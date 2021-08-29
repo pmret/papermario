@@ -14,7 +14,7 @@ EvtSource N(80243538) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
+    EVT_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -22,7 +22,7 @@ EvtSource N(main) = SCRIPT({
     MakeNpcs(0, N(npcGroupList_80244000));
     await N(makeEntities);
     spawn N(802433D0);
-    SI_VAR(0) = N(80243538);
+    EVT_VAR(0) = N(80243538);
     spawn EnterWalk;
     sleep 1;
 });
@@ -268,12 +268,12 @@ static s32 N(pad_403C)[] = {
 
 EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA564, 450, 285, 120, 0, ITEM_SUPER_SHROOM, MAKE_ENTITY_END);
-    AssignBlockFlag(SI_SAVE_FLAG(1008));
+    AssignBlockFlag(EVT_SAVE_FLAG(1008));
     MakeEntity(0x802EA564, 720, 333, 75, 0, ITEM_COIN, MAKE_ENTITY_END);
-    AssignBlockFlag(SI_SAVE_FLAG(1009));
+    AssignBlockFlag(EVT_SAVE_FLAG(1009));
     MakeEntity(0x802EA0E8, 600, 290, 200, 0, MAKE_ENTITY_END);
-    AssignBlockFlag(SI_SAVE_FLAG(1010));
-    MakeItemEntity(ITEM_STAR_PIECE, 540, 230, 13, 17, SI_SAVE_FLAG(1019));
+    AssignBlockFlag(EVT_SAVE_FLAG(1010));
+    MakeItemEntity(ITEM_STAR_PIECE, 540, 230, 13, 17, EVT_SAVE_FLAG(1019));
 });
 
 #include "world/common/UnkNpcAIFunc24.inc.c"

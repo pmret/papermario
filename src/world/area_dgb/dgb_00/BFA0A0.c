@@ -22,7 +22,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(80240110) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_GUSTY_GULCH, 0, 8);
         }
@@ -45,10 +45,10 @@ EvtSource N(exitDoubleDoor_8024021C) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
-    SI_VAR(0) = 1;
-    SI_VAR(1) = 18;
-    SI_VAR(2) = 5;
-    SI_VAR(3) = 7;
+    EVT_VAR(0) = 1;
+    EVT_VAR(1) = 18;
+    EVT_VAR(2) = 5;
+    EVT_VAR(3) = 7;
     spawn ExitDoubleDoor;
     sleep 17;
     GotoMap("dgb_01", 0);
@@ -57,7 +57,7 @@ EvtSource N(exitDoubleDoor_8024021C) = SCRIPT({
 
 EvtSource N(802402D0) = SCRIPT({
     bind N(exitWalk_802401C0) TRIGGER_FLOOR_ABOVE 15;
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH3_TUBBA_SMASHED_THE_BRIDGES {
             bind N(exitDoubleDoor_8024021C) TRIGGER_WALL_PRESS_A 18;
         }
@@ -72,22 +72,22 @@ EvtSource N(802402D0) = SCRIPT({
 });
 
 EvtSource N(enterDoubleDoor_8024038C) = SCRIPT({
-    GetLoadType(SI_VAR(1));
-    if (SI_VAR(1) == 1) {
+    GetLoadType(EVT_VAR(1));
+    if (EVT_VAR(1) == 1) {
         spawn EnterSavePoint;
         spawn N(802402D0);
         return;
     }
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
-            SI_VAR(0) = N(802402D0);
+            EVT_VAR(0) = N(802402D0);
             spawn EnterWalk;
             sleep 1;
         }
         == 1 {
-            if (SI_STORY_PROGRESS >= STORY_CH3_TUBBA_SMASHED_THE_BRIDGES) {
-                if (SI_STORY_PROGRESS < STORY_CH3_ESCAPED_TUBBAS_MANOR) {
+            if (EVT_STORY_PROGRESS >= STORY_CH3_TUBBA_SMASHED_THE_BRIDGES) {
+                if (EVT_STORY_PROGRESS < STORY_CH3_ESCAPED_TUBBAS_MANOR) {
                     spawn N(802402D0);
                     spawn {
                         await N(8024103C);
@@ -97,8 +97,8 @@ EvtSource N(enterDoubleDoor_8024038C) = SCRIPT({
                 }
             }
             UseDoorSounds(3);
-            SI_VAR(2) = 5;
-            SI_VAR(3) = 7;
+            EVT_VAR(2) = 5;
+            EVT_VAR(3) = 7;
             await EnterDoubleDoor;
             spawn N(802402D0);
         }
@@ -110,15 +110,15 @@ EvtSource N(enterDoubleDoor_8024038C) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
-    SI_SAVE_FLAG(1978) = 1;
+    EVT_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    EVT_SAVE_FLAG(1978) = 1;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamLeadPlayer(0, 0);
     SetCamEnabled(0, 1);
-    GetEntryID(SI_VAR(0));
-    if (SI_VAR(0) == 2) {
+    GetEntryID(EVT_VAR(0));
+    if (EVT_VAR(0) == 2) {
         MakeNpcs(0, N(npcGroupList_80243740));
     } else {
         MakeNpcs(0, N(npcGroupList_802436EC));

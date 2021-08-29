@@ -94,58 +94,58 @@ s32 N(modelCommandList)[] = {
 };
 
 EvtSource script = SCRIPT({
-    SI_VAR(10) = (const) ITEM_INSECTICIDE_HERB;
+    EVT_VAR(10) = (const) ITEM_INSECTICIDE_HERB;
     await N(UseItemWithEffect);
     UseBattleCamPreset(3);
     MoveBattleCamOver(15);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_THROW);
     PlaySound(SOUND_THROW);
     sleep 3;
-    CreateVirtualEntity(SI_VAR(10), N(modelCommandList));
-    SI_VAR(0) = 1.0;
-    MultiplyByActorScale(SI_VAR(0));
-    SetVirtualEntityScale(SI_VAR(10), SI_VAR(0), SI_VAR(0), SI_VAR(0));
-    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(3) = 20;
-    SI_VAR(4) = 42;
-    SI_VAR(5) = 5;
-    MultiplyVec3ByActorScale(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    SI_VAR(0) += SI_VAR(3);
-    SI_VAR(1) += SI_VAR(4);
-    SI_VAR(2) += SI_VAR(5);
-    SetVirtualEntityPosition(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    CreateVirtualEntity(EVT_VAR(10), N(modelCommandList));
+    EVT_VAR(0) = 1.0;
+    MultiplyByActorScale(EVT_VAR(0));
+    SetVirtualEntityScale(EVT_VAR(10), EVT_VAR(0), EVT_VAR(0), EVT_VAR(0));
+    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(3) = 20;
+    EVT_VAR(4) = 42;
+    EVT_VAR(5) = 5;
+    MultiplyVec3ByActorScale(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+    EVT_VAR(0) += EVT_VAR(3);
+    EVT_VAR(1) += EVT_VAR(4);
+    EVT_VAR(2) += EVT_VAR(5);
+    SetVirtualEntityPosition(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     InitTargetIterator();
     SetGoalToTarget(ACTOR_SELF);
-    GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     spawn {
-        SI_VAR(0) = 0;
+        EVT_VAR(0) = 0;
         loop 18 {
-            SI_VAR(0) += 0xFFFFFFC4;
-            SetVirtualEntityRotation(SI_VAR(10), 0, 0, SI_VAR(0));
+            EVT_VAR(0) += 0xFFFFFFC4;
+            SetVirtualEntityRotation(EVT_VAR(10), 0, 0, EVT_VAR(0));
             sleep 1;
         }
     }
-    SetVirtualEntityJumpGravity(SI_VAR(10), 0.80078125);
-    SI_VAR(2) += 5;
-    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
-    PlayEffect(0x7, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    SI_VAR(0) -= 10;
-    PlayEffect(0x7, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    SI_VAR(0) += 20;
-    PlayEffect(0x7, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    SetVirtualEntityJumpGravity(EVT_VAR(10), 0.80078125);
+    EVT_VAR(2) += 5;
+    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 18);
+    PlayEffect(0x7, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    EVT_VAR(0) -= 10;
+    PlayEffect(0x7, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    EVT_VAR(0) += 20;
+    PlayEffect(0x7, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     spawn {
-        N(func_802A12E0_72AA30)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        N(func_802A12E0_72AA30)(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         sleep 3;
-        N(func_802A12E0_72AA30)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        N(func_802A12E0_72AA30)(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         sleep 3;
-        N(func_802A12E0_72AA30)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        N(func_802A12E0_72AA30)(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     }
     InitTargetIterator();
     SetGoalToTarget(ACTOR_SELF);
     N(func_802A123C_72A98C)();
-    DeleteVirtualEntity(SI_VAR(10));
-    if (SI_VAR(9) == 0) {
-        ItemDamageEnemy(SI_VAR(0), 0, 0, 0, 32);
+    DeleteVirtualEntity(EVT_VAR(10));
+    if (EVT_VAR(9) == 0) {
+        ItemDamageEnemy(EVT_VAR(0), 0, 0, 0, 32);
     } else {
         InitTargetIterator();
         SetGoalToTarget(ACTOR_SELF);

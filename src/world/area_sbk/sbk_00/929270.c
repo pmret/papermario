@@ -28,9 +28,9 @@ EvtSource N(80240198) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_DRY_DRY_DESERT;
+    EVT_WORLD_LOCATION = LOCATION_DRY_DRY_DESERT;
     SetSpriteShading(-1);
-    if (SI_STORY_PROGRESS == STORY_CH2_GOT_PULSE_STONE) {
+    if (EVT_STORY_PROGRESS == STORY_CH2_GOT_PULSE_STONE) {
         DisablePulseStone(0);
     }
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -41,6 +41,6 @@ EvtSource N(main) = SCRIPT({
     await N(makeEntities);
     N(SpawnSunEffect)();
     SetMusicTrack(0, SONG_DRY_DRY_DESERT, 0, 8);
-    SI_VAR(0) = N(80240198);
+    EVT_VAR(0) = N(80240198);
     spawn EnterWalk;
 });

@@ -43,7 +43,7 @@ FoliageDropList N(tree1_Drops) = {
             .itemID = ITEM_COIN,
             .pos = { 120, 92, -18 },
             .spawnMode = 0xF,
-            .pickupFlag = SI_SAVE_FLAG(760),
+            .pickupFlag = EVT_SAVE_FLAG(760),
         },
     }
 };
@@ -57,7 +57,7 @@ ShakeTreeConfig N(tree1) = {
 Vec4f N(triggerCoord_8024DD68) = { 120.0f, 0.0f, -43.0f, 0.0f };
 
 EvtSource N(8024DD78) = SCRIPT({
-    SI_VAR(0) = N(tree1);
+    EVT_VAR(0) = N(tree1);
     bind N(shakeTree) TRIGGER_WALL_HAMMER 11;
     bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_8024DD68);
 });

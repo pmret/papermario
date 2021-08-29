@@ -49,7 +49,7 @@ ApiStatus N(func_8024004C_BECE3C)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
         script->varTable[0] = ptr;
-        set_variable(NULL, SI_MAP_VAR(1), ptr);
+        set_variable(NULL, EVT_MAP_VAR(1), ptr);
         ptr->unk_38 = get_variable(script, *args++);
         ptr->unk_3C = get_variable(script, *args++);
         ptr->unk_0C = get_float_variable(script, *args++);
@@ -222,18 +222,18 @@ s32 N(itemList_80242040)[] = {
 
 EvtSource N(80242048) = SCRIPT({
     FadeOutMusic(0, 1000);
-    SI_VAR(0) = 0;
-    if (SI_VAR(0) == 0) {
+    EVT_VAR(0) = 0;
+    if (EVT_VAR(0) == 0) {
         DisablePlayerInput(TRUE);
         UseSettingsFrom(0, 145, 65, 0);
         SetCamSpeed(0, 0.6005859375);
         SetPanTarget(0, 145, 30, 0);
-        GetCamDistance(0, SI_VAR(1));
-        SI_VAR(1) -= 100;
-        SetCamDistance(0, SI_VAR(1));
+        GetCamDistance(0, EVT_VAR(1));
+        EVT_VAR(1) -= 100;
+        SetCamDistance(0, EVT_VAR(1));
         if (10000 != 10000) {
-            GetCamPitch(0, SI_VAR(2), SI_VAR(3));
-            SetCamPitch(0, SI_VAR(2), 10000);
+            GetCamPitch(0, EVT_VAR(2), EVT_VAR(3));
+            SetCamPitch(0, EVT_VAR(2), 10000);
         }
         PanToTarget(0, 0, 1);
         N(func_8024004C_BECE3C)(2, 50, 100, 31, -6, 145, 65, 0, 30, 0);
@@ -261,14 +261,14 @@ EvtSource N(80242048) = SCRIPT({
             sleep 80;
             SetPlayerAnimation(ANIM_10002);
         }
-        SI_VAR(1) += 100;
-        SetCamDistance(0, SI_VAR(1));
+        EVT_VAR(1) += 100;
+        SetCamDistance(0, EVT_VAR(1));
         SetPanTarget(0, 145, 0, 0);
         N(func_802405BC_BED3AC)(2);
-        GetPlayerPos(SI_VAR(2), SI_VAR(3), SI_VAR(4));
-        UseSettingsFrom(0, SI_VAR(2), SI_VAR(3), SI_VAR(4));
+        GetPlayerPos(EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
+        UseSettingsFrom(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
         SetCamSpeed(0, 1.0);
-        SetPanTarget(0, SI_VAR(2), SI_VAR(3), SI_VAR(4));
+        SetPanTarget(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
         WaitForCam(0, 1.0);
         PanToTarget(0, 0, 0);
         DisablePlayerInput(FALSE);
@@ -282,24 +282,24 @@ EvtSource N(80242048) = SCRIPT({
     N(func_802405BC_BED3AC)(3);
     PlaySoundAtPlayer(312, 0);
     DisablePlayerInput(TRUE);
-    SI_STORY_PROGRESS = STORY_CH3_STAR_SPIRIT_RESCUED;
+    EVT_STORY_PROGRESS = STORY_CH3_STAR_SPIRIT_RESCUED;
     GotoMapSpecial("kmr_23", 2, 14);
     sleep 100;
 });
 
 EvtSource N(80242498) = SCRIPT({
-    SI_VAR(0) = 1;
-    if (SI_VAR(0) == 0) {
+    EVT_VAR(0) = 1;
+    if (EVT_VAR(0) == 0) {
         DisablePlayerInput(TRUE);
         UseSettingsFrom(0, 145, 65, 0);
         SetCamSpeed(0, 0.6005859375);
         SetPanTarget(0, 145, 30, 0);
-        GetCamDistance(0, SI_VAR(1));
-        SI_VAR(1) -= 100;
-        SetCamDistance(0, SI_VAR(1));
+        GetCamDistance(0, EVT_VAR(1));
+        EVT_VAR(1) -= 100;
+        SetCamDistance(0, EVT_VAR(1));
         if (10000 != 10000) {
-            GetCamPitch(0, SI_VAR(2), SI_VAR(3));
-            SetCamPitch(0, SI_VAR(2), 10000);
+            GetCamPitch(0, EVT_VAR(2), EVT_VAR(3));
+            SetCamPitch(0, EVT_VAR(2), 10000);
         }
         PanToTarget(0, 0, 1);
         N(func_8024004C_BECE3C)(2, 50, 100, 31, -6, 145, 65, 0, 30, 0);
@@ -327,14 +327,14 @@ EvtSource N(80242498) = SCRIPT({
             sleep 80;
             SetPlayerAnimation(ANIM_10002);
         }
-        SI_VAR(1) += 100;
-        SetCamDistance(0, SI_VAR(1));
+        EVT_VAR(1) += 100;
+        SetCamDistance(0, EVT_VAR(1));
         SetPanTarget(0, 145, 0, 0);
         N(func_802405BC_BED3AC)(2);
-        GetPlayerPos(SI_VAR(2), SI_VAR(3), SI_VAR(4));
-        UseSettingsFrom(0, SI_VAR(2), SI_VAR(3), SI_VAR(4));
+        GetPlayerPos(EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
+        UseSettingsFrom(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
         SetCamSpeed(0, 1.0);
-        SetPanTarget(0, SI_VAR(2), SI_VAR(3), SI_VAR(4));
+        SetPanTarget(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
         WaitForCam(0, 1.0);
         PanToTarget(0, 0, 0);
         DisablePlayerInput(FALSE);
@@ -348,7 +348,7 @@ EvtSource N(80242498) = SCRIPT({
     N(func_802405BC_BED3AC)(3);
     PlaySoundAtPlayer(312, 0);
     DisablePlayerInput(TRUE);
-    SI_STORY_PROGRESS = STORY_CH3_STAR_SPIRIT_RESCUED;
+    EVT_STORY_PROGRESS = STORY_CH3_STAR_SPIRIT_RESCUED;
     GotoMapSpecial("kmr_23", 2, 14);
     sleep 100;
 });
@@ -356,10 +356,10 @@ EvtSource N(80242498) = SCRIPT({
 EvtSource N(exitSingleDoor_802428D4) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 10;
-    SI_VAR(2) = 29;
-    SI_VAR(3) = 1;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 10;
+    EVT_VAR(2) = 29;
+    EVT_VAR(3) = 1;
     spawn ExitSingleDoor;
     sleep 17;
     GotoMap("arn_08", 0);
@@ -403,8 +403,8 @@ EvtSource N(80242A30) = SCRIPT({
             PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
             NpcJump0(NPC_TUBBAS_HEART, 0, 0, 0, 10);
             sleep 1;
-            GetNpcVar(0, 0, SI_VAR(0));
-            if (SI_VAR(0) == 1) {
+            GetNpcVar(0, 0, EVT_VAR(0));
+            if (EVT_VAR(0) == 1) {
                 break loop;
             }
         }
@@ -414,9 +414,9 @@ EvtSource N(80242A30) = SCRIPT({
         MakeLerp(80, 0, 10, 0);
         loop {
             UpdateLerp();
-            RotateModel(29, SI_VAR(0), 0, -1, 0);
+            RotateModel(29, EVT_VAR(0), 0, -1, 0);
             sleep 1;
-            if (SI_VAR(1) == 0) {
+            if (EVT_VAR(1) == 0) {
                 break loop;
             }
         }
@@ -426,8 +426,8 @@ EvtSource N(80242A30) = SCRIPT({
     SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_A, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 5, MESSAGE_ID(0x0E, 0x00C7));
     SetNpcVar(0, 0, 1);
     loop {
-        GetNpcVar(0, 0, SI_VAR(0));
-        if (SI_VAR(0) == 2) {
+        GetNpcVar(0, 0, EVT_VAR(0));
+        if (EVT_VAR(0) == 2) {
             break loop;
         }
         sleep 1;
@@ -465,9 +465,9 @@ EvtSource N(80242A30) = SCRIPT({
         MakeLerp(0, 80, 10, 0);
         loop {
             UpdateLerp();
-            RotateModel(29, SI_VAR(0), 0, -1, 0);
+            RotateModel(29, EVT_VAR(0), 0, -1, 0);
             sleep 1;
-            if (SI_VAR(1) == 0) {
+            if (EVT_VAR(1) == 0) {
                 break loop;
             }
         }
@@ -491,9 +491,9 @@ EvtSource N(80242A30) = SCRIPT({
         MakeLerp(80, 0, 10, 0);
         loop {
             UpdateLerp();
-            RotateModel(29, SI_VAR(0), 0, -1, 0);
+            RotateModel(29, EVT_VAR(0), 0, -1, 0);
             sleep 1;
-            if (SI_VAR(1) == 0) {
+            if (EVT_VAR(1) == 0) {
                 break loop;
             }
         }
@@ -510,7 +510,7 @@ EvtSource N(80242A30) = SCRIPT({
 EvtSource N(802433C8) = SCRIPT({
     bind N(exitWalk_80242978) TRIGGER_FLOOR_ABOVE 5;
     bind N(exitWalk_802429D4) TRIGGER_FLOOR_ABOVE 1;
-    if (SI_STORY_PROGRESS < STORY_CH3_UNLOCKED_WINDY_MILL) {
+    if (EVT_STORY_PROGRESS < STORY_CH3_UNLOCKED_WINDY_MILL) {
         bind_padlock N(802439B0) TRIGGER_WALL_PRESS_A entity(0) N(itemList_80242040);
     } else {
         bind N(exitSingleDoor_802428D4) TRIGGER_WALL_PRESS_A 10;
@@ -518,26 +518,26 @@ EvtSource N(802433C8) = SCRIPT({
 });
 
 EvtSource N(enterWalk_8024346C) = SCRIPT({
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
-            if (SI_STORY_PROGRESS == STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
+            if (EVT_STORY_PROGRESS == STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
                 await N(80242A30);
                 spawn N(802433C8);
             } else {
-                SI_VAR(2) = 29;
-                SI_VAR(3) = 1;
+                EVT_VAR(2) = 29;
+                EVT_VAR(3) = 1;
                 await EnterSingleDoor;
                 spawn N(802433C8);
             }
         }
         == 1 {
-            SI_VAR(0) = N(802433C8);
+            EVT_VAR(0) = N(802433C8);
             spawn EnterWalk;
             sleep 1;
         }
         == 2 {
-            SI_VAR(0) = N(802433C8);
+            EVT_VAR(0) = N(802433C8);
             spawn EnterWalk;
             sleep 1;
         }
@@ -549,14 +549,14 @@ EvtSource N(enterWalk_8024346C) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
+    EVT_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamLeadPlayer(0, 0);
     SetCamEnabled(0, 1);
-    SI_SAVE_FLAG(1977) = 1;
-    match SI_STORY_PROGRESS {
+    EVT_SAVE_FLAG(1977) = 1;
+    match EVT_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             MakeNpcs(0, N(npcGroupList_802478B8));
         }
@@ -570,12 +570,12 @@ EvtSource N(main) = SCRIPT({
         }
     }
     await N(makeEntities);
-    if (SI_STORY_PROGRESS == STORY_CH3_DEFEATED_TUBBA_BLUBBA) {
+    if (EVT_STORY_PROGRESS == STORY_CH3_DEFEATED_TUBBA_BLUBBA) {
         spawn N(80242498);
     }
     spawn N(enterWalk_8024346C);
-    GetEntryID(SI_VAR(0));
-    if (SI_VAR(0) == 3) {
+    GetEntryID(EVT_VAR(0));
+    if (EVT_VAR(0) == 3) {
         sleep 65;
     }
     spawn N(80243790);

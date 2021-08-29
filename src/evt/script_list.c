@@ -511,7 +511,7 @@ void update_scripts(void) {
                     };
 
                     script->frameCounter -= 1.0;
-                    status = si_execute_next_command(script);
+                    status = evt_execute_next_command(script);
                     if (status == 1) {
                         stop = TRUE;
                         break;

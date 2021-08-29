@@ -336,7 +336,7 @@ s32 N(modelCommandList)[] = {
 };
 
 EvtSource N(main) = SCRIPT({
-    SI_VAR(10) = (const) ITEM_SLEEPY_SHEEP;
+    EVT_VAR(10) = (const) ITEM_SLEEPY_SHEEP;
     await N(UseItemWithEffect);
     UseBattleCamPreset(19);
     SetBattleCamTarget(0xFFFFFFBD, 0xFFFFFFF1, 0xFFFFFFFB);
@@ -366,9 +366,9 @@ EvtSource N(main) = SCRIPT({
     }
     sleep 20;
     SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(1) += 32;
-    ShowEmote(0, EMOTE_QUESTION, -45, 20, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
+    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(1) += 32;
+    ShowEmote(0, EMOTE_QUESTION, -45, 20, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10);
     sleep 30;
     SetActorYaw(ACTOR_PLAYER, 30);
     sleep 1;
@@ -395,8 +395,8 @@ EvtSource N(main) = SCRIPT({
     sleep 8;
     SetJumpAnimations(ACTOR_PLAYER, 0, ANIM_1002B, ANIM_1002B, ANIM_MIDAIR);
     SetActorJumpGravity(ACTOR_PLAYER, 1.80078125);
-    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetGoalPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    SetGoalPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     func_80273444(15, 0, 0);
     spawn {
         sleep 5;
@@ -413,21 +413,21 @@ EvtSource N(main) = SCRIPT({
         SetActorYaw(ACTOR_PLAYER, 0);
     }
     sleep 40;
-    CreateVirtualEntity(SI_VAR(10), N(modelCommandList));
-    SI_VAR(7) = 0xFFFFFF38;
-    SI_VAR(8) = 0;
-    SI_VAR(9) = 0;
-    SetVirtualEntityPosition(SI_VAR(10), SI_VAR(7), SI_VAR(8), SI_VAR(9));
-    SetVirtualEntityScale(SI_VAR(10), 0.7109375, 0.7109375, 0.7109375);
-    SetVirtualEntityMoveSpeed(SI_VAR(10), 7.0);
-    SetVirtualEntityJumpGravity(SI_VAR(10), 1.400390625);
+    CreateVirtualEntity(EVT_VAR(10), N(modelCommandList));
+    EVT_VAR(7) = 0xFFFFFF38;
+    EVT_VAR(8) = 0;
+    EVT_VAR(9) = 0;
+    SetVirtualEntityPosition(EVT_VAR(10), EVT_VAR(7), EVT_VAR(8), EVT_VAR(9));
+    SetVirtualEntityScale(EVT_VAR(10), 0.7109375, 0.7109375, 0.7109375);
+    SetVirtualEntityMoveSpeed(EVT_VAR(10), 7.0);
+    SetVirtualEntityJumpGravity(EVT_VAR(10), 1.400390625);
     SetOwnerTarget(0, 0);
     SetGoalToTarget(ACTOR_PLAYER);
-    GetGoalPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) -= 60;
-    VirtualEntityMoveTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
-    GetGoalPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
+    GetGoalPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) -= 60;
+    VirtualEntityMoveTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0);
+    GetGoalPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0);
     PlaySoundAtActor(ACTOR_PLAYER, SOUND_HIT_BLOCK);
     spawn {
         SetAnimation(ACTOR_PLAYER, 0, ANIM_SHOCK_STILL);
@@ -439,26 +439,26 @@ EvtSource N(main) = SCRIPT({
         sleep 1;
         SetActorScale(ACTOR_PLAYER, 1.0, 1.0, 1.0);
     }
-    PlayEffect(0x6, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x6, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     sleep 2;
-    SetVirtualEntityJumpGravity(SI_VAR(10), 1.400390625);
-    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += 60;
-    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
-    PlayEffect(0x6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    SetVirtualEntityJumpGravity(EVT_VAR(10), 1.400390625);
+    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) += 60;
+    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0);
+    PlayEffect(0x6, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    SI_VAR(0) += 20;
-    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
-    PlayEffect(0x6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    SI_VAR(0) += 10;
-    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
-    PlayEffect(0x6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    EVT_VAR(0) += 20;
+    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0);
+    PlayEffect(0x6, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    EVT_VAR(0) += 10;
+    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0);
+    PlayEffect(0x6, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     sleep 5;
     spawn {
-        GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SI_VAR(0) += 270;
-        VirtualEntityMoveTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
-        DeleteVirtualEntity(SI_VAR(10));
+        GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        EVT_VAR(0) += 270;
+        VirtualEntityMoveTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0);
+        DeleteVirtualEntity(EVT_VAR(10));
     }
     sleep 30;
     UseBattleCamPreset(3);
@@ -466,17 +466,17 @@ EvtSource N(main) = SCRIPT({
     InitTargetIterator();
 0:
     SetGoalToTarget(ACTOR_SELF);
-    ItemCheckHit(SI_VAR(0), 0x10000000, 0, SI_VAR(0), 0);
-    if (SI_VAR(0) == 6) {
+    ItemCheckHit(EVT_VAR(0), 0x10000000, 0, EVT_VAR(0), 0);
+    if (EVT_VAR(0) == 6) {
         goto 1;
     }
-    GetItemPower(ITEM_SLEEPY_SHEEP, SI_VAR(0), SI_VAR(1));
-    MakeStatusField(SI_VAR(0), 4096, 100, SI_VAR(0));
-    func_80252B3C(SI_VAR(0), 0x50000000, SI_VAR(0), 0, 32);
+    GetItemPower(ITEM_SLEEPY_SHEEP, EVT_VAR(0), EVT_VAR(1));
+    MakeStatusField(EVT_VAR(0), 4096, 100, EVT_VAR(0));
+    func_80252B3C(EVT_VAR(0), 0x50000000, EVT_VAR(0), 0, 32);
 1:
     sleep 5;
-    ChooseNextTarget(0, SI_VAR(0));
-    if (SI_VAR(0) != -1) {
+    ChooseNextTarget(0, EVT_VAR(0));
+    if (EVT_VAR(0) != -1) {
         goto 0;
     }
     sleep 30;

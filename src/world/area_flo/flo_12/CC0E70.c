@@ -23,11 +23,11 @@ MapConfig N(config) = {
 };
 
 EvtSource N(80240750) = SCRIPT({
-    GetEntryID(SI_VAR(0));
-    if (SI_VAR(0) == 1) {
+    GetEntryID(EVT_VAR(0));
+    if (EVT_VAR(0) == 1) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
     } else {
-        match SI_STORY_PROGRESS {
+        match EVT_STORY_PROGRESS {
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
             } else {
@@ -53,40 +53,40 @@ static s32 N(pad_86C) = {
 
 EvtSource N(80240870) = SCRIPT({
     group 11;
-    SI_VAR(10) = SI_VAR(0);
-    SI_VAR(11) = SI_VAR(1);
-    SI_VAR(12) = SI_VAR(2);
-    SI_VAR(13) = SI_VAR(3);
-    SI_VAR(14) = SI_VAR(4);
-    SI_VAR(12) -= SI_VAR(0);
-    SI_VAR(13) -= SI_VAR(1);
-    SI_VAR(0) = (float) SI_VAR(12);
-    SI_VAR(0) /= 100.0;
-    SI_VAR(15) = 100.0;
-    SI_VAR(15) /= (float) SI_VAR(0);
-    SI_VAR(15) += 11;
-    SI_VAR(5) = 200;
-    SI_VAR(5) /= SI_VAR(15);
-    SI_VAR(5) += 1;
-    loop SI_VAR(5) {
-        RandInt(SI_VAR(12), SI_VAR(0));
-        RandInt(SI_VAR(13), SI_VAR(1));
-        RandInt(199, SI_VAR(2));
-        SI_VAR(3) = 210;
-        SI_VAR(3) -= SI_VAR(2);
-        SI_VAR(0) += SI_VAR(10);
-        SI_VAR(1) += SI_VAR(11);
-        SI_VAR(2) += SI_VAR(14);
-        PlayEffect(0xD, SI_VAR(0), SI_VAR(2), SI_VAR(1), SI_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    EVT_VAR(10) = EVT_VAR(0);
+    EVT_VAR(11) = EVT_VAR(1);
+    EVT_VAR(12) = EVT_VAR(2);
+    EVT_VAR(13) = EVT_VAR(3);
+    EVT_VAR(14) = EVT_VAR(4);
+    EVT_VAR(12) -= EVT_VAR(0);
+    EVT_VAR(13) -= EVT_VAR(1);
+    EVT_VAR(0) = (float) EVT_VAR(12);
+    EVT_VAR(0) /= 100.0;
+    EVT_VAR(15) = 100.0;
+    EVT_VAR(15) /= (float) EVT_VAR(0);
+    EVT_VAR(15) += 11;
+    EVT_VAR(5) = 200;
+    EVT_VAR(5) /= EVT_VAR(15);
+    EVT_VAR(5) += 1;
+    loop EVT_VAR(5) {
+        RandInt(EVT_VAR(12), EVT_VAR(0));
+        RandInt(EVT_VAR(13), EVT_VAR(1));
+        RandInt(199, EVT_VAR(2));
+        EVT_VAR(3) = 210;
+        EVT_VAR(3) -= EVT_VAR(2);
+        EVT_VAR(0) += EVT_VAR(10);
+        EVT_VAR(1) += EVT_VAR(11);
+        EVT_VAR(2) += EVT_VAR(14);
+        PlayEffect(0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
-    sleep SI_VAR(15);
+    sleep EVT_VAR(15);
 0:
-    RandInt(SI_VAR(12), SI_VAR(0));
-    RandInt(SI_VAR(13), SI_VAR(1));
-    SI_VAR(0) += SI_VAR(10);
-    SI_VAR(1) += SI_VAR(11);
-    PlayEffect(0xD, SI_VAR(0), SI_VAR(14), SI_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    sleep SI_VAR(15);
+    RandInt(EVT_VAR(12), EVT_VAR(0));
+    RandInt(EVT_VAR(13), EVT_VAR(1));
+    EVT_VAR(0) += EVT_VAR(10);
+    EVT_VAR(1) += EVT_VAR(11);
+    PlayEffect(0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    sleep EVT_VAR(15);
     goto 0;
 });
 
@@ -97,43 +97,43 @@ EvtSource N(80240B78) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    EVT_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
-    SI_AREA_FLAG(22) = 0;
+    EVT_AREA_FLAG(22) = 0;
     MakeNpcs(0, N(npcGroupList_802429B8));
     ModifyColliderFlags(3, 11, 0x00000006);
-    SI_VAR(0) = -65;
-    SI_VAR(1) = -210;
-    SI_VAR(2) = 90;
-    SI_VAR(3) = -110;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = -65;
+    EVT_VAR(1) = -210;
+    EVT_VAR(2) = 90;
+    EVT_VAR(3) = -110;
+    EVT_VAR(4) = 0;
     spawn N(80240870);
-    SI_VAR(0) = -200;
-    SI_VAR(1) = 130;
-    SI_VAR(2) = -80;
-    SI_VAR(3) = 170;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = -200;
+    EVT_VAR(1) = 130;
+    EVT_VAR(2) = -80;
+    EVT_VAR(3) = 170;
+    EVT_VAR(4) = 0;
     spawn N(80240870);
-    SI_VAR(0) = -270;
-    SI_VAR(1) = -80;
-    SI_VAR(2) = -225;
-    SI_VAR(3) = 125;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = -270;
+    EVT_VAR(1) = -80;
+    EVT_VAR(2) = -225;
+    EVT_VAR(3) = 125;
+    EVT_VAR(4) = 0;
     spawn N(80240870);
-    GetEntryID(SI_VAR(0));
-    if (SI_VAR(0) == 1) {
+    GetEntryID(EVT_VAR(0));
+    if (EVT_VAR(0) == 1) {
         spawn N(802419F4);
     } else {
         ModifyColliderFlags(0, 1, 0x7FFFFE00);
-        SI_VAR(0) = N(80240B78);
+        EVT_VAR(0) = N(80240B78);
         spawn EnterWalk;
     }
     await N(80240750);
-    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CC0E30)();
     }
 });
@@ -159,12 +159,12 @@ NpcSettings N(npcSettings_80240E5C) = {
 s32** N(D_802417EC_CC261C) = NULL;
 
 EvtSource N(802417F0) = SCRIPT({
-    ShowGotItem(SI_VAR(0), 1, 0);
+    ShowGotItem(EVT_VAR(0), 1, 0);
     return;
 });
 
 EvtSource N(80241820) = SCRIPT({
-    ShowGotItem(SI_VAR(0), 1, 16);
+    ShowGotItem(EVT_VAR(0), 1, 16);
     return;
 });
 
@@ -177,33 +177,33 @@ s32 N(D_80241854_CC2684) = {
 };
 
 EvtSource N(80241858) = SCRIPT({
-    SI_VAR(9) = SI_VAR(1);
+    EVT_VAR(9) = EVT_VAR(1);
     ShowKeyChoicePopup();
-    SI_VAR(10) = SI_VAR(0);
-    match SI_VAR(0) {
+    EVT_VAR(10) = EVT_VAR(0);
+    match EVT_VAR(0) {
         == 0 {}
         == -1 {}
         else {
-            RemoveKeyItemAt(SI_VAR(1));
-            GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-            N(AddPlayerHandsOffset)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-            SI_VAR(0) |= (const)  0x50000;
-            MakeItemEntity(SI_VAR(0), SI_VAR(3), SI_VAR(4), SI_VAR(5), 1, 0);
+            RemoveKeyItemAt(EVT_VAR(1));
+            GetPlayerPos(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+            N(AddPlayerHandsOffset)(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+            EVT_VAR(0) |= (const)  0x50000;
+            MakeItemEntity(EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0);
             SetPlayerAnimation(0x60005);
             sleep 30;
             SetPlayerAnimation(ANIM_10002);
-            RemoveItemEntity(SI_VAR(0));
+            RemoveItemEntity(EVT_VAR(0));
         }
     }
-    N(func_80240614_CC1444)(SI_VAR(10));
+    N(func_80240614_CC1444)(EVT_VAR(10));
     CloseChoicePopup();
     unbind;
 });
 
 EvtSource N(8024199C) = SCRIPT({
-    N(func_8024064C_CC147C)(SI_VAR(0));
+    N(func_8024064C_CC147C)(EVT_VAR(0));
     bind_padlock N(80241858) 0x10 0 N(D_802429E0);
-    N(func_802405C0_CC13F0)(SI_VAR(0));
+    N(func_802405C0_CC13F0)(EVT_VAR(0));
 });
 
 s32 N(D_802419EC_CC281C)[] = {
@@ -213,9 +213,9 @@ s32 N(D_802419EC_CC281C)[] = {
 EvtSource N(802419F4) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
-    GetNpcPos(NPC_ROSIE0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetNpcPos(NPC_ROSIE0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetCamDistance(0, 350);
     SetCamPitch(0, 17.0, -9.5);
     SetCamPosA(0, 0, 0);
@@ -250,18 +250,18 @@ EvtSource N(80241BE4) = SCRIPT({
 
 EvtSource N(interact_80241C8C) = SCRIPT({
     await N(8024080C);
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH6_GOT_CRYSTAL_BERRY {
-            match SI_SAVE_FLAG(1378) {
+            match EVT_SAVE_FLAG(1378) {
                 == 0 {
                     spawn N(80241B6C);
-                    GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                    SI_VAR(0) += 30;
-                    SetCamProperties(0, 4.0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 325, 19.0, -9.5);
+                    GetNpcPos(NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                    EVT_VAR(0) += 30;
+                    SetCamProperties(0, 4.0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 325, 19.0, -9.5);
                     SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x008C));
                     ShowChoice(MESSAGE_ID(0x1E, 0x0011));
                     sleep 10;
-                    match SI_VAR(0) {
+                    match EVT_VAR(0) {
                         == 0 {
                             ContinueSpeech(-1, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x008D));
                         }
@@ -275,7 +275,7 @@ EvtSource N(interact_80241C8C) = SCRIPT({
                     SetNpcAnimation(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_2);
                     MakeItemEntity(ITEM_WATER_STONE, -33, 14, 19, 1, 1380);
                     sleep 10;
-                    match SI_SAVE_FLAG(1375) {
+                    match EVT_SAVE_FLAG(1375) {
                         == 0 {
                             SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11, 0x008F));
                         }
@@ -288,15 +288,15 @@ EvtSource N(interact_80241C8C) = SCRIPT({
                             sleep 40;
                             SetPlayerAnimation(ANIM_10002);
                             SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0092));
-                            SI_SAVE_FLAG(1379) = 1;
+                            EVT_SAVE_FLAG(1379) = 1;
                         }
                     }
-                    SI_SAVE_FLAG(1378) = 1;
+                    EVT_SAVE_FLAG(1378) = 1;
                 }
                 == 1 {
-                    match SI_SAVE_FLAG(1379) {
+                    match EVT_SAVE_FLAG(1379) {
                         == 0 {
-                            if (SI_SAVE_FLAG(1375) == 1) {
+                            if (EVT_SAVE_FLAG(1375) == 1) {
                                 spawn N(80241BE4);
                                 SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11,
                                               0x0090));
@@ -308,7 +308,7 @@ EvtSource N(interact_80241C8C) = SCRIPT({
                                 SetPlayerAnimation(ANIM_10002);
                                 SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11,
                                               0x0092));
-                                SI_SAVE_FLAG(1379) = 1;
+                                EVT_SAVE_FLAG(1379) = 1;
                             } else {
                                 SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11,
                                               0x0090));
@@ -322,39 +322,39 @@ EvtSource N(interact_80241C8C) = SCRIPT({
             }
         }
         < 48 {
-            FindKeyItem(ITEM_CRYSTAL_BERRY, SI_VAR(0));
-            if (SI_VAR(0) != -1) {
+            FindKeyItem(ITEM_CRYSTAL_BERRY, EVT_VAR(0));
+            if (EVT_VAR(0) != -1) {
                 spawn N(80241BE4);
-                GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                SI_VAR(0) += 30;
-                SetCamProperties(0, 4.0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 325, 19.0, -9.5);
+                GetNpcPos(NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                EVT_VAR(0) += 30;
+                SetCamProperties(0, 4.0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 325, 19.0, -9.5);
             }
             SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0094));
-            SI_VAR(0) = N(D_802419EC_CC281C);
-            SI_VAR(1) = 0;
+            EVT_VAR(0) = N(D_802419EC_CC281C);
+            EVT_VAR(1) = 0;
             await N(8024199C);
-            match SI_VAR(0) {
+            match EVT_VAR(0) {
                 <= 0 {
                     SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0093));
                 } else {
                     SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11,
                                   0x0095));
-                    RemoveItemEntity(SI_VAR(7));
+                    RemoveItemEntity(EVT_VAR(7));
                     MakeItemEntity(ITEM_CRYSTAL_BERRY, -33, 14, 19, 1, 1380);
-                    SI_VAR(0) = 87;
-                    SI_VAR(1) = 1;
+                    EVT_VAR(0) = 87;
+                    EVT_VAR(1) = 1;
                     await N(802417F0);
                     AddKeyItem(ITEM_WATER_STONE);
                     sleep 10;
                     SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11,
                                   0x0096));
-                    SI_AREA_FLAG(22) = 1;
-                    SI_STORY_PROGRESS = STORY_CH6_GOT_WATER_STONE;
+                    EVT_AREA_FLAG(22) = 1;
+                    EVT_STORY_PROGRESS = STORY_CH6_GOT_WATER_STONE;
                 }
             }
         }
         < 53 {
-            match SI_AREA_FLAG(22) {
+            match EVT_AREA_FLAG(22) {
                 == 0 {
                     SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0097));
                 }
@@ -376,30 +376,30 @@ EvtSource N(interact_80241C8C) = SCRIPT({
 
 EvtSource N(init_802423D0) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80241C8C));
-    GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += 35;
-    SetNpcPos(NPC_ROSIE1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetNpcPos(NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) += 35;
+    SetNpcPos(NPC_ROSIE1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetNpcFlagBits(NPC_ROSIE1, ((0x00000002)), TRUE);
     SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_HAS_SHADOW)), TRUE);
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH6_GOT_CRYSTAL_BERRY {
-            if (SI_SAVE_FLAG(1378) == 1) {
+            if (EVT_SAVE_FLAG(1378) == 1) {
                 SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_100)), FALSE);
                 SetNpcAnimation(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_2);
                 MakeItemEntity(ITEM_WATER_STONE, -33, 14, 19, 1, 1380);
-                SI_VAR(10) = SI_VAR(0);
+                EVT_VAR(10) = EVT_VAR(0);
             }
         }
         < STORY_CH6_GOT_WATER_STONE {
             SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_100)), FALSE);
             SetNpcAnimation(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_2);
             MakeItemEntity(ITEM_WATER_STONE, -33, 14, 19, 1, 1380);
-            SI_VAR(10) = SI_VAR(0);
+            EVT_VAR(10) = EVT_VAR(0);
         } else {
             SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_100)), FALSE);
             SetNpcAnimation(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_2);
             MakeItemEntity(ITEM_CRYSTAL_BERRY, -33, 14, 19, 1, 1380);
-            SI_VAR(10) = SI_VAR(0);
+            EVT_VAR(10) = EVT_VAR(0);
         }
     }
 });

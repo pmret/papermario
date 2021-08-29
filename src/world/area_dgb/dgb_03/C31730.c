@@ -31,7 +31,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(80242870) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -51,10 +51,10 @@ EvtSource N(exitDoubleDoor_80242910) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
-    SI_VAR(0) = 1;
-    SI_VAR(1) = 25;
-    SI_VAR(2) = 36;
-    SI_VAR(3) = 34;
+    EVT_VAR(0) = 1;
+    EVT_VAR(1) = 25;
+    EVT_VAR(2) = 36;
+    EVT_VAR(3) = 34;
     spawn ExitDoubleDoor;
     sleep 17;
     GotoMap("dgb_02", 0);
@@ -65,10 +65,10 @@ EvtSource N(exitDoubleDoor_802429C4) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
-    SI_VAR(0) = 4;
-    SI_VAR(1) = 21;
-    SI_VAR(2) = 46;
-    SI_VAR(3) = 44;
+    EVT_VAR(0) = 4;
+    EVT_VAR(1) = 21;
+    EVT_VAR(2) = 46;
+    EVT_VAR(3) = 44;
     spawn ExitDoubleDoor;
     sleep 17;
     GotoMap("dgb_09", 0);
@@ -79,10 +79,10 @@ EvtSource N(exitDoubleDoor_80242A78) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 13;
-    SI_VAR(2) = 29;
-    SI_VAR(3) = 31;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 13;
+    EVT_VAR(2) = 29;
+    EVT_VAR(3) = 31;
     spawn ExitDoubleDoor;
     sleep 17;
     GotoMap("dgb_04", 0);
@@ -95,10 +95,10 @@ EvtSource N(exitSingleDoor_80242B88) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(0);
-    SI_VAR(0) = 2;
-    SI_VAR(1) = 33;
-    SI_VAR(2) = 49;
-    SI_VAR(3) = 1;
+    EVT_VAR(0) = 2;
+    EVT_VAR(1) = 33;
+    EVT_VAR(2) = 49;
+    EVT_VAR(3) = 1;
     spawn ExitSingleDoor;
     sleep 17;
     GotoMap("dgb_05", 0);
@@ -109,10 +109,10 @@ EvtSource N(exitDoubleDoor_80242C3C) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
-    SI_VAR(0) = 3;
-    SI_VAR(1) = 17;
-    SI_VAR(2) = 39;
-    SI_VAR(3) = 41;
+    EVT_VAR(0) = 3;
+    EVT_VAR(1) = 17;
+    EVT_VAR(2) = 39;
+    EVT_VAR(3) = 41;
     spawn ExitDoubleDoor;
     sleep 17;
     GotoMap("dgb_14", 0);
@@ -124,45 +124,45 @@ EvtSource N(80242CF0) = SCRIPT({
 });
 
 EvtSource N(enterDoubleDoor_80242D1C) = SCRIPT({
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
             UseDoorSounds(3);
-            SI_VAR(2) = 29;
-            SI_VAR(3) = 31;
+            EVT_VAR(2) = 29;
+            EVT_VAR(3) = 31;
             await EnterDoubleDoor;
             spawn N(80242CF0);
         }
         == 1 {
             UseDoorSounds(3);
-            SI_VAR(2) = 36;
-            SI_VAR(3) = 34;
+            EVT_VAR(2) = 36;
+            EVT_VAR(3) = 34;
             await EnterDoubleDoor;
             spawn N(80242CF0);
         }
         == 2 {
             UseDoorSounds(0);
-            SI_VAR(2) = 49;
-            SI_VAR(3) = 1;
+            EVT_VAR(2) = 49;
+            EVT_VAR(3) = 1;
             await EnterSingleDoor;
             spawn N(80242CF0);
         }
         == 3 {
             UseDoorSounds(3);
-            SI_VAR(2) = 39;
-            SI_VAR(3) = 41;
+            EVT_VAR(2) = 39;
+            EVT_VAR(3) = 41;
             await EnterDoubleDoor;
             spawn N(80242CF0);
         }
         == 4 {
             UseDoorSounds(3);
-            SI_VAR(2) = 46;
-            SI_VAR(3) = 44;
+            EVT_VAR(2) = 46;
+            EVT_VAR(3) = 44;
             await EnterDoubleDoor;
             spawn N(80242CF0);
         }
         == 5 {
-            SI_VAR(0) = N(80242CF0);
+            EVT_VAR(0) = N(80242CF0);
             spawn EnterWalkShort;
             sleep 1;
         }
@@ -175,12 +175,12 @@ s32 N(itemList_80242F28)[] = {
 };
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    EVT_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
-    if (SI_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
+    if (EVT_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
         MakeNpcs(1, N(npcGroupList_80244988));
     }
     await N(makeEntities);
@@ -189,7 +189,7 @@ EvtSource N(main) = SCRIPT({
     bind N(exitDoubleDoor_802429C4) TRIGGER_WALL_PRESS_A 21;
     bind N(exitDoubleDoor_80242A78) TRIGGER_WALL_PRESS_A 13;
     bind N(exitSingleDoor_80242B88) TRIGGER_WALL_PRESS_A 33;
-    if (SI_SAVE_FLAG(1043) == 0) {
+    if (EVT_SAVE_FLAG(1043) == 0) {
         bind_padlock N(80243740) TRIGGER_WALL_PRESS_A entity(0) N(itemList_80242F28);
     } else {
         bind N(exitDoubleDoor_80242C3C) TRIGGER_WALL_PRESS_A 17;
@@ -205,23 +205,23 @@ static s32 N(pad_30D8)[] = {
 EvtSource N(802430E0) = SCRIPT({
     group 0;
     loop 20 {
-        GetCurrentPartner(SI_VAR(10));
-        if (SI_VAR(10) != 0) {
-            SI_VAR(8) = -1;
+        GetCurrentPartner(EVT_VAR(10));
+        if (EVT_VAR(10) != 0) {
+            EVT_VAR(8) = -1;
             return;
         }
-        N(UnkFunc11)(SI_VAR(9));
-        if (SI_VAR(0) == 0) {
-            SI_VAR(8) = -1;
+        N(UnkFunc11)(EVT_VAR(9));
+        if (EVT_VAR(0) == 0) {
+            EVT_VAR(8) = -1;
             return;
         } else {
             SetPlayerActionState(20);
         }
         sleep 1;
     }
-    GetCurrentPartner(SI_VAR(10));
-    if (SI_VAR(10) != 0) {
-        SI_VAR(8) = -1;
+    GetCurrentPartner(EVT_VAR(10));
+    if (EVT_VAR(10) != 0) {
+        EVT_VAR(8) = -1;
         return;
     }
     DisablePlayerInput(TRUE);
@@ -229,40 +229,40 @@ EvtSource N(802430E0) = SCRIPT({
         ShakeCam(0, 0, 100, 0.6005859375);
     }
     spawn {
-        if (SI_VAR(6) >= SI_VAR(7)) {
+        if (EVT_VAR(6) >= EVT_VAR(7)) {
             InterpPlayerYaw(270, 0);
         } else {
             InterpPlayerYaw(90, 0);
         }
         SetPlayerActionState(20);
-        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SI_VAR(1) = SI_VAR(0);
-        SI_VAR(2) = SI_VAR(7);
-        SI_VAR(2) -= SI_VAR(6);
-        SI_VAR(1) += SI_VAR(2);
-        MakeLerp(SI_VAR(0), SI_VAR(1), 100, 0);
+        GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        EVT_VAR(1) = EVT_VAR(0);
+        EVT_VAR(2) = EVT_VAR(7);
+        EVT_VAR(2) -= EVT_VAR(6);
+        EVT_VAR(1) += EVT_VAR(2);
+        MakeLerp(EVT_VAR(0), EVT_VAR(1), 100, 0);
         loop {
             SetPlayerActionState(20);
             UpdateLerp();
             N(UnkFunc12)();
             sleep 1;
-            if (SI_VAR(1) == 0) {
+            if (EVT_VAR(1) == 0) {
                 break loop;
             }
         }
         SetPlayerActionState(0);
         DisablePlayerInput(FALSE);
     }
-    MakeLerp(SI_VAR(6), SI_VAR(7), 100, 0);
+    MakeLerp(EVT_VAR(6), EVT_VAR(7), 100, 0);
     PlaySoundAtCollider(27, 0x80000010, 0);
     loop {
         UpdateLerp();
-        TranslateModel(51, SI_VAR(0), 0, 0);
+        TranslateModel(51, EVT_VAR(0), 0, 0);
         UpdateColliderTransform(27);
         UpdateColliderTransform(28);
         UpdateColliderTransform(29);
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
     }
@@ -270,35 +270,35 @@ EvtSource N(802430E0) = SCRIPT({
 });
 
 EvtSource N(80243470) = SCRIPT({
-    if (SI_SAVE_FLAG(1044) != 0) {
+    if (EVT_SAVE_FLAG(1044) != 0) {
         goto 90;
     }
-    SI_VAR(6) = 0;
-    SI_VAR(7) = 48;
-    SI_VAR(8) = 0;
-    SI_VAR(9) = 27;
+    EVT_VAR(6) = 0;
+    EVT_VAR(7) = 48;
+    EVT_VAR(8) = 0;
+    EVT_VAR(9) = 27;
     await N(802430E0);
 90:
-    if (SI_VAR(8) != -1) {
-        SI_SAVE_FLAG(1045) = 0;
-        SI_SAVE_FLAG(1044) = 1;
+    if (EVT_VAR(8) != -1) {
+        EVT_SAVE_FLAG(1045) = 0;
+        EVT_SAVE_FLAG(1044) = 1;
         unbind;
     }
 });
 
 EvtSource N(8024353C) = SCRIPT({
-    if (SI_SAVE_FLAG(1044) != 0) {
+    if (EVT_SAVE_FLAG(1044) != 0) {
         goto 90;
     }
-    SI_VAR(6) = 0;
-    SI_VAR(7) = -48;
-    SI_VAR(8) = 0;
-    SI_VAR(9) = 28;
+    EVT_VAR(6) = 0;
+    EVT_VAR(7) = -48;
+    EVT_VAR(8) = 0;
+    EVT_VAR(9) = 28;
     await N(802430E0);
 90:
-    if (SI_VAR(8) != -1) {
-        SI_SAVE_FLAG(1045) = 1;
-        SI_SAVE_FLAG(1044) = 1;
+    if (EVT_VAR(8) != -1) {
+        EVT_SAVE_FLAG(1045) = 1;
+        EVT_SAVE_FLAG(1044) = 1;
         unbind;
     }
 });
@@ -307,16 +307,16 @@ EvtSource N(80243608) = SCRIPT({
     ParentColliderToModel(27, 51);
     ParentColliderToModel(28, 51);
     ParentColliderToModel(29, 51);
-    if (SI_SAVE_FLAG(1044) == 0) {
+    if (EVT_SAVE_FLAG(1044) == 0) {
         bind N(80243470) TRIGGER_WALL_PUSH 27;
         bind N(8024353C) TRIGGER_WALL_PUSH 28;
     } else {
-        if (SI_SAVE_FLAG(1045) == 0) {
-            SI_VAR(0) = 48;
+        if (EVT_SAVE_FLAG(1045) == 0) {
+            EVT_VAR(0) = 48;
         } else {
-            SI_VAR(0) = -48;
+            EVT_VAR(0) = -48;
         }
-        TranslateModel(51, SI_VAR(0), 0, 0);
+        TranslateModel(51, EVT_VAR(0), 0, 0);
         UpdateColliderTransform(27);
         UpdateColliderTransform(28);
         UpdateColliderTransform(29);
@@ -331,24 +331,24 @@ EvtSource N(80243740) = SCRIPT({
     group 0;
     suspend group 1;
     ShowKeyChoicePopup();
-    if (SI_VAR(0) == 0) {
+    if (EVT_VAR(0) == 0) {
         ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x00D8), 160, 40);
         CloseChoicePopup();
         resume group 1;
         return;
     }
-    if (SI_VAR(0) == -1) {
+    if (EVT_VAR(0) == -1) {
         CloseChoicePopup();
         resume group 1;
         return;
     }
-    FindKeyItem(19, SI_VAR(0));
-    RemoveKeyItemAt(SI_VAR(0));
+    FindKeyItem(19, EVT_VAR(0));
+    RemoveKeyItemAt(EVT_VAR(0));
     CloseChoicePopup();
-    SI_SAVE_FLAG(1043) = 1;
-    N(GetEntityPosition)(SI_MAP_VAR(0), SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    PlaySoundAt(0x269, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) = SI_MAP_VAR(0);
+    EVT_SAVE_FLAG(1043) = 1;
+    N(GetEntityPosition)(EVT_MAP_VAR(0), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    PlaySoundAt(0x269, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) = EVT_MAP_VAR(0);
     N(SetEntityFlags100000)();
     resume group 1;
     unbind;
@@ -359,12 +359,12 @@ EvtSource N(802438A8) = SCRIPT({
 });
 
 EvtSource N(makeEntities) = SCRIPT({
-    if (SI_SAVE_FLAG(1043) == 0) {
+    if (EVT_SAVE_FLAG(1043) == 0) {
         MakeEntity(0x802BCD68, -355, 218, 75, 80, MAKE_ENTITY_END);
         AssignScript(N(802438A8));
-        SI_MAP_VAR(0) = SI_VAR(0);
+        EVT_MAP_VAR(0) = EVT_VAR(0);
     }
-    MakeItemEntity(ITEM_STAR_PIECE, 0, 75, 100, 17, SI_SAVE_FLAG(1042));
+    MakeItemEntity(ITEM_STAR_PIECE, 0, 75, 100, 17, EVT_SAVE_FLAG(1042));
 });
 
 static s32 N(pad_3964)[] = {
@@ -372,8 +372,8 @@ static s32 N(pad_3964)[] = {
 };
 
 EvtSource N(80243970) = SCRIPT({
-    GetBattleOutcome(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattleOutcome(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
             RemoveNpc(NPC_SELF);
         }
@@ -515,8 +515,8 @@ NpcSettings N(npcSettings_80243D68) = {
 };
 
 EvtSource N(init_80243D94) = SCRIPT({
-    GetEntryID(SI_VAR(0));
-    if (SI_VAR(0) == 3) {
+    GetEntryID(EVT_VAR(0));
+    if (EVT_VAR(0) == 3) {
         SetNpcPos(NPC_SELF, -330, 210, -20);
     }
 });

@@ -37,17 +37,17 @@ ApiStatus N(func_802A12C4_726224)(Evt* script, s32 isInitialCall) {
 #include "UseItem.inc.c"
 
 EvtSource N(main) = SCRIPT({
-    SI_VAR(10) = (const) ITEM_HUSTLE_DRINK;
+    EVT_VAR(10) = (const) ITEM_HUSTLE_DRINK;
     await N(UseItemWithEffect);
     await N(DrinkItem);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_SQUISH);
-    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(1) += 25;
-    func_802D7520(SI_VAR(0), SI_VAR(1), SI_VAR(2), 5);
+    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(1) += 25;
+    func_802D7520(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5);
     N(func_802A12C4_726224)();
     N(func_802A123C_72619C)();
-    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(1) += 20;
+    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(1) += 20;
     UseBattleCamPreset(13);
     BattleCamTargetActor(ACTOR_SELF);
     MoveBattleCamOver(20);
@@ -102,8 +102,8 @@ EvtSource N(main) = SCRIPT({
     }
     loop 10 {
         PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_369);
-        PlayEffect(0x6, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        PlayEffect(0x6, 1, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x6, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x6, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
         sleep 4;
     }
     sleep 10;

@@ -22,7 +22,7 @@ ApiStatus N(func_80240358_C8DF08)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
         script->varTable[0] = ptr;
-        set_variable(NULL, SI_MAP_VAR(1), ptr);
+        set_variable(NULL, EVT_MAP_VAR(1), ptr);
         ptr->unk_38 = get_variable(script, *args++);
         ptr->unk_3C = get_variable(script, *args++);
         ptr->unk_0C = get_float_variable(script, *args++);

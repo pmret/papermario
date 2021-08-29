@@ -5,7 +5,7 @@
 #include "UseItem.inc.c"
 
 EvtSource N(main) = SCRIPT({
-    SI_VAR(10) = (const) ITEM_DIZZY_DIAL;
+    EVT_VAR(10) = (const) ITEM_DIZZY_DIAL;
     await N(UseItemWithEffect);
     SetGoalToHome(ACTOR_PLAYER);
     SetJumpAnimations(ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009);

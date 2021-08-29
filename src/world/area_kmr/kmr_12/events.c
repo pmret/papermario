@@ -11,7 +11,7 @@ EvtSource N(BindExits) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_GOOMBA_ROAD;
+    EVT_WORLD_LOCATION = LOCATION_GOOMBA_ROAD;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -19,7 +19,7 @@ EvtSource N(main) = SCRIPT({
     MakeNpcs(0, N(npcGroupList));
     await N(MakeEntities);
     spawn N(PlayMusic);
-    SI_VAR(0) = N(BindExits);
+    EVT_VAR(0) = N(BindExits);
     spawn EnterWalk;
     sleep 1;
     bind N(ReadWestSign) TRIGGER_WALL_PRESS_A 10;
@@ -63,19 +63,19 @@ EvtSource N(ReadWestSign) = SCRIPT({
     ShowMessageAtScreenPos(MSG_kmr_12_sign_trap, 160, 40);
     resume group 1;
 
-    SI_FLAG(0) = FALSE;
+    EVT_FLAG(0) = FALSE;
     GetGoomba();
-    if (SI_VAR(0) != FALSE) {
-        GetNpcVar(NPC_GOOMBA, 0, SI_VAR(0));
-        if (SI_VAR(0) == FALSE) {
+    if (EVT_VAR(0) != FALSE) {
+        GetNpcVar(NPC_GOOMBA, 0, EVT_VAR(0));
+        if (EVT_VAR(0) == FALSE) {
             // Trigger Goomba to peel off
             SetNpcVar(NPC_GOOMBA, 0, TRUE);
-            SI_FLAG(0) = TRUE;
+            EVT_FLAG(0) = TRUE;
             sleep 10;
         }
     }
     DisablePlayerInput(FALSE);
-    if (SI_FLAG(0) == TRUE) {
+    if (EVT_FLAG(0) == TRUE) {
         unbind;
     }
 
@@ -93,25 +93,25 @@ EvtSource N(GoombaIdle) = SCRIPT({
 
     // Wait until read_sign sets NPC var 0
 0:
-    GetSelfVar(0, SI_VAR(0));
+    GetSelfVar(0, EVT_VAR(0));
     sleep 1;
-    if (SI_VAR(0) == FALSE) {
+    if (EVT_VAR(0) == FALSE) {
         goto 0;
     }
 
     // Peel and jump off the sign
     SetNpcFlagBits(NPC_SELF, 0x240000, TRUE);
     sleep 3;
-    SI_VAR(0) = 0.0;
+    EVT_VAR(0) = 0.0;
     loop 9 {
-        SI_VAR(0) += 10.0;
-        SetNpcRotation(NPC_SELF, 0, SI_VAR(0), 0);
+        EVT_VAR(0) += 10.0;
+        SetNpcRotation(NPC_SELF, 0, EVT_VAR(0), 0);
         sleep 1;
     }
     SetNpcAnimation(NPC_SELF, NPC_ANIM_goomba_normal_still);
     loop 9 {
-        SI_VAR(0) += 10.0;
-        SetNpcRotation(NPC_SELF, 0, SI_VAR(0), 0);
+        EVT_VAR(0) += 10.0;
+        SetNpcRotation(NPC_SELF, 0, EVT_VAR(0), 0);
         sleep 1;
     }
     SetNpcAnimation(NPC_SELF, NPC_ANIM_goomba_normal_dizzy);

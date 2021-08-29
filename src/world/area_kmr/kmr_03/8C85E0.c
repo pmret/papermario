@@ -6,16 +6,16 @@ EvtSource N(80242340) = SCRIPT({
     SetCamDistance(0, 700.0);
     SetCamSpeed(0, 90.0);
     PanToTarget(0, 0, 1);
-    if (SI_STORY_PROGRESS >= STORY_CH0_FOUND_HAMMER) {
+    if (EVT_STORY_PROGRESS >= STORY_CH0_FOUND_HAMMER) {
         SetPlayerPos(0, -1000, 0);
         DisablePlayerInput(TRUE);
         SetPlayerPos(-224, 20, -80);
         SetNpcPos(NPC_PARTNER, -224, 20, -80);
         sleep 20;
         SetCamSpeed(0, 3.0);
-        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         PanToTarget(0, 0, 1);
         WaitForCam(0, 1.0);
         PanToTarget(0, 0, 0);
@@ -24,8 +24,8 @@ EvtSource N(80242340) = SCRIPT({
     }
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetPlayerPos(SI_VAR(0), -1000, SI_VAR(2));
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    SetPlayerPos(EVT_VAR(0), -1000, EVT_VAR(2));
     sleep 30;
     SetCamDistance(0, 220);
     SetCamSpeed(0, 1.0);
@@ -45,10 +45,10 @@ EvtSource N(80242340) = SCRIPT({
     InterpPlayerYaw(90, 0);
 0:
     sleep 1;
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(1) += -2;
-    SetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    if (SI_VAR(1) > 86) {
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(1) += -2;
+    SetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    if (EVT_VAR(1) > 86) {
         goto 0;
     }
     SetPlayerPos(-310, 20, -80);
@@ -67,15 +67,15 @@ EvtSource N(80242340) = SCRIPT({
     SetPlayerAnimation(ANIM_BEFORE_JUMP);
     sleep 10;
     SetPlayerAnimation(ANIM_MIDAIR_STILL);
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetPlayerJumpscale(1.0);
-    PlayerJump(SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
+    PlayerJump(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10);
     SetPlayerAnimation(ANIM_10002);
     spawn {
         SetCamSpeed(0, 3.0);
-        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         PanToTarget(0, 0, 1);
         WaitForCam(0, 1.0);
         PanToTarget(0, 0, 0);
