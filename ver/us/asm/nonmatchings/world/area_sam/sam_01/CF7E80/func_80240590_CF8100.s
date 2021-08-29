@@ -5,7 +5,7 @@ glabel func_80240590_CF8100
 /* CF8100 80240590 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* CF8104 80240594 AFBF0010 */  sw        $ra, 0x10($sp)
 /* CF8108 80240598 8C82000C */  lw        $v0, 0xc($a0)
-/* CF810C 8024059C 0C0B1EAF */  jal       get_variable
+/* CF810C 8024059C 0C0B1EAF */  jal       evt_get_variable
 /* CF8110 802405A0 8C450000 */   lw       $a1, ($v0)
 /* CF8114 802405A4 3C018024 */  lui       $at, %hi(D_802432D4_CFAE44)
 /* CF8118 802405A8 AC2232D4 */  sw        $v0, %lo(D_802432D4_CFAE44)($at)

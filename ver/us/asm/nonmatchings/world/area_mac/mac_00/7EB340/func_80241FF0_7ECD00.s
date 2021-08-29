@@ -15,12 +15,12 @@ glabel func_80241FF0_7ECD00
 /* 7ECD28 80242018 AFBF0020 */  sw        $ra, 0x20($sp)
 .L8024201C:
 /* 7ECD2C 8024201C 8E05FFF8 */  lw        $a1, -8($s0)
-/* 7ECD30 80242020 0C0B1EAF */  jal       get_variable
+/* 7ECD30 80242020 0C0B1EAF */  jal       evt_get_variable
 /* 7ECD34 80242024 0260202D */   daddu    $a0, $s3, $zero
 /* 7ECD38 80242028 50400007 */  beql      $v0, $zero, .L80242048
 /* 7ECD3C 8024202C 26310001 */   addiu    $s1, $s1, 1
 /* 7ECD40 80242030 8E050000 */  lw        $a1, ($s0)
-/* 7ECD44 80242034 0C0B1EAF */  jal       get_variable
+/* 7ECD44 80242034 0C0B1EAF */  jal       evt_get_variable
 /* 7ECD48 80242038 0260202D */   daddu    $a0, $s3, $zero
 /* 7ECD4C 8024203C 50400001 */  beql      $v0, $zero, .L80242044
 /* 7ECD50 80242040 26520001 */   addiu    $s2, $s2, 1

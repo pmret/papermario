@@ -11,17 +11,17 @@ glabel SetAnimatedNodeFlags
 /* F23B8 802CDA08 AFB00010 */  sw        $s0, 0x10($sp)
 /* F23BC 802CDA0C 8E50000C */  lw        $s0, 0xc($s2)
 /* F23C0 802CDA10 8E050000 */  lw        $a1, ($s0)
-/* F23C4 802CDA14 0C0B1EAF */  jal       get_variable
+/* F23C4 802CDA14 0C0B1EAF */  jal       evt_get_variable
 /* F23C8 802CDA18 26100004 */   addiu    $s0, $s0, 4
 /* F23CC 802CDA1C 8E050000 */  lw        $a1, ($s0)
 /* F23D0 802CDA20 26100004 */  addiu     $s0, $s0, 4
 /* F23D4 802CDA24 0240202D */  daddu     $a0, $s2, $zero
-/* F23D8 802CDA28 0C0B1EAF */  jal       get_variable
+/* F23D8 802CDA28 0C0B1EAF */  jal       evt_get_variable
 /* F23DC 802CDA2C 0040882D */   daddu    $s1, $v0, $zero
 /* F23E0 802CDA30 0240202D */  daddu     $a0, $s2, $zero
 /* F23E4 802CDA34 8E050004 */  lw        $a1, 4($s0)
 /* F23E8 802CDA38 8E130000 */  lw        $s3, ($s0)
-/* F23EC 802CDA3C 0C0B1EAF */  jal       get_variable
+/* F23EC 802CDA3C 0C0B1EAF */  jal       evt_get_variable
 /* F23F0 802CDA40 0040902D */   daddu    $s2, $v0, $zero
 /* F23F4 802CDA44 3C03802E */  lui       $v1, %hi(gCurrentMeshAnimationListPtr)
 /* F23F8 802CDA48 8C63AE30 */  lw        $v1, %lo(gCurrentMeshAnimationListPtr)($v1)

@@ -26,7 +26,7 @@ glabel func_80240000_90F6B0
 /* 90F6DC 8024002C F7B80050 */  sdc1      $f24, 0x50($sp)
 /* 90F6E0 80240030 F7B60048 */  sdc1      $f22, 0x48($sp)
 /* 90F6E4 80240034 F7B40040 */  sdc1      $f20, 0x40($sp)
-/* 90F6E8 80240038 0C0B1EAF */  jal       get_variable
+/* 90F6E8 80240038 0C0B1EAF */  jal       evt_get_variable
 /* 90F6EC 8024003C 34A50F8F */   ori      $a1, $a1, 0xf8f
 /* 90F6F0 80240040 0040882D */  daddu     $s1, $v0, $zero
 /* 90F6F4 80240044 0000982D */  daddu     $s3, $zero, $zero

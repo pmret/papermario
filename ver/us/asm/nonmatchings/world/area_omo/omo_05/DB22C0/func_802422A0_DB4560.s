@@ -7,7 +7,7 @@ glabel func_802422A0_DB4560
 /* DB4568 802422A8 0080802D */  daddu     $s0, $a0, $zero
 /* DB456C 802422AC AFBF0014 */  sw        $ra, 0x14($sp)
 /* DB4570 802422B0 8E02000C */  lw        $v0, 0xc($s0)
-/* DB4574 802422B4 0C0B1EAF */  jal       get_variable
+/* DB4574 802422B4 0C0B1EAF */  jal       evt_get_variable
 /* DB4578 802422B8 8C450000 */   lw       $a1, ($v0)
 /* DB457C 802422BC 0040202D */  daddu     $a0, $v0, $zero
 /* DB4580 802422C0 3C038008 */  lui       $v1, %hi(gItemTable)

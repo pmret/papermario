@@ -18,7 +18,7 @@ glabel func_802406D8_AEDAE8
 /* AEDB1C 8024070C F7B40038 */  sdc1      $f20, 0x38($sp)
 /* AEDB20 80240710 8E70000C */  lw        $s0, 0xc($s3)
 /* AEDB24 80240714 8E050000 */  lw        $a1, ($s0)
-/* AEDB28 80240718 0C0B1EAF */  jal       get_variable
+/* AEDB28 80240718 0C0B1EAF */  jal       evt_get_variable
 /* AEDB2C 8024071C 26100004 */   addiu    $s0, $s0, 4
 /* AEDB30 80240720 8E150000 */  lw        $s5, ($s0)
 /* AEDB34 80240724 26100004 */  addiu     $s0, $s0, 4

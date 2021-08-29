@@ -7,7 +7,7 @@ glabel func_80240E80_801700
 /* 801708 80240E88 0080802D */  daddu     $s0, $a0, $zero
 /* 80170C 80240E8C 3C05F5DE */  lui       $a1, 0xf5de
 /* 801710 80240E90 AFBF0014 */  sw        $ra, 0x14($sp)
-/* 801714 80240E94 0C0B1EAF */  jal       get_variable
+/* 801714 80240E94 0C0B1EAF */  jal       evt_get_variable
 /* 801718 80240E98 34A502DD */   ori      $a1, $a1, 0x2dd
 /* 80171C 80240E9C 3C048025 */  lui       $a0, %hi(D_802485E8_808E68)
 /* 801720 80240EA0 248485E8 */  addiu     $a0, $a0, %lo(D_802485E8_808E68)

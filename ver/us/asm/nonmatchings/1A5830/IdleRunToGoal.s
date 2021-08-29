@@ -21,7 +21,7 @@ glabel IdleRunToGoal
 /* 1A8B80 8027A2A0 00000000 */   nop
 /* 1A8B84 8027A2A4 8E250000 */  lw        $a1, ($s1)
 /* 1A8B88 8027A2A8 26310004 */  addiu     $s1, $s1, 4
-/* 1A8B8C 8027A2AC 0C0B1EAF */  jal       get_variable
+/* 1A8B8C 8027A2AC 0C0B1EAF */  jal       evt_get_variable
 /* 1A8B90 8027A2B0 0240202D */   daddu    $a0, $s2, $zero
 /* 1A8B94 8027A2B4 0040202D */  daddu     $a0, $v0, $zero
 /* 1A8B98 8027A2B8 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -34,7 +34,7 @@ glabel IdleRunToGoal
 /* 1A8BB0 8027A2D0 0040802D */  daddu     $s0, $v0, $zero
 /* 1A8BB4 8027A2D4 AE500074 */  sw        $s0, 0x74($s2)
 /* 1A8BB8 8027A2D8 8E250000 */  lw        $a1, ($s1)
-/* 1A8BBC 8027A2DC 0C0B1EAF */  jal       get_variable
+/* 1A8BBC 8027A2DC 0C0B1EAF */  jal       evt_get_variable
 /* 1A8BC0 8027A2E0 0240202D */   daddu    $a0, $s2, $zero
 /* 1A8BC4 8027A2E4 C61600D4 */  lwc1      $f22, 0xd4($s0)
 /* 1A8BC8 8027A2E8 C61800DC */  lwc1      $f24, 0xdc($s0)

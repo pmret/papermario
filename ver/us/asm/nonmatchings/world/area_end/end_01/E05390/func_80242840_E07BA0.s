@@ -8,7 +8,7 @@ glabel func_80242840_E07BA0
 /* E07BAC 8024284C AFBF0014 */  sw        $ra, 0x14($sp)
 /* E07BB0 80242850 10A00006 */  beqz      $a1, .L8024286C
 /* E07BB4 80242854 8E02000C */   lw       $v0, 0xc($s0)
-/* E07BB8 80242858 0C0B1EAF */  jal       get_variable
+/* E07BB8 80242858 0C0B1EAF */  jal       evt_get_variable
 /* E07BBC 8024285C 8C450000 */   lw       $a1, ($v0)
 /* E07BC0 80242860 0C00EABB */  jal       get_npc_unsafe
 /* E07BC4 80242864 0040202D */   daddu    $a0, $v0, $zero

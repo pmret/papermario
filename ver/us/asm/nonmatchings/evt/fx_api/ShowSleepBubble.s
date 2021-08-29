@@ -16,12 +16,12 @@ glabel ShowSleepBubble
 /* FCA04 802D8054 F7B40040 */  sdc1      $f20, 0x40($sp)
 /* FCA08 802D8058 8E30000C */  lw        $s0, 0xc($s1)
 /* FCA0C 802D805C 8E050000 */  lw        $a1, ($s0)
-/* FCA10 802D8060 0C0B1EAF */  jal       get_variable
+/* FCA10 802D8060 0C0B1EAF */  jal       evt_get_variable
 /* FCA14 802D8064 26100004 */   addiu    $s0, $s0, 4
 /* FCA18 802D8068 8E050000 */  lw        $a1, ($s0)
 /* FCA1C 802D806C 26100004 */  addiu     $s0, $s0, 4
 /* FCA20 802D8070 0220202D */  daddu     $a0, $s1, $zero
-/* FCA24 802D8074 0C0B1EAF */  jal       get_variable
+/* FCA24 802D8074 0C0B1EAF */  jal       evt_get_variable
 /* FCA28 802D8078 0040982D */   daddu    $s3, $v0, $zero
 /* FCA2C 802D807C 8E050000 */  lw        $a1, ($s0)
 /* FCA30 802D8080 26100004 */  addiu     $s0, $s0, 4
@@ -31,7 +31,7 @@ glabel ShowSleepBubble
 /* FCA40 802D8090 8E050000 */  lw        $a1, ($s0)
 /* FCA44 802D8094 26100004 */  addiu     $s0, $s0, 4
 /* FCA48 802D8098 0220202D */  daddu     $a0, $s1, $zero
-/* FCA4C 802D809C 0C0B1EAF */  jal       get_variable
+/* FCA4C 802D809C 0C0B1EAF */  jal       evt_get_variable
 /* FCA50 802D80A0 46000686 */   mov.s    $f26, $f0
 /* FCA54 802D80A4 8E050000 */  lw        $a1, ($s0)
 /* FCA58 802D80A8 26100004 */  addiu     $s0, $s0, 4

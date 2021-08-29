@@ -18,7 +18,7 @@ glabel func_80240728_ACE868
 /* ACE89C 8024075C F7B40038 */  sdc1      $f20, 0x38($sp)
 /* ACE8A0 80240760 8E70000C */  lw        $s0, 0xc($s3)
 /* ACE8A4 80240764 8E050000 */  lw        $a1, ($s0)
-/* ACE8A8 80240768 0C0B1EAF */  jal       get_variable
+/* ACE8A8 80240768 0C0B1EAF */  jal       evt_get_variable
 /* ACE8AC 8024076C 26100004 */   addiu    $s0, $s0, 4
 /* ACE8B0 80240770 8E150000 */  lw        $s5, ($s0)
 /* ACE8B4 80240774 26100004 */  addiu     $s0, $s0, 4

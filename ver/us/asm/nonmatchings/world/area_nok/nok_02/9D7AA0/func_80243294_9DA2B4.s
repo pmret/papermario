@@ -21,11 +21,11 @@ glabel func_80243294_9DA2B4
 /* 9DA2F4 802432D4 8EB0000C */  lw        $s0, 0xc($s5)
 /* 9DA2F8 802432D8 3694851F */  ori       $s4, $s4, 0x851f
 /* 9DA2FC 802432DC 8E050000 */  lw        $a1, ($s0)
-/* 9DA300 802432E0 0C0B1EAF */  jal       get_variable
+/* 9DA300 802432E0 0C0B1EAF */  jal       evt_get_variable
 /* 9DA304 802432E4 26100004 */   addiu    $s0, $s0, 4
 /* 9DA308 802432E8 02A0202D */  daddu     $a0, $s5, $zero
 /* 9DA30C 802432EC 8E050000 */  lw        $a1, ($s0)
-/* 9DA310 802432F0 0C0B1EAF */  jal       get_variable
+/* 9DA310 802432F0 0C0B1EAF */  jal       evt_get_variable
 /* 9DA314 802432F4 0040902D */   daddu    $s2, $v0, $zero
 /* 9DA318 802432F8 0040982D */  daddu     $s3, $v0, $zero
 .L802432FC:

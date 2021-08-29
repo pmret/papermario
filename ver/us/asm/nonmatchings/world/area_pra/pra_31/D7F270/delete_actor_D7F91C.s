@@ -8,12 +8,12 @@ glabel btl_delete_actor_D7F91C
 /* D7F928 80240BC8 AFBF0018 */  sw        $ra, 0x18($sp)
 /* D7F92C 80240BCC AFB00010 */  sw        $s0, 0x10($sp)
 /* D7F930 80240BD0 8E22000C */  lw        $v0, 0xc($s1)
-/* D7F934 80240BD4 0C0B1EAF */  jal       get_variable
+/* D7F934 80240BD4 0C0B1EAF */  jal       evt_get_variable
 /* D7F938 80240BD8 8C450000 */   lw       $a1, ($v0)
 /* D7F93C 80240BDC 0220202D */  daddu     $a0, $s1, $zero
 /* D7F940 80240BE0 3C05FD05 */  lui       $a1, 0xfd05
 /* D7F944 80240BE4 34A50F80 */  ori       $a1, $a1, 0xf80
-/* D7F948 80240BE8 0C0B1EAF */  jal       get_variable
+/* D7F948 80240BE8 0C0B1EAF */  jal       evt_get_variable
 /* D7F94C 80240BEC 0040802D */   daddu    $s0, $v0, $zero
 /* D7F950 80240BF0 00101840 */  sll       $v1, $s0, 1
 /* D7F954 80240BF4 00701821 */  addu      $v1, $v1, $s0

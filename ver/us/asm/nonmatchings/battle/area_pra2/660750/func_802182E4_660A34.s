@@ -5,7 +5,7 @@ glabel func_802182E4_660A34
 /* 660A34 802182E4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 660A38 802182E8 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 660A3C 802182EC 8C82000C */  lw        $v0, 0xc($a0)
-/* 660A40 802182F0 0C0B1EAF */  jal       get_variable
+/* 660A40 802182F0 0C0B1EAF */  jal       evt_get_variable
 /* 660A44 802182F4 8C450000 */   lw       $a1, ($v0)
 /* 660A48 802182F8 8C43000C */  lw        $v1, 0xc($v0)
 /* 660A4C 802182FC 240500FF */  addiu     $a1, $zero, 0xff

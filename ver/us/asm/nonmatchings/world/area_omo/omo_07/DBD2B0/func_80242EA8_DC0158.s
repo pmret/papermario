@@ -12,11 +12,11 @@ glabel func_80242EA8_DC0158
 /* DC0174 80242EC4 8E50000C */  lw        $s0, 0xc($s2)
 /* DC0178 80242EC8 36318887 */  ori       $s1, $s1, 0x8887
 /* DC017C 80242ECC 8E050000 */  lw        $a1, ($s0)
-/* DC0180 80242ED0 0C0B1EAF */  jal       get_variable
+/* DC0180 80242ED0 0C0B1EAF */  jal       evt_get_variable
 /* DC0184 80242ED4 26100004 */   addiu    $s0, $s0, 4
 /* DC0188 80242ED8 00518821 */  addu      $s1, $v0, $s1
 /* DC018C 80242EDC 8E050000 */  lw        $a1, ($s0)
-/* DC0190 80242EE0 0C0B1EAF */  jal       get_variable
+/* DC0190 80242EE0 0C0B1EAF */  jal       evt_get_variable
 /* DC0194 80242EE4 0240202D */   daddu    $a0, $s2, $zero
 /* DC0198 80242EE8 0240202D */  daddu     $a0, $s2, $zero
 /* DC019C 80242EEC 0220282D */  daddu     $a1, $s1, $zero

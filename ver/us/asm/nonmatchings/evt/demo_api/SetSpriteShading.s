@@ -14,7 +14,7 @@ glabel SetSpriteShading
 /* FE0D4 802D9724 AFB10044 */  sw        $s1, 0x44($sp)
 /* FE0D8 802D9728 AFB00040 */  sw        $s0, 0x40($sp)
 /* FE0DC 802D972C 8C82000C */  lw        $v0, 0xc($a0)
-/* FE0E0 802D9730 0C0B1EAF */  jal       get_variable
+/* FE0E0 802D9730 0C0B1EAF */  jal       evt_get_variable
 /* FE0E4 802D9734 8C450000 */   lw       $a1, ($v0)
 /* FE0E8 802D9738 00021C03 */  sra       $v1, $v0, 0x10
 /* FE0EC 802D973C 000330C0 */  sll       $a2, $v1, 3

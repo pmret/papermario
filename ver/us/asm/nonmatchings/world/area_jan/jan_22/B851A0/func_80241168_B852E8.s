@@ -9,7 +9,7 @@ glabel func_80241168_B852E8
 /* B852F8 80241178 AFB20018 */  sw        $s2, 0x18($sp)
 /* B852FC 8024117C AFB00010 */  sw        $s0, 0x10($sp)
 /* B85300 80241180 8E22000C */  lw        $v0, 0xc($s1)
-/* B85304 80241184 0C0B1EAF */  jal       get_variable
+/* B85304 80241184 0C0B1EAF */  jal       evt_get_variable
 /* B85308 80241188 8C450000 */   lw       $a1, ($v0)
 /* B8530C 8024118C 8E23013C */  lw        $v1, 0x13c($s1)
 /* B85310 80241190 8C720000 */  lw        $s2, ($v1)

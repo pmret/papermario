@@ -23,7 +23,7 @@ glabel func_8021825C_4EF6FC
 /* 4EF744 802182A4 122000E3 */  beqz      $s1, .L80218634
 /* 4EF748 802182A8 0000102D */   daddu    $v0, $zero, $zero
 /* 4EF74C 802182AC 8E450000 */  lw        $a1, ($s2)
-/* 4EF750 802182B0 0C0B1EAF */  jal       get_variable
+/* 4EF750 802182B0 0C0B1EAF */  jal       evt_get_variable
 /* 4EF754 802182B4 0200202D */   daddu    $a0, $s0, $zero
 /* 4EF758 802182B8 0040A82D */  daddu     $s5, $v0, $zero
 /* 4EF75C 802182BC 2402000A */  addiu     $v0, $zero, 0xa

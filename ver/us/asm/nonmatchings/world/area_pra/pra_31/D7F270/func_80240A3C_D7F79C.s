@@ -7,12 +7,12 @@ glabel func_80240A3C_D7F79C
 /* D7F7A4 80240A44 0080802D */  daddu     $s0, $a0, $zero
 /* D7F7A8 80240A48 AFBF0014 */  sw        $ra, 0x14($sp)
 /* D7F7AC 80240A4C 8E02000C */  lw        $v0, 0xc($s0)
-/* D7F7B0 80240A50 0C0B1EAF */  jal       get_variable
+/* D7F7B0 80240A50 0C0B1EAF */  jal       evt_get_variable
 /* D7F7B4 80240A54 8C450000 */   lw       $a1, ($v0)
 /* D7F7B8 80240A58 0200202D */  daddu     $a0, $s0, $zero
 /* D7F7BC 80240A5C 3C05FD05 */  lui       $a1, 0xfd05
 /* D7F7C0 80240A60 34A50F80 */  ori       $a1, $a1, 0xf80
-/* D7F7C4 80240A64 0C0B1EAF */  jal       get_variable
+/* D7F7C4 80240A64 0C0B1EAF */  jal       evt_get_variable
 /* D7F7C8 80240A68 0040802D */   daddu    $s0, $v0, $zero
 /* D7F7CC 80240A6C 0040302D */  daddu     $a2, $v0, $zero
 /* D7F7D0 80240A70 00101040 */  sll       $v0, $s0, 1

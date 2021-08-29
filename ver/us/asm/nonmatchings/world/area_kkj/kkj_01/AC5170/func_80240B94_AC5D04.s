@@ -25,7 +25,7 @@ glabel func_80240B94_AC5D04
 /* AC5D38 80240BC8 8E83000C */  lw        $v1, 0xc($s4)
 /* AC5D3C 80240BCC 0280202D */  daddu     $a0, $s4, $zero
 /* AC5D40 80240BD0 8C650000 */  lw        $a1, ($v1)
-/* AC5D44 80240BD4 0C0B1EAF */  jal       get_variable
+/* AC5D44 80240BD4 0C0B1EAF */  jal       evt_get_variable
 /* AC5D48 80240BD8 0040902D */   daddu    $s2, $v0, $zero
 /* AC5D4C 80240BDC AFA00018 */  sw        $zero, 0x18($sp)
 /* AC5D50 80240BE0 8E2300D0 */  lw        $v1, 0xd0($s1)

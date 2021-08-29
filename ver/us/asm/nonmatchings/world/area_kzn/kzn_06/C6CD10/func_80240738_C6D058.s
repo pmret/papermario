@@ -8,7 +8,7 @@ glabel func_80240738_C6D058
 /* C6D064 80240744 AFB10014 */  sw        $s1, 0x14($sp)
 /* C6D068 80240748 AFB00010 */  sw        $s0, 0x10($sp)
 /* C6D06C 8024074C 8C82000C */  lw        $v0, 0xc($a0)
-/* C6D070 80240750 0C0B1EAF */  jal       get_variable
+/* C6D070 80240750 0C0B1EAF */  jal       evt_get_variable
 /* C6D074 80240754 8C450000 */   lw       $a1, ($v0)
 /* C6D078 80240758 0040902D */  daddu     $s2, $v0, $zero
 /* C6D07C 8024075C 12400013 */  beqz      $s2, .L802407AC

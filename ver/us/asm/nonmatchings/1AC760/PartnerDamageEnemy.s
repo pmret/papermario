@@ -29,7 +29,7 @@ glabel PartnerDamageEnemy
 /* 1AE6F4 8027FE14 26100004 */  addiu     $s0, $s0, 4
 /* 1AE6F8 8027FE18 AE230190 */  sw        $v1, 0x190($s1)
 /* 1AE6FC 8027FE1C 8E050000 */  lw        $a1, ($s0)
-/* 1AE700 8027FE20 0C0B1EAF */  jal       get_variable
+/* 1AE700 8027FE20 0C0B1EAF */  jal       evt_get_variable
 /* 1AE704 8027FE24 26100004 */   addiu    $s0, $s0, 4
 /* 1AE708 8027FE28 A622017E */  sh        $v0, 0x17e($s1)
 /* 1AE70C 8027FE2C A2200198 */  sb        $zero, 0x198($s1)

@@ -25,7 +25,7 @@ glabel btl_state_update_begin_player_turn_A70404
 /* A70438 80242058 00A0882D */   daddu    $s1, $a1, $zero
 /* A7043C 8024205C 0280202D */  daddu     $a0, $s4, $zero
 /* A70440 80242060 8E050000 */  lw        $a1, ($s0)
-/* A70444 80242064 0C0B1EAF */  jal       get_variable
+/* A70444 80242064 0C0B1EAF */  jal       evt_get_variable
 /* A70448 80242068 0040A82D */   daddu    $s5, $v0, $zero
 /* A7044C 8024206C AFA00010 */  sw        $zero, 0x10($sp)
 /* A70450 80242070 8E4300D0 */  lw        $v1, 0xd0($s2)

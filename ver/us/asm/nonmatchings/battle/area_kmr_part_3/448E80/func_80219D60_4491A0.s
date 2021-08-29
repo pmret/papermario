@@ -14,7 +14,7 @@ glabel func_80219D60_4491A0
 /* 4491C4 80219D84 F7B60038 */  sdc1      $f22, 0x38($sp)
 /* 4491C8 80219D88 F7B40030 */  sdc1      $f20, 0x30($sp)
 /* 4491CC 80219D8C 8E02000C */  lw        $v0, 0xc($s0)
-/* 4491D0 80219D90 0C0B1EAF */  jal       get_variable
+/* 4491D0 80219D90 0C0B1EAF */  jal       evt_get_variable
 /* 4491D4 80219D94 8C450000 */   lw       $a1, ($v0)
 /* 4491D8 80219D98 0040882D */  daddu     $s1, $v0, $zero
 /* 4491DC 80219D9C 24040001 */  addiu     $a0, $zero, 1

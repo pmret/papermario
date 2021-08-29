@@ -18,7 +18,7 @@ glabel SetCamProperties
 /* F0DD0 802CC420 F7B40070 */  sdc1      $f20, 0x70($sp)
 /* F0DD4 802CC424 8E30000C */  lw        $s0, 0xc($s1)
 /* F0DD8 802CC428 8E050000 */  lw        $a1, ($s0)
-/* F0DDC 802CC42C 0C0B1EAF */  jal       get_variable
+/* F0DDC 802CC42C 0C0B1EAF */  jal       evt_get_variable
 /* F0DE0 802CC430 26100004 */   addiu    $s0, $s0, 4
 /* F0DE4 802CC434 8E050000 */  lw        $a1, ($s0)
 /* F0DE8 802CC438 26100004 */  addiu     $s0, $s0, 4

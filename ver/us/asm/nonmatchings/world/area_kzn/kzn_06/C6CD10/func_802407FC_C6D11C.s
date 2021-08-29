@@ -17,31 +17,31 @@ glabel func_802407FC_C6D11C
 /* C6D14C 8024082C AFB00018 */  sw        $s0, 0x18($sp)
 /* C6D150 80240830 8EB0000C */  lw        $s0, 0xc($s5)
 /* C6D154 80240834 8E050000 */  lw        $a1, ($s0)
-/* C6D158 80240838 0C0B1EAF */  jal       get_variable
+/* C6D158 80240838 0C0B1EAF */  jal       evt_get_variable
 /* C6D15C 8024083C 26100004 */   addiu    $s0, $s0, 4
 /* C6D160 80240840 8E050000 */  lw        $a1, ($s0)
 /* C6D164 80240844 26100004 */  addiu     $s0, $s0, 4
 /* C6D168 80240848 02A0202D */  daddu     $a0, $s5, $zero
-/* C6D16C 8024084C 0C0B1EAF */  jal       get_variable
+/* C6D16C 8024084C 0C0B1EAF */  jal       evt_get_variable
 /* C6D170 80240850 0040882D */   daddu    $s1, $v0, $zero
 /* C6D174 80240854 8E050000 */  lw        $a1, ($s0)
 /* C6D178 80240858 26100004 */  addiu     $s0, $s0, 4
 /* C6D17C 8024085C 02A0202D */  daddu     $a0, $s5, $zero
-/* C6D180 80240860 0C0B1EAF */  jal       get_variable
+/* C6D180 80240860 0C0B1EAF */  jal       evt_get_variable
 /* C6D184 80240864 AFA20010 */   sw       $v0, 0x10($sp)
 /* C6D188 80240868 8E050000 */  lw        $a1, ($s0)
 /* C6D18C 8024086C 26100004 */  addiu     $s0, $s0, 4
 /* C6D190 80240870 02A0202D */  daddu     $a0, $s5, $zero
-/* C6D194 80240874 0C0B1EAF */  jal       get_variable
+/* C6D194 80240874 0C0B1EAF */  jal       evt_get_variable
 /* C6D198 80240878 0040F02D */   daddu    $fp, $v0, $zero
 /* C6D19C 8024087C 8E050000 */  lw        $a1, ($s0)
 /* C6D1A0 80240880 26100004 */  addiu     $s0, $s0, 4
 /* C6D1A4 80240884 02A0202D */  daddu     $a0, $s5, $zero
-/* C6D1A8 80240888 0C0B1EAF */  jal       get_variable
+/* C6D1A8 80240888 0C0B1EAF */  jal       evt_get_variable
 /* C6D1AC 8024088C 0040B82D */   daddu    $s7, $v0, $zero
 /* C6D1B0 80240890 02A0202D */  daddu     $a0, $s5, $zero
 /* C6D1B4 80240894 8E050000 */  lw        $a1, ($s0)
-/* C6D1B8 80240898 0C0B1EAF */  jal       get_variable
+/* C6D1B8 80240898 0C0B1EAF */  jal       evt_get_variable
 /* C6D1BC 8024089C 0040A02D */   daddu    $s4, $v0, $zero
 /* C6D1C0 802408A0 0040B02D */  daddu     $s6, $v0, $zero
 /* C6D1C4 802408A4 12400019 */  beqz      $s2, .L8024090C

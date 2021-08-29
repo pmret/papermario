@@ -9,11 +9,11 @@ glabel func_8024174C_D313CC
 /* D313DC 8024175C AFB00010 */  sw        $s0, 0x10($sp)
 /* D313E0 80241760 8E30000C */  lw        $s0, 0xc($s1)
 /* D313E4 80241764 8E050000 */  lw        $a1, ($s0)
-/* D313E8 80241768 0C0B1EAF */  jal       get_variable
+/* D313E8 80241768 0C0B1EAF */  jal       evt_get_variable
 /* D313EC 8024176C 26100004 */   addiu    $s0, $s0, 4
 /* D313F0 80241770 0220202D */  daddu     $a0, $s1, $zero
 /* D313F4 80241774 8E050000 */  lw        $a1, ($s0)
-/* D313F8 80241778 0C0B1EAF */  jal       get_variable
+/* D313F8 80241778 0C0B1EAF */  jal       evt_get_variable
 /* D313FC 8024177C 0040802D */   daddu    $s0, $v0, $zero
 /* D31400 80241780 320400FF */  andi      $a0, $s0, 0xff
 /* D31404 80241784 0C00A3C2 */  jal       start_rumble

@@ -5,7 +5,7 @@ glabel func_8021837C_4B156C
 /* 4B156C 8021837C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 4B1570 80218380 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 4B1574 80218384 8C82000C */  lw        $v0, 0xc($a0)
-/* 4B1578 80218388 0C0B1EAF */  jal       get_variable
+/* 4B1578 80218388 0C0B1EAF */  jal       evt_get_variable
 /* 4B157C 8021838C 8C450000 */   lw       $a1, ($v0)
 /* 4B1580 80218390 0C09A75B */  jal       get_actor
 /* 4B1584 80218394 0040202D */   daddu    $a0, $v0, $zero

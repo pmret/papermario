@@ -46,13 +46,13 @@ glabel func_8021B678_6A2878
 /* 6A291C 8021B71C 4481D000 */  mtc1      $at, $f26
 /* 6A2920 8021B720 3C014170 */  lui       $at, 0x4170
 /* 6A2924 8021B724 4481C000 */  mtc1      $at, $f24
-/* 6A2928 8021B728 0C0B1EAF */  jal       get_variable
+/* 6A2928 8021B728 0C0B1EAF */  jal       evt_get_variable
 /* 6A292C 8021B72C 26300018 */   addiu    $s0, $s1, 0x18
 /* 6A2930 8021B730 8E650000 */  lw        $a1, ($s3)
 /* 6A2934 8021B734 4482B000 */  mtc1      $v0, $f22
 /* 6A2938 8021B738 00000000 */  nop
 /* 6A293C 8021B73C 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 6A2940 8021B740 0C0B1EAF */  jal       get_variable
+/* 6A2940 8021B740 0C0B1EAF */  jal       evt_get_variable
 /* 6A2944 8021B744 02A0202D */   daddu    $a0, $s5, $zero
 /* 6A2948 8021B748 4482A000 */  mtc1      $v0, $f20
 /* 6A294C 8021B74C 00000000 */  nop

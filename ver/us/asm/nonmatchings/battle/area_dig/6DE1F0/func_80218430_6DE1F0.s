@@ -15,7 +15,7 @@ glabel func_80218430_6DE1F0
 /* 6DE218 80218458 F7B40068 */  sdc1      $f20, 0x68($sp)
 /* 6DE21C 8021845C 8E30000C */  lw        $s0, 0xc($s1)
 /* 6DE220 80218460 8E050000 */  lw        $a1, ($s0)
-/* 6DE224 80218464 0C0B1EAF */  jal       get_variable
+/* 6DE224 80218464 0C0B1EAF */  jal       evt_get_variable
 /* 6DE228 80218468 26100004 */   addiu    $s0, $s0, 4
 /* 6DE22C 8021846C 4482A000 */  mtc1      $v0, $f20
 /* 6DE230 80218470 00000000 */  nop

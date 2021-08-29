@@ -24,7 +24,7 @@ glabel func_80242A90_854C00
 /* 854C30 80242AC0 F7B40030 */  sdc1      $f20, 0x30($sp)
 /* 854C34 80242AC4 8E50000C */  lw        $s0, 0xc($s2)
 /* 854C38 80242AC8 8E050000 */  lw        $a1, ($s0)
-/* 854C3C 80242ACC 0C0B1EAF */  jal       get_variable
+/* 854C3C 80242ACC 0C0B1EAF */  jal       evt_get_variable
 /* 854C40 80242AD0 26100004 */   addiu    $s0, $s0, 4
 /* 854C44 80242AD4 8E130000 */  lw        $s3, ($s0)
 /* 854C48 80242AD8 26100004 */  addiu     $s0, $s0, 4

@@ -24,7 +24,7 @@ glabel VanishActor
 /* 19EF20 80270640 00000000 */   nop
 /* 19EF24 80270644 8E250000 */  lw        $a1, ($s1)
 /* 19EF28 80270648 26310004 */  addiu     $s1, $s1, 4
-/* 19EF2C 8027064C 0C0B1EAF */  jal       get_variable
+/* 19EF2C 8027064C 0C0B1EAF */  jal       evt_get_variable
 /* 19EF30 80270650 0240202D */   daddu    $a0, $s2, $zero
 /* 19EF34 80270654 0040802D */  daddu     $s0, $v0, $zero
 /* 19EF38 80270658 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -33,7 +33,7 @@ glabel VanishActor
 /* 19EF44 80270664 8E500148 */  lw        $s0, 0x148($s2)
 .L80270668:
 /* 19EF48 80270668 8E250000 */  lw        $a1, ($s1)
-/* 19EF4C 8027066C 0C0B1EAF */  jal       get_variable
+/* 19EF4C 8027066C 0C0B1EAF */  jal       evt_get_variable
 /* 19EF50 80270670 0240202D */   daddu    $a0, $s2, $zero
 /* 19EF54 80270674 0040882D */  daddu     $s1, $v0, $zero
 /* 19EF58 80270678 0C09A75B */  jal       get_actor

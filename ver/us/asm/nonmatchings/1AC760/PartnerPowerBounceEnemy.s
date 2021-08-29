@@ -29,12 +29,12 @@ glabel PartnerPowerBounceEnemy
 /* 1AEBB0 802802D0 26100004 */  addiu     $s0, $s0, 4
 /* 1AEBB4 802802D4 AE230190 */  sw        $v1, 0x190($s1)
 /* 1AEBB8 802802D8 8E050000 */  lw        $a1, ($s0)
-/* 1AEBBC 802802DC 0C0B1EAF */  jal       get_variable
+/* 1AEBBC 802802DC 0C0B1EAF */  jal       evt_get_variable
 /* 1AEBC0 802802E0 26100004 */   addiu    $s0, $s0, 4
 /* 1AEBC4 802802E4 A622017E */  sh        $v0, 0x17e($s1)
 /* 1AEBC8 802802E8 8E050000 */  lw        $a1, ($s0)
 /* 1AEBCC 802802EC 26100004 */  addiu     $s0, $s0, 4
-/* 1AEBD0 802802F0 0C0B1EAF */  jal       get_variable
+/* 1AEBD0 802802F0 0C0B1EAF */  jal       evt_get_variable
 /* 1AEBD4 802802F4 0240202D */   daddu    $a0, $s2, $zero
 /* 1AEBD8 802802F8 A2220198 */  sb        $v0, 0x198($s1)
 /* 1AEBDC 802802FC 8E100000 */  lw        $s0, ($s0)

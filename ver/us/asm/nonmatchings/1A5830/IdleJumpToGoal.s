@@ -23,7 +23,7 @@ glabel IdleJumpToGoal
 /* 1A7A30 80279150 00000000 */   nop
 /* 1A7A34 80279154 8E250000 */  lw        $a1, ($s1)
 /* 1A7A38 80279158 26310004 */  addiu     $s1, $s1, 4
-/* 1A7A3C 8027915C 0C0B1EAF */  jal       get_variable
+/* 1A7A3C 8027915C 0C0B1EAF */  jal       evt_get_variable
 /* 1A7A40 80279160 0240202D */   daddu    $a0, $s2, $zero
 /* 1A7A44 80279164 0040202D */  daddu     $a0, $v0, $zero
 /* 1A7A48 80279168 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -37,16 +37,16 @@ glabel IdleJumpToGoal
 /* 1A7A64 80279184 AE500074 */  sw        $s0, 0x74($s2)
 /* 1A7A68 80279188 8E250000 */  lw        $a1, ($s1)
 /* 1A7A6C 8027918C 26310004 */  addiu     $s1, $s1, 4
-/* 1A7A70 80279190 0C0B1EAF */  jal       get_variable
+/* 1A7A70 80279190 0C0B1EAF */  jal       evt_get_variable
 /* 1A7A74 80279194 0240202D */   daddu    $a0, $s2, $zero
 /* 1A7A78 80279198 A6020120 */  sh        $v0, 0x120($s0)
 /* 1A7A7C 8027919C 8E250000 */  lw        $a1, ($s1)
 /* 1A7A80 802791A0 26310004 */  addiu     $s1, $s1, 4
-/* 1A7A84 802791A4 0C0B1EAF */  jal       get_variable
+/* 1A7A84 802791A4 0C0B1EAF */  jal       evt_get_variable
 /* 1A7A88 802791A8 0240202D */   daddu    $a0, $s2, $zero
 /* 1A7A8C 802791AC AE420078 */  sw        $v0, 0x78($s2)
 /* 1A7A90 802791B0 8E250000 */  lw        $a1, ($s1)
-/* 1A7A94 802791B4 0C0B1EAF */  jal       get_variable
+/* 1A7A94 802791B4 0C0B1EAF */  jal       evt_get_variable
 /* 1A7A98 802791B8 0240202D */   daddu    $a0, $s2, $zero
 /* 1A7A9C 802791BC AE42007C */  sw        $v0, 0x7c($s2)
 /* 1A7AA0 802791C0 C6000148 */  lwc1      $f0, 0x148($s0)

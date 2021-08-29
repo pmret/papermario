@@ -10,7 +10,7 @@ glabel SetActorType
 /* 19E414 8026FB34 AFB00010 */  sw        $s0, 0x10($sp)
 /* 19E418 8026FB38 8E51000C */  lw        $s1, 0xc($s2)
 /* 19E41C 8026FB3C 8E250000 */  lw        $a1, ($s1)
-/* 19E420 8026FB40 0C0B1EAF */  jal       get_variable
+/* 19E420 8026FB40 0C0B1EAF */  jal       evt_get_variable
 /* 19E424 8026FB44 26310004 */   addiu    $s1, $s1, 4
 /* 19E428 8026FB48 0040802D */  daddu     $s0, $v0, $zero
 /* 19E42C 8026FB4C 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -19,7 +19,7 @@ glabel SetActorType
 /* 19E438 8026FB58 8E500148 */  lw        $s0, 0x148($s2)
 .L8026FB5C:
 /* 19E43C 8026FB5C 8E250000 */  lw        $a1, ($s1)
-/* 19E440 8026FB60 0C0B1EAF */  jal       get_variable
+/* 19E440 8026FB60 0C0B1EAF */  jal       evt_get_variable
 /* 19E444 8026FB64 0240202D */   daddu    $a0, $s2, $zero
 /* 19E448 8026FB68 0200202D */  daddu     $a0, $s0, $zero
 /* 19E44C 8026FB6C 0C09A75B */  jal       get_actor

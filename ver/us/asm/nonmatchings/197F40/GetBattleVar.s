@@ -9,7 +9,7 @@ glabel GetBattleVar
 /* 19DF84 8026F6A4 AFB00010 */  sw        $s0, 0x10($sp)
 /* 19DF88 8026F6A8 8E30000C */  lw        $s0, 0xc($s1)
 /* 19DF8C 8026F6AC 8E050000 */  lw        $a1, ($s0)
-/* 19DF90 8026F6B0 0C0B1EAF */  jal       get_variable
+/* 19DF90 8026F6B0 0C0B1EAF */  jal       evt_get_variable
 /* 19DF94 8026F6B4 26100004 */   addiu    $s0, $s0, 4
 /* 19DF98 8026F6B8 00021080 */  sll       $v0, $v0, 2
 /* 19DF9C 8026F6BC 8E050000 */  lw        $a1, ($s0)

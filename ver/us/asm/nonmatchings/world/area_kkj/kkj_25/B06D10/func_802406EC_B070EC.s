@@ -11,11 +11,11 @@ glabel func_802406EC_B070EC
 /* B07104 80240704 AFB00010 */  sw        $s0, 0x10($sp)
 /* B07108 80240708 8E70000C */  lw        $s0, 0xc($s3)
 /* B0710C 8024070C 8E050000 */  lw        $a1, ($s0)
-/* B07110 80240710 0C0B1EAF */  jal       get_variable
+/* B07110 80240710 0C0B1EAF */  jal       evt_get_variable
 /* B07114 80240714 26100004 */   addiu    $s0, $s0, 4
 /* B07118 80240718 0260202D */  daddu     $a0, $s3, $zero
 /* B0711C 8024071C 8E050000 */  lw        $a1, ($s0)
-/* B07120 80240720 0C0B1EAF */  jal       get_variable
+/* B07120 80240720 0C0B1EAF */  jal       evt_get_variable
 /* B07124 80240724 0040902D */   daddu    $s2, $v0, $zero
 /* B07128 80240728 2404003C */  addiu     $a0, $zero, 0x3c
 /* B0712C 8024072C 0C00AB39 */  jal       heap_malloc

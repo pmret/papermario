@@ -10,7 +10,7 @@ glabel func_80241668_B857E8
 /* B857FC 8024167C F7B40060 */  sdc1      $f20, 0x60($sp)
 /* B85800 80241680 8E30000C */  lw        $s0, 0xc($s1)
 /* B85804 80241684 8E050000 */  lw        $a1, ($s0)
-/* B85808 80241688 0C0B1EAF */  jal       get_variable
+/* B85808 80241688 0C0B1EAF */  jal       evt_get_variable
 /* B8580C 8024168C 26100004 */   addiu    $s0, $s0, 4
 /* B85810 80241690 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* B85814 80241694 0040202D */   daddu    $a0, $v0, $zero

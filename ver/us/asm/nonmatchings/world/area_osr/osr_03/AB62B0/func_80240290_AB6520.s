@@ -10,7 +10,7 @@ glabel func_80240290_AB6520
 /* AB6534 802402A4 10A0002A */  beqz      $a1, .L80240350
 /* AB6538 802402A8 8E30000C */   lw       $s0, 0xc($s1)
 /* AB653C 802402AC 8E050000 */  lw        $a1, ($s0)
-/* AB6540 802402B0 0C0B1EAF */  jal       get_variable
+/* AB6540 802402B0 0C0B1EAF */  jal       evt_get_variable
 /* AB6544 802402B4 26100004 */   addiu    $s0, $s0, 4
 /* AB6548 802402B8 0220202D */  daddu     $a0, $s1, $zero
 /* AB654C 802402BC 8E050000 */  lw        $a1, ($s0)

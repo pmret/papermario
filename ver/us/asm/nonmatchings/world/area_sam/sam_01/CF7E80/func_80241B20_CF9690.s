@@ -16,16 +16,16 @@ glabel func_80241B20_CF9690
 /* CF96BC 80241B4C F7B40028 */  sdc1      $f20, 0x28($sp)
 /* CF96C0 80241B50 8E30000C */  lw        $s0, 0xc($s1)
 /* CF96C4 80241B54 8E050000 */  lw        $a1, ($s0)
-/* CF96C8 80241B58 0C0B1EAF */  jal       get_variable
+/* CF96C8 80241B58 0C0B1EAF */  jal       evt_get_variable
 /* CF96CC 80241B5C 26100004 */   addiu    $s0, $s0, 4
 /* CF96D0 80241B60 8E050000 */  lw        $a1, ($s0)
 /* CF96D4 80241B64 26100004 */  addiu     $s0, $s0, 4
 /* CF96D8 80241B68 0220202D */  daddu     $a0, $s1, $zero
-/* CF96DC 80241B6C 0C0B1EAF */  jal       get_variable
+/* CF96DC 80241B6C 0C0B1EAF */  jal       evt_get_variable
 /* CF96E0 80241B70 0040902D */   daddu    $s2, $v0, $zero
 /* CF96E4 80241B74 0220202D */  daddu     $a0, $s1, $zero
 /* CF96E8 80241B78 8E050000 */  lw        $a1, ($s0)
-/* CF96EC 80241B7C 0C0B1EAF */  jal       get_variable
+/* CF96EC 80241B7C 0C0B1EAF */  jal       evt_get_variable
 /* CF96F0 80241B80 0040982D */   daddu    $s3, $v0, $zero
 /* CF96F4 80241B84 3C10800B */  lui       $s0, %hi(gCameras)
 /* CF96F8 80241B88 26101D80 */  addiu     $s0, $s0, %lo(gCameras)

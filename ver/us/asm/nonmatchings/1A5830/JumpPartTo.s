@@ -24,7 +24,7 @@ glabel JumpPartTo
 /* 1A8E0C 8027A52C 00000000 */   nop
 /* 1A8E10 8027A530 8E450000 */  lw        $a1, ($s2)
 /* 1A8E14 8027A534 26520004 */  addiu     $s2, $s2, 4
-/* 1A8E18 8027A538 0C0B1EAF */  jal       get_variable
+/* 1A8E18 8027A538 0C0B1EAF */  jal       evt_get_variable
 /* 1A8E1C 8027A53C 0260202D */   daddu    $a0, $s3, $zero
 /* 1A8E20 8027A540 0040802D */  daddu     $s0, $v0, $zero
 /* 1A8E24 8027A544 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -34,7 +34,7 @@ glabel JumpPartTo
 .L8027A554:
 /* 1A8E34 8027A554 8E450000 */  lw        $a1, ($s2)
 /* 1A8E38 8027A558 26520004 */  addiu     $s2, $s2, 4
-/* 1A8E3C 8027A55C 0C0B1EAF */  jal       get_variable
+/* 1A8E3C 8027A55C 0C0B1EAF */  jal       evt_get_variable
 /* 1A8E40 8027A560 0260202D */   daddu    $a0, $s3, $zero
 /* 1A8E44 8027A564 0200202D */  daddu     $a0, $s0, $zero
 /* 1A8E48 8027A568 0C09A75B */  jal       get_actor
@@ -49,21 +49,21 @@ glabel JumpPartTo
 /* 1A8E6C 8027A58C 8E450000 */  lw        $a1, ($s2)
 /* 1A8E70 8027A590 26520004 */  addiu     $s2, $s2, 4
 /* 1A8E74 8027A594 8E300010 */  lw        $s0, 0x10($s1)
-/* 1A8E78 8027A598 0C0B1EAF */  jal       get_variable
+/* 1A8E78 8027A598 0C0B1EAF */  jal       evt_get_variable
 /* 1A8E7C 8027A59C 0260202D */   daddu    $a0, $s3, $zero
 /* 1A8E80 8027A5A0 4482E000 */  mtc1      $v0, $f28
 /* 1A8E84 8027A5A4 00000000 */  nop
 /* 1A8E88 8027A5A8 4680E720 */  cvt.s.w   $f28, $f28
 /* 1A8E8C 8027A5AC 8E450000 */  lw        $a1, ($s2)
 /* 1A8E90 8027A5B0 26520004 */  addiu     $s2, $s2, 4
-/* 1A8E94 8027A5B4 0C0B1EAF */  jal       get_variable
+/* 1A8E94 8027A5B4 0C0B1EAF */  jal       evt_get_variable
 /* 1A8E98 8027A5B8 0260202D */   daddu    $a0, $s3, $zero
 /* 1A8E9C 8027A5BC 4482F000 */  mtc1      $v0, $f30
 /* 1A8EA0 8027A5C0 00000000 */  nop
 /* 1A8EA4 8027A5C4 4680F7A0 */  cvt.s.w   $f30, $f30
 /* 1A8EA8 8027A5C8 8E450000 */  lw        $a1, ($s2)
 /* 1A8EAC 8027A5CC 26520004 */  addiu     $s2, $s2, 4
-/* 1A8EB0 8027A5D0 0C0B1EAF */  jal       get_variable
+/* 1A8EB0 8027A5D0 0C0B1EAF */  jal       evt_get_variable
 /* 1A8EB4 8027A5D4 0260202D */   daddu    $a0, $s3, $zero
 /* 1A8EB8 8027A5D8 44820000 */  mtc1      $v0, $f0
 /* 1A8EBC 8027A5DC 00000000 */  nop
@@ -73,11 +73,11 @@ glabel JumpPartTo
 /* 1A8ECC 8027A5EC E6000014 */  swc1      $f0, 0x14($s0)
 /* 1A8ED0 8027A5F0 8E450000 */  lw        $a1, ($s2)
 /* 1A8ED4 8027A5F4 26520004 */  addiu     $s2, $s2, 4
-/* 1A8ED8 8027A5F8 0C0B1EAF */  jal       get_variable
+/* 1A8ED8 8027A5F8 0C0B1EAF */  jal       evt_get_variable
 /* 1A8EDC 8027A5FC 0260202D */   daddu    $a0, $s3, $zero
 /* 1A8EE0 8027A600 A6020038 */  sh        $v0, 0x38($s0)
 /* 1A8EE4 8027A604 8E450000 */  lw        $a1, ($s2)
-/* 1A8EE8 8027A608 0C0B1EAF */  jal       get_variable
+/* 1A8EE8 8027A608 0C0B1EAF */  jal       evt_get_variable
 /* 1A8EEC 8027A60C 0260202D */   daddu    $a0, $s3, $zero
 /* 1A8EF0 8027A610 AE62007C */  sw        $v0, 0x7c($s3)
 /* 1A8EF4 8027A614 C620002C */  lwc1      $f0, 0x2c($s1)

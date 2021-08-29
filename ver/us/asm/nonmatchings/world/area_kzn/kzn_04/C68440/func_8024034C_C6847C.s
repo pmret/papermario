@@ -5,7 +5,7 @@ glabel func_8024034C_C6847C
 /* C6847C 8024034C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* C68480 80240350 AFBF0010 */  sw        $ra, 0x10($sp)
 /* C68484 80240354 8C82000C */  lw        $v0, 0xc($a0)
-/* C68488 80240358 0C0B1EAF */  jal       get_variable
+/* C68488 80240358 0C0B1EAF */  jal       evt_get_variable
 /* C6848C 8024035C 8C450000 */   lw       $a1, ($v0)
 /* C68490 80240360 0C0B95A4 */  jal       entity_upgrade_block_hide_content
 /* C68494 80240364 0040202D */   daddu    $a0, $v0, $zero

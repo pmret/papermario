@@ -10,16 +10,16 @@ glabel func_80240314_9EDF04
 /* 9EDF18 80240328 AFB00010 */  sw        $s0, 0x10($sp)
 /* 9EDF1C 8024032C 8E30000C */  lw        $s0, 0xc($s1)
 /* 9EDF20 80240330 8E050000 */  lw        $a1, ($s0)
-/* 9EDF24 80240334 0C0B1EAF */  jal       get_variable
+/* 9EDF24 80240334 0C0B1EAF */  jal       evt_get_variable
 /* 9EDF28 80240338 26100004 */   addiu    $s0, $s0, 4
 /* 9EDF2C 8024033C 8E050000 */  lw        $a1, ($s0)
 /* 9EDF30 80240340 26100004 */  addiu     $s0, $s0, 4
 /* 9EDF34 80240344 0220202D */  daddu     $a0, $s1, $zero
-/* 9EDF38 80240348 0C0B1EAF */  jal       get_variable
+/* 9EDF38 80240348 0C0B1EAF */  jal       evt_get_variable
 /* 9EDF3C 8024034C 0040902D */   daddu    $s2, $v0, $zero
 /* 9EDF40 80240350 0220202D */  daddu     $a0, $s1, $zero
 /* 9EDF44 80240354 8E050000 */  lw        $a1, ($s0)
-/* 9EDF48 80240358 0C0B1EAF */  jal       get_variable
+/* 9EDF48 80240358 0C0B1EAF */  jal       evt_get_variable
 /* 9EDF4C 8024035C 0040802D */   daddu    $s0, $v0, $zero
 /* 9EDF50 80240360 44823000 */  mtc1      $v0, $f6
 /* 9EDF54 80240364 00000000 */  nop

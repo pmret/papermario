@@ -5,7 +5,7 @@ glabel func_80240E48_865988
 /* 865988 80240E48 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 86598C 80240E4C AFBF0010 */  sw        $ra, 0x10($sp)
 /* 865990 80240E50 8C82000C */  lw        $v0, 0xc($a0)
-/* 865994 80240E54 0C0B1EAF */  jal       get_variable
+/* 865994 80240E54 0C0B1EAF */  jal       evt_get_variable
 /* 865998 80240E58 8C450000 */   lw       $a1, ($v0)
 /* 86599C 80240E5C 8C44000C */  lw        $a0, 0xc($v0)
 /* 8659A0 80240E60 24030001 */  addiu     $v1, $zero, 1

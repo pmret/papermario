@@ -218,7 +218,7 @@ glabel L800E57B0_7EC60
 /* 7ECD0 800E5820 0000202D */  daddu     $a0, $zero, $zero
 .L800E5824:
 /* 7ECD4 800E5824 3C05F5DE */  lui       $a1, 0xf5de
-/* 7ECD8 800E5828 0C0B1EAF */  jal       get_variable
+/* 7ECD8 800E5828 0C0B1EAF */  jal       evt_get_variable
 /* 7ECDC 800E582C 34A50180 */   ori      $a1, $a1, 0x180
 /* 7ECE0 800E5830 2842FFC6 */  slti      $v0, $v0, -0x3a
 /* 7ECE4 800E5834 14400003 */  bnez      $v0, .L800E5844

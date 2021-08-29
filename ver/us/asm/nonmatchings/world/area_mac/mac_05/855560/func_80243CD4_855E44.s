@@ -12,7 +12,7 @@ glabel func_80243CD4_855E44
 /* 855E60 80243CF0 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* 855E64 80243CF4 8E30000C */  lw        $s0, 0xc($s1)
 /* 855E68 80243CF8 8E050000 */  lw        $a1, ($s0)
-/* 855E6C 80243CFC 0C0B1EAF */  jal       get_variable
+/* 855E6C 80243CFC 0C0B1EAF */  jal       evt_get_variable
 /* 855E70 80243D00 26100004 */   addiu    $s0, $s0, 4
 /* 855E74 80243D04 8E050000 */  lw        $a1, ($s0)
 /* 855E78 80243D08 26100004 */  addiu     $s0, $s0, 4

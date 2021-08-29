@@ -18,7 +18,7 @@ glabel pause_cleanup
 /* 137A78 80244738 1440FFFA */  bnez      $v0, .L80244724
 /* 137A7C 8024473C 0000202D */   daddu    $a0, $zero, $zero
 /* 137A80 80244740 3C05F840 */  lui       $a1, 0xf840
-/* 137A84 80244744 0C0B1EAF */  jal       get_variable
+/* 137A84 80244744 0C0B1EAF */  jal       evt_get_variable
 /* 137A88 80244748 34A55BDE */   ori      $a1, $a1, 0x5bde
 /* 137A8C 8024474C 1040000A */  beqz      $v0, .L80244778
 /* 137A90 80244750 0000802D */   daddu    $s0, $zero, $zero

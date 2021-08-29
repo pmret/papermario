@@ -16,7 +16,7 @@ glabel func_802405FC_DE8D6C
 /* DE8D98 80240628 AE500084 */  sw        $s0, 0x84($s2)
 /* DE8D9C 8024062C 8E250000 */  lw        $a1, ($s1)
 /* DE8DA0 80240630 26310004 */  addiu     $s1, $s1, 4
-/* DE8DA4 80240634 0C0B1EAF */  jal       get_variable
+/* DE8DA4 80240634 0C0B1EAF */  jal       evt_get_variable
 /* DE8DA8 80240638 0240202D */   daddu    $a0, $s2, $zero
 /* DE8DAC 8024063C AE020038 */  sw        $v0, 0x38($s0)
 /* DE8DB0 80240640 8E250000 */  lw        $a1, ($s1)

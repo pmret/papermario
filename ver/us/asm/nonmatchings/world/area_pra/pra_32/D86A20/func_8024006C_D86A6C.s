@@ -21,12 +21,12 @@ glabel func_8024006C_D86A6C
 /* D86AAC 802400AC AE500084 */   sw       $s0, 0x84($s2)
 /* D86AB0 802400B0 8E250000 */  lw        $a1, ($s1)
 /* D86AB4 802400B4 26310004 */  addiu     $s1, $s1, 4
-/* D86AB8 802400B8 0C0B1EAF */  jal       get_variable
+/* D86AB8 802400B8 0C0B1EAF */  jal       evt_get_variable
 /* D86ABC 802400BC 0240202D */   daddu    $a0, $s2, $zero
 /* D86AC0 802400C0 AE020038 */  sw        $v0, 0x38($s0)
 /* D86AC4 802400C4 8E250000 */  lw        $a1, ($s1)
 /* D86AC8 802400C8 26310004 */  addiu     $s1, $s1, 4
-/* D86ACC 802400CC 0C0B1EAF */  jal       get_variable
+/* D86ACC 802400CC 0C0B1EAF */  jal       evt_get_variable
 /* D86AD0 802400D0 0240202D */   daddu    $a0, $s2, $zero
 /* D86AD4 802400D4 AE02003C */  sw        $v0, 0x3c($s0)
 /* D86AD8 802400D8 8E250000 */  lw        $a1, ($s1)

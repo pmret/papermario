@@ -31,7 +31,7 @@ glabel HealActor
 /* 19F5CC 80270CEC 00000000 */   nop
 /* 19F5D0 80270CF0 8E050000 */  lw        $a1, ($s0)
 /* 19F5D4 80270CF4 26100004 */  addiu     $s0, $s0, 4
-/* 19F5D8 80270CF8 0C0B1EAF */  jal       get_variable
+/* 19F5D8 80270CF8 0C0B1EAF */  jal       evt_get_variable
 /* 19F5DC 80270CFC 0240202D */   daddu    $a0, $s2, $zero
 /* 19F5E0 80270D00 0040882D */  daddu     $s1, $v0, $zero
 /* 19F5E4 80270D04 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -41,11 +41,11 @@ glabel HealActor
 .L80270D14:
 /* 19F5F4 80270D14 8E050000 */  lw        $a1, ($s0)
 /* 19F5F8 80270D18 26100004 */  addiu     $s0, $s0, 4
-/* 19F5FC 80270D1C 0C0B1EAF */  jal       get_variable
+/* 19F5FC 80270D1C 0C0B1EAF */  jal       evt_get_variable
 /* 19F600 80270D20 0240202D */   daddu    $a0, $s2, $zero
 /* 19F604 80270D24 0040982D */  daddu     $s3, $v0, $zero
 /* 19F608 80270D28 8E050000 */  lw        $a1, ($s0)
-/* 19F60C 80270D2C 0C0B1EAF */  jal       get_variable
+/* 19F60C 80270D2C 0C0B1EAF */  jal       evt_get_variable
 /* 19F610 80270D30 0240202D */   daddu    $a0, $s2, $zero
 /* 19F614 80270D34 3C01802A */  lui       $at, %hi(D_8029FBD0)
 /* 19F618 80270D38 AC22FBD0 */  sw        $v0, %lo(D_8029FBD0)($at)

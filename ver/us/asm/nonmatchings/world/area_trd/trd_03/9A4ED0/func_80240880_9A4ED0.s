@@ -16,16 +16,16 @@ glabel func_80240880_9A4ED0
 /* 9A4EFC 802408AC F7B40028 */  sdc1      $f20, 0x28($sp)
 /* 9A4F00 802408B0 8E30000C */  lw        $s0, 0xc($s1)
 /* 9A4F04 802408B4 8E050000 */  lw        $a1, ($s0)
-/* 9A4F08 802408B8 0C0B1EAF */  jal       get_variable
+/* 9A4F08 802408B8 0C0B1EAF */  jal       evt_get_variable
 /* 9A4F0C 802408BC 26100004 */   addiu    $s0, $s0, 4
 /* 9A4F10 802408C0 8E050000 */  lw        $a1, ($s0)
 /* 9A4F14 802408C4 26100004 */  addiu     $s0, $s0, 4
 /* 9A4F18 802408C8 0220202D */  daddu     $a0, $s1, $zero
-/* 9A4F1C 802408CC 0C0B1EAF */  jal       get_variable
+/* 9A4F1C 802408CC 0C0B1EAF */  jal       evt_get_variable
 /* 9A4F20 802408D0 0040902D */   daddu    $s2, $v0, $zero
 /* 9A4F24 802408D4 0220202D */  daddu     $a0, $s1, $zero
 /* 9A4F28 802408D8 8E050000 */  lw        $a1, ($s0)
-/* 9A4F2C 802408DC 0C0B1EAF */  jal       get_variable
+/* 9A4F2C 802408DC 0C0B1EAF */  jal       evt_get_variable
 /* 9A4F30 802408E0 0040982D */   daddu    $s3, $v0, $zero
 /* 9A4F34 802408E4 3C10800B */  lui       $s0, %hi(gCameras)
 /* 9A4F38 802408E8 26101D80 */  addiu     $s0, $s0, %lo(gCameras)

@@ -11,20 +11,20 @@ glabel GetGridIndexFromPos
 /* 7E4550 802836D0 AFB00010 */  sw        $s0, 0x10($sp)
 /* 7E4554 802836D4 8E70000C */  lw        $s0, 0xc($s3)
 /* 7E4558 802836D8 8E050000 */  lw        $a1, ($s0)
-/* 7E455C 802836DC 0C0B1EAF */  jal       get_variable
+/* 7E455C 802836DC 0C0B1EAF */  jal       evt_get_variable
 /* 7E4560 802836E0 26100004 */   addiu    $s0, $s0, 4
 /* 7E4564 802836E4 8E050000 */  lw        $a1, ($s0)
 /* 7E4568 802836E8 26100004 */  addiu     $s0, $s0, 4
 /* 7E456C 802836EC 0260202D */  daddu     $a0, $s3, $zero
-/* 7E4570 802836F0 0C0B1EAF */  jal       get_variable
+/* 7E4570 802836F0 0C0B1EAF */  jal       evt_get_variable
 /* 7E4574 802836F4 0040882D */   daddu    $s1, $v0, $zero
 /* 7E4578 802836F8 0040902D */  daddu     $s2, $v0, $zero
 /* 7E457C 802836FC 8E050000 */  lw        $a1, ($s0)
 /* 7E4580 80283700 26100004 */  addiu     $s0, $s0, 4
-/* 7E4584 80283704 0C0B1EAF */  jal       get_variable
+/* 7E4584 80283704 0C0B1EAF */  jal       evt_get_variable
 /* 7E4588 80283708 0260202D */   daddu    $a0, $s3, $zero
 /* 7E458C 8028370C 8E050000 */  lw        $a1, ($s0)
-/* 7E4590 80283710 0C0B1EAF */  jal       get_variable
+/* 7E4590 80283710 0C0B1EAF */  jal       evt_get_variable
 /* 7E4594 80283714 0260202D */   daddu    $a0, $s3, $zero
 /* 7E4598 80283718 00118880 */  sll       $s1, $s1, 2
 /* 7E459C 8028371C 3C04802E */  lui       $a0, %hi(D_802DBC88)

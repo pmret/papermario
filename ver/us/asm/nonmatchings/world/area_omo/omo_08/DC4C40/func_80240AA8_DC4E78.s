@@ -25,7 +25,7 @@ glabel btl_restore_world_cameras_DC4E78
 /* DC4EAC 80240ADC 8E63000C */  lw        $v1, 0xc($s3)
 /* DC4EB0 80240AE0 0260202D */  daddu     $a0, $s3, $zero
 /* DC4EB4 80240AE4 8C650000 */  lw        $a1, ($v1)
-/* DC4EB8 80240AE8 0C0B1EAF */  jal       get_variable
+/* DC4EB8 80240AE8 0C0B1EAF */  jal       evt_get_variable
 /* DC4EBC 80240AEC 0040902D */   daddu    $s2, $v0, $zero
 /* DC4EC0 80240AF0 AFA00018 */  sw        $zero, 0x18($sp)
 /* DC4EC4 80240AF4 8E2300D0 */  lw        $v1, 0xd0($s1)

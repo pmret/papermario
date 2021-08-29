@@ -24,7 +24,7 @@ glabel PlayerTestEnemy
 /* 1A301C 8027473C 26100004 */  addiu     $s0, $s0, 4
 /* 1A3020 80274740 AE220190 */  sw        $v0, 0x190($s1)
 /* 1A3024 80274744 8E050000 */  lw        $a1, ($s0)
-/* 1A3028 80274748 0C0B1EAF */  jal       get_variable
+/* 1A3028 80274748 0C0B1EAF */  jal       evt_get_variable
 /* 1A302C 8027474C 26100004 */   addiu    $s0, $s0, 4
 /* 1A3030 80274750 A622017E */  sh        $v0, 0x17e($s1)
 /* 1A3034 80274754 A2200198 */  sb        $zero, 0x198($s1)

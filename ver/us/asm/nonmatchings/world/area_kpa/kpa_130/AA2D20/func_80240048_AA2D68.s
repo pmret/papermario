@@ -29,7 +29,7 @@ glabel func_80240048_AA2D68
 /* AA2DAC 8024008C 8E63000C */  lw        $v1, 0xc($s3)
 /* AA2DB0 80240090 0260202D */  daddu     $a0, $s3, $zero
 /* AA2DB4 80240094 8C650000 */  lw        $a1, ($v1)
-/* AA2DB8 80240098 0C0B1EAF */  jal       get_variable
+/* AA2DB8 80240098 0C0B1EAF */  jal       evt_get_variable
 /* AA2DBC 8024009C 0040882D */   daddu    $s1, $v0, $zero
 /* AA2DC0 802400A0 16000005 */  bnez      $s0, .L802400B8
 /* AA2DC4 802400A4 0040B02D */   daddu    $s6, $v0, $zero

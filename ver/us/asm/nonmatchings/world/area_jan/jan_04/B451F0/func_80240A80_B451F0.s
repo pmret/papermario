@@ -13,25 +13,25 @@ glabel func_80240A80_B451F0
 /* B45210 80240AA0 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* B45214 80240AA4 8E30000C */  lw        $s0, 0xc($s1)
 /* B45218 80240AA8 8E050000 */  lw        $a1, ($s0)
-/* B4521C 80240AAC 0C0B1EAF */  jal       get_variable
+/* B4521C 80240AAC 0C0B1EAF */  jal       evt_get_variable
 /* B45220 80240AB0 26100004 */   addiu    $s0, $s0, 4
 /* B45224 80240AB4 8E050000 */  lw        $a1, ($s0)
 /* B45228 80240AB8 26100004 */  addiu     $s0, $s0, 4
 /* B4522C 80240ABC 0220202D */  daddu     $a0, $s1, $zero
-/* B45230 80240AC0 0C0B1EAF */  jal       get_variable
+/* B45230 80240AC0 0C0B1EAF */  jal       evt_get_variable
 /* B45234 80240AC4 0040902D */   daddu    $s2, $v0, $zero
 /* B45238 80240AC8 8E050000 */  lw        $a1, ($s0)
 /* B4523C 80240ACC 26100004 */  addiu     $s0, $s0, 4
 /* B45240 80240AD0 4482C000 */  mtc1      $v0, $f24
 /* B45244 80240AD4 00000000 */  nop
 /* B45248 80240AD8 4680C620 */  cvt.s.w   $f24, $f24
-/* B4524C 80240ADC 0C0B1EAF */  jal       get_variable
+/* B4524C 80240ADC 0C0B1EAF */  jal       evt_get_variable
 /* B45250 80240AE0 0220202D */   daddu    $a0, $s1, $zero
 /* B45254 80240AE4 8E050000 */  lw        $a1, ($s0)
 /* B45258 80240AE8 4482B000 */  mtc1      $v0, $f22
 /* B4525C 80240AEC 00000000 */  nop
 /* B45260 80240AF0 4680B5A0 */  cvt.s.w   $f22, $f22
-/* B45264 80240AF4 0C0B1EAF */  jal       get_variable
+/* B45264 80240AF4 0C0B1EAF */  jal       evt_get_variable
 /* B45268 80240AF8 0220202D */   daddu    $a0, $s1, $zero
 /* B4526C 80240AFC 4482A000 */  mtc1      $v0, $f20
 /* B45270 80240B00 00000000 */  nop

@@ -254,7 +254,7 @@ glabel pause_stats_handle_input
 /* 13A250 80246F10 00028C03 */   sra      $s1, $v0, 0x10
 .L80246F14:
 /* 13A254 80246F14 3C05F840 */  lui       $a1, 0xf840
-/* 13A258 80246F18 0C0B1EAF */  jal       get_variable
+/* 13A258 80246F18 0C0B1EAF */  jal       evt_get_variable
 /* 13A25C 80246F1C 34A55BE5 */   ori      $a1, $a1, 0x5be5
 /* 13A260 80246F20 54400001 */  bnel      $v0, $zero, .L80246F28
 /* 13A264 80246F24 24110001 */   addiu    $s1, $zero, 1

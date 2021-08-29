@@ -11,29 +11,29 @@ glabel func_80240418_8FFA88
 /* 8FFAA0 80240430 AFB00010 */  sw        $s0, 0x10($sp)
 /* 8FFAA4 80240434 8E30000C */  lw        $s0, 0xc($s1)
 /* 8FFAA8 80240438 8E050000 */  lw        $a1, ($s0)
-/* 8FFAAC 8024043C 0C0B1EAF */  jal       get_variable
+/* 8FFAAC 8024043C 0C0B1EAF */  jal       evt_get_variable
 /* 8FFAB0 80240440 26100004 */   addiu    $s0, $s0, 4
 /* 8FFAB4 80240444 8E050000 */  lw        $a1, ($s0)
 /* 8FFAB8 80240448 26100004 */  addiu     $s0, $s0, 4
 /* 8FFABC 8024044C 0220202D */  daddu     $a0, $s1, $zero
-/* 8FFAC0 80240450 0C0B1EAF */  jal       get_variable
+/* 8FFAC0 80240450 0C0B1EAF */  jal       evt_get_variable
 /* 8FFAC4 80240454 0040982D */   daddu    $s3, $v0, $zero
 /* 8FFAC8 80240458 8E050000 */  lw        $a1, ($s0)
 /* 8FFACC 8024045C 26100004 */  addiu     $s0, $s0, 4
 /* 8FFAD0 80240460 0220202D */  daddu     $a0, $s1, $zero
-/* 8FFAD4 80240464 0C0B1EAF */  jal       get_variable
+/* 8FFAD4 80240464 0C0B1EAF */  jal       evt_get_variable
 /* 8FFAD8 80240468 0040902D */   daddu    $s2, $v0, $zero
 /* 8FFADC 8024046C 8E050000 */  lw        $a1, ($s0)
 /* 8FFAE0 80240470 26100004 */  addiu     $s0, $s0, 4
-/* 8FFAE4 80240474 0C0B1EAF */  jal       get_variable
+/* 8FFAE4 80240474 0C0B1EAF */  jal       evt_get_variable
 /* 8FFAE8 80240478 0220202D */   daddu    $a0, $s1, $zero
 /* 8FFAEC 8024047C 8E050000 */  lw        $a1, ($s0)
-/* 8FFAF0 80240480 0C0B1EAF */  jal       get_variable
+/* 8FFAF0 80240480 0C0B1EAF */  jal       evt_get_variable
 /* 8FFAF4 80240484 0220202D */   daddu    $a0, $s1, $zero
 /* 8FFAF8 80240488 0000202D */  daddu     $a0, $zero, $zero
 /* 8FFAFC 8024048C 3C05FD05 */  lui       $a1, 0xfd05
 /* 8FFB00 80240490 34A50F80 */  ori       $a1, $a1, 0xf80
-/* 8FFB04 80240494 0C0B1EAF */  jal       get_variable
+/* 8FFB04 80240494 0C0B1EAF */  jal       evt_get_variable
 /* 8FFB08 80240498 0040802D */   daddu    $s0, $v0, $zero
 /* 8FFB0C 8024049C 00131900 */  sll       $v1, $s3, 4
 /* 8FFB10 802404A0 00731823 */  subu      $v1, $v1, $s3

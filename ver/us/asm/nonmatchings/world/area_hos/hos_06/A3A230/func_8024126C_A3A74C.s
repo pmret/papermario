@@ -16,7 +16,7 @@ glabel func_8024126C_A3A74C
 /* A3A778 80241298 AFB3001C */  sw        $s3, 0x1c($sp)
 /* A3A77C 8024129C AFB20018 */  sw        $s2, 0x18($sp)
 /* A3A780 802412A0 AFB10014 */  sw        $s1, 0x14($sp)
-/* A3A784 802412A4 0C0B1EAF */  jal       get_variable
+/* A3A784 802412A4 0C0B1EAF */  jal       evt_get_variable
 /* A3A788 802412A8 AFB00010 */   sw       $s0, 0x10($sp)
 /* A3A78C 802412AC 0040B02D */  daddu     $s6, $v0, $zero
 /* A3A790 802412B0 0000A02D */  daddu     $s4, $zero, $zero
@@ -37,7 +37,7 @@ glabel func_8024126C_A3A74C
 /* A3A7C8 802412E8 54400007 */  bnel      $v0, $zero, .L80241308
 /* A3A7CC 802412EC 26100001 */   addiu    $s0, $s0, 1
 /* A3A7D0 802412F0 0000202D */  daddu     $a0, $zero, $zero
-/* A3A7D4 802412F4 0C0B1EAF */  jal       get_variable
+/* A3A7D4 802412F4 0C0B1EAF */  jal       evt_get_variable
 /* A3A7D8 802412F8 02122821 */   addu     $a1, $s0, $s2
 /* A3A7DC 802412FC 50400001 */  beql      $v0, $zero, .L80241304
 /* A3A7E0 80241300 26940001 */   addiu    $s4, $s4, 1
@@ -72,7 +72,7 @@ glabel func_8024126C_A3A74C
 /* A3A848 80241368 26100001 */   addiu    $s0, $s0, 1
 /* A3A84C 8024136C 0000202D */  daddu     $a0, $zero, $zero
 /* A3A850 80241370 02178821 */  addu      $s1, $s0, $s7
-/* A3A854 80241374 0C0B1EAF */  jal       get_variable
+/* A3A854 80241374 0C0B1EAF */  jal       evt_get_variable
 /* A3A858 80241378 0220282D */   daddu    $a1, $s1, $zero
 /* A3A85C 8024137C 54400004 */  bnel      $v0, $zero, .L80241390
 /* A3A860 80241380 26100001 */   addiu    $s0, $s0, 1
@@ -115,7 +115,7 @@ glabel func_8024126C_A3A74C
 /* A3A8DC 802413FC 54400007 */  bnel      $v0, $zero, .L8024141C
 /* A3A8E0 80241400 26100001 */   addiu    $s0, $s0, 1
 /* A3A8E4 80241404 0000202D */  daddu     $a0, $zero, $zero
-/* A3A8E8 80241408 0C0B1EAF */  jal       get_variable
+/* A3A8E8 80241408 0C0B1EAF */  jal       evt_get_variable
 /* A3A8EC 8024140C 02122821 */   addu     $a1, $s0, $s2
 /* A3A8F0 80241410 50400001 */  beql      $v0, $zero, .L80241418
 /* A3A8F4 80241414 26940001 */   addiu    $s4, $s4, 1
@@ -149,7 +149,7 @@ glabel func_8024126C_A3A74C
 /* A3A958 80241478 26100001 */   addiu    $s0, $s0, 1
 /* A3A95C 8024147C 0000202D */  daddu     $a0, $zero, $zero
 /* A3A960 80241480 02169021 */  addu      $s2, $s0, $s6
-/* A3A964 80241484 0C0B1EAF */  jal       get_variable
+/* A3A964 80241484 0C0B1EAF */  jal       evt_get_variable
 /* A3A968 80241488 0240282D */   daddu    $a1, $s2, $zero
 /* A3A96C 8024148C 54400004 */  bnel      $v0, $zero, .L802414A0
 /* A3A970 80241490 26100001 */   addiu    $s0, $s0, 1

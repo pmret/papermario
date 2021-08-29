@@ -17,12 +17,12 @@ glabel ShowEmote
 /* FC280 802D78D0 F7B40050 */  sdc1      $f20, 0x50($sp)
 /* FC284 802D78D4 8E30000C */  lw        $s0, 0xc($s1)
 /* FC288 802D78D8 8E050000 */  lw        $a1, ($s0)
-/* FC28C 802D78DC 0C0B1EAF */  jal       get_variable
+/* FC28C 802D78DC 0C0B1EAF */  jal       evt_get_variable
 /* FC290 802D78E0 26100004 */   addiu    $s0, $s0, 4
 /* FC294 802D78E4 8E050000 */  lw        $a1, ($s0)
 /* FC298 802D78E8 26100004 */  addiu     $s0, $s0, 4
 /* FC29C 802D78EC 0220202D */  daddu     $a0, $s1, $zero
-/* FC2A0 802D78F0 0C0B1EAF */  jal       get_variable
+/* FC2A0 802D78F0 0C0B1EAF */  jal       evt_get_variable
 /* FC2A4 802D78F4 0040982D */   daddu    $s3, $v0, $zero
 /* FC2A8 802D78F8 8E050000 */  lw        $a1, ($s0)
 /* FC2AC 802D78FC 26100004 */  addiu     $s0, $s0, 4
@@ -32,12 +32,12 @@ glabel ShowEmote
 /* FC2BC 802D790C 8E050000 */  lw        $a1, ($s0)
 /* FC2C0 802D7910 26100004 */  addiu     $s0, $s0, 4
 /* FC2C4 802D7914 0220202D */  daddu     $a0, $s1, $zero
-/* FC2C8 802D7918 0C0B1EAF */  jal       get_variable
+/* FC2C8 802D7918 0C0B1EAF */  jal       evt_get_variable
 /* FC2CC 802D791C 46000686 */   mov.s    $f26, $f0
 /* FC2D0 802D7920 8E050000 */  lw        $a1, ($s0)
 /* FC2D4 802D7924 26100004 */  addiu     $s0, $s0, 4
 /* FC2D8 802D7928 0220202D */  daddu     $a0, $s1, $zero
-/* FC2DC 802D792C 0C0B1EAF */  jal       get_variable
+/* FC2DC 802D792C 0C0B1EAF */  jal       evt_get_variable
 /* FC2E0 802D7930 0040A02D */   daddu    $s4, $v0, $zero
 /* FC2E4 802D7934 8E050000 */  lw        $a1, ($s0)
 /* FC2E8 802D7938 26100004 */  addiu     $s0, $s0, 4

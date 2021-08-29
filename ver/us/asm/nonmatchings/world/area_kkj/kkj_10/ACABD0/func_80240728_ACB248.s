@@ -18,7 +18,7 @@ glabel func_80240728_ACB248
 /* ACB27C 8024075C F7B40038 */  sdc1      $f20, 0x38($sp)
 /* ACB280 80240760 8E70000C */  lw        $s0, 0xc($s3)
 /* ACB284 80240764 8E050000 */  lw        $a1, ($s0)
-/* ACB288 80240768 0C0B1EAF */  jal       get_variable
+/* ACB288 80240768 0C0B1EAF */  jal       evt_get_variable
 /* ACB28C 8024076C 26100004 */   addiu    $s0, $s0, 4
 /* ACB290 80240770 8E150000 */  lw        $s5, ($s0)
 /* ACB294 80240774 26100004 */  addiu     $s0, $s0, 4

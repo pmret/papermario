@@ -10,7 +10,7 @@ glabel AddActorVar
 /* 19A9C8 8026C0E8 AFB00010 */  sw        $s0, 0x10($sp)
 /* 19A9CC 8026C0EC 8E50000C */  lw        $s0, 0xc($s2)
 /* 19A9D0 8026C0F0 8E050000 */  lw        $a1, ($s0)
-/* 19A9D4 8026C0F4 0C0B1EAF */  jal       get_variable
+/* 19A9D4 8026C0F4 0C0B1EAF */  jal       evt_get_variable
 /* 19A9D8 8026C0F8 26100004 */   addiu    $s0, $s0, 4
 /* 19A9DC 8026C0FC 0040882D */  daddu     $s1, $v0, $zero
 /* 19A9E0 8026C100 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -20,11 +20,11 @@ glabel AddActorVar
 .L8026C110:
 /* 19A9F0 8026C110 8E050000 */  lw        $a1, ($s0)
 /* 19A9F4 8026C114 26100004 */  addiu     $s0, $s0, 4
-/* 19A9F8 8026C118 0C0B1EAF */  jal       get_variable
+/* 19A9F8 8026C118 0C0B1EAF */  jal       evt_get_variable
 /* 19A9FC 8026C11C 0240202D */   daddu    $a0, $s2, $zero
 /* 19AA00 8026C120 0240202D */  daddu     $a0, $s2, $zero
 /* 19AA04 8026C124 8E050000 */  lw        $a1, ($s0)
-/* 19AA08 8026C128 0C0B1EAF */  jal       get_variable
+/* 19AA08 8026C128 0C0B1EAF */  jal       evt_get_variable
 /* 19AA0C 8026C12C 0040802D */   daddu    $s0, $v0, $zero
 /* 19AA10 8026C130 0220202D */  daddu     $a0, $s1, $zero
 /* 19AA14 8026C134 0C09A75B */  jal       get_actor

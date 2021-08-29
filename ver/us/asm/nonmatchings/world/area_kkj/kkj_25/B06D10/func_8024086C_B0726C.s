@@ -28,7 +28,7 @@ glabel func_8024086C_B0726C
 /* B072C8 802408C8 3C05FD05 */  lui       $a1, 0xfd05
 /* B072CC 802408CC 4600008D */  trunc.w.s $f2, $f0
 /* B072D0 802408D0 44101000 */  mfc1      $s0, $f2
-/* B072D4 802408D4 0C0B1EAF */  jal       get_variable
+/* B072D4 802408D4 0C0B1EAF */  jal       evt_get_variable
 /* B072D8 802408D8 34A50F8A */   ori      $a1, $a1, 0xf8a
 /* B072DC 802408DC 0040182D */  daddu     $v1, $v0, $zero
 /* B072E0 802408E0 44920000 */  mtc1      $s2, $f0

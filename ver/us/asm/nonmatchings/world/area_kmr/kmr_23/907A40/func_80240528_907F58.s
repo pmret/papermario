@@ -16,13 +16,13 @@ glabel func_80240528_907F58
 /* 907F84 80240554 0220202D */  daddu     $a0, $s1, $zero
 /* 907F88 80240558 3C05FD05 */  lui       $a1, 0xfd05
 /* 907F8C 8024055C 34A50F80 */  ori       $a1, $a1, 0xf80
-/* 907F90 80240560 0C0B1EAF */  jal       get_variable
+/* 907F90 80240560 0C0B1EAF */  jal       evt_get_variable
 /* 907F94 80240564 0040982D */   daddu    $s3, $v0, $zero
 /* 907F98 80240568 12000006 */  beqz      $s0, .L80240584
 /* 907F9C 8024056C 00000000 */   nop
 /* 907FA0 80240570 AE200070 */  sw        $zero, 0x70($s1)
 /* 907FA4 80240574 8E450000 */  lw        $a1, ($s2)
-/* 907FA8 80240578 0C0B1EAF */  jal       get_variable
+/* 907FA8 80240578 0C0B1EAF */  jal       evt_get_variable
 /* 907FAC 8024057C 0220202D */   daddu    $a0, $s1, $zero
 /* 907FB0 80240580 AE220074 */  sw        $v0, 0x74($s1)
 .L80240584:

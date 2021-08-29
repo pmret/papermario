@@ -11,11 +11,11 @@ glabel filemenu_update_show_name_input_803C00
 /* 803C18 80243398 AFB00010 */  sw        $s0, 0x10($sp)
 /* 803C1C 8024339C 8E70000C */  lw        $s0, 0xc($s3)
 /* 803C20 802433A0 8E050000 */  lw        $a1, ($s0)
-/* 803C24 802433A4 0C0B1EAF */  jal       get_variable
+/* 803C24 802433A4 0C0B1EAF */  jal       evt_get_variable
 /* 803C28 802433A8 26100004 */   addiu    $s0, $s0, 4
 /* 803C2C 802433AC 0260202D */  daddu     $a0, $s3, $zero
 /* 803C30 802433B0 8E050000 */  lw        $a1, ($s0)
-/* 803C34 802433B4 0C0B1EAF */  jal       get_variable
+/* 803C34 802433B4 0C0B1EAF */  jal       evt_get_variable
 /* 803C38 802433B8 0040902D */   daddu    $s2, $v0, $zero
 /* 803C3C 802433BC 2404003C */  addiu     $a0, $zero, 0x3c
 /* 803C40 802433C0 0C00AB39 */  jal       heap_malloc

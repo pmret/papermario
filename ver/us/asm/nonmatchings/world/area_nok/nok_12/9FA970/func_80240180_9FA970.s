@@ -12,16 +12,16 @@ glabel func_80240180_9FA970
 /* 9FA98C 8024019C 8E30000C */  lw        $s0, 0xc($s1)
 /* 9FA990 802401A0 8E330148 */  lw        $s3, 0x148($s1)
 /* 9FA994 802401A4 8E050000 */  lw        $a1, ($s0)
-/* 9FA998 802401A8 0C0B1EAF */  jal       get_variable
+/* 9FA998 802401A8 0C0B1EAF */  jal       evt_get_variable
 /* 9FA99C 802401AC 26100004 */   addiu    $s0, $s0, 4
 /* 9FA9A0 802401B0 0040902D */  daddu     $s2, $v0, $zero
 /* 9FA9A4 802401B4 8E050000 */  lw        $a1, ($s0)
 /* 9FA9A8 802401B8 26100004 */  addiu     $s0, $s0, 4
-/* 9FA9AC 802401BC 0C0B1EAF */  jal       get_variable
+/* 9FA9AC 802401BC 0C0B1EAF */  jal       evt_get_variable
 /* 9FA9B0 802401C0 0220202D */   daddu    $a0, $s1, $zero
 /* 9FA9B4 802401C4 0220202D */  daddu     $a0, $s1, $zero
 /* 9FA9B8 802401C8 8E050000 */  lw        $a1, ($s0)
-/* 9FA9BC 802401CC 0C0B1EAF */  jal       get_variable
+/* 9FA9BC 802401CC 0C0B1EAF */  jal       evt_get_variable
 /* 9FA9C0 802401D0 0040802D */   daddu    $s0, $v0, $zero
 /* 9FA9C4 802401D4 0040882D */  daddu     $s1, $v0, $zero
 /* 9FA9C8 802401D8 2402FFFF */  addiu     $v0, $zero, -1

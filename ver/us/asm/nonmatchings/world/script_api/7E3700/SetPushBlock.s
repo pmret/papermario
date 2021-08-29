@@ -11,21 +11,21 @@ glabel SetPushBlock
 /* 7E4314 80283494 AFB00028 */  sw        $s0, 0x28($sp)
 /* 7E4318 80283498 8E70000C */  lw        $s0, 0xc($s3)
 /* 7E431C 8028349C 8E050000 */  lw        $a1, ($s0)
-/* 7E4320 802834A0 0C0B1EAF */  jal       get_variable
+/* 7E4320 802834A0 0C0B1EAF */  jal       evt_get_variable
 /* 7E4324 802834A4 26100004 */   addiu    $s0, $s0, 4
 /* 7E4328 802834A8 8E050000 */  lw        $a1, ($s0)
 /* 7E432C 802834AC 26100004 */  addiu     $s0, $s0, 4
 /* 7E4330 802834B0 0260202D */  daddu     $a0, $s3, $zero
-/* 7E4334 802834B4 0C0B1EAF */  jal       get_variable
+/* 7E4334 802834B4 0C0B1EAF */  jal       evt_get_variable
 /* 7E4338 802834B8 0040882D */   daddu    $s1, $v0, $zero
 /* 7E433C 802834BC 8E050000 */  lw        $a1, ($s0)
 /* 7E4340 802834C0 26100004 */  addiu     $s0, $s0, 4
 /* 7E4344 802834C4 0260202D */  daddu     $a0, $s3, $zero
-/* 7E4348 802834C8 0C0B1EAF */  jal       get_variable
+/* 7E4348 802834C8 0C0B1EAF */  jal       evt_get_variable
 /* 7E434C 802834CC 0040902D */   daddu    $s2, $v0, $zero
 /* 7E4350 802834D0 0260202D */  daddu     $a0, $s3, $zero
 /* 7E4354 802834D4 8E050000 */  lw        $a1, ($s0)
-/* 7E4358 802834D8 0C0B1EAF */  jal       get_variable
+/* 7E4358 802834D8 0C0B1EAF */  jal       evt_get_variable
 /* 7E435C 802834DC 0040802D */   daddu    $s0, $v0, $zero
 /* 7E4360 802834E0 00118880 */  sll       $s1, $s1, 2
 /* 7E4364 802834E4 3C01802E */  lui       $at, %hi(D_802DBC88)

@@ -38,7 +38,7 @@ glabel func_802400A0_A4F0A0
 /* A4F0FC 802400FC 00459021 */   addu     $s2, $v0, $a1
 /* A4F100 80240100 0220202D */  daddu     $a0, $s1, $zero
 /* A4F104 80240104 8E050000 */  lw        $a1, ($s0)
-/* A4F108 80240108 0C0B1EAF */  jal       get_variable
+/* A4F108 80240108 0C0B1EAF */  jal       evt_get_variable
 /* A4F10C 8024010C 0040802D */   daddu    $s0, $v0, $zero
 /* A4F110 80240110 0260202D */  daddu     $a0, $s3, $zero
 /* A4F114 80240114 8C460024 */  lw        $a2, 0x24($v0)

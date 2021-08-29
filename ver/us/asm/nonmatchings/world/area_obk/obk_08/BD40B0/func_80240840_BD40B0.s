@@ -5,7 +5,7 @@ glabel func_80240840_BD40B0
 /* BD40B0 80240840 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* BD40B4 80240844 AFBF0010 */  sw        $ra, 0x10($sp)
 /* BD40B8 80240848 8C82000C */  lw        $v0, 0xc($a0)
-/* BD40BC 8024084C 0C0B1EAF */  jal       get_variable
+/* BD40BC 8024084C 0C0B1EAF */  jal       evt_get_variable
 /* BD40C0 80240850 8C450000 */   lw       $a1, ($v0)
 /* BD40C4 80240854 24040064 */  addiu     $a0, $zero, 0x64
 /* BD40C8 80240858 0C00A3C2 */  jal       start_rumble

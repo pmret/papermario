@@ -9,7 +9,7 @@ glabel func_80240DA0_A2AFE0
 /* A2AFF0 80240DB0 AFB00010 */  sw        $s0, 0x10($sp)
 /* A2AFF4 80240DB4 8E30000C */  lw        $s0, 0xc($s1)
 /* A2AFF8 80240DB8 8E050000 */  lw        $a1, ($s0)
-/* A2AFFC 80240DBC 0C0B1EAF */  jal       get_variable
+/* A2AFFC 80240DBC 0C0B1EAF */  jal       evt_get_variable
 /* A2B000 80240DC0 26100004 */   addiu    $s0, $s0, 4
 /* A2B004 80240DC4 0220202D */  daddu     $a0, $s1, $zero
 /* A2B008 80240DC8 8E050000 */  lw        $a1, ($s0)

@@ -17,7 +17,7 @@ glabel func_802416F8_B21C38
 /* B21C68 80241728 8E50000C */  lw        $s0, 0xc($s2)
 /* B21C6C 8024172C 8E140000 */  lw        $s4, ($s0)
 /* B21C70 80241730 26100004 */  addiu     $s0, $s0, 4
-/* B21C74 80241734 0C0B1EAF */  jal       get_variable
+/* B21C74 80241734 0C0B1EAF */  jal       evt_get_variable
 /* B21C78 80241738 0280282D */   daddu    $a1, $s4, $zero
 /* B21C7C 8024173C 0040982D */  daddu     $s3, $v0, $zero
 /* B21C80 80241740 8E150000 */  lw        $s5, ($s0)
@@ -34,12 +34,12 @@ glabel func_802416F8_B21C38
 /* B21CAC 8024176C 8E050000 */  lw        $a1, ($s0)
 /* B21CB0 80241770 26100004 */  addiu     $s0, $s0, 4
 /* B21CB4 80241774 0240202D */  daddu     $a0, $s2, $zero
-/* B21CB8 80241778 0C0B1EAF */  jal       get_variable
+/* B21CB8 80241778 0C0B1EAF */  jal       evt_get_variable
 /* B21CBC 8024177C 46000506 */   mov.s    $f20, $f0
 /* B21CC0 80241780 8E050000 */  lw        $a1, ($s0)
 /* B21CC4 80241784 26100004 */  addiu     $s0, $s0, 4
 /* B21CC8 80241788 0240202D */  daddu     $a0, $s2, $zero
-/* B21CCC 8024178C 0C0B1EAF */  jal       get_variable
+/* B21CCC 8024178C 0C0B1EAF */  jal       evt_get_variable
 /* B21CD0 80241790 0040882D */   daddu    $s1, $v0, $zero
 /* B21CD4 80241794 0240202D */  daddu     $a0, $s2, $zero
 /* B21CD8 80241798 8E050000 */  lw        $a1, ($s0)

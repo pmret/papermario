@@ -20,7 +20,7 @@ glabel func_80240B4C_B2108C
 /* B210C8 80240B88 8E050000 */  lw        $a1, ($s0)
 /* B210CC 80240B8C 26100004 */  addiu     $s0, $s0, 4
 /* B210D0 80240B90 4600A686 */  mov.s     $f26, $f20
-/* B210D4 80240B94 0C0B1EAF */  jal       get_variable
+/* B210D4 80240B94 0C0B1EAF */  jal       evt_get_variable
 /* B210D8 80240B98 4600A606 */   mov.s    $f24, $f20
 /* B210DC 80240B9C 8E130000 */  lw        $s3, ($s0)
 /* B210E0 80240BA0 26100004 */  addiu     $s0, $s0, 4

@@ -9,7 +9,7 @@ glabel func_802400B0_98AAC0
 /* 98AAD0 802400C0 AFB00010 */  sw        $s0, 0x10($sp)
 /* 98AAD4 802400C4 8E30000C */  lw        $s0, 0xc($s1)
 /* 98AAD8 802400C8 8E050000 */  lw        $a1, ($s0)
-/* 98AADC 802400CC 0C0B1EAF */  jal       get_variable
+/* 98AADC 802400CC 0C0B1EAF */  jal       evt_get_variable
 /* 98AAE0 802400D0 26100004 */   addiu    $s0, $s0, 4
 /* 98AAE4 802400D4 3C03FFF0 */  lui       $v1, 0xfff0
 /* 98AAE8 802400D8 3463FFFF */  ori       $v1, $v1, 0xffff

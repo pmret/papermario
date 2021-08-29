@@ -23,7 +23,7 @@ glabel FallToGoal
 /* 1A8510 80279C30 00000000 */   nop
 /* 1A8514 80279C34 8E250000 */  lw        $a1, ($s1)
 /* 1A8518 80279C38 26310004 */  addiu     $s1, $s1, 4
-/* 1A851C 80279C3C 0C0B1EAF */  jal       get_variable
+/* 1A851C 80279C3C 0C0B1EAF */  jal       evt_get_variable
 /* 1A8520 80279C40 0240202D */   daddu    $a0, $s2, $zero
 /* 1A8524 80279C44 0040202D */  daddu     $a0, $v0, $zero
 /* 1A8528 80279C48 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -36,7 +36,7 @@ glabel FallToGoal
 /* 1A8540 80279C60 0040802D */  daddu     $s0, $v0, $zero
 /* 1A8544 80279C64 AE500074 */  sw        $s0, 0x74($s2)
 /* 1A8548 80279C68 8E250000 */  lw        $a1, ($s1)
-/* 1A854C 80279C6C 0C0B1EAF */  jal       get_variable
+/* 1A854C 80279C6C 0C0B1EAF */  jal       evt_get_variable
 /* 1A8550 80279C70 0240202D */   daddu    $a0, $s2, $zero
 /* 1A8554 80279C74 C6000148 */  lwc1      $f0, 0x148($s0)
 /* 1A8558 80279C78 C61A0018 */  lwc1      $f26, 0x18($s0)

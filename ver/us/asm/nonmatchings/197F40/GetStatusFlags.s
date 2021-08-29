@@ -10,7 +10,7 @@ glabel GetStatusFlags
 /* 19DB24 8026F244 AFB00010 */  sw        $s0, 0x10($sp)
 /* 19DB28 8026F248 8E30000C */  lw        $s0, 0xc($s1)
 /* 19DB2C 8026F24C 8E050000 */  lw        $a1, ($s0)
-/* 19DB30 8026F250 0C0B1EAF */  jal       get_variable
+/* 19DB30 8026F250 0C0B1EAF */  jal       evt_get_variable
 /* 19DB34 8026F254 26100004 */   addiu    $s0, $s0, 4
 /* 19DB38 8026F258 0040202D */  daddu     $a0, $v0, $zero
 /* 19DB3C 8026F25C 2402FF81 */  addiu     $v0, $zero, -0x7f

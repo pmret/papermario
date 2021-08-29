@@ -10,11 +10,11 @@ glabel CreatePartShadow
 /* 19DE20 8026F540 AFB00010 */  sw        $s0, 0x10($sp)
 /* 19DE24 8026F544 8E50000C */  lw        $s0, 0xc($s2)
 /* 19DE28 8026F548 8E050000 */  lw        $a1, ($s0)
-/* 19DE2C 8026F54C 0C0B1EAF */  jal       get_variable
+/* 19DE2C 8026F54C 0C0B1EAF */  jal       evt_get_variable
 /* 19DE30 8026F550 26100004 */   addiu    $s0, $s0, 4
 /* 19DE34 8026F554 0040882D */  daddu     $s1, $v0, $zero
 /* 19DE38 8026F558 8E050000 */  lw        $a1, ($s0)
-/* 19DE3C 8026F55C 0C0B1EAF */  jal       get_variable
+/* 19DE3C 8026F55C 0C0B1EAF */  jal       evt_get_variable
 /* 19DE40 8026F560 0240202D */   daddu    $a0, $s2, $zero
 /* 19DE44 8026F564 0040282D */  daddu     $a1, $v0, $zero
 /* 19DE48 8026F568 2402FF81 */  addiu     $v0, $zero, -0x7f

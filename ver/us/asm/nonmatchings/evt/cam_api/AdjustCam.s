@@ -18,7 +18,7 @@ glabel AdjustCam
 /* F1044 802CC694 F7B40078 */  sdc1      $f20, 0x78($sp)
 /* F1048 802CC698 8E30000C */  lw        $s0, 0xc($s1)
 /* F104C 802CC69C 8E050000 */  lw        $a1, ($s0)
-/* F1050 802CC6A0 0C0B1EAF */  jal       get_variable
+/* F1050 802CC6A0 0C0B1EAF */  jal       evt_get_variable
 /* F1054 802CC6A4 26100004 */   addiu    $s0, $s0, 4
 /* F1058 802CC6A8 8E050000 */  lw        $a1, ($s0)
 /* F105C 802CC6AC 26100004 */  addiu     $s0, $s0, 4

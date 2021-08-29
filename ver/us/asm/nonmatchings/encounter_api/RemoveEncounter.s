@@ -11,7 +11,7 @@ glabel RemoveEncounter
 /* 1F890 80044490 8C82000C */  lw        $v0, 0xc($a0)
 /* 1F894 80044494 8C450000 */  lw        $a1, ($v0)
 /* 1F898 80044498 8C900148 */  lw        $s0, 0x148($a0)
-/* 1F89C 8004449C 0C0B1EAF */  jal       get_variable
+/* 1F89C 8004449C 0C0B1EAF */  jal       evt_get_variable
 /* 1F8A0 800444A0 24120001 */   addiu    $s2, $zero, 1
 /* 1F8A4 800444A4 0040882D */  daddu     $s1, $v0, $zero
 /* 1F8A8 800444A8 3C13800B */  lui       $s3, %hi(gCurrentEncounter)

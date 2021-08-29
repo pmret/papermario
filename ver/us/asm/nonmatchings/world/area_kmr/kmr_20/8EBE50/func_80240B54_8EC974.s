@@ -38,7 +38,7 @@ glabel func_80240B54_8EC974
 .L80240BD0:
 /* 8EC9F0 80240BD0 0000202D */  daddu     $a0, $zero, $zero
 /* 8EC9F4 80240BD4 3C05F5DE */  lui       $a1, 0xf5de
-/* 8EC9F8 80240BD8 0C0B1EAF */  jal       get_variable
+/* 8EC9F8 80240BD8 0C0B1EAF */  jal       evt_get_variable
 /* 8EC9FC 80240BDC 34A50180 */   ori      $a1, $a1, 0x180
 /* 8ECA00 80240BE0 8E630000 */  lw        $v1, ($s3)
 /* 8ECA04 80240BE4 0043102A */  slt       $v0, $v0, $v1
