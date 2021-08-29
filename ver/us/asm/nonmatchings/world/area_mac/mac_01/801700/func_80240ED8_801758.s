@@ -24,7 +24,7 @@ glabel func_80240ED8_801758
 /* 8017A0 80240F20 0200202D */  daddu     $a0, $s0, $zero
 .L80240F24:
 /* 8017A4 80240F24 3C05F5DE */  lui       $a1, 0xf5de
-/* 8017A8 80240F28 0C0B2026 */  jal       set_variable
+/* 8017A8 80240F28 0C0B2026 */  jal       evt_set_variable
 /* 8017AC 80240F2C 34A502DD */   ori      $a1, $a1, 0x2dd
 /* 8017B0 80240F30 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 8017B4 80240F34 8FB00010 */  lw        $s0, 0x10($sp)

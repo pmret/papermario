@@ -157,7 +157,7 @@ void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
 
 s32 is_trigger_bound(Trigger*, EvtSource* script);
 Trigger* create_trigger(TriggerDefinition* def);
-s32 _bound_script_trigger_handler(Trigger* trigger);
+s32 evt_bound_script_trigger_handler(Trigger* trigger);
 Trigger* get_trigger_by_id(s32 triggerID);
 
 Actor* get_actor(ActorID actorID);
@@ -170,10 +170,10 @@ void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2);
 
 s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
 
-s32 get_variable(Evt* script, Bytecode var);
-s32 set_variable(Evt* script, Bytecode var, s32 value);
-f32 get_float_variable(Evt* script, Bytecode var);
-f32 set_float_variable(Evt* script, Bytecode var, f32 value);
+s32 evt_get_variable(Evt* script, Bytecode var);
+s32 evt_set_variable(Evt* script, Bytecode var, s32 value);
+f32 evt_get_float_variable(Evt* script, Bytecode var);
+f32 evt_set_float_variable(Evt* script, Bytecode var, f32 value);
 void set_script_timescale(Evt* script, f32 timescale);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);

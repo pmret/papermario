@@ -122,9 +122,9 @@ ApiStatus func_80238388_708028(Evt* script, s32 isInitialCall) {
 ApiStatus func_80238480_708120(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
-    f32 var1 = get_float_variable(script, *args++);
-    f32 var2 = get_float_variable(script, *args++);
-    f32 var3 = get_float_variable(script, *args++);
+    f32 var1 = evt_get_float_variable(script, *args++);
+    f32 var2 = evt_get_float_variable(script, *args++);
+    f32 var3 = evt_get_float_variable(script, *args++);
     s32 effect = battleStatus->unk_A0;
 
     if (effect != NULL) {

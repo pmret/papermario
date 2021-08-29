@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_8024005C_95401C);
 INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_802400BC_95407C);
 /*
 ApiStatus N(func_802400BC_95407C)(Evt* script, s32 isInitialCall) {
-    switch_to_partner(get_variable(script, *script->ptrReadPos));
+    switch_to_partner(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 */
@@ -57,7 +57,7 @@ ApiStatus N(func_80240680_954640)(Evt *script, s32 isInitialCall) {
         script->userData = (N(UserData)*)general_heap_malloc(0x68);
         scriptPtr = (N(UserData)*)script->userData;
 
-        scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
+        scriptPtr->unk_5C = get_entity_by_index(evt_get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
             userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f, scriptPtr->unk_5C->position.z, 1.0f, -1);

@@ -52,10 +52,10 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802404CC_8B053C);
 /*
 ApiStatus N(func_802404CC_8B053C)(Evt *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemyID;
-    u16 phi_s0 = get_variable(script, EVT_SAVE_FLAG(1768));
-    u16 phi_s7 = get_variable(script, EVT_SAVE_FLAG(1769));
-    u16 temp_s6 = get_variable(script, EVT_SAVE_VAR(350));
-    u16 phi_s5 = get_variable(script, EVT_SAVE_VAR(351));
+    u16 phi_s0 = evt_get_variable(script, EVT_SAVE_FLAG(1768));
+    u16 phi_s7 = evt_get_variable(script, EVT_SAVE_FLAG(1769));
+    u16 temp_s6 = evt_get_variable(script, EVT_SAVE_VAR(350));
+    u16 phi_s5 = evt_get_variable(script, EVT_SAVE_VAR(351));
     s32 var;
     s32 i;
 
@@ -76,16 +76,16 @@ ApiStatus N(func_802404CC_8B053C)(Evt *script, s32 isInitialCall) {
         if (rand_int(100) < 30) {
             phi_s5 = rand_int(temp_s2 - 1);
             temp_s6 = temp_s3;
-            set_variable(script, EVT_SAVE_VAR(350), temp_s6);
-            set_variable(script, EVT_SAVE_VAR(351), phi_s5);
+            evt_set_variable(script, EVT_SAVE_VAR(350), temp_s6);
+            evt_set_variable(script, EVT_SAVE_VAR(351), phi_s5);
             phi_s0 = 1;
         }
     }
 
-    set_variable(script, EVT_SAVE_FLAG(1768), phi_s0);
-    set_variable(script, EVT_SAVE_FLAG(1769), phi_s7);
-    temp_s0_2 = get_variable(NULL, EVT_SAVE_VAR(352));
-    temp_v0 = get_variable(NULL, EVT_STORY_PROGRESS);
+    evt_set_variable(script, EVT_SAVE_FLAG(1768), phi_s0);
+    evt_set_variable(script, EVT_SAVE_FLAG(1769), phi_s7);
+    temp_s0_2 = evt_get_variable(NULL, EVT_SAVE_VAR(352));
+    temp_v0 = evt_get_variable(NULL, EVT_STORY_PROGRESS);
 
     for (i = 0; i < 8; i++) {
         if (temp_v0 < (*(N(quizRequirements) + i)).unk_00) {
@@ -120,7 +120,7 @@ ApiStatus N(func_80240A7C_8B0AEC)(Evt *script, s32 isInitialCall) {
         playerData->quizzesAnswered++;
     }
 
-    if (script->varTable[0] == N(quizAnswers)[get_variable(NULL, EVT_SAVE_VAR(352))]) {
+    if (script->varTable[0] == N(quizAnswers)[evt_get_variable(NULL, EVT_SAVE_VAR(352))]) {
         script->varTable[0] = 1;
         playerData->quizzesCorrect++;
     } else {
@@ -139,9 +139,9 @@ ApiStatus N(func_80240B00_8B0B70)(Evt *script, s32 isInitialCall) {
     if (isInitialCall) {
         Effect** effect = &D_8024DFE0;
 
-        *effect = playFX_4E(0, get_variable(script, EVT_ARRAY(1)), get_variable(script, EVT_ARRAY(2)), get_variable(script, EVT_ARRAY(3)));
-        D_8024DFE4 = playFX_54(0, get_variable(script, EVT_ARRAY(1)), get_variable(script, EVT_ARRAY(2)), get_variable(script, EVT_ARRAY(3)));
-        D_8024DFE8 = playFX_80(0, get_variable(script, EVT_ARRAY(1)), get_variable(script, EVT_ARRAY(2)), get_variable(script, EVT_ARRAY(3)), 1.0f, 0);
+        *effect = playFX_4E(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)), evt_get_variable(script, EVT_ARRAY(3)));
+        D_8024DFE4 = playFX_54(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)), evt_get_variable(script, EVT_ARRAY(3)));
+        D_8024DFE8 = playFX_80(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)), evt_get_variable(script, EVT_ARRAY(3)), 1.0f, 0);
 
         effectPtr = (*effect)->unk_0C;
         effectPtr->unk_18 = 0;
@@ -198,7 +198,7 @@ ApiStatus N(func_80240D18_8B0D88)(Evt *script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240DCC_8B0E3C);
 /*
 ApiStatus N(func_80240DCC_8B0E3C)(Evt *script, s32 isInitialCall) {
-    D_8024DFE0->unk_0C->unk_34 = get_variable(script, *script->ptrReadPos);
+    D_8024DFE0->unk_0C->unk_34 = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 */
@@ -206,7 +206,7 @@ ApiStatus N(func_80240DCC_8B0E3C)(Evt *script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240E00_8B0E70);
 /*
 ApiStatus N(func_80240E00_8B0E70)(Evt *script, s32 isInitialCall) {
-    s32 var = get_variable(script, *script->ptrReadPos);
+    s32 var = evt_get_variable(script, *script->ptrReadPos);
     EffectInstanceDataThing* effectPtr = D_8024DFE0->unk_0C;
 
     switch (var) {
@@ -267,7 +267,7 @@ ApiStatus N(func_80240EB4_8B0F24)(Evt *script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241388_8B13F8);
 /*
 void N(func_80241388_8B13F8)(void) {
-    s32 var = get_variable(NULL, D_8024DFD8);
+    s32 var = evt_get_variable(NULL, D_8024DFD8);
 
     if (var == 1) {
         playFX_50(0, 0, 0, 0);
@@ -328,7 +328,7 @@ ApiStatus N(func_8024226C_8B22DC)(Evt* script, s32 isInitialCall) {
 
     if (N(D_80247E30_8B7EA0)) {
         N(D_80247E30_8B7EA0) = FALSE;
-        set_variable(script, *args, N(D_80247E34_8B7EA4));
+        evt_set_variable(script, *args, N(D_80247E34_8B7EA4));
         return ApiStatus_DONE2;
     }
 
@@ -341,7 +341,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802422C0_8B2330);
 ApiStatus N(func_802422C0_8B2330)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    N(D_80247E34_8B7EA4) = get_variable(script, *args);
+    N(D_80247E34_8B7EA4) = evt_get_variable(script, *args);
     N(D_80247E30_8B7EA0) = TRUE;
     return ApiStatus_DONE2;
 }
@@ -351,7 +351,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802422F8_8B2368);
 /*
 ApiStatus N(func_802422F8_8B2368)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

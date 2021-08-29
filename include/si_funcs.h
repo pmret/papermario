@@ -1,9 +1,9 @@
 #ifndef _EVT_FUNCS_H_
 #define _EVT_FUNCS_H_
 
-f32 fixed_var_to_float(Bytecode scriptVar);
+f32 evt_fixed_var_to_float(Bytecode scriptVar);
 
-Bytecode float_to_fixed_var(f32 value);
+Bytecode evt_float_to_fixed_var(f32 value);
 
 ApiStatus evt_handle_return(Evt* script);
 
@@ -145,7 +145,7 @@ ApiStatus evt_handle_exec_wait(Evt* script);
 
 ApiStatus evt_handle_jump(Evt* script);
 
-s32 _bound_script_trigger_handler(Trigger* trigger);
+s32 evt_bound_script_trigger_handler(Trigger* trigger);
 
 ApiStatus evt_handle_bind(Evt* script);
 
@@ -199,17 +199,17 @@ s32 func_802C73B8(Evt* script);
 
 s32 evt_execute_next_command(Evt *script);
 
-s32 get_variable(Evt* script, Bytecode var);
+s32 evt_get_variable(Evt* script, Bytecode var);
 
-s32 get_variable_index(Evt* script, s32 var);
+s32 evt_get_variable_index(Evt* script, s32 var);
 
-s32 get_variable_index_alt(s32 var);
+s32 evt_get_variable_index_alt(s32 var);
 
-s32 set_variable(Evt* script, Bytecode var, s32 value);
+s32 evt_set_variable(Evt* script, Bytecode var, s32 value);
 
-f32 get_float_variable(Evt* script, Bytecode var);
+f32 evt_get_float_variable(Evt* script, Bytecode var);
 
-f32 set_float_variable(Evt* script, Bytecode var, s32 value);
+f32 evt_set_float_variable(Evt* script, Bytecode var, s32 value);
 
 Bytecode* evt_find_label(Evt* script, s32 arg1);
 

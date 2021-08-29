@@ -25,7 +25,7 @@ glabel func_802417EC_A3ACCC
 .L8024183C:
 /* A3AD1C 8024183C 0000302D */  daddu     $a2, $zero, $zero
 .L80241840:
-/* A3AD20 80241840 0C0B2026 */  jal       set_variable
+/* A3AD20 80241840 0C0B2026 */  jal       evt_set_variable
 /* A3AD24 80241844 00000000 */   nop
 /* A3AD28 80241848 8FBF0018 */  lw        $ra, 0x18($sp)
 /* A3AD2C 8024184C 8FB10014 */  lw        $s1, 0x14($sp)

@@ -19,7 +19,7 @@ glabel func_80242310_C5CA50
 .L80242344:
 /* C5CA84 80242344 8CC50000 */  lw        $a1, ($a2)
 /* C5CA88 80242348 3C068024 */  lui       $a2, %hi(D_80244A78_C5F1B8)
-/* C5CA8C 8024234C 0C0B2026 */  jal       set_variable
+/* C5CA8C 8024234C 0C0B2026 */  jal       evt_set_variable
 /* C5CA90 80242350 8CC64A78 */   lw       $a2, %lo(D_80244A78_C5F1B8)($a2)
 /* C5CA94 80242354 24020002 */  addiu     $v0, $zero, 2
 .L80242358:

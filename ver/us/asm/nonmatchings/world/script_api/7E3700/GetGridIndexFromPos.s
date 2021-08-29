@@ -49,11 +49,11 @@ glabel GetGridIndexFromPos
 /* 7E45E8 80283768 000217C3 */  sra       $v0, $v0, 0x1f
 /* 7E45EC 8028376C 00001810 */  mfhi      $v1
 /* 7E45F0 80283770 000388C3 */  sra       $s1, $v1, 3
-/* 7E45F4 80283774 0C0B2026 */  jal       set_variable
+/* 7E45F4 80283774 0C0B2026 */  jal       evt_set_variable
 /* 7E45F8 80283778 02228823 */   subu     $s1, $s1, $v0
 /* 7E45FC 8028377C 0260202D */  daddu     $a0, $s3, $zero
 /* 7E4600 80283780 0200282D */  daddu     $a1, $s0, $zero
-/* 7E4604 80283784 0C0B2026 */  jal       set_variable
+/* 7E4604 80283784 0C0B2026 */  jal       evt_set_variable
 /* 7E4608 80283788 0220302D */   daddu    $a2, $s1, $zero
 /* 7E460C 8028378C 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 7E4610 80283790 8FB3001C */  lw        $s3, 0x1c($sp)

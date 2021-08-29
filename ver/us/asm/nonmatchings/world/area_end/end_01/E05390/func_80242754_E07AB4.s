@@ -18,7 +18,7 @@ glabel func_80242754_E07AB4
 /* E07AE8 80242788 0040282D */   daddu    $a1, $v0, $zero
 /* E07AEC 8024278C 0220202D */  daddu     $a0, $s1, $zero
 /* E07AF0 80242790 0040302D */  daddu     $a2, $v0, $zero
-/* E07AF4 80242794 0C0B2026 */  jal       set_variable
+/* E07AF4 80242794 0C0B2026 */  jal       evt_set_variable
 /* E07AF8 80242798 0200282D */   daddu    $a1, $s0, $zero
 /* E07AFC 8024279C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* E07B00 802427A0 8FB10014 */  lw        $s1, 0x14($sp)

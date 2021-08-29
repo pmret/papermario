@@ -5,7 +5,7 @@ glabel func_80240020_AB2190
 /* AB2190 80240020 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* AB2194 80240024 AFBF0010 */  sw        $ra, 0x10($sp)
 /* AB2198 80240028 8C82000C */  lw        $v0, 0xc($a0)
-/* AB219C 8024002C 0C0B210B */  jal       get_float_variable
+/* AB219C 8024002C 0C0B210B */  jal       evt_get_float_variable
 /* AB21A0 80240030 8C450000 */   lw       $a1, ($v0)
 /* AB21A4 80240034 8FBF0010 */  lw        $ra, 0x10($sp)
 /* AB21A8 80240038 4600008D */  trunc.w.s $f2, $f0

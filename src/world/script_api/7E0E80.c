@@ -151,7 +151,7 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall) {
     static s32 D_80286524;
 
     Shop* shop = gGameStatusPtr->mapShop;
-    s32 currentItemSlot = get_variable(script, *script->ptrReadPos);
+    s32 currentItemSlot = evt_get_variable(script, *script->ptrReadPos);
 
     if (!(shop->flags & 8)) {
         shop->currentItemSlot = currentItemSlot;
@@ -390,6 +390,6 @@ INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", MakeShop, Evt* script, s32 isI
 ApiStatus MakeShopOwner(Evt* script, s32 isInitialCall) {
     Shop* mapShop = gGameStatusPtr->mapShop;
 
-    mapShop->owner = get_variable(script, *script->ptrReadPos);
+    mapShop->owner = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }

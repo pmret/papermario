@@ -8,7 +8,7 @@ glabel func_80241C78_8D3188
 /* 8D3194 80241C84 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 8D3198 80241C88 F7B40018 */  sdc1      $f20, 0x18($sp)
 /* 8D319C 80241C8C 8E02000C */  lw        $v0, 0xc($s0)
-/* 8D31A0 80241C90 0C0B210B */  jal       get_float_variable
+/* 8D31A0 80241C90 0C0B210B */  jal       evt_get_float_variable
 /* 8D31A4 80241C94 8C450000 */   lw       $a1, ($v0)
 /* 8D31A8 80241C98 0200202D */  daddu     $a0, $s0, $zero
 /* 8D31AC 80241C9C 3C05FD05 */  lui       $a1, 0xfd05

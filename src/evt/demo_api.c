@@ -3,7 +3,7 @@
 INCLUDE_ASM(ApiStatus, "evt/demo_api", SetSpriteShading, Evt* script, s32 isInitialCall);
 
 ApiStatus EnableSpriteShading(Evt* script, s32 isInitialCall) {
-    if (get_variable(script, *script->ptrReadPos) != 0) {
+    if (evt_get_variable(script, *script->ptrReadPos) != 0) {
         *D_80151328 |= 1;
     } else {
         *D_80151328 &= ~1;
@@ -12,22 +12,22 @@ ApiStatus EnableSpriteShading(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus GetDemoState(Evt* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, gGameStatusPtr->demoState);
+    evt_set_variable(script, *script->ptrReadPos, gGameStatusPtr->demoState);
     return ApiStatus_DONE2;
 }
 
 ApiStatus DemoPressButton(Evt* script, s32 isInitialCall) {
-    gGameStatusPtr->demoButtonInput |= get_variable(script, *script->ptrReadPos);
+    gGameStatusPtr->demoButtonInput |= evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus DemoReleaseButton(Evt* script, s32 isInitialCall) {
-    gGameStatusPtr->demoButtonInput &= ~get_variable(script, *script->ptrReadPos);
+    gGameStatusPtr->demoButtonInput &= ~evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus DemoSetButtons(Evt* script, s32 isInitialCall) {
-    gGameStatusPtr->demoButtonInput = get_variable(script, *script->ptrReadPos);
+    gGameStatusPtr->demoButtonInput = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -37,8 +37,8 @@ ApiStatus DemoJoystickRadial(Evt* script, s32 isInitialCall) {
     f32 b;
     s32* thisPos = script->ptrReadPos;
 
-    a = get_float_variable(script, *thisPos++);
-    b = get_float_variable(script, *thisPos++);
+    a = evt_get_float_variable(script, *thisPos++);
+    b = evt_get_float_variable(script, *thisPos++);
 
     (*gameStatus)->demoStickX = a * sin_deg(b);
     (*gameStatus)->demoStickY = a * cos_deg(b);
@@ -52,8 +52,8 @@ ApiStatus DemoJoystickXY(Evt* script, s32 isInitialCall) {
     f32 y;
     s32* thisPos = script->ptrReadPos;
 
-    x = get_float_variable(script, *thisPos++);
-    y = get_float_variable(script, *thisPos++);
+    x = evt_get_float_variable(script, *thisPos++);
+    y = evt_get_float_variable(script, *thisPos++);
 
     (*gameStatus)->demoStickX = x;
     (*gameStatus)->demoStickY = y;

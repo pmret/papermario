@@ -139,7 +139,7 @@ glabel func_802402BC_AF1F1C
 /* AF210C 802404AC 8E65008C */  lw        $a1, 0x8c($s3)
 /* AF2110 802404B0 0000202D */  daddu     $a0, $zero, $zero
 /* AF2114 802404B4 00A62821 */  addu      $a1, $a1, $a2
-/* AF2118 802404B8 0C0B2026 */  jal       set_variable
+/* AF2118 802404B8 0C0B2026 */  jal       evt_set_variable
 /* AF211C 802404BC 24060001 */   addiu    $a2, $zero, 1
 .L802404C0:
 /* AF2120 802404C0 8E640078 */  lw        $a0, 0x78($s3)

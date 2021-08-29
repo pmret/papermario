@@ -5,7 +5,7 @@ glabel func_80282594
 /* 7E3414 80282594 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 7E3418 80282598 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 7E341C 8028259C 8C82000C */  lw        $v0, 0xc($a0)
-/* 7E3420 802825A0 0C0B210B */  jal       get_float_variable
+/* 7E3420 802825A0 0C0B210B */  jal       evt_get_float_variable
 /* 7E3424 802825A4 8C450000 */   lw       $a1, ($v0)
 /* 7E3428 802825A8 46000086 */  mov.s     $f2, $f0
 /* 7E342C 802825AC 3C02800B */  lui       $v0, %hi(gCameras)

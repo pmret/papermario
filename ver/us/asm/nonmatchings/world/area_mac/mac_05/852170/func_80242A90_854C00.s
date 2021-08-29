@@ -115,15 +115,15 @@ glabel L80242B68_854CD8
 /* 854D80 80242C10 0240202D */  daddu     $a0, $s2, $zero
 .L80242C14:
 /* 854D84 80242C14 4406C000 */  mfc1      $a2, $f24
-/* 854D88 80242C18 0C0B2190 */  jal       set_float_variable
+/* 854D88 80242C18 0C0B2190 */  jal       evt_set_float_variable
 /* 854D8C 80242C1C 0260282D */   daddu    $a1, $s3, $zero
 /* 854D90 80242C20 0240202D */  daddu     $a0, $s2, $zero
 /* 854D94 80242C24 4406B000 */  mfc1      $a2, $f22
-/* 854D98 80242C28 0C0B2190 */  jal       set_float_variable
+/* 854D98 80242C28 0C0B2190 */  jal       evt_set_float_variable
 /* 854D9C 80242C2C 0280282D */   daddu    $a1, $s4, $zero
 /* 854DA0 80242C30 0240202D */  daddu     $a0, $s2, $zero
 /* 854DA4 80242C34 4406A000 */  mfc1      $a2, $f20
-/* 854DA8 80242C38 0C0B2190 */  jal       set_float_variable
+/* 854DA8 80242C38 0C0B2190 */  jal       evt_set_float_variable
 /* 854DAC 80242C3C 02A0282D */   daddu    $a1, $s5, $zero
 /* 854DB0 80242C40 8FBF0028 */  lw        $ra, 0x28($sp)
 /* 854DB4 80242C44 8FB50024 */  lw        $s5, 0x24($sp)

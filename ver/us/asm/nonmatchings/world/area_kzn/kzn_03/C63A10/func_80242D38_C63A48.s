@@ -35,7 +35,7 @@ glabel func_80242D38_C63A48
 /* C63A9C 80242D8C 04C00004 */  bltz      $a2, .L80242DA0
 /* C63AA0 80242D90 00000000 */   nop
 /* C63AA4 80242D94 3C05FD05 */  lui       $a1, 0xfd05
-/* C63AA8 80242D98 0C0B2026 */  jal       set_variable
+/* C63AA8 80242D98 0C0B2026 */  jal       evt_set_variable
 /* C63AAC 80242D9C 34A50F89 */   ori      $a1, $a1, 0xf89
 .L80242DA0:
 /* C63AB0 80242DA0 8FBF0010 */  lw        $ra, 0x10($sp)

@@ -136,7 +136,7 @@ glabel func_802400B0_ACE1F0
 /* ACE3C0 80240280 0260202D */  daddu     $a0, $s3, $zero
 .L80240284:
 /* ACE3C4 80240284 0280282D */  daddu     $a1, $s4, $zero
-/* ACE3C8 80240288 0C0B2026 */  jal       set_variable
+/* ACE3C8 80240288 0C0B2026 */  jal       evt_set_variable
 /* ACE3CC 8024028C 0220302D */   daddu    $a2, $s1, $zero
 /* ACE3D0 80240290 8FBF0044 */  lw        $ra, 0x44($sp)
 /* ACE3D4 80240294 8FB40040 */  lw        $s4, 0x40($sp)

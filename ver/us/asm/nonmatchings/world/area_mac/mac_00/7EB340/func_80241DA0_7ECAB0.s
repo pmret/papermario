@@ -16,7 +16,7 @@ glabel func_80241DA0_7ECAB0
 /* 7ECAD8 80241DC8 8E250010 */  lw        $a1, 0x10($s1)
 /* 7ECADC 80241DCC 26310014 */  addiu     $s1, $s1, 0x14
 /* 7ECAE0 80241DD0 0240202D */  daddu     $a0, $s2, $zero
-/* 7ECAE4 80241DD4 0C0B2026 */  jal       set_variable
+/* 7ECAE4 80241DD4 0C0B2026 */  jal       evt_set_variable
 /* 7ECAE8 80241DD8 0000302D */   daddu    $a2, $zero, $zero
 /* 7ECAEC 80241DDC 2E020024 */  sltiu     $v0, $s0, 0x24
 /* 7ECAF0 80241DE0 1440FFF9 */  bnez      $v0, .L80241DC8

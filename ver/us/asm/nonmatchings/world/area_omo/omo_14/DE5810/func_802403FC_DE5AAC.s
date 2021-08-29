@@ -17,11 +17,11 @@ glabel func_802403FC_DE5AAC
 /* DE5ADC 8024042C 8E050000 */  lw        $a1, ($s0)
 /* DE5AE0 80240430 26100004 */  addiu     $s0, $s0, 4
 /* DE5AE4 80240434 0220202D */  daddu     $a0, $s1, $zero
-/* DE5AE8 80240438 0C0B210B */  jal       get_float_variable
+/* DE5AE8 80240438 0C0B210B */  jal       evt_get_float_variable
 /* DE5AEC 8024043C 0040902D */   daddu    $s2, $v0, $zero
 /* DE5AF0 80240440 0220202D */  daddu     $a0, $s1, $zero
 /* DE5AF4 80240444 8E050000 */  lw        $a1, ($s0)
-/* DE5AF8 80240448 0C0B210B */  jal       get_float_variable
+/* DE5AF8 80240448 0C0B210B */  jal       evt_get_float_variable
 /* DE5AFC 8024044C 46000586 */   mov.s    $f22, $f0
 /* DE5B00 80240450 46000506 */  mov.s     $f20, $f0
 /* DE5B04 80240454 C64C0038 */  lwc1      $f12, 0x38($s2)

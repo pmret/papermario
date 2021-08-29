@@ -7,7 +7,7 @@ glabel func_802405BC_AFE0FC
 /* AFE104 802405C4 8C82000C */  lw        $v0, 0xc($a0)
 /* AFE108 802405C8 3C068011 */  lui       $a2, %hi(gPlayerStatus+0xC)
 /* AFE10C 802405CC 80C6EFD4 */  lb        $a2, %lo(gPlayerStatus+0xC)($a2)
-/* AFE110 802405D0 0C0B2026 */  jal       set_variable
+/* AFE110 802405D0 0C0B2026 */  jal       evt_set_variable
 /* AFE114 802405D4 8C450000 */   lw       $a1, ($v0)
 /* AFE118 802405D8 8FBF0010 */  lw        $ra, 0x10($sp)
 /* AFE11C 802405DC 24020002 */  addiu     $v0, $zero, 2

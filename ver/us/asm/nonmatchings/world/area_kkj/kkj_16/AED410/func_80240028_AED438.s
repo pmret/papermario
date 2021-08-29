@@ -5,7 +5,7 @@ glabel func_80240028_AED438
 /* AED438 80240028 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* AED43C 8024002C AFBF0010 */  sw        $ra, 0x10($sp)
 /* AED440 80240030 8C82000C */  lw        $v0, 0xc($a0)
-/* AED444 80240034 0C0B210B */  jal       get_float_variable
+/* AED444 80240034 0C0B210B */  jal       evt_get_float_variable
 /* AED448 80240038 8C450000 */   lw       $a1, ($v0)
 /* AED44C 8024003C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* AED450 80240040 4600008D */  trunc.w.s $f2, $f0

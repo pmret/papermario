@@ -21,21 +21,21 @@ glabel func_802405FC_DE8D6C
 /* DE8DAC 8024063C AE020038 */  sw        $v0, 0x38($s0)
 /* DE8DB0 80240640 8E250000 */  lw        $a1, ($s1)
 /* DE8DB4 80240644 26310004 */  addiu     $s1, $s1, 4
-/* DE8DB8 80240648 0C0B210B */  jal       get_float_variable
+/* DE8DB8 80240648 0C0B210B */  jal       evt_get_float_variable
 /* DE8DBC 8024064C 0240202D */   daddu    $a0, $s2, $zero
 /* DE8DC0 80240650 E6000018 */  swc1      $f0, 0x18($s0)
 /* DE8DC4 80240654 8E250000 */  lw        $a1, ($s1)
 /* DE8DC8 80240658 26310004 */  addiu     $s1, $s1, 4
-/* DE8DCC 8024065C 0C0B210B */  jal       get_float_variable
+/* DE8DCC 8024065C 0C0B210B */  jal       evt_get_float_variable
 /* DE8DD0 80240660 0240202D */   daddu    $a0, $s2, $zero
 /* DE8DD4 80240664 E6000024 */  swc1      $f0, 0x24($s0)
 /* DE8DD8 80240668 8E250000 */  lw        $a1, ($s1)
 /* DE8DDC 8024066C 26310004 */  addiu     $s1, $s1, 4
-/* DE8DE0 80240670 0C0B210B */  jal       get_float_variable
+/* DE8DE0 80240670 0C0B210B */  jal       evt_get_float_variable
 /* DE8DE4 80240674 0240202D */   daddu    $a0, $s2, $zero
 /* DE8DE8 80240678 E6000020 */  swc1      $f0, 0x20($s0)
 /* DE8DEC 8024067C 8E250000 */  lw        $a1, ($s1)
-/* DE8DF0 80240680 0C0B210B */  jal       get_float_variable
+/* DE8DF0 80240680 0C0B210B */  jal       evt_get_float_variable
 /* DE8DF4 80240684 0240202D */   daddu    $a0, $s2, $zero
 /* DE8DF8 80240688 3C013F80 */  lui       $at, 0x3f80
 /* DE8DFC 8024068C 44811000 */  mtc1      $at, $f2

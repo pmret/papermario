@@ -17,7 +17,7 @@ glabel func_802401B0_926BA0
 /* 926BD0 802401E0 3C05FE36 */  lui       $a1, 0xfe36
 /* 926BD4 802401E4 34A53C80 */  ori       $a1, $a1, 0x3c80
 /* 926BD8 802401E8 44060000 */  mfc1      $a2, $f0
-/* 926BDC 802401EC 0C0B2190 */  jal       set_float_variable
+/* 926BDC 802401EC 0C0B2190 */  jal       evt_set_float_variable
 /* 926BE0 802401F0 0200202D */   daddu    $a0, $s0, $zero
 /* 926BE4 802401F4 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 926BE8 802401F8 8FB00010 */  lw        $s0, 0x10($sp)

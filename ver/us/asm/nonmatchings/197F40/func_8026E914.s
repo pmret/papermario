@@ -13,11 +13,11 @@ glabel func_8026E914
 /* 19D214 8026E934 8E02000C */  lw        $v0, 0xc($s0)
 /* 19D218 8026E938 864601A4 */  lh        $a2, 0x1a4($s2)
 /* 19D21C 8026E93C 8C450000 */  lw        $a1, ($v0)
-/* 19D220 8026E940 0C0B2026 */  jal       set_variable
+/* 19D220 8026E940 0C0B2026 */  jal       evt_set_variable
 /* 19D224 8026E944 8C510004 */   lw       $s1, 4($v0)
 /* 19D228 8026E948 0200202D */  daddu     $a0, $s0, $zero
 /* 19D22C 8026E94C 824601A6 */  lb        $a2, 0x1a6($s2)
-/* 19D230 8026E950 0C0B2026 */  jal       set_variable
+/* 19D230 8026E950 0C0B2026 */  jal       evt_set_variable
 /* 19D234 8026E954 0220282D */   daddu    $a1, $s1, $zero
 /* 19D238 8026E958 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 19D23C 8026E95C 8FB20018 */  lw        $s2, 0x18($sp)

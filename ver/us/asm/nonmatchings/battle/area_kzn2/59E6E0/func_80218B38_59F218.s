@@ -16,7 +16,7 @@ glabel func_80218B38_59F218
 /* 59F244 80218B64 3C068022 */  lui       $a2, %hi(D_80222D48_5A9428)
 /* 59F248 80218B68 00C23021 */  addu      $a2, $a2, $v0
 /* 59F24C 80218B6C 8CC62D48 */  lw        $a2, %lo(D_80222D48_5A9428)($a2)
-/* 59F250 80218B70 0C0B2026 */  jal       set_variable
+/* 59F250 80218B70 0C0B2026 */  jal       evt_set_variable
 /* 59F254 80218B74 0220202D */   daddu    $a0, $s1, $zero
 /* 59F258 80218B78 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 59F25C 80218B7C 8FB10014 */  lw        $s1, 0x14($sp)

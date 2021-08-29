@@ -10,12 +10,12 @@ glabel func_802400E4_DB79F4
 /* DB7A08 802400F8 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* DB7A0C 802400FC 8E30000C */  lw        $s0, 0xc($s1)
 /* DB7A10 80240100 8E050000 */  lw        $a1, ($s0)
-/* DB7A14 80240104 0C0B210B */  jal       get_float_variable
+/* DB7A14 80240104 0C0B210B */  jal       evt_get_float_variable
 /* DB7A18 80240108 26100004 */   addiu    $s0, $s0, 4
 /* DB7A1C 8024010C 8E050000 */  lw        $a1, ($s0)
 /* DB7A20 80240110 26100004 */  addiu     $s0, $s0, 4
 /* DB7A24 80240114 0220202D */  daddu     $a0, $s1, $zero
-/* DB7A28 80240118 0C0B210B */  jal       get_float_variable
+/* DB7A28 80240118 0C0B210B */  jal       evt_get_float_variable
 /* DB7A2C 8024011C 46000506 */   mov.s    $f20, $f0
 /* DB7A30 80240120 4614003C */  c.lt.s    $f0, $f20
 /* DB7A34 80240124 00000000 */  nop
@@ -28,7 +28,7 @@ glabel func_802400E4_DB79F4
 /* DB7A4C 8024013C 8E050000 */  lw        $a1, ($s0)
 /* DB7A50 80240140 0000302D */  daddu     $a2, $zero, $zero
 .L80240144:
-/* DB7A54 80240144 0C0B2026 */  jal       set_variable
+/* DB7A54 80240144 0C0B2026 */  jal       evt_set_variable
 /* DB7A58 80240148 00000000 */   nop
 /* DB7A5C 8024014C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* DB7A60 80240150 8FB10014 */  lw        $s1, 0x14($sp)

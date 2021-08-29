@@ -47,11 +47,11 @@ glabel func_802186D0_69F8D0
 /* 69F978 80218778 4482C000 */  mtc1      $v0, $f24
 /* 69F97C 8021877C 00000000 */  nop
 /* 69F980 80218780 4680C620 */  cvt.s.w   $f24, $f24
-/* 69F984 80218784 0C0B210B */  jal       get_float_variable
+/* 69F984 80218784 0C0B210B */  jal       evt_get_float_variable
 /* 69F988 80218788 0220202D */   daddu    $a0, $s1, $zero
 /* 69F98C 8021878C 0220202D */  daddu     $a0, $s1, $zero
 /* 69F990 80218790 8E050000 */  lw        $a1, ($s0)
-/* 69F994 80218794 0C0B210B */  jal       get_float_variable
+/* 69F994 80218794 0C0B210B */  jal       evt_get_float_variable
 /* 69F998 80218798 46000506 */   mov.s    $f20, $f0
 /* 69F99C 8021879C 240400B4 */  addiu     $a0, $zero, 0xb4
 /* 69F9A0 802187A0 0C00AB39 */  jal       heap_malloc

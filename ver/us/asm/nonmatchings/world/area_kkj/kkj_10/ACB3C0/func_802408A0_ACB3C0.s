@@ -136,7 +136,7 @@ glabel func_802408A0_ACB3C0
 /* ACB590 80240A70 0260202D */  daddu     $a0, $s3, $zero
 .L80240A74:
 /* ACB594 80240A74 0280282D */  daddu     $a1, $s4, $zero
-/* ACB598 80240A78 0C0B2026 */  jal       set_variable
+/* ACB598 80240A78 0C0B2026 */  jal       evt_set_variable
 /* ACB59C 80240A7C 0220302D */   daddu    $a2, $s1, $zero
 /* ACB5A0 80240A80 8FBF0044 */  lw        $ra, 0x44($sp)
 /* ACB5A4 80240A84 8FB40040 */  lw        $s4, 0x40($sp)

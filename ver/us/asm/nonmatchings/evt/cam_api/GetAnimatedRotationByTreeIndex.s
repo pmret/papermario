@@ -40,19 +40,19 @@ glabel GetAnimatedRotationByTreeIndex
 /* F2334 802CD984 C600009C */  lwc1      $f0, 0x9c($s0)
 /* F2338 802CD988 4600008D */  trunc.w.s $f2, $f0
 /* F233C 802CD98C 44061000 */  mfc1      $a2, $f2
-/* F2340 802CD990 0C0B2026 */  jal       set_variable
+/* F2340 802CD990 0C0B2026 */  jal       evt_set_variable
 /* F2344 802CD994 0260282D */   daddu    $a1, $s3, $zero
 /* F2348 802CD998 0240202D */  daddu     $a0, $s2, $zero
 /* F234C 802CD99C C60000A0 */  lwc1      $f0, 0xa0($s0)
 /* F2350 802CD9A0 4600008D */  trunc.w.s $f2, $f0
 /* F2354 802CD9A4 44061000 */  mfc1      $a2, $f2
-/* F2358 802CD9A8 0C0B2026 */  jal       set_variable
+/* F2358 802CD9A8 0C0B2026 */  jal       evt_set_variable
 /* F235C 802CD9AC 0280282D */   daddu    $a1, $s4, $zero
 /* F2360 802CD9B0 0240202D */  daddu     $a0, $s2, $zero
 /* F2364 802CD9B4 C60000A4 */  lwc1      $f0, 0xa4($s0)
 /* F2368 802CD9B8 4600008D */  trunc.w.s $f2, $f0
 /* F236C 802CD9BC 44061000 */  mfc1      $a2, $f2
-/* F2370 802CD9C0 0C0B2026 */  jal       set_variable
+/* F2370 802CD9C0 0C0B2026 */  jal       evt_set_variable
 /* F2374 802CD9C4 02A0282D */   daddu    $a1, $s5, $zero
 /* F2378 802CD9C8 8FBF0028 */  lw        $ra, 0x28($sp)
 /* F237C 802CD9CC 8FB50024 */  lw        $s5, 0x24($sp)

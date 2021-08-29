@@ -146,7 +146,7 @@ glabel PartnerDamageEnemy
 /* 1AE890 8027FFB0 0440000B */  bltz      $v0, .L8027FFE0
 /* 1AE894 8027FFB4 0240202D */   daddu    $a0, $s2, $zero
 /* 1AE898 8027FFB8 0280282D */  daddu     $a1, $s4, $zero
-/* 1AE89C 8027FFBC 0C0B2026 */  jal       set_variable
+/* 1AE89C 8027FFBC 0C0B2026 */  jal       evt_set_variable
 /* 1AE8A0 8027FFC0 0040302D */   daddu    $a2, $v0, $zero
 /* 1AE8A4 8027FFC4 0C0B1069 */  jal       does_script_exist_by_ref
 /* 1AE8A8 8027FFC8 0240202D */   daddu    $a0, $s2, $zero

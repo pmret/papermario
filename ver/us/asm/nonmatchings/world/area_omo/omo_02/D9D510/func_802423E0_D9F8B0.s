@@ -280,7 +280,7 @@ glabel func_802423E0_D9F8B0
 /* D9FC98 802427C8 AE220000 */  sw        $v0, ($s1)
 /* D9FC9C 802427CC AC800070 */  sw        $zero, 0x70($a0)
 .L802427D0:
-/* D9FCA0 802427D0 0C0B2026 */  jal       set_variable
+/* D9FCA0 802427D0 0C0B2026 */  jal       evt_set_variable
 /* D9FCA4 802427D4 00000000 */   nop
 /* D9FCA8 802427D8 08090A04 */  j         .L80242810
 /* D9FCAC 802427DC 24020002 */   addiu    $v0, $zero, 2

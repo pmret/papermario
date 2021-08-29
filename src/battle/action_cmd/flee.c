@@ -24,7 +24,7 @@ ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     battleStatus->unk_434 = &D_80294200;
     battleStatus->unk_86 = 127;
     func_80268858();
-    actionCommandStatus->unk_5A = get_variable(script, *args++);
+    actionCommandStatus->unk_5A = evt_get_variable(script, *args++);
     actionCommandStatus->actionCommandID = ACTION_COMMAND_FLEE;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
@@ -82,9 +82,9 @@ ApiStatus func_802A92A0_422D70(Evt* script) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     func_80268858();
-    actionCommandStatus->unk_4E = get_variable(script, *args++);
-    actionCommandStatus->unk_52 = get_variable(script, *args++);
-    actionCommandStatus->unk_50 = get_variable(script, *args++);
+    actionCommandStatus->unk_4E = evt_get_variable(script, *args++);
+    actionCommandStatus->unk_52 = evt_get_variable(script, *args++);
+    actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
     actionCommandStatus->unk_60 = 0;
     battleStatus->actionSuccess = 0;

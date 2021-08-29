@@ -143,7 +143,7 @@ glabel PlayerTestEnemy
 /* 1A31C0 802748E0 04400006 */  bltz      $v0, .L802748FC
 /* 1A31C4 802748E4 0240202D */   daddu    $a0, $s2, $zero
 /* 1A31C8 802748E8 0260282D */  daddu     $a1, $s3, $zero
-/* 1A31CC 802748EC 0C0B2026 */  jal       set_variable
+/* 1A31CC 802748EC 0C0B2026 */  jal       evt_set_variable
 /* 1A31D0 802748F0 0040302D */   daddu    $a2, $v0, $zero
 /* 1A31D4 802748F4 0809D240 */  j         .L80274900
 /* 1A31D8 802748F8 24020002 */   addiu    $v0, $zero, 2

@@ -147,7 +147,7 @@ glabel PlayerPowerBounceEnemy
 /* 1A2F80 802746A0 0440000B */  bltz      $v0, .L802746D0
 /* 1A2F84 802746A4 0240202D */   daddu    $a0, $s2, $zero
 /* 1A2F88 802746A8 0260282D */  daddu     $a1, $s3, $zero
-/* 1A2F8C 802746AC 0C0B2026 */  jal       set_variable
+/* 1A2F8C 802746AC 0C0B2026 */  jal       evt_set_variable
 /* 1A2F90 802746B0 0040302D */   daddu    $a2, $v0, $zero
 /* 1A2F94 802746B4 0C0B1069 */  jal       does_script_exist_by_ref
 /* 1A2F98 802746B8 0240202D */   daddu    $a0, $s2, $zero

@@ -9,7 +9,7 @@ extern s32 D_8008EF20[11][4];
 #include "world/common/UnkFunc17.inc.c"
 
 ApiStatus N(func_8024003C_CAED7C)(Evt* script, s32 isInitialCall) {
-    entity_upgrade_block_hide_content(get_variable(script, *script->ptrReadPos));
+    entity_upgrade_block_hide_content(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
@@ -155,7 +155,7 @@ ApiStatus N(func_80240600_CAF340)(Evt* script, s32 isInitialCall) {
         script->userData = (N(UserData)*)general_heap_malloc(0x68);
         scriptPtr = (N(UserData)*)script->userData;
 
-        scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
+        scriptPtr->unk_5C = get_entity_by_index(evt_get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
             userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,

@@ -3,10 +3,10 @@
 ApiStatus MakeLerp(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    script->varTable[0xC] = get_variable(script, *ptrReadPos++); // start
-    script->varTable[0xD] = get_variable(script, *ptrReadPos++); // end
-    script->varTable[0xF] = get_variable(script, *ptrReadPos++); // duration
-    script->varTable[0xB] = get_variable(script, *ptrReadPos++); // easing type
+    script->varTable[0xC] = evt_get_variable(script, *ptrReadPos++); // start
+    script->varTable[0xD] = evt_get_variable(script, *ptrReadPos++); // end
+    script->varTable[0xF] = evt_get_variable(script, *ptrReadPos++); // duration
+    script->varTable[0xB] = evt_get_variable(script, *ptrReadPos++); // easing type
     script->varTable[0xE] = 0; // elapsed
 
     return ApiStatus_DONE2;
@@ -34,10 +34,10 @@ ApiStatus UpdateLerp(Evt* script, s32 isInitialCall) {
 ApiStatus RandInt(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    s32 max = get_variable(script, *ptrReadPos++);
+    s32 max = evt_get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
 
-    set_variable(script, outVar, rand_int(max));
+    evt_set_variable(script, outVar, rand_int(max));
 
     return ApiStatus_DONE2;
 }
@@ -45,13 +45,13 @@ ApiStatus RandInt(Evt* script, s32 isInitialCall) {
 ApiStatus GetAngleBetweenNPCs(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    NpcID aID = get_variable(script, *ptrReadPos++);
-    NpcID bID = get_variable(script, *ptrReadPos++);
+    NpcID aID = evt_get_variable(script, *ptrReadPos++);
+    NpcID bID = evt_get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
 
     Npc* a = resolve_npc(script, aID);
     Npc* b = resolve_npc(script, bID);
-    set_variable(script, outVar, atan2(a->pos.x, a->pos.z, b->pos.x, b->pos.z));
+    evt_set_variable(script, outVar, atan2(a->pos.x, a->pos.z, b->pos.x, b->pos.z));
 
     return ApiStatus_DONE2;
 }
@@ -60,11 +60,11 @@ ApiStatus GetAngleToNPC(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    NpcID npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
 
     Npc* npc = resolve_npc(script, npcID);
-    set_variable(script, outVar, atan2(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z));
+    evt_set_variable(script, outVar, atan2(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z));
 
     return ApiStatus_DONE2;
 }
@@ -73,11 +73,11 @@ ApiStatus GetAngleToPlayer(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    NpcID npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
 
     Npc* npc = resolve_npc(script, npcID);
-    set_variable(script, outVar, atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z));
+    evt_set_variable(script, outVar, atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z));
 
     return ApiStatus_DONE2;
 }
@@ -93,9 +93,9 @@ ApiStatus AwaitPlayerApproach(Evt* script, s32 isInitialCall) {
     f32 distance;
 
     if (isInitialCall) {
-        *targetX = get_variable(script, *ptrReadPos++);
-        *targetZ = get_variable(script, *ptrReadPos++);
-        *distanceRequired = get_variable(script, *ptrReadPos++);
+        *targetX = evt_get_variable(script, *ptrReadPos++);
+        *targetZ = evt_get_variable(script, *ptrReadPos++);
+        *distanceRequired = evt_get_variable(script, *ptrReadPos++);
     }
 
     distance = dist2D(
@@ -122,9 +122,9 @@ ApiStatus IsPlayerWithin(Evt* script, s32 isInitialCall) {
     Bytecode outVar = EVT_VAR(0);
 
     if (isInitialCall) {
-        *targetX = get_variable(script, *ptrReadPos++);
-        *targetZ = get_variable(script, *ptrReadPos++);
-        *distanceRequired = get_variable(script, *ptrReadPos++);
+        *targetX = evt_get_variable(script, *ptrReadPos++);
+        *targetZ = evt_get_variable(script, *ptrReadPos++);
+        *distanceRequired = evt_get_variable(script, *ptrReadPos++);
         outVar = *ptrReadPos++;
     }
 
@@ -133,9 +133,9 @@ ApiStatus IsPlayerWithin(Evt* script, s32 isInitialCall) {
                    *targetX, *targetZ
                );
 
-    set_variable(script, outVar, 0);
+    evt_set_variable(script, outVar, 0);
     if (distance < *distanceRequired) {
-        set_variable(script, outVar, 1);
+        evt_set_variable(script, outVar, 1);
     }
 
     return ApiStatus_DONE2;
@@ -152,9 +152,9 @@ ApiStatus AwaitPlayerLeave(Evt* script, s32 isInitialCall) {
     f32 distance;
 
     if (isInitialCall) {
-        *targetX = get_variable(script, *ptrReadPos++);
-        *targetZ = get_variable(script, *ptrReadPos++);
-        *distanceRequired = get_variable(script, *ptrReadPos++);
+        *targetX = evt_get_variable(script, *ptrReadPos++);
+        *targetZ = evt_get_variable(script, *ptrReadPos++);
+        *distanceRequired = evt_get_variable(script, *ptrReadPos++);
     }
 
     distance = dist2D(
@@ -173,17 +173,17 @@ ApiStatus AddVectorPolar(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
     Bytecode xVar = *ptrReadPos++;
-    f32 x = get_float_variable(script, xVar);
+    f32 x = evt_get_float_variable(script, xVar);
 
     Bytecode yVar = *ptrReadPos++;
-    f32 y = get_float_variable(script, yVar);
+    f32 y = evt_get_float_variable(script, yVar);
 
-    f32 r = get_float_variable(script, *ptrReadPos++);
+    f32 r = evt_get_float_variable(script, *ptrReadPos++);
 
-    add_vec2D_polar(&x, &y, r, get_float_variable(script, *ptrReadPos++));
+    add_vec2D_polar(&x, &y, r, evt_get_float_variable(script, *ptrReadPos++));
 
-    set_float_variable(script, xVar, x);
-    set_float_variable(script, yVar, y);
+    evt_set_float_variable(script, xVar, x);
+    evt_set_float_variable(script, yVar, y);
 
     return ApiStatus_DONE2;
 }
@@ -244,7 +244,7 @@ ApiStatus func_802D4C4C(Evt* script, s32 initialCall) {
 }
 
 ApiStatus func_802D4CC4(Evt* script, s32 initialCall) {
-    s32 value = get_variable(script, *script->ptrReadPos);
+    s32 value = evt_get_variable(script, *script->ptrReadPos);
     if (value < 0) {
         set_screen_overlay_params_back(255, -1.0f);
     } else {
@@ -255,7 +255,7 @@ ApiStatus func_802D4CC4(Evt* script, s32 initialCall) {
 }
 
 ApiStatus func_802D4D14(Evt* script, s32 initialCall) {
-    s32 value = get_float_variable(script, *script->ptrReadPos);
+    s32 value = evt_get_float_variable(script, *script->ptrReadPos);
 
     set_screen_overlay_center(0, 0, 0xC, 0x14);
     set_screen_overlay_center(0, 1, 0x134, 0xDC);
@@ -353,10 +353,10 @@ INCLUDE_ASM(s32, "evt/f8f60_len_1560", get_path_position);
 
 s32 LoadPath(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 time = get_variable(script, *args++);
-    s32 vectorList = get_variable(script, *args++);
-    s32 numVectors = get_variable(script, *args++);
-    s32 easingType = get_variable(script, *args++);
+    s32 time = evt_get_variable(script, *args++);
+    s32 vectorList = evt_get_variable(script, *args++);
+    s32 numVectors = evt_get_variable(script, *args++);
+    s32 easingType = evt_get_variable(script, *args++);
     Path* path = heap_malloc(sizeof(Path));
 
     script->varTable[15] = path;
@@ -379,25 +379,25 @@ ApiStatus GetDist2D(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
     Bytecode outVar = *ptrReadPos++;
-    set_float_variable(script, outVar, dist2D(
-                           get_float_variable(script, *ptrReadPos++),
-                           get_float_variable(script, *ptrReadPos++),
-                           get_float_variable(script, *ptrReadPos++),
-                           get_float_variable(script, *ptrReadPos++)
+    evt_set_float_variable(script, outVar, dist2D(
+                           evt_get_float_variable(script, *ptrReadPos++),
+                           evt_get_float_variable(script, *ptrReadPos++),
+                           evt_get_float_variable(script, *ptrReadPos++),
+                           evt_get_float_variable(script, *ptrReadPos++)
                        ));
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetTimeFreezeMode(Evt* script, s32 initialCall) {
-    set_time_freeze_mode(get_variable(script, *script->ptrReadPos));
+    set_time_freeze_mode(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
 ApiStatus ModifyGlobalOverrideFlags(Evt* script, s32 initialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    s32 setMode = get_variable(script,  *ptrReadPos++);
-    s32 flags = get_variable(script, *ptrReadPos++);
+    s32 setMode = evt_get_variable(script,  *ptrReadPos++);
+    s32 flags = evt_get_variable(script, *ptrReadPos++);
 
     if (setMode) {
         gOverrideFlags |= flags;
@@ -411,9 +411,9 @@ ApiStatus ModifyGlobalOverrideFlags(Evt* script, s32 initialCall) {
 ApiStatus SetValueByRef(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    s32 dest = get_variable(script, *ptrReadPos++); /* Reference */
-    s32 src = get_variable(script, *ptrReadPos++);
-    set_variable(script, dest, src);
+    s32 dest = evt_get_variable(script, *ptrReadPos++); /* Reference */
+    s32 src = evt_get_variable(script, *ptrReadPos++);
+    evt_set_variable(script, dest, src);
 
     return ApiStatus_DONE2;
 }
@@ -421,16 +421,16 @@ ApiStatus SetValueByRef(Evt* script, s32 isInitialCall) {
 ApiStatus GetValueByRef(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    s32 src = get_variable(script, *ptrReadPos++); /* Reference */
+    s32 src = evt_get_variable(script, *ptrReadPos++); /* Reference */
     Bytecode dest = *ptrReadPos++;
 
-    set_variable(script, dest, get_variable(script, src));
+    evt_set_variable(script, dest, evt_get_variable(script, src));
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus EnableStatusMenu(Evt* script, s32 isInitialCall) {
-    if (get_variable(script, *script->ptrReadPos) != 0) {
+    if (evt_get_variable(script, *script->ptrReadPos) != 0) {
         decrement_status_menu_disabled();
     } else {
         increment_status_menu_disabled();
@@ -440,7 +440,7 @@ ApiStatus EnableStatusMenu(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus ShowStatusMenu(Evt* script, s32 isInitialCall) {
-    if (get_variable(script, *script->ptrReadPos) != 0) {
+    if (evt_get_variable(script, *script->ptrReadPos) != 0) {
         func_800E9894();
         close_status_menu();
     } else {
@@ -451,7 +451,7 @@ ApiStatus ShowStatusMenu(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetGameMode(Evt* script, s32 isInitialCall) {
-    s16 mode = get_variable(script, *script->ptrReadPos);
+    s16 mode = evt_get_variable(script, *script->ptrReadPos);
 
     set_game_mode(mode);
 
@@ -461,7 +461,7 @@ ApiStatus SetGameMode(Evt* script, s32 isInitialCall) {
 ApiStatus ClampAngleInt(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    set_variable(script, *ptrReadPos, clamp_angle(get_variable(script, *ptrReadPos)));
+    evt_set_variable(script, *ptrReadPos, clamp_angle(evt_get_variable(script, *ptrReadPos)));
 
     return ApiStatus_DONE2;
 }
@@ -469,7 +469,7 @@ ApiStatus ClampAngleInt(Evt* script, s32 isInitialCall) {
 ApiStatus ClampAngleFloat(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    set_float_variable(script, *ptrReadPos, clamp_angle(get_float_variable(script, *ptrReadPos)));
+    evt_set_float_variable(script, *ptrReadPos, clamp_angle(evt_get_float_variable(script, *ptrReadPos)));
 
     return ApiStatus_DONE2;
 }

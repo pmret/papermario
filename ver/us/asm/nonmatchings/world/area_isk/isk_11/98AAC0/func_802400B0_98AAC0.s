@@ -19,7 +19,7 @@ glabel func_802400B0_98AAC0
 /* 98AAF8 802400E8 3C068008 */  lui       $a2, %hi(gItemTable)
 /* 98AAFC 802400EC 00C23021 */  addu      $a2, $a2, $v0
 /* 98AB00 802400F0 8CC678E0 */  lw        $a2, %lo(gItemTable)($a2)
-/* 98AB04 802400F4 0C0B2026 */  jal       set_variable
+/* 98AB04 802400F4 0C0B2026 */  jal       evt_set_variable
 /* 98AB08 802400F8 0220202D */   daddu    $a0, $s1, $zero
 /* 98AB0C 802400FC 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 98AB10 80240100 8FB10014 */  lw        $s1, 0x14($sp)

@@ -168,7 +168,7 @@ glabel ShowShopPurchaseDialog
 /* 7E1604 80280784 0000202D */  daddu     $a0, $zero, $zero
 /* 7E1608 80280788 3C05F840 */  lui       $a1, 0xf840
 /* 7E160C 8028078C 34A55CF0 */  ori       $a1, $a1, 0x5cf0
-/* 7E1610 80280790 0C0B2026 */  jal       set_variable
+/* 7E1610 80280790 0C0B2026 */  jal       evt_set_variable
 /* 7E1614 80280794 24060001 */   addiu    $a2, $zero, 1
 /* 7E1618 80280798 080A01EA */  j         .L802807A8
 /* 7E161C 8028079C 00000000 */   nop

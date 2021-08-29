@@ -57,7 +57,7 @@ glabel func_80242074_D3C644
 /* D3C710 80242140 0240202D */  daddu     $a0, $s2, $zero
 .L80242144:
 /* D3C714 80242144 8E250000 */  lw        $a1, ($s1)
-/* D3C718 80242148 0C0B2026 */  jal       set_variable
+/* D3C718 80242148 0C0B2026 */  jal       evt_set_variable
 /* D3C71C 8024214C 0200302D */   daddu    $a2, $s0, $zero
 /* D3C720 80242150 8FBF003C */  lw        $ra, 0x3c($sp)
 /* D3C724 80242154 8FB20038 */  lw        $s2, 0x38($sp)

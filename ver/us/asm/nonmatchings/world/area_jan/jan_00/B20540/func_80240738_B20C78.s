@@ -19,7 +19,7 @@ glabel func_80240738_B20C78
 .L8024076C:
 /* B20CAC 8024076C 8CC50000 */  lw        $a1, ($a2)
 /* B20CB0 80240770 3C068024 */  lui       $a2, %hi(D_80242430_B22970)
-/* B20CB4 80240774 0C0B2026 */  jal       set_variable
+/* B20CB4 80240774 0C0B2026 */  jal       evt_set_variable
 /* B20CB8 80240778 8CC62430 */   lw       $a2, %lo(D_80242430_B22970)($a2)
 /* B20CBC 8024077C 24020002 */  addiu     $v0, $zero, 2
 .L80240780:

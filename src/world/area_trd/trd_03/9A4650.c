@@ -15,11 +15,11 @@ ApiStatus func_80240000_9A4650(Evt* script, s32 isInitialCall) {
         stickX = 2;
     }
 
-    set_variable(script, *args, stickX);
+    evt_set_variable(script, *args, stickX);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetFrameCounter(Evt* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, gGameStatusPtr->frameCounter);
+    evt_set_variable(script, *script->ptrReadPos, gGameStatusPtr->frameCounter);
     return ApiStatus_DONE2;
 }

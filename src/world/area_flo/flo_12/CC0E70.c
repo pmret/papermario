@@ -503,7 +503,7 @@ ApiStatus N(func_802405C0_CC13F0)(Evt* script, s32 isInitialCall) {
 
     if (N(D_80241850_CC2680)) {
         N(D_80241850_CC2680) = FALSE;
-        set_variable(script, *args, N(D_80241854_CC2684));
+        evt_set_variable(script, *args, N(D_80241854_CC2684));
         return ApiStatus_DONE2;
     }
 
@@ -513,14 +513,14 @@ ApiStatus N(func_802405C0_CC13F0)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_80240614_CC1444)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    N(D_80241854_CC2684) = get_variable(script, *args);
+    N(D_80241854_CC2684) = evt_get_variable(script, *args);
     N(D_80241850_CC2680) = TRUE;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_8024064C_CC147C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

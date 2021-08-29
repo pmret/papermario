@@ -150,7 +150,7 @@ glabel PartnerPowerBounceEnemy
 /* 1AED5C 8028047C 0440000B */  bltz      $v0, .L802804AC
 /* 1AED60 80280480 0240202D */   daddu    $a0, $s2, $zero
 /* 1AED64 80280484 0280282D */  daddu     $a1, $s4, $zero
-/* 1AED68 80280488 0C0B2026 */  jal       set_variable
+/* 1AED68 80280488 0C0B2026 */  jal       evt_set_variable
 /* 1AED6C 8028048C 0040302D */   daddu    $a2, $v0, $zero
 /* 1AED70 80280490 0C0B1069 */  jal       does_script_exist_by_ref
 /* 1AED74 80280494 0240202D */   daddu    $a0, $s2, $zero

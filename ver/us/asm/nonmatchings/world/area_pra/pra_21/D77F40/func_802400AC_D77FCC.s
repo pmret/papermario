@@ -14,7 +14,7 @@ glabel func_802400AC_D77FCC
 /* D77FF0 802400D0 0040802D */   daddu    $s0, $v0, $zero
 /* D77FF4 802400D4 3C05FD05 */  lui       $a1, 0xfd05
 /* D77FF8 802400D8 34A50F80 */  ori       $a1, $a1, 0xf80
-/* D77FFC 802400DC 0C0B2026 */  jal       set_variable
+/* D77FFC 802400DC 0C0B2026 */  jal       evt_set_variable
 /* D78000 802400E0 0000302D */   daddu    $a2, $zero, $zero
 .L802400E4:
 /* D78004 802400E4 86030018 */  lh        $v1, 0x18($s0)
@@ -23,7 +23,7 @@ glabel func_802400AC_D77FCC
 /* D78010 802400F0 0220202D */   daddu    $a0, $s1, $zero
 /* D78014 802400F4 3C05FD05 */  lui       $a1, 0xfd05
 /* D78018 802400F8 34A50F80 */  ori       $a1, $a1, 0xf80
-/* D7801C 802400FC 0C0B2026 */  jal       set_variable
+/* D7801C 802400FC 0C0B2026 */  jal       evt_set_variable
 /* D78020 80240100 24060001 */   addiu    $a2, $zero, 1
 .L80240104:
 /* D78024 80240104 8FBF0018 */  lw        $ra, 0x18($sp)

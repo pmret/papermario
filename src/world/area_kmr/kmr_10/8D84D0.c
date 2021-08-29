@@ -35,7 +35,7 @@ ApiStatus N(func_80240000_8D84D0)(Evt* script, s32 isInitialCall) {
 // play_model_animation, and entity->unk_14 before we can tackle this
 ApiStatus func_802402BC_8D878C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Entity* entity = get_entity_by_index(get_variable(script, *args++));
+    Entity* entity = get_entity_by_index(evt_get_variable(script, *args++));
 
     if (entity == NULL) {
         return ApiStatus_BLOCK;

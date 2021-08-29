@@ -176,7 +176,7 @@ glabel func_8024031C_AED72C
 /* AED9B0 802405A0 02E0202D */  daddu     $a0, $s7, $zero
 .L802405A4:
 /* AED9B4 802405A4 03C0282D */  daddu     $a1, $fp, $zero
-/* AED9B8 802405A8 0C0B2026 */  jal       set_variable
+/* AED9B8 802405A8 0C0B2026 */  jal       evt_set_variable
 /* AED9BC 802405AC 0200302D */   daddu    $a2, $s0, $zero
 /* AED9C0 802405B0 8FBF0054 */  lw        $ra, 0x54($sp)
 /* AED9C4 802405B4 8FBE0050 */  lw        $fp, 0x50($sp)

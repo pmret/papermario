@@ -27,7 +27,7 @@ glabel GetDistanceToGoal
 /* 19D330 8026EA50 0220202D */  daddu     $a0, $s1, $zero
 /* 19D334 8026EA54 4600008D */  trunc.w.s $f2, $f0
 /* 19D338 8026EA58 44061000 */  mfc1      $a2, $f2
-/* 19D33C 8026EA5C 0C0B2026 */  jal       set_variable
+/* 19D33C 8026EA5C 0C0B2026 */  jal       evt_set_variable
 /* 19D340 8026EA60 0200282D */   daddu    $a1, $s0, $zero
 /* 19D344 8026EA64 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 19D348 8026EA68 8FB10014 */  lw        $s1, 0x14($sp)

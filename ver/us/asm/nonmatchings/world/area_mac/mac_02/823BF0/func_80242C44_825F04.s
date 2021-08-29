@@ -90,11 +90,11 @@ glabel func_80242C44_825F04
 .L80242D80:
 /* 826040 80242D80 0220202D */  daddu     $a0, $s1, $zero
 .L80242D84:
-/* 826044 80242D84 0C0B2026 */  jal       set_variable
+/* 826044 80242D84 0C0B2026 */  jal       evt_set_variable
 /* 826048 80242D88 0240282D */   daddu    $a1, $s2, $zero
 /* 82604C 80242D8C 0220202D */  daddu     $a0, $s1, $zero
 /* 826050 80242D90 0260282D */  daddu     $a1, $s3, $zero
-/* 826054 80242D94 0C0B2026 */  jal       set_variable
+/* 826054 80242D94 0C0B2026 */  jal       evt_set_variable
 /* 826058 80242D98 0200302D */   daddu    $a2, $s0, $zero
 /* 82605C 80242D9C 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 826060 80242DA0 8FB3001C */  lw        $s3, 0x1c($sp)

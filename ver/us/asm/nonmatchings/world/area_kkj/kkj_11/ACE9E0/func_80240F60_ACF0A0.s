@@ -67,17 +67,17 @@ glabel func_80240F60_ACF0A0
 /* ACF194 80241054 02A0282D */  daddu     $a1, $s5, $zero
 /* ACF198 80241058 C6540030 */  lwc1      $f20, 0x30($s2)
 /* ACF19C 8024105C 0280302D */  daddu     $a2, $s4, $zero
-/* ACF1A0 80241060 0C0B2026 */  jal       set_variable
+/* ACF1A0 80241060 0C0B2026 */  jal       evt_set_variable
 /* ACF1A4 80241064 4600A501 */   sub.s    $f20, $f20, $f0
 /* ACF1A8 80241068 0260202D */  daddu     $a0, $s3, $zero
 /* ACF1AC 8024106C 4600B08D */  trunc.w.s $f2, $f22
 /* ACF1B0 80241070 44061000 */  mfc1      $a2, $f2
-/* ACF1B4 80241074 0C0B2026 */  jal       set_variable
+/* ACF1B4 80241074 0C0B2026 */  jal       evt_set_variable
 /* ACF1B8 80241078 02C0282D */   daddu    $a1, $s6, $zero
 /* ACF1BC 8024107C 0260202D */  daddu     $a0, $s3, $zero
 /* ACF1C0 80241080 4600A08D */  trunc.w.s $f2, $f20
 /* ACF1C4 80241084 44061000 */  mfc1      $a2, $f2
-/* ACF1C8 80241088 0C0B2026 */  jal       set_variable
+/* ACF1C8 80241088 0C0B2026 */  jal       evt_set_variable
 /* ACF1CC 8024108C 02E0282D */   daddu    $a1, $s7, $zero
 .L80241090:
 /* ACF1D0 80241090 24020002 */  addiu     $v0, $zero, 2

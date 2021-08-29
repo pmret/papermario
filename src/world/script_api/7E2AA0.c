@@ -25,7 +25,7 @@ typedef struct {
 ApiStatus func_80281C20(Evt* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
 
-    func_800EF414(get_variable(script, *thisPos++), get_variable(script, *thisPos++));
+    func_800EF414(evt_get_variable(script, *thisPos++), evt_get_variable(script, *thisPos++));
     partner_set_tether_distance(0.0f);
     return ApiStatus_DONE2;
 }
@@ -53,7 +53,7 @@ ApiStatus func_80282324(Evt* script, s32 isInitialCall) {
 ApiStatus func_80282338(Evt* script, s32 isInitialCall) {
     UNK_TYPE* temp_s0 = script->functionTemp[1];
 
-    *temp_s0 = get_variable(script, *script->ptrReadPos);
+    *temp_s0 = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -69,7 +69,7 @@ ApiStatus func_80282594(Evt* script, s32 isInitialCall) {
     Camera* camera;
     f32 temp_f0;
 
-    temp_f0 = get_float_variable(script, *script->ptrReadPos);
+    temp_f0 = evt_get_float_variable(script, *script->ptrReadPos);
     camera = &gCameras[0];
 
     if (temp_f0 >= 0.0f) {

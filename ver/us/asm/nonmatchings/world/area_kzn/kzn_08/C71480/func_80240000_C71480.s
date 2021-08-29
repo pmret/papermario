@@ -102,7 +102,7 @@ glabel func_80240000_C71480
 /* C715CC 8024014C 00000000 */   nop
 .L80240150:
 /* C715D0 80240150 3C05FD05 */  lui       $a1, 0xfd05
-/* C715D4 80240154 0C0B210B */  jal       get_float_variable
+/* C715D4 80240154 0C0B210B */  jal       evt_get_float_variable
 /* C715D8 80240158 34A50F80 */   ori      $a1, $a1, 0xf80
 /* C715DC 8024015C 44802000 */  mtc1      $zero, $f4
 /* C715E0 80240160 00000000 */  nop
@@ -133,7 +133,7 @@ glabel func_80240000_C71480
 .L802401C0:
 /* C71640 802401C0 0000202D */  daddu     $a0, $zero, $zero
 /* C71644 802401C4 3C05FD05 */  lui       $a1, 0xfd05
-/* C71648 802401C8 0C0B210B */  jal       get_float_variable
+/* C71648 802401C8 0C0B210B */  jal       evt_get_float_variable
 /* C7164C 802401CC 34A50F80 */   ori      $a1, $a1, 0xf80
 /* C71650 802401D0 3C018024 */  lui       $at, %hi(D_802455D0_C76A50)
 /* C71654 802401D4 D42255D0 */  ldc1      $f2, %lo(D_802455D0_C76A50)($at)

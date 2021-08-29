@@ -4,15 +4,15 @@
 ApiStatus N(SetManyVars)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    script->varTable[2] = get_variable(script, *args++);
-    script->varTable[3] = get_variable(script, *args++);
-    script->varTable[4] = get_variable(script, *args++);
-    script->varTable[5] = get_variable(script, *args++);
-    script->varTable[6] = get_variable(script, *args++);
-    script->varTable[7] = get_variable(script, *args++);
-    script->varTable[8] = get_variable(script, *args++);
-    script->varTable[9] = get_variable(script, *args++);
-    script->varTable[10] = get_variable(script, *args++);
-    script->varTable[11] = get_variable(script, *args++);
+    script->varTable[2] = evt_get_variable(script, *args++);
+    script->varTable[3] = evt_get_variable(script, *args++);
+    script->varTable[4] = evt_get_variable(script, *args++);
+    script->varTable[5] = evt_get_variable(script, *args++);
+    script->varTable[6] = evt_get_variable(script, *args++);
+    script->varTable[7] = evt_get_variable(script, *args++);
+    script->varTable[8] = evt_get_variable(script, *args++);
+    script->varTable[9] = evt_get_variable(script, *args++);
+    script->varTable[10] = evt_get_variable(script, *args++);
+    script->varTable[11] = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }

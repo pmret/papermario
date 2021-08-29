@@ -58,7 +58,7 @@ ApiStatus N(func_80241D60_DB4020)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -128,7 +128,7 @@ ApiStatus N(func_80242178_DB4438)(Evt* script, s32 isInitialCall) {
 
     if (N(D_80243098_DB5358)) {
         N(D_80243098_DB5358) = FALSE;
-        set_variable(script, *args, N(D_8024309C_DB535C));
+        evt_set_variable(script, *args, N(D_8024309C_DB535C));
         return ApiStatus_DONE2;
     }
 
@@ -141,7 +141,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802421CC_DB448C);
 ApiStatus N(func_802421CC_DB448C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    N(D_8024309C_DB535C) = get_variable(script, *args);
+    N(D_8024309C_DB535C) = evt_get_variable(script, *args);
     N(D_80243098_DB5358) = TRUE;
     return ApiStatus_DONE2;
 }
@@ -151,7 +151,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242204_DB44C4);
 /*
 ApiStatus N(func_80242204_DB44C4)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

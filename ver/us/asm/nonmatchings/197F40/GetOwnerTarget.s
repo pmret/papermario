@@ -15,11 +15,11 @@ glabel GetOwnerTarget
 /* 19D1B4 8026E8D4 8E050000 */  lw        $a1, ($s0)
 /* 19D1B8 8026E8D8 86460428 */  lh        $a2, 0x428($s2)
 /* 19D1BC 8026E8DC 8E100004 */  lw        $s0, 4($s0)
-/* 19D1C0 8026E8E0 0C0B2026 */  jal       set_variable
+/* 19D1C0 8026E8E0 0C0B2026 */  jal       evt_set_variable
 /* 19D1C4 8026E8E4 0220202D */   daddu    $a0, $s1, $zero
 /* 19D1C8 8026E8E8 0220202D */  daddu     $a0, $s1, $zero
 /* 19D1CC 8026E8EC 82460426 */  lb        $a2, 0x426($s2)
-/* 19D1D0 8026E8F0 0C0B2026 */  jal       set_variable
+/* 19D1D0 8026E8F0 0C0B2026 */  jal       evt_set_variable
 /* 19D1D4 8026E8F4 0200282D */   daddu    $a1, $s0, $zero
 /* 19D1D8 8026E8F8 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 19D1DC 8026E8FC 8FB20018 */  lw        $s2, 0x18($sp)

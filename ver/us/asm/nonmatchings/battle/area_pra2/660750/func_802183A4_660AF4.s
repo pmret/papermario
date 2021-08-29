@@ -48,7 +48,7 @@ glabel func_802183A4_660AF4
 /* 660BA0 80218450 0220202D */  daddu     $a0, $s1, $zero
 /* 660BA4 80218454 4600008D */  trunc.w.s $f2, $f0
 /* 660BA8 80218458 44061000 */  mfc1      $a2, $f2
-/* 660BAC 8021845C 0C0B2026 */  jal       set_variable
+/* 660BAC 8021845C 0C0B2026 */  jal       evt_set_variable
 /* 660BB0 80218460 0240282D */   daddu    $a1, $s2, $zero
 /* 660BB4 80218464 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 660BB8 80218468 8FB20018 */  lw        $s2, 0x18($sp)

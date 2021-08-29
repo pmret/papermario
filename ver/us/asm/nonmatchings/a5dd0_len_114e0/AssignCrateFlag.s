@@ -16,7 +16,7 @@ glabel AssignCrateFlag
 /* A889C 8011219C 00000000 */   nop
 /* A88A0 801121A0 8E050000 */  lw        $a1, ($s0)
 /* A88A4 801121A4 8C500040 */  lw        $s0, 0x40($v0)
-/* A88A8 801121A8 0C0B1F6A */  jal       get_variable_index
+/* A88A8 801121A8 0C0B1F6A */  jal       evt_get_variable_index
 /* A88AC 801121AC 0220202D */   daddu    $a0, $s1, $zero
 /* A88B0 801121B0 A6020004 */  sh        $v0, 4($s0)
 /* A88B4 801121B4 24020002 */  addiu     $v0, $zero, 2

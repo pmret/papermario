@@ -48,7 +48,7 @@ glabel func_80240674_B02EF4
 /* B02FA0 80240720 0220202D */  daddu     $a0, $s1, $zero
 /* B02FA4 80240724 4600008D */  trunc.w.s $f2, $f0
 /* B02FA8 80240728 44061000 */  mfc1      $a2, $f2
-/* B02FAC 8024072C 0C0B2026 */  jal       set_variable
+/* B02FAC 8024072C 0C0B2026 */  jal       evt_set_variable
 /* B02FB0 80240730 0280282D */   daddu    $a1, $s4, $zero
 /* B02FB4 80240734 8FBF0024 */  lw        $ra, 0x24($sp)
 /* B02FB8 80240738 8FB40020 */  lw        $s4, 0x20($sp)

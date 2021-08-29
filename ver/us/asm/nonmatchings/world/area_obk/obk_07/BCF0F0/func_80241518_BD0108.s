@@ -11,7 +11,7 @@ glabel func_80241518_BD0108
 /* BD0120 80241530 0200202D */  daddu     $a0, $s0, $zero
 /* BD0124 80241534 3C05FE36 */  lui       $a1, 0xfe36
 /* BD0128 80241538 34A53C80 */  ori       $a1, $a1, 0x3c80
-/* BD012C 8024153C 0C0B210B */  jal       get_float_variable
+/* BD012C 8024153C 0C0B210B */  jal       evt_get_float_variable
 /* BD0130 80241540 0040882D */   daddu    $s1, $v0, $zero
 /* BD0134 80241544 0C00A6C9 */  jal       clamp_angle
 /* BD0138 80241548 46000306 */   mov.s    $f12, $f0
@@ -19,7 +19,7 @@ glabel func_80241518_BD0108
 /* BD0140 80241550 3C05FE36 */  lui       $a1, 0xfe36
 /* BD0144 80241554 44060000 */  mfc1      $a2, $f0
 /* BD0148 80241558 34A53C80 */  ori       $a1, $a1, 0x3c80
-/* BD014C 8024155C 0C0B2190 */  jal       set_float_variable
+/* BD014C 8024155C 0C0B2190 */  jal       evt_set_float_variable
 /* BD0150 80241560 AE2601CC */   sw       $a2, 0x1cc($s1)
 /* BD0154 80241564 8FBF0018 */  lw        $ra, 0x18($sp)
 /* BD0158 80241568 8FB10014 */  lw        $s1, 0x14($sp)

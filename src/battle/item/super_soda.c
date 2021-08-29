@@ -5,9 +5,9 @@
 
 ApiStatus N(func_802A123C_724F1C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
+    s32 a = evt_get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
+    s32 c = evt_get_variable(script, *args++);
     ItemEntity* item = get_item_entity(script->varTable[14]);
 
     item->position.x = a;
@@ -26,7 +26,7 @@ ApiStatus N(func_802A12EC_724FCC)(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    partner->koDuration -= get_variable(script, *args++);
+    partner->koDuration -= evt_get_variable(script, *args++);
     if (partner->koDuration < 0) {
         partner->koDuration = 0;
     }
@@ -42,7 +42,7 @@ ApiStatus N(func_802A12EC_724FCC)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_802A1378_725058)(Evt* script, s32 isInitialCall) {
-    s32 actorId = get_variable(script, *script->ptrReadPos);
+    s32 actorId = evt_get_variable(script, *script->ptrReadPos);
     Actor* actor = get_actor(actorId);
     s32 id = actor->actorID & 0x700;
 
@@ -70,10 +70,10 @@ ApiStatus N(func_802A1378_725058)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_802A1418_7250F8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
-    s32 d = get_variable(script, *args++);
+    s32 a = evt_get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
+    s32 c = evt_get_variable(script, *args++);
+    s32 d = evt_get_variable(script, *args++);
 
     playFX_40(1, a, b, c, d);
     return ApiStatus_DONE2;

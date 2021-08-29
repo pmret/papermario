@@ -1096,7 +1096,7 @@ ApiStatus N(func_8024150C_CB024C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
+    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -1168,7 +1168,7 @@ ApiStatus N(func_80241970_CB06B0)(Evt* script, s32 isInitialCall) {
 
     if (N(D_80243088_CB1DC8)) {
         N(D_80243088_CB1DC8) = FALSE;
-        set_variable(script, *args, N(D_8024308C_CB1DCC));
+        evt_set_variable(script, *args, N(D_8024308C_CB1DCC));
         return ApiStatus_DONE2;
     }
 
@@ -1178,14 +1178,14 @@ ApiStatus N(func_80241970_CB06B0)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_802419C4_CB0704)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    N(D_8024308C_CB1DCC) = get_variable(script, *args);
+    N(D_8024308C_CB1DCC) = evt_get_variable(script, *args);
     N(D_80243088_CB1DC8) = TRUE;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_802419FC_CB073C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {
@@ -1204,10 +1204,10 @@ ApiStatus N(func_802419FC_CB073C)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_80241A98_CB07D8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 itemIdx = get_variable(script, *args++);
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 itemIdx = evt_get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
     ItemEntity* item = get_item_entity(itemIdx);
 
     item->position.x = var1;
@@ -1218,7 +1218,7 @@ ApiStatus N(func_80241A98_CB07D8)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_80241B5C_CB089C)(Evt* script, s32 isInitialCall) {
-    s32 itemId = get_variable(script, *script->ptrReadPos);
+    s32 itemId = evt_get_variable(script, *script->ptrReadPos);
     StaticItem* item = &gItemTable[itemId];
 
     if (itemId == ITEM_YUMMY_MEAL) {

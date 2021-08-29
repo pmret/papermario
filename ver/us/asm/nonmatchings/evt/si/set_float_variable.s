@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel set_float_variable
+glabel evt_set_float_variable
 /* ECFF0 802C8640 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* ECFF4 802C8644 AFB10014 */  sw        $s1, 0x14($sp)
 /* ECFF8 802C8648 0080882D */  daddu     $s1, $a0, $zero
@@ -154,7 +154,7 @@ glabel set_float_variable
 /* ED218 802C8868 AE020084 */  sw        $v0, 0x84($s0)
 /* ED21C 802C886C 0240202D */  daddu     $a0, $s2, $zero
 .L802C8870:
-/* ED220 802C8870 0C0B1248 */  jal       fixed_var_to_float
+/* ED220 802C8870 0C0B1248 */  jal       evt_fixed_var_to_float
 /* ED224 802C8874 00000000 */   nop
 .L802C8878:
 /* ED228 802C8878 8FBF001C */  lw        $ra, 0x1c($sp)

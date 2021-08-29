@@ -19,7 +19,7 @@ glabel func_802404DC_AF7E2C
 .L80240510:
 /* AF7E60 80240510 8CC50000 */  lw        $a1, ($a2)
 /* AF7E64 80240514 3C068024 */  lui       $a2, %hi(D_80241B14_AF9464)
-/* AF7E68 80240518 0C0B2026 */  jal       set_variable
+/* AF7E68 80240518 0C0B2026 */  jal       evt_set_variable
 /* AF7E6C 8024051C 8CC61B14 */   lw       $a2, %lo(D_80241B14_AF9464)($a2)
 /* AF7E70 80240520 24020002 */  addiu     $v0, $zero, 2
 .L80240524:

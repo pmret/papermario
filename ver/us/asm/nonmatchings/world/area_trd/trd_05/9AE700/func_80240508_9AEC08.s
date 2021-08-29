@@ -17,18 +17,18 @@ glabel func_80240508_9AEC08
 /* 9AEC1C 8024051C AFB00010 */  sw        $s0, 0x10($sp)
 /* 9AEC20 80240520 8E30000C */  lw        $s0, 0xc($s1)
 /* 9AEC24 80240524 8E050000 */  lw        $a1, ($s0)
-/* 9AEC28 80240528 0C0B210B */  jal       get_float_variable
+/* 9AEC28 80240528 0C0B210B */  jal       evt_get_float_variable
 /* 9AEC2C 8024052C 26100004 */   addiu    $s0, $s0, 4
 /* 9AEC30 80240530 8E050000 */  lw        $a1, ($s0)
 /* 9AEC34 80240534 26100004 */  addiu     $s0, $s0, 4
 /* 9AEC38 80240538 4600018D */  trunc.w.s $f6, $f0
 /* 9AEC3C 8024053C 44123000 */  mfc1      $s2, $f6
-/* 9AEC40 80240540 0C0B210B */  jal       get_float_variable
+/* 9AEC40 80240540 0C0B210B */  jal       evt_get_float_variable
 /* 9AEC44 80240544 0220202D */   daddu    $a0, $s1, $zero
 /* 9AEC48 80240548 8E050000 */  lw        $a1, ($s0)
 /* 9AEC4C 8024054C 4600018D */  trunc.w.s $f6, $f0
 /* 9AEC50 80240550 44103000 */  mfc1      $s0, $f6
-/* 9AEC54 80240554 0C0B210B */  jal       get_float_variable
+/* 9AEC54 80240554 0C0B210B */  jal       evt_get_float_variable
 /* 9AEC58 80240558 0220202D */   daddu    $a0, $s1, $zero
 /* 9AEC5C 8024055C 3C028011 */  lui       $v0, %hi(gPlayerStatus+0xB0)
 /* 9AEC60 80240560 8442F078 */  lh        $v0, %lo(gPlayerStatus+0xB0)($v0)

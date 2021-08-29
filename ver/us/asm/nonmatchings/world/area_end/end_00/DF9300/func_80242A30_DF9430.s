@@ -17,16 +17,16 @@ glabel func_80242A30_DF9430
 /* DF9460 80242A60 8E050000 */  lw        $a1, ($s0)
 /* DF9464 80242A64 26100004 */  addiu     $s0, $s0, 4
 /* DF9468 80242A68 0220202D */  daddu     $a0, $s1, $zero
-/* DF946C 80242A6C 0C0B210B */  jal       get_float_variable
+/* DF946C 80242A6C 0C0B210B */  jal       evt_get_float_variable
 /* DF9470 80242A70 0040902D */   daddu    $s2, $v0, $zero
 /* DF9474 80242A74 8E050000 */  lw        $a1, ($s0)
 /* DF9478 80242A78 26100004 */  addiu     $s0, $s0, 4
 /* DF947C 80242A7C 0220202D */  daddu     $a0, $s1, $zero
-/* DF9480 80242A80 0C0B210B */  jal       get_float_variable
+/* DF9480 80242A80 0C0B210B */  jal       evt_get_float_variable
 /* DF9484 80242A84 46000586 */   mov.s    $f22, $f0
 /* DF9488 80242A88 0220202D */  daddu     $a0, $s1, $zero
 /* DF948C 80242A8C 8E050000 */  lw        $a1, ($s0)
-/* DF9490 80242A90 0C0B210B */  jal       get_float_variable
+/* DF9490 80242A90 0C0B210B */  jal       evt_get_float_variable
 /* DF9494 80242A94 46000506 */   mov.s    $f20, $f0
 /* DF9498 80242A98 8E42000C */  lw        $v0, 0xc($s2)
 /* DF949C 80242A9C E4560008 */  swc1      $f22, 8($v0)

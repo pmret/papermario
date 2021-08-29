@@ -45,7 +45,7 @@ glabel func_8021ABD8_6A1DD8
 /* 6A1E78 8021AC78 4482B000 */  mtc1      $v0, $f22
 /* 6A1E7C 8021AC7C 00000000 */  nop
 /* 6A1E80 8021AC80 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 6A1E84 8021AC84 0C0B210B */  jal       get_float_variable
+/* 6A1E84 8021AC84 0C0B210B */  jal       evt_get_float_variable
 /* 6A1E88 8021AC88 0220202D */   daddu    $a0, $s1, $zero
 /* 6A1E8C 8021AC8C 82830210 */  lb        $v1, 0x210($s4)
 /* 6A1E90 8021AC90 2402000A */  addiu     $v0, $zero, 0xa

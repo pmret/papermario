@@ -567,23 +567,23 @@ ApiStatus N(func_802403D4_CCB6E4)(Evt* script, s32 isInitialCall) {
     }
 
     script->varTable[14] = 1;
-    set_variable(NULL, EVT_MAP_VAR(0), get_npc_unsafe(-4)->flags);
+    evt_set_variable(NULL, EVT_MAP_VAR(0), get_npc_unsafe(-4)->flags);
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_8024042C_CCB73C)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(-4);
 
-    npc->flags = get_variable(NULL, EVT_MAP_VAR(0));
+    npc->flags = evt_get_variable(NULL, EVT_MAP_VAR(0));
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_8024046C_CCB77C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    script->functionTemp[0] = get_variable(script, *args++);
-    script->functionTemp[1] = get_variable(script, *args++);
-    script->functionTemp[2] = get_variable(script, *args++);
+    script->functionTemp[0] = evt_get_variable(script, *args++);
+    script->functionTemp[1] = evt_get_variable(script, *args++);
+    script->functionTemp[2] = evt_get_variable(script, *args++);
     sfx_adjust_env_sound_pos(0x194, 0, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
     return ApiStatus_DONE2;
 }
@@ -657,7 +657,7 @@ void N(func_802407D4_CCBAE4)(void) {
 
     gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(1));
 
-    if (get_variable(NULL, EVT_AREA_FLAG(36)) != 0) {
+    if (evt_get_variable(NULL, EVT_AREA_FLAG(36)) != 0) {
         if (N(D_80243B18_CCEE28) > 90) {
             N(D_80243B18_CCEE28) -= 360;
         }

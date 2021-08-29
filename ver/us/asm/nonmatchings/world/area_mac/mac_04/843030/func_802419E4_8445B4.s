@@ -16,15 +16,15 @@ glabel func_802419E4_8445B4
 /* 8445E0 80241A10 8C450000 */  lw        $a1, ($v0)
 /* 8445E4 80241A14 24420004 */  addiu     $v0, $v0, 4
 /* 8445E8 80241A18 8C520000 */  lw        $s2, ($v0)
-/* 8445EC 80241A1C 0C0B2026 */  jal       set_variable
+/* 8445EC 80241A1C 0C0B2026 */  jal       evt_set_variable
 /* 8445F0 80241A20 8C530004 */   lw       $s3, 4($v0)
 /* 8445F4 80241A24 0200202D */  daddu     $a0, $s0, $zero
 /* 8445F8 80241A28 82260007 */  lb        $a2, 7($s1)
-/* 8445FC 80241A2C 0C0B2026 */  jal       set_variable
+/* 8445FC 80241A2C 0C0B2026 */  jal       evt_set_variable
 /* 844600 80241A30 0240282D */   daddu    $a1, $s2, $zero
 /* 844604 80241A34 0200202D */  daddu     $a0, $s0, $zero
 /* 844608 80241A38 82260008 */  lb        $a2, 8($s1)
-/* 84460C 80241A3C 0C0B2026 */  jal       set_variable
+/* 84460C 80241A3C 0C0B2026 */  jal       evt_set_variable
 /* 844610 80241A40 0260282D */   daddu    $a1, $s3, $zero
 /* 844614 80241A44 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 844618 80241A48 8FB3001C */  lw        $s3, 0x1c($sp)

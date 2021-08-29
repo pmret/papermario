@@ -12,7 +12,7 @@ glabel func_802411F0_A3A6D0
 /* A3A6EC 8024120C 0000202D */  daddu     $a0, $zero, $zero
 .L80241210:
 /* A3A6F0 80241210 02112821 */  addu      $a1, $s0, $s1
-/* A3A6F4 80241214 0C0B2026 */  jal       set_variable
+/* A3A6F4 80241214 0C0B2026 */  jal       evt_set_variable
 /* A3A6F8 80241218 0080302D */   daddu    $a2, $a0, $zero
 /* A3A6FC 8024121C 26100001 */  addiu     $s0, $s0, 1
 /* A3A700 80241220 2E02004F */  sltiu     $v0, $s0, 0x4f
@@ -23,7 +23,7 @@ glabel func_802411F0_A3A6D0
 /* A3A714 80241234 363188E4 */  ori       $s1, $s1, 0x88e4
 .L80241238:
 /* A3A718 80241238 02112821 */  addu      $a1, $s0, $s1
-/* A3A71C 8024123C 0C0B2026 */  jal       set_variable
+/* A3A71C 8024123C 0C0B2026 */  jal       evt_set_variable
 /* A3A720 80241240 0080302D */   daddu    $a2, $a0, $zero
 /* A3A724 80241244 26100001 */  addiu     $s0, $s0, 1
 /* A3A728 80241248 2E020010 */  sltiu     $v0, $s0, 0x10

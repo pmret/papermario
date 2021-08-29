@@ -3,7 +3,7 @@
 #include "ItemRefund.inc.c"
 
 ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall) {
-    s32 actorId = get_variable(script, *script->ptrReadPos);
+    s32 actorId = evt_get_variable(script, *script->ptrReadPos);
     Actor* actor = get_actor(actorId);
     s32 id = actor->actorID & 0x700;
 

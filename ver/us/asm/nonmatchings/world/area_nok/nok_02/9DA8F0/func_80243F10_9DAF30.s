@@ -88,7 +88,7 @@ glabel func_80243F10_9DAF30
 /* 9DB05C 8024403C 26260001 */  addiu     $a2, $s1, 1
 /* 9DB060 80244040 AC820084 */  sw        $v0, 0x84($a0)
 .L80244044:
-/* 9DB064 80244044 0C0B2026 */  jal       set_variable
+/* 9DB064 80244044 0C0B2026 */  jal       evt_set_variable
 /* 9DB068 80244048 00000000 */   nop
 /* 9DB06C 8024404C 24020002 */  addiu     $v0, $zero, 2
 /* 9DB070 80244050 8FBF002C */  lw        $ra, 0x2c($sp)

@@ -46,7 +46,7 @@ glabel GetPushBlock
 .L80283660:
 /* 7E44E0 80283660 0200282D */  daddu     $a1, $s0, $zero
 .L80283664:
-/* 7E44E4 80283664 0C0B2026 */  jal       set_variable
+/* 7E44E4 80283664 0C0B2026 */  jal       evt_set_variable
 /* 7E44E8 80283668 24060003 */   addiu    $a2, $zero, 3
 .L8028366C:
 /* 7E44EC 8028366C 92420004 */  lbu       $v0, 4($s2)
@@ -57,7 +57,7 @@ glabel GetPushBlock
 /* 7E4500 80283680 02671821 */  addu      $v1, $s3, $a3
 /* 7E4504 80283684 00431021 */  addu      $v0, $v0, $v1
 /* 7E4508 80283688 90460000 */  lbu       $a2, ($v0)
-/* 7E450C 8028368C 0C0B2026 */  jal       set_variable
+/* 7E450C 8028368C 0C0B2026 */  jal       evt_set_variable
 /* 7E4510 80283690 0200282D */   daddu    $a1, $s0, $zero
 /* 7E4514 80283694 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 7E4518 80283698 8FB40020 */  lw        $s4, 0x20($sp)

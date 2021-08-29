@@ -26,7 +26,7 @@ glabel func_8021C9D4_6A3BD4
 .L8021CA24:
 /* 6A3C24 8021CA24 00003012 */   mflo     $a2
 /* 6A3C28 8021CA28 8C82000C */  lw        $v0, 0xc($a0)
-/* 6A3C2C 8021CA2C 0C0B2026 */  jal       set_variable
+/* 6A3C2C 8021CA2C 0C0B2026 */  jal       evt_set_variable
 /* 6A3C30 8021CA30 8C450000 */   lw       $a1, ($v0)
 /* 6A3C34 8021CA34 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 6A3C38 8021CA38 24020002 */  addiu     $v0, $zero, 2

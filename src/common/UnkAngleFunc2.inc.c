@@ -4,7 +4,7 @@
 
 ApiStatus N(UnkAngleFunc2)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    f32 var0 =  get_variable(script, *args++) / 10.0;
+    f32 var0 =  evt_get_variable(script, *args++) / 10.0;
     s32 a3 = *args++;
     s32 a4 = *args++;
     s32 a5 = *args++;
@@ -15,9 +15,9 @@ ApiStatus N(UnkAngleFunc2)(Evt* script, s32 isInitialCall) {
     f32 fout3 = cos_rad(temp1) * 150.0f / 20.0f + -50.0f;
     s32 outVal;
 
-    set_float_variable(script, a3, fout1);
-    set_float_variable(script, a4, fout2);
-    set_float_variable(script, a5, fout3);
+    evt_set_float_variable(script, a3, fout1);
+    evt_set_float_variable(script, a4, fout2);
+    evt_set_float_variable(script, a5, fout3);
 
     outVal = 0;
     if (var0 > 90.0f && var0 < 270.0f) {
@@ -29,7 +29,7 @@ ApiStatus N(UnkAngleFunc2)(Evt* script, s32 isInitialCall) {
     if ((s32)fabsf(270.0f - var0) < 45) {
         outVal = 2.0f * (var0 - 225.0f) + 180.0f;
     }
-    set_variable(script, a6, outVal);
+    evt_set_variable(script, a6, outVal);
 
     return ApiStatus_DONE2;
 }

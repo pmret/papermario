@@ -25,7 +25,7 @@ glabel func_802424CC_A3B9AC
 /* A3B9F0 80242510 34A55D6E */  ori       $a1, $a1, 0x5d6e
 /* A3B9F4 80242514 0000202D */  daddu     $a0, $zero, $zero
 /* A3B9F8 80242518 00C52821 */  addu      $a1, $a2, $a1
-/* A3B9FC 8024251C 0C0B2026 */  jal       set_variable
+/* A3B9FC 8024251C 0C0B2026 */  jal       evt_set_variable
 /* A3BA00 80242520 24060001 */   addiu    $a2, $zero, 1
 .L80242524:
 /* A3BA04 80242524 8FBF0010 */  lw        $ra, 0x10($sp)

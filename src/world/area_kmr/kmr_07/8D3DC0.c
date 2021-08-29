@@ -26,7 +26,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_802407F4_8D45B4);
 // see func_802402BC_8D878C
 #ifdef NON_MATCHING
 ApiStatus func_80240A6C_8D482C(Evt* script, s32 isInitialCall) {
-    Entity* entity = get_entity_by_index(get_variable(NULL, EVT_MAP_VAR(0)));
+    Entity* entity = get_entity_by_index(evt_get_variable(NULL, EVT_MAP_VAR(0)));
 
     if (entity == NULL) {
         return ApiStatus_BLOCK;
@@ -39,7 +39,7 @@ ApiStatus func_80240A6C_8D482C(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_80240A6C_8D482C);
 /*
 ApiStatus N(func_80240A6C_8D482C)(void) {
-    Entity* entity = get_entity_by_index(get_variable(NULL, 0xFD050F80));
+    Entity* entity = get_entity_by_index(evt_get_variable(NULL, 0xFD050F80));
 
     if (entity == NULL) {
         return ApiStatus_BLOCK;

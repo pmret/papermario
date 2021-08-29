@@ -44,8 +44,8 @@ ApiStatus func_802380E4_710FD4(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* playerActor = battleStatus->playerActor;
-    f32 var0 = get_variable(script, *args++);
-    f32 var1 = get_variable(script, *args++);
+    f32 var0 = evt_get_variable(script, *args++);
+    f32 var1 = evt_get_variable(script, *args++);
     f32 scalingFactor = playerActor->scalingFactor;
 
     var0 *= scalingFactor;

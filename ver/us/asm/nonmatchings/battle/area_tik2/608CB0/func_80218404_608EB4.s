@@ -38,7 +38,7 @@ glabel func_80218404_608EB4
 /* 608F38 80218488 4482A000 */  mtc1      $v0, $f20
 /* 608F3C 8021848C 00000000 */  nop
 /* 608F40 80218490 4680A520 */  cvt.s.w   $f20, $f20
-/* 608F44 80218494 0C0B210B */  jal       get_float_variable
+/* 608F44 80218494 0C0B210B */  jal       evt_get_float_variable
 /* 608F48 80218498 0220202D */   daddu    $a0, $s1, $zero
 /* 608F4C 8021849C 8E42000C */  lw        $v0, 0xc($s2)
 /* 608F50 802184A0 E4580004 */  swc1      $f24, 4($v0)

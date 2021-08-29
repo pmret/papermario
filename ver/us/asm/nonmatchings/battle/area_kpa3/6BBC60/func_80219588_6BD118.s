@@ -13,14 +13,14 @@ glabel func_80219588_6BD118
 /* 6BD138 802195A8 8E50000C */  lw        $s0, 0xc($s2)
 /* 6BD13C 802195AC 82260012 */  lb        $a2, 0x12($s1)
 /* 6BD140 802195B0 8E050000 */  lw        $a1, ($s0)
-/* 6BD144 802195B4 0C0B2026 */  jal       set_variable
+/* 6BD144 802195B4 0C0B2026 */  jal       evt_set_variable
 /* 6BD148 802195B8 26100004 */   addiu    $s0, $s0, 4
 /* 6BD14C 802195BC 82220012 */  lb        $v0, 0x12($s1)
 /* 6BD150 802195C0 8E050000 */  lw        $a1, ($s0)
 /* 6BD154 802195C4 000210C0 */  sll       $v0, $v0, 3
 /* 6BD158 802195C8 00511021 */  addu      $v0, $v0, $s1
 /* 6BD15C 802195CC 80460015 */  lb        $a2, 0x15($v0)
-/* 6BD160 802195D0 0C0B2026 */  jal       set_variable
+/* 6BD160 802195D0 0C0B2026 */  jal       evt_set_variable
 /* 6BD164 802195D4 0240202D */   daddu    $a0, $s2, $zero
 /* 6BD168 802195D8 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 6BD16C 802195DC 8FB20018 */  lw        $s2, 0x18($sp)

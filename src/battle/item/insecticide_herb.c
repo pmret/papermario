@@ -33,9 +33,9 @@ typedef struct N(temp) {
 
 ApiStatus N(func_802A12E0_72AA30)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    f32 a = get_variable(script, *args++);
-    f32 b = get_variable(script, *args++);
-    f32 c = get_variable(script, *args++);
+    f32 a = evt_get_variable(script, *args++);
+    f32 b = evt_get_variable(script, *args++);
+    f32 c = evt_get_variable(script, *args++);
     struct N(temp)* effect;
 
     a += rand_int(20) - 10;

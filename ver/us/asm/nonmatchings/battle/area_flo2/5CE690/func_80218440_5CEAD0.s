@@ -107,7 +107,7 @@ glabel func_80218440_5CEAD0
 /* 5CEC3C 802185AC 8C460010 */  lw        $a2, 0x10($v0)
 .L802185B0:
 /* 5CEC40 802185B0 8E050000 */  lw        $a1, ($s0)
-/* 5CEC44 802185B4 0C0B2026 */  jal       set_variable
+/* 5CEC44 802185B4 0C0B2026 */  jal       evt_set_variable
 /* 5CEC48 802185B8 0220202D */   daddu    $a0, $s1, $zero
 /* 5CEC4C 802185BC 8FBF0040 */  lw        $ra, 0x40($sp)
 /* 5CEC50 802185C0 8FB1003C */  lw        $s1, 0x3c($sp)

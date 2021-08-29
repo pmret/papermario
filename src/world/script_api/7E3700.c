@@ -22,9 +22,9 @@ INCLUDE_ASM(s32, "world/script_api/7E3700", func_80283174);
 ApiStatus CheckActionState(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Bytecode a0 = *args++;
-    s32 var = get_float_variable(script, *args);
+    s32 var = evt_get_float_variable(script, *args);
 
-    set_variable(script, a0, gPlayerActionState == var);
+    evt_set_variable(script, a0, gPlayerActionState == var);
     return ApiStatus_DONE2;
 }
 
