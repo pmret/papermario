@@ -9,7 +9,7 @@ glabel func_80240560_EED660
 /* EED670 80240570 AFB00018 */  sw        $s0, 0x18($sp)
 /* EED674 80240574 8E30000C */  lw        $s0, 0xc($s1)
 /* EED678 80240578 8E050000 */  lw        $a1, ($s0)
-/* EED67C 8024057C 0C0B53A3 */  jal       dead_get_variable
+/* EED67C 8024057C 0C0B53A3 */  jal       dead_evt_get_variable
 /* EED680 80240580 26100004 */   addiu    $s0, $s0, 4
 /* EED684 80240584 0C0462EC */  jal       func_80118BB0
 /* EED688 80240588 0040202D */   daddu    $a0, $v0, $zero
@@ -30,7 +30,7 @@ glabel func_80240560_EED660
 /* EED6C4 802405C4 0000202D */   daddu    $a0, $zero, $zero
 /* EED6C8 802405C8 0220202D */  daddu     $a0, $s1, $zero
 /* EED6CC 802405CC 0200282D */  daddu     $a1, $s0, $zero
-/* EED6D0 802405D0 0C0B551A */  jal       dead_set_variable
+/* EED6D0 802405D0 0C0B551A */  jal       dead_evt_set_variable
 /* EED6D4 802405D4 0040302D */   daddu    $a2, $v0, $zero
 /* EED6D8 802405D8 8FBF0020 */  lw        $ra, 0x20($sp)
 /* EED6DC 802405DC 8FB1001C */  lw        $s1, 0x1c($sp)

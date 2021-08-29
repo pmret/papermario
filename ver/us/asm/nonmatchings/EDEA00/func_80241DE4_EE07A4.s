@@ -20,7 +20,7 @@ glabel func_80241DE4_EE07A4
 /* EE07E0 80241E20 00A0882D */   daddu    $s1, $a1, $zero
 /* EE07E4 80241E24 0280202D */  daddu     $a0, $s4, $zero
 /* EE07E8 80241E28 8E050000 */  lw        $a1, ($s0)
-/* EE07EC 80241E2C 0C0B53A3 */  jal       dead_get_variable
+/* EE07EC 80241E2C 0C0B53A3 */  jal       dead_evt_get_variable
 /* EE07F0 80241E30 0040902D */   daddu    $s2, $v0, $zero
 /* EE07F4 80241E34 AFA00020 */  sw        $zero, 0x20($sp)
 /* EE07F8 80241E38 8E6300D0 */  lw        $v1, 0xd0($s3)

@@ -9,16 +9,16 @@ glabel func_802430E4_EA39E4
 /* EA39F4 802430F4 AFB00018 */  sw        $s0, 0x18($sp)
 /* EA39F8 802430F8 8E30000C */  lw        $s0, 0xc($s1)
 /* EA39FC 802430FC 8E050000 */  lw        $a1, ($s0)
-/* EA3A00 80243100 0C0B53A3 */  jal       dead_get_variable
+/* EA3A00 80243100 0C0B53A3 */  jal       dead_evt_get_variable
 /* EA3A04 80243104 26100004 */   addiu    $s0, $s0, 4
 /* EA3A08 80243108 AE220070 */  sw        $v0, 0x70($s1)
 /* EA3A0C 8024310C 8E050000 */  lw        $a1, ($s0)
 /* EA3A10 80243110 26100004 */  addiu     $s0, $s0, 4
-/* EA3A14 80243114 0C0B53A3 */  jal       dead_get_variable
+/* EA3A14 80243114 0C0B53A3 */  jal       dead_evt_get_variable
 /* EA3A18 80243118 0220202D */   daddu    $a0, $s1, $zero
 /* EA3A1C 8024311C AE220074 */  sw        $v0, 0x74($s1)
 /* EA3A20 80243120 8E050000 */  lw        $a1, ($s0)
-/* EA3A24 80243124 0C0B53A3 */  jal       dead_get_variable
+/* EA3A24 80243124 0C0B53A3 */  jal       dead_evt_get_variable
 /* EA3A28 80243128 0220202D */   daddu    $a0, $s1, $zero
 /* EA3A2C 8024312C 24040052 */  addiu     $a0, $zero, 0x52
 /* EA3A30 80243130 0000282D */  daddu     $a1, $zero, $zero

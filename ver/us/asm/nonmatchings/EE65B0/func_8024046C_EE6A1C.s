@@ -9,16 +9,16 @@ glabel func_8024046C_EE6A1C
 /* EE6A2C 8024047C AFB00018 */  sw        $s0, 0x18($sp)
 /* EE6A30 80240480 8E30000C */  lw        $s0, 0xc($s1)
 /* EE6A34 80240484 8E050000 */  lw        $a1, ($s0)
-/* EE6A38 80240488 0C0B53A3 */  jal       dead_get_variable
+/* EE6A38 80240488 0C0B53A3 */  jal       dead_evt_get_variable
 /* EE6A3C 8024048C 26100004 */   addiu    $s0, $s0, 4
 /* EE6A40 80240490 AE220070 */  sw        $v0, 0x70($s1)
 /* EE6A44 80240494 8E050000 */  lw        $a1, ($s0)
 /* EE6A48 80240498 26100004 */  addiu     $s0, $s0, 4
-/* EE6A4C 8024049C 0C0B53A3 */  jal       dead_get_variable
+/* EE6A4C 8024049C 0C0B53A3 */  jal       dead_evt_get_variable
 /* EE6A50 802404A0 0220202D */   daddu    $a0, $s1, $zero
 /* EE6A54 802404A4 AE220074 */  sw        $v0, 0x74($s1)
 /* EE6A58 802404A8 8E050000 */  lw        $a1, ($s0)
-/* EE6A5C 802404AC 0C0B53A3 */  jal       dead_get_variable
+/* EE6A5C 802404AC 0C0B53A3 */  jal       dead_evt_get_variable
 /* EE6A60 802404B0 0220202D */   daddu    $a0, $s1, $zero
 /* EE6A64 802404B4 24040194 */  addiu     $a0, $zero, 0x194
 /* EE6A68 802404B8 0000282D */  daddu     $a1, $zero, $zero

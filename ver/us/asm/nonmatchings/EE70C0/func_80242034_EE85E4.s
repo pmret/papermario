@@ -9,7 +9,7 @@ glabel func_80242034_EE85E4
 /* EE85F4 80242044 AFB00010 */  sw        $s0, 0x10($sp)
 /* EE85F8 80242048 8E30000C */  lw        $s0, 0xc($s1)
 /* EE85FC 8024204C 8E050000 */  lw        $a1, ($s0)
-/* EE8600 80242050 0C0B53A3 */  jal       dead_get_variable
+/* EE8600 80242050 0C0B53A3 */  jal       dead_evt_get_variable
 /* EE8604 80242054 26100004 */   addiu    $s0, $s0, 4
 /* EE8608 80242058 0C00F94D */  jal       func_8003E534
 /* EE860C 8024205C 0040202D */   daddu    $a0, $v0, $zero
@@ -17,7 +17,7 @@ glabel func_80242034_EE85E4
 /* EE8614 80242064 00000000 */   nop
 /* EE8618 80242068 8E050000 */  lw        $a1, ($s0)
 /* EE861C 8024206C 844600A8 */  lh        $a2, 0xa8($v0)
-/* EE8620 80242070 0C0B551A */  jal       dead_set_variable
+/* EE8620 80242070 0C0B551A */  jal       dead_evt_set_variable
 /* EE8624 80242074 0220202D */   daddu    $a0, $s1, $zero
 .L80242078:
 /* EE8628 80242078 8FBF0018 */  lw        $ra, 0x18($sp)

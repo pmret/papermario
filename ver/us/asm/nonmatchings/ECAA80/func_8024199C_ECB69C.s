@@ -19,7 +19,7 @@ glabel func_8024199C_ECB69C
 .L802419D0:
 /* ECB6D0 802419D0 8CC50000 */  lw        $a1, ($a2)
 /* ECB6D4 802419D4 3C068024 */  lui       $a2, %hi(D_802430BC_ECCDBC)
-/* ECB6D8 802419D8 0C0B551A */  jal       dead_set_variable
+/* ECB6D8 802419D8 0C0B551A */  jal       dead_evt_set_variable
 /* ECB6DC 802419DC 8CC630BC */   lw       $a2, %lo(D_802430BC_ECCDBC)($a2)
 /* ECB6E0 802419E0 24020002 */  addiu     $v0, $zero, 2
 .L802419E4:

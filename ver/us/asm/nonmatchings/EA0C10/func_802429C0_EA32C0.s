@@ -19,7 +19,7 @@ glabel func_802429C0_EA32C0
 .L802429F4:
 /* EA32F4 802429F4 8CC50000 */  lw        $a1, ($a2)
 /* EA32F8 802429F8 3C068024 */  lui       $a2, %hi(D_802441BC_EA4ABC)
-/* EA32FC 802429FC 0C0B551A */  jal       dead_set_variable
+/* EA32FC 802429FC 0C0B551A */  jal       dead_evt_set_variable
 /* EA3300 80242A00 8CC641BC */   lw       $a2, %lo(D_802441BC_EA4ABC)($a2)
 /* EA3304 80242A04 24020002 */  addiu     $v0, $zero, 2
 .L80242A08:
