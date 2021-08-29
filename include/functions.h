@@ -41,7 +41,7 @@ s32 intro_logos_fade_out(s16 addAlpha);
 void _render_transition_stencil(s32, f32, s32);
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
-s32 create_entity(StaticEntityData*, s32, s32, s32, s32, s32);
+s32 create_entity(StaticEntityData*, s32, s32, s32, s32, ...);
 void entity_shattering_idle(Entity* entity);
 void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s16 damage);
 
@@ -483,12 +483,15 @@ void entity_set_render_script(Entity* entity, u32* commandList);
 s32 entity_can_collide_with_jumping_player(Entity* entity);
 s32 set_global_flag(s32 index);
 void entity_base_block_init(Entity* entity);
-s32 entity_start_script(Npc* npc);
+s32 entity_start_script(Entity* entity);
 s32 remove_item_entity_by_index(s32 index); // might not actually return anything
 void set_entity_commandlist(Entity* entity, s32* entityScript);
 void func_800EF3E4(void);
 void func_80268858(void);
 void func_80269118(void);
 s32 func_80268224(s32);
+void func_80149A6C(s32, s32);
+void func_800EF300(void);
+void enable_player_shadow(void);
 
 #endif

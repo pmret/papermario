@@ -194,8 +194,8 @@ void entity_GiantChest_give_equipment(Entity* entity) {
 INCLUDE_ASM(void, "entity/Chest", entity_GiantChest_give_equipment);
 #endif
 
-void entity_Chest_start_bound_script(Npc* npc) {
-    entity_start_script(npc);
+void entity_Chest_start_bound_script(Entity* entity) {
+    entity_start_script(entity);
 }
 
 void entity_Chest_enable_player_input(Entity* entity) {
