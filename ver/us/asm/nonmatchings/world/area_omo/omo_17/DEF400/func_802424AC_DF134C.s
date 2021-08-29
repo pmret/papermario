@@ -38,7 +38,7 @@ glabel func_802424AC_DF134C
 /* DF13A8 80242508 00459021 */   addu     $s2, $v0, $a1
 /* DF13AC 8024250C 0220202D */  daddu     $a0, $s1, $zero
 /* DF13B0 80242510 8E050000 */  lw        $a1, ($s0)
-/* DF13B4 80242514 0C0B1EAF */  jal       get_variable
+/* DF13B4 80242514 0C0B1EAF */  jal       evt_get_variable
 /* DF13B8 80242518 0040802D */   daddu    $s0, $v0, $zero
 /* DF13BC 8024251C 0260202D */  daddu     $a0, $s3, $zero
 /* DF13C0 80242520 8C460024 */  lw        $a2, 0x24($v0)

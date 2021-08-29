@@ -18,7 +18,7 @@ glabel func_80240F60_ACF0A0
 /* ACF0D4 80240F94 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* ACF0D8 80240F98 8E70000C */  lw        $s0, 0xc($s3)
 /* ACF0DC 80240F9C 8E050000 */  lw        $a1, ($s0)
-/* ACF0E0 80240FA0 0C0B1EAF */  jal       get_variable
+/* ACF0E0 80240FA0 0C0B1EAF */  jal       evt_get_variable
 /* ACF0E4 80240FA4 26100004 */   addiu    $s0, $s0, 4
 /* ACF0E8 80240FA8 8E150000 */  lw        $s5, ($s0)
 /* ACF0EC 80240FAC 26100004 */  addiu     $s0, $s0, 4

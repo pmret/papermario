@@ -9,7 +9,7 @@ glabel func_80218D40_59F420
 /* 59F430 80218D50 AFB00010 */  sw        $s0, 0x10($sp)
 /* 59F434 80218D54 8E30000C */  lw        $s0, 0xc($s1)
 /* 59F438 80218D58 8E050000 */  lw        $a1, ($s0)
-/* 59F43C 80218D5C 0C0B1EAF */  jal       get_variable
+/* 59F43C 80218D5C 0C0B1EAF */  jal       evt_get_variable
 /* 59F440 80218D60 26100004 */   addiu    $s0, $s0, 4
 /* 59F444 80218D64 8E050000 */  lw        $a1, ($s0)
 /* 59F448 80218D68 8C50000C */  lw        $s0, 0xc($v0)

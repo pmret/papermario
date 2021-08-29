@@ -13,12 +13,12 @@ glabel GetAnimatedRotationByTreeIndex
 /* F22C8 802CD918 AFB00010 */  sw        $s0, 0x10($sp)
 /* F22CC 802CD91C 8E50000C */  lw        $s0, 0xc($s2)
 /* F22D0 802CD920 8E050000 */  lw        $a1, ($s0)
-/* F22D4 802CD924 0C0B1EAF */  jal       get_variable
+/* F22D4 802CD924 0C0B1EAF */  jal       evt_get_variable
 /* F22D8 802CD928 26100004 */   addiu    $s0, $s0, 4
 /* F22DC 802CD92C 8E050000 */  lw        $a1, ($s0)
 /* F22E0 802CD930 26100004 */  addiu     $s0, $s0, 4
 /* F22E4 802CD934 0240202D */  daddu     $a0, $s2, $zero
-/* F22E8 802CD938 0C0B1EAF */  jal       get_variable
+/* F22E8 802CD938 0C0B1EAF */  jal       evt_get_variable
 /* F22EC 802CD93C 0040882D */   daddu    $s1, $v0, $zero
 /* F22F0 802CD940 00118880 */  sll       $s1, $s1, 2
 /* F22F4 802CD944 8E130000 */  lw        $s3, ($s0)

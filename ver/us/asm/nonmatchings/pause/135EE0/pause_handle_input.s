@@ -23,7 +23,7 @@ glabel pause_handle_input
 /* 1377AC 8024446C 3C148025 */  lui       $s4, %hi(gPauseMenuTabs)
 /* 1377B0 80244470 0282A021 */  addu      $s4, $s4, $v0
 /* 1377B4 80244474 8E94EF80 */  lw        $s4, %lo(gPauseMenuTabs)($s4)
-/* 1377B8 80244478 0C0B1EAF */  jal       get_variable
+/* 1377B8 80244478 0C0B1EAF */  jal       evt_get_variable
 /* 1377BC 8024447C 34A55BDE */   ori      $a1, $a1, 0x5bde
 /* 1377C0 80244480 1040000F */  beqz      $v0, .L802444C0
 /* 1377C4 80244484 0000802D */   daddu    $s0, $zero, $zero
@@ -51,7 +51,7 @@ glabel pause_handle_input
 /* 137814 802444D4 3C118027 */  lui       $s1, %hi(gPauseMenuHeldButtons)
 /* 137818 802444D8 263100C0 */  addiu     $s1, $s1, %lo(gPauseMenuHeldButtons)
 /* 13781C 802444DC AE150000 */  sw        $s5, ($s0)
-/* 137820 802444E0 0C0B1EAF */  jal       get_variable
+/* 137820 802444E0 0C0B1EAF */  jal       evt_get_variable
 /* 137824 802444E4 AE360000 */   sw       $s6, ($s1)
 /* 137828 802444E8 10400003 */  beqz      $v0, .L802444F8
 /* 13782C 802444EC 0200202D */   daddu    $a0, $s0, $zero

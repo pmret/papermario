@@ -15,38 +15,38 @@ glabel func_80218930_59F010
 /* 59F038 80218958 F7B40030 */  sdc1      $f20, 0x30($sp)
 /* 59F03C 8021895C 8E30000C */  lw        $s0, 0xc($s1)
 /* 59F040 80218960 8E050000 */  lw        $a1, ($s0)
-/* 59F044 80218964 0C0B1EAF */  jal       get_variable
+/* 59F044 80218964 0C0B1EAF */  jal       evt_get_variable
 /* 59F048 80218968 26100004 */   addiu    $s0, $s0, 4
 /* 59F04C 8021896C 8E050000 */  lw        $a1, ($s0)
 /* 59F050 80218970 26100004 */  addiu     $s0, $s0, 4
 /* 59F054 80218974 8C54000C */  lw        $s4, 0xc($v0)
-/* 59F058 80218978 0C0B1EAF */  jal       get_variable
+/* 59F058 80218978 0C0B1EAF */  jal       evt_get_variable
 /* 59F05C 8021897C 0220202D */   daddu    $a0, $s1, $zero
 /* 59F060 80218980 8E050000 */  lw        $a1, ($s0)
 /* 59F064 80218984 26100004 */  addiu     $s0, $s0, 4
 /* 59F068 80218988 0220202D */  daddu     $a0, $s1, $zero
-/* 59F06C 8021898C 0C0B1EAF */  jal       get_variable
+/* 59F06C 8021898C 0C0B1EAF */  jal       evt_get_variable
 /* 59F070 80218990 0040A82D */   daddu    $s5, $v0, $zero
 /* 59F074 80218994 8E050000 */  lw        $a1, ($s0)
 /* 59F078 80218998 26100004 */  addiu     $s0, $s0, 4
 /* 59F07C 8021899C 0220202D */  daddu     $a0, $s1, $zero
-/* 59F080 802189A0 0C0B1EAF */  jal       get_variable
+/* 59F080 802189A0 0C0B1EAF */  jal       evt_get_variable
 /* 59F084 802189A4 0040902D */   daddu    $s2, $v0, $zero
 /* 59F088 802189A8 8E050000 */  lw        $a1, ($s0)
 /* 59F08C 802189AC 26100004 */  addiu     $s0, $s0, 4
 /* 59F090 802189B0 4482B000 */  mtc1      $v0, $f22
 /* 59F094 802189B4 00000000 */  nop
 /* 59F098 802189B8 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 59F09C 802189BC 0C0B1EAF */  jal       get_variable
+/* 59F09C 802189BC 0C0B1EAF */  jal       evt_get_variable
 /* 59F0A0 802189C0 0220202D */   daddu    $a0, $s1, $zero
 /* 59F0A4 802189C4 8E050000 */  lw        $a1, ($s0)
 /* 59F0A8 802189C8 26100004 */  addiu     $s0, $s0, 4
 /* 59F0AC 802189CC 0220202D */  daddu     $a0, $s1, $zero
-/* 59F0B0 802189D0 0C0B1EAF */  jal       get_variable
+/* 59F0B0 802189D0 0C0B1EAF */  jal       evt_get_variable
 /* 59F0B4 802189D4 0040982D */   daddu    $s3, $v0, $zero
 /* 59F0B8 802189D8 0220202D */  daddu     $a0, $s1, $zero
 /* 59F0BC 802189DC 8E050000 */  lw        $a1, ($s0)
-/* 59F0C0 802189E0 0C0B1EAF */  jal       get_variable
+/* 59F0C0 802189E0 0C0B1EAF */  jal       evt_get_variable
 /* 59F0C4 802189E4 0040882D */   daddu    $s1, $v0, $zero
 /* 59F0C8 802189E8 4600B306 */  mov.s     $f12, $f22
 /* 59F0CC 802189EC 0C00A8D4 */  jal       cos_deg

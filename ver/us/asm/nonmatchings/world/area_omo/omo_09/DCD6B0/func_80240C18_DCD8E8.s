@@ -25,7 +25,7 @@ glabel func_80240C18_DCD8E8
 /* DCD91C 80240C4C 8E63000C */  lw        $v1, 0xc($s3)
 /* DCD920 80240C50 0260202D */  daddu     $a0, $s3, $zero
 /* DCD924 80240C54 8C650000 */  lw        $a1, ($v1)
-/* DCD928 80240C58 0C0B1EAF */  jal       get_variable
+/* DCD928 80240C58 0C0B1EAF */  jal       evt_get_variable
 /* DCD92C 80240C5C 0040902D */   daddu    $s2, $v0, $zero
 /* DCD930 80240C60 AFA00018 */  sw        $zero, 0x18($sp)
 /* DCD934 80240C64 8E2300D0 */  lw        $v1, 0xd0($s1)

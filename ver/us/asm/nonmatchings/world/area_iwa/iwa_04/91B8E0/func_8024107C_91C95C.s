@@ -12,7 +12,7 @@ glabel func_8024107C_91C95C
 /* 91C978 80241098 2405FFFF */   addiu    $a1, $zero, -1
 /* 91C97C 8024109C 0200202D */  daddu     $a0, $s0, $zero
 /* 91C980 802410A0 8E250000 */  lw        $a1, ($s1)
-/* 91C984 802410A4 0C0B1EAF */  jal       get_variable
+/* 91C984 802410A4 0C0B1EAF */  jal       evt_get_variable
 /* 91C988 802410A8 0040802D */   daddu    $s0, $v0, $zero
 /* 91C98C 802410AC 44820000 */  mtc1      $v0, $f0
 /* 91C990 802410B0 00000000 */  nop

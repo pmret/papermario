@@ -50,7 +50,7 @@ glabel func_80240910_C68A40
 /* C68AF4 802409C4 3C013F80 */  lui       $at, 0x3f80
 /* C68AF8 802409C8 4481B000 */  mtc1      $at, $f22
 /* C68AFC 802409CC 4480A000 */  mtc1      $zero, $f20
-/* C68B00 802409D0 0C0B1EAF */  jal       get_variable
+/* C68B00 802409D0 0C0B1EAF */  jal       evt_get_variable
 /* C68B04 802409D4 0240802D */   daddu    $s0, $s2, $zero
 /* C68B08 802409D8 0C04417A */  jal       get_entity_by_index
 /* C68B0C 802409DC 0040202D */   daddu    $a0, $v0, $zero

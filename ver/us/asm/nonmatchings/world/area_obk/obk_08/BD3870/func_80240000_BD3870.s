@@ -15,7 +15,7 @@ glabel func_80240000_BD3870
 /* BD3898 80240028 AFB000C0 */  sw        $s0, 0xc0($sp)
 /* BD389C 8024002C F7B600E8 */  sdc1      $f22, 0xe8($sp)
 /* BD38A0 80240030 F7B400E0 */  sdc1      $f20, 0xe0($sp)
-/* BD38A4 80240034 0C0B1EAF */  jal       get_variable
+/* BD38A4 80240034 0C0B1EAF */  jal       evt_get_variable
 /* BD38A8 80240038 34A50F8A */   ori      $a1, $a1, 0xf8a
 /* BD38AC 8024003C 3C07E300 */  lui       $a3, 0xe300
 /* BD38B0 80240040 34E70A01 */  ori       $a3, $a3, 0xa01

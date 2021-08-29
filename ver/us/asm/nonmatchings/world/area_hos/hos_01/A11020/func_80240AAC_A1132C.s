@@ -5,7 +5,7 @@ glabel func_80240AAC_A1132C
 /* A1132C 80240AAC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A11330 80240AB0 AFBF0010 */  sw        $ra, 0x10($sp)
 /* A11334 80240AB4 8C82000C */  lw        $v0, 0xc($a0)
-/* A11338 80240AB8 0C0B1EAF */  jal       get_variable
+/* A11338 80240AB8 0C0B1EAF */  jal       evt_get_variable
 /* A1133C 80240ABC 8C450000 */   lw       $a1, ($v0)
 /* A11340 80240AC0 8C43000C */  lw        $v1, 0xc($v0)
 /* A11344 80240AC4 3C01433E */  lui       $at, 0x433e

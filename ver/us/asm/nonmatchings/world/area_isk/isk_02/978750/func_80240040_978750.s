@@ -10,13 +10,13 @@ glabel func_80240040_978750
 /* 978764 80240054 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* 978768 80240058 8E30000C */  lw        $s0, 0xc($s1)
 /* 97876C 8024005C 8E050000 */  lw        $a1, ($s0)
-/* 978770 80240060 0C0B1EAF */  jal       get_variable
+/* 978770 80240060 0C0B1EAF */  jal       evt_get_variable
 /* 978774 80240064 26100004 */   addiu    $s0, $s0, 4
 /* 978778 80240068 8E050000 */  lw        $a1, ($s0)
 /* 97877C 8024006C 4482A000 */  mtc1      $v0, $f20
 /* 978780 80240070 00000000 */  nop
 /* 978784 80240074 4680A520 */  cvt.s.w   $f20, $f20
-/* 978788 80240078 0C0B1EAF */  jal       get_variable
+/* 978788 80240078 0C0B1EAF */  jal       evt_get_variable
 /* 97878C 8024007C 0220202D */   daddu    $a0, $s1, $zero
 /* 978790 80240080 3C038011 */  lui       $v1, %hi(gPlayerStatus)
 /* 978794 80240084 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)

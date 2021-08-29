@@ -35,7 +35,7 @@ glabel pause_map_update
 /* 142068 8024ED28 AE400000 */  sw        $zero, ($s2)
 .L8024ED2C:
 /* 14206C 8024ED2C 0000202D */  daddu     $a0, $zero, $zero
-/* 142070 8024ED30 0C0B1EAF */  jal       get_variable
+/* 142070 8024ED30 0C0B1EAF */  jal       evt_get_variable
 /* 142074 8024ED34 02132821 */   addu     $a1, $s0, $s3
 /* 142078 8024ED38 50400028 */  beql      $v0, $zero, .L8024EDDC
 /* 14207C 8024ED3C 26100001 */   addiu    $s0, $s0, 1

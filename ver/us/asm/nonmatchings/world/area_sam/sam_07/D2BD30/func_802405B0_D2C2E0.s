@@ -9,11 +9,11 @@ glabel func_802405B0_D2C2E0
 /* D2C2F0 802405C0 AFB00010 */  sw        $s0, 0x10($sp)
 /* D2C2F4 802405C4 8E30000C */  lw        $s0, 0xc($s1)
 /* D2C2F8 802405C8 8E050000 */  lw        $a1, ($s0)
-/* D2C2FC 802405CC 0C0B1EAF */  jal       get_variable
+/* D2C2FC 802405CC 0C0B1EAF */  jal       evt_get_variable
 /* D2C300 802405D0 26100004 */   addiu    $s0, $s0, 4
 /* D2C304 802405D4 0220202D */  daddu     $a0, $s1, $zero
 /* D2C308 802405D8 8E050000 */  lw        $a1, ($s0)
-/* D2C30C 802405DC 0C0B1EAF */  jal       get_variable
+/* D2C30C 802405DC 0C0B1EAF */  jal       evt_get_variable
 /* D2C310 802405E0 0040802D */   daddu    $s0, $v0, $zero
 /* D2C314 802405E4 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x2)
 /* D2C318 802405E8 8463A552 */  lh        $v1, %lo(gCollisionStatus+0x2)($v1)

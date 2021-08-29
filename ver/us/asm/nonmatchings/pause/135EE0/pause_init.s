@@ -119,7 +119,7 @@ glabel pause_init
 /* 13754C 8024420C 24420006 */  addiu     $v0, $v0, 6
 /* 137550 80244210 3C018016 */  lui       $at, %hi(D_8015A2BC)
 /* 137554 80244214 A422A2BC */  sh        $v0, %lo(D_8015A2BC)($at)
-/* 137558 80244218 0C0B1EAF */  jal       get_variable
+/* 137558 80244218 0C0B1EAF */  jal       evt_get_variable
 /* 13755C 8024421C 34A55BDE */   ori      $a1, $a1, 0x5bde
 /* 137560 80244220 10400013 */  beqz      $v0, .L80244270
 /* 137564 80244224 0000882D */   daddu    $s1, $zero, $zero

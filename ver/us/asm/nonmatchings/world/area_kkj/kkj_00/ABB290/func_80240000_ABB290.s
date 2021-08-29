@@ -6,7 +6,7 @@ glabel func_80240000_ABB290
 /* ABB294 80240004 AFBF0010 */  sw        $ra, 0x10($sp)
 /* ABB298 80240008 3C05F5DE */  lui       $a1, 0xf5de
 /* ABB29C 8024000C 34A50180 */  ori       $a1, $a1, 0x180
-/* ABB2A0 80240010 0C0B1EAF */  jal       get_variable
+/* ABB2A0 80240010 0C0B1EAF */  jal       evt_get_variable
 /* ABB2A4 80240014 0000202D */   daddu    $a0, $zero, $zero
 /* ABB2A8 80240018 28420060 */  slti      $v0, $v0, 0x60
 /* ABB2AC 8024001C 14400004 */  bnez      $v0, .L80240030

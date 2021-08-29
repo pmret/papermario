@@ -5,7 +5,7 @@ glabel func_802417FC_832FFC
 /* 832FFC 802417FC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 833000 80241800 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 833004 80241804 8C82000C */  lw        $v0, 0xc($a0)
-/* 833008 80241808 0C0B1EAF */  jal       get_variable
+/* 833008 80241808 0C0B1EAF */  jal       evt_get_variable
 /* 83300C 8024180C 8C450000 */   lw       $a1, ($v0)
 /* 833010 80241810 0040182D */  daddu     $v1, $v0, $zero
 /* 833014 80241814 10600012 */  beqz      $v1, .L80241860

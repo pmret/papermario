@@ -11,12 +11,12 @@ glabel func_802181E8_660938
 /* 660950 80218200 AFB00010 */  sw        $s0, 0x10($sp)
 /* 660954 80218204 8E50000C */  lw        $s0, 0xc($s2)
 /* 660958 80218208 8E050000 */  lw        $a1, ($s0)
-/* 66095C 8021820C 0C0B1EAF */  jal       get_variable
+/* 66095C 8021820C 0C0B1EAF */  jal       evt_get_variable
 /* 660960 80218210 26100004 */   addiu    $s0, $s0, 4
 /* 660964 80218214 0040882D */  daddu     $s1, $v0, $zero
 /* 660968 80218218 8E050000 */  lw        $a1, ($s0)
 /* 66096C 8021821C 26100004 */  addiu     $s0, $s0, 4
-/* 660970 80218220 0C0B1EAF */  jal       get_variable
+/* 660970 80218220 0C0B1EAF */  jal       evt_get_variable
 /* 660974 80218224 0240202D */   daddu    $a0, $s2, $zero
 /* 660978 80218228 0040982D */  daddu     $s3, $v0, $zero
 /* 66097C 8021822C 2402FF81 */  addiu     $v0, $zero, -0x7f

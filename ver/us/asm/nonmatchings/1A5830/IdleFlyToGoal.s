@@ -20,7 +20,7 @@ glabel IdleFlyToGoal
 /* 1AA4B8 8027BBD8 10A0004F */  beqz      $a1, .L8027BD18
 /* 1AA4BC 8027BBDC 8E51000C */   lw       $s1, 0xc($s2)
 /* 1AA4C0 8027BBE0 8E250000 */  lw        $a1, ($s1)
-/* 1AA4C4 8027BBE4 0C0B1EAF */  jal       get_variable
+/* 1AA4C4 8027BBE4 0C0B1EAF */  jal       evt_get_variable
 /* 1AA4C8 8027BBE8 26310004 */   addiu    $s1, $s1, 4
 /* 1AA4CC 8027BBEC 0040202D */  daddu     $a0, $v0, $zero
 /* 1AA4D0 8027BBF0 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -34,16 +34,16 @@ glabel IdleFlyToGoal
 /* 1AA4EC 8027BC0C AE500074 */  sw        $s0, 0x74($s2)
 /* 1AA4F0 8027BC10 8E250000 */  lw        $a1, ($s1)
 /* 1AA4F4 8027BC14 26310004 */  addiu     $s1, $s1, 4
-/* 1AA4F8 8027BC18 0C0B1EAF */  jal       get_variable
+/* 1AA4F8 8027BC18 0C0B1EAF */  jal       evt_get_variable
 /* 1AA4FC 8027BC1C 0240202D */   daddu    $a0, $s2, $zero
 /* 1AA500 8027BC20 A6020120 */  sh        $v0, 0x120($s0)
 /* 1AA504 8027BC24 8E250000 */  lw        $a1, ($s1)
 /* 1AA508 8027BC28 26310004 */  addiu     $s1, $s1, 4
-/* 1AA50C 8027BC2C 0C0B1EAF */  jal       get_variable
+/* 1AA50C 8027BC2C 0C0B1EAF */  jal       evt_get_variable
 /* 1AA510 8027BC30 0240202D */   daddu    $a0, $s2, $zero
 /* 1AA514 8027BC34 A6020122 */  sh        $v0, 0x122($s0)
 /* 1AA518 8027BC38 8E250000 */  lw        $a1, ($s1)
-/* 1AA51C 8027BC3C 0C0B1EAF */  jal       get_variable
+/* 1AA51C 8027BC3C 0C0B1EAF */  jal       evt_get_variable
 /* 1AA520 8027BC40 0240202D */   daddu    $a0, $s2, $zero
 /* 1AA524 8027BC44 AE42007C */  sw        $v0, 0x7c($s2)
 /* 1AA528 8027BC48 C60000D4 */  lwc1      $f0, 0xd4($s0)

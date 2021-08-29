@@ -14,38 +14,38 @@ glabel func_80218058_608B08
 /* 608B2C 8021807C F7B40028 */  sdc1      $f20, 0x28($sp)
 /* 608B30 80218080 8E30000C */  lw        $s0, 0xc($s1)
 /* 608B34 80218084 8E050000 */  lw        $a1, ($s0)
-/* 608B38 80218088 0C0B1EAF */  jal       get_variable
+/* 608B38 80218088 0C0B1EAF */  jal       evt_get_variable
 /* 608B3C 8021808C 26100004 */   addiu    $s0, $s0, 4
 /* 608B40 80218090 8E050000 */  lw        $a1, ($s0)
 /* 608B44 80218094 26100004 */  addiu     $s0, $s0, 4
 /* 608B48 80218098 4482E000 */  mtc1      $v0, $f28
 /* 608B4C 8021809C 00000000 */  nop
 /* 608B50 802180A0 4680E720 */  cvt.s.w   $f28, $f28
-/* 608B54 802180A4 0C0B1EAF */  jal       get_variable
+/* 608B54 802180A4 0C0B1EAF */  jal       evt_get_variable
 /* 608B58 802180A8 0220202D */   daddu    $a0, $s1, $zero
 /* 608B5C 802180AC 8E050000 */  lw        $a1, ($s0)
 /* 608B60 802180B0 26100004 */  addiu     $s0, $s0, 4
 /* 608B64 802180B4 4482D000 */  mtc1      $v0, $f26
 /* 608B68 802180B8 00000000 */  nop
 /* 608B6C 802180BC 4680D6A0 */  cvt.s.w   $f26, $f26
-/* 608B70 802180C0 0C0B1EAF */  jal       get_variable
+/* 608B70 802180C0 0C0B1EAF */  jal       evt_get_variable
 /* 608B74 802180C4 0220202D */   daddu    $a0, $s1, $zero
 /* 608B78 802180C8 8E050000 */  lw        $a1, ($s0)
 /* 608B7C 802180CC 26100004 */  addiu     $s0, $s0, 4
-/* 608B80 802180D0 0C0B1EAF */  jal       get_variable
+/* 608B80 802180D0 0C0B1EAF */  jal       evt_get_variable
 /* 608B84 802180D4 0220202D */   daddu    $a0, $s1, $zero
 /* 608B88 802180D8 8E050000 */  lw        $a1, ($s0)
 /* 608B8C 802180DC 26100004 */  addiu     $s0, $s0, 4
 /* 608B90 802180E0 4482A000 */  mtc1      $v0, $f20
 /* 608B94 802180E4 00000000 */  nop
 /* 608B98 802180E8 4680A520 */  cvt.s.w   $f20, $f20
-/* 608B9C 802180EC 0C0B1EAF */  jal       get_variable
+/* 608B9C 802180EC 0C0B1EAF */  jal       evt_get_variable
 /* 608BA0 802180F0 0220202D */   daddu    $a0, $s1, $zero
 /* 608BA4 802180F4 8E050000 */  lw        $a1, ($s0)
 /* 608BA8 802180F8 4482B000 */  mtc1      $v0, $f22
 /* 608BAC 802180FC 00000000 */  nop
 /* 608BB0 80218100 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 608BB4 80218104 0C0B1EAF */  jal       get_variable
+/* 608BB4 80218104 0C0B1EAF */  jal       evt_get_variable
 /* 608BB8 80218108 0220202D */   daddu    $a0, $s1, $zero
 /* 608BBC 8021810C 3C014220 */  lui       $at, 0x4220
 /* 608BC0 80218110 44810000 */  mtc1      $at, $f0

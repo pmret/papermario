@@ -9,7 +9,7 @@ glabel func_802404F8_BA4C78
 /* BA4C88 80240508 AFB00010 */  sw        $s0, 0x10($sp)
 /* BA4C8C 8024050C 8E30000C */  lw        $s0, 0xc($s1)
 /* BA4C90 80240510 8E050000 */  lw        $a1, ($s0)
-/* BA4C94 80240514 0C0B1EAF */  jal       get_variable
+/* BA4C94 80240514 0C0B1EAF */  jal       evt_get_variable
 /* BA4C98 80240518 26100004 */   addiu    $s0, $s0, 4
 /* BA4C9C 8024051C 44826000 */  mtc1      $v0, $f12
 /* BA4CA0 80240520 00000000 */  nop

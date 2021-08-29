@@ -24,7 +24,7 @@ glabel func_80244F5C_8057DC
 /* 805824 80244FA4 5455000F */  bnel      $v0, $s5, .L80244FE4
 /* 805828 80244FA8 26100001 */   addiu    $s0, $s0, 1
 /* 80582C 80244FAC 0000202D */  daddu     $a0, $zero, $zero
-/* 805830 80244FB0 0C0B1EAF */  jal       get_variable
+/* 805830 80244FB0 0C0B1EAF */  jal       evt_get_variable
 /* 805834 80244FB4 02142821 */   addu     $a1, $s0, $s4
 /* 805838 80244FB8 5040000A */  beql      $v0, $zero, .L80244FE4
 /* 80583C 80244FBC 26100001 */   addiu    $s0, $s0, 1
@@ -32,7 +32,7 @@ glabel func_80244F5C_8057DC
 /* 805844 80244FC4 24110001 */   addiu    $s1, $zero, 1
 .L80244FC8:
 /* 805848 80244FC8 0000202D */  daddu     $a0, $zero, $zero
-/* 80584C 80244FCC 0C0B1EAF */  jal       get_variable
+/* 80584C 80244FCC 0C0B1EAF */  jal       evt_get_variable
 /* 805850 80244FD0 02132821 */   addu     $a1, $s0, $s3
 /* 805854 80244FD4 14400003 */  bnez      $v0, .L80244FE4
 /* 805858 80244FD8 26100001 */   addiu    $s0, $s0, 1

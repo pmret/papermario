@@ -12,7 +12,7 @@ glabel func_80242A30_DF9430
 /* DF944C 80242A4C F7B40020 */  sdc1      $f20, 0x20($sp)
 /* DF9450 80242A50 8E30000C */  lw        $s0, 0xc($s1)
 /* DF9454 80242A54 8E050000 */  lw        $a1, ($s0)
-/* DF9458 80242A58 0C0B1EAF */  jal       get_variable
+/* DF9458 80242A58 0C0B1EAF */  jal       evt_get_variable
 /* DF945C 80242A5C 26100004 */   addiu    $s0, $s0, 4
 /* DF9460 80242A60 8E050000 */  lw        $a1, ($s0)
 /* DF9464 80242A64 26100004 */  addiu     $s0, $s0, 4

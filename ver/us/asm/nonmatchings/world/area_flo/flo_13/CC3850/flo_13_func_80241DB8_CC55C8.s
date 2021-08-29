@@ -20,7 +20,7 @@ glabel flo_13_func_80241DB8_CC55C8
 /* CC5604 80241DF4 00A0882D */   daddu    $s1, $a1, $zero
 /* CC5608 80241DF8 0280202D */  daddu     $a0, $s4, $zero
 /* CC560C 80241DFC 8E050000 */  lw        $a1, ($s0)
-/* CC5610 80241E00 0C0B1EAF */  jal       get_variable
+/* CC5610 80241E00 0C0B1EAF */  jal       evt_get_variable
 /* CC5614 80241E04 0040902D */   daddu    $s2, $v0, $zero
 /* CC5618 80241E08 AFA00020 */  sw        $zero, 0x20($sp)
 /* CC561C 80241E0C 8E6300D0 */  lw        $v1, 0xd0($s3)

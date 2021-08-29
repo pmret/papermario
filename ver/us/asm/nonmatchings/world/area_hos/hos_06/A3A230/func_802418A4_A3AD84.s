@@ -5,7 +5,7 @@ glabel func_802418A4_A3AD84
 /* A3AD84 802418A4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A3AD88 802418A8 AFBF0010 */  sw        $ra, 0x10($sp)
 /* A3AD8C 802418AC 8C82000C */  lw        $v0, 0xc($a0)
-/* A3AD90 802418B0 0C0B1EAF */  jal       get_variable
+/* A3AD90 802418B0 0C0B1EAF */  jal       evt_get_variable
 /* A3AD94 802418B4 8C450000 */   lw       $a1, ($v0)
 /* A3AD98 802418B8 3C058011 */  lui       $a1, %hi(gPlayerData)
 /* A3AD9C 802418BC 24A5F290 */  addiu     $a1, $a1, %lo(gPlayerData)

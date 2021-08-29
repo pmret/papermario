@@ -10,7 +10,7 @@ glabel func_8021CC5C_6A3E5C
 /* 6A3E70 8021CC70 AFB00010 */  sw        $s0, 0x10($sp)
 /* 6A3E74 8021CC74 8E50000C */  lw        $s0, 0xc($s2)
 /* 6A3E78 8021CC78 8E050000 */  lw        $a1, ($s0)
-/* 6A3E7C 8021CC7C 0C0B1EAF */  jal       get_variable
+/* 6A3E7C 8021CC7C 0C0B1EAF */  jal       evt_get_variable
 /* 6A3E80 8021CC80 26100004 */   addiu    $s0, $s0, 4
 /* 6A3E84 8021CC84 0C04C3D6 */  jal       get_item_entity
 /* 6A3E88 8021CC88 0040202D */   daddu    $a0, $v0, $zero

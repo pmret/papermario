@@ -13,7 +13,7 @@ glabel SetEntityCullMode
 /* A85BC 80111EBC 8E03000C */  lw        $v1, 0xc($s0)
 /* A85C0 80111EC0 0200202D */  daddu     $a0, $s0, $zero
 /* A85C4 80111EC4 8C650000 */  lw        $a1, ($v1)
-/* A85C8 80111EC8 0C0B1EAF */  jal       get_variable
+/* A85C8 80111EC8 0C0B1EAF */  jal       evt_get_variable
 /* A85CC 80111ECC 0040802D */   daddu    $s0, $v0, $zero
 /* A85D0 80111ED0 0040182D */  daddu     $v1, $v0, $zero
 /* A85D4 80111ED4 54600004 */  bnel      $v1, $zero, .L80111EE8

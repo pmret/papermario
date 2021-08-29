@@ -12,7 +12,7 @@ glabel func_80241838_D701E8
 /* D70204 80241854 AFB10014 */  sw        $s1, 0x14($sp)
 /* D70208 80241858 8E51000C */  lw        $s1, 0xc($s2)
 /* D7020C 8024185C 8E250000 */  lw        $a1, ($s1)
-/* D70210 80241860 0C0B1EAF */  jal       get_variable
+/* D70210 80241860 0C0B1EAF */  jal       evt_get_variable
 /* D70214 80241864 26310004 */   addiu    $s1, $s1, 4
 /* D70218 80241868 0C00EABB */  jal       get_npc_unsafe
 /* D7021C 8024186C 0040202D */   daddu    $a0, $v0, $zero
@@ -20,13 +20,13 @@ glabel func_80241838_D701E8
 /* D70224 80241874 0040982D */   daddu    $s3, $v0, $zero
 /* D70228 80241878 8E250000 */  lw        $a1, ($s1)
 /* D7022C 8024187C 26310004 */  addiu     $s1, $s1, 4
-/* D70230 80241880 0C0B1EAF */  jal       get_variable
+/* D70230 80241880 0C0B1EAF */  jal       evt_get_variable
 /* D70234 80241884 0240202D */   daddu    $a0, $s2, $zero
 /* D70238 80241888 AE4200AC */  sw        $v0, 0xac($s2)
 /* D7023C 8024188C 24020008 */  addiu     $v0, $zero, 8
 /* D70240 80241890 AE4200B0 */  sw        $v0, 0xb0($s2)
 /* D70244 80241894 8E250000 */  lw        $a1, ($s1)
-/* D70248 80241898 0C0B1EAF */  jal       get_variable
+/* D70248 80241898 0C0B1EAF */  jal       evt_get_variable
 /* D7024C 8024189C 0240202D */   daddu    $a0, $s2, $zero
 /* D70250 802418A0 AE4200B4 */  sw        $v0, 0xb4($s2)
 /* D70254 802418A4 C6620038 */  lwc1      $f2, 0x38($s3)

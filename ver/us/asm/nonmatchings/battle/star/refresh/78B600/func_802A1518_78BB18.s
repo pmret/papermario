@@ -30,7 +30,7 @@ glabel func_802A1518_78BB18
 /* 78BB74 802A1574 00000000 */   nop
 .L802A1578:
 /* 78BB78 802A1578 8C850000 */  lw        $a1, ($a0)
-/* 78BB7C 802A157C 0C0B1EAF */  jal       get_variable
+/* 78BB7C 802A157C 0C0B1EAF */  jal       evt_get_variable
 /* 78BB80 802A1580 0220202D */   daddu    $a0, $s1, $zero
 /* 78BB84 802A1584 0C00EABB */  jal       get_npc_unsafe
 /* 78BB88 802A1588 0040202D */   daddu    $a0, $v0, $zero

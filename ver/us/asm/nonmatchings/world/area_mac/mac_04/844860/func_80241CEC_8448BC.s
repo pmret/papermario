@@ -5,7 +5,7 @@ glabel func_80241CEC_8448BC
 /* 8448BC 80241CEC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 8448C0 80241CF0 3C05FD05 */  lui       $a1, 0xfd05
 /* 8448C4 80241CF4 AFBF0010 */  sw        $ra, 0x10($sp)
-/* 8448C8 80241CF8 0C0B1EAF */  jal       get_variable
+/* 8448C8 80241CF8 0C0B1EAF */  jal       evt_get_variable
 /* 8448CC 80241CFC 34A50F8B */   ori      $a1, $a1, 0xf8b
 /* 8448D0 80241D00 0040202D */  daddu     $a0, $v0, $zero
 /* 8448D4 80241D04 3C028011 */  lui       $v0, %hi(gPlayerStatus)

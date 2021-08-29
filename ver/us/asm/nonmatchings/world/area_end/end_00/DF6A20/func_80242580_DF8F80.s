@@ -10,7 +10,7 @@ glabel func_80242580_DF8F80
 /* DF8F94 80242594 AFB00010 */  sw        $s0, 0x10($sp)
 /* DF8F98 80242598 8E22000C */  lw        $v0, 0xc($s1)
 /* DF8F9C 8024259C 00A0802D */  daddu     $s0, $a1, $zero
-/* DF8FA0 802425A0 0C0B1EAF */  jal       get_variable
+/* DF8FA0 802425A0 0C0B1EAF */  jal       evt_get_variable
 /* DF8FA4 802425A4 8C450000 */   lw       $a1, ($v0)
 /* DF8FA8 802425A8 12000005 */  beqz      $s0, .L802425C0
 /* DF8FAC 802425AC 0040902D */   daddu    $s2, $v0, $zero

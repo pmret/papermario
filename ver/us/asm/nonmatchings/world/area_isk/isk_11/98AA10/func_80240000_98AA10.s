@@ -26,7 +26,7 @@ glabel func_80240000_98AA10
 /* 98AA64 80240054 46000586 */   mov.s    $f22, $f0
 /* 98AA68 80240058 0220202D */  daddu     $a0, $s1, $zero
 /* 98AA6C 8024005C 8E050000 */  lw        $a1, ($s0)
-/* 98AA70 80240060 0C0B1EAF */  jal       get_variable
+/* 98AA70 80240060 0C0B1EAF */  jal       evt_get_variable
 /* 98AA74 80240064 46000506 */   mov.s    $f20, $f0
 /* 98AA78 80240068 4405C000 */  mfc1      $a1, $f24
 /* 98AA7C 8024006C 4406B000 */  mfc1      $a2, $f22

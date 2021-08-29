@@ -9,7 +9,7 @@ glabel AssignAreaFlag
 /* A8708 80112008 AFB00010 */  sw        $s0, 0x10($sp)
 /* A870C 8011200C 14A20012 */  bne       $a1, $v0, .L80112058
 /* A8710 80112010 8C83000C */   lw       $v1, 0xc($a0)
-/* A8714 80112014 0C0B1EAF */  jal       get_variable
+/* A8714 80112014 0C0B1EAF */  jal       evt_get_variable
 /* A8718 80112018 8C650000 */   lw       $a1, ($v1)
 /* A871C 8011201C 3C048015 */  lui       $a0, %hi(gLastCreatedEntityIndex)
 /* A8720 80112020 8C8412EC */  lw        $a0, %lo(gLastCreatedEntityIndex)($a0)

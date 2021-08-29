@@ -26,7 +26,7 @@ glabel func_80240264_B06C64
 /* B06CB8 802402B8 46000586 */   mov.s    $f22, $f0
 /* B06CBC 802402BC 0220202D */  daddu     $a0, $s1, $zero
 /* B06CC0 802402C0 8E050000 */  lw        $a1, ($s0)
-/* B06CC4 802402C4 0C0B1EAF */  jal       get_variable
+/* B06CC4 802402C4 0C0B1EAF */  jal       evt_get_variable
 /* B06CC8 802402C8 46000506 */   mov.s    $f20, $f0
 /* B06CCC 802402CC 4405C000 */  mfc1      $a1, $f24
 /* B06CD0 802402D0 4406B000 */  mfc1      $a2, $f22

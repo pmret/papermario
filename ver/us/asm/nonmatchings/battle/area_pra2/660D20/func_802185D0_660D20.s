@@ -17,7 +17,7 @@ glabel func_802185D0_660D20
 /* 660D50 80218600 24050001 */   addiu    $a1, $zero, 1
 /* 660D54 80218604 0200202D */  daddu     $a0, $s0, $zero
 /* 660D58 80218608 8E250000 */  lw        $a1, ($s1)
-/* 660D5C 8021860C 0C0B1EAF */  jal       get_variable
+/* 660D5C 8021860C 0C0B1EAF */  jal       evt_get_variable
 /* 660D60 80218610 0040802D */   daddu    $s0, $v0, $zero
 /* 660D64 80218614 C600004C */  lwc1      $f0, 0x4c($s0)
 /* 660D68 80218618 3C0141C0 */  lui       $at, 0x41c0

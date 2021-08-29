@@ -6,7 +6,7 @@ glabel func_802417C8_D3BD98
 /* D3BD9C 802417CC 3C058025 */  lui       $a1, %hi(D_80251468)
 /* D3BDA0 802417D0 8CA51468 */  lw        $a1, %lo(D_80251468)($a1)
 /* D3BDA4 802417D4 AFBF0010 */  sw        $ra, 0x10($sp)
-/* D3BDA8 802417D8 0C0B1EAF */  jal       get_variable
+/* D3BDA8 802417D8 0C0B1EAF */  jal       evt_get_variable
 /* D3BDAC 802417DC 0000202D */   daddu    $a0, $zero, $zero
 /* D3BDB0 802417E0 0040182D */  daddu     $v1, $v0, $zero
 /* D3BDB4 802417E4 24020001 */  addiu     $v0, $zero, 1

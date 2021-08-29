@@ -17,7 +17,7 @@ glabel func_80241FFC_9D901C
 .L8024202C:
 /* 9D904C 8024202C 3C05F5DE */  lui       $a1, 0xf5de
 /* 9D9050 80242030 34A502E0 */  ori       $a1, $a1, 0x2e0
-/* 9D9054 80242034 0C0B1EAF */  jal       get_variable
+/* 9D9054 80242034 0C0B1EAF */  jal       evt_get_variable
 /* 9D9058 80242038 0000202D */   daddu    $a0, $zero, $zero
 /* 9D905C 8024203C 3C038024 */  lui       $v1, %hi(D_8024712C_9DE14C)
 /* 9D9060 80242040 00621821 */  addu      $v1, $v1, $v0

@@ -21,7 +21,7 @@ glabel RunToGoal
 /* 1A8780 80279EA0 00000000 */   nop
 /* 1A8784 80279EA4 8E250000 */  lw        $a1, ($s1)
 /* 1A8788 80279EA8 26310004 */  addiu     $s1, $s1, 4
-/* 1A878C 80279EAC 0C0B1EAF */  jal       get_variable
+/* 1A878C 80279EAC 0C0B1EAF */  jal       evt_get_variable
 /* 1A8790 80279EB0 0240202D */   daddu    $a0, $s2, $zero
 /* 1A8794 80279EB4 0040202D */  daddu     $a0, $v0, $zero
 /* 1A8798 80279EB8 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -35,11 +35,11 @@ glabel RunToGoal
 /* 1A87B4 80279ED4 AE500074 */  sw        $s0, 0x74($s2)
 /* 1A87B8 80279ED8 8E250000 */  lw        $a1, ($s1)
 /* 1A87BC 80279EDC 26310004 */  addiu     $s1, $s1, 4
-/* 1A87C0 80279EE0 0C0B1EAF */  jal       get_variable
+/* 1A87C0 80279EE0 0C0B1EAF */  jal       evt_get_variable
 /* 1A87C4 80279EE4 0240202D */   daddu    $a0, $s2, $zero
 /* 1A87C8 80279EE8 A6020070 */  sh        $v0, 0x70($s0)
 /* 1A87CC 80279EEC 8E250000 */  lw        $a1, ($s1)
-/* 1A87D0 80279EF0 0C0B1EAF */  jal       get_variable
+/* 1A87D0 80279EF0 0C0B1EAF */  jal       evt_get_variable
 /* 1A87D4 80279EF4 0240202D */   daddu    $a0, $s2, $zero
 /* 1A87D8 80279EF8 AE420078 */  sw        $v0, 0x78($s2)
 /* 1A87DC 80279EFC C6160018 */  lwc1      $f22, 0x18($s0)

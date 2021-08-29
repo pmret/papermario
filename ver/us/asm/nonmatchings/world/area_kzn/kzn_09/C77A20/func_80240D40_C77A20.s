@@ -12,16 +12,16 @@ glabel func_80240D40_C77A20
 /* C77A3C 80240D5C 1040001B */  beqz      $v0, .L80240DCC
 /* C77A40 80240D60 26100004 */   addiu    $s0, $s0, 4
 /* C77A44 80240D64 8E050000 */  lw        $a1, ($s0)
-/* C77A48 80240D68 0C0B1EAF */  jal       get_variable
+/* C77A48 80240D68 0C0B1EAF */  jal       evt_get_variable
 /* C77A4C 80240D6C 26100004 */   addiu    $s0, $s0, 4
 /* C77A50 80240D70 AE220070 */  sw        $v0, 0x70($s1)
 /* C77A54 80240D74 8E050000 */  lw        $a1, ($s0)
 /* C77A58 80240D78 26100004 */  addiu     $s0, $s0, 4
-/* C77A5C 80240D7C 0C0B1EAF */  jal       get_variable
+/* C77A5C 80240D7C 0C0B1EAF */  jal       evt_get_variable
 /* C77A60 80240D80 0220202D */   daddu    $a0, $s1, $zero
 /* C77A64 80240D84 AE220074 */  sw        $v0, 0x74($s1)
 /* C77A68 80240D88 8E050000 */  lw        $a1, ($s0)
-/* C77A6C 80240D8C 0C0B1EAF */  jal       get_variable
+/* C77A6C 80240D8C 0C0B1EAF */  jal       evt_get_variable
 /* C77A70 80240D90 0220202D */   daddu    $a0, $s1, $zero
 /* C77A74 80240D94 24040168 */  addiu     $a0, $zero, 0x168
 /* C77A78 80240D98 0000282D */  daddu     $a1, $zero, $zero

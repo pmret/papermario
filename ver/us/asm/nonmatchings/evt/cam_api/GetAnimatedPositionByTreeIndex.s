@@ -13,12 +13,12 @@ glabel GetAnimatedPositionByTreeIndex
 /* F21A8 802CD7F8 AFB00030 */  sw        $s0, 0x30($sp)
 /* F21AC 802CD7FC 8E50000C */  lw        $s0, 0xc($s2)
 /* F21B0 802CD800 8E050000 */  lw        $a1, ($s0)
-/* F21B4 802CD804 0C0B1EAF */  jal       get_variable
+/* F21B4 802CD804 0C0B1EAF */  jal       evt_get_variable
 /* F21B8 802CD808 26100004 */   addiu    $s0, $s0, 4
 /* F21BC 802CD80C 8E050000 */  lw        $a1, ($s0)
 /* F21C0 802CD810 26100004 */  addiu     $s0, $s0, 4
 /* F21C4 802CD814 0240202D */  daddu     $a0, $s2, $zero
-/* F21C8 802CD818 0C0B1EAF */  jal       get_variable
+/* F21C8 802CD818 0C0B1EAF */  jal       evt_get_variable
 /* F21CC 802CD81C 0040882D */   daddu    $s1, $v0, $zero
 /* F21D0 802CD820 00118880 */  sll       $s1, $s1, 2
 /* F21D4 802CD824 8E140000 */  lw        $s4, ($s0)

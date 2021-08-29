@@ -394,7 +394,7 @@ glabel dro_02_func_8024190C_96AACC
 /* 96B0C8 80241F08 00621821 */  addu      $v1, $v1, $v0
 /* 96B0CC 80241F0C 3C028000 */  lui       $v0, 0x8000
 /* 96B0D0 80241F10 00621821 */  addu      $v1, $v1, $v0
-/* 96B0D4 80241F14 0C0B1EAF */  jal       get_variable
+/* 96B0D4 80241F14 0C0B1EAF */  jal       evt_get_variable
 /* 96B0D8 80241F18 ACC30004 */   sw       $v1, 4($a2)
 /* 96B0DC 80241F1C 0040202D */  daddu     $a0, $v0, $zero
 /* 96B0E0 80241F20 27A50098 */  addiu     $a1, $sp, 0x98
@@ -475,7 +475,7 @@ glabel dro_02_func_8024190C_96AACC
 /* 96B200 80242040 00541021 */  addu      $v0, $v0, $s4
 /* 96B204 80242044 00621821 */  addu      $v1, $v1, $v0
 /* 96B208 80242048 006D1821 */  addu      $v1, $v1, $t5
-/* 96B20C 8024204C 0C0B1EAF */  jal       get_variable
+/* 96B20C 8024204C 0C0B1EAF */  jal       evt_get_variable
 /* 96B210 80242050 ACC30004 */   sw       $v1, 4($a2)
 /* 96B214 80242054 0040202D */  daddu     $a0, $v0, $zero
 /* 96B218 80242058 27B60098 */  addiu     $s6, $sp, 0x98
@@ -485,7 +485,7 @@ glabel dro_02_func_8024190C_96AACC
 /* 96B228 80242068 27A70018 */   addiu    $a3, $sp, 0x18
 /* 96B22C 8024206C 3C05F4AC */  lui       $a1, 0xf4ac
 /* 96B230 80242070 8EA40000 */  lw        $a0, ($s5)
-/* 96B234 80242074 0C0B1EAF */  jal       get_variable
+/* 96B234 80242074 0C0B1EAF */  jal       evt_get_variable
 /* 96B238 80242078 34A5D482 */   ori      $a1, $a1, 0xd482
 /* 96B23C 8024207C 0040202D */  daddu     $a0, $v0, $zero
 /* 96B240 80242080 02C0282D */  daddu     $a1, $s6, $zero
@@ -560,7 +560,7 @@ glabel dro_02_func_8024190C_96AACC
 /* 96B354 80242194 00021FC2 */  srl       $v1, $v0, 0x1f
 /* 96B358 80242198 00431021 */  addu      $v0, $v0, $v1
 /* 96B35C 8024219C 00021043 */  sra       $v0, $v0, 1
-/* 96B360 802421A0 0C0B1EAF */  jal       get_variable
+/* 96B360 802421A0 0C0B1EAF */  jal       evt_get_variable
 /* 96B364 802421A4 A7A200A6 */   sh       $v0, 0xa6($sp)
 /* 96B368 802421A8 0040202D */  daddu     $a0, $v0, $zero
 /* 96B36C 802421AC 02C0282D */  daddu     $a1, $s6, $zero

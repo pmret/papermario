@@ -10,7 +10,7 @@ glabel GetCommandAutoSuccess
 /* 197C90 802693B0 3C11802A */  lui       $s1, %hi(gActionCommandStatus)
 /* 197C94 802693B4 2631FBE0 */  addiu     $s1, $s1, %lo(gActionCommandStatus)
 /* 197C98 802693B8 8C450000 */  lw        $a1, ($v0)
-/* 197C9C 802693BC 0C0B1EAF */  jal       get_variable
+/* 197C9C 802693BC 0C0B1EAF */  jal       evt_get_variable
 /* 197CA0 802693C0 0220802D */   daddu    $s0, $s1, $zero
 /* 197CA4 802693C4 10400003 */  beqz      $v0, .L802693D4
 /* 197CA8 802693C8 24020001 */   addiu    $v0, $zero, 1

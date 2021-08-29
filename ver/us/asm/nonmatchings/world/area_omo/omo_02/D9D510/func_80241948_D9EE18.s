@@ -38,7 +38,7 @@ glabel func_80241948_D9EE18
 /* D9EE74 802419A4 00459021 */   addu     $s2, $v0, $a1
 /* D9EE78 802419A8 0220202D */  daddu     $a0, $s1, $zero
 /* D9EE7C 802419AC 8E050000 */  lw        $a1, ($s0)
-/* D9EE80 802419B0 0C0B1EAF */  jal       get_variable
+/* D9EE80 802419B0 0C0B1EAF */  jal       evt_get_variable
 /* D9EE84 802419B4 0040802D */   daddu    $s0, $v0, $zero
 /* D9EE88 802419B8 0260202D */  daddu     $a0, $s3, $zero
 /* D9EE8C 802419BC 8C460024 */  lw        $a2, 0x24($v0)

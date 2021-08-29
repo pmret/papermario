@@ -9,7 +9,7 @@ glabel WaitForState
 /* 19CA88 8026E1A8 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 19CA8C 8026E1AC 10A00008 */  beqz      $a1, .L8026E1D0
 /* 19CA90 8026E1B0 8C82000C */   lw       $v0, 0xc($a0)
-/* 19CA94 8026E1B4 0C0B1EAF */  jal       get_variable
+/* 19CA94 8026E1B4 0C0B1EAF */  jal       evt_get_variable
 /* 19CA98 8026E1B8 8C450000 */   lw       $a1, ($v0)
 /* 19CA9C 8026E1BC 0040182D */  daddu     $v1, $v0, $zero
 /* 19CAA0 8026E1C0 54600003 */  bnel      $v1, $zero, .L8026E1D0

@@ -5,7 +5,7 @@ glabel func_80218178_69F378
 /* 69F378 80218178 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 69F37C 8021817C AFBF0010 */  sw        $ra, 0x10($sp)
 /* 69F380 80218180 8C82000C */  lw        $v0, 0xc($a0)
-/* 69F384 80218184 0C0B1EAF */  jal       get_variable
+/* 69F384 80218184 0C0B1EAF */  jal       evt_get_variable
 /* 69F388 80218188 8C450000 */   lw       $a1, ($v0)
 /* 69F38C 8021818C 8C43000C */  lw        $v1, 0xc($v0)
 /* 69F390 80218190 3C013D23 */  lui       $at, 0x3d23

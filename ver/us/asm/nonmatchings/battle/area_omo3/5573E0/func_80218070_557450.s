@@ -17,7 +17,7 @@ glabel func_80218070_557450
 /* 557480 802180A0 F7B60050 */  sdc1      $f22, 0x50($sp)
 /* 557484 802180A4 F7B40048 */  sdc1      $f20, 0x48($sp)
 /* 557488 802180A8 8E02000C */  lw        $v0, 0xc($s0)
-/* 55748C 802180AC 0C0B1EAF */  jal       get_variable
+/* 55748C 802180AC 0C0B1EAF */  jal       evt_get_variable
 /* 557490 802180B0 8C450000 */   lw       $a1, ($v0)
 /* 557494 802180B4 8E040148 */  lw        $a0, 0x148($s0)
 /* 557498 802180B8 0C09A75B */  jal       get_actor

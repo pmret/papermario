@@ -29,14 +29,14 @@ glabel PartnerAfflictEnemy
 /* 1AE944 80280064 26100004 */  addiu     $s0, $s0, 4
 /* 1AE948 80280068 AE230190 */  sw        $v1, 0x190($s1)
 /* 1AE94C 8028006C 8E050000 */  lw        $a1, ($s0)
-/* 1AE950 80280070 0C0B1EAF */  jal       get_variable
+/* 1AE950 80280070 0C0B1EAF */  jal       evt_get_variable
 /* 1AE954 80280074 26100004 */   addiu    $s0, $s0, 4
 /* 1AE958 80280078 8E230190 */  lw        $v1, 0x190($s1)
 /* 1AE95C 8028007C 0240202D */  daddu     $a0, $s2, $zero
 /* 1AE960 80280080 00621825 */  or        $v1, $v1, $v0
 /* 1AE964 80280084 AE230190 */  sw        $v1, 0x190($s1)
 /* 1AE968 80280088 8E050000 */  lw        $a1, ($s0)
-/* 1AE96C 8028008C 0C0B1EAF */  jal       get_variable
+/* 1AE96C 8028008C 0C0B1EAF */  jal       evt_get_variable
 /* 1AE970 80280090 26100004 */   addiu    $s0, $s0, 4
 /* 1AE974 80280094 A622017E */  sh        $v0, 0x17e($s1)
 /* 1AE978 80280098 A2200198 */  sb        $zero, 0x198($s1)

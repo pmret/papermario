@@ -27,7 +27,7 @@ glabel func_802A1518_799CC8
 /* 799D20 802A1570 26B1000C */   addiu    $s1, $s5, 0xc
 /* 799D24 802A1574 3C01802A */  lui       $at, %hi(D_802A3838)
 /* 799D28 802A1578 AC203838 */  sw        $zero, %lo(D_802A3838)($at)
-/* 799D2C 802A157C 0C0B1EAF */  jal       get_variable
+/* 799D2C 802A157C 0C0B1EAF */  jal       evt_get_variable
 /* 799D30 802A1580 8C450000 */   lw       $a1, ($v0)
 /* 799D34 802A1584 AFC20078 */  sw        $v0, 0x78($fp)
 /* 799D38 802A1588 AFC00070 */  sw        $zero, 0x70($fp)

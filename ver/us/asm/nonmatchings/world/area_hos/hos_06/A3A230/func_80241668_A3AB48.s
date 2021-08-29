@@ -16,7 +16,7 @@ glabel func_80241668_A3AB48
 /* A3AB74 80241694 AFB3001C */  sw        $s3, 0x1c($sp)
 /* A3AB78 80241698 AFB20018 */  sw        $s2, 0x18($sp)
 /* A3AB7C 8024169C AFB10014 */  sw        $s1, 0x14($sp)
-/* A3AB80 802416A0 0C0B1EAF */  jal       get_variable
+/* A3AB80 802416A0 0C0B1EAF */  jal       evt_get_variable
 /* A3AB84 802416A4 AFB00010 */   sw       $s0, 0x10($sp)
 /* A3AB88 802416A8 0040A82D */  daddu     $s5, $v0, $zero
 /* A3AB8C 802416AC 0000A02D */  daddu     $s4, $zero, $zero
@@ -32,12 +32,12 @@ glabel func_80241668_A3AB48
 /* A3ABB0 802416D0 5440000C */  bnel      $v0, $zero, .L80241704
 /* A3ABB4 802416D4 26100001 */   addiu    $s0, $s0, 1
 /* A3ABB8 802416D8 8E250000 */  lw        $a1, ($s1)
-/* A3ABBC 802416DC 0C0B1EAF */  jal       get_variable
+/* A3ABBC 802416DC 0C0B1EAF */  jal       evt_get_variable
 /* A3ABC0 802416E0 0000202D */   daddu    $a0, $zero, $zero
 /* A3ABC4 802416E4 54400007 */  bnel      $v0, $zero, .L80241704
 /* A3ABC8 802416E8 26100001 */   addiu    $s0, $s0, 1
 /* A3ABCC 802416EC 0000202D */  daddu     $a0, $zero, $zero
-/* A3ABD0 802416F0 0C0B1EAF */  jal       get_variable
+/* A3ABD0 802416F0 0C0B1EAF */  jal       evt_get_variable
 /* A3ABD4 802416F4 02122821 */   addu     $a1, $s0, $s2
 /* A3ABD8 802416F8 50400001 */  beql      $v0, $zero, .L80241700
 /* A3ABDC 802416FC 26940001 */   addiu    $s4, $s4, 1
@@ -65,13 +65,13 @@ glabel func_80241668_A3AB48
 /* A3AC28 80241748 54400017 */  bnel      $v0, $zero, .L802417A8
 /* A3AC2C 8024174C 26100001 */   addiu    $s0, $s0, 1
 /* A3AC30 80241750 8E450000 */  lw        $a1, ($s2)
-/* A3AC34 80241754 0C0B1EAF */  jal       get_variable
+/* A3AC34 80241754 0C0B1EAF */  jal       evt_get_variable
 /* A3AC38 80241758 0000202D */   daddu    $a0, $zero, $zero
 /* A3AC3C 8024175C 54400012 */  bnel      $v0, $zero, .L802417A8
 /* A3AC40 80241760 26100001 */   addiu    $s0, $s0, 1
 /* A3AC44 80241764 0000202D */  daddu     $a0, $zero, $zero
 /* A3AC48 80241768 02168821 */  addu      $s1, $s0, $s6
-/* A3AC4C 8024176C 0C0B1EAF */  jal       get_variable
+/* A3AC4C 8024176C 0C0B1EAF */  jal       evt_get_variable
 /* A3AC50 80241770 0220282D */   daddu    $a1, $s1, $zero
 /* A3AC54 80241774 5440000C */  bnel      $v0, $zero, .L802417A8
 /* A3AC58 80241778 26100001 */   addiu    $s0, $s0, 1

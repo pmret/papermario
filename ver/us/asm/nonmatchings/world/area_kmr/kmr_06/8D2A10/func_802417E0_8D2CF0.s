@@ -12,7 +12,7 @@ glabel func_802417E0_8D2CF0
 /* 8D2D0C 802417FC AFB10014 */  sw        $s1, 0x14($sp)
 /* 8D2D10 80241800 AFB00010 */  sw        $s0, 0x10($sp)
 /* 8D2D14 80241804 8E62000C */  lw        $v0, 0xc($s3)
-/* 8D2D18 80241808 0C0B1EAF */  jal       get_variable
+/* 8D2D18 80241808 0C0B1EAF */  jal       evt_get_variable
 /* 8D2D1C 8024180C 8C450000 */   lw       $a1, ($v0)
 /* 8D2D20 80241810 24040048 */  addiu     $a0, $zero, 0x48
 /* 8D2D24 80241814 0C00AB39 */  jal       heap_malloc

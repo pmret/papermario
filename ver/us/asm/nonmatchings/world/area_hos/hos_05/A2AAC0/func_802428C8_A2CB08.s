@@ -48,7 +48,7 @@ glabel func_802428C8_A2CB08
 /* A2CB44 80242904 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* A2CB48 80242908 8E70000C */  lw        $s0, 0xc($s3)
 /* A2CB4C 8024290C 8E050000 */  lw        $a1, ($s0)
-/* A2CB50 80242910 0C0B1EAF */  jal       get_variable
+/* A2CB50 80242910 0C0B1EAF */  jal       evt_get_variable
 /* A2CB54 80242914 26100004 */   addiu    $s0, $s0, 4
 /* A2CB58 80242918 8E050000 */  lw        $a1, ($s0)
 /* A2CB5C 8024291C 26100004 */  addiu     $s0, $s0, 4
@@ -62,7 +62,7 @@ glabel func_802428C8_A2CB08
 /* A2CB7C 8024293C 0260202D */  daddu     $a0, $s3, $zero
 /* A2CB80 80242940 3C05F4AC */  lui       $a1, 0xf4ac
 /* A2CB84 80242944 34A5D480 */  ori       $a1, $a1, 0xd480
-/* A2CB88 80242948 0C0B1EAF */  jal       get_variable
+/* A2CB88 80242948 0C0B1EAF */  jal       evt_get_variable
 /* A2CB8C 8024294C 46000706 */   mov.s    $f28, $f0
 /* A2CB90 80242950 0040202D */  daddu     $a0, $v0, $zero
 /* A2CB94 80242954 26C3FFFF */  addiu     $v1, $s6, -1

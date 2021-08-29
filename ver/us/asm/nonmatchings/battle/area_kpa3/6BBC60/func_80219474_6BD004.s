@@ -12,7 +12,7 @@ glabel func_80219474_6BD004
 /* 6BD020 80219490 8E11000C */   lw       $s1, 0xc($s0)
 /* 6BD024 80219494 0200202D */  daddu     $a0, $s0, $zero
 /* 6BD028 80219498 8E250000 */  lw        $a1, ($s1)
-/* 6BD02C 8021949C 0C0B1EAF */  jal       get_variable
+/* 6BD02C 8021949C 0C0B1EAF */  jal       evt_get_variable
 /* 6BD030 802194A0 8C500090 */   lw       $s0, 0x90($v0)
 /* 6BD034 802194A4 AE02000C */  sw        $v0, 0xc($s0)
 /* 6BD038 802194A8 8FBF0018 */  lw        $ra, 0x18($sp)

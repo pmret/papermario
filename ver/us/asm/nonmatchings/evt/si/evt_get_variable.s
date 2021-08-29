@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel get_variable
+glabel evt_get_variable
 /* EC46C 802C7ABC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* EC470 802C7AC0 3C07EFE8 */  lui       $a3, 0xefe8
 /* EC474 802C7AC4 34E72080 */  ori       $a3, $a3, 0x2080

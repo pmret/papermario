@@ -5,7 +5,7 @@ glabel func_802421CC_DB448C
 /* DB448C 802421CC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* DB4490 802421D0 AFBF0010 */  sw        $ra, 0x10($sp)
 /* DB4494 802421D4 8C82000C */  lw        $v0, 0xc($a0)
-/* DB4498 802421D8 0C0B1EAF */  jal       get_variable
+/* DB4498 802421D8 0C0B1EAF */  jal       evt_get_variable
 /* DB449C 802421DC 8C450000 */   lw       $a1, ($v0)
 /* DB44A0 802421E0 3C018024 */  lui       $at, %hi(D_8024309C_DB535C)
 /* DB44A4 802421E4 AC22309C */  sw        $v0, %lo(D_8024309C_DB535C)($at)

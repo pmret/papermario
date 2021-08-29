@@ -8,12 +8,12 @@ glabel func_80240F2C_D7FC8C
 /* D7FC98 80240F38 AFBF0018 */  sw        $ra, 0x18($sp)
 /* D7FC9C 80240F3C AFB00010 */  sw        $s0, 0x10($sp)
 /* D7FCA0 80240F40 8E22000C */  lw        $v0, 0xc($s1)
-/* D7FCA4 80240F44 0C0B1EAF */  jal       get_variable
+/* D7FCA4 80240F44 0C0B1EAF */  jal       evt_get_variable
 /* D7FCA8 80240F48 8C450000 */   lw       $a1, ($v0)
 /* D7FCAC 80240F4C 0220202D */  daddu     $a0, $s1, $zero
 /* D7FCB0 80240F50 3C05FD05 */  lui       $a1, 0xfd05
 /* D7FCB4 80240F54 34A50F80 */  ori       $a1, $a1, 0xf80
-/* D7FCB8 80240F58 0C0B1EAF */  jal       get_variable
+/* D7FCB8 80240F58 0C0B1EAF */  jal       evt_get_variable
 /* D7FCBC 80240F5C 0040802D */   daddu    $s0, $v0, $zero
 /* D7FCC0 80240F60 0220202D */  daddu     $a0, $s1, $zero
 /* D7FCC4 80240F64 3C05FE36 */  lui       $a1, 0xfe36

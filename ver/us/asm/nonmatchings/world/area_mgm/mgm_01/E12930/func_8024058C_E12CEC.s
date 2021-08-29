@@ -18,7 +18,7 @@ glabel func_8024058C_E12CEC
 /* E12D04 802405A4 8E03000C */  lw        $v1, 0xc($s0)
 /* E12D08 802405A8 0200202D */  daddu     $a0, $s0, $zero
 /* E12D0C 802405AC 8C650000 */  lw        $a1, ($v1)
-/* E12D10 802405B0 0C0B1EAF */  jal       get_variable
+/* E12D10 802405B0 0C0B1EAF */  jal       evt_get_variable
 /* E12D14 802405B4 8C500080 */   lw       $s0, 0x80($v0)
 /* E12D18 802405B8 00021840 */  sll       $v1, $v0, 1
 /* E12D1C 802405BC 00621821 */  addu      $v1, $v1, $v0

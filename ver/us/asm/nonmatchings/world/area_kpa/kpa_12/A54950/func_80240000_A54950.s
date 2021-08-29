@@ -6,7 +6,7 @@ glabel func_80240000_A54950
 /* A54954 80240004 AFBF0010 */  sw        $ra, 0x10($sp)
 /* A54958 80240008 3C05F840 */  lui       $a1, 0xf840
 /* A5495C 8024000C 34A56194 */  ori       $a1, $a1, 0x6194
-/* A54960 80240010 0C0B1EAF */  jal       get_variable
+/* A54960 80240010 0C0B1EAF */  jal       evt_get_variable
 /* A54964 80240014 0000202D */   daddu    $a0, $zero, $zero
 /* A54968 80240018 0040182D */  daddu     $v1, $v0, $zero
 /* A5496C 8024001C 3C020019 */  lui       $v0, 0x19

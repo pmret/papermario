@@ -21,7 +21,7 @@ glabel func_80244550_A2E790
 /* A2E7D0 80244590 02C0202D */  daddu     $a0, $s6, $zero
 /* A2E7D4 80244594 3C05F4AC */  lui       $a1, 0xf4ac
 /* A2E7D8 80244598 34A5D480 */  ori       $a1, $a1, 0xd480
-/* A2E7DC 8024459C 0C0B1EAF */  jal       get_variable
+/* A2E7DC 8024459C 0C0B1EAF */  jal       evt_get_variable
 /* A2E7E0 802445A0 0040A02D */   daddu    $s4, $v0, $zero
 /* A2E7E4 802445A4 1200002B */  beqz      $s0, .L80244654
 /* A2E7E8 802445A8 0040A82D */   daddu    $s5, $v0, $zero

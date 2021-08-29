@@ -5,7 +5,7 @@ glabel func_80242934_C63644
 /* C63644 80242934 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* C63648 80242938 AFBF0010 */  sw        $ra, 0x10($sp)
 /* C6364C 8024293C 8C82000C */  lw        $v0, 0xc($a0)
-/* C63650 80242940 0C0B1EAF */  jal       get_variable
+/* C63650 80242940 0C0B1EAF */  jal       evt_get_variable
 /* C63654 80242944 8C450000 */   lw       $a1, ($v0)
 /* C63658 80242948 3C018024 */  lui       $at, %hi(D_80244208_C64F18)
 /* C6365C 8024294C AC224208 */  sw        $v0, %lo(D_80244208_C64F18)($at)

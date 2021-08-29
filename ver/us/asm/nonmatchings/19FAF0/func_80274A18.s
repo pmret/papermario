@@ -52,11 +52,11 @@ glabel func_80274A18
 /* 1A3338 80274A58 10A00010 */  beqz      $a1, .L80274A9C
 /* 1A333C 80274A5C 2650000C */   addiu    $s0, $s2, 0xc
 /* 1A3340 80274A60 8E250000 */  lw        $a1, ($s1)
-/* 1A3344 80274A64 0C0B1EAF */  jal       get_variable
+/* 1A3344 80274A64 0C0B1EAF */  jal       evt_get_variable
 /* 1A3348 80274A68 26310004 */   addiu    $s1, $s1, 4
 /* 1A334C 80274A6C A6420070 */  sh        $v0, 0x70($s2)
 /* 1A3350 80274A70 8E250000 */  lw        $a1, ($s1)
-/* 1A3354 80274A74 0C0B1EAF */  jal       get_variable
+/* 1A3354 80274A74 0C0B1EAF */  jal       evt_get_variable
 /* 1A3358 80274A78 0260202D */   daddu    $a0, $s3, $zero
 /* 1A335C 80274A7C A6420072 */  sh        $v0, 0x72($s2)
 /* 1A3360 80274A80 AE600074 */  sw        $zero, 0x74($s3)

@@ -19,7 +19,7 @@ glabel func_80240E20_A01420
 /* A0143C 80240E3C F7B40028 */  sdc1      $f20, 0x28($sp)
 /* A01440 80240E40 8E42000C */  lw        $v0, 0xc($s2)
 /* A01444 80240E44 00A0802D */  daddu     $s0, $a1, $zero
-/* A01448 80240E48 0C0B1EAF */  jal       get_variable
+/* A01448 80240E48 0C0B1EAF */  jal       evt_get_variable
 /* A0144C 80240E4C 8C450000 */   lw       $a1, ($v0)
 /* A01450 80240E50 3C138011 */  lui       $s3, %hi(gPlayerStatus)
 /* A01454 80240E54 2673EFC8 */  addiu     $s3, $s3, %lo(gPlayerStatus)

@@ -5,7 +5,7 @@ glabel func_80240664_D13C34
 /* D13C34 80240664 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* D13C38 80240668 AFBF0010 */  sw        $ra, 0x10($sp)
 /* D13C3C 8024066C 8C82000C */  lw        $v0, 0xc($a0)
-/* D13C40 80240670 0C0B1EAF */  jal       get_variable
+/* D13C40 80240670 0C0B1EAF */  jal       evt_get_variable
 /* D13C44 80240674 8C450000 */   lw       $a1, ($v0)
 /* D13C48 80240678 0040182D */  daddu     $v1, $v0, $zero
 /* D13C4C 8024067C 10600012 */  beqz      $v1, .L802406C8

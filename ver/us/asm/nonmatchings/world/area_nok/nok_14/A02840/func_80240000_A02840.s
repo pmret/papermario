@@ -14,31 +14,31 @@ glabel func_80240000_A02840
 /* A02864 80240024 AFB00010 */  sw        $s0, 0x10($sp)
 /* A02868 80240028 8E30000C */  lw        $s0, 0xc($s1)
 /* A0286C 8024002C 8E050000 */  lw        $a1, ($s0)
-/* A02870 80240030 0C0B1EAF */  jal       get_variable
+/* A02870 80240030 0C0B1EAF */  jal       evt_get_variable
 /* A02874 80240034 26100004 */   addiu    $s0, $s0, 4
 /* A02878 80240038 8E050000 */  lw        $a1, ($s0)
 /* A0287C 8024003C 26100004 */  addiu     $s0, $s0, 4
 /* A02880 80240040 0220202D */  daddu     $a0, $s1, $zero
-/* A02884 80240044 0C0B1EAF */  jal       get_variable
+/* A02884 80240044 0C0B1EAF */  jal       evt_get_variable
 /* A02888 80240048 0040902D */   daddu    $s2, $v0, $zero
 /* A0288C 8024004C 8E050000 */  lw        $a1, ($s0)
 /* A02890 80240050 26100004 */  addiu     $s0, $s0, 4
 /* A02894 80240054 0220202D */  daddu     $a0, $s1, $zero
-/* A02898 80240058 0C0B1EAF */  jal       get_variable
+/* A02898 80240058 0C0B1EAF */  jal       evt_get_variable
 /* A0289C 8024005C 0040B02D */   daddu    $s6, $v0, $zero
 /* A028A0 80240060 8E050000 */  lw        $a1, ($s0)
 /* A028A4 80240064 26100004 */  addiu     $s0, $s0, 4
 /* A028A8 80240068 0220202D */  daddu     $a0, $s1, $zero
-/* A028AC 8024006C 0C0B1EAF */  jal       get_variable
+/* A028AC 8024006C 0C0B1EAF */  jal       evt_get_variable
 /* A028B0 80240070 0040A82D */   daddu    $s5, $v0, $zero
 /* A028B4 80240074 8E050000 */  lw        $a1, ($s0)
 /* A028B8 80240078 26100004 */  addiu     $s0, $s0, 4
 /* A028BC 8024007C 0220202D */  daddu     $a0, $s1, $zero
-/* A028C0 80240080 0C0B1EAF */  jal       get_variable
+/* A028C0 80240080 0C0B1EAF */  jal       evt_get_variable
 /* A028C4 80240084 0040A02D */   daddu    $s4, $v0, $zero
 /* A028C8 80240088 0220202D */  daddu     $a0, $s1, $zero
 /* A028CC 8024008C 8E050000 */  lw        $a1, ($s0)
-/* A028D0 80240090 0C0B1EAF */  jal       get_variable
+/* A028D0 80240090 0C0B1EAF */  jal       evt_get_variable
 /* A028D4 80240094 0040802D */   daddu    $s0, $v0, $zero
 /* A028D8 80240098 3C138011 */  lui       $s3, %hi(gPlayerStatus)
 /* A028DC 8024009C 2673EFC8 */  addiu     $s3, $s3, %lo(gPlayerStatus)

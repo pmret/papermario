@@ -5,7 +5,7 @@ glabel func_802405F8_AF3298
 /* AF3298 802405F8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* AF329C 802405FC AFBF0010 */  sw        $ra, 0x10($sp)
 /* AF32A0 80240600 8C82000C */  lw        $v0, 0xc($a0)
-/* AF32A4 80240604 0C0B1EAF */  jal       get_variable
+/* AF32A4 80240604 0C0B1EAF */  jal       evt_get_variable
 /* AF32A8 80240608 8C450000 */   lw       $a1, ($v0)
 /* AF32AC 8024060C 0040182D */  daddu     $v1, $v0, $zero
 /* AF32B0 80240610 10600012 */  beqz      $v1, .L8024065C

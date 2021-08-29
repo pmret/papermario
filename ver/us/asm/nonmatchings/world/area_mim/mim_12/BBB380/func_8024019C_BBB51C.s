@@ -12,16 +12,16 @@ glabel func_8024019C_BBB51C
 /* BBB538 802401B8 10A0000E */  beqz      $a1, .L802401F4
 /* BBB53C 802401BC 0000902D */   daddu    $s2, $zero, $zero
 /* BBB540 802401C0 8E050000 */  lw        $a1, ($s0)
-/* BBB544 802401C4 0C0B1EAF */  jal       get_variable
+/* BBB544 802401C4 0C0B1EAF */  jal       evt_get_variable
 /* BBB548 802401C8 26100004 */   addiu    $s0, $s0, 4
 /* BBB54C 802401CC AE220074 */  sw        $v0, 0x74($s1)
 /* BBB550 802401D0 8E050000 */  lw        $a1, ($s0)
 /* BBB554 802401D4 26100004 */  addiu     $s0, $s0, 4
-/* BBB558 802401D8 0C0B1EAF */  jal       get_variable
+/* BBB558 802401D8 0C0B1EAF */  jal       evt_get_variable
 /* BBB55C 802401DC 0220202D */   daddu    $a0, $s1, $zero
 /* BBB560 802401E0 AE220078 */  sw        $v0, 0x78($s1)
 /* BBB564 802401E4 8E050000 */  lw        $a1, ($s0)
-/* BBB568 802401E8 0C0B1EAF */  jal       get_variable
+/* BBB568 802401E8 0C0B1EAF */  jal       evt_get_variable
 /* BBB56C 802401EC 0220202D */   daddu    $a0, $s1, $zero
 /* BBB570 802401F0 AE22007C */  sw        $v0, 0x7c($s1)
 .L802401F4:

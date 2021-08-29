@@ -13,27 +13,27 @@ glabel func_802413A4_D59C34
 /* D59C54 802413C4 8E50000C */  lw        $s0, 0xc($s2)
 /* D59C58 802413C8 8E530148 */  lw        $s3, 0x148($s2)
 /* D59C5C 802413CC 8E050000 */  lw        $a1, ($s0)
-/* D59C60 802413D0 0C0B1EAF */  jal       get_variable
+/* D59C60 802413D0 0C0B1EAF */  jal       evt_get_variable
 /* D59C64 802413D4 26100004 */   addiu    $s0, $s0, 4
 /* D59C68 802413D8 2C510001 */  sltiu     $s1, $v0, 1
 /* D59C6C 802413DC 8E050000 */  lw        $a1, ($s0)
 /* D59C70 802413E0 26100004 */  addiu     $s0, $s0, 4
 /* D59C74 802413E4 3C14800B */  lui       $s4, %hi(gCurrentEncounter)
 /* D59C78 802413E8 26940F10 */  addiu     $s4, $s4, %lo(gCurrentEncounter)
-/* D59C7C 802413EC 0C0B1EAF */  jal       get_variable
+/* D59C7C 802413EC 0C0B1EAF */  jal       evt_get_variable
 /* D59C80 802413F0 0240202D */   daddu    $a0, $s2, $zero
 /* D59C84 802413F4 50400001 */  beql      $v0, $zero, .L802413FC
 /* D59C88 802413F8 26310001 */   addiu    $s1, $s1, 1
 .L802413FC:
 /* D59C8C 802413FC 8E050000 */  lw        $a1, ($s0)
 /* D59C90 80241400 26100004 */  addiu     $s0, $s0, 4
-/* D59C94 80241404 0C0B1EAF */  jal       get_variable
+/* D59C94 80241404 0C0B1EAF */  jal       evt_get_variable
 /* D59C98 80241408 0240202D */   daddu    $a0, $s2, $zero
 /* D59C9C 8024140C 50400001 */  beql      $v0, $zero, .L80241414
 /* D59CA0 80241410 26310001 */   addiu    $s1, $s1, 1
 .L80241414:
 /* D59CA4 80241414 8E050000 */  lw        $a1, ($s0)
-/* D59CA8 80241418 0C0B1EAF */  jal       get_variable
+/* D59CA8 80241418 0C0B1EAF */  jal       evt_get_variable
 /* D59CAC 8024141C 0240202D */   daddu    $a0, $s2, $zero
 /* D59CB0 80241420 50400001 */  beql      $v0, $zero, .L80241428
 /* D59CB4 80241424 26310001 */   addiu    $s1, $s1, 1

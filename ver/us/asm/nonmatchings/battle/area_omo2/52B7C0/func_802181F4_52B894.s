@@ -11,7 +11,7 @@ glabel func_802181F4_52B894
 /* 52B8AC 8021820C 0C09A75B */  jal       get_actor
 /* 52B8B0 80218210 8E11000C */   lw       $s1, 0xc($s0)
 /* 52B8B4 80218214 8E250000 */  lw        $a1, ($s1)
-/* 52B8B8 80218218 0C0B1EAF */  jal       get_variable
+/* 52B8B8 80218218 0C0B1EAF */  jal       evt_get_variable
 /* 52B8BC 8021821C 0200202D */   daddu    $a0, $s0, $zero
 /* 52B8C0 80218220 44820000 */  mtc1      $v0, $f0
 /* 52B8C4 80218224 00000000 */  nop

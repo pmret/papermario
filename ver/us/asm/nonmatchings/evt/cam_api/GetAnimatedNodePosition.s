@@ -13,12 +13,12 @@ glabel GetAnimatedNodePosition
 /* F1F90 802CD5E0 AFB00030 */  sw        $s0, 0x30($sp)
 /* F1F94 802CD5E4 8E50000C */  lw        $s0, 0xc($s2)
 /* F1F98 802CD5E8 8E050000 */  lw        $a1, ($s0)
-/* F1F9C 802CD5EC 0C0B1EAF */  jal       get_variable
+/* F1F9C 802CD5EC 0C0B1EAF */  jal       evt_get_variable
 /* F1FA0 802CD5F0 26100004 */   addiu    $s0, $s0, 4
 /* F1FA4 802CD5F4 8E050000 */  lw        $a1, ($s0)
 /* F1FA8 802CD5F8 26100004 */  addiu     $s0, $s0, 4
 /* F1FAC 802CD5FC 0240202D */  daddu     $a0, $s2, $zero
-/* F1FB0 802CD600 0C0B1EAF */  jal       get_variable
+/* F1FB0 802CD600 0C0B1EAF */  jal       evt_get_variable
 /* F1FB4 802CD604 0040882D */   daddu    $s1, $v0, $zero
 /* F1FB8 802CD608 00118880 */  sll       $s1, $s1, 2
 /* F1FBC 802CD60C 8E140000 */  lw        $s4, ($s0)

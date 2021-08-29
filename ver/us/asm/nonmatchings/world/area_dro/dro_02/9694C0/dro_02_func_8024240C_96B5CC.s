@@ -32,7 +32,7 @@ glabel dro_02_func_8024240C_96B5CC
 /* 96B5E0 80242420 AFB1007C */  sw        $s1, 0x7c($sp)
 /* 96B5E4 80242424 AFB00078 */  sw        $s0, 0x78($sp)
 /* 96B5E8 80242428 F7B40088 */  sdc1      $f20, 0x88($sp)
-/* 96B5EC 8024242C 0C0B1EAF */  jal       get_variable
+/* 96B5EC 8024242C 0C0B1EAF */  jal       evt_get_variable
 /* 96B5F0 80242430 34A5D489 */   ori      $a1, $a1, 0xd489
 /* 96B5F4 80242434 0040182D */  daddu     $v1, $v0, $zero
 /* 96B5F8 80242438 2C62000E */  sltiu     $v0, $v1, 0xe

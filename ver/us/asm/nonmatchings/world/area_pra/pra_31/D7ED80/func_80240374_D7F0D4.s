@@ -5,7 +5,7 @@ glabel func_80240374_D7F0D4
 /* D7F0D4 80240374 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* D7F0D8 80240378 AFBF0010 */  sw        $ra, 0x10($sp)
 /* D7F0DC 8024037C 8C82000C */  lw        $v0, 0xc($a0)
-/* D7F0E0 80240380 0C0B1EAF */  jal       get_variable
+/* D7F0E0 80240380 0C0B1EAF */  jal       evt_get_variable
 /* D7F0E4 80240384 8C450000 */   lw       $a1, ($v0)
 /* D7F0E8 80240388 0040182D */  daddu     $v1, $v0, $zero
 /* D7F0EC 8024038C 10600012 */  beqz      $v1, .L802403D8

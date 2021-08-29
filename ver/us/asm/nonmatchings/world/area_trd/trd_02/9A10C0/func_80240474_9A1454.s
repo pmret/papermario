@@ -25,7 +25,7 @@ glabel func_80240474_9A1454
 /* 9A1488 802404A8 8E63000C */  lw        $v1, 0xc($s3)
 /* 9A148C 802404AC 0260202D */  daddu     $a0, $s3, $zero
 /* 9A1490 802404B0 8C650000 */  lw        $a1, ($v1)
-/* 9A1494 802404B4 0C0B1EAF */  jal       get_variable
+/* 9A1494 802404B4 0C0B1EAF */  jal       evt_get_variable
 /* 9A1498 802404B8 0040902D */   daddu    $s2, $v0, $zero
 /* 9A149C 802404BC AFA00028 */  sw        $zero, 0x28($sp)
 /* 9A14A0 802404C0 8E2300D0 */  lw        $v1, 0xd0($s1)
