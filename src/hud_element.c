@@ -203,9 +203,9 @@ void set_hud_element_anim(s32 id, const HudElementAnim* anim) {
     hudElement->screenPosOffset.y = 0;
     hudElement->worldPosOffset.x = 0;
     hudElement->worldPosOffset.y = 0;
-    hudElement->flags &= ~4;
+    hudElement->flags.as_word &= ~4;
     hudElement->uniformScale = 1.0f;
-    hudElement->flags &= ~0x930;
+    hudElement->flags.as_word &= ~0x930;
     load_hud_element(hudElement, anim);
 
     while (hud_element_update(hudElement) != 0) {}
@@ -220,7 +220,7 @@ HudElement* get_hud_element(s32 id) {
 }
 
 void free_hud_element(s32 id) {
-    if (hudElements[id & ~0x800]->flags & 0x10000) {
+    if (hudElements[id & ~0x800]->flags.as_word & 0x10000) {
         free_hud_element_transform(id & ~0x800);
     }
 
@@ -246,11 +246,11 @@ void get_hud_element_render_pos(s32 id, s32* x, s32* y) {
 INCLUDE_ASM(void, "hud_element", set_hud_element_render_depth, s32 id, s32 z);
 
 void set_hud_element_flags(s32 id, s32 flags) {
-    hudElements[id & ~0x800]->flags |= flags;
+    hudElements[id & ~0x800]->flags.as_word |= flags;
 }
 
 void clear_hud_element_flags(s32 id, s32 flags) {
-    hudElements[id & ~0x800]->flags &= ~flags;
+    hudElements[id & ~0x800]->flags.as_word &= ~flags;
 }
 
 INCLUDE_ASM(void, "hud_element", ALT_clear_hud_element_cache, void);
@@ -265,27 +265,29 @@ void set_hud_element_size(s32 id, s8 size) {
     hudElement->tileSizePreset = size;
     hudElement->drawSizePreset = size;
     hudElement->uniformScale = 1.0f;
-    hudElement->flags &= ~0x100;
-    hudElement->flags &= ~0x810;
+    hudElement->flags.as_word &= ~0x100;
+    hudElement->flags.as_word &= ~0x810;
 }
 
-INCLUDE_ASM(s32, "hud_element", func_80144E4C);
+s32 func_80144E4C(s32 id) {
+    return hudElements[id & ~0x800]->flags.as_bitfields.f4;
+}
 
 void func_80144E74(s32 id, s32 arg1) {
     HudElement* hudElement = hudElements[id & ~0x800];
 
-    hudElement->flags &= ~0xF000000;
-    hudElement->flags |= arg1 << 24;
+    hudElement->flags.as_word &= ~0xF000000;
+    hudElement->flags.as_word |= arg1 << 24;
 }
 
 void set_hud_element_alpha(s32 id, s32 opacity) {
     HudElement* hudElement = hudElements[id & ~0x800];
 
-    hudElement->flags |= 0x20;
+    hudElement->flags.as_word |= 0x20;
     hudElement->opacity = opacity;
 
     if (opacity == 255) {
-        hudElement->flags &= ~0x20;
+        hudElement->flags.as_word &= ~0x20;
     }
 }
 
@@ -307,13 +309,13 @@ void free_hud_element_transform(s32 id) {
     HudElement* hudElement = hudElements[id & ~0x800];
     s32* hudTransform = hudElement->hudTransform;
 
-    if (!(hudElement->flags & 0x20000)) {
+    if (!(hudElement->flags.as_word & 0x20000)) {
         func_8013A854(*hudTransform);
     }
 
     heap_free(hudElement->hudTransform);
     hudElement->hudTransform = NULL;
-    hudElement->flags &= ~0x40030000;
+    hudElement->flags.as_word &= ~0x40030000;
 }
 
 INCLUDE_ASM(void, "hud_element", set_hud_element_transform_pos, s32 id, f32 x, f32 y, f32 z);
