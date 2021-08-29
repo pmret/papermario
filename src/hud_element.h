@@ -62,8 +62,17 @@ enum {
     HUD_ELEMENT_SIZE_32x24,
 };
 
+
+typedef union {
+    struct {
+        u32 f0: 4;
+        u32 f4: 4;
+    } as_bitfields;
+    u32 as_word;
+} HudFlags;
+
 typedef struct HudElement {
-    /* 0x00 */ s32 flags;
+    /* 0x00 */ HudFlags flags;
     /* 0x04 */ const HudElementAnim* readPos;
     /* 0x08 */ const HudElementAnim* anim;
     /* 0x0C */ s32* ptrPropertyList;
@@ -196,7 +205,7 @@ void set_hud_element_scale(s32 index, f32 scale);
 
 void set_hud_element_size(s32 id, s8 size);
 
-s32 func_80144E4C();
+s32 func_80144E4C(s32 id);
 
 void func_80144E74(s32 id, s32 arg1);
 
