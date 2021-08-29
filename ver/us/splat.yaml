@@ -702,7 +702,7 @@ segments:
     - [0xd0a70, c, d0a70_len_4fe0]
     - [0xd5a50, c, hud_element]
     - [0xdba20, c, dba20_len_350]
-    - [0xdbd70, c, dbd70_len_700]
+    - [0xdbd70, c, trigger]
     - [0xdc470, c, dc470_len_14c0]
     - [0xdd930, c, dd930_len_1c0]
     - [0xddaf0, c, ddaf0_len_c50]

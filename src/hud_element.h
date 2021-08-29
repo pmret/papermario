@@ -232,6 +232,6 @@ void set_hud_element_transform_rotation_pivot(s32 id, s32 dx, s32 dy);
 
 void copy_world_hud_element_ref_to_battle(s32 worldID, s32 battleID);
 
-void set_hud_element_nonworld_cache(void* base, size_t size);
+void set_hud_element_nonworld_cache(void* base, s32 size);
 
 #endif

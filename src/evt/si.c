@@ -13,6 +13,9 @@ u8 D_802D9D71 = 0xFE;
 u8 D_802D9D72 = 0x00;
 u8 D_802D9D73 = 0xFF;
 
+// BSS
+extern s8 evtDebugPrintBuffer[];
+
 f32 fixed_var_to_float(Bytecode scriptVar) {
     if (scriptVar <= -220000000) {
         return (scriptVar + 230000000) / 1024.0f;
@@ -46,7 +49,7 @@ ApiStatus si_handle_loop(Evt* script) {
 
     ASSERT(loopDepth < 8);
 
-    script->loopStartTable[loopDepth] = args;
+    script->loopStartTable[loopDepth] = (s32)args;
     script->loopCounterTable[loopDepth] = var;
 
     return ApiStatus_DONE2;
@@ -61,7 +64,7 @@ ApiStatus si_handle_end_loop(Evt* script) {
     loopCounter = script->loopCounterTable[loopDepth];
 
     if (loopCounter == 0) {
-        script->ptrNextLine = script->loopStartTable[loopDepth];
+        script->ptrNextLine = (Bytecode*)script->loopStartTable[loopDepth];
         return ApiStatus_DONE2;
     }
 
@@ -74,7 +77,7 @@ ApiStatus si_handle_end_loop(Evt* script) {
     }
 
     if (loopCounter != 0) {
-        script->ptrNextLine = script->loopStartTable[loopDepth];
+        script->ptrNextLine = (Bytecode*)script->loopStartTable[loopDepth];
         return ApiStatus_DONE2;
     } else {
         script->loopDepth--;
@@ -225,12 +228,13 @@ ApiStatus si_handle_switch(Evt* script) {
 }
 
 ApiStatus si_handle_switch_const(Evt* script) {
-    Bytecode* args = *script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
+    s32 a0 = *args++;
     s32 switchDepth = ++script->switchDepth;
 
     ASSERT(switchDepth < 8);
 
-    script->switchBlockValue[switchDepth] = args;
+    script->switchBlockValue[switchDepth] = a0;
     script->switchBlockState[switchDepth] = 1;
 
     return ApiStatus_DONE2;
@@ -657,12 +661,16 @@ ApiStatus si_handle_divideF(Evt* script) {
 }
 
 ApiStatus si_handle_set_int_buffer_ptr(Evt* script) {
-    script->buffer = get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    script->buffer = (s32*)get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
 ApiStatus si_handle_set_float_buffer_ptr(Evt* script) {
-    script->buffer = get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    script->buffer = (s32*)get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -829,7 +837,7 @@ ApiStatus si_handle_allocate_array(Evt* script) {
     s32 size = get_variable(script, *args++);
     Bytecode var = *args++;
 
-    script->array = (s32)heap_malloc(size * 4);
+    script->array = (s32*)heap_malloc(size * 4);
     set_variable(script, var, (s32)script->array);
     return ApiStatus_DONE2;
 }
@@ -903,7 +911,7 @@ ApiStatus si_handle_exec1(Evt* script) {
     Evt* newScript;
     s32 i;
 
-    newScript = start_script_in_group((Evt*)get_variable(script, *script->ptrReadPos), script->priority, 0,
+    newScript = start_script_in_group((EvtSource*)get_variable(script, *script->ptrReadPos), script->priority, 0,
                                       script->groupFlags);
 
     newScript->owner1 = script->owner1;
@@ -927,12 +935,12 @@ ApiStatus si_handle_exec1(Evt* script) {
 
 ApiStatus si_handle_exec1_get_id(Evt* script) {
     Bytecode* args = script->ptrReadPos;
-    Evt* var = (Evt*)get_variable(script, *args++);
+    EvtSource* evtSource = (EvtSource*)get_variable(script, *args++);
     Bytecode arg2 = *args++;
     Evt* newScript;
     s32 i;
 
-    newScript = start_script_in_group(var, script->priority, 0, script->groupFlags);
+    newScript = start_script_in_group(evtSource, script->priority, 0, script->groupFlags);
 
     newScript->owner1 = script->owner1;
     newScript->owner2 = script->owner2;
@@ -954,19 +962,23 @@ ApiStatus si_handle_exec1_get_id(Evt* script) {
 }
 
 ApiStatus si_handle_exec_wait(Evt* script) {
-    start_child_script(script, get_variable(script, *script->ptrReadPos), 0);
+    Bytecode* args = script->ptrReadPos;
+
+    start_child_script(script, (EvtSource*)get_variable(script, *args++), 0);
     script->currentOpcode = 0;
     return ApiStatus_FINISH;
 }
 
 ApiStatus si_handle_jump(Evt* script) {
-    script->ptrFirstLine = (Bytecode*)get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    script->ptrFirstLine = (Bytecode*)get_variable(script, *args++);
     restart_script(script);
     return ApiStatus_DONE2;
 }
 
 s32 _bound_script_trigger_handler(Trigger* trigger) {
-    Bytecode* scriptStart;
+    EvtSource* scriptStart;
     Evt* script;
 
     if (trigger->runningScript == NULL) {
@@ -975,7 +987,7 @@ s32 _bound_script_trigger_handler(Trigger* trigger) {
             return 0;
         }
 
-        script = start_script(scriptStart, trigger->priority, 0x20);
+        script = start_script((EvtSource*)scriptStart, trigger->priority, 0x20);
         trigger->runningScript = script;
         trigger->runningScriptID = script->id;
         script->varTable[0] = trigger->scriptVars[0];
@@ -995,7 +1007,7 @@ s32 _bound_script_trigger_handler(Trigger* trigger) {
 ApiStatus si_handle_bind(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     Trigger* trigger;
-    Bytecode* triggerScript = get_variable(script, *args++);
+    Bytecode* triggerScript = (Bytecode*)get_variable(script, *args++);
     Bytecode eventType = *args++;
     Bytecode colliderIDVar = *args++;
     Bytecode a3 = *args++;
@@ -1010,7 +1022,7 @@ ApiStatus si_handle_bind(Evt* script) {
     def.function = _bound_script_trigger_handler;
 
     trigger = create_trigger(&def);
-    trigger->scriptSource = triggerScript;
+    trigger->scriptSource = (EvtSource*)triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
     trigger->scriptVars[0] = get_variable(script, script->varTable[0]);
@@ -1018,14 +1030,14 @@ ApiStatus si_handle_bind(Evt* script) {
     trigger->scriptVars[2] = get_variable(script, script->varTable[2]);
 
     if (triggerOut != 0) {
-        set_variable(script, triggerOut, trigger);
+        set_variable(script, triggerOut, (s32)trigger);
     }
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus DeleteTrigger(Evt* script, s32 isInitialCall) {
-    delete_trigger(get_variable(script, *script->ptrReadPos));
+    delete_trigger((Trigger*)get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
@@ -1113,10 +1125,10 @@ void si_standard_trigger_executor(Trigger* trigger) {
 ApiStatus si_handle_bind_lock(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     Trigger* trigger;
-    Bytecode* triggerScript = get_variable(script, *args++);
+    Bytecode* triggerScript = (Bytecode*)get_variable(script, *args++);
     Bytecode eventType = *args++;
     Bytecode colliderIDVar = *args++;
-    s32* itemList = get_variable(script, *args++);
+    s32* itemList = (s32*)get_variable(script, *args++);
     Bytecode triggerOut = *args++;
     s32 a5 = *args++;
     TriggerDefinition def;
@@ -1130,7 +1142,7 @@ ApiStatus si_handle_bind_lock(Evt* script) {
     def.inputArg3 = a5;
 
     trigger = create_trigger(&def);
-    trigger->scriptSource = triggerScript;
+    trigger->scriptSource = (EvtSource*)triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
     trigger->scriptVars[0] = get_variable(script, script->varTable[0]);
@@ -1161,7 +1173,108 @@ ApiStatus func_802C6E14(Evt* script) {
 }
 
 ApiStatus si_handle_print_debug_var(Evt* script);
+// Almost, some ordering stuff and such
+#ifdef NON_MATCHING
+s32 si_handle_print_debug_var(Evt* script) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var = *args++;
+    s32 phi_t0;
+
+    if (var <= -270000000) {
+        sprintf(&evtDebugPrintBuffer, "ADDR     [%08X]", var);
+    } else if (var <= -220000000) {
+        sprintf(&evtDebugPrintBuffer, "FLOAT    [%4.2f]", fixed_var_to_float(var));
+    } else if (var <= -200000000) {
+        var += 210000000;
+        phi_t0 = var % 32;
+        sprintf(&evtDebugPrintBuffer, "UF(%3d)  [%d]", var, script->flagArray[var / 32] & (1 << phi_t0));
+    } else if (var <= -180000000) {
+        s32 arrayVal;
+
+        var += 190000000;
+        arrayVal = script->array[var];
+
+        if (script->array[var] <= -270000000) {
+            sprintf(&evtDebugPrintBuffer, "UW(%3d)  [%08X]", var, arrayVal);
+        } else if (arrayVal <= -220000000) {
+            sprintf(&evtDebugPrintBuffer, "UW(%3d)  [%4.2f]", var, fixed_var_to_float(arrayVal));
+        } else {
+            sprintf(&evtDebugPrintBuffer, "UW(%3d)  [%d]", var, arrayVal);
+        }
+    } else if (var <= -160000000) {
+        s32 globalByte;
+
+        var += 170000000;
+        globalByte = get_global_byte(var);
+
+        if (globalByte <= -270000000) {
+            sprintf(&evtDebugPrintBuffer, "GSW(%3d) [%08X]", var, globalByte);
+        } else if (globalByte <= -220000000) {
+            sprintf(&evtDebugPrintBuffer, "GSW(%3d) [%4.2f]", var, fixed_var_to_float(globalByte));
+        } else {
+            sprintf(&evtDebugPrintBuffer, "GSW(%3d) [%d]", var, globalByte);
+        }
+    } else if (var <= -140000000) {
+        s32 areaByte;
+
+        var += 150000000;
+        areaByte = get_area_byte(var);
+
+        if (areaByte <= -270000000) {
+            sprintf(&evtDebugPrintBuffer, "LSW(%3d) [%08X]", var, areaByte);
+        } else if (areaByte <= -220000000) {
+            sprintf(&evtDebugPrintBuffer, "LSW(%3d)  [%4.2f]", var, fixed_var_to_float(areaByte));
+        } else {
+            sprintf(&evtDebugPrintBuffer, "LSW(%3d) [%d]", var, areaByte);
+        }
+    } else if (var <= -120000000) {
+        var += 130000000;
+        sprintf(&evtDebugPrintBuffer, "GSWF(%3d)[%d]", var, get_global_flag(var));
+    } else if (var <= -100000000) {
+        var += 110000000;
+        sprintf(&evtDebugPrintBuffer, "LSWF(%3d)[%d]", var, get_area_flag(var));
+    } else if (var <= -80000000) {
+        var += 90000000;
+        phi_t0 = var % 32;
+        sprintf(&evtDebugPrintBuffer, "GF(%3d)  [%d]", var, gMapFlags[var / 32] & (1 << phi_t0));
+    } else if (var <= -60000000) {
+        var += 70000000;
+        phi_t0 = var % 32;
+        sprintf(&evtDebugPrintBuffer, "LF(%3d)  [%d]", var, script->varFlags[var / 32] & (1 << phi_t0));
+    } else if (var <= -40000000) {
+        s32 mapVar;
+
+        var += 50000000;
+        mapVar = gMapVars[var];
+
+        if (mapVar <= -270000000) {
+            sprintf(&evtDebugPrintBuffer, "GW(%3d)  [%08X]", var, mapVar);
+        } else if (mapVar <= -220000000) {
+            sprintf(&evtDebugPrintBuffer, "GW(%3d)  [%4.2f]", var, fixed_var_to_float(mapVar));
+        } else {
+            sprintf(&evtDebugPrintBuffer, "GW(%3d)  [%d]", var, mapVar);
+        }
+    } else if (var <= -20000000) {
+        s32 tableVar;
+
+        var += 30000000;
+        tableVar = script->varTable[var];
+
+        if (tableVar <= -270000000) {
+            sprintf(&evtDebugPrintBuffer, "LW(%3d)  [%08X]", var, tableVar);
+        } else if (tableVar <= -220000000) {
+            sprintf(&evtDebugPrintBuffer, "LW(%3d)  [%4.2f]", var, fixed_var_to_float(tableVar));
+        } else {
+            sprintf(&evtDebugPrintBuffer, "LW(%3d)  [%d]", var, tableVar);
+        }
+    } else {
+        sprintf(&evtDebugPrintBuffer, "         [%d]", var);
+    }
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(ApiStatus, "evt/si", si_handle_print_debug_var, Evt* script);
+#endif
 
 ApiStatus func_802C739C(Evt* script) {
     script->ptrSavedPosition = (Bytecode*)*script->ptrReadPos;
@@ -1840,6 +1953,7 @@ Bytecode* si_goto_next_case(Evt* script) {
         switch (*opcode) {
             case EVT_OP_END:
                 PANIC();
+                break;
             case EVT_OP_MATCH:
                 switchDepth++;
                 break;
@@ -1863,9 +1977,35 @@ Bytecode* si_goto_next_case(Evt* script) {
                 if (switchDepth == 1) {
                     return opcode;
                 }
-            break;
+                break;
         }
     } while(1);
 }
 
-INCLUDE_ASM(Bytecode*, "evt/si", si_goto_end_loop, Evt* script);
+Bytecode* si_goto_end_loop(Evt* script) {
+    s32 loopDepth = 0;
+    Bytecode* pos = script->ptrNextLine;
+    s32 opcode;
+    s32 nargs;
+
+    do {
+        opcode = *pos++;
+        nargs = *pos++;
+        pos += nargs;
+
+        switch (opcode) {
+            case EVT_OP_END:
+                PANIC();
+                break;
+            case EVT_OP_END_LOOP:
+                loopDepth--;
+                if (loopDepth < 0) {
+                    return pos;
+                }
+                break;
+            case EVT_OP_LOOP:
+                loopDepth++;
+                break;
+        }
+    } while(1);
+}
