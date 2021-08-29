@@ -257,8 +257,8 @@ glabel pause_map_draw_contents
 /* 14122C 8024DEEC 8FA80068 */  lw        $t0, 0x68($sp)
 /* 141230 8024DEF0 5040007D */  beql      $v0, $zero, .L8024E0E8
 /* 141234 8024DEF4 26F70001 */   addiu    $s7, $s7, 1
-/* 141238 8024DEF8 3C028027 */  lui       $v0, %hi(D_8027071C)
-/* 14123C 8024DEFC 8C42071C */  lw        $v0, %lo(D_8027071C)($v0)
+/* 141238 8024DEF8 3C028027 */  lui       $v0, %hi(mapCursorCurrentOption)
+/* 14123C 8024DEFC 8C42071C */  lw        $v0, %lo(mapCursorCurrentOption)($v0)
 /* 141240 8024DF00 12E2000A */  beq       $s7, $v0, .L8024DF2C
 /* 141244 8024DF04 3C02DC50 */   lui      $v0, 0xdc50
 /* 141248 8024DF08 8D030000 */  lw        $v1, ($t0)
@@ -396,11 +396,11 @@ glabel pause_map_draw_contents
 /* 141444 8024E104 26100700 */  addiu     $s0, $s0, %lo(D_80270700)
 /* 141448 8024E108 8E040000 */  lw        $a0, ($s0)
 /* 14144C 8024E10C 8FAE0050 */  lw        $t6, 0x50($sp)
-/* 141450 8024E110 3C058027 */  lui       $a1, %hi(D_8027070C)
-/* 141454 8024E114 8CA5070C */  lw        $a1, %lo(D_8027070C)($a1)
+/* 141450 8024E110 3C058027 */  lui       $a1, %hi(mapMarioXPos)
+/* 141454 8024E114 8CA5070C */  lw        $a1, %lo(mapMarioXPos)($a1)
 /* 141458 8024E118 8FAF00A4 */  lw        $t7, 0xa4($sp)
-/* 14145C 8024E11C 3C068027 */  lui       $a2, %hi(D_80270710)
-/* 141460 8024E120 8CC60710 */  lw        $a2, %lo(D_80270710)($a2)
+/* 14145C 8024E11C 3C068027 */  lui       $a2, %hi(mapMarioYPos)
+/* 141460 8024E120 8CC60710 */  lw        $a2, %lo(mapMarioYPos)($a2)
 /* 141464 8024E124 25C2001A */  addiu     $v0, $t6, 0x1a
 /* 141468 8024E128 01E29021 */  addu      $s2, $t7, $v0
 /* 14146C 8024E12C 02452821 */  addu      $a1, $s2, $a1
@@ -420,14 +420,14 @@ glabel pause_map_draw_contents
 /* 1414A4 8024E164 24020006 */  addiu     $v0, $zero, 6
 /* 1414A8 8024E168 16020081 */  bne       $s0, $v0, .L8024E370
 /* 1414AC 8024E16C 00000000 */   nop
-/* 1414B0 8024E170 3C018027 */  lui       $at, %hi(D_80270714)
-/* 1414B4 8024E174 C4200714 */  lwc1      $f0, %lo(D_80270714)($at)
+/* 1414B0 8024E170 3C018027 */  lui       $at, %hi(mapCursorXPos)
+/* 1414B4 8024E174 C4200714 */  lwc1      $f0, %lo(mapCursorXPos)($at)
 /* 1414B8 8024E178 44922000 */  mtc1      $s2, $f4
 /* 1414BC 8024E17C 00000000 */  nop
 /* 1414C0 8024E180 46802120 */  cvt.s.w   $f4, $f4
 /* 1414C4 8024E184 46002100 */  add.s     $f4, $f4, $f0
-/* 1414C8 8024E188 3C018027 */  lui       $at, %hi(D_80270718)
-/* 1414CC 8024E18C C4200718 */  lwc1      $f0, %lo(D_80270718)($at)
+/* 1414C8 8024E188 3C018027 */  lui       $at, %hi(mapCursorYPos)
+/* 1414CC 8024E18C C4200718 */  lwc1      $f0, %lo(mapCursorYPos)($at)
 /* 1414D0 8024E190 44911000 */  mtc1      $s1, $f2
 /* 1414D4 8024E194 00000000 */  nop
 /* 1414D8 8024E198 468010A0 */  cvt.s.w   $f2, $f2

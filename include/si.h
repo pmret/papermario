@@ -119,6 +119,8 @@ enum {
 #define MAKE_ENTITY_END 0x80000000
 
 #define SI_STORY_PROGRESS SI_SAVE_VAR(0)
+#define SI_SAVE_FLAG_PLACES_VISITED SI_SAVE_FLAG(0x7AA)
+#define SI_SAVE_FLAG_PLACES_VISITED_TOTAL 0x22
 #define SI_WORLD_LOCATION SI_SAVE_VAR(425)
 
 /* Return type of si_execute_next_command */

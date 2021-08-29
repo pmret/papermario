@@ -176,6 +176,7 @@ extern s32 gPauseMenuPressedButtons;
 extern s32 gPauseMenuCurrentDescString;
 extern s32* gPauseMenuCurrentDescIconScript;
 extern s32 D_802700D0;
+
 extern s8 gPauseMenuCurrentTab;
 extern char D_802700D[8];
 extern s32 D_802700E0;
@@ -192,7 +193,31 @@ extern s32 gPauseMenuTargetPosY;
 extern s32 gPauseMenuCursorTargetOpacity;
 extern u8 gPauseMenuTextScrollInterpEasingLUT[16];
 extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
+extern s32 D_80270700[1];
+extern f32 D_80270704;
+extern f32 D_80270708;
+extern s32 mapMarioXPos; //mario xPos on map tab
+extern s32 mapMarioYPos; //mario xPos on map tab
+extern f32 mapCursorXPos; //cursor X pos float map tab
+extern f32 mapCursorYPos; //cursor Y pos float map tab
+extern s32 mapCursorCurrentOption;
+extern s32 mapCursorCurrentOptionCopy;
+extern s32 D_80270724;
+extern f64 D_80270080;
+extern f64 D_80270088;
+extern f64 D_80270090;
+extern f64 D_80270098;
+extern f64 D_802700A0;
+extern f64 D_802700A8;
+extern f64 D_802700B0;
+extern f64 D_802700B8;
 
+
+extern s32 D_8024FA30[1];
+
+extern pause_80250668* D_80250668[6];
+extern pause_map_spaces* D_802502B8[5];
+extern s8 D_80250590;
 // Badges
 extern s32 gBadgeMenuCurrentScrollPos;
 extern s32 gBadgeMenuTargetScrollPos;

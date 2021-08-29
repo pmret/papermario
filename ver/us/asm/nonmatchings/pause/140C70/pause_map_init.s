@@ -40,12 +40,12 @@ glabel pause_map_init
 /* 1419C8 8024E688 0000202D */  daddu     $a0, $zero, $zero
 /* 1419CC 8024E68C 3C05F5DE */  lui       $a1, 0xf5de
 /* 1419D0 8024E690 2402FFFF */  addiu     $v0, $zero, -1
-/* 1419D4 8024E694 3C018027 */  lui       $at, %hi(D_8027071C)
-/* 1419D8 8024E698 AC22071C */  sw        $v0, %lo(D_8027071C)($at)
+/* 1419D4 8024E694 3C018027 */  lui       $at, %hi(mapCursorCurrentOption)
+/* 1419D8 8024E698 AC22071C */  sw        $v0, %lo(mapCursorCurrentOption)($at)
 /* 1419DC 8024E69C 3C018027 */  lui       $at, %hi(D_80270724)
 /* 1419E0 8024E6A0 AC200724 */  sw        $zero, %lo(D_80270724)($at)
-/* 1419E4 8024E6A4 3C018027 */  lui       $at, %hi(D_80270720)
-/* 1419E8 8024E6A8 AC220720 */  sw        $v0, %lo(D_80270720)($at)
+/* 1419E4 8024E6A4 3C018027 */  lui       $at, %hi(mapCursorCurrentOptionCopy)
+/* 1419E8 8024E6A8 AC220720 */  sw        $v0, %lo(mapCursorCurrentOptionCopy)($at)
 /* 1419EC 8024E6AC 0C0B1EAF */  jal       get_variable
 /* 1419F0 8024E6B0 34A50329 */   ori      $a1, $a1, 0x329
 /* 1419F4 8024E6B4 0040202D */  daddu     $a0, $v0, $zero
@@ -70,35 +70,35 @@ glabel pause_map_init
 /* 141A38 8024E6F8 00451021 */  addu      $v0, $v0, $a1
 /* 141A3C 8024E6FC 84430000 */  lh        $v1, ($v0)
 /* 141A40 8024E700 84420002 */  lh        $v0, 2($v0)
-/* 141A44 8024E704 3C018027 */  lui       $at, %hi(D_8027070C)
-/* 141A48 8024E708 AC23070C */  sw        $v1, %lo(D_8027070C)($at)
-/* 141A4C 8024E70C 3C018027 */  lui       $at, %hi(D_80270710)
-/* 141A50 8024E710 AC220710 */  sw        $v0, %lo(D_80270710)($at)
+/* 141A44 8024E704 3C018027 */  lui       $at, %hi(mapMarioXPos)
+/* 141A48 8024E708 AC23070C */  sw        $v1, %lo(mapMarioXPos)($at)
+/* 141A4C 8024E70C 3C018027 */  lui       $at, %hi(mapMarioYPos)
+/* 141A50 8024E710 AC220710 */  sw        $v0, %lo(mapMarioYPos)($at)
 /* 141A54 8024E714 080939CB */  j         .L8024E72C
 /* 141A58 8024E718 00000000 */   nop
 .L8024E71C:
-/* 141A5C 8024E71C 3C018027 */  lui       $at, %hi(D_8027070C)
-/* 141A60 8024E720 AC20070C */  sw        $zero, %lo(D_8027070C)($at)
-/* 141A64 8024E724 3C018027 */  lui       $at, %hi(D_80270710)
-/* 141A68 8024E728 AC200710 */  sw        $zero, %lo(D_80270710)($at)
+/* 141A5C 8024E71C 3C018027 */  lui       $at, %hi(mapMarioXPos)
+/* 141A60 8024E720 AC20070C */  sw        $zero, %lo(mapMarioXPos)($at)
+/* 141A64 8024E724 3C018027 */  lui       $at, %hi(mapMarioYPos)
+/* 141A68 8024E728 AC200710 */  sw        $zero, %lo(mapMarioYPos)($at)
 .L8024E72C:
-/* 141A6C 8024E72C 3C018027 */  lui       $at, %hi(D_8027070C)
-/* 141A70 8024E730 C422070C */  lwc1      $f2, %lo(D_8027070C)($at)
+/* 141A6C 8024E72C 3C018027 */  lui       $at, %hi(mapMarioXPos)
+/* 141A70 8024E730 C422070C */  lwc1      $f2, %lo(mapMarioXPos)($at)
 /* 141A74 8024E734 468010A0 */  cvt.s.w   $f2, $f2
 /* 141A78 8024E738 3C038027 */  lui       $v1, %hi(D_80270704)
 /* 141A7C 8024E73C 24630704 */  addiu     $v1, $v1, %lo(D_80270704)
-/* 141A80 8024E740 3C018027 */  lui       $at, %hi(D_80270714)
-/* 141A84 8024E744 E4220714 */  swc1      $f2, %lo(D_80270714)($at)
+/* 141A80 8024E740 3C018027 */  lui       $at, %hi(mapCursorXPos)
+/* 141A84 8024E744 E4220714 */  swc1      $f2, %lo(mapCursorXPos)($at)
 /* 141A88 8024E748 AC600000 */  sw        $zero, ($v1)
 /* 141A8C 8024E74C C4660000 */  lwc1      $f6, ($v1)
-/* 141A90 8024E750 3C018027 */  lui       $at, %hi(D_80270710)
-/* 141A94 8024E754 C4200710 */  lwc1      $f0, %lo(D_80270710)($at)
+/* 141A90 8024E750 3C018027 */  lui       $at, %hi(mapMarioYPos)
+/* 141A94 8024E754 C4200710 */  lwc1      $f0, %lo(mapMarioYPos)($at)
 /* 141A98 8024E758 46800020 */  cvt.s.w   $f0, $f0
 /* 141A9C 8024E75C 46061080 */  add.s     $f2, $f2, $f6
 /* 141AA0 8024E760 3C048027 */  lui       $a0, %hi(D_80270708)
 /* 141AA4 8024E764 24840708 */  addiu     $a0, $a0, %lo(D_80270708)
-/* 141AA8 8024E768 3C018027 */  lui       $at, %hi(D_80270718)
-/* 141AAC 8024E76C E4200718 */  swc1      $f0, %lo(D_80270718)($at)
+/* 141AA8 8024E768 3C018027 */  lui       $at, %hi(mapCursorYPos)
+/* 141AAC 8024E76C E4200718 */  swc1      $f0, %lo(mapCursorYPos)($at)
 /* 141AB0 8024E770 46060000 */  add.s     $f0, $f0, $f6
 /* 141AB4 8024E774 3C018027 */  lui       $at, %hi(D_80270080)
 /* 141AB8 8024E778 D4240080 */  ldc1      $f4, %lo(D_80270080)($at)
