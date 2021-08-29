@@ -10,11 +10,11 @@ void N(foliage_setup_shear_mtx)(Matrix4f mtx, f32 scale, f32 xAmount, f32 zAmoun
 
 ApiStatus N(DeadTransformFoliage)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 modelListIndex = func_80125270(get_variable(script, *args++));
-    f32 scale = get_float_variable(script, *args++);
-    f32 dx = get_float_variable(script, *args++);
-    f32 dy = get_float_variable(script, *args++);
-    f32 dz = get_float_variable(script, *args++);
+    s32 modelListIndex = func_80125270(evt_get_variable(script, *args++));
+    f32 scale = evt_get_float_variable(script, *args++);
+    f32 dx = evt_get_float_variable(script, *args++);
+    f32 dy = evt_get_float_variable(script, *args++);
+    f32 dz = evt_get_float_variable(script, *args++);
     Model* model = func_80124F44(modelListIndex);
     Matrix4f mtx;
 

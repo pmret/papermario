@@ -86,11 +86,11 @@ glabel func_80241E80_7ECB90
 /* 7ECCB0 80241FA0 AE95008C */  sw        $s5, 0x8c($s4)
 /* 7ECCB4 80241FA4 AE820088 */  sw        $v0, 0x88($s4)
 /* 7ECCB8 80241FA8 8E65000C */  lw        $a1, 0xc($s3)
-/* 7ECCBC 80241FAC 0C0B2026 */  jal       set_variable
+/* 7ECCBC 80241FAC 0C0B2026 */  jal       evt_set_variable
 /* 7ECCC0 80241FB0 24060001 */   addiu    $a2, $zero, 1
 /* 7ECCC4 80241FB4 0280202D */  daddu     $a0, $s4, $zero
 /* 7ECCC8 80241FB8 8E650010 */  lw        $a1, 0x10($s3)
-/* 7ECCCC 80241FBC 0C0B2026 */  jal       set_variable
+/* 7ECCCC 80241FBC 0C0B2026 */  jal       evt_set_variable
 /* 7ECCD0 80241FC0 24060001 */   addiu    $a2, $zero, 1
 /* 7ECCD4 80241FC4 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 7ECCD8 80241FC8 8FB60028 */  lw        $s6, 0x28($sp)

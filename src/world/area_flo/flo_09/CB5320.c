@@ -181,7 +181,7 @@ ApiStatus N(func_8024162C_CB662C)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
+    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;

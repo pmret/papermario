@@ -30,7 +30,7 @@ glabel func_80244078_9DB098
 /* 9DB0FC 802440DC 3C058025 */  lui       $a1, %hi(D_80252794_9E97B4)
 /* 9DB100 802440E0 00A22821 */  addu      $a1, $a1, $v0
 /* 9DB104 802440E4 8CA52794 */  lw        $a1, %lo(D_80252794_9E97B4)($a1)
-/* 9DB108 802440E8 0C0B2026 */  jal       set_variable
+/* 9DB108 802440E8 0C0B2026 */  jal       evt_set_variable
 /* 9DB10C 802440EC 24060001 */   addiu    $a2, $zero, 1
 .L802440F0:
 /* 9DB110 802440F0 8E05FFFC */  lw        $a1, -4($s0)
@@ -104,7 +104,7 @@ glabel func_80244078_9DB098
 /* 9DB204 802441E4 26260001 */  addiu     $a2, $s1, 1
 /* 9DB208 802441E8 AC820084 */  sw        $v0, 0x84($a0)
 .L802441EC:
-/* 9DB20C 802441EC 0C0B2026 */  jal       set_variable
+/* 9DB20C 802441EC 0C0B2026 */  jal       evt_set_variable
 /* 9DB210 802441F0 00000000 */   nop
 /* 9DB214 802441F4 24020002 */  addiu     $v0, $zero, 2
 /* 9DB218 802441F8 8FBF0030 */  lw        $ra, 0x30($sp)

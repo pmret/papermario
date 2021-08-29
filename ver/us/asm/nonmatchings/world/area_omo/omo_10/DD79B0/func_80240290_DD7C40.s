@@ -19,21 +19,21 @@ glabel func_80240290_DD7C40
 /* DD7C78 802402C8 8E050000 */  lw        $a1, ($s0)
 /* DD7C7C 802402CC 26100004 */  addiu     $s0, $s0, 4
 /* DD7C80 802402D0 0220202D */  daddu     $a0, $s1, $zero
-/* DD7C84 802402D4 0C0B210B */  jal       get_float_variable
+/* DD7C84 802402D4 0C0B210B */  jal       evt_get_float_variable
 /* DD7C88 802402D8 0040902D */   daddu    $s2, $v0, $zero
 /* DD7C8C 802402DC 8E050000 */  lw        $a1, ($s0)
 /* DD7C90 802402E0 26100004 */  addiu     $s0, $s0, 4
 /* DD7C94 802402E4 0220202D */  daddu     $a0, $s1, $zero
-/* DD7C98 802402E8 0C0B210B */  jal       get_float_variable
+/* DD7C98 802402E8 0C0B210B */  jal       evt_get_float_variable
 /* DD7C9C 802402EC 46000686 */   mov.s    $f26, $f0
 /* DD7CA0 802402F0 8E050000 */  lw        $a1, ($s0)
 /* DD7CA4 802402F4 26100004 */  addiu     $s0, $s0, 4
 /* DD7CA8 802402F8 0220202D */  daddu     $a0, $s1, $zero
-/* DD7CAC 802402FC 0C0B210B */  jal       get_float_variable
+/* DD7CAC 802402FC 0C0B210B */  jal       evt_get_float_variable
 /* DD7CB0 80240300 46000606 */   mov.s    $f24, $f0
 /* DD7CB4 80240304 0220202D */  daddu     $a0, $s1, $zero
 /* DD7CB8 80240308 8E050000 */  lw        $a1, ($s0)
-/* DD7CBC 8024030C 0C0B210B */  jal       get_float_variable
+/* DD7CBC 8024030C 0C0B210B */  jal       evt_get_float_variable
 /* DD7CC0 80240310 46000506 */   mov.s    $f20, $f0
 /* DD7CC4 80240314 0240202D */  daddu     $a0, $s2, $zero
 /* DD7CC8 80240318 0C00EAD2 */  jal       get_npc_safe

@@ -7,7 +7,7 @@ glabel func_802408C8_EA93A8
 /* EA93B0 802408D0 0080802D */  daddu     $s0, $a0, $zero
 /* EA93B4 802408D4 AFBF0014 */  sw        $ra, 0x14($sp)
 /* EA93B8 802408D8 8E02000C */  lw        $v0, 0xc($s0)
-/* EA93BC 802408DC 0C0B53A3 */  jal       dead_get_variable
+/* EA93BC 802408DC 0C0B53A3 */  jal       dead_evt_get_variable
 /* EA93C0 802408E0 8C450000 */   lw       $a1, ($v0)
 /* EA93C4 802408E4 8E030084 */  lw        $v1, 0x84($s0)
 /* EA93C8 802408E8 8FBF0014 */  lw        $ra, 0x14($sp)

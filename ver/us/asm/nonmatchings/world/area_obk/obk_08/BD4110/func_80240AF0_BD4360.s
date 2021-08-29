@@ -86,7 +86,7 @@ glabel L80240B9C_BD440C
 /* BD4478 80240C08 0220202D */  daddu     $a0, $s1, $zero
 /* BD447C 80240C0C 3C05FD05 */  lui       $a1, 0xfd05
 /* BD4480 80240C10 34A50F81 */  ori       $a1, $a1, 0xf81
-/* BD4484 80240C14 0C0B2026 */  jal       set_variable
+/* BD4484 80240C14 0C0B2026 */  jal       evt_set_variable
 /* BD4488 80240C18 24060001 */   addiu    $a2, $zero, 1
 /* BD448C 80240C1C 0C09029F */  jal       func_80240A7C_BD42EC
 /* BD4490 80240C20 00000000 */   nop

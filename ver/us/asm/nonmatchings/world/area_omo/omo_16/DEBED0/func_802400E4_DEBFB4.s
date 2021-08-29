@@ -10,12 +10,12 @@ glabel func_802400E4_DEBFB4
 /* DEBFC8 802400F8 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* DEBFCC 802400FC 8E30000C */  lw        $s0, 0xc($s1)
 /* DEBFD0 80240100 8E050000 */  lw        $a1, ($s0)
-/* DEBFD4 80240104 0C0B210B */  jal       get_float_variable
+/* DEBFD4 80240104 0C0B210B */  jal       evt_get_float_variable
 /* DEBFD8 80240108 26100004 */   addiu    $s0, $s0, 4
 /* DEBFDC 8024010C 8E050000 */  lw        $a1, ($s0)
 /* DEBFE0 80240110 26100004 */  addiu     $s0, $s0, 4
 /* DEBFE4 80240114 0220202D */  daddu     $a0, $s1, $zero
-/* DEBFE8 80240118 0C0B210B */  jal       get_float_variable
+/* DEBFE8 80240118 0C0B210B */  jal       evt_get_float_variable
 /* DEBFEC 8024011C 46000506 */   mov.s    $f20, $f0
 /* DEBFF0 80240120 4614003C */  c.lt.s    $f0, $f20
 /* DEBFF4 80240124 00000000 */  nop
@@ -28,7 +28,7 @@ glabel func_802400E4_DEBFB4
 /* DEC00C 8024013C 8E050000 */  lw        $a1, ($s0)
 /* DEC010 80240140 0000302D */  daddu     $a2, $zero, $zero
 .L80240144:
-/* DEC014 80240144 0C0B2026 */  jal       set_variable
+/* DEC014 80240144 0C0B2026 */  jal       evt_set_variable
 /* DEC018 80240148 00000000 */   nop
 /* DEC01C 8024014C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* DEC020 80240150 8FB10014 */  lw        $s1, 0x14($sp)

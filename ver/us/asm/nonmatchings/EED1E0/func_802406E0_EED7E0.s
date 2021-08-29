@@ -50,7 +50,7 @@ glabel func_802406E0_EED7E0
 /* EED894 80240794 3C013F80 */  lui       $at, 0x3f80
 /* EED898 80240798 4481B000 */  mtc1      $at, $f22
 /* EED89C 8024079C 4480A000 */  mtc1      $zero, $f20
-/* EED8A0 802407A0 0C0B53A3 */  jal       dead_get_variable
+/* EED8A0 802407A0 0C0B53A3 */  jal       dead_evt_get_variable
 /* EED8A4 802407A4 0240802D */   daddu    $s0, $s2, $zero
 /* EED8A8 802407A8 0C0462EC */  jal       func_80118BB0
 /* EED8AC 802407AC 0040202D */   daddu    $a0, $v0, $zero

@@ -67,17 +67,17 @@ glabel func_80240730_AD47C0
 /* AD48B4 80240824 02A0282D */  daddu     $a1, $s5, $zero
 /* AD48B8 80240828 C6540030 */  lwc1      $f20, 0x30($s2)
 /* AD48BC 8024082C 0280302D */  daddu     $a2, $s4, $zero
-/* AD48C0 80240830 0C0B2026 */  jal       set_variable
+/* AD48C0 80240830 0C0B2026 */  jal       evt_set_variable
 /* AD48C4 80240834 4600A501 */   sub.s    $f20, $f20, $f0
 /* AD48C8 80240838 0260202D */  daddu     $a0, $s3, $zero
 /* AD48CC 8024083C 4600B08D */  trunc.w.s $f2, $f22
 /* AD48D0 80240840 44061000 */  mfc1      $a2, $f2
-/* AD48D4 80240844 0C0B2026 */  jal       set_variable
+/* AD48D4 80240844 0C0B2026 */  jal       evt_set_variable
 /* AD48D8 80240848 02C0282D */   daddu    $a1, $s6, $zero
 /* AD48DC 8024084C 0260202D */  daddu     $a0, $s3, $zero
 /* AD48E0 80240850 4600A08D */  trunc.w.s $f2, $f20
 /* AD48E4 80240854 44061000 */  mfc1      $a2, $f2
-/* AD48E8 80240858 0C0B2026 */  jal       set_variable
+/* AD48E8 80240858 0C0B2026 */  jal       evt_set_variable
 /* AD48EC 8024085C 02E0282D */   daddu    $a1, $s7, $zero
 .L80240860:
 /* AD48F0 80240860 24020002 */  addiu     $v0, $zero, 2

@@ -11,7 +11,7 @@ glabel func_80240B4C_9001BC
 /* 9001D4 80240B64 0200202D */  daddu     $a0, $s0, $zero
 /* 9001D8 80240B68 3C05FD05 */  lui       $a1, 0xfd05
 /* 9001DC 80240B6C 34A50F80 */  ori       $a1, $a1, 0xf80
-/* 9001E0 80240B70 0C0B2026 */  jal       set_variable
+/* 9001E0 80240B70 0C0B2026 */  jal       evt_set_variable
 /* 9001E4 80240B74 0040302D */   daddu    $a2, $v0, $zero
 /* 9001E8 80240B78 2402FFFF */  addiu     $v0, $zero, -1
 /* 9001EC 80240B7C 3C058024 */  lui       $a1, %hi(func_80240B00_900170)

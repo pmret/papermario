@@ -23,7 +23,7 @@ glabel func_80241170_E0F910
 /* E0F950 802411B0 0220202D */  daddu     $a0, $s1, $zero
 /* E0F954 802411B4 3C05FE36 */  lui       $a1, 0xfe36
 /* E0F958 802411B8 34A53C85 */  ori       $a1, $a1, 0x3c85
-/* E0F95C 802411BC 0C0B2026 */  jal       set_variable
+/* E0F95C 802411BC 0C0B2026 */  jal       evt_set_variable
 /* E0F960 802411C0 0200302D */   daddu    $a2, $s0, $zero
 /* E0F964 802411C4 8FBF0018 */  lw        $ra, 0x18($sp)
 /* E0F968 802411C8 8FB10014 */  lw        $s1, 0x14($sp)

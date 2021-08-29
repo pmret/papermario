@@ -16,11 +16,11 @@ ApiStatus GetDamageIntensity(Evt* script, s32 isInitialCall) {
 // TODO: Rename to AddEffectOffset
 ApiStatus AddEffectOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    EffectInstance* effect = get_variable(script, *args++);
+    EffectInstance* effect = evt_get_variable(script, *args++);
 
-    effect->data->pos.x += get_variable(script, *args++);
-    effect->data->pos.y += get_variable(script, *args++);
-    effect->data->pos.z += get_variable(script, *args++);
+    effect->data->pos.x += evt_get_variable(script, *args++);
+    effect->data->pos.y += evt_get_variable(script, *args++);
+    effect->data->pos.z += evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }

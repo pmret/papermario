@@ -138,7 +138,7 @@ glabel func_8024228C_A3B76C
 /* A3B958 80242478 8E65008C */  lw        $a1, 0x8c($s3)
 /* A3B95C 8024247C 0000202D */  daddu     $a0, $zero, $zero
 /* A3B960 80242480 00A62821 */  addu      $a1, $a1, $a2
-/* A3B964 80242484 0C0B2026 */  jal       set_variable
+/* A3B964 80242484 0C0B2026 */  jal       evt_set_variable
 /* A3B968 80242488 24060001 */   addiu    $a2, $zero, 1
 .L8024248C:
 /* A3B96C 8024248C 8E640078 */  lw        $a0, 0x78($s3)

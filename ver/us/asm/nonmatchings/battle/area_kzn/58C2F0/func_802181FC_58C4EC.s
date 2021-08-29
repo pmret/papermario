@@ -34,7 +34,7 @@ glabel func_802181FC_58C4EC
 /* 58C560 80218270 8E050000 */  lw        $a1, ($s0)
 /* 58C564 80218274 26100004 */  addiu     $s0, $s0, 4
 /* 58C568 80218278 0220202D */  daddu     $a0, $s1, $zero
-/* 58C56C 8021827C 0C0B210B */  jal       get_float_variable
+/* 58C56C 8021827C 0C0B210B */  jal       evt_get_float_variable
 /* 58C570 80218280 0040A02D */   daddu    $s4, $v0, $zero
 /* 58C574 80218284 8E050000 */  lw        $a1, ($s0)
 /* 58C578 80218288 26100004 */  addiu     $s0, $s0, 4

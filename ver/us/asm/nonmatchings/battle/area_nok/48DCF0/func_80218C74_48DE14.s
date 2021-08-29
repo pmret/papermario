@@ -70,21 +70,21 @@ glabel func_80218C74_48DE14
 /* 48DF18 80218D78 0240302D */  daddu     $a2, $s2, $zero
 /* 48DF1C 80218D7C 4600C08D */  trunc.w.s $f2, $f24
 /* 48DF20 80218D80 44121000 */  mfc1      $s2, $f2
-/* 48DF24 80218D84 0C0B2026 */  jal       set_variable
+/* 48DF24 80218D84 0C0B2026 */  jal       evt_set_variable
 /* 48DF28 80218D88 0220202D */   daddu    $a0, $s1, $zero
 /* 48DF2C 80218D8C 8E050000 */  lw        $a1, ($s0)
 /* 48DF30 80218D90 26100004 */  addiu     $s0, $s0, 4
 /* 48DF34 80218D94 0220202D */  daddu     $a0, $s1, $zero
-/* 48DF38 80218D98 0C0B2026 */  jal       set_variable
+/* 48DF38 80218D98 0C0B2026 */  jal       evt_set_variable
 /* 48DF3C 80218D9C 0260302D */   daddu    $a2, $s3, $zero
 /* 48DF40 80218DA0 8E050000 */  lw        $a1, ($s0)
 /* 48DF44 80218DA4 26100004 */  addiu     $s0, $s0, 4
 /* 48DF48 80218DA8 0220202D */  daddu     $a0, $s1, $zero
-/* 48DF4C 80218DAC 0C0B2026 */  jal       set_variable
+/* 48DF4C 80218DAC 0C0B2026 */  jal       evt_set_variable
 /* 48DF50 80218DB0 0280302D */   daddu    $a2, $s4, $zero
 /* 48DF54 80218DB4 0220202D */  daddu     $a0, $s1, $zero
 /* 48DF58 80218DB8 8E050000 */  lw        $a1, ($s0)
-/* 48DF5C 80218DBC 0C0B2026 */  jal       set_variable
+/* 48DF5C 80218DBC 0C0B2026 */  jal       evt_set_variable
 /* 48DF60 80218DC0 0240302D */   daddu    $a2, $s2, $zero
 /* 48DF64 80218DC4 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 48DF68 80218DC8 8FB40020 */  lw        $s4, 0x20($sp)

@@ -48,7 +48,7 @@ glabel func_80240E34_ACEF74
 /* ACF020 80240EE0 0220202D */  daddu     $a0, $s1, $zero
 /* ACF024 80240EE4 4600008D */  trunc.w.s $f2, $f0
 /* ACF028 80240EE8 44061000 */  mfc1      $a2, $f2
-/* ACF02C 80240EEC 0C0B2026 */  jal       set_variable
+/* ACF02C 80240EEC 0C0B2026 */  jal       evt_set_variable
 /* ACF030 80240EF0 0280282D */   daddu    $a1, $s4, $zero
 /* ACF034 80240EF4 8FBF0024 */  lw        $ra, 0x24($sp)
 /* ACF038 80240EF8 8FB40020 */  lw        $s4, 0x20($sp)

@@ -33,12 +33,12 @@ MapConfig N(config) = {
 };
 
 EvtSource N(802436D0) = SCRIPT({
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    if (SI_VAR(0) < -500) {
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    if (EVT_VAR(0) < -500) {
         goto 10;
     }
 0:
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
         } else {
@@ -46,14 +46,14 @@ EvtSource N(802436D0) = SCRIPT({
         }
     }
     loop {
-        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        if (SI_VAR(0) < -500) {
+        GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        if (EVT_VAR(0) < -500) {
             break loop;
         }
         sleep 1;
     }
 10:
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_SUN_TOWER_CLOUDY, 0, 8);
         } else {
@@ -61,8 +61,8 @@ EvtSource N(802436D0) = SCRIPT({
         }
     }
     loop {
-        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        if (SI_VAR(0) > -500) {
+        GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        if (EVT_VAR(0) > -500) {
             break loop;
         }
         sleep 1;
@@ -93,9 +93,9 @@ EvtSource N(80243950) = SCRIPT({
 });
 
 EvtSource N(makeEntities) = SCRIPT({
-    MakeItemEntity(ITEM_MEGA_SMASH, -61, 60, -85, 17, SI_SAVE_FLAG(1385));
-    MakeItemEntity(ITEM_SHOOTING_STAR, 128, 0, 157, 17, SI_SAVE_FLAG(1386));
-    if (SI_SAVE_FLAG(1385) == 0) {
+    MakeItemEntity(ITEM_MEGA_SMASH, -61, 60, -85, 17, EVT_SAVE_FLAG(1385));
+    MakeItemEntity(ITEM_SHOOTING_STAR, 128, 0, 157, 17, EVT_SAVE_FLAG(1386));
+    if (EVT_SAVE_FLAG(1385) == 0) {
         MakeEntity(0x802BCF00, -160, 160, -90, 0, MAKE_ENTITY_END);
         AssignScript(N(80243950));
     } else {
@@ -109,40 +109,40 @@ static s32 N(pad_3A3C) = {
 
 EvtSource N(80243A40) = SCRIPT({
     group 11;
-    SI_VAR(10) = SI_VAR(0);
-    SI_VAR(11) = SI_VAR(1);
-    SI_VAR(12) = SI_VAR(2);
-    SI_VAR(13) = SI_VAR(3);
-    SI_VAR(14) = SI_VAR(4);
-    SI_VAR(12) -= SI_VAR(0);
-    SI_VAR(13) -= SI_VAR(1);
-    SI_VAR(0) = (float) SI_VAR(12);
-    SI_VAR(0) /= 100.0;
-    SI_VAR(15) = 100.0;
-    SI_VAR(15) /= (float) SI_VAR(0);
-    SI_VAR(15) += 11;
-    SI_VAR(5) = 200;
-    SI_VAR(5) /= SI_VAR(15);
-    SI_VAR(5) += 1;
-    loop SI_VAR(5) {
-        RandInt(SI_VAR(12), SI_VAR(0));
-        RandInt(SI_VAR(13), SI_VAR(1));
-        RandInt(199, SI_VAR(2));
-        SI_VAR(3) = 210;
-        SI_VAR(3) -= SI_VAR(2);
-        SI_VAR(0) += SI_VAR(10);
-        SI_VAR(1) += SI_VAR(11);
-        SI_VAR(2) += SI_VAR(14);
-        PlayEffect(0xD, SI_VAR(0), SI_VAR(2), SI_VAR(1), SI_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    EVT_VAR(10) = EVT_VAR(0);
+    EVT_VAR(11) = EVT_VAR(1);
+    EVT_VAR(12) = EVT_VAR(2);
+    EVT_VAR(13) = EVT_VAR(3);
+    EVT_VAR(14) = EVT_VAR(4);
+    EVT_VAR(12) -= EVT_VAR(0);
+    EVT_VAR(13) -= EVT_VAR(1);
+    EVT_VAR(0) = (float) EVT_VAR(12);
+    EVT_VAR(0) /= 100.0;
+    EVT_VAR(15) = 100.0;
+    EVT_VAR(15) /= (float) EVT_VAR(0);
+    EVT_VAR(15) += 11;
+    EVT_VAR(5) = 200;
+    EVT_VAR(5) /= EVT_VAR(15);
+    EVT_VAR(5) += 1;
+    loop EVT_VAR(5) {
+        RandInt(EVT_VAR(12), EVT_VAR(0));
+        RandInt(EVT_VAR(13), EVT_VAR(1));
+        RandInt(199, EVT_VAR(2));
+        EVT_VAR(3) = 210;
+        EVT_VAR(3) -= EVT_VAR(2);
+        EVT_VAR(0) += EVT_VAR(10);
+        EVT_VAR(1) += EVT_VAR(11);
+        EVT_VAR(2) += EVT_VAR(14);
+        PlayEffect(0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
-    sleep SI_VAR(15);
+    sleep EVT_VAR(15);
 0:
-    RandInt(SI_VAR(12), SI_VAR(0));
-    RandInt(SI_VAR(13), SI_VAR(1));
-    SI_VAR(0) += SI_VAR(10);
-    SI_VAR(1) += SI_VAR(11);
-    PlayEffect(0xD, SI_VAR(0), SI_VAR(14), SI_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    sleep SI_VAR(15);
+    RandInt(EVT_VAR(12), EVT_VAR(0));
+    RandInt(EVT_VAR(13), EVT_VAR(1));
+    EVT_VAR(0) += EVT_VAR(10);
+    EVT_VAR(1) += EVT_VAR(11);
+    PlayEffect(0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    sleep EVT_VAR(15);
     goto 0;
 });
 
@@ -156,7 +156,7 @@ EvtSource N(80243DA4) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    EVT_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -165,42 +165,42 @@ EvtSource N(main) = SCRIPT({
     MakeNpcs(0, N(npcGroupList_80247984));
     await N(makeEntities);
     ModifyColliderFlags(3, 13, 0x00000006);
-    SI_VAR(0) = 274;
-    SI_VAR(1) = -137;
-    SI_VAR(2) = 583;
-    SI_VAR(3) = -64;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = 274;
+    EVT_VAR(1) = -137;
+    EVT_VAR(2) = 583;
+    EVT_VAR(3) = -64;
+    EVT_VAR(4) = 0;
     spawn N(80243A40);
-    SI_VAR(0) = 433;
-    SI_VAR(1) = 108;
-    SI_VAR(2) = 580;
-    SI_VAR(3) = 169;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = 433;
+    EVT_VAR(1) = 108;
+    EVT_VAR(2) = 580;
+    EVT_VAR(3) = 169;
+    EVT_VAR(4) = 0;
     spawn N(80243A40);
-    SI_VAR(0) = -460;
-    SI_VAR(1) = 90;
-    SI_VAR(2) = -125;
-    SI_VAR(3) = 130;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = -460;
+    EVT_VAR(1) = 90;
+    EVT_VAR(2) = -125;
+    EVT_VAR(3) = 130;
+    EVT_VAR(4) = 0;
     spawn N(80243A40);
-    SI_VAR(0) = -420;
-    SI_VAR(1) = -130;
-    SI_VAR(2) = -260;
-    SI_VAR(3) = -90;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = -420;
+    EVT_VAR(1) = -130;
+    EVT_VAR(2) = -260;
+    EVT_VAR(3) = -90;
+    EVT_VAR(4) = 0;
     spawn N(80243A40);
-    SI_VAR(0) = -220;
-    SI_VAR(1) = -137;
-    SI_VAR(2) = 0;
-    SI_VAR(3) = -50;
-    SI_VAR(4) = 160;
+    EVT_VAR(0) = -220;
+    EVT_VAR(1) = -137;
+    EVT_VAR(2) = 0;
+    EVT_VAR(3) = -50;
+    EVT_VAR(4) = 160;
     spawn N(80243A40);
     ModifyColliderFlags(0, 1, 0x7FFFFE00);
     ModifyColliderFlags(0, 5, 0x7FFFFE00);
-    SI_VAR(0) = N(80243DA4);
+    EVT_VAR(0) = N(80243DA4);
     spawn EnterWalk;
     await N(802438B0);
-    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CC3810)();
     }
 });
@@ -273,8 +273,8 @@ EvtSource N(npcAI_80244240) = SCRIPT({
 
 EvtSource N(802442B0) = SCRIPT({
     SetNpcRotation(NPC_SELF, 0, 0, 0);
-    GetBattleOutcome(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattleOutcome(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
             SetSelfVar(10, 100);
             DoNpcDefeat();
@@ -317,35 +317,35 @@ Vec3f N(vectorList_80244420)[] = {
 };
 
 EvtSource N(8024445C) = SCRIPT({
-    GetNpcPos(NPC_WORLD_LAKILESTER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetNpcPos(NPC_WORLD_LAKILESTER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
 0:
-    GetNpcPos(NPC_WORLD_LAKILESTER, SI_VAR(3), SI_VAR(4), SI_VAR(5));
+    GetNpcPos(NPC_WORLD_LAKILESTER, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
     N(UnkFunc42)();
-    InterpNpcYaw(NPC_WORLD_LAKILESTER, SI_VAR(10), 0);
-    SI_VAR(0) = SI_VAR(3);
-    SI_VAR(1) = SI_VAR(4);
-    SI_VAR(2) = SI_VAR(5);
-    GetAngleBetweenNPCs(-4, 0, SI_VAR(10));
-    InterpNpcYaw(NPC_PARTNER, SI_VAR(10), 0);
+    InterpNpcYaw(NPC_WORLD_LAKILESTER, EVT_VAR(10), 0);
+    EVT_VAR(0) = EVT_VAR(3);
+    EVT_VAR(1) = EVT_VAR(4);
+    EVT_VAR(2) = EVT_VAR(5);
+    GetAngleBetweenNPCs(-4, 0, EVT_VAR(10));
+    InterpNpcYaw(NPC_PARTNER, EVT_VAR(10), 0);
     PlayerFaceNpc(0, 0);
     sleep 1;
     goto 0;
 });
 
 EvtSource N(80244560) = SCRIPT({
-    GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetNpcPos(NPC_LAKILULU0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
 0:
-    GetNpcPos(NPC_LAKILULU0, SI_VAR(3), SI_VAR(4), SI_VAR(5));
+    GetNpcPos(NPC_LAKILULU0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
     N(UnkFunc42)();
-    InterpNpcYaw(NPC_LAKILULU0, SI_VAR(10), 0);
-    SI_VAR(0) = SI_VAR(3);
-    SI_VAR(1) = SI_VAR(4);
-    SI_VAR(2) = SI_VAR(5);
-    GetAngleBetweenNPCs(-4, 1, SI_VAR(10));
-    InterpNpcYaw(NPC_PARTNER, SI_VAR(10), 0);
-    if (SI_STORY_PROGRESS < STORY_CH6_LAKILESTER_JOINED_PARTY) {
-        GetAngleBetweenNPCs(0, 1, SI_VAR(11));
-        InterpNpcYaw(NPC_WORLD_LAKILESTER, SI_VAR(11), 0);
+    InterpNpcYaw(NPC_LAKILULU0, EVT_VAR(10), 0);
+    EVT_VAR(0) = EVT_VAR(3);
+    EVT_VAR(1) = EVT_VAR(4);
+    EVT_VAR(2) = EVT_VAR(5);
+    GetAngleBetweenNPCs(-4, 1, EVT_VAR(10));
+    InterpNpcYaw(NPC_PARTNER, EVT_VAR(10), 0);
+    if (EVT_STORY_PROGRESS < STORY_CH6_LAKILESTER_JOINED_PARTY) {
+        GetAngleBetweenNPCs(0, 1, EVT_VAR(11));
+        InterpNpcYaw(NPC_WORLD_LAKILESTER, EVT_VAR(11), 0);
     }
     PlayerFaceNpc(1, 0);
     sleep 1;
@@ -353,30 +353,30 @@ EvtSource N(80244560) = SCRIPT({
 });
 
 EvtSource N(802446AC) = SCRIPT({
-    SI_MAP_VAR(10) = 0;
+    EVT_MAP_VAR(10) = 0;
     loop {
         loop 2 {
-            GetNpcPos(NPC_LAKILULU1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            SI_VAR(1) += 1;
-            SetNpcPos(NPC_LAKILULU1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            SI_VAR(1) += 1;
-            SetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            GetNpcPos(NPC_LAKILULU1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            EVT_VAR(1) += 1;
+            SetNpcPos(NPC_LAKILULU1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            GetNpcPos(NPC_LAKILULU0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            EVT_VAR(1) += 1;
+            SetNpcPos(NPC_LAKILULU0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
             sleep 2;
         }
         sleep 1;
         loop 2 {
-            GetNpcPos(NPC_LAKILULU1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            SI_VAR(1) += -1;
-            SetNpcPos(NPC_LAKILULU1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            SI_VAR(1) += -1;
-            SetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            GetNpcPos(NPC_LAKILULU1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            EVT_VAR(1) += -1;
+            SetNpcPos(NPC_LAKILULU1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            GetNpcPos(NPC_LAKILULU0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            EVT_VAR(1) += -1;
+            SetNpcPos(NPC_LAKILULU0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
             sleep 2;
         }
         sleep 1;
-        if (SI_MAP_VAR(10) == 1) {
-            SI_MAP_VAR(10) = 2;
+        if (EVT_MAP_VAR(10) == 1) {
+            EVT_MAP_VAR(10) = 2;
             break loop;
         }
     }
@@ -385,12 +385,12 @@ EvtSource N(802446AC) = SCRIPT({
 EvtSource N(80244888) = SCRIPT({
     spawn N(802446AC);
     SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_C);
-    GetNpcPos(NPC_LAKILULU0, SI_VAR(1), SI_VAR(2), SI_VAR(3));
-    SI_VAR(1) += -5;
-    SI_VAR(2) += 30;
-    SI_VAR(3) += 2;
+    GetNpcPos(NPC_LAKILULU0, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
+    EVT_VAR(1) += -5;
+    EVT_VAR(2) += 30;
+    EVT_VAR(3) += 2;
     SetNpcYaw(NPC_LAKILULU1, 270);
-    SetNpcPos(NPC_LAKILULU1, SI_VAR(1), SI_VAR(2), SI_VAR(3));
+    SetNpcPos(NPC_LAKILULU1, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
     spawn {
         sleep 5;
         SetPlayerAnimation(ANIM_1002B);
@@ -400,24 +400,24 @@ EvtSource N(80244888) = SCRIPT({
         sleep 15;
         EndSpeech(1, -1, -1, 512);
     }
-    SI_MAP_VAR(10) = 1;
+    EVT_MAP_VAR(10) = 1;
     loop {
         sleep 1;
-        if (SI_MAP_VAR(10) == 2) {
+        if (EVT_MAP_VAR(10) == 2) {
             break loop;
         }
     }
     SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_D);
-    GetPlayerPos(SI_VAR(1), SI_VAR(2), SI_VAR(3));
-    SI_VAR(1) += 5;
-    SI_VAR(2) += 20;
+    GetPlayerPos(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
+    EVT_VAR(1) += 5;
+    EVT_VAR(2) += 20;
     SetNpcJumpscale(NPC_LAKILULU1, 0.0);
-    NpcJump0(NPC_LAKILULU1, SI_VAR(1), SI_VAR(2), SI_VAR(3), 7);
-    SI_VAR(1) += -100;
-    SI_VAR(2) += 10;
+    NpcJump0(NPC_LAKILULU1, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), 7);
+    EVT_VAR(1) += -100;
+    EVT_VAR(2) += 10;
     spawn {
         SetNpcJumpscale(NPC_LAKILULU1, 1.5);
-        NpcJump0(NPC_LAKILULU1, SI_VAR(1), SI_VAR(2), SI_VAR(3), 15);
+        NpcJump0(NPC_LAKILULU1, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), 15);
         SetNpcPos(NPC_LAKILULU1, 0, -1000, 0);
     }
     spawn {
@@ -425,13 +425,13 @@ EvtSource N(80244888) = SCRIPT({
     }
     PlaySoundAtPlayer(225, 0);
     SetPlayerAnimation(ANIM_FALL_BACK);
-    SI_VAR(0) = 90;
+    EVT_VAR(0) = 90;
     loop 20 {
-        SI_VAR(0) += 144;
-        if (SI_VAR(0) > 359) {
-            SI_VAR(0) -= 360;
+        EVT_VAR(0) += 144;
+        if (EVT_VAR(0) > 359) {
+            EVT_VAR(0) -= 360;
         }
-        InterpPlayerYaw(SI_VAR(0), 1);
+        InterpPlayerYaw(EVT_VAR(0), 1);
         sleep 1;
     }
     SetPlayerAnimation(ANIM_STAND_STILL);
@@ -439,7 +439,7 @@ EvtSource N(80244888) = SCRIPT({
 });
 
 EvtSource N(idle_80244BF8) = SCRIPT({
-    if (SI_STORY_PROGRESS != STORY_CH6_SPOKE_WITH_THE_SUN) {
+    if (EVT_STORY_PROGRESS != STORY_CH6_SPOKE_WITH_THE_SUN) {
         return;
     }
     AwaitPlayerApproach(200, 20, 275);
@@ -460,22 +460,22 @@ EvtSource N(idle_80244BF8) = SCRIPT({
     spawn {
         N(func_802434D4_CC6CE4)();
     }
-    SI_VAR(9) = spawn N(8024445C);
+    EVT_VAR(9) = spawn N(8024445C);
     LoadPath(80, N(vectorList_802443A8), 5, 0);
 0:
     GetNextPathPos();
-    SetNpcPos(NPC_WORLD_LAKILESTER, SI_VAR(1), SI_VAR(2), SI_VAR(3));
+    SetNpcPos(NPC_WORLD_LAKILESTER, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
     sleep 1;
-    if (SI_VAR(0) == 1) {
+    if (EVT_VAR(0) == 1) {
         goto 0;
     }
-    kill SI_VAR(9);
+    kill EVT_VAR(9);
     SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_1);
     PlayerFaceNpc(0, 0);
     sleep 15;
-    GetNpcPos(NPC_WORLD_LAKILESTER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetNpcPos(NPC_WORLD_LAKILESTER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetCamDistance(0, 200);
     SetCamPitch(0, 18.0, -8.5);
     SetCamSpeed(0, 90.0);
@@ -501,12 +501,12 @@ EvtSource N(idle_80244BF8) = SCRIPT({
 });
 
 EvtSource N(80245014) = SCRIPT({
-    GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    AwaitPlayerLeave(SI_VAR(0), SI_VAR(2), 120);
+    GetNpcPos(NPC_LAKILULU0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    AwaitPlayerLeave(EVT_VAR(0), EVT_VAR(2), 120);
     DisablePlayerInput(TRUE);
-    GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    UseSettingsFrom(0, SI_VAR(0), 0, SI_VAR(2));
-    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetNpcPos(NPC_LAKILULU0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    UseSettingsFrom(0, EVT_VAR(0), 0, EVT_VAR(2));
+    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetCamDistance(0, 250);
     SetCamPitch(0, 5.5, -7.5);
     SetCamSpeed(0, 90.0);
@@ -527,25 +527,25 @@ EvtSource N(80245014) = SCRIPT({
         N(func_802433C0_CC6BD0)(55);
     }
     SetNpcFlagBits(NPC_LAKILULU0, ((NPC_FLAG_100)), TRUE);
-    SI_VAR(9) = spawn N(80244560);
+    EVT_VAR(9) = spawn N(80244560);
     LoadPath(55, N(vectorList_80244420), 5, 0);
 20:
     GetNextPathPos();
-    SetNpcPos(NPC_LAKILULU0, SI_VAR(1), SI_VAR(2), SI_VAR(3));
+    SetNpcPos(NPC_LAKILULU0, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
     sleep 1;
-    if (SI_VAR(0) == 1) {
+    if (EVT_VAR(0) == 1) {
         goto 20;
     }
-    kill SI_VAR(9);
-    GetCurrentPartnerID(SI_VAR(0));
+    kill EVT_VAR(9);
+    GetCurrentPartnerID(EVT_VAR(0));
     BringPartnerOut(8);
-    if (SI_VAR(0) != 8) {
+    if (EVT_VAR(0) != 8) {
         SetNpcJumpscale(NPC_PARTNER, 0.0);
-        GetPlayerPos(SI_VAR(1), SI_VAR(2), SI_VAR(3));
-        SI_VAR(1) += 20;
-        SI_VAR(2) += 20;
-        SI_VAR(3) += 20;
-        NpcJump0(NPC_PARTNER, SI_VAR(1), SI_VAR(2), SI_VAR(3), 30);
+        GetPlayerPos(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
+        EVT_VAR(1) += 20;
+        EVT_VAR(2) += 20;
+        EVT_VAR(3) += 20;
+        NpcJump0(NPC_PARTNER, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), 30);
     }
     DisablePartnerAI(0);
     InterpNpcYaw(NPC_PARTNER, 270, 0);
@@ -591,40 +591,40 @@ EvtSource N(80245444) = SCRIPT({
     spawn {
         N(func_802433C0_CC6BD0)(80);
     }
-    SI_VAR(9) = spawn N(80244560);
+    EVT_VAR(9) = spawn N(80244560);
     LoadPath(80, N(vectorList_802443E4), 5, 0);
 0:
     GetNextPathPos();
-    SetNpcPos(NPC_LAKILULU0, SI_VAR(1), SI_VAR(2), SI_VAR(3));
+    SetNpcPos(NPC_LAKILULU0, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
     sleep 1;
-    if (SI_VAR(0) == 1) {
+    if (EVT_VAR(0) == 1) {
         goto 0;
     }
-    kill SI_VAR(9);
+    kill EVT_VAR(9);
     SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_9);
     SetPlayerAnimation(ANIM_STAND_STILL);
     sleep 20;
-    GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += 20;
-    UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetNpcPos(NPC_LAKILULU0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) += 20;
+    UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetCamDistance(0, 250);
     SetCamPitch(0, 5.5, -7.5);
     SetCamSpeed(0, 90.0);
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00A4));
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += 40;
-    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) += 40;
+    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetCamDistance(0, 300);
     SetCamSpeed(0, 4.0);
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_8, NPC_ANIM_lakilulu_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x00A5));
-    GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += 20;
-    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetNpcPos(NPC_LAKILULU0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) += 20;
+    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetCamDistance(0, 250);
     SetCamSpeed(0, 4.0);
     PanToTarget(0, 0, 1);
@@ -632,9 +632,9 @@ EvtSource N(80245444) = SCRIPT({
     SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_B, NPC_ANIM_world_lakilester_Palette_00_Anim_3, 0, MESSAGE_ID(0x11, 0x00A6));
     SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_1);
     EndSpeech(0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0);
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += 40;
-    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) += 40;
+    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetCamDistance(0, 350);
     SetCamSpeed(0, 10.0);
     PanToTarget(0, 0, 1);
@@ -642,7 +642,7 @@ EvtSource N(80245444) = SCRIPT({
 10:
     SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_A, NPC_ANIM_lakilulu_Palette_00_Anim_9, 0, MESSAGE_ID(0x11, 0x00A7));
     ShowChoice(MESSAGE_ID(0x1E, 0x0020));
-    if (SI_VAR(0) != 0) {
+    if (EVT_VAR(0) != 0) {
         await N(80244888);
         sleep 10;
         goto 10;
@@ -654,9 +654,9 @@ EvtSource N(80245444) = SCRIPT({
         sleep 10;
         SetPlayerAnimation(ANIM_STAND_STILL);
         sleep 20;
-        GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SI_VAR(0) += 20;
-        SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetNpcPos(NPC_LAKILULU0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        EVT_VAR(0) += 20;
+        SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         SetCamDistance(0, 250);
         SetCamSpeed(0, 90.0);
         PanToTarget(0, 0, 1);
@@ -664,9 +664,9 @@ EvtSource N(80245444) = SCRIPT({
         SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_B, NPC_ANIM_world_lakilester_Palette_00_Anim_3, 0, MESSAGE_ID(0x11, 0x00AA));
         SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_1);
         EndSpeech(0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0);
-        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SI_VAR(0) += 40;
-        SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        EVT_VAR(0) += 40;
+        SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         SetCamDistance(0, 350);
         SetCamSpeed(0, 5.0);
         PanToTarget(0, 0, 1);
@@ -675,7 +675,7 @@ EvtSource N(80245444) = SCRIPT({
         SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_B, NPC_ANIM_world_lakilester_Palette_00_Anim_3, 0, MESSAGE_ID(0x11, 0x00AB));
         sleep 10;
         ShowChoice(MESSAGE_ID(0x1E, 0x0021));
-        match SI_VAR(0) {
+        match EVT_VAR(0) {
             == -1 {}
             == 0 {
                 ContinueSpeech(0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00AC));
@@ -702,10 +702,10 @@ EvtSource N(80245444) = SCRIPT({
     spawn {
         ResetCam(0, 90.0);
     }
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += 30;
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) += 30;
     SetNpcSpeed(NPC_WORLD_LAKILESTER, 3.5);
-    NpcMoveTo(NPC_WORLD_LAKILESTER, SI_VAR(0), 60, 0);
+    NpcMoveTo(NPC_WORLD_LAKILESTER, EVT_VAR(0), 60, 0);
     N(UnkFunc41)(0, 8);
     N(LoadPartyImage)();
     spawn N(802438CC);
@@ -714,24 +714,24 @@ EvtSource N(80245444) = SCRIPT({
     spawn N(802438F8);
     sleep 10;
     PanToTarget(0, 0, 0);
-    SI_STORY_PROGRESS = STORY_CH6_LAKILESTER_JOINED_PARTY;
+    EVT_STORY_PROGRESS = STORY_CH6_LAKILESTER_JOINED_PARTY;
     EnablePartnerAI();
     DisablePlayerInput(FALSE);
     await N(80245014);
 });
 
 EvtSource N(defeat_80246038) = SCRIPT({
-    GetBattleOutcome(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattleOutcome(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
             SetNpcAnimation(NPC_SELF, NPC_ANIM_world_lakilester_Palette_00_Anim_4);
             SetCamType(0, 6, 1);
-            GetNpcPos(NPC_SELF, SI_VAR(3), SI_VAR(1), SI_VAR(2));
-            GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            SI_VAR(0) += SI_VAR(3);
-            SI_VAR(0) /= 2;
-            UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            GetNpcPos(NPC_SELF, EVT_VAR(3), EVT_VAR(1), EVT_VAR(2));
+            GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            EVT_VAR(0) += EVT_VAR(3);
+            EVT_VAR(0) /= 2;
+            UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
             SetCamDistance(0, 300);
             SetCamPitch(0, 17.0, -7.5);
             SetCamSpeed(0, 90.0);
@@ -746,12 +746,12 @@ EvtSource N(defeat_80246038) = SCRIPT({
 });
 
 EvtSource N(interact_802461C0) = SCRIPT({
-    if (SI_STORY_PROGRESS <= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (EVT_STORY_PROGRESS <= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0,
                       MESSAGE_ID(0x11, 0x0032));
     } else {
-        GetCurrentPartnerID(SI_VAR(0));
-        if (SI_VAR(0) != 8) {
+        GetCurrentPartnerID(EVT_VAR(0));
+        if (EVT_VAR(0) != 8) {
             SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0,
                           MESSAGE_ID(0x11, 0x0034));
         } else {
@@ -762,17 +762,17 @@ EvtSource N(interact_802461C0) = SCRIPT({
 });
 
 EvtSource N(init_80246280) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH6_LAKILESTER_JOINED_PARTY) {
+    if (EVT_STORY_PROGRESS < STORY_CH6_LAKILESTER_JOINED_PARTY) {
         BindNpcIdle(NPC_SELF, N(idle_80244BF8));
         BindNpcDefeat(NPC_SELF, N(defeat_80246038));
     }
 });
 
 EvtSource N(init_802462D0) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH6_BEGAN_PEACH_MISSION) {
+    if (EVT_STORY_PROGRESS < STORY_CH6_BEGAN_PEACH_MISSION) {
         BindNpcInteract(NPC_SELF, N(interact_802461C0));
         SetNpcCollisionSize(-1, 36, 28);
-        if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+        if (EVT_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
             SetNpcPos(NPC_SELF, -50, 180, -50);
         }
     } else {
@@ -786,13 +786,13 @@ EvtSource N(init_80246370) = SCRIPT({
 });
 
 EvtSource N(init_802463B0) = SCRIPT({
-    if (SI_STORY_PROGRESS == STORY_CH6_SPOKE_WITH_THE_SUN) {
+    if (EVT_STORY_PROGRESS == STORY_CH6_SPOKE_WITH_THE_SUN) {
         RemoveNpc(NPC_SELF);
     }
 });
 
 EvtSource N(init_802463E8) = SCRIPT({
-    if (SI_STORY_PROGRESS == STORY_CH6_SPOKE_WITH_THE_SUN) {
+    if (EVT_STORY_PROGRESS == STORY_CH6_SPOKE_WITH_THE_SUN) {
         RemoveNpc(NPC_SELF);
     }
     SetSelfVar(13, 1);
@@ -1365,7 +1365,7 @@ ApiStatus N(func_802414D0_CC4CE0)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -1568,7 +1568,7 @@ ApiStatus N(func_80241DB8_CC55C8)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
     f32 temp_f4;
     f32 dist;
 
@@ -1710,7 +1710,7 @@ ApiStatus N(func_8024262C_CC5E3C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
     s32 var;
 
     territory.unk_00 = 0;
@@ -1846,7 +1846,7 @@ ApiStatus N(func_80242A6C_CC627C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
     s32 var;
     u32 x, y, z;
     f32 x2, y2, z2, w2;
@@ -2067,7 +2067,7 @@ ApiStatus N(func_802433C0_CC6BD0)(Evt* script, s32 isInitialCall) {
     s16 param1;
     s16 param2;
 
-    script->functionTemp[1] = get_variable(script, *script->ptrReadPos);
+    script->functionTemp[1] = evt_get_variable(script, *script->ptrReadPos);
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;

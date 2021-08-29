@@ -36,12 +36,12 @@ EvtSource N(802401BC) = SCRIPT({
     SetPlayerAnimation(0x90000);
     spawn {
         SetNpcJumpscale(NPC_TUBBAS_HEART, 2.5);
-        GetNpcPos(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetNpcPos(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
-        NpcJump0(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
+        NpcJump0(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10);
         sleep 1;
         PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
-        NpcJump0(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
+        NpcJump0(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10);
     }
     sleep 40;
     SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00C2));
@@ -54,10 +54,10 @@ EvtSource N(802401BC) = SCRIPT({
 EvtSource N(exitSingleDoor_80240428) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 2;
-    SI_VAR(2) = 0;
-    SI_VAR(3) = -1;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 2;
+    EVT_VAR(2) = 0;
+    EVT_VAR(3) = -1;
     spawn ExitSingleDoor;
     sleep 17;
     GotoMap("arn_13", 1);
@@ -70,11 +70,11 @@ EvtSource N(802404CC) = SCRIPT({
 
 EvtSource N(enterSingleDoor_802404F8) = SCRIPT({
     DisablePlayerInput(TRUE);
-    SI_VAR(2) = 0;
-    SI_VAR(3) = -1;
+    EVT_VAR(2) = 0;
+    EVT_VAR(3) = -1;
     await EnterSingleDoor;
     spawn N(802404CC);
-    if (SI_STORY_PROGRESS < STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
+    if (EVT_STORY_PROGRESS < STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
         sleep 10;
         spawn N(802400F0);
         spawn N(802401BC);
@@ -84,7 +84,7 @@ EvtSource N(enterSingleDoor_802404F8) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_WINDY_MILL;
+    EVT_WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(524290);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -118,8 +118,8 @@ NpcSettings N(npcSettings_802406A0) = {
 
 EvtSource N(idle_802406CC) = SCRIPT({
     loop {
-        GetSelfVar(0, SI_VAR(0));
-        if (SI_VAR(0) != 0) {
+        GetSelfVar(0, EVT_VAR(0));
+        if (EVT_VAR(0) != 0) {
             break loop;
         }
         sleep 1;
@@ -127,10 +127,10 @@ EvtSource N(idle_802406CC) = SCRIPT({
     spawn {
         SetCamType(0, 6, 1);
         SetCamSpeed(0, 4.0);
-        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SI_VAR(0) += 50;
-        UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        EVT_VAR(0) += 50;
+        UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         SetCamDistance(0, 3000);
         PanToTarget(0, 0, 1);
         WaitForCam(0, 1.0);
@@ -144,9 +144,9 @@ EvtSource N(8024081C) = SCRIPT({
     MakeLerp(0, 80, 10, 0);
     loop {
         UpdateLerp();
-        RotateModel(0, SI_VAR(0), 0, -1, 0);
+        RotateModel(0, EVT_VAR(0), 0, -1, 0);
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
     }
@@ -156,9 +156,9 @@ EvtSource N(802408D8) = SCRIPT({
     MakeLerp(80, 0, 10, 0);
     loop {
         UpdateLerp();
-        RotateModel(0, SI_VAR(0), 0, -1, 0);
+        RotateModel(0, EVT_VAR(0), 0, -1, 0);
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
     }
@@ -175,20 +175,20 @@ EvtSource N(defeat_802409DC) = SCRIPT({
     spawn {
         SetCamType(0, 6, 1);
         SetCamSpeed(0, 90.0);
-        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SI_VAR(0) += 50;
-        UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        EVT_VAR(0) += 50;
+        UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         SetCamDistance(0, 450);
         PanToTarget(0, 0, 1);
     }
     sleep 10;
     PlayerFaceNpc(0, 1);
     loop 2 {
-        GetNpcPos(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetNpcPos(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         SetNpcJumpscale(NPC_TUBBAS_HEART, 2.5);
         PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
-        NpcJump0(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2), 12);
+        NpcJump0(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 12);
         sleep 1;
     }
     spawn {
@@ -205,40 +205,40 @@ EvtSource N(defeat_802409DC) = SCRIPT({
     PlayerFaceNpc(0, 1);
     buf_use N(intTable_80240988);
     loop {
-        buf_read SI_VAR(0) SI_VAR(1) SI_VAR(2);
-        if (SI_VAR(0) == -10000) {
+        buf_read EVT_VAR(0) EVT_VAR(1) EVT_VAR(2);
+        if (EVT_VAR(0) == -10000) {
             break loop;
         }
         PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
-        NpcJump0(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2), 12);
+        NpcJump0(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 12);
         sleep 1;
     }
     spawn N(8024081C);
     loop {
-        buf_read SI_VAR(0) SI_VAR(1) SI_VAR(2);
-        if (SI_VAR(0) == -10000) {
+        buf_read EVT_VAR(0) EVT_VAR(1) EVT_VAR(2);
+        if (EVT_VAR(0) == -10000) {
             break loop;
         }
         PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
-        NpcJump0(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2), 12);
+        NpcJump0(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 12);
         sleep 1;
     }
     spawn N(802408D8);
     sleep 30;
     SetCamType(0, 6, 1);
     SetCamSpeed(0, 90.0);
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetCamDistance(0, 450);
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     PanToTarget(0, 0, 0);
-    SI_STORY_PROGRESS = STORY_CH3_HEART_FLED_FIRST_TUNNEL;
+    EVT_STORY_PROGRESS = STORY_CH3_HEART_FLED_FIRST_TUNNEL;
 });
 
 EvtSource N(init_80240E70) = SCRIPT({
-    if (SI_STORY_PROGRESS >= STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
+    if (EVT_STORY_PROGRESS >= STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
         RemoveNpc(NPC_SELF);
     } else {
         SetSelfVar(0, 0);

@@ -18,17 +18,17 @@ ApiStatus N(func_8024006C_D86A6C)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
         script->varTable[0] = ptr;
-        set_variable(NULL, SI_MAP_VAR(1), ptr);
-        ptr->unk_38 = get_variable(script, *args++);
-        ptr->unk_3C = get_variable(script, *args++);
-        ptr->unk_0C = get_float_variable(script, *args++);
-        ptr->unk_10 = get_float_variable(script, *args++);
-        ptr->unk_14 = get_float_variable(script, *args++);
-        ptr->unk_18 = get_float_variable(script, *args++);
-        ptr->unk_1C = get_float_variable(script, *args++);
-        ptr->unk_20 = get_float_variable(script, *args++);
-        ptr->unk_24 = get_float_variable(script, *args++);
-        ptr->unk_28 = get_float_variable(script, *args++);
+        evt_set_variable(NULL, EVT_MAP_VAR(1), ptr);
+        ptr->unk_38 = evt_get_variable(script, *args++);
+        ptr->unk_3C = evt_get_variable(script, *args++);
+        ptr->unk_0C = evt_get_float_variable(script, *args++);
+        ptr->unk_10 = evt_get_float_variable(script, *args++);
+        ptr->unk_14 = evt_get_float_variable(script, *args++);
+        ptr->unk_18 = evt_get_float_variable(script, *args++);
+        ptr->unk_1C = evt_get_float_variable(script, *args++);
+        ptr->unk_20 = evt_get_float_variable(script, *args++);
+        ptr->unk_24 = evt_get_float_variable(script, *args++);
+        ptr->unk_28 = evt_get_float_variable(script, *args++);
         ptr->unk_50 = (struct N(temp)*)playFX_83(2, ptr->unk_0C, ptr->unk_10, ptr->unk_14, 1.0f, 0);
         ptr->unk_4E = 0;
         ptr->unk_48 = 0;
@@ -49,7 +49,7 @@ static char* N(exit_str_1) = "pra_40";
 INCLUDE_ASM(s32, "world/area_pra/pra_32/D86A20", func_802405DC_D86FDC);
 /*
 ApiStatus N(func_802405DC_D86FDC)(Evt* script, s32 isInitialCall) {
-    s32 var = get_variable(script, *script->ptrReadPos);
+    s32 var = evt_get_variable(script, *script->ptrReadPos);
     arn_07_struct* ptr = script->varTable[0];
 
     return (ptr->unk_4E == var) * ApiStatus_DONE2;
@@ -64,11 +64,11 @@ ApiStatus N(func_8024061C_D8701C)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
         script->varTable[0] = ptr;
-        ptr->unk_38 = get_variable(script, *args++);
-        ptr->unk_18 = get_float_variable(script, *args++);
-        ptr->unk_24 = get_float_variable(script, *args++);
-        ptr->unk_20 = get_float_variable(script, *args++);
-        ptr->unk_28 = get_float_variable(script, *args++);
+        ptr->unk_38 = evt_get_variable(script, *args++);
+        ptr->unk_18 = evt_get_float_variable(script, *args++);
+        ptr->unk_24 = evt_get_float_variable(script, *args++);
+        ptr->unk_20 = evt_get_float_variable(script, *args++);
+        ptr->unk_28 = evt_get_float_variable(script, *args++);
         ptr->unk_54 = playFX_7B(1, ptr->unk_18, ptr->unk_24, ptr->unk_20, 1.0f, 0);
         ptr->unk_54->unk_0C->unk_34 = ptr->unk_38;
         ptr->unk_54->unk_0C->unk_20 = 0;

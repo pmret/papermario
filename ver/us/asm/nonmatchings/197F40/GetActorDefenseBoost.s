@@ -21,7 +21,7 @@ glabel GetActorDefenseBoost
 /* 19E588 8026FCA8 8E100000 */   lw       $s0, ($s0)
 /* 19E58C 8026FCAC 0220202D */  daddu     $a0, $s1, $zero
 /* 19E590 8026FCB0 80460222 */  lb        $a2, 0x222($v0)
-/* 19E594 8026FCB4 0C0B2026 */  jal       set_variable
+/* 19E594 8026FCB4 0C0B2026 */  jal       evt_set_variable
 /* 19E598 8026FCB8 0200282D */   daddu    $a1, $s0, $zero
 /* 19E59C 8026FCBC 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 19E5A0 8026FCC0 8FB10014 */  lw        $s1, 0x14($sp)

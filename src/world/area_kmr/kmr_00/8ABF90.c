@@ -10,11 +10,11 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_00/8ABF90", func_80240388_8AC318);
 
 ApiStatus func_802403B8_8AC348(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var0 = get_variable(script, *args++);
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
-    s32 var4 = get_variable(script, *args++);
+    s32 var0 = evt_get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    s32 var4 = evt_get_variable(script, *args++);
 
     playFX_11(var0, var1, var2, var3, var4);
     return ApiStatus_DONE2;
@@ -28,7 +28,7 @@ ApiStatus func_802404A0_8AC430(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kmr/kmr_00/8ABF90", func_802404E8_8AC478);
 
 ApiStatus func_80240530_8AC4C0(Evt* script, s32 isInitialCall) {
-    Npc* npc = get_npc_unsafe(get_variable(script, *script->ptrReadPos));
+    Npc* npc = get_npc_unsafe(evt_get_variable(script, *script->ptrReadPos));
 
     playFX_11(3, npc->pos.x, npc->pos.y + 10.0f, npc->pos.z, 10.0f);
     return ApiStatus_DONE2;
@@ -56,7 +56,7 @@ ApiStatus func_80240BD8_8ACB68(Evt* script, s32 isInitialCall) {
     Npc* npc;
 
     if (isInitialCall) {
-        script->functionTemp[1] = get_variable(script, *args);
+        script->functionTemp[1] = evt_get_variable(script, *args);
         npc = get_npc_unsafe(script->functionTemp[1]);
         sfx_play_sound_at_position(0xB000001E, 0, npc->pos.x, npc->pos.y, npc->pos.z);
         playFX_11(0, npc->pos.x, npc->pos.y + 20.0f, npc->pos.z, 10.0f);

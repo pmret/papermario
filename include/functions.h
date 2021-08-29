@@ -41,7 +41,7 @@ s32 intro_logos_fade_out(s16 addAlpha);
 void _render_transition_stencil(s32, f32, s32);
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
-s32 create_entity(StaticEntityData*, s32, s32, s32, s32, s32);
+s32 create_entity(StaticEntityData*, s32, s32, s32, s32, ...);
 void entity_shattering_idle(Entity* entity);
 void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s16 damage);
 
@@ -155,23 +155,25 @@ s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, 
 void update_collider_transform(s16 colliderID);
 void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
 
-s32 is_trigger_bound(Trigger*, Bytecode* script);
+s32 is_trigger_bound(Trigger*, EvtSource* script);
 Trigger* create_trigger(TriggerDefinition* def);
-s32 _bound_script_trigger_handler(Trigger* trigger);
+s32 evt_bound_script_trigger_handler(Trigger* trigger);
 Trigger* get_trigger_by_id(s32 triggerID);
 
 Actor* get_actor(ActorID actorID);
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 s32 add_coins(s32 amt);
 
+s32 phys_can_player_interact(void);
+
 void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2);
 
 s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
 
-s32 get_variable(Evt* script, Bytecode var);
-s32 set_variable(Evt* script, Bytecode var, s32 value);
-f32 get_float_variable(Evt* script, Bytecode var);
-f32 set_float_variable(Evt* script, Bytecode var, f32 value);
+s32 evt_get_variable(Evt* script, Bytecode var);
+s32 evt_set_variable(Evt* script, Bytecode var, s32 value);
+f32 evt_get_float_variable(Evt* script, Bytecode var);
+f32 evt_set_float_variable(Evt* script, Bytecode var, f32 value);
 void set_script_timescale(Evt* script, f32 timescale);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
@@ -205,7 +207,25 @@ void set_game_mode(s16 idx);
 f32 get_xz_dist_to_player(f32, f32);
 void func_800E06C0(s32);
 void close_status_menu(void);
+Evt* func_802C39F8(Evt* parentScript, Bytecode* nextLine, s32 newState);
+Evt* start_child_script(Evt* parentScript, EvtSource* source, s32 initialState);
+Evt* restart_script(Evt* script);
+void clear_virtual_entity_list(void);
+void reset_model_animators(void);
+void init_virtual_entity_list(void);
+void init_model_animators(void);
+s32 heap_free(void* ptr);
 void btl_state_update_switch_to_partner(void);
+void switch_to_partner(s32 arg0);
+
+void delete_trigger(Trigger* toDelete);
+void kill_script_by_ID(s32 id);
+void set_script_priority(Evt* script, s32 priority);
+void set_script_group(Evt* script, s32 groupFlags);
+void suspend_group_others(Evt* script, s32 groupFlags);
+void resume_group_others(Evt* script, s32 groupFlags);
+s32 suspend_all_script(s32 id);
+s32 resume_all_script(s32 id);
 
 Shadow* create_shadow_type(s32 type, f32 x, f32 y, f32 z);
 s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 centerY, f32 sizeX, f32 sizeZ);
@@ -259,6 +279,11 @@ void sort_items(void);
 s32 is_ability_active(s32 arg0);
 f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 void sin_cos_deg(f32 rad, f32* outSinTheta, f32* outCosTheta);
+
+void set_main_pan_u(s32 texPannerID, s32 value);
+void set_main_pan_v(s32 texPannerID, s32 value);
+void set_aux_pan_u(s32 texPannerID, s32 value);
+void set_aux_pan_v(s32 texPannerID, s32 value);
 
 void enable_world_fog(void);
 void set_world_fog_dist(s32 start, s32 end);
@@ -458,12 +483,15 @@ void entity_set_render_script(Entity* entity, u32* commandList);
 s32 entity_can_collide_with_jumping_player(Entity* entity);
 s32 set_global_flag(s32 index);
 void entity_base_block_init(Entity* entity);
-s32 entity_start_script(Npc* npc);
+s32 entity_start_script(Entity* entity);
 s32 remove_item_entity_by_index(s32 index); // might not actually return anything
 void set_entity_commandlist(Entity* entity, s32* entityScript);
 void func_800EF3E4(void);
 void func_80268858(void);
 void func_80269118(void);
 s32 func_80268224(s32);
+void func_80149A6C(s32, s32);
+void func_800EF300(void);
+void enable_player_shadow(void);
 
 #endif

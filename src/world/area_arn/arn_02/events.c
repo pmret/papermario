@@ -13,7 +13,7 @@ EvtSource N(802411A8) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
+    EVT_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -21,7 +21,7 @@ EvtSource N(main) = SCRIPT({
     MakeNpcs(0, N(npcGroupList_80241A9C));
     await N(makeEntities);
     spawn N(80241040);
-    SI_VAR(0) = N(802411A8);
+    EVT_VAR(0) = N(802411A8);
     spawn EnterWalk;
     sleep 1;
 });
@@ -31,14 +31,14 @@ static s32 N(pad_12C4)[] = {
 };
 
 EvtSource N(makeEntities) = SCRIPT({
-    MakeItemEntity(ITEM_DIZZY_DIAL, -248, 193, 45, 17, SI_SAVE_FLAG(1005));
-    MakeItemEntity(ITEM_LETTER07, 536, 260, 227, 17, SI_SAVE_FLAG(1006));
+    MakeItemEntity(ITEM_DIZZY_DIAL, -248, 193, 45, 17, EVT_SAVE_FLAG(1005));
+    MakeItemEntity(ITEM_LETTER07, 536, 260, 227, 17, EVT_SAVE_FLAG(1006));
     MakeEntity(0x802EA564, -350, 172, 170, 0, ITEM_COIN, MAKE_ENTITY_END);
-    AssignBlockFlag(SI_SAVE_FLAG(1002));
+    AssignBlockFlag(EVT_SAVE_FLAG(1002));
     MakeEntity(0x802EA564, 225, 265, 30, 0, ITEM_COIN, MAKE_ENTITY_END);
-    AssignBlockFlag(SI_SAVE_FLAG(1003));
+    AssignBlockFlag(EVT_SAVE_FLAG(1003));
     MakeEntity(0x802EA564, 275, 265, 150, 0, ITEM_REPEL_GEL, MAKE_ENTITY_END);
-    AssignBlockFlag(SI_SAVE_FLAG(1004));
+    AssignBlockFlag(EVT_SAVE_FLAG(1004));
 });
 
 NpcAISettings N(npcAISettings_802413D0) = {
@@ -317,11 +317,11 @@ s32 N(func_80240C90_BDDE40)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
+    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
 
-    enemy->varTable[10] = get_variable(script, *args++);
+    enemy->varTable[10] = evt_get_variable(script, *args++);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;

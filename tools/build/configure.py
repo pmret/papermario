@@ -638,7 +638,7 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--debug", action="store_true", help="Generate debugging information")
     parser.add_argument("-n", "--non-matching", action="store_true", help="Compile nonmatching code. Combine with --debug for more detailed debug info")
     parser.add_argument("-w", "--no-warn", action="store_true", help="Inhibit compiler warnings")
-    parser.add_argument("--no-ccache", action="store_true", help="Don't use ccache")
+    parser.add_argument("--ccache", action="store_true", help="Use ccache")
     args = parser.parse_args()
 
     exec_shell(["make", "-C", str(ROOT / args.splat)])
@@ -706,7 +706,7 @@ if __name__ == "__main__":
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
 
-    write_ninja_rules(ninja, args.cpp or "cpp", cppflags, cflags, not args.no_ccache)
+    write_ninja_rules(ninja, args.cpp or "cpp", cppflags, cflags, args.ccache)
     write_ninja_for_tools(ninja)
 
     skip_files = set()

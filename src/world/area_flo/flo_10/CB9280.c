@@ -21,11 +21,11 @@ MapConfig N(config) = {
 };
 
 EvtSource N(802414E0) = SCRIPT({
-    GetEntryID(SI_VAR(0));
-    if (SI_VAR(0) == 1) {
+    GetEntryID(EVT_VAR(0));
+    if (EVT_VAR(0) == 1) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
     } else {
-        match SI_STORY_PROGRESS {
+        match EVT_STORY_PROGRESS {
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
             } else {
@@ -33,7 +33,7 @@ EvtSource N(802414E0) = SCRIPT({
             }
         }
     }
-    if (SI_STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
         PlaySound(0x80000022);
     }
 });
@@ -53,7 +53,7 @@ static s32 N(pad_1624)[] = {
 };
 
 EvtSource N(80241630) = SCRIPT({
-    if (SI_STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
         MakeItemEntity(ITEM_WATER_STONE, 0, -60, 6, 1, 0);
     }
 });
@@ -64,40 +64,40 @@ static s32 N(pad_167C) = {
 
 EvtSource N(80241680) = SCRIPT({
     group 11;
-    SI_VAR(10) = SI_VAR(0);
-    SI_VAR(11) = SI_VAR(1);
-    SI_VAR(12) = SI_VAR(2);
-    SI_VAR(13) = SI_VAR(3);
-    SI_VAR(14) = SI_VAR(4);
-    SI_VAR(12) -= SI_VAR(0);
-    SI_VAR(13) -= SI_VAR(1);
-    SI_VAR(0) = (float) SI_VAR(12);
-    SI_VAR(0) /= 100.0;
-    SI_VAR(15) = 100.0;
-    SI_VAR(15) /= (float) SI_VAR(0);
-    SI_VAR(15) += 11;
-    SI_VAR(5) = 200;
-    SI_VAR(5) /= SI_VAR(15);
-    SI_VAR(5) += 1;
-    loop SI_VAR(5) {
-        RandInt(SI_VAR(12), SI_VAR(0));
-        RandInt(SI_VAR(13), SI_VAR(1));
-        RandInt(199, SI_VAR(2));
-        SI_VAR(3) = 210;
-        SI_VAR(3) -= SI_VAR(2);
-        SI_VAR(0) += SI_VAR(10);
-        SI_VAR(1) += SI_VAR(11);
-        SI_VAR(2) += SI_VAR(14);
-        PlayEffect(0xD, SI_VAR(0), SI_VAR(2), SI_VAR(1), SI_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    EVT_VAR(10) = EVT_VAR(0);
+    EVT_VAR(11) = EVT_VAR(1);
+    EVT_VAR(12) = EVT_VAR(2);
+    EVT_VAR(13) = EVT_VAR(3);
+    EVT_VAR(14) = EVT_VAR(4);
+    EVT_VAR(12) -= EVT_VAR(0);
+    EVT_VAR(13) -= EVT_VAR(1);
+    EVT_VAR(0) = (float) EVT_VAR(12);
+    EVT_VAR(0) /= 100.0;
+    EVT_VAR(15) = 100.0;
+    EVT_VAR(15) /= (float) EVT_VAR(0);
+    EVT_VAR(15) += 11;
+    EVT_VAR(5) = 200;
+    EVT_VAR(5) /= EVT_VAR(15);
+    EVT_VAR(5) += 1;
+    loop EVT_VAR(5) {
+        RandInt(EVT_VAR(12), EVT_VAR(0));
+        RandInt(EVT_VAR(13), EVT_VAR(1));
+        RandInt(199, EVT_VAR(2));
+        EVT_VAR(3) = 210;
+        EVT_VAR(3) -= EVT_VAR(2);
+        EVT_VAR(0) += EVT_VAR(10);
+        EVT_VAR(1) += EVT_VAR(11);
+        EVT_VAR(2) += EVT_VAR(14);
+        PlayEffect(0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
-    sleep SI_VAR(15);
+    sleep EVT_VAR(15);
 0:
-    RandInt(SI_VAR(12), SI_VAR(0));
-    RandInt(SI_VAR(13), SI_VAR(1));
-    SI_VAR(0) += SI_VAR(10);
-    SI_VAR(1) += SI_VAR(11);
-    PlayEffect(0xD, SI_VAR(0), SI_VAR(14), SI_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    sleep SI_VAR(15);
+    RandInt(EVT_VAR(12), EVT_VAR(0));
+    RandInt(EVT_VAR(13), EVT_VAR(1));
+    EVT_VAR(0) += EVT_VAR(10);
+    EVT_VAR(1) += EVT_VAR(11);
+    PlayEffect(0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    sleep EVT_VAR(15);
     goto 0;
 });
 
@@ -108,7 +108,7 @@ EvtSource N(80241988) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    EVT_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -122,26 +122,26 @@ EvtSource N(main) = SCRIPT({
     spawn N(80244074);
     ModifyColliderFlags(3, 11, 0x00000006);
     ModifyColliderFlags(3, 12, 0x00000006);
-    SI_VAR(0) = -265;
-    SI_VAR(1) = 247;
-    SI_VAR(2) = 199;
-    SI_VAR(3) = 313;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = -265;
+    EVT_VAR(1) = 247;
+    EVT_VAR(2) = 199;
+    EVT_VAR(3) = 313;
+    EVT_VAR(4) = 0;
     spawn N(80241680);
-    SI_VAR(0) = -300;
-    SI_VAR(1) = -275;
-    SI_VAR(2) = -140;
-    SI_VAR(3) = -185;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = -300;
+    EVT_VAR(1) = -275;
+    EVT_VAR(2) = -140;
+    EVT_VAR(3) = -185;
+    EVT_VAR(4) = 0;
     spawn N(80241680);
-    SI_VAR(0) = 263;
-    SI_VAR(1) = -248;
-    SI_VAR(2) = 362;
-    SI_VAR(3) = 146;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = 263;
+    EVT_VAR(1) = -248;
+    EVT_VAR(2) = 362;
+    EVT_VAR(3) = 146;
+    EVT_VAR(4) = 0;
     spawn N(80241680);
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 1 {
             spawn N(8024324C);
         }
@@ -150,12 +150,12 @@ EvtSource N(main) = SCRIPT({
             spawn N(80241988);
         } else {
             ModifyColliderFlags(0, 1, 0x7FFFFE00);
-            SI_VAR(0) = N(80241988);
+            EVT_VAR(0) = N(80241988);
             spawn EnterWalk;
         }
     }
     await N(802414E0);
-    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240040_CB9240)();
     }
 });
@@ -167,21 +167,21 @@ static s32 N(pad_1CA8)[] = {
 s32** N(D_80241CB0_CBAEB0) = NULL;
 
 EvtSource N(80241CB4) = SCRIPT({
-    ShowGotItem(SI_VAR(0), 1, 0);
+    ShowGotItem(EVT_VAR(0), 1, 0);
     return;
 });
 
 EvtSource N(80241CE4) = SCRIPT({
-    ShowGotItem(SI_VAR(0), 1, 16);
+    ShowGotItem(EVT_VAR(0), 1, 16);
     return;
 });
 
 EvtSource N(updateTexturePan_80241D14) = SCRIPT({
     group 0;
-    if (SI_VAR(5) == 1) {
-        if (SI_VAR(6) == 1) {
-            if (SI_VAR(7) == 1) {
-                if (SI_VAR(8) == 1) {
+    if (EVT_VAR(5) == 1) {
+        if (EVT_VAR(6) == 1) {
+            if (EVT_VAR(7) == 1) {
+                if (EVT_VAR(8) == 1) {
                     N(UnkTexturePanFunc)();
                     return;
                 }
@@ -195,8 +195,8 @@ EvtSource N(80241DB0) = SCRIPT({
     MakeLerp(-50, 170, 385, 0);
 1:
     UpdateLerp();
-    TranslateGroup(56, 0, SI_VAR(0), 0);
-    if (SI_VAR(1) == 1) {
+    TranslateGroup(56, 0, EVT_VAR(0), 0);
+    if (EVT_VAR(1) == 1) {
         sleep 1;
         goto 1;
     }
@@ -206,13 +206,13 @@ EvtSource N(80241E40) = SCRIPT({
     MakeLerp(0, 100, 90, 1);
 1:
     UpdateLerp();
-    SI_VAR(2) = (float) SI_VAR(0);
-    SI_VAR(3) = (float) SI_VAR(0);
-    SI_VAR(2) /= 333.0;
-    SI_VAR(3) /= 100.0;
-    SI_VAR(2) += 0.703125;
-    ScaleGroup(56, SI_VAR(2), SI_VAR(3), SI_VAR(2));
-    if (SI_VAR(1) == 1) {
+    EVT_VAR(2) = (float) EVT_VAR(0);
+    EVT_VAR(3) = (float) EVT_VAR(0);
+    EVT_VAR(2) /= 333.0;
+    EVT_VAR(3) /= 100.0;
+    EVT_VAR(2) += 0.703125;
+    ScaleGroup(56, EVT_VAR(2), EVT_VAR(3), EVT_VAR(2));
+    if (EVT_VAR(1) == 1) {
         sleep 1;
         goto 1;
     }
@@ -221,19 +221,19 @@ EvtSource N(80241E40) = SCRIPT({
 EvtSource N(80241F20) = SCRIPT({
     EnableTexPanning(53, 1);
     spawn {
-        SI_VAR(0) = 10;
-        SI_VAR(1) = -150;
-        SI_VAR(2) = 0;
-        SI_VAR(3) = 0;
-        SI_VAR(4) = 0;
-        SI_VAR(5) = 1;
-        SI_VAR(6) = 0;
-        SI_VAR(7) = 0;
-        SI_VAR(8) = 0;
-        SI_VAR(9) = 0;
-        SI_VAR(10) = 0;
-        SI_VAR(11) = 0;
-        SI_VAR(12) = 0;
+        EVT_VAR(0) = 10;
+        EVT_VAR(1) = -150;
+        EVT_VAR(2) = 0;
+        EVT_VAR(3) = 0;
+        EVT_VAR(4) = 0;
+        EVT_VAR(5) = 1;
+        EVT_VAR(6) = 0;
+        EVT_VAR(7) = 0;
+        EVT_VAR(8) = 0;
+        EVT_VAR(9) = 0;
+        EVT_VAR(10) = 0;
+        EVT_VAR(11) = 0;
+        EVT_VAR(12) = 0;
         spawn N(updateTexturePan_80241D14);
     }
 });
@@ -247,17 +247,17 @@ EvtSource N(80242030) = SCRIPT({
 EvtSource N(8024206C) = SCRIPT({
     sleep 80;
     EnableNpcShadow(NPC_LILY, FALSE);
-    GetNpcPos(NPC_LILY, SI_VAR(3), SI_VAR(4), SI_VAR(5));
+    GetNpcPos(NPC_LILY, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
     MakeLerp(10, 55, 108, 0);
     loop {
         UpdateLerp();
-        SI_VAR(6) = SI_VAR(4);
-        SI_VAR(6) += SI_VAR(0);
-        SI_VAR(6) += -10;
-        SetNpcPos(NPC_LILY, SI_VAR(3), SI_VAR(6), SI_VAR(5));
-        TranslateGroup(60, 0, SI_VAR(0), 0);
+        EVT_VAR(6) = EVT_VAR(4);
+        EVT_VAR(6) += EVT_VAR(0);
+        EVT_VAR(6) += -10;
+        SetNpcPos(NPC_LILY, EVT_VAR(3), EVT_VAR(6), EVT_VAR(5));
+        TranslateGroup(60, 0, EVT_VAR(0), 0);
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
     }
@@ -267,24 +267,24 @@ EvtSource N(80242188) = SCRIPT({
     DisablePlayerPhysics(TRUE);
     sleep 40;
     SetPlayerAnimation(0x80024);
-    GetPlayerPos(SI_VAR(2), SI_VAR(0), SI_VAR(3));
+    GetPlayerPos(EVT_VAR(2), EVT_VAR(0), EVT_VAR(3));
     MakeLerp(-50, 90, 60, 1);
     loop {
         UpdateLerp();
-        SI_VAR(2) /= 1.2001953125;
-        SI_VAR(3) /= 1.2001953125;
-        SetPlayerPos(SI_VAR(2), SI_VAR(0), SI_VAR(3));
+        EVT_VAR(2) /= 1.2001953125;
+        EVT_VAR(3) /= 1.2001953125;
+        SetPlayerPos(EVT_VAR(2), EVT_VAR(0), EVT_VAR(3));
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
     }
     MakeLerp(90, 270, 280, 0);
     loop {
         UpdateLerp();
-        SetPlayerPos(0, SI_VAR(0), 0);
+        SetPlayerPos(0, EVT_VAR(0), 0);
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
     }
@@ -293,9 +293,9 @@ EvtSource N(80242188) = SCRIPT({
 
 EvtSource N(8024230C) = SCRIPT({
     sleep 80;
-    GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    UseSettingsFrom(0, SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    SetPanTarget(0, SI_VAR(3), SI_VAR(4), SI_VAR(5));
+    GetPlayerPos(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+    UseSettingsFrom(0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+    SetPanTarget(0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
     SetCamSpeed(0, 0.7001953125);
     SetCamPitch(0, 25.0, -22.0);
     SetCamDistance(0, 450);
@@ -317,8 +317,8 @@ EvtSource N(8024244C) = SCRIPT({
     MakeLerp(170, 75, 150, 0);
 1:
     UpdateLerp();
-    TranslateGroup(56, 0, SI_VAR(0), 0);
-    if (SI_VAR(1) == 1) {
+    TranslateGroup(56, 0, EVT_VAR(0), 0);
+    if (EVT_VAR(1) == 1) {
         sleep 1;
         goto 1;
     }
@@ -328,13 +328,13 @@ EvtSource N(802424DC) = SCRIPT({
     MakeLerp(100, 15, 150, 1);
 1:
     UpdateLerp();
-    SI_VAR(2) = (float) SI_VAR(0);
-    SI_VAR(3) = (float) SI_VAR(0);
-    SI_VAR(2) /= 333.0;
-    SI_VAR(3) /= 100.0;
-    SI_VAR(2) += 0.703125;
-    ScaleGroup(56, SI_VAR(2), SI_VAR(3), SI_VAR(2));
-    if (SI_VAR(1) == 1) {
+    EVT_VAR(2) = (float) EVT_VAR(0);
+    EVT_VAR(3) = (float) EVT_VAR(0);
+    EVT_VAR(2) /= 333.0;
+    EVT_VAR(3) /= 100.0;
+    EVT_VAR(2) += 0.703125;
+    ScaleGroup(56, EVT_VAR(2), EVT_VAR(3), EVT_VAR(2));
+    if (EVT_VAR(1) == 1) {
         sleep 1;
         goto 1;
     }
@@ -350,9 +350,9 @@ const char N(flo_24_name_hack)[];
 EvtSource N(802425E4) = SCRIPT({
     sleep 20;
     SetPlayerAnimation(ANIM_STAND_STILL);
-    GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    UseSettingsFrom(0, SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    SetPanTarget(0, SI_VAR(3), SI_VAR(4), SI_VAR(5));
+    GetPlayerPos(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+    UseSettingsFrom(0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+    SetPanTarget(0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
     SetCamSpeed(0, 1.0);
     SetCamDistance(0, 600);
     PanToTarget(0, 0, 1);
@@ -405,8 +405,8 @@ EvtSource N(802427EC) = SCRIPT({
     SetNpcAnimation(NPC_LILY, NPC_ANIM_lily_Palette_00_Anim_6);
     sleep 20;
     SetNpcAnimation(NPC_LILY, NPC_ANIM_lily_Palette_00_Anim_1);
-    SI_VAR(0) = 90;
-    SI_VAR(1) = 1;
+    EVT_VAR(0) = 90;
+    EVT_VAR(1) = 1;
     await N(80241CB4);
     AddKeyItem(ITEM_MIRACLE_WATER);
     SpeakToPlayer(NPC_LILY, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MESSAGE_ID(0x11, 0x0084));
@@ -419,7 +419,7 @@ EvtSource N(802427EC) = SCRIPT({
 });
 
 EvtSource N(80242AE8) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH6_FILLED_SPRING_WITH_WATER) {
+    if (EVT_STORY_PROGRESS < STORY_CH6_FILLED_SPRING_WITH_WATER) {
         EnableGroup(52, 0);
         EnableGroup(61, 0);
         ModifyColliderFlags(0, 21, 0x7FFFFE00);
@@ -439,102 +439,102 @@ EvtSource N(80242AE8) = SCRIPT({
     EnableTexPanning(49, 1);
     EnableTexPanning(51, 1);
     spawn {
-        SI_VAR(0) = 1;
-        SI_VAR(1) = 0;
-        SI_VAR(2) = -2000;
-        SI_VAR(3) = 0;
-        SI_VAR(4) = 0;
-        SI_VAR(5) = 0;
-        SI_VAR(6) = 1;
-        SI_VAR(7) = 0;
-        SI_VAR(8) = 0;
-        SI_VAR(9) = 0;
-        SI_VAR(10) = 0;
-        SI_VAR(11) = 0;
-        SI_VAR(12) = 0;
+        EVT_VAR(0) = 1;
+        EVT_VAR(1) = 0;
+        EVT_VAR(2) = -2000;
+        EVT_VAR(3) = 0;
+        EVT_VAR(4) = 0;
+        EVT_VAR(5) = 0;
+        EVT_VAR(6) = 1;
+        EVT_VAR(7) = 0;
+        EVT_VAR(8) = 0;
+        EVT_VAR(9) = 0;
+        EVT_VAR(10) = 0;
+        EVT_VAR(11) = 0;
+        EVT_VAR(12) = 0;
         spawn N(updateTexturePan_80241D14);
     }
     spawn {
-        SI_VAR(0) = 3;
-        SI_VAR(1) = -100;
-        SI_VAR(2) = 80;
-        SI_VAR(3) = 0;
-        SI_VAR(4) = 0;
-        SI_VAR(5) = 1;
-        SI_VAR(6) = 1;
-        SI_VAR(7) = 0;
-        SI_VAR(8) = 0;
-        SI_VAR(9) = 0;
-        SI_VAR(10) = 0;
-        SI_VAR(11) = 0;
-        SI_VAR(12) = 0;
+        EVT_VAR(0) = 3;
+        EVT_VAR(1) = -100;
+        EVT_VAR(2) = 80;
+        EVT_VAR(3) = 0;
+        EVT_VAR(4) = 0;
+        EVT_VAR(5) = 1;
+        EVT_VAR(6) = 1;
+        EVT_VAR(7) = 0;
+        EVT_VAR(8) = 0;
+        EVT_VAR(9) = 0;
+        EVT_VAR(10) = 0;
+        EVT_VAR(11) = 0;
+        EVT_VAR(12) = 0;
         spawn N(updateTexturePan_80241D14);
     }
     spawn {
-        SI_VAR(0) = 5;
-        SI_VAR(1) = -1000;
-        SI_VAR(2) = 2000;
-        SI_VAR(3) = 0;
-        SI_VAR(4) = 0;
-        SI_VAR(5) = 1;
-        SI_VAR(6) = 1;
-        SI_VAR(7) = 0;
-        SI_VAR(8) = 0;
-        SI_VAR(9) = 0;
-        SI_VAR(10) = 0;
-        SI_VAR(11) = 0;
-        SI_VAR(12) = 0;
+        EVT_VAR(0) = 5;
+        EVT_VAR(1) = -1000;
+        EVT_VAR(2) = 2000;
+        EVT_VAR(3) = 0;
+        EVT_VAR(4) = 0;
+        EVT_VAR(5) = 1;
+        EVT_VAR(6) = 1;
+        EVT_VAR(7) = 0;
+        EVT_VAR(8) = 0;
+        EVT_VAR(9) = 0;
+        EVT_VAR(10) = 0;
+        EVT_VAR(11) = 0;
+        EVT_VAR(12) = 0;
         spawn N(updateTexturePan_80241D14);
     }
     spawn {
-        SI_VAR(0) = 6;
-        SI_VAR(1) = 0;
-        SI_VAR(2) = -2000;
-        SI_VAR(3) = 0;
-        SI_VAR(4) = 0;
-        SI_VAR(5) = 0;
-        SI_VAR(6) = 1;
-        SI_VAR(7) = 0;
-        SI_VAR(8) = 0;
-        SI_VAR(9) = 0;
-        SI_VAR(10) = 0;
-        SI_VAR(11) = 0;
-        SI_VAR(12) = 0;
+        EVT_VAR(0) = 6;
+        EVT_VAR(1) = 0;
+        EVT_VAR(2) = -2000;
+        EVT_VAR(3) = 0;
+        EVT_VAR(4) = 0;
+        EVT_VAR(5) = 0;
+        EVT_VAR(6) = 1;
+        EVT_VAR(7) = 0;
+        EVT_VAR(8) = 0;
+        EVT_VAR(9) = 0;
+        EVT_VAR(10) = 0;
+        EVT_VAR(11) = 0;
+        EVT_VAR(12) = 0;
         spawn N(updateTexturePan_80241D14);
     }
     spawn {
-        SI_VAR(0) = 8;
-        SI_VAR(1) = 0;
-        SI_VAR(2) = -1500;
-        SI_VAR(3) = 0;
-        SI_VAR(4) = 0;
-        SI_VAR(5) = 0;
-        SI_VAR(6) = 1;
-        SI_VAR(7) = 0;
-        SI_VAR(8) = 0;
-        SI_VAR(9) = 0;
-        SI_VAR(10) = 0;
-        SI_VAR(11) = 0;
-        SI_VAR(12) = 0;
+        EVT_VAR(0) = 8;
+        EVT_VAR(1) = 0;
+        EVT_VAR(2) = -1500;
+        EVT_VAR(3) = 0;
+        EVT_VAR(4) = 0;
+        EVT_VAR(5) = 0;
+        EVT_VAR(6) = 1;
+        EVT_VAR(7) = 0;
+        EVT_VAR(8) = 0;
+        EVT_VAR(9) = 0;
+        EVT_VAR(10) = 0;
+        EVT_VAR(11) = 0;
+        EVT_VAR(12) = 0;
         spawn N(updateTexturePan_80241D14);
     }
     spawn {
-        SI_VAR(0) = 9;
-        SI_VAR(1) = 0;
-        SI_VAR(2) = -1000;
-        SI_VAR(3) = 0;
-        SI_VAR(4) = 0;
-        SI_VAR(5) = 0;
-        SI_VAR(6) = 1;
-        SI_VAR(7) = 0;
-        SI_VAR(8) = 0;
-        SI_VAR(9) = 0;
-        SI_VAR(10) = 0;
-        SI_VAR(11) = 0;
-        SI_VAR(12) = 0;
+        EVT_VAR(0) = 9;
+        EVT_VAR(1) = 0;
+        EVT_VAR(2) = -1000;
+        EVT_VAR(3) = 0;
+        EVT_VAR(4) = 0;
+        EVT_VAR(5) = 0;
+        EVT_VAR(6) = 1;
+        EVT_VAR(7) = 0;
+        EVT_VAR(8) = 0;
+        EVT_VAR(9) = 0;
+        EVT_VAR(10) = 0;
+        EVT_VAR(11) = 0;
+        EVT_VAR(12) = 0;
         spawn N(updateTexturePan_80241D14);
     }
-    if (SI_STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
         spawn N(80241F20);
     }
 });
@@ -575,9 +575,9 @@ s32 N(itemList_80243394)[] = {
 };
 
 EvtSource N(8024339C) = SCRIPT({
-    if (SI_SAVE_FLAG(1376) == 1) {
-        GetCurrentPartner(SI_VAR(10));
-        if (SI_VAR(10) != 0) {
+    if (EVT_SAVE_FLAG(1376) == 1) {
+        GetCurrentPartner(EVT_VAR(10));
+        if (EVT_VAR(10) != 0) {
             AwaitPlayerLeave(0, 0, 19);
             return;
         }
@@ -585,15 +585,15 @@ EvtSource N(8024339C) = SCRIPT({
         group 0;
         SetTimeFreezeMode(1);
         ShowKeyChoicePopup();
-        SI_VAR(2) = SI_VAR(0);
-        match SI_VAR(2) {
+        EVT_VAR(2) = EVT_VAR(0);
+        match EVT_VAR(2) {
             == -1 {
                 CloseChoicePopup();
                 SetTimeFreezeMode(0);
                 sleep 10;
                 SpeakToPlayer(NPC_LILY, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x0081));
             } else {
-                GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
+                GetPlayerPos(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
                 PlayerMoveTo(-17, -17, 20);
                 func_802CF56C(2);
                 InterpPlayerYaw(100, 1);
@@ -601,9 +601,9 @@ EvtSource N(8024339C) = SCRIPT({
                 AdjustCam(0, 1.0, 0, 450, 25.0, -6.0);
                 sleep 10;
                 SetPlayerAnimation(0x60006);
-                RemoveKeyItemAt(SI_VAR(1));
+                RemoveKeyItemAt(EVT_VAR(1));
                 MakeItemEntity(ITEM_WATER_STONE, 0, -60, 6, 1, 0);
-                SI_VAR(10) = SI_VAR(0);
+                EVT_VAR(10) = EVT_VAR(0);
                 CloseChoicePopup();
                 SetTimeFreezeMode(0);
                 await N(802425E4);
@@ -620,27 +620,27 @@ EvtSource N(802435F8) = SCRIPT({
 
 EvtSource N(80243628) = SCRIPT({
     sleep 10;
-    GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    if (SI_VAR(5) < SI_VAR(2)) {
-        SI_VAR(6) = 30;
+    GetNpcPos(NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    GetPlayerPos(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+    if (EVT_VAR(5) < EVT_VAR(2)) {
+        EVT_VAR(6) = 30;
     } else {
-        SI_VAR(6) = 20;
+        EVT_VAR(6) = 20;
     }
-    SI_VAR(1) = SI_VAR(0);
-    SI_VAR(4) = SI_VAR(0);
-    SI_VAR(1) -= SI_VAR(6);
-    SI_VAR(4) += SI_VAR(6);
-    match SI_VAR(3) {
-        SI_VAR(1) ... SI_VAR(4) {
+    EVT_VAR(1) = EVT_VAR(0);
+    EVT_VAR(4) = EVT_VAR(0);
+    EVT_VAR(1) -= EVT_VAR(6);
+    EVT_VAR(4) += EVT_VAR(6);
+    match EVT_VAR(3) {
+        EVT_VAR(1) ... EVT_VAR(4) {
             spawn {
-                if (SI_VAR(3) < SI_VAR(0)) {
-                    SI_VAR(0) -= 40;
+                if (EVT_VAR(3) < EVT_VAR(0)) {
+                    EVT_VAR(0) -= 40;
                 } else {
-                    SI_VAR(0) += 40;
+                    EVT_VAR(0) += 40;
                 }
                 SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_100)), TRUE);
-                PlayerMoveTo(SI_VAR(0), SI_VAR(5), 15);
+                PlayerMoveTo(EVT_VAR(0), EVT_VAR(5), 15);
                 PlayerFaceNpc(0, 1);
                 SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_100)), FALSE);
             }
@@ -650,12 +650,12 @@ EvtSource N(80243628) = SCRIPT({
 
 EvtSource N(interact_802437C8) = SCRIPT({
     await N(802415C4);
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             spawn N(80243628);
-            GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            GetNpcPos(NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
             SetCamDistance(0, 325);
             SetCamPitch(0, 23.0, -9.0);
             SetCamSpeed(0, 4.0);
@@ -666,11 +666,11 @@ EvtSource N(interact_802437C8) = SCRIPT({
             EndSpeech(-1, NPC_ANIM_lily_Palette_00_Anim_9, NPC_ANIM_lily_Palette_00_Anim_5, 5);
         }
         < STORY_CH6_GOT_WATER_STONE {
-            if (SI_SAVE_FLAG(1375) == 0) {
+            if (EVT_SAVE_FLAG(1375) == 0) {
                 spawn N(80243628);
-                GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+                GetNpcPos(NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
                 SetCamDistance(0, 325);
                 SetCamPitch(0, 23.0, -9.0);
                 SetCamSpeed(0, 4.0);
@@ -687,8 +687,8 @@ EvtSource N(interact_802437C8) = SCRIPT({
                 SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_1, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                               0x007A));
                 EndSpeech(-1, NPC_ANIM_lily_Palette_00_Anim_5, NPC_ANIM_lily_Palette_00_Anim_1, 0);
-                GetPlayerTargetYaw(SI_VAR(0));
-                InterpNpcYaw(NPC_SELF, SI_VAR(0), 1);
+                GetPlayerTargetYaw(EVT_VAR(0));
+                InterpNpcYaw(NPC_SELF, EVT_VAR(0), 1);
                 sleep 20;
                 SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 5, MESSAGE_ID(0x11,
                               0x007B));
@@ -698,7 +698,7 @@ EvtSource N(interact_802437C8) = SCRIPT({
                               0x007C));
                 ShowChoice(MESSAGE_ID(0x1E, 0x0011));
                 sleep 10;
-                match SI_VAR(0) {
+                match EVT_VAR(0) {
                     == 0 {
                         ContinueSpeech(-1, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MESSAGE_ID(0x11, 0x007D));
                     }
@@ -707,7 +707,7 @@ EvtSource N(interact_802437C8) = SCRIPT({
                     }
                 }
                 sleep 10;
-                SI_SAVE_FLAG(1375) = 1;
+                EVT_SAVE_FLAG(1375) = 1;
                 SetEnemyFlagBits(-1, 4194304, 0);
             } else {
                 SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MESSAGE_ID(0x11,
@@ -716,7 +716,7 @@ EvtSource N(interact_802437C8) = SCRIPT({
         }
         < 49 {
             SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0080));
-            SI_SAVE_FLAG(1376) = 1;
+            EVT_SAVE_FLAG(1376) = 1;
         }
         < 53 {
             SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x0085));
@@ -736,9 +736,9 @@ EvtSource N(interact_802437C8) = SCRIPT({
 
 EvtSource N(init_80243D78) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_802437C8));
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH6_GOT_WATER_STONE {
-            if (SI_SAVE_FLAG(1375) == 0) {
+            if (EVT_SAVE_FLAG(1375) == 0) {
                 SetNpcAnimation(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_8);
                 InterpNpcYaw(NPC_SELF, 90, 1);
                 SetEnemyFlagBits(-1, 4194304, 1);

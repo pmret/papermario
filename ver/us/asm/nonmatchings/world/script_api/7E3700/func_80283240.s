@@ -35,7 +35,7 @@ glabel func_80283240
 .L802832AC:
 /* 7E412C 802832AC 0260202D */  daddu     $a0, $s3, $zero
 /* 7E4130 802832B0 0280282D */  daddu     $a1, $s4, $zero
-/* 7E4134 802832B4 0C0B2026 */  jal       set_variable
+/* 7E4134 802832B4 0C0B2026 */  jal       evt_set_variable
 /* 7E4138 802832B8 0220302D */   daddu    $a2, $s1, $zero
 /* 7E413C 802832BC 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 7E4140 802832C0 8FB40020 */  lw        $s4, 0x20($sp)

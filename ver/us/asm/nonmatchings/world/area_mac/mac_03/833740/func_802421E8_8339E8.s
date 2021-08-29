@@ -91,7 +91,7 @@ glabel func_802421E8_8339E8
 /* 833B40 80242340 8E22000C */  lw        $v0, 0xc($s1)
 /* 833B44 80242344 24030002 */  addiu     $v1, $zero, 2
 /* 833B48 80242348 00531021 */  addu      $v0, $v0, $s3
-/* 833B4C 8024234C 0C0B2026 */  jal       set_variable
+/* 833B4C 8024234C 0C0B2026 */  jal       evt_set_variable
 /* 833B50 80242350 A04300EF */   sb       $v1, 0xef($v0)
 .L80242354:
 /* 833B54 80242354 8FBF0024 */  lw        $ra, 0x24($sp)

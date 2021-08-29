@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel get_float_variable
+glabel evt_get_float_variable
 /* ECDDC 802C842C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* ECDE0 802C8430 3C02EFE8 */  lui       $v0, 0xefe8
 /* ECDE4 802C8434 34422080 */  ori       $v0, $v0, 0x2080
@@ -15,7 +15,7 @@ glabel get_float_variable
 /* ECE04 802C8454 3C02F2E3 */   lui      $v0, 0xf2e3
 .L802C8458:
 /* ECE08 802C8458 44850000 */  mtc1      $a1, $f0
-/* ECE0C 802C845C 00000000 */  nop       
+/* ECE0C 802C845C 00000000 */  nop
 /* ECE10 802C8460 080B218D */  j         .L802C8634
 /* ECE14 802C8464 46800020 */   cvt.s.w  $f0, $f0
 .L802C8468:
@@ -112,10 +112,10 @@ glabel get_float_variable
 .L802C85B4:
 /* ECF64 802C85B4 00622824 */  and       $a1, $v1, $v0
 /* ECF68 802C85B8 14A0001E */  bnez      $a1, .L802C8634
-/* ECF6C 802C85BC 00000000 */   nop      
+/* ECF6C 802C85BC 00000000 */   nop
 /* ECF70 802C85C0 44800000 */  mtc1      $zero, $f0
 /* ECF74 802C85C4 080B218D */  j         .L802C8634
-/* ECF78 802C85C8 00000000 */   nop      
+/* ECF78 802C85C8 00000000 */   nop
 .L802C85CC:
 /* ECF7C 802C85CC 3442A600 */  ori       $v0, $v0, 0xa600
 /* ECF80 802C85D0 0045102A */  slt       $v0, $v0, $a1
@@ -144,8 +144,8 @@ glabel get_float_variable
 /* ECFD4 802C8624 00821021 */  addu      $v0, $a0, $v0
 /* ECFD8 802C8628 8C440084 */  lw        $a0, 0x84($v0)
 .L802C862C:
-/* ECFDC 802C862C 0C0B1248 */  jal       fixed_var_to_float
-/* ECFE0 802C8630 00000000 */   nop      
+/* ECFDC 802C862C 0C0B1248 */  jal       evt_fixed_var_to_float
+/* ECFE0 802C8630 00000000 */   nop
 .L802C8634:
 /* ECFE4 802C8634 8FBF0010 */  lw        $ra, 0x10($sp)
 /* ECFE8 802C8638 03E00008 */  jr        $ra

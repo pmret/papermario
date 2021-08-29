@@ -48,7 +48,7 @@ glabel func_80240E34_ACB954
 /* ACBA00 80240EE0 0220202D */  daddu     $a0, $s1, $zero
 /* ACBA04 80240EE4 4600008D */  trunc.w.s $f2, $f0
 /* ACBA08 80240EE8 44061000 */  mfc1      $a2, $f2
-/* ACBA0C 80240EEC 0C0B2026 */  jal       set_variable
+/* ACBA0C 80240EEC 0C0B2026 */  jal       evt_set_variable
 /* ACBA10 80240EF0 0280282D */   daddu    $a1, $s4, $zero
 /* ACBA14 80240EF4 8FBF0024 */  lw        $ra, 0x24($sp)
 /* ACBA18 80240EF8 8FB40020 */  lw        $s4, 0x20($sp)

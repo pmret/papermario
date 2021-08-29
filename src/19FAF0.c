@@ -105,9 +105,9 @@ ApiStatus GetMenuSelection(Evt* script, s32 isInitialCall) {
     s32 outVar2 = *args++;
     s32 outVar3 = *args++;
 
-    set_variable(script, outVar1, battleStatus->moveCategory);
-    set_variable(script, outVar2, battleStatus->selectedItemID);
-    set_variable(script, outVar3, battleStatus->selectedMoveID);
+    evt_set_variable(script, outVar1, battleStatus->moveCategory);
+    evt_set_variable(script, outVar2, battleStatus->selectedItemID);
+    evt_set_variable(script, outVar3, battleStatus->selectedMoveID);
 
     return ApiStatus_DONE2;
 }
@@ -169,7 +169,7 @@ INCLUDE_ASM(s32, "19FAF0", PlayerRunToGoal, Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "19FAF0", CancelablePlayerRunToGoal, Evt* script, s32 isInitialCall);
 
 ApiStatus GetPlayerHP(Evt* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, gPlayerData.curHP);
+    evt_set_variable(script, *script->ptrReadPos, gPlayerData.curHP);
     return ApiStatus_DONE2;
 }
 
@@ -182,7 +182,7 @@ INCLUDE_ASM(s32, "19FAF0", PlayerTestEnemy, Evt* script, s32 isInitialCall);
 ApiStatus DispatchDamagePlayerEvent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    if (dispatch_damage_event_player_0(get_variable(script, *args++), *args++) < 0) {
+    if (dispatch_damage_event_player_0(evt_get_variable(script, *args++), *args++) < 0) {
         return ApiStatus_BLOCK;
     }
 
@@ -194,7 +194,7 @@ ApiStatus DispatchDamagePlayerEvent(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus EnablePlayerBlur(Evt* script, s32 isInitialCall) {
-    s32 setting = get_variable(script, *script->ptrReadPos);
+    s32 setting = evt_get_variable(script, *script->ptrReadPos);
 
     if (setting == 0) {
         disable_player_blur();
@@ -237,7 +237,7 @@ ApiStatus DidActionSucceed(Evt* script, s32 isInitialCall) {
         actionSucceeded = actionSuccess;
     }
 
-    set_variable(script, outVar, actionSucceeded);
+    evt_set_variable(script, outVar, actionSucceeded);
     return ApiStatus_DONE2;
 }
 
@@ -247,6 +247,6 @@ ApiStatus func_80276EFC(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus DispatchEventPlayer(Evt* script, s32 isInitialCall) {
-    dispatch_event_player(get_variable(script, *script->ptrReadPos));
+    dispatch_event_player(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }

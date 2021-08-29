@@ -18,7 +18,7 @@ glabel func_80240484_EB12E4
 /* EB1318 802404B8 8E30000C */  lw        $s0, 0xc($s1)
 /* EB131C 802404BC 8E130000 */  lw        $s3, ($s0)
 /* EB1320 802404C0 26100004 */  addiu     $s0, $s0, 4
-/* EB1324 802404C4 0C0B53A3 */  jal       dead_get_variable
+/* EB1324 802404C4 0C0B53A3 */  jal       dead_evt_get_variable
 /* EB1328 802404C8 0260282D */   daddu    $a1, $s3, $zero
 /* EB132C 802404CC 4482E000 */  mtc1      $v0, $f28
 /* EB1330 802404D0 00000000 */  nop
@@ -26,14 +26,14 @@ glabel func_80240484_EB12E4
 /* EB1338 802404D8 8E140000 */  lw        $s4, ($s0)
 /* EB133C 802404DC 26100004 */  addiu     $s0, $s0, 4
 /* EB1340 802404E0 0220202D */  daddu     $a0, $s1, $zero
-/* EB1344 802404E4 0C0B53A3 */  jal       dead_get_variable
+/* EB1344 802404E4 0C0B53A3 */  jal       dead_evt_get_variable
 /* EB1348 802404E8 0280282D */   daddu    $a1, $s4, $zero
 /* EB134C 802404EC 4482D000 */  mtc1      $v0, $f26
 /* EB1350 802404F0 00000000 */  nop
 /* EB1354 802404F4 4680D6A0 */  cvt.s.w   $f26, $f26
 /* EB1358 802404F8 8E100000 */  lw        $s0, ($s0)
 /* EB135C 802404FC 0220202D */  daddu     $a0, $s1, $zero
-/* EB1360 80240500 0C0B53A3 */  jal       dead_get_variable
+/* EB1360 80240500 0C0B53A3 */  jal       dead_evt_get_variable
 /* EB1364 80240504 0200282D */   daddu    $a1, $s0, $zero
 /* EB1368 80240508 4482C000 */  mtc1      $v0, $f24
 /* EB136C 8024050C 00000000 */  nop
@@ -94,17 +94,17 @@ glabel func_80240484_EB12E4
 /* EB1440 802405E0 0260282D */  daddu     $a1, $s3, $zero
 /* EB1444 802405E4 4600E18D */  trunc.w.s $f6, $f28
 /* EB1448 802405E8 44063000 */  mfc1      $a2, $f6
-/* EB144C 802405EC 0C0B551A */  jal       dead_set_variable
+/* EB144C 802405EC 0C0B551A */  jal       dead_evt_set_variable
 /* EB1450 802405F0 4600C601 */   sub.s    $f24, $f24, $f0
 /* EB1454 802405F4 0220202D */  daddu     $a0, $s1, $zero
 /* EB1458 802405F8 4600D18D */  trunc.w.s $f6, $f26
 /* EB145C 802405FC 44063000 */  mfc1      $a2, $f6
-/* EB1460 80240600 0C0B551A */  jal       dead_set_variable
+/* EB1460 80240600 0C0B551A */  jal       dead_evt_set_variable
 /* EB1464 80240604 0280282D */   daddu    $a1, $s4, $zero
 /* EB1468 80240608 0220202D */  daddu     $a0, $s1, $zero
 /* EB146C 8024060C 4600C18D */  trunc.w.s $f6, $f24
 /* EB1470 80240610 44063000 */  mfc1      $a2, $f6
-/* EB1474 80240614 0C0B551A */  jal       dead_set_variable
+/* EB1474 80240614 0C0B551A */  jal       dead_evt_set_variable
 /* EB1478 80240618 0200282D */   daddu    $a1, $s0, $zero
 /* EB147C 8024061C 8FBF0024 */  lw        $ra, 0x24($sp)
 /* EB1480 80240620 8FB40020 */  lw        $s4, 0x20($sp)

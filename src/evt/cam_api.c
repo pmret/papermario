@@ -3,18 +3,18 @@
 
 EvtSource ShakeCam1 = SCRIPT({
     group 0;
-    ShakeCam(SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.0);
+    ShakeCam(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1.0);
 });
 
 EvtSource ShakeCamX = SCRIPT({
     group 0;
-    ShakeCam(SI_VAR(0), SI_VAR(1), SI_VAR(2), SI_VAR(3));
+    ShakeCam(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
 });
 
 ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    s32 enabled = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    s32 enabled = evt_get_variable(script, *args++);
 
     if (!enabled) {
         gCameras[id].flags |= CAM_FLAG_ENABLED;
@@ -26,8 +26,8 @@ ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCamFlag80(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    s32 enabled = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    s32 enabled = evt_get_variable(script, *args++);
 
     if (!enabled) {
         gCameras[id].flags |= CAM_FLAG_80;
@@ -39,11 +39,11 @@ ApiStatus SetCamFlag80(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCamPerspective(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    s16 mode = get_variable(script, *args++);
-    f32 vfov = get_float_variable(script, *args++);
-    s16 nearClip = get_variable(script, *args++);
-    s16 farClip = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    s16 mode = evt_get_variable(script, *args++);
+    f32 vfov = evt_get_float_variable(script, *args++);
+    s16 nearClip = evt_get_variable(script, *args++);
+    s16 farClip = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
@@ -58,8 +58,8 @@ ApiStatus SetCamPerspective(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802CA90C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    s16 mode = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    s16 mode = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
@@ -70,7 +70,7 @@ ApiStatus func_802CA90C(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802CA988(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode id = get_variable(script, *args++);
+    Bytecode id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
     Bytecode outVar3 = *args++;
@@ -92,20 +92,20 @@ ApiStatus func_802CA988(Evt* script, s32 isInitialCall) {
     gCameras[id].unk_58 = gCameras[id].lookAt_obj.y;
     gCameras[id].unk_5C = gCameras[id].lookAt_obj.z;
 
-    set_variable(script, outVar1, gCameras[id].unk_1C);
-    set_variable(script, outVar2, gCameras[id].unk_1E);
-    set_variable(script, outVar3, gCameras[id].unk_20);
-    set_variable(script, outVar4, gCameras[id].unk_22);
+    evt_set_variable(script, outVar1, gCameras[id].unk_1C);
+    evt_set_variable(script, outVar2, gCameras[id].unk_1E);
+    evt_set_variable(script, outVar3, gCameras[id].unk_20);
+    evt_set_variable(script, outVar4, gCameras[id].unk_22);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetCamViewport(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    s32 x = get_variable(script, *args++);
-    s32 y = get_variable(script, *args++);
-    s16 width = get_variable(script, *args++);
-    s16 height = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s16 width = evt_get_variable(script, *args++);
+    s16 height = evt_get_variable(script, *args++);
 
     set_cam_viewport(id, x, y, width, height);
     return ApiStatus_DONE2;
@@ -113,11 +113,11 @@ ApiStatus SetCamViewport(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802CABE8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    s16 value1 = get_variable(script, *args++);
-    s32 value2 = get_variable(script, *args++);
-    s32 value3 = get_variable(script, *args++);
-    s16 value4 = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    s16 value1 = evt_get_variable(script, *args++);
+    s32 value2 = evt_get_variable(script, *args++);
+    s32 value3 = evt_get_variable(script, *args++);
+    s16 value4 = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
@@ -130,11 +130,11 @@ ApiStatus func_802CABE8(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802CACC0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    s16 value1 = get_variable(script, *args++);
-    s32 value2 = get_variable(script, *args++);
-    s32 value3 = get_variable(script, *args++);
-    s16 zoomPercent = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    s16 value1 = evt_get_variable(script, *args++);
+    s32 value2 = evt_get_variable(script, *args++);
+    s32 value3 = evt_get_variable(script, *args++);
+    s16 zoomPercent = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
@@ -147,10 +147,10 @@ ApiStatus func_802CACC0(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCamBGColor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    s16 r = get_variable(script, *args++);
-    s16 g = get_variable(script, *args++);
-    s16 b = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    s16 r = evt_get_variable(script, *args++);
+    s16 g = evt_get_variable(script, *args++);
+    s16 b = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
@@ -162,10 +162,10 @@ ApiStatus SetCamBGColor(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802CAE50(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    s32 value1 = get_variable(script, *args++);
-    s32 value2 = get_variable(script, *args++);
-    s32 value3 = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    s32 value1 = evt_get_variable(script, *args++);
+    s32 value2 = evt_get_variable(script, *args++);
+    s32 value3 = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
@@ -177,10 +177,10 @@ ApiStatus func_802CAE50(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCamTarget(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    s32 x = get_variable(script, *args++);
-    s32 y = get_variable(script, *args++);
-    s32 z = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
@@ -207,16 +207,16 @@ void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3) {
     Evt* script;
 
     script = start_script_in_group(&ShakeCamX, 1, 0, 4);
-    set_variable(script, SI_VAR(0), arg0);
-    set_variable(script, SI_VAR(1), arg1);
-    set_variable(script, SI_VAR(2), arg2);
-    set_float_variable(script, SI_VAR(3), arg3);
+    evt_set_variable(script, EVT_VAR(0), arg0);
+    evt_set_variable(script, EVT_VAR(1), arg1);
+    evt_set_variable(script, EVT_VAR(2), arg2);
+    evt_set_float_variable(script, EVT_VAR(3), arg3);
 }
 
 ApiStatus SetCamLeadPlayer(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    s32 enabled = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    s32 enabled = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
@@ -230,8 +230,8 @@ ApiStatus SetCamLeadPlayer(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802CB710(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    f32 value = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    f32 value = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
@@ -241,9 +241,9 @@ ApiStatus func_802CB710(Evt* script, s32 isInitialCall) {
 
 ApiStatus PanToTarget(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    f32 panPhase = get_float_variable(script, *args++);
-    s32 targetType = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    f32 panPhase = evt_get_float_variable(script, *args++);
+    s32 targetType = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
@@ -265,11 +265,11 @@ INCLUDE_ASM(s32, "evt/cam_api", LoadSettings, Evt* script, s32 isInitialCall);
 
 ApiStatus SetCamType(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
-    s32 controllerType = get_variable(script, *args++);
-    s32 enabled = get_variable(script, *args++);
+    s32 controllerType = evt_get_variable(script, *args++);
+    s32 enabled = evt_get_variable(script, *args++);
 
     camera->unk_500 = enabled;
     camera->controllerType = controllerType;
@@ -278,11 +278,11 @@ ApiStatus SetCamType(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCamPitch(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
-    f32 boomPitch = get_float_variable(script, *args++);
-    f32 viewPitch = get_float_variable(script, *args++);
+    f32 boomPitch = evt_get_float_variable(script, *args++);
+    f32 viewPitch = evt_get_float_variable(script, *args++);
 
     camera->controllerBoomPitch = boomPitch;
     camera->controllerViewPitch = viewPitch;
@@ -291,10 +291,10 @@ ApiStatus SetCamPitch(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCamDistance(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
-    f32 boomLength = get_float_variable(script, *args++);
+    f32 boomLength = evt_get_float_variable(script, *args++);
 
     camera->controllerBoomLen = boomLength;
     return ApiStatus_DONE2;
@@ -302,11 +302,11 @@ ApiStatus SetCamDistance(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCamPosA(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
-    f32 x = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
 
     camera->posA.x = x;
     camera->posA.z = z;
@@ -315,11 +315,11 @@ ApiStatus SetCamPosA(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCamPosB(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
-    f32 x = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
 
     camera->posB.x = x;
     camera->posB.z = z;
@@ -328,11 +328,11 @@ ApiStatus SetCamPosB(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCamPosC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
-    f32 y1 = get_float_variable(script, *args++);
-    f32 y2 = get_float_variable(script, *args++);
+    f32 y1 = evt_get_float_variable(script, *args++);
+    f32 y2 = evt_get_float_variable(script, *args++);
 
     camera->posA.y = y1;
     camera->posB.y = y2;
@@ -341,12 +341,12 @@ ApiStatus SetCamPosC(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPanTarget(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
 
     camera->movePos.x = x;
     camera->movePos.y = y;
@@ -357,8 +357,8 @@ ApiStatus SetPanTarget(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCamSpeed(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
-    f32 speed = get_float_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
+    f32 speed = evt_get_float_variable(script, *args++);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
@@ -368,99 +368,99 @@ ApiStatus SetCamSpeed(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetCamType(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
-    set_variable(script, outVar1, camera->controllerType);
-    set_variable(script, outVar2, camera->unk_500);
+    evt_set_variable(script, outVar1, camera->controllerType);
+    evt_set_variable(script, outVar2, camera->unk_500);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetCamPitch(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
-    set_float_variable(script, outVar1, camera->controllerBoomPitch);
-    set_float_variable(script, outVar2, camera->controllerViewPitch);
+    evt_set_float_variable(script, outVar1, camera->controllerBoomPitch);
+    evt_set_float_variable(script, outVar2, camera->controllerViewPitch);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetCamDistance(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
-    set_float_variable(script, outVar1, camera->controllerBoomLen);
+    evt_set_float_variable(script, outVar1, camera->controllerBoomLen);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetCamPosA(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
-    set_float_variable(script, outVar1, camera->posA.x);
-    set_float_variable(script, outVar2, camera->posA.z);
+    evt_set_float_variable(script, outVar1, camera->posA.x);
+    evt_set_float_variable(script, outVar2, camera->posA.z);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetCamPosB(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
-    set_float_variable(script, outVar1, camera->posB.x);
-    set_float_variable(script, outVar2, camera->posB.z);
+    evt_set_float_variable(script, outVar1, camera->posB.x);
+    evt_set_float_variable(script, outVar2, camera->posB.z);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetCamPosC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
-    set_float_variable(script, outVar1, camera->posA.y);
-    set_float_variable(script, outVar2, camera->posB.y);
+    evt_set_float_variable(script, outVar1, camera->posA.y);
+    evt_set_float_variable(script, outVar2, camera->posB.y);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetCamPosition(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, *args++);
+    s32 id = evt_get_variable(script, *args++);
     Bytecode outVar1 = *args++;
     Bytecode outVar2 = *args++;
     Bytecode outVar3 = *args++;
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
-    set_float_variable(script, outVar1, camera->movePos.x);
-    set_float_variable(script, outVar2, camera->movePos.y);
-    set_float_variable(script, outVar3, camera->movePos.z);
+    evt_set_float_variable(script, outVar1, camera->movePos.x);
+    evt_set_float_variable(script, outVar2, camera->movePos.y);
+    evt_set_float_variable(script, outVar3, camera->movePos.z);
     return ApiStatus_DONE2;
 }
 
 ApiStatus WaitForCam(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 id = get_variable(script, args[0]);
-    f32 endInterpValue = get_float_variable(script, args[1]);
+    s32 id = evt_get_variable(script, args[0]);
+    f32 endInterpValue = evt_get_float_variable(script, args[1]);
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
@@ -502,8 +502,8 @@ ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall) {
 
 ApiStatus LoadAnimatedModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    s32 var1 = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
     AnimatedModel* animModel = (*gCurrentMeshAnimationListPtr)[index];
     s32 animModelID = create_model_animator(0);
 
@@ -526,8 +526,8 @@ ApiStatus LoadAnimatedModel(Evt* script, s32 isInitialCall) {
 
 ApiStatus LoadAnimatedMesh(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    s32 var1 = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
     AnimatedModel* animModel = (*gCurrentMeshAnimationListPtr)[index];
     s32 animModelID = create_model_animator(0);
 
@@ -550,8 +550,8 @@ ApiStatus LoadAnimatedMesh(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlayModelAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
     model->currentAnimData = var2;
@@ -562,9 +562,9 @@ ApiStatus PlayModelAnimation(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlayModelAnimationStartingFrom(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
     model->currentAnimData = var2;
@@ -575,8 +575,8 @@ ApiStatus PlayModelAnimationStartingFrom(Evt* script, s32 isInitialCall) {
 
 ApiStatus ChangeModelAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
     if (model->currentAnimData == var2) {
@@ -590,10 +590,10 @@ ApiStatus ChangeModelAnimation(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetAnimatedModelRootPosition(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
     model->pos.x = x;
@@ -605,25 +605,25 @@ ApiStatus SetAnimatedModelRootPosition(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetAnimatedModelRootPosition(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
     s32 outX = *args++;
     s32 outY = *args++;
     s32 outZ = *args++;
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
-    set_float_variable(script, outX, model->pos.x);
-    set_float_variable(script, outY, model->pos.y);
-    set_float_variable(script, outZ, model->pos.z);
+    evt_set_float_variable(script, outX, model->pos.x);
+    evt_set_float_variable(script, outY, model->pos.y);
+    evt_set_float_variable(script, outZ, model->pos.z);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus AddAnimatedModelRootPosition(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
     model->pos.x += x;
@@ -635,10 +635,10 @@ ApiStatus AddAnimatedModelRootPosition(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetAnimatedModelRootRotation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
     model->rot.x = x;
@@ -650,10 +650,10 @@ ApiStatus SetAnimatedModelRootRotation(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetAnimatedModelRootScale(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
     model->scale.x = x;
@@ -665,15 +665,15 @@ ApiStatus SetAnimatedModelRootScale(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetAnimatedModelRenderMode(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    s32 renderMode = get_float_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    s32 renderMode = evt_get_float_variable(script, *args++);
 
     get_animator_by_index((*gCurrentMeshAnimationListPtr)[index]->animModelID)->renderMode = renderMode;
     return ApiStatus_DONE2;
 }
 
 ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall) {
-    AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[get_variable(script, *script->ptrReadPos)];
+    AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[evt_get_variable(script, *script->ptrReadPos)];
 
     delete_model_animator(get_animator_by_index(model->animModelID));
     model->animModelID = -1;
@@ -682,9 +682,9 @@ ApiStatus DeleteAnimatedModel(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetAnimatorFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
     s32 a1 = *args++;
-    s32 enable = get_variable(script, *args++);
+    s32 enable = evt_get_variable(script, *args++);
     AnimatedMesh* animMesh = get_animator_by_index((*gCurrentMeshAnimationListPtr)[index]->animModelID);
 
     if (enable) {

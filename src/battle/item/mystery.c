@@ -214,9 +214,9 @@ INCLUDE_ASM(ApiStatus, "battle/item/mystery", battle_item_mystery_func_802A13E4_
 
 ApiStatus N(func_802A188C_72CE3C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
+    s32 a = evt_get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
+    s32 c = evt_get_variable(script, *args++);
 
     playFX_18(2, a, b, c, 0, -1.0f, 0, 5);
 
@@ -274,7 +274,7 @@ s32 N(D_802A229C_72D84C)[8] = {
 };
 
 EvtSource N(main) = SCRIPT({
-    SI_VAR(10) = (const) ITEM_MYSTERY;
+    EVT_VAR(10) = (const) ITEM_MYSTERY;
     await N(UseItemWithEffect);
     spawn {
         sleep 220;
@@ -283,38 +283,38 @@ EvtSource N(main) = SCRIPT({
     PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_368);
     N(func_802A13E4_72C994)();
     sleep 2;
-    if (SI_VAR(0) != ITEM_PEBBLE) {
+    if (EVT_VAR(0) != ITEM_PEBBLE) {
         jump UseMystery;
         return;
     }
-    CreateVirtualEntity(SI_VAR(10), N(modelCommandList));
-    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(1) += 150;
-    SetVirtualEntityPosition(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    CreateVirtualEntity(EVT_VAR(10), N(modelCommandList));
+    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(1) += 150;
+    SetVirtualEntityPosition(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetOwnerTarget(0, 0);
     SetGoalToTarget(ACTOR_SELF);
-    GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     spawn {
-        SI_VAR(0) = 0;
+        EVT_VAR(0) = 0;
         loop 18 {
-            SI_VAR(0) += 0xFFFFFFC4;
-            SetVirtualEntityRotation(SI_VAR(10), 0, 0, SI_VAR(0));
+            EVT_VAR(0) += 0xFFFFFFC4;
+            SetVirtualEntityRotation(EVT_VAR(10), 0, 0, EVT_VAR(0));
             sleep 1;
         }
     }
-    SetVirtualEntityJumpGravity(SI_VAR(10), 0.6005859375);
-    SI_VAR(2) += 5;
-    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 12);
+    SetVirtualEntityJumpGravity(EVT_VAR(10), 0.6005859375);
+    EVT_VAR(2) += 5;
+    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 12);
     spawn {
-        SI_VAR(0) += 60;
-        SI_VAR(1) += 0;
-        VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 16);
-        DeleteVirtualEntity(SI_VAR(10));
+        EVT_VAR(0) += 60;
+        EVT_VAR(1) += 0;
+        VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 16);
+        DeleteVirtualEntity(EVT_VAR(10));
     }
     SetTargetActor(ACTOR_SELF, 0);
     SetGoalToTarget(ACTOR_SELF);
-    GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    N(func_802A188C_72CE3C)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    N(func_802A188C_72CE3C)(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetBattleFlagBits(32, 1);
     DispatchDamagePlayerEvent(1, EVENT_HIT);
 });

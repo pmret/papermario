@@ -15,7 +15,7 @@ glabel func_80240754_D3AD24
 /* D3AD4C 8024077C 0080882D */   daddu    $s1, $a0, $zero
 /* D3AD50 80240780 3C05FD05 */  lui       $a1, 0xfd05
 /* D3AD54 80240784 34A50F87 */  ori       $a1, $a1, 0xf87
-/* D3AD58 80240788 0C0B2026 */  jal       set_variable
+/* D3AD58 80240788 0C0B2026 */  jal       evt_set_variable
 /* D3AD5C 8024078C 0000302D */   daddu    $a2, $zero, $zero
 /* D3AD60 80240790 86030018 */  lh        $v1, 0x18($s0)
 .L80240794:
@@ -24,7 +24,7 @@ glabel func_80240754_D3AD24
 /* D3AD6C 8024079C 0220202D */   daddu    $a0, $s1, $zero
 /* D3AD70 802407A0 3C05FD05 */  lui       $a1, 0xfd05
 /* D3AD74 802407A4 34A50F87 */  ori       $a1, $a1, 0xf87
-/* D3AD78 802407A8 0C0B2026 */  jal       set_variable
+/* D3AD78 802407A8 0C0B2026 */  jal       evt_set_variable
 /* D3AD7C 802407AC 24060001 */   addiu    $a2, $zero, 1
 .L802407B0:
 /* D3AD80 802407B0 8FBF0018 */  lw        $ra, 0x18($sp)

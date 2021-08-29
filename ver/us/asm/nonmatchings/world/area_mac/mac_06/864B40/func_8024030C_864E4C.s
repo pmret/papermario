@@ -24,12 +24,12 @@ glabel func_8024030C_864E4C
 /* 864E98 80240358 26100004 */  addiu     $s0, $s0, 4
 /* 864E9C 8024035C 8E050000 */  lw        $a1, ($s0)
 /* 864EA0 80240360 26100004 */  addiu     $s0, $s0, 4
-/* 864EA4 80240364 0C0B210B */  jal       get_float_variable
+/* 864EA4 80240364 0C0B210B */  jal       evt_get_float_variable
 /* 864EA8 80240368 0240202D */   daddu    $a0, $s2, $zero
 /* 864EAC 8024036C 8E050000 */  lw        $a1, ($s0)
 /* 864EB0 80240370 26100004 */  addiu     $s0, $s0, 4
 /* 864EB4 80240374 0240202D */  daddu     $a0, $s2, $zero
-/* 864EB8 80240378 0C0B210B */  jal       get_float_variable
+/* 864EB8 80240378 0C0B210B */  jal       evt_get_float_variable
 /* 864EBC 8024037C 46000606 */   mov.s    $f24, $f0
 /* 864EC0 80240380 8E050000 */  lw        $a1, ($s0)
 /* 864EC4 80240384 26100004 */  addiu     $s0, $s0, 4
@@ -43,7 +43,7 @@ glabel func_8024030C_864E4C
 /* 864EE4 802403A4 0040882D */   daddu    $s1, $v0, $zero
 /* 864EE8 802403A8 0240202D */  daddu     $a0, $s2, $zero
 /* 864EEC 802403AC 8E050000 */  lw        $a1, ($s0)
-/* 864EF0 802403B0 0C0B210B */  jal       get_float_variable
+/* 864EF0 802403B0 0C0B210B */  jal       evt_get_float_variable
 /* 864EF4 802403B4 0040802D */   daddu    $s0, $v0, $zero
 /* 864EF8 802403B8 4618A501 */  sub.s     $f20, $f20, $f24
 /* 864EFC 802403BC 3C013F00 */  lui       $at, 0x3f00
@@ -58,7 +58,7 @@ glabel func_8024030C_864E4C
 /* 864F20 802403E0 0240202D */   daddu    $a0, $s2, $zero
 /* 864F24 802403E4 0220982D */  daddu     $s3, $s1, $zero
 /* 864F28 802403E8 0280282D */  daddu     $a1, $s4, $zero
-/* 864F2C 802403EC 0C0B2026 */  jal       set_variable
+/* 864F2C 802403EC 0C0B2026 */  jal       evt_set_variable
 /* 864F30 802403F0 0220302D */   daddu    $a2, $s1, $zero
 .L802403F4:
 /* 864F34 802403F4 3C014334 */  lui       $at, 0x4334
@@ -80,7 +80,7 @@ glabel func_8024030C_864E4C
 /* 864F74 80240434 46001081 */  sub.s     $f2, $f2, $f0
 /* 864F78 80240438 0240202D */  daddu     $a0, $s2, $zero
 /* 864F7C 8024043C 44061000 */  mfc1      $a2, $f2
-/* 864F80 80240440 0C0B2190 */  jal       set_float_variable
+/* 864F80 80240440 0C0B2190 */  jal       evt_set_float_variable
 /* 864F84 80240444 02A0282D */   daddu    $a1, $s5, $zero
 /* 864F88 80240448 8FBF0028 */  lw        $ra, 0x28($sp)
 /* 864F8C 8024044C 8FB50024 */  lw        $s5, 0x24($sp)

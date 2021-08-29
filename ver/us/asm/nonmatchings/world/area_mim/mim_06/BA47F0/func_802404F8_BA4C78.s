@@ -23,7 +23,7 @@ glabel func_802404F8_BA4C78
 /* BA4CC0 80240540 8E050000 */  lw        $a1, ($s0)
 /* BA4CC4 80240544 4600010D */  trunc.w.s $f4, $f0
 /* BA4CC8 80240548 44062000 */  mfc1      $a2, $f4
-/* BA4CCC 8024054C 0C0B2026 */  jal       set_variable
+/* BA4CCC 8024054C 0C0B2026 */  jal       evt_set_variable
 /* BA4CD0 80240550 0220202D */   daddu    $a0, $s1, $zero
 /* BA4CD4 80240554 8FBF0018 */  lw        $ra, 0x18($sp)
 /* BA4CD8 80240558 8FB10014 */  lw        $s1, 0x14($sp)

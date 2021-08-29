@@ -5,7 +5,7 @@ glabel func_8024064C_EDC62C
 /* EDC62C 8024064C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* EDC630 80240650 AFBF0010 */  sw        $ra, 0x10($sp)
 /* EDC634 80240654 8C82000C */  lw        $v0, 0xc($a0)
-/* EDC638 80240658 0C0B53A3 */  jal       dead_get_variable
+/* EDC638 80240658 0C0B53A3 */  jal       dead_evt_get_variable
 /* EDC63C 8024065C 8C450000 */   lw       $a1, ($v0)
 /* EDC640 80240660 0040182D */  daddu     $v1, $v0, $zero
 /* EDC644 80240664 10600012 */  beqz      $v1, .L802406B0

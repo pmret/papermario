@@ -8,12 +8,12 @@ glabel func_80241674_BD0264
 /* BD0270 80241680 3C05FE36 */  lui       $a1, 0xfe36
 /* BD0274 80241684 AFBF0014 */  sw        $ra, 0x14($sp)
 /* BD0278 80241688 F7B40018 */  sdc1      $f20, 0x18($sp)
-/* BD027C 8024168C 0C0B210B */  jal       get_float_variable
+/* BD027C 8024168C 0C0B210B */  jal       evt_get_float_variable
 /* BD0280 80241690 34A53C80 */   ori      $a1, $a1, 0x3c80
 /* BD0284 80241694 0200202D */  daddu     $a0, $s0, $zero
 /* BD0288 80241698 3C05FE36 */  lui       $a1, 0xfe36
 /* BD028C 8024169C 34A53C81 */  ori       $a1, $a1, 0x3c81
-/* BD0290 802416A0 0C0B210B */  jal       get_float_variable
+/* BD0290 802416A0 0C0B210B */  jal       evt_get_float_variable
 /* BD0294 802416A4 46000506 */   mov.s    $f20, $f0
 /* BD0298 802416A8 3C013F80 */  lui       $at, 0x3f80
 /* BD029C 802416AC 44811000 */  mtc1      $at, $f2

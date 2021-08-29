@@ -5,7 +5,7 @@ glabel func_80240344_8DA444
 /* 8DA444 80240344 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 8DA448 80240348 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 8DA44C 8024034C 8C82000C */  lw        $v0, 0xc($a0)
-/* 8DA450 80240350 0C0B210B */  jal       get_float_variable
+/* 8DA450 80240350 0C0B210B */  jal       evt_get_float_variable
 /* 8DA454 80240354 8C450000 */   lw       $a1, ($v0)
 /* 8DA458 80240358 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 8DA45C 8024035C 24020002 */  addiu     $v0, $zero, 2

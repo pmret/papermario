@@ -15,16 +15,16 @@ glabel func_80242600_9B8F80
 /* 9B8FA8 80242628 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* 9B8FAC 8024262C 8E30000C */  lw        $s0, 0xc($s1)
 /* 9B8FB0 80242630 8E050000 */  lw        $a1, ($s0)
-/* 9B8FB4 80242634 0C0B210B */  jal       get_float_variable
+/* 9B8FB4 80242634 0C0B210B */  jal       evt_get_float_variable
 /* 9B8FB8 80242638 26100004 */   addiu    $s0, $s0, 4
 /* 9B8FBC 8024263C 8E050000 */  lw        $a1, ($s0)
 /* 9B8FC0 80242640 26100004 */  addiu     $s0, $s0, 4
 /* 9B8FC4 80242644 0220202D */  daddu     $a0, $s1, $zero
-/* 9B8FC8 80242648 0C0B210B */  jal       get_float_variable
+/* 9B8FC8 80242648 0C0B210B */  jal       evt_get_float_variable
 /* 9B8FCC 8024264C 46000506 */   mov.s    $f20, $f0
 /* 9B8FD0 80242650 0220202D */  daddu     $a0, $s1, $zero
 /* 9B8FD4 80242654 8E050000 */  lw        $a1, ($s0)
-/* 9B8FD8 80242658 0C0B210B */  jal       get_float_variable
+/* 9B8FD8 80242658 0C0B210B */  jal       evt_get_float_variable
 /* 9B8FDC 8024265C 46000586 */   mov.s    $f22, $f0
 /* 9B8FE0 80242660 3C10800B */  lui       $s0, %hi(gCameras)
 /* 9B8FE4 80242664 26101D80 */  addiu     $s0, $s0, %lo(gCameras)

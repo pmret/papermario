@@ -52,7 +52,7 @@ ApiStatus N(func_802A1354_71B4F4)(Evt* script, s32 isInitialCall) {
 #include "UseItem.inc.c"
 
 EvtSource N(main) = SCRIPT({
-    SI_VAR(10) = (const) ITEM_THUNDER_RAGE;
+    EVT_VAR(10) = (const) ITEM_THUNDER_RAGE;
     await N(UseItemWithEffect);
     parallel {
         sleep 5;
@@ -65,8 +65,8 @@ EvtSource N(main) = SCRIPT({
     InitTargetIterator();
 0:
     SetGoalToTarget(ACTOR_SELF);
-    ItemCheckHit(SI_VAR(0), 0x10000000, 0, SI_VAR(0), 0);
-    if (SI_VAR(0) == 6) {
+    ItemCheckHit(EVT_VAR(0), 0x10000000, 0, EVT_VAR(0), 0);
+    if (EVT_VAR(0) == 6) {
         goto 1;
     }
     N(func_802A1354_71B4F4)();
@@ -74,12 +74,12 @@ EvtSource N(main) = SCRIPT({
     StartRumble(10);
     ShakeCam(1, 0, 5, 1.0);
     SetGoalToTarget(ACTOR_SELF);
-    GetItemPower(ITEM_THUNDER_RAGE, SI_VAR(0), SI_VAR(1));
-    ItemDamageEnemy(SI_VAR(0), 0x38000020, 0, SI_VAR(0), 32);
+    GetItemPower(ITEM_THUNDER_RAGE, EVT_VAR(0), EVT_VAR(1));
+    ItemDamageEnemy(EVT_VAR(0), 0x38000020, 0, EVT_VAR(0), 32);
 1:
     sleep 5;
-    ChooseNextTarget(0, SI_VAR(0));
-    if (SI_VAR(0) != -1) {
+    ChooseNextTarget(0, EVT_VAR(0));
+    if (EVT_VAR(0) != -1) {
         goto 0;
     }
     UseBattleCamPreset(3);

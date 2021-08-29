@@ -23,9 +23,9 @@ ApiStatus func_802A1518_78ECE8(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802A1628_78EDF8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
 
     playFX_18(2, var1, var2, var3, 0, -1.0f, 0, 5);
 

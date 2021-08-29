@@ -7,7 +7,7 @@ glabel func_8024055C_DEC42C
 /* DEC434 80240564 0080802D */  daddu     $s0, $a0, $zero
 /* DEC438 80240568 3C05FD05 */  lui       $a1, 0xfd05
 /* DEC43C 8024056C AFBF0014 */  sw        $ra, 0x14($sp)
-/* DEC440 80240570 0C0B210B */  jal       get_float_variable
+/* DEC440 80240570 0C0B210B */  jal       evt_get_float_variable
 /* DEC444 80240574 34A50F8B */   ori      $a1, $a1, 0xf8b
 /* DEC448 80240578 46000106 */  mov.s     $f4, $f0
 /* DEC44C 8024057C 3C0144FA */  lui       $at, 0x44fa

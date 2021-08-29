@@ -1,5 +1,5 @@
-#ifndef _SI_H_
-#define _SI_H_
+#ifndef _EVT_H_
+#define _EVT_H_
 
 #include "ultra64.h"
 
@@ -104,29 +104,34 @@ enum {
     EVT_OP_94,
 };
 
-#define SI_VAR(v)           ((v -  30000000))
-#define SI_MAP_VAR(v)       ((v -  50000000))
-#define SI_FLAG(v)          ((v -  70000000))
-#define SI_MAP_FLAG(v)      ((v -  90000000))
-#define SI_AREA_FLAG(v)     ((v - 110000000))
-#define SI_SAVE_FLAG(v)     ((v - 130000000))
-#define SI_AREA_VAR(v)      ((v - 150000000))
-#define SI_SAVE_VAR(v)      ((v - 170000000))
-#define SI_ARRAY(v)         ((v - 190000000))
-#define SI_ARRAY_FLAG(v)    ((v - 210000000))
-#define SI_FIXED(v) (((v * 1024.0f) + -230000000)) // See float_to_fixed_var
-#define SI_LIMIT        -250000000 // TODO better name
+#define EVT_VAR(v)           ((v -  30000000))
+#define EVT_MAP_VAR(v)       ((v -  50000000))
+#define EVT_FLAG(v)          ((v -  70000000))
+#define EVT_MAP_FLAG(v)      ((v -  90000000))
+#define EVT_AREA_FLAG(v)     ((v - 110000000))
+#define EVT_SAVE_FLAG(v)     ((v - 130000000))
+#define EVT_AREA_VAR(v)      ((v - 150000000))
+#define EVT_SAVE_VAR(v)      ((v - 170000000))
+#define EVT_ARRAY(v)         ((v - 190000000))
+#define EVT_ARRAY_FLAG(v)    ((v - 210000000))
+#define EVT_FIXED(v) (((v * 1024.0f) + -230000000)) // See evt_float_to_fixed_var
+#define EVT_LIMIT        -250000000 // TODO better name
 #define MAKE_ENTITY_END 0x80000000
 
+<<<<<<< HEAD:include/si.h
 #define SI_STORY_PROGRESS SI_SAVE_VAR(0)
 #define SI_SAVE_FLAG_PLACES_VISITED SI_SAVE_FLAG(0x7AA)
 #define SI_SAVE_FLAG_PLACES_VISITED_TOTAL 0x22
 #define SI_WORLD_LOCATION SI_SAVE_VAR(425)
+=======
+#define EVT_STORY_PROGRESS EVT_SAVE_VAR(0)
+#define EVT_WORLD_LOCATION EVT_SAVE_VAR(425)
+>>>>>>> b198250cde30a26dd0c979af4e2d4434de66ec03:include/evt.h
 
-/* Return type of si_execute_next_command */
-#define SI_CONTINUE 0   /* Continue to next command */
-#define SI_ABORT    1   /* Quit execution */
-#define SI_FINISH   255 /* Return from script */
+/* Return type of evt_execute_next_command */
+#define EVT_CONTINUE 0   /* Continue to next command */
+#define EVT_ABORT    1   /* Quit execution */
+#define EVT_FINISH   255 /* Return from script */
 
 /* Return type of script API functions */
 typedef s32 ApiStatus;
@@ -134,9 +139,9 @@ typedef s32 ApiStatus;
 #define ApiStatus_DONE1  1   /* Unconditional. Probably only exists to return a bool from functions */
 #define ApiStatus_DONE2  2   /* Conditional on Evt->disableScripts */
 #define ApiStatus_REPEAT 3   /* Call again immediately */
-#define ApiStatus_FINISH 255 /* Corresponds to SI_FINISH */
+#define ApiStatus_FINISH 255 /* Corresponds to EVT_FINISH */
 
-#define SI_CMD(opcode, argv...) \
+#define EVT_CMD(opcode, argv...) \
     opcode, \
     /* argc */ (sizeof((Bytecode[]){argv})/sizeof(Bytecode)), \
     ##argv

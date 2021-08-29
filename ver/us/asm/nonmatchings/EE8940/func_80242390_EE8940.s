@@ -7,7 +7,7 @@ glabel func_80242390_EE8940
 /* EE8948 80242398 8C82000C */  lw        $v0, 0xc($a0)
 /* EE894C 8024239C 3C068017 */  lui       $a2, %hi(D_80169B16)
 /* EE8950 802423A0 84C69B16 */  lh        $a2, %lo(D_80169B16)($a2)
-/* EE8954 802423A4 0C0B551A */  jal       dead_set_variable
+/* EE8954 802423A4 0C0B551A */  jal       dead_evt_set_variable
 /* EE8958 802423A8 8C450000 */   lw       $a1, ($v0)
 /* EE895C 802423AC 8FBF0010 */  lw        $ra, 0x10($sp)
 /* EE8960 802423B0 24020002 */  addiu     $v0, $zero, 2

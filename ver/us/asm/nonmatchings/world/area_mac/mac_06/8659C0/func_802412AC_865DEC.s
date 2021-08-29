@@ -39,15 +39,15 @@ glabel func_802412AC_865DEC
 /* 865E70 80241330 4600A006 */  mov.s     $f0, $f20
 .L80241334:
 /* 865E74 80241334 44060000 */  mfc1      $a2, $f0
-/* 865E78 80241338 0C0B2190 */  jal       set_float_variable
+/* 865E78 80241338 0C0B2190 */  jal       evt_set_float_variable
 /* 865E7C 8024133C 0240282D */   daddu    $a1, $s2, $zero
 /* 865E80 80241340 0220202D */  daddu     $a0, $s1, $zero
 /* 865E84 80241344 4406B000 */  mfc1      $a2, $f22
-/* 865E88 80241348 0C0B2190 */  jal       set_float_variable
+/* 865E88 80241348 0C0B2190 */  jal       evt_set_float_variable
 /* 865E8C 8024134C 0260282D */   daddu    $a1, $s3, $zero
 /* 865E90 80241350 0220202D */  daddu     $a0, $s1, $zero
 /* 865E94 80241354 4406A000 */  mfc1      $a2, $f20
-/* 865E98 80241358 0C0B2190 */  jal       set_float_variable
+/* 865E98 80241358 0C0B2190 */  jal       evt_set_float_variable
 /* 865E9C 8024135C 0200282D */   daddu    $a1, $s0, $zero
 /* 865EA0 80241360 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 865EA4 80241364 8FB3001C */  lw        $s3, 0x1c($sp)

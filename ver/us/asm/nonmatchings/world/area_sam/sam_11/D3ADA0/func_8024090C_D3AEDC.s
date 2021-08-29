@@ -60,24 +60,24 @@ glabel func_8024090C_D3AEDC
 /* D3AFB4 802409E4 0220202D */  daddu     $a0, $s1, $zero
 /* D3AFB8 802409E8 3C05F5DE */  lui       $a1, 0xf5de
 /* D3AFBC 802409EC 34A502DE */  ori       $a1, $a1, 0x2de
-/* D3AFC0 802409F0 0C0B2026 */  jal       set_variable
+/* D3AFC0 802409F0 0C0B2026 */  jal       evt_set_variable
 /* D3AFC4 802409F4 0280302D */   daddu    $a2, $s4, $zero
 /* D3AFC8 802409F8 0220202D */  daddu     $a0, $s1, $zero
 /* D3AFCC 802409FC 3C05F5DE */  lui       $a1, 0xf5de
 /* D3AFD0 80240A00 34A502DF */  ori       $a1, $a1, 0x2df
-/* D3AFD4 80240A04 0C0B2026 */  jal       set_variable
+/* D3AFD4 80240A04 0C0B2026 */  jal       evt_set_variable
 /* D3AFD8 80240A08 32A6FFFF */   andi     $a2, $s5, 0xffff
 /* D3AFDC 80240A0C 24100001 */  addiu     $s0, $zero, 1
 /* D3AFE0 80240A10 0220202D */  daddu     $a0, $s1, $zero
 .L80240A14:
 /* D3AFE4 80240A14 3C05F840 */  lui       $a1, 0xf840
 /* D3AFE8 80240A18 34A56268 */  ori       $a1, $a1, 0x6268
-/* D3AFEC 80240A1C 0C0B2026 */  jal       set_variable
+/* D3AFEC 80240A1C 0C0B2026 */  jal       evt_set_variable
 /* D3AFF0 80240A20 3206FFFF */   andi     $a2, $s0, 0xffff
 /* D3AFF4 80240A24 0220202D */  daddu     $a0, $s1, $zero
 /* D3AFF8 80240A28 3C05F840 */  lui       $a1, 0xf840
 /* D3AFFC 80240A2C 34A56269 */  ori       $a1, $a1, 0x6269
-/* D3B000 80240A30 0C0B2026 */  jal       set_variable
+/* D3B000 80240A30 0C0B2026 */  jal       evt_set_variable
 /* D3B004 80240A34 32E6FFFF */   andi     $a2, $s7, 0xffff
 /* D3B008 80240A38 0000202D */  daddu     $a0, $zero, $zero
 /* D3B00C 80240A3C 3C05F5DE */  lui       $a1, 0xf5de

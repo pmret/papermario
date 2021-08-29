@@ -194,9 +194,9 @@ ApiStatus HasMerleeCasts(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlayMerleeGatherFX(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var0 = get_variable(script, *args++);
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
+    s32 var0 = evt_get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
 
     playFX_6B(6, var0, var1, var2, 1.2f, 30);
     return ApiStatus_DONE2;
@@ -204,9 +204,9 @@ ApiStatus PlayMerleeGatherFX(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlayMerleeOrbFX(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var0 = get_variable(script, *args++);
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
+    s32 var0 = evt_get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
 
     playFX_52(9, var0, var1, var2, 5.0f, 15);
     return ApiStatus_DONE2;

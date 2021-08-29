@@ -25,7 +25,7 @@ glabel func_80240398_90FA48
 /* 90FA7C 802403CC 0000202D */  daddu     $a0, $zero, $zero
 /* 90FA80 802403D0 3C05FD05 */  lui       $a1, 0xfd05
 /* 90FA84 802403D4 34A50F8F */  ori       $a1, $a1, 0xf8f
-/* 90FA88 802403D8 0C0B2026 */  jal       set_variable
+/* 90FA88 802403D8 0C0B2026 */  jal       evt_set_variable
 /* 90FA8C 802403DC 0260302D */   daddu    $a2, $s3, $zero
 /* 90FA90 802403E0 0000902D */  daddu     $s2, $zero, $zero
 /* 90FA94 802403E4 3C146666 */  lui       $s4, 0x6666

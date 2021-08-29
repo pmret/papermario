@@ -13,7 +13,7 @@ glabel func_80240DA0_A2AFE0
 /* A2B000 80240DC0 26100004 */   addiu    $s0, $s0, 4
 /* A2B004 80240DC4 0220202D */  daddu     $a0, $s1, $zero
 /* A2B008 80240DC8 8E050000 */  lw        $a1, ($s0)
-/* A2B00C 80240DCC 0C0B210B */  jal       get_float_variable
+/* A2B00C 80240DCC 0C0B210B */  jal       evt_get_float_variable
 /* A2B010 80240DD0 0040802D */   daddu    $s0, $v0, $zero
 /* A2B014 80240DD4 44050000 */  mfc1      $a1, $f0
 /* A2B018 80240DD8 0C090355 */  jal       func_80240D54_A2AF94

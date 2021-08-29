@@ -5,9 +5,9 @@ void func_8011B950(u16, s32, s32, s32);
 
 ApiStatus N(UnkFunc27)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 testS2 = get_variable(script, *args++);
-    s32 testS0 = get_variable(script, *args++);
-    s32 testS1 = get_variable(script, *args++);
+    s32 testS2 = evt_get_variable(script, *args++);
+    s32 testS0 = evt_get_variable(script, *args++);
+    s32 testS1 = evt_get_variable(script, *args++);
     s32* temp_s0_3 = testS0;
     s32 temp_s1 = testS1;
     s32 temp_s2 = testS2;

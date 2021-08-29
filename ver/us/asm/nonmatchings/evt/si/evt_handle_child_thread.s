@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel si_handle_child_thread
+glabel evt_handle_child_thread
 /* EB71C 802C6D6C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* EB720 802C6D70 AFB00010 */  sw        $s0, 0x10($sp)
 /* EB724 802C6D74 0080802D */  daddu     $s0, $a0, $zero

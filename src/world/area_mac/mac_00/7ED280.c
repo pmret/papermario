@@ -30,7 +30,7 @@ ApiStatus N(func_80243104_7EDE14)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
+    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
     f32 posX, posY, posZ, posW;
 
     territory.unk_00 = 0;
@@ -155,7 +155,7 @@ ApiStatus N(func_80243744_7EE454)(Evt* script, s32 isInitialCall) {
 
     if (N(D_8024ED4C_7F9A5C)) {
         N(D_8024ED4C_7F9A5C) = FALSE;
-        set_variable(script, *args, N(D_8024ED50_7F9A60));
+        evt_set_variable(script, *args, N(D_8024ED50_7F9A60));
         return ApiStatus_DONE2;
     }
 
@@ -168,7 +168,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243798_7EE4A8);
 ApiStatus N(func_80243798_7EE4A8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    N(D_8024ED50_7F9A60) = get_variable(script, *args);
+    N(D_8024ED50_7F9A60) = evt_get_variable(script, *args);
     N(D_8024ED4C_7F9A5C) = TRUE;
     return ApiStatus_DONE2;
 }
@@ -178,7 +178,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_802437D0_7EE4E0);
 /*
 ApiStatus N(func_802437D0_7EE4E0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

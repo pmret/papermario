@@ -24,7 +24,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(80241880) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
         } else {
@@ -35,40 +35,40 @@ EvtSource N(80241880) = SCRIPT({
 
 EvtSource N(802418F0) = SCRIPT({
     group 11;
-    SI_VAR(10) = SI_VAR(0);
-    SI_VAR(11) = SI_VAR(1);
-    SI_VAR(12) = SI_VAR(2);
-    SI_VAR(13) = SI_VAR(3);
-    SI_VAR(14) = SI_VAR(4);
-    SI_VAR(12) -= SI_VAR(0);
-    SI_VAR(13) -= SI_VAR(1);
-    SI_VAR(0) = (float) SI_VAR(12);
-    SI_VAR(0) /= 100.0;
-    SI_VAR(15) = 100.0;
-    SI_VAR(15) /= (float) SI_VAR(0);
-    SI_VAR(15) += 11;
-    SI_VAR(5) = 200;
-    SI_VAR(5) /= SI_VAR(15);
-    SI_VAR(5) += 1;
-    loop SI_VAR(5) {
-        RandInt(SI_VAR(12), SI_VAR(0));
-        RandInt(SI_VAR(13), SI_VAR(1));
-        RandInt(199, SI_VAR(2));
-        SI_VAR(3) = 210;
-        SI_VAR(3) -= SI_VAR(2);
-        SI_VAR(0) += SI_VAR(10);
-        SI_VAR(1) += SI_VAR(11);
-        SI_VAR(2) += SI_VAR(14);
-        PlayEffect(0xD, SI_VAR(0), SI_VAR(2), SI_VAR(1), SI_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    EVT_VAR(10) = EVT_VAR(0);
+    EVT_VAR(11) = EVT_VAR(1);
+    EVT_VAR(12) = EVT_VAR(2);
+    EVT_VAR(13) = EVT_VAR(3);
+    EVT_VAR(14) = EVT_VAR(4);
+    EVT_VAR(12) -= EVT_VAR(0);
+    EVT_VAR(13) -= EVT_VAR(1);
+    EVT_VAR(0) = (float) EVT_VAR(12);
+    EVT_VAR(0) /= 100.0;
+    EVT_VAR(15) = 100.0;
+    EVT_VAR(15) /= (float) EVT_VAR(0);
+    EVT_VAR(15) += 11;
+    EVT_VAR(5) = 200;
+    EVT_VAR(5) /= EVT_VAR(15);
+    EVT_VAR(5) += 1;
+    loop EVT_VAR(5) {
+        RandInt(EVT_VAR(12), EVT_VAR(0));
+        RandInt(EVT_VAR(13), EVT_VAR(1));
+        RandInt(199, EVT_VAR(2));
+        EVT_VAR(3) = 210;
+        EVT_VAR(3) -= EVT_VAR(2);
+        EVT_VAR(0) += EVT_VAR(10);
+        EVT_VAR(1) += EVT_VAR(11);
+        EVT_VAR(2) += EVT_VAR(14);
+        PlayEffect(0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
-    sleep SI_VAR(15);
+    sleep EVT_VAR(15);
 0:
-    RandInt(SI_VAR(12), SI_VAR(0));
-    RandInt(SI_VAR(13), SI_VAR(1));
-    SI_VAR(0) += SI_VAR(10);
-    SI_VAR(1) += SI_VAR(11);
-    PlayEffect(0xD, SI_VAR(0), SI_VAR(14), SI_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    sleep SI_VAR(15);
+    RandInt(EVT_VAR(12), EVT_VAR(0));
+    RandInt(EVT_VAR(13), EVT_VAR(1));
+    EVT_VAR(0) += EVT_VAR(10);
+    EVT_VAR(1) += EVT_VAR(11);
+    PlayEffect(0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    sleep EVT_VAR(15);
     goto 0;
 });
 
@@ -82,7 +82,7 @@ EvtSource N(80241C54) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    EVT_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -91,48 +91,48 @@ EvtSource N(main) = SCRIPT({
     spawn N(802425DC);
     spawn N(802434A8);
     ModifyColliderFlags(3, 9, 0x00000006);
-    SI_VAR(0) = -511;
-    SI_VAR(1) = -4;
-    SI_VAR(2) = -319;
-    SI_VAR(3) = 10;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = -511;
+    EVT_VAR(1) = -4;
+    EVT_VAR(2) = -319;
+    EVT_VAR(3) = 10;
+    EVT_VAR(4) = 0;
     spawn N(802418F0);
-    SI_VAR(0) = -302;
-    SI_VAR(1) = 77;
-    SI_VAR(2) = -32;
-    SI_VAR(3) = 116;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = -302;
+    EVT_VAR(1) = 77;
+    EVT_VAR(2) = -32;
+    EVT_VAR(3) = 116;
+    EVT_VAR(4) = 0;
     spawn N(802418F0);
-    SI_VAR(0) = 51;
-    SI_VAR(1) = 18;
-    SI_VAR(2) = 141;
-    SI_VAR(3) = 127;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = 51;
+    EVT_VAR(1) = 18;
+    EVT_VAR(2) = 141;
+    EVT_VAR(3) = 127;
+    EVT_VAR(4) = 0;
     spawn N(802418F0);
-    SI_VAR(0) = 234;
-    SI_VAR(1) = 38;
-    SI_VAR(2) = 502;
-    SI_VAR(3) = 98;
-    SI_VAR(4) = 0;
+    EVT_VAR(0) = 234;
+    EVT_VAR(1) = 38;
+    EVT_VAR(2) = 502;
+    EVT_VAR(3) = 98;
+    EVT_VAR(4) = 0;
     spawn N(802418F0);
-    SI_VAR(0) = -525;
-    SI_VAR(1) = -163;
-    SI_VAR(2) = -400;
-    SI_VAR(3) = -80;
-    SI_VAR(4) = 60;
+    EVT_VAR(0) = -525;
+    EVT_VAR(1) = -163;
+    EVT_VAR(2) = -400;
+    EVT_VAR(3) = -80;
+    EVT_VAR(4) = 60;
     spawn N(802418F0);
-    SI_VAR(0) = -346;
-    SI_VAR(1) = -148;
-    SI_VAR(2) = 517;
-    SI_VAR(3) = -91;
-    SI_VAR(4) = 60;
+    EVT_VAR(0) = -346;
+    EVT_VAR(1) = -148;
+    EVT_VAR(2) = 517;
+    EVT_VAR(3) = -91;
+    EVT_VAR(4) = 60;
     spawn N(802418F0);
     ModifyColliderFlags(0, 1, 0x7FFFFE00);
     ModifyColliderFlags(0, 5, 0x7FFFFE00);
-    SI_VAR(0) = N(80241C54);
+    EVT_VAR(0) = N(80241C54);
     spawn EnterWalk;
     await N(80241880);
-    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CB5000)();
     }
 });
@@ -143,135 +143,135 @@ static s32 N(pad_2004)[] = {
 
 EvtSource N(80242010) = SCRIPT({
     group 11;
-    SI_VAR(10) = SI_VAR(0);
-    SI_VAR(11) = SI_VAR(1);
-    SI_VAR(12) = SI_VAR(2);
-    SI_VAR(13) = SI_VAR(3);
-    SI_VAR(14) = SI_VAR(4);
-    SI_VAR(12) -= SI_VAR(0);
-    SI_VAR(13) -= SI_VAR(1);
-    SI_VAR(0) = (float) SI_VAR(12);
-    SI_VAR(0) /= 100.0;
-    SI_VAR(15) = 100.0;
-    SI_VAR(15) /= (float) SI_VAR(0);
-    SI_VAR(15) += 11;
-    SI_VAR(5) = 200;
-    SI_VAR(5) /= SI_VAR(15);
-    SI_VAR(5) += 1;
-    loop SI_VAR(5) {
-        RandInt(SI_VAR(12), SI_VAR(0));
-        RandInt(SI_VAR(13), SI_VAR(1));
-        RandInt(199, SI_VAR(2));
-        SI_VAR(3) = 210;
-        SI_VAR(3) -= SI_VAR(2);
-        SI_VAR(0) += SI_VAR(10);
-        SI_VAR(1) += SI_VAR(11);
-        SI_VAR(2) += SI_VAR(14);
-        PlayEffect(0xD, SI_VAR(0), SI_VAR(2), SI_VAR(1), SI_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    EVT_VAR(10) = EVT_VAR(0);
+    EVT_VAR(11) = EVT_VAR(1);
+    EVT_VAR(12) = EVT_VAR(2);
+    EVT_VAR(13) = EVT_VAR(3);
+    EVT_VAR(14) = EVT_VAR(4);
+    EVT_VAR(12) -= EVT_VAR(0);
+    EVT_VAR(13) -= EVT_VAR(1);
+    EVT_VAR(0) = (float) EVT_VAR(12);
+    EVT_VAR(0) /= 100.0;
+    EVT_VAR(15) = 100.0;
+    EVT_VAR(15) /= (float) EVT_VAR(0);
+    EVT_VAR(15) += 11;
+    EVT_VAR(5) = 200;
+    EVT_VAR(5) /= EVT_VAR(15);
+    EVT_VAR(5) += 1;
+    loop EVT_VAR(5) {
+        RandInt(EVT_VAR(12), EVT_VAR(0));
+        RandInt(EVT_VAR(13), EVT_VAR(1));
+        RandInt(199, EVT_VAR(2));
+        EVT_VAR(3) = 210;
+        EVT_VAR(3) -= EVT_VAR(2);
+        EVT_VAR(0) += EVT_VAR(10);
+        EVT_VAR(1) += EVT_VAR(11);
+        EVT_VAR(2) += EVT_VAR(14);
+        PlayEffect(0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
-    sleep SI_VAR(15);
+    sleep EVT_VAR(15);
 0:
-    RandInt(SI_VAR(12), SI_VAR(0));
-    RandInt(SI_VAR(13), SI_VAR(1));
-    SI_VAR(0) += SI_VAR(10);
-    SI_VAR(1) += SI_VAR(11);
-    PlayEffect(0xD, SI_VAR(0), SI_VAR(14), SI_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    sleep SI_VAR(15);
+    RandInt(EVT_VAR(12), EVT_VAR(0));
+    RandInt(EVT_VAR(13), EVT_VAR(1));
+    EVT_VAR(0) += EVT_VAR(10);
+    EVT_VAR(1) += EVT_VAR(11);
+    PlayEffect(0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    sleep EVT_VAR(15);
     goto 0;
 });
 
 EvtSource N(802422BC) = SCRIPT({
-    SI_VAR(9) = SI_VAR(6);
-    SI_VAR(8) = SI_VAR(5);
-    SI_VAR(7) = SI_VAR(4);
-    SI_VAR(6) = SI_VAR(3);
-    SI_VAR(5) = SI_VAR(2);
-    SI_VAR(4) = SI_VAR(1);
-    SI_VAR(3) = SI_VAR(0);
-    EnableModel(SI_VAR(6), 0);
+    EVT_VAR(9) = EVT_VAR(6);
+    EVT_VAR(8) = EVT_VAR(5);
+    EVT_VAR(7) = EVT_VAR(4);
+    EVT_VAR(6) = EVT_VAR(3);
+    EVT_VAR(5) = EVT_VAR(2);
+    EVT_VAR(4) = EVT_VAR(1);
+    EVT_VAR(3) = EVT_VAR(0);
+    EnableModel(EVT_VAR(6), 0);
 0:
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     N(UnkFunc43)();
-    if (SI_VAR(0) == 0) {
+    if (EVT_VAR(0) == 0) {
         sleep 1;
         goto 0;
     }
     spawn {
         sleep 5;
-        EnableModel(SI_VAR(6), 1);
+        EnableModel(EVT_VAR(6), 1);
     }
-    if (SI_VAR(10) != 0) {
+    if (EVT_VAR(10) != 0) {
         spawn {
             sleep 5;
-            SI_VAR(0) = SI_VAR(3);
-            SI_VAR(1) = SI_VAR(4);
-            SI_VAR(2) = SI_VAR(5);
-            SI_VAR(1) += 10;
-            SI_VAR(2) += 8;
-            PlayEffect(0x11, 4, SI_VAR(0), SI_VAR(1), SI_VAR(2), 15, 0, 0, 0, 0, 0, 0, 0, 0);
+            EVT_VAR(0) = EVT_VAR(3);
+            EVT_VAR(1) = EVT_VAR(4);
+            EVT_VAR(2) = EVT_VAR(5);
+            EVT_VAR(1) += 10;
+            EVT_VAR(2) += 8;
+            PlayEffect(0x11, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 15, 0, 0, 0, 0, 0, 0, 0, 0);
             sleep 15;
-            SI_VAR(1) -= 10;
-            MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 14, 0);
+            EVT_VAR(1) -= 10;
+            MakeItemEntity(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 14, 0);
         }
     }
     spawn {
         sleep 10;
-        PlaySoundAt(0xF8, 0, SI_VAR(3), SI_VAR(4), SI_VAR(5));
+        PlaySoundAt(0xF8, 0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
     }
     MakeLerp(0, 180, 20, 2);
 1:
     UpdateLerp();
-    RotateModel(SI_VAR(8), SI_VAR(0), 1, 0, 0);
-    RotateModel(SI_VAR(9), SI_VAR(0), 1, 0, 0);
-    if (SI_VAR(1) == 1) {
+    RotateModel(EVT_VAR(8), EVT_VAR(0), 1, 0, 0);
+    RotateModel(EVT_VAR(9), EVT_VAR(0), 1, 0, 0);
+    if (EVT_VAR(1) == 1) {
         sleep 1;
         goto 1;
     }
-    EnableModel(SI_VAR(7), 0);
+    EnableModel(EVT_VAR(7), 0);
 });
 
 EvtSource N(802425DC) = SCRIPT({
     GetModelCenter(69);
-    SI_VAR(3) = 69;
-    SI_VAR(4) = 70;
-    SI_VAR(5) = 71;
-    SI_VAR(6) = 72;
-    SI_VAR(10) = 0;
+    EVT_VAR(3) = 69;
+    EVT_VAR(4) = 70;
+    EVT_VAR(5) = 71;
+    EVT_VAR(6) = 72;
+    EVT_VAR(10) = 0;
     spawn N(802422BC);
     GetModelCenter(75);
-    SI_VAR(3) = 75;
-    SI_VAR(4) = 76;
-    SI_VAR(5) = 77;
-    SI_VAR(6) = 78;
-    SI_VAR(10) = 174;
+    EVT_VAR(3) = 75;
+    EVT_VAR(4) = 76;
+    EVT_VAR(5) = 77;
+    EVT_VAR(6) = 78;
+    EVT_VAR(10) = 174;
     spawn N(802422BC);
     GetModelCenter(83);
-    SI_VAR(3) = 83;
-    SI_VAR(4) = 84;
-    SI_VAR(5) = 85;
-    SI_VAR(6) = 86;
-    SI_VAR(10) = 0;
+    EVT_VAR(3) = 83;
+    EVT_VAR(4) = 84;
+    EVT_VAR(5) = 85;
+    EVT_VAR(6) = 86;
+    EVT_VAR(10) = 0;
     spawn N(802422BC);
     GetModelCenter(89);
-    SI_VAR(3) = 89;
-    SI_VAR(4) = 90;
-    SI_VAR(5) = 91;
-    SI_VAR(6) = 92;
-    SI_VAR(10) = 0;
+    EVT_VAR(3) = 89;
+    EVT_VAR(4) = 90;
+    EVT_VAR(5) = 91;
+    EVT_VAR(6) = 92;
+    EVT_VAR(10) = 0;
     spawn N(802422BC);
     GetModelCenter(97);
-    SI_VAR(3) = 97;
-    SI_VAR(4) = 98;
-    SI_VAR(5) = 99;
-    SI_VAR(6) = 100;
-    SI_VAR(10) = 0;
+    EVT_VAR(3) = 97;
+    EVT_VAR(4) = 98;
+    EVT_VAR(5) = 99;
+    EVT_VAR(6) = 100;
+    EVT_VAR(10) = 0;
     spawn N(802422BC);
     GetModelCenter(103);
-    SI_VAR(3) = 103;
-    SI_VAR(4) = 104;
-    SI_VAR(5) = 105;
-    SI_VAR(6) = 106;
-    SI_VAR(10) = 0;
+    EVT_VAR(3) = 103;
+    EVT_VAR(4) = 104;
+    EVT_VAR(5) = 105;
+    EVT_VAR(6) = 106;
+    EVT_VAR(10) = 0;
     spawn N(802422BC);
 });
 
@@ -282,46 +282,46 @@ static s32 N(pad_2874)[] = {
 #include "world/common/foliage.inc.c"
 
 EvtSource N(802431E4) = SCRIPT({
-    GetNpcPos(NPC_BZZAP1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    if (SI_VAR(1) < 0) {
-        GetModelCenter(SI_VAR(9));
-        SI_VAR(2) += 35;
-        SetNpcPos(NPC_BZZAP1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetNpcPos(NPC_BZZAP1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    if (EVT_VAR(1) < 0) {
+        GetModelCenter(EVT_VAR(9));
+        EVT_VAR(2) += 35;
+        SetNpcPos(NPC_BZZAP1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     }
 });
 
 EvtSource N(tree1_Callback) = SCRIPT({
-    if (SI_SAVE_FLAG(1382) == 0) {
-        if (SI_AREA_VAR(5) == 1) {
-            MakeItemEntity(ITEM_HAPPY_FLOWER_B, -250, 100, 0, 13, SI_SAVE_FLAG(1382));
+    if (EVT_SAVE_FLAG(1382) == 0) {
+        if (EVT_AREA_VAR(5) == 1) {
+            MakeItemEntity(ITEM_HAPPY_FLOWER_B, -250, 100, 0, 13, EVT_SAVE_FLAG(1382));
         } else {
-            SI_VAR(9) = 14;
+            EVT_VAR(9) = 14;
             spawn N(802431E4);
         }
-        SI_AREA_VAR(4) = 0;
-        SI_AREA_VAR(5) = 0;
+        EVT_AREA_VAR(4) = 0;
+        EVT_AREA_VAR(5) = 0;
     }
 });
 
 EvtSource N(tree2_Callback) = SCRIPT({
-    if (SI_SAVE_FLAG(1382) == 0) {
-        SI_AREA_VAR(4) = 1;
-        SI_AREA_VAR(5) = 0;
+    if (EVT_SAVE_FLAG(1382) == 0) {
+        EVT_AREA_VAR(4) = 1;
+        EVT_AREA_VAR(5) = 0;
     }
 });
 
 EvtSource N(tree3_Callback) = SCRIPT({
-    if (SI_SAVE_FLAG(1382) == 0) {
-        if (SI_AREA_VAR(4) == 1) {
-            if (SI_AREA_VAR(5) == 0) {
-                SI_AREA_VAR(5) = 1;
+    if (EVT_SAVE_FLAG(1382) == 0) {
+        if (EVT_AREA_VAR(4) == 1) {
+            if (EVT_AREA_VAR(5) == 0) {
+                EVT_AREA_VAR(5) = 1;
                 return;
             }
         }
-        SI_VAR(9) = 22;
+        EVT_VAR(9) = 22;
         spawn N(802431E4);
-        SI_AREA_VAR(4) = 0;
-        SI_AREA_VAR(5) = 0;
+        EVT_AREA_VAR(4) = 0;
+        EVT_AREA_VAR(5) = 0;
     }
 });
 
@@ -380,15 +380,15 @@ ShakeTreeConfig N(tree3) = {
 Vec4f N(triggerCoord_80243498) = { 200.0f, 0.0f, 1.0f, 0.0f };
 
 EvtSource N(802434A8) = SCRIPT({
-    SI_AREA_VAR(4) = 0;
-    SI_AREA_VAR(5) = 0;
-    SI_VAR(0) = N(tree1);
+    EVT_AREA_VAR(4) = 0;
+    EVT_AREA_VAR(5) = 0;
+    EVT_VAR(0) = N(tree1);
     bind N(shakeTree) TRIGGER_WALL_HAMMER 15;
     bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80243428);
-    SI_VAR(0) = N(tree2);
+    EVT_VAR(0) = N(tree2);
     bind N(shakeTree) TRIGGER_WALL_HAMMER 16;
     bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80243460);
-    SI_VAR(0) = N(tree3);
+    EVT_VAR(0) = N(tree3);
     bind N(shakeTree) TRIGGER_WALL_HAMMER 17;
     bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80243498);
 });
@@ -466,14 +466,14 @@ NpcSettings N(npcSettings_80243710) = {
 
 EvtSource N(npcAI_8024373C) = SCRIPT({
     loop {
-        GetSelfVar(0, SI_VAR(0));
-        match SI_VAR(0) {
+        GetSelfVar(0, EVT_VAR(0));
+        match EVT_VAR(0) {
             == 0 {
-                GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                if (SI_VAR(1) > 0) {
-                    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+                GetNpcPos(NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                if (EVT_VAR(1) > 0) {
+                    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
                     SetNpcJumpscale(NPC_SELF, 0);
-                    NpcJump0(NPC_SELF, SI_VAR(0), 50, SI_VAR(2), 15);
+                    NpcJump0(NPC_SELF, EVT_VAR(0), 50, EVT_VAR(2), 15);
                     SetSelfVar(0, 1);
                     BindNpcAI(NPC_SELF, N(npcAI_80243674));
                 }
@@ -492,8 +492,8 @@ EvtSource N(npcAI_8024373C) = SCRIPT({
 });
 
 EvtSource N(defeat_802438C8) = SCRIPT({
-    GetBattleOutcome(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattleOutcome(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
             SetSelfVar(0, 2);
             BindNpcAI(NPC_SELF, N(npcAI_8024373C));

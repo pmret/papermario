@@ -73,7 +73,7 @@ glabel func_80240050_A6ACF0
 /* A6ADDC 8024013C C6000080 */  lwc1      $f0, 0x80($s0)
 /* A6ADE0 80240140 4600010D */  trunc.w.s $f4, $f0
 /* A6ADE4 80240144 44062000 */  mfc1      $a2, $f4
-/* A6ADE8 80240148 0C0B2026 */  jal       set_variable
+/* A6ADE8 80240148 0C0B2026 */  jal       evt_set_variable
 /* A6ADEC 8024014C 0240282D */   daddu    $a1, $s2, $zero
 /* A6ADF0 80240150 24020002 */  addiu     $v0, $zero, 2
 .L80240154:

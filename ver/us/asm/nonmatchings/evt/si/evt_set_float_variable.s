@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel set_float_variable
+glabel evt_set_float_variable
 /* ECFF0 802C8640 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* ECFF4 802C8644 AFB10014 */  sw        $s1, 0x14($sp)
 /* ECFF8 802C8648 0080882D */  daddu     $s1, $a0, $zero
@@ -28,7 +28,7 @@ glabel set_float_variable
 /* ED04C 802C869C 8E22013C */  lw        $v0, 0x13c($s1)
 /* ED050 802C86A0 00058080 */  sll       $s0, $a1, 2
 /* ED054 802C86A4 02021021 */  addu      $v0, $s0, $v0
-/* ED058 802C86A8 0C0B125B */  jal       float_to_fixed_var
+/* ED058 802C86A8 0C0B125B */  jal       evt_float_to_fixed_var
 /* ED05C 802C86AC 8C520000 */   lw       $s2, ($v0)
 /* ED060 802C86B0 8E23013C */  lw        $v1, 0x13c($s1)
 /* ED064 802C86B4 0240202D */  daddu     $a0, $s2, $zero
@@ -132,7 +132,7 @@ glabel set_float_variable
 /* ED1C4 802C8814 8E220000 */  lw        $v0, ($s1)
 /* ED1C8 802C8818 00058080 */  sll       $s0, $a1, 2
 /* ED1CC 802C881C 02021021 */  addu      $v0, $s0, $v0
-/* ED1D0 802C8820 0C0B125B */  jal       float_to_fixed_var
+/* ED1D0 802C8820 0C0B125B */  jal       evt_float_to_fixed_var
 /* ED1D4 802C8824 8C520000 */   lw       $s2, ($v0)
 /* ED1D8 802C8828 8E230000 */  lw        $v1, ($s1)
 /* ED1DC 802C882C 0240202D */  daddu     $a0, $s2, $zero
@@ -149,12 +149,12 @@ glabel set_float_variable
 /* ED204 802C8854 00A22821 */  addu      $a1, $a1, $v0
 /* ED208 802C8858 00058080 */  sll       $s0, $a1, 2
 /* ED20C 802C885C 02308021 */  addu      $s0, $s1, $s0
-/* ED210 802C8860 0C0B125B */  jal       float_to_fixed_var
+/* ED210 802C8860 0C0B125B */  jal       evt_float_to_fixed_var
 /* ED214 802C8864 8E120084 */   lw       $s2, 0x84($s0)
 /* ED218 802C8868 AE020084 */  sw        $v0, 0x84($s0)
 /* ED21C 802C886C 0240202D */  daddu     $a0, $s2, $zero
 .L802C8870:
-/* ED220 802C8870 0C0B1248 */  jal       fixed_var_to_float
+/* ED220 802C8870 0C0B1248 */  jal       evt_fixed_var_to_float
 /* ED224 802C8874 00000000 */   nop
 .L802C8878:
 /* ED228 802C8878 8FBF001C */  lw        $ra, 0x1c($sp)

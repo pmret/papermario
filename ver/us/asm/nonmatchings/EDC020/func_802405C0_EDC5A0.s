@@ -19,7 +19,7 @@ glabel func_802405C0_EDC5A0
 .L802405F4:
 /* EDC5D4 802405F4 8CC50000 */  lw        $a1, ($a2)
 /* EDC5D8 802405F8 3C068024 */  lui       $a2, %hi(D_80241854_EDD834)
-/* EDC5DC 802405FC 0C0B551A */  jal       dead_set_variable
+/* EDC5DC 802405FC 0C0B551A */  jal       dead_evt_set_variable
 /* EDC5E0 80240600 8CC61854 */   lw       $a2, %lo(D_80241854_EDD834)($a2)
 /* EDC5E4 80240604 24020002 */  addiu     $v0, $zero, 2
 .L80240608:

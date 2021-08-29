@@ -4,7 +4,7 @@
 #include "macros.h"
 #include "ultra64.h"
 #include "types.h"
-#include "si.h"
+#include "evt.h"
 #include "enums.h"
 
 struct Evt;
@@ -275,12 +275,12 @@ typedef struct Trigger {
     /* 0x00 */ TriggerFlags flags;
     /* 0x04 */ s32 params1;
     /* 0x08 */ s32 params2;
-    /* 0x0C */ UNK_FUN_PTR(functionHandler);
+    /* 0x0C */ s32 (*functionHandler)(struct Trigger*);
     /* 0x10 */ EvtSource* scriptSource;
     /* 0x14 */ struct Evt* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
-    /* 0x28 */ char unk_28[4];
+    /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ u8 unk_30;
     /* 0x31 */ char unk_31[3];
@@ -1483,7 +1483,7 @@ typedef struct FontRasterSet {
     /* 0x02 */ char unk_02[10];
 } FontRasterSet; // size = 0x0C
 
-typedef s32(*TriggerHandlerFunc)(struct Trigger*);
+typedef s32 (*TriggerHandlerFunc)(Trigger*);
 
 typedef struct TriggerDefinition {
     /* 0x00 */ s32 flags;
@@ -1512,7 +1512,7 @@ typedef struct CollisionStatus {
     /* 0x16 */ s16 touchingWallTrigger; /* 0/1 */
     /* 0x18 */ s16 bombetteExploded; /* 0 = yes, FFFF = no */
     /* 0x1A */ char unk_1A[2];
-    /* 0x1C */ f32 bombetteExplositionPos[3];
+    /* 0x1C */ Vec3f bombetteExplosionPos;
 } CollisionStatus; // size = 0x28
 
 typedef struct DecorationTable {

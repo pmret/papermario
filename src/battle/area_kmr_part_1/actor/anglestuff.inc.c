@@ -57,20 +57,20 @@ u32 N(angle_calculate)(f32 x, f32 y) {
 
 ApiStatus N(AngleCalculate)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
-    s32 var4 = get_variable(script, *args++);
-    s32 var5 = get_variable(script, *args);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    s32 var4 = evt_get_variable(script, *args++);
+    s32 var5 = evt_get_variable(script, *args);
 
     var3 -= var1;
     var4 -= var2;
 
     if (var3 == 0 && var4 == 0) {
-        set_variable(script, *args, var5);
+        evt_set_variable(script, *args, var5);
         return ApiStatus_DONE2;
     } else {
-        set_variable(script, *args, N(angle_calculate)(var3, var4) - 90);
+        evt_set_variable(script, *args, N(angle_calculate)(var3, var4) - 90);
         return ApiStatus_DONE2;
     }
 }

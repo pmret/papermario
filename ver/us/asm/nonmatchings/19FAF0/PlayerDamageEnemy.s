@@ -143,7 +143,7 @@ glabel PlayerDamageEnemy
 /* 1A2D30 80274450 0440000B */  bltz      $v0, .L80274480
 /* 1A2D34 80274454 0240202D */   daddu    $a0, $s2, $zero
 /* 1A2D38 80274458 0260282D */  daddu     $a1, $s3, $zero
-/* 1A2D3C 8027445C 0C0B2026 */  jal       set_variable
+/* 1A2D3C 8027445C 0C0B2026 */  jal       evt_set_variable
 /* 1A2D40 80274460 0040302D */   daddu    $a2, $v0, $zero
 /* 1A2D44 80274464 0C0B1069 */  jal       does_script_exist_by_ref
 /* 1A2D48 80274468 0240202D */   daddu    $a0, $s2, $zero

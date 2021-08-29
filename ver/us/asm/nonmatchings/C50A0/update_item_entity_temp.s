@@ -571,7 +571,7 @@ glabel L80135E78_CC578
 /* CC5E4 80135EE4 3C05F840 */  lui       $a1, 0xf840
 /* CC5E8 80135EE8 34A55BE5 */  ori       $a1, $a1, 0x5be5
 .L80135EEC:
-/* CC5EC 80135EEC 0C0B2026 */  jal       set_variable
+/* CC5EC 80135EEC 0C0B2026 */  jal       evt_set_variable
 /* CC5F0 80135EF0 24060001 */   addiu    $a2, $zero, 1
 /* CC5F4 80135EF4 24020005 */  addiu     $v0, $zero, 5
 /* CC5F8 80135EF8 0804D8DF */  j         L8013637C_CCA7C

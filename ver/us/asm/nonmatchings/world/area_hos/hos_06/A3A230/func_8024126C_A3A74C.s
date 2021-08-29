@@ -96,7 +96,7 @@ glabel func_8024126C_A3A74C
 .L802413BC:
 /* A3A89C 802413BC 8E620000 */  lw        $v0, ($s3)
 /* A3A8A0 802413C0 24060001 */  addiu     $a2, $zero, 1
-/* A3A8A4 802413C4 0C0B2026 */  jal       set_variable
+/* A3A8A4 802413C4 0C0B2026 */  jal       evt_set_variable
 /* A3A8A8 802413C8 AFC20088 */   sw       $v0, 0x88($fp)
 /* A3A8AC 802413CC 0809052D */  j         .L802414B4
 /* A3A8B0 802413D0 24020002 */   addiu    $v0, $zero, 2

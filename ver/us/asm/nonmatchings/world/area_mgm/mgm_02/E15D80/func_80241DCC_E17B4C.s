@@ -85,7 +85,7 @@ glabel func_80241DCC_E17B4C
 /* E17C84 80241F04 0280202D */  daddu     $a0, $s4, $zero
 .L80241F08:
 /* E17C88 80241F08 3C05FE36 */  lui       $a1, 0xfe36
-/* E17C8C 80241F0C 0C0B2026 */  jal       set_variable
+/* E17C8C 80241F0C 0C0B2026 */  jal       evt_set_variable
 /* E17C90 80241F10 34A53C80 */   ori      $a1, $a1, 0x3c80
 /* E17C94 80241F14 8FBF0024 */  lw        $ra, 0x24($sp)
 /* E17C98 80241F18 8FB40020 */  lw        $s4, 0x20($sp)

@@ -306,7 +306,7 @@ glabel L80240ACC_AF841C
 /* AF8460 80240B10 3C05F70F */  lui       $a1, 0xf70f
 /* AF8464 80240B14 3C068024 */  lui       $a2, %hi(D_8024652C)
 /* AF8468 80240B18 8CC6652C */  lw        $a2, %lo(D_8024652C)($a2)
-/* AF846C 80240B1C 0C0B2026 */  jal       set_variable
+/* AF846C 80240B1C 0C0B2026 */  jal       evt_set_variable
 /* AF8470 80240B20 34A52E83 */   ori      $a1, $a1, 0x2e83
 /* AF8474 80240B24 0000102D */  daddu     $v0, $zero, $zero
 .L80240B28:

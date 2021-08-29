@@ -19,7 +19,7 @@ glabel func_80240654_EB14B4
 .L80240688:
 /* EB14E8 80240688 8CC50000 */  lw        $a1, ($a2)
 /* EB14EC 8024068C 3C068024 */  lui       $a2, %hi(D_802417E8_EB2648)
-/* EB14F0 80240690 0C0B551A */  jal       dead_set_variable
+/* EB14F0 80240690 0C0B551A */  jal       dead_evt_set_variable
 /* EB14F4 80240694 8CC617E8 */   lw       $a2, %lo(D_802417E8_EB2648)($a2)
 /* EB14F8 80240698 24020002 */  addiu     $v0, $zero, 2
 .L8024069C:

@@ -38,7 +38,7 @@ glabel func_802403F0_B93830
 /* B938B4 80240474 8E050000 */  lw        $a1, ($s0)
 /* B938B8 80240478 4600008D */  trunc.w.s $f2, $f0
 /* B938BC 8024047C 44061000 */  mfc1      $a2, $f2
-/* B938C0 80240480 0C0B2026 */  jal       set_variable
+/* B938C0 80240480 0C0B2026 */  jal       evt_set_variable
 /* B938C4 80240484 0220202D */   daddu    $a0, $s1, $zero
 /* B938C8 80240488 C7A00014 */  lwc1      $f0, 0x14($sp)
 /* B938CC 8024048C 46140002 */  mul.s     $f0, $f0, $f20
@@ -48,7 +48,7 @@ glabel func_802403F0_B93830
 /* B938DC 8024049C 8E050000 */  lw        $a1, ($s0)
 /* B938E0 802404A0 4600008D */  trunc.w.s $f2, $f0
 /* B938E4 802404A4 44061000 */  mfc1      $a2, $f2
-/* B938E8 802404A8 0C0B2026 */  jal       set_variable
+/* B938E8 802404A8 0C0B2026 */  jal       evt_set_variable
 /* B938EC 802404AC 0220202D */   daddu    $a0, $s1, $zero
 /* B938F0 802404B0 C7A00018 */  lwc1      $f0, 0x18($sp)
 /* B938F4 802404B4 46140002 */  mul.s     $f0, $f0, $f20
@@ -58,7 +58,7 @@ glabel func_802403F0_B93830
 /* B93904 802404C4 8E050000 */  lw        $a1, ($s0)
 /* B93908 802404C8 4600008D */  trunc.w.s $f2, $f0
 /* B9390C 802404CC 44061000 */  mfc1      $a2, $f2
-/* B93910 802404D0 0C0B2026 */  jal       set_variable
+/* B93910 802404D0 0C0B2026 */  jal       evt_set_variable
 /* B93914 802404D4 0220202D */   daddu    $a0, $s1, $zero
 /* B93918 802404D8 8FBF0028 */  lw        $ra, 0x28($sp)
 /* B9391C 802404DC 8FB10024 */  lw        $s1, 0x24($sp)

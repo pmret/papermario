@@ -246,9 +246,9 @@ ApiStatus func_802613A8(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802613BC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
 
     playFX_6B(6, var1, var2 + 15, var3, 1.2f, 30);
     return ApiStatus_DONE2;
@@ -256,9 +256,9 @@ ApiStatus func_802613BC(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80261478(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
 
     playFX_52(9, var1, var2 + 15, var3, 5.0f, 15);
     return ApiStatus_DONE2;
@@ -397,9 +397,9 @@ ApiStatus HasMerleeCastsLeft(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802619E8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 x = get_variable(script, *args++);
-    s32 y = get_variable(script, *args++);
-    s32 z = get_variable(script, *args++);
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
     s32 screenX;
     s32 screenY;
     s32 screenZ;
@@ -434,10 +434,10 @@ ApiStatus func_80261B40(Evt* script, s32 isInitialCall) {
 
 ApiStatus FXRecoverHP(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
-    s32 var4 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    s32 var4 = evt_get_variable(script, *args++);
 
     playFX_40(0, var1, var2, var3, var4);
     return ApiStatus_DONE2;
@@ -445,10 +445,10 @@ ApiStatus FXRecoverHP(Evt* script, s32 isInitialCall) {
 
 ApiStatus FXRecoverFP(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
-    s32 var4 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    s32 var4 = evt_get_variable(script, *args++);
 
     playFX_40(1, var1, var2, var3, var4);
     return ApiStatus_DONE2;

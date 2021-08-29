@@ -51,7 +51,7 @@ ApiStatus ItemDamageEnemy(Evt* script, s32 isInitialCall) {
     battleStatus->currentAttackElement = *args++;
     battleStatus->currentAttackEventSuppression = 0;
     battleStatus->currentAttackStatus = *args++;
-    battleStatus->currentAttackDamage = get_variable(script, *args++);
+    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
     a5 = *args++;
 
     if ((a5 & 0x30) == 0x30) {
@@ -98,7 +98,7 @@ ApiStatus ItemDamageEnemy(Evt* script, s32 isInitialCall) {
         return ApiStatus_FINISH;
     }
 
-    set_variable(script, itemDamageOut, itemDamage);
+    evt_set_variable(script, itemDamageOut, itemDamage);
     if (!does_script_exist_by_ref(script)) {
         return ApiStatus_FINISH;
     }
@@ -118,8 +118,8 @@ ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall) {
     battleStatus->currentAttackElement = *args++;
     battleStatus->currentAttackEventSuppression = 0;
     battleStatus->currentAttackStatus = *args++;
-    battleStatus->currentAttackStatus |= get_variable(script, *args++);
-    battleStatus->currentAttackDamage = get_variable(script, *args++);
+    battleStatus->currentAttackStatus |= evt_get_variable(script, *args++);
+    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
     a5 = *args++;
 
     if ((a5 & 0x30) == 0x30) {
@@ -166,7 +166,7 @@ ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall) {
         return ApiStatus_FINISH;
     }
 
-    set_variable(script, itemDamageOut, itemDamage);
+    evt_set_variable(script, itemDamageOut, itemDamage);
     if (!does_script_exist_by_ref(script)) {
         return ApiStatus_FINISH;
     }
@@ -185,8 +185,8 @@ ApiStatus func_80252B3C(Evt* script, s32 isInitialCall) {
 
     battleStatus->currentAttackElement = *args++;
     battleStatus->currentAttackEventSuppression = 0;
-    battleStatus->currentAttackStatus = get_variable(script, *args++);
-    battleStatus->currentAttackDamage = get_variable(script, *args++);
+    battleStatus->currentAttackStatus = evt_get_variable(script, *args++);
+    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
     a5 = *args++;
 
     if ((a5 & 0x30) == 0x30) {
@@ -233,7 +233,7 @@ ApiStatus func_80252B3C(Evt* script, s32 isInitialCall) {
         return ApiStatus_FINISH;
     }
 
-    set_variable(script, itemDamageOut, itemDamage);
+    evt_set_variable(script, itemDamageOut, itemDamage);
     if (!does_script_exist_by_ref(script)) {
         return ApiStatus_FINISH;
     }
@@ -253,7 +253,7 @@ ApiStatus ItemCheckHit(Evt* script, s32 isInitialCall) {
     battleStatus->currentAttackElement = *args++;
     battleStatus->currentAttackEventSuppression = 0;
     battleStatus->currentAttackStatus = *args++;
-    battleStatus->currentAttackDamage = get_variable(script, *args++);
+    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
     a5 = *args++;
 
     if ((a5 & 0x30) == 0x30) {
@@ -300,7 +300,7 @@ ApiStatus ItemCheckHit(Evt* script, s32 isInitialCall) {
         return ApiStatus_FINISH;
     }
 
-    set_variable(script, itemDamageOut, itemDamage);
+    evt_set_variable(script, itemDamageOut, itemDamage);
 
     return ApiStatus_DONE2;
 }

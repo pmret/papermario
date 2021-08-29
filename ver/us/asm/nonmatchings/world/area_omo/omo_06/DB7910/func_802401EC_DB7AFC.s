@@ -12,21 +12,21 @@ glabel func_802401EC_DB7AFC
 /* DB7B18 80240208 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* DB7B1C 8024020C 8E30000C */  lw        $s0, 0xc($s1)
 /* DB7B20 80240210 8E050000 */  lw        $a1, ($s0)
-/* DB7B24 80240214 0C0B210B */  jal       get_float_variable
+/* DB7B24 80240214 0C0B210B */  jal       evt_get_float_variable
 /* DB7B28 80240218 26100004 */   addiu    $s0, $s0, 4
 /* DB7B2C 8024021C 8E050000 */  lw        $a1, ($s0)
 /* DB7B30 80240220 26100004 */  addiu     $s0, $s0, 4
 /* DB7B34 80240224 0220202D */  daddu     $a0, $s1, $zero
-/* DB7B38 80240228 0C0B210B */  jal       get_float_variable
+/* DB7B38 80240228 0C0B210B */  jal       evt_get_float_variable
 /* DB7B3C 8024022C 46000606 */   mov.s    $f24, $f0
 /* DB7B40 80240230 8E050000 */  lw        $a1, ($s0)
 /* DB7B44 80240234 26100004 */  addiu     $s0, $s0, 4
 /* DB7B48 80240238 0220202D */  daddu     $a0, $s1, $zero
-/* DB7B4C 8024023C 0C0B210B */  jal       get_float_variable
+/* DB7B4C 8024023C 0C0B210B */  jal       evt_get_float_variable
 /* DB7B50 80240240 46000586 */   mov.s    $f22, $f0
 /* DB7B54 80240244 0220202D */  daddu     $a0, $s1, $zero
 /* DB7B58 80240248 8E050000 */  lw        $a1, ($s0)
-/* DB7B5C 8024024C 0C0B210B */  jal       get_float_variable
+/* DB7B5C 8024024C 0C0B210B */  jal       evt_get_float_variable
 /* DB7B60 80240250 46000506 */   mov.s    $f20, $f0
 /* DB7B64 80240254 3C028011 */  lui       $v0, %hi(gPlayerStatus)
 /* DB7B68 80240258 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)

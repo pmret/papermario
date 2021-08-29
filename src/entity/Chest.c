@@ -185,7 +185,7 @@ void entity_GiantChest_give_equipment(Entity* entity) {
     }
 
     flag = data->unk_00;
-    if (flag <= SI_SAVE_FLAG(10000000)) {
+    if (flag <= EVT_SAVE_FLAG(10000000)) {
         flag += 130000000;
     }
     set_global_flag(flag);
@@ -194,8 +194,8 @@ void entity_GiantChest_give_equipment(Entity* entity) {
 INCLUDE_ASM(void, "entity/Chest", entity_GiantChest_give_equipment);
 #endif
 
-void entity_Chest_start_bound_script(Npc* npc) {
-    entity_start_script(npc);
+void entity_Chest_start_bound_script(Entity* entity) {
+    entity_start_script(entity);
 }
 
 void entity_Chest_enable_player_input(Entity* entity) {

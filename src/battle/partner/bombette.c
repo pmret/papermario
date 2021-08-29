@@ -5,9 +5,9 @@
 ApiStatus func_80238000_6FAD10(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
-    s32 x = get_variable(script, *args++);
-    s32 y = get_variable(script, *args++);
-    s32 z = get_variable(script, *args++);
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
     s16 selectedMoveID;
     s32 soundID;
 
@@ -86,7 +86,7 @@ ApiStatus func_80238358_6FB068(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    s32 var0 = get_variable(script, *args++);
+    s32 var0 = evt_get_variable(script, *args++);
     s32 var1 = 0;
 
     switch (partnerActor->staticActorData->level) {
@@ -147,7 +147,7 @@ ApiStatus func_8023849C_6FB1AC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    s32 var0 = get_variable(script, *args++);
+    s32 var0 = evt_get_variable(script, *args++);
     s32 var1 = 0;
 
     switch (partnerActor->staticActorData->level) {
@@ -194,7 +194,7 @@ ApiStatus func_80238590_6FB2A0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    s32 var0 = get_variable(script, *args++);
+    s32 var0 = evt_get_variable(script, *args++);
     s32 var1 = 0;
 
     switch (partnerActor->staticActorData->level) {

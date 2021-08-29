@@ -40,19 +40,19 @@ glabel GetAnimatedNodeRotation
 /* F211C 802CD76C C600009C */  lwc1      $f0, 0x9c($s0)
 /* F2120 802CD770 4600008D */  trunc.w.s $f2, $f0
 /* F2124 802CD774 44061000 */  mfc1      $a2, $f2
-/* F2128 802CD778 0C0B2026 */  jal       set_variable
+/* F2128 802CD778 0C0B2026 */  jal       evt_set_variable
 /* F212C 802CD77C 0260282D */   daddu    $a1, $s3, $zero
 /* F2130 802CD780 0240202D */  daddu     $a0, $s2, $zero
 /* F2134 802CD784 C60000A0 */  lwc1      $f0, 0xa0($s0)
 /* F2138 802CD788 4600008D */  trunc.w.s $f2, $f0
 /* F213C 802CD78C 44061000 */  mfc1      $a2, $f2
-/* F2140 802CD790 0C0B2026 */  jal       set_variable
+/* F2140 802CD790 0C0B2026 */  jal       evt_set_variable
 /* F2144 802CD794 0280282D */   daddu    $a1, $s4, $zero
 /* F2148 802CD798 0240202D */  daddu     $a0, $s2, $zero
 /* F214C 802CD79C C60000A4 */  lwc1      $f0, 0xa4($s0)
 /* F2150 802CD7A0 4600008D */  trunc.w.s $f2, $f0
 /* F2154 802CD7A4 44061000 */  mfc1      $a2, $f2
-/* F2158 802CD7A8 0C0B2026 */  jal       set_variable
+/* F2158 802CD7A8 0C0B2026 */  jal       evt_set_variable
 /* F215C 802CD7AC 02A0282D */   daddu    $a1, $s5, $zero
 /* F2160 802CD7B0 8FBF0028 */  lw        $ra, 0x28($sp)
 /* F2164 802CD7B4 8FB50024 */  lw        $s5, 0x24($sp)

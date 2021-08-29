@@ -13,11 +13,11 @@ glabel func_80240040_EDEA00
 /* EDEA20 80240060 AFB00010 */  sw        $s0, 0x10($sp)
 /* EDEA24 80240064 8E50000C */  lw        $s0, 0xc($s2)
 /* EDEA28 80240068 8E050000 */  lw        $a1, ($s0)
-/* EDEA2C 8024006C 0C0B53A3 */  jal       dead_get_variable
+/* EDEA2C 8024006C 0C0B53A3 */  jal       dead_evt_get_variable
 /* EDEA30 80240070 26100004 */   addiu    $s0, $s0, 4
 /* EDEA34 80240074 0240202D */  daddu     $a0, $s2, $zero
 /* EDEA38 80240078 8E050000 */  lw        $a1, ($s0)
-/* EDEA3C 8024007C 0C0B53A3 */  jal       dead_get_variable
+/* EDEA3C 8024007C 0C0B53A3 */  jal       dead_evt_get_variable
 /* EDEA40 80240080 0040802D */   daddu    $s0, $v0, $zero
 /* EDEA44 80240084 0200202D */  daddu     $a0, $s0, $zero
 /* EDEA48 80240088 0C00F94D */  jal       func_8003E534

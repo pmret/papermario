@@ -94,7 +94,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(80240D40) = SCRIPT({
-    if (SI_STORY_PROGRESS == STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (EVT_STORY_PROGRESS == STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         FadeOutMusic(0, 500);
     } else {
         SetMusicTrack(0, SONG_CLOUDY_CLIMB, 0, 8);
@@ -114,17 +114,17 @@ ApiStatus N(func_8024004C_CE674C)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         N(Unk_effect_struct)* ptr = (N(Unk_effect_struct)*)heap_malloc(sizeof(N(Unk_effect_struct)));
         script->varTable[0] = ptr;
-        set_variable(NULL, SI_MAP_VAR(1), ptr);
-        ptr->unk_38 = get_variable(script, *args++);
-        ptr->unk_3C = get_variable(script, *args++);
-        ptr->unk_0C = get_float_variable(script, *args++);
-        ptr->unk_10 = get_float_variable(script, *args++);
-        ptr->unk_14 = get_float_variable(script, *args++);
-        ptr->unk_18 = get_float_variable(script, *args++);
-        ptr->unk_1C = get_float_variable(script, *args++);
-        ptr->unk_20 = get_float_variable(script, *args++);
-        ptr->unk_24 = get_float_variable(script, *args++);
-        ptr->unk_28 = get_float_variable(script, *args++);
+        evt_set_variable(NULL, EVT_MAP_VAR(1), ptr);
+        ptr->unk_38 = evt_get_variable(script, *args++);
+        ptr->unk_3C = evt_get_variable(script, *args++);
+        ptr->unk_0C = evt_get_float_variable(script, *args++);
+        ptr->unk_10 = evt_get_float_variable(script, *args++);
+        ptr->unk_14 = evt_get_float_variable(script, *args++);
+        ptr->unk_18 = evt_get_float_variable(script, *args++);
+        ptr->unk_1C = evt_get_float_variable(script, *args++);
+        ptr->unk_20 = evt_get_float_variable(script, *args++);
+        ptr->unk_24 = evt_get_float_variable(script, *args++);
+        ptr->unk_28 = evt_get_float_variable(script, *args++);
         ptr->unk_50 = (struct N(temp)*)playFX_83(2, ptr->unk_0C, ptr->unk_10, ptr->unk_14, 1.0f, 0);
         ptr->unk_4E = 0;
         ptr->unk_48 = 0;
@@ -236,7 +236,7 @@ ApiStatus N(func_802401AC_CE68AC)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_802405BC_CE6CBC)(Evt* script, s32 isInitialCall) {
-    s32 var = get_variable(script, *script->ptrReadPos);
+    s32 var = evt_get_variable(script, *script->ptrReadPos);
     N(Unk_effect_struct)* ptr = (N(Unk_effect_struct)*)script->varTable[0];
 
     return (ptr->unk_4E == var) * ApiStatus_DONE2;
@@ -248,11 +248,11 @@ ApiStatus N(func_802405FC_CE6CFC)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         N(Unk_effect_struct)* ptr = (N(Unk_effect_struct)*)heap_malloc(sizeof(N(Unk_effect_struct)));
         script->varTable[0] = ptr;
-        ptr->unk_38 = get_variable(script, *args++);
-        ptr->unk_18 = get_float_variable(script, *args++);
-        ptr->unk_24 = get_float_variable(script, *args++);
-        ptr->unk_20 = get_float_variable(script, *args++);
-        ptr->unk_28 = get_float_variable(script, *args++);
+        ptr->unk_38 = evt_get_variable(script, *args++);
+        ptr->unk_18 = evt_get_float_variable(script, *args++);
+        ptr->unk_24 = evt_get_float_variable(script, *args++);
+        ptr->unk_20 = evt_get_float_variable(script, *args++);
+        ptr->unk_28 = evt_get_float_variable(script, *args++);
         ptr->unk_54 = playFX_7B(1, ptr->unk_18, ptr->unk_24, ptr->unk_20, 1.0f, 0);
         ptr->unk_54->unk_0C->unk_34 = ptr->unk_38;
         ptr->unk_54->unk_0C->unk_20 = 0;
@@ -282,10 +282,10 @@ ApiStatus N(func_80240708_CE6E08)(Evt* script, s32 isInitialCall) {
 
 EvtSource N(80240DA0) = SCRIPT({
     group 0;
-    if (SI_VAR(5) == 1) {
-        if (SI_VAR(6) == 1) {
-            if (SI_VAR(7) == 1) {
-                if (SI_VAR(8) == 1) {
+    if (EVT_VAR(5) == 1) {
+        if (EVT_VAR(6) == 1) {
+            if (EVT_VAR(7) == 1) {
+                if (EVT_VAR(8) == 1) {
                     N(UnkTexturePanFunc)();
                     return;
                 }
@@ -296,31 +296,31 @@ EvtSource N(80240DA0) = SCRIPT({
 });
 
 EvtSource N(80240E3C) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         == STORY_CH6_GREW_MAGIC_BEANSTALK {
-            SI_VAR(0) = 0;
-            if (SI_MAP_VAR(10) == 0) {
+            EVT_VAR(0) = 0;
+            if (EVT_MAP_VAR(10) == 0) {
                 return;
             }
-            SI_STORY_PROGRESS = STORY_CH6_DEFEATED_HUFF_N_PUFF;
+            EVT_STORY_PROGRESS = STORY_CH6_DEFEATED_HUFF_N_PUFF;
         }
         == STORY_CH6_DEFEATED_HUFF_N_PUFF {
-            SI_VAR(0) = 1;
+            EVT_VAR(0) = 1;
         } else {
             return;
         }
     }
-    if (SI_VAR(0) == 0) {
+    if (EVT_VAR(0) == 0) {
         DisablePlayerInput(TRUE);
         UseSettingsFrom(0, 650, 205, 0);
         SetCamSpeed(0, 0.6005859375);
         SetPanTarget(0, 650, 150, 0);
-        GetCamDistance(0, SI_VAR(1));
-        SI_VAR(1) -= 100;
-        SetCamDistance(0, SI_VAR(1));
+        GetCamDistance(0, EVT_VAR(1));
+        EVT_VAR(1) -= 100;
+        SetCamDistance(0, EVT_VAR(1));
         if (-5.5 != 10000) {
-            GetCamPitch(0, SI_VAR(2), SI_VAR(3));
-            SetCamPitch(0, SI_VAR(2), -5.5);
+            GetCamPitch(0, EVT_VAR(2), EVT_VAR(3));
+            SetCamPitch(0, EVT_VAR(2), -5.5);
         }
         PanToTarget(0, 0, 1);
         N(func_8024004C_CE674C)(5, 180, 650, 170, 0, 650, 205, 0, 150, 120);
@@ -348,14 +348,14 @@ EvtSource N(80240E3C) = SCRIPT({
             sleep 80;
             SetPlayerAnimation(ANIM_10002);
         }
-        SI_VAR(1) += 100;
-        SetCamDistance(0, SI_VAR(1));
+        EVT_VAR(1) += 100;
+        SetCamDistance(0, EVT_VAR(1));
         SetPanTarget(0, 650, 120, 0);
         N(func_802405BC_CE6CBC)(2);
-        GetPlayerPos(SI_VAR(2), SI_VAR(3), SI_VAR(4));
-        UseSettingsFrom(0, SI_VAR(2), SI_VAR(3), SI_VAR(4));
+        GetPlayerPos(EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
+        UseSettingsFrom(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
         SetCamSpeed(0, 1.0);
-        SetPanTarget(0, SI_VAR(2), SI_VAR(3), SI_VAR(4));
+        SetPanTarget(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
         WaitForCam(0, 1.0);
         PanToTarget(0, 0, 0);
         DisablePlayerInput(FALSE);
@@ -369,7 +369,7 @@ EvtSource N(80240E3C) = SCRIPT({
     N(func_802405BC_CE6CBC)(3);
     PlaySoundAtPlayer(312, 0);
     DisablePlayerInput(TRUE);
-    SI_STORY_PROGRESS = STORY_CH6_STAR_SPIRIT_RESCUED;
+    EVT_STORY_PROGRESS = STORY_CH6_STAR_SPIRIT_RESCUED;
     GotoMapSpecial("kmr_23", 5, 14);
     sleep 100;
 });
@@ -381,7 +381,7 @@ EvtSource N(80241350) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_CLOUDY_CLIMB;
+    EVT_WORLD_LOCATION = LOCATION_CLOUDY_CLIMB;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -393,12 +393,12 @@ EvtSource N(main) = SCRIPT({
     spawn N(80241600);
     ModifyColliderFlags(3, 5, 0x00000007);
     ModifyColliderFlags(3, 7, 0x00000007);
-    GetEntryID(SI_VAR(0));
+    GetEntryID(EVT_VAR(0));
     ModifyColliderFlags(0, 1, 0x7FFFFE00);
-    SI_VAR(0) = N(80241350);
+    EVT_VAR(0) = N(80241350);
     spawn EnterWalk;
     await N(80240D40);
-    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240B00_CE7200)();
     }
     spawn N(80240E3C);
@@ -406,53 +406,53 @@ EvtSource N(main) = SCRIPT({
 
 s32 N(D_802414FC_CE7BFC)[] = {
     0,
-    SI_FIXED(1), SI_FIXED(1), SI_FIXED(1),
-    SI_FIXED(1), SI_FIXED(1), SI_FIXED(1),
-    SI_FIXED(1.1005859375), SI_FIXED(1.1005859375), SI_FIXED(1.1005859375),
-    SI_FIXED(1.1005859375), SI_FIXED(1.1005859375), SI_FIXED(1.1005859375),
-    SI_FIXED(1), SI_FIXED(1), SI_FIXED(1),
-    SI_FIXED(1), SI_FIXED(1), SI_FIXED(1),
-    SI_FIXED(0.900390625), SI_FIXED(0.900390625), SI_FIXED(0.900390625),
-    SI_FIXED(0.900390625), SI_FIXED(0.900390625), SI_FIXED(0.900390625),
+    EVT_FIXED(1), EVT_FIXED(1), EVT_FIXED(1),
+    EVT_FIXED(1), EVT_FIXED(1), EVT_FIXED(1),
+    EVT_FIXED(1.1005859375), EVT_FIXED(1.1005859375), EVT_FIXED(1.1005859375),
+    EVT_FIXED(1.1005859375), EVT_FIXED(1.1005859375), EVT_FIXED(1.1005859375),
+    EVT_FIXED(1), EVT_FIXED(1), EVT_FIXED(1),
+    EVT_FIXED(1), EVT_FIXED(1), EVT_FIXED(1),
+    EVT_FIXED(0.900390625), EVT_FIXED(0.900390625), EVT_FIXED(0.900390625),
+    EVT_FIXED(0.900390625), EVT_FIXED(0.900390625), EVT_FIXED(0.900390625),
 };
 
 EvtSource N(80241560) = SCRIPT({
-    SI_MAP_VAR(0) += -1.5;
+    EVT_MAP_VAR(0) += -1.5;
 });
 
 EvtSource N(80241580) = SCRIPT({
-    SI_MAP_VAR(1) += -1.5;
+    EVT_MAP_VAR(1) += -1.5;
 });
 
 EvtSource N(802415A0) = SCRIPT({
-    SI_MAP_VAR(2) += -1.5;
+    EVT_MAP_VAR(2) += -1.5;
 });
 
 EvtSource N(802415C0) = SCRIPT({
-    SI_MAP_VAR(3) += -1.5;
+    EVT_MAP_VAR(3) += -1.5;
 });
 
 EvtSource N(802415E0) = SCRIPT({
-    SI_MAP_VAR(4) += -1.5;
+    EVT_MAP_VAR(4) += -1.5;
 });
 
 EvtSource N(80241600) = SCRIPT({
     spawn {
-        SI_VAR(15) = 0;
+        EVT_VAR(15) = 0;
 0:
-        N(UnkFloatFunc)(SI_VAR(15), SI_VAR(0), 0.96875, 1.03125, 15, 0, 0);
-        N(UnkFloatFunc)(SI_VAR(15), SI_VAR(1), 1.03125, 0.96875, 15, 0, 0);
-        ScaleModel(88, SI_VAR(1), SI_VAR(0), 1);
-        ScaleModel(90, SI_VAR(1), SI_VAR(0), 1);
-        ScaleModel(92, SI_VAR(0), SI_VAR(1), 1);
-        ScaleModel(94, SI_VAR(0), SI_VAR(1), 1);
-        ScaleModel(96, SI_VAR(0), SI_VAR(1), 1);
-        ScaleModel(98, SI_VAR(1), SI_VAR(0), 1);
-        ScaleModel(100, SI_VAR(0), SI_VAR(1), 1);
-        ScaleModel(102, SI_VAR(0), SI_VAR(1), 1);
-        SI_VAR(15) += 1;
-        if (SI_VAR(15) >= 30) {
-            SI_VAR(15) = 0;
+        N(UnkFloatFunc)(EVT_VAR(15), EVT_VAR(0), 0.96875, 1.03125, 15, 0, 0);
+        N(UnkFloatFunc)(EVT_VAR(15), EVT_VAR(1), 1.03125, 0.96875, 15, 0, 0);
+        ScaleModel(88, EVT_VAR(1), EVT_VAR(0), 1);
+        ScaleModel(90, EVT_VAR(1), EVT_VAR(0), 1);
+        ScaleModel(92, EVT_VAR(0), EVT_VAR(1), 1);
+        ScaleModel(94, EVT_VAR(0), EVT_VAR(1), 1);
+        ScaleModel(96, EVT_VAR(0), EVT_VAR(1), 1);
+        ScaleModel(98, EVT_VAR(1), EVT_VAR(0), 1);
+        ScaleModel(100, EVT_VAR(0), EVT_VAR(1), 1);
+        ScaleModel(102, EVT_VAR(0), EVT_VAR(1), 1);
+        EVT_VAR(15) += 1;
+        if (EVT_VAR(15) >= 30) {
+            EVT_VAR(15) = 0;
         }
         sleep 1;
         goto 0;
@@ -534,9 +534,9 @@ EvtSource N(80241920) = SCRIPT({
         LoadPath(30, N(vectorList_8024189C), 3, 0);
 0:
         GetNextPathPos();
-        SetPlayerPos(SI_VAR(1), SI_VAR(2), SI_VAR(3));
+        SetPlayerPos(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
         sleep 1;
-        if (SI_VAR(0) == 1) {
+        if (EVT_VAR(0) == 1) {
             goto 0;
         }
     }
@@ -544,15 +544,15 @@ EvtSource N(80241920) = SCRIPT({
 });
 
 EvtSource N(80241B98) = SCRIPT({
-    if (SI_STORY_PROGRESS >= STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         return;
     }
     AwaitPlayerApproach(650, 0, 30);
     DisablePlayerInput(TRUE);
     SetMusicTrack(0, SONG_HUFF_N_PUFF_THEME, 0, 8);
-    SI_VAR(9) = spawn N(802418C0);
-    GetCurrentPartner(SI_VAR(0));
-    if (SI_VAR(0) != 0) {
+    EVT_VAR(9) = spawn N(802418C0);
+    GetCurrentPartner(EVT_VAR(0));
+    if (EVT_VAR(0) != 0) {
         func_802D2B6C();
         sleep 20;
     }
@@ -561,37 +561,37 @@ EvtSource N(80241B98) = SCRIPT({
     sleep 5;
     SetPlayerAnimation(ANIM_1002B);
     SetNpcFlagBits(NPC_HUFF_N_PUFF1, ((NPC_FLAG_100)), TRUE);
-    GetPlayerPos(SI_VAR(2), SI_VAR(3), SI_VAR(4));
-    UseSettingsFrom(0, SI_VAR(2), SI_VAR(3), SI_VAR(4));
-    SetPanTarget(0, SI_VAR(2), SI_VAR(3), SI_VAR(4));
+    GetPlayerPos(EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
+    UseSettingsFrom(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
+    SetPanTarget(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
     SetCamSpeed(0, 90.0);
     PanToTarget(0, 0, 1);
-    MakeLerp(SI_VAR(2), 600, 20, 0);
-    SI_VAR(2) = SI_VAR(3);
-    SI_VAR(5) = SI_VAR(3);
-    SI_VAR(5) += 15;
+    MakeLerp(EVT_VAR(2), 600, 20, 0);
+    EVT_VAR(2) = EVT_VAR(3);
+    EVT_VAR(5) = EVT_VAR(3);
+    EVT_VAR(5) += 15;
     loop {
         UpdateLerp();
-        SI_VAR(3) += 3;
-        SetPlayerPos(SI_VAR(0), SI_VAR(3), SI_VAR(4));
-        if (SI_VAR(3) > SI_VAR(5)) {
-            SI_VAR(3) = SI_VAR(2);
+        EVT_VAR(3) += 3;
+        SetPlayerPos(EVT_VAR(0), EVT_VAR(3), EVT_VAR(4));
+        if (EVT_VAR(3) > EVT_VAR(5)) {
+            EVT_VAR(3) = EVT_VAR(2);
         }
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
-        SetPanTarget(0, SI_VAR(0), SI_VAR(2), SI_VAR(4));
+        SetPanTarget(0, EVT_VAR(0), EVT_VAR(2), EVT_VAR(4));
     }
     func_802D2C14(1);
-    SetPlayerPos(SI_VAR(0), SI_VAR(2), SI_VAR(4));
+    SetPlayerPos(EVT_VAR(0), EVT_VAR(2), EVT_VAR(4));
     SetNpcFlagBits(NPC_HUFF_N_PUFF1, ((NPC_FLAG_100)), FALSE);
     DisablePlayerPhysics(FALSE);
     sleep 10;
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += 25;
-    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) += 25;
+    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetCamDistance(0, 300.0);
     SetCamPitch(0, 17.0, -9.0);
     SetCamSpeed(0, 4.0);
@@ -610,34 +610,34 @@ EvtSource N(80241B98) = SCRIPT({
     PanToTarget(0, 0, 1);
     func_802D2C14(0);
     sleep 10;
-    GetCurrentPartnerID(SI_VAR(0));
-    if (SI_VAR(0) != 8) {
+    GetCurrentPartnerID(EVT_VAR(0));
+    if (EVT_VAR(0) != 8) {
         ShowMessageAtWorldPos(MESSAGE_ID(0x11, 0x00CC), 630, 120, 0);
     } else {
         ShowMessageAtWorldPos(MESSAGE_ID(0x11, 0x00CD), 630, 120, 0);
     }
     parallel {
         sleep 15;
-        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SI_VAR(0) += 25;
-        UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        EVT_VAR(0) += 25;
+        UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         SetCamPitch(0, 17.0, -6.0);
-        SI_VAR(3) = 40;
+        EVT_VAR(3) = 40;
         loop 5 {
-            SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
             SetCamDistance(0, 400.0);
-            SetCamSpeed(0, SI_VAR(3));
+            SetCamSpeed(0, EVT_VAR(3));
             WaitForCam(0, 1.0);
-            SI_VAR(3) -= 10;
-            SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            EVT_VAR(3) -= 10;
+            SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
             SetCamDistance(0, 600.0);
-            SetCamSpeed(0, SI_VAR(3));
+            SetCamSpeed(0, EVT_VAR(3));
             WaitForCam(0, 1.0);
-            SI_VAR(3) += 7;
+            EVT_VAR(3) += 7;
         }
     }
     await N(80241920);
-    kill SI_VAR(9);
+    kill EVT_VAR(9);
     sleep 30;
     SetNpcVar(0, 0, 1);
     DisablePlayerInput(FALSE);
@@ -645,38 +645,38 @@ EvtSource N(80241B98) = SCRIPT({
 });
 
 EvtSource N(80242290) = SCRIPT({
-    SI_VAR(0) = 0.9501953125;
-    SI_VAR(1) = 1.1005859375;
+    EVT_VAR(0) = 0.9501953125;
+    EVT_VAR(1) = 1.1005859375;
 0:
-    match SI_MAP_VAR(13) {
+    match EVT_MAP_VAR(13) {
         == 0 {
-            SI_VAR(3) = 10;
-            SI_VAR(2) = 2;
+            EVT_VAR(3) = 10;
+            EVT_VAR(2) = 2;
         }
         == 1 {
-            SI_VAR(3) = 5;
-            SI_VAR(2) = 1;
+            EVT_VAR(3) = 5;
+            EVT_VAR(2) = 1;
         } else {
             return;
         }
     }
-    SI_VAR(4) = SI_VAR(3);
-    loop SI_VAR(4) {
-        SetNpcScale(NPC_HUFF_N_PUFF0, SI_VAR(0), SI_VAR(1), 1);
-        SetNpcScale(NPC_HUFF_N_PUFF1, SI_VAR(0), SI_VAR(1), 1);
-        SetNpcScale(NPC_HUFF_N_PUFF2, SI_VAR(0), SI_VAR(1), 1);
-        SI_VAR(0) += 0.015625;
-        SI_VAR(1) -= 0.0107421875;
-        sleep SI_VAR(2);
+    EVT_VAR(4) = EVT_VAR(3);
+    loop EVT_VAR(4) {
+        SetNpcScale(NPC_HUFF_N_PUFF0, EVT_VAR(0), EVT_VAR(1), 1);
+        SetNpcScale(NPC_HUFF_N_PUFF1, EVT_VAR(0), EVT_VAR(1), 1);
+        SetNpcScale(NPC_HUFF_N_PUFF2, EVT_VAR(0), EVT_VAR(1), 1);
+        EVT_VAR(0) += 0.015625;
+        EVT_VAR(1) -= 0.0107421875;
+        sleep EVT_VAR(2);
     }
-    SI_VAR(4) = SI_VAR(3);
-    loop SI_VAR(4) {
-        SetNpcScale(NPC_HUFF_N_PUFF0, SI_VAR(0), SI_VAR(1), 1);
-        SetNpcScale(NPC_HUFF_N_PUFF1, SI_VAR(0), SI_VAR(1), 1);
-        SetNpcScale(NPC_HUFF_N_PUFF2, SI_VAR(0), SI_VAR(1), 1);
-        SI_VAR(0) -= 0.015625;
-        SI_VAR(1) += 0.0107421875;
-        sleep SI_VAR(2);
+    EVT_VAR(4) = EVT_VAR(3);
+    loop EVT_VAR(4) {
+        SetNpcScale(NPC_HUFF_N_PUFF0, EVT_VAR(0), EVT_VAR(1), 1);
+        SetNpcScale(NPC_HUFF_N_PUFF1, EVT_VAR(0), EVT_VAR(1), 1);
+        SetNpcScale(NPC_HUFF_N_PUFF2, EVT_VAR(0), EVT_VAR(1), 1);
+        EVT_VAR(0) -= 0.015625;
+        EVT_VAR(1) += 0.0107421875;
+        sleep EVT_VAR(2);
     }
     goto 0;
 });
@@ -713,30 +713,30 @@ s32 N(intTable_8024262C)[] = {
 };
 
 EvtSource N(8024263C) = SCRIPT({
-    SI_VAR(0) = (float) 10;
-    SI_VAR(1) = (float) 1;
+    EVT_VAR(0) = (float) 10;
+    EVT_VAR(1) = (float) 1;
     parallel {
         loop 8 {
             SetNpcFlagBits(NPC_HUFF_N_PUFF0, ((0x00000002)), FALSE);
             SetNpcFlagBits(NPC_HUFF_N_PUFF1, ((0x00000002)), FALSE);
             SetNpcFlagBits(NPC_HUFF_N_PUFF2, ((0x00000002)), FALSE);
-            sleep SI_VAR(0);
+            sleep EVT_VAR(0);
             SetNpcFlagBits(NPC_HUFF_N_PUFF0, ((0x00000002)), TRUE);
             SetNpcFlagBits(NPC_HUFF_N_PUFF1, ((0x00000002)), TRUE);
             SetNpcFlagBits(NPC_HUFF_N_PUFF2, ((0x00000002)), TRUE);
-            sleep SI_VAR(1);
-            SI_VAR(0) -= (float) 0;
-            SI_VAR(1) += (float) 0;
+            sleep EVT_VAR(1);
+            EVT_VAR(0) -= (float) 0;
+            EVT_VAR(1) += (float) 0;
         }
         loop {
             SetNpcFlagBits(NPC_HUFF_N_PUFF0, ((0x00000002)), FALSE);
             SetNpcFlagBits(NPC_HUFF_N_PUFF1, ((0x00000002)), FALSE);
             SetNpcFlagBits(NPC_HUFF_N_PUFF2, ((0x00000002)), FALSE);
-            sleep SI_VAR(0);
+            sleep EVT_VAR(0);
             SetNpcFlagBits(NPC_HUFF_N_PUFF0, ((0x00000002)), TRUE);
             SetNpcFlagBits(NPC_HUFF_N_PUFF1, ((0x00000002)), TRUE);
             SetNpcFlagBits(NPC_HUFF_N_PUFF2, ((0x00000002)), TRUE);
-            sleep SI_VAR(1);
+            sleep EVT_VAR(1);
         }
     }
     parallel {
@@ -744,11 +744,11 @@ EvtSource N(8024263C) = SCRIPT({
             MakeLerp(0, 255, 10, 4);
             loop {
                 UpdateLerp();
-                func_802CFD30(NPC_HUFF_N_PUFF0, 9, SI_VAR(0), SI_VAR(0), SI_VAR(0), 0);
-                func_802CFD30(NPC_HUFF_N_PUFF1, 9, SI_VAR(0), SI_VAR(0), SI_VAR(0), 0);
-                func_802CFD30(NPC_HUFF_N_PUFF2, 9, SI_VAR(0), SI_VAR(0), SI_VAR(0), 0);
+                func_802CFD30(NPC_HUFF_N_PUFF0, 9, EVT_VAR(0), EVT_VAR(0), EVT_VAR(0), 0);
+                func_802CFD30(NPC_HUFF_N_PUFF1, 9, EVT_VAR(0), EVT_VAR(0), EVT_VAR(0), 0);
+                func_802CFD30(NPC_HUFF_N_PUFF2, 9, EVT_VAR(0), EVT_VAR(0), EVT_VAR(0), 0);
                 sleep 1;
-                if (SI_VAR(1) == 0) {
+                if (EVT_VAR(1) == 0) {
                     break loop;
                 }
             }
@@ -758,20 +758,20 @@ EvtSource N(8024263C) = SCRIPT({
 });
 
 EvtSource N(80242918) = SCRIPT({
-    SI_MAP_VAR(11) = 1.0;
-    SI_MAP_VAR(12) = 1.0;
+    EVT_MAP_VAR(11) = 1.0;
+    EVT_MAP_VAR(12) = 1.0;
     parallel {
         buf_use N(intTable_8024258C);
         loop 6 {
             PlaySoundAtNpc(NPC_HUFF_N_PUFF0, 0x20B6, 0);
-            buf_read SI_VAR(6) SI_VAR(7) SI_VAR(8);
-            MakeLerp(SI_VAR(6), SI_VAR(7), SI_VAR(8), 11);
+            buf_read EVT_VAR(6) EVT_VAR(7) EVT_VAR(8);
+            MakeLerp(EVT_VAR(6), EVT_VAR(7), EVT_VAR(8), 11);
             loop {
                 UpdateLerp();
-                SI_VAR(0) /= (float) 10;
-                SI_MAP_VAR(11) = (float) SI_VAR(0);
+                EVT_VAR(0) /= (float) 10;
+                EVT_MAP_VAR(11) = (float) EVT_VAR(0);
                 sleep 1;
-                if (SI_VAR(1) == 0) {
+                if (EVT_VAR(1) == 0) {
                     break loop;
                 }
             }
@@ -781,14 +781,14 @@ EvtSource N(80242918) = SCRIPT({
             buf_use N(intTable_802425D4);
             loop 2 {
                 PlaySoundAtNpc(NPC_HUFF_N_PUFF0, 0x20B6, 0);
-                buf_read SI_VAR(6) SI_VAR(7);
-                MakeLerp(SI_VAR(6), SI_VAR(7), 4, 11);
+                buf_read EVT_VAR(6) EVT_VAR(7);
+                MakeLerp(EVT_VAR(6), EVT_VAR(7), 4, 11);
                 loop {
                     UpdateLerp();
-                    SI_VAR(0) /= (float) 10;
-                    SI_MAP_VAR(11) = (float) SI_VAR(0);
+                    EVT_VAR(0) /= (float) 10;
+                    EVT_MAP_VAR(11) = (float) EVT_VAR(0);
                     sleep 1;
-                    if (SI_VAR(1) == 0) {
+                    if (EVT_VAR(1) == 0) {
                         break loop;
                     }
                 }
@@ -798,14 +798,14 @@ EvtSource N(80242918) = SCRIPT({
     parallel {
         buf_use N(intTable_802425E4);
         loop 6 {
-            buf_read SI_VAR(6) SI_VAR(7) SI_VAR(8);
-            MakeLerp(SI_VAR(6), SI_VAR(7), SI_VAR(8), 11);
+            buf_read EVT_VAR(6) EVT_VAR(7) EVT_VAR(8);
+            MakeLerp(EVT_VAR(6), EVT_VAR(7), EVT_VAR(8), 11);
             loop {
                 UpdateLerp();
-                SI_VAR(0) /= (float) 10;
-                SI_MAP_VAR(12) = (float) SI_VAR(0);
+                EVT_VAR(0) /= (float) 10;
+                EVT_MAP_VAR(12) = (float) EVT_VAR(0);
                 sleep 1;
-                if (SI_VAR(1) == 0) {
+                if (EVT_VAR(1) == 0) {
                     break loop;
                 }
             }
@@ -814,14 +814,14 @@ EvtSource N(80242918) = SCRIPT({
         loop {
             buf_use N(intTable_8024262C);
             loop 2 {
-                buf_read SI_VAR(6) SI_VAR(7);
-                MakeLerp(SI_VAR(6), SI_VAR(7), 4, 11);
+                buf_read EVT_VAR(6) EVT_VAR(7);
+                MakeLerp(EVT_VAR(6), EVT_VAR(7), 4, 11);
                 loop {
                     UpdateLerp();
-                    SI_VAR(0) /= (float) 10;
-                    SI_MAP_VAR(12) = (float) SI_VAR(0);
+                    EVT_VAR(0) /= (float) 10;
+                    EVT_MAP_VAR(12) = (float) EVT_VAR(0);
                     sleep 1;
-                    if (SI_VAR(1) == 0) {
+                    if (EVT_VAR(1) == 0) {
                         break loop;
                     }
                 }
@@ -829,65 +829,65 @@ EvtSource N(80242918) = SCRIPT({
         }
     }
     loop 100 {
-        SetNpcScale(NPC_HUFF_N_PUFF0, SI_MAP_VAR(11), SI_MAP_VAR(12), 1);
-        SetNpcScale(NPC_HUFF_N_PUFF1, SI_MAP_VAR(11), SI_MAP_VAR(12), 1);
-        SetNpcScale(NPC_HUFF_N_PUFF2, SI_MAP_VAR(11), SI_MAP_VAR(12), 1);
+        SetNpcScale(NPC_HUFF_N_PUFF0, EVT_MAP_VAR(11), EVT_MAP_VAR(12), 1);
+        SetNpcScale(NPC_HUFF_N_PUFF1, EVT_MAP_VAR(11), EVT_MAP_VAR(12), 1);
+        SetNpcScale(NPC_HUFF_N_PUFF2, EVT_MAP_VAR(11), EVT_MAP_VAR(12), 1);
         sleep 1;
     }
 });
 
 EvtSource N(80242D34) = SCRIPT({
     parallel {
-        SI_VAR(1) = 0;
+        EVT_VAR(1) = 0;
         loop {
-            SI_VAR(0) = 3;
+            EVT_VAR(0) = 3;
             loop 15 {
-                SetNpcRotation(SI_VAR(0), 0, SI_VAR(1), 0);
-                SI_VAR(0) += 1;
+                SetNpcRotation(EVT_VAR(0), 0, EVT_VAR(1), 0);
+                EVT_VAR(0) += 1;
             }
-            SI_VAR(1) += 60;
-            if (SI_VAR(1) > 360) {
-                SI_VAR(1) += -360;
+            EVT_VAR(1) += 60;
+            if (EVT_VAR(1) > 360) {
+                EVT_VAR(1) += -360;
             }
             sleep 1;
         }
     }
     buf_use N(intTable_8024249C);
-    SI_VAR(8) = 3;
+    EVT_VAR(8) = 3;
     loop 14 {
-        buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3) SI_VAR(4);
+        buf_read EVT_VAR(1) EVT_VAR(2) EVT_VAR(3) EVT_VAR(4);
         spawn {
-            RandInt(5, SI_VAR(5));
-            sleep SI_VAR(5);
-            SetNpcPos(SI_VAR(8), SI_VAR(1), SI_VAR(2), -30);
-            RandInt(2, SI_VAR(5));
-            SI_VAR(5) += 8;
-            PlaySoundAtNpc(SI_VAR(8), 0x3D5, 0);
-            NpcJump0(SI_VAR(8), SI_VAR(3), SI_VAR(4), -15, SI_VAR(5));
-            SetNpcPos(SI_VAR(8), 0, -1000, 0);
+            RandInt(5, EVT_VAR(5));
+            sleep EVT_VAR(5);
+            SetNpcPos(EVT_VAR(8), EVT_VAR(1), EVT_VAR(2), -30);
+            RandInt(2, EVT_VAR(5));
+            EVT_VAR(5) += 8;
+            PlaySoundAtNpc(EVT_VAR(8), 0x3D5, 0);
+            NpcJump0(EVT_VAR(8), EVT_VAR(3), EVT_VAR(4), -15, EVT_VAR(5));
+            SetNpcPos(EVT_VAR(8), 0, -1000, 0);
         }
-        SI_VAR(8) += 1;
+        EVT_VAR(8) += 1;
     }
     SetNpcPos(NPC_HUFF_N_PUFF0, 0, -1000, 0);
     SetNpcPos(NPC_HUFF_N_PUFF1, 0, -1000, 0);
     SetNpcPos(NPC_HUFF_N_PUFF2, 0, -1000, 0);
-    buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3) SI_VAR(4);
+    buf_read EVT_VAR(1) EVT_VAR(2) EVT_VAR(3) EVT_VAR(4);
     sleep 5;
-    SetNpcPos(SI_VAR(8), SI_VAR(1), SI_VAR(2), -30);
-    PlaySoundAtNpc(SI_VAR(8), 0x3D6, 0);
-    NpcJump0(SI_VAR(8), SI_VAR(3), SI_VAR(4), -15, 10);
-    SetNpcPos(SI_VAR(8), 0, -1000, 0);
+    SetNpcPos(EVT_VAR(8), EVT_VAR(1), EVT_VAR(2), -30);
+    PlaySoundAtNpc(EVT_VAR(8), 0x3D6, 0);
+    NpcJump0(EVT_VAR(8), EVT_VAR(3), EVT_VAR(4), -15, 10);
+    SetNpcPos(EVT_VAR(8), 0, -1000, 0);
 });
 
 EvtSource N(80243010) = SCRIPT({
     SetNpcAnimation(NPC_HUFF_N_PUFF1, NPC_ANIM_huff_n_puff_Palette_00_Anim_4);
     SetNpcAnimation(NPC_HUFF_N_PUFF0, NPC_ANIM_huff_n_puff_Palette_00_Anim_5);
     SetNpcAnimation(NPC_HUFF_N_PUFF2, NPC_ANIM_huff_n_puff_Palette_00_Anim_6);
-    GetNpcPos(NPC_HUFF_N_PUFF0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += -15;
-    SI_VAR(2) += 40;
-    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetNpcPos(NPC_HUFF_N_PUFF0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) += -15;
+    EVT_VAR(2) += 40;
+    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetCamDistance(0, 350.0);
     SetCamPitch(0, 17.0, -5.5);
     SetCamSpeed(0, 90.0);
@@ -895,30 +895,30 @@ EvtSource N(80243010) = SCRIPT({
     WaitForCam(0, 1.0);
     SpeakToPlayer(NPC_HUFF_N_PUFF0, NPC_ANIM_huff_n_puff_Palette_00_Anim_30, NPC_ANIM_huff_n_puff_Palette_00_Anim_5, 256, -30, 30, MESSAGE_ID(0x11, 0x00CE));
     FadeOutMusic(0, 1500);
-    SI_MAP_VAR(13) = 2;
-    GetNpcPos(NPC_HUFF_N_PUFF0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    EVT_MAP_VAR(13) = 2;
+    GetNpcPos(NPC_HUFF_N_PUFF0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     spawn {
-        SI_VAR(3) = SI_VAR(0);
-        SI_VAR(4) = SI_VAR(0);
-        SI_VAR(3) += -35;
-        SI_VAR(4) += 35;
+        EVT_VAR(3) = EVT_VAR(0);
+        EVT_VAR(4) = EVT_VAR(0);
+        EVT_VAR(3) += -35;
+        EVT_VAR(4) += 35;
         loop 3 {
-            PlayEffect(0x19, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            PlayEffect(0x19, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
             sleep 12;
-            PlayEffect(0x19, 0, SI_VAR(3), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            SI_VAR(3) += 7;
+            PlayEffect(0x19, 0, EVT_VAR(3), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            EVT_VAR(3) += 7;
             sleep 8;
-            PlayEffect(0x19, 0, SI_VAR(4), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            SI_VAR(4) += -7;
+            PlayEffect(0x19, 0, EVT_VAR(4), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            EVT_VAR(4) += -7;
             sleep 14;
         }
-        PlayEffect(0x19, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x19, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
         ShakeCam(0, 0, 30, 1.5);
     }
     spawn {
         sleep 30;
         loop 10 {
-            PlayEffect(0x3A, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 40, 65, 12, 15, 0, 0, 0, 0, 0);
+            PlayEffect(0x3A, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 40, 65, 12, 15, 0, 0, 0, 0, 0);
             sleep 7;
         }
     }
@@ -932,30 +932,30 @@ EvtSource N(idle_80243428) = SCRIPT({
 0:
     SetSelfVar(0, 0);
     loop {
-        GetSelfVar(0, SI_VAR(0));
-        if (SI_VAR(0) != 0) {
+        GetSelfVar(0, EVT_VAR(0));
+        if (EVT_VAR(0) != 0) {
             break loop;
         }
         sleep 1;
     }
-    SI_MAP_VAR(13) = 1;
+    EVT_MAP_VAR(13) = 1;
     StartBossBattle(14);
     goto 0;
 });
 
 EvtSource N(defeat_802434D8) = SCRIPT({
-    GetBattleOutcome(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattleOutcome(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
             SetEncounterStatusFlags(1, 1);
             SetNpcYaw(NPC_PARTNER, 90);
-            GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(3));
-            GetNpcPos(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            SI_VAR(3) += -20;
-            SetNpcPos(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(3));
+            GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(3));
+            GetNpcPos(NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            EVT_VAR(3) += -20;
+            SetNpcPos(NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(3));
             await N(80243010);
             sleep 50;
-            SI_MAP_VAR(10) = 1;
+            EVT_MAP_VAR(10) = 1;
             spawn N(80240E3C);
         }
     }
@@ -966,7 +966,7 @@ EvtSource N(defeat_802435D4) = SCRIPT({
 });
 
 EvtSource N(init_802435E4) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (EVT_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         SetEnemyFlagBits(-1, 4194304, 1);
         BindNpcIdle(NPC_SELF, N(idle_80243428));
         BindNpcDefeat(NPC_SELF, N(defeat_802434D8));
@@ -977,7 +977,7 @@ EvtSource N(init_802435E4) = SCRIPT({
 });
 
 EvtSource N(init_80243684) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (EVT_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         SetEnemyFlagBits(-1, 4194304, 1);
         BindNpcDefeat(NPC_SELF, N(defeat_802435D4));
         SetNpcAnimation(NPC_SELF, NPC_ANIM_huff_n_puff_Palette_00_Anim_1);
@@ -988,7 +988,7 @@ EvtSource N(init_80243684) = SCRIPT({
 });
 
 EvtSource N(init_8024371C) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (EVT_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         SetEnemyFlagBits(-1, 4194304, 1);
         BindNpcDefeat(NPC_SELF, N(defeat_802435D4));
         SetNpcAnimation(NPC_SELF, NPC_ANIM_huff_n_puff_Palette_00_Anim_19);

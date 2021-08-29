@@ -177,9 +177,9 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             offsetX = data->unk_1C * sin_rad((data->unk_18 * TAU) / 360.0f);
             offsetZ = data->unk_1C * cos_rad((data->unk_18 * TAU) / 360.0f);
             offsetY = data->unk_04;
-    
+
             data->unk_04 -= 0.7;
-    
+
             if ((data->unk_03++ & 1) != 0) {
                 playFX_11(3, playerStatus->position.x + offsetX,
                         playerStatus->position.y + offsetY,
@@ -258,14 +258,14 @@ void entity_HeartBlock_change_render_script(Entity* entity) {
 }
 
 void entity_HeartBlock_show_tutorial_message(Entity* entity) {
-    if ((!gPlayerData.partners[1].enabled) && get_global_flag(SI_SAVE_FLAG(96)) == 0) {
+    if ((!gPlayerData.partners[1].enabled) && get_global_flag(EVT_SAVE_FLAG(96)) == 0) {
         UNK_TYPE* ptr = &D_802EB3C0;
         *ptr = 0;
         msg_get_printer_for_string(0x1D0001, ptr);
         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
         gOverrideFlags |= 0x40;
         disable_player_input();
-        set_global_flag(SI_SAVE_FLAG(96));
+        set_global_flag(EVT_SAVE_FLAG(96));
         return;
     }
     exec_entity_commandlist(entity);

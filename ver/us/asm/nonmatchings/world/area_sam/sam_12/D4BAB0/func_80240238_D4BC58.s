@@ -13,26 +13,26 @@ glabel func_80240238_D4BC58
 /* D4BC78 80240258 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* D4BC7C 8024025C 8E30000C */  lw        $s0, 0xc($s1)
 /* D4BC80 80240260 8E050000 */  lw        $a1, ($s0)
-/* D4BC84 80240264 0C0B210B */  jal       get_float_variable
+/* D4BC84 80240264 0C0B210B */  jal       evt_get_float_variable
 /* D4BC88 80240268 26100004 */   addiu    $s0, $s0, 4
 /* D4BC8C 8024026C 8E050000 */  lw        $a1, ($s0)
 /* D4BC90 80240270 26100004 */  addiu     $s0, $s0, 4
 /* D4BC94 80240274 0220202D */  daddu     $a0, $s1, $zero
-/* D4BC98 80240278 0C0B210B */  jal       get_float_variable
+/* D4BC98 80240278 0C0B210B */  jal       evt_get_float_variable
 /* D4BC9C 8024027C 46000686 */   mov.s    $f26, $f0
 /* D4BCA0 80240280 8E050000 */  lw        $a1, ($s0)
 /* D4BCA4 80240284 26100004 */  addiu     $s0, $s0, 4
 /* D4BCA8 80240288 0220202D */  daddu     $a0, $s1, $zero
-/* D4BCAC 8024028C 0C0B210B */  jal       get_float_variable
+/* D4BCAC 8024028C 0C0B210B */  jal       evt_get_float_variable
 /* D4BCB0 80240290 46000506 */   mov.s    $f20, $f0
 /* D4BCB4 80240294 8E050000 */  lw        $a1, ($s0)
 /* D4BCB8 80240298 26100004 */  addiu     $s0, $s0, 4
 /* D4BCBC 8024029C 0220202D */  daddu     $a0, $s1, $zero
-/* D4BCC0 802402A0 0C0B210B */  jal       get_float_variable
+/* D4BCC0 802402A0 0C0B210B */  jal       evt_get_float_variable
 /* D4BCC4 802402A4 46000586 */   mov.s    $f22, $f0
 /* D4BCC8 802402A8 0220202D */  daddu     $a0, $s1, $zero
 /* D4BCCC 802402AC 8E050000 */  lw        $a1, ($s0)
-/* D4BCD0 802402B0 0C0B210B */  jal       get_float_variable
+/* D4BCD0 802402B0 0C0B210B */  jal       evt_get_float_variable
 /* D4BCD4 802402B4 46000606 */   mov.s    $f24, $f0
 /* D4BCD8 802402B8 3C065555 */  lui       $a2, 0x5555
 /* D4BCDC 802402BC 3C078011 */  lui       $a3, %hi(gPlayerStatus)
@@ -80,7 +80,7 @@ glabel func_80240238_D4BC58
 /* D4BD84 80240364 E7A20010 */   swc1     $f2, 0x10($sp)
 /* D4BD88 80240368 0220202D */  daddu     $a0, $s1, $zero
 /* D4BD8C 8024036C 8FA60020 */  lw        $a2, 0x20($sp)
-/* D4BD90 80240370 0C0B2026 */  jal       set_variable
+/* D4BD90 80240370 0C0B2026 */  jal       evt_set_variable
 /* D4BD94 80240374 0200282D */   daddu    $a1, $s0, $zero
 /* D4BD98 80240378 8FBF0030 */  lw        $ra, 0x30($sp)
 /* D4BD9C 8024037C 8FB1002C */  lw        $s1, 0x2c($sp)

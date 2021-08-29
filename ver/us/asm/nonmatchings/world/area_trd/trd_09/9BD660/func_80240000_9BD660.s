@@ -40,7 +40,7 @@ glabel func_80240000_9BD660
 /* 9BD6E4 80240084 0200282D */  daddu     $a1, $s0, $zero
 /* 9BD6E8 80240088 2406FFFF */  addiu     $a2, $zero, -1
 .L8024008C:
-/* 9BD6EC 8024008C 0C0B2026 */  jal       set_variable
+/* 9BD6EC 8024008C 0C0B2026 */  jal       evt_set_variable
 /* 9BD6F0 80240090 00000000 */   nop
 /* 9BD6F4 80240094 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 9BD6F8 80240098 8FB40020 */  lw        $s4, 0x20($sp)

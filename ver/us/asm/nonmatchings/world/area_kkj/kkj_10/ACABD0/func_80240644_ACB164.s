@@ -48,7 +48,7 @@ glabel func_80240644_ACB164
 /* ACB210 802406F0 0220202D */  daddu     $a0, $s1, $zero
 /* ACB214 802406F4 4600008D */  trunc.w.s $f2, $f0
 /* ACB218 802406F8 44061000 */  mfc1      $a2, $f2
-/* ACB21C 802406FC 0C0B2026 */  jal       set_variable
+/* ACB21C 802406FC 0C0B2026 */  jal       evt_set_variable
 /* ACB220 80240700 0280282D */   daddu    $a1, $s4, $zero
 /* ACB224 80240704 8FBF0024 */  lw        $ra, 0x24($sp)
 /* ACB228 80240708 8FB40020 */  lw        $s4, 0x20($sp)

@@ -31,7 +31,7 @@ glabel func_80218680_4FF0D0
 /* 4FF138 802186E8 0040982D */   daddu    $s3, $v0, $zero
 /* 4FF13C 802186EC 0220202D */  daddu     $a0, $s1, $zero
 /* 4FF140 802186F0 8E050000 */  lw        $a1, ($s0)
-/* 4FF144 802186F4 0C0B210B */  jal       get_float_variable
+/* 4FF144 802186F4 0C0B210B */  jal       evt_get_float_variable
 /* 4FF148 802186F8 0040802D */   daddu    $s0, $v0, $zero
 /* 4FF14C 802186FC 8E42000C */  lw        $v0, 0xc($s2)
 /* 4FF150 80218700 44941000 */  mtc1      $s4, $f2

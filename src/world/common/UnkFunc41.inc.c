@@ -4,8 +4,8 @@
 ApiStatus N(UnkFunc41)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerData* playerData = &gPlayerData;
-    NpcID npcID = get_variable(script, *args++);
-    PartnerID partnerID = get_variable(script, *args++);
+    NpcID npcID = evt_get_variable(script, *args++);
+    PartnerID partnerID = evt_get_variable(script, *args++);
     Npc* npc = get_npc_safe(npcID);
 
     if (isInitialCall) {

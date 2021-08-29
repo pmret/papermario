@@ -24,21 +24,21 @@ EvtSource N(802407A8) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_GOOMBA_VILLAGE;
+    EVT_WORLD_LOCATION = LOCATION_GOOMBA_VILLAGE;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
     SetCamLeadPlayer(0, 0);
-    SI_AREA_FLAG(8) = 0;
+    EVT_AREA_FLAG(8) = 0;
     MakeNpcs(0, N(npcGroupList_80241450));
     ClearDefeatedEnemies();
     await N(makeEntities);
     await N(802422B8);
     spawn N(802406C0);
-    GetEntryID(SI_VAR(0));
-    if (SI_VAR(0) != 2) {
-        SI_VAR(0) = N(802407A8);
+    GetEntryID(EVT_VAR(0));
+    if (EVT_VAR(0) != 2) {
+        EVT_VAR(0) = N(802407A8);
         spawn EnterWalk;
     } else {
         spawn N(802407A8);
@@ -60,7 +60,7 @@ NpcSettings N(npcSettings_80240950) = {
 
 EvtSource N(8024097C) = SCRIPT({
 1:
-    if (SI_AREA_FLAG(8) == 1) {
+    if (EVT_AREA_FLAG(8) == 1) {
 100:
         AwaitPlayerLeave(294, 123, 170);
         EnableNpcAI(0, 0);
@@ -68,11 +68,11 @@ EvtSource N(8024097C) = SCRIPT({
         SetNpcSpeed(NPC_GOOMPA, 4.0);
         SetNpcAnimation(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_3);
         N(func_802401B0_8C8140)();
-        GetAngleToPlayer(0, SI_VAR(2));
-        loop SI_VAR(1) {
-            GetNpcPos(NPC_GOOMPA, SI_VAR(7), SI_VAR(8), SI_VAR(9));
-            AddVectorPolar(SI_VAR(7), SI_VAR(9), 4.0, SI_VAR(2));
-            SetNpcPos(NPC_GOOMPA, SI_VAR(7), SI_VAR(8), SI_VAR(9));
+        GetAngleToPlayer(0, EVT_VAR(2));
+        loop EVT_VAR(1) {
+            GetNpcPos(NPC_GOOMPA, EVT_VAR(7), EVT_VAR(8), EVT_VAR(9));
+            AddVectorPolar(EVT_VAR(7), EVT_VAR(9), 4.0, EVT_VAR(2));
+            SetNpcPos(NPC_GOOMPA, EVT_VAR(7), EVT_VAR(8), EVT_VAR(9));
             sleep 1;
         }
         PlayerFaceNpc(0, 3);
@@ -89,12 +89,12 @@ EvtSource N(8024097C) = SCRIPT({
 
 EvtSource N(npcAI_80240B50) = SCRIPT({
 1:
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         == STORY_CH0_FELL_OFF_CLIFF {
 89:
             N(UnkPositionFunc)(-118, 86, -70, -15);
             sleep 1;
-            if (SI_VAR(0) == 0) {
+            if (EVT_VAR(0) == 0) {
                 goto 89;
             }
             DisablePlayerInput(TRUE);
@@ -116,7 +116,7 @@ EvtSource N(npcAI_80240B50) = SCRIPT({
                 SetPlayerSpeed(2.0);
                 PlayerMoveTo(-38, 68, 0);
             }
-            GetNpcPos(NPC_GOOMPA, SI_VAR(7), SI_VAR(8), SI_VAR(9));
+            GetNpcPos(NPC_GOOMPA, EVT_VAR(7), EVT_VAR(8), EVT_VAR(9));
             SetNpcSpeed(NPC_GOOMPA, 4.0);
             SetNpcAnimation(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_3);
             NpcMoveTo(NPC_GOOMPA, 0, 70, 0);
@@ -129,10 +129,10 @@ EvtSource N(npcAI_80240B50) = SCRIPT({
             sleep 30;
             SpeakToPlayer(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A8));
             N(UnkFunc41)(0, 5);
-            SI_STORY_PROGRESS = STORY_CH0_GOOMPA_JOINED_PARTY;
+            EVT_STORY_PROGRESS = STORY_CH0_GOOMPA_JOINED_PARTY;
             UseSettingsFrom(0, -220, 20, -72);
-            GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
             SetCamSpeed(0, 3.0);
             PanToTarget(0, 0, 1);
             WaitForCam(0, 1.0);
@@ -148,24 +148,24 @@ EvtSource N(hit_80240F64) = SCRIPT({
     SetNpcAnimation(NPC_SELF, NPC_ANIM_goompa_Palette_00_Anim_7);
     sleep 10;
     SetNpcAnimation(NPC_SELF, NPC_ANIM_goompa_Palette_00_Anim_1);
-    SI_MAP_VAR(0) += 1;
-    if (SI_MAP_VAR(0) < 3) {
-        GetOwnerEncounterTrigger(SI_VAR(0));
-        match SI_VAR(0) {
+    EVT_MAP_VAR(0) += 1;
+    if (EVT_MAP_VAR(0) < 3) {
+        GetOwnerEncounterTrigger(EVT_VAR(0));
+        match EVT_VAR(0) {
             == 2 {
                 SetNpcVar(0, 0, 1);
-                if (SI_AREA_FLAG(6) == 1) {
+                if (EVT_AREA_FLAG(6) == 1) {
                 } else {
-                    SI_AREA_FLAG(6) = 1;
-                    SI_AREA_FLAG(7) = 0;
+                    EVT_AREA_FLAG(6) = 1;
+                    EVT_AREA_FLAG(7) = 0;
                 }
             }
             == 4 {
                 SetNpcVar(0, 0, 1);
-                if (SI_AREA_FLAG(7) == 1) {
+                if (EVT_AREA_FLAG(7) == 1) {
                 } else {
-                    SI_AREA_FLAG(6) = 0;
-                    SI_AREA_FLAG(7) = 1;
+                    EVT_AREA_FLAG(6) = 0;
+                    EVT_AREA_FLAG(7) = 1;
                 }
             }
         }
@@ -173,8 +173,8 @@ EvtSource N(hit_80240F64) = SCRIPT({
         SetNpcAnimation(NPC_SELF, NPC_ANIM_goompa_Palette_00_Anim_3);
     } else {
         sleep 10;
-        GetNpcPos(NPC_GOOMPA, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SetNpcPos(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetNpcPos(NPC_GOOMPA, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        SetNpcPos(NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         SetNpcFlagBits(NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE);
         SetNpcPos(NPC_GOOMPA, 0, -1000, 0);
         SetNpcFlagBits(NPC_GOOMPA, NPC_FLAG_100, FALSE);
@@ -188,7 +188,7 @@ EvtSource N(init_802411A8) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(npcAI_80240B50));
     BindNpcAux(-1, N(8024097C));
     BindNpcHit(-1, N(hit_80240F64));
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         >= STORY_CH0_GOOMPA_JOINED_PARTY {
             SetNpcFlagBits(NPC_SELF, NPC_FLAG_GRAVITY, FALSE);
             SetNpcFlagBits(NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE);
@@ -239,45 +239,45 @@ static s32 N(pad_1468)[] = {
 
 EvtSource N(80241470) = SCRIPT({
     ModifyColliderFlags(0, 9, 0x7FFFFE00);
-    SI_STORY_PROGRESS = STORY_CH0_LEFT_THE_PLAYGROUND;
+    EVT_STORY_PROGRESS = STORY_CH0_LEFT_THE_PLAYGROUND;
 });
 
 EvtSource N(802414A8) = SCRIPT({
-    SI_SAVE_FLAG(54) = 1;
+    EVT_SAVE_FLAG(54) = 1;
 });
 
 EvtSource N(802414C8) = SCRIPT({
 0:
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetCamTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    SetCamTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     sleep 1;
     goto 0;
 });
 
 EvtSource N(makeEntities) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH0_LEFT_THE_PLAYGROUND) {
+    if (EVT_STORY_PROGRESS < STORY_CH0_LEFT_THE_PLAYGROUND) {
         MakeEntity(0x802EA10C, 45, 0, 70, 15, MAKE_ENTITY_END);
         AssignScript(N(80241470));
     } else {
         ModifyColliderFlags(0, 9, 0x7FFFFE00);
     }
-    if (SI_SAVE_FLAG(54) == 0) {
+    if (EVT_SAVE_FLAG(54) == 0) {
         MakeEntity(0x802EA19C, 230, 0, 310, 15, MAKE_ENTITY_END);
         AssignScript(N(802414A8));
     }
     MakeEntity(0x802EA588, 230, 60, 310, 15, ITEM_REPEL_GEL, MAKE_ENTITY_END);
-    AssignBlockFlag(SI_SAVE_FLAG(52));
+    AssignBlockFlag(EVT_SAVE_FLAG(52));
     MakeEntity(0x802EA0C4, 230, 50, -160, 15, MAKE_ENTITY_END);
     MakeEntity(0x802EA0C4, 165, 0, 380, 20, MAKE_ENTITY_END);
     MakeEntity(0x802EA564, -170, 0, 370, 43, ITEM_COIN, MAKE_ENTITY_END);
-    AssignBlockFlag(SI_SAVE_FLAG(50));
+    AssignBlockFlag(EVT_SAVE_FLAG(50));
     MakeEntity(0x802EAA54, 345, 75, -250, 0, ITEM_WATER, MAKE_ENTITY_END);
-    MakeItemEntity(ITEM_COIN, 345, 205, -250, 17, SI_SAVE_FLAG(56));
-    MakeItemEntity(ITEM_COIN, 345, 230, -250, 17, SI_SAVE_FLAG(57));
-    MakeItemEntity(ITEM_COIN, 345, 255, -250, 17, SI_SAVE_FLAG(58));
-    MakeItemEntity(ITEM_COIN, 345, 280, -250, 17, SI_SAVE_FLAG(59));
-    MakeItemEntity(ITEM_FIRE_FLOWER, 229, 250, -156, 17, SI_SAVE_FLAG(49));
+    MakeItemEntity(ITEM_COIN, 345, 205, -250, 17, EVT_SAVE_FLAG(56));
+    MakeItemEntity(ITEM_COIN, 345, 230, -250, 17, EVT_SAVE_FLAG(57));
+    MakeItemEntity(ITEM_COIN, 345, 255, -250, 17, EVT_SAVE_FLAG(58));
+    MakeItemEntity(ITEM_COIN, 345, 280, -250, 17, EVT_SAVE_FLAG(59));
+    MakeItemEntity(ITEM_FIRE_FLOWER, 229, 250, -156, 17, EVT_SAVE_FLAG(49));
     MakeEntity(0x802EAB04, 300, 0, 150, 0, ITEM_PULSE_STONE, MAKE_ENTITY_END);
-    AssignPanelFlag(SI_SAVE_FLAG(88));
+    AssignPanelFlag(EVT_SAVE_FLAG(88));
     MakeEntity(0x802EA7E0, 130, 60, 0, 0, MAKE_ENTITY_END);
 });

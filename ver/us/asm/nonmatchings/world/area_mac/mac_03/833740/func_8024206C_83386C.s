@@ -34,7 +34,7 @@ glabel func_8024206C_83386C
 /* 8338E0 802420E0 3C05FD05 */  lui       $a1, 0xfd05
 /* 8338E4 802420E4 34A50F82 */  ori       $a1, $a1, 0xf82
 /* 8338E8 802420E8 0040802D */  daddu     $s0, $v0, $zero
-/* 8338EC 802420EC 0C0B2026 */  jal       set_variable
+/* 8338EC 802420EC 0C0B2026 */  jal       evt_set_variable
 /* 8338F0 802420F0 0200302D */   daddu    $a2, $s0, $zero
 /* 8338F4 802420F4 1A60002F */  blez      $s3, .L802421B4
 /* 8338F8 802420F8 24150002 */   addiu    $s5, $zero, 2

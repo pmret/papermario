@@ -176,7 +176,7 @@ glabel func_8024032C_AD43BC
 /* AD4640 802405B0 02E0202D */  daddu     $a0, $s7, $zero
 .L802405B4:
 /* AD4644 802405B4 03C0282D */  daddu     $a1, $fp, $zero
-/* AD4648 802405B8 0C0B2026 */  jal       set_variable
+/* AD4648 802405B8 0C0B2026 */  jal       evt_set_variable
 /* AD464C 802405BC 0200302D */   daddu    $a2, $s0, $zero
 /* AD4650 802405C0 8FBF0054 */  lw        $ra, 0x54($sp)
 /* AD4654 802405C4 8FBE0050 */  lw        $fp, 0x50($sp)

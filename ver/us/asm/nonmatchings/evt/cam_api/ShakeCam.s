@@ -36,7 +36,7 @@ glabel ShakeCam
 /* EFCB8 802CB308 0040982D */   daddu    $s3, $v0, $zero
 /* EFCBC 802CB30C 0040A02D */  daddu     $s4, $v0, $zero
 /* EFCC0 802CB310 8E050000 */  lw        $a1, ($s0)
-/* EFCC4 802CB314 0C0B210B */  jal       get_float_variable
+/* EFCC4 802CB314 0C0B210B */  jal       evt_get_float_variable
 /* EFCC8 802CB318 02A0202D */   daddu    $a0, $s5, $zero
 /* EFCCC 802CB31C 3C04800B */  lui       $a0, %hi(gCameras)
 /* EFCD0 802CB320 24841D80 */  addiu     $a0, $a0, %lo(gCameras)

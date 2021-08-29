@@ -146,7 +146,7 @@ glabel PartnerTestEnemy
 /* 1AEFAC 802806CC 04400006 */  bltz      $v0, .L802806E8
 /* 1AEFB0 802806D0 0240202D */   daddu    $a0, $s2, $zero
 /* 1AEFB4 802806D4 0280282D */  daddu     $a1, $s4, $zero
-/* 1AEFB8 802806D8 0C0B2026 */  jal       set_variable
+/* 1AEFB8 802806D8 0C0B2026 */  jal       evt_set_variable
 /* 1AEFBC 802806DC 0040302D */   daddu    $a2, $v0, $zero
 /* 1AEFC0 802806E0 080A01BB */  j         .L802806EC
 /* 1AEFC4 802806E4 24020002 */   addiu    $v0, $zero, 2

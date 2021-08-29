@@ -151,7 +151,7 @@ glabel GetStatusFlags
 .L8026F420:
 /* 19DD00 8026F420 0220202D */  daddu     $a0, $s1, $zero
 /* 19DD04 8026F424 0240282D */  daddu     $a1, $s2, $zero
-/* 19DD08 8026F428 0C0B2026 */  jal       set_variable
+/* 19DD08 8026F428 0C0B2026 */  jal       evt_set_variable
 /* 19DD0C 8026F42C 0200302D */   daddu    $a2, $s0, $zero
 /* 19DD10 8026F430 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 19DD14 8026F434 8FB20018 */  lw        $s2, 0x18($sp)

@@ -14,7 +14,7 @@ glabel func_80240818_D7F578
 /* D7F59C 8024083C 26100004 */   addiu    $s0, $s0, 4
 /* D7F5A0 80240840 0220202D */  daddu     $a0, $s1, $zero
 /* D7F5A4 80240844 8E050000 */  lw        $a1, ($s0)
-/* D7F5A8 80240848 0C0B210B */  jal       get_float_variable
+/* D7F5A8 80240848 0C0B210B */  jal       evt_get_float_variable
 /* D7F5AC 8024084C 0040802D */   daddu    $s0, $v0, $zero
 /* D7F5B0 80240850 0220202D */  daddu     $a0, $s1, $zero
 /* D7F5B4 80240854 3C05FD05 */  lui       $a1, 0xfd05

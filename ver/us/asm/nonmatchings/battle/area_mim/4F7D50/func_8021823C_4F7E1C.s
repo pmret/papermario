@@ -56,11 +56,11 @@ glabel func_8021823C_4F7E1C
 /* 4F7EE8 80218308 4494A000 */  mtc1      $s4, $f20
 /* 4F7EEC 8021830C 00000000 */  nop
 /* 4F7EF0 80218310 4680A520 */  cvt.s.w   $f20, $f20
-/* 4F7EF4 80218314 0C0B2190 */  jal       set_float_variable
+/* 4F7EF4 80218314 0C0B2190 */  jal       evt_set_float_variable
 /* 4F7EF8 80218318 4616A501 */   sub.s    $f20, $f20, $f22
 /* 4F7EFC 8021831C 8E050000 */  lw        $a1, ($s0)
 /* 4F7F00 80218320 4406A000 */  mfc1      $a2, $f20
-/* 4F7F04 80218324 0C0B2190 */  jal       set_float_variable
+/* 4F7F04 80218324 0C0B2190 */  jal       evt_set_float_variable
 /* 4F7F08 80218328 0220202D */   daddu    $a0, $s1, $zero
 /* 4F7F0C 8021832C 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 4F7F10 80218330 8FB40020 */  lw        $s4, 0x20($sp)

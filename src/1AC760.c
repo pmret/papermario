@@ -127,8 +127,8 @@ ApiStatus MakeOwnerTargetIndex(Evt* script, s32 isInitialCall) {
     Actor* actor = get_actor(script->owner1.actorID);
     s32 numTargets = actor->targetListLength;
     s8* targetList = &actor->targetIndexList;
-    s32 arg1 = get_variable(script, *args++);
-    s32 arg2 = get_variable(script, *args++);
+    s32 arg1 = evt_get_variable(script, *args++);
+    s32 arg2 = evt_get_variable(script, *args++);
     s32 otherArg = *args++;
     SelectableTarget* selectableTarget;
 
@@ -148,7 +148,7 @@ ApiStatus MakeOwnerTargetIndex(Evt* script, s32 isInitialCall) {
         actor->targetPartIndex = selectableTarget->partID;
     }
 
-    set_variable(script, otherArg, arg2);
+    evt_set_variable(script, otherArg, arg2);
     return ApiStatus_DONE2;
 }
 
@@ -159,7 +159,7 @@ ApiStatus func_8027FC90(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hitResult;
     Actor* actor;
-    ActorID actorID = get_variable(script, *args++);
+    ActorID actorID = evt_get_variable(script, *args++);
     s32 outVar;
 
     if (actorID == ACTOR_SELF) {
@@ -173,14 +173,14 @@ ApiStatus func_8027FC90(Evt* script, s32 isInitialCall) {
     hitResult = calc_partner_damage_enemy();
     show_damage_popup(actor->walk.goalPos.x, actor->walk.goalPos.y, actor->walk.goalPos.z, battleStatus->lastAttackDamage,
                       0);
-    set_variable(script, outVar, hitResult);
+    evt_set_variable(script, outVar, hitResult);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetActorLevel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = get_variable(script, *args++);
+    ActorID actorID = evt_get_variable(script, *args++);
     Bytecode* outVar;
 
     if (actorID == ACTOR_SELF) {
@@ -188,7 +188,7 @@ ApiStatus GetActorLevel(Evt* script, s32 isInitialCall) {
     }
 
     outVar = *args++;
-    set_variable(script, outVar, get_actor(actorID)->staticActorData->level);
+    evt_set_variable(script, outVar, get_actor(actorID)->staticActorData->level);
 
     return ApiStatus_DONE2;
 }
@@ -205,8 +205,8 @@ ApiStatus func_8028070C(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
-    s32 damageAmount = get_variable(script, *args++);
-    s32 event = get_variable(script, *args++);
+    s32 damageAmount = evt_get_variable(script, *args++);
+    s32 event = evt_get_variable(script, *args++);
 
     battleStatus->currentTargetID = actor->targetActorID;
     battleStatus->currentTargetPart = actor->targetPartIndex;
@@ -239,7 +239,7 @@ ApiStatus GetActionCommandResult(Evt* script, s32 isInitialCall) {
         outVal = actionSuccess;
     }
 
-    set_variable(script, var, outVal);
+    evt_set_variable(script, var, outVal);
     return ApiStatus_DONE2;
 }
 

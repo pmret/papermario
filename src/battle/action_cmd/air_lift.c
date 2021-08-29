@@ -18,7 +18,7 @@ ApiStatus func_802A9000_428A70(Evt* script, s32 isInitialCall) {
     battleStatus->unk_82 = 0;
     battleStatus->unk_86 = 127;
     func_80268858();
-    actionCommandStatus->unk_5A = get_variable(script, *args++);
+    actionCommandStatus->unk_5A = evt_get_variable(script, *args++);
     actionCommandStatus->actionCommandID = ACTION_COMMAND_AIR_LIFT;
     actionCommandStatus->unk_61 = 1;
     actionCommandStatus->state = 0;

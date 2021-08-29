@@ -34,7 +34,7 @@ glabel func_802418AC_84447C
 /* 8444E8 80241918 0240282D */  daddu     $a1, $s2, $zero
 /* 8444EC 8024191C 24060001 */  addiu     $a2, $zero, 1
 .L80241920:
-/* 8444F0 80241920 0C0B2026 */  jal       set_variable
+/* 8444F0 80241920 0C0B2026 */  jal       evt_set_variable
 /* 8444F4 80241924 00000000 */   nop
 /* 8444F8 80241928 24020002 */  addiu     $v0, $zero, 2
 /* 8444FC 8024192C 8FBF001C */  lw        $ra, 0x1c($sp)

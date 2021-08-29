@@ -16,7 +16,7 @@ glabel func_802405A8_B5E858
 /* B5E884 802405D4 0040202D */   daddu    $a0, $v0, $zero
 /* B5E888 802405D8 0220202D */  daddu     $a0, $s1, $zero
 /* B5E88C 802405DC 8E050000 */  lw        $a1, ($s0)
-/* B5E890 802405E0 0C0B210B */  jal       get_float_variable
+/* B5E890 802405E0 0C0B210B */  jal       evt_get_float_variable
 /* B5E894 802405E4 0040802D */   daddu    $s0, $v0, $zero
 /* B5E898 802405E8 0200202D */  daddu     $a0, $s0, $zero
 /* B5E89C 802405EC 0C046B4C */  jal       get_model_from_list_index

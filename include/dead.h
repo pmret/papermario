@@ -2,11 +2,11 @@
 #define _DEAD_H_
 
 #define gCameras dead_gCameras
-#define get_variable dead_get_variable
-#define set_variable dead_set_variable
-#define get_float_variable dead_get_float_variable
+#define evt_get_variable dead_evt_get_variable
+#define evt_set_variable dead_evt_set_variable
+#define evt_get_float_variable dead_evt_get_float_variable
 #define cos_rad dead_cos_rad
-#define set_float_variable dead_set_float_variable
+#define evt_set_float_variable dead_evt_set_float_variable
 #define playFX_11 dead_playFX_11
 #define gPlayerStatusPtr dead_gPlayerStatusPtr
 #define set_main_pan_u dead_set_main_pan_u

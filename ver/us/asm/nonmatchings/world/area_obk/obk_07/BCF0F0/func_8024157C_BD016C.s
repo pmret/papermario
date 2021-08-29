@@ -10,7 +10,7 @@ glabel func_8024157C_BD016C
 /* BD0180 80241590 3C05FE36 */  lui       $a1, 0xfe36
 /* BD0184 80241594 34A53C80 */  ori       $a1, $a1, 0x3c80
 /* BD0188 80241598 8C4601D0 */  lw        $a2, 0x1d0($v0)
-/* BD018C 8024159C 0C0B2190 */  jal       set_float_variable
+/* BD018C 8024159C 0C0B2190 */  jal       evt_set_float_variable
 /* BD0190 802415A0 0200202D */   daddu    $a0, $s0, $zero
 /* BD0194 802415A4 8FBF0014 */  lw        $ra, 0x14($sp)
 /* BD0198 802415A8 8FB00010 */  lw        $s0, 0x10($sp)

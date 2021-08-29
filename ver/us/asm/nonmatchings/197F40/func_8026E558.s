@@ -204,7 +204,7 @@ glabel func_8026E558
 .L8026E838:
 /* 19D118 8026E838 0260202D */  daddu     $a0, $s3, $zero
 .L8026E83C:
-/* 19D11C 8026E83C 0C0B2026 */  jal       set_variable
+/* 19D11C 8026E83C 0C0B2026 */  jal       evt_set_variable
 /* 19D120 8026E840 0200282D */   daddu    $a1, $s0, $zero
 /* 19D124 8026E844 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 19D128 8026E848 8FB3001C */  lw        $s3, 0x1c($sp)
