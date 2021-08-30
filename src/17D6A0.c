@@ -122,7 +122,7 @@ INCLUDE_ASM(s32, "17D6A0", func_8024F768);
 void func_8024F7C8(void);
 INCLUDE_ASM(s32, "17D6A0", func_8024F7C8);
 
-s32 func_8024F84C(Evt* script, s32 isInitialCall) {
+ApiStatus func_8024F84C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
