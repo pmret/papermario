@@ -12,13 +12,13 @@ glabel func_802424A0_833CA0
 /* 833CBC 802424BC AFB40020 */  sw        $s4, 0x20($sp)
 /* 833CC0 802424C0 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 833CC4 802424C4 AFB20018 */  sw        $s2, 0x18($sp)
-/* 833CC8 802424C8 0C0B1EAF */  jal       get_variable
+/* 833CC8 802424C8 0C0B1EAF */  jal       evt_get_variable
 /* 833CCC 802424CC AFB00010 */   sw       $s0, 0x10($sp)
 /* 833CD0 802424D0 0220202D */  daddu     $a0, $s1, $zero
 /* 833CD4 802424D4 8E30000C */  lw        $s0, 0xc($s1)
 /* 833CD8 802424D8 0040982D */  daddu     $s3, $v0, $zero
 /* 833CDC 802424DC 8E050000 */  lw        $a1, ($s0)
-/* 833CE0 802424E0 0C0B1EAF */  jal       get_variable
+/* 833CE0 802424E0 0C0B1EAF */  jal       evt_get_variable
 /* 833CE4 802424E4 26100004 */   addiu    $s0, $s0, 4
 /* 833CE8 802424E8 8E050000 */  lw        $a1, ($s0)
 /* 833CEC 802424EC 26100004 */  addiu     $s0, $s0, 4

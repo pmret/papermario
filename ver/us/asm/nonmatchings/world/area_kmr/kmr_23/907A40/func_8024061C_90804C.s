@@ -10,7 +10,7 @@ glabel func_8024061C_90804C
 /* 908060 80240630 3C05FD05 */  lui       $a1, 0xfd05
 /* 908064 80240634 34A50F80 */  ori       $a1, $a1, 0xf80
 /* 908068 80240638 AFBF001C */  sw        $ra, 0x1c($sp)
-/* 90806C 8024063C 0C0B1EAF */  jal       get_variable
+/* 90806C 8024063C 0C0B1EAF */  jal       evt_get_variable
 /* 908070 80240640 AFB10014 */   sw       $s1, 0x14($sp)
 /* 908074 80240644 12000002 */  beqz      $s0, .L80240650
 /* 908078 80240648 0040882D */   daddu    $s1, $v0, $zero

@@ -9,7 +9,7 @@ glabel func_80218C48_58CF38
 /* 58CF48 80218C58 AFB00010 */  sw        $s0, 0x10($sp)
 /* 58CF4C 80218C5C 8E30000C */  lw        $s0, 0xc($s1)
 /* 58CF50 80218C60 8E050000 */  lw        $a1, ($s0)
-/* 58CF54 80218C64 0C0B1EAF */  jal       get_variable
+/* 58CF54 80218C64 0C0B1EAF */  jal       evt_get_variable
 /* 58CF58 80218C68 26100004 */   addiu    $s0, $s0, 4
 /* 58CF5C 80218C6C 0040202D */  daddu     $a0, $v0, $zero
 /* 58CF60 80218C70 2402FF81 */  addiu     $v0, $zero, -0x7f

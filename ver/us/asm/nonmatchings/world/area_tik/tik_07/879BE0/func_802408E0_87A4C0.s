@@ -50,7 +50,7 @@ glabel func_802408E0_87A4C0
 /* 87A574 80240994 3C013F80 */  lui       $at, 0x3f80
 /* 87A578 80240998 4481B000 */  mtc1      $at, $f22
 /* 87A57C 8024099C 4480A000 */  mtc1      $zero, $f20
-/* 87A580 802409A0 0C0B1EAF */  jal       get_variable
+/* 87A580 802409A0 0C0B1EAF */  jal       evt_get_variable
 /* 87A584 802409A4 0240802D */   daddu    $s0, $s2, $zero
 /* 87A588 802409A8 0C04417A */  jal       get_entity_by_index
 /* 87A58C 802409AC 0040202D */   daddu    $a0, $v0, $zero

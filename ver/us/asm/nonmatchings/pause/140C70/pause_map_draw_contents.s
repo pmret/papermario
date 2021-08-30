@@ -252,7 +252,7 @@ glabel pause_map_draw_contents
 /* 141218 8024DED8 87D1FFFA */  lh        $s1, -6($fp)
 /* 14121C 8024DEDC 85F00000 */  lh        $s0, ($t7)
 /* 141220 8024DEE0 02E52821 */  addu      $a1, $s7, $a1
-/* 141224 8024DEE4 0C0B1EAF */  jal       get_variable
+/* 141224 8024DEE4 0C0B1EAF */  jal       evt_get_variable
 /* 141228 8024DEE8 AFA80068 */   sw       $t0, 0x68($sp)
 /* 14122C 8024DEEC 8FA80068 */  lw        $t0, 0x68($sp)
 /* 141230 8024DEF0 5040007D */  beql      $v0, $zero, .L8024E0E8

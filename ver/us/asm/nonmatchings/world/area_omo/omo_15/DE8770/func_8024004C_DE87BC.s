@@ -21,12 +21,12 @@ glabel func_8024004C_DE87BC
 /* DE87FC 8024008C AE500084 */   sw       $s0, 0x84($s2)
 /* DE8800 80240090 8E250000 */  lw        $a1, ($s1)
 /* DE8804 80240094 26310004 */  addiu     $s1, $s1, 4
-/* DE8808 80240098 0C0B1EAF */  jal       get_variable
+/* DE8808 80240098 0C0B1EAF */  jal       evt_get_variable
 /* DE880C 8024009C 0240202D */   daddu    $a0, $s2, $zero
 /* DE8810 802400A0 AE020038 */  sw        $v0, 0x38($s0)
 /* DE8814 802400A4 8E250000 */  lw        $a1, ($s1)
 /* DE8818 802400A8 26310004 */  addiu     $s1, $s1, 4
-/* DE881C 802400AC 0C0B1EAF */  jal       get_variable
+/* DE881C 802400AC 0C0B1EAF */  jal       evt_get_variable
 /* DE8820 802400B0 0240202D */   daddu    $a0, $s2, $zero
 /* DE8824 802400B4 AE02003C */  sw        $v0, 0x3c($s0)
 /* DE8828 802400B8 8E250000 */  lw        $a1, ($s1)

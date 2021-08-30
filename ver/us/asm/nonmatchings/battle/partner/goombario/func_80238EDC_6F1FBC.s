@@ -50,16 +50,16 @@ glabel func_80238EDC_6F1FBC
 .L80238F84:
 /* 6F2064 80238F84 8E250000 */  lw        $a1, ($s1)
 /* 6F2068 80238F88 26310004 */  addiu     $s1, $s1, 4
-/* 6F206C 80238F8C 0C0B1EAF */  jal       get_variable
+/* 6F206C 80238F8C 0C0B1EAF */  jal       evt_get_variable
 /* 6F2070 80238F90 0260202D */   daddu    $a0, $s3, $zero
 /* 6F2074 80238F94 8E250000 */  lw        $a1, ($s1)
 /* 6F2078 80238F98 26310004 */  addiu     $s1, $s1, 4
 /* 6F207C 80238F9C 0260202D */  daddu     $a0, $s3, $zero
-/* 6F2080 80238FA0 0C0B1EAF */  jal       get_variable
+/* 6F2080 80238FA0 0C0B1EAF */  jal       evt_get_variable
 /* 6F2084 80238FA4 0040802D */   daddu    $s0, $v0, $zero
 /* 6F2088 80238FA8 0260202D */  daddu     $a0, $s3, $zero
 /* 6F208C 80238FAC 8E250000 */  lw        $a1, ($s1)
-/* 6F2090 80238FB0 0C0B1EAF */  jal       get_variable
+/* 6F2090 80238FB0 0C0B1EAF */  jal       evt_get_variable
 /* 6F2094 80238FB4 0040882D */   daddu    $s1, $v0, $zero
 /* 6F2098 80238FB8 0240202D */  daddu     $a0, $s2, $zero
 /* 6F209C 80238FBC 44901000 */  mtc1      $s0, $f2

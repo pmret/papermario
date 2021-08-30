@@ -10,16 +10,16 @@ glabel func_80240500_AE5A90
 /* AE5AA4 80240514 AFB00028 */  sw        $s0, 0x28($sp)
 /* AE5AA8 80240518 8E30000C */  lw        $s0, 0xc($s1)
 /* AE5AAC 8024051C 8E050000 */  lw        $a1, ($s0)
-/* AE5AB0 80240520 0C0B1EAF */  jal       get_variable
+/* AE5AB0 80240520 0C0B1EAF */  jal       evt_get_variable
 /* AE5AB4 80240524 26100004 */   addiu    $s0, $s0, 4
 /* AE5AB8 80240528 8E050000 */  lw        $a1, ($s0)
 /* AE5ABC 8024052C 26100004 */  addiu     $s0, $s0, 4
 /* AE5AC0 80240530 0220202D */  daddu     $a0, $s1, $zero
-/* AE5AC4 80240534 0C0B1EAF */  jal       get_variable
+/* AE5AC4 80240534 0C0B1EAF */  jal       evt_get_variable
 /* AE5AC8 80240538 0040902D */   daddu    $s2, $v0, $zero
 /* AE5ACC 8024053C 0220202D */  daddu     $a0, $s1, $zero
 /* AE5AD0 80240540 8E050000 */  lw        $a1, ($s0)
-/* AE5AD4 80240544 0C0B1EAF */  jal       get_variable
+/* AE5AD4 80240544 0C0B1EAF */  jal       evt_get_variable
 /* AE5AD8 80240548 0040802D */   daddu    $s0, $v0, $zero
 /* AE5ADC 8024054C 0000202D */  daddu     $a0, $zero, $zero
 /* AE5AE0 80240550 24050005 */  addiu     $a1, $zero, 5

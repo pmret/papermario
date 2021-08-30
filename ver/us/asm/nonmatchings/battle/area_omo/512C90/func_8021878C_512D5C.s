@@ -13,17 +13,17 @@ glabel func_8021878C_512D5C
 /* 512D7C 802187AC F7B40028 */  sdc1      $f20, 0x28($sp)
 /* 512D80 802187B0 8E30000C */  lw        $s0, 0xc($s1)
 /* 512D84 802187B4 8E050000 */  lw        $a1, ($s0)
-/* 512D88 802187B8 0C0B1EAF */  jal       get_variable
+/* 512D88 802187B8 0C0B1EAF */  jal       evt_get_variable
 /* 512D8C 802187BC 26100004 */   addiu    $s0, $s0, 4
 /* 512D90 802187C0 8E050000 */  lw        $a1, ($s0)
 /* 512D94 802187C4 26100004 */  addiu     $s0, $s0, 4
 /* 512D98 802187C8 0220202D */  daddu     $a0, $s1, $zero
-/* 512D9C 802187CC 0C0B1EAF */  jal       get_variable
+/* 512D9C 802187CC 0C0B1EAF */  jal       evt_get_variable
 /* 512DA0 802187D0 0040A02D */   daddu    $s4, $v0, $zero
 /* 512DA4 802187D4 8E050000 */  lw        $a1, ($s0)
 /* 512DA8 802187D8 26100004 */  addiu     $s0, $s0, 4
 /* 512DAC 802187DC 0220202D */  daddu     $a0, $s1, $zero
-/* 512DB0 802187E0 0C0B1EAF */  jal       get_variable
+/* 512DB0 802187E0 0C0B1EAF */  jal       evt_get_variable
 /* 512DB4 802187E4 0040982D */   daddu    $s3, $v0, $zero
 /* 512DB8 802187E8 8E050000 */  lw        $a1, ($s0)
 /* 512DBC 802187EC 26100004 */  addiu     $s0, $s0, 4
@@ -32,7 +32,7 @@ glabel func_8021878C_512D5C
 /* 512DC8 802187F8 0040902D */   daddu    $s2, $v0, $zero
 /* 512DCC 802187FC 0220202D */  daddu     $a0, $s1, $zero
 /* 512DD0 80218800 8E050000 */  lw        $a1, ($s0)
-/* 512DD4 80218804 0C0B1EAF */  jal       get_variable
+/* 512DD4 80218804 0C0B1EAF */  jal       evt_get_variable
 /* 512DD8 80218808 46000506 */   mov.s    $f20, $f0
 /* 512DDC 8021880C 24040006 */  addiu     $a0, $zero, 6
 /* 512DE0 80218810 3C058023 */  lui       $a1, %hi(D_802310D0)

@@ -10,16 +10,16 @@ glabel func_80240310_C804B0
 /* C804C4 80240324 AFB00010 */  sw        $s0, 0x10($sp)
 /* C804C8 80240328 8E30000C */  lw        $s0, 0xc($s1)
 /* C804CC 8024032C 8E050000 */  lw        $a1, ($s0)
-/* C804D0 80240330 0C0B1EAF */  jal       get_variable
+/* C804D0 80240330 0C0B1EAF */  jal       evt_get_variable
 /* C804D4 80240334 26100004 */   addiu    $s0, $s0, 4
 /* C804D8 80240338 8E050000 */  lw        $a1, ($s0)
 /* C804DC 8024033C 26100004 */  addiu     $s0, $s0, 4
 /* C804E0 80240340 0220202D */  daddu     $a0, $s1, $zero
-/* C804E4 80240344 0C0B1EAF */  jal       get_variable
+/* C804E4 80240344 0C0B1EAF */  jal       evt_get_variable
 /* C804E8 80240348 0040902D */   daddu    $s2, $v0, $zero
 /* C804EC 8024034C 0220202D */  daddu     $a0, $s1, $zero
 /* C804F0 80240350 8E050000 */  lw        $a1, ($s0)
-/* C804F4 80240354 0C0B1EAF */  jal       get_variable
+/* C804F4 80240354 0C0B1EAF */  jal       evt_get_variable
 /* C804F8 80240358 0040882D */   daddu    $s1, $v0, $zero
 /* C804FC 8024035C 0040802D */  daddu     $s0, $v0, $zero
 /* C80500 80240360 3C028016 */  lui       $v0, %hi(gCollisionStatus)

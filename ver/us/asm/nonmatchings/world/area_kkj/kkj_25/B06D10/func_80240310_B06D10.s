@@ -15,7 +15,7 @@ glabel func_80240310_B06D10
 /* B06D38 80240338 AFB000C0 */  sw        $s0, 0xc0($sp)
 /* B06D3C 8024033C F7B600E8 */  sdc1      $f22, 0xe8($sp)
 /* B06D40 80240340 F7B400E0 */  sdc1      $f20, 0xe0($sp)
-/* B06D44 80240344 0C0B1EAF */  jal       get_variable
+/* B06D44 80240344 0C0B1EAF */  jal       evt_get_variable
 /* B06D48 80240348 34A50F8A */   ori      $a1, $a1, 0xf8a
 /* B06D4C 8024034C 3C07E300 */  lui       $a3, 0xe300
 /* B06D50 80240350 34E70A01 */  ori       $a3, $a3, 0xa01

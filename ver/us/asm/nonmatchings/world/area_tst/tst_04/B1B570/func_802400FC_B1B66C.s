@@ -26,7 +26,7 @@ glabel func_802400FC_B1B66C
 /* B1B6C0 80240150 0220202D */  daddu     $a0, $s1, $zero
 /* B1B6C4 80240154 3C05FE36 */  lui       $a1, 0xfe36
 /* B1B6C8 80240158 34A53C80 */  ori       $a1, $a1, 0x3c80
-/* B1B6CC 8024015C 0C0B1EAF */  jal       get_variable
+/* B1B6CC 8024015C 0C0B1EAF */  jal       evt_get_variable
 /* B1B6D0 80240160 46000606 */   mov.s    $f24, $f0
 /* B1B6D4 80240164 2442FFFF */  addiu     $v0, $v0, -1
 /* B1B6D8 80240168 3C0140C9 */  lui       $at, 0x40c9
@@ -53,7 +53,7 @@ glabel func_802400FC_B1B66C
 /* B1B72C 802401BC 4614C502 */  mul.s     $f20, $f24, $f20
 /* B1B730 802401C0 00000000 */  nop
 /* B1B734 802401C4 3C05FE36 */  lui       $a1, 0xfe36
-/* B1B738 802401C8 0C0B1EAF */  jal       get_variable
+/* B1B738 802401C8 0C0B1EAF */  jal       evt_get_variable
 /* B1B73C 802401CC 34A53C80 */   ori      $a1, $a1, 0x3c80
 /* B1B740 802401D0 44820000 */  mtc1      $v0, $f0
 /* B1B744 802401D4 00000000 */  nop

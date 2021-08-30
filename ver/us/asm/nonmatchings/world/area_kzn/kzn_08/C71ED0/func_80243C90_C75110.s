@@ -18,7 +18,7 @@ glabel func_80243C90_C75110
 /* C75144 80243CC4 8E43000C */  lw        $v1, 0xc($s2)
 /* C75148 80243CC8 0240202D */  daddu     $a0, $s2, $zero
 /* C7514C 80243CCC 8C650000 */  lw        $a1, ($v1)
-/* C75150 80243CD0 0C0B1EAF */  jal       get_variable
+/* C75150 80243CD0 0C0B1EAF */  jal       evt_get_variable
 /* C75154 80243CD4 0040A82D */   daddu    $s5, $v0, $zero
 /* C75158 80243CD8 AFA00010 */  sw        $zero, 0x10($sp)
 /* C7515C 80243CDC 8E2300D0 */  lw        $v1, 0xd0($s1)

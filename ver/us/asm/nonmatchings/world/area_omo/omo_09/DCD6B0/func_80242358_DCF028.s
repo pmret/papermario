@@ -38,7 +38,7 @@ glabel func_80242358_DCF028
 /* DCF084 802423B4 00459021 */   addu     $s2, $v0, $a1
 /* DCF088 802423B8 0220202D */  daddu     $a0, $s1, $zero
 /* DCF08C 802423BC 8E050000 */  lw        $a1, ($s0)
-/* DCF090 802423C0 0C0B1EAF */  jal       get_variable
+/* DCF090 802423C0 0C0B1EAF */  jal       evt_get_variable
 /* DCF094 802423C4 0040802D */   daddu    $s0, $v0, $zero
 /* DCF098 802423C8 0260202D */  daddu     $a0, $s3, $zero
 /* DCF09C 802423CC 8C460024 */  lw        $a2, 0x24($v0)

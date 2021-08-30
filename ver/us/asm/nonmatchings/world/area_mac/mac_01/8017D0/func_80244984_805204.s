@@ -15,7 +15,7 @@ glabel func_80244984_805204
 /* 80522C 802449AC AFBF0020 */  sw        $ra, 0x20($sp)
 /* 805230 802449B0 0000202D */  daddu     $a0, $zero, $zero
 .L802449B4:
-/* 805234 802449B4 0C0B1EAF */  jal       get_variable
+/* 805234 802449B4 0C0B1EAF */  jal       evt_get_variable
 /* 805238 802449B8 02502821 */   addu     $a1, $s2, $s0
 /* 80523C 802449BC 50400001 */  beql      $v0, $zero, .L802449C4
 /* 805240 802449C0 26310001 */   addiu    $s1, $s1, 1

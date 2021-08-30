@@ -27,7 +27,7 @@ glabel BoostAttack
 /* 19E5EC 8026FD0C 00000000 */   nop
 /* 19E5F0 8026FD10 8E250000 */  lw        $a1, ($s1)
 /* 19E5F4 8026FD14 26310004 */  addiu     $s1, $s1, 4
-/* 19E5F8 8026FD18 0C0B1EAF */  jal       get_variable
+/* 19E5F8 8026FD18 0C0B1EAF */  jal       evt_get_variable
 /* 19E5FC 8026FD1C 0240202D */   daddu    $a0, $s2, $zero
 /* 19E600 8026FD20 0040802D */  daddu     $s0, $v0, $zero
 /* 19E604 8026FD24 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -36,7 +36,7 @@ glabel BoostAttack
 /* 19E610 8026FD30 8E500148 */  lw        $s0, 0x148($s2)
 .L8026FD34:
 /* 19E614 8026FD34 8E250000 */  lw        $a1, ($s1)
-/* 19E618 8026FD38 0C0B1EAF */  jal       get_variable
+/* 19E618 8026FD38 0C0B1EAF */  jal       evt_get_variable
 /* 19E61C 8026FD3C 0240202D */   daddu    $a0, $s2, $zero
 /* 19E620 8026FD40 0040882D */  daddu     $s1, $v0, $zero
 /* 19E624 8026FD44 0C09A75B */  jal       get_actor

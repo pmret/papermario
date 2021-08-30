@@ -32,7 +32,7 @@ glabel func_80240AD0_A39FB0
 /* A3A01C 80240B3C 02A0802D */  daddu     $s0, $s5, $zero
 .L80240B40:
 /* A3A020 80240B40 0000202D */  daddu     $a0, $zero, $zero
-/* A3A024 80240B44 0C0B1EAF */  jal       get_variable
+/* A3A024 80240B44 0C0B1EAF */  jal       evt_get_variable
 /* A3A028 80240B48 02572821 */   addu     $a1, $s2, $s7
 /* A3A02C 80240B4C 54400022 */  bnel      $v0, $zero, .L80240BD8
 /* A3A030 80240B50 26520001 */   addiu    $s2, $s2, 1

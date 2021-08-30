@@ -154,7 +154,7 @@ glabel L80240F20_BD4790
 /* BD47A8 80240F38 0240202D */  daddu     $a0, $s2, $zero
 /* BD47AC 80240F3C 3C05FD05 */  lui       $a1, 0xfd05
 /* BD47B0 80240F40 34A50F82 */  ori       $a1, $a1, 0xf82
-/* BD47B4 80240F44 0C0B1EAF */  jal       get_variable
+/* BD47B4 80240F44 0C0B1EAF */  jal       evt_get_variable
 /* BD47B8 80240F48 E614000C */   swc1     $f20, 0xc($s0)
 /* BD47BC 80240F4C 24030001 */  addiu     $v1, $zero, 1
 /* BD47C0 80240F50 14430002 */  bne       $v0, $v1, .L80240F5C
@@ -179,7 +179,7 @@ glabel L80240F20_BD4790
 glabel L80240F98_BD4808
 /* BD4808 80240F98 0240202D */  daddu     $a0, $s2, $zero
 /* BD480C 80240F9C 3C05FD05 */  lui       $a1, 0xfd05
-/* BD4810 80240FA0 0C0B1EAF */  jal       get_variable
+/* BD4810 80240FA0 0C0B1EAF */  jal       evt_get_variable
 /* BD4814 80240FA4 34A50F82 */   ori      $a1, $a1, 0xf82
 /* BD4818 80240FA8 14400002 */  bnez      $v0, L80240FB4_BD4824
 /* BD481C 80240FAC 2402000A */   addiu    $v0, $zero, 0xa

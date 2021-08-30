@@ -18,7 +18,7 @@ glabel func_80240F10_AEE320
 /* AEE354 80240F44 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* AEE358 80240F48 8E70000C */  lw        $s0, 0xc($s3)
 /* AEE35C 80240F4C 8E050000 */  lw        $a1, ($s0)
-/* AEE360 80240F50 0C0B1EAF */  jal       get_variable
+/* AEE360 80240F50 0C0B1EAF */  jal       evt_get_variable
 /* AEE364 80240F54 26100004 */   addiu    $s0, $s0, 4
 /* AEE368 80240F58 8E150000 */  lw        $s5, ($s0)
 /* AEE36C 80240F5C 26100004 */  addiu     $s0, $s0, 4

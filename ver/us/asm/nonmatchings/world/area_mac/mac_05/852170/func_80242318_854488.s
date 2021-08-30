@@ -6,7 +6,7 @@ glabel func_80242318_854488
 /* 85448C 8024231C 3C058025 */  lui       $a1, %hi(D_802529E8)
 /* 854490 80242320 8CA529E8 */  lw        $a1, %lo(D_802529E8)($a1)
 /* 854494 80242324 AFBF0010 */  sw        $ra, 0x10($sp)
-/* 854498 80242328 0C0B1EAF */  jal       get_variable
+/* 854498 80242328 0C0B1EAF */  jal       evt_get_variable
 /* 85449C 8024232C 0000202D */   daddu    $a0, $zero, $zero
 /* 8544A0 80242330 0040182D */  daddu     $v1, $v0, $zero
 /* 8544A4 80242334 24020001 */  addiu     $v0, $zero, 1

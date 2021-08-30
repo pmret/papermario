@@ -9,7 +9,7 @@ glabel btl_state_draw_begin_partner_turn_C63C08
 /* C63C18 80242F08 AFB20018 */  sw        $s2, 0x18($sp)
 /* C63C1C 80242F0C AFB00010 */  sw        $s0, 0x10($sp)
 /* C63C20 80242F10 8E22000C */  lw        $v0, 0xc($s1)
-/* C63C24 80242F14 0C0B1EAF */  jal       get_variable
+/* C63C24 80242F14 0C0B1EAF */  jal       evt_get_variable
 /* C63C28 80242F18 8C450000 */   lw       $a1, ($v0)
 /* C63C2C 80242F1C 8E23013C */  lw        $v1, 0x13c($s1)
 /* C63C30 80242F20 8C720000 */  lw        $s2, ($v1)

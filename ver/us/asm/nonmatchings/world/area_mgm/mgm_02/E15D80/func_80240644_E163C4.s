@@ -13,12 +13,12 @@ glabel func_80240644_E163C4
 /* E163E4 80240664 0240202D */  daddu     $a0, $s2, $zero
 /* E163E8 80240668 3C05FE36 */  lui       $a1, 0xfe36
 /* E163EC 8024066C 8C51006C */  lw        $s1, 0x6c($v0)
-/* E163F0 80240670 0C0B1EAF */  jal       get_variable
+/* E163F0 80240670 0C0B1EAF */  jal       evt_get_variable
 /* E163F4 80240674 34A53C8A */   ori      $a1, $a1, 0x3c8a
 /* E163F8 80240678 0240202D */  daddu     $a0, $s2, $zero
 /* E163FC 8024067C 3C05FE36 */  lui       $a1, 0xfe36
 /* E16400 80240680 34A53C8B */  ori       $a1, $a1, 0x3c8b
-/* E16404 80240684 0C0B1EAF */  jal       get_variable
+/* E16404 80240684 0C0B1EAF */  jal       evt_get_variable
 /* E16408 80240688 0040802D */   daddu    $s0, $v0, $zero
 /* E1640C 8024068C 0000182D */  daddu     $v1, $zero, $zero
 /* E16410 80240690 0220202D */  daddu     $a0, $s1, $zero

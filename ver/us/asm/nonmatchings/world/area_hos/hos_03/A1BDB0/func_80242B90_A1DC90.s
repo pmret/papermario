@@ -17,7 +17,7 @@ glabel func_80242B90_A1DC90
 .L80242BC0:
 /* A1DCC0 80242BC0 3C05F5DE */  lui       $a1, 0xf5de
 /* A1DCC4 80242BC4 34A502E0 */  ori       $a1, $a1, 0x2e0
-/* A1DCC8 80242BC8 0C0B1EAF */  jal       get_variable
+/* A1DCC8 80242BC8 0C0B1EAF */  jal       evt_get_variable
 /* A1DCCC 80242BCC 0000202D */   daddu    $a0, $zero, $zero
 /* A1DCD0 80242BD0 3C038025 */  lui       $v1, %hi(D_80248080_A23180)
 /* A1DCD4 80242BD4 00621821 */  addu      $v1, $v1, $v0

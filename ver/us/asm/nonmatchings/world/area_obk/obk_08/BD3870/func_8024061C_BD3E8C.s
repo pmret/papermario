@@ -28,7 +28,7 @@ glabel func_8024061C_BD3E8C
 /* BD3EE8 80240678 3C05FD05 */  lui       $a1, 0xfd05
 /* BD3EEC 8024067C 4600008D */  trunc.w.s $f2, $f0
 /* BD3EF0 80240680 44101000 */  mfc1      $s0, $f2
-/* BD3EF4 80240684 0C0B1EAF */  jal       get_variable
+/* BD3EF4 80240684 0C0B1EAF */  jal       evt_get_variable
 /* BD3EF8 80240688 34A50F8A */   ori      $a1, $a1, 0xf8a
 /* BD3EFC 8024068C 0040182D */  daddu     $v1, $v0, $zero
 /* BD3F00 80240690 44920000 */  mtc1      $s2, $f0

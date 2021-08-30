@@ -15,31 +15,31 @@ glabel func_802CB008
 /* EF9E0 802CB030 10A00066 */  beqz      $a1, .L802CB1CC
 /* EF9E4 802CB034 8E72000C */   lw       $s2, 0xc($s3)
 /* EF9E8 802CB038 8E450000 */  lw        $a1, ($s2)
-/* EF9EC 802CB03C 0C0B1EAF */  jal       get_variable
+/* EF9EC 802CB03C 0C0B1EAF */  jal       evt_get_variable
 /* EF9F0 802CB040 26520004 */   addiu    $s2, $s2, 4
 /* EF9F4 802CB044 8E450000 */  lw        $a1, ($s2)
 /* EF9F8 802CB048 26520004 */  addiu     $s2, $s2, 4
 /* EF9FC 802CB04C 0260202D */  daddu     $a0, $s3, $zero
-/* EFA00 802CB050 0C0B1EAF */  jal       get_variable
+/* EFA00 802CB050 0C0B1EAF */  jal       evt_get_variable
 /* EFA04 802CB054 0040802D */   daddu    $s0, $v0, $zero
 /* EFA08 802CB058 8E450000 */  lw        $a1, ($s2)
 /* EFA0C 802CB05C 26520004 */  addiu     $s2, $s2, 4
 /* EFA10 802CB060 0260202D */  daddu     $a0, $s3, $zero
-/* EFA14 802CB064 0C0B1EAF */  jal       get_variable
+/* EFA14 802CB064 0C0B1EAF */  jal       evt_get_variable
 /* EFA18 802CB068 0040882D */   daddu    $s1, $v0, $zero
 /* EFA1C 802CB06C 8E450000 */  lw        $a1, ($s2)
 /* EFA20 802CB070 26520004 */  addiu     $s2, $s2, 4
 /* EFA24 802CB074 0260202D */  daddu     $a0, $s3, $zero
-/* EFA28 802CB078 0C0B1EAF */  jal       get_variable
+/* EFA28 802CB078 0C0B1EAF */  jal       evt_get_variable
 /* EFA2C 802CB07C 0040A02D */   daddu    $s4, $v0, $zero
 /* EFA30 802CB080 8E450000 */  lw        $a1, ($s2)
 /* EFA34 802CB084 26520004 */  addiu     $s2, $s2, 4
 /* EFA38 802CB088 0260202D */  daddu     $a0, $s3, $zero
-/* EFA3C 802CB08C 0C0B1EAF */  jal       get_variable
+/* EFA3C 802CB08C 0C0B1EAF */  jal       evt_get_variable
 /* EFA40 802CB090 0040A82D */   daddu    $s5, $v0, $zero
 /* EFA44 802CB094 0260202D */  daddu     $a0, $s3, $zero
 /* EFA48 802CB098 8E450000 */  lw        $a1, ($s2)
-/* EFA4C 802CB09C 0C0B1EAF */  jal       get_variable
+/* EFA4C 802CB09C 0C0B1EAF */  jal       evt_get_variable
 /* EFA50 802CB0A0 0040B02D */   daddu    $s6, $v0, $zero
 /* EFA54 802CB0A4 24040018 */  addiu     $a0, $zero, 0x18
 /* EFA58 802CB0A8 0C00AB39 */  jal       heap_malloc

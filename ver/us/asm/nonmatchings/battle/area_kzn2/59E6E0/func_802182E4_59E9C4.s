@@ -9,22 +9,22 @@ glabel func_802182E4_59E9C4
 /* 59E9D4 802182F4 AFB00010 */  sw        $s0, 0x10($sp)
 /* 59E9D8 802182F8 8E30000C */  lw        $s0, 0xc($s1)
 /* 59E9DC 802182FC 8E050000 */  lw        $a1, ($s0)
-/* 59E9E0 80218300 0C0B1EAF */  jal       get_variable
+/* 59E9E0 80218300 0C0B1EAF */  jal       evt_get_variable
 /* 59E9E4 80218304 26100004 */   addiu    $s0, $s0, 4
 /* 59E9E8 80218308 8E050000 */  lw        $a1, ($s0)
 /* 59E9EC 8021830C 26100004 */  addiu     $s0, $s0, 4
-/* 59E9F0 80218310 0C0B1EAF */  jal       get_variable
+/* 59E9F0 80218310 0C0B1EAF */  jal       evt_get_variable
 /* 59E9F4 80218314 0220202D */   daddu    $a0, $s1, $zero
 /* 59E9F8 80218318 8E050000 */  lw        $a1, ($s0)
 /* 59E9FC 8021831C 26100004 */  addiu     $s0, $s0, 4
-/* 59EA00 80218320 0C0B1EAF */  jal       get_variable
+/* 59EA00 80218320 0C0B1EAF */  jal       evt_get_variable
 /* 59EA04 80218324 0220202D */   daddu    $a0, $s1, $zero
 /* 59EA08 80218328 8E050000 */  lw        $a1, ($s0)
 /* 59EA0C 8021832C 26100004 */  addiu     $s0, $s0, 4
-/* 59EA10 80218330 0C0B1EAF */  jal       get_variable
+/* 59EA10 80218330 0C0B1EAF */  jal       evt_get_variable
 /* 59EA14 80218334 0220202D */   daddu    $a0, $s1, $zero
 /* 59EA18 80218338 8E050000 */  lw        $a1, ($s0)
-/* 59EA1C 8021833C 0C0B1EAF */  jal       get_variable
+/* 59EA1C 8021833C 0C0B1EAF */  jal       evt_get_variable
 /* 59EA20 80218340 0220202D */   daddu    $a0, $s1, $zero
 /* 59EA24 80218344 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 59EA28 80218348 8FB10014 */  lw        $s1, 0x14($sp)

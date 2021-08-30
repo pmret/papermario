@@ -30,11 +30,11 @@ glabel func_8024522C_805AAC
 /* 805B10 80245290 02C0882D */  daddu     $s1, $s6, $zero
 .L80245294:
 /* 805B14 80245294 0000202D */  daddu     $a0, $zero, $zero
-/* 805B18 80245298 0C0B1EAF */  jal       get_variable
+/* 805B18 80245298 0C0B1EAF */  jal       evt_get_variable
 /* 805B1C 8024529C 027E2821 */   addu     $a1, $s3, $fp
 /* 805B20 802452A0 0000202D */  daddu     $a0, $zero, $zero
 /* 805B24 802452A4 02772821 */  addu      $a1, $s3, $s7
-/* 805B28 802452A8 0C0B1EAF */  jal       get_variable
+/* 805B28 802452A8 0C0B1EAF */  jal       evt_get_variable
 /* 805B2C 802452AC 0040802D */   daddu    $s0, $v0, $zero
 /* 805B30 802452B0 1200001C */  beqz      $s0, .L80245324
 /* 805B34 802452B4 0040202D */   daddu    $a0, $v0, $zero

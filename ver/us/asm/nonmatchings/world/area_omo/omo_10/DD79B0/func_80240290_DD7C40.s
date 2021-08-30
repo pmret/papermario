@@ -14,7 +14,7 @@ glabel func_80240290_DD7C40
 /* DD7C64 802402B4 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* DD7C68 802402B8 8E30000C */  lw        $s0, 0xc($s1)
 /* DD7C6C 802402BC 8E050000 */  lw        $a1, ($s0)
-/* DD7C70 802402C0 0C0B1EAF */  jal       get_variable
+/* DD7C70 802402C0 0C0B1EAF */  jal       evt_get_variable
 /* DD7C74 802402C4 26100004 */   addiu    $s0, $s0, 4
 /* DD7C78 802402C8 8E050000 */  lw        $a1, ($s0)
 /* DD7C7C 802402CC 26100004 */  addiu     $s0, $s0, 4

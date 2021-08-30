@@ -12,7 +12,7 @@ glabel func_80240DA4_8658E4
 /* 865900 80240DC0 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* 865904 80240DC4 8E30000C */  lw        $s0, 0xc($s1)
 /* 865908 80240DC8 8E050000 */  lw        $a1, ($s0)
-/* 86590C 80240DCC 0C0B1EAF */  jal       get_variable
+/* 86590C 80240DCC 0C0B1EAF */  jal       evt_get_variable
 /* 865910 80240DD0 26100004 */   addiu    $s0, $s0, 4
 /* 865914 80240DD4 8E050000 */  lw        $a1, ($s0)
 /* 865918 80240DD8 26100004 */  addiu     $s0, $s0, 4

@@ -11,7 +11,7 @@ glabel func_80240420_B9B8A0
 /* B9B8B8 80240438 F7B40030 */  sdc1      $f20, 0x30($sp)
 /* B9B8BC 8024043C 8E30000C */  lw        $s0, 0xc($s1)
 /* B9B8C0 80240440 8E050000 */  lw        $a1, ($s0)
-/* B9B8C4 80240444 0C0B1EAF */  jal       get_variable
+/* B9B8C4 80240444 0C0B1EAF */  jal       evt_get_variable
 /* B9B8C8 80240448 26100004 */   addiu    $s0, $s0, 4
 /* B9B8CC 8024044C 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* B9B8D0 80240450 0040202D */   daddu    $a0, $v0, $zero

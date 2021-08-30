@@ -24,13 +24,13 @@ glabel SummonEnemy
 .L8026DBAC:
 /* 19C48C 8026DBAC 8E050000 */  lw        $a1, ($s0)
 /* 19C490 8026DBB0 26100004 */  addiu     $s0, $s0, 4
-/* 19C494 8026DBB4 0C0B1EAF */  jal       get_variable
+/* 19C494 8026DBB4 0C0B1EAF */  jal       evt_get_variable
 /* 19C498 8026DBB8 0240202D */   daddu    $a0, $s2, $zero
 /* 19C49C 8026DBBC 0C0994E9 */  jal       create_actor
 /* 19C4A0 8026DBC0 0040202D */   daddu    $a0, $v0, $zero
 /* 19C4A4 8026DBC4 AE420074 */  sw        $v0, 0x74($s2)
 /* 19C4A8 8026DBC8 8E050000 */  lw        $a1, ($s0)
-/* 19C4AC 8026DBCC 0C0B1EAF */  jal       get_variable
+/* 19C4AC 8026DBCC 0C0B1EAF */  jal       evt_get_variable
 /* 19C4B0 8026DBD0 0240202D */   daddu    $a0, $s2, $zero
 /* 19C4B4 8026DBD4 AE420078 */  sw        $v0, 0x78($s2)
 /* 19C4B8 8026DBD8 24020001 */  addiu     $v0, $zero, 1

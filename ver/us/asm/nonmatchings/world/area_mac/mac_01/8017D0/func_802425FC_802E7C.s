@@ -17,7 +17,7 @@ glabel func_802425FC_802E7C
 .L8024262C:
 /* 802EAC 8024262C 3C05F5DE */  lui       $a1, 0xf5de
 /* 802EB0 80242630 34A502E0 */  ori       $a1, $a1, 0x2e0
-/* 802EB4 80242634 0C0B1EAF */  jal       get_variable
+/* 802EB4 80242634 0C0B1EAF */  jal       evt_get_variable
 /* 802EB8 80242638 0000202D */   daddu    $a0, $zero, $zero
 /* 802EBC 8024263C 3C038025 */  lui       $v1, %hi(D_80248C94_809514)
 /* 802EC0 80242640 00621821 */  addu      $v1, $v1, $v0

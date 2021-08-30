@@ -10,7 +10,7 @@ glabel func_802694A4
 /* 197D98 802694B8 3C10802A */  lui       $s0, %hi(gActionCommandStatus)
 /* 197D9C 802694BC 2610FBE0 */  addiu     $s0, $s0, %lo(gActionCommandStatus)
 /* 197DA0 802694C0 8C450000 */  lw        $a1, ($v0)
-/* 197DA4 802694C4 0C0B1EAF */  jal       get_variable
+/* 197DA4 802694C4 0C0B1EAF */  jal       evt_get_variable
 /* 197DA8 802694C8 0200882D */   daddu    $s1, $s0, $zero
 /* 197DAC 802694CC 14400003 */  bnez      $v0, .L802694DC
 /* 197DB0 802694D0 24020001 */   addiu    $v0, $zero, 1

@@ -7,7 +7,7 @@ glabel func_80240FF0_D7FD50
 /* D7FD58 80240FF8 0080802D */  daddu     $s0, $a0, $zero
 /* D7FD5C 80240FFC AFBF0014 */  sw        $ra, 0x14($sp)
 /* D7FD60 80241000 8E02000C */  lw        $v0, 0xc($s0)
-/* D7FD64 80241004 0C0B1EAF */  jal       get_variable
+/* D7FD64 80241004 0C0B1EAF */  jal       evt_get_variable
 /* D7FD68 80241008 8C450000 */   lw       $a1, ($v0)
 /* D7FD6C 8024100C 0040302D */  daddu     $a2, $v0, $zero
 /* D7FD70 80241010 3C058016 */  lui       $a1, %hi(gCollisionStatus)

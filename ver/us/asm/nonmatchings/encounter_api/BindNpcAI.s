@@ -15,11 +15,11 @@ glabel BindNpcAI
 /* 1FEA0 80044AA0 8E11000C */  lw        $s1, 0xc($s0)
 /* 1FEA4 80044AA4 8E120148 */  lw        $s2, 0x148($s0)
 /* 1FEA8 80044AA8 8E250000 */  lw        $a1, ($s1)
-/* 1FEAC 80044AAC 0C0B1EAF */  jal       get_variable
+/* 1FEAC 80044AAC 0C0B1EAF */  jal       evt_get_variable
 /* 1FEB0 80044AB0 26310004 */   addiu    $s1, $s1, 4
 /* 1FEB4 80044AB4 0040982D */  daddu     $s3, $v0, $zero
 /* 1FEB8 80044AB8 8E250000 */  lw        $a1, ($s1)
-/* 1FEBC 80044ABC 0C0B1EAF */  jal       get_variable
+/* 1FEBC 80044ABC 0C0B1EAF */  jal       evt_get_variable
 /* 1FEC0 80044AC0 0200202D */   daddu    $a0, $s0, $zero
 /* 1FEC4 80044AC4 0040A02D */  daddu     $s4, $v0, $zero
 /* 1FEC8 80044AC8 2402FFFF */  addiu     $v0, $zero, -1

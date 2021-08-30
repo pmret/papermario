@@ -26,7 +26,7 @@ glabel func_802402A0_8DA3A0
 /* 8DA3F4 802402F4 46000586 */   mov.s    $f22, $f0
 /* 8DA3F8 802402F8 0220202D */  daddu     $a0, $s1, $zero
 /* 8DA3FC 802402FC 8E050000 */  lw        $a1, ($s0)
-/* 8DA400 80240300 0C0B1EAF */  jal       get_variable
+/* 8DA400 80240300 0C0B1EAF */  jal       evt_get_variable
 /* 8DA404 80240304 46000506 */   mov.s    $f20, $f0
 /* 8DA408 80240308 4405C000 */  mfc1      $a1, $f24
 /* 8DA40C 8024030C 4406B000 */  mfc1      $a2, $f22

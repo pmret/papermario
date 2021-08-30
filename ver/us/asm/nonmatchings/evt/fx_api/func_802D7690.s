@@ -41,7 +41,7 @@ glabel func_802D7690
 /* FC0D0 802D7720 46000586 */   mov.s    $f22, $f0
 /* FC0D4 802D7724 0240202D */  daddu     $a0, $s2, $zero
 /* FC0D8 802D7728 8E050000 */  lw        $a1, ($s0)
-/* FC0DC 802D772C 0C0B1EAF */  jal       get_variable
+/* FC0DC 802D772C 0C0B1EAF */  jal       evt_get_variable
 /* FC0E0 802D7730 46000706 */   mov.s    $f28, $f0
 /* FC0E4 802D7734 12200002 */  beqz      $s1, .L802D7740
 /* FC0E8 802D7738 0040802D */   daddu    $s0, $v0, $zero

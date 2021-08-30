@@ -5,7 +5,7 @@ glabel func_802427B4_E07B14
 /* E07B14 802427B4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* E07B18 802427B8 AFBF0010 */  sw        $ra, 0x10($sp)
 /* E07B1C 802427BC 8C82000C */  lw        $v0, 0xc($a0)
-/* E07B20 802427C0 0C0B1EAF */  jal       get_variable
+/* E07B20 802427C0 0C0B1EAF */  jal       evt_get_variable
 /* E07B24 802427C4 8C450000 */   lw       $a1, ($v0)
 /* E07B28 802427C8 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
 /* E07B2C 802427CC 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)

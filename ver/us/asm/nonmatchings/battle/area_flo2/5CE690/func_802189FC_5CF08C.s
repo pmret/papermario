@@ -12,7 +12,7 @@ glabel func_802189FC_5CF08C
 /* 5CF0A8 80218A18 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* 5CF0AC 80218A1C 8E30000C */  lw        $s0, 0xc($s1)
 /* 5CF0B0 80218A20 8E050000 */  lw        $a1, ($s0)
-/* 5CF0B4 80218A24 0C0B1EAF */  jal       get_variable
+/* 5CF0B4 80218A24 0C0B1EAF */  jal       evt_get_variable
 /* 5CF0B8 80218A28 26100004 */   addiu    $s0, $s0, 4
 /* 5CF0BC 80218A2C 8E050000 */  lw        $a1, ($s0)
 /* 5CF0C0 80218A30 26100004 */  addiu     $s0, $s0, 4

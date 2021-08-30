@@ -38,7 +38,7 @@ glabel func_80240520_90FBD0
 /* 90FC2C 8024057C 00459021 */   addu     $s2, $v0, $a1
 /* 90FC30 80240580 0220202D */  daddu     $a0, $s1, $zero
 /* 90FC34 80240584 8E050000 */  lw        $a1, ($s0)
-/* 90FC38 80240588 0C0B1EAF */  jal       get_variable
+/* 90FC38 80240588 0C0B1EAF */  jal       evt_get_variable
 /* 90FC3C 8024058C 0040802D */   daddu    $s0, $v0, $zero
 /* 90FC40 80240590 0260202D */  daddu     $a0, $s3, $zero
 /* 90FC44 80240594 8C460024 */  lw        $a2, 0x24($v0)

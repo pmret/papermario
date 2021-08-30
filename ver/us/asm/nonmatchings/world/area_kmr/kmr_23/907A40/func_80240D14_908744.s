@@ -6,7 +6,7 @@ glabel func_80240D14_908744
 /* 908748 80240D18 3C05FD05 */  lui       $a1, 0xfd05
 /* 90874C 80240D1C 34A50F80 */  ori       $a1, $a1, 0xf80
 /* 908750 80240D20 AFBF0010 */  sw        $ra, 0x10($sp)
-/* 908754 80240D24 0C0B1EAF */  jal       get_variable
+/* 908754 80240D24 0C0B1EAF */  jal       evt_get_variable
 /* 908758 80240D28 0000202D */   daddu    $a0, $zero, $zero
 /* 90875C 80240D2C 24030001 */  addiu     $v1, $zero, 1
 /* 908760 80240D30 3C05800A */  lui       $a1, %hi(gOverrideFlags)

@@ -12,22 +12,22 @@ glabel EndActorSpeech
 /* 181BCC 802532EC 10A00029 */  beqz      $a1, .L80253394
 /* 181BD0 802532F0 8E50000C */   lw       $s0, 0xc($s2)
 /* 181BD4 802532F4 8E050000 */  lw        $a1, ($s0)
-/* 181BD8 802532F8 0C0B1EAF */  jal       get_variable
+/* 181BD8 802532F8 0C0B1EAF */  jal       evt_get_variable
 /* 181BDC 802532FC 26100004 */   addiu    $s0, $s0, 4
 /* 181BE0 80253300 0040882D */  daddu     $s1, $v0, $zero
 /* 181BE4 80253304 8E050000 */  lw        $a1, ($s0)
 /* 181BE8 80253308 26100004 */  addiu     $s0, $s0, 4
-/* 181BEC 8025330C 0C0B1EAF */  jal       get_variable
+/* 181BEC 8025330C 0C0B1EAF */  jal       evt_get_variable
 /* 181BF0 80253310 0240202D */   daddu    $a0, $s2, $zero
 /* 181BF4 80253314 8E050000 */  lw        $a1, ($s0)
 /* 181BF8 80253318 26100004 */  addiu     $s0, $s0, 4
 /* 181BFC 8025331C 0240202D */  daddu     $a0, $s2, $zero
-/* 181C00 80253320 0C0B1EAF */  jal       get_variable
+/* 181C00 80253320 0C0B1EAF */  jal       evt_get_variable
 /* 181C04 80253324 0040982D */   daddu    $s3, $v0, $zero
 /* 181C08 80253328 3C01802A */  lui       $at, %hi(gSpeakingActorTalkAnim)
 /* 181C0C 8025332C AC22FA6C */  sw        $v0, %lo(gSpeakingActorTalkAnim)($at)
 /* 181C10 80253330 8E050000 */  lw        $a1, ($s0)
-/* 181C14 80253334 0C0B1EAF */  jal       get_variable
+/* 181C14 80253334 0C0B1EAF */  jal       evt_get_variable
 /* 181C18 80253338 0240202D */   daddu    $a0, $s2, $zero
 /* 181C1C 8025333C 3C01802A */  lui       $at, %hi(gSpeakingActorIdleAnim)
 /* 181C20 80253340 AC22FA70 */  sw        $v0, %lo(gSpeakingActorIdleAnim)($at)

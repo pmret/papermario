@@ -14,7 +14,7 @@ glabel func_802402B0_DA54F0
 /* DA5514 802402D4 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* DA5518 802402D8 8E30000C */  lw        $s0, 0xc($s1)
 /* DA551C 802402DC 8E050000 */  lw        $a1, ($s0)
-/* DA5520 802402E0 0C0B1EAF */  jal       get_variable
+/* DA5520 802402E0 0C0B1EAF */  jal       evt_get_variable
 /* DA5524 802402E4 26100004 */   addiu    $s0, $s0, 4
 /* DA5528 802402E8 8E050000 */  lw        $a1, ($s0)
 /* DA552C 802402EC 26100004 */  addiu     $s0, $s0, 4

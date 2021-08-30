@@ -10,16 +10,16 @@ glabel func_80240168_DEF008
 /* DEF01C 8024017C AFB00010 */  sw        $s0, 0x10($sp)
 /* DEF020 80240180 8E50000C */  lw        $s0, 0xc($s2)
 /* DEF024 80240184 8E050000 */  lw        $a1, ($s0)
-/* DEF028 80240188 0C0B1EAF */  jal       get_variable
+/* DEF028 80240188 0C0B1EAF */  jal       evt_get_variable
 /* DEF02C 8024018C 26100004 */   addiu    $s0, $s0, 4
 /* DEF030 80240190 8E050000 */  lw        $a1, ($s0)
 /* DEF034 80240194 26100004 */  addiu     $s0, $s0, 4
 /* DEF038 80240198 0240202D */  daddu     $a0, $s2, $zero
-/* DEF03C 8024019C 0C0B1EAF */  jal       get_variable
+/* DEF03C 8024019C 0C0B1EAF */  jal       evt_get_variable
 /* DEF040 802401A0 0040882D */   daddu    $s1, $v0, $zero
 /* DEF044 802401A4 0240202D */  daddu     $a0, $s2, $zero
 /* DEF048 802401A8 8E050000 */  lw        $a1, ($s0)
-/* DEF04C 802401AC 0C0B1EAF */  jal       get_variable
+/* DEF04C 802401AC 0C0B1EAF */  jal       evt_get_variable
 /* DEF050 802401B0 0040802D */   daddu    $s0, $v0, $zero
 /* DEF054 802401B4 02020018 */  mult      $s0, $v0
 /* DEF058 802401B8 24020002 */  addiu     $v0, $zero, 2

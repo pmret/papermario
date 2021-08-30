@@ -13,12 +13,12 @@ glabel GetAnimatedNodeRotation
 /* F20B0 802CD700 AFB00010 */  sw        $s0, 0x10($sp)
 /* F20B4 802CD704 8E50000C */  lw        $s0, 0xc($s2)
 /* F20B8 802CD708 8E050000 */  lw        $a1, ($s0)
-/* F20BC 802CD70C 0C0B1EAF */  jal       get_variable
+/* F20BC 802CD70C 0C0B1EAF */  jal       evt_get_variable
 /* F20C0 802CD710 26100004 */   addiu    $s0, $s0, 4
 /* F20C4 802CD714 8E050000 */  lw        $a1, ($s0)
 /* F20C8 802CD718 26100004 */  addiu     $s0, $s0, 4
 /* F20CC 802CD71C 0240202D */  daddu     $a0, $s2, $zero
-/* F20D0 802CD720 0C0B1EAF */  jal       get_variable
+/* F20D0 802CD720 0C0B1EAF */  jal       evt_get_variable
 /* F20D4 802CD724 0040882D */   daddu    $s1, $v0, $zero
 /* F20D8 802CD728 00118880 */  sll       $s1, $s1, 2
 /* F20DC 802CD72C 8E130000 */  lw        $s3, ($s0)

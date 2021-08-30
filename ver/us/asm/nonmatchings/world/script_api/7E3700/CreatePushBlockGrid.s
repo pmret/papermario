@@ -16,38 +16,38 @@ glabel CreatePushBlockGrid
 /* 7E418C 8028330C AFB00010 */  sw        $s0, 0x10($sp)
 /* 7E4190 80283310 8E30000C */  lw        $s0, 0xc($s1)
 /* 7E4194 80283314 8E050000 */  lw        $a1, ($s0)
-/* 7E4198 80283318 0C0B1EAF */  jal       get_variable
+/* 7E4198 80283318 0C0B1EAF */  jal       evt_get_variable
 /* 7E419C 8028331C 26100004 */   addiu    $s0, $s0, 4
 /* 7E41A0 80283320 8E050000 */  lw        $a1, ($s0)
 /* 7E41A4 80283324 26100004 */  addiu     $s0, $s0, 4
 /* 7E41A8 80283328 0220202D */  daddu     $a0, $s1, $zero
-/* 7E41AC 8028332C 0C0B1EAF */  jal       get_variable
+/* 7E41AC 8028332C 0C0B1EAF */  jal       evt_get_variable
 /* 7E41B0 80283330 0040902D */   daddu    $s2, $v0, $zero
 /* 7E41B4 80283334 8E050000 */  lw        $a1, ($s0)
 /* 7E41B8 80283338 26100004 */  addiu     $s0, $s0, 4
 /* 7E41BC 8028333C 0220202D */  daddu     $a0, $s1, $zero
-/* 7E41C0 80283340 0C0B1EAF */  jal       get_variable
+/* 7E41C0 80283340 0C0B1EAF */  jal       evt_get_variable
 /* 7E41C4 80283344 0040A82D */   daddu    $s5, $v0, $zero
 /* 7E41C8 80283348 8E050000 */  lw        $a1, ($s0)
 /* 7E41CC 8028334C 26100004 */  addiu     $s0, $s0, 4
 /* 7E41D0 80283350 0220202D */  daddu     $a0, $s1, $zero
-/* 7E41D4 80283354 0C0B1EAF */  jal       get_variable
+/* 7E41D4 80283354 0C0B1EAF */  jal       evt_get_variable
 /* 7E41D8 80283358 0040A02D */   daddu    $s4, $v0, $zero
 /* 7E41DC 8028335C 8E050000 */  lw        $a1, ($s0)
 /* 7E41E0 80283360 26100004 */  addiu     $s0, $s0, 4
 /* 7E41E4 80283364 0220202D */  daddu     $a0, $s1, $zero
-/* 7E41E8 80283368 0C0B1EAF */  jal       get_variable
+/* 7E41E8 80283368 0C0B1EAF */  jal       evt_get_variable
 /* 7E41EC 8028336C 0040F02D */   daddu    $fp, $v0, $zero
 /* 7E41F0 80283370 0220202D */  daddu     $a0, $s1, $zero
 /* 7E41F4 80283374 8E050000 */  lw        $a1, ($s0)
-/* 7E41F8 80283378 0C0B1EAF */  jal       get_variable
+/* 7E41F8 80283378 0C0B1EAF */  jal       evt_get_variable
 /* 7E41FC 8028337C 0040B82D */   daddu    $s7, $v0, $zero
 /* 7E4200 80283380 02B40018 */  mult      $s5, $s4
 /* 7E4204 80283384 26100004 */  addiu     $s0, $s0, 4
 /* 7E4208 80283388 0220202D */  daddu     $a0, $s1, $zero
 /* 7E420C 8028338C 8E050000 */  lw        $a1, ($s0)
 /* 7E4210 80283390 00008812 */  mflo      $s1
-/* 7E4214 80283394 0C0B1EAF */  jal       get_variable
+/* 7E4214 80283394 0C0B1EAF */  jal       evt_get_variable
 /* 7E4218 80283398 0040B02D */   daddu    $s6, $v0, $zero
 /* 7E421C 8028339C 2404001C */  addiu     $a0, $zero, 0x1c
 /* 7E4220 802833A0 0C00AB0A */  jal       general_heap_malloc

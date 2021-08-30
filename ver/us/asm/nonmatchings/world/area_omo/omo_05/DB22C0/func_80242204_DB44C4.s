@@ -5,7 +5,7 @@ glabel func_80242204_DB44C4
 /* DB44C4 80242204 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* DB44C8 80242208 AFBF0010 */  sw        $ra, 0x10($sp)
 /* DB44CC 8024220C 8C82000C */  lw        $v0, 0xc($a0)
-/* DB44D0 80242210 0C0B1EAF */  jal       get_variable
+/* DB44D0 80242210 0C0B1EAF */  jal       evt_get_variable
 /* DB44D4 80242214 8C450000 */   lw       $a1, ($v0)
 /* DB44D8 80242218 0040182D */  daddu     $v1, $v0, $zero
 /* DB44DC 8024221C 10600012 */  beqz      $v1, .L80242268

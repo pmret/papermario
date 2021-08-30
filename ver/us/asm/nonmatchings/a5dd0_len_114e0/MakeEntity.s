@@ -23,27 +23,27 @@ glabel MakeEntity
 /* A8480 80111D80 0240202D */  daddu     $a0, $s2, $zero
 /* A8484 80111D84 3C118016 */  lui       $s1, %hi(D_8015C7D8)
 /* A8488 80111D88 2631C7D8 */  addiu     $s1, $s1, %lo(D_8015C7D8)
-/* A848C 80111D8C 0C0B1EAF */  jal       get_variable
+/* A848C 80111D8C 0C0B1EAF */  jal       evt_get_variable
 /* A8490 80111D90 3C148000 */   lui      $s4, 0x8000
 /* A8494 80111D94 8E050000 */  lw        $a1, ($s0)
 /* A8498 80111D98 26100004 */  addiu     $s0, $s0, 4
 /* A849C 80111D9C 0240202D */  daddu     $a0, $s2, $zero
-/* A84A0 80111DA0 0C0B1EAF */  jal       get_variable
+/* A84A0 80111DA0 0C0B1EAF */  jal       evt_get_variable
 /* A84A4 80111DA4 0040F02D */   daddu    $fp, $v0, $zero
 /* A84A8 80111DA8 8E050000 */  lw        $a1, ($s0)
 /* A84AC 80111DAC 26100004 */  addiu     $s0, $s0, 4
 /* A84B0 80111DB0 0240202D */  daddu     $a0, $s2, $zero
-/* A84B4 80111DB4 0C0B1EAF */  jal       get_variable
+/* A84B4 80111DB4 0C0B1EAF */  jal       evt_get_variable
 /* A84B8 80111DB8 0040B02D */   daddu    $s6, $v0, $zero
 /* A84BC 80111DBC 8E050000 */  lw        $a1, ($s0)
 /* A84C0 80111DC0 26100004 */  addiu     $s0, $s0, 4
 /* A84C4 80111DC4 0240202D */  daddu     $a0, $s2, $zero
-/* A84C8 80111DC8 0C0B1EAF */  jal       get_variable
+/* A84C8 80111DC8 0C0B1EAF */  jal       evt_get_variable
 /* A84CC 80111DCC 0040B82D */   daddu    $s7, $v0, $zero
 /* A84D0 80111DD0 8E050000 */  lw        $a1, ($s0)
 /* A84D4 80111DD4 26100004 */  addiu     $s0, $s0, 4
 /* A84D8 80111DD8 0240202D */  daddu     $a0, $s2, $zero
-/* A84DC 80111DDC 0C0B1EAF */  jal       get_variable
+/* A84DC 80111DDC 0C0B1EAF */  jal       evt_get_variable
 /* A84E0 80111DE0 0040A82D */   daddu    $s5, $v0, $zero
 /* A84E4 80111DE4 0040982D */  daddu     $s3, $v0, $zero
 /* A84E8 80111DE8 AE200000 */  sw        $zero, ($s1)
@@ -54,7 +54,7 @@ glabel MakeEntity
 .L80111DFC:
 /* A84FC 80111DFC 8E050000 */  lw        $a1, ($s0)
 /* A8500 80111E00 26100004 */  addiu     $s0, $s0, 4
-/* A8504 80111E04 0C0B1EAF */  jal       get_variable
+/* A8504 80111E04 0C0B1EAF */  jal       evt_get_variable
 /* A8508 80111E08 0240202D */   daddu    $a0, $s2, $zero
 /* A850C 80111E0C 10540004 */  beq       $v0, $s4, .L80111E20
 /* A8510 80111E10 03C0202D */   daddu    $a0, $fp, $zero

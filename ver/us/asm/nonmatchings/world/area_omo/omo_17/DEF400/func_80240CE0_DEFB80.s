@@ -25,7 +25,7 @@ glabel func_80240CE0_DEFB80
 /* DEFBB4 80240D14 8E63000C */  lw        $v1, 0xc($s3)
 /* DEFBB8 80240D18 0260202D */  daddu     $a0, $s3, $zero
 /* DEFBBC 80240D1C 8C650000 */  lw        $a1, ($v1)
-/* DEFBC0 80240D20 0C0B1EAF */  jal       get_variable
+/* DEFBC0 80240D20 0C0B1EAF */  jal       evt_get_variable
 /* DEFBC4 80240D24 0040902D */   daddu    $s2, $v0, $zero
 /* DEFBC8 80240D28 AFA00018 */  sw        $zero, 0x18($sp)
 /* DEFBCC 80240D2C 8E2300D0 */  lw        $v1, 0xd0($s1)

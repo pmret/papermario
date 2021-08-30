@@ -25,7 +25,7 @@ glabel func_80240780_DB2A40
 /* DB2A74 802407B4 8E63000C */  lw        $v1, 0xc($s3)
 /* DB2A78 802407B8 0260202D */  daddu     $a0, $s3, $zero
 /* DB2A7C 802407BC 8C650000 */  lw        $a1, ($v1)
-/* DB2A80 802407C0 0C0B1EAF */  jal       get_variable
+/* DB2A80 802407C0 0C0B1EAF */  jal       evt_get_variable
 /* DB2A84 802407C4 0040902D */   daddu    $s2, $v0, $zero
 /* DB2A88 802407C8 AFA00018 */  sw        $zero, 0x18($sp)
 /* DB2A8C 802407CC 8E2300D0 */  lw        $v1, 0xd0($s1)

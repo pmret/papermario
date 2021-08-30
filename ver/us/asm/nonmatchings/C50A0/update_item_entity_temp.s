@@ -549,7 +549,7 @@ glabel L80135E78_CC578
 /* CC590 80135E90 10400009 */  beqz      $v0, .L80135EB8
 /* CC594 80135E94 0000202D */   daddu    $a0, $zero, $zero
 /* CC598 80135E98 3C05F840 */  lui       $a1, 0xf840
-/* CC59C 80135E9C 0C0B1EAF */  jal       get_variable
+/* CC59C 80135E9C 0C0B1EAF */  jal       evt_get_variable
 /* CC5A0 80135EA0 34A55BE1 */   ori      $a1, $a1, 0x5be1
 /* CC5A4 80135EA4 14400004 */  bnez      $v0, .L80135EB8
 /* CC5A8 80135EA8 0000202D */   daddu    $a0, $zero, $zero
@@ -563,7 +563,7 @@ glabel L80135E78_CC578
 /* CC5C4 80135EC4 24020009 */   addiu    $v0, $zero, 9
 /* CC5C8 80135EC8 0000202D */  daddu     $a0, $zero, $zero
 /* CC5CC 80135ECC 3C05F840 */  lui       $a1, 0xf840
-/* CC5D0 80135ED0 0C0B1EAF */  jal       get_variable
+/* CC5D0 80135ED0 0C0B1EAF */  jal       evt_get_variable
 /* CC5D4 80135ED4 34A55BE5 */   ori      $a1, $a1, 0x5be5
 /* CC5D8 80135ED8 14400009 */  bnez      $v0, .L80135F00
 /* CC5DC 80135EDC 24020009 */   addiu    $v0, $zero, 9

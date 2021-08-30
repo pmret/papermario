@@ -14,7 +14,7 @@ glabel apply_transform_to_children
 /* EDF74 802C95C4 8E62000C */  lw        $v0, 0xc($s3)
 /* EDF78 802C95C8 2411FFFF */  addiu     $s1, $zero, -1
 /* EDF7C 802C95CC 8C450000 */  lw        $a1, ($v0)
-/* EDF80 802C95D0 0C0B1EAF */  jal       get_variable
+/* EDF80 802C95D0 0C0B1EAF */  jal       evt_get_variable
 /* EDF84 802C95D4 0260202D */   daddu    $a0, $s3, $zero
 /* EDF88 802C95D8 0040282D */  daddu     $a1, $v0, $zero
 /* EDF8C 802C95DC 3C06800A */  lui       $a2, %hi(D_8009A5F4)

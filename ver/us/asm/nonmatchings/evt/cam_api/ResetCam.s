@@ -15,7 +15,7 @@ glabel ResetCam
 /* F12A0 802CC8F0 F7B40068 */  sdc1      $f20, 0x68($sp)
 /* F12A4 802CC8F4 8E30000C */  lw        $s0, 0xc($s1)
 /* F12A8 802CC8F8 8E050000 */  lw        $a1, ($s0)
-/* F12AC 802CC8FC 0C0B1EAF */  jal       get_variable
+/* F12AC 802CC8FC 0C0B1EAF */  jal       evt_get_variable
 /* F12B0 802CC900 26100004 */   addiu    $s0, $s0, 4
 /* F12B4 802CC904 0220202D */  daddu     $a0, $s1, $zero
 /* F12B8 802CC908 3C06800B */  lui       $a2, %hi(gCameras)

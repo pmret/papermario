@@ -12,7 +12,7 @@ glabel func_80240AAC_E1320C
 /* E13228 80240AC8 8E23000C */  lw        $v1, 0xc($s1)
 /* E1322C 80240ACC 8C650000 */  lw        $a1, ($v1)
 /* E13230 80240AD0 8C500080 */  lw        $s0, 0x80($v0)
-/* E13234 80240AD4 0C0B1EAF */  jal       get_variable
+/* E13234 80240AD4 0C0B1EAF */  jal       evt_get_variable
 /* E13238 80240AD8 0220202D */   daddu    $a0, $s1, $zero
 /* E1323C 80240ADC 00021840 */  sll       $v1, $v0, 1
 /* E13240 80240AE0 00621821 */  addu      $v1, $v1, $v0

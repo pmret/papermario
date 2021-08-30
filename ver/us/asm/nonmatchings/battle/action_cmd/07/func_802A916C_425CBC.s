@@ -13,16 +13,16 @@ glabel func_802A916C_425CBC
 /* 425CDC 802A918C 2631FBE0 */  addiu     $s1, $s1, %lo(gActionCommandStatus)
 /* 425CE0 802A9190 A220005E */  sb        $zero, 0x5e($s1)
 /* 425CE4 802A9194 8E050000 */  lw        $a1, ($s0)
-/* 425CE8 802A9198 0C0B1EAF */  jal       get_variable
+/* 425CE8 802A9198 0C0B1EAF */  jal       evt_get_variable
 /* 425CEC 802A919C 26100004 */   addiu    $s0, $s0, 4
 /* 425CF0 802A91A0 A622004E */  sh        $v0, 0x4e($s1)
 /* 425CF4 802A91A4 8E050000 */  lw        $a1, ($s0)
 /* 425CF8 802A91A8 26100004 */  addiu     $s0, $s0, 4
-/* 425CFC 802A91AC 0C0B1EAF */  jal       get_variable
+/* 425CFC 802A91AC 0C0B1EAF */  jal       evt_get_variable
 /* 425D00 802A91B0 0240202D */   daddu    $a0, $s2, $zero
 /* 425D04 802A91B4 A6220052 */  sh        $v0, 0x52($s1)
 /* 425D08 802A91B8 8E050000 */  lw        $a1, ($s0)
-/* 425D0C 802A91BC 0C0B1EAF */  jal       get_variable
+/* 425D0C 802A91BC 0C0B1EAF */  jal       evt_get_variable
 /* 425D10 802A91C0 0240202D */   daddu    $a0, $s2, $zero
 /* 425D14 802A91C4 00022400 */  sll       $a0, $v0, 0x10
 /* 425D18 802A91C8 00042403 */  sra       $a0, $a0, 0x10

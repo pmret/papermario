@@ -7,7 +7,7 @@ glabel pause_tabs_draw_stats_805418
 /* 805420 80244BA0 3C05FD05 */  lui       $a1, 0xfd05
 /* 805424 80244BA4 34A50F80 */  ori       $a1, $a1, 0xf80
 /* 805428 80244BA8 AFBF0024 */  sw        $ra, 0x24($sp)
-/* 80542C 80244BAC 0C0B1EAF */  jal       get_variable
+/* 80542C 80244BAC 0C0B1EAF */  jal       evt_get_variable
 /* 805430 80244BB0 AFB00020 */   sw       $s0, 0x20($sp)
 /* 805434 80244BB4 0000202D */  daddu     $a0, $zero, $zero
 /* 805438 80244BB8 27A50010 */  addiu     $a1, $sp, 0x10

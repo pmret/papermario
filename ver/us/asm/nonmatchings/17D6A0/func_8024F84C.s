@@ -13,31 +13,31 @@ glabel func_8024F84C
 /* 17E14C 8024F86C AFB00018 */  sw        $s0, 0x18($sp)
 /* 17E150 8024F870 8E30000C */  lw        $s0, 0xc($s1)
 /* 17E154 8024F874 8E050000 */  lw        $a1, ($s0)
-/* 17E158 8024F878 0C0B1EAF */  jal       get_variable
+/* 17E158 8024F878 0C0B1EAF */  jal       evt_get_variable
 /* 17E15C 8024F87C 26100004 */   addiu    $s0, $s0, 4
 /* 17E160 8024F880 8E050000 */  lw        $a1, ($s0)
 /* 17E164 8024F884 26100004 */  addiu     $s0, $s0, 4
 /* 17E168 8024F888 0220202D */  daddu     $a0, $s1, $zero
-/* 17E16C 8024F88C 0C0B1EAF */  jal       get_variable
+/* 17E16C 8024F88C 0C0B1EAF */  jal       evt_get_variable
 /* 17E170 8024F890 0040A82D */   daddu    $s5, $v0, $zero
 /* 17E174 8024F894 8E050000 */  lw        $a1, ($s0)
 /* 17E178 8024F898 26100004 */  addiu     $s0, $s0, 4
 /* 17E17C 8024F89C 0220202D */  daddu     $a0, $s1, $zero
-/* 17E180 8024F8A0 0C0B1EAF */  jal       get_variable
+/* 17E180 8024F8A0 0C0B1EAF */  jal       evt_get_variable
 /* 17E184 8024F8A4 0040A02D */   daddu    $s4, $v0, $zero
 /* 17E188 8024F8A8 8E050000 */  lw        $a1, ($s0)
 /* 17E18C 8024F8AC 26100004 */  addiu     $s0, $s0, 4
 /* 17E190 8024F8B0 0220202D */  daddu     $a0, $s1, $zero
-/* 17E194 8024F8B4 0C0B1EAF */  jal       get_variable
+/* 17E194 8024F8B4 0C0B1EAF */  jal       evt_get_variable
 /* 17E198 8024F8B8 0040982D */   daddu    $s3, $v0, $zero
 /* 17E19C 8024F8BC 8E050000 */  lw        $a1, ($s0)
 /* 17E1A0 8024F8C0 26100004 */  addiu     $s0, $s0, 4
 /* 17E1A4 8024F8C4 0220202D */  daddu     $a0, $s1, $zero
-/* 17E1A8 8024F8C8 0C0B1EAF */  jal       get_variable
+/* 17E1A8 8024F8C8 0C0B1EAF */  jal       evt_get_variable
 /* 17E1AC 8024F8CC 0040902D */   daddu    $s2, $v0, $zero
 /* 17E1B0 8024F8D0 0220202D */  daddu     $a0, $s1, $zero
 /* 17E1B4 8024F8D4 8E050000 */  lw        $a1, ($s0)
-/* 17E1B8 8024F8D8 0C0B1EAF */  jal       get_variable
+/* 17E1B8 8024F8D8 0C0B1EAF */  jal       evt_get_variable
 /* 17E1BC 8024F8DC 0040802D */   daddu    $s0, $v0, $zero
 /* 17E1C0 8024F8E0 44956000 */  mtc1      $s5, $f12
 /* 17E1C4 8024F8E4 00000000 */  nop

@@ -7,7 +7,7 @@ glabel func_80242690_E079F0
 /* E079F8 80242698 AFB10024 */  sw        $s1, 0x24($sp)
 /* E079FC 8024269C AFB00020 */  sw        $s0, 0x20($sp)
 /* E07A00 802426A0 8C82000C */  lw        $v0, 0xc($a0)
-/* E07A04 802426A4 0C0B1EAF */  jal       get_variable
+/* E07A04 802426A4 0C0B1EAF */  jal       evt_get_variable
 /* E07A08 802426A8 8C450000 */   lw       $a1, ($v0)
 /* E07A0C 802426AC 24030100 */  addiu     $v1, $zero, 0x100
 /* E07A10 802426B0 0040882D */  daddu     $s1, $v0, $zero

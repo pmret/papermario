@@ -50,7 +50,7 @@ glabel func_80240C60_B5EF10
 /* B5EFC4 80240D14 3C013F80 */  lui       $at, 0x3f80
 /* B5EFC8 80240D18 4481B000 */  mtc1      $at, $f22
 /* B5EFCC 80240D1C 4480A000 */  mtc1      $zero, $f20
-/* B5EFD0 80240D20 0C0B1EAF */  jal       get_variable
+/* B5EFD0 80240D20 0C0B1EAF */  jal       evt_get_variable
 /* B5EFD4 80240D24 0240802D */   daddu    $s0, $s2, $zero
 /* B5EFD8 80240D28 0C04417A */  jal       get_entity_by_index
 /* B5EFDC 80240D2C 0040202D */   daddu    $a0, $v0, $zero

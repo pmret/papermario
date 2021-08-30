@@ -18,7 +18,7 @@ glabel ResetActorSounds
 /* 19E130 8026F850 AFB00010 */  sw        $s0, 0x10($sp)
 /* 19E134 8026F854 8E50000C */  lw        $s0, 0xc($s2)
 /* 19E138 8026F858 8E050000 */  lw        $a1, ($s0)
-/* 19E13C 8026F85C 0C0B1EAF */  jal       get_variable
+/* 19E13C 8026F85C 0C0B1EAF */  jal       evt_get_variable
 /* 19E140 8026F860 26100004 */   addiu    $s0, $s0, 4
 /* 19E144 8026F864 0040882D */  daddu     $s1, $v0, $zero
 /* 19E148 8026F868 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -28,15 +28,15 @@ glabel ResetActorSounds
 .L8026F878:
 /* 19E158 8026F878 8E050000 */  lw        $a1, ($s0)
 /* 19E15C 8026F87C 26100004 */  addiu     $s0, $s0, 4
-/* 19E160 8026F880 0C0B1EAF */  jal       get_variable
+/* 19E160 8026F880 0C0B1EAF */  jal       evt_get_variable
 /* 19E164 8026F884 0240202D */   daddu    $a0, $s2, $zero
 /* 19E168 8026F888 8E050000 */  lw        $a1, ($s0)
 /* 19E16C 8026F88C 26100004 */  addiu     $s0, $s0, 4
 /* 19E170 8026F890 0240202D */  daddu     $a0, $s2, $zero
-/* 19E174 8026F894 0C0B1EAF */  jal       get_variable
+/* 19E174 8026F894 0C0B1EAF */  jal       evt_get_variable
 /* 19E178 8026F898 0040982D */   daddu    $s3, $v0, $zero
 /* 19E17C 8026F89C 8E050000 */  lw        $a1, ($s0)
-/* 19E180 8026F8A0 0C0B1EAF */  jal       get_variable
+/* 19E180 8026F8A0 0C0B1EAF */  jal       evt_get_variable
 /* 19E184 8026F8A4 0240202D */   daddu    $a0, $s2, $zero
 /* 19E188 8026F8A8 0C09A75B */  jal       get_actor
 /* 19E18C 8026F8AC 0220202D */   daddu    $a0, $s1, $zero

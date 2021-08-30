@@ -15,7 +15,7 @@ glabel func_80241540_E0FCE0
 /* E0FCEC 8024154C 34A50F8A */  ori       $a1, $a1, 0xf8a
 /* E0FCF0 80241550 AFBF0020 */  sw        $ra, 0x20($sp)
 /* E0FCF4 80241554 AFB1001C */  sw        $s1, 0x1c($sp)
-/* E0FCF8 80241558 0C0B1EAF */  jal       get_variable
+/* E0FCF8 80241558 0C0B1EAF */  jal       evt_get_variable
 /* E0FCFC 8024155C AFB00018 */   sw       $s0, 0x18($sp)
 /* E0FD00 80241560 0040802D */  daddu     $s0, $v0, $zero
 /* E0FD04 80241564 8E030000 */  lw        $v1, ($s0)

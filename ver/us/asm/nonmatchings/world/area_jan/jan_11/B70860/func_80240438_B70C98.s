@@ -14,7 +14,7 @@ glabel func_80240438_B70C98
 /* B70CBC 8024045C F7B60030 */  sdc1      $f22, 0x30($sp)
 /* B70CC0 80240460 F7B40028 */  sdc1      $f20, 0x28($sp)
 /* B70CC4 80240464 8E62000C */  lw        $v0, 0xc($s3)
-/* B70CC8 80240468 0C0B1EAF */  jal       get_variable
+/* B70CC8 80240468 0C0B1EAF */  jal       evt_get_variable
 /* B70CCC 8024046C 8C450000 */   lw       $a1, ($v0)
 /* B70CD0 80240470 2404FFFC */  addiu     $a0, $zero, -4
 /* B70CD4 80240474 0C00EABB */  jal       get_npc_unsafe

@@ -5,7 +5,7 @@ glabel LoadBattleSection
 /* 1986C4 80269DE4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 1986C8 80269DE8 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 1986CC 80269DEC 8C82000C */  lw        $v0, 0xc($a0)
-/* 1986D0 80269DF0 0C0B1EAF */  jal       get_variable
+/* 1986D0 80269DF0 0C0B1EAF */  jal       evt_get_variable
 /* 1986D4 80269DF4 8C450000 */   lw       $a1, ($v0)
 /* 1986D8 80269DF8 3C038009 */  lui       $v1, %hi(gBattleAreas)
 /* 1986DC 80269DFC 24635A30 */  addiu     $v1, $v1, %lo(gBattleAreas)

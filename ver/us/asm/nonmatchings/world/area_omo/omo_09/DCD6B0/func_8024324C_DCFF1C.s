@@ -25,7 +25,7 @@ glabel func_8024324C_DCFF1C
 /* DCFF50 80243280 00A0882D */   daddu    $s1, $a1, $zero
 /* DCFF54 80243284 0260202D */  daddu     $a0, $s3, $zero
 /* DCFF58 80243288 8E050000 */  lw        $a1, ($s0)
-/* DCFF5C 8024328C 0C0B1EAF */  jal       get_variable
+/* DCFF5C 8024328C 0C0B1EAF */  jal       evt_get_variable
 /* DCFF60 80243290 0040A02D */   daddu    $s4, $v0, $zero
 /* DCFF64 80243294 AFA00010 */  sw        $zero, 0x10($sp)
 /* DCFF68 80243298 8E4300D0 */  lw        $v1, 0xd0($s2)

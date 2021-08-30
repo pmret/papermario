@@ -25,7 +25,7 @@ glabel PlayerFallToGoal
 /* 1A21C0 802738E0 14400046 */  bnez      $v0, .L802739FC
 /* 1A21C4 802738E4 00000000 */   nop
 /* 1A21C8 802738E8 8C650000 */  lw        $a1, ($v1)
-/* 1A21CC 802738EC 0C0B1EAF */  jal       get_variable
+/* 1A21CC 802738EC 0C0B1EAF */  jal       evt_get_variable
 /* 1A21D0 802738F0 0240202D */   daddu    $a0, $s2, $zero
 /* 1A21D4 802738F4 C6000148 */  lwc1      $f0, 0x148($s0)
 /* 1A21D8 802738F8 C61A0018 */  lwc1      $f26, 0x18($s0)

@@ -17,7 +17,7 @@ glabel func_80241D00_B2E170
 .L80241D30:
 /* B2E1A0 80241D30 3C05F5DE */  lui       $a1, 0xf5de
 /* B2E1A4 80241D34 34A502E0 */  ori       $a1, $a1, 0x2e0
-/* B2E1A8 80241D38 0C0B1EAF */  jal       get_variable
+/* B2E1A8 80241D38 0C0B1EAF */  jal       evt_get_variable
 /* B2E1AC 80241D3C 0000202D */   daddu    $a0, $zero, $zero
 /* B2E1B0 80241D40 3C038024 */  lui       $v1, %hi(D_80243248_B2F6B8)
 /* B2E1B4 80241D44 00621821 */  addu      $v1, $v1, $v0

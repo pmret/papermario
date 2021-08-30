@@ -6,7 +6,7 @@ glabel func_80240000_C8C0A0
 /* C8C0A4 80240004 AFBF0010 */  sw        $ra, 0x10($sp)
 /* C8C0A8 80240008 3C05F5DE */  lui       $a1, 0xf5de
 /* C8C0AC 8024000C 34A50180 */  ori       $a1, $a1, 0x180
-/* C8C0B0 80240010 0C0B1EAF */  jal       get_variable
+/* C8C0B0 80240010 0C0B1EAF */  jal       evt_get_variable
 /* C8C0B4 80240014 0000202D */   daddu    $a0, $zero, $zero
 /* C8C0B8 80240018 28430027 */  slti      $v1, $v0, 0x27
 /* C8C0BC 8024001C 3C020019 */  lui       $v0, 0x19

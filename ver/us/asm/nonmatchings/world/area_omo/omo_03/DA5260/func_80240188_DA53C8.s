@@ -10,16 +10,16 @@ glabel func_80240188_DA53C8
 /* DA53DC 8024019C AFB00010 */  sw        $s0, 0x10($sp)
 /* DA53E0 802401A0 8E50000C */  lw        $s0, 0xc($s2)
 /* DA53E4 802401A4 8E050000 */  lw        $a1, ($s0)
-/* DA53E8 802401A8 0C0B1EAF */  jal       get_variable
+/* DA53E8 802401A8 0C0B1EAF */  jal       evt_get_variable
 /* DA53EC 802401AC 26100004 */   addiu    $s0, $s0, 4
 /* DA53F0 802401B0 8E050000 */  lw        $a1, ($s0)
 /* DA53F4 802401B4 26100004 */  addiu     $s0, $s0, 4
 /* DA53F8 802401B8 0240202D */  daddu     $a0, $s2, $zero
-/* DA53FC 802401BC 0C0B1EAF */  jal       get_variable
+/* DA53FC 802401BC 0C0B1EAF */  jal       evt_get_variable
 /* DA5400 802401C0 0040882D */   daddu    $s1, $v0, $zero
 /* DA5404 802401C4 0240202D */  daddu     $a0, $s2, $zero
 /* DA5408 802401C8 8E050000 */  lw        $a1, ($s0)
-/* DA540C 802401CC 0C0B1EAF */  jal       get_variable
+/* DA540C 802401CC 0C0B1EAF */  jal       evt_get_variable
 /* DA5410 802401D0 0040802D */   daddu    $s0, $v0, $zero
 /* DA5414 802401D4 02020018 */  mult      $s0, $v0
 /* DA5418 802401D8 24020002 */  addiu     $v0, $zero, 2

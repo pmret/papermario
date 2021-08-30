@@ -22,7 +22,7 @@ glabel pause_tutorial_draw_contents
 /* 136B78 80243838 F7B60108 */  sdc1      $f22, 0x108($sp)
 /* 136B7C 8024383C F7B40100 */  sdc1      $f20, 0x100($sp)
 /* 136B80 80243840 AFA60128 */  sw        $a2, 0x128($sp)
-/* 136B84 80243844 0C0B1EAF */  jal       get_variable
+/* 136B84 80243844 0C0B1EAF */  jal       evt_get_variable
 /* 136B88 80243848 AFA7012C */   sw       $a3, 0x12c($sp)
 /* 136B8C 8024384C 104001F4 */  beqz      $v0, .L80244020
 /* 136B90 80243850 3C08E300 */   lui      $t0, 0xe300

@@ -10,7 +10,7 @@ glabel func_802401CC_B7A21C
 /* B7A230 802401E0 F7B40060 */  sdc1      $f20, 0x60($sp)
 /* B7A234 802401E4 8E30000C */  lw        $s0, 0xc($s1)
 /* B7A238 802401E8 8E050000 */  lw        $a1, ($s0)
-/* B7A23C 802401EC 0C0B1EAF */  jal       get_variable
+/* B7A23C 802401EC 0C0B1EAF */  jal       evt_get_variable
 /* B7A240 802401F0 26100004 */   addiu    $s0, $s0, 4
 /* B7A244 802401F4 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* B7A248 802401F8 0040202D */   daddu    $a0, $v0, $zero

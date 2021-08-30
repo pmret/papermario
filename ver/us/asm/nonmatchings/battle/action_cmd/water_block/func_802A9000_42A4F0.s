@@ -34,7 +34,7 @@ glabel func_802A9000_42A4F0
 /* 42A560 802A9070 A6400044 */  sh        $zero, 0x44($s2)
 /* 42A564 802A9074 A6400048 */  sh        $zero, 0x48($s2)
 /* 42A568 802A9078 8E050000 */  lw        $a1, ($s0)
-/* 42A56C 802A907C 0C0B1EAF */  jal       get_variable
+/* 42A56C 802A907C 0C0B1EAF */  jal       evt_get_variable
 /* 42A570 802A9080 0220202D */   daddu    $a0, $s1, $zero
 /* 42A574 802A9084 3C048011 */  lui       $a0, %hi(D_80108B28)
 /* 42A578 802A9088 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)

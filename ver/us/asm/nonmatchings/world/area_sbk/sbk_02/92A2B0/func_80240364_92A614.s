@@ -26,42 +26,42 @@ glabel func_80240364_92A614
 /* 92A668 802403B8 AFA20014 */   sw       $v0, 0x14($sp)
 /* 92A66C 802403BC 8E050000 */  lw        $a1, ($s0)
 /* 92A670 802403C0 26100004 */  addiu     $s0, $s0, 4
-/* 92A674 802403C4 0C0B1EAF */  jal       get_variable
+/* 92A674 802403C4 0C0B1EAF */  jal       evt_get_variable
 /* 92A678 802403C8 0220202D */   daddu    $a0, $s1, $zero
 /* 92A67C 802403CC 3C018024 */  lui       $at, %hi(D_80245608)
 /* 92A680 802403D0 AC225608 */  sw        $v0, %lo(D_80245608)($at)
 /* 92A684 802403D4 8E050000 */  lw        $a1, ($s0)
 /* 92A688 802403D8 26100004 */  addiu     $s0, $s0, 4
-/* 92A68C 802403DC 0C0B1EAF */  jal       get_variable
+/* 92A68C 802403DC 0C0B1EAF */  jal       evt_get_variable
 /* 92A690 802403E0 0220202D */   daddu    $a0, $s1, $zero
 /* 92A694 802403E4 3C018024 */  lui       $at, %hi(D_8024560C)
 /* 92A698 802403E8 AC22560C */  sw        $v0, %lo(D_8024560C)($at)
 /* 92A69C 802403EC 8E050000 */  lw        $a1, ($s0)
 /* 92A6A0 802403F0 26100004 */  addiu     $s0, $s0, 4
-/* 92A6A4 802403F4 0C0B1EAF */  jal       get_variable
+/* 92A6A4 802403F4 0C0B1EAF */  jal       evt_get_variable
 /* 92A6A8 802403F8 0220202D */   daddu    $a0, $s1, $zero
 /* 92A6AC 802403FC 3C018024 */  lui       $at, %hi(D_80245610)
 /* 92A6B0 80240400 AC225610 */  sw        $v0, %lo(D_80245610)($at)
 /* 92A6B4 80240404 8E050000 */  lw        $a1, ($s0)
 /* 92A6B8 80240408 26100004 */  addiu     $s0, $s0, 4
-/* 92A6BC 8024040C 0C0B1EAF */  jal       get_variable
+/* 92A6BC 8024040C 0C0B1EAF */  jal       evt_get_variable
 /* 92A6C0 80240410 0220202D */   daddu    $a0, $s1, $zero
 /* 92A6C4 80240414 3C018024 */  lui       $at, %hi(D_80245614)
 /* 92A6C8 80240418 AC225614 */  sw        $v0, %lo(D_80245614)($at)
 /* 92A6CC 8024041C 8E050000 */  lw        $a1, ($s0)
 /* 92A6D0 80240420 26100004 */  addiu     $s0, $s0, 4
-/* 92A6D4 80240424 0C0B1EAF */  jal       get_variable
+/* 92A6D4 80240424 0C0B1EAF */  jal       evt_get_variable
 /* 92A6D8 80240428 0220202D */   daddu    $a0, $s1, $zero
 /* 92A6DC 8024042C 3C018024 */  lui       $at, %hi(D_80245618)
 /* 92A6E0 80240430 AC225618 */  sw        $v0, %lo(D_80245618)($at)
 /* 92A6E4 80240434 8E050000 */  lw        $a1, ($s0)
 /* 92A6E8 80240438 26100004 */  addiu     $s0, $s0, 4
-/* 92A6EC 8024043C 0C0B1EAF */  jal       get_variable
+/* 92A6EC 8024043C 0C0B1EAF */  jal       evt_get_variable
 /* 92A6F0 80240440 0220202D */   daddu    $a0, $s1, $zero
 /* 92A6F4 80240444 3C018024 */  lui       $at, %hi(D_8024561C)
 /* 92A6F8 80240448 AC22561C */  sw        $v0, %lo(D_8024561C)($at)
 /* 92A6FC 8024044C 8E050000 */  lw        $a1, ($s0)
-/* 92A700 80240450 0C0B1EAF */  jal       get_variable
+/* 92A700 80240450 0C0B1EAF */  jal       evt_get_variable
 /* 92A704 80240454 0220202D */   daddu    $a0, $s1, $zero
 /* 92A708 80240458 3C018024 */  lui       $at, %hi(D_80245620)
 /* 92A70C 8024045C AC225620 */  sw        $v0, %lo(D_80245620)($at)
