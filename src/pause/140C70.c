@@ -64,24 +64,17 @@ void pause_map_draw_title(s32* arg1, s32 arg2, s32 textOffsetY, s32 textOffsetX)
 
 #ifdef NON_MATCHING
 void pause_map_init(s8* arg0) {
-    f32 temp_f0;
-    f32 temp_f0_2;
-    f32 temp_f2;
-    f32 temp_f2_2;
-    f32 temp_f6;
-    s32 i;
-    s32* phi_s2;
-    HudElement* hudElement;
-    s32 phi_s0_2;
-    s32 phi_v0_2;
-    s32 phi_s0_4 = 0;
     PauseMapSpaces* map_spaces;
+    PauseMapSpaces* map_spacesTemp;
     Pause80250668* phi_v0;
-    s32* hudElementPtr = &D_80270700;
+    f32 temp_f6;
+    s32 i = 0;
+    s32 tempEvt;
     s32* phi_s1 = &D_8024FA30;
+    s32* hudElementPtr = &D_80270700;
     
     
-    for (i = 0; i <= 0; i++) {
+    for (i; i < 1; i++) {
         hudElementPtr[i] = create_hud_element(phi_s1[0]);
         set_hud_element_flags(hudElementPtr[i], 0x80);
         phi_s1++;
@@ -89,7 +82,6 @@ void pause_map_init(s8* arg0) {
     
     i = 6;
     phi_v0 = &D_80250668;
-    
 
     for (i; i >= 0; i--) {
         phi_v0->unk_10 = arg0;
@@ -100,45 +92,47 @@ void pause_map_init(s8* arg0) {
     mapCursorCurrentOption = -1;
     D_80270724 = 0;
     mapCursorCurrentOptionCopy = -1;
-
-    for (i = 0; i < EVT_SAVE_FLAG_PLACES_VISITED_TOTAL; i++) {
-        if (map_spaces->tabIndex != evt_get_variable(0, 0xF5DE0329)) {
-            map_spaces++;
-            phi_s0_4 = 1;
-        } else {
+    tempEvt = evt_get_variable(0, 0xF5DE0329);
+    i = 0;
+    map_spaces = (PauseMapSpaces*)&D_802502B8;
+    map_spacesTemp = map_spaces;
+    
+    for (i; i < EVT_SAVE_FLAG_PLACES_VISITED_TOTAL; i++) {
+        if (map_spaces->tabIndex == tempEvt) {
             break;
+        } else {
+            map_spaces++;
         }
     }
 
-    if (map_spaces->tabIndex != 0) {
-        map_spaces = phi_s0_4 * sizeof(pause_map_spaces) + &D_802502B8;
-        mapMarioXPos = map_spaces->xPos;
-        mapMarioYPos = map_spaces->yPos;
+    if (i < EVT_SAVE_FLAG_PLACES_VISITED_TOTAL) {
+        mapMarioXPos = map_spacesTemp[i].xPos;
+        mapMarioYPos = map_spacesTemp[i].yPos;
     } else {
         mapMarioXPos = 0;
         mapMarioYPos = 0;
     }
-    
-    temp_f2 = mapMarioXPos;
-    mapCursorXPos = temp_f2;
+    mapCursorXPos = (s32) mapMarioXPos;
+    mapCursorYPos = (s32) mapMarioYPos;
     D_80270704 = 0.0f;
+    D_80270708 = 0;
     temp_f6 = D_80270704;
-    temp_f0 = mapMarioYPos;
-    mapCursorYPos = temp_f0;
-    temp_f2_2 = temp_f6 - (f32) (s32) ((f64) (temp_f2 + temp_f6) - D_80270080);
-    temp_f0_2 = temp_f6 - (f32) (s32) ((f64) (temp_f0 + temp_f6) - D_80270088);
-    D_80270708 = 0.0f;
-    D_80270704 = temp_f2_2;
-    D_80270708 = temp_f0_2;
-    if (temp_f6 < temp_f2_2) {
-        D_80270704 = temp_f6;
+    
+    D_80270704 = temp_f6 - (s32) (mapCursorXPos + temp_f6 - D_80270080);
+    D_80270708 = temp_f6 - (s32) (mapCursorYPos + temp_f6 - D_80270088);
+    
+    if (0 < D_80270704) {
+        D_80270704 = 0;
     }
-    if (temp_f6 < temp_f0_2) {
-        D_80270708 = temp_f6;
+
+    if (0 < D_80270708) {
+        D_80270708 = 0;
     }
+    
     if (D_80270704 <= -86.0f) {
         D_80270704 = -85.0f;
     }
+
     if (D_80270708 <= -210.0f) {
         D_80270708 = -209.0f;
     }
