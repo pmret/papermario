@@ -1,48 +1,33 @@
 #include "common.h"
 #include "effects.h"
 
-struct BattlePopup;
-typedef void (*BattlePopupCallback)(struct BattlePopup* popup);
-typedef struct BattlePopup {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ BattlePopupCallback unk_04;
-    /* 0x08 */ BattlePopupCallback unk_08;
-    /* 0x0C */ BattlePopupCallback drawFunc;
-    /* 0x10 */ s16 active;
-    /* 0x12 */ s16 messageIndex;
-    /* 0x14 */ s16 duration;
-    /* 0x16 */ s8 unk_16;
-    /* 0x17 */ s8 unk_17;
-    /* 0x18 */ s32* message;
-} BattlePopup; // size = 0x1C
-
-extern BattlePopup battlePopups[32];
-extern BattlePopup* D_802838F8;
+extern PopupMessage popupMessages[32];
+extern PopupMessage* D_802838F8;
 extern s16 D_8029F64C;
 extern s16 D_8029F640;
 extern s16 D_8029F64A;
 extern s16 D_8029F64E;
 extern s16 D_8029F650;
-extern void func_8024FB3C(BattlePopup* popup);
-void btl_show_message_popup(BattlePopup* popup);
+extern void func_8024FB3C(PopupMessage* popup);
+void btl_show_message_popup(PopupMessage* popup);
 
 void func_8024EDC0(void) {
-    BattlePopup* popup;
+    PopupMessage* popup;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(battlePopups); i++) {
-        popup = &battlePopups[i];
+    for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
+        popup = &popupMessages[i];
         popup->active = FALSE;
         popup->message = NULL;
     }
 }
 
 void func_8024EDEC(void) {
-    BattlePopup* popup;
+    PopupMessage* popup;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(battlePopups); i++) {
-        popup = &battlePopups[i];
+    for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
+        popup = &popupMessages[i];
         if (popup->message != NULL) {
             heap_free(popup->message);
             popup->message = NULL;
@@ -52,11 +37,11 @@ void func_8024EDEC(void) {
 }
 
 void func_8024EE48(void) {
-    BattlePopup* popup;
+    PopupMessage* popup;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(battlePopups); i++) {
-        popup = &battlePopups[i];
+    for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
+        popup = &popupMessages[i];
         if (popup->active && popup->unk_04 != NULL) {
             popup->unk_04(popup);
         }
@@ -64,11 +49,11 @@ void func_8024EE48(void) {
 }
 
 void func_8024EEA8(void) {
-    BattlePopup* popup;
+    PopupMessage* popup;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(battlePopups); i++) {
-        popup = &battlePopups[i];
+    for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
+        popup = &popupMessages[i];
         if (popup->active && popup->unk_08 != NULL) {
             popup->unk_08(popup);
         }
@@ -76,23 +61,23 @@ void func_8024EEA8(void) {
 }
 
 void btl_draw_popup_messages(void) {
-    BattlePopup* popup;
+    PopupMessage* popup;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(battlePopups); i++) {
-        popup = &battlePopups[i];
+    for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
+        popup = &popupMessages[i];
         if (popup->active && popup->drawFunc != NULL) {
             popup->drawFunc(popup);
         }
     }
 }
 
-BattlePopup* btl_create_popup(void) {
-    BattlePopup* popup;
+PopupMessage* btl_create_popup(void) {
+    PopupMessage* popup;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(battlePopups); i++) {
-        popup = &battlePopups[i];
+    for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
+        popup = &popupMessages[i];
         if (!popup->active) {
             popup->active = TRUE;
             return popup;
@@ -102,7 +87,7 @@ BattlePopup* btl_create_popup(void) {
     return NULL;
 }
 
-void free_popup(BattlePopup* popup) {
+void free_popup(PopupMessage* popup) {
     if (popup->message != NULL) {
         heap_free(popup->message);
         popup->message = NULL;
@@ -141,7 +126,7 @@ ApiStatus func_8024F940(Evt* script, s32 isInitialCall) {
 }
 
 void btl_show_battle_message(s32 messageIndex, s32 duration) {
-    BattlePopup* popup = btl_create_popup();
+    PopupMessage* popup = btl_create_popup();
 
     if (popup != NULL) {
         popup->unk_04 = func_8024FB3C;
@@ -163,7 +148,7 @@ void btl_show_battle_message(s32 messageIndex, s32 duration) {
 }
 
 void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varValue) {
-    BattlePopup* popup = btl_create_popup();
+    PopupMessage* popup = btl_create_popup();
 
     if (popup != NULL) {
         popup->unk_04 = func_8024FB3C;
@@ -190,7 +175,7 @@ s32 btl_is_popup_displayed(void) {
 
 #ifdef NON_MATCHING // requires data migration
 void btl_set_popup_duration(s32 duration) {
-    BattlePopup* popup = D_802838F8;
+    PopupMessage* popup = D_802838F8;
 
     if (D_8029F64A != NULL && popup != NULL) {
         popup->duration = duration;
@@ -210,7 +195,7 @@ void func_8024FAFC(void) {
 }
 
 void close_action_command_instruction_popup(void) {
-    BattlePopup* popup = D_802838F8;
+    PopupMessage* popup = D_802838F8;
 
     if (popup != NULL && popup->messageIndex < 67 && popup->messageIndex >= 46) {
         popup->duration = 0;
