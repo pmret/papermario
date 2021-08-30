@@ -275,7 +275,7 @@ void pause_map_update(void) {
 void pause_map_cleanup(void) {
     s32 i;
 
-    for (i = 0; i < 1; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_80270700); i++) {
         free_hud_element(D_80270700[i]);
     }
 }
