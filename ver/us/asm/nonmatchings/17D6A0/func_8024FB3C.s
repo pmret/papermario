@@ -921,7 +921,7 @@ glabel L802507A8_17F088
 /* 17F0CC 802507EC 24050002 */   addiu    $a1, $zero, 2
 /* 17F0D0 802507F0 3C018028 */  lui       $at, %hi(D_802838F8)
 /* 17F0D4 802507F4 AC2038F8 */  sw        $zero, %lo(D_802838F8)($at)
-/* 17F0D8 802507F8 0C093BE9 */  jal       func_8024EFA4
+/* 17F0D8 802507F8 0C093BE9 */  jal       free_popup
 /* 17F0DC 802507FC 0220202D */   daddu    $a0, $s1, $zero
 .L80250800:
 /* 17F0E0 80250800 8FBF001C */  lw        $ra, 0x1c($sp)
