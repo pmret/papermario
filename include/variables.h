@@ -215,8 +215,8 @@ extern f64 D_802700B8;
 
 extern s32 D_8024FA30[1];
 
-extern pause_80250668* D_80250668[6];
-extern pause_map_spaces* D_802502B8[5];
+extern Pause80250668* D_80250668[6];
+extern PauseMapSpaces* D_802502B8[5];
 extern s8 D_80250590;
 // Badges
 extern s32 gBadgeMenuCurrentScrollPos;

@@ -2041,25 +2041,24 @@ typedef struct {
     /* 0x18 */ void* fpCleanup;
 } MenuTab; // size = 0x1C
 
-typedef struct pause_map_spaces {
+typedef struct PauseMapSpaces {
     /* 0x00 */ s16 xPos;
     /* 0x02 */ s16 yPos;
     /* 0x04 */ char unk_04;
     /* 0x05 */ u8 unk_05;
     /* 0x06 */ s16 unk_06;
-    /* 0x08 */ char* area_description;
+    /* 0x08 */ char* areaDescription;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 tabIndex;
-} pause_map_spaces; //size = 0x14
+} PauseMapSpaces; //size = 0x14
 
-
-typedef struct pause_80250668 {
-    /* 0x00 */ char unk00[0x10];
+typedef struct Pause80250668 {
+    /* 0x00 */ char unk_00[0x10];
     /* 0x10 */ u8* unk_10;
     /* 0x14 */ char unk_14[0x10];
-} pause_80250668; //size == 0x24
+} Pause80250668; //size == 0x24
 
-typedef struct pause_8025068C {
+typedef struct Pause8025068C {
     /* 0x00 */ u8 cursorMoveBool; //if 0, cant move cursor in map tab
     /* 0x01 */ char unk_01[3]; //padding?
     /* 0x04 */ char unk_04[8];
@@ -2068,7 +2067,7 @@ typedef struct pause_8025068C {
     /* 0x14 */ s32* unk_14; //function ptr
     /* 0x18 */ s32* unk_18; //function ptr
     /* 0x1C */ char unk_1C[8];
-} pause_8025068C; //size == 0x24 (?)
+} Pause8025068C; //size == 0x24 (?)
 
 typedef struct {
     /* 0x00 */ s8 flags;

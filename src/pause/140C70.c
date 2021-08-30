@@ -46,16 +46,14 @@ void pause_map_draw_border_arrows(s32 arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM(s32, "pause/140C70", pause_map_draw_contents);
 
 void pause_map_draw_title(s32* arg1, s32 arg2, s32 textOffsetY, s32 textOffsetX) {
-    s32 temp_v1;
     s32 stringWidth;
     s32 stringID;
     s32 xPos;
     s32 yPos;
 
     if (gPauseMenuCurrentTab == 6) {
-        temp_v1 = mapCursorCurrentOption;
-        if (temp_v1 != -1) {
-            stringWidth = get_string_width((temp_v1 * 3) + pause_map_tab_places_description_string_id, 0);
+        if (mapCursorCurrentOption != -1) {
+            stringWidth = get_string_width((mapCursorCurrentOption * 3) + pause_map_tab_places_description_string_id, 0);
             stringID = (mapCursorCurrentOption * 3) + pause_map_tab_places_description_string_id;
             xPos = arg2 + ((textOffsetX - stringWidth) >> 1);
             yPos = textOffsetY + 1;
@@ -77,8 +75,8 @@ void pause_map_init(s8* arg0) {
     s32 phi_s0_2;
     s32 phi_v0_2;
     s32 phi_s0_4 = 0;
-    pause_map_spaces* map_spaces;
-    pause_80250668* phi_v0;
+    PauseMapSpaces* map_spaces;
+    Pause80250668* phi_v0;
     s32* hudElementPtr = &D_80270700;
     s32* phi_s1 = &D_8024FA30;
     
@@ -151,39 +149,41 @@ INCLUDE_ASM(s32, "pause/140C70", pause_map_init);
 #endif
 
 void pause_map_handle_input(void) {
+    GameStatus* gameStatus = gGameStatusPtr;
+    PauseMapSpaces* map_spaces;
     f64 temp_f4_2;
     s32 temp_f12;
-    pause_map_spaces* map_spaces;
-    GameStatus* gameStatus;
     f32 phi_f8;
     f32 phi_f6;
     f32 mapCursorYPosTemp = mapCursorYPos;
     f32 mapCursorXPosTemp = mapCursorXPos;
-    
 
-    gameStatus = gGameStatusPtr;
     phi_f8 = (f32) gameStatus->stickX * 0.05f;
     phi_f6 = (f32) -(s32) gameStatus->stickY * 0.05f;
     if ((phi_f8 == 0.0f) && (phi_f6 == 0.0f)) {
         if (mapCursorCurrentOption != -1) {
-            map_spaces = (pause_map_spaces*)&D_802502B8 + mapCursorCurrentOption;
+            map_spaces = (PauseMapSpaces*)&D_802502B8 + mapCursorCurrentOption;
             phi_f8 = map_spaces->xPos - mapCursorXPosTemp;
             phi_f8 = phi_f8 * D_80270090;
             phi_f6 = map_spaces->yPos - mapCursorYPosTemp;
             phi_f6 = phi_f6 * D_80270090;
         }
     }
+
     mapCursorXPos += phi_f8;
     mapCursorYPos += phi_f6;
     if (mapCursorXPos < 16.0f) {
         mapCursorXPos = 16.0f;
     }
+
     if (mapCursorYPos < 8.0f) {
         mapCursorYPos = 8.0f;
     }
+
     if (mapCursorXPos >= 316.0f) {
         mapCursorXPos = 315.0f;
     }
+
     if (mapCursorYPos >= 308.0f) {
         mapCursorYPos = 307.0f;
     }
@@ -223,7 +223,7 @@ void pause_map_handle_input(void) {
         D_80270708 = -210.0f;
     }
 
-    if ((gPauseMenuPressedButtons & B_BUTTON) != 0) {
+    if (gPauseMenuPressedButtons & B_BUTTON) {
         sfx_play_sound(0xCA);
         gPauseMenuCurrentTab = 0;
         return;
@@ -242,25 +242,25 @@ void pause_map_handle_input(void) {
 }
 
 void pause_map_update(void) {
-    f32 temp_f0;
-    f32 temp_f4;
+    PauseMapSpaces* mapSpace;
+    f32 deltaY;
+    f32 deltaX;
     f32 temp_f4_2;
     s32 i;
-    pause_map_spaces* phi_s1;
     f32 phi_f20;
     f32 phi_f22;
 
     mapCursorCurrentOption = -1;
     D_80270724 = 0;
-    phi_s1 = (pause_map_spaces*)&D_802502B8;
+    mapSpace = (PauseMapSpaces*)&D_802502B8;
     phi_f20 = 10000.0f;
     phi_f22 = -1.0f;
     
     for (i = 0; i < EVT_SAVE_FLAG_PLACES_VISITED_TOTAL; i++) {
         if (evt_get_variable(0, i + EVT_SAVE_FLAG_PLACES_VISITED) != 0) {
-            temp_f4 = mapCursorXPos - phi_s1->xPos;
-            temp_f0 = mapCursorYPos - phi_s1->yPos;
-            temp_f4_2 = SQ(temp_f4) + SQ(temp_f0);
+            deltaX = mapCursorXPos - mapSpace->xPos;
+            deltaY = mapCursorYPos - mapSpace->yPos;
+            temp_f4_2 = SQ(deltaX) + SQ(deltaY);
             if (temp_f4_2 < 400.0f) {
                 D_80270724++;
             }
@@ -271,7 +271,7 @@ void pause_map_update(void) {
             }
         }
 
-        phi_s1++;
+        mapSpace++;
     }
     
     mapCursorCurrentOption = phi_f22;
@@ -281,7 +281,7 @@ void pause_map_update(void) {
 void pause_map_cleanup(void) {
     s32 i;
 
-    for (i = 0; i <= 0; i++) {
+    for (i = 0; i < 1; i++) {
         free_hud_element(D_80270700[i]);
     }
 }
