@@ -16,7 +16,7 @@ typedef struct BattlePopup {
     /* 0x18 */ s32* message;
 } BattlePopup; // size = 0x1C
 
-extern BattlePopup BattlePopups[32];
+extern BattlePopup battlePopups[32];
 extern BattlePopup* D_802838F8;
 extern s16 D_8029F64C;
 extern s16 D_8029F640;
@@ -30,8 +30,8 @@ void func_8024EDC0(void) {
     BattlePopup* popup;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(BattlePopups); i++) {
-        popup = &BattlePopups[i];
+    for (i = 0; i < ARRAY_COUNT(battlePopups); i++) {
+        popup = &battlePopups[i];
         popup->active = FALSE;
         popup->message = NULL;
     }
@@ -41,8 +41,8 @@ void func_8024EDEC(void) {
     BattlePopup* popup;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(BattlePopups); i++) {
-        popup = &BattlePopups[i];
+    for (i = 0; i < ARRAY_COUNT(battlePopups); i++) {
+        popup = &battlePopups[i];
         if (popup->message != NULL) {
             heap_free(popup->message);
             popup->message = NULL;
@@ -55,8 +55,8 @@ void func_8024EE48(void) {
     BattlePopup* popup;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(BattlePopups); i++) {
-        popup = &BattlePopups[i];
+    for (i = 0; i < ARRAY_COUNT(battlePopups); i++) {
+        popup = &battlePopups[i];
         if (popup->active && popup->unk_04 != NULL) {
             popup->unk_04(popup);
         }
@@ -67,8 +67,8 @@ void func_8024EEA8(void) {
     BattlePopup* popup;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(BattlePopups); i++) {
-        popup = &BattlePopups[i];
+    for (i = 0; i < ARRAY_COUNT(battlePopups); i++) {
+        popup = &battlePopups[i];
         if (popup->active && popup->unk_08 != NULL) {
             popup->unk_08(popup);
         }
@@ -79,8 +79,8 @@ void btl_draw_popup_messages(void) {
     BattlePopup* popup;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(BattlePopups); i++) {
-        popup = &BattlePopups[i];
+    for (i = 0; i < ARRAY_COUNT(battlePopups); i++) {
+        popup = &battlePopups[i];
         if (popup->active && popup->drawFunc != NULL) {
             popup->drawFunc(popup);
         }
@@ -91,8 +91,8 @@ BattlePopup* btl_create_popup(void) {
     BattlePopup* popup;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(BattlePopups); i++) {
-        popup = &BattlePopups[i];
+    for (i = 0; i < ARRAY_COUNT(battlePopups); i++) {
+        popup = &battlePopups[i];
         if (!popup->active) {
             popup->active = TRUE;
             return popup;

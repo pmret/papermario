@@ -5,8 +5,8 @@ glabel func_8024F7C8
 /* 17E0A8 8024F7C8 0000382D */  daddu     $a3, $zero, $zero
 /* 17E0AC 8024F7CC 24090001 */  addiu     $t1, $zero, 1
 /* 17E0B0 8024F7D0 24080014 */  addiu     $t0, $zero, 0x14
-/* 17E0B4 8024F7D4 3C06802A */  lui       $a2, %hi(BattlePopups)
-/* 17E0B8 8024F7D8 24C6F2C0 */  addiu     $a2, $a2, %lo(BattlePopups)
+/* 17E0B4 8024F7D4 3C06802A */  lui       $a2, %hi(battlePopups)
+/* 17E0B8 8024F7D8 24C6F2C0 */  addiu     $a2, $a2, %lo(battlePopups)
 .L8024F7DC:
 /* 17E0BC 8024F7DC 84C20010 */  lh        $v0, 0x10($a2)
 /* 17E0C0 8024F7E0 94C30010 */  lhu       $v1, 0x10($a2)
