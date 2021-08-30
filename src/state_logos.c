@@ -36,7 +36,7 @@ void state_init_logos(void) {
 
     nuContRmbForceStop();
     create_cameras_a();
-    gCameras[0].mode = 6;
+    gCameras[0].updateMode = 6;
     gCameras[0].unk_06 = 1;
     gCameras[0].nearClip = 0x10;
     gCameras[0].farClip = 0x1000;

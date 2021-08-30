@@ -510,12 +510,22 @@ typedef struct CameraUnk {
     /* 0x68 */ char unk_68[0x24];
 } CameraUnk; // size = 0x8C
 
+typedef struct CameraControlSettings {
+    /* 0x00 */ s32 type;
+    /* 0x04 */ f32 boomLength;
+    /* 0x08 */ f32 boomPitch;
+    /* 0x0C */ Vec3f posA;
+    /* 0x18 */ Vec3f posB;
+    /* 0x24 */ f32 viewPitch;
+    /* 0x28 */ s32 flag;
+} CameraControlSettings; // size = 0x2C
+
 typedef struct Camera {
     /* 0x000 */ u16 flags;
     /* 0x002 */ s16 moveFlags;
-    /* 0x004 */ s16 mode;
+    /* 0x004 */ s16 updateMode;
     /* 0x006 */ s16 unk_06;
-    /* 0x008 */ s16 unk_08;
+    /* 0x008 */ s16 changingMap;
     /* 0x00A */ s16 viewportW;
     /* 0x00C */ s16 viewportH;
     /* 0x00E */ s16 viewportStartX;
@@ -533,7 +543,7 @@ typedef struct Camera {
     /* 0x028 */ s16 unk_28;
     /* 0x02A */ s16 zoomPercent;
     /* 0x02C */ s16 bgColor[3];
-    /* 0x032 */ s16 targetScreenCoords[3];
+    /* 0x032 */ Vec3s targetScreenCoords;
     /* 0x038 */ u16 perspNorm;
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ Vec3f lookAt_eye;
@@ -553,7 +563,7 @@ typedef struct Camera {
     /* 0x094 */ f32 currentPitch;
     /* 0x098 */ s32 unk_98;
     /* 0x09C */ s32 unk_9C;
-    /* 0x0A0 */ Vp viewport;
+    /* 0x0A0 */ Vp vp;
     /* 0x0B0 */ Vp vpAlt;
     /* 0x0C0 */ s32 unk_C0;
     /* 0x0C4 */ f32 unk_C4;
@@ -565,33 +575,34 @@ typedef struct Camera {
     /* 0x1D4 */ char unk_1D4[0x28];
     /* 0x1FC */ void (*fpDoPreRender)(struct Camera*);
     /* 0x200 */ void (*fpDoPostRender)(struct Camera*);
-    /* 0x204 */ struct Matrix4s* unkMatrix;
+    /* 0x204 */ Matrix4s* unkMatrix;
     /* 0x208 */ s32 unk_208;
-    /* 0x20C */ struct Matrix4s* unkEffectMatrix;
+    /* 0x20C */ Matrix4s* unkEffectMatrix;
     /* 0x210 */ char unk_210[0x2];
     /* 0x212 */ s16 unk_212;
     /* 0x214 */ CameraUnk unk_214[4];
-    /* 0x444 */ struct Zone* prevZone;
-    /* 0x448 */ struct Zone* currentZone;
-    /* 0x44C */ struct CamPosSettings initialSettings; /* for start of blend between zones */
-    /* 0x468 */ struct CamPosSettings targetSettings; /* goal for blend between zones */
-    /* 0x484 */ f32 sinInterpAlpha;
+    /* 0x444 */ CameraControlSettings* prevController;
+    /* 0x448 */ CameraControlSettings* currentController;
+    /* 0x44C */ struct CamPosSettings oldCameraSettings;
+    /* 0x468 */ struct CamPosSettings newCameraSettings;
+    /* 0x484 */ f32 interpAlpha;
     /* 0x488 */ f32 linearInterp;
     /* 0x48C */ f32 linearInterpScale; /* 3.0? */
     /* 0x490 */ f32 moveSpeed;
-    /* 0x494 */ char unk_494[0x8];
+    /* 0x494 */ f32 unk_494;
+    /* 0x498 */ f32 unk_498;
     /* 0x49C */ f32 unk_49C;
-    /* 0x4A0 */ char unk_4A0[0x10];
+    /* 0x4A0 */ f32 savedTargetY;
+    /* 0x4A4 */ f32 unk_4A4;
+    /* 0x4A8 */ f32 unk_4A8;
+    /* 0x4AC */ f32 unk_4AC;
     /* 0x4B0 */ Vec3f movePos;
-    /* 0x4BC */ char unk_4BC[28];
-    /* 0x4D8 */ s32 controllerType;
-    /* 0x4DC */ f32 controllerBoomLen;
-    /* 0x4E0 */ f32 controllerBoomPitch;
-    /* 0x4E4 */ Vec3f posA;
-    /* 0x4F0 */ Vec3f posB;
-    /* 0x4FC */ f32 controllerViewPitch;
-    /* 0x500 */ s32 unk_500;
-    /* 0x504 */ s16 boolTargetPlayer;
+    /* 0x4BC */ Vec3f prevPrevMovePos;
+    /* 0x4C8 */ Vec3f prevMovePos;
+    /* 0x4D4 */ s16 prevPrevFollowFlags;
+    /* 0x4D6 */ s16 prevFollowFlags;
+    /* 0x4D8 */ CameraControlSettings controlSettings;
+    /* 0x504 */ s16 followPlayer;
     /* 0x506 */ u16 unk_506;
     /* 0x508 */ f32 panPhase;
     /* 0x50C */ f32 leadAmount;
@@ -1663,15 +1674,6 @@ typedef struct CollisionHeader {
     /* 0x14 */ s32 bbTableOffset;
     /* 0x18 */ char unk_18[8];
 } CollisionHeader; // size = 0x20
-
-typedef struct Zone {
-    /* 0x00 */ s32 type;
-    /* 0x04 */ f32 boomLength;
-    /* 0x08 */ f32 boomPitch;
-    /* 0x0C */ f32 pos[6];
-    /* 0x24 */ f32 viewPitch;
-    /* 0x28 */ s32 flag;
-} Zone; // size = 0x2C
 
 typedef struct ActorMovement {
     /* 0x00 */ Vec3f currentPos;
