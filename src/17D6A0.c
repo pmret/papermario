@@ -32,7 +32,7 @@ void func_8024EDC0(void) {
 
     for (i = 0; i < ARRAY_COUNT(BattlePopups); i++) {
         popup = &BattlePopups[i];
-        popup->active = 0;
+        popup->active = FALSE;
         popup->message = NULL;
     }
 }
@@ -47,7 +47,7 @@ void func_8024EDEC(void) {
             heap_free(popup->message);
             popup->message = NULL;
         }
-        popup->active = 0;
+        popup->active = FALSE;
     }
 }
 
@@ -57,7 +57,7 @@ void func_8024EE48(void) {
 
     for (i = 0; i < ARRAY_COUNT(BattlePopups); i++) {
         popup = &BattlePopups[i];
-        if (popup->active != 0 && popup->unk_04 != NULL) {
+        if (popup->active && popup->unk_04 != NULL) {
             popup->unk_04(popup);
         }
     }
@@ -69,7 +69,7 @@ void func_8024EEA8(void) {
 
     for (i = 0; i < ARRAY_COUNT(BattlePopups); i++) {
         popup = &BattlePopups[i];
-        if (popup->active != 0 && popup->unk_08 != NULL) {
+        if (popup->active && popup->unk_08 != NULL) {
             popup->unk_08(popup);
         }
     }
@@ -81,7 +81,7 @@ void btl_draw_popup_messages(void) {
 
     for (i = 0; i < ARRAY_COUNT(BattlePopups); i++) {
         popup = &BattlePopups[i];
-        if (popup->active != 0 && popup->drawFunc != NULL) {
+        if (popup->active && popup->drawFunc != NULL) {
             popup->drawFunc(popup);
         }
     }
@@ -93,8 +93,8 @@ BattlePopup* btl_create_popup(void) {
 
     for (i = 0; i < ARRAY_COUNT(BattlePopups); i++) {
         popup = &BattlePopups[i];
-        if (popup->active == 0) {
-            popup->active = 1;
+        if (!popup->active) {
+            popup->active = TRUE;
             return popup;
         }
     }
@@ -107,7 +107,7 @@ void free_popup(BattlePopup* popup) {
         heap_free(popup->message);
         popup->message = NULL;
     }
-    popup->active = 0;
+    popup->active = FALSE;
 }
 
 void func_8024EFE0(f32 x, f32 y, f32 z, s32, s32, s32);
@@ -123,20 +123,15 @@ void func_8024F7C8(void);
 INCLUDE_ASM(s32, "17D6A0", func_8024F7C8);
 
 s32 func_8024F84C(Evt* script, s32 isInitialCall) {
-    s32 arg5;
-    s32 arg4;
-    s32 z;
-    s32 y;
-    s32 x;
-    Bytecode* args;
+    Bytecode* args = script->ptrReadPos;
+    s32 x = evt_get_variable(script, *args++);
+    s32 y = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
+    s32 arg4 = evt_get_variable(script, *args++);
+    s32 arg5 = evt_get_variable(script, *args++);
+    s32 arg6 = evt_get_variable(script, *args++);
 
-    args = script->ptrReadPos;
-    x = evt_get_variable(script, *args++);
-    y = evt_get_variable(script, *args++);
-    z = evt_get_variable(script, *args++);
-    arg4 = evt_get_variable(script, *args++);
-    arg5 = evt_get_variable(script, *args++);
-    func_8024EFE0(x, y, z, arg4, arg5, evt_get_variable(script, *args++));
+    func_8024EFE0(x, y, z, arg4, arg5, arg6);
     return ApiStatus_DONE2;
 }
 
@@ -147,11 +142,12 @@ ApiStatus func_8024F940(Evt* script, s32 isInitialCall) {
 
 void btl_show_battle_message(s32 messageIndex, s32 duration) {
     BattlePopup* popup = btl_create_popup();
+
     if (popup != NULL) {
-        popup->unk_04 = &func_8024FB3C;
-        popup->drawFunc = &btl_show_message_popup;
+        popup->unk_04 = func_8024FB3C;
+        popup->drawFunc = btl_show_message_popup;
         popup->unk_00 = 0;
-        popup->unk_08 = 0;
+        popup->unk_08 = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
         popup->unk_16 = 0;
@@ -168,11 +164,12 @@ void btl_show_battle_message(s32 messageIndex, s32 duration) {
 
 void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varValue) {
     BattlePopup* popup = btl_create_popup();
+
     if (popup != NULL) {
-        popup->unk_04 = &func_8024FB3C;
-        popup->drawFunc = &btl_show_message_popup;
+        popup->unk_04 = func_8024FB3C;
+        popup->drawFunc = btl_show_message_popup;
         popup->unk_00 = 0;
-        popup->unk_08 = 0;
+        popup->unk_08 = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
         popup->unk_16 = 0;
@@ -194,6 +191,7 @@ s32 btl_is_popup_displayed(void) {
 #ifdef NON_MATCHING // requires data migration
 void btl_set_popup_duration(s32 duration) {
     BattlePopup* popup = D_802838F8;
+
     if (D_8029F64A != NULL && popup != NULL) {
         popup->duration = duration;
     }
@@ -213,13 +211,8 @@ void func_8024FAFC(void) {
 
 void close_action_command_instruction_popup(void) {
     BattlePopup* popup = D_802838F8;
-    if (popup != NULL) {
-        if (popup->messageIndex >= 67) {
-            return;
-        }
-        if (popup->messageIndex < 46) {
-            return;
-        }
+
+    if (popup != NULL && popup->messageIndex < 67 && popup->messageIndex >= 46) {
         popup->duration = 0;
     }
 }
@@ -232,7 +225,10 @@ INCLUDE_ASM(s32, "17D6A0", btl_show_message_popup);
 
 ApiStatus ShowMessageBox(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    btl_show_battle_message(evt_get_variable(script, *args++), evt_get_variable(script, *args++));
+    s32 messageIndex = evt_get_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
+
+    btl_show_battle_message(messageIndex, duration);
     return ApiStatus_DONE2;
 }
 
