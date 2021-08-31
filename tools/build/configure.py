@@ -185,6 +185,9 @@ OS_K0_TO_PHYSICAL = "int"
 "G_.*" = "int"
 "TEXEL.*" = "int"
 PRIMITIVE = "int"
+
+[decompme.compilers]
+"tools/build/cc/gcc/gcc" = "gcc2.8.1"
 """)
 
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):

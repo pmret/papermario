@@ -583,8 +583,8 @@ typedef struct Camera {
     /* 0x214 */ CameraUnk unk_214[4];
     /* 0x444 */ CameraControlSettings* prevController;
     /* 0x448 */ CameraControlSettings* currentController;
-    /* 0x44C */ struct CamPosSettings oldCameraSettings;
-    /* 0x468 */ struct CamPosSettings newCameraSettings;
+    /* 0x44C */ CamPosSettings oldCameraSettings;
+    /* 0x468 */ CamPosSettings newCameraSettings;
     /* 0x484 */ f32 interpAlpha;
     /* 0x488 */ f32 linearInterp;
     /* 0x48C */ f32 linearInterpScale; /* 3.0? */
@@ -599,10 +599,10 @@ typedef struct Camera {
     /* 0x4B0 */ Vec3f movePos;
     /* 0x4BC */ Vec3f prevPrevMovePos;
     /* 0x4C8 */ Vec3f prevMovePos;
-    /* 0x4D4 */ s16 prevPrevFollowFlags;
-    /* 0x4D6 */ s16 prevFollowFlags;
+    /* 0x4D4 */ u16 prevPrevFollowFlags;
+    /* 0x4D6 */ u16 prevFollowFlags;
     /* 0x4D8 */ CameraControlSettings controlSettings;
-    /* 0x504 */ s16 followPlayer;
+    /* 0x504 */ u16 followPlayer;
     /* 0x506 */ u16 unk_506;
     /* 0x508 */ f32 panPhase;
     /* 0x50C */ f32 leadAmount;
@@ -2239,7 +2239,7 @@ typedef struct TempSetZoneEnabled {
     /* 0x04 */ s16 id1;
     /* 0x06 */ s16 id2;
     /* 0x08 */ char unk_08[0x8];
-    /* 0x10 */ s32 unk_10;
+    /* 0x10 */ CameraControlSettings* unk_10;
     /* 0x14 */ char unk_14[0x8];
 } TempSetZoneEnabled; // size = 0x1C
 
