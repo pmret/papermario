@@ -981,7 +981,8 @@ segments:
     - [0x1617F0, palette,    prompt_check_abilities]
     - [0x1619F0, ci4,        stats_bar, 160, 8]
     - [0x161C70, palette,    stats_bar]
-    - [0x161E70, bin]
+    - [0x161E70, data]
+    - [0x1632A0]
   - type: code
     start: 0x163400
     vram: 0x80242BA0

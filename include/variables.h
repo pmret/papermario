@@ -196,26 +196,18 @@ extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
 extern s32 D_80270700[1];
 extern f32 pause_map_cameraX;
 extern f32 pause_map_cameraY;
-extern s32 pause_map_marioX; //mario xPos on map tab
-extern s32 pause_map_marioY; //mario xPos on map tab
-extern f32 pause_map_cursorX; //cursor X pos float map tab
-extern f32 pause_map_cursorY; //cursor Y pos float map tab
+extern s32 pause_map_marioX;
+extern s32 pause_map_marioY;
+extern f32 pause_map_targetX;
+extern f32 pause_map_targetY;
 extern s32 pause_map_cursorCurrentOption;
 extern s32 pause_map_cursorCurrentOptionCopy;
-extern s32 D_80270724;
-extern f64 D_80270080;
-extern f64 D_80270088;
-extern f64 D_80270090;
-extern f64 D_80270098;
-extern f64 D_802700A0;
-extern f64 D_802700A8;
-extern f64 D_802700B0;
-extern f64 D_802700B8;
+extern s32 pause_map_spacesInSnapRange;
 
 
 extern HudElementAnim* D_8024FA30[1];
 
-extern PauseMapSpace D_802502B8[5];
+extern PauseMapSpace pause_map_spaces[34];
 extern MenuWindowBP pause_map_windowBlueprints[7];
 // Badges
 extern s32 gBadgeMenuCurrentScrollPos;
