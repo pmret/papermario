@@ -205,7 +205,6 @@ void update_camera_zone_interp(Camera* camera);
 #ifdef NON_MATCHING
 void update_camera_zone_interp(Camera* camera) {
     CameraControlSettings* cs;
-    CameraControlSettings* cc;
     f32 targetX;
     f32 targetY;
     f32 targetZ;
@@ -305,47 +304,46 @@ void update_camera_zone_interp(Camera* camera) {
         }
 
         cond2 = FALSE;
-        cc = camera->currentController;
 
-        if (cs != NULL && cc != NULL && cs->type == cc->type &&
-            cs->flag == cc->flag && cs->boomLength == cc->boomLength &&
-            cs->boomPitch == cc->boomPitch &&
-            cs->viewPitch == cc->viewPitch) {
+        if (cs != NULL && camera->currentController != NULL && cs->type == camera->currentController->type &&
+            cs->flag == camera->currentController->flag && cs->boomLength == camera->currentController->boomLength &&
+            cs->boomPitch == camera->currentController->boomPitch &&
+            cs->viewPitch == camera->currentController->viewPitch) {
 
             switch (cs->type) {
                 case 0:
-                    if (cs->posA.x == cc->posA.x &&
-                        cs->posA.z == cc->posA.z &&
-                        cs->posB.x == cc->posB.x &&
-                        cs->posB.z == cc->posB.z) {
+                    if (cs->posA.x == camera->currentController->posA.x &&
+                        cs->posA.z == camera->currentController->posA.z &&
+                        cs->posB.x == camera->currentController->posB.x &&
+                        cs->posB.z == camera->currentController->posB.z) {
 
                         cond2 = TRUE;
                     }
                     break;
                 case 1:
                     if (!cs->flag) {
-                        if (cs->posA.x == cc->posA.x &&
-                            cs->posA.z == cc->posA.z) {
+                        if (cs->posA.x == camera->currentController->posA.x &&
+                            cs->posA.z == camera->currentController->posA.z) {
 
                             cond2 = TRUE;
                         }
                     } else {
-                        if (cs->posA.x == cc->posA.x &&
-                            cs->posA.z == cc->posA.z &&
-                            cs->posB.x == cc->posB.x &&
-                            cs->posB.z == cc->posB.z) {
+                        if (cs->posA.x == camera->currentController->posA.x &&
+                            cs->posA.z == camera->currentController->posA.z &&
+                            cs->posB.x == camera->currentController->posB.x &&
+                            cs->posB.z == camera->currentController->posB.z) {
 
                             cond2 = TRUE;
                         }
                     }
                     break;
                 default:
-                    if (cs->posA.x == cc->posA.x &&
-                        cs->posA.z == cc->posA.z &&
-                        cs->posA.y == cc->posA.y &&
-                        cs->posB.y == cc->posB.y &&
-                        cs->posB.x == cc->posB.x &&
-                        cs->posB.z == cc->posB.z) {
+                    if (cs->posA.x == camera->currentController->posA.x &&
+                        cs->posA.z == camera->currentController->posA.z &&
+                        cs->posA.y == camera->currentController->posA.y &&
+                        cs->posB.y == camera->currentController->posB.y &&
+                        cs->posB.x == camera->currentController->posB.x &&
+                        cs->posB.z == camera->currentController->posB.z) {
 
                         cond2 = TRUE;
                     }
@@ -353,7 +351,7 @@ void update_camera_zone_interp(Camera* camera) {
             }
         }
 
-        if (camera->unk_506 != 0 || (!cond2 && cs != cc)) {
+        if (camera->unk_506 != 0 || (!cond2 && cs != camera->currentController)) {
             if (camera->interpAlpha == 1.0f) {
                 camera->prevController = camera->currentController;
             } else {
