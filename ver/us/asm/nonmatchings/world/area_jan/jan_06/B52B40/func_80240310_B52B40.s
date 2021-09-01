@@ -9,16 +9,16 @@ glabel func_80240310_B52B40
 /* B52B50 80240320 AFB00018 */  sw        $s0, 0x18($sp)
 /* B52B54 80240324 8E30000C */  lw        $s0, 0xc($s1)
 /* B52B58 80240328 8E050000 */  lw        $a1, ($s0)
-/* B52B5C 8024032C 0C0B1EAF */  jal       get_variable
+/* B52B5C 8024032C 0C0B1EAF */  jal       evt_get_variable
 /* B52B60 80240330 26100004 */   addiu    $s0, $s0, 4
 /* B52B64 80240334 AE220070 */  sw        $v0, 0x70($s1)
 /* B52B68 80240338 8E050000 */  lw        $a1, ($s0)
 /* B52B6C 8024033C 26100004 */  addiu     $s0, $s0, 4
-/* B52B70 80240340 0C0B1EAF */  jal       get_variable
+/* B52B70 80240340 0C0B1EAF */  jal       evt_get_variable
 /* B52B74 80240344 0220202D */   daddu    $a0, $s1, $zero
 /* B52B78 80240348 AE220074 */  sw        $v0, 0x74($s1)
 /* B52B7C 8024034C 8E050000 */  lw        $a1, ($s0)
-/* B52B80 80240350 0C0B1EAF */  jal       get_variable
+/* B52B80 80240350 0C0B1EAF */  jal       evt_get_variable
 /* B52B84 80240354 0220202D */   daddu    $a0, $s1, $zero
 /* B52B88 80240358 2404009E */  addiu     $a0, $zero, 0x9e
 /* B52B8C 8024035C 0000282D */  daddu     $a1, $zero, $zero

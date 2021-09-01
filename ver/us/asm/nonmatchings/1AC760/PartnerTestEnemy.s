@@ -29,7 +29,7 @@ glabel PartnerTestEnemy
 /* 1AEE10 80280530 26100004 */  addiu     $s0, $s0, 4
 /* 1AEE14 80280534 AE230190 */  sw        $v1, 0x190($s1)
 /* 1AEE18 80280538 8E050000 */  lw        $a1, ($s0)
-/* 1AEE1C 8028053C 0C0B1EAF */  jal       get_variable
+/* 1AEE1C 8028053C 0C0B1EAF */  jal       evt_get_variable
 /* 1AEE20 80280540 26100004 */   addiu    $s0, $s0, 4
 /* 1AEE24 80280544 A622017E */  sh        $v0, 0x17e($s1)
 /* 1AEE28 80280548 A2200198 */  sb        $zero, 0x198($s1)

@@ -25,7 +25,7 @@ glabel func_80242A08_DF18A8
 /* DF18F8 80242A58 1062012F */  beq       $v1, $v0, .L80242F18
 /* DF18FC 80242A5C 0000102D */   daddu    $v0, $zero, $zero
 /* DF1900 80242A60 8E050000 */  lw        $a1, ($s0)
-/* DF1904 80242A64 0C0B1EAF */  jal       get_variable
+/* DF1904 80242A64 0C0B1EAF */  jal       evt_get_variable
 /* DF1908 80242A68 02E0202D */   daddu    $a0, $s7, $zero
 /* DF190C 80242A6C 86640008 */  lh        $a0, 8($s3)
 /* DF1910 80242A70 0C00EABB */  jal       get_npc_unsafe

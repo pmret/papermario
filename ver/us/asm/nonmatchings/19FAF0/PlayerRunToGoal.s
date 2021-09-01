@@ -23,7 +23,7 @@ glabel PlayerRunToGoal
 /* 1A2588 80273CA8 14400041 */  bnez      $v0, .L80273DB0
 /* 1A258C 80273CAC 00000000 */   nop
 /* 1A2590 80273CB0 8C650000 */  lw        $a1, ($v1)
-/* 1A2594 80273CB4 0C0B1EAF */  jal       get_variable
+/* 1A2594 80273CB4 0C0B1EAF */  jal       evt_get_variable
 /* 1A2598 80273CB8 0240202D */   daddu    $a0, $s2, $zero
 /* 1A259C 80273CBC C6180018 */  lwc1      $f24, 0x18($s0)
 /* 1A25A0 80273CC0 C61A0020 */  lwc1      $f26, 0x20($s0)

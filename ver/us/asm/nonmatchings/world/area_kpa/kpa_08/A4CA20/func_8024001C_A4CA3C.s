@@ -9,11 +9,11 @@ glabel func_8024001C_A4CA3C
 /* A4CA4C 8024002C AFB00010 */  sw        $s0, 0x10($sp)
 /* A4CA50 80240030 8E30000C */  lw        $s0, 0xc($s1)
 /* A4CA54 80240034 8E050000 */  lw        $a1, ($s0)
-/* A4CA58 80240038 0C0B1EAF */  jal       get_variable
+/* A4CA58 80240038 0C0B1EAF */  jal       evt_get_variable
 /* A4CA5C 8024003C 26100004 */   addiu    $s0, $s0, 4
 /* A4CA60 80240040 0220202D */  daddu     $a0, $s1, $zero
 /* A4CA64 80240044 8E050000 */  lw        $a1, ($s0)
-/* A4CA68 80240048 0C0B1EAF */  jal       get_variable
+/* A4CA68 80240048 0C0B1EAF */  jal       evt_get_variable
 /* A4CA6C 8024004C 0040802D */   daddu    $s0, $v0, $zero
 /* A4CA70 80240050 0040182D */  daddu     $v1, $v0, $zero
 /* A4CA74 80240054 3C028016 */  lui       $v0, %hi(gCollisionStatus+0x2)

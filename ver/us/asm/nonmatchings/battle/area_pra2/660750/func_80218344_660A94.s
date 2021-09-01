@@ -5,7 +5,7 @@ glabel func_80218344_660A94
 /* 660A94 80218344 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 660A98 80218348 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 660A9C 8021834C 8C82000C */  lw        $v0, 0xc($a0)
-/* 660AA0 80218350 0C0B1EAF */  jal       get_variable
+/* 660AA0 80218350 0C0B1EAF */  jal       evt_get_variable
 /* 660AA4 80218354 8C450000 */   lw       $a1, ($v0)
 /* 660AA8 80218358 8C43000C */  lw        $v1, 0xc($v0)
 /* 660AAC 8021835C 240500FF */  addiu     $a1, $zero, 0xff

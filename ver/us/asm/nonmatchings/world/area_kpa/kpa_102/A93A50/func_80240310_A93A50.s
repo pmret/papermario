@@ -38,7 +38,7 @@ glabel func_80240310_A93A50
 /* A93AAC 8024036C 00459021 */   addu     $s2, $v0, $a1
 /* A93AB0 80240370 0220202D */  daddu     $a0, $s1, $zero
 /* A93AB4 80240374 8E050000 */  lw        $a1, ($s0)
-/* A93AB8 80240378 0C0B1EAF */  jal       get_variable
+/* A93AB8 80240378 0C0B1EAF */  jal       evt_get_variable
 /* A93ABC 8024037C 0040802D */   daddu    $s0, $v0, $zero
 /* A93AC0 80240380 0260202D */  daddu     $a0, $s3, $zero
 /* A93AC4 80240384 8C460024 */  lw        $a2, 0x24($v0)

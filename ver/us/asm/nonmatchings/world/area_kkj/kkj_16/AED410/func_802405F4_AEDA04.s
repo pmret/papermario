@@ -14,21 +14,21 @@ glabel func_802405F4_AEDA04
 /* AEDA28 80240618 8E140000 */  lw        $s4, ($s0)
 /* AEDA2C 8024061C 26100004 */  addiu     $s0, $s0, 4
 /* AEDA30 80240620 8E050000 */  lw        $a1, ($s0)
-/* AEDA34 80240624 0C0B1EAF */  jal       get_variable
+/* AEDA34 80240624 0C0B1EAF */  jal       evt_get_variable
 /* AEDA38 80240628 26100004 */   addiu    $s0, $s0, 4
 /* AEDA3C 8024062C 8E050000 */  lw        $a1, ($s0)
 /* AEDA40 80240630 26100004 */  addiu     $s0, $s0, 4
 /* AEDA44 80240634 0220202D */  daddu     $a0, $s1, $zero
-/* AEDA48 80240638 0C0B1EAF */  jal       get_variable
+/* AEDA48 80240638 0C0B1EAF */  jal       evt_get_variable
 /* AEDA4C 8024063C 0040982D */   daddu    $s3, $v0, $zero
 /* AEDA50 80240640 8E050000 */  lw        $a1, ($s0)
 /* AEDA54 80240644 26100004 */  addiu     $s0, $s0, 4
 /* AEDA58 80240648 0220202D */  daddu     $a0, $s1, $zero
-/* AEDA5C 8024064C 0C0B1EAF */  jal       get_variable
+/* AEDA5C 8024064C 0C0B1EAF */  jal       evt_get_variable
 /* AEDA60 80240650 0040902D */   daddu    $s2, $v0, $zero
 /* AEDA64 80240654 0220202D */  daddu     $a0, $s1, $zero
 /* AEDA68 80240658 8E050000 */  lw        $a1, ($s0)
-/* AEDA6C 8024065C 0C0B1EAF */  jal       get_variable
+/* AEDA6C 8024065C 0C0B1EAF */  jal       evt_get_variable
 /* AEDA70 80240660 0040802D */   daddu    $s0, $v0, $zero
 /* AEDA74 80240664 44901000 */  mtc1      $s0, $f2
 /* AEDA78 80240668 00000000 */  nop

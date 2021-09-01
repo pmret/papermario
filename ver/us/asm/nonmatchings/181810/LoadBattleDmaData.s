@@ -5,7 +5,7 @@ glabel LoadBattleDmaData
 /* 181F04 80253624 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 181F08 80253628 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 181F0C 8025362C 8C82000C */  lw        $v0, 0xc($a0)
-/* 181F10 80253630 0C0B1EAF */  jal       get_variable
+/* 181F10 80253630 0C0B1EAF */  jal       evt_get_variable
 /* 181F14 80253634 8C450000 */   lw       $a1, ($v0)
 /* 181F18 80253638 00021840 */  sll       $v1, $v0, 1
 /* 181F1C 8025363C 3C04800E */  lui       $a0, %hi(gCurrentBattleSection)

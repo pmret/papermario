@@ -44,7 +44,7 @@ glabel func_80241388_865EC8
 /* 865F48 80241408 46000586 */  mov.s     $f22, $f0
 /* 865F4C 8024140C 0200202D */  daddu     $a0, $s0, $zero
 /* 865F50 80241410 3C05FBD3 */  lui       $a1, 0xfbd3
-/* 865F54 80241414 0C0B1EAF */  jal       get_variable
+/* 865F54 80241414 0C0B1EAF */  jal       evt_get_variable
 /* 865F58 80241418 34A5E280 */   ori      $a1, $a1, 0xe280
 /* 865F5C 8024141C 10400017 */  beqz      $v0, .L8024147C
 /* 865F60 80241420 0200202D */   daddu    $a0, $s0, $zero
@@ -82,7 +82,7 @@ glabel func_80241388_865EC8
 /* 865FDC 8024149C 0200202D */  daddu     $a0, $s0, $zero
 /* 865FE0 802414A0 3C05FBD3 */  lui       $a1, 0xfbd3
 .L802414A4:
-/* 865FE4 802414A4 0C0B1EAF */  jal       get_variable
+/* 865FE4 802414A4 0C0B1EAF */  jal       evt_get_variable
 /* 865FE8 802414A8 34A5E281 */   ori      $a1, $a1, 0xe281
 /* 865FEC 802414AC 10400018 */  beqz      $v0, .L80241510
 /* 865FF0 802414B0 4600C386 */   mov.s    $f14, $f24

@@ -11,7 +11,7 @@ glabel func_802403F0_B93830
 /* B93848 80240408 F7B40030 */  sdc1      $f20, 0x30($sp)
 /* B9384C 8024040C 8E30000C */  lw        $s0, 0xc($s1)
 /* B93850 80240410 8E050000 */  lw        $a1, ($s0)
-/* B93854 80240414 0C0B1EAF */  jal       get_variable
+/* B93854 80240414 0C0B1EAF */  jal       evt_get_variable
 /* B93858 80240418 26100004 */   addiu    $s0, $s0, 4
 /* B9385C 8024041C 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* B93860 80240420 0040202D */   daddu    $a0, $v0, $zero

@@ -12,7 +12,7 @@ glabel StartBossBattle
 /* 1FCB8 800448B8 AFB00010 */  sw        $s0, 0x10($sp)
 /* 1FCBC 800448BC 8C82000C */  lw        $v0, 0xc($a0)
 /* 1FCC0 800448C0 8C450000 */  lw        $a1, ($v0)
-/* 1FCC4 800448C4 0C0B1EAF */  jal       get_variable
+/* 1FCC4 800448C4 0C0B1EAF */  jal       evt_get_variable
 /* 1FCC8 800448C8 8C910148 */   lw       $s1, 0x148($a0)
 /* 1FCCC 800448CC 24040001 */  addiu     $a0, $zero, 1
 /* 1FCD0 800448D0 0C0B1192 */  jal       resume_all_group

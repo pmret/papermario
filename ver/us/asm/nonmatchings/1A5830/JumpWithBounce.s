@@ -23,7 +23,7 @@ glabel JumpWithBounce
 /* 1A804C 8027976C 24040002 */   addiu    $a0, $zero, 2
 /* 1A8050 80279770 8E250000 */  lw        $a1, ($s1)
 /* 1A8054 80279774 26310004 */  addiu     $s1, $s1, 4
-/* 1A8058 80279778 0C0B1EAF */  jal       get_variable
+/* 1A8058 80279778 0C0B1EAF */  jal       evt_get_variable
 /* 1A805C 8027977C 0240202D */   daddu    $a0, $s2, $zero
 /* 1A8060 80279780 0040202D */  daddu     $a0, $v0, $zero
 /* 1A8064 80279784 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -37,7 +37,7 @@ glabel JumpWithBounce
 /* 1A8080 802797A0 AE500074 */  sw        $s0, 0x74($s2)
 /* 1A8084 802797A4 8E250000 */  lw        $a1, ($s1)
 /* 1A8088 802797A8 26310004 */  addiu     $s1, $s1, 4
-/* 1A808C 802797AC 0C0B1EAF */  jal       get_variable
+/* 1A808C 802797AC 0C0B1EAF */  jal       evt_get_variable
 /* 1A8090 802797B0 0240202D */   daddu    $a0, $s2, $zero
 /* 1A8094 802797B4 A6020070 */  sh        $v0, 0x70($s0)
 /* 1A8098 802797B8 8E250000 */  lw        $a1, ($s1)

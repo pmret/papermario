@@ -16,22 +16,22 @@ glabel func_80241750_B2DBC0
 /* B2DBEC 8024177C AFB20028 */  sw        $s2, 0x28($sp)
 /* B2DBF0 80241780 AFB00020 */  sw        $s0, 0x20($sp)
 /* B2DBF4 80241784 8E3E0148 */  lw        $fp, 0x148($s1)
-/* B2DBF8 80241788 0C0B1EAF */  jal       get_variable
+/* B2DBF8 80241788 0C0B1EAF */  jal       evt_get_variable
 /* B2DBFC 8024178C 34A56268 */   ori      $a1, $a1, 0x6268
 /* B2DC00 80241790 0040802D */  daddu     $s0, $v0, $zero
 /* B2DC04 80241794 0220202D */  daddu     $a0, $s1, $zero
 /* B2DC08 80241798 3C05F840 */  lui       $a1, 0xf840
-/* B2DC0C 8024179C 0C0B1EAF */  jal       get_variable
+/* B2DC0C 8024179C 0C0B1EAF */  jal       evt_get_variable
 /* B2DC10 802417A0 34A56269 */   ori      $a1, $a1, 0x6269
 /* B2DC14 802417A4 0040B82D */  daddu     $s7, $v0, $zero
 /* B2DC18 802417A8 0220202D */  daddu     $a0, $s1, $zero
 /* B2DC1C 802417AC 3C05F5DE */  lui       $a1, 0xf5de
-/* B2DC20 802417B0 0C0B1EAF */  jal       get_variable
+/* B2DC20 802417B0 0C0B1EAF */  jal       evt_get_variable
 /* B2DC24 802417B4 34A502DE */   ori      $a1, $a1, 0x2de
 /* B2DC28 802417B8 0040B02D */  daddu     $s6, $v0, $zero
 /* B2DC2C 802417BC 0220202D */  daddu     $a0, $s1, $zero
 /* B2DC30 802417C0 3C05F5DE */  lui       $a1, 0xf5de
-/* B2DC34 802417C4 0C0B1EAF */  jal       get_variable
+/* B2DC34 802417C4 0C0B1EAF */  jal       evt_get_variable
 /* B2DC38 802417C8 34A502DF */   ori      $a1, $a1, 0x2df
 /* B2DC3C 802417CC 0040A82D */  daddu     $s5, $v0, $zero
 /* B2DC40 802417D0 93D3006D */  lbu       $s3, 0x6d($fp)
@@ -81,12 +81,12 @@ glabel func_80241750_B2DBC0
 /* B2DCE8 80241878 32E6FFFF */   andi     $a2, $s7, 0xffff
 /* B2DCEC 8024187C 0000202D */  daddu     $a0, $zero, $zero
 /* B2DCF0 80241880 3C05F5DE */  lui       $a1, 0xf5de
-/* B2DCF4 80241884 0C0B1EAF */  jal       get_variable
+/* B2DCF4 80241884 0C0B1EAF */  jal       evt_get_variable
 /* B2DCF8 80241888 34A502E0 */   ori      $a1, $a1, 0x2e0
 /* B2DCFC 8024188C 0000202D */  daddu     $a0, $zero, $zero
 /* B2DD00 80241890 3C05F5DE */  lui       $a1, 0xf5de
 /* B2DD04 80241894 34A50180 */  ori       $a1, $a1, 0x180
-/* B2DD08 80241898 0C0B1EAF */  jal       get_variable
+/* B2DD08 80241898 0C0B1EAF */  jal       evt_get_variable
 /* B2DD0C 8024189C 0040802D */   daddu    $s0, $v0, $zero
 /* B2DD10 802418A0 0040282D */  daddu     $a1, $v0, $zero
 /* B2DD14 802418A4 0000182D */  daddu     $v1, $zero, $zero

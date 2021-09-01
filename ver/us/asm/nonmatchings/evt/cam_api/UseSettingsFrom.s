@@ -12,7 +12,7 @@ glabel UseSettingsFrom
 /* F022C 802CB87C F7B40068 */  sdc1      $f20, 0x68($sp)
 /* F0230 802CB880 8E30000C */  lw        $s0, 0xc($s1)
 /* F0234 802CB884 8E050000 */  lw        $a1, ($s0)
-/* F0238 802CB888 0C0B1EAF */  jal       get_variable
+/* F0238 802CB888 0C0B1EAF */  jal       evt_get_variable
 /* F023C 802CB88C 26100004 */   addiu    $s0, $s0, 4
 /* F0240 802CB890 8E050000 */  lw        $a1, ($s0)
 /* F0244 802CB894 26100004 */  addiu     $s0, $s0, 4

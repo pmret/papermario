@@ -8,7 +8,7 @@ glabel func_80240050_AB9300
 /* AB930C 8024005C AFBF0018 */  sw        $ra, 0x18($sp)
 /* AB9310 80240060 AFB10014 */  sw        $s1, 0x14($sp)
 /* AB9314 80240064 8E11000C */  lw        $s1, 0xc($s0)
-/* AB9318 80240068 0C0B1EAF */  jal       get_variable
+/* AB9318 80240068 0C0B1EAF */  jal       evt_get_variable
 /* AB931C 8024006C 8E250000 */   lw       $a1, ($s1)
 /* AB9320 80240070 44826000 */  mtc1      $v0, $f12
 /* AB9324 80240074 00000000 */  nop

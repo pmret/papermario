@@ -14,11 +14,11 @@ glabel func_8024050C_E12C6C
 /* E12C90 80240530 8E30000C */  lw        $s0, 0xc($s1)
 /* E12C94 80240534 8C520080 */  lw        $s2, 0x80($v0)
 /* E12C98 80240538 8E050000 */  lw        $a1, ($s0)
-/* E12C9C 8024053C 0C0B1EAF */  jal       get_variable
+/* E12C9C 8024053C 0C0B1EAF */  jal       evt_get_variable
 /* E12CA0 80240540 26100004 */   addiu    $s0, $s0, 4
 /* E12CA4 80240544 0220202D */  daddu     $a0, $s1, $zero
 /* E12CA8 80240548 8E050000 */  lw        $a1, ($s0)
-/* E12CAC 8024054C 0C0B1EAF */  jal       get_variable
+/* E12CAC 8024054C 0C0B1EAF */  jal       evt_get_variable
 /* E12CB0 80240550 0040802D */   daddu    $s0, $v0, $zero
 /* E12CB4 80240554 00101840 */  sll       $v1, $s0, 1
 /* E12CB8 80240558 00701821 */  addu      $v1, $v1, $s0

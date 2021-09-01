@@ -9,7 +9,7 @@ glabel func_80240B8C_AF84DC
 /* AF84EC 80240B9C AFB10014 */  sw        $s1, 0x14($sp)
 /* AF84F0 80240BA0 8E02000C */  lw        $v0, 0xc($s0)
 /* AF84F4 80240BA4 8C510000 */  lw        $s1, ($v0)
-/* AF84F8 80240BA8 0C0B1EAF */  jal       get_variable
+/* AF84F8 80240BA8 0C0B1EAF */  jal       evt_get_variable
 /* AF84FC 80240BAC 0220282D */   daddu    $a1, $s1, $zero
 /* AF8500 80240BB0 0200202D */  daddu     $a0, $s0, $zero
 /* AF8504 80240BB4 00021140 */  sll       $v0, $v0, 5

@@ -10,16 +10,16 @@ glabel func_80241310_D658F0
 /* D65904 80241324 AFB00010 */  sw        $s0, 0x10($sp)
 /* D65908 80241328 8E30000C */  lw        $s0, 0xc($s1)
 /* D6590C 8024132C 8E050000 */  lw        $a1, ($s0)
-/* D65910 80241330 0C0B1EAF */  jal       get_variable
+/* D65910 80241330 0C0B1EAF */  jal       evt_get_variable
 /* D65914 80241334 26100004 */   addiu    $s0, $s0, 4
 /* D65918 80241338 8E050000 */  lw        $a1, ($s0)
 /* D6591C 8024133C 26100004 */  addiu     $s0, $s0, 4
 /* D65920 80241340 0220202D */  daddu     $a0, $s1, $zero
-/* D65924 80241344 0C0B1EAF */  jal       get_variable
+/* D65924 80241344 0C0B1EAF */  jal       evt_get_variable
 /* D65928 80241348 0040902D */   daddu    $s2, $v0, $zero
 /* D6592C 8024134C 0220202D */  daddu     $a0, $s1, $zero
 /* D65930 80241350 8E050000 */  lw        $a1, ($s0)
-/* D65934 80241354 0C0B1EAF */  jal       get_variable
+/* D65934 80241354 0C0B1EAF */  jal       evt_get_variable
 /* D65938 80241358 0040802D */   daddu    $s0, $v0, $zero
 /* D6593C 8024135C 44926000 */  mtc1      $s2, $f12
 /* D65940 80241360 00000000 */  nop

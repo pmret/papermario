@@ -14,21 +14,21 @@ glabel func_80240604_AD4694
 /* AD46B8 80240628 8E140000 */  lw        $s4, ($s0)
 /* AD46BC 8024062C 26100004 */  addiu     $s0, $s0, 4
 /* AD46C0 80240630 8E050000 */  lw        $a1, ($s0)
-/* AD46C4 80240634 0C0B1EAF */  jal       get_variable
+/* AD46C4 80240634 0C0B1EAF */  jal       evt_get_variable
 /* AD46C8 80240638 26100004 */   addiu    $s0, $s0, 4
 /* AD46CC 8024063C 8E050000 */  lw        $a1, ($s0)
 /* AD46D0 80240640 26100004 */  addiu     $s0, $s0, 4
 /* AD46D4 80240644 0220202D */  daddu     $a0, $s1, $zero
-/* AD46D8 80240648 0C0B1EAF */  jal       get_variable
+/* AD46D8 80240648 0C0B1EAF */  jal       evt_get_variable
 /* AD46DC 8024064C 0040982D */   daddu    $s3, $v0, $zero
 /* AD46E0 80240650 8E050000 */  lw        $a1, ($s0)
 /* AD46E4 80240654 26100004 */  addiu     $s0, $s0, 4
 /* AD46E8 80240658 0220202D */  daddu     $a0, $s1, $zero
-/* AD46EC 8024065C 0C0B1EAF */  jal       get_variable
+/* AD46EC 8024065C 0C0B1EAF */  jal       evt_get_variable
 /* AD46F0 80240660 0040902D */   daddu    $s2, $v0, $zero
 /* AD46F4 80240664 0220202D */  daddu     $a0, $s1, $zero
 /* AD46F8 80240668 8E050000 */  lw        $a1, ($s0)
-/* AD46FC 8024066C 0C0B1EAF */  jal       get_variable
+/* AD46FC 8024066C 0C0B1EAF */  jal       evt_get_variable
 /* AD4700 80240670 0040802D */   daddu    $s0, $v0, $zero
 /* AD4704 80240674 44901000 */  mtc1      $s0, $f2
 /* AD4708 80240678 00000000 */  nop

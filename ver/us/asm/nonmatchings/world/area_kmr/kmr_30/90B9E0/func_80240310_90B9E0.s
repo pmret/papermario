@@ -13,7 +13,7 @@ glabel func_80240310_90B9E0
 /* 90BA00 80240330 AFB00010 */  sw        $s0, 0x10($sp)
 /* 90BA04 80240334 8C82000C */  lw        $v0, 0xc($a0)
 /* 90BA08 80240338 8C450000 */  lw        $a1, ($v0)
-/* 90BA0C 8024033C 0C0B1EAF */  jal       get_variable
+/* 90BA0C 8024033C 0C0B1EAF */  jal       evt_get_variable
 /* 90BA10 80240340 241000FF */   addiu    $s0, $zero, 0xff
 /* 90BA14 80240344 240400FF */  addiu     $a0, $zero, 0xff
 /* 90BA18 80240348 0C00A67F */  jal       rand_int

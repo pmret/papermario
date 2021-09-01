@@ -10,16 +10,16 @@ glabel func_80240168_DEC038
 /* DEC04C 8024017C AFB00010 */  sw        $s0, 0x10($sp)
 /* DEC050 80240180 8E50000C */  lw        $s0, 0xc($s2)
 /* DEC054 80240184 8E050000 */  lw        $a1, ($s0)
-/* DEC058 80240188 0C0B1EAF */  jal       get_variable
+/* DEC058 80240188 0C0B1EAF */  jal       evt_get_variable
 /* DEC05C 8024018C 26100004 */   addiu    $s0, $s0, 4
 /* DEC060 80240190 8E050000 */  lw        $a1, ($s0)
 /* DEC064 80240194 26100004 */  addiu     $s0, $s0, 4
 /* DEC068 80240198 0240202D */  daddu     $a0, $s2, $zero
-/* DEC06C 8024019C 0C0B1EAF */  jal       get_variable
+/* DEC06C 8024019C 0C0B1EAF */  jal       evt_get_variable
 /* DEC070 802401A0 0040882D */   daddu    $s1, $v0, $zero
 /* DEC074 802401A4 0240202D */  daddu     $a0, $s2, $zero
 /* DEC078 802401A8 8E050000 */  lw        $a1, ($s0)
-/* DEC07C 802401AC 0C0B1EAF */  jal       get_variable
+/* DEC07C 802401AC 0C0B1EAF */  jal       evt_get_variable
 /* DEC080 802401B0 0040802D */   daddu    $s0, $v0, $zero
 /* DEC084 802401B4 02020018 */  mult      $s0, $v0
 /* DEC088 802401B8 24020002 */  addiu     $v0, $zero, 2

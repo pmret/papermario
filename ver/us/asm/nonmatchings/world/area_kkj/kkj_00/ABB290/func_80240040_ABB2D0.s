@@ -9,7 +9,7 @@ glabel func_80240040_ABB2D0
 /* ABB2E0 80240050 8C450000 */  lw        $a1, ($v0)
 /* ABB2E4 80240054 3C108011 */  lui       $s0, %hi(gPlayerStatus)
 /* ABB2E8 80240058 2610EFC8 */  addiu     $s0, $s0, %lo(gPlayerStatus)
-/* ABB2EC 8024005C 0C0B1EAF */  jal       get_variable
+/* ABB2EC 8024005C 0C0B1EAF */  jal       evt_get_variable
 /* ABB2F0 80240060 00000000 */   nop
 /* ABB2F4 80240064 14400005 */  bnez      $v0, .L8024007C
 /* ABB2F8 80240068 00000000 */   nop

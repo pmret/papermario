@@ -8,7 +8,7 @@ glabel func_80240CA0_BC8B00
 /* BC8B0C 80240CAC 0000202D */  daddu     $a0, $zero, $zero
 /* BC8B10 80240CB0 3C05FD05 */  lui       $a1, 0xfd05
 /* BC8B14 80240CB4 AFBF0014 */  sw        $ra, 0x14($sp)
-/* BC8B18 80240CB8 0C0B1EAF */  jal       get_variable
+/* BC8B18 80240CB8 0C0B1EAF */  jal       evt_get_variable
 /* BC8B1C 80240CBC 34A50F85 */   ori      $a1, $a1, 0xf85
 /* BC8B20 80240CC0 0C00EABB */  jal       get_npc_unsafe
 /* BC8B24 80240CC4 0040202D */   daddu    $a0, $v0, $zero

@@ -18,7 +18,7 @@ glabel func_802407A0_B03020
 /* B03054 802407D4 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* B03058 802407D8 8E70000C */  lw        $s0, 0xc($s3)
 /* B0305C 802407DC 8E050000 */  lw        $a1, ($s0)
-/* B03060 802407E0 0C0B1EAF */  jal       get_variable
+/* B03060 802407E0 0C0B1EAF */  jal       evt_get_variable
 /* B03064 802407E4 26100004 */   addiu    $s0, $s0, 4
 /* B03068 802407E8 8E150000 */  lw        $s5, ($s0)
 /* B0306C 802407EC 26100004 */  addiu     $s0, $s0, 4

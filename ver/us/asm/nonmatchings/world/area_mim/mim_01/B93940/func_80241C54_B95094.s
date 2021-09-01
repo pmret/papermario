@@ -18,7 +18,7 @@ glabel func_80241C54_B95094
 /* B950C8 80241C88 8E43000C */  lw        $v1, 0xc($s2)
 /* B950CC 80241C8C 0240202D */  daddu     $a0, $s2, $zero
 /* B950D0 80241C90 8C650000 */  lw        $a1, ($v1)
-/* B950D4 80241C94 0C0B1EAF */  jal       get_variable
+/* B950D4 80241C94 0C0B1EAF */  jal       evt_get_variable
 /* B950D8 80241C98 0040A82D */   daddu    $s5, $v0, $zero
 /* B950DC 80241C9C AFA00010 */  sw        $zero, 0x10($sp)
 /* B950E0 80241CA0 8E2300D0 */  lw        $v1, 0xd0($s1)

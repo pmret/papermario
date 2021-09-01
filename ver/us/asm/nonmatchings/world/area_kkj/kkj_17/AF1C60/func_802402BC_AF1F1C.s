@@ -51,12 +51,12 @@ glabel func_802402BC_AF1F1C
 .L8024036C:
 /* AF1FCC 8024036C 8E650088 */  lw        $a1, 0x88($s3)
 /* AF1FD0 80240370 0000202D */  daddu     $a0, $zero, $zero
-/* AF1FD4 80240374 0C0B1EAF */  jal       get_variable
+/* AF1FD4 80240374 0C0B1EAF */  jal       evt_get_variable
 /* AF1FD8 80240378 00B22821 */   addu     $a1, $a1, $s2
 /* AF1FDC 8024037C 0000202D */  daddu     $a0, $zero, $zero
 /* AF1FE0 80240380 8E65008C */  lw        $a1, 0x8c($s3)
 /* AF1FE4 80240384 0040802D */  daddu     $s0, $v0, $zero
-/* AF1FE8 80240388 0C0B1EAF */  jal       get_variable
+/* AF1FE8 80240388 0C0B1EAF */  jal       evt_get_variable
 /* AF1FEC 8024038C 00B22821 */   addu     $a1, $a1, $s2
 /* AF1FF0 80240390 52000016 */  beql      $s0, $zero, .L802403EC
 /* AF1FF4 80240394 26520001 */   addiu    $s2, $s2, 1

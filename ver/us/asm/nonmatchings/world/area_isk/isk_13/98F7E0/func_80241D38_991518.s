@@ -35,7 +35,7 @@ glabel func_80241D38_991518
 /* 991574 80241D94 3C05FD05 */  lui       $a1, 0xfd05
 /* 991578 80241D98 4600010D */  trunc.w.s $f4, $f0
 /* 99157C 80241D9C 44102000 */  mfc1      $s0, $f4
-/* 991580 80241DA0 0C0B1EAF */  jal       get_variable
+/* 991580 80241DA0 0C0B1EAF */  jal       evt_get_variable
 /* 991584 80241DA4 34A50F8A */   ori      $a1, $a1, 0xf8a
 /* 991588 80241DA8 0040182D */  daddu     $v1, $v0, $zero
 /* 99158C 80241DAC C4600050 */  lwc1      $f0, 0x50($v1)

@@ -5,7 +5,7 @@ glabel func_802402F0_9867D0
 /* 9867D0 802402F0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 9867D4 802402F4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 9867D8 802402F8 8C82000C */  lw        $v0, 0xc($a0)
-/* 9867DC 802402FC 0C0B1EAF */  jal       get_variable
+/* 9867DC 802402FC 0C0B1EAF */  jal       evt_get_variable
 /* 9867E0 80240300 8C450000 */   lw       $a1, ($v0)
 /* 9867E4 80240304 3C038016 */  lui       $v1, %hi(gCollisionStatus+0x2)
 /* 9867E8 80240308 8463A552 */  lh        $v1, %lo(gCollisionStatus+0x2)($v1)

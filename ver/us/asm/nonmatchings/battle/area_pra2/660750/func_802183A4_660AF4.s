@@ -15,27 +15,27 @@ glabel func_802183A4_660AF4
 /* 660B1C 802183CC 8E120000 */  lw        $s2, ($s0)
 /* 660B20 802183D0 26100004 */  addiu     $s0, $s0, 4
 /* 660B24 802183D4 8E050000 */  lw        $a1, ($s0)
-/* 660B28 802183D8 0C0B1EAF */  jal       get_variable
+/* 660B28 802183D8 0C0B1EAF */  jal       evt_get_variable
 /* 660B2C 802183DC 26100004 */   addiu    $s0, $s0, 4
 /* 660B30 802183E0 8E050000 */  lw        $a1, ($s0)
 /* 660B34 802183E4 26100004 */  addiu     $s0, $s0, 4
 /* 660B38 802183E8 4482C000 */  mtc1      $v0, $f24
 /* 660B3C 802183EC 00000000 */  nop
 /* 660B40 802183F0 4680C620 */  cvt.s.w   $f24, $f24
-/* 660B44 802183F4 0C0B1EAF */  jal       get_variable
+/* 660B44 802183F4 0C0B1EAF */  jal       evt_get_variable
 /* 660B48 802183F8 0220202D */   daddu    $a0, $s1, $zero
 /* 660B4C 802183FC 8E050000 */  lw        $a1, ($s0)
 /* 660B50 80218400 26100004 */  addiu     $s0, $s0, 4
 /* 660B54 80218404 4482B000 */  mtc1      $v0, $f22
 /* 660B58 80218408 00000000 */  nop
 /* 660B5C 8021840C 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 660B60 80218410 0C0B1EAF */  jal       get_variable
+/* 660B60 80218410 0C0B1EAF */  jal       evt_get_variable
 /* 660B64 80218414 0220202D */   daddu    $a0, $s1, $zero
 /* 660B68 80218418 8E050000 */  lw        $a1, ($s0)
 /* 660B6C 8021841C 4482A000 */  mtc1      $v0, $f20
 /* 660B70 80218420 00000000 */  nop
 /* 660B74 80218424 4680A520 */  cvt.s.w   $f20, $f20
-/* 660B78 80218428 0C0B1EAF */  jal       get_variable
+/* 660B78 80218428 0C0B1EAF */  jal       evt_get_variable
 /* 660B7C 8021842C 0220202D */   daddu    $a0, $s1, $zero
 /* 660B80 80218430 4600C306 */  mov.s     $f12, $f24
 /* 660B84 80218434 44821000 */  mtc1      $v0, $f2

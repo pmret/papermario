@@ -10,7 +10,7 @@ glabel func_802416F8_E0FE98
 /* E0FEAC 8024170C AFB00010 */  sw        $s0, 0x10($sp)
 /* E0FEB0 80241710 8E22000C */  lw        $v0, 0xc($s1)
 /* E0FEB4 80241714 00A0802D */  daddu     $s0, $a1, $zero
-/* E0FEB8 80241718 0C0B1EAF */  jal       get_variable
+/* E0FEB8 80241718 0C0B1EAF */  jal       evt_get_variable
 /* E0FEBC 8024171C 8C450000 */   lw       $a1, ($v0)
 /* E0FEC0 80241720 12000013 */  beqz      $s0, .L80241770
 /* E0FEC4 80241724 0040902D */   daddu    $s2, $v0, $zero

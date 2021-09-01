@@ -25,7 +25,7 @@ glabel func_802413AC_BAECEC
 /* BAED20 802413E0 00A0882D */   daddu    $s1, $a1, $zero
 /* BAED24 802413E4 0280202D */  daddu     $a0, $s4, $zero
 /* BAED28 802413E8 8E050000 */  lw        $a1, ($s0)
-/* BAED2C 802413EC 0C0B1EAF */  jal       get_variable
+/* BAED2C 802413EC 0C0B1EAF */  jal       evt_get_variable
 /* BAED30 802413F0 0040A82D */   daddu    $s5, $v0, $zero
 /* BAED34 802413F4 AFA00010 */  sw        $zero, 0x10($sp)
 /* BAED38 802413F8 8E4300D0 */  lw        $v1, 0xd0($s2)

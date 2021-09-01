@@ -5,7 +5,7 @@ glabel func_80231000_54CC70
 /* 54CC70 80231000 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 54CC74 80231004 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 54CC78 80231008 8C82000C */  lw        $v0, 0xc($a0)
-/* 54CC7C 8023100C 0C0B1EAF */  jal       get_variable
+/* 54CC7C 8023100C 0C0B1EAF */  jal       evt_get_variable
 /* 54CC80 80231010 8C450004 */   lw       $a1, 4($v0)
 /* 54CC84 80231014 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 54CC88 80231018 24020002 */  addiu     $v0, $zero, 2

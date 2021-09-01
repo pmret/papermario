@@ -25,7 +25,7 @@ glabel func_802428B4_DCF584
 /* DCF5D4 80242904 1062012F */  beq       $v1, $v0, .L80242DC4
 /* DCF5D8 80242908 0000102D */   daddu    $v0, $zero, $zero
 /* DCF5DC 8024290C 8E050000 */  lw        $a1, ($s0)
-/* DCF5E0 80242910 0C0B1EAF */  jal       get_variable
+/* DCF5E0 80242910 0C0B1EAF */  jal       evt_get_variable
 /* DCF5E4 80242914 02E0202D */   daddu    $a0, $s7, $zero
 /* DCF5E8 80242918 86640008 */  lh        $a0, 8($s3)
 /* DCF5EC 8024291C 0C00EABB */  jal       get_npc_unsafe

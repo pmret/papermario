@@ -6,7 +6,7 @@ glabel CancelEnemyTurn
 /* 19CAEC 8026E20C AFBF0014 */  sw        $ra, 0x14($sp)
 /* 19CAF0 8026E210 AFB00010 */  sw        $s0, 0x10($sp)
 /* 19CAF4 8026E214 8C82000C */  lw        $v0, 0xc($a0)
-/* 19CAF8 8026E218 0C0B1EAF */  jal       get_variable
+/* 19CAF8 8026E218 0C0B1EAF */  jal       evt_get_variable
 /* 19CAFC 8026E21C 8C450000 */   lw       $a1, ($v0)
 /* 19CB00 8026E220 3C10800E */  lui       $s0, %hi(gBattleStatus)
 /* 19CB04 8026E224 2610C070 */  addiu     $s0, $s0, %lo(gBattleStatus)

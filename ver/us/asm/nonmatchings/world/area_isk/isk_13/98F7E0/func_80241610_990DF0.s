@@ -17,7 +17,7 @@ glabel func_80241610_990DF0
 /* 990E20 80241640 AFB000D0 */  sw        $s0, 0xd0($sp)
 /* 990E24 80241644 F7B60100 */  sdc1      $f22, 0x100($sp)
 /* 990E28 80241648 F7B400F8 */  sdc1      $f20, 0xf8($sp)
-/* 990E2C 8024164C 0C0B1EAF */  jal       get_variable
+/* 990E2C 8024164C 0C0B1EAF */  jal       evt_get_variable
 /* 990E30 80241650 34A50F8A */   ori      $a1, $a1, 0xf8a
 /* 990E34 80241654 3C03DC08 */  lui       $v1, 0xdc08
 /* 990E38 80241658 3C1E800A */  lui       $fp, %hi(gMasterGfxPos)

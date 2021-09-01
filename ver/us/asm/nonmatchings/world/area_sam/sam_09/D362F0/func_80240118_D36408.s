@@ -7,7 +7,7 @@ glabel func_80240118_D36408
 /* D36410 80240120 0080802D */  daddu     $s0, $a0, $zero
 /* D36414 80240124 AFBF0014 */  sw        $ra, 0x14($sp)
 /* D36418 80240128 8E02000C */  lw        $v0, 0xc($s0)
-/* D3641C 8024012C 0C0B1EAF */  jal       get_variable
+/* D3641C 8024012C 0C0B1EAF */  jal       evt_get_variable
 /* D36420 80240130 8C450000 */   lw       $a1, ($v0)
 /* D36424 80240134 0C04C3D6 */  jal       get_item_entity
 /* D36428 80240138 0040202D */   daddu    $a0, $v0, $zero

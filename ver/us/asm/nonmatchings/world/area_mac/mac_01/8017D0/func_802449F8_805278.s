@@ -13,12 +13,12 @@ glabel func_802449F8_805278
 /* 805298 80244A18 AFB20018 */  sw        $s2, 0x18($sp)
 /* 80529C 80244A1C AFB10014 */  sw        $s1, 0x14($sp)
 /* 8052A0 80244A20 F7B40028 */  sdc1      $f20, 0x28($sp)
-/* 8052A4 80244A24 0C0B1EAF */  jal       get_variable
+/* 8052A4 80244A24 0C0B1EAF */  jal       evt_get_variable
 /* 8052A8 80244A28 34A50F81 */   ori      $a1, $a1, 0xf81
 /* 8052AC 80244A2C 0000202D */  daddu     $a0, $zero, $zero
 /* 8052B0 80244A30 3C05FD05 */  lui       $a1, 0xfd05
 /* 8052B4 80244A34 34A50F80 */  ori       $a1, $a1, 0xf80
-/* 8052B8 80244A38 0C0B1EAF */  jal       get_variable
+/* 8052B8 80244A38 0C0B1EAF */  jal       evt_get_variable
 /* 8052BC 80244A3C 00029823 */   negu     $s3, $v0
 /* 8052C0 80244A40 24040002 */  addiu     $a0, $zero, 2
 /* 8052C4 80244A44 8E1100A0 */  lw        $s1, 0xa0($s0)

@@ -14,7 +14,7 @@ glabel func_802414A8_D51498
 /* D514BC 802414CC F7B40020 */  sdc1      $f20, 0x20($sp)
 /* D514C0 802414D0 8E30000C */  lw        $s0, 0xc($s1)
 /* D514C4 802414D4 8E050000 */  lw        $a1, ($s0)
-/* D514C8 802414D8 0C0B1EAF */  jal       get_variable
+/* D514C8 802414D8 0C0B1EAF */  jal       evt_get_variable
 /* D514CC 802414DC 26100004 */   addiu    $s0, $s0, 4
 /* D514D0 802414E0 8E050000 */  lw        $a1, ($s0)
 /* D514D4 802414E4 26100004 */  addiu     $s0, $s0, 4

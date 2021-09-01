@@ -9,7 +9,7 @@ glabel GetDistanceToGoal
 /* 19D2EC 8026EA0C AFB00010 */  sw        $s0, 0x10($sp)
 /* 19D2F0 8026EA10 8E30000C */  lw        $s0, 0xc($s1)
 /* 19D2F4 8026EA14 8E050000 */  lw        $a1, ($s0)
-/* 19D2F8 8026EA18 0C0B1EAF */  jal       get_variable
+/* 19D2F8 8026EA18 0C0B1EAF */  jal       evt_get_variable
 /* 19D2FC 8026EA1C 26100004 */   addiu    $s0, $s0, 4
 /* 19D300 8026EA20 0040202D */  daddu     $a0, $v0, $zero
 /* 19D304 8026EA24 2402FF81 */  addiu     $v0, $zero, -0x7f

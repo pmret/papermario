@@ -5,7 +5,7 @@ glabel func_80240A94_A39F74
 /* A39F74 80240A94 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A39F78 80240A98 AFBF0010 */  sw        $ra, 0x10($sp)
 /* A39F7C 80240A9C 8C82000C */  lw        $v0, 0xc($a0)
-/* A39F80 80240AA0 0C0B1EAF */  jal       get_variable
+/* A39F80 80240AA0 0C0B1EAF */  jal       evt_get_variable
 /* A39F84 80240AA4 8C450000 */   lw       $a1, ($v0)
 /* A39F88 80240AA8 3C05F840 */  lui       $a1, 0xf840
 /* A39F8C 80240AAC 34A5626B */  ori       $a1, $a1, 0x626b

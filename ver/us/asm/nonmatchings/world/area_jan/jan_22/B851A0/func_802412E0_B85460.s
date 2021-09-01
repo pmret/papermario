@@ -10,12 +10,12 @@ glabel func_802412E0_B85460
 /* B85474 802412F4 AFB00010 */  sw        $s0, 0x10($sp)
 /* B85478 802412F8 8E30000C */  lw        $s0, 0xc($s1)
 /* B8547C 802412FC 8E050000 */  lw        $a1, ($s0)
-/* B85480 80241300 0C0B1EAF */  jal       get_variable
+/* B85480 80241300 0C0B1EAF */  jal       evt_get_variable
 /* B85484 80241304 26100004 */   addiu    $s0, $s0, 4
 /* B85488 80241308 0220202D */  daddu     $a0, $s1, $zero
 /* B8548C 8024130C 8E050000 */  lw        $a1, ($s0)
 /* B85490 80241310 2450FFEF */  addiu     $s0, $v0, -0x11
-/* B85494 80241314 0C0B1EAF */  jal       get_variable
+/* B85494 80241314 0C0B1EAF */  jal       evt_get_variable
 /* B85498 80241318 24520011 */   addiu    $s2, $v0, 0x11
 /* B8549C 8024131C 2403FFFF */  addiu     $v1, $zero, -1
 /* B854A0 80241320 44900000 */  mtc1      $s0, $f0

@@ -2285,4 +2285,19 @@ typedef struct ActionCommandStatus {
     /* 0x74 */ s16 mashMeterCutoffs[6]; // upper bounds for each interval
     /* 0x80 */ s8 mashMeterIntervals;
 } ActionCommandStatus;
+
+struct PopupMessage;
+typedef void (*PopupMessageCallback)(struct PopupMessage* popup);
+typedef struct PopupMessage {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ PopupMessageCallback unk_04;
+    /* 0x08 */ PopupMessageCallback unk_08;
+    /* 0x0C */ PopupMessageCallback drawFunc;
+    /* 0x10 */ s16 active;
+    /* 0x12 */ s16 messageIndex;
+    /* 0x14 */ s16 duration;
+    /* 0x16 */ s8 unk_16;
+    /* 0x17 */ s8 unk_17;
+    /* 0x18 */ s32* message;
+} PopupMessage; // size = 0x1C
 #endif

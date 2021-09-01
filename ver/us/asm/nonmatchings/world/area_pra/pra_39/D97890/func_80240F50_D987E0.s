@@ -33,7 +33,7 @@ glabel func_80240F50_D987E0
 /* D9881C 80240F8C 8E63000C */  lw        $v1, 0xc($s3)
 /* D98820 80240F90 0260202D */  daddu     $a0, $s3, $zero
 /* D98824 80240F94 8C650000 */  lw        $a1, ($v1)
-/* D98828 80240F98 0C0B1EAF */  jal       get_variable
+/* D98828 80240F98 0C0B1EAF */  jal       evt_get_variable
 /* D9882C 80240F9C 0040882D */   daddu    $s1, $v0, $zero
 /* D98830 80240FA0 AFA00020 */  sw        $zero, 0x20($sp)
 /* D98834 80240FA4 8E4300D0 */  lw        $v1, 0xd0($s2)

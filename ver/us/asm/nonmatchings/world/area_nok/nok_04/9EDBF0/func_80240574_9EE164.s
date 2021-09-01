@@ -11,7 +11,7 @@ glabel func_80240574_9EE164
 /* 9EE17C 8024058C AFB00010 */  sw        $s0, 0x10($sp)
 /* 9EE180 80240590 8E50000C */  lw        $s0, 0xc($s2)
 /* 9EE184 80240594 8E050000 */  lw        $a1, ($s0)
-/* 9EE188 80240598 0C0B1EAF */  jal       get_variable
+/* 9EE188 80240598 0C0B1EAF */  jal       evt_get_variable
 /* 9EE18C 8024059C 26100004 */   addiu    $s0, $s0, 4
 /* 9EE190 802405A0 8E050000 */  lw        $a1, ($s0)
 /* 9EE194 802405A4 26100004 */  addiu     $s0, $s0, 4

@@ -5,7 +5,7 @@ glabel func_80240F8C_DE341C
 /* DE341C 80240F8C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* DE3420 80240F90 AFBF0010 */  sw        $ra, 0x10($sp)
 /* DE3424 80240F94 8C82000C */  lw        $v0, 0xc($a0)
-/* DE3428 80240F98 0C0B1EAF */  jal       get_variable
+/* DE3428 80240F98 0C0B1EAF */  jal       evt_get_variable
 /* DE342C 80240F9C 8C450000 */   lw       $a1, ($v0)
 /* DE3430 80240FA0 0040182D */  daddu     $v1, $v0, $zero
 /* DE3434 80240FA4 10600012 */  beqz      $v1, .L80240FF0

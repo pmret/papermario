@@ -14,7 +14,7 @@ glabel func_80240290_DC4660
 /* DC4684 802402B4 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* DC4688 802402B8 8E30000C */  lw        $s0, 0xc($s1)
 /* DC468C 802402BC 8E050000 */  lw        $a1, ($s0)
-/* DC4690 802402C0 0C0B1EAF */  jal       get_variable
+/* DC4690 802402C0 0C0B1EAF */  jal       evt_get_variable
 /* DC4694 802402C4 26100004 */   addiu    $s0, $s0, 4
 /* DC4698 802402C8 8E050000 */  lw        $a1, ($s0)
 /* DC469C 802402CC 26100004 */  addiu     $s0, $s0, 4

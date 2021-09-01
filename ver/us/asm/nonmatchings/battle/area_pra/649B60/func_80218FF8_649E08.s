@@ -9,7 +9,7 @@ glabel func_80218FF8_649E08
 /* 649E18 80219008 AFB00010 */  sw        $s0, 0x10($sp)
 /* 649E1C 8021900C 8E30000C */  lw        $s0, 0xc($s1)
 /* 649E20 80219010 8E050000 */  lw        $a1, ($s0)
-/* 649E24 80219014 0C0B1EAF */  jal       get_variable
+/* 649E24 80219014 0C0B1EAF */  jal       evt_get_variable
 /* 649E28 80219018 26100004 */   addiu    $s0, $s0, 4
 /* 649E2C 8021901C 0040202D */  daddu     $a0, $v0, $zero
 /* 649E30 80219020 2402FF81 */  addiu     $v0, $zero, -0x7f

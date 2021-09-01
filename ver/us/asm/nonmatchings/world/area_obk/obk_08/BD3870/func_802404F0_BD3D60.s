@@ -9,7 +9,7 @@ glabel func_802404F0_BD3D60
 /* BD3D70 80240500 3C05FD05 */  lui       $a1, 0xfd05
 /* BD3D74 80240504 34A50F8A */  ori       $a1, $a1, 0xf8a
 /* BD3D78 80240508 AFBF0018 */  sw        $ra, 0x18($sp)
-/* BD3D7C 8024050C 0C0B1EAF */  jal       get_variable
+/* BD3D7C 8024050C 0C0B1EAF */  jal       evt_get_variable
 /* BD3D80 80240510 AFB00010 */   sw       $s0, 0x10($sp)
 /* BD3D84 80240514 0040802D */  daddu     $s0, $v0, $zero
 /* BD3D88 80240518 0C04EA15 */  jal       func_8013A854

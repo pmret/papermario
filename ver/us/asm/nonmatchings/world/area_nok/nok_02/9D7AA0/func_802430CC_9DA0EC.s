@@ -10,11 +10,11 @@ glabel func_802430CC_9DA0EC
 /* 9DA100 802430E0 AFB00010 */  sw        $s0, 0x10($sp)
 /* 9DA104 802430E4 8E30000C */  lw        $s0, 0xc($s1)
 /* 9DA108 802430E8 8E050000 */  lw        $a1, ($s0)
-/* 9DA10C 802430EC 0C0B1EAF */  jal       get_variable
+/* 9DA10C 802430EC 0C0B1EAF */  jal       evt_get_variable
 /* 9DA110 802430F0 26100004 */   addiu    $s0, $s0, 4
 /* 9DA114 802430F4 0220202D */  daddu     $a0, $s1, $zero
 /* 9DA118 802430F8 8E050000 */  lw        $a1, ($s0)
-/* 9DA11C 802430FC 0C0B1EAF */  jal       get_variable
+/* 9DA11C 802430FC 0C0B1EAF */  jal       evt_get_variable
 /* 9DA120 80243100 0040802D */   daddu    $s0, $v0, $zero
 /* 9DA124 80243104 3C128011 */  lui       $s2, %hi(gPlayerStatus)
 /* 9DA128 80243108 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)

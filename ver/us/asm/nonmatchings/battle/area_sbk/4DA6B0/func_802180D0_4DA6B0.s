@@ -15,7 +15,7 @@ glabel func_802180D0_4DA6B0
 /* 4DA6D8 802180F8 F7B40068 */  sdc1      $f20, 0x68($sp)
 /* 4DA6DC 802180FC 8E30000C */  lw        $s0, 0xc($s1)
 /* 4DA6E0 80218100 8E050000 */  lw        $a1, ($s0)
-/* 4DA6E4 80218104 0C0B1EAF */  jal       get_variable
+/* 4DA6E4 80218104 0C0B1EAF */  jal       evt_get_variable
 /* 4DA6E8 80218108 26100004 */   addiu    $s0, $s0, 4
 /* 4DA6EC 8021810C 4482A000 */  mtc1      $v0, $f20
 /* 4DA6F0 80218110 00000000 */  nop

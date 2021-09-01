@@ -7,7 +7,7 @@ glabel func_80219824_465CB4
 /* 465CBC 8021982C 0080802D */  daddu     $s0, $a0, $zero
 /* 465CC0 80219830 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 465CC4 80219834 8E02000C */  lw        $v0, 0xc($s0)
-/* 465CC8 80219838 0C0B1EAF */  jal       get_variable
+/* 465CC8 80219838 0C0B1EAF */  jal       evt_get_variable
 /* 465CCC 8021983C 8C450000 */   lw       $a1, ($v0)
 /* 465CD0 80219840 8E040148 */  lw        $a0, 0x148($s0)
 /* 465CD4 80219844 0C09A75B */  jal       get_actor

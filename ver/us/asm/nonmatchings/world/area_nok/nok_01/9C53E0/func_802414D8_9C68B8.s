@@ -11,21 +11,21 @@ glabel func_802414D8_9C68B8
 /* 9C68D0 802414F0 10A00060 */  beqz      $a1, .L80241674
 /* 9C68D4 802414F4 0080882D */   daddu    $s1, $a0, $zero
 /* 9C68D8 802414F8 3C05F4AC */  lui       $a1, 0xf4ac
-/* 9C68DC 802414FC 0C0B1EAF */  jal       get_variable
+/* 9C68DC 802414FC 0C0B1EAF */  jal       evt_get_variable
 /* 9C68E0 80241500 34A5D481 */   ori      $a1, $a1, 0xd481
 /* 9C68E4 80241504 0220202D */  daddu     $a0, $s1, $zero
 /* 9C68E8 80241508 3C05F4AC */  lui       $a1, 0xf4ac
 /* 9C68EC 8024150C 4482B000 */  mtc1      $v0, $f22
 /* 9C68F0 80241510 00000000 */  nop
 /* 9C68F4 80241514 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 9C68F8 80241518 0C0B1EAF */  jal       get_variable
+/* 9C68F8 80241518 0C0B1EAF */  jal       evt_get_variable
 /* 9C68FC 8024151C 34A5D482 */   ori      $a1, $a1, 0xd482
 /* 9C6900 80241520 0220202D */  daddu     $a0, $s1, $zero
 /* 9C6904 80241524 3C05F4AC */  lui       $a1, 0xf4ac
 /* 9C6908 80241528 4482A000 */  mtc1      $v0, $f20
 /* 9C690C 8024152C 00000000 */  nop
 /* 9C6910 80241530 4680A520 */  cvt.s.w   $f20, $f20
-/* 9C6914 80241534 0C0B1EAF */  jal       get_variable
+/* 9C6914 80241534 0C0B1EAF */  jal       evt_get_variable
 /* 9C6918 80241538 34A5D483 */   ori      $a1, $a1, 0xd483
 /* 9C691C 8024153C 44821000 */  mtc1      $v0, $f2
 /* 9C6920 80241540 00000000 */  nop
@@ -40,21 +40,21 @@ glabel func_802414D8_9C68B8
 /* 9C6944 80241564 34A5D481 */  ori       $a1, $a1, 0xd481
 /* 9C6948 80241568 3C108025 */  lui       $s0, %hi(D_80251C60)
 /* 9C694C 8024156C 26101C60 */  addiu     $s0, $s0, %lo(D_80251C60)
-/* 9C6950 80241570 0C0B1EAF */  jal       get_variable
+/* 9C6950 80241570 0C0B1EAF */  jal       evt_get_variable
 /* 9C6954 80241574 AE020000 */   sw       $v0, ($s0)
 /* 9C6958 80241578 0220202D */  daddu     $a0, $s1, $zero
 /* 9C695C 8024157C 3C05F4AC */  lui       $a1, 0xf4ac
 /* 9C6960 80241580 4482B000 */  mtc1      $v0, $f22
 /* 9C6964 80241584 00000000 */  nop
 /* 9C6968 80241588 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 9C696C 8024158C 0C0B1EAF */  jal       get_variable
+/* 9C696C 8024158C 0C0B1EAF */  jal       evt_get_variable
 /* 9C6970 80241590 34A5D482 */   ori      $a1, $a1, 0xd482
 /* 9C6974 80241594 0220202D */  daddu     $a0, $s1, $zero
 /* 9C6978 80241598 3C05F4AC */  lui       $a1, 0xf4ac
 /* 9C697C 8024159C 4482A000 */  mtc1      $v0, $f20
 /* 9C6980 802415A0 00000000 */  nop
 /* 9C6984 802415A4 4680A520 */  cvt.s.w   $f20, $f20
-/* 9C6988 802415A8 0C0B1EAF */  jal       get_variable
+/* 9C6988 802415A8 0C0B1EAF */  jal       evt_get_variable
 /* 9C698C 802415AC 34A5D483 */   ori      $a1, $a1, 0xd483
 /* 9C6990 802415B0 44821000 */  mtc1      $v0, $f2
 /* 9C6994 802415B4 00000000 */  nop
@@ -68,21 +68,21 @@ glabel func_802414D8_9C68B8
 /* 9C69B4 802415D4 3C05F4AC */  lui       $a1, 0xf4ac
 /* 9C69B8 802415D8 3C018025 */  lui       $at, %hi(dgb_01_D_80251C64_C0F4E4)
 /* 9C69BC 802415DC AC221C64 */  sw        $v0, %lo(dgb_01_D_80251C64_C0F4E4)($at)
-/* 9C69C0 802415E0 0C0B1EAF */  jal       get_variable
+/* 9C69C0 802415E0 0C0B1EAF */  jal       evt_get_variable
 /* 9C69C4 802415E4 34A5D481 */   ori      $a1, $a1, 0xd481
 /* 9C69C8 802415E8 0220202D */  daddu     $a0, $s1, $zero
 /* 9C69CC 802415EC 3C05F4AC */  lui       $a1, 0xf4ac
 /* 9C69D0 802415F0 4482B000 */  mtc1      $v0, $f22
 /* 9C69D4 802415F4 00000000 */  nop
 /* 9C69D8 802415F8 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 9C69DC 802415FC 0C0B1EAF */  jal       get_variable
+/* 9C69DC 802415FC 0C0B1EAF */  jal       evt_get_variable
 /* 9C69E0 80241600 34A5D482 */   ori      $a1, $a1, 0xd482
 /* 9C69E4 80241604 0220202D */  daddu     $a0, $s1, $zero
 /* 9C69E8 80241608 3C05F4AC */  lui       $a1, 0xf4ac
 /* 9C69EC 8024160C 4482A000 */  mtc1      $v0, $f20
 /* 9C69F0 80241610 00000000 */  nop
 /* 9C69F4 80241614 4680A520 */  cvt.s.w   $f20, $f20
-/* 9C69F8 80241618 0C0B1EAF */  jal       get_variable
+/* 9C69F8 80241618 0C0B1EAF */  jal       evt_get_variable
 /* 9C69FC 8024161C 34A5D483 */   ori      $a1, $a1, 0xd483
 /* 9C6A00 80241620 44821000 */  mtc1      $v0, $f2
 /* 9C6A04 80241624 00000000 */  nop

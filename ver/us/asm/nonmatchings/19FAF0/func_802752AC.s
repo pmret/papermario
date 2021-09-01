@@ -53,11 +53,11 @@ glabel func_802752AC
 /* 1A3BC4 802752E4 10A00019 */  beqz      $a1, .L8027534C
 /* 1A3BC8 802752E8 2650000C */   addiu    $s0, $s2, 0xc
 /* 1A3BCC 802752EC 8E250000 */  lw        $a1, ($s1)
-/* 1A3BD0 802752F0 0C0B1EAF */  jal       get_variable
+/* 1A3BD0 802752F0 0C0B1EAF */  jal       evt_get_variable
 /* 1A3BD4 802752F4 26310004 */   addiu    $s1, $s1, 4
 /* 1A3BD8 802752F8 A6420070 */  sh        $v0, 0x70($s2)
 /* 1A3BDC 802752FC 8E250000 */  lw        $a1, ($s1)
-/* 1A3BE0 80275300 0C0B1EAF */  jal       get_variable
+/* 1A3BE0 80275300 0C0B1EAF */  jal       evt_get_variable
 /* 1A3BE4 80275304 0260202D */   daddu    $a0, $s3, $zero
 /* 1A3BE8 80275308 A6420072 */  sh        $v0, 0x72($s2)
 /* 1A3BEC 8027530C AE600070 */  sw        $zero, 0x70($s3)

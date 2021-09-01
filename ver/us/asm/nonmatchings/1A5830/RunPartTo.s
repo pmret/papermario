@@ -23,7 +23,7 @@ glabel RunPartTo
 /* 1A95D0 8027ACF0 00000000 */   nop
 /* 1A95D4 8027ACF4 8E250000 */  lw        $a1, ($s1)
 /* 1A95D8 8027ACF8 26310004 */  addiu     $s1, $s1, 4
-/* 1A95DC 8027ACFC 0C0B1EAF */  jal       get_variable
+/* 1A95DC 8027ACFC 0C0B1EAF */  jal       evt_get_variable
 /* 1A95E0 8027AD00 0280202D */   daddu    $a0, $s4, $zero
 /* 1A95E4 8027AD04 0040802D */  daddu     $s0, $v0, $zero
 /* 1A95E8 8027AD08 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -33,7 +33,7 @@ glabel RunPartTo
 .L8027AD18:
 /* 1A95F8 8027AD18 8E250000 */  lw        $a1, ($s1)
 /* 1A95FC 8027AD1C 26310004 */  addiu     $s1, $s1, 4
-/* 1A9600 8027AD20 0C0B1EAF */  jal       get_variable
+/* 1A9600 8027AD20 0C0B1EAF */  jal       evt_get_variable
 /* 1A9604 8027AD24 0280202D */   daddu    $a0, $s4, $zero
 /* 1A9608 8027AD28 0200202D */  daddu     $a0, $s0, $zero
 /* 1A960C 8027AD2C 0C09A75B */  jal       get_actor
@@ -48,21 +48,21 @@ glabel RunPartTo
 /* 1A9630 8027AD50 8E250000 */  lw        $a1, ($s1)
 /* 1A9634 8027AD54 26310004 */  addiu     $s1, $s1, 4
 /* 1A9638 8027AD58 8E500010 */  lw        $s0, 0x10($s2)
-/* 1A963C 8027AD5C 0C0B1EAF */  jal       get_variable
+/* 1A963C 8027AD5C 0C0B1EAF */  jal       evt_get_variable
 /* 1A9640 8027AD60 0280202D */   daddu    $a0, $s4, $zero
 /* 1A9644 8027AD64 4482D000 */  mtc1      $v0, $f26
 /* 1A9648 8027AD68 00000000 */  nop
 /* 1A964C 8027AD6C 4680D6A0 */  cvt.s.w   $f26, $f26
 /* 1A9650 8027AD70 8E250000 */  lw        $a1, ($s1)
 /* 1A9654 8027AD74 26310004 */  addiu     $s1, $s1, 4
-/* 1A9658 8027AD78 0C0B1EAF */  jal       get_variable
+/* 1A9658 8027AD78 0C0B1EAF */  jal       evt_get_variable
 /* 1A965C 8027AD7C 0280202D */   daddu    $a0, $s4, $zero
 /* 1A9660 8027AD80 8E250000 */  lw        $a1, ($s1)
 /* 1A9664 8027AD84 26310004 */  addiu     $s1, $s1, 4
 /* 1A9668 8027AD88 4482A000 */  mtc1      $v0, $f20
 /* 1A966C 8027AD8C 00000000 */  nop
 /* 1A9670 8027AD90 4680A520 */  cvt.s.w   $f20, $f20
-/* 1A9674 8027AD94 0C0B1EAF */  jal       get_variable
+/* 1A9674 8027AD94 0C0B1EAF */  jal       evt_get_variable
 /* 1A9678 8027AD98 0280202D */   daddu    $a0, $s4, $zero
 /* 1A967C 8027AD9C 44820000 */  mtc1      $v0, $f0
 /* 1A9680 8027ADA0 00000000 */  nop
@@ -71,7 +71,7 @@ glabel RunPartTo
 /* 1A968C 8027ADAC E6140010 */  swc1      $f20, 0x10($s0)
 /* 1A9690 8027ADB0 E6000014 */  swc1      $f0, 0x14($s0)
 /* 1A9694 8027ADB4 8E250000 */  lw        $a1, ($s1)
-/* 1A9698 8027ADB8 0C0B1EAF */  jal       get_variable
+/* 1A9698 8027ADB8 0C0B1EAF */  jal       evt_get_variable
 /* 1A969C 8027ADBC 0280202D */   daddu    $a0, $s4, $zero
 /* 1A96A0 8027ADC0 A6020038 */  sh        $v0, 0x38($s0)
 /* 1A96A4 8027ADC4 C640002C */  lwc1      $f0, 0x2c($s2)

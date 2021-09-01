@@ -46,7 +46,7 @@ glabel pause_map_init
 /* 1419E0 8024E6A0 AC200724 */  sw        $zero, %lo(D_80270724)($at)
 /* 1419E4 8024E6A4 3C018027 */  lui       $at, %hi(D_80270720)
 /* 1419E8 8024E6A8 AC220720 */  sw        $v0, %lo(D_80270720)($at)
-/* 1419EC 8024E6AC 0C0B1EAF */  jal       get_variable
+/* 1419EC 8024E6AC 0C0B1EAF */  jal       evt_get_variable
 /* 1419F0 8024E6B0 34A50329 */   ori      $a1, $a1, 0x329
 /* 1419F4 8024E6B4 0040202D */  daddu     $a0, $v0, $zero
 /* 1419F8 8024E6B8 0000802D */  daddu     $s0, $zero, $zero

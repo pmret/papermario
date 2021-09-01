@@ -16,7 +16,7 @@ glabel func_80218BE0_609690
 /* 6096BC 80218C0C F7B60038 */  sdc1      $f22, 0x38($sp)
 /* 6096C0 80218C10 F7B40030 */  sdc1      $f20, 0x30($sp)
 /* 6096C4 80218C14 8E82000C */  lw        $v0, 0xc($s4)
-/* 6096C8 80218C18 0C0B1EAF */  jal       get_variable
+/* 6096C8 80218C18 0C0B1EAF */  jal       evt_get_variable
 /* 6096CC 80218C1C 8C450000 */   lw       $a1, ($v0)
 /* 6096D0 80218C20 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* 6096D4 80218C24 0040202D */   daddu    $a0, $v0, $zero

@@ -25,7 +25,7 @@ glabel func_80241D60_DB4020
 /* DB4054 80241D94 00A0882D */   daddu    $s1, $a1, $zero
 /* DB4058 80241D98 0280202D */  daddu     $a0, $s4, $zero
 /* DB405C 80241D9C 8E050000 */  lw        $a1, ($s0)
-/* DB4060 80241DA0 0C0B1EAF */  jal       get_variable
+/* DB4060 80241DA0 0C0B1EAF */  jal       evt_get_variable
 /* DB4064 80241DA4 0040A82D */   daddu    $s5, $v0, $zero
 /* DB4068 80241DA8 AFA00010 */  sw        $zero, 0x10($sp)
 /* DB406C 80241DAC 8E4300D0 */  lw        $v1, 0xd0($s2)

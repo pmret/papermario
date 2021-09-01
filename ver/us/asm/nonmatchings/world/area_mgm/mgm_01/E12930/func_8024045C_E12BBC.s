@@ -12,7 +12,7 @@ glabel func_8024045C_E12BBC
 /* E12BD8 80240478 8E23000C */  lw        $v1, 0xc($s1)
 /* E12BDC 8024047C 8C650000 */  lw        $a1, ($v1)
 /* E12BE0 80240480 8C500080 */  lw        $s0, 0x80($v0)
-/* E12BE4 80240484 0C0B1EAF */  jal       get_variable
+/* E12BE4 80240484 0C0B1EAF */  jal       evt_get_variable
 /* E12BE8 80240488 0220202D */   daddu    $a0, $s1, $zero
 /* E12BEC 8024048C 0220202D */  daddu     $a0, $s1, $zero
 /* E12BF0 80240490 3C05FE36 */  lui       $a1, 0xfe36

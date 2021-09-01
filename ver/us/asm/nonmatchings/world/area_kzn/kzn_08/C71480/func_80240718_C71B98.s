@@ -6,7 +6,7 @@ glabel func_80240718_C71B98
 /* C71B9C 8024071C AFBF0014 */  sw        $ra, 0x14($sp)
 /* C71BA0 80240720 AFB00010 */  sw        $s0, 0x10($sp)
 /* C71BA4 80240724 8C82000C */  lw        $v0, 0xc($a0)
-/* C71BA8 80240728 0C0B1EAF */  jal       get_variable
+/* C71BA8 80240728 0C0B1EAF */  jal       evt_get_variable
 /* C71BAC 8024072C 8C450000 */   lw       $a1, ($v0)
 /* C71BB0 80240730 0040802D */  daddu     $s0, $v0, $zero
 /* C71BB4 80240734 12000006 */  beqz      $s0, .L80240750

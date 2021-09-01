@@ -267,7 +267,7 @@ glabel pause_map_handle_input
 /* 141F94 8024EC54 00061040 */  sll       $v0, $a2, 1
 /* 141F98 8024EC58 00461021 */  addu      $v0, $v0, $a2
 /* 141F9C 8024EC5C 00431021 */  addu      $v0, $v0, $v1
-/* 141FA0 8024EC60 0C0B1EAF */  jal       get_variable
+/* 141FA0 8024EC60 0C0B1EAF */  jal       evt_get_variable
 /* 141FA4 8024EC64 AE020000 */   sw       $v0, ($s0)
 /* 141FA8 8024EC68 8E240000 */  lw        $a0, ($s1)
 /* 141FAC 8024EC6C 00041880 */  sll       $v1, $a0, 2

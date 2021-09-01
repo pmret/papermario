@@ -18,7 +18,7 @@ glabel func_80240730_AD47C0
 /* AD47F4 80240764 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* AD47F8 80240768 8E70000C */  lw        $s0, 0xc($s3)
 /* AD47FC 8024076C 8E050000 */  lw        $a1, ($s0)
-/* AD4800 80240770 0C0B1EAF */  jal       get_variable
+/* AD4800 80240770 0C0B1EAF */  jal       evt_get_variable
 /* AD4804 80240774 26100004 */   addiu    $s0, $s0, 4
 /* AD4808 80240778 8E150000 */  lw        $s5, ($s0)
 /* AD480C 8024077C 26100004 */  addiu     $s0, $s0, 4

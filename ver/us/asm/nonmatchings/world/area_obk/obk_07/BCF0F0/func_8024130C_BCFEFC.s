@@ -5,7 +5,7 @@ glabel func_8024130C_BCFEFC
 /* BCFEFC 8024130C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* BCFF00 80241310 3C05F5DE */  lui       $a1, 0xf5de
 /* BCFF04 80241314 AFBF0018 */  sw        $ra, 0x18($sp)
-/* BCFF08 80241318 0C0B1EAF */  jal       get_variable
+/* BCFF08 80241318 0C0B1EAF */  jal       evt_get_variable
 /* BCFF0C 8024131C 34A50236 */   ori      $a1, $a1, 0x236
 /* BCFF10 80241320 0000202D */  daddu     $a0, $zero, $zero
 /* BCFF14 80241324 24030008 */  addiu     $v1, $zero, 8

@@ -33,7 +33,7 @@ glabel func_80240098_BBD238
 /* BBD28C 802400EC 8E050000 */  lw        $a1, ($s0)
 /* BBD290 802400F0 3C108024 */  lui       $s0, %hi(D_80241C58_BBEDF8)
 /* BBD294 802400F4 26101C58 */  addiu     $s0, $s0, %lo(D_80241C58_BBEDF8)
-/* BBD298 802400F8 0C0B1EAF */  jal       get_variable
+/* BBD298 802400F8 0C0B1EAF */  jal       evt_get_variable
 /* BBD29C 802400FC 0220902D */   daddu    $s2, $s1, $zero
 /* BBD2A0 80240100 AE220008 */  sw        $v0, 8($s1)
 /* BBD2A4 80240104 AC510000 */  sw        $s1, ($v0)
@@ -282,7 +282,7 @@ glabel L8024038C_BBD52C
 /* BBD62C 8024048C 0280202D */  daddu     $a0, $s4, $zero
 .L80240490:
 /* BBD630 80240490 3C05FD05 */  lui       $a1, 0xfd05
-/* BBD634 80240494 0C0B1EAF */  jal       get_variable
+/* BBD634 80240494 0C0B1EAF */  jal       evt_get_variable
 /* BBD638 80240498 34A50F8B */   ori      $a1, $a1, 0xf8b
 /* BBD63C 8024049C 8E83007C */  lw        $v1, 0x7c($s4)
 /* BBD640 802404A0 14600015 */  bnez      $v1, .L802404F8

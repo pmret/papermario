@@ -14,7 +14,7 @@ glabel func_80240360_8A5DE0
 /* 8A5E04 80240384 F7B60030 */  sdc1      $f22, 0x30($sp)
 /* 8A5E08 80240388 F7B40028 */  sdc1      $f20, 0x28($sp)
 /* 8A5E0C 8024038C 8E62000C */  lw        $v0, 0xc($s3)
-/* 8A5E10 80240390 0C0B1EAF */  jal       get_variable
+/* 8A5E10 80240390 0C0B1EAF */  jal       evt_get_variable
 /* 8A5E14 80240394 8C450000 */   lw       $a1, ($v0)
 /* 8A5E18 80240398 2404FFFC */  addiu     $a0, $zero, -4
 /* 8A5E1C 8024039C 0C00EABB */  jal       get_npc_unsafe

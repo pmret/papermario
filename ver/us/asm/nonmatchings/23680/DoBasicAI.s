@@ -25,7 +25,7 @@ glabel DoBasicAI
 /* 258B0 8004A4B0 8E43000C */  lw        $v1, 0xc($s2)
 /* 258B4 8004A4B4 0240202D */  daddu     $a0, $s2, $zero
 /* 258B8 8004A4B8 8C650000 */  lw        $a1, ($v1)
-/* 258BC 8004A4BC 0C0B1EAF */  jal       get_variable
+/* 258BC 8004A4BC 0C0B1EAF */  jal       evt_get_variable
 /* 258C0 8004A4C0 0040A82D */   daddu    $s5, $v0, $zero
 /* 258C4 8004A4C4 AFA00010 */  sw        $zero, 0x10($sp)
 /* 258C8 8004A4C8 8E2300D0 */  lw        $v1, 0xd0($s1)

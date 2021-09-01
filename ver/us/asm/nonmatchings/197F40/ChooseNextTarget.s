@@ -14,7 +14,7 @@ glabel ChooseNextTarget
 /* 19CD18 8026E438 8E050000 */  lw        $a1, ($s0)
 /* 19CD1C 8026E43C 26100004 */  addiu     $s0, $s0, 4
 /* 19CD20 8026E440 0240202D */  daddu     $a0, $s2, $zero
-/* 19CD24 8026E444 0C0B1EAF */  jal       get_variable
+/* 19CD24 8026E444 0C0B1EAF */  jal       evt_get_variable
 /* 19CD28 8026E448 0040882D */   daddu    $s1, $v0, $zero
 /* 19CD2C 8026E44C 0040202D */  daddu     $a0, $v0, $zero
 /* 19CD30 8026E450 2402FFFF */  addiu     $v0, $zero, -1

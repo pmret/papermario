@@ -7,7 +7,7 @@ glabel func_80240310_C5AA50
 /* C5AA58 80240318 0080802D */  daddu     $s0, $a0, $zero
 /* C5AA5C 8024031C AFBF003C */  sw        $ra, 0x3c($sp)
 /* C5AA60 80240320 8E02000C */  lw        $v0, 0xc($s0)
-/* C5AA64 80240324 0C0B1EAF */  jal       get_variable
+/* C5AA64 80240324 0C0B1EAF */  jal       evt_get_variable
 /* C5AA68 80240328 8C450000 */   lw       $a1, ($v0)
 /* C5AA6C 8024032C 3044FFFF */  andi      $a0, $v0, 0xffff
 /* C5AA70 80240330 27A50020 */  addiu     $a1, $sp, 0x20

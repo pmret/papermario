@@ -20,7 +20,7 @@ glabel func_802419EC_8D2EFC
 /* 8D2F38 80241A28 0220202D */  daddu     $a0, $s1, $zero
 /* 8D2F3C 80241A2C 3C05FD05 */  lui       $a1, 0xfd05
 /* 8D2F40 80241A30 34A50F8A */  ori       $a1, $a1, 0xf8a
-/* 8D2F44 80241A34 0C0B1EAF */  jal       get_variable
+/* 8D2F44 80241A34 0C0B1EAF */  jal       evt_get_variable
 /* 8D2F48 80241A38 46000506 */   mov.s    $f20, $f0
 /* 8D2F4C 80241A3C 0040182D */  daddu     $v1, $v0, $zero
 /* 8D2F50 80241A40 E4760014 */  swc1      $f22, 0x14($v1)

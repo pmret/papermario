@@ -19,7 +19,7 @@ glabel func_80240CF8_B21238
 /* B21270 80240D30 12000010 */  beqz      $s0, .L80240D74
 /* B21274 80240D34 0040882D */   daddu    $s1, $v0, $zero
 /* B21278 80240D38 8E450000 */  lw        $a1, ($s2)
-/* B2127C 80240D3C 0C0B1EAF */  jal       get_variable
+/* B2127C 80240D3C 0C0B1EAF */  jal       evt_get_variable
 /* B21280 80240D40 0260202D */   daddu    $a0, $s3, $zero
 /* B21284 80240D44 0040182D */  daddu     $v1, $v0, $zero
 /* B21288 80240D48 10600006 */  beqz      $v1, .L80240D64

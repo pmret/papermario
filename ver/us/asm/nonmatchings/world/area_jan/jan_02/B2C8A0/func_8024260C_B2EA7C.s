@@ -6,7 +6,7 @@ glabel func_8024260C_B2EA7C
 /* B2EA80 80242610 3C058025 */  lui       $a1, %hi(D_80248938)
 /* B2EA84 80242614 8CA58938 */  lw        $a1, %lo(D_80248938)($a1)
 /* B2EA88 80242618 AFBF0010 */  sw        $ra, 0x10($sp)
-/* B2EA8C 8024261C 0C0B1EAF */  jal       get_variable
+/* B2EA8C 8024261C 0C0B1EAF */  jal       evt_get_variable
 /* B2EA90 80242620 0000202D */   daddu    $a0, $zero, $zero
 /* B2EA94 80242624 0040182D */  daddu     $v1, $v0, $zero
 /* B2EA98 80242628 24020001 */  addiu     $v0, $zero, 1

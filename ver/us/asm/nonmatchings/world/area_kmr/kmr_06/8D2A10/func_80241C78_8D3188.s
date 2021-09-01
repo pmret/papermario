@@ -13,7 +13,7 @@ glabel func_80241C78_8D3188
 /* 8D31A8 80241C98 0200202D */  daddu     $a0, $s0, $zero
 /* 8D31AC 80241C9C 3C05FD05 */  lui       $a1, 0xfd05
 /* 8D31B0 80241CA0 34A50F8A */  ori       $a1, $a1, 0xf8a
-/* 8D31B4 80241CA4 0C0B1EAF */  jal       get_variable
+/* 8D31B4 80241CA4 0C0B1EAF */  jal       evt_get_variable
 /* 8D31B8 80241CA8 46000506 */   mov.s    $f20, $f0
 /* 8D31BC 80241CAC E4540040 */  swc1      $f20, 0x40($v0)
 /* 8D31C0 80241CB0 8FBF0014 */  lw        $ra, 0x14($sp)

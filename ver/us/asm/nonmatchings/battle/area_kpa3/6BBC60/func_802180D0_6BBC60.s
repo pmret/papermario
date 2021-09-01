@@ -23,11 +23,11 @@ glabel func_802180D0_6BBC60
 /* 6BBCA8 80218118 2671000C */   addiu    $s1, $s3, 0xc
 /* 6BBCAC 8021811C 8E450000 */  lw        $a1, ($s2)
 /* 6BBCB0 80218120 26520004 */  addiu     $s2, $s2, 4
-/* 6BBCB4 80218124 0C0B1EAF */  jal       get_variable
+/* 6BBCB4 80218124 0C0B1EAF */  jal       evt_get_variable
 /* 6BBCB8 80218128 0280202D */   daddu    $a0, $s4, $zero
 /* 6BBCBC 8021812C A6620070 */  sh        $v0, 0x70($s3)
 /* 6BBCC0 80218130 8E450000 */  lw        $a1, ($s2)
-/* 6BBCC4 80218134 0C0B1EAF */  jal       get_variable
+/* 6BBCC4 80218134 0C0B1EAF */  jal       evt_get_variable
 /* 6BBCC8 80218138 0280202D */   daddu    $a0, $s4, $zero
 /* 6BBCCC 8021813C A6620072 */  sh        $v0, 0x72($s3)
 /* 6BBCD0 80218140 AE800074 */  sw        $zero, 0x74($s4)

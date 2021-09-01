@@ -6,7 +6,7 @@ glabel func_80240000_D3A5D0
 /* D3A5D4 80240004 AFBF0010 */  sw        $ra, 0x10($sp)
 /* D3A5D8 80240008 3C05F5DE */  lui       $a1, 0xf5de
 /* D3A5DC 8024000C 34A50180 */  ori       $a1, $a1, 0x180
-/* D3A5E0 80240010 0C0B1EAF */  jal       get_variable
+/* D3A5E0 80240010 0C0B1EAF */  jal       evt_get_variable
 /* D3A5E4 80240014 0000202D */   daddu    $a0, $zero, $zero
 /* D3A5E8 80240018 28430040 */  slti      $v1, $v0, 0x40
 /* D3A5EC 8024001C 3C020019 */  lui       $v0, 0x19

@@ -24,7 +24,7 @@ glabel JumpToGoal
 /* 1A7630 80278D50 00000000 */   nop
 /* 1A7634 80278D54 8E250000 */  lw        $a1, ($s1)
 /* 1A7638 80278D58 26310004 */  addiu     $s1, $s1, 4
-/* 1A763C 80278D5C 0C0B1EAF */  jal       get_variable
+/* 1A763C 80278D5C 0C0B1EAF */  jal       evt_get_variable
 /* 1A7640 80278D60 0260202D */   daddu    $a0, $s3, $zero
 /* 1A7644 80278D64 0040202D */  daddu     $a0, $v0, $zero
 /* 1A7648 80278D68 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -39,18 +39,18 @@ glabel JumpToGoal
 /* 1A7668 80278D88 AE700074 */  sw        $s0, 0x74($s3)
 /* 1A766C 80278D8C 8E250000 */  lw        $a1, ($s1)
 /* 1A7670 80278D90 26310004 */  addiu     $s1, $s1, 4
-/* 1A7674 80278D94 0C0B1EAF */  jal       get_variable
+/* 1A7674 80278D94 0C0B1EAF */  jal       evt_get_variable
 /* 1A7678 80278D98 0260202D */   daddu    $a0, $s3, $zero
 /* 1A767C 80278D9C A6020070 */  sh        $v0, 0x70($s0)
 /* 1A7680 80278DA0 8E250000 */  lw        $a1, ($s1)
 /* 1A7684 80278DA4 26310004 */  addiu     $s1, $s1, 4
-/* 1A7688 80278DA8 0C0B1EAF */  jal       get_variable
+/* 1A7688 80278DA8 0C0B1EAF */  jal       evt_get_variable
 /* 1A768C 80278DAC 0260202D */   daddu    $a0, $s3, $zero
 /* 1A7690 80278DB0 AE620078 */  sw        $v0, 0x78($s3)
 /* 1A7694 80278DB4 AE60007C */  sw        $zero, 0x7c($s3)
 /* 1A7698 80278DB8 8E250000 */  lw        $a1, ($s1)
 /* 1A769C 80278DBC 26310004 */  addiu     $s1, $s1, 4
-/* 1A76A0 80278DC0 0C0B1EAF */  jal       get_variable
+/* 1A76A0 80278DC0 0C0B1EAF */  jal       evt_get_variable
 /* 1A76A4 80278DC4 0260202D */   daddu    $a0, $s3, $zero
 /* 1A76A8 80278DC8 10400004 */  beqz      $v0, .L80278DDC
 /* 1A76AC 80278DCC 00000000 */   nop
@@ -59,7 +59,7 @@ glabel JumpToGoal
 /* 1A76B8 80278DD8 AE62007C */  sw        $v0, 0x7c($s3)
 .L80278DDC:
 /* 1A76BC 80278DDC 8E250000 */  lw        $a1, ($s1)
-/* 1A76C0 80278DE0 0C0B1EAF */  jal       get_variable
+/* 1A76C0 80278DE0 0C0B1EAF */  jal       evt_get_variable
 /* 1A76C4 80278DE4 0260202D */   daddu    $a0, $s3, $zero
 /* 1A76C8 80278DE8 10400004 */  beqz      $v0, .L80278DFC
 /* 1A76CC 80278DEC 00000000 */   nop

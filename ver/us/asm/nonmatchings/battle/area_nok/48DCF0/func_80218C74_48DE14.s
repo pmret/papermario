@@ -16,11 +16,11 @@ glabel func_80218C74_48DE14
 /* 48DE40 80218CA0 F7B40028 */  sdc1      $f20, 0x28($sp)
 /* 48DE44 80218CA4 8E30000C */  lw        $s0, 0xc($s1)
 /* 48DE48 80218CA8 8E050000 */  lw        $a1, ($s0)
-/* 48DE4C 80218CAC 0C0B1EAF */  jal       get_variable
+/* 48DE4C 80218CAC 0C0B1EAF */  jal       evt_get_variable
 /* 48DE50 80218CB0 26100004 */   addiu    $s0, $s0, 4
 /* 48DE54 80218CB4 0220202D */  daddu     $a0, $s1, $zero
 /* 48DE58 80218CB8 8E050000 */  lw        $a1, ($s0)
-/* 48DE5C 80218CBC 0C0B1EAF */  jal       get_variable
+/* 48DE5C 80218CBC 0C0B1EAF */  jal       evt_get_variable
 /* 48DE60 80218CC0 0040902D */   daddu    $s2, $v0, $zero
 /* 48DE64 80218CC4 24040168 */  addiu     $a0, $zero, 0x168
 /* 48DE68 80218CC8 0C00A67F */  jal       rand_int

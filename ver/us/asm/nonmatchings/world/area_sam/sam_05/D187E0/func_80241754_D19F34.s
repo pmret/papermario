@@ -18,7 +18,7 @@ glabel func_80241754_D19F34
 /* D19F68 80241788 8E43000C */  lw        $v1, 0xc($s2)
 /* D19F6C 8024178C 0240202D */  daddu     $a0, $s2, $zero
 /* D19F70 80241790 8C650000 */  lw        $a1, ($v1)
-/* D19F74 80241794 0C0B1EAF */  jal       get_variable
+/* D19F74 80241794 0C0B1EAF */  jal       evt_get_variable
 /* D19F78 80241798 0040A82D */   daddu    $s5, $v0, $zero
 /* D19F7C 8024179C AFA00010 */  sw        $zero, 0x10($sp)
 /* D19F80 802417A0 8E2300D0 */  lw        $v1, 0xd0($s1)

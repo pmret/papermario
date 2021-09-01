@@ -17,7 +17,7 @@ glabel func_80240B4C_84371C
 .L80240B7C:
 /* 84374C 80240B7C 3C05F5DE */  lui       $a1, 0xf5de
 /* 843750 80240B80 34A502E0 */  ori       $a1, $a1, 0x2e0
-/* 843754 80240B84 0C0B1EAF */  jal       get_variable
+/* 843754 80240B84 0C0B1EAF */  jal       evt_get_variable
 /* 843758 80240B88 0000202D */   daddu    $a0, $zero, $zero
 /* 84375C 80240B8C 3C038024 */  lui       $v1, %hi(D_8024404C_846C1C)
 /* 843760 80240B90 00621821 */  addu      $v1, $v1, $v0

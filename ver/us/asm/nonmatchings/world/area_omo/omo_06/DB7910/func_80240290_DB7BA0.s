@@ -14,7 +14,7 @@ glabel func_80240290_DB7BA0
 /* DB7BC4 802402B4 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* DB7BC8 802402B8 8E30000C */  lw        $s0, 0xc($s1)
 /* DB7BCC 802402BC 8E050000 */  lw        $a1, ($s0)
-/* DB7BD0 802402C0 0C0B1EAF */  jal       get_variable
+/* DB7BD0 802402C0 0C0B1EAF */  jal       evt_get_variable
 /* DB7BD4 802402C4 26100004 */   addiu    $s0, $s0, 4
 /* DB7BD8 802402C8 8E050000 */  lw        $a1, ($s0)
 /* DB7BDC 802402CC 26100004 */  addiu     $s0, $s0, 4

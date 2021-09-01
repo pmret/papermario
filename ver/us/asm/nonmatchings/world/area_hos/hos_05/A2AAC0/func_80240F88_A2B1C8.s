@@ -5,7 +5,7 @@ glabel func_80240F88_A2B1C8
 /* A2B1C8 80240F88 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A2B1CC 80240F8C 3C05F4AC */  lui       $a1, 0xf4ac
 /* A2B1D0 80240F90 AFBF0010 */  sw        $ra, 0x10($sp)
-/* A2B1D4 80240F94 0C0B1EAF */  jal       get_variable
+/* A2B1D4 80240F94 0C0B1EAF */  jal       evt_get_variable
 /* A2B1D8 80240F98 34A5D480 */   ori      $a1, $a1, 0xd480
 /* A2B1DC 80240F9C 3C058025 */  lui       $a1, %hi(D_802495E0_A33820)
 /* A2B1E0 80240FA0 24A595E0 */  addiu     $a1, $a1, %lo(D_802495E0_A33820)

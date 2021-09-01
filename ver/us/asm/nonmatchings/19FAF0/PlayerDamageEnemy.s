@@ -24,7 +24,7 @@ glabel PlayerDamageEnemy
 /* 1A2B8C 802742AC 26100004 */  addiu     $s0, $s0, 4
 /* 1A2B90 802742B0 AE220190 */  sw        $v0, 0x190($s1)
 /* 1A2B94 802742B4 8E050000 */  lw        $a1, ($s0)
-/* 1A2B98 802742B8 0C0B1EAF */  jal       get_variable
+/* 1A2B98 802742B8 0C0B1EAF */  jal       evt_get_variable
 /* 1A2B9C 802742BC 26100004 */   addiu    $s0, $s0, 4
 /* 1A2BA0 802742C0 A622017E */  sh        $v0, 0x17e($s1)
 /* 1A2BA4 802742C4 A2200198 */  sb        $zero, 0x198($s1)

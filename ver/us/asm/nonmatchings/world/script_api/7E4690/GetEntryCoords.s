@@ -14,7 +14,7 @@ glabel GetEntryCoords
 /* 7E4AD8 80283C58 0240202D */  daddu     $a0, $s2, $zero
 /* 7E4ADC 80283C5C 8C530014 */  lw        $s3, 0x14($v0)
 /* 7E4AE0 80283C60 8E050000 */  lw        $a1, ($s0)
-/* 7E4AE4 80283C64 0C0B1EAF */  jal       get_variable
+/* 7E4AE4 80283C64 0C0B1EAF */  jal       evt_get_variable
 /* 7E4AE8 80283C68 26100004 */   addiu    $s0, $s0, 4
 /* 7E4AEC 80283C6C 8E050000 */  lw        $a1, ($s0)
 /* 7E4AF0 80283C70 26100004 */  addiu     $s0, $s0, 4

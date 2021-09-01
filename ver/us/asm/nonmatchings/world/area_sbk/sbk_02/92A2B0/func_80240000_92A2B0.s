@@ -6,7 +6,7 @@ glabel func_80240000_92A2B0
 /* 92A2B4 80240004 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 92A2B8 80240008 3C05F5DE */  lui       $a1, 0xf5de
 /* 92A2BC 8024000C 34A50180 */  ori       $a1, $a1, 0x180
-/* 92A2C0 80240010 0C0B1EAF */  jal       get_variable
+/* 92A2C0 80240010 0C0B1EAF */  jal       evt_get_variable
 /* 92A2C4 80240014 0000202D */   daddu    $a0, $zero, $zero
 /* 92A2C8 80240018 3C030019 */  lui       $v1, 0x19
 /* 92A2CC 8024001C 2842FFC2 */  slti      $v0, $v0, -0x3e

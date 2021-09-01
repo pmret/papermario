@@ -29,11 +29,11 @@ glabel func_80244E90_805710
 /* 80576C 80244EEC 90420014 */  lbu       $v0, 0x14($v0)
 /* 805770 80244EF0 1040000A */  beqz      $v0, .L80244F1C
 /* 805774 80244EF4 0000202D */   daddu    $a0, $zero, $zero
-/* 805778 80244EF8 0C0B1EAF */  jal       get_variable
+/* 805778 80244EF8 0C0B1EAF */  jal       evt_get_variable
 /* 80577C 80244EFC 02142821 */   addu     $a1, $s0, $s4
 /* 805780 80244F00 10400006 */  beqz      $v0, .L80244F1C
 /* 805784 80244F04 0000202D */   daddu    $a0, $zero, $zero
-/* 805788 80244F08 0C0B1EAF */  jal       get_variable
+/* 805788 80244F08 0C0B1EAF */  jal       evt_get_variable
 /* 80578C 80244F0C 02132821 */   addu     $a1, $s0, $s3
 /* 805790 80244F10 10400006 */  beqz      $v0, .L80244F2C
 /* 805794 80244F14 24120001 */   addiu    $s2, $zero, 1

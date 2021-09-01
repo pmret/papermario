@@ -7,7 +7,7 @@ glabel func_80240A30_869EE0
 /* 869EE8 80240A38 AFB00010 */  sw        $s0, 0x10($sp)
 /* 869EEC 80240A3C 8C82000C */  lw        $v0, 0xc($a0)
 /* 869EF0 80240A40 8C450000 */  lw        $a1, ($v0)
-/* 869EF4 80240A44 0C0B1EAF */  jal       get_variable
+/* 869EF4 80240A44 0C0B1EAF */  jal       evt_get_variable
 /* 869EF8 80240A48 8C900148 */   lw       $s0, 0x148($a0)
 /* 869EFC 80240A4C 82030004 */  lb        $v1, 4($s0)
 /* 869F00 80240A50 00021080 */  sll       $v0, $v0, 2

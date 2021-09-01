@@ -17,7 +17,7 @@ glabel begin_battle_D06948
 .L80241248:
 /* D06978 80241248 3C05F5DE */  lui       $a1, 0xf5de
 /* D0697C 8024124C 34A502E0 */  ori       $a1, $a1, 0x2e0
-/* D06980 80241250 0C0B1EAF */  jal       get_variable
+/* D06980 80241250 0C0B1EAF */  jal       evt_get_variable
 /* D06984 80241254 0000202D */   daddu    $a0, $zero, $zero
 /* D06988 80241258 3C038024 */  lui       $v1, %hi(D_80246BC4_D0C2F4)
 /* D0698C 8024125C 00621821 */  addu      $v1, $v1, $v0
