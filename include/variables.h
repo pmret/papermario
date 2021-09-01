@@ -213,10 +213,10 @@ extern f64 D_802700B0;
 extern f64 D_802700B8;
 
 
-extern s32 D_8024FA30[1];
+extern HudElementAnim* D_8024FA30[1];
 
 extern PauseMapSpaces D_802502B8[5];
-extern MenuWindowBP D_80250590[7];
+extern MenuWindowBP pause_map_windowBlueprints[7];
 // Badges
 extern s32 gBadgeMenuCurrentScrollPos;
 extern s32 gBadgeMenuTargetScrollPos;

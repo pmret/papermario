@@ -67,20 +67,20 @@ void pause_map_draw_title(s32* arg1, s32 arg2, s32 textOffsetY, s32 textOffsetX)
     }
 }
 
-void pause_map_init(s8* arg0) {
+void pause_map_init(MenuPanel* tab) {
     s32 tempVar;
     s32 i;
 
-    for (i = 0; i < 1; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_80270700); i++) {
         D_80270700[i] = create_hud_element(D_8024FA30[i]);
         set_hud_element_flags(D_80270700[i], 0x80);
     }
 
-    for (i = 6; i >= 0; i--) {
-        D_80250590[i].tab = arg0;
+    for (i = 0; i < ARRAY_COUNT(pause_map_windowBlueprints); i++) {
+        pause_map_windowBlueprints[i].tab = tab;
     }
 
-    setup_pause_menu_tab(&D_80250590, 7);
+    setup_pause_menu_tab(pause_map_windowBlueprints, ARRAY_COUNT(pause_map_windowBlueprints));
     pause_map_cursorCurrentOption = -1;
     D_80270724 = 0;
     pause_map_cursorCurrentOptionCopy = -1;
@@ -121,7 +121,7 @@ void pause_map_init(s8* arg0) {
         pause_map_cameraY = -209.0f;
     }
 
-    *arg0 = 1;
+    tab->initialized = 1;
 }
 
 void pause_map_handle_input(void) {
@@ -215,7 +215,7 @@ void pause_map_handle_input(void) {
 }
 
 void pause_map_update(void) {
-    PauseMapSpaces* mapSpace = &D_802502B8;
+    PauseMapSpaces* mapSpace = &D_802502B8[0];
     f32 lowestSqSum = 10000.0f;
     f32 cursorOption = -1.0f;
     s32 i;
