@@ -12,22 +12,20 @@ void func_8024FB3C(PopupMessage* popup);
 void btl_show_message_popup(PopupMessage* popup);
 
 void func_8024EDC0(void) {
-    PopupMessage* popup;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
-        popup = &popupMessages[i];
+        PopupMessage* popup = &popupMessages[i];
         popup->active = FALSE;
         popup->message = NULL;
     }
 }
 
 void func_8024EDEC(void) {
-    PopupMessage* popup;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
-        popup = &popupMessages[i];
+        PopupMessage* popup = &popupMessages[i];
         if (popup->message != NULL) {
             heap_free(popup->message);
             popup->message = NULL;
@@ -37,11 +35,10 @@ void func_8024EDEC(void) {
 }
 
 void func_8024EE48(void) {
-    PopupMessage* popup;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
-        popup = &popupMessages[i];
+        PopupMessage* popup = &popupMessages[i];
         if (popup->active && popup->unk_04 != NULL) {
             popup->unk_04(popup);
         }
@@ -49,11 +46,10 @@ void func_8024EE48(void) {
 }
 
 void func_8024EEA8(void) {
-    PopupMessage* popup;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
-        popup = &popupMessages[i];
+        PopupMessage* popup = &popupMessages[i];
         if (popup->active && popup->unk_08 != NULL) {
             popup->unk_08(popup);
         }
@@ -61,11 +57,10 @@ void func_8024EEA8(void) {
 }
 
 void btl_draw_popup_messages(void) {
-    PopupMessage* popup;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
-        popup = &popupMessages[i];
+        PopupMessage* popup = &popupMessages[i];
         if (popup->active && popup->drawFunc != NULL) {
             popup->drawFunc(popup);
         }
@@ -73,11 +68,10 @@ void btl_draw_popup_messages(void) {
 }
 
 PopupMessage* btl_create_popup(void) {
-    PopupMessage* popup;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
-        popup = &popupMessages[i];
+        PopupMessage* popup = &popupMessages[i];
         if (!popup->active) {
             popup->active = TRUE;
             return popup;
