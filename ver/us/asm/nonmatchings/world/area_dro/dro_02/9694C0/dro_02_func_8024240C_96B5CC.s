@@ -497,8 +497,8 @@ glabel L80242A80_96BC40
 /* 96BCDC 80242B1C 3C013F80 */  lui       $at, 0x3f80
 /* 96BCE0 80242B20 44810000 */  mtc1      $at, $f0
 /* 96BCE4 80242B24 27A20054 */  addiu     $v0, $sp, 0x54
-/* 96BCE8 80242B28 3C018025 */  lui       $at, %hi(gPauseMenuTabs)
-/* 96BCEC 80242B2C AC20EF80 */  sw        $zero, %lo(gPauseMenuTabs)($at)
+/* 96BCE8 80242B28 3C018025 */  lui       $at, %hi(gPauseMenuPanels)
+/* 96BCEC 80242B2C AC20EF80 */  sw        $zero, %lo(gPauseMenuPanels)($at)
 /* 96BCF0 80242B30 AFA20010 */  sw        $v0, 0x10($sp)
 /* 96BCF4 80242B34 3C018025 */  lui       $at, %hi(D_8024EF84)
 /* 96BCF8 80242B38 E420EF84 */  swc1      $f0, %lo(D_8024EF84)($at)
@@ -646,8 +646,8 @@ glabel L80242C2C_96BDEC
 /* 96BF10 80242D50 00000000 */   nop
 /* 96BF14 80242D54 3C108025 */  lui       $s0, %hi(D_8024F010)
 /* 96BF18 80242D58 2610F010 */  addiu     $s0, $s0, %lo(D_8024F010)
-/* 96BF1C 80242D5C 3C048025 */  lui       $a0, %hi(gPauseMenuTabs)
-/* 96BF20 80242D60 2484EF80 */  addiu     $a0, $a0, %lo(gPauseMenuTabs)
+/* 96BF1C 80242D5C 3C048025 */  lui       $a0, %hi(gPauseMenuPanels)
+/* 96BF20 80242D60 2484EF80 */  addiu     $a0, $a0, %lo(gPauseMenuPanels)
 /* 96BF24 80242D64 3C038025 */  lui       $v1, %hi(D_8024EF84)
 /* 96BF28 80242D68 2463EF84 */  addiu     $v1, $v1, %lo(D_8024EF84)
 /* 96BF2C 80242D6C 3C078025 */  lui       $a3, %hi(D_8024EF88)

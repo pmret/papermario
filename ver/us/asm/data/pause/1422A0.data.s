@@ -5,7 +5,7 @@
 glabel gPauseMenuIconScripts
 .word D_80241ECC, 0x802427D4, nok_02_UnkMovePartner, 0x80241E00, D_801091E4, D_80108BBC, 0x80108D04, 0x80108D40
 
-glabel gPauseMenuTabs
+glabel gPauseMenuPanels
 .word D_8024F314, D_8024F4AC, D_8024F54C, D_8024F5E4, D_8024F88C, D_8024FA10
 
 glabel D_8024EF98

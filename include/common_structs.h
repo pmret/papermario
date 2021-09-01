@@ -2031,26 +2031,16 @@ typedef struct {
     /* 0x08 */ s32 count;
 } PauseItemPage; // size = 0xC
 
-typedef struct {
-    /* 0x00 */ f32 unk_00;
-    /* 0x04 */ char unk_04[4];
-    /* 0x08 */ s8* unk_08;
-    /* 0x0C */ void* fpInit;
-    /* 0x10 */ void* fpHandleInput;
-    /* 0x14 */ void* fpUpdate;
-    /* 0x18 */ void* fpCleanup;
-} MenuTab; // size = 0x1C
-
-typedef struct PauseMapSpaces {
+typedef struct PauseMapSpace {
     /* 0x00 */ s16 xPos;
     /* 0x02 */ s16 yPos;
-    /* 0x04 */ char unk_04;
-    /* 0x05 */ u8 unk_05;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ char* areaDescription;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 tabIndex;
-} PauseMapSpaces; //size = 0x14
+    /* 0x04 */ s8 parent;
+    /* 0x05 */ u8 pathLength;
+    /* 0x06 */ s16 unk_06; // always 0
+    /* 0x08 */ s32* path;
+    /* 0x0C */ s32 description;
+    /* 0x10 */ s32 id;
+} PauseMapSpace; //size = 0x14
 
 typedef struct MenuPanel {
     /* 0x00 */ s8 initialized; //?
@@ -2126,20 +2116,20 @@ typedef struct Pause8025068C {
 
 typedef struct {
     /* 0x00 */ s8 flags;
-    /* 0x01 */ char unk_01;
+    /* 0x01 */ s8 panelID; // ?
     /* 0x02 */ s8 unk_02; // related to heirarchy somehow - sibling? group?
     /* 0x03 */ s8 parent; // ?
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ UNK_PTR unk_08;
+    /* 0x04 */ UNK_FUN_PTR(fpUpdate);
+    /* 0x08 */ UNK_FUN_PTR(fpPending);
     /* 0x0C */ s16 posX;
     /* 0x0E */ s16 posY;
     /* 0x10 */ s16 width;
     /* 0x12 */ s16 height;
-    /* 0x14 */ UNK_PTR fpDrawContents;
-    /* 0x18 */ s32 unk_18; // MenuTab pointer for pause menu tabs
-    /* 0x1C */ u8 unk_1C;
+    /* 0x14 */ UNK_FUN_PTR(fpDrawContents);
+    /* 0x18 */ s32 drawContentsArg0;
+    /* 0x1C */ u8 updateCounter;
     /* 0x1D */ char unk_1D[3];
-} UIPanel; // size = 0x20
+} Window; // size = 0x20
 
 // BEGIN ENTITY-SPECIFIC STRUCTS
 

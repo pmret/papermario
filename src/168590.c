@@ -12,12 +12,12 @@ void filemenu_info_update(void) {
 void filemenu_info_cleanup(void) {
 }
 
-void func_80248170(s32 arg0) {
-    UIPanel* panel = &gUIPanels[arg0];
+void func_80248170(s32 idx) {
+    Window* window = &gWindows[idx];
 
-    if (panel->unk_1C == 0x8) {
-        panel->flags &= ~0x8;
-        set_window_update(arg0, 1);
+    if (window->updateCounter == 8) {
+        window->flags &= ~0x8;
+        set_window_update(idx, 1);
     }
 }
 

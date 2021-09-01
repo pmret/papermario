@@ -166,7 +166,7 @@ extern s8 D_800A0B94;
 extern s16 D_800A0BB8;
 
 
-extern UIPanel gUIPanels[64];
+extern Window gWindows[64];
 
 extern s32 D_802A3838;
 
@@ -184,7 +184,7 @@ extern s32 gPauseMenuCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
 extern s32 gPauseMenuStrings[348];
 extern s32 gPauseMenuIconScripts[8];
-extern MenuTab gPauseMenuTabs[7];
+extern MenuPanel gPauseMenuPanels[7];
 extern s32 gPauseMenuCursorPosX;
 extern s32 gPauseMenuCursorPosY;
 extern s32 gPauseMenuCursorOpacity;
@@ -215,7 +215,7 @@ extern f64 D_802700B8;
 
 extern HudElementAnim* D_8024FA30[1];
 
-extern PauseMapSpaces D_802502B8[5];
+extern PauseMapSpace D_802502B8[5];
 extern MenuWindowBP pause_map_windowBlueprints[7];
 // Badges
 extern s32 gBadgeMenuCurrentScrollPos;

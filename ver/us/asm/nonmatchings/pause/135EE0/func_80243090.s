@@ -3,8 +3,8 @@
 
 glabel func_80243090
 /* 1363D0 80243090 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 1363D4 80243094 3C028016 */  lui       $v0, %hi(gUIPanels)
-/* 1363D8 80243098 24429D50 */  addiu     $v0, $v0, %lo(gUIPanels)
+/* 1363D4 80243094 3C028016 */  lui       $v0, %hi(gWindows)
+/* 1363D8 80243098 24429D50 */  addiu     $v0, $v0, %lo(gWindows)
 /* 1363DC 8024309C 00041940 */  sll       $v1, $a0, 5
 /* 1363E0 802430A0 AFB00010 */  sw        $s0, 0x10($sp)
 /* 1363E4 802430A4 00628021 */  addu      $s0, $v1, $v0

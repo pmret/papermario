@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel set_windows_visible
-/* DE5C4 80147EC4 3C068016 */  lui       $a2, %hi(gUIPanels)
-/* DE5C8 80147EC8 24C69D50 */  addiu     $a2, $a2, %lo(gUIPanels)
+/* DE5C4 80147EC4 3C068016 */  lui       $a2, %hi(gWindows)
+/* DE5C8 80147EC8 24C69D50 */  addiu     $a2, $a2, %lo(gWindows)
 /* DE5CC 80147ECC 0000282D */  daddu     $a1, $zero, $zero
 /* DE5D0 80147ED0 3C028015 */  lui       $v0, %hi(D_8014F2C0)
 /* DE5D4 80147ED4 2442F2C0 */  addiu     $v0, $v0, %lo(D_8014F2C0)

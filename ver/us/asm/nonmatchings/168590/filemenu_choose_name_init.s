@@ -38,8 +38,8 @@ glabel filemenu_choose_name_init
 /* 16935C 80248AFC 2484A190 */  addiu     $a0, $a0, %lo(D_8024A190)
 /* 169360 80248B00 0C051FCC */  jal       setup_pause_menu_tab
 /* 169364 80248B04 24050002 */   addiu    $a1, $zero, 2
-/* 169368 80248B08 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 16936C 80248B0C 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 169368 80248B08 3C048016 */  lui       $a0, %hi(gWindows)
+/* 16936C 80248B0C 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 /* 169370 80248B10 94820610 */  lhu       $v0, 0x610($a0)
 /* 169374 80248B14 00021400 */  sll       $v0, $v0, 0x10
 /* 169378 80248B18 00021C03 */  sra       $v1, $v0, 0x10
@@ -63,8 +63,8 @@ glabel filemenu_choose_name_init
 .L80248B60:
 /* 1693C0 80248B60 240200A0 */  addiu     $v0, $zero, 0xa0
 /* 1693C4 80248B64 00451023 */  subu      $v0, $v0, $a1
-/* 1693C8 80248B68 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 1693CC 80248B6C 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 1693C8 80248B68 3C048016 */  lui       $a0, %hi(gWindows)
+/* 1693CC 80248B6C 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 .L80248B70:
 /* 1693D0 80248B70 A4C20000 */  sh        $v0, ($a2)
 /* 1693D4 80248B74 94820630 */  lhu       $v0, 0x630($a0)
