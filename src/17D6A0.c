@@ -8,7 +8,7 @@ extern s16 D_8029F640;
 extern s16 D_8029F64A;
 extern s16 D_8029F64E;
 extern s16 D_8029F650;
-extern void func_8024FB3C(PopupMessage* popup);
+void func_8024FB3C(PopupMessage* popup);
 void btl_show_message_popup(PopupMessage* popup);
 
 void func_8024EDC0(void) {
