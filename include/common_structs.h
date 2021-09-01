@@ -2052,11 +2052,66 @@ typedef struct PauseMapSpaces {
     /* 0x10 */ s32 tabIndex;
 } PauseMapSpaces; //size = 0x14
 
-typedef struct Pause80250668 {
-    /* 0x00 */ char unk_00[0x10];
-    /* 0x10 */ u8* unk_10;
-    /* 0x14 */ char unk_14[0x10];
-} Pause80250668; //size == 0x24
+typedef struct MenuPanel {
+    /* 0x00 */ s8 initialized; //?
+    /* 0x01 */ s8 col; // might be backwards
+    /* 0x02 */ s8 row; // might be backwards
+    /* 0x03 */ s8 selected;
+    /* 0x04 */ s8 page; // filemenu: 0 = select, 1 = delete, 3 = copy from, 4 = copy to, all else = save
+    /* 0x05 */ s8 numCols;
+    /* 0x06 */ s8 numRows;
+    /* 0x07 */ char unk_07;
+    /* 0x08 */ s8* gridData; // user value at each 2D grid point
+    /* 0x0C */ UNK_FUN_PTR(fpInit);
+    /* 0x10 */ UNK_FUN_PTR(fpHandleInput);
+    /* 0x14 */ UNK_FUN_PTR(fpUpdate);
+    /* 0x18 */ UNK_FUN_PTR(fpCleanup);
+} MenuPanel;
+
+typedef struct WindowBackground {
+    /* 0x00 */ s32* imgData;
+    /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
+    /* 0x05 */ s8 width;
+    /* 0x06 */ s8 height;
+    /* 0x07 */ char unk_07[4];
+    /* 0x0B */ s8 size;
+} WindowBackground; // size = 0xC
+
+typedef struct WindowCorners {
+    /* 0x00 */ s32* imgData;
+    /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
+    /* 0x05 */ s8 size1[2];
+    /* 0x07 */ s8 size2[2];
+    /* 0x09 */ s8 size3[2];
+    /* 0x0B */ s8 size4[2];
+    /* 0x0D */ char unk_0D[3];
+} WindowCorners; // size = 0x10
+
+typedef struct WindowStyleCustom {
+    /* 0x00 */ WindowBackground background;
+    /* 0x0C */ WindowCorners corners;
+    /* 0x1C */ char unk_1C[0x4];
+    /* 0x20 */ s32 opaqueCombineMode[2]; // used when alpha == 255
+    /* 0x28 */ s32 transparentCombineMode[2]; // used when alpha < 255
+    /* 0x30 */ s8 color1[4];
+    /* 0x34 */ s8 color2[4];
+} WindowStyleCustom; // size = 0x38;
+
+typedef struct MenuWindowBP {
+    /* 0x00 */ s8 windowID;
+    /* 0x01 */ char unk_01;
+    /* 0x02 */ s16 posX;
+    /* 0x04 */ s16 posY;
+    /* 0x06 */ s16 height;
+    /* 0x08 */ s16 width; // switch? ^
+    /* 0x0A */ char unk_0A[2];
+    /* 0x0C */ UNK_FUN_PTR(fpDrawContents);
+    /* 0x10 */ MenuPanel* tab;
+    /* 0x14 */ s32 parentID;
+    /* 0x18 */ UNK_FUN_PTR(fpUpdate);
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ WindowStyleCustom* style;
+} MenuWindowBP; // size = 0x24;
 
 typedef struct Pause8025068C {
     /* 0x00 */ u8 cursorMoveBool; //if 0, cant move cursor in map tab

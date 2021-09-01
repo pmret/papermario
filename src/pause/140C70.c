@@ -1,44 +1,53 @@
 #include "common.h"
 
-#define pause_map_tab_places_description_string_id 0x1D00F2
+#define pause_map_tab_places_desc_string_id 0x1D00F2
 
-INCLUDE_ASM(s32, "pause/140C70", func_8024D930);
+typedef struct Pause8024D930 {
+    /* 0x00 */ s16 xPos;
+    /* 0x02 */ s16 yPos;
+    /* 0x04 */ u8 unk_04;
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ char unk_06[0x2];
+    /* 0x08 */ Vec2b* unk_08;
+} Pause8024D930; // Similar to PauseMapSpaces
 
-void pause_map_draw_border_arrows(s32 arg0, s32 arg1, s32 arg2) {
-    s32 phi_a0;
-    s32 phi_a1;
-    s32 phi_a2;
-    s32 phi_a3;
-    s32 temp = 0x10;
+void func_8024D930(Pause8024D930* arg0) {
+    Vec2b* unk_08 = arg0->unk_08;
+    s32 limit = arg0->unk_05;
+    s32 x1 = D_802502B8[arg0->unk_04].xPos;
+    s32 y1 = D_802502B8[arg0->unk_04].yPos;
+    s32 x2 = arg0->xPos;
+    s32 y2 = arg0->yPos;
+    s32 xThingPrev = 0;
+    s32 yThingPrev = 0;
+    s32 i;
 
-    switch (arg0) {
+    for (i = 0; i < limit; i++) {
+        s32 xThing = ((x1 - x2) * (i + 1)) / (limit + 1);
+        s32 yThing = ((y1 - y2) * (i + 1)) / (limit + 1);
+
+        unk_08[i].x = xThing - xThingPrev;
+        unk_08[i].y = yThing - yThingPrev;
+        xThingPrev = xThing;
+        yThingPrev = yThing;
+    }
+}
+
+void pause_map_draw_border_arrows(s32 imageIndex, s32 x, s32 y) {
+    s32 size = 16;
+
+    switch (imageIndex) {
         case 0:
-            phi_a0 = arg1 * 4;
-            phi_a1 = arg2 * 4;
-            phi_a2 = (arg1 + 16) * 4;
-            phi_a3 = (arg2 + 16) * 4;
-            pause_draw_rect(phi_a0, phi_a1, phi_a2, phi_a3, 0, 0, 0, 0x400, 0x400);
+            pause_draw_rect(x * 4, y * 4, (x + size) * 4, (y + size) * 4, 0, 0, 0, 0x400, 0x400);
             break;
         case 1:
-            phi_a0 = arg1 * 4;
-            phi_a1 = arg2 * 4;
-            phi_a2 = (arg1 + 16) * 4;
-            phi_a3 = (arg2 + 16) * 4;
-            pause_draw_rect(phi_a0, phi_a1, phi_a2, phi_a3, 0, 0, 0x200, 0x400, 0x400);
+            pause_draw_rect(x * 4, y * 4, (x + size) * 4, (y + size) * 4, 0, 0, 0x200, 0x400, 0x400);
             break;
         case 2:
-            phi_a0 = arg1 * 4;
-            phi_a1 = arg2 * 4;
-            phi_a2 = (arg1 + 16) * 4;
-            phi_a3 = (arg2 + 16) * 4;
-            pause_draw_rect(phi_a0, phi_a1, phi_a2, phi_a3, 0, 0, 0x400, 0x400, 0x400);
+            pause_draw_rect(x * 4, y * 4, (x + size) * 4, (y + size) * 4, 0, 0, 0x400, 0x400, 0x400);
             break;
         default:
-            phi_a0 = arg1 * 4;
-            phi_a1 = arg2 * 4;
-            phi_a2 = (arg1 + temp) * 4;
-            phi_a3 = (arg2 + temp) * 4;
-            pause_draw_rect(phi_a0, phi_a1, phi_a2, phi_a3, 0, 0, 0x600, 0x400, 0x400);
+            pause_draw_rect(x * 4, y * 4, (x + size) * 4, (y + size) * 4, 0, 0, 0x600, 0x400, 0x400);
             break;
     }
 }
@@ -48,173 +57,143 @@ INCLUDE_ASM(s32, "pause/140C70", pause_map_draw_contents);
 void pause_map_draw_title(s32* arg1, s32 arg2, s32 textOffsetY, s32 textOffsetX) {
     s32 stringWidth;
     s32 stringID;
-    s32 xPos;
-    s32 yPos;
 
     if (gPauseMenuCurrentTab == 6) {
-        if (mapCursorCurrentOption != -1) {
-            stringWidth = get_string_width((mapCursorCurrentOption * 3) + pause_map_tab_places_description_string_id, 0);
-            stringID = (mapCursorCurrentOption * 3) + pause_map_tab_places_description_string_id;
-            xPos = arg2 + ((textOffsetX - stringWidth) >> 1);
-            yPos = textOffsetY + 1;
-            draw_string(stringID, xPos, yPos, 0xFF, 0, 0);
+        if (pause_map_cursorCurrentOption != -1) {
+            stringWidth = get_string_width(pause_map_tab_places_desc_string_id + (pause_map_cursorCurrentOption * 3), 0);
+            stringID = pause_map_tab_places_desc_string_id + (pause_map_cursorCurrentOption * 3);
+            draw_string(stringID, arg2 + ((textOffsetX - stringWidth) >> 1), textOffsetY + 1, 255, 0, 0);
         }
     }
 }
 
-#ifdef NON_MATCHING
 void pause_map_init(s8* arg0) {
-    PauseMapSpaces* map_spaces;
-    PauseMapSpaces* map_spacesTemp;
-    Pause80250668* phi_v0;
-    f32 temp_f6;
-    s32 i = 0;
-    s32 tempEvt;
-    s32* phi_s1 = &D_8024FA30;
-    s32* hudElementPtr = &D_80270700;
-    
-    
-    for (i; i < 1; i++) {
-        hudElementPtr[i] = create_hud_element(phi_s1[0]);
-        set_hud_element_flags(hudElementPtr[i], 0x80);
-        phi_s1++;
-    }
-    
-    i = 6;
-    phi_v0 = &D_80250668;
+    s32 tempVar;
+    s32 i;
 
-    for (i; i >= 0; i--) {
-        phi_v0->unk_10 = arg0;
-        phi_v0--;
+    for (i = 0; i < 1; i++) {
+        D_80270700[i] = create_hud_element(D_8024FA30[i]);
+        set_hud_element_flags(D_80270700[i], 0x80);
+    }
+
+    for (i = 6; i >= 0; i--) {
+        D_80250590[i].tab = arg0;
     }
 
     setup_pause_menu_tab(&D_80250590, 7);
-    mapCursorCurrentOption = -1;
+    pause_map_cursorCurrentOption = -1;
     D_80270724 = 0;
-    mapCursorCurrentOptionCopy = -1;
-    tempEvt = evt_get_variable(0, 0xF5DE0329);
-    i = 0;
-    map_spaces = (PauseMapSpaces*)&D_802502B8;
-    map_spacesTemp = map_spaces;
-    
-    for (i; i < EVT_SAVE_FLAG_PLACES_VISITED_TOTAL; i++) {
-        if (map_spaces->tabIndex == tempEvt) {
+    pause_map_cursorCurrentOptionCopy = -1;
+    tempVar = evt_get_variable(0, EVT_SAVE_VAR(425));
+
+    for (i = 0; i < EVT_SAVE_FLAG_PLACES_VISITED_TOTAL; i++) {
+        if (D_802502B8[i].tabIndex == tempVar) {
             break;
-        } else {
-            map_spaces++;
         }
     }
 
     if (i < EVT_SAVE_FLAG_PLACES_VISITED_TOTAL) {
-        mapMarioXPos = map_spacesTemp[i].xPos;
-        mapMarioYPos = map_spacesTemp[i].yPos;
+        pause_map_marioX = D_802502B8[i].xPos;
+        pause_map_marioY = D_802502B8[i].yPos;
     } else {
-        mapMarioXPos = 0;
-        mapMarioYPos = 0;
+        pause_map_marioX = 0;
+        pause_map_marioY = 0;
     }
-    mapCursorXPos = (s32) mapMarioXPos;
-    mapCursorYPos = (s32) mapMarioYPos;
-    D_80270704 = 0.0f;
-    D_80270708 = 0;
-    temp_f6 = D_80270704;
-    
-    D_80270704 = temp_f6 - (s32) (mapCursorXPos + temp_f6 - D_80270080);
-    D_80270708 = temp_f6 - (s32) (mapCursorYPos + temp_f6 - D_80270088);
-    
-    if (0 < D_80270704) {
-        D_80270704 = 0;
+    pause_map_cursorX = pause_map_marioX;
+    pause_map_cursorY = pause_map_marioY;
+
+    pause_map_cameraX = 0.0f;
+    pause_map_cameraY = 0.0f;
+    pause_map_cameraX -= (s32)(pause_map_cursorX + pause_map_cameraX - D_80270080);
+    pause_map_cameraY -= (s32)(pause_map_cursorY + pause_map_cameraY - D_80270088);
+
+    if (pause_map_cameraX > 0)  {
+        pause_map_cameraX = 0;
+    }
+    if (pause_map_cameraY > 0) {
+        pause_map_cameraY = 0;
     }
 
-    if (0 < D_80270708) {
-        D_80270708 = 0;
+    if (pause_map_cameraX <= -86.0f) {
+        pause_map_cameraX = -85.0f;
     }
-    
-    if (D_80270704 <= -86.0f) {
-        D_80270704 = -85.0f;
+    if (pause_map_cameraY <= -210.0f) {
+        pause_map_cameraY = -209.0f;
     }
 
-    if (D_80270708 <= -210.0f) {
-        D_80270708 = -209.0f;
-    }
     *arg0 = 1;
 }
-#else
-INCLUDE_ASM(s32, "pause/140C70", pause_map_init);
-#endif
 
 void pause_map_handle_input(void) {
-    GameStatus* gameStatus = gGameStatusPtr;
-    PauseMapSpaces* map_spaces;
-    f64 temp_f4_2;
-    s32 temp_f12;
-    f32 phi_f8;
-    f32 phi_f6;
-    f32 mapCursorYPosTemp = mapCursorYPos;
-    f32 mapCursorXPosTemp = mapCursorXPos;
+    f32 xMovement = gGameStatusPtr->stickX * 0.05f;
+    f32 yMovement = -gGameStatusPtr->stickY * 0.05f;
+    f32 pause_map_cursorYPosTemp = pause_map_cursorY;
+    f32 pause_map_cursorXPosTemp = pause_map_cursorX;
+    s32 xTemp;
+    s32 yTemp;
 
-    phi_f8 = (f32) gameStatus->stickX * 0.05f;
-    phi_f6 = (f32) -(s32) gameStatus->stickY * 0.05f;
-    if ((phi_f8 == 0.0f) && (phi_f6 == 0.0f)) {
-        if (mapCursorCurrentOption != -1) {
-            map_spaces = (PauseMapSpaces*)&D_802502B8 + mapCursorCurrentOption;
-            phi_f8 = map_spaces->xPos - mapCursorXPosTemp;
-            phi_f8 = phi_f8 * D_80270090;
-            phi_f6 = map_spaces->yPos - mapCursorYPosTemp;
-            phi_f6 = phi_f6 * D_80270090;
-        }
+    if (xMovement == 0.0f && yMovement == 0.0f && pause_map_cursorCurrentOption != -1) {
+        PauseMapSpaces* mapSpace = &D_802502B8[pause_map_cursorCurrentOption];
+
+        xMovement = mapSpace->xPos - pause_map_cursorXPosTemp;
+        yMovement = mapSpace->yPos - pause_map_cursorYPosTemp;
+
+        xMovement *= D_80270090;
+        yMovement *= D_80270090;
     }
 
-    mapCursorXPos += phi_f8;
-    mapCursorYPos += phi_f6;
-    if (mapCursorXPos < 16.0f) {
-        mapCursorXPos = 16.0f;
+    pause_map_cursorX += xMovement;
+    pause_map_cursorY += yMovement;
+
+    if (pause_map_cursorX < 16.0f) {
+        pause_map_cursorX = 16.0f;
     }
 
-    if (mapCursorYPos < 8.0f) {
-        mapCursorYPos = 8.0f;
+    if (pause_map_cursorY < 8.0f) {
+        pause_map_cursorY = 8.0f;
     }
 
-    if (mapCursorXPos >= 316.0f) {
-        mapCursorXPos = 315.0f;
+    if (pause_map_cursorX >= 316.0f) {
+        pause_map_cursorX = 315.0f;
     }
 
-    if (mapCursorYPos >= 308.0f) {
-        mapCursorYPos = 307.0f;
+    if (pause_map_cursorY >= 308.0f) {
+        pause_map_cursorY = 307.0f;
     }
 
-    temp_f4_2 = (s32) (mapCursorXPos + D_80270704 - D_80270098);
-    temp_f12 = mapCursorYPos + D_80270708 - D_802700A0;
-    if (D_802700A8 <= temp_f4_2) {
-        D_80270704 = D_80270704 - (temp_f4_2 - D_802700A8);
+    xTemp = pause_map_cursorX + pause_map_cameraX - D_80270098;
+    yTemp = pause_map_cursorY + pause_map_cameraY - D_802700A0;
+
+    if (D_802700A8 <= xTemp) {
+        pause_map_cameraX = pause_map_cameraX - (xTemp - D_802700A8);
     }
 
-    if (temp_f4_2 <= D_802700B0) {
-        D_80270704 = D_80270704 - (temp_f4_2 + D_802700B8);
+    if (D_802700B0 >= xTemp) {
+        pause_map_cameraX = pause_map_cameraX - (xTemp + D_802700B8);
     }
 
-    temp_f12 = temp_f12;
-    if (temp_f12 >= 15.0) {
-        D_80270708 = D_80270708 - (temp_f12 - 15.0);
+    if (yTemp >= 15.0) {
+        pause_map_cameraY -= yTemp - 15.0;
     }
 
-    if (temp_f12 <= -15.0) {
-        D_80270708 =  D_80270708 - (temp_f12 + 15.0);
+    if (yTemp <= -15.0) {
+        pause_map_cameraY -= yTemp + 15.0;
     }
 
-    if (D_80270704 > 0.0f) {
-        D_80270704 = 0.0f;
+    if (pause_map_cameraX > 0.0f) {
+        pause_map_cameraX = 0.0f;
     }
 
-    if (D_80270708 > 0.0f) {
-        D_80270708 = 0.0f;
+    if (pause_map_cameraY > 0.0f) {
+        pause_map_cameraY = 0.0f;
     }
 
-    if (D_80270704 < -86.0f) {
-        D_80270704 = -86.0f;
+    if (pause_map_cameraX < -86.0f) {
+        pause_map_cameraX = -86.0f;
     }
 
-    if (D_80270708 < -210.0f) {
-        D_80270708 = -210.0f;
+    if (pause_map_cameraY < -210.0f) {
+        pause_map_cameraY = -210.0f;
     }
 
     if (gPauseMenuPressedButtons & B_BUTTON) {
@@ -224,52 +203,45 @@ void pause_map_handle_input(void) {
     }
 
     gPauseMenuCurrentDescIconScript = 0;
-    if (mapCursorCurrentOption == -1) {
+    if (pause_map_cursorCurrentOption == -1) {
         gPauseMenuCurrentDescString = 0;
         return;
     }
 
-    gPauseMenuCurrentDescString = (mapCursorCurrentOption * 3) + 0x1D00F3;
-    if (evt_get_variable(0, EVT_STORY_PROGRESS) >= (s32)*(D_802502B8 + (mapCursorCurrentOption * ARRAY_COUNT(D_802502B8) + 3))) {
+    gPauseMenuCurrentDescString = pause_map_tab_places_desc_string_id + 1 + (pause_map_cursorCurrentOption * 3);
+    if (evt_get_variable(0, EVT_STORY_PROGRESS) >= D_802502B8[pause_map_cursorCurrentOption].unk_0C) {
         gPauseMenuCurrentDescString++;
     }
 }
 
 void pause_map_update(void) {
-    PauseMapSpaces* mapSpace;
-    f32 deltaY;
-    f32 deltaX;
-    f32 temp_f4_2;
+    PauseMapSpaces* mapSpace = &D_802502B8;
+    f32 lowestSqSum = 10000.0f;
+    f32 cursorOption = -1.0f;
     s32 i;
-    f32 phi_f20;
-    f32 phi_f22;
 
-    mapCursorCurrentOption = -1;
+    pause_map_cursorCurrentOption = -1;
     D_80270724 = 0;
-    mapSpace = (PauseMapSpaces*)&D_802502B8;
-    phi_f20 = 10000.0f;
-    phi_f22 = -1.0f;
-    
-    for (i = 0; i < EVT_SAVE_FLAG_PLACES_VISITED_TOTAL; i++) {
-        if (evt_get_variable(0, i + EVT_SAVE_FLAG_PLACES_VISITED) != 0) {
-            deltaX = mapCursorXPos - mapSpace->xPos;
-            deltaY = mapCursorYPos - mapSpace->yPos;
-            temp_f4_2 = SQ(deltaX) + SQ(deltaY);
-            if (temp_f4_2 < 400.0f) {
+
+    for (i = 0; i < EVT_SAVE_FLAG_PLACES_VISITED_TOTAL; i++, mapSpace++) {
+        if (evt_get_variable(0, EVT_SAVE_FLAG_PLACES_VISITED + i) != 0) {
+            f32 deltaX = pause_map_cursorX - mapSpace->xPos;
+            f32 deltaY = pause_map_cursorY - mapSpace->yPos;
+            f32 sqSum = SQ(deltaX) + SQ(deltaY);
+
+            if (sqSum < 400.0f) {
                 D_80270724++;
             }
 
-            if ((temp_f4_2 < phi_f20) && (temp_f4_2 < 200.0f)) {
-                phi_f20 = temp_f4_2;
-                phi_f22 = i;
+            if (sqSum < lowestSqSum && sqSum < 200.0f) {
+                lowestSqSum = sqSum;
+                cursorOption = i;
             }
         }
-
-        mapSpace++;
     }
-    
-    mapCursorCurrentOption = phi_f22;
-    mapCursorCurrentOptionCopy = phi_f22;
+
+    pause_map_cursorCurrentOption = cursorOption;
+    pause_map_cursorCurrentOptionCopy = cursorOption;
 }
 
 void pause_map_cleanup(void) {

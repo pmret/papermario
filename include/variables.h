@@ -194,14 +194,14 @@ extern s32 gPauseMenuCursorTargetOpacity;
 extern u8 gPauseMenuTextScrollInterpEasingLUT[16];
 extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
 extern s32 D_80270700[1];
-extern f32 D_80270704;
-extern f32 D_80270708;
-extern s32 mapMarioXPos; //mario xPos on map tab
-extern s32 mapMarioYPos; //mario xPos on map tab
-extern f32 mapCursorXPos; //cursor X pos float map tab
-extern f32 mapCursorYPos; //cursor Y pos float map tab
-extern s32 mapCursorCurrentOption;
-extern s32 mapCursorCurrentOptionCopy;
+extern f32 pause_map_cameraX;
+extern f32 pause_map_cameraY;
+extern s32 pause_map_marioX; //mario xPos on map tab
+extern s32 pause_map_marioY; //mario xPos on map tab
+extern f32 pause_map_cursorX; //cursor X pos float map tab
+extern f32 pause_map_cursorY; //cursor Y pos float map tab
+extern s32 pause_map_cursorCurrentOption;
+extern s32 pause_map_cursorCurrentOptionCopy;
 extern s32 D_80270724;
 extern f64 D_80270080;
 extern f64 D_80270088;
@@ -215,9 +215,8 @@ extern f64 D_802700B8;
 
 extern s32 D_8024FA30[1];
 
-extern Pause80250668* D_80250668[6];
-extern PauseMapSpaces* D_802502B8[5];
-extern s8 D_80250590;
+extern PauseMapSpaces D_802502B8[5];
+extern MenuWindowBP D_80250590[7];
 // Badges
 extern s32 gBadgeMenuCurrentScrollPos;
 extern s32 gBadgeMenuTargetScrollPos;
