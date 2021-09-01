@@ -2,32 +2,23 @@
 
 #define pause_map_tab_places_desc_string_id 0x1D00F2
 
-typedef struct Pause8024D930 {
-    /* 0x00 */ s16 xPos;
-    /* 0x02 */ s16 yPos;
-    /* 0x04 */ u8 unk_04;
-    /* 0x05 */ u8 unk_05;
-    /* 0x06 */ char unk_06[0x2];
-    /* 0x08 */ Vec2b* unk_08;
-} Pause8024D930; // Similar to PauseMapSpaces
-
-void func_8024D930(Pause8024D930* arg0) {
-    Vec2b* unk_08 = arg0->unk_08;
-    s32 limit = arg0->unk_05;
-    s32 x1 = D_802502B8[arg0->unk_04].xPos;
-    s32 y1 = D_802502B8[arg0->unk_04].yPos;
-    s32 x2 = arg0->xPos;
-    s32 y2 = arg0->yPos;
+void func_8024D930(PauseMapSpace* space) {
+    Vec2b* path = space->path;
+    s32 pathLength = space->pathLength;
+    s32 x1 = D_802502B8[space->parent].xPos;
+    s32 y1 = D_802502B8[space->parent].yPos;
+    s32 x2 = space->xPos;
+    s32 y2 = space->yPos;
     s32 xThingPrev = 0;
     s32 yThingPrev = 0;
     s32 i;
 
-    for (i = 0; i < limit; i++) {
-        s32 xThing = ((x1 - x2) * (i + 1)) / (limit + 1);
-        s32 yThing = ((y1 - y2) * (i + 1)) / (limit + 1);
+    for (i = 0; i < pathLength; i++) {
+        s32 xThing = ((x1 - x2) * (i + 1)) / (pathLength + 1);
+        s32 yThing = ((y1 - y2) * (i + 1)) / (pathLength + 1);
 
-        unk_08[i].x = xThing - xThingPrev;
-        unk_08[i].y = yThing - yThingPrev;
+        path[i].x = xThing - xThingPrev;
+        path[i].y = yThing - yThingPrev;
         xThingPrev = xThing;
         yThingPrev = yThing;
     }

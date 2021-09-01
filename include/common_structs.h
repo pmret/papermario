@@ -2034,10 +2034,10 @@ typedef struct {
 typedef struct PauseMapSpace {
     /* 0x00 */ s16 xPos;
     /* 0x02 */ s16 yPos;
-    /* 0x04 */ s8 parent;
+    /* 0x04 */ u8 parent;
     /* 0x05 */ u8 pathLength;
     /* 0x06 */ s16 unk_06; // always 0
-    /* 0x08 */ s32* path;
+    /* 0x08 */ Vec2b* path;
     /* 0x0C */ s32 description;
     /* 0x10 */ s32 id;
 } PauseMapSpace; //size = 0x14
@@ -2102,17 +2102,6 @@ typedef struct MenuWindowBP {
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ WindowStyleCustom* style;
 } MenuWindowBP; // size = 0x24;
-
-typedef struct Pause8025068C {
-    /* 0x00 */ u8 cursorMoveBool; //if 0, cant move cursor in map tab
-    /* 0x01 */ char unk_01[3]; //padding?
-    /* 0x04 */ char unk_04[8];
-    /* 0x0C */ s32* unk_0C; //function ptr
-    /* 0x10 */ s32* unk_10; //function ptr
-    /* 0x14 */ s32* unk_14; //function ptr
-    /* 0x18 */ s32* unk_18; //function ptr
-    /* 0x1C */ char unk_1C[8];
-} Pause8025068C; //size == 0x24 (?)
 
 typedef struct {
     /* 0x00 */ s8 flags;
