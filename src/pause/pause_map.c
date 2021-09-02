@@ -5,10 +5,10 @@
 void func_8024D930(PauseMapSpace* space) {
     Vec2b* path = space->path;
     s32 pathLength = space->pathLength;
-    s32 x1 = pause_map_spaces[space->parent].xPos;
-    s32 y1 = pause_map_spaces[space->parent].yPos;
-    s32 x2 = space->xPos;
-    s32 y2 = space->yPos;
+    s32 x1 = pause_map_spaces[space->parent].pos.x;
+    s32 y1 = pause_map_spaces[space->parent].pos.y;
+    s32 x2 = space->pos.x;
+    s32 y2 = space->pos.y;
     s32 xThingPrev = 0;
     s32 yThingPrev = 0;
     s32 i;
@@ -43,17 +43,17 @@ void pause_map_draw_border_arrows(s32 imageIndex, s32 x, s32 y) {
     }
 }
 
-INCLUDE_ASM(s32, "pause/140C70", pause_map_draw_contents);
+INCLUDE_ASM(s32, "pause/pause_map", pause_map_draw_contents);
 
 void pause_map_draw_title(s32* arg1, s32 arg2, s32 textOffsetY, s32 textOffsetX) {
-    s32 stringWidth;
-    s32 stringID;
+    s32 msgWidth;
+    s32 msgID;
 
     if (gPauseMenuCurrentTab == 6) {
         if (pause_map_cursorCurrentOption != -1) {
-            stringWidth = get_string_width(pause_map_tab_places_desc_string_id + (pause_map_cursorCurrentOption * 3), 0);
-            stringID = pause_map_tab_places_desc_string_id + (pause_map_cursorCurrentOption * 3);
-            draw_string(stringID, arg2 + ((textOffsetX - stringWidth) >> 1), textOffsetY + 1, 255, 0, 0);
+            msgWidth = get_string_width(pause_map_tab_places_desc_string_id + (pause_map_cursorCurrentOption * 3), 0);
+            msgID = pause_map_tab_places_desc_string_id + (pause_map_cursorCurrentOption * 3);
+            draw_string(msgID, arg2 + ((textOffsetX - msgWidth) >> 1), textOffsetY + 1, 255, 0, 0);
         }
     }
 }
@@ -84,8 +84,8 @@ void pause_map_init(MenuPanel* tab) {
     }
 
     if (i < ARRAY_COUNT(pause_map_spaces)) {
-        pause_map_marioX = pause_map_spaces[i].xPos;
-        pause_map_marioY = pause_map_spaces[i].yPos;
+        pause_map_marioX = pause_map_spaces[i].pos.x;
+        pause_map_marioY = pause_map_spaces[i].pos.y;
     } else {
         pause_map_marioX = 0;
         pause_map_marioY = 0;
@@ -126,8 +126,8 @@ void pause_map_handle_input(void) {
     if (xMovement == 0.0f && yMovement == 0.0f && pause_map_cursorCurrentOption != -1) {
         PauseMapSpace* mapSpace = &pause_map_spaces[pause_map_cursorCurrentOption];
 
-        xMovement = mapSpace->xPos - pause_map_targetXPosTemp;
-        yMovement = mapSpace->yPos - pause_map_targetYPosTemp;
+        xMovement = mapSpace->pos.x - pause_map_targetXPosTemp;
+        yMovement = mapSpace->pos.y - pause_map_targetYPosTemp;
 
         xMovement *= 0.32;
         yMovement *= 0.32;
@@ -216,8 +216,8 @@ void pause_map_update(void) {
 
     for (i = 0; i < ARRAY_COUNT(pause_map_spaces); i++, mapSpace++) {
         if (evt_get_variable(0, EVT_SAVE_FLAG_PLACES_VISITED + i) != 0) {
-            f32 deltaX = pause_map_targetX - mapSpace->xPos;
-            f32 deltaY = pause_map_targetY - mapSpace->yPos;
+            f32 deltaX = pause_map_targetX - mapSpace->pos.x;
+            f32 deltaY = pause_map_targetY - mapSpace->pos.y;
             f32 sqSum = SQ(deltaX) + SQ(deltaY);
 
             if (sqSum < 400.0f) {

@@ -949,7 +949,7 @@ segments:
     - [0x13CAF0, c, pause_items]
     - [0x13E120, c]
     - [0x13FD40, c]
-    - [0x140C70, c]
+    - [0x140C70, c, pause_map]
     - [0x1421C0, c]
     - [0x1422A0, data]
     - [0x1443F0, ci8,        world_map, 320, 320]

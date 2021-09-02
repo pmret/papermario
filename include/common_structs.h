@@ -2032,15 +2032,14 @@ typedef struct {
 } PauseItemPage; // size = 0xC
 
 typedef struct PauseMapSpace {
-    /* 0x00 */ s16 xPos;
-    /* 0x02 */ s16 yPos;
+    /* 0x00 */ Vec2s pos;
     /* 0x04 */ u8 parent;
     /* 0x05 */ u8 pathLength;
     /* 0x06 */ s16 unk_06; // always 0
     /* 0x08 */ Vec2b* path;
     /* 0x0C */ s32 description;
     /* 0x10 */ s32 id;
-} PauseMapSpace; //size = 0x14
+} PauseMapSpace; // size = 0x14
 
 typedef struct MenuPanel {
     /* 0x00 */ s8 initialized; //?
@@ -2070,10 +2069,10 @@ typedef struct WindowBackground {
 typedef struct WindowCorners {
     /* 0x00 */ s32* imgData;
     /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
-    /* 0x05 */ s8 size1[2];
-    /* 0x07 */ s8 size2[2];
-    /* 0x09 */ s8 size3[2];
-    /* 0x0B */ s8 size4[2];
+    /* 0x05 */ Vec2b size1;
+    /* 0x07 */ Vec2b size2;
+    /* 0x09 */ Vec2b size3;
+    /* 0x0B */ Vec2b size4;
     /* 0x0D */ char unk_0D[3];
 } WindowCorners; // size = 0x10
 
@@ -2090,8 +2089,7 @@ typedef struct WindowStyleCustom {
 typedef struct MenuWindowBP {
     /* 0x00 */ s8 windowID;
     /* 0x01 */ char unk_01;
-    /* 0x02 */ s16 posX;
-    /* 0x04 */ s16 posY;
+    /* 0x02 */ Vec2s pos;
     /* 0x06 */ s16 height;
     /* 0x08 */ s16 width; // switch? ^
     /* 0x0A */ char unk_0A[2];
@@ -2110,8 +2108,7 @@ typedef struct {
     /* 0x03 */ s8 parent; // ?
     /* 0x04 */ UNK_FUN_PTR(fpUpdate);
     /* 0x08 */ UNK_FUN_PTR(fpPending);
-    /* 0x0C */ s16 posX;
-    /* 0x0E */ s16 posY;
+    /* 0x0C */ Vec2s pos;
     /* 0x10 */ s16 width;
     /* 0x12 */ s16 height;
     /* 0x14 */ UNK_FUN_PTR(fpDrawContents);
