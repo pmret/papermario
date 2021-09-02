@@ -304,8 +304,8 @@ glabel pause_partners_handle_input
 /* 13FAC0 8024C780 00220821 */  addu      $at, $at, $v0
 /* 13FAC4 8024C784 8C22F06C */  lw        $v0, %lo(D_8008F06C)($at)
 .L8024C788:
-/* 13FAC8 8024C788 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescString)
-/* 13FACC 8024C78C AC2200C8 */  sw        $v0, %lo(gPauseMenuCurrentDescString)($at)
+/* 13FAC8 8024C788 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescMsg)
+/* 13FACC 8024C78C AC2200C8 */  sw        $v0, %lo(gPauseMenuCurrentDescMsg)($at)
 .L8024C790:
 /* 13FAD0 8024C790 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 13FAD4 8024C794 8FB10014 */  lw        $s1, 0x14($sp)

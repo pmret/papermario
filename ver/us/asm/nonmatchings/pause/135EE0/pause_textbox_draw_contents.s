@@ -121,7 +121,7 @@ glabel pause_textbox_draw_contents
 /* 136A78 80243738 AD020004 */  sw        $v0, 4($t0)
 /* 136A7C 8024373C 2402000A */  addiu     $v0, $zero, 0xa
 /* 136A80 80243740 AFA20010 */  sw        $v0, 0x10($sp)
-/* 136A84 80243744 0C04993B */  jal       draw_string
+/* 136A84 80243744 0C04993B */  jal       draw_msg
 /* 136A88 80243748 AFA00014 */   sw       $zero, 0x14($sp)
 /* 136A8C 8024374C 3C128027 */  lui       $s2, %hi(D_80270118)
 /* 136A90 80243750 26520118 */  addiu     $s2, $s2, %lo(D_80270118)

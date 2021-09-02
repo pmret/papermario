@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel _msg_get_printer_for_string
+glabel _msg_get_printer_for_msg
 /* BC01C 8012591C 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* BC020 80125920 AFB70054 */  sw        $s7, 0x54($sp)
 /* BC024 80125924 0080B82D */  daddu     $s7, $a0, $zero
@@ -54,7 +54,7 @@ glabel _msg_get_printer_for_string
 /* BC0D8 801259D8 AFB50010 */  sw        $s5, 0x10($sp)
 /* BC0DC 801259DC AFB60014 */  sw        $s6, 0x14($sp)
 /* BC0E0 801259E0 AFA00018 */  sw        $zero, 0x18($sp)
-/* BC0E4 801259E4 0C0497DA */  jal       get_string_properties
+/* BC0E4 801259E4 0C0497DA */  jal       get_msg_properties
 /* BC0E8 801259E8 AFA0001C */   sw       $zero, 0x1c($sp)
 /* BC0EC 801259EC 96220002 */  lhu       $v0, 2($s1)
 /* BC0F0 801259F0 A6020536 */  sh        $v0, 0x536($s0)

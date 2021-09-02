@@ -50,9 +50,9 @@ void pause_map_draw_title(s32* arg1, s32 arg2, s32 textOffsetY, s32 textOffsetX)
 
     if (gPauseMenuCurrentTab == 6) {
         if (pause_map_cursorCurrentOption != -1) {
-            msgWidth = get_string_width(MSG_pause_map_location_0_name + (pause_map_cursorCurrentOption * 3), 0);
+            msgWidth = get_msg_width(MSG_pause_map_location_0_name + (pause_map_cursorCurrentOption * 3), 0);
             msgID = MSG_pause_map_location_0_name + (pause_map_cursorCurrentOption * 3);
-            draw_string(msgID, arg2 + ((textOffsetX - msgWidth) >> 1), textOffsetY + 1, 255, 0, 0);
+            draw_msg(msgID, arg2 + ((textOffsetX - msgWidth) >> 1), textOffsetY + 1, 255, 0, 0);
         }
     }
 }
@@ -194,15 +194,15 @@ void pause_map_handle_input(void) {
 
     gPauseMenuCurrentDescIconScript = 0;
     if (pause_map_cursorCurrentOption == -1) {
-        gPauseMenuCurrentDescString = 0;
+        gPauseMenuCurrentDescMsg = 0;
         return;
     }
 
-    gPauseMenuCurrentDescString = MSG_pause_map_location_0_before_desc + (pause_map_cursorCurrentOption * 3);
+    gPauseMenuCurrentDescMsg = MSG_pause_map_location_0_before_desc + (pause_map_cursorCurrentOption * 3);
 
     // If the story has progressed enough, show the "after" description
     if (evt_get_variable(0, EVT_STORY_PROGRESS) >= pause_map_spaces[pause_map_cursorCurrentOption].afterRequirement) {
-        gPauseMenuCurrentDescString++;
+        gPauseMenuCurrentDescMsg++;
     }
 }
 

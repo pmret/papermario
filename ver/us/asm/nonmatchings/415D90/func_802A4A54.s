@@ -493,7 +493,7 @@ glabel L802A5130_419EC0
 .L802A516C:
 /* 419EFC 802A516C 348400CC */  ori       $a0, $a0, 0xcc
 .L802A5170:
-/* 419F00 802A5170 0C04991D */  jal       get_string_width
+/* 419F00 802A5170 0C04991D */  jal       get_msg_width
 /* 419F04 802A5174 0000282D */   daddu    $a1, $zero, $zero
 /* 419F08 802A5178 24040009 */  addiu     $a0, $zero, 9
 /* 419F0C 802A517C 24470017 */  addiu     $a3, $v0, 0x17

@@ -41,7 +41,7 @@ glabel pause_partners_draw_title
 /* 13EF7C 8024BC3C 000318C0 */  sll       $v1, $v1, 3
 /* 13EF80 8024BC40 00431021 */  addu      $v0, $v0, $v1
 /* 13EF84 8024BC44 80500015 */  lb        $s0, 0x15($v0)
-/* 13EF88 8024BC48 0C04991D */  jal       get_string_width
+/* 13EF88 8024BC48 0C04991D */  jal       get_msg_width
 /* 13EF8C 8024BC4C 0220202D */   daddu    $a0, $s1, $zero
 /* 13EF90 8024BC50 0040302D */  daddu     $a2, $v0, $zero
 /* 13EF94 8024BC54 24020001 */  addiu     $v0, $zero, 1
@@ -63,7 +63,7 @@ glabel pause_partners_draw_title
 /* 13EFCC 8024BC8C 26660001 */  addiu     $a2, $s3, 1
 /* 13EFD0 8024BC90 240700FF */  addiu     $a3, $zero, 0xff
 /* 13EFD4 8024BC94 AFA00010 */  sw        $zero, 0x10($sp)
-/* 13EFD8 8024BC98 0C04993B */  jal       draw_string
+/* 13EFD8 8024BC98 0C04993B */  jal       draw_msg
 /* 13EFDC 8024BC9C AFA00014 */   sw       $zero, 0x14($sp)
 /* 13EFE0 8024BCA0 24020001 */  addiu     $v0, $zero, 1
 /* 13EFE4 8024BCA4 1602000A */  bne       $s0, $v0, .L8024BCD0

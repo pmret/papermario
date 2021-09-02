@@ -114,7 +114,7 @@ void entity_HugeBlueSwitch_init(Entity* entity);
 s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 
 // Text
-MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1);
+MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* a1);
 
 void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
@@ -133,7 +133,7 @@ void peach_set_disguise_anim(s32);
 void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, s32 opacity,
               s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
               s32 drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
-s32 get_string_width(s32 stringID, u16 charset);
+s32 get_msg_width(s32 msgID, u16 charset);
 
 s32 partner_player_can_pause(void);
 s32 disable_player_static_collisions(void);
@@ -475,7 +475,7 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
 s32 func_8011CFBC(void);
 s32 set_screen_overlay_center_worldpos(void);
 s32 mdl_get_next_texture_address(void);
-void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
+void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
 
 s32 entity_base_block_idle(Entity* entity);

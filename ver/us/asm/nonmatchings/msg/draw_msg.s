@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel draw_string
+glabel draw_msg
 /* BCBEC 801264EC 27BDFA58 */  addiu     $sp, $sp, -0x5a8
 /* BCBF0 801264F0 8FA205BC */  lw        $v0, 0x5bc($sp)
 /* BCBF4 801264F4 AFB7059C */  sw        $s7, 0x59c($sp)
@@ -48,7 +48,7 @@ glabel draw_string
 /* BCC8C 8012658C 24040400 */   addiu    $a0, $zero, 0x400
 /* BCC90 80126590 0040A02D */  daddu     $s4, $v0, $zero
 /* BCC94 80126594 0200202D */  daddu     $a0, $s0, $zero
-/* BCC98 80126598 0C049601 */  jal       dma_load_string
+/* BCC98 80126598 0C049601 */  jal       dma_load_msg
 /* BCC9C 8012659C 0280282D */   daddu    $a1, $s4, $zero
 /* BCCA0 801265A0 0000282D */  daddu     $a1, $zero, $zero
 /* BCCA4 801265A4 27B00578 */  addiu     $s0, $sp, 0x578
@@ -59,7 +59,7 @@ glabel draw_string
 /* BCCB8 801265B8 AFA00018 */  sw        $zero, 0x18($sp)
 /* BCCBC 801265BC AFB3001C */  sw        $s3, 0x1c($sp)
 /* BCCC0 801265C0 0280202D */  daddu     $a0, $s4, $zero
-/* BCCC4 801265C4 0C0497DA */  jal       get_string_properties
+/* BCCC4 801265C4 0C0497DA */  jal       get_msg_properties
 /* BCCC8 801265C8 00A0382D */   daddu    $a3, $a1, $zero
 /* BCCCC 801265CC 96020002 */  lhu       $v0, 2($s0)
 /* BCCD0 801265D0 A7A20558 */  sh        $v0, 0x558($sp)

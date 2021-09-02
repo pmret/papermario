@@ -936,8 +936,8 @@ glabel L80125244_BB944
 /* BB96C 8012526C 27A60010 */  addiu     $a2, $sp, 0x10
 .L80125270:
 /* BB970 80125270 96820528 */  lhu       $v0, 0x528($s4)
-/* BB974 80125274 3C088015 */  lui       $t0, %hi(gMessageStringVars)
-/* BB978 80125278 25085C38 */  addiu     $t0, $t0, %lo(gMessageStringVars)
+/* BB974 80125274 3C088015 */  lui       $t0, %hi(gMessageMsgVars)
+/* BB978 80125278 25085C38 */  addiu     $t0, $t0, %lo(gMessageMsgVars)
 /* BB97C 8012527C 24430001 */  addiu     $v1, $v0, 1
 /* BB980 80125280 3042FFFF */  andi      $v0, $v0, 0xffff
 /* BB984 80125284 00501021 */  addu      $v0, $v0, $s0
@@ -959,8 +959,8 @@ glabel L80125244_BB944
 /* BB9C4 801252C4 00400008 */  jr        $v0
 /* BB9C8 801252C8 00000000 */   nop
 /* BB9CC 801252CC 96820528 */  lhu       $v0, 0x528($s4)
-/* BB9D0 801252D0 3C088015 */  lui       $t0, %hi(gMessageStringVars)
-/* BB9D4 801252D4 25085C38 */  addiu     $t0, $t0, %lo(gMessageStringVars)
+/* BB9D0 801252D0 3C088015 */  lui       $t0, %hi(gMessageMsgVars)
+/* BB9D4 801252D4 25085C38 */  addiu     $t0, $t0, %lo(gMessageMsgVars)
 /* BB9D8 801252D8 00501021 */  addu      $v0, $v0, $s0
 /* BB9DC 801252DC 00481021 */  addu      $v0, $v0, $t0
 /* BB9E0 801252E0 90420000 */  lbu       $v0, ($v0)
@@ -982,8 +982,8 @@ glabel L80125244_BB944
 /* BBA1C 8012531C A3A20010 */   sb       $v0, 0x10($sp)
 /* BBA20 80125320 A3B60010 */  sb        $s6, 0x10($sp)
 /* BBA24 80125324 96820528 */  lhu       $v0, 0x528($s4)
-/* BBA28 80125328 3C088015 */  lui       $t0, %hi(gMessageStringVars)
-/* BBA2C 8012532C 25085C38 */  addiu     $t0, $t0, %lo(gMessageStringVars)
+/* BBA28 80125328 3C088015 */  lui       $t0, %hi(gMessageMsgVars)
+/* BBA2C 8012532C 25085C38 */  addiu     $t0, $t0, %lo(gMessageMsgVars)
 /* BBA30 80125330 24430001 */  addiu     $v1, $v0, 1
 /* BBA34 80125334 3042FFFF */  andi      $v0, $v0, 0xffff
 /* BBA38 80125338 00501021 */  addu      $v0, $v0, $s0
@@ -1009,8 +1009,8 @@ glabel L80125244_BB944
 /* BBA80 80125380 24020004 */  addiu     $v0, $zero, 4
 /* BBA84 80125384 A3A20011 */  sb        $v0, 0x11($sp)
 /* BBA88 80125388 96820528 */  lhu       $v0, 0x528($s4)
-/* BBA8C 8012538C 3C088015 */  lui       $t0, %hi(gMessageStringVars)
-/* BBA90 80125390 25085C38 */  addiu     $t0, $t0, %lo(gMessageStringVars)
+/* BBA8C 8012538C 3C088015 */  lui       $t0, %hi(gMessageMsgVars)
+/* BBA90 80125390 25085C38 */  addiu     $t0, $t0, %lo(gMessageMsgVars)
 /* BBA94 80125394 24430001 */  addiu     $v1, $v0, 1
 /* BBA98 80125398 3042FFFF */  andi      $v0, $v0, 0xffff
 /* BBA9C 8012539C 00501021 */  addu      $v0, $v0, $s0
@@ -1047,8 +1047,8 @@ glabel L80125244_BB944
 /* BBAFC 801253FC 26520001 */   addiu    $s2, $s2, 1
 .L80125400:
 /* BBB00 80125400 96820528 */  lhu       $v0, 0x528($s4)
-/* BBB04 80125404 3C088015 */  lui       $t0, %hi(gMessageStringVars)
-/* BBB08 80125408 25085C38 */  addiu     $t0, $t0, %lo(gMessageStringVars)
+/* BBB04 80125404 3C088015 */  lui       $t0, %hi(gMessageMsgVars)
+/* BBB08 80125408 25085C38 */  addiu     $t0, $t0, %lo(gMessageMsgVars)
 /* BBB0C 8012540C 00501021 */  addu      $v0, $v0, $s0
 /* BBB10 80125410 00481021 */  addu      $v0, $v0, $t0
 /* BBB14 80125414 90420000 */  lbu       $v0, ($v0)

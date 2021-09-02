@@ -17,7 +17,7 @@ glabel jtbl_801506B8
 
 .section .text
 
-glabel get_string_properties
+glabel get_msg_properties
 /* BC668 80125F68 27BDFEB0 */  addiu     $sp, $sp, -0x150
 /* BC66C 80125F6C F7B40148 */  sdc1      $f20, 0x148($sp)
 /* BC670 80125F70 3C013F80 */  lui       $at, 0x3f80
@@ -53,7 +53,7 @@ glabel get_string_properties
 /* BC6E8 80125FE8 24040400 */   addiu    $a0, $zero, 0x400
 /* BC6EC 80125FEC 0200202D */  daddu     $a0, $s0, $zero
 /* BC6F0 80125FF0 AFA200F0 */  sw        $v0, 0xf0($sp)
-/* BC6F4 80125FF4 0C049601 */  jal       dma_load_string
+/* BC6F4 80125FF4 0C049601 */  jal       dma_load_msg
 /* BC6F8 80125FF8 0040282D */   daddu    $a1, $v0, $zero
 /* BC6FC 80125FFC 8FB100F0 */  lw        $s1, 0xf0($sp)
 /* BC700 80126000 08049803 */  j         .L8012600C
@@ -240,10 +240,10 @@ glabel L80126268_BC968
 /* BC96C 8012626C 26100001 */  addiu     $s0, $s0, 1
 /* BC970 80126270 90440000 */  lbu       $a0, ($v0)
 /* BC974 80126274 0000282D */  daddu     $a1, $zero, $zero
-/* BC978 80126278 3C098015 */  lui       $t1, %hi(gMessageStringVars)
-/* BC97C 8012627C 25295C38 */  addiu     $t1, $t1, %lo(gMessageStringVars)
+/* BC978 80126278 3C098015 */  lui       $t1, %hi(gMessageMsgVars)
+/* BC97C 8012627C 25295C38 */  addiu     $t1, $t1, %lo(gMessageMsgVars)
 /* BC980 80126280 00042140 */  sll       $a0, $a0, 5
-/* BC984 80126284 0C04991D */  jal       get_string_width
+/* BC984 80126284 0C04991D */  jal       get_msg_width
 /* BC988 80126288 00892021 */   addu     $a0, $a0, $t1
 /* BC98C 8012628C 080498BA */  j         L801262E8_BC9E8
 /* BC990 80126290 02629821 */   addu     $s3, $s3, $v0

@@ -1001,9 +1001,9 @@ EvtSource N(80246520) = SCRIPT({
             N(func_80240DF0_969FB0)();
             SetMessageValue(EVT_SAVE_VAR(352), 0);
             if (EVT_SAVE_VAR(352) == 1) {
-                SetMessageString(2148844180, 1);
+                SetMessageMsg(2148844180, 1);
             } else {
-                SetMessageString(2148844176, 1);
+                SetMessageMsg(2148844176, 1);
             }
             SpeakToPlayer(NPC_SELF, NPC_ANIM_chuck_quizmo_Palette_00_Anim_4, NPC_ANIM_chuck_quizmo_Palette_00_Anim_1, 0, MESSAGE_ID(0x08, 0x000F));
         }

@@ -110,7 +110,7 @@ glabel ShowShopPurchaseDialog
 /* 7E1528 802806A8 26650078 */  addiu     $a1, $s3, 0x78
 /* 7E152C 802806AC 24020064 */  addiu     $v0, $zero, 0x64
 /* 7E1530 802806B0 AE620070 */  sw        $v0, 0x70($s3)
-/* 7E1534 802806B4 0C049640 */  jal       msg_get_printer_for_string
+/* 7E1534 802806B4 0C049640 */  jal       msg_get_printer_for_msg
 /* 7E1538 802806B8 AE600078 */   sw       $zero, 0x78($s3)
 /* 7E153C 802806BC 3C018028 */  lui       $at, %hi(D_80286528)
 /* 7E1540 802806C0 AC226528 */  sw        $v0, %lo(D_80286528)($at)

@@ -12,8 +12,8 @@ glabel pause_handle_input
 /* 137780 80244440 804200D4 */  lb        $v0, %lo(gPauseMenuCurrentTab)($v0)
 /* 137784 80244444 3C05F840 */  lui       $a1, 0xf840
 /* 137788 80244448 AFB3003C */  sw        $s3, 0x3c($sp)
-/* 13778C 8024444C 3C138027 */  lui       $s3, %hi(gPauseMenuCurrentDescString)
-/* 137790 80244450 8E7300C8 */  lw        $s3, %lo(gPauseMenuCurrentDescString)($s3)
+/* 13778C 8024444C 3C138027 */  lui       $s3, %hi(gPauseMenuCurrentDescMsg)
+/* 137790 80244450 8E7300C8 */  lw        $s3, %lo(gPauseMenuCurrentDescMsg)($s3)
 /* 137794 80244454 AFBF004C */  sw        $ra, 0x4c($sp)
 /* 137798 80244458 AFB40040 */  sw        $s4, 0x40($sp)
 /* 13779C 8024445C AFB20038 */  sw        $s2, 0x38($sp)
@@ -105,7 +105,7 @@ glabel pause_handle_input
 /* 1378DC 8024459C AFA20010 */  sw        $v0, 0x10($sp)
 /* 1378E0 802445A0 AFA00014 */  sw        $zero, 0x14($sp)
 /* 1378E4 802445A4 AFA00018 */  sw        $zero, 0x18($sp)
-/* 1378E8 802445A8 0C0497DA */  jal       get_string_properties
+/* 1378E8 802445A8 0C0497DA */  jal       get_msg_properties
 /* 1378EC 802445AC AFA0001C */   sw       $zero, 0x1c($sp)
 /* 1378F0 802445B0 8FA3002C */  lw        $v1, 0x2c($sp)
 /* 1378F4 802445B4 30620001 */  andi      $v0, $v1, 1

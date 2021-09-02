@@ -181,7 +181,7 @@ glabel L802A3D00_418A90
 /* 418CBC 802A3F2C AFA80010 */  sw        $t0, 0x10($sp)
 /* 418CC0 802A3F30 AFA20014 */  sw        $v0, 0x14($sp)
 /* 418CC4 802A3F34 8C840000 */  lw        $a0, ($a0)
-/* 418CC8 802A3F38 0C04993B */  jal       draw_string
+/* 418CC8 802A3F38 0C04993B */  jal       draw_msg
 /* 418CCC 802A3F3C 0220302D */   daddu    $a2, $s1, $zero
 .L802A3F40:
 /* 418CD0 802A3F40 8E820000 */  lw        $v0, ($s4)

@@ -173,7 +173,7 @@ extern s32 D_802A3838;
 // Pause
 extern s32 gPauseMenuHeldButtons;
 extern s32 gPauseMenuPressedButtons;
-extern s32 gPauseMenuCurrentDescString;
+extern s32 gPauseMenuCurrentDescMsg;
 extern s32* gPauseMenuCurrentDescIconScript;
 extern s32 D_802700D0;
 
@@ -182,7 +182,7 @@ extern char D_802700D[8];
 extern s32 D_802700E0;
 extern s32 gPauseMenuCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
-extern s32 gPauseMenuStrings[348];
+extern s32 gPauseMenuMsgs[348];
 extern s32 gPauseMenuIconScripts[8];
 extern MenuPanel gPauseMenuPanels[7];
 extern s32 gPauseMenuCursorPosX;
