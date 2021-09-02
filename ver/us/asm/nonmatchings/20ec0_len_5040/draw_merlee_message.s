@@ -35,8 +35,8 @@ glabel draw_merlee_message
 /* 21348 80045F48 3C038008 */  lui       $v1, %hi(D_80078160)
 /* 2134C 80045F4C 00621821 */  addu      $v1, $v1, $v0
 /* 21350 80045F50 84638160 */  lh        $v1, %lo(D_80078160)($v1)
-/* 21354 80045F54 3C028004 */  lui       $v0, %hi(draw_merlee_message_msg)
-/* 21358 80045F58 24425E4C */  addiu     $v0, $v0, %lo(draw_merlee_message_msg)
+/* 21354 80045F54 3C028004 */  lui       $v0, %hi(draw_merlee_message_string)
+/* 21358 80045F58 24425E4C */  addiu     $v0, $v0, %lo(draw_merlee_message_string)
 /* 2135C 80045F5C AFA20018 */  sw        $v0, 0x18($sp)
 /* 21360 80045F60 2402FFFF */  addiu     $v0, $zero, -1
 /* 21364 80045F64 24060050 */  addiu     $a2, $zero, 0x50

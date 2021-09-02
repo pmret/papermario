@@ -22,7 +22,7 @@ glabel func_8002C324
 /* 7740 8002C340 3C06800A */  lui       $a2, %hi(D_80098050)
 /* 7744 8002C344 24C68050 */  addiu     $a2, $a2, %lo(D_80098050)
 /* 7748 8002C348 AFBF0018 */  sw        $ra, 0x18($sp)
-/* 774C 8002C34C 0C00B082 */  jal       crash_printf_msg
+/* 774C 8002C34C 0C00B082 */  jal       crash_printf_string
 /* 7750 8002C350 0220382D */   daddu    $a3, $s1, $zero
 /* 7754 8002C354 0000182D */  daddu     $v1, $zero, $zero
 /* 7758 8002C358 3C078007 */  lui       $a3, %hi(D_800773D8)
@@ -35,7 +35,7 @@ glabel func_8002C324
 /* 7770 8002C370 8CE70000 */  lw        $a3, ($a3)
 /* 7774 8002C374 3C06800A */  lui       $a2, %hi(D_8009805C)
 /* 7778 8002C378 24C6805C */  addiu     $a2, $a2, %lo(D_8009805C)
-/* 777C 8002C37C 0C00B082 */  jal       crash_printf_msg
+/* 777C 8002C37C 0C00B082 */  jal       crash_printf_string
 /* 7780 8002C380 2405009B */   addiu    $a1, $zero, 0x9b
 /* 7784 8002C384 0800B0E7 */  j         .L8002C39C
 /* 7788 8002C388 00000000 */   nop

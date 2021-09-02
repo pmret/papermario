@@ -21,7 +21,7 @@ INCLUDE_ASM(s32, "20ec0_len_5040", show_merlee_message);
 
 INCLUDE_ASM(s32, "20ec0_len_5040", update_merlee_message);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", draw_merlee_message_msg);
+INCLUDE_ASM(s32, "20ec0_len_5040", draw_merlee_message_string);
 
 INCLUDE_ASM(s32, "20ec0_len_5040", draw_merlee_message);
 

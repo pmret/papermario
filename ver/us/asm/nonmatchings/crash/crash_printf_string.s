@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel crash_printf_msg
+glabel crash_printf_string
 /* 7608 8002C208 AFA60008 */  sw        $a2, 8($sp)
 /* 760C 8002C20C AFA7000C */  sw        $a3, 0xc($sp)
 /* 7610 8002C210 27BDFED0 */  addiu     $sp, $sp, -0x130

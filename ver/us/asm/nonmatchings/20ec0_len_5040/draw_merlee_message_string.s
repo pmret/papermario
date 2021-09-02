@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel draw_merlee_message_msg
+glabel draw_merlee_message_string
 /* 2124C 80045E4C 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 21250 80045E50 AFBF0024 */  sw        $ra, 0x24($sp)
 /* 21254 80045E54 AFB20020 */  sw        $s2, 0x20($sp)
