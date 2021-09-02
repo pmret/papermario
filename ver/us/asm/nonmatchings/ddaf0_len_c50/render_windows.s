@@ -13,8 +13,8 @@ glabel render_windows
 /* DDDB8 801476B8 00171140 */  sll       $v0, $s7, 5
 /* DDDBC 801476BC F7B400E8 */  sdc1      $f20, 0xe8($sp)
 /* DDDC0 801476C0 4480A000 */  mtc1      $zero, $f20
-/* DDDC4 801476C4 3C0B8016 */  lui       $t3, %hi(gUIPanels)
-/* DDDC8 801476C8 256B9D50 */  addiu     $t3, $t3, %lo(gUIPanels)
+/* DDDC4 801476C4 3C0B8016 */  lui       $t3, %hi(gWindows)
+/* DDDC8 801476C8 256B9D50 */  addiu     $t3, $t3, %lo(gWindows)
 /* DDDCC 801476CC AFBE00E0 */  sw        $fp, 0xe0($sp)
 /* DDDD0 801476D0 004BF021 */  addu      $fp, $v0, $t3
 /* DDDD4 801476D4 AFBF00E4 */  sw        $ra, 0xe4($sp)
@@ -30,8 +30,8 @@ glabel render_windows
 /* DDDF8 801476F8 064200E2 */  bltzl     $s2, .L80147A84
 /* DDDFC 801476FC 26D60001 */   addiu    $s6, $s6, 1
 /* DDE00 80147700 00121140 */  sll       $v0, $s2, 5
-/* DDE04 80147704 3C0B8016 */  lui       $t3, %hi(gUIPanels)
-/* DDE08 80147708 256B9D50 */  addiu     $t3, $t3, %lo(gUIPanels)
+/* DDE04 80147704 3C0B8016 */  lui       $t3, %hi(gWindows)
+/* DDE08 80147708 256B9D50 */  addiu     $t3, $t3, %lo(gWindows)
 /* DDE0C 8014770C 004B8821 */  addu      $s1, $v0, $t3
 /* DDE10 80147710 92220000 */  lbu       $v0, ($s1)
 /* DDE14 80147714 504000DB */  beql      $v0, $zero, .L80147A84

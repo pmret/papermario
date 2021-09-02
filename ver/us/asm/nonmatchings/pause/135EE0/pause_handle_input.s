@@ -20,9 +20,9 @@ glabel pause_handle_input
 /* 1377A0 80244460 AFB10034 */  sw        $s1, 0x34($sp)
 /* 1377A4 80244464 AFB00030 */  sw        $s0, 0x30($sp)
 /* 1377A8 80244468 00021080 */  sll       $v0, $v0, 2
-/* 1377AC 8024446C 3C148025 */  lui       $s4, %hi(gPauseMenuTabs)
+/* 1377AC 8024446C 3C148025 */  lui       $s4, %hi(gPauseMenuPanels)
 /* 1377B0 80244470 0282A021 */  addu      $s4, $s4, $v0
-/* 1377B4 80244474 8E94EF80 */  lw        $s4, %lo(gPauseMenuTabs)($s4)
+/* 1377B4 80244474 8E94EF80 */  lw        $s4, %lo(gPauseMenuPanels)($s4)
 /* 1377B8 80244478 0C0B1EAF */  jal       evt_get_variable
 /* 1377BC 8024447C 34A55BDE */   ori      $a1, $a1, 0x5bde
 /* 1377C0 80244480 1040000F */  beqz      $v0, .L802444C0
@@ -174,8 +174,8 @@ glabel pause_handle_input
 /* 1379DC 8024469C 0040F809 */  jalr      $v0
 /* 1379E0 802446A0 0280202D */   daddu    $a0, $s4, $zero
 .L802446A4:
-/* 1379E4 802446A4 3C118025 */  lui       $s1, %hi(gPauseMenuTabs)
-/* 1379E8 802446A8 2631EF80 */  addiu     $s1, $s1, %lo(gPauseMenuTabs)
+/* 1379E4 802446A4 3C118025 */  lui       $s1, %hi(gPauseMenuPanels)
+/* 1379E8 802446A8 2631EF80 */  addiu     $s1, $s1, %lo(gPauseMenuPanels)
 /* 1379EC 802446AC 0000802D */  daddu     $s0, $zero, $zero
 .L802446B0:
 /* 1379F0 802446B0 8E240000 */  lw        $a0, ($s1)

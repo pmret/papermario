@@ -17,8 +17,8 @@ glabel filemenu_update_show_name_confirm
 /* 16455C 80243CFC 35084340 */  ori       $t0, $t0, 0x4340
 /* 164560 80243D00 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
 /* 164564 80243D04 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
-/* 164568 80243D08 3C038016 */  lui       $v1, %hi(gUIPanels)
-/* 16456C 80243D0C 24639D50 */  addiu     $v1, $v1, %lo(gUIPanels)
+/* 164568 80243D08 3C038016 */  lui       $v1, %hi(gWindows)
+/* 16456C 80243D0C 24639D50 */  addiu     $v1, $v1, %lo(gWindows)
 /* 164570 80243D10 00042140 */  sll       $a0, $a0, 5
 /* 164574 80243D14 AFB40038 */  sw        $s4, 0x38($sp)
 /* 164578 80243D18 0083A021 */  addu      $s4, $a0, $v1

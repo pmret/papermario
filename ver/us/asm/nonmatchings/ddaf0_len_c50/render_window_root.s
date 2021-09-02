@@ -16,8 +16,8 @@ glabel render_window_root
 /* DE1EC 80147AEC 0461FFFD */  bgez      $v1, .L80147AE4
 /* DE1F0 80147AF0 24420004 */   addiu    $v0, $v0, 4
 /* DE1F4 80147AF4 0000182D */  daddu     $v1, $zero, $zero
-/* DE1F8 80147AF8 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* DE1FC 80147AFC 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* DE1F8 80147AF8 3C048016 */  lui       $a0, %hi(gWindows)
+/* DE1FC 80147AFC 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 /* DE200 80147B00 27A50020 */  addiu     $a1, $sp, 0x20
 .L80147B04:
 /* DE204 80147B04 90820000 */  lbu       $v0, ($a0)

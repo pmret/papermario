@@ -476,8 +476,8 @@ glabel L80245DD0_166630
 /* 166958 802460F8 24040032 */  addiu     $a0, $zero, 0x32
 /* 16695C 802460FC 0C051F9F */  jal       set_window_update
 /* 166960 80246100 24050001 */   addiu    $a1, $zero, 1
-/* 166964 80246104 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 166968 80246108 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 166964 80246104 3C048016 */  lui       $a0, %hi(gWindows)
+/* 166968 80246108 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 /* 16696C 8024610C 2402008F */  addiu     $v0, $zero, 0x8f
 /* 166970 80246110 A482064E */  sh        $v0, 0x64e($a0)
 /* 166974 80246114 24020045 */  addiu     $v0, $zero, 0x45
@@ -500,8 +500,8 @@ glabel L80245DD0_166630
 /* 1669B8 80246158 2463FFDE */   addiu    $v1, $v1, -0x22
 .L8024615C:
 /* 1669BC 8024615C 2403007E */  addiu     $v1, $zero, 0x7e
-/* 1669C0 80246160 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 1669C4 80246164 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 1669C0 80246160 3C048016 */  lui       $a0, %hi(gWindows)
+/* 1669C4 80246164 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 .L80246168:
 /* 1669C8 80246168 2402FFE3 */  addiu     $v0, $zero, -0x1d
 /* 1669CC 8024616C A4A30000 */  sh        $v1, ($a1)
@@ -580,8 +580,8 @@ glabel L802461E8_166A48
 /* 166AE0 80246280 24A53CCC */  addiu     $a1, $a1, %lo(filemenu_update_show_name_confirm)
 /* 166AE4 80246284 0C051F9F */  jal       set_window_update
 /* 166AE8 80246288 24040032 */   addiu    $a0, $zero, 0x32
-/* 166AEC 8024628C 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 166AF0 80246290 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 166AEC 8024628C 3C048016 */  lui       $a0, %hi(gWindows)
+/* 166AF0 80246290 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 /* 166AF4 80246294 24020079 */  addiu     $v0, $zero, 0x79
 /* 166AF8 80246298 A482064E */  sh        $v0, 0x64e($a0)
 /* 166AFC 8024629C 24020045 */  addiu     $v0, $zero, 0x45
@@ -604,8 +604,8 @@ glabel L802461E8_166A48
 /* 166B40 802462E0 2463FFDE */   addiu    $v1, $v1, -0x22
 .L802462E4:
 /* 166B44 802462E4 2403007E */  addiu     $v1, $zero, 0x7e
-/* 166B48 802462E8 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 166B4C 802462EC 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 166B48 802462E8 3C048016 */  lui       $a0, %hi(gWindows)
+/* 166B4C 802462EC 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 .L802462F0:
 /* 166B50 802462F0 2402FFE3 */  addiu     $v0, $zero, -0x1d
 /* 166B54 802462F4 A4A30000 */  sh        $v1, ($a1)
@@ -728,8 +728,8 @@ glabel L80246420_166C80
 /* 166D08 802464A8 3C018025 */  lui       $at, %hi(D_8024C098_C09918)
 /* 166D0C 802464AC A022C098 */  sb        $v0, %lo(D_8024C098_C09918)($at)
 /* 166D10 802464B0 24020002 */  addiu     $v0, $zero, 2
-/* 166D14 802464B4 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 166D18 802464B8 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 166D14 802464B4 3C048016 */  lui       $a0, %hi(gWindows)
+/* 166D18 802464B8 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 /* 166D1C 802464BC 3C038025 */  lui       $v1, %hi(D_80249B8C)
 /* 166D20 802464C0 8C639B8C */  lw        $v1, %lo(D_80249B8C)($v1)
 /* 166D24 802464C4 A0620004 */  sb        $v0, 4($v1)
@@ -753,8 +753,8 @@ glabel L80246420_166C80
 /* 166D6C 8024650C 2463FFB3 */   addiu    $v1, $v1, -0x4d
 .L80246510:
 /* 166D70 80246510 24030053 */  addiu     $v1, $zero, 0x53
-/* 166D74 80246514 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 166D78 80246518 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 166D74 80246514 3C048016 */  lui       $a0, %hi(gWindows)
+/* 166D78 80246518 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 .L8024651C:
 /* 166D7C 8024651C A4A30000 */  sh        $v1, ($a1)
 /* 166D80 80246520 948205F2 */  lhu       $v0, 0x5f2($a0)
@@ -834,8 +834,8 @@ glabel L80246420_166C80
 /* 166E9C 8024663C 24A53CCC */  addiu     $a1, $a1, %lo(filemenu_update_show_name_confirm)
 /* 166EA0 80246640 0C051F9F */  jal       set_window_update
 /* 166EA4 80246644 24040032 */   addiu    $a0, $zero, 0x32
-/* 166EA8 80246648 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 166EAC 8024664C 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 166EA8 80246648 3C048016 */  lui       $a0, %hi(gWindows)
+/* 166EAC 8024664C 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 /* 166EB0 80246650 24020079 */  addiu     $v0, $zero, 0x79
 /* 166EB4 80246654 A482064E */  sh        $v0, 0x64e($a0)
 /* 166EB8 80246658 24020045 */  addiu     $v0, $zero, 0x45
@@ -858,8 +858,8 @@ glabel L80246420_166C80
 /* 166EFC 8024669C 2463FFDE */   addiu    $v1, $v1, -0x22
 .L802466A0:
 /* 166F00 802466A0 2403007E */  addiu     $v1, $zero, 0x7e
-/* 166F04 802466A4 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 166F08 802466A8 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 166F04 802466A4 3C048016 */  lui       $a0, %hi(gWindows)
+/* 166F08 802466A8 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 .L802466AC:
 /* 166F0C 802466AC 2402FFD5 */  addiu     $v0, $zero, -0x2b
 /* 166F10 802466B0 A4A30000 */  sh        $v1, ($a1)
@@ -950,8 +950,8 @@ glabel L8024672C_166F8C
 /* 167050 802467F0 24A53CCC */  addiu     $a1, $a1, %lo(filemenu_update_show_name_confirm)
 /* 167054 802467F4 0C051F9F */  jal       set_window_update
 /* 167058 802467F8 24040032 */   addiu    $a0, $zero, 0x32
-/* 16705C 802467FC 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 167060 80246800 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 16705C 802467FC 3C048016 */  lui       $a0, %hi(gWindows)
+/* 167060 80246800 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 /* 167064 80246804 2402007F */  addiu     $v0, $zero, 0x7f
 /* 167068 80246808 A482064E */  sh        $v0, 0x64e($a0)
 /* 16706C 8024680C 24020045 */  addiu     $v0, $zero, 0x45
@@ -974,8 +974,8 @@ glabel L8024672C_166F8C
 /* 1670B0 80246850 2463FFDE */   addiu    $v1, $v1, -0x22
 .L80246854:
 /* 1670B4 80246854 2403007E */  addiu     $v1, $zero, 0x7e
-/* 1670B8 80246858 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 1670BC 8024685C 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 1670B8 80246858 3C048016 */  lui       $a0, %hi(gWindows)
+/* 1670BC 8024685C 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 .L80246860:
 /* 1670C0 80246860 2402FFCE */  addiu     $v0, $zero, -0x32
 /* 1670C4 80246864 A4A30000 */  sh        $v1, ($a1)

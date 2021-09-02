@@ -3,8 +3,8 @@
 
 glabel filemenu_update_select_file
 /* 164168 80243908 00C0482D */  daddu     $t1, $a2, $zero
-/* 16416C 8024390C 3C028016 */  lui       $v0, %hi(gUIPanels)
-/* 164170 80243910 24429D50 */  addiu     $v0, $v0, %lo(gUIPanels)
+/* 16416C 8024390C 3C028016 */  lui       $v0, %hi(gWindows)
+/* 164170 80243910 24429D50 */  addiu     $v0, $v0, %lo(gWindows)
 /* 164174 80243914 00042140 */  sll       $a0, $a0, 5
 /* 164178 80243918 00824021 */  addu      $t0, $a0, $v0
 /* 16417C 8024391C 81050003 */  lb        $a1, 3($t0)

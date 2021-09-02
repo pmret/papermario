@@ -118,8 +118,11 @@ enum {
 #define EVT_LIMIT        -250000000 // TODO better name
 #define MAKE_ENTITY_END 0x80000000
 
+
 #define EVT_STORY_PROGRESS EVT_SAVE_VAR(0)
+#define EVT_SAVE_FLAG_PLACES_VISITED EVT_SAVE_FLAG(0x7AA)
 #define EVT_WORLD_LOCATION EVT_SAVE_VAR(425)
+
 
 /* Return type of evt_execute_next_command */
 #define EVT_CONTINUE 0   /* Continue to next command */

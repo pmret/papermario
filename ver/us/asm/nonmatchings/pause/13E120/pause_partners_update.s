@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80270048
+.double 0.3
+
+.section .text
+
 glabel pause_partners_update
 /* 13FAE4 8024C7A4 3C028027 */  lui       $v0, %hi(D_802706A0)
 /* 13FAE8 8024C7A8 8C4206A0 */  lw        $v0, %lo(D_802706A0)($v0)

@@ -2031,32 +2031,91 @@ typedef struct {
     /* 0x08 */ s32 count;
 } PauseItemPage; // size = 0xC
 
-typedef struct {
-    /* 0x00 */ f32 unk_00;
-    /* 0x04 */ char unk_04[4];
-    /* 0x08 */ s8* unk_08;
-    /* 0x0C */ void* fpInit;
-    /* 0x10 */ void* fpHandleInput;
-    /* 0x14 */ void* fpUpdate;
-    /* 0x18 */ void* fpCleanup;
-} MenuTab; // size = 0x1C
+typedef struct PauseMapSpace {
+    /* 0x00 */ Vec2s pos;
+    /* 0x04 */ u8 parent;
+    /* 0x05 */ u8 pathLength;
+    /* 0x06 */ s16 unk_06; // always 0
+    /* 0x08 */ Vec2b* path;
+    /* 0x0C */ s32 afterRequirement;
+    /* 0x10 */ s32 id;
+} PauseMapSpace; // size = 0x14
+
+typedef struct MenuPanel {
+    /* 0x00 */ s8 initialized; //?
+    /* 0x01 */ s8 col; // might be backwards
+    /* 0x02 */ s8 row; // might be backwards
+    /* 0x03 */ s8 selected;
+    /* 0x04 */ s8 page; // filemenu: 0 = select, 1 = delete, 3 = copy from, 4 = copy to, all else = save
+    /* 0x05 */ s8 numCols;
+    /* 0x06 */ s8 numRows;
+    /* 0x07 */ char unk_07;
+    /* 0x08 */ s8* gridData; // user value at each 2D grid point
+    /* 0x0C */ UNK_FUN_PTR(fpInit);
+    /* 0x10 */ UNK_FUN_PTR(fpHandleInput);
+    /* 0x14 */ UNK_FUN_PTR(fpUpdate);
+    /* 0x18 */ UNK_FUN_PTR(fpCleanup);
+} MenuPanel;
+
+typedef struct WindowBackground {
+    /* 0x00 */ s32* imgData;
+    /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
+    /* 0x05 */ s8 width;
+    /* 0x06 */ s8 height;
+    /* 0x07 */ char unk_07[4];
+    /* 0x0B */ s8 size;
+} WindowBackground; // size = 0xC
+
+typedef struct WindowCorners {
+    /* 0x00 */ s32* imgData;
+    /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
+    /* 0x05 */ Vec2b size1;
+    /* 0x07 */ Vec2b size2;
+    /* 0x09 */ Vec2b size3;
+    /* 0x0B */ Vec2b size4;
+    /* 0x0D */ char unk_0D[3];
+} WindowCorners; // size = 0x10
+
+typedef struct WindowStyleCustom {
+    /* 0x00 */ WindowBackground background;
+    /* 0x0C */ WindowCorners corners;
+    /* 0x1C */ char unk_1C[0x4];
+    /* 0x20 */ s32 opaqueCombineMode[2]; // used when alpha == 255
+    /* 0x28 */ s32 transparentCombineMode[2]; // used when alpha < 255
+    /* 0x30 */ s8 color1[4];
+    /* 0x34 */ s8 color2[4];
+} WindowStyleCustom; // size = 0x38;
+
+typedef struct MenuWindowBP {
+    /* 0x00 */ s8 windowID;
+    /* 0x01 */ char unk_01;
+    /* 0x02 */ Vec2s pos;
+    /* 0x06 */ s16 height;
+    /* 0x08 */ s16 width; // switch? ^
+    /* 0x0A */ char unk_0A[2];
+    /* 0x0C */ UNK_FUN_PTR(fpDrawContents);
+    /* 0x10 */ MenuPanel* tab;
+    /* 0x14 */ s32 parentID;
+    /* 0x18 */ UNK_FUN_PTR(fpUpdate);
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ WindowStyleCustom* style;
+} MenuWindowBP; // size = 0x24;
 
 typedef struct {
     /* 0x00 */ s8 flags;
-    /* 0x01 */ char unk_01;
+    /* 0x01 */ s8 panelID; // ?
     /* 0x02 */ s8 unk_02; // related to heirarchy somehow - sibling? group?
     /* 0x03 */ s8 parent; // ?
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ UNK_PTR unk_08;
-    /* 0x0C */ s16 posX;
-    /* 0x0E */ s16 posY;
+    /* 0x04 */ UNK_FUN_PTR(fpUpdate);
+    /* 0x08 */ UNK_FUN_PTR(fpPending);
+    /* 0x0C */ Vec2s pos;
     /* 0x10 */ s16 width;
     /* 0x12 */ s16 height;
-    /* 0x14 */ UNK_PTR fpDrawContents;
-    /* 0x18 */ s32 unk_18; // MenuTab pointer for pause menu tabs
-    /* 0x1C */ u8 unk_1C;
+    /* 0x14 */ UNK_FUN_PTR(fpDrawContents);
+    /* 0x18 */ s32 drawContentsArg0;
+    /* 0x1C */ u8 updateCounter;
     /* 0x1D */ char unk_1D[3];
-} UIPanel; // size = 0x20
+} Window; // size = 0x20
 
 // BEGIN ENTITY-SPECIFIC STRUCTS
 

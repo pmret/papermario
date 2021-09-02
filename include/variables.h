@@ -166,7 +166,7 @@ extern s8 D_800A0B94;
 extern s16 D_800A0BB8;
 
 
-extern UIPanel gUIPanels[64];
+extern Window gWindows[64];
 
 extern s32 D_802A3838;
 
@@ -176,6 +176,7 @@ extern s32 gPauseMenuPressedButtons;
 extern s32 gPauseMenuCurrentDescString;
 extern s32* gPauseMenuCurrentDescIconScript;
 extern s32 D_802700D0;
+
 extern s8 gPauseMenuCurrentTab;
 extern char D_802700D[8];
 extern s32 D_802700E0;
@@ -183,7 +184,7 @@ extern s32 gPauseMenuCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
 extern s32 gPauseMenuStrings[348];
 extern s32 gPauseMenuIconScripts[8];
-extern MenuTab gPauseMenuTabs[7];
+extern MenuPanel gPauseMenuPanels[7];
 extern s32 gPauseMenuCursorPosX;
 extern s32 gPauseMenuCursorPosY;
 extern s32 gPauseMenuCursorOpacity;
@@ -192,7 +193,22 @@ extern s32 gPauseMenuTargetPosY;
 extern s32 gPauseMenuCursorTargetOpacity;
 extern u8 gPauseMenuTextScrollInterpEasingLUT[16];
 extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
+extern s32 D_80270700[1];
+extern f32 pause_map_cameraX;
+extern f32 pause_map_cameraY;
+extern s32 pause_map_marioX;
+extern s32 pause_map_marioY;
+extern f32 pause_map_targetX;
+extern f32 pause_map_targetY;
+extern s32 pause_map_cursorCurrentOption;
+extern s32 pause_map_cursorCurrentOptionCopy;
+extern s32 pause_map_spacesInSnapRange;
 
+
+extern HudElementAnim* D_8024FA30[1];
+
+extern PauseMapSpace pause_map_spaces[34];
+extern MenuWindowBP pause_map_windowBlueprints[7];
 // Badges
 extern s32 gBadgeMenuCurrentScrollPos;
 extern s32 gBadgeMenuTargetScrollPos;

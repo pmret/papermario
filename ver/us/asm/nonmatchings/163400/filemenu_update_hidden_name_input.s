@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel filemenu_update_hidden_name_input
-/* 163E88 80243628 3C028016 */  lui       $v0, %hi(gUIPanels)
-/* 163E8C 8024362C 24429D50 */  addiu     $v0, $v0, %lo(gUIPanels)
+/* 163E88 80243628 3C028016 */  lui       $v0, %hi(gWindows)
+/* 163E8C 8024362C 24429D50 */  addiu     $v0, $v0, %lo(gWindows)
 /* 163E90 80243630 00042140 */  sll       $a0, $a0, 5
 /* 163E94 80243634 00822021 */  addu      $a0, $a0, $v0
 /* 163E98 80243638 9083001C */  lbu       $v1, 0x1c($a0)

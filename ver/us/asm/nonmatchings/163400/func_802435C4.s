@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_802435C4
-/* 163E24 802435C4 3C028016 */  lui       $v0, %hi(gUIPanels)
-/* 163E28 802435C8 24429D50 */  addiu     $v0, $v0, %lo(gUIPanels)
+/* 163E24 802435C4 3C028016 */  lui       $v0, %hi(gWindows)
+/* 163E28 802435C8 24429D50 */  addiu     $v0, $v0, %lo(gWindows)
 /* 163E2C 802435CC 00042140 */  sll       $a0, $a0, 5
 /* 163E30 802435D0 00822021 */  addu      $a0, $a0, $v0
 /* 163E34 802435D4 9083001C */  lbu       $v1, 0x1c($a0)

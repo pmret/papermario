@@ -9,8 +9,8 @@ glabel D_80151240
 .section .text
 
 glabel basic_window_update
-/* DDB74 80147474 3C028016 */  lui       $v0, %hi(gUIPanels)
-/* DDB78 80147478 24429D50 */  addiu     $v0, $v0, %lo(gUIPanels)
+/* DDB74 80147474 3C028016 */  lui       $v0, %hi(gWindows)
+/* DDB78 80147478 24429D50 */  addiu     $v0, $v0, %lo(gWindows)
 /* DDB7C 8014747C 00042140 */  sll       $a0, $a0, 5
 /* DDB80 80147480 00822021 */  addu      $a0, $a0, $v0
 /* DDB84 80147484 8FA70014 */  lw        $a3, 0x14($sp)

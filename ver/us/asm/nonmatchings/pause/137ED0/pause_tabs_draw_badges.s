@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_8026FF88
+.double 255.0
+
+.section .text
+
 glabel pause_tabs_draw_badges
 /* 138000 80244CC0 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 138004 80244CC4 AFB10014 */  sw        $s1, 0x14($sp)
