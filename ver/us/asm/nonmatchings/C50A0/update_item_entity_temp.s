@@ -527,8 +527,8 @@ glabel L80135B24_CC224
 /* CC540 80135E40 0804D8DF */  j         L8013637C_CCA7C
 /* CC544 80135E44 A222001A */   sb       $v0, 0x1a($s1)
 glabel L80135E48_CC548
-/* CC548 80135E48 3C038016 */  lui       $v1, %hi(gUIPanels)
-/* CC54C 80135E4C 24639D50 */  addiu     $v1, $v1, %lo(gUIPanels)
+/* CC548 80135E48 3C038016 */  lui       $v1, %hi(gWindows)
+/* CC54C 80135E4C 24639D50 */  addiu     $v1, $v1, %lo(gWindows)
 /* CC550 80135E50 90620180 */  lbu       $v0, 0x180($v1)
 /* CC554 80135E54 30420008 */  andi      $v0, $v0, 8
 /* CC558 80135E58 14400148 */  bnez      $v0, L8013637C_CCA7C
@@ -718,8 +718,8 @@ glabel L80135FE8_CC6E8
 /* CC804 80136104 0804D8DF */  j         L8013637C_CCA7C
 /* CC808 80136108 A222001A */   sb       $v0, 0x1a($s1)
 glabel L8013610C_CC80C
-/* CC80C 8013610C 3C038016 */  lui       $v1, %hi(gUIPanels)
-/* CC810 80136110 24639D50 */  addiu     $v1, $v1, %lo(gUIPanels)
+/* CC80C 8013610C 3C038016 */  lui       $v1, %hi(gWindows)
+/* CC810 80136110 24639D50 */  addiu     $v1, $v1, %lo(gWindows)
 /* CC814 80136114 90620180 */  lbu       $v0, 0x180($v1)
 /* CC818 80136118 30420008 */  andi      $v0, $v0, 8
 /* CC81C 8013611C 14400097 */  bnez      $v0, L8013637C_CCA7C
@@ -837,8 +837,8 @@ glabel L8013629C_CC99C
 /* CC9C8 801362C8 0804D8DF */  j         L8013637C_CCA7C
 /* CC9CC 801362CC A222001A */   sb       $v0, 0x1a($s1)
 glabel L801362D0_CC9D0
-/* CC9D0 801362D0 3C038016 */  lui       $v1, %hi(gUIPanels)
-/* CC9D4 801362D4 24639D50 */  addiu     $v1, $v1, %lo(gUIPanels)
+/* CC9D0 801362D0 3C038016 */  lui       $v1, %hi(gWindows)
+/* CC9D4 801362D4 24639D50 */  addiu     $v1, $v1, %lo(gWindows)
 /* CC9D8 801362D8 90620180 */  lbu       $v0, 0x180($v1)
 /* CC9DC 801362DC 30420008 */  andi      $v0, $v0, 8
 /* CC9E0 801362E0 14400026 */  bnez      $v0, L8013637C_CCA7C

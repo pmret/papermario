@@ -360,11 +360,11 @@ void state_step_exit_file_select(void) {
         case 0:
             flagSum = 0;
 
-            for (i = 44; i < ARRAY_COUNT(gUIPanels); i++) {
-                UIPanel* panel = &gUIPanels[i];
+            for (i = 44; i < ARRAY_COUNT(gWindows); i++) {
+                Window* window = &gWindows[i];
 
-                if (panel->parent == 44 || panel->parent == -1) {
-                    flagSum += panel->flags & 8;
+                if (window->parent == 44 || window->parent == -1) {
+                    flagSum += window->flags & 8;
                 }
             }
 

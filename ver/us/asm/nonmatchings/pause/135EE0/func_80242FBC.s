@@ -9,8 +9,8 @@ glabel func_80242FBC
 /* 13630C 80242FCC AC620000 */  sw        $v0, ($v1)
 /* 136310 80242FD0 24020050 */  addiu     $v0, $zero, 0x50
 /* 136314 80242FD4 ACA20000 */  sw        $v0, ($a1)
-/* 136318 80242FD8 3C028016 */  lui       $v0, %hi(gUIPanels)
-/* 13631C 80242FDC 24429D50 */  addiu     $v0, $v0, %lo(gUIPanels)
+/* 136318 80242FD8 3C028016 */  lui       $v0, %hi(gWindows)
+/* 13631C 80242FDC 24429D50 */  addiu     $v0, $v0, %lo(gWindows)
 /* 136320 80242FE0 00822021 */  addu      $a0, $a0, $v0
 /* 136324 80242FE4 90820000 */  lbu       $v0, ($a0)
 /* 136328 80242FE8 304200F3 */  andi      $v0, $v0, 0xf3

@@ -9,8 +9,8 @@ glabel D_80151248
 .section .text
 
 glabel basic_hidden_window_update
-/* DDC74 80147574 3C028016 */  lui       $v0, %hi(gUIPanels)
-/* DDC78 80147578 24429D50 */  addiu     $v0, $v0, %lo(gUIPanels)
+/* DDC74 80147574 3C028016 */  lui       $v0, %hi(gWindows)
+/* DDC78 80147578 24429D50 */  addiu     $v0, $v0, %lo(gWindows)
 /* DDC7C 8014757C 00042140 */  sll       $a0, $a0, 5
 /* DDC80 80147580 00822021 */  addu      $a0, $a0, $v0
 /* DDC84 80147584 9086001C */  lbu       $a2, 0x1c($a0)

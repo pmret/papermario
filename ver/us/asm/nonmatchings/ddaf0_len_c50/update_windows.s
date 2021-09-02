@@ -3,8 +3,8 @@
 
 glabel update_windows
 /* DDB14 80147414 0000302D */  daddu     $a2, $zero, $zero
-/* DDB18 80147418 3C058016 */  lui       $a1, %hi(gUIPanels)
-/* DDB1C 8014741C 24A59D50 */  addiu     $a1, $a1, %lo(gUIPanels)
+/* DDB18 80147418 3C058016 */  lui       $a1, %hi(gWindows)
+/* DDB1C 8014741C 24A59D50 */  addiu     $a1, $a1, %lo(gWindows)
 /* DDB20 80147420 24A4001C */  addiu     $a0, $a1, 0x1c
 .L80147424:
 /* DDB24 80147424 90A30000 */  lbu       $v1, ($a1)

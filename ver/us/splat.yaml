@@ -949,7 +949,7 @@ segments:
     - [0x13CAF0, c, pause_items]
     - [0x13E120, c]
     - [0x13FD40, c]
-    - [0x140C70, c]
+    - [0x140C70, c, pause_map]
     - [0x1421C0, c]
     - [0x1422A0, data]
     - [0x1443F0, ci8,        world_map, 320, 320]
@@ -981,7 +981,8 @@ segments:
     - [0x1617F0, palette,    prompt_check_abilities]
     - [0x1619F0, ci4,        stats_bar, 160, 8]
     - [0x161C70, palette,    stats_bar]
-    - [0x161E70, bin]
+    - [0x161E70, data]
+    - [0x1632A0]
   - type: code
     start: 0x163400
     vram: 0x80242BA0

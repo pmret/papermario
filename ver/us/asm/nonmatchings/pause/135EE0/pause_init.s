@@ -44,8 +44,8 @@ glabel pause_init
 /* 137434 802440F4 3C048025 */  lui       $a0, %hi(D_8024F114)
 /* 137438 802440F8 2484F114 */  addiu     $a0, $a0, %lo(D_8024F114)
 /* 13743C 802440FC 24050004 */  addiu     $a1, $zero, 4
-/* 137440 80244100 3C108025 */  lui       $s0, %hi(gPauseMenuTabs)
-/* 137444 80244104 2610EF80 */  addiu     $s0, $s0, %lo(gPauseMenuTabs)
+/* 137440 80244100 3C108025 */  lui       $s0, %hi(gPauseMenuPanels)
+/* 137444 80244104 2610EF80 */  addiu     $s0, $s0, %lo(gPauseMenuPanels)
 /* 137448 80244108 3C028027 */  lui       $v0, %hi(gPauseMenuCommonIconIDs)
 /* 13744C 8024410C 8C4200E8 */  lw        $v0, %lo(gPauseMenuCommonIconIDs)($v0)
 /* 137450 80244110 3C018027 */  lui       $at, %hi(D_802700D0)
@@ -81,8 +81,8 @@ glabel pause_init
 /* 1374C0 80244180 26100004 */   addiu    $s0, $s0, 4
 /* 1374C4 80244184 241400E1 */  addiu     $s4, $zero, 0xe1
 /* 1374C8 80244188 24110006 */  addiu     $s1, $zero, 6
-/* 1374CC 8024418C 3C158016 */  lui       $s5, %hi(gUIPanels)
-/* 1374D0 80244190 26B59D50 */  addiu     $s5, $s5, %lo(gUIPanels)
+/* 1374CC 8024418C 3C158016 */  lui       $s5, %hi(gWindows)
+/* 1374D0 80244190 26B59D50 */  addiu     $s5, $s5, %lo(gWindows)
 /* 1374D4 80244194 241303C0 */  addiu     $s3, $zero, 0x3c0
 /* 1374D8 80244198 2412001E */  addiu     $s2, $zero, 0x1e
 /* 1374DC 8024419C 3C108025 */  lui       $s0, %hi(D_8024EF98)
@@ -107,8 +107,8 @@ glabel pause_init
 /* 13751C 802441DC 2631FFFF */  addiu     $s1, $s1, -1
 /* 137520 802441E0 1E20FFF0 */  bgtz      $s1, .L802441A4
 /* 137524 802441E4 2610FFFC */   addiu    $s0, $s0, -4
-/* 137528 802441E8 3C028025 */  lui       $v0, %hi(gPauseMenuTabs)
-/* 13752C 802441EC 8C42EF80 */  lw        $v0, %lo(gPauseMenuTabs)($v0)
+/* 137528 802441E8 3C028025 */  lui       $v0, %hi(gPauseMenuPanels)
+/* 13752C 802441EC 8C42EF80 */  lw        $v0, %lo(gPauseMenuPanels)($v0)
 /* 137530 802441F0 0000202D */  daddu     $a0, $zero, $zero
 /* 137534 802441F4 80420001 */  lb        $v0, 1($v0)
 /* 137538 802441F8 3C05F840 */  lui       $a1, 0xf840

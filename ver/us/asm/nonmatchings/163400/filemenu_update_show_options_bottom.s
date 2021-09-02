@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel filemenu_update_show_options_bottom
-/* 163D3C 802434DC 3C028016 */  lui       $v0, %hi(gUIPanels)
-/* 163D40 802434E0 24429D50 */  addiu     $v0, $v0, %lo(gUIPanels)
+/* 163D3C 802434DC 3C028016 */  lui       $v0, %hi(gWindows)
+/* 163D40 802434E0 24429D50 */  addiu     $v0, $v0, %lo(gWindows)
 /* 163D44 802434E4 00042140 */  sll       $a0, $a0, 5
 /* 163D48 802434E8 00822021 */  addu      $a0, $a0, $v0
 /* 163D4C 802434EC 9083001C */  lbu       $v1, 0x1c($a0)
