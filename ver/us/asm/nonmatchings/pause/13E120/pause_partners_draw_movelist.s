@@ -125,7 +125,7 @@ glabel pause_partners_draw_movelist
 /* 13F238 8024BEF8 2408000A */  addiu     $t0, $zero, 0xa
 /* 13F23C 8024BEFC AFA80010 */  sw        $t0, 0x10($sp)
 /* 13F240 8024BF00 24080001 */  addiu     $t0, $zero, 1
-/* 13F244 8024BF04 0C04993B */  jal       draw_string
+/* 13F244 8024BF04 0C04993B */  jal       draw_msg
 /* 13F248 8024BF08 AFA80014 */   sw       $t0, 0x14($sp)
 /* 13F24C 8024BF0C 26500004 */  addiu     $s0, $s2, 4
 /* 13F250 8024BF10 00108080 */  sll       $s0, $s0, 2

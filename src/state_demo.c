@@ -11,7 +11,7 @@ typedef struct DemoSceneData {
 } DemoSceneData; // size = 0xC;
 
 // rodata for below map names
-// the compiler deduplicates the two identical map name strings, but it's removing the wrong one
+// the compiler deduplicates the two identical map name msgs, but it's removing the wrong one
 const char D_800983F8[] = {
     "end\0kkj_26\0\0arn_08\0\0kkj_11\0\0nok_02\0\0mac_03\0\0kzn_02\0\0mac_00\0\0jan_04\0\0trd_09\0\0tik_03\0\0isk_04\0\0nok_12\0\0"
 };
@@ -39,7 +39,7 @@ DemoSceneData D_80077AE0[20] = {
     { .unk_0 = 0, .entryID = 0, .unk_4 = 0, .partnerID = PARTNER_NONE, .unk_6 = 0x00, },
 };
 
-char versionString[] = "Prg Ver.00/12/05 16:54";
+char versionMsg[] = "Prg Ver.00/12/05 16:54";
 
 void state_init_demo(void) {
     if (gGameStatusPtr->demoState == 0) {

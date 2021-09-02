@@ -5,19 +5,19 @@ INCLUDE_ASM(void, "28910_len_5090", func_8004D510, BGMPlayer* arg0);
 // Return values are being pushed into v0 in the wrong place
 // May depend on data decomp
 #ifdef NON_MATCHING
-BGMPlayer* snd_get_player_with_song_name(s32 songString) {
+BGMPlayer* snd_get_player_with_song_name(s32 songMsg) {
     UnkAl19E0* temp_v1 = D_8009A664->data;
 
-    if (songString == temp_v1->currentTrackData[0][2]) {
+    if (songMsg == temp_v1->currentTrackData[0][2]) {
         return D_8009A664;
     }
-    if (songString == temp_v1->currentTrackData[1][2]) {
+    if (songMsg == temp_v1->currentTrackData[1][2]) {
         return D_8009A5FC;
     }
     return NULL;
 }
 #else
-INCLUDE_ASM(BGMPlayer*, "28910_len_5090", snd_get_player_with_song_name, s32 songString);
+INCLUDE_ASM(BGMPlayer*, "28910_len_5090", snd_get_player_with_song_name, s32 songMsg);
 #endif
 
 INCLUDE_ASM(s32, "28910_len_5090", snd_dispatch_bgm_player_event);

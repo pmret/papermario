@@ -22,7 +22,7 @@ glabel func_802400E4_AF7A34
 /* AF7A78 80240128 00108140 */  sll       $s0, $s0, 5
 /* AF7A7C 8024012C 02028021 */  addu      $s0, $s0, $v0
 /* AF7A80 80240130 8E040000 */  lw        $a0, ($s0)
-/* AF7A84 80240134 0C04991D */  jal       get_string_width
+/* AF7A84 80240134 0C04991D */  jal       get_msg_width
 /* AF7A88 80240138 0000282D */   daddu    $a1, $zero, $zero
 /* AF7A8C 8024013C 00021043 */  sra       $v0, $v0, 1
 /* AF7A90 80240140 2442FFC4 */  addiu     $v0, $v0, -0x3c
@@ -31,7 +31,7 @@ glabel func_802400E4_AF7A34
 /* AF7A9C 8024014C AFA00010 */  sw        $zero, 0x10($sp)
 /* AF7AA0 80240150 AFA00014 */  sw        $zero, 0x14($sp)
 /* AF7AA4 80240154 8E040000 */  lw        $a0, ($s0)
-/* AF7AA8 80240158 0C04993B */  jal       draw_string
+/* AF7AA8 80240158 0C04993B */  jal       draw_msg
 /* AF7AAC 8024015C 240700FF */   addiu    $a3, $zero, 0xff
 /* AF7AB0 80240160 8FBF0024 */  lw        $ra, 0x24($sp)
 /* AF7AB4 80240164 8FB20020 */  lw        $s2, 0x20($sp)

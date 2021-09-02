@@ -369,28 +369,28 @@ void show_first_strike_message(void) {
             switch (currentEncounter->hitType) {
                 case 2:
                 case 4:
-                    width = get_string_width(0x1D00AC, 0) + 24;
+                    width = get_msg_width(0x1D00AC, 0) + 24;
                     posX = (xOffset + screenWidthHalf) - (width / 2);
                     draw_box(0, 0x14, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
                              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-                    draw_string(0x1D00AC, posX + 11, 75, 0xFF, 0xA, 0);
+                    draw_msg(0x1D00AC, posX + 11, 75, 0xFF, 0xA, 0);
                     break;
                 case 6:
-                    width = get_string_width(0x1D00AD, 0) + 24;
+                    width = get_msg_width(0x1D00AD, 0) + 24;
                     posX = (xOffset + screenWidthHalf) - (width / 2);
                     draw_box(0, 0x14, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
                              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-                    draw_string(0x1D00AD, posX + 11, 75, 0xFF, 0xA, 0);
+                    draw_msg(0x1D00AD, posX + 11, 75, 0xFF, 0xA, 0);
                     break;
             }
             break;
         case FIRST_STRIKE_ENEMY:
             if (!is_ability_active(ABILITY_CHILL_OUT)) {
-                width = get_string_width(0x1D00AE, 0) + 24;
+                width = get_msg_width(0x1D00AE, 0) + 24;
                 posX = (xOffset + screenWidthHalf) - (width / 2);
                 draw_box(0, 4, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
                          SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-                draw_string(0x1D00AE, posX + 11, 75, 0xFF, 0xA, 0);
+                draw_msg(0x1D00AE, posX + 11, 75, 0xFF, 0xA, 0);
             }
             break;
     }

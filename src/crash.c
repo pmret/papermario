@@ -63,7 +63,7 @@ INCLUDE_ASM(s32, "crash", func_8002C054);
 
 INCLUDE_ASM(s32, "crash", func_8002C1D4);
 
-INCLUDE_ASM(s32, "crash", crash_printf_string);
+INCLUDE_ASM(s32, "crash", crash_printf_msg);
 
 INCLUDE_ASM(s32, "crash", crash_print_fpr);
 

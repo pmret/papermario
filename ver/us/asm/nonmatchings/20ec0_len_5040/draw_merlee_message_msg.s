@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel draw_merlee_message_string
+glabel draw_merlee_message_msg
 /* 2124C 80045E4C 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 21250 80045E50 AFBF0024 */  sw        $ra, 0x24($sp)
 /* 21254 80045E54 AFB20020 */  sw        $s2, 0x20($sp)
@@ -14,7 +14,7 @@ glabel draw_merlee_message_string
 /* 21270 80045E70 02429021 */  addu      $s2, $s2, $v0
 /* 21274 80045E74 8E528168 */  lw        $s2, %lo(D_80078168)($s2)
 /* 21278 80045E78 24B1000F */  addiu     $s1, $a1, 0xf
-/* 2127C 80045E7C 0C04992C */  jal       get_string_lines
+/* 2127C 80045E7C 0C04992C */  jal       get_msg_lines
 /* 21280 80045E80 0240202D */   daddu    $a0, $s2, $zero
 /* 21284 80045E84 0240202D */  daddu     $a0, $s2, $zero
 /* 21288 80045E88 2442FFFF */  addiu     $v0, $v0, -1
@@ -27,7 +27,7 @@ glabel draw_merlee_message_string
 /* 212A4 80045EA4 240700FF */  addiu     $a3, $zero, 0xff
 /* 212A8 80045EA8 AFA20010 */  sw        $v0, 0x10($sp)
 /* 212AC 80045EAC AFA00014 */  sw        $zero, 0x14($sp)
-/* 212B0 80045EB0 0C04993B */  jal       draw_string
+/* 212B0 80045EB0 0C04993B */  jal       draw_msg
 /* 212B4 80045EB4 02063021 */   addu     $a2, $s0, $a2
 /* 212B8 80045EB8 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 212BC 80045EBC 8FB20020 */  lw        $s2, 0x20($sp)

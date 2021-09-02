@@ -4,11 +4,11 @@ extern s32 D_8026F8D4[];
 
 // Needs .data section
 #ifdef NON_MATCHING
-s32 pause_get_menu_string(s32 index) {
-    return gPauseMenuStrings[index];
+s32 pause_get_menu_msg(s32 index) {
+    return gPauseMenuMsgs[index];
 }
 #else
-INCLUDE_ASM(s32, "pause/1421C0", pause_get_menu_string);
+INCLUDE_ASM(s32, "pause/1421C0", pause_get_menu_msg);
 #endif
 
 void pause_draw_menu_label(s32 index, s32 x, s32 y) {

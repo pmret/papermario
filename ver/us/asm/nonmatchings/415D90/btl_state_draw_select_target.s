@@ -283,7 +283,7 @@ glabel btl_state_draw_select_target
 .L802AB0EC:
 /* 41FE7C 802AB0EC 348400C5 */  ori       $a0, $a0, 0xc5
 .L802AB0F0:
-/* 41FE80 802AB0F0 0C04991D */  jal       get_string_width
+/* 41FE80 802AB0F0 0C04991D */  jal       get_msg_width
 /* 41FE84 802AB0F4 0000282D */   daddu    $a1, $zero, $zero
 /* 41FE88 802AB0F8 2442000A */  addiu     $v0, $v0, 0xa
 /* 41FE8C 802AB0FC 0000202D */  daddu     $a0, $zero, $zero
@@ -420,7 +420,7 @@ glabel btl_state_draw_select_target
 .L802AB2E8:
 /* 420078 802AB2E8 01052821 */  addu      $a1, $t0, $a1
 .L802AB2EC:
-/* 42007C 802AB2EC 0C04993B */  jal       draw_string
+/* 42007C 802AB2EC 0C04993B */  jal       draw_msg
 /* 420080 802AB2F0 00000000 */   nop
 .L802AB2F4:
 /* 420084 802AB2F4 8FBF008C */  lw        $ra, 0x8c($sp)

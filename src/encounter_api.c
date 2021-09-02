@@ -552,12 +552,12 @@ ApiStatus func_80045900(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetTattleString(Evt* script, s32 isInitialCall) {
+ApiStatus SetTattleMsg(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     NpcID enemyId = evt_get_variable(script, *args++);
-    u32 tattleString = evt_get_variable(script, *args);
+    u32 tattleMsg = evt_get_variable(script, *args);
     Enemy* npc = get_enemy(enemyId);
 
-    npc->tattleString = tattleString;
+    npc->tattleMsg = tattleMsg;
     return ApiStatus_DONE2;
 }

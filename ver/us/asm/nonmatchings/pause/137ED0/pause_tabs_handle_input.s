@@ -153,13 +153,13 @@ glabel pause_tabs_handle_input
 /* 1388C4 80245584 00021080 */  sll       $v0, $v0, 2
 /* 1388C8 80245588 3C048025 */  lui       $a0, %hi(D_8024F2E8)
 /* 1388CC 8024558C 00822021 */  addu      $a0, $a0, $v0
-/* 1388D0 80245590 0C093BA0 */  jal       pause_get_menu_string
+/* 1388D0 80245590 0C093BA0 */  jal       pause_get_menu_msg
 /* 1388D4 80245594 8C84F2E8 */   lw       $a0, %lo(D_8024F2E8)($a0)
 /* 1388D8 80245598 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 1388DC 8024559C 8FB10014 */  lw        $s1, 0x14($sp)
 /* 1388E0 802455A0 8FB00010 */  lw        $s0, 0x10($sp)
-/* 1388E4 802455A4 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescString)
-/* 1388E8 802455A8 AC2200C8 */  sw        $v0, %lo(gPauseMenuCurrentDescString)($at)
+/* 1388E4 802455A4 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescMsg)
+/* 1388E8 802455A8 AC2200C8 */  sw        $v0, %lo(gPauseMenuCurrentDescMsg)($at)
 /* 1388EC 802455AC 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescIconScript)
 /* 1388F0 802455B0 AC2000CC */  sw        $zero, %lo(gPauseMenuCurrentDescIconScript)($at)
 /* 1388F4 802455B4 03E00008 */  jr        $ra

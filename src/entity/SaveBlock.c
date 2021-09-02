@@ -51,7 +51,7 @@ void entity_SaveBlock_save_data(void) {
 void entity_SaveBlock_show_tutorial_message(Entity* entity) {
     if (!get_global_flag(EVT_SAVE_FLAG(95))) {
         D_802EB390 = FALSE;
-        msg_get_printer_for_string(0x1D0000, &D_802EB390);
+        msg_get_printer_for_msg(0x1D0000, &D_802EB390);
         set_global_flag(EVT_SAVE_FLAG(95));
         return;
     }
@@ -69,12 +69,12 @@ void entity_SaveBlock_wait_for_close_tutorial(Entity* entity) {
 void entity_SaveBlock_show_choice_message(void) {
     D_802EB390 = FALSE;
     D_802EB394 = FALSE;
-    D_802EB39C = msg_get_printer_for_string(0x1D0004, &D_802EB394);
-    D_802EB398 = msg_get_printer_for_string(0x1E000A, &D_802EB390);
+    D_802EB39C = msg_get_printer_for_msg(0x1D0004, &D_802EB394);
+    D_802EB398 = msg_get_printer_for_msg(0x1E000A, &D_802EB390);
 }
 
 void entity_SaveBlock_show_result_message(void) {
-    msg_printer_load_string(0x1D0005, D_802EB39C);
+    msg_printer_load_msg(0x1D0005, D_802EB39C);
     sfx_play_sound(0x10);
 }
 

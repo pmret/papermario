@@ -155,7 +155,7 @@ glabel func_80240000_E15D80
 /* E15F9C 8024021C 240700FF */  addiu     $a3, $zero, 0xff
 /* E15FA0 80240220 AFA00010 */  sw        $zero, 0x10($sp)
 /* E15FA4 80240224 AFA00014 */  sw        $zero, 0x14($sp)
-/* E15FA8 80240228 0C04993B */  jal       draw_string
+/* E15FA8 80240228 0C04993B */  jal       draw_msg
 /* E15FAC 8024022C 24A5002A */   addiu    $a1, $a1, 0x2a
 /* E15FB0 80240230 2406002B */  addiu     $a2, $zero, 0x2b
 /* E15FB4 80240234 24070001 */  addiu     $a3, $zero, 1
@@ -274,7 +274,7 @@ glabel func_80240000_E15D80
 /* E16174 802403F4 240700FF */  addiu     $a3, $zero, 0xff
 /* E16178 802403F8 AFA00010 */  sw        $zero, 0x10($sp)
 /* E1617C 802403FC AFA00014 */  sw        $zero, 0x14($sp)
-/* E16180 80240400 0C04993B */  jal       draw_string
+/* E16180 80240400 0C04993B */  jal       draw_msg
 /* E16184 80240404 24A5001E */   addiu    $a1, $a1, 0x1e
 /* E16188 80240408 8FBF006C */  lw        $ra, 0x6c($sp)
 /* E1618C 8024040C 8FB60068 */  lw        $s6, 0x68($sp)
