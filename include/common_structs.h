@@ -2037,7 +2037,7 @@ typedef struct PauseMapSpace {
     /* 0x05 */ u8 pathLength;
     /* 0x06 */ s16 unk_06; // always 0
     /* 0x08 */ Vec2b* path;
-    /* 0x0C */ s32 description;
+    /* 0x0C */ s32 afterRequirement;
     /* 0x10 */ s32 id;
 } PauseMapSpace; // size = 0x14
 
