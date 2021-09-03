@@ -7,13 +7,13 @@ glabel load_model_textures
 /* AC32C 80115C2C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* AC330 80115C30 AFBF0010 */  sw        $ra, 0x10($sp)
 /* AC334 80115C34 80420070 */  lb        $v0, 0x70($v0)
-/* AC338 80115C38 3C038015 */  lui       $v1, %hi(D_8014B748)
-/* AC33C 80115C3C 8C63B748 */  lw        $v1, %lo(D_8014B748)($v1)
+/* AC338 80115C38 3C038015 */  lui       $v1, %hi(mdl_textureBaseAddress)
+/* AC33C 80115C3C 8C63B748 */  lw        $v1, %lo(mdl_textureBaseAddress)($v1)
 /* AC340 80115C40 0002102B */  sltu      $v0, $zero, $v0
 /* AC344 80115C44 00021440 */  sll       $v0, $v0, 0x11
 /* AC348 80115C48 00621821 */  addu      $v1, $v1, $v0
-/* AC34C 80115C4C 3C018015 */  lui       $at, %hi(D_80153368)
-/* AC350 80115C50 AC233368 */  sw        $v1, %lo(D_80153368)($at)
+/* AC34C 80115C4C 3C018015 */  lui       $at, %hi(mdl_nextTextureAddress)
+/* AC350 80115C50 AC233368 */  sw        $v1, %lo(mdl_nextTextureAddress)($at)
 /* AC354 80115C54 10800011 */  beqz      $a0, .L80115C9C
 /* AC358 80115C58 00000000 */   nop
 /* AC35C 80115C5C 10A0000F */  beqz      $a1, .L80115C9C

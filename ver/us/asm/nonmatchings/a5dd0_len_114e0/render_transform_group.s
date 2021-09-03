@@ -18,8 +18,8 @@ glabel render_transform_group
 /* AE740 80118040 94A20000 */  lhu       $v0, ($a1)
 /* AE744 80118044 90A3009C */  lbu       $v1, 0x9c($a1)
 /* AE748 80118048 30422000 */  andi      $v0, $v0, 0x2000
-/* AE74C 8011804C 3C018015 */  lui       $at, %hi(D_8015336C)
-/* AE750 80118050 A423336C */  sh        $v1, %lo(D_8015336C)($at)
+/* AE74C 8011804C 3C018015 */  lui       $at, %hi(mdl_currentTransformGroupChildIndex)
+/* AE750 80118050 A423336C */  sh        $v1, %lo(mdl_currentTransformGroupChildIndex)($at)
 /* AE754 80118054 14400009 */  bnez      $v0, .L8011807C
 /* AE758 80118058 3C03DA38 */   lui      $v1, 0xda38
 /* AE75C 8011805C 8E020000 */  lw        $v0, ($s0)
