@@ -59,7 +59,7 @@ void set_entity_model_flags(s32 idx, s32 newFlags);
 void clear_entity_model_flags(s32 idx, s32 newFlags);
 void exec_entity_model_commandlist(s32 idx);
 s32 load_entity_model(s32* cmdList);
-RenderTaskEntry* queue_render_task(RenderTask* task);
+RenderTask* queue_render_task(RenderTask* task);
 
 void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 

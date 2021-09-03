@@ -274,8 +274,8 @@ s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
 
 // TODO BSS to sort out
 extern ModelNode** gCurrentModelTreeRoot;
-extern ModelTransformGroup* wTransformGroups[4];
-extern ModelTransformGroup* bTransformGroups[4];
+extern ModelTransformGroupList wTransformGroups;
+extern ModelTransformGroupList bTransformGroups;
 
 // BSS
 static s32 B_801512B0[2];
@@ -324,11 +324,13 @@ extern s32 texPannerMainV[MAX_TEX_PANNERS];
 extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
 extern u16 D_8015336C;
-extern RenderTaskEntry* D_801533A0[];
+extern RenderTask* mdl_renderTaskLists[3];
 extern s32 mdl_renderTaskMode;
 extern s32 mdl_renderTaskCount; // num render task entries?
 
 extern s8 D_8015A578;
+
+extern RenderTask mdl_clearRenderTasks[3][0x100];
 
 void update_shadows(void);
 s32 step_entity_commandlist(Entity* entity);
@@ -1089,6 +1091,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", state_render_backUI);
 // calls renderAux and render
 INCLUDE_ASM(s32, "a5dd0_len_114e0", state_render_frontUI);
 
+void appendGfx_model(Model* model);
 INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80114B58);
@@ -1176,8 +1179,8 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
 
 void init_model_data(void) {
     if (!gGameStatusPtr->isBattle) {
-        gCurrentModels = wModelList;
-        gCurrentTransformGroups = wTransformGroups;
+        gCurrentModels = &wModelList;
+        gCurrentTransformGroups = &wTransformGroups;
         gCurrentCustomModelGfxPtr = wModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
@@ -1186,8 +1189,8 @@ void init_model_data(void) {
         D_801512F0 = &wBgRenderType;
         gCurrentFogSettings = &wFogSettings;
     } else {
-        gCurrentModels = bModelList;
-        gCurrentTransformGroups = bTransformGroups;
+        gCurrentModels = &bModelList;
+        gCurrentTransformGroups = &bTransformGroups;
         gCurrentCustomModelGfxPtr = bModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
@@ -1205,7 +1208,7 @@ void calculate_model_sizes(void) {
         Model* model = (*gCurrentModels)[i];
 
         if (model != NULL) {
-            ModelBoundingBox* prop = get_model_property(model->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
+            ModelBoundingBox* prop = (ModelBoundingBox*)get_model_property(model->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
 
             prop->centerX = (prop->maxX - prop->minX) * 0.5;
             prop->centerY = (prop->maxY - prop->minY) * 0.5;
@@ -1217,12 +1220,23 @@ void calculate_model_sizes(void) {
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_create_model);
 
+#ifdef NON_MATCHING
+void func_80116674(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
+        Model* m = (*gCurrentModels)[i];
+    }
+}
+#else
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116674);
+#endif
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116698);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", render_models);
 
+void appendGfx_model_group(Model* model);
 INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model_group, Model*);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80117D00);
@@ -1550,27 +1564,45 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_next_texture_address);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_set_all_fog_mode);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_render_tasks);
+void clear_render_tasks(void) {
+    s32 i;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_render_tasks_alt);
+    for (i = 0; i < 3; i++) {
+        mdl_renderTaskLists[i] = mdl_clearRenderTasks[i];
+    }
 
-RenderTaskEntry* queue_render_task(RenderTask* task) {
-    RenderTaskEntry* entry = D_801533A0[mdl_renderTaskMode];
+    mdl_renderTaskMode = 0;
+    mdl_renderTaskCount = 0;
+}
+
+void clear_render_tasks_alt(void) {
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        mdl_renderTaskLists[i] = mdl_clearRenderTasks[i];
+    }
+
+    mdl_renderTaskMode = 0;
+    mdl_renderTaskCount = 0;
+}
+
+RenderTask* queue_render_task(RenderTask* task) {
+    RenderTask* ret = mdl_renderTaskLists[mdl_renderTaskMode];
 
     ASSERT(mdl_renderTaskCount < 0x100);
 
-    entry = &entry[mdl_renderTaskCount++];
+    ret = &ret[mdl_renderTaskCount++];
 
-    entry->unk_00 = 1;
+    ret->renderMode = 1;
     if (task->renderMode == 0x2D) {
-        entry->unk_00 = 0x21;
+        ret->renderMode = 0x21;
     }
 
-    entry->appendGfxArg = task->appendGfxArg;
-    entry->appendGfx = task->appendGfx;
-    entry->unk_04 = D_8014C188[task->renderMode] - task->distance;
+    ret->appendGfxArg = task->appendGfxArg;
+    ret->appendGfx = task->appendGfx;
+    ret->distance = D_8014C188[task->renderMode] - task->distance;
 
-    return entry;
+    return ret;
 }
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", execute_render_tasks);

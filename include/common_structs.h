@@ -2300,13 +2300,6 @@ typedef struct TempSetZoneEnabled {
     /* 0x14 */ char unk_14[0x8];
 } TempSetZoneEnabled; // size = 0x1C
 
-typedef struct RenderTaskEntry {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ void* appendGfxArg;
-    /* 0x0C */ void (*appendGfx)(void*);
-} RenderTaskEntry; // size = 0x10
-
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 hudElements[15];
