@@ -64,8 +64,8 @@ glabel render_models
 /* AD37C 80116C7C C65A0110 */  lwc1      $f26, 0x110($s2)
 /* AD380 80116C80 E7BA0084 */  swc1      $f26, 0x84($sp)
 .L80116C84:
-/* AD384 80116C84 3C038015 */  lui       $v1, %hi(gCurrentModelListPtr)
-/* AD388 80116C88 8C6312CC */  lw        $v1, %lo(gCurrentModelListPtr)($v1)
+/* AD384 80116C84 3C038015 */  lui       $v1, %hi(gCurrentModels)
+/* AD388 80116C88 8C6312CC */  lw        $v1, %lo(gCurrentModels)($v1)
 /* AD38C 80116C8C 00131080 */  sll       $v0, $s3, 2
 /* AD390 80116C90 00431021 */  addu      $v0, $v0, $v1
 /* AD394 80116C94 8C500000 */  lw        $s0, ($v0)

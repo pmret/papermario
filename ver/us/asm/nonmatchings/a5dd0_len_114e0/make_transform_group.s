@@ -3,8 +3,8 @@
 
 glabel make_transform_group
 /* B1A7C 8011B37C 27BDFFC0 */  addiu     $sp, $sp, -0x40
-/* B1A80 8011B380 3C038015 */  lui       $v1, %hi(D_801512FC)
-/* B1A84 8011B384 8C6312FC */  lw        $v1, %lo(D_801512FC)($v1)
+/* B1A80 8011B380 3C038015 */  lui       $v1, %hi(gCurrentModelTreeRoot)
+/* B1A84 8011B384 8C6312FC */  lw        $v1, %lo(gCurrentModelTreeRoot)($v1)
 /* B1A88 8011B388 0080102D */  daddu     $v0, $a0, $zero
 /* B1A8C 8011B38C AFB00030 */  sw        $s0, 0x30($sp)
 /* B1A90 8011B390 3C108015 */  lui       $s0, %hi(D_80153370)

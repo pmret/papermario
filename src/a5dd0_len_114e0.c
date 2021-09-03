@@ -1,5 +1,15 @@
 #include "common.h"
+#include "model.h"
 #include "ld_addrs.h"
+
+typedef struct GameMode {
+    /* 0x00 */ u16 flags;
+    /* 0x04 */ void (*init)(void);
+    /* 0x08 */ void (*step)(struct GameMode*);
+    /* 0x0C */ UNK_FUN_PTR(unk_0C);
+    /* 0x10 */ void (*render)(void);
+    /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
+} GameMode; // size = 0x18
 
 typedef struct Fog {
     /* 0x00 */ s32 enabled;
@@ -10,15 +20,6 @@ typedef struct Fog {
     /* 0x14 */ s32 startDistance;
     /* 0x18 */ s32 endDistance;
 } Fog; // size = 0x1C
-
-typedef struct GameMode {
-    /* 0x00 */ u16 flags;
-    /* 0x04 */ void (*init)(void);
-    /* 0x08 */ void (*step)(struct GameMode*);
-    /* 0x0C */ UNK_FUN_PTR(unk_0C);
-    /* 0x10 */ void (*render)(void);
-    /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
-} GameMode; // size = 0x18
 
 extern s32 D_8014B7F8[];
 extern s32 D_8014B820[];
@@ -115,12 +116,12 @@ s8 D_8014B756 = 0;
 s8 D_8014B757 = 0;
 s32 D_8014B758 = 950;
 s32 D_8014B75C = 1000;
-s8 D_8014B760 = 0xFF;
-s8 D_8014B761 = 0xFF;
-s8 D_8014B762 = 0xFF;
-s8 D_8014B763 = 0;
-s8 D_8014B764 = 0;
-s8 D_8014B765 = 0;
+s8 gRenderModelPrimR = 0xFF;
+s8 gRenderModelPrimG = 0xFF;
+s8 gRenderModelPrimB = 0xFF;
+s8 gRenderModelEnvR = 0;
+s8 gRenderModelEnvG = 0;
+s8 gRenderModelEnvB = 0;
 s8 D_8014B766 = 0;
 s8 D_8014B767 = 0;
 
@@ -271,9 +272,14 @@ s32 D_8014C188[] = { 0xFFFE7960, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000,
 
 s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
 
+// TODO BSS to sort out
+extern ModelNode** gCurrentModelTreeRoot;
+extern ModelTransformGroup* wTransformGroups[4];
+extern ModelTransformGroup* bTransformGroups[4];
+
 // BSS
 static s32 B_801512B0[2];
-static CustomModelGfxBuilder* gCurrentCustomModelGfxBuilders;
+static ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
 static s32 D_801512BC;
 static s32 D_801512C0;
 static s32 D_801512C4;
@@ -287,17 +293,43 @@ static GameMode gMainGameState[2]; // TODO rename
 extern s32 D_80151324;
 extern s32 D_8015132C;
 extern s32 D_80151330;
-extern Fog* wFog;
+
+extern ModelList wModelList;
+extern ModelList bModelList;
+
+// TODO: potentially a display list, figure this out
+extern u32* wModelSpecialDls[32];
+extern u32* bModelSpecialDls[32];
+
+extern ModelList* gCurrentModels;
+
+extern ModelCustomGfxBuilder wCustomModelGfxBuilders;
+extern ModelCustomGfxBuilder bCustomModelGfxBuilders;
+extern ModelLocalVertexCopy** D_80152190;
+extern ModelLocalVertexCopy** D_801521D0;
+extern ModelCustomGfxList* gCurrentCustomModelGfxPtr;
+extern ModelLocalVertexCopy** D_80152210;
+extern ModelNode* D_80152214;
+extern ModelNode* D_80152218;
+extern ModelTreeInfoList D_80152220;
+extern ModelTreeInfoList D_80152A20;
+
+extern s8 wBgRenderType;
+extern s8 bBgRenderType;
+extern Fog wFogSettings;
+extern Fog bFogSettings;
+extern Fog* gCurrentFogSettings;
 extern s32 texPannerMainU[MAX_TEX_PANNERS];
 extern s32 texPannerMainV[MAX_TEX_PANNERS];
 extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
+extern u16 D_8015336C;
 extern RenderTaskEntry* D_801533A0[];
 extern s32 D_801533AC;
 extern s32 D_801533B0; // num render task entries?
+
 extern s8 D_8015A578;
 
-// funcs
 void update_shadows(void);
 s32 step_entity_commandlist(Entity* entity);
 void render_shadows(void);
@@ -1065,6 +1097,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", load_tile_header);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80115498);
 
+ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_property);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", _load_model_textures);
@@ -1074,10 +1107,113 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", load_model_textures);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_child_count);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
+/*void clear_model_data(void) {
+    s32 i;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", init_model_data);
+    if (!gGameStatusPtr->isBattle) {
+        gCurrentModels = wModelList;
+        gCurrentTransformGroups = wTransformGroups;
+        gCurrentCustomModelGfxPtr = wModelSpecialDls;
+        gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
+        gCurrentModelTreeRoot = &D_80152214;
+        D_80152210 = &D_80152190;
+        D_8009A5F4 = D_80152220;
+        D_801512F0 = &wBgRenderType;
+        D_8014B74C = 0;
+        D_8014B74D = 0;
+        D_8014B74E = 0;
+        D_8014B74F = 0;
+        gCurrentFogSettings = &wFogSettings;
+    } else {
+        gCurrentModels = bModelList;
+        gCurrentTransformGroups = bTransformGroups;
+        gCurrentCustomModelGfxPtr = bModelSpecialDls;
+        gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
+        gCurrentModelTreeRoot = &D_80152218;
+        D_80152210 = &D_801521D0;
+        D_8009A5F4 = D_80152A20;
+        D_801512F0 = &bBgRenderType;
+        gCurrentFogSettings = &bFogSettings;
+    }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", calculate_model_sizes);
+    for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
+        (*gCurrentModels)[i] = 0;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentTransformGroups); i++) {
+        (*gCurrentTransformGroups)[i] = 0;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentCustomModelGfxPtr); i++) {
+        (*gCurrentCustomModelGfxPtr)[i].pre = 0;
+        (*gCurrentCustomModelGfxBuildersPtr)[i].pre = 0;
+    }
+
+    *gCurrentModelTreeRoot = NULL;
+
+    for (i = 0; i < ARRAY_COUNT(*D_8009A5F4); i++) {
+        (*D_8009A5F4)[i].modelIndex = -1;
+        (*D_8009A5F4)[i].treeDepth = 0;
+        (*D_8009A5F4)[i].textureID = 0;
+    }
+
+    *D_801512F0 = 0;
+    gCurrentFogSettings->r = 10;
+    gCurrentFogSettings->g = 10;
+    gCurrentFogSettings->b = 10;
+    gCurrentFogSettings->startDistance = 950;
+    gCurrentFogSettings->enabled = FALSE;
+    gCurrentFogSettings->a = 0;
+    gCurrentFogSettings->endDistance = 1000;
+
+    for (i = 0; i < ARRAY_COUNT(texPannerAuxV); i++) {
+        texPannerAuxV[i] = 0;
+        texPannerAuxU[i] = 0;
+        texPannerMainV[i] = 0;
+        texPannerMainU[i] = 0;
+    }
+}*/
+
+void init_model_data(void) {
+    if (!gGameStatusPtr->isBattle) {
+        gCurrentModels = wModelList;
+        gCurrentTransformGroups = wTransformGroups;
+        gCurrentCustomModelGfxPtr = wModelSpecialDls;
+        gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
+        gCurrentModelTreeRoot = &D_80152214;
+        D_80152210 = &D_80152190;
+        D_8009A5F4 = &D_80152220;
+        D_801512F0 = &wBgRenderType;
+        gCurrentFogSettings = &wFogSettings;
+    } else {
+        gCurrentModels = bModelList;
+        gCurrentTransformGroups = bTransformGroups;
+        gCurrentCustomModelGfxPtr = bModelSpecialDls;
+        gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
+        gCurrentModelTreeRoot = &D_80152218;
+        D_80152210 = &D_801521D0;
+        D_8009A5F4 = &D_80152A20;
+        D_801512F0 = &bBgRenderType;
+        gCurrentFogSettings = &bFogSettings;
+    }
+}
+
+void calculate_model_sizes(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
+        Model* model = (*gCurrentModels)[i];
+
+        if (model != NULL) {
+            ModelBoundingBox* prop = get_model_property(model->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
+
+            prop->centerX = (prop->maxX - prop->minX) * 0.5;
+            prop->centerY = (prop->maxY - prop->minY) * 0.5;
+            prop->centerZ = (prop->maxZ - prop->minZ) * 0.5;
+            model->flags |= 0x1000;
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_create_model);
 
@@ -1087,22 +1223,67 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116698);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", render_models);
 
-void appendGfx_model_group(Model*);
-void appendGfx_model(Model*);
-void render_transform_group(Model*);
-
 INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model_group, Model*);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80117D00);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", render_transform_group_node);
+// this looks like a switch but I can't figure it out
+void render_transform_group_node(ModelNode* node) {
+    Gfx** gfx = &gMasterGfxPos;
+    Model* model;
+
+    if (node != NULL) {
+        if (node->type == SHAPE_TYPE_GROUP) {
+            ModelNodeProperty* groupTypeProp = get_model_property(node, MODEL_PROP_KEY_GROUP_TYPE);
+
+            if (groupTypeProp != NULL && groupTypeProp->data.s != 0) {
+                model = get_model_from_list_index(D_8015336C);
+                if (!(model->flags & 2)) {
+                    appendGfx_model_group(model);
+                }
+                D_8015336C++;
+                return;
+            }
+        }
+        if (node->type != SHAPE_TYPE_MODEL) {
+            if (node->groupData != NULL) {
+                s32 numChildren;
+                s32 i;
+
+                if (node->groupData->transformMatrix != NULL) {
+                    gSPMatrix((*gfx)++, node->groupData->transformMatrix,
+                              G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+                }
+
+                numChildren = node->groupData->numChildren;
+                if (numChildren != 0) {
+                    for (i = 0; i < numChildren; i++) {
+                        render_transform_group_node(node->groupData->childList[i]);
+                    }
+                }
+
+                if (node->groupData->transformMatrix != NULL) {
+                    gSPPopMatrix((*gfx)++, G_MTX_MODELVIEW);
+                }
+            }
+            return;
+        }
+
+        model = get_model_from_list_index(D_8015336C);
+        if (!(model->flags & 2)) {
+            appendGfx_model(model);
+        }
+        D_8015336C++;
+    }
+}
+
 
 INCLUDE_ASM(void, "a5dd0_len_114e0", render_transform_group, Model*);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801180E8);
 
 Model* get_model_from_list_index(s32 listIndex) {
-    return (*gCurrentModelListPtr)[listIndex];
+    return (*gCurrentModels)[listIndex];
 }
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", load_data_for_models);
@@ -1133,13 +1314,13 @@ void clone_model(u16 srcModelID, u16 newModelID) {
     Model* newModel;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(*gCurrentModelListPtr); i++) {
-        if ((*gCurrentModelListPtr)[i] == NULL) {
+    for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
+        if ((*gCurrentModels)[i] == NULL) {
             break;
         }
     }
 
-    (*gCurrentModelListPtr)[i] = newModel = heap_malloc(sizeof(Model));
+    (*gCurrentModels)[i] = newModel = heap_malloc(sizeof(Model));
     *newModel = *srcModel;
     newModel->modelID = newModelID;
 }
@@ -1151,8 +1332,8 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B950);
 void func_8011BAE8(void) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(*gCurrentModelListPtr); i++) {
-        Model* model = (*gCurrentModelListPtr)[i];
+    for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
+        Model* model = (*gCurrentModels)[i];
 
         if (model != NULL) {
             model->flags &= ~0x0400;
@@ -1169,39 +1350,39 @@ void func_8011BAE8(void) {
 }
 
 void enable_world_fog(void) {
-    wFog->enabled = TRUE;
+    gCurrentFogSettings->enabled = TRUE;
 }
 
 void disable_world_fog(void) {
-    wFog->enabled = FALSE;
+    gCurrentFogSettings->enabled = FALSE;
 }
 
 void set_world_fog_dist(s32 start, s32 end) {
-    wFog->startDistance = start;
-    wFog->endDistance = end;
+    gCurrentFogSettings->startDistance = start;
+    gCurrentFogSettings->endDistance = end;
 }
 
 void set_world_fog_color(s32 r, s32 g, s32 b, s32 a) {
-    wFog->r = r;
-    wFog->g = g;
-    wFog->b = b;
-    wFog->a = a;
+    gCurrentFogSettings->r = r;
+    gCurrentFogSettings->g = g;
+    gCurrentFogSettings->b = b;
+    gCurrentFogSettings->a = a;
 }
 
 s32 is_world_fog_enabled(void) {
-    return wFog->enabled;
+    return gCurrentFogSettings->enabled;
 }
 
 void get_world_fog_distance(s32* start, s32* end) {
-    *start = wFog->startDistance;
-    *end = wFog->endDistance;
+    *start = gCurrentFogSettings->startDistance;
+    *end = gCurrentFogSettings->endDistance;
 }
 
 void get_world_fog_color(s32* r, s32* g, s32* b, s32* a) {
-    *r = wFog->r;
-    *g = wFog->g;
-    *b = wFog->b;
-    *a = wFog->a;
+    *r = gCurrentFogSettings->r;
+    *g = gCurrentFogSettings->g;
+    *b = gCurrentFogSettings->b;
+    *a = gCurrentFogSettings->a;
 }
 
 void set_tex_panner(Model* model, s8 texPannerID) {
@@ -1224,19 +1405,55 @@ void set_aux_pan_v(s32 texPannerID, s32 value) {
     texPannerAuxV[texPannerID] = value;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_mdl_custom_gfx_set);
+void set_mdl_custom_gfx_set(Model* model, s32 customGfxIndex, u32 fogType) {
+    if (customGfxIndex == -1) {
+        customGfxIndex = model->specialDisplayListID & 15;
+    }
+
+    if (fogType == -1) {
+        fogType = model->specialDisplayListID / 16;
+    }
+
+    model->specialDisplayListID = (customGfxIndex & 15) + ((fogType & 15) * 16);
+}
 
 void set_custom_gfx(s32 customGfxIndex, Gfx* pre, Gfx* post) {
-    gCurrentModelSpecialDlsPtr[customGfxIndex].pre = pre;
-    gCurrentModelSpecialDlsPtr[customGfxIndex].post = post;
+    (*gCurrentCustomModelGfxPtr)[customGfxIndex].pre = pre;
+    (*gCurrentCustomModelGfxPtr)[customGfxIndex].post = post;
 }
 
-void set_custom_gfx_builders(s32 customGfxIndex, CustomModelGfxBuilderFunc pre, CustomModelGfxBuilderFunc post) {
-    gCurrentCustomModelGfxBuilders[customGfxIndex].pre = pre;
-    gCurrentCustomModelGfxBuilders[customGfxIndex].post = post;
+void set_custom_gfx_builders(s32 customGfxIndex, ModelCustomGfxBuilderFunc pre, ModelCustomGfxBuilderFunc post) {
+    (*gCurrentCustomModelGfxBuildersPtr)[customGfxIndex].pre = pre;
+    (*gCurrentCustomModelGfxBuildersPtr)[customGfxIndex].post = post;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", build_custom_gfx);
+void build_custom_gfx(void) {
+    Gfx* gfx = gMasterGfxPos;
+    ModelCustomGfxBuilderFunc preFunc;
+    ModelCustomGfxBuilderFunc postFunc;
+    s32 i;
+
+    gSPBranchList(gMasterGfxPos++, 0x00000000);
+
+    for (i = 0; i < 0x10; i++) {
+        preFunc = (*gCurrentCustomModelGfxBuildersPtr)[i].pre;
+
+        if (preFunc != NULL) {
+            (*gCurrentCustomModelGfxPtr)[i].pre = gMasterGfxPos;
+            preFunc(i);
+            gSPEndDisplayList(gMasterGfxPos++);
+        }
+
+        postFunc = (*gCurrentCustomModelGfxBuildersPtr)[i].post;
+        if (postFunc != NULL) {
+            (*gCurrentCustomModelGfxPtr)[i].post = gMasterGfxPos;
+            postFunc(i);
+            gSPEndDisplayList(gMasterGfxPos++);
+        }
+    }
+
+    gSPBranchList(gfx, gMasterGfxPos);
+}
 
 /// @returns TRUE if mtx is NULL or identity.
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_identity_fixed_mtx);
@@ -1259,7 +1476,14 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", set_model_fog_color_parameters);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_fog_color_parameters);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_model_env_color_parameters);
+void set_model_env_color_parameters(s8 primR, s8 primG, s8 primB, s8 envR, s32 envG, s32 envB) {
+    gRenderModelPrimR = primR;
+    gRenderModelPrimG = primG;
+    gRenderModelPrimB = primB;
+    gRenderModelEnvR = envR;
+    gRenderModelEnvG = envG;
+    gRenderModelEnvB = envB;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_env_color_parameters);
 

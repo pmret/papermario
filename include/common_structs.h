@@ -17,6 +17,10 @@ typedef struct {
     u8 r, g, b, a;
 } Color_RGBA8;
 
+typedef struct {
+    u8 r, g, b;
+} Color_RGB8;
+
 typedef struct Vec2b {
     /* 0x00 */ s8 x;
     /* 0x01 */ s8 y;
@@ -827,11 +831,17 @@ typedef struct ModelDisplayData {
     /* 0x4 */ char unk_00[0x4];
 } ModelDisplayData; // size = 0x8
 
+typedef union ModelNodePropertyData {
+    s32 s;
+    f32 f;
+    s32* p;
+} ModelNodePropertyData;
+
 typedef struct ModelNodeProperty {
     /* 0x0 */ s32 key;
     /* 0x4 */ s32 dataType;
-    /* 0x8 */ s32 data;
-} ModelNodeProperty; // size = 0x8;
+    /* 0x8 */ ModelNodePropertyData data;
+} ModelNodeProperty; // size = 0xC;
 
 typedef struct ModelNode {
     /* 0x00 */ s32 type; /* 2 = model */
@@ -1383,18 +1393,6 @@ typedef struct RenderTask {
     /* 0x08 */ void* appendGfxArg;
     /* 0x0C */ void (*appendGfx)(void*);
 } RenderTask; // size = 0x10
-
-typedef void(*CustomModelGfxBuilderFunc)(s32 index);
-
-typedef struct CustomModelGfxBuilder {
-    /* 0x00 */ CustomModelGfxBuilderFunc pre;
-    /* 0x00 */ CustomModelGfxBuilderFunc post;
-} CustomModelGfxBuilder; // size = 0x8
-
-typedef struct CustomModelGfx {
-    /* 0x00 */ Gfx* pre;
-    /* 0x00 */ Gfx* post;
-} CustomModelGfx; // size = 0x8
 
 typedef struct SelectableTarget {
     /* 0x00 */ s16 actorID;

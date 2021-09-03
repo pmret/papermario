@@ -89,8 +89,8 @@ glabel appendGfx_model
 /* A9860 80113160 1040000B */  beqz      $v0, .L80113190
 /* A9864 80113164 00000000 */   nop
 .L80113168:
-/* A9868 80113168 3C028015 */  lui       $v0, %hi(wFog)
-/* A986C 8011316C 8C423264 */  lw        $v0, %lo(wFog)($v0)
+/* A9868 80113168 3C028015 */  lui       $v0, %hi(gCurrentFogSettings)
+/* A986C 8011316C 8C423264 */  lw        $v0, %lo(gCurrentFogSettings)($v0)
 /* A9870 80113170 8C420000 */  lw        $v0, ($v0)
 /* A9874 80113174 10400006 */  beqz      $v0, .L80113190
 /* A9878 80113178 33020040 */   andi     $v0, $t8, 0x40
@@ -222,12 +222,12 @@ glabel appendGfx_model
 /* A9A4C 8011334C 0040282D */  daddu     $a1, $v0, $zero
 /* A9A50 80113350 3C02FA00 */  lui       $v0, 0xfa00
 /* A9A54 80113354 ACC20000 */  sw        $v0, ($a2)
-/* A9A58 80113358 3C028015 */  lui       $v0, %hi(D_8014B760)
-/* A9A5C 8011335C 9042B760 */  lbu       $v0, %lo(D_8014B760)($v0)
-/* A9A60 80113360 3C048015 */  lui       $a0, %hi(D_8014B761)
-/* A9A64 80113364 9084B761 */  lbu       $a0, %lo(D_8014B761)($a0)
-/* A9A68 80113368 3C038015 */  lui       $v1, %hi(D_8014B762)
-/* A9A6C 8011336C 9063B762 */  lbu       $v1, %lo(D_8014B762)($v1)
+/* A9A58 80113358 3C028015 */  lui       $v0, %hi(gRenderModelPrimR)
+/* A9A5C 8011335C 9042B760 */  lbu       $v0, %lo(gRenderModelPrimR)($v0)
+/* A9A60 80113360 3C048015 */  lui       $a0, %hi(gRenderModelPrimG)
+/* A9A64 80113364 9084B761 */  lbu       $a0, %lo(gRenderModelPrimG)($a0)
+/* A9A68 80113368 3C038015 */  lui       $v1, %hi(gRenderModelPrimB)
+/* A9A6C 8011336C 9063B762 */  lbu       $v1, %lo(gRenderModelPrimB)($v1)
 /* A9A70 80113370 00021600 */  sll       $v0, $v0, 0x18
 /* A9A74 80113374 00042400 */  sll       $a0, $a0, 0x10
 /* A9A78 80113378 00441025 */  or        $v0, $v0, $a0
@@ -240,12 +240,12 @@ glabel appendGfx_model
 /* A9A94 80113394 3C02FB00 */  lui       $v0, 0xfb00
 /* A9A98 80113398 AE050000 */  sw        $a1, ($s0)
 /* A9A9C 8011339C ACC20000 */  sw        $v0, ($a2)
-/* A9AA0 801133A0 3C028015 */  lui       $v0, %hi(D_8014B763)
-/* A9AA4 801133A4 9042B763 */  lbu       $v0, %lo(D_8014B763)($v0)
-/* A9AA8 801133A8 3C048015 */  lui       $a0, %hi(D_8014B764)
-/* A9AAC 801133AC 9084B764 */  lbu       $a0, %lo(D_8014B764)($a0)
-/* A9AB0 801133B0 3C038015 */  lui       $v1, %hi(D_8014B765)
-/* A9AB4 801133B4 9063B765 */  lbu       $v1, %lo(D_8014B765)($v1)
+/* A9AA0 801133A0 3C028015 */  lui       $v0, %hi(gRenderModelEnvR)
+/* A9AA4 801133A4 9042B763 */  lbu       $v0, %lo(gRenderModelEnvR)($v0)
+/* A9AA8 801133A8 3C048015 */  lui       $a0, %hi(gRenderModelEnvG)
+/* A9AAC 801133AC 9084B764 */  lbu       $a0, %lo(gRenderModelEnvG)($a0)
+/* A9AB0 801133B0 3C038015 */  lui       $v1, %hi(gRenderModelEnvB)
+/* A9AB4 801133B4 9063B765 */  lbu       $v1, %lo(gRenderModelEnvB)($v1)
 /* A9AB8 801133B8 00021600 */  sll       $v0, $v0, 0x18
 /* A9ABC 801133BC 00042400 */  sll       $a0, $a0, 0x10
 /* A9AC0 801133C0 00441025 */  or        $v0, $v0, $a0
@@ -1017,8 +1017,8 @@ glabel L80113E48_AA548
 /* AA57C 80113E7C 3C018015 */  lui       $at, %hi(D_8014AFC0)
 /* AA580 80113E80 00220821 */  addu      $at, $at, $v0
 /* AA584 80113E84 8C22AFC0 */  lw        $v0, %lo(D_8014AFC0)($at)
-/* AA588 80113E88 3C088015 */  lui       $t0, %hi(wFog)
-/* AA58C 80113E8C 25083264 */  addiu     $t0, $t0, %lo(wFog)
+/* AA588 80113E88 3C088015 */  lui       $t0, %hi(gCurrentFogSettings)
+/* AA58C 80113E8C 25083264 */  addiu     $t0, $t0, %lo(gCurrentFogSettings)
 /* AA590 80113E90 AC820004 */  sw        $v0, 4($a0)
 /* AA594 80113E94 8D050000 */  lw        $a1, ($t0)
 /* AA598 80113E98 3C02F800 */  lui       $v0, 0xf800
@@ -1286,8 +1286,8 @@ glabel L80114234_AA934
 /* AA948 80114248 AE020000 */  sw        $v0, ($s0)
 /* AA94C 8011424C 0040282D */  daddu     $a1, $v0, $zero
 /* AA950 80114250 3C02F800 */  lui       $v0, 0xf800
-/* AA954 80114254 3C038015 */  lui       $v1, %hi(wFog)
-/* AA958 80114258 8C633264 */  lw        $v1, %lo(wFog)($v1)
+/* AA954 80114254 3C038015 */  lui       $v1, %hi(gCurrentFogSettings)
+/* AA958 80114258 8C633264 */  lw        $v1, %lo(gCurrentFogSettings)($v1)
 /* AA95C 8011425C 00A0402D */  daddu     $t0, $a1, $zero
 /* AA960 80114260 ACE20000 */  sw        $v0, ($a3)
 /* AA964 80114264 90620007 */  lbu       $v0, 7($v1)
@@ -1394,8 +1394,8 @@ glabel L801143A8_AAAA8
 .L801143AC:
 /* AAAAC 801143AC 3C02DE00 */  lui       $v0, 0xde00
 /* AAAB0 801143B0 8E0B0000 */  lw        $t3, ($s0)
-/* AAAB4 801143B4 3C0A8015 */  lui       $t2, %hi(wFog)
-/* AAAB8 801143B8 8D4A3264 */  lw        $t2, %lo(wFog)($t2)
+/* AAAB4 801143B4 3C0A8015 */  lui       $t2, %hi(gCurrentFogSettings)
+/* AAAB8 801143B8 8D4A3264 */  lw        $t2, %lo(gCurrentFogSettings)($t2)
 /* AAABC 801143BC 0160182D */  daddu     $v1, $t3, $zero
 /* AAAC0 801143C0 AC620000 */  sw        $v0, ($v1)
 /* AAAC4 801143C4 00051080 */  sll       $v0, $a1, 2
@@ -1636,8 +1636,8 @@ glabel L80114690_AAD90
 /* AAE2C 8011472C 10400018 */  beqz      $v0, .L80114790
 /* AAE30 80114730 00000000 */   nop
 /* AAE34 80114734 92C200A5 */  lbu       $v0, 0xa5($s6)
-/* AAE38 80114738 3C038015 */  lui       $v1, %hi(gCurrentModelSpecialDlsPtr)
-/* AAE3C 8011473C 246312E8 */  addiu     $v1, $v1, %lo(gCurrentModelSpecialDlsPtr)
+/* AAE38 80114738 3C038015 */  lui       $v1, %hi(gCurrentCustomModelGfxPtr)
+/* AAE3C 8011473C 246312E8 */  addiu     $v1, $v1, %lo(gCurrentCustomModelGfxPtr)
 /* AAE40 80114740 3042000F */  andi      $v0, $v0, 0xf
 /* AAE44 80114744 00021040 */  sll       $v0, $v0, 1
 /* AAE48 80114748 A7A20036 */  sh        $v0, 0x36($sp)
@@ -1861,8 +1861,8 @@ glabel L80114690_AAD90
 /* AB188 80114A88 10400016 */  beqz      $v0, .L80114AE4
 /* AB18C 80114A8C 00000000 */   nop
 /* AB190 80114A90 97B50036 */  lhu       $s5, 0x36($sp)
-/* AB194 80114A94 3C078015 */  lui       $a3, %hi(gCurrentModelSpecialDlsPtr)
-/* AB198 80114A98 24E712E8 */  addiu     $a3, $a3, %lo(gCurrentModelSpecialDlsPtr)
+/* AB194 80114A94 3C078015 */  lui       $a3, %hi(gCurrentCustomModelGfxPtr)
+/* AB198 80114A98 24E712E8 */  addiu     $a3, $a3, %lo(gCurrentCustomModelGfxPtr)
 /* AB19C 80114A9C 26B50001 */  addiu     $s5, $s5, 1
 /* AB1A0 80114AA0 A7B50036 */  sh        $s5, 0x36($sp)
 /* AB1A4 80114AA4 32A2FFFF */  andi      $v0, $s5, 0xffff

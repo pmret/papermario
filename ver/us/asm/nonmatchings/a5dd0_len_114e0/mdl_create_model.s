@@ -53,8 +53,8 @@ glabel mdl_create_model
 .L801162CC:
 /* AC9CC 801162CC 0000982D */  daddu     $s3, $zero, $zero
 .L801162D0:
-/* AC9D0 801162D0 3C108015 */  lui       $s0, %hi(gCurrentModelListPtr)
-/* AC9D4 801162D4 261012CC */  addiu     $s0, $s0, %lo(gCurrentModelListPtr)
+/* AC9D0 801162D0 3C108015 */  lui       $s0, %hi(gCurrentModels)
+/* AC9D4 801162D4 261012CC */  addiu     $s0, $s0, %lo(gCurrentModels)
 /* AC9D8 801162D8 8E030000 */  lw        $v1, ($s0)
 .L801162DC:
 /* AC9DC 801162DC 8C620000 */  lw        $v0, ($v1)
