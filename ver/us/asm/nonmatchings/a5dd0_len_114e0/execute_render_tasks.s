@@ -3,8 +3,8 @@
 
 glabel execute_render_tasks
 /* B40B8 8011D9B8 27BDFB88 */  addiu     $sp, $sp, -0x478
-/* B40BC 8011D9BC 3C048015 */  lui       $a0, %hi(D_801533B0)
-/* B40C0 8011D9C0 248433B0 */  addiu     $a0, $a0, %lo(D_801533B0)
+/* B40BC 8011D9BC 3C048015 */  lui       $a0, %hi(mdl_renderTaskCount)
+/* B40C0 8011D9C0 248433B0 */  addiu     $a0, $a0, %lo(mdl_renderTaskCount)
 /* B40C4 8011D9C4 AFBF0470 */  sw        $ra, 0x470($sp)
 /* B40C8 8011D9C8 AFB7046C */  sw        $s7, 0x46c($sp)
 /* B40CC 8011D9CC AFB60468 */  sw        $s6, 0x468($sp)
@@ -29,8 +29,8 @@ glabel execute_render_tasks
 /* B4114 8011DA14 1440FFFA */  bnez      $v0, .L8011DA00
 /* B4118 8011DA18 26B50001 */   addiu    $s5, $s5, 1
 .L8011DA1C:
-/* B411C 8011DA1C 3C028015 */  lui       $v0, %hi(D_801533AC)
-/* B4120 8011DA20 8C4233AC */  lw        $v0, %lo(D_801533AC)($v0)
+/* B411C 8011DA1C 3C028015 */  lui       $v0, %hi(mdl_renderTaskMode)
+/* B4120 8011DA20 8C4233AC */  lw        $v0, %lo(mdl_renderTaskMode)($v0)
 /* B4124 8011DA24 00021080 */  sll       $v0, $v0, 2
 /* B4128 8011DA28 3C148015 */  lui       $s4, %hi(D_801533A0)
 /* B412C 8011DA2C 0282A021 */  addu      $s4, $s4, $v0
@@ -73,8 +73,8 @@ glabel execute_render_tasks
 /* B41B0 8011DAB0 1440FFE6 */  bnez      $v0, .L8011DA4C
 /* B41B4 8011DAB4 254A0004 */   addiu    $t2, $t2, 4
 .L8011DAB8:
-/* B41B8 8011DAB8 3C028015 */  lui       $v0, %hi(D_801533AC)
-/* B41BC 8011DABC 8C4233AC */  lw        $v0, %lo(D_801533AC)($v0)
+/* B41B8 8011DAB8 3C028015 */  lui       $v0, %hi(mdl_renderTaskMode)
+/* B41BC 8011DABC 8C4233AC */  lw        $v0, %lo(mdl_renderTaskMode)($v0)
 /* B41C0 8011DAC0 00021080 */  sll       $v0, $v0, 2
 /* B41C4 8011DAC4 3C148015 */  lui       $s4, %hi(D_801533A0)
 /* B41C8 8011DAC8 0282A021 */  addu      $s4, $s4, $v0
@@ -126,8 +126,8 @@ glabel execute_render_tasks
 /* B426C 8011DB6C 1440FFE0 */  bnez      $v0, .L8011DAF0
 /* B4270 8011DB70 254A0004 */   addiu    $t2, $t2, 4
 .L8011DB74:
-/* B4274 8011DB74 3C028015 */  lui       $v0, %hi(D_801533AC)
-/* B4278 8011DB78 8C4233AC */  lw        $v0, %lo(D_801533AC)($v0)
+/* B4274 8011DB74 3C028015 */  lui       $v0, %hi(mdl_renderTaskMode)
+/* B4278 8011DB78 8C4233AC */  lw        $v0, %lo(mdl_renderTaskMode)($v0)
 /* B427C 8011DB7C 00021080 */  sll       $v0, $v0, 2
 /* B4280 8011DB80 3C148015 */  lui       $s4, %hi(D_801533A0)
 /* B4284 8011DB84 0282A021 */  addu      $s4, $s4, $v0
@@ -182,8 +182,8 @@ glabel execute_render_tasks
 /* B4334 8011DC34 1440FFDD */  bnez      $v0, .L8011DBAC
 /* B4338 8011DC38 254A0004 */   addiu    $t2, $t2, 4
 .L8011DC3C:
-/* B433C 8011DC3C 3C038015 */  lui       $v1, %hi(D_801533AC)
-/* B4340 8011DC40 8C6333AC */  lw        $v1, %lo(D_801533AC)($v1)
+/* B433C 8011DC3C 3C038015 */  lui       $v1, %hi(mdl_renderTaskMode)
+/* B4340 8011DC40 8C6333AC */  lw        $v1, %lo(mdl_renderTaskMode)($v1)
 /* B4344 8011DC44 3C02800A */  lui       $v0, %hi(gOverrideFlags)
 /* B4348 8011DC48 8C42A650 */  lw        $v0, %lo(gOverrideFlags)($v0)
 /* B434C 8011DC4C 3C018015 */  lui       $at, %hi(D_8014B7F0)
@@ -311,8 +311,8 @@ glabel execute_render_tasks
 /* B4520 8011DE20 1440FFF6 */  bnez      $v0, .L8011DDFC
 /* B4524 8011DE24 00000000 */   nop
 .L8011DE28:
-/* B4528 8011DE28 3C038015 */  lui       $v1, %hi(D_801533AC)
-/* B452C 8011DE2C 246333AC */  addiu     $v1, $v1, %lo(D_801533AC)
+/* B4528 8011DE28 3C038015 */  lui       $v1, %hi(mdl_renderTaskMode)
+/* B452C 8011DE2C 246333AC */  addiu     $v1, $v1, %lo(mdl_renderTaskMode)
 /* B4530 8011DE30 8C620000 */  lw        $v0, ($v1)
 /* B4534 8011DE34 24420001 */  addiu     $v0, $v0, 1
 /* B4538 8011DE38 AC620000 */  sw        $v0, ($v1)
@@ -320,8 +320,8 @@ glabel execute_render_tasks
 /* B4540 8011DE40 50400001 */  beql      $v0, $zero, .L8011DE48
 /* B4544 8011DE44 AC600000 */   sw       $zero, ($v1)
 .L8011DE48:
-/* B4548 8011DE48 3C018015 */  lui       $at, %hi(D_801533B0)
-/* B454C 8011DE4C AC2033B0 */  sw        $zero, %lo(D_801533B0)($at)
+/* B4548 8011DE48 3C018015 */  lui       $at, %hi(mdl_renderTaskCount)
+/* B454C 8011DE4C AC2033B0 */  sw        $zero, %lo(mdl_renderTaskCount)($at)
 .L8011DE50:
 /* B4550 8011DE50 8FBF0470 */  lw        $ra, 0x470($sp)
 /* B4554 8011DE54 8FB7046C */  lw        $s7, 0x46c($sp)

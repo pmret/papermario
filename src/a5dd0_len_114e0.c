@@ -308,7 +308,7 @@ extern ModelCustomGfxBuilder bCustomModelGfxBuilders;
 extern ModelLocalVertexCopy** D_80152190;
 extern ModelLocalVertexCopy** D_801521D0;
 extern ModelCustomGfxList* gCurrentCustomModelGfxPtr;
-extern ModelLocalVertexCopy** D_80152210;
+extern ModelLocalVertexCopy** gCurrentModelLocalVtxBuffers;
 extern ModelNode* D_80152214;
 extern ModelNode* D_80152218;
 extern ModelTreeInfoList D_80152220;
@@ -325,8 +325,8 @@ extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
 extern u16 D_8015336C;
 extern RenderTaskEntry* D_801533A0[];
-extern s32 D_801533AC;
-extern s32 D_801533B0; // num render task entries?
+extern s32 mdl_renderTaskMode;
+extern s32 mdl_renderTaskCount; // num render task entries?
 
 extern s8 D_8015A578;
 
@@ -1116,7 +1116,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
         gCurrentCustomModelGfxPtr = wModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
-        D_80152210 = &D_80152190;
+        gCurrentModelLocalVtxBuffers = &D_80152190;
         D_8009A5F4 = D_80152220;
         D_801512F0 = &wBgRenderType;
         D_8014B74C = 0;
@@ -1130,7 +1130,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
         gCurrentCustomModelGfxPtr = bModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
-        D_80152210 = &D_801521D0;
+        gCurrentModelLocalVtxBuffers = &D_801521D0;
         D_8009A5F4 = D_80152A20;
         D_801512F0 = &bBgRenderType;
         gCurrentFogSettings = &bFogSettings;
@@ -1181,7 +1181,7 @@ void init_model_data(void) {
         gCurrentCustomModelGfxPtr = wModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
-        D_80152210 = &D_80152190;
+        gCurrentModelLocalVtxBuffers = &D_80152190;
         D_8009A5F4 = &D_80152220;
         D_801512F0 = &wBgRenderType;
         gCurrentFogSettings = &wFogSettings;
@@ -1191,7 +1191,7 @@ void init_model_data(void) {
         gCurrentCustomModelGfxPtr = bModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
-        D_80152210 = &D_801521D0;
+        gCurrentModelLocalVtxBuffers = &D_801521D0;
         D_8009A5F4 = &D_80152A20;
         D_801512F0 = &bBgRenderType;
         gCurrentFogSettings = &bFogSettings;
@@ -1495,9 +1495,27 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_copy_vertices);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_make_local_vertex_copy);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_copied_vertices);
+void mdl_get_copied_vertices(s32 copyIndex, Vtx** firstVertex, Vtx** copiedVertices, s32* numCopied) {
+    ModelLocalVertexCopy* mlvc = gCurrentModelLocalVtxBuffers[copyIndex];
+    s32 selector = mlvc->selector;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_copied_gfx);
+    *firstVertex = mlvc->minVertexAddr;
+    *copiedVertices = mlvc->vtxCopy[selector];
+    *numCopied = mlvc->numVertices;
+}
+
+Gfx* mdl_get_copied_gfx(s32 copyIndex) {
+    ModelLocalVertexCopy* mlvc = gCurrentModelLocalVtxBuffers[copyIndex];
+    s32 selector = mlvc->selector;
+    Gfx* gfxCopy = mlvc->gfxCopy[selector];
+
+    mlvc->selector++;
+    if (mlvc->selector >= 2) {
+        mlvc->selector = 0;
+    }
+
+    return gfxCopy;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_project_tex_coords);
 
@@ -1537,11 +1555,11 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_render_tasks);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_render_tasks_alt);
 
 RenderTaskEntry* queue_render_task(RenderTask* task) {
-    RenderTaskEntry* entry = D_801533A0[D_801533AC];
+    RenderTaskEntry* entry = D_801533A0[mdl_renderTaskMode];
 
-    ASSERT(D_801533B0 < 0x100);
+    ASSERT(mdl_renderTaskCount < 0x100);
 
-    entry = &entry[D_801533B0++];
+    entry = &entry[mdl_renderTaskCount++];
 
     entry->unk_00 = 1;
     if (task->renderMode == 0x2D) {

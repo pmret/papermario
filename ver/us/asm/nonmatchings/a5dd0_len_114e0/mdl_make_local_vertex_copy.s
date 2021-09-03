@@ -28,8 +28,8 @@ glabel mdl_make_local_vertex_copy
 /* B28C0 8011C1C0 0C00AB39 */  jal       heap_malloc
 /* B28C4 8011C1C4 2404001C */   addiu    $a0, $zero, 0x1c
 /* B28C8 8011C1C8 00108080 */  sll       $s0, $s0, 2
-/* B28CC 8011C1CC 3C038015 */  lui       $v1, %hi(D_80152210)
-/* B28D0 8011C1D0 8C632210 */  lw        $v1, %lo(D_80152210)($v1)
+/* B28CC 8011C1CC 3C038015 */  lui       $v1, %hi(gCurrentModelLocalVtxBuffers)
+/* B28D0 8011C1D0 8C632210 */  lw        $v1, %lo(gCurrentModelLocalVtxBuffers)($v1)
 /* B28D4 8011C1D4 0040902D */  daddu     $s2, $v0, $zero
 /* B28D8 8011C1D8 02038021 */  addu      $s0, $s0, $v1
 /* B28DC 8011C1DC 1220001C */  beqz      $s1, .L8011C250
