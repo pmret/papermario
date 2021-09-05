@@ -853,7 +853,7 @@ typedef struct ModelNode {
 
 typedef struct Model {
     /* 0x00 */ u16 flags;
-    /* 0x02 */ s16 modelID;
+    /* 0x02 */ u16 modelID;
     /* 0x04 */ Matrix4s* currentMatrix;
     /* 0x08 */ ModelNode* modelNode;
     /* 0x0C */ ModelGroupData* groupData;

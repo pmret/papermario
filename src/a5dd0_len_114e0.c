@@ -1482,7 +1482,26 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMt
 INCLUDE_ASM(s32, "a5dd0_len_114e0", load_model_transforms);
 #endif
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_list_index_from_tree_index, s32 treeIndex);
+s32 get_model_list_index_from_tree_index(s32 treeIndex) {
+    s32 i;
+
+    if (treeIndex < 0x100) {
+        u8 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
+
+        if (modelIndex != (u8)-1) {
+            return modelIndex;
+        }
+    }
+
+    for (i = 0; i < 0x100; i++) {
+        Model* model = get_model_from_list_index(i);
+
+        if (model != NULL && model->modelID == treeIndex) {
+            return i;
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", get_transform_group_index, s32 arg0);
 
