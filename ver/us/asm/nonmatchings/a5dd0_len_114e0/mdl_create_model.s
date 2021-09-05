@@ -120,8 +120,8 @@ glabel mdl_create_model
 .L801163B8:
 /* ACAB8 801163B8 A22200A6 */  sb        $v0, 0xa6($s1)
 .L801163BC:
-/* ACABC 801163BC 3C028015 */  lui       $v0, %hi(D_80153224)
-/* ACAC0 801163C0 8C423224 */  lw        $v0, %lo(D_80153224)($v0)
+/* ACABC 801163BC 3C028015 */  lui       $v0, %hi(mdl_treeIterPos)
+/* ACAC0 801163C0 8C423224 */  lw        $v0, %lo(mdl_treeIterPos)($v0)
 /* ACAC4 801163C4 3C03800A */  lui       $v1, %hi(D_8009A5F4)
 /* ACAC8 801163C8 8C63A5F4 */  lw        $v1, %lo(D_8009A5F4)($v1)
 /* ACACC 801163CC 00021080 */  sll       $v0, $v0, 2
@@ -287,8 +287,8 @@ glabel mdl_create_model
 /* ACD30 80116630 34420200 */  ori       $v0, $v0, 0x200
 /* ACD34 80116634 A6220000 */  sh        $v0, ($s1)
 .L80116638:
-/* ACD38 80116638 3C028015 */  lui       $v0, %hi(D_80153224)
-/* ACD3C 8011663C 8C423224 */  lw        $v0, %lo(D_80153224)($v0)
+/* ACD38 80116638 3C028015 */  lui       $v0, %hi(mdl_treeIterPos)
+/* ACD3C 8011663C 8C423224 */  lw        $v0, %lo(mdl_treeIterPos)($v0)
 /* ACD40 80116640 3C03800A */  lui       $v1, %hi(D_8009A5F4)
 /* ACD44 80116644 8C63A5F4 */  lw        $v1, %lo(D_8009A5F4)($v1)
 /* ACD48 80116648 00021080 */  sll       $v0, $v0, 2

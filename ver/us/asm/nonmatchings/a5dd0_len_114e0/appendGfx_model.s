@@ -54,8 +54,8 @@ glabel appendGfx_model
 /* A97E4 801130E4 AFAF0028 */   sw       $t7, 0x28($sp)
 /* A97E8 801130E8 92C300A8 */  lbu       $v1, 0xa8($s6)
 /* A97EC 801130EC 82C200A9 */  lb        $v0, 0xa9($s6)
-/* A97F0 801130F0 3C048016 */  lui       $a0, %hi(D_8015A590)
-/* A97F4 801130F4 2484A590 */  addiu     $a0, $a0, %lo(D_8015A590)
+/* A97F0 801130F0 3C048016 */  lui       $a0, %hi(mdl_textureHandles)
+/* A97F4 801130F4 2484A590 */  addiu     $a0, $a0, %lo(mdl_textureHandles)
 /* A97F8 801130F8 00621821 */  addu      $v1, $v1, $v0
 /* A97FC 801130FC 00031100 */  sll       $v0, $v1, 4
 /* A9800 80113100 00431021 */  addu      $v0, $v0, $v1

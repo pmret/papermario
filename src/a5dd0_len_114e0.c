@@ -125,7 +125,7 @@ s8 gRenderModelEnvB = 0;
 s8 D_8014B766 = 0;
 s8 D_8014B767 = 0;
 
-Matrix4s D_8014B768 = {
+Matrix4s mdl_RDPIdentity = {
     .whole = {
         {1, 0, 0, 0},
         {0, 1, 0, 0},
@@ -294,6 +294,8 @@ extern s32 D_80151324;
 extern s32 D_8015132C;
 extern s32 D_80151330;
 
+extern TileDescriptor gCurrentTileDescriptor;
+
 extern ModelList wModelList;
 extern ModelList bModelList;
 
@@ -316,6 +318,7 @@ extern ModelTreeInfoList D_80152A20;
 
 extern s8 wBgRenderType;
 extern s8 bBgRenderType;
+extern s32 mdl_treeIterPos;
 extern Fog wFogSettings;
 extern Fog bFogSettings;
 extern Fog* gCurrentFogSettings;
@@ -329,7 +332,7 @@ extern s32 mdl_renderTaskMode;
 extern s32 mdl_renderTaskCount; // num render task entries?
 
 extern s8 D_8015A578;
-
+extern TextureHandle mdl_textureHandles[128];
 extern RenderTask mdl_clearRenderTasks[3][0x100];
 
 void update_shadows(void);
@@ -965,18 +968,15 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", is_block_on_ground);
 void state_delegate_NOP(void) {
 }
 
-// ordering
-#ifdef NON_MATCHING
+// Dumb temp and weird i decrement and temp increment stuff needed to match
 void clear_game_modes(void) {
+    GameMode* state = &gMainGameState[0];
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++) {
-        gMainGameState[i].flags = 0;
+    for (i = ARRAY_COUNT(gMainGameState) - 1; i >= 0; i--, state++) {
+        state->flags = 0;
     }
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_game_modes);
-#endif
 
 // regalloc?
 #ifndef NON_MATCHING
@@ -1096,12 +1096,24 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80114B58);
 
+void load_tile_header(char* textureName, s32 romOffset, s32 size);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", load_tile_header);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80115498);
 
-ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key);
-INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_property);
+// Goofy temps needed to match
+ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key) {
+    s32 numProperties = node->numProperties;
+    ModelNodeProperty* propertyList = node->propertyList;
+    s32 i;
+
+    for (i = 0; i < numProperties; i++, propertyList++) {
+        if (propertyList->key == key) {
+            return propertyList;
+        }
+    }
+    return NULL;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", _load_model_textures);
 
@@ -1220,6 +1232,7 @@ void calculate_model_sizes(void) {
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_create_model);
 
+// The global here is getting optimized out because nothing is happening to it. Very weird
 #ifdef NON_MATCHING
 void func_80116674(void) {
     s32 i;
@@ -1469,8 +1482,27 @@ void build_custom_gfx(void) {
     gSPBranchList(gfx, gMasterGfxPos);
 }
 
+// weird temps necessary to match
 /// @returns TRUE if mtx is NULL or identity.
-INCLUDE_ASM(s32, "a5dd0_len_114e0", is_identity_fixed_mtx);
+s32 is_identity_fixed_mtx(Matrix4s* mtx) {
+    s32* mtxIt = mtx;
+    s32* identityIt;
+    s32 i;
+
+    if (mtx == NULL) {
+        return TRUE;
+    }
+
+    identityIt = &mdl_RDPIdentity;
+
+    for (i = 0; i < 16; i++, mtxIt++, identityIt++) {
+        if (*mtxIt != *identityIt) {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
 
 void set_background_color_blend(u8 r, u8 g, u8 b, u8 a) {
     D_8014B74D = r;

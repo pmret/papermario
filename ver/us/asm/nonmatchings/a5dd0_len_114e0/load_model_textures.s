@@ -27,8 +27,8 @@ glabel load_model_textures
 /* AC378 80115C78 2463FFFF */  addiu     $v1, $v1, -1
 /* AC37C 80115C7C 0461FFFD */  bgez      $v1, .L80115C74
 /* AC380 80115C80 2442FFBC */   addiu    $v0, $v0, -0x44
-/* AC384 80115C84 3C018015 */  lui       $at, %hi(D_80153224)
-/* AC388 80115C88 AC203224 */  sw        $zero, %lo(D_80153224)($at)
+/* AC384 80115C84 3C018015 */  lui       $at, %hi(mdl_treeIterPos)
+/* AC388 80115C88 AC203224 */  sw        $zero, %lo(mdl_treeIterPos)($at)
 /* AC38C 80115C8C 10800003 */  beqz      $a0, .L80115C9C
 /* AC390 80115C90 00000000 */   nop
 /* AC394 80115C94 0C0456D1 */  jal       _load_model_textures

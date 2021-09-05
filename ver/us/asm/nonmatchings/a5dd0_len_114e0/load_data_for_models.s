@@ -21,8 +21,8 @@ glabel load_data_for_models
 /* B1484 8011AD84 3C028015 */  lui       $v0, %hi(gCurrentModelTreeRoot)
 /* B1488 8011AD88 8C4212FC */  lw        $v0, %lo(gCurrentModelTreeRoot)($v0)
 /* B148C 8011AD8C AC500000 */  sw        $s0, ($v0)
-/* B1490 8011AD90 3C018015 */  lui       $at, %hi(D_80153224)
-/* B1494 8011AD94 AC203224 */  sw        $zero, %lo(D_80153224)($at)
+/* B1490 8011AD90 3C018015 */  lui       $at, %hi(mdl_treeIterPos)
+/* B1494 8011AD94 AC203224 */  sw        $zero, %lo(mdl_treeIterPos)($at)
 /* B1498 8011AD98 12000005 */  beqz      $s0, .L8011ADB0
 /* B149C 8011AD9C 0200202D */   daddu    $a0, $s0, $zero
 /* B14A0 8011ADA0 0000282D */  daddu     $a1, $zero, $zero

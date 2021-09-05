@@ -18,6 +18,15 @@ typedef struct ModelTreeInfo {
     /* 0x03 */ char unk_03;
 } ModelTreeInfo; // size = 0x04
 
+typedef struct TextureHandle {
+    /* 0x00 */ Gfx* gfx;
+    /* 0x04 */ TileDescriptor desc;
+    /* 0x34 */ s32* raster;
+    /* 0x38 */ s32* palette;
+    /* 0x3C */ s32* auxRaster;
+    /* 0x40 */ s32* auxPalette;
+} TextureHandle; // size = 0x44
+
 typedef void(*ModelCustomGfxBuilderFunc)(s32 index);
 
 typedef struct ModelCustomGfxBuilder {

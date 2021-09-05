@@ -26,8 +26,8 @@ glabel func_80117D00
 /* AE454 80117D54 0000882D */   daddu    $s1, $zero, $zero
 /* AE458 80117D58 249500B0 */  addiu     $s5, $a0, 0xb0
 /* AE45C 80117D5C 24160002 */  addiu     $s6, $zero, 2
-/* AE460 80117D60 3C148015 */  lui       $s4, %hi(D_80153224)
-/* AE464 80117D64 26943224 */  addiu     $s4, $s4, %lo(D_80153224)
+/* AE460 80117D60 3C148015 */  lui       $s4, %hi(mdl_treeIterPos)
+/* AE464 80117D64 26943224 */  addiu     $s4, $s4, %lo(mdl_treeIterPos)
 /* AE468 80117D68 27A30010 */  addiu     $v1, $sp, 0x10
 .L80117D6C:
 /* AE46C 80117D6C 0200102D */  daddu     $v0, $s0, $zero
