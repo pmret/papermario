@@ -1162,7 +1162,23 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", _load_model_textures);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", load_model_textures);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_child_count);
+s32 mdl_get_child_count(ModelNode* model) {
+    s32 ret = 0;
+
+    if (model->type != 2 && model->groupData != NULL) {
+        s32 numChildren = model->groupData->numChildren;
+
+        if (numChildren != 0) {
+            s32 i;
+
+            ret += numChildren;
+            for (i = 0; i < numChildren; i++) {
+                ret += mdl_get_child_count(model->groupData->childList[i]);
+            }
+        }
+    }
+    return ret;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
 /*void clear_model_data(void) {
