@@ -282,7 +282,7 @@ static s32 B_801512B0[2];
 static ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
 static s32 D_801512BC;
 static s32 D_801512C0;
-static s32 D_801512C4;
+static s32 gEntityHeapBase;
 static s32 D_801512C8[6];
 static ModelTransformGroupList* gCurrentTransformGroups;
 static s8 gMsgGlobalWaveCounter[0x4];
@@ -293,6 +293,12 @@ static GameMode gMainGameState[2]; // TODO rename
 extern s32 D_80151324;
 extern s32 D_8015132C;
 extern s32 D_80151330;
+
+extern s32 wStaticEntityDataSize;
+extern s32 bStaticEntityDataSize;
+
+extern StaticEntityData* wStaticEntityData[30];
+extern StaticEntityData* bStaticEntityData[4];
 
 extern TileDescriptor gCurrentTileDescriptor;
 
@@ -876,9 +882,46 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80110F10);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_anim_make_vertex_pointers);
 
+s32 is_entity_data_loaded(Entity* entity, StaticEntityData* entityData, s32* loadedStart, s32* loadedEnd);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_entity_data_loaded);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", load_simple_entity_data);
+void load_simple_entity_data(Entity* entity, StaticEntityData* entityData) {
+    s32 loadedStart;
+    s32 loadedEnd;
+    s32 entitySize;
+    u32 temp;
+    s32 sizeTemp;
+
+    entity->vertexSegment = 10;
+    if (!gGameStatusPtr->isBattle) {
+        sizeTemp = wStaticEntityDataSize;
+    } else {
+        sizeTemp = bStaticEntityDataSize;
+    }
+
+    if (is_entity_data_loaded(entity, entityData, &loadedStart, &loadedEnd)) {
+        if (sizeTemp + ((entityData->dmaEnd - entityData->dmaStart) >> 2) >= 0x5FFDU) {
+            get_entity_type(entity->listIndex);
+            get_entity_type(entity->listIndex);
+            PANIC();
+        }
+        entitySize = (entityData->dmaEnd - entityData->dmaStart) >> 2;
+        entity->vertexData = (gEntityHeapBase - (sizeTemp * 4)) - (entitySize * 4);
+        temp = dma_copy(entityData->dmaStart, entityData->dmaEnd, entity->vertexData);
+        sizeTemp += temp / 4;
+        get_entity_type(entity->listIndex);
+    } else {
+        entitySize = (entityData->dmaEnd - entityData->dmaStart) >> 2;
+        entity->vertexData = (gEntityHeapBase - (loadedStart * 4)) - (entitySize * 4);
+        get_entity_type(entity->listIndex);
+    }
+
+    if (!gGameStatusPtr->isBattle) {
+        wStaticEntityDataSize = sizeTemp;
+    } else {
+        bStaticEntityDataSize = sizeTemp;
+    }
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", load_split_entity_data);
 
