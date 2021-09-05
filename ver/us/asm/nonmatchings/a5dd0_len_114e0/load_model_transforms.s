@@ -70,8 +70,8 @@ glabel load_model_transforms
 .L8011AEB8:
 /* B15B8 8011AEB8 3C048015 */  lui       $a0, %hi(mdl_treeIterPos)
 /* B15BC 8011AEBC 24843224 */  addiu     $a0, $a0, %lo(mdl_treeIterPos)
-/* B15C0 8011AEC0 3C05800A */  lui       $a1, %hi(D_8009A5F4)
-/* B15C4 8011AEC4 24A5A5F4 */  addiu     $a1, $a1, %lo(D_8009A5F4)
+/* B15C0 8011AEC0 3C05800A */  lui       $a1, %hi(mdl_currentModelTreeNodeInfo)
+/* B15C4 8011AEC4 24A5A5F4 */  addiu     $a1, $a1, %lo(mdl_currentModelTreeNodeInfo)
 /* B15C8 8011AEC8 8C820000 */  lw        $v0, ($a0)
 /* B15CC 8011AECC 8CA30000 */  lw        $v1, ($a1)
 /* B15D0 8011AED0 00021080 */  sll       $v0, $v0, 2
@@ -112,8 +112,8 @@ glabel load_model_transforms
 /* B1654 8011AF54 0202102A */  slt       $v0, $s0, $v0
 /* B1658 8011AF58 10400011 */  beqz      $v0, .L8011AFA0
 /* B165C 8011AF5C 240800FF */   addiu    $t0, $zero, 0xff
-/* B1660 8011AF60 3C05800A */  lui       $a1, %hi(D_8009A5F4)
-/* B1664 8011AF64 24A5A5F4 */  addiu     $a1, $a1, %lo(D_8009A5F4)
+/* B1660 8011AF60 3C05800A */  lui       $a1, %hi(mdl_currentModelTreeNodeInfo)
+/* B1664 8011AF64 24A5A5F4 */  addiu     $a1, $a1, %lo(mdl_currentModelTreeNodeInfo)
 /* B1668 8011AF68 26860001 */  addiu     $a2, $s4, 1
 .L8011AF6C:
 /* B166C 8011AF6C 8CA20000 */  lw        $v0, ($a1)
@@ -142,8 +142,8 @@ glabel load_model_transforms
 /* B16C0 8011AFC0 3C038015 */  lui       $v1, %hi(mdl_treeIterPos)
 /* B16C4 8011AFC4 24633224 */  addiu     $v1, $v1, %lo(mdl_treeIterPos)
 /* B16C8 8011AFC8 8C620000 */  lw        $v0, ($v1)
-/* B16CC 8011AFCC 3C04800A */  lui       $a0, %hi(D_8009A5F4)
-/* B16D0 8011AFD0 8C84A5F4 */  lw        $a0, %lo(D_8009A5F4)($a0)
+/* B16CC 8011AFCC 3C04800A */  lui       $a0, %hi(mdl_currentModelTreeNodeInfo)
+/* B16D0 8011AFD0 8C84A5F4 */  lw        $a0, %lo(mdl_currentModelTreeNodeInfo)($a0)
 /* B16D4 8011AFD4 00021080 */  sll       $v0, $v0, 2
 /* B16D8 8011AFD8 00441021 */  addu      $v0, $v0, $a0
 /* B16DC 8011AFDC A0540001 */  sb        $s4, 1($v0)

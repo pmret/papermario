@@ -17,8 +17,8 @@ glabel apply_transform_to_children
 /* EDF80 802C95D0 0C0B1EAF */  jal       evt_get_variable
 /* EDF84 802C95D4 0260202D */   daddu    $a0, $s3, $zero
 /* EDF88 802C95D8 0040282D */  daddu     $a1, $v0, $zero
-/* EDF8C 802C95DC 3C06800A */  lui       $a2, %hi(D_8009A5F4)
-/* EDF90 802C95E0 8CC6A5F4 */  lw        $a2, %lo(D_8009A5F4)($a2)
+/* EDF8C 802C95DC 3C06800A */  lui       $a2, %hi(mdl_currentModelTreeNodeInfo)
+/* EDF90 802C95E0 8CC6A5F4 */  lw        $a2, %lo(mdl_currentModelTreeNodeInfo)($a2)
 /* EDF94 802C95E4 00051080 */  sll       $v0, $a1, 2
 /* EDF98 802C95E8 00462021 */  addu      $a0, $v0, $a2
 /* EDF9C 802C95EC 90830000 */  lbu       $v1, ($a0)

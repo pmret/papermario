@@ -39,6 +39,14 @@ typedef struct ModelCustomGfx {
     /* 0x00 */ Gfx* post;
 } ModelCustomGfx; // size = 0x8
 
+typedef struct ModelBlueprint {
+    /* 0x0 */ s16 flags;
+    /* 0x2 */ char unk_02[0x2];
+    /* 0x4 */ ModelNode* mdlNode;
+    /* 0x8 */ ModelGroupData* groupData;
+    /* 0xC */ Matrix4s* mtx;
+} ModelBlueprint; // size = 0x10
+
 typedef ModelCustomGfx ModelCustomGfxList[32];
 typedef ModelCustomGfxBuilder ModelCustomGfxBuilderList[32];
 
@@ -80,6 +88,6 @@ typedef enum ShapeTypes {
 } ShapeTypes;
 
 typedef ModelTreeInfo ModelTreeInfoList[0x200];
-extern ModelTreeInfoList* D_8009A5F4;
+extern ModelTreeInfoList* mdl_currentModelTreeNodeInfo;
 
 #endif

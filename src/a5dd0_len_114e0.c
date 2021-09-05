@@ -353,6 +353,7 @@ void _delete_shadow(s32 shadowIndex);
 s32 entity_get_collision_flags(Entity* entity);
 void entity_free_static_data(StaticEntityData* data);
 void update_entity_shadow_position(Entity* entity);
+void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
 
 void update_entities(void) {
     s32 i;
@@ -1191,7 +1192,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
         gCurrentModelLocalVtxBuffers = &D_80152190;
-        D_8009A5F4 = D_80152220;
+        mdl_currentModelTreeNodeInfo = D_80152220;
         D_801512F0 = &wBgRenderType;
         D_8014B74C = 0;
         D_8014B74D = 0;
@@ -1205,7 +1206,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
         gCurrentModelLocalVtxBuffers = &D_801521D0;
-        D_8009A5F4 = D_80152A20;
+        mdl_currentModelTreeNodeInfo = D_80152A20;
         D_801512F0 = &bBgRenderType;
         gCurrentFogSettings = &bFogSettings;
     }
@@ -1225,10 +1226,10 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
 
     *gCurrentModelTreeRoot = NULL;
 
-    for (i = 0; i < ARRAY_COUNT(*D_8009A5F4); i++) {
-        (*D_8009A5F4)[i].modelIndex = -1;
-        (*D_8009A5F4)[i].treeDepth = 0;
-        (*D_8009A5F4)[i].textureID = 0;
+    for (i = 0; i < ARRAY_COUNT(*mdl_currentModelTreeNodeInfo); i++) {
+        (*mdl_currentModelTreeNodeInfo)[i].modelIndex = -1;
+        (*mdl_currentModelTreeNodeInfo)[i].treeDepth = 0;
+        (*mdl_currentModelTreeNodeInfo)[i].textureID = 0;
     }
 
     *D_801512F0 = 0;
@@ -1256,7 +1257,7 @@ void init_model_data(void) {
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
         gCurrentModelLocalVtxBuffers = &D_80152190;
-        D_8009A5F4 = &D_80152220;
+        mdl_currentModelTreeNodeInfo = &D_80152220;
         D_801512F0 = &wBgRenderType;
         gCurrentFogSettings = &wFogSettings;
     } else {
@@ -1266,7 +1267,7 @@ void init_model_data(void) {
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
         gCurrentModelLocalVtxBuffers = &D_801521D0;
-        D_8009A5F4 = &D_80152A20;
+        mdl_currentModelTreeNodeInfo = &D_80152A20;
         D_801512F0 = &bBgRenderType;
         gCurrentFogSettings = &bFogSettings;
     }
@@ -1289,6 +1290,7 @@ void calculate_model_sizes(void) {
     }
 }
 
+void mdl_create_model(ModelBlueprint* bp, s32 arg1);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_create_model);
 
 // The global here is getting optimized out because nothing is happening to it. Very weird
@@ -1364,7 +1366,24 @@ void render_transform_group_node(ModelNode* node) {
 }
 
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", render_transform_group, Model*);
+// arg0 and gfx temps needed
+void render_transform_group(ModelTransformGroup* group) {
+    ModelTransformGroup* mtg = group;
+    Gfx** gfx = &gMasterGfxPos;
+
+    if (!(mtg->flags & 4)) {
+        mdl_currentTransformGroupChildIndex = mtg->minChildModelIndex;
+        if (!(mtg->flags & 0x2000)) {
+            gSPMatrix((*gfx)++, mtg->transformMtx, (G_MTX_PUSH | G_MTX_LOAD) | G_MTX_MODELVIEW);
+        }
+
+        render_transform_group_node(mtg->modelNode);
+        if (!(mtg->flags & 0x2000)) {
+            gSPPopMatrix((*gfx)++, G_MTX_MODELVIEW);
+        }
+        gDPPipeSync((*gfx)++);
+    }
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801180E8);
 
@@ -1372,9 +1391,96 @@ Model* get_model_from_list_index(s32 listIndex) {
     return (*gCurrentModels)[listIndex];
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", load_data_for_models);
+void load_data_for_models(ModelNode* model, s32 romOffset, s32 size) {
+    Matrix4f mtx;
 
+    guMtxIdentF(mtx);
+
+    if (romOffset != 0) {
+        load_model_textures(model, romOffset, size);
+    }
+
+    *gCurrentModelTreeRoot = model;
+    mdl_treeIterPos = 0;
+
+    if (model != NULL) {
+        load_model_transforms(model, 0, &mtx, 0);
+    }
+}
+
+// tiny reg swap in the first loop
+#ifdef NON_MATCHING
+void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth) {
+    Matrix4f sp10;
+    Matrix4f sp50;
+    ModelBlueprint modelBP;
+    ModelBlueprint* modelBPptr = &modelBP;
+    ModelNodeProperty* groupTypeProperty;
+    s32 i;
+
+    if (model->groupData != NULL && model->groupData->numChildren != 0) {
+        s32 groupType;
+
+        if (model->groupData->transformMatrix != NULL) {
+            Matrix4f spA0;
+
+            guMtxL2F(spA0, model->groupData->transformMatrix);
+            guMtxCatF(spA0, mdlTxMtx, sp10);
+        }
+        groupTypeProperty = get_model_property(model, MODEL_PROP_KEY_GROUP_TYPE);
+
+        if (groupTypeProperty == NULL) {
+            groupType = 0;
+        } else {
+            groupType = groupTypeProperty->data.s;
+        }
+
+        if (model->type != 5 || groupType == 0) {
+            for (i = 0; i < model->groupData->numChildren; i++) {
+                ModelNode** modelTemp;
+                Matrix4f* txMtx;
+
+                modelTemp = &model->groupData->childList[i];
+
+                if (model->groupData->transformMatrix != NULL) {
+                    txMtx = sp10;
+                } else {
+                    txMtx = mdlTxMtx;
+                }
+
+                load_model_transforms(*modelTemp, model, txMtx, treeDepth + 1);
+            }
+
+            (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = -1;
+            (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].treeDepth = treeDepth;
+            mdl_treeIterPos += 1;
+            return;
+        }
+    }
+
+    guMtxF2L(mdlTxMtx, sp50);
+    modelBPptr->flags = 0;
+    modelBPptr->mdlNode = model;
+    modelBPptr->groupData = parent->groupData;
+    modelBPptr->mtx = sp50;
+
+    if (model->type == 5) {
+        s32 childCount = mdl_get_child_count(model);
+
+        for (i = mdl_treeIterPos; i < mdl_treeIterPos + childCount; i++) {
+            (*mdl_currentModelTreeNodeInfo)[i].modelIndex = -1;
+            (*mdl_currentModelTreeNodeInfo)[i].treeDepth = treeDepth + 1;
+        }
+        mdl_treeIterPos += childCount;
+    }
+
+    mdl_create_model(modelBPptr, 4);
+    (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].treeDepth = treeDepth;
+    mdl_treeIterPos += 1;
+}
+#else
 INCLUDE_ASM(s32, "a5dd0_len_114e0", load_model_transforms);
+#endif
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_list_index_from_tree_index, s32 treeIndex);
 

@@ -69,8 +69,8 @@ glabel func_80117D00
 /* AE4F4 80117DF4 A3A200B6 */  sb        $v0, 0xb6($sp)
 .L80117DF8:
 /* AE4F8 80117DF8 8E820000 */  lw        $v0, ($s4)
-/* AE4FC 80117DFC 3C03800A */  lui       $v1, %hi(D_8009A5F4)
-/* AE500 80117E00 8C63A5F4 */  lw        $v1, %lo(D_8009A5F4)($v1)
+/* AE4FC 80117DFC 3C03800A */  lui       $v1, %hi(mdl_currentModelTreeNodeInfo)
+/* AE500 80117E00 8C63A5F4 */  lw        $v1, %lo(mdl_currentModelTreeNodeInfo)($v1)
 /* AE504 80117E04 00021080 */  sll       $v0, $v0, 2
 /* AE508 80117E08 00431021 */  addu      $v0, $v0, $v1
 /* AE50C 80117E0C 90420002 */  lbu       $v0, 2($v0)

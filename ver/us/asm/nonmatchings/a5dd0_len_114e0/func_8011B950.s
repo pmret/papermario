@@ -3,8 +3,8 @@
 
 glabel func_8011B950
 /* B2050 8011B950 3084FFFF */  andi      $a0, $a0, 0xffff
-/* B2054 8011B954 3C0A800A */  lui       $t2, %hi(D_8009A5F4)
-/* B2058 8011B958 8D4AA5F4 */  lw        $t2, %lo(D_8009A5F4)($t2)
+/* B2054 8011B954 3C0A800A */  lui       $t2, %hi(mdl_currentModelTreeNodeInfo)
+/* B2058 8011B958 8D4AA5F4 */  lw        $t2, %lo(mdl_currentModelTreeNodeInfo)($t2)
 /* B205C 8011B95C 00041080 */  sll       $v0, $a0, 2
 /* B2060 8011B960 004A4021 */  addu      $t0, $v0, $t2
 /* B2064 8011B964 91030000 */  lbu       $v1, ($t0)

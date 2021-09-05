@@ -5,8 +5,8 @@ glabel appendGfx_model_group
 /* AE394 80117C94 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* AE398 80117C98 AFBF0010 */  sw        $ra, 0x10($sp)
 /* AE39C 80117C9C 94820002 */  lhu       $v0, 2($a0)
-/* AE3A0 80117CA0 3C05800A */  lui       $a1, %hi(D_8009A5F4)
-/* AE3A4 80117CA4 8CA5A5F4 */  lw        $a1, %lo(D_8009A5F4)($a1)
+/* AE3A0 80117CA0 3C05800A */  lui       $a1, %hi(mdl_currentModelTreeNodeInfo)
+/* AE3A4 80117CA4 8CA5A5F4 */  lw        $a1, %lo(mdl_currentModelTreeNodeInfo)($a1)
 /* AE3A8 80117CA8 2443FFFF */  addiu     $v1, $v0, -1
 /* AE3AC 80117CAC 00021080 */  sll       $v0, $v0, 2
 /* AE3B0 80117CB0 00451021 */  addu      $v0, $v0, $a1

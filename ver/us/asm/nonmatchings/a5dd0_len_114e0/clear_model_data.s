@@ -33,8 +33,8 @@ glabel clear_model_data
 /* AC4B4 80115DB4 AC222210 */  sw        $v0, %lo(gCurrentModelLocalVtxBuffers)($at)
 /* AC4B8 80115DB8 3C028015 */  lui       $v0, %hi(D_80152220)
 /* AC4BC 80115DBC 24422220 */  addiu     $v0, $v0, %lo(D_80152220)
-/* AC4C0 80115DC0 3C01800A */  lui       $at, %hi(D_8009A5F4)
-/* AC4C4 80115DC4 AC22A5F4 */  sw        $v0, %lo(D_8009A5F4)($at)
+/* AC4C0 80115DC0 3C01800A */  lui       $at, %hi(mdl_currentModelTreeNodeInfo)
+/* AC4C4 80115DC4 AC22A5F4 */  sw        $v0, %lo(mdl_currentModelTreeNodeInfo)($at)
 /* AC4C8 80115DC8 3C028015 */  lui       $v0, %hi(wBgRenderType)
 /* AC4CC 80115DCC 24423220 */  addiu     $v0, $v0, %lo(wBgRenderType)
 /* AC4D0 80115DD0 3C018015 */  lui       $at, %hi(D_801512F0)
@@ -77,8 +77,8 @@ glabel clear_model_data
 /* AC560 80115E60 AC222210 */  sw        $v0, %lo(gCurrentModelLocalVtxBuffers)($at)
 /* AC564 80115E64 3C028015 */  lui       $v0, %hi(D_80152A20)
 /* AC568 80115E68 24422A20 */  addiu     $v0, $v0, %lo(D_80152A20)
-/* AC56C 80115E6C 3C01800A */  lui       $at, %hi(D_8009A5F4)
-/* AC570 80115E70 AC22A5F4 */  sw        $v0, %lo(D_8009A5F4)($at)
+/* AC56C 80115E6C 3C01800A */  lui       $at, %hi(mdl_currentModelTreeNodeInfo)
+/* AC570 80115E70 AC22A5F4 */  sw        $v0, %lo(mdl_currentModelTreeNodeInfo)($at)
 /* AC574 80115E74 3C028015 */  lui       $v0, %hi(bBgRenderType)
 /* AC578 80115E78 24423221 */  addiu     $v0, $v0, %lo(bBgRenderType)
 /* AC57C 80115E7C 3C018015 */  lui       $at, %hi(D_801512F0)
@@ -120,8 +120,8 @@ glabel clear_model_data
 /* AC5FC 80115EFC 1440FFFA */  bnez      $v0, .L80115EE8
 /* AC600 80115F00 24630004 */   addiu    $v1, $v1, 4
 /* AC604 80115F04 0000202D */  daddu     $a0, $zero, $zero
-/* AC608 80115F08 3C05800A */  lui       $a1, %hi(D_8009A5F4)
-/* AC60C 80115F0C 24A5A5F4 */  addiu     $a1, $a1, %lo(D_8009A5F4)
+/* AC608 80115F08 3C05800A */  lui       $a1, %hi(mdl_currentModelTreeNodeInfo)
+/* AC60C 80115F0C 24A5A5F4 */  addiu     $a1, $a1, %lo(mdl_currentModelTreeNodeInfo)
 /* AC610 80115F10 3C028015 */  lui       $v0, %hi(gCurrentModelTreeRoot)
 /* AC614 80115F14 8C4212FC */  lw        $v0, %lo(gCurrentModelTreeRoot)($v0)
 /* AC618 80115F18 240600FF */  addiu     $a2, $zero, 0xff
