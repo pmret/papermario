@@ -12,7 +12,7 @@ typedef struct struct8015A578 {
 void func_802B6000_E26DE0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
-    Entity *entity;
+    Entity* entity;
     struct8015A578* tempStruct;
     s32 sp10;
     s32 tempCondition;
@@ -48,7 +48,7 @@ void func_802B6000_E26DE0(void) {
                     playerStatus->position.y += playerStatus->gravityIntegrator[0];
                 } else if (collisionStatus->currentCeiling & 0x4000) {
                     entity = get_entity_by_index(collisionStatus->currentCeiling);
-                    if (entity != 0) {
+                    if (entity != NULL) {
                         playerStatus->position.y = entity->position.y - (playerStatus->colliderHeight * 0.5);
                     }
                 }
@@ -189,14 +189,14 @@ void func_802B6000_E26DE0(void) {
 }
 
 s32 func_802B6648_E27428(void) {
-    f32 sp44;
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    f32 sp30;
-    f32 sp2C;
     f32 sp28;
+    f32 sp2C;
+    f32 sp30;
+    f32 sp34;
+    f32 sp38;
+    f32 sp3C;
+    f32 sp40;
+    f32 sp44;
 
     sp28 = gPlayerStatus.position.x;
     sp34 = gPlayerStatus.colliderHeight;
