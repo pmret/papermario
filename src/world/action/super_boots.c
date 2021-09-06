@@ -1,7 +1,7 @@
 #include "common.h"
 
-extern f32 D_8015A578;
 extern f32 D_802B6730;
+extern struct struct8015A578 D_8015A578;
 
 typedef struct struct8015A578 {
     /* 0x00 */ u8 unk_00;
