@@ -1934,7 +1934,9 @@ typedef struct PlayerStatus {
     /* 0x168 */ s32 stickXBuffer[10];
     /* 0x190 */ s32 stickYBuffer[10];
     /* 0x1B8 */ s32 inputBufPos;
-    /* 0x1BC */ char unk_1BC[204];
+    /* 0x1BC */ char unk_1BC[196];
+    /* 0x280 */ s8 unk_280;
+    /* 0x281 */ char unk_281[7];
 } PlayerStatus; // size = 0x288
 
 typedef struct AnimatedModelNode {
