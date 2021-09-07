@@ -50,6 +50,7 @@ s32 resume_all_group(s32 groupFlags);
 f32 length2D(f32 x, f32 y);
 void player_input_to_move_vector(f32* angle, f32* magnitude);
 void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3);
+void exec_ShakeCam1(s32 arg0, s32 arg1, s32 arg2);
 f32 func_800E5348(void);
 
 void draw_number(s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
