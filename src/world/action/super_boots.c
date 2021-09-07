@@ -3,6 +3,8 @@
 extern f32 D_802B6730;
 extern struct struct8015A578 D_8015A578;
 
+s32 func_802B6648_E27428(void);
+
 typedef struct struct8015A578 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ char unk_01[7];
@@ -121,7 +123,7 @@ void func_802B6000_E26DE0(void) {
                         playerStatus->gravityIntegrator[3] = -1.1904f;
                         playerStatus->gravityIntegrator[0] = 10.0f;
                         suggest_player_anim_clearUnkFlag(0x1000B);
-                        playerStatus->actionState = 0xE;
+                        playerStatus->actionState = ACTION_STATE_GROUND_POUND;
                         playerStatus->decorationList = 0;
                         playerStatus->unk_280 = 0xC;
                         playerStatus->unk_8C = 0.0f;
