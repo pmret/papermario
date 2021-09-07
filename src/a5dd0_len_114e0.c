@@ -358,6 +358,7 @@ s32 entity_get_collision_flags(Entity* entity);
 void entity_free_static_data(StaticEntityData* data);
 void update_entity_shadow_position(Entity* entity);
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
+void enable_transform_group(u16 modelID);
 
 void update_entities(void) {
     s32 i;
@@ -1579,7 +1580,7 @@ void make_transform_group(u16 modelID) {
         newMtg->matrixMode = 0;
         newMtg->matrixRDP_N = NULL;
         newMtg->modelNode = D_80153370;
-        guMtxIdent(newMtg->matrixA);
+        guMtxIdent(&newMtg->matrixA);
         newMtg->flags |= 0x2000;
         guMtxIdentF(newMtg->matrixB);
 
