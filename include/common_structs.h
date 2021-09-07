@@ -1004,10 +1004,19 @@ typedef struct ItemEntity {
     /* 0x58 */ s32 unk_58;
 } ItemEntity; // size = 0x5C
 
-typedef struct StaticShadowData {
-    /* 0x00 */ s16 flags;
-    /* 0x02 */ char unk_02[34];
-} StaticShadowData; // size = 0x24
+typedef struct StaticAnimatorNode {
+    /* 0x00 */ u32* displayList; // can sometime point to a node???
+    /* 0x04 */ Vec3s rot; /* range = -180,180 */
+    /* 0x0A */ char unk_0A[0x2];
+    /* 0x0C */ Vec3f pos;
+    /* 0x18 */ struct StaticAnimatorNode* sibling;
+    /* 0x1C */ struct StaticAnimatorNode* child;
+    /* 0x20 */ s16 vertexStartOffset;
+    /* 0x22 */ char unk_22[0x2];
+    /* 0x24 */ Vtx* vtxList;
+    /* 0x28 */ s16 modelID;
+    /* 0x2A */ char unk_2A[0x2];
+} StaticAnimatorNode; // size = 0x2C
 
 typedef struct SpriteComponent {
     /* 0x00 */ char unk_00[8];
@@ -1307,6 +1316,15 @@ typedef struct Shadow {
 } Shadow; // size = 0x78
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
+
+typedef struct StaticShadowData {
+    /* 0x00 */ u16 flags;
+    /* 0x02 */ char unk_02[0x2];
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ StaticAnimatorNode** animModelNode;
+    /* 0x0C */ void (*onCreateCallback)(Shadow* shadow);
+    /* 0x10 */ char unk_10[0x14];
+} StaticShadowData; // size = 0x24
 
 typedef struct PushBlockGrid {
     /* 0x00 */ s8* cells;
@@ -1878,12 +1896,6 @@ typedef struct PlayerStatus {
     /* 0x1B8 */ s32 inputBufPos;
     /* 0x1BC */ char unk_1BC[204];
 } PlayerStatus; // size = 0x288
-
-typedef struct AnimatedModelNode {
-    /* 0x00 */ u32* displayList;
-    /* 0x04 */ s16 rot[3]; /* range = -180,180 */
-    /* 0x0A */ char unk_0A[34];
-} AnimatedModelNode; // size = 0x2C
 
 typedef struct EncounterStatus {
     /* 0x000 */ s32 flags;

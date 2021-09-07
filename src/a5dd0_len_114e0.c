@@ -928,7 +928,6 @@ void entity_model_set_shadow_color(s32 alpha) {
 }
 
 void render_entities(void) {
-    s32 phi_v0;
     s32 i;
 
     for (i = 0; i < MAX_ENTITIES; i++) {
@@ -1321,7 +1320,48 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, StaticEntityData* 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, StaticEntityData* data, s32 x, s32 y, s32 z, s32 arg4,
             ...);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", create_shadow_from_data);
+s32 create_shadow_from_data(StaticShadowData* data, f32 x, f32 y, f32 z) {
+    Shadow* shadow;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentShadowListPtr); i++) {
+        if ((*gCurrentShadowListPtr)[i] == NULL) {
+            break;
+        }
+    }
+
+    if (i >= 60) {
+        PANIC();
+    }
+
+    shadow = heap_malloc(sizeof(*shadow));
+    (*gCurrentShadowListPtr)[i] = shadow;
+    mem_clear(shadow, sizeof(*shadow));
+    shadow->listIndex = i;
+    shadow->flags = data->flags | 0x80000000;
+    shadow->unk_05 = 0x80;
+    shadow->unk_06 = 0x80;
+    shadow->position.x = x;
+    shadow->position.y = y;
+    shadow->position.z = z;
+    shadow->scale.x = 1.0f;
+    shadow->scale.y = 1.0f;
+    shadow->scale.z = 1.0f;
+
+    if (data->animModelNode != NULL) {
+        shadow->flags |= 8;
+        shadow->entityModelID = create_model_animator(data->unk_04);
+        load_model_animator_tree(shadow->entityModelID, data->animModelNode);
+    } else {
+        shadow->entityModelID = load_entity_model(data->unk_04);
+    }
+
+    if (data->onCreateCallback != NULL) {
+        data->onCreateCallback(shadow);
+    }
+    update_shadow_transform_matrix(shadow);
+    return shadow->listIndex;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", MakeEntity, Evt* script, s32 isInitialCall);
 
