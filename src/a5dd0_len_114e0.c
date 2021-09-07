@@ -102,10 +102,10 @@ s32 D_8014B404[] = { 0xFFFE793C, 0xFCFFFFFF, 0xFFFE7838, 0xFCFFFFFF, 0xFFFE7838,
 
 s32 mdl_textureBaseAddress = 0x8028E000;
 
-s8 D_8014B74C = 0;
-s8 D_8014B74D = 0;
-s8 D_8014B74E = 0;
-s8 D_8014B74F = 0;
+s8 mdl_bgMultiplyColorA = 0;
+s8 mdl_bgMultiplyColorR = 0;
+s8 mdl_bgMultiplyColorG = 0;
+s8 mdl_bgMultiplyColorB = 0;
 
 s8 mdl_renderModelFogPrimColorR = 0;
 s8 mdl_renderModelFogPrimColorG = 0;
@@ -1278,10 +1278,10 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
         gCurrentModelLocalVtxBuffers = &D_80152190;
         mdl_currentModelTreeNodeInfo = D_80152220;
         D_801512F0 = &wBgRenderType;
-        D_8014B74C = 0;
-        D_8014B74D = 0;
-        D_8014B74E = 0;
-        D_8014B74F = 0;
+        mdl_bgMultiplyColorA = 0;
+        mdl_bgMultiplyColorR = 0;
+        mdl_bgMultiplyColorG = 0;
+        mdl_bgMultiplyColorB = 0;
         gCurrentFogSettings = &wFogSettings;
     } else {
         gCurrentModels = bModelList;
@@ -1904,17 +1904,17 @@ s32 is_identity_fixed_mtx(Matrix4s* mtx) {
 }
 
 void set_background_color_blend(u8 r, u8 g, u8 b, u8 a) {
-    D_8014B74D = r;
-    D_8014B74E = g;
-    D_8014B74F = b;
-    D_8014B74C = a;
+    mdl_bgMultiplyColorR = r;
+    mdl_bgMultiplyColorG = g;
+    mdl_bgMultiplyColorB = b;
+    mdl_bgMultiplyColorA = a;
 }
 
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a) {
-    *r = D_8014B74D;
-    *g = D_8014B74E;
-    *b = D_8014B74F;
-    *a = D_8014B74C;
+    *r = mdl_bgMultiplyColorR;
+    *g = mdl_bgMultiplyColorG;
+    *b = mdl_bgMultiplyColorB;
+    *a = mdl_bgMultiplyColorA;
 }
 
 void set_model_fog_color_parameters(s8 primR, s8 primG, s8 primB, s8 primA, s32 fogR, s32 fogG, s32 fogB, s32 fogStart,
@@ -1952,7 +1952,14 @@ void set_model_env_color_parameters(s8 primR, s8 primG, s8 primB, s8 envR, s32 e
     gRenderModelEnvB = envB;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_env_color_parameters);
+void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u8* envG, u8* envB) {
+    *primR = gRenderModelPrimR;
+    *primG = gRenderModelPrimG;
+    *primB = gRenderModelPrimB;
+    *envR = gRenderModelEnvR;
+    *envG = gRenderModelEnvG;
+    *envB = gRenderModelEnvB;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_vertex_count);
 
