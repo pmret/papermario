@@ -1002,7 +1002,82 @@ void delete_shadow(s32 shadowIndex) {
     _delete_shadow(shadowIndex);
 }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", update_entity_shadow_position, Entity* entity);
+void update_entity_shadow_position(Entity* entity) {
+    Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
+
+    if (shadow != NULL) {
+        f32 rayX;
+        f32 rayY;
+        f32 rayZ;
+        f32 hitYaw;
+        f32 hitPitch;
+        f32 hitLength;
+        f32 origHitLength;
+
+        if (entity->alpha < 255) {
+            shadow->unk_05 = entity->alpha / 2;
+        } else {
+            u8 alphaTemp;
+
+            if (shadow->flags & 0x800000) {
+                alphaTemp = 160;
+            } else {
+                alphaTemp = 128;
+            }
+            shadow->unk_05 = alphaTemp;
+        }
+
+        if (!(entity->flags & 4)) {
+            if (shadow->flags & 0x400000) {
+                shadow->flags &= ~0x400000;
+            } else {
+                return;
+            }
+        }
+
+        rayX = entity->position.x;
+        rayY = entity->position.y;
+        rayZ = entity->position.z;
+
+        if (!entity_raycast_down(&rayX, &rayY, &rayZ, &hitYaw, &hitPitch, &hitLength) && hitLength == 32767.0f) {
+            hitLength = 0.0f;
+        }
+
+        origHitLength = hitLength;
+
+        if (shadow->flags & 0x200) {
+            hitLength = 212.5f;
+            shadow->scale.x = entity->aabb.x / hitLength;
+            shadow->scale.z = entity->aabb.z / hitLength;
+        } else {
+            hitLength = ((hitLength / 150.0f) + 0.95) * 250.0;
+            shadow->scale.x = (entity->aabb.x / hitLength) * entity->scale.x;
+            shadow->scale.z = (entity->aabb.z / hitLength) * entity->scale.z;
+        }
+
+        shadow->position.x = entity->position.x;
+        shadow->position.z = entity->position.z;
+        shadow->position.y = rayY;
+        entity->shadowPosY = rayY;
+        shadow->rotation.x = hitYaw;
+        shadow->rotation.z = hitPitch;
+        shadow->rotation.y = entity->rotation.y;
+
+        if (entity->position.y < rayY) {
+            shadow->flags |= 0x40000000;
+            entity->position.y = rayY + 10.0f;
+        } else {
+            shadow->flags &= ~0x40000000;
+        }
+
+        shadow->flags = (shadow->flags & ~1) | ((u16)entity->flags & 1);
+        if (!(entity->flags & 0x400) && origHitLength == 0.0f) {
+            shadow->flags |= 1;
+        }
+    } else {
+        entity->shadowPosY = 0.0f;
+    }
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_raycast_down);
 
