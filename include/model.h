@@ -54,13 +54,13 @@ typedef ModelCustomGfxBuilder ModelCustomGfxBuilderList[32];
 // the fields (storing into the "type" field) we decided to make a struct for this
 typedef struct ModelBoundingBox {
     /* 0x00 */ s32 key; // MODEL_PROP_KEY_BOUNDING_BOX
-    /* 0x04 */ s32 centerX;
+    /* 0x04 */ s32 halfSizeX;
     /* 0x08 */ f32 minX;
     /* 0x0C */ char unk_0C[0x04];
-    /* 0x10 */ s32 centerY;
+    /* 0x10 */ s32 halfSizeY;
     /* 0x14 */ f32 minY;
     /* 0x18 */ char unk_18[0x04];
-    /* 0x1C */ s32 centerZ;
+    /* 0x1C */ s32 halfSizeZ;
     /* 0x20 */ f32 minZ;
     /* 0x24 */ char unk_24[0x8];
     /* 0x2C */ f32 maxX;

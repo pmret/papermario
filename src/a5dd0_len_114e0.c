@@ -333,6 +333,10 @@ extern s32 texPannerMainV[MAX_TEX_PANNERS];
 extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
 extern u16 mdl_currentTransformGroupChildIndex;
+extern ModelNode* D_80153370;
+extern u16 D_80153374;
+extern u16 D_80153376;
+extern s16 D_8015336E;
 extern RenderTask* mdl_renderTaskLists[3];
 extern s32 mdl_renderTaskMode;
 extern s32 mdl_renderTaskCount; // num render task entries?
@@ -1280,11 +1284,11 @@ void calculate_model_sizes(void) {
         Model* model = (*gCurrentModels)[i];
 
         if (model != NULL) {
-            ModelBoundingBox* prop = (ModelBoundingBox*)get_model_property(model->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
+            ModelBoundingBox* bb = (ModelBoundingBox*)get_model_property(model->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
 
-            prop->centerX = (prop->maxX - prop->minX) * 0.5;
-            prop->centerY = (prop->maxY - prop->minY) * 0.5;
-            prop->centerZ = (prop->maxZ - prop->minZ) * 0.5;
+            bb->halfSizeX = (bb->maxX - bb->minX) * 0.5;
+            bb->halfSizeY = (bb->maxY - bb->minY) * 0.5;
+            bb->halfSizeZ = (bb->maxZ - bb->minZ) * 0.5;
             model->flags |= 0x1000;
         }
     }
@@ -1503,10 +1507,41 @@ s32 get_model_list_index_from_tree_index(s32 treeIndex) {
     return 0;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", get_transform_group_index, s32 arg0);
+s32 get_transform_group_index(s32 modelID) {
+    ModelTransformGroup* group;
+    s32 i;
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", get_model_center_and_size, u16 modelID, f32* centerX, f32* centerY,
-            f32* centerZ, f32* sizeX, f32* sizeY, f32* sizeZ);
+    for (i = 0; i < MAX_MODEL_TRANSFORM_GROUPS; i++) {
+        group = get_transform_group(i);
+
+        if (group != NULL && group->groupModelID == modelID) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+// TODO this seems to be returning center for the model and center for the BB (not the size)
+void get_model_center_and_size(u16 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY, f32* sizeZ) {
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
+    ModelNode* node = model->modelNode;
+    ModelBoundingBox* bb;
+
+    *centerX = model->center.x;
+    *centerY = model->center.y;
+    *centerZ = model->center.z;
+
+    bb = (ModelBoundingBox*)get_model_property(node, MODEL_PROP_KEY_BOUNDING_BOX);
+
+    if (bb != NULL) {
+        *sizeX = bb->halfSizeX;
+        *sizeY = bb->halfSizeY;
+        *sizeZ = bb->halfSizeZ;
+    } else {
+        *sizeX = *sizeY = *sizeZ = 0.0f;
+    }
+}
 
 ModelTransformGroup* get_transform_group(s32 index) {
     return (*gCurrentTransformGroups)[index];
@@ -1514,11 +1549,111 @@ ModelTransformGroup* get_transform_group(s32 index) {
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B1D8);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", make_transform_group);
+void make_transform_group(u16 modelID) {
+    mdl_treeIterPos = 0;
+    D_80153370 = NULL;
+    D_8015336E = modelID;
+    D_80153376 = 0;
+    D_80153374 = 0;
+    func_8011B1D8(*gCurrentModelTreeRoot);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", enable_transform_group);
+    if (D_80153370 != 0) {
+        ModelTransformGroup* newMtg;
+        ModelNode* node;
+        ModelNodeProperty* prop;
+        ModelBoundingBox* bb;
+        f32 x, y, z;
+        s32 i;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", disable_transform_group);
+        for (i = 0; i < ARRAY_COUNT(*gCurrentTransformGroups); i++) {
+            if ((*gCurrentTransformGroups)[i] == NULL) {
+                break;
+            }
+        }
+
+        (*gCurrentTransformGroups)[i] = newMtg = heap_malloc(sizeof(ModelTransformGroup));
+        newMtg->flags = 1;
+        newMtg->groupModelID = modelID;
+        newMtg->minChildModelIndex = get_model_list_index_from_tree_index(D_80153374);
+        newMtg->maxChildModelIndex = get_model_list_index_from_tree_index(D_80153376);
+        newMtg->matrixMode = 0;
+        newMtg->matrixRDP_N = NULL;
+        newMtg->modelNode = D_80153370;
+        guMtxIdent(newMtg->matrixA);
+        newMtg->flags |= 0x2000;
+        guMtxIdentF(newMtg->matrixB);
+
+        node = newMtg->modelNode;
+
+        if (node->type != SHAPE_TYPE_GROUP) {
+            prop = get_model_property(node, MODEL_PROP_KEY_RENDER_MODE);
+        } else {
+            prop = get_model_property(node, MODEL_PROP_KEY_GROUP_TYPE);
+
+            if (prop != NULL) {
+                prop = &prop[1];
+            }
+        }
+
+        if (prop != NULL) {
+            newMtg->renderMode = prop->data.s;
+        } else {
+            newMtg->renderMode = 1;
+        }
+
+        bb = (ModelBoundingBox*)get_model_property(node, MODEL_PROP_KEY_BOUNDING_BOX);
+        if (bb != NULL) {
+            x = (bb->minX + bb->maxX) * 0.5f;
+            y = (bb->minY + bb->maxY) * 0.5f;
+            z = (bb->minZ + bb->maxZ) * 0.5f;
+        } else {
+            x = y = z = 0.0f;
+        }
+
+        if (newMtg->matrixRDP_N != NULL) {
+            guMtxXFML(newMtg->matrixRDP_N, x, y, z, &x, &y, &z);
+        }
+
+        newMtg->center.x = x;
+        newMtg->center.y = y;
+        newMtg->center.z = z;
+        enable_transform_group(modelID);
+    }
+}
+
+void enable_transform_group(u16 modelID) {
+    ModelTransformGroup* group = get_transform_group(get_transform_group_index(modelID));
+    s32 i;
+
+    group->flags &= ~0x4;
+
+    for (i = group->minChildModelIndex; i <= group->maxChildModelIndex; i++) {
+        Model* model = get_model_from_list_index(i);
+
+        model->flags |= 0x8;
+
+        if (model->currentMatrix != NULL) {
+            model->flags |= 0x1000;
+        }
+    }
+}
+
+void disable_transform_group(u16 modelID) {
+    ModelTransformGroup* group = get_transform_group(get_transform_group_index(modelID));
+    s32 i;
+
+    group->flags |= 0x4;
+
+    for (i = group->minChildModelIndex; i <= group->maxChildModelIndex; i++) {
+        Model* model = get_model_from_list_index(i);
+
+        model->flags &= ~0x8;
+
+        if (model->currentMatrix != NULL) {
+            model->flags |= 0x1000;
+        }
+    }
+}
 
 void clone_model(u16 srcModelID, u16 newModelID) {
     Model* srcModel = get_model_from_list_index(get_model_list_index_from_tree_index(srcModelID));

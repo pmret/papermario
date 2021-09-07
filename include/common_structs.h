@@ -873,7 +873,7 @@ typedef struct Model {
 
 typedef struct ModelTransformGroup {
     /* 0x00 */ u16 flags;
-    /* 0x02 */ s16 groupModelID;
+    /* 0x02 */ u16 groupModelID;
     /* 0x04 */ Matrix4s* matrixRDP_N;
     /* 0x08 */ ModelNode* modelNode;
     /* 0x0C */ Matrix4s* transformMtx;
