@@ -106,19 +106,23 @@ s8 D_8014B74C = 0;
 s8 D_8014B74D = 0;
 s8 D_8014B74E = 0;
 s8 D_8014B74F = 0;
-s8 D_8014B750 = 0;
-s8 D_8014B751 = 0;
-s8 D_8014B752 = 0;
-s8 D_8014B753 = 0;
-s8 D_8014B754 = 0;
-s8 D_8014B755 = 0;
-s8 D_8014B756 = 0;
-s8 D_8014B757 = 0;
-s32 D_8014B758 = 950;
-s32 D_8014B75C = 1000;
-s8 gRenderModelPrimR = 0xFF;
-s8 gRenderModelPrimG = 0xFF;
-s8 gRenderModelPrimB = 0xFF;
+
+s8 mdl_renderModelFogPrimColorR = 0;
+s8 mdl_renderModelFogPrimColorG = 0;
+s8 mdl_renderModelFogPrimColorB = 0;
+s8 mdl_renderModelFogPrimColorA = 0;
+
+s8 mdl_renderModelFogColorR = 0;
+s8 mdl_renderModelFogColorG = 0;
+s8 mdl_renderModelFogColorB = 0;
+s8 mdl_renderModelFogColorA = 0; // unused?
+
+s32 mdl_renderModelFogStart = 950;
+s32 mdl_renderModelFogEnd = 1000;
+
+s8 gRenderModelPrimR = 255;
+s8 gRenderModelPrimG = 255;
+s8 gRenderModelPrimB = 255;
 s8 gRenderModelEnvR = 0;
 s8 gRenderModelEnvG = 0;
 s8 gRenderModelEnvB = 0;
@@ -1913,9 +1917,31 @@ void get_background_color_blend(u8* r, u8* g, u8* b, u8* a) {
     *a = D_8014B74C;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_model_fog_color_parameters);
+void set_model_fog_color_parameters(s8 primR, s8 primG, s8 primB, s8 primA, s32 fogR, s32 fogG, s32 fogB, s32 fogStart,
+                                    s32 fogEnd) {
+    mdl_renderModelFogPrimColorR = primR;
+    mdl_renderModelFogPrimColorG = primG;
+    mdl_renderModelFogPrimColorB = primB;
+    mdl_renderModelFogPrimColorA = primA;
+    mdl_renderModelFogColorR = fogR;
+    mdl_renderModelFogColorG = fogG;
+    mdl_renderModelFogColorB = fogB;
+    mdl_renderModelFogStart = fogStart;
+    mdl_renderModelFogEnd = fogEnd;
+}
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_fog_color_parameters);
+void get_model_fog_color_parameters(u8* primR, u8* primG, u8* primB, u8* primA, u8* fogR, u8* fogG, u8* fogB,
+                                    s32* fogStart, s32* fogEnd) {
+    *primR = mdl_renderModelFogPrimColorR;
+    *primG = mdl_renderModelFogPrimColorG;
+    *primB = mdl_renderModelFogPrimColorB;
+    *primA = mdl_renderModelFogPrimColorA;
+    *fogR = mdl_renderModelFogColorR;
+    *fogG = mdl_renderModelFogColorG;
+    *fogB = mdl_renderModelFogColorB;
+    *fogStart = mdl_renderModelFogStart;
+    *fogEnd = mdl_renderModelFogEnd;
+}
 
 void set_model_env_color_parameters(s8 primR, s8 primG, s8 primB, s8 envR, s32 envG, s32 envB) {
     gRenderModelPrimR = primR;
@@ -1958,6 +1984,7 @@ Gfx* mdl_get_copied_gfx(s32 copyIndex) {
     return gfxCopy;
 }
 
+void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, Matrix4f* destMtx, Vtx* destVertices);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_project_tex_coords);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C80C);

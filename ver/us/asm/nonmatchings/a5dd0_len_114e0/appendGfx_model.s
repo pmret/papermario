@@ -127,10 +127,10 @@ glabel appendGfx_model
 /* A98E4 801131E4 28420011 */  slti      $v0, $v0, 0x11
 /* A98E8 801131E8 1040007A */  beqz      $v0, .L801133D4
 /* A98EC 801131EC 3C070001 */   lui      $a3, 1
-/* A98F0 801131F0 3C038015 */  lui       $v1, %hi(D_8014B75C)
-/* A98F4 801131F4 8C63B75C */  lw        $v1, %lo(D_8014B75C)($v1)
-/* A98F8 801131F8 3C048015 */  lui       $a0, %hi(D_8014B758)
-/* A98FC 801131FC 8C84B758 */  lw        $a0, %lo(D_8014B758)($a0)
+/* A98F0 801131F0 3C038015 */  lui       $v1, %hi(mdl_renderModelFogEnd)
+/* A98F4 801131F4 8C63B75C */  lw        $v1, %lo(mdl_renderModelFogEnd)($v1)
+/* A98F8 801131F8 3C048015 */  lui       $a0, %hi(mdl_renderModelFogStart)
+/* A98FC 801131FC 8C84B758 */  lw        $a0, %lo(mdl_renderModelFogStart)($a0)
 /* A9900 80113200 34E7F400 */  ori       $a3, $a3, 0xf400
 /* A9904 80113204 00641823 */  subu      $v1, $v1, $a0
 /* A9908 80113208 14600002 */  bnez      $v1, .L80113214
@@ -170,18 +170,18 @@ glabel appendGfx_model
 /* A9980 80113280 0040302D */  daddu     $a2, $v0, $zero
 /* A9984 80113284 3C02FA00 */  lui       $v0, 0xfa00
 /* A9988 80113288 AD020000 */  sw        $v0, ($t0)
-/* A998C 8011328C 3C028015 */  lui       $v0, %hi(D_8014B750)
-/* A9990 80113290 9042B750 */  lbu       $v0, %lo(D_8014B750)($v0)
-/* A9994 80113294 3C038015 */  lui       $v1, %hi(D_8014B751)
-/* A9998 80113298 9063B751 */  lbu       $v1, %lo(D_8014B751)($v1)
-/* A999C 8011329C 3C048015 */  lui       $a0, %hi(D_8014B752)
-/* A99A0 801132A0 9084B752 */  lbu       $a0, %lo(D_8014B752)($a0)
+/* A998C 8011328C 3C028015 */  lui       $v0, %hi(mdl_renderModelFogPrimColorR)
+/* A9990 80113290 9042B750 */  lbu       $v0, %lo(mdl_renderModelFogPrimColorR)($v0)
+/* A9994 80113294 3C038015 */  lui       $v1, %hi(mdl_renderModelFogPrimColorG)
+/* A9998 80113298 9063B751 */  lbu       $v1, %lo(mdl_renderModelFogPrimColorG)($v1)
+/* A999C 8011329C 3C048015 */  lui       $a0, %hi(mdl_renderModelFogPrimColorB)
+/* A99A0 801132A0 9084B752 */  lbu       $a0, %lo(mdl_renderModelFogPrimColorB)($a0)
 /* A99A4 801132A4 00021600 */  sll       $v0, $v0, 0x18
 /* A99A8 801132A8 00031C00 */  sll       $v1, $v1, 0x10
 /* A99AC 801132AC 00431025 */  or        $v0, $v0, $v1
 /* A99B0 801132B0 00042200 */  sll       $a0, $a0, 8
-/* A99B4 801132B4 3C038015 */  lui       $v1, %hi(D_8014B753)
-/* A99B8 801132B8 9063B753 */  lbu       $v1, %lo(D_8014B753)($v1)
+/* A99B4 801132B4 3C038015 */  lui       $v1, %hi(mdl_renderModelFogPrimColorA)
+/* A99B8 801132B8 9063B753 */  lbu       $v1, %lo(mdl_renderModelFogPrimColorA)($v1)
 /* A99BC 801132BC 00441025 */  or        $v0, $v0, $a0
 /* A99C0 801132C0 00431025 */  or        $v0, $v0, $v1
 /* A99C4 801132C4 AD020004 */  sw        $v0, 4($t0)
@@ -190,12 +190,12 @@ glabel appendGfx_model
 /* A99D0 801132D0 3C02F800 */  lui       $v0, 0xf800
 /* A99D4 801132D4 AE060000 */  sw        $a2, ($s0)
 /* A99D8 801132D8 AD020000 */  sw        $v0, ($t0)
-/* A99DC 801132DC 3C028015 */  lui       $v0, %hi(D_8014B754)
-/* A99E0 801132E0 9042B754 */  lbu       $v0, %lo(D_8014B754)($v0)
-/* A99E4 801132E4 3C048015 */  lui       $a0, %hi(D_8014B755)
-/* A99E8 801132E8 9084B755 */  lbu       $a0, %lo(D_8014B755)($a0)
-/* A99EC 801132EC 3C038015 */  lui       $v1, %hi(D_8014B756)
-/* A99F0 801132F0 9063B756 */  lbu       $v1, %lo(D_8014B756)($v1)
+/* A99DC 801132DC 3C028015 */  lui       $v0, %hi(mdl_renderModelFogColorR)
+/* A99E0 801132E0 9042B754 */  lbu       $v0, %lo(mdl_renderModelFogColorR)($v0)
+/* A99E4 801132E4 3C048015 */  lui       $a0, %hi(mdl_renderModelFogColorG)
+/* A99E8 801132E8 9084B755 */  lbu       $a0, %lo(mdl_renderModelFogColorG)($a0)
+/* A99EC 801132EC 3C038015 */  lui       $v1, %hi(mdl_renderModelFogColorB)
+/* A99F0 801132F0 9063B756 */  lbu       $v1, %lo(mdl_renderModelFogColorB)($v1)
 /* A99F4 801132F4 00021600 */  sll       $v0, $v0, 0x18
 /* A99F8 801132F8 00042400 */  sll       $a0, $a0, 0x10
 /* A99FC 801132FC 00441025 */  or        $v0, $v0, $a0
