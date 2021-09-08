@@ -853,7 +853,7 @@ if __name__ == "__main__":
                         message.bytes += [0xFF, 0x27, 0x05]
                     elif command == "rainbow":
                         fx_stack.append(0x06)
-                        message.bytes += [0xFF, 0x27, 0x06]
+                        message.bytes += [0xFF, 0x26, 0x06]
                     elif command == "/rainbow":
                         fx_stack.pop()
                         message.bytes += [0xFF, 0x27, 0x06]
