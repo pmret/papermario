@@ -1396,9 +1396,38 @@ ApiStatus AssignScript(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignAreaFlag, Evt* script, s32 isInitialCall);
+ApiStatus AssignAreaFlag(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignBlockFlag, Evt* script, s32 isInitialCall);
+    if (isInitialCall == TRUE) {
+        s32 temp_s0 = evt_get_variable(script, *args++);
+        Entity* entity = get_entity_by_index(gLastCreatedEntityIndex);
+
+        // TODO find proper struct for the dataBuf
+        ((s16*)(entity->dataBuf))[16] = temp_s0;
+        if (get_area_flag(temp_s0) != 0) {
+            entity->flags |= 0x20000000;
+        }
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_DONE1;
+}
+
+ApiStatus AssignBlockFlag(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (isInitialCall == TRUE) {
+        s32 temp_s0 = evt_get_variable_index(script, *args++);
+        Entity* entity = get_entity_by_index(gLastCreatedEntityIndex);
+
+        // TODO find proper struct for the dataBuf
+        ((s16*)(entity->dataBuf))[5] = temp_s0;
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_DONE1;
+}
 
 ApiStatus AssignFlag(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -1413,9 +1442,33 @@ ApiStatus AssignFlag(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignPanelFlag, Evt* script, s32 isInitialCall);
+ApiStatus AssignPanelFlag(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignCrateFlag, Evt* script, s32 isInitialCall);
+    if (isInitialCall == TRUE) {
+        // TODO find proper struct for the dataBuf
+        s16* dataBuf = (s16*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
+
+        dataBuf[3] = evt_get_variable_index(script, *args++);
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_DONE1;
+}
+
+ApiStatus AssignCrateFlag(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (isInitialCall == TRUE) {
+        // TODO find proper struct for the dataBuf
+        s16* dataBuf = (s16*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
+
+        dataBuf[2] = evt_get_variable_index(script, *args++);
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_DONE1;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity_shadow);
 
