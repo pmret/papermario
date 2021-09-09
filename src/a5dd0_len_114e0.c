@@ -1869,7 +1869,49 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", render_models);
 void appendGfx_model_group(Model* model);
 INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model_group, Model*);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80117D00);
+void func_80117D00(Model* model) {
+    Model* mdl = model; // temps needed to match
+    ModelNode* modelNode = mdl->modelNode;
+
+    if (model->modelNode->type != SHAPE_TYPE_MODEL) {
+        if (modelNode->groupData != NULL) {
+            s32 numChildren = modelNode->groupData->numChildren;
+
+            if (numChildren != 0) {
+                s32 i;
+
+                for (i = 0; i < numChildren; i++, mdl_treeIterPos++) {
+                    Model newModel = *mdl;
+                    ModelNodeProperty* prop;
+
+                    newModel.flags = mdl->flags;
+                    newModel.currentSpecialMatrix = mdl->currentSpecialMatrix;
+                    newModel.modelNode = modelNode->groupData->childList[i];
+                    newModel.texPannerID = mdl->texPannerID;
+                    newModel.specialDisplayListID = mdl->specialDisplayListID;
+
+                    if (newModel.modelNode->type == SHAPE_TYPE_MODEL) {
+                        prop = get_model_property(newModel.modelNode, MODEL_PROP_KEY_RENDER_MODE);
+                    } else {
+                        prop = NULL;
+                    }
+
+                    if (prop != NULL) {
+                        newModel.renderMode = prop->data.s;
+                    } else {
+                        newModel.renderMode = 0;
+                    }
+
+                    newModel.textureID = (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID;
+                    newModel.unk_A9 = 0;
+                    func_80117D00(&newModel);
+                }
+            }
+        }
+    } else {
+        appendGfx_model(mdl);
+    }
+}
 
 // this looks like a switch, but I can't figure it out
 void render_transform_group_node(ModelNode* node) {
