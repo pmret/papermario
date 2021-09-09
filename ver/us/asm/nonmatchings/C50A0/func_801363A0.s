@@ -65,7 +65,7 @@ glabel func_801363A0
 /* CCB78 80136478 3652005C */  ori       $s2, $s2, 0x5c
 .L8013647C:
 /* CCB7C 8013647C 8C840000 */  lw        $a0, ($a0)
-/* CCB80 80136480 0C0496CF */  jal       set_message_string
+/* CCB80 80136480 0C0496CF */  jal       set_message_msg
 /* CCB84 80136484 0000282D */   daddu    $a1, $zero, $zero
 /* CCB88 80136488 86840018 */  lh        $a0, 0x18($s4)
 /* CCB8C 8013648C 00041140 */  sll       $v0, $a0, 5
@@ -84,14 +84,14 @@ glabel func_801363A0
 /* CCBC0 801364C0 30420030 */  andi      $v0, $v0, 0x30
 /* CCBC4 801364C4 14400006 */  bnez      $v0, .L801364E0
 /* CCBC8 801364C8 00000000 */   nop
-/* CCBCC 801364CC 0C04991D */  jal       get_string_width
+/* CCBCC 801364CC 0C04991D */  jal       get_msg_width
 /* CCBD0 801364D0 0000282D */   daddu    $a1, $zero, $zero
 /* CCBD4 801364D4 0804D93B */  j         .L801364EC
 /* CCBD8 801364D8 24500036 */   addiu    $s0, $v0, 0x36
 .L801364DC:
 /* CCBDC 801364DC 0240202D */  daddu     $a0, $s2, $zero
 .L801364E0:
-/* CCBE0 801364E0 0C04991D */  jal       get_string_width
+/* CCBE0 801364E0 0C04991D */  jal       get_msg_width
 /* CCBE4 801364E4 0000282D */   daddu    $a1, $zero, $zero
 /* CCBE8 801364E8 2450001E */  addiu     $s0, $v0, 0x1e
 .L801364EC:
@@ -133,10 +133,10 @@ glabel func_801363A0
 .L80136564:
 /* CCC64 80136564 8C840000 */  lw        $a0, ($a0)
 /* CCC68 80136568 0000282D */  daddu     $a1, $zero, $zero
-/* CCC6C 8013656C 0C0496CF */  jal       set_message_string
+/* CCC6C 8013656C 0C0496CF */  jal       set_message_msg
 /* CCC70 80136570 2413004C */   addiu    $s3, $zero, 0x4c
 /* CCC74 80136574 0240202D */  daddu     $a0, $s2, $zero
-/* CCC78 80136578 0C04991D */  jal       get_string_width
+/* CCC78 80136578 0C04991D */  jal       get_msg_width
 /* CCC7C 8013657C 0000282D */   daddu    $a1, $zero, $zero
 /* CCC80 80136580 2450001E */  addiu     $s0, $v0, 0x1e
 /* CCC84 80136584 001017C2 */  srl       $v0, $s0, 0x1f
@@ -145,7 +145,7 @@ glabel func_801363A0
 /* CCC90 80136590 240300A0 */  addiu     $v1, $zero, 0xa0
 /* CCC94 80136594 00628823 */  subu      $s1, $v1, $v0
 .L80136598:
-/* CCC98 80136598 0C04992C */  jal       get_string_lines
+/* CCC98 80136598 0C04992C */  jal       get_msg_lines
 /* CCC9C 8013659C 0240202D */   daddu    $a0, $s2, $zero
 /* CCCA0 801365A0 2442FFFF */  addiu     $v0, $v0, -1
 /* CCCA4 801365A4 00021040 */  sll       $v0, $v0, 1
@@ -202,7 +202,7 @@ glabel func_801363A0
 /* CCD68 80136668 1062002C */  beq       $v1, $v0, .L8013671C
 /* CCD6C 8013666C 3C04001D */   lui      $a0, 0x1d
 /* CCD70 80136670 34840060 */  ori       $a0, $a0, 0x60
-/* CCD74 80136674 0C04991D */  jal       get_string_width
+/* CCD74 80136674 0C04991D */  jal       get_msg_width
 /* CCD78 80136678 0000282D */   daddu    $a1, $zero, $zero
 /* CCD7C 8013667C 24500018 */  addiu     $s0, $v0, 0x18
 /* CCD80 80136680 24040011 */  addiu     $a0, $zero, 0x11
@@ -220,11 +220,11 @@ glabel func_801363A0
 /* CCDB0 801366B0 0200382D */   daddu    $a3, $s0, $zero
 .L801366B4:
 /* CCDB4 801366B4 8C840000 */  lw        $a0, ($a0)
-/* CCDB8 801366B8 0C0496CF */  jal       set_message_string
+/* CCDB8 801366B8 0C0496CF */  jal       set_message_msg
 /* CCDBC 801366BC 0000282D */   daddu    $a1, $zero, $zero
 /* CCDC0 801366C0 3C04001D */  lui       $a0, 0x1d
 /* CCDC4 801366C4 3484005F */  ori       $a0, $a0, 0x5f
-/* CCDC8 801366C8 0C04991D */  jal       get_string_width
+/* CCDC8 801366C8 0C04991D */  jal       get_msg_width
 /* CCDCC 801366CC 0000282D */   daddu    $a1, $zero, $zero
 /* CCDD0 801366D0 24500036 */  addiu     $s0, $v0, 0x36
 /* CCDD4 801366D4 2404000C */  addiu     $a0, $zero, 0xc

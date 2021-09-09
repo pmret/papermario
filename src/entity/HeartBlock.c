@@ -261,7 +261,7 @@ void entity_HeartBlock_show_tutorial_message(Entity* entity) {
     if ((!gPlayerData.partners[1].enabled) && get_global_flag(EVT_SAVE_FLAG(96)) == 0) {
         UNK_TYPE* ptr = &D_802EB3C0;
         *ptr = 0;
-        msg_get_printer_for_string(0x1D0001, ptr);
+        msg_get_printer_for_msg(0x1D0001, ptr);
         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
         gOverrideFlags |= 0x40;
         disable_player_input();

@@ -22,7 +22,7 @@ glabel func_802416F8_E13E58
 /* E13E9C 8024173C 3C048015 */  lui       $a0, %hi(MessageSingular)
 /* E13EA0 80241740 2484C294 */  addiu     $a0, $a0, %lo(MessageSingular)
 .L80241744:
-/* E13EA4 80241744 0C0496CF */  jal       set_message_string
+/* E13EA4 80241744 0C0496CF */  jal       set_message_msg
 /* E13EA8 80241748 24050001 */   addiu    $a1, $zero, 1
 /* E13EAC 8024174C 8FBF0014 */  lw        $ra, 0x14($sp)
 /* E13EB0 80241750 8FB00010 */  lw        $s0, 0x10($sp)

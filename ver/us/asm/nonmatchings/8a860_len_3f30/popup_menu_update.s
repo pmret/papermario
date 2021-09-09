@@ -1575,7 +1575,7 @@ glabel L800F3034_8C4E4
 .L800F3064:
 /* 8C514 800F3064 3C04001D */  lui       $a0, 0x1d
 /* 8C518 800F3068 3484006B */  ori       $a0, $a0, 0x6b
-/* 8C51C 800F306C 0C04991D */  jal       get_string_width
+/* 8C51C 800F306C 0C04991D */  jal       get_msg_width
 /* 8C520 800F3070 0000282D */   daddu    $a1, $zero, $zero
 /* 8C524 800F3074 24470017 */  addiu     $a3, $v0, 0x17
 /* 8C528 800F3078 24040009 */  addiu     $a0, $zero, 9
@@ -1790,7 +1790,7 @@ glabel L800F3350_8C800
 /* 8C830 800F3380 3C04001D */  lui       $a0, 0x1d
 /* 8C834 800F3384 34840068 */  ori       $a0, $a0, 0x68
 .L800F3388:
-/* 8C838 800F3388 0C04991D */  jal       get_string_width
+/* 8C838 800F3388 0C04991D */  jal       get_msg_width
 /* 8C83C 800F338C 0000282D */   daddu    $a1, $zero, $zero
 /* 8C840 800F3390 24470017 */  addiu     $a3, $v0, 0x17
 /* 8C844 800F3394 24040015 */  addiu     $a0, $zero, 0x15
@@ -1817,7 +1817,7 @@ glabel L800F3350_8C800
 /* 8C898 800F33E8 3C04001E */  lui       $a0, 0x1e
 /* 8C89C 800F33EC 3C058011 */  lui       $a1, %hi(D_8010D6A4)
 /* 8C8A0 800F33F0 24A5D6A4 */  addiu     $a1, $a1, %lo(D_8010D6A4)
-/* 8C8A4 800F33F4 0C049640 */  jal       msg_get_printer_for_string
+/* 8C8A4 800F33F4 0C049640 */  jal       msg_get_printer_for_msg
 /* 8C8A8 800F33F8 3484001D */   ori      $a0, $a0, 0x1d
 /* 8C8AC 800F33FC 0040202D */  daddu     $a0, $v0, $zero
 /* 8C8B0 800F3400 240500A0 */  addiu     $a1, $zero, 0xa0

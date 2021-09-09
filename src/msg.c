@@ -104,7 +104,7 @@ extern s32 gMsgVarImages; // message images?
 extern s32 gMsgBGScrollAmtY;
 extern s32 D_80151338;
 extern char gMessageBuffers[][1024];
-extern u8 gMessageStringVars[3][32];
+extern u8 gMessageMsgVars[3][32];
 extern s16 D_80155C98;
 extern Matrix4s gMessageWindowProjMatrix[2];
 extern MessageDrawState* gMessageDrawStatePtr;
@@ -122,7 +122,7 @@ void load_font(s32 font);
 s32 _update_message(MessagePrintState*);
 void appendGfx_message(MessagePrintState*, s16, s16, u16, u16, u16, u8);
 void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY);
-void get_string_properties(s32 stringID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
+void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
                            s32* maxLinesPerPage, s32* arg6, s32 charset);
 
 
@@ -140,8 +140,8 @@ void clear_printers(void) {
     gMsgBGScrollAmtX = 0;
     gMsgBGScrollAmtY = 0;
 
-    for (i = 0; i < ARRAY_COUNT(gMessageStringVars); i++) {
-        gMessageStringVars[i][0] = 0;
+    for (i = 0; i < ARRAY_COUNT(gMessageMsgVars); i++) {
+        gMessageMsgVars[i][0] = 0;
     }
 
     D_80151338 = 0;
@@ -612,7 +612,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->charsPerChunk = 1;
     printer->unk_464 = 6;
     printer->srcBuffer = NULL;
-    printer->stringID = 0;
+    printer->msgID = 0;
     printer->currentPrintDelay = 0;
     printer->windowOffsetPos.x = 0;
     printer->windowOffsetPos.y = 0;
@@ -678,7 +678,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->sizeScale = 1.0f;
 }
 
-void dma_load_string(u32 msgID, void* dest) {
+void dma_load_msg(u32 msgID, void* dest) {
     u8* addr = (u8*) MSG_ROM_START + (msgID >> 14); // (msgID >> 16) * 4
     u8* offset[2]; // start, end
 
@@ -691,10 +691,10 @@ void dma_load_string(u32 msgID, void* dest) {
     dma_copy(MSG_ROM_START + offset[0], MSG_ROM_START + offset[1], dest);
 }
 
-s32* load_message_to_buffer(s32 stringID) {
+s32* load_message_to_buffer(s32 msgID) {
     s32* prevBufferPos;
 
-    dma_load_string(stringID, &gMessageBuffers[gNextMessageBuffer]);
+    dma_load_msg(msgID, &gMessageBuffers[gNextMessageBuffer]);
     prevBufferPos = gMessageBuffers[gNextMessageBuffer];
 
     gNextMessageBuffer++;
@@ -705,17 +705,17 @@ s32* load_message_to_buffer(s32 stringID) {
     return prevBufferPos;
 }
 
-MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* donePrintingWriteback) {
-    return _msg_get_printer_for_string(stringID, donePrintingWriteback, 0);
+MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback) {
+    return _msg_get_printer_for_msg(msgID, donePrintingWriteback, 0);
 }
 
 #ifdef NON_MATCHING
-MessagePrintState* _msg_get_printer_for_string(s32 stringID, s32* donePrintingWriteback, s32 arg2) {
-    if (stringID != 0) {
-        s8* srcBuffer = (s8*) stringID;
+MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback, s32 arg2) {
+    if (msgID != 0) {
+        s8* srcBuffer = (s8*) msgID;
         s32 i;
 
-        if (stringID >= 0) {
+        if (msgID >= 0) {
             srcBuffer = load_message_to_buffer(srcBuffer);
         }
 
@@ -732,11 +732,11 @@ MessagePrintState* _msg_get_printer_for_string(s32 stringID, s32* donePrintingWr
                 initialize_printer(printer, 1, arg2);
                 printer->windowState = 1;
                 printer->srcBuffer = srcBuffer;
-                printer->stringID = stringID;
+                printer->msgID = msgID;
                 printer->stateFlags |= 2;
-                get_string_properties(stringID, &height, &width, &maxLineChars, &numLines, &maxLinesPerPage, NULL, 0);
-                printer->stringHeight = height;
-                printer->stringWidth = width;
+                get_msg_properties(msgID, &height, &width, &maxLineChars, &numLines, &maxLinesPerPage, NULL, 0);
+                printer->msgHeight = height;
+                printer->msgWidth = width;
                 printer->maxLineChars = maxLineChars;
                 printer->numLines = numLines;
                 printer->maxLinesPerPage = maxLinesPerPage;
@@ -752,16 +752,16 @@ MessagePrintState* _msg_get_printer_for_string(s32 stringID, s32* donePrintingWr
     return NULL;
 }
 #else
-INCLUDE_ASM(MessagePrintState*, "msg", _msg_get_printer_for_string, s32 stringID, s32* donePrintingWriteback, s32 arg2);
+INCLUDE_ASM(MessagePrintState*, "msg", _msg_get_printer_for_msg, s32 msgID, s32* donePrintingWriteback, s32 arg2);
 #endif
 
-s32 msg_printer_load_string(s32 stringID, MessagePrintState* printer) {
+s32 msg_printer_load_msg(s32 msgID, MessagePrintState* printer) {
     s32* buffer;
 
-    if (stringID >= 0) {
-        buffer = load_message_to_buffer(stringID);
+    if (msgID >= 0) {
+        buffer = load_message_to_buffer(msgID);
     } else {
-        buffer = (s32*) stringID;
+        buffer = (s32*) msgID;
     }
 
     printer->srcBuffer = buffer;
@@ -803,21 +803,21 @@ void set_message_images(s32* images) {
 
 // loop crap
 #ifdef NON_MATCHING
-void set_message_string(s32 stringID, s32 index) {
-    u8* buffer = stringID;
+void set_message_msg(s32 msgID, s32 index) {
+    u8* buffer = msgID;
     u8* mallocSpace = NULL;
     u8* it;
     s32 i;
     s32 new_var;
 
-    if (stringID >= 0) {
+    if (msgID >= 0) {
         buffer = general_heap_malloc(0x400);
-        dma_load_string(stringID, buffer);
+        dma_load_msg(msgID, buffer);
         mallocSpace = buffer;
     }
 
-    for (i = 0; i < ARRAY_COUNT(gMessageStringVars[index]); i++) {
-        gMessageStringVars[index][i] = buffer[i];
+    for (i = 0; i < ARRAY_COUNT(gMessageMsgVars[index]); i++) {
+        gMessageMsgVars[index][i] = buffer[i];
         if (buffer[i] == 0xFD) {
             break;
         }
@@ -828,25 +828,25 @@ void set_message_string(s32 stringID, s32 index) {
     }
 }
 #else
-INCLUDE_ASM(s32, "msg", set_message_string);
+INCLUDE_ASM(s32, "msg", set_message_msg);
 #endif
 
 void set_message_value(s32 value, s32 index) {
-    s8 strBuffer[ARRAY_COUNT(gMessageStringVars[index])];
+    s8 strBuffer[ARRAY_COUNT(gMessageMsgVars[index])];
     s8* bufferIt;
     s32 i;
 
     int_to_string(value, &strBuffer, 10);
 
-    for (i = 0, bufferIt = strBuffer; i < ARRAY_COUNT(gMessageStringVars[index]) - 1; i++) {
+    for (i = 0, bufferIt = strBuffer; i < ARRAY_COUNT(gMessageMsgVars[index]) - 1; i++) {
         s8 thisChar = bufferIt[i];
 
         if (thisChar == 0) {
             break;
         }
-        gMessageStringVars[index][i] = thisChar - 0x20;
+        gMessageMsgVars[index][i] = thisChar - 0x20;
     }
-    gMessageStringVars[index][i] = 0xFD;
+    gMessageMsgVars[index][i] = 0xFD;
 }
 
 void close_message(MessagePrintState* msgPrintState) {
@@ -854,9 +854,9 @@ void close_message(MessagePrintState* msgPrintState) {
 }
 
 // so close, just some dumb control flow thing at the beginning
-s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 stringScale, s32 overrideCharWidth, u8 flags);
+s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
 #ifdef NON_MATCHING
-s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 stringScale, s32 overrideCharWidth, u8 flags) {
+s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags) {
     u8* charWidthTable;
     f32 baseWidth;
     f64 charWidth;
@@ -873,52 +873,52 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 stri
         }
 
         if (character == 0xF7) {
-            charWidth = baseWidth * stringScale;
+            charWidth = baseWidth * msgScale;
             modifier = 0.6;
             return charWidth * modifier;
         }
         if (character == 0xF8) {
-            charWidth = baseWidth * stringScale;
+            charWidth = baseWidth * msgScale;
             return charWidth;
         }
         if (character == 0xF9) {
-            charWidth = baseWidth * stringScale;
+            charWidth = baseWidth * msgScale;
             modifier = 0.5;
             return charWidth * modifier;
         }
         if (character < 0xF0) {
-            return baseWidth * stringScale;
+            return baseWidth * msgScale;
         }
     }
     return 0;
 }
 #else
-INCLUDE_ASM(s32, "msg", msg_get_print_char_width, s32 character, s32 charset, s32 variation, f32 stringScale, s32 overrideCharWidth, u8 flags);
+INCLUDE_ASM(s32, "msg", msg_get_print_char_width, s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
 #endif
 
-s32 msg_get_draw_char_width(s32 character, s32 charset, s32 varaition, f32 stringScale, s32 overrideCharWidth, s32 flags);
-INCLUDE_ASM(s32, "msg", msg_get_draw_char_width, s32 character, s32 charset, s32 varaition, f32 stringScale, s32 overrideCharWidth, s32 flags);
+s32 msg_get_draw_char_width(s32 character, s32 charset, s32 varaition, f32 msgScale, s32 overrideCharWidth, s32 flags);
+INCLUDE_ASM(s32, "msg", msg_get_draw_char_width, s32 character, s32 charset, s32 varaition, f32 msgScale, s32 overrideCharWidth, s32 flags);
 
-INCLUDE_ASM(void, "msg", get_string_properties, s32 stringID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
+INCLUDE_ASM(void, "msg", get_msg_properties, s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
             s32* maxLinesPerPage, s32* arg6, s32 charset);
 
-s32 get_string_width(s32 stringID, u16 charset) {
+s32 get_msg_width(s32 msgID, u16 charset) {
     s32 width;
 
-    get_string_properties(stringID, NULL, &width, NULL, NULL, NULL, NULL, charset);
+    get_msg_properties(msgID, NULL, &width, NULL, NULL, NULL, NULL, charset);
     return width;
 }
 
-s32 get_string_lines(s32 stringID) {
+s32 get_msg_lines(s32 msgID) {
     s32 numLines;
 
-    get_string_properties(stringID, NULL, NULL, NULL, &numLines, NULL, NULL, 0);
+    get_msg_properties(msgID, NULL, NULL, NULL, &numLines, NULL, NULL, 0);
     return numLines;
 }
 
-// some weird stacky stringIDy stuff
+// some weird stacky msgIDy stuff
 #ifdef NON_MATCHING
-void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style) {
+void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style) {
     s32 width;
     MessagePrintState stackPrinter;
     MessagePrintState* printer;
@@ -932,7 +932,7 @@ void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 
     mallocSpace = NULL;
     charset = 0;
 
-    if (stringID != 0) {
+    if (msgID != 0) {
         if (style & 1) {
             flags = 2;
             charset = 1;
@@ -945,14 +945,14 @@ void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 
         printer = &stackPrinter;
         initialize_printer(printer, 1, 0);
 
-        if (stringID < 0) {
-            printer = (MessagePrintState*)stringID;
+        if (msgID < 0) {
+            printer = (MessagePrintState*)msgID;
         } else {
             mallocSpace = general_heap_malloc(0x400);
-            dma_load_string(stringID, mallocSpace);
+            dma_load_msg(msgID, mallocSpace);
             printer->srcBuffer = mallocSpace;
-            get_string_properties(stringID, 0, &width, 0, 0, 0, 0, charset);
-            printer->stringWidth = width;
+            get_msg_properties(msgID, 0, &width, 0, 0, 0, 0, charset);
+            printer->msgWidth = width;
         }
 
         if (palette >= 0) {
@@ -992,7 +992,7 @@ void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 
     }
 }
 #else
-INCLUDE_ASM(void, "msg", draw_string, s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
+INCLUDE_ASM(void, "msg", draw_msg, s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
 #endif
 
 INCLUDE_ASM(s32, "msg", msg_update_rewind_arrow);

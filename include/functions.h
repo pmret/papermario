@@ -50,6 +50,7 @@ s32 resume_all_group(s32 groupFlags);
 f32 length2D(f32 x, f32 y);
 void player_input_to_move_vector(f32* angle, f32* magnitude);
 void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3);
+void exec_ShakeCam1(s32 arg0, s32 arg1, s32 arg2);
 f32 func_800E5348(void);
 
 void draw_number(s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
@@ -114,7 +115,7 @@ void entity_HugeBlueSwitch_init(Entity* entity);
 s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 
 // Text
-MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1);
+MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* a1);
 
 void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
@@ -133,7 +134,7 @@ void peach_set_disguise_anim(s32);
 void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, s32 opacity,
               s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
               s32 drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
-s32 get_string_width(s32 stringID, u16 charset);
+s32 get_msg_width(s32 msgID, u16 charset);
 
 s32 partner_player_can_pause(void);
 s32 disable_player_static_collisions(void);
@@ -474,8 +475,8 @@ s32 load_effect(s32 effectIndex);
 void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
 s32 func_8011CFBC(void);
 s32 set_screen_overlay_center_worldpos(void);
-s32 mdl_get_next_texture_address(s32);
-void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
+s32 mdl_get_next_texture_address(void);
+void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
 
 s32 entity_base_block_idle(Entity* entity);

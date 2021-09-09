@@ -244,7 +244,7 @@ glabel pause_spirits_handle_input
 /* 140B04 8024D7C4 0062102A */  slt       $v0, $v1, $v0
 /* 140B08 8024D7C8 14400005 */  bnez      $v0, .L8024D7E0
 /* 140B0C 8024D7CC 3C02001D */   lui      $v0, 0x1d
-/* 140B10 8024D7D0 0C093BA0 */  jal       pause_get_menu_string
+/* 140B10 8024D7D0 0C093BA0 */  jal       pause_get_menu_msg
 /* 140B14 8024D7D4 24040056 */   addiu    $a0, $zero, 0x56
 /* 140B18 8024D7D8 080935FA */  j         .L8024D7E8
 /* 140B1C 8024D7DC 00000000 */   nop
@@ -252,8 +252,8 @@ glabel pause_spirits_handle_input
 /* 140B20 8024D7E0 34420031 */  ori       $v0, $v0, 0x31
 /* 140B24 8024D7E4 00621021 */  addu      $v0, $v1, $v0
 .L8024D7E8:
-/* 140B28 8024D7E8 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescString)
-/* 140B2C 8024D7EC AC2200C8 */  sw        $v0, %lo(gPauseMenuCurrentDescString)($at)
+/* 140B28 8024D7E8 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescMsg)
+/* 140B2C 8024D7EC AC2200C8 */  sw        $v0, %lo(gPauseMenuCurrentDescMsg)($at)
 .L8024D7F0:
 /* 140B30 8024D7F0 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 140B34 8024D7F4 8FB00010 */  lw        $s0, 0x10($sp)

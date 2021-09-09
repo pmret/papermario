@@ -32,12 +32,12 @@ glabel pause_spirits_draw_title
 /* 140640 8024D300 080934C5 */  j         .L8024D314
 /* 140644 8024D304 00828021 */   addu     $s0, $a0, $v0
 .L8024D308:
-/* 140648 8024D308 0C093BA0 */  jal       pause_get_menu_string
+/* 140648 8024D308 0C093BA0 */  jal       pause_get_menu_msg
 /* 14064C 8024D30C 24040056 */   addiu    $a0, $zero, 0x56
 /* 140650 8024D310 0040802D */  daddu     $s0, $v0, $zero
 .L8024D314:
 /* 140654 8024D314 0200202D */  daddu     $a0, $s0, $zero
-/* 140658 8024D318 0C04991D */  jal       get_string_width
+/* 140658 8024D318 0C04991D */  jal       get_msg_width
 /* 14065C 8024D31C 0000282D */   daddu    $a1, $zero, $zero
 /* 140660 8024D320 0200202D */  daddu     $a0, $s0, $zero
 /* 140664 8024D324 02221023 */  subu      $v0, $s1, $v0
@@ -46,7 +46,7 @@ glabel pause_spirits_draw_title
 /* 140670 8024D330 26660001 */  addiu     $a2, $s3, 1
 /* 140674 8024D334 240700FF */  addiu     $a3, $zero, 0xff
 /* 140678 8024D338 AFA00010 */  sw        $zero, 0x10($sp)
-/* 14067C 8024D33C 0C04993B */  jal       draw_string
+/* 14067C 8024D33C 0C04993B */  jal       draw_msg
 /* 140680 8024D340 AFA00014 */   sw       $zero, 0x14($sp)
 .L8024D344:
 /* 140684 8024D344 8FBF0028 */  lw        $ra, 0x28($sp)

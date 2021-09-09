@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel set_message_string
+glabel set_message_msg
 /* BC23C 80125B3C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* BC240 80125B40 AFB00010 */  sw        $s0, 0x10($sp)
 /* BC244 80125B44 0080802D */  daddu     $s0, $a0, $zero
@@ -15,14 +15,14 @@ glabel set_message_string
 /* BC264 80125B64 24040400 */   addiu    $a0, $zero, 0x400
 /* BC268 80125B68 0040882D */  daddu     $s1, $v0, $zero
 /* BC26C 80125B6C 0200202D */  daddu     $a0, $s0, $zero
-/* BC270 80125B70 0C049601 */  jal       dma_load_string
+/* BC270 80125B70 0C049601 */  jal       dma_load_msg
 /* BC274 80125B74 0220282D */   daddu    $a1, $s1, $zero
 /* BC278 80125B78 0220802D */  daddu     $s0, $s1, $zero
 .L80125B7C:
 /* BC27C 80125B7C 0000282D */  daddu     $a1, $zero, $zero
 /* BC280 80125B80 240600FD */  addiu     $a2, $zero, 0xfd
-/* BC284 80125B84 3C038015 */  lui       $v1, %hi(gMessageStringVars)
-/* BC288 80125B88 24635C38 */  addiu     $v1, $v1, %lo(gMessageStringVars)
+/* BC284 80125B84 3C038015 */  lui       $v1, %hi(gMessageMsgVars)
+/* BC288 80125B88 24635C38 */  addiu     $v1, $v1, %lo(gMessageMsgVars)
 /* BC28C 80125B8C 00121140 */  sll       $v0, $s2, 5
 /* BC290 80125B90 00432021 */  addu      $a0, $v0, $v1
 .L80125B94:

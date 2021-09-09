@@ -870,8 +870,8 @@ typedef struct PrintHandle {
 
 typedef struct OtherPrint {
     /* 0x00 */ char unk_00[16];
-    /* 0x10 */ f32 stringScaleH;
-    /* 0x14 */ f32 stringScaleW;
+    /* 0x10 */ f32 msgScaleH;
+    /* 0x14 */ f32 msgScaleW;
     /* 0x18 */ f32 characterScaleH;
     /* 0x1C */ f32 characterScaleW;
     /* 0x20 */ char unk_20[32];
@@ -886,14 +886,14 @@ typedef struct ColliderBoundingBox {
 } ColliderBoundingBox; // size = 0x1C
 
 typedef struct StaticItem {
-    /* 0x00 */ s32 nameString;
+    /* 0x00 */ s32 nameMsg;
     /* 0x04 */ s16 iconID;
     /* 0x06 */ s16 badgeSortPriority;
     /* 0x08 */ s32 targetFlags;
     /* 0x0C */ s16 sellValue;
     /* 0x0E */ char unk_0E[2];
-    /* 0x10 */ s32 menuString;
-    /* 0x14 */ s32 itemString;
+    /* 0x10 */ s32 menuMsg;
+    /* 0x14 */ s32 itemMsg;
     /* 0x18 */ s16 typeFlags;
     /* 0x1A */ u8 moveID;
     /* 0x1B */ s8 potencyA;
@@ -1036,7 +1036,7 @@ typedef struct MessagePrintState {
     /* 0x000 */ s8* srcBuffer;
     /* 0x004 */ s16 printBufferPos;
     /* 0x006 */ char unk_06[2];
-    /* 0x008 */ s32 stringID;
+    /* 0x008 */ s32 msgID;
     /* 0x00C */ s16 srcBufferPos;
     /* 0x00E */ s16 currentPrintDelay;
     /* 0x010 */ u8 printBuffer[1088]; // slightly larger than source buffer
@@ -1111,8 +1111,8 @@ typedef struct MessagePrintState {
     /* 0x532 */ s8 varImgAlphaFadeStep; // how much to fade in per frame
     /* 0x533 */ s8 varImageDisplayState; // 0 = fade in, 1 = fully visible, 2 = fade out
     /* 0x534 */ s16 varImageFadeTimer; // frames faded in
-    /* 0x536 */ s16 stringHeight;
-    /* 0x538 */ s16 stringWidth;
+    /* 0x536 */ s16 msgHeight;
+    /* 0x538 */ s16 msgWidth;
     /* 0x53A */ s8 maxLineChars;
     /* 0x53B */ s8 numLines;
     /* 0x53C */ s8 maxLinesPerPage;
@@ -1128,9 +1128,9 @@ typedef struct MessagePrintState {
 typedef struct MessageDrawState {
     /* 0x00 */ s32 clipX[2]; // characters beyond this pos get skipped
     /* 0x08 */ s32 clipY[2]; // characters beyond this pos get skipped
-    /* 0x10 */ Vec2f stringScale;
+    /* 0x10 */ Vec2f msgScale;
     /* 0x18 */ Vec2f charScale;
-    /* 0x20 */ s32 drawBufferPos; // string gets printed here and read for display
+    /* 0x20 */ s32 drawBufferPos; // msg gets printed here and read for display
     /* 0x24 */ s16 savedPos[2];
     /* 0x28 */ s8 savedColor;
     /* 0x29 */ u8 unk_29;
@@ -1534,7 +1534,7 @@ typedef struct ShopOwner {
     /* 0x0C */ char unk_0C[0x4];
     /* 0x10 */ Bytecode* unkScript;
     /* 0x14 */ char unk_14[0x4];
-    /* 0x18 */ s32* shopStringIDs;
+    /* 0x18 */ s32* shopMsgIDs;
 } ShopOwner;
 
 typedef struct ShopItemLocation {
@@ -1557,7 +1557,7 @@ typedef struct StaticPriceItem {
 typedef struct PopupMenu {
     /* 0x000 */ s32* ptrIcon[32];
     /* 0x080 */ char unk_80[4];
-    /* 0x084 */ s32 nameString[32];
+    /* 0x084 */ s32 nameMsg[32];
     /* 0x104 */ char unk_104[4];
     /* 0x108 */ s32 userIndex[32]; // used to map menu order to a user-ID for each item
     /* 0x188 */ char unk_188[4];
@@ -1565,7 +1565,7 @@ typedef struct PopupMenu {
     /* 0x20C */ char unk_20C[4];
     /* 0x210 */ s32 value[32]; // sale price, etc
     /* 0x290 */ char unk_290[4];
-    /* 0x294 */ s32 descString[32];
+    /* 0x294 */ s32 descMsg[32];
     /* 0x314 */ char unk_314[4];
     /* 0x318 */ s32 popupType; // C = keys
     /* 0x31C */ s32 unk_31C;
@@ -1894,7 +1894,9 @@ typedef struct PlayerStatus {
     /* 0x168 */ s32 stickXBuffer[10];
     /* 0x190 */ s32 stickYBuffer[10];
     /* 0x1B8 */ s32 inputBufPos;
-    /* 0x1BC */ char unk_1BC[204];
+    /* 0x1BC */ char unk_1BC[196];
+    /* 0x280 */ s8 unk_280;
+    /* 0x281 */ char unk_281[7];
 } PlayerStatus; // size = 0x288
 
 typedef struct EncounterStatus {

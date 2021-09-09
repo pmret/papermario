@@ -37,7 +37,7 @@ glabel L80250EEC_17F7CC
 /* 17F7E4 80250F04 3C108028 */  lui       $s0, %hi(bMessages)
 /* 17F7E8 80250F08 02028021 */  addu      $s0, $s0, $v0
 /* 17F7EC 80250F0C 8E103770 */  lw        $s0, %lo(bMessages)($s0)
-/* 17F7F0 80250F10 0C04991D */  jal       get_string_width
+/* 17F7F0 80250F10 0C04991D */  jal       get_msg_width
 /* 17F7F4 80250F14 0200202D */   daddu    $a0, $s0, $zero
 /* 17F7F8 80250F18 2447001E */  addiu     $a3, $v0, 0x1e
 /* 17F7FC 80250F1C 000717C2 */  srl       $v0, $a3, 0x1f
@@ -46,7 +46,7 @@ glabel L80250EEC_17F7CC
 /* 17F808 80250F28 240300A0 */  addiu     $v1, $zero, 0xa0
 /* 17F80C 80250F2C 00628823 */  subu      $s1, $v1, $v0
 /* 17F810 80250F30 00E0902D */  daddu     $s2, $a3, $zero
-/* 17F814 80250F34 0C04992C */  jal       get_string_lines
+/* 17F814 80250F34 0C04992C */  jal       get_msg_lines
 /* 17F818 80250F38 0200202D */   daddu    $a0, $s0, $zero
 /* 17F81C 80250F3C 2442FFFF */  addiu     $v0, $v0, -1
 /* 17F820 80250F40 24040009 */  addiu     $a0, $zero, 9
@@ -79,7 +79,7 @@ glabel L80250F90_17F870
 /* 17F888 80250FA8 3C048028 */  lui       $a0, %hi(bMessages)
 /* 17F88C 80250FAC 00822021 */  addu      $a0, $a0, $v0
 /* 17F890 80250FB0 8C843770 */  lw        $a0, %lo(bMessages)($a0)
-/* 17F894 80250FB4 0C04991D */  jal       get_string_width
+/* 17F894 80250FB4 0C04991D */  jal       get_msg_width
 /* 17F898 80250FB8 0000282D */   daddu    $a1, $zero, $zero
 /* 17F89C 80250FBC 24470037 */  addiu     $a3, $v0, 0x37
 /* 17F8A0 80250FC0 24080028 */  addiu     $t0, $zero, 0x28
@@ -117,7 +117,7 @@ glabel L80251010_17F8F0
 /* 17F91C 8025103C 0C0496FA */  jal       set_message_value
 /* 17F920 80251040 0000282D */   daddu    $a1, $zero, $zero
 /* 17F924 80251044 0000282D */  daddu     $a1, $zero, $zero
-/* 17F928 80251048 0C04991D */  jal       get_string_width
+/* 17F928 80251048 0C04991D */  jal       get_msg_width
 /* 17F92C 8025104C 0200202D */   daddu    $a0, $s0, $zero
 /* 17F930 80251050 2447001F */  addiu     $a3, $v0, 0x1f
 /* 17F934 80251054 000717C2 */  srl       $v0, $a3, 0x1f
@@ -126,7 +126,7 @@ glabel L80251010_17F8F0
 /* 17F940 80251060 240300A0 */  addiu     $v1, $zero, 0xa0
 /* 17F944 80251064 00628823 */  subu      $s1, $v1, $v0
 /* 17F948 80251068 00E0902D */  daddu     $s2, $a3, $zero
-/* 17F94C 8025106C 0C04992C */  jal       get_string_lines
+/* 17F94C 8025106C 0C04992C */  jal       get_msg_lines
 /* 17F950 80251070 0200202D */   daddu    $a0, $s0, $zero
 /* 17F954 80251074 2442FFFF */  addiu     $v0, $v0, -1
 /* 17F958 80251078 24040009 */  addiu     $a0, $zero, 9
@@ -165,10 +165,10 @@ glabel L802510C8_17F9A8
 /* 17F9D8 802510F8 3C108028 */  lui       $s0, %hi(bMessages)
 /* 17F9DC 802510FC 02028021 */  addu      $s0, $s0, $v0
 /* 17F9E0 80251100 8E103770 */  lw        $s0, %lo(bMessages)($s0)
-/* 17F9E4 80251104 0C0496CF */  jal       set_message_string
+/* 17F9E4 80251104 0C0496CF */  jal       set_message_msg
 /* 17F9E8 80251108 0000282D */   daddu    $a1, $zero, $zero
 /* 17F9EC 8025110C 0200202D */  daddu     $a0, $s0, $zero
-/* 17F9F0 80251110 0C04991D */  jal       get_string_width
+/* 17F9F0 80251110 0C04991D */  jal       get_msg_width
 /* 17F9F4 80251114 0000282D */   daddu    $a1, $zero, $zero
 /* 17F9F8 80251118 2447001F */  addiu     $a3, $v0, 0x1f
 /* 17F9FC 8025111C 000717C2 */  srl       $v0, $a3, 0x1f
@@ -177,7 +177,7 @@ glabel L802510C8_17F9A8
 /* 17FA08 80251128 240300A0 */  addiu     $v1, $zero, 0xa0
 /* 17FA0C 8025112C 00628823 */  subu      $s1, $v1, $v0
 /* 17FA10 80251130 00E0902D */  daddu     $s2, $a3, $zero
-/* 17FA14 80251134 0C04992C */  jal       get_string_lines
+/* 17FA14 80251134 0C04992C */  jal       get_msg_lines
 /* 17FA18 80251138 0200202D */   daddu    $a0, $s0, $zero
 /* 17FA1C 8025113C 2442FFFF */  addiu     $v0, $v0, -1
 /* 17FA20 80251140 24040009 */  addiu     $a0, $zero, 9
@@ -211,7 +211,7 @@ glabel L80251190_17FA70
 /* 17FA8C 802511AC 02028021 */  addu      $s0, $s0, $v0
 /* 17FA90 802511B0 8E103770 */  lw        $s0, %lo(bMessages)($s0)
 /* 17FA94 802511B4 241400C0 */  addiu     $s4, $zero, 0xc0
-/* 17FA98 802511B8 0C04991D */  jal       get_string_width
+/* 17FA98 802511B8 0C04991D */  jal       get_msg_width
 /* 17FA9C 802511BC 0200202D */   daddu    $a0, $s0, $zero
 /* 17FAA0 802511C0 2447001F */  addiu     $a3, $v0, 0x1f
 /* 17FAA4 802511C4 000717C2 */  srl       $v0, $a3, 0x1f
@@ -220,7 +220,7 @@ glabel L80251190_17FA70
 /* 17FAB0 802511D0 240300A0 */  addiu     $v1, $zero, 0xa0
 /* 17FAB4 802511D4 00628823 */  subu      $s1, $v1, $v0
 /* 17FAB8 802511D8 00E0902D */  daddu     $s2, $a3, $zero
-/* 17FABC 802511DC 0C04992C */  jal       get_string_lines
+/* 17FABC 802511DC 0C04992C */  jal       get_msg_lines
 /* 17FAC0 802511E0 0200202D */   daddu    $a0, $s0, $zero
 /* 17FAC4 802511E4 2442FFFF */  addiu     $v0, $v0, -1
 /* 17FAC8 802511E8 00021840 */  sll       $v1, $v0, 1

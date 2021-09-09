@@ -265,13 +265,13 @@ glabel pause_items_handle_input
 /* 13DEE0 8024ABA0 3C018008 */  lui       $at, %hi(gItemTable+0x10)
 /* 13DEE4 8024ABA4 00220821 */  addu      $at, $at, $v0
 /* 13DEE8 8024ABA8 8C2278F0 */  lw        $v0, %lo(gItemTable+0x10)($at)
-/* 13DEEC 8024ABAC 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescString)
-/* 13DEF0 8024ABB0 AC2200C8 */  sw        $v0, %lo(gPauseMenuCurrentDescString)($at)
+/* 13DEEC 8024ABAC 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescMsg)
+/* 13DEF0 8024ABB0 AC2200C8 */  sw        $v0, %lo(gPauseMenuCurrentDescMsg)($at)
 /* 13DEF4 8024ABB4 08092AFE */  j         .L8024ABF8
 /* 13DEF8 8024ABB8 00000000 */   nop
 .L8024ABBC:
-/* 13DEFC 8024ABBC 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescString)
-/* 13DF00 8024ABC0 AC2000C8 */  sw        $zero, %lo(gPauseMenuCurrentDescString)($at)
+/* 13DEFC 8024ABBC 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescMsg)
+/* 13DF00 8024ABC0 AC2000C8 */  sw        $zero, %lo(gPauseMenuCurrentDescMsg)($at)
 /* 13DF04 8024ABC4 08092AFC */  j         .L8024ABF0
 /* 13DF08 8024ABC8 00000000 */   nop
 .L8024ABCC:
@@ -281,10 +281,10 @@ glabel pause_items_handle_input
 /* 13DF18 8024ABD8 24040052 */   addiu    $a0, $zero, 0x52
 /* 13DF1C 8024ABDC 24040051 */  addiu     $a0, $zero, 0x51
 .L8024ABE0:
-/* 13DF20 8024ABE0 0C093BA0 */  jal       pause_get_menu_string
+/* 13DF20 8024ABE0 0C093BA0 */  jal       pause_get_menu_msg
 /* 13DF24 8024ABE4 00000000 */   nop
-/* 13DF28 8024ABE8 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescString)
-/* 13DF2C 8024ABEC AC2200C8 */  sw        $v0, %lo(gPauseMenuCurrentDescString)($at)
+/* 13DF28 8024ABE8 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescMsg)
+/* 13DF2C 8024ABEC AC2200C8 */  sw        $v0, %lo(gPauseMenuCurrentDescMsg)($at)
 .L8024ABF0:
 /* 13DF30 8024ABF0 3C018027 */  lui       $at, %hi(gPauseMenuCurrentDescIconScript)
 /* 13DF34 8024ABF4 AC2000CC */  sw        $zero, %lo(gPauseMenuCurrentDescIconScript)($at)

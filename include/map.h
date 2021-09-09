@@ -317,7 +317,7 @@ typedef struct Enemy {
     /* 0xCC */ s32* animList;
     /* 0xD0 */ EnemyTerritory* territory;
     /* 0xD4 */ EnemyDrops* drops;
-    /* 0xD8 */ u32 tattleString;
+    /* 0xD8 */ u32 tattleMsg;
     /* 0xDC */ char unk_DC[20];
 } Enemy; // size = 0xF0
 

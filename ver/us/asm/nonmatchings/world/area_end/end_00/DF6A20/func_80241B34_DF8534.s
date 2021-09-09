@@ -43,7 +43,7 @@ glabel func_80241B34_DF8534
 /* DF85A0 80241BA0 AFA00018 */  sw        $zero, 0x18($sp)
 /* DF85A4 80241BA4 AFA0001C */  sw        $zero, 0x1c($sp)
 /* DF85A8 80241BA8 8E640000 */  lw        $a0, ($s3)
-/* DF85AC 80241BAC 0C0497DA */  jal       get_string_properties
+/* DF85AC 80241BAC 0C0497DA */  jal       get_msg_properties
 /* DF85B0 80241BB0 24170008 */   addiu    $s7, $zero, 8
 /* DF85B4 80241BB4 24020001 */  addiu     $v0, $zero, 1
 /* DF85B8 80241BB8 AFA00024 */  sw        $zero, 0x24($sp)
@@ -438,7 +438,7 @@ glabel L80241F28_DF8928
 /* DF8B1C 8024211C AFA00018 */  sw        $zero, 0x18($sp)
 /* DF8B20 80242120 AFA0001C */  sw        $zero, 0x1c($sp)
 /* DF8B24 80242124 8E640000 */  lw        $a0, ($s3)
-/* DF8B28 80242128 0C0497DA */  jal       get_string_properties
+/* DF8B28 80242128 0C0497DA */  jal       get_msg_properties
 /* DF8B2C 8024212C 27A7004C */   addiu    $a3, $sp, 0x4c
 /* DF8B30 80242130 8E64000C */  lw        $a0, 0xc($s3)
 /* DF8B34 80242134 8E630038 */  lw        $v1, 0x38($s3)

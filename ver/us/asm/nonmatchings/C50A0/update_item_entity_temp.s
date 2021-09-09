@@ -599,7 +599,7 @@ glabel L80135F08_CC608
 .L80135F44:
 /* CC644 80135F44 3C058015 */  lui       $a1, %hi(D_801568F8)
 /* CC648 80135F48 24A568F8 */  addiu     $a1, $a1, %lo(D_801568F8)
-/* CC64C 80135F4C 0C049640 */  jal       msg_get_printer_for_string
+/* CC64C 80135F4C 0C049640 */  jal       msg_get_printer_for_msg
 /* CC650 80135F50 00000000 */   nop
 /* CC654 80135F54 0040202D */  daddu     $a0, $v0, $zero
 /* CC658 80135F58 0000282D */  daddu     $a1, $zero, $zero

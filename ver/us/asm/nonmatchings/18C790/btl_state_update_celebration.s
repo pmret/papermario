@@ -1826,7 +1826,7 @@ glabel L8025FC04_18E4E4
 glabel L8025FCA4_18E584
 /* 18E584 8025FCA4 3C04001D */  lui       $a0, 0x1d
 /* 18E588 8025FCA8 348400AB */  ori       $a0, $a0, 0xab
-/* 18E58C 8025FCAC 0C04991D */  jal       get_string_width
+/* 18E58C 8025FCAC 0C04991D */  jal       get_msg_width
 /* 18E590 8025FCB0 0000282D */   daddu    $a1, $zero, $zero
 /* 18E594 8025FCB4 24040009 */  addiu     $a0, $zero, 9
 /* 18E598 8025FCB8 2447001F */  addiu     $a3, $v0, 0x1f
