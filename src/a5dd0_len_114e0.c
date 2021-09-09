@@ -1313,7 +1313,20 @@ void load_simple_entity_data(Entity* entity, StaticEntityData* entityData) {
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", load_split_entity_data);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80111790);
+s32 func_80111790(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentEntityListPtr); i++) {
+        Entity* entity = (*gCurrentEntityListPtr)[i];
+
+        if (entity != NULL && entity->staticData->dmaStart != NULL) {
+            if (entity->staticData->dmaStart == entity->staticData) {
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
 
 INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, StaticEntityData* data);
 
@@ -1330,9 +1343,7 @@ s32 create_shadow_from_data(StaticShadowData* data, f32 x, f32 y, f32 z) {
         }
     }
 
-    if (i >= 60) {
-        PANIC();
-    }
+    ASSERT(i < 60);
 
     shadow = heap_malloc(sizeof(*shadow));
     (*gCurrentShadowListPtr)[i] = shadow;
@@ -1578,7 +1589,7 @@ void clear_game_modes(void) {
     }
 }
 
-// regalloc?
+// weird ordering at the beginning
 #ifndef NON_MATCHING
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_next_game_mode);
 #else
@@ -1597,13 +1608,22 @@ GameMode* set_next_game_mode(GameMode* arg0) {
 
     gameMode->flags = 1 | 2;
     gameMode->init = arg0->init;
-    gameMode->unk_08 = arg0->unk_08;
+    gameMode->step = arg0->step;
     gameMode->render = arg0->render;
     gameMode->unk_0C = NULL;
-    if (gameMode->init == NULL) gameMode->init = state_delegate_NOP;
-    if (gameMode->step == NULL) gameMode->step = state_delegate_NOP;
-    if (gameMode->unk_0C == NULL) gameMode->unk_0C = state_delegate_NOP;
-    if (gameMode->render == NULL) gameMode->render = state_delegate_NOP;
+
+    if (gameMode->init == NULL) {
+        gameMode->init = state_delegate_NOP;
+    }
+    if (gameMode->step == NULL) {
+        gameMode->step = state_delegate_NOP;
+    }
+    if (gameMode->unk_0C == NULL) {
+        gameMode->unk_0C = state_delegate_NOP;
+    }
+    if (gameMode->render == NULL) {
+        gameMode->render = state_delegate_NOP;
+    }
 
     gameMode->renderAux = state_delegate_NOP;
     gameMode->init();
