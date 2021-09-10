@@ -110,7 +110,7 @@ glabel L80240BB0_BC8A10
 /* BC8A20 80240BC0 24060008 */  addiu     $a2, $zero, 8
 .L80240BC4:
 /* BC8A24 80240BC4 4600008D */  trunc.w.s $f2, $f0
-/* BC8A28 80240BC8 0C0B2026 */  jal       set_variable
+/* BC8A28 80240BC8 0C0B2026 */  jal       evt_set_variable
 /* BC8A2C 80240BCC E6020084 */   swc1     $f2, 0x84($s0)
 /* BC8A30 80240BD0 8E030084 */  lw        $v1, 0x84($s0)
 .L80240BD4:

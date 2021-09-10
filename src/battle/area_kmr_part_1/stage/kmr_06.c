@@ -11,12 +11,12 @@ EvtSource N(beforeBattle_80220E28) = SCRIPT({
 
     N(UnkFogFunc)();
 
-    SI_VAR(0) = 1;
-    SI_VAR(2) = 0;
+    EVT_VAR(0) = 1;
+    EVT_VAR(2) = 0;
     spawn N(clouds1);
 
-    SI_VAR(0) = 4;
-    SI_VAR(2) = 70;
+    EVT_VAR(0) = 4;
+    EVT_VAR(2) = 70;
     spawn N(clouds1);
 });
 

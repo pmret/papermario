@@ -5,7 +5,7 @@ glabel func_80240034_ACE174
 /* ACE174 80240034 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* ACE178 80240038 AFBF0010 */  sw        $ra, 0x10($sp)
 /* ACE17C 8024003C 8C82000C */  lw        $v0, 0xc($a0)
-/* ACE180 80240040 0C0B210B */  jal       get_float_variable
+/* ACE180 80240040 0C0B210B */  jal       evt_get_float_variable
 /* ACE184 80240044 8C450000 */   lw       $a1, ($v0)
 /* ACE188 80240048 8FBF0010 */  lw        $ra, 0x10($sp)
 /* ACE18C 8024004C 4600008D */  trunc.w.s $f2, $f0

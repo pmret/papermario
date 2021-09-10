@@ -43,7 +43,7 @@ glabel func_80241B44_E06EA4
 /* E06F10 80241BB0 AFA00018 */  sw        $zero, 0x18($sp)
 /* E06F14 80241BB4 AFA0001C */  sw        $zero, 0x1c($sp)
 /* E06F18 80241BB8 8E640000 */  lw        $a0, ($s3)
-/* E06F1C 80241BBC 0C0497DA */  jal       get_string_properties
+/* E06F1C 80241BBC 0C0497DA */  jal       get_msg_properties
 /* E06F20 80241BC0 24170008 */   addiu    $s7, $zero, 8
 /* E06F24 80241BC4 24020001 */  addiu     $v0, $zero, 1
 /* E06F28 80241BC8 AFA00024 */  sw        $zero, 0x24($sp)
@@ -438,7 +438,7 @@ glabel L80241F38_E07298
 /* E0748C 8024212C AFA00018 */  sw        $zero, 0x18($sp)
 /* E07490 80242130 AFA0001C */  sw        $zero, 0x1c($sp)
 /* E07494 80242134 8E640000 */  lw        $a0, ($s3)
-/* E07498 80242138 0C0497DA */  jal       get_string_properties
+/* E07498 80242138 0C0497DA */  jal       get_msg_properties
 /* E0749C 8024213C 27A7004C */   addiu    $a3, $sp, 0x4c
 /* E074A0 80242140 8E64000C */  lw        $a0, 0xc($s3)
 /* E074A4 80242144 8E630038 */  lw        $v1, 0x38($s3)

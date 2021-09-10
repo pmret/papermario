@@ -16,22 +16,22 @@ glabel func_802404CC_8B053C
 /* 8B0568 802404F8 AFB20028 */  sw        $s2, 0x28($sp)
 /* 8B056C 802404FC AFB00020 */  sw        $s0, 0x20($sp)
 /* 8B0570 80240500 8E3E0148 */  lw        $fp, 0x148($s1)
-/* 8B0574 80240504 0C0B1EAF */  jal       get_variable
+/* 8B0574 80240504 0C0B1EAF */  jal       evt_get_variable
 /* 8B0578 80240508 34A56268 */   ori      $a1, $a1, 0x6268
 /* 8B057C 8024050C 0040802D */  daddu     $s0, $v0, $zero
 /* 8B0580 80240510 0220202D */  daddu     $a0, $s1, $zero
 /* 8B0584 80240514 3C05F840 */  lui       $a1, 0xf840
-/* 8B0588 80240518 0C0B1EAF */  jal       get_variable
+/* 8B0588 80240518 0C0B1EAF */  jal       evt_get_variable
 /* 8B058C 8024051C 34A56269 */   ori      $a1, $a1, 0x6269
 /* 8B0590 80240520 0040B82D */  daddu     $s7, $v0, $zero
 /* 8B0594 80240524 0220202D */  daddu     $a0, $s1, $zero
 /* 8B0598 80240528 3C05F5DE */  lui       $a1, 0xf5de
-/* 8B059C 8024052C 0C0B1EAF */  jal       get_variable
+/* 8B059C 8024052C 0C0B1EAF */  jal       evt_get_variable
 /* 8B05A0 80240530 34A502DE */   ori      $a1, $a1, 0x2de
 /* 8B05A4 80240534 0040B02D */  daddu     $s6, $v0, $zero
 /* 8B05A8 80240538 0220202D */  daddu     $a0, $s1, $zero
 /* 8B05AC 8024053C 3C05F5DE */  lui       $a1, 0xf5de
-/* 8B05B0 80240540 0C0B1EAF */  jal       get_variable
+/* 8B05B0 80240540 0C0B1EAF */  jal       evt_get_variable
 /* 8B05B4 80240544 34A502DF */   ori      $a1, $a1, 0x2df
 /* 8B05B8 80240548 0040A82D */  daddu     $s5, $v0, $zero
 /* 8B05BC 8024054C 93D3006D */  lbu       $s3, 0x6d($fp)
@@ -60,33 +60,33 @@ glabel func_802404CC_8B053C
 /* 8B0614 802405A4 0220202D */  daddu     $a0, $s1, $zero
 /* 8B0618 802405A8 3C05F5DE */  lui       $a1, 0xf5de
 /* 8B061C 802405AC 34A502DE */  ori       $a1, $a1, 0x2de
-/* 8B0620 802405B0 0C0B2026 */  jal       set_variable
+/* 8B0620 802405B0 0C0B2026 */  jal       evt_set_variable
 /* 8B0624 802405B4 0280302D */   daddu    $a2, $s4, $zero
 /* 8B0628 802405B8 0220202D */  daddu     $a0, $s1, $zero
 /* 8B062C 802405BC 3C05F5DE */  lui       $a1, 0xf5de
 /* 8B0630 802405C0 34A502DF */  ori       $a1, $a1, 0x2df
-/* 8B0634 802405C4 0C0B2026 */  jal       set_variable
+/* 8B0634 802405C4 0C0B2026 */  jal       evt_set_variable
 /* 8B0638 802405C8 32A6FFFF */   andi     $a2, $s5, 0xffff
 /* 8B063C 802405CC 24100001 */  addiu     $s0, $zero, 1
 /* 8B0640 802405D0 0220202D */  daddu     $a0, $s1, $zero
 .L802405D4:
 /* 8B0644 802405D4 3C05F840 */  lui       $a1, 0xf840
 /* 8B0648 802405D8 34A56268 */  ori       $a1, $a1, 0x6268
-/* 8B064C 802405DC 0C0B2026 */  jal       set_variable
+/* 8B064C 802405DC 0C0B2026 */  jal       evt_set_variable
 /* 8B0650 802405E0 3206FFFF */   andi     $a2, $s0, 0xffff
 /* 8B0654 802405E4 0220202D */  daddu     $a0, $s1, $zero
 /* 8B0658 802405E8 3C05F840 */  lui       $a1, 0xf840
 /* 8B065C 802405EC 34A56269 */  ori       $a1, $a1, 0x6269
-/* 8B0660 802405F0 0C0B2026 */  jal       set_variable
+/* 8B0660 802405F0 0C0B2026 */  jal       evt_set_variable
 /* 8B0664 802405F4 32E6FFFF */   andi     $a2, $s7, 0xffff
 /* 8B0668 802405F8 0000202D */  daddu     $a0, $zero, $zero
 /* 8B066C 802405FC 3C05F5DE */  lui       $a1, 0xf5de
-/* 8B0670 80240600 0C0B1EAF */  jal       get_variable
+/* 8B0670 80240600 0C0B1EAF */  jal       evt_get_variable
 /* 8B0674 80240604 34A502E0 */   ori      $a1, $a1, 0x2e0
 /* 8B0678 80240608 0000202D */  daddu     $a0, $zero, $zero
 /* 8B067C 8024060C 3C05F5DE */  lui       $a1, 0xf5de
 /* 8B0680 80240610 34A50180 */  ori       $a1, $a1, 0x180
-/* 8B0684 80240614 0C0B1EAF */  jal       get_variable
+/* 8B0684 80240614 0C0B1EAF */  jal       evt_get_variable
 /* 8B0688 80240618 0040802D */   daddu    $s0, $v0, $zero
 /* 8B068C 8024061C 0040282D */  daddu     $a1, $v0, $zero
 /* 8B0690 80240620 0000182D */  daddu     $v1, $zero, $zero

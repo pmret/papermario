@@ -25,9 +25,9 @@
 
 ApiStatus func_80218A60_43A4F0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
 
-    fx_land(2, var1, var2, get_variable(script, *args++), 0);
+    fx_land(2, var1, var2, evt_get_variable(script, *args++), 0);
     return ApiStatus_DONE2;
 }

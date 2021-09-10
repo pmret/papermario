@@ -136,7 +136,7 @@ glabel func_80240070_AD4100
 /* AD42D0 80240240 0260202D */  daddu     $a0, $s3, $zero
 .L80240244:
 /* AD42D4 80240244 0280282D */  daddu     $a1, $s4, $zero
-/* AD42D8 80240248 0C0B2026 */  jal       set_variable
+/* AD42D8 80240248 0C0B2026 */  jal       evt_set_variable
 /* AD42DC 8024024C 0220302D */   daddu    $a2, $s1, $zero
 /* AD42E0 80240250 8FBF0044 */  lw        $ra, 0x44($sp)
 /* AD42E4 80240254 8FB40040 */  lw        $s4, 0x40($sp)

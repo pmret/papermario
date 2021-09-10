@@ -2,7 +2,7 @@
 #define _SCRIPT_API_COMMON_H_
 
 #include "common_structs.h"
-#include "si.h"
+#include "evt.h"
 
 ApiStatus FadeBackgroundToBlack(Evt* script, s32 isInitialCall);
 ApiStatus UnfadeBackgroundFromBlack(Evt* script, s32 isInitialCall);
@@ -163,7 +163,7 @@ ApiStatus CloseChoice(Evt* script, s32 isInitialCall);
 ApiStatus CancelMessage(Evt* script, s32 isInitialCall);
 ApiStatus CancelMessageAndBlock(void); // ???
 ApiStatus SetMessageImages(Evt* script, s32 isInitialCall);
-ApiStatus SetMessageString(Evt* script, s32 isInitialCall);
+ApiStatus SetMessageMsg(Evt* script, s32 isInitialCall);
 ApiStatus SetMessageValue(Evt* script, s32 isInitialCall);
 ApiStatus HidePlayerShadow(Evt* script, s32 isInitialCall);
 ApiStatus DisablePlayerPhysics(Evt* script, s32 isInitialCall);

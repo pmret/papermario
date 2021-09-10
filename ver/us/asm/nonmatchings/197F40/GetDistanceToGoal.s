@@ -9,7 +9,7 @@ glabel GetDistanceToGoal
 /* 19D2EC 8026EA0C AFB00010 */  sw        $s0, 0x10($sp)
 /* 19D2F0 8026EA10 8E30000C */  lw        $s0, 0xc($s1)
 /* 19D2F4 8026EA14 8E050000 */  lw        $a1, ($s0)
-/* 19D2F8 8026EA18 0C0B1EAF */  jal       get_variable
+/* 19D2F8 8026EA18 0C0B1EAF */  jal       evt_get_variable
 /* 19D2FC 8026EA1C 26100004 */   addiu    $s0, $s0, 4
 /* 19D300 8026EA20 0040202D */  daddu     $a0, $v0, $zero
 /* 19D304 8026EA24 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -27,7 +27,7 @@ glabel GetDistanceToGoal
 /* 19D330 8026EA50 0220202D */  daddu     $a0, $s1, $zero
 /* 19D334 8026EA54 4600008D */  trunc.w.s $f2, $f0
 /* 19D338 8026EA58 44061000 */  mfc1      $a2, $f2
-/* 19D33C 8026EA5C 0C0B2026 */  jal       set_variable
+/* 19D33C 8026EA5C 0C0B2026 */  jal       evt_set_variable
 /* 19D340 8026EA60 0200282D */   daddu    $a1, $s0, $zero
 /* 19D344 8026EA64 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 19D348 8026EA68 8FB10014 */  lw        $s1, 0x14($sp)

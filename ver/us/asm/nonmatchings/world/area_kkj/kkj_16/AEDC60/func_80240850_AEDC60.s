@@ -136,7 +136,7 @@ glabel func_80240850_AEDC60
 /* AEDE30 80240A20 0260202D */  daddu     $a0, $s3, $zero
 .L80240A24:
 /* AEDE34 80240A24 0280282D */  daddu     $a1, $s4, $zero
-/* AEDE38 80240A28 0C0B2026 */  jal       set_variable
+/* AEDE38 80240A28 0C0B2026 */  jal       evt_set_variable
 /* AEDE3C 80240A2C 0220302D */   daddu    $a2, $s1, $zero
 /* AEDE40 80240A30 8FBF0044 */  lw        $ra, 0x44($sp)
 /* AEDE44 80240A34 8FB40040 */  lw        $s4, 0x40($sp)

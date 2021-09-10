@@ -6,7 +6,7 @@ glabel func_80241388_8B13F8
 /* 8B13FC 8024138C 3C058025 */  lui       $a1, %hi(D_80257F40)
 /* 8B1400 80241390 8CA57F40 */  lw        $a1, %lo(D_80257F40)($a1)
 /* 8B1404 80241394 AFBF0010 */  sw        $ra, 0x10($sp)
-/* 8B1408 80241398 0C0B1EAF */  jal       get_variable
+/* 8B1408 80241398 0C0B1EAF */  jal       evt_get_variable
 /* 8B140C 8024139C 0000202D */   daddu    $a0, $zero, $zero
 /* 8B1410 802413A0 0040182D */  daddu     $v1, $v0, $zero
 /* 8B1414 802413A4 24020001 */  addiu     $v0, $zero, 1

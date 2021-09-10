@@ -10,16 +10,16 @@ glabel func_80240168_DB7A78
 /* DB7A8C 8024017C AFB00010 */  sw        $s0, 0x10($sp)
 /* DB7A90 80240180 8E50000C */  lw        $s0, 0xc($s2)
 /* DB7A94 80240184 8E050000 */  lw        $a1, ($s0)
-/* DB7A98 80240188 0C0B1EAF */  jal       get_variable
+/* DB7A98 80240188 0C0B1EAF */  jal       evt_get_variable
 /* DB7A9C 8024018C 26100004 */   addiu    $s0, $s0, 4
 /* DB7AA0 80240190 8E050000 */  lw        $a1, ($s0)
 /* DB7AA4 80240194 26100004 */  addiu     $s0, $s0, 4
 /* DB7AA8 80240198 0240202D */  daddu     $a0, $s2, $zero
-/* DB7AAC 8024019C 0C0B1EAF */  jal       get_variable
+/* DB7AAC 8024019C 0C0B1EAF */  jal       evt_get_variable
 /* DB7AB0 802401A0 0040882D */   daddu    $s1, $v0, $zero
 /* DB7AB4 802401A4 0240202D */  daddu     $a0, $s2, $zero
 /* DB7AB8 802401A8 8E050000 */  lw        $a1, ($s0)
-/* DB7ABC 802401AC 0C0B1EAF */  jal       get_variable
+/* DB7ABC 802401AC 0C0B1EAF */  jal       evt_get_variable
 /* DB7AC0 802401B0 0040802D */   daddu    $s0, $v0, $zero
 /* DB7AC4 802401B4 02020018 */  mult      $s0, $v0
 /* DB7AC8 802401B8 24020002 */  addiu     $v0, $zero, 2

@@ -5,7 +5,7 @@ glabel func_8024113C_B98D3C
 /* B98D3C 8024113C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* B98D40 80241140 AFBF0010 */  sw        $ra, 0x10($sp)
 /* B98D44 80241144 8C82000C */  lw        $v0, 0xc($a0)
-/* B98D48 80241148 0C0B1EAF */  jal       get_variable
+/* B98D48 80241148 0C0B1EAF */  jal       evt_get_variable
 /* B98D4C 8024114C 8C450000 */   lw       $a1, ($v0)
 /* B98D50 80241150 0040182D */  daddu     $v1, $v0, $zero
 /* B98D54 80241154 10600012 */  beqz      $v1, .L802411A0

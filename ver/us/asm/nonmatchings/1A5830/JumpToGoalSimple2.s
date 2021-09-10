@@ -23,7 +23,7 @@ glabel JumpToGoalSimple2
 /* 1A7D44 80279464 00000000 */   nop
 /* 1A7D48 80279468 8E250000 */  lw        $a1, ($s1)
 /* 1A7D4C 8027946C 26310004 */  addiu     $s1, $s1, 4
-/* 1A7D50 80279470 0C0B1EAF */  jal       get_variable
+/* 1A7D50 80279470 0C0B1EAF */  jal       evt_get_variable
 /* 1A7D54 80279474 0240202D */   daddu    $a0, $s2, $zero
 /* 1A7D58 80279478 0040202D */  daddu     $a0, $v0, $zero
 /* 1A7D5C 8027947C 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -36,7 +36,7 @@ glabel JumpToGoalSimple2
 /* 1A7D74 80279494 0040802D */  daddu     $s0, $v0, $zero
 /* 1A7D78 80279498 AE500074 */  sw        $s0, 0x74($s2)
 /* 1A7D7C 8027949C 8E250000 */  lw        $a1, ($s1)
-/* 1A7D80 802794A0 0C0B1EAF */  jal       get_variable
+/* 1A7D80 802794A0 0C0B1EAF */  jal       evt_get_variable
 /* 1A7D84 802794A4 0240202D */   daddu    $a0, $s2, $zero
 /* 1A7D88 802794A8 C6000148 */  lwc1      $f0, 0x148($s0)
 /* 1A7D8C 802794AC C61A0018 */  lwc1      $f26, 0x18($s0)

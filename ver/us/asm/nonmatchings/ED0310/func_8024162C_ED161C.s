@@ -25,7 +25,7 @@ glabel func_8024162C_ED161C
 /* ED1650 80241660 00A0882D */   daddu    $s1, $a1, $zero
 /* ED1654 80241664 02A0202D */  daddu     $a0, $s5, $zero
 /* ED1658 80241668 8E050000 */  lw        $a1, ($s0)
-/* ED165C 8024166C 0C0B53A3 */  jal       dead_get_variable
+/* ED165C 8024166C 0C0B53A3 */  jal       dead_evt_get_variable
 /* ED1660 80241670 0040A02D */   daddu    $s4, $v0, $zero
 /* ED1664 80241674 AFA00010 */  sw        $zero, 0x10($sp)
 /* ED1668 80241678 8E4300D0 */  lw        $v1, 0xd0($s2)

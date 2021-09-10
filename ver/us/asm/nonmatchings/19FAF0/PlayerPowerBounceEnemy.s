@@ -24,12 +24,12 @@ glabel PlayerPowerBounceEnemy
 /* 1A2DCC 802744EC 26100004 */  addiu     $s0, $s0, 4
 /* 1A2DD0 802744F0 AE220190 */  sw        $v0, 0x190($s1)
 /* 1A2DD4 802744F4 8E050000 */  lw        $a1, ($s0)
-/* 1A2DD8 802744F8 0C0B1EAF */  jal       get_variable
+/* 1A2DD8 802744F8 0C0B1EAF */  jal       evt_get_variable
 /* 1A2DDC 802744FC 26100004 */   addiu    $s0, $s0, 4
 /* 1A2DE0 80274500 A622017E */  sh        $v0, 0x17e($s1)
 /* 1A2DE4 80274504 8E050000 */  lw        $a1, ($s0)
 /* 1A2DE8 80274508 26100004 */  addiu     $s0, $s0, 4
-/* 1A2DEC 8027450C 0C0B1EAF */  jal       get_variable
+/* 1A2DEC 8027450C 0C0B1EAF */  jal       evt_get_variable
 /* 1A2DF0 80274510 0240202D */   daddu    $a0, $s2, $zero
 /* 1A2DF4 80274514 A2220198 */  sb        $v0, 0x198($s1)
 /* 1A2DF8 80274518 8E100000 */  lw        $s0, ($s0)
@@ -147,7 +147,7 @@ glabel PlayerPowerBounceEnemy
 /* 1A2F80 802746A0 0440000B */  bltz      $v0, .L802746D0
 /* 1A2F84 802746A4 0240202D */   daddu    $a0, $s2, $zero
 /* 1A2F88 802746A8 0260282D */  daddu     $a1, $s3, $zero
-/* 1A2F8C 802746AC 0C0B2026 */  jal       set_variable
+/* 1A2F8C 802746AC 0C0B2026 */  jal       evt_set_variable
 /* 1A2F90 802746B0 0040302D */   daddu    $a2, $v0, $zero
 /* 1A2F94 802746B4 0C0B1069 */  jal       does_script_exist_by_ref
 /* 1A2F98 802746B8 0240202D */   daddu    $a0, $s2, $zero

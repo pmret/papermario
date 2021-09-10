@@ -25,7 +25,7 @@ glabel func_80240500_AF2160
 /* AF21A4 80240544 34A55D6E */  ori       $a1, $a1, 0x5d6e
 /* AF21A8 80240548 0000202D */  daddu     $a0, $zero, $zero
 /* AF21AC 8024054C 00C52821 */  addu      $a1, $a2, $a1
-/* AF21B0 80240550 0C0B2026 */  jal       set_variable
+/* AF21B0 80240550 0C0B2026 */  jal       evt_set_variable
 /* AF21B4 80240554 24060001 */   addiu    $a2, $zero, 1
 .L80240558:
 /* AF21B8 80240558 8FBF0010 */  lw        $ra, 0x10($sp)

@@ -9,7 +9,7 @@ glabel func_802417EC_A3ACCC
 /* A3ACDC 802417FC AFB00010 */  sw        $s0, 0x10($sp)
 /* A3ACE0 80241800 8E30000C */  lw        $s0, 0xc($s1)
 /* A3ACE4 80241804 8E050000 */  lw        $a1, ($s0)
-/* A3ACE8 80241808 0C0B1EAF */  jal       get_variable
+/* A3ACE8 80241808 0C0B1EAF */  jal       evt_get_variable
 /* A3ACEC 8024180C 26100004 */   addiu    $s0, $s0, 4
 /* A3ACF0 80241810 3C038011 */  lui       $v1, %hi(gPlayerData+0xC)
 /* A3ACF4 80241814 8463F29C */  lh        $v1, %lo(gPlayerData+0xC)($v1)
@@ -25,7 +25,7 @@ glabel func_802417EC_A3ACCC
 .L8024183C:
 /* A3AD1C 8024183C 0000302D */  daddu     $a2, $zero, $zero
 .L80241840:
-/* A3AD20 80241840 0C0B2026 */  jal       set_variable
+/* A3AD20 80241840 0C0B2026 */  jal       evt_set_variable
 /* A3AD24 80241844 00000000 */   nop
 /* A3AD28 80241848 8FBF0018 */  lw        $ra, 0x18($sp)
 /* A3AD2C 8024184C 8FB10014 */  lw        $s1, 0x14($sp)

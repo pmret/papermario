@@ -26,32 +26,32 @@ glabel func_8021A804_6A1A04
 /* 6A1A58 8021A858 0220202D */   daddu    $a0, $s1, $zero
 /* 6A1A5C 8021A85C 8E050000 */  lw        $a1, ($s0)
 /* 6A1A60 8021A860 26100004 */  addiu     $s0, $s0, 4
-/* 6A1A64 8021A864 0C0B1EAF */  jal       get_variable
+/* 6A1A64 8021A864 0C0B1EAF */  jal       evt_get_variable
 /* 6A1A68 8021A868 0000902D */   daddu    $s2, $zero, $zero
 /* 6A1A6C 8021A86C 8E050000 */  lw        $a1, ($s0)
 /* 6A1A70 8021A870 26100004 */  addiu     $s0, $s0, 4
 /* 6A1A74 8021A874 4482E000 */  mtc1      $v0, $f28
 /* 6A1A78 8021A878 00000000 */  nop
 /* 6A1A7C 8021A87C 4680E720 */  cvt.s.w   $f28, $f28
-/* 6A1A80 8021A880 0C0B1EAF */  jal       get_variable
+/* 6A1A80 8021A880 0C0B1EAF */  jal       evt_get_variable
 /* 6A1A84 8021A884 0220202D */   daddu    $a0, $s1, $zero
 /* 6A1A88 8021A888 8E050000 */  lw        $a1, ($s0)
 /* 6A1A8C 8021A88C 26100004 */  addiu     $s0, $s0, 4
 /* 6A1A90 8021A890 4482D000 */  mtc1      $v0, $f26
 /* 6A1A94 8021A894 00000000 */  nop
 /* 6A1A98 8021A898 4680D6A0 */  cvt.s.w   $f26, $f26
-/* 6A1A9C 8021A89C 0C0B1EAF */  jal       get_variable
+/* 6A1A9C 8021A89C 0C0B1EAF */  jal       evt_get_variable
 /* 6A1AA0 8021A8A0 0220202D */   daddu    $a0, $s1, $zero
 /* 6A1AA4 8021A8A4 8E050000 */  lw        $a1, ($s0)
 /* 6A1AA8 8021A8A8 26100004 */  addiu     $s0, $s0, 4
 /* 6A1AAC 8021A8AC 4482C000 */  mtc1      $v0, $f24
 /* 6A1AB0 8021A8B0 00000000 */  nop
 /* 6A1AB4 8021A8B4 4680C620 */  cvt.s.w   $f24, $f24
-/* 6A1AB8 8021A8B8 0C0B210B */  jal       get_float_variable
+/* 6A1AB8 8021A8B8 0C0B210B */  jal       evt_get_float_variable
 /* 6A1ABC 8021A8BC 0220202D */   daddu    $a0, $s1, $zero
 /* 6A1AC0 8021A8C0 0220202D */  daddu     $a0, $s1, $zero
 /* 6A1AC4 8021A8C4 8E050000 */  lw        $a1, ($s0)
-/* 6A1AC8 8021A8C8 0C0B210B */  jal       get_float_variable
+/* 6A1AC8 8021A8C8 0C0B210B */  jal       evt_get_float_variable
 /* 6A1ACC 8021A8CC 46000506 */   mov.s    $f20, $f0
 /* 6A1AD0 8021A8D0 240400B4 */  addiu     $a0, $zero, 0xb4
 /* 6A1AD4 8021A8D4 0C00AB39 */  jal       heap_malloc

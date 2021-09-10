@@ -9,7 +9,7 @@ glabel func_80240E88_C77B68
 /* C77B78 80240E98 AFB20018 */  sw        $s2, 0x18($sp)
 /* C77B7C 80240E9C AFB00010 */  sw        $s0, 0x10($sp)
 /* C77B80 80240EA0 8E22000C */  lw        $v0, 0xc($s1)
-/* C77B84 80240EA4 0C0B1EAF */  jal       get_variable
+/* C77B84 80240EA4 0C0B1EAF */  jal       evt_get_variable
 /* C77B88 80240EA8 8C450000 */   lw       $a1, ($v0)
 /* C77B8C 80240EAC 8E23013C */  lw        $v1, 0x13c($s1)
 /* C77B90 80240EB0 8C720000 */  lw        $s2, ($v1)

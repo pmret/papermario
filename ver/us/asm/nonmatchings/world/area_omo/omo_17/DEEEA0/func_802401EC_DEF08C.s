@@ -12,21 +12,21 @@ glabel func_802401EC_DEF08C
 /* DEF0A8 80240208 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* DEF0AC 8024020C 8E30000C */  lw        $s0, 0xc($s1)
 /* DEF0B0 80240210 8E050000 */  lw        $a1, ($s0)
-/* DEF0B4 80240214 0C0B210B */  jal       get_float_variable
+/* DEF0B4 80240214 0C0B210B */  jal       evt_get_float_variable
 /* DEF0B8 80240218 26100004 */   addiu    $s0, $s0, 4
 /* DEF0BC 8024021C 8E050000 */  lw        $a1, ($s0)
 /* DEF0C0 80240220 26100004 */  addiu     $s0, $s0, 4
 /* DEF0C4 80240224 0220202D */  daddu     $a0, $s1, $zero
-/* DEF0C8 80240228 0C0B210B */  jal       get_float_variable
+/* DEF0C8 80240228 0C0B210B */  jal       evt_get_float_variable
 /* DEF0CC 8024022C 46000606 */   mov.s    $f24, $f0
 /* DEF0D0 80240230 8E050000 */  lw        $a1, ($s0)
 /* DEF0D4 80240234 26100004 */  addiu     $s0, $s0, 4
 /* DEF0D8 80240238 0220202D */  daddu     $a0, $s1, $zero
-/* DEF0DC 8024023C 0C0B210B */  jal       get_float_variable
+/* DEF0DC 8024023C 0C0B210B */  jal       evt_get_float_variable
 /* DEF0E0 80240240 46000586 */   mov.s    $f22, $f0
 /* DEF0E4 80240244 0220202D */  daddu     $a0, $s1, $zero
 /* DEF0E8 80240248 8E050000 */  lw        $a1, ($s0)
-/* DEF0EC 8024024C 0C0B210B */  jal       get_float_variable
+/* DEF0EC 8024024C 0C0B210B */  jal       evt_get_float_variable
 /* DEF0F0 80240250 46000506 */   mov.s    $f20, $f0
 /* DEF0F4 80240254 3C028011 */  lui       $v0, %hi(gPlayerStatus)
 /* DEF0F8 80240258 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)

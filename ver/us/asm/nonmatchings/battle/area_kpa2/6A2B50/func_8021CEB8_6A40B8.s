@@ -36,7 +36,7 @@ glabel func_8021CEB8_6A40B8
 /* 6A4128 8021CF28 8E050000 */  lw        $a1, ($s0)
 /* 6A412C 8021CF2C 2406FFFF */  addiu     $a2, $zero, -1
 .L8021CF30:
-/* 6A4130 8021CF30 0C0B2026 */  jal       set_variable
+/* 6A4130 8021CF30 0C0B2026 */  jal       evt_set_variable
 /* 6A4134 8021CF34 00000000 */   nop
 /* 6A4138 8021CF38 24020002 */  addiu     $v0, $zero, 2
 /* 6A413C 8021CF3C 8FBF001C */  lw        $ra, 0x1c($sp)

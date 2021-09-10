@@ -26,11 +26,11 @@ glabel btl_merlee_on_start_turn_BAAFA0
 /* BAAFD8 80240E98 8E050000 */  lw        $a1, ($s0)
 /* BAAFDC 80240E9C 26100004 */  addiu     $s0, $s0, 4
 /* BAAFE0 80240EA0 0260202D */  daddu     $a0, $s3, $zero
-/* BAAFE4 80240EA4 0C0B1EAF */  jal       get_variable
+/* BAAFE4 80240EA4 0C0B1EAF */  jal       evt_get_variable
 /* BAAFE8 80240EA8 0040A82D */   daddu    $s5, $v0, $zero
 /* BAAFEC 80240EAC 0260202D */  daddu     $a0, $s3, $zero
 /* BAAFF0 80240EB0 8E050000 */  lw        $a1, ($s0)
-/* BAAFF4 80240EB4 0C0B1EAF */  jal       get_variable
+/* BAAFF4 80240EB4 0C0B1EAF */  jal       evt_get_variable
 /* BAAFF8 80240EB8 0040A02D */   daddu    $s4, $v0, $zero
 /* BAAFFC 80240EBC AE420094 */  sw        $v0, 0x94($s2)
 /* BAB000 80240EC0 AFA00010 */  sw        $zero, 0x10($sp)

@@ -10,16 +10,16 @@ extern s32 D_802DADA4;
 
 ApiStatus TranslateModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 modelIndex = get_variable(script, *args++);
+    s32 modelIndex = evt_get_variable(script, *args++);
     f32 x;
     f32 y;
     f32 z;
     Model* model;
 
     modelIndex = get_model_list_index_from_tree_index(modelIndex);
-    x = get_float_variable(script, *args++);
-    y = get_float_variable(script, *args++);
-    z = get_float_variable(script, *args++);
+    x = evt_get_float_variable(script, *args++);
+    y = evt_get_float_variable(script, *args++);
+    z = evt_get_float_variable(script, *args++);
     model = get_model_from_list_index(modelIndex);
 
     if (!(model->flags & 0x400)) {
@@ -37,12 +37,12 @@ ApiStatus TranslateModel(Evt* script, s32 isInitialCall) {
 
 ApiStatus RotateModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
     s32 modelListIndex = get_model_list_index_from_tree_index(var1);
-    f32 a = get_float_variable(script, *args++);
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    f32 a = evt_get_float_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
     Model* model = get_model_from_list_index(modelListIndex);
 
     if (!(model->flags & 0x400)) {
@@ -60,16 +60,16 @@ ApiStatus RotateModel(Evt* script, s32 isInitialCall) {
 
 ApiStatus ScaleModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 modelIndex = get_variable(script, *args++);
+    s32 modelIndex = evt_get_variable(script, *args++);
     f32 x;
     f32 y;
     f32 z;
     Model* model;
 
     modelIndex = get_model_list_index_from_tree_index(modelIndex);
-    x = get_float_variable(script, *args++);
-    y = get_float_variable(script, *args++);
-    z = get_float_variable(script, *args++);
+    x = evt_get_float_variable(script, *args++);
+    y = evt_get_float_variable(script, *args++);
+    z = evt_get_float_variable(script, *args++);
     model = get_model_from_list_index(modelIndex);
 
     if (!(model->flags & 0x400)) {
@@ -87,16 +87,16 @@ ApiStatus ScaleModel(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetModelIndex(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode modelID = get_variable(script, *args++);
+    Bytecode modelID = evt_get_variable(script, *args++);
     Bytecode index = *args++;
 
-    set_variable(script, index, get_model_list_index_from_tree_index(modelID));
+    evt_set_variable(script, index, get_model_list_index_from_tree_index(modelID));
     return ApiStatus_DONE2;
 }
 
 ApiStatus InvalidateModelTransform(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode modelID = get_variable(script, *args++);
+    Bytecode modelID = evt_get_variable(script, *args++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
 
     model->flags &= ~0x400;
@@ -105,8 +105,8 @@ ApiStatus InvalidateModelTransform(Evt* script, s32 isInitialCall) {
 
 ApiStatus CloneModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode srcModelID = get_variable(script, *args++);
-    Bytecode newModelID = get_variable(script, *args++);
+    Bytecode srcModelID = evt_get_variable(script, *args++);
+    Bytecode newModelID = evt_get_variable(script, *args++);
 
     clone_model(srcModelID, newModelID);
     return ApiStatus_DONE2;
@@ -121,7 +121,7 @@ ApiStatus GetModelCenter(Evt* script, s32 isInitialCall) {
     f32 sizeY;
     f32 sizeZ;
 
-    get_model_center_and_size(get_variable(script, *args++), &centerX, &centerY, &centerZ, &sizeX, &sizeY,
+    get_model_center_and_size(evt_get_variable(script, *args++), &centerX, &centerY, &centerZ, &sizeX, &sizeY,
                               &sizeZ);
     script->varTable[0] = centerX;
     script->varTable[1] = centerY;
@@ -131,8 +131,8 @@ ApiStatus GetModelCenter(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetTexPanner(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 treeIndex = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
+    s32 treeIndex = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
     set_tex_panner(model, var2);
@@ -142,8 +142,8 @@ ApiStatus SetTexPanner(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCustomGfxEnabled(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode treeIndex = get_variable(script, *args++);
-    Bytecode enable = get_variable(script, *args++);
+    Bytecode treeIndex = evt_get_variable(script, *args++);
+    Bytecode enable = evt_get_variable(script, *args++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
     if (enable) {
@@ -156,9 +156,9 @@ ApiStatus SetCustomGfxEnabled(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetModelCustomGfx(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 treeIndex = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 treeIndex = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
     Model* model;
 
     treeIndex = get_model_list_index_from_tree_index(treeIndex);
@@ -173,8 +173,8 @@ ApiStatus SetModelCustomGfx(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetModelTexVariant(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode treeIndex = get_variable(script, *args++);
-    Bytecode var2 = get_variable(script, *args++);
+    Bytecode treeIndex = evt_get_variable(script, *args++);
+    Bytecode var2 = evt_get_variable(script, *args++);
 
     get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex))->unk_A9 = var2;
     return ApiStatus_DONE2;
@@ -182,8 +182,8 @@ ApiStatus SetModelTexVariant(Evt* script, s32 isInitialCall) {
 
 ApiStatus EnableTexPanning(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 treeIndex = get_variable(script, *args++);
-    s32 flag = get_variable(script, *args++);
+    s32 treeIndex = evt_get_variable(script, *args++);
+    s32 flag = evt_get_variable(script, *args++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
     if (flag) {
@@ -196,8 +196,8 @@ ApiStatus EnableTexPanning(Evt* script, s32 isInitialCall) {
 
 ApiStatus EnableModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 listIndex = get_model_list_index_from_tree_index(get_variable(script, *args++));
-    Bytecode flag = get_variable(script, *args++);
+    s32 listIndex = get_model_list_index_from_tree_index(evt_get_variable(script, *args++));
+    Bytecode flag = evt_get_variable(script, *args++);
     Model* model = get_model_from_list_index(listIndex);
 
     if (flag != 0) {
@@ -210,8 +210,8 @@ ApiStatus EnableModel(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetGroupEnabled(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode var1 = get_variable(script, *args++);
-    Bytecode var2 = get_variable(script, *args++);
+    Bytecode var1 = evt_get_variable(script, *args++);
+    Bytecode var2 = evt_get_variable(script, *args++);
 
     func_8011B7C0(var1, 2, var2);
     return ApiStatus_DONE2;
@@ -219,10 +219,10 @@ ApiStatus SetGroupEnabled(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetTexPanOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode var1 = get_variable(script, *args++);
-    Bytecode var2 = get_variable(script, *args++);
-    Bytecode var3 = get_variable(script, *args++);
-    Bytecode var4 = get_variable(script, *args++);
+    Bytecode var1 = evt_get_variable(script, *args++);
+    Bytecode var2 = evt_get_variable(script, *args++);
+    Bytecode var3 = evt_get_variable(script, *args++);
+    Bytecode var4 = evt_get_variable(script, *args++);
 
     if (var2 == 0) {
         set_main_pan_u(var1, var3);
@@ -237,9 +237,9 @@ ApiStatus SetTexPanOffset(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCustomGfx(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
 
     set_custom_gfx(var1, var2, var3);
     return ApiStatus_DONE2;
@@ -247,9 +247,9 @@ ApiStatus SetCustomGfx(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetCustomGfxBuilders(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
 
     set_custom_gfx_builders(var1, var2, var3);
     return ApiStatus_DONE2;
@@ -262,10 +262,10 @@ ApiStatus SetModelFlags(Evt* script, s32 isInitialCall) {
     s32 enable;
     Model* model;
 
-    modelIndex = get_variable(script, *args++);
+    modelIndex = evt_get_variable(script, *args++);
     modelIndex = get_model_list_index_from_tree_index(modelIndex);
     a1 = *args++;
-    enable = get_variable(script, *args++);
+    enable = evt_get_variable(script, *args++);
     model = get_model_from_list_index(modelIndex);
 
     if (enable) {
@@ -280,14 +280,14 @@ ApiStatus SetModelFlags(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "evt/map_api", apply_transform_to_children);
 
 ApiStatus MakeTransformGroup(Evt* script, s32 isInitialCall) {
-    make_transform_group((u16)get_variable(script, *script->ptrReadPos));
+    make_transform_group((u16)evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetTransformGroupEnabled(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    u16 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
+    u16 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
 
     if (var2 != 0) {
         enable_transform_group(var1);
@@ -299,7 +299,7 @@ ApiStatus SetTransformGroupEnabled(Evt* script, s32 isInitialCall) {
 
 ApiStatus TranslateGroup(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args);
+    s32 var1 = evt_get_variable(script, *args);
     s32 index = get_transform_group_index(var1);
     ModelTransformGroup* transformGroup;
     f32 x, y, z;
@@ -311,9 +311,9 @@ ApiStatus TranslateGroup(Evt* script, s32 isInitialCall) {
 
     args++;
 
-    x = get_float_variable(script, *args++);
-    y = get_float_variable(script, *args++);
-    z = get_float_variable(script, *args++);
+    x = evt_get_float_variable(script, *args++);
+    y = evt_get_float_variable(script, *args++);
+    z = evt_get_float_variable(script, *args++);
 
     transformGroup = get_transform_group(index);
 
@@ -333,7 +333,7 @@ ApiStatus TranslateGroup(Evt* script, s32 isInitialCall) {
 
 ApiStatus RotateGroup(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_transform_group_index(get_variable(script, *args));
+    s32 index = get_transform_group_index(evt_get_variable(script, *args));
     ModelTransformGroup* transformGroup;
     f32 a, x, y, z;
 
@@ -344,10 +344,10 @@ ApiStatus RotateGroup(Evt* script, s32 isInitialCall) {
 
     args++;
 
-    a = get_float_variable(script, *args++);
-    x = get_float_variable(script, *args++);
-    y = get_float_variable(script, *args++);
-    z = get_float_variable(script, *args++);
+    a = evt_get_float_variable(script, *args++);
+    x = evt_get_float_variable(script, *args++);
+    y = evt_get_float_variable(script, *args++);
+    z = evt_get_float_variable(script, *args++);
 
     transformGroup = get_transform_group(index);
 
@@ -366,7 +366,7 @@ ApiStatus RotateGroup(Evt* script, s32 isInitialCall) {
 
 ApiStatus ScaleGroup(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args);
+    s32 var1 = evt_get_variable(script, *args);
     s32 index = get_transform_group_index(var1);
     ModelTransformGroup* transformGroup;
     f32 x, y, z;
@@ -378,9 +378,9 @@ ApiStatus ScaleGroup(Evt* script, s32 isInitialCall) {
 
     args++;
 
-    x = get_float_variable(script, *args++);
-    y = get_float_variable(script, *args++);
-    z = get_float_variable(script, *args++);
+    x = evt_get_float_variable(script, *args++);
+    y = evt_get_float_variable(script, *args++);
+    z = evt_get_float_variable(script, *args++);
 
     transformGroup = get_transform_group(index);
 
@@ -400,16 +400,16 @@ ApiStatus ScaleGroup(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetTransformGroup(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
     Bytecode var2 = *args++;
 
-    set_variable(script, var2, get_transform_group_index(var1));
+    evt_set_variable(script, var2, get_transform_group_index(var1));
     return ApiStatus_DONE2;
 }
 
 ApiStatus EnableGroup(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_transform_group_index(get_variable(script, *args));
+    s32 index = get_transform_group_index(evt_get_variable(script, *args));
     s32 flagUnset;
     ModelTransformGroup* transformGroup;
 
@@ -420,7 +420,7 @@ ApiStatus EnableGroup(Evt* script, s32 isInitialCall) {
 
     args++;
 
-    flagUnset = get_variable(script, *args++);
+    flagUnset = evt_get_variable(script, *args++);
     transformGroup = get_transform_group(index);
 
     for (index = transformGroup->minChildModelIndex; index <= transformGroup->maxChildModelIndex; index++) {
@@ -437,9 +437,9 @@ ApiStatus EnableGroup(Evt* script, s32 isInitialCall) {
 
 ApiStatus MakeLocalVertexCopy(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    u16 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    u16 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
 
     mdl_make_local_vertex_copy(var1, var2, var3);
     return ApiStatus_DONE2;
@@ -476,9 +476,9 @@ void modify_collider_family_flags(s32 index, s32 flags, s32 mode) {
 
 ApiStatus ModifyColliderFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 mode = get_variable(script, *args++);
-    s32 index = get_variable(script, *args++);
-    s32 flags = get_variable(script, *args++);
+    s32 mode = evt_get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    s32 flags = evt_get_variable(script, *args++);
     Collider* collider = &gCollisionData.colliderList[index];
 
     if (collider->firstChild >= 0) {
@@ -511,7 +511,7 @@ ApiStatus ResetFromLava(Evt* script, s32 isInitialCall) {
     LavaReset* lavaReset;
 
     if (isInitialCall) {
-        lavaReset = gLavaResetList = get_variable(script, *args++);
+        lavaReset = gLavaResetList = evt_get_variable(script, *args++);
 
         while (TRUE) {
             if (lavaReset->colliderID == -1) {
@@ -571,7 +571,7 @@ s32 get_lava_reset_pos(f32* outX, f32* outY, f32* outZ) {
 ApiStatus GetColliderCenter(Evt* script, s32 isInitialCall) {
     f32 x, y, z;
 
-    get_collider_center(get_variable(script, *script->ptrReadPos), &x, &y, &z);
+    get_collider_center(evt_get_variable(script, *script->ptrReadPos), &x, &y, &z);
 
     script->varTable[0] = x;
     script->varTable[1] = y;
@@ -582,8 +582,8 @@ ApiStatus GetColliderCenter(Evt* script, s32 isInitialCall) {
 
 ApiStatus ParentColliderToModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s16 colliderID = get_variable(script, *args++);
-    s32 treeIndex = get_variable(script, *args++);
+    s16 colliderID = evt_get_variable(script, *args++);
+    s32 treeIndex = evt_get_variable(script, *args++);
 
     parent_collider_to_model(colliderID, get_model_list_index_from_tree_index(treeIndex));
     update_collider_transform(colliderID);
@@ -591,7 +591,7 @@ ApiStatus ParentColliderToModel(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus UpdateColliderTransform(Evt* script, s32 isInitialCall) {
-    update_collider_transform(get_variable(script, *script->ptrReadPos));
+    update_collider_transform(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
@@ -617,8 +617,8 @@ void set_zone_enabled(s32 zoneID, s32 enabled) {
 
 ApiStatus SetZoneEnabled(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 idx = get_variable(script, *args++);
-    s32 enabled = get_variable(script, *args++);
+    s32 idx = evt_get_variable(script, *args++);
+    s32 enabled = evt_get_variable(script, *args++);
     TempSetZoneEnabled* unkStruct = &D_800D91D4[idx];
 
     if (unkStruct->id2 >= 0) {
@@ -644,18 +644,18 @@ void goto_map(Evt* script, s32 mode) {
     s16 mapTransitionEffect = 0;
 
     if (mode == 2) {
-        areaID = get_variable(script, *args++);
-        mapID = get_variable(script, *args++);
+        areaID = evt_get_variable(script, *args++);
+        mapID = evt_get_variable(script, *args++);
     } else {
-        get_map_IDs_by_name(get_variable(script, *args++), &areaID, &mapID);
+        get_map_IDs_by_name(evt_get_variable(script, *args++), &areaID, &mapID);
     }
 
     gGameStatusPtr->areaID = areaID;
     gGameStatusPtr->mapID = mapID;
-    gGameStatusPtr->entryID = get_variable(script, *args++);
+    gGameStatusPtr->entryID = evt_get_variable(script, *args++);
 
     if (mode == 1) {
-        mapTransitionEffect = get_variable(script, *args++);
+        mapTransitionEffect = evt_get_variable(script, *args++);
     }
 
     set_map_transition_effect(mapTransitionEffect);
@@ -678,24 +678,24 @@ ApiStatus GotoMapByID(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus GetEntryID(Evt* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, gGameStatusPtr->entryID);
+    evt_set_variable(script, *script->ptrReadPos, gGameStatusPtr->entryID);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetMapID(Evt* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, gGameStatusPtr->mapID);
+    evt_set_variable(script, *script->ptrReadPos, gGameStatusPtr->mapID);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetLoadType(Evt* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, gGameStatusPtr->loadType != 0);
+    evt_set_variable(script, *script->ptrReadPos, gGameStatusPtr->loadType != 0);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetRenderMode(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 treeIndex = get_variable(script, *args++);
-    s8 renderMode = get_variable(script, *args++);
+    s32 treeIndex = evt_get_variable(script, *args++);
+    s8 renderMode = evt_get_variable(script, *args++);
 
     get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex))->renderMode = renderMode;
 
@@ -704,9 +704,9 @@ ApiStatus SetRenderMode(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlaySoundAtModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 modelID = get_variable(script, *args++);
-    SoundID soundID = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 modelID = evt_get_variable(script, *args++);
+    SoundID soundID = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
     f32 x, y, z;
     f32 sx, sy, sz;
 
@@ -718,9 +718,9 @@ ApiStatus PlaySoundAtModel(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlaySoundAtCollider(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 colliderID = get_variable(script, *args++);
-    SoundID soundID = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 colliderID = evt_get_variable(script, *args++);
+    SoundID soundID = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
     f32 x, y, z;
 
     get_collider_center(colliderID, &x, &y, &z);

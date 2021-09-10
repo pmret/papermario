@@ -25,9 +25,9 @@ ApiStatus N(UnkMovePartner)(Evt* script, s32 isInitialCall) {
     f32* z = (f32*) &script->functionTemp[3];
 
     if (isInitialCall) {
-        *x = get_float_variable(script, SI_VAR(0)) / 60.0f;
-        *y = get_float_variable(script, SI_VAR(5)) / 60.0f;
-        *z = get_float_variable(script, SI_VAR(1)) / 60.0f;
+        *x = evt_get_float_variable(script, EVT_VAR(0)) / 60.0f;
+        *y = evt_get_float_variable(script, EVT_VAR(5)) / 60.0f;
+        *z = evt_get_float_variable(script, EVT_VAR(1)) / 60.0f;
         script->functionTemp[0] = 60;
     }
 

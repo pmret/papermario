@@ -5,7 +5,7 @@ glabel func_80240C10_AF8560
 /* AF8560 80240C10 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* AF8564 80240C14 AFBF0010 */  sw        $ra, 0x10($sp)
 /* AF8568 80240C18 8C82000C */  lw        $v0, 0xc($a0)
-/* AF856C 80240C1C 0C0B1EAF */  jal       get_variable
+/* AF856C 80240C1C 0C0B1EAF */  jal       evt_get_variable
 /* AF8570 80240C20 8C450000 */   lw       $a1, ($v0)
 /* AF8574 80240C24 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
 /* AF8578 80240C28 8C84419C */  lw        $a0, %lo(gGameStatusPtr)($a0)

@@ -5,7 +5,7 @@ glabel func_80240BB0_BBDD50
 /* BBDD50 80240BB0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* BBDD54 80240BB4 AFBF0010 */  sw        $ra, 0x10($sp)
 /* BBDD58 80240BB8 8C82000C */  lw        $v0, 0xc($a0)
-/* BBDD5C 80240BBC 0C0B1EAF */  jal       get_variable
+/* BBDD5C 80240BBC 0C0B1EAF */  jal       evt_get_variable
 /* BBDD60 80240BC0 8C450000 */   lw       $a1, ($v0)
 /* BBDD64 80240BC4 0040182D */  daddu     $v1, $v0, $zero
 /* BBDD68 80240BC8 10600012 */  beqz      $v1, .L80240C14

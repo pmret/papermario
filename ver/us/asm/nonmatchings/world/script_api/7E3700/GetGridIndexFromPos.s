@@ -11,20 +11,20 @@ glabel GetGridIndexFromPos
 /* 7E4550 802836D0 AFB00010 */  sw        $s0, 0x10($sp)
 /* 7E4554 802836D4 8E70000C */  lw        $s0, 0xc($s3)
 /* 7E4558 802836D8 8E050000 */  lw        $a1, ($s0)
-/* 7E455C 802836DC 0C0B1EAF */  jal       get_variable
+/* 7E455C 802836DC 0C0B1EAF */  jal       evt_get_variable
 /* 7E4560 802836E0 26100004 */   addiu    $s0, $s0, 4
 /* 7E4564 802836E4 8E050000 */  lw        $a1, ($s0)
 /* 7E4568 802836E8 26100004 */  addiu     $s0, $s0, 4
 /* 7E456C 802836EC 0260202D */  daddu     $a0, $s3, $zero
-/* 7E4570 802836F0 0C0B1EAF */  jal       get_variable
+/* 7E4570 802836F0 0C0B1EAF */  jal       evt_get_variable
 /* 7E4574 802836F4 0040882D */   daddu    $s1, $v0, $zero
 /* 7E4578 802836F8 0040902D */  daddu     $s2, $v0, $zero
 /* 7E457C 802836FC 8E050000 */  lw        $a1, ($s0)
 /* 7E4580 80283700 26100004 */  addiu     $s0, $s0, 4
-/* 7E4584 80283704 0C0B1EAF */  jal       get_variable
+/* 7E4584 80283704 0C0B1EAF */  jal       evt_get_variable
 /* 7E4588 80283708 0260202D */   daddu    $a0, $s3, $zero
 /* 7E458C 8028370C 8E050000 */  lw        $a1, ($s0)
-/* 7E4590 80283710 0C0B1EAF */  jal       get_variable
+/* 7E4590 80283710 0C0B1EAF */  jal       evt_get_variable
 /* 7E4594 80283714 0260202D */   daddu    $a0, $s3, $zero
 /* 7E4598 80283718 00118880 */  sll       $s1, $s1, 2
 /* 7E459C 8028371C 3C04802E */  lui       $a0, %hi(D_802DBC88)
@@ -49,11 +49,11 @@ glabel GetGridIndexFromPos
 /* 7E45E8 80283768 000217C3 */  sra       $v0, $v0, 0x1f
 /* 7E45EC 8028376C 00001810 */  mfhi      $v1
 /* 7E45F0 80283770 000388C3 */  sra       $s1, $v1, 3
-/* 7E45F4 80283774 0C0B2026 */  jal       set_variable
+/* 7E45F4 80283774 0C0B2026 */  jal       evt_set_variable
 /* 7E45F8 80283778 02228823 */   subu     $s1, $s1, $v0
 /* 7E45FC 8028377C 0260202D */  daddu     $a0, $s3, $zero
 /* 7E4600 80283780 0200282D */  daddu     $a1, $s0, $zero
-/* 7E4604 80283784 0C0B2026 */  jal       set_variable
+/* 7E4604 80283784 0C0B2026 */  jal       evt_set_variable
 /* 7E4608 80283788 0220302D */   daddu    $a2, $s1, $zero
 /* 7E460C 8028378C 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 7E4610 80283790 8FB3001C */  lw        $s3, 0x1c($sp)

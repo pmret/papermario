@@ -36,7 +36,7 @@ glabel func_802406C4_AF8014
 glabel L80240720_AF8070
 /* AF8070 80240720 02A0202D */  daddu     $a0, $s5, $zero
 /* AF8074 80240724 8CC50000 */  lw        $a1, ($a2)
-/* AF8078 80240728 0C0B1EAF */  jal       get_variable
+/* AF8078 80240728 0C0B1EAF */  jal       evt_get_variable
 /* AF807C 8024072C 24140009 */   addiu    $s4, $zero, 9
 /* AF8080 80240730 3C058024 */  lui       $a1, %hi(func_802406A0_AF7FF0)
 /* AF8084 80240734 24A506A0 */  addiu     $a1, $a1, %lo(func_802406A0_AF7FF0)
@@ -306,7 +306,7 @@ glabel L80240ACC_AF841C
 /* AF8460 80240B10 3C05F70F */  lui       $a1, 0xf70f
 /* AF8464 80240B14 3C068024 */  lui       $a2, %hi(D_8024652C)
 /* AF8468 80240B18 8CC6652C */  lw        $a2, %lo(D_8024652C)($a2)
-/* AF846C 80240B1C 0C0B2026 */  jal       set_variable
+/* AF846C 80240B1C 0C0B2026 */  jal       evt_set_variable
 /* AF8470 80240B20 34A52E83 */   ori      $a1, $a1, 0x2e83
 /* AF8474 80240B24 0000102D */  daddu     $v0, $zero, $zero
 .L80240B28:

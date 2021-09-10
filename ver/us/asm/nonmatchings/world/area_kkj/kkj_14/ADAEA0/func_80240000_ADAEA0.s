@@ -13,7 +13,7 @@ glabel func_80240000_ADAEA0
 /* ADAEA4 80240004 AFBF0010 */  sw        $ra, 0x10($sp)
 /* ADAEA8 80240008 0000202D */  daddu     $a0, $zero, $zero
 /* ADAEAC 8024000C 3C05F5DE */  lui       $a1, 0xf5de
-/* ADAEB0 80240010 0C0B1EAF */  jal       get_variable
+/* ADAEB0 80240010 0C0B1EAF */  jal       evt_get_variable
 /* ADAEB4 80240014 34A50180 */   ori      $a1, $a1, 0x180
 /* ADAEB8 80240018 2403FF80 */  addiu     $v1, $zero, -0x80
 /* ADAEBC 8024001C 14430006 */  bne       $v0, $v1, .L80240038

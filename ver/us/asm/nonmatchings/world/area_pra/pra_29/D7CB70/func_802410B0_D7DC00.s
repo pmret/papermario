@@ -10,7 +10,7 @@ glabel func_802410B0_D7DC00
 /* D7DC14 802410C4 34A50F80 */  ori       $a1, $a1, 0xf80
 /* D7DC18 802410C8 AFBF003C */  sw        $ra, 0x3c($sp)
 /* D7DC1C 802410CC AFB20038 */  sw        $s2, 0x38($sp)
-/* D7DC20 802410D0 0C0B1EAF */  jal       get_variable
+/* D7DC20 802410D0 0C0B1EAF */  jal       evt_get_variable
 /* D7DC24 802410D4 AFB10034 */   sw       $s1, 0x34($sp)
 /* D7DC28 802410D8 0040902D */  daddu     $s2, $v0, $zero
 /* D7DC2C 802410DC 2A420100 */  slti      $v0, $s2, 0x100

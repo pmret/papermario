@@ -28,7 +28,7 @@ ApiStatus func_802405EC_7EB2FC(Evt* script, s32 isInitialCall) {
     f32 y;
     f32 z;
 
-    get_collider_center(get_variable(script, *script->ptrReadPos), &x, &y, &z);
+    get_collider_center(evt_get_variable(script, *script->ptrReadPos), &x, &y, &z);
     return ApiStatus_DONE2;
 }
 

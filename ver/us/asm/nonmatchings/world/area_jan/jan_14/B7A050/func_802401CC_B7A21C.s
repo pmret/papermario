@@ -10,13 +10,13 @@ glabel func_802401CC_B7A21C
 /* B7A230 802401E0 F7B40060 */  sdc1      $f20, 0x60($sp)
 /* B7A234 802401E4 8E30000C */  lw        $s0, 0xc($s1)
 /* B7A238 802401E8 8E050000 */  lw        $a1, ($s0)
-/* B7A23C 802401EC 0C0B1EAF */  jal       get_variable
+/* B7A23C 802401EC 0C0B1EAF */  jal       evt_get_variable
 /* B7A240 802401F0 26100004 */   addiu    $s0, $s0, 4
 /* B7A244 802401F4 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* B7A248 802401F8 0040202D */   daddu    $a0, $v0, $zero
 /* B7A24C 802401FC 0220202D */  daddu     $a0, $s1, $zero
 /* B7A250 80240200 8E050000 */  lw        $a1, ($s0)
-/* B7A254 80240204 0C0B210B */  jal       get_float_variable
+/* B7A254 80240204 0C0B210B */  jal       evt_get_float_variable
 /* B7A258 80240208 0040802D */   daddu    $s0, $v0, $zero
 /* B7A25C 8024020C 0200202D */  daddu     $a0, $s0, $zero
 /* B7A260 80240210 0C046B4C */  jal       get_model_from_list_index

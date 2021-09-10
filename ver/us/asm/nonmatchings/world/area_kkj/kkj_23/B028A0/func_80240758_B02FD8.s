@@ -7,7 +7,7 @@ glabel func_80240758_B02FD8
 /* B02FE0 80240760 8C82000C */  lw        $v0, 0xc($a0)
 /* B02FE4 80240764 3C068011 */  lui       $a2, %hi(gPlayerStatus+0xC)
 /* B02FE8 80240768 80C6EFD4 */  lb        $a2, %lo(gPlayerStatus+0xC)($a2)
-/* B02FEC 8024076C 0C0B2026 */  jal       set_variable
+/* B02FEC 8024076C 0C0B2026 */  jal       evt_set_variable
 /* B02FF0 80240770 8C450000 */   lw       $a1, ($v0)
 /* B02FF4 80240774 8FBF0010 */  lw        $ra, 0x10($sp)
 /* B02FF8 80240778 24020002 */  addiu     $v0, $zero, 2

@@ -8,12 +8,12 @@
 EvtSource N(beforeBattle_80220188) = SCRIPT({
     SetSpriteShading(-1);
 
-    SI_VAR(0) = 1; // model
-    SI_VAR(2) = 0; // speed
+    EVT_VAR(0) = 1; // model
+    EVT_VAR(2) = 0; // speed
     spawn N(clouds1);
 
-    SI_VAR(0) = 4;
-    SI_VAR(2) = 70;
+    EVT_VAR(0) = 4;
+    EVT_VAR(2) = 70;
     spawn N(clouds1);
 });
 

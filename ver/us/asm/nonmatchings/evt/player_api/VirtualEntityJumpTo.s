@@ -22,32 +22,32 @@ glabel VirtualEntityJumpTo
 /* F8648 802D3C98 00000000 */   nop
 /* F864C 802D3C9C 8E250000 */  lw        $a1, ($s1)
 /* F8650 802D3CA0 26310004 */  addiu     $s1, $s1, 4
-/* F8654 802D3CA4 0C0B1EAF */  jal       get_variable
+/* F8654 802D3CA4 0C0B1EAF */  jal       evt_get_variable
 /* F8658 802D3CA8 0240202D */   daddu    $a0, $s2, $zero
 /* F865C 802D3CAC 8E250000 */  lw        $a1, ($s1)
 /* F8660 802D3CB0 26310004 */  addiu     $s1, $s1, 4
 /* F8664 802D3CB4 0240202D */  daddu     $a0, $s2, $zero
-/* F8668 802D3CB8 0C0B1EAF */  jal       get_variable
+/* F8668 802D3CB8 0C0B1EAF */  jal       evt_get_variable
 /* F866C 802D3CBC 0040802D */   daddu    $s0, $v0, $zero
 /* F8670 802D3CC0 4482D000 */  mtc1      $v0, $f26
 /* F8674 802D3CC4 00000000 */  nop
 /* F8678 802D3CC8 4680D6A0 */  cvt.s.w   $f26, $f26
 /* F867C 802D3CCC 8E250000 */  lw        $a1, ($s1)
 /* F8680 802D3CD0 26310004 */  addiu     $s1, $s1, 4
-/* F8684 802D3CD4 0C0B1EAF */  jal       get_variable
+/* F8684 802D3CD4 0C0B1EAF */  jal       evt_get_variable
 /* F8688 802D3CD8 0240202D */   daddu    $a0, $s2, $zero
 /* F868C 802D3CDC 4482E000 */  mtc1      $v0, $f28
 /* F8690 802D3CE0 00000000 */  nop
 /* F8694 802D3CE4 4680E720 */  cvt.s.w   $f28, $f28
 /* F8698 802D3CE8 8E250000 */  lw        $a1, ($s1)
 /* F869C 802D3CEC 26310004 */  addiu     $s1, $s1, 4
-/* F86A0 802D3CF0 0C0B1EAF */  jal       get_variable
+/* F86A0 802D3CF0 0C0B1EAF */  jal       evt_get_variable
 /* F86A4 802D3CF4 0240202D */   daddu    $a0, $s2, $zero
 /* F86A8 802D3CF8 4482C000 */  mtc1      $v0, $f24
 /* F86AC 802D3CFC 00000000 */  nop
 /* F86B0 802D3D00 4680C620 */  cvt.s.w   $f24, $f24
 /* F86B4 802D3D04 8E250000 */  lw        $a1, ($s1)
-/* F86B8 802D3D08 0C0B1EAF */  jal       get_variable
+/* F86B8 802D3D08 0C0B1EAF */  jal       evt_get_variable
 /* F86BC 802D3D0C 0240202D */   daddu    $a0, $s2, $zero
 /* F86C0 802D3D10 3C04802E */  lui       $a0, %hi(D_802DB7C0)
 /* F86C4 802D3D14 8C84B7C0 */  lw        $a0, %lo(D_802DB7C0)($a0)

@@ -36,7 +36,7 @@ ApiStatus N(func_80240960_889530)(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240C58_889828);
 /*
 ApiStatus N(func_80240C58_889828)(Evt* script, s32 isInitialCall) {
-    switch_to_partner(get_variable(script, *script->ptrReadPos));
+    switch_to_partner(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 */
@@ -75,7 +75,7 @@ ApiStatus N(func_8024121C_889DEC)(Evt *script, s32 isInitialCall) {
         script->userData = (N(UserData)*)general_heap_malloc(0x68);
         scriptPtr = (N(UserData)*)script->userData;
 
-        scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
+        scriptPtr->unk_5C = get_entity_by_index(evt_get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
             userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f, scriptPtr->unk_5C->position.z, 1.0f, -1);

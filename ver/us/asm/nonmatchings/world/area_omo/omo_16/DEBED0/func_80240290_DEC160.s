@@ -14,26 +14,26 @@ glabel func_80240290_DEC160
 /* DEC184 802402B4 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* DEC188 802402B8 8E30000C */  lw        $s0, 0xc($s1)
 /* DEC18C 802402BC 8E050000 */  lw        $a1, ($s0)
-/* DEC190 802402C0 0C0B1EAF */  jal       get_variable
+/* DEC190 802402C0 0C0B1EAF */  jal       evt_get_variable
 /* DEC194 802402C4 26100004 */   addiu    $s0, $s0, 4
 /* DEC198 802402C8 8E050000 */  lw        $a1, ($s0)
 /* DEC19C 802402CC 26100004 */  addiu     $s0, $s0, 4
 /* DEC1A0 802402D0 0220202D */  daddu     $a0, $s1, $zero
-/* DEC1A4 802402D4 0C0B210B */  jal       get_float_variable
+/* DEC1A4 802402D4 0C0B210B */  jal       evt_get_float_variable
 /* DEC1A8 802402D8 0040902D */   daddu    $s2, $v0, $zero
 /* DEC1AC 802402DC 8E050000 */  lw        $a1, ($s0)
 /* DEC1B0 802402E0 26100004 */  addiu     $s0, $s0, 4
 /* DEC1B4 802402E4 0220202D */  daddu     $a0, $s1, $zero
-/* DEC1B8 802402E8 0C0B210B */  jal       get_float_variable
+/* DEC1B8 802402E8 0C0B210B */  jal       evt_get_float_variable
 /* DEC1BC 802402EC 46000686 */   mov.s    $f26, $f0
 /* DEC1C0 802402F0 8E050000 */  lw        $a1, ($s0)
 /* DEC1C4 802402F4 26100004 */  addiu     $s0, $s0, 4
 /* DEC1C8 802402F8 0220202D */  daddu     $a0, $s1, $zero
-/* DEC1CC 802402FC 0C0B210B */  jal       get_float_variable
+/* DEC1CC 802402FC 0C0B210B */  jal       evt_get_float_variable
 /* DEC1D0 80240300 46000606 */   mov.s    $f24, $f0
 /* DEC1D4 80240304 0220202D */  daddu     $a0, $s1, $zero
 /* DEC1D8 80240308 8E050000 */  lw        $a1, ($s0)
-/* DEC1DC 8024030C 0C0B210B */  jal       get_float_variable
+/* DEC1DC 8024030C 0C0B210B */  jal       evt_get_float_variable
 /* DEC1E0 80240310 46000506 */   mov.s    $f20, $f0
 /* DEC1E4 80240314 0240202D */  daddu     $a0, $s2, $zero
 /* DEC1E8 80240318 0C00EAD2 */  jal       get_npc_safe

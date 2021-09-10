@@ -11,21 +11,21 @@ glabel func_80240C20_832420
 /* 832438 80240C38 10A00060 */  beqz      $a1, .L80240DBC
 /* 83243C 80240C3C 0080882D */   daddu    $s1, $a0, $zero
 /* 832440 80240C40 3C05F4AC */  lui       $a1, 0xf4ac
-/* 832444 80240C44 0C0B1EAF */  jal       get_variable
+/* 832444 80240C44 0C0B1EAF */  jal       evt_get_variable
 /* 832448 80240C48 34A5D481 */   ori      $a1, $a1, 0xd481
 /* 83244C 80240C4C 0220202D */  daddu     $a0, $s1, $zero
 /* 832450 80240C50 3C05F4AC */  lui       $a1, 0xf4ac
 /* 832454 80240C54 4482B000 */  mtc1      $v0, $f22
 /* 832458 80240C58 00000000 */  nop
 /* 83245C 80240C5C 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 832460 80240C60 0C0B1EAF */  jal       get_variable
+/* 832460 80240C60 0C0B1EAF */  jal       evt_get_variable
 /* 832464 80240C64 34A5D482 */   ori      $a1, $a1, 0xd482
 /* 832468 80240C68 0220202D */  daddu     $a0, $s1, $zero
 /* 83246C 80240C6C 3C05F4AC */  lui       $a1, 0xf4ac
 /* 832470 80240C70 4482A000 */  mtc1      $v0, $f20
 /* 832474 80240C74 00000000 */  nop
 /* 832478 80240C78 4680A520 */  cvt.s.w   $f20, $f20
-/* 83247C 80240C7C 0C0B1EAF */  jal       get_variable
+/* 83247C 80240C7C 0C0B1EAF */  jal       evt_get_variable
 /* 832480 80240C80 34A5D483 */   ori      $a1, $a1, 0xd483
 /* 832484 80240C84 44821000 */  mtc1      $v0, $f2
 /* 832488 80240C88 00000000 */  nop
@@ -40,21 +40,21 @@ glabel func_80240C20_832420
 /* 8324AC 80240CAC 34A5D481 */  ori       $a1, $a1, 0xd481
 /* 8324B0 80240CB0 3C108025 */  lui       $s0, %hi(ForceCloseMessageBox)
 /* 8324B4 80240CB4 261013F0 */  addiu     $s0, $s0, %lo(ForceCloseMessageBox)
-/* 8324B8 80240CB8 0C0B1EAF */  jal       get_variable
+/* 8324B8 80240CB8 0C0B1EAF */  jal       evt_get_variable
 /* 8324BC 80240CBC AE020000 */   sw       $v0, ($s0)
 /* 8324C0 80240CC0 0220202D */  daddu     $a0, $s1, $zero
 /* 8324C4 80240CC4 3C05F4AC */  lui       $a1, 0xf4ac
 /* 8324C8 80240CC8 4482B000 */  mtc1      $v0, $f22
 /* 8324CC 80240CCC 00000000 */  nop
 /* 8324D0 80240CD0 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 8324D4 80240CD4 0C0B1EAF */  jal       get_variable
+/* 8324D4 80240CD4 0C0B1EAF */  jal       evt_get_variable
 /* 8324D8 80240CD8 34A5D482 */   ori      $a1, $a1, 0xd482
 /* 8324DC 80240CDC 0220202D */  daddu     $a0, $s1, $zero
 /* 8324E0 80240CE0 3C05F4AC */  lui       $a1, 0xf4ac
 /* 8324E4 80240CE4 4482A000 */  mtc1      $v0, $f20
 /* 8324E8 80240CE8 00000000 */  nop
 /* 8324EC 80240CEC 4680A520 */  cvt.s.w   $f20, $f20
-/* 8324F0 80240CF0 0C0B1EAF */  jal       get_variable
+/* 8324F0 80240CF0 0C0B1EAF */  jal       evt_get_variable
 /* 8324F4 80240CF4 34A5D483 */   ori      $a1, $a1, 0xd483
 /* 8324F8 80240CF8 44821000 */  mtc1      $v0, $f2
 /* 8324FC 80240CFC 00000000 */  nop
@@ -68,21 +68,21 @@ glabel func_80240C20_832420
 /* 83251C 80240D1C 3C05F4AC */  lui       $a1, 0xf4ac
 /* 832520 80240D20 3C018025 */  lui       $at, %hi(D_802513F4)
 /* 832524 80240D24 AC2213F4 */  sw        $v0, %lo(D_802513F4)($at)
-/* 832528 80240D28 0C0B1EAF */  jal       get_variable
+/* 832528 80240D28 0C0B1EAF */  jal       evt_get_variable
 /* 83252C 80240D2C 34A5D481 */   ori      $a1, $a1, 0xd481
 /* 832530 80240D30 0220202D */  daddu     $a0, $s1, $zero
 /* 832534 80240D34 3C05F4AC */  lui       $a1, 0xf4ac
 /* 832538 80240D38 4482B000 */  mtc1      $v0, $f22
 /* 83253C 80240D3C 00000000 */  nop
 /* 832540 80240D40 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 832544 80240D44 0C0B1EAF */  jal       get_variable
+/* 832544 80240D44 0C0B1EAF */  jal       evt_get_variable
 /* 832548 80240D48 34A5D482 */   ori      $a1, $a1, 0xd482
 /* 83254C 80240D4C 0220202D */  daddu     $a0, $s1, $zero
 /* 832550 80240D50 3C05F4AC */  lui       $a1, 0xf4ac
 /* 832554 80240D54 4482A000 */  mtc1      $v0, $f20
 /* 832558 80240D58 00000000 */  nop
 /* 83255C 80240D5C 4680A520 */  cvt.s.w   $f20, $f20
-/* 832560 80240D60 0C0B1EAF */  jal       get_variable
+/* 832560 80240D60 0C0B1EAF */  jal       evt_get_variable
 /* 832564 80240D64 34A5D483 */   ori      $a1, $a1, 0xd483
 /* 832568 80240D68 44821000 */  mtc1      $v0, $f2
 /* 83256C 80240D6C 00000000 */  nop

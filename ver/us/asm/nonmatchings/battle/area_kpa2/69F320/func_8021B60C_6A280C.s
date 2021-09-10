@@ -5,7 +5,7 @@ glabel func_8021B60C_6A280C
 /* 6A280C 8021B60C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 6A2810 8021B610 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 6A2814 8021B614 8C82000C */  lw        $v0, 0xc($a0)
-/* 6A2818 8021B618 0C0B1EAF */  jal       get_variable
+/* 6A2818 8021B618 0C0B1EAF */  jal       evt_get_variable
 /* 6A281C 8021B61C 8C450000 */   lw       $a1, ($v0)
 /* 6A2820 8021B620 8C43000C */  lw        $v1, 0xc($v0)
 /* 6A2824 8021B624 3C013D23 */  lui       $at, 0x3d23

@@ -11,21 +11,21 @@ glabel func_80240314_DDF624
 /* DDF63C 8024032C AFB00018 */  sw        $s0, 0x18($sp)
 /* DDF640 80240330 8E30000C */  lw        $s0, 0xc($s1)
 /* DDF644 80240334 8E050000 */  lw        $a1, ($s0)
-/* DDF648 80240338 0C0B1EAF */  jal       get_variable
+/* DDF648 80240338 0C0B1EAF */  jal       evt_get_variable
 /* DDF64C 8024033C 26100004 */   addiu    $s0, $s0, 4
 /* DDF650 80240340 8E050000 */  lw        $a1, ($s0)
 /* DDF654 80240344 26100004 */  addiu     $s0, $s0, 4
 /* DDF658 80240348 0220202D */  daddu     $a0, $s1, $zero
-/* DDF65C 8024034C 0C0B1EAF */  jal       get_variable
+/* DDF65C 8024034C 0C0B1EAF */  jal       evt_get_variable
 /* DDF660 80240350 0040982D */   daddu    $s3, $v0, $zero
 /* DDF664 80240354 8E050000 */  lw        $a1, ($s0)
 /* DDF668 80240358 26100004 */  addiu     $s0, $s0, 4
 /* DDF66C 8024035C 0220202D */  daddu     $a0, $s1, $zero
-/* DDF670 80240360 0C0B1EAF */  jal       get_variable
+/* DDF670 80240360 0C0B1EAF */  jal       evt_get_variable
 /* DDF674 80240364 0040902D */   daddu    $s2, $v0, $zero
 /* DDF678 80240368 0220202D */  daddu     $a0, $s1, $zero
 /* DDF67C 8024036C 8E050000 */  lw        $a1, ($s0)
-/* DDF680 80240370 0C0B1EAF */  jal       get_variable
+/* DDF680 80240370 0C0B1EAF */  jal       evt_get_variable
 /* DDF684 80240374 0040802D */   daddu    $s0, $v0, $zero
 /* DDF688 80240378 24040001 */  addiu     $a0, $zero, 1
 /* DDF68C 8024037C 0080282D */  daddu     $a1, $a0, $zero

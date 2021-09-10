@@ -14,31 +14,31 @@ glabel func_80240000_9FA7F0
 /* 9FA814 80240024 AFB00010 */  sw        $s0, 0x10($sp)
 /* 9FA818 80240028 8E30000C */  lw        $s0, 0xc($s1)
 /* 9FA81C 8024002C 8E050000 */  lw        $a1, ($s0)
-/* 9FA820 80240030 0C0B1EAF */  jal       get_variable
+/* 9FA820 80240030 0C0B1EAF */  jal       evt_get_variable
 /* 9FA824 80240034 26100004 */   addiu    $s0, $s0, 4
 /* 9FA828 80240038 8E050000 */  lw        $a1, ($s0)
 /* 9FA82C 8024003C 26100004 */  addiu     $s0, $s0, 4
 /* 9FA830 80240040 0220202D */  daddu     $a0, $s1, $zero
-/* 9FA834 80240044 0C0B1EAF */  jal       get_variable
+/* 9FA834 80240044 0C0B1EAF */  jal       evt_get_variable
 /* 9FA838 80240048 0040902D */   daddu    $s2, $v0, $zero
 /* 9FA83C 8024004C 8E050000 */  lw        $a1, ($s0)
 /* 9FA840 80240050 26100004 */  addiu     $s0, $s0, 4
 /* 9FA844 80240054 0220202D */  daddu     $a0, $s1, $zero
-/* 9FA848 80240058 0C0B1EAF */  jal       get_variable
+/* 9FA848 80240058 0C0B1EAF */  jal       evt_get_variable
 /* 9FA84C 8024005C 0040B02D */   daddu    $s6, $v0, $zero
 /* 9FA850 80240060 8E050000 */  lw        $a1, ($s0)
 /* 9FA854 80240064 26100004 */  addiu     $s0, $s0, 4
 /* 9FA858 80240068 0220202D */  daddu     $a0, $s1, $zero
-/* 9FA85C 8024006C 0C0B1EAF */  jal       get_variable
+/* 9FA85C 8024006C 0C0B1EAF */  jal       evt_get_variable
 /* 9FA860 80240070 0040A82D */   daddu    $s5, $v0, $zero
 /* 9FA864 80240074 8E050000 */  lw        $a1, ($s0)
 /* 9FA868 80240078 26100004 */  addiu     $s0, $s0, 4
 /* 9FA86C 8024007C 0220202D */  daddu     $a0, $s1, $zero
-/* 9FA870 80240080 0C0B1EAF */  jal       get_variable
+/* 9FA870 80240080 0C0B1EAF */  jal       evt_get_variable
 /* 9FA874 80240084 0040A02D */   daddu    $s4, $v0, $zero
 /* 9FA878 80240088 0220202D */  daddu     $a0, $s1, $zero
 /* 9FA87C 8024008C 8E050000 */  lw        $a1, ($s0)
-/* 9FA880 80240090 0C0B1EAF */  jal       get_variable
+/* 9FA880 80240090 0C0B1EAF */  jal       evt_get_variable
 /* 9FA884 80240094 0040802D */   daddu    $s0, $v0, $zero
 /* 9FA888 80240098 3C138011 */  lui       $s3, %hi(gPlayerStatus)
 /* 9FA88C 8024009C 2673EFC8 */  addiu     $s3, $s3, %lo(gPlayerStatus)

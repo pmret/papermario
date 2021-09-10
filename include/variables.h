@@ -138,8 +138,8 @@ extern AnimatedModelList* gCurrentMeshAnimationListPtr;
 
 // Triggers
 extern s16 gTriggerCount;
-extern TriggerList gTriggerList1;
-extern TriggerList gTriggerList2;
+extern TriggerList wTriggerList;
+extern TriggerList bTriggerList;
 extern TriggerList* gCurrentTriggerListPtr;
 
 // Map transition data. Should probably be a struct
@@ -166,24 +166,25 @@ extern s8 D_800A0B94;
 extern s16 D_800A0BB8;
 
 
-extern UIPanel gUIPanels[64];
+extern Window gWindows[64];
 
 extern s32 D_802A3838;
 
 // Pause
 extern s32 gPauseMenuHeldButtons;
 extern s32 gPauseMenuPressedButtons;
-extern s32 gPauseMenuCurrentDescString;
+extern s32 gPauseMenuCurrentDescMsg;
 extern s32* gPauseMenuCurrentDescIconScript;
 extern s32 D_802700D0;
+
 extern s8 gPauseMenuCurrentTab;
 extern char D_802700D[8];
 extern s32 D_802700E0;
 extern s32 gPauseMenuCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
-extern s32 gPauseMenuStrings[348];
+extern s32 gPauseMenuMsgs[348];
 extern s32 gPauseMenuIconScripts[8];
-extern MenuTab gPauseMenuTabs[7];
+extern MenuPanel gPauseMenuPanels[7];
 extern s32 gPauseMenuCursorPosX;
 extern s32 gPauseMenuCursorPosY;
 extern s32 gPauseMenuCursorOpacity;
@@ -192,7 +193,22 @@ extern s32 gPauseMenuTargetPosY;
 extern s32 gPauseMenuCursorTargetOpacity;
 extern u8 gPauseMenuTextScrollInterpEasingLUT[16];
 extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
+extern s32 D_80270700[1];
+extern f32 pause_map_cameraX;
+extern f32 pause_map_cameraY;
+extern s32 pause_map_marioX;
+extern s32 pause_map_marioY;
+extern f32 pause_map_targetX;
+extern f32 pause_map_targetY;
+extern s32 pause_map_cursorCurrentOption;
+extern s32 pause_map_cursorCurrentOptionCopy;
+extern s32 pause_map_spacesInSnapRange;
 
+
+extern HudElementAnim* D_8024FA30[1];
+
+extern PauseMapSpace pause_map_spaces[34];
+extern MenuWindowBP pause_map_windowBlueprints[7];
 // Badges
 extern s32 gBadgeMenuCurrentScrollPos;
 extern s32 gBadgeMenuTargetScrollPos;
@@ -295,13 +311,10 @@ extern s32 D_8010C978;
 extern PartnerActionStatus gPartnerActionStatus; // something with partners
 extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
 
-// Effects
-extern EffectTableEntry gEffectTable[135];
-
 extern SaveData gCurrentSaveFile;
 
 extern u32* gMapFlags;
-extern u32* gMapVars;
+extern s32* gMapVars;
 
 extern f32 D_80286540;
 
@@ -392,11 +405,6 @@ extern s32 D_8029C890[12][5];
 extern s32 D_8038F800;
 extern s32 D_803B5000;
 extern s32 D_803DA800;
-
-// Dead code
-extern PlayerStatus* dead_gPlayerStatusPtr;
-extern StaticItem dead_gItemTable[364];
-extern Camera dead_gCameras[4];
 
 extern s32 D_80108A64;
 extern s32 bMarioIdleAnims[];

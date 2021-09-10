@@ -38,20 +38,20 @@ FoliageVectorList N(treeEffectVectors_Tree1) = {
 };
 
 EvtSource N(tree1_Callback) = SCRIPT({
-    if (SI_SAVE_FLAG(53) == TRUE) {
+    if (EVT_SAVE_FLAG(53) == TRUE) {
         return;
     }
-    if (SI_MAP_FLAG(10) == TRUE) {
+    if (EVT_MAP_FLAG(10) == TRUE) {
         return;
     }
     sleep 10;
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    if (SI_VAR(0) < -30) {
-        MakeItemEntity(ITEM_MUSHROOM, -23, 100, 35, 13, SI_SAVE_FLAG(53));
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    if (EVT_VAR(0) < -30) {
+        MakeItemEntity(ITEM_MUSHROOM, -23, 100, 35, 13, EVT_SAVE_FLAG(53));
     } else {
-        MakeItemEntity(ITEM_MUSHROOM, -85, 100, 16, 13, SI_SAVE_FLAG(53));
+        MakeItemEntity(ITEM_MUSHROOM, -85, 100, 16, 13, EVT_SAVE_FLAG(53));
     }
-    SI_MAP_FLAG(10) = 1;
+    EVT_MAP_FLAG(10) = 1;
 });
 
 ShakeTreeConfig N(tree1) = {
@@ -64,10 +64,10 @@ ShakeTreeConfig N(tree1) = {
 Vec4f N(tree1Point) = { -42.0f, 0.0f, -13.0f, 0.0f };
 
 EvtSource N(802422B8) = SCRIPT({
-    SI_VAR(0) = N(bush1);
+    EVT_VAR(0) = N(bush1);
     bind N(searchBush) TRIGGER_WALL_PRESS_A 53;
 
-    SI_VAR(0) = N(tree1);
+    EVT_VAR(0) = N(tree1);
     bind N(shakeTree) TRIGGER_WALL_HAMMER 52;
     bind N(shakeTree) TRIGGER_POINT_BOMB N(tree1Point);
 });

@@ -5,7 +5,7 @@ glabel func_80241F98_A3B478
 /* A3B478 80241F98 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A3B47C 80241F9C AFBF0010 */  sw        $ra, 0x10($sp)
 /* A3B480 80241FA0 8C82000C */  lw        $v0, 0xc($a0)
-/* A3B484 80241FA4 0C0B1EAF */  jal       get_variable
+/* A3B484 80241FA4 0C0B1EAF */  jal       evt_get_variable
 /* A3B488 80241FA8 8C450000 */   lw       $a1, ($v0)
 /* A3B48C 80241FAC 8C44000C */  lw        $a0, 0xc($v0)
 /* A3B490 80241FB0 8C83001C */  lw        $v1, 0x1c($a0)

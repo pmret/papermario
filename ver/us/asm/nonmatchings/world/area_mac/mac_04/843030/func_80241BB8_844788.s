@@ -10,11 +10,11 @@ glabel func_80241BB8_844788
 /* 84479C 80241BCC F7B40020 */  sdc1      $f20, 0x20($sp)
 /* 8447A0 80241BD0 8E30000C */  lw        $s0, 0xc($s1)
 /* 8447A4 80241BD4 8E050000 */  lw        $a1, ($s0)
-/* 8447A8 80241BD8 0C0B1EAF */  jal       get_variable
+/* 8447A8 80241BD8 0C0B1EAF */  jal       evt_get_variable
 /* 8447AC 80241BDC 26100004 */   addiu    $s0, $s0, 4
 /* 8447B0 80241BE0 0220202D */  daddu     $a0, $s1, $zero
 /* 8447B4 80241BE4 8E050000 */  lw        $a1, ($s0)
-/* 8447B8 80241BE8 0C0B210B */  jal       get_float_variable
+/* 8447B8 80241BE8 0C0B210B */  jal       evt_get_float_variable
 /* 8447BC 80241BEC 0040802D */   daddu    $s0, $v0, $zero
 /* 8447C0 80241BF0 0220202D */  daddu     $a0, $s1, $zero
 /* 8447C4 80241BF4 0200282D */  daddu     $a1, $s0, $zero

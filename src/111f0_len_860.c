@@ -28,7 +28,7 @@ void init_enter_world_shared(void) {
 
     gOverrideFlags |= 0x8;
 
-    set_variable(NULL, SI_SAVE_VAR(1), gGameStatusPtr->unk_A9);
+    evt_set_variable(NULL, EVT_SAVE_VAR(1), gGameStatusPtr->unk_A9);
     timeFreezeMode = 0;
 }
 

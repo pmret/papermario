@@ -17,7 +17,7 @@ glabel func_80240DEC_CF895C
 .L80240E1C:
 /* CF898C 80240E1C 3C05F5DE */  lui       $a1, 0xf5de
 /* CF8990 80240E20 34A502E0 */  ori       $a1, $a1, 0x2e0
-/* CF8994 80240E24 0C0B1EAF */  jal       get_variable
+/* CF8994 80240E24 0C0B1EAF */  jal       evt_get_variable
 /* CF8998 80240E28 0000202D */   daddu    $a0, $zero, $zero
 /* CF899C 80240E2C 3C038024 */  lui       $v1, %hi(D_802436FC_CFB26C)
 /* CF89A0 80240E30 00621821 */  addu      $v1, $v1, $v0

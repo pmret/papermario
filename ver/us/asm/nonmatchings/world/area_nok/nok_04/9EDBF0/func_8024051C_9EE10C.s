@@ -5,7 +5,7 @@ glabel func_8024051C_9EE10C
 /* 9EE10C 8024051C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 9EE110 80240520 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 9EE114 80240524 8C82000C */  lw        $v0, 0xc($a0)
-/* 9EE118 80240528 0C0B1EAF */  jal       get_variable
+/* 9EE118 80240528 0C0B1EAF */  jal       evt_get_variable
 /* 9EE11C 8024052C 8C450000 */   lw       $a1, ($v0)
 /* 9EE120 80240530 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 9EE124 80240534 3C018024 */  lui       $at, %hi(D_80241438_9EF028)

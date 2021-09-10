@@ -25,7 +25,7 @@ glabel func_80241100_DBE3B0
 /* DBE3E4 80241134 8E83000C */  lw        $v1, 0xc($s4)
 /* DBE3E8 80241138 0280202D */  daddu     $a0, $s4, $zero
 /* DBE3EC 8024113C 8C650000 */  lw        $a1, ($v1)
-/* DBE3F0 80241140 0C0B1EAF */  jal       get_variable
+/* DBE3F0 80241140 0C0B1EAF */  jal       evt_get_variable
 /* DBE3F4 80241144 0040902D */   daddu    $s2, $v0, $zero
 /* DBE3F8 80241148 AFA00018 */  sw        $zero, 0x18($sp)
 /* DBE3FC 8024114C 8E2300D0 */  lw        $v1, 0xd0($s1)

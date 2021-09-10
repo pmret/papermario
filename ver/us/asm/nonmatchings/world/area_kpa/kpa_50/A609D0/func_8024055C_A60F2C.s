@@ -25,7 +25,7 @@ glabel func_8024055C_A60F2C
 /* A60F7C 802405AC 1062012F */  beq       $v1, $v0, .L80240A6C
 /* A60F80 802405B0 0000102D */   daddu    $v0, $zero, $zero
 /* A60F84 802405B4 8E050000 */  lw        $a1, ($s0)
-/* A60F88 802405B8 0C0B1EAF */  jal       get_variable
+/* A60F88 802405B8 0C0B1EAF */  jal       evt_get_variable
 /* A60F8C 802405BC 02E0202D */   daddu    $a0, $s7, $zero
 /* A60F90 802405C0 86640008 */  lh        $a0, 8($s3)
 /* A60F94 802405C4 0C00EABB */  jal       get_npc_unsafe

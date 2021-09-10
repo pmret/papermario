@@ -6,7 +6,6 @@ void gfxThread(void);
 extern s32 nuContWaitMesgBuf;
 extern OSThread D_800B1B90;
 extern OSMesg nuGfxMesgBuf[NU_GFX_MESGS];
-extern OSMesgQueue nuGfxMesgQ;
 
 void nuGfxThreadStart(void) {
     osCreateThread(&D_800B1B90, 4, gfxThread, NULL, &nuContWaitMesgBuf, NU_GFX_THREAD_PRI);

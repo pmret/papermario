@@ -8,7 +8,7 @@ glabel func_80240730_BBD8D0
 /* BBD8DC 8024073C AFBF0014 */  sw        $ra, 0x14($sp)
 /* BBD8E0 80240740 10A00005 */  beqz      $a1, .L80240758
 /* BBD8E4 80240744 8E02000C */   lw       $v0, 0xc($s0)
-/* BBD8E8 80240748 0C0B1EAF */  jal       get_variable
+/* BBD8E8 80240748 0C0B1EAF */  jal       evt_get_variable
 /* BBD8EC 8024074C 8C450000 */   lw       $a1, ($v0)
 /* BBD8F0 80240750 8C420000 */  lw        $v0, ($v0)
 /* BBD8F4 80240754 AE020074 */  sw        $v0, 0x74($s0)

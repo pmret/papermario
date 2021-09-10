@@ -19,7 +19,7 @@ glabel func_802419D8_B365A8
 .L80241A0C:
 /* B365DC 80241A0C 8CC50000 */  lw        $a1, ($a2)
 /* B365E0 80241A10 3C068024 */  lui       $a2, %hi(D_80247448_B3C018)
-/* B365E4 80241A14 0C0B2026 */  jal       set_variable
+/* B365E4 80241A14 0C0B2026 */  jal       evt_set_variable
 /* B365E8 80241A18 8CC67448 */   lw       $a2, %lo(D_80247448_B3C018)($a2)
 /* B365EC 80241A1C 24020002 */  addiu     $v0, $zero, 2
 .L80241A20:

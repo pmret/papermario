@@ -29,7 +29,7 @@ glabel func_8024351C_9DA53C
 /* 9DA59C 8024357C 3C0146AF */  lui       $at, 0x46af
 /* 9DA5A0 80243580 3421C800 */  ori       $at, $at, 0xc800
 /* 9DA5A4 80243584 4481C000 */  mtc1      $at, $f24
-/* 9DA5A8 80243588 0C0B1EAF */  jal       get_variable
+/* 9DA5A8 80243588 0C0B1EAF */  jal       evt_get_variable
 /* 9DA5AC 8024358C 3673851F */   ori      $s3, $s3, 0x851f
 /* 9DA5B0 80243590 0040902D */  daddu     $s2, $v0, $zero
 .L80243594:

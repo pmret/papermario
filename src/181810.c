@@ -14,7 +14,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor;
     ActorPart* part;
-    s32 stringID;
+    s32 msgID;
     ActorID actorID;
     s32 partIndex;
     MessagePrintState** printContext;
@@ -22,15 +22,15 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
 
     f32 headX, headY, headZ;
     s32 screenX, screenY, screenZ;
-    s32 stringID2;
+    s32 msgID2;
 
     if (isInitialCall) {
-        stringID = get_variable(script, *args++);
-        actorID = get_variable(script, *args++);
-        partIndex = get_variable(script, *args++);
-        gSpeakingActorTalkAnim = get_variable(script, *args++);
-        gSpeakingActorIdleAnim = get_variable(script, *args++);
-        stringID2 = stringID;
+        msgID = evt_get_variable(script, *args++);
+        actorID = evt_get_variable(script, *args++);
+        partIndex = evt_get_variable(script, *args++);
+        gSpeakingActorTalkAnim = evt_get_variable(script, *args++);
+        gSpeakingActorIdleAnim = evt_get_variable(script, *args++);
+        msgID2 = msgID;
 
         if (actorID == ACTOR_SELF) {
             actorID = script->owner1.actorID;
@@ -54,7 +54,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         {
             s32* isPrintDone = &gSpeakingActorPrintIsDone;
             *isPrintDone = FALSE;
-            gSpeakingActorPrintCtx = msg_get_printer_for_string(stringID2, isPrintDone);
+            gSpeakingActorPrintCtx = msg_get_printer_for_msg(msgID2, isPrintDone);
         }
         msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
@@ -114,10 +114,10 @@ ApiStatus ShowBattleChoice(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        s32 stringID = get_variable(script, *args);
+        s32 msgID = evt_get_variable(script, *args);
 
         script->functionTemp[1] = 0;
-        D_8029FA64 = msg_get_printer_for_string(stringID, &script->functionTemp[1]);
+        D_8029FA64 = msg_get_printer_for_msg(msgID, &script->functionTemp[1]);
     }
 
     if (script->functionTemp[1] == 1) {
@@ -133,7 +133,7 @@ ApiStatus ShowBattleChoice(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802535B4(Evt* script, s32 isInitialCall) {
-    if (get_variable(script, *script->ptrReadPos)) {
+    if (evt_get_variable(script, *script->ptrReadPos)) {
         decrement_status_menu_disabled();
     } else {
         increment_status_menu_disabled();
@@ -142,7 +142,7 @@ ApiStatus func_802535B4(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus OverrideBattleDmaDest(Evt* script, s32 isInitialCall) {
-    gBattleDmaDest = get_variable(script, *script->ptrReadPos);
+    gBattleDmaDest = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -151,7 +151,7 @@ INCLUDE_ASM(s32, "181810", LoadBattleDmaData);
 ApiStatus func_802536A8(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    if (get_variable(script, *script->ptrReadPos) != 0) {
+    if (evt_get_variable(script, *script->ptrReadPos) != 0) {
         battleStatus->unk_92 |= 1;
         gOverrideFlags |= 0x80;
     } else {
@@ -165,7 +165,7 @@ ApiStatus func_802536A8(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80253734(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 val = get_variable(script, *script->ptrReadPos);
+    s32 val = evt_get_variable(script, *script->ptrReadPos);
 
     switch (val) {
         case 0:
@@ -202,15 +202,15 @@ ApiStatus func_802537C0(Evt* script, s32 isInitialCall) {
         t3 = 1;
     }
 
-    set_variable(script, a0, 1);
-    set_variable(script, a1, t3);
+    evt_set_variable(script, a0, 1);
+    evt_set_variable(script, a1, t3);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus PlaySoundAtActor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = get_variable(script, *args++);
+    ActorID actorID = evt_get_variable(script, *args++);
     Bytecode soundID = *args++;
     Actor* actor;
 
@@ -226,8 +226,8 @@ ApiStatus PlaySoundAtActor(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlaySoundAtPart(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = get_variable(script, *args++);
-    s32 partIndex = get_variable(script, *args++);
+    ActorID actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
     Bytecode soundID = *args++;
     ActorPart* part;
 
@@ -243,8 +243,8 @@ ApiStatus PlaySoundAtPart(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = get_variable(script, *args++);
-    s32 idx = get_variable(script, *args++);
+    ActorID actorID = evt_get_variable(script, *args++);
+    s32 idx = evt_get_variable(script, *args++);
     Bytecode soundID = *args++;
     Actor* actor;
 
@@ -261,8 +261,8 @@ ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
 
 ApiStatus StopLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = get_variable(script, *args++);
-    s32 idx = get_variable(script, *args++);
+    ActorID actorID = evt_get_variable(script, *args++);
+    s32 idx = evt_get_variable(script, *args++);
     Actor* actor;
 
     if (actorID == ACTOR_SELF) {
@@ -281,7 +281,7 @@ ApiStatus StopLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetForegroundModelsVisibleUnchecked(Evt* script, s32 isInitialCall) {
-    if (get_variable(script, *script->ptrReadPos)) {
+    if (evt_get_variable(script, *script->ptrReadPos)) {
         show_foreground_models_unchecked();
     } else {
         hide_foreground_models_unchecked();
@@ -290,7 +290,7 @@ ApiStatus SetForegroundModelsVisibleUnchecked(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetForegroundModelsVisible(Evt* script, s32 isInitialCall) {
-    if (get_variable(script, *script->ptrReadPos)) {
+    if (evt_get_variable(script, *script->ptrReadPos)) {
         show_foreground_models();
     } else {
         hide_foreground_models();
@@ -302,9 +302,9 @@ ApiStatus func_80253B30(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Bytecode a0 = *args++;
     Bytecode a1 = *args++;
-    s32 var1 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
 
-    set_variable(script, a0, (a1 | 0xFE) | (var1 * 256));
+    evt_set_variable(script, a0, (a1 | 0xFE) | (var1 * 256));
     return ApiStatus_DONE2;
 }
 
@@ -312,10 +312,10 @@ ApiStatus MakeStatusField(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
     s32 a = *args++;
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
+    s32 c = evt_get_variable(script, *args++);
 
-    set_variable(script, outVar, a | 0x80000000 | (c << 8) | b);
+    evt_set_variable(script, outVar, a | 0x80000000 | (c << 8) | b);
     return ApiStatus_DONE2;
 }
 
@@ -361,7 +361,7 @@ ApiStatus MultiplyByActorScale(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
 
-    set_float_variable(script, args[0], get_float_variable(script, args[0]) * actor->scalingFactor);
+    evt_set_float_variable(script, args[0], evt_get_float_variable(script, args[0]) * actor->scalingFactor);
     return ApiStatus_DONE2;
 }
 
@@ -369,8 +369,8 @@ ApiStatus MultiplyVec2ByActorScale(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
 
-    set_float_variable(script, args[0], get_float_variable(script, args[0]) * actor->scalingFactor);
-    set_float_variable(script, args[1], get_float_variable(script, args[1]) * actor->scalingFactor);
+    evt_set_float_variable(script, args[0], evt_get_float_variable(script, args[0]) * actor->scalingFactor);
+    evt_set_float_variable(script, args[1], evt_get_float_variable(script, args[1]) * actor->scalingFactor);
 
     return ApiStatus_DONE2;
 }
@@ -379,9 +379,9 @@ ApiStatus MultiplyVec3ByActorScale(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
 
-    set_float_variable(script, args[0], get_float_variable(script, args[0]) * actor->scalingFactor);
-    set_float_variable(script, args[1], get_float_variable(script, args[1]) * actor->scalingFactor);
-    set_float_variable(script, args[2], get_float_variable(script, args[2]) * actor->scalingFactor);
+    evt_set_float_variable(script, args[0], evt_get_float_variable(script, args[0]) * actor->scalingFactor);
+    evt_set_float_variable(script, args[1], evt_get_float_variable(script, args[1]) * actor->scalingFactor);
+    evt_set_float_variable(script, args[2], evt_get_float_variable(script, args[2]) * actor->scalingFactor);
 
     return ApiStatus_DONE2;
 }
@@ -389,17 +389,17 @@ ApiStatus MultiplyVec3ByActorScale(Evt* script, s32 isInitialCall) {
 ApiStatus ApplyShrinkFromOwner(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
-    s32 amt = get_variable(script, *args);
+    s32 amt = evt_get_variable(script, *args);
 
     if (actor->debuff == STATUS_SHRINK && amt > 0) {
         amt /= 2;
     }
 
-    set_variable(script, *args, amt);
+    evt_set_variable(script, *args, amt);
     return ApiStatus_DONE2;
 }
 
 ApiStatus StartRumble(Evt* script, s32 isInitialCall) {
-    start_rumble_type(get_variable(script, *script->ptrReadPos));
+    start_rumble_type(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }

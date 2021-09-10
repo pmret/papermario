@@ -1,5 +1,6 @@
 #include "common.h"
 #include "map.h"
+#include "effects.h"
 
 void N(UnkFunc13_copy)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;

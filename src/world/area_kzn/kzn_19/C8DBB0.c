@@ -22,17 +22,17 @@ ApiStatus N(func_80240358_C8DF08)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
         script->varTable[0] = ptr;
-        set_variable(NULL, SI_MAP_VAR(1), ptr);
-        ptr->unk_38 = get_variable(script, *args++);
-        ptr->unk_3C = get_variable(script, *args++);
-        ptr->unk_0C = get_float_variable(script, *args++);
-        ptr->unk_10 = get_float_variable(script, *args++);
-        ptr->unk_14 = get_float_variable(script, *args++);
-        ptr->unk_18 = get_float_variable(script, *args++);
-        ptr->unk_1C = get_float_variable(script, *args++);
-        ptr->unk_20 = get_float_variable(script, *args++);
-        ptr->unk_24 = get_float_variable(script, *args++);
-        ptr->unk_28 = get_float_variable(script, *args++);
+        evt_set_variable(NULL, EVT_MAP_VAR(1), ptr);
+        ptr->unk_38 = evt_get_variable(script, *args++);
+        ptr->unk_3C = evt_get_variable(script, *args++);
+        ptr->unk_0C = evt_get_float_variable(script, *args++);
+        ptr->unk_10 = evt_get_float_variable(script, *args++);
+        ptr->unk_14 = evt_get_float_variable(script, *args++);
+        ptr->unk_18 = evt_get_float_variable(script, *args++);
+        ptr->unk_1C = evt_get_float_variable(script, *args++);
+        ptr->unk_20 = evt_get_float_variable(script, *args++);
+        ptr->unk_24 = evt_get_float_variable(script, *args++);
+        ptr->unk_28 = evt_get_float_variable(script, *args++);
         ptr->unk_50 = (struct N(temp)*)playFX_83(2, ptr->unk_0C, ptr->unk_10, ptr->unk_14, 1.0f, 0);
         ptr->unk_4E = 0;
         ptr->unk_48 = 0;
@@ -54,7 +54,7 @@ static char* N(exit_str_2) = "kzn_20";
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_802408C8_C8E478);
 /*
 ApiStatus N(func_802408C8_C8E478)(Evt* script, s32 isInitialCall) {
-    s32 var = get_variable(script, *script->ptrReadPos);
+    s32 var = evt_get_variable(script, *script->ptrReadPos);
     arn_07_struct* ptr = script->varTable[0];
 
     return (ptr->unk_4E == var) * ApiStatus_DONE2;
@@ -69,11 +69,11 @@ ApiStatus N(func_80240908_C8E4B8)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
         script->varTable[0] = ptr;
-        ptr->unk_38 = get_variable(script, *args++);
-        ptr->unk_18 = get_float_variable(script, *args++);
-        ptr->unk_24 = get_float_variable(script, *args++);
-        ptr->unk_20 = get_float_variable(script, *args++);
-        ptr->unk_28 = get_float_variable(script, *args++);
+        ptr->unk_38 = evt_get_variable(script, *args++);
+        ptr->unk_18 = evt_get_float_variable(script, *args++);
+        ptr->unk_24 = evt_get_float_variable(script, *args++);
+        ptr->unk_20 = evt_get_float_variable(script, *args++);
+        ptr->unk_28 = evt_get_float_variable(script, *args++);
         ptr->unk_54 = playFX_7B(1, ptr->unk_18, ptr->unk_24, ptr->unk_20, 1.0f, 0);
         ptr->unk_54->unk_0C->unk_34 = ptr->unk_38;
         ptr->unk_54->unk_0C->unk_20 = 0;
@@ -159,7 +159,7 @@ ApiStatus N(func_802417AC_C8F35C)(Evt* script, s32 isInitialCall) {
 
     if (N(D_80243DD8_C91988)) {
         N(D_80243DD8_C91988) = FALSE;
-        set_variable(script, *args, N(D_80243DDC_C9198C));
+        evt_set_variable(script, *args, N(D_80243DDC_C9198C));
         return ApiStatus_DONE2;
     }
 
@@ -172,7 +172,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80241800_C8F3B0);
 ApiStatus N(func_80241800_C8F3B0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    N(D_80243DDC_C9198C) = get_variable(script, *args);
+    N(D_80243DDC_C9198C) = evt_get_variable(script, *args);
     N(D_80243DD8_C91988) = TRUE;
     return ApiStatus_DONE2;
 }
@@ -182,7 +182,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80241838_C8F3E8);
 /*
 ApiStatus N(func_80241838_C8F3E8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

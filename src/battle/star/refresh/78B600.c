@@ -31,10 +31,10 @@ ApiStatus func_802A17D4_78BDD4(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802A18E8_78BEE8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
-    s32 var4 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    s32 var4 = evt_get_variable(script, *args++);
 
     playFX_40(0, var1, var2, var3, var4);
 
@@ -43,10 +43,10 @@ ApiStatus func_802A18E8_78BEE8(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802A19A8_78BFA8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
-    s32 var4 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    s32 var4 = evt_get_variable(script, *args++);
 
     playFX_40(1, var1, var2, var3, var4);
 

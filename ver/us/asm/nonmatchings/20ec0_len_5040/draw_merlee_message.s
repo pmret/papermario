@@ -18,7 +18,7 @@ glabel draw_merlee_message
 /* 21304 80045F04 02028021 */  addu      $s0, $s0, $v0
 /* 21308 80045F08 8E108168 */  lw        $s0, %lo(D_80078168)($s0)
 /* 2130C 80045F0C 0000282D */  daddu     $a1, $zero, $zero
-/* 21310 80045F10 0C04991D */  jal       get_string_width
+/* 21310 80045F10 0C04991D */  jal       get_msg_width
 /* 21314 80045F14 0200202D */   daddu    $a0, $s0, $zero
 /* 21318 80045F18 0200202D */  daddu     $a0, $s0, $zero
 /* 2131C 80045F1C 2451001E */  addiu     $s1, $v0, 0x1e
@@ -26,7 +26,7 @@ glabel draw_merlee_message
 /* 21324 80045F24 02221021 */  addu      $v0, $s1, $v0
 /* 21328 80045F28 00021043 */  sra       $v0, $v0, 1
 /* 2132C 80045F2C 241000A0 */  addiu     $s0, $zero, 0xa0
-/* 21330 80045F30 0C04992C */  jal       get_string_lines
+/* 21330 80045F30 0C04992C */  jal       get_msg_lines
 /* 21334 80045F34 02028023 */   subu     $s0, $s0, $v0
 /* 21338 80045F38 24040009 */  addiu     $a0, $zero, 9
 /* 2133C 80045F3C 2442FFFF */  addiu     $v0, $v0, -1

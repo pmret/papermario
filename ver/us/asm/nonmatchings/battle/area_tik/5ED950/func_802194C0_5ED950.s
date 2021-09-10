@@ -16,7 +16,7 @@ glabel func_802194C0_5ED950
 /* 5ED97C 802194EC F7B60038 */  sdc1      $f22, 0x38($sp)
 /* 5ED980 802194F0 F7B40030 */  sdc1      $f20, 0x30($sp)
 /* 5ED984 802194F4 8E82000C */  lw        $v0, 0xc($s4)
-/* 5ED988 802194F8 0C0B1EAF */  jal       get_variable
+/* 5ED988 802194F8 0C0B1EAF */  jal       evt_get_variable
 /* 5ED98C 802194FC 8C450000 */   lw       $a1, ($v0)
 /* 5ED990 80219500 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* 5ED994 80219504 0040202D */   daddu    $a0, $v0, $zero

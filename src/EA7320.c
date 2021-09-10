@@ -1,9 +1,10 @@
+#include "dead.h"
 #include "common.h"
 
 #define NAMESPACE EA7320
 
 ApiStatus func_80240350_EA7320(Evt* script, s32 isInitialCall) {
-    Camera* camera = &dead_gCameras[0];
+    Camera* camera = &gCameras[0];
 
     camera->flags |= 0x1000;
     return ApiStatus_DONE2;

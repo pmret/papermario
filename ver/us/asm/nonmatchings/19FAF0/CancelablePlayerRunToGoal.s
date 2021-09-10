@@ -27,7 +27,7 @@ glabel CancelablePlayerRunToGoal
 /* 1A2830 80273F50 00000000 */   nop
 /* 1A2834 80273F54 8E250000 */  lw        $a1, ($s1)
 /* 1A2838 80273F58 26310004 */  addiu     $s1, $s1, 4
-/* 1A283C 80273F5C 0C0B1EAF */  jal       get_variable
+/* 1A283C 80273F5C 0C0B1EAF */  jal       evt_get_variable
 /* 1A2840 80273F60 0260202D */   daddu    $a0, $s3, $zero
 /* 1A2844 80273F64 A6020070 */  sh        $v0, 0x70($s0)
 /* 1A2848 80273F68 8E220000 */  lw        $v0, ($s1)
@@ -206,7 +206,7 @@ glabel CancelablePlayerRunToGoal
 /* 1A2AD0 802741F0 8C850074 */  lw        $a1, 0x74($a0)
 /* 1A2AD4 802741F4 0000302D */  daddu     $a2, $zero, $zero
 .L802741F8:
-/* 1A2AD8 802741F8 0C0B2026 */  jal       set_variable
+/* 1A2AD8 802741F8 0C0B2026 */  jal       evt_set_variable
 /* 1A2ADC 802741FC 00000000 */   nop
 /* 1A2AE0 80274200 24020002 */  addiu     $v0, $zero, 2
 .L80274204:

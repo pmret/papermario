@@ -11,16 +11,16 @@ glabel func_8026EDE4
 /* 19D6DC 8026EDFC AFB00010 */  sw        $s0, 0x10($sp)
 /* 19D6E0 8026EE00 8E50000C */  lw        $s0, 0xc($s2)
 /* 19D6E4 8026EE04 8E050000 */  lw        $a1, ($s0)
-/* 19D6E8 8026EE08 0C0B1EAF */  jal       get_variable
+/* 19D6E8 8026EE08 0C0B1EAF */  jal       evt_get_variable
 /* 19D6EC 8026EE0C 26100004 */   addiu    $s0, $s0, 4
 /* 19D6F0 8026EE10 0040882D */  daddu     $s1, $v0, $zero
 /* 19D6F4 8026EE14 8E050000 */  lw        $a1, ($s0)
 /* 19D6F8 8026EE18 26100004 */  addiu     $s0, $s0, 4
-/* 19D6FC 8026EE1C 0C0B1EAF */  jal       get_variable
+/* 19D6FC 8026EE1C 0C0B1EAF */  jal       evt_get_variable
 /* 19D700 8026EE20 0240202D */   daddu    $a0, $s2, $zero
 /* 19D704 8026EE24 0240202D */  daddu     $a0, $s2, $zero
 /* 19D708 8026EE28 8E050000 */  lw        $a1, ($s0)
-/* 19D70C 8026EE2C 0C0B1EAF */  jal       get_variable
+/* 19D70C 8026EE2C 0C0B1EAF */  jal       evt_get_variable
 /* 19D710 8026EE30 0040802D */   daddu    $s0, $v0, $zero
 /* 19D714 8026EE34 0040982D */  daddu     $s3, $v0, $zero
 /* 19D718 8026EE38 2402FF81 */  addiu     $v0, $zero, -0x7f

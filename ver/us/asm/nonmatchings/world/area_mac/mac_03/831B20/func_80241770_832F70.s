@@ -19,7 +19,7 @@ glabel func_80241770_832F70
 .L802417A4:
 /* 832FA4 802417A4 8CC50000 */  lw        $a1, ($a2)
 /* 832FA8 802417A8 3C068025 */  lui       $a2, %hi(D_80248C70_83A470)
-/* 832FAC 802417AC 0C0B2026 */  jal       set_variable
+/* 832FAC 802417AC 0C0B2026 */  jal       evt_set_variable
 /* 832FB0 802417B0 8CC68C70 */   lw       $a2, %lo(D_80248C70_83A470)($a2)
 /* 832FB4 802417B4 24020002 */  addiu     $v0, $zero, 2
 .L802417B8:

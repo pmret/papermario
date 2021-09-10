@@ -41,7 +41,7 @@ glabel func_80242368_E076C8
 /* E07750 802423F0 3C108025 */  lui       $s0, %hi(D_8024A2D0)
 /* E07754 802423F4 2610A2D0 */  addiu     $s0, $s0, %lo(D_8024A2D0)
 /* E07758 802423F8 00052A00 */  sll       $a1, $a1, 8
-/* E0775C 802423FC 0C049601 */  jal       dma_load_string
+/* E0775C 802423FC 0C049601 */  jal       dma_load_msg
 /* E07760 80242400 00B02821 */   addu     $a1, $a1, $s0
 /* E07764 80242404 8E630000 */  lw        $v1, ($s3)
 /* E07768 80242408 00031200 */  sll       $v0, $v1, 8
@@ -64,7 +64,7 @@ glabel func_80242368_E076C8
 /* E077A4 80242444 AFA20018 */  sw        $v0, 0x18($sp)
 /* E077A8 80242448 AFA0001C */  sw        $zero, 0x1c($sp)
 /* E077AC 8024244C 8E240000 */  lw        $a0, ($s1)
-/* E077B0 80242450 0C0497DA */  jal       get_string_properties
+/* E077B0 80242450 0C0497DA */  jal       get_msg_properties
 /* E077B4 80242454 27A70020 */   addiu    $a3, $sp, 0x20
 /* E077B8 80242458 8E420004 */  lw        $v0, 4($s2)
 /* E077BC 8024245C AE220068 */  sw        $v0, 0x68($s1)

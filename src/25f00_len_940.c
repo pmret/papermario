@@ -13,6 +13,8 @@ u8 D_80078181 = 1;
 //bss
 //static u16 D_800A0F50;
 
+s32 nuAuDmaCallBack(s32 addr, s32 len, void* state, s32 arg3);
+
 INCLUDE_ASM(s32, "25f00_len_940", create_audio_system);
 
 void nuAuPreNMIFuncSet(NUAuPreNMIFunc func) {

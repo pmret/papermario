@@ -9,7 +9,7 @@ glabel LoadSettings
 /* F03B8 802CBA08 AFB00010 */  sw        $s0, 0x10($sp)
 /* F03BC 802CBA0C 8E30000C */  lw        $s0, 0xc($s1)
 /* F03C0 802CBA10 8E050000 */  lw        $a1, ($s0)
-/* F03C4 802CBA14 0C0B1EAF */  jal       get_variable
+/* F03C4 802CBA14 0C0B1EAF */  jal       evt_get_variable
 /* F03C8 802CBA18 26100004 */   addiu    $s0, $s0, 4
 /* F03CC 802CBA1C 0220202D */  daddu     $a0, $s1, $zero
 /* F03D0 802CBA20 3C03800B */  lui       $v1, %hi(gCameras)
@@ -22,7 +22,7 @@ glabel LoadSettings
 /* F03EC 802CBA3C 001010C0 */  sll       $v0, $s0, 3
 /* F03F0 802CBA40 02028021 */  addu      $s0, $s0, $v0
 /* F03F4 802CBA44 001080C0 */  sll       $s0, $s0, 3
-/* F03F8 802CBA48 0C0B1EAF */  jal       get_variable
+/* F03F8 802CBA48 0C0B1EAF */  jal       evt_get_variable
 /* F03FC 802CBA4C 02038021 */   addu     $s0, $s0, $v1
 /* F0400 802CBA50 261004D8 */  addiu     $s0, $s0, 0x4d8
 /* F0404 802CBA54 24430020 */  addiu     $v1, $v0, 0x20

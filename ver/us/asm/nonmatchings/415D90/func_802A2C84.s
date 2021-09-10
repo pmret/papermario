@@ -1016,7 +1016,7 @@ glabel L802A3A9C_41882C
 /* 4188A8 802A3B18 3631009F */  ori       $s1, $s1, 0x9f
 .L802A3B1C:
 /* 4188AC 802A3B1C 0220202D */  daddu     $a0, $s1, $zero
-/* 4188B0 802A3B20 0C04991D */  jal       get_string_width
+/* 4188B0 802A3B20 0C04991D */  jal       get_msg_width
 /* 4188B4 802A3B24 0000282D */   daddu    $a1, $zero, $zero
 /* 4188B8 802A3B28 24500017 */  addiu     $s0, $v0, 0x17
 /* 4188BC 802A3B2C 001017C2 */  srl       $v0, $s0, 0x1f
@@ -1024,7 +1024,7 @@ glabel L802A3A9C_41882C
 /* 4188C4 802A3B34 00021043 */  sra       $v0, $v0, 1
 /* 4188C8 802A3B38 240300A0 */  addiu     $v1, $zero, 0xa0
 /* 4188CC 802A3B3C 00629823 */  subu      $s3, $v1, $v0
-/* 4188D0 802A3B40 0C04992C */  jal       get_string_lines
+/* 4188D0 802A3B40 0C04992C */  jal       get_msg_lines
 /* 4188D4 802A3B44 0220202D */   daddu    $a0, $s1, $zero
 /* 4188D8 802A3B48 24040009 */  addiu     $a0, $zero, 9
 /* 4188DC 802A3B4C 0260282D */  daddu     $a1, $s3, $zero

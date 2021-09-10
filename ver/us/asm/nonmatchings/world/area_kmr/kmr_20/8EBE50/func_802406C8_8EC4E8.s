@@ -60,7 +60,7 @@ glabel func_802406C8_8EC4E8
 .L80240794:
 /* 8EC5B4 80240794 0000202D */  daddu     $a0, $zero, $zero
 /* 8EC5B8 80240798 3C05F840 */  lui       $a1, 0xf840
-/* 8EC5BC 8024079C 0C0B1EAF */  jal       get_variable
+/* 8EC5BC 8024079C 0C0B1EAF */  jal       evt_get_variable
 /* 8EC5C0 802407A0 34A55C9A */   ori      $a1, $a1, 0x5c9a
 /* 8EC5C4 802407A4 10400019 */  beqz      $v0, .L8024080C
 /* 8EC5C8 802407A8 00000000 */   nop
@@ -70,13 +70,13 @@ glabel func_802406C8_8EC4E8
 /* 8EC5D4 802407B4 0000802D */  daddu     $s0, $zero, $zero
 /* 8EC5D8 802407B8 0200202D */  daddu     $a0, $s0, $zero
 /* 8EC5DC 802407BC 3C05F5DE */  lui       $a1, 0xf5de
-/* 8EC5E0 802407C0 0C0B1EAF */  jal       get_variable
+/* 8EC5E0 802407C0 0C0B1EAF */  jal       evt_get_variable
 /* 8EC5E4 802407C4 34A50180 */   ori      $a1, $a1, 0x180
 /* 8EC5E8 802407C8 28420006 */  slti      $v0, $v0, 6
 /* 8EC5EC 802407CC 14400005 */  bnez      $v0, .L802407E4
 /* 8EC5F0 802407D0 0200202D */   daddu    $a0, $s0, $zero
 /* 8EC5F4 802407D4 3C05F840 */  lui       $a1, 0xf840
-/* 8EC5F8 802407D8 0C0B1EAF */  jal       get_variable
+/* 8EC5F8 802407D8 0C0B1EAF */  jal       evt_get_variable
 /* 8EC5FC 802407DC 34A55CF0 */   ori      $a1, $a1, 0x5cf0
 /* 8EC600 802407E0 0002802B */  sltu      $s0, $zero, $v0
 .L802407E4:
@@ -87,7 +87,7 @@ glabel func_802406C8_8EC4E8
 .L802407F4:
 /* 8EC614 802407F4 3C05F5DE */  lui       $a1, 0xf5de
 .L802407F8:
-/* 8EC618 802407F8 0C0B1EAF */  jal       get_variable
+/* 8EC618 802407F8 0C0B1EAF */  jal       evt_get_variable
 /* 8EC61C 802407FC 34A50180 */   ori      $a1, $a1, 0x180
 /* 8EC620 80240800 0050102A */  slt       $v0, $v0, $s0
 /* 8EC624 80240804 50400001 */  beql      $v0, $zero, .L8024080C
@@ -212,7 +212,7 @@ glabel func_802406C8_8EC4E8
 /* 8EC7DC 802409BC 0000202D */   daddu    $a0, $zero, $zero
 /* 8EC7E0 802409C0 3C05F840 */  lui       $a1, 0xf840
 /* 8EC7E4 802409C4 34A55BE7 */  ori       $a1, $a1, 0x5be7
-/* 8EC7E8 802409C8 0C0B2026 */  jal       set_variable
+/* 8EC7E8 802409C8 0C0B2026 */  jal       evt_set_variable
 /* 8EC7EC 802409CC 24060001 */   addiu    $a2, $zero, 1
 .L802409D0:
 /* 8EC7F0 802409D0 3C148025 */  lui       $s4, %hi(D_80253390)

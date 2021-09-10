@@ -8,7 +8,7 @@ void* effectFuncs[] = {
     npc_raycast_down_sides, load_effect, sqrtf, mdl_draw_hidden_panel_surface, func_8011CFBC, guPerspectiveF,
     guMtxIdentF, transform_point, guLookAtHiliteF, set_screen_overlay_params_back, set_screen_overlay_center,
     set_screen_overlay_center_worldpos, mdl_get_next_texture_address, guPositionF, guOrthoF, guFrustumF, func_80138D88,
-    draw_box, draw_string, get_string_width, get_background_color_blend, sfx_play_sound_at_position
+    draw_box, draw_msg, get_msg_width, get_background_color_blend, sfx_play_sound_at_position
 };
 
 s32 D_E0200734[128] = {

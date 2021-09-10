@@ -17,7 +17,7 @@ glabel func_80240050_A6ACF0
 /* A6AD04 80240064 AFB00010 */  sw        $s0, 0x10($sp)
 /* A6AD08 80240068 8E30000C */  lw        $s0, 0xc($s1)
 /* A6AD0C 8024006C 8E050000 */  lw        $a1, ($s0)
-/* A6AD10 80240070 0C0B1EAF */  jal       get_variable
+/* A6AD10 80240070 0C0B1EAF */  jal       evt_get_variable
 /* A6AD14 80240074 26100004 */   addiu    $s0, $s0, 4
 /* A6AD18 80240078 0220202D */  daddu     $a0, $s1, $zero
 /* A6AD1C 8024007C 8E120000 */  lw        $s2, ($s0)
@@ -73,7 +73,7 @@ glabel func_80240050_A6ACF0
 /* A6ADDC 8024013C C6000080 */  lwc1      $f0, 0x80($s0)
 /* A6ADE0 80240140 4600010D */  trunc.w.s $f4, $f0
 /* A6ADE4 80240144 44062000 */  mfc1      $a2, $f4
-/* A6ADE8 80240148 0C0B2026 */  jal       set_variable
+/* A6ADE8 80240148 0C0B2026 */  jal       evt_set_variable
 /* A6ADEC 8024014C 0240282D */   daddu    $a1, $s2, $zero
 /* A6ADF0 80240150 24020002 */  addiu     $v0, $zero, 2
 .L80240154:

@@ -26,11 +26,11 @@ glabel func_80241330_B53B60
 /* B53B98 80241368 8E050000 */  lw        $a1, ($s0)
 /* B53B9C 8024136C 26100004 */  addiu     $s0, $s0, 4
 /* B53BA0 80241370 0260202D */  daddu     $a0, $s3, $zero
-/* B53BA4 80241374 0C0B1EAF */  jal       get_variable
+/* B53BA4 80241374 0C0B1EAF */  jal       evt_get_variable
 /* B53BA8 80241378 0040A82D */   daddu    $s5, $v0, $zero
 /* B53BAC 8024137C 0260202D */  daddu     $a0, $s3, $zero
 /* B53BB0 80241380 8E050000 */  lw        $a1, ($s0)
-/* B53BB4 80241384 0C0B1EAF */  jal       get_variable
+/* B53BB4 80241384 0C0B1EAF */  jal       evt_get_variable
 /* B53BB8 80241388 0040A02D */   daddu    $s4, $v0, $zero
 /* B53BBC 8024138C AE420094 */  sw        $v0, 0x94($s2)
 /* B53BC0 80241390 AFA00010 */  sw        $zero, 0x10($sp)

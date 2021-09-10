@@ -22,7 +22,7 @@ glabel func_802A9000_425B50
 /* 425B94 802A9044 A602004A */  sh        $v0, 0x4a($s0)
 /* 425B98 802A9048 A600004C */  sh        $zero, 0x4c($s0)
 /* 425B9C 802A904C A2000060 */  sb        $zero, 0x60($s0)
-/* 425BA0 802A9050 0C0B1EAF */  jal       get_variable
+/* 425BA0 802A9050 0C0B1EAF */  jal       evt_get_variable
 /* 425BA4 802A9054 8C650000 */   lw       $a1, ($v1)
 /* 425BA8 802A9058 3C048011 */  lui       $a0, %hi(D_80108B28)
 /* 425BAC 802A905C 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)

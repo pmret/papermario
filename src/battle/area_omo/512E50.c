@@ -18,9 +18,9 @@ ApiStatus func_80218CF4_5132C4(Evt* script, s32 isInitialCall) {
         status->jumpLossTurns == -1 ||
         status->itemLossTurns == -1
     ) {
-        set_variable(script, *args++, 0);
+        evt_set_variable(script, *args++, 0);
     } else {
-        set_variable(script, *args++, -1);
+        evt_set_variable(script, *args++, -1);
     }
 
     return ApiStatus_DONE2;

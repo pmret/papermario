@@ -176,7 +176,7 @@ glabel func_8024036C_ACE4AC
 /* ACE730 802405F0 02E0202D */  daddu     $a0, $s7, $zero
 .L802405F4:
 /* ACE734 802405F4 03C0282D */  daddu     $a1, $fp, $zero
-/* ACE738 802405F8 0C0B2026 */  jal       set_variable
+/* ACE738 802405F8 0C0B2026 */  jal       evt_set_variable
 /* ACE73C 802405FC 0200302D */   daddu    $a2, $s0, $zero
 /* ACE740 80240600 8FBF0054 */  lw        $ra, 0x54($sp)
 /* ACE744 80240604 8FBE0050 */  lw        $fp, 0x50($sp)

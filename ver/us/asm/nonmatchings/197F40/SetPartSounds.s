@@ -19,7 +19,7 @@ glabel SetPartSounds
 /* 19E2FC 8026FA1C AFB00010 */  sw        $s0, 0x10($sp)
 /* 19E300 8026FA20 8E51000C */  lw        $s1, 0xc($s2)
 /* 19E304 8026FA24 8E250000 */  lw        $a1, ($s1)
-/* 19E308 8026FA28 0C0B1EAF */  jal       get_variable
+/* 19E308 8026FA28 0C0B1EAF */  jal       evt_get_variable
 /* 19E30C 8026FA2C 26310004 */   addiu    $s1, $s1, 4
 /* 19E310 8026FA30 0040982D */  daddu     $s3, $v0, $zero
 /* 19E314 8026FA34 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -29,21 +29,21 @@ glabel SetPartSounds
 .L8026FA44:
 /* 19E324 8026FA44 8E250000 */  lw        $a1, ($s1)
 /* 19E328 8026FA48 26310004 */  addiu     $s1, $s1, 4
-/* 19E32C 8026FA4C 0C0B1EAF */  jal       get_variable
+/* 19E32C 8026FA4C 0C0B1EAF */  jal       evt_get_variable
 /* 19E330 8026FA50 0240202D */   daddu    $a0, $s2, $zero
 /* 19E334 8026FA54 8E250000 */  lw        $a1, ($s1)
 /* 19E338 8026FA58 26310004 */  addiu     $s1, $s1, 4
 /* 19E33C 8026FA5C 0240202D */  daddu     $a0, $s2, $zero
-/* 19E340 8026FA60 0C0B1EAF */  jal       get_variable
+/* 19E340 8026FA60 0C0B1EAF */  jal       evt_get_variable
 /* 19E344 8026FA64 0040802D */   daddu    $s0, $v0, $zero
 /* 19E348 8026FA68 8E250000 */  lw        $a1, ($s1)
 /* 19E34C 8026FA6C 26310004 */  addiu     $s1, $s1, 4
 /* 19E350 8026FA70 0240202D */  daddu     $a0, $s2, $zero
-/* 19E354 8026FA74 0C0B1EAF */  jal       get_variable
+/* 19E354 8026FA74 0C0B1EAF */  jal       evt_get_variable
 /* 19E358 8026FA78 0040A02D */   daddu    $s4, $v0, $zero
 /* 19E35C 8026FA7C 0240202D */  daddu     $a0, $s2, $zero
 /* 19E360 8026FA80 8E250000 */  lw        $a1, ($s1)
-/* 19E364 8026FA84 0C0B1EAF */  jal       get_variable
+/* 19E364 8026FA84 0C0B1EAF */  jal       evt_get_variable
 /* 19E368 8026FA88 0040882D */   daddu    $s1, $v0, $zero
 /* 19E36C 8026FA8C 0260202D */  daddu     $a0, $s3, $zero
 /* 19E370 8026FA90 0C09A75B */  jal       get_actor

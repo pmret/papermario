@@ -194,9 +194,9 @@ ApiStatus HasMerleeCasts(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlayMerleeGatherFX(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var0 = get_variable(script, *args++);
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
+    s32 var0 = evt_get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
 
     playFX_6B(6, var0, var1, var2, 1.2f, 30);
     return ApiStatus_DONE2;
@@ -204,9 +204,9 @@ ApiStatus PlayMerleeGatherFX(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlayMerleeOrbFX(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var0 = get_variable(script, *args++);
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
+    s32 var0 = evt_get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
 
     playFX_52(9, var0, var1, var2, 5.0f, 15);
     return ApiStatus_DONE2;
@@ -369,28 +369,28 @@ void show_first_strike_message(void) {
             switch (currentEncounter->hitType) {
                 case 2:
                 case 4:
-                    width = get_string_width(0x1D00AC, 0) + 24;
+                    width = get_msg_width(0x1D00AC, 0) + 24;
                     posX = (xOffset + screenWidthHalf) - (width / 2);
                     draw_box(0, 0x14, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
                              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-                    draw_string(0x1D00AC, posX + 11, 75, 0xFF, 0xA, 0);
+                    draw_msg(0x1D00AC, posX + 11, 75, 0xFF, 0xA, 0);
                     break;
                 case 6:
-                    width = get_string_width(0x1D00AD, 0) + 24;
+                    width = get_msg_width(0x1D00AD, 0) + 24;
                     posX = (xOffset + screenWidthHalf) - (width / 2);
                     draw_box(0, 0x14, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
                              SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-                    draw_string(0x1D00AD, posX + 11, 75, 0xFF, 0xA, 0);
+                    draw_msg(0x1D00AD, posX + 11, 75, 0xFF, 0xA, 0);
                     break;
             }
             break;
         case FIRST_STRIKE_ENEMY:
             if (!is_ability_active(ABILITY_CHILL_OUT)) {
-                width = get_string_width(0x1D00AE, 0) + 24;
+                width = get_msg_width(0x1D00AE, 0) + 24;
                 posX = (xOffset + screenWidthHalf) - (width / 2);
                 draw_box(0, 4, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
                          SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-                draw_string(0x1D00AE, posX + 11, 75, 0xFF, 0xA, 0);
+                draw_msg(0x1D00AE, posX + 11, 75, 0xFF, 0xA, 0);
             }
             break;
     }

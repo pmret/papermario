@@ -7,9 +7,12 @@ extern VirtualEntityList D_802DB5C0;
 extern VirtualEntityList D_802DB6C0;
 extern VirtualEntityList* D_802DB7C0;
 
+void virtual_entity_list_render_world(void);
+void virtual_entity_list_render_UI(void);
+
 ApiStatus HidePlayerShadow(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 hideShadow = get_variable(script, *args++);
+    s32 hideShadow = evt_get_variable(script, *args++);
 
     if (hideShadow) {
         disable_player_shadow();
@@ -21,7 +24,7 @@ ApiStatus HidePlayerShadow(Evt* script, s32 isInitialCall) {
 
 ApiStatus DisablePlayerPhysics(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 disable = get_variable(script, *args++);
+    s32 disable = evt_get_variable(script, *args++);
 
     if (disable) {
         disable_player_static_collisions();
@@ -34,7 +37,7 @@ ApiStatus DisablePlayerPhysics(Evt* script, s32 isInitialCall) {
 ApiStatus DisablePlayerInput(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
-    s32 enable = get_variable(script, *args++);
+    s32 enable = evt_get_variable(script, *args++);
 
     if (enable) {
         disable_player_input();
@@ -58,9 +61,9 @@ ApiStatus DisablePlayerInput(Evt* script, s32 isInitialCall) {
 ApiStatus SetPlayerPos(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
-    f32 x = get_variable(script, *args++);
-    f32 y = get_variable(script, *args++);
-    f32 z = get_variable(script, *args++);
+    f32 x = evt_get_variable(script, *args++);
+    f32 y = evt_get_variable(script, *args++);
+    f32 z = evt_get_variable(script, *args++);
 
     playerNpc->pos.x = x;
     playerNpc->pos.y = y;
@@ -76,8 +79,8 @@ ApiStatus SetPlayerPos(Evt* script, s32 isInitialCall) {
 ApiStatus SetPlayerCollisionSize(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
-    s32 height = get_variable(script, *args++);
-    s32 radius = get_variable(script, *args);
+    s32 height = evt_get_variable(script, *args++);
+    s32 radius = evt_get_variable(script, *args);
 
     playerNpc->collisionHeight = height;
     playerNpc->collisionRadius = radius;
@@ -89,18 +92,18 @@ ApiStatus SetPlayerCollisionSize(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetPlayerSpeed(Evt* script, s32 isInitialCall) {
-    playerNpc->moveSpeed = get_float_variable(script, *script->ptrReadPos);
+    playerNpc->moveSpeed = evt_get_float_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetPlayerJumpscale(Evt* script, s32 isInitialCall) {
-    playerNpc->jumpScale = get_float_variable(script, *script->ptrReadPos);
+    playerNpc->jumpScale = evt_get_float_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    PlayerAnim currentAnim = get_variable(script, *args++);
+    PlayerAnim currentAnim = evt_get_variable(script, *args++);
     s32 shakeAnim = 0x80003;
 
     playerNpc->currentAnim.w = currentAnim;
@@ -117,12 +120,12 @@ ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetPlayerActionState(Evt* script, s32 isInitialCall) {
-    set_action_state(get_variable(script, *script->ptrReadPos));
+    set_action_state(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetPlayerAnimationSpeed(Evt* script, s32 isInitialCall) {
-    playerNpc->animationSpeed = get_float_variable(script, *script->ptrReadPos);
+    playerNpc->animationSpeed = evt_get_float_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -131,11 +134,11 @@ ApiStatus PlayerMoveTo(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
-        f32 targetX = get_variable(script, *args++);
-        f32 targetZ = get_variable(script, *args++);
+        f32 targetX = evt_get_variable(script, *args++);
+        f32 targetZ = evt_get_variable(script, *args++);
         f32 moveSpeed;
 
-        script->functionTemp[0] = get_variable(script, *args++);
+        script->functionTemp[0] = evt_get_variable(script, *args++);
         playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
 
         if (script->functionTemp[0] == 0) {
@@ -158,9 +161,9 @@ ApiStatus func_802D1270(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
-        f32 targetX = get_variable(script, *args++);
-        f32 targetZ = get_variable(script, *args++);
-        f32 var3 = get_float_variable(script, *args++);
+        f32 targetX = evt_get_variable(script, *args++);
+        f32 targetZ = evt_get_variable(script, *args++);
+        f32 var3 = evt_get_float_variable(script, *args++);
         f32 dist;
         f32 moveSpeed;
 
@@ -182,10 +185,10 @@ ApiStatus func_802D1380(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
-        f32 targetX = get_variable(script, *args++);
-        f32 targetZ = get_variable(script, *args++);
+        f32 targetX = evt_get_variable(script, *args++);
+        f32 targetZ = evt_get_variable(script, *args++);
 
-        playerNpc->duration = get_variable(script, *args++);
+        playerNpc->duration = evt_get_variable(script, *args++);
         playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
 
         if (playerNpc->duration != 0) {
@@ -219,10 +222,10 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     }
 
     if (script->functionTemp[0] == 0) {
-        xTemp = get_variable(script, *args++);
-        yTemp = get_variable(script, *args++);
-        zTemp = get_variable(script, *args++);
-        duration = get_variable(script, *args++);
+        xTemp = evt_get_variable(script, *args++);
+        yTemp = evt_get_variable(script, *args++);
+        zTemp = evt_get_variable(script, *args++);
+        duration = evt_get_variable(script, *args++);
 
         playerNpc->pos.x = playerStatus->position.x;
         playerNpc->pos.y = playerStatus->position.y;
@@ -349,8 +352,8 @@ ApiStatus InterpPlayerYaw(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         playerNpc->yaw = playerStatus->targetYaw;
         *initialYaw = playerNpc->yaw;
-        *deltaYaw = get_float_variable(script, *args++) - *initialYaw;
-        *time = get_variable(script, *args++);
+        *deltaYaw = evt_get_float_variable(script, *args++) - *initialYaw;
+        *time = evt_get_variable(script, *args++);
         playerNpc->duration = 0;
 
         if (*deltaYaw < -180.0f) {
@@ -385,7 +388,7 @@ ApiStatus PlayerFaceNpc(Evt* script, s32 isInitialCall) {
     s32* ft3 = &script->functionTemp[3];
 
     if (isInitialCall) {
-        NpcID npcID = get_variable(script, *args++);
+        NpcID npcID = evt_get_variable(script, *args++);
         Npc* npc;
 
         if (npcID == NPC_SELF) {
@@ -401,7 +404,7 @@ ApiStatus PlayerFaceNpc(Evt* script, s32 isInitialCall) {
 
         *playerTargetYaw = playerNpc->yaw = playerStatus->targetYaw;
         *angle = atan2(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z) - *playerTargetYaw;
-        *ft3 = get_variable(script, *args++);
+        *ft3 = evt_get_variable(script, *args++);
 
         playerNpc->duration = 0;
 
@@ -427,7 +430,7 @@ ApiStatus PlayerFaceNpc(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus GetPlayerTargetYaw(Evt* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, gPlayerStatus.targetYaw);
+    evt_set_variable(script, *script->ptrReadPos, gPlayerStatus.targetYaw);
     return ApiStatus_DONE2;
 }
 
@@ -437,7 +440,7 @@ ApiStatus SetPlayerFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode bits = *args++;
     Bytecode a1 = *args;
 
-    if (get_variable(script, a1)) {
+    if (evt_get_variable(script, a1)) {
         playerStatus->flags |= bits;
     } else {
         playerStatus->flags &= ~bits;
@@ -448,7 +451,7 @@ ApiStatus SetPlayerFlagBits(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetPlayerActionState(Evt* script, s32 isInitialCall) {
     Bytecode outVar = *script->ptrReadPos;
-    set_variable(script, outVar, gPlayerActionState);
+    evt_set_variable(script, outVar, gPlayerActionState);
     return ApiStatus_DONE2;
 }
 
@@ -459,16 +462,16 @@ ApiStatus GetPlayerPos(Evt* script, s32 isInitialCall) {
     Bytecode outVar2 = *args++;
     Bytecode outVar3 = *args++;
 
-    set_variable(script, outVar1, playerStatus->position.x);
-    set_variable(script, outVar2, playerStatus->position.y);
-    set_variable(script, outVar3, playerStatus->position.z);
+    evt_set_variable(script, outVar1, playerStatus->position.x);
+    evt_set_variable(script, outVar2, playerStatus->position.y);
+    evt_set_variable(script, outVar3, playerStatus->position.z);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetPlayerAnimation(Evt* script, s32 isInitialCall) {
     Bytecode outVar = *script->ptrReadPos;
 
-    set_variable(script, outVar, gPlayerAnimation);
+    evt_set_variable(script, outVar, gPlayerAnimation);
     return ApiStatus_DONE2;
 }
 
@@ -488,7 +491,7 @@ ApiStatus FullyRestoreSP(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus EnablePartner(Evt* script, s32 isInitialCall) {
-    s32 partnerIdx = get_variable(script, *script->ptrReadPos) - 1;
+    s32 partnerIdx = evt_get_variable(script, *script->ptrReadPos) - 1;
     PartnerData* partner = &gPlayerData.partners[partnerIdx];
 
     partner->enabled = TRUE;
@@ -496,7 +499,7 @@ ApiStatus EnablePartner(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus DisablePartner(Evt* script, s32 isInitialCall) {
-    s32 partnerIdx = get_variable(script, *script->ptrReadPos) - 1;
+    s32 partnerIdx = evt_get_variable(script, *script->ptrReadPos) - 1;
     PartnerData* partner = &gPlayerData.partners[partnerIdx];
 
     partner->enabled = FALSE;
@@ -506,8 +509,8 @@ ApiStatus DisablePartner(Evt* script, s32 isInitialCall) {
 ApiStatus UseEntryHeading(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     MapConfig* mapConfig = get_current_map_header();
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
     f32 entryX = script->varTable[1] = (*mapConfig->entryList)[gGameStatusPtr->entryID].x;
     f32 entryY = script->varTable[2] = (*mapConfig->entryList)[gGameStatusPtr->entryID].y;
     f32 entryZ = script->varTable[3] = (*mapConfig->entryList)[gGameStatusPtr->entryID].z;
@@ -541,8 +544,8 @@ ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
     f32* varTableVar5 = &script->varTable[5];
 
     if (can_trigger_loading_zone()) {
-        s32 var1 = get_variable(script, *args++);
-        s32 entryID = get_variable(script, *args++);
+        s32 var1 = evt_get_variable(script, *args++);
+        s32 entryID = evt_get_variable(script, *args++);
         f32 entryX = (*mapConfig->entryList)[entryID].x;
         f32 entryZ = (*mapConfig->entryList)[entryID].z;
         f32 temp = (var1 + 10.0f) / 2;
@@ -602,7 +605,7 @@ ApiStatus IsPlayerOnValidFloor(Evt* script, s32 isInitialCall) {
     if (gCollisionStatus.currentFloor >= 0) {
         val = func_802D23F8() != 0;
     }
-    set_variable(script, *args, val);
+    evt_set_variable(script, *args, val);
 
     return ApiStatus_DONE2;
 }
@@ -621,7 +624,7 @@ ApiStatus func_802D2520(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 a0 = *args++;
-    s32 val = get_variable(script, *args++);
+    s32 val = evt_get_variable(script, *args++);
     s32 a2;
     s32 a3;
 
@@ -640,44 +643,44 @@ ApiStatus func_802D2520(Evt* script, s32 isInitialCall) {
             break;
         case 4:
             playerStatus->renderMode = 13;
-            a2 = get_variable(script, *args++);
-            a3 = get_variable(script, *args++);
-            get_variable(script, *args++);
+            a2 = evt_get_variable(script, *args++);
+            a3 = evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
             func_802DDFF8(a0, 4, a2, a3, 0, 0, 0);
             break;
         case 6:
             playerStatus->renderMode = 13;
-            a2 = get_variable(script, *args++);
-            a3 = get_variable(script, *args++);
-            get_variable(script, *args++);
+            a2 = evt_get_variable(script, *args++);
+            a3 = evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
             func_802DDFF8(a0, 6, a2, a3, 0, 0, 0);
             break;
         case 7:
             playerStatus->renderMode = 22;
-            get_variable(script, *args++);
+            evt_get_variable(script, *args++);
             func_802DDFF8(a0, 7, 0xFF, 0xFF, 0, 0, 0);
             break;
         case 8:
             playerStatus->renderMode = 22;
-            a3 = get_variable(script, *args++);
-            a2 = get_variable(script, *args++);
-            get_variable(script, *args++);
-            get_variable(script, *args++);
+            a3 = evt_get_variable(script, *args++);
+            a2 = evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
             func_802DDFF8(a0, 8, a2, a3, 0, 0, 0);
             break;
         case 5:
             playerStatus->renderMode = 13;
-            a2 = get_variable(script, *args++);
-            a3 = get_variable(script, *args++);
-            get_variable(script, *args++);
+            a2 = evt_get_variable(script, *args++);
+            a3 = evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
             func_802DDFF8(a0, 5, a2, a3, 0, 0, 0);
             break;
         case 13:
             playerStatus->renderMode = 22;
-            a2 = get_variable(script, *args++);
-            a3 = get_variable(script, *args++);
-            get_variable(script, *args++);
-            get_variable(script, *args++);
+            a2 = evt_get_variable(script, *args++);
+            a3 = evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
             func_802DDFF8(a0, 13, a2, a3, 0, 0, 0);
             break;
     }
@@ -704,8 +707,8 @@ ApiStatus func_802D2884(Evt* script, s32 isInitialCall) {
     s32* ft3 = &script->functionTemp[3];
 
     if (isInitialCall) {
-        f32 x = get_float_variable(script, *args++);
-        f32 z = get_float_variable(script, *args++);
+        f32 x = evt_get_float_variable(script, *args++);
+        f32 z = evt_get_float_variable(script, *args++);
         f32 yawTemp;
 
         *ft1 = playerNpc->yaw = playerStatus->targetYaw;
@@ -717,7 +720,7 @@ ApiStatus func_802D2884(Evt* script, s32 isInitialCall) {
         }
 
         *angle = yawTemp - *ft1;
-        *ft3 = get_variable(script, *args++);
+        *ft3 = evt_get_variable(script, *args++);
         playerNpc->duration = 0;
 
         if (*angle < -180.0f) {
@@ -743,7 +746,7 @@ ApiStatus func_802D2884(Evt* script, s32 isInitialCall) {
 ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (get_variable(script, *script->ptrReadPos)) {
+    if (evt_get_variable(script, *script->ptrReadPos)) {
         playerStatus->animFlags &= ~0x80;
     } else {
         playerStatus->animFlags |= 0x80;
@@ -762,7 +765,7 @@ ApiStatus GetCurrentPartner(Evt* script, s32 isInitialCall) {
         currentPartner = playerData->currentPartner;
     }
 
-    set_variable(script, a0, currentPartner);
+    evt_set_variable(script, a0, currentPartner);
     return ApiStatus_DONE2;
 }
 
@@ -784,7 +787,7 @@ ApiStatus Disable8bitMario(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (get_variable(script, *args)) {
+    if (evt_get_variable(script, *args)) {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
         playerStatus->animFlags &= ~0x4000;
@@ -798,28 +801,28 @@ ApiStatus Disable8bitMario(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802D2C14(Evt* script, s32 isInitialCall) {
-    func_800EF3D4(get_variable(script, *script->ptrReadPos));
+    func_800EF3D4(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D2C40(Evt* script) {
     Bytecode* args = script->ptrReadPos;
-    f32 x = get_variable(script, *args++);
+    f32 x = evt_get_variable(script, *args++);
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 y;
     f32 z;
 
     playerStatus->extraVelocity.x = x;
-    playerStatus->extraVelocity.y = get_variable(script, *args++);
-    playerStatus->extraVelocity.z = get_variable(script, *args++);
+    playerStatus->extraVelocity.y = evt_get_variable(script, *args++);
+    playerStatus->extraVelocity.z = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus PlaySoundAtPlayer(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
+    s32 var = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
 
     sfx_play_sound_at_player(var, var2);
     return ApiStatus_DONE2;
@@ -885,8 +888,8 @@ ApiStatus InitVirtualEntityList(Evt* script, s32 isInitialCall) {
 
 ApiStatus CreateVirtualEntityAt(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    u32* cmdList = (u32*)get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    u32* cmdList = (u32*)evt_get_variable(script, *args++);
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
     virtualEntity->entityModelIndex = load_entity_model(cmdList);
@@ -907,7 +910,7 @@ ApiStatus CreateVirtualEntityAt(Evt* script, s32 isInitialCall) {
 ApiStatus CreateVirtualEntity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
-    s32* unkStructPtr = (s32*)get_variable(script, *args++);
+    s32* unkStructPtr = (s32*)evt_get_variable(script, *args++);
     VirtualEntity* virtualEntity;
     s32 i;
 
@@ -934,7 +937,7 @@ ApiStatus CreateVirtualEntity(Evt* script, s32 isInitialCall) {
     virtualEntity->scale.z = 1.0f;
 
     exec_entity_model_commandlist(virtualEntity->entityModelIndex);
-    set_variable(script, outVar, i);
+    evt_set_variable(script, outVar, i);
 
     return ApiStatus_DONE2;
 }
@@ -942,7 +945,7 @@ ApiStatus CreateVirtualEntity(Evt* script, s32 isInitialCall) {
 ApiStatus CreateVirtualEntity_ALT(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
-    s32* unkStructPtr = (s32*)get_variable(script, *args++);
+    s32* unkStructPtr = (s32*)evt_get_variable(script, *args++);
     VirtualEntity* virtualEntity;
     s32 i;
 
@@ -969,13 +972,13 @@ ApiStatus CreateVirtualEntity_ALT(Evt* script, s32 isInitialCall) {
     virtualEntity->scale.z = 1.0f;
 
     exec_entity_model_commandlist(virtualEntity->entityModelIndex);
-    set_variable(script, outVar, i);
+    evt_set_variable(script, outVar, i);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus DeleteVirtualEntity(Evt* script, s32 isInitialCall) {
-    VirtualEntity* virtualEntity = (*D_802DB7C0)[get_variable(script, *script->ptrReadPos)];
+    VirtualEntity* virtualEntity = (*D_802DB7C0)[evt_get_variable(script, *script->ptrReadPos)];
 
     free_entity_model_by_index(virtualEntity->entityModelIndex);
     virtualEntity->entityModelIndex = -1;
@@ -984,8 +987,8 @@ ApiStatus DeleteVirtualEntity(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetVirtualEntityRenderCommands(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    u32* commandList = (u32*)get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    u32* commandList = (u32*)evt_get_variable(script, *args++);
 
     set_entity_model_render_command_list((*D_802DB7C0)[index]->entityModelIndex, commandList);
     return ApiStatus_DONE2;
@@ -993,10 +996,10 @@ ApiStatus SetVirtualEntityRenderCommands(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetVirtualEntityPosition(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
     virtualEntity->pos.x = x;
@@ -1007,24 +1010,24 @@ ApiStatus SetVirtualEntityPosition(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetVirtualEntityPosition(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
     s32 outVar1 = *args++;
     s32 outVar2 = *args++;
     s32 outVar3 = *args++;
 
-    set_variable(script, outVar1, virtualEntity->pos.x);
-    set_variable(script, outVar2, virtualEntity->pos.y);
-    set_variable(script, outVar3, virtualEntity->pos.z);
+    evt_set_variable(script, outVar1, virtualEntity->pos.x);
+    evt_set_variable(script, outVar2, virtualEntity->pos.y);
+    evt_set_variable(script, outVar3, virtualEntity->pos.z);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetVirtualEntityRotation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
     virtualEntity->rot.x = x;
@@ -1035,10 +1038,10 @@ ApiStatus SetVirtualEntityRotation(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetVirtualEntityScale(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
     virtualEntity->scale.x = x;
@@ -1049,17 +1052,17 @@ ApiStatus SetVirtualEntityScale(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetVirtualEntityMoveSpeed(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
 
-    (*D_802DB7C0)[index]->moveSpeed = get_float_variable(script, *args++);
+    (*D_802DB7C0)[index]->moveSpeed = evt_get_float_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetVirtualEntityJumpGravity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
 
-    (*D_802DB7C0)[index]->jumpGravity = get_float_variable(script, *args++);
+    (*D_802DB7C0)[index]->jumpGravity = evt_get_float_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -1072,11 +1075,11 @@ ApiStatus VirtualEntityMoveTo(Evt* script, s32 isInitialCall) {
     }
 
     if (script->functionTemp[0] == 0) {
-        s32 index = get_variable(script, *args++);
-        f32 xTemp = get_variable(script, *args++);
-        f32 yTemp = get_variable(script, *args++);
-        f32 zTemp = get_variable(script, *args++);
-        s32 moveTime = get_variable(script, *args++);
+        s32 index = evt_get_variable(script, *args++);
+        f32 xTemp = evt_get_variable(script, *args++);
+        f32 yTemp = evt_get_variable(script, *args++);
+        f32 zTemp = evt_get_variable(script, *args++);
+        s32 moveTime = evt_get_variable(script, *args++);
         f32 goalPosX;
         f32 goalPosZ;
 
@@ -1138,11 +1141,11 @@ ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
     }
 
     if (script->functionTemp[0] == 0) {
-        index = get_variable(script, *args++);
-        xTemp = get_variable(script, *args++);
-        yTemp = get_variable(script, *args++);
-        zTemp = get_variable(script, *args++);
-        moveTime = get_variable(script, *args++);
+        index = evt_get_variable(script, *args++);
+        xTemp = evt_get_variable(script, *args++);
+        yTemp = evt_get_variable(script, *args++);
+        zTemp = evt_get_variable(script, *args++);
+        moveTime = evt_get_variable(script, *args++);
 
         virtualEntity = (*D_802DB7C0)[index];
         script->functionTemp[1] = index;
@@ -1205,7 +1208,7 @@ ApiStatus VirtualEntityLandJump(Evt* script, s32 isInitialCall) {
     }
 
     if (script->functionTemp[0] == 0) {
-        script->functionTemp[1] = get_variable(script, *args++);
+        script->functionTemp[1] = evt_get_variable(script, *args++);
         script->functionTemp[0] = 1;
     }
 
@@ -1225,7 +1228,7 @@ ApiStatus VirtualEntityLandJump(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetVirtualEntityFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
     s32 flags = *args++;
 
     get_entity_model((*D_802DB7C0)[index]->entityModelIndex)->flags = flags;
@@ -1234,9 +1237,9 @@ ApiStatus SetVirtualEntityFlags(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetVirtualEntityFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
     s32 flags = *args++;
-    s32 cond = get_variable(script, *args++);
+    s32 cond = evt_get_variable(script, *args++);
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
     if (cond) {
@@ -1250,8 +1253,8 @@ ApiStatus SetVirtualEntityFlagBits(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetVirtualEntityRenderMode(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
     EntityModel* entityModel = get_entity_model((*D_802DB7C0)[index]->entityModelIndex);
 
     switch (var2) {
@@ -1260,26 +1263,26 @@ ApiStatus SetVirtualEntityRenderMode(Evt* script, s32 isInitialCall) {
             break;
         case 0:
             entityModel->renderMode = 1;
-            get_variable(script, *args++);
-            get_variable(script, *args++);
-            get_variable(script, *args++);
+            evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
             break;
         case 2:
             entityModel->renderMode = 0xD;
-            get_variable(script, *args++);
-            get_variable(script, *args++);
-            get_variable(script, *args++);
+            evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
             break;
         case 3:
             entityModel->renderMode = 0x16;
-            get_variable(script, *args++);
+            evt_get_variable(script, *args++);
             break;
         case 4:
             entityModel->renderMode = 0x16;
-            get_variable(script, *args++);
-            get_variable(script, *args++);
-            get_variable(script, *args++);
-            get_variable(script, *args++);
+            evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
+            evt_get_variable(script, *args++);
             break;
     }
     return ApiStatus_DONE2;

@@ -7,7 +7,6 @@
 #if !defined(SPLAT) && !defined(__CTX__) && !defined(PERMUTER)
 #ifndef INCLUDE_ASM
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...) \
-   TYPE NAME(ARGS); \
    __asm__( \
         ".section .text\n" \
         "\t.align\t2\n" \

@@ -25,7 +25,7 @@ glabel func_8024150C_ECB20C
 /* ECB240 80241540 8EA3000C */  lw        $v1, 0xc($s5)
 /* ECB244 80241544 02A0202D */  daddu     $a0, $s5, $zero
 /* ECB248 80241548 8C650000 */  lw        $a1, ($v1)
-/* ECB24C 8024154C 0C0B53A3 */  jal       dead_get_variable
+/* ECB24C 8024154C 0C0B53A3 */  jal       dead_evt_get_variable
 /* ECB250 80241550 0040902D */   daddu    $s2, $v0, $zero
 /* ECB254 80241554 AFA00010 */  sw        $zero, 0x10($sp)
 /* ECB258 80241558 8E2300D0 */  lw        $v1, 0xd0($s1)

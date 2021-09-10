@@ -14,26 +14,26 @@ glabel func_80240290_DEF130
 /* DEF154 802402B4 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* DEF158 802402B8 8E30000C */  lw        $s0, 0xc($s1)
 /* DEF15C 802402BC 8E050000 */  lw        $a1, ($s0)
-/* DEF160 802402C0 0C0B1EAF */  jal       get_variable
+/* DEF160 802402C0 0C0B1EAF */  jal       evt_get_variable
 /* DEF164 802402C4 26100004 */   addiu    $s0, $s0, 4
 /* DEF168 802402C8 8E050000 */  lw        $a1, ($s0)
 /* DEF16C 802402CC 26100004 */  addiu     $s0, $s0, 4
 /* DEF170 802402D0 0220202D */  daddu     $a0, $s1, $zero
-/* DEF174 802402D4 0C0B210B */  jal       get_float_variable
+/* DEF174 802402D4 0C0B210B */  jal       evt_get_float_variable
 /* DEF178 802402D8 0040902D */   daddu    $s2, $v0, $zero
 /* DEF17C 802402DC 8E050000 */  lw        $a1, ($s0)
 /* DEF180 802402E0 26100004 */  addiu     $s0, $s0, 4
 /* DEF184 802402E4 0220202D */  daddu     $a0, $s1, $zero
-/* DEF188 802402E8 0C0B210B */  jal       get_float_variable
+/* DEF188 802402E8 0C0B210B */  jal       evt_get_float_variable
 /* DEF18C 802402EC 46000686 */   mov.s    $f26, $f0
 /* DEF190 802402F0 8E050000 */  lw        $a1, ($s0)
 /* DEF194 802402F4 26100004 */  addiu     $s0, $s0, 4
 /* DEF198 802402F8 0220202D */  daddu     $a0, $s1, $zero
-/* DEF19C 802402FC 0C0B210B */  jal       get_float_variable
+/* DEF19C 802402FC 0C0B210B */  jal       evt_get_float_variable
 /* DEF1A0 80240300 46000606 */   mov.s    $f24, $f0
 /* DEF1A4 80240304 0220202D */  daddu     $a0, $s1, $zero
 /* DEF1A8 80240308 8E050000 */  lw        $a1, ($s0)
-/* DEF1AC 8024030C 0C0B210B */  jal       get_float_variable
+/* DEF1AC 8024030C 0C0B210B */  jal       evt_get_float_variable
 /* DEF1B0 80240310 46000506 */   mov.s    $f20, $f0
 /* DEF1B4 80240314 0240202D */  daddu     $a0, $s2, $zero
 /* DEF1B8 80240318 0C00EAD2 */  jal       get_npc_safe

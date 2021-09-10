@@ -27,7 +27,7 @@ glabel BoostDefense
 /* 19EA8C 802701AC 00000000 */   nop
 /* 19EA90 802701B0 8E250000 */  lw        $a1, ($s1)
 /* 19EA94 802701B4 26310004 */  addiu     $s1, $s1, 4
-/* 19EA98 802701B8 0C0B1EAF */  jal       get_variable
+/* 19EA98 802701B8 0C0B1EAF */  jal       evt_get_variable
 /* 19EA9C 802701BC 0240202D */   daddu    $a0, $s2, $zero
 /* 19EAA0 802701C0 0040802D */  daddu     $s0, $v0, $zero
 /* 19EAA4 802701C4 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -36,7 +36,7 @@ glabel BoostDefense
 /* 19EAB0 802701D0 8E500148 */  lw        $s0, 0x148($s2)
 .L802701D4:
 /* 19EAB4 802701D4 8E250000 */  lw        $a1, ($s1)
-/* 19EAB8 802701D8 0C0B1EAF */  jal       get_variable
+/* 19EAB8 802701D8 0C0B1EAF */  jal       evt_get_variable
 /* 19EABC 802701DC 0240202D */   daddu    $a0, $s2, $zero
 /* 19EAC0 802701E0 0040882D */  daddu     $s1, $v0, $zero
 /* 19EAC4 802701E4 0C09A75B */  jal       get_actor

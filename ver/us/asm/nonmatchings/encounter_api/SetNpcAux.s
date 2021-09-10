@@ -14,11 +14,11 @@ glabel SetNpcAux
 /* 201C8 80044DC8 8E70000C */  lw        $s0, 0xc($s3)
 /* 201CC 80044DCC 8E710148 */  lw        $s1, 0x148($s3)
 /* 201D0 80044DD0 8E050000 */  lw        $a1, ($s0)
-/* 201D4 80044DD4 0C0B1EAF */  jal       get_variable
+/* 201D4 80044DD4 0C0B1EAF */  jal       evt_get_variable
 /* 201D8 80044DD8 26100004 */   addiu    $s0, $s0, 4
 /* 201DC 80044DDC 0040902D */  daddu     $s2, $v0, $zero
 /* 201E0 80044DE0 8E050000 */  lw        $a1, ($s0)
-/* 201E4 80044DE4 0C0B1EAF */  jal       get_variable
+/* 201E4 80044DE4 0C0B1EAF */  jal       evt_get_variable
 /* 201E8 80044DE8 0260202D */   daddu    $a0, $s3, $zero
 /* 201EC 80044DEC 0040802D */  daddu     $s0, $v0, $zero
 /* 201F0 80044DF0 2402FFFF */  addiu     $v0, $zero, -1

@@ -6,7 +6,7 @@ glabel func_80244D68_8055E8
 /* 8055EC 80244D6C AFBF0010 */  sw        $ra, 0x10($sp)
 /* 8055F0 80244D70 0000202D */  daddu     $a0, $zero, $zero
 /* 8055F4 80244D74 3C05F840 */  lui       $a1, 0xf840
-/* 8055F8 80244D78 0C0B1EAF */  jal       get_variable
+/* 8055F8 80244D78 0C0B1EAF */  jal       evt_get_variable
 /* 8055FC 80244D7C 34A55C84 */   ori      $a1, $a1, 0x5c84
 /* 805600 80244D80 14400008 */  bnez      $v0, .L80244DA4
 /* 805604 80244D84 0000202D */   daddu    $a0, $zero, $zero
@@ -19,7 +19,7 @@ glabel func_80244D68_8055E8
 /* 805620 80244DA0 0000202D */  daddu     $a0, $zero, $zero
 .L80244DA4:
 /* 805624 80244DA4 3C05F840 */  lui       $a1, 0xf840
-/* 805628 80244DA8 0C0B1EAF */  jal       get_variable
+/* 805628 80244DA8 0C0B1EAF */  jal       evt_get_variable
 /* 80562C 80244DAC 34A55C85 */   ori      $a1, $a1, 0x5c85
 /* 805630 80244DB0 14400008 */  bnez      $v0, .L80244DD4
 /* 805634 80244DB4 0000202D */   daddu    $a0, $zero, $zero
@@ -32,7 +32,7 @@ glabel func_80244D68_8055E8
 /* 805650 80244DD0 0000202D */  daddu     $a0, $zero, $zero
 .L80244DD4:
 /* 805654 80244DD4 3C05F840 */  lui       $a1, 0xf840
-/* 805658 80244DD8 0C0B1EAF */  jal       get_variable
+/* 805658 80244DD8 0C0B1EAF */  jal       evt_get_variable
 /* 80565C 80244DDC 34A55C86 */   ori      $a1, $a1, 0x5c86
 /* 805660 80244DE0 14400007 */  bnez      $v0, .L80244E00
 /* 805664 80244DE4 00000000 */   nop

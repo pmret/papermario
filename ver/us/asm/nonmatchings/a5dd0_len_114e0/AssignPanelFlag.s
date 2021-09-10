@@ -16,7 +16,7 @@ glabel AssignPanelFlag
 /* A8840 80112140 00000000 */   nop
 /* A8844 80112144 8E050000 */  lw        $a1, ($s0)
 /* A8848 80112148 8C500040 */  lw        $s0, 0x40($v0)
-/* A884C 8011214C 0C0B1F6A */  jal       get_variable_index
+/* A884C 8011214C 0C0B1F6A */  jal       evt_get_variable_index
 /* A8850 80112150 0220202D */   daddu    $a0, $s1, $zero
 /* A8854 80112154 A6020006 */  sh        $v0, 6($s0)
 /* A8858 80112158 24020002 */  addiu     $v0, $zero, 2

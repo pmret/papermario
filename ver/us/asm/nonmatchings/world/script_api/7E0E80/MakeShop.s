@@ -16,21 +16,21 @@ glabel MakeShop
 /* 7E270C 8028188C AFB00040 */  sw        $s0, 0x40($sp)
 /* 7E2710 80281890 8E30000C */  lw        $s0, 0xc($s1)
 /* 7E2714 80281894 8E050000 */  lw        $a1, ($s0)
-/* 7E2718 80281898 0C0B1EAF */  jal       get_variable
+/* 7E2718 80281898 0C0B1EAF */  jal       evt_get_variable
 /* 7E271C 8028189C 26100004 */   addiu    $s0, $s0, 4
 /* 7E2720 802818A0 8E050000 */  lw        $a1, ($s0)
 /* 7E2724 802818A4 26100004 */  addiu     $s0, $s0, 4
 /* 7E2728 802818A8 0220202D */  daddu     $a0, $s1, $zero
-/* 7E272C 802818AC 0C0B1EAF */  jal       get_variable
+/* 7E272C 802818AC 0C0B1EAF */  jal       evt_get_variable
 /* 7E2730 802818B0 0040A82D */   daddu    $s5, $v0, $zero
 /* 7E2734 802818B4 8E050000 */  lw        $a1, ($s0)
 /* 7E2738 802818B8 26100004 */  addiu     $s0, $s0, 4
 /* 7E273C 802818BC 0220202D */  daddu     $a0, $s1, $zero
-/* 7E2740 802818C0 0C0B1EAF */  jal       get_variable
+/* 7E2740 802818C0 0C0B1EAF */  jal       evt_get_variable
 /* 7E2744 802818C4 0040982D */   daddu    $s3, $v0, $zero
 /* 7E2748 802818C8 0220202D */  daddu     $a0, $s1, $zero
 /* 7E274C 802818CC 8E050000 */  lw        $a1, ($s0)
-/* 7E2750 802818D0 0C0B1EAF */  jal       get_variable
+/* 7E2750 802818D0 0C0B1EAF */  jal       evt_get_variable
 /* 7E2754 802818D4 0040882D */   daddu    $s1, $v0, $zero
 /* 7E2758 802818D8 2404035C */  addiu     $a0, $zero, 0x35c
 /* 7E275C 802818DC 0C00AB39 */  jal       heap_malloc

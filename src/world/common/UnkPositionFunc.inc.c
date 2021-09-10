@@ -4,10 +4,10 @@
 ApiStatus N(UnkPositionFunc)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 var0 = get_variable(script, *args++);
-    f32 var1 = get_variable(script, *args++);
-    f32 var2 = get_variable(script, *args++);
-    f32 var3 = get_variable(script, *args++);
+    f32 var0 = evt_get_variable(script, *args++);
+    f32 var1 = evt_get_variable(script, *args++);
+    f32 var2 = evt_get_variable(script, *args++);
+    f32 var3 = evt_get_variable(script, *args++);
     f32 temp;
 
     temp = (var3 - var1) / (var2 - var0);

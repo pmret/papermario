@@ -4,7 +4,7 @@
 glabel func_802404E8_8AC478
 /* 8AC478 802404E8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 8AC47C 802404EC AFBF0010 */  sw        $ra, 0x10($sp)
-/* 8AC480 802404F0 0C0B1EAF */  jal       get_variable
+/* 8AC480 802404F0 0C0B1EAF */  jal       evt_get_variable
 /* 8AC484 802404F4 8C850084 */   lw       $a1, 0x84($a0)
 /* 8AC488 802404F8 3C013A83 */  lui       $at, 0x3a83
 /* 8AC48C 802404FC 3421126F */  ori       $at, $at, 0x126f

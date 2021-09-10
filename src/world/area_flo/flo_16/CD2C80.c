@@ -125,22 +125,22 @@ static s32 N(pad_44F8)[] = {
 
 EvtSource N(80244500) = SCRIPT({
     N(func_80242940_CD4770)();
-    if (SI_VAR(0) == 0) {
+    if (EVT_VAR(0) == 0) {
         return;
     }
     DisablePlayerInput(TRUE);
-    if (SI_AREA_FLAG(41) == 0) {
-        SI_VAR(5) = 0;
-        SI_VAR(6) = 50;
-        SI_VAR(7) = 0;
-        SI_VAR(8) = 180;
-        SI_AREA_FLAG(41) = 1;
+    if (EVT_AREA_FLAG(41) == 0) {
+        EVT_VAR(5) = 0;
+        EVT_VAR(6) = 50;
+        EVT_VAR(7) = 0;
+        EVT_VAR(8) = 180;
+        EVT_AREA_FLAG(41) = 1;
     } else {
-        SI_VAR(5) = 50;
-        SI_VAR(6) = 0;
-        SI_VAR(7) = 180;
-        SI_VAR(8) = 0;
-        SI_AREA_FLAG(41) = 0;
+        EVT_VAR(5) = 50;
+        EVT_VAR(6) = 0;
+        EVT_VAR(7) = 180;
+        EVT_VAR(8) = 0;
+        EVT_AREA_FLAG(41) = 0;
     }
     sleep 15;
     PlaySound(0x204D);
@@ -148,37 +148,37 @@ EvtSource N(80244500) = SCRIPT({
         ShakeCam(0, 0, 30, 0.80078125);
         ShakeCam(0, 0, 5, 0.2001953125);
     }
-    MakeLerp(SI_VAR(5), SI_VAR(6), 30, 0);
+    MakeLerp(EVT_VAR(5), EVT_VAR(6), 30, 0);
     loop {
         UpdateLerp();
-        TranslateModel(94, 0, SI_VAR(0), 0);
-        TranslateGroup(97, 0, SI_VAR(0), 0);
-        TranslateModel(108, 0, SI_VAR(0), 0);
-        TranslateGroup(111, 0, SI_VAR(0), 0);
-        RotateGroup(97, SI_VAR(7), 1, 0, 0);
-        RotateGroup(111, SI_VAR(7), 1, 0, 0);
+        TranslateModel(94, 0, EVT_VAR(0), 0);
+        TranslateGroup(97, 0, EVT_VAR(0), 0);
+        TranslateModel(108, 0, EVT_VAR(0), 0);
+        TranslateGroup(111, 0, EVT_VAR(0), 0);
+        RotateGroup(97, EVT_VAR(7), 1, 0, 0);
+        RotateGroup(111, EVT_VAR(7), 1, 0, 0);
         UpdateColliderTransform(26);
         UpdateColliderTransform(27);
         UpdateColliderTransform(32);
         UpdateColliderTransform(33);
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
     }
     DisablePlayerInput(FALSE);
     sleep 10;
-    MakeLerp(SI_VAR(7), SI_VAR(8), 15, 0);
+    MakeLerp(EVT_VAR(7), EVT_VAR(8), 15, 0);
     loop {
         UpdateLerp();
-        TranslateModel(94, 0, SI_VAR(6), 0);
-        TranslateGroup(97, 0, SI_VAR(6), 0);
-        TranslateModel(108, 0, SI_VAR(6), 0);
-        TranslateGroup(111, 0, SI_VAR(6), 0);
-        RotateGroup(97, SI_VAR(0), 1, 0, 0);
-        RotateGroup(111, SI_VAR(0), 1, 0, 0);
+        TranslateModel(94, 0, EVT_VAR(6), 0);
+        TranslateGroup(97, 0, EVT_VAR(6), 0);
+        TranslateModel(108, 0, EVT_VAR(6), 0);
+        TranslateGroup(111, 0, EVT_VAR(6), 0);
+        RotateGroup(97, EVT_VAR(0), 1, 0, 0);
+        RotateGroup(111, EVT_VAR(0), 1, 0, 0);
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
     }
@@ -186,22 +186,22 @@ EvtSource N(80244500) = SCRIPT({
 
 EvtSource N(802448FC) = SCRIPT({
     N(func_80242940_CD4770)();
-    if (SI_VAR(0) == 0) {
+    if (EVT_VAR(0) == 0) {
         return;
     }
     DisablePlayerInput(TRUE);
-    if (SI_AREA_FLAG(42) == 0) {
-        SI_VAR(5) = 0;
-        SI_VAR(6) = 50;
-        SI_VAR(7) = 0;
-        SI_VAR(8) = 180;
-        SI_AREA_FLAG(42) = 1;
+    if (EVT_AREA_FLAG(42) == 0) {
+        EVT_VAR(5) = 0;
+        EVT_VAR(6) = 50;
+        EVT_VAR(7) = 0;
+        EVT_VAR(8) = 180;
+        EVT_AREA_FLAG(42) = 1;
     } else {
-        SI_VAR(5) = 50;
-        SI_VAR(6) = 0;
-        SI_VAR(7) = 180;
-        SI_VAR(8) = 0;
-        SI_AREA_FLAG(42) = 0;
+        EVT_VAR(5) = 50;
+        EVT_VAR(6) = 0;
+        EVT_VAR(7) = 180;
+        EVT_VAR(8) = 0;
+        EVT_AREA_FLAG(42) = 0;
     }
     sleep 15;
     PlaySound(0x204D);
@@ -209,18 +209,18 @@ EvtSource N(802448FC) = SCRIPT({
         ShakeCam(0, 0, 30, 0.80078125);
         ShakeCam(0, 0, 5, 0.2001953125);
     }
-    MakeLerp(SI_VAR(5), SI_VAR(6), 30, 0);
+    MakeLerp(EVT_VAR(5), EVT_VAR(6), 30, 0);
     loop {
         UpdateLerp();
-        TranslateModel(101, 0, SI_VAR(0), 0);
-        TranslateGroup(104, 0, SI_VAR(0), 0);
-        TranslateModel(115, 0, SI_VAR(0), 0);
-        TranslateGroup(118, 0, SI_VAR(0), 0);
-        TranslateModel(129, 0, SI_VAR(0), 0);
-        TranslateGroup(132, 0, SI_VAR(0), 0);
-        RotateGroup(104, SI_VAR(7), 1, 0, 0);
-        RotateGroup(118, SI_VAR(7), 1, 0, 0);
-        RotateGroup(132, SI_VAR(7), 1, 0, 0);
+        TranslateModel(101, 0, EVT_VAR(0), 0);
+        TranslateGroup(104, 0, EVT_VAR(0), 0);
+        TranslateModel(115, 0, EVT_VAR(0), 0);
+        TranslateGroup(118, 0, EVT_VAR(0), 0);
+        TranslateModel(129, 0, EVT_VAR(0), 0);
+        TranslateGroup(132, 0, EVT_VAR(0), 0);
+        RotateGroup(104, EVT_VAR(7), 1, 0, 0);
+        RotateGroup(118, EVT_VAR(7), 1, 0, 0);
+        RotateGroup(132, EVT_VAR(7), 1, 0, 0);
         UpdateColliderTransform(29);
         UpdateColliderTransform(30);
         UpdateColliderTransform(35);
@@ -228,26 +228,26 @@ EvtSource N(802448FC) = SCRIPT({
         UpdateColliderTransform(41);
         UpdateColliderTransform(42);
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
     }
     DisablePlayerInput(FALSE);
     sleep 10;
-    MakeLerp(SI_VAR(7), SI_VAR(8), 15, 0);
+    MakeLerp(EVT_VAR(7), EVT_VAR(8), 15, 0);
     loop {
         UpdateLerp();
-        TranslateModel(101, 0, SI_VAR(6), 0);
-        TranslateGroup(104, 0, SI_VAR(6), 0);
-        TranslateModel(115, 0, SI_VAR(6), 0);
-        TranslateGroup(118, 0, SI_VAR(6), 0);
-        TranslateModel(129, 0, SI_VAR(6), 0);
-        TranslateGroup(132, 0, SI_VAR(6), 0);
-        RotateGroup(104, SI_VAR(0), 1, 0, 0);
-        RotateGroup(118, SI_VAR(0), 1, 0, 0);
-        RotateGroup(132, SI_VAR(0), 1, 0, 0);
+        TranslateModel(101, 0, EVT_VAR(6), 0);
+        TranslateGroup(104, 0, EVT_VAR(6), 0);
+        TranslateModel(115, 0, EVT_VAR(6), 0);
+        TranslateGroup(118, 0, EVT_VAR(6), 0);
+        TranslateModel(129, 0, EVT_VAR(6), 0);
+        TranslateGroup(132, 0, EVT_VAR(6), 0);
+        RotateGroup(104, EVT_VAR(0), 1, 0, 0);
+        RotateGroup(118, EVT_VAR(0), 1, 0, 0);
+        RotateGroup(132, EVT_VAR(0), 1, 0, 0);
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
     }
@@ -255,22 +255,22 @@ EvtSource N(802448FC) = SCRIPT({
 
 EvtSource N(80244DC8) = SCRIPT({
     N(func_80242940_CD4770)();
-    if (SI_VAR(0) == 0) {
+    if (EVT_VAR(0) == 0) {
         return;
     }
     DisablePlayerInput(TRUE);
-    if (SI_AREA_FLAG(43) == 0) {
-        SI_VAR(5) = 0;
-        SI_VAR(6) = -50;
-        SI_VAR(7) = 0;
-        SI_VAR(8) = 180;
-        SI_AREA_FLAG(43) = 1;
+    if (EVT_AREA_FLAG(43) == 0) {
+        EVT_VAR(5) = 0;
+        EVT_VAR(6) = -50;
+        EVT_VAR(7) = 0;
+        EVT_VAR(8) = 180;
+        EVT_AREA_FLAG(43) = 1;
     } else {
-        SI_VAR(5) = -50;
-        SI_VAR(6) = 0;
-        SI_VAR(7) = 180;
-        SI_VAR(8) = 0;
-        SI_AREA_FLAG(43) = 0;
+        EVT_VAR(5) = -50;
+        EVT_VAR(6) = 0;
+        EVT_VAR(7) = 180;
+        EVT_VAR(8) = 0;
+        EVT_AREA_FLAG(43) = 0;
     }
     sleep 15;
     PlaySound(0x204D);
@@ -278,46 +278,46 @@ EvtSource N(80244DC8) = SCRIPT({
         ShakeCam(0, 0, 30, 0.80078125);
         ShakeCam(0, 0, 5, 0.2001953125);
     }
-    MakeLerp(SI_VAR(5), SI_VAR(6), 30, 0);
+    MakeLerp(EVT_VAR(5), EVT_VAR(6), 30, 0);
     loop {
         UpdateLerp();
-        TranslateModel(122, 0, SI_VAR(0), 0);
-        TranslateGroup(125, 0, SI_VAR(0), 0);
-        TranslateModel(136, 0, SI_VAR(0), 0);
-        TranslateGroup(139, 0, SI_VAR(0), 0);
-        RotateGroup(125, SI_VAR(7), 1, 0, 0);
-        RotateGroup(139, SI_VAR(7), 1, 0, 0);
+        TranslateModel(122, 0, EVT_VAR(0), 0);
+        TranslateGroup(125, 0, EVT_VAR(0), 0);
+        TranslateModel(136, 0, EVT_VAR(0), 0);
+        TranslateGroup(139, 0, EVT_VAR(0), 0);
+        RotateGroup(125, EVT_VAR(7), 1, 0, 0);
+        RotateGroup(139, EVT_VAR(7), 1, 0, 0);
         UpdateColliderTransform(38);
         UpdateColliderTransform(39);
         UpdateColliderTransform(44);
         UpdateColliderTransform(45);
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
     }
     DisablePlayerInput(FALSE);
     sleep 10;
-    MakeLerp(SI_VAR(7), SI_VAR(8), 15, 0);
+    MakeLerp(EVT_VAR(7), EVT_VAR(8), 15, 0);
     loop {
         UpdateLerp();
-        TranslateModel(122, 0, SI_VAR(6), 0);
-        TranslateGroup(125, 0, SI_VAR(6), 0);
-        TranslateModel(136, 0, SI_VAR(6), 0);
-        TranslateGroup(139, 0, SI_VAR(6), 0);
-        RotateGroup(125, SI_VAR(0), 1, 0, 0);
-        RotateGroup(139, SI_VAR(0), 1, 0, 0);
+        TranslateModel(122, 0, EVT_VAR(6), 0);
+        TranslateGroup(125, 0, EVT_VAR(6), 0);
+        TranslateModel(136, 0, EVT_VAR(6), 0);
+        TranslateGroup(139, 0, EVT_VAR(6), 0);
+        RotateGroup(125, EVT_VAR(0), 1, 0, 0);
+        RotateGroup(139, EVT_VAR(0), 1, 0, 0);
         sleep 1;
-        if (SI_VAR(1) == 0) {
+        if (EVT_VAR(1) == 0) {
             break loop;
         }
     }
 });
 
 EvtSource N(802451C4) = SCRIPT({
-    SI_AREA_FLAG(41) = 0;
-    SI_AREA_FLAG(42) = 0;
-    SI_AREA_FLAG(43) = 0;
+    EVT_AREA_FLAG(41) = 0;
+    EVT_AREA_FLAG(42) = 0;
+    EVT_AREA_FLAG(43) = 0;
     ParentColliderToModel(26, 94);
     ParentColliderToModel(27, 94);
     ParentColliderToModel(29, 101);
@@ -518,7 +518,7 @@ ApiStatus N(func_8024215C_CD3F8C)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -627,7 +627,7 @@ ApiStatus N(func_80242754_CD4584)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;

@@ -13,7 +13,7 @@ glabel func_8024050C_86504C
 /* 86506C 8024052C F7B40028 */  sdc1      $f20, 0x28($sp)
 /* 865070 80240530 8E30000C */  lw        $s0, 0xc($s1)
 /* 865074 80240534 8E050000 */  lw        $a1, ($s0)
-/* 865078 80240538 0C0B1EAF */  jal       get_variable
+/* 865078 80240538 0C0B1EAF */  jal       evt_get_variable
 /* 86507C 8024053C 26100004 */   addiu    $s0, $s0, 4
 /* 865080 80240540 8E120000 */  lw        $s2, ($s0)
 /* 865084 80240544 26100004 */  addiu     $s0, $s0, 4
@@ -69,15 +69,15 @@ glabel func_8024050C_86504C
 /* 865140 80240600 0220202D */  daddu     $a0, $s1, $zero
 .L80240604:
 /* 865144 80240604 8E060038 */  lw        $a2, 0x38($s0)
-/* 865148 80240608 0C0B2190 */  jal       set_float_variable
+/* 865148 80240608 0C0B2190 */  jal       evt_set_float_variable
 /* 86514C 8024060C 0240282D */   daddu    $a1, $s2, $zero
 /* 865150 80240610 0220202D */  daddu     $a0, $s1, $zero
 /* 865154 80240614 4406A000 */  mfc1      $a2, $f20
-/* 865158 80240618 0C0B2190 */  jal       set_float_variable
+/* 865158 80240618 0C0B2190 */  jal       evt_set_float_variable
 /* 86515C 8024061C 0260282D */   daddu    $a1, $s3, $zero
 /* 865160 80240620 0220202D */  daddu     $a0, $s1, $zero
 /* 865164 80240624 8E060040 */  lw        $a2, 0x40($s0)
-/* 865168 80240628 0C0B2190 */  jal       set_float_variable
+/* 865168 80240628 0C0B2190 */  jal       evt_set_float_variable
 /* 86516C 8024062C 0280282D */   daddu    $a1, $s4, $zero
 /* 865170 80240630 24020002 */  addiu     $v0, $zero, 2
 .L80240634:

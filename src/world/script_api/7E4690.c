@@ -80,7 +80,7 @@ ApiStatus PlayerMoveToDoor(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
-        script->functionTemp[0] = get_variable(script, *args++);
+        script->functionTemp[0] = evt_get_variable(script, *args++);
         move_player(script->functionTemp[0], playerStatus->targetYaw, playerStatus->runSpeed);
     }
 

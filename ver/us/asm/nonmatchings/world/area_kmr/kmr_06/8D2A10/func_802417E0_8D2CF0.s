@@ -12,7 +12,7 @@ glabel func_802417E0_8D2CF0
 /* 8D2D0C 802417FC AFB10014 */  sw        $s1, 0x14($sp)
 /* 8D2D10 80241800 AFB00010 */  sw        $s0, 0x10($sp)
 /* 8D2D14 80241804 8E62000C */  lw        $v0, 0xc($s3)
-/* 8D2D18 80241808 0C0B1EAF */  jal       get_variable
+/* 8D2D18 80241808 0C0B1EAF */  jal       evt_get_variable
 /* 8D2D1C 8024180C 8C450000 */   lw       $a1, ($v0)
 /* 8D2D20 80241810 24040048 */  addiu     $a0, $zero, 0x48
 /* 8D2D24 80241814 0C00AB39 */  jal       heap_malloc
@@ -72,17 +72,17 @@ glabel func_802417E0_8D2CF0
 /* 8D2DFC 802418EC 3C05FD05 */  lui       $a1, 0xfd05
 /* 8D2E00 802418F0 34A50F8A */  ori       $a1, $a1, 0xf8a
 /* 8D2E04 802418F4 0200302D */  daddu     $a2, $s0, $zero
-/* 8D2E08 802418F8 0C0B2026 */  jal       set_variable
+/* 8D2E08 802418F8 0C0B2026 */  jal       evt_set_variable
 /* 8D2E0C 802418FC ACC20004 */   sw       $v0, 4($a2)
 /* 8D2E10 80241900 0260202D */  daddu     $a0, $s3, $zero
 /* 8D2E14 80241904 3C05FD05 */  lui       $a1, 0xfd05
 /* 8D2E18 80241908 34A50F8B */  ori       $a1, $a1, 0xf8b
-/* 8D2E1C 8024190C 0C0B2026 */  jal       set_variable
+/* 8D2E1C 8024190C 0C0B2026 */  jal       evt_set_variable
 /* 8D2E20 80241910 02A0302D */   daddu    $a2, $s5, $zero
 /* 8D2E24 80241914 0260202D */  daddu     $a0, $s3, $zero
 /* 8D2E28 80241918 3C05FD05 */  lui       $a1, 0xfd05
 /* 8D2E2C 8024191C 34A50F8C */  ori       $a1, $a1, 0xf8c
-/* 8D2E30 80241920 0C0B2026 */  jal       set_variable
+/* 8D2E30 80241920 0C0B2026 */  jal       evt_set_variable
 /* 8D2E34 80241924 0280302D */   daddu    $a2, $s4, $zero
 /* 8D2E38 80241928 8FBF0028 */  lw        $ra, 0x28($sp)
 /* 8D2E3C 8024192C 8FB50024 */  lw        $s5, 0x24($sp)

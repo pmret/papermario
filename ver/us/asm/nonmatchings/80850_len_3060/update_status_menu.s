@@ -31,7 +31,7 @@ glabel update_status_menu
 /* 815CC 800E811C 14400462 */  bnez      $v0, .L800E92A8
 /* 815D0 800E8120 0000202D */   daddu    $a0, $zero, $zero
 /* 815D4 800E8124 3C05F5DE */  lui       $a1, 0xf5de
-/* 815D8 800E8128 0C0B1EAF */  jal       get_variable
+/* 815D8 800E8128 0C0B1EAF */  jal       evt_get_variable
 /* 815DC 800E812C 34A50180 */   ori      $a1, $a1, 0x180
 /* 815E0 800E8130 28420060 */  slti      $v0, $v0, 0x60
 /* 815E4 800E8134 1040045C */  beqz      $v0, .L800E92A8

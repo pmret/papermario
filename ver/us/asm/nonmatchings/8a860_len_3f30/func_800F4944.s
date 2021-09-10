@@ -32,7 +32,7 @@ glabel func_800F4944
 glabel L800F4994_8DE44
 /* 8DE44 800F4994 3C04001D */  lui       $a0, 0x1d
 /* 8DE48 800F4998 34840061 */  ori       $a0, $a0, 0x61
-/* 8DE4C 800F499C 0C04991D */  jal       get_string_width
+/* 8DE4C 800F499C 0C04991D */  jal       get_msg_width
 /* 8DE50 800F49A0 0000282D */   daddu    $a1, $zero, $zero
 /* 8DE54 800F49A4 3C04001D */  lui       $a0, 0x1d
 /* 8DE58 800F49A8 0803D2F7 */  j         .L800F4BDC
@@ -40,7 +40,7 @@ glabel L800F4994_8DE44
 glabel L800F49B0_8DE60
 /* 8DE60 800F49B0 3C04001D */  lui       $a0, 0x1d
 /* 8DE64 800F49B4 34840063 */  ori       $a0, $a0, 0x63
-/* 8DE68 800F49B8 0C04991D */  jal       get_string_width
+/* 8DE68 800F49B8 0C04991D */  jal       get_msg_width
 /* 8DE6C 800F49BC 0000282D */   daddu    $a1, $zero, $zero
 /* 8DE70 800F49C0 3C04001D */  lui       $a0, 0x1d
 /* 8DE74 800F49C4 34840063 */  ori       $a0, $a0, 0x63
@@ -54,7 +54,7 @@ glabel L800F49B0_8DE60
 glabel L800F49E4_8DE94
 /* 8DE94 800F49E4 3C04001D */  lui       $a0, 0x1d
 /* 8DE98 800F49E8 34840064 */  ori       $a0, $a0, 0x64
-/* 8DE9C 800F49EC 0C04991D */  jal       get_string_width
+/* 8DE9C 800F49EC 0C04991D */  jal       get_msg_width
 /* 8DEA0 800F49F0 0000282D */   daddu    $a1, $zero, $zero
 /* 8DEA4 800F49F4 3C04001D */  lui       $a0, 0x1d
 /* 8DEA8 800F49F8 34840064 */  ori       $a0, $a0, 0x64
@@ -68,7 +68,7 @@ glabel L800F49E4_8DE94
 glabel L800F4A18_8DEC8
 /* 8DEC8 800F4A18 3C04001D */  lui       $a0, 0x1d
 /* 8DECC 800F4A1C 34840070 */  ori       $a0, $a0, 0x70
-/* 8DED0 800F4A20 0C04991D */  jal       get_string_width
+/* 8DED0 800F4A20 0C04991D */  jal       get_msg_width
 /* 8DED4 800F4A24 0000282D */   daddu    $a1, $zero, $zero
 /* 8DED8 800F4A28 3C04001D */  lui       $a0, 0x1d
 /* 8DEDC 800F4A2C 34840070 */  ori       $a0, $a0, 0x70
@@ -82,7 +82,7 @@ glabel L800F4A18_8DEC8
 glabel L800F4A4C_8DEFC
 /* 8DEFC 800F4A4C 3C04001D */  lui       $a0, 0x1d
 /* 8DF00 800F4A50 3484006A */  ori       $a0, $a0, 0x6a
-/* 8DF04 800F4A54 0C04991D */  jal       get_string_width
+/* 8DF04 800F4A54 0C04991D */  jal       get_msg_width
 /* 8DF08 800F4A58 0000282D */   daddu    $a1, $zero, $zero
 /* 8DF0C 800F4A5C 3C04001D */  lui       $a0, 0x1d
 /* 8DF10 800F4A60 3484006A */  ori       $a0, $a0, 0x6a
@@ -96,7 +96,7 @@ glabel L800F4A4C_8DEFC
 glabel L800F4A80_8DF30
 /* 8DF30 800F4A80 3C04001D */  lui       $a0, 0x1d
 /* 8DF34 800F4A84 34840065 */  ori       $a0, $a0, 0x65
-/* 8DF38 800F4A88 0C04991D */  jal       get_string_width
+/* 8DF38 800F4A88 0C04991D */  jal       get_msg_width
 /* 8DF3C 800F4A8C 0000282D */   daddu    $a1, $zero, $zero
 /* 8DF40 800F4A90 3C04001D */  lui       $a0, 0x1d
 /* 8DF44 800F4A94 34840065 */  ori       $a0, $a0, 0x65
@@ -105,7 +105,7 @@ glabel L800F4A80_8DF30
 glabel L800F4AA0_8DF50
 /* 8DF50 800F4AA0 3C04001D */  lui       $a0, 0x1d
 /* 8DF54 800F4AA4 34840066 */  ori       $a0, $a0, 0x66
-/* 8DF58 800F4AA8 0C04991D */  jal       get_string_width
+/* 8DF58 800F4AA8 0C04991D */  jal       get_msg_width
 /* 8DF5C 800F4AAC 0000282D */   daddu    $a1, $zero, $zero
 /* 8DF60 800F4AB0 3C04001D */  lui       $a0, 0x1d
 /* 8DF64 800F4AB4 0803D2F7 */  j         .L800F4BDC
@@ -113,7 +113,7 @@ glabel L800F4AA0_8DF50
 glabel L800F4ABC_8DF6C
 /* 8DF6C 800F4ABC 3C04001D */  lui       $a0, 0x1d
 /* 8DF70 800F4AC0 34840067 */  ori       $a0, $a0, 0x67
-/* 8DF74 800F4AC4 0C04991D */  jal       get_string_width
+/* 8DF74 800F4AC4 0C04991D */  jal       get_msg_width
 /* 8DF78 800F4AC8 0000282D */   daddu    $a1, $zero, $zero
 /* 8DF7C 800F4ACC 3C04001D */  lui       $a0, 0x1d
 /* 8DF80 800F4AD0 0803D2F7 */  j         .L800F4BDC
@@ -121,7 +121,7 @@ glabel L800F4ABC_8DF6C
 glabel L800F4AD8_8DF88
 /* 8DF88 800F4AD8 3C04001D */  lui       $a0, 0x1d
 /* 8DF8C 800F4ADC 3484006F */  ori       $a0, $a0, 0x6f
-/* 8DF90 800F4AE0 0C04991D */  jal       get_string_width
+/* 8DF90 800F4AE0 0C04991D */  jal       get_msg_width
 /* 8DF94 800F4AE4 0000282D */   daddu    $a1, $zero, $zero
 /* 8DF98 800F4AE8 3C04001D */  lui       $a0, 0x1d
 /* 8DF9C 800F4AEC 3484006F */  ori       $a0, $a0, 0x6f
@@ -135,7 +135,7 @@ glabel L800F4AD8_8DF88
 glabel L800F4B0C_8DFBC
 /* 8DFBC 800F4B0C 3C04001D */  lui       $a0, 0x1d
 /* 8DFC0 800F4B10 3484006D */  ori       $a0, $a0, 0x6d
-/* 8DFC4 800F4B14 0C04991D */  jal       get_string_width
+/* 8DFC4 800F4B14 0C04991D */  jal       get_msg_width
 /* 8DFC8 800F4B18 0000282D */   daddu    $a1, $zero, $zero
 /* 8DFCC 800F4B1C 3C04001D */  lui       $a0, 0x1d
 /* 8DFD0 800F4B20 3484006D */  ori       $a0, $a0, 0x6d
@@ -149,7 +149,7 @@ glabel L800F4B0C_8DFBC
 glabel L800F4B40_8DFF0
 /* 8DFF0 800F4B40 3C04001D */  lui       $a0, 0x1d
 /* 8DFF4 800F4B44 348400D6 */  ori       $a0, $a0, 0xd6
-/* 8DFF8 800F4B48 0C04991D */  jal       get_string_width
+/* 8DFF8 800F4B48 0C04991D */  jal       get_msg_width
 /* 8DFFC 800F4B4C 0000282D */   daddu    $a1, $zero, $zero
 /* 8E000 800F4B50 3C04001D */  lui       $a0, 0x1d
 /* 8E004 800F4B54 0803D2F7 */  j         .L800F4BDC
@@ -157,7 +157,7 @@ glabel L800F4B40_8DFF0
 glabel L800F4B5C_8E00C
 /* 8E00C 800F4B5C 3C04001D */  lui       $a0, 0x1d
 /* 8E010 800F4B60 3484006C */  ori       $a0, $a0, 0x6c
-/* 8E014 800F4B64 0C04991D */  jal       get_string_width
+/* 8E014 800F4B64 0C04991D */  jal       get_msg_width
 /* 8E018 800F4B68 0000282D */   daddu    $a1, $zero, $zero
 /* 8E01C 800F4B6C 3C04001D */  lui       $a0, 0x1d
 /* 8E020 800F4B70 3484006C */  ori       $a0, $a0, 0x6c
@@ -171,7 +171,7 @@ glabel L800F4B5C_8E00C
 glabel L800F4B90_8E040
 /* 8E040 800F4B90 3C04001D */  lui       $a0, 0x1d
 /* 8E044 800F4B94 3484006D */  ori       $a0, $a0, 0x6d
-/* 8E048 800F4B98 0C04991D */  jal       get_string_width
+/* 8E048 800F4B98 0C04991D */  jal       get_msg_width
 /* 8E04C 800F4B9C 0000282D */   daddu    $a1, $zero, $zero
 /* 8E050 800F4BA0 3C04001D */  lui       $a0, 0x1d
 /* 8E054 800F4BA4 3484006D */  ori       $a0, $a0, 0x6d
@@ -185,7 +185,7 @@ glabel L800F4B90_8E040
 glabel L800F4BC4_8E074
 /* 8E074 800F4BC4 3C04001D */  lui       $a0, 0x1d
 /* 8E078 800F4BC8 34840062 */  ori       $a0, $a0, 0x62
-/* 8E07C 800F4BCC 0C04991D */  jal       get_string_width
+/* 8E07C 800F4BCC 0C04991D */  jal       get_msg_width
 /* 8E080 800F4BD0 0000282D */   daddu    $a1, $zero, $zero
 /* 8E084 800F4BD4 3C04001D */  lui       $a0, 0x1d
 /* 8E088 800F4BD8 34840062 */  ori       $a0, $a0, 0x62
@@ -201,7 +201,7 @@ glabel L800F4BC4_8E074
 /* 8E0A4 800F4BF4 240700FF */  addiu     $a3, $zero, 0xff
 /* 8E0A8 800F4BF8 2402000F */  addiu     $v0, $zero, 0xf
 /* 8E0AC 800F4BFC AFA20010 */  sw        $v0, 0x10($sp)
-/* 8E0B0 800F4C00 0C04993B */  jal       draw_string
+/* 8E0B0 800F4C00 0C04993B */  jal       draw_msg
 /* 8E0B4 800F4C04 AFA00014 */   sw       $zero, 0x14($sp)
 .L800F4C08:
 /* 8E0B8 800F4C08 8FBF0020 */  lw        $ra, 0x20($sp)

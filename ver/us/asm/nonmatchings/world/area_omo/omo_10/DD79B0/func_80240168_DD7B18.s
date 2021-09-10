@@ -10,16 +10,16 @@ glabel func_80240168_DD7B18
 /* DD7B2C 8024017C AFB00010 */  sw        $s0, 0x10($sp)
 /* DD7B30 80240180 8E50000C */  lw        $s0, 0xc($s2)
 /* DD7B34 80240184 8E050000 */  lw        $a1, ($s0)
-/* DD7B38 80240188 0C0B1EAF */  jal       get_variable
+/* DD7B38 80240188 0C0B1EAF */  jal       evt_get_variable
 /* DD7B3C 8024018C 26100004 */   addiu    $s0, $s0, 4
 /* DD7B40 80240190 8E050000 */  lw        $a1, ($s0)
 /* DD7B44 80240194 26100004 */  addiu     $s0, $s0, 4
 /* DD7B48 80240198 0240202D */  daddu     $a0, $s2, $zero
-/* DD7B4C 8024019C 0C0B1EAF */  jal       get_variable
+/* DD7B4C 8024019C 0C0B1EAF */  jal       evt_get_variable
 /* DD7B50 802401A0 0040882D */   daddu    $s1, $v0, $zero
 /* DD7B54 802401A4 0240202D */  daddu     $a0, $s2, $zero
 /* DD7B58 802401A8 8E050000 */  lw        $a1, ($s0)
-/* DD7B5C 802401AC 0C0B1EAF */  jal       get_variable
+/* DD7B5C 802401AC 0C0B1EAF */  jal       evt_get_variable
 /* DD7B60 802401B0 0040802D */   daddu    $s0, $v0, $zero
 /* DD7B64 802401B4 02020018 */  mult      $s0, $v0
 /* DD7B68 802401B8 24020002 */  addiu     $v0, $zero, 2

@@ -4,7 +4,7 @@
 #include "macros.h"
 #include "ultra64.h"
 #include "types.h"
-#include "si.h"
+#include "evt.h"
 #include "enums.h"
 
 struct Evt;
@@ -275,12 +275,12 @@ typedef struct Trigger {
     /* 0x00 */ TriggerFlags flags;
     /* 0x04 */ s32 params1;
     /* 0x08 */ s32 params2;
-    /* 0x0C */ UNK_FUN_PTR(functionHandler);
+    /* 0x0C */ s32 (*functionHandler)(struct Trigger*);
     /* 0x10 */ EvtSource* scriptSource;
     /* 0x14 */ struct Evt* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
-    /* 0x28 */ char unk_28[4];
+    /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ u8 unk_30;
     /* 0x31 */ char unk_31[3];
@@ -907,8 +907,8 @@ typedef struct PrintHandle {
 
 typedef struct OtherPrint {
     /* 0x00 */ char unk_00[16];
-    /* 0x10 */ f32 stringScaleH;
-    /* 0x14 */ f32 stringScaleW;
+    /* 0x10 */ f32 msgScaleH;
+    /* 0x14 */ f32 msgScaleW;
     /* 0x18 */ f32 characterScaleH;
     /* 0x1C */ f32 characterScaleW;
     /* 0x20 */ char unk_20[32];
@@ -923,14 +923,14 @@ typedef struct ColliderBoundingBox {
 } ColliderBoundingBox; // size = 0x1C
 
 typedef struct StaticItem {
-    /* 0x00 */ s32 nameString;
+    /* 0x00 */ s32 nameMsg;
     /* 0x04 */ s16 iconID;
     /* 0x06 */ s16 badgeSortPriority;
     /* 0x08 */ s32 targetFlags;
     /* 0x0C */ s16 sellValue;
     /* 0x0E */ char unk_0E[2];
-    /* 0x10 */ s32 menuString;
-    /* 0x14 */ s32 itemString;
+    /* 0x10 */ s32 menuMsg;
+    /* 0x14 */ s32 itemMsg;
     /* 0x18 */ s16 typeFlags;
     /* 0x1A */ u8 moveID;
     /* 0x1B */ s8 potencyA;
@@ -1064,7 +1064,7 @@ typedef struct MessagePrintState {
     /* 0x000 */ s8* srcBuffer;
     /* 0x004 */ s16 printBufferPos;
     /* 0x006 */ char unk_06[2];
-    /* 0x008 */ s32 stringID;
+    /* 0x008 */ s32 msgID;
     /* 0x00C */ s16 srcBufferPos;
     /* 0x00E */ s16 currentPrintDelay;
     /* 0x010 */ u8 printBuffer[1088]; // slightly larger than source buffer
@@ -1139,8 +1139,8 @@ typedef struct MessagePrintState {
     /* 0x532 */ s8 varImgAlphaFadeStep; // how much to fade in per frame
     /* 0x533 */ s8 varImageDisplayState; // 0 = fade in, 1 = fully visible, 2 = fade out
     /* 0x534 */ s16 varImageFadeTimer; // frames faded in
-    /* 0x536 */ s16 stringHeight;
-    /* 0x538 */ s16 stringWidth;
+    /* 0x536 */ s16 msgHeight;
+    /* 0x538 */ s16 msgWidth;
     /* 0x53A */ s8 maxLineChars;
     /* 0x53B */ s8 numLines;
     /* 0x53C */ s8 maxLinesPerPage;
@@ -1156,9 +1156,9 @@ typedef struct MessagePrintState {
 typedef struct MessageDrawState {
     /* 0x00 */ s32 clipX[2]; // characters beyond this pos get skipped
     /* 0x08 */ s32 clipY[2]; // characters beyond this pos get skipped
-    /* 0x10 */ Vec2f stringScale;
+    /* 0x10 */ Vec2f msgScale;
     /* 0x18 */ Vec2f charScale;
-    /* 0x20 */ s32 drawBufferPos; // string gets printed here and read for display
+    /* 0x20 */ s32 drawBufferPos; // msg gets printed here and read for display
     /* 0x24 */ s16 savedPos[2];
     /* 0x28 */ s8 savedColor;
     /* 0x29 */ u8 unk_29;
@@ -1483,7 +1483,7 @@ typedef struct FontRasterSet {
     /* 0x02 */ char unk_02[10];
 } FontRasterSet; // size = 0x0C
 
-typedef s32(*TriggerHandlerFunc)(struct Trigger*);
+typedef s32 (*TriggerHandlerFunc)(Trigger*);
 
 typedef struct TriggerDefinition {
     /* 0x00 */ s32 flags;
@@ -1512,7 +1512,7 @@ typedef struct CollisionStatus {
     /* 0x16 */ s16 touchingWallTrigger; /* 0/1 */
     /* 0x18 */ s16 bombetteExploded; /* 0 = yes, FFFF = no */
     /* 0x1A */ char unk_1A[2];
-    /* 0x1C */ f32 bombetteExplositionPos[3];
+    /* 0x1C */ Vec3f bombetteExplosionPos;
 } CollisionStatus; // size = 0x28
 
 typedef struct DecorationTable {
@@ -1565,7 +1565,7 @@ typedef struct ShopOwner {
     /* 0x0C */ char unk_0C[0x4];
     /* 0x10 */ Bytecode* unkScript;
     /* 0x14 */ char unk_14[0x4];
-    /* 0x18 */ s32* shopStringIDs;
+    /* 0x18 */ s32* shopMsgIDs;
 } ShopOwner;
 
 typedef struct ShopItemLocation {
@@ -1588,7 +1588,7 @@ typedef struct StaticPriceItem {
 typedef struct PopupMenu {
     /* 0x000 */ s32* ptrIcon[32];
     /* 0x080 */ char unk_80[4];
-    /* 0x084 */ s32 nameString[32];
+    /* 0x084 */ s32 nameMsg[32];
     /* 0x104 */ char unk_104[4];
     /* 0x108 */ s32 userIndex[32]; // used to map menu order to a user-ID for each item
     /* 0x188 */ char unk_188[4];
@@ -1596,7 +1596,7 @@ typedef struct PopupMenu {
     /* 0x20C */ char unk_20C[4];
     /* 0x210 */ s32 value[32]; // sale price, etc
     /* 0x290 */ char unk_290[4];
-    /* 0x294 */ s32 descString[32];
+    /* 0x294 */ s32 descMsg[32];
     /* 0x314 */ char unk_314[4];
     /* 0x318 */ s32 popupType; // C = keys
     /* 0x31C */ s32 unk_31C;
@@ -1934,7 +1934,9 @@ typedef struct PlayerStatus {
     /* 0x168 */ s32 stickXBuffer[10];
     /* 0x190 */ s32 stickYBuffer[10];
     /* 0x1B8 */ s32 inputBufPos;
-    /* 0x1BC */ char unk_1BC[204];
+    /* 0x1BC */ char unk_1BC[196];
+    /* 0x280 */ s8 unk_280;
+    /* 0x281 */ char unk_281[7];
 } PlayerStatus; // size = 0x288
 
 typedef struct AnimatedModelNode {
@@ -2031,32 +2033,91 @@ typedef struct {
     /* 0x08 */ s32 count;
 } PauseItemPage; // size = 0xC
 
-typedef struct {
-    /* 0x00 */ f32 unk_00;
-    /* 0x04 */ char unk_04[4];
-    /* 0x08 */ s8* unk_08;
-    /* 0x0C */ void* fpInit;
-    /* 0x10 */ void* fpHandleInput;
-    /* 0x14 */ void* fpUpdate;
-    /* 0x18 */ void* fpCleanup;
-} MenuTab; // size = 0x1C
+typedef struct PauseMapSpace {
+    /* 0x00 */ Vec2s pos;
+    /* 0x04 */ u8 parent;
+    /* 0x05 */ u8 pathLength;
+    /* 0x06 */ s16 unk_06; // always 0
+    /* 0x08 */ Vec2b* path;
+    /* 0x0C */ s32 afterRequirement;
+    /* 0x10 */ s32 id;
+} PauseMapSpace; // size = 0x14
+
+typedef struct MenuPanel {
+    /* 0x00 */ s8 initialized; //?
+    /* 0x01 */ s8 col; // might be backwards
+    /* 0x02 */ s8 row; // might be backwards
+    /* 0x03 */ s8 selected;
+    /* 0x04 */ s8 page; // filemenu: 0 = select, 1 = delete, 3 = copy from, 4 = copy to, all else = save
+    /* 0x05 */ s8 numCols;
+    /* 0x06 */ s8 numRows;
+    /* 0x07 */ char unk_07;
+    /* 0x08 */ s8* gridData; // user value at each 2D grid point
+    /* 0x0C */ UNK_FUN_PTR(fpInit);
+    /* 0x10 */ UNK_FUN_PTR(fpHandleInput);
+    /* 0x14 */ UNK_FUN_PTR(fpUpdate);
+    /* 0x18 */ UNK_FUN_PTR(fpCleanup);
+} MenuPanel;
+
+typedef struct WindowBackground {
+    /* 0x00 */ s32* imgData;
+    /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
+    /* 0x05 */ s8 width;
+    /* 0x06 */ s8 height;
+    /* 0x07 */ char unk_07[4];
+    /* 0x0B */ s8 size;
+} WindowBackground; // size = 0xC
+
+typedef struct WindowCorners {
+    /* 0x00 */ s32* imgData;
+    /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
+    /* 0x05 */ Vec2b size1;
+    /* 0x07 */ Vec2b size2;
+    /* 0x09 */ Vec2b size3;
+    /* 0x0B */ Vec2b size4;
+    /* 0x0D */ char unk_0D[3];
+} WindowCorners; // size = 0x10
+
+typedef struct WindowStyleCustom {
+    /* 0x00 */ WindowBackground background;
+    /* 0x0C */ WindowCorners corners;
+    /* 0x1C */ char unk_1C[0x4];
+    /* 0x20 */ s32 opaqueCombineMode[2]; // used when alpha == 255
+    /* 0x28 */ s32 transparentCombineMode[2]; // used when alpha < 255
+    /* 0x30 */ s8 color1[4];
+    /* 0x34 */ s8 color2[4];
+} WindowStyleCustom; // size = 0x38;
+
+typedef struct MenuWindowBP {
+    /* 0x00 */ s8 windowID;
+    /* 0x01 */ char unk_01;
+    /* 0x02 */ Vec2s pos;
+    /* 0x06 */ s16 height;
+    /* 0x08 */ s16 width; // switch? ^
+    /* 0x0A */ char unk_0A[2];
+    /* 0x0C */ UNK_FUN_PTR(fpDrawContents);
+    /* 0x10 */ MenuPanel* tab;
+    /* 0x14 */ s32 parentID;
+    /* 0x18 */ UNK_FUN_PTR(fpUpdate);
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ WindowStyleCustom* style;
+} MenuWindowBP; // size = 0x24;
 
 typedef struct {
     /* 0x00 */ s8 flags;
-    /* 0x01 */ char unk_01;
+    /* 0x01 */ s8 panelID; // ?
     /* 0x02 */ s8 unk_02; // related to heirarchy somehow - sibling? group?
     /* 0x03 */ s8 parent; // ?
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ UNK_PTR unk_08;
-    /* 0x0C */ s16 posX;
-    /* 0x0E */ s16 posY;
+    /* 0x04 */ UNK_FUN_PTR(fpUpdate);
+    /* 0x08 */ UNK_FUN_PTR(fpPending);
+    /* 0x0C */ Vec2s pos;
     /* 0x10 */ s16 width;
     /* 0x12 */ s16 height;
-    /* 0x14 */ UNK_PTR fpDrawContents;
-    /* 0x18 */ s32 unk_18; // MenuTab pointer for pause menu tabs
-    /* 0x1C */ u8 unk_1C;
+    /* 0x14 */ UNK_FUN_PTR(fpDrawContents);
+    /* 0x18 */ s32 drawContentsArg0;
+    /* 0x1C */ u8 updateCounter;
     /* 0x1D */ char unk_1D[3];
-} UIPanel; // size = 0x20
+} Window; // size = 0x20
 
 // BEGIN ENTITY-SPECIFIC STRUCTS
 
@@ -2121,13 +2182,23 @@ typedef struct struct802E4B10 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ s8 unk_02;
-    /* 0x03 */ char unk_03[6];
+    /* 0x03 */ s8 unk_03;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ char unk_08;
     /* 0x09 */ u8 unk_09;
     /* 0x0A */ u8 unk_0A;
     /* 0x0B */ char unk_0B; // padding?
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
-    /* 0x14 */ char unk_14[0xBC];
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ u16 unk_24;
+    /* 0x24 */ s16 unk_26;
+    /* 0x28 */ f32 unk_28[0xB];
+    /* 0x54 */ f32 unk_54;
+    /* 0x58 */ char unk_58[0x78];
     /* 0xD0 */ u16 unk_D0;
     /* 0xD4 */ f32 unk_D4[0];
 } struct802E4B10;
@@ -2240,7 +2311,7 @@ typedef struct RenderTaskEntry {
 
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ struct HudElement* hudElements[15];
+    /* 0x04 */ s32 hudElements[15];
     /* 0x40 */ char unk_40[0x4];
     /* 0x44 */ s16 unk_44;
     /* 0x46 */ s16 unk_46;
@@ -2273,4 +2344,19 @@ typedef struct ActionCommandStatus {
     /* 0x74 */ s16 mashMeterCutoffs[6]; // upper bounds for each interval
     /* 0x80 */ s8 mashMeterIntervals;
 } ActionCommandStatus;
+
+struct PopupMessage;
+typedef void (*PopupMessageCallback)(struct PopupMessage* popup);
+typedef struct PopupMessage {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ PopupMessageCallback unk_04;
+    /* 0x08 */ PopupMessageCallback unk_08;
+    /* 0x0C */ PopupMessageCallback drawFunc;
+    /* 0x10 */ s16 active;
+    /* 0x12 */ s16 messageIndex;
+    /* 0x14 */ s16 duration;
+    /* 0x16 */ s8 unk_16;
+    /* 0x17 */ s8 unk_17;
+    /* 0x18 */ s32* message;
+} PopupMessage; // size = 0x1C
 #endif

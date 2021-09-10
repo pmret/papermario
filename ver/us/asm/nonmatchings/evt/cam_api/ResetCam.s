@@ -15,7 +15,7 @@ glabel ResetCam
 /* F12A0 802CC8F0 F7B40068 */  sdc1      $f20, 0x68($sp)
 /* F12A4 802CC8F4 8E30000C */  lw        $s0, 0xc($s1)
 /* F12A8 802CC8F8 8E050000 */  lw        $a1, ($s0)
-/* F12AC 802CC8FC 0C0B1EAF */  jal       get_variable
+/* F12AC 802CC8FC 0C0B1EAF */  jal       evt_get_variable
 /* F12B0 802CC900 26100004 */   addiu    $s0, $s0, 4
 /* F12B4 802CC904 0220202D */  daddu     $a0, $s1, $zero
 /* F12B8 802CC908 3C06800B */  lui       $a2, %hi(gCameras)
@@ -28,7 +28,7 @@ glabel ResetCam
 /* F12D4 802CC924 00621821 */  addu      $v1, $v1, $v0
 /* F12D8 802CC928 000318C0 */  sll       $v1, $v1, 3
 /* F12DC 802CC92C 8E050000 */  lw        $a1, ($s0)
-/* F12E0 802CC930 0C0B210B */  jal       get_float_variable
+/* F12E0 802CC930 0C0B210B */  jal       evt_get_float_variable
 /* F12E4 802CC934 00668021 */   addu     $s0, $v1, $a2
 /* F12E8 802CC938 3C038011 */  lui       $v1, %hi(gPlayerStatus)
 /* F12EC 802CC93C 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)

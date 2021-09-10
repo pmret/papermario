@@ -25,7 +25,7 @@ glabel func_80241FBC_A1D0BC
 /* A1D0F0 80241FF0 00A0882D */   daddu    $s1, $a1, $zero
 /* A1D0F4 80241FF4 0280202D */  daddu     $a0, $s4, $zero
 /* A1D0F8 80241FF8 8E050000 */  lw        $a1, ($s0)
-/* A1D0FC 80241FFC 0C0B1EAF */  jal       get_variable
+/* A1D0FC 80241FFC 0C0B1EAF */  jal       evt_get_variable
 /* A1D100 80242000 0040A82D */   daddu    $s5, $v0, $zero
 /* A1D104 80242004 AFA00010 */  sw        $zero, 0x10($sp)
 /* A1D108 80242008 8E4300D0 */  lw        $v1, 0xd0($s2)

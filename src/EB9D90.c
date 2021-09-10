@@ -1,3 +1,4 @@
+#include "dead.h"
 #include "common.h"
 
 static char* N(exit_str_0) = "flo_07";

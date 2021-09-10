@@ -24,7 +24,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(802414E0) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -44,10 +44,10 @@ EvtSource N(exitSingleDoor_80241580) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(0);
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 16;
-    SI_VAR(2) = 30;
-    SI_VAR(3) = -1;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 16;
+    EVT_VAR(2) = 30;
+    EVT_VAR(3) = -1;
     spawn ExitSingleDoor;
     sleep 17;
     GotoMap("dgb_03", 2);
@@ -56,24 +56,24 @@ EvtSource N(exitSingleDoor_80241580) = SCRIPT({
 
 EvtSource N(enterSingleDoor_80241634) = SCRIPT({
     UseDoorSounds(0);
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
-            SI_VAR(2) = 30;
-            SI_VAR(3) = -1;
+            EVT_VAR(2) = 30;
+            EVT_VAR(3) = -1;
             await EnterSingleDoor;
         }
     }
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    EVT_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamLeadPlayer(0, 0);
     SetCamEnabled(0, 1);
-    if (SI_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
+    if (EVT_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
         MakeNpcs(1, N(npcGroupList_8024230C));
     }
     await N(makeEntities);
@@ -91,9 +91,9 @@ static s32 N(pad_17E8)[] = {
 
 EvtSource N(802417F0) = SCRIPT({
     N(func_80240000_C3AA10)();
-    func_802CA988(0, SI_VAR(2), SI_VAR(3), SI_VAR(4), SI_VAR(5));
+    func_802CA988(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
     N(func_80240030_C3AA40)();
-    SI_SAVE_FLAG(1047) = 1;
+    EVT_SAVE_FLAG(1047) = 1;
     GotoMap("dgb_06", 1);
     sleep 100;
 });
@@ -103,7 +103,7 @@ static s32 N(pad_1868)[] = {
 };
 
 EvtSource N(makeEntities) = SCRIPT({
-    if (SI_SAVE_FLAG(1047) == 0) {
+    if (EVT_SAVE_FLAG(1047) == 0) {
         MakeEntity(0x802BCE84, 510, -210, 100, 0, MAKE_ENTITY_END);
     }
 });
@@ -113,8 +113,8 @@ static s32 N(pad_18BC) = {
 };
 
 EvtSource N(802418C0) = SCRIPT({
-    GetBattleOutcome(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattleOutcome(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
             RemoveNpc(NPC_SELF);
         }
@@ -543,7 +543,7 @@ ApiStatus N(func_80240E80_C3B890)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
+    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -647,7 +647,7 @@ ApiStatus N(func_802411D0_C3BBE0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
+    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;

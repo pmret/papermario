@@ -11,11 +11,11 @@ glabel func_802406EC_B070EC
 /* B07104 80240704 AFB00010 */  sw        $s0, 0x10($sp)
 /* B07108 80240708 8E70000C */  lw        $s0, 0xc($s3)
 /* B0710C 8024070C 8E050000 */  lw        $a1, ($s0)
-/* B07110 80240710 0C0B1EAF */  jal       get_variable
+/* B07110 80240710 0C0B1EAF */  jal       evt_get_variable
 /* B07114 80240714 26100004 */   addiu    $s0, $s0, 4
 /* B07118 80240718 0260202D */  daddu     $a0, $s3, $zero
 /* B0711C 8024071C 8E050000 */  lw        $a1, ($s0)
-/* B07120 80240720 0C0B1EAF */  jal       get_variable
+/* B07120 80240720 0C0B1EAF */  jal       evt_get_variable
 /* B07124 80240724 0040902D */   daddu    $s2, $v0, $zero
 /* B07128 80240728 2404003C */  addiu     $a0, $zero, 0x3c
 /* B0712C 8024072C 0C00AB39 */  jal       heap_malloc
@@ -61,7 +61,7 @@ glabel func_802406EC_B070EC
 /* B071CC 802407CC 3C05FD05 */  lui       $a1, 0xfd05
 /* B071D0 802407D0 34A50F8A */  ori       $a1, $a1, 0xf8a
 /* B071D4 802407D4 0200302D */  daddu     $a2, $s0, $zero
-/* B071D8 802407D8 0C0B2026 */  jal       set_variable
+/* B071D8 802407D8 0C0B2026 */  jal       evt_set_variable
 /* B071DC 802407DC AE020004 */   sw       $v0, 4($s0)
 /* B071E0 802407E0 8FBF0020 */  lw        $ra, 0x20($sp)
 /* B071E4 802407E4 8FB3001C */  lw        $s3, 0x1c($sp)

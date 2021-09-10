@@ -61,22 +61,22 @@ glabel filemenu_main_init
 /* 166140 802458E0 24020002 */  addiu     $v0, $zero, 2
 /* 166144 802458E4 14620006 */  bne       $v1, $v0, .L80245900
 /* 166148 802458E8 24020001 */   addiu    $v0, $zero, 1
-/* 16614C 802458EC 3C038016 */  lui       $v1, %hi(gUIPanels)
-/* 166150 802458F0 24639D50 */  addiu     $v1, $v1, %lo(gUIPanels)
+/* 16614C 802458EC 3C038016 */  lui       $v1, %hi(gWindows)
+/* 166150 802458F0 24639D50 */  addiu     $v1, $v1, %lo(gWindows)
 /* 166154 802458F4 A46205AE */  sh        $v0, 0x5ae($v1)
 /* 166158 802458F8 08091644 */  j         .L80245910
 /* 16615C 802458FC 240200D3 */   addiu    $v0, $zero, 0xd3
 .L80245900:
-/* 166160 80245900 3C038016 */  lui       $v1, %hi(gUIPanels)
-/* 166164 80245904 24639D50 */  addiu     $v1, $v1, %lo(gUIPanels)
+/* 166160 80245900 3C038016 */  lui       $v1, %hi(gWindows)
+/* 166164 80245904 24639D50 */  addiu     $v1, $v1, %lo(gWindows)
 /* 166168 80245908 A46205AE */  sh        $v0, 0x5ae($v1)
 /* 16616C 8024590C 240200A2 */  addiu     $v0, $zero, 0xa2
 .L80245910:
 /* 166170 80245910 A46205B0 */  sh        $v0, 0x5b0($v1)
 /* 166174 80245914 24020019 */  addiu     $v0, $zero, 0x19
 /* 166178 80245918 A46205B2 */  sh        $v0, 0x5b2($v1)
-/* 16617C 8024591C 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 166180 80245920 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 16617C 8024591C 3C048016 */  lui       $a0, %hi(gWindows)
+/* 166180 80245920 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 /* 166184 80245924 948205B0 */  lhu       $v0, 0x5b0($a0)
 /* 166188 80245928 00021400 */  sll       $v0, $v0, 0x10
 /* 16618C 8024592C 00021C03 */  sra       $v1, $v0, 0x10
@@ -100,8 +100,8 @@ glabel filemenu_main_init
 .L80245974:
 /* 1661D4 80245974 240200A0 */  addiu     $v0, $zero, 0xa0
 /* 1661D8 80245978 00451023 */  subu      $v0, $v0, $a1
-/* 1661DC 8024597C 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* 1661E0 80245980 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* 1661DC 8024597C 3C048016 */  lui       $a0, %hi(gWindows)
+/* 1661E0 80245980 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 .L80245984:
 /* 1661E4 80245984 A4C20000 */  sh        $v0, ($a2)
 /* 1661E8 80245988 948206D0 */  lhu       $v0, 0x6d0($a0)

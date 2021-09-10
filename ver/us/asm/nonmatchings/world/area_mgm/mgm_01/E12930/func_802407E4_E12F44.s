@@ -11,7 +11,7 @@ glabel func_802407E4_E12F44
 /* E12F5C 802407FC 8E03000C */  lw        $v1, 0xc($s0)
 /* E12F60 80240800 0200202D */  daddu     $a0, $s0, $zero
 /* E12F64 80240804 8C650000 */  lw        $a1, ($v1)
-/* E12F68 80240808 0C0B1EAF */  jal       get_variable
+/* E12F68 80240808 0C0B1EAF */  jal       evt_get_variable
 /* E12F6C 8024080C 8C500080 */   lw       $s0, 0x80($v0)
 /* E12F70 80240810 0040202D */  daddu     $a0, $v0, $zero
 /* E12F74 80240814 24020002 */  addiu     $v0, $zero, 2

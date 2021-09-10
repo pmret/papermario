@@ -26,42 +26,42 @@ glabel func_80240000_8ABF90
 /* 8ABFE4 80240054 AFA20014 */   sw       $v0, 0x14($sp)
 /* 8ABFE8 80240058 8E050000 */  lw        $a1, ($s0)
 /* 8ABFEC 8024005C 26100004 */  addiu     $s0, $s0, 4
-/* 8ABFF0 80240060 0C0B1EAF */  jal       get_variable
+/* 8ABFF0 80240060 0C0B1EAF */  jal       evt_get_variable
 /* 8ABFF4 80240064 0220202D */   daddu    $a0, $s1, $zero
 /* 8ABFF8 80240068 3C018024 */  lui       $at, %hi(mac_01_GetPlayerCoins)
 /* 8ABFFC 8024006C AC2240E8 */  sw        $v0, %lo(mac_01_GetPlayerCoins)($at)
 /* 8AC000 80240070 8E050000 */  lw        $a1, ($s0)
 /* 8AC004 80240074 26100004 */  addiu     $s0, $s0, 4
-/* 8AC008 80240078 0C0B1EAF */  jal       get_variable
+/* 8AC008 80240078 0C0B1EAF */  jal       evt_get_variable
 /* 8AC00C 8024007C 0220202D */   daddu    $a0, $s1, $zero
 /* 8AC010 80240080 3C018024 */  lui       $at, %hi(dgb_09_npcAISettings_802440EC)
 /* 8AC014 80240084 AC2240EC */  sw        $v0, %lo(dgb_09_npcAISettings_802440EC)($at)
 /* 8AC018 80240088 8E050000 */  lw        $a1, ($s0)
 /* 8AC01C 8024008C 26100004 */  addiu     $s0, $s0, 4
-/* 8AC020 80240090 0C0B1EAF */  jal       get_variable
+/* 8AC020 80240090 0C0B1EAF */  jal       evt_get_variable
 /* 8AC024 80240094 0220202D */   daddu    $a0, $s1, $zero
 /* 8AC028 80240098 3C018024 */  lui       $at, %hi(D_802440F0_BC1290)
 /* 8AC02C 8024009C AC2240F0 */  sw        $v0, %lo(D_802440F0_BC1290)($at)
 /* 8AC030 802400A0 8E050000 */  lw        $a1, ($s0)
 /* 8AC034 802400A4 26100004 */  addiu     $s0, $s0, 4
-/* 8AC038 802400A8 0C0B1EAF */  jal       get_variable
+/* 8AC038 802400A8 0C0B1EAF */  jal       evt_get_variable
 /* 8AC03C 802400AC 0220202D */   daddu    $a0, $s1, $zero
 /* 8AC040 802400B0 3C018024 */  lui       $at, %hi(flo_16_npcGroup_802440F4)
 /* 8AC044 802400B4 AC2240F4 */  sw        $v0, %lo(flo_16_npcGroup_802440F4)($at)
 /* 8AC048 802400B8 8E050000 */  lw        $a1, ($s0)
 /* 8AC04C 802400BC 26100004 */  addiu     $s0, $s0, 4
-/* 8AC050 802400C0 0C0B1EAF */  jal       get_variable
+/* 8AC050 802400C0 0C0B1EAF */  jal       evt_get_variable
 /* 8AC054 802400C4 0220202D */   daddu    $a0, $s1, $zero
 /* 8AC058 802400C8 3C018024 */  lui       $at, %hi(D_802440F8)
 /* 8AC05C 802400CC AC2240F8 */  sw        $v0, %lo(D_802440F8)($at)
 /* 8AC060 802400D0 8E050000 */  lw        $a1, ($s0)
 /* 8AC064 802400D4 26100004 */  addiu     $s0, $s0, 4
-/* 8AC068 802400D8 0C0B1EAF */  jal       get_variable
+/* 8AC068 802400D8 0C0B1EAF */  jal       evt_get_variable
 /* 8AC06C 802400DC 0220202D */   daddu    $a0, $s1, $zero
 /* 8AC070 802400E0 3C018024 */  lui       $at, %hi(func_802440FC_80497C)
 /* 8AC074 802400E4 AC2240FC */  sw        $v0, %lo(func_802440FC_80497C)($at)
 /* 8AC078 802400E8 8E050000 */  lw        $a1, ($s0)
-/* 8AC07C 802400EC 0C0B1EAF */  jal       get_variable
+/* 8AC07C 802400EC 0C0B1EAF */  jal       evt_get_variable
 /* 8AC080 802400F0 0220202D */   daddu    $a0, $s1, $zero
 /* 8AC084 802400F4 3C018024 */  lui       $at, %hi(dgb_08_npcAI_80244100)
 /* 8AC088 802400F8 AC224100 */  sw        $v0, %lo(dgb_08_npcAI_80244100)($at)

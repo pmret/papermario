@@ -18,7 +18,7 @@ glabel func_80240728_ACB248
 /* ACB27C 8024075C F7B40038 */  sdc1      $f20, 0x38($sp)
 /* ACB280 80240760 8E70000C */  lw        $s0, 0xc($s3)
 /* ACB284 80240764 8E050000 */  lw        $a1, ($s0)
-/* ACB288 80240768 0C0B1EAF */  jal       get_variable
+/* ACB288 80240768 0C0B1EAF */  jal       evt_get_variable
 /* ACB28C 8024076C 26100004 */   addiu    $s0, $s0, 4
 /* ACB290 80240770 8E150000 */  lw        $s5, ($s0)
 /* ACB294 80240774 26100004 */  addiu     $s0, $s0, 4
@@ -67,17 +67,17 @@ glabel func_80240728_ACB248
 /* ACB33C 8024081C 02A0282D */  daddu     $a1, $s5, $zero
 /* ACB340 80240820 C6540030 */  lwc1      $f20, 0x30($s2)
 /* ACB344 80240824 0280302D */  daddu     $a2, $s4, $zero
-/* ACB348 80240828 0C0B2026 */  jal       set_variable
+/* ACB348 80240828 0C0B2026 */  jal       evt_set_variable
 /* ACB34C 8024082C 4600A501 */   sub.s    $f20, $f20, $f0
 /* ACB350 80240830 0260202D */  daddu     $a0, $s3, $zero
 /* ACB354 80240834 4600B08D */  trunc.w.s $f2, $f22
 /* ACB358 80240838 44061000 */  mfc1      $a2, $f2
-/* ACB35C 8024083C 0C0B2026 */  jal       set_variable
+/* ACB35C 8024083C 0C0B2026 */  jal       evt_set_variable
 /* ACB360 80240840 02C0282D */   daddu    $a1, $s6, $zero
 /* ACB364 80240844 0260202D */  daddu     $a0, $s3, $zero
 /* ACB368 80240848 4600A08D */  trunc.w.s $f2, $f20
 /* ACB36C 8024084C 44061000 */  mfc1      $a2, $f2
-/* ACB370 80240850 0C0B2026 */  jal       set_variable
+/* ACB370 80240850 0C0B2026 */  jal       evt_set_variable
 /* ACB374 80240854 02E0282D */   daddu    $a1, $s7, $zero
 .L80240858:
 /* ACB378 80240858 24020002 */  addiu     $v0, $zero, 2

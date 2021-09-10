@@ -7,7 +7,7 @@ glabel func_80240ED8_801758
 /* 801760 80240EE0 0080802D */  daddu     $s0, $a0, $zero
 /* 801764 80240EE4 3C05F5DE */  lui       $a1, 0xf5de
 /* 801768 80240EE8 AFBF0014 */  sw        $ra, 0x14($sp)
-/* 80176C 80240EEC 0C0B1EAF */  jal       get_variable
+/* 80176C 80240EEC 0C0B1EAF */  jal       evt_get_variable
 /* 801770 80240EF0 34A50180 */   ori      $a1, $a1, 0x180
 /* 801774 80240EF4 0040202D */  daddu     $a0, $v0, $zero
 /* 801778 80240EF8 3C038025 */  lui       $v1, %hi(D_80248714_808F94)
@@ -24,7 +24,7 @@ glabel func_80240ED8_801758
 /* 8017A0 80240F20 0200202D */  daddu     $a0, $s0, $zero
 .L80240F24:
 /* 8017A4 80240F24 3C05F5DE */  lui       $a1, 0xf5de
-/* 8017A8 80240F28 0C0B2026 */  jal       set_variable
+/* 8017A8 80240F28 0C0B2026 */  jal       evt_set_variable
 /* 8017AC 80240F2C 34A502DD */   ori      $a1, $a1, 0x2dd
 /* 8017B0 80240F30 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 8017B4 80240F34 8FB00010 */  lw        $s0, 0x10($sp)

@@ -21,7 +21,7 @@ glabel FlyPartTo
 /* 1AA83C 8027BF5C 10A0008A */  beqz      $a1, .L8027C188
 /* 1AA840 8027BF60 8E71000C */   lw       $s1, 0xc($s3)
 /* 1AA844 8027BF64 8E250000 */  lw        $a1, ($s1)
-/* 1AA848 8027BF68 0C0B1EAF */  jal       get_variable
+/* 1AA848 8027BF68 0C0B1EAF */  jal       evt_get_variable
 /* 1AA84C 8027BF6C 26310004 */   addiu    $s1, $s1, 4
 /* 1AA850 8027BF70 0040802D */  daddu     $s0, $v0, $zero
 /* 1AA854 8027BF74 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -31,7 +31,7 @@ glabel FlyPartTo
 .L8027BF84:
 /* 1AA864 8027BF84 8E250000 */  lw        $a1, ($s1)
 /* 1AA868 8027BF88 26310004 */  addiu     $s1, $s1, 4
-/* 1AA86C 8027BF8C 0C0B1EAF */  jal       get_variable
+/* 1AA86C 8027BF8C 0C0B1EAF */  jal       evt_get_variable
 /* 1AA870 8027BF90 0260202D */   daddu    $a0, $s3, $zero
 /* 1AA874 8027BF94 0200202D */  daddu     $a0, $s0, $zero
 /* 1AA878 8027BF98 0C09A75B */  jal       get_actor
@@ -46,7 +46,7 @@ glabel FlyPartTo
 /* 1AA89C 8027BFBC 8E250000 */  lw        $a1, ($s1)
 /* 1AA8A0 8027BFC0 26310004 */  addiu     $s1, $s1, 4
 /* 1AA8A4 8027BFC4 8E500010 */  lw        $s0, 0x10($s2)
-/* 1AA8A8 8027BFC8 0C0B1EAF */  jal       get_variable
+/* 1AA8A8 8027BFC8 0C0B1EAF */  jal       evt_get_variable
 /* 1AA8AC 8027BFCC 0260202D */   daddu    $a0, $s3, $zero
 /* 1AA8B0 8027BFD0 44820000 */  mtc1      $v0, $f0
 /* 1AA8B4 8027BFD4 00000000 */  nop
@@ -54,7 +54,7 @@ glabel FlyPartTo
 /* 1AA8BC 8027BFDC E600000C */  swc1      $f0, 0xc($s0)
 /* 1AA8C0 8027BFE0 8E250000 */  lw        $a1, ($s1)
 /* 1AA8C4 8027BFE4 26310004 */  addiu     $s1, $s1, 4
-/* 1AA8C8 8027BFE8 0C0B1EAF */  jal       get_variable
+/* 1AA8C8 8027BFE8 0C0B1EAF */  jal       evt_get_variable
 /* 1AA8CC 8027BFEC 0260202D */   daddu    $a0, $s3, $zero
 /* 1AA8D0 8027BFF0 44820000 */  mtc1      $v0, $f0
 /* 1AA8D4 8027BFF4 00000000 */  nop
@@ -62,7 +62,7 @@ glabel FlyPartTo
 /* 1AA8DC 8027BFFC E6000010 */  swc1      $f0, 0x10($s0)
 /* 1AA8E0 8027C000 8E250000 */  lw        $a1, ($s1)
 /* 1AA8E4 8027C004 26310004 */  addiu     $s1, $s1, 4
-/* 1AA8E8 8027C008 0C0B1EAF */  jal       get_variable
+/* 1AA8E8 8027C008 0C0B1EAF */  jal       evt_get_variable
 /* 1AA8EC 8027C00C 0260202D */   daddu    $a0, $s3, $zero
 /* 1AA8F0 8027C010 44820000 */  mtc1      $v0, $f0
 /* 1AA8F4 8027C014 00000000 */  nop
@@ -70,16 +70,16 @@ glabel FlyPartTo
 /* 1AA8FC 8027C01C E6000014 */  swc1      $f0, 0x14($s0)
 /* 1AA900 8027C020 8E250000 */  lw        $a1, ($s1)
 /* 1AA904 8027C024 26310004 */  addiu     $s1, $s1, 4
-/* 1AA908 8027C028 0C0B1EAF */  jal       get_variable
+/* 1AA908 8027C028 0C0B1EAF */  jal       evt_get_variable
 /* 1AA90C 8027C02C 0260202D */   daddu    $a0, $s3, $zero
 /* 1AA910 8027C030 A6020038 */  sh        $v0, 0x38($s0)
 /* 1AA914 8027C034 8E250000 */  lw        $a1, ($s1)
 /* 1AA918 8027C038 26310004 */  addiu     $s1, $s1, 4
-/* 1AA91C 8027C03C 0C0B1EAF */  jal       get_variable
+/* 1AA91C 8027C03C 0C0B1EAF */  jal       evt_get_variable
 /* 1AA920 8027C040 0260202D */   daddu    $a0, $s3, $zero
 /* 1AA924 8027C044 A602003A */  sh        $v0, 0x3a($s0)
 /* 1AA928 8027C048 8E250000 */  lw        $a1, ($s1)
-/* 1AA92C 8027C04C 0C0B1EAF */  jal       get_variable
+/* 1AA92C 8027C04C 0C0B1EAF */  jal       evt_get_variable
 /* 1AA930 8027C050 0260202D */   daddu    $a0, $s3, $zero
 /* 1AA934 8027C054 AE62007C */  sw        $v0, 0x7c($s3)
 /* 1AA938 8027C058 C602000C */  lwc1      $f2, 0xc($s0)

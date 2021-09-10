@@ -24,7 +24,7 @@ glabel func_802404AC_AA31CC
 /* AA31FC 802404DC 00A0882D */   daddu    $s1, $a1, $zero
 /* AA3200 802404E0 0280202D */  daddu     $a0, $s4, $zero
 /* AA3204 802404E4 8E050000 */  lw        $a1, ($s0)
-/* AA3208 802404E8 0C0B1EAF */  jal       get_variable
+/* AA3208 802404E8 0C0B1EAF */  jal       evt_get_variable
 /* AA320C 802404EC 0040982D */   daddu    $s3, $v0, $zero
 /* AA3210 802404F0 1220000C */  beqz      $s1, .L80240524
 /* AA3214 802404F4 2402001E */   addiu    $v0, $zero, 0x1e

@@ -29,7 +29,7 @@ glabel PartnerDamageEnemy
 /* 1AE6F4 8027FE14 26100004 */  addiu     $s0, $s0, 4
 /* 1AE6F8 8027FE18 AE230190 */  sw        $v1, 0x190($s1)
 /* 1AE6FC 8027FE1C 8E050000 */  lw        $a1, ($s0)
-/* 1AE700 8027FE20 0C0B1EAF */  jal       get_variable
+/* 1AE700 8027FE20 0C0B1EAF */  jal       evt_get_variable
 /* 1AE704 8027FE24 26100004 */   addiu    $s0, $s0, 4
 /* 1AE708 8027FE28 A622017E */  sh        $v0, 0x17e($s1)
 /* 1AE70C 8027FE2C A2200198 */  sb        $zero, 0x198($s1)
@@ -146,7 +146,7 @@ glabel PartnerDamageEnemy
 /* 1AE890 8027FFB0 0440000B */  bltz      $v0, .L8027FFE0
 /* 1AE894 8027FFB4 0240202D */   daddu    $a0, $s2, $zero
 /* 1AE898 8027FFB8 0280282D */  daddu     $a1, $s4, $zero
-/* 1AE89C 8027FFBC 0C0B2026 */  jal       set_variable
+/* 1AE89C 8027FFBC 0C0B2026 */  jal       evt_set_variable
 /* 1AE8A0 8027FFC0 0040302D */   daddu    $a2, $v0, $zero
 /* 1AE8A4 8027FFC4 0C0B1069 */  jal       does_script_exist_by_ref
 /* 1AE8A8 8027FFC8 0240202D */   daddu    $a0, $s2, $zero

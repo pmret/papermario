@@ -10,11 +10,11 @@ glabel RemovePartShadow
 /* 19DE90 8026F5B0 AFB00010 */  sw        $s0, 0x10($sp)
 /* 19DE94 8026F5B4 8E50000C */  lw        $s0, 0xc($s2)
 /* 19DE98 8026F5B8 8E050000 */  lw        $a1, ($s0)
-/* 19DE9C 8026F5BC 0C0B1EAF */  jal       get_variable
+/* 19DE9C 8026F5BC 0C0B1EAF */  jal       evt_get_variable
 /* 19DEA0 8026F5C0 26100004 */   addiu    $s0, $s0, 4
 /* 19DEA4 8026F5C4 0040882D */  daddu     $s1, $v0, $zero
 /* 19DEA8 8026F5C8 8E050000 */  lw        $a1, ($s0)
-/* 19DEAC 8026F5CC 0C0B1EAF */  jal       get_variable
+/* 19DEAC 8026F5CC 0C0B1EAF */  jal       evt_get_variable
 /* 19DEB0 8026F5D0 0240202D */   daddu    $a0, $s2, $zero
 /* 19DEB4 8026F5D4 0040282D */  daddu     $a1, $v0, $zero
 /* 19DEB8 8026F5D8 2402FF81 */  addiu     $v0, $zero, -0x7f

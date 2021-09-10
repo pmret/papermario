@@ -12,16 +12,16 @@ glabel func_80241020_B851A0
 /* B851BC 8024103C 1040001B */  beqz      $v0, .L802410AC
 /* B851C0 80241040 26100004 */   addiu    $s0, $s0, 4
 /* B851C4 80241044 8E050000 */  lw        $a1, ($s0)
-/* B851C8 80241048 0C0B1EAF */  jal       get_variable
+/* B851C8 80241048 0C0B1EAF */  jal       evt_get_variable
 /* B851CC 8024104C 26100004 */   addiu    $s0, $s0, 4
 /* B851D0 80241050 AE220070 */  sw        $v0, 0x70($s1)
 /* B851D4 80241054 8E050000 */  lw        $a1, ($s0)
 /* B851D8 80241058 26100004 */  addiu     $s0, $s0, 4
-/* B851DC 8024105C 0C0B1EAF */  jal       get_variable
+/* B851DC 8024105C 0C0B1EAF */  jal       evt_get_variable
 /* B851E0 80241060 0220202D */   daddu    $a0, $s1, $zero
 /* B851E4 80241064 AE220074 */  sw        $v0, 0x74($s1)
 /* B851E8 80241068 8E050000 */  lw        $a1, ($s0)
-/* B851EC 8024106C 0C0B1EAF */  jal       get_variable
+/* B851EC 8024106C 0C0B1EAF */  jal       evt_get_variable
 /* B851F0 80241070 0220202D */   daddu    $a0, $s1, $zero
 /* B851F4 80241074 24040168 */  addiu     $a0, $zero, 0x168
 /* B851F8 80241078 0000282D */  daddu     $a1, $zero, $zero

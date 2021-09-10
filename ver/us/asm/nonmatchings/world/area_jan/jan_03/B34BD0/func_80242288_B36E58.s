@@ -17,7 +17,7 @@ glabel func_80242288_B36E58
 .L802422B8:
 /* B36E88 802422B8 3C05F5DE */  lui       $a1, 0xf5de
 /* B36E8C 802422BC 34A502E0 */  ori       $a1, $a1, 0x2e0
-/* B36E90 802422C0 0C0B1EAF */  jal       get_variable
+/* B36E90 802422C0 0C0B1EAF */  jal       evt_get_variable
 /* B36E94 802422C4 0000202D */   daddu    $a0, $zero, $zero
 /* B36E98 802422C8 3C038024 */  lui       $v1, %hi(D_802477C8_B3C398)
 /* B36E9C 802422CC 00621821 */  addu      $v1, $v1, $v0

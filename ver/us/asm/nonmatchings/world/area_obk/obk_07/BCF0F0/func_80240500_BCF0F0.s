@@ -11,7 +11,7 @@ glabel func_80240500_BCF0F0
 /* BCF108 80240518 0200202D */  daddu     $a0, $s0, $zero
 /* BCF10C 8024051C 3C05FD05 */  lui       $a1, 0xfd05
 /* BCF110 80240520 34A50F86 */  ori       $a1, $a1, 0xf86
-/* BCF114 80240524 0C0B2026 */  jal       set_variable
+/* BCF114 80240524 0C0B2026 */  jal       evt_set_variable
 /* BCF118 80240528 0040302D */   daddu    $a2, $v0, $zero
 /* BCF11C 8024052C 8FBF0014 */  lw        $ra, 0x14($sp)
 /* BCF120 80240530 8FB00010 */  lw        $s0, 0x10($sp)

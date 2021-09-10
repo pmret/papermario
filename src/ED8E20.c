@@ -1,3 +1,4 @@
+#include "dead.h"
 #include "common.h"
 
 INCLUDE_ASM(s32, "ED8E20", func_80240000_ED8E20);

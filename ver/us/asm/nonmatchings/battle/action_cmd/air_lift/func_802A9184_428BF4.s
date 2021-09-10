@@ -12,19 +12,19 @@ glabel func_802A9184_428BF4
 /* 428C10 802A91A0 8E50000C */   lw       $s0, 0xc($s2)
 /* 428C14 802A91A4 0240202D */  daddu     $a0, $s2, $zero
 /* 428C18 802A91A8 8E050000 */  lw        $a1, ($s0)
-/* 428C1C 802A91AC 0C0B1EAF */  jal       get_variable
+/* 428C1C 802A91AC 0C0B1EAF */  jal       evt_get_variable
 /* 428C20 802A91B0 26100004 */   addiu    $s0, $s0, 4
 /* 428C24 802A91B4 3C11802A */  lui       $s1, %hi(gActionCommandStatus)
 /* 428C28 802A91B8 2631FBE0 */  addiu     $s1, $s1, %lo(gActionCommandStatus)
 /* 428C2C 802A91BC A622004E */  sh        $v0, 0x4e($s1)
 /* 428C30 802A91C0 8E050000 */  lw        $a1, ($s0)
 /* 428C34 802A91C4 26100004 */  addiu     $s0, $s0, 4
-/* 428C38 802A91C8 0C0B1EAF */  jal       get_variable
+/* 428C38 802A91C8 0C0B1EAF */  jal       evt_get_variable
 /* 428C3C 802A91CC 0240202D */   daddu    $a0, $s2, $zero
 /* 428C40 802A91D0 A6220052 */  sh        $v0, 0x52($s1)
 /* 428C44 802A91D4 8E050000 */  lw        $a1, ($s0)
 /* 428C48 802A91D8 26100004 */  addiu     $s0, $s0, 4
-/* 428C4C 802A91DC 0C0B1EAF */  jal       get_variable
+/* 428C4C 802A91DC 0C0B1EAF */  jal       evt_get_variable
 /* 428C50 802A91E0 0240202D */   daddu    $a0, $s2, $zero
 /* 428C54 802A91E4 00022400 */  sll       $a0, $v0, 0x10
 /* 428C58 802A91E8 00042403 */  sra       $a0, $a0, 0x10
@@ -32,7 +32,7 @@ glabel func_802A9184_428BF4
 /* 428C60 802A91F0 A6220050 */   sh       $v0, 0x50($s1)
 /* 428C64 802A91F4 A6220050 */  sh        $v0, 0x50($s1)
 /* 428C68 802A91F8 8E050000 */  lw        $a1, ($s0)
-/* 428C6C 802A91FC 0C0B1EAF */  jal       get_variable
+/* 428C6C 802A91FC 0C0B1EAF */  jal       evt_get_variable
 /* 428C70 802A9200 0240202D */   daddu    $a0, $s2, $zero
 /* 428C74 802A9204 3C05FFFF */  lui       $a1, 0xffff
 /* 428C78 802A9208 3C04800E */  lui       $a0, %hi(gBattleStatus)

@@ -15,13 +15,13 @@ glabel func_80240F40_EB9D90
 /* EB9DB8 80240F68 4600008D */  trunc.w.s $f2, $f0
 /* EB9DBC 80240F6C 44061000 */  mfc1      $a2, $f2
 /* EB9DC0 80240F70 8C450000 */  lw        $a1, ($v0)
-/* EB9DC4 80240F74 0C0B551A */  jal       dead_set_variable
+/* EB9DC4 80240F74 0C0B551A */  jal       dead_evt_set_variable
 /* EB9DC8 80240F78 8C510004 */   lw       $s1, 4($v0)
 /* EB9DCC 80240F7C 0200202D */  daddu     $a0, $s0, $zero
 /* EB9DD0 80240F80 C6400080 */  lwc1      $f0, 0x80($s2)
 /* EB9DD4 80240F84 4600008D */  trunc.w.s $f2, $f0
 /* EB9DD8 80240F88 44061000 */  mfc1      $a2, $f2
-/* EB9DDC 80240F8C 0C0B551A */  jal       dead_set_variable
+/* EB9DDC 80240F8C 0C0B551A */  jal       dead_evt_set_variable
 /* EB9DE0 80240F90 0220282D */   daddu    $a1, $s1, $zero
 /* EB9DE4 80240F94 8FBF001C */  lw        $ra, 0x1c($sp)
 /* EB9DE8 80240F98 8FB20018 */  lw        $s2, 0x18($sp)

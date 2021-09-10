@@ -25,7 +25,7 @@ glabel func_80242014_DCECE4
 /* DCED18 80242048 8E63000C */  lw        $v1, 0xc($s3)
 /* DCED1C 8024204C 0260202D */  daddu     $a0, $s3, $zero
 /* DCED20 80242050 8C650000 */  lw        $a1, ($v1)
-/* DCED24 80242054 0C0B1EAF */  jal       get_variable
+/* DCED24 80242054 0C0B1EAF */  jal       evt_get_variable
 /* DCED28 80242058 0040902D */   daddu    $s2, $v0, $zero
 /* DCED2C 8024205C AFA00018 */  sw        $zero, 0x18($sp)
 /* DCED30 80242060 8E2300D0 */  lw        $v1, 0xd0($s1)

@@ -29,22 +29,22 @@ glabel func_8005DB00
 .L8005DB5C:
 /* 38F5C 8005DB5C 0240202D */  daddu     $a0, $s2, $zero
 /* 38F60 8005DB60 3C05FE36 */  lui       $a1, 0xfe36
-/* 38F64 8005DB64 0C0B210B */  jal       get_float_variable
+/* 38F64 8005DB64 0C0B210B */  jal       evt_get_float_variable
 /* 38F68 8005DB68 34A53C80 */   ori      $a1, $a1, 0x3c80
 /* 38F6C 8005DB6C 0240202D */  daddu     $a0, $s2, $zero
 /* 38F70 8005DB70 3C05FE36 */  lui       $a1, 0xfe36
 /* 38F74 8005DB74 34A53C81 */  ori       $a1, $a1, 0x3c81
-/* 38F78 8005DB78 0C0B1EAF */  jal       get_variable
+/* 38F78 8005DB78 0C0B1EAF */  jal       evt_get_variable
 /* 38F7C 8005DB7C E6200010 */   swc1     $f0, 0x10($s1)
 /* 38F80 8005DB80 0240202D */  daddu     $a0, $s2, $zero
 /* 38F84 8005DB84 3C05FE36 */  lui       $a1, 0xfe36
 /* 38F88 8005DB88 34A53C82 */  ori       $a1, $a1, 0x3c82
-/* 38F8C 8005DB8C 0C0B1EAF */  jal       get_variable
+/* 38F8C 8005DB8C 0C0B1EAF */  jal       evt_get_variable
 /* 38F90 8005DB90 A622008E */   sh       $v0, 0x8e($s1)
 /* 38F94 8005DB94 0240202D */  daddu     $a0, $s2, $zero
 /* 38F98 8005DB98 3C05FE36 */  lui       $a1, 0xfe36
 /* 38F9C 8005DB9C 34A53C83 */  ori       $a1, $a1, 0x3c83
-/* 38FA0 8005DBA0 0C0B1EAF */  jal       get_variable
+/* 38FA0 8005DBA0 0C0B1EAF */  jal       evt_get_variable
 /* 38FA4 8005DBA4 AE420074 */   sw       $v0, 0x74($s2)
 /* 38FA8 8005DBA8 00021FC2 */  srl       $v1, $v0, 0x1f
 /* 38FAC 8005DBAC 00621821 */  addu      $v1, $v1, $v0

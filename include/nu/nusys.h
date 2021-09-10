@@ -676,7 +676,7 @@ extern u16*		nuGfxZBuffer;	/* Pointer to the Z buffer */
 extern volatile u32	nuGfxTaskSpool; /* Number of tasks in queue */
 extern u32		nuGfxDisplay;	/* Display on/off flag  */
 extern u32		nuGfxCfbCounter; /* For frame buffer swapping */
-extern OSMesgQueue	nuGfxMesgQ;
+//extern OSMesgQueue	nuGfxMesgQ;
 extern OSThread		nuGfxThread;			/* graphic thread */
 
 /*--------------------------------------*/

@@ -22,21 +22,21 @@ glabel ShakeCam
 /* EFC80 802CB2D0 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* EFC84 802CB2D4 8EB0000C */  lw        $s0, 0xc($s5)
 /* EFC88 802CB2D8 8E050000 */  lw        $a1, ($s0)
-/* EFC8C 802CB2DC 0C0B1EAF */  jal       get_variable
+/* EFC8C 802CB2DC 0C0B1EAF */  jal       evt_get_variable
 /* EFC90 802CB2E0 26100004 */   addiu    $s0, $s0, 4
 /* EFC94 802CB2E4 8E050000 */  lw        $a1, ($s0)
 /* EFC98 802CB2E8 26100004 */  addiu     $s0, $s0, 4
 /* EFC9C 802CB2EC 02A0202D */  daddu     $a0, $s5, $zero
-/* EFCA0 802CB2F0 0C0B1EAF */  jal       get_variable
+/* EFCA0 802CB2F0 0C0B1EAF */  jal       evt_get_variable
 /* EFCA4 802CB2F4 0040882D */   daddu    $s1, $v0, $zero
 /* EFCA8 802CB2F8 8E050000 */  lw        $a1, ($s0)
 /* EFCAC 802CB2FC 26100004 */  addiu     $s0, $s0, 4
 /* EFCB0 802CB300 02A0202D */  daddu     $a0, $s5, $zero
-/* EFCB4 802CB304 0C0B1EAF */  jal       get_variable
+/* EFCB4 802CB304 0C0B1EAF */  jal       evt_get_variable
 /* EFCB8 802CB308 0040982D */   daddu    $s3, $v0, $zero
 /* EFCBC 802CB30C 0040A02D */  daddu     $s4, $v0, $zero
 /* EFCC0 802CB310 8E050000 */  lw        $a1, ($s0)
-/* EFCC4 802CB314 0C0B210B */  jal       get_float_variable
+/* EFCC4 802CB314 0C0B210B */  jal       evt_get_float_variable
 /* EFCC8 802CB318 02A0202D */   daddu    $a0, $s5, $zero
 /* EFCCC 802CB31C 3C04800B */  lui       $a0, %hi(gCameras)
 /* EFCD0 802CB320 24841D80 */  addiu     $a0, $a0, %lo(gCameras)

@@ -9,7 +9,7 @@ glabel GetActorDefenseBoost
 /* 19E55C 8026FC7C AFB00010 */  sw        $s0, 0x10($sp)
 /* 19E560 8026FC80 8E30000C */  lw        $s0, 0xc($s1)
 /* 19E564 8026FC84 8E050000 */  lw        $a1, ($s0)
-/* 19E568 8026FC88 0C0B1EAF */  jal       get_variable
+/* 19E568 8026FC88 0C0B1EAF */  jal       evt_get_variable
 /* 19E56C 8026FC8C 26100004 */   addiu    $s0, $s0, 4
 /* 19E570 8026FC90 0040202D */  daddu     $a0, $v0, $zero
 /* 19E574 8026FC94 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -21,7 +21,7 @@ glabel GetActorDefenseBoost
 /* 19E588 8026FCA8 8E100000 */   lw       $s0, ($s0)
 /* 19E58C 8026FCAC 0220202D */  daddu     $a0, $s1, $zero
 /* 19E590 8026FCB0 80460222 */  lb        $a2, 0x222($v0)
-/* 19E594 8026FCB4 0C0B2026 */  jal       set_variable
+/* 19E594 8026FCB4 0C0B2026 */  jal       evt_set_variable
 /* 19E598 8026FCB8 0200282D */   daddu    $a1, $s0, $zero
 /* 19E59C 8026FCBC 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 19E5A0 8026FCC0 8FB10014 */  lw        $s1, 0x14($sp)

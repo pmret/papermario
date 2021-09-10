@@ -2,6 +2,11 @@
 #include "sprite/npc/world_goombario.h"
 #include "goombario.h"
 
+ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall);
+ApiStatus func_802BD1D0_3170F0(Evt* script, s32 isInitialCall);
+ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall);
+ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall);
+
 s32 func_802BD100_317020(s32 arg0) {
     s32 i;
 
@@ -96,20 +101,20 @@ EvtSource world_goombario_update = SCRIPT({
 });
 
 EvtSource world_goombario_use_ability = SCRIPT({
-    func_802BD5D8_3174F8(); // returns tattle message id on SI_VAR(0), and something else on SI_VAR(1)
+    func_802BD5D8_3174F8(); // returns tattle message id on EVT_VAR(0), and something else on EVT_VAR(1)
 
-    if (SI_VAR(0) == -1) {
+    if (EVT_VAR(0) == -1) {
         return;
     }
 
-    if (SI_VAR(0) == 0) {
+    if (EVT_VAR(0) == 0) {
         func_802BDB30_317A50();
         return;
     }
 
-    if (SI_VAR(1) == 0) {
+    if (EVT_VAR(1) == 0) {
         SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk, NPC_ANIM_world_goombario_normal_idle, 0,
-                      SI_VAR(0));
+                      EVT_VAR(0));
     }
 
     sleep 1;

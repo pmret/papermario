@@ -23,7 +23,7 @@ glabel func_80240208_926BF8
 /* 926C40 80240250 3C05FE36 */  lui       $a1, 0xfe36
 /* 926C44 80240254 34A53C80 */  ori       $a1, $a1, 0x3c80
 /* 926C48 80240258 44060000 */  mfc1      $a2, $f0
-/* 926C4C 8024025C 0C0B2190 */  jal       set_float_variable
+/* 926C4C 8024025C 0C0B2190 */  jal       evt_set_float_variable
 /* 926C50 80240260 0200202D */   daddu    $a0, $s0, $zero
 /* 926C54 80240264 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 926C58 80240268 8FB00010 */  lw        $s0, 0x10($sp)

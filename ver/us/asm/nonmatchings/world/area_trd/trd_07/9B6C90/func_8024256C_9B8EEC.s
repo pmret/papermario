@@ -39,7 +39,7 @@ glabel func_8024256C_9B8EEC
 /* 9B8F60 802425E0 25290004 */   addiu    $t1, $t1, 4
 .L802425E4:
 /* 9B8F64 802425E4 8CA50000 */  lw        $a1, ($a1)
-/* 9B8F68 802425E8 0C0B2026 */  jal       set_variable
+/* 9B8F68 802425E8 0C0B2026 */  jal       evt_set_variable
 /* 9B8F6C 802425EC 00000000 */   nop
 /* 9B8F70 802425F0 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 9B8F74 802425F4 24020002 */  addiu     $v0, $zero, 2

@@ -14,21 +14,21 @@ glabel func_80240DE4_AEE1F4
 /* AEE218 80240E08 8E140000 */  lw        $s4, ($s0)
 /* AEE21C 80240E0C 26100004 */  addiu     $s0, $s0, 4
 /* AEE220 80240E10 8E050000 */  lw        $a1, ($s0)
-/* AEE224 80240E14 0C0B1EAF */  jal       get_variable
+/* AEE224 80240E14 0C0B1EAF */  jal       evt_get_variable
 /* AEE228 80240E18 26100004 */   addiu    $s0, $s0, 4
 /* AEE22C 80240E1C 8E050000 */  lw        $a1, ($s0)
 /* AEE230 80240E20 26100004 */  addiu     $s0, $s0, 4
 /* AEE234 80240E24 0220202D */  daddu     $a0, $s1, $zero
-/* AEE238 80240E28 0C0B1EAF */  jal       get_variable
+/* AEE238 80240E28 0C0B1EAF */  jal       evt_get_variable
 /* AEE23C 80240E2C 0040982D */   daddu    $s3, $v0, $zero
 /* AEE240 80240E30 8E050000 */  lw        $a1, ($s0)
 /* AEE244 80240E34 26100004 */  addiu     $s0, $s0, 4
 /* AEE248 80240E38 0220202D */  daddu     $a0, $s1, $zero
-/* AEE24C 80240E3C 0C0B1EAF */  jal       get_variable
+/* AEE24C 80240E3C 0C0B1EAF */  jal       evt_get_variable
 /* AEE250 80240E40 0040902D */   daddu    $s2, $v0, $zero
 /* AEE254 80240E44 0220202D */  daddu     $a0, $s1, $zero
 /* AEE258 80240E48 8E050000 */  lw        $a1, ($s0)
-/* AEE25C 80240E4C 0C0B1EAF */  jal       get_variable
+/* AEE25C 80240E4C 0C0B1EAF */  jal       evt_get_variable
 /* AEE260 80240E50 0040802D */   daddu    $s0, $v0, $zero
 /* AEE264 80240E54 44901000 */  mtc1      $s0, $f2
 /* AEE268 80240E58 00000000 */  nop
@@ -48,7 +48,7 @@ glabel func_80240DE4_AEE1F4
 /* AEE2A0 80240E90 0220202D */  daddu     $a0, $s1, $zero
 /* AEE2A4 80240E94 4600008D */  trunc.w.s $f2, $f0
 /* AEE2A8 80240E98 44061000 */  mfc1      $a2, $f2
-/* AEE2AC 80240E9C 0C0B2026 */  jal       set_variable
+/* AEE2AC 80240E9C 0C0B2026 */  jal       evt_set_variable
 /* AEE2B0 80240EA0 0280282D */   daddu    $a1, $s4, $zero
 /* AEE2B4 80240EA4 8FBF0024 */  lw        $ra, 0x24($sp)
 /* AEE2B8 80240EA8 8FB40020 */  lw        $s4, 0x20($sp)

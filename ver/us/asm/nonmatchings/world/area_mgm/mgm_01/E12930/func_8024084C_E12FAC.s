@@ -12,7 +12,7 @@ glabel func_8024084C_E12FAC
 /* E12FC8 80240868 8E23000C */  lw        $v1, 0xc($s1)
 /* E12FCC 8024086C 8C650000 */  lw        $a1, ($v1)
 /* E12FD0 80240870 8C500080 */  lw        $s0, 0x80($v0)
-/* E12FD4 80240874 0C0B1EAF */  jal       get_variable
+/* E12FD4 80240874 0C0B1EAF */  jal       evt_get_variable
 /* E12FD8 80240878 0220202D */   daddu    $a0, $s1, $zero
 /* E12FDC 8024087C 00021840 */  sll       $v1, $v0, 1
 /* E12FE0 80240880 00621821 */  addu      $v1, $v1, $v0
@@ -36,7 +36,7 @@ glabel func_8024084C_E12FAC
 /* E13024 802408C4 34A53C83 */  ori       $a1, $a1, 0x3c83
 /* E13028 802408C8 0000302D */  daddu     $a2, $zero, $zero
 .L802408CC:
-/* E1302C 802408CC 0C0B2026 */  jal       set_variable
+/* E1302C 802408CC 0C0B2026 */  jal       evt_set_variable
 /* E13030 802408D0 00000000 */   nop
 /* E13034 802408D4 8FBF0018 */  lw        $ra, 0x18($sp)
 /* E13038 802408D8 8FB10014 */  lw        $s1, 0x14($sp)

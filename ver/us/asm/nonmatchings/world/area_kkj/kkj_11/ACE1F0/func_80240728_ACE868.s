@@ -18,7 +18,7 @@ glabel func_80240728_ACE868
 /* ACE89C 8024075C F7B40038 */  sdc1      $f20, 0x38($sp)
 /* ACE8A0 80240760 8E70000C */  lw        $s0, 0xc($s3)
 /* ACE8A4 80240764 8E050000 */  lw        $a1, ($s0)
-/* ACE8A8 80240768 0C0B1EAF */  jal       get_variable
+/* ACE8A8 80240768 0C0B1EAF */  jal       evt_get_variable
 /* ACE8AC 8024076C 26100004 */   addiu    $s0, $s0, 4
 /* ACE8B0 80240770 8E150000 */  lw        $s5, ($s0)
 /* ACE8B4 80240774 26100004 */  addiu     $s0, $s0, 4
@@ -67,17 +67,17 @@ glabel func_80240728_ACE868
 /* ACE95C 8024081C 02A0282D */  daddu     $a1, $s5, $zero
 /* ACE960 80240820 C6540030 */  lwc1      $f20, 0x30($s2)
 /* ACE964 80240824 0280302D */  daddu     $a2, $s4, $zero
-/* ACE968 80240828 0C0B2026 */  jal       set_variable
+/* ACE968 80240828 0C0B2026 */  jal       evt_set_variable
 /* ACE96C 8024082C 4600A501 */   sub.s    $f20, $f20, $f0
 /* ACE970 80240830 0260202D */  daddu     $a0, $s3, $zero
 /* ACE974 80240834 4600B08D */  trunc.w.s $f2, $f22
 /* ACE978 80240838 44061000 */  mfc1      $a2, $f2
-/* ACE97C 8024083C 0C0B2026 */  jal       set_variable
+/* ACE97C 8024083C 0C0B2026 */  jal       evt_set_variable
 /* ACE980 80240840 02C0282D */   daddu    $a1, $s6, $zero
 /* ACE984 80240844 0260202D */  daddu     $a0, $s3, $zero
 /* ACE988 80240848 4600A08D */  trunc.w.s $f2, $f20
 /* ACE98C 8024084C 44061000 */  mfc1      $a2, $f2
-/* ACE990 80240850 0C0B2026 */  jal       set_variable
+/* ACE990 80240850 0C0B2026 */  jal       evt_set_variable
 /* ACE994 80240854 02E0282D */   daddu    $a1, $s7, $zero
 .L80240858:
 /* ACE998 80240858 24020002 */  addiu     $v0, $zero, 2

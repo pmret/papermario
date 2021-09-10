@@ -527,8 +527,8 @@ glabel L80135B24_CC224
 /* CC540 80135E40 0804D8DF */  j         L8013637C_CCA7C
 /* CC544 80135E44 A222001A */   sb       $v0, 0x1a($s1)
 glabel L80135E48_CC548
-/* CC548 80135E48 3C038016 */  lui       $v1, %hi(gUIPanels)
-/* CC54C 80135E4C 24639D50 */  addiu     $v1, $v1, %lo(gUIPanels)
+/* CC548 80135E48 3C038016 */  lui       $v1, %hi(gWindows)
+/* CC54C 80135E4C 24639D50 */  addiu     $v1, $v1, %lo(gWindows)
 /* CC550 80135E50 90620180 */  lbu       $v0, 0x180($v1)
 /* CC554 80135E54 30420008 */  andi      $v0, $v0, 8
 /* CC558 80135E58 14400148 */  bnez      $v0, L8013637C_CCA7C
@@ -549,7 +549,7 @@ glabel L80135E78_CC578
 /* CC590 80135E90 10400009 */  beqz      $v0, .L80135EB8
 /* CC594 80135E94 0000202D */   daddu    $a0, $zero, $zero
 /* CC598 80135E98 3C05F840 */  lui       $a1, 0xf840
-/* CC59C 80135E9C 0C0B1EAF */  jal       get_variable
+/* CC59C 80135E9C 0C0B1EAF */  jal       evt_get_variable
 /* CC5A0 80135EA0 34A55BE1 */   ori      $a1, $a1, 0x5be1
 /* CC5A4 80135EA4 14400004 */  bnez      $v0, .L80135EB8
 /* CC5A8 80135EA8 0000202D */   daddu    $a0, $zero, $zero
@@ -563,7 +563,7 @@ glabel L80135E78_CC578
 /* CC5C4 80135EC4 24020009 */   addiu    $v0, $zero, 9
 /* CC5C8 80135EC8 0000202D */  daddu     $a0, $zero, $zero
 /* CC5CC 80135ECC 3C05F840 */  lui       $a1, 0xf840
-/* CC5D0 80135ED0 0C0B1EAF */  jal       get_variable
+/* CC5D0 80135ED0 0C0B1EAF */  jal       evt_get_variable
 /* CC5D4 80135ED4 34A55BE5 */   ori      $a1, $a1, 0x5be5
 /* CC5D8 80135ED8 14400009 */  bnez      $v0, .L80135F00
 /* CC5DC 80135EDC 24020009 */   addiu    $v0, $zero, 9
@@ -571,7 +571,7 @@ glabel L80135E78_CC578
 /* CC5E4 80135EE4 3C05F840 */  lui       $a1, 0xf840
 /* CC5E8 80135EE8 34A55BE5 */  ori       $a1, $a1, 0x5be5
 .L80135EEC:
-/* CC5EC 80135EEC 0C0B2026 */  jal       set_variable
+/* CC5EC 80135EEC 0C0B2026 */  jal       evt_set_variable
 /* CC5F0 80135EF0 24060001 */   addiu    $a2, $zero, 1
 /* CC5F4 80135EF4 24020005 */  addiu     $v0, $zero, 5
 /* CC5F8 80135EF8 0804D8DF */  j         L8013637C_CCA7C
@@ -599,7 +599,7 @@ glabel L80135F08_CC608
 .L80135F44:
 /* CC644 80135F44 3C058015 */  lui       $a1, %hi(D_801568F8)
 /* CC648 80135F48 24A568F8 */  addiu     $a1, $a1, %lo(D_801568F8)
-/* CC64C 80135F4C 0C049640 */  jal       msg_get_printer_for_string
+/* CC64C 80135F4C 0C049640 */  jal       msg_get_printer_for_msg
 /* CC650 80135F50 00000000 */   nop
 /* CC654 80135F54 0040202D */  daddu     $a0, $v0, $zero
 /* CC658 80135F58 0000282D */  daddu     $a1, $zero, $zero
@@ -718,8 +718,8 @@ glabel L80135FE8_CC6E8
 /* CC804 80136104 0804D8DF */  j         L8013637C_CCA7C
 /* CC808 80136108 A222001A */   sb       $v0, 0x1a($s1)
 glabel L8013610C_CC80C
-/* CC80C 8013610C 3C038016 */  lui       $v1, %hi(gUIPanels)
-/* CC810 80136110 24639D50 */  addiu     $v1, $v1, %lo(gUIPanels)
+/* CC80C 8013610C 3C038016 */  lui       $v1, %hi(gWindows)
+/* CC810 80136110 24639D50 */  addiu     $v1, $v1, %lo(gWindows)
 /* CC814 80136114 90620180 */  lbu       $v0, 0x180($v1)
 /* CC818 80136118 30420008 */  andi      $v0, $v0, 8
 /* CC81C 8013611C 14400097 */  bnez      $v0, L8013637C_CCA7C
@@ -837,8 +837,8 @@ glabel L8013629C_CC99C
 /* CC9C8 801362C8 0804D8DF */  j         L8013637C_CCA7C
 /* CC9CC 801362CC A222001A */   sb       $v0, 0x1a($s1)
 glabel L801362D0_CC9D0
-/* CC9D0 801362D0 3C038016 */  lui       $v1, %hi(gUIPanels)
-/* CC9D4 801362D4 24639D50 */  addiu     $v1, $v1, %lo(gUIPanels)
+/* CC9D0 801362D0 3C038016 */  lui       $v1, %hi(gWindows)
+/* CC9D4 801362D4 24639D50 */  addiu     $v1, $v1, %lo(gWindows)
 /* CC9D8 801362D8 90620180 */  lbu       $v0, 0x180($v1)
 /* CC9DC 801362DC 30420008 */  andi      $v0, $v0, 8
 /* CC9E0 801362E0 14400026 */  bnez      $v0, L8013637C_CCA7C

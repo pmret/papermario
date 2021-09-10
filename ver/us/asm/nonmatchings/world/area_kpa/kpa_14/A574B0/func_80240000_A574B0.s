@@ -6,7 +6,7 @@ glabel func_80240000_A574B0
 /* A574B4 80240004 AFBF0010 */  sw        $ra, 0x10($sp)
 /* A574B8 80240008 3C05F840 */  lui       $a1, 0xf840
 /* A574BC 8024000C 34A56194 */  ori       $a1, $a1, 0x6194
-/* A574C0 80240010 0C0B1EAF */  jal       get_variable
+/* A574C0 80240010 0C0B1EAF */  jal       evt_get_variable
 /* A574C4 80240014 0000202D */   daddu    $a0, $zero, $zero
 /* A574C8 80240018 0040182D */  daddu     $v1, $v0, $zero
 /* A574CC 8024001C 3C020019 */  lui       $v0, 0x19

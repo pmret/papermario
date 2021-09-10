@@ -19,7 +19,7 @@ glabel func_80242C78_854DE8
 /* 854E20 80242CB0 12000010 */  beqz      $s0, .L80242CF4
 /* 854E24 80242CB4 0040882D */   daddu    $s1, $v0, $zero
 /* 854E28 80242CB8 8E450000 */  lw        $a1, ($s2)
-/* 854E2C 80242CBC 0C0B1EAF */  jal       get_variable
+/* 854E2C 80242CBC 0C0B1EAF */  jal       evt_get_variable
 /* 854E30 80242CC0 0260202D */   daddu    $a0, $s3, $zero
 /* 854E34 80242CC4 0040182D */  daddu     $v1, $v0, $zero
 /* 854E38 80242CC8 10600006 */  beqz      $v1, .L80242CE4

@@ -10,16 +10,16 @@ glabel func_80240818_D7F578
 /* D7F58C 8024082C F7B40020 */  sdc1      $f20, 0x20($sp)
 /* D7F590 80240830 8E30000C */  lw        $s0, 0xc($s1)
 /* D7F594 80240834 8E050000 */  lw        $a1, ($s0)
-/* D7F598 80240838 0C0B1EAF */  jal       get_variable
+/* D7F598 80240838 0C0B1EAF */  jal       evt_get_variable
 /* D7F59C 8024083C 26100004 */   addiu    $s0, $s0, 4
 /* D7F5A0 80240840 0220202D */  daddu     $a0, $s1, $zero
 /* D7F5A4 80240844 8E050000 */  lw        $a1, ($s0)
-/* D7F5A8 80240848 0C0B210B */  jal       get_float_variable
+/* D7F5A8 80240848 0C0B210B */  jal       evt_get_float_variable
 /* D7F5AC 8024084C 0040802D */   daddu    $s0, $v0, $zero
 /* D7F5B0 80240850 0220202D */  daddu     $a0, $s1, $zero
 /* D7F5B4 80240854 3C05FD05 */  lui       $a1, 0xfd05
 /* D7F5B8 80240858 34A50F80 */  ori       $a1, $a1, 0xf80
-/* D7F5BC 8024085C 0C0B1EAF */  jal       get_variable
+/* D7F5BC 8024085C 0C0B1EAF */  jal       evt_get_variable
 /* D7F5C0 80240860 46000506 */   mov.s    $f20, $f0
 /* D7F5C4 80240864 00101840 */  sll       $v1, $s0, 1
 /* D7F5C8 80240868 00701821 */  addu      $v1, $v1, $s0

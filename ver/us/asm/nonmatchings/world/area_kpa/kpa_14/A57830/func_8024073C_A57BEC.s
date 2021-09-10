@@ -10,16 +10,16 @@ glabel func_8024073C_A57BEC
 /* A57C00 80240750 AFB00010 */  sw        $s0, 0x10($sp)
 /* A57C04 80240754 8E30000C */  lw        $s0, 0xc($s1)
 /* A57C08 80240758 8E050000 */  lw        $a1, ($s0)
-/* A57C0C 8024075C 0C0B1EAF */  jal       get_variable
+/* A57C0C 8024075C 0C0B1EAF */  jal       evt_get_variable
 /* A57C10 80240760 26100004 */   addiu    $s0, $s0, 4
 /* A57C14 80240764 8E050000 */  lw        $a1, ($s0)
 /* A57C18 80240768 26100004 */  addiu     $s0, $s0, 4
 /* A57C1C 8024076C 0220202D */  daddu     $a0, $s1, $zero
-/* A57C20 80240770 0C0B1EAF */  jal       get_variable
+/* A57C20 80240770 0C0B1EAF */  jal       evt_get_variable
 /* A57C24 80240774 0040902D */   daddu    $s2, $v0, $zero
 /* A57C28 80240778 0220202D */  daddu     $a0, $s1, $zero
 /* A57C2C 8024077C 8E050000 */  lw        $a1, ($s0)
-/* A57C30 80240780 0C0B1EAF */  jal       get_variable
+/* A57C30 80240780 0C0B1EAF */  jal       evt_get_variable
 /* A57C34 80240784 0040802D */   daddu    $s0, $v0, $zero
 /* A57C38 80240788 0040202D */  daddu     $a0, $v0, $zero
 /* A57C3C 8024078C 3C038016 */  lui       $v1, %hi(gCollisionStatus)

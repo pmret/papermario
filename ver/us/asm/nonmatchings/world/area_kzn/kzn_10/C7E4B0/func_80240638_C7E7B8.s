@@ -9,16 +9,16 @@ glabel func_80240638_C7E7B8
 /* C7E7C8 80240648 AFB00018 */  sw        $s0, 0x18($sp)
 /* C7E7CC 8024064C 8E30000C */  lw        $s0, 0xc($s1)
 /* C7E7D0 80240650 8E050000 */  lw        $a1, ($s0)
-/* C7E7D4 80240654 0C0B1EAF */  jal       get_variable
+/* C7E7D4 80240654 0C0B1EAF */  jal       evt_get_variable
 /* C7E7D8 80240658 26100004 */   addiu    $s0, $s0, 4
 /* C7E7DC 8024065C AE220070 */  sw        $v0, 0x70($s1)
 /* C7E7E0 80240660 8E050000 */  lw        $a1, ($s0)
 /* C7E7E4 80240664 26100004 */  addiu     $s0, $s0, 4
-/* C7E7E8 80240668 0C0B1EAF */  jal       get_variable
+/* C7E7E8 80240668 0C0B1EAF */  jal       evt_get_variable
 /* C7E7EC 8024066C 0220202D */   daddu    $a0, $s1, $zero
 /* C7E7F0 80240670 AE220074 */  sw        $v0, 0x74($s1)
 /* C7E7F4 80240674 8E050000 */  lw        $a1, ($s0)
-/* C7E7F8 80240678 0C0B1EAF */  jal       get_variable
+/* C7E7F8 80240678 0C0B1EAF */  jal       evt_get_variable
 /* C7E7FC 8024067C 0220202D */   daddu    $a0, $s1, $zero
 /* C7E800 80240680 24040052 */  addiu     $a0, $zero, 0x52
 /* C7E804 80240684 0000282D */  daddu     $a1, $zero, $zero

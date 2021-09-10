@@ -25,7 +25,7 @@ glabel func_80240238_DB24F8
 /* DB252C 8024026C 8E63000C */  lw        $v1, 0xc($s3)
 /* DB2530 80240270 0260202D */  daddu     $a0, $s3, $zero
 /* DB2534 80240274 8C650000 */  lw        $a1, ($v1)
-/* DB2538 80240278 0C0B1EAF */  jal       get_variable
+/* DB2538 80240278 0C0B1EAF */  jal       evt_get_variable
 /* DB253C 8024027C 0040902D */   daddu    $s2, $v0, $zero
 /* DB2540 80240280 AFA00018 */  sw        $zero, 0x18($sp)
 /* DB2544 80240284 8E2300D0 */  lw        $v1, 0xd0($s1)

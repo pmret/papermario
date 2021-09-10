@@ -9,11 +9,11 @@ glabel SetPushBlockFallEffect
 /* 7E463C 802837BC AFB00010 */  sw        $s0, 0x10($sp)
 /* 7E4640 802837C0 8E30000C */  lw        $s0, 0xc($s1)
 /* 7E4644 802837C4 8E050000 */  lw        $a1, ($s0)
-/* 7E4648 802837C8 0C0B1EAF */  jal       get_variable
+/* 7E4648 802837C8 0C0B1EAF */  jal       evt_get_variable
 /* 7E464C 802837CC 26100004 */   addiu    $s0, $s0, 4
 /* 7E4650 802837D0 0220202D */  daddu     $a0, $s1, $zero
 /* 7E4654 802837D4 8E050000 */  lw        $a1, ($s0)
-/* 7E4658 802837D8 0C0B1EAF */  jal       get_variable
+/* 7E4658 802837D8 0C0B1EAF */  jal       evt_get_variable
 /* 7E465C 802837DC 0040802D */   daddu    $s0, $v0, $zero
 /* 7E4660 802837E0 00108080 */  sll       $s0, $s0, 2
 /* 7E4664 802837E4 3C03802E */  lui       $v1, %hi(D_802DBC88)

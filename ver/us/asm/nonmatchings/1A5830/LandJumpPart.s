@@ -17,11 +17,11 @@ glabel LandJumpPart
 /* 1A9468 8027AB88 00000000 */   nop
 /* 1A946C 8027AB8C 8E250000 */  lw        $a1, ($s1)
 /* 1A9470 8027AB90 26310004 */  addiu     $s1, $s1, 4
-/* 1A9474 8027AB94 0C0B1EAF */  jal       get_variable
+/* 1A9474 8027AB94 0C0B1EAF */  jal       evt_get_variable
 /* 1A9478 8027AB98 0240202D */   daddu    $a0, $s2, $zero
 /* 1A947C 8027AB9C 0040802D */  daddu     $s0, $v0, $zero
 /* 1A9480 8027ABA0 8E250000 */  lw        $a1, ($s1)
-/* 1A9484 8027ABA4 0C0B1EAF */  jal       get_variable
+/* 1A9484 8027ABA4 0C0B1EAF */  jal       evt_get_variable
 /* 1A9488 8027ABA8 0240202D */   daddu    $a0, $s2, $zero
 /* 1A948C 8027ABAC 0040882D */  daddu     $s1, $v0, $zero
 /* 1A9490 8027ABB0 2402FF81 */  addiu     $v0, $zero, -0x7f

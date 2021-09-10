@@ -5,7 +5,7 @@ glabel func_80240730_AF33D0
 /* AF33D0 80240730 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* AF33D4 80240734 AFBF0010 */  sw        $ra, 0x10($sp)
 /* AF33D8 80240738 8C82000C */  lw        $v0, 0xc($a0)
-/* AF33DC 8024073C 0C0B210B */  jal       get_float_variable
+/* AF33DC 8024073C 0C0B210B */  jal       evt_get_float_variable
 /* AF33E0 80240740 8C450000 */   lw       $a1, ($v0)
 /* AF33E4 80240744 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* AF33E8 80240748 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)

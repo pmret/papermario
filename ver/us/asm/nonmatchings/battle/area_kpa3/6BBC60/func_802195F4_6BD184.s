@@ -7,7 +7,7 @@ glabel func_802195F4_6BD184
 /* 6BD18C 802195FC 0080802D */  daddu     $s0, $a0, $zero
 /* 6BD190 80219600 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 6BD194 80219604 8E02000C */  lw        $v0, 0xc($s0)
-/* 6BD198 80219608 0C0B1EAF */  jal       get_variable
+/* 6BD198 80219608 0C0B1EAF */  jal       evt_get_variable
 /* 6BD19C 8021960C 8C450000 */   lw       $a1, ($v0)
 /* 6BD1A0 80219610 8E040148 */  lw        $a0, 0x148($s0)
 /* 6BD1A4 80219614 0C09A75B */  jal       get_actor

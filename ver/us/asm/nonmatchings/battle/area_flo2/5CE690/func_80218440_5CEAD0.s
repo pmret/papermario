@@ -9,7 +9,7 @@ glabel func_80218440_5CEAD0
 /* 5CEAE0 80218450 AFB00038 */  sw        $s0, 0x38($sp)
 /* 5CEAE4 80218454 8E30000C */  lw        $s0, 0xc($s1)
 /* 5CEAE8 80218458 8E050000 */  lw        $a1, ($s0)
-/* 5CEAEC 8021845C 0C0B1EAF */  jal       get_variable
+/* 5CEAEC 8021845C 0C0B1EAF */  jal       evt_get_variable
 /* 5CEAF0 80218460 26100004 */   addiu    $s0, $s0, 4
 /* 5CEAF4 80218464 0040282D */  daddu     $a1, $v0, $zero
 /* 5CEAF8 80218468 30A20002 */  andi      $v0, $a1, 2
@@ -107,7 +107,7 @@ glabel func_80218440_5CEAD0
 /* 5CEC3C 802185AC 8C460010 */  lw        $a2, 0x10($v0)
 .L802185B0:
 /* 5CEC40 802185B0 8E050000 */  lw        $a1, ($s0)
-/* 5CEC44 802185B4 0C0B2026 */  jal       set_variable
+/* 5CEC44 802185B4 0C0B2026 */  jal       evt_set_variable
 /* 5CEC48 802185B8 0220202D */   daddu    $a0, $s1, $zero
 /* 5CEC4C 802185BC 8FBF0040 */  lw        $ra, 0x40($sp)
 /* 5CEC50 802185C0 8FB1003C */  lw        $s1, 0x3c($sp)

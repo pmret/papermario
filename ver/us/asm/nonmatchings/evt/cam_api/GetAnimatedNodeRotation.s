@@ -13,12 +13,12 @@ glabel GetAnimatedNodeRotation
 /* F20B0 802CD700 AFB00010 */  sw        $s0, 0x10($sp)
 /* F20B4 802CD704 8E50000C */  lw        $s0, 0xc($s2)
 /* F20B8 802CD708 8E050000 */  lw        $a1, ($s0)
-/* F20BC 802CD70C 0C0B1EAF */  jal       get_variable
+/* F20BC 802CD70C 0C0B1EAF */  jal       evt_get_variable
 /* F20C0 802CD710 26100004 */   addiu    $s0, $s0, 4
 /* F20C4 802CD714 8E050000 */  lw        $a1, ($s0)
 /* F20C8 802CD718 26100004 */  addiu     $s0, $s0, 4
 /* F20CC 802CD71C 0240202D */  daddu     $a0, $s2, $zero
-/* F20D0 802CD720 0C0B1EAF */  jal       get_variable
+/* F20D0 802CD720 0C0B1EAF */  jal       evt_get_variable
 /* F20D4 802CD724 0040882D */   daddu    $s1, $v0, $zero
 /* F20D8 802CD728 00118880 */  sll       $s1, $s1, 2
 /* F20DC 802CD72C 8E130000 */  lw        $s3, ($s0)
@@ -40,19 +40,19 @@ glabel GetAnimatedNodeRotation
 /* F211C 802CD76C C600009C */  lwc1      $f0, 0x9c($s0)
 /* F2120 802CD770 4600008D */  trunc.w.s $f2, $f0
 /* F2124 802CD774 44061000 */  mfc1      $a2, $f2
-/* F2128 802CD778 0C0B2026 */  jal       set_variable
+/* F2128 802CD778 0C0B2026 */  jal       evt_set_variable
 /* F212C 802CD77C 0260282D */   daddu    $a1, $s3, $zero
 /* F2130 802CD780 0240202D */  daddu     $a0, $s2, $zero
 /* F2134 802CD784 C60000A0 */  lwc1      $f0, 0xa0($s0)
 /* F2138 802CD788 4600008D */  trunc.w.s $f2, $f0
 /* F213C 802CD78C 44061000 */  mfc1      $a2, $f2
-/* F2140 802CD790 0C0B2026 */  jal       set_variable
+/* F2140 802CD790 0C0B2026 */  jal       evt_set_variable
 /* F2144 802CD794 0280282D */   daddu    $a1, $s4, $zero
 /* F2148 802CD798 0240202D */  daddu     $a0, $s2, $zero
 /* F214C 802CD79C C60000A4 */  lwc1      $f0, 0xa4($s0)
 /* F2150 802CD7A0 4600008D */  trunc.w.s $f2, $f0
 /* F2154 802CD7A4 44061000 */  mfc1      $a2, $f2
-/* F2158 802CD7A8 0C0B2026 */  jal       set_variable
+/* F2158 802CD7A8 0C0B2026 */  jal       evt_set_variable
 /* F215C 802CD7AC 02A0282D */   daddu    $a1, $s5, $zero
 /* F2160 802CD7B0 8FBF0028 */  lw        $ra, 0x28($sp)
 /* F2164 802CD7B4 8FB50024 */  lw        $s5, 0x24($sp)

@@ -5,7 +5,7 @@ glabel func_802409A8_92AC58
 /* 92AC58 802409A8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 92AC5C 802409AC AFBF0010 */  sw        $ra, 0x10($sp)
 /* 92AC60 802409B0 8C82000C */  lw        $v0, 0xc($a0)
-/* 92AC64 802409B4 0C0B1EAF */  jal       get_variable
+/* 92AC64 802409B4 0C0B1EAF */  jal       evt_get_variable
 /* 92AC68 802409B8 8C450000 */   lw       $a1, ($v0)
 /* 92AC6C 802409BC 0040182D */  daddu     $v1, $v0, $zero
 /* 92AC70 802409C0 10600012 */  beqz      $v1, .L80240A0C

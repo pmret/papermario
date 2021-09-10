@@ -10,7 +10,7 @@ glabel RemoveActor
 /* 1AB0A4 8027C7C4 AFB20018 */  sw        $s2, 0x18($sp)
 /* 1AB0A8 8027C7C8 AFB10014 */  sw        $s1, 0x14($sp)
 /* 1AB0AC 8027C7CC 8E02000C */  lw        $v0, 0xc($s0)
-/* 1AB0B0 8027C7D0 0C0B1EAF */  jal       get_variable
+/* 1AB0B0 8027C7D0 0C0B1EAF */  jal       evt_get_variable
 /* 1AB0B4 8027C7D4 8C450000 */   lw       $a1, ($v0)
 /* 1AB0B8 8027C7D8 0040882D */  daddu     $s1, $v0, $zero
 /* 1AB0BC 8027C7DC 3C12800E */  lui       $s2, %hi(gBattleStatus)

@@ -13,27 +13,27 @@ glabel func_80218B60_5CF1F0
 /* 5CF210 80218B80 F7B40030 */  sdc1      $f20, 0x30($sp)
 /* 5CF214 80218B84 8E30000C */  lw        $s0, 0xc($s1)
 /* 5CF218 80218B88 8E050000 */  lw        $a1, ($s0)
-/* 5CF21C 80218B8C 0C0B1EAF */  jal       get_variable
+/* 5CF21C 80218B8C 0C0B1EAF */  jal       evt_get_variable
 /* 5CF220 80218B90 26100004 */   addiu    $s0, $s0, 4
 /* 5CF224 80218B94 8E050000 */  lw        $a1, ($s0)
 /* 5CF228 80218B98 26100004 */  addiu     $s0, $s0, 4
 /* 5CF22C 80218B9C 0220202D */  daddu     $a0, $s1, $zero
-/* 5CF230 80218BA0 0C0B210B */  jal       get_float_variable
+/* 5CF230 80218BA0 0C0B210B */  jal       evt_get_float_variable
 /* 5CF234 80218BA4 0040982D */   daddu    $s3, $v0, $zero
 /* 5CF238 80218BA8 8E050000 */  lw        $a1, ($s0)
 /* 5CF23C 80218BAC 26100004 */  addiu     $s0, $s0, 4
 /* 5CF240 80218BB0 0220202D */  daddu     $a0, $s1, $zero
-/* 5CF244 80218BB4 0C0B210B */  jal       get_float_variable
+/* 5CF244 80218BB4 0C0B210B */  jal       evt_get_float_variable
 /* 5CF248 80218BB8 46000586 */   mov.s    $f22, $f0
 /* 5CF24C 80218BBC 8E050000 */  lw        $a1, ($s0)
 /* 5CF250 80218BC0 26100004 */  addiu     $s0, $s0, 4
 /* 5CF254 80218BC4 0220202D */  daddu     $a0, $s1, $zero
-/* 5CF258 80218BC8 0C0B1EAF */  jal       get_variable
+/* 5CF258 80218BC8 0C0B1EAF */  jal       evt_get_variable
 /* 5CF25C 80218BCC 46000506 */   mov.s    $f20, $f0
 /* 5CF260 80218BD0 8E050000 */  lw        $a1, ($s0)
 /* 5CF264 80218BD4 26100004 */  addiu     $s0, $s0, 4
 /* 5CF268 80218BD8 0220202D */  daddu     $a0, $s1, $zero
-/* 5CF26C 80218BDC 0C0B1EAF */  jal       get_variable
+/* 5CF26C 80218BDC 0C0B1EAF */  jal       evt_get_variable
 /* 5CF270 80218BE0 0040902D */   daddu    $s2, $v0, $zero
 /* 5CF274 80218BE4 0260202D */  daddu     $a0, $s3, $zero
 /* 5CF278 80218BE8 4405B000 */  mfc1      $a1, $f22
@@ -43,7 +43,7 @@ glabel func_80218B60_5CF1F0
 /* 5CF288 80218BF8 AFA20010 */   sw       $v0, 0x10($sp)
 /* 5CF28C 80218BFC 8E050000 */  lw        $a1, ($s0)
 /* 5CF290 80218C00 44060000 */  mfc1      $a2, $f0
-/* 5CF294 80218C04 0C0B2190 */  jal       set_float_variable
+/* 5CF294 80218C04 0C0B2190 */  jal       evt_set_float_variable
 /* 5CF298 80218C08 0220202D */   daddu    $a0, $s1, $zero
 /* 5CF29C 80218C0C 8FBF0028 */  lw        $ra, 0x28($sp)
 /* 5CF2A0 80218C10 8FB30024 */  lw        $s3, 0x24($sp)

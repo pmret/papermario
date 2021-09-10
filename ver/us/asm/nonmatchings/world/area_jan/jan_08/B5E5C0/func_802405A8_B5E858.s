@@ -10,13 +10,13 @@ glabel func_802405A8_B5E858
 /* B5E86C 802405BC F7B40060 */  sdc1      $f20, 0x60($sp)
 /* B5E870 802405C0 8E30000C */  lw        $s0, 0xc($s1)
 /* B5E874 802405C4 8E050000 */  lw        $a1, ($s0)
-/* B5E878 802405C8 0C0B1EAF */  jal       get_variable
+/* B5E878 802405C8 0C0B1EAF */  jal       evt_get_variable
 /* B5E87C 802405CC 26100004 */   addiu    $s0, $s0, 4
 /* B5E880 802405D0 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* B5E884 802405D4 0040202D */   daddu    $a0, $v0, $zero
 /* B5E888 802405D8 0220202D */  daddu     $a0, $s1, $zero
 /* B5E88C 802405DC 8E050000 */  lw        $a1, ($s0)
-/* B5E890 802405E0 0C0B210B */  jal       get_float_variable
+/* B5E890 802405E0 0C0B210B */  jal       evt_get_float_variable
 /* B5E894 802405E4 0040802D */   daddu    $s0, $v0, $zero
 /* B5E898 802405E8 0200202D */  daddu     $a0, $s0, $zero
 /* B5E89C 802405EC 0C046B4C */  jal       get_model_from_list_index

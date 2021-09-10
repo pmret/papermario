@@ -18,7 +18,7 @@ glabel func_80242774_C79454
 /* C79488 802427A8 8E43000C */  lw        $v1, 0xc($s2)
 /* C7948C 802427AC 0240202D */  daddu     $a0, $s2, $zero
 /* C79490 802427B0 8C650000 */  lw        $a1, ($v1)
-/* C79494 802427B4 0C0B1EAF */  jal       get_variable
+/* C79494 802427B4 0C0B1EAF */  jal       evt_get_variable
 /* C79498 802427B8 0040A82D */   daddu    $s5, $v0, $zero
 /* C7949C 802427BC AFA00010 */  sw        $zero, 0x10($sp)
 /* C794A0 802427C0 8E2300D0 */  lw        $v1, 0xd0($s1)

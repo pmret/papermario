@@ -136,7 +136,7 @@ glabel func_802400E0_B02960
 /* B02B30 802402B0 0260202D */  daddu     $a0, $s3, $zero
 .L802402B4:
 /* B02B34 802402B4 0280282D */  daddu     $a1, $s4, $zero
-/* B02B38 802402B8 0C0B2026 */  jal       set_variable
+/* B02B38 802402B8 0C0B2026 */  jal       evt_set_variable
 /* B02B3C 802402BC 0220302D */   daddu    $a2, $s1, $zero
 /* B02B40 802402C0 8FBF0044 */  lw        $ra, 0x44($sp)
 /* B02B44 802402C4 8FB40040 */  lw        $s4, 0x40($sp)

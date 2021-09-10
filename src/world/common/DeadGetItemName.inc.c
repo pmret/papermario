@@ -3,8 +3,8 @@
 
 ApiStatus N(DeadGetItemName)(Evt* script, s32 isInitialCall) {
     Bytecode args = *script->ptrReadPos;
-    s32 itemID = dead_get_variable(script, args);
+    s32 itemID = evt_get_variable(script, args);
 
-    dead_set_variable(script, args, DEAD_LOOKUP_ITEM(itemID).nameString);
+    evt_set_variable(script, args, LOOKUP_ITEM(itemID).nameMsg);
     return ApiStatus_DONE2;
 }

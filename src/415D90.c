@@ -82,7 +82,7 @@ extern s32 D_802AD61C;
 extern s32 D_802AD620;
 extern s32 D_802AD624;
 extern s32 D_802AD628[];
-extern s32 D_802AD658[]; // string IDs
+extern s32 D_802AD658[]; // msg IDs
 extern s32 D_802AD66C;
 extern s8 D_802AD673;
 extern s32 D_802AD678[];
@@ -366,26 +366,26 @@ INCLUDE_ASM(s32, "415D90", func_802A2C84);
 INCLUDE_ASM(s32, "415D90", func_802A3C98);
 
 void func_802A43DC(s32 arg0, s32 x, s32 y) {
-    s32 stringID;
+    s32 msgID;
     s32 posX;
     s32 posY;
     s32 opacity;
     s32 palette;
 
     if (!battle_menu_hasSpiritsMenu) {
-        stringID = 0x1D0045;
+        msgID = 0x1D0045;
         posX = x + 16;
         posY = y + 2;
         opacity = battle_menu_moveTextOpacity;
         palette = 0x30;
     } else {
-        stringID = 0x1D003A;
+        msgID = 0x1D003A;
         posX = x + 6;
         posY = y + 2;
         opacity = battle_menu_moveTextOpacity;
         palette = 0x31;
     }
-    draw_string(stringID, posX, posY, opacity, palette, 1);
+    draw_msg(msgID, posX, posY, opacity, palette, 1);
 }
 
 void func_802A4448(s32 arg0, s32 x, s32 y) {
@@ -404,7 +404,7 @@ void func_802A4494(s32 arg0, s32 x, s32 y) {
         case 20:
         case 30:
             if (D_802AD10F != 0) {
-                draw_string(battle_menu_moveOptionDescriptions[battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos]],
+                draw_msg(battle_menu_moveOptionDescriptions[battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos]],
                             x + 8, y, battle_menu_moveTextOpacity, battle_menu_moveTextColor, 0);
             }
             break;
@@ -414,19 +414,19 @@ void func_802A4494(s32 arg0, s32 x, s32 y) {
 void func_802A4534(s32 arg0, s32 x, s32 y) {
     s32 posY = y;
     s32 posX;
-    s32 stringID;
+    s32 msgID;
 
     posY += 6;
     posX = x + 11;
 
     if (D_802AD258 != 0) {
-        stringID = 0x1D00C3;
+        msgID = 0x1D00C3;
     } else if (battle_menu_hasSpiritsMenu == FALSE) {
-        stringID = 0x1D009F;
+        msgID = 0x1D009F;
     } else {
-        stringID = 0x1D00A0;
+        msgID = 0x1D00A0;
     }
-    draw_string(stringID, posX, posY + D_802AB344[get_string_lines(stringID) - 1], 255, 0xF, 0);
+    draw_msg(msgID, posX, posY + D_802AB344[get_msg_lines(msgID) - 1], 255, 0xF, 0);
 }
 
 void func_802A45D8(void) {
@@ -592,7 +592,7 @@ void func_802A5290(s32 arg0, s32 x, s32 y) {
                 if (D_802AD690[i] == 0) {
                     palette = 0xB;
                 }
-                draw_string(D_802AD658[i], xTemp, phi_s1, D_802AD624, palette, 1);
+                draw_msg(D_802AD658[i], xTemp, phi_s1, D_802AD624, palette, 1);
             }
 
             xTemp = x + 24;
@@ -640,7 +640,7 @@ INCLUDE_ASM(s32, "415D90", func_802A5290);
 #endif
 
 void func_802A56F8(s32 arg0, s32 x, s32 y) {
-    draw_string(0x1D0043, x + 15, y + 2, D_802AD624, 0x33, 1);
+    draw_msg(0x1D0043, x + 15, y + 2, D_802AD624, 0x33, 1);
 }
 
 void func_802A5738(s32 arg0, s32 x, s32 y) {
@@ -651,7 +651,7 @@ void func_802A5738(s32 arg0, s32 x, s32 y) {
         case 20:
         case 30:
             if (D_802AD60B != 0) {
-                draw_string(D_802AD6C0[D_802AD605], x + 8, y, D_802AD624, D_802AD614, 0);
+                draw_msg(D_802AD6C0[D_802AD605], x + 8, y, D_802AD624, D_802AD614, 0);
             }
             break;
     }
@@ -664,9 +664,9 @@ void func_802A57C8(s32 arg0, s32 x, s32 y) {
     y += 6;
 
     if (D_802AD610 == 0) {
-        draw_string(0x1D00CB, x, y, 255, 15, 0);
+        draw_msg(0x1D00CB, x, y, 255, 15, 0);
     } else {
-        draw_string(0x1D00CC, x, y, 255, 15, 0);
+        draw_msg(0x1D00CC, x, y, 255, 15, 0);
     }
 }
 #else

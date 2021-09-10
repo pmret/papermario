@@ -26,10 +26,10 @@ s32 BadgeShopInteract[] = { 0x00000043, 0x00000002, ShowShopPurchaseDialog, 0xFE
 
 s32 shop_owner_begin_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
-    s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
+    s32 shopMsgID = shop->owner->shopMsgIDs[messageIndex];
     Evt* script = start_script(&ShopBeginSpeech, 1, 0);
 
-    script->varTable[0] = shopStringID;
+    script->varTable[0] = shopMsgID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
     script->varTable[3] = shop->owner->idleAnim;
@@ -39,11 +39,11 @@ s32 shop_owner_begin_speech(s32 messageIndex) {
 
 s32 shop_owner_buy_dialog(s32 messageIndex, s32 itemName, s32 coinCost, s32 bpCost) {
     Shop* shop = gGameStatusPtr->mapShop;
-    s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
+    s32 shopMsgID = shop->owner->shopMsgIDs[messageIndex];
     Evt* script;
     s32 phi_a0;
 
-    set_message_string(itemName, 0);
+    set_message_msg(itemName, 0);
     set_message_value(coinCost, 1);
 
     if (bpCost > 0) {
@@ -54,11 +54,11 @@ s32 shop_owner_buy_dialog(s32 messageIndex, s32 itemName, s32 coinCost, s32 bpCo
         } else {
             phi_a0 = &MessagePlural;
         }
-        set_message_string(phi_a0, 2);
+        set_message_msg(phi_a0, 2);
     }
 
     script = start_script(&ShopBeginSpeech, 1, 0);
-    script->varTable[0] = shopStringID;
+    script->varTable[0] = shopMsgID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
     script->varTable[3] = shop->owner->idleAnim;
@@ -68,10 +68,10 @@ s32 shop_owner_buy_dialog(s32 messageIndex, s32 itemName, s32 coinCost, s32 bpCo
 
 s32 shop_owner_continue_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
-    s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
+    s32 shopMsgID = shop->owner->shopMsgIDs[messageIndex];
     Evt* script = start_script(&ShopContinueSpeech, 1, 0);
 
-    script->varTable[0] = shopStringID;
+    script->varTable[0] = shopMsgID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
     script->functionTemp[3] = script->varTable[3] = shop->owner->idleAnim;
@@ -81,7 +81,7 @@ s32 shop_owner_continue_speech(s32 messageIndex) {
 
 s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
     Shop* shop = gGameStatusPtr->mapShop;
-    s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
+    s32 shopMsgID = shop->owner->shopMsgIDs[messageIndex];
     s32 phi_a0;
     Evt* script;
 
@@ -93,10 +93,10 @@ s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
         phi_a0 = &MessagePlural;
     }
 
-    set_message_string(phi_a0, 1);
+    set_message_msg(phi_a0, 1);
 
     script = start_script(&ShopContinueSpeech, 1, 0);
-    script->varTable[0] = shopStringID;
+    script->varTable[0] = shopMsgID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
     script->functionTemp[3] = script->varTable[3] = shop->owner->idleAnim;
@@ -106,10 +106,10 @@ s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
 
 s32 shop_owner_reset_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
-    s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
+    s32 shopMsgID = shop->owner->shopMsgIDs[messageIndex];
     Evt* script = start_script(&ShopResetSpeech, 1, 0);
 
-    script->varTable[0] = shopStringID;
+    script->varTable[0] = shopMsgID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
     script->functionTemp[3] = script->varTable[3] = shop->owner->idleAnim;
@@ -151,7 +151,7 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall) {
     static s32 D_80286524;
 
     Shop* shop = gGameStatusPtr->mapShop;
-    s32 currentItemSlot = get_variable(script, *script->ptrReadPos);
+    s32 currentItemSlot = evt_get_variable(script, *script->ptrReadPos);
 
     if (!(shop->flags & 8)) {
         shop->currentItemSlot = currentItemSlot;
@@ -228,8 +228,8 @@ void shop_open_item_select_popup(s32 mode) {
             menu->ptrIcon[i] = D_8008A680[gItemTable[itemID].iconID][0];
             menu->userIndex[i] = i;
             menu->enabled[i] = TRUE;
-            menu->nameString[i] = gItemTable[itemID].nameString;
-            menu->descString[i] = gItemTable[itemID].itemString;
+            menu->nameMsg[i] = gItemTable[itemID].nameMsg;
+            menu->descMsg[i] = gItemTable[itemID].itemMsg;
             menu->value[i] = shop_get_sell_price(itemID);
             numEntries++;
         }
@@ -301,14 +301,14 @@ void shop_draw_item_name(s32 arg0, s32 posX, s32 posY) {
     StaticInventoryItem* siItem = &shop->staticInventory[shop->currentItemSlot];
     StaticItem* item = &gItemTable[siItem->unk_00];
 
-    draw_string(item->nameString, posX + 60 - (get_string_width(item->nameString, 0) >> 1), posY + 6, 255, 0, 0);
+    draw_msg(item->nameMsg, posX + 60 - (get_msg_width(item->nameMsg, 0) >> 1), posY + 6, 255, 0, 0);
 }
 
 void shop_draw_item_desc(s32 arg0, s32 posX, s32 posY) {
     Shop* shop = gGameStatusPtr->mapShop;
     StaticInventoryItem* item = &shop->staticInventory[shop->currentItemSlot];
 
-    draw_string(item->unk_08, posX + 8, posY, 255, 0xA, 0);
+    draw_msg(item->unk_08, posX + 8, posY, 255, 0xA, 0);
 }
 
 // Problems with the struct iteration
@@ -390,6 +390,6 @@ INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", MakeShop, Evt* script, s32 isI
 ApiStatus MakeShopOwner(Evt* script, s32 isInitialCall) {
     Shop* mapShop = gGameStatusPtr->mapShop;
 
-    mapShop->owner = get_variable(script, *script->ptrReadPos);
+    mapShop->owner = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }

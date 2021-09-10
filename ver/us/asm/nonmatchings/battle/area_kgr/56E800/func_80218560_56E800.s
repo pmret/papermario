@@ -14,7 +14,7 @@ glabel func_80218560_56E800
 /* 56E824 80218584 F7B60038 */  sdc1      $f22, 0x38($sp)
 /* 56E828 80218588 F7B40030 */  sdc1      $f20, 0x30($sp)
 /* 56E82C 8021858C 8E02000C */  lw        $v0, 0xc($s0)
-/* 56E830 80218590 0C0B1EAF */  jal       get_variable
+/* 56E830 80218590 0C0B1EAF */  jal       evt_get_variable
 /* 56E834 80218594 8C450000 */   lw       $a1, ($v0)
 /* 56E838 80218598 0040882D */  daddu     $s1, $v0, $zero
 /* 56E83C 8021859C 24040001 */  addiu     $a0, $zero, 1

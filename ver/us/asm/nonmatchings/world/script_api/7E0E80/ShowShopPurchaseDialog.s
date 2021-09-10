@@ -110,7 +110,7 @@ glabel ShowShopPurchaseDialog
 /* 7E1528 802806A8 26650078 */  addiu     $a1, $s3, 0x78
 /* 7E152C 802806AC 24020064 */  addiu     $v0, $zero, 0x64
 /* 7E1530 802806B0 AE620070 */  sw        $v0, 0x70($s3)
-/* 7E1534 802806B4 0C049640 */  jal       msg_get_printer_for_string
+/* 7E1534 802806B4 0C049640 */  jal       msg_get_printer_for_msg
 /* 7E1538 802806B8 AE600078 */   sw       $zero, 0x78($s3)
 /* 7E153C 802806BC 3C018028 */  lui       $at, %hi(D_80286528)
 /* 7E1540 802806C0 AC226528 */  sw        $v0, %lo(D_80286528)($at)
@@ -168,7 +168,7 @@ glabel ShowShopPurchaseDialog
 /* 7E1604 80280784 0000202D */  daddu     $a0, $zero, $zero
 /* 7E1608 80280788 3C05F840 */  lui       $a1, 0xf840
 /* 7E160C 8028078C 34A55CF0 */  ori       $a1, $a1, 0x5cf0
-/* 7E1610 80280790 0C0B2026 */  jal       set_variable
+/* 7E1610 80280790 0C0B2026 */  jal       evt_set_variable
 /* 7E1614 80280794 24060001 */   addiu    $a2, $zero, 1
 /* 7E1618 80280798 080A01EA */  j         .L802807A8
 /* 7E161C 8028079C 00000000 */   nop

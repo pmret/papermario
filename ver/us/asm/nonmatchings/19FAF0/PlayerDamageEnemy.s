@@ -24,7 +24,7 @@ glabel PlayerDamageEnemy
 /* 1A2B8C 802742AC 26100004 */  addiu     $s0, $s0, 4
 /* 1A2B90 802742B0 AE220190 */  sw        $v0, 0x190($s1)
 /* 1A2B94 802742B4 8E050000 */  lw        $a1, ($s0)
-/* 1A2B98 802742B8 0C0B1EAF */  jal       get_variable
+/* 1A2B98 802742B8 0C0B1EAF */  jal       evt_get_variable
 /* 1A2B9C 802742BC 26100004 */   addiu    $s0, $s0, 4
 /* 1A2BA0 802742C0 A622017E */  sh        $v0, 0x17e($s1)
 /* 1A2BA4 802742C4 A2200198 */  sb        $zero, 0x198($s1)
@@ -143,7 +143,7 @@ glabel PlayerDamageEnemy
 /* 1A2D30 80274450 0440000B */  bltz      $v0, .L80274480
 /* 1A2D34 80274454 0240202D */   daddu    $a0, $s2, $zero
 /* 1A2D38 80274458 0260282D */  daddu     $a1, $s3, $zero
-/* 1A2D3C 8027445C 0C0B2026 */  jal       set_variable
+/* 1A2D3C 8027445C 0C0B2026 */  jal       evt_set_variable
 /* 1A2D40 80274460 0040302D */   daddu    $a2, $v0, $zero
 /* 1A2D44 80274464 0C0B1069 */  jal       does_script_exist_by_ref
 /* 1A2D48 80274468 0240202D */   daddu    $a0, $s2, $zero

@@ -18,8 +18,8 @@ glabel setup_pause_menu_tab
 /* DE664 80147F64 2416FFFF */  addiu     $s6, $zero, -1
 /* DE668 80147F68 3C158015 */  lui       $s5, %hi(D_8014F150)
 /* DE66C 80147F6C 26B5F150 */  addiu     $s5, $s5, %lo(D_8014F150)
-/* DE670 80147F70 3C148016 */  lui       $s4, %hi(gUIPanels)
-/* DE674 80147F74 26949D50 */  addiu     $s4, $s4, %lo(gUIPanels)
+/* DE670 80147F70 3C148016 */  lui       $s4, %hi(gWindows)
+/* DE674 80147F74 26949D50 */  addiu     $s4, $s4, %lo(gWindows)
 /* DE678 80147F78 2490001C */  addiu     $s0, $a0, 0x1c
 .L80147F7C:
 /* DE67C 80147F7C 8602FFEC */  lh        $v0, -0x14($s0)

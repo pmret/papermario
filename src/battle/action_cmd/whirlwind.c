@@ -19,7 +19,7 @@ ApiStatus func_802A9000_423C70(Evt* script, s32 isInitialCall) {
     }
 
     func_80268858();
-    temp_v0 = get_variable(script, *args);
+    temp_v0 = evt_get_variable(script, *args);
     actionCommandStatus->unk_64 = temp_v0;
     actionCommandStatus->actionCommandID = ACTION_COMMAND_WHIRLWIND;
     actionCommandStatus->state = 0;

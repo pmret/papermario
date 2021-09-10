@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'ninja'
+                sh 'ninja 2>&1 | tee build_log.txt'
             }
         }
         stage("Comment") {
@@ -29,7 +29,7 @@ pipeline {
                     if (env.CHANGE_ID) {
                         def us_progress = sh(returnStdout: true, script: "python3 progress.py us --pr-comment").trim()
                         def jp_progress = sh(returnStdout: true, script: "python3 progress.py jp --pr-comment").trim()
-                        def warnings = sh(returnStdout: true, script: "./tools/warnings_count/check_new_warnings.sh --pr-message").trim()
+                        def warnings = sh(returnStdout: true, script: "./tools/warnings_count/check_new_warnings.sh --jenkins").trim()
                         def comment_id = -1
 
                         for (comment in pullRequest.comments) {

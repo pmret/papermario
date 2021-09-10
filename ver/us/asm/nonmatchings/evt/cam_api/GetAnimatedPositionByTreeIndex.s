@@ -13,12 +13,12 @@ glabel GetAnimatedPositionByTreeIndex
 /* F21A8 802CD7F8 AFB00030 */  sw        $s0, 0x30($sp)
 /* F21AC 802CD7FC 8E50000C */  lw        $s0, 0xc($s2)
 /* F21B0 802CD800 8E050000 */  lw        $a1, ($s0)
-/* F21B4 802CD804 0C0B1EAF */  jal       get_variable
+/* F21B4 802CD804 0C0B1EAF */  jal       evt_get_variable
 /* F21B8 802CD808 26100004 */   addiu    $s0, $s0, 4
 /* F21BC 802CD80C 8E050000 */  lw        $a1, ($s0)
 /* F21C0 802CD810 26100004 */  addiu     $s0, $s0, 4
 /* F21C4 802CD814 0240202D */  daddu     $a0, $s2, $zero
-/* F21C8 802CD818 0C0B1EAF */  jal       get_variable
+/* F21C8 802CD818 0C0B1EAF */  jal       evt_get_variable
 /* F21CC 802CD81C 0040882D */   daddu    $s1, $v0, $zero
 /* F21D0 802CD820 00118880 */  sll       $s1, $s1, 2
 /* F21D4 802CD824 8E140000 */  lw        $s4, ($s0)
@@ -50,19 +50,19 @@ glabel GetAnimatedPositionByTreeIndex
 /* F223C 802CD88C C7A00020 */  lwc1      $f0, 0x20($sp)
 /* F2240 802CD890 4600008D */  trunc.w.s $f2, $f0
 /* F2244 802CD894 44061000 */  mfc1      $a2, $f2
-/* F2248 802CD898 0C0B2026 */  jal       set_variable
+/* F2248 802CD898 0C0B2026 */  jal       evt_set_variable
 /* F224C 802CD89C 0280282D */   daddu    $a1, $s4, $zero
 /* F2250 802CD8A0 0240202D */  daddu     $a0, $s2, $zero
 /* F2254 802CD8A4 C7A00024 */  lwc1      $f0, 0x24($sp)
 /* F2258 802CD8A8 4600008D */  trunc.w.s $f2, $f0
 /* F225C 802CD8AC 44061000 */  mfc1      $a2, $f2
-/* F2260 802CD8B0 0C0B2026 */  jal       set_variable
+/* F2260 802CD8B0 0C0B2026 */  jal       evt_set_variable
 /* F2264 802CD8B4 02A0282D */   daddu    $a1, $s5, $zero
 /* F2268 802CD8B8 0240202D */  daddu     $a0, $s2, $zero
 /* F226C 802CD8BC C7A00028 */  lwc1      $f0, 0x28($sp)
 /* F2270 802CD8C0 4600008D */  trunc.w.s $f2, $f0
 /* F2274 802CD8C4 44061000 */  mfc1      $a2, $f2
-/* F2278 802CD8C8 0C0B2026 */  jal       set_variable
+/* F2278 802CD8C8 0C0B2026 */  jal       evt_set_variable
 /* F227C 802CD8CC 0200282D */   daddu    $a1, $s0, $zero
 /* F2280 802CD8D0 8FBF0048 */  lw        $ra, 0x48($sp)
 /* F2284 802CD8D4 8FB50044 */  lw        $s5, 0x44($sp)

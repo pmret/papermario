@@ -12,31 +12,31 @@ glabel func_80240314_8FF984
 /* 8FF9A0 80240330 AFB00010 */  sw        $s0, 0x10($sp)
 /* 8FF9A4 80240334 8E30000C */  lw        $s0, 0xc($s1)
 /* 8FF9A8 80240338 8E050000 */  lw        $a1, ($s0)
-/* 8FF9AC 8024033C 0C0B1EAF */  jal       get_variable
+/* 8FF9AC 8024033C 0C0B1EAF */  jal       evt_get_variable
 /* 8FF9B0 80240340 26100004 */   addiu    $s0, $s0, 4
 /* 8FF9B4 80240344 8E050000 */  lw        $a1, ($s0)
 /* 8FF9B8 80240348 26100004 */  addiu     $s0, $s0, 4
 /* 8FF9BC 8024034C 0220202D */  daddu     $a0, $s1, $zero
-/* 8FF9C0 80240350 0C0B1EAF */  jal       get_variable
+/* 8FF9C0 80240350 0C0B1EAF */  jal       evt_get_variable
 /* 8FF9C4 80240354 0040982D */   daddu    $s3, $v0, $zero
 /* 8FF9C8 80240358 8E050000 */  lw        $a1, ($s0)
 /* 8FF9CC 8024035C 26100004 */  addiu     $s0, $s0, 4
 /* 8FF9D0 80240360 0220202D */  daddu     $a0, $s1, $zero
-/* 8FF9D4 80240364 0C0B1EAF */  jal       get_variable
+/* 8FF9D4 80240364 0C0B1EAF */  jal       evt_get_variable
 /* 8FF9D8 80240368 0040902D */   daddu    $s2, $v0, $zero
 /* 8FF9DC 8024036C 8E050000 */  lw        $a1, ($s0)
 /* 8FF9E0 80240370 26100004 */  addiu     $s0, $s0, 4
 /* 8FF9E4 80240374 0220202D */  daddu     $a0, $s1, $zero
-/* 8FF9E8 80240378 0C0B1EAF */  jal       get_variable
+/* 8FF9E8 80240378 0C0B1EAF */  jal       evt_get_variable
 /* 8FF9EC 8024037C 0040A02D */   daddu    $s4, $v0, $zero
 /* 8FF9F0 80240380 0220202D */  daddu     $a0, $s1, $zero
 /* 8FF9F4 80240384 8E050000 */  lw        $a1, ($s0)
-/* 8FF9F8 80240388 0C0B1EAF */  jal       get_variable
+/* 8FF9F8 80240388 0C0B1EAF */  jal       evt_get_variable
 /* 8FF9FC 8024038C 0040882D */   daddu    $s1, $v0, $zero
 /* 8FFA00 80240390 0000202D */  daddu     $a0, $zero, $zero
 /* 8FFA04 80240394 3C05FD05 */  lui       $a1, 0xfd05
 /* 8FFA08 80240398 34A50F80 */  ori       $a1, $a1, 0xf80
-/* 8FFA0C 8024039C 0C0B1EAF */  jal       get_variable
+/* 8FFA0C 8024039C 0C0B1EAF */  jal       evt_get_variable
 /* 8FFA10 802403A0 0040802D */   daddu    $s0, $v0, $zero
 /* 8FFA14 802403A4 00131900 */  sll       $v1, $s3, 4
 /* 8FFA18 802403A8 00731823 */  subu      $v1, $v1, $s3

@@ -17,31 +17,31 @@ glabel func_80219D44_6A0F44
 /* 6A0F74 80219D74 AE510070 */  sw        $s1, 0x70($s2)
 /* 6A0F78 80219D78 8E050000 */  lw        $a1, ($s0)
 /* 6A0F7C 80219D7C 26100004 */  addiu     $s0, $s0, 4
-/* 6A0F80 80219D80 0C0B1EAF */  jal       get_variable
+/* 6A0F80 80219D80 0C0B1EAF */  jal       evt_get_variable
 /* 6A0F84 80219D84 0240202D */   daddu    $a0, $s2, $zero
 /* 6A0F88 80219D88 AE220020 */  sw        $v0, 0x20($s1)
 /* 6A0F8C 80219D8C 8E050000 */  lw        $a1, ($s0)
 /* 6A0F90 80219D90 26100004 */  addiu     $s0, $s0, 4
-/* 6A0F94 80219D94 0C0B210B */  jal       get_float_variable
+/* 6A0F94 80219D94 0C0B210B */  jal       evt_get_float_variable
 /* 6A0F98 80219D98 0240202D */   daddu    $a0, $s2, $zero
 /* 6A0F9C 80219D9C E6200000 */  swc1      $f0, ($s1)
 /* 6A0FA0 80219DA0 8E050000 */  lw        $a1, ($s0)
 /* 6A0FA4 80219DA4 26100004 */  addiu     $s0, $s0, 4
-/* 6A0FA8 80219DA8 0C0B210B */  jal       get_float_variable
+/* 6A0FA8 80219DA8 0C0B210B */  jal       evt_get_float_variable
 /* 6A0FAC 80219DAC 0240202D */   daddu    $a0, $s2, $zero
 /* 6A0FB0 80219DB0 E6200004 */  swc1      $f0, 4($s1)
 /* 6A0FB4 80219DB4 8E050000 */  lw        $a1, ($s0)
 /* 6A0FB8 80219DB8 26100004 */  addiu     $s0, $s0, 4
-/* 6A0FBC 80219DBC 0C0B210B */  jal       get_float_variable
+/* 6A0FBC 80219DBC 0C0B210B */  jal       evt_get_float_variable
 /* 6A0FC0 80219DC0 0240202D */   daddu    $a0, $s2, $zero
 /* 6A0FC4 80219DC4 E6200008 */  swc1      $f0, 8($s1)
 /* 6A0FC8 80219DC8 8E050000 */  lw        $a1, ($s0)
 /* 6A0FCC 80219DCC 26100004 */  addiu     $s0, $s0, 4
-/* 6A0FD0 80219DD0 0C0B1EAF */  jal       get_variable
+/* 6A0FD0 80219DD0 0C0B1EAF */  jal       evt_get_variable
 /* 6A0FD4 80219DD4 0240202D */   daddu    $a0, $s2, $zero
 /* 6A0FD8 80219DD8 AE22001C */  sw        $v0, 0x1c($s1)
 /* 6A0FDC 80219DDC 8E050000 */  lw        $a1, ($s0)
-/* 6A0FE0 80219DE0 0C0B210B */  jal       get_float_variable
+/* 6A0FE0 80219DE0 0C0B210B */  jal       evt_get_float_variable
 /* 6A0FE4 80219DE4 0240202D */   daddu    $a0, $s2, $zero
 /* 6A0FE8 80219DE8 8E240020 */  lw        $a0, 0x20($s1)
 /* 6A0FEC 80219DEC 0C04C3D6 */  jal       get_item_entity

@@ -10,16 +10,16 @@ glabel func_80240168_DC4538
 /* DC454C 8024017C AFB00010 */  sw        $s0, 0x10($sp)
 /* DC4550 80240180 8E50000C */  lw        $s0, 0xc($s2)
 /* DC4554 80240184 8E050000 */  lw        $a1, ($s0)
-/* DC4558 80240188 0C0B1EAF */  jal       get_variable
+/* DC4558 80240188 0C0B1EAF */  jal       evt_get_variable
 /* DC455C 8024018C 26100004 */   addiu    $s0, $s0, 4
 /* DC4560 80240190 8E050000 */  lw        $a1, ($s0)
 /* DC4564 80240194 26100004 */  addiu     $s0, $s0, 4
 /* DC4568 80240198 0240202D */  daddu     $a0, $s2, $zero
-/* DC456C 8024019C 0C0B1EAF */  jal       get_variable
+/* DC456C 8024019C 0C0B1EAF */  jal       evt_get_variable
 /* DC4570 802401A0 0040882D */   daddu    $s1, $v0, $zero
 /* DC4574 802401A4 0240202D */  daddu     $a0, $s2, $zero
 /* DC4578 802401A8 8E050000 */  lw        $a1, ($s0)
-/* DC457C 802401AC 0C0B1EAF */  jal       get_variable
+/* DC457C 802401AC 0C0B1EAF */  jal       evt_get_variable
 /* DC4580 802401B0 0040802D */   daddu    $s0, $v0, $zero
 /* DC4584 802401B4 02020018 */  mult      $s0, $v0
 /* DC4588 802401B8 24020002 */  addiu     $v0, $zero, 2

@@ -24,7 +24,7 @@ glabel ElectrifyActor
 /* 19F268 80270988 00000000 */   nop
 /* 19F26C 8027098C 8E250000 */  lw        $a1, ($s1)
 /* 19F270 80270990 26310004 */  addiu     $s1, $s1, 4
-/* 19F274 80270994 0C0B1EAF */  jal       get_variable
+/* 19F274 80270994 0C0B1EAF */  jal       evt_get_variable
 /* 19F278 80270998 0240202D */   daddu    $a0, $s2, $zero
 /* 19F27C 8027099C 0040802D */  daddu     $s0, $v0, $zero
 /* 19F280 802709A0 2402FF81 */  addiu     $v0, $zero, -0x7f
@@ -33,7 +33,7 @@ glabel ElectrifyActor
 /* 19F28C 802709AC 8E500148 */  lw        $s0, 0x148($s2)
 .L802709B0:
 /* 19F290 802709B0 8E250000 */  lw        $a1, ($s1)
-/* 19F294 802709B4 0C0B1EAF */  jal       get_variable
+/* 19F294 802709B4 0C0B1EAF */  jal       evt_get_variable
 /* 19F298 802709B8 0240202D */   daddu    $a0, $s2, $zero
 /* 19F29C 802709BC 0040882D */  daddu     $s1, $v0, $zero
 /* 19F2A0 802709C0 0C09A75B */  jal       get_actor

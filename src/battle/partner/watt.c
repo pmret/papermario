@@ -47,7 +47,7 @@ ApiStatus func_802383F8_703EE8(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80238408_703EF8(Evt* script, s32 isInitialCall) {
-    D_8023C1C8 = get_variable(script, *script->ptrReadPos);
+    D_8023C1C8 = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -57,9 +57,9 @@ ApiStatus func_80238408_703EF8(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802384B0_703FA0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
 
     D_80239A0C_7054FC = playFX_33(8, var1, var2, var3, 1.3f, 55);
 
@@ -81,9 +81,9 @@ ApiStatus func_80238570_704060(Evt* script, s32 isInitialCall) {
 // janky solution, but this does match.
 ApiStatus func_8023859C_70408C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
     EffectInstanceDataThing* dataThing;
 
     D_8023C1B4 = playFX_58(0, var1, var2, var3, 1.0f, 10);
@@ -120,9 +120,9 @@ INCLUDE_ASM(s32, "battle/partner/watt", func_80238810_704300);
 // janky solution, but this does match.
 ApiStatus func_80238B3C_70462C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
     EffectInstanceDataThing* temp_a0;
 
     D_8023C1B4 = playFX_58(0, var1, var2, var3, 1.0f, 60);

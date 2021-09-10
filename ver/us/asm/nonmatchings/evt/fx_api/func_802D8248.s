@@ -9,11 +9,11 @@ glabel func_802D8248
 /* FCC08 802D8258 AFB00010 */  sw        $s0, 0x10($sp)
 /* FCC0C 802D825C 8E30000C */  lw        $s0, 0xc($s1)
 /* FCC10 802D8260 8E050000 */  lw        $a1, ($s0)
-/* FCC14 802D8264 0C0B1EAF */  jal       get_variable
+/* FCC14 802D8264 0C0B1EAF */  jal       evt_get_variable
 /* FCC18 802D8268 26100004 */   addiu    $s0, $s0, 4
 /* FCC1C 802D826C 0220202D */  daddu     $a0, $s1, $zero
 /* FCC20 802D8270 8E050000 */  lw        $a1, ($s0)
-/* FCC24 802D8274 0C0B1EAF */  jal       get_variable
+/* FCC24 802D8274 0C0B1EAF */  jal       evt_get_variable
 /* FCC28 802D8278 0040802D */   daddu    $s0, $v0, $zero
 /* FCC2C 802D827C 8E03000C */  lw        $v1, 0xc($s0)
 /* FCC30 802D8280 AC62001C */  sw        $v0, 0x1c($v1)

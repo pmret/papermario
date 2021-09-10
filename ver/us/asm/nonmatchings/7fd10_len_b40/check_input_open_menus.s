@@ -32,7 +32,7 @@ glabel check_input_open_menus
 /* 801E4 800E6D34 1440014D */  bnez      $v0, L800E726C_8071C
 /* 801E8 800E6D38 0000202D */   daddu    $a0, $zero, $zero
 /* 801EC 800E6D3C 3C05F5DE */  lui       $a1, 0xf5de
-/* 801F0 800E6D40 0C0B1EAF */  jal       get_variable
+/* 801F0 800E6D40 0C0B1EAF */  jal       evt_get_variable
 /* 801F4 800E6D44 34A50180 */   ori      $a1, $a1, 0x180
 /* 801F8 800E6D48 2403FF80 */  addiu     $v1, $zero, -0x80
 /* 801FC 800E6D4C 10430147 */  beq       $v0, $v1, L800E726C_8071C
@@ -55,7 +55,7 @@ glabel check_input_open_menus
 /* 8023C 800E6D8C 0000202D */  daddu     $a0, $zero, $zero
 /* 80240 800E6D90 3C05F5DE */  lui       $a1, 0xf5de
 .L800E6D94:
-/* 80244 800E6D94 0C0B1EAF */  jal       get_variable
+/* 80244 800E6D94 0C0B1EAF */  jal       evt_get_variable
 /* 80248 800E6D98 34A50180 */   ori      $a1, $a1, 0x180
 /* 8024C 800E6D9C 28420060 */  slti      $v0, $v0, 0x60
 /* 80250 800E6DA0 14400003 */  bnez      $v0, .L800E6DB0

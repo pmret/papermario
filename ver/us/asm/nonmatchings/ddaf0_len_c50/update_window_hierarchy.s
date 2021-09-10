@@ -21,8 +21,8 @@ glabel update_window_hierarchy
 /* DE4A8 80147DA8 03A31821 */  addu      $v1, $sp, $v1
 /* DE4AC 80147DAC AC640000 */  sw        $a0, ($v1)
 /* DE4B0 80147DB0 0000302D */  daddu     $a2, $zero, $zero
-/* DE4B4 80147DB4 3C058016 */  lui       $a1, %hi(gUIPanels)
-/* DE4B8 80147DB8 24A59D50 */  addiu     $a1, $a1, %lo(gUIPanels)
+/* DE4B4 80147DB4 3C058016 */  lui       $a1, %hi(gWindows)
+/* DE4B8 80147DB8 24A59D50 */  addiu     $a1, $a1, %lo(gWindows)
 /* DE4BC 80147DBC 0040382D */  daddu     $a3, $v0, $zero
 .L80147DC0:
 /* DE4C0 80147DC0 90A20000 */  lbu       $v0, ($a1)
@@ -47,8 +47,8 @@ glabel update_window_hierarchy
 /* DE504 80147E04 0060302D */  daddu     $a2, $v1, $zero
 /* DE508 80147E08 03A0382D */  daddu     $a3, $sp, $zero
 /* DE50C 80147E0C 2405FFFF */  addiu     $a1, $zero, -1
-/* DE510 80147E10 3C048016 */  lui       $a0, %hi(gUIPanels)
-/* DE514 80147E14 24849D50 */  addiu     $a0, $a0, %lo(gUIPanels)
+/* DE510 80147E10 3C048016 */  lui       $a0, %hi(gWindows)
+/* DE514 80147E14 24849D50 */  addiu     $a0, $a0, %lo(gWindows)
 .L80147E18:
 /* DE518 80147E18 8CE20000 */  lw        $v0, ($a3)
 /* DE51C 80147E1C 10450005 */  beq       $v0, $a1, .L80147E34
