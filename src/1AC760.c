@@ -215,18 +215,17 @@ ApiStatus PartnerAfflictEnemy(Evt* script, s32 isInitialCall) {
 
     flags = *args++;
     if ((flags & 0x30) == 0x30) {
-        battleStatus->flags1 |= 0x30;
+        battleStatus->flags1 |= 0x10;
+        battleStatus->flags1 |= 0x20;
+    } else if (flags & 0x10) {
+        battleStatus->flags1 |= 0x10;
+        battleStatus->flags1 &= ~0x20;
+    } else if (flags & 0x20) {
+        battleStatus->flags1 &= ~0x10;
+        battleStatus->flags1 |= 0x20;
     } else {
-        if (flags & 0x10) {
-            battleStatus->flags1 |= 0x10;
-            battleStatus->flags1 &= ~0x20;
-        } else if (flags & 0x20) {
-            battleStatus->flags1 &= ~0x10;
-            battleStatus->flags1 |= 0x20;
-        } else {
-            battleStatus->flags1 &= ~0x10;
-            battleStatus->flags1 &= ~0x20;
-        }
+        battleStatus->flags1 &= ~0x10;
+        battleStatus->flags1 &= ~0x20;
     }
 
     if (flags & 0x40) {
