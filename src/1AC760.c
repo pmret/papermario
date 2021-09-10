@@ -195,7 +195,82 @@ ApiStatus GetActorLevel(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "1AC760", PartnerDamageEnemy);
 
-INCLUDE_ASM(s32, "1AC760", PartnerAfflictEnemy);
+ApiStatus PartnerAfflictEnemy(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor = get_actor(script->owner1.enemyID);
+
+    s32 returnValue;
+    s32 flags;
+    u8 statusChance;
+    s32 damageResult;
+
+    returnValue = *args++;
+    battleStatus->currentAttackElement = *args++;
+    battleStatus->currentAttackEventSuppression = *args++;
+    battleStatus->currentAttackStatus = *args++;
+    battleStatus->currentAttackStatus |= evt_get_variable(script, *args++);
+    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
+    battleStatus->powerBounceCounter = 0;
+
+    flags = *args++;
+    if ((flags & 0x30) == 0x30) {
+        battleStatus->flags1 |= 0x30;
+    } else {
+        if (flags & 0x10) {
+            battleStatus->flags1 |= 0x10;
+            battleStatus->flags1 &= ~0x20;
+        } else if (flags & 0x20) {
+            battleStatus->flags1 &= ~0x10;
+            battleStatus->flags1 |= 0x20;
+        } else {
+            battleStatus->flags1 &= ~0x10;
+            battleStatus->flags1 &= ~0x20;
+        }
+    }
+
+    if (flags & 0x40) {
+        gBattleStatus.flags1 |= 0x40;
+    } else {
+        gBattleStatus.flags1 &= ~0x40;
+    }
+    if (flags & 0x200) {
+        gBattleStatus.flags1 |= 0x200;
+    } else {
+        gBattleStatus.flags1 &= ~0x200;
+    }
+    if (flags & 0x80) {
+        gBattleStatus.flags1 |= 0x80;
+    } else {
+        gBattleStatus.flags1 &= ~0x80;
+    }
+    if (flags & 0x800) {
+        gBattleStatus.flags1 |= 0x800;
+    } else {
+        gBattleStatus.flags1 &= ~0x800;
+    }
+
+    statusChance = battleStatus->currentAttackStatus;
+    battleStatus->currentTargetID = actor->targetActorID;
+    battleStatus->currentTargetPart = actor->targetPartIndex;
+    battleStatus->statusChance = statusChance;
+    if (statusChance == 0xFF) {
+        battleStatus->statusChance = 0;
+    }
+    battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
+
+    damageResult = calc_partner_damage_enemy();
+    if (damageResult < 0) {
+        return ApiStatus_FINISH;
+    }
+    evt_set_variable(script, returnValue, damageResult);
+
+    if (!does_script_exist_by_ref(script)) {
+        return ApiStatus_FINISH;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "1AC760", PartnerPowerBounceEnemy);
 
