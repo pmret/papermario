@@ -666,10 +666,13 @@ static ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
 static s32 D_801512BC;
 static s32 D_801512C0;
 static s32 gEntityHeapBase;
-static s32 D_801512C8[6];
+static s32 D_801512C8;
+BSS ModelList* gCurrentModels;
+static s32 D_801512D0[4];
 static ModelTransformGroupList* gCurrentTransformGroups;
 static s8 gMsgGlobalWaveCounter[0x4];
-static s8 D_801512E8[0x8];
+static ModelCustomGfxList* gCurrentCustomModelGfxPtr;
+static s32 gLastCreatedEntityIndex;
 static s8 B_801512F0[0x410];
 static GameMode gMainGameState[2]; // TODO rename
 
@@ -692,13 +695,12 @@ extern ModelList bModelList;
 extern u32* wModelSpecialDls[32];
 extern u32* bModelSpecialDls[32];
 
-extern ModelList* gCurrentModels;
 
 extern ModelCustomGfxBuilder wCustomModelGfxBuilders;
 extern ModelCustomGfxBuilder bCustomModelGfxBuilders;
 extern ModelLocalVertexCopy** D_80152190;
 extern ModelLocalVertexCopy** D_801521D0;
-extern ModelCustomGfxList* gCurrentCustomModelGfxPtr;
+
 extern ModelLocalVertexCopy** gCurrentModelLocalVtxBuffers;
 extern ModelNode* D_80152214;
 extern ModelNode* D_80152218;

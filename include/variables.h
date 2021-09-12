@@ -56,7 +56,6 @@ extern s32 gMoveScriptTable[][4];
 extern EntityList gWorldEntityList;
 extern EntityList gBattleEntityList;
 extern EntityList* gCurrentEntityListPtr;
-extern s32 gLastCreatedEntityIndex;
 
 extern DynamicEntityList gWorldDynamicEntityList;
 extern DynamicEntityList gBattleDynamicEntityList;
