@@ -1568,7 +1568,43 @@ void update_entity_shadow_position(Entity* entity) {
     }
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_raycast_down);
+s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32* hitLength) {
+    f32 hitX, hitY, hitZ;
+    f32 hitDepth;
+    f32 hitNx, hitNy, hitNz;
+    s32 entityID;
+    s32 colliderID;
+    s32 hitID;
+    s32 ret;
+
+    hitDepth = 32767.0f;
+    *hitLength = 32767.0f;
+    entityID = test_ray_entities(*x, *y, *z, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    hitID = -1;
+    ret = FALSE;
+
+    if ((entityID >= 0) && ((get_entity_type(entityID) != 0xC) || (hitNx == 0.0f && hitNz == 0.0f && hitNy == 1.0))) {
+        hitID = entityID | 0x4000;
+    }
+
+    colliderID = test_ray_colliders(0x10000, *x, *y, *z, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx,
+                                    &hitNy, &hitNz);
+    if (colliderID >= 0) {
+        hitID = colliderID;
+    }
+
+    if (hitID >= 0) {
+        *hitLength = hitDepth;
+        *y = hitY;
+        *hitYaw = -atan2(0.0f, 0.0f, hitNz * 100.0f, hitNy * 100.0f);
+        *hitPitch = -atan2(0.0f, 0.0f, hitNx * 100.0f, hitNy * 100.0f);
+        ret = TRUE;
+    } else {
+        *hitYaw = 0.0f;
+        *hitPitch = 0.0f;
+    }
+    return ret;
+}
 
 INCLUDE_ASM(void, "a5dd0_len_114e0", set_standard_shadow_scale, Shadow* shadow, f32 scale);
 
