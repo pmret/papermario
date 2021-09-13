@@ -5,7 +5,7 @@
 typedef struct GameMode {
     /* 0x00 */ u16 flags;
     /* 0x04 */ void (*init)(void);
-    /* 0x08 */ void (*step)(struct GameMode*);
+    /* 0x08 */ void (*step)(void);
     /* 0x0C */ UNK_FUN_PTR(unk_0C);
     /* 0x10 */ void (*render)(void);
     /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
@@ -827,7 +827,7 @@ void update_entities(void) {
                         if (entity->hasEntityScript) {
                             entity->hasEntityScript--;
                             if (!(entity->hasEntityScript)) {
-                                while (step_entity_commandlist(entity) != 0);
+                                while (step_entity_commandlist(entity));
                             }
                         }
                     }
@@ -982,7 +982,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", step_entity_commandlist, Entity* entity);
 #endif
 
 void exec_entity_commandlist(Entity* entity) {
-    while (step_entity_commandlist(entity) != 0);
+    while (step_entity_commandlist(entity));
 }
 
 void func_8010FD98(s32 arg0, s32 alpha) {
@@ -1834,24 +1834,21 @@ void func_80112E4C(s32 i) {
     gMainGameState[i].flags |= 0x10;
 }
 
-#ifndef NON_MATCHING
-INCLUDE_ASM(s32, "a5dd0_len_114e0", step_current_game_mode);
-#else
 void step_current_game_mode(void) {
-    GameMode* gameMode;
+    GameMode* gameMode = gMainGameState;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++) {
-        gameMode = &gMainGameState[i];
-        if (gameMode->flags != 0 && !(gameMode->flags & 4) && !(gameMode->flags & 8)) {
-            gameMode->flags &= ~2;
-            gameMode->step(gameMode);
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
+        if (gameMode->flags != 0) {
+            if (!(gameMode->flags & 4)) {
+                if (!(gameMode->flags & 8)) {
+                    gameMode->flags &= ~2;
+                    gameMode->step();
+                }
+            }
         }
     }
-
-    //return i;
 }
-#endif
 
 // similar to step_current_game_mode, but calls unk_0C
 INCLUDE_ASM(s32, "a5dd0_len_114e0", state_do_unk);
