@@ -248,6 +248,7 @@ s32 npc_test_move_simple_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32
 s32 npc_test_move_complex_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 Npc* get_npc_by_index(s32 listIndex);
+void free_npc_by_index(s32 listIndex);
 
 // Partner
 void partner_walking_update_player_tracking(Npc* partner);
@@ -282,6 +283,7 @@ void set_screen_overlay_center(s32, s32, s32, s32);
 s32 rand_int(s32);
 void sort_items(void);
 s32 is_ability_active(s32 arg0);
+s32 is_starting_conversation(void);
 f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 void sin_cos_deg(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
