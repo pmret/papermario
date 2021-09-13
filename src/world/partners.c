@@ -868,7 +868,6 @@ void partner_disable_input(void) {
 
 void partner_do_player_collision(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Matrix4f* cameraPerspectiveMatrix;
     f32 sp28;
     f32 sp2C;
     f32 sp30;
@@ -877,9 +876,8 @@ void partner_do_player_collision(Npc* partner) {
     f32 sp3C;
     f32 sp40;
 
-    cameraPerspectiveMatrix = gCameras->perspectiveMatrix;
-    transform_point(cameraPerspectiveMatrix, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 1.0f, &sp28, &sp2C, &sp30, &sp34);
-    transform_point(cameraPerspectiveMatrix, partner->pos.x, partner->pos.y, partner->pos.z, 1.0f, &sp38, &sp3C, &sp40, &sp34);
+    transform_point(gCameras->perspectiveMatrix, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 1.0f, &sp28, &sp2C, &sp30, &sp34);
+    transform_point(gCameras->perspectiveMatrix, partner->pos.x, partner->pos.y, partner->pos.z, 1.0f, &sp38, &sp3C, &sp40, &sp34);
     sp28 = fabsf(sp28 - sp38);
     sp2C = fabsf(sp2C - sp3C);
     sp30 = fabsf(sp30 - sp40);
