@@ -112,7 +112,6 @@ s32 entity_block_handle_collision(Entity* entity);
 void entity_BlueSwitch_init(Entity* entity);
 void entity_HugeBlueSwitch_init(Entity* entity);
 
-
 s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 
 // Text
