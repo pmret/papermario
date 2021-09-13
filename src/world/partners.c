@@ -35,11 +35,22 @@ extern s16 D_8010CFC8;
 extern s16 D_8010CFCA;
 extern s16 D_8010CFCE;
 extern s32 D_802C0000;
+extern s32 D_8010CFB8;
+extern s32 D_8010CFBC;
+
+extern struct struct8015A578 *D_8010CD38;
+
+typedef struct struct8010CD38{
+    /* 0x00 */ s8 unk_00;
+    /* 0x03 */ char unk_01[3];
+    /* 0x04 */ Vec3f position;
+}struct8010CD38; // size unknown
 
 s32 partner_is_idle(Npc* partner);
 s32 world_partner_can_player_pause_default(Npc* partner);
 NpcID _create_npc_basic(NpcBlueprint* blueprint);
 void _use_partner_ability();
+
 
 // Partner icons
 s32 D_800F7F00[] = {
@@ -586,7 +597,30 @@ void partner_resume_ability_script(void) {
 
 INCLUDE_ASM(void, "world/partners", partner_walking_enable, Npc* partner, s32 val);
 
-INCLUDE_ASM(void, "world/partners", partner_walking_update_player_tracking, Npc* partner);
+void partner_walking_update_player_tracking(Npc* partner) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 tempCondition;
+    struct8010CD38* tempStruct;
+
+    if ((playerStatus->flags & 6) != 0) {
+        tempCondition = (playerStatus->actionState == 10 || playerStatus->actionState == 9) ^ 1;
+    } else {
+        tempCondition = 0;
+    }
+    tempStruct = (D_8010CFB8 << 2) + &D_8010CD38;
+    if (((tempStruct->unk_00 == 0) || (tempCondition == 0)) && ((tempStruct->position.x != playerStatus->position.x) || (tempStruct->position.y != playerStatus->position.y) || (tempStruct->position.z != playerStatus->position.z))) {
+        if (D_8010CFBC != D_8010CFB8 + 1) {
+            if (++D_8010CFB8 >= 0x28) {
+                D_8010CFB8 = 0;
+            }
+            tempStruct = (D_8010CFB8 << 2) + &D_8010CD38;
+            tempStruct->position.x = playerStatus->position.x;
+            tempStruct->position.y = playerStatus->position.y;
+            tempStruct->position.z = playerStatus->position.z;
+            tempStruct->unk_00 = tempCondition;
+        }
+    }
+}
 
 void partner_walking_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -621,7 +655,31 @@ INCLUDE_ASM(void, "world/partners", partner_walking_follow_player, Npc* partner)
 
 INCLUDE_ASM(void, "world/partners", partner_flying_enable, Npc* partner, s32 val);
 
-INCLUDE_ASM(void, "world/partners", partner_flying_update_player_tracking, Npc* partner);
+void partner_flying_update_player_tracking(Npc* partner) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    struct8010CD38* tempStruct;
+    f32 tempY;
+    s32 Zero = 0; // Why
+
+    tempY = playerStatus->position.y;
+    if ((playerStatus->actionState == 23) || (playerStatus->actionState == 21)) {
+        tempY = playerStatus->lastGoodPosition.y + partner->collisionHeight + 5;
+    }
+    tempStruct = (D_8010CFB8 << 2) + &D_8010CD38;
+    if ((!tempStruct->unk_00 || Zero == 0) && (tempStruct->position.x != playerStatus->position.x || tempStruct->position.y != tempY
+                                            || tempStruct->position.z != playerStatus->position.z)) {
+        if (D_8010CFBC != D_8010CFB8 + 1) {
+            if (++D_8010CFB8 >= 0x28) {
+                D_8010CFB8 = 0;
+            }
+            tempStruct = (D_8010CFB8 << 2) + &D_8010CD38;
+            tempStruct->position.x = playerStatus->position.x;
+            tempStruct->position.y = tempY;
+            tempStruct->position.z = playerStatus->position.z;
+            tempStruct->unk_00 = Zero;
+        }
+    }
+}
 
 INCLUDE_ASM(void, "world/partners", partner_flying_update_motion, Npc* partner);
 
@@ -634,7 +692,74 @@ s32 partner_init_put_away(Npc* arg0) {
     return D_8010CFC8;
 }
 
-INCLUDE_ASM(s32, "world/partners", partner_put_away);
+s32 partner_put_away(Npc* partner) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 tempMoveToY;
+    f32 tempMoveToZ;
+    f32 tempPosZ;
+    f32 tempMoveToX;
+    f32 tempPosX;
+    f32 tempPosY;
+    f32 tempDuration;
+    f32 divisor;
+
+    switch (D_8010CFC8){
+        case 0:
+            tempMoveToX = partner->pos.x;
+            tempMoveToY = partner->pos.y;
+            tempMoveToZ = partner->pos.z;
+            partner->flags &= ~0x200;
+            partner->flags &= ~8;
+            tempPosX = playerStatus->position.x;
+            partner->moveToPos.x = tempPosX;
+            tempPosY = playerStatus->position.y + (playerStatus->colliderHeight / 2);
+            partner->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight / 2);
+            tempPosZ = playerStatus->position.z;
+            D_800F833C = tempMoveToX;
+            D_800F8340 = tempMoveToY;
+            D_800F8344 = tempMoveToZ;
+            partner->moveSpeed = 4.0f;
+            partner->jumpScale = 1.6f;
+            partner->moveToPos.z = tempPosZ;
+            partner->planarFlyDist = dist2D(tempMoveToX, tempMoveToZ, tempPosX, tempPosZ);
+            partner->yaw = atan2(tempMoveToX, tempMoveToZ, tempPosX, tempPosZ);
+            partner->duration = 0xF;
+            divisor = 15.0f;
+            partner->moveSpeed = partner->planarFlyDist / divisor;
+            tempMoveToY = tempPosY - tempMoveToY;
+            partner->jumpVelocity = (tempMoveToY + partner->jumpScale * partner->duration * partner->duration * 0.5f) / partner->duration;
+            partner->currentAnim.w = gPartnerAnimations[D_8010CFD8].anims[2];
+            enable_npc_blur(partner);
+            D_8010CFC8 = 1;
+            break;
+        case 1:
+            partner->jumpVelocity -= partner->jumpScale;
+            partner->pos.y += partner->jumpVelocity;
+            if (partner->jumpVelocity <= 0.0f) {
+                partner->currentAnim.w = gPartnerAnimations[D_8010CFD8].anims[3];
+            }
+            npc_move_heading(partner, partner->moveSpeed, partner->yaw);
+            tempDuration = partner->duration;
+            if (partner->duration > 10.0f) {
+                tempDuration = 10.0f;
+            }
+            partner->scale.x = tempDuration / 10.0f;
+            partner->scale.y = partner->scale.x;
+            partner->scale.z = partner->scale.x;
+            partner->duration--;
+            if (partner->duration >> 0x10 != 0) {
+                D_8010CFC8 = 2;
+            }
+            break;
+        case 2:
+            partner->currentAnim.w = gPartnerAnimations[D_8010CFD8].anims[4];
+            partner->jumpVelocity = 0.0f;
+            partner->pos.y = partner->moveToPos.y;
+            disable_npc_blur(partner);
+            return 1;
+    }
+    return 0;
+}
 
 s32 partner_init_get_out(Npc* arg0) {
     arg0->unk_80 = 0x10000;
@@ -701,37 +826,30 @@ void func_800EF43C(void) {
 
 INCLUDE_ASM(void, "world/partners", partner_clear_player_tracking, Npc* partner);
 
-// Saves at the end
-#ifdef NON_MATCHING
 s32 func_800EF4E0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* cameras = &gCameras;
-    f32 yaw;
     s32 ret;
 
     if (playerStatus->unk_90 == 0.0f) {
         if (!(playerStatus->spriteFacingAngle >= 90.0f) || !(playerStatus->spriteFacingAngle < 270.0f)) {
             ret = 1;
-            yaw = clamp_angle(cameras[0].currentYaw - 90.0f);
+            playerStatus->targetYaw = clamp_angle(cameras[0].currentYaw - 90.0f);
         } else {
-            yaw = clamp_angle(cameras[0].currentYaw + 90.0f);
+            playerStatus->targetYaw = clamp_angle(cameras[0].currentYaw + 90.0f);
             ret = 0;
         }
     } else if (get_clamped_angle_diff(cameras[0].currentYaw, playerStatus->targetYaw) < 0.0f) {
         ret = 1;
-        yaw = clamp_angle(cameras[0].currentYaw - 90.0f);
+        playerStatus->targetYaw = clamp_angle(cameras[0].currentYaw - 90.0f);
     } else {
         ret = 0;
-        yaw = clamp_angle(cameras[0].currentYaw + 90.0f);
+        playerStatus->targetYaw = clamp_angle(cameras[0].currentYaw + 90.0f);
     }
 
-    playerStatus->targetYaw = yaw;
     playerStatus->currentYaw = playerStatus->targetYaw;
     return ret;
 }
-#else
-INCLUDE_ASM(s32, "world/partners", func_800EF4E0);
-#endif
 
 void partner_enable_input(void) {
     PartnerActionStatus* actionStatus = &gPartnerActionStatus;
@@ -748,6 +866,27 @@ void partner_disable_input(void) {
     actionStatus->inputDisabled++;
 }
 
-INCLUDE_ASM(void, "world/partners", partner_do_player_collision, Npc* partner);
+void partner_do_player_collision(Npc* partner) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Matrix4f* cameraPerspectiveMatrix;
+    f32 sp28;
+    f32 sp2C;
+    f32 sp30;
+    f32 sp34;
+    f32 sp38;
+    f32 sp3C;
+    f32 sp40;
+
+    cameraPerspectiveMatrix = gCameras->perspectiveMatrix;
+    transform_point(cameraPerspectiveMatrix, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 1.0f, &sp28, &sp2C, &sp30, &sp34);
+    transform_point(cameraPerspectiveMatrix, partner->pos.x, partner->pos.y, partner->pos.z, 1.0f, &sp38, &sp3C, &sp40, &sp34);
+    sp28 = fabsf(sp28 - sp38);
+    sp2C = fabsf(sp2C - sp3C);
+    sp30 = fabsf(sp30 - sp40);
+    if (sp28 <= (partner->collisionRadius + playerStatus->colliderDiameter) * 0.9f && sp2C <= partner->collisionHeight + playerStatus->colliderHeight && sp30 <= 4.0) {
+        npc_move_heading(partner, 1.0f, atan2(playerStatus->position.x, playerStatus->position.z, partner->pos.x, partner->pos.z));
+        add_vec2D_polar(&partner->pos.x, &partner->pos.z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
+    }
+}
 
 INCLUDE_ASM(s32, "world/partners", partner_move_to_goal);
