@@ -904,7 +904,82 @@ void set_entity_commandlist(Entity* entity, s32* entityScript) {
     entity->savedReadPos = entity->scriptReadPos;
 }
 
+// Ordering issues with the savedReadPos cases (4 and 5)
+#ifdef NON_MATCHING
+s32 step_entity_commandlist(Entity* entity) {
+    s32* args = entity->scriptReadPos;
+    s32 ret;
+    s32 a1;
+    s32 (*tempfunc)(Entity*);
+
+    switch (*args++) {
+        case 0:
+            entity->hasEntityScript = -1;
+            entity->updateScriptCallback = NULL;
+            entity->scriptReadPos = NULL;
+            ret = FALSE;
+            break;
+        case 1:
+            entity->scriptReadPos = *args;
+            entity->hasEntityScript = 1;
+            entity->savedReadPos = entity->scriptReadPos;
+            ret = TRUE;
+            break;
+        case 2:
+            tempfunc = *args++;
+            entity->scriptReadPos = args;
+            (tempfunc)(entity);
+            ret = TRUE;
+            break;
+        case 3:
+            entity->hasEntityScript = *args++;
+            entity->updateScriptCallback = (s32 (*)(Entity*)) *args++;
+            entity->scriptReadPos = args++;
+            ret = FALSE;
+            break;
+        case 4:
+            entity->scriptReadPos = entity->savedReadPos[*args++];
+            ret = TRUE;
+            break;
+        case 5:
+            a1 = *args++;
+            entity->savedReadPos[a1] = args;
+            entity->scriptReadPos = args;
+            ret = TRUE;
+            break;
+        case 6:
+            if (entity->boundScriptBytecode != NULL) {
+                entity->flags |= 0x1000000;
+            }
+            entity->scriptReadPos = args++;
+            ret = TRUE;
+            break;
+        case 7:
+            entity->flags |= *args++;
+            entity->scriptReadPos = args++;
+            ret = TRUE;
+            break;
+        case 8:
+            entity->flags &= ~*args++;
+            entity->scriptReadPos = args++;
+            ret = TRUE;
+            break;
+        case 9:
+            sfx_play_sound(*args++);
+            entity->scriptReadPos = args++;
+            ret = TRUE;
+            break;
+        default:
+            args++;
+            entity->scriptReadPos = args++;
+            ret = TRUE;
+            break;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM(s32, "a5dd0_len_114e0", step_entity_commandlist, Entity* entity);
+#endif
 
 void exec_entity_commandlist(Entity* entity) {
     while (step_entity_commandlist(entity) != 0);
@@ -1376,7 +1451,45 @@ s32 create_shadow_from_data(StaticShadowData* data, f32 x, f32 y, f32 z) {
     return shadow->listIndex;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", MakeEntity, Evt* script, s32 isInitialCall);
+s32 MakeEntity(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    StaticEntityData* entityData;
+    s32 x, y, z;
+    s32 flags;
+    s32 temp_v0;
+    s32 entityIndex;
+    s32 t80000000;
+    s32* temp;
+
+    if (isInitialCall != TRUE) {
+        return ApiStatus_DONE2;
+    }
+
+    entityData = (StaticEntityData*)evt_get_variable(script, *args++);
+    temp = &D_8015C7D0[2];
+    t80000000 = 0x80000000;
+    x = evt_get_variable(script, *args++);
+    y = evt_get_variable(script, *args++);
+    z = evt_get_variable(script, *args++);
+    flags = evt_get_variable(script, *args++);
+
+    *temp-- = 0;
+    *temp-- = 0;
+    *temp = 0;
+
+    do {
+        temp_v0 = evt_get_variable(script, *args++);
+
+        if (temp_v0 != t80000000) {
+            *temp++ = temp_v0;
+        }
+    } while (temp_v0 != t80000000);
+
+    entityIndex = create_entity(entityData, x, y, z, flags, D_8015C7D0[0], D_8015C7D0[1], D_8015C7D0[2], t80000000);
+    gLastCreatedEntityIndex = entityIndex;
+    script->varTable[0] = entityIndex;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", SetEntityCullMode);
 
