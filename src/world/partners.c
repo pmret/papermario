@@ -49,8 +49,7 @@ typedef struct struct8010CD38{
 
 s32 partner_is_idle(Npc* partner);
 s32 world_partner_can_player_pause_default(Npc* partner);
-NpcID _create_npc_basic(NpcBlueprint* blueprint);
-void _use_partner_ability();
+void _use_partner_ability(void);
 
 // Partner icons
 s32 D_800F7F00[] = {
