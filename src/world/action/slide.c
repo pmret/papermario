@@ -13,9 +13,8 @@ extern s32 D_802B679C;
 
 void func_802B6000_E27510(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32* temp_v0;
+    f32* temp_v0 = playerStatus->unk_D0;
 
-    temp_v0 = playerStatus->unk_D0;
     playerStatus->gravityIntegrator[0] = temp_v0[4];
     playerStatus->gravityIntegrator[1] = temp_v0[5];
     playerStatus->gravityIntegrator[2] = temp_v0[6];
@@ -66,6 +65,7 @@ void func_802B6060_E27570(void) {
     playerStatus->position.x = sp28;
     playerStatus->position.z = sp30;
     playerStatus->position.y = sp2C;
+
     switch (playerStatus->fallState) {
         case 0:
             D_802B6780 += 0.1;
@@ -100,9 +100,9 @@ void func_802B6060_E27570(void) {
             } else {
                 playerStatus->fallState = 2;
             }
-            sin_cos_rad((D_802B6790 * 6.28318f) / 360.0f, &sp4C, &sp50);
+            sin_cos_rad((D_802B6790 * TAU) / 360.0f, &sp4C, &sp50);
             playerStatus->position.y += fabsf((sp4C / sp50) * playerStatus->currentSpeed);
-            snd_stop_sound(0x167);
+            snd_stop_sound(SOUND_UNKNOWN_167);
             break;
         case 1:
             sp28 = playerStatus->position.x;
@@ -123,7 +123,6 @@ void func_802B6060_E27570(void) {
                     playerStatus->framesOnGround = 15;
                     playerStatus->currentSpeed = 0.0f;
                     playerStatus->position.y = sp2C;
-                    break;
                 }
                 break;
             }
@@ -153,7 +152,6 @@ void func_802B6060_E27570(void) {
                 suggest_player_anim_setUnkFlag(0x80003);
                 sfx_play_sound_at_player(SOUND_UNKNOWN_162, 0);
                 playerStatus->fallState++;
-                break;
             }
             break;
         case 4:

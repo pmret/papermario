@@ -85,7 +85,7 @@ void func_802B60A4_E29514(void) {
                 D_802B6EF4++;
             }
             D_802B6EE8 += 8.0f;
-            playerStatus->position.y = D_802B6EF4 + sin_rad(clamp_angle(D_802B6EE8) * 6.28318f / 360.0f) * 4.0f;
+            playerStatus->position.y = D_802B6EF4 + sin_rad(clamp_angle(D_802B6EE8) * TAU / 360.0f) * 4.0f;
             if (D_802B6ED0 >= 0) {
                 entityByIndex = get_entity_by_index(D_802B6ED0);
                 tempDistance = dist2D(entityByIndex->position.x, entityByIndex->position.z, playerStatus->position.x, playerStatus->position.z);
@@ -93,16 +93,16 @@ void func_802B60A4_E29514(void) {
                 if (tempDistance > 4.0f) {
                     tempDistance--;
                 }
-                sin_cos_rad(D_802B6EEC * 6.28318f / 360.0f, &sp10, &sp14);
+                sin_cos_rad(D_802B6EEC * TAU / 360.0f, &sp10, &sp14);
                 playerStatus->position.x = entityByIndex->position.x + (sp10 * tempDistance);
                 playerStatus->position.z = entityByIndex->position.z - (sp14 * tempDistance);
-                sin_cos_rad((D_802B6EEC - 91.0f) * 6.28318f / 360.0f, &sp10, &sp14);
+                sin_cos_rad((D_802B6EEC - 91.0f) * TAU / 360.0f, &sp10, &sp14);
                 D_802B6ED4 = sp10 * D_802B6EDC;
                 D_802B6ED8 = -sp14 * D_802B6EDC;
             }
             game_input_to_move_vector(&sp18, &sp1C);
             if (sp1C != 0.0f) {
-                sin_cos_rad((sp18 * 6.28318f) / 360.0f, &sp10, &sp14);
+                sin_cos_rad((sp18 * TAU) / 360.0f, &sp10, &sp14);
                 sp1C *= 0.03125f;
                 if (sp1C < 0.1) {
                     sp1C = 0.1f;
@@ -138,7 +138,7 @@ void func_802B60A4_E29514(void) {
                 playerStatus->flags &= ~0x100000;
             }
             playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
-            sin_cos_rad((D_802B6EEC - 60.0f) * 6.28318f / 360.0f, &sp10, &sp14);
+            sin_cos_rad((D_802B6EEC - 60.0f) * TAU / 360.0f, &sp10, &sp14);
             D_802B6EDC += 0.2;
             D_802B6EF0 -= 0.72;
             D_802B6ED4 = sp10 * D_802B6EDC;
@@ -171,16 +171,16 @@ void func_802B60A4_E29514(void) {
                 if (tempDistance > 4.0f) {
                     tempDistance -= 1.0f;
                 }
-                sin_cos_rad(D_802B6EEC * 6.28318f / 360.0f, &sp10, &sp14);
+                sin_cos_rad(D_802B6EEC * TAU / 360.0f, &sp10, &sp14);
                 playerStatus->position.x = entityByIndex->position.x + (sp10 * tempDistance);
                 playerStatus->position.z = entityByIndex->position.z - (sp14 * tempDistance);
-                sin_cos_rad((D_802B6EEC - 91.0f) * 6.28318f / 360.0f, &sp10, &sp14);
+                sin_cos_rad((D_802B6EEC - 91.0f) * TAU / 360.0f, &sp10, &sp14);
                 D_802B6ED4 = sp10 * D_802B6EDC;
                 D_802B6ED8 = -sp14 * D_802B6EDC;
             }
             D_802B6EE8 += 8.0f;
 
-            playerStatus->position.y = D_802B6EF4 + sin_rad(clamp_angle(D_802B6EE8) * 6.28318f / 360.0f) * 4.0f;
+            playerStatus->position.y = D_802B6EF4 + sin_rad(clamp_angle(D_802B6EE8) * TAU / 360.0f) * 4.0f;
             gCameras->targetPos.z = playerStatus->position.z;
             gCameras->targetPos.x = playerStatus->position.x;
             gCameras->targetPos.y = playerStatus->position.y;
@@ -208,7 +208,7 @@ void func_802B60A4_E29514(void) {
                 D_802B6EE0 = 45.0f;
             }
 
-            tempY = sin_rad(D_802B6EE0 * 6.28318f / 360.0f) * 4.0f;
+            tempY = sin_rad(D_802B6EE0 * TAU / 360.0f) * 4.0f;
             playerStatus->position.y += tempY;
             gCameras->targetPos.x = playerStatus->position.x;
             gCameras->targetPos.y = playerStatus->position.y;
@@ -218,21 +218,20 @@ void func_802B60A4_E29514(void) {
                 if (D_802BCE30 + 30 < playerStatus->position.y) {
                     playerStatus->fallState++;
                     sp18 = atan2(playerStatus->position.x, playerStatus->position.z, D_802BCE34, D_802BCE32);
-                    sin_cos_rad(sp18 * 6.28318f / 360.0f, &sp10, &sp14);
+                    sin_cos_rad(sp18 * TAU / 360.0f, &sp10, &sp14);
                     playerStatus->framesOnGround = 64;
                     D_802B6EEC = sp18;
                     D_802B6ED4 = (sp10 * tempDistance) * 0.015625;
                     D_802B6ED8 = (-sp14 * tempDistance) * 0.015625;
-                    break;
                 }
                 break;
             }
             if (playerStatus->framesOnGround == 0) {
                 playerStatus->fallState = 0xA;
                 playerStatus->framesOnGround = 20;
-                break;
+            } else {
+                playerStatus->framesOnGround--;
             }
-            playerStatus->framesOnGround--;
             break;
         case 2:
             playerStatus->spriteFacingAngle = clamp_angle(playerStatus->spriteFacingAngle + D_802B6EE4);
@@ -241,7 +240,7 @@ void func_802B60A4_E29514(void) {
                 if (D_802B6EE0-- < 0.0f) {
                     D_802B6EE0 = 0.0f;
                 }
-                tempY = 2.0f * sin_rad(D_802B6EE0 * 6.28318f / 360.0f);
+                tempY = 2.0f * sin_rad(D_802B6EE0 * TAU / 360.0f);
                 playerStatus->position.x += D_802B6ED4;
                 playerStatus->position.y += tempY;
                 playerStatus->position.z += D_802B6ED8;
@@ -261,7 +260,7 @@ void func_802B60A4_E29514(void) {
             if (D_802B6EE0 > 45.0f) {
                 D_802B6EE0 = 45.0f;
             }
-            tempY = sin_rad(D_802B6EE0 * 6.28318f / 360.0f) * 3.0f;
+            tempY = sin_rad(D_802B6EE0 * TAU / 360.0f) * 3.0f;
             playerStatus->position.y += tempY;
             if (playerStatus->framesOnGround != 0) {
                 playerStatus->framesOnGround--;
