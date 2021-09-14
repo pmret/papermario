@@ -2,6 +2,7 @@
 #include "ld_addrs.h"
 #include "partners.h"
 #include "map.h"
+#include "npc.h"
 
 #include "partner/goombario.h"
 #include "sprite/npc/world_goombario.h"
@@ -38,7 +39,7 @@ extern s32 D_802C0000;
 extern s32 D_8010CFB8;
 extern s32 D_8010CFBC;
 
-extern struct struct8015A578 *D_8010CD38;
+extern struct struct8015A578* D_8010CD38;
 
 typedef struct struct8010CD38{
     /* 0x00 */ s8 unk_00;
@@ -50,7 +51,6 @@ s32 partner_is_idle(Npc* partner);
 s32 world_partner_can_player_pause_default(Npc* partner);
 NpcID _create_npc_basic(NpcBlueprint* blueprint);
 void _use_partner_ability();
-
 
 // Partner icons
 s32 D_800F7F00[] = {
@@ -603,12 +603,14 @@ void partner_walking_update_player_tracking(Npc* partner) {
     struct8010CD38* tempStruct;
 
     if ((playerStatus->flags & 6) != 0) {
-        tempCondition = (playerStatus->actionState == 10 || playerStatus->actionState == 9) ^ 1;
+        tempCondition = (playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_STEP_DOWN) ^ 1;
     } else {
         tempCondition = 0;
     }
     tempStruct = (D_8010CFB8 << 2) + &D_8010CD38;
-    if (((tempStruct->unk_00 == 0) || (tempCondition == 0)) && ((tempStruct->position.x != playerStatus->position.x) || (tempStruct->position.y != playerStatus->position.y) || (tempStruct->position.z != playerStatus->position.z))) {
+    if (((tempStruct->unk_00 == 0) || (tempCondition == 0)) &&
+        ((tempStruct->position.x != playerStatus->position.x) || (tempStruct->position.y != playerStatus->position.y)
+        || (tempStruct->position.z != playerStatus->position.z))) {
         if (D_8010CFBC != D_8010CFB8 + 1) {
             if (++D_8010CFB8 >= 0x28) {
                 D_8010CFB8 = 0;
@@ -659,14 +661,14 @@ void partner_flying_update_player_tracking(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     struct8010CD38* tempStruct;
     f32 tempY;
-    s32 Zero = 0; // Why
+    s32 zero = 0; // TODO fix this as || zero == 0 is always going to be true as is
 
     tempY = playerStatus->position.y;
     if ((playerStatus->actionState == 23) || (playerStatus->actionState == 21)) {
         tempY = playerStatus->lastGoodPosition.y + partner->collisionHeight + 5;
     }
     tempStruct = (D_8010CFB8 << 2) + &D_8010CD38;
-    if ((!tempStruct->unk_00 || Zero == 0) && (tempStruct->position.x != playerStatus->position.x || tempStruct->position.y != tempY
+    if ((!tempStruct->unk_00 || zero == 0) && (tempStruct->position.x != playerStatus->position.x || tempStruct->position.y != tempY
                                             || tempStruct->position.z != playerStatus->position.z)) {
         if (D_8010CFBC != D_8010CFB8 + 1) {
             if (++D_8010CFB8 >= 0x28) {
@@ -676,7 +678,7 @@ void partner_flying_update_player_tracking(Npc* partner) {
             tempStruct->position.x = playerStatus->position.x;
             tempStruct->position.y = tempY;
             tempStruct->position.z = playerStatus->position.z;
-            tempStruct->unk_00 = Zero;
+            tempStruct->unk_00 = zero;
         }
     }
 }

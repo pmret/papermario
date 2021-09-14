@@ -49,7 +49,7 @@ void step_game_loop(void);
 s32 resume_all_group(s32 groupFlags);
 f32 length2D(f32 x, f32 y);
 void player_input_to_move_vector(f32* angle, f32* magnitude);
-void game_input_to_move_vector(f32*, f32*);
+void game_input_to_move_vector(f32* x, f32* y);
 void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3);
 f32 func_800E5348(void);
 
@@ -173,7 +173,7 @@ s32 phys_can_player_interact(void);
 void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2);
 
 s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
-s32 player_test_move_with_slipping(PlayerStatus*, f32* posX, f32* posY, f32* posZ, f32 Speed, f32 Heading);
+s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* posX, f32* posY, f32* posZ, f32 speed, f32 heading);
 
 s32 evt_get_variable(Evt* script, Bytecode var);
 s32 evt_set_variable(Evt* script, Bytecode var, s32 value);
@@ -248,7 +248,6 @@ s32 npc_test_move_simple_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32
 s32 npc_test_move_complex_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 Npc* get_npc_by_index(s32 listIndex);
-void free_npc_by_index(s32 listIndex);
 
 // Partner
 void partner_walking_update_player_tracking(Npc* partner);
@@ -323,7 +322,7 @@ Npc* get_npc_unsafe(NpcID npcId);
 Npc* resolve_npc(Evt* script, NpcID npcIdOrPtr);
 void set_npc_yaw(Npc* npcPtr, f32 angle);
 void npc_move_heading(Npc* npc, f32 speed, f32 yaw);
-void enable_npc_blur(Npc*);
+void enable_npc_blur(Npc* npc);
 void disable_npc_blur(Npc* npc);
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
