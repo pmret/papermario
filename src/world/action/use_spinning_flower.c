@@ -122,7 +122,7 @@ void func_802B60A4_E29514(void) {
                 D_802B6EF0 = 1.6f;
                 playerStatus->flags |= 0x800000;
             }
-            if (gGameStatusPtr->pressedButtons & 0x00002000 && !(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
+            if (gGameStatusPtr->pressedButtons & BUTTON_Z && !(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
                 suggest_player_anim_setUnkFlag(0x10007);
                 playerStatus->fallState = 3;
                 playerStatus->framesOnGround = 30;
