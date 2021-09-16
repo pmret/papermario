@@ -393,7 +393,7 @@ void filemenu_update_hidden_with_rotation(
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
-    if (updateCounter <= 9) { // TODO: array count?
+    if (updateCounter < 10) { // TODO: array count?
         *rotY += -D_80249D14[updateCounter];
         *flags = 8 | 1;
     } else {
@@ -421,7 +421,7 @@ void filemenu_update_hidden_name_confirm(
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
-    if (updateCounter <= 9) { // TODO: array count?
+    if (updateCounter < ARRAY_COUNT(D_80249D48)) {
         gDPPipeSync(gMasterGfxPos++);
         gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
         gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
