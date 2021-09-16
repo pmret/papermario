@@ -148,7 +148,19 @@ INCLUDE_ASM(s32, "pause/135EE0", pause_handle_input);
 
 INCLUDE_ASM(s32, "pause/135EE0", pause_cleanup);
 
-INCLUDE_ASM(s32, "pause/135EE0", pause_get_total_equipped_bp_cost);
+s32 pause_get_total_equipped_bp_cost(void) {
+    s32 totalCost = 0;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
+        ItemID itemID = gPlayerData.equippedBadges[i];
+        if (itemID != ITEM_NONE) {
+            MoveID moveID = gItemTable[itemID].moveID;
+            totalCost += gMoveTable[moveID].costBP;
+        }
+    }
+    return totalCost;
+}
 
 INCLUDE_ASM(void, "pause/135EE0", pause_draw_rect, s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls,
             s32 ult, s32 dsdx, s32 dtdy);
