@@ -1746,4 +1746,10 @@ enum EffectGfxDataFlags {
     FX_GRAPHICS_2 = 2,
 };
 
+typedef u8 MoveID;
+enum MoveIDs {
+    MOVE_NONE,
+    MOVE_UNK_184 = 184,
+};
+
 #endif

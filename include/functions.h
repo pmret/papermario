@@ -243,6 +243,7 @@ PlayerData* get_player_data(void);
 // Pause
 s32 pause_interp_vertical_scroll(s32 deltaBefore);
 void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
+s32 pause_get_total_equipped_bp_cost(void);
 
 s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);

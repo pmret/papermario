@@ -19,6 +19,7 @@ extern GameStatus* gGameStatusPtr;
 extern s32 gRandSeed;
 extern StaticItem gItemTable[364];
 extern UNK_FUN_PTR(gCurrentUpdateFunction);
+extern StaticMove gMoveTable[185];
 
 extern s32 gBattleState;
 extern BattleStatus gBattleStatus;

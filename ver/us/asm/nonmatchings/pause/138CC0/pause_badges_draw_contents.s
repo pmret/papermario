@@ -284,8 +284,8 @@ glabel pause_badges_draw_contents
 /* 13AC5C 8024791C 3C0B8008 */  lui       $t3, %hi(gItemTable)
 /* 13AC60 80247920 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
 /* 13AC64 80247924 004B1021 */  addu      $v0, $v0, $t3
-/* 13AC68 80247928 3C0A8009 */  lui       $t2, %hi(D_8008F060)
-/* 13AC6C 8024792C 254AF060 */  addiu     $t2, $t2, %lo(D_8008F060)
+/* 13AC68 80247928 3C0A8009 */  lui       $t2, %hi(gMoveTable)
+/* 13AC6C 8024792C 254AF060 */  addiu     $t2, $t2, %lo(gMoveTable)
 /* 13AC70 80247930 9043001A */  lbu       $v1, 0x1a($v0)
 /* 13AC74 80247934 8FAB0084 */  lw        $t3, 0x84($sp)
 /* 13AC78 80247938 00031080 */  sll       $v0, $v1, 2
@@ -309,8 +309,8 @@ glabel pause_badges_draw_contents
 /* 13ACBC 8024797C 3C0B8008 */  lui       $t3, %hi(gItemTable)
 /* 13ACC0 80247980 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
 /* 13ACC4 80247984 004B1021 */  addu      $v0, $v0, $t3
-/* 13ACC8 80247988 3C0A8009 */  lui       $t2, %hi(D_8008F060)
-/* 13ACCC 8024798C 254AF060 */  addiu     $t2, $t2, %lo(D_8008F060)
+/* 13ACC8 80247988 3C0A8009 */  lui       $t2, %hi(gMoveTable)
+/* 13ACCC 8024798C 254AF060 */  addiu     $t2, $t2, %lo(gMoveTable)
 /* 13ACD0 80247990 9043001A */  lbu       $v1, 0x1a($v0)
 /* 13ACD4 80247994 8FAB006C */  lw        $t3, 0x6c($sp)
 /* 13ACD8 80247998 00031080 */  sll       $v0, $v1, 2
@@ -467,8 +467,8 @@ glabel pause_badges_draw_contents
 /* 13AF10 80247BD0 3C0B8008 */  lui       $t3, %hi(gItemTable)
 /* 13AF14 80247BD4 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
 /* 13AF18 80247BD8 006B1821 */  addu      $v1, $v1, $t3
-/* 13AF1C 80247BDC 3C0B8009 */  lui       $t3, %hi(D_8008F060)
-/* 13AF20 80247BE0 256BF060 */  addiu     $t3, $t3, %lo(D_8008F060)
+/* 13AF1C 80247BDC 3C0B8009 */  lui       $t3, %hi(gMoveTable)
+/* 13AF20 80247BE0 256BF060 */  addiu     $t3, $t3, %lo(gMoveTable)
 /* 13AF24 80247BE4 24070001 */  addiu     $a3, $zero, 1
 /* 13AF28 80247BE8 8FAA00C8 */  lw        $t2, 0xc8($sp)
 /* 13AF2C 80247BEC 9063001A */  lbu       $v1, 0x1a($v1)
@@ -607,8 +607,8 @@ glabel pause_badges_draw_contents
 /* 13B114 80247DD4 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
 /* 13B118 80247DD8 004B1021 */  addu      $v0, $v0, $t3
 /* 13B11C 80247DDC 9043001A */  lbu       $v1, 0x1a($v0)
-/* 13B120 80247DE0 3C0A8009 */  lui       $t2, %hi(D_8008F060)
-/* 13B124 80247DE4 254AF060 */  addiu     $t2, $t2, %lo(D_8008F060)
+/* 13B120 80247DE0 3C0A8009 */  lui       $t2, %hi(gMoveTable)
+/* 13B124 80247DE4 254AF060 */  addiu     $t2, $t2, %lo(gMoveTable)
 /* 13B128 80247DE8 00031080 */  sll       $v0, $v1, 2
 /* 13B12C 80247DEC 00431021 */  addu      $v0, $v0, $v1
 /* 13B130 80247DF0 00021080 */  sll       $v0, $v0, 2
