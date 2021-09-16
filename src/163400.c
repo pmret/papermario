@@ -23,34 +23,23 @@ s32 filemenu_cursorGoalAlpha = 0;
 s32 filemenu_cursorGoalAlpha2 = 0;
 s32 D_80249BB0[] = { 0x00000001, 0x00000000 };
 s32 D_80249BB8[] = { 0x00000000 };
-s16 D_80249BBC[] = { 315, 303, 283, 260, 235, 210, 185, 160, 135, 110, 85, 60, 37, 17, 5 };
-s16 D_80249BDA = 0;
-s16 D_80249BDC[] = { 315, 303, 283, 260, 235, 210, 185, 160, 135, 110, 85, 60, 37, 17, 5 };
-s16 D_80249BFA = 0;
-s16 D_80249BFC[] = { 157, 151, 141, 130, 117, 105, 92, 80, 67, 55, 42, 30, 18, 8, 2 };
-s16 D_80249C1A = 0;
-s16 D_80249C1C[] = { 157, 151, 141, 130, 117, 105, 92, 80, 67, 55, 42, 30, 18, 8, 2 };
-s16 D_80249C3A = 0;
-s16 D_80249C3C[] = { 63, 60, 56, 52, 47, 42, 37, 32, 27, 22, 17, 12, 7, 3, 1 };
-s16 D_80249C5A = 0;
-s16 D_80249C5C[] = { 63, 60, 56, 52, 47, 42, 37, 32, 27, 22, 17, 12, 7, 3, 1 };
-s16 D_80249C7A = 0;
-s16 D_80249C7C[] = { -5, -17, -37, -60, -85, -110, -135, -160, -185 };
-s16 D_80249C8E = -210;
-s16 D_80249C90[] = { -5, -17, -37, -60, -85, -110, -135, -160, -185 };
-s16 D_80249CA2 = -210;
-s16 D_80249CA4[] = { -2, -8, -18, -30, -42, -55, -70, -85, -100 };
-s16 D_80249CB6 = -115;
-s16 D_80249CB8[] = { -2, -8, -18, -30, -42, -55, -70, -85, -100 };
-s16 D_80249CCA = -115;
-s16 D_80249CCC[] = { -1, -3, -7, -12, -17, -22, -27, -32, -37 };
-s16 D_80249CDE = -42;
-s16 D_80249CE0[] = { -1, -3, -7, -12, -17, -22, -27, -32, -37 };
-s16 D_80249CF2 = -42;
-s16 D_80249CF4[] = { 180, 173, 161, 148, 134, 120, 105, 91, 77, 62, 48, 34, 21, 9, 2 };
+s16 D_80249BBC[16] = { 315, 303, 283, 260, 235, 210, 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
+s16 D_80249BDC[16] = { 315, 303, 283, 260, 235, 210, 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
+s16 D_80249BFC[16] = { 157, 151, 141, 130, 117, 105, 92, 80, 67, 55, 42, 30, 18, 8, 2, 0 };
+s16 D_80249C1C[16] = { 157, 151, 141, 130, 117, 105, 92, 80, 67, 55, 42, 30, 18, 8, 2, 0 };
+s16 D_80249C3C[16] = { 63, 60, 56, 52, 47, 42, 37, 32, 27, 22, 17, 12, 7, 3, 1, 0 };
+s16 D_80249C5C[16] = { 63, 60, 56, 52, 47, 42, 37, 32, 27, 22, 17, 12, 7, 3, 1, 0 };
+s16 D_80249C7C[10] = { -5, -17, -37, -60, -85, -110, -135, -160, -185, -210 };
+s16 D_80249C90[10] = { -5, -17, -37, -60, -85, -110, -135, -160, -185, -210 };
+s16 D_80249CA4[10] = { -2, -8, -18, -30, -42, -55, -70, -85, -100, -115 };
+s16 D_80249CB8[10] = { -2, -8, -18, -30, -42, -55, -70, -85, -100, -115 };
+s16 D_80249CCC[10] = { -1, -3, -7, -12, -17, -22, -27, -32, -37, -42 };
+s16 D_80249CE0[10] = { -1, -3, -7, -12, -17, -22, -27, -32, -37, -42 };
+s16 D_80249CF4[16] = { 180, 173, 161, 148, 134, 120, 105, 91, 77, 62, 48, 34, 21, 9, 2, 0 };
 s16 D_80249D14[] = { 0, 2, 9, 21, 34, 48, 62, 77, 91, 105, 120, 134, 148, 161, 173, 180 };
 s16 D_80249D34[] = { 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
-s16 D_80249D48[] = { 0, 5, 17, 37, 60, 85, 110, 135, 160, 185, 0, 0 };
+s16 D_80249D48[10] = { 0, 5, 17, 37, 60, 85, 110, 135, 160, 185};
+s32 D_80249D4C = 0; // padding?
 s32 D_80249D60[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
 s32 D_80249D70[] = { 0x40E00000, 0x41480000, 0x41500000, 0x41680000, 0x41600000, 0x41500000, 0x41380000, 0x41180000,
                      0x40F00000, 0x40B00000, 0x40600000, 0x40000000, 0x3F800000, 0x3F000000, 0x00000000, };
@@ -108,10 +97,10 @@ void func_8024330C(
         window->flags &= ~0x4;
     }
 
-    if (updateCounter <= ARRAY_COUNT(D_80249BBC)) {
+    if (updateCounter < ARRAY_COUNT(D_80249BBC)) {
         *posX -= D_80249BBC[updateCounter];
     } else {
-        *posX -= D_80249BDA;
+        *posX -= D_80249BBC[ARRAY_COUNT(D_80249BBC) - 1];
         window->flags &= ~0x8;
     }
 }
@@ -132,10 +121,10 @@ void filemenu_update_show_name_input(
         window->flags &= ~0x4;
     }
 
-    if (updateCounter <= ARRAY_COUNT(D_80249BDC)) {
+    if (updateCounter < ARRAY_COUNT(D_80249BDC)) {
         *posX += D_80249BDC[updateCounter];
     } else {
-        *posX += D_80249BFA;
+        *posX += D_80249BDC[ARRAY_COUNT(D_80249BDC) - 1];
         window->flags &= ~0x8;
     }
 }
@@ -156,10 +145,10 @@ void filemenu_update_show_options_left(
         window->flags &= ~0x4;
     }
 
-    if (updateCounter <= ARRAY_COUNT(D_80249BFC)) {
+    if (updateCounter < ARRAY_COUNT(D_80249BFC)) {
         *posX -= D_80249BFC[updateCounter];
     } else {
-        *posX -= D_80249C1A;
+        *posX -= D_80249BFC[ARRAY_COUNT(D_80249BFC) - 1];
         window->flags &= ~0x8;
     }
 }
@@ -180,10 +169,10 @@ void filemenu_update_show_options_right(
         window->flags &= ~0x4;
     }
 
-    if (updateCounter <= ARRAY_COUNT(D_80249C1C)) {
+    if (updateCounter < ARRAY_COUNT(D_80249C1C)) {
         *posX += D_80249C1C[updateCounter];
     } else {
-        *posX += D_80249C3A;
+        *posX += D_80249C1C[ARRAY_COUNT(D_80249C1C) - 1];
         window->flags &= ~0x8;
     }
 }
@@ -204,10 +193,10 @@ void filemenu_update_show_options_bottom(
         window->flags &= ~0x4;
     }
 
-    if (updateCounter <= ARRAY_COUNT(D_80249C3C)) {
+    if (updateCounter < ARRAY_COUNT(D_80249C3C)) {
         *posY += D_80249C3C[updateCounter];
     } else {
-        *posY += D_80249C5A;
+        *posY += D_80249C3C[ARRAY_COUNT(D_80249C3C) - 1];
         window->flags &= ~0x8;
     }
 }
@@ -228,10 +217,10 @@ void filemenu_update_show_title(
         window->flags &= ~0x4;
     }
 
-    if (updateCounter <= ARRAY_COUNT(D_80249C5C)) {
+    if (updateCounter < ARRAY_COUNT(D_80249C5C)) {
         *posY -= D_80249C5C[updateCounter];
     } else {
-        *posY -= D_80249C7A;
+        *posY -= D_80249C5C[ARRAY_COUNT(D_80249C5C) - 1];
         window->flags &= ~0x8;
     }
 }
@@ -248,10 +237,10 @@ void func_802435C4(
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
-    if (updateCounter <= ARRAY_COUNT(D_80249C7C)) {
+    if (updateCounter < ARRAY_COUNT(D_80249C7C)) {
         *posX += D_80249C7C[updateCounter];
     } else {
-        *posX += D_80249C8E;
+        *posX += D_80249C7C[ARRAY_COUNT(D_80249C7C) - 1];
         window->flags &= ~0x8;
         window->flags |= 0x4;
     }
@@ -269,10 +258,10 @@ void filemenu_update_hidden_name_input(
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
-    if (updateCounter <= ARRAY_COUNT(D_80249C90)) {
+    if (updateCounter < ARRAY_COUNT(D_80249C90)) {
         *posX -= D_80249C90[updateCounter];
     } else {
-        *posX -= D_80249CA2;
+        *posX -= D_80249C90[ARRAY_COUNT(D_80249C90) - 1];
         window->flags &= ~0x8;
         window->flags |= 0x4;
     }
@@ -290,10 +279,10 @@ void filemenu_update_hidden_options_left(
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
-    if (updateCounter <= ARRAY_COUNT(D_80249CA4)) {
+    if (updateCounter < ARRAY_COUNT(D_80249CA4)) {
         *posX += D_80249CA4[updateCounter];
     } else {
-        *posX += D_80249CB6;
+        *posX += D_80249CA4[ARRAY_COUNT(D_80249CA4) - 1];
         window->flags &= ~0x8;
         window->flags |= 0x4;
     }
@@ -311,10 +300,10 @@ void filemenu_update_hidden_options_right(
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
-    if (updateCounter <= ARRAY_COUNT(D_80249CB8)) {
+    if (updateCounter < ARRAY_COUNT(D_80249CB8)) {
         *posX -= D_80249CB8[updateCounter];
     } else {
-        *posX -= D_80249CCA;
+        *posX -= D_80249CB8[ARRAY_COUNT(D_80249CB8) - 1];
         window->flags &= ~0x8;
         window->flags |= 0x4;
     }
@@ -332,10 +321,10 @@ void filemenu_update_hidden_title(
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
-    if (updateCounter <= ARRAY_COUNT(D_80249CCC)) {
+    if (updateCounter < ARRAY_COUNT(D_80249CCC)) {
         *posY += D_80249CCC[updateCounter];
     } else {
-        *posY += D_80249CDE;
+        *posY += D_80249CCC[ARRAY_COUNT(D_80249CCC) - 1];
         window->flags &= ~0x8;
         window->flags |= 0x4;
     }
@@ -353,10 +342,10 @@ void filemenu_update_hidden_options_bottom(
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
-    if (updateCounter <= ARRAY_COUNT(D_80249CE0)) {
+    if (updateCounter < ARRAY_COUNT(D_80249CE0)) {
         *posY -= D_80249CE0[updateCounter];
     } else {
-        *posY -= D_80249CF2;
+        *posY -= D_80249CE0[ARRAY_COUNT(D_80249CE0) - 1];
         window->flags &= ~0x8;
         window->flags |= 0x4;
     }
@@ -378,7 +367,7 @@ void filemenu_update_show_with_rotation(
         window->flags &= ~0x4;
     }
 
-    if (updateCounter <= ARRAY_COUNT(D_80249CF4)) {
+    if (updateCounter < ARRAY_COUNT(D_80249CF4)) {
         *rotY += D_80249CF4[updateCounter];
         *flags = 8 | 1;
     } else {
