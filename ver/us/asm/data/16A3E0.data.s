@@ -5,7 +5,7 @@
 glabel D_80249B80
 .word D_80241ECC
 
-glabel D_80249B84
+glabel filemenu_menus
 .word D_8024A098
 
 glabel D_80249B88

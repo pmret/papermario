@@ -2001,7 +2001,7 @@ typedef struct MenuPanel {
     /* 0x00 */ s8 initialized; //?
     /* 0x01 */ s8 col; // might be backwards
     /* 0x02 */ s8 row; // might be backwards
-    /* 0x03 */ s8 selected;
+    /* 0x03 */ u8 selected;
     /* 0x04 */ s8 page; // filemenu: 0 = select, 1 = delete, 3 = copy from, 4 = copy to, all else = save
     /* 0x05 */ s8 numCols;
     /* 0x06 */ s8 numRows;

@@ -149,8 +149,8 @@ glabel filemenu_choose_name_handle_input
 /* 169650 80248DF0 0C05272D */  jal       sfx_play_sound
 /* 169654 80248DF4 24042102 */   addiu    $a0, $zero, 0x2102
 .L80248DF8:
-/* 169658 80248DF8 3C028025 */  lui       $v0, %hi(D_8024C084)
-/* 16965C 80248DFC 8C42C084 */  lw        $v0, %lo(D_8024C084)($v0)
+/* 169658 80248DF8 3C028025 */  lui       $v0, %hi(filemenu_pressedButtons)
+/* 16965C 80248DFC 8C42C084 */  lw        $v0, %lo(filemenu_pressedButtons)($v0)
 /* 169660 80248E00 30428000 */  andi      $v0, $v0, 0x8000
 /* 169664 80248E04 1040009A */  beqz      $v0, .L80249070
 /* 169668 80248E08 00000000 */   nop
@@ -323,8 +323,8 @@ glabel L80249034_169894
 /* 1698C8 80249068 0C090B65 */  jal       filemenu_set_selected
 /* 1698CC 8024906C 24C6FFFF */   addiu    $a2, $a2, -1
 .L80249070:
-/* 1698D0 80249070 3C038025 */  lui       $v1, %hi(D_8024C084)
-/* 1698D4 80249074 8C63C084 */  lw        $v1, %lo(D_8024C084)($v1)
+/* 1698D0 80249070 3C038025 */  lui       $v1, %hi(filemenu_pressedButtons)
+/* 1698D4 80249074 8C63C084 */  lw        $v1, %lo(filemenu_pressedButtons)($v1)
 /* 1698D8 80249078 30624000 */  andi      $v0, $v1, 0x4000
 /* 1698DC 8024907C 14400006 */  bnez      $v0, .L80249098
 /* 1698E0 80249080 30628000 */   andi     $v0, $v1, 0x8000
@@ -408,8 +408,8 @@ glabel L80249034_169894
 /* 169A0C 802491AC 1440FFFC */  bnez      $v0, .L802491A0
 /* 169A10 802491B0 00651021 */   addu     $v0, $v1, $a1
 .L802491B4:
-/* 169A14 802491B4 3C028025 */  lui       $v0, %hi(D_8024C084)
-/* 169A18 802491B8 8C42C084 */  lw        $v0, %lo(D_8024C084)($v0)
+/* 169A14 802491B4 3C028025 */  lui       $v0, %hi(filemenu_pressedButtons)
+/* 169A18 802491B8 8C42C084 */  lw        $v0, %lo(filemenu_pressedButtons)($v0)
 /* 169A1C 802491BC 30421000 */  andi      $v0, $v0, 0x1000
 /* 169A20 802491C0 10400053 */  beqz      $v0, .L80249310
 /* 169A24 802491C4 0000182D */   daddu    $v1, $zero, $zero

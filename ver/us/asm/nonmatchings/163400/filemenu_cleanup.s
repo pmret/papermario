@@ -16,8 +16,8 @@ glabel filemenu_cleanup
 /* 165388 80244B28 26100001 */   addiu    $s0, $s0, 1
 /* 16538C 80244B2C 1A00FFFB */  blez      $s0, .L80244B1C
 /* 165390 80244B30 00000000 */   nop
-/* 165394 80244B34 3C118025 */  lui       $s1, %hi(D_80249B84)
-/* 165398 80244B38 26319B84 */  addiu     $s1, $s1, %lo(D_80249B84)
+/* 165394 80244B34 3C118025 */  lui       $s1, %hi(filemenu_menus)
+/* 165398 80244B38 26319B84 */  addiu     $s1, $s1, %lo(filemenu_menus)
 /* 16539C 80244B3C 0000802D */  daddu     $s0, $zero, $zero
 .L80244B40:
 /* 1653A0 80244B40 8E240000 */  lw        $a0, ($s1)
