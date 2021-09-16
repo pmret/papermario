@@ -26,8 +26,8 @@ glabel pause_badges_init
 /* 13C354 80249014 08092423 */  j         .L8024908C
 /* 13C358 80249018 A2600000 */   sb       $zero, ($s3)
 .L8024901C:
-/* 13C35C 8024901C 3C128027 */  lui       $s2, %hi(D_802703A8)
-/* 13C360 80249020 265203A8 */  addiu     $s2, $s2, %lo(D_802703A8)
+/* 13C35C 8024901C 3C128027 */  lui       $s2, %hi(gBadgeMenuIconIDs)
+/* 13C360 80249020 265203A8 */  addiu     $s2, $s2, %lo(gBadgeMenuIconIDs)
 /* 13C364 80249024 3C118025 */  lui       $s1, %hi(D_8024F4D0)
 /* 13C368 80249028 2631F4D0 */  addiu     $s1, $s1, %lo(D_8024F4D0)
 .L8024902C:

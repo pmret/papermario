@@ -215,7 +215,7 @@ extern s32 gBadgeMenuLevel;
 extern s32 gBadgeMenuCurrentTab;
 extern s32 gBadgeMenuBShowNotEnoughBP;
 extern s32 D_802703A4;
-extern s32 D_802703A8;
+extern s32 gBadgeMenuIconIDs[22];
 
 // Items
 extern s16 gItemMenuItemIDs[100];

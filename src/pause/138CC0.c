@@ -155,4 +155,9 @@ void pause_badges_update(void) {
     *currentScrollPos += pause_interp_vertical_scroll(gBadgeMenuTargetScrollPos - *currentScrollPos);
 }
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_cleanup);
+void pause_badges_cleanup(void) {
+    s32 i;
+    for (i = 0; i < ARRAY_COUNT(gBadgeMenuIconIDs); ++i) {
+        free_hud_element(gBadgeMenuIconIDs[i]);
+    }
+}
