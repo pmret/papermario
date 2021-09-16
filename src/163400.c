@@ -92,8 +92,15 @@ INCLUDE_ASM(s32, "163400", filemenu_update_cursor);
 
 INCLUDE_ASM(s32, "163400", filemenu_update);
 
-void func_8024330C(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY, s32* rotX,
-                   f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void func_8024330C(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -109,8 +116,15 @@ void func_8024330C(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s
     }
 }
 
-void filemenu_update_show_name_input(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                     s32* scaleY, s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_show_name_input(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -126,8 +140,15 @@ void filemenu_update_show_name_input(s32 windowIdx, s32* flags, s32* posX, s32* 
     }
 }
 
-void filemenu_update_show_options_left(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                       s32* scaleY, s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_show_options_left(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -143,8 +164,15 @@ void filemenu_update_show_options_left(s32 windowIdx, s32* flags, s32* posX, s32
     }
 }
 
-void filemenu_update_show_options_right(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                        s32* scaleY, s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_show_options_right(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -160,8 +188,15 @@ void filemenu_update_show_options_right(s32 windowIdx, s32* flags, s32* posX, s3
     }
 }
 
-void filemenu_update_show_options_bottom(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                         s32* scaleY, s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_show_options_bottom(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -177,8 +212,15 @@ void filemenu_update_show_options_bottom(s32 windowIdx, s32* flags, s32* posX, s
     }
 }
 
-void filemenu_update_show_title(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
-                                s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_show_title(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -194,8 +236,15 @@ void filemenu_update_show_title(s32 windowIdx, s32* flags, s32* posX, s32* posY,
     }
 }
 
-void func_802435C4(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY, s32* rotX,
-                   f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void func_802435C4(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -208,8 +257,15 @@ void func_802435C4(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s
     }
 }
 
-void filemenu_update_hidden_name_input(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                       s32* scaleY, s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_hidden_name_input(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -222,8 +278,15 @@ void filemenu_update_hidden_name_input(s32 windowIdx, s32* flags, s32* posX, s32
     }
 }
 
-void filemenu_update_hidden_options_left(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                         s32* scaleY, s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_hidden_options_left(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -236,8 +299,15 @@ void filemenu_update_hidden_options_left(s32 windowIdx, s32* flags, s32* posX, s
     }
 }
 
-void filemenu_update_hidden_options_right(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                          s32* scaleY, s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_hidden_options_right(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -250,8 +320,15 @@ void filemenu_update_hidden_options_right(s32 windowIdx, s32* flags, s32* posX, 
     }
 }
 
-void filemenu_update_hidden_title(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                  s32* scaleY, s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_hidden_title(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -264,8 +341,15 @@ void filemenu_update_hidden_title(s32 windowIdx, s32* flags, s32* posX, s32* pos
     }
 }
 
-void filemenu_update_hidden_options_bottom(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                           s32* scaleY, s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_hidden_options_bottom(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -278,8 +362,15 @@ void filemenu_update_hidden_options_bottom(s32 windowIdx, s32* flags, s32* posX,
     }
 }
 
-void filemenu_update_show_with_rotation(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                        s32* scaleY, s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_show_with_rotation(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -296,8 +387,15 @@ void filemenu_update_show_with_rotation(s32 windowIdx, s32* flags, s32* posX, s3
     }
 }
 
-void filemenu_update_hidden_with_rotation(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                          s32* scaleY, s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_hidden_with_rotation(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
@@ -317,8 +415,15 @@ INCLUDE_ASM(s32, "163400", filemenu_update_deselect_file);
 
 INCLUDE_ASM(s32, "163400", filemenu_update_show_name_confirm);
 
-void filemenu_update_hidden_name_confirm(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                         s32* scaleY, s32* rotX, f32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+void filemenu_update_hidden_name_confirm(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    s32* scaleX, s32* scaleY,
+    s32* rotX, f32* rotY, s32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
     Window* window = &gWindows[windowIdx];
     s32 updateCounter = window->updateCounter;
 
