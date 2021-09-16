@@ -12,7 +12,7 @@ extern s32 D_8024BA98;
 void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity,
                                        s32 darkening);
-s32 D_80249B80[] = { &D_80241ECC };
+s32* D_80249B80[] = { &D_80241ECC };
 MenuPanel* filemenu_menus[4] = { &D_8024A098, &D_8024A114, &D_8024A158, &D_8024A1D8 };
 s32 D_80249B94 = 160;
 s32 D_80249B98 = -120;

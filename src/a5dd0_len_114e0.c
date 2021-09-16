@@ -1905,8 +1905,9 @@ s32 mdl_get_child_count(ModelNode* model) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
-/*void clear_model_data(void) {
+// Issue with pointer advancement in the gCurrentCustomModelGfxPtr loop (adding 8 bytes instead of 4)
+#ifdef NON_MATCHING
+void clear_model_data(void) {
     s32 i;
 
     if (!gGameStatusPtr->isBattle) {
@@ -1971,7 +1972,10 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
         texPannerMainV[i] = 0;
         texPannerMainU[i] = 0;
     }
-}*/
+}
+#else
+INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
+#endif
 
 void init_model_data(void) {
     if (!gGameStatusPtr->isBattle) {
