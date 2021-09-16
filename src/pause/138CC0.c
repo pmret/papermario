@@ -107,7 +107,20 @@ INCLUDE_ASM(s32, "pause/138CC0", pause_badges_try_remove);
 
 INCLUDE_ASM(s32, "pause/138CC0", pause_badges_try_equip);
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_draw_bp_orbs);
+void pause_badges_draw_bp_orbs(s32 orbState, s32 x, s32 y) {
+    s32 orbSize = 8;
+    switch (orbState) {
+        case 0:
+            pause_draw_rect(x * 4, y * 4, (x + orbSize) * 4, (y + orbSize) * 4, 0, 0, 0x100, 0x400, 0x400);
+            break;
+        case 1:
+            pause_draw_rect(x * 4, y * 4, (x + orbSize) * 4, (y + orbSize) * 4, 0, 0, 0, 0x400, 0x400);
+            break;
+        default:
+            pause_draw_rect(x * 4, y * 4, (x + orbSize) * 4, (y + orbSize) * 4, 0, 0, 0x200, 0x400, 0x400);
+            break;
+    }
+}
 
 INCLUDE_ASM(s32, "pause/138CC0", pause_badges_draw_contents);
 
