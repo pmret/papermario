@@ -124,9 +124,34 @@ void pause_badges_draw_bp_orbs(s32 orbState, s32 x, s32 y) {
 
 INCLUDE_ASM(s32, "pause/138CC0", pause_badges_draw_contents);
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_load_badges);
+INCLUDE_ASM(void, "pause/138CC0", pause_badges_load_badges, s32 arg);
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_init);
+void pause_badges_init(MenuPanel *panel) {
+    s32 i;
+
+    (void)pause_badges_count_all();
+    gBadgeMenuLevel = 0;
+    gBadgeMenuCurrentTab = 0;
+    gBadgeMenuBShowNotEnoughBP = 0;
+
+    pause_badges_load_badges(0);
+    if (gBadgeMenuItemIDs[0] == 0x7FFE) {
+        panel->initialized = 0;
+        return;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(gBadgeMenuIconIDs); ++i) {
+        s32 iconID = create_hud_element(gBadgeMenuElements[i]);
+        gBadgeMenuIconIDs[i] = iconID;
+        set_hud_element_flags(iconID, 0x80);
+    }
+
+    for (i = 0; i < ARRAY_COUNT(gBadgeMenuWindowBPs); ++i) {
+        gBadgeMenuWindowBPs[i].tab = panel;
+    }
+    setup_pause_menu_tab(gBadgeMenuWindowBPs, ARRAY_COUNT(gBadgeMenuWindowBPs));
+    panel->initialized = 1;
+}
 
 INCLUDE_ASM(s32, "pause/138CC0", pause_badges_handle_input);
 

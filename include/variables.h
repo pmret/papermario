@@ -216,6 +216,8 @@ extern s32 gBadgeMenuCurrentTab;
 extern s32 gBadgeMenuBShowNotEnoughBP;
 extern s32 D_802703A4;
 extern s32 gBadgeMenuIconIDs[22];
+extern MenuWindowBP gBadgeMenuWindowBPs[1];
+extern HudElementAnim *gBadgeMenuElements[22];
 
 // Items
 extern s16 gItemMenuItemIDs[100];
