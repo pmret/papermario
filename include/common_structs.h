@@ -1258,7 +1258,7 @@ typedef struct GameStatus {
     /* 0x0A8 */ s8 creditsViewportMode;
     /* 0x0A9 */ s8 unk_A9;
     /* 0x0AA */ s8 demoFlags;
-    /* 0x0AB */ s8 unk_AB;
+    /* 0x0AB */ u8 unk_AB;
     /* 0x0AC */ s8 loadMenuState;
     /* 0x0AD */ s8 menuCounter;
     /* 0x0AE */ s8 bSkipIntro;
@@ -1998,7 +1998,7 @@ typedef struct PauseMapSpace {
 } PauseMapSpace; // size = 0x14
 
 typedef struct MenuPanel {
-    /* 0x00 */ s8 initialized; //?
+    /* 0x00 */ u8 initialized; //?
     /* 0x01 */ s8 col; // might be backwards
     /* 0x02 */ s8 row; // might be backwards
     /* 0x03 */ u8 selected;
@@ -2011,7 +2011,7 @@ typedef struct MenuPanel {
     /* 0x10 */ UNK_FUN_PTR(fpHandleInput);
     /* 0x14 */ UNK_FUN_PTR(fpUpdate);
     /* 0x18 */ UNK_FUN_PTR(fpCleanup);
-} MenuPanel;
+} MenuPanel; // size = 0x1C
 
 typedef struct WindowBackground {
     /* 0x00 */ s32* imgData;

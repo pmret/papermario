@@ -1,6 +1,6 @@
 #include "common.h"
+#include "filemenu.h"
 
-extern MenuPanel* filemenu_menus[4];
 extern MenuWindowBP D_8024A134[1];
 
 extern s32 filemenu_iterFileIdx;

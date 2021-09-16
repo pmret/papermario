@@ -8,8 +8,8 @@ glabel filemenu_main_init
 /* 166074 80245814 AFB00010 */  sw        $s0, 0x10($sp)
 /* 166078 80245818 0000802D */  daddu     $s0, $zero, $zero
 /* 16607C 8024581C AFB20018 */  sw        $s2, 0x18($sp)
-/* 166080 80245820 3C128025 */  lui       $s2, %hi(D_8024C0B0)
-/* 166084 80245824 2652C0B0 */  addiu     $s2, $s2, %lo(D_8024C0B0)
+/* 166080 80245820 3C128025 */  lui       $s2, %hi(filemenu_hudElemIDs)
+/* 166084 80245824 2652C0B0 */  addiu     $s2, $s2, %lo(filemenu_hudElemIDs)
 /* 166088 80245828 AFB10014 */  sw        $s1, 0x14($sp)
 /* 16608C 8024582C 3C118025 */  lui       $s1, %hi(D_80249E20)
 /* 166090 80245830 26319E20 */  addiu     $s1, $s1, %lo(D_80249E20)

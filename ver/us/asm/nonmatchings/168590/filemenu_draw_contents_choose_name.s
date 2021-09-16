@@ -471,8 +471,8 @@ glabel filemenu_draw_contents_choose_name
 /* 169230 802489D0 24020003 */  addiu     $v0, $zero, 3
 /* 169234 802489D4 1462001D */  bne       $v1, $v0, .L80248A4C
 /* 169238 802489D8 00000000 */   nop
-/* 16923C 802489DC 3C028025 */  lui       $v0, %hi(D_8024C08C)
-/* 169240 802489E0 8C42C08C */  lw        $v0, %lo(D_8024C08C)($v0)
+/* 16923C 802489DC 3C028025 */  lui       $v0, %hi(filemenu_heldButtons)
+/* 169240 802489E0 8C42C08C */  lw        $v0, %lo(filemenu_heldButtons)($v0)
 /* 169244 802489E4 3C03000F */  lui       $v1, 0xf
 /* 169248 802489E8 00431024 */  and       $v0, $v0, $v1
 /* 16924C 802489EC 10400003 */  beqz      $v0, .L802489FC
