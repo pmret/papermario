@@ -103,7 +103,35 @@ s32 pause_badges_scroll_offset_x(s32 x) {
     return x;
 }
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_try_remove);
+s32 pause_badges_try_remove(s16 badgeID) {
+    s16 *currentSlot = gPlayerData.equippedBadges;
+    s16 *slotToRemove = currentSlot;
+    s32 result = 0;
+    s32 i;
+
+    if (badgeID == 0x7FFF) {
+        return 0;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); ++i, ++currentSlot) {
+        if (badgeID == *currentSlot) {
+            slotToRemove = currentSlot;
+            result = 1;
+            break;
+        }
+    }
+
+    // Remove and shift array contents
+    for (; i < ARRAY_COUNT(gPlayerData.equippedBadges)-1; ++i, ++currentSlot) {
+        *currentSlot = *(currentSlot+1);
+    }
+    *currentSlot = 0;
+
+    if (*slotToRemove == 0) {
+        result = 2;
+    }
+    return result;
+}
 
 INCLUDE_ASM(s32, "pause/138CC0", pause_badges_try_equip);
 
