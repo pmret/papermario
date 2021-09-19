@@ -34,6 +34,7 @@ s32 func_802BD260_31B280(Evt* evt, s32 arg1) {
         partner_walking_update_motion(npc);
         return 0;
     }
+
     switch (D_802BEB60_31CB80->unk_04) {
         case 0:
             D_802BEB60_31CB80->unk_04 = 1;

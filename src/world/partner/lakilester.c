@@ -31,6 +31,7 @@ s32 func_802BD2D4_320E24(Evt* evt, s32 arg1) {
         partner_flying_update_motion(npc);
         return 0;
     }
+
     switch (D_802BFE7C_3239CC->unk_04) {
         case 0:
             D_802BFE7C_3239CC->unk_04 = 1;
