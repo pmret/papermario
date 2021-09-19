@@ -1,5 +1,9 @@
 # splat Release Notes
 
+### 0.7.9
+* Finally removed the dumb linker section alignment hack
+* Added version number to output on execution
+
 ### 0.7.8
 
 * Fixed a bug relating to a linker section alignment hack (thanks Wiseguy!)

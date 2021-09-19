@@ -20,7 +20,7 @@ def setup_lib():
         lib = cdll.LoadLibrary(os.path.dirname(os.path.realpath(__file__)) + "/Yay0decompress")
         return True
     except Exception:
-        print(f"Failed to load Yay0decompress, falling back to python method")
+        print(f"Failed to load C library; falling back to python method")
         tried_loading = True
         return False
 
