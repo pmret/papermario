@@ -683,7 +683,7 @@ typedef struct BattleStatus {
     /* 0x096 */ s8 hammerCharge;
     /* 0x097 */ s8 jumpCharge;
     /* 0x098 */ char unk_98;
-    /* 0x099 */ u8 dangerFlags; /* 1 = danger, 2 = peril */
+    /* 0x099 */ u8 rushesFlags; /* 1 = mega rush, 2 = power rush */
     /* 0x09A */ s8 outtaSightActive;
     /* 0x09B */ s8 turboChargeTurnsLeft;
     /* 0x09C */ u8 turboChargeAmount; /* unused? */
@@ -1921,7 +1921,7 @@ typedef struct PlayerStatus {
     /* 0x0C6 */ s16 unk_C6;
     /* 0x0C8 */ s32* unk_C8;
     /* 0x0CC */ s32 shadowID;
-    /* 0x0D0 */ char unk_D0[4];
+    /* 0x0D0 */ f32* unk_D0;
     /* 0x0D4 */ f32 unk_D4;
     /* 0x0D8 */ UNK_PTR** unk_D8;
     /* 0x0DC */ s32 currentButtons;
