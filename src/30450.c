@@ -517,6 +517,8 @@ s32* func_80055EB4(s32 arg0) {
     return ret;
 }
 
+static const f32 padding[] = {0.0f};
+
 s32 func_80055F58(s32 arg0, u32 arg1, u32 arg2) {
     s32* subroutine_arg4;
     s32* subroutine_arg5;
