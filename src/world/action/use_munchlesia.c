@@ -32,7 +32,7 @@ void func_802B6000_E291A0(void) {
             break;
         case 1:
             playerStatus->position.y += D_802B62D0;
-            D_802B62D0 = D_802B62D0 - D_802B62D8;
+            D_802B62D0 -= D_802B62D8;
             add_vec2D_polar(&playerStatus->position, &playerStatus->position.z, D_802B62D4, D_802B62DC);
             gCameras[0].targetPos.x = playerStatus->position.x;
             gCameras[0].targetPos.y = playerStatus->position.y;
@@ -43,7 +43,7 @@ void func_802B6000_E291A0(void) {
             break;
         case 2:
             playerStatus->position.y += D_802B62D0;
-            D_802B62D0 = D_802B62D0 - D_802B62D8;
+            D_802B62D0 -= D_802B62D8;
             add_vec2D_polar(&playerStatus->position, &playerStatus->position.z, D_802B62D4, D_802B62DC);
             gCameras[0].targetPos.x = playerStatus->position.x;
             gCameras[0].targetPos.y = playerStatus->position.y;
