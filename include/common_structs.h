@@ -2359,4 +2359,14 @@ typedef struct PopupMessage {
     /* 0x17 */ s8 unk_17;
     /* 0x18 */ s32* message;
 } PopupMessage; // size = 0x1C
+
+typedef struct unkPartnerStruct {
+    /* 0x000 */ s32 unk_00;
+    /* 0x004 */ s32 unk_04;
+    /* 0x008 */ s32 unk_08;
+    /* 0x00c */ f32 unk_0C;
+    /* 0x010 */ f32 unk_10;
+    /* 0x014 */ f32 unk_14;
+    /* 0x018 */ f32 unk_18;
+} unkPartnerStruct; // size = 0x1C
 #endif
