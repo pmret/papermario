@@ -497,6 +497,8 @@ enum Easings {
 typedef UNK_TYPE SoundID;
 enum SoundIDs {
     SOUND_UNKNOWN_0,
+    SOUND_MENU_BADGE_EQUIP          = 5,
+    SOUND_MENU_BADGE_UNEQUIP        = 6,
     SOUND_UNKNOWN_D                 = 13,
     SOUND_UNKNOWN_E                 = 14,
     SOUND_UNKNOWN_43                = 67,
@@ -544,6 +546,7 @@ enum SoundIDs {
     SOUND_CREAKY_DOOR_CLOSE,
     SOUND_METAL_GATE_OPEN,
     SOUND_METAL_GATE_CLOSE,
+    SOUND_MENU_BADGE_ERROR          = 541,
     SOUND_UNKNOWN_246               = 582,
     SOUND_UNKNOWN_259               = 601,
     SOUND_UNKNOWN_25A,
@@ -1462,6 +1465,10 @@ enum Buttons {
     BUTTON_Z            = 0x00002000,
     BUTTON_B            = 0x00004000,
     BUTTON_A            = 0x00008000,
+    BUTTON_STICK_UP     = 0x00010000,
+    BUTTON_STICK_DOWN   = 0x00020000,
+    BUTTON_STICK_LEFT   = 0x00040000,
+    BUTTON_STICK_RIGHT  = 0x00080000,
 };
 
 typedef UNK_TYPE PlayerBuff;

@@ -181,7 +181,164 @@ void pause_badges_init(MenuPanel *panel) {
     panel->initialized = 1;
 }
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_handle_input);
+void pause_badges_handle_input(void) {
+    s32 selectedIndex = gBadgeMenuSelectedIndex;
+    s32 numCols = gBadgeMenuPages[gBadgeMenuCurrentPage].numCols;
+
+    s32 selectedCol = selectedIndex % numCols;
+    s32 selectedRow = selectedIndex / numCols;
+
+    if (gPauseMenuPressedButtons & BUTTON_A) {
+        s16 badgeID;
+        if (gBadgeMenuBShowNotEnoughBP != 0) {
+            gBadgeMenuBShowNotEnoughBP = 0;
+            return;
+        }
+        if (gBadgeMenuLevel == 0) {
+            if (gBadgeMenuItemIDs[selectedIndex] == 0x7FFE) {
+                sfx_play_sound(SOUND_MENU_BADGE_ERROR);
+                return;
+            }
+            gBadgeMenuLevel = 1;
+            sfx_play_sound(SOUND_MENU_NEXT);
+            return;
+        }
+        badgeID = gBadgeMenuItemIDs[selectedIndex];
+        switch (pause_badges_try_equip(badgeID)) {
+            case 0:
+                sfx_play_sound(SOUND_MENU_BADGE_UNEQUIP);
+                pause_badges_try_remove(badgeID);
+                return;
+            case 1:
+                sfx_play_sound(SOUND_MENU_BADGE_ERROR);
+                gBadgeMenuBShowNotEnoughBP = 1;
+                return;
+            case 2:
+                sfx_play_sound(SOUND_MENU_BADGE_ERROR);
+                gBadgeMenuBShowNotEnoughBP = 2;
+                return;
+            case 3:
+                sfx_play_sound(SOUND_MENU_BADGE_EQUIP);
+                return;
+            default:
+                return;
+        }
+    }
+
+    if ((gPauseMenuPressedButtons != 0) || (gPauseMenuHeldButtons != 0)) {
+        gBadgeMenuBShowNotEnoughBP = 0;
+    }
+
+    if (gBadgeMenuNumItems != 0) {
+        if (gBadgeMenuLevel == 0) {
+            s32 oldTab = gBadgeMenuCurrentTab;
+            if (gPauseMenuHeldButtons & (BUTTON_STICK_UP | BUTTON_STICK_DOWN)) {
+                gBadgeMenuCurrentTab ^= 1;
+            }
+            if (oldTab != gBadgeMenuCurrentTab) {
+                sfx_play_sound(SOUND_MENU_CHANGE_TAB);
+                pause_badges_load_badges(gBadgeMenuCurrentTab);
+            }
+        } else {
+            s32 heldButtons = gPauseMenuHeldButtons;
+            s32 heldButtons2;
+            u8 newPageNumCols;
+
+            if (heldButtons & (BUTTON_STICK_UP | BUTTON_Z)) {
+                if (heldButtons & BUTTON_STICK_UP) {
+                    selectedRow -= 1;
+                    if (selectedRow < 0) {
+                        selectedRow = 0;
+                    }
+                    if (selectedRow < (s32) gBadgeMenuPages[gBadgeMenuCurrentPage].listStart) {
+                        gBadgeMenuCurrentPage -= 1;
+                    }
+                } else {
+                    // Z button press
+                    gBadgeMenuCurrentPage -= 1;
+                    if (gBadgeMenuCurrentPage < 0) {
+                        gBadgeMenuCurrentPage = 0;
+                    }
+                    selectedRow = (s32) gBadgeMenuPages[gBadgeMenuCurrentPage].listStart;
+                }
+            }
+
+            // Need to re-read button state here for strange regalloc reasons
+            heldButtons2 = gPauseMenuHeldButtons;
+            if (heldButtons2 & (BUTTON_STICK_DOWN | BUTTON_R)) {
+                if (heldButtons2 & BUTTON_STICK_DOWN) {
+                    PauseItemPage* page = &gBadgeMenuPages[gBadgeMenuCurrentPage];
+                    selectedRow += 1;
+                    if (selectedRow >= (page->listStart + page->numRows)) {
+                        gBadgeMenuCurrentPage += 1;
+                        if (gBadgeMenuPages[gBadgeMenuCurrentPage].enabled == 0) {
+                            gBadgeMenuCurrentPage -= 1;
+                            selectedRow -= 1;
+                        }
+                    }
+                } else {
+                    // R button press
+                    PauseItemPage* newPage = &gBadgeMenuPages[++gBadgeMenuCurrentPage];
+
+                    if (newPage->enabled == 0) {
+                        gBadgeMenuCurrentPage -= 1;
+                    } else {
+                        selectedRow = (s32) newPage->listStart;
+                    }
+                }
+            }
+
+            newPageNumCols = gBadgeMenuPages[gBadgeMenuCurrentPage].numCols;
+            if (gBadgeMenuItemIDs[selectedRow * newPageNumCols] != 0x7FFE) {
+                if (gPauseMenuHeldButtons & BUTTON_STICK_LEFT) {
+                    selectedCol -= 1;
+                    if (selectedCol < 0) {
+                        selectedCol = newPageNumCols - 1;
+                    }
+                } else if (gPauseMenuHeldButtons & BUTTON_STICK_RIGHT) {
+                    selectedCol += 1;
+                    if (selectedCol >= newPageNumCols) {
+                        selectedCol = 0;
+                    }
+                }
+            } else {
+                selectedCol = 0;
+            }
+            gBadgeMenuSelectedIndex = selectedCol + (selectedRow * gBadgeMenuPages[gBadgeMenuCurrentPage].numCols);
+            if (gBadgeMenuSelectedIndex != selectedIndex) {
+                sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
+            }
+            gBadgeMenuSelectedItemID = gBadgeMenuItemIDs[gBadgeMenuSelectedIndex];
+        }
+    }
+
+    if (gBadgeMenuLevel == 1) {
+        s32 itemID = gBadgeMenuSelectedItemID;
+        if (((itemID != 0x7FFE) && (itemID != 0x7FFF) && (itemID != 0))) {
+            gPauseMenuCurrentDescMsg = gItemTable[itemID].menuMsg;
+        } else {
+            gPauseMenuCurrentDescMsg = 0;
+            gPauseMenuCurrentDescIconScript = NULL;
+        }
+    } else {
+        gPauseMenuCurrentDescMsg = pause_get_menu_msg(gBadgeMenuCurrentTab == 0 ? 0x4C : 0x4D);
+        gPauseMenuCurrentDescIconScript = NULL;
+    }
+
+    if ((gPauseMenuPressedButtons & BUTTON_B) != 0) {
+        if (gBadgeMenuLevel == 0) {
+            sfx_play_sound(SOUND_MENU_BACK);
+            gPauseMenuCurrentTab = 0;
+        } else {
+            sfx_play_sound(SOUND_MENU_BACK);
+            gBadgeMenuLevel = 0;
+            enforce_hpfp_limits();
+            if (gBadgeMenuCurrentTab == 1) {
+                pause_badges_load_badges(1);
+            }
+        }
+    }
+}
 
 void pause_badges_update(void) {
     PauseItemPage* menuPages = gBadgeMenuPages;

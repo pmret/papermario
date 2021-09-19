@@ -1895,7 +1895,7 @@ typedef struct {
 } Path; // size = 0x1C
 
 typedef struct {
-    /* 0x00 */ s8 enabled;
+    /* 0x00 */ u8 enabled;
     /* 0x01 */ u8 listStart;
     /* 0x02 */ u8 numCols;
     /* 0x03 */ u8 numRows;
