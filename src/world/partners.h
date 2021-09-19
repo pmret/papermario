@@ -42,5 +42,7 @@ extern Npc* wPartnerNpc; // wPartnerNpc
 
 s32 partner_init_get_out(Npc*);
 s32 partner_get_out(Npc*);
+void partner_do_player_collision(Npc* partner);
+void partner_walking_follow_player(Npc* partner);
 
 #endif
