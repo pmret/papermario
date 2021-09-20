@@ -133,7 +133,58 @@ s32 pause_badges_try_remove(s16 badgeID) {
     return result;
 }
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_try_equip);
+typedef s32 BadgeEquipResult;
+enum BadgeEquipResults {
+    EQUIP_RESULT_ALREADY_EQUIPPED,
+    EQUIP_RESULT_NOT_ENOUGH_BP,
+    EQUIP_RESULT_TOO_MANY_BADGES,
+    EQUIP_RESULT_SUCCESS,
+};
+
+BadgeEquipResult pause_badges_try_equip(s16 badgeID) {
+    PlayerData* playerData = &gPlayerData;
+    s16 *badgeSlot = &playerData->equippedBadges[0];
+    s32 i;
+    s32 totalEquippedBP;
+
+    if (badgeID == 0x7FFE) {
+        badgeID = 0;
+    }
+    if (badgeID == 0x7FFF) {
+        badgeID = 0;
+    }
+    if (badgeID == 0) {
+        return EQUIP_RESULT_NOT_ENOUGH_BP;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); ++i, ++badgeSlot) {
+        if (*badgeSlot == badgeID) {
+            return EQUIP_RESULT_ALREADY_EQUIPPED;
+        }
+    }
+
+    totalEquippedBP = pause_get_total_equipped_bp_cost();
+    if (badgeID != 0) {
+        u8 moveID = gItemTable[badgeID].moveID;
+        s32 requiredBP = totalEquippedBP + gMoveTable[moveID].costBP;
+        if (playerData->maxBP < requiredBP) {
+            return EQUIP_RESULT_NOT_ENOUGH_BP;
+        }
+    }
+
+    badgeSlot = &playerData->equippedBadges[0];
+    for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); ++i, ++badgeSlot) {
+        if (*badgeSlot == 0) {
+            *badgeSlot = badgeID;
+            break;
+        }
+    }
+    if (i == ARRAY_COUNT(playerData->equippedBadges)) {
+        return EQUIP_RESULT_TOO_MANY_BADGES;
+    } else {
+        return EQUIP_RESULT_SUCCESS;
+    }
+}
 
 void pause_badges_draw_bp_orbs(s32 orbState, s32 x, s32 y) {
     s32 orbSize = 8;
@@ -205,19 +256,19 @@ void pause_badges_handle_input(void) {
         }
         badgeID = gBadgeMenuItemIDs[selectedIndex];
         switch (pause_badges_try_equip(badgeID)) {
-            case 0:
+            case EQUIP_RESULT_ALREADY_EQUIPPED:
                 sfx_play_sound(SOUND_MENU_BADGE_UNEQUIP);
                 pause_badges_try_remove(badgeID);
                 return;
-            case 1:
+            case EQUIP_RESULT_NOT_ENOUGH_BP:
                 sfx_play_sound(SOUND_MENU_BADGE_ERROR);
                 gBadgeMenuBShowNotEnoughBP = 1;
                 return;
-            case 2:
+            case EQUIP_RESULT_TOO_MANY_BADGES:
                 sfx_play_sound(SOUND_MENU_BADGE_ERROR);
                 gBadgeMenuBShowNotEnoughBP = 2;
                 return;
-            case 3:
+            case EQUIP_RESULT_SUCCESS:
                 sfx_play_sound(SOUND_MENU_BADGE_EQUIP);
                 return;
             default:

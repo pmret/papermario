@@ -209,7 +209,7 @@ typedef struct PlayerData {
     /* 0x005 */ s8 curFP;
     /* 0x006 */ s8 curMaxFP;
     /* 0x007 */ u8 hardMaxFP;
-    /* 0x008 */ u8 maxBP;
+    /* 0x008 */ s8 maxBP;
     /* 0x009 */ s8 level;
     /* 0x00A */ s8 hasActionCommands;
     /* 0x00B */ char unk_0B;
