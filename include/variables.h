@@ -207,6 +207,7 @@ extern ItemID gBadgeMenuItemIDs[128];
 extern s32 gBadgeMenuCurrentPage;
 extern PauseItemPage gBadgeMenuPages[20];
 extern s32 gBadgeMenuSelectedIndex;
+extern s32 D_8027037C;
 extern s32 gBadgeMenuSelectedItemID;
 extern s16 gBadgeMenuNumItems;
 extern s32 D_80270388;

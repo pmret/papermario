@@ -203,7 +203,109 @@ void pause_badges_draw_bp_orbs(s32 orbState, s32 x, s32 y) {
 
 INCLUDE_ASM(s32, "pause/138CC0", pause_badges_draw_contents);
 
+#ifdef NON_MATCHING
+// Slight instruction ordering mismatch, but this code is definitely semantically equivalent
+void pause_badges_load_badges(s32 onlyEquipped) {
+    PlayerData* playerData = &gPlayerData;
+    s32 i;
+    s32 numItems = 0;
+    PauseItemPage* page;
+    s16* menuItemIDs;
+
+    D_80270388 = 0;
+    if (!onlyEquipped) {
+        i = 0;
+        menuItemIDs = gBadgeMenuItemIDs;
+        // A move instruction is out of order right here, no impact on behavior
+        for (; i < ARRAY_COUNT(playerData->badges); ++i) {
+            s16 badgeItemID = playerData->badges[i];
+            if (badgeItemID == 0) {
+                continue;
+            } else if (badgeItemID >= ITEM_PARTNER_ATTACK) {
+                break;
+            } else {
+                *menuItemIDs = badgeItemID;
+                ++menuItemIDs;
+                ++numItems;
+            }
+        }
+    } else {
+        s16* equippedBadges;
+        pause_badges_count_equipped();
+        equippedBadges = playerData->equippedBadges;
+        i = 0;
+        menuItemIDs = gBadgeMenuItemIDs;
+        for (; i < ARRAY_COUNT(playerData->equippedBadges); ++i, ++equippedBadges) {
+            if (*equippedBadges != 0) {
+                *menuItemIDs = *equippedBadges;
+                ++menuItemIDs;
+                numItems += 1;
+            }
+        }
+    }
+    if (numItems == 0) {
+        gBadgeMenuItemIDs[0] = 0x7FFE;
+        numItems = 1;
+    }
+    gBadgeMenuNumItems = numItems;
+    for (i = numItems; i < ARRAY_COUNT(gBadgeMenuItemIDs); ++i) {
+        gBadgeMenuItemIDs[i] = 0x7FFF;
+    }
+
+    gBadgeMenuSelectedIndex = 0;
+    gBadgeMenuSelectedItemID = 0;
+    D_8027037C = 0;
+    D_80270394 = 0;
+    gBadgeMenuCurrentPage = 0;
+
+    page = &gBadgeMenuPages[0];
+    i = 0;
+   
+    while (1) {
+        s32 totalItems = gBadgeMenuNumItems;
+        if (i >= totalItems / 8) {
+            break;
+        }
+
+        page->listStart = i*8;
+        page->numCols = 1;
+        page->numRows = 8;
+        page->enabled = 1;
+        page->startIndex = i*8;
+        page->count = 8;
+
+        i += 1;
+        page += 1;
+    }
+
+    if (((u16) gBadgeMenuNumItems & 7) != 0) {
+        s16 count;
+        s32 menuNumItems;
+        page->listStart = i * 8;
+        page->numCols = 1;
+        page->enabled = 1;
+        page->startIndex = i * 8;
+
+        menuNumItems = gBadgeMenuNumItems;
+        count = menuNumItems - (menuNumItems / 8 * 8);
+        page->count = count;
+        page->numRows = page->count;
+        i += 1;
+        page += 1;
+    }
+
+    while (i < ARRAY_COUNT(gBadgeMenuPages)) {
+        page->enabled = 0;
+
+        ++i;
+        ++page;
+    }
+
+    gBadgeMenuTargetScrollPos = gBadgeMenuCurrentScrollPos = pause_badges_get_pos_y(0, 0);
+}
+#else
 INCLUDE_ASM(void, "pause/138CC0", pause_badges_load_badges, s32 arg);
+#endif
 
 void pause_badges_init(MenuPanel *panel) {
     s32 i;
