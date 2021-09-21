@@ -529,6 +529,8 @@ enum SoundIDs {
     SOUND_SEARCH_BUSH               = 339,
     SOUND_UNKNOWN_162               = 354,
     SOUND_SMASH_GOOMNUT_TREE        = 357,
+    SOUND_UNKNOWN_167               = 359,
+    SOUND_UNKNOWN_172               = 370,
     SOUND_BASIC_DOOR_OPEN           = 449,
     SOUND_BASIC_DOOR_CLOSE,
     SOUND_METAL_DOOR_OPEN,

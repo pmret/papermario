@@ -49,6 +49,7 @@ void step_game_loop(void);
 s32 resume_all_group(s32 groupFlags);
 f32 length2D(f32 x, f32 y);
 void player_input_to_move_vector(f32* angle, f32* magnitude);
+void game_input_to_move_vector(f32* x, f32* y);
 void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3);
 void exec_ShakeCam1(s32 arg0, s32 arg1, s32 arg2);
 f32 func_800E5348(void);
@@ -127,6 +128,7 @@ s32 get_transform_group_index(s32);
 void get_model_center_and_size(u16 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY,
                                f32* sizeZ);
 s32 collision_main_above(void);
+s32 collision_lava_reset_check_additional_overlaps(void);
 s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
 void peach_set_disguise_anim(s32);
@@ -172,6 +174,7 @@ s32 phys_can_player_interact(void);
 void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2);
 
 s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
+s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* posX, f32* posY, f32* posZ, f32 speed, f32 heading);
 
 s32 evt_get_variable(Evt* script, Bytecode var);
 s32 evt_set_variable(Evt* script, Bytecode var, s32 value);
@@ -280,6 +283,7 @@ void set_screen_overlay_center(s32, s32, s32, s32);
 s32 rand_int(s32);
 void sort_items(void);
 s32 is_ability_active(s32 arg0);
+s32 is_starting_conversation(void);
 f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 void sin_cos_deg(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
@@ -310,6 +314,7 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 void disable_player_shadow(void);
 void move_player(s32 duration, f32 heading, f32 speed);
 s32 enable_player_input(void);
+s32 enable_player_static_collisions(void);
 s32 check_input_jump(void);
 s32 check_input_hammer(void);
 
@@ -318,6 +323,7 @@ Npc* get_npc_unsafe(NpcID npcId);
 Npc* resolve_npc(Evt* script, NpcID npcIdOrPtr);
 void set_npc_yaw(Npc* npcPtr, f32 angle);
 void npc_move_heading(Npc* npc, f32 speed, f32 yaw);
+void enable_npc_blur(Npc* npc);
 void disable_npc_blur(Npc* npc);
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
@@ -356,6 +362,7 @@ Evt* get_script_by_index(s32 index);
 
 s32 get_lava_reset_pos(f32* x, f32* y, f32* z);
 void start_rumble(s32, s32);
+void start_falling(void);
 
 void set_action_state(s32 actionState);
 s32 get_collider_type_by_id(s32 colliderID);
