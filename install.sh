@@ -12,6 +12,9 @@ if [[ "$uname" == "Darwin" ]]; then
     curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/mac.tar.gz" | tar zx -C tools/build/cc/gcc
     curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/mac.tar.gz" | tar zx -C tools/build/cc/gcc
 
+    echo "Downloading IDO 5.3 for macOS"
+    curl -L "https://github.com/ethteck/ido-static-recomp/releases/download/per-function/ido-5.3-recomp-macos-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3
+
     echo "Installing packages for macOS"
 
     if ! command -v brew >/dev/null 2>&1; then
@@ -35,6 +38,9 @@ fi
 echo "Downloading gcc/binutils for Linux"
 curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc
 curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc
+
+echo "Downloading IDO 5.3 for Linux"
+curl -L "https://github.com/ethteck/ido-static-recomp/releases/download/per-function/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3
 
 # Debian and derivatives (apt)
 if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; then
