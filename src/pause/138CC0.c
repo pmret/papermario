@@ -203,44 +203,38 @@ void pause_badges_draw_bp_orbs(s32 orbState, s32 x, s32 y) {
 
 INCLUDE_ASM(s32, "pause/138CC0", pause_badges_draw_contents);
 
-#ifdef NON_MATCHING
-// Slight instruction ordering mismatch, but this code is definitely semantically equivalent
 void pause_badges_load_badges(s32 onlyEquipped) {
     PlayerData* playerData = &gPlayerData;
-    s32 i;
     s32 numItems = 0;
     PauseItemPage* page;
-    s16* menuItemIDs;
+    s32 i;
 
     D_80270388 = 0;
     if (!onlyEquipped) {
-        i = 0;
-        menuItemIDs = gBadgeMenuItemIDs;
-        // A move instruction is out of order right here, no impact on behavior
-        for (; i < ARRAY_COUNT(playerData->badges); ++i) {
+        for (i = 0; i < ARRAY_COUNT(playerData->badges); ++i) {
             s16 badgeItemID = playerData->badges[i];
             if (badgeItemID == 0) {
                 continue;
             } else if (badgeItemID >= ITEM_PARTNER_ATTACK) {
                 break;
             } else {
-                *menuItemIDs = badgeItemID;
-                ++menuItemIDs;
-                ++numItems;
+                gBadgeMenuItemIDs[numItems] = badgeItemID;
+                numItems += 1;
             }
         }
     } else {
         s16* equippedBadges;
         pause_badges_count_equipped();
         equippedBadges = playerData->equippedBadges;
-        i = 0;
-        menuItemIDs = gBadgeMenuItemIDs;
-        for (; i < ARRAY_COUNT(playerData->equippedBadges); ++i, ++equippedBadges) {
-            if (*equippedBadges != 0) {
-                *menuItemIDs = *equippedBadges;
-                ++menuItemIDs;
+        for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); ++i) {
+            // This can be written more clearly as equippedBadges[i],
+            // but that causes some instruction reordering
+            s16 badgeItemID = *equippedBadges;
+            if (badgeItemID != 0) {
+                gBadgeMenuItemIDs[numItems] = badgeItemID;
                 numItems += 1;
             }
+            ++equippedBadges;
         }
     }
     if (numItems == 0) {
@@ -303,9 +297,6 @@ void pause_badges_load_badges(s32 onlyEquipped) {
 
     gBadgeMenuTargetScrollPos = gBadgeMenuCurrentScrollPos = pause_badges_get_pos_y(0, 0);
 }
-#else
-INCLUDE_ASM(void, "pause/138CC0", pause_badges_load_badges, s32 arg);
-#endif
 
 void pause_badges_init(MenuPanel *panel) {
     s32 i;
@@ -315,7 +306,7 @@ void pause_badges_init(MenuPanel *panel) {
     gBadgeMenuCurrentTab = 0;
     gBadgeMenuBShowNotEnoughBP = 0;
 
-    pause_badges_load_badges(0);
+    pause_badges_load_badges(FALSE);
     if (gBadgeMenuItemIDs[0] == 0x7FFE) {
         panel->initialized = 0;
         return;
@@ -487,7 +478,7 @@ void pause_badges_handle_input(void) {
             gBadgeMenuLevel = 0;
             enforce_hpfp_limits();
             if (gBadgeMenuCurrentTab == 1) {
-                pause_badges_load_badges(1);
+                pause_badges_load_badges(TRUE);
             }
         }
     }
