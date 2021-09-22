@@ -21,7 +21,7 @@
 
 /*---------------------------------------------------------------------*
         Copyright (C) 1998 Nintendo. (Originated by SGI)
-        
+
         $RCSfile: os_pi.h,v $
         $Revision: 1.1 $
         $Date: 1998/10/09 08:01:16 $
@@ -103,7 +103,7 @@ typedef struct {
         u16 		type;		/* Message type */
         u8 		pri;		/* Message priority (High or Normal) */
         u8		status;		/* Return status */
-	OSMesgQueue	*retQueue;	/* Return message queue to notify I/O 
+	OSMesgQueue	*retQueue;	/* Return message queue to notify I/O
 					 * completion */
 } OSIoMesgHdr;
 

@@ -100,7 +100,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc_ido",
         description="cc_ido $in",
-        command=f"{ccache}{cc_ido} {CPPFLAGS_COMMON} {cppflags} -c -mips2 -g -O2 -Xfullwarn -Xcpluscomm -o $out $in",
+        command=f"{ccache}{cc_ido} {CPPFLAGS_COMMON} {cppflags} -c -mips1 -O0 -G0 -non_shared -Xfullwarn -Xcpluscomm -o $out $in",
     )
 
     ninja.rule("cxx",
@@ -359,8 +359,7 @@ class Configure:
                     if "SCRIPT(" in s or "#pragma SCRIPT" in s or "#include \"world/common/foliage.inc.c\"" in s:
                         task = "cc_dsl"
                 if seg.name.endswith("osFlash"):
-                    pass
-                    #task = "cc_ido"
+                    task = "cc_ido"
 
                 build(entry.object_path, entry.src_paths, task, variables={"cflags": cflags})
 
