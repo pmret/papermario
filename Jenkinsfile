@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'ninja 2>&1 | tee build_log.txt'
+                sh "bash -o pipefail -c 'ninja 2>&1 | tee build_log.txt'"
             }
         }
         stage("Comment") {
