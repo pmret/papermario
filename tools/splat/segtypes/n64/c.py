@@ -5,7 +5,7 @@ import os
 import re
 from pathlib import Path
 
-from util import options
+from util import log, options
 
 
 class N64SegC(N64SegCodeSubsegment):
@@ -175,4 +175,4 @@ class N64SegC(N64SegCodeSubsegment):
         Path(c_path).parent.mkdir(parents=True, exist_ok=True)
         with open(c_path, "w") as f:
             f.write("\n".join(c_lines))
-        print(f"Wrote {self.name} to {c_path}")
+        log.write(f"Wrote {self.name} to {c_path}")

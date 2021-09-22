@@ -77,6 +77,12 @@ class N64SegCodeSubsegment(Segment):
             op_str = insn.op_str
             func_addr = insn.address if len(func) == 0 else func[0][0].address
 
+            # If this is non-zero, disasm size insns
+            hard_size = 0
+            func_sym = self.parent.get_symbol(func_addr, type="func")
+            if func_sym and func_sym.size > 4:
+                hard_size = func_sym.size / 4
+
             if mnemonic == "move":
                 # Let's get the actual instruction out
                 opcode = insn.bytes[3] & 0b00111111
@@ -116,6 +122,8 @@ class N64SegCodeSubsegment(Segment):
             func.append((insn, mnemonic, op_str, rom_addr))
             rom_addr += 4
 
+            size_remaining = hard_size - len(func) if hard_size > 0 else 0
+
             if mnemonic == "jr":
                 # Record potential jtbl jumps
                 if op_str != "$ra":
@@ -126,9 +134,13 @@ class N64SegCodeSubsegment(Segment):
                     if (label[0] > insn.address and label[1] <= insn.address) or (label[0] <= insn.address and label[1] > insn.address):
                         keep_going = True
                         break
-                if not keep_going:
+                if not keep_going and not size_remaining:
                     end_func = True
                     continue
+
+            # Stop here if a size was specified and we have disassembled up to the size
+            if hard_size > 0 and size_remaining == 0:
+                end_func = True
 
             if i < len(insns) - 1 and self.parent.get_symbol(insns[i + 1].address, local_only=True, type="func", dead=False):
                 end_func = True
