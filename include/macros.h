@@ -62,23 +62,6 @@
 
 #define PACK_FILL_COLOR(r, g, b, a) (GPACK_RGBA5551(r, g, b, a) << 0x10) | GPACK_RGBA5551(r, g, b, a)
 
-//NOTE: SCRIPT_ALLOC is probably not quite correct, but this is the closest thing to matching for the functions its used in. Needs more work.
-#define SCRIPT_ALLOC(new, index) \
-{ \
-    (*gCurrentScriptListPtr)[index] = new = heap_malloc(sizeof(Evt)); \
-    gNumScripts++; \
-    ASSERT(new != NULL); \
-}
-
-#define SCRIPT_FREE(index) \
-{ \
-    ScriptList** temp = &gCurrentScriptListPtr; \
-    s32 *numScripts = &gNumScripts; \
-    heap_free((**temp)[index]); \
-    (**temp)[index] = NULL; \
-    (*numScripts)--; \
-}
-
 #define SQ(x) (x*x)
 #define CUBE(x) (x*x*x)
 #define QUART(x) (x*x*x*x)

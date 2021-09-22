@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'ninja 2>&1 | tee build_log.txt'
+                sh "bash -o pipefail -c 'ninja 2>&1 | tee build_log.txt'"
             }
         }
         stage("Comment") {
@@ -64,7 +64,7 @@ pipeline {
                 sh 'python3 progress.py jp --csv >> reports/progress_jp.csv'
                 sh 'python3 progress.py jp --shield-json > reports/progress_jp_shield.json'
 
-                sh './tools/warnings_count/update_current_warnings.sh'
+                sh 'cat build_log.txt | grep warning | sort > tools/warnings_count/warnings.txt'
                 sh 'cp tools/warnings_count/warnings.txt reports/warnings.txt'
 
                 stash includes: 'reports/*', name: 'reports'

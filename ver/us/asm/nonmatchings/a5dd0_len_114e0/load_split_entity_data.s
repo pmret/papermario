@@ -93,13 +93,13 @@ glabel L80111480_A7B80
 /* A7C34 80111534 80420070 */  lb        $v0, 0x70($v0)
 /* A7C38 80111538 14400005 */  bnez      $v0, .L80111550
 /* A7C3C 8011153C 00000000 */   nop
-/* A7C40 80111540 3C128015 */  lui       $s2, %hi(D_8015165C)
-/* A7C44 80111544 8E52165C */  lw        $s2, %lo(D_8015165C)($s2)
+/* A7C40 80111540 3C128015 */  lui       $s2, %hi(wStaticEntityDataSize)
+/* A7C44 80111544 8E52165C */  lw        $s2, %lo(wStaticEntityDataSize)($s2)
 /* A7C48 80111548 08044556 */  j         .L80111558
 /* A7C4C 8011154C 00000000 */   nop
 .L80111550:
-/* A7C50 80111550 3C128015 */  lui       $s2, %hi(D_80151660)
-/* A7C54 80111554 8E521660 */  lw        $s2, %lo(D_80151660)($s2)
+/* A7C50 80111550 3C128015 */  lui       $s2, %hi(bStaticEntityDataSize)
+/* A7C54 80111554 8E521660 */  lw        $s2, %lo(bStaticEntityDataSize)($s2)
 .L80111558:
 /* A7C58 80111558 8E620004 */  lw        $v0, 4($s3)
 /* A7C5C 8011155C 8E630000 */  lw        $v1, ($s3)
@@ -130,8 +130,8 @@ glabel L80111480_A7B80
 /* A7CB4 801115B4 0804456D */  j         .L801115B4
 /* A7CB8 801115B8 00000000 */   nop
 .L801115BC:
-/* A7CBC 801115BC 3C118015 */  lui       $s1, %hi(D_801512C4)
-/* A7CC0 801115C0 263112C4 */  addiu     $s1, $s1, %lo(D_801512C4)
+/* A7CBC 801115BC 3C118015 */  lui       $s1, %hi(gEntityHeapBase)
+/* A7CC0 801115C0 263112C4 */  addiu     $s1, $s1, %lo(gEntityHeapBase)
 /* A7CC4 801115C4 8E640000 */  lw        $a0, ($s3)
 /* A7CC8 801115C8 8E260000 */  lw        $a2, ($s1)
 /* A7CCC 801115CC 8E650004 */  lw        $a1, 4($s3)
@@ -170,20 +170,20 @@ glabel L80111480_A7B80
 /* A7D50 80111650 80420070 */  lb        $v0, 0x70($v0)
 /* A7D54 80111654 14400005 */  bnez      $v0, .L8011166C
 /* A7D58 80111658 24150001 */   addiu    $s5, $zero, 1
-/* A7D5C 8011165C 3C018015 */  lui       $at, %hi(D_8015165C)
-/* A7D60 80111660 AC32165C */  sw        $s2, %lo(D_8015165C)($at)
+/* A7D5C 8011165C 3C018015 */  lui       $at, %hi(wStaticEntityDataSize)
+/* A7D60 80111660 AC32165C */  sw        $s2, %lo(wStaticEntityDataSize)($at)
 /* A7D64 80111664 080445C4 */  j         .L80111710
 /* A7D68 80111668 00000000 */   nop
 .L8011166C:
-/* A7D6C 8011166C 3C018015 */  lui       $at, %hi(D_80151660)
-/* A7D70 80111670 AC321660 */  sw        $s2, %lo(D_80151660)($at)
+/* A7D6C 8011166C 3C018015 */  lui       $at, %hi(bStaticEntityDataSize)
+/* A7D70 80111670 AC321660 */  sw        $s2, %lo(bStaticEntityDataSize)($at)
 /* A7D74 80111674 080445C4 */  j         .L80111710
 /* A7D78 80111678 00000000 */   nop
 .L8011167C:
 /* A7D7C 8011167C 8E620004 */  lw        $v0, 4($s3)
 /* A7D80 80111680 8E630000 */  lw        $v1, ($s3)
-/* A7D84 80111684 3C058015 */  lui       $a1, %hi(D_801512C4)
-/* A7D88 80111688 8CA512C4 */  lw        $a1, %lo(D_801512C4)($a1)
+/* A7D84 80111684 3C058015 */  lui       $a1, %hi(gEntityHeapBase)
+/* A7D88 80111688 8CA512C4 */  lw        $a1, %lo(gEntityHeapBase)($a1)
 /* A7D8C 8011168C 00431023 */  subu      $v0, $v0, $v1
 /* A7D90 80111690 00021883 */  sra       $v1, $v0, 2
 /* A7D94 80111694 8FA20010 */  lw        $v0, 0x10($sp)

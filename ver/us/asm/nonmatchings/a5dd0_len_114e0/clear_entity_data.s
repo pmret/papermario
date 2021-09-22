@@ -42,8 +42,8 @@ glabel clear_entity_data
 /* A7444 80110D44 80420070 */  lb        $v0, 0x70($v0)
 /* A7448 80110D48 1440000C */  bnez      $v0, .L80110D7C
 /* A744C 80110D4C 24040003 */   addiu    $a0, $zero, 3
-/* A7450 80110D50 3C018015 */  lui       $at, %hi(D_8015165C)
-/* A7454 80110D54 AC20165C */  sw        $zero, %lo(D_8015165C)($at)
+/* A7450 80110D50 3C018015 */  lui       $at, %hi(wStaticEntityDataSize)
+/* A7454 80110D54 AC20165C */  sw        $zero, %lo(wStaticEntityDataSize)($at)
 /* A7458 80110D58 2404001D */  addiu     $a0, $zero, 0x1d
 /* A745C 80110D5C 3C028015 */  lui       $v0, %hi(D_801516DC)
 /* A7460 80110D60 244216DC */  addiu     $v0, $v0, %lo(D_801516DC)
@@ -55,8 +55,8 @@ glabel clear_entity_data
 /* A7474 80110D74 08044367 */  j         .L80110D9C
 /* A7478 80110D78 00000000 */   nop
 .L80110D7C:
-/* A747C 80110D7C 3C018015 */  lui       $at, %hi(D_80151660)
-/* A7480 80110D80 AC201660 */  sw        $zero, %lo(D_80151660)($at)
+/* A747C 80110D7C 3C018015 */  lui       $at, %hi(bStaticEntityDataSize)
+/* A7480 80110D80 AC201660 */  sw        $zero, %lo(bStaticEntityDataSize)($at)
 /* A7484 80110D84 3C028015 */  lui       $v0, %hi(D_801516F4)
 /* A7488 80110D88 244216F4 */  addiu     $v0, $v0, %lo(D_801516F4)
 .L80110D8C:
@@ -74,8 +74,8 @@ glabel clear_entity_data
 /* A74B4 80110DB4 34637FF0 */  ori       $v1, $v1, 0x7ff0
 /* A74B8 80110DB8 3C018015 */  lui       $at, %hi(D_80151300)
 /* A74BC 80110DBC AC221300 */  sw        $v0, %lo(D_80151300)($at)
-/* A74C0 80110DC0 3C018015 */  lui       $at, %hi(D_801512C4)
-/* A74C4 80110DC4 AC2312C4 */  sw        $v1, %lo(D_801512C4)($at)
+/* A74C0 80110DC0 3C018015 */  lui       $at, %hi(gEntityHeapBase)
+/* A74C4 80110DC4 AC2312C4 */  sw        $v1, %lo(gEntityHeapBase)($at)
 /* A74C8 80110DC8 0804437B */  j         .L80110DEC
 /* A74CC 80110DCC 00000000 */   nop
 .L80110DD0:
@@ -84,8 +84,8 @@ glabel clear_entity_data
 /* A74D8 80110DD8 3C018015 */  lui       $at, %hi(D_80151300)
 /* A74DC 80110DDC AC221300 */  sw        $v0, %lo(D_80151300)($at)
 /* A74E0 80110DE0 24423000 */  addiu     $v0, $v0, 0x3000
-/* A74E4 80110DE4 3C018015 */  lui       $at, %hi(D_801512C4)
-/* A74E8 80110DE8 AC2212C4 */  sw        $v0, %lo(D_801512C4)($at)
+/* A74E4 80110DE4 3C018015 */  lui       $at, %hi(gEntityHeapBase)
+/* A74E8 80110DE8 AC2212C4 */  sw        $v0, %lo(gEntityHeapBase)($at)
 .L80110DEC:
 /* A74EC 80110DEC 0C044188 */  jal       get_entity_list
 /* A74F0 80110DF0 00000000 */   nop

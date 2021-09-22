@@ -24,7 +24,8 @@
         "ver/current": true,
         "ver/us/build": true,
         "ver/jp/build": true,
-        "expected": true
+        "expected": true,
+        "**/*.i": true,
     },
     "python.autoComplete.extraPaths": [
         "./tools"

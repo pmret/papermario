@@ -1,4 +1,5 @@
 #include "common.h"
+#include "filemenu.h"
 
 INCLUDE_ASM(s32, "167570", filemenu_yesno_draw_options_contents);
 

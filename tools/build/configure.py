@@ -54,8 +54,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
     compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
-    CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM -DVERSION=$version " \
-                "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
+    CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
+               "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
     cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
@@ -185,6 +185,9 @@ OS_K0_TO_PHYSICAL = "int"
 "G_.*" = "int"
 "TEXEL.*" = "int"
 PRIMITIVE = "int"
+
+[decompme.compilers]
+"tools/build/cc/gcc/gcc" = "gcc2.8.1"
 """)
 
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):

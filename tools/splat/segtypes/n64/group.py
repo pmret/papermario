@@ -157,8 +157,7 @@ class N64SegGroup(N64Segment):
             end = self.get_next_seg_start(i, segment_yaml["subsegments"])
 
             if isinstance(start, int) and isinstance(prev_start, int) and start < prev_start:
-                print(f"Error: Code segment {self.name} contains subsegments which are out of ascending rom order (0x{prev_start:X} followed by 0x{start:X})")
-                sys.exit(1)
+                log.error(f"Error: Code segment {self.name} contains subsegments which are out of ascending rom order (0x{prev_start:X} followed by 0x{start:X})")
 
             vram = None
             if start != "auto":

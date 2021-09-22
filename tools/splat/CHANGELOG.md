@@ -1,5 +1,18 @@
 # splat Release Notes
 
+### 0.7.9
+* Finally removed the dumb linker section alignment hack
+* Added version number to output on execution
+
+### 0.7.8
+
+* Fixed a bug relating to a linker section alignment hack (thanks Wiseguy!)
+* Fixed a bug in linker_entry.py's clean_up_path that should make this function more versatile (thanks Wiseguy!)
+
+### 0.7.7
+
+* Disassembly now reads the `size` property of a function in symbol_addrs.txt to disassemble `size / 4` number of instructions. Feel free to specify the size of your functions in your symbol_addrs file if splat's disassembly is chopping a function too short or making a function too long.
+
 ### 0.7.6
 
 * Fixed a bug involving detection of defined functions in c files for GLOBAL_ASM-using projects

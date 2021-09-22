@@ -35,8 +35,8 @@ glabel func_8011B1D8
 /* B194C 8011B24C 00000000 */   nop
 /* B1950 8011B250 0C04572A */  jal       mdl_get_child_count
 /* B1954 8011B254 02A0202D */   daddu    $a0, $s5, $zero
-/* B1958 8011B258 3C038015 */  lui       $v1, %hi(D_80153224)
-/* B195C 8011B25C 24633224 */  addiu     $v1, $v1, %lo(D_80153224)
+/* B1958 8011B258 3C038015 */  lui       $v1, %hi(mdl_treeIterPos)
+/* B195C 8011B25C 24633224 */  addiu     $v1, $v1, %lo(mdl_treeIterPos)
 /* B1960 8011B260 8C640000 */  lw        $a0, ($v1)
 /* B1964 8011B264 00822021 */  addu      $a0, $a0, $v0
 /* B1968 8011B268 AC640000 */  sw        $a0, ($v1)
@@ -60,8 +60,8 @@ glabel func_8011B1D8
 /* B19A8 8011B2A8 00000000 */   nop
 /* B19AC 8011B2AC 1A600028 */  blez      $s3, .L8011B350
 /* B19B0 8011B2B0 0000882D */   daddu    $s1, $zero, $zero
-/* B19B4 8011B2B4 3C148015 */  lui       $s4, %hi(D_80153224)
-/* B19B8 8011B2B8 26943224 */  addiu     $s4, $s4, %lo(D_80153224)
+/* B19B4 8011B2B4 3C148015 */  lui       $s4, %hi(mdl_treeIterPos)
+/* B19B8 8011B2B8 26943224 */  addiu     $s4, $s4, %lo(mdl_treeIterPos)
 /* B19BC 8011B2BC 24170005 */  addiu     $s7, $zero, 5
 /* B19C0 8011B2C0 3C168015 */  lui       $s6, %hi(D_80153370)
 /* B19C4 8011B2C4 26D63370 */  addiu     $s6, $s6, %lo(D_80153370)

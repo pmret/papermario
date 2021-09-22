@@ -345,8 +345,8 @@ glabel update_camera_zone_interp
 .L80031944:
 /* CD44 80031944 AE220444 */  sw        $v0, 0x444($s1)
 .L80031948:
-/* CD48 80031948 3C0C800A */  lui       $t4, %hi(D_800A08C0)
-/* CD4C 8003194C 258C08C0 */  addiu     $t4, $t4, %lo(D_800A08C0)
+/* CD48 80031948 3C0C800A */  lui       $t4, %hi(blendedCamSettings)
+/* CD4C 8003194C 258C08C0 */  addiu     $t4, $t4, %lo(blendedCamSettings)
 /* CD50 80031950 8D890000 */  lw        $t1, ($t4)
 /* CD54 80031954 8D8A0004 */  lw        $t2, 4($t4)
 /* CD58 80031958 8D8B0008 */  lw        $t3, 8($t4)
@@ -721,8 +721,8 @@ glabel update_camera_zone_interp
 /* D2B4 80031EB4 E63E04A8 */  swc1      $f30, 0x4a8($s1)
 /* D2B8 80031EB8 C7B0003C */  lwc1      $f16, 0x3c($sp)
 /* D2BC 80031EBC 46001080 */  add.s     $f2, $f2, $f0
-/* D2C0 80031EC0 3C12800A */  lui       $s2, %hi(D_800A08C0)
-/* D2C4 80031EC4 265208C0 */  addiu     $s2, $s2, %lo(D_800A08C0)
+/* D2C0 80031EC0 3C12800A */  lui       $s2, %hi(blendedCamSettings)
+/* D2C4 80031EC4 265208C0 */  addiu     $s2, $s2, %lo(blendedCamSettings)
 /* D2C8 80031EC8 E63004AC */  swc1      $f16, 0x4ac($s1)
 /* D2CC 80031ECC E6420000 */  swc1      $f2, ($s2)
 /* D2D0 80031ED0 C6240450 */  lwc1      $f4, 0x450($s1)
@@ -859,8 +859,8 @@ glabel update_camera_zone_interp
 /* D4D8 800320D8 0800C840 */  j         .L80032100
 /* D4DC 800320DC 00000000 */   nop
 .L800320E0:
-/* D4E0 800320E0 3C02800A */  lui       $v0, %hi(D_800A08C0)
-/* D4E4 800320E4 244208C0 */  addiu     $v0, $v0, %lo(D_800A08C0)
+/* D4E0 800320E0 3C02800A */  lui       $v0, %hi(blendedCamSettings)
+/* D4E4 800320E4 244208C0 */  addiu     $v0, $v0, %lo(blendedCamSettings)
 /* D4E8 800320E8 C62C003C */  lwc1      $f12, 0x3c($s1)
 /* D4EC 800320EC C62E0044 */  lwc1      $f14, 0x44($s1)
 /* D4F0 800320F0 8C460010 */  lw        $a2, 0x10($v0)
@@ -868,8 +868,8 @@ glabel update_camera_zone_interp
 /* D4F8 800320F8 8C470018 */   lw       $a3, 0x18($v0)
 /* D4FC 800320FC 46000106 */  mov.s     $f4, $f0
 .L80032100:
-/* D500 80032100 3C03800A */  lui       $v1, %hi(D_800A08C0)
-/* D504 80032104 246308C0 */  addiu     $v1, $v1, %lo(D_800A08C0)
+/* D500 80032100 3C03800A */  lui       $v1, %hi(blendedCamSettings)
+/* D504 80032104 246308C0 */  addiu     $v1, $v1, %lo(blendedCamSettings)
 /* D508 80032108 C4600014 */  lwc1      $f0, 0x14($v1)
 /* D50C 8003210C 96220002 */  lhu       $v0, 2($s1)
 /* D510 80032110 C6260040 */  lwc1      $f6, 0x40($s1)

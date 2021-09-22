@@ -17,6 +17,10 @@ typedef struct {
     u8 r, g, b, a;
 } Color_RGBA8;
 
+typedef struct {
+    u8 r, g, b;
+} Color_RGB8;
+
 typedef struct Vec2b {
     /* 0x00 */ s8 x;
     /* 0x01 */ s8 y;
@@ -510,12 +514,22 @@ typedef struct CameraUnk {
     /* 0x68 */ char unk_68[0x24];
 } CameraUnk; // size = 0x8C
 
+typedef struct CameraControlSettings {
+    /* 0x00 */ s32 type;
+    /* 0x04 */ f32 boomLength;
+    /* 0x08 */ f32 boomPitch;
+    /* 0x0C */ Vec3f posA;
+    /* 0x18 */ Vec3f posB;
+    /* 0x24 */ f32 viewPitch;
+    /* 0x28 */ s32 flag;
+} CameraControlSettings; // size = 0x2C
+
 typedef struct Camera {
     /* 0x000 */ u16 flags;
     /* 0x002 */ s16 moveFlags;
-    /* 0x004 */ s16 mode;
+    /* 0x004 */ s16 updateMode;
     /* 0x006 */ s16 unk_06;
-    /* 0x008 */ s16 unk_08;
+    /* 0x008 */ s16 changingMap;
     /* 0x00A */ s16 viewportW;
     /* 0x00C */ s16 viewportH;
     /* 0x00E */ s16 viewportStartX;
@@ -533,7 +547,7 @@ typedef struct Camera {
     /* 0x028 */ s16 unk_28;
     /* 0x02A */ s16 zoomPercent;
     /* 0x02C */ s16 bgColor[3];
-    /* 0x032 */ s16 targetScreenCoords[3];
+    /* 0x032 */ Vec3s targetScreenCoords;
     /* 0x038 */ u16 perspNorm;
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ Vec3f lookAt_eye;
@@ -553,7 +567,7 @@ typedef struct Camera {
     /* 0x094 */ f32 currentPitch;
     /* 0x098 */ s32 unk_98;
     /* 0x09C */ s32 unk_9C;
-    /* 0x0A0 */ Vp viewport;
+    /* 0x0A0 */ Vp vp;
     /* 0x0B0 */ Vp vpAlt;
     /* 0x0C0 */ s32 unk_C0;
     /* 0x0C4 */ f32 unk_C4;
@@ -565,33 +579,34 @@ typedef struct Camera {
     /* 0x1D4 */ char unk_1D4[0x28];
     /* 0x1FC */ void (*fpDoPreRender)(struct Camera*);
     /* 0x200 */ void (*fpDoPostRender)(struct Camera*);
-    /* 0x204 */ struct Matrix4s* unkMatrix;
+    /* 0x204 */ Matrix4s* unkMatrix;
     /* 0x208 */ s32 unk_208;
-    /* 0x20C */ struct Matrix4s* unkEffectMatrix;
+    /* 0x20C */ Matrix4s* unkEffectMatrix;
     /* 0x210 */ char unk_210[0x2];
     /* 0x212 */ s16 unk_212;
     /* 0x214 */ CameraUnk unk_214[4];
-    /* 0x444 */ struct Zone* prevZone;
-    /* 0x448 */ struct Zone* currentZone;
-    /* 0x44C */ struct CamPosSettings initialSettings; /* for start of blend between zones */
-    /* 0x468 */ struct CamPosSettings targetSettings; /* goal for blend between zones */
-    /* 0x484 */ f32 sinInterpAlpha;
+    /* 0x444 */ CameraControlSettings* prevController;
+    /* 0x448 */ CameraControlSettings* currentController;
+    /* 0x44C */ CamPosSettings oldCameraSettings;
+    /* 0x468 */ CamPosSettings newCameraSettings;
+    /* 0x484 */ f32 interpAlpha;
     /* 0x488 */ f32 linearInterp;
     /* 0x48C */ f32 linearInterpScale; /* 3.0? */
     /* 0x490 */ f32 moveSpeed;
-    /* 0x494 */ char unk_494[0x8];
+    /* 0x494 */ f32 unk_494;
+    /* 0x498 */ f32 unk_498;
     /* 0x49C */ f32 unk_49C;
-    /* 0x4A0 */ char unk_4A0[0x10];
+    /* 0x4A0 */ f32 savedTargetY;
+    /* 0x4A4 */ f32 unk_4A4;
+    /* 0x4A8 */ f32 unk_4A8;
+    /* 0x4AC */ f32 unk_4AC;
     /* 0x4B0 */ Vec3f movePos;
-    /* 0x4BC */ char unk_4BC[28];
-    /* 0x4D8 */ s32 controllerType;
-    /* 0x4DC */ f32 controllerBoomLen;
-    /* 0x4E0 */ f32 controllerBoomPitch;
-    /* 0x4E4 */ Vec3f posA;
-    /* 0x4F0 */ Vec3f posB;
-    /* 0x4FC */ f32 controllerViewPitch;
-    /* 0x500 */ s32 unk_500;
-    /* 0x504 */ s16 boolTargetPlayer;
+    /* 0x4BC */ Vec3f prevPrevMovePos;
+    /* 0x4C8 */ Vec3f prevMovePos;
+    /* 0x4D4 */ u16 prevPrevFollowFlags;
+    /* 0x4D6 */ u16 prevFollowFlags;
+    /* 0x4D8 */ CameraControlSettings controlSettings;
+    /* 0x504 */ u16 followPlayer;
     /* 0x506 */ u16 unk_506;
     /* 0x508 */ f32 panPhase;
     /* 0x50C */ f32 leadAmount;
@@ -816,58 +831,6 @@ typedef struct ModelDisplayData {
     /* 0x4 */ char unk_00[0x4];
 } ModelDisplayData; // size = 0x8
 
-typedef struct ModelNodeProperty {
-    /* 0x0 */ s32 key;
-    /* 0x4 */ s32 dataType;
-    /* 0x8 */ s32 data;
-} ModelNodeProperty; // size = 0x8;
-
-typedef struct ModelNode {
-    /* 0x00 */ s32 type; /* 2 = model */
-    /* 0x04 */ ModelDisplayData* displayData;
-    /* 0x08 */ s32 numProperties;
-    /* 0x0C */ ModelNodeProperty* propertyList;
-    /* 0x10 */ struct ModelGroupData* groupData;
-} ModelNode; // size = 0x14
-
-typedef struct Model {
-    /* 0x00 */ u16 flags;
-    /* 0x02 */ s16 modelID;
-    /* 0x04 */ Matrix4s* currentMatrix;
-    /* 0x08 */ ModelNode* modelNode;
-    /* 0x0C */ ModelGroupData* groupData;
-    /* 0x10 */ s32* currentSpecialMatrix;
-    /* 0x14 */ char unk_14[4];
-    /* 0x18 */ Matrix4s specialMatrix;
-    /* 0x58 */ Matrix4f transformMatrix;
-    /* 0x98 */ Vec3f center;
-    /* 0xA4 */ u8 texPannerID;
-    /* 0xA5 */ u8 specialDisplayListID;
-    /* 0xA6 */ s8 renderMode;
-    /* 0xA7 */ char unk_A7;
-    /* 0xA8 */ u8 textureID;
-    /* 0xA9 */ u8 unk_A9;
-    /* 0xAA */ char unk_AA[6];
-} Model; // size = 0xB0
-
-typedef struct ModelTransformGroup {
-    /* 0x00 */ u16 flags;
-    /* 0x02 */ s16 groupModelID;
-    /* 0x04 */ Matrix4s* matrixRDP_N;
-    /* 0x08 */ ModelNode* modelNode;
-    /* 0x0C */ Matrix4s* transformMtx;
-    /* 0x10 */ Matrix4f matrixA;
-    /* 0x50 */ Matrix4f matrixB;
-    /* 0x90 */ Vec3f center;
-    /* 0x9C */ u8 minChildModelIndex;
-    /* 0x9D */ u8 maxChildModelIndex;
-    /* 0x9E */ u8 renderMode;
-    /* 0x9F */ s8 matrixMode;
-} ModelTransformGroup; // size = 0xA0
-
-typedef Model* ModelList[MAX_MODELS];
-typedef ModelTransformGroup* ModelTransformGroupList[MAX_MODEL_TRANSFORM_GROUPS];
-
 typedef struct AnimatedMesh {
     /* 0x000 */ s32 flags;
     /* 0x004 */ u8 renderMode;
@@ -1041,10 +1004,19 @@ typedef struct ItemEntity {
     /* 0x58 */ s32 unk_58;
 } ItemEntity; // size = 0x5C
 
-typedef struct StaticShadowData {
-    /* 0x00 */ s16 flags;
-    /* 0x02 */ char unk_02[34];
-} StaticShadowData; // size = 0x24
+typedef struct StaticAnimatorNode {
+    /* 0x00 */ u32* displayList; // can sometime point to a node???
+    /* 0x04 */ Vec3s rot; /* range = -180,180 */
+    /* 0x0A */ char unk_0A[0x2];
+    /* 0x0C */ Vec3f pos;
+    /* 0x18 */ struct StaticAnimatorNode* sibling;
+    /* 0x1C */ struct StaticAnimatorNode* child;
+    /* 0x20 */ s16 vertexStartOffset;
+    /* 0x22 */ char unk_22[0x2];
+    /* 0x24 */ Vtx* vtxList;
+    /* 0x28 */ s16 modelID;
+    /* 0x2A */ char unk_2A[0x2];
+} StaticAnimatorNode; // size = 0x2C
 
 typedef struct SpriteComponent {
     /* 0x00 */ char unk_00[8];
@@ -1286,7 +1258,7 @@ typedef struct GameStatus {
     /* 0x0A8 */ s8 creditsViewportMode;
     /* 0x0A9 */ s8 unk_A9;
     /* 0x0AA */ s8 demoFlags;
-    /* 0x0AB */ s8 unk_AB;
+    /* 0x0AB */ u8 unk_AB;
     /* 0x0AC */ s8 loadMenuState;
     /* 0x0AD */ s8 menuCounter;
     /* 0x0AE */ s8 bSkipIntro;
@@ -1345,6 +1317,15 @@ typedef struct Shadow {
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
 
+typedef struct StaticShadowData {
+    /* 0x00 */ u16 flags;
+    /* 0x02 */ char unk_02[0x2];
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ StaticAnimatorNode** animModelNode;
+    /* 0x0C */ void (*onCreateCallback)(Shadow* shadow);
+    /* 0x10 */ char unk_10[0x14];
+} StaticShadowData; // size = 0x24
+
 typedef struct PushBlockGrid {
     /* 0x00 */ s8* cells;
     /* 0x04 */ u8 numCellsX;
@@ -1372,18 +1353,6 @@ typedef struct RenderTask {
     /* 0x08 */ void* appendGfxArg;
     /* 0x0C */ void (*appendGfx)(void*);
 } RenderTask; // size = 0x10
-
-typedef void(*CustomModelGfxBuilderFunc)(s32 index);
-
-typedef struct CustomModelGfxBuilder {
-    /* 0x00 */ CustomModelGfxBuilderFunc pre;
-    /* 0x00 */ CustomModelGfxBuilderFunc post;
-} CustomModelGfxBuilder; // size = 0x8
-
-typedef struct CustomModelGfx {
-    /* 0x00 */ Gfx* pre;
-    /* 0x00 */ Gfx* post;
-} CustomModelGfx; // size = 0x8
 
 typedef struct SelectableTarget {
     /* 0x00 */ s16 actorID;
@@ -1664,15 +1633,6 @@ typedef struct CollisionHeader {
     /* 0x18 */ char unk_18[8];
 } CollisionHeader; // size = 0x20
 
-typedef struct Zone {
-    /* 0x00 */ s32 type;
-    /* 0x04 */ f32 boomLength;
-    /* 0x08 */ f32 boomPitch;
-    /* 0x0C */ f32 pos[6];
-    /* 0x24 */ f32 viewPitch;
-    /* 0x28 */ s32 flag;
-} Zone; // size = 0x2C
-
 typedef struct ActorMovement {
     /* 0x00 */ Vec3f currentPos;
     /* 0x0C */ Vec3f goalPos;
@@ -1939,12 +1899,6 @@ typedef struct PlayerStatus {
     /* 0x281 */ char unk_281[7];
 } PlayerStatus; // size = 0x288
 
-typedef struct AnimatedModelNode {
-    /* 0x00 */ u32* displayList;
-    /* 0x04 */ s16 rot[3]; /* range = -180,180 */
-    /* 0x0A */ char unk_0A[34];
-} AnimatedModelNode; // size = 0x2C
-
 typedef struct EncounterStatus {
     /* 0x000 */ s32 flags;
     /* 0x004 */ s8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
@@ -2044,10 +1998,10 @@ typedef struct PauseMapSpace {
 } PauseMapSpace; // size = 0x14
 
 typedef struct MenuPanel {
-    /* 0x00 */ s8 initialized; //?
+    /* 0x00 */ u8 initialized; //?
     /* 0x01 */ s8 col; // might be backwards
     /* 0x02 */ s8 row; // might be backwards
-    /* 0x03 */ s8 selected;
+    /* 0x03 */ u8 selected;
     /* 0x04 */ s8 page; // filemenu: 0 = select, 1 = delete, 3 = copy from, 4 = copy to, all else = save
     /* 0x05 */ s8 numCols;
     /* 0x06 */ s8 numRows;
@@ -2057,7 +2011,7 @@ typedef struct MenuPanel {
     /* 0x10 */ UNK_FUN_PTR(fpHandleInput);
     /* 0x14 */ UNK_FUN_PTR(fpUpdate);
     /* 0x18 */ UNK_FUN_PTR(fpCleanup);
-} MenuPanel;
+} MenuPanel; // size = 0x1C
 
 typedef struct WindowBackground {
     /* 0x00 */ s32* imgData;
@@ -2298,16 +2252,9 @@ typedef struct TempSetZoneEnabled {
     /* 0x04 */ s16 id1;
     /* 0x06 */ s16 id2;
     /* 0x08 */ char unk_08[0x8];
-    /* 0x10 */ s32 unk_10;
+    /* 0x10 */ CameraControlSettings* unk_10;
     /* 0x14 */ char unk_14[0x8];
 } TempSetZoneEnabled; // size = 0x1C
-
-typedef struct RenderTaskEntry {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ void* appendGfxArg;
-    /* 0x0C */ void (*appendGfx)(void*);
-} RenderTaskEntry; // size = 0x10
 
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 unk_00;

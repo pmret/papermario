@@ -682,10 +682,14 @@ segments:
     - [0x9D410, ci4,     ui/orb_red, 32, 32]
     - [0x9D610, palette, ui/orb_red]
     - [0x9D630, palette, ui/orb_red.disabled]
-    - [0x9D650, data]
-    - [0x9D658, rgba32,  ui/stat_heart, 16, 16]
-    - [0x9DA58, data]
-    - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
+    - start: 0x9D650 # TODO: The images before this (just above) should probably be with these in c
+      type: .data
+      name: 9D650
+      subsegments:
+      - [0x9D650, .data, 9D650]
+      - [0x9D658, rgba32,  ui/stat_heart, 16, 16]
+      - [0x9DA58]
+      - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
     - [0x9DE60, data]
     - [0xA5100] # bss at 8010C920
   - type: code
@@ -987,12 +991,13 @@ segments:
     start: 0x163400
     vram: 0x80242BA0
     subsegments:
-    - [0x163400, c]
+    - [0x163400, c, 163400]
     - [0x165490, c, 165490]
     - [0x167570, c, 167570]
     - [0x168590, c, 168590]
     - [0x169BE0, c]
-    - [0x16A3E0, data]
+    - [0x16A3E0, .data, 163400]
+    - [0x16A680, data]
     - [0x16C7D0, .rodata, 165490]
     - [0x16C848, .rodata, 167570]
     - [0x16C8C0, .rodata, 168590]
@@ -5021,8 +5026,7 @@ segments:
     - [0x7E7A30, data]
     - [0x7E8470, data]
     - [0x7EA340, data]
-    - [0x7EAA50, data]
-    - [0x7EACD8, .rodata, 7E73A0]
+    - [0x7EAA50, .rodata, 7E73A0]
     - [0x7EAD00, .rodata, 7E7850]
   - name: mac_00
     dir: world/area_mac/mac_00

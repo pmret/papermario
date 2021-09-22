@@ -38,7 +38,7 @@ void state_init_file_select(void) {
     set_hud_element_nonworld_cache(0, 0);
     clear_hud_element_cache();
     load_model_textures(0, 0, 0);
-    gCameras[0].mode = 6;
+    gCameras[0].updateMode = 6;
     gCameras[0].unk_06 = 1;
     gCameras[0].nearClip = 16;
     gCameras[0].farClip = 4096;

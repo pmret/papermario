@@ -407,17 +407,9 @@ void func_80027BAC(s32 arg0, s32 arg1) {
     gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
 
     for (i = 0; i < 40; i++) {
-        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, arg0 + (0xF00 * i));
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_LOADTILE, 0,
-                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-                   G_TX_NOLOD);
-        gDPLoadSync(gMasterGfxPos++);
-        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x04FC, 0x0014);
-        gDPPipeSync(gMasterGfxPos++);
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_RENDERTILE, 0,
-                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-                   G_TX_NOLOD);
-        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 0x04FC, 0x0014);
+        gDPLoadTextureTile(gMasterGfxPos++, arg0 + (0xF00 * i), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                           SCREEN_HEIGHT, 0, 0, SCREEN_WIDTH - 1, 5, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
         gSPTextureRectangle(gMasterGfxPos++, 0, i * temp, 0x04FC, (i * 24) + 20, G_TX_RENDERTILE, 0, 0, 0x1000, 0x0400);
         gDPPipeSync(gMasterGfxPos++);
     }
@@ -482,17 +474,9 @@ void gfx_draw_background(void) {
             gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
 
             for (i = 0; i < 40; i++) {
-                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxZBuffer + (i * 0x780));
-                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_LOADTILE, 0,
-                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-                           G_TX_NOLOD);
-                gDPLoadSync(gMasterGfxPos++);
-                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x04FC, 0x0014);
-                gDPPipeSync(gMasterGfxPos++);
-                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_RENDERTILE, 0,
-                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-                           G_TX_NOLOD);
-                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 0x04FC, 0x0014);
+                gDPLoadTextureTile(gMasterGfxPos++, nuGfxZBuffer + (i * 0x780), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                           SCREEN_HEIGHT, 0, 0, SCREEN_WIDTH - 1, 5, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
                 gSPTextureRectangle(gMasterGfxPos++, 0, i * a, 0x0500, a + (i * 0x18), G_TX_RENDERTILE,
                                     -0x0020, 0, 0x0400, 0x0400);
                 gDPPipeSync(gMasterGfxPos++);

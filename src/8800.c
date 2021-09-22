@@ -19,7 +19,7 @@ void update_cameras(void) {
 
             gCurrentCamID = i;
 
-            switch (cam->mode) {
+            switch (cam->updateMode) {
                 case 3:
                     update_camera_zone_interp(cam);
                     break;
@@ -70,9 +70,9 @@ void update_cameras(void) {
             }
 
             get_screen_coords(0, cam->targetPos.x, cam->targetPos.y, cam->targetPos.z, &sx, &sy, &sz);
-            cam->targetScreenCoords[0] = sx;
-            cam->targetScreenCoords[1] = sy;
-            cam->targetScreenCoords[2] = sz;
+            cam->targetScreenCoords.x = sx;
+            cam->targetScreenCoords.y = sy;
+            cam->targetScreenCoords.z = sz;
         }
     }
 
@@ -111,7 +111,7 @@ void render_frame(s32 flag) {
                 s32 lrx;
                 s32 lry;
 
-                gSPViewport(gMasterGfxPos++, &camera->viewport);
+                gSPViewport(gMasterGfxPos++, &camera->vp);
                 gSPClearGeometryMode(gMasterGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
                                      G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
                 gSPTexture(gMasterGfxPos++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
@@ -178,8 +178,8 @@ void render_frame(s32 flag) {
             camera->unkMatrix = &gDisplayContext->matrixStack[gMatrixListPos];
             matrixListPos = gMatrixListPos++;
             guRotate(&gDisplayContext->matrixStack[matrixListPos], -camera->trueRotation.x, 0.0f, 1.0f, 0.0f);
-            camera->vpAlt.vp.vtrans[0] = camera->viewport.vp.vtrans[0] + gGameStatusPtr->unk_82;
-            camera->vpAlt.vp.vtrans[1] = camera->viewport.vp.vtrans[1] + gGameStatusPtr->unk_83;
+            camera->vpAlt.vp.vtrans[0] = camera->vp.vp.vtrans[0] + gGameStatusPtr->unk_82;
+            camera->vpAlt.vp.vtrans[1] = camera->vp.vp.vtrans[1] + gGameStatusPtr->unk_83;
 
             if (!(camera->flags & CAM_FLAG_ORTHO)) {
                 if (gCurrentCamID != CAM_CAM3) {
@@ -359,7 +359,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->trueRotation.x = 0.0f;
     camera->trueRotation.y = 0.0f;
     camera->trueRotation.z = 0.0f;
-    camera->mode = initData->type;
+    camera->updateMode = initData->type;
     camera->unk_06 = 1;
     camera->nearClip = initData->nearClip;
     camera->farClip = initData->farClip;
@@ -392,7 +392,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->unk_52C = 0;
     camera->aabbForZoneBelow = 0;
     camera->unk_506 = 0;
-    camera->boolTargetPlayer = 0;
+    camera->followPlayer = 0;
     camera->unk_C4 = 1000.0f;
     camera->unk_520 = 0.2f;
     camera->moveSpeed = 1.0f;
@@ -409,15 +409,15 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height) {
     camera->viewportStartX = x;
     camera->viewportStartY = y;
 
-    camera->viewport.vp.vscale[0] = 2.0f * camera->viewportW;
-    camera->viewport.vp.vscale[1] = 2.0f * camera->viewportH;
-    camera->viewport.vp.vscale[2] = 0x1FF;
-    camera->viewport.vp.vscale[3] = 0;
+    camera->vp.vp.vscale[0] = 2.0f * camera->viewportW;
+    camera->vp.vp.vscale[1] = 2.0f * camera->viewportH;
+    camera->vp.vp.vscale[2] = 0x1FF;
+    camera->vp.vp.vscale[3] = 0;
 
-    camera->viewport.vp.vtrans[0] = (((camera->viewportStartX + (camera->viewportW / 2)) << 16) >> 14);
-    camera->viewport.vp.vtrans[1] = (((camera->viewportStartY + (camera->viewportH / 2)) << 16) >> 14);
-    camera->viewport.vp.vtrans[2] = 0x1FF;
-    camera->viewport.vp.vtrans[3] = 0;
+    camera->vp.vp.vtrans[0] = (((camera->viewportStartX + (camera->viewportW / 2)) << 16) >> 14);
+    camera->vp.vp.vtrans[1] = (((camera->viewportStartY + (camera->viewportH / 2)) << 16) >> 14);
+    camera->vp.vp.vtrans[2] = 0x1FF;
+    camera->vp.vp.vtrans[3] = 0;
 
     camera->vpAlt.vp.vscale[0] = 2.0f * camera->viewportW;
     camera->vpAlt.vp.vscale[1] = 2.0f * camera->viewportH;

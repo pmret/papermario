@@ -16,7 +16,7 @@ build_dir = root_dir + "build/"
 
 
 def read_rom():
-    with open("ver/current/baserom.z64", "rb") as f:
+    with open(root_dir + "ver/current/baserom.z64", "rb") as f:
         return f.read()
 
 
