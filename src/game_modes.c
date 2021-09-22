@@ -67,10 +67,10 @@ StateFunc D_80077828[] = { NULL, state_init_intro, state_step_intro, NULL, state
 
 StateFunc D_8007783C[] = { NULL, state_init_demo, state_step_demo, NULL, state_drawUI_demo };
 
-StateFunc gameModeMap[] = {
-    &gameModeBlueprints, &D_800776FC, &D_80077710, &D_80077724, &D_80077774, &D_80077738, &D_8007774C, &D_80077760,
-    &D_80077788, &D_8007779C, &D_800777B0, &D_800777C4, &D_800777D8, &D_800777EC, &D_80077800, &D_80077814, &D_80077828,
-    &D_8007783C, NULL, NULL,
+StateFunc* gameModeMap[] = {
+    gameModeBlueprints, D_800776FC, D_80077710, D_80077724, D_80077774, D_80077738, D_8007774C, D_80077760, D_80077788,
+    D_8007779C, D_800777B0, D_800777C4, D_800777D8, D_800777EC, D_80077800, D_80077814, D_80077828, D_8007783C, NULL,
+    NULL,
 };
 
 // BSS

@@ -53,19 +53,9 @@ extern s32 gScriptIndexList[MAX_SCRIPTS];
 
 extern s32 gMoveScriptTable[][4];
 
-extern ModelList gWorldModelList;
-extern ModelList gBattleModelList;
-extern ModelList* gCurrentModelListPtr;
-
-// TODO: potentially a display list, figure this out
-extern u32* gWorldModelSpecialDls[32];
-extern u32* gBattleModelSpecialDls[32];
-extern CustomModelGfx* gCurrentModelSpecialDlsPtr;
-
 extern EntityList gWorldEntityList;
 extern EntityList gBattleEntityList;
 extern EntityList* gCurrentEntityListPtr;
-extern s32 gLastCreatedEntityIndex;
 
 extern DynamicEntityList gWorldDynamicEntityList;
 extern DynamicEntityList gBattleDynamicEntityList;

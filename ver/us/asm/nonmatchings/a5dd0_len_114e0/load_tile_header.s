@@ -24,12 +24,12 @@ glabel load_tile_header
 /* AB4B8 80114DB8 03C2102B */  sltu      $v0, $fp, $v0
 /* AB4BC 80114DBC 10400171 */  beqz      $v0, .L80115384
 /* AB4C0 80114DC0 24160001 */   addiu    $s6, $zero, 1
-/* AB4C4 80114DC4 3C128015 */  lui       $s2, %hi(D_80151740)
-/* AB4C8 80114DC8 26521740 */  addiu     $s2, $s2, %lo(D_80151740)
+/* AB4C4 80114DC4 3C128015 */  lui       $s2, %hi(gCurrentTileDescriptor)
+/* AB4C8 80114DC8 26521740 */  addiu     $s2, $s2, %lo(gCurrentTileDescriptor)
 /* AB4CC 80114DCC 0280202D */  daddu     $a0, $s4, $zero
 .L80114DD0:
-/* AB4D0 80114DD0 3C068015 */  lui       $a2, %hi(D_80151740)
-/* AB4D4 80114DD4 24C61740 */  addiu     $a2, $a2, %lo(D_80151740)
+/* AB4D0 80114DD0 3C068015 */  lui       $a2, %hi(gCurrentTileDescriptor)
+/* AB4D4 80114DD4 24C61740 */  addiu     $a2, $a2, %lo(gCurrentTileDescriptor)
 /* AB4D8 80114DD8 0C00A5CF */  jal       dma_copy
 /* AB4DC 80114DDC 26850030 */   addiu    $a1, $s4, 0x30
 /* AB4E0 80114DE0 96430022 */  lhu       $v1, 0x22($s2)
@@ -454,19 +454,19 @@ glabel load_tile_header
 /* ABA90 80115390 14400009 */  bnez      $v0, .L801153B8
 /* ABA94 80115394 00000000 */   nop
 .L80115398:
-/* ABA98 80115398 3C028015 */  lui       $v0, %hi(D_80153224)
-/* ABA9C 8011539C 8C423224 */  lw        $v0, %lo(D_80153224)($v0)
-/* ABAA0 801153A0 3C03800A */  lui       $v1, %hi(D_8009A5F4)
-/* ABAA4 801153A4 8C63A5F4 */  lw        $v1, %lo(D_8009A5F4)($v1)
+/* ABA98 80115398 3C028015 */  lui       $v0, %hi(mdl_treeIterPos)
+/* ABA9C 8011539C 8C423224 */  lw        $v0, %lo(mdl_treeIterPos)($v0)
+/* ABAA0 801153A0 3C03800A */  lui       $v1, %hi(mdl_currentModelTreeNodeInfo)
+/* ABAA4 801153A4 8C63A5F4 */  lw        $v1, %lo(mdl_currentModelTreeNodeInfo)($v1)
 /* ABAA8 801153A8 00021080 */  sll       $v0, $v0, 2
 /* ABAAC 801153AC 00431021 */  addu      $v0, $v0, $v1
 /* ABAB0 801153B0 0804551A */  j         .L80115468
 /* ABAB4 801153B4 A0400002 */   sb       $zero, 2($v0)
 .L801153B8:
-/* ABAB8 801153B8 3C168015 */  lui       $s6, %hi(D_80153224)
-/* ABABC 801153BC 26D63224 */  addiu     $s6, $s6, %lo(D_80153224)
-/* ABAC0 801153C0 3C17800A */  lui       $s7, %hi(D_8009A5F4)
-/* ABAC4 801153C4 26F7A5F4 */  addiu     $s7, $s7, %lo(D_8009A5F4)
+/* ABAB8 801153B8 3C168015 */  lui       $s6, %hi(mdl_treeIterPos)
+/* ABABC 801153BC 26D63224 */  addiu     $s6, $s6, %lo(mdl_treeIterPos)
+/* ABAC0 801153C0 3C17800A */  lui       $s7, %hi(mdl_currentModelTreeNodeInfo)
+/* ABAC4 801153C4 26F7A5F4 */  addiu     $s7, $s7, %lo(mdl_currentModelTreeNodeInfo)
 /* ABAC8 801153C8 8EC20000 */  lw        $v0, ($s6)
 /* ABACC 801153CC 8EE30000 */  lw        $v1, ($s7)
 /* ABAD0 801153D0 8FA80020 */  lw        $t0, 0x20($sp)
@@ -479,8 +479,8 @@ glabel load_tile_header
 /* ABAEC 801153EC 00021080 */  sll       $v0, $v0, 2
 /* ABAF0 801153F0 00431021 */  addu      $v0, $v0, $v1
 /* ABAF4 801153F4 90430002 */  lbu       $v1, 2($v0)
-/* ABAF8 801153F8 3C048016 */  lui       $a0, %hi(D_8015A590)
-/* ABAFC 801153FC 2484A590 */  addiu     $a0, $a0, %lo(D_8015A590)
+/* ABAF8 801153F8 3C048016 */  lui       $a0, %hi(mdl_textureHandles)
+/* ABAFC 801153FC 2484A590 */  addiu     $a0, $a0, %lo(mdl_textureHandles)
 /* ABB00 80115400 00031100 */  sll       $v0, $v1, 4
 /* ABB04 80115404 00431021 */  addu      $v0, $v0, $v1
 /* ABB08 80115408 00021080 */  sll       $v0, $v0, 2

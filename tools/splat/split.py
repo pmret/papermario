@@ -14,6 +14,8 @@ from util import options
 from util import symbols
 from util import palettes
 
+VERSION = "0.7.9"
+
 parser = argparse.ArgumentParser(description="Split a rom given a rom, a config, and output directory")
 parser.add_argument("config", help="path to a compatible config .yaml file")
 parser.add_argument("--target", help="path to a file to split (.z64 rom)")
@@ -109,6 +111,8 @@ def do_statistics(seg_sizes, rom_bytes, seg_split, seg_cached):
 
 def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
     global config
+
+    log.write(f"splat {VERSION}")
 
     # Load config
     with open(config_path) as f:

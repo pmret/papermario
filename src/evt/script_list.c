@@ -167,7 +167,9 @@ Evt* start_script(EvtSource* source, s32 priority, s32 initialState) {
     ASSERT(i < MAX_SCRIPTS);
     curScriptIndex = i;
 
-    SCRIPT_ALLOC(newScript, curScriptIndex);
+    (*gCurrentScriptListPtr)[curScriptIndex] = newScript = heap_malloc(sizeof(*newScript));
+    gNumScripts++;
+    ASSERT(newScript != NULL);
 
     newScript->state = initialState | 1;
     newScript->currentOpcode = 0;
@@ -290,11 +292,10 @@ Evt* start_script_in_group(EvtSource* source, u8 priority, u8 initialState, u8 g
 }
 
 Evt* start_child_script(Evt* parentScript, EvtSource* source, s32 initialState) {
-    s32 i;
     s32 curScriptIndex;
     s32 scriptListCount;
-    s32* tempCounter;
     Evt* child;
+    s32 i;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         if ((*gCurrentScriptListPtr)[i] == NULL) {
@@ -303,9 +304,10 @@ Evt* start_child_script(Evt* parentScript, EvtSource* source, s32 initialState) 
     }
 
     ASSERT(i < MAX_SCRIPTS);
-
     curScriptIndex = i;
-    SCRIPT_ALLOC(child, curScriptIndex);
+
+    (*gCurrentScriptListPtr)[curScriptIndex] = child = heap_malloc(sizeof(*child));
+    gNumScripts++;
     ASSERT(child != NULL);
 
     parentScript->childScript = child;
@@ -352,9 +354,8 @@ Evt* start_child_script(Evt* parentScript, EvtSource* source, s32 initialState) 
 
     suspend_frozen_scripts(child);
 
-    tempCounter = &gStaticScriptCounter;
-    if (*tempCounter == 0) {
-        *tempCounter = 1;
+    if (gStaticScriptCounter == 0) {
+        gStaticScriptCounter = 1;
     }
 
     return child;
@@ -374,7 +375,10 @@ Evt* func_802C39F8(Evt* parentScript, Bytecode* nextLine, s32 newState) {
 
     ASSERT(i < MAX_SCRIPTS);
     curScriptIndex = i;
-    SCRIPT_ALLOC(child, curScriptIndex);
+
+    (*gCurrentScriptListPtr)[curScriptIndex] = child = heap_malloc(sizeof(*child));
+    gNumScripts++;
+    ASSERT(child != NULL);
 
     child->state = newState | 1;
     child->ptrNextLine = nextLine;
@@ -579,7 +583,9 @@ void kill_script(Evt* instanceToKill) {
         instanceToKill->userData = NULL;
     }
 
-    SCRIPT_FREE(i);
+    heap_free((*gCurrentScriptListPtr)[i]);
+    (*gCurrentScriptListPtr)[i] = NULL;
+    gNumScripts--;
 }
 
 void kill_script_by_ID(s32 id) {
@@ -676,16 +682,16 @@ Trigger* bind_trigger_1(EvtSource* script, s32 flags, s32 triggerFlagIndex, s32 
 }
 
 void suspend_group_script(Evt* script, s32 groupFlags) {
-    int i;
-    Evt* scriptContextPtr;
     Evt* childScript = script->childScript;
+    s32 i;
 
     if (childScript != NULL) {
         suspend_group_script(childScript, groupFlags);
     }
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
-        scriptContextPtr = (*gCurrentScriptListPtr)[i];
+        Evt* scriptContextPtr = (*gCurrentScriptListPtr)[i];
+
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             suspend_group_script(scriptContextPtr, groupFlags);
         }
@@ -697,16 +703,16 @@ void suspend_group_script(Evt* script, s32 groupFlags) {
 }
 
 void resume_group_script(Evt* script, s32 groupFlags) {
-    int i;
-    Evt* scriptContextPtr;
     Evt* childScript = script->childScript;
+    s32 i;
 
     if (childScript != NULL) {
         resume_group_script(childScript, groupFlags);
     }
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
-        scriptContextPtr = (*gCurrentScriptListPtr)[i];
+        Evt* scriptContextPtr = (*gCurrentScriptListPtr)[i];
+
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             suspend_group_script(scriptContextPtr, groupFlags);
         }
@@ -719,10 +725,10 @@ void resume_group_script(Evt* script, s32 groupFlags) {
 
 s32 suspend_all_script(s32 id) {
     s32 i;
-    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
-        scriptContextPtr = (*gCurrentScriptListPtr)[i];
+        Evt* scriptContextPtr = (*gCurrentScriptListPtr)[i];
+
         if (scriptContextPtr != NULL && scriptContextPtr->id == id) {
             suspend_group_script(scriptContextPtr, 0xEF);
         }
@@ -833,9 +839,8 @@ Evt* get_script_by_id(s32 id) {
 }
 
 void set_script_flags(Evt* script, s32 flags) {
-    int i;
-    Evt* scriptContextPtr;
     Evt* childScript = script->childScript;
+    s32 i;
 
     script->state |= flags;
     if (childScript != NULL) {
@@ -843,7 +848,8 @@ void set_script_flags(Evt* script, s32 flags) {
     }
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
-        scriptContextPtr = (*gCurrentScriptListPtr)[i];
+        Evt* scriptContextPtr = (*gCurrentScriptListPtr)[i];
+
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             set_script_flags(script->parentScript, flags);
         }
@@ -851,9 +857,8 @@ void set_script_flags(Evt* script, s32 flags) {
 }
 
 void clear_script_flags(Evt* script, s32 flags) {
-    int i;
-    Evt* scriptContextPtr;
     Evt* childScript = script->childScript;
+    s32 i;
 
     script->state &= ~flags;
     if (childScript != NULL) {
@@ -861,7 +866,8 @@ void clear_script_flags(Evt* script, s32 flags) {
     }
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
-        scriptContextPtr = (*gCurrentScriptListPtr)[i];
+        Evt* scriptContextPtr = (*gCurrentScriptListPtr)[i];
+
         if (scriptContextPtr != NULL && scriptContextPtr->parentScript == script) {
             clear_script_flags(scriptContextPtr, flags);
         }

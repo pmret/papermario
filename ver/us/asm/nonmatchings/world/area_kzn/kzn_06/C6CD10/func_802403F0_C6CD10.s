@@ -52,8 +52,8 @@ glabel func_802403F0_C6CD10
 /* C6CDAC 8024048C 08090132 */  j         .L802404C8
 /* C6CDB0 80240490 00000000 */   nop
 .L80240494:
-/* C6CDB4 80240494 3C118015 */  lui       $s1, %hi(gCurrentModelListPtr)
-/* C6CDB8 80240498 8E3112CC */  lw        $s1, %lo(gCurrentModelListPtr)($s1)
+/* C6CDB4 80240494 3C118015 */  lui       $s1, %hi(gCurrentModels)
+/* C6CDB8 80240498 8E3112CC */  lw        $s1, %lo(gCurrentModels)($s1)
 /* C6CDBC 8024049C 0000802D */  daddu     $s0, $zero, $zero
 .L802404A0:
 /* C6CDC0 802404A0 8E240000 */  lw        $a0, ($s1)

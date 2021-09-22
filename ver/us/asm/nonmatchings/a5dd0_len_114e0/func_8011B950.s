@@ -3,8 +3,8 @@
 
 glabel func_8011B950
 /* B2050 8011B950 3084FFFF */  andi      $a0, $a0, 0xffff
-/* B2054 8011B954 3C0A800A */  lui       $t2, %hi(D_8009A5F4)
-/* B2058 8011B958 8D4AA5F4 */  lw        $t2, %lo(D_8009A5F4)($t2)
+/* B2054 8011B954 3C0A800A */  lui       $t2, %hi(mdl_currentModelTreeNodeInfo)
+/* B2058 8011B958 8D4AA5F4 */  lw        $t2, %lo(mdl_currentModelTreeNodeInfo)($t2)
 /* B205C 8011B95C 00041080 */  sll       $v0, $a0, 2
 /* B2060 8011B960 004A4021 */  addu      $t0, $v0, $t2
 /* B2064 8011B964 91030000 */  lbu       $v1, ($t0)
@@ -58,8 +58,8 @@ glabel func_8011B950
 /* B2104 8011BA04 0124102A */  slt       $v0, $t1, $a0
 /* B2108 8011BA08 1440000F */  bnez      $v0, .L8011BA48
 /* B210C 8011BA0C 010A3021 */   addu     $a2, $t0, $t2
-/* B2110 8011BA10 3C078015 */  lui       $a3, %hi(gCurrentModelListPtr)
-/* B2114 8011BA14 24E712CC */  addiu     $a3, $a3, %lo(gCurrentModelListPtr)
+/* B2110 8011BA10 3C078015 */  lui       $a3, %hi(gCurrentModels)
+/* B2114 8011BA14 24E712CC */  addiu     $a3, $a3, %lo(gCurrentModels)
 .L8011BA18:
 /* B2118 8011BA18 8CE30000 */  lw        $v1, ($a3)
 /* B211C 8011BA1C 00041080 */  sll       $v0, $a0, 2
@@ -79,8 +79,8 @@ glabel func_8011B950
 .L8011BA50:
 /* B2150 8011BA50 19600010 */  blez      $t3, .L8011BA94
 /* B2154 8011BA54 0000202D */   daddu    $a0, $zero, $zero
-/* B2158 8011BA58 3C078015 */  lui       $a3, %hi(gCurrentModelListPtr)
-/* B215C 8011BA5C 24E712CC */  addiu     $a3, $a3, %lo(gCurrentModelListPtr)
+/* B2158 8011BA58 3C078015 */  lui       $a3, %hi(gCurrentModels)
+/* B215C 8011BA5C 24E712CC */  addiu     $a3, $a3, %lo(gCurrentModels)
 /* B2160 8011BA60 010A3021 */  addu      $a2, $t0, $t2
 .L8011BA64:
 /* B2164 8011BA64 8CE30000 */  lw        $v1, ($a3)
@@ -100,8 +100,8 @@ glabel func_8011B950
 /* B2198 8011BA98 28820100 */  slti      $v0, $a0, 0x100
 /* B219C 8011BA9C 1040FFEA */  beqz      $v0, .L8011BA48
 /* B21A0 8011BAA0 010A3021 */   addu     $a2, $t0, $t2
-/* B21A4 8011BAA4 3C078015 */  lui       $a3, %hi(gCurrentModelListPtr)
-/* B21A8 8011BAA8 24E712CC */  addiu     $a3, $a3, %lo(gCurrentModelListPtr)
+/* B21A4 8011BAA4 3C078015 */  lui       $a3, %hi(gCurrentModels)
+/* B21A8 8011BAA8 24E712CC */  addiu     $a3, $a3, %lo(gCurrentModels)
 .L8011BAAC:
 /* B21AC 8011BAAC 8CE30000 */  lw        $v1, ($a3)
 /* B21B0 8011BAB0 00041080 */  sll       $v0, $a0, 2

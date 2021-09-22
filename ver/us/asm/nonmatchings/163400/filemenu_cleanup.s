@@ -6,8 +6,8 @@ glabel filemenu_cleanup
 /* 165364 80244B04 AFB00010 */  sw        $s0, 0x10($sp)
 /* 165368 80244B08 0000802D */  daddu     $s0, $zero, $zero
 /* 16536C 80244B0C AFB10014 */  sw        $s1, 0x14($sp)
-/* 165370 80244B10 3C118025 */  lui       $s1, %hi(pause_partners_draw_movelist_flower)
-/* 165374 80244B14 2631C0A0 */  addiu     $s1, $s1, %lo(pause_partners_draw_movelist_flower)
+/* 165370 80244B10 3C118025 */  lui       $s1, %hi(filemenu_cursorHudElemID)
+/* 165374 80244B14 2631C0A0 */  addiu     $s1, $s1, %lo(filemenu_cursorHudElemID)
 /* 165378 80244B18 AFBF0018 */  sw        $ra, 0x18($sp)
 .L80244B1C:
 /* 16537C 80244B1C 8E240000 */  lw        $a0, ($s1)
@@ -16,8 +16,8 @@ glabel filemenu_cleanup
 /* 165388 80244B28 26100001 */   addiu    $s0, $s0, 1
 /* 16538C 80244B2C 1A00FFFB */  blez      $s0, .L80244B1C
 /* 165390 80244B30 00000000 */   nop
-/* 165394 80244B34 3C118025 */  lui       $s1, %hi(D_80249B84)
-/* 165398 80244B38 26319B84 */  addiu     $s1, $s1, %lo(D_80249B84)
+/* 165394 80244B34 3C118025 */  lui       $s1, %hi(filemenu_menus)
+/* 165398 80244B38 26319B84 */  addiu     $s1, $s1, %lo(filemenu_menus)
 /* 16539C 80244B3C 0000802D */  daddu     $s0, $zero, $zero
 .L80244B40:
 /* 1653A0 80244B40 8E240000 */  lw        $a0, ($s1)

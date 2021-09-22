@@ -10,6 +10,18 @@ jobs:
   mypy:
     runs-on: ubuntu-latest
 
+    name: mypy
     steps:
-      - uses: actions/checkout@v2
-      - uses: jpetrucciani/mypy-check@master
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9
+    - name: Install Dependencies
+      run: |
+        pip install mypy
+        pip install -r requirements.txt
+        pip install types-PyYAML
+    - name: mypy
+      run: |
+        mypy --show-column-numbers --hide-error-context .

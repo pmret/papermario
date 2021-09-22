@@ -19,8 +19,8 @@ glabel filemenu_init
 /* 165178 80244918 0C00A5CF */  jal       dma_copy
 /* 16517C 8024491C AFB00010 */   sw       $s0, 0x10($sp)
 /* 165180 80244920 0000802D */  daddu     $s0, $zero, $zero
-/* 165184 80244924 3C128025 */  lui       $s2, %hi(pause_partners_draw_movelist_flower)
-/* 165188 80244928 2652C0A0 */  addiu     $s2, $s2, %lo(pause_partners_draw_movelist_flower)
+/* 165184 80244924 3C128025 */  lui       $s2, %hi(filemenu_cursorHudElemID)
+/* 165188 80244928 2652C0A0 */  addiu     $s2, $s2, %lo(filemenu_cursorHudElemID)
 /* 16518C 8024492C 3C118025 */  lui       $s1, %hi(D_80249B80)
 /* 165190 80244930 26319B80 */  addiu     $s1, $s1, %lo(D_80249B80)
 .L80244934:
@@ -35,8 +35,8 @@ glabel filemenu_init
 /* 1651B4 80244954 AE440000 */   sw       $a0, ($s2)
 /* 1651B8 80244958 1A00FFF6 */  blez      $s0, .L80244934
 /* 1651BC 8024495C 26520004 */   addiu    $s2, $s2, 4
-/* 1651C0 80244960 3C028025 */  lui       $v0, %hi(pause_partners_draw_movelist_flower)
-/* 1651C4 80244964 8C42C0A0 */  lw        $v0, %lo(pause_partners_draw_movelist_flower)($v0)
+/* 1651C0 80244960 3C028025 */  lui       $v0, %hi(filemenu_cursorHudElemID)
+/* 1651C4 80244964 8C42C0A0 */  lw        $v0, %lo(filemenu_cursorHudElemID)($v0)
 /* 1651C8 80244968 3C018025 */  lui       $at, %hi(D_8024C088)
 /* 1651CC 8024496C AC22C088 */  sw        $v0, %lo(D_8024C088)($at)
 /* 1651D0 80244970 16800004 */  bnez      $s4, .L80244984
@@ -49,8 +49,8 @@ glabel filemenu_init
 /* 1651E8 80244988 24849DAC */  addiu     $a0, $a0, %lo(D_80249DAC)
 /* 1651EC 8024498C 0C051FCC */  jal       setup_pause_menu_tab
 /* 1651F0 80244990 24050003 */   addiu    $a1, $zero, 3
-/* 1651F4 80244994 3C138025 */  lui       $s3, %hi(D_80249B84)
-/* 1651F8 80244998 8E739B84 */  lw        $s3, %lo(D_80249B84)($s3)
+/* 1651F4 80244994 3C138025 */  lui       $s3, %hi(filemenu_menus)
+/* 1651F8 80244998 8E739B84 */  lw        $s3, %lo(filemenu_menus)($s3)
 /* 1651FC 8024499C 3C018025 */  lui       $at, %hi(D_8024C098_C09918)
 /* 165200 802449A0 A020C098 */  sb        $zero, %lo(D_8024C098_C09918)($at)
 /* 165204 802449A4 16800003 */  bnez      $s4, .L802449B4
@@ -118,8 +118,8 @@ glabel filemenu_init
 .L80244A84:
 /* 1652E4 80244A84 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 1652E8 80244A88 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
-/* 1652EC 80244A8C 3C118025 */  lui       $s1, %hi(D_80249B84)
-/* 1652F0 80244A90 26319B84 */  addiu     $s1, $s1, %lo(D_80249B84)
+/* 1652EC 80244A8C 3C118025 */  lui       $s1, %hi(filemenu_menus)
+/* 1652F0 80244A90 26319B84 */  addiu     $s1, $s1, %lo(filemenu_menus)
 /* 1652F4 80244A94 90460166 */  lbu       $a2, 0x166($v0)
 /* 1652F8 80244A98 0000802D */  daddu     $s0, $zero, $zero
 /* 1652FC 80244A9C 30C50001 */  andi      $a1, $a2, 1
