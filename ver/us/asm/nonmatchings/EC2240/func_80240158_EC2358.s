@@ -26,8 +26,8 @@ glabel func_80240158_EC2358
 /* EC2378 80240178 8C910148 */  lw        $s1, 0x148($a0)
 /* EC237C 8024017C 0C00F92F */  jal       dead_get_npc_unsafe
 /* EC2380 80240180 86240008 */   lh       $a0, 8($s1)
-/* EC2384 80240184 3C038011 */  lui       $v1, %hi(D_80117578)
-/* EC2388 80240188 24637578 */  addiu     $v1, $v1, %lo(D_80117578)
+/* EC2384 80240184 3C038011 */  lui       $v1, %hi(dead_gPlayerStatus)
+/* EC2388 80240188 24637578 */  addiu     $v1, $v1, %lo(dead_gPlayerStatus)
 /* EC238C 8024018C 0040802D */  daddu     $s0, $v0, $zero
 /* EC2390 80240190 3C01C352 */  lui       $at, 0xc352
 /* EC2394 80240194 4481B000 */  mtc1      $at, $f22
@@ -52,7 +52,7 @@ glabel func_80240158_EC2358
 /* EC23E0 802401E0 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EC23E4 802401E4 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EC23E8 802401E8 8FA60010 */  lw        $a2, 0x10($sp)
-/* EC23EC 802401EC 0C00AC71 */  jal       func_8002B1C4
+/* EC23EC 802401EC 0C00AC71 */  jal       dead_dist2D
 /* EC23F0 802401F0 8FA70014 */   lw       $a3, 0x14($sp)
 /* EC23F4 802401F4 3C014000 */  lui       $at, 0x4000
 /* EC23F8 802401F8 44811800 */  mtc1      $at, $f3
@@ -152,7 +152,7 @@ glabel func_80240158_EC2358
 /* EC2554 80240354 3C054000 */  lui       $a1, 0x4000
 /* EC2558 80240358 44060000 */  mfc1      $a2, $f0
 /* EC255C 8024035C 0200202D */  daddu     $a0, $s0, $zero
-/* EC2560 80240360 0C00F909 */  jal       func_8003E424
+/* EC2560 80240360 0C00F909 */  jal       dead_npc_move_heading
 /* EC2564 80240364 AC86000C */   sw       $a2, 0xc($a0)
 /* EC2568 80240368 080900F7 */  j         .L802403DC
 /* EC256C 8024036C 00000000 */   nop

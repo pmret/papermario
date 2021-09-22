@@ -51,10 +51,10 @@ glabel func_80241B94_EE0554
 /* EE0608 80241C48 4628A503 */  div.d     $f20, $f20, $f8
 /* EE060C 80241C4C AFA20010 */  sw        $v0, 0x10($sp)
 /* EE0610 80241C50 8E040080 */  lw        $a0, 0x80($s0)
-/* EE0614 80241C54 0C03908F */  jal       func_800E423C
+/* EE0614 80241C54 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EE0618 80241C58 4620A520 */   cvt.s.d  $f20, $f20
 /* EE061C 80241C5C C62C0074 */  lwc1      $f12, 0x74($s1)
-/* EE0620 80241C60 0C00AD77 */  jal       func_8002B5DC
+/* EE0620 80241C60 0C00AD77 */  jal       dead_sin_deg
 /* EE0624 80241C64 46806320 */   cvt.s.w  $f12, $f12
 /* EE0628 80241C68 46140002 */  mul.s     $f0, $f0, $f20
 /* EE062C 80241C6C 00000000 */  nop
@@ -98,11 +98,11 @@ glabel func_80241B94_EE0554
 /* EE06C4 80241D04 AFA20020 */  sw        $v0, 0x20($sp)
 /* EE06C8 80241D08 E7A00010 */  swc1      $f0, 0x10($sp)
 /* EE06CC 80241D0C E7A20014 */  swc1      $f2, 0x14($sp)
-/* EE06D0 80241D10 0C01D444 */  jal       func_80075110
+/* EE06D0 80241D10 0C01D444 */  jal       dead_fx_emote
 /* EE06D4 80241D14 E7A40018 */   swc1     $f4, 0x18($sp)
 /* EE06D8 80241D18 0200202D */  daddu     $a0, $s0, $zero
 /* EE06DC 80241D1C 240502F4 */  addiu     $a1, $zero, 0x2f4
-/* EE06E0 80241D20 0C013600 */  jal       func_8004D800
+/* EE06E0 80241D20 0C013600 */  jal       dead_ai_enemy_play_sound
 /* EE06E4 80241D24 3C060020 */   lui      $a2, 0x20
 /* EE06E8 80241D28 2402000C */  addiu     $v0, $zero, 0xc
 /* EE06EC 80241D2C 0809076F */  j         .L80241DBC

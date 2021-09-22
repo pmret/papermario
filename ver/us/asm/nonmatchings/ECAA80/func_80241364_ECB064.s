@@ -43,7 +43,7 @@ glabel func_80241364_ECB064
 /* ECB0FC 802413FC AFA20020 */  sw        $v0, 0x20($sp)
 /* ECB100 80241400 E7A00010 */  swc1      $f0, 0x10($sp)
 /* ECB104 80241404 E7A20014 */  swc1      $f2, 0x14($sp)
-/* ECB108 80241408 0C01D444 */  jal       func_80075110
+/* ECB108 80241408 0C01D444 */  jal       dead_fx_emote
 /* ECB10C 8024140C E7A40018 */   swc1     $f4, 0x18($sp)
 /* ECB110 80241410 8E4200CC */  lw        $v0, 0xcc($s2)
 /* ECB114 80241414 8C430000 */  lw        $v1, ($v0)
@@ -77,7 +77,7 @@ glabel func_80241364_ECB064
 /* ECB178 80241478 00000000 */   nop
 /* ECB17C 8024147C 8E050018 */  lw        $a1, 0x18($s0)
 /* ECB180 80241480 8E06000C */  lw        $a2, 0xc($s0)
-/* ECB184 80241484 0C00F909 */  jal       func_8003E424
+/* ECB184 80241484 0C00F909 */  jal       dead_npc_move_heading
 /* ECB188 80241488 0200202D */   daddu    $a0, $s0, $zero
 .L8024148C:
 /* ECB18C 8024148C 8602008E */  lh        $v0, 0x8e($s0)

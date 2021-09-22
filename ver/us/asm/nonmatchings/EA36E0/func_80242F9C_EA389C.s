@@ -24,7 +24,7 @@ glabel func_80242F9C_EA389C
 /* EA38C0 80242FC0 46006307 */  neg.s     $f12, $f12
 /* EA38C4 80242FC4 46006321 */  cvt.d.s   $f12, $f12
 /* EA38C8 80242FC8 46346301 */  sub.d     $f12, $f12, $f20
-/* EA38CC 80242FCC 0C00AD90 */  jal       func_8002B640
+/* EA38CC 80242FCC 0C00AD90 */  jal       dead_cos_deg
 /* EA38D0 80242FD0 46206320 */   cvt.s.d  $f12, $f12
 /* EA38D4 80242FD4 3C014008 */  lui       $at, 0x4008
 /* EA38D8 80242FD8 44811800 */  mtc1      $at, $f3
@@ -42,7 +42,7 @@ glabel func_80242F9C_EA389C
 /* EA3908 80243008 46220001 */  sub.d     $f0, $f0, $f2
 /* EA390C 8024300C 4620010D */  trunc.w.d $f4, $f0
 /* EA3910 80243010 E6040098 */  swc1      $f4, 0x98($s0)
-/* EA3914 80243014 0C00AD77 */  jal       func_8002B5DC
+/* EA3914 80243014 0C00AD77 */  jal       dead_sin_deg
 /* EA3918 80243018 46206320 */   cvt.s.d  $f12, $f12
 /* EA391C 8024301C 3C014014 */  lui       $at, 0x4014
 /* EA3920 80243020 44811800 */  mtc1      $at, $f3

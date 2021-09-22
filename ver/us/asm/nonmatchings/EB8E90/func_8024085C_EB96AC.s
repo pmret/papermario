@@ -41,7 +41,7 @@ glabel func_8024085C_EB96AC
 /* EB973C 802408EC 8C470030 */   lw       $a3, 0x30($v0)
 /* EB9740 802408F0 46000506 */  mov.s     $f20, $f0
 /* EB9744 802408F4 C64C000C */  lwc1      $f12, 0xc($s2)
-/* EB9748 802408F8 0C00ABC6 */  jal       func_8002AF18
+/* EB9748 802408F8 0C00ABC6 */  jal       dead_get_clamped_angle_diff
 /* EB974C 802408FC 4600A386 */   mov.s    $f14, $f20
 /* EB9750 80240900 46000086 */  mov.s     $f2, $f0
 /* EB9754 80240904 8E02001C */  lw        $v0, 0x1c($s0)

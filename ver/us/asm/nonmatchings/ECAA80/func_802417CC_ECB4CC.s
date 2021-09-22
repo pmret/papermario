@@ -38,8 +38,8 @@ glabel func_802417CC_ECB4CC
 /* ECB550 80241850 4482C000 */  mtc1      $v0, $f24
 /* ECB554 80241854 00000000 */  nop
 /* ECB558 80241858 4680C620 */  cvt.s.w   $f24, $f24
-/* ECB55C 8024185C 3C128011 */  lui       $s2, %hi(D_80117578)
-/* ECB560 80241860 26527578 */  addiu     $s2, $s2, %lo(D_80117578)
+/* ECB55C 8024185C 3C128011 */  lui       $s2, %hi(dead_gPlayerStatus)
+/* ECB560 80241860 26527578 */  addiu     $s2, $s2, %lo(dead_gPlayerStatus)
 /* ECB564 80241864 3C038008 */  lui       $v1, %hi(D_8007C760)
 /* ECB568 80241868 8C63C760 */  lw        $v1, %lo(D_8007C760)($v1)
 /* ECB56C 8024186C C64200A8 */  lwc1      $f2, 0xa8($s2)
@@ -72,7 +72,7 @@ glabel func_802417CC_ECB4CC
 /* ECB5D0 802418D0 46000586 */  mov.s     $f22, $f0
 /* ECB5D4 802418D4 3C014170 */  lui       $at, 0x4170
 /* ECB5D8 802418D8 4481A000 */  mtc1      $at, $f20
-/* ECB5DC 802418DC 0C00AD77 */  jal       func_8002B5DC
+/* ECB5DC 802418DC 0C00AD77 */  jal       dead_sin_deg
 /* ECB5E0 802418E0 4600B306 */   mov.s    $f12, $f22
 /* ECB5E4 802418E4 46140002 */  mul.s     $f0, $f0, $f20
 /* ECB5E8 802418E8 00000000 */  nop
@@ -86,7 +86,7 @@ glabel func_802417CC_ECB4CC
 /* ECB608 80241908 00000000 */  nop
 /* ECB60C 8024190C 4600E700 */  add.s     $f28, $f28, $f0
 /* ECB610 80241910 4602D680 */  add.s     $f26, $f26, $f2
-/* ECB614 80241914 0C00AD90 */  jal       func_8002B640
+/* ECB614 80241914 0C00AD90 */  jal       dead_cos_deg
 /* ECB618 80241918 4600B306 */   mov.s    $f12, $f22
 /* ECB61C 8024191C 46140002 */  mul.s     $f0, $f0, $f20
 /* ECB620 80241920 00000000 */  nop

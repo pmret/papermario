@@ -44,7 +44,7 @@ glabel func_80240B10_EE70C0
 /* EE715C 80240BAC 46800020 */  cvt.s.w   $f0, $f0
 /* EE7160 80240BB0 E7A00018 */  swc1      $f0, 0x18($sp)
 /* EE7164 80240BB4 8C640018 */  lw        $a0, 0x18($v1)
-/* EE7168 80240BB8 0C013431 */  jal       func_8004D0C4
+/* EE7168 80240BB8 0C013431 */  jal       dead_is_point_within_region
 /* EE716C 80240BBC 8E070038 */   lw       $a3, 0x38($s0)
 /* EE7170 80240BC0 1040000E */  beqz      $v0, .L80240BFC
 /* EE7174 80240BC4 00000000 */   nop

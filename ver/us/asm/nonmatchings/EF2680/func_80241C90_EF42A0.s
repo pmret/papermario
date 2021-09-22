@@ -59,7 +59,7 @@ glabel func_80241C90_EF42A0
 /* EF4378 80241D68 0240202D */  daddu     $a0, $s2, $zero
 /* EF437C 80241D6C 0260282D */  daddu     $a1, $s3, $zero
 /* EF4380 80241D70 0280302D */  daddu     $a2, $s4, $zero
-/* EF4384 80241D74 0C090496 */  jal       func_80241258_EF3868
+/* EF4384 80241D74 0C090496 */  jal       EF2680_UnkFunc5
 /* EF4388 80241D78 02C0382D */   daddu    $a3, $s6, $zero
 /* EF438C 80241D7C AE800070 */  sw        $zero, 0x70($s4)
 .L80241D80:
@@ -132,7 +132,7 @@ glabel func_80241C90_EF42A0
 /* EF4478 80241E68 E640000C */   swc1     $f0, 0xc($s2)
 /* EF447C 80241E6C 0440000F */  bltz      $v0, .L80241EAC
 /* EF4480 80241E70 AE62007C */   sw       $v0, 0x7c($s3)
-/* EF4484 80241E74 0C010ABD */  jal       func_80042AF4
+/* EF4484 80241E74 0C010ABD */  jal       dead_get_enemy
 /* EF4488 80241E78 0040202D */   daddu    $a0, $v0, $zero
 /* EF448C 80241E7C 3C030049 */  lui       $v1, 0x49
 /* EF4490 80241E80 0040202D */  daddu     $a0, $v0, $zero
@@ -171,13 +171,13 @@ glabel func_80241C90_EF42A0
 .L80241EF8:
 /* EF4508 80241EF8 0280202D */  daddu     $a0, $s4, $zero
 /* EF450C 80241EFC 02C0282D */  daddu     $a1, $s6, $zero
-/* EF4510 80241F00 0C090399 */  jal       func_80240E64_EF3474
+/* EF4510 80241F00 0C090399 */  jal       EF2680_UnkNpcAIFunc3
 /* EF4514 80241F04 02A0302D */   daddu    $a2, $s5, $zero
 /* EF4518 80241F08 080907C7 */  j         .L80241F1C
 /* EF451C 80241F0C 00000000 */   nop
 .L80241F10:
 /* EF4520 80241F10 02C0282D */  daddu     $a1, $s6, $zero
-/* EF4524 80241F14 0C0903B2 */  jal       func_80240EC8_EF34D8
+/* EF4524 80241F14 0C0903B2 */  jal       EF2680_UnkFunc6
 /* EF4528 80241F18 02A0302D */   daddu    $a2, $s5, $zero
 .L80241F1C:
 /* EF452C 80241F1C 8E830070 */  lw        $v1, 0x70($s4)
@@ -206,7 +206,7 @@ glabel func_80241C90_EF42A0
 /* EF457C 80241F6C 00021400 */  sll       $v0, $v0, 0x10
 /* EF4580 80241F70 1C400027 */  bgtz      $v0, .L80242010
 /* EF4584 80241F74 00000000 */   nop
-/* EF4588 80241F78 0C010ABD */  jal       func_80042AF4
+/* EF4588 80241F78 0C010ABD */  jal       dead_get_enemy
 /* EF458C 80241F7C 8E64007C */   lw       $a0, 0x7c($s3)
 /* EF4590 80241F80 24030002 */  addiu     $v1, $zero, 2
 /* EF4594 80241F84 AC430094 */  sw        $v1, 0x94($v0)
@@ -222,7 +222,7 @@ glabel func_80241C90_EF42A0
 /* EF45B8 80241FA8 3C020049 */   lui      $v0, 0x49
 /* EF45BC 80241FAC 34420015 */  ori       $v0, $v0, 0x15
 /* EF45C0 80241FB0 AE420028 */  sw        $v0, 0x28($s2)
-/* EF45C4 80241FB4 0C010ABD */  jal       func_80042AF4
+/* EF45C4 80241FB4 0C010ABD */  jal       dead_get_enemy
 /* EF45C8 80241FB8 8E64007C */   lw       $a0, 0x7c($s3)
 /* EF45CC 80241FBC 24030003 */  addiu     $v1, $zero, 3
 /* EF45D0 80241FC0 AC430094 */  sw        $v1, 0x94($v0)
@@ -266,7 +266,7 @@ glabel func_80241C90_EF42A0
 /* EF465C 8024204C 8E020000 */  lw        $v0, ($s0)
 /* EF4660 80242050 E640000C */  swc1      $f0, 0xc($s2)
 /* EF4664 80242054 C44C0028 */  lwc1      $f12, 0x28($v0)
-/* EF4668 80242058 0C00AC71 */  jal       func_8002B1C4
+/* EF4668 80242058 0C00AC71 */  jal       dead_dist2D
 /* EF466C 8024205C C44E0030 */   lwc1     $f14, 0x30($v0)
 /* EF4670 80242060 C6A20008 */  lwc1      $f2, 8($s5)
 /* EF4674 80242064 468010A0 */  cvt.s.w   $f2, $f2
@@ -284,7 +284,7 @@ glabel func_80241C90_EF42A0
 /* EF46A4 80242094 E7A20018 */  swc1      $f2, 0x18($sp)
 /* EF46A8 80242098 8EA40004 */  lw        $a0, 4($s5)
 /* EF46AC 8024209C 8E470038 */  lw        $a3, 0x38($s2)
-/* EF46B0 802420A0 0C013431 */  jal       func_8004D0C4
+/* EF46B0 802420A0 0C013431 */  jal       dead_is_point_within_region
 /* EF46B4 802420A4 46000506 */   mov.s    $f20, $f0
 /* EF46B8 802420A8 14400031 */  bnez      $v0, .L80242170
 /* EF46BC 802420AC 0000102D */   daddu    $v0, $zero, $zero
@@ -335,7 +335,7 @@ glabel func_80241C90_EF42A0
 /* EF4768 80242158 44050000 */  mfc1      $a1, $f0
 /* EF476C 8024215C 8E46000C */  lw        $a2, 0xc($s2)
 /* EF4770 80242160 0240202D */  daddu     $a0, $s2, $zero
-/* EF4774 80242164 0C00F909 */  jal       func_8003E424
+/* EF4774 80242164 0C00F909 */  jal       dead_npc_move_heading
 /* EF4778 80242168 AC850018 */   sw       $a1, 0x18($a0)
 /* EF477C 8024216C 0000102D */  daddu     $v0, $zero, $zero
 .L80242170:

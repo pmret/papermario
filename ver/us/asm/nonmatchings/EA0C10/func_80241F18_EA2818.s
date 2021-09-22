@@ -59,14 +59,14 @@ glabel func_80241F18_EA2818
 /* EA28EC 80241FEC 46800020 */  cvt.s.w   $f0, $f0
 /* EA28F0 80241FF0 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* EA28F4 80241FF4 8E040080 */  lw        $a0, 0x80($s0)
-/* EA28F8 80241FF8 0C0394C1 */  jal       func_800E5304
+/* EA28F8 80241FF8 0C0394C1 */  jal       dead_npc_test_move_simple_with_slipping
 /* EA28FC 80241FFC 27A70028 */   addiu    $a3, $sp, 0x28
 /* EA2900 80242000 0040902D */  daddu     $s2, $v0, $zero
 /* EA2904 80242004 16400005 */  bnez      $s2, .L8024201C
 /* EA2908 80242008 00000000 */   nop
 /* EA290C 8024200C 8E050018 */  lw        $a1, 0x18($s0)
 /* EA2910 80242010 8E06000C */  lw        $a2, 0xc($s0)
-/* EA2914 80242014 0C00F909 */  jal       func_8003E424
+/* EA2914 80242014 0C00F909 */  jal       dead_npc_move_heading
 /* EA2918 80242018 0200202D */   daddu    $a0, $s0, $zero
 .L8024201C:
 /* EA291C 8024201C 8602008E */  lh        $v0, 0x8e($s0)

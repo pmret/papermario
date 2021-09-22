@@ -92,7 +92,7 @@ glabel func_80241000_EEE100
 /* EEE230 80241130 E7A60034 */  swc1      $f6, 0x34($sp)
 /* EEE234 80241134 AFA20010 */  sw        $v0, 0x10($sp)
 /* EEE238 80241138 8E040080 */  lw        $a0, 0x80($s0)
-/* EEE23C 8024113C 0C03908F */  jal       func_800E423C
+/* EEE23C 8024113C 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EEE240 80241140 27A70030 */   addiu    $a3, $sp, 0x30
 /* EEE244 80241144 C7A00034 */  lwc1      $f0, 0x34($sp)
 /* EEE248 80241148 4600D001 */  sub.s     $f0, $f26, $f0
@@ -136,7 +136,7 @@ glabel func_80241000_EEE100
 /* EEE2D8 802411D8 E7A40034 */  swc1      $f4, 0x34($sp)
 /* EEE2DC 802411DC AFA20010 */  sw        $v0, 0x10($sp)
 /* EEE2E0 802411E0 8E040080 */  lw        $a0, 0x80($s0)
-/* EEE2E4 802411E4 0C03908F */  jal       func_800E423C
+/* EEE2E4 802411E4 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EEE2E8 802411E8 27A70030 */   addiu    $a3, $sp, 0x30
 /* EEE2EC 802411EC C7A4002C */  lwc1      $f4, 0x2c($sp)
 /* EEE2F0 802411F0 461A2100 */  add.s     $f4, $f4, $f26
@@ -172,7 +172,7 @@ glabel func_80241000_EEE100
 /* EEE360 80241260 1840002E */  blez      $v0, .L8024131C
 /* EEE364 80241264 00000000 */   nop
 /* EEE368 80241268 C62C0074 */  lwc1      $f12, 0x74($s1)
-/* EEE36C 8024126C 0C00AD77 */  jal       func_8002B5DC
+/* EEE36C 8024126C 0C00AD77 */  jal       dead_sin_deg
 /* EEE370 80241270 46806320 */   cvt.s.w  $f12, $f12
 /* EEE374 80241274 8E020000 */  lw        $v0, ($s0)
 /* EEE378 80241278 30420008 */  andi      $v0, $v0, 8
@@ -195,7 +195,7 @@ glabel func_80241000_EEE100
 /* EEE3B8 802412B8 E7A60034 */  swc1      $f6, 0x34($sp)
 /* EEE3BC 802412BC AFA20010 */  sw        $v0, 0x10($sp)
 /* EEE3C0 802412C0 8E040080 */  lw        $a0, 0x80($s0)
-/* EEE3C4 802412C4 0C03908F */  jal       func_800E423C
+/* EEE3C4 802412C4 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EEE3C8 802412C8 27A70030 */   addiu    $a3, $sp, 0x30
 .L802412CC:
 /* EEE3CC 802412CC 10400007 */  beqz      $v0, .L802412EC
@@ -276,13 +276,13 @@ glabel func_80241000_EEE100
 /* EEE4EC 802413EC AFA20020 */  sw        $v0, 0x20($sp)
 /* EEE4F0 802413F0 E7A00010 */  swc1      $f0, 0x10($sp)
 /* EEE4F4 802413F4 E7A20014 */  swc1      $f2, 0x14($sp)
-/* EEE4F8 802413F8 0C01D444 */  jal       func_80075110
+/* EEE4F8 802413F8 0C01D444 */  jal       dead_fx_emote
 /* EEE4FC 802413FC E7A40018 */   swc1     $f4, 0x18($sp)
 /* EEE500 80241400 0200202D */  daddu     $a0, $s0, $zero
 /* EEE504 80241404 240502F4 */  addiu     $a1, $zero, 0x2f4
 /* EEE508 80241408 C480003C */  lwc1      $f0, 0x3c($a0)
 /* EEE50C 8024140C 3C060020 */  lui       $a2, 0x20
-/* EEE510 80241410 0C013600 */  jal       func_8004D800
+/* EEE510 80241410 0C013600 */  jal       dead_ai_enemy_play_sound
 /* EEE514 80241414 E4800064 */   swc1     $f0, 0x64($a0)
 /* EEE518 80241418 8E220018 */  lw        $v0, 0x18($s1)
 /* EEE51C 8024141C 9442002A */  lhu       $v0, 0x2a($v0)
@@ -321,7 +321,7 @@ glabel func_80241000_EEE100
 /* EEE58C 8024148C 46800020 */  cvt.s.w   $f0, $f0
 /* EEE590 80241490 E7A00018 */  swc1      $f0, 0x18($sp)
 /* EEE594 80241494 8C640018 */  lw        $a0, 0x18($v1)
-/* EEE598 80241498 0C013431 */  jal       func_8004D0C4
+/* EEE598 80241498 0C013431 */  jal       dead_is_point_within_region
 /* EEE59C 8024149C 8E070038 */   lw       $a3, 0x38($s0)
 /* EEE5A0 802414A0 1040001A */  beqz      $v0, .L8024150C
 /* EEE5A4 802414A4 00000000 */   nop
@@ -331,7 +331,7 @@ glabel func_80241000_EEE100
 /* EEE5B4 802414B4 C44C0000 */  lwc1      $f12, ($v0)
 /* EEE5B8 802414B8 46806320 */  cvt.s.w   $f12, $f12
 /* EEE5BC 802414BC C44E0008 */  lwc1      $f14, 8($v0)
-/* EEE5C0 802414C0 0C00AC71 */  jal       func_8002B1C4
+/* EEE5C0 802414C0 0C00AC71 */  jal       dead_dist2D
 /* EEE5C4 802414C4 468073A0 */   cvt.s.w  $f14, $f14
 /* EEE5C8 802414C8 C6020018 */  lwc1      $f2, 0x18($s0)
 /* EEE5CC 802414CC 4600103C */  c.lt.s    $f2, $f0
@@ -363,7 +363,7 @@ glabel func_80241000_EEE100
 /* EEE630 80241530 00000000 */   nop
 /* EEE634 80241534 8E050018 */  lw        $a1, 0x18($s0)
 /* EEE638 80241538 8E06000C */  lw        $a2, 0xc($s0)
-/* EEE63C 8024153C 0C00F909 */  jal       func_8003E424
+/* EEE63C 8024153C 0C00F909 */  jal       dead_npc_move_heading
 /* EEE640 80241540 0200202D */   daddu    $a0, $s0, $zero
 .L80241544:
 /* EEE644 80241544 C600003C */  lwc1      $f0, 0x3c($s0)

@@ -38,8 +38,8 @@ glabel func_802415DC_EAA0BC
 /* EAA140 80241660 4482C000 */  mtc1      $v0, $f24
 /* EAA144 80241664 00000000 */  nop
 /* EAA148 80241668 4680C620 */  cvt.s.w   $f24, $f24
-/* EAA14C 8024166C 3C128011 */  lui       $s2, %hi(D_80117578)
-/* EAA150 80241670 26527578 */  addiu     $s2, $s2, %lo(D_80117578)
+/* EAA14C 8024166C 3C128011 */  lui       $s2, %hi(dead_gPlayerStatus)
+/* EAA150 80241670 26527578 */  addiu     $s2, $s2, %lo(dead_gPlayerStatus)
 /* EAA154 80241674 3C038008 */  lui       $v1, %hi(D_8007C760)
 /* EAA158 80241678 8C63C760 */  lw        $v1, %lo(D_8007C760)($v1)
 /* EAA15C 8024167C C64200A8 */  lwc1      $f2, 0xa8($s2)
@@ -72,7 +72,7 @@ glabel func_802415DC_EAA0BC
 /* EAA1C0 802416E0 46000586 */  mov.s     $f22, $f0
 /* EAA1C4 802416E4 3C014170 */  lui       $at, 0x4170
 /* EAA1C8 802416E8 4481A000 */  mtc1      $at, $f20
-/* EAA1CC 802416EC 0C00AD77 */  jal       func_8002B5DC
+/* EAA1CC 802416EC 0C00AD77 */  jal       dead_sin_deg
 /* EAA1D0 802416F0 4600B306 */   mov.s    $f12, $f22
 /* EAA1D4 802416F4 46140002 */  mul.s     $f0, $f0, $f20
 /* EAA1D8 802416F8 00000000 */  nop
@@ -86,7 +86,7 @@ glabel func_802415DC_EAA0BC
 /* EAA1F8 80241718 00000000 */  nop
 /* EAA1FC 8024171C 4600E700 */  add.s     $f28, $f28, $f0
 /* EAA200 80241720 4602D680 */  add.s     $f26, $f26, $f2
-/* EAA204 80241724 0C00AD90 */  jal       func_8002B640
+/* EAA204 80241724 0C00AD90 */  jal       dead_cos_deg
 /* EAA208 80241728 4600B306 */   mov.s    $f12, $f22
 /* EAA20C 8024172C 46140002 */  mul.s     $f0, $f0, $f20
 /* EAA210 80241730 00000000 */  nop

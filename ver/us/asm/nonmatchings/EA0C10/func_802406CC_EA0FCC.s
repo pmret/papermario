@@ -62,7 +62,7 @@ glabel func_802406CC_EA0FCC
 /* EA10A8 802407A8 00000000 */   nop
 .L802407AC:
 /* EA10AC 802407AC 86240008 */  lh        $a0, 8($s1)
-/* EA10B0 802407B0 0C010ABD */  jal       func_80042AF4
+/* EA10B0 802407B0 0C010ABD */  jal       dead_get_enemy
 /* EA10B4 802407B4 2484FFFF */   addiu    $a0, $a0, -1
 /* EA10B8 802407B8 0040802D */  daddu     $s0, $v0, $zero
 /* EA10BC 802407BC 0C00F92F */  jal       dead_get_npc_unsafe
@@ -77,7 +77,7 @@ glabel func_802406CC_EA0FCC
 /* EA10E0 802407E0 8E2500A8 */  lw        $a1, 0xa8($s1)
 /* EA10E4 802407E4 10A00003 */  beqz      $a1, .L802407F4
 /* EA10E8 802407E8 0260202D */   daddu    $a0, $s3, $zero
-/* EA10EC 802407EC 0C013600 */  jal       func_8004D800
+/* EA10EC 802407EC 0C013600 */  jal       dead_ai_enemy_play_sound
 /* EA10F0 802407F0 0000302D */   daddu    $a2, $zero, $zero
 .L802407F4:
 /* EA10F4 802407F4 27A40010 */  addiu     $a0, $sp, 0x10
@@ -133,7 +133,7 @@ glabel func_802406CC_EA0FCC
 /* EA11BC 802408BC AE820070 */   sw       $v0, 0x70($s4)
 .L802408C0:
 /* EA11C0 802408C0 86240008 */  lh        $a0, 8($s1)
-/* EA11C4 802408C4 0C010ABD */  jal       func_80042AF4
+/* EA11C4 802408C4 0C010ABD */  jal       dead_get_enemy
 /* EA11C8 802408C8 2484FFFF */   addiu    $a0, $a0, -1
 /* EA11CC 802408CC 0040802D */  daddu     $s0, $v0, $zero
 /* EA11D0 802408D0 0C00F92F */  jal       dead_get_npc_unsafe

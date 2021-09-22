@@ -92,7 +92,7 @@ glabel func_80240374_EDED34
 /* EDEE64 802404A4 E7A60034 */  swc1      $f6, 0x34($sp)
 /* EDEE68 802404A8 AFA20010 */  sw        $v0, 0x10($sp)
 /* EDEE6C 802404AC 8E040080 */  lw        $a0, 0x80($s0)
-/* EDEE70 802404B0 0C03908F */  jal       func_800E423C
+/* EDEE70 802404B0 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EDEE74 802404B4 27A70030 */   addiu    $a3, $sp, 0x30
 /* EDEE78 802404B8 C7A00034 */  lwc1      $f0, 0x34($sp)
 /* EDEE7C 802404BC 4600D001 */  sub.s     $f0, $f26, $f0
@@ -136,7 +136,7 @@ glabel func_80240374_EDED34
 /* EDEF0C 8024054C E7A40034 */  swc1      $f4, 0x34($sp)
 /* EDEF10 80240550 AFA20010 */  sw        $v0, 0x10($sp)
 /* EDEF14 80240554 8E040080 */  lw        $a0, 0x80($s0)
-/* EDEF18 80240558 0C03908F */  jal       func_800E423C
+/* EDEF18 80240558 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EDEF1C 8024055C 27A70030 */   addiu    $a3, $sp, 0x30
 /* EDEF20 80240560 C7A4002C */  lwc1      $f4, 0x2c($sp)
 /* EDEF24 80240564 461A2100 */  add.s     $f4, $f4, $f26
@@ -172,7 +172,7 @@ glabel func_80240374_EDED34
 /* EDEF94 802405D4 1840002E */  blez      $v0, .L80240690
 /* EDEF98 802405D8 00000000 */   nop
 /* EDEF9C 802405DC C62C0074 */  lwc1      $f12, 0x74($s1)
-/* EDEFA0 802405E0 0C00AD77 */  jal       func_8002B5DC
+/* EDEFA0 802405E0 0C00AD77 */  jal       dead_sin_deg
 /* EDEFA4 802405E4 46806320 */   cvt.s.w  $f12, $f12
 /* EDEFA8 802405E8 8E020000 */  lw        $v0, ($s0)
 /* EDEFAC 802405EC 30420008 */  andi      $v0, $v0, 8
@@ -195,7 +195,7 @@ glabel func_80240374_EDED34
 /* EDEFEC 8024062C E7A60034 */  swc1      $f6, 0x34($sp)
 /* EDEFF0 80240630 AFA20010 */  sw        $v0, 0x10($sp)
 /* EDEFF4 80240634 8E040080 */  lw        $a0, 0x80($s0)
-/* EDEFF8 80240638 0C03908F */  jal       func_800E423C
+/* EDEFF8 80240638 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EDEFFC 8024063C 27A70030 */   addiu    $a3, $sp, 0x30
 .L80240640:
 /* EDF000 80240640 10400007 */  beqz      $v0, .L80240660
@@ -276,13 +276,13 @@ glabel func_80240374_EDED34
 /* EDF120 80240760 AFA20020 */  sw        $v0, 0x20($sp)
 /* EDF124 80240764 E7A00010 */  swc1      $f0, 0x10($sp)
 /* EDF128 80240768 E7A20014 */  swc1      $f2, 0x14($sp)
-/* EDF12C 8024076C 0C01D444 */  jal       func_80075110
+/* EDF12C 8024076C 0C01D444 */  jal       dead_fx_emote
 /* EDF130 80240770 E7A40018 */   swc1     $f4, 0x18($sp)
 /* EDF134 80240774 0200202D */  daddu     $a0, $s0, $zero
 /* EDF138 80240778 240502F4 */  addiu     $a1, $zero, 0x2f4
 /* EDF13C 8024077C C480003C */  lwc1      $f0, 0x3c($a0)
 /* EDF140 80240780 3C060020 */  lui       $a2, 0x20
-/* EDF144 80240784 0C013600 */  jal       func_8004D800
+/* EDF144 80240784 0C013600 */  jal       dead_ai_enemy_play_sound
 /* EDF148 80240788 E4800064 */   swc1     $f0, 0x64($a0)
 /* EDF14C 8024078C 8E220018 */  lw        $v0, 0x18($s1)
 /* EDF150 80240790 9442002A */  lhu       $v0, 0x2a($v0)
@@ -321,7 +321,7 @@ glabel func_80240374_EDED34
 /* EDF1C0 80240800 46800020 */  cvt.s.w   $f0, $f0
 /* EDF1C4 80240804 E7A00018 */  swc1      $f0, 0x18($sp)
 /* EDF1C8 80240808 8C640018 */  lw        $a0, 0x18($v1)
-/* EDF1CC 8024080C 0C013431 */  jal       func_8004D0C4
+/* EDF1CC 8024080C 0C013431 */  jal       dead_is_point_within_region
 /* EDF1D0 80240810 8E070038 */   lw       $a3, 0x38($s0)
 /* EDF1D4 80240814 1040001A */  beqz      $v0, .L80240880
 /* EDF1D8 80240818 00000000 */   nop
@@ -331,7 +331,7 @@ glabel func_80240374_EDED34
 /* EDF1E8 80240828 C44C0000 */  lwc1      $f12, ($v0)
 /* EDF1EC 8024082C 46806320 */  cvt.s.w   $f12, $f12
 /* EDF1F0 80240830 C44E0008 */  lwc1      $f14, 8($v0)
-/* EDF1F4 80240834 0C00AC71 */  jal       func_8002B1C4
+/* EDF1F4 80240834 0C00AC71 */  jal       dead_dist2D
 /* EDF1F8 80240838 468073A0 */   cvt.s.w  $f14, $f14
 /* EDF1FC 8024083C C6020018 */  lwc1      $f2, 0x18($s0)
 /* EDF200 80240840 4600103C */  c.lt.s    $f2, $f0
@@ -363,7 +363,7 @@ glabel func_80240374_EDED34
 /* EDF264 802408A4 00000000 */   nop
 /* EDF268 802408A8 8E050018 */  lw        $a1, 0x18($s0)
 /* EDF26C 802408AC 8E06000C */  lw        $a2, 0xc($s0)
-/* EDF270 802408B0 0C00F909 */  jal       func_8003E424
+/* EDF270 802408B0 0C00F909 */  jal       dead_npc_move_heading
 /* EDF274 802408B4 0200202D */   daddu    $a0, $s0, $zero
 .L802408B8:
 /* EDF278 802408B8 C600003C */  lwc1      $f0, 0x3c($s0)

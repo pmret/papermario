@@ -41,7 +41,7 @@ glabel func_80242038_EEF138
 /* EEF1C0 802420C0 E7A60024 */  swc1      $f6, 0x24($sp)
 /* EEF1C4 802420C4 AFA20010 */  sw        $v0, 0x10($sp)
 /* EEF1C8 802420C8 8C840080 */  lw        $a0, 0x80($a0)
-/* EEF1CC 802420CC 0C03908F */  jal       func_800E423C
+/* EEF1CC 802420CC 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EEF1D0 802420D0 27A70020 */   addiu    $a3, $sp, 0x20
 /* EEF1D4 802420D4 C7A20024 */  lwc1      $f2, 0x24($sp)
 /* EEF1D8 802420D8 3C014059 */  lui       $at, 0x4059
