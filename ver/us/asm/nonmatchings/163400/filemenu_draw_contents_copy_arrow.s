@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel filemenu_draw_contents_copy_arrow
-/* 16491C 802440BC 3C048025 */  lui       $a0, %hi(D_80249B84)
-/* 164920 802440C0 8C849B84 */  lw        $a0, %lo(D_80249B84)($a0)
+/* 16491C 802440BC 3C048025 */  lui       $a0, %hi(filemenu_menus)
+/* 164920 802440C0 8C849B84 */  lw        $a0, %lo(filemenu_menus)($a0)
 /* 164924 802440C4 27BDFF08 */  addiu     $sp, $sp, -0xf8
 /* 164928 802440C8 AFBF00C4 */  sw        $ra, 0xc4($sp)
 /* 16492C 802440CC AFBE00C0 */  sw        $fp, 0xc0($sp)
@@ -30,8 +30,8 @@ glabel filemenu_draw_contents_copy_arrow
 /* 164980 80244120 104001DD */  beqz      $v0, .L80244898
 /* 164984 80244124 00000000 */   nop
 /* 164988 80244128 90820003 */  lbu       $v0, 3($a0)
-/* 16498C 8024412C 3C038025 */  lui       $v1, %hi(D_8024C094)
-/* 164990 80244130 8C63C094 */  lw        $v1, %lo(D_8024C094)($v1)
+/* 16498C 8024412C 3C038025 */  lui       $v1, %hi(filemenu_loadedFileIdx)
+/* 164990 80244130 8C63C094 */  lw        $v1, %lo(filemenu_loadedFileIdx)($v1)
 /* 164994 80244134 104301D8 */  beq       $v0, $v1, .L80244898
 /* 164998 80244138 24040002 */   addiu    $a0, $zero, 2
 /* 16499C 8024413C 3C028025 */  lui       $v0, %hi(D_8024C098_C09918)
@@ -77,8 +77,8 @@ glabel filemenu_draw_contents_copy_arrow
 /* 164A24 802441C4 3C014316 */  lui       $at, 0x4316
 /* 164A28 802441C8 4481B000 */  mtc1      $at, $f22
 .L802441CC:
-/* 164A2C 802441CC 3C028025 */  lui       $v0, %hi(D_80249B84)
-/* 164A30 802441D0 8C429B84 */  lw        $v0, %lo(D_80249B84)($v0)
+/* 164A2C 802441CC 3C028025 */  lui       $v0, %hi(filemenu_menus)
+/* 164A30 802441D0 8C429B84 */  lw        $v0, %lo(filemenu_menus)($v0)
 /* 164A34 802441D4 90430003 */  lbu       $v1, 3($v0)
 /* 164A38 802441D8 24020001 */  addiu     $v0, $zero, 1
 /* 164A3C 802441DC 10620012 */  beq       $v1, $v0, .L80244228

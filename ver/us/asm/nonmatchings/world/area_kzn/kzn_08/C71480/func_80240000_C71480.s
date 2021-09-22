@@ -52,8 +52,8 @@ glabel func_80240000_C71480
 /* C7151C 8024009C 08090036 */  j         .L802400D8
 /* C71520 802400A0 00000000 */   nop
 .L802400A4:
-/* C71524 802400A4 3C118015 */  lui       $s1, %hi(gCurrentModelListPtr)
-/* C71528 802400A8 8E3112CC */  lw        $s1, %lo(gCurrentModelListPtr)($s1)
+/* C71524 802400A4 3C118015 */  lui       $s1, %hi(gCurrentModels)
+/* C71528 802400A8 8E3112CC */  lw        $s1, %lo(gCurrentModels)($s1)
 /* C7152C 802400AC 0000802D */  daddu     $s0, $zero, $zero
 .L802400B0:
 /* C71530 802400B0 8E240000 */  lw        $a0, ($s1)

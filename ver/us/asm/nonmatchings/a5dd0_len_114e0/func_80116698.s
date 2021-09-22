@@ -19,8 +19,8 @@ glabel func_80116698
 /* ACDD0 801166D0 AFB100BC */  sw        $s1, 0xbc($sp)
 /* ACDD4 801166D4 AFB000B8 */  sw        $s0, 0xb8($sp)
 .L801166D8:
-/* ACDD8 801166D8 3C038015 */  lui       $v1, %hi(gCurrentModelListPtr)
-/* ACDDC 801166DC 8C6312CC */  lw        $v1, %lo(gCurrentModelListPtr)($v1)
+/* ACDD8 801166D8 3C038015 */  lui       $v1, %hi(gCurrentModels)
+/* ACDDC 801166DC 8C6312CC */  lw        $v1, %lo(gCurrentModels)($v1)
 /* ACDE0 801166E0 00121080 */  sll       $v0, $s2, 2
 /* ACDE4 801166E4 00431021 */  addu      $v0, $v0, $v1
 /* ACDE8 801166E8 8C500000 */  lw        $s0, ($v0)

@@ -179,6 +179,7 @@ void copy_matrix(Matrix4f src, Matrix4f dest) {
     bcopy(src, dest, sizeof(Matrix4f));
 }
 
+// maybe u32
 s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest) {
     u32 length = romEnd - romStart;
     s32 i;

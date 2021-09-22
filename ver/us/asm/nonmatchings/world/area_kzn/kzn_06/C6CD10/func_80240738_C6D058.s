@@ -33,8 +33,8 @@ glabel func_80240738_C6D058
 /* C6D0C4 802407A4 080901F8 */  j         .L802407E0
 /* C6D0C8 802407A8 00000000 */   nop
 .L802407AC:
-/* C6D0CC 802407AC 3C118015 */  lui       $s1, %hi(gCurrentModelListPtr)
-/* C6D0D0 802407B0 8E3112CC */  lw        $s1, %lo(gCurrentModelListPtr)($s1)
+/* C6D0CC 802407AC 3C118015 */  lui       $s1, %hi(gCurrentModels)
+/* C6D0D0 802407B0 8E3112CC */  lw        $s1, %lo(gCurrentModels)($s1)
 /* C6D0D4 802407B4 0000802D */  daddu     $s0, $zero, $zero
 .L802407B8:
 /* C6D0D8 802407B8 8E240000 */  lw        $a0, ($s1)

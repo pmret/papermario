@@ -54,14 +54,14 @@ glabel filemenu_main_update
 /* 16743C 80246BDC 24C200A8 */  addiu     $v0, $a2, 0xa8
 /* 167440 80246BE0 ACA200FC */  sw        $v0, 0xfc($a1)
 .L80246BE4:
-/* 167444 80246BE4 3C028025 */  lui       $v0, %hi(D_80249B84)
-/* 167448 80246BE8 8C429B84 */  lw        $v0, %lo(D_80249B84)($v0)
+/* 167444 80246BE4 3C028025 */  lui       $v0, %hi(filemenu_menus)
+/* 167448 80246BE8 8C429B84 */  lw        $v0, %lo(filemenu_menus)($v0)
 /* 16744C 80246BEC 80430004 */  lb        $v1, 4($v0)
 /* 167450 80246BF0 24020004 */  addiu     $v0, $zero, 4
 /* 167454 80246BF4 14620009 */  bne       $v1, $v0, .L80246C1C
 /* 167458 80246BF8 24020001 */   addiu    $v0, $zero, 1
-/* 16745C 80246BFC 3C038025 */  lui       $v1, %hi(D_8024C094)
-/* 167460 80246C00 8C63C094 */  lw        $v1, %lo(D_8024C094)($v1)
+/* 16745C 80246BFC 3C038025 */  lui       $v1, %hi(filemenu_loadedFileIdx)
+/* 167460 80246C00 8C63C094 */  lw        $v1, %lo(filemenu_loadedFileIdx)($v1)
 /* 167464 80246C04 10620015 */  beq       $v1, $v0, .L80246C5C
 /* 167468 80246C08 28620002 */   slti     $v0, $v1, 2
 /* 16746C 80246C0C 50400005 */  beql      $v0, $zero, .L80246C24

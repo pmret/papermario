@@ -14,9 +14,9 @@ glabel filemenu_update
 /* 163A24 802431C4 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 163A28 802431C8 AFB10014 */  sw        $s1, 0x14($sp)
 /* 163A2C 802431CC 00021080 */  sll       $v0, $v0, 2
-/* 163A30 802431D0 3C048025 */  lui       $a0, %hi(D_80249B84)
+/* 163A30 802431D0 3C048025 */  lui       $a0, %hi(filemenu_menus)
 /* 163A34 802431D4 00822021 */  addu      $a0, $a0, $v0
-/* 163A38 802431D8 8C849B84 */  lw        $a0, %lo(D_80249B84)($a0)
+/* 163A38 802431D8 8C849B84 */  lw        $a0, %lo(filemenu_menus)($a0)
 .L802431DC:
 /* 163A3C 802431DC 80620003 */  lb        $v0, 3($v1)
 /* 163A40 802431E0 10460003 */  beq       $v0, $a2, .L802431F0
@@ -41,20 +41,20 @@ glabel filemenu_update
 /* 163A80 80243220 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 163A84 80243224 8C430020 */  lw        $v1, 0x20($v0)
 /* 163A88 80243228 8C420010 */  lw        $v0, 0x10($v0)
-/* 163A8C 8024322C 3C018025 */  lui       $at, %hi(D_8024C08C)
-/* 163A90 80243230 AC23C08C */  sw        $v1, %lo(D_8024C08C)($at)
-/* 163A94 80243234 3C018025 */  lui       $at, %hi(D_8024C084)
-/* 163A98 80243238 AC22C084 */  sw        $v0, %lo(D_8024C084)($at)
+/* 163A8C 8024322C 3C018025 */  lui       $at, %hi(filemenu_heldButtons)
+/* 163A90 80243230 AC23C08C */  sw        $v1, %lo(filemenu_heldButtons)($at)
+/* 163A94 80243234 3C018025 */  lui       $at, %hi(filemenu_pressedButtons)
+/* 163A98 80243238 AC22C084 */  sw        $v0, %lo(filemenu_pressedButtons)($at)
 /* 163A9C 8024323C 08090C95 */  j         .L80243254
 /* 163AA0 80243240 00000000 */   nop
 .L80243244:
-/* 163AA4 80243244 3C018025 */  lui       $at, %hi(D_8024C08C)
-/* 163AA8 80243248 AC20C08C */  sw        $zero, %lo(D_8024C08C)($at)
-/* 163AAC 8024324C 3C018025 */  lui       $at, %hi(D_8024C084)
-/* 163AB0 80243250 AC20C084 */  sw        $zero, %lo(D_8024C084)($at)
+/* 163AA4 80243244 3C018025 */  lui       $at, %hi(filemenu_heldButtons)
+/* 163AA8 80243248 AC20C08C */  sw        $zero, %lo(filemenu_heldButtons)($at)
+/* 163AAC 8024324C 3C018025 */  lui       $at, %hi(filemenu_pressedButtons)
+/* 163AB0 80243250 AC20C084 */  sw        $zero, %lo(filemenu_pressedButtons)($at)
 .L80243254:
-/* 163AB4 80243254 3C058025 */  lui       $a1, %hi(D_8024C084)
-/* 163AB8 80243258 24A5C084 */  addiu     $a1, $a1, %lo(D_8024C084)
+/* 163AB4 80243254 3C058025 */  lui       $a1, %hi(filemenu_pressedButtons)
+/* 163AB8 80243258 24A5C084 */  addiu     $a1, $a1, %lo(filemenu_pressedButtons)
 /* 163ABC 8024325C 8CA30000 */  lw        $v1, ($a1)
 /* 163AC0 80243260 30624000 */  andi      $v0, $v1, 0x4000
 /* 163AC4 80243264 10400004 */  beqz      $v0, .L80243278
@@ -63,8 +63,8 @@ glabel filemenu_update
 /* 163AD0 80243270 00621024 */  and       $v0, $v1, $v0
 /* 163AD4 80243274 ACA20000 */  sw        $v0, ($a1)
 .L80243278:
-/* 163AD8 80243278 3C058025 */  lui       $a1, %hi(D_8024C08C)
-/* 163ADC 8024327C 24A5C08C */  addiu     $a1, $a1, %lo(D_8024C08C)
+/* 163AD8 80243278 3C058025 */  lui       $a1, %hi(filemenu_heldButtons)
+/* 163ADC 8024327C 24A5C08C */  addiu     $a1, $a1, %lo(filemenu_heldButtons)
 /* 163AE0 80243280 8CA30000 */  lw        $v1, ($a1)
 /* 163AE4 80243284 30624000 */  andi      $v0, $v1, 0x4000
 /* 163AE8 80243288 10400004 */  beqz      $v0, .L8024329C
@@ -82,8 +82,8 @@ glabel filemenu_update
 /* 163B14 802432B4 0040F809 */  jalr      $v0
 /* 163B18 802432B8 00000000 */   nop
 .L802432BC:
-/* 163B1C 802432BC 3C118025 */  lui       $s1, %hi(D_80249B84)
-/* 163B20 802432C0 26319B84 */  addiu     $s1, $s1, %lo(D_80249B84)
+/* 163B1C 802432BC 3C118025 */  lui       $s1, %hi(filemenu_menus)
+/* 163B20 802432C0 26319B84 */  addiu     $s1, $s1, %lo(filemenu_menus)
 /* 163B24 802432C4 0000802D */  daddu     $s0, $zero, $zero
 .L802432C8:
 /* 163B28 802432C8 8E240000 */  lw        $a0, ($s1)

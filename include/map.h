@@ -4,6 +4,7 @@
 #include "common_structs.h"
 #include "enums.h"
 #include "script_api/map.h"
+#include "model.h"
 
 // TODO: consider moving Npc here
 

@@ -141,8 +141,8 @@ glabel filemenu_draw_contents_file_info
 /* 165A44 802451E4 00088483 */  sra       $s0, $t0, 0x12
 /* 165A48 802451E8 02128023 */  subu      $s0, $s0, $s2
 /* 165A4C 802451EC 02150018 */  mult      $s0, $s5
-/* 165A50 802451F0 3C158025 */  lui       $s5, %hi(D_8024C0B0)
-/* 165A54 802451F4 26B5C0B0 */  addiu     $s5, $s5, %lo(D_8024C0B0)
+/* 165A50 802451F0 3C158025 */  lui       $s5, %hi(filemenu_hudElemIDs)
+/* 165A54 802451F4 26B5C0B0 */  addiu     $s5, $s5, %lo(filemenu_hudElemIDs)
 /* 165A58 802451F8 2408000A */  addiu     $t0, $zero, 0xa
 /* 165A5C 802451FC AFA80010 */  sw        $t0, 0x10($sp)
 /* 165A60 80245200 240800FF */  addiu     $t0, $zero, 0xff
@@ -258,8 +258,8 @@ glabel filemenu_draw_contents_file_info
 /* 165C14 802453B4 080914F3 */  j         .L802453CC
 /* 165C18 802453B8 8EB00000 */   lw       $s0, ($s5)
 .L802453BC:
-/* 165C1C 802453BC 3C088025 */  lui       $t0, %hi(D_8024C0B0)
-/* 165C20 802453C0 2508C0B0 */  addiu     $t0, $t0, %lo(D_8024C0B0)
+/* 165C1C 802453BC 3C088025 */  lui       $t0, %hi(filemenu_hudElemIDs)
+/* 165C20 802453C0 2508C0B0 */  addiu     $t0, $t0, %lo(filemenu_hudElemIDs)
 /* 165C24 802453C4 02C81021 */  addu      $v0, $s6, $t0
 /* 165C28 802453C8 8C500000 */  lw        $s0, ($v0)
 .L802453CC:

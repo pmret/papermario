@@ -14,8 +14,8 @@ glabel func_80110E58
 /* A757C 80110E7C 3C028025 */  lui       $v0, 0x8025
 /* A7580 80110E80 3C018015 */  lui       $at, %hi(D_80151300)
 /* A7584 80110E84 AC221300 */  sw        $v0, %lo(D_80151300)($at)
-/* A7588 80110E88 3C018015 */  lui       $at, %hi(D_801512C4)
-/* A758C 80110E8C AC2312C4 */  sw        $v1, %lo(D_801512C4)($at)
+/* A7588 80110E88 3C018015 */  lui       $at, %hi(gEntityHeapBase)
+/* A758C 80110E8C AC2312C4 */  sw        $v1, %lo(gEntityHeapBase)($at)
 /* A7590 80110E90 0C0443C4 */  jal       func_80110F10
 /* A7594 80110E94 00000000 */   nop
 /* A7598 80110E98 080443B5 */  j         .L80110ED4
@@ -33,8 +33,8 @@ glabel func_80110E58
 /* A75C0 80110EC0 3C018015 */  lui       $at, %hi(D_80151300)
 /* A75C4 80110EC4 AC221300 */  sw        $v0, %lo(D_80151300)($at)
 /* A75C8 80110EC8 24423000 */  addiu     $v0, $v0, 0x3000
-/* A75CC 80110ECC 3C018015 */  lui       $at, %hi(D_801512C4)
-/* A75D0 80110ED0 AC2212C4 */  sw        $v0, %lo(D_801512C4)($at)
+/* A75CC 80110ECC 3C018015 */  lui       $at, %hi(gEntityHeapBase)
+/* A75D0 80110ED0 AC2212C4 */  sw        $v0, %lo(gEntityHeapBase)($at)
 .L80110ED4:
 /* A75D4 80110ED4 0C044188 */  jal       get_entity_list
 /* A75D8 80110ED8 00000000 */   nop

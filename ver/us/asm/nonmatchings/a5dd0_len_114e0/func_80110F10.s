@@ -11,11 +11,11 @@ glabel func_80110F10
 /* A7628 80110F28 3C168015 */  lui       $s6, %hi(D_80151300)
 /* A762C 80110F2C 26D61300 */  addiu     $s6, $s6, %lo(D_80151300)
 /* A7630 80110F30 AFB7002C */  sw        $s7, 0x2c($sp)
-/* A7634 80110F34 3C178015 */  lui       $s7, %hi(D_801512C4)
-/* A7638 80110F38 26F712C4 */  addiu     $s7, $s7, %lo(D_801512C4)
+/* A7634 80110F34 3C178015 */  lui       $s7, %hi(gEntityHeapBase)
+/* A7638 80110F38 26F712C4 */  addiu     $s7, $s7, %lo(gEntityHeapBase)
 /* A763C 80110F3C AFB40020 */  sw        $s4, 0x20($sp)
-/* A7640 80110F40 3C148015 */  lui       $s4, %hi(D_80151668)
-/* A7644 80110F44 26941668 */  addiu     $s4, $s4, %lo(D_80151668)
+/* A7640 80110F40 3C148015 */  lui       $s4, %hi(wStaticEntityData)
+/* A7644 80110F44 26941668 */  addiu     $s4, $s4, %lo(wStaticEntityData)
 /* A7648 80110F48 AFBF0030 */  sw        $ra, 0x30($sp)
 /* A764C 80110F4C AFB20018 */  sw        $s2, 0x18($sp)
 /* A7650 80110F50 AFB10014 */  sw        $s1, 0x14($sp)
@@ -30,8 +30,8 @@ glabel func_80110F10
 /* A7670 80110F70 24030043 */   addiu    $v1, $zero, 0x43
 /* A7674 80110F74 8E25001C */  lw        $a1, 0x1c($s1)
 /* A7678 80110F78 8E240018 */  lw        $a0, 0x18($s1)
-/* A767C 80110F7C 3C038015 */  lui       $v1, %hi(D_801512C4)
-/* A7680 80110F80 8C6312C4 */  lw        $v1, %lo(D_801512C4)($v1)
+/* A767C 80110F7C 3C038015 */  lui       $v1, %hi(gEntityHeapBase)
+/* A7680 80110F80 8C6312C4 */  lw        $v1, %lo(gEntityHeapBase)($v1)
 /* A7684 80110F84 00A41023 */  subu      $v0, $a1, $a0
 /* A7688 80110F88 00023083 */  sra       $a2, $v0, 2
 /* A768C 80110F8C 00131080 */  sll       $v0, $s3, 2

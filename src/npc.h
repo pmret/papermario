@@ -94,13 +94,13 @@ void npc_draw_with_palswap(Npc* npc, s32 arg1, s32 arg2);
 
 void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, s32 arg2);
 
-s32 npc_draw_palswap_mode_1();
+s32 npc_draw_palswap_mode_1(Npc*, s32, s32);
 
-s32 npc_blend_palette_colors();
+s32 npc_blend_palette_colors(void);
 
-s32 npc_draw_palswap_mode_2();
+s32 npc_draw_palswap_mode_2(Npc*, s32, s32, s32);
 
-s32 npc_draw_palswap_mode_4();
+s32 npc_draw_palswap_mode_4(Npc*, s32, s32);
 
 void npc_set_decoration(Npc* npc, s32 idx, s32 decorationType);
 

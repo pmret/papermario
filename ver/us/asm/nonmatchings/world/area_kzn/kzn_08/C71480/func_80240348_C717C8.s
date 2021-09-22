@@ -33,8 +33,8 @@ glabel func_80240348_C717C8
 /* C71834 802403B4 080900FC */  j         .L802403F0
 /* C71838 802403B8 00000000 */   nop
 .L802403BC:
-/* C7183C 802403BC 3C118015 */  lui       $s1, %hi(gCurrentModelListPtr)
-/* C71840 802403C0 8E3112CC */  lw        $s1, %lo(gCurrentModelListPtr)($s1)
+/* C7183C 802403BC 3C118015 */  lui       $s1, %hi(gCurrentModels)
+/* C71840 802403C0 8E3112CC */  lw        $s1, %lo(gCurrentModels)($s1)
 /* C71844 802403C4 0000802D */  daddu     $s0, $zero, $zero
 .L802403C8:
 /* C71848 802403C8 8E240000 */  lw        $a0, ($s1)
