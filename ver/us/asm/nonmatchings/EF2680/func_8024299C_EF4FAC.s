@@ -306,7 +306,7 @@ glabel func_8024299C_EF4FAC
 .L80242DE0:
 /* EF53F0 80242DE0 02A0202D */  daddu     $a0, $s5, $zero
 /* EF53F4 80242DE4 0260282D */  daddu     $a1, $s3, $zero
-/* EF53F8 80242DE8 0C09092C */  jal       func_802424B0_EF4AC0
+/* EF53F8 80242DE8 0C09092C */  jal       EF2680_set_script_owner_npc_col_height
 /* EF53FC 80242DEC 0280302D */   daddu    $a2, $s4, $zero
 /* EF5400 80242DF0 08090CA5 */  j         .L80243294
 /* EF5404 80242DF4 00000000 */   nop
