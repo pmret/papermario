@@ -10,12 +10,13 @@ pipeline {
                 sh 'cp /usr/local/etc/roms/papermario.jp.z64 ver/jp/baserom.z64'
                 sh 'curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                 sh 'curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
+                sh 'curl -L "https://github.com/ethteck/ido-static-recomp/releases/download/per-function/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3'
                 sh './configure'
             }
         }
         stage('Build') {
             steps {
-                sh 'ninja 2>&1 | tee build_log.txt'
+                sh "bash -o pipefail -c 'ninja 2>&1 | tee build_log.txt'"
             }
         }
         stage("Comment") {
