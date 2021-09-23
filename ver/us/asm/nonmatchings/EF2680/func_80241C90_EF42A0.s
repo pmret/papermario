@@ -96,7 +96,7 @@ glabel func_80241C90_EF42A0
 .L80241DF0:
 /* EF4400 80241DF0 0280202D */  daddu     $a0, $s4, $zero
 /* EF4404 80241DF4 02C0282D */  daddu     $a1, $s6, $zero
-/* EF4408 80241DF8 0C09001C */  jal       func_80240070_EF2680
+/* EF4408 80241DF8 0C09001C */  jal       EF2680_UnkNpcAIFunc23
 /* EF440C 80241DFC 02A0302D */   daddu    $a2, $s5, $zero
 .L80241E00:
 /* EF4410 80241E00 0280202D */  daddu     $a0, $s4, $zero
