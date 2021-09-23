@@ -554,6 +554,7 @@ enum SoundIDs {
     SOUND_DAYZEE_SONG               = 727,
     SOUND_POWER_UP,
     SOUND_UNKNOWN_2F1               = 753,
+    SOUND_UNKNOWN_2F6               = 758,
     SOUND_UNKNOWN_2F7               = 759,
     SOUND_CLOSE_SHELL               = 767,
     SOUND_SHY_GUY_SCREAMS1          = 780,
