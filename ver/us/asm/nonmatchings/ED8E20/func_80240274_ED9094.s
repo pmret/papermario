@@ -11,8 +11,8 @@ glabel func_80240274_ED9094
 /* ED90AC 8024028C 0C0B55FF */  jal       dead_evt_get_float_variable
 /* ED90B0 80240290 8C450000 */   lw       $a1, ($v0)
 /* ED90B4 80240294 27A40010 */  addiu     $a0, $sp, 0x10
-/* ED90B8 80240298 3C028011 */  lui       $v0, %hi(D_80117578)
-/* ED90BC 8024029C 24427578 */  addiu     $v0, $v0, %lo(D_80117578)
+/* ED90B8 80240298 3C028011 */  lui       $v0, %hi(dead_gPlayerStatus)
+/* ED90BC 8024029C 24427578 */  addiu     $v0, $v0, %lo(dead_gPlayerStatus)
 /* ED90C0 802402A0 44060000 */  mfc1      $a2, $f0
 /* ED90C4 802402A4 C4400028 */  lwc1      $f0, 0x28($v0)
 /* ED90C8 802402A8 C4420030 */  lwc1      $f2, 0x30($v0)

@@ -50,7 +50,7 @@ glabel func_802416E8_EEE7E8
 /* EEE898 80241798 46800020 */  cvt.s.w   $f0, $f0
 /* EEE89C 8024179C 46000021 */  cvt.d.s   $f0, $f0
 /* EEE8A0 802417A0 46220003 */  div.d     $f0, $f0, $f2
-/* EEE8A4 802417A4 0C00AD77 */  jal       func_8002B5DC
+/* EEE8A4 802417A4 0C00AD77 */  jal       dead_sin_deg
 /* EEE8A8 802417A8 462005A0 */   cvt.s.d  $f22, $f0
 /* EEE8AC 802417AC 8E020000 */  lw        $v0, ($s0)
 /* EEE8B0 802417B0 30420008 */  andi      $v0, $v0, 8
@@ -73,7 +73,7 @@ glabel func_802416E8_EEE7E8
 /* EEE8F0 802417F0 E7A60034 */  swc1      $f6, 0x34($sp)
 /* EEE8F4 802417F4 AFA20010 */  sw        $v0, 0x10($sp)
 /* EEE8F8 802417F8 8E040080 */  lw        $a0, 0x80($s0)
-/* EEE8FC 802417FC 0C03908F */  jal       func_800E423C
+/* EEE8FC 802417FC 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EEE900 80241800 27A70030 */   addiu    $a3, $sp, 0x30
 .L80241804:
 /* EEE904 80241804 10400007 */  beqz      $v0, .L80241824
@@ -148,13 +148,13 @@ glabel func_802416E8_EEE7E8
 /* EEEA0C 8024190C AFA20020 */  sw        $v0, 0x20($sp)
 /* EEEA10 80241910 E7A00010 */  swc1      $f0, 0x10($sp)
 /* EEEA14 80241914 E7A20014 */  swc1      $f2, 0x14($sp)
-/* EEEA18 80241918 0C01D444 */  jal       func_80075110
+/* EEEA18 80241918 0C01D444 */  jal       dead_fx_emote
 /* EEEA1C 8024191C E7A40018 */   swc1     $f4, 0x18($sp)
 /* EEEA20 80241920 0200202D */  daddu     $a0, $s0, $zero
 /* EEEA24 80241924 240502F4 */  addiu     $a1, $zero, 0x2f4
 /* EEEA28 80241928 C480003C */  lwc1      $f0, 0x3c($a0)
 /* EEEA2C 8024192C 3C060020 */  lui       $a2, 0x20
-/* EEEA30 80241930 0C013600 */  jal       func_8004D800
+/* EEEA30 80241930 0C013600 */  jal       dead_ai_enemy_play_sound
 /* EEEA34 80241934 E4800064 */   swc1     $f0, 0x64($a0)
 /* EEEA38 80241938 8E220018 */  lw        $v0, 0x18($s1)
 /* EEEA3C 8024193C 9442002A */  lhu       $v0, 0x2a($v0)

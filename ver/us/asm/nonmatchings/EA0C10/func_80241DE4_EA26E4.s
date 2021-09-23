@@ -58,7 +58,7 @@ glabel func_80241DE4_EA26E4
 /* EA2790 80241E90 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EA2794 80241E94 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EA2798 80241E98 8C460028 */  lw        $a2, 0x28($v0)
-/* EA279C 80241E9C 0C00AC71 */  jal       func_8002B1C4
+/* EA279C 80241E9C 0C00AC71 */  jal       dead_dist2D
 /* EA27A0 80241EA0 8C470030 */   lw       $a3, 0x30($v0)
 /* EA27A4 80241EA4 C6020018 */  lwc1      $f2, 0x18($s0)
 /* EA27A8 80241EA8 46020003 */  div.s     $f0, $f0, $f2

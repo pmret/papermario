@@ -38,8 +38,8 @@ glabel func_802403F0_EDC3D0
 /* EDC454 80240474 4482C000 */  mtc1      $v0, $f24
 /* EDC458 80240478 00000000 */  nop
 /* EDC45C 8024047C 4680C620 */  cvt.s.w   $f24, $f24
-/* EDC460 80240480 3C128011 */  lui       $s2, %hi(D_80117578)
-/* EDC464 80240484 26527578 */  addiu     $s2, $s2, %lo(D_80117578)
+/* EDC460 80240480 3C128011 */  lui       $s2, %hi(dead_gPlayerStatus)
+/* EDC464 80240484 26527578 */  addiu     $s2, $s2, %lo(dead_gPlayerStatus)
 /* EDC468 80240488 3C038008 */  lui       $v1, %hi(D_8007C760)
 /* EDC46C 8024048C 8C63C760 */  lw        $v1, %lo(D_8007C760)($v1)
 /* EDC470 80240490 C64200A8 */  lwc1      $f2, 0xa8($s2)
@@ -72,7 +72,7 @@ glabel func_802403F0_EDC3D0
 /* EDC4D4 802404F4 46000586 */  mov.s     $f22, $f0
 /* EDC4D8 802404F8 3C014170 */  lui       $at, 0x4170
 /* EDC4DC 802404FC 4481A000 */  mtc1      $at, $f20
-/* EDC4E0 80240500 0C00AD77 */  jal       func_8002B5DC
+/* EDC4E0 80240500 0C00AD77 */  jal       dead_sin_deg
 /* EDC4E4 80240504 4600B306 */   mov.s    $f12, $f22
 /* EDC4E8 80240508 46140002 */  mul.s     $f0, $f0, $f20
 /* EDC4EC 8024050C 00000000 */  nop
@@ -86,7 +86,7 @@ glabel func_802403F0_EDC3D0
 /* EDC50C 8024052C 00000000 */  nop
 /* EDC510 80240530 4600E700 */  add.s     $f28, $f28, $f0
 /* EDC514 80240534 4602D680 */  add.s     $f26, $f26, $f2
-/* EDC518 80240538 0C00AD90 */  jal       func_8002B640
+/* EDC518 80240538 0C00AD90 */  jal       dead_cos_deg
 /* EDC51C 8024053C 4600B306 */   mov.s    $f12, $f22
 /* EDC520 80240540 46140002 */  mul.s     $f0, $f0, $f20
 /* EDC524 80240544 00000000 */  nop

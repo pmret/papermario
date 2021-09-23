@@ -129,7 +129,7 @@ glabel func_802420FC_EA29FC
 /* EA2BC0 802422C0 AFA20020 */  sw        $v0, 0x20($sp)
 /* EA2BC4 802422C4 E7A00010 */  swc1      $f0, 0x10($sp)
 /* EA2BC8 802422C8 E7A20014 */  swc1      $f2, 0x14($sp)
-/* EA2BCC 802422CC 0C01D444 */  jal       func_80075110
+/* EA2BCC 802422CC 0C01D444 */  jal       dead_fx_emote
 /* EA2BD0 802422D0 E7A40018 */   swc1     $f4, 0x18($sp)
 /* EA2BD4 802422D4 8E2200B0 */  lw        $v0, 0xb0($s1)
 /* EA2BD8 802422D8 2403FFFB */  addiu     $v1, $zero, -5

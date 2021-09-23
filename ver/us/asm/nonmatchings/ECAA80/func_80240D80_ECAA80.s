@@ -55,7 +55,7 @@ glabel func_80240D80_ECAA80
 /* ECAB48 80240E48 460C0300 */   add.s    $f12, $f0, $f12
 /* ECAB4C 80240E4C 46000506 */  mov.s     $f20, $f0
 /* ECAB50 80240E50 C60C000C */  lwc1      $f12, 0xc($s0)
-/* ECAB54 80240E54 0C00ABC6 */  jal       func_8002AF18
+/* ECAB54 80240E54 0C00ABC6 */  jal       dead_get_clamped_angle_diff
 /* ECAB58 80240E58 4600A386 */   mov.s    $f14, $f20
 /* ECAB5C 80240E5C 46000086 */  mov.s     $f2, $f0
 /* ECAB60 80240E60 8E22001C */  lw        $v0, 0x1c($s1)
@@ -136,7 +136,7 @@ glabel func_80240D80_ECAA80
 /* ECAC84 80240F84 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* ECAC88 80240F88 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* ECAC8C 80240F8C 8FA60020 */  lw        $a2, 0x20($sp)
-/* ECAC90 80240F90 0C00AC71 */  jal       func_8002B1C4
+/* ECAC90 80240F90 0C00AC71 */  jal       dead_dist2D
 /* ECAC94 80240F94 8FA70028 */   lw       $a3, 0x28($sp)
 /* ECAC98 80240F98 46000586 */  mov.s     $f22, $f0
 /* ECAC9C 80240F9C C6020038 */  lwc1      $f2, 0x38($s0)
@@ -176,7 +176,7 @@ glabel func_80240D80_ECAA80
 /* ECAD24 80241024 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* ECAD28 80241028 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* ECAD2C 8024102C 8FA6002C */  lw        $a2, 0x2c($sp)
-/* ECAD30 80241030 0C00AC71 */  jal       func_8002B1C4
+/* ECAD30 80241030 0C00AC71 */  jal       dead_dist2D
 /* ECAD34 80241034 8FA70034 */   lw       $a3, 0x34($sp)
 /* ECAD38 80241038 46000606 */  mov.s     $f24, $f0
 .L8024103C:
@@ -215,7 +215,7 @@ glabel func_80240D80_ECAA80
 /* ECADBC 802410BC C60C0038 */  lwc1      $f12, 0x38($s0)
 /* ECADC0 802410C0 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* ECADC4 802410C4 8FA60038 */  lw        $a2, 0x38($sp)
-/* ECADC8 802410C8 0C00AC71 */  jal       func_8002B1C4
+/* ECADC8 802410C8 0C00AC71 */  jal       dead_dist2D
 /* ECADCC 802410CC 8FA70040 */   lw       $a3, 0x40($sp)
 /* ECADD0 802410D0 46000686 */  mov.s     $f26, $f0
 .L802410D4:
@@ -223,7 +223,7 @@ glabel func_80240D80_ECAA80
 /* ECADD8 802410D8 8E820000 */  lw        $v0, ($s4)
 /* ECADDC 802410DC C60E0040 */  lwc1      $f14, 0x40($s0)
 /* ECADE0 802410E0 8C460028 */  lw        $a2, 0x28($v0)
-/* ECADE4 802410E4 0C00AC71 */  jal       func_8002B1C4
+/* ECADE4 802410E4 0C00AC71 */  jal       dead_dist2D
 /* ECADE8 802410E8 8C470030 */   lw       $a3, 0x30($v0)
 /* ECADEC 802410EC C6000018 */  lwc1      $f0, 0x18($s0)
 /* ECADF0 802410F0 3C013FF8 */  lui       $at, 0x3ff8
@@ -343,7 +343,7 @@ glabel func_80240D80_ECAA80
 /* ECAF90 80241290 46000506 */  mov.s     $f20, $f0
 .L80241294:
 /* ECAF94 80241294 C60C000C */  lwc1      $f12, 0xc($s0)
-/* ECAF98 80241298 0C00ABC6 */  jal       func_8002AF18
+/* ECAF98 80241298 0C00ABC6 */  jal       dead_get_clamped_angle_diff
 /* ECAF9C 8024129C 4600A386 */   mov.s    $f14, $f20
 /* ECAFA0 802412A0 46000086 */  mov.s     $f2, $f0
 /* ECAFA4 802412A4 8E22001C */  lw        $v0, 0x1c($s1)

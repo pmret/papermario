@@ -21,7 +21,7 @@ glabel func_80242E2C_EA372C
 /* EA376C 80242E6C E7A0001C */  swc1      $f0, 0x1c($sp)
 /* EA3770 80242E70 AFA00020 */  sw        $zero, 0x20($sp)
 /* EA3774 80242E74 E7A20024 */  swc1      $f2, 0x24($sp)
-/* EA3778 80242E78 0C03908F */  jal       func_800E423C
+/* EA3778 80242E78 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EA377C 80242E7C AFA20010 */   sw       $v0, 0x10($sp)
 /* EA3780 80242E80 1040000B */  beqz      $v0, .L80242EB0
 /* EA3784 80242E84 00000000 */   nop

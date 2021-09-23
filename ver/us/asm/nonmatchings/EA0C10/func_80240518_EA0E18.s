@@ -35,7 +35,7 @@ glabel func_80240518_EA0E18
 /* EA0E74 80240574 000218C0 */  sll       $v1, $v0, 3
 /* EA0E78 80240578 00431021 */  addu      $v0, $v0, $v1
 /* EA0E7C 8024057C 000210C0 */  sll       $v0, $v0, 3
-/* EA0E80 80240580 0C010ABD */  jal       func_80042AF4
+/* EA0E80 80240580 0C010ABD */  jal       dead_get_enemy
 /* EA0E84 80240584 00459021 */   addu     $s2, $v0, $a1
 /* EA0E88 80240588 3C148010 */  lui       $s4, %hi(dead_gPlayerStatusPtr)
 /* EA0E8C 8024058C 2694FC90 */  addiu     $s4, $s4, %lo(dead_gPlayerStatusPtr)
@@ -44,7 +44,7 @@ glabel func_80240518_EA0E18
 /* EA0E98 80240598 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EA0E9C 8024059C 8C660028 */  lw        $a2, 0x28($v1)
 /* EA0EA0 802405A0 8C670030 */  lw        $a3, 0x30($v1)
-/* EA0EA4 802405A4 0C00AC71 */  jal       func_8002B1C4
+/* EA0EA4 802405A4 0C00AC71 */  jal       dead_dist2D
 /* EA0EA8 802405A8 0040982D */   daddu    $s3, $v0, $zero
 /* EA0EAC 802405AC C6620074 */  lwc1      $f2, 0x74($s3)
 /* EA0EB0 802405B0 468010A0 */  cvt.s.w   $f2, $f2
@@ -57,7 +57,7 @@ glabel func_80240518_EA0E18
 /* EA0EC8 802405C8 C60E000C */  lwc1      $f14, 0xc($s0)
 /* EA0ECC 802405CC 3C014387 */  lui       $at, 0x4387
 /* EA0ED0 802405D0 4481A000 */  mtc1      $at, $f20
-/* EA0ED4 802405D4 0C00ABC6 */  jal       func_8002AF18
+/* EA0ED4 802405D4 0C00ABC6 */  jal       dead_get_clamped_angle_diff
 /* EA0ED8 802405D8 00000000 */   nop
 /* EA0EDC 802405DC 0C00AB85 */  jal       dead_clamp_angle
 /* EA0EE0 802405E0 46000306 */   mov.s    $f12, $f0
@@ -78,7 +78,7 @@ glabel func_80240518_EA0E18
 /* EA0F18 80240618 0C00ABDC */  jal       fio_validate_header_checksums
 /* EA0F1C 8024061C 8C470030 */   lw       $a3, 0x30($v0)
 /* EA0F20 80240620 4600A306 */  mov.s     $f12, $f20
-/* EA0F24 80240624 0C00ABC6 */  jal       func_8002AF18
+/* EA0F24 80240624 0C00ABC6 */  jal       dead_get_clamped_angle_diff
 /* EA0F28 80240628 46000386 */   mov.s    $f14, $f0
 /* EA0F2C 8024062C C6620078 */  lwc1      $f2, 0x78($s3)
 /* EA0F30 80240630 468010A0 */  cvt.s.w   $f2, $f2

@@ -41,7 +41,7 @@ glabel func_80242374_EEF474
 /* EEF504 80242404 8C470030 */   lw       $a3, 0x30($v0)
 /* EEF508 80242408 46000506 */  mov.s     $f20, $f0
 /* EEF50C 8024240C C64C000C */  lwc1      $f12, 0xc($s2)
-/* EEF510 80242410 0C00ABC6 */  jal       func_8002AF18
+/* EEF510 80242410 0C00ABC6 */  jal       dead_get_clamped_angle_diff
 /* EEF514 80242414 4600A386 */   mov.s    $f14, $f20
 /* EEF518 80242418 46000086 */  mov.s     $f2, $f0
 /* EEF51C 8024241C 8E02001C */  lw        $v0, 0x1c($s0)

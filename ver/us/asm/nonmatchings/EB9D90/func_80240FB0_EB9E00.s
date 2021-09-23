@@ -28,7 +28,7 @@ glabel func_80240FB0_EB9E00
 /* EB9E5C 8024100C 4481D000 */  mtc1      $at, $f26
 /* EB9E60 80241010 44071000 */  mfc1      $a3, $f2
 /* EB9E64 80241014 4600C306 */  mov.s     $f12, $f24
-/* EB9E68 80241018 0C00AC71 */  jal       func_8002B1C4
+/* EB9E68 80241018 0C00AC71 */  jal       dead_dist2D
 /* EB9E6C 8024101C 4600D386 */   mov.s    $f14, $f26
 /* EB9E70 80241020 4600C306 */  mov.s     $f12, $f24
 /* EB9E74 80241024 4600D386 */  mov.s     $f14, $f26
@@ -43,13 +43,13 @@ glabel func_80240FB0_EB9E00
 /* EB9E98 80241048 0C00AB85 */  jal       dead_clamp_angle
 /* EB9E9C 8024104C 46140301 */   sub.s    $f12, $f0, $f20
 /* EB9EA0 80241050 46000506 */  mov.s     $f20, $f0
-/* EB9EA4 80241054 0C00AD77 */  jal       func_8002B5DC
+/* EB9EA4 80241054 0C00AD77 */  jal       dead_sin_deg
 /* EB9EA8 80241058 4600A306 */   mov.s    $f12, $f20
 /* EB9EAC 8024105C 4600B002 */  mul.s     $f0, $f22, $f0
 /* EB9EB0 80241060 00000000 */  nop
 /* EB9EB4 80241064 46180000 */  add.s     $f0, $f0, $f24
-/* EB9EB8 80241068 3C118011 */  lui       $s1, %hi(D_80117578)
-/* EB9EBC 8024106C 26317578 */  addiu     $s1, $s1, %lo(D_80117578)
+/* EB9EB8 80241068 3C118011 */  lui       $s1, %hi(dead_gPlayerStatus)
+/* EB9EBC 8024106C 26317578 */  addiu     $s1, $s1, %lo(dead_gPlayerStatus)
 /* EB9EC0 80241070 E6200028 */  swc1      $f0, 0x28($s1)
 /* EB9EC4 80241074 8E0500AC */  lw        $a1, 0xac($s0)
 /* EB9EC8 80241078 0C0B53A3 */  jal       dead_evt_get_variable
@@ -63,7 +63,7 @@ glabel func_80240FB0_EB9E00
 /* EB9EE8 80241098 44900000 */  mtc1      $s0, $f0
 /* EB9EEC 8024109C 00000000 */  nop
 /* EB9EF0 802410A0 46800020 */  cvt.s.w   $f0, $f0
-/* EB9EF4 802410A4 0C00AD90 */  jal       func_8002B640
+/* EB9EF4 802410A4 0C00AD90 */  jal       dead_cos_deg
 /* EB9EF8 802410A8 E620002C */   swc1     $f0, 0x2c($s1)
 /* EB9EFC 802410AC 4600B582 */  mul.s     $f22, $f22, $f0
 /* EB9F00 802410B0 00000000 */  nop

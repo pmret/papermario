@@ -35,7 +35,7 @@ glabel func_8024101C_EDF9DC
 /* EDFA54 80241094 46240003 */  div.d     $f0, $f0, $f4
 /* EDFA58 80241098 46200520 */  cvt.s.d   $f20, $f0
 /* EDFA5C 8024109C 46241083 */  div.d     $f2, $f2, $f4
-/* EDFA60 802410A0 0C00F909 */  jal       func_8003E424
+/* EDFA60 802410A0 0C00F909 */  jal       dead_npc_move_heading
 /* EDFA64 802410A4 462015A0 */   cvt.s.d  $f22, $f2
 /* EDFA68 802410A8 C604001C */  lwc1      $f4, 0x1c($s0)
 /* EDFA6C 802410AC 44801000 */  mtc1      $zero, $f2
@@ -70,7 +70,7 @@ glabel func_8024101C_EDF9DC
 /* EDFAE0 80241120 E7A60024 */  swc1      $f6, 0x24($sp)
 /* EDFAE4 80241124 AFA20010 */  sw        $v0, 0x10($sp)
 /* EDFAE8 80241128 8E040080 */  lw        $a0, 0x80($s0)
-/* EDFAEC 8024112C 0C03908F */  jal       func_800E423C
+/* EDFAEC 8024112C 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EDFAF0 80241130 27A70020 */   addiu    $a3, $sp, 0x20
 .L80241134:
 /* EDFAF4 80241134 1040000B */  beqz      $v0, .L80241164
@@ -118,7 +118,7 @@ glabel func_8024101C_EDF9DC
 /* EDFB94 802411D4 8C470030 */   lw       $a3, 0x30($v0)
 /* EDFB98 802411D8 46000506 */  mov.s     $f20, $f0
 /* EDFB9C 802411DC C60C000C */  lwc1      $f12, 0xc($s0)
-/* EDFBA0 802411E0 0C00ABC6 */  jal       func_8002AF18
+/* EDFBA0 802411E0 0C00ABC6 */  jal       dead_get_clamped_angle_diff
 /* EDFBA4 802411E4 4600A386 */   mov.s    $f14, $f20
 /* EDFBA8 802411E8 46000086 */  mov.s     $f2, $f0
 /* EDFBAC 802411EC 8E62001C */  lw        $v0, 0x1c($s3)
@@ -187,7 +187,7 @@ glabel func_8024101C_EDF9DC
 /* EDFC98 802412D8 E7A00024 */  swc1      $f0, 0x24($sp)
 /* EDFC9C 802412DC AFA20010 */  sw        $v0, 0x10($sp)
 /* EDFCA0 802412E0 8E040080 */  lw        $a0, 0x80($s0)
-/* EDFCA4 802412E4 0C03908F */  jal       func_800E423C
+/* EDFCA4 802412E4 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EDFCA8 802412E8 27A70020 */   addiu    $a3, $sp, 0x20
 /* EDFCAC 802412EC 10400015 */  beqz      $v0, .L80241344
 /* EDFCB0 802412F0 00000000 */   nop

@@ -58,7 +58,7 @@ glabel func_8024236C_EE0D2C
 /* EE0DD8 80242418 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EE0DDC 8024241C C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EE0DE0 80242420 8C460028 */  lw        $a2, 0x28($v0)
-/* EE0DE4 80242424 0C00AC71 */  jal       func_8002B1C4
+/* EE0DE4 80242424 0C00AC71 */  jal       dead_dist2D
 /* EE0DE8 80242428 8C470030 */   lw       $a3, 0x30($v0)
 /* EE0DEC 8024242C C6020018 */  lwc1      $f2, 0x18($s0)
 /* EE0DF0 80242430 46020003 */  div.s     $f0, $f0, $f2

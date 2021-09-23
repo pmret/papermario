@@ -49,7 +49,7 @@ glabel func_802419F4_EA22F4
 /* EA23A4 80241AA4 AFA20020 */  sw        $v0, 0x20($sp)
 /* EA23A8 80241AA8 E7A00010 */  swc1      $f0, 0x10($sp)
 /* EA23AC 80241AAC E7A20014 */  swc1      $f2, 0x14($sp)
-/* EA23B0 80241AB0 0C01D444 */  jal       func_80075110
+/* EA23B0 80241AB0 0C01D444 */  jal       dead_fx_emote
 /* EA23B4 80241AB4 E7A40018 */   swc1     $f4, 0x18($sp)
 /* EA23B8 80241AB8 A600008E */  sh        $zero, 0x8e($s0)
 .L80241ABC:

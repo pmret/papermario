@@ -6,8 +6,8 @@ glabel func_80240F40_EB9D90
 /* EB9D94 80240F44 AFB00010 */  sw        $s0, 0x10($sp)
 /* EB9D98 80240F48 0080802D */  daddu     $s0, $a0, $zero
 /* EB9D9C 80240F4C AFB20018 */  sw        $s2, 0x18($sp)
-/* EB9DA0 80240F50 3C128011 */  lui       $s2, %hi(D_80117578)
-/* EB9DA4 80240F54 26527578 */  addiu     $s2, $s2, %lo(D_80117578)
+/* EB9DA0 80240F50 3C128011 */  lui       $s2, %hi(dead_gPlayerStatus)
+/* EB9DA4 80240F54 26527578 */  addiu     $s2, $s2, %lo(dead_gPlayerStatus)
 /* EB9DA8 80240F58 AFBF001C */  sw        $ra, 0x1c($sp)
 /* EB9DAC 80240F5C AFB10014 */  sw        $s1, 0x14($sp)
 /* EB9DB0 80240F60 C64000A8 */  lwc1      $f0, 0xa8($s2)

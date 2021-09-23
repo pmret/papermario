@@ -129,7 +129,7 @@ glabel func_80242530_EF4B40
 /* EF4D04 802426F4 AFA20020 */  sw        $v0, 0x20($sp)
 /* EF4D08 802426F8 E7A00010 */  swc1      $f0, 0x10($sp)
 /* EF4D0C 802426FC E7A20014 */  swc1      $f2, 0x14($sp)
-/* EF4D10 80242700 0C01D444 */  jal       func_80075110
+/* EF4D10 80242700 0C01D444 */  jal       dead_fx_emote
 /* EF4D14 80242704 E7A40018 */   swc1     $f4, 0x18($sp)
 /* EF4D18 80242708 8E2200B0 */  lw        $v0, 0xb0($s1)
 /* EF4D1C 8024270C 2403FFFB */  addiu     $v1, $zero, -5
@@ -250,25 +250,25 @@ glabel func_80242530_EF4B40
 .L802428AC:
 /* EF4EBC 802428AC 0260202D */  daddu     $a0, $s3, $zero
 /* EF4EC0 802428B0 0280282D */  daddu     $a1, $s4, $zero
-/* EF4EC4 802428B4 0C090867 */  jal       func_8024219C_EF47AC
+/* EF4EC4 802428B4 0C090867 */  jal       EF2680_set_script_owner_npc_anim
 /* EF4EC8 802428B8 02A0302D */   daddu    $a2, $s5, $zero
 /* EF4ECC 802428BC 0260202D */  daddu     $a0, $s3, $zero
 .L802428C0:
 /* EF4ED0 802428C0 0280282D */  daddu     $a1, $s4, $zero
-/* EF4ED4 802428C4 0C090886 */  jal       func_80242218_EF4828
+/* EF4ED4 802428C4 0C090886 */  jal       EF2680_UnkDistFunc
 /* EF4ED8 802428C8 02A0302D */   daddu    $a2, $s5, $zero
 /* EF4EDC 802428CC 08090A42 */  j         .L80242908
 /* EF4EE0 802428D0 00000000 */   nop
 .L802428D4:
 /* EF4EE4 802428D4 0260202D */  daddu     $a0, $s3, $zero
 /* EF4EE8 802428D8 0280282D */  daddu     $a1, $s4, $zero
-/* EF4EEC 802428DC 0C0908D3 */  jal       func_8024234C_EF495C
+/* EF4EEC 802428DC 0C0908D3 */  jal       EF2680_UnkNpcAIFunc12
 /* EF4EF0 802428E0 02A0302D */   daddu    $a2, $s5, $zero
 /* EF4EF4 802428E4 08090A42 */  j         .L80242908
 /* EF4EF8 802428E8 00000000 */   nop
 .L802428EC:
 /* EF4EFC 802428EC 0280282D */  daddu     $a1, $s4, $zero
-/* EF4F00 802428F0 0C09092C */  jal       func_802424B0_EF4AC0
+/* EF4F00 802428F0 0C09092C */  jal       EF2680_set_script_owner_npc_col_height
 /* EF4F04 802428F4 02A0302D */   daddu    $a2, $s5, $zero
 /* EF4F08 802428F8 08090A42 */  j         .L80242908
 /* EF4F0C 802428FC 00000000 */   nop

@@ -7,7 +7,7 @@ glabel func_802416E8_EE00A8
 /* EE00B0 802416F0 24100032 */  addiu     $s0, $zero, 0x32
 /* EE00B4 802416F4 AFBF0014 */  sw        $ra, 0x14($sp)
 .L802416F8:
-/* EE00B8 802416F8 0C010ABD */  jal       func_80042AF4
+/* EE00B8 802416F8 0C010ABD */  jal       dead_get_enemy
 /* EE00BC 802416FC 0200202D */   daddu    $a0, $s0, $zero
 /* EE00C0 80241700 8C420094 */  lw        $v0, 0x94($v0)
 /* EE00C4 80241704 54400003 */  bnel      $v0, $zero, .L80241714

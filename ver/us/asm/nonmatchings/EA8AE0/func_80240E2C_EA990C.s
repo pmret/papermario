@@ -273,11 +273,11 @@ glabel func_80240E2C_EA990C
 /* EA9CD0 802411F0 AFA50028 */  sw        $a1, 0x28($sp)
 /* EA9CD4 802411F4 AFA6002C */  sw        $a2, 0x2c($sp)
 /* EA9CD8 802411F8 AFA70030 */  sw        $a3, 0x30($sp)
-/* EA9CDC 802411FC 0C00AD77 */  jal       func_8002B5DC
+/* EA9CDC 802411FC 0C00AD77 */  jal       dead_sin_deg
 /* EA9CE0 80241200 AFA80034 */   sw       $t0, 0x34($sp)
 /* EA9CE4 80241204 46180502 */  mul.s     $f20, $f0, $f24
 /* EA9CE8 80241208 00000000 */  nop
-/* EA9CEC 8024120C 0C00AD90 */  jal       func_8002B640
+/* EA9CEC 8024120C 0C00AD90 */  jal       dead_cos_deg
 /* EA9CF0 80241210 4600B306 */   mov.s    $f12, $f22
 /* EA9CF4 80241214 46000007 */  neg.s     $f0, $f0
 /* EA9CF8 80241218 46180002 */  mul.s     $f0, $f0, $f24
