@@ -20,7 +20,7 @@ typedef struct Effect1 {
 void fx_1_init(EffectInstance* effect);
 void fx_1_update(EffectInstance* effect);
 void fx_1_renderWorld(EffectInstance* effect);
-void func_E0002300(EffectInstance* effect);
+void fx_1_appendGfx(EffectInstance* effect);
 
 f32 D_E0002760[10] = { 10.0f, 40.0f, 80.0f, 170.0f, 140.0f, 100.0f, 25.0f, 155.0f, 60.0f, 120.0f };
 f32 D_E0002788[10] = { 2.2f, 2.7f, 3.0f, 2.2f, 2.7f, 3.0f, 1.9f, 1.9f, 1.5f, 1.5f };
@@ -115,7 +115,7 @@ void fx_1_renderWorld(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = func_E0002300;
+    renderTask.appendGfx = fx_1_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_SHADOW | RENDER_MODE_ALPHATEST; // RENDER_MODE_2D?
@@ -124,7 +124,7 @@ void fx_1_renderWorld(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void func_E0002300(EffectInstance* effect) {
+void fx_1_appendGfx(EffectInstance* effect) {
     Effect1* effectData = effect->data;
     Matrix4f mtx;
     s32 i;
@@ -143,8 +143,6 @@ void func_E0002300(EffectInstance* effect) {
         if (effectData->unk_02 >= 0 && effectData->unk_08 < 0) {
             s32 primAlpha = effectData->unk_02;
             f32 temp_f12;
-            s32 temp_f4;
-            s32 phi_v0;
             s32 envAlpha;
             s32 dlist;
 
@@ -165,16 +163,10 @@ void func_E0002300(EffectInstance* effect) {
                 envAlpha = 255;
                 dlist = fx_1_dlists[ARRAY_COUNT(fx_1_dlists) - 1];
             } else {
-                f32 sinAngle = shim_sin_deg((((temp_f12 * 7.0f) / effectData->unk_04) * 90.0f) / 7.0f) * 7.0f;
+                f32 temp = shim_sin_deg((((temp_f12 * 7.0f) / effectData->unk_04) * 90.0f) / 7.0f) * 7.0f;
 
-                temp_f4 = sinAngle * 255.0f;
-                phi_v0 = temp_f4;
-                if (temp_f4 < 0) {
-                    phi_v0 = temp_f4 + 0xFF;
-                }
-                envAlpha = phi_v0 >> 8;
-                envAlpha = temp_f4 - (envAlpha << 8);
-                dlist = fx_1_dlists[(s32)sinAngle];
+                envAlpha = (s32)(temp * 255.0f) % 256;
+                dlist = fx_1_dlists[(s32)temp];
             }
 
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, (u32)(primAlpha * 105) / 8);
