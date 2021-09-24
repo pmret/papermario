@@ -1625,6 +1625,7 @@ enum PlayerAnimFlags {
 enum RenderMode {
     RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0 = 0x00,
     RENDER_MODE_SURFACE_OPA             = 0x01,
+    RENDER_MODE_2                       = 0x02,
     RENDER_MODE_SURFACE_OPA_NO_AA       = 0x03,
     RENDER_MODE_SURFACE_OPA_NO_ZB       = 0x04,
     RENDER_MODE_DECAL_OPA               = 0x05,
