@@ -133,7 +133,18 @@ s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ,
     return ret;
 }
 
-INCLUDE_ASM(s32, "77480", player_raycast_below_cam_relative);
+s32 player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32* outY, f32* outZ, f32* outLength, 
+                                      f32* hitRx, f32* hitRz, f32* hitDirX, f32* hitDirZ) {
+    f32 yaw = 0.0f;
+
+    if ((playerStatus->spriteFacingAngle >= 90.0f) && (playerStatus->spriteFacingAngle < 270.0f)) {
+        yaw = 180.0f;
+    }
+
+    return player_raycast_below((yaw - 90.0f) + (gCameras[gCurrentCameraID].currentYaw), playerStatus->colliderDiameter, 
+                                outX, outY, outZ, outLength, hitRx, hitRz, hitDirX, hitDirZ);
+}
+
 
 INCLUDE_ASM(s32, "77480", player_raycast_down);
 
