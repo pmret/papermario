@@ -40,8 +40,8 @@ glabel func_802403F0_EDC3D0
 /* EDC45C 8024047C 4680C620 */  cvt.s.w   $f24, $f24
 /* EDC460 80240480 3C128011 */  lui       $s2, %hi(dead_gPlayerStatus)
 /* EDC464 80240484 26527578 */  addiu     $s2, $s2, %lo(dead_gPlayerStatus)
-/* EDC468 80240488 3C038008 */  lui       $v1, %hi(D_8007C760)
-/* EDC46C 8024048C 8C63C760 */  lw        $v1, %lo(D_8007C760)($v1)
+/* EDC468 80240488 3C038008 */  lui       $v1, %hi(dead_gCurrentCameraID)
+/* EDC46C 8024048C 8C63C760 */  lw        $v1, %lo(dead_gCurrentCameraID)($v1)
 /* EDC470 80240490 C64200A8 */  lwc1      $f2, 0xa8($s2)
 /* EDC474 80240494 44800000 */  mtc1      $zero, $f0
 /* EDC478 80240498 00031080 */  sll       $v0, $v1, 2

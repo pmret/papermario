@@ -3,6 +3,7 @@
 
 #define NAMESPACE EE70C0
 
+extern s32 D_802453E0_EEB990[];
 extern f32 D_802444F0_EEAAA0[];
 
 INCLUDE_ASM(s32, "EE70C0", func_80240B10_EE70C0);
@@ -43,4 +44,21 @@ INCLUDE_ASM(s32, "EE70C0", func_80242260_EE8810);
 
 INCLUDE_ASM(s32, "EE70C0", func_802422B4_EE8864);
 
-INCLUDE_ASM(s32, "EE70C0", func_802422EC_EE889C);
+ApiStatus func_802422EC_EE889C(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = evt_get_variable(script, *args);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            D_802453E0_EEB990[i] = ptr[i];
+        }
+        D_802453E0_EEB990[i] = 0;
+    } else {
+        for (i = 0; i < 91; i++) {
+            D_802453E0_EEB990[i] = i + 128;
+            D_802453E0_EEB990[91] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}

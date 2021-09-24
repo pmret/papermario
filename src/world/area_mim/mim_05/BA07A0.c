@@ -14,9 +14,9 @@
 
 #include "world/common/UnkNpcAIFunc27.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_05/BA07A0", func_80240940_BA1070);
+#include "world/common/UnkNpcAIFunc31.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_05/BA07A0", func_802409AC_BA10DC);
+#include "world/common/UnkNpcAIFunc32.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_05/BA07A0", func_80240AA8_BA11D8);
 

@@ -99,12 +99,12 @@ glabel func_802417C4_BA1EF4
 /* BA205C 8024192C 00000000 */   nop
 .L80241930:
 /* BA2060 80241930 0260282D */  daddu     $a1, $s3, $zero
-/* BA2064 80241934 0C090250 */  jal       func_80240940_BA1070
+/* BA2064 80241934 0C090250 */  jal       mim_05_UnkNpcAIFunc31
 /* BA2068 80241938 0280302D */   daddu    $a2, $s4, $zero
 .L8024193C:
 /* BA206C 8024193C 0240202D */  daddu     $a0, $s2, $zero
 /* BA2070 80241940 0260282D */  daddu     $a1, $s3, $zero
-/* BA2074 80241944 0C09026B */  jal       func_802409AC_BA10DC
+/* BA2074 80241944 0C09026B */  jal       mim_05_UnkNpcAIFunc32
 /* BA2078 80241948 0280302D */   daddu    $a2, $s4, $zero
 /* BA207C 8024194C 0809067B */  j         .L802419EC
 /* BA2080 80241950 00000000 */   nop

@@ -3,6 +3,8 @@
 
 #define NAMESPACE EA8AE0
 
+extern s32 D_80248388[];
+
 #include "world/common/DeadUnkTexturePanFunc.inc.c"
 
 #include "world/common/DeadUnkTexturePanFunc2.inc.c"
@@ -51,11 +53,29 @@ INCLUDE_ASM(s32, "EA8AE0", func_802417AC_EAA28C);
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241800_EAA2E0);
 
-INCLUDE_ASM(s32, "EA8AE0", func_80241838_EAA318);
+ApiStatus func_80241838_EAA318(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = evt_get_variable(script, *args);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            D_80248388[i] = ptr[i];
+        }
+        D_80248388[i] = 0;
+    } else {
+        for (i = 0; i < 112; i++) {
+            D_80248388[i] = i + 16;
+            D_80248388[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "EA8AE0", func_802418D4_EAA3B4);
 
-INCLUDE_ASM(s32, "EA8AE0", func_802419C4_EAA4A4);
+//INCLUDE_ASM(s32, "EA8AE0", func_802419C4_EAA4A4);
+#include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241B50_EAA630);
 

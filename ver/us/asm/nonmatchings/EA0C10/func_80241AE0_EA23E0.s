@@ -114,12 +114,12 @@ glabel func_80241AE0_EA23E0
 /* EA2580 80241C80 00000000 */   nop
 .L80241C84:
 /* EA2584 80241C84 0240282D */  daddu     $a1, $s2, $zero
-/* EA2588 80241C88 0C090317 */  jal       func_80240C5C_EA155C
+/* EA2588 80241C88 0C090317 */  jal       EA0C10_UnkNpcAIFunc31
 /* EA258C 80241C8C 0260302D */   daddu    $a2, $s3, $zero
 .L80241C90:
 /* EA2590 80241C90 0220202D */  daddu     $a0, $s1, $zero
 /* EA2594 80241C94 0240282D */  daddu     $a1, $s2, $zero
-/* EA2598 80241C98 0C090332 */  jal       func_80240CC8_EA15C8
+/* EA2598 80241C98 0C090332 */  jal       EA0C10_UnkNpcAIFunc32
 /* EA259C 80241C9C 0260302D */   daddu    $a2, $s3, $zero
 /* EA25A0 80241CA0 08090750 */  j         .L80241D40
 /* EA25A4 80241CA4 00000000 */   nop

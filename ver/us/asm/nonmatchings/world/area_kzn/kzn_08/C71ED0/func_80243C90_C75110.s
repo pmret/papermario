@@ -99,12 +99,12 @@ glabel func_80243C90_C75110
 /* C75278 80243DF8 00000000 */   nop
 .L80243DFC:
 /* C7527C 80243DFC 0260282D */  daddu     $a1, $s3, $zero
-/* C75280 80243E00 0C090B83 */  jal       func_80242E0C_C7428C
+/* C75280 80243E00 0C090B83 */  jal       kzn_08_UnkNpcAIFunc31
 /* C75284 80243E04 0280302D */   daddu    $a2, $s4, $zero
 .L80243E08:
 /* C75288 80243E08 0240202D */  daddu     $a0, $s2, $zero
 /* C7528C 80243E0C 0260282D */  daddu     $a1, $s3, $zero
-/* C75290 80243E10 0C090B9E */  jal       func_80242E78_C742F8
+/* C75290 80243E10 0C090B9E */  jal       kzn_08_UnkNpcAIFunc32
 /* C75294 80243E14 0280302D */   daddu    $a2, $s4, $zero
 /* C75298 80243E18 08090FAE */  j         .L80243EB8
 /* C7529C 80243E1C 00000000 */   nop

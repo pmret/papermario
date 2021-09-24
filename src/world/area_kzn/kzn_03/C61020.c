@@ -26,9 +26,9 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_802406A4_C613B4);
 
 #include "world/common/UnkNpcAIFunc27.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_802414C8_C621D8);
+#include "world/common/UnkNpcAIFunc31.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80241534_C62244);
+#include "world/common/UnkNpcAIFunc32.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80241630_C62340);
 

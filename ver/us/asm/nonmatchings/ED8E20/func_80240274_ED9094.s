@@ -20,7 +20,7 @@ glabel func_80240274_ED9094
 /* ED90D0 802402B0 E7A20014 */  swc1      $f2, 0x14($sp)
 /* ED90D4 802402B4 8C470080 */  lw        $a3, 0x80($v0)
 /* ED90D8 802402B8 C454002C */  lwc1      $f20, 0x2c($v0)
-/* ED90DC 802402BC 0C00ACA3 */  jal       func_8002B28C
+/* ED90DC 802402BC 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* ED90E0 802402C0 27A50014 */   addiu    $a1, $sp, 0x14
 /* ED90E4 802402C4 0200202D */  daddu     $a0, $s0, $zero
 /* ED90E8 802402C8 3C05FE36 */  lui       $a1, 0xfe36

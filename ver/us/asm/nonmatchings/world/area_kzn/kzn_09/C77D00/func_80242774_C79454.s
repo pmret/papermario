@@ -99,12 +99,12 @@ glabel func_80242774_C79454
 /* C795BC 802428DC 00000000 */   nop
 .L802428E0:
 /* C795C0 802428E0 0260282D */  daddu     $a1, $s3, $zero
-/* C795C4 802428E4 0C09063C */  jal       func_802418F0_C785D0
+/* C795C4 802428E4 0C09063C */  jal       kzn_09_UnkNpcAIFunc31
 /* C795C8 802428E8 0280302D */   daddu    $a2, $s4, $zero
 .L802428EC:
 /* C795CC 802428EC 0240202D */  daddu     $a0, $s2, $zero
 /* C795D0 802428F0 0260282D */  daddu     $a1, $s3, $zero
-/* C795D4 802428F4 0C090657 */  jal       func_8024195C_C7863C
+/* C795D4 802428F4 0C090657 */  jal       kzn_09_UnkNpcAIFunc32
 /* C795D8 802428F8 0280302D */   daddu    $a2, $s4, $zero
 /* C795DC 802428FC 08090A67 */  j         .L8024299C
 /* C795E0 80242900 00000000 */   nop
