@@ -1644,6 +1644,7 @@ enum RenderMode {
     RENDER_MODE_SURFACE_XLU_LAYER3      = 0x22,
     RENDER_MODE_INTERSECTING_XLU        = 0x26,
     RENDER_MODE_SURF_XLU_AA_ZB_ZUPD     = 0x29,
+    RENDER_MODE_2D                      = 0x2D,
     RENDER_MODE_CLOUD                   = 0x2E,
     RENDER_MODE_CLOUD_NO_ZB             = 0x2F,
 };

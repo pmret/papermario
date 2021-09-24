@@ -17,9 +17,10 @@ typedef struct Effect1 {
     /* 0x28 */ s32 unk_28;
 } Effect1; // size = 0x2C
 
-void func_E00021B4(EffectInstance* effect);
-void func_E00021BC(EffectInstance* effect);
-void func_E00022BC(EffectInstance* effect);
+void fx_1_init(EffectInstance* effect);
+void fx_1_update(EffectInstance* effect);
+void fx_1_renderWorld(EffectInstance* effect);
+void* func_E0002300(EffectInstance* effect);
 
 f32 D_E0002760[10] = { 10.0f, 40.0f, 80.0f, 170.0f, 140.0f, 100.0f, 25.0f, 155.0f, 60.0f, 120.0f };
 f32 D_E0002788[10] = { 2.2f, 2.7f, 3.0f, 2.2f, 2.7f, 3.0f, 1.9f, 1.9f, 1.5f, 1.5f };
@@ -40,9 +41,9 @@ void fx_1_main(f32 arg0, f32 arg1, f32 arg2) {
     s32 i;
 
     bp.unk_00 = 0;
-    bp.init = func_E00021B4;
-    bp.update = &func_E00021BC;
-    bp.renderWorld = &func_E00022BC;
+    bp.init = fx_1_init;
+    bp.update = fx_1_update;
+    bp.renderWorld = fx_1_renderWorld;
     bp.unk_14 = NULL;
     bp.effectIndex = 1;
 
@@ -75,12 +76,23 @@ void fx_1_main(f32 arg0, f32 arg1, f32 arg2) {
     }
 }
 
-void func_E00021B4(EffectInstance* effect) {
+void fx_1_init(EffectInstance* effect) {
 }
 
-INCLUDE_ASM(s32, "effects/effect_1", func_E00021BC);
+INCLUDE_ASM(s32, "effects/effect_1", fx_1_update);
 
-INCLUDE_ASM(s32, "effects/effect_1", func_E00022BC);
+void fx_1_renderWorld(EffectInstance* effect) {
+    RenderTask renderTask;
+    RenderTask* retTask;
+
+    renderTask.appendGfx = func_E0002300;
+    renderTask.appendGfxArg = effect;
+    renderTask.distance = 0;
+    renderTask.renderMode = RENDER_MODE_2D;
+
+    retTask = shim_queue_render_task(&renderTask);
+    retTask->renderMode |= 0x2;
+}
 
 INCLUDE_ASM(s32, "effects/effect_1", func_E0002300);
 
