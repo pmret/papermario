@@ -45,19 +45,19 @@ INCLUDE_ASM(s32, "20ec0_len_5040", func_800477F4);
 
 INCLUDE_ASM(s32, "20ec0_len_5040", func_80047820);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_1);
+INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_debuff);
 
 INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_1);
 
 INCLUDE_ASM(s32, "20ec0_len_5040", func_80047928);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_2);
+INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_static);
 
 INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_2);
 
 INCLUDE_ASM(s32, "20ec0_len_5040", func_80047A30);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_3);
+INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_transparent);
 
 INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_3);
 

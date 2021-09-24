@@ -1768,7 +1768,7 @@ typedef struct Actor {
     /* 0x42C */ struct Shadow* shadow; /* might be shadow ID */
     /* 0x430 */ f32 shadowScale; /* = actor size / 24.0 */
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
-    /* 0x436 */ s16 unk_436;
+    /* 0x436 */ s16 hudElementDataIndex;
     /* 0x438 */ s32 x[2]; /* ??? see FUN_80253974 */
     /* 0x440 */ struct HudElement* ptrDefuffIcon;
 } Actor; // size = 0x444

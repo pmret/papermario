@@ -1846,19 +1846,19 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
     if (actor->debuff != STATUS_END) {
         actor->debuffDuration = 0;
         actor->debuff = STATUS_END;
-        remove_status_1(actor->unk_436);
+        remove_status_debuff(actor->hudElementDataIndex);
     }
 
     if (actor->staticStatus != 0) {
         actor->staticDuration = 0;
         actor->staticStatus = 0;
-        remove_status_2(actor->unk_436);
+        remove_status_static(actor->hudElementDataIndex);
     }
 
     if (actor->transStatus != 0) {
         actor->transDuration = 0;
         actor->transStatus = 0;
-        remove_status_3(actor->unk_436);
+        remove_status_transparent(actor->hudElementDataIndex);
     }
 
     if (actor->stoneStatus != 0) {

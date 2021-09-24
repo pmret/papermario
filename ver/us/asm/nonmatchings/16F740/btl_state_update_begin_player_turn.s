@@ -477,7 +477,7 @@ glabel btl_state_update_begin_player_turn
 /* 170FDC 802426FC 1C400004 */  bgtz      $v0, .L80242710
 /* 170FE0 80242700 00000000 */   nop
 /* 170FE4 80242704 86240436 */  lh        $a0, 0x436($s1)
-/* 170FE8 80242708 0C011E68 */  jal       remove_status_2
+/* 170FE8 80242708 0C011E68 */  jal       remove_status_static
 /* 170FEC 8024270C A2200212 */   sb       $zero, 0x212($s1)
 .L80242710:
 /* 170FF0 80242710 82220218 */  lb        $v0, 0x218($s1)
@@ -496,7 +496,7 @@ glabel btl_state_update_begin_player_turn
 /* 171024 80242744 8E820000 */  lw        $v0, ($s4)
 /* 171028 80242748 00431024 */  and       $v0, $v0, $v1
 /* 17102C 8024274C AE820000 */  sw        $v0, ($s4)
-/* 171030 80242750 0C011EAA */  jal       remove_status_3
+/* 171030 80242750 0C011EAA */  jal       remove_status_transparent
 /* 171034 80242754 86240436 */   lh       $a0, 0x436($s1)
 .L80242758:
 /* 171038 80242758 82220210 */  lb        $v0, 0x210($s1)
@@ -532,7 +532,7 @@ glabel btl_state_update_begin_player_turn
 /* 1710A8 802427C8 00000000 */   nop
 /* 1710AC 802427CC 86240436 */  lh        $a0, 0x436($s1)
 /* 1710B0 802427D0 A2200210 */  sb        $zero, 0x210($s1)
-/* 1710B4 802427D4 0C011E26 */  jal       remove_status_1
+/* 1710B4 802427D4 0C011E26 */  jal       remove_status_debuff
 /* 1710B8 802427D8 A2200211 */   sb       $zero, 0x211($s1)
 .L802427DC:
 /* 1710BC 802427DC 92220211 */  lbu       $v0, 0x211($s1)
