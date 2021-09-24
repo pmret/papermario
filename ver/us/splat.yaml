@@ -2219,7 +2219,7 @@ segments:
     vram: 0xE0002000
     subsegments:
     - [0x3278F0, c, effect_1]
-    - [0x328050, data]
+    - [0x328050]
   - name: effect_6
     dir: effects
     type: code
