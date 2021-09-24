@@ -14,7 +14,7 @@ glabel func_E0082580
 /* 385BE4 E00825A4 8E050008 */  lw        $a1, 8($s0)
 /* 385BE8 E00825A8 8E06000C */  lw        $a2, 0xc($s0)
 /* 385BEC E00825AC 8E070010 */  lw        $a3, 0x10($s0)
-/* 385BF0 E00825B0 0C080108 */  jal       func_E0200420
+/* 385BF0 E00825B0 0C080108 */  jal       shim_guTranslateF
 /* 385BF4 E00825B4 36521630 */   ori      $s2, $s2, 0x1630
 /* 385BF8 E00825B8 27B10058 */  addiu     $s1, $sp, 0x58
 /* 385BFC E00825BC 0220202D */  daddu     $a0, $s1, $zero
@@ -22,7 +22,7 @@ glabel func_E0082580
 /* 385C04 E00825C4 4481A000 */  mtc1      $at, $f20
 /* 385C08 E00825C8 8E050034 */  lw        $a1, 0x34($s0)
 /* 385C0C E00825CC 4407A000 */  mfc1      $a3, $f20
-/* 385C10 E00825D0 0C080110 */  jal       func_E0200440
+/* 385C10 E00825D0 0C080110 */  jal       shim_guScaleF
 /* 385C14 E00825D4 00A0302D */   daddu    $a2, $a1, $zero
 /* 385C18 E00825D8 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
 /* 385C1C E00825DC 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
@@ -42,11 +42,11 @@ glabel func_E0082580
 /* 385C54 E0082614 46000007 */  neg.s     $f0, $f0
 /* 385C58 E0082618 44050000 */  mfc1      $a1, $f0
 /* 385C5C E008261C 0220202D */  daddu     $a0, $s1, $zero
-/* 385C60 E0082620 0C080104 */  jal       func_E0200410
+/* 385C60 E0082620 0C080104 */  jal       shim_guRotateF
 /* 385C64 E0082624 AFA60010 */   sw       $a2, 0x10($sp)
 /* 385C68 E0082628 0220202D */  daddu     $a0, $s1, $zero
 /* 385C6C E008262C 27A50018 */  addiu     $a1, $sp, 0x18
-/* 385C70 E0082630 0C080114 */  jal       func_E0200450
+/* 385C70 E0082630 0C080114 */  jal       shim_guMtxCatF
 /* 385C74 E0082634 00A0302D */   daddu    $a2, $a1, $zero
 /* 385C78 E0082638 27A40018 */  addiu     $a0, $sp, 0x18
 /* 385C7C E008263C 3C108007 */  lui       $s0, %hi(gMatrixListPos)
@@ -57,7 +57,7 @@ glabel func_E0082580
 /* 385C90 E0082650 8E220000 */  lw        $v0, ($s1)
 /* 385C94 E0082654 00052980 */  sll       $a1, $a1, 6
 /* 385C98 E0082658 00B22821 */  addu      $a1, $a1, $s2
-/* 385C9C E008265C 0C080118 */  jal       func_E0200460
+/* 385C9C E008265C 0C080118 */  jal       shim_guMtxF2L
 /* 385CA0 E0082660 00452821 */   addu     $a1, $v0, $a1
 /* 385CA4 E0082664 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
 /* 385CA8 E0082668 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)

@@ -32,7 +32,7 @@ glabel fx_114_main
 /* 3DE06C E00E406C AFA00010 */  sw        $zero, 0x10($sp)
 /* 3DE070 E00E4070 AFA00024 */  sw        $zero, 0x24($sp)
 /* 3DE074 E00E4074 AFA20014 */  sw        $v0, 0x14($sp)
-/* 3DE078 E00E4078 0C080124 */  jal       func_E0200490
+/* 3DE078 E00E4078 0C080124 */  jal       shim_create_effect_instance
 /* 3DE07C E00E407C 26310001 */   addiu    $s1, $s1, 1
 /* 3DE080 E00E4080 00112040 */  sll       $a0, $s1, 1
 /* 3DE084 E00E4084 00912021 */  addu      $a0, $a0, $s1
@@ -40,7 +40,7 @@ glabel fx_114_main
 /* 3DE08C E00E408C 00912021 */  addu      $a0, $a0, $s1
 /* 3DE090 E00E4090 00042080 */  sll       $a0, $a0, 2
 /* 3DE094 E00E4094 0040982D */  daddu     $s3, $v0, $zero
-/* 3DE098 E00E4098 0C08012C */  jal       func_E02004B0
+/* 3DE098 E00E4098 0C08012C */  jal       shim_general_heap_malloc
 /* 3DE09C E00E409C AE710008 */   sw       $s1, 8($s3)
 /* 3DE0A0 E00E40A0 0040802D */  daddu     $s0, $v0, $zero
 /* 3DE0A4 E00E40A4 16000003 */  bnez      $s0, .LE00E40B4
@@ -104,19 +104,19 @@ glabel fx_114_main
 /* 3DE168 E00E4168 08039071 */  j         .LE00E41C4
 /* 3DE16C E00E416C AE030054 */   sw       $v1, 0x54($s0)
 .LE00E4170:
-/* 3DE170 E00E4170 0C080138 */  jal       func_E02004E0
+/* 3DE170 E00E4170 0C080138 */  jal       shim_rand_int
 /* 3DE174 E00E4174 2404007F */   addiu    $a0, $zero, 0x7f
 /* 3DE178 E00E4178 24420080 */  addiu     $v0, $v0, 0x80
 /* 3DE17C E00E417C 240400FF */  addiu     $a0, $zero, 0xff
 /* 3DE180 E00E4180 00822023 */  subu      $a0, $a0, $v0
-/* 3DE184 E00E4184 0C080138 */  jal       func_E02004E0
+/* 3DE184 E00E4184 0C080138 */  jal       shim_rand_int
 /* 3DE188 E00E4188 AE020038 */   sw       $v0, 0x38($s0)
 /* 3DE18C E00E418C 24420080 */  addiu     $v0, $v0, 0x80
 /* 3DE190 E00E4190 2404017F */  addiu     $a0, $zero, 0x17f
 /* 3DE194 E00E4194 8E030038 */  lw        $v1, 0x38($s0)
 /* 3DE198 E00E4198 00822023 */  subu      $a0, $a0, $v0
 /* 3DE19C E00E419C AE02003C */  sw        $v0, 0x3c($s0)
-/* 3DE1A0 E00E41A0 0C080138 */  jal       func_E02004E0
+/* 3DE1A0 E00E41A0 0C080138 */  jal       shim_rand_int
 /* 3DE1A4 E00E41A4 00832023 */   subu     $a0, $a0, $v1
 /* 3DE1A8 E00E41A8 24420080 */  addiu     $v0, $v0, 0x80
 /* 3DE1AC E00E41AC AE020040 */  sw        $v0, 0x40($s0)

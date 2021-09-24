@@ -12,5 +12,5 @@ INCLUDE_ASM(s32, "effects/effect_1", func_E00022BC);
 INCLUDE_ASM(s32, "effects/effect_1", func_E0002300);
 
 void func_E0002738(void) {
-    func_E02004A0();
+    shim_remove_effect();
 }

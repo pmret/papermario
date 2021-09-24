@@ -455,7 +455,7 @@ void render_effects_UI(void) {
     }
 }
 
-EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
+EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
     EffectInstance* newEffectInst;
     EffectGraphics* curEffect;
     s32 i;

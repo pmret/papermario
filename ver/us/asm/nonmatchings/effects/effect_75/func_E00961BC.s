@@ -38,7 +38,7 @@ glabel func_E00961BC
 /* 3944C0 E0096240 8E460008 */  lw        $a2, 8($s2)
 /* 3944C4 E0096244 8E47000C */  lw        $a3, 0xc($s2)
 /* 3944C8 E0096248 25080008 */  addiu     $t0, $t0, 8
-/* 3944CC E009624C 0C080108 */  jal       func_E0200420
+/* 3944CC E009624C 0C080108 */  jal       shim_guTranslateF
 /* 3944D0 E0096250 AE280000 */   sw       $t0, ($s1)
 /* 3944D4 E0096254 27B00058 */  addiu     $s0, $sp, 0x58
 /* 3944D8 E0096258 3C013F80 */  lui       $at, 0x3f80
@@ -61,20 +61,20 @@ glabel func_E00961BC
 /* 39451C E009629C 46000007 */  neg.s     $f0, $f0
 /* 394520 E00962A0 44050000 */  mfc1      $a1, $f0
 /* 394524 E00962A4 0200202D */  daddu     $a0, $s0, $zero
-/* 394528 E00962A8 0C080104 */  jal       func_E0200410
+/* 394528 E00962A8 0C080104 */  jal       shim_guRotateF
 /* 39452C E00962AC AFA60010 */   sw       $a2, 0x10($sp)
 /* 394530 E00962B0 0200202D */  daddu     $a0, $s0, $zero
 /* 394534 E00962B4 27A50018 */  addiu     $a1, $sp, 0x18
-/* 394538 E00962B8 0C080114 */  jal       func_E0200450
+/* 394538 E00962B8 0C080114 */  jal       shim_guMtxCatF
 /* 39453C E00962BC 00A0302D */   daddu    $a2, $a1, $zero
 /* 394540 E00962C0 0200202D */  daddu     $a0, $s0, $zero
 /* 394544 E00962C4 8E450018 */  lw        $a1, 0x18($s2)
 /* 394548 E00962C8 4407A000 */  mfc1      $a3, $f20
-/* 39454C E00962CC 0C080110 */  jal       func_E0200440
+/* 39454C E00962CC 0C080110 */  jal       shim_guScaleF
 /* 394550 E00962D0 00A0302D */   daddu    $a2, $a1, $zero
 /* 394554 E00962D4 0200202D */  daddu     $a0, $s0, $zero
 /* 394558 E00962D8 27A50018 */  addiu     $a1, $sp, 0x18
-/* 39455C E00962DC 0C080114 */  jal       func_E0200450
+/* 39455C E00962DC 0C080114 */  jal       shim_guMtxCatF
 /* 394560 E00962E0 00A0302D */   daddu    $a2, $a1, $zero
 /* 394564 E00962E4 27A40018 */  addiu     $a0, $sp, 0x18
 /* 394568 E00962E8 3C108007 */  lui       $s0, %hi(gMatrixListPos)
@@ -85,7 +85,7 @@ glabel func_E00961BC
 /* 39457C E00962FC 8E420000 */  lw        $v0, ($s2)
 /* 394580 E0096300 00052980 */  sll       $a1, $a1, 6
 /* 394584 E0096304 00B42821 */  addu      $a1, $a1, $s4
-/* 394588 E0096308 0C080118 */  jal       func_E0200460
+/* 394588 E0096308 0C080118 */  jal       shim_guMtxF2L
 /* 39458C E009630C 00452821 */   addu     $a1, $v0, $a1
 /* 394590 E0096310 3C06D838 */  lui       $a2, 0xd838
 /* 394594 E0096314 34C60002 */  ori       $a2, $a2, 2

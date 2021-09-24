@@ -34,12 +34,12 @@ glabel fx_9_main
 /* 32DF88 E0012278 AFA7007C */  sw        $a3, 0x7c($sp)
 /* 32DF8C E001227C AFA00010 */  sw        $zero, 0x10($sp)
 /* 32DF90 E0012280 AFA00024 */  sw        $zero, 0x24($sp)
-/* 32DF94 E0012284 0C080124 */  jal       func_E0200490
+/* 32DF94 E0012284 0C080124 */  jal       shim_create_effect_instance
 /* 32DF98 E0012288 AFA20014 */   sw       $v0, 0x14($sp)
 /* 32DF9C E001228C 24040098 */  addiu     $a0, $zero, 0x98
 /* 32DFA0 E0012290 24130001 */  addiu     $s3, $zero, 1
 /* 32DFA4 E0012294 0040802D */  daddu     $s0, $v0, $zero
-/* 32DFA8 E0012298 0C08012C */  jal       func_E02004B0
+/* 32DFA8 E0012298 0C08012C */  jal       shim_general_heap_malloc
 /* 32DFAC E001229C AE130008 */   sw       $s3, 8($s0)
 /* 32DFB0 E00122A0 0040882D */  daddu     $s1, $v0, $zero
 /* 32DFB4 E00122A4 16200003 */  bnez      $s1, .LE00122B4
@@ -53,7 +53,7 @@ glabel fx_9_main
 /* 32DFCC E00122BC 00B32821 */  addu      $a1, $a1, $s3
 /* 32DFD0 E00122C0 00052880 */  sll       $a1, $a1, 2
 /* 32DFD4 E00122C4 00B32823 */  subu      $a1, $a1, $s3
-/* 32DFD8 E00122C8 0C080130 */  jal       func_E02004C0
+/* 32DFD8 E00122C8 0C080130 */  jal       shim_mem_clear
 /* 32DFDC E00122CC 000528C0 */   sll      $a1, $a1, 3
 /* 32DFE0 E00122D0 0000902D */  daddu     $s2, $zero, $zero
 /* 32DFE4 E00122D4 0253102A */  slt       $v0, $s2, $s3
@@ -111,7 +111,7 @@ glabel fx_9_main
 /* 32E0A8 E0012398 AE00FF98 */  sw        $zero, -0x68($s0)
 /* 32E0AC E001239C E600FFEC */  swc1      $f0, -0x14($s0)
 /* 32E0B0 E00123A0 E602FFF0 */  swc1      $f2, -0x10($s0)
-/* 32E0B4 E00123A4 0C080138 */  jal       func_E02004E0
+/* 32E0B4 E00123A4 0C080138 */  jal       shim_rand_int
 /* 32E0B8 E00123A8 E604FFF4 */   swc1     $f4, -0xc($s0)
 /* 32E0BC E00123AC 00021103 */  sra       $v0, $v0, 4
 /* 32E0C0 E00123B0 30420001 */  andi      $v0, $v0, 1
@@ -123,13 +123,13 @@ glabel fx_9_main
 /* 32E0D8 E00123C8 3C01C2B4 */  lui       $at, 0xc2b4
 /* 32E0DC E00123CC 44810000 */  mtc1      $at, $f0
 .LE00123D0:
-/* 32E0E0 E00123D0 0C08013C */  jal       func_E02004F0
+/* 32E0E0 E00123D0 0C08013C */  jal       shim_clamp_angle
 /* 32E0E4 E00123D4 4600D300 */   add.s    $f12, $f26, $f0
 /* 32E0E8 E00123D8 46000506 */  mov.s     $f20, $f0
-/* 32E0EC E00123DC 0C080140 */  jal       func_E0200500
+/* 32E0EC E00123DC 0C080140 */  jal       shim_sin_deg
 /* 32E0F0 E00123E0 4600A306 */   mov.s    $f12, $f20
 /* 32E0F4 E00123E4 4600A306 */  mov.s     $f12, $f20
-/* 32E0F8 E00123E8 0C080144 */  jal       func_E0200510
+/* 32E0F8 E00123E8 0C080144 */  jal       shim_cos_deg
 /* 32E0FC E00123EC E600FFFC */   swc1     $f0, -4($s0)
 /* 32E100 E00123F0 26520001 */  addiu     $s2, $s2, 1
 /* 32E104 E00123F4 E6000000 */  swc1      $f0, ($s0)

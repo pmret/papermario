@@ -35,7 +35,7 @@ glabel fx_29_main
 /* 34ECF8 E003A078 AFA00010 */  sw        $zero, 0x10($sp)
 /* 34ECFC E003A07C AFA00024 */  sw        $zero, 0x24($sp)
 /* 34ED00 E003A080 AFA20014 */  sw        $v0, 0x14($sp)
-/* 34ED04 E003A084 0C080124 */  jal       func_E0200490
+/* 34ED04 E003A084 0C080124 */  jal       shim_create_effect_instance
 /* 34ED08 E003A088 26730001 */   addiu    $s3, $s3, 1
 /* 34ED0C E003A08C 00132040 */  sll       $a0, $s3, 1
 /* 34ED10 E003A090 00932021 */  addu      $a0, $a0, $s3
@@ -43,7 +43,7 @@ glabel fx_29_main
 /* 34ED18 E003A098 00932021 */  addu      $a0, $a0, $s3
 /* 34ED1C E003A09C 00042080 */  sll       $a0, $a0, 2
 /* 34ED20 E003A0A0 0040802D */  daddu     $s0, $v0, $zero
-/* 34ED24 E003A0A4 0C08012C */  jal       func_E02004B0
+/* 34ED24 E003A0A4 0C08012C */  jal       shim_general_heap_malloc
 /* 34ED28 E003A0A8 AE130008 */   sw       $s3, 8($s0)
 /* 34ED2C E003A0AC 0040882D */  daddu     $s1, $v0, $zero
 /* 34ED30 E003A0B0 16200003 */  bnez      $s1, .LE003A0C0
@@ -57,7 +57,7 @@ glabel fx_29_main
 /* 34ED48 E003A0C8 00B32821 */  addu      $a1, $a1, $s3
 /* 34ED4C E003A0CC 00052880 */  sll       $a1, $a1, 2
 /* 34ED50 E003A0D0 00B32821 */  addu      $a1, $a1, $s3
-/* 34ED54 E003A0D4 0C080130 */  jal       func_E02004C0
+/* 34ED54 E003A0D4 0C080130 */  jal       shim_mem_clear
 /* 34ED58 E003A0D8 00052880 */   sll      $a1, $a1, 2
 /* 34ED5C E003A0DC 3C014120 */  lui       $at, 0x4120
 /* 34ED60 E003A0E0 44811000 */  mtc1      $at, $f2
@@ -101,11 +101,11 @@ glabel fx_29_main
 /* 34EDEC E003A16C 4614D500 */  add.s     $f20, $f26, $f20
 /* 34EDF0 E003A170 AE00FFF0 */  sw        $zero, -0x10($s0)
 /* 34EDF4 E003A174 AE00FFF4 */  sw        $zero, -0xc($s0)
-/* 34EDF8 E003A178 0C080140 */  jal       func_E0200500
+/* 34EDF8 E003A178 0C080140 */  jal       shim_sin_deg
 /* 34EDFC E003A17C 4600A306 */   mov.s    $f12, $f20
 /* 34EE00 E003A180 4600A306 */  mov.s     $f12, $f20
 /* 34EE04 E003A184 E600FFF8 */  swc1      $f0, -8($s0)
-/* 34EE08 E003A188 0C080144 */  jal       func_E0200510
+/* 34EE08 E003A188 0C080144 */  jal       shim_cos_deg
 /* 34EE0C E003A18C AE00FFFC */   sw       $zero, -4($s0)
 /* 34EE10 E003A190 E6000000 */  swc1      $f0, ($s0)
 /* 34EE14 E003A194 0253102A */  slt       $v0, $s2, $s3

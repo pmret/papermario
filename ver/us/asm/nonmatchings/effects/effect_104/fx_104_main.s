@@ -36,7 +36,7 @@ glabel fx_104_main
 /* 3D3E98 E00D0078 AC820010 */  sw        $v0, 0x10($a0)
 /* 3D3E9C E00D007C 24020068 */  addiu     $v0, $zero, 0x68
 /* 3D3EA0 E00D0080 AC800014 */  sw        $zero, 0x14($a0)
-/* 3D3EA4 E00D0084 0C080124 */  jal       func_E0200490
+/* 3D3EA4 E00D0084 0C080124 */  jal       shim_create_effect_instance
 /* 3D3EA8 E00D0088 AC820004 */   sw       $v0, 4($a0)
 /* 3D3EAC E00D008C 00102040 */  sll       $a0, $s0, 1
 /* 3D3EB0 E00D0090 00902021 */  addu      $a0, $a0, $s0
@@ -44,7 +44,7 @@ glabel fx_104_main
 /* 3D3EB8 E00D0098 00902023 */  subu      $a0, $a0, $s0
 /* 3D3EBC E00D009C 000420C0 */  sll       $a0, $a0, 3
 /* 3D3EC0 E00D00A0 0040882D */  daddu     $s1, $v0, $zero
-/* 3D3EC4 E00D00A4 0C08012C */  jal       func_E02004B0
+/* 3D3EC4 E00D00A4 0C08012C */  jal       shim_general_heap_malloc
 /* 3D3EC8 E00D00A8 AE300008 */   sw       $s0, 8($s1)
 /* 3D3ECC E00D00AC 0040182D */  daddu     $v1, $v0, $zero
 /* 3D3ED0 E00D00B0 14600003 */  bnez      $v1, .LE00D00C0

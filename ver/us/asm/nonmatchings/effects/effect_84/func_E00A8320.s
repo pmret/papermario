@@ -51,7 +51,7 @@ glabel func_E00A8320
 /* 3A74C8 E00A83D8 8E660010 */  lw        $a2, 0x10($s3)
 /* 3A74CC E00A83DC 8E670014 */  lw        $a3, 0x14($s3)
 /* 3A74D0 E00A83E0 25080008 */  addiu     $t0, $t0, 8
-/* 3A74D4 E00A83E4 0C080108 */  jal       func_E0200420
+/* 3A74D4 E00A83E4 0C080108 */  jal       shim_guTranslateF
 /* 3A74D8 E00A83E8 AEA80000 */   sw       $t0, ($s5)
 /* 3A74DC E00A83EC 27B10058 */  addiu     $s1, $sp, 0x58
 /* 3A74E0 E00A83F0 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
@@ -72,18 +72,18 @@ glabel func_E00A8320
 /* 3A751C E00A842C 46000007 */  neg.s     $f0, $f0
 /* 3A7520 E00A8430 44050000 */  mfc1      $a1, $f0
 /* 3A7524 E00A8434 0220202D */  daddu     $a0, $s1, $zero
-/* 3A7528 E00A8438 0C080104 */  jal       func_E0200410
+/* 3A7528 E00A8438 0C080104 */  jal       shim_guRotateF
 /* 3A752C E00A843C AFA60010 */   sw       $a2, 0x10($sp)
 /* 3A7530 E00A8440 0220202D */  daddu     $a0, $s1, $zero
 /* 3A7534 E00A8444 27A50018 */  addiu     $a1, $sp, 0x18
-/* 3A7538 E00A8448 0C080114 */  jal       func_E0200450
+/* 3A7538 E00A8448 0C080114 */  jal       shim_guMtxCatF
 /* 3A753C E00A844C 00A0302D */   daddu    $a2, $a1, $zero
 /* 3A7540 E00A8450 27A40018 */  addiu     $a0, $sp, 0x18
 /* 3A7544 E00A8454 96C50000 */  lhu       $a1, ($s6)
 /* 3A7548 E00A8458 8FC20000 */  lw        $v0, ($fp)
 /* 3A754C E00A845C 00052980 */  sll       $a1, $a1, 6
 /* 3A7550 E00A8460 00B22821 */  addu      $a1, $a1, $s2
-/* 3A7554 E00A8464 0C080118 */  jal       func_E0200460
+/* 3A7554 E00A8464 0C080118 */  jal       shim_guMtxF2L
 /* 3A7558 E00A8468 00452821 */   addu     $a1, $v0, $a1
 /* 3A755C E00A846C 3C03DA38 */  lui       $v1, 0xda38
 /* 3A7560 E00A8470 34630002 */  ori       $v1, $v1, 2
@@ -127,14 +127,14 @@ glabel func_E00A8320
 /* 3A75F4 E00A8504 8E6600E4 */  lw        $a2, 0xe4($s3)
 /* 3A75F8 E00A8508 26730004 */  addiu     $s3, $s3, 4
 /* 3A75FC E00A850C 00148080 */  sll       $s0, $s4, 2
-/* 3A7600 E00A8510 0C080108 */  jal       func_E0200420
+/* 3A7600 E00A8510 0C080108 */  jal       shim_guTranslateF
 /* 3A7604 E00A8514 26940001 */   addiu    $s4, $s4, 1
 /* 3A7608 E00A8518 27A40018 */  addiu     $a0, $sp, 0x18
 /* 3A760C E00A851C 96C50000 */  lhu       $a1, ($s6)
 /* 3A7610 E00A8520 8FC20000 */  lw        $v0, ($fp)
 /* 3A7614 E00A8524 00052980 */  sll       $a1, $a1, 6
 /* 3A7618 E00A8528 00B72821 */  addu      $a1, $a1, $s7
-/* 3A761C E00A852C 0C080118 */  jal       func_E0200460
+/* 3A761C E00A852C 0C080118 */  jal       shim_guMtxF2L
 /* 3A7620 E00A8530 00452821 */   addu     $a1, $v0, $a1
 /* 3A7624 E00A8534 3C06D838 */  lui       $a2, 0xd838
 /* 3A7628 E00A8538 8EA40000 */  lw        $a0, ($s5)

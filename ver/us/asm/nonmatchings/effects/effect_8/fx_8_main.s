@@ -35,12 +35,12 @@ glabel fx_8_main
 /* 32CA00 E0010260 AFA7008C */  sw        $a3, 0x8c($sp)
 /* 32CA04 E0010264 AFA00010 */  sw        $zero, 0x10($sp)
 /* 32CA08 E0010268 AFA00024 */  sw        $zero, 0x24($sp)
-/* 32CA0C E001026C 0C080124 */  jal       func_E0200490
+/* 32CA0C E001026C 0C080124 */  jal       shim_create_effect_instance
 /* 32CA10 E0010270 AFA20014 */   sw       $v0, 0x14($sp)
 /* 32CA14 E0010274 240402F8 */  addiu     $a0, $zero, 0x2f8
 /* 32CA18 E0010278 24140005 */  addiu     $s4, $zero, 5
 /* 32CA1C E001027C 0040802D */  daddu     $s0, $v0, $zero
-/* 32CA20 E0010280 0C08012C */  jal       func_E02004B0
+/* 32CA20 E0010280 0C08012C */  jal       shim_general_heap_malloc
 /* 32CA24 E0010284 AE140008 */   sw       $s4, 8($s0)
 /* 32CA28 E0010288 0040882D */  daddu     $s1, $v0, $zero
 /* 32CA2C E001028C 16200003 */  bnez      $s1, .LE001029C
@@ -54,7 +54,7 @@ glabel fx_8_main
 /* 32CA44 E00102A4 00B42821 */  addu      $a1, $a1, $s4
 /* 32CA48 E00102A8 00052880 */  sll       $a1, $a1, 2
 /* 32CA4C E00102AC 00B42823 */  subu      $a1, $a1, $s4
-/* 32CA50 E00102B0 0C080130 */  jal       func_E02004C0
+/* 32CA50 E00102B0 0C080130 */  jal       shim_mem_clear
 /* 32CA54 E00102B4 000528C0 */   sll      $a1, $a1, 3
 /* 32CA58 E00102B8 1280003B */  beqz      $s4, .LE00103A8
 /* 32CA5C E00102BC 0000902D */   daddu    $s2, $zero, $zero
@@ -105,13 +105,13 @@ glabel fx_8_main
 /* 32CB0C E001036C AE00FFF8 */  sw        $zero, -8($s0)
 /* 32CB10 E0010370 E602FFF0 */  swc1      $f2, -0x10($s0)
 /* 32CB14 E0010374 E604FFDC */  swc1      $f4, -0x24($s0)
-/* 32CB18 E0010378 0C08013C */  jal       func_E02004F0
+/* 32CB18 E0010378 0C08013C */  jal       shim_clamp_angle
 /* 32CB1C E001037C E600FFEC */   swc1     $f0, -0x14($s0)
 /* 32CB20 E0010380 46000506 */  mov.s     $f20, $f0
-/* 32CB24 E0010384 0C080140 */  jal       func_E0200500
+/* 32CB24 E0010384 0C080140 */  jal       shim_sin_deg
 /* 32CB28 E0010388 4600A306 */   mov.s    $f12, $f20
 /* 32CB2C E001038C 4600A306 */  mov.s     $f12, $f20
-/* 32CB30 E0010390 0C080144 */  jal       func_E0200510
+/* 32CB30 E0010390 0C080144 */  jal       shim_cos_deg
 /* 32CB34 E0010394 E600FFFC */   swc1     $f0, -4($s0)
 /* 32CB38 E0010398 E6000000 */  swc1      $f0, ($s0)
 /* 32CB3C E001039C 0254102A */  slt       $v0, $s2, $s4

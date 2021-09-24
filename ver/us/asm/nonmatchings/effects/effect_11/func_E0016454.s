@@ -86,33 +86,33 @@ glabel func_E0016454
 /* 32F3C4 E0016594 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 32F3C8 E0016598 C600000C */  lwc1      $f0, 0xc($s0)
 /* 32F3CC E001659C 27A40020 */  addiu     $a0, $sp, 0x20
-/* 32F3D0 E00165A0 0C080180 */  jal       func_E0200600
+/* 32F3D0 E00165A0 0C080180 */  jal       shim_guPositionF
 /* 32F3D4 E00165A4 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 32F3D8 E00165A8 8E050014 */  lw        $a1, 0x14($s0)
 /* 32F3DC E00165AC 8E060018 */  lw        $a2, 0x18($s0)
 /* 32F3E0 E00165B0 8E07001C */  lw        $a3, 0x1c($s0)
-/* 32F3E4 E00165B4 0C080110 */  jal       func_E0200440
+/* 32F3E4 E00165B4 0C080110 */  jal       shim_guScaleF
 /* 32F3E8 E00165B8 0220202D */   daddu    $a0, $s1, $zero
 /* 32F3EC E00165BC 0220202D */  daddu     $a0, $s1, $zero
 /* 32F3F0 E00165C0 27A50020 */  addiu     $a1, $sp, 0x20
-/* 32F3F4 E00165C4 0C080114 */  jal       func_E0200450
+/* 32F3F4 E00165C4 0C080114 */  jal       shim_guMtxCatF
 /* 32F3F8 E00165C8 00A0302D */   daddu    $a2, $a1, $zero
 /* 32F3FC E00165CC E7B60010 */  swc1      $f22, 0x10($sp)
 /* 32F400 E00165D0 8E050010 */  lw        $a1, 0x10($s0)
 /* 32F404 E00165D4 4406A000 */  mfc1      $a2, $f20
 /* 32F408 E00165D8 4407A000 */  mfc1      $a3, $f20
-/* 32F40C E00165DC 0C080104 */  jal       func_E0200410
+/* 32F40C E00165DC 0C080104 */  jal       shim_guRotateF
 /* 32F410 E00165E0 0220202D */   daddu    $a0, $s1, $zero
 /* 32F414 E00165E4 0220202D */  daddu     $a0, $s1, $zero
 /* 32F418 E00165E8 27A50020 */  addiu     $a1, $sp, 0x20
-/* 32F41C E00165EC 0C080114 */  jal       func_E0200450
+/* 32F41C E00165EC 0C080114 */  jal       shim_guMtxCatF
 /* 32F420 E00165F0 00A0302D */   daddu    $a2, $a1, $zero
 /* 32F424 E00165F4 27A40020 */  addiu     $a0, $sp, 0x20
 /* 32F428 E00165F8 96E50000 */  lhu       $a1, ($s7)
 /* 32F42C E00165FC 8FC20000 */  lw        $v0, ($fp)
 /* 32F430 E0016600 00052980 */  sll       $a1, $a1, 6
 /* 32F434 E0016604 00B52821 */  addu      $a1, $a1, $s5
-/* 32F438 E0016608 0C080118 */  jal       func_E0200460
+/* 32F438 E0016608 0C080118 */  jal       shim_guMtxF2L
 /* 32F43C E001660C 00452821 */   addu     $a1, $v0, $a1
 /* 32F440 E0016610 3C077060 */  lui       $a3, 0x7060
 /* 32F444 E0016614 34E71800 */  ori       $a3, $a3, 0x1800

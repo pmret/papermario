@@ -42,7 +42,7 @@ glabel func_E002C23C
 /* 34014C E002C2CC 2442FFFF */  addiu     $v0, $v0, -1
 /* 340150 E002C2D0 04410005 */  bgez      $v0, .LE002C2E8
 /* 340154 E002C2D4 ACA20020 */   sw       $v0, 0x20($a1)
-/* 340158 E002C2D8 0C080128 */  jal       func_E02004A0
+/* 340158 E002C2D8 0C080128 */  jal       shim_remove_effect
 /* 34015C E002C2DC 00000000 */   nop
 /* 340160 E002C2E0 0800B0F1 */  j         .LE002C3C4
 /* 340164 E002C2E4 00000000 */   nop

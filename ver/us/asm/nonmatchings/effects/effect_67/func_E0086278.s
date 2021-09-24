@@ -13,7 +13,7 @@ glabel func_E0086278
 /* 389AE8 E0086298 AC620030 */  sw        $v0, 0x30($v1)
 /* 389AEC E008629C 04410005 */  bgez      $v0, .LE00862B4
 /* 389AF0 E00862A0 AC650034 */   sw       $a1, 0x34($v1)
-/* 389AF4 E00862A4 0C080128 */  jal       func_E02004A0
+/* 389AF4 E00862A4 0C080128 */  jal       shim_remove_effect
 /* 389AF8 E00862A8 00000000 */   nop
 /* 389AFC E00862AC 080218E1 */  j         .LE0086384
 /* 389B00 E00862B0 00000000 */   nop

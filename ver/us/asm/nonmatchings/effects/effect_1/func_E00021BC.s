@@ -65,7 +65,7 @@ glabel func_E00021BC
 .LE00022A0:
 /* 327B90 E00022A0 14E00003 */  bnez      $a3, .LE00022B0
 /* 327B94 E00022A4 00000000 */   nop
-/* 327B98 E00022A8 0C080128 */  jal       func_E02004A0
+/* 327B98 E00022A8 0C080128 */  jal       shim_remove_effect
 /* 327B9C E00022AC 00000000 */   nop
 .LE00022B0:
 /* 327BA0 E00022B0 8FBF0010 */  lw        $ra, 0x10($sp)

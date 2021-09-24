@@ -33,12 +33,12 @@ glabel fx_11_main
 /* 32EEA0 E0016070 F7B40048 */  sdc1      $f20, 0x48($sp)
 /* 32EEA4 E0016074 AFA00010 */  sw        $zero, 0x10($sp)
 /* 32EEA8 E0016078 AFA00024 */  sw        $zero, 0x24($sp)
-/* 32EEAC E001607C 0C080124 */  jal       func_E0200490
+/* 32EEAC E001607C 0C080124 */  jal       shim_create_effect_instance
 /* 32EEB0 E0016080 AFA20014 */   sw       $v0, 0x14($sp)
 /* 32EEB4 E0016084 24040050 */  addiu     $a0, $zero, 0x50
 /* 32EEB8 E0016088 24130001 */  addiu     $s3, $zero, 1
 /* 32EEBC E001608C 0040802D */  daddu     $s0, $v0, $zero
-/* 32EEC0 E0016090 0C08012C */  jal       func_E02004B0
+/* 32EEC0 E0016090 0C08012C */  jal       shim_general_heap_malloc
 /* 32EEC4 E0016094 AE130008 */   sw       $s3, 8($s0)
 /* 32EEC8 E0016098 0040882D */  daddu     $s1, $v0, $zero
 /* 32EECC E001609C 16200003 */  bnez      $s1, .LE00160AC
@@ -50,7 +50,7 @@ glabel fx_11_main
 /* 32EEDC E00160AC 0220202D */  daddu     $a0, $s1, $zero
 /* 32EEE0 E00160B0 00132880 */  sll       $a1, $s3, 2
 /* 32EEE4 E00160B4 00B32821 */  addu      $a1, $a1, $s3
-/* 32EEE8 E00160B8 0C080130 */  jal       func_E02004C0
+/* 32EEE8 E00160B8 0C080130 */  jal       shim_mem_clear
 /* 32EEEC E00160BC 00052900 */   sll      $a1, $a1, 4
 /* 32EEF0 E00160C0 0000902D */  daddu     $s2, $zero, $zero
 /* 32EEF4 E00160C4 0253102A */  slt       $v0, $s2, $s3
@@ -74,7 +74,7 @@ glabel fx_11_main
 /* 32EF38 E0016108 E6160014 */  swc1      $f22, 0x14($s0)
 /* 32EF3C E001610C E6160018 */  swc1      $f22, 0x18($s0)
 /* 32EF40 E0016110 E616001C */  swc1      $f22, 0x1c($s0)
-/* 32EF44 E0016114 0C080138 */  jal       func_E02004E0
+/* 32EF44 E0016114 0C080138 */  jal       shim_rand_int
 /* 32EF48 E0016118 A2140000 */   sb       $s4, ($s0)
 /* 32EF4C E001611C 44820000 */  mtc1      $v0, $f0
 /* 32EF50 E0016120 00000000 */  nop
@@ -86,7 +86,7 @@ glabel fx_11_main
 /* 32EF68 E0016138 46220000 */  add.d     $f0, $f0, $f2
 /* 32EF6C E001613C 2404000A */  addiu     $a0, $zero, 0xa
 /* 32EF70 E0016140 46200020 */  cvt.s.d   $f0, $f0
-/* 32EF74 E0016144 0C080138 */  jal       func_E02004E0
+/* 32EF74 E0016144 0C080138 */  jal       shim_rand_int
 /* 32EF78 E0016148 E6000020 */   swc1     $f0, 0x20($s0)
 /* 32EF7C E001614C 44820000 */  mtc1      $v0, $f0
 /* 32EF80 E0016150 00000000 */  nop

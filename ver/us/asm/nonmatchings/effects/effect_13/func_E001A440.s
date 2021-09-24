@@ -44,7 +44,7 @@ glabel func_E001A440
 /* 33030C E001A4DC 8CC50024 */  lw        $a1, 0x24($a2)
 /* 330310 E001A4E0 8CC60028 */  lw        $a2, 0x28($a2)
 /* 330314 E001A4E4 24630008 */  addiu     $v1, $v1, 8
-/* 330318 E001A4E8 0C080180 */  jal       func_E0200600
+/* 330318 E001A4E8 0C080180 */  jal       shim_guPositionF
 /* 33031C E001A4EC AE830000 */   sw       $v1, ($s4)
 /* 330320 E001A4F0 27A40020 */  addiu     $a0, $sp, 0x20
 /* 330324 E001A4F4 3C108007 */  lui       $s0, %hi(gMatrixListPos)
@@ -55,7 +55,7 @@ glabel func_E001A440
 /* 330338 E001A508 8E220000 */  lw        $v0, ($s1)
 /* 33033C E001A50C 00052980 */  sll       $a1, $a1, 6
 /* 330340 E001A510 00B22821 */  addu      $a1, $a1, $s2
-/* 330344 E001A514 0C080118 */  jal       func_E0200460
+/* 330344 E001A514 0C080118 */  jal       shim_guMtxF2L
 /* 330348 E001A518 00452821 */   addu     $a1, $v0, $a1
 /* 33034C E001A51C 8E820000 */  lw        $v0, ($s4)
 /* 330350 E001A520 241300FF */  addiu     $s3, $zero, 0xff
@@ -82,7 +82,7 @@ glabel func_E001A440
 /* 3303A4 E001A574 27A400A0 */   addiu    $a0, $sp, 0xa0
 /* 3303A8 E001A578 0080282D */  daddu     $a1, $a0, $zero
 /* 3303AC E001A57C 0080302D */  daddu     $a2, $a0, $zero
-/* 3303B0 E001A580 0C08019C */  jal       func_E0200670
+/* 3303B0 E001A580 0C08019C */  jal       shim_get_background_color_blend
 /* 3303B4 E001A584 27A700A1 */   addiu    $a3, $sp, 0xa1
 /* 3303B8 E001A588 93A200A1 */  lbu       $v0, 0xa1($sp)
 /* 3303BC E001A58C 02629823 */  subu      $s3, $s3, $v0

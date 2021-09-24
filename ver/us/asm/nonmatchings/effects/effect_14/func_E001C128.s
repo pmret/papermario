@@ -9,7 +9,7 @@ glabel func_E001C128
 /* 330A48 E001C138 2442FFFF */  addiu     $v0, $v0, -1
 /* 330A4C E001C13C 04410005 */  bgez      $v0, .LE001C154
 /* 330A50 E001C140 AC620028 */   sw       $v0, 0x28($v1)
-/* 330A54 E001C144 0C080128 */  jal       func_E02004A0
+/* 330A54 E001C144 0C080128 */  jal       shim_remove_effect
 /* 330A58 E001C148 00000000 */   nop
 /* 330A5C E001C14C 0800707D */  j         .LE001C1F4
 /* 330A60 E001C150 00000000 */   nop

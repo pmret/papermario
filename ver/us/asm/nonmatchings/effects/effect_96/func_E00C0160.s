@@ -27,7 +27,7 @@ glabel func_E00C0160
 /* 3BCF10 E00C01B0 24420001 */  addiu     $v0, $v0, 1
 /* 3BCF14 E00C01B4 04A10005 */  bgez      $a1, .LE00C01CC
 /* 3BCF18 E00C01B8 AE020014 */   sw       $v0, 0x14($s0)
-/* 3BCF1C E00C01BC 0C080128 */  jal       func_E02004A0
+/* 3BCF1C E00C01BC 0C080128 */  jal       shim_remove_effect
 /* 3BCF20 E00C01C0 00000000 */   nop
 /* 3BCF24 E00C01C4 080301BF */  j         .LE00C06FC
 /* 3BCF28 E00C01C8 00000000 */   nop
@@ -317,9 +317,9 @@ glabel LE00C0570_3BD2D0
 .LE00C05D4:
 /* 3BD334 E00C05D4 14620049 */  bne       $v1, $v0, .LE00C06FC
 /* 3BD338 E00C05D8 00000000 */   nop
-/* 3BD33C E00C05DC 0C080150 */  jal       func_E0200540
+/* 3BD33C E00C05DC 0C080150 */  jal       shim_load_effect
 /* 3BD340 E00C05E0 2404006F */   addiu    $a0, $zero, 0x6f
-/* 3BD344 E00C05E4 0C080138 */  jal       func_E02004E0
+/* 3BD344 E00C05E4 0C080138 */  jal       shim_rand_int
 /* 3BD348 E00C05E8 2404003C */   addiu    $a0, $zero, 0x3c
 /* 3BD34C E00C05EC C6140004 */  lwc1      $f20, 4($s0)
 /* 3BD350 E00C05F0 C6000030 */  lwc1      $f0, 0x30($s0)
@@ -331,7 +331,7 @@ glabel LE00C0570_3BD2D0
 /* 3BD368 E00C0608 3C0141F0 */  lui       $at, 0x41f0
 /* 3BD36C E00C060C 44810000 */  mtc1      $at, $f0
 /* 3BD370 E00C0610 24040064 */  addiu     $a0, $zero, 0x64
-/* 3BD374 E00C0614 0C080138 */  jal       func_E02004E0
+/* 3BD374 E00C0614 0C080138 */  jal       shim_rand_int
 /* 3BD378 E00C0618 4600A501 */   sub.s    $f20, $f20, $f0
 /* 3BD37C E00C061C C602000C */  lwc1      $f2, 0xc($s0)
 /* 3BD380 E00C0620 C6000038 */  lwc1      $f0, 0x38($s0)
@@ -356,7 +356,7 @@ glabel LE00C0570_3BD2D0
 /* 3BD3CC E00C066C AFA20014 */  sw        $v0, 0x14($sp)
 /* 3BD3D0 E00C0670 0C037800 */  jal       fx_111_main
 /* 3BD3D4 E00C0674 E7A00010 */   swc1     $f0, 0x10($sp)
-/* 3BD3D8 E00C0678 0C080150 */  jal       func_E0200540
+/* 3BD3D8 E00C0678 0C080150 */  jal       shim_load_effect
 /* 3BD3DC E00C067C 24040072 */   addiu    $a0, $zero, 0x72
 /* 3BD3E0 E00C0680 C6020004 */  lwc1      $f2, 4($s0)
 /* 3BD3E4 E00C0684 C6000030 */  lwc1      $f0, 0x30($s0)

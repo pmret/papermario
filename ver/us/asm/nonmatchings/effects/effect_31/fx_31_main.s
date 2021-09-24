@@ -49,7 +49,7 @@ glabel fx_31_main
 /* 3524EC E003E0AC 00000000 */  nop
 /* 3524F0 E003E0B0 450100C5 */  bc1t      .LE003E3C8
 /* 3524F4 E003E0B4 0000102D */   daddu    $v0, $zero, $zero
-/* 3524F8 E003E0B8 0C080154 */  jal       func_E0200550
+/* 3524F8 E003E0B8 0C080154 */  jal       shim_sqrtf
 /* 3524FC E003E0BC 00000000 */   nop
 /* 352500 E003E0C0 3C013F80 */  lui       $at, 0x3f80
 /* 352504 E003E0C4 44811000 */  mtc1      $at, $f2
@@ -91,7 +91,7 @@ glabel fx_31_main
 /* 352588 E003E148 00000000 */  nop
 /* 35258C E003E14C 4501009E */  bc1t      .LE003E3C8
 /* 352590 E003E150 0000102D */   daddu    $v0, $zero, $zero
-/* 352594 E003E154 0C080154 */  jal       func_E0200550
+/* 352594 E003E154 0C080154 */  jal       shim_sqrtf
 /* 352598 E003E158 00000000 */   nop
 /* 35259C E003E15C 3C013F80 */  lui       $at, 0x3f80
 /* 3525A0 E003E160 44819000 */  mtc1      $at, $f18
@@ -136,7 +136,7 @@ glabel fx_31_main
 /* 35263C E003E1FC 0800F8F2 */  j         .LE003E3C8
 /* 352640 E003E200 0000102D */   daddu    $v0, $zero, $zero
 .LE003E204:
-/* 352644 E003E204 0C080154 */  jal       func_E0200550
+/* 352644 E003E204 0C080154 */  jal       shim_sqrtf
 /* 352648 E003E208 00000000 */   nop
 /* 35264C E003E20C 3C013F80 */  lui       $at, 0x3f80
 /* 352650 E003E210 44819000 */  mtc1      $at, $f18
@@ -166,13 +166,13 @@ glabel fx_31_main
 /* 3526B0 E003E270 2402001F */  addiu     $v0, $zero, 0x1f
 /* 3526B4 E003E274 AC800000 */  sw        $zero, ($a0)
 /* 3526B8 E003E278 AC800014 */  sw        $zero, 0x14($a0)
-/* 3526BC E003E27C 0C080124 */  jal       func_E0200490
+/* 3526BC E003E27C 0C080124 */  jal       shim_create_effect_instance
 /* 3526C0 E003E280 AC820004 */   sw       $v0, 4($a0)
 /* 3526C4 E003E284 00112140 */  sll       $a0, $s1, 5
 /* 3526C8 E003E288 00912023 */  subu      $a0, $a0, $s1
 /* 3526CC E003E28C 00042080 */  sll       $a0, $a0, 2
 /* 3526D0 E003E290 0040802D */  daddu     $s0, $v0, $zero
-/* 3526D4 E003E294 0C08012C */  jal       func_E02004B0
+/* 3526D4 E003E294 0C08012C */  jal       shim_general_heap_malloc
 /* 3526D8 E003E298 AE110008 */   sw       $s1, 8($s0)
 /* 3526DC E003E29C 0040302D */  daddu     $a2, $v0, $zero
 /* 3526E0 E003E2A0 14C00003 */  bnez      $a2, .LE003E2B0

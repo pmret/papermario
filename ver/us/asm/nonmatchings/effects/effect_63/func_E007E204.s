@@ -17,7 +17,7 @@ glabel func_E007E204
 /* 37F954 E007E234 24020007 */  addiu     $v0, $zero, 7
 /* 37F958 E007E238 14A20005 */  bne       $a1, $v0, .LE007E250
 /* 37F95C E007E23C AE030040 */   sw       $v1, 0x40($s0)
-/* 37F960 E007E240 0C080128 */  jal       func_E02004A0
+/* 37F960 E007E240 0C080128 */  jal       shim_remove_effect
 /* 37F964 E007E244 00000000 */   nop
 /* 37F968 E007E248 0801F93D */  j         .LE007E4F4
 /* 37F96C E007E24C 00000000 */   nop
@@ -31,7 +31,7 @@ glabel func_E007E204
 /* 37F988 E007E268 00400008 */  jr        $v0
 /* 37F98C E007E26C 00000000 */   nop
 glabel LE007E270_37F990
-/* 37F990 E007E270 0C080150 */  jal       func_E0200540
+/* 37F990 E007E270 0C080150 */  jal       shim_load_effect
 /* 37F994 E007E274 2404002D */   addiu    $a0, $zero, 0x2d
 /* 37F998 E007E278 C6020008 */  lwc1      $f2, 8($s0)
 /* 37F99C E007E27C 3C014120 */  lui       $at, 0x4120

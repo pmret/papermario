@@ -14,7 +14,7 @@ glabel func_E009829C
 /* 395E70 E00982C0 AFA20010 */  sw        $v0, 0x10($sp)
 /* 395E74 E00982C4 4600008D */  trunc.w.s $f2, $f0
 /* 395E78 E00982C8 E7A20014 */  swc1      $f2, 0x14($sp)
-/* 395E7C E00982CC 0C080120 */  jal       func_E0200480
+/* 395E7C E00982CC 0C080120 */  jal       shim_queue_render_task
 /* 395E80 E00982D0 27A40010 */   addiu    $a0, $sp, 0x10
 /* 395E84 E00982D4 8C430000 */  lw        $v1, ($v0)
 /* 395E88 E00982D8 34630002 */  ori       $v1, $v1, 2

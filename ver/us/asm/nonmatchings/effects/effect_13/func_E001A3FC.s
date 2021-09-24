@@ -11,7 +11,7 @@ glabel func_E001A3FC
 /* 330244 E001A414 27A40010 */  addiu     $a0, $sp, 0x10
 /* 330248 E001A418 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 33024C E001A41C AFA00014 */  sw        $zero, 0x14($sp)
-/* 330250 E001A420 0C080120 */  jal       func_E0200480
+/* 330250 E001A420 0C080120 */  jal       shim_queue_render_task
 /* 330254 E001A424 AFA20010 */   sw       $v0, 0x10($sp)
 /* 330258 E001A428 8C430000 */  lw        $v1, ($v0)
 /* 33025C E001A42C 34630002 */  ori       $v1, $v1, 2

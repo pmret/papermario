@@ -9,7 +9,7 @@ glabel func_E00501D8
 /* 35C1B8 E00501E8 2442FFFF */  addiu     $v0, $v0, -1
 /* 35C1BC E00501EC 04410005 */  bgez      $v0, .LE0050204
 /* 35C1C0 E00501F0 AC620024 */   sw       $v0, 0x24($v1)
-/* 35C1C4 E00501F4 0C080128 */  jal       func_E02004A0
+/* 35C1C4 E00501F4 0C080128 */  jal       shim_remove_effect
 /* 35C1C8 E00501F8 00000000 */   nop
 /* 35C1CC E00501FC 080140AE */  j         .LE00502B8
 /* 35C1D0 E0050200 00000000 */   nop

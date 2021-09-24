@@ -26,7 +26,7 @@ glabel func_E006E35C
 /* 372B40 E006E3B0 46020003 */  div.s     $f0, $f0, $f2
 /* 372B44 E006E3B4 04410005 */  bgez      $v0, .LE006E3CC
 /* 372B48 E006E3B8 E600005C */   swc1     $f0, 0x5c($s0)
-/* 372B4C E006E3BC 0C080128 */  jal       func_E02004A0
+/* 372B4C E006E3BC 0C080128 */  jal       shim_remove_effect
 /* 372B50 E006E3C0 00000000 */   nop
 /* 372B54 E006E3C4 0801B9B3 */  j         .LE006E6CC
 /* 372B58 E006E3C8 00000000 */   nop
@@ -113,7 +113,7 @@ glabel func_E006E35C
 /* 372C90 E006E500 8E020004 */  lw        $v0, 4($s0)
 /* 372C94 E006E504 18400031 */  blez      $v0, .LE006E5CC
 /* 372C98 E006E508 2A22000A */   slti     $v0, $s1, 0xa
-/* 372C9C E006E50C 0C080150 */  jal       func_E0200540
+/* 372C9C E006E50C 0C080150 */  jal       shim_load_effect
 /* 372CA0 E006E510 24040037 */   addiu    $a0, $zero, 0x37
 /* 372CA4 E006E514 C6000024 */  lwc1      $f0, 0x24($s0)
 /* 372CA8 E006E518 E7A00010 */  swc1      $f0, 0x10($sp)

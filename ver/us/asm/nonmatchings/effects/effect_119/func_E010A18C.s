@@ -29,7 +29,7 @@ glabel func_E010A18C
 /* 3E4584 E010A1E4 24420001 */  addiu     $v0, $v0, 1
 /* 3E4588 E010A1E8 04A10005 */  bgez      $a1, .LE010A200
 /* 3E458C E010A1EC AE220020 */   sw       $v0, 0x20($s1)
-/* 3E4590 E010A1F0 0C080128 */  jal       func_E02004A0
+/* 3E4590 E010A1F0 0C080128 */  jal       shim_remove_effect
 /* 3E4594 E010A1F4 00000000 */   nop
 /* 3E4598 E010A1F8 08042921 */  j         .LE010A484
 /* 3E459C E010A1FC 00000000 */   nop
@@ -112,7 +112,7 @@ glabel func_E010A18C
 /* 3E46C4 E010A324 44826000 */  mtc1      $v0, $f12
 /* 3E46C8 E010A328 00000000 */  nop
 /* 3E46CC E010A32C 46806320 */  cvt.s.w   $f12, $f12
-/* 3E46D0 E010A330 0C080140 */  jal       func_E0200500
+/* 3E46D0 E010A330 0C080140 */  jal       shim_sin_deg
 /* 3E46D4 E010A334 E6020050 */   swc1     $f2, 0x50($s0)
 /* 3E46D8 E010A338 C6260014 */  lwc1      $f6, 0x14($s1)
 /* 3E46DC E010A33C 46143182 */  mul.s     $f6, $f6, $f20
@@ -133,7 +133,7 @@ glabel func_E010A18C
 /* 3E4718 E010A378 C622000C */  lwc1      $f2, 0xc($s1)
 /* 3E471C E010A37C 46001081 */  sub.s     $f2, $f2, $f0
 /* 3E4720 E010A380 2404000A */  addiu     $a0, $zero, 0xa
-/* 3E4724 E010A384 0C080138 */  jal       func_E02004E0
+/* 3E4724 E010A384 0C080138 */  jal       shim_rand_int
 /* 3E4728 E010A388 E6020070 */   swc1     $f2, 0x70($s0)
 /* 3E472C E010A38C 2442FFFB */  addiu     $v0, $v0, -5
 /* 3E4730 E010A390 3C013DCC */  lui       $at, 0x3dcc
@@ -145,7 +145,7 @@ glabel func_E010A18C
 /* 3E4748 E010A3A8 46140002 */  mul.s     $f0, $f0, $f20
 /* 3E474C E010A3AC 00000000 */  nop
 /* 3E4750 E010A3B0 2404000A */  addiu     $a0, $zero, 0xa
-/* 3E4754 E010A3B4 0C080138 */  jal       func_E02004E0
+/* 3E4754 E010A3B4 0C080138 */  jal       shim_rand_int
 /* 3E4758 E010A3B8 E6000080 */   swc1     $f0, 0x80($s0)
 /* 3E475C E010A3BC 2442FFFB */  addiu     $v0, $v0, -5
 /* 3E4760 E010A3C0 44820000 */  mtc1      $v0, $f0
@@ -154,7 +154,7 @@ glabel func_E010A18C
 /* 3E476C E010A3CC 46140002 */  mul.s     $f0, $f0, $f20
 /* 3E4770 E010A3D0 00000000 */  nop
 /* 3E4774 E010A3D4 2404000A */  addiu     $a0, $zero, 0xa
-/* 3E4778 E010A3D8 0C080138 */  jal       func_E02004E0
+/* 3E4778 E010A3D8 0C080138 */  jal       shim_rand_int
 /* 3E477C E010A3DC E6000090 */   swc1     $f0, 0x90($s0)
 /* 3E4780 E010A3E0 0000202D */  daddu     $a0, $zero, $zero
 /* 3E4784 E010A3E4 2442FFFB */  addiu     $v0, $v0, -5

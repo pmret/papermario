@@ -70,7 +70,7 @@ glabel func_E00A223C
 /* 3A2CCC E00A233C 27A2004C */  addiu     $v0, $sp, 0x4c
 /* 3A2CD0 E00A2340 44060000 */  mfc1      $a2, $f0
 /* 3A2CD4 E00A2344 2407FFFF */  addiu     $a3, $zero, -1
-/* 3A2CD8 E00A2348 0C08015C */  jal       func_E0200570
+/* 3A2CD8 E00A2348 0C08015C */  jal       shim_func_8011CFBC
 /* 3A2CDC E00A234C AFA20014 */   sw       $v0, 0x14($sp)
 /* 3A2CE0 E00A2350 080288D9 */  j         .LE00A2364
 /* 3A2CE4 E00A2354 0040302D */   daddu    $a2, $v0, $zero

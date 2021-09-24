@@ -476,7 +476,7 @@ void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 void* load_asset_by_name(const char* assetName, u32* decompressedSize);
 
-EffectInstance* func_8005A2BC(EffectBlueprint* effectBp);
+EffectInstance* create_effect_instance(EffectBlueprint* effectBp);
 void remove_effect(EffectInstance* arg0);
 s32 load_effect(s32 effectIndex);
 void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);

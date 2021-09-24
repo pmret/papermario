@@ -96,7 +96,7 @@ glabel func_E00D8630
 /* 3D6F58 E00D8798 44066000 */  mfc1      $a2, $f12
 /* 3D6F5C E00D879C 4600130D */  trunc.w.s $f12, $f2
 /* 3D6F60 E00D87A0 44076000 */  mfc1      $a3, $f12
-/* 3D6F64 E00D87A4 0C080190 */  jal       func_E0200640
+/* 3D6F64 E00D87A4 0C080190 */  jal       shim_draw_box
 /* 3D6F68 E00D87A8 E7A60034 */   swc1     $f6, 0x34($sp)
 /* 3D6F6C E00D87AC 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
 /* 3D6F70 E00D87B0 2463A66C */  addiu     $v1, $v1, %lo(gMasterGfxPos)

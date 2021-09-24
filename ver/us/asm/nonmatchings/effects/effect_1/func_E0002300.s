@@ -65,7 +65,7 @@ glabel func_E0002300
 /* 327CE0 E00023F0 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 327CE4 E00023F4 C6800014 */  lwc1      $f0, 0x14($s4)
 /* 327CE8 E00023F8 36101630 */  ori       $s0, $s0, 0x1630
-/* 327CEC E00023FC 0C080180 */  jal       func_E0200600
+/* 327CEC E00023FC 0C080180 */  jal       shim_guPositionF
 /* 327CF0 E0002400 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 327CF4 E0002404 27A40020 */  addiu     $a0, $sp, 0x20
 /* 327CF8 E0002408 3C118007 */  lui       $s1, %hi(gMatrixListPos)
@@ -76,7 +76,7 @@ glabel func_E0002300
 /* 327D0C E000241C 8E620000 */  lw        $v0, ($s3)
 /* 327D10 E0002420 00052980 */  sll       $a1, $a1, 6
 /* 327D14 E0002424 00B02821 */  addu      $a1, $a1, $s0
-/* 327D18 E0002428 0C080118 */  jal       func_E0200460
+/* 327D18 E0002428 0C080118 */  jal       shim_guMtxF2L
 /* 327D1C E000242C 00452821 */   addu     $a1, $v0, $a1
 /* 327D20 E0002430 8EA20000 */  lw        $v0, ($s5)
 /* 327D24 E0002434 0040282D */  daddu     $a1, $v0, $zero
@@ -135,14 +135,14 @@ glabel func_E0002300
 /* 327DF0 E0002500 3C07E000 */  lui       $a3, %hi(D_E00027D8)
 /* 327DF4 E0002504 00E23821 */  addu      $a3, $a3, $v0
 /* 327DF8 E0002508 8CE727D8 */  lw        $a3, %lo(D_E00027D8)($a3)
-/* 327DFC E000250C 0C080180 */  jal       func_E0200600
+/* 327DFC E000250C 0C080180 */  jal       shim_guPositionF
 /* 327E00 E0002510 27A40020 */   addiu    $a0, $sp, 0x20
 /* 327E04 E0002514 27A40020 */  addiu     $a0, $sp, 0x20
 /* 327E08 E0002518 96E50000 */  lhu       $a1, ($s7)
 /* 327E0C E000251C 8FC20000 */  lw        $v0, ($fp)
 /* 327E10 E0002520 00052980 */  sll       $a1, $a1, 6
 /* 327E14 E0002524 00B62821 */  addu      $a1, $a1, $s6
-/* 327E18 E0002528 0C080118 */  jal       func_E0200460
+/* 327E18 E0002528 0C080118 */  jal       shim_guMtxF2L
 /* 327E1C E000252C 00452821 */   addu     $a1, $v0, $a1
 /* 327E20 E0002530 8E620000 */  lw        $v0, ($s3)
 /* 327E24 E0002534 0040282D */  daddu     $a1, $v0, $zero
@@ -183,7 +183,7 @@ glabel func_E0002300
 /* 327EAC E00025BC 46026303 */  div.s     $f12, $f12, $f2
 /* 327EB0 E00025C0 46006302 */  mul.s     $f12, $f12, $f0
 /* 327EB4 E00025C4 00000000 */  nop
-/* 327EB8 E00025C8 0C080140 */  jal       func_E0200500
+/* 327EB8 E00025C8 0C080140 */  jal       shim_sin_deg
 /* 327EBC E00025CC 46146303 */   div.s    $f12, $f12, $f20
 /* 327EC0 E00025D0 46140082 */  mul.s     $f2, $f0, $f20
 /* 327EC4 E00025D4 00000000 */  nop

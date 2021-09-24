@@ -33,12 +33,12 @@ glabel fx_102_main
 /* 3D1700 E00CC070 F7B80058 */  sdc1      $f24, 0x58($sp)
 /* 3D1704 E00CC074 AFA00010 */  sw        $zero, 0x10($sp)
 /* 3D1708 E00CC078 AFA00024 */  sw        $zero, 0x24($sp)
-/* 3D170C E00CC07C 0C080124 */  jal       func_E0200490
+/* 3D170C E00CC07C 0C080124 */  jal       shim_create_effect_instance
 /* 3D1710 E00CC080 AFA20014 */   sw       $v0, 0x14($sp)
 /* 3D1714 E00CC084 24040798 */  addiu     $a0, $zero, 0x798
 /* 3D1718 E00CC088 24030001 */  addiu     $v1, $zero, 1
 /* 3D171C E00CC08C 0040A02D */  daddu     $s4, $v0, $zero
-/* 3D1720 E00CC090 0C08012C */  jal       func_E02004B0
+/* 3D1720 E00CC090 0C08012C */  jal       shim_general_heap_malloc
 /* 3D1724 E00CC094 AE830008 */   sw       $v1, 8($s4)
 /* 3D1728 E00CC098 0040182D */  daddu     $v1, $v0, $zero
 /* 3D172C E00CC09C 14600003 */  bnez      $v1, .LE00CC0AC
@@ -88,13 +88,13 @@ glabel fx_102_main
 /* 3D17C8 E00CC138 4482A000 */  mtc1      $v0, $f20
 /* 3D17CC E00CC13C 00000000 */  nop
 /* 3D17D0 E00CC140 4680A520 */  cvt.s.w   $f20, $f20
-/* 3D17D4 E00CC144 0C080140 */  jal       func_E0200500
+/* 3D17D4 E00CC144 0C080140 */  jal       shim_sin_deg
 /* 3D17D8 E00CC148 4600A306 */   mov.s    $f12, $f20
 /* 3D17DC E00CC14C 4600A306 */  mov.s     $f12, $f20
-/* 3D17E0 E00CC150 0C080144 */  jal       func_E0200510
+/* 3D17E0 E00CC150 0C080144 */  jal       shim_cos_deg
 /* 3D17E4 E00CC154 46000506 */   mov.s    $f20, $f0
 /* 3D17E8 E00CC158 24040167 */  addiu     $a0, $zero, 0x167
-/* 3D17EC E00CC15C 0C080138 */  jal       func_E02004E0
+/* 3D17EC E00CC15C 0C080138 */  jal       shim_rand_int
 /* 3D17F0 E00CC160 46000586 */   mov.s    $f22, $f0
 /* 3D17F4 E00CC164 461AA082 */  mul.s     $f2, $f20, $f26
 /* 3D17F8 E00CC168 00000000 */  nop

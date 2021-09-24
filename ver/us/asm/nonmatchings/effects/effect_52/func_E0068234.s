@@ -68,7 +68,7 @@ glabel func_E0068234
 /* 36AC00 E0068330 AE260000 */  sw        $a2, ($s1)
 /* 36AC04 E0068334 44061000 */  mfc1      $a2, $f2
 /* 36AC08 E0068338 27A40020 */  addiu     $a0, $sp, 0x20
-/* 36AC0C E006833C 0C080180 */  jal       func_E0200600
+/* 36AC0C E006833C 0C080180 */  jal       shim_guPositionF
 /* 36AC10 E0068340 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 36AC14 E0068344 27A40020 */  addiu     $a0, $sp, 0x20
 /* 36AC18 E0068348 3C108007 */  lui       $s0, %hi(gMatrixListPos)
@@ -79,7 +79,7 @@ glabel func_E0068234
 /* 36AC2C E006835C 8E420000 */  lw        $v0, ($s2)
 /* 36AC30 E0068360 00052980 */  sll       $a1, $a1, 6
 /* 36AC34 E0068364 00B32821 */  addu      $a1, $a1, $s3
-/* 36AC38 E0068368 0C080118 */  jal       func_E0200460
+/* 36AC38 E0068368 0C080118 */  jal       shim_guMtxF2L
 /* 36AC3C E006836C 00452821 */   addu     $a1, $v0, $a1
 /* 36AC40 E0068370 8E220000 */  lw        $v0, ($s1)
 /* 36AC44 E0068374 0040202D */  daddu     $a0, $v0, $zero

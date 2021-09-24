@@ -70,17 +70,17 @@ glabel func_E00462C0
 /* 3562A4 E00463C4 8E660008 */  lw        $a2, 8($s3)
 /* 3562A8 E00463C8 8E67000C */  lw        $a3, 0xc($s3)
 /* 3562AC E00463CC 25020020 */  addiu     $v0, $t0, 0x20
-/* 3562B0 E00463D0 0C080108 */  jal       func_E0200420
+/* 3562B0 E00463D0 0C080108 */  jal       shim_guTranslateF
 /* 3562B4 E00463D4 AD220000 */   sw       $v0, ($t1)
 /* 3562B8 E00463D8 27B00060 */  addiu     $s0, $sp, 0x60
 /* 3562BC E00463DC 0200202D */  daddu     $a0, $s0, $zero
 /* 3562C0 E00463E0 8E650010 */  lw        $a1, 0x10($s3)
 /* 3562C4 E00463E4 3C063F80 */  lui       $a2, 0x3f80
-/* 3562C8 E00463E8 0C080110 */  jal       func_E0200440
+/* 3562C8 E00463E8 0C080110 */  jal       shim_guScaleF
 /* 3562CC E00463EC 00A0382D */   daddu    $a3, $a1, $zero
 /* 3562D0 E00463F0 0200202D */  daddu     $a0, $s0, $zero
 /* 3562D4 E00463F4 27A50020 */  addiu     $a1, $sp, 0x20
-/* 3562D8 E00463F8 0C080114 */  jal       func_E0200450
+/* 3562D8 E00463F8 0C080114 */  jal       shim_guMtxCatF
 /* 3562DC E00463FC 00A0302D */   daddu    $a2, $a1, $zero
 /* 3562E0 E0046400 08011936 */  j         .LE00464D8
 /* 3562E4 E0046404 3C120001 */   lui      $s2, 1
@@ -134,7 +134,7 @@ glabel func_E00462C0
 /* 3563A0 E00464C0 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 3563A4 E00464C4 C660000C */  lwc1      $f0, 0xc($s3)
 /* 3563A8 E00464C8 27A40020 */  addiu     $a0, $sp, 0x20
-/* 3563AC E00464CC 0C080180 */  jal       func_E0200600
+/* 3563AC E00464CC 0C080180 */  jal       shim_guPositionF
 /* 3563B0 E00464D0 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 3563B4 E00464D4 3C120001 */  lui       $s2, 1
 .LE00464D8:
@@ -148,7 +148,7 @@ glabel func_E00462C0
 /* 3563D4 E00464F4 8E220000 */  lw        $v0, ($s1)
 /* 3563D8 E00464F8 00052980 */  sll       $a1, $a1, 6
 /* 3563DC E00464FC 00B22821 */  addu      $a1, $a1, $s2
-/* 3563E0 E0046500 0C080118 */  jal       func_E0200460
+/* 3563E0 E0046500 0C080118 */  jal       shim_guMtxF2L
 /* 3563E4 E0046504 00452821 */   addu     $a1, $v0, $a1
 /* 3563E8 E0046508 3C07800A */  lui       $a3, %hi(gMasterGfxPos)
 /* 3563EC E004650C 24E7A66C */  addiu     $a3, $a3, %lo(gMasterGfxPos)

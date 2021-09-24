@@ -3,12 +3,12 @@
 u32 D_E0200690 = 0x1E6D3457;
 
 void* effectFuncs[] = {
-    guRotateF, guTranslateF, guTranslate, guScaleF, guMtxCatF, guMtxF2L, guMtxL2F, queue_render_task, func_8005A2BC,
-    remove_effect, general_heap_malloc, mem_clear, NULL, rand_int, clamp_angle, sin_deg, cos_deg, atan2,
-    npc_raycast_down_sides, load_effect, sqrtf, mdl_draw_hidden_panel_surface, func_8011CFBC, guPerspectiveF,
-    guMtxIdentF, transform_point, guLookAtHiliteF, set_screen_overlay_params_back, set_screen_overlay_center,
-    set_screen_overlay_center_worldpos, mdl_get_next_texture_address, guPositionF, guOrthoF, guFrustumF, func_80138D88,
-    draw_box, draw_msg, get_msg_width, get_background_color_blend, sfx_play_sound_at_position
+    guRotateF, guTranslateF, guTranslate, guScaleF, guMtxCatF, guMtxF2L, guMtxL2F, queue_render_task,
+    create_effect_instance, remove_effect, general_heap_malloc, mem_clear, NULL, rand_int, clamp_angle, sin_deg,
+    cos_deg, atan2, npc_raycast_down_sides, load_effect, sqrtf, mdl_draw_hidden_panel_surface, func_8011CFBC,
+    guPerspectiveF, guMtxIdentF, transform_point, guLookAtHiliteF, set_screen_overlay_params_back,
+    set_screen_overlay_center, set_screen_overlay_center_worldpos, mdl_get_next_texture_address, guPositionF, guOrthoF,
+    guFrustumF, func_80138D88, draw_box, draw_msg, get_msg_width, get_background_color_blend, sfx_play_sound_at_position
 };
 
 s32 D_E0200734[128] = {

@@ -31,12 +31,12 @@ glabel fx_43_main
 /* 35DA68 E0056068 AFB00028 */  sw        $s0, 0x28($sp)
 /* 35DA6C E005606C AFA00010 */  sw        $zero, 0x10($sp)
 /* 35DA70 E0056070 AFA00024 */  sw        $zero, 0x24($sp)
-/* 35DA74 E0056074 0C080124 */  jal       func_E0200490
+/* 35DA74 E0056074 0C080124 */  jal       shim_create_effect_instance
 /* 35DA78 E0056078 AFA20014 */   sw       $v0, 0x14($sp)
 /* 35DA7C E005607C 2404012C */  addiu     $a0, $zero, 0x12c
 /* 35DA80 E0056080 24160005 */  addiu     $s6, $zero, 5
 /* 35DA84 E0056084 0040802D */  daddu     $s0, $v0, $zero
-/* 35DA88 E0056088 0C08012C */  jal       func_E02004B0
+/* 35DA88 E0056088 0C08012C */  jal       shim_general_heap_malloc
 /* 35DA8C E005608C AE160008 */   sw       $s6, 8($s0)
 /* 35DA90 E0056090 0040182D */  daddu     $v1, $v0, $zero
 /* 35DA94 E0056094 14600003 */  bnez      $v1, .LE00560A4
@@ -156,7 +156,7 @@ glabel fx_43_main
 /* 35DC3C E005623C 00000000 */  nop
 /* 35DC40 E0056240 46200000 */  add.d     $f0, $f0, $f0
 /* 35DC44 E0056244 46200020 */  cvt.s.d   $f0, $f0
-/* 35DC48 E0056248 0C080138 */  jal       func_E02004E0
+/* 35DC48 E0056248 0C080138 */  jal       shim_rand_int
 /* 35DC4C E005624C E6600008 */   swc1     $f0, 8($s3)
 /* 35DC50 E0056250 44821000 */  mtc1      $v0, $f2
 /* 35DC54 E0056254 00000000 */  nop
@@ -171,7 +171,7 @@ glabel fx_43_main
 /* 35DC78 E0056278 00000000 */  nop
 /* 35DC7C E005627C 2404000A */  addiu     $a0, $zero, 0xa
 /* 35DC80 E0056280 46200020 */  cvt.s.d   $f0, $f0
-/* 35DC84 E0056284 0C080138 */  jal       func_E02004E0
+/* 35DC84 E0056284 0C080138 */  jal       shim_rand_int
 /* 35DC88 E0056288 E660FFFC */   swc1     $f0, -4($s3)
 /* 35DC8C E005628C 44821000 */  mtc1      $v0, $f2
 /* 35DC90 E0056290 00000000 */  nop

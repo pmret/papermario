@@ -28,12 +28,12 @@ glabel fx_35_main
 /* 355F3C E004605C AFB00028 */  sw        $s0, 0x28($sp)
 /* 355F40 E0046060 AFA00010 */  sw        $zero, 0x10($sp)
 /* 355F44 E0046064 AFA00024 */  sw        $zero, 0x24($sp)
-/* 355F48 E0046068 0C080124 */  jal       func_E0200490
+/* 355F48 E0046068 0C080124 */  jal       shim_create_effect_instance
 /* 355F4C E004606C AFA20014 */   sw       $v0, 0x14($sp)
 /* 355F50 E0046070 24040028 */  addiu     $a0, $zero, 0x28
 /* 355F54 E0046074 24030001 */  addiu     $v1, $zero, 1
 /* 355F58 E0046078 0040802D */  daddu     $s0, $v0, $zero
-/* 355F5C E004607C 0C08012C */  jal       func_E02004B0
+/* 355F5C E004607C 0C08012C */  jal       shim_general_heap_malloc
 /* 355F60 E0046080 AE030008 */   sw       $v1, 8($s0)
 /* 355F64 E0046084 AE02000C */  sw        $v0, 0xc($s0)
 /* 355F68 E0046088 0040802D */  daddu     $s0, $v0, $zero
@@ -52,7 +52,7 @@ glabel fx_35_main
 /* 355F94 E00460B4 00000000 */  nop
 /* 355F98 E00460B8 45010013 */  bc1t      .LE0046108
 /* 355F9C E00460BC AE00001C */   sw       $zero, 0x1c($s0)
-/* 355FA0 E00460C0 0C080138 */  jal       func_E02004E0
+/* 355FA0 E00460C0 0C080138 */  jal       shim_rand_int
 /* 355FA4 E00460C4 24040003 */   addiu    $a0, $zero, 3
 /* 355FA8 E00460C8 3C01E004 */  lui       $at, %hi(D_E0046620)
 /* 355FAC E00460CC D4226620 */  ldc1      $f2, %lo(D_E0046620)($at)
@@ -78,7 +78,7 @@ glabel fx_35_main
 /* 355FF4 E0046114 E6000010 */  swc1      $f0, 0x10($s0)
 /* 355FF8 E0046118 2404001F */  addiu     $a0, $zero, 0x1f
 /* 355FFC E004611C 24020020 */  addiu     $v0, $zero, 0x20
-/* 356000 E0046120 0C080138 */  jal       func_E02004E0
+/* 356000 E0046120 0C080138 */  jal       shim_rand_int
 /* 356004 E0046124 AE020018 */   sw       $v0, 0x18($s0)
 /* 356008 E0046128 461AC000 */  add.s     $f0, $f24, $f26
 /* 35600C E004612C AE020020 */  sw        $v0, 0x20($s0)

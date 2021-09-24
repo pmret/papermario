@@ -30,12 +30,12 @@ glabel fx_79_main
 /* 39FF84 E009E064 AFB20030 */  sw        $s2, 0x30($sp)
 /* 39FF88 E009E068 AFA00010 */  sw        $zero, 0x10($sp)
 /* 39FF8C E009E06C AFA00024 */  sw        $zero, 0x24($sp)
-/* 39FF90 E009E070 0C080124 */  jal       func_E0200490
+/* 39FF90 E009E070 0C080124 */  jal       shim_create_effect_instance
 /* 39FF94 E009E074 AFA20014 */   sw       $v0, 0x14($sp)
 /* 39FF98 E009E078 24040138 */  addiu     $a0, $zero, 0x138
 /* 39FF9C E009E07C 24130006 */  addiu     $s3, $zero, 6
 /* 39FFA0 E009E080 0040902D */  daddu     $s2, $v0, $zero
-/* 39FFA4 E009E084 0C08012C */  jal       func_E02004B0
+/* 39FFA4 E009E084 0C08012C */  jal       shim_general_heap_malloc
 /* 39FFA8 E009E088 AE530008 */   sw       $s3, 8($s2)
 /* 39FFAC E009E08C 0040182D */  daddu     $v1, $v0, $zero
 /* 39FFB0 E009E090 14600003 */  bnez      $v1, .LE009E0A0
@@ -69,7 +69,7 @@ glabel fx_79_main
 /* 3A0010 E009E0F0 3C01E00A */  lui       $at, %hi(D_E009EE08)
 /* 3A0014 E009E0F4 D436EE08 */  ldc1      $f22, %lo(D_E009EE08)($at)
 .LE009E0F8:
-/* 3A0018 E009E0F8 0C080138 */  jal       func_E02004E0
+/* 3A0018 E009E0F8 0C080138 */  jal       shim_rand_int
 /* 3A001C E009E0FC 24040168 */   addiu    $a0, $zero, 0x168
 /* 3A0020 E009E100 00112840 */  sll       $a1, $s1, 1
 /* 3A0024 E009E104 00B40018 */  mult      $a1, $s4
@@ -90,7 +90,7 @@ glabel fx_79_main
 /* 3A0060 E009E140 44850000 */  mtc1      $a1, $f0
 /* 3A0064 E009E144 00000000 */  nop
 /* 3A0068 E009E148 46800020 */  cvt.s.w   $f0, $f0
-/* 3A006C E009E14C 0C080138 */  jal       func_E02004E0
+/* 3A006C E009E14C 0C080138 */  jal       shim_rand_int
 /* 3A0070 E009E150 E600FFFC */   swc1     $f0, -4($s0)
 /* 3A0074 E009E154 44820000 */  mtc1      $v0, $f0
 /* 3A0078 E009E158 00000000 */  nop
@@ -100,7 +100,7 @@ glabel fx_79_main
 /* 3A0088 E009E168 46360000 */  add.d     $f0, $f0, $f22
 /* 3A008C E009E16C 2404000A */  addiu     $a0, $zero, 0xa
 /* 3A0090 E009E170 46200020 */  cvt.s.d   $f0, $f0
-/* 3A0094 E009E174 0C080138 */  jal       func_E02004E0
+/* 3A0094 E009E174 0C080138 */  jal       shim_rand_int
 /* 3A0098 E009E178 E600FFF8 */   swc1     $f0, -8($s0)
 /* 3A009C E009E17C 44820000 */  mtc1      $v0, $f0
 /* 3A00A0 E009E180 00000000 */  nop

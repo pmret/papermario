@@ -26,7 +26,7 @@ glabel func_E00A2120
 /* 3A2AFC E00A216C 8C620050 */  lw        $v0, 0x50($v1)
 /* 3A2B00 E00A2170 04410005 */  bgez      $v0, .LE00A2188
 /* 3A2B04 E00A2174 0040282D */   daddu    $a1, $v0, $zero
-/* 3A2B08 E00A2178 0C080128 */  jal       func_E02004A0
+/* 3A2B08 E00A2178 0C080128 */  jal       shim_remove_effect
 /* 3A2B0C E00A217C 00000000 */   nop
 /* 3A2B10 E00A2180 08028878 */  j         .LE00A21E0
 /* 3A2B14 E00A2184 00000000 */   nop

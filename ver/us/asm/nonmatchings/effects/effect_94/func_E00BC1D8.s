@@ -8,7 +8,7 @@ glabel func_E00BC1D8
 /* 3BA214 E00BC1E4 4600A08D */  trunc.w.s $f2, $f20
 /* 3BA218 E00BC1E8 44041000 */  mfc1      $a0, $f2
 /* 3BA21C E00BC1EC AFBF0010 */  sw        $ra, 0x10($sp)
-/* 3BA220 E00BC1F0 0C080138 */  jal       func_E02004E0
+/* 3BA220 E00BC1F0 0C080138 */  jal       shim_rand_int
 /* 3BA224 E00BC1F4 00000000 */   nop
 /* 3BA228 E00BC1F8 3C013FE0 */  lui       $at, 0x3fe0
 /* 3BA22C E00BC1FC 44810800 */  mtc1      $at, $f1

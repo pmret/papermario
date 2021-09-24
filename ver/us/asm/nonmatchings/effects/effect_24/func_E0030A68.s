@@ -146,7 +146,7 @@ glabel func_E0030A68
 /* 342DD8 E0030C98 8E05FFE8 */  lw        $a1, -0x18($s0)
 /* 342DDC E0030C9C 8E06FFEC */  lw        $a2, -0x14($s0)
 /* 342DE0 E0030CA0 8E07FFF0 */  lw        $a3, -0x10($s0)
-/* 342DE4 E0030CA4 0C080108 */  jal       func_E0200420
+/* 342DE4 E0030CA4 0C080108 */  jal       shim_guTranslateF
 /* 342DE8 E0030CA8 27DE0003 */   addiu    $fp, $fp, 3
 /* 342DEC E0030CAC 3C0A800B */  lui       $t2, %hi(gCameras)
 /* 342DF0 E0030CB0 254A1D80 */  addiu     $t2, $t2, %lo(gCameras)
@@ -167,11 +167,11 @@ glabel func_E0030A68
 /* 342E2C E0030CEC 46000007 */  neg.s     $f0, $f0
 /* 342E30 E0030CF0 44050000 */  mfc1      $a1, $f0
 /* 342E34 E0030CF4 26F70003 */  addiu     $s7, $s7, 3
-/* 342E38 E0030CF8 0C080104 */  jal       func_E0200410
+/* 342E38 E0030CF8 0C080104 */  jal       shim_guRotateF
 /* 342E3C E0030CFC E7B40010 */   swc1     $f20, 0x10($sp)
 /* 342E40 E0030D00 27A50018 */  addiu     $a1, $sp, 0x18
 /* 342E44 E0030D04 8FA4009C */  lw        $a0, 0x9c($sp)
-/* 342E48 E0030D08 0C080114 */  jal       func_E0200450
+/* 342E48 E0030D08 0C080114 */  jal       shim_guMtxCatF
 /* 342E4C E0030D0C 00A0302D */   daddu    $a2, $a1, $zero
 /* 342E50 E0030D10 27A40018 */  addiu     $a0, $sp, 0x18
 /* 342E54 E0030D14 96C50000 */  lhu       $a1, ($s6)
@@ -179,7 +179,7 @@ glabel func_E0030A68
 /* 342E5C E0030D1C 8C42A674 */  lw        $v0, %lo(gDisplayContext)($v0)
 /* 342E60 E0030D20 00052980 */  sll       $a1, $a1, 6
 /* 342E64 E0030D24 00B32821 */  addu      $a1, $a1, $s3
-/* 342E68 E0030D28 0C080118 */  jal       func_E0200460
+/* 342E68 E0030D28 0C080118 */  jal       shim_guMtxF2L
 /* 342E6C E0030D2C 00452821 */   addu     $a1, $v0, $a1
 /* 342E70 E0030D30 27A40018 */  addiu     $a0, $sp, 0x18
 /* 342E74 E0030D34 8E290000 */  lw        $t1, ($s1)
@@ -201,7 +201,7 @@ glabel func_E0030A68
 /* 342EB4 E0030D74 8E050000 */  lw        $a1, ($s0)
 /* 342EB8 E0030D78 25080001 */  addiu     $t0, $t0, 1
 /* 342EBC E0030D7C AE290000 */  sw        $t1, ($s1)
-/* 342EC0 E0030D80 0C080104 */  jal       func_E0200410
+/* 342EC0 E0030D80 0C080104 */  jal       shim_guRotateF
 /* 342EC4 E0030D84 A6C80000 */   sh       $t0, ($s6)
 /* 342EC8 E0030D88 27A40018 */  addiu     $a0, $sp, 0x18
 /* 342ECC E0030D8C 96C50000 */  lhu       $a1, ($s6)
@@ -209,7 +209,7 @@ glabel func_E0030A68
 /* 342ED4 E0030D94 8C42A674 */  lw        $v0, %lo(gDisplayContext)($v0)
 /* 342ED8 E0030D98 00052980 */  sll       $a1, $a1, 6
 /* 342EDC E0030D9C 00B32821 */  addu      $a1, $a1, $s3
-/* 342EE0 E0030DA0 0C080118 */  jal       func_E0200460
+/* 342EE0 E0030DA0 0C080118 */  jal       shim_guMtxF2L
 /* 342EE4 E0030DA4 00452821 */   addu     $a1, $v0, $a1
 /* 342EE8 E0030DA8 8E240000 */  lw        $a0, ($s1)
 /* 342EEC E0030DAC 96C30000 */  lhu       $v1, ($s6)

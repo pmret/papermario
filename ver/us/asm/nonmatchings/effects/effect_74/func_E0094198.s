@@ -17,7 +17,7 @@ glabel func_E0094198
 /* 392A94 E00941C4 24420001 */  addiu     $v0, $v0, 1
 /* 392A98 E00941C8 04A10005 */  bgez      $a1, .LE00941E0
 /* 392A9C E00941CC AC620020 */   sw       $v0, 0x20($v1)
-/* 392AA0 E00941D0 0C080128 */  jal       func_E02004A0
+/* 392AA0 E00941D0 0C080128 */  jal       shim_remove_effect
 /* 392AA4 E00941D4 00000000 */   nop
 /* 392AA8 E00941D8 080250AD */  j         .LE00942B4
 /* 392AAC E00941DC 00000000 */   nop

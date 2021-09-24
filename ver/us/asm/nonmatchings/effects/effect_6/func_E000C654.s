@@ -23,7 +23,7 @@ glabel func_E000C654
 /* 3287AC E000C69C AE03003C */  sw        $v1, 0x3c($s0)
 /* 3287B0 E000C6A0 04410005 */  bgez      $v0, .LE000C6B8
 /* 3287B4 E000C6A4 AE020040 */   sw       $v0, 0x40($s0)
-/* 3287B8 E000C6A8 0C080128 */  jal       func_E02004A0
+/* 3287B8 E000C6A8 0C080128 */  jal       shim_remove_effect
 /* 3287BC E000C6AC 00000000 */   nop
 /* 3287C0 E000C6B0 080031CD */  j         .LE000C734
 /* 3287C4 E000C6B4 00000000 */   nop

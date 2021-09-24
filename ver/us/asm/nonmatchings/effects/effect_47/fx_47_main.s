@@ -32,7 +32,7 @@ glabel fx_47_main
 /* 36262C E005E06C AFB00028 */  sw        $s0, 0x28($sp)
 /* 362630 E005E070 AFA00010 */  sw        $zero, 0x10($sp)
 /* 362634 E005E074 AFA20014 */  sw        $v0, 0x14($sp)
-/* 362638 E005E078 0C080124 */  jal       func_E0200490
+/* 362638 E005E078 0C080124 */  jal       shim_create_effect_instance
 /* 36263C E005E07C 26310001 */   addiu    $s1, $s1, 1
 /* 362640 E005E080 00112040 */  sll       $a0, $s1, 1
 /* 362644 E005E084 00912021 */  addu      $a0, $a0, $s1
@@ -40,7 +40,7 @@ glabel fx_47_main
 /* 36264C E005E08C 00912023 */  subu      $a0, $a0, $s1
 /* 362650 E005E090 00042080 */  sll       $a0, $a0, 2
 /* 362654 E005E094 0040902D */  daddu     $s2, $v0, $zero
-/* 362658 E005E098 0C08012C */  jal       func_E02004B0
+/* 362658 E005E098 0C08012C */  jal       shim_general_heap_malloc
 /* 36265C E005E09C AE510008 */   sw       $s1, 8($s2)
 /* 362660 E005E0A0 0040802D */  daddu     $s0, $v0, $zero
 /* 362664 E005E0A4 16000003 */  bnez      $s0, .LE005E0B4
@@ -54,7 +54,7 @@ glabel fx_47_main
 /* 36267C E005E0BC 00B12821 */  addu      $a1, $a1, $s1
 /* 362680 E005E0C0 00052880 */  sll       $a1, $a1, 2
 /* 362684 E005E0C4 00B12823 */  subu      $a1, $a1, $s1
-/* 362688 E005E0C8 0C080130 */  jal       func_E02004C0
+/* 362688 E005E0C8 0C080130 */  jal       shim_mem_clear
 /* 36268C E005E0CC 00052880 */   sll      $a1, $a1, 2
 /* 362690 E005E0D0 24020001 */  addiu     $v0, $zero, 1
 /* 362694 E005E0D4 AE130000 */  sw        $s3, ($s0)

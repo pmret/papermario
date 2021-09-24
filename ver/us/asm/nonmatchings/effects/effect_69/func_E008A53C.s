@@ -34,7 +34,7 @@ glabel func_E008A53C
 /* 38CB9C E008A5AC 8E220020 */  lw        $v0, 0x20($s1)
 /* 38CBA0 E008A5B0 04410005 */  bgez      $v0, .LE008A5C8
 /* 38CBA4 E008A5B4 00000000 */   nop
-/* 38CBA8 E008A5B8 0C080128 */  jal       func_E02004A0
+/* 38CBA8 E008A5B8 0C080128 */  jal       shim_remove_effect
 /* 38CBAC E008A5BC 00A0202D */   daddu    $a0, $a1, $zero
 /* 38CBB0 E008A5C0 080229AF */  j         .LE008A6BC
 /* 38CBB4 E008A5C4 00000000 */   nop

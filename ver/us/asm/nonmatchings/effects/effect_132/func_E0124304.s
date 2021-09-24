@@ -102,7 +102,7 @@ glabel func_E0124304
 /* 412BA0 E0124470 14400003 */  bnez      $v0, .LE0124480
 /* 412BA4 E0124474 00000000 */   nop
 .LE0124478:
-/* 412BA8 E0124478 0C080128 */  jal       func_E02004A0
+/* 412BA8 E0124478 0C080128 */  jal       shim_remove_effect
 /* 412BAC E012447C 00000000 */   nop
 .LE0124480:
 /* 412BB0 E0124480 8FBF0010 */  lw        $ra, 0x10($sp)

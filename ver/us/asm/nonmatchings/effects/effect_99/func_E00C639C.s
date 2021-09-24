@@ -36,7 +36,7 @@ glabel func_E00C639C
 /* 3CCDF0 E00C6410 00000000 */   nop
 /* 3CCDF4 E00C6414 16230014 */  bne       $s1, $v1, .LE00C6468
 /* 3CCDF8 E00C6418 00000000 */   nop
-/* 3CCDFC E00C641C 0C080150 */  jal       func_E0200540
+/* 3CCDFC E00C641C 0C080150 */  jal       shim_load_effect
 /* 3CCE00 E00C6420 24040063 */   addiu    $a0, $zero, 0x63
 /* 3CCE04 E00C6424 C6000010 */  lwc1      $f0, 0x10($s0)
 /* 3CCE08 E00C6428 E7A00010 */  swc1      $f0, 0x10($sp)
@@ -59,7 +59,7 @@ glabel func_E00C639C
 /* 3CCE48 E00C6468 8E020020 */  lw        $v0, 0x20($s0)
 /* 3CCE4C E00C646C 04410005 */  bgez      $v0, .LE00C6484
 /* 3CCE50 E00C6470 24020001 */   addiu    $v0, $zero, 1
-/* 3CCE54 E00C6474 0C080128 */  jal       func_E02004A0
+/* 3CCE54 E00C6474 0C080128 */  jal       shim_remove_effect
 /* 3CCE58 E00C6478 0240202D */   daddu    $a0, $s2, $zero
 /* 3CCE5C E00C647C 080319D2 */  j         .LE00C6748
 /* 3CCE60 E00C6480 00000000 */   nop
@@ -81,7 +81,7 @@ glabel func_E00C639C
 .LE00C64B8:
 /* 3CCE98 E00C64B8 144000A3 */  bnez      $v0, .LE00C6748
 /* 3CCE9C E00C64BC 00000000 */   nop
-/* 3CCEA0 E00C64C0 0C080150 */  jal       func_E0200540
+/* 3CCEA0 E00C64C0 0C080150 */  jal       shim_load_effect
 /* 3CCEA4 E00C64C4 24040063 */   addiu    $a0, $zero, 0x63
 /* 3CCEA8 E00C64C8 C6000010 */  lwc1      $f0, 0x10($s0)
 /* 3CCEAC E00C64CC E7A00010 */  swc1      $f0, 0x10($sp)

@@ -29,7 +29,7 @@ glabel func_E00CA248
 /* 3D07A0 E00CA2A0 24420001 */  addiu     $v0, $v0, 1
 /* 3D07A4 E00CA2A4 04610005 */  bgez      $v1, .LE00CA2BC
 /* 3D07A8 E00CA2A8 AE020014 */   sw       $v0, 0x14($s0)
-/* 3D07AC E00CA2AC 0C080128 */  jal       func_E02004A0
+/* 3D07AC E00CA2AC 0C080128 */  jal       shim_remove_effect
 /* 3D07B0 E00CA2B0 00000000 */   nop
 /* 3D07B4 E00CA2B4 0803291B */  j         .LE00CA46C
 /* 3D07B8 E00CA2B8 00000000 */   nop
@@ -43,7 +43,7 @@ glabel func_E00CA248
 /* 3D07D0 E00CA2D0 24020003 */  addiu     $v0, $zero, 3
 /* 3D07D4 E00CA2D4 14A20020 */  bne       $a1, $v0, .LE00CA358
 /* 3D07D8 E00CA2D8 3C028888 */   lui      $v0, %hi(D_8887FFFB)
-/* 3D07DC E00CA2DC 0C080138 */  jal       func_E02004E0
+/* 3D07DC E00CA2DC 0C080138 */  jal       shim_rand_int
 /* 3D07E0 E00CA2E0 2404000A */   addiu    $a0, $zero, 0xa
 /* 3D07E4 E00CA2E4 2442FFFB */  addiu     $v0, $v0, %lo(D_8887FFFB)
 /* 3D07E8 E00CA2E8 C6000044 */  lwc1      $f0, 0x44($s0)
@@ -52,7 +52,7 @@ glabel func_E00CA248
 /* 3D07F4 E00CA2F4 468010A0 */  cvt.s.w   $f2, $f2
 /* 3D07F8 E00CA2F8 46020000 */  add.s     $f0, $f0, $f2
 /* 3D07FC E00CA2FC 2404000A */  addiu     $a0, $zero, 0xa
-/* 3D0800 E00CA300 0C080138 */  jal       func_E02004E0
+/* 3D0800 E00CA300 0C080138 */  jal       shim_rand_int
 /* 3D0804 E00CA304 E6000044 */   swc1     $f0, 0x44($s0)
 /* 3D0808 E00CA308 2442FFFB */  addiu     $v0, $v0, -5
 /* 3D080C E00CA30C 44820000 */  mtc1      $v0, $f0
@@ -141,7 +141,7 @@ glabel func_E00CA248
 /* 3D094C E00CA44C 00000000 */  nop
 /* 3D0950 E00CA450 45010004 */  bc1t      .LE00CA464
 /* 3D0954 E00CA454 AE1101B8 */   sw       $s1, 0x1b8($s0)
-/* 3D0958 E00CA458 0C080154 */  jal       func_E0200550
+/* 3D0958 E00CA458 0C080154 */  jal       shim_sqrtf
 /* 3D095C E00CA45C 00000000 */   nop
 /* 3D0960 E00CA460 46000306 */  mov.s     $f12, $f0
 .LE00CA464:

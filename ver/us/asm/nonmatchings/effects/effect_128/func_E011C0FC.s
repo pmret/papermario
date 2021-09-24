@@ -25,7 +25,7 @@ glabel func_E011C0FC
 /* 406C84 E011C144 24420001 */  addiu     $v0, $v0, 1
 /* 406C88 E011C148 04A10005 */  bgez      $a1, .LE011C160
 /* 406C8C E011C14C AC620014 */   sw       $v0, 0x14($v1)
-/* 406C90 E011C150 0C080128 */  jal       func_E02004A0
+/* 406C90 E011C150 0C080128 */  jal       shim_remove_effect
 /* 406C94 E011C154 00000000 */   nop
 /* 406C98 E011C158 0804705C */  j         .LE011C170
 /* 406C9C E011C15C 00000000 */   nop
