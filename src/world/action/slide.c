@@ -1,7 +1,5 @@
 #include "common.h"
 
-void snd_stop_sound(s32 soundID);
-
 extern f32 D_802B6780;
 extern f32 D_802B6784;
 extern f32 D_802B6788;

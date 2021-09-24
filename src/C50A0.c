@@ -36,7 +36,7 @@ s32 integer_log(s32 number, s32 base) {
 
 INCLUDE_ASM(s32, "C50A0", draw_adjustable_tiled_image);
 
-void sparkle_script_init(ItemEntity* itemEntity, s32 state) {
+void sparkle_script_init(ItemEntity* itemEntity, s32* state) {
     itemEntity->currentState = state;
     itemEntity->framesLeft = 1;
     itemEntity->sequenceStart = state;
@@ -133,8 +133,6 @@ void init_item_entity_list(void) {
 
 INCLUDE_ASM(s32, "C50A0", item_entity_load);
 
-s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign,
-                     s32 pickupVar);
 INCLUDE_ASM(s32, "C50A0", make_item_entity, s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay,
             s32 facingAngleSign, s32 pickupVar);
 

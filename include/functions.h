@@ -504,8 +504,9 @@ void func_80149A6C(s32, s32);
 void func_800EF300(void);
 void enable_player_shadow(void);
 s32 get_msg_lines(s32 messageID);
-void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, s32, PopupMessageCallback drawContents, PopupMessage* popup, s32 parent);
+void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, s32, void* drawContents, PopupMessage* popup, s32 parent);
 void set_window_update(s32 panelID, s32);
 void snd_stop_sound(SoundID soundID);
+void partner_disable_input(void);
 
 #endif
