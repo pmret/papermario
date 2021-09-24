@@ -127,7 +127,7 @@ glabel func_802417C4_BA1EF4
 /* BA20BC 8024198C 0240202D */  daddu     $a0, $s2, $zero
 .L80241990:
 /* BA20C0 80241990 0260282D */  daddu     $a1, $s3, $zero
-/* BA20C4 80241994 0C09055E */  jal       func_80241578_BA1CA8
+/* BA20C4 80241994 0C09055E */  jal       mim_05_UnkNpcAIFunc33
 /* BA20C8 80241998 0280302D */   daddu    $a2, $s4, $zero
 /* BA20CC 8024199C 8E430070 */  lw        $v1, 0x70($s2)
 /* BA20D0 802419A0 2402000D */  addiu     $v0, $zero, 0xd

@@ -22,7 +22,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_80240D48_C867F8);
 
 #include "world/common/UnkNpcDurationFlagFunc3.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C85DC0", func_80241818_C872C8);
+#include "world/common/UnkNpcAIFunc33.inc.c"
 
 #include "world/common/UnkNpcDurationFlagFunc2.inc.c"
 

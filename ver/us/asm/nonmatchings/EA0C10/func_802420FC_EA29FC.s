@@ -268,7 +268,7 @@ glabel func_802420FC_EA29FC
 /* EA2DB4 802424B4 00000000 */   nop
 .L802424B8:
 /* EA2DB8 802424B8 0280282D */  daddu     $a1, $s4, $zero
-/* EA2DBC 802424BC 0C09081F */  jal       func_8024207C_EA297C
+/* EA2DBC 802424BC 0C09081F */  jal       EA0C10_set_script_owner_npc_col_height
 /* EA2DC0 802424C0 02A0302D */   daddu    $a2, $s5, $zero
 /* EA2DC4 802424C4 08090935 */  j         .L802424D4
 /* EA2DC8 802424C8 00000000 */   nop

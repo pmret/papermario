@@ -17,7 +17,7 @@ glabel func_80240600_ECA300
 /* ECA330 80240630 F7B60050 */  sdc1      $f22, 0x50($sp)
 /* ECA334 80240634 F7B40048 */  sdc1      $f20, 0x48($sp)
 /* ECA338 80240638 8ED3000C */  lw        $s3, 0xc($s6)
-/* ECA33C 8024063C 0C00F94D */  jal       func_8003E534
+/* ECA33C 8024063C 0C00F94D */  jal       dead_get_npc_safe
 /* ECA340 80240640 2404FFFC */   addiu    $a0, $zero, -4
 /* ECA344 80240644 27A50018 */  addiu     $a1, $sp, 0x18
 /* ECA348 80240648 3C048008 */  lui       $a0, %hi(dead_gCurrentCameraID)

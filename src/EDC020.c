@@ -11,7 +11,7 @@ INCLUDE_ASM(s32, "EDC020", func_8024027C_EDC25C);
 
 #include "world/common/DeadGetItemName.inc.c"
 
-INCLUDE_ASM(s32, "EDC020", func_80240394_EDC374);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "EDC020", func_802403F0_EDC3D0);
 

@@ -123,7 +123,7 @@ INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80241FD0_BAF910);
 
 #include "world/common/UnkNpcDurationFlagFunc3.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80242AA0_BB03E0);
+#include "world/common/UnkNpcAIFunc33.inc.c"
 
 #include "world/common/UnkNpcDurationFlagFunc2.inc.c"
 

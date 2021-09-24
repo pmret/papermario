@@ -17,7 +17,7 @@ glabel func_802406E0_EED7E0
 /* EED810 80240710 F7B60050 */  sdc1      $f22, 0x50($sp)
 /* EED814 80240714 F7B40048 */  sdc1      $f20, 0x48($sp)
 /* EED818 80240718 8ED3000C */  lw        $s3, 0xc($s6)
-/* EED81C 8024071C 0C00F94D */  jal       func_8003E534
+/* EED81C 8024071C 0C00F94D */  jal       dead_get_npc_safe
 /* EED820 80240720 2404FFFC */   addiu    $a0, $zero, -4
 /* EED824 80240724 27A50018 */  addiu     $a1, $sp, 0x18
 /* EED828 80240728 3C048008 */  lui       $a0, %hi(dead_gCurrentCameraID)

@@ -36,7 +36,7 @@ void func_80241764_EE7D14(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 
 INCLUDE_ASM(s32, "EE70C0", func_80241E1C_EE83CC);
 
-INCLUDE_ASM(s32, "EE70C0", func_80242034_EE85E4);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "EE70C0", func_80242090_EE8640);
 

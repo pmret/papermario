@@ -13,7 +13,7 @@ INCLUDE_ASM(s32, "ECAA80", func_802414C8_ECB1C8);
 
 INCLUDE_ASM(s32, "ECAA80", func_8024150C_ECB20C);
 
-INCLUDE_ASM(s32, "ECAA80", func_80241770_ECB470);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "ECAA80", func_802417CC_ECB4CC);
 

@@ -42,5 +42,8 @@
 #define func_8004A73C func_8004EB8C
 #define gCurrentCameraID dead_gCurrentCameraID
 #define add_vec2D_polar dead_add_vec2D_polar
+#define gCurrentCamID dead_gCurrentCamID
+#define gPartnerActionStatus dead_gPartnerActionStatus
+#define get_npc_safe dead_get_npc_safe
 
 #endif

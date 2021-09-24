@@ -4,7 +4,7 @@
 glabel func_802405A8_ECA2A8
 /* ECA2A8 802405A8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* ECA2AC 802405AC AFBF0018 */  sw        $ra, 0x18($sp)
-/* ECA2B0 802405B0 0C00F94D */  jal       func_8003E534
+/* ECA2B0 802405B0 0C00F94D */  jal       dead_get_npc_safe
 /* ECA2B4 802405B4 2404FFFC */   addiu    $a0, $zero, -4
 /* ECA2B8 802405B8 C444003C */  lwc1      $f4, 0x3c($v0)
 /* ECA2BC 802405BC 3C014148 */  lui       $at, 0x4148

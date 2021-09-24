@@ -9,7 +9,7 @@ INCLUDE_ASM(s32, "EB1170", func_80240310_EB1170);
 
 #include "world/common/DeadGetItemName.inc.c"
 
-INCLUDE_ASM(s32, "EB1170", func_80240428_EB1288);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "EB1170", func_80240484_EB12E4);
 

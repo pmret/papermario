@@ -51,7 +51,7 @@ INCLUDE_ASM(s32, "EDEA00", func_80241DE4_EE07A4);
 
 #include "world/common/UnkNpcAIFunc12.inc.c"
 
-INCLUDE_ASM(s32, "EDEA00", func_80242604_EE0FC4);
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "EDEA00", func_80242684_EE1044);
 

@@ -127,7 +127,7 @@ glabel func_80241754_D19F34
 /* D1A0FC 8024191C 0240202D */  daddu     $a0, $s2, $zero
 .L80241920:
 /* D1A100 80241920 0260282D */  daddu     $a1, $s3, $zero
-/* D1A104 80241924 0C090542 */  jal       func_80241508_D19CE8
+/* D1A104 80241924 0C090542 */  jal       sam_05_UnkNpcAIFunc33
 /* D1A108 80241928 0280302D */   daddu    $a2, $s4, $zero
 /* D1A10C 8024192C 8E430070 */  lw        $v1, 0x70($s2)
 /* D1A110 80241930 2402000D */  addiu     $v0, $zero, 0xd

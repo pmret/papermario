@@ -306,7 +306,7 @@ glabel func_80242AF0_EE14B0
 .L80242F34:
 /* EE18F4 80242F34 02A0202D */  daddu     $a0, $s5, $zero
 /* EE18F8 80242F38 0260282D */  daddu     $a1, $s3, $zero
-/* EE18FC 80242F3C 0C090981 */  jal       func_80242604_EE0FC4
+/* EE18FC 80242F3C 0C090981 */  jal       EDEA00_set_script_owner_npc_col_height
 /* EE1900 80242F40 0280302D */   daddu    $a2, $s4, $zero
 /* EE1904 80242F44 08090CFA */  j         .L802433E8
 /* EE1908 80242F48 00000000 */   nop

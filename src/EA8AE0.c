@@ -45,7 +45,7 @@ INCLUDE_ASM(s32, "EA8AE0", func_80241468_EA9F48);
 
 #include "world/common/DeadGetItemName.inc.c"
 
-INCLUDE_ASM(s32, "EA8AE0", func_80241580_EAA060);
+#include "world/common/GetNpcCollisionHeight.inc.c"
 
 INCLUDE_ASM(s32, "EA8AE0", func_802415DC_EAA0BC);
 
