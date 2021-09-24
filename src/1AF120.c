@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 ApiStatus GetDamageIntensity(Evt* script, s32 isInitialCall) {
     if (gBattleStatus.lastAttackDamage < 4) {

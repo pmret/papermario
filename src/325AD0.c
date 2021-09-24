@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 u32 D_E0200690 = 0x1E6D3457;
 
