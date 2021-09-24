@@ -9,7 +9,7 @@ glabel func_80242608_EA2F08
 /* EA2F18 80242618 AFB10014 */  sw        $s1, 0x14($sp)
 /* EA2F1C 8024261C 8C44014C */  lw        $a0, 0x14c($v0)
 /* EA2F20 80242620 8C510148 */  lw        $s1, 0x148($v0)
-/* EA2F24 80242624 0C00F94D */  jal       func_8003E534
+/* EA2F24 80242624 0C00F94D */  jal       dead_get_npc_safe
 /* EA2F28 80242628 00A0802D */   daddu    $s0, $a1, $zero
 /* EA2F2C 8024262C 56000001 */  bnel      $s0, $zero, .L80242634
 /* EA2F30 80242630 A04000AB */   sb       $zero, 0xab($v0)

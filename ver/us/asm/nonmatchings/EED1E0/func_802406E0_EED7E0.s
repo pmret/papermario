@@ -17,11 +17,11 @@ glabel func_802406E0_EED7E0
 /* EED810 80240710 F7B60050 */  sdc1      $f22, 0x50($sp)
 /* EED814 80240714 F7B40048 */  sdc1      $f20, 0x48($sp)
 /* EED818 80240718 8ED3000C */  lw        $s3, 0xc($s6)
-/* EED81C 8024071C 0C00F94D */  jal       func_8003E534
+/* EED81C 8024071C 0C00F94D */  jal       dead_get_npc_safe
 /* EED820 80240720 2404FFFC */   addiu    $a0, $zero, -4
 /* EED824 80240724 27A50018 */  addiu     $a1, $sp, 0x18
-/* EED828 80240728 3C048008 */  lui       $a0, %hi(D_8007C760)
-/* EED82C 8024072C 8C84C760 */  lw        $a0, %lo(D_8007C760)($a0)
+/* EED828 80240728 3C048008 */  lui       $a0, %hi(dead_gCurrentCameraID)
+/* EED82C 8024072C 8C84C760 */  lw        $a0, %lo(dead_gCurrentCameraID)($a0)
 /* EED830 80240730 27A6001C */  addiu     $a2, $sp, 0x1c
 /* EED834 80240734 00041880 */  sll       $v1, $a0, 2
 /* EED838 80240738 00641821 */  addu      $v1, $v1, $a0
@@ -93,7 +93,7 @@ glabel func_802406E0_EED7E0
 /* EED938 80240838 4406A000 */  mfc1      $a2, $f20
 /* EED93C 8024083C 8E870000 */  lw        $a3, ($s4)
 /* EED940 80240840 02532821 */  addu      $a1, $s2, $s3
-/* EED944 80240844 0C00ACA3 */  jal       func_8002B28C
+/* EED944 80240844 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* EED948 80240848 AFA00020 */   sw       $zero, 0x20($sp)
 /* EED94C 8024084C C7A2001C */  lwc1      $f2, 0x1c($sp)
 /* EED950 80240850 C7A40020 */  lwc1      $f4, 0x20($sp)
@@ -169,7 +169,7 @@ glabel func_802406E0_EED7E0
 /* EEDA58 80240958 E6160020 */  swc1      $f22, 0x20($s0)
 /* EEDA5C 8024095C 8E870000 */  lw        $a3, ($s4)
 /* EEDA60 80240960 02532821 */  addu      $a1, $s2, $s3
-/* EEDA64 80240964 0C00ACA3 */  jal       func_8002B28C
+/* EEDA64 80240964 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* EEDA68 80240968 E7B60020 */   swc1     $f22, 0x20($sp)
 /* EEDA6C 8024096C C7A4001C */  lwc1      $f4, 0x1c($sp)
 /* EEDA70 80240970 C7A00020 */  lwc1      $f0, 0x20($sp)
@@ -210,7 +210,7 @@ glabel func_802406E0_EED7E0
 /* EEDAF4 802409F4 E6160020 */  swc1      $f22, 0x20($s0)
 /* EEDAF8 802409F8 8E870000 */  lw        $a3, ($s4)
 /* EEDAFC 802409FC 02532821 */  addu      $a1, $s2, $s3
-/* EEDB00 80240A00 0C00ACA3 */  jal       func_8002B28C
+/* EEDB00 80240A00 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* EEDB04 80240A04 E7B60020 */   swc1     $f22, 0x20($sp)
 /* EEDB08 80240A08 C7A4001C */  lwc1      $f4, 0x1c($sp)
 /* EEDB0C 80240A0C C7A00020 */  lwc1      $f0, 0x20($sp)

@@ -40,8 +40,8 @@ glabel func_802415DC_EAA0BC
 /* EAA148 80241668 4680C620 */  cvt.s.w   $f24, $f24
 /* EAA14C 8024166C 3C128011 */  lui       $s2, %hi(dead_gPlayerStatus)
 /* EAA150 80241670 26527578 */  addiu     $s2, $s2, %lo(dead_gPlayerStatus)
-/* EAA154 80241674 3C038008 */  lui       $v1, %hi(D_8007C760)
-/* EAA158 80241678 8C63C760 */  lw        $v1, %lo(D_8007C760)($v1)
+/* EAA154 80241674 3C038008 */  lui       $v1, %hi(dead_gCurrentCameraID)
+/* EAA158 80241678 8C63C760 */  lw        $v1, %lo(dead_gCurrentCameraID)($v1)
 /* EAA15C 8024167C C64200A8 */  lwc1      $f2, 0xa8($s2)
 /* EAA160 80241680 44800000 */  mtc1      $zero, $f0
 /* EAA164 80241684 00031080 */  sll       $v0, $v1, 2

@@ -250,25 +250,25 @@ glabel func_802420FC_EA29FC
 .L80242478:
 /* EA2D78 80242478 0260202D */  daddu     $a0, $s3, $zero
 /* EA2D7C 8024247C 0280282D */  daddu     $a1, $s4, $zero
-/* EA2D80 80242480 0C09075A */  jal       func_80241D68_EA2668
+/* EA2D80 80242480 0C09075A */  jal       EA0C10_set_script_owner_npc_anim
 /* EA2D84 80242484 02A0302D */   daddu    $a2, $s5, $zero
 /* EA2D88 80242488 0260202D */  daddu     $a0, $s3, $zero
 .L8024248C:
 /* EA2D8C 8024248C 0280282D */  daddu     $a1, $s4, $zero
-/* EA2D90 80242490 0C090779 */  jal       func_80241DE4_EA26E4
+/* EA2D90 80242490 0C090779 */  jal       EA0C10_UnkDistFunc
 /* EA2D94 80242494 02A0302D */   daddu    $a2, $s5, $zero
 /* EA2D98 80242498 08090935 */  j         .L802424D4
 /* EA2D9C 8024249C 00000000 */   nop
 .L802424A0:
 /* EA2DA0 802424A0 0260202D */  daddu     $a0, $s3, $zero
 /* EA2DA4 802424A4 0280282D */  daddu     $a1, $s4, $zero
-/* EA2DA8 802424A8 0C0907C6 */  jal       func_80241F18_EA2818
+/* EA2DA8 802424A8 0C0907C6 */  jal       EA0C10_UnkNpcAIFunc12
 /* EA2DAC 802424AC 02A0302D */   daddu    $a2, $s5, $zero
 /* EA2DB0 802424B0 08090935 */  j         .L802424D4
 /* EA2DB4 802424B4 00000000 */   nop
 .L802424B8:
 /* EA2DB8 802424B8 0280282D */  daddu     $a1, $s4, $zero
-/* EA2DBC 802424BC 0C09081F */  jal       func_8024207C_EA297C
+/* EA2DBC 802424BC 0C09081F */  jal       EA0C10_set_script_owner_npc_col_height
 /* EA2DC0 802424C0 02A0302D */   daddu    $a2, $s5, $zero
 /* EA2DC4 802424C4 08090935 */  j         .L802424D4
 /* EA2DC8 802424C8 00000000 */   nop

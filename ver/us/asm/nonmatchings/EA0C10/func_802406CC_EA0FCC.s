@@ -93,7 +93,7 @@ glabel func_802406CC_EA0FCC
 /* EA111C 8024081C 44070000 */  mfc1      $a3, $f0
 /* EA1120 80240820 27A50014 */  addiu     $a1, $sp, 0x14
 /* EA1124 80240824 E7A60010 */  swc1      $f6, 0x10($sp)
-/* EA1128 80240828 0C00ACA3 */  jal       func_8002B28C
+/* EA1128 80240828 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* EA112C 8024082C E7A40014 */   swc1     $f4, 0x14($sp)
 /* EA1130 80240830 C7A00010 */  lwc1      $f0, 0x10($sp)
 /* EA1134 80240834 4600020D */  trunc.w.s $f8, $f0

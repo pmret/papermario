@@ -45,13 +45,13 @@ INCLUDE_ASM(s32, "EDEA00", func_80241B94_EE0554);
 
 INCLUDE_ASM(s32, "EDEA00", func_80241DE4_EE07A4);
 
-INCLUDE_ASM(s32, "EDEA00", func_802422F0_EE0CB0);
+#include "world/common/set_script_owner_npc_anim.inc.c"
 
-INCLUDE_ASM(s32, "EDEA00", func_8024236C_EE0D2C);
+#include "world/common/UnkDistFunc.inc.c"
 
-INCLUDE_ASM(s32, "EDEA00", func_802424A0_EE0E60);
+#include "world/common/UnkNpcAIFunc12.inc.c"
 
-INCLUDE_ASM(s32, "EDEA00", func_80242604_EE0FC4);
+#include "world/common/set_script_owner_npc_col_height.inc.c"
 
 INCLUDE_ASM(s32, "EDEA00", func_80242684_EE1044);
 

@@ -453,7 +453,7 @@ void set_curtain_fade_goal(f32 fade);
 void set_curtain_fade(f32 fade);
 
 // Dead functions:
-Npc* func_8003E534(NpcID npcId); // get_npc_safe
+//Npc* dead_get_npc_safe(NpcID npcId); // get_npc_safe
 void func_80077BD0(s32, s32, s32, s32, s32, s32);
 void func_8006CAC0(float mf[4][4], float x, float y, float z);
 

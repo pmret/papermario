@@ -4,7 +4,7 @@
 glabel func_80240688_EED788
 /* EED788 80240688 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* EED78C 8024068C AFBF0018 */  sw        $ra, 0x18($sp)
-/* EED790 80240690 0C00F94D */  jal       func_8003E534
+/* EED790 80240690 0C00F94D */  jal       dead_get_npc_safe
 /* EED794 80240694 2404FFFC */   addiu    $a0, $zero, -4
 /* EED798 80240698 C444003C */  lwc1      $f4, 0x3c($v0)
 /* EED79C 8024069C 3C014148 */  lui       $at, 0x4148
