@@ -47,7 +47,7 @@ glabel func_802403EC_EA0CEC
 /* EA0D94 80240494 0000302D */  daddu     $a2, $zero, $zero
 /* EA0D98 80240498 AFA30020 */  sw        $v1, 0x20($sp)
 /* EA0D9C 8024049C 2442FFFF */  addiu     $v0, $v0, -1
-/* EA0DA0 802404A0 0C01D444 */  jal       func_80075110
+/* EA0DA0 802404A0 0C01D444 */  jal       dead_fx_emote
 /* EA0DA4 802404A4 AFA2001C */   sw       $v0, 0x1c($sp)
 /* EA0DA8 802404A8 24020021 */  addiu     $v0, $zero, 0x21
 .L802404AC:

@@ -41,7 +41,7 @@ glabel func_802413AC_EDFD6C
 /* EDFDF4 80241434 E7A60024 */  swc1      $f6, 0x24($sp)
 /* EDFDF8 80241438 AFA20010 */  sw        $v0, 0x10($sp)
 /* EDFDFC 8024143C 8C840080 */  lw        $a0, 0x80($a0)
-/* EDFE00 80241440 0C03908F */  jal       func_800E423C
+/* EDFE00 80241440 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EDFE04 80241444 27A70020 */   addiu    $a3, $sp, 0x20
 /* EDFE08 80241448 C7A20024 */  lwc1      $f2, 0x24($sp)
 /* EDFE0C 8024144C 3C014059 */  lui       $at, 0x4059

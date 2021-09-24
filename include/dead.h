@@ -18,5 +18,27 @@
 #define clamp_angle dead_clamp_angle
 #define rand_int dead_rand_int
 #define gItemTable dead_gItemTable
+#define set_screen_overlay_params_back dead_set_screen_overlay_params_back
+#define get_npc_by_index dead_get_npc_by_index
+#define dist2D dead_dist2D
+#define sin_deg dead_sin_deg
+#define cos_deg dead_cos_deg
+#define gPlayerStatus dead_gPlayerStatus
+#define gPlayerActionState dead_gPlayerActionState
+#define is_point_within_region dead_is_point_within_region
+#define npc_raycast_down_sides dead_npc_raycast_down_sides
+#define func_800490B4 func_8004D1A4
+#define fx_emote dead_fx_emote
+#define ai_enemy_play_sound dead_ai_enemy_play_sound
+#define npc_move_heading dead_npc_move_heading
+#define get_clamped_angle_diff dead_get_clamped_angle_diff
+#define get_enemy dead_get_enemy
+#define npc_test_move_simple_with_slipping dead_npc_test_move_simple_with_slipping
+#define get_screen_coords dead_get_screen_coords
+#define func_800495A0 func_800495A0
+#define func_8004DAD8 func_800496B8
+#define func_8004D9C0 func_800496B8
+#define func_8004E024 func_80049C04
+#define func_8004A73C func_8004EB8C
 
 #endif

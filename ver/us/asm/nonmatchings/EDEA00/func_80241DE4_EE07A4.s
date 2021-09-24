@@ -132,7 +132,7 @@ glabel func_80241DE4_EE07A4
 /* EE097C 80241FBC E640000C */   swc1     $f0, 0xc($s2)
 /* EE0980 80241FC0 0440000F */  bltz      $v0, .L80242000
 /* EE0984 80241FC4 AE62007C */   sw       $v0, 0x7c($s3)
-/* EE0988 80241FC8 0C010ABD */  jal       func_80042AF4
+/* EE0988 80241FC8 0C010ABD */  jal       dead_get_enemy
 /* EE098C 80241FCC 0040202D */   daddu    $a0, $v0, $zero
 /* EE0990 80241FD0 3C030049 */  lui       $v1, 0x49
 /* EE0994 80241FD4 0040202D */  daddu     $a0, $v0, $zero
@@ -206,7 +206,7 @@ glabel func_80241DE4_EE07A4
 /* EE0A80 802420C0 00021400 */  sll       $v0, $v0, 0x10
 /* EE0A84 802420C4 1C400027 */  bgtz      $v0, .L80242164
 /* EE0A88 802420C8 00000000 */   nop
-/* EE0A8C 802420CC 0C010ABD */  jal       func_80042AF4
+/* EE0A8C 802420CC 0C010ABD */  jal       dead_get_enemy
 /* EE0A90 802420D0 8E64007C */   lw       $a0, 0x7c($s3)
 /* EE0A94 802420D4 24030002 */  addiu     $v1, $zero, 2
 /* EE0A98 802420D8 AC430094 */  sw        $v1, 0x94($v0)
@@ -222,7 +222,7 @@ glabel func_80241DE4_EE07A4
 /* EE0ABC 802420FC 3C020049 */   lui      $v0, 0x49
 /* EE0AC0 80242100 34420015 */  ori       $v0, $v0, 0x15
 /* EE0AC4 80242104 AE420028 */  sw        $v0, 0x28($s2)
-/* EE0AC8 80242108 0C010ABD */  jal       func_80042AF4
+/* EE0AC8 80242108 0C010ABD */  jal       dead_get_enemy
 /* EE0ACC 8024210C 8E64007C */   lw       $a0, 0x7c($s3)
 /* EE0AD0 80242110 24030003 */  addiu     $v1, $zero, 3
 /* EE0AD4 80242114 AC430094 */  sw        $v1, 0x94($v0)
@@ -266,7 +266,7 @@ glabel func_80241DE4_EE07A4
 /* EE0B60 802421A0 8E020000 */  lw        $v0, ($s0)
 /* EE0B64 802421A4 E640000C */  swc1      $f0, 0xc($s2)
 /* EE0B68 802421A8 C44C0028 */  lwc1      $f12, 0x28($v0)
-/* EE0B6C 802421AC 0C00AC71 */  jal       func_8002B1C4
+/* EE0B6C 802421AC 0C00AC71 */  jal       dead_dist2D
 /* EE0B70 802421B0 C44E0030 */   lwc1     $f14, 0x30($v0)
 /* EE0B74 802421B4 C6A20008 */  lwc1      $f2, 8($s5)
 /* EE0B78 802421B8 468010A0 */  cvt.s.w   $f2, $f2
@@ -284,7 +284,7 @@ glabel func_80241DE4_EE07A4
 /* EE0BA8 802421E8 E7A20018 */  swc1      $f2, 0x18($sp)
 /* EE0BAC 802421EC 8EA40004 */  lw        $a0, 4($s5)
 /* EE0BB0 802421F0 8E470038 */  lw        $a3, 0x38($s2)
-/* EE0BB4 802421F4 0C013431 */  jal       func_8004D0C4
+/* EE0BB4 802421F4 0C013431 */  jal       dead_is_point_within_region
 /* EE0BB8 802421F8 46000506 */   mov.s    $f20, $f0
 /* EE0BBC 802421FC 14400031 */  bnez      $v0, .L802422C4
 /* EE0BC0 80242200 0000102D */   daddu    $v0, $zero, $zero
@@ -335,7 +335,7 @@ glabel func_80241DE4_EE07A4
 /* EE0C6C 802422AC 44050000 */  mfc1      $a1, $f0
 /* EE0C70 802422B0 8E46000C */  lw        $a2, 0xc($s2)
 /* EE0C74 802422B4 0240202D */  daddu     $a0, $s2, $zero
-/* EE0C78 802422B8 0C00F909 */  jal       func_8003E424
+/* EE0C78 802422B8 0C00F909 */  jal       dead_npc_move_heading
 /* EE0C7C 802422BC AC850018 */   sw       $a1, 0x18($a0)
 /* EE0C80 802422C0 0000102D */  daddu     $v0, $zero, $zero
 .L802422C4:

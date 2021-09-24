@@ -147,7 +147,7 @@ glabel func_8024299C_EF4FAC
 /* EF51B8 80242BA8 AFA20020 */  sw        $v0, 0x20($sp)
 /* EF51BC 80242BAC E7A00010 */  swc1      $f0, 0x10($sp)
 /* EF51C0 80242BB0 E7A20014 */  swc1      $f2, 0x14($sp)
-/* EF51C4 80242BB4 0C01D444 */  jal       func_80075110
+/* EF51C4 80242BB4 0C01D444 */  jal       dead_fx_emote
 /* EF51C8 80242BB8 E7A40018 */   swc1     $f4, 0x18($sp)
 /* EF51CC 80242BBC 8E4200CC */  lw        $v0, 0xcc($s2)
 /* EF51D0 80242BC0 8C420000 */  lw        $v0, ($v0)
@@ -166,7 +166,7 @@ glabel func_8024299C_EF4FAC
 /* EF51FC 80242BEC 8E250038 */  lw        $a1, 0x38($s1)
 /* EF5200 80242BF0 8E26003C */  lw        $a2, 0x3c($s1)
 /* EF5204 80242BF4 8E270040 */  lw        $a3, 0x40($s1)
-/* EF5208 80242BF8 0C00BF2F */  jal       func_8002FCBC
+/* EF5208 80242BF8 0C00BF2F */  jal       dead_get_screen_coords
 /* EF520C 80242BFC 0000202D */   daddu    $a0, $zero, $zero
 /* EF5210 80242C00 8EA20070 */  lw        $v0, 0x70($s5)
 /* EF5214 80242C04 28420064 */  slti      $v0, $v0, 0x64
@@ -286,12 +286,12 @@ glabel func_8024299C_EF4FAC
 /* EF53AC 80242D9C 00000000 */   nop
 .L80242DA0:
 /* EF53B0 80242DA0 0260282D */  daddu     $a1, $s3, $zero
-/* EF53B4 80242DA4 0C090867 */  jal       func_8024219C_EF47AC
+/* EF53B4 80242DA4 0C090867 */  jal       EF2680_set_script_owner_npc_anim
 /* EF53B8 80242DA8 0280302D */   daddu    $a2, $s4, $zero
 .L80242DAC:
 /* EF53BC 80242DAC 02A0202D */  daddu     $a0, $s5, $zero
 /* EF53C0 80242DB0 0260282D */  daddu     $a1, $s3, $zero
-/* EF53C4 80242DB4 0C090886 */  jal       func_80242218_EF4828
+/* EF53C4 80242DB4 0C090886 */  jal       EF2680_UnkDistFunc
 /* EF53C8 80242DB8 0280302D */   daddu    $a2, $s4, $zero
 /* EF53CC 80242DBC 96420086 */  lhu       $v0, 0x86($s2)
 /* EF53D0 80242DC0 08090CA5 */  j         .L80243294
@@ -299,14 +299,14 @@ glabel func_8024299C_EF4FAC
 .L80242DC8:
 /* EF53D8 80242DC8 02A0202D */  daddu     $a0, $s5, $zero
 /* EF53DC 80242DCC 0260282D */  daddu     $a1, $s3, $zero
-/* EF53E0 80242DD0 0C0908D3 */  jal       func_8024234C_EF495C
+/* EF53E0 80242DD0 0C0908D3 */  jal       EF2680_UnkNpcAIFunc12
 /* EF53E4 80242DD4 0280302D */   daddu    $a2, $s4, $zero
 /* EF53E8 80242DD8 08090CA5 */  j         .L80243294
 /* EF53EC 80242DDC 00000000 */   nop
 .L80242DE0:
 /* EF53F0 80242DE0 02A0202D */  daddu     $a0, $s5, $zero
 /* EF53F4 80242DE4 0260282D */  daddu     $a1, $s3, $zero
-/* EF53F8 80242DE8 0C09092C */  jal       func_802424B0_EF4AC0
+/* EF53F8 80242DE8 0C09092C */  jal       EF2680_set_script_owner_npc_col_height
 /* EF53FC 80242DEC 0280302D */   daddu    $a2, $s4, $zero
 /* EF5400 80242DF0 08090CA5 */  j         .L80243294
 /* EF5404 80242DF4 00000000 */   nop
@@ -314,7 +314,7 @@ glabel func_8024299C_EF4FAC
 /* EF5408 80242DF8 8E430094 */  lw        $v1, 0x94($s2)
 /* EF540C 80242DFC 14620125 */  bne       $v1, $v0, .L80243294
 /* EF5410 80242E00 00000000 */   nop
-/* EF5414 80242E04 0C010ABD */  jal       func_80042AF4
+/* EF5414 80242E04 0C010ABD */  jal       dead_get_enemy
 /* EF5418 80242E08 8E440098 */   lw       $a0, 0x98($s2)
 /* EF541C 80242E0C 0C00F92F */  jal       dead_get_npc_unsafe
 /* EF5420 80242E10 84440008 */   lh       $a0, 8($v0)
@@ -433,13 +433,13 @@ glabel func_8024299C_EF4FAC
 /* EF55D4 80242FC4 46800020 */  cvt.s.w   $f0, $f0
 /* EF55D8 80242FC8 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* EF55DC 80242FCC 8E240080 */  lw        $a0, 0x80($s1)
-/* EF55E0 80242FD0 0C0394C1 */  jal       func_800E5304
+/* EF55E0 80242FD0 0C0394C1 */  jal       dead_npc_test_move_simple_with_slipping
 /* EF55E4 80242FD4 27A70060 */   addiu    $a3, $sp, 0x60
 /* EF55E8 80242FD8 54400005 */  bnel      $v0, $zero, .L80242FF0
 /* EF55EC 80242FDC AE200018 */   sw       $zero, 0x18($s1)
 /* EF55F0 80242FE0 8E250018 */  lw        $a1, 0x18($s1)
 /* EF55F4 80242FE4 8E26000C */  lw        $a2, 0xc($s1)
-/* EF55F8 80242FE8 0C00F909 */  jal       func_8003E424
+/* EF55F8 80242FE8 0C00F909 */  jal       dead_npc_move_heading
 /* EF55FC 80242FEC 0220202D */   daddu    $a0, $s1, $zero
 .L80242FF0:
 /* EF5600 80242FF0 C620001C */  lwc1      $f0, 0x1c($s1)
@@ -475,7 +475,7 @@ glabel func_8024299C_EF4FAC
 /* EF5678 80243068 E7A00064 */  swc1      $f0, 0x64($sp)
 /* EF567C 8024306C AFA20010 */  sw        $v0, 0x10($sp)
 /* EF5680 80243070 8E240080 */  lw        $a0, 0x80($s1)
-/* EF5684 80243074 0C03908F */  jal       func_800E423C
+/* EF5684 80243074 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EF5688 80243078 27A70060 */   addiu    $a3, $sp, 0x60
 /* EF568C 8024307C 10400057 */  beqz      $v0, .L802431DC
 /* EF5690 80243080 00000000 */   nop

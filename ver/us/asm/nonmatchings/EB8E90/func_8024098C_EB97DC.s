@@ -44,7 +44,7 @@ glabel func_8024098C_EB97DC
 /* EB9878 80240A28 AFA20020 */  sw        $v0, 0x20($sp)
 /* EB987C 80240A2C E7A00010 */  swc1      $f0, 0x10($sp)
 /* EB9880 80240A30 E7A20014 */  swc1      $f2, 0x14($sp)
-/* EB9884 80240A34 0C01D444 */  jal       func_80075110
+/* EB9884 80240A34 0C01D444 */  jal       dead_fx_emote
 /* EB9888 80240A38 E7A40018 */   swc1     $f4, 0x18($sp)
 /* EB988C 80240A3C 8E4200CC */  lw        $v0, 0xcc($s2)
 /* EB9890 80240A40 8C430000 */  lw        $v1, ($v0)
@@ -58,7 +58,7 @@ glabel func_8024098C_EB97DC
 /* EB98AC 80240A5C 24050001 */   addiu    $a1, $zero, 1
 /* EB98B0 80240A60 8E050018 */  lw        $a1, 0x18($s0)
 /* EB98B4 80240A64 8E06000C */  lw        $a2, 0xc($s0)
-/* EB98B8 80240A68 0C00F909 */  jal       func_8003E424
+/* EB98B8 80240A68 0C00F909 */  jal       dead_npc_move_heading
 /* EB98BC 80240A6C 0200202D */   daddu    $a0, $s0, $zero
 /* EB98C0 80240A70 8602008E */  lh        $v0, 0x8e($s0)
 /* EB98C4 80240A74 9603008E */  lhu       $v1, 0x8e($s0)

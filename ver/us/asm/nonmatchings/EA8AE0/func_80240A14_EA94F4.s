@@ -9,7 +9,7 @@ glabel func_80240A14_EA94F4
 /* EA9504 80240A24 8602004C */  lh        $v0, 0x4c($s0)
 /* EA9508 80240A28 44826000 */  mtc1      $v0, $f12
 /* EA950C 80240A2C 00000000 */  nop
-/* EA9510 80240A30 0C00AD77 */  jal       func_8002B5DC
+/* EA9510 80240A30 0C00AD77 */  jal       dead_sin_deg
 /* EA9514 80240A34 46806320 */   cvt.s.w  $f12, $f12
 /* EA9518 80240A38 3C013F80 */  lui       $at, 0x3f80
 /* EA951C 80240A3C 44811000 */  mtc1      $at, $f2
@@ -29,12 +29,12 @@ glabel func_80240A14_EA94F4
 /* EA9554 80240A74 44022000 */  mfc1      $v0, $f4
 /* EA9558 80240A78 00000000 */  nop
 /* EA955C 80240A7C A602004C */  sh        $v0, 0x4c($s0)
-/* EA9560 80240A80 3C028011 */  lui       $v0, %hi(D_80117578)
-/* EA9564 80240A84 24427578 */  addiu     $v0, $v0, %lo(D_80117578)
+/* EA9560 80240A80 3C028011 */  lui       $v0, %hi(dead_gPlayerStatus)
+/* EA9564 80240A84 24427578 */  addiu     $v0, $v0, %lo(dead_gPlayerStatus)
 /* EA9568 80240A88 C44C0028 */  lwc1      $f12, 0x28($v0)
 /* EA956C 80240A8C C44E0030 */  lwc1      $f14, 0x30($v0)
 /* EA9570 80240A90 8E060018 */  lw        $a2, 0x18($s0)
-/* EA9574 80240A94 0C00AC71 */  jal       func_8002B1C4
+/* EA9574 80240A94 0C00AC71 */  jal       dead_dist2D
 /* EA9578 80240A98 8E070020 */   lw       $a3, 0x20($s0)
 /* EA957C 80240A9C 3C0141F0 */  lui       $at, 0x41f0
 /* EA9580 80240AA0 44811000 */  mtc1      $at, $f2

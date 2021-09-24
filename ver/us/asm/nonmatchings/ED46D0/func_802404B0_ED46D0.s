@@ -242,7 +242,7 @@ glabel func_802404B0_ED46D0
 /* ED4A50 80240830 006A1821 */  addu      $v1, $v1, $t2
 /* ED4A54 80240834 44836000 */  mtc1      $v1, $f12
 /* ED4A58 80240838 00000000 */  nop
-/* ED4A5C 8024083C 0C00AD77 */  jal       func_8002B5DC
+/* ED4A5C 8024083C 0C00AD77 */  jal       dead_sin_deg
 /* ED4A60 80240840 46806320 */   cvt.s.w  $f12, $f12
 /* ED4A64 80240844 3C0143FA */  lui       $at, 0x43fa
 /* ED4A68 80240848 44811000 */  mtc1      $at, $f2

@@ -131,7 +131,7 @@ glabel func_80240BD4_EB9A24
 /* EB9BEC 80240D9C E7A0003C */  swc1      $f0, 0x3c($sp)
 /* EB9BF0 80240DA0 AFA20010 */  sw        $v0, 0x10($sp)
 /* EB9BF4 80240DA4 8E440080 */  lw        $a0, 0x80($s2)
-/* EB9BF8 80240DA8 0C03908F */  jal       func_800E423C
+/* EB9BF8 80240DA8 0C03908F */  jal       dead_npc_raycast_down_sides
 /* EB9BFC 80240DAC 27A70040 */   addiu    $a3, $sp, 0x40
 /* EB9C00 80240DB0 10400003 */  beqz      $v0, .L80240DC0
 /* EB9C04 80240DB4 00000000 */   nop

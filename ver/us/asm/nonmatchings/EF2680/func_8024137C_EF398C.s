@@ -64,7 +64,7 @@ glabel func_8024137C_EF398C
 /* EF3A5C 8024144C 0280202D */  daddu     $a0, $s4, $zero
 /* EF3A60 80241450 0240282D */  daddu     $a1, $s2, $zero
 /* EF3A64 80241454 02A0302D */  daddu     $a2, $s5, $zero
-/* EF3A68 80241458 0C090496 */  jal       func_80241258_EF3868
+/* EF3A68 80241458 0C090496 */  jal       EF2680_UnkFunc5
 /* EF3A6C 8024145C 0200382D */   daddu    $a3, $s0, $zero
 .L80241460:
 /* EF3A70 80241460 2402FFFE */  addiu     $v0, $zero, -2
@@ -109,14 +109,14 @@ glabel L802414DC_EF3AEC
 glabel L802414EC_EF3AFC
 /* EF3AFC 802414EC 02A0202D */  daddu     $a0, $s5, $zero
 /* EF3B00 802414F0 0200282D */  daddu     $a1, $s0, $zero
-/* EF3B04 802414F4 0C090242 */  jal       func_80240908_EF2F18
+/* EF3B04 802414F4 0C090242 */  jal       EF2680_UnkFunc4
 /* EF3B08 802414F8 0260302D */   daddu    $a2, $s3, $zero
 /* EF3B0C 802414FC 0809055C */  j         .L80241570
 /* EF3B10 80241500 0000102D */   daddu    $v0, $zero, $zero
 glabel L80241504_EF3B14
 /* EF3B14 80241504 02A0202D */  daddu     $a0, $s5, $zero
 /* EF3B18 80241508 0200282D */  daddu     $a1, $s0, $zero
-/* EF3B1C 8024150C 0C090313 */  jal       func_80240C4C_EF325C
+/* EF3B1C 8024150C 0C090313 */  jal       EF2680_UnkNpcAIFunc2
 /* EF3B20 80241510 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241514_EF3B24
 /* EF3B24 80241514 02A0202D */  daddu     $a0, $s5, $zero
@@ -135,14 +135,14 @@ glabel L8024152C_EF3B3C
 glabel L80241544_EF3B54
 /* EF3B54 80241544 02A0202D */  daddu     $a0, $s5, $zero
 /* EF3B58 80241548 0200282D */  daddu     $a1, $s0, $zero
-/* EF3B5C 8024154C 0C090399 */  jal       func_80240E64_EF3474
+/* EF3B5C 8024154C 0C090399 */  jal       EF2680_UnkNpcAIFunc3
 /* EF3B60 80241550 0260302D */   daddu    $a2, $s3, $zero
 /* EF3B64 80241554 0809055C */  j         .L80241570
 /* EF3B68 80241558 0000102D */   daddu    $v0, $zero, $zero
 glabel L8024155C_EF3B6C
 /* EF3B6C 8024155C 02A0202D */  daddu     $a0, $s5, $zero
 /* EF3B70 80241560 0200282D */  daddu     $a1, $s0, $zero
-/* EF3B74 80241564 0C0903B2 */  jal       func_80240EC8_EF34D8
+/* EF3B74 80241564 0C0903B2 */  jal       EF2680_UnkFunc6
 /* EF3B78 80241568 0260302D */   daddu    $a2, $s3, $zero
 glabel L8024156C_EF3B7C
 /* EF3B7C 8024156C 0000102D */  daddu     $v0, $zero, $zero

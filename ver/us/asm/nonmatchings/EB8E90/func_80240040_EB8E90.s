@@ -49,7 +49,7 @@ glabel func_80240040_EB8E90
 /* EB8F20 802400D0 C444000C */  lwc1      $f4, 0xc($v0)
 /* EB8F24 802400D4 46802120 */  cvt.s.w   $f4, $f4
 /* EB8F28 802400D8 44072000 */  mfc1      $a3, $f4
-/* EB8F2C 802400DC 0C00AC71 */  jal       func_8002B1C4
+/* EB8F2C 802400DC 0C00AC71 */  jal       dead_dist2D
 /* EB8F30 802400E0 4600B386 */   mov.s    $f14, $f22
 /* EB8F34 802400E4 4614003C */  c.lt.s    $f0, $f20
 /* EB8F38 802400E8 00000000 */  nop

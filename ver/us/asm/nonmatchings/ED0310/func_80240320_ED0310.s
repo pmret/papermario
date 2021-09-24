@@ -51,7 +51,7 @@ glabel func_80240320_ED0310
 /* ED03AC 802403BC 46800020 */  cvt.s.w   $f0, $f0
 /* ED03B0 802403C0 E7A00018 */  swc1      $f0, 0x18($sp)
 /* ED03B4 802403C4 8C640018 */  lw        $a0, 0x18($v1)
-/* ED03B8 802403C8 0C013431 */  jal       func_8004D0C4
+/* ED03B8 802403C8 0C013431 */  jal       dead_is_point_within_region
 /* ED03BC 802403CC 8E070038 */   lw       $a3, 0x38($s0)
 /* ED03C0 802403D0 1040000E */  beqz      $v0, .L8024040C
 /* ED03C4 802403D4 00000000 */   nop

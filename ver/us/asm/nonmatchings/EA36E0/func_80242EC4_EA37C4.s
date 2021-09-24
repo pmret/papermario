@@ -5,8 +5,8 @@ glabel func_80242EC4_EA37C4
 /* EA37C4 80242EC4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* EA37C8 80242EC8 AFB00010 */  sw        $s0, 0x10($sp)
 /* EA37CC 80242ECC 0080802D */  daddu     $s0, $a0, $zero
-/* EA37D0 80242ED0 3C028011 */  lui       $v0, %hi(D_80117578)
-/* EA37D4 80242ED4 24427578 */  addiu     $v0, $v0, %lo(D_80117578)
+/* EA37D0 80242ED0 3C028011 */  lui       $v0, %hi(dead_gPlayerStatus)
+/* EA37D4 80242ED4 24427578 */  addiu     $v0, $v0, %lo(dead_gPlayerStatus)
 /* EA37D8 80242ED8 AFBF0014 */  sw        $ra, 0x14($sp)
 /* EA37DC 80242EDC C4400028 */  lwc1      $f0, 0x28($v0)
 /* EA37E0 80242EE0 C6020084 */  lwc1      $f2, 0x84($s0)
