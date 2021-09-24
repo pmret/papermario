@@ -56,7 +56,7 @@ typedef struct EffectInstanceData {
 typedef struct EffectInstance {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
-    /* 0x08 */ s32 totalMatricies;
+    /* 0x08 */ s32 numParts;
     /* 0x0C */ EffectInstanceData* data;
     /* 0x10 */ struct EffectGraphics* effect;
 } EffectInstance;

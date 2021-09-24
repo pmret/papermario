@@ -24,10 +24,10 @@ void func_E0002300(EffectInstance* effect);
 
 f32 D_E0002760[10] = { 10.0f, 40.0f, 80.0f, 170.0f, 140.0f, 100.0f, 25.0f, 155.0f, 60.0f, 120.0f };
 f32 D_E0002788[10] = { 2.2f, 2.7f, 3.0f, 2.2f, 2.7f, 3.0f, 1.9f, 1.9f, 1.5f, 1.5f };
-f32 partScales[10] = { 1.4f, 1.3f, 1.2f, 1.3f, 1.4f, 1.3f, 1.6f, 1.6f, 1.6f, 1.6f };
-f32 partYaws[10] = { 0.0f, 234.0f, 468.0f, 702.0f, 936.0f, 1260.0f, 1404.0f, 1638.0f, 1902.0f, 1976.0f };
+f32 fx_1_partScales[10] = { 1.4f, 1.3f, 1.2f, 1.3f, 1.4f, 1.3f, 1.6f, 1.6f, 1.6f, 1.6f };
+f32 fx_1_partYaws[10] = { 0.0f, 234.0f, 468.0f, 702.0f, 936.0f, 1260.0f, 1404.0f, 1638.0f, 1902.0f, 1976.0f };
 
-s32 D_E0002800[] = { 0x09000FA0, 0x09001060, 0x09001120, 0x090011E0, 0x090012A0, 0x09001360, 0x09001420 };
+s32 fx_1_dlists[7] = { 0x09000FA0, 0x09001060, 0x09001120, 0x090011E0, 0x090012A0, 0x09001360, 0x09001420 };
 
 void fx_1_main(f32 x, f32 y, f32 z) {
     EffectBlueprint bp;
@@ -37,7 +37,7 @@ void fx_1_main(f32 x, f32 y, f32 z) {
     f32 temp_f20;
     f32 cosTheta;
     f32 sinTheta;
-    s32 numMatrices = 10;
+    s32 numParts = 10;
     s32 i;
 
     bp.unk_00 = 0;
@@ -48,14 +48,14 @@ void fx_1_main(f32 x, f32 y, f32 z) {
     bp.effectIndex = 1;
 
     effect = shim_create_effect_instance(&bp);
-    effect->totalMatricies = numMatrices;
+    effect->numParts = numParts;
 
-    effectData = shim_general_heap_malloc(effect->totalMatricies * sizeof(Effect1));
+    effectData = shim_general_heap_malloc(effect->numParts * sizeof(Effect1));
     effect->data = effectData;
 
     ASSERT(effectData != NULL);
 
-    for (i = 0; i < effect->totalMatricies; i++, effectData++) {
+    for (i = 0; i < effect->numParts; i++, effectData++) {
         effectData->unk_00 = 0;
         effectData->unk_02 = effectData->unk_04 = func_E0200000(6) + 0x10;
         effectData->unk_06 = 4;
@@ -84,7 +84,7 @@ void fx_1_update(EffectInstance* effect) {
     s32 cond = FALSE;
     s32 i;
 
-    for (i = 0; i < effect->totalMatricies; i++, effectData++) {
+    for (i = 0; i < effect->numParts; i++, effectData++) {
         if (effectData->unk_02 >= 0) {
             effectData->unk_08--;
 
@@ -126,7 +126,7 @@ void fx_1_renderWorld(EffectInstance* effect) {
 
 void func_E0002300(EffectInstance* effect) {
     Effect1* effectData = effect->data;
-    Matrix4s mtx;
+    Matrix4f mtx;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);
@@ -139,7 +139,7 @@ void func_E0002300(EffectInstance* effect) {
     gSPMatrix(gMasterGfxPos++,
               &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    for (i = 0; i < effect->totalMatricies; i++, effectData++) {
+    for (i = 0; i < effect->numParts; i++, effectData++) {
         if (effectData->unk_02 >= 0 && effectData->unk_08 < 0) {
             s32 primAlpha = effectData->unk_02;
             f32 temp_f12;
@@ -152,7 +152,8 @@ void func_E0002300(EffectInstance* effect) {
                 primAlpha = 16;
             }
 
-            shim_guPositionF(&mtx, 0.0f, 0.0f, partYaws[i], partScales[i], effectData->partX, effectData->partY, 0.0f);
+            shim_guPositionF(&mtx, 0.0f, 0.0f, fx_1_partYaws[i], fx_1_partScales[i], effectData->partX,
+                             effectData->partY, 0.0f);
             shim_guMtxF2L(&mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMasterGfxPos++,
@@ -162,7 +163,7 @@ void func_E0002300(EffectInstance* effect) {
 
             if (effectData->unk_04 <= temp_f12) {
                 envAlpha = 255;
-                dlist = D_E0002800[6];
+                dlist = fx_1_dlists[ARRAY_COUNT(fx_1_dlists) - 1];
             } else {
                 f32 sinAngle = shim_sin_deg((((temp_f12 * 7.0f) / effectData->unk_04) * 90.0f) / 7.0f) * 7.0f;
 
@@ -173,7 +174,7 @@ void func_E0002300(EffectInstance* effect) {
                 }
                 envAlpha = phi_v0 >> 8;
                 envAlpha = temp_f4 - (envAlpha << 8);
-                dlist = D_E0002800[(s32)sinAngle];
+                dlist = fx_1_dlists[(s32)sinAngle];
             }
 
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, (u32)(primAlpha * 105) / 8);
