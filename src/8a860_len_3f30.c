@@ -5,7 +5,6 @@ extern s32 D_8010D660;
 extern s32 D_8010D664;
 extern s8 D_8010D699;
 extern PopupMenu* D_8010D69C;
-void func_800E98C4(void);
 extern s32 D_8010D640;
 extern s32 D_8010D65C;
 extern s32 D_8010D668;
@@ -14,6 +13,23 @@ extern s32 D_8010D670;
 extern s32 D_8010D674;
 extern s32 D_8010D678;
 extern s8 D_8010D69A;
+extern s32 D_8010D640;
+extern s32 D_8010D648;
+extern s32 D_8010D64C;
+extern s32 D_8010D650;
+extern s8 D_8010D654;
+extern u8 D_8010D655;
+extern u8 D_8010D656;
+extern s8 D_8010D68E;
+extern s8 D_8010D68F;
+extern s8 D_8010D691;
+extern s8 D_8010D692;
+extern s32 D_8010D694;
+extern s8 D_8010D698;
+void func_800E9894();
+s8 func_800E98D4();
+void open_status_menu_short();
+void func_800E98C4(void);
 
 typedef s32 PopupType;
 enum PopupTypes {
@@ -150,29 +166,9 @@ void func_800F4D28(PopupMessage* popup, s32 x, s32 y) {
 }
 
 #ifdef NON_MATCHING
-void func_800E9894();
-s8 func_800E98D4();
-void open_status_menu_short();
-extern s32 D_8010D640;
-extern s32 D_8010D648;
-extern s32 D_8010D64C;
-extern s32 D_8010D650;
-extern s8 D_8010D654;
-extern u8 D_8010D655;
-extern u8 D_8010D656;
-extern s8 D_8010D68E;
-extern s8 D_8010D68F;
-extern s8 D_8010D691;
-extern s8 D_8010D692;
-extern s32 D_8010D694;
-extern s8 D_8010D698;
-extern s8 D_8010D699;
-extern s8 D_8010D69A;
-extern PopupMenu* D_8010D69C;
-
 void create_popup_menu(PopupMenu* popup) {
-    PopupMenu* temp_a1;
-    s8 temp_v0_3;
+    PopupMenu* otherPopup;
+    s8 entryCount;
 
     D_8010D69A = func_800E98D4();
     func_800E9894();
@@ -192,25 +188,25 @@ void create_popup_menu(PopupMenu* popup) {
         }
         D_8010D698 = 0;
     }
-    temp_a1 = D_8010D69C;
+    otherPopup = D_8010D69C;
     D_8010D68E = 1;
     D_8010D640 = 0;
-    D_8010D648 = temp_a1->initialPos;
-    if (temp_a1->initialPos >= temp_a1->numEntries) {
-        D_8010D648 = temp_a1->numEntries - 1;
+    D_8010D648 = otherPopup->initialPos;
+    if (otherPopup->initialPos >= otherPopup->numEntries) {
+        D_8010D648 = otherPopup->numEntries - 1;
     }
     D_8010D68F = 6;
     D_8010D654 = 0;
     D_8010D64C = D_8010D648;
-    temp_v0_3 = temp_a1->numEntries; // unk_327
+    entryCount = otherPopup->numEntries;
     
-    D_8010D656 = temp_v0_3;
-    if (temp_v0_3 > 6) {
+    D_8010D656 = entryCount;
+    if (entryCount > 6) {
         D_8010D656 = 6;
     }
     D_8010D655 = 6;
     if (temp_a1->numEntries < 6) {
-        D_8010D655 = temp_a1->numEntries; // unk_327
+        D_8010D655 = temp_a1->numEntries;
     }
     D_8010D650 = 255;
     D_8010D691 = 4;
