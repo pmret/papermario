@@ -3,24 +3,34 @@
 
 #define NAMESPACE ED0310
 
-INCLUDE_ASM(s32, "ED0310", func_80240320_ED0310);
+extern f32 D_8024365C_ED364C[];
+
+#include "world/common/UnkNpcAIFunc23.inc.c"
 
 INCLUDE_ASM(s32, "ED0310", func_802404D0_ED04C0);
 
 #include "world/common/DeadUnkNpcAIFunc1.inc.c"
 
-INCLUDE_ASM(s32, "ED0310", func_80240BB8_ED0BA8);
+#include "world/common/UnkFunc4.inc.c"
 
-INCLUDE_ASM(s32, "ED0310", func_80240EFC_ED0EEC);
+#include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "ED0310", func_80240F74_ED0F64);
+void func_80240F74_ED0F64(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    npc->pos.y += D_8024365C_ED364C[npc->duration++];
+    if (npc->duration >= 5) {
+        script->functionTemp[0] = 12;
+    }
+}
 
 #include "world/common/DeadUnkNpcAIFunc14.inc.c"
 
-INCLUDE_ASM(s32, "ED0310", func_80241114_ED1104);
+#include "world/common/UnkNpcAIFunc3.inc.c"
 
-INCLUDE_ASM(s32, "ED0310", func_80241178_ED1168);
+#include "world/common/UnkFunc6.inc.c"
 
-INCLUDE_ASM(s32, "ED0310", func_80241508_ED14F8);
+#include "world/common/UnkFunc5.inc.c"
 
 INCLUDE_ASM(s32, "ED0310", func_8024162C_ED161C);

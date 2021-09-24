@@ -92,7 +92,7 @@ glabel func_8024137C_EF398C
 glabel L802414B4_EF3AC4
 /* EF3AC4 802414B4 02A0202D */  daddu     $a0, $s5, $zero
 /* EF3AC8 802414B8 0200282D */  daddu     $a1, $s0, $zero
-/* EF3ACC 802414BC 0C09001C */  jal       func_80240070_EF2680
+/* EF3ACC 802414BC 0C09001C */  jal       EF2680_UnkNpcAIFunc23
 /* EF3AD0 802414C0 0260302D */   daddu    $a2, $s3, $zero
 glabel L802414C4_EF3AD4
 /* EF3AD4 802414C4 02A0202D */  daddu     $a0, $s5, $zero
