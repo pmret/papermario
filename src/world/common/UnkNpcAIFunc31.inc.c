@@ -8,11 +8,10 @@ void N(UnkNpcAIFunc31)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
 
     if (npc->duration > 0) {
         npc->duration--;
-        return;
+    } else {
+        enemy->varTable[0] = 0;
+        npc->currentAnim.w = enemy->animList[0];
+        script->functionTemp[1] = 0;
+        script->functionTemp[0] = 1;
     }
-
-    enemy->varTable[0] = 0;
-    npc->currentAnim.w = *enemy->animList;
-    script->functionTemp[1] = 0;
-    script->functionTemp[0] = 1;
 }
