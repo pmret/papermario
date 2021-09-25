@@ -138,7 +138,7 @@ void entity_Chest_close(Entity* entity) {
                 entity->flags |= 0x4000;
             }
             break;
-        case 4: // needed to make gcc create a jumptable
+        case 4:
             break;
     }
 }
