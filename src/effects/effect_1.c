@@ -19,7 +19,7 @@ typedef struct Effect1 {
 
 void fx_1_init(EffectInstance* effect);
 void fx_1_update(EffectInstance* effect);
-void fx_1_renderWorld(EffectInstance* effect);
+void fx_1_render(EffectInstance* effect);
 void fx_1_appendGfx(EffectInstance* effect);
 
 f32 D_E0002760[10] = { 10.0f, 40.0f, 80.0f, 170.0f, 140.0f, 100.0f, 25.0f, 155.0f, 60.0f, 120.0f };
@@ -43,7 +43,7 @@ void fx_1_main(f32 x, f32 y, f32 z) {
     bp.unk_00 = 0;
     bp.init = fx_1_init;
     bp.update = fx_1_update;
-    bp.renderWorld = fx_1_renderWorld;
+    bp.renderWorld = fx_1_render;
     bp.unk_14 = NULL;
     bp.effectIndex = 1;
 
@@ -111,7 +111,7 @@ void fx_1_update(EffectInstance* effect) {
     }
 }
 
-void fx_1_renderWorld(EffectInstance* effect) {
+void fx_1_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
