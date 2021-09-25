@@ -83,9 +83,9 @@ s32 fio_flush_backups(void) {
     D_800D95E8[12] = checksum;
     D_800D95E8[13] = ~checksum;
     fio_erase_flash(6);
-    fio_write_flash(6, D_800D95E8, 0x80);
+    fio_write_flash(6, D_800D95E8, 128);
     fio_erase_flash(7);
-    fio_write_flash(7, D_800D95E8, 0x80);
+    fio_write_flash(7, D_800D95E8, 128);
     return 1;
 }
 

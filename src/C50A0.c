@@ -1,10 +1,12 @@
 #include "common.h"
 
+#define MAX_ITEM_ENTITIES 256
+
 extern s32 D_801512F8;
 extern s32 D_80155D84;
 extern s32 D_80155D88;
-extern ItemEntity* D_80155DA0[0xFF];
-extern ItemEntity* D_801561A0[0xFF];
+extern ItemEntity* D_80155DA0[MAX_ITEM_ENTITIES];
+extern ItemEntity* D_801561A0[MAX_ITEM_ENTITIES];
 extern ItemEntity** D_801565A0; // item entity list
 extern s16 D_801565A4;
 extern s16 D_801565A8;
@@ -132,7 +134,7 @@ void clear_item_entity_data(void) {
         D_801565A0 = D_801561A0;
     }
 
-    for (i = ARRAY_COUNT(D_80155DA0); i >= 0; i--) {
+    for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
         D_801565A0[i] = NULL;
     }
 
@@ -142,7 +144,7 @@ void clear_item_entity_data(void) {
     D_80155D90 = 0;
     D_80155D84 = 0;
 
-    if (gGameStatusPtr->isBattle == 0) {
+    if (!gGameStatusPtr->isBattle) {
         D_80155D88 = 0;
     }
 
@@ -195,18 +197,18 @@ INCLUDE_ASM(s32, "C50A0", render_item_entities);
 void remove_item_entity_by_reference(ItemEntity* entity) {
     s32 index;
 
-    for (index = 0; index < 0x100; index++) {
+    for (index = 0; index < MAX_ITEM_ENTITIES; index++) {
         if (D_801565A0[index] == entity) {
             break;
         }
     }
 
-    if (index < 0x100) {
+    if (index < MAX_ITEM_ENTITIES) {
         if (entity->physicsData != NULL) {
             heap_free(entity->physicsData);
         }
 
-        switch ((s8)entity->type) {
+        switch (entity->type) {
             case 0:
             case 3:
             case 12:
@@ -226,7 +228,7 @@ void remove_item_entity_by_reference(ItemEntity* entity) {
 void remove_item_entity_by_index(s32 index) {
     ItemEntity* itemEntity = D_801565A0[index];
 
-    switch ((s8)itemEntity->type) {
+    switch (itemEntity->type) {
         case 0:
         case 3:
         case 12:

@@ -982,7 +982,7 @@ typedef struct ItemEntity {
     /* 0x14 */ struct ItemEntityPhysicsData* physicsData;
     /* 0x18 */ s16 itemID; /* into item table, also worldIconID */
     /* 0x1A */ u8 state;
-    /* 0x1B */ u8 type;
+    /* 0x1B */ s8 type;
     /* 0x1C */ u8 pickupDelay; /* num frames before item can be picked up */
     /* 0x1D */ char unk_1D;
     /* 0x1E */ s16 wsFaceAngle; /* < 0 means none */
