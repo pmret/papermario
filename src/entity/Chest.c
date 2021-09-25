@@ -108,38 +108,38 @@ void entity_Chest_close(Entity* entity) {
     f32 delta;
 
     switch (data->unk_04) {
-	    case 0:
-	        data->unk_0C = 0.0f;
-	        data->unk_04++;
-	        // fallthrough
-	    case 1:
-	        data->unk_0C += 5.0f;
-	        if (data->unk_0C >= 180.0f) {
-	            data->unk_0C = 180.0f;
-	            data->unk_04++;
-	        }
-	        delta = 2.6f * sin_rad(data->unk_0C * TAU / 360.0f);
+        case 0:
+            data->unk_0C = 0.0f;
+            data->unk_04++;
+            // fallthrough
+        case 1:
+            data->unk_0C += 5.0f;
+            if (data->unk_0C >= 180.0f) {
+                data->unk_0C = 180.0f;
+                data->unk_04++;
+            }
+            delta = 2.6f * sin_rad(data->unk_0C * TAU / 360.0f);
             data->unk_08 += delta;
-	        break;
-	    case 2:
-	        data->unk_0C += 1.0f;
-	        if (data->unk_0C >= 185.0f) {
-	            data->unk_0C = 185.0f;
-	            data->unk_06 = 10;
-	            data->unk_04++;
-	        }
-	        delta = 2.0f * sin_rad(data->unk_0C * TAU / 360.0f);
+            break;
+        case 2:
+            data->unk_0C += 1.0f;
+            if (data->unk_0C >= 185.0f) {
+                data->unk_0C = 185.0f;
+                data->unk_06 = 10;
+                data->unk_04++;
+            }
+            delta = 2.0f * sin_rad(data->unk_0C * TAU / 360.0f);
             data->unk_08 += delta;
-	        break;
-	    case 3:
-	        data->unk_06--;
-	        if (data->unk_06 == 0) {
-	            data->unk_04++;
-	            entity->flags |= 0x4000;
-	        }
-	        break;
-	    case 4: // needed to make gcc create a jumptable
-	        break;
+            break;
+        case 3:
+            data->unk_06--;
+            if (data->unk_06 == 0) {
+                data->unk_04++;
+                entity->flags |= 0x4000;
+            }
+            break;
+        case 4: // needed to make gcc create a jumptable
+            break;
     }
 }
 
