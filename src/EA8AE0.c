@@ -91,7 +91,7 @@ ApiStatus func_80240358_EA8E38(Evt* script, s32 isInitialCall) {
         ptr->unk_20 = evt_get_float_variable(script, *args++);
         ptr->unk_24 = evt_get_float_variable(script, *args++);
         ptr->unk_28 = evt_get_float_variable(script, *args++);
-        ptr->unk_50 = (struct N(temp)*)playFX_83(2, ptr->unk_0C, ptr->unk_10, ptr->unk_14, 1.0f, 0);
+        ptr->unk_50 = (struct temp*)playFX_83(2, ptr->unk_0C, ptr->unk_10, ptr->unk_14, 1.0f, 0);
         ptr->unk_4E = 0;
         ptr->unk_48 = 0;
         ptr->unk_4A = 0;
