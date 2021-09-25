@@ -51,11 +51,14 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     cross = "mips-linux-gnu-"
     cc = f"{BUILD_TOOLS}/cc/gcc/gcc"
+    cc_ido = f"{BUILD_TOOLS}/cc/ido5.3/cc"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
     compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
-    CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
-               "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
+    CPPFLAGS_COMMON = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
+               "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
+
+    CPPFLAGS = CPPFLAGS_COMMON + " -nostdinc"
 
     cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
@@ -93,6 +96,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
         command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {compile_script} | {iconv} > $out.i && {cc} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
+    )
+
+    ninja.rule("cc_ido",
+        description="cc_ido $in",
+        command=f"{ccache}{cc_ido} {CPPFLAGS_COMMON} {cppflags} -c -mips1 -O0 -G0 -non_shared -Xfullwarn -Xcpluscomm -o $out $in",
     )
 
     ninja.rule("cxx",
@@ -309,7 +317,7 @@ class Configure:
 
                 if task == "yay0":
                     implicit.append(YAY0_COMPRESS_TOOL)
-                elif task in ["cc", "cc_dsl", "cxx"]:
+                elif task in ["cc", "cc_dsl", "cc_ido", "cxx"]:
                     order_only.append("generated_headers_" + self.version)
 
                 ninja.build(
@@ -353,6 +361,8 @@ class Configure:
                     s = f.read()
                     if "SCRIPT(" in s or "#pragma SCRIPT" in s or "#include \"world/common/foliage.inc.c\"" in s:
                         task = "cc_dsl"
+                if seg.name.endswith("osFlash"):
+                    task = "cc_ido"
 
                 build(entry.object_path, entry.src_paths, task, variables={"cflags": cflags})
 
