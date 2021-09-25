@@ -29,7 +29,6 @@ s8 func_800E98D4(void);
 void open_status_menu_short(void);
 void func_800E98C4(void);
 
-typedef s32 PopupType;
 enum PopupTypes {
     POPUP_TYPE_USE_ITEM,
     POPUP_TYPE_SWITCH_PARTNER,

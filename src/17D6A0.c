@@ -39,8 +39,8 @@ void func_8024EE48(void) {
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
         PopupMessage* popup = &popupMessages[i];
-        if (popup->active && popup->unk_04 != NULL) {
-            popup->unk_04(popup);
+        if (popup->active && popup->updateFunc != NULL) {
+            popup->updateFunc(popup);
         }
     }
 }
@@ -123,7 +123,7 @@ void btl_show_battle_message(s32 messageIndex, s32 duration) {
     PopupMessage* popup = btl_create_popup();
 
     if (popup != NULL) {
-        popup->unk_04 = func_8024FB3C;
+        popup->updateFunc = func_8024FB3C;
         popup->drawFunc = btl_show_message_popup;
         popup->unk_00 = 0;
         popup->unk_08 = NULL;
@@ -145,7 +145,7 @@ void btl_show_variable_battle_message(s32 messageIndex, s32 duration, s32 varVal
     PopupMessage* popup = btl_create_popup();
 
     if (popup != NULL) {
-        popup->unk_04 = func_8024FB3C;
+        popup->updateFunc = func_8024FB3C;
         popup->drawFunc = btl_show_message_popup;
         popup->unk_00 = 0;
         popup->unk_08 = NULL;

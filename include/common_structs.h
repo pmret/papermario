@@ -2297,7 +2297,7 @@ struct PopupMessage;
 typedef void (*PopupMessageCallback)(struct PopupMessage* popup);
 typedef struct PopupMessage {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ PopupMessageCallback unk_04;
+    /* 0x04 */ PopupMessageCallback updateFunc;
     /* 0x08 */ PopupMessageCallback unk_08;
     /* 0x0C */ PopupMessageCallback drawFunc;
     /* 0x10 */ s16 active;

@@ -3,60 +3,55 @@
 
 extern s32 D_800A0F40;
 extern PopupMessage D_800A0BC0[32];
+extern s16 D_80078160[];
+extern s32 D_80078168[];
 
 void update_merlee_message(PopupMessage* popup);
 void draw_merlee_message(PopupMessage* popup);
 void func_80045BC8(void);
 void func_80045FB4(void);
 
-extern s16 D_80078160[];
-extern s32 D_80078168[];
-
 void func_80045AC0(void) {
-    PopupMessage* popup;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
-        popup = &D_800A0BC0[i];
-        popup->active = 0;
-        popup->message = 0;
+        PopupMessage* popup = &D_800A0BC0[i];
+        popup->active = FALSE;
+        popup->message = NULL;
     }
-    
+
     create_generic_entity_world(NULL, func_80045BC8);
     func_80045FB4();
 }
 
 void func_80045B10(void) {
-    PopupMessage* popup;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
-        popup = &D_800A0BC0[i];
+        PopupMessage* popup = &D_800A0BC0[i];
         if (popup->message != NULL) {
             heap_free(popup->message);
         }
-        popup->active = 0;
+        popup->active = FALSE;
     }
 }
 
 void update_merlee_messages(void) {
-    PopupMessage* popup;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
-        popup = &D_800A0BC0[i];
-        if (popup->active && popup->unk_04 != NULL) {
-            popup->unk_04(popup);
+        PopupMessage* popup = &D_800A0BC0[i];
+        if (popup->active && popup->updateFunc != NULL) {
+            popup->updateFunc(popup);
         }
     }
 }
 
 void func_80045BC8(void) {
-    PopupMessage* popup;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
-        popup = &D_800A0BC0[i];
+        PopupMessage* popup = &D_800A0BC0[i];
         if (popup->active && popup->unk_08 != NULL) {
             popup->unk_08(popup);
         }
@@ -64,11 +59,10 @@ void func_80045BC8(void) {
 }
 
 void draw_merlee_messages(void) {
-    PopupMessage* popup;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
-        popup = &D_800A0BC0[i];
+        PopupMessage* popup = &D_800A0BC0[i];
         if (popup->active && popup->drawFunc != NULL) {
             popup->drawFunc(popup);
         }
@@ -76,11 +70,10 @@ void draw_merlee_messages(void) {
 }
 
 PopupMessage* get_current_merlee_message(void) {
-    PopupMessage* popup;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_800A0BC0); i++) {
-        popup = &D_800A0BC0[i];
+        PopupMessage* popup = &D_800A0BC0[i];
         if (!popup->active) {
             popup->active = TRUE;
             return popup;
@@ -90,19 +83,19 @@ PopupMessage* get_current_merlee_message(void) {
     return NULL;
 }
 
-void dispose_merlee_message(PopupMessage* message) {
-    if (message->message != NULL) {
-        heap_free(message->message);
-        message->message = NULL;
+void dispose_merlee_message(PopupMessage* popup) {
+    if (popup->message != NULL) {
+        heap_free(popup->message);
+        popup->message = NULL;
     }
-    message->active = FALSE;
+    popup->active = FALSE;
 }
 
 void show_merlee_message(s16 messageIndex, s16 duration) {
     PopupMessage* popup = get_current_merlee_message();
 
-    if (popup != 0) {
-        popup->unk_04 = update_merlee_message;
+    if (popup != NULL) {
+        popup->updateFunc = update_merlee_message;
         popup->drawFunc = draw_merlee_message;
         popup->unk_17 = 1;
         popup->unk_00 = 0;
@@ -116,7 +109,7 @@ void show_merlee_message(s16 messageIndex, s16 duration) {
 
 #ifdef NON_MATCHING // .rodata alignment, will match once all other functions in this file are matched
 void update_merlee_message(PopupMessage* popup) {
-    s32 closeMessage = 0;
+    s32 closeMessage = FALSE;
 
     switch (popup->unk_16) {
         case 0:
@@ -139,7 +132,7 @@ void update_merlee_message(PopupMessage* popup) {
             popup->unk_16 = 4;
             break;
         case 4:
-            closeMessage = 1;
+            closeMessage = TRUE;
             break;
     }
 
