@@ -103,10 +103,10 @@ void entity_Chest_begin_opening(Entity* entity) {
 
 INCLUDE_ASM(s32, "entity/Chest", entity_Chest_open);
 
-// regalloc after sin_rad
-#ifdef NON_MATCHING
 void entity_Chest_close(Entity* entity) {
     Chest* data = (Chest*)entity->dataBuf;
+    f32 delta;
+
     switch (data->unk_04) {
 	    case 0:
 	        data->unk_0C = 0.0f;
@@ -118,7 +118,8 @@ void entity_Chest_close(Entity* entity) {
 	            data->unk_0C = 180.0f;
 	            data->unk_04++;
 	        }
-	        data->unk_08 += 2.6f * sin_rad(data->unk_0C * TAU / 360.0f);
+	        delta = 2.6f * sin_rad(data->unk_0C * TAU / 360.0f);
+            data->unk_08 += delta;
 	        break;
 	    case 2:
 	        data->unk_0C += 1.0f;
@@ -127,7 +128,8 @@ void entity_Chest_close(Entity* entity) {
 	            data->unk_06 = 10;
 	            data->unk_04++;
 	        }
-	        data->unk_08 += 2.0f * sin_rad(data->unk_0C * TAU / 360.0f);
+	        delta = 2.0f * sin_rad(data->unk_0C * TAU / 360.0f);
+            data->unk_08 += delta;
 	        break;
 	    case 3:
 	        data->unk_06--;
@@ -140,9 +142,6 @@ void entity_Chest_close(Entity* entity) {
 	        break;
     }
 }
-#else
-INCLUDE_ASM(s32, "entity/Chest", entity_Chest_close);
-#endif
 
 INCLUDE_ASM(s32, "entity/Chest", entity_GiantChest_hide_effect);
 
