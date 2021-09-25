@@ -17,4 +17,5 @@ INCLUDE_ASM(s32, "891b0_len_fb0", func_800F09EC);
 
 INCLUDE_ASM(s32, "891b0_len_fb0", func_800F0B3C);
 
-INCLUDE_ASM(s32, "891b0_len_fb0", func_800F0C9C);
+void func_800F0C9C(void) {
+}

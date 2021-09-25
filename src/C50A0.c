@@ -15,11 +15,32 @@ INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
 
 INCLUDE_ASM(s32, "C50A0", draw_tiled_image);
 
-INCLUDE_ASM(s32, "C50A0", integer_log);
+s32 integer_log(s32 number, s32 base) {
+    f64 temp_f0;
+    f32 fNumber = number;
+    s32 ret = 1;
+
+    while (TRUE) {
+        temp_f0 = base;
+        if (base < 0) {
+            temp_f0 += 4294967296.0;
+        }
+        fNumber /= (f32)temp_f0;
+        if (fNumber <= 1.0) {
+            return ret;
+        }
+
+        ret++;
+    }
+}
 
 INCLUDE_ASM(s32, "C50A0", draw_adjustable_tiled_image);
 
-INCLUDE_ASM(s32, "C50A0", sparkle_script_init);
+void sparkle_script_init(ItemEntity* itemEntity, s32* state) {
+    itemEntity->currentState = state;
+    itemEntity->framesLeft = 1;
+    itemEntity->sequenceStart = state;
+}
 
 s32 sparkle_script_step(ItemEntity* itemEntity) {
     s32* currentState = itemEntity->currentState;
@@ -75,9 +96,25 @@ ItemEntity* get_item_entity(s32 itemEntityIndex) {
     return D_801565A0[itemEntityIndex];
 }
 
-INCLUDE_ASM(s32, "C50A0", item_entity_disable_shadow);
+void item_entity_disable_shadow(ItemEntity* itemEntity) {
+    Shadow* shadow;
 
-INCLUDE_ASM(s32, "C50A0", item_entity_enable_shadow);
+    itemEntity->flags |= 0x40;
+    if (itemEntity->shadowIndex >= 0) {
+        shadow = get_shadow_by_index(itemEntity->shadowIndex);
+        shadow->flags |= 1;
+    }
+}
+
+void item_entity_enable_shadow(ItemEntity* itemEntity) {
+    Shadow* shadow;
+
+    itemEntity->flags &= ~0x40;
+    if (itemEntity->shadowIndex >= 0) {
+        shadow = get_shadow_by_index(itemEntity->shadowIndex);
+        shadow->flags &= ~1;
+    }
+}
 
 INCLUDE_ASM(s32, "C50A0", clear_item_entity_data);
 
@@ -96,8 +133,6 @@ void init_item_entity_list(void) {
 
 INCLUDE_ASM(s32, "C50A0", item_entity_load);
 
-s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign,
-                     s32 pickupVar);
 INCLUDE_ASM(s32, "C50A0", make_item_entity, s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay,
             s32 facingAngleSign, s32 pickupVar);
 
@@ -129,6 +164,7 @@ INCLUDE_ASM(s32, "C50A0", remove_item_entity_by_index);
 
 INCLUDE_ASM(s32, "C50A0", func_80133A94);
 
+s32 test_item_player_collision(ItemEntity* itemEntity);
 INCLUDE_ASM(s32, "C50A0", test_item_player_collision);
 
 INCLUDE_ASM(s32, "C50A0", test_item_entity_position);
@@ -184,7 +220,15 @@ INCLUDE_ASM(s32, "C50A0", update_item_entity_collectable);
 
 INCLUDE_ASM(s32, "C50A0", func_8013559C);
 
-INCLUDE_ASM(s32, "C50A0", update_item_entity_static);
+void update_item_entity_static(ItemEntity* itemEntity) {
+    if ((s8)itemEntity->state == 0 && test_item_player_collision(itemEntity)) {
+        D_801565A4 = 1;
+        itemEntity->type = 28;
+        itemEntity->state = 0;
+        D_801565A8 = 0;
+        gOverrideFlags |= 0x40;
+    }
+}
 
 void func_801356C4(void) {
 }
@@ -201,6 +245,8 @@ INCLUDE_ASM(s32, "C50A0", func_801363A0);
 
 INCLUDE_ASM(s32, "C50A0", func_8013673C);
 
-INCLUDE_ASM(s32, "C50A0", func_801369D0);
+void func_801369D0(s32 arg1, s32 x, s32 y) {
+    draw_msg(0x1D0060, x + 12, y + 4, 255, 52, 0);
+}
 
 INCLUDE_ASM(s32, "C50A0", func_80136A08);
