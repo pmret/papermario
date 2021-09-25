@@ -494,7 +494,7 @@ s32 entity_can_collide_with_jumping_player(Entity* entity);
 s32 set_global_flag(s32 index);
 void entity_base_block_init(Entity* entity);
 s32 entity_start_script(Entity* entity);
-s32 remove_item_entity_by_index(s32 index); // might not actually return anything
+void remove_item_entity_by_index(s32 index); // might not actually return anything
 void set_entity_commandlist(Entity* entity, s32* entityScript);
 void func_800EF3E4(void);
 void func_80268858(void);
