@@ -31,7 +31,7 @@ s32 integer_log(s32 number, s32 base) {
         }
 
         ret++;
-    };
+    }
 }
 
 INCLUDE_ASM(s32, "C50A0", draw_adjustable_tiled_image);
