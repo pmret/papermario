@@ -243,7 +243,9 @@ void get_hud_element_render_pos(s32 id, s32* x, s32* y) {
     *y = hudElement->renderPosY;
 }
 
-INCLUDE_ASM(void, "hud_element", set_hud_element_render_depth, s32 id, s32 z);
+void set_hud_element_render_depth(s32 id, s32 z) {
+    hudElements[id & ~0x800]->worldPosOffset.z = z;
+}
 
 void set_hud_element_flags(s32 id, s32 flags) {
     hudElements[id & ~0x800]->flags.as_word |= flags;
