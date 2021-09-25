@@ -11,7 +11,7 @@ glabel func_80240310_EB1170
 /* EB1188 80240328 8E020000 */  lw        $v0, ($s0)
 /* EB118C 8024032C 14400010 */  bnez      $v0, .L80240370
 /* EB1190 80240330 0080882D */   daddu    $s1, $a0, $zero
-/* EB1194 80240334 0C00AFF5 */  jal       func_8002BFD4
+/* EB1194 80240334 0C00AFF5 */  jal       dead_heap_malloc
 /* EB1198 80240338 24040040 */   addiu    $a0, $zero, 0x40
 /* EB119C 8024033C AE020000 */  sw        $v0, ($s0)
 /* EB11A0 80240340 0000182D */  daddu     $v1, $zero, $zero

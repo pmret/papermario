@@ -11,7 +11,7 @@ glabel func_80240040_EC2240
 /* EC2258 80240058 8E020000 */  lw        $v0, ($s0)
 /* EC225C 8024005C 14400010 */  bnez      $v0, .L802400A0
 /* EC2260 80240060 0080882D */   daddu    $s1, $a0, $zero
-/* EC2264 80240064 0C00AFF5 */  jal       func_8002BFD4
+/* EC2264 80240064 0C00AFF5 */  jal       dead_heap_malloc
 /* EC2268 80240068 24040040 */   addiu    $a0, $zero, 0x40
 /* EC226C 8024006C AE020000 */  sw        $v0, ($s0)
 /* EC2270 80240070 0000182D */  daddu     $v1, $zero, $zero

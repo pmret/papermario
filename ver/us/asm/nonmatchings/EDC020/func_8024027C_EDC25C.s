@@ -11,7 +11,7 @@ glabel func_8024027C_EDC25C
 /* EDC274 80240294 8E020000 */  lw        $v0, ($s0)
 /* EDC278 80240298 14400010 */  bnez      $v0, .L802402DC
 /* EDC27C 8024029C 0080882D */   daddu    $s1, $a0, $zero
-/* EDC280 802402A0 0C00AFF5 */  jal       func_8002BFD4
+/* EDC280 802402A0 0C00AFF5 */  jal       dead_heap_malloc
 /* EDC284 802402A4 24040040 */   addiu    $a0, $zero, 0x40
 /* EDC288 802402A8 AE020000 */  sw        $v0, ($s0)
 /* EDC28C 802402AC 0000182D */  daddu     $v1, $zero, $zero

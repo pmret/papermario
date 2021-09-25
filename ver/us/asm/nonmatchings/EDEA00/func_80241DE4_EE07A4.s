@@ -330,7 +330,7 @@ glabel func_80241DE4_EE07A4
 /* EE0C58 80242298 8EC60018 */  lw        $a2, 0x18($s6)
 /* EE0C5C 8024229C 4600218D */  trunc.w.s $f6, $f4
 /* EE0C60 802422A0 44073000 */  mfc1      $a3, $f6
-/* EE0C64 802422A4 0C00ADA9 */  jal       func_8002B6A4
+/* EE0C64 802422A4 0C00ADA9 */  jal       dead_update_lerp
 /* EE0C68 802422A8 0000202D */   daddu    $a0, $zero, $zero
 /* EE0C6C 802422AC 44050000 */  mfc1      $a1, $f0
 /* EE0C70 802422B0 8E46000C */  lw        $a2, 0xc($s2)

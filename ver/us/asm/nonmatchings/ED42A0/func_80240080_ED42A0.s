@@ -11,7 +11,7 @@ glabel func_80240080_ED42A0
 /* ED42B8 80240098 8E020000 */  lw        $v0, ($s0)
 /* ED42BC 8024009C 14400010 */  bnez      $v0, .L802400E0
 /* ED42C0 802400A0 0080882D */   daddu    $s1, $a0, $zero
-/* ED42C4 802400A4 0C00AFF5 */  jal       func_8002BFD4
+/* ED42C4 802400A4 0C00AFF5 */  jal       dead_heap_malloc
 /* ED42C8 802400A8 24040040 */   addiu    $a0, $zero, 0x40
 /* ED42CC 802400AC AE020000 */  sw        $v0, ($s0)
 /* ED42D0 802400B0 0000182D */  daddu     $v1, $zero, $zero
