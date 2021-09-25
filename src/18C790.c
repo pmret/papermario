@@ -12,7 +12,7 @@ ApiStatus func_8025DEB0(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "18C790", func_8025DEC4);
 
 ApiStatus func_8025E030(Evt* script, s32 isInitialCall) {
-    return D_8029FB78 != 0 ? ApiStatus_DONE2 : 0;
+    return D_8029FB78 != 0 ? ApiStatus_DONE2 : ApiStatus_BLOCK;
 }
 
 ApiStatus func_8025E044(Evt* script, s32 isInitialCall) {

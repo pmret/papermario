@@ -95,22 +95,21 @@ void dispose_merlee_message(PopupMessage* message) {
         heap_free(message->message);
         message->message = NULL;
     }
-    message->active = 0;
+    message->active = FALSE;
 }
 
 void show_merlee_message(s16 messageIndex, s16 duration) {
-    PopupMessage* temp_v0;
+    PopupMessage* popup = get_current_merlee_message();
 
-    temp_v0 = get_current_merlee_message();
-    if (temp_v0 != 0) {
-        temp_v0->unk_04 = update_merlee_message;
-        temp_v0->drawFunc = draw_merlee_message;
-        temp_v0->unk_17 = 1;
-        temp_v0->unk_00 = 0;
-        temp_v0->unk_08 = NULL;
-        temp_v0->messageIndex = messageIndex;
-        temp_v0->duration = duration;
-        temp_v0->unk_16 = 0;
+    if (popup != 0) {
+        popup->unk_04 = update_merlee_message;
+        popup->drawFunc = draw_merlee_message;
+        popup->unk_17 = 1;
+        popup->unk_00 = 0;
+        popup->unk_08 = NULL;
+        popup->messageIndex = messageIndex;
+        popup->duration = duration;
+        popup->unk_16 = 0;
         D_800A0F40 = 1;
     }
 }
@@ -118,6 +117,7 @@ void show_merlee_message(s16 messageIndex, s16 duration) {
 #ifdef NON_MATCHING // .rodata alignment, will match once all other functions in this file are matched
 void update_merlee_message(PopupMessage* popup) {
     s32 closeMessage = 0;
+
     switch (popup->unk_16) {
         case 0:
             popup->unk_16 = 1;
@@ -142,6 +142,7 @@ void update_merlee_message(PopupMessage* popup) {
             closeMessage = 1;
             break;
     }
+
     if (closeMessage) {
         set_window_update(9, 2);
         D_800A0F40 = 0;

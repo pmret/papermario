@@ -54,20 +54,25 @@ void destroy_popup_menu(void) {
     free_hud_element(D_8010D66C);
     free_hud_element(D_8010D670);
     free_hud_element(D_8010D674);
+
     if (D_8010D69C->popupType == POPUP_TYPE_TRADE_FOR_BADGE) {
         free_hud_element(D_8010D660);
         free_hud_element(D_8010D664);
     }
+
     if (D_8010D69C->popupType == POPUP_TYPE_UPGRADE_PARTNER) {
         free_hud_element(D_8010D660);
         free_hud_element(D_8010D664);
     }
+
     if (D_8010D69C->popupType == POPUP_TYPE_SWITCH_PARTNER || D_8010D69C->popupType == POPUP_TYPE_UPGRADE_PARTNER) {
         free_hud_element(D_8010D668);
     }
+
     if (D_8010D69C->popupType == POPUP_TYPE_SELL_ITEM) {
         free_hud_element(D_8010D660);
     }
+
     if ((D_8010D69C->popupType <= POPUP_TYPE_USE_ITEM ||
          D_8010D69C->popupType == POPUP_TYPE_SWITCH_PARTNER ||
          D_8010D69C->popupType == POPUP_TYPE_THROW_AWAY_ITEM ||
@@ -80,6 +85,7 @@ void destroy_popup_menu(void) {
         }
         close_status_menu();
     }
+
     D_8010D640 = -4;
 }
 
