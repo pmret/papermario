@@ -8,11 +8,6 @@ Bytecode* evt_goto_next_case(Evt* script);
 Bytecode* evt_goto_end_loop(Evt* script);
 s32 evt_get_variable_index(Evt* script, s32 var);
 
-u8 D_802D9D70 = 0xFE;
-u8 D_802D9D71 = 0xFE;
-u8 D_802D9D72 = 0x00;
-u8 D_802D9D73 = 0xFF;
-
 // BSS
 extern s8 evtDebugPrintBuffer[];
 
@@ -1623,7 +1618,6 @@ s32 evt_execute_next_command(Evt *script) {
     }
 }
 
-// TODO: consider renaming to evt_get_variable
 #ifdef NON_MATCHING
 s32 evt_get_variable(Evt* script, Bytecode var) {
     s32 wordIdx;
@@ -1900,8 +1894,6 @@ Bytecode* evt_skip_else(Evt* script) {
                     return pos;
                 }
                 break;
-            // If this isn't copy-pasted at least once, the function breaks, so
-            // might as well be consistent
             case EVT_OP_IF_EQ:
                 nestedIfDepth++;
                 break;

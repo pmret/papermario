@@ -1,5 +1,11 @@
 #include "common.h"
 
+// TODO: not sure where these go
+u8 D_802D9D70 = 0xFE;
+u8 D_802D9D71 = 0xFE;
+u8 D_802D9D72 = 0x00;
+u8 D_802D9D73 = 0xFF;
+
 INCLUDE_ASM(ApiStatus, "evt/demo_api", SetSpriteShading, Evt* script, s32 isInitialCall);
 
 ApiStatus EnableSpriteShading(Evt* script, s32 isInitialCall) {
