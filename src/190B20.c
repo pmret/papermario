@@ -1200,17 +1200,17 @@ INCLUDE_ASM(s32, "190B20", func_80265CE8);
 
 INCLUDE_ASM(s32, "190B20", func_80265D44);
 
-s32 lookup_defense(DefenseTableEntry* defenseTable, Element elementKey) {
-    DefenseTableEntry* row;
+s32 lookup_defense(DictionaryEntry* defenseTable, Element elementKey) {
+    DictionaryEntry* row;
     s32 normalDefense = 0;
 
-    for (row = defenseTable; row->element != ELEMENT_END; row++, defenseTable++) {
-        if (row->element == ELEMENT_NORMAL) {
-            normalDefense = defenseTable->defense;
+    for (row = defenseTable; row->key != ELEMENT_END; row++, defenseTable++) {
+        if (row->key == ELEMENT_NORMAL) {
+            normalDefense = defenseTable->value;
         }
 
-        if (row->element == elementKey) {
-            normalDefense = defenseTable->defense;
+        if (row->key == elementKey) {
+            normalDefense = defenseTable->value;
             break;
         }
     }
@@ -1219,9 +1219,43 @@ s32 lookup_defense(DefenseTableEntry* defenseTable, Element elementKey) {
     return normalDefense;
 }
 
-INCLUDE_ASM(s32, "190B20", lookup_status_chance); // exactly (?) the same as lookup_defense
+s32 lookup_status_chance(DictionaryEntry* statusTable, Element statusKey) {
+    DictionaryEntry* row;
+    s32 normalChance = 0;
 
-INCLUDE_ASM(s32, "190B20", lookup_status_duration_mod); // exactly (?) the same as lookup_defense
+    for (row = statusTable; row->key != STATUS_END; row++, statusTable++) {
+        if (row->key == STATUS_DEFAULT) {
+            normalChance = statusTable->value;
+        }
+
+        if (row->key == statusKey) {
+            normalChance = statusTable->value;
+            break;
+        }
+    }
+
+    // Fall back to normal chance if given element is not specified in table
+    return normalChance;
+}
+
+s32 lookup_status_duration_mod(DictionaryEntry* statusTable, Element statusKey) {
+    DictionaryEntry* row;
+    s32 normalDuration = 0;
+
+    for (row = statusTable; row->key != ELEMENT_END; row++, statusTable++) {
+        if (row->key == STATUS_DEFAULT_TURN_MOD) {
+            normalDuration = statusTable->value;
+        }
+
+        if (row->key == statusKey) {
+            normalDuration = statusTable->value;
+            break;
+        }
+    }
+
+    // Fall back to normal duration if given element is not specified in table
+    return normalDuration;
+}
 
 s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -1474,7 +1508,24 @@ INCLUDE_ASM(s32, "190B20", func_80266B14);
 
 INCLUDE_ASM(s32, "190B20", try_inflict_status);
 
-INCLUDE_ASM(s32, "190B20", inflict_status_set_duration);
+s32 inflict_status_set_duration(Actor* actor, s32 statusTypeKey, s32 statusDurationKey, s32 duration) {
+    s32 var0 = duration;
+    s32 statusDuration = 0;
+
+    if (actor->statusTable == NULL || lookup_status_chance(actor->statusTable, statusTypeKey) > 0) {
+        statusDuration = var0;
+    }
+
+    if (statusDuration > 0) {
+        return inflict_status(actor, statusTypeKey, statusDuration);
+    }
+    else {
+        var0 = 0;
+    }
+
+    return 0;
+}
+
 
 INCLUDE_ASM(s32, "190B20", func_80266D6C);
 
