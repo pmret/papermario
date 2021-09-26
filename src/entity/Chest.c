@@ -147,8 +147,6 @@ INCLUDE_ASM(s32, "entity/Chest", entity_GiantChest_hide_effect);
 
 INCLUDE_ASM(s32, "entity/Chest", entity_GiantChest_open);
 
-// the function itself matches, but somehow it breaks other completely unrelated files
-#ifdef NON_MATCHING
 void entity_GiantChest_give_equipment(Entity* entity) {
     Chest* data = (Chest*)entity->dataBuf;
     f32 angle;
@@ -189,9 +187,6 @@ void entity_GiantChest_give_equipment(Entity* entity) {
     }
     set_global_flag(flag);
 }
-#else
-INCLUDE_ASM(void, "entity/Chest", entity_GiantChest_give_equipment);
-#endif
 
 void entity_Chest_start_bound_script(Entity* entity) {
     entity_start_script(entity);
