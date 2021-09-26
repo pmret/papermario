@@ -508,5 +508,8 @@ void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 heigh
 void set_window_update(s32 panelID, s32);
 void snd_stop_sound(SoundID soundID);
 void partner_disable_input(void);
+void func_80268798(s32, s32, s32, s32);
+void func_802687E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void sfx_stop_sound(SongID soundID);
 
 #endif
