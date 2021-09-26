@@ -2317,4 +2317,13 @@ typedef struct unkPartnerStruct {
     /* 0x014 */ f32 unk_14;
     /* 0x018 */ f32 unk_18;
 } unkPartnerStruct; // size = 0x1C
+
+typedef struct struct8015A578 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03[5];
+    /* 0x08 */ f32 unk_08;
+} struct8015A578; // size = 0x0C
+
 #endif
