@@ -111,7 +111,7 @@ void N(reflection_setup_wall)(void) {
 
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
-        renderTaskPtr->appendGfx = N(reflection_render_wall);
+        renderTaskPtr->appendGfx = (void(*))N(reflection_render_wall);
         renderTaskPtr->distance = -screenZ;
         queue_render_task(renderTaskPtr);
     }

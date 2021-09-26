@@ -468,7 +468,7 @@ void base_UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryTh
 void DeadUnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
 s32* spr_get_npc_palettes(u16 arg0);
-void spr_draw_player_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void spr_draw_player_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f arg4);
 void spr_draw_npc_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
 s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
