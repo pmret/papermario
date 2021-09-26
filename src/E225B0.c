@@ -1,11 +1,5 @@
 #include "common.h"
 
-void func_8013AA9C(s32, s32, s32, s32, s32, s32, s32); // extern
-extern Matrix4f D_802B7580_E22B30;
-extern Matrix4f D_802B7BA0_E23150;
-extern Matrix4f D_802B7BC0_E23170;
-extern Matrix4f D_802B7BE0_E23190;
-extern Matrix4f D_802B7C00_E231B0;
 
 typedef struct struct802B7C78 {
     /* 0x00 */ f32 x;
@@ -31,10 +25,18 @@ typedef struct UnknownCommand {
     /* 0x10 */ u8 unk_10;
 } UnknownCommand;
 
-void func_8013AF70(s32, UnknownCommand*, s32, Matrix4f*); // extern
+extern Matrix4f D_802B7580_E22B30;
+extern Matrix4f D_802B7BA0_E23150;
+extern Matrix4f D_802B7BC0_E23170;
+extern Matrix4f D_802B7BE0_E23190;
+extern Matrix4f D_802B7C00_E231B0;
 
 extern void (*D_8010C93C)(void);
 extern struct802B7C78* D_802B7C78_E23228;
+extern struct8015A578 D_8015A578;
+
+void func_8013AA9C(s32, s32, s32, s32, s32, s32, s32);
+void func_8013AF70(s32, UnknownCommand*, s32, Matrix4f*);
 void func_802B735C_E2290C(void);
 
 void func_802B7000_E225B0(void) {
@@ -49,7 +51,7 @@ void func_802B7000_E225B0(void) {
     struct802B7C78* localD_802B7C78_E23228;
     u16 oldMatrixListPos;
 
-    if ((gPlayerStatus.animFlags & 0x100) != 0) {
+    if (gPlayerStatus.animFlags & 0x100) {
         guScaleF(matrix1, D_802B7C78_E23228->scale, D_802B7C78_E23228->scale,
             D_802B7C78_E23228->scale);
         guRotateF(matrix2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
@@ -69,27 +71,24 @@ void func_802B7000_E225B0(void) {
         temp = D_802B7C78_E23228->unk_20;
         temp = temp - (temp / 12) * 12;
         switch (temp) {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-            // spA4 = &D_802B7BA0_E23150;
-            command.unk_04 = &D_802B7BA0_E23150;
-            break;
-        case 4:
-        case 5:
-        case 6:
-        case 7:
-            // spA4 = &D_802B7BC0_E23170;
-            command.unk_04 = &D_802B7BC0_E23170;
-            break;
-        case 8:
-        case 9:
-        case 10:
-        case 11:
-            // spA4 = &D_802B7BE0_E23190;
-            command.unk_04 = &D_802B7BE0_E23190;
-            break;
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                command.unk_04 = &D_802B7BA0_E23150;
+                break;
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                command.unk_04 = &D_802B7BC0_E23170;
+                break;
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+                command.unk_04 = &D_802B7BE0_E23190;
+                break;
         }
         func_8013AA9C(0, 7, 0xFF, 0xFF, 0xFF, D_802B7C78_E23228->unk_28, 0);
 
@@ -107,25 +106,17 @@ void func_802B7000_E225B0(void) {
 
 
 void func_802B72C0_E22870(void) {
-    mem_clear((s8*)D_802B7C78_E23228, 0x2C);
+    mem_clear((s8*)D_802B7C78_E23228, sizeof(*D_802B7C78_E23228));
 
-    D_802B7C78_E23228->x = (f32)gPlayerStatus.position.x;
-    D_802B7C78_E23228->y = (f32)(gPlayerStatus.position.y + (f32)gPlayerStatus.colliderHeight + 8.0f);
-    D_802B7C78_E23228->z = (f32)gPlayerStatus.position.z;
+    D_802B7C78_E23228->x = gPlayerStatus.position.x;
+    D_802B7C78_E23228->y = gPlayerStatus.position.y + gPlayerStatus.colliderHeight + 8.0f;
+    D_802B7C78_E23228->z = gPlayerStatus.position.z;
 
     D_802B7C78_E23228->unk_28 = 0xFF;
 
     gPlayerStatus.animFlags |= 0x100;
     D_8010C93C = &func_802B735C_E2290C;
 }
-
-
-typedef struct struct8015A578 {
-    u8 unk_0[0x2];
-    u8 unk_2;
-    u8 unk_3[0x9];
-} struct8015A578;
-extern struct8015A578 D_8015A578;
 
 void func_802B735C_E2290C(void) {
     f32 temp_f2;
@@ -140,63 +131,55 @@ void func_802B735C_E2290C(void) {
     temp_a0 = D_802B7C78_E23228;
     temp_f2 = temp_a0->y;
     temp_v1 = temp_a0->unk_24;
-    temp_a0->y = temp_f2 + (((playerStatus->position.y + (f32) playerStatus->colliderHeight + 10.0f)
-            - temp_f2) / 1.5f);
+    temp_a0->y = temp_f2 + (((playerStatus->position.y + playerStatus->colliderHeight + 10.0f) - temp_f2) / 1.5f);
     temp_a0->x = playerStatus->position.x;
     temp_a0->z = playerStatus->position.z;
 
     switch (temp_v1) {
-    case 0:
-        if (partnerActionStatus->actionState.b[0] != 0
-                && partnerActionStatus->actionState.b[3] == 8) {
-            phi_v0 = gGameStatusPtr->unk_7D;
-        } else {
-            phi_v0 = playerStatus->flags & 0x3000;
-        }
-        if (phi_v0 == 0) {
-            temp_v1_3 = D_802B7C78_E23228;
-            temp_v1_3->unk_24 += 1;
-            return;
-        }
-        break;
-
-    case 1:
-        if ((playerStatus->flags & 0x20) != 0) {
-            temp_a0->unk_24 = 3;
-            return;
-        }
-
-        if (temp_a0->unk_18++ >= 0x10) {
-            temp_a0->scale = 0.36f;
-            temp_a0->unk_24 += 1;
-        }
-        break;
-
-    case 2:
-        temp_a0->scale = 0.57f;
-        temp_a0->unk_24 += 1;
-        sfx_play_sound_at_player(0x17B, 0);
-        break;
-
-    case 3:
-        temp_a0->scale = 0.53f;
-        if (temp_a0->unk_18 >= 0x2F || (playerStatus->flags & 0x20) != 0) {
-            temp_a0->unk_28 -= 0x40;
-            if (temp_a0->unk_28 < 0) {
-                temp_a0->unk_28 = 0;
-                temp_a0->unk_18 = 0x33;
+        case 0:
+            if (partnerActionStatus->actionState.b[0] && partnerActionStatus->actionState.b[3] == 8) {
+                phi_v0 = gGameStatusPtr->unk_7D;
+            } else {
+                phi_v0 = playerStatus->flags & 0x3000;
             }
-        }
+            if (phi_v0 == 0) {
+                temp_v1_3 = D_802B7C78_E23228;
+                temp_v1_3->unk_24 += 1;
+                return;
+            }
+            break;
+        case 1:
+            if (playerStatus->flags & 0x20) {
+                temp_a0->unk_24 = 3;
+                return;
+            }
 
-        if (D_802B7C78_E23228->unk_18++ >= 0x33) {
-            D_8015A578.unk_2 = 0;
-            D_8010C93C = NULL;
-            playerStatus->animFlags &= ~0x100;
-        }
-        break;
+            if (temp_a0->unk_18++ >= 0x10) {
+                temp_a0->scale = 0.36f;
+                temp_a0->unk_24 += 1;
+            }
+            break;
+        case 2:
+            temp_a0->scale = 0.57f;
+            temp_a0->unk_24 += 1;
+            sfx_play_sound_at_player(SOUND_UNKNOWN_17B, 0);
+            break;
+        case 3:
+            temp_a0->scale = 0.53f;
+            if (temp_a0->unk_18 >= 0x2F || playerStatus->flags & 0x20) {
+                temp_a0->unk_28 -= 0x40;
+                if (temp_a0->unk_28 < 0) {
+                    temp_a0->unk_28 = 0;
+                    temp_a0->unk_18 = 0x33;
+                }
+            }
 
-    default:
-        break;
+            if (D_802B7C78_E23228->unk_18++ >= 0x33) {
+                D_8015A578.unk_02 = 0;
+                D_8010C93C = NULL;
+                playerStatus->animFlags &= ~0x100;
+            }
+            break;
     }
 }
 
