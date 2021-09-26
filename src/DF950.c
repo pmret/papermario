@@ -2,7 +2,7 @@
 
 #define MAX_SOUND_INSTANCES 10
 
-typedef struct Sound {
+typedef struct SoundInstance {
     /* 0x00 */ s32 flags;
     /* 0x04 */ SoundID soundID;
     /* 0x08 */ s32 sourceFlags;
@@ -10,11 +10,11 @@ typedef struct Sound {
     /* 0x0D */ u8 pan;
     /* 0x0E */ s16 pitchShift;
     /* 0x10 */ Vec3f position;
-} Sound; // size = 0x1C
+} SoundInstance; // size = 0x1C
 
-extern Sound D_801598A0[MAX_SOUND_INSTANCES];
-extern Sound D_801599B8[MAX_SOUND_INSTANCES];
-extern Sound* D_80159AD0;
+extern SoundInstance D_801598A0[MAX_SOUND_INSTANCES];
+extern SoundInstance D_801599B8[MAX_SOUND_INSTANCES];
+extern SoundInstance* D_80159AD0;
 
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
@@ -249,7 +249,7 @@ void sfx_clear_env_sounds(s16 playSounds) {
 
     if (playSounds) {
         s32 i;
-        Sound* sound = D_80159AD0;
+        SoundInstance* sound = D_80159AD0;
         for (i = 0; i < MAX_SOUND_INSTANCES; sound++) {
             if (sound->flags & 1) {
                 snd_start_sound_with_shift(sound->soundID, sound->volume, sound->pan, sound->pitchShift);
@@ -258,7 +258,7 @@ void sfx_clear_env_sounds(s16 playSounds) {
             i++;
         }
     } else {
-        bzero(D_80159AD0, MAX_SOUND_INSTANCES * sizeof(Sound));
+        bzero(D_80159AD0, MAX_SOUND_INSTANCES * sizeof(SoundInstance));
     }
 }
 
@@ -275,7 +275,7 @@ s32 func_80149828(void) {
 
 void sfx_stop_env_sounds(void) {
     s32 i;
-    Sound* sound;
+    SoundInstance* sound;
 
     if (!gGameStatusPtr->isBattle) {
         D_80159AD0 = D_801598A0;
@@ -294,9 +294,9 @@ void sfx_stop_env_sounds(void) {
     }
 }
 
-Sound* sfx_get_env_sound_instance(s32 soundID) {
+SoundInstance* sfx_get_env_sound_instance(s32 soundID) {
     s32 i;
-    Sound* sound = D_80159AD0;
+    SoundInstance* sound = D_80159AD0;
 
     for (i = 0; i < MAX_SOUND_INSTANCES; i++) {
         if (sound->flags & 1 && sound->soundID == soundID) {
@@ -311,7 +311,7 @@ Sound* sfx_get_env_sound_instance(s32 soundID) {
 
 void sfx_play_sound_looping(SoundID soundId, u8 volume, u8 pan, s16 pitchShift) {
     s32 i;
-    Sound* sound = D_80159AD0;
+    SoundInstance* sound = D_80159AD0;
     for (i = 0; i < MAX_SOUND_INSTANCES; i++) {
         if (!(sound->flags & 1)) {
             break;
@@ -331,7 +331,7 @@ void sfx_play_sound_looping(SoundID soundId, u8 volume, u8 pan, s16 pitchShift) 
 
 void sfx_register_looping_sound_at_position(SoundID soundID, s32 flags, f32 x, f32 y, f32 z) {
     s32 i;
-    Sound* sound = D_80159AD0;
+    SoundInstance* sound = D_80159AD0;
     for (i = 0; i < MAX_SOUND_INSTANCES; i++) {
         if (!(sound->flags & 1)) {
             break;
@@ -351,7 +351,7 @@ void sfx_register_looping_sound_at_position(SoundID soundID, s32 flags, f32 x, f
 }
 
 s32 sfx_adjust_env_sound_pos(s32 soundID, s32 sourceFlags, f32 x, f32 y, f32 z) {
-    Sound* sound = sfx_get_env_sound_instance(soundID);
+    SoundInstance* sound = sfx_get_env_sound_instance(soundID);
 
     if (sound == NULL) {
         return 0;
@@ -368,7 +368,7 @@ s32 sfx_adjust_env_sound_pos(s32 soundID, s32 sourceFlags, f32 x, f32 y, f32 z) 
 }
 
 void func_80149A6C(SoundID soundID, s32 keepPlaying) {
-    Sound* sound = sfx_get_env_sound_instance(soundID);
+    SoundInstance* sound = sfx_get_env_sound_instance(soundID);
 
     if (sound != NULL) {
         sound->flags &= -4;
@@ -382,7 +382,7 @@ void func_80149A6C(SoundID soundID, s32 keepPlaying) {
 INCLUDE_ASM(void, "DF950", sfx_play_sound_with_params, s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 
 void sfx_adjust_env_sound_params(SongID soundID, u8 volume, u8 pan, s16 pitchShift) {
-    Sound* sound;
+    SoundInstance* sound;
 
     if (soundID < 0) {
         sound = sfx_get_env_sound_instance(D_8014F2D0[soundID & 0xFFFF]);
