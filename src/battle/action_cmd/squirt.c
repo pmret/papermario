@@ -74,7 +74,7 @@ INCLUDE_ASM(s32, "battle/action_cmd/squirt", func_802A9208_429F28);
 
 void func_802A9634_42A354(void) {
     s32 x, y;
-    HudElement* hudElement;
+    s32 hudElement;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     draw_hud_element_clipped(actionCommandStatus->hudElements[0]);
