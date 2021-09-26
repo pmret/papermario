@@ -1,5 +1,24 @@
 #include "common.h"
 
+#define MAX_SOUND_INSTANCES 10
+
+typedef struct Sound {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ SoundID soundID;
+    /* 0x08 */ s32 sourceFlags;
+    /* 0x0C */ u8 volume;
+    /* 0x0D */ u8 pan;
+    /* 0x0E */ s16 pitchShift;
+    /* 0x10 */ Vec3f position;
+} Sound; // size = 0x1C
+
+extern Sound D_801598A0[MAX_SOUND_INSTANCES];
+extern Sound D_801599B8[MAX_SOUND_INSTANCES];
+extern Sound* D_80159AD0;
+
+void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
+void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
+
 s32 D_8014F2D0[] = { 0x00000287, 0x000002A8, 0x00000054, 0x00000056, 0x00000024, 0x00000027, 0x00000021, 0x00000022,
                      0x00000349, 0x00000273, 0x00000275, 0x00000275, 0x00000274, 0x00000273, 0x00000274, 0x00000099,
                      0x0000009E, 0x0000032E, 0x0000008E, 0x00000089, 0x00000083, 0x00000388, 0x000000A0, 0x0000004A,
@@ -51,16 +70,152 @@ s32 D_8014F58C[] = { 0x00002043, 0x00002044 };
 s32 D_8014F594[] = { 0x00002078, 0x00002079 };
 s32 D_8014F59C[] = { 0x000003B6, 0x000003B7 };
 
-s32 D_8014F5A4[] = { &D_8014F48C, 0x00020000, &D_8014F494, 0x00020000, &D_8014F49C, 0x00020000, &D_8014F4A4, 0x00020000,
-                     &D_8014F4AC, 0x00020000, &D_8014F4B4, 0x00020000, &D_8014F4BC, 0x00020000, &D_8014F4C4, 0x00020000,
-                     &D_8014F4CC, 0x00020000, &D_8014F4D4, 0x00020000, &D_8014F4DC, 0x00020000, &D_8014F4E4, 0x00020000,
-                     &D_8014F4EC, 0x00020000, &D_8014F4F4, 0x00020000, &D_8014F4FC, 0x00020000, &D_8014F504, 0x00020000,
-                     &D_8014F50C, 0x00020000, &D_8014F514, 0x00020000, &D_8014F51C, 0x00020000, &D_8014F524, 0x00020000,
-                     &D_8014F52C, 0x00030000, &D_8014F538, 0x00020000, &D_8014F540, 0x00020000, &D_8014F548, 0x00030000,
-                     &D_8014F554, 0x00020000, &D_8014F55C, 0x00020000, &D_8014F564, 0x00020000, &D_8014F56C, 0x00020000,
-                     &D_8014F574, 0x00020000, &D_8014F57C, 0x00020000, &D_8014F584, 0x00020000, &D_8014F58C, 0x00020000,
-                     &D_8014F594, 0x00020000, &D_8014F59C, 0x00020000,
-                   };
+typedef struct struct_8014F5A4 {
+    /* 0x00 */ s32* unk_00;
+    /* 0x04 */ s16 unk_04;
+    /* 0x06 */ s16 unk_06;
+} struct_8014F5A4;
+
+struct_8014F5A4 D_8014F5A4[] = {
+    {
+        .unk_00 = D_8014F48C,
+        .unk_04 = ARRAY_COUNT(D_8014F48C),
+    },
+    {
+        .unk_00 = D_8014F494,
+        .unk_04 = ARRAY_COUNT(D_8014F494),
+    },
+    {
+        .unk_00 = D_8014F49C,
+        .unk_04 = ARRAY_COUNT(D_8014F494),
+    },
+    {
+        .unk_00 = D_8014F4A4,
+        .unk_04 = ARRAY_COUNT(D_8014F4A4),
+    },
+    {
+        .unk_00 = D_8014F4AC,
+        .unk_04 = ARRAY_COUNT(D_8014F4AC),
+    },
+    {
+        .unk_00 = D_8014F4B4,
+        .unk_04 = ARRAY_COUNT(D_8014F4B4),
+    },
+    {
+        .unk_00 = D_8014F4BC,
+        .unk_04 = ARRAY_COUNT(D_8014F4BC),
+    },
+    {
+        .unk_00 = D_8014F4C4,
+        .unk_04 = ARRAY_COUNT(D_8014F4C4),
+    },
+    {
+        .unk_00 = D_8014F4CC,
+        .unk_04 = ARRAY_COUNT(D_8014F4CC),
+    },
+    {
+        .unk_00 = D_8014F4D4,
+        .unk_04 = ARRAY_COUNT(D_8014F4D4),
+    },
+    {
+        .unk_00 = D_8014F4DC,
+        .unk_04 = ARRAY_COUNT(D_8014F4DC),
+    },
+    {
+        .unk_00 = D_8014F4E4,
+        .unk_04 = ARRAY_COUNT(D_8014F4E4),
+    },
+    {
+        .unk_00 = D_8014F4EC,
+        .unk_04 = ARRAY_COUNT(D_8014F4EC),
+    },
+    {
+        .unk_00 = D_8014F4F4,
+        .unk_04 = ARRAY_COUNT(D_8014F4F4),
+    },
+    {
+        .unk_00 = D_8014F4FC,
+        .unk_04 = ARRAY_COUNT(D_8014F4FC),
+    },
+    {
+        .unk_00 = D_8014F504,
+        .unk_04 = ARRAY_COUNT(D_8014F504),
+    },
+    {
+        .unk_00 = D_8014F50C,
+        .unk_04 = ARRAY_COUNT(D_8014F50C),
+    },
+    {
+        .unk_00 = D_8014F514,
+        .unk_04 = ARRAY_COUNT(D_8014F514),
+    },
+    {
+        .unk_00 = D_8014F51C,
+        .unk_04 = ARRAY_COUNT(D_8014F51C),
+    },
+    {
+        .unk_00 = D_8014F524,
+        .unk_04 = ARRAY_COUNT(D_8014F524),
+    },
+    {
+        .unk_00 = D_8014F52C,
+        .unk_04 = ARRAY_COUNT(D_8014F52C),
+    },
+    {
+        .unk_00 = D_8014F538,
+        .unk_04 = ARRAY_COUNT(D_8014F538),
+    },
+    {
+        .unk_00 = D_8014F540,
+        .unk_04 = ARRAY_COUNT(D_8014F540),
+
+    },
+    {
+        .unk_00 = D_8014F548,
+        .unk_04 = ARRAY_COUNT(D_8014F548),
+
+    },
+    {
+        .unk_00 = D_8014F554,
+        .unk_04 = ARRAY_COUNT(D_8014F554),
+    },
+    {
+        .unk_00 = D_8014F55C,
+        .unk_04 = ARRAY_COUNT(D_8014F55C),
+    },
+    {
+        .unk_00 = D_8014F564,
+        .unk_04 = ARRAY_COUNT(D_8014F564),
+    },
+    {
+        .unk_00 = D_8014F56C,
+        .unk_04 = ARRAY_COUNT(D_8014F56C),
+    },
+    {
+        .unk_00 = D_8014F574,
+        .unk_04 = ARRAY_COUNT(D_8014F574),
+    },
+    {
+        .unk_00 = D_8014F57C,
+        .unk_04 = ARRAY_COUNT(D_8014F57C),
+    },
+    {
+        .unk_00 = D_8014F584,
+        .unk_04 = ARRAY_COUNT(D_8014F584),
+    },
+    {
+        .unk_00 = D_8014F58C,
+        .unk_04 = ARRAY_COUNT(D_8014F58C),
+    },
+    {
+        .unk_00 = D_8014F594,
+        .unk_04 = ARRAY_COUNT(D_8014F594),
+    },
+    {
+        .unk_00 = D_8014F59C,
+        .unk_04 = ARRAY_COUNT(D_8014F59C),
+    }
+};
 
 s32 D_8014F6B4[] = { 0x000001C1, 0x000001C2, 0x000001C3, 0x000001C4, 0x000001C5, 0x000001C6, 0x000001C7, 0x000001C8,
                      0x000001C9, 0x000001CA, 0x000001CB, 0x000001CC, 0x000020A3, 0x000020A4, 0x00000000,
@@ -76,9 +231,36 @@ void sfx_reset_door_sounds(void) {
     D_80151308 = 0;
 }
 
-INCLUDE_ASM(void, "DF950", sfx_clear_sounds);
+void sfx_clear_sounds(void) {
+    bzero(&D_801598A0, sizeof(D_801598A0));
+    bzero(&D_801599B8, sizeof(D_801599B8));
+    D_80159AD0 = D_801598A0;
+    func_801497FC(0);
+    sfx_reset_door_sounds();
+}
 
-INCLUDE_ASM(s32, "DF950", sfx_clear_env_sounds);
+// name might be incorrect?
+void sfx_clear_env_sounds(s16 playSounds) {
+    if (!gGameStatusPtr->isBattle) {
+        D_80159AD0 = D_801598A0;
+    } else {
+        D_80159AD0 = D_801599B8;
+    }
+
+    if (playSounds) {
+        s32 i;
+        Sound* sound = D_80159AD0;
+        for (i = 0; i < MAX_SOUND_INSTANCES; sound++) {
+            if (sound->flags & 1) {
+                snd_start_sound_with_shift(sound->soundID, sound->volume, sound->pan, sound->pitchShift);
+            }
+
+            i++;
+        }
+    } else {
+        bzero(D_80159AD0, MAX_SOUND_INSTANCES * sizeof(Sound));
+    }
+}
 
 INCLUDE_ASM(void, "DF950", sfx_update_looping_sound_params);
 
@@ -91,21 +273,128 @@ s32 func_80149828(void) {
     return D_80159AD4;
 }
 
-INCLUDE_ASM(s32, "DF950", sfx_stop_env_sounds);
+void sfx_stop_env_sounds(void) {
+    s32 i;
+    Sound* sound;
 
-INCLUDE_ASM(s32, "DF950", sfx_get_env_sound_instance);
+    if (!gGameStatusPtr->isBattle) {
+        D_80159AD0 = D_801598A0;
+        
+    } else {
+        D_80159AD0 = D_801599B8;
+    }
 
-INCLUDE_ASM(s32, "DF950", sfx_play_sound_looping);
+    sound = D_80159AD0;
+    for (i = 0; i < MAX_SOUND_INSTANCES; i++) {
+        if (sound->flags & 1) {
+            snd_stop_sound(sound->soundID);
+        }
 
-INCLUDE_ASM(s32, "DF950", sfx_register_looping_sound_at_position);
+        sound++;
+    }
+}
 
-INCLUDE_ASM(s32, "DF950", sfx_adjust_env_sound_pos, s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
+Sound* sfx_get_env_sound_instance(s32 soundID) {
+    s32 i;
+    Sound* sound = D_80159AD0;
 
-INCLUDE_ASM(s32, "DF950", func_80149A6C);
+    for (i = 0; i < MAX_SOUND_INSTANCES; i++) {
+        if (sound->flags & 1 && sound->soundID == soundID) {
+            return sound;
+        }
 
+        sound++;
+    }
+
+    return NULL;
+}
+
+void sfx_play_sound_looping(SoundID soundId, u8 volume, u8 pan, s16 pitchShift) {
+    s32 i;
+    Sound* sound = D_80159AD0;
+    for (i = 0; i < MAX_SOUND_INSTANCES; i++) {
+        if (!(sound->flags & 1)) {
+            break;
+        }
+
+        sound++;
+    }
+
+    sound->pan = pan;
+    sound->soundID = soundId;
+    sound->volume = volume;
+    sound->pitchShift = pitchShift;
+    sound->flags |= 1;
+
+    snd_start_sound_with_shift(soundId, volume, pan, pitchShift);
+}
+
+void sfx_register_looping_sound_at_position(SoundID soundID, s32 flags, f32 x, f32 y, f32 z) {
+    s32 i;
+    Sound* sound = D_80159AD0;
+    for (i = 0; i < MAX_SOUND_INSTANCES; i++) {
+        if (!(sound->flags & 1)) {
+            break;
+        }
+
+        sound++;
+    }
+
+    sound->sourceFlags = flags;
+    sound->position.x = x;
+    sound->position.y = y;
+    sound->position.z = z;
+    sound->soundID = soundID;
+    sound->flags |= 3;
+
+    sfx_play_sound_at_position(soundID, flags, x, y, z);
+}
+
+s32 sfx_adjust_env_sound_pos(s32 soundID, s32 sourceFlags, f32 x, f32 y, f32 z) {
+    Sound* sound = sfx_get_env_sound_instance(soundID);
+
+    if (sound == NULL) {
+        return 0;
+    }
+
+    sound->sourceFlags = sourceFlags;
+    sound->position.x = x;
+    sound->position.y = y;
+    sound->position.z = z;
+    sound->soundID = soundID;
+    sound->flags |= 3;
+
+    return 1;
+}
+
+void func_80149A6C(SoundID soundID, s32 keepPlaying) {
+    Sound* sound = sfx_get_env_sound_instance(soundID);
+
+    if (sound != NULL) {
+        sound->flags &= -4;
+        if (!keepPlaying) {
+            snd_stop_sound(sound->soundID);
+        }
+    }
+}
+
+// https://decomp.me/scratch/8V5LN
 INCLUDE_ASM(void, "DF950", sfx_play_sound_with_params, s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 
-INCLUDE_ASM(s32, "DF950", sfx_adjust_env_sound_params);
+void sfx_adjust_env_sound_params(SongID soundID, u8 volume, u8 pan, s16 pitchShift) {
+    Sound* sound;
+
+    if (soundID < 0) {
+        sound = sfx_get_env_sound_instance(D_8014F2D0[soundID & 0xFFFF]);
+        if (sound != NULL) {
+            sound->volume = volume;
+            sound->pan = pan;
+            sound->pitchShift = pitchShift;
+        }
+    } else {
+        snd_adjust_sound_with_shift(soundID, volume, pan, pitchShift);
+    }
+}
 
 void sfx_stop_sound(SongID soundID) {
     SongID sound = soundID;
