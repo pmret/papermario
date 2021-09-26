@@ -122,7 +122,7 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
     Npc* npc = script->owner2.npc;
     f32 distance;
 
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         func_802BD4FC_323E4C(npc);
         if (!(playerStatus->animFlags & 0x100000)) {
             if (func_800EA52C(9) != 0) {
@@ -324,7 +324,7 @@ void func_802BDDF0_324740(Npc* partner) {
 ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
     Npc* partner = script->owner2.npc;
 
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         partner_init_put_away(partner);
         if (D_802BE0C0 != 0) {
             sfx_play_sound_at_npc(SOUND_BOW_APPEAR, 0, -4);
