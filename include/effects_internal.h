@@ -1,5 +1,5 @@
-#ifndef _EFFECT_INTERNAL_H_
-#define _EFFECT_INTERNAL_H_
+#ifndef _EFFECTS_INTERNAL_H_
+#define _EFFECTS_INTERNAL_H_
 
 #include "effects.h"
 
