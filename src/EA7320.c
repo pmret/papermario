@@ -13,7 +13,7 @@ ApiStatus func_80240350_EA7320(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8024036C_EA733C(Evt* script, s32 isInitialCall) {
-    gCameras->flags &= 0xEFFF;
+    gCameras->flags &= ~0x1000;
     return ApiStatus_DONE2;
 }
 
