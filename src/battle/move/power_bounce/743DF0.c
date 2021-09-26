@@ -17,7 +17,7 @@ ApiStatus func_802A10E4_743ED4(Evt* script, s32 isInitialCall) {
     if (is_ability_active(ABILITY_DODGE_MASTER)) {
         powerBounceChance += 7;
     }
-    D_802A2730_745520 = (D_802A2730_745520 * powerBounceChance / 100);
+    D_802A2730_745520 = D_802A2730_745520 * powerBounceChance / 100;
 
     if (D_802A2730_745520 < rand_int(100)) {
         script->varTable[0] = 0;
