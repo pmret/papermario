@@ -29,16 +29,15 @@ ApiStatus func_802BD130_323A80(Evt* script, s32 isInitialCall) {
     return partner_get_out(owner) != 0;
 }
 
-s32 func_802BD168_323AB8(Evt* evt, s32 arg1) {
+ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    Npc* npc;
+    Npc* npc = script->owner2.npc;
     Entity* entity;
     f32 sp10;
     f32 sp14;
     f32 tempY;
 
-    npc = evt->owner2.npc;
-    if (arg1 != 0) {
+    if (isInitialCall) {
         partner_flying_enable(npc, 1);
         mem_clear(D_802BDFFC_32494C, sizeof(*D_802BDFFC_32494C));
         D_8010C954 = 0;
@@ -116,81 +115,80 @@ void func_802BD4FC_323E4C(Npc* partner) {
 
 INCLUDE_ASM(s32, "world/partner/bow", func_802BD540_323E90);
 
-s32 func_802BD694_323FE4(Evt* arg0, s32 arg1) {
+ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
-    Npc* npc;
+    Npc* npc = script->owner2.npc;
     f32 distance;
 
-    npc = arg0->owner2.npc;
-    if (arg1 != 0) {
+    if (isInitialCall != 0) {
         func_802BD4FC_323E4C(npc);
         if (!(playerStatus->animFlags & 0x100000)) {
             if (func_800EA52C(9) != 0) {
                 if (playerStatus->animFlags & 0x200000) {
                     playerStatus->animFlags &= ~0x200000;
-                    arg0->functionTemp[2] = disable_player_input();
+                    script->functionTemp[2] = disable_player_input();
                     D_802BE0C4 = 1;
-                    arg0->functionTemp[0] = 20;
+                    script->functionTemp[0] = 20;
                 } else {
-                    arg0->functionTemp[0] = 40;
+                    script->functionTemp[0] = 40;
                 }
             } else {
-                return 2;
+                return ApiStatus_DONE2;
             }
         } else {
-            return 2;
+            return ApiStatus_DONE2;
         }
     }
 
-    switch (arg0->functionTemp[0]) {
+    switch (script->functionTemp[0]) {
         case 40:
             if (playerStatus->statusMenuCounterinputEnabledCounter != 0) {
-                return 2;
+                return ApiStatus_DONE2;
             }
             playerStatus->flags |= 0x100;
-            arg0->functionTemp[1] = 3;
-            arg0->functionTemp[2] = disable_player_input();
+            script->functionTemp[1] = 3;
+            script->functionTemp[2] = disable_player_input();
             D_802BE0C4 = 1;
-            arg0->functionTemp[0]++;
+            script->functionTemp[0]++;
             break;
         case 41:
             if ((func_800EA52C(9) == 0 || is_starting_conversation()) &&
-                 arg0->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter
+                 script->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter
                  && D_802BE0C4 != 0) {
 
                 enable_player_input();
                 D_802BE0C4 = 0;
                 playerStatus->flags &= ~0x100;
-                return 2;
+                return ApiStatus_DONE2;
             }
-            arg0->functionTemp[1]--;
-            if (arg0->functionTemp[1] == 0) {
-                if (arg0->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter) {
+            script->functionTemp[1]--;
+            if (script->functionTemp[1] == 0) {
+                if (script->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter) {
                     if (D_802BE0C4 != 0) {
                         enable_player_input();
                         D_802BE0C4 = 0;
                     }
                     playerStatus->flags &= ~0x100;
-                    return 2;
+                    return ApiStatus_DONE2;
                 }
-                arg0->functionTemp[0] = 20;
+                script->functionTemp[0] = 20;
             }
             break;
     }
 
-    switch (arg0->functionTemp[0]) {
+    switch (script->functionTemp[0]) {
         case 20:
-            if ((playerStatus->flags & 0x800) != 0) {
+            if (playerStatus->flags & 0x800) {
                 playerStatus->flags &= ~0x100;
                 if (D_802BE0C4 != 0) {
                     enable_player_input();
                     D_802BE0C4 = 0;
                 }
-                return 2;
+                return ApiStatus_DONE2;
             }
-            if (arg0->functionTemp[2] != 0) {
+            if (script->functionTemp[2] != 0) {
                 D_802BE0C4 = 1;
             }
 
@@ -212,7 +210,7 @@ s32 func_802BD694_323FE4(Evt* arg0, s32 arg1) {
             npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
             set_action_state(ACTION_STATE_RIDE);
             suggest_player_anim_clearUnkFlag(0x10002);
-            arg0->functionTemp[0]++;
+            script->functionTemp[0]++;
             break;
         case 21:
             if (collisionStatus->currentFloor >= 0 && (playerStatus->animFlags & 0x100000) == 0) {
@@ -231,19 +229,19 @@ s32 func_802BD694_323FE4(Evt* arg0, s32 arg1) {
                     func_8003D624(npc, 7, playerStatus->alpha1, 0, 0, 0, 0);
                     suggest_player_anim_setUnkFlag(0x10014);
                     sfx_play_sound_at_npc(SOUND_BOW_VANISH, 0, -4);
-                    arg0->functionTemp[0] = 1;
+                    script->functionTemp[0] = 1;
                 }
                 break;
             }
             func_802BDDF0_324740(npc);
-            return 2;
+            return ApiStatus_DONE2;
         case 1:
             if (collisionStatus->currentFloor >= 0) {
                 playerStatus->alpha1 -= 8;
-                if (playerStatus->alpha1 < 0x81) {
-                    playerStatus->alpha1 = 0x80;
+                if (playerStatus->alpha1 <= 128) {
+                    playerStatus->alpha1 = 128;
                     npc->renderMode = 0x16;
-                    arg0->functionTemp[0]++;
+                    script->functionTemp[0]++;
                     playerStatus->flags &= ~0x100;
                     npc->flags |= 0x40;
                 }
@@ -255,11 +253,11 @@ s32 func_802BD694_323FE4(Evt* arg0, s32 arg1) {
                 break;
             }
             func_802BDDF0_324740(npc);
-            return 2;
+            return ApiStatus_DONE2;
         case 2:
             if (collisionStatus->currentFloor < 0) {
                 func_802BDDF0_324740(npc);
-                return 2;
+                return ApiStatus_DONE2;
             }
             npc->pos.x = playerStatus->position.x - D_802BE0E4;
             npc->pos.y = playerStatus->position.y - D_802BE0E8;
@@ -269,28 +267,28 @@ s32 func_802BD694_323FE4(Evt* arg0, s32 arg1) {
             if ((collisionStatus->currentFloor < 0) || distance > 10.0f ||
                  partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_C_DOWN) || playerStatus->flags & 0x800) {
                 if (func_802BD540_323E90() < 0) {
-                    arg0->functionTemp[0]++;
-                    arg0->functionTemp[1] = 3;
-                    arg0->functionTemp[2] = playerStatus->statusMenuCounterinputEnabledCounter;
+                    script->functionTemp[0]++;
+                    script->functionTemp[1] = 3;
+                    script->functionTemp[2] = playerStatus->statusMenuCounterinputEnabledCounter;
                 }
             }
             break;
         case 3:
-            if (arg0->functionTemp[1] == 0) {
-                if (arg0->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter) {
-                    arg0->functionTemp[0] = 2;
+            if (script->functionTemp[1] == 0) {
+                if (script->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter) {
+                    script->functionTemp[0] = 2;
                     break;
                 }
             } else {
-                arg0->functionTemp[1]--;
+                script->functionTemp[1]--;
                 break;
             }
 
             sfx_play_sound_at_npc(SOUND_BOW_APPEAR, 0, -4);
             func_802BDDF0_324740(npc);
-            return 1;
+            return ApiStatus_DONE1;
     }
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
 void func_802BDDF0_324740(Npc* partner) {
@@ -298,7 +296,7 @@ void func_802BDDF0_324740(Npc* partner) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     s32 actionState;
 
-    playerStatus->alpha1 = 0xFF;
+    playerStatus->alpha1 = 255;
     func_8003D624(partner, 0, 0, 0, 0, 0, 0);
     partner->renderMode = 0x11;
     get_shadow_by_index(partner->shadowIndex)->unk_05 = playerStatus->alpha1 >> 1;
@@ -311,7 +309,7 @@ void func_802BDDF0_324740(Npc* partner) {
     partner->flags &= ~0x42;
     D_802BE0C4 = 0;
     actionState = ACTION_STATE_IDLE;
-    if ((playerStatus->flags & 0x800) != 0) {
+    if (playerStatus->flags & 0x800) {
         actionState = ACTION_STATE_HIT_LAVA;
     }
 
@@ -323,9 +321,10 @@ void func_802BDDF0_324740(Npc* partner) {
     D_802BE0C0 = 0;
 }
 
-s32 func_802BDF08_324858(Evt* arg0, s32 arg1) {
-    Npc* partner = arg0->owner2.npc;
-    if (arg1 != 0) {
+ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
+    Npc* partner = script->owner2.npc;
+
+    if (isInitialCall != 0) {
         partner_init_put_away(partner);
         if (D_802BE0C0 != 0) {
             sfx_play_sound_at_npc(SOUND_BOW_APPEAR, 0, -4);
@@ -335,16 +334,16 @@ s32 func_802BDF08_324858(Evt* arg0, s32 arg1) {
     return partner_put_away(partner) != 0;
 }
 
-void func_802BDF64_3248B4(Npc* arg0) {
+void func_802BDF64_3248B4(Npc* partner) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     if (D_802BE0C0 != 0) {
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
-        partner_clear_player_tracking(arg0);
+        partner_clear_player_tracking(partner);
         partnerActionStatus->actionState.b[0] = 0;
         partnerActionStatus->actionState.b[3] = 0;
         D_802BE0C0 = 0;
-        arg0->flags &= ~0x2;
+        partner->flags &= ~0x2;
     }
 }

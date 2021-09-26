@@ -17,16 +17,15 @@ INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD21C_320D6C);
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD29C_320DEC);
 
-s32 func_802BD2D4_320E24(Evt* evt, s32 arg1) {
+ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Entity* entity;
-    Npc* npc;
+    Npc* npc = script->owner2.npc;
     f32 sp10;
     f32 sp14;
     f32 tempY;
 
-    npc = evt->owner2.npc;
-    if (arg1 != 0) {
+    if (isInitialCall) {
         partner_flying_enable(npc, 1);
         mem_clear(D_802BFE7C_3239CC, sizeof(*D_802BFE7C_3239CC));
         D_8010C954 = 0;
@@ -37,7 +36,7 @@ s32 func_802BD2D4_320E24(Evt* evt, s32 arg1) {
     if (entity == NULL) {
         partner_flying_update_player_tracking(npc);
         partner_flying_update_motion(npc);
-        return 0;
+        return ApiStatus_BLOCK;
     }
 
     switch (D_802BFE7C_3239CC->unk_04) {
@@ -98,7 +97,7 @@ s32 func_802BD2D4_320E24(Evt* evt, s32 arg1) {
             }
             break;
     }
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD678_3211C8);
@@ -117,11 +116,11 @@ INCLUDE_ASM(s32, "world/partner/lakilester", func_802BE6A0_3221F0);
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BE724_322274);
 
-s32 func_802BF4F0_323040(Evt* arg0, s32 arg1) {
+ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Camera* cam = &gCameras;
-    Npc* partner = arg0->owner2.npc;
+    Npc* partner = script->owner2.npc;
     f32 sp2C;
     f32 sp28;
     f32 sp24;
@@ -129,7 +128,7 @@ s32 func_802BF4F0_323040(Evt* arg0, s32 arg1) {
     f32 yaw;
     s32 phi_v1;
 
-    if (arg1 != 0) {
+    if (isInitialCall) {
         phi_v1 = 0;
         if (D_802BFF0C == 0) {
             phi_v1 = 3;
@@ -218,7 +217,7 @@ s32 func_802BF4F0_323040(Evt* arg0, s32 arg1) {
                 D_802BFF0C = 0;
                 partner_clear_player_tracking(partner);
                 set_action_state(ACTION_STATE_HIT_FIRE);
-                return 1;
+                return ApiStatus_DONE1;
             }
             if (D_802BFF0C == 0) {
                 phys_main_collision_below();
@@ -245,9 +244,9 @@ s32 func_802BF4F0_323040(Evt* arg0, s32 arg1) {
             if (partner_put_away(partner) == FALSE) {
                 break;
             }
-            return 1;
+            return ApiStatus_DONE1;
     }
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BFA00_323550);

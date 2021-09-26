@@ -202,7 +202,9 @@ void entity_GiantChest_open(Entity* entity) {
 
             if (gGameStatusPtr->areaID == 0x12) {
                 phi_f22 = 3.0f;
-            } else phi_f22 = 4.0f;
+            } else {
+                phi_f22 = 4.0f;
+            }
 
             theta *= TAU;
             theta = theta / 360.0f;
