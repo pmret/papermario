@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240358_C8DF08
+glabel kzn_19_StarSpiritEffectFunc2
 /* C8DF08 80240358 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* C8DF0C 8024035C AFB20020 */  sw        $s2, 0x20($sp)
 /* C8DF10 80240360 0080902D */  daddu     $s2, $a0, $zero

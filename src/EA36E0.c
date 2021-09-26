@@ -8,7 +8,7 @@
 #define UNK_FUNC_50_VAR1 -583.0
 #define UNK_FUNC_50_VAR2 165.0
 
-ApiStatus func_80242DE0_EA36E0(Evt* script, s32 isInitialCall) {
+ApiStatus N(SpinyTrompHit)(Evt* script, s32 isInitialCall) {
     subtract_hp(1);
     return ApiStatus_DONE2;
 }
@@ -17,9 +17,9 @@ INCLUDE_ASM(s32, "EA36E0", func_80242E00_EA3700);
 
 #include "world/common/UnkFunc46.inc.c"
 
-// This should work, but apparently ibultra's sqrtf, can't have a dead_sqrtf counterpart in dead.h without breaking?
-// Someone smarter than me has to look into that.
-// #include "world/common/UnkFunc47.inc.c"
+// TODO: Linker magic
+// Normally this would be #include "world/common/UnkFunc47.inc.c"
+// Due to sqrtf being an inline/instrinsic func, we can't use dead.h
 #ifdef NON_MATCHING
 ApiStatus func_80242EC4_EA37C4(Evt* script, s32 isInitialCall) {
     f32 var1 = script->varTable[0] - gPlayerStatus.position.x;
@@ -38,9 +38,9 @@ INCLUDE_ASM(s32, "EA36E0", func_80242EC4_EA37C4);
 
 #include "world/common/UnkFunc49.inc.c"
 
-// This should work, but apparently ibultra's sqrtf, can't have a dead_sqrtf counterpart in dead.h without breaking?
-// Someone smarter than me has to look into that.
-// #include "world/common/UnkFunc50.inc.c"
+// TODO: Linker magic
+// Normally this would be #include "world/common/UnkFunc50.inc.c"
+// Due to sqrtf being an inline/instrinsic func, we can't use dead.h
 #ifdef NON_MATCHING
 ApiStatus func_80243054_EA3954(Evt* script, s32 isInitialCall) {
     f32 temp_f2 = UNK_FUNC_50_VAR1 - script->varTable[0]; //-469.0

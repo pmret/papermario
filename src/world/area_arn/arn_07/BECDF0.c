@@ -3,217 +3,7 @@
 #include "sprite/npc/world_tubba.h"
 #include "sprite/npc/tubbas_heart.h"
 
-typedef struct N(temp) {
-    char unk_00[0xC];
-    EffectInstanceDataThing* unk_0C;
-} N(temp);
-
-typedef struct {
-    /* 0x00 */ f32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ s32 unk_38;
-    /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ Shadow* unk_40;
-    /* 0x44 */ s16 unk_44;
-    /* 0x46 */ s16 unk_46;
-    /* 0x48 */ s16 unk_48;
-    /* 0x4A */ s16 unk_4A;
-    /* 0x4C */ s16 unk_4C;
-    /* 0x4E */ s16 unk_4E;
-    /* 0x50 */ struct N(temp)* unk_50;
-    /* 0x54 */ struct N(temp)* unk_54;
-} arn_07_struct; // size = 0x58
-
-ApiStatus N(func_80240000_BECDF0)(Evt* script, s32 isInitialCall) {
-    arn_07_struct* ptr = script->varTable[0];
-
-    sfx_adjust_env_sound_pos(0xA2, 0, ptr->unk_00, ptr->unk_04, ptr->unk_08);
-    return ((ptr->unk_44 < 2) == 0) * ApiStatus_DONE2;
-}
-
-ApiStatus N(func_8024004C_BECE3C)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
-        script->varTable[0] = ptr;
-        evt_set_variable(NULL, EVT_MAP_VAR(1), ptr);
-        ptr->unk_38 = evt_get_variable(script, *args++);
-        ptr->unk_3C = evt_get_variable(script, *args++);
-        ptr->unk_0C = evt_get_float_variable(script, *args++);
-        ptr->unk_10 = evt_get_float_variable(script, *args++);
-        ptr->unk_14 = evt_get_float_variable(script, *args++);
-        ptr->unk_18 = evt_get_float_variable(script, *args++);
-        ptr->unk_1C = evt_get_float_variable(script, *args++);
-        ptr->unk_20 = evt_get_float_variable(script, *args++);
-        ptr->unk_24 = evt_get_float_variable(script, *args++);
-        ptr->unk_28 = evt_get_float_variable(script, *args++);
-        ptr->unk_50 = (struct N(temp)*)playFX_83(2, ptr->unk_0C, ptr->unk_10, ptr->unk_14, 1.0f, 0);
-        ptr->unk_4E = 0;
-        ptr->unk_48 = 0;
-        ptr->unk_4A = 0;
-        ptr->unk_44 = 0;
-        ptr->unk_46 = 0;
-    }
-
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_802401AC_BECF9C)(Evt* script, s32 isInitialCall) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    arn_07_struct* ptr = script->varTable[0];
-
-    switch (ptr->unk_44) {
-        case 0:
-            ptr->unk_04 = update_lerp(5, ptr->unk_10, ptr->unk_1C, ptr->unk_46, ptr->unk_3C);
-            ptr->unk_00 = update_lerp(0, ptr->unk_0C, ptr->unk_18, ptr->unk_46, ptr->unk_3C);
-            ptr->unk_08 = update_lerp(0, ptr->unk_14, ptr->unk_20, ptr->unk_46, ptr->unk_3C);
-            ptr->unk_50->unk_0C->unk_08 = ptr->unk_00;
-            ptr->unk_50->unk_0C->unk_0C = ptr->unk_04;
-            ptr->unk_50->unk_0C->unk_10 = ptr->unk_08;
-            ptr->unk_46++;
-            if (ptr->unk_46 >= ptr->unk_3C) {
-                ptr->unk_44 = 1;
-                ptr->unk_46 = 0;
-            }
-            break;
-
-        case 1:
-            ptr->unk_46++;
-            if (ptr->unk_46 >= 60) {
-                ptr->unk_44 = 2;
-                ptr->unk_46 = 0;
-                ptr->unk_50->unk_0C->unk_70 = 1;
-                ptr->unk_50->unk_0C->unk_74 = 0;
-            }
-            break;
-
-        case 2:
-            ptr->unk_46++;
-            if (ptr->unk_46 >= 60) {
-                ptr->unk_54 = playFX_7B(1, ptr->unk_18, ptr->unk_1C, ptr->unk_20, 1.0f, 0);
-                *((s8*)ptr->unk_54->unk_0C + 0x34) = ptr->unk_38;
-                ptr->unk_54->unk_0C->unk_20 = 0;
-                ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);
-                ptr->unk_44 = 3;
-                ptr->unk_46 = 0;
-                ptr->unk_2C = 0.0f;
-                ptr->unk_48 = 1;
-                ptr->unk_30 = 36.0f;
-            }
-            break;
-
-        case 3:
-            ptr->unk_30 = update_lerp(0, 36.0f, 19.0f, ptr->unk_46, 120);
-            ptr->unk_46++;
-            if (ptr->unk_46 >= 120) {
-                ptr->unk_4C = 0;
-                ptr->unk_4A = 1;
-                ptr->unk_48 = 2;
-                ptr->unk_4E = 1;
-                ptr->unk_44 = 4;
-                ptr->unk_46 = 0;
-                ptr->unk_34 = ptr->unk_2C;
-            }
-            break;
-
-        case 4:
-            break;
-    }
-
-    switch (ptr->unk_4A) {
-        case 1:
-            ptr->unk_2C = update_lerp(4, ptr->unk_34, 1440.0f, ptr->unk_4C, 120);
-            ptr->unk_04 = update_lerp(0xA, ptr->unk_1C, ptr->unk_24, ptr->unk_4C, 120);
-            ptr->unk_4C++;
-            if (ptr->unk_4C >= 120) {
-                ptr->unk_4C = 0x10E;
-                ptr->unk_4A = 2;
-                ptr->unk_4E = 2;
-            }
-            break;
-
-        case 2:
-            ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
-            ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);
-            if (!(dist3D(playerStatus->position.x, playerStatus->position.y + 20.0f, playerStatus->position.z,
-                         ptr->unk_00, ptr->unk_04, ptr->unk_08) > 30.0f)) {
-                ptr->unk_4E = 3;
-            }
-            break;
-    }
-
-    switch (ptr->unk_48) {
-        case 1:
-            ptr->unk_2C = clamp_angle(ptr->unk_2C + ptr->unk_30);
-
-        case 2:
-            ptr->unk_54->unk_0C->unk_24.f = ptr->unk_2C;
-            ptr->unk_54->unk_0C->unk_04 = ptr->unk_18;
-            ptr->unk_54->unk_0C->unk_08 = ptr->unk_04;
-            ptr->unk_54->unk_0C->unk_0C = ptr->unk_20;
-            break;
-    }
-
-    return ApiStatus_BLOCK;
-}
-
-ApiStatus N(func_802405BC_BED3AC)(Evt* script, s32 isInitialCall) {
-    s32 var = evt_get_variable(script, *script->ptrReadPos);
-    arn_07_struct* ptr = script->varTable[0];
-
-    return (ptr->unk_4E == var) * ApiStatus_DONE2;
-}
-
-ApiStatus N(func_802405FC_BED3EC)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
-        script->varTable[0] = ptr;
-        ptr->unk_38 = evt_get_variable(script, *args++);
-        ptr->unk_18 = evt_get_float_variable(script, *args++);
-        ptr->unk_24 = evt_get_float_variable(script, *args++);
-        ptr->unk_20 = evt_get_float_variable(script, *args++);
-        ptr->unk_28 = evt_get_float_variable(script, *args++);
-        ptr->unk_54 = playFX_7B(1, ptr->unk_18, ptr->unk_24, ptr->unk_20, 1.0f, 0);
-        *((s8*)ptr->unk_54->unk_0C + 0x34) = ptr->unk_38;
-        ptr->unk_54->unk_0C->unk_20 = 0;
-        ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);
-        ptr->unk_4C = 0x10E;
-    }
-
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_80240708_BED4F8)(Evt* script, s32 isInitialCall) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    arn_07_struct* ptr = script->varTable[0];
-
-    ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
-    ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);
-    if (dist2D(playerStatus->position.x, playerStatus->position.z,
-               ptr->unk_18, ptr->unk_20) <= 30.0f) {
-        ptr->unk_4E = 3;
-    }
-    ptr->unk_54->unk_0C->unk_04 = ptr->unk_18;
-    ptr->unk_54->unk_0C->unk_08 = ptr->unk_04;
-    ptr->unk_54->unk_0C->unk_0C = ptr->unk_20;
-
-    return ApiStatus_BLOCK;
-}
+#include "world/common/StarSpiritEffectFunc.inc.c"
 
 s32 N(itemList_80242040)[] = {
     ITEM_MYSTICAL_KEY,
@@ -236,14 +26,14 @@ EvtSource N(80242048) = SCRIPT({
             SetCamPitch(0, EVT_VAR(2), 10000);
         }
         PanToTarget(0, 0, 1);
-        N(func_8024004C_BECE3C)(2, 50, 100, 31, -6, 145, 65, 0, 30, 0);
+        N(StarSpiritEffectFunc2)(2, 50, 100, 31, -6, 145, 65, 0, 30, 0);
         spawn {
-            N(func_802401AC_BECF9C)();
+            N(StarSpiritEffectFunc3)();
         }
         spawn {
             sleep 1;
             PlaySound(0x80000067);
-            N(func_80240000_BECDF0)();
+            N(StarSpiritEffectFunc1)();
             StopSound(0x80000067);
             PlaySoundAt(0xB2, 0, 145, 65, 0);
         }
@@ -256,7 +46,7 @@ EvtSource N(80242048) = SCRIPT({
             sleep 115;
             PlaySoundAt(0x137, 0, 145, 65, 0);
         }
-        N(func_802405BC_BED3AC)(1);
+        N(StarSpiritEffectFunc4)(1);
         spawn {
             sleep 80;
             SetPlayerAnimation(ANIM_10002);
@@ -264,7 +54,7 @@ EvtSource N(80242048) = SCRIPT({
         EVT_VAR(1) += 100;
         SetCamDistance(0, EVT_VAR(1));
         SetPanTarget(0, 145, 0, 0);
-        N(func_802405BC_BED3AC)(2);
+        N(StarSpiritEffectFunc4)(2);
         GetPlayerPos(EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
         UseSettingsFrom(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
         SetCamSpeed(0, 1.0);
@@ -273,13 +63,13 @@ EvtSource N(80242048) = SCRIPT({
         PanToTarget(0, 0, 0);
         DisablePlayerInput(FALSE);
     } else {
-        N(func_802405FC_BED3EC)(2, 145, 30, 0, 0);
+        N(StarSpiritEffectFunc5)(2, 145, 30, 0, 0);
         spawn {
-            N(func_80240708_BED4F8)();
+            N(StarSpiritEffectFunc6)();
         }
         sleep 1;
     }
-    N(func_802405BC_BED3AC)(3);
+    N(StarSpiritEffectFunc4)(3);
     PlaySoundAtPlayer(312, 0);
     DisablePlayerInput(TRUE);
     EVT_STORY_PROGRESS = STORY_CH3_STAR_SPIRIT_RESCUED;
@@ -302,14 +92,14 @@ EvtSource N(80242498) = SCRIPT({
             SetCamPitch(0, EVT_VAR(2), 10000);
         }
         PanToTarget(0, 0, 1);
-        N(func_8024004C_BECE3C)(2, 50, 100, 31, -6, 145, 65, 0, 30, 0);
+        N(StarSpiritEffectFunc2)(2, 50, 100, 31, -6, 145, 65, 0, 30, 0);
         spawn {
-            N(func_802401AC_BECF9C)();
+            N(StarSpiritEffectFunc3)();
         }
         spawn {
             sleep 1;
             PlaySound(0x80000067);
-            N(func_80240000_BECDF0)();
+            N(StarSpiritEffectFunc1)();
             StopSound(0x80000067);
             PlaySoundAt(0xB2, 0, 145, 65, 0);
         }
@@ -322,7 +112,7 @@ EvtSource N(80242498) = SCRIPT({
             sleep 115;
             PlaySoundAt(0x137, 0, 145, 65, 0);
         }
-        N(func_802405BC_BED3AC)(1);
+        N(StarSpiritEffectFunc4)(1);
         spawn {
             sleep 80;
             SetPlayerAnimation(ANIM_10002);
@@ -330,7 +120,7 @@ EvtSource N(80242498) = SCRIPT({
         EVT_VAR(1) += 100;
         SetCamDistance(0, EVT_VAR(1));
         SetPanTarget(0, 145, 0, 0);
-        N(func_802405BC_BED3AC)(2);
+        N(StarSpiritEffectFunc4)(2);
         GetPlayerPos(EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
         UseSettingsFrom(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
         SetCamSpeed(0, 1.0);
@@ -339,13 +129,13 @@ EvtSource N(80242498) = SCRIPT({
         PanToTarget(0, 0, 0);
         DisablePlayerInput(FALSE);
     } else {
-        N(func_802405FC_BED3EC)(2, 145, 30, 0, 0);
+        N(StarSpiritEffectFunc5)(2, 145, 30, 0, 0);
         spawn {
-            N(func_80240708_BED4F8)();
+            N(StarSpiritEffectFunc6)();
         }
         sleep 1;
     }
-    N(func_802405BC_BED3AC)(3);
+    N(StarSpiritEffectFunc4)(3);
     PlaySoundAtPlayer(312, 0);
     DisablePlayerInput(TRUE);
     EVT_STORY_PROGRESS = STORY_CH3_STAR_SPIRIT_RESCUED;

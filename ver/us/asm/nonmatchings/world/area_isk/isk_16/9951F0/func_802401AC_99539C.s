@@ -8,7 +8,7 @@ glabel jtbl_80242D50_997F40
 
 .section .text
 
-glabel func_802401AC_99539C
+glabel isk_16_StarSpiritEffectFunc3
 /* 99539C 802401AC 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 9953A0 802401B0 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 9953A4 802401B4 AFB1001C */  sw        $s1, 0x1c($sp)

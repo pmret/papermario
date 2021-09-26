@@ -503,6 +503,8 @@ enum SoundIDs {
     SOUND_JR_TROOPA_SPLASH          = 69,
     SOUND_JR_TROOPA_SWIM,
     SOUND_BOO_SPOOK,
+    SOUND_UNKNOWN_52                = 82,
+    SOUND_UNKNOWN_A2                = 162,
     SOUND_UNKNOWN_B4                = 180,
     SOUND_BOO_VANISH                = 193,
     SOUND_BOO_APPEAR                = 195,

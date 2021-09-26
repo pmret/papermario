@@ -8,7 +8,7 @@ glabel jtbl_80242CB0_D896B0
 
 .section .text
 
-glabel func_802401CC_D86BCC
+glabel pra_32_StarSpiritEffectFunc3
 /* D86BCC 802401CC 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* D86BD0 802401D0 AFBF0020 */  sw        $ra, 0x20($sp)
 /* D86BD4 802401D4 AFB1001C */  sw        $s1, 0x1c($sp)

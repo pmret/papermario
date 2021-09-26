@@ -8,7 +8,7 @@ glabel jtbl_80248340_C95EF0
 
 .section .text
 
-glabel func_802404B8_C8E068
+glabel kzn_19_StarSpiritEffectFunc3
 /* C8E068 802404B8 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* C8E06C 802404BC AFBF0020 */  sw        $ra, 0x20($sp)
 /* C8E070 802404C0 AFB1001C */  sw        $s1, 0x1c($sp)

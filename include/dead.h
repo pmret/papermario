@@ -1,3 +1,5 @@
+#include "ultra64.h"
+
 #ifndef _DEAD_H_
 #define _DEAD_H_
 
@@ -53,6 +55,6 @@
 #define playFX_7B dead_playFX_7B
 #define dist3D dead_dist3D
 #define subtract_hp dead_subtract_hp
-//#define sqrtf dead_sqrtf <- This somehow breaks things
+//#define sqrtf dead_sqrtf // <- This somehow breaks things
 
 #endif

@@ -3,7 +3,7 @@
 #define UNK_FUNC_50_VAR1 -469.0
 #define UNK_FUNC_50_VAR2 46.0
 
-ApiStatus func_80240330_C7E4B0(Evt* script, s32 isInitialCall) {
+ApiStatus N(SpinyTrompHit)(Evt* script, s32 isInitialCall) {
     subtract_hp(1);
     return ApiStatus_DONE2;
 }
