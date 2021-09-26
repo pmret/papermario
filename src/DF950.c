@@ -70,150 +70,150 @@ s32 D_8014F58C[] = { 0x00002043, 0x00002044 };
 s32 D_8014F594[] = { 0x00002078, 0x00002079 };
 s32 D_8014F59C[] = { 0x000003B6, 0x000003B7 };
 
-typedef struct struct_8014F5A4 {
-    /* 0x00 */ s32* unk_00;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-} struct_8014F5A4;
+typedef struct AlternatingSoundSet {
+    /* 0x00 */ s32* sounds;
+    /* 0x04 */ s16 soundCount;
+    /* 0x06 */ s16 currentIndex;
+} AlternatingSoundSet; // size = 0x08
 
-struct_8014F5A4 D_8014F5A4[] = {
+AlternatingSoundSet D_8014F5A4[] = {
     {
-        .unk_00 = D_8014F48C,
-        .unk_04 = ARRAY_COUNT(D_8014F48C),
+        .sounds = D_8014F48C,
+        .soundCount = ARRAY_COUNT(D_8014F48C),
     },
     {
-        .unk_00 = D_8014F494,
-        .unk_04 = ARRAY_COUNT(D_8014F494),
+        .sounds = D_8014F494,
+        .soundCount = ARRAY_COUNT(D_8014F494),
     },
     {
-        .unk_00 = D_8014F49C,
-        .unk_04 = ARRAY_COUNT(D_8014F494),
+        .sounds = D_8014F49C,
+        .soundCount = ARRAY_COUNT(D_8014F494),
     },
     {
-        .unk_00 = D_8014F4A4,
-        .unk_04 = ARRAY_COUNT(D_8014F4A4),
+        .sounds = D_8014F4A4,
+        .soundCount = ARRAY_COUNT(D_8014F4A4),
     },
     {
-        .unk_00 = D_8014F4AC,
-        .unk_04 = ARRAY_COUNT(D_8014F4AC),
+        .sounds = D_8014F4AC,
+        .soundCount = ARRAY_COUNT(D_8014F4AC),
     },
     {
-        .unk_00 = D_8014F4B4,
-        .unk_04 = ARRAY_COUNT(D_8014F4B4),
+        .sounds = D_8014F4B4,
+        .soundCount = ARRAY_COUNT(D_8014F4B4),
     },
     {
-        .unk_00 = D_8014F4BC,
-        .unk_04 = ARRAY_COUNT(D_8014F4BC),
+        .sounds = D_8014F4BC,
+        .soundCount = ARRAY_COUNT(D_8014F4BC),
     },
     {
-        .unk_00 = D_8014F4C4,
-        .unk_04 = ARRAY_COUNT(D_8014F4C4),
+        .sounds = D_8014F4C4,
+        .soundCount = ARRAY_COUNT(D_8014F4C4),
     },
     {
-        .unk_00 = D_8014F4CC,
-        .unk_04 = ARRAY_COUNT(D_8014F4CC),
+        .sounds = D_8014F4CC,
+        .soundCount = ARRAY_COUNT(D_8014F4CC),
     },
     {
-        .unk_00 = D_8014F4D4,
-        .unk_04 = ARRAY_COUNT(D_8014F4D4),
+        .sounds = D_8014F4D4,
+        .soundCount = ARRAY_COUNT(D_8014F4D4),
     },
     {
-        .unk_00 = D_8014F4DC,
-        .unk_04 = ARRAY_COUNT(D_8014F4DC),
+        .sounds = D_8014F4DC,
+        .soundCount = ARRAY_COUNT(D_8014F4DC),
     },
     {
-        .unk_00 = D_8014F4E4,
-        .unk_04 = ARRAY_COUNT(D_8014F4E4),
+        .sounds = D_8014F4E4,
+        .soundCount = ARRAY_COUNT(D_8014F4E4),
     },
     {
-        .unk_00 = D_8014F4EC,
-        .unk_04 = ARRAY_COUNT(D_8014F4EC),
+        .sounds = D_8014F4EC,
+        .soundCount = ARRAY_COUNT(D_8014F4EC),
     },
     {
-        .unk_00 = D_8014F4F4,
-        .unk_04 = ARRAY_COUNT(D_8014F4F4),
+        .sounds = D_8014F4F4,
+        .soundCount = ARRAY_COUNT(D_8014F4F4),
     },
     {
-        .unk_00 = D_8014F4FC,
-        .unk_04 = ARRAY_COUNT(D_8014F4FC),
+        .sounds = D_8014F4FC,
+        .soundCount = ARRAY_COUNT(D_8014F4FC),
     },
     {
-        .unk_00 = D_8014F504,
-        .unk_04 = ARRAY_COUNT(D_8014F504),
+        .sounds = D_8014F504,
+        .soundCount = ARRAY_COUNT(D_8014F504),
     },
     {
-        .unk_00 = D_8014F50C,
-        .unk_04 = ARRAY_COUNT(D_8014F50C),
+        .sounds = D_8014F50C,
+        .soundCount = ARRAY_COUNT(D_8014F50C),
     },
     {
-        .unk_00 = D_8014F514,
-        .unk_04 = ARRAY_COUNT(D_8014F514),
+        .sounds = D_8014F514,
+        .soundCount = ARRAY_COUNT(D_8014F514),
     },
     {
-        .unk_00 = D_8014F51C,
-        .unk_04 = ARRAY_COUNT(D_8014F51C),
+        .sounds = D_8014F51C,
+        .soundCount = ARRAY_COUNT(D_8014F51C),
     },
     {
-        .unk_00 = D_8014F524,
-        .unk_04 = ARRAY_COUNT(D_8014F524),
+        .sounds = D_8014F524,
+        .soundCount = ARRAY_COUNT(D_8014F524),
     },
     {
-        .unk_00 = D_8014F52C,
-        .unk_04 = ARRAY_COUNT(D_8014F52C),
+        .sounds = D_8014F52C,
+        .soundCount = ARRAY_COUNT(D_8014F52C),
     },
     {
-        .unk_00 = D_8014F538,
-        .unk_04 = ARRAY_COUNT(D_8014F538),
+        .sounds = D_8014F538,
+        .soundCount = ARRAY_COUNT(D_8014F538),
     },
     {
-        .unk_00 = D_8014F540,
-        .unk_04 = ARRAY_COUNT(D_8014F540),
-
-    },
-    {
-        .unk_00 = D_8014F548,
-        .unk_04 = ARRAY_COUNT(D_8014F548),
+        .sounds = D_8014F540,
+        .soundCount = ARRAY_COUNT(D_8014F540),
 
     },
     {
-        .unk_00 = D_8014F554,
-        .unk_04 = ARRAY_COUNT(D_8014F554),
+        .sounds = D_8014F548,
+        .soundCount = ARRAY_COUNT(D_8014F548),
+
     },
     {
-        .unk_00 = D_8014F55C,
-        .unk_04 = ARRAY_COUNT(D_8014F55C),
+        .sounds = D_8014F554,
+        .soundCount = ARRAY_COUNT(D_8014F554),
     },
     {
-        .unk_00 = D_8014F564,
-        .unk_04 = ARRAY_COUNT(D_8014F564),
+        .sounds = D_8014F55C,
+        .soundCount = ARRAY_COUNT(D_8014F55C),
     },
     {
-        .unk_00 = D_8014F56C,
-        .unk_04 = ARRAY_COUNT(D_8014F56C),
+        .sounds = D_8014F564,
+        .soundCount = ARRAY_COUNT(D_8014F564),
     },
     {
-        .unk_00 = D_8014F574,
-        .unk_04 = ARRAY_COUNT(D_8014F574),
+        .sounds = D_8014F56C,
+        .soundCount = ARRAY_COUNT(D_8014F56C),
     },
     {
-        .unk_00 = D_8014F57C,
-        .unk_04 = ARRAY_COUNT(D_8014F57C),
+        .sounds = D_8014F574,
+        .soundCount = ARRAY_COUNT(D_8014F574),
     },
     {
-        .unk_00 = D_8014F584,
-        .unk_04 = ARRAY_COUNT(D_8014F584),
+        .sounds = D_8014F57C,
+        .soundCount = ARRAY_COUNT(D_8014F57C),
     },
     {
-        .unk_00 = D_8014F58C,
-        .unk_04 = ARRAY_COUNT(D_8014F58C),
+        .sounds = D_8014F584,
+        .soundCount = ARRAY_COUNT(D_8014F584),
     },
     {
-        .unk_00 = D_8014F594,
-        .unk_04 = ARRAY_COUNT(D_8014F594),
+        .sounds = D_8014F58C,
+        .soundCount = ARRAY_COUNT(D_8014F58C),
     },
     {
-        .unk_00 = D_8014F59C,
-        .unk_04 = ARRAY_COUNT(D_8014F59C),
+        .sounds = D_8014F594,
+        .soundCount = ARRAY_COUNT(D_8014F594),
+    },
+    {
+        .sounds = D_8014F59C,
+        .soundCount = ARRAY_COUNT(D_8014F59C),
     }
 };
 
@@ -378,8 +378,44 @@ void func_80149A6C(SoundID soundID, s32 keepPlaying) {
     }
 }
 
-// https://decomp.me/scratch/8V5LN
+#ifdef NON_MATCHING // weird & 0xFF everywhere
+void sfx_play_sound_with_params(SoundID soundID, u8 arg1, u8 arg2, s16 arg3) {
+    AlternatingSoundSet* alternatingSound;
+    
+    if (gGameStatusPtr->demoState) {
+        return;
+    }
+
+    if (soundID < 0) {
+        SoundID sound = soundID & 0xFF;
+        switch ((soundID >> 0x1C) & 7) {
+            case 0:
+                sfx_play_sound_looping(D_8014F2D0[sound], arg1, arg2, arg3);
+                break;
+            case 1:
+                snd_start_sound_with_shift(D_8014F6B4[sound + ((u16)gCurrentDoorSoundsSet * 2)], arg1, arg2, arg3);
+                break;
+            case 2:
+                snd_start_sound_with_shift(D_8014F6B4[sound + ((u16)D_80151308 * 2)], arg1, arg2, arg3);
+                break;
+            case 3:
+                alternatingSound = &D_8014F5A4[sound];
+                if (alternatingSound->currentIndex >= alternatingSound->soundCount) {
+                    alternatingSound->currentIndex = 0;
+                }
+                snd_start_sound_with_shift(alternatingSound->sounds[alternatingSound->currentIndex++], arg1, arg2, arg3);
+                break;
+            default:
+                snd_start_sound_with_shift(soundID, arg1, arg2, arg3);
+                break;
+        }
+    } else {
+        snd_start_sound_with_shift(soundID, arg1, arg2, arg3);
+    }
+}
+#else
 INCLUDE_ASM(void, "DF950", sfx_play_sound_with_params, s32 arg0, u8 arg1, u8 arg2, s16 arg3);
+#endif
 
 void sfx_adjust_env_sound_params(SongID soundID, u8 volume, u8 pan, s16 pitchShift) {
     SoundInstance* sound;
