@@ -17,15 +17,15 @@ static char* N(exit_str_1) = "sam_06";
 
 #include "world/common/UnkNpcAIFunc27.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_802408D0_D190B0);
+#include "world/common/UnkNpcAIFunc31.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_8024093C_D1911C);
+#include "world/common/UnkNpcAIFunc32.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_80240A38_D19218);
 
 #include "world/common/UnkNpcDurationFlagFunc3.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_05/D187E0", func_80241508_D19CE8);
+#include "world/common/UnkNpcAIFunc33.inc.c"
 
 #include "world/common/UnkNpcDurationFlagFunc2.inc.c"
 

@@ -24,10 +24,10 @@ void fx_1_appendGfx(EffectInstance* effect);
 
 static f32 D_E0002760[10] = { 10.0f, 40.0f, 80.0f, 170.0f, 140.0f, 100.0f, 25.0f, 155.0f, 60.0f, 120.0f };
 static f32 D_E0002788[10] = { 2.2f, 2.7f, 3.0f, 2.2f, 2.7f, 3.0f, 1.9f, 1.9f, 1.5f, 1.5f };
-static f32 partScales[10] = { 1.4f, 1.3f, 1.2f, 1.3f, 1.4f, 1.3f, 1.6f, 1.6f, 1.6f, 1.6f };
-static f32 partYaws[10] = { 0.0f, 234.0f, 468.0f, 702.0f, 936.0f, 1260.0f, 1404.0f, 1638.0f, 1902.0f, 1976.0f };
+static f32 sPartScales[10] = { 1.4f, 1.3f, 1.2f, 1.3f, 1.4f, 1.3f, 1.6f, 1.6f, 1.6f, 1.6f };
+static f32 sPartYaws[10] = { 0.0f, 234.0f, 468.0f, 702.0f, 936.0f, 1260.0f, 1404.0f, 1638.0f, 1902.0f, 1976.0f };
 
-static s32 dlists[7] = { 0x09000FA0, 0x09001060, 0x09001120, 0x090011E0, 0x090012A0, 0x09001360, 0x09001420 };
+static s32 sDlists[7] = { 0x09000FA0, 0x09001060, 0x09001120, 0x090011E0, 0x090012A0, 0x09001360, 0x09001420 };
 
 void fx_1_main(f32 x, f32 y, f32 z) {
     EffectBlueprint bp;
@@ -150,7 +150,7 @@ void fx_1_appendGfx(EffectInstance* effect) {
                 primAlpha = 16;
             }
 
-            shim_guPositionF(&mtx, 0.0f, 0.0f, partYaws[i], partScales[i], effectData->partX,
+            shim_guPositionF(&mtx, 0.0f, 0.0f, sPartYaws[i], sPartScales[i], effectData->partX,
                              effectData->partY, 0.0f);
             shim_guMtxF2L(&mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
@@ -161,12 +161,12 @@ void fx_1_appendGfx(EffectInstance* effect) {
 
             if (effectData->unk_04 <= temp_f12) {
                 envAlpha = 255;
-                dlist = dlists[ARRAY_COUNT(dlists) - 1];
+                dlist = sDlists[ARRAY_COUNT(sDlists) - 1];
             } else {
                 f32 temp = shim_sin_deg((((temp_f12 * 7.0f) / effectData->unk_04) * 90.0f) / 7.0f) * 7.0f;
 
                 envAlpha = (s32)(temp * 255.0f) % 256;
-                dlist = dlists[(s32)temp];
+                dlist = sDlists[(s32)temp];
             }
 
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, (u32)(primAlpha * 105) / 8);

@@ -5,12 +5,6 @@ extern s32 gSpinHistoryPosY[5];
 extern s16 gSpinHistoryPosAngle[5];
 extern struct struct8015A578 D_8015A578;
 
-typedef struct struct8015A578 {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ char unk_01[7];
-    /* 0x08 */ f32 unk_08;
-} struct8015A578;
-
 s32 func_802B65F8_E26D08(void);
 
 void func_802B6000_E26710(void) {

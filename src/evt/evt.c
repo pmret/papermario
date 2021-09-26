@@ -1139,16 +1139,68 @@ ApiStatus evt_handle_bind_lock(Evt* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus evt_handle_thread(Evt* script);
-INCLUDE_ASM(s32, "evt/si", evt_handle_thread, Evt* script);
+ApiStatus evt_handle_thread(Evt* script) {
+    Evt* newScript;
+    s32 nargs;
+    s32 opcode;
+    s32 i;
+
+    // seek end thread opcode
+    Bytecode* startLine = script->ptrNextLine;
+    Bytecode* endLine = startLine;
+    do {
+        opcode = *endLine++;
+        nargs = *endLine++;
+        endLine += nargs;
+    } while (opcode != EVT_OP_END_SPAWN_THREAD);
+
+    script->ptrNextLine = endLine;
+    newScript = start_script_in_group((EvtSource*)startLine, script->priority, 0x60, script->groupFlags);
+    newScript->owner1.enemyID = script->owner1.enemyID;
+    newScript->owner2.npcID = script->owner2.npcID;
+    newScript->array = script->array;
+    newScript->flagArray = script->flagArray;
+
+    for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
+        newScript->varTable[i] = script->varTable[i];
+    }
+
+    for (i = 0; i < ARRAY_COUNT(script->varFlags); i++) {
+        newScript->varFlags[i] = script->varFlags[i];
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus evt_handle_end_thread(Evt* script) {
     kill_script(script);
     return ApiStatus_FINISH;
 }
 
-ApiStatus evt_handle_child_thread(Evt* script);
-INCLUDE_ASM(ApiStatus, "evt/si", evt_handle_child_thread, Evt* script);
+ApiStatus evt_handle_child_thread(Evt* script) {
+    Evt* newScript;
+    s32 nargs;
+    s32 opcode;
+    s32 i;
+
+    Bytecode* startLine = script->ptrNextLine;
+    Bytecode* endLine = startLine;
+    do {
+        opcode = *endLine++;
+        nargs = *endLine++;
+        endLine += nargs;
+    } while (opcode != EVT_OP_END_PARALLEL_THREAD);
+
+    script->ptrNextLine = endLine;
+    newScript = func_802C39F8(script, startLine, 0x60);
+    newScript->owner1.enemyID = script->owner1.enemyID;
+    newScript->owner2.npcID = script->owner2.npcID;
+    newScript->groupFlags = script->groupFlags;
+    newScript->array = script->array;
+    newScript->flagArray = script->flagArray;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus evt_handle_end_child_thread(Evt* script) {
     kill_script(script);

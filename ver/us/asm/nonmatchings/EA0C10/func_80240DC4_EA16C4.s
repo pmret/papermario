@@ -73,8 +73,8 @@ glabel func_80240DC4_EA16C4
 /* EA1778 80240E78 00000000 */  nop
 /* EA177C 80240E7C 45000011 */  bc1f      .L80240EC4
 /* EA1780 80240E80 00000000 */   nop
-/* EA1784 80240E84 3C038008 */  lui       $v1, %hi(D_8007C760)
-/* EA1788 80240E88 8C63C760 */  lw        $v1, %lo(D_8007C760)($v1)
+/* EA1784 80240E84 3C038008 */  lui       $v1, %hi(dead_gCurrentCameraID)
+/* EA1788 80240E88 8C63C760 */  lw        $v1, %lo(dead_gCurrentCameraID)($v1)
 /* EA178C 80240E8C 3C0142B4 */  lui       $at, 0x42b4
 /* EA1790 80240E90 44816000 */  mtc1      $at, $f12
 /* EA1794 80240E94 00031080 */  sll       $v0, $v1, 2
@@ -90,8 +90,8 @@ glabel func_80240DC4_EA16C4
 /* EA17BC 80240EBC 080903C0 */  j         .L80240F00
 /* EA17C0 80240EC0 460C0301 */   sub.s    $f12, $f0, $f12
 .L80240EC4:
-/* EA17C4 80240EC4 3C038008 */  lui       $v1, %hi(D_8007C760)
-/* EA17C8 80240EC8 8C63C760 */  lw        $v1, %lo(D_8007C760)($v1)
+/* EA17C4 80240EC4 3C038008 */  lui       $v1, %hi(dead_gCurrentCameraID)
+/* EA17C8 80240EC8 8C63C760 */  lw        $v1, %lo(dead_gCurrentCameraID)($v1)
 /* EA17CC 80240ECC 3C0142B4 */  lui       $at, 0x42b4
 /* EA17D0 80240ED0 44816000 */  mtc1      $at, $f12
 /* EA17D4 80240ED4 00031080 */  sll       $v0, $v1, 2
@@ -164,7 +164,7 @@ glabel func_80240DC4_EA16C4
 /* EA18CC 80240FCC E6200038 */  swc1      $f0, 0x38($s1)
 /* EA18D0 80240FD0 C4600030 */  lwc1      $f0, 0x30($v1)
 /* EA18D4 80240FD4 0260282D */  daddu     $a1, $s3, $zero
-/* EA18D8 80240FD8 0C00ACA3 */  jal       func_8002B28C
+/* EA18D8 80240FD8 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* EA18DC 80240FDC E6200040 */   swc1     $f0, 0x40($s1)
 /* EA18E0 80240FE0 862200A6 */  lh        $v0, 0xa6($s1)
 /* EA18E4 80240FE4 44820000 */  mtc1      $v0, $f0
@@ -238,7 +238,7 @@ glabel func_80240DC4_EA16C4
 /* EA19E4 802410E4 00000000 */  nop
 /* EA19E8 802410E8 45010003 */  bc1t      .L802410F8
 /* EA19EC 802410EC 00000000 */   nop
-/* EA19F0 802410F0 0C019C10 */  jal       func_80067040
+/* EA19F0 802410F0 0C019C10 */  jal       dead_sqrtf
 /* EA19F4 802410F4 00000000 */   nop
 .L802410F8:
 /* EA19F8 802410F8 8E260038 */  lw        $a2, 0x38($s1)
@@ -273,7 +273,7 @@ glabel func_80240DC4_EA16C4
 /* EA1A64 80241164 4407B000 */  mfc1      $a3, $f22
 /* EA1A68 80241168 0260282D */  daddu     $a1, $s3, $zero
 /* EA1A6C 8024116C E6340038 */  swc1      $f20, 0x38($s1)
-/* EA1A70 80241170 0C00ACA3 */  jal       func_8002B28C
+/* EA1A70 80241170 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* EA1A74 80241174 E6340040 */   swc1     $f20, 0x40($s1)
 /* EA1A78 80241178 08090550 */  j         .L80241540
 /* EA1A7C 8024117C 00000000 */   nop
@@ -450,7 +450,7 @@ glabel func_80240DC4_EA16C4
 /* EA1D20 80241420 E6200038 */  swc1      $f0, 0x38($s1)
 /* EA1D24 80241424 C4600030 */  lwc1      $f0, 0x30($v1)
 /* EA1D28 80241428 26250040 */  addiu     $a1, $s1, 0x40
-/* EA1D2C 8024142C 0C00ACA3 */  jal       func_8002B28C
+/* EA1D2C 8024142C 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* EA1D30 80241430 E6200040 */   swc1     $f0, 0x40($s1)
 /* EA1D34 80241434 862200A6 */  lh        $v0, 0xa6($s1)
 /* EA1D38 80241438 44820000 */  mtc1      $v0, $f0
@@ -509,7 +509,7 @@ glabel func_80240DC4_EA16C4
 /* EA1E08 80241508 E6200038 */  swc1      $f0, 0x38($s1)
 /* EA1E0C 8024150C C4600030 */  lwc1      $f0, 0x30($v1)
 /* EA1E10 80241510 0260282D */  daddu     $a1, $s3, $zero
-/* EA1E14 80241514 0C00ACA3 */  jal       func_8002B28C
+/* EA1E14 80241514 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* EA1E18 80241518 E6200040 */   swc1     $f0, 0x40($s1)
 /* EA1E1C 8024151C 862200A6 */  lh        $v0, 0xa6($s1)
 /* EA1E20 80241520 44820000 */  mtc1      $v0, $f0
@@ -585,7 +585,7 @@ glabel func_80240DC4_EA16C4
 /* EA1F2C 8024162C C6480010 */  lwc1      $f8, 0x10($s2)
 /* EA1F30 80241630 46804220 */  cvt.s.w   $f8, $f8
 /* EA1F34 80241634 44064000 */  mfc1      $a2, $f8
-/* EA1F38 80241638 0C00ACA3 */  jal       func_8002B28C
+/* EA1F38 80241638 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* EA1F3C 8024163C 0260282D */   daddu    $a1, $s3, $zero
 /* EA1F40 80241640 080905BE */  j         .L802416F8
 /* EA1F44 80241644 00000000 */   nop

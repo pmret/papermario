@@ -632,7 +632,7 @@ void btl_delete_actor(Actor* actor) {
     }
 
     delete_shadow(actor->shadow);
-    remove_all_status_icons(actor->unk_436);
+    remove_all_status_icons(actor->hudElementDataIndex);
     remove_effect(actor->ptrDefuffIcon);
 
     if (actor->unk_200 != NULL) {
@@ -675,7 +675,7 @@ void btl_delete_player_actor(Actor* player) {
     movement = partsTable->movement;
 
     delete_shadow(player->shadow);
-    remove_all_status_icons(player->unk_436);
+    remove_all_status_icons(player->hudElementDataIndex);
     remove_effect(player->ptrDefuffIcon);
 
     if (player->unk_200 != NULL) {

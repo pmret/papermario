@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80242EC4_EA37C4
+glabel EA36E0_UnkFunc47
 /* EA37C4 80242EC4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* EA37C8 80242EC8 AFB00010 */  sw        $s0, 0x10($sp)
 /* EA37CC 80242ECC 0080802D */  daddu     $s0, $a0, $zero
@@ -33,7 +33,7 @@ glabel func_80242EC4_EA37C4
 /* EA3834 80242F34 00000000 */  nop
 /* EA3838 80242F38 45010003 */  bc1t      .L80242F48
 /* EA383C 80242F3C 00000000 */   nop
-/* EA3840 80242F40 0C019C10 */  jal       func_80067040
+/* EA3840 80242F40 0C019C10 */  jal       dead_sqrtf
 /* EA3844 80242F44 00000000 */   nop
 .L80242F48:
 /* EA3848 80242F48 4600020D */  trunc.w.s $f8, $f0

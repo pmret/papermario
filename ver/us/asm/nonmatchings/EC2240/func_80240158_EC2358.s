@@ -47,7 +47,7 @@ glabel func_80240158_EC2358
 /* EC23CC 802401CC 44070000 */  mfc1      $a3, $f0
 /* EC23D0 802401D0 27A50014 */  addiu     $a1, $sp, 0x14
 /* EC23D4 802401D4 E7B60010 */  swc1      $f22, 0x10($sp)
-/* EC23D8 802401D8 0C00ACA3 */  jal       func_8002B28C
+/* EC23D8 802401D8 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* EC23DC 802401DC E7B80014 */   swc1     $f24, 0x14($sp)
 /* EC23E0 802401E0 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EC23E4 802401E4 C60E0040 */  lwc1      $f14, 0x40($s0)
@@ -132,7 +132,7 @@ glabel func_80240158_EC2358
 /* EC250C 8024030C 27A40010 */  addiu     $a0, $sp, 0x10
 /* EC2510 80240310 3C064238 */  lui       $a2, 0x4238
 /* EC2514 80240314 44070000 */  mfc1      $a3, $f0
-/* EC2518 80240318 0C00ACA3 */  jal       func_8002B28C
+/* EC2518 80240318 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* EC251C 8024031C 27A50014 */   addiu    $a1, $sp, 0x14
 /* EC2520 80240320 080900CD */  j         .L80240334
 /* EC2524 80240324 00000000 */   nop

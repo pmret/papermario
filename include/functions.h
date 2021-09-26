@@ -154,7 +154,7 @@ void phys_adjust_cam_on_landing(void);
 void phys_init_integrator_for_current_state(void);
 void phys_player_land(void);
 
-void create_popup_menu(void*);
+void create_popup_menu(PopupMenu*);
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 void update_collider_transform(s16 colliderID);
@@ -203,7 +203,7 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
 s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX, f32* hitY, f32* hitZ,
                       f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
 
-void mem_clear(s8* data, s32 numBytes);
+void mem_clear(void* data, s32 numBytes);
 
 void intro_logos_set_fade_color(s16 color);
 void intro_logos_set_fade_alpha(s16 alpha);
@@ -453,7 +453,7 @@ void set_curtain_fade_goal(f32 fade);
 void set_curtain_fade(f32 fade);
 
 // Dead functions:
-Npc* func_8003E534(NpcID npcId); // get_npc_safe
+//Npc* dead_get_npc_safe(NpcID npcId); // get_npc_safe
 void func_80077BD0(s32, s32, s32, s32, s32, s32);
 void func_8006CAC0(float mf[4][4], float x, float y, float z);
 
@@ -491,7 +491,7 @@ s32 entity_can_collide_with_jumping_player(Entity* entity);
 s32 set_global_flag(s32 index);
 void entity_base_block_init(Entity* entity);
 s32 entity_start_script(Entity* entity);
-s32 remove_item_entity_by_index(s32 index); // might not actually return anything
+void remove_item_entity_by_index(s32 index);
 void set_entity_commandlist(Entity* entity, s32* entityScript);
 void func_800EF3E4(void);
 void func_80268858(void);
@@ -500,5 +500,13 @@ s32 func_80268224(s32);
 void func_80149A6C(s32, s32);
 void func_800EF300(void);
 void enable_player_shadow(void);
+s32 get_msg_lines(s32 messageID);
+void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, s32, void* drawContents, PopupMessage* popup, s32 parent);
+void set_window_update(s32 panelID, s32);
+void snd_stop_sound(SoundID soundID);
+void partner_disable_input(void);
+void func_80268798(s32, s32, s32, s32);
+void func_802687E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void sfx_stop_sound(SongID soundID);
 
 #endif

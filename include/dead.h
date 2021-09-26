@@ -1,3 +1,5 @@
+#include "ultra64.h"
+
 #ifndef _DEAD_H_
 #define _DEAD_H_
 
@@ -40,5 +42,19 @@
 #define func_8004D9C0 func_800496B8
 #define func_8004E024 func_80049C04
 #define func_8004A73C func_8004EB8C
+#define gCurrentCameraID dead_gCurrentCameraID
+#define add_vec2D_polar dead_add_vec2D_polar
+#define gCurrentCamID dead_gCurrentCamID
+#define gPartnerActionStatus dead_gPartnerActionStatus
+#define get_npc_safe dead_get_npc_safe
+#define sfx_adjust_env_sound_pos dead_sfx_adjust_env_sound_pos
+#define playFX_83 dead_playFX_83
+#define heap_malloc dead_heap_malloc
+#define update_lerp dead_update_lerp
+#define create_shadow_type dead_create_shadow_type
+#define playFX_7B dead_playFX_7B
+#define dist3D dead_dist3D
+#define subtract_hp dead_subtract_hp
+//#define sqrtf dead_sqrtf // <- This somehow breaks things
 
 #endif

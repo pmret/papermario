@@ -57,7 +57,7 @@ glabel func_80241E1C_EE83CC
 /* EE849C 80241EEC 0280202D */  daddu     $a0, $s4, $zero
 /* EE84A0 80241EF0 0240282D */  daddu     $a1, $s2, $zero
 /* EE84A4 80241EF4 02A0302D */  daddu     $a2, $s5, $zero
-/* EE84A8 80241EF8 0C09073E */  jal       func_80241CF8_EE82A8
+/* EE84A8 80241EF8 0C09073E */  jal       EE70C0_UnkFunc5
 /* EE84AC 80241EFC 0200382D */   daddu    $a3, $s0, $zero
 .L80241F00:
 /* EE84B0 80241F00 2402FFFE */  addiu     $v0, $zero, -2
@@ -102,14 +102,14 @@ glabel L80241F7C_EE852C
 glabel L80241F8C_EE853C
 /* EE853C 80241F8C 02A0202D */  daddu     $a0, $s5, $zero
 /* EE8540 80241F90 0200282D */  daddu     $a1, $s0, $zero
-/* EE8544 80241F94 0C0904EA */  jal       func_802413A8_EE7958
+/* EE8544 80241F94 0C0904EA */  jal       EE70C0_UnkFunc4
 /* EE8548 80241F98 0260302D */   daddu    $a2, $s3, $zero
 /* EE854C 80241F9C 08090804 */  j         .L80242010
 /* EE8550 80241FA0 0000102D */   daddu    $v0, $zero, $zero
 glabel L80241FA4_EE8554
 /* EE8554 80241FA4 02A0202D */  daddu     $a0, $s5, $zero
 /* EE8558 80241FA8 0200282D */  daddu     $a1, $s0, $zero
-/* EE855C 80241FAC 0C0905BB */  jal       func_802416EC_EE7C9C
+/* EE855C 80241FAC 0C0905BB */  jal       EE70C0_UnkNpcAIFunc2
 /* EE8560 80241FB0 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241FB4_EE8564
 /* EE8564 80241FB4 02A0202D */  daddu     $a0, $s5, $zero
@@ -128,14 +128,14 @@ glabel L80241FCC_EE857C
 glabel L80241FE4_EE8594
 /* EE8594 80241FE4 02A0202D */  daddu     $a0, $s5, $zero
 /* EE8598 80241FE8 0200282D */  daddu     $a1, $s0, $zero
-/* EE859C 80241FEC 0C090641 */  jal       func_80241904_EE7EB4
+/* EE859C 80241FEC 0C090641 */  jal       EE70C0_UnkNpcAIFunc3
 /* EE85A0 80241FF0 0260302D */   daddu    $a2, $s3, $zero
 /* EE85A4 80241FF4 08090804 */  j         .L80242010
 /* EE85A8 80241FF8 0000102D */   daddu    $v0, $zero, $zero
 glabel L80241FFC_EE85AC
 /* EE85AC 80241FFC 02A0202D */  daddu     $a0, $s5, $zero
 /* EE85B0 80242000 0200282D */  daddu     $a1, $s0, $zero
-/* EE85B4 80242004 0C09065A */  jal       func_80241968_EE7F18
+/* EE85B4 80242004 0C09065A */  jal       EE70C0_UnkFunc6
 /* EE85B8 80242008 0260302D */   daddu    $a2, $s3, $zero
 glabel L8024200C_EE85BC
 /* EE85BC 8024200C 0000102D */  daddu     $v0, $zero, $zero

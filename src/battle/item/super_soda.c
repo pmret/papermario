@@ -49,7 +49,7 @@ ApiStatus N(func_802A1378_725058)(Evt* script, s32 isInitialCall) {
     if (actor->debuff != STATUS_END) {
         actor->debuffDuration = 0;
         actor->debuff = 0;
-        remove_status_1(actor->unk_436);
+        remove_status_debuff(actor->hudElementDataIndex);
     }
 
     if (actor->koStatus != 0) {

@@ -4,7 +4,7 @@
 glabel func_80242568_EA2E68
 /* EA2E68 80242568 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* EA2E6C 8024256C AFBF0010 */  sw        $ra, 0x10($sp)
-/* EA2E70 80242570 0C00F94D */  jal       func_8003E534
+/* EA2E70 80242570 0C00F94D */  jal       dead_get_npc_safe
 /* EA2E74 80242574 8C84014C */   lw       $a0, 0x14c($a0)
 /* EA2E78 80242578 0040182D */  daddu     $v1, $v0, $zero
 /* EA2E7C 8024257C 846200A8 */  lh        $v0, 0xa8($v1)

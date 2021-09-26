@@ -14,15 +14,15 @@
 
 #include "world/common/UnkNpcAIFunc27.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_802418F0_C785D0);
+#include "world/common/UnkNpcAIFunc31.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_8024195C_C7863C);
+#include "world/common/UnkNpcAIFunc32.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80241A58_C78738);
 
 #include "world/common/UnkNpcDurationFlagFunc3.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242528_C79208);
+#include "world/common/UnkNpcAIFunc33.inc.c"
 
 #include "world/common/UnkNpcDurationFlagFunc2.inc.c"
 

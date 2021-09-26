@@ -96,7 +96,7 @@ glabel func_80241C90_EF42A0
 .L80241DF0:
 /* EF4400 80241DF0 0280202D */  daddu     $a0, $s4, $zero
 /* EF4404 80241DF4 02C0282D */  daddu     $a1, $s6, $zero
-/* EF4408 80241DF8 0C09001C */  jal       func_80240070_EF2680
+/* EF4408 80241DF8 0C09001C */  jal       EF2680_UnkNpcAIFunc23
 /* EF440C 80241DFC 02A0302D */   daddu    $a2, $s5, $zero
 .L80241E00:
 /* EF4410 80241E00 0280202D */  daddu     $a0, $s4, $zero
@@ -330,7 +330,7 @@ glabel func_80241C90_EF42A0
 /* EF4754 80242144 8EC60018 */  lw        $a2, 0x18($s6)
 /* EF4758 80242148 4600218D */  trunc.w.s $f6, $f4
 /* EF475C 8024214C 44073000 */  mfc1      $a3, $f6
-/* EF4760 80242150 0C00ADA9 */  jal       func_8002B6A4
+/* EF4760 80242150 0C00ADA9 */  jal       dead_update_lerp
 /* EF4764 80242154 0000202D */   daddu    $a0, $zero, $zero
 /* EF4768 80242158 44050000 */  mfc1      $a1, $f0
 /* EF476C 8024215C 8E46000C */  lw        $a2, 0xc($s2)

@@ -40,8 +40,8 @@ glabel func_80240484_EB12E4
 /* EB1370 80240510 4680C620 */  cvt.s.w   $f24, $f24
 /* EB1374 80240514 3C128011 */  lui       $s2, %hi(dead_gPlayerStatus)
 /* EB1378 80240518 26527578 */  addiu     $s2, $s2, %lo(dead_gPlayerStatus)
-/* EB137C 8024051C 3C038008 */  lui       $v1, %hi(D_8007C760)
-/* EB1380 80240520 8C63C760 */  lw        $v1, %lo(D_8007C760)($v1)
+/* EB137C 8024051C 3C038008 */  lui       $v1, %hi(dead_gCurrentCameraID)
+/* EB1380 80240520 8C63C760 */  lw        $v1, %lo(dead_gCurrentCameraID)($v1)
 /* EB1384 80240524 C64200A8 */  lwc1      $f2, 0xa8($s2)
 /* EB1388 80240528 44800000 */  mtc1      $zero, $f0
 /* EB138C 8024052C 00031080 */  sll       $v0, $v1, 2

@@ -107,7 +107,14 @@ INCLUDE_ASM(void, "DF950", sfx_play_sound_with_params, s32 arg0, u8 arg1, u8 arg
 
 INCLUDE_ASM(s32, "DF950", sfx_adjust_env_sound_params);
 
-INCLUDE_ASM(s32, "DF950", sfx_stop_sound);
+void sfx_stop_sound(SongID soundID) {
+    SongID sound = soundID;
+    if (sound < 0) {
+        func_80149A6C(D_8014F2D0[sound & 0xFFFF], 0);
+    } else {
+        snd_stop_sound(sound);
+    }
+}
 
 void sfx_play_sound(s32 soundID) {
     sfx_play_sound_with_params(soundID, 0, 0, 0);

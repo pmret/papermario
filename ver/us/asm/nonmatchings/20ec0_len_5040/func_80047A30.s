@@ -22,7 +22,7 @@ glabel func_80047A30
 /* 22E74 80047A74 00431024 */  and       $v0, $v0, $v1
 /* 22E78 80047A78 10910006 */  beq       $a0, $s1, .L80047A94
 /* 22E7C 80047A7C AE020000 */   sw       $v0, ($s0)
-/* 22E80 80047A80 0C011EAA */  jal       remove_status_3
+/* 22E80 80047A80 0C011EAA */  jal       remove_status_transparent
 /* 22E84 80047A84 00C0202D */   daddu    $a0, $a2, $zero
 /* 22E88 80047A88 24020001 */  addiu     $v0, $zero, 1
 /* 22E8C 80047A8C A2110058 */  sb        $s1, 0x58($s0)

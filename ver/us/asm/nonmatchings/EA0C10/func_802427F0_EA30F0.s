@@ -40,8 +40,8 @@ glabel func_802427F0_EA30F0
 /* EA317C 8024287C 4680C620 */  cvt.s.w   $f24, $f24
 /* EA3180 80242880 3C128011 */  lui       $s2, %hi(dead_gPlayerStatus)
 /* EA3184 80242884 26527578 */  addiu     $s2, $s2, %lo(dead_gPlayerStatus)
-/* EA3188 80242888 3C038008 */  lui       $v1, %hi(D_8007C760)
-/* EA318C 8024288C 8C63C760 */  lw        $v1, %lo(D_8007C760)($v1)
+/* EA3188 80242888 3C038008 */  lui       $v1, %hi(dead_gCurrentCameraID)
+/* EA318C 8024288C 8C63C760 */  lw        $v1, %lo(dead_gCurrentCameraID)($v1)
 /* EA3190 80242890 C64200A8 */  lwc1      $f2, 0xa8($s2)
 /* EA3194 80242894 44800000 */  mtc1      $zero, $f0
 /* EA3198 80242898 00031080 */  sll       $v0, $v1, 2

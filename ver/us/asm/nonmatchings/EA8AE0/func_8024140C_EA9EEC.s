@@ -6,7 +6,7 @@ glabel func_8024140C_EA9EEC
 /* EA9EF0 80241410 AFB00010 */  sw        $s0, 0x10($sp)
 /* EA9EF4 80241414 0080802D */  daddu     $s0, $a0, $zero
 /* EA9EF8 80241418 AFBF0014 */  sw        $ra, 0x14($sp)
-/* EA9EFC 8024141C 0C00AFF5 */  jal       func_8002BFD4
+/* EA9EFC 8024141C 0C00AFF5 */  jal       dead_heap_malloc
 /* EA9F00 80241420 24040780 */   addiu    $a0, $zero, 0x780
 /* EA9F04 80241424 0200202D */  daddu     $a0, $s0, $zero
 /* EA9F08 80241428 3C05FD05 */  lui       $a1, 0xfd05

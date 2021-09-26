@@ -40,8 +40,8 @@ glabel func_80242090_EE8640
 /* EE86CC 8024211C 4680C620 */  cvt.s.w   $f24, $f24
 /* EE86D0 80242120 3C128011 */  lui       $s2, %hi(dead_gPlayerStatus)
 /* EE86D4 80242124 26527578 */  addiu     $s2, $s2, %lo(dead_gPlayerStatus)
-/* EE86D8 80242128 3C038008 */  lui       $v1, %hi(D_8007C760)
-/* EE86DC 8024212C 8C63C760 */  lw        $v1, %lo(D_8007C760)($v1)
+/* EE86D8 80242128 3C038008 */  lui       $v1, %hi(dead_gCurrentCameraID)
+/* EE86DC 8024212C 8C63C760 */  lw        $v1, %lo(dead_gCurrentCameraID)($v1)
 /* EE86E0 80242130 C64200A8 */  lwc1      $f2, 0xa8($s2)
 /* EE86E4 80242134 44800000 */  mtc1      $zero, $f0
 /* EE86E8 80242138 00031080 */  sll       $v0, $v1, 2

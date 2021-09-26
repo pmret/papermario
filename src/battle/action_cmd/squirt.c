@@ -72,25 +72,21 @@ ApiStatus func_802A911C_429E3C(Evt* script) {
 
 INCLUDE_ASM(s32, "battle/action_cmd/squirt", func_802A9208_429F28);
 
-#ifdef NON_MATCHING
 void func_802A9634_42A354(void) {
     s32 x, y;
-    HudElement* hudElement;
+    s32 hudElement;
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
-    draw_hud_element_clipped(gActionCommandStatus.hudElements[0]);
-    hudElement = gActionCommandStatus.hudElements[1];
+    draw_hud_element_clipped(actionCommandStatus->hudElements[0]);
+    hudElement = actionCommandStatus->hudElements[1];
     draw_hud_element_clipped(hudElement);
     get_hud_element_render_pos(hudElement, &x, &y);
-    if (gActionCommandStatus.unk_5C == 0) {
-        func_80268798(x, y, gActionCommandStatus.unk_44 / 100, 1);
-        return;
+    if (actionCommandStatus->unk_5C == 0) {
+        func_80268798(x, y, actionCommandStatus->unk_44 / 100, 1);
+    } else {
+        func_802687E4(x, y, actionCommandStatus->unk_44 / 100, 1, 1);
     }
-    func_802687E4(x, y, gActionCommandStatus.unk_44 / 100, 1, 1);
-    
 }
-#else
-INCLUDE_ASM(s32, "battle/action_cmd/squirt", func_802A9634_42A354);
-#endif
 
 void func_802A9720_42A440(void) {
     sfx_stop_sound(0x80000041);

@@ -21,12 +21,12 @@ enum {
     NPC_WORLD_SKOLAR,
 };
 
-ApiStatus N(func_80240000_BECDF0)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024004C_BECE3C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802401AC_BECF9C)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802405BC_BED3AC)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802405FC_BED3EC)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240708_BED4F8)(Evt* script, s32 isInitialCall);
+ApiStatus N(arn_07_StarSpiritEffectFunc1)(Evt* script, s32 isInitialCall);
+ApiStatus N(arn_07_StarSpiritEffectFunc2)(Evt* script, s32 isInitialCall);
+ApiStatus N(arn_07_StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall);
+ApiStatus N(arn_07_StarSpiritEffectFunc4)(Evt* script, s32 isInitialCall);
+ApiStatus N(arn_07_StarSpiritEffectFunc5)(Evt* script, s32 isInitialCall);
+ApiStatus N(arn_07_StarSpiritEffectFunc6)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240800_BED5F0)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80241C5C_BEEA4C)(Evt* script, s32 isInitialCall);
 ApiStatus N(SetEntityFlags100000)(Evt* script, s32 isInitialCall);

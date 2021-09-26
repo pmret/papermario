@@ -385,7 +385,7 @@ glabel calc_item_damage_enemy
 /* 180538 80251C58 A2600220 */   sb       $zero, 0x220($s3)
 /* 18053C 80251C5C 86640436 */  lh        $a0, 0x436($s3)
 /* 180540 80251C60 A2600212 */  sb        $zero, 0x212($s3)
-/* 180544 80251C64 0C011E68 */  jal       remove_status_2
+/* 180544 80251C64 0C011E68 */  jal       remove_status_static
 /* 180548 80251C68 A2600213 */   sb       $zero, 0x213($s3)
 .L80251C6C:
 /* 18054C 80251C6C 82620218 */  lb        $v0, 0x218($s3)
@@ -393,7 +393,7 @@ glabel calc_item_damage_enemy
 /* 180554 80251C74 24150001 */   addiu    $s5, $zero, 1
 /* 180558 80251C78 86640436 */  lh        $a0, 0x436($s3)
 /* 18055C 80251C7C A2600218 */  sb        $zero, 0x218($s3)
-/* 180560 80251C80 0C011EAA */  jal       remove_status_3
+/* 180560 80251C80 0C011EAA */  jal       remove_status_transparent
 /* 180564 80251C84 A2600219 */   sb       $zero, 0x219($s3)
 /* 180568 80251C88 24150001 */  addiu     $s5, $zero, 1
 .L80251C8C:

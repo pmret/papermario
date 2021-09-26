@@ -1259,30 +1259,30 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                                 }
                                 target->unk_228 = playFX_81(0, target->currentPos.x, target->currentPos.y,
                                                             target->currentPos.z, 1.0f, 0);
-                                func_80047820(target->unk_436, STATUS_FROZEN);
+                                func_80047820(target->hudElementDataIndex, STATUS_FROZEN);
                             }
                             return TRUE;
                         case STATUS_SLEEP:
                             func_80266DAC(target, 3);
-                            func_80047820(target->unk_436, STATUS_SLEEP);
+                            func_80047820(target->hudElementDataIndex, STATUS_SLEEP);
                             return TRUE;
                         case STATUS_PARALYZE:
                             func_80266DAC(target, 7);
-                            func_80047820(target->unk_436, STATUS_PARALYZE);
+                            func_80047820(target->hudElementDataIndex, STATUS_PARALYZE);
                             return TRUE;
                         case STATUS_DIZZY:
-                            func_80047820(target->unk_436, STATUS_DIZZY);
+                            func_80047820(target->hudElementDataIndex, STATUS_DIZZY);
                             return TRUE;
                         case STATUS_FEAR:
                             func_80266DAC(target, 5);
-                            func_80047820(target->unk_436, STATUS_FEAR);
+                            func_80047820(target->hudElementDataIndex, STATUS_FEAR);
                             return TRUE;
                         case STATUS_POISON:
                             func_80266DAC(target, 6);
-                            func_80047820(target->unk_436, STATUS_POISON);
+                            func_80047820(target->hudElementDataIndex, STATUS_POISON);
                             return TRUE;
                         case STATUS_SHRINK:
-                            func_80047820(target->unk_436, STATUS_SHRINK);
+                            func_80047820(target->hudElementDataIndex, STATUS_SHRINK);
                             return TRUE;
                     }
                 }
@@ -1300,7 +1300,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 }
                 target->status = STATUS_STATIC;
                 func_80266DAC(target, 4);
-                func_80047928(target->unk_436, STATUS_STATIC);
+                func_80047928(target->hudElementDataIndex, STATUS_STATIC);
             }
             return TRUE;
         case STATUS_STONE:
@@ -1331,7 +1331,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     target->transDuration = 9;
                 }
                 target->status = STATUS_E;
-                func_80047A30(target->unk_436, STATUS_E);
+                func_80047A30(target->hudElementDataIndex, STATUS_E);
             }
             return TRUE;
         case STATUS_END:
@@ -1618,13 +1618,13 @@ void remove_player_buffs(PlayerBuff buffs) {
     if (buffs & 0x20 && (player->staticStatus != 0)) {
         player->staticDuration = 0;
         player->staticStatus = 0;
-        remove_status_2(player->unk_436);
+        remove_status_static(player->hudElementDataIndex);
     }
     if (buffs & 0x40 && (player->transStatus != 0)) {
         player->transDuration = 0;
         player->transStatus = 0;
         playerPartsTable->flags &= ~0x100;
-        remove_status_3(player->unk_436);
+        remove_status_transparent(player->hudElementDataIndex);
     }
     if (buffs & 0x200 && (battleStatus->waterBlockTurnsLeft != 0)) {
         battleStatus->waterBlockTurnsLeft = 0;

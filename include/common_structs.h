@@ -897,7 +897,7 @@ typedef struct ItemEntity {
     /* 0x14 */ struct ItemEntityPhysicsData* physicsData;
     /* 0x18 */ s16 itemID; /* into item table, also worldIconID */
     /* 0x1A */ u8 state;
-    /* 0x1B */ u8 type;
+    /* 0x1B */ s8 type;
     /* 0x1C */ u8 pickupDelay; /* num frames before item can be picked up */
     /* 0x1D */ char unk_1D;
     /* 0x1E */ s16 wsFaceAngle; /* < 0 means none */
@@ -1683,7 +1683,7 @@ typedef struct Actor {
     /* 0x42C */ struct Shadow* shadow; /* might be shadow ID */
     /* 0x430 */ f32 shadowScale; /* = actor size / 24.0 */
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
-    /* 0x436 */ s16 unk_436;
+    /* 0x436 */ s16 hudElementDataIndex;
     /* 0x438 */ s32 x[2]; /* ??? see FUN_80253974 */
     /* 0x440 */ struct HudElement* ptrDefuffIcon;
 } Actor; // size = 0x444
@@ -2212,7 +2212,7 @@ struct PopupMessage;
 typedef void (*PopupMessageCallback)(struct PopupMessage* popup);
 typedef struct PopupMessage {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ PopupMessageCallback unk_04;
+    /* 0x04 */ PopupMessageCallback updateFunc;
     /* 0x08 */ PopupMessageCallback unk_08;
     /* 0x0C */ PopupMessageCallback drawFunc;
     /* 0x10 */ s16 active;
@@ -2232,4 +2232,13 @@ typedef struct unkPartnerStruct {
     /* 0x014 */ f32 unk_14;
     /* 0x018 */ f32 unk_18;
 } unkPartnerStruct; // size = 0x1C
+
+typedef struct struct8015A578 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03[5];
+    /* 0x08 */ f32 unk_08;
+} struct8015A578; // size = 0x0C
+
 #endif

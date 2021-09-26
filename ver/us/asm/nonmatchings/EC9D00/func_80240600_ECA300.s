@@ -17,11 +17,11 @@ glabel func_80240600_ECA300
 /* ECA330 80240630 F7B60050 */  sdc1      $f22, 0x50($sp)
 /* ECA334 80240634 F7B40048 */  sdc1      $f20, 0x48($sp)
 /* ECA338 80240638 8ED3000C */  lw        $s3, 0xc($s6)
-/* ECA33C 8024063C 0C00F94D */  jal       func_8003E534
+/* ECA33C 8024063C 0C00F94D */  jal       dead_get_npc_safe
 /* ECA340 80240640 2404FFFC */   addiu    $a0, $zero, -4
 /* ECA344 80240644 27A50018 */  addiu     $a1, $sp, 0x18
-/* ECA348 80240648 3C048008 */  lui       $a0, %hi(D_8007C760)
-/* ECA34C 8024064C 8C84C760 */  lw        $a0, %lo(D_8007C760)($a0)
+/* ECA348 80240648 3C048008 */  lui       $a0, %hi(dead_gCurrentCameraID)
+/* ECA34C 8024064C 8C84C760 */  lw        $a0, %lo(dead_gCurrentCameraID)($a0)
 /* ECA350 80240650 27A6001C */  addiu     $a2, $sp, 0x1c
 /* ECA354 80240654 00041880 */  sll       $v1, $a0, 2
 /* ECA358 80240658 00641821 */  addu      $v1, $v1, $a0
@@ -93,7 +93,7 @@ glabel func_80240600_ECA300
 /* ECA458 80240758 4406A000 */  mfc1      $a2, $f20
 /* ECA45C 8024075C 8E870000 */  lw        $a3, ($s4)
 /* ECA460 80240760 02532821 */  addu      $a1, $s2, $s3
-/* ECA464 80240764 0C00ACA3 */  jal       func_8002B28C
+/* ECA464 80240764 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* ECA468 80240768 AFA00020 */   sw       $zero, 0x20($sp)
 /* ECA46C 8024076C C7A2001C */  lwc1      $f2, 0x1c($sp)
 /* ECA470 80240770 C7A40020 */  lwc1      $f4, 0x20($sp)
@@ -160,7 +160,7 @@ glabel func_80240600_ECA300
 /* ECA558 80240858 44050000 */  mfc1      $a1, $f0
 /* ECA55C 8024085C 8E470060 */  lw        $a3, 0x60($s2)
 /* ECA560 80240860 4485B000 */  mtc1      $a1, $f22
-/* ECA564 80240864 0C00ADA9 */  jal       func_8002B6A4
+/* ECA564 80240864 0C00ADA9 */  jal       dead_update_lerp
 /* ECA568 80240868 0240802D */   daddu    $s0, $s2, $zero
 /* ECA56C 8024086C 46000506 */  mov.s     $f20, $f0
 .L80240870:
@@ -169,7 +169,7 @@ glabel func_80240600_ECA300
 /* ECA578 80240878 E6160020 */  swc1      $f22, 0x20($s0)
 /* ECA57C 8024087C 8E870000 */  lw        $a3, ($s4)
 /* ECA580 80240880 02532821 */  addu      $a1, $s2, $s3
-/* ECA584 80240884 0C00ACA3 */  jal       func_8002B28C
+/* ECA584 80240884 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* ECA588 80240888 E7B60020 */   swc1     $f22, 0x20($sp)
 /* ECA58C 8024088C C7A4001C */  lwc1      $f4, 0x1c($sp)
 /* ECA590 80240890 C7A00020 */  lwc1      $f0, 0x20($sp)
@@ -210,7 +210,7 @@ glabel func_80240600_ECA300
 /* ECA614 80240914 E6160020 */  swc1      $f22, 0x20($s0)
 /* ECA618 80240918 8E870000 */  lw        $a3, ($s4)
 /* ECA61C 8024091C 02532821 */  addu      $a1, $s2, $s3
-/* ECA620 80240920 0C00ACA3 */  jal       func_8002B28C
+/* ECA620 80240920 0C00ACA3 */  jal       dead_add_vec2D_polar
 /* ECA624 80240924 E7B60020 */   swc1     $f22, 0x20($sp)
 /* ECA628 80240928 C7A4001C */  lwc1      $f4, 0x1c($sp)
 /* ECA62C 8024092C C7A00020 */  lwc1      $f0, 0x20($sp)
@@ -282,7 +282,7 @@ glabel func_80240600_ECA300
 /* ECA71C 80240A1C AFB30010 */  sw        $s3, 0x10($sp)
 /* ECA720 80240A20 8E060038 */  lw        $a2, 0x38($s0)
 /* ECA724 80240A24 8E470064 */  lw        $a3, 0x64($s2)
-/* ECA728 80240A28 0C00ADA9 */  jal       func_8002B6A4
+/* ECA728 80240A28 0C00ADA9 */  jal       dead_update_lerp
 /* ECA72C 80240A2C 24040001 */   addiu    $a0, $zero, 1
 /* ECA730 80240A30 C6020014 */  lwc1      $f2, 0x14($s0)
 /* ECA734 80240A34 46001080 */  add.s     $f2, $f2, $f0
@@ -291,7 +291,7 @@ glabel func_80240600_ECA300
 /* ECA740 80240A40 AFB30010 */  sw        $s3, 0x10($sp)
 /* ECA744 80240A44 8E060044 */  lw        $a2, 0x44($s0)
 /* ECA748 80240A48 8E470064 */  lw        $a3, 0x64($s2)
-/* ECA74C 80240A4C 0C00ADA9 */  jal       func_8002B6A4
+/* ECA74C 80240A4C 0C00ADA9 */  jal       dead_update_lerp
 /* ECA750 80240A50 24040001 */   addiu    $a0, $zero, 1
 /* ECA754 80240A54 C6020020 */  lwc1      $f2, 0x20($s0)
 /* ECA758 80240A58 46001080 */  add.s     $f2, $f2, $f0
@@ -300,7 +300,7 @@ glabel func_80240600_ECA300
 /* ECA764 80240A64 AFB30010 */  sw        $s3, 0x10($sp)
 /* ECA768 80240A68 8E060050 */  lw        $a2, 0x50($s0)
 /* ECA76C 80240A6C 8E470064 */  lw        $a3, 0x64($s2)
-/* ECA770 80240A70 0C00ADA9 */  jal       func_8002B6A4
+/* ECA770 80240A70 0C00ADA9 */  jal       dead_update_lerp
 /* ECA774 80240A74 24040001 */   addiu    $a0, $zero, 1
 /* ECA778 80240A78 C602002C */  lwc1      $f2, 0x2c($s0)
 /* ECA77C 80240A7C 46001080 */  add.s     $f2, $f2, $f0

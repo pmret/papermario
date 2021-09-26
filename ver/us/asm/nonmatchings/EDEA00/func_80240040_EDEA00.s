@@ -20,7 +20,7 @@ glabel func_80240040_EDEA00
 /* EDEA3C 8024007C 0C0B53A3 */  jal       dead_evt_get_variable
 /* EDEA40 80240080 0040802D */   daddu    $s0, $v0, $zero
 /* EDEA44 80240084 0200202D */  daddu     $a0, $s0, $zero
-/* EDEA48 80240088 0C00F94D */  jal       func_8003E534
+/* EDEA48 80240088 0C00F94D */  jal       dead_get_npc_safe
 /* EDEA4C 8024008C 0040A02D */   daddu    $s4, $v0, $zero
 /* EDEA50 80240090 3C138011 */  lui       $s3, %hi(D_80117840)
 /* EDEA54 80240094 26737840 */  addiu     $s3, $s3, %lo(D_80117840)
@@ -80,7 +80,7 @@ glabel func_80240040_EDEA00
 /* EDEB18 80240158 08090068 */  j         .L802401A0
 /* EDEB1C 8024015C AE420070 */   sw       $v0, 0x70($s2)
 .L80240160:
-/* EDEB20 80240160 0C00F94D */  jal       func_8003E534
+/* EDEB20 80240160 0C00F94D */  jal       dead_get_npc_safe
 /* EDEB24 80240164 2404FFFC */   addiu    $a0, $zero, -4
 /* EDEB28 80240168 8E05000C */  lw        $a1, 0xc($s0)
 /* EDEB2C 8024016C 0C00FB54 */  jal       func_8003ED50

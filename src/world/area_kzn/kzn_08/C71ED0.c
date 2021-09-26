@@ -223,15 +223,15 @@ ApiStatus N(func_80242354_C737D4)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkNpcAIFunc27.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80242E0C_C7428C);
+#include "world/common/UnkNpcAIFunc31.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80242E78_C742F8);
+#include "world/common/UnkNpcAIFunc32.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80242F74_C743F4);
 
 #include "world/common/UnkNpcDurationFlagFunc3.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80243A44_C74EC4);
+#include "world/common/UnkNpcAIFunc33.inc.c"
 
 #include "world/common/UnkNpcDurationFlagFunc2.inc.c"
 

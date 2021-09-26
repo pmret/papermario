@@ -17,7 +17,7 @@ glabel func_802402AC_EED3AC
 /* EED3DC 802402DC AFB1001C */  sw        $s1, 0x1c($sp)
 /* EED3E0 802402E0 10A0004F */  beqz      $a1, .L80240420
 /* EED3E4 802402E4 AFB00018 */   sw       $s0, 0x18($sp)
-/* EED3E8 802402E8 0C00AFF5 */  jal       func_8002BFD4
+/* EED3E8 802402E8 0C00AFF5 */  jal       dead_heap_malloc
 /* EED3EC 802402EC 24040330 */   addiu    $a0, $zero, 0x330
 /* EED3F0 802402F0 0040982D */  daddu     $s3, $v0, $zero
 /* EED3F4 802402F4 0000B02D */  daddu     $s6, $zero, $zero
