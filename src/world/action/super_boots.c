@@ -5,12 +5,6 @@ extern struct struct8015A578 D_8015A578;
 
 s32 func_802B6648_E27428(void);
 
-typedef struct struct8015A578 {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ char unk_01[7];
-    /* 0x02 */ f32 unk_08;
-} struct8015A578;
-
 void func_802B6000_E26DE0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;

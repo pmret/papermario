@@ -982,7 +982,7 @@ typedef struct ItemEntity {
     /* 0x14 */ struct ItemEntityPhysicsData* physicsData;
     /* 0x18 */ s16 itemID; /* into item table, also worldIconID */
     /* 0x1A */ u8 state;
-    /* 0x1B */ u8 type;
+    /* 0x1B */ s8 type;
     /* 0x1C */ u8 pickupDelay; /* num frames before item can be picked up */
     /* 0x1D */ char unk_1D;
     /* 0x1E */ s16 wsFaceAngle; /* < 0 means none */
@@ -2374,6 +2374,12 @@ typedef struct StarSpiritEffect {
     /* 0x54 */ struct StarSpiritEffectUnkStruct* unk_54;
 } StarSpiritEffect; // size = 0x58
 
-
+typedef struct struct8015A578 {
+    /* 0x00 */ u8 unk_00;
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ u8 unk_02;
+    /* 0x03 */ u8 unk_03[5];
+    /* 0x08 */ f32 unk_08;
+} struct8015A578; // size = 0x0C
 
 #endif

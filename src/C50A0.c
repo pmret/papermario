@@ -1,13 +1,22 @@
 #include "common.h"
 
+#define MAX_ITEM_ENTITIES 256
+
 extern s32 D_801512F8;
 extern s32 D_80155D84;
 extern s32 D_80155D88;
-extern ItemEntity* D_80155DA0;
-extern ItemEntity* D_801561A0;
+extern ItemEntity* D_80155DA0[MAX_ITEM_ENTITIES];
+extern ItemEntity* D_801561A0[MAX_ITEM_ENTITIES];
 extern ItemEntity** D_801565A0; // item entity list
 extern s16 D_801565A4;
 extern s16 D_801565A8;
+extern s16 D_80155D8C;
+extern s16 D_80155D8E;
+extern s16 D_80155D90;
+
+void delete_shadow(s16);
+void draw_item_entities(void);
+void func_80132D94(void);
 
 INCLUDE_ASM(s32, "C50A0", draw_ci_image_with_clipping);
 
@@ -116,13 +125,40 @@ void item_entity_enable_shadow(ItemEntity* itemEntity) {
     }
 }
 
-INCLUDE_ASM(s32, "C50A0", clear_item_entity_data);
+void clear_item_entity_data(void) {
+    s32 i;
+
+    if (!gGameStatusPtr->isBattle) {
+        D_801565A0 = D_80155DA0;
+    } else {
+        D_801565A0 = D_801561A0;
+    }
+
+    for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
+        D_801565A0[i] = NULL;
+    }
+
+    D_801512F8 = 0;
+    D_80155D8C = 0;
+    D_80155D8E = 0;
+    D_80155D90 = 0;
+    D_80155D84 = 0;
+
+    if (!gGameStatusPtr->isBattle) {
+        D_80155D88 = 0;
+    }
+
+    create_generic_entity_world(NULL, draw_item_entities);
+    create_generic_entity_frontUI(NULL, func_80132D94);
+    D_801565A4 = 0;
+    D_801565A8 = 0;
+}
 
 void init_item_entity_list(void) {
     if (!gGameStatusPtr->isBattle) {
-        D_801565A0 = &D_80155DA0;
+        D_801565A0 = D_80155DA0;
     } else {
-        D_801565A0 = &D_801561A0;
+        D_801565A0 = D_801561A0;
     }
 
     D_801565A4 = 0;
@@ -158,9 +194,55 @@ INCLUDE_ASM(s32, "C50A0", func_80132D94);
 
 INCLUDE_ASM(s32, "C50A0", render_item_entities);
 
-INCLUDE_ASM(s32, "C50A0", remove_item_entity_by_reference);
+void remove_item_entity_by_reference(ItemEntity* entity) {
+    s32 index;
 
-INCLUDE_ASM(s32, "C50A0", remove_item_entity_by_index);
+    for (index = 0; index < MAX_ITEM_ENTITIES; index++) {
+        if (D_801565A0[index] == entity) {
+            break;
+        }
+    }
+
+    if (index < MAX_ITEM_ENTITIES) {
+        if (entity->physicsData != NULL) {
+            heap_free(entity->physicsData);
+        }
+
+        switch (entity->type) {
+            case 0:
+            case 3:
+            case 12:
+            case 16:
+            case 20:
+            case 28:
+                delete_shadow(entity->shadowIndex);
+                break;
+        }
+
+        heap_free(D_801565A0[index]);
+        D_801565A4 = 0;
+        D_801565A0[index] = NULL;
+    }
+}
+
+void remove_item_entity_by_index(s32 index) {
+    ItemEntity* itemEntity = D_801565A0[index];
+
+    switch (itemEntity->type) {
+        case 0:
+        case 3:
+        case 12:
+        case 16:
+        case 20:
+        case 28:
+            delete_shadow(itemEntity->shadowIndex);
+            break;
+    }
+
+    heap_free(D_801565A0[index]);
+    D_801565A0[index] = NULL;
+    D_801565A4 = 0;
+}
 
 INCLUDE_ASM(s32, "C50A0", func_80133A94);
 
