@@ -203,7 +203,7 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
 s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX, f32* hitY, f32* hitZ,
                       f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
 
-void mem_clear(s8* data, s32 numBytes);
+void mem_clear(void* data, s32 numBytes);
 
 void intro_logos_set_fade_color(s16 color);
 void intro_logos_set_fade_alpha(s16 alpha);

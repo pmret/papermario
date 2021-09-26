@@ -29,7 +29,7 @@ extern Matrix4f D_802B7580_E22B30;
 extern Matrix4f D_802B7BA0_E23150;
 extern Matrix4f D_802B7BC0_E23170;
 extern Matrix4f D_802B7BE0_E23190;
-extern Matrix4f D_802B7C00_E231B0;
+extern Gfx D_802B7C00_E231B0[];
 
 extern void (*D_8010C93C)(void);
 extern struct802B7C78* D_802B7C78_E23228;
@@ -61,10 +61,10 @@ void func_802B7000_E225B0(void) {
         guMtxF2L(matrix2, (Mtx*) &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 3);
-        gSPDisplayList(gMasterGfxPos++, (u32) &D_802B7C00_E231B0);
+        gSPDisplayList(gMasterGfxPos++, D_802B7C00_E231B0);
 
         localD_802B7C78_E23228 = D_802B7C78_E23228;
-        if (localD_802B7C78_E23228->unk_18 < 0x2F) {
+        if (localD_802B7C78_E23228->unk_18 < 47) {
             localD_802B7C78_E23228->unk_20 += 1;
         }
 
@@ -106,7 +106,7 @@ void func_802B7000_E225B0(void) {
 
 
 void func_802B72C0_E22870(void) {
-    mem_clear((s8*)D_802B7C78_E23228, sizeof(*D_802B7C78_E23228));
+    mem_clear(D_802B7C78_E23228, sizeof(*D_802B7C78_E23228));
 
     D_802B7C78_E23228->x = gPlayerStatus.position.x;
     D_802B7C78_E23228->y = gPlayerStatus.position.y + gPlayerStatus.colliderHeight + 8.0f;
