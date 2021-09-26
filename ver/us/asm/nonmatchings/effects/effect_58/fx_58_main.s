@@ -31,7 +31,7 @@ glabel fx_58_main
 /* 3764C8 E0074068 AFA00010 */  sw        $zero, 0x10($sp)
 /* 3764CC E007406C AFA00024 */  sw        $zero, 0x24($sp)
 /* 3764D0 E0074070 AFA20014 */  sw        $v0, 0x14($sp)
-/* 3764D4 E0074074 0C080124 */  jal       func_E0200490
+/* 3764D4 E0074074 0C080124 */  jal       shim_create_effect_instance
 /* 3764D8 E0074078 26100001 */   addiu    $s0, $s0, 1
 /* 3764DC E007407C 001020C0 */  sll       $a0, $s0, 3
 /* 3764E0 E0074080 00902023 */  subu      $a0, $a0, $s0
@@ -39,7 +39,7 @@ glabel fx_58_main
 /* 3764E8 E0074088 00902023 */  subu      $a0, $a0, $s0
 /* 3764EC E007408C 00042080 */  sll       $a0, $a0, 2
 /* 3764F0 E0074090 0040882D */  daddu     $s1, $v0, $zero
-/* 3764F4 E0074094 0C08012C */  jal       func_E02004B0
+/* 3764F4 E0074094 0C08012C */  jal       shim_general_heap_malloc
 /* 3764F8 E0074098 AE300008 */   sw       $s0, 8($s1)
 /* 3764FC E007409C 0040202D */  daddu     $a0, $v0, $zero
 /* 376500 E00740A0 14800003 */  bnez      $a0, .LE00740B0

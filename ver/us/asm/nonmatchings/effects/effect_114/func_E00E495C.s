@@ -118,14 +118,14 @@ glabel func_E00E495C
 /* 3DEB1C E00E4B1C C600FFA8 */  lwc1      $f0, -0x58($s0)
 /* 3DEB20 E00E4B20 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 3DEB24 E00E4B24 C600FFAC */  lwc1      $f0, -0x54($s0)
-/* 3DEB28 E00E4B28 0C080180 */  jal       func_E0200600
+/* 3DEB28 E00E4B28 0C080180 */  jal       shim_guPositionF
 /* 3DEB2C E00E4B2C E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 3DEB30 E00E4B30 27A40020 */  addiu     $a0, $sp, 0x20
 /* 3DEB34 E00E4B34 96A50000 */  lhu       $a1, ($s5)
 /* 3DEB38 E00E4B38 8EC20000 */  lw        $v0, ($s6)
 /* 3DEB3C E00E4B3C 00052980 */  sll       $a1, $a1, 6
 /* 3DEB40 E00E4B40 00B32821 */  addu      $a1, $a1, $s3
-/* 3DEB44 E00E4B44 0C080118 */  jal       func_E0200460
+/* 3DEB44 E00E4B44 0C080118 */  jal       shim_guMtxF2L
 /* 3DEB48 E00E4B48 00452821 */   addu     $a1, $v0, $a1
 /* 3DEB4C E00E4B4C 8E240000 */  lw        $a0, ($s1)
 /* 3DEB50 E00E4B50 0080282D */  daddu     $a1, $a0, $zero

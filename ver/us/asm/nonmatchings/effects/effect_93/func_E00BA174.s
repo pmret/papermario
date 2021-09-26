@@ -32,7 +32,7 @@ glabel func_E00BA174
 /* 3B8DA8 E00BA1D8 24420001 */  addiu     $v0, $v0, 1
 /* 3B8DAC E00BA1DC 04610005 */  bgez      $v1, .LE00BA1F4
 /* 3B8DB0 E00BA1E0 AE020014 */   sw       $v0, 0x14($s0)
-/* 3B8DB4 E00BA1E4 0C080128 */  jal       func_E02004A0
+/* 3B8DB4 E00BA1E4 0C080128 */  jal       shim_remove_effect
 /* 3B8DB8 E00BA1E8 00000000 */   nop
 /* 3B8DBC E00BA1EC 0802E96D */  j         .LE00BA5B4
 /* 3B8DC0 E00BA1F0 00000000 */   nop
@@ -90,7 +90,7 @@ glabel func_E00BA174
 /* 3B8E78 E00BA2A8 44826000 */  mtc1      $v0, $f12
 /* 3B8E7C E00BA2AC 00000000 */  nop
 /* 3B8E80 E00BA2B0 46806320 */  cvt.s.w   $f12, $f12
-/* 3B8E84 E00BA2B4 0C080140 */  jal       func_E0200500
+/* 3B8E84 E00BA2B4 0C080140 */  jal       shim_sin_deg
 /* 3B8E88 E00BA2B8 26520001 */   addiu    $s2, $s2, 1
 /* 3B8E8C E00BA2BC 46160002 */  mul.s     $f0, $f0, $f22
 /* 3B8E90 E00BA2C0 00000000 */  nop

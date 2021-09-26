@@ -12,7 +12,7 @@ glabel func_E01166A0
 /* 402CFC E01166BC AFA40018 */  sw        $a0, 0x18($sp)
 /* 402D00 E01166C0 27A40010 */  addiu     $a0, $sp, 0x10
 /* 402D04 E01166C4 AFBF0020 */  sw        $ra, 0x20($sp)
-/* 402D08 E01166C8 0C080120 */  jal       func_E0200480
+/* 402D08 E01166C8 0C080120 */  jal       shim_queue_render_task
 /* 402D0C E01166CC AFA20010 */   sw       $v0, 0x10($sp)
 /* 402D10 E01166D0 8C430000 */  lw        $v1, ($v0)
 /* 402D14 E01166D4 34630002 */  ori       $v1, $v1, 2

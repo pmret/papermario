@@ -50,7 +50,7 @@ glabel func_E005A3F4
 /* 360768 E005A4A8 8E650004 */  lw        $a1, 4($s3)
 /* 36076C E005A4AC 8E660008 */  lw        $a2, 8($s3)
 /* 360770 E005A4B0 8E67000C */  lw        $a3, 0xc($s3)
-/* 360774 E005A4B4 0C080108 */  jal       func_E0200420
+/* 360774 E005A4B4 0C080108 */  jal       shim_guTranslateF
 /* 360778 E005A4B8 24140001 */   addiu    $s4, $zero, 1
 /* 36077C E005A4BC 27B10058 */  addiu     $s1, $sp, 0x58
 /* 360780 E005A4C0 4480A000 */  mtc1      $zero, $f20
@@ -73,11 +73,11 @@ glabel func_E005A3F4
 /* 3607C4 E005A504 46000007 */  neg.s     $f0, $f0
 /* 3607C8 E005A508 44050000 */  mfc1      $a1, $f0
 /* 3607CC E005A50C 0220202D */  daddu     $a0, $s1, $zero
-/* 3607D0 E005A510 0C080104 */  jal       func_E0200410
+/* 3607D0 E005A510 0C080104 */  jal       shim_guRotateF
 /* 3607D4 E005A514 E7B40010 */   swc1     $f20, 0x10($sp)
 /* 3607D8 E005A518 0220202D */  daddu     $a0, $s1, $zero
 /* 3607DC E005A51C 27A50018 */  addiu     $a1, $sp, 0x18
-/* 3607E0 E005A520 0C080114 */  jal       func_E0200450
+/* 3607E0 E005A520 0C080114 */  jal       shim_guMtxCatF
 /* 3607E4 E005A524 00A0302D */   daddu    $a2, $a1, $zero
 /* 3607E8 E005A528 27A40018 */  addiu     $a0, $sp, 0x18
 /* 3607EC E005A52C 3C158007 */  lui       $s5, %hi(gMatrixListPos)
@@ -88,7 +88,7 @@ glabel func_E005A3F4
 /* 360800 E005A540 8EC20000 */  lw        $v0, ($s6)
 /* 360804 E005A544 00052980 */  sll       $a1, $a1, 6
 /* 360808 E005A548 00B02821 */  addu      $a1, $a1, $s0
-/* 36080C E005A54C 0C080118 */  jal       func_E0200460
+/* 36080C E005A54C 0C080118 */  jal       shim_guMtxF2L
 /* 360810 E005A550 00452821 */   addu     $a1, $v0, $a1
 /* 360814 E005A554 3C06DCDC */  lui       $a2, 0xdcdc
 /* 360818 E005A558 8E440000 */  lw        $a0, ($s2)
@@ -128,34 +128,34 @@ glabel func_E005A3F4
 /* 36089C E005A5DC 8E05FFD4 */  lw        $a1, -0x2c($s0)
 /* 3608A0 E005A5E0 8E06FFD8 */  lw        $a2, -0x28($s0)
 /* 3608A4 E005A5E4 8E07FFDC */  lw        $a3, -0x24($s0)
-/* 3608A8 E005A5E8 0C080108 */  jal       func_E0200420
+/* 3608A8 E005A5E8 0C080108 */  jal       shim_guTranslateF
 /* 3608AC E005A5EC 26940001 */   addiu    $s4, $s4, 1
 /* 3608B0 E005A5F0 E7B40010 */  swc1      $f20, 0x10($sp)
 /* 3608B4 E005A5F4 8E05FFEC */  lw        $a1, -0x14($s0)
 /* 3608B8 E005A5F8 4406B000 */  mfc1      $a2, $f22
 /* 3608BC E005A5FC 4407B000 */  mfc1      $a3, $f22
-/* 3608C0 E005A600 0C080104 */  jal       func_E0200410
+/* 3608C0 E005A600 0C080104 */  jal       shim_guRotateF
 /* 3608C4 E005A604 0220202D */   daddu    $a0, $s1, $zero
 /* 3608C8 E005A608 0220202D */  daddu     $a0, $s1, $zero
 /* 3608CC E005A60C 27A50018 */  addiu     $a1, $sp, 0x18
-/* 3608D0 E005A610 0C080114 */  jal       func_E0200450
+/* 3608D0 E005A610 0C080114 */  jal       shim_guMtxCatF
 /* 3608D4 E005A614 00A0302D */   daddu    $a2, $a1, $zero
 /* 3608D8 E005A618 0220202D */  daddu     $a0, $s1, $zero
 /* 3608DC E005A61C 8E050000 */  lw        $a1, ($s0)
 /* 3608E0 E005A620 26100034 */  addiu     $s0, $s0, 0x34
 /* 3608E4 E005A624 4407A000 */  mfc1      $a3, $f20
-/* 3608E8 E005A628 0C080110 */  jal       func_E0200440
+/* 3608E8 E005A628 0C080110 */  jal       shim_guScaleF
 /* 3608EC E005A62C 00A0302D */   daddu    $a2, $a1, $zero
 /* 3608F0 E005A630 0220202D */  daddu     $a0, $s1, $zero
 /* 3608F4 E005A634 27A50018 */  addiu     $a1, $sp, 0x18
-/* 3608F8 E005A638 0C080114 */  jal       func_E0200450
+/* 3608F8 E005A638 0C080114 */  jal       shim_guMtxCatF
 /* 3608FC E005A63C 00A0302D */   daddu    $a2, $a1, $zero
 /* 360900 E005A640 27A40018 */  addiu     $a0, $sp, 0x18
 /* 360904 E005A644 96C50000 */  lhu       $a1, ($s6)
 /* 360908 E005A648 8EE20000 */  lw        $v0, ($s7)
 /* 36090C E005A64C 00052980 */  sll       $a1, $a1, 6
 /* 360910 E005A650 00B52821 */  addu      $a1, $a1, $s5
-/* 360914 E005A654 0C080118 */  jal       func_E0200460
+/* 360914 E005A654 0C080118 */  jal       shim_guMtxF2L
 /* 360918 E005A658 00452821 */   addu     $a1, $v0, $a1
 /* 36091C E005A65C 3C06D838 */  lui       $a2, 0xd838
 /* 360920 E005A660 8E440000 */  lw        $a0, ($s2)

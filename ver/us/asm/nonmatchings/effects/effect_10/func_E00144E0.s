@@ -85,23 +85,23 @@ glabel func_E00144E0
 /* 32EAAC E001461C E7A00018 */  swc1      $f0, 0x18($sp)
 /* 32EAB0 E0014620 C600000C */  lwc1      $f0, 0xc($s0)
 /* 32EAB4 E0014624 27A40020 */  addiu     $a0, $sp, 0x20
-/* 32EAB8 E0014628 0C080180 */  jal       func_E0200600
+/* 32EAB8 E0014628 0C080180 */  jal       shim_guPositionF
 /* 32EABC E001462C E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 32EAC0 E0014630 8E050010 */  lw        $a1, 0x10($s0)
 /* 32EAC4 E0014634 8E060014 */  lw        $a2, 0x14($s0)
 /* 32EAC8 E0014638 8E070018 */  lw        $a3, 0x18($s0)
-/* 32EACC E001463C 0C080110 */  jal       func_E0200440
+/* 32EACC E001463C 0C080110 */  jal       shim_guScaleF
 /* 32EAD0 E0014640 02A0202D */   daddu    $a0, $s5, $zero
 /* 32EAD4 E0014644 02A0202D */  daddu     $a0, $s5, $zero
 /* 32EAD8 E0014648 27A50020 */  addiu     $a1, $sp, 0x20
-/* 32EADC E001464C 0C080114 */  jal       func_E0200450
+/* 32EADC E001464C 0C080114 */  jal       shim_guMtxCatF
 /* 32EAE0 E0014650 00A0302D */   daddu    $a2, $a1, $zero
 /* 32EAE4 E0014654 27A40020 */  addiu     $a0, $sp, 0x20
 /* 32EAE8 E0014658 96E50000 */  lhu       $a1, ($s7)
 /* 32EAEC E001465C 8FC20000 */  lw        $v0, ($fp)
 /* 32EAF0 E0014660 00052980 */  sll       $a1, $a1, 6
 /* 32EAF4 E0014664 00B42821 */  addu      $a1, $a1, $s4
-/* 32EAF8 E0014668 0C080118 */  jal       func_E0200460
+/* 32EAF8 E0014668 0C080118 */  jal       shim_guMtxF2L
 /* 32EAFC E001466C 00452821 */   addu     $a1, $v0, $a1
 /* 32EB00 E0014670 3C077060 */  lui       $a3, 0x7060
 /* 32EB04 E0014674 34E71800 */  ori       $a3, $a3, 0x1800

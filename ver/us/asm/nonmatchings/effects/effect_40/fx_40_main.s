@@ -30,12 +30,12 @@ glabel fx_40_main
 /* 35C034 E0050064 F7B40080 */  sdc1      $f20, 0x80($sp)
 /* 35C038 E0050068 AFA00018 */  sw        $zero, 0x18($sp)
 /* 35C03C E005006C AFA0002C */  sw        $zero, 0x2c($sp)
-/* 35C040 E0050070 0C080124 */  jal       func_E0200490
+/* 35C040 E0050070 0C080124 */  jal       shim_create_effect_instance
 /* 35C044 E0050074 AFA2001C */   sw       $v0, 0x1c($sp)
 /* 35C048 E0050078 24040028 */  addiu     $a0, $zero, 0x28
 /* 35C04C E005007C 24030001 */  addiu     $v1, $zero, 1
 /* 35C050 E0050080 0040802D */  daddu     $s0, $v0, $zero
-/* 35C054 E0050084 0C08012C */  jal       func_E02004B0
+/* 35C054 E0050084 0C08012C */  jal       shim_general_heap_malloc
 /* 35C058 E0050088 AE030008 */   sw       $v1, 8($s0)
 /* 35C05C E005008C 0040882D */  daddu     $s1, $v0, $zero
 /* 35C060 E0050090 16200003 */  bnez      $s1, .LE00500A0
@@ -58,7 +58,7 @@ glabel fx_40_main
 /* 35C09C E00500CC 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 35C0A0 E00500D0 00220821 */  addu      $at, $at, $v0
 /* 35C0A4 E00500D4 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
-/* 35C0A8 E00500D8 0C080140 */  jal       func_E0200500
+/* 35C0A8 E00500D8 0C080140 */  jal       shim_sin_deg
 /* 35C0AC E00500DC 00000000 */   nop
 /* 35C0B0 E00500E0 8E030000 */  lw        $v1, ($s0)
 /* 35C0B4 E00500E4 00031080 */  sll       $v0, $v1, 2
@@ -71,7 +71,7 @@ glabel fx_40_main
 /* 35C0D0 E0050100 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 35C0D4 E0050104 00220821 */  addu      $at, $at, $v0
 /* 35C0D8 E0050108 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
-/* 35C0DC E005010C 0C080144 */  jal       func_E0200510
+/* 35C0DC E005010C 0C080144 */  jal       shim_cos_deg
 /* 35C0E0 E0050110 46000506 */   mov.s    $f20, $f0
 /* 35C0E4 E0050114 27A40030 */  addiu     $a0, $sp, 0x30
 /* 35C0E8 E0050118 0000382D */  daddu     $a3, $zero, $zero
@@ -79,7 +79,7 @@ glabel fx_40_main
 /* 35C0F0 E0050120 4406A000 */  mfc1      $a2, $f20
 /* 35C0F4 E0050124 44052000 */  mfc1      $a1, $f4
 /* 35C0F8 E0050128 46000007 */  neg.s     $f0, $f0
-/* 35C0FC E005012C 0C080104 */  jal       func_E0200410
+/* 35C0FC E005012C 0C080104 */  jal       shim_guRotateF
 /* 35C100 E0050130 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 35C104 E0050134 3C014180 */  lui       $at, 0x4180
 /* 35C108 E0050138 44810000 */  mtc1      $at, $f0

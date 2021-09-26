@@ -116,7 +116,7 @@ glabel LE010E61C_3EBAFC
 /* 3EBBDC E010E6FC AFA00014 */  sw        $zero, 0x14($sp)
 /* 3EBBE0 E010E700 8E040054 */  lw        $a0, 0x54($s0)
 /* 3EBBE4 E010E704 8E060044 */  lw        $a2, 0x44($s0)
-/* 3EBBE8 E010E708 0C080194 */  jal       func_E0200650
+/* 3EBBE8 E010E708 0C080194 */  jal       shim_draw_msg
 /* 3EBBEC E010E70C 00652823 */   subu     $a1, $v1, $a1
 .LE010E710:
 /* 3EBBF0 E010E710 8E420000 */  lw        $v0, ($s2)

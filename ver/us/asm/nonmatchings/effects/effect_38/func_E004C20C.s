@@ -13,7 +13,7 @@ glabel func_E004C20C
 /* 35A14C E004C22C 24420001 */  addiu     $v0, $v0, 1
 /* 35A150 E004C230 04C10005 */  bgez      $a2, .LE004C248
 /* 35A154 E004C234 ACA2001C */   sw       $v0, 0x1c($a1)
-/* 35A158 E004C238 0C080128 */  jal       func_E02004A0
+/* 35A158 E004C238 0C080128 */  jal       shim_remove_effect
 /* 35A15C E004C23C 00000000 */   nop
 /* 35A160 E004C240 080130D6 */  j         .LE004C358
 /* 35A164 E004C244 00000000 */   nop

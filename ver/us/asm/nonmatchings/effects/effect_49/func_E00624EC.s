@@ -52,7 +52,7 @@ glabel func_E00624EC
 /* 3648A8 E00625A8 8E460008 */  lw        $a2, 8($s2)
 /* 3648AC E00625AC 8E47000C */  lw        $a3, 0xc($s2)
 /* 3648B0 E00625B0 24630010 */  addiu     $v1, $v1, 0x10
-/* 3648B4 E00625B4 0C080108 */  jal       func_E0200420
+/* 3648B4 E00625B4 0C080108 */  jal       shim_guTranslateF
 /* 3648B8 E00625B8 AE630000 */   sw       $v1, ($s3)
 /* 3648BC E00625BC 27B50058 */  addiu     $s5, $sp, 0x58
 /* 3648C0 E00625C0 4480A000 */  mtc1      $zero, $f20
@@ -75,12 +75,12 @@ glabel func_E00624EC
 /* 364904 E0062604 46000007 */  neg.s     $f0, $f0
 /* 364908 E0062608 44050000 */  mfc1      $a1, $f0
 /* 36490C E006260C 02A0202D */  daddu     $a0, $s5, $zero
-/* 364910 E0062610 0C080104 */  jal       func_E0200410
+/* 364910 E0062610 0C080104 */  jal       shim_guRotateF
 /* 364914 E0062614 E7B40010 */   swc1     $f20, 0x10($sp)
 /* 364918 E0062618 02A0202D */  daddu     $a0, $s5, $zero
 /* 36491C E006261C 27A50018 */  addiu     $a1, $sp, 0x18
 /* 364920 E0062620 27B00098 */  addiu     $s0, $sp, 0x98
-/* 364924 E0062624 0C080114 */  jal       func_E0200450
+/* 364924 E0062624 0C080114 */  jal       shim_guMtxCatF
 /* 364928 E0062628 0200302D */   daddu    $a2, $s0, $zero
 /* 36492C E006262C 0200202D */  daddu     $a0, $s0, $zero
 /* 364930 E0062630 3C108007 */  lui       $s0, %hi(gMatrixListPos)
@@ -91,7 +91,7 @@ glabel func_E00624EC
 /* 364944 E0062644 8EC20000 */  lw        $v0, ($s6)
 /* 364948 E0062648 00052980 */  sll       $a1, $a1, 6
 /* 36494C E006264C 00B12821 */  addu      $a1, $a1, $s1
-/* 364950 E0062650 0C080118 */  jal       func_E0200460
+/* 364950 E0062650 0C080118 */  jal       shim_guMtxF2L
 /* 364954 E0062654 00452821 */   addu     $a1, $v0, $a1
 /* 364958 E0062658 8E660000 */  lw        $a2, ($s3)
 /* 36495C E006265C 24140001 */  addiu     $s4, $zero, 1
@@ -154,34 +154,34 @@ glabel func_E00624EC
 /* 364A3C E006273C 8E05FFE8 */  lw        $a1, -0x18($s0)
 /* 364A40 E0062740 8E06FFEC */  lw        $a2, -0x14($s0)
 /* 364A44 E0062744 8E07FFF0 */  lw        $a3, -0x10($s0)
-/* 364A48 E0062748 0C080108 */  jal       func_E0200420
+/* 364A48 E0062748 0C080108 */  jal       shim_guTranslateF
 /* 364A4C E006274C 26940001 */   addiu    $s4, $s4, 1
 /* 364A50 E0062750 E7B40010 */  swc1      $f20, 0x10($sp)
 /* 364A54 E0062754 8E050010 */  lw        $a1, 0x10($s0)
 /* 364A58 E0062758 4406B000 */  mfc1      $a2, $f22
 /* 364A5C E006275C 4407B000 */  mfc1      $a3, $f22
-/* 364A60 E0062760 0C080104 */  jal       func_E0200410
+/* 364A60 E0062760 0C080104 */  jal       shim_guRotateF
 /* 364A64 E0062764 0220202D */   daddu    $a0, $s1, $zero
 /* 364A68 E0062768 0220202D */  daddu     $a0, $s1, $zero
 /* 364A6C E006276C 27A50018 */  addiu     $a1, $sp, 0x18
-/* 364A70 E0062770 0C080114 */  jal       func_E0200450
+/* 364A70 E0062770 0C080114 */  jal       shim_guMtxCatF
 /* 364A74 E0062774 00A0302D */   daddu    $a2, $a1, $zero
 /* 364A78 E0062778 0220202D */  daddu     $a0, $s1, $zero
 /* 364A7C E006277C 8E050004 */  lw        $a1, 4($s0)
 /* 364A80 E0062780 8E060000 */  lw        $a2, ($s0)
 /* 364A84 E0062784 4407A000 */  mfc1      $a3, $f20
-/* 364A88 E0062788 0C080110 */  jal       func_E0200440
+/* 364A88 E0062788 0C080110 */  jal       shim_guScaleF
 /* 364A8C E006278C 26100040 */   addiu    $s0, $s0, 0x40
 /* 364A90 E0062790 0220202D */  daddu     $a0, $s1, $zero
 /* 364A94 E0062794 27A50018 */  addiu     $a1, $sp, 0x18
-/* 364A98 E0062798 0C080114 */  jal       func_E0200450
+/* 364A98 E0062798 0C080114 */  jal       shim_guMtxCatF
 /* 364A9C E006279C 00A0302D */   daddu    $a2, $a1, $zero
 /* 364AA0 E00627A0 27A40018 */  addiu     $a0, $sp, 0x18
 /* 364AA4 E00627A4 96C50000 */  lhu       $a1, ($s6)
 /* 364AA8 E00627A8 8EE20000 */  lw        $v0, ($s7)
 /* 364AAC E00627AC 00052980 */  sll       $a1, $a1, 6
 /* 364AB0 E00627B0 00B52821 */  addu      $a1, $a1, $s5
-/* 364AB4 E00627B4 0C080118 */  jal       func_E0200460
+/* 364AB4 E00627B4 0C080118 */  jal       shim_guMtxF2L
 /* 364AB8 E00627B8 00452821 */   addu     $a1, $v0, $a1
 /* 364ABC E00627BC 3C06D838 */  lui       $a2, 0xd838
 /* 364AC0 E00627C0 8E640000 */  lw        $a0, ($s3)

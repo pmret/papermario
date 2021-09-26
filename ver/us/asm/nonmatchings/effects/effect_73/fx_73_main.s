@@ -29,12 +29,12 @@ glabel fx_73_main
 /* 391D90 E0092060 AFB00028 */  sw        $s0, 0x28($sp)
 /* 391D94 E0092064 AFA00010 */  sw        $zero, 0x10($sp)
 /* 391D98 E0092068 AFA00024 */  sw        $zero, 0x24($sp)
-/* 391D9C E009206C 0C080124 */  jal       func_E0200490
+/* 391D9C E009206C 0C080124 */  jal       shim_create_effect_instance
 /* 391DA0 E0092070 AFA20014 */   sw       $v0, 0x14($sp)
 /* 391DA4 E0092074 240400B4 */  addiu     $a0, $zero, 0xb4
 /* 391DA8 E0092078 24110005 */  addiu     $s1, $zero, 5
 /* 391DAC E009207C 0040802D */  daddu     $s0, $v0, $zero
-/* 391DB0 E0092080 0C08012C */  jal       func_E02004B0
+/* 391DB0 E0092080 0C08012C */  jal       shim_general_heap_malloc
 /* 391DB4 E0092084 AE110008 */   sw       $s1, 8($s0)
 /* 391DB8 E0092088 0040182D */  daddu     $v1, $v0, $zero
 /* 391DBC E009208C 14600003 */  bnez      $v1, .LE009209C

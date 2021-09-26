@@ -13,7 +13,7 @@ glabel fx_80_main
 /* 3A22B0 E00A0020 AFA0001C */  sw        $zero, 0x1c($sp)
 /* 3A22B4 E00A0024 AFA00020 */  sw        $zero, 0x20($sp)
 /* 3A22B8 E00A0028 AFA00024 */  sw        $zero, 0x24($sp)
-/* 3A22BC E00A002C 0C080124 */  jal       func_E0200490
+/* 3A22BC E00A002C 0C080124 */  jal       shim_create_effect_instance
 /* 3A22C0 E00A0030 AFA20014 */   sw       $v0, 0x14($sp)
 /* 3A22C4 E00A0034 3C04DB06 */  lui       $a0, 0xdb06
 /* 3A22C8 E00A0038 34840024 */  ori       $a0, $a0, 0x24
@@ -104,7 +104,7 @@ glabel fx_80_main
 /* 3A2414 E00A0184 ACA30000 */  sw        $v1, ($a1)
 /* 3A2418 E00A0188 3C03DB06 */  lui       $v1, 0xdb06
 /* 3A241C E00A018C AC430020 */  sw        $v1, 0x20($v0)
-/* 3A2420 E00A0190 0C080128 */  jal       func_E02004A0
+/* 3A2420 E00A0190 0C080128 */  jal       shim_remove_effect
 /* 3A2424 E00A0194 AC400024 */   sw       $zero, 0x24($v0)
 /* 3A2428 E00A0198 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 3A242C E00A019C 8FB00028 */  lw        $s0, 0x28($sp)

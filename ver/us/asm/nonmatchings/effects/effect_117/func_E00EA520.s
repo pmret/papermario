@@ -33,7 +33,7 @@ glabel func_E00EA520
 /* 3E2470 E00EA590 8CE50004 */  lw        $a1, 4($a3)
 /* 3E2474 E00EA594 8CE60008 */  lw        $a2, 8($a3)
 /* 3E2478 E00EA598 8CE7000C */  lw        $a3, 0xc($a3)
-/* 3E247C E00EA59C 0C080168 */  jal       func_E02005A0
+/* 3E247C E00EA59C 0C080168 */  jal       shim_transform_point
 /* 3E2480 E00EA5A0 00822021 */   addu     $a0, $a0, $v0
 /* 3E2484 E00EA5A4 C7A00040 */  lwc1      $f0, 0x40($sp)
 /* 3E2488 E00EA5A8 3C01459C */  lui       $at, 0x459c
@@ -76,7 +76,7 @@ glabel func_E00EA520
 /* 3E2510 E00EA630 AC820004 */  sw        $v0, 4($a0)
 /* 3E2514 E00EA634 24020011 */  addiu     $v0, $zero, 0x11
 /* 3E2518 E00EA638 AC910008 */  sw        $s1, 8($a0)
-/* 3E251C E00EA63C 0C080120 */  jal       func_E0200480
+/* 3E251C E00EA63C 0C080120 */  jal       shim_queue_render_task
 /* 3E2520 E00EA640 AC820000 */   sw       $v0, ($a0)
 /* 3E2524 E00EA644 8C430000 */  lw        $v1, ($v0)
 /* 3E2528 E00EA648 34630002 */  ori       $v1, $v1, 2

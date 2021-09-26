@@ -62,7 +62,7 @@ glabel func_E0090444
 /* 38FE24 E0090524 8E650008 */  lw        $a1, 8($s3)
 /* 38FE28 E0090528 8E66000C */  lw        $a2, 0xc($s3)
 /* 38FE2C E009052C 8E670010 */  lw        $a3, 0x10($s3)
-/* 38FE30 E0090530 0C080108 */  jal       func_E0200420
+/* 38FE30 E0090530 0C080108 */  jal       shim_guTranslateF
 /* 38FE34 E0090534 36521630 */   ori      $s2, $s2, 0x1630
 /* 38FE38 E0090538 27B00058 */  addiu     $s0, $sp, 0x58
 /* 38FE3C E009053C 3C013F80 */  lui       $at, 0x3f80
@@ -85,20 +85,20 @@ glabel func_E0090444
 /* 38FE80 E0090580 46000007 */  neg.s     $f0, $f0
 /* 38FE84 E0090584 44050000 */  mfc1      $a1, $f0
 /* 38FE88 E0090588 0200202D */  daddu     $a0, $s0, $zero
-/* 38FE8C E009058C 0C080104 */  jal       func_E0200410
+/* 38FE8C E009058C 0C080104 */  jal       shim_guRotateF
 /* 38FE90 E0090590 AFA60010 */   sw       $a2, 0x10($sp)
 /* 38FE94 E0090594 0200202D */  daddu     $a0, $s0, $zero
 /* 38FE98 E0090598 27A50018 */  addiu     $a1, $sp, 0x18
-/* 38FE9C E009059C 0C080114 */  jal       func_E0200450
+/* 38FE9C E009059C 0C080114 */  jal       shim_guMtxCatF
 /* 38FEA0 E00905A0 00A0302D */   daddu    $a2, $a1, $zero
 /* 38FEA4 E00905A4 0200202D */  daddu     $a0, $s0, $zero
 /* 38FEA8 E00905A8 4405B000 */  mfc1      $a1, $f22
 /* 38FEAC E00905AC 4407A000 */  mfc1      $a3, $f20
-/* 38FEB0 E00905B0 0C080110 */  jal       func_E0200440
+/* 38FEB0 E00905B0 0C080110 */  jal       shim_guScaleF
 /* 38FEB4 E00905B4 00A0302D */   daddu    $a2, $a1, $zero
 /* 38FEB8 E00905B8 0200202D */  daddu     $a0, $s0, $zero
 /* 38FEBC E00905BC 27A50018 */  addiu     $a1, $sp, 0x18
-/* 38FEC0 E00905C0 0C080114 */  jal       func_E0200450
+/* 38FEC0 E00905C0 0C080114 */  jal       shim_guMtxCatF
 /* 38FEC4 E00905C4 00A0302D */   daddu    $a2, $a1, $zero
 /* 38FEC8 E00905C8 27A40018 */  addiu     $a0, $sp, 0x18
 /* 38FECC E00905CC 3C108007 */  lui       $s0, %hi(gMatrixListPos)
@@ -109,7 +109,7 @@ glabel func_E0090444
 /* 38FEE0 E00905E0 8E220000 */  lw        $v0, ($s1)
 /* 38FEE4 E00905E4 00052980 */  sll       $a1, $a1, 6
 /* 38FEE8 E00905E8 00B22821 */  addu      $a1, $a1, $s2
-/* 38FEEC E00905EC 0C080118 */  jal       func_E0200460
+/* 38FEEC E00905EC 0C080118 */  jal       shim_guMtxF2L
 /* 38FEF0 E00905F0 00452821 */   addu     $a1, $v0, $a1
 /* 38FEF4 E00905F4 3C03DA38 */  lui       $v1, 0xda38
 /* 38FEF8 E00905F8 34630002 */  ori       $v1, $v1, 2

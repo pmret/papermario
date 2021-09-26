@@ -27,7 +27,7 @@ glabel func_E00BE3A4
 /* 3BC354 E00BE3F4 24420001 */  addiu     $v0, $v0, 1
 /* 3BC358 E00BE3F8 04A10005 */  bgez      $a1, .LE00BE410
 /* 3BC35C E00BE3FC AC620020 */   sw       $v0, 0x20($v1)
-/* 3BC360 E00BE400 0C080128 */  jal       func_E02004A0
+/* 3BC360 E00BE400 0C080128 */  jal       shim_remove_effect
 /* 3BC364 E00BE404 00000000 */   nop
 /* 3BC368 E00BE408 0802F95A */  j         .LE00BE568
 /* 3BC36C E00BE40C 00000000 */   nop

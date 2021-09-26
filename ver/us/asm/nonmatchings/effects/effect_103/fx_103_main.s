@@ -32,12 +32,12 @@ glabel fx_103_main
 /* 3D2B2C E00CE06C AFA7007C */  sw        $a3, 0x7c($sp)
 /* 3D2B30 E00CE070 AFA00010 */  sw        $zero, 0x10($sp)
 /* 3D2B34 E00CE074 AFA00024 */  sw        $zero, 0x24($sp)
-/* 3D2B38 E00CE078 0C080124 */  jal       func_E0200490
+/* 3D2B38 E00CE078 0C080124 */  jal       shim_create_effect_instance
 /* 3D2B3C E00CE07C AFA20014 */   sw       $v0, 0x14($sp)
 /* 3D2B40 E00CE080 24040144 */  addiu     $a0, $zero, 0x144
 /* 3D2B44 E00CE084 24030001 */  addiu     $v1, $zero, 1
 /* 3D2B48 E00CE088 0040982D */  daddu     $s3, $v0, $zero
-/* 3D2B4C E00CE08C 0C08012C */  jal       func_E02004B0
+/* 3D2B4C E00CE08C 0C08012C */  jal       shim_general_heap_malloc
 /* 3D2B50 E00CE090 AE630008 */   sw       $v1, 8($s3)
 /* 3D2B54 E00CE094 0040882D */  daddu     $s1, $v0, $zero
 /* 3D2B58 E00CE098 16200003 */  bnez      $s1, .LE00CE0A8
@@ -95,13 +95,13 @@ glabel fx_103_main
 /* 3D2C14 E00CE154 24040168 */  addiu     $a0, $zero, 0x168
 /* 3D2C18 E00CE158 E6020078 */  swc1      $f2, 0x78($s0)
 /* 3D2C1C E00CE15C 46200020 */  cvt.s.d   $f0, $f0
-/* 3D2C20 E00CE160 0C080138 */  jal       func_E02004E0
+/* 3D2C20 E00CE160 0C080138 */  jal       shim_rand_int
 /* 3D2C24 E00CE164 E6000098 */   swc1     $f0, 0x98($s0)
 /* 3D2C28 E00CE168 24040064 */  addiu     $a0, $zero, 0x64
 /* 3D2C2C E00CE16C 44820000 */  mtc1      $v0, $f0
 /* 3D2C30 E00CE170 00000000 */  nop
 /* 3D2C34 E00CE174 46800020 */  cvt.s.w   $f0, $f0
-/* 3D2C38 E00CE178 0C080138 */  jal       func_E02004E0
+/* 3D2C38 E00CE178 0C080138 */  jal       shim_rand_int
 /* 3D2C3C E00CE17C E60000B8 */   swc1     $f0, 0xb8($s0)
 /* 3D2C40 E00CE180 44820000 */  mtc1      $v0, $f0
 /* 3D2C44 E00CE184 00000000 */  nop
@@ -111,7 +111,7 @@ glabel fx_103_main
 /* 3D2C54 E00CE194 46360000 */  add.d     $f0, $f0, $f22
 /* 3D2C58 E00CE198 2404001E */  addiu     $a0, $zero, 0x1e
 /* 3D2C5C E00CE19C 46200020 */  cvt.s.d   $f0, $f0
-/* 3D2C60 E00CE1A0 0C080138 */  jal       func_E02004E0
+/* 3D2C60 E00CE1A0 0C080138 */  jal       shim_rand_int
 /* 3D2C64 E00CE1A4 E60000D8 */   swc1     $f0, 0xd8($s0)
 /* 3D2C68 E00CE1A8 44820000 */  mtc1      $v0, $f0
 /* 3D2C6C E00CE1AC 00000000 */  nop

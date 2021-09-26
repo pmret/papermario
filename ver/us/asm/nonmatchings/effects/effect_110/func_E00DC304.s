@@ -65,7 +65,7 @@ glabel func_E00DC304
 /* 3D7E64 E00DC3F4 44133000 */  mfc1      $s3, $f6
 /* 3D7E68 E00DC3F8 4600218D */  trunc.w.s $f6, $f4
 /* 3D7E6C E00DC3FC 44163000 */  mfc1      $s6, $f6
-/* 3D7E70 E00DC400 0C080108 */  jal       func_E0200420
+/* 3D7E70 E00DC400 0C080108 */  jal       shim_guTranslateF
 /* 3D7E74 E00DC404 02238821 */   addu     $s1, $s1, $v1
 /* 3D7E78 E00DC408 37DE1630 */  ori       $fp, $fp, 0x1630
 /* 3D7E7C E00DC40C 3C013F80 */  lui       $at, 0x3f80
@@ -76,20 +76,20 @@ glabel func_E00DC304
 /* 3D7E90 E00DC420 0200202D */  daddu     $a0, $s0, $zero
 /* 3D7E94 E00DC424 44060000 */  mfc1      $a2, $f0
 /* 3D7E98 E00DC428 8E450048 */  lw        $a1, 0x48($s2)
-/* 3D7E9C E00DC42C 0C080104 */  jal       func_E0200410
+/* 3D7E9C E00DC42C 0C080104 */  jal       shim_guRotateF
 /* 3D7EA0 E00DC430 00C0382D */   daddu    $a3, $a2, $zero
 /* 3D7EA4 E00DC434 0200202D */  daddu     $a0, $s0, $zero
 /* 3D7EA8 E00DC438 27A50018 */  addiu     $a1, $sp, 0x18
-/* 3D7EAC E00DC43C 0C080114 */  jal       func_E0200450
+/* 3D7EAC E00DC43C 0C080114 */  jal       shim_guMtxCatF
 /* 3D7EB0 E00DC440 00A0302D */   daddu    $a2, $a1, $zero
 /* 3D7EB4 E00DC444 8E45004C */  lw        $a1, 0x4c($s2)
 /* 3D7EB8 E00DC448 0200202D */  daddu     $a0, $s0, $zero
 /* 3D7EBC E00DC44C 00A0302D */  daddu     $a2, $a1, $zero
-/* 3D7EC0 E00DC450 0C080110 */  jal       func_E0200440
+/* 3D7EC0 E00DC450 0C080110 */  jal       shim_guScaleF
 /* 3D7EC4 E00DC454 00A0382D */   daddu    $a3, $a1, $zero
 /* 3D7EC8 E00DC458 0200202D */  daddu     $a0, $s0, $zero
 /* 3D7ECC E00DC45C 27A50018 */  addiu     $a1, $sp, 0x18
-/* 3D7ED0 E00DC460 0C080114 */  jal       func_E0200450
+/* 3D7ED0 E00DC460 0C080114 */  jal       shim_guMtxCatF
 /* 3D7ED4 E00DC464 00A0302D */   daddu    $a2, $a1, $zero
 /* 3D7ED8 E00DC468 27A40018 */  addiu     $a0, $sp, 0x18
 /* 3D7EDC E00DC46C 3C108007 */  lui       $s0, %hi(gMatrixListPos)
@@ -100,7 +100,7 @@ glabel func_E00DC304
 /* 3D7EF0 E00DC480 8EA20000 */  lw        $v0, ($s5)
 /* 3D7EF4 E00DC484 00052980 */  sll       $a1, $a1, 6
 /* 3D7EF8 E00DC488 00BE2821 */  addu      $a1, $a1, $fp
-/* 3D7EFC E00DC48C 0C080118 */  jal       func_E0200460
+/* 3D7EFC E00DC48C 0C080118 */  jal       shim_guMtxF2L
 /* 3D7F00 E00DC490 00452821 */   addu     $a1, $v0, $a1
 /* 3D7F04 E00DC494 3C03DA38 */  lui       $v1, 0xda38
 /* 3D7F08 E00DC498 34630002 */  ori       $v1, $v1, 2

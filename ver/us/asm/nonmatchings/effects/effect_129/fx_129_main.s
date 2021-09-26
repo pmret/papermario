@@ -31,12 +31,12 @@ glabel fx_129_main
 /* 4099F8 E011E068 AFB00040 */  sw        $s0, 0x40($sp)
 /* 4099FC E011E06C AFA00028 */  sw        $zero, 0x28($sp)
 /* 409A00 E011E070 AFA0003C */  sw        $zero, 0x3c($sp)
-/* 409A04 E011E074 0C080124 */  jal       func_E0200490
+/* 409A04 E011E074 0C080124 */  jal       shim_create_effect_instance
 /* 409A08 E011E078 AFA2002C */   sw       $v0, 0x2c($sp)
 /* 409A0C E011E07C 2404002C */  addiu     $a0, $zero, 0x2c
 /* 409A10 E011E080 24030001 */  addiu     $v1, $zero, 1
 /* 409A14 E011E084 0040882D */  daddu     $s1, $v0, $zero
-/* 409A18 E011E088 0C08012C */  jal       func_E02004B0
+/* 409A18 E011E088 0C08012C */  jal       shim_general_heap_malloc
 /* 409A1C E011E08C AE230008 */   sw       $v1, 8($s1)
 /* 409A20 E011E090 0040802D */  daddu     $s0, $v0, $zero
 /* 409A24 E011E094 16000003 */  bnez      $s0, .LE011E0A4
@@ -70,7 +70,7 @@ glabel fx_129_main
 /* 409A84 E011E0F4 A203001E */  sb        $v1, 0x1e($s0)
 /* 409A88 E011E0F8 A203001F */  sb        $v1, 0x1f($s0)
 /* 409A8C E011E0FC A2000025 */  sb        $zero, 0x25($s0)
-/* 409A90 E011E100 0C080150 */  jal       func_E0200540
+/* 409A90 E011E100 0C080150 */  jal       shim_load_effect
 /* 409A94 E011E104 A2000024 */   sb       $zero, 0x24($s0)
 /* 409A98 E011E108 24040001 */  addiu     $a0, $zero, 1
 /* 409A9C E011E10C 3C014120 */  lui       $at, 0x4120
@@ -91,7 +91,7 @@ glabel fx_129_main
 /* 409AD8 E011E148 0C039000 */  jal       fx_114_main
 /* 409ADC E011E14C E7A40014 */   swc1     $f4, 0x14($sp)
 /* 409AE0 E011E150 2404006F */  addiu     $a0, $zero, 0x6f
-/* 409AE4 E011E154 0C080150 */  jal       func_E0200540
+/* 409AE4 E011E154 0C080150 */  jal       shim_load_effect
 /* 409AE8 E011E158 AE020028 */   sw       $v0, 0x28($s0)
 /* 409AEC E011E15C 0220102D */  daddu     $v0, $s1, $zero
 /* 409AF0 E011E160 8FBF0050 */  lw        $ra, 0x50($sp)

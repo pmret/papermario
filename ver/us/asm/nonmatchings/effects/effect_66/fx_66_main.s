@@ -110,13 +110,13 @@ glabel fx_66_main
 /* 388BF0 E0084220 46202520 */  cvt.s.d   $f20, $f4
 /* 388BF4 E0084224 462017A0 */  cvt.s.d   $f30, $f2
 /* 388BF8 E0084228 00004012 */  mflo      $t0
-/* 388BFC E008422C 0C080124 */  jal       func_E0200490
+/* 388BFC E008422C 0C080124 */  jal       shim_create_effect_instance
 /* 388C00 E0084230 25100001 */   addiu    $s0, $t0, 1
 /* 388C04 E0084234 00102080 */  sll       $a0, $s0, 2
 /* 388C08 E0084238 00902021 */  addu      $a0, $a0, $s0
 /* 388C0C E008423C 00042100 */  sll       $a0, $a0, 4
 /* 388C10 E0084240 0040A02D */  daddu     $s4, $v0, $zero
-/* 388C14 E0084244 0C08012C */  jal       func_E02004B0
+/* 388C14 E0084244 0C08012C */  jal       shim_general_heap_malloc
 /* 388C18 E0084248 AE900008 */   sw       $s0, 8($s4)
 /* 388C1C E008424C 0040202D */  daddu     $a0, $v0, $zero
 /* 388C20 E0084250 14800003 */  bnez      $a0, .LE0084260

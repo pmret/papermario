@@ -108,7 +108,7 @@ glabel func_E00D048C
 /* 3D4448 E00D0628 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 3D444C E00D062C C620000C */  lwc1      $f0, 0xc($s1)
 /* 3D4450 E00D0630 46204620 */  cvt.s.d   $f24, $f8
-/* 3D4454 E00D0634 0C080180 */  jal       func_E0200600
+/* 3D4454 E00D0634 0C080180 */  jal       shim_guPositionF
 /* 3D4458 E00D0638 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 3D445C E00D063C 27A40020 */  addiu     $a0, $sp, 0x20
 /* 3D4460 E00D0640 3C158007 */  lui       $s5, %hi(gMatrixListPos)
@@ -119,7 +119,7 @@ glabel func_E00D048C
 /* 3D4474 E00D0654 8EC20000 */  lw        $v0, ($s6)
 /* 3D4478 E00D0658 00052980 */  sll       $a1, $a1, 6
 /* 3D447C E00D065C 00B02821 */  addu      $a1, $a1, $s0
-/* 3D4480 E00D0660 0C080118 */  jal       func_E0200460
+/* 3D4480 E00D0660 0C080118 */  jal       shim_guMtxF2L
 /* 3D4484 E00D0664 00452821 */   addu     $a1, $v0, $a1
 /* 3D4488 E00D0668 24140001 */  addiu     $s4, $zero, 1
 /* 3D448C E00D066C 3C02DA38 */  lui       $v0, 0xda38
@@ -173,17 +173,17 @@ glabel func_E00D048C
 /* 3D4548 E00D0728 8E05FFC0 */  lw        $a1, -0x40($s0)
 /* 3D454C E00D072C 8E06FFC4 */  lw        $a2, -0x3c($s0)
 /* 3D4550 E00D0730 8E07FFC8 */  lw        $a3, -0x38($s0)
-/* 3D4554 E00D0734 0C080108 */  jal       func_E0200420
+/* 3D4554 E00D0734 0C080108 */  jal       shim_guTranslateF
 /* 3D4558 E00D0738 27A40020 */   addiu    $a0, $sp, 0x20
 /* 3D455C E00D073C E7B60010 */  swc1      $f22, 0x10($sp)
 /* 3D4560 E00D0740 8E05FFF0 */  lw        $a1, -0x10($s0)
 /* 3D4564 E00D0744 4406A000 */  mfc1      $a2, $f20
 /* 3D4568 E00D0748 4407A000 */  mfc1      $a3, $f20
-/* 3D456C E00D074C 0C080104 */  jal       func_E0200410
+/* 3D456C E00D074C 0C080104 */  jal       shim_guRotateF
 /* 3D4570 E00D0750 0240202D */   daddu    $a0, $s2, $zero
 /* 3D4574 E00D0754 0240202D */  daddu     $a0, $s2, $zero
 /* 3D4578 E00D0758 27A50020 */  addiu     $a1, $sp, 0x20
-/* 3D457C E00D075C 0C080114 */  jal       func_E0200450
+/* 3D457C E00D075C 0C080114 */  jal       shim_guMtxCatF
 /* 3D4580 E00D0760 00A0302D */   daddu    $a2, $a1, $zero
 /* 3D4584 E00D0764 C600FFD8 */  lwc1      $f0, -0x28($s0)
 /* 3D4588 E00D0768 461C0002 */  mul.s     $f0, $f0, $f28
@@ -197,21 +197,21 @@ glabel func_E00D048C
 /* 3D45A8 E00D0788 46180002 */  mul.s     $f0, $f0, $f24
 /* 3D45AC E00D078C 00000000 */  nop
 /* 3D45B0 E00D0790 44070000 */  mfc1      $a3, $f0
-/* 3D45B4 E00D0794 0C080110 */  jal       func_E0200440
+/* 3D45B4 E00D0794 0C080110 */  jal       shim_guScaleF
 /* 3D45B8 E00D0798 0240202D */   daddu    $a0, $s2, $zero
 /* 3D45BC E00D079C 0240202D */  daddu     $a0, $s2, $zero
 /* 3D45C0 E00D07A0 27A50020 */  addiu     $a1, $sp, 0x20
-/* 3D45C4 E00D07A4 0C080114 */  jal       func_E0200450
+/* 3D45C4 E00D07A4 0C080114 */  jal       shim_guMtxCatF
 /* 3D45C8 E00D07A8 00A0302D */   daddu    $a2, $a1, $zero
 /* 3D45CC E00D07AC E7B40010 */  swc1      $f20, 0x10($sp)
 /* 3D45D0 E00D07B0 8E05FFEC */  lw        $a1, -0x14($s0)
 /* 3D45D4 E00D07B4 4406A000 */  mfc1      $a2, $f20
 /* 3D45D8 E00D07B8 4407B000 */  mfc1      $a3, $f22
-/* 3D45DC E00D07BC 0C080104 */  jal       func_E0200410
+/* 3D45DC E00D07BC 0C080104 */  jal       shim_guRotateF
 /* 3D45E0 E00D07C0 0240202D */   daddu    $a0, $s2, $zero
 /* 3D45E4 E00D07C4 0240202D */  daddu     $a0, $s2, $zero
 /* 3D45E8 E00D07C8 27A50020 */  addiu     $a1, $sp, 0x20
-/* 3D45EC E00D07CC 0C080114 */  jal       func_E0200450
+/* 3D45EC E00D07CC 0C080114 */  jal       shim_guMtxCatF
 /* 3D45F0 E00D07D0 00A0302D */   daddu    $a2, $a1, $zero
 /* 3D45F4 E00D07D4 27A40020 */  addiu     $a0, $sp, 0x20
 /* 3D45F8 E00D07D8 96C50000 */  lhu       $a1, ($s6)
@@ -219,7 +219,7 @@ glabel func_E00D048C
 /* 3D4600 E00D07E0 8C42A674 */  lw        $v0, %lo(gDisplayContext)($v0)
 /* 3D4604 E00D07E4 00052980 */  sll       $a1, $a1, 6
 /* 3D4608 E00D07E8 00B52821 */  addu      $a1, $a1, $s5
-/* 3D460C E00D07EC 0C080118 */  jal       func_E0200460
+/* 3D460C E00D07EC 0C080118 */  jal       shim_guMtxF2L
 /* 3D4610 E00D07F0 00452821 */   addu     $a1, $v0, $a1
 /* 3D4614 E00D07F4 3C06000F */  lui       $a2, 0xf
 /* 3D4618 E00D07F8 34C6C000 */  ori       $a2, $a2, 0xc000

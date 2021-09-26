@@ -55,7 +55,7 @@ glabel func_E007827C
 /* 37A730 E0078340 8E06000C */  lw        $a2, 0xc($s0)
 /* 37A734 E0078344 8E07001C */  lw        $a3, 0x1c($s0)
 /* 37A738 E0078348 24840008 */  addiu     $a0, $a0, 8
-/* 37A73C E007834C 0C08015C */  jal       func_E0200570
+/* 37A73C E007834C 0C08015C */  jal       shim_func_8011CFBC
 /* 37A740 E0078350 AEA40000 */   sw       $a0, ($s5)
 /* 37A744 E0078354 0040182D */  daddu     $v1, $v0, $zero
 /* 37A748 E0078358 24020005 */  addiu     $v0, $zero, 5

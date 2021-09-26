@@ -16,7 +16,7 @@ glabel func_E007A50C
 /* 37CA78 E007A538 24020002 */  addiu     $v0, $zero, 2
 /* 37CA7C E007A53C 14E20005 */  bne       $a3, $v0, .LE007A554
 /* 37CA80 E007A540 00000000 */   nop
-/* 37CA84 E007A544 0C080128 */  jal       func_E02004A0
+/* 37CA84 E007A544 0C080128 */  jal       shim_remove_effect
 /* 37CA88 E007A548 00000000 */   nop
 /* 37CA8C E007A54C 0801EA0D */  j         .LE007A834
 /* 37CA90 E007A550 00000000 */   nop

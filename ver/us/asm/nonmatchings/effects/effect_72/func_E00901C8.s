@@ -19,7 +19,7 @@ glabel func_E00901C8
 /* 38FAFC E00901FC ACA6001C */   sw       $a2, 0x1c($a1)
 /* 38FB00 E0090200 2402FFFF */  addiu     $v0, $zero, -1
 /* 38FB04 E0090204 ACA00024 */  sw        $zero, 0x24($a1)
-/* 38FB08 E0090208 0C080128 */  jal       func_E02004A0
+/* 38FB08 E0090208 0C080128 */  jal       shim_remove_effect
 /* 38FB0C E009020C ACA20018 */   sw       $v0, 0x18($a1)
 /* 38FB10 E0090210 08024105 */  j         .LE0090414
 /* 38FB14 E0090214 00000000 */   nop

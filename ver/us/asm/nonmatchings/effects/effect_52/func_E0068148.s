@@ -25,7 +25,7 @@ glabel func_E0068148
 /* 36AA60 E0068190 24420001 */  addiu     $v0, $v0, 1
 /* 36AA64 E0068194 04A10005 */  bgez      $a1, .LE00681AC
 /* 36AA68 E0068198 AC620020 */   sw       $v0, 0x20($v1)
-/* 36AA6C E006819C 0C080128 */  jal       func_E02004A0
+/* 36AA6C E006819C 0C080128 */  jal       shim_remove_effect
 /* 36AA70 E00681A0 00000000 */   nop
 /* 36AA74 E00681A4 0801A073 */  j         .LE00681CC
 /* 36AA78 E00681A8 00000000 */   nop

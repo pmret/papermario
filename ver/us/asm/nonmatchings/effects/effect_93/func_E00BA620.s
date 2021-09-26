@@ -223,7 +223,7 @@ glabel func_E00BA620
 /* 3B9554 E00BA984 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 3B9558 E00BA988 E7A20014 */  swc1      $f2, 0x14($sp)
 /* 3B955C E00BA98C E7A40018 */  swc1      $f4, 0x18($sp)
-/* 3B9560 E00BA990 0C080188 */  jal       func_E0200620
+/* 3B9560 E00BA990 0C080188 */  jal       shim_guFrustumF
 /* 3B9564 E00BA994 E7A6001C */   swc1     $f6, 0x1c($sp)
 /* 3B9568 E00BA998 27A40020 */  addiu     $a0, $sp, 0x20
 /* 3B956C E00BA99C 3C118007 */  lui       $s1, %hi(gMatrixListPos)
@@ -234,7 +234,7 @@ glabel func_E00BA620
 /* 3B9580 E00BA9B0 8E420000 */  lw        $v0, ($s2)
 /* 3B9584 E00BA9B4 00052980 */  sll       $a1, $a1, 6
 /* 3B9588 E00BA9B8 00B32821 */  addu      $a1, $a1, $s3
-/* 3B958C E00BA9BC 0C080118 */  jal       func_E0200460
+/* 3B958C E00BA9BC 0C080118 */  jal       shim_guMtxF2L
 /* 3B9590 E00BA9C0 00452821 */   addu     $a1, $v0, $a1
 /* 3B9594 E00BA9C4 3C03DA38 */  lui       $v1, 0xda38
 /* 3B9598 E00BA9C8 34630007 */  ori       $v1, $v1, 7

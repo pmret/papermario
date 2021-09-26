@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 ApiStatus GetDamageIntensity(Evt* script, s32 isInitialCall) {
     if (gBattleStatus.lastAttackDamage < 4) {
@@ -13,7 +14,6 @@ ApiStatus GetDamageIntensity(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// TODO: Rename to AddEffectOffset
 ApiStatus AddEffectOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = evt_get_variable(script, *args++);

@@ -24,7 +24,7 @@ glabel fx_69_main
 /* 38C7C4 E008A1D4 AFB20030 */  sw        $s2, 0x30($sp)
 /* 38C7C8 E008A1D8 AFA00010 */  sw        $zero, 0x10($sp)
 /* 38C7CC E008A1DC AFA00024 */  sw        $zero, 0x24($sp)
-/* 38C7D0 E008A1E0 0C080124 */  jal       func_E0200490
+/* 38C7D0 E008A1E0 0C080124 */  jal       shim_create_effect_instance
 /* 38C7D4 E008A1E4 AFA20014 */   sw       $v0, 0x14($sp)
 /* 38C7D8 E008A1E8 00102040 */  sll       $a0, $s0, 1
 /* 38C7DC E008A1EC 00902021 */  addu      $a0, $a0, $s0
@@ -32,7 +32,7 @@ glabel fx_69_main
 /* 38C7E4 E008A1F4 00902021 */  addu      $a0, $a0, $s0
 /* 38C7E8 E008A1F8 00042080 */  sll       $a0, $a0, 2
 /* 38C7EC E008A1FC 0040902D */  daddu     $s2, $v0, $zero
-/* 38C7F0 E008A200 0C08012C */  jal       func_E02004B0
+/* 38C7F0 E008A200 0C08012C */  jal       shim_general_heap_malloc
 /* 38C7F4 E008A204 AE500008 */   sw       $s0, 8($s2)
 /* 38C7F8 E008A208 0040802D */  daddu     $s0, $v0, $zero
 /* 38C7FC E008A20C 16000003 */  bnez      $s0, .LE008A21C

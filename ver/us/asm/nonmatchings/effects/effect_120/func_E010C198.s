@@ -37,7 +37,7 @@ glabel func_E010C198
 /* 3E56D0 E010C210 24420001 */  addiu     $v0, $v0, 1
 /* 3E56D4 E010C214 04610005 */  bgez      $v1, .LE010C22C
 /* 3E56D8 E010C218 AE220014 */   sw       $v0, 0x14($s1)
-/* 3E56DC E010C21C 0C080128 */  jal       func_E02004A0
+/* 3E56DC E010C21C 0C080128 */  jal       shim_remove_effect
 /* 3E56E0 E010C220 00000000 */   nop
 /* 3E56E4 E010C224 080430C6 */  j         .LE010C318
 /* 3E56E8 E010C228 00000000 */   nop
@@ -76,14 +76,14 @@ glabel func_E010C198
 /* 3E5760 E010C2A0 00000000 */  nop
 /* 3E5764 E010C2A4 4680A520 */  cvt.s.w   $f20, $f20
 /* 3E5768 E010C2A8 4614F500 */  add.s     $f20, $f30, $f20
-/* 3E576C E010C2AC 0C080140 */  jal       func_E0200500
+/* 3E576C E010C2AC 0C080140 */  jal       shim_sin_deg
 /* 3E5770 E010C2B0 4600A306 */   mov.s    $f12, $f20
 /* 3E5774 E010C2B4 4600E002 */  mul.s     $f0, $f28, $f0
 /* 3E5778 E010C2B8 00000000 */  nop
 /* 3E577C E010C2BC 4600D000 */  add.s     $f0, $f26, $f0
 /* 3E5780 E010C2C0 4600A306 */  mov.s     $f12, $f20
 /* 3E5784 E010C2C4 E6180008 */  swc1      $f24, 8($s0)
-/* 3E5788 E010C2C8 0C080144 */  jal       func_E0200510
+/* 3E5788 E010C2C8 0C080144 */  jal       shim_cos_deg
 /* 3E578C E010C2CC E6000004 */   swc1     $f0, 4($s0)
 /* 3E5790 E010C2D0 4600E002 */  mul.s     $f0, $f28, $f0
 /* 3E5794 E010C2D4 00000000 */  nop

@@ -62,21 +62,21 @@ glabel func_E003E638
 /* 352B5C E003E71C 8E07000C */  lw        $a3, 0xc($s0)
 /* 352B60 E003E720 4600008D */  trunc.w.s $f2, $f0
 /* 352B64 E003E724 44111000 */  mfc1      $s1, $f2
-/* 352B68 E003E728 0C080108 */  jal       func_E0200420
+/* 352B68 E003E728 0C080108 */  jal       shim_guTranslateF
 /* 352B6C E003E72C 36B51630 */   ori      $s5, $s5, 0x1630
 /* 352B70 E003E730 2604001C */  addiu     $a0, $s0, 0x1c
 /* 352B74 E003E734 27A50010 */  addiu     $a1, $sp, 0x10
-/* 352B78 E003E738 0C080114 */  jal       func_E0200450
+/* 352B78 E003E738 0C080114 */  jal       shim_guMtxCatF
 /* 352B7C E003E73C 00A0302D */   daddu    $a2, $a1, $zero
 /* 352B80 E003E740 8E050064 */  lw        $a1, 0x64($s0)
 /* 352B84 E003E744 27B00050 */  addiu     $s0, $sp, 0x50
 /* 352B88 E003E748 0200202D */  daddu     $a0, $s0, $zero
 /* 352B8C E003E74C 00A0302D */  daddu     $a2, $a1, $zero
-/* 352B90 E003E750 0C080110 */  jal       func_E0200440
+/* 352B90 E003E750 0C080110 */  jal       shim_guScaleF
 /* 352B94 E003E754 00A0382D */   daddu    $a3, $a1, $zero
 /* 352B98 E003E758 0200202D */  daddu     $a0, $s0, $zero
 /* 352B9C E003E75C 27A50010 */  addiu     $a1, $sp, 0x10
-/* 352BA0 E003E760 0C080114 */  jal       func_E0200450
+/* 352BA0 E003E760 0C080114 */  jal       shim_guMtxCatF
 /* 352BA4 E003E764 00A0302D */   daddu    $a2, $a1, $zero
 /* 352BA8 E003E768 27A40010 */  addiu     $a0, $sp, 0x10
 /* 352BAC E003E76C 3C108007 */  lui       $s0, %hi(gMatrixListPos)
@@ -87,7 +87,7 @@ glabel func_E003E638
 /* 352BC0 E003E780 8E620000 */  lw        $v0, ($s3)
 /* 352BC4 E003E784 00052980 */  sll       $a1, $a1, 6
 /* 352BC8 E003E788 00B52821 */  addu      $a1, $a1, $s5
-/* 352BCC E003E78C 0C080118 */  jal       func_E0200460
+/* 352BCC E003E78C 0C080118 */  jal       shim_guMtxF2L
 /* 352BD0 E003E790 00452821 */   addu     $a1, $v0, $a1
 /* 352BD4 E003E794 3C06D838 */  lui       $a2, 0xd838
 /* 352BD8 E003E798 8E440000 */  lw        $a0, ($s2)

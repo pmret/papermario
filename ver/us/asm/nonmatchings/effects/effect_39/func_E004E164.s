@@ -24,7 +24,7 @@ glabel func_E004E164
 /* 35BB80 E004E1B0 46001083 */  div.s     $f2, $f2, $f0
 /* 35BB84 E004E1B4 04810003 */  bgez      $a0, .LE004E1C4
 /* 35BB88 E004E1B8 E4420020 */   swc1     $f2, 0x20($v0)
-/* 35BB8C E004E1BC 0C080128 */  jal       func_E02004A0
+/* 35BB8C E004E1BC 0C080128 */  jal       shim_remove_effect
 /* 35BB90 E004E1C0 00A0202D */   daddu    $a0, $a1, $zero
 .LE004E1C4:
 /* 35BB94 E004E1C4 8FBF0010 */  lw        $ra, 0x10($sp)

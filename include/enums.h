@@ -1628,6 +1628,7 @@ enum PlayerAnimFlags {
 enum RenderMode {
     RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0 = 0x00,
     RENDER_MODE_SURFACE_OPA             = 0x01,
+    RENDER_MODE_2                       = 0x02,
     RENDER_MODE_SURFACE_OPA_NO_AA       = 0x03,
     RENDER_MODE_SURFACE_OPA_NO_ZB       = 0x04,
     RENDER_MODE_DECAL_OPA               = 0x05,
@@ -1646,7 +1647,9 @@ enum RenderMode {
     RENDER_MODE_SHADOW                  = 0x20,
     RENDER_MODE_SURFACE_XLU_LAYER3      = 0x22,
     RENDER_MODE_INTERSECTING_XLU        = 0x26,
+    RENDER_MODE_28                      = 0x28,
     RENDER_MODE_SURF_XLU_AA_ZB_ZUPD     = 0x29,
+    RENDER_MODE_2D                      = 0x2D,
     RENDER_MODE_CLOUD                   = 0x2E,
     RENDER_MODE_CLOUD_NO_ZB             = 0x2F,
 };

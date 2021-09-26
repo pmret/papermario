@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 #include "ld_addrs.h"
 
 typedef s32 TlbEntry[0x1000 / 4];
@@ -455,7 +456,7 @@ void render_effects_UI(void) {
     }
 }
 
-EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
+EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
     EffectInstance* newEffectInst;
     EffectGraphics* curEffect;
     s32 i;

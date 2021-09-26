@@ -564,7 +564,7 @@ void render_npcs(void) {
     f32 phi_f20;
     s32 i;
     RenderTask renderTask;
-    RenderTask* task = &renderTask; // WTF?
+    RenderTask* renderTaskPtr = &renderTask;
     f32 x;
     f32 y;
     f32 z;
@@ -585,10 +585,11 @@ void render_npcs(void) {
                         phi_f20 = 10000.0f;
                     }
 
-                    task->distance = -phi_f20;
-                    task->appendGfxArg = npc;
-                    task->appendGfx = &appendGfx_npc;
-                    task->renderMode = npc->renderMode;
+                    renderTaskPtr->distance = -phi_f20;
+                    renderTaskPtr->appendGfxArg = npc;
+                    renderTaskPtr->appendGfx = appendGfx_npc;
+                    renderTaskPtr->renderMode = npc->renderMode;
+
                     if (npc->flags & NPC_FLAG_NO_DROPS) {
                         u8 r, g, b, a;
                         get_background_color_blend(&r, &g, &b, &a);
@@ -598,15 +599,15 @@ void render_npcs(void) {
                     }
 
                     if (npc->alpha2 != 0) {
-                        queue_render_task(task);
+                        queue_render_task(renderTaskPtr);
                     }
 
                     if ((npc->flags & NPC_FLAG_MOTION_BLUR) != 0) {
-                        task->distance = -phi_f20;
-                        task->appendGfx = &appendGfx_npc_blur;
-                        task->appendGfxArg = npc;
-                        task->renderMode = 0x11;
-                        queue_render_task(task);
+                        renderTaskPtr->distance = -phi_f20;
+                        renderTaskPtr->appendGfx = appendGfx_npc_blur;
+                        renderTaskPtr->appendGfxArg = npc;
+                        renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
+                        queue_render_task(renderTaskPtr);
                     }
                 }
             }

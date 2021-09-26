@@ -73,17 +73,17 @@ glabel func_E00EA66C
 /* 3E265C E00EA77C 441E5000 */  mfc1      $fp, $f10
 /* 3E2660 E00EA780 4600428D */  trunc.w.s $f10, $f8
 /* 3E2664 E00EA784 E7AA009C */  swc1      $f10, 0x9c($sp)
-/* 3E2668 E00EA788 0C080108 */  jal       func_E0200420
+/* 3E2668 E00EA788 0C080108 */  jal       shim_guTranslateF
 /* 3E266C E00EA78C 0048A821 */   addu     $s5, $v0, $t0
 /* 3E2670 E00EA790 27B00058 */  addiu     $s0, $sp, 0x58
 /* 3E2674 E00EA794 8E65003C */  lw        $a1, 0x3c($s3)
 /* 3E2678 E00EA798 0200202D */  daddu     $a0, $s0, $zero
 /* 3E267C E00EA79C 00A0302D */  daddu     $a2, $a1, $zero
-/* 3E2680 E00EA7A0 0C080110 */  jal       func_E0200440
+/* 3E2680 E00EA7A0 0C080110 */  jal       shim_guScaleF
 /* 3E2684 E00EA7A4 00A0382D */   daddu    $a3, $a1, $zero
 /* 3E2688 E00EA7A8 0200202D */  daddu     $a0, $s0, $zero
 /* 3E268C E00EA7AC 27A50018 */  addiu     $a1, $sp, 0x18
-/* 3E2690 E00EA7B0 0C080114 */  jal       func_E0200450
+/* 3E2690 E00EA7B0 0C080114 */  jal       shim_guMtxCatF
 /* 3E2694 E00EA7B4 00A0302D */   daddu    $a2, $a1, $zero
 /* 3E2698 E00EA7B8 8FAB0098 */  lw        $t3, 0x98($sp)
 /* 3E269C E00EA7BC 24020001 */  addiu     $v0, $zero, 1
@@ -96,11 +96,11 @@ glabel func_E00EA66C
 /* 3E26B8 E00EA7D8 3C013F80 */  lui       $at, 0x3f80
 /* 3E26BC E00EA7DC 44810000 */  mtc1      $at, $f0
 /* 3E26C0 E00EA7E0 00C0382D */  daddu     $a3, $a2, $zero
-/* 3E26C4 E00EA7E4 0C080104 */  jal       func_E0200410
+/* 3E26C4 E00EA7E4 0C080104 */  jal       shim_guRotateF
 /* 3E26C8 E00EA7E8 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 3E26CC E00EA7EC 0200202D */  daddu     $a0, $s0, $zero
 /* 3E26D0 E00EA7F0 27A50018 */  addiu     $a1, $sp, 0x18
-/* 3E26D4 E00EA7F4 0C080114 */  jal       func_E0200450
+/* 3E26D4 E00EA7F4 0C080114 */  jal       shim_guMtxCatF
 /* 3E26D8 E00EA7F8 00A0302D */   daddu    $a2, $a1, $zero
 /* 3E26DC E00EA7FC 3C120001 */  lui       $s2, 1
 .LE00EA800:
@@ -114,7 +114,7 @@ glabel func_E00EA66C
 /* 3E26FC E00EA81C 8E220000 */  lw        $v0, ($s1)
 /* 3E2700 E00EA820 00052980 */  sll       $a1, $a1, 6
 /* 3E2704 E00EA824 00B22821 */  addu      $a1, $a1, $s2
-/* 3E2708 E00EA828 0C080118 */  jal       func_E0200460
+/* 3E2708 E00EA828 0C080118 */  jal       shim_guMtxF2L
 /* 3E270C E00EA82C 00452821 */   addu     $a1, $v0, $a1
 /* 3E2710 E00EA830 3C03DA38 */  lui       $v1, 0xda38
 /* 3E2714 E00EA834 34630002 */  ori       $v1, $v1, 2

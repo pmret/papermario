@@ -26,12 +26,12 @@ glabel fx_78_main
 /* 398244 E009C054 AFB00028 */  sw        $s0, 0x28($sp)
 /* 398248 E009C058 AFA00010 */  sw        $zero, 0x10($sp)
 /* 39824C E009C05C AFA00024 */  sw        $zero, 0x24($sp)
-/* 398250 E009C060 0C080124 */  jal       func_E0200490
+/* 398250 E009C060 0C080124 */  jal       shim_create_effect_instance
 /* 398254 E009C064 AFA20014 */   sw       $v0, 0x14($sp)
 /* 398258 E009C068 24040044 */  addiu     $a0, $zero, 0x44
 /* 39825C E009C06C 24030001 */  addiu     $v1, $zero, 1
 /* 398260 E009C070 0040802D */  daddu     $s0, $v0, $zero
-/* 398264 E009C074 0C08012C */  jal       func_E02004B0
+/* 398264 E009C074 0C08012C */  jal       shim_general_heap_malloc
 /* 398268 E009C078 AE030008 */   sw       $v1, 8($s0)
 /* 39826C E009C07C 0040202D */  daddu     $a0, $v0, $zero
 /* 398270 E009C080 14800003 */  bnez      $a0, .LE009C090

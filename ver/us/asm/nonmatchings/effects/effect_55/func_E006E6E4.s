@@ -28,7 +28,7 @@ glabel func_E006E6E4
 /* 372ECC E006E73C AFA00014 */  sw        $zero, 0x14($sp)
 /* 372ED0 E006E740 2402002D */  addiu     $v0, $zero, 0x2d
 .LE006E744:
-/* 372ED4 E006E744 0C080120 */  jal       func_E0200480
+/* 372ED4 E006E744 0C080120 */  jal       shim_queue_render_task
 /* 372ED8 E006E748 AC820000 */   sw       $v0, ($a0)
 /* 372EDC E006E74C 8C430000 */  lw        $v1, ($v0)
 /* 372EE0 E006E750 34630002 */  ori       $v1, $v1, 2

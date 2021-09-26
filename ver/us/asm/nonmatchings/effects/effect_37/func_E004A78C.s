@@ -121,7 +121,7 @@ glabel func_E004A78C
 /* 358E18 E004A958 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 358E1C E004A95C C620000C */  lwc1      $f0, 0xc($s1)
 /* 358E20 E004A960 36101630 */  ori       $s0, $s0, 0x1630
-/* 358E24 E004A964 0C080180 */  jal       func_E0200600
+/* 358E24 E004A964 0C080180 */  jal       shim_guPositionF
 /* 358E28 E004A968 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 358E2C E004A96C 27A40020 */  addiu     $a0, $sp, 0x20
 /* 358E30 E004A970 3C158007 */  lui       $s5, %hi(gMatrixListPos)
@@ -132,7 +132,7 @@ glabel func_E004A78C
 /* 358E44 E004A984 8EC20000 */  lw        $v0, ($s6)
 /* 358E48 E004A988 00052980 */  sll       $a1, $a1, 6
 /* 358E4C E004A98C 00B02821 */  addu      $a1, $a1, $s0
-/* 358E50 E004A990 0C080118 */  jal       func_E0200460
+/* 358E50 E004A990 0C080118 */  jal       shim_guMtxF2L
 /* 358E54 E004A994 00452821 */   addu     $a1, $v0, $a1
 /* 358E58 E004A998 24140001 */  addiu     $s4, $zero, 1
 /* 358E5C E004A99C 3C02DA38 */  lui       $v0, 0xda38
@@ -177,17 +177,17 @@ glabel func_E004A78C
 /* 358EF4 E004AA34 8E05FFC0 */  lw        $a1, -0x40($s0)
 /* 358EF8 E004AA38 8E06FFC4 */  lw        $a2, -0x3c($s0)
 /* 358EFC E004AA3C 8E07FFC8 */  lw        $a3, -0x38($s0)
-/* 358F00 E004AA40 0C080108 */  jal       func_E0200420
+/* 358F00 E004AA40 0C080108 */  jal       shim_guTranslateF
 /* 358F04 E004AA44 27A40020 */   addiu    $a0, $sp, 0x20
 /* 358F08 E004AA48 E7B80010 */  swc1      $f24, 0x10($sp)
 /* 358F0C E004AA4C 8E05FFF0 */  lw        $a1, -0x10($s0)
 /* 358F10 E004AA50 4406B000 */  mfc1      $a2, $f22
 /* 358F14 E004AA54 4407B000 */  mfc1      $a3, $f22
-/* 358F18 E004AA58 0C080104 */  jal       func_E0200410
+/* 358F18 E004AA58 0C080104 */  jal       shim_guRotateF
 /* 358F1C E004AA5C 0240202D */   daddu    $a0, $s2, $zero
 /* 358F20 E004AA60 0240202D */  daddu     $a0, $s2, $zero
 /* 358F24 E004AA64 27A50020 */  addiu     $a1, $sp, 0x20
-/* 358F28 E004AA68 0C080114 */  jal       func_E0200450
+/* 358F28 E004AA68 0C080114 */  jal       shim_guMtxCatF
 /* 358F2C E004AA6C 00A0302D */   daddu    $a2, $a1, $zero
 /* 358F30 E004AA70 C604FFD8 */  lwc1      $f4, -0x28($s0)
 /* 358F34 E004AA74 46002121 */  cvt.d.s   $f4, $f4
@@ -207,21 +207,21 @@ glabel func_E004A78C
 /* 358F6C E004AAAC 44052000 */  mfc1      $a1, $f4
 /* 358F70 E004AAB0 44061000 */  mfc1      $a2, $f2
 /* 358F74 E004AAB4 44070000 */  mfc1      $a3, $f0
-/* 358F78 E004AAB8 0C080110 */  jal       func_E0200440
+/* 358F78 E004AAB8 0C080110 */  jal       shim_guScaleF
 /* 358F7C E004AABC 0240202D */   daddu    $a0, $s2, $zero
 /* 358F80 E004AAC0 0240202D */  daddu     $a0, $s2, $zero
 /* 358F84 E004AAC4 27A50020 */  addiu     $a1, $sp, 0x20
-/* 358F88 E004AAC8 0C080114 */  jal       func_E0200450
+/* 358F88 E004AAC8 0C080114 */  jal       shim_guMtxCatF
 /* 358F8C E004AACC 00A0302D */   daddu    $a2, $a1, $zero
 /* 358F90 E004AAD0 E7B60010 */  swc1      $f22, 0x10($sp)
 /* 358F94 E004AAD4 8E05FFEC */  lw        $a1, -0x14($s0)
 /* 358F98 E004AAD8 4406B000 */  mfc1      $a2, $f22
 /* 358F9C E004AADC 4407C000 */  mfc1      $a3, $f24
-/* 358FA0 E004AAE0 0C080104 */  jal       func_E0200410
+/* 358FA0 E004AAE0 0C080104 */  jal       shim_guRotateF
 /* 358FA4 E004AAE4 0240202D */   daddu    $a0, $s2, $zero
 /* 358FA8 E004AAE8 0240202D */  daddu     $a0, $s2, $zero
 /* 358FAC E004AAEC 27A50020 */  addiu     $a1, $sp, 0x20
-/* 358FB0 E004AAF0 0C080114 */  jal       func_E0200450
+/* 358FB0 E004AAF0 0C080114 */  jal       shim_guMtxCatF
 /* 358FB4 E004AAF4 00A0302D */   daddu    $a2, $a1, $zero
 /* 358FB8 E004AAF8 27A40020 */  addiu     $a0, $sp, 0x20
 /* 358FBC E004AAFC 96C50000 */  lhu       $a1, ($s6)
@@ -229,7 +229,7 @@ glabel func_E004A78C
 /* 358FC4 E004AB04 8C42A674 */  lw        $v0, %lo(gDisplayContext)($v0)
 /* 358FC8 E004AB08 00052980 */  sll       $a1, $a1, 6
 /* 358FCC E004AB0C 00B52821 */  addu      $a1, $a1, $s5
-/* 358FD0 E004AB10 0C080118 */  jal       func_E0200460
+/* 358FD0 E004AB10 0C080118 */  jal       shim_guMtxF2L
 /* 358FD4 E004AB14 00452821 */   addu     $a1, $v0, $a1
 /* 358FD8 E004AB18 3C06000F */  lui       $a2, 0xf
 /* 358FDC E004AB1C 34C6C000 */  ori       $a2, $a2, 0xc000

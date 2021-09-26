@@ -37,12 +37,12 @@ glabel fx_55_main
 /* 372810 E006E080 AFB00028 */  sw        $s0, 0x28($sp)
 /* 372814 E006E084 AFA00010 */  sw        $zero, 0x10($sp)
 /* 372818 E006E088 AFA00024 */  sw        $zero, 0x24($sp)
-/* 37281C E006E08C 0C080124 */  jal       func_E0200490
+/* 37281C E006E08C 0C080124 */  jal       shim_create_effect_instance
 /* 372820 E006E090 AFA20014 */   sw       $v0, 0x14($sp)
 /* 372824 E006E094 2404007C */  addiu     $a0, $zero, 0x7c
 /* 372828 E006E098 24030001 */  addiu     $v1, $zero, 1
 /* 37282C E006E09C 0040902D */  daddu     $s2, $v0, $zero
-/* 372830 E006E0A0 0C08012C */  jal       func_E02004B0
+/* 372830 E006E0A0 0C08012C */  jal       shim_general_heap_malloc
 /* 372834 E006E0A4 AE430008 */   sw       $v1, 8($s2)
 /* 372838 E006E0A8 0040802D */  daddu     $s0, $v0, $zero
 /* 37283C E006E0AC 16000003 */  bnez      $s0, .LE006E0BC

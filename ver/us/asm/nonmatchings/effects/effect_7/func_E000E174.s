@@ -17,7 +17,7 @@ glabel func_E000E174
 /* 32C2B4 E000E1A4 ACC30070 */  sw        $v1, 0x70($a2)
 /* 32C2B8 E000E1A8 04410005 */  bgez      $v0, .LE000E1C0
 /* 32C2BC E000E1AC ACC20074 */   sw       $v0, 0x74($a2)
-/* 32C2C0 E000E1B0 0C080128 */  jal       func_E02004A0
+/* 32C2C0 E000E1B0 0C080128 */  jal       shim_remove_effect
 /* 32C2C4 E000E1B4 00000000 */   nop
 /* 32C2C8 E000E1B8 0800388E */  j         .LE000E238
 /* 32C2CC E000E1BC 00000000 */   nop

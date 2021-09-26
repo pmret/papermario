@@ -696,23 +696,23 @@ segments:
     start: 0xA5DD0
     vram: 0x8010F6D0
     subsegments:
-    - [0xa5dd0, c, a5dd0_len_114e0]
+    - [0xA5DD0, c, a5dd0_len_114e0]
     - [0xB4580, c, B4580]
-    - [0xb72b0, c, entity]
+    - [0xB72B0, c, entity]
     - [0xB9D60, c, msg]
     - [0xC50A0, c, C50A0]
-    - [0xcd180, c, cd180_len_38f0]
+    - [0xCD180, c, cd180_len_38f0]
     - [0xCEE40, c, CEE40]
-    - [0xd0a70, c, d0a70_len_4fe0]
-    - [0xd5a50, c, hud_element]
-    - [0xdba20, c, dba20_len_350]
-    - [0xdbd70, c, trigger]
-    - [0xdc470, c, dc470_len_14c0]
-    - [0xdd930, c, dd930_len_1c0]
-    - [0xddaf0, c, ddaf0_len_c50]
-    - [0xde740, c, de740_len_23f0]
+    - [0xD0A70, c, d0a70_len_4fe0]
+    - [0xD5A50, c, hud_element]
+    - [0xDBA20, c, dba20_len_350]
+    - [0xDBD70, c, trigger]
+    - [0xDC470, c, dc470_len_14c0]
+    - [0xDD930, c, dd930_len_1c0]
+    - [0xDDAF0, c, ddaf0_len_c50]
+    - [0xDE740, c, de740_len_23f0]
     - [0xDF950, c, DF950]
-    - [0xe0b30, c, e0b30_len_b80]
+    - [0xE0B30, c, e0b30_len_b80]
     - [0xE16B0, .data, a5dd0_len_114e0]
     - [0xE2950, .data, B4580]
     - [0xE2960, .data, entity]
@@ -731,36 +731,24 @@ segments:
     start: 0xE79B0
     vram: 0x802C3000
     subsegments:
-    - [0xe79b0, c, script_list]
-    - [0xe92d0, c, evt]
+    - [0xE79B0, c, script_list]
+    - [0xE92D0, c, evt]
     - [0xED510, c, map_api]
-    - [0xef070, c, cam_api]
-    - [0xf2470, c, npc_api]
-    - [0xf4c60, c, msg_api]
-    - [0xf5750, c, player_api]
-    - [0xf8f60, c, f8f60_len_1560]
-    - [0xfa4c0, c, fa4c0_len_3bf0]
+    - [0xEF070, c, cam_api]
+    - [0xF2470, c, npc_api]
+    - [0xF4C60, c, msg_api]
+    - [0xF5750, c, player_api]
+    - [0xF8F60, c, f8f60_len_1560]
+    - [0xFA4C0, c, fa4c0_len_3bf0]
     - [0xFBE10, c, fx_api]
-    - [0xfe0b0, c, demo_api]
-    - [0xFE650, .data, script_list]
-    - [0xFE660, .data, cam_api]
-    - [0xFE6D0, .data, player_api]
-    - [0xFE6E0, .data, fa4c0_len_3bf0]
-    - [0xFE700, .data, fx_api]
-    - [0xFE720, .data, evt]
-    - [0xFE730, .rodata, script_list]
-    - [0xFE748, .rodata, evt]
-    - [0xFEB80, .rodata, cam_api]
-    - [0xFEB90, .rodata, npc_api]
-    - [0xFEBA0, .rodata, msg_api]
-    - [0xFEBB8, .rodata, player_api]
-    - [0xFEC08, .rodata, fx_api]
+    - [0xFE0B0, c, demo_api]
+    - [0xFE650]
   - type: code
     start: 0xFEE30
     vram: 0x802DBD40
     subsegments:
-    - [0x0fee30, c, sprite]
-    - [0x101b90, c, 101b90_len_8f0]
+    - [0x0FEE30, c, sprite]
+    - [0x101B90, c, 101b90_len_8f0]
     - [0x102480]
   - type: code
     start: 0x102610
@@ -2219,7 +2207,7 @@ segments:
     vram: 0xE0002000
     subsegments:
     - [0x3278F0, c, effect_1]
-    - [0x328050, data]
+    - [0x328050]
   - name: effect_6
     dir: effects
     type: code
@@ -2227,7 +2215,7 @@ segments:
     vram: 0xE000C000
     subsegments:
     - [0x328110, c, effect_6]
-    - [0x328D20, data]
+    - [0x328D20]
   - [0x328EA0, bin] # effect 6,7,23,29,39 gfx
   - name: effect_7
     dir: effects

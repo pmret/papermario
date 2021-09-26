@@ -35,7 +35,7 @@ glabel fx_50_main
 /* 364F84 E0064074 AC820010 */  sw        $v0, 0x10($a0)
 /* 364F88 E0064078 24020032 */  addiu     $v0, $zero, 0x32
 /* 364F8C E006407C AC800014 */  sw        $zero, 0x14($a0)
-/* 364F90 E0064080 0C080124 */  jal       func_E0200490
+/* 364F90 E0064080 0C080124 */  jal       shim_create_effect_instance
 /* 364F94 E0064084 AC820004 */   sw       $v0, 4($a0)
 /* 364F98 E0064088 00112040 */  sll       $a0, $s1, 1
 /* 364F9C E006408C 00912021 */  addu      $a0, $a0, $s1
@@ -43,7 +43,7 @@ glabel fx_50_main
 /* 364FA4 E0064094 00912023 */  subu      $a0, $a0, $s1
 /* 364FA8 E0064098 000420C0 */  sll       $a0, $a0, 3
 /* 364FAC E006409C 0040902D */  daddu     $s2, $v0, $zero
-/* 364FB0 E00640A0 0C08012C */  jal       func_E02004B0
+/* 364FB0 E00640A0 0C08012C */  jal       shim_general_heap_malloc
 /* 364FB4 E00640A4 AE510008 */   sw       $s1, 8($s2)
 /* 364FB8 E00640A8 0040802D */  daddu     $s0, $v0, $zero
 /* 364FBC E00640AC 16000003 */  bnez      $s0, .LE00640BC
@@ -57,7 +57,7 @@ glabel fx_50_main
 /* 364FD4 E00640C4 00B12821 */  addu      $a1, $a1, $s1
 /* 364FD8 E00640C8 00052880 */  sll       $a1, $a1, 2
 /* 364FDC E00640CC 00B12823 */  subu      $a1, $a1, $s1
-/* 364FE0 E00640D0 0C080130 */  jal       func_E02004C0
+/* 364FE0 E00640D0 0C080130 */  jal       shim_mem_clear
 /* 364FE4 E00640D4 000528C0 */   sll      $a1, $a1, 3
 /* 364FE8 E00640D8 2402003C */  addiu     $v0, $zero, 0x3c
 /* 364FEC E00640DC 240300FF */  addiu     $v1, $zero, 0xff

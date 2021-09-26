@@ -44,7 +44,7 @@ glabel func_E00E01D8
 /* 3DB6C8 E00E0268 8C830018 */  lw        $v1, 0x18($a0)
 /* 3DB6CC E00E026C 04610005 */  bgez      $v1, .LE00E0284
 /* 3DB6D0 E00E0270 28620010 */   slti     $v0, $v1, 0x10
-/* 3DB6D4 E00E0274 0C080128 */  jal       func_E02004A0
+/* 3DB6D4 E00E0274 0C080128 */  jal       shim_remove_effect
 /* 3DB6D8 E00E0278 0240202D */   daddu    $a0, $s2, $zero
 /* 3DB6DC E00E027C 0803815F */  j         .LE00E057C
 /* 3DB6E0 E00E0280 00000000 */   nop
@@ -92,7 +92,7 @@ glabel func_E00E01D8
 /* 3DB774 E00E0314 00000000 */   nop
 /* 3DB778 E00E0318 4600C68D */  trunc.w.s $f26, $f24
 /* 3DB77C E00E031C 4404D000 */  mfc1      $a0, $f26
-/* 3DB780 E00E0320 0C080138 */  jal       func_E02004E0
+/* 3DB780 E00E0320 0C080138 */  jal       shim_rand_int
 /* 3DB784 E00E0324 00000000 */   nop
 /* 3DB788 E00E0328 3C013FE0 */  lui       $at, 0x3fe0
 /* 3DB78C E00E032C 44810800 */  mtc1      $at, $f1
@@ -107,14 +107,14 @@ glabel func_E00E01D8
 /* 3DB7B0 E00E0350 4600F68D */  trunc.w.s $f26, $f30
 /* 3DB7B4 E00E0354 4404D000 */  mfc1      $a0, $f26
 /* 3DB7B8 E00E0358 46200020 */  cvt.s.d   $f0, $f0
-/* 3DB7BC E00E035C 0C080138 */  jal       func_E02004E0
+/* 3DB7BC E00E035C 0C080138 */  jal       shim_rand_int
 /* 3DB7C0 E00E0360 E600FFB8 */   swc1     $f0, -0x48($s0)
 /* 3DB7C4 E00E0364 24040014 */  addiu     $a0, $zero, 0x14
 /* 3DB7C8 E00E0368 44820000 */  mtc1      $v0, $f0
 /* 3DB7CC E00E036C 00000000 */  nop
 /* 3DB7D0 E00E0370 46800020 */  cvt.s.w   $f0, $f0
 /* 3DB7D4 E00E0374 E600FFBC */  swc1      $f0, -0x44($s0)
-/* 3DB7D8 E00E0378 0C080138 */  jal       func_E02004E0
+/* 3DB7D8 E00E0378 0C080138 */  jal       shim_rand_int
 /* 3DB7DC E00E037C AE00FFC0 */   sw       $zero, -0x40($s0)
 /* 3DB7E0 E00E0380 2442FFF6 */  addiu     $v0, $v0, -0xa
 /* 3DB7E4 E00E0384 44820000 */  mtc1      $v0, $f0
@@ -125,7 +125,7 @@ glabel func_E00E01D8
 /* 3DB7F8 E00E0398 00000000 */  nop
 /* 3DB7FC E00E039C 24040028 */  addiu     $a0, $zero, 0x28
 /* 3DB800 E00E03A0 46200020 */  cvt.s.d   $f0, $f0
-/* 3DB804 E00E03A4 0C080138 */  jal       func_E02004E0
+/* 3DB804 E00E03A4 0C080138 */  jal       shim_rand_int
 /* 3DB808 E00E03A8 E600FFF8 */   swc1     $f0, -8($s0)
 /* 3DB80C E00E03AC 2442FFFF */  addiu     $v0, $v0, -1
 /* 3DB810 E00E03B0 44820000 */  mtc1      $v0, $f0
@@ -139,7 +139,7 @@ glabel func_E00E01D8
 /* 3DB830 E00E03D0 24040014 */  addiu     $a0, $zero, 0x14
 /* 3DB834 E00E03D4 AE000000 */  sw        $zero, ($s0)
 /* 3DB838 E00E03D8 46200020 */  cvt.s.d   $f0, $f0
-/* 3DB83C E00E03DC 0C080138 */  jal       func_E02004E0
+/* 3DB83C E00E03DC 0C080138 */  jal       shim_rand_int
 /* 3DB840 E00E03E0 E600FFFC */   swc1     $f0, -4($s0)
 /* 3DB844 E00E03E4 2442FFF6 */  addiu     $v0, $v0, -0xa
 /* 3DB848 E00E03E8 44820000 */  mtc1      $v0, $f0
@@ -150,7 +150,7 @@ glabel func_E00E01D8
 /* 3DB85C E00E03FC 00000000 */  nop
 /* 3DB860 E00E0400 2404001E */  addiu     $a0, $zero, 0x1e
 /* 3DB864 E00E0404 46200020 */  cvt.s.d   $f0, $f0
-/* 3DB868 E00E0408 0C080138 */  jal       func_E02004E0
+/* 3DB868 E00E0408 0C080138 */  jal       shim_rand_int
 /* 3DB86C E00E040C E6000004 */   swc1     $f0, 4($s0)
 /* 3DB870 E00E0410 2442FFFF */  addiu     $v0, $v0, -1
 /* 3DB874 E00E0414 C7BA0010 */  lwc1      $f26, 0x10($sp)
@@ -165,13 +165,13 @@ glabel func_E00E01D8
 /* 3DB898 E00E0438 2404000F */  addiu     $a0, $zero, 0xf
 /* 3DB89C E00E043C AE00000C */  sw        $zero, 0xc($s0)
 /* 3DB8A0 E00E0440 46200020 */  cvt.s.d   $f0, $f0
-/* 3DB8A4 E00E0444 0C080138 */  jal       func_E02004E0
+/* 3DB8A4 E00E0444 0C080138 */  jal       shim_rand_int
 /* 3DB8A8 E00E0448 E6000008 */   swc1     $f0, 8($s0)
 /* 3DB8AC E00E044C 2404000F */  addiu     $a0, $zero, 0xf
 /* 3DB8B0 E00E0450 44820000 */  mtc1      $v0, $f0
 /* 3DB8B4 E00E0454 00000000 */  nop
 /* 3DB8B8 E00E0458 46800020 */  cvt.s.w   $f0, $f0
-/* 3DB8BC E00E045C 0C080138 */  jal       func_E02004E0
+/* 3DB8BC E00E045C 0C080138 */  jal       shim_rand_int
 /* 3DB8C0 E00E0460 E6000010 */   swc1     $f0, 0x10($s0)
 /* 3DB8C4 E00E0464 44820000 */  mtc1      $v0, $f0
 /* 3DB8C8 E00E0468 00000000 */  nop

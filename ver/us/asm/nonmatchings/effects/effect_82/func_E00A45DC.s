@@ -17,12 +17,12 @@ glabel func_E00A45DC
 /* 3A3DEC E00A460C 28420003 */  slti      $v0, $v0, 3
 /* 3A3DF0 E00A4610 14400005 */  bnez      $v0, .LE00A4628
 /* 3A3DF4 E00A4614 27A40010 */   addiu    $a0, $sp, 0x10
-/* 3A3DF8 E00A4618 0C080120 */  jal       func_E0200480
+/* 3A3DF8 E00A4618 0C080120 */  jal       shim_queue_render_task
 /* 3A3DFC E00A461C 00000000 */   nop
 /* 3A3E00 E00A4620 0802918F */  j         .LE00A463C
 /* 3A3E04 E00A4624 00000000 */   nop
 .LE00A4628:
-/* 3A3E08 E00A4628 0C080120 */  jal       func_E0200480
+/* 3A3E08 E00A4628 0C080120 */  jal       shim_queue_render_task
 /* 3A3E0C E00A462C 00000000 */   nop
 /* 3A3E10 E00A4630 8C430000 */  lw        $v1, ($v0)
 /* 3A3E14 E00A4634 34630002 */  ori       $v1, $v1, 2

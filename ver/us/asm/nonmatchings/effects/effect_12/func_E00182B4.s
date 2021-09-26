@@ -46,7 +46,7 @@ glabel func_E00182B4
 .LE0018348:
 /* 32F8C8 E0018348 16600003 */  bnez      $s3, .LE0018358
 /* 32F8CC E001834C 00000000 */   nop
-/* 32F8D0 E0018350 0C080128 */  jal       func_E02004A0
+/* 32F8D0 E0018350 0C080128 */  jal       shim_remove_effect
 /* 32F8D4 E0018354 0280202D */   daddu    $a0, $s4, $zero
 .LE0018358:
 /* 32F8D8 E0018358 8FBF0024 */  lw        $ra, 0x24($sp)

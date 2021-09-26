@@ -67,7 +67,7 @@ glabel func_E001C200
 /* 330BF0 E001C2E0 2402002D */  addiu     $v0, $zero, 0x2d
 /* 330BF4 E001C2E4 AC850008 */  sw        $a1, 8($a0)
 /* 330BF8 E001C2E8 AC800004 */  sw        $zero, 4($a0)
-/* 330BFC E001C2EC 0C080120 */  jal       func_E0200480
+/* 330BFC E001C2EC 0C080120 */  jal       shim_queue_render_task
 /* 330C00 E001C2F0 AC820000 */   sw       $v0, ($a0)
 /* 330C04 E001C2F4 8C430000 */  lw        $v1, ($v0)
 /* 330C08 E001C2F8 34630002 */  ori       $v1, $v1, 2

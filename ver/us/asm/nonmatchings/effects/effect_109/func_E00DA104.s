@@ -25,7 +25,7 @@ glabel func_E00DA104
 /* 3D738C E00DA14C 24460001 */  addiu     $a2, $v0, 1
 /* 3D7390 E00DA150 04A10005 */  bgez      $a1, .LE00DA168
 /* 3D7394 E00DA154 AC660014 */   sw       $a2, 0x14($v1)
-/* 3D7398 E00DA158 0C080128 */  jal       func_E02004A0
+/* 3D7398 E00DA158 0C080128 */  jal       shim_remove_effect
 /* 3D739C E00DA15C 00000000 */   nop
 /* 3D73A0 E00DA160 08036875 */  j         .LE00DA1D4
 /* 3D73A4 E00DA164 00000000 */   nop

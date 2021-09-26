@@ -58,7 +58,7 @@ glabel func_E008C6FC
 /* 38E5D0 E008C7D0 8E26000C */  lw        $a2, 0xc($s1)
 /* 38E5D4 E008C7D4 8E270010 */  lw        $a3, 0x10($s1)
 /* 38E5D8 E008C7D8 4480A000 */  mtc1      $zero, $f20
-/* 38E5DC E008C7DC 0C080108 */  jal       func_E0200420
+/* 38E5DC E008C7DC 0C080108 */  jal       shim_guTranslateF
 /* 38E5E0 E008C7E0 24160001 */   addiu    $s6, $zero, 1
 /* 38E5E4 E008C7E4 27B20060 */  addiu     $s2, $sp, 0x60
 /* 38E5E8 E008C7E8 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
@@ -78,11 +78,11 @@ glabel func_E008C6FC
 /* 38E620 E008C820 46000007 */  neg.s     $f0, $f0
 /* 38E624 E008C824 44050000 */  mfc1      $a1, $f0
 /* 38E628 E008C828 0240202D */  daddu     $a0, $s2, $zero
-/* 38E62C E008C82C 0C080104 */  jal       func_E0200410
+/* 38E62C E008C82C 0C080104 */  jal       shim_guRotateF
 /* 38E630 E008C830 E7B40010 */   swc1     $f20, 0x10($sp)
 /* 38E634 E008C834 0240202D */  daddu     $a0, $s2, $zero
 /* 38E638 E008C838 27A50020 */  addiu     $a1, $sp, 0x20
-/* 38E63C E008C83C 0C080114 */  jal       func_E0200450
+/* 38E63C E008C83C 0C080114 */  jal       shim_guMtxCatF
 /* 38E640 E008C840 00A0302D */   daddu    $a2, $a1, $zero
 /* 38E644 E008C844 27A40020 */  addiu     $a0, $sp, 0x20
 /* 38E648 E008C848 3C148007 */  lui       $s4, %hi(gMatrixListPos)
@@ -93,7 +93,7 @@ glabel func_E008C6FC
 /* 38E65C E008C85C 8EA20000 */  lw        $v0, ($s5)
 /* 38E660 E008C860 00052980 */  sll       $a1, $a1, 6
 /* 38E664 E008C864 00B02821 */  addu      $a1, $a1, $s0
-/* 38E668 E008C868 0C080118 */  jal       func_E0200460
+/* 38E668 E008C868 0C080118 */  jal       shim_guMtxF2L
 /* 38E66C E008C86C 00452821 */   addu     $a1, $v0, $a1
 /* 38E670 E008C870 8E620000 */  lw        $v0, ($s3)
 /* 38E674 E008C874 26310048 */  addiu     $s1, $s1, 0x48
@@ -135,17 +135,17 @@ glabel func_E008C6FC
 /* 38E700 E008C900 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* 38E704 E008C904 8E05FFE6 */  lw        $a1, -0x1a($s0)
 /* 38E708 E008C908 8E07FFEE */  lw        $a3, -0x12($s0)
-/* 38E70C E008C90C 0C080180 */  jal       func_E0200600
+/* 38E70C E008C90C 0C080180 */  jal       shim_guPositionF
 /* 38E710 E008C910 27A40020 */   addiu    $a0, $sp, 0x20
 /* 38E714 E008C914 E7B40010 */  swc1      $f20, 0x10($sp)
 /* 38E718 E008C918 8E05FFEA */  lw        $a1, -0x16($s0)
 /* 38E71C E008C91C 4406A000 */  mfc1      $a2, $f20
 /* 38E720 E008C920 3C073F80 */  lui       $a3, 0x3f80
-/* 38E724 E008C924 0C080104 */  jal       func_E0200410
+/* 38E724 E008C924 0C080104 */  jal       shim_guRotateF
 /* 38E728 E008C928 0240202D */   daddu    $a0, $s2, $zero
 /* 38E72C E008C92C 0240202D */  daddu     $a0, $s2, $zero
 /* 38E730 E008C930 27A50020 */  addiu     $a1, $sp, 0x20
-/* 38E734 E008C934 0C080114 */  jal       func_E0200450
+/* 38E734 E008C934 0C080114 */  jal       shim_guMtxCatF
 /* 38E738 E008C938 00A0302D */   daddu    $a2, $a1, $zero
 /* 38E73C E008C93C 8FA800A0 */  lw        $t0, 0xa0($sp)
 /* 38E740 E008C940 29020008 */  slti      $v0, $t0, 8
@@ -166,11 +166,11 @@ glabel func_E008C6FC
 /* 38E778 E008C978 4406A000 */  mfc1      $a2, $f20
 /* 38E77C E008C97C 4407A000 */  mfc1      $a3, $f20
 .LE008C980:
-/* 38E780 E008C980 0C080108 */  jal       func_E0200420
+/* 38E780 E008C980 0C080108 */  jal       shim_guTranslateF
 /* 38E784 E008C984 0240202D */   daddu    $a0, $s2, $zero
 /* 38E788 E008C988 0240202D */  daddu     $a0, $s2, $zero
 /* 38E78C E008C98C 27A50020 */  addiu     $a1, $sp, 0x20
-/* 38E790 E008C990 0C080114 */  jal       func_E0200450
+/* 38E790 E008C990 0C080114 */  jal       shim_guMtxCatF
 /* 38E794 E008C994 00A0302D */   daddu    $a2, $a1, $zero
 /* 38E798 E008C998 27A40020 */  addiu     $a0, $sp, 0x20
 /* 38E79C E008C99C 26D60001 */  addiu     $s6, $s6, 1
@@ -197,7 +197,7 @@ glabel func_E008C6FC
 /* 38E7F0 E008C9F0 00661825 */  or        $v1, $v1, $a2
 /* 38E7F4 E008C9F4 310200FF */  andi      $v0, $t0, 0xff
 /* 38E7F8 E008C9F8 00621825 */  or        $v1, $v1, $v0
-/* 38E7FC E008C9FC 0C080118 */  jal       func_E0200460
+/* 38E7FC E008C9FC 0C080118 */  jal       shim_guMtxF2L
 /* 38E800 E008CA00 ACE30004 */   sw       $v1, 4($a3)
 /* 38E804 E008CA04 3C06D838 */  lui       $a2, 0xd838
 /* 38E808 E008CA08 8E640000 */  lw        $a0, ($s3)

@@ -28,7 +28,7 @@ glabel func_E0020000
 /* 333F1C E002005C 00220821 */  addu      $at, $at, $v0
 /* 333F20 E0020060 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
 /* 333F24 E0020064 8E32003C */  lw        $s2, 0x3c($s1)
-/* 333F28 E0020068 0C080140 */  jal       func_E0200500
+/* 333F28 E0020068 0C080140 */  jal       shim_sin_deg
 /* 333F2C E002006C 00A0982D */   daddu    $s3, $a1, $zero
 /* 333F30 E0020070 8E030000 */  lw        $v1, ($s0)
 /* 333F34 E0020074 00031080 */  sll       $v0, $v1, 2
@@ -41,7 +41,7 @@ glabel func_E0020000
 /* 333F50 E0020090 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 333F54 E0020094 00220821 */  addu      $at, $at, $v0
 /* 333F58 E0020098 C42C1DEC */  lwc1      $f12, %lo(gCameras+0x6C)($at)
-/* 333F5C E002009C 0C080144 */  jal       func_E0200510
+/* 333F5C E002009C 0C080144 */  jal       shim_cos_deg
 /* 333F60 E00200A0 46000506 */   mov.s    $f20, $f0
 /* 333F64 E00200A4 00131080 */  sll       $v0, $s3, 2
 /* 333F68 E00200A8 46000007 */  neg.s     $f0, $f0
@@ -59,7 +59,7 @@ glabel func_E0020000
 /* 333F98 E00200D8 4406A000 */  mfc1      $a2, $f20
 /* 333F9C E00200DC 46000007 */  neg.s     $f0, $f0
 /* 333FA0 E00200E0 44050000 */  mfc1      $a1, $f0
-/* 333FA4 E00200E4 0C080104 */  jal       func_E0200410
+/* 333FA4 E00200E4 0C080104 */  jal       shim_guRotateF
 /* 333FA8 E00200E8 0000382D */   daddu    $a3, $zero, $zero
 /* 333FAC E00200EC 2402FFFF */  addiu     $v0, $zero, -1
 /* 333FB0 E00200F0 1642001F */  bne       $s2, $v0, .LE0020170

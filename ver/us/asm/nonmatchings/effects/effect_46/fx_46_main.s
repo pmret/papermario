@@ -31,12 +31,12 @@ glabel fx_46_main
 /* 360FA8 E005C068 AFB00028 */  sw        $s0, 0x28($sp)
 /* 360FAC E005C06C AFA00010 */  sw        $zero, 0x10($sp)
 /* 360FB0 E005C070 AFA00024 */  sw        $zero, 0x24($sp)
-/* 360FB4 E005C074 0C080124 */  jal       func_E0200490
+/* 360FB4 E005C074 0C080124 */  jal       shim_create_effect_instance
 /* 360FB8 E005C078 AFA20014 */   sw       $v0, 0x14($sp)
 /* 360FBC E005C07C 24040068 */  addiu     $a0, $zero, 0x68
 /* 360FC0 E005C080 24130002 */  addiu     $s3, $zero, 2
 /* 360FC4 E005C084 0040802D */  daddu     $s0, $v0, $zero
-/* 360FC8 E005C088 0C08012C */  jal       func_E02004B0
+/* 360FC8 E005C088 0C08012C */  jal       shim_general_heap_malloc
 /* 360FCC E005C08C AE130008 */   sw       $s3, 8($s0)
 /* 360FD0 E005C090 0040882D */  daddu     $s1, $v0, $zero
 /* 360FD4 E005C094 16200003 */  bnez      $s1, .LE005C0A4
@@ -50,7 +50,7 @@ glabel fx_46_main
 /* 360FEC E005C0AC 00B32821 */  addu      $a1, $a1, $s3
 /* 360FF0 E005C0B0 00052880 */  sll       $a1, $a1, 2
 /* 360FF4 E005C0B4 00B32821 */  addu      $a1, $a1, $s3
-/* 360FF8 E005C0B8 0C080130 */  jal       func_E02004C0
+/* 360FF8 E005C0B8 0C080130 */  jal       shim_mem_clear
 /* 360FFC E005C0BC 00052880 */   sll      $a1, $a1, 2
 /* 361000 E005C0C0 24120001 */  addiu     $s2, $zero, 1
 /* 361004 E005C0C4 3C014120 */  lui       $at, 0x4120
@@ -76,11 +76,11 @@ glabel fx_46_main
 /* 361050 E005C110 4600A306 */  mov.s     $f12, $f20
 /* 361054 E005C114 E614FFEC */  swc1      $f20, -0x14($s0)
 /* 361058 E005C118 E614FFF0 */  swc1      $f20, -0x10($s0)
-/* 36105C E005C11C 0C080140 */  jal       func_E0200500
+/* 36105C E005C11C 0C080140 */  jal       shim_sin_deg
 /* 361060 E005C120 E614FFF4 */   swc1     $f20, -0xc($s0)
 /* 361064 E005C124 4600A306 */  mov.s     $f12, $f20
 /* 361068 E005C128 E600FFF8 */  swc1      $f0, -8($s0)
-/* 36106C E005C12C 0C080144 */  jal       func_E0200510
+/* 36106C E005C12C 0C080144 */  jal       shim_cos_deg
 /* 361070 E005C130 E614FFFC */   swc1     $f20, -4($s0)
 /* 361074 E005C134 26520001 */  addiu     $s2, $s2, 1
 /* 361078 E005C138 E6000000 */  swc1      $f0, ($s0)

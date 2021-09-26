@@ -37,10 +37,10 @@ glabel func_E0016228
 /* 32F0D0 E00162A0 C600FFF8 */  lwc1      $f0, -8($s0)
 /* 32F0D4 E00162A4 3C014140 */  lui       $at, 0x4140
 /* 32F0D8 E00162A8 44816000 */  mtc1      $at, $f12
-/* 32F0DC E00162AC 0C08013C */  jal       func_E02004F0
+/* 32F0DC E00162AC 0C08013C */  jal       shim_clamp_angle
 /* 32F0E0 E00162B0 460C0300 */   add.s    $f12, $f0, $f12
 /* 32F0E4 E00162B4 46000306 */  mov.s     $f12, $f0
-/* 32F0E8 E00162B8 0C080140 */  jal       func_E0200500
+/* 32F0E8 E00162B8 0C080140 */  jal       shim_sin_deg
 /* 32F0EC E00162BC E60CFFF8 */   swc1     $f12, -8($s0)
 /* 32F0F0 E00162C0 46000021 */  cvt.d.s   $f0, $f0
 /* 32F0F4 E00162C4 46340002 */  mul.d     $f0, $f0, $f20
@@ -50,7 +50,7 @@ glabel func_E0016228
 /* 32F104 E00162D4 46201080 */  add.d     $f2, $f2, $f0
 /* 32F108 E00162D8 C60CFFF8 */  lwc1      $f12, -8($s0)
 /* 32F10C E00162DC 462010A0 */  cvt.s.d   $f2, $f2
-/* 32F110 E00162E0 0C080144 */  jal       func_E0200510
+/* 32F110 E00162E0 0C080144 */  jal       shim_cos_deg
 /* 32F114 E00162E4 E602FFE4 */   swc1     $f2, -0x1c($s0)
 /* 32F118 E00162E8 46000021 */  cvt.d.s   $f0, $f0
 /* 32F11C E00162EC 46340002 */  mul.d     $f0, $f0, $f20
@@ -118,7 +118,7 @@ glabel func_E0016228
 .LE00163D8:
 /* 32F208 E00163D8 16600003 */  bnez      $s3, .LE00163E8
 /* 32F20C E00163DC 00000000 */   nop
-/* 32F210 E00163E0 0C080128 */  jal       func_E02004A0
+/* 32F210 E00163E0 0C080128 */  jal       shim_remove_effect
 /* 32F214 E00163E4 0280202D */   daddu    $a0, $s4, $zero
 .LE00163E8:
 /* 32F218 E00163E8 8FBF0024 */  lw        $ra, 0x24($sp)

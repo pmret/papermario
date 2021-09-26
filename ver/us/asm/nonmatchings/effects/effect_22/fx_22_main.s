@@ -31,12 +31,12 @@ glabel fx_22_main
 /* 33FEE8 E002C068 AFB00028 */  sw        $s0, 0x28($sp)
 /* 33FEEC E002C06C AFA00010 */  sw        $zero, 0x10($sp)
 /* 33FEF0 E002C070 AFA00024 */  sw        $zero, 0x24($sp)
-/* 33FEF4 E002C074 0C080124 */  jal       func_E0200490
+/* 33FEF4 E002C074 0C080124 */  jal       shim_create_effect_instance
 /* 33FEF8 E002C078 AFA20014 */   sw       $v0, 0x14($sp)
 /* 33FEFC E002C07C 24040240 */  addiu     $a0, $zero, 0x240
 /* 33FF00 E002C080 24150009 */  addiu     $s5, $zero, 9
 /* 33FF04 E002C084 0040802D */  daddu     $s0, $v0, $zero
-/* 33FF08 E002C088 0C08012C */  jal       func_E02004B0
+/* 33FF08 E002C088 0C08012C */  jal       shim_general_heap_malloc
 /* 33FF0C E002C08C AE150008 */   sw       $s5, 8($s0)
 /* 33FF10 E002C090 0040882D */  daddu     $s1, $v0, $zero
 /* 33FF14 E002C094 16200003 */  bnez      $s1, .LE002C0A4
@@ -56,7 +56,7 @@ glabel fx_22_main
 /* 33FF44 E002C0C4 AE20002C */  sw        $zero, 0x2c($s1)
 /* 33FF48 E002C0C8 AE200030 */  sw        $zero, 0x30($s1)
 /* 33FF4C E002C0CC E620000C */  swc1      $f0, 0xc($s1)
-/* 33FF50 E002C0D0 0C080138 */  jal       func_E02004E0
+/* 33FF50 E002C0D0 0C080138 */  jal       shim_rand_int
 /* 33FF54 E002C0D4 E6220014 */   swc1     $f2, 0x14($s1)
 /* 33FF58 E002C0D8 2404003C */  addiu     $a0, $zero, 0x3c
 /* 33FF5C E002C0DC 2442FFE2 */  addiu     $v0, $v0, -0x1e
@@ -65,7 +65,7 @@ glabel fx_22_main
 /* 33FF68 E002C0E8 46800020 */  cvt.s.w   $f0, $f0
 /* 33FF6C E002C0EC 240200FF */  addiu     $v0, $zero, 0xff
 /* 33FF70 E002C0F0 E6200034 */  swc1      $f0, 0x34($s1)
-/* 33FF74 E002C0F4 0C080138 */  jal       func_E02004E0
+/* 33FF74 E002C0F4 0C080138 */  jal       shim_rand_int
 /* 33FF78 E002C0F8 AE220028 */   sw       $v0, 0x28($s1)
 /* 33FF7C E002C0FC 2442FFE2 */  addiu     $v0, $v0, -0x1e
 /* 33FF80 E002C100 44822000 */  mtc1      $v0, $f4
@@ -111,7 +111,7 @@ glabel fx_22_main
 /* 34001C E002C19C C4400000 */  lwc1      $f0, ($v0)
 /* 340020 E002C1A0 46000000 */  add.s     $f0, $f0, $f0
 /* 340024 E002C1A4 2404000A */  addiu     $a0, $zero, 0xa
-/* 340028 E002C1A8 0C080138 */  jal       func_E02004E0
+/* 340028 E002C1A8 0C080138 */  jal       shim_rand_int
 /* 34002C E002C1AC E600FFDC */   swc1     $f0, -0x24($s0)
 /* 340030 E002C1B0 44820000 */  mtc1      $v0, $f0
 /* 340034 E002C1B4 00000000 */  nop

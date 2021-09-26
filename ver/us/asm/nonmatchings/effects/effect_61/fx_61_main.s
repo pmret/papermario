@@ -39,7 +39,7 @@ glabel fx_61_main
 /* 37C5C8 E007A088 00000000 */  nop
 /* 37C5CC E007A08C 4501010F */  bc1t      .LE007A4CC
 /* 37C5D0 E007A090 26520001 */   addiu    $s2, $s2, 1
-/* 37C5D4 E007A094 0C080154 */  jal       func_E0200550
+/* 37C5D4 E007A094 0C080154 */  jal       shim_sqrtf
 /* 37C5D8 E007A098 00000000 */   nop
 /* 37C5DC E007A09C 3C01BF80 */  lui       $at, 0xbf80
 /* 37C5E0 E007A0A0 44811000 */  mtc1      $at, $f2
@@ -94,7 +94,7 @@ glabel fx_61_main
 /* 37C698 E007A158 00000000 */  nop
 /* 37C69C E007A15C 450100DB */  bc1t      .LE007A4CC
 /* 37C6A0 E007A160 00000000 */   nop
-/* 37C6A4 E007A164 0C080154 */  jal       func_E0200550
+/* 37C6A4 E007A164 0C080154 */  jal       shim_sqrtf
 /* 37C6A8 E007A168 00000000 */   nop
 /* 37C6AC E007A16C 3C013F80 */  lui       $at, 0x3f80
 /* 37C6B0 E007A170 44811000 */  mtc1      $at, $f2
@@ -136,7 +136,7 @@ glabel fx_61_main
 /* 37C740 E007A200 AC820010 */  sw        $v0, 0x10($a0)
 /* 37C744 E007A204 2402003D */  addiu     $v0, $zero, 0x3d
 /* 37C748 E007A208 AC800014 */  sw        $zero, 0x14($a0)
-/* 37C74C E007A20C 0C080124 */  jal       func_E0200490
+/* 37C74C E007A20C 0C080124 */  jal       shim_create_effect_instance
 /* 37C750 E007A210 AC820004 */   sw       $v0, 4($a0)
 /* 37C754 E007A214 00122040 */  sll       $a0, $s2, 1
 /* 37C758 E007A218 00922021 */  addu      $a0, $a0, $s2
@@ -144,7 +144,7 @@ glabel fx_61_main
 /* 37C760 E007A220 00922021 */  addu      $a0, $a0, $s2
 /* 37C764 E007A224 000420C0 */  sll       $a0, $a0, 3
 /* 37C768 E007A228 0040A02D */  daddu     $s4, $v0, $zero
-/* 37C76C E007A22C 0C08012C */  jal       func_E02004B0
+/* 37C76C E007A22C 0C08012C */  jal       shim_general_heap_malloc
 /* 37C770 E007A230 AE920008 */   sw       $s2, 8($s4)
 /* 37C774 E007A234 0040182D */  daddu     $v1, $v0, $zero
 /* 37C778 E007A238 14600003 */  bnez      $v1, .LE007A248
@@ -184,7 +184,7 @@ glabel fx_61_main
 /* 37C7F4 E007A2B4 AE00FFAC */  sw        $zero, -0x54($s0)
 /* 37C7F8 E007A2B8 AE00FFB0 */  sw        $zero, -0x50($s0)
 /* 37C7FC E007A2BC AE00FFB4 */  sw        $zero, -0x4c($s0)
-/* 37C800 E007A2C0 0C080104 */  jal       func_E0200410
+/* 37C800 E007A2C0 0C080104 */  jal       shim_guRotateF
 /* 37C804 E007A2C4 E7BA0010 */   swc1     $f26, 0x10($sp)
 /* 37C808 E007A2C8 3C01E008 */  lui       $at, %hi(D_E007AC00)
 /* 37C80C E007A2CC D42EAC00 */  ldc1      $f14, %lo(D_E007AC00)($at)

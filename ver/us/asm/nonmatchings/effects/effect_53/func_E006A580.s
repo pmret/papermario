@@ -33,7 +33,7 @@ glabel func_E006A580
 /* 36D608 E006A5E8 8E220028 */  lw        $v0, 0x28($s1)
 /* 36D60C E006A5EC 04410005 */  bgez      $v0, .LE006A604
 /* 36D610 E006A5F0 0040982D */   daddu    $s3, $v0, $zero
-/* 36D614 E006A5F4 0C080128 */  jal       func_E02004A0
+/* 36D614 E006A5F4 0C080128 */  jal       shim_remove_effect
 /* 36D618 E006A5F8 0280202D */   daddu    $a0, $s4, $zero
 /* 36D61C E006A5FC 0801A9FD */  j         .LE006A7F4
 /* 36D620 E006A600 00000000 */   nop

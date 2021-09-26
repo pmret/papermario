@@ -122,7 +122,7 @@ glabel func_E001A224
 /* 33020C E001A3DC ACA20038 */  sw        $v0, 0x38($a1)
 /* 330210 E001A3E0 04610003 */  bgez      $v1, .LE001A3F0
 /* 330214 E001A3E4 E4A00008 */   swc1     $f0, 8($a1)
-/* 330218 E001A3E8 0C080128 */  jal       func_E02004A0
+/* 330218 E001A3E8 0C080128 */  jal       shim_remove_effect
 /* 33021C E001A3EC 00000000 */   nop
 .LE001A3F0:
 /* 330220 E001A3F0 8FBF0010 */  lw        $ra, 0x10($sp)

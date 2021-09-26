@@ -31,12 +31,12 @@ glabel fx_15_main
 /* 3319A8 E001E068 F7B80048 */  sdc1      $f24, 0x48($sp)
 /* 3319AC E001E06C AFA00010 */  sw        $zero, 0x10($sp)
 /* 3319B0 E001E070 AFA00024 */  sw        $zero, 0x24($sp)
-/* 3319B4 E001E074 0C080124 */  jal       func_E0200490
+/* 3319B4 E001E074 0C080124 */  jal       shim_create_effect_instance
 /* 3319B8 E001E078 AFA20014 */   sw       $v0, 0x14($sp)
 /* 3319BC E001E07C 24040250 */  addiu     $a0, $zero, 0x250
 /* 3319C0 E001E080 24030001 */  addiu     $v1, $zero, 1
 /* 3319C4 E001E084 0040902D */  daddu     $s2, $v0, $zero
-/* 3319C8 E001E088 0C08012C */  jal       func_E02004B0
+/* 3319C8 E001E088 0C08012C */  jal       shim_general_heap_malloc
 /* 3319CC E001E08C AE430008 */   sw       $v1, 8($s2)
 /* 3319D0 E001E090 0040882D */  daddu     $s1, $v0, $zero
 /* 3319D4 E001E094 16200003 */  bnez      $s1, .LE001E0A4
@@ -60,11 +60,11 @@ glabel fx_15_main
 /* 331A14 E001E0D4 3421CCCD */  ori       $at, $at, 0xcccd
 /* 331A18 E001E0D8 44810000 */  mtc1      $at, $f0
 /* 331A1C E001E0DC 240400FF */  addiu     $a0, $zero, 0xff
-/* 331A20 E001E0E0 0C080138 */  jal       func_E02004E0
+/* 331A20 E001E0E0 0C080138 */  jal       shim_rand_int
 /* 331A24 E001E0E4 E6200240 */   swc1     $f0, 0x240($s1)
 /* 331A28 E001E0E8 241000FF */  addiu     $s0, $zero, 0xff
 /* 331A2C E001E0EC 02022023 */  subu      $a0, $s0, $v0
-/* 331A30 E001E0F0 0C080138 */  jal       func_E02004E0
+/* 331A30 E001E0F0 0C080138 */  jal       shim_rand_int
 /* 331A34 E001E0F4 AE220244 */   sw       $v0, 0x244($s1)
 /* 331A38 E001E0F8 8E230244 */  lw        $v1, 0x244($s1)
 /* 331A3C E001E0FC 02028023 */  subu      $s0, $s0, $v0
@@ -103,7 +103,7 @@ glabel fx_15_main
 /* 331AB8 E001E178 00000000 */  nop
 /* 331ABC E001E17C 45010005 */  bc1t      .LE001E194
 /* 331AC0 E001E180 4600D106 */   mov.s    $f4, $f26
-/* 331AC4 E001E184 0C080154 */  jal       func_E0200550
+/* 331AC4 E001E184 0C080154 */  jal       shim_sqrtf
 /* 331AC8 E001E188 4600D306 */   mov.s    $f12, $f26
 /* 331ACC E001E18C 46000686 */  mov.s     $f26, $f0
 /* 331AD0 E001E190 461AF103 */  div.s     $f4, $f30, $f26
@@ -129,10 +129,10 @@ glabel fx_15_main
 /* 331B1C E001E1DC 3C01800B */  lui       $at, %hi(gCameras+0x6C)
 /* 331B20 E001E1E0 00220821 */  addu      $at, $at, $v0
 /* 331B24 E001E1E4 C4341DEC */  lwc1      $f20, %lo(gCameras+0x6C)($at)
-/* 331B28 E001E1E8 0C080144 */  jal       func_E0200510
+/* 331B28 E001E1E8 0C080144 */  jal       shim_cos_deg
 /* 331B2C E001E1EC 4600A306 */   mov.s    $f12, $f20
 /* 331B30 E001E1F0 4600A306 */  mov.s     $f12, $f20
-/* 331B34 E001E1F4 0C080140 */  jal       func_E0200500
+/* 331B34 E001E1F4 0C080140 */  jal       shim_sin_deg
 /* 331B38 E001E1F8 46000587 */   neg.s    $f22, $f0
 /* 331B3C E001E1FC C6240010 */  lwc1      $f4, 0x10($s1)
 /* 331B40 E001E200 4604B102 */  mul.s     $f4, $f22, $f4
@@ -150,7 +150,7 @@ glabel fx_15_main
 /* 331B70 E001E230 00000000 */  nop
 /* 331B74 E001E234 45010004 */  bc1t      .LE001E248
 /* 331B78 E001E238 00000000 */   nop
-/* 331B7C E001E23C 0C080154 */  jal       func_E0200550
+/* 331B7C E001E23C 0C080154 */  jal       shim_sqrtf
 /* 331B80 E001E240 00000000 */   nop
 /* 331B84 E001E244 46000306 */  mov.s     $f12, $f0
 .LE001E248:
@@ -181,7 +181,7 @@ glabel fx_15_main
 /* 331BE0 E001E2A0 44806000 */  mtc1      $zero, $f12
 /* 331BE4 E001E2A4 46000007 */  neg.s     $f0, $f0
 /* 331BE8 E001E2A8 44060000 */  mfc1      $a2, $f0
-/* 331BEC E001E2AC 0C080148 */  jal       func_E0200520
+/* 331BEC E001E2AC 0C080148 */  jal       shim_atan2
 /* 331BF0 E001E2B0 46006386 */   mov.s    $f14, $f12
 /* 331BF4 E001E2B4 461ED083 */  div.s     $f2, $f26, $f30
 /* 331BF8 E001E2B8 4600118D */  trunc.w.s $f6, $f2
@@ -193,7 +193,7 @@ glabel fx_15_main
 /* 331C10 E001E2D0 0200202D */  daddu     $a0, $s0, $zero
 /* 331C14 E001E2D4 E6200024 */  swc1      $f0, 0x24($s1)
 /* 331C18 E001E2D8 E6200020 */  swc1      $f0, 0x20($s1)
-/* 331C1C E001E2DC 0C08010C */  jal       func_E0200430
+/* 331C1C E001E2DC 0C08010C */  jal       shim_guTranslate
 /* 331C20 E001E2E0 E6340034 */   swc1     $f20, 0x34($s1)
 /* 331C24 E001E2E4 24050001 */  addiu     $a1, $zero, 1
 /* 331C28 E001E2E8 26260080 */  addiu     $a2, $s1, 0x80

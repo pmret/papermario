@@ -30,12 +30,12 @@ glabel fx_54_main
 /* 36E234 E006C064 F7B40048 */  sdc1      $f20, 0x48($sp)
 /* 36E238 E006C068 AFA00018 */  sw        $zero, 0x18($sp)
 /* 36E23C E006C06C AFA0002C */  sw        $zero, 0x2c($sp)
-/* 36E240 E006C070 0C080124 */  jal       func_E0200490
+/* 36E240 E006C070 0C080124 */  jal       shim_create_effect_instance
 /* 36E244 E006C074 AFA2001C */   sw       $v0, 0x1c($sp)
 /* 36E248 E006C078 2404004C */  addiu     $a0, $zero, 0x4c
 /* 36E24C E006C07C 24030001 */  addiu     $v1, $zero, 1
 /* 36E250 E006C080 0040982D */  daddu     $s3, $v0, $zero
-/* 36E254 E006C084 0C08012C */  jal       func_E02004B0
+/* 36E254 E006C084 0C08012C */  jal       shim_general_heap_malloc
 /* 36E258 E006C088 AE630008 */   sw       $v1, 8($s3)
 /* 36E25C E006C08C 0040802D */  daddu     $s0, $v0, $zero
 /* 36E260 E006C090 16000003 */  bnez      $s0, .LE006C0A0
@@ -87,7 +87,7 @@ glabel fx_54_main
 /* 36E308 E006C138 24020001 */  addiu     $v0, $zero, 1
 /* 36E30C E006C13C 16820019 */  bne       $s4, $v0, .LE006C1A4
 /* 36E310 E006C140 00000000 */   nop
-/* 36E314 E006C144 0C080150 */  jal       func_E0200540
+/* 36E314 E006C144 0C080150 */  jal       shim_load_effect
 /* 36E318 E006C148 24040047 */   addiu    $a0, $zero, 0x47
 /* 36E31C E006C14C 0000202D */  daddu     $a0, $zero, $zero
 /* 36E320 E006C150 3C05C2EC */  lui       $a1, 0xc2ec
@@ -100,7 +100,7 @@ glabel fx_54_main
 /* 36E33C E006C16C 0C023800 */  jal       fx_71_main
 /* 36E340 E006C170 E7B40010 */   swc1     $f20, 0x10($sp)
 /* 36E344 E006C174 2404003C */  addiu     $a0, $zero, 0x3c
-/* 36E348 E006C178 0C080150 */  jal       func_E0200540
+/* 36E348 E006C178 0C080150 */  jal       shim_load_effect
 /* 36E34C E006C17C AE020044 */   sw       $v0, 0x44($s0)
 /* 36E350 E006C180 3C05C2F0 */  lui       $a1, 0xc2f0
 /* 36E354 E006C184 3C06433D */  lui       $a2, 0x433d
@@ -112,7 +112,7 @@ glabel fx_54_main
 /* 36E36C E006C19C 0801B087 */  j         .LE006C21C
 /* 36E370 E006C1A0 2A820003 */   slti     $v0, $s4, 3
 .LE006C1A4:
-/* 36E374 E006C1A4 0C080150 */  jal       func_E0200540
+/* 36E374 E006C1A4 0C080150 */  jal       shim_load_effect
 /* 36E378 E006C1A8 24040057 */   addiu    $a0, $zero, 0x57
 /* 36E37C E006C1AC 3C05C2F0 */  lui       $a1, 0xc2f0
 /* 36E380 E006C1B0 3C06433D */  lui       $a2, 0x433d
@@ -146,7 +146,7 @@ glabel fx_54_main
 .LE006C21C:
 /* 36E3EC E006C21C 14400012 */  bnez      $v0, .LE006C268
 /* 36E3F0 E006C220 0260102D */   daddu    $v0, $s3, $zero
-/* 36E3F4 E006C224 0C080150 */  jal       func_E0200540
+/* 36E3F4 E006C224 0C080150 */  jal       shim_load_effect
 /* 36E3F8 E006C228 2404004A */   addiu    $a0, $zero, 0x4a
 /* 36E3FC E006C22C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 36E400 E006C230 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)

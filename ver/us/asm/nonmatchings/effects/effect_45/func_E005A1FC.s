@@ -12,7 +12,7 @@ glabel func_E005A1FC
 /* 3604D8 E005A218 ACA20028 */  sw        $v0, 0x28($a1)
 /* 3604DC E005A21C 04610005 */  bgez      $v1, .LE005A234
 /* 3604E0 E005A220 ACA30024 */   sw       $v1, 0x24($a1)
-/* 3604E4 E005A224 0C080128 */  jal       func_E02004A0
+/* 3604E4 E005A224 0C080128 */  jal       shim_remove_effect
 /* 3604E8 E005A228 00000000 */   nop
 /* 3604EC E005A22C 080168E9 */  j         .LE005A3A4
 /* 3604F0 E005A230 00000000 */   nop

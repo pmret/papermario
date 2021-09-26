@@ -29,19 +29,19 @@ glabel func_E006C2A0
 /* 36E4C8 E006C2F8 24420001 */  addiu     $v0, $v0, 1
 /* 36E4CC E006C2FC 04A10010 */  bgez      $a1, .LE006C340
 /* 36E4D0 E006C300 AE020018 */   sw       $v0, 0x18($s0)
-/* 36E4D4 E006C304 0C080128 */  jal       func_E02004A0
+/* 36E4D4 E006C304 0C080128 */  jal       shim_remove_effect
 /* 36E4D8 E006C308 00000000 */   nop
 /* 36E4DC E006C30C 8E040048 */  lw        $a0, 0x48($s0)
 /* 36E4E0 E006C310 10800004 */  beqz      $a0, .LE006C324
 /* 36E4E4 E006C314 00000000 */   nop
-/* 36E4E8 E006C318 0C080128 */  jal       func_E02004A0
+/* 36E4E8 E006C318 0C080128 */  jal       shim_remove_effect
 /* 36E4EC E006C31C 00000000 */   nop
 /* 36E4F0 E006C320 AE000048 */  sw        $zero, 0x48($s0)
 .LE006C324:
 /* 36E4F4 E006C324 8E040044 */  lw        $a0, 0x44($s0)
 /* 36E4F8 E006C328 10800096 */  beqz      $a0, .LE006C584
 /* 36E4FC E006C32C 00000000 */   nop
-/* 36E500 E006C330 0C080128 */  jal       func_E02004A0
+/* 36E500 E006C330 0C080128 */  jal       shim_remove_effect
 /* 36E504 E006C334 00000000 */   nop
 /* 36E508 E006C338 0801B161 */  j         .LE006C584
 /* 36E50C E006C33C AE000044 */   sw       $zero, 0x44($s0)
@@ -53,7 +53,7 @@ glabel func_E006C2A0
 /* 36E520 E006C350 2A220012 */  slti      $v0, $s1, 0x12
 /* 36E524 E006C354 14400005 */  bnez      $v0, .LE006C36C
 /* 36E528 E006C358 2A420003 */   slti     $v0, $s2, 3
-/* 36E52C E006C35C 0C080128 */  jal       func_E02004A0
+/* 36E52C E006C35C 0C080128 */  jal       shim_remove_effect
 /* 36E530 E006C360 00000000 */   nop
 /* 36E534 E006C364 AE000044 */  sw        $zero, 0x44($s0)
 .LE006C368:
