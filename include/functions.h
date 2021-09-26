@@ -203,7 +203,7 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
 s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX, f32* hitY, f32* hitZ,
                       f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
 
-void mem_clear(s8* data, s32 numBytes);
+void mem_clear(void* data, s32 numBytes);
 
 void intro_logos_set_fade_color(s16 color);
 void intro_logos_set_fade_alpha(s16 alpha);
@@ -494,7 +494,7 @@ s32 entity_can_collide_with_jumping_player(Entity* entity);
 s32 set_global_flag(s32 index);
 void entity_base_block_init(Entity* entity);
 s32 entity_start_script(Entity* entity);
-s32 remove_item_entity_by_index(s32 index); // might not actually return anything
+void remove_item_entity_by_index(s32 index);
 void set_entity_commandlist(Entity* entity, s32* entityScript);
 void func_800EF3E4(void);
 void func_80268858(void);

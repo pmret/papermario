@@ -6,8 +6,11 @@ extern s32 logicalSaveInfo[4][2]; // 0x8009BA30
 extern s32 physicalSaveInfo[6][2]; // 0x8009BA50
 extern s32 nextAvailableSavePage; // 0x8009BA80
 extern s32 D_800D95E8[];
+extern s32 D_8009A6B0[];
 
 void fio_serialize_state(void);
+void fio_erase_flash(s32 pageNum);
+void fio_write_flash(s32 pageNum, s32* readBuffer, s32 numBytes);
 
 s32 get_spirits_rescued(void) {
     s32 storyProgress = evt_get_variable(NULL, EVT_STORY_PROGRESS);
@@ -70,7 +73,21 @@ s32 fio_has_valid_backup(void) {
     return TRUE;
 }
 
-INCLUDE_ASM(s32, "fio", fio_flush_backups);
+s32 fio_flush_backups(void) {
+    s32 checksum;
+
+    strcpy(D_800D95E8, &magicSaveString);
+    D_800D95E8[12] = 0;
+    D_800D95E8[13] = -1;
+    checksum = fio_calc_header_checksum();
+    D_800D95E8[12] = checksum;
+    D_800D95E8[13] = ~checksum;
+    fio_erase_flash(6);
+    fio_write_flash(6, D_800D95E8, 128);
+    fio_erase_flash(7);
+    fio_write_flash(7, D_800D95E8, 128);
+    return 1;
+}
 
 s32 fio_calc_file_checksum(SaveData* saveData) {
     u32 sum = 0;
@@ -90,7 +107,46 @@ s32 fio_validate_file_checksum(SaveData* saveData) {
     return FALSE;
 }
 
-INCLUDE_ASM(s32, "fio", fio_fetch_saved_file_info);
+s32 fio_fetch_saved_file_info(void) {
+    s32* buffer = D_8009A6B0;
+    void* bufferPtr = (void*)buffer;
+    s32 i, j, savePage;
+
+    for (i = 0; i < ARRAY_COUNT(logicalSaveInfo); i++) {
+        logicalSaveInfo[i][0] = -1;
+        logicalSaveInfo[i][1] = -1;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(physicalSaveInfo); i++) {
+        fio_read_flash(i, bufferPtr, sizeof(SaveData));
+        if (fio_validate_file_checksum(bufferPtr) != 0) {
+            physicalSaveInfo[i][0] = buffer[14];
+            physicalSaveInfo[i][1] = buffer[15];
+            if (logicalSaveInfo[buffer[14]][1] < buffer[15]) {
+                logicalSaveInfo[buffer[14]][0] = i;
+                logicalSaveInfo[buffer[14]][1] = buffer[15];
+            }
+        }
+    }
+
+    savePage = 0x7FFFFFFF;
+    for (j = 0; j < ARRAY_COUNT(physicalSaveInfo); j++) {
+        for (i = 0; i < ARRAY_COUNT(logicalSaveInfo); i++) {
+            if (j == logicalSaveInfo[i][0]) {
+                break;
+            }
+        }
+
+        if (i == ARRAY_COUNT(logicalSaveInfo)) {
+            if (physicalSaveInfo[j][1] < savePage) {
+                savePage = physicalSaveInfo[j][1];
+                nextAvailableSavePage = j;
+            }
+        }
+    }
+
+    return 1;
+}
 
 s32 fio_load_game(s32 saveSlot) {
     gGameStatusPtr->saveSlot = saveSlot;

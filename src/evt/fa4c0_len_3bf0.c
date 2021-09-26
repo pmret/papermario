@@ -1,5 +1,9 @@
 #include "common.h"
 
+extern Bytecode D_802D9D34[0];
+extern s32 D_802DB7D0;
+extern s32 D_802DB7D8[10];
+extern s32 D_802DB800[10];
 s32 func_802D5B10();
 
 s32 D_802D9D30 = 0;
@@ -10,7 +14,19 @@ EvtSource D_802D9D34 = SCRIPT({
 
 INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D5B10);
 
-INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D5C70);
+ApiStatus func_802D5C70(Evt* script) {
+    s32 i;
+
+    D_802DB7D0 = evt_get_variable(script, *script->ptrReadPos);
+
+    for (i = 0; i < ARRAY_COUNT(D_802DB7D8); i++) {
+        D_802DB7D8[i] = 0;
+        D_802DB800[i] = 0;
+    }
+
+    start_script(&D_802D9D34, 1, 0);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus FadeOutMusic(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

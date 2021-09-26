@@ -161,9 +161,11 @@ INCLUDE_ASM(char*, "43F0", int_to_string, s32 arg01, char* arg1, s32 arg2);
 #endif
 
 // should maybe be called bzero
-void mem_clear(s8* data, s32 numBytes) {
+void mem_clear(void* data, s32 numBytes) {
+    u8* addressableData = data;
+
     while (numBytes > 0) {
-        *data++ = 0;
+        *addressableData++ = 0;
         numBytes--;
     }
 }
