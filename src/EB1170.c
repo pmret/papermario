@@ -36,9 +36,8 @@ ApiStatus func_802406E0_EB1540(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "EB1170", func_8024077C_EB15DC);
+#include "world/common/SetManyVars.inc.c"
 
-//INCLUDE_ASM(s32, "EB1170", func_8024086C_EB16CC);
 #include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "EB1170", func_802409F8_EB1858);

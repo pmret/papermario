@@ -48,7 +48,7 @@ glabel func_80243470_EE1E30
 /* EE1ED8 80243518 0000202D */  daddu     $a0, $zero, $zero
 /* EE1EDC 8024351C AFA20010 */  sw        $v0, 0x10($sp)
 /* EE1EE0 80243520 8E670070 */  lw        $a3, 0x70($s3)
-/* EE1EE4 80243524 0C00ADA9 */  jal       func_8002B6A4
+/* EE1EE4 80243524 0C00ADA9 */  jal       dead_update_lerp
 /* EE1EE8 80243528 0000302D */   daddu    $a2, $zero, $zero
 /* EE1EEC 8024352C 24040295 */  addiu     $a0, $zero, 0x295
 /* EE1EF0 80243530 4600008D */  trunc.w.s $f2, $f0

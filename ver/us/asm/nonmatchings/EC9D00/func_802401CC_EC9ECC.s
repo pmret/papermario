@@ -17,7 +17,7 @@ glabel func_802401CC_EC9ECC
 /* EC9EFC 802401FC AFB1001C */  sw        $s1, 0x1c($sp)
 /* EC9F00 80240200 10A0004F */  beqz      $a1, .L80240340
 /* EC9F04 80240204 AFB00018 */   sw       $s0, 0x18($sp)
-/* EC9F08 80240208 0C00AFF5 */  jal       func_8002BFD4
+/* EC9F08 80240208 0C00AFF5 */  jal       dead_heap_malloc
 /* EC9F0C 8024020C 24040330 */   addiu    $a0, $zero, 0x330
 /* EC9F10 80240210 0040982D */  daddu     $s3, $v0, $zero
 /* EC9F14 80240214 0000B02D */  daddu     $s6, $zero, $zero

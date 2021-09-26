@@ -2318,6 +2318,62 @@ typedef struct unkPartnerStruct {
     /* 0x018 */ f32 unk_18;
 } unkPartnerStruct; // size = 0x1C
 
+typedef struct EffectStruct {
+    char unk_00[0x4];
+    f32 unk_04;
+    f32 unk_08;
+    f32 unk_0C;
+    f32 unk_10;
+    char unk_14[0x4];
+    s32 unk_18;
+    s32 unk_1C;
+    s32 unk_20;
+    X32 unk_24;
+    s32 unk_28;
+    s32 unk_2C;
+    s32 unk_30;
+    u8 unk_34;
+    s32 unk_38;
+    char unk_3C[0xC];
+    EffectUnkStruct1* unk_48;
+    char unk_4C[0x24];
+    s32 unk_70;
+    s32 unk_74;
+} EffectStruct;
+
+typedef struct StarSpiritEffectUnkStruct {
+    char unk_00[0xC];
+    EffectStruct* unk_0C;
+} StarSpiritEffectUnkStruct;
+
+typedef struct StarSpiritEffect {
+    /* 0x00 */ f32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ Shadow* unk_40;
+    /* 0x44 */ s16 unk_44;
+    /* 0x46 */ s16 unk_46;
+    /* 0x48 */ s16 unk_48;
+    /* 0x4A */ s16 unk_4A;
+    /* 0x4C */ s16 unk_4C;
+    /* 0x4E */ s16 unk_4E;
+    /* 0x50 */ struct StarSpiritEffectUnkStruct* unk_50;
+    /* 0x54 */ struct StarSpiritEffectUnkStruct* unk_54;
+} StarSpiritEffect; // size = 0x58
+
 typedef struct struct8015A578 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;

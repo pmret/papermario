@@ -11,7 +11,7 @@ glabel func_8024061C_EC77CC
 /* EC77E4 80240634 8E020000 */  lw        $v0, ($s0)
 /* EC77E8 80240638 14400010 */  bnez      $v0, .L8024067C
 /* EC77EC 8024063C 0080882D */   daddu    $s1, $a0, $zero
-/* EC77F0 80240640 0C00AFF5 */  jal       func_8002BFD4
+/* EC77F0 80240640 0C00AFF5 */  jal       dead_heap_malloc
 /* EC77F4 80240644 24040040 */   addiu    $a0, $zero, 0x40
 /* EC77F8 80240648 AE020000 */  sw        $v0, ($s0)
 /* EC77FC 8024064C 0000182D */  daddu     $v1, $zero, $zero

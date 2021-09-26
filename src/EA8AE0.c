@@ -1,29 +1,23 @@
 #include "dead.h"
 #include "common.h"
+#include "effects.h"
+
+// Copy of kzn_19?
 
 #define NAMESPACE EA8AE0
 
 extern s32 D_80248388[];
+extern s32 D_80248380;
 
 #include "world/common/DeadUnkTexturePanFunc.inc.c"
 
 #include "world/common/DeadUnkTexturePanFunc2.inc.c"
 
-INCLUDE_ASM(s32, "EA8AE0", func_8024030C_EA8DEC);
-
-INCLUDE_ASM(s32, "EA8AE0", func_80240358_EA8E38);
-
-INCLUDE_ASM(s32, "EA8AE0", func_802404B8_EA8F98);
+#include "world/common/StarSpiritEffectFunc.inc.c"
 
 static char* N(exit_str_0) = "kmr_23";
 static char* N(exit_str_1) = "kzn_18";
 static char* N(exit_str_2) = "kzn_20";
-
-INCLUDE_ASM(s32, "EA8AE0", func_802408C8_EA93A8);
-
-INCLUDE_ASM(s32, "EA8AE0", func_80240908_EA93E8);
-
-INCLUDE_ASM(s32, "EA8AE0", func_80240A14_EA94F4);
 
 INCLUDE_ASM(s32, "EA8AE0", func_80240B00_EA95E0);
 
@@ -37,7 +31,11 @@ INCLUDE_ASM(s32, "EA8AE0", func_80240E2C_EA990C);
 
 INCLUDE_ASM(s32, "EA8AE0", func_802413C0_EA9EA0);
 
-INCLUDE_ASM(s32, "EA8AE0", func_802413FC_EA9EDC);
+ApiStatus func_802413FC_EA9EDC(Evt* script, s32 isInitialCall) {
+    D_80248380 = 0;
+    return ApiStatus_DONE2;
+}
+
 
 INCLUDE_ASM(s32, "EA8AE0", func_8024140C_EA9EEC);
 
@@ -72,9 +70,8 @@ ApiStatus func_80241838_EAA318(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "EA8AE0", func_802418D4_EAA3B4);
+#include "world/common/SetManyVars.inc.c"
 
-//INCLUDE_ASM(s32, "EA8AE0", func_802419C4_EAA4A4);
 #include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241B50_EAA630);

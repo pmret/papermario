@@ -11,7 +11,7 @@ glabel func_80241468_EA9F48
 /* EA9F60 80241480 8E020000 */  lw        $v0, ($s0)
 /* EA9F64 80241484 14400010 */  bnez      $v0, .L802414C8
 /* EA9F68 80241488 0080882D */   daddu    $s1, $a0, $zero
-/* EA9F6C 8024148C 0C00AFF5 */  jal       func_8002BFD4
+/* EA9F6C 8024148C 0C00AFF5 */  jal       dead_heap_malloc
 /* EA9F70 80241490 24040040 */   addiu    $a0, $zero, 0x40
 /* EA9F74 80241494 AE020000 */  sw        $v0, ($s0)
 /* EA9F78 80241498 0000182D */  daddu     $v1, $zero, $zero

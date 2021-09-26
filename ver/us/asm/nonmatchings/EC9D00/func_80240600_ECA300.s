@@ -160,7 +160,7 @@ glabel func_80240600_ECA300
 /* ECA558 80240858 44050000 */  mfc1      $a1, $f0
 /* ECA55C 8024085C 8E470060 */  lw        $a3, 0x60($s2)
 /* ECA560 80240860 4485B000 */  mtc1      $a1, $f22
-/* ECA564 80240864 0C00ADA9 */  jal       func_8002B6A4
+/* ECA564 80240864 0C00ADA9 */  jal       dead_update_lerp
 /* ECA568 80240868 0240802D */   daddu    $s0, $s2, $zero
 /* ECA56C 8024086C 46000506 */  mov.s     $f20, $f0
 .L80240870:
@@ -282,7 +282,7 @@ glabel func_80240600_ECA300
 /* ECA71C 80240A1C AFB30010 */  sw        $s3, 0x10($sp)
 /* ECA720 80240A20 8E060038 */  lw        $a2, 0x38($s0)
 /* ECA724 80240A24 8E470064 */  lw        $a3, 0x64($s2)
-/* ECA728 80240A28 0C00ADA9 */  jal       func_8002B6A4
+/* ECA728 80240A28 0C00ADA9 */  jal       dead_update_lerp
 /* ECA72C 80240A2C 24040001 */   addiu    $a0, $zero, 1
 /* ECA730 80240A30 C6020014 */  lwc1      $f2, 0x14($s0)
 /* ECA734 80240A34 46001080 */  add.s     $f2, $f2, $f0
@@ -291,7 +291,7 @@ glabel func_80240600_ECA300
 /* ECA740 80240A40 AFB30010 */  sw        $s3, 0x10($sp)
 /* ECA744 80240A44 8E060044 */  lw        $a2, 0x44($s0)
 /* ECA748 80240A48 8E470064 */  lw        $a3, 0x64($s2)
-/* ECA74C 80240A4C 0C00ADA9 */  jal       func_8002B6A4
+/* ECA74C 80240A4C 0C00ADA9 */  jal       dead_update_lerp
 /* ECA750 80240A50 24040001 */   addiu    $a0, $zero, 1
 /* ECA754 80240A54 C6020020 */  lwc1      $f2, 0x20($s0)
 /* ECA758 80240A58 46001080 */  add.s     $f2, $f2, $f0
@@ -300,7 +300,7 @@ glabel func_80240600_ECA300
 /* ECA764 80240A64 AFB30010 */  sw        $s3, 0x10($sp)
 /* ECA768 80240A68 8E060050 */  lw        $a2, 0x50($s0)
 /* ECA76C 80240A6C 8E470064 */  lw        $a3, 0x64($s2)
-/* ECA770 80240A70 0C00ADA9 */  jal       func_8002B6A4
+/* ECA770 80240A70 0C00ADA9 */  jal       dead_update_lerp
 /* ECA774 80240A74 24040001 */   addiu    $a0, $zero, 1
 /* ECA778 80240A78 C602002C */  lwc1      $f2, 0x2c($s0)
 /* ECA77C 80240A7C 46001080 */  add.s     $f2, $f2, $f0

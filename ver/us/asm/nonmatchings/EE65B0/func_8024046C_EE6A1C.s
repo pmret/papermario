@@ -32,7 +32,7 @@ glabel func_8024046C_EE6A1C
 /* EE6A88 802404D8 00000000 */  nop
 /* EE6A8C 802404DC 46800020 */  cvt.s.w   $f0, $f0
 /* EE6A90 802404E0 AE220078 */  sw        $v0, 0x78($s1)
-/* EE6A94 802404E4 0C055C13 */  jal       func_8015704C
+/* EE6A94 802404E4 0C055C13 */  jal       dead_sfx_adjust_env_sound_pos
 /* EE6A98 802404E8 E7A00010 */   swc1     $f0, 0x10($sp)
 /* EE6A9C 802404EC 8FBF0020 */  lw        $ra, 0x20($sp)
 /* EE6AA0 802404F0 8FB1001C */  lw        $s1, 0x1c($sp)
