@@ -43,29 +43,29 @@ INCLUDE_ASM(s32, "20ec0_len_5040", set_status_icons_properties);
 
 INCLUDE_ASM(s32, "20ec0_len_5040", func_800477F4);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_80047820);
+INCLUDE_ASM(s32, "20ec0_len_5040", create_status_icon_debuff);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_debuff);
+INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_icon_debuff);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_1);
+INCLUDE_ASM(s32, "20ec0_len_5040", hide_status_icon_debuff);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_80047928);
+INCLUDE_ASM(s32, "20ec0_len_5040", create_status_icon_static);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_static);
+INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_icon_static);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_2);
+INCLUDE_ASM(s32, "20ec0_len_5040", hide_status_icon_static);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_80047A30);
+INCLUDE_ASM(s32, "20ec0_len_5040", create_status_icon_transparent);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_transparent);
+INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_icon_transparent);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_3);
+INCLUDE_ASM(s32, "20ec0_len_5040", hide_status_icon_transparent);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_80047B38);
+INCLUDE_ASM(s32, "20ec0_len_5040", create_status_icon_chillout);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_4);
+INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_icon_chillout);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_4);
+INCLUDE_ASM(s32, "20ec0_len_5040", hide_status_icon_chillout);
 
 INCLUDE_ASM(s32, "20ec0_len_5040", create_status_icon_boost_jump);
 

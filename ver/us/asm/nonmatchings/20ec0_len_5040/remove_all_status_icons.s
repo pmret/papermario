@@ -14,13 +14,13 @@ glabel remove_all_status_icons
 /* 22B18 80047718 8E310F44 */  lw        $s1, %lo(D_800A0F44)($s1)
 /* 22B1C 8004771C 00021100 */  sll       $v0, $v0, 4
 /* 22B20 80047720 AFBF0018 */  sw        $ra, 0x18($sp)
-/* 22B24 80047724 0C011E26 */  jal       remove_status_debuff
+/* 22B24 80047724 0C011E26 */  jal       remove_status_icon_debuff
 /* 22B28 80047728 02228821 */   addu     $s1, $s1, $v0
-/* 22B2C 8004772C 0C011E68 */  jal       remove_status_static
+/* 22B2C 8004772C 0C011E68 */  jal       remove_status_icon_static
 /* 22B30 80047730 0200202D */   daddu    $a0, $s0, $zero
-/* 22B34 80047734 0C011EAA */  jal       remove_status_transparent
+/* 22B34 80047734 0C011EAA */  jal       remove_status_icon_transparent
 /* 22B38 80047738 0200202D */   daddu    $a0, $s0, $zero
-/* 22B3C 8004773C 0C011EE1 */  jal       remove_status_4
+/* 22B3C 8004773C 0C011EE1 */  jal       remove_status_icon_chillout
 /* 22B40 80047740 0200202D */   daddu    $a0, $s0, $zero
 /* 22B44 80047744 0C011F29 */  jal       remove_status_icon_boost_jump
 /* 22B48 80047748 0200202D */   daddu    $a0, $s0, $zero

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80047B38
+glabel create_status_icon_chillout
 /* 22F38 80047B38 00041040 */  sll       $v0, $a0, 1
 /* 22F3C 80047B3C 00441021 */  addu      $v0, $v0, $a0
 /* 22F40 80047B40 00021080 */  sll       $v0, $v0, 2

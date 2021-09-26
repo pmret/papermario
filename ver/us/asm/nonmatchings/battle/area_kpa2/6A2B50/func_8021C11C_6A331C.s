@@ -8,7 +8,7 @@ glabel func_8021C11C_6A331C
 /* 6A3328 8021C128 8C840148 */   lw       $a0, 0x148($a0)
 /* 6A332C 8021C12C 84440436 */  lh        $a0, 0x436($v0)
 /* 6A3330 8021C130 A0400224 */  sb        $zero, 0x224($v0)
-/* 6A3334 8021C134 0C011EE1 */  jal       remove_status_4
+/* 6A3334 8021C134 0C011EE1 */  jal       remove_status_icon_chillout
 /* 6A3338 8021C138 A0400223 */   sb       $zero, 0x223($v0)
 /* 6A333C 8021C13C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 6A3340 8021C140 24020002 */  addiu     $v0, $zero, 2

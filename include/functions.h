@@ -79,7 +79,7 @@ void func_80258E14(void);
 f32 func_800E34D8(void);
 f32 player_check_collision_below(f32, s32* colliderID);
 s32 can_trigger_loading_zone(void);
-void func_802667F0(s32, Actor*, f32, f32, f32);
+void func_create_textPopup(s32, Actor*, f32, f32, f32);
 
 void* general_heap_malloc(s32 size);
 s32 general_heap_free(s32 size);

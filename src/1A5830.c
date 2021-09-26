@@ -334,7 +334,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                         damage--;
                         damage = damage - player_team_is_ability_active(target, ABILITY_DAMAGE_DODGE);
                         sfx_play_sound_at_position(0x231, 0, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
-                        func_802667F0(0, target, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
+                        func_create_textPopup(0, target, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
                         gBattleStatus.flags1 |= 0x80000000;
                     }
 
@@ -346,7 +346,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                     if (check_block_input(BUTTON_A)) {
                         damage = 0;
                         sfx_play_sound_at_position(0x231, 0, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
-                        func_802667F0(0, target, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
+                        func_create_textPopup(0, target, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
                         gBattleStatus.flags1 |= 0x80000000;
                     }
 
@@ -1846,19 +1846,19 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
     if (actor->debuff != STATUS_END) {
         actor->debuffDuration = 0;
         actor->debuff = STATUS_END;
-        remove_status_debuff(actor->hudElementDataIndex);
+        remove_status_icon_debuff(actor->hudElementDataIndex);
     }
 
     if (actor->staticStatus != 0) {
         actor->staticDuration = 0;
         actor->staticStatus = 0;
-        remove_status_static(actor->hudElementDataIndex);
+        remove_status_icon_static(actor->hudElementDataIndex);
     }
 
     if (actor->transStatus != 0) {
         actor->transDuration = 0;
         actor->transStatus = 0;
-        remove_status_transparent(actor->hudElementDataIndex);
+        remove_status_icon_transparent(actor->hudElementDataIndex);
     }
 
     if (actor->stoneStatus != 0) {

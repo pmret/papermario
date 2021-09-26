@@ -410,7 +410,7 @@ glabel func_80257DA4
 /* 186C3C 8025835C 24040008 */   addiu    $a0, $zero, 8
 /* 186C40 80258360 AEE20088 */  sw        $v0, 0x88($s7)
 /* 186C44 80258364 86C40436 */  lh        $a0, 0x436($s6)
-/* 186C48 80258368 0C011E08 */  jal       func_80047820
+/* 186C48 80258368 0C011E08 */  jal       create_status_icon_debuff
 /* 186C4C 8025836C 24050008 */   addiu    $a1, $zero, 8
 /* 186C50 80258370 08096272 */  j         .L802589C8
 /* 186C54 80258374 00000000 */   nop
@@ -536,16 +536,16 @@ glabel func_80257DA4
 /* 186DFC 8025851C 0C099BBA */  jal       func_80266EE8
 /* 186E00 80258520 0000282D */   daddu    $a1, $zero, $zero
 /* 186E04 80258524 86C40436 */  lh        $a0, 0x436($s6)
-/* 186E08 80258528 0C011E3E */  jal       enable_status_1
+/* 186E08 80258528 0C011E3E */  jal       hide_status_icon_debuff
 /* 186E0C 8025852C 24120001 */   addiu    $s2, $zero, 1
 /* 186E10 80258530 86C40436 */  lh        $a0, 0x436($s6)
-/* 186E14 80258534 0C011E80 */  jal       enable_status_2
+/* 186E14 80258534 0C011E80 */  jal       hide_status_icon_static
 /* 186E18 80258538 0240982D */   daddu    $s3, $s2, $zero
 /* 186E1C 8025853C 86C40436 */  lh        $a0, 0x436($s6)
-/* 186E20 80258540 0C011EC2 */  jal       enable_status_3
+/* 186E20 80258540 0C011EC2 */  jal       hide_status_icon_transparent
 /* 186E24 80258544 0240A82D */   daddu    $s5, $s2, $zero
 /* 186E28 80258548 86C40436 */  lh        $a0, 0x436($s6)
-/* 186E2C 8025854C 0C011EF9 */  jal       enable_status_4
+/* 186E2C 8025854C 0C011EF9 */  jal       hide_status_icon_chillout
 /* 186E30 80258550 00000000 */   nop
 .L80258554:
 /* 186E34 80258554 8EC20000 */  lw        $v0, ($s6)
@@ -780,7 +780,7 @@ glabel func_80257DA4
 /* 18715C 8025887C 24110001 */  addiu     $s1, $zero, 1
 .L80258880:
 /* 187160 80258880 86C40436 */  lh        $a0, 0x436($s6)
-/* 187164 80258884 0C011E8C */  jal       func_80047A30
+/* 187164 80258884 0C011E8C */  jal       create_status_icon_transparent
 /* 187168 80258888 2405000E */   addiu    $a1, $zero, 0xe
 .L8025888C:
 /* 18716C 8025888C 16200004 */  bnez      $s1, .L802588A0
@@ -815,7 +815,7 @@ glabel func_80257DA4
 /* 1871DC 802588FC 0040282D */   daddu    $a1, $v0, $zero
 /* 1871E0 80258900 86C40436 */  lh        $a0, 0x436($s6)
 .L80258904:
-/* 1871E4 80258904 0C011E08 */  jal       func_80047820
+/* 1871E4 80258904 0C011E08 */  jal       create_status_icon_debuff
 /* 1871E8 80258908 00000000 */   nop
 .L8025890C:
 /* 1871EC 8025890C 16A0000B */  bnez      $s5, .L8025893C
@@ -829,7 +829,7 @@ glabel func_80257DA4
 /* 18720C 8025892C 00000000 */   nop
 .L80258930:
 /* 187210 80258930 86C40436 */  lh        $a0, 0x436($s6)
-/* 187214 80258934 0C011E4A */  jal       func_80047928
+/* 187214 80258934 0C011E4A */  jal       create_status_icon_static
 /* 187218 80258938 2405000B */   addiu    $a1, $zero, 0xb
 .L8025893C:
 /* 18721C 8025893C 82C30218 */  lb        $v1, 0x218($s6)
@@ -842,18 +842,18 @@ glabel func_80257DA4
 /* 187238 80258958 00000000 */   nop
 .L8025895C:
 /* 18723C 8025895C 86C40436 */  lh        $a0, 0x436($s6)
-/* 187240 80258960 0C011E8C */  jal       func_80047A30
+/* 187240 80258960 0C011E8C */  jal       create_status_icon_transparent
 /* 187244 80258964 2405000E */   addiu    $a1, $zero, 0xe
 /* 187248 80258968 08096264 */  j         .L80258990
 /* 18724C 8025896C 00000000 */   nop
 .L80258970:
-/* 187250 80258970 0C011E3E */  jal       enable_status_1
+/* 187250 80258970 0C011E3E */  jal       hide_status_icon_debuff
 /* 187254 80258974 86C40436 */   lh       $a0, 0x436($s6)
-/* 187258 80258978 0C011E80 */  jal       enable_status_2
+/* 187258 80258978 0C011E80 */  jal       hide_status_icon_static
 /* 18725C 8025897C 86C40436 */   lh       $a0, 0x436($s6)
-/* 187260 80258980 0C011EC2 */  jal       enable_status_3
+/* 187260 80258980 0C011EC2 */  jal       hide_status_icon_transparent
 /* 187264 80258984 86C40436 */   lh       $a0, 0x436($s6)
-/* 187268 80258988 0C011EF9 */  jal       enable_status_4
+/* 187268 80258988 0C011EF9 */  jal       hide_status_icon_chillout
 /* 18726C 8025898C 86C40436 */   lh       $a0, 0x436($s6)
 .L80258990:
 /* 187270 80258990 82C30210 */  lb        $v1, 0x210($s6)

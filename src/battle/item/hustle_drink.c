@@ -9,12 +9,12 @@ ApiStatus N(func_802A123C_72619C)(Evt* script, s32 isInitialCall) {
     if (player->debuff != 0) {
         player->debuffDuration = 0;
         player->debuff = 0;
-        remove_status_debuff(player->hudElementDataIndex);
+        remove_status_icon_debuff(player->hudElementDataIndex);
     }
     if (player->staticStatus != 0) {
         player->staticDuration = 0;
         player->staticStatus = 0;
-        remove_status_static(player->hudElementDataIndex);
+        remove_status_icon_static(player->hudElementDataIndex);
     }
     if (player->stoneStatus != 0) {
         player->stoneDuration = 0;

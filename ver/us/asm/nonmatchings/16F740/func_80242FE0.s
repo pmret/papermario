@@ -133,7 +133,7 @@ glabel func_80242FE0
 /* 171A9C 802431BC 1C400009 */  bgtz      $v0, .L802431E4
 /* 171AA0 802431C0 00000000 */   nop
 /* 171AA4 802431C4 86040436 */  lh        $a0, 0x436($s0)
-/* 171AA8 802431C8 0C011E26 */  jal       remove_status_debuff
+/* 171AA8 802431C8 0C011E26 */  jal       remove_status_icon_debuff
 /* 171AAC 802431CC A2000210 */   sb       $zero, 0x210($s0)
 /* 171AB0 802431D0 0200202D */  daddu     $a0, $s0, $zero
 /* 171AB4 802431D4 0C09DC58 */  jal       dispatch_event_actor
@@ -151,7 +151,7 @@ glabel func_80242FE0
 /* 171AE0 80243200 1C400006 */  bgtz      $v0, .L8024321C
 /* 171AE4 80243204 00000000 */   nop
 /* 171AE8 80243208 86040436 */  lh        $a0, 0x436($s0)
-/* 171AEC 8024320C 0C011E68 */  jal       remove_status_static
+/* 171AEC 8024320C 0C011E68 */  jal       remove_status_icon_static
 /* 171AF0 80243210 A2000212 */   sb       $zero, 0x212($s0)
 /* 171AF4 80243214 3C01802A */  lui       $at, %hi(D_8029F258)
 /* 171AF8 80243218 AC33F258 */  sw        $s3, %lo(D_8029F258)($at)
@@ -166,7 +166,7 @@ glabel func_80242FE0
 /* 171B18 80243238 1C400006 */  bgtz      $v0, .L80243254
 /* 171B1C 8024323C 00000000 */   nop
 /* 171B20 80243240 86040436 */  lh        $a0, 0x436($s0)
-/* 171B24 80243244 0C011EAA */  jal       remove_status_transparent
+/* 171B24 80243244 0C011EAA */  jal       remove_status_icon_transparent
 /* 171B28 80243248 A2000218 */   sb       $zero, 0x218($s0)
 /* 171B2C 8024324C 3C01802A */  lui       $at, %hi(D_8029F258)
 /* 171B30 80243250 AC33F258 */  sw        $s3, %lo(D_8029F258)($at)

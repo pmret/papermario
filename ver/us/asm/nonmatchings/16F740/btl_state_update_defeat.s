@@ -58,7 +58,7 @@ glabel btl_state_update_defeat
 .L8024550C:
 /* 173DEC 8024550C 86040436 */  lh        $a0, 0x436($s0)
 /* 173DF0 80245510 A2000210 */  sb        $zero, 0x210($s0)
-/* 173DF4 80245514 0C011E26 */  jal       remove_status_debuff
+/* 173DF4 80245514 0C011E26 */  jal       remove_status_icon_debuff
 /* 173DF8 80245518 A2000211 */   sb       $zero, 0x211($s0)
 /* 173DFC 8024551C 8E020440 */  lw        $v0, 0x440($s0)
 /* 173E00 80245520 A2000216 */  sb        $zero, 0x216($s0)

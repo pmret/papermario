@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel enable_status_1
+glabel hide_status_icon_debuff
 /* 22CF8 800478F8 00041040 */  sll       $v0, $a0, 1
 /* 22CFC 800478FC 00441021 */  addu      $v0, $v0, $a0
 /* 22D00 80047900 00021080 */  sll       $v0, $v0, 2

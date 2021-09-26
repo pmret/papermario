@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80047820
+glabel create_status_icon_debuff
 /* 22C20 80047820 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 22C24 80047824 0080302D */  daddu     $a2, $a0, $zero
 /* 22C28 80047828 AFB10014 */  sw        $s1, 0x14($sp)
@@ -22,7 +22,7 @@ glabel func_80047820
 /* 22C64 80047864 00431024 */  and       $v0, $v0, $v1
 /* 22C68 80047868 10910006 */  beq       $a0, $s1, .L80047884
 /* 22C6C 8004786C AE020000 */   sw       $v0, ($s0)
-/* 22C70 80047870 0C011E26 */  jal       remove_status_debuff
+/* 22C70 80047870 0C011E26 */  jal       remove_status_icon_debuff
 /* 22C74 80047874 00C0202D */   daddu    $a0, $a2, $zero
 /* 22C78 80047878 24020001 */  addiu     $v0, $zero, 1
 /* 22C7C 8004787C A2110038 */  sb        $s1, 0x38($s0)

@@ -8,7 +8,7 @@ glabel func_80219414_6A0614
 /* 6A0620 80219420 8C840148 */   lw       $a0, 0x148($a0)
 /* 6A0624 80219424 84440436 */  lh        $a0, 0x436($v0)
 /* 6A0628 80219428 A0400224 */  sb        $zero, 0x224($v0)
-/* 6A062C 8021942C 0C011EE1 */  jal       remove_status_4
+/* 6A062C 8021942C 0C011EE1 */  jal       remove_status_icon_chillout
 /* 6A0630 80219430 A0400223 */   sb       $zero, 0x223($v0)
 /* 6A0634 80219434 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 6A0638 80219438 24020002 */  addiu     $v0, $zero, 2
