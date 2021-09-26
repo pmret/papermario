@@ -10,7 +10,7 @@
 extern s16 D_80169B12;
 
 typedef struct arg8024030C_EB543C {
-    /* 0x00 */ char unk_0[0xB];
+    /* 0x00 */ char unk_0[0xC];
     /* 0x0C */ Evt** unk_C;
 } arg8024030C_EB543C;
 
