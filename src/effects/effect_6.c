@@ -27,9 +27,9 @@ void fx_6_update(EffectInstance* effect);
 void fx_6_render(EffectInstance* effect);
 void fx_6_appendGfx(EffectInstance* effect);
 
-static s32 D_E000CC10[] = { 0x09002B20, 0x09002B40, 0x09002B60, 0x09002B60, 0x09002B60 };
+static s32 sDlists[] = { 0x09002B20, 0x09002B40, 0x09002B60, 0x09002B60, 0x09002B60 };
 
-static s32 D_E000CC24[] = { 0x09002780, 0x09002868, 0x09002950, 0x09002A38, 0x09002A38 };
+static s32 sDlists2[] = { 0x09002780, 0x09002868, 0x09002950, 0x09002A38, 0x09002A38 };
 
 static s8 D_E000CC38[] = { 0x00, 0x01, 0x02, 0x1A, 0x03, 0x1B, 0x04, 0x1C, 0x05, 0x15, 0x35, 0x46, 0x46, 0x46, 0xFF,
                            0x00 };
@@ -262,4 +262,89 @@ void fx_6_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-INCLUDE_ASM(s32, "effects/effect_6", fx_6_appendGfx);
+//INCLUDE_ASM(s32, "effects/effect_6", fx_6_appendGfx);
+void fx_6_appendGfx(EffectInstance* effect) {
+    Effect6* part = effect->data;
+    s32 type = part->type;
+    s32 temp_t0 = part->unk_40;
+    Matrix4f mtx1;
+    Matrix4f mtx2;
+    Matrix4f mtx3;
+    s32 spD8;
+    s32 spDC;
+    s32 temp_lo;
+    s32 envAlpha;
+    s32 dlist1;
+    s32 dlist2;
+    s32 phi_a0;
+    s32 temp;
+    s32 i;
+
+    envAlpha = (temp_t0 & 0x38) * 4;
+
+    dlist1 = sDlists[type];
+    dlist2 = sDlists2[type];
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->effect->data));
+    gSPDisplayList(gMasterGfxPos++, dlist2);
+
+    spD8 = temp_t0 & 7;
+    spDC = temp_t0 & 0x40;
+
+    shim_guTranslateF(mtx1, part->x, part->y, part->z);
+    shim_guRotateF(mtx2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(mtx2, mtx1, mtx3);
+    shim_guMtxF2L(mtx3, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++,
+              &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+
+    switch (type) {
+        case 0:
+        case 1:
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 230, 222, 222, 110);
+            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, envAlpha);
+            break;
+        case 2:
+        case 3:
+        case 4:
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 230, 222, 222, 130);
+            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, envAlpha);
+            break;
+    }
+
+    if (type == 0) {
+        phi_a0 = 24;
+    } else {
+        phi_a0 = 32;
+    }
+
+    temp_lo = spD8 * phi_a0;
+    temp = temp_lo + phi_a0;
+
+    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, temp_lo * 4, 0, temp * 4, phi_a0 * 4);
+
+    if (spDC) {
+        gDPSetTileSize(gMasterGfxPos++, 1, temp * 4, phi_a0 * 4, (temp_lo + (phi_a0 * 2)) * 4, phi_a0 * 8);
+    } else {
+        gDPSetTileSize(gMasterGfxPos++, 1, temp * 4, 0,          (temp_lo + (phi_a0 * 2)) * 4, phi_a0 * 4);
+    }
+
+    if (type == 2) {
+        gSPDisplayList(gMasterGfxPos++, dlist1);
+    }
+
+    part++;
+    for (i = 1; i < effect->numParts; i++, part++) {
+        shim_guTranslateF(mtx1, part->x, part->y, part->z);
+        shim_guMtxF2L(mtx1, &gDisplayContext->matrixStack[gMatrixListPos]);
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                  G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMasterGfxPos++, dlist1);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}
