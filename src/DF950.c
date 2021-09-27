@@ -278,7 +278,6 @@ void sfx_stop_env_sounds(void) {
 
     if (!gGameStatusPtr->isBattle) {
         D_80159AD0 = D_801598A0;
-        
     } else {
         D_80159AD0 = D_801599B8;
     }
