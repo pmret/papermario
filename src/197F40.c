@@ -2210,7 +2210,7 @@ ApiStatus SetActorType(Evt* script, s32 isInitialCall) {
     actorType = evt_get_variable(script, *args++);
     enemy = get_actor(actorID);
 
-    if (is_actor_hp_bar_visible(enemy) != 0) {
+    if (is_actor_hp_bar_visible(enemy)) {
         load_tattle_flags(actorType);
     }
 

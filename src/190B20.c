@@ -1201,18 +1201,18 @@ INCLUDE_ASM(s32, "190B20", func_80265CE8);
 INCLUDE_ASM(s32, "190B20", func_80265D44);
 
 s32 lookup_defense(DictionaryEntry* defenseTable, Element elementKey) {
-    DictionaryEntry* row;
     s32 normalDefense = 0;
 
-    for (row = defenseTable; row->key != ELEMENT_END; row++, defenseTable++) {
-        if (row->key == ELEMENT_NORMAL) {
+    while (defenseTable->key != ELEMENT_END) {
+        if (defenseTable->key == ELEMENT_NORMAL) {
             normalDefense = defenseTable->value;
         }
 
-        if (row->key == elementKey) {
+        if (defenseTable->key == elementKey) {
             normalDefense = defenseTable->value;
             break;
         }
+        defenseTable++;
     }
 
     // Fall back to normal defense if given element is not specified in table
@@ -1220,41 +1220,41 @@ s32 lookup_defense(DictionaryEntry* defenseTable, Element elementKey) {
 }
 
 s32 lookup_status_chance(DictionaryEntry* statusTable, Element statusKey) {
-    DictionaryEntry* row;
-    s32 normalChance = 0;
+    s32 defaultChance = 0;
 
-    for (row = statusTable; row->key != STATUS_END; row++, statusTable++) {
-        if (row->key == STATUS_DEFAULT) {
-            normalChance = statusTable->value;
+    while (statusTable->key != STATUS_END) {
+        if (statusTable->key == STATUS_DEFAULT) {
+            defaultChance = statusTable->value;
         }
 
-        if (row->key == statusKey) {
-            normalChance = statusTable->value;
+        if (statusTable->key == statusKey) {
+            defaultChance = statusTable->value;
             break;
         }
+        statusTable++;
     }
 
     // Fall back to normal chance if given element is not specified in table
-    return normalChance;
+    return defaultChance;
 }
 
 s32 lookup_status_duration_mod(DictionaryEntry* statusTable, Element statusKey) {
-    DictionaryEntry* row;
-    s32 normalDuration = 0;
+    s32 defaultTurnMod = 0;
 
-    for (row = statusTable; row->key != ELEMENT_END; row++, statusTable++) {
-        if (row->key == STATUS_DEFAULT_TURN_MOD) {
-            normalDuration = statusTable->value;
+    while (statusTable->key != ELEMENT_END) {
+        if (statusTable->key == STATUS_DEFAULT_TURN_MOD) {
+            defaultTurnMod = statusTable->value;
         }
 
-        if (row->key == statusKey) {
-            normalDuration = statusTable->value;
+        if (statusTable->key == statusKey) {
+            defaultTurnMod = statusTable->value;
             break;
         }
+        statusTable++;
     }
 
     // Fall back to normal duration if given element is not specified in table
-    return normalDuration;
+    return defaultTurnMod;
 }
 
 s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
@@ -1518,8 +1518,7 @@ s32 inflict_status_set_duration(Actor* actor, s32 statusTypeKey, s32 statusDurat
 
     if (statusDuration > 0) {
         return inflict_status(actor, statusTypeKey, statusDuration);
-    }
-    else {
+    } else {
         var0 = 0;
     }
 
