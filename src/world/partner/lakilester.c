@@ -1,7 +1,15 @@
 #include "common.h"
+#include "../partners.h"
 
 extern unkPartnerStruct* D_802BFE7C_3239CC;
+
 extern f64 D_802BFEF0;
+extern s32 D_802BFF00;
+extern s32 D_802BFF04;
+extern s32 D_802BFF08;
+extern s32 D_802BFF0C;
+
+s32 func_802BD7DC(void);
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD100_320C50);
 
@@ -9,16 +17,15 @@ INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD21C_320D6C);
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD29C_320DEC);
 
-s32 func_802BD2D4_320E24(Evt* evt, s32 arg1) {
+ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Entity* entity;
-    Npc* npc;
+    Npc* npc = script->owner2.npc;
     f32 sp10;
     f32 sp14;
     f32 tempY;
 
-    npc = evt->owner2.npc;
-    if (arg1 != 0) {
+    if (isInitialCall) {
         partner_flying_enable(npc, 1);
         mem_clear(D_802BFE7C_3239CC, sizeof(*D_802BFE7C_3239CC));
         D_8010C954 = 0;
@@ -29,7 +36,7 @@ s32 func_802BD2D4_320E24(Evt* evt, s32 arg1) {
     if (entity == NULL) {
         partner_flying_update_player_tracking(npc);
         partner_flying_update_motion(npc);
-        return 0;
+        return ApiStatus_BLOCK;
     }
 
     switch (D_802BFE7C_3239CC->unk_04) {
@@ -90,7 +97,7 @@ s32 func_802BD2D4_320E24(Evt* evt, s32 arg1) {
             }
             break;
     }
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD678_3211C8);
@@ -109,7 +116,134 @@ INCLUDE_ASM(s32, "world/partner/lakilester", func_802BE6A0_3221F0);
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BE724_322274);
 
-INCLUDE_ASM(s32, "world/partner/lakilester", func_802BF4F0_323040);
+ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    Camera* cam = &gCameras;
+    Npc* partner = script->owner2.npc;
+    f32 sp2C;
+    f32 sp28;
+    f32 sp24;
+    f32 sp20;
+    f32 yaw;
+    s32 phi_v1;
+
+    if (isInitialCall) {
+        D_802BFF00 = (D_802BFF0C == 0) ? 3 : 0;
+        partner_init_put_away(partner);
+        func_802BD7DC();
+        playerStatus->animFlags &= ~0x400000;
+        playerStatus->flags |= 0x100;
+    }
+
+    switch (D_802BFF00) {
+        case 0:
+            func_802BD7DC();
+            yaw = cam->currentYaw;
+            if ((playerStatus->spriteFacingAngle >= 90.0f) && (playerStatus->spriteFacingAngle < 270.0f)) {
+                partner->yaw = (yaw + 180.0f) - 90.0f;
+            } else {
+                partner->yaw = (yaw + 0.0f) - 90.0f;
+            }
+
+            sp2C = dist2D(playerStatus->position.x, playerStatus->position.z,
+                          partner->moveToPos.x, partner->moveToPos.z);
+            partner->duration = 14;
+
+            if (partner->moveToPos.y > partner->pos.y ) {
+                partner->jumpVelocity = (partner->moveToPos.y - partner->pos.y) / 14.0f + 6.0f;
+            } else {
+                partner->jumpVelocity = 6.0f;
+            }
+            partner->jumpScale = 1.2f;
+            partner->moveSpeed = sp2C / partner->duration;
+            partner->yaw = atan2(playerStatus->position.x, playerStatus->position.z,
+                                 partner->moveToPos.x, partner->moveToPos.z);
+            suggest_player_anim_clearUnkFlag(0x10006);
+            D_802BFF00++;
+            break;
+        case 1:
+            suggest_player_anim_clearUnkFlag(0x10007);
+            D_802BFF00++;
+        case 2:
+            playerStatus->position.y += partner->jumpVelocity;
+            partner->jumpVelocity -= partner->jumpScale;
+            add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z,
+                            partner->moveSpeed, partner->yaw);
+            func_800E4AD8(0);
+            if (partner->jumpVelocity <= 0.0f) {
+                playerStatus->flags |= 4;
+                if (partner->jumpVelocity < -10.0) {
+                    partner->jumpVelocity = -10.0f;
+                }
+            }
+            sp20 = playerStatus->position.x;
+            sp24 = playerStatus->position.y + playerStatus->colliderHeight;
+            sp28 = playerStatus->position.z;
+            sp2C = playerStatus->colliderHeight;
+            if (npc_raycast_down_ahead(0, &sp20, &sp24, &sp28, &sp2C,
+                                       partner->yaw, partner->collisionRadius)) {
+
+                D_802BFF00 = 3;
+                playerStatus->position.y = sp24;
+            }
+            break;
+    }
+
+    gCameras->targetPos.x = playerStatus->position.x;
+    gCameras->targetPos.y = playerStatus->position.y;
+    gCameras->targetPos.z = playerStatus->position.z;
+
+    switch (D_802BFF00) {
+        case 3:
+            partner->flags &= ~0x48;
+            if (D_802BFF08) {
+                D_802BFF08 = FALSE;
+                enable_player_static_collisions();
+            }
+            enable_player_shadow();
+            if (playerStatus->flags & 0x800) {
+                partnerActionStatus->actionState.b[3] = 0;
+                partnerActionStatus->actionState.b[0] = 0;
+                if (D_802BFF04) {
+                    D_802BFF04 = FALSE;
+                    enable_player_input();
+                }
+                gGameStatusPtr->unk_7D = 0;
+                D_802BFF0C = 0;
+                partner_clear_player_tracking(partner);
+                set_action_state(ACTION_STATE_HIT_FIRE);
+                return ApiStatus_DONE1;
+            }
+            if (D_802BFF0C == 0) {
+                phys_main_collision_below();
+            } else {
+                set_action_state(ACTION_STATE_FALLING);
+                gravity_use_fall_parms();
+            }
+            D_802BFF00++;
+            break;
+        case 4:
+            partnerActionStatus->actionState.b[3] = 0;
+            partnerActionStatus->actionState.b[0] = 0;
+            playerStatus->flags &= -0x101;
+            if (D_802BFF04) {
+                D_802BFF04 = FALSE;
+                enable_player_input();
+            }
+            gGameStatusPtr->unk_7D = 0;
+            D_802BFF0C = 0;
+            partner_clear_player_tracking(partner);
+            D_802BFF00++;
+            break;
+        case 5:
+            if (partner_put_away(partner) == FALSE) {
+                break;
+            }
+            return ApiStatus_DONE1;
+    }
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BFA00_323550);
 

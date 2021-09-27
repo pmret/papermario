@@ -35,6 +35,7 @@ s16 get_game_mode(void);
 s32 is_picking_up_item(void);
 
 f32 integrate_gravity(void);
+void gravity_use_fall_parms(void);
 f32 get_clamped_angle_diff(f32, f32);
 s32 intro_logos_fade_out(s16 addAlpha);
 
@@ -77,6 +78,7 @@ void func_80254C50(void);
 void func_80258E14(void);
 
 f32 func_800E34D8(void);
+void func_800E4AD8(s32 arg0);
 f32 player_check_collision_below(f32, s32* colliderID);
 s32 can_trigger_loading_zone(void);
 void func_802667F0(s32, Actor*, f32, f32, f32);
@@ -153,6 +155,7 @@ void phys_update_interact_collider(void);
 void phys_adjust_cam_on_landing(void);
 void phys_init_integrator_for_current_state(void);
 void phys_player_land(void);
+void phys_main_collision_below(void);
 
 void create_popup_menu(PopupMenu*);
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
@@ -334,6 +337,7 @@ s32 sfx_adjust_env_sound_pos(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4
 void sfx_play_sound(s32 soundID);
 s32 sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 void sfx_play_sound_at_player(s32 soundID, s32 arg0);
+void sfx_play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID);
 s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 void func_801497FC(s32 arg0);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
