@@ -296,12 +296,14 @@ extern BattleArea gBattleAreas[0x30];
 
 // TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
 
-typedef struct {
-    Element element;
-    s32 defense;
-} DefenseTableEntry;
+typedef struct DictionaryEntry {
+    /* 0x00 */ s32 key;
+    /* 0x04 */ s32 value;
+} DictionaryEntry; // size = 0x08
 
-typedef DefenseTableEntry DefenseTable[];
+typedef DictionaryEntry DefenseTable[];
+
+typedef DictionaryEntry StatusTable[];
 
 typedef struct ActorSounds {
     /* 0x00 */ SoundID walk[2];

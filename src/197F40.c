@@ -99,7 +99,13 @@ Actor* get_actor(ActorID actorID) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "197F40", LoadBattleSection);
+ApiStatus LoadBattleSection(Evt* script, s32 isInitialCall) {
+    BattleArea* battleArea = &gBattleAreas[evt_get_variable(script, *script->ptrReadPos)];
+
+    dma_copy(battleArea->dmaStart, battleArea->dmaEnd, battleArea->dmaDest);
+    return ApiStatus_DONE1;
+}
+
 
 ApiStatus GetBattlePhase(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.battlePhase);
@@ -2090,7 +2096,16 @@ ApiStatus InitTargetIterator(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", SetOwnerTarget);
+ApiStatus SetOwnerTarget(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor = get_actor(script->owner1.enemyID);
+    s16 actorID = evt_get_variable(script, *args++);
+
+    actor->targetPartIndex = evt_get_variable(script, *args++);
+    actor->targetActorID = actorID;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", ChooseNextTarget);
 
@@ -2156,7 +2171,14 @@ ApiStatus func_8026F60C(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "197F40", SetBattleVar);
 
-INCLUDE_ASM(s32, "197F40", GetBattleVar);
+ApiStatus GetBattleVar(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 varIdx = evt_get_variable(script, *args++);
+
+    evt_set_variable(script, *args++, gBattleStatus.varTable[varIdx]);
+    return ApiStatus_DONE2;
+}
+
 
 ApiStatus ResetAllActorSounds(Evt* script, s32 isInitialCall) {
     ActorID actorID = evt_get_variable(script, *script->ptrReadPos);
@@ -2175,7 +2197,27 @@ INCLUDE_ASM(s32, "197F40", ResetActorSounds);
 
 INCLUDE_ASM(s32, "197F40", SetPartSounds);
 
-INCLUDE_ASM(s32, "197F40", SetActorType);
+ApiStatus SetActorType(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID* actorID = evt_get_variable(script, *args++);
+    Actor* enemy;
+    s32 actorType;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.enemyID;
+    }
+
+    actorType = evt_get_variable(script, *args++);
+    enemy = get_actor(actorID);
+
+    if (is_actor_hp_bar_visible(enemy)) {
+        load_tattle_flags(actorType);
+    }
+
+    enemy->actorType = actorType;
+    return ApiStatus_DONE2;
+}
+
 
 ApiStatus ShowShockEffect(Evt* script, s32 isInitialCall) {
     ActorID actorID = evt_get_variable(script, *script->ptrReadPos);
@@ -2188,9 +2230,33 @@ ApiStatus ShowShockEffect(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", GetActorAttackBoost);
+ApiStatus GetActorAttackBoost(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 enemyID = evt_get_variable(script, *args++);
+    Bytecode attackBoost;
 
-INCLUDE_ASM(s32, "197F40", GetActorDefenseBoost);
+    if (enemyID == ACTOR_SELF) {
+        enemyID = script->owner1.enemyID;
+    }
+
+    attackBoost = *args++;
+    evt_set_variable(script, attackBoost, get_actor(enemyID)->attackBoost);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus GetActorDefenseBoost(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 enemyID = evt_get_variable(script, *args++);
+    Bytecode defenseBoost;
+
+    if (enemyID == ACTOR_SELF) {
+        enemyID = script->owner1.enemyID;
+    }
+
+    defenseBoost = *args++;
+    evt_set_variable(script, defenseBoost, get_actor(enemyID)->defenseBoost);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", BoostAttack);
 
@@ -2206,4 +2272,28 @@ ApiStatus WaitForBuffDone(Evt* script, s32 isInitialCall) {
     return (D_8029FBD4 == 0) * ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", CopyBuffs);
+ApiStatus CopyBuffs(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = evt_get_variable(script, *args++);
+    Actor* actorFrom;
+    Actor* actorTo;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.enemyID;
+    }
+    actorFrom = get_actor(actorID);
+
+    actorID = evt_get_variable(script, *args++);
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.enemyID;
+    }
+    actorTo = get_actor(actorID);
+
+    actorTo->isGlowing = actorFrom->isGlowing;
+    actorTo->attackBoost = actorFrom->attackBoost;
+    actorTo->defenseBoost = actorFrom->defenseBoost;
+    actorTo->chillOutAmount = actorFrom->chillOutAmount;
+    actorTo->chillOutTurns = actorFrom->chillOutTurns;
+
+    return ApiStatus_DONE2;
+}
