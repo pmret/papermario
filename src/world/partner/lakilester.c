@@ -129,12 +129,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     s32 phi_v1;
 
     if (isInitialCall) {
-        if (D_802BFF0C == 0) {
-            phi_v1 = 3;
-        } else {
-            phi_v1 = 0;
-        }
-        D_802BFF00 = phi_v1;
+        D_802BFF00 = (D_802BFF0C == 0) ? 3 : 0;
         partner_init_put_away(partner);
         func_802BD7DC();
         playerStatus->animFlags &= ~0x400000;
