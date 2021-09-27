@@ -1,6 +1,8 @@
 #include "common.h"
 #include "effects.h"
 
+void entity_Chest_open(Entity* entity);
+
 // size unknown
 typedef struct Chest {
     /* 0x00 */ u16 unk_00;
@@ -150,7 +152,7 @@ INCLUDE_ASM(s32, "entity/Chest", entity_GiantChest_hide_effect);
 
 void entity_GiantChest_open(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Chest* chest = entity->dataBuf;
+    Chest* chest = (Chest*)entity->dataBuf;
     f32 sp24;
     f32 sp20;
     f32 sp1C;
