@@ -192,7 +192,7 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
                 D_802BE0C4 = TRUE;
             }
 
-            D_802BE0C0 = 1;
+            D_802BE0C0 = TRUE;
             npc->flags &= ~0xA00;
             partnerActionStatus->actionState.b[0] = 1;
             partnerActionStatus->actionState.b[3] = 9;
