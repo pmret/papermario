@@ -335,7 +335,7 @@ void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 
 s32 sfx_adjust_env_sound_pos(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
 void sfx_play_sound(s32 soundID);
-s32 sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
+void sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 void sfx_play_sound_at_player(s32 soundID, s32 arg0);
 void sfx_play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID);
 s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
