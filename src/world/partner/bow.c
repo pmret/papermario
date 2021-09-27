@@ -17,8 +17,8 @@ void func_802BD100_323A50(Npc* partner) {
     partner->collisionHeight = 26;
     partner->collisionRadius = 24;
     partner->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-    D_802BE0C4 = 0;
-    D_802BE0C0 = 0;
+    D_802BE0C4 = FALSE;
+    D_802BE0C0 = FALSE;
 }
 
 ApiStatus func_802BD130_323A80(Evt* script, s32 isInitialCall) {
@@ -129,7 +129,7 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
                 if (playerStatus->animFlags & 0x200000) {
                     playerStatus->animFlags &= ~0x200000;
                     script->functionTemp[2] = disable_player_input();
-                    D_802BE0C4 = 1;
+                    D_802BE0C4 = TRUE;
                     script->functionTemp[0] = 20;
                 } else {
                     script->functionTemp[0] = 40;
@@ -150,25 +150,25 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
             playerStatus->flags |= 0x100;
             script->functionTemp[1] = 3;
             script->functionTemp[2] = disable_player_input();
-            D_802BE0C4 = 1;
+            D_802BE0C4 = TRUE;
             script->functionTemp[0]++;
             break;
         case 41:
             if ((func_800EA52C(9) == 0 || is_starting_conversation()) &&
                  script->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter
-                 && D_802BE0C4 != 0) {
+                 && D_802BE0C4) {
 
                 enable_player_input();
-                D_802BE0C4 = 0;
+                D_802BE0C4 = FALSE;
                 playerStatus->flags &= ~0x100;
                 return ApiStatus_DONE2;
             }
             script->functionTemp[1]--;
             if (script->functionTemp[1] == 0) {
                 if (script->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter) {
-                    if (D_802BE0C4 != 0) {
+                    if (D_802BE0C4) {
                         enable_player_input();
-                        D_802BE0C4 = 0;
+                        D_802BE0C4 = FALSE;
                     }
                     playerStatus->flags &= ~0x100;
                     return ApiStatus_DONE2;
@@ -182,14 +182,14 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
         case 20:
             if (playerStatus->flags & 0x800) {
                 playerStatus->flags &= ~0x100;
-                if (D_802BE0C4 != 0) {
+                if (D_802BE0C4) {
                     enable_player_input();
-                    D_802BE0C4 = 0;
+                    D_802BE0C4 = FALSE;
                 }
                 return ApiStatus_DONE2;
             }
             if (script->functionTemp[2] != 0) {
-                D_802BE0C4 = 1;
+                D_802BE0C4 = TRUE;
             }
 
             D_802BE0C0 = 1;
@@ -301,13 +301,13 @@ void func_802BDDF0_324740(Npc* partner) {
     partner->renderMode = 0x11;
     get_shadow_by_index(partner->shadowIndex)->unk_05 = playerStatus->alpha1 >> 1;
 
-    if (D_802BE0C4 != 0) {
+    if (D_802BE0C4) {
         enable_player_input();
     }
 
     playerStatus->flags &= ~0x8002;
     partner->flags &= ~0x42;
-    D_802BE0C4 = 0;
+    D_802BE0C4 = FALSE;
     actionState = ACTION_STATE_IDLE;
     if (playerStatus->flags & 0x800) {
         actionState = ACTION_STATE_HIT_LAVA;
@@ -318,7 +318,7 @@ void func_802BDDF0_324740(Npc* partner) {
     partnerActionStatus->actionState.b[3] = 0;
     playerStatus->flags &= ~0x100;
     partner_clear_player_tracking(partner);
-    D_802BE0C0 = 0;
+    D_802BE0C0 = FALSE;
 }
 
 ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
@@ -326,24 +326,28 @@ ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         partner_init_put_away(partner);
-        if (D_802BE0C0 != 0) {
+        if (D_802BE0C0) {
             sfx_play_sound_at_npc(SOUND_BOW_APPEAR, 0, -4);
         }
         func_802BDDF0_324740(partner);
     }
-    return partner_put_away(partner) != 0;
+    if (partner_put_away(partner)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 void func_802BDF64_3248B4(Npc* partner) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-    if (D_802BE0C0 != 0) {
+    if (D_802BE0C0) {
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(partner);
         partnerActionStatus->actionState.b[0] = 0;
         partnerActionStatus->actionState.b[3] = 0;
-        D_802BE0C0 = 0;
+        D_802BE0C0 = FALSE;
         partner->flags &= ~0x2;
     }
 }

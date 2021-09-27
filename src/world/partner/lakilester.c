@@ -129,9 +129,10 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     s32 phi_v1;
 
     if (isInitialCall) {
-        phi_v1 = 0;
         if (D_802BFF0C == 0) {
             phi_v1 = 3;
+        } else {
+            phi_v1 = 0;
         }
         D_802BFF00 = phi_v1;
         partner_init_put_away(partner);
@@ -201,16 +202,16 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     switch (D_802BFF00) {
         case 3:
             partner->flags &= ~0x48;
-            if (D_802BFF08 != 0) {
-                D_802BFF08 = 0;
+            if (D_802BFF08) {
+                D_802BFF08 = FALSE;
                 enable_player_static_collisions();
             }
             enable_player_shadow();
             if (playerStatus->flags & 0x800) {
                 partnerActionStatus->actionState.b[3] = 0;
                 partnerActionStatus->actionState.b[0] = 0;
-                if (D_802BFF04 != 0) {
-                    D_802BFF04 = 0;
+                if (D_802BFF04) {
+                    D_802BFF04 = FALSE;
                     enable_player_input();
                 }
                 gGameStatusPtr->unk_7D = 0;
@@ -231,8 +232,8 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
             partnerActionStatus->actionState.b[3] = 0;
             partnerActionStatus->actionState.b[0] = 0;
             playerStatus->flags &= -0x101;
-            if (D_802BFF04 != 0) {
-                D_802BFF04 = 0;
+            if (D_802BFF04) {
+                D_802BFF04 = FALSE;
                 enable_player_input();
             }
             gGameStatusPtr->unk_7D = 0;
