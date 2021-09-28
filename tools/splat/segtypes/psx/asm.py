@@ -5,7 +5,7 @@ from pathlib import Path
 from util import options
 
 
-class N64SegAsm(CommonSegAsm):
+class PsxSegAsm(CommonSegAsm):
     @staticmethod
     def get_file_header():
         ret = []
@@ -15,7 +15,6 @@ class N64SegAsm(CommonSegAsm):
         ret.append("# assembler directives")
         ret.append(".set noat      # allow manual use of $at")
         ret.append(".set noreorder # don't insert nops after branches")
-        ret.append(".set gp=64     # allow use of 64-bit general purpose registers")
         ret.append("")
         ret.append(".section .text, \"ax\"")
         ret.append("")

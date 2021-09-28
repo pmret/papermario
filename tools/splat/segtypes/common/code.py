@@ -1,11 +1,11 @@
-from segtypes.n64.group import N64SegGroup
+from segtypes.common.group import CommonSegGroup
 from typing import Optional
 from segtypes.segment import Segment
 from util import symbols
 from util.symbols import Symbol
 
 # code group
-class N64SegCode(N64SegGroup):
+class CommonSegCode(CommonSegGroup):
     def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml):
         super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
 
@@ -91,4 +91,3 @@ class N64SegCode(N64SegGroup):
                 ret.referenced = True
 
         return ret
-

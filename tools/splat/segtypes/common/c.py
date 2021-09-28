@@ -1,5 +1,5 @@
-from segtypes.n64.codesubsegment import N64SegCodeSubsegment
-from segtypes.n64.group import N64SegGroup
+from segtypes.common.codesubsegment import CommonSegCodeSubsegment
+from segtypes.common.group import CommonSegGroup
 from typing import Optional, Set
 import os
 import re
@@ -8,7 +8,7 @@ from pathlib import Path
 from util import log, options
 
 
-class N64SegC(N64SegCodeSubsegment):
+class CommonSegC(CommonSegCodeSubsegment):
     defined_funcs: Set[str] = set()
     global_asm_funcs: Set[str] = set()
 
@@ -35,20 +35,20 @@ class N64SegC(N64SegCodeSubsegment):
                 return " "
             else:
                 return s
-        return re.sub(N64SegC.STRIP_C_COMMENTS_RE, replacer, text)
+        return re.sub(CommonSegC.STRIP_C_COMMENTS_RE, replacer, text)
 
     @staticmethod
     def get_funcs_defined_in_c(c_file):
         with open(c_file, "r") as f:
-            text = N64SegC.strip_c_comments(f.read())
+            text = CommonSegC.strip_c_comments(f.read())
 
-        return set(m.group(2) for m in N64SegC.C_FUNC_RE.finditer(text))
+        return set(m.group(2) for m in CommonSegC.C_FUNC_RE.finditer(text))
 
     @staticmethod
     def get_global_asm_funcs(c_file):
         with open(c_file, "r") as f:
-            text = N64SegC.strip_c_comments(f.read())
-        return set(m.group(3) for m in N64SegC.C_GLOBAL_ASM_RE.finditer(text))
+            text = CommonSegC.strip_c_comments(f.read())
+        return set(m.group(3) for m in CommonSegC.C_GLOBAL_ASM_RE.finditer(text))
 
     def out_path(self) -> Optional[Path]:
         return options.get_src_path() / self.dir / f"{self.name}.c"
@@ -124,7 +124,7 @@ class N64SegC(N64SegCodeSubsegment):
         else:
             out_lines = []
 
-        if self.parent and isinstance(self.parent, N64SegGroup):
+        if self.parent and isinstance(self.parent, CommonSegGroup):
             if func in self.parent.rodata_syms:
                 func_rodata = list({s for s in self.parent.rodata_syms[func] if s.disasm_str})
                 func_rodata.sort(key=lambda s:s.vram_start)

@@ -3,17 +3,17 @@ from typing import List, Dict
 import sys
 from util.range import Range
 from util import log, options
-from segtypes.n64.segment import N64Segment
+from segtypes.common.segment import CommonSegment
 from segtypes.segment import RomAddr, Segment
 from util.symbols import Symbol
 
-class N64SegGroup(N64Segment):
+class CommonSegGroup(CommonSegment):
     def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml):
         super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
 
         self.rodata_syms: Dict[int, List[Symbol]] = {}
 
-        # TODO: move this to N64SegCode
+        # TODO: move this to CommonSegCode
         if isinstance(yaml, dict):
             # TODO Note: These start/end vram options don't really do anything yet
             data_vram = Range(yaml.get("data_vram_start"), yaml.get("data_vram_end"))
@@ -229,7 +229,7 @@ class N64SegGroup(N64Segment):
 
     def should_split(self) -> bool:
         return self.extract
-    
+
     def should_scan(self) -> bool:
         return self.extract
 
@@ -238,7 +238,7 @@ class N64SegGroup(N64Segment):
 
         for sub in self.subsegments:
             c.append(sub.cache())
-        
+
         return c
 
     def get_most_parent(self):

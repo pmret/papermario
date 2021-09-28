@@ -20,7 +20,7 @@ def clean_up_path(path: Path) -> Path:
         return path_resolved.relative_to(cwd)
     except ValueError:
         pass
-    
+
     # If it wasn't relative to that too, then just return the path as-is
     return path
 
@@ -44,7 +44,7 @@ def to_cname(symbol: str) -> str:
 
     if symbol[0] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
         symbol = "_" + symbol
-    
+
     return symbol
 
 def get_segment_cname(segment: Segment) -> str:
@@ -86,6 +86,7 @@ class LinkerWriter():
 
         self._write_symbol(f"{seg_name}_TEXT_START", ".")
 
+        force_new_section = False
         text_ended = False
         data_started = False
         data_ended = False
@@ -121,6 +122,18 @@ class LinkerWriter():
             elif not bss_started and "bss" in cur_section:
                 bss_started = True
                 self._write_symbol(f"{seg_name}_BSS_START", ".")
+
+            if options.get("enable_ld_alignment_hack", False):
+                start = entry.segment.rom_start
+                if isinstance(start, int):
+                    # Create new sections for non-subalign alignment (hack)
+                    if start % 0x10 != 0 and i != 0 or force_new_section:
+                        self._end_block()
+                        self._begin_segment(entry.segment, mid_segment=True)
+                        force_new_section = False
+
+                    if start % 0x10 != 0 and i != 0:
+                        force_new_section = True
 
             if entry.object_path and cur_section == ".data":
                 path_cname = re.sub(r"[^0-9a-zA-Z_]", "_", str(entry.segment.dir / entry.segment.name) + ".".join(entry.object_path.suffixes[:-1]))
@@ -206,7 +219,7 @@ class LinkerWriter():
         vram_str = f"0x{vram:X} " if isinstance(vram, int) else ""
 
         name = get_segment_cname(segment)
-        
+
         if mid_segment:
             name += to_cname(segment.type)
 
