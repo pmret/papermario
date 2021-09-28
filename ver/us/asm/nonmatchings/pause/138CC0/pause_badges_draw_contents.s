@@ -87,8 +87,8 @@ glabel pause_badges_draw_contents
 /* 13A96C 8024762C AFAA0060 */  sw        $t2, 0x60($sp)
 /* 13A970 80247630 0C03D4B8 */  jal       draw_box
 /* 13A974 80247634 AFAB005C */   sw       $t3, 0x5c($sp)
-/* 13A978 80247638 3C108027 */  lui       $s0, %hi(D_802703A8)
-/* 13A97C 8024763C 261003A8 */  addiu     $s0, $s0, %lo(D_802703A8)
+/* 13A978 80247638 3C108027 */  lui       $s0, %hi(gBadgeMenuIconIDs)
+/* 13A97C 8024763C 261003A8 */  addiu     $s0, $s0, %lo(gBadgeMenuIconIDs)
 /* 13A980 80247640 8FAA00C4 */  lw        $t2, 0xc4($sp)
 /* 13A984 80247644 8E040050 */  lw        $a0, 0x50($s0)
 /* 13A988 80247648 8FAB00C8 */  lw        $t3, 0xc8($sp)
@@ -284,8 +284,8 @@ glabel pause_badges_draw_contents
 /* 13AC5C 8024791C 3C0B8008 */  lui       $t3, %hi(gItemTable)
 /* 13AC60 80247920 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
 /* 13AC64 80247924 004B1021 */  addu      $v0, $v0, $t3
-/* 13AC68 80247928 3C0A8009 */  lui       $t2, %hi(D_8008F060)
-/* 13AC6C 8024792C 254AF060 */  addiu     $t2, $t2, %lo(D_8008F060)
+/* 13AC68 80247928 3C0A8009 */  lui       $t2, %hi(gMoveTable)
+/* 13AC6C 8024792C 254AF060 */  addiu     $t2, $t2, %lo(gMoveTable)
 /* 13AC70 80247930 9043001A */  lbu       $v1, 0x1a($v0)
 /* 13AC74 80247934 8FAB0084 */  lw        $t3, 0x84($sp)
 /* 13AC78 80247938 00031080 */  sll       $v0, $v1, 2
@@ -309,8 +309,8 @@ glabel pause_badges_draw_contents
 /* 13ACBC 8024797C 3C0B8008 */  lui       $t3, %hi(gItemTable)
 /* 13ACC0 80247980 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
 /* 13ACC4 80247984 004B1021 */  addu      $v0, $v0, $t3
-/* 13ACC8 80247988 3C0A8009 */  lui       $t2, %hi(D_8008F060)
-/* 13ACCC 8024798C 254AF060 */  addiu     $t2, $t2, %lo(D_8008F060)
+/* 13ACC8 80247988 3C0A8009 */  lui       $t2, %hi(gMoveTable)
+/* 13ACCC 8024798C 254AF060 */  addiu     $t2, $t2, %lo(gMoveTable)
 /* 13ACD0 80247990 9043001A */  lbu       $v1, 0x1a($v0)
 /* 13ACD4 80247994 8FAB006C */  lw        $t3, 0x6c($sp)
 /* 13ACD8 80247998 00031080 */  sll       $v0, $v1, 2
@@ -467,8 +467,8 @@ glabel pause_badges_draw_contents
 /* 13AF10 80247BD0 3C0B8008 */  lui       $t3, %hi(gItemTable)
 /* 13AF14 80247BD4 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
 /* 13AF18 80247BD8 006B1821 */  addu      $v1, $v1, $t3
-/* 13AF1C 80247BDC 3C0B8009 */  lui       $t3, %hi(D_8008F060)
-/* 13AF20 80247BE0 256BF060 */  addiu     $t3, $t3, %lo(D_8008F060)
+/* 13AF1C 80247BDC 3C0B8009 */  lui       $t3, %hi(gMoveTable)
+/* 13AF20 80247BE0 256BF060 */  addiu     $t3, $t3, %lo(gMoveTable)
 /* 13AF24 80247BE4 24070001 */  addiu     $a3, $zero, 1
 /* 13AF28 80247BE8 8FAA00C8 */  lw        $t2, 0xc8($sp)
 /* 13AF2C 80247BEC 9063001A */  lbu       $v1, 0x1a($v1)
@@ -493,8 +493,8 @@ glabel pause_badges_draw_contents
 /* 13AF70 80247C30 3C052000 */   lui      $a1, 0x2000
 /* 13AF74 80247C34 8FAA0058 */  lw        $t2, 0x58($sp)
 /* 13AF78 80247C38 000A1080 */  sll       $v0, $t2, 2
-/* 13AF7C 80247C3C 3C0B8027 */  lui       $t3, %hi(D_802703A8)
-/* 13AF80 80247C40 256B03A8 */  addiu     $t3, $t3, %lo(D_802703A8)
+/* 13AF7C 80247C3C 3C0B8027 */  lui       $t3, %hi(gBadgeMenuIconIDs)
+/* 13AF80 80247C40 256B03A8 */  addiu     $t3, $t3, %lo(gBadgeMenuIconIDs)
 /* 13AF84 80247C44 004B1021 */  addu      $v0, $v0, $t3
 /* 13AF88 80247C48 8C510000 */  lw        $s1, ($v0)
 /* 13AF8C 80247C4C 0C05128B */  jal       clear_hud_element_flags
@@ -607,8 +607,8 @@ glabel pause_badges_draw_contents
 /* 13B114 80247DD4 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
 /* 13B118 80247DD8 004B1021 */  addu      $v0, $v0, $t3
 /* 13B11C 80247DDC 9043001A */  lbu       $v1, 0x1a($v0)
-/* 13B120 80247DE0 3C0A8009 */  lui       $t2, %hi(D_8008F060)
-/* 13B124 80247DE4 254AF060 */  addiu     $t2, $t2, %lo(D_8008F060)
+/* 13B120 80247DE0 3C0A8009 */  lui       $t2, %hi(gMoveTable)
+/* 13B124 80247DE4 254AF060 */  addiu     $t2, $t2, %lo(gMoveTable)
 /* 13B128 80247DE8 00031080 */  sll       $v0, $v1, 2
 /* 13B12C 80247DEC 00431021 */  addu      $v0, $v0, $v1
 /* 13B130 80247DF0 00021080 */  sll       $v0, $v0, 2
@@ -957,8 +957,8 @@ glabel pause_badges_draw_contents
 /* 13B644 80248304 8E220000 */  lw        $v0, ($s1)
 /* 13B648 80248308 1840000E */  blez      $v0, .L80248344
 /* 13B64C 8024830C 24420001 */   addiu    $v0, $v0, 1
-/* 13B650 80248310 3C108027 */  lui       $s0, %hi(D_802703A8)
-/* 13B654 80248314 261003A8 */  addiu     $s0, $s0, %lo(D_802703A8)
+/* 13B650 80248310 3C108027 */  lui       $s0, %hi(gBadgeMenuIconIDs)
+/* 13B654 80248314 261003A8 */  addiu     $s0, $s0, %lo(gBadgeMenuIconIDs)
 /* 13B658 80248318 8FAB00C4 */  lw        $t3, 0xc4($sp)
 /* 13B65C 8024831C 8E040044 */  lw        $a0, 0x44($s0)
 /* 13B660 80248320 8FAA00C8 */  lw        $t2, 0xc8($sp)
@@ -979,8 +979,8 @@ glabel pause_badges_draw_contents
 /* 13B698 80248358 90420288 */  lbu       $v0, %lo(gBadgeMenuPages)($v0)
 /* 13B69C 8024835C 1040000C */  beqz      $v0, .L80248390
 /* 13B6A0 80248360 00000000 */   nop
-/* 13B6A4 80248364 3C108027 */  lui       $s0, %hi(D_802703A8)
-/* 13B6A8 80248368 261003A8 */  addiu     $s0, $s0, %lo(D_802703A8)
+/* 13B6A4 80248364 3C108027 */  lui       $s0, %hi(gBadgeMenuIconIDs)
+/* 13B6A8 80248368 261003A8 */  addiu     $s0, $s0, %lo(gBadgeMenuIconIDs)
 /* 13B6AC 8024836C 8FAB00C4 */  lw        $t3, 0xc4($sp)
 /* 13B6B0 80248370 8E040048 */  lw        $a0, 0x48($s0)
 /* 13B6B4 80248374 8FAA00C8 */  lw        $t2, 0xc8($sp)
@@ -991,8 +991,8 @@ glabel pause_badges_draw_contents
 /* 13B6C8 80248388 0C0511F8 */  jal       draw_hud_element_3
 /* 13B6CC 8024838C 00000000 */   nop
 .L80248390:
-/* 13B6D0 80248390 3C108027 */  lui       $s0, %hi(D_802703A8)
-/* 13B6D4 80248394 261003A8 */  addiu     $s0, $s0, %lo(D_802703A8)
+/* 13B6D0 80248390 3C108027 */  lui       $s0, %hi(gBadgeMenuIconIDs)
+/* 13B6D4 80248394 261003A8 */  addiu     $s0, $s0, %lo(gBadgeMenuIconIDs)
 /* 13B6D8 80248398 8FAB00C4 */  lw        $t3, 0xc4($sp)
 /* 13B6DC 8024839C 8E040040 */  lw        $a0, 0x40($s0)
 /* 13B6E0 802483A0 8FAA00C8 */  lw        $t2, 0xc8($sp)

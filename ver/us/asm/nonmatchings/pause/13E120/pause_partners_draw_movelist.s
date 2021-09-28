@@ -69,8 +69,8 @@ glabel pause_partners_draw_movelist
 /* 13F168 8024BE28 00021080 */  sll       $v0, $v0, 2
 /* 13F16C 8024BE2C 00481021 */  addu      $v0, $v0, $t0
 /* 13F170 8024BE30 8C430000 */  lw        $v1, ($v0)
-/* 13F174 8024BE34 3C088009 */  lui       $t0, %hi(D_8008F060)
-/* 13F178 8024BE38 2508F060 */  addiu     $t0, $t0, %lo(D_8008F060)
+/* 13F174 8024BE34 3C088009 */  lui       $t0, %hi(gMoveTable)
+/* 13F178 8024BE38 2508F060 */  addiu     $t0, $t0, %lo(gMoveTable)
 /* 13F17C 8024BE3C 08092FA1 */  j         .L8024BE84
 /* 13F180 8024BE40 00031080 */   sll      $v0, $v1, 2
 .L8024BE44:
@@ -86,8 +86,8 @@ glabel pause_partners_draw_movelist
 /* 13F1A8 8024BE68 00021080 */  sll       $v0, $v0, 2
 /* 13F1AC 8024BE6C 00481021 */  addu      $v0, $v0, $t0
 /* 13F1B0 8024BE70 8C430000 */  lw        $v1, ($v0)
-/* 13F1B4 8024BE74 3C088009 */  lui       $t0, %hi(D_8008F060)
-/* 13F1B8 8024BE78 2508F060 */  addiu     $t0, $t0, %lo(D_8008F060)
+/* 13F1B4 8024BE74 3C088009 */  lui       $t0, %hi(gMoveTable)
+/* 13F1B8 8024BE78 2508F060 */  addiu     $t0, $t0, %lo(gMoveTable)
 /* 13F1BC 8024BE7C 00731821 */  addu      $v1, $v1, $s3
 /* 13F1C0 8024BE80 00031080 */  sll       $v0, $v1, 2
 .L8024BE84:
@@ -109,8 +109,8 @@ glabel pause_partners_draw_movelist
 /* 13F200 8024BEC0 00021080 */  sll       $v0, $v0, 2
 /* 13F204 8024BEC4 00481021 */  addu      $v0, $v0, $t0
 /* 13F208 8024BEC8 8C430000 */  lw        $v1, ($v0)
-/* 13F20C 8024BECC 3C088009 */  lui       $t0, %hi(D_8008F060)
-/* 13F210 8024BED0 2508F060 */  addiu     $t0, $t0, %lo(D_8008F060)
+/* 13F20C 8024BECC 3C088009 */  lui       $t0, %hi(gMoveTable)
+/* 13F210 8024BED0 2508F060 */  addiu     $t0, $t0, %lo(gMoveTable)
 /* 13F214 8024BED4 00731821 */  addu      $v1, $v1, $s3
 /* 13F218 8024BED8 00031080 */  sll       $v0, $v1, 2
 /* 13F21C 8024BEDC 00431021 */  addu      $v0, $v0, $v1

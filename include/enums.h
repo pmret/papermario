@@ -497,6 +497,8 @@ enum Easings {
 typedef UNK_TYPE SoundID;
 enum SoundIDs {
     SOUND_UNKNOWN_0,
+    SOUND_MENU_BADGE_EQUIP          = 5,
+    SOUND_MENU_BADGE_UNEQUIP        = 6,
     SOUND_UNKNOWN_D                 = 13,
     SOUND_UNKNOWN_E                 = 14,
     SOUND_UNKNOWN_43                = 67,
@@ -544,6 +546,7 @@ enum SoundIDs {
     SOUND_CREAKY_DOOR_CLOSE,
     SOUND_METAL_GATE_OPEN,
     SOUND_METAL_GATE_CLOSE,
+    SOUND_MENU_BADGE_ERROR          = 541,
     SOUND_UNKNOWN_246               = 582,
     SOUND_UNKNOWN_259               = 601,
     SOUND_UNKNOWN_25A,
@@ -998,6 +1001,13 @@ enum ItemIDs {
     ITEM_BOOTS3_ICON,
     ITEM_ITEMS_ICON,
 };
+
+#define ITEM_FIRST_KEY_ITEM ITEM_LUCKY_STAR
+#define ITEM_LAST_KEY_ITEM ITEM_PRISON_KEY4
+#define ITEM_FIRST_NORMAL_ITEM ITEM_FIRE_FLOWER
+#define ITEM_LAST_NORMAL_ITEM ITEM_JELLY_SHROOM6
+#define ITEM_FIRST_BADGE ITEM_SPIN_SMASH
+#define ITEM_LAST_BADGE ITEM_ATTACK_F_X_F5
 
 // TODO: use NPC_ANIM-like macro for player animations
 typedef UNK_TYPE PlayerAnim;
@@ -1462,6 +1472,10 @@ enum Buttons {
     BUTTON_Z            = 0x00002000,
     BUTTON_B            = 0x00004000,
     BUTTON_A            = 0x00008000,
+    BUTTON_STICK_UP     = 0x00010000,
+    BUTTON_STICK_DOWN   = 0x00020000,
+    BUTTON_STICK_LEFT   = 0x00040000,
+    BUTTON_STICK_RIGHT  = 0x00080000,
 };
 
 typedef UNK_TYPE PlayerBuff;
@@ -1744,6 +1758,11 @@ enum EffectGfxDataFlags {
     FX_GRAPHICS_DISABLED = 0,
     FX_GRAPHICS_ENABLED = 1,
     FX_GRAPHICS_2 = 2,
+};
+
+enum MoveIDs {
+    MOVE_NONE,
+    MOVE_UNK_184 = 184,
 };
 
 #endif

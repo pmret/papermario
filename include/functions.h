@@ -243,6 +243,8 @@ PlayerData* get_player_data(void);
 // Pause
 s32 pause_interp_vertical_scroll(s32 deltaBefore);
 void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
+s32 pause_get_total_equipped_bp_cost(void);
+s32 pause_get_menu_msg(s32 index);
 
 s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
@@ -512,5 +514,7 @@ void partner_disable_input(void);
 void func_80268798(s32, s32, s32, s32);
 void func_802687E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void sfx_stop_sound(SongID soundID);
+
+void enforce_hpfp_limits(void);
 
 #endif
