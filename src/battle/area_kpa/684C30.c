@@ -16,4 +16,4 @@
 #include "common/StartRumbleWithParams.inc.c"
 #define NAMESPACE b_area_kpa
 
-INCLUDE_ASM(s32, "battle/area_kpa/684C30", func_80218638_685068);
+#include "world/common/UnkFunc52.inc.c"

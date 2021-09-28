@@ -16,4 +16,6 @@
 #include "common/StartRumbleWithParams.inc.c"
 #define NAMESPACE b_area_flo
 
-INCLUDE_ASM(s32, "battle/area_flo/5B1D80", func_80218B78_5B2028);
+#define NAMESPACE dup_b_area_flo
+#include "world/common/UnkFunc52.inc.c"
+#define NAMESPACE b_area_flo

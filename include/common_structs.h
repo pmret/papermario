@@ -2126,7 +2126,9 @@ typedef struct Temp8025D160_2 {
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ char unk_24[8];
     /* 0x2C */ s32 unk_2C;
-} Temp8025D160_2; // size = 0x30 (?)
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ f32 unk_34;
+} Temp8025D160_2; // size = 0x38 (?)
 
 typedef struct EntityModel {
     /* 0x00 */ s32 flags;

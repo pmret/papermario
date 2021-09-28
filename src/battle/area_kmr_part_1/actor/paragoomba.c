@@ -127,7 +127,7 @@ ActorPartDesc N(partsTable_8021CC70)[] = {
 
 ActorDesc NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
-    .type = ACTOR_TYPE_paragoomba,
+    .type = ACTOR_TYPE_PARAGOOMBA,
     .level = 6,
     .maxHP = 2,
     .partCount = ARRAY_COUNT(N(partsTable_8021CC70)),
@@ -541,7 +541,7 @@ EvtSource N(8021DF64) = SCRIPT({
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle);
     SetActorFlagBits(ACTOR_SELF, 512, 0);
     SetStatusTable(ACTOR_SELF, N(statusTable_8021CB18));
-    SetActorType(ACTOR_SELF, ACTOR_TYPE_goomba);
+    SetActorType(ACTOR_SELF, ACTOR_TYPE_GOOMBA);
     await N(8021E584);
     SetActorFlagBits(ACTOR_SELF, 4096, 1);
     HPBarToHome(ACTOR_SELF);

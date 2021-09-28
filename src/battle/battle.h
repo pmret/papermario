@@ -3,199 +3,227 @@
 
 #include "common.h"
 
-#define ACTOR_TYPE_red_goomba 0x00
-#define ACTOR_TYPE_red_paragoomba 0x01
-#define ACTOR_TYPE_gloomba 0x02
-#define ACTOR_TYPE_paragloomba 0x03
-#define ACTOR_TYPE_spiked_gloomba 0x04
-#define ACTOR_TYPE_dark_koopa 0x05
-#define ACTOR_TYPE_dark_paratroopa 0x06
-#define ACTOR_TYPE_goomba 0x07
-#define ACTOR_TYPE_paragoomba 0x08
-#define ACTOR_TYPE_spiked_goomba 0x09
-#define ACTOR_TYPE_fuzzy 0x0A
-#define ACTOR_TYPE_koopa_troopa 0x0B
-#define ACTOR_TYPE_paratroopa 0x0C
-#define ACTOR_TYPE_bob_omb 0x0D
-#define ACTOR_TYPE_bob_omb_dup 0x0E
-#define ACTOR_TYPE_bullet_bill 0x0F
-#define ACTOR_TYPE_bill_blaster 0x10
-#define ACTOR_TYPE_cleft 0x11
-#define ACTOR_TYPE_monty_mole 0x12
-#define ACTOR_TYPE_bandit 0x13
-#define ACTOR_TYPE_pokey 0x14
-#define ACTOR_TYPE_pokey_mummy 0x15
-#define ACTOR_TYPE_swooper 0x16
-#define ACTOR_TYPE_buzzy_beetle 0x17
-#define ACTOR_TYPE_stone_chomp 0x18
-#define ACTOR_TYPE_piranha_plant 0x19
-#define ACTOR_TYPE_forest_fuzzy 0x1A
-#define ACTOR_TYPE_hyper_goomba 0x1B
-#define ACTOR_TYPE_hyper_paragoomba 0x1C
-#define ACTOR_TYPE_hyper_cleft 0x1D
-#define ACTOR_TYPE_clubba 0x1E
-#define ACTOR_TYPE_shy_guy 0x1F
-#define ACTOR_TYPE_groove_guy 0x20
-#define ACTOR_TYPE_sky_guy 0x21
-#define ACTOR_TYPE_medi_guy 0x22
-#define ACTOR_TYPE_pyro_guy 0x23
-#define ACTOR_TYPE_spy_guy 0x24
-#define ACTOR_TYPE_fuzzipede 0x25
-#define ACTOR_TYPE_hurt_plant 0x26
-#define ACTOR_TYPE_m_bush 0x27
-#define ACTOR_TYPE_aqua_fuzzy 0x28
-#define ACTOR_TYPE_jungle_fuzzy 0x29
-#define ACTOR_TYPE_spear_guy 0x2A
-#define ACTOR_TYPE_lava_bubble 0x2B
-#define ACTOR_TYPE_spike_top 0x2C
-#define ACTOR_TYPE_putrid_piranha 0x2D
-#define ACTOR_TYPE_lakitu 0x2E
-#define ACTOR_TYPE_spiny 0x2F
-#define ACTOR_TYPE_monty_mole_boss 0x30
-#define ACTOR_TYPE_bzzap 0x31
-#define ACTOR_TYPE_crazee_dayzee 0x32
-#define ACTOR_TYPE_amazy_dayzee 0x33
-#define ACTOR_TYPE_ruff_puff 0x34
-#define ACTOR_TYPE_spike 0x35
-#define ACTOR_TYPE_gulpit 0x36
-#define ACTOR_TYPE_gulpit_rocks 0x37
-#define ACTOR_TYPE_white_clubba 0x38
-#define ACTOR_TYPE_frost_piranha 0x39
-#define ACTOR_TYPE_swoopula 0x3A
-#define ACTOR_TYPE_duplighost 0x3B
-#define ACTOR_TYPE_ghost_goombario 0x3C
-#define ACTOR_TYPE_ghost_kooper 0x3D
-#define ACTOR_TYPE_ghost_bombette 0x3E
-#define ACTOR_TYPE_ghost_parakarry 0x3F
-#define ACTOR_TYPE_ghost_bow 0x40
-#define ACTOR_TYPE_ghost_watt 0x41
-#define ACTOR_TYPE_ghost_sushie 0x42
-#define ACTOR_TYPE_ghost_lakilester 0x43
-#define ACTOR_TYPE_albino_dino 0x44
-#define ACTOR_TYPE_ember 0x45
-#define ACTOR_TYPE_bony_beetle 0x46
-#define ACTOR_TYPE_dry_bones 0x47
-#define ACTOR_TYPE_dry_bones2 0x48
-#define ACTOR_TYPE_bombshell_blaster 0x49
-#define ACTOR_TYPE_bombshell_bill 0x4A
-#define ACTOR_TYPE_hammer_bros 0x4B
-#define ACTOR_TYPE_koopatrol 0x4C
-#define ACTOR_TYPE_magikoopa 0x4D
-#define ACTOR_TYPE_flying_magikoopa 0x4E
-#define ACTOR_TYPE_magiclone 0x4F
-#define ACTOR_TYPE_flying_magiclone 0x50
-#define ACTOR_TYPE_red_magikoopa 0x51
-#define ACTOR_TYPE_flying_red_magikoopa 0x52
-#define ACTOR_TYPE_green_magikoopa 0x53
-#define ACTOR_TYPE_flying_green_magikoopa 0x54
-#define ACTOR_TYPE_yellow_magikoopa 0x55
-#define ACTOR_TYPE_flying_yellow_magikoopa 0x56
-#define ACTOR_TYPE_gray_magikoopa 0x57
-#define ACTOR_TYPE_flying_gray_magikoopa 0x58
-#define ACTOR_TYPE_white_magikoopa 0x59
-#define ACTOR_TYPE_flying_white_magikoopa 0x5A
-#define ACTOR_TYPE_monty_hole 0x6B
-#define ACTOR_TYPE_player 0x6E
-#define ACTOR_TYPE_goombario 0x6F
-#define ACTOR_TYPE_kooper 0x70
-#define ACTOR_TYPE_bombette 0x71
-#define ACTOR_TYPE_parakarry 0x72
-#define ACTOR_TYPE_bow 0x73
-#define ACTOR_TYPE_watt 0x74
-#define ACTOR_TYPE_sushie 0x75
-#define ACTOR_TYPE_lakilester 0x76
-#define ACTOR_TYPE_twink 0x77
-#define ACTOR_TYPE_the_master_1 0x7A
-#define ACTOR_TYPE_the_master_2 0x7B
-#define ACTOR_TYPE_the_master_3 0x7C
-#define ACTOR_TYPE_chan 0x7D
-#define ACTOR_TYPE_lee 0x7E
-#define ACTOR_TYPE_lee_goombario 0x7F
-#define ACTOR_TYPE_lee_kooper 0x80
-#define ACTOR_TYPE_lee_bombette 0x81
-#define ACTOR_TYPE_lee_parakarry 0x82
-#define ACTOR_TYPE_lee_bow 0x83
-#define ACTOR_TYPE_lee_watt 0x84
-#define ACTOR_TYPE_lee_sushie 0x85
-#define ACTOR_TYPE_lee_lakilester 0x86
-#define ACTOR_TYPE_kammy_koopa 0x87
-#define ACTOR_TYPE_jr_troopa1 0x88
-#define ACTOR_TYPE_jr_troopa2 0x89
-#define ACTOR_TYPE_jr_troopa3 0x8A
-#define ACTOR_TYPE_jr_troopa4 0x8B
-#define ACTOR_TYPE_jr_troopa5 0x8C
-#define ACTOR_TYPE_jr_troopa6 0x8D
-#define ACTOR_TYPE_jr_troopa_dup1 0x8E
-#define ACTOR_TYPE_jr_troopa_dup2 0x8F
-#define ACTOR_TYPE_blue_goomba_boss 0x90
-#define ACTOR_TYPE_red_goomba_boss 0x91
-#define ACTOR_TYPE_goomba_king 0x92
-#define ACTOR_TYPE_goomnut_tree 0x93
-#define ACTOR_TYPE_goombario_tutor1 0x94
-#define ACTOR_TYPE_magikoopa_boss 0x95
-#define ACTOR_TYPE_flying_magikoopa_boss 0x96
-#define ACTOR_TYPE_magikoopa_dup1 0x97
-#define ACTOR_TYPE_magikoopa_dup2 0x98
-#define ACTOR_TYPE_fake_bowser 0x99
-#define ACTOR_TYPE_koopa_bros 0x9A
-#define ACTOR_TYPE_green_ninjakoopa 0x9B
-#define ACTOR_TYPE_red_ninjakoopa 0x9C
-#define ACTOR_TYPE_blue_ninjakoopa 0x9D
-#define ACTOR_TYPE_yellow_ninjakoopa 0x9E
-#define ACTOR_TYPE_goombario_tutor2 0x9F
-#define ACTOR_TYPE_buzzar 0xA0
-#define ACTOR_TYPE_tutankoopa 0xA1
-#define ACTOR_TYPE_chomp 0xA2
-#define ACTOR_TYPE_tubba_blubba_invincible 0xA3
-#define ACTOR_TYPE_tubba_blubba 0xA4
-#define ACTOR_TYPE_tubba_heart 0xA5
-#define ACTOR_TYPE_stilt_guy 0xA6
-#define ACTOR_TYPE_shy_stack 0xA7
-#define ACTOR_TYPE_shy_squad 0xA8
-#define ACTOR_TYPE_general_guy 0xA9
-#define ACTOR_TYPE_toy_tank 0xAA
-#define ACTOR_TYPE_light_bulb 0xAB
-#define ACTOR_TYPE_signal_guy 0xAC
-#define ACTOR_TYPE_shy_squad_dup 0xAD
-#define ACTOR_TYPE_shy_guy_dup 0xAE
-#define ACTOR_TYPE_anti_guy 0xAF
-#define ACTOR_TYPE_anti_guy_dup 0xB0
-#define ACTOR_TYPE_big_lantern_ghost 0xB1
-#define ACTOR_TYPE_goomba_king_dup 0xB2
-#define ACTOR_TYPE_lava_piranha_phase_1 0xB3
-#define ACTOR_TYPE_lava_piranha_phase_2 0xB4
-#define ACTOR_TYPE_lava_bud_phase_1 0xB5
-#define ACTOR_TYPE_lava_bud_phase_2 0xB6
-#define ACTOR_TYPE_petit_piranha 0xB7
-#define ACTOR_TYPE_petit_piranha_bomb 0xB8
-#define ACTOR_TYPE_kent_c_koopa 0xB9
-#define ACTOR_TYPE_huff_n_puff 0xBA
-#define ACTOR_TYPE_tuff_puff 0xBB
-#define ACTOR_TYPE_monstar 0xBC
-#define ACTOR_TYPE_crystal_king 0xBD
-#define ACTOR_TYPE_crystal_clone 0xBE
-#define ACTOR_TYPE_crystal_bit 0xBF
-#define ACTOR_TYPE_intro_bowser 0xC0
-#define ACTOR_TYPE_bowser_phase_1 0xC1
-#define ACTOR_TYPE_bowser_dup1 0xC2
-#define ACTOR_TYPE_bowser_phase_2 0xC3
-#define ACTOR_TYPE_bowser_dup2 0xC4
-#define ACTOR_TYPE_bowser_phase_3 0xC5
-#define ACTOR_TYPE_bowser_dup3 0xC6
-#define ACTOR_TYPE_blooper 0xC7
-#define ACTOR_TYPE_electro_blooper1 0xC8
-#define ACTOR_TYPE_electro_blooper2 0xC9
-#define ACTOR_TYPE_super_blooper1 0xCA
-#define ACTOR_TYPE_super_blooper2 0xCB
-#define ACTOR_TYPE_blooper_baby 0xCC
-#define ACTOR_TYPE_lakilester_dup 0xCD
-#define ACTOR_TYPE_slot_machine_start 0xCE
-#define ACTOR_TYPE_slot_machine_stop 0xCF
-#define ACTOR_TYPE_whacka 0xD0
-#define ACTOR_TYPE_slot_machine_start_dup1 0xD1
-#define ACTOR_TYPE_slot_machine_start_dup2 0xD2
-#define ACTOR_TYPE_slot_machine_start_dup3 0xD3
-#define ACTOR_TYPE_COUNT 0xD4
+typedef enum ActorType {
+    ACTOR_TYPE_RED_GOOMBA = 0x00,
+    ACTOR_TYPE_RED_PARAGOOMBA = 0x01,
+    ACTOR_TYPE_GLOOMBA = 0x02,
+    ACTOR_TYPE_PARAGLOOMBA = 0x03,
+    ACTOR_TYPE_SPIKED_GLOOMBA = 0x04,
+    ACTOR_TYPE_DARK_KOOPA = 0x05,
+    ACTOR_TYPE_DARK_PARATROOPA = 0x06,
+    ACTOR_TYPE_GOOMBA = 0x07,
+    ACTOR_TYPE_PARAGOOMBA = 0x08,
+    ACTOR_TYPE_SPIKED_GOOMBA = 0x09,
+    ACTOR_TYPE_FUZZY = 0x0A,
+    ACTOR_TYPE_KOOPA_TROOPA = 0x0B,
+    ACTOR_TYPE_PARATROOPA = 0x0C,
+    ACTOR_TYPE_BOB_OMB = 0x0D,
+    ACTOR_TYPE_BOB_OMB_DUP = 0x0E,
+    ACTOR_TYPE_BULLET_BILL = 0x0F,
+    ACTOR_TYPE_BILL_BLASTER = 0x10,
+    ACTOR_TYPE_CLEFT = 0x11,
+    ACTOR_TYPE_MONTY_MOLE = 0x12,
+    ACTOR_TYPE_BANDIT = 0x13,
+    ACTOR_TYPE_POKEY = 0x14,
+    ACTOR_TYPE_POKEY_MUMMY = 0x15,
+    ACTOR_TYPE_SWOOPER = 0x16,
+    ACTOR_TYPE_BUZZY_BEETLE = 0x17,
+    ACTOR_TYPE_STONE_CHOMP = 0x18,
+    ACTOR_TYPE_PIRANHA_PLANT = 0x19,
+    ACTOR_TYPE_FOREST_FUZZY = 0x1A,
+    ACTOR_TYPE_HYPER_GOOMBA = 0x1B,
+    ACTOR_TYPE_HYPER_PARAGOOMBA = 0x1C,
+    ACTOR_TYPE_HYPER_CLEFT = 0x1D,
+    ACTOR_TYPE_CLUBBA = 0x1E,
+    ACTOR_TYPE_SHY_GUY = 0x1F,
+    ACTOR_TYPE_GROOVE_GUY = 0x20,
+    ACTOR_TYPE_SKY_GUY = 0x21,
+    ACTOR_TYPE_MEDI_GUY = 0x22,
+    ACTOR_TYPE_PYRO_GUY = 0x23,
+    ACTOR_TYPE_SPY_GUY = 0x24,
+    ACTOR_TYPE_FUZZIPEDE = 0x25,
+    ACTOR_TYPE_HURT_PLANT = 0x26,
+    ACTOR_TYPE_M_BUSH = 0x27,
+    ACTOR_TYPE_AQUA_FUZZY = 0x28,
+    ACTOR_TYPE_JUNGLE_FUZZY = 0x29,
+    ACTOR_TYPE_SPEAR_GUY = 0x2A,
+    ACTOR_TYPE_LAVA_BUBBLE = 0x2B,
+    ACTOR_TYPE_SPIKE_TOP = 0x2C,
+    ACTOR_TYPE_PUTRID_PIRANHA = 0x2D,
+    ACTOR_TYPE_LAKITU = 0x2E,
+    ACTOR_TYPE_SPINY = 0x2F,
+    ACTOR_TYPE_MONTY_MOLE_BOSS = 0x30,
+    ACTOR_TYPE_BZZAP = 0x31,
+    ACTOR_TYPE_CRAZEE_DAYZEE = 0x32,
+    ACTOR_TYPE_AMAZY_DAYZEE = 0x33,
+    ACTOR_TYPE_RUFF_PUFF = 0x34,
+    ACTOR_TYPE_SPIKE = 0x35,
+    ACTOR_TYPE_GULPIT = 0x36,
+    ACTOR_TYPE_GULPIT_ROCKS = 0x37,
+    ACTOR_TYPE_WHITE_CLUBBA = 0x38,
+    ACTOR_TYPE_FROST_PIRANHA = 0x39,
+    ACTOR_TYPE_SWOOPULA = 0x3A,
+    ACTOR_TYPE_DUPLIGHOST = 0x3B,
+    ACTOR_TYPE_GHOST_GOOMBARIO = 0x3C,
+    ACTOR_TYPE_GHOST_KOOPER = 0x3D,
+    ACTOR_TYPE_GHOST_BOMBETTE = 0x3E,
+    ACTOR_TYPE_GHOST_PARAKARRY = 0x3F,
+    ACTOR_TYPE_GHOST_BOW = 0x40,
+    ACTOR_TYPE_GHOST_WATT = 0x41,
+    ACTOR_TYPE_GHOST_SUSHIE = 0x42,
+    ACTOR_TYPE_GHOST_LAKILESTER = 0x43,
+    ACTOR_TYPE_ALBINO_DINO = 0x44,
+    ACTOR_TYPE_EMBER = 0x45,
+    ACTOR_TYPE_BONY_BEETLE = 0x46,
+    ACTOR_TYPE_DRY_BONES = 0x47,
+    ACTOR_TYPE_DRY_BONES2 = 0x48,
+    ACTOR_TYPE_BOMBSHELL_BLASTER = 0x49,
+    ACTOR_TYPE_BOMBSHELL_BILL = 0x4A,
+    ACTOR_TYPE_HAMMER_BROS = 0x4B,
+    ACTOR_TYPE_KOOPATROL = 0x4C,
+    ACTOR_TYPE_MAGIKOOPA = 0x4D,
+    ACTOR_TYPE_FLYING_MAGIKOOPA = 0x4E,
+    ACTOR_TYPE_MAGICLONE = 0x4F,
+    ACTOR_TYPE_FLYING_MAGICLONE = 0x50,
+    ACTOR_TYPE_RED_MAGIKOOPA = 0x51,
+    ACTOR_TYPE_FLYING_RED_MAGIKOOPA = 0x52,
+    ACTOR_TYPE_GREEN_MAGIKOOPA = 0x53,
+    ACTOR_TYPE_FLYING_GREEN_MAGIKOOPA = 0x54,
+    ACTOR_TYPE_YELLOW_MAGIKOOPA = 0x55,
+    ACTOR_TYPE_FLYING_YELLOW_MAGIKOOPA = 0x56,
+    ACTOR_TYPE_GRAY_MAGIKOOPA = 0x57,
+    ACTOR_TYPE_FLYING_GRAY_MAGIKOOPA = 0x58,
+    ACTOR_TYPE_WHITE_MAGIKOOPA = 0x59,
+    ACTOR_TYPE_FLYING_WHITE_MAGIKOOPA = 0x5A,
+
+    ACTOR_TYPE_UNUSED_5B = 0x5B,
+    ACTOR_TYPE_UNUSED_5C = 0x5C,
+    ACTOR_TYPE_UNUSED_5D = 0x5D,
+    ACTOR_TYPE_UNUSED_5E = 0x5E,
+    ACTOR_TYPE_UNUSED_5F = 0x5F,
+    ACTOR_TYPE_UNUSED_60 = 0x60,
+    ACTOR_TYPE_UNUSED_61 = 0x61,
+    ACTOR_TYPE_UNUSED_62 = 0x62,
+    ACTOR_TYPE_UNUSED_63 = 0x63,
+    ACTOR_TYPE_UNUSED_64 = 0x64,
+    ACTOR_TYPE_UNUSED_65 = 0x65,
+    ACTOR_TYPE_UNUSED_66 = 0x66,
+    ACTOR_TYPE_UNUSED_67 = 0x67,
+    ACTOR_TYPE_UNUSED_68 = 0x68,
+    ACTOR_TYPE_UNUSED_69 = 0x69,
+    ACTOR_TYPE_UNUSED_6A = 0x6A,
+
+    ACTOR_TYPE_MONTY_HOLE = 0x6B,
+
+    ACTOR_TYPE_UNUSED_6C = 0x6C,
+    ACTOR_TYPE_UNUSED_6D = 0x6D,
+
+    ACTOR_TYPE_PLAYER = 0x6E,
+    ACTOR_TYPE_GOOMBARIO = 0x6F,
+    ACTOR_TYPE_KOOPER = 0x70,
+    ACTOR_TYPE_BOMBETTE = 0x71,
+    ACTOR_TYPE_PARAKARRY = 0x72,
+    ACTOR_TYPE_BOW = 0x73,
+    ACTOR_TYPE_WATT = 0x74,
+    ACTOR_TYPE_SUSHIE = 0x75,
+    ACTOR_TYPE_LAKILESTER = 0x76,
+    ACTOR_TYPE_TWINK = 0x77,
+
+    ACTOR_TYPE_UNUSED_78 = 0x78,
+    ACTOR_TYPE_UNUSED_79 = 0x79,
+
+    ACTOR_TYPE_THE_MASTER_1 = 0x7A,
+    ACTOR_TYPE_THE_MASTER_2 = 0x7B,
+    ACTOR_TYPE_THE_MASTER_3 = 0x7C,
+    ACTOR_TYPE_CHAN = 0x7D,
+    ACTOR_TYPE_LEE = 0x7E,
+    ACTOR_TYPE_LEE_GOOMBARIO = 0x7F,
+    ACTOR_TYPE_LEE_KOOPER = 0x80,
+    ACTOR_TYPE_LEE_BOMBETTE = 0x81,
+    ACTOR_TYPE_LEE_PARAKARRY = 0x82,
+    ACTOR_TYPE_LEE_BOW = 0x83,
+    ACTOR_TYPE_LEE_WATT = 0x84,
+    ACTOR_TYPE_LEE_SUSHIE = 0x85,
+    ACTOR_TYPE_LEE_LAKILESTER = 0x86,
+    ACTOR_TYPE_KAMMY_KOOPA = 0x87,
+    ACTOR_TYPE_JR_TROOPA1 = 0x88,
+    ACTOR_TYPE_JR_TROOPA2 = 0x89,
+    ACTOR_TYPE_JR_TROOPA3 = 0x8A,
+    ACTOR_TYPE_JR_TROOPA4 = 0x8B,
+    ACTOR_TYPE_JR_TROOPA5 = 0x8C,
+    ACTOR_TYPE_JR_TROOPA6 = 0x8D,
+    ACTOR_TYPE_JR_TROOPA_DUP1 = 0x8E,
+    ACTOR_TYPE_JR_TROOPA_DUP2 = 0x8F,
+    ACTOR_TYPE_BLUE_GOOMBA_BOSS = 0x90,
+    ACTOR_TYPE_RED_GOOMBA_BOSS = 0x91,
+    ACTOR_TYPE_GOOMBA_KING = 0x92,
+    ACTOR_TYPE_GOOMNUT_TREE = 0x93,
+    ACTOR_TYPE_GOOMBARIO_TUTOR1 = 0x94,
+    ACTOR_TYPE_MAGIKOOPA_BOSS = 0x95,
+    ACTOR_TYPE_FLYING_MAGIKOOPA_BOSS = 0x96,
+    ACTOR_TYPE_MAGIKOOPA_DUP1 = 0x97,
+    ACTOR_TYPE_MAGIKOOPA_DUP2 = 0x98,
+    ACTOR_TYPE_FAKE_BOWSER = 0x99,
+    ACTOR_TYPE_KOOPA_BROS = 0x9A,
+    ACTOR_TYPE_GREEN_NINJAKOOPA = 0x9B,
+    ACTOR_TYPE_RED_NINJAKOOPA = 0x9C,
+    ACTOR_TYPE_BLUE_NINJAKOOPA = 0x9D,
+    ACTOR_TYPE_YELLOW_NINJAKOOPA = 0x9E,
+    ACTOR_TYPE_GOOMBARIO_TUTOR2 = 0x9F,
+    ACTOR_TYPE_BUZZAR = 0xA0,
+    ACTOR_TYPE_TUTANKOOPA = 0xA1,
+    ACTOR_TYPE_CHOMP = 0xA2,
+    ACTOR_TYPE_TUBBA_BLUBBA_INVINCIBLE = 0xA3,
+    ACTOR_TYPE_TUBBA_BLUBBA = 0xA4,
+    ACTOR_TYPE_TUBBA_HEART = 0xA5,
+    ACTOR_TYPE_STILT_GUY = 0xA6,
+    ACTOR_TYPE_SHY_STACK = 0xA7,
+    ACTOR_TYPE_SHY_SQUAD = 0xA8,
+    ACTOR_TYPE_GENERAL_GUY = 0xA9,
+    ACTOR_TYPE_TOY_TANK = 0xAA,
+    ACTOR_TYPE_LIGHT_BULB = 0xAB,
+    ACTOR_TYPE_SIGNAL_GUY = 0xAC,
+    ACTOR_TYPE_SHY_SQUAD_DUP = 0xAD,
+    ACTOR_TYPE_SHY_GUY_DUP = 0xAE,
+    ACTOR_TYPE_ANTI_GUY = 0xAF,
+    ACTOR_TYPE_ANTI_GUY_DUP = 0xB0,
+    ACTOR_TYPE_BIG_LANTERN_GHOST = 0xB1,
+    ACTOR_TYPE_GOOMBA_KING_DUP = 0xB2,
+    ACTOR_TYPE_LAVA_PIRANHA_PHASE_1 = 0xB3,
+    ACTOR_TYPE_LAVA_PIRANHA_PHASE_2 = 0xB4,
+    ACTOR_TYPE_LAVA_BUD_PHASE_1 = 0xB5,
+    ACTOR_TYPE_LAVA_BUD_PHASE_2 = 0xB6,
+    ACTOR_TYPE_PETIT_PIRANHA = 0xB7,
+    ACTOR_TYPE_PETIT_PIRANHA_BOMB = 0xB8,
+    ACTOR_TYPE_KENT_C_KOOPA = 0xB9,
+    ACTOR_TYPE_HUFF_N_PUFF = 0xBA,
+    ACTOR_TYPE_TUFF_PUFF = 0xBB,
+    ACTOR_TYPE_MONSTAR = 0xBC,
+    ACTOR_TYPE_CRYSTAL_KING = 0xBD,
+    ACTOR_TYPE_CRYSTAL_CLONE = 0xBE,
+    ACTOR_TYPE_CRYSTAL_BIT = 0xBF,
+    ACTOR_TYPE_INTRO_BOWSER = 0xC0,
+    ACTOR_TYPE_BOWSER_PHASE_1 = 0xC1,
+    ACTOR_TYPE_BOWSER_DUP1 = 0xC2,
+    ACTOR_TYPE_BOWSER_PHASE_2 = 0xC3,
+    ACTOR_TYPE_BOWSER_DUP2 = 0xC4,
+    ACTOR_TYPE_BOWSER_PHASE_3 = 0xC5,
+    ACTOR_TYPE_BOWSER_DUP3 = 0xC6,
+    ACTOR_TYPE_BLOOPER = 0xC7,
+    ACTOR_TYPE_ELECTRO_BLOOPER1 = 0xC8,
+    ACTOR_TYPE_ELECTRO_BLOOPER2 = 0xC9,
+    ACTOR_TYPE_SUPER_BLOOPER1 = 0xCA,
+    ACTOR_TYPE_SUPER_BLOOPER2 = 0xCB,
+    ACTOR_TYPE_BLOOPER_BABY = 0xCC,
+    ACTOR_TYPE_LAKILESTER_DUP = 0xCD,
+    ACTOR_TYPE_SLOT_MACHINE_START = 0xCE,
+    ACTOR_TYPE_SLOT_MACHINE_STOP = 0xCF,
+    ACTOR_TYPE_WHACKA = 0xD0,
+    ACTOR_TYPE_SLOT_MACHINE_START_DUP1 = 0xD1,
+    ACTOR_TYPE_SLOT_MACHINE_START_DUP2 = 0xD2,
+    ACTOR_TYPE_SLOT_MACHINE_START_DUP3 = 0xD3,
+    ACTOR_TYPE_COUNT = 0xD4,
+} ActorType;
 
 #define AREA(id) \
     .dmaStart = battle_##id##_ROM_START, \

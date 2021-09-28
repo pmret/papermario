@@ -10,7 +10,7 @@
 
 #include "common/StartRumbleWithParams.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_jan2/584B90", func_802184F8_584E38);
+#include "world/common/UnkFunc52.inc.c"
 
 #include "common/GetBootsHammerLevel.inc.c"
 

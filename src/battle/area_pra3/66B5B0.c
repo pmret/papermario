@@ -10,5 +10,5 @@
 
 #include "common/StartRumbleWithParams.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_pra3/66B5B0", func_80219AD8_66B858);
+#include "world/common/UnkFunc52.inc.c"
 

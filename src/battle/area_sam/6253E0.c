@@ -12,4 +12,4 @@
 
 #include "common/StartRumbleWithParams.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_sam/6253E0", func_80219AE8_625688);
+#include "world/common/UnkFunc52.inc.c"
