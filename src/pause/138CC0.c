@@ -127,8 +127,8 @@ s32 pause_badges_try_remove(s16 badgeID) {
     }
 
     // Remove and shift array contents
-    for (; i < ARRAY_COUNT(gPlayerData.equippedBadges)-1; i++, currentSlot++) {
-        *currentSlot = *(currentSlot+1);
+    for (; i < ARRAY_COUNT(gPlayerData.equippedBadges) - 1; i++, currentSlot++) {
+        *currentSlot = *(currentSlot + 1);
     }
     *currentSlot = 0;
 
