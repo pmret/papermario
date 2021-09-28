@@ -209,7 +209,7 @@ typedef struct PlayerData {
     /* 0x005 */ s8 curFP;
     /* 0x006 */ s8 curMaxFP;
     /* 0x007 */ u8 hardMaxFP;
-    /* 0x008 */ u8 maxBP;
+    /* 0x008 */ s8 maxBP;
     /* 0x009 */ s8 level;
     /* 0x00A */ s8 hasActionCommands;
     /* 0x00B */ char unk_0B;
@@ -807,7 +807,7 @@ typedef struct StaticMove {
     /* 0x0C */ s32 menuDescID;
     /* 0x10 */ u8 battleSubmenu;
     /* 0x11 */ u8 costFP;
-    /* 0x12 */ u8 costBP;
+    /* 0x12 */ s8 costBP;
     /* 0x13 */ u8 actionCommandID;
 } StaticMove; // size = 0x14
 
@@ -1895,7 +1895,7 @@ typedef struct {
 } Path; // size = 0x1C
 
 typedef struct {
-    /* 0x00 */ s8 enabled;
+    /* 0x00 */ u8 enabled;
     /* 0x01 */ u8 listStart;
     /* 0x02 */ u8 numCols;
     /* 0x03 */ u8 numRows;
@@ -2126,7 +2126,9 @@ typedef struct Temp8025D160_2 {
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ char unk_24[8];
     /* 0x2C */ s32 unk_2C;
-} Temp8025D160_2; // size = 0x30 (?)
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ f32 unk_34;
+} Temp8025D160_2; // size = 0x38 (?)
 
 typedef struct EntityModel {
     /* 0x00 */ s32 flags;

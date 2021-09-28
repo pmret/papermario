@@ -55,7 +55,7 @@ ActorPartDesc N(partsTable_8021B088)[] = {
 
 ActorDesc NAMESPACE = {
     .flags = 0,
-    .type = ACTOR_TYPE_spiked_goomba,
+    .type = ACTOR_TYPE_SPIKED_GOOMBA,
     .level = 6,
     .maxHP = 2,
     .partCount = ARRAY_COUNT(N(partsTable_8021B088)),

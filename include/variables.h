@@ -19,6 +19,7 @@ extern GameStatus* gGameStatusPtr;
 extern s32 gRandSeed;
 extern StaticItem gItemTable[364];
 extern UNK_FUN_PTR(gCurrentUpdateFunction);
+extern StaticMove gMoveTable[185];
 
 extern s32 gBattleState;
 extern BattleStatus gBattleStatus;
@@ -206,6 +207,7 @@ extern ItemID gBadgeMenuItemIDs[128];
 extern s32 gBadgeMenuCurrentPage;
 extern PauseItemPage gBadgeMenuPages[20];
 extern s32 gBadgeMenuSelectedIndex;
+extern s32 D_8027037C;
 extern s32 gBadgeMenuSelectedItemID;
 extern s16 gBadgeMenuNumItems;
 extern s32 D_80270388;
@@ -214,7 +216,9 @@ extern s32 gBadgeMenuLevel;
 extern s32 gBadgeMenuCurrentTab;
 extern s32 gBadgeMenuBShowNotEnoughBP;
 extern s32 D_802703A4;
-extern s32 D_802703A8;
+extern s32 gBadgeMenuIconIDs[22];
+extern MenuWindowBP gBadgeMenuWindowBPs[1];
+extern HudElementAnim *gBadgeMenuElements[22];
 
 // Items
 extern s16 gItemMenuItemIDs[100];

@@ -16,4 +16,6 @@
 #include "common/StartRumbleWithParams.inc.c"
 #define NAMESPACE b_area_pra
 
-INCLUDE_ASM(s32, "battle/area_pra/649B60", func_80218FF8_649E08);
+#define NAMESPACE dup3_b_area_pra
+#include "world/common/UnkFunc52.inc.c"
+#define NAMESPACE b_area_pra

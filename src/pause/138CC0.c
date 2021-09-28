@@ -1,5 +1,10 @@
 #include "common.h"
 
+// Fake "badge" for the None entry that appears on the equipped badges page when nothing is equipped
+#define BADGE_NONE_STANDIN 0x7FFE
+// Invalid badge ID filled in unused slots of gBadgeMenuItemIDs
+#define BADGE_INVALID 0x7FFF
+
 INCLUDE_ASM(s32, "pause/138CC0", pause_stats_draw_contents);
 
 INCLUDE_ASM(s32, "pause/138CC0", pause_stats_init);
@@ -20,13 +25,13 @@ s32 pause_badges_comparator(s16* a, s16* b) {
     s16 bVal;
 
     if (*a == 0) {
-        aVal = ~0x8000;
+        aVal = BADGE_INVALID;
     } else {
         aVal = gItemTable[*a].badgeSortPriority;
     }
 
     if (*b == 0) {
-        bVal = ~0x8000;
+        bVal = BADGE_INVALID;
     } else {
         bVal = gItemTable[*b].badgeSortPriority;
     }
@@ -103,19 +108,392 @@ s32 pause_badges_scroll_offset_x(s32 x) {
     return x;
 }
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_try_remove);
+s32 pause_badges_try_remove(s16 badgeID) {
+    s16 *currentSlot = gPlayerData.equippedBadges;
+    s16 *slotToRemove = currentSlot;
+    s32 result = 0;
+    s32 i;
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_try_equip);
+    if (badgeID == BADGE_INVALID) {
+        return 0;
+    }
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_draw_bp_orbs);
+    for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++, currentSlot++) {
+        if (badgeID == *currentSlot) {
+            slotToRemove = currentSlot;
+            result = 1;
+            break;
+        }
+    }
+
+    // Remove and shift array contents
+    for (; i < ARRAY_COUNT(gPlayerData.equippedBadges) - 1; i++, currentSlot++) {
+        *currentSlot = *(currentSlot + 1);
+    }
+    *currentSlot = 0;
+
+    if (*slotToRemove == 0) {
+        result = 2;
+    }
+    return result;
+}
+
+typedef enum BadgeEquipResult {
+    EQUIP_RESULT_ALREADY_EQUIPPED,
+    EQUIP_RESULT_NOT_ENOUGH_BP,
+    EQUIP_RESULT_TOO_MANY_BADGES,
+    EQUIP_RESULT_SUCCESS,
+} BadgeEquipResult;
+
+s32 pause_badges_try_equip(s16 badgeID) {
+    PlayerData* playerData = &gPlayerData;
+    s16 *badgeSlot = &playerData->equippedBadges[0];
+    s32 i;
+    s32 totalEquippedBP;
+
+    if (badgeID == BADGE_NONE_STANDIN) {
+        badgeID = 0;
+    }
+    if (badgeID == BADGE_INVALID) {
+        badgeID = 0;
+    }
+    if (badgeID == 0) {
+        return EQUIP_RESULT_NOT_ENOUGH_BP;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++, badgeSlot++) {
+        if (*badgeSlot == badgeID) {
+            return EQUIP_RESULT_ALREADY_EQUIPPED;
+        }
+    }
+
+    totalEquippedBP = pause_get_total_equipped_bp_cost();
+    if (badgeID != 0) {
+        u8 moveID = gItemTable[badgeID].moveID;
+        s32 requiredBP = totalEquippedBP + gMoveTable[moveID].costBP;
+
+        if (playerData->maxBP < requiredBP) {
+            return EQUIP_RESULT_NOT_ENOUGH_BP;
+        }
+    }
+
+    badgeSlot = &playerData->equippedBadges[0];
+    for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++, badgeSlot++) {
+        if (*badgeSlot == 0) {
+            *badgeSlot = badgeID;
+            break;
+        }
+    }
+    if (i == ARRAY_COUNT(playerData->equippedBadges)) {
+        return EQUIP_RESULT_TOO_MANY_BADGES;
+    } else {
+        return EQUIP_RESULT_SUCCESS;
+    }
+}
+
+void pause_badges_draw_bp_orbs(s32 orbState, s32 x, s32 y) {
+    s32 orbSize = 8;
+
+    switch (orbState) {
+        case 0:
+            pause_draw_rect(x * 4, y * 4, (x + orbSize) * 4, (y + orbSize) * 4, 0, 0, 256, 1024, 1024);
+            break;
+        case 1:
+            pause_draw_rect(x * 4, y * 4, (x + orbSize) * 4, (y + orbSize) * 4, 0, 0, 0, 1024, 1024);
+            break;
+        default:
+            pause_draw_rect(x * 4, y * 4, (x + orbSize) * 4, (y + orbSize) * 4, 0, 0, 512, 1024, 1024);
+            break;
+    }
+}
 
 INCLUDE_ASM(s32, "pause/138CC0", pause_badges_draw_contents);
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_load_badges);
+void pause_badges_load_badges(s32 onlyEquipped) {
+    PlayerData* playerData = &gPlayerData;
+    s32 numItems = 0;
+    PauseItemPage* page;
+    s32 i;
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_init);
+    D_80270388 = 0;
+    if (!onlyEquipped) {
+        for (i = 0; i < ARRAY_COUNT(playerData->badges); i++) {
+            s16 badgeItemID = playerData->badges[i];
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_handle_input);
+            if (badgeItemID == 0) {
+                continue;
+            } else if (badgeItemID > ITEM_LAST_BADGE) {
+                break;
+            } else {
+                gBadgeMenuItemIDs[numItems] = badgeItemID;
+                numItems += 1;
+            }
+        }
+    } else {
+        s16* equippedBadges;
+
+        // This is just called to sort equippedBadges, the count is discarded
+        pause_badges_count_equipped();
+
+        equippedBadges = playerData->equippedBadges;
+        for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
+            // This can be written more clearly as equippedBadges[i],
+            // but that causes some instruction reordering
+            s16 badgeItemID = *equippedBadges;
+
+            if (badgeItemID != 0) {
+                gBadgeMenuItemIDs[numItems] = badgeItemID;
+                numItems += 1;
+            }
+            equippedBadges++;
+        }
+    }
+    if (numItems == 0) {
+        gBadgeMenuItemIDs[0] = BADGE_NONE_STANDIN;
+        numItems = 1;
+    }
+    gBadgeMenuNumItems = numItems;
+    for (i = numItems; i < ARRAY_COUNT(gBadgeMenuItemIDs); i++) {
+        gBadgeMenuItemIDs[i] = BADGE_INVALID;
+    }
+
+    gBadgeMenuSelectedIndex = 0;
+    gBadgeMenuSelectedItemID = 0;
+    D_8027037C = 0;
+    D_80270394 = 0;
+    gBadgeMenuCurrentPage = 0;
+
+    page = &gBadgeMenuPages[0];
+    i = 0;
+   
+    for (i = 0; i < gBadgeMenuNumItems / 8; i++, page++) {
+        page->listStart = i * 8;
+        page->numCols = 1;
+        page->numRows = 8;
+        page->enabled = TRUE;
+        page->startIndex = i * 8;
+        page->count = 8;
+    }
+
+    if ((gBadgeMenuNumItems % 8) != 0) {
+        s16 count;
+        s32 menuNumItems;
+
+        page->listStart = i * 8;
+        page->numCols = 1;
+        page->enabled = TRUE;
+        page->startIndex = i * 8;
+
+        menuNumItems = gBadgeMenuNumItems;
+        count = menuNumItems - (menuNumItems / 8 * 8);
+        page->count = count;
+        page->numRows = page->count;
+        i++;
+        page++;
+    }
+
+    while (i < ARRAY_COUNT(gBadgeMenuPages)) {
+        page->enabled = FALSE;
+
+        i++;
+        page++;
+    }
+
+    gBadgeMenuTargetScrollPos = gBadgeMenuCurrentScrollPos = pause_badges_get_pos_y(0, 0);
+}
+
+void pause_badges_init(MenuPanel *panel) {
+    s32 i;
+
+    // This sorts the badge list and then discards the count
+    pause_badges_count_all();
+
+    gBadgeMenuLevel = 0;
+    gBadgeMenuCurrentTab = 0;
+    gBadgeMenuBShowNotEnoughBP = 0;
+
+    pause_badges_load_badges(FALSE);
+    if (gBadgeMenuItemIDs[0] == BADGE_NONE_STANDIN) {
+        panel->initialized = FALSE;
+        return;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(gBadgeMenuIconIDs); i++) {
+        s32 iconID = create_hud_element(gBadgeMenuElements[i]);
+
+        gBadgeMenuIconIDs[i] = iconID;
+        set_hud_element_flags(iconID, 0x80);
+    }
+
+    for (i = 0; i < ARRAY_COUNT(gBadgeMenuWindowBPs); i++) {
+        gBadgeMenuWindowBPs[i].tab = panel;
+    }
+    setup_pause_menu_tab(gBadgeMenuWindowBPs, ARRAY_COUNT(gBadgeMenuWindowBPs));
+    panel->initialized = TRUE;
+}
+
+void pause_badges_handle_input(void) {
+    s32 selectedIndex = gBadgeMenuSelectedIndex;
+    s32 numCols = gBadgeMenuPages[gBadgeMenuCurrentPage].numCols;
+
+    s32 selectedCol = selectedIndex % numCols;
+    s32 selectedRow = selectedIndex / numCols;
+
+    if (gPauseMenuPressedButtons & BUTTON_A) {
+        s16 badgeID;
+
+        if (gBadgeMenuBShowNotEnoughBP != 0) {
+            gBadgeMenuBShowNotEnoughBP = 0;
+        } else if (gBadgeMenuLevel == 0) {
+            if (gBadgeMenuItemIDs[selectedIndex] == BADGE_NONE_STANDIN) {
+                sfx_play_sound(SOUND_MENU_BADGE_ERROR);
+            } else {
+                gBadgeMenuLevel = 1;
+                sfx_play_sound(SOUND_MENU_NEXT);
+            }
+        } else {
+            badgeID = gBadgeMenuItemIDs[selectedIndex];
+            switch (pause_badges_try_equip(badgeID)) {
+                case EQUIP_RESULT_ALREADY_EQUIPPED:
+                    sfx_play_sound(SOUND_MENU_BADGE_UNEQUIP);
+                    pause_badges_try_remove(badgeID);
+                    break;
+                case EQUIP_RESULT_NOT_ENOUGH_BP:
+                    sfx_play_sound(SOUND_MENU_BADGE_ERROR);
+                    gBadgeMenuBShowNotEnoughBP = 1;
+                    break;
+                case EQUIP_RESULT_TOO_MANY_BADGES:
+                    sfx_play_sound(SOUND_MENU_BADGE_ERROR);
+                    gBadgeMenuBShowNotEnoughBP = 2;
+                    break;
+                case EQUIP_RESULT_SUCCESS:
+                    sfx_play_sound(SOUND_MENU_BADGE_EQUIP);
+                    break;
+            }
+        }
+        return;
+    }
+
+    if ((gPauseMenuPressedButtons != 0) || (gPauseMenuHeldButtons != 0)) {
+        gBadgeMenuBShowNotEnoughBP = 0;
+    }
+
+    if (gBadgeMenuNumItems != 0) {
+        if (gBadgeMenuLevel == 0) {
+            s32 oldTab = gBadgeMenuCurrentTab;
+
+            if (gPauseMenuHeldButtons & (BUTTON_STICK_UP | BUTTON_STICK_DOWN)) {
+                gBadgeMenuCurrentTab ^= 1;
+            }
+            if (oldTab != gBadgeMenuCurrentTab) {
+                sfx_play_sound(SOUND_MENU_CHANGE_TAB);
+                pause_badges_load_badges(gBadgeMenuCurrentTab);
+            }
+        } else {
+            s32 heldButtons = gPauseMenuHeldButtons;
+            s32 heldButtons2;
+            u8 newPageNumCols;
+
+            if (heldButtons & (BUTTON_STICK_UP | BUTTON_Z)) {
+                if (heldButtons & BUTTON_STICK_UP) {
+                    selectedRow -= 1;
+                    if (selectedRow < 0) {
+                        selectedRow = 0;
+                    }
+                    if (selectedRow < gBadgeMenuPages[gBadgeMenuCurrentPage].listStart) {
+                        gBadgeMenuCurrentPage -= 1;
+                    }
+                } else {
+                    // Z button press
+                    gBadgeMenuCurrentPage -= 1;
+                    if (gBadgeMenuCurrentPage < 0) {
+                        gBadgeMenuCurrentPage = 0;
+                    }
+                    selectedRow = gBadgeMenuPages[gBadgeMenuCurrentPage].listStart;
+                }
+            }
+
+            // Need to re-read button state here for strange regalloc reasons
+            heldButtons2 = gPauseMenuHeldButtons;
+            if (heldButtons2 & (BUTTON_STICK_DOWN | BUTTON_R)) {
+                if (heldButtons2 & BUTTON_STICK_DOWN) {
+                    PauseItemPage* page = &gBadgeMenuPages[gBadgeMenuCurrentPage];
+
+                    selectedRow += 1;
+                    if (selectedRow >= (page->listStart + page->numRows)) {
+                        gBadgeMenuCurrentPage += 1;
+                        if (!gBadgeMenuPages[gBadgeMenuCurrentPage].enabled) {
+                            gBadgeMenuCurrentPage -= 1;
+                            selectedRow -= 1;
+                        }
+                    }
+                } else {
+                    // R button press
+                    PauseItemPage* newPage;
+
+                    gBadgeMenuCurrentPage++;
+                    newPage = &gBadgeMenuPages[gBadgeMenuCurrentPage];
+
+                    if (!newPage->enabled) {
+                        gBadgeMenuCurrentPage -= 1;
+                    } else {
+                        selectedRow = newPage->listStart;
+                    }
+                }
+            }
+
+            newPageNumCols = gBadgeMenuPages[gBadgeMenuCurrentPage].numCols;
+            if (gBadgeMenuItemIDs[selectedRow * newPageNumCols] != BADGE_NONE_STANDIN) {
+                if (gPauseMenuHeldButtons & BUTTON_STICK_LEFT) {
+                    selectedCol -= 1;
+                    if (selectedCol < 0) {
+                        selectedCol = newPageNumCols - 1;
+                    }
+                } else if (gPauseMenuHeldButtons & BUTTON_STICK_RIGHT) {
+                    selectedCol += 1;
+                    if (selectedCol >= newPageNumCols) {
+                        selectedCol = 0;
+                    }
+                }
+            } else {
+                selectedCol = 0;
+            }
+            gBadgeMenuSelectedIndex = selectedCol + (selectedRow * gBadgeMenuPages[gBadgeMenuCurrentPage].numCols);
+            if (gBadgeMenuSelectedIndex != selectedIndex) {
+                sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
+            }
+            gBadgeMenuSelectedItemID = gBadgeMenuItemIDs[gBadgeMenuSelectedIndex];
+        }
+    }
+
+    if (gBadgeMenuLevel == 1) {
+        s32 itemID = gBadgeMenuSelectedItemID;
+
+        if (((itemID != BADGE_NONE_STANDIN) && (itemID != BADGE_INVALID) && (itemID != 0))) {
+            gPauseMenuCurrentDescMsg = gItemTable[itemID].menuMsg;
+        } else {
+            gPauseMenuCurrentDescMsg = 0;
+            gPauseMenuCurrentDescIconScript = NULL;
+        }
+    } else {
+        gPauseMenuCurrentDescMsg = pause_get_menu_msg(gBadgeMenuCurrentTab == 0 ? 0x4C : 0x4D);
+        gPauseMenuCurrentDescIconScript = NULL;
+    }
+
+    if (gPauseMenuPressedButtons & BUTTON_B) {
+        if (gBadgeMenuLevel == 0) {
+            sfx_play_sound(SOUND_MENU_BACK);
+            gPauseMenuCurrentTab = 0;
+        } else {
+            sfx_play_sound(SOUND_MENU_BACK);
+            gBadgeMenuLevel = 0;
+            enforce_hpfp_limits();
+            if (gBadgeMenuCurrentTab == 1) {
+                pause_badges_load_badges(TRUE);
+            }
+        }
+    }
+}
 
 void pause_badges_update(void) {
     PauseItemPage* menuPages = gBadgeMenuPages;
@@ -142,4 +520,10 @@ void pause_badges_update(void) {
     *currentScrollPos += pause_interp_vertical_scroll(gBadgeMenuTargetScrollPos - *currentScrollPos);
 }
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_badges_cleanup);
+void pause_badges_cleanup(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gBadgeMenuIconIDs); i++) {
+        free_hud_element(gBadgeMenuIconIDs[i]);
+    }
+}

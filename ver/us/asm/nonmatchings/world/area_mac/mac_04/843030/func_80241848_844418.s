@@ -6,8 +6,8 @@ glabel func_80241848_844418
 /* 84441C 8024184C 00C0282D */  daddu     $a1, $a2, $zero
 /* 844420 80241850 3C088008 */  lui       $t0, %hi(gItemTable)
 /* 844424 80241854 250878E0 */  addiu     $t0, $t0, %lo(gItemTable)
-/* 844428 80241858 3C078009 */  lui       $a3, %hi(D_8008F060)
-/* 84442C 8024185C 24E7F060 */  addiu     $a3, $a3, %lo(D_8008F060)
+/* 844428 80241858 3C078009 */  lui       $a3, %hi(gMoveTable)
+/* 84442C 8024185C 24E7F060 */  addiu     $a3, $a3, %lo(gMoveTable)
 /* 844430 80241860 3C048011 */  lui       $a0, %hi(gPlayerData)
 /* 844434 80241864 2484F290 */  addiu     $a0, $a0, %lo(gPlayerData)
 .L80241868:
