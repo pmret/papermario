@@ -423,7 +423,7 @@ void pause_badges_handle_input(void) {
                     selectedRow += 1;
                     if (selectedRow >= (page->listStart + page->numRows)) {
                         gBadgeMenuCurrentPage += 1;
-                        if (gBadgeMenuPages[gBadgeMenuCurrentPage].enabled == FALSE) {
+                        if (!gBadgeMenuPages[gBadgeMenuCurrentPage].enabled) {
                             gBadgeMenuCurrentPage -= 1;
                             selectedRow -= 1;
                         }
