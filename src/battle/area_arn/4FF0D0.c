@@ -4,17 +4,12 @@
 
 ApiStatus func_80218680_4FF0D0(Evt* script, s32 isInitialCall) {
     Bytecode *args = script->ptrReadPos;
-    s32 var1;
-    s32 var2;
-    s32 var3;
-    f32 var4;
-    Temp8025D160* temp8025D160;
+    Temp8025D160* temp8025D160 = (Temp8025D160*)evt_get_variable(script, *args++);
 
-    temp8025D160 = (Temp8025D160*)evt_get_variable(script, *args++);
-    var1 = evt_get_variable(script, *args++);
-    var2 = evt_get_variable(script, *args++);
-    var3 = evt_get_variable(script, *args++);
-    var4 = evt_get_float_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    f32 var4 = evt_get_float_variable(script, *args++);
 
     temp8025D160->unk_0C->unk_04 = var1;
     temp8025D160->unk_0C->unk_08 = var2;

@@ -1,4 +1,6 @@
 #include "common.h"
+#include "battle/battle.h"
+
 
 ApiStatus N(UnkFunc52)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -13,16 +15,34 @@ ApiStatus N(UnkFunc52)(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
 
     switch (actor->actorType) {
-        case 0x4D: case 0x4E: case 0x4F: case 0x50:
-        case 0x51: case 0x52: case 0x53: case 0x54:
-        case 0x55: case 0x56: case 0x57: case 0x58:
-        case 0x59: case 0x5A: case 0x5B: case 0x5C:
-        case 0x5D: case 0x5E: case 0x5F: case 0x60:
-        case 0x61: case 0x62: case 0x63: case 0x64:
+        case ACTOR_TYPE_MAGIKOOPA:
+        case ACTOR_TYPE_FLYING_MAGIKOOPA:
+        case ACTOR_TYPE_MAGICLONE:
+        case ACTOR_TYPE_FLYING_MAGICLONE:
+        case ACTOR_TYPE_RED_MAGIKOOPA:
+        case ACTOR_TYPE_FLYING_RED_MAGIKOOPA:
+        case ACTOR_TYPE_GREEN_MAGIKOOPA:
+        case ACTOR_TYPE_FLYING_GREEN_MAGIKOOPA:
+        case ACTOR_TYPE_YELLOW_MAGIKOOPA:
+        case ACTOR_TYPE_FLYING_YELLOW_MAGIKOOPA:
+        case ACTOR_TYPE_GRAY_MAGIKOOPA:
+        case ACTOR_TYPE_FLYING_GRAY_MAGIKOOPA:
+        case ACTOR_TYPE_WHITE_MAGIKOOPA:
+        case ACTOR_TYPE_FLYING_WHITE_MAGIKOOPA:
+        case ACTOR_TYPE_UNUSED_5B:
+        case ACTOR_TYPE_UNUSED_5C:
+        case ACTOR_TYPE_UNUSED_5D:
+        case ACTOR_TYPE_UNUSED_5E:
+        case ACTOR_TYPE_UNUSED_5F:
+        case ACTOR_TYPE_UNUSED_60:
+        case ACTOR_TYPE_UNUSED_61:
+        case ACTOR_TYPE_UNUSED_62:
+        case ACTOR_TYPE_UNUSED_63:
+        case ACTOR_TYPE_UNUSED_64:
             evt_set_variable(script, *args, -1);
             break;
 
-        case 0x47:
+        case ACTOR_TYPE_DRY_BONES:
             if (actor->varTable[8] == 1) {
                 evt_set_variable(script, *args, -1);
                 break;

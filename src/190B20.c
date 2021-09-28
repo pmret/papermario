@@ -975,7 +975,7 @@ s32 bPlayerStatusTable[] = {
 };
 
 ActorDesc bPlayerActorDesc = {
-    .type = ACTOR_TYPE_player,
+    .type = ACTOR_TYPE_PLAYER,
     .maxHP = 99,
     .statusTable = bPlayerStatusTable,
 
