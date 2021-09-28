@@ -18,7 +18,9 @@
 #include "common/StartRumbleWithParams.inc.c"
 #define NAMESPACE b_area_kzn
 
-INCLUDE_ASM(s32, "battle/area_kzn/58CC90", func_80218C48_58CF38);
+#define NAMESPACE dup_b_area_kzn
+#include "world/common/UnkFunc52.inc.c"
+#define NAMESPACE b_area_kzn
 
 #include "common/GetBootsHammerLevel.inc.c"
 
