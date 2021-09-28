@@ -1002,6 +1002,13 @@ enum ItemIDs {
     ITEM_ITEMS_ICON,
 };
 
+#define ITEM_FIRST_KEY_ITEM ITEM_LUCKY_STAR
+#define ITEM_LAST_KEY_ITEM ITEM_PRISON_KEY4
+#define ITEM_FIRST_NORMAL_ITEM ITEM_FIRE_FLOWER
+#define ITEM_LAST_NORMAL_ITEM ITEM_JELLY_SHROOM6
+#define ITEM_FIRST_BADGE ITEM_SPIN_SMASH
+#define ITEM_LAST_BADGE ITEM_ATTACK_F_X_F5
+
 // TODO: use NPC_ANIM-like macro for player animations
 typedef UNK_TYPE PlayerAnim;
 enum PlayerAnims {
@@ -1753,7 +1760,6 @@ enum EffectGfxDataFlags {
     FX_GRAPHICS_2 = 2,
 };
 
-typedef u8 MoveID;
 enum MoveIDs {
     MOVE_NONE,
     MOVE_UNK_184 = 184,

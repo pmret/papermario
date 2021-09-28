@@ -138,15 +138,14 @@ s32 pause_badges_try_remove(s16 badgeID) {
     return result;
 }
 
-typedef s32 BadgeEquipResult;
-enum BadgeEquipResults {
+typedef enum BadgeEquipResult {
     EQUIP_RESULT_ALREADY_EQUIPPED,
     EQUIP_RESULT_NOT_ENOUGH_BP,
     EQUIP_RESULT_TOO_MANY_BADGES,
     EQUIP_RESULT_SUCCESS,
-};
+} BadgeEquipResult;
 
-BadgeEquipResult pause_badges_try_equip(s16 badgeID) {
+s32 pause_badges_try_equip(s16 badgeID) {
     PlayerData* playerData = &gPlayerData;
     s16 *badgeSlot = &playerData->equippedBadges[0];
     s32 i;
@@ -197,13 +196,13 @@ void pause_badges_draw_bp_orbs(s32 orbState, s32 x, s32 y) {
 
     switch (orbState) {
         case 0:
-            pause_draw_rect(x * 4, y * 4, (x + orbSize) * 4, (y + orbSize) * 4, 0, 0, 0x100, 0x400, 0x400);
+            pause_draw_rect(x * 4, y * 4, (x + orbSize) * 4, (y + orbSize) * 4, 0, 0, 256, 1024, 1024);
             break;
         case 1:
-            pause_draw_rect(x * 4, y * 4, (x + orbSize) * 4, (y + orbSize) * 4, 0, 0, 0, 0x400, 0x400);
+            pause_draw_rect(x * 4, y * 4, (x + orbSize) * 4, (y + orbSize) * 4, 0, 0, 0, 1024, 1024);
             break;
         default:
-            pause_draw_rect(x * 4, y * 4, (x + orbSize) * 4, (y + orbSize) * 4, 0, 0, 0x200, 0x400, 0x400);
+            pause_draw_rect(x * 4, y * 4, (x + orbSize) * 4, (y + orbSize) * 4, 0, 0, 512, 1024, 1024);
             break;
     }
 }
@@ -223,7 +222,7 @@ void pause_badges_load_badges(s32 onlyEquipped) {
 
             if (badgeItemID == 0) {
                 continue;
-            } else if (badgeItemID >= ITEM_PARTNER_ATTACK) {
+            } else if (badgeItemID > ITEM_LAST_BADGE) {
                 break;
             } else {
                 gBadgeMenuItemIDs[numItems] = badgeItemID;
@@ -268,11 +267,11 @@ void pause_badges_load_badges(s32 onlyEquipped) {
     i = 0;
    
     for (i = 0; i < gBadgeMenuNumItems / 8; i++, page++) {
-        page->listStart = i*8;
+        page->listStart = i * 8;
         page->numCols = 1;
         page->numRows = 8;
-        page->enabled = 1;
-        page->startIndex = i*8;
+        page->enabled = TRUE;
+        page->startIndex = i * 8;
         page->count = 8;
     }
 
@@ -282,7 +281,7 @@ void pause_badges_load_badges(s32 onlyEquipped) {
 
         page->listStart = i * 8;
         page->numCols = 1;
-        page->enabled = 1;
+        page->enabled = TRUE;
         page->startIndex = i * 8;
 
         menuNumItems = gBadgeMenuNumItems;
@@ -294,7 +293,7 @@ void pause_badges_load_badges(s32 onlyEquipped) {
     }
 
     while (i < ARRAY_COUNT(gBadgeMenuPages)) {
-        page->enabled = 0;
+        page->enabled = FALSE;
 
         i++;
         page++;
@@ -315,7 +314,7 @@ void pause_badges_init(MenuPanel *panel) {
 
     pause_badges_load_badges(FALSE);
     if (gBadgeMenuItemIDs[0] == BADGE_NONE_STANDIN) {
-        panel->initialized = 0;
+        panel->initialized = FALSE;
         return;
     }
 
@@ -330,7 +329,7 @@ void pause_badges_init(MenuPanel *panel) {
         gBadgeMenuWindowBPs[i].tab = panel;
     }
     setup_pause_menu_tab(gBadgeMenuWindowBPs, ARRAY_COUNT(gBadgeMenuWindowBPs));
-    panel->initialized = 1;
+    panel->initialized = TRUE;
 }
 
 void pause_badges_handle_input(void) {
@@ -435,7 +434,7 @@ void pause_badges_handle_input(void) {
                     gBadgeMenuCurrentPage++;
                     newPage = &gBadgeMenuPages[gBadgeMenuCurrentPage];
 
-                    if (newPage->enabled == 0) {
+                    if (!newPage->enabled) {
                         gBadgeMenuCurrentPage -= 1;
                     } else {
                         selectedRow = newPage->listStart;

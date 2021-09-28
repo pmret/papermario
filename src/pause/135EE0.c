@@ -156,7 +156,7 @@ s32 pause_get_total_equipped_bp_cost(void) {
         ItemID itemID = gPlayerData.equippedBadges[i];
 
         if (itemID != ITEM_NONE) {
-            MoveID moveID = gItemTable[itemID].moveID;
+            s32 moveID = gItemTable[itemID].moveID;
 
             totalCost += gMoveTable[moveID].costBP;
         }
