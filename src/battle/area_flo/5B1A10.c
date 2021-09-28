@@ -15,18 +15,18 @@
 #include "common/StartRumbleWithParams.inc.c"
 
 ApiStatus func_80218808_5B1CB8(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
     Actor* actor;
     s32 actorType;
     s32 value;
 
-    Bytecode* readPos = script->ptrReadPos;
-    ActorID actorId = evt_get_variable(script, *readPos++);
+    ActorID actorID = evt_get_variable(script, *args++);
 
-    if (actorId == -0x7F) {
-        actorId = script->owner1.enemyID;
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.enemyID;
     }
 
-    actor = get_actor(actorId);
+    actor = get_actor(actorID);
     actorType = actor->actorType;
 
     // These gotos are weird, but they produce the least weird looking match
@@ -41,19 +41,19 @@ ApiStatus func_80218808_5B1CB8(Evt* script, s32 isInitialCall) {
         if (actorType >= 0x47) {
             if (actorType < 0x65) {
                 if (actorType >= 0x4D) {
-                    evt_set_variable(script, *readPos, -1);
+                    evt_set_variable(script, *args, -1);
                     goto done;
                 }
             }
         }
     } else {
         if (actor->varTable[8] == 1) {
-            evt_set_variable(script, *readPos, -1);
+            evt_set_variable(script, *args, -1);
             goto done;
         }
     }
 
-    evt_set_variable(script, *readPos, 0);
+    evt_set_variable(script, *args, 0);
 
 done:
     return ApiStatus_DONE2;

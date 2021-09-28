@@ -3,8 +3,10 @@
 #define NAMESPACE b_area_dig
 
 ApiStatus func_80218430_6DE1F0(Evt* script, s32 isInitialCall) {
-    f32 y;
+    Bytecode* args = script->ptrReadPos;
+
     f32 x;
+    f32 y;
     f32 float3;
     f32 angle;
 
@@ -15,26 +17,24 @@ ApiStatus func_80218430_6DE1F0(Evt* script, s32 isInitialCall) {
     // Seems to be necessary to get the stack allocations to line up.
     s8 unused[0x40];
 
-    s32* readPos = script->ptrReadPos;
-
-    angle = (f64)evt_get_variable(script, *readPos++) / 10.0f;
+    angle = (f64)evt_get_variable(script, *args++) / 10.0f;
     angle = angle * TAU;
     angle = angle / 360.0f;
 
-    destBytecode1 = *readPos++;
-    destBytecode2 = *readPos++;
-    destBytecode3 = *readPos++;
+    destBytecode1 = *args++;
+    destBytecode2 = *args++;
+    destBytecode3 = *args++;
 
-    y = sin_rad(angle) * 150.0f + 0.0f;
-    x = cos_rad(angle) * 150.0f + 0.0f;
+    x = sin_rad(angle) * 150.0f + 0.0f;
+    y = cos_rad(angle) * 150.0f + 0.0f;
     float3 = -252.0f;
 
-    y -= script->varTable[11];
-    x -= script->varTable[12];
+    x -= script->varTable[11];
+    y -= script->varTable[12];
     float3 -= script->varTable[13];
 
-    evt_set_float_variable(script, destBytecode1, y);
-    evt_set_float_variable(script, destBytecode2, x);
+    evt_set_float_variable(script, destBytecode1, x);
+    evt_set_float_variable(script, destBytecode2, y);
     evt_set_float_variable(script, destBytecode3, float3);
 
     return ApiStatus_DONE2;
