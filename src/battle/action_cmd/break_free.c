@@ -27,7 +27,7 @@ ApiStatus func_802A9000_4233F0(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_61 = 1;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_46 = 0;
     actionCommandStatus->unk_48 = 0;
     battleStatus->actionSuccess = 0;

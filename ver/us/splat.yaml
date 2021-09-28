@@ -3636,7 +3636,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42DA10, c, mega_shock]
-    - [0x42E330, data]
+    - [0x42E342, .data, mega_shock]
   - type: code
     start: 0x42E3A0
     vram: 0x802A9000
