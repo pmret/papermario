@@ -78,7 +78,7 @@ void crash_screen_draw_rect(s32 x, s32 y, s32 width, s32 height) {
     s32 i;
     s32 j;
 
-    if (gCrashScreen.width == 640) {
+    if (gCrashScreen.width == (SCREEN_WIDTH * 2)) {
         x <<= 1;
         y <<= 1;
         width <<= 1;
@@ -104,7 +104,7 @@ void crash_screen_draw_glyph(s32 x, s32 y, s32 glyph) {
     s32 i;
     s32 j;
 
-    if (width == 320) {
+    if (width == SCREEN_WIDTH) {
         u16* ptr = gCrashScreen.frameBuf + (gCrashScreen.width) * y + x;
 
         for (i = 0; i < 7; i++) {
@@ -118,7 +118,7 @@ void crash_screen_draw_glyph(s32 x, s32 y, s32 glyph) {
 
             ptr += gCrashScreen.width - 6;
         }
-    } else if (width == 640) {
+    } else if (width == (SCREEN_WIDTH * 2)) {
         u16* ptr = gCrashScreen.frameBuf + (y * 0x500) + (x * 2);
 
         for (i = 0; i < 7; i++) {
@@ -130,8 +130,8 @@ void crash_screen_draw_glyph(s32 x, s32 y, s32 glyph) {
 
                 ptr[0] = temp;
                 ptr[1] = temp;
-                ptr[640] = temp;
-                ptr[641] = temp;
+                ptr[(SCREEN_WIDTH * 2)] = temp;
+                ptr[(SCREEN_WIDTH * 2) + 1] = temp;
                 ptr += 2;
                 bit >>= 1;
             }
