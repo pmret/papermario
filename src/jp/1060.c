@@ -4,7 +4,7 @@
 
 // TODO: use src/is_debug.c instead as this file is identical between versions
 
-u32 func_80025D74(void* arg0, const unsigned char* str, s32 count);
+u32 func_80025D74(void* arg0, const unsigned char* str, u32 count);
 
 void func_80025C60(void) {
     OSPiHandle** handle = &nuPiCartHandle;
@@ -35,7 +35,7 @@ void func_80025D38(const char* fmt, ...) {
     _Printf(&func_80025D74, NULL, fmt, args);
 }
 
-u32 func_80025D74(void* arg0, const unsigned char* str, s32 count) {
+u32 func_80025D74(void* arg0, const unsigned char* str, u32 count) {
     u32 data;
     s32 pos;
     s32 start;
