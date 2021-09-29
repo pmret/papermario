@@ -12,15 +12,17 @@ typedef struct {
 } CrashScreen; // size unknown
 
 extern CrashScreen gCrashScreen; // bss, externed for now
-// D_80077210
-s32 D_80077210[] = {
-    0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFF29FFFF,
-    0xFF2BFFFF, 0x2526FF2A, 0xFF272CFF, 0x00010203, 0x04050607, 0x080924FF, 0xFFFFFF28, 0xFF0A0B0C, 0x0D0E0F10,
-    0x11121314, 0x15161718, 0x191A1B1C, 0x1D1E1F20, 0x212223FF, 0xFFFFFFFF, 0xFF0A0B0C, 0x0D0E0F10, 0x11121314,
-    0x15161718, 0x191A1B1C, 0x1D1E1F20, 0x212223FF, 0xFFFFFFFF,
+
+u8 gCrashScreencharToGlyph[128] = {
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 41, -1, -1, -1, 43, -1, -1, 37, 38, -1, 42,
+    -1, 39, 44, -1, 0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  36, -1, -1, -1, -1, 40, -1, 10,
+    11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+    33, 34, 35, -1, -1, -1, -1, -1, -1, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+    23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, -1, -1, -1, -1, -1,
 };
 
-s32 D_80077290[] = {
+u32 gCrashScreenFont[] = {
     0x70871C30, 0x8988A250, 0x88808290, 0x88831C90, 0x888402F8, 0x88882210, 0x71CF9C10, 0xF9CF9C70, 0x8228A288,
     0xF200A288, 0x0BC11C78, 0x0A222208, 0x8A222288, 0x71C21C70, 0x23C738F8, 0x5228A480, 0x8A282280, 0x8BC822F0,
     0xFA282280, 0x8A28A480, 0x8BC738F8, 0xF9C89C08, 0x82288808, 0x82088808, 0xF2EF8808, 0x82288888, 0x82288888,
@@ -31,7 +33,7 @@ s32 D_80077290[] = {
     0x00000000,
 };
 
-char* gFaultCauses[18] = {
+const char* gFaultCauses[18] = {
     "Interrupt",
     "TLB modification",
     "TLB exception on load",
@@ -52,7 +54,7 @@ char* gFaultCauses[18] = {
     "Virtual coherency on data",
 };
 
-char* gFPCSRFaultCauses[6] = {
+const char* gFPCSRFaultCauses[6] = {
     "Unimplemented operation",
     "Invalid operation",
     "Division by zero",
@@ -95,10 +97,10 @@ void crash_screen_draw_rect(s32 x, s32 y, s32 width, s32 height) {
     }
 }
 
-void func_8002C054(s32 x, s32 y, s32 character) {
-    s32 shift = ((character % 5) * 6);
+void crash_screen_draw_glyph(s32 x, s32 y, s32 glyph) {
+    s32 shift = ((glyph % 5) * 6);
     u16 width = gCrashScreen.width;
-    const u32* data = &D_80077290[character / 5 * 7];
+    const u32* data = &gCrashScreenFont[glyph / 5 * 7];
     s32 i;
     s32 j;
 
@@ -139,7 +141,7 @@ void func_8002C054(s32 x, s32 y, s32 character) {
     }
 }
 
-u8* crash_screen_copy_to_buf(u8* dest, const u8* src, u32 size) {
+void* crash_screen_copy_to_buf(void* dest, const char* src, u32 size) {
     memcpy(dest, src, size);
     return dest + size;
 }
@@ -150,6 +152,7 @@ void crash_screen_printf(s32 x, s32 y, const char* fmt, ...) {
     s32 size;
     u8 buf[0x100];
     va_list args;
+
     va_start(args, fmt);
 
     size = _Printf(crash_screen_copy_to_buf, buf, fmt, args);
@@ -158,12 +161,12 @@ void crash_screen_printf(s32 x, s32 y, const char* fmt, ...) {
         ptr = buf;
 
         while (size > 0) {
-            u8* chartoglyph = D_80077210;
+            u8* charToGlyph = gCrashScreencharToGlyph;
 
-            glyph = chartoglyph[*ptr & 0x7F];
+            glyph = charToGlyph[*ptr & 0x7F];
 
             if (glyph != 0xFF) {
-                func_8002C054(x, y, glyph);
+                crash_screen_draw_glyph(x, y, glyph);
             }
 
             x += 6;
@@ -196,8 +199,10 @@ void crash_screen_print_fpcsr(u32 value) {
         if (value & flag) {
             crash_screen_printf(132, 155, "(%s)", gFPCSRFaultCauses[i]);
             break;
+            
             do {} while (0);
         }
+
         i++;
         flag >>= 1;
     }
@@ -270,13 +275,14 @@ void crash_screen_draw(OSThread* faultedThread) {
 }
 
 OSThread* crash_screen_get_faulted_thread(void) {
-    OSThread* iter = osGetActiveQueue();
+    OSThread* thread = osGetActiveQueue();
 
-    while (iter->priority != -1) {
-        if (iter->priority > 0 && iter->priority < 0x7F && (iter->flags & 3)) {
-            return iter;
+    while (thread->priority != -1) {
+        if (thread->priority > 0 && thread->priority < 0x7F && (thread->flags & 3)) {
+            return thread;
         }
-        iter = iter->tlnext;
+
+        thread = thread->tlnext;
     }
 
     return NULL;
@@ -334,12 +340,12 @@ void func_8002C94C(s16 x, s16 y, const char* fmt, ...) {
         ptr = buf;
 
         while (size > 0) {
-            u8* chartoglyph = D_80077210;
+            u8* charToGlyph = gCrashScreencharToGlyph;
 
-            glyph = chartoglyph[*ptr & 0x7F];
+            glyph = charToGlyph[*ptr & 0x7F];
 
             if (glyph != 0xFF) {
-                func_8002C054(x, y, glyph);
+                crash_screen_draw_glyph(x, y, glyph);
             }
 
             x += 6;

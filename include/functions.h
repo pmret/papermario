@@ -5,6 +5,7 @@
 #include "common.h"
 #include "map.h"
 #include "enums.h"
+#include "stdlib/stdarg.h"
 
 f32 fabsf(f32 f);
 f32 cosine(s16 arg0);
@@ -16,12 +17,15 @@ void boot_idle(void);
 void boot_main(void);
 
 void osCleanupThread(void);
+OSThread* osGetActiveQueue(void);
 
 f32 signF(f32 val);
 
 void* heap_malloc(s32 size);
 HeapNode* _heap_create(s32* addr, u32 size);
 s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
+
+s32 _Printf(PrintCallback pfn, void* arg, const char* fmt, va_list ap);
 
 s32 get_global_byte(s32 index);
 s32 get_global_flag(s32 index);
