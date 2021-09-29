@@ -460,6 +460,9 @@ void set_curtain_draw_callback(UNK_FUN_PTR(callback));
 void set_curtain_fade_goal(f32 fade);
 void set_curtain_fade(f32 fade);
 
+void crash_screen_init(void);
+void crash_screen_set_draw_info(u16* frameBufPtr, s16 width, s16 height);
+
 // Dead functions:
 //Npc* dead_get_npc_safe(NpcID npcId); // get_npc_safe
 void func_80077BD0(s32, s32, s32, s32, s32, s32);
