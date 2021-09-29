@@ -11,7 +11,7 @@ typedef struct {
     /* 0x9D2 */ u16 height;
 } CrashScreen; // size unknown
 
-extern CrashScreen gCrashScreen; // bss, externed for now
+extern CrashScreen gCrashScreen; // bss, externed for now until issues are figured out
 
 u8 gCrashScreencharToGlyph[128] = {
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
@@ -225,9 +225,9 @@ void crash_screen_draw(OSThread* faultedThread) {
 
     osWritebackDCacheAll();
 
-    crash_screen_draw_rect(0x19, 0x14, 0x10E, 0x19);
-    crash_screen_printf(0x1E, 0x19, "THREAD:%d  (%s)", faultedThread->id, gFaultCauses[causeIndex]);
-    crash_screen_printf(0x1E, 0x23, "PC:%08XH   SR:%08XH   VA:%08XH", ctx->pc, ctx->sr, ctx->badvaddr);
+    crash_screen_draw_rect(25, 20, 270, 25);
+    crash_screen_printf(30, 25, "THREAD:%d  (%s)", faultedThread->id, gFaultCauses[causeIndex]);
+    crash_screen_printf(30, 35, "PC:%08XH   SR:%08XH   VA:%08XH", ctx->pc, ctx->sr, ctx->badvaddr);
 
     crash_screen_sleep(2000);
 
@@ -235,43 +235,43 @@ void crash_screen_draw(OSThread* faultedThread) {
     osViRepeatLine(0);
     osViSwapBuffer(gCrashScreen.frameBuf);
 
-    crash_screen_draw_rect(0x19, 0x2D, 0x10E, 0xB9);
+    crash_screen_draw_rect(25, 45, 270, 185);
 
-    crash_screen_printf(0x1E, 0x32, "AT:%08XH   V0:%08XH   V1:%08XH", (u32)ctx->at, (u32)ctx->v0, (u32)ctx->v1);
-    crash_screen_printf(0x1E, 0x3C, "A0:%08XH   A1:%08XH   A2:%08XH", (u32)ctx->a0, (u32)ctx->a1, (u32)ctx->a2);
-    crash_screen_printf(0x1E, 0x46, "A3:%08XH   T0:%08XH   T1:%08XH", (u32)ctx->a3, (u32)ctx->t0, (u32)ctx->t1);
-    crash_screen_printf(0x1E, 0x50, "T2:%08XH   T3:%08XH   T4:%08XH", (u32)ctx->t2, (u32)ctx->t3, (u32)ctx->t4);
-    crash_screen_printf(0x1E, 0x5A, "T5:%08XH   T6:%08XH   T7:%08XH", (u32)ctx->t5, (u32)ctx->t6, (u32)ctx->t7);
-    crash_screen_printf(0x1E, 0x64, "S0:%08XH   S1:%08XH   S2:%08XH", (u32)ctx->s0, (u32)ctx->s1, (u32)ctx->s2);
-    crash_screen_printf(0x1E, 0x6E, "S3:%08XH   S4:%08XH   S5:%08XH", (u32)ctx->s3, (u32)ctx->s4, (u32)ctx->s5);
-    crash_screen_printf(0x1E, 0x78, "S6:%08XH   S7:%08XH   T8:%08XH", (u32)ctx->s6, (u32)ctx->s7, (u32)ctx->t8);
-    crash_screen_printf(0x1E, 0x82, "T9:%08XH   GP:%08XH   SP:%08XH", (u32)ctx->t9, (u32)ctx->gp, (u32)ctx->sp);
-    crash_screen_printf(0x1E, 0x8C, "S8:%08XH   RA:%08XH", (u32)ctx->s8, (u32)ctx->ra);
+    crash_screen_printf(30, 50, "AT:%08XH   V0:%08XH   V1:%08XH", (u32)ctx->at, (u32)ctx->v0, (u32)ctx->v1);
+    crash_screen_printf(30, 60, "A0:%08XH   A1:%08XH   A2:%08XH", (u32)ctx->a0, (u32)ctx->a1, (u32)ctx->a2);
+    crash_screen_printf(30, 70, "A3:%08XH   T0:%08XH   T1:%08XH", (u32)ctx->a3, (u32)ctx->t0, (u32)ctx->t1);
+    crash_screen_printf(30, 80, "T2:%08XH   T3:%08XH   T4:%08XH", (u32)ctx->t2, (u32)ctx->t3, (u32)ctx->t4);
+    crash_screen_printf(30, 90, "T5:%08XH   T6:%08XH   T7:%08XH", (u32)ctx->t5, (u32)ctx->t6, (u32)ctx->t7);
+    crash_screen_printf(30, 100, "S0:%08XH   S1:%08XH   S2:%08XH", (u32)ctx->s0, (u32)ctx->s1, (u32)ctx->s2);
+    crash_screen_printf(30, 110, "S3:%08XH   S4:%08XH   S5:%08XH", (u32)ctx->s3, (u32)ctx->s4, (u32)ctx->s5);
+    crash_screen_printf(30, 120, "S6:%08XH   S7:%08XH   T8:%08XH", (u32)ctx->s6, (u32)ctx->s7, (u32)ctx->t8);
+    crash_screen_printf(30, 130, "T9:%08XH   GP:%08XH   SP:%08XH", (u32)ctx->t9, (u32)ctx->gp, (u32)ctx->sp);
+    crash_screen_printf(30, 140, "S8:%08XH   RA:%08XH", (u32)ctx->s8, (u32)ctx->ra);
 
     crash_screen_print_fpcsr(ctx->fpcsr);
 
-    crash_screen_print_fpr(0x1E, 0xAA, 0, &ctx->fp0.f.f_even);
-    crash_screen_print_fpr(0x78, 0xAA, 2, &ctx->fp2.f.f_even);
-    crash_screen_print_fpr(0xD2, 0xAA, 4, &ctx->fp4.f.f_even);
-    crash_screen_print_fpr(0x1E, 0xB4, 6, &ctx->fp6.f.f_even);
-    crash_screen_print_fpr(0x78, 0xB4, 8, &ctx->fp8.f.f_even);
-    crash_screen_print_fpr(0xD2, 0xB4, 0xA, &ctx->fp10.f.f_even);
-    crash_screen_print_fpr(0x1E, 0xBE, 0xC, &ctx->fp12.f.f_even);
-    crash_screen_print_fpr(0x78, 0xBE, 0xE, &ctx->fp14.f.f_even);
-    crash_screen_print_fpr(0xD2, 0xBE, 0x10, &ctx->fp16.f.f_even);
-    crash_screen_print_fpr(0x1E, 0xC8, 0x12, &ctx->fp18.f.f_even);
-    crash_screen_print_fpr(0x78, 0xC8, 0x14, &ctx->fp20.f.f_even);
-    crash_screen_print_fpr(0xD2, 0xC8, 0x16, &ctx->fp22.f.f_even);
-    crash_screen_print_fpr(0x1E, 0xD2, 0x18, &ctx->fp24.f.f_even);
-    crash_screen_print_fpr(0x78, 0xD2, 0x1A, &ctx->fp26.f.f_even);
-    crash_screen_print_fpr(0xD2, 0xD2, 0x1C, &ctx->fp28.f.f_even);
-    crash_screen_print_fpr(0x1E, 0xDC, 0x1E, &ctx->fp30.f.f_even);
+    crash_screen_print_fpr(30, 170, 0, &ctx->fp0.f.f_even);
+    crash_screen_print_fpr(120, 170, 2, &ctx->fp2.f.f_even);
+    crash_screen_print_fpr(210, 170, 4, &ctx->fp4.f.f_even);
+    crash_screen_print_fpr(30, 180, 6, &ctx->fp6.f.f_even);
+    crash_screen_print_fpr(120, 180, 8, &ctx->fp8.f.f_even);
+    crash_screen_print_fpr(210, 180, 10, &ctx->fp10.f.f_even);
+    crash_screen_print_fpr(30, 190, 12, &ctx->fp12.f.f_even);
+    crash_screen_print_fpr(120, 190, 14, &ctx->fp14.f.f_even);
+    crash_screen_print_fpr(210, 190, 16, &ctx->fp16.f.f_even);
+    crash_screen_print_fpr(30, 200, 18, &ctx->fp18.f.f_even);
+    crash_screen_print_fpr(120, 200, 20, &ctx->fp20.f.f_even);
+    crash_screen_print_fpr(210, 200, 22, &ctx->fp22.f.f_even);
+    crash_screen_print_fpr(30, 210, 24, &ctx->fp24.f.f_even);
+    crash_screen_print_fpr(120, 210, 26, &ctx->fp26.f.f_even);
+    crash_screen_print_fpr(210, 210, 28, &ctx->fp28.f.f_even);
+    crash_screen_print_fpr(30, 220, 30, &ctx->fp30.f.f_even);
 
     crash_screen_sleep(500);
 
     // all of these null terminators needed to pad the rodata section for this file
     // can potentially fix this problem in another way?
-    crash_screen_printf(0xD2, 0x8C, "MM:%08XH\0\0\0\0\0\0\0\0", *(u32*)ctx->pc);
+    crash_screen_printf(210, 140, "MM:%08XH\0\0\0\0\0\0\0\0", *(u32*)ctx->pc);
 }
 
 OSThread* crash_screen_get_faulted_thread(void) {
@@ -323,8 +323,7 @@ void crash_screen_init(void) {
 }
 
 // unused
-// almost the same as crash_screen_printf but it has a call to crash_screen_draw_rect
-void func_8002C94C(s16 x, s16 y, const char* fmt, ...) {
+void crash_screen_printf_with_bg(s16 x, s16 y, const char* fmt, ...) {
     u8* ptr;
     u32 glyph;
     s32 size;
