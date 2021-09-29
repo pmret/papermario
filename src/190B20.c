@@ -1253,11 +1253,11 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     switch (statusTypeKey) {
                         case STATUS_FROZEN:
                             if (target->actorID != ACTOR_PARTNER) {
-                                effect = target->unk_228;
+                                effect = target->icePillarData;
                                 if (effect != NULL) {
                                     effect->flags |= 0x10;
                                 }
-                                target->unk_228 = playFX_81(0, target->currentPos.x, target->currentPos.y,
+                                target->icePillarData = playFX_81(0, target->currentPos.x, target->currentPos.y,
                                                             target->currentPos.z, 1.0f, 0);
                                 create_status_icon_debuff(target->hudElementDataIndex, STATUS_FROZEN);
                             }
