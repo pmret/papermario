@@ -749,7 +749,7 @@ glabel calc_item_damage_enemy
 .L8025217C:
 /* 180A5C 8025217C 8E26000C */  lw        $a2, 0xc($s1)
 /* 180A60 80252180 8E270010 */  lw        $a3, 0x10($s1)
-/* 180A64 80252184 0C0999FC */  jal       func_create_textPopup
+/* 180A64 80252184 0C0999FC */  jal       create_textPopup
 /* 180A68 80252188 0260282D */   daddu    $a1, $s3, $zero
 .L8025218C:
 /* 180A6C 8025218C 3C10800E */  lui       $s0, %hi(gBattleStatus)

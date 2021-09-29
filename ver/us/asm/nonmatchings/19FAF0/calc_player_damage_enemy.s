@@ -1358,7 +1358,7 @@ glabel L80271E88_1A0768
 /* 1A1530 80272C50 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A1534 80272C54 8E46000C */  lw        $a2, 0xc($s2)
 /* 1A1538 80272C58 8E470010 */  lw        $a3, 0x10($s2)
-/* 1A153C 80272C5C 0C0999FC */  jal       func_create_textPopup
+/* 1A153C 80272C5C 0C0999FC */  jal       create_textPopup
 /* 1A1540 80272C60 0260282D */   daddu    $a1, $s3, $zero
 .L80272C64:
 /* 1A1544 80272C64 8FA80024 */  lw        $t0, 0x24($sp)
@@ -1368,7 +1368,7 @@ glabel L80271E88_1A0768
 /* 1A1554 80272C74 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A1558 80272C78 8E46000C */  lw        $a2, 0xc($s2)
 /* 1A155C 80272C7C 8E470010 */  lw        $a3, 0x10($s2)
-/* 1A1560 80272C80 0C0999FC */  jal       func_create_textPopup
+/* 1A1560 80272C80 0C0999FC */  jal       create_textPopup
 /* 1A1564 80272C84 0260282D */   daddu    $a1, $s3, $zero
 .L80272C88:
 /* 1A1568 80272C88 3C02800E */  lui       $v0, %hi(gBattleStatus)

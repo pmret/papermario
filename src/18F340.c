@@ -58,7 +58,7 @@ ApiStatus activate_defend_command(Evt* script, s32 isInitialCall) {
 ApiStatus func_80260B70(Evt* script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
 
-    func_create_textPopup(2, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
+    create_textPopup(2, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
     sfx_play_sound(0x3FC);
     script->varTable[0] = FALSE;
     if (player->debuff == STATUS_FEAR || player->debuff == STATUS_DIZZY || player->debuff == STATUS_PARALYZE ||

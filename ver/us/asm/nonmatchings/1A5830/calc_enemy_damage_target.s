@@ -429,7 +429,7 @@ glabel calc_enemy_damage_target
 /* 1A6328 80277A48 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A632C 80277A4C 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6330 80277A50 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6334 80277A54 0C0999FC */  jal       func_create_textPopup
+/* 1A6334 80277A54 0C0999FC */  jal       create_textPopup
 /* 1A6338 80277A58 0260282D */   daddu    $a1, $s3, $zero
 /* 1A633C 80277A5C 3C04800E */  lui       $a0, %hi(gBattleStatus)
 /* 1A6340 80277A60 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)

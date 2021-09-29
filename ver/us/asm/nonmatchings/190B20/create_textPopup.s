@@ -11,7 +11,7 @@ glabel jtbl_8029D658
 
 .section .text
 
-glabel func_create_textPopup
+glabel create_textPopup
 /* 1950D0 create_textPopup 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 1950D4 802667F4 44860000 */  mtc1      $a2, $f0
 /* 1950D8 802667F8 44871000 */  mtc1      $a3, $f2

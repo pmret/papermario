@@ -334,7 +334,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                         damage--;
                         damage = damage - player_team_is_ability_active(target, ABILITY_DAMAGE_DODGE);
                         sfx_play_sound_at_position(0x231, 0, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
-                        func_create_textPopup(0, target, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
+                        create_textPopup(0, target, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
                         gBattleStatus.flags1 |= 0x80000000;
                     }
 
@@ -346,7 +346,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                     if (check_block_input(BUTTON_A)) {
                         damage = 0;
                         sfx_play_sound_at_position(0x231, 0, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
-                        func_create_textPopup(0, target, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
+                        create_textPopup(0, target, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
                         gBattleStatus.flags1 |= 0x80000000;
                     }
 

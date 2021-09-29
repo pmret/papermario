@@ -1214,7 +1214,7 @@ glabel calc_partner_damage_enemy
 .L8027F458:
 /* 1ADD38 8027F458 8E46000C */  lw        $a2, 0xc($s2)
 /* 1ADD3C 8027F45C 8E470010 */  lw        $a3, 0x10($s2)
-/* 1ADD40 8027F460 0C0999FC */  jal       func_create_textPopup
+/* 1ADD40 8027F460 0C0999FC */  jal       create_textPopup
 /* 1ADD44 8027F464 0260282D */   daddu    $a1, $s3, $zero
 .L8027F468:
 /* 1ADD48 8027F468 3C02800E */  lui       $v0, %hi(gBattleStatus)
