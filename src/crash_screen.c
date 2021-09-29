@@ -9,7 +9,7 @@ typedef struct {
     /* 0x9CC */ u16* frameBuf;
     /* 0x9D0 */ u16 width;
     /* 0x9D2 */ u16 height;
-} CrashScreen; // size unknown
+} CrashScreen; // size = 0x9D4
 
 extern CrashScreen gCrashScreen; // bss, externed for now until issues are figured out
 
