@@ -1717,27 +1717,6 @@ typedef struct FontData {
     /* 0x00 */ char unk_00[24];
 } FontData; // size = 0x18
 
-typedef struct Crash {
-    /* 0x000 */ char unk_00[20];
-    /* 0x014 */ s32 threadID;
-    /* 0x018 */ char unk_18[12];
-    /* 0x024 */ s64 AT;
-    /* 0x02C */ s64 V0;
-    /* 0x034 */ s64 V1;
-    /* 0x03C */ s64 A0;
-    /* 0x044 */ s64 A1;
-    /* 0x04C */ s64 A2;
-    /* 0x054 */ s64 A3;
-    /* 0x05C */ char unk_5C[16];
-    /* 0x06C */ s32 T2;
-    /* 0x070 */ char unk_70[168];
-    /* 0x118 */ s32 SR;
-    /* 0x11C */ s32 PC;
-    /* 0x120 */ s32 interrupt;
-    /* 0x124 */ s32 VA;
-    /* 0x128 */ char unk_128[208];
-} Crash; // size = 0x1F8
-
 typedef struct PlayerStatus {
     /* 0x000 */ s32 flags;
     /* 0x004 */ u32 animFlags;
