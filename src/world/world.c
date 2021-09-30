@@ -199,6 +199,7 @@ s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID) {
     s32 j;
     Map* maps;
 
+    // TODO: Potentially a fake match? Difficult to not set the temp in the for conditional.
     for (i = 0; (maps = gAreas[i].maps) != NULL; i++) {
         for (j = 0; j < gAreas[i].mapCount; j++) {
             if (strcmp(maps[j].id, mapName) == 0) {
