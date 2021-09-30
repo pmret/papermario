@@ -1561,7 +1561,7 @@ typedef struct ActorMovement {
     /* 0x4C */ f32 distance;
 } ActorMovement; // size = 0x50;
 
-typedef struct ActorMovementWalk {
+typedef struct ActorState { // TODO: Make the first field of this an ActorMovement
     /* 0x00 */ Vec3f currentPos;
     /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ Vec3f unk_18;
@@ -1576,19 +1576,19 @@ typedef struct ActorMovementWalk {
     /* 0x58 */ s32 animJumpRise;
     /* 0x5C */ s32 animJumpFall;
     /* 0x60 */ s32 animJumpLand;
-} ActorMovementWalk; // size = 0x64;
+    /* 0x64 */ s16 moveTime;
+    /* 0x66 */ s16 moveArcAmplitude;
+    /* 0x68 */ char unk_74[3];
+    /* 0x6B */ u8 jumpPartIndex;
+    /* 0x6C */ char unk_78[16];
+    /* 0x7C */ s32 varTable[16];
+} ActorState; // size = 0xBC;
 
 typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
     /* 0x008 */ struct ActorDesc* staticActorData;
-    /* 0x00C */ ActorMovementWalk walk;
-    /* 0x070 */ s16 moveTime;
-    /* 0x072 */ s16 moveArcAmplitude;
-    /* 0x074 */ char unk_74[3];
-    /* 0x077 */ u8 jumpPartIndex;
-    /* 0x078 */ char unk_78[16];
-    /* 0x088 */ s32 varTable[16];
+    /* 0x00C */ ActorState state;
     /* 0x0C8 */ ActorMovement fly;
     /* 0x118 */ f32 flyElapsed;
     /* 0x11C */ char unk_11C[4];

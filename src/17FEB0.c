@@ -2,7 +2,7 @@
 
 HitResult calc_item_check_hit(void) {
     BattleStatus* battleStatus = &gBattleStatus;
-    ActorMovement* walk = &battleStatus->playerActor->walk;
+    ActorMovement* walk = &battleStatus->playerActor->state;
     ActorID actorID = battleStatus->currentTargetID;
     s8 currentTargetPartS8;
     u32 currentTargetPart;

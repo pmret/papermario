@@ -138,9 +138,9 @@ ApiStatus SetGoalToHome(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->walk.goalPos.x = actor->homePos.x;
-    actor->walk.goalPos.y = actor->homePos.y;
-    actor->walk.goalPos.z = actor->homePos.z;
+    actor->state.goalPos.x = actor->homePos.x;
+    actor->state.goalPos.y = actor->homePos.y;
+    actor->state.goalPos.z = actor->homePos.z;
 
     return ApiStatus_DONE2;
 }
@@ -270,7 +270,7 @@ ApiStatus SetGoalToTarget(Evt* script, s32 isInitialCall) {
     }
     actor = get_actor(actorID);
 
-    set_goal_pos_to_part(&actor->walk, actor->targetActorID, actor->targetPartIndex);
+    set_goal_pos_to_part(&actor->state, actor->targetActorID, actor->targetPartIndex);
 
     return ApiStatus_DONE2;
 }
@@ -303,7 +303,7 @@ ApiStatus SetGoalToFirstTarget(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
 
     target = &actor->targetData[actor->targetIndexList[0]];
-    set_goal_pos_to_part(&actor->walk, target->actorID, target->partID);
+    set_goal_pos_to_part(&actor->state, target->actorID, target->partID);
 
     return ApiStatus_DONE2;
 }
@@ -319,10 +319,10 @@ ApiStatus SetGoalPos(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
     actor = get_actor(actorID);
-    walk = &actor->walk;
+    walk = &actor->state;
 
     if (*args == -12345678) {
-        x = actor->walk.goalPos.x;
+        x = actor->state.goalPos.x;
     } else {
         x = evt_get_variable(script, *args);
     }
@@ -402,9 +402,9 @@ ApiStatus AddGoalPos(Evt* script, s32 isInitialCall) {
     z = evt_get_float_variable(script, *args++);
 
     actor = get_actor(actorID);
-    actor->walk.goalPos.x += x;
-    actor->walk.goalPos.y += y;
-    actor->walk.goalPos.z += z;
+    actor->state.goalPos.x += x;
+    actor->state.goalPos.y += y;
+    actor->state.goalPos.z += z;
 
     return ApiStatus_DONE2;
 }
@@ -426,9 +426,9 @@ ApiStatus GetGoalPos(Evt* script, s32 isInitialCall) {
     outY = *args++;
     outZ = *args++;
 
-    x = actor->walk.goalPos.x;
-    y = actor->walk.goalPos.y;
-    z = actor->walk.goalPos.z;
+    x = actor->state.goalPos.x;
+    y = actor->state.goalPos.y;
+    z = actor->state.goalPos.z;
 
     evt_set_variable(script, outX, x);
     evt_set_variable(script, outY, y);
@@ -832,7 +832,7 @@ ApiStatus SetActorJumpGravity(Evt* script, s32 isInitialCall) {
     }
 
     jumpAccel = evt_get_float_variable(script, *args++);
-    get_actor(actorID)->walk.acceleration = jumpAccel;
+    get_actor(actorID)->state.acceleration = jumpAccel;
     return ApiStatus_DONE2;
 }
 
@@ -860,7 +860,7 @@ ApiStatus SetActorSpeed(Evt* script, s32 isInitialCall) {
     }
 
     moveSpeed = evt_get_float_variable(script, *args++);
-    get_actor(actorID)->walk.speed = moveSpeed;
+    get_actor(actorID)->state.speed = moveSpeed;
     return ApiStatus_DONE2;
 }
 
@@ -932,10 +932,10 @@ ApiStatus SetJumpAnimations(Evt* script, s32 isInitialCall) {
     animJumpLand = *args++;
 
     actor = get_actor(actorID);
-    actor->jumpPartIndex = jumpPartIndex;
-    actor->walk.animJumpRise = animJumpRise;
-    actor->walk.animJumpFall = animJumpFall;
-    actor->walk.animJumpLand = animJumpLand;
+    actor->state.jumpPartIndex = jumpPartIndex;
+    actor->state.animJumpRise = animJumpRise;
+    actor->state.animJumpFall = animJumpFall;
+    actor->state.animJumpLand = animJumpLand;
 
     return ApiStatus_DONE2;
 }
@@ -1109,7 +1109,7 @@ ApiStatus GetActorVar(Evt* script, s32 isInitialCall) {
     var1 = evt_get_variable(script, *args++);
     a2 = *args++;
 
-    evt_set_variable(script, a2, get_actor(actorID)->varTable[var1]);
+    evt_set_variable(script, a2, get_actor(actorID)->state.varTable[var1]);
 
     return ApiStatus_DONE2;
 }
@@ -1127,17 +1127,17 @@ ApiStatus SetActorVar(Evt* script, s32 isInitialCall) {
     index = evt_get_variable(script, *args++);
     val = evt_get_variable(script, *args++);
 
-    get_actor(actorID)->varTable[index] = val;
+    get_actor(actorID)->state.varTable[index] = val;
 
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
 ApiStatus AddActorVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = evt_get_variable(script, *args++);
     s32 index;
     s32 val;
+    ActorState* state;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -1146,13 +1146,11 @@ ApiStatus AddActorVar(Evt* script, s32 isInitialCall) {
     index = evt_get_variable(script, *args++);
     val = evt_get_variable(script, *args++);
 
-    get_actor(actorID)->varTable[index] += val;
+    state = &get_actor(actorID)->state;
+    state->varTable[index] += val;
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "197F40", AddActorVar);
-#endif
 
 ApiStatus GetPartMovementVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
