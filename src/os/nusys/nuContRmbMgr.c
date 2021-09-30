@@ -1,7 +1,7 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-s32 contRmbControl(NUSiCommonMesg* mesg);
+s32 contRmbRetrace(NUSiCommonMesg* mesg);
 s32 contRmbCheckMesg(NUSiCommonMesg* mesg);
 s32 contRmbStartMesg(NUSiCommonMesg* mesg);
 s32 contRmbStopMesg(NUSiCommonMesg* mesg);
@@ -10,18 +10,17 @@ s32 contRmbForceStopEndMesg(NUSiCommonMesg* mesg);
 
 u32 nuContRmbSearchTime = 300;
 
-s32 D_80093CE4[] = { contRmbControl, contRmbCheckMesg, contRmbStartMesg, contRmbStopMesg, contRmbForceStopMesg, contRmbForceStopEndMesg, NULL};
+s32 D_80093CE4[] = { contRmbRetrace, contRmbCheckMesg, contRmbStartMesg, contRmbStopMesg, contRmbForceStopMesg, contRmbForceStopEndMesg, NULL};
 
 NUCallBackList nuContRmbCallBack = {.next = NULL, .func = D_80093CE4, .majorNo = 0x300, .funcNum = 0};
 
-s32 _osMotorStop(NUContRmbCtl* rmbCtl, u32 contNo) {
+s32 contRmbControl(NUContRmbCtl* rmbCtl, u32 contNo) {
     s32 ret = 0;
     u32 cnt;
 
     switch (rmbCtl->state) {
         case NU_CONT_RMB_STATE_STOPPED:
             break;
-
         case NU_CONT_RMB_STATE_STOPPING:
             if (rmbCtl->counter != 0) {
                 ret = osMotorStop(&nuContPfs[contNo]);
@@ -30,7 +29,6 @@ s32 _osMotorStop(NUContRmbCtl* rmbCtl, u32 contNo) {
             }
             rmbCtl->counter--;
             break;
-
         case NU_CONT_RMB_STATE_RUN:
             if (rmbCtl->frame > 0) {
                 rmbCtl->counter += rmbCtl->freq;
@@ -48,7 +46,6 @@ s32 _osMotorStop(NUContRmbCtl* rmbCtl, u32 contNo) {
             }
             rmbCtl->frame--;
             break;
-
         case NU_CONT_RMB_STATE_FORCESTOP:
             ret = osMotorInit(&nuSiMesgQ, &nuContPfs[contNo], contNo);
             if (ret == 0) {
@@ -61,7 +58,7 @@ s32 _osMotorStop(NUContRmbCtl* rmbCtl, u32 contNo) {
     return ret;
 }
 
-s32 contRmbControl(NUSiCommonMesg* mesg) {
+s32 contRmbRetrace(NUSiCommonMesg* mesg) {
     u32 i;
     NUContRmbCtl* cont;
 
@@ -70,13 +67,11 @@ s32 contRmbControl(NUSiCommonMesg* mesg) {
         switch (cont->mode) {
             case NU_CONT_RMB_MODE_DISABLE:
                 break;
-
             case NU_CONT_RMB_MODE_ENABLE:
-                if (_osMotorStop(cont, i)) {
+                if (contRmbControl(cont, i)) {
                     cont->mode = NU_CONT_RMB_MODE_DISABLE;
                 }
                 break;
-
             case NU_CONT_RMB_MODE_AUTORUN:
                 if (cont->autorun == NU_CONT_RMB_AUTO_SEARCH) {
                     if ((cont->counter % nuContRmbSearchTime) == 0) {
@@ -87,18 +82,17 @@ s32 contRmbControl(NUSiCommonMesg* mesg) {
                     }
                     cont->counter++;
                 } else {
-                    if (_osMotorStop(cont, i)) {
+                    if (contRmbControl(cont, i)) {
                         cont->counter = i;
                         cont->autorun = NU_CONT_RMB_AUTO_SEARCH;
                         cont->type = NU_CONT_PAK_TYPE_NONE;
                     }
                 }
                 break;
-
             case (NU_CONT_RMB_MODE_ENABLE | NU_CONT_RMB_MODE_PAUSE):
             case (NU_CONT_RMB_MODE_AUTORUN | NU_CONT_RMB_MODE_PAUSE):
                 if (cont->type == NU_CONT_PAK_TYPE_RUMBLE) {
-                    _osMotorStop(cont, i);
+                    contRmbControl(cont, i);
                 }
         }
     }
