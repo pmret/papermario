@@ -15,7 +15,7 @@ s32 general_heap_malloc_tail(s32 size) {
     return _heap_malloc_tail(&D_802FB800, size);
 }
 
-s32 general_heap_free(s32 size) {
+s32 general_heap_free(s32* size) {
     return _heap_free(&D_802FB800, size);
 }
 
