@@ -30,7 +30,7 @@ void boot_main(void) {
     }
 
     nuGfxDisplayOff();
-    crash_create_monitor();
+    crash_screen_init();
     is_debug_init();
     nuGfxInit();
     gGameStatusPtr->contBitPattern = nuContInit();

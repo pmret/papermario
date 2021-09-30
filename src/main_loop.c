@@ -232,7 +232,7 @@ void gfx_draw_frame(void) {
     nuGfxTaskStart(gDisplayContext->mainGfx, (u32)(gMasterGfxPos - gDisplayContext->mainGfx) * 8, NU_GFX_UCODE_F3DEX2,
                    NU_SC_TASK_LODABLE | NU_SC_SWAPBUFFER);
     gCurrentDisplayContextIndex = gCurrentDisplayContextIndex ^ 1;
-    func_8002C890(nuGfxCfb_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+    crash_screen_set_draw_info(nuGfxCfb_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
 void load_engine_data(void) {
@@ -475,8 +475,8 @@ void gfx_draw_background(void) {
 
             for (i = 0; i < 40; i++) {
                 gDPLoadTextureTile(gMasterGfxPos++, nuGfxZBuffer + (i * 0x780), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
-                           SCREEN_HEIGHT, 0, 0, SCREEN_WIDTH - 1, 5, 0, G_TX_NOMIRROR | G_TX_WRAP,
-                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                                   SCREEN_HEIGHT, 0, 0, SCREEN_WIDTH - 1, 5, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
                 gSPTextureRectangle(gMasterGfxPos++, 0, i * a, 0x0500, a + (i * 0x18), G_TX_RENDERTILE,
                                     -0x0020, 0, 0x0400, 0x0400);
                 gDPPipeSync(gMasterGfxPos++);

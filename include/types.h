@@ -12,6 +12,8 @@
 
 typedef void (*StateFunc)(void);
 
+typedef void* (*PrintCallback)(void*, const char*, u32);
+
 /// Linker symbol address, as in `ld_addrs.h`.
 typedef u8 Addr[];
 

@@ -13,7 +13,7 @@ typedef struct {
 
 #define gISVDbgPrnAdrs ((ISVDbg*) 0xb3ff0000)
 
-u32 is_debug_print(void* arg0, const unsigned char* str, s32 count);
+u32 is_debug_print(void* arg0, const unsigned char* str, u32 count);
 
 void is_debug_init(void) {
     osEPiWriteIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->put, 0);
@@ -42,7 +42,7 @@ void rmonPrintf(const char* fmt, ...) {
     _Printf(is_debug_print, NULL, fmt, args);
 }
 
-u32 is_debug_print(void* arg0, const unsigned char* str, s32 count) {
+u32 is_debug_print(void* arg0, const unsigned char* str, u32 count) {
     u32 data;
     s32 pos;
     s32 start;
