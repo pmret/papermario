@@ -194,16 +194,14 @@ MapConfig* get_current_map_header(void) {
     return &gMapConfig;
 }
 
-// weirdness with gAreas loading, extra lw
-#ifdef NON_MATCHING
 s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID) {
     s32 i;
     s32 j;
+    Map* maps;
 
-    for (i = 0; (gAreas + i)->maps != NULL; i++) {
-        Map* maps = (gAreas + i)->maps;
-
-        for (j = 0; j < (gAreas + i)->mapCount; j++) {
+    // TODO: Potentially a fake match? Difficult to not set the temp in the for conditional.
+    for (i = 0; (maps = gAreas[i].maps) != NULL; i++) {
+        for (j = 0; j < gAreas[i].mapCount; j++) {
             if (strcmp(maps[j].id, mapName) == 0) {
                 *areaID = i;
                 *mapID = j;
@@ -214,9 +212,6 @@ s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID) {
 
     return FALSE;
 }
-#else
-INCLUDE_ASM(s32, "world/world", get_map_IDs_by_name);
-#endif
 
 void* load_asset_by_name(const char* assetName, u32* decompressedSize) {
     AssetHeader firstHeader;
