@@ -29,7 +29,9 @@ extern s32 D_8024EFB4;
 void func_80242BAC(s32 windowID, s32 posX, s32 posY) {
     Window *window = &gWindows[windowID];
 
-    if (D_8024EFB4 != 0 || get_game_mode() == 0xF || get_game_mode() == 0xD) {
+    if (D_8024EFB4 != 0
+            || get_game_mode() == GAME_MODE_EXIT_FILE_SELECT
+            || get_game_mode() == GAME_MODE_EXIT_LANGUAGE_SELECT) {
         if (D_8024EFB4 != 0) {
             s32 i;
 
@@ -64,7 +66,9 @@ extern s32 D_8024EFB4;
 void func_80242D04(s32 windowID, s32 posX, s32 posY) {
     Window *window = &gWindows[windowID];
 
-    if (D_8024EFB4 != 0 || get_game_mode() == 0xF || get_game_mode() == 0xD) {
+    if (D_8024EFB4 != 0
+            || get_game_mode() == GAME_MODE_EXIT_FILE_SELECT
+            || get_game_mode() == GAME_MODE_EXIT_LANGUAGE_SELECT) {
         if (D_8024EFB4 != 0) {
             s32 i;
 
@@ -231,19 +235,22 @@ s32 pause_get_total_equipped_bp_cost(void) {
     return totalCost;
 }
 
-INCLUDE_ASM(void, "pause/135EE0", pause_draw_rect, s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls,
-            s32 ult, s32 dsdx, s32 dtdy);
+void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy) {
+    if (ulx < -2687 || uly < -2687 || lrx <= 0 || lry <= 0) {
+        return;
+    }
+    if (ulx >= 1280 || uly >= 960 || lrx >= 2688 || lry >= 2688) {
+        return;
+    }
+    gSPScisTextureRectangle(gMasterGfxPos++, ulx, uly, lrx, lry, tileDescriptor, uls, ult, dsdx, dtdy);
+}
 
-#ifdef NON_MATCHING
 void pause_sort_item_list(s16 *arr, s32 len, s32 (*compare)(s16*, s16 *)) {
-    s16 *end;
-    u32 gap;
-
-    // 1edc
     if (len < 2) {
+        // Trivially sorted
         return;
     } else if (len == 2) {
-        // 1ef0
+        // Trivial 2-element sort
         if (compare(&arr[0], &arr[1]) > 0) {
             s16 temp = arr[0];
             arr[0] = arr[1];
@@ -251,40 +258,39 @@ void pause_sort_item_list(s16 *arr, s32 len, s32 (*compare)(s16*, s16 *)) {
         }
         return;
     } else {
-        // Nontrivial sort required, this algorithm is shell sort
+        // Nontrivial sort required, use shell sort
         u32 gap = 1;
         s16* end;
 
-        // 1f14
         while (gap < len) {
             gap = gap * 2 + 1;
         }
 
-        // 1f34
         end = &arr[len];
-        for (gap = gap / 2; gap != 0; gap /= 2) {
-            // 1f44
-            s16* phi_s2 = &arr[gap];
-            while (phi_s2 < end) {
-                // 1f58
-                s16* phi_s0 = phi_s2 - gap;
-                while (phi_s0 >= arr && phi_s0 < end) {
-                    // 1f68
-                    if (compare(&phi_s0[0], &phi_s0[gap]) > 0) {
-                        s16 temp = phi_s0[0];
-                        phi_s0[0] = phi_s0[gap];
-                        phi_s0[gap] = temp;
-                        phi_s0 -= gap;
-                    } else {
-                        break;
-                    }
+        while ((gap /= 2) != 0) {
+            s16* window_end;
+
+            for (window_end = &arr[gap]; window_end < end; window_end++) {
+                s16* cur_elem = window_end - gap;
+
+                // This could be written simpler as a while loop, but the compiler figures out that it only needs to do
+                // the "cur_elem < end" check on the first iteration in that case
+                if (cur_elem >= arr && cur_elem < end) {
+                    do {
+                        s16* elem_a = cur_elem;
+                        s16* elem_b = cur_elem + gap;
+
+                        if (compare(elem_a, elem_b) > 0) {
+                            s16 temp = *elem_a;
+                            *elem_a = *elem_b;
+                            *elem_b = temp;
+                            cur_elem -= gap;
+                        } else {
+                            break;
+                        }
+                    } while (cur_elem >= arr && cur_elem < end);
                 }
-                // 1fa4
-                phi_s2++;
             }
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "pause/135EE0", pause_sort_item_list);
-#endif
