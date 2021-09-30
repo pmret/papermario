@@ -284,7 +284,7 @@ class Configure:
 
     def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str]):
         import segtypes
-        import segtypes.n64.data
+        import segtypes.common.data
         import segtypes.n64.Yay0
 
         assert self.linker_entries is not None
@@ -335,9 +335,9 @@ class Configure:
 
             if isinstance(seg, segtypes.n64.header.N64SegHeader):
                 build(entry.object_path, entry.src_paths, "as")
-            elif isinstance(seg, segtypes.n64.asm.N64SegAsm) or (isinstance(seg, segtypes.n64.data.N64SegData) and not seg.type[0] == "."):
+            elif isinstance(seg, segtypes.common.asm.CommonSegAsm) or (isinstance(seg, segtypes.common.data.CommonSegData) and not seg.type[0] == "."):
                 build(entry.object_path, entry.src_paths, "as")
-            elif isinstance(seg, segtypes.n64.c.N64SegC) or (isinstance(seg, segtypes.n64.data.N64SegData) and seg.type[0] == "."):
+            elif isinstance(seg, segtypes.common.c.CommonSegC) or (isinstance(seg, segtypes.common.data.CommonSegData) and seg.type[0] == "."):
                 cflags = None
                 if isinstance(seg.yaml, dict):
                     cflags = seg.yaml.get("cflags")
@@ -367,7 +367,7 @@ class Configure:
                 build(entry.object_path, entry.src_paths, task, variables={"cflags": cflags})
 
                 # images embedded inside data aren't linked, but they do need to be built into .inc.c files
-                if isinstance(seg, segtypes.n64.group.N64SegGroup):
+                if isinstance(seg, segtypes.common.group.CommonSegGroup):
                     for seg in seg.subsegments:
                         if isinstance(seg, segtypes.n64.img.N64SegImg):
                             flags = ""
@@ -397,7 +397,7 @@ class Configure:
                                 "img_flags": "",
                             })
                             build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "bin_inc_c")
-            elif isinstance(seg, segtypes.n64.bin.N64SegBin):
+            elif isinstance(seg, segtypes.common.bin.CommonSegBin):
                 build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(seg, segtypes.n64.Yay0.N64SegYay0):
                 compressed_path = entry.object_path.with_suffix("") # remove .o

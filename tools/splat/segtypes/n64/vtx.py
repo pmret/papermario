@@ -12,9 +12,9 @@ from pathlib import Path
 from util.log import error
 
 from util import options
-from segtypes.n64.codesubsegment import N64SegCodeSubsegment
+from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 
-class N64SegVtx(N64SegCodeSubsegment):
+class N64SegVtx(CommonSegCodeSubsegment):
     def __init__(self, rom_start, rom_end, type, name, vram_start, extract,
                  given_subalign, given_is_overlay, given_dir, args = [], yaml = {}):
         super().__init__(rom_start, rom_end, type, name, vram_start, extract,
@@ -61,12 +61,12 @@ class N64SegVtx(N64SegCodeSubsegment):
     def split(self, rom_bytes: bytes):
         if self.file_text and self.out_path():
             self.out_path().parent.mkdir(parents=True, exist_ok=True)
-                
+
             with open(self.out_path(), "w", newline="\n") as f:
                 f.write(self.file_text)
 
     def should_scan(self) -> bool:
         return options.mode_active("vtx") and self.rom_start != "auto" and self.rom_end != "auto"
-    
+
     def should_split(self) -> bool:
         return self.extract and options.mode_active("vtx")

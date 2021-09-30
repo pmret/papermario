@@ -322,16 +322,12 @@ void clear_effect_data(void) {
 void func_80059D48(void) {
 }
 
-// The third loop is doing some negative reference bs
-#ifdef NON_MATCHING
 void update_effects(void) {
-    EffectGraphics* effectGraphics;
-    s32 i;
-
     if (!(gOverrideFlags & 0xC00)) {
-        for (i = 0; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-            effectGraphics = &gEffectGraphicsData[i];
+        EffectGraphics* effectGraphics;
+        s32 i;
 
+        for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
             if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
                 if (!(effectGraphics->flags & FX_GRAPHICS_2)) {
                     effectGraphics->flags |= FX_GRAPHICS_2;
@@ -360,17 +356,15 @@ void update_effects(void) {
             }
         }
 
-        for (i = 0; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-            effectGraphics = &gEffectGraphicsData[i];
-
+        for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
             if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
                 if (effectGraphics->flags & FX_GRAPHICS_2) {
                     if (effectGraphics->freeDelay != 0) {
                         effectGraphics->freeDelay--;
                     } else {
-                        if (effectGraphics->data[0] != NULL) {
+                        if (effectGraphics->data != NULL) {
                             general_heap_free(effectGraphics->data);
-                            effectGraphics->data[0] = NULL;
+                            effectGraphics->data = NULL;
                         }
                         effectGraphics->flags = FX_GRAPHICS_DISABLED;
                         osUnmapTLB(i);
@@ -380,9 +374,6 @@ void update_effects(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "341d0", update_effects);
-#endif
 
 s32 render_effects_world(void) {
     s32 i;

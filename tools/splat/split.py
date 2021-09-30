@@ -14,7 +14,7 @@ from util import options
 from util import symbols
 from util import palettes
 
-VERSION = "0.7.9"
+VERSION = "0.7.10"
 
 parser = argparse.ArgumentParser(description="Split a rom given a rom, a config, and output directory")
 parser.add_argument("config", help="path to a compatible config .yaml file")

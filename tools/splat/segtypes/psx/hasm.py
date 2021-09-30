@@ -1,7 +1,7 @@
-from segtypes.n64.asm import N64SegAsm
+from segtypes.psx.asm import PsxSegAsm
 
 
-class N64SegHasm(N64SegAsm):
+class PsxSegHasm(PsxSegAsm):
     def split_write(self, out_path, out_lines):
         if not out_path.exists():
             with open(out_path, "w", newline="\n") as f:
