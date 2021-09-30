@@ -1,5 +1,11 @@
 # splat Release Notes
 
+### 0.7.10: WIP PSX support
+* WIP PSX support has been added, thanks to @mkst! (https://github.com/ethteck/splat/pull/99)
+  * Many segments have moved to a "common" package
+  * Endianness of the input binary is now a configurable option
+* Linker hack restored but is now optional and off by default
+
 ### 0.7.9
 * Finally removed the dumb linker section alignment hack
 * Added version number to output on execution

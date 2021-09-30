@@ -1,13 +1,13 @@
 from pathlib import Path
 from typing import Optional
-from segtypes.n64.segment import N64Segment
+from segtypes.common.segment import CommonSegment
 from util import options
 from util import log
 
-class N64SegBin(N64Segment):
+class CommonSegBin(CommonSegment):
     def out_path(self) -> Optional[Path]:
         return options.get_asset_path() / self.dir / f"{self.name}.bin"
-        
+
     def split(self, rom_bytes):
         path = self.out_path()
         path.parent.mkdir(parents=True, exist_ok=True)

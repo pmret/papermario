@@ -48,13 +48,20 @@ class Segment:
     @staticmethod
     def get_base_segment_class(seg_type):
         platform = options.get_platform()
+        is_platform_seg = False
 
+        # heirarchy is platform -> common -> fail
         try:
             segmodule = importlib.import_module(f"segtypes.{platform}.{seg_type}")
+            is_platform_seg = True
         except ModuleNotFoundError:
-            return None
+            try:
+                segmodule = importlib.import_module(f"segtypes.common.{seg_type}")
+            except ModuleNotFoundError:
+                return None
 
-        return getattr(segmodule, f"{platform.upper()}Seg{seg_type[0].upper()}{seg_type[1:]}")
+        seg_prefix = platform.capitalize() if is_platform_seg else "Common"
+        return getattr(segmodule, f"{seg_prefix}Seg{seg_type.capitalize()}")
 
     @staticmethod
     def get_extension_segment_class(seg_type):

@@ -1,12 +1,12 @@
-from segtypes.n64.code import N64SegCode
-from segtypes.n64.codesubsegment import N64SegCodeSubsegment
-from segtypes.n64.group import N64SegGroup
+from segtypes.common.code import CommonSegCode
+from segtypes.common.codesubsegment import CommonSegCodeSubsegment
+from segtypes.common.group import CommonSegGroup
 from pathlib import Path
 from typing import List, Optional
 from util.symbols import Symbol
 from util import floats, options
 
-class N64SegData(N64SegCodeSubsegment, N64SegGroup):
+class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
     def out_path(self) -> Optional[Path]:
         if self.type.startswith("."):
             if self.sibling:
@@ -20,7 +20,7 @@ class N64SegData(N64SegCodeSubsegment, N64SegGroup):
             return options.get_asm_path() / "data" / self.dir / f"{self.name}.{self.type}.s"
 
     def scan(self, rom_bytes: bytes):
-        N64SegGroup.scan(self, rom_bytes)
+        CommonSegGroup.scan(self, rom_bytes)
 
         if super().should_scan():
             self.file_text = self.disassemble_data(rom_bytes)
@@ -28,11 +28,11 @@ class N64SegData(N64SegCodeSubsegment, N64SegGroup):
             self.file_text = None
 
     def split(self, rom_bytes: bytes):
-        N64SegGroup.split(self, rom_bytes)
+        CommonSegGroup.split(self, rom_bytes)
 
         if not self.type.startswith(".") and self.file_text:
             path = self.out_path()
-            
+
             if path:
                 path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -46,15 +46,16 @@ class N64SegData(N64SegCodeSubsegment, N64SegGroup):
         return True
 
     def cache(self):
-        return [N64SegCodeSubsegment.cache(self), N64SegGroup.cache(self)]
+        return [CommonSegCodeSubsegment.cache(self), CommonSegGroup.cache(self)]
 
     def get_linker_section(self) -> str:
         return ".data"
 
     def get_linker_entries(self):
-        return N64SegCodeSubsegment.get_linker_entries(self)
+        return CommonSegCodeSubsegment.get_linker_entries(self)
 
     def check_jtbls(self, rom_bytes, syms: List[Symbol]):
+        endian = options.get_endianess()
         for i, sym in enumerate(syms):
             if sym.type == "jtbl":
                 start = self.get_most_parent().ram_to_rom(syms[i].vram_start)
@@ -65,7 +66,7 @@ class N64SegData(N64SegCodeSubsegment, N64SegGroup):
                 b = 0
                 last_bits = 0
                 while b < len(sym_bytes):
-                    bits = int.from_bytes(sym_bytes[b : b + 4], "big")
+                    bits = int.from_bytes(sym_bytes[b : b + 4], endian)
 
                     if last_bits != 0 and bits != 0 and abs(last_bits - bits) > 0x100000:
                         new_sym_rom_start = start + b
@@ -83,10 +84,11 @@ class N64SegData(N64SegCodeSubsegment, N64SegGroup):
 
     def get_symbols(self, rom_bytes) -> List[Symbol]:
         symset = set()
+        endian = options.get_endianess()
 
         # Find inter-data symbols
         for i in range(self.rom_start, self.rom_end, 4):
-            bits = int.from_bytes(rom_bytes[i : i + 4], "big")
+            bits = int.from_bytes(rom_bytes[i : i + 4], endian)
             if self.contains_vram(bits):
                 symset.add(self.get_most_parent().get_symbol(bits, create=True, define=True, local_only=True))
 
@@ -146,7 +148,7 @@ class N64SegData(N64SegCodeSubsegment, N64SegGroup):
             # TODO: if we find null bytes in the middle, break this into multiple strings ?
             if c == null_char:
                 if true_end is None:
-                    if N64SegData.are_null(chars[i:]):
+                    if CommonSegData.are_null(chars[i:]):
                         true_end = i
                     else:
                         pass
@@ -181,8 +183,9 @@ class N64SegData(N64SegCodeSubsegment, N64SegGroup):
             return True
 
         return False
-    
+
     def disassemble_symbol(self, sym_bytes, sym_type):
+        endian = options.get_endianess()
         if sym_type == "jtbl":
             sym_str = ".word "
         else:
@@ -212,7 +215,7 @@ class N64SegData(N64SegCodeSubsegment, N64SegGroup):
         i = 0
         while i < len(sym_bytes):
             adv_amt = min(slen, len(sym_bytes) - i)
-            bits = int.from_bytes(sym_bytes[i : i + adv_amt], "big")
+            bits = int.from_bytes(sym_bytes[i : i + adv_amt], endian)
 
             if sym_type == "jtbl":
                 if bits == 0:
@@ -254,7 +257,7 @@ class N64SegData(N64SegCodeSubsegment, N64SegGroup):
                 sym_str += ", "
 
         return sym_str
-    
+
     def disassemble_data(self, rom_bytes):
         rodata_encountered = "rodata" in self.type
         ret = ".include \"macro.inc\"\n\n"
@@ -268,7 +271,7 @@ class N64SegData(N64SegCodeSubsegment, N64SegGroup):
         for i in range(len(syms) - 1):
             mnemonic = syms[i].access_mnemonic
             sym = self.get_most_parent().get_symbol(syms[i].vram_start, create=True, define=True, local_only=True)
-            
+
             sym_str = f"\n\nglabel {sym.name}\n"
             dis_start = self.get_most_parent().ram_to_rom(syms[i].vram_start)
             dis_end = self.get_most_parent().ram_to_rom(syms[i + 1].vram_start)
@@ -284,13 +287,13 @@ class N64SegData(N64SegCodeSubsegment, N64SegGroup):
                     stype = "ascii"
                 elif syms[i].type == "jtbl":
                     stype = "jtbl"
-                elif len(sym_bytes) % 8 == 0 and mnemonic in N64SegCodeSubsegment.double_mnemonics:
+                elif len(sym_bytes) % 8 == 0 and mnemonic in CommonSegCodeSubsegment.double_mnemonics:
                     stype = "double"
-                elif len(sym_bytes) % 4 == 0 and mnemonic in N64SegCodeSubsegment.float_mnemonics:
+                elif len(sym_bytes) % 4 == 0 and mnemonic in CommonSegCodeSubsegment.float_mnemonics:
                     stype = "float"
-                elif len(sym_bytes) % 4 == 0 and sym.vram_start % 4 == 0 and (mnemonic in N64SegCodeSubsegment.word_mnemonics or not mnemonic):
+                elif len(sym_bytes) % 4 == 0 and sym.vram_start % 4 == 0 and (mnemonic in CommonSegCodeSubsegment.word_mnemonics or not mnemonic):
                     stype = "word"
-                elif len(sym_bytes) % 2 == 0 and sym.vram_start % 2 == 0 and (mnemonic in N64SegCodeSubsegment.short_mnemonics or not mnemonic):
+                elif len(sym_bytes) % 2 == 0 and sym.vram_start % 2 == 0 and (mnemonic in CommonSegCodeSubsegment.short_mnemonics or not mnemonic):
                     stype = "short"
                 else:
                     stype = "byte"

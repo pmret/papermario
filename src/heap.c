@@ -40,7 +40,7 @@ void* heap_malloc(s32 size) {
 }
 
 s32 heap_free(void* ptr) {
-    if (gGameStatusPtr->isBattle != 0) {
+    if (gGameStatusPtr->isBattle) {
         return _heap_free(&D_803DA800, ptr);
     } else {
         return general_heap_free(ptr);

@@ -1,7 +1,7 @@
-from segtypes.n64.data import N64SegData
+from segtypes.common.data import CommonSegData
 from util import log
 
-class N64SegBss(N64SegData):    
+class CommonSegBss(CommonSegData):
     def get_linker_section(self) -> str:
         return ".bss"
 

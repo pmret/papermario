@@ -1,23 +1,28 @@
 from typing import Optional
 from util import options
-from segtypes.n64.code import N64SegCode
+from segtypes.common.code import CommonSegCode
 from collections import OrderedDict
 import re
 
-from capstone import Cs, CS_ARCH_MIPS, CS_MODE_MIPS64, CS_MODE_BIG_ENDIAN
+from capstone import Cs, CS_ARCH_MIPS, CS_MODE_MIPS64, CS_MODE_BIG_ENDIAN, CS_MODE_MIPS32, CS_MODE_LITTLE_ENDIAN
 from capstone.mips import *
 
 from segtypes.segment import Segment
 
 # abstract class for c, asm, data, etc
-class N64SegCodeSubsegment(Segment):    
+class CommonSegCodeSubsegment(Segment):
     double_mnemonics = ["ldc1", "sdc1"]
     word_mnemonics = ["addiu", "sw", "lw", "jtbl"]
     float_mnemonics = ["lwc1", "swc1"]
     short_mnemonics = ["addiu", "lh", "sh", "lhu"]
     byte_mnemonics = ["lb", "sb", "lbu"]
 
-    md = Cs(CS_ARCH_MIPS, CS_MODE_MIPS64 + CS_MODE_BIG_ENDIAN)
+    if options.get_endianess() == "big":
+        capstone_mode = CS_MODE_MIPS64 | CS_MODE_BIG_ENDIAN
+    else:
+        capstone_mode = CS_MODE_MIPS32 | CS_MODE_LITTLE_ENDIAN
+
+    md = Cs(CS_ARCH_MIPS, capstone_mode)
     md.detail = True
     md.skipdata = True
 
@@ -40,7 +45,7 @@ class N64SegCodeSubsegment(Segment):
         return (mnemonic.startswith("b") and not mnemonic.startswith("binsl") and not mnemonic == "break") or mnemonic == "j"
 
     def disassemble_code(self, rom_bytes, addsuffix=False):
-        insns = [insn for insn in N64SegCodeSubsegment.md.disasm(rom_bytes[self.rom_start : self.rom_end], self.vram_start)]
+        insns = [insn for insn in CommonSegCodeSubsegment.md.disasm(rom_bytes[self.rom_start : self.rom_end], self.vram_start)]
 
         funcs = self.process_insns(insns, self.rom_start)
 
@@ -53,8 +58,8 @@ class N64SegCodeSubsegment(Segment):
         return self.add_labels(funcs, addsuffix)
 
     def process_insns(self, insns, rom_addr):
-        assert(isinstance(self.parent, N64SegCode))
-        self.parent: N64SegCode = self.parent
+        assert(isinstance(self.parent, CommonSegCode))
+        self.parent: CommonSegCode = self.parent
 
         ret = OrderedDict()
 
@@ -62,6 +67,8 @@ class N64SegCodeSubsegment(Segment):
         func = []
         end_func = False
         labels = []
+
+        big_endian = options.get_endianess() == "big"
 
         # Collect labels
         for insn in insns:
@@ -85,7 +92,9 @@ class N64SegCodeSubsegment(Segment):
 
             if mnemonic == "move":
                 # Let's get the actual instruction out
-                opcode = insn.bytes[3] & 0b00111111
+                idx = 3 if big_endian else 0
+                opcode = insn.bytes[idx] & 0b00111111
+
                 op_str += ", $zero"
 
                 if opcode == 37:
@@ -95,7 +104,7 @@ class N64SegCodeSubsegment(Segment):
                 elif opcode == 33:
                     mnemonic = "addu"
                 else:
-                    print("INVALID INSTRUCTION " + insn)
+                    print("INVALID INSTRUCTION " + str(insn), opcode)
             elif mnemonic == "jal":
                 jal_addr = int(op_str, 0)
                 jump_func = self.parent.get_symbol(jal_addr, type="func", create=True, reference=True)
@@ -115,8 +124,9 @@ class N64SegCodeSubsegment(Segment):
                     label_name = f".L{branch_target[2:].upper()}"
 
                 op_str = " ".join(op_str_split[:-1] + [label_name])
-            elif mnemonic == "mtc0" or mnemonic == "mfc0":
-                rd = (insn.bytes[2] & 0xF8) >> 3
+            elif mnemonic in ["mtc0", "mfc0", "mtc2", "mfc2"]:
+                idx = 2 if big_endian else 1
+                rd = (insn.bytes[idx] & 0xF8) >> 3
                 op_str = op_str.split(" ")[0] + " $" + str(rd)
 
             func.append((insn, mnemonic, op_str, rom_addr))
@@ -322,8 +332,8 @@ class N64SegCodeSubsegment(Segment):
 
                 if insn[0].mnemonic != "branch" and insn[0].mnemonic.startswith("b") or insn[0].mnemonic.startswith("j"):
                     indent_next = True
-            
-            if addsuffix:            
+
+            if addsuffix:
                 func_text.append(f"endlabel {sym.name}")
 
             ret[func] = (func_text, rom_addr)
@@ -373,6 +383,6 @@ class N64SegCodeSubsegment(Segment):
 
     def should_scan(self) -> bool:
         return options.mode_active("code") and self.rom_start != "auto" and self.rom_end != "auto"
-    
+
     def should_split(self) -> bool:
         return self.extract and options.mode_active("code")

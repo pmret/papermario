@@ -323,12 +323,11 @@ void func_80059D48(void) {
 }
 
 void update_effects(void) {
-    EffectGraphics* effectGraphics;
-    s32 i;
-
     if (!(gOverrideFlags & 0xC00)) {
-        for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
+        EffectGraphics* effectGraphics;
+        s32 i;
 
+        for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
             if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
                 if (!(effectGraphics->flags & FX_GRAPHICS_2)) {
                     effectGraphics->flags |= FX_GRAPHICS_2;

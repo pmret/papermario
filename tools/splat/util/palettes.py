@@ -1,9 +1,9 @@
 from typing import Dict
 from segtypes.n64.palette import N64SegPalette as Palette
 from segtypes.n64.ci8 import N64SegCi8 as Raster
-from segtypes.n64.group import N64SegGroup
+from segtypes.common.group import CommonSegGroup
 
-# Resolve Raster#palette and Palette#raster links 
+# Resolve Raster#palette and Palette#raster links
 def initialize(all_segments):
     global palettes_remaining
 
@@ -18,9 +18,9 @@ def initialize(all_segments):
             if isinstance(segment, Raster):
                 raster_map[segment.name] = segment
 
-            if isinstance(segment, N64SegGroup):
+            if isinstance(segment, CommonSegGroup):
                 process(segment.subsegments)
-        
+
         for raster_name in raster_map:
             raster = raster_map[raster_name]
             #print(f"{raster_name} -> {raster.palette_name}")
