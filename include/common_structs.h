@@ -1324,7 +1324,7 @@ typedef struct ActorPart {
     /* 0x94 */ u32* idleAnimations;
     /* 0x98 */ s16 opacity;
     /* 0x9A */ char unk_9A[2];
-    /* 0x9C */ struct Shadow* shadow;
+    /* 0x9C */ s32 shadowIndex;
     /* 0xA0 */ f32 shadowScale;
     /* 0xA4 */ s32 partTypeData[6];
     /* 0xBC */ s16 actorTypeData2b[2];

@@ -1596,7 +1596,30 @@ ApiStatus AssignCrateFlag(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity_shadow);
+s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
+    u16 staticFlags = entity->staticData->flags;
+    s32 type;
+    s16 shadowIndex;
+    Shadow* shadow;
+
+    if (staticFlags & 0x200) {
+        if (staticFlags & 0x800) {
+            type = 2;
+        } else {
+            type = 3;
+        }
+    } else {
+        type = ((staticFlags >> 11) ^ 1) & 1;
+    }
+
+    shadowIndex = create_shadow_type(type, x, y, z);
+    entity->shadowIndex = shadowIndex;
+
+    shadow = get_shadow_by_index(shadowIndex);
+    shadow->flags |= 0xC00000;
+
+    return entity->shadowIndex;
+}
 
 INCLUDE_ASM(Shadow*, "a5dd0_len_114e0", create_shadow_type, s32 type, f32 x, f32 y, f32 z);
 

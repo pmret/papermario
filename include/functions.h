@@ -240,7 +240,7 @@ void resume_group_others(Evt* script, s32 groupFlags);
 s32 suspend_all_script(s32 id);
 s32 resume_all_script(s32 id);
 
-Shadow* create_shadow_type(s32 type, f32 x, f32 y, f32 z);
+s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z);
 s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 centerY, f32 sizeX, f32 sizeZ);
 PlayerData* get_player_data(void);
 
