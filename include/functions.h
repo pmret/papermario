@@ -521,6 +521,12 @@ void partner_disable_input(void);
 void func_80268798(s32, s32, s32, s32);
 void func_802687E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void sfx_stop_sound(SongID soundID);
+void close_message(MessagePrintState* msgPrintState);
+void show_foreground_models_unchecked(void);
+void hide_foreground_models_unchecked(void);
+void show_foreground_models(void);
+void hide_foreground_models(void);
+void btl_set_state(s32 battleState);
 
 void enforce_hpfp_limits(void);
 
