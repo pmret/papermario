@@ -116,19 +116,19 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
     s32 screenX, screenY, screenZ;
 
     if (isInitialCall) {
-        Actor* actor = (Actor*) evt_get_variable(script, *args++);
+        s32 actor = evt_get_variable(script, *args++);
         s32 partIndex = evt_get_variable(script, *args++);
         ActorPart* actorPart;
 
         gSpeakingActorTalkAnim = evt_get_variable(script, *args++);
         gSpeakingActorIdleAnim = evt_get_variable(script, *args++);
 
-        if ((s32) actor == ACTOR_SELF) {
-            actor = (Actor*) script->owner1.enemyID;
+        if (actor == ACTOR_SELF) {
+            actor = script->owner1.enemyID;
         }
-        actor = get_actor((s32) actor);
-        actorPart = get_actor_part(actor, partIndex);
-        gSpeakingActor = actor;
+        actor = (s32) get_actor(actor);
+        actorPart = get_actor_part((Actor*)actor, partIndex);
+        gSpeakingActor = (Actor*) actor;
         gSpeakingActorPart = actorPart;
         close_message(gSpeakingActorPrintCtx);
         script->functionTemp[0] = 0;
