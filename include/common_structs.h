@@ -236,7 +236,7 @@ typedef struct PlayerData {
     /* 0x290 */ s16 specialBarsFilled;
     /* 0x292 */ s8 unk_292;
     /* 0x293 */ char unk_293[0x1];
-    /* 0x294 */ s16 otherHitsTaken;
+    /* 0x294 */ u16 otherHitsTaken;
     /* 0x296 */ s16 unk_296;
     /* 0x298 */ u16 hitsTaken;
     /* 0x29A */ u16 hitsBlocked;

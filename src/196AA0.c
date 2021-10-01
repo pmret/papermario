@@ -292,7 +292,7 @@ void func_80269118(void) {
     ActionCommandStatus *actionCommandStatus = &gActionCommandStatus;
 
     if (!actionCommandStatus->autoSucceed) {
-        if (playerData->otherHitsTaken < 9999U) {
+        if (playerData->otherHitsTaken < 9999) {
             playerData->otherHitsTaken++;
             actionCommandStatus->hitsTakenIsMax = FALSE;
         } else {
@@ -303,6 +303,7 @@ void func_80269118(void) {
 
 void func_80269160(void) {
     PlayerData* playerData = &gPlayerData;
+
     if (!gActionCommandStatus.autoSucceed && gActionCommandStatus.hitsTakenIsMax) {
         playerData->unk_296++;
     }
@@ -354,6 +355,7 @@ ApiStatus SetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+
     if (evt_get_variable(script, *script->ptrReadPos) != 0) {
         actionCommandStatus->autoSucceed = TRUE;
     } else {
@@ -371,9 +373,10 @@ INCLUDE_ASM(s32, "196AA0", CloseActionCommandInfo);
 
 INCLUDE_ASM(s32, "196AA0", func_80269470);
 
-ApiStatus func_802694A4(Evt *arg0, s32 isInitialCall) {
+ApiStatus func_802694A4(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
-    if (evt_get_variable(arg0, *arg0->ptrReadPos) == 0) {
+
+    if (evt_get_variable(script, *script->ptrReadPos) == 0) {
         actionCommandStatus->unk_61 = FALSE;
     } else {
         actionCommandStatus->unk_61 = TRUE;
