@@ -1867,14 +1867,66 @@ void step_current_game_mode(void) {
     }
 }
 
-// similar to step_current_game_mode, but calls unk_0C
-INCLUDE_ASM(s32, "a5dd0_len_114e0", state_do_unk);
+void state_do_unk(void) {
+    GameMode* gameMode = gMainGameState;
+    s32 i;
 
-// similar to step_current_game_mode, but calls render
-INCLUDE_ASM(s32, "a5dd0_len_114e0", state_render_backUI);
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
+        if (gameMode->flags != 0) {
+            if (!(gameMode->flags & 4)) {
+                if (!(gameMode->flags & 0x10)) {
+                    gameMode->unk_0C();
+                }
+            }
+        }
+    }
+}
 
-// calls renderAux and render
-INCLUDE_ASM(s32, "a5dd0_len_114e0", state_render_frontUI);
+void state_render_backUI(void) {
+    GameMode* gameMode = gMainGameState;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
+        if (gameMode->flags != 0) {
+            if (!(gameMode->flags & 4)) {
+                if (!(gameMode->flags & 0x10)) {
+                    gameMode->render();
+                }
+            }
+        }
+    }
+}
+
+void state_render_frontUI(void) {
+    GameMode* gameMode = gMainGameState;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
+        if (gameMode->flags != 0) {
+            if (!(gameMode->flags & 4)) {
+                if (!(gameMode->flags & 2)) {
+                    if (gameMode->flags & 0x20) {
+                        gameMode->renderAux();
+                    }
+                }
+            }
+        }
+    }
+
+    // re-initialization needed - evidence of inlining? or just copy/pasting?
+    gameMode = &gMainGameState;
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
+        if (gameMode->flags != 0) {
+            if (!(gameMode->flags & 4)) {
+                if (!(gameMode->flags & 2)) {
+                    if (gameMode->flags & 0x10) {
+                        gameMode->render();
+                    }
+                }
+            }
+        }
+    }
+}
 
 void appendGfx_model(Model* model);
 INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
