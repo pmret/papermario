@@ -348,12 +348,12 @@ ApiStatus GetActionCommandMode(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "196AA0", func_80269344);
 
-ApiStatus SetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
+ApiStatus GetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, *script->ptrReadPos, gActionCommandStatus.autoSucceed);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
+ApiStatus SetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     if (evt_get_variable(script, *script->ptrReadPos) != 0) {
