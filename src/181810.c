@@ -108,7 +108,72 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "181810", EndActorSpeech);
+ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 flags;
+    s32 anim;
+    f32 x, y, z;
+    s32 screenX, screenY, screenZ;
+
+    if (isInitialCall) {
+        Actor* actor = (Actor*) evt_get_variable(script, *args++);
+        s32 partIndex = evt_get_variable(script, *args++);
+        ActorPart *actorPart;
+
+        gSpeakingActorTalkAnim = evt_get_variable(script, *args++);
+        gSpeakingActorIdleAnim = evt_get_variable(script, *args++);
+
+        if ((s32) actor == ACTOR_SELF) {
+            actor = (Actor*) script->owner1.enemyID;
+        }
+        actor = get_actor((s32) actor);
+        actorPart = get_actor_part(actor, partIndex);
+        gSpeakingActor = actor;
+        gSpeakingActorPart = actorPart;
+        close_message(gSpeakingActorPrintCtx);
+        script->functionTemp[0] = 0;
+        increment_status_menu_disabled();
+    }
+
+    if (script->functionTemp[0] == 0) {
+        Actor* actor = gSpeakingActor;
+        ActorPart *actorPart = gSpeakingActorPart;
+
+        x = actor->currentPos.x + actor->headOffset.x;
+        if ((gSpeakingActor->flags & 0x8000) == 0) {
+            y = actor->currentPos.y + actor->headOffset.y + actor->size.y ;
+        } else {
+            y = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
+        }
+        z = actor->currentPos.z + actor->headOffset.z;
+        get_screen_coords(CAM_BATTLE, x, y, z, &screenX, &screenY, &screenZ);
+        msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
+
+        flags = gSpeakingActorPrintCtx->stateFlags;
+        if (flags & 0x40) {
+            decrement_status_menu_disabled();
+            return ApiStatus_DONE1;
+        }
+
+        if (flags & 0x80) {
+            anim = gSpeakingActorTalkAnim;
+        } else {
+            anim = gSpeakingActorIdleAnim;
+        }
+
+        if (anim >= 0) {
+            func_80263E08(actor, actorPart, anim);
+        }
+
+        if (gSpeakingActorPrintIsDone == TRUE) {
+            decrement_status_menu_disabled();
+            gOverrideFlags &= ~0x10;
+            return ApiStatus_DONE1;
+        }
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus ShowBattleChoice(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
