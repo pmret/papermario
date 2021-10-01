@@ -1953,7 +1953,7 @@ typedef struct MenuWindowBP {
 } MenuWindowBP; // size = 0x24;
 
 typedef struct {
-    /* 0x00 */ s8 flags;
+    /* 0x00 */ u8 flags;
     /* 0x01 */ s8 panelID; // ?
     /* 0x02 */ s8 unk_02; // related to heirarchy somehow - sibling? group?
     /* 0x03 */ s8 parent; // ?
