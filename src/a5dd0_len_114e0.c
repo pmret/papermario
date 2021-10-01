@@ -1742,11 +1742,11 @@ s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32*
     return ret;
 }
 
-void set_standard_shadow_scale(Shadow* shadow, f32 scale) {
+void set_standard_shadow_scale(Shadow* shadow, f32 height) {
     if (!gGameStatusPtr->isBattle) {
-        shadow->scale.x = 0.13 - (scale / 2600.0f);
+        shadow->scale.x = 0.13 - (height / 2600.0f);
     } else {
-        shadow->scale.x = 0.12 - (scale / 3600.0f);
+        shadow->scale.x = 0.12 - (height / 3600.0f);
     }
 
     if (shadow->scale.x < 0.01) {
@@ -1755,9 +1755,55 @@ void set_standard_shadow_scale(Shadow* shadow, f32 scale) {
     shadow->scale.z = shadow->scale.x;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_npc_shadow_scale);
+void set_npc_shadow_scale(Shadow* shadow, f32 height, f32 npcRadius) {
+    if (!gGameStatusPtr->isBattle) {
+        shadow->scale.x = 0.13 - (height / 2600.0f);
+    } else {
+        shadow->scale.x = 0.12 - (height / 3600.0f);
+    }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", set_peach_shadow_scale, Shadow* shadow, f32 scale);
+    if (shadow->scale.x < 0.01) {
+        shadow->scale.x = 0.01f;
+    }
+
+    if (npcRadius > 60.0f) {
+        shadow->scale.z = shadow->scale.x * 2.0f;
+    } else {
+        shadow->scale.z = shadow->scale.x;
+    }
+}
+
+//INCLUDE_ASM(void, "a5dd0_len_114e0", set_peach_shadow_scale, Shadow* shadow, f32 scale);
+void set_peach_shadow_scale(Shadow* shadow, f32 scale) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 phi_f2 = 0.12f;
+
+    if (!gGameStatusPtr->isBattle) {
+        switch (playerStatus->anim) {
+            case 0xC0018:
+            case 0xC0019:
+            case 0xC001A:
+            case 0xD0008:
+                shadow->scale.x = 0.26f - (scale / 2600.0f);
+                if (shadow->scale.x < 0.01) {
+                    shadow->scale.x = 0.01f;
+                }
+                shadow->scale.z = 0.13f - (scale / 2600.0f);
+                if (shadow->scale.z < 0.01) {
+                    shadow->scale.z = 0.01f;
+                }
+                return;
+        }
+
+        phi_f2 = 0.16f;
+    }
+
+    shadow->scale.x = phi_f2 - (scale / 3600.0f);
+    if (shadow->scale.x < 0.01) {
+        shadow->scale.x = 0.01f;
+    }
+    shadow->scale.z = shadow->scale.x;
+}
 
 s32 is_block_on_ground(Entity* block) {
     f32 x = block->position.x;
