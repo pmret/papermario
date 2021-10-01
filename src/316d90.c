@@ -6,19 +6,13 @@
 extern s32 D_7012ACA1[];
 
 void func_802AE000(void) {
-    s32(*readFunc)(OSPiHandle*, u32, u32*);
-    UNK_FUN_PTR(aFunction);
+    s32(*readFunc)(OSPiHandle*, u32, u32*) = osEPiReadIo;
+    s32 seed = 0x33F50000;
+    UNK_FUN_PTR(battle_heap_create) = D_7012ACA1;
+    u32 hash = 0;
     u32 thisInsn;
     u32* it;
     u32 prevInsn;
-    s32 seed;
-    u32 blah;
-    u32 hash;
-
-    readFunc = osEPiReadIo;
-    seed = 0x33F50000;
-    aFunction = D_7012ACA1;
-    hash = 0;
 
     readFunc(nuPiCartHandle, 0xB0000800, &thisInsn);
     seed -= thisInsn;
@@ -43,11 +37,11 @@ void func_802AE000(void) {
         prevInsn = thisInsn;
     }
 
-    aFunction += seed + 0x291993 - hash;
+    battle_heap_create += seed + 0x291993 - hash;
 
     // If the function's address is 0x8XXXXXXX
-    if (((u32)aFunction >> 0x1C) == 8) {
-        (aFunction)();
+    if (((u32)battle_heap_create >> 0x1C) == 8) {
+        (battle_heap_create)();
     } else {
         _heap_create(&D_803DA800, 0x10000);
     }
