@@ -1742,7 +1742,18 @@ s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32*
     return ret;
 }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", set_standard_shadow_scale, Shadow* shadow, f32 scale);
+void set_standard_shadow_scale(Shadow* shadow, f32 scale) {
+    if (!gGameStatusPtr->isBattle) {
+        shadow->scale.x = 0.13 - (scale / 2600.0f);
+    } else {
+        shadow->scale.x = 0.12 - (scale / 3600.0f);
+    }
+
+    if (shadow->scale.x < 0.01) {
+        shadow->scale.x = 0.01f;
+    }
+    shadow->scale.z = shadow->scale.x;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_npc_shadow_scale);
 
