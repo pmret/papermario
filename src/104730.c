@@ -102,25 +102,32 @@ s32 D_802E9898[9] = {
     0x00000000,
 };
 
-s32 D_802E98BC[8] = {
-    0x00200000, (s32) &D_802E9850, 0x00000000, (s32)entity_Shadow_init,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000
+StaticShadowData D_802E98BC = {
+    .flags = 0x20,
+    .unk_04 = &D_802E9850,
+    .animModelNode =  NULL,
+    .onCreateCallback = entity_Shadow_init,
+    .unk_20 = 0x01190A19,
 };
 
-s32 D_802E98DC[9] = {
-    0x01190A19, 0x00200000, (s32) &D_802E9874, 0x00000000,
-    (s32)entity_Shadow_init, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000
+StaticShadowData D_802E98E0 = {
+    .flags = 0x20,
+    .unk_04 = &D_802E9874,
+    .animModelNode =  NULL,
+    .onCreateCallback = entity_Shadow_init,
+    .unk_20 = 0x01190A19,
 };
 
-s32 D_802E9900[9] = {
-    0x01190A19, 0x00200000, (s32) &D_802E9898, 0x00000000,
-    (s32)entity_Shadow_init, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000,
+StaticShadowData D_802E9904 = {
+    .flags = 0x20,
+    .unk_04 = &D_802E9898,
+    .animModelNode =  NULL,
+    .onCreateCallback = entity_Shadow_init,
+    .unk_20 = 0x01190A19,
 };
 
-s32 D_802E9924[3] = {
-    0x01190A19, 0x00000000, 0x00000000
+s32 D_802E9928[2] = {
+    0x00000000, 0x00000000
 };
 
 s32 D_802E9930[51] = {

@@ -1600,7 +1600,6 @@ s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
     u16 staticFlags = entity->staticData->flags;
     s32 type;
     s16 shadowIndex;
-    Shadow* shadow;
 
     if (staticFlags & 0x200) {
         if (staticFlags & 0x800) {
@@ -1615,13 +1614,42 @@ s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
     shadowIndex = create_shadow_type(type, x, y, z);
     entity->shadowIndex = shadowIndex;
 
-    shadow = get_shadow_by_index(shadowIndex);
-    shadow->flags |= 0xC00000;
+    get_shadow_by_index(shadowIndex)->flags |= 0xC00000;
 
     return entity->shadowIndex;
 }
 
-INCLUDE_ASM(Shadow*, "a5dd0_len_114e0", create_shadow_type, s32 type, f32 x, f32 y, f32 z);
+s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z) {
+    s32 setFlag200 = FALSE;
+    StaticShadowData* data = &D_802E98BC;
+    s32 shadowIndex;
+
+    switch (type) {
+        case 2:
+            setFlag200 = TRUE;
+        case 0:
+            data = &D_802E98BC;
+            break;
+        case 3:
+            setFlag200 = TRUE;
+        case 1:
+            data = &D_802E9904;
+            break;
+        case 5:
+            setFlag200 = TRUE;
+        case 4:
+            data = &D_802E98E0;
+            break;
+    }
+
+    shadowIndex = create_shadow_from_data(data, x, y, z);
+
+    if (setFlag200) {
+        get_shadow_by_index(shadowIndex)->flags |= 0x200;
+    }
+
+    return shadowIndex;
+}
 
 void delete_shadow(s32 shadowIndex) {
     _delete_shadow(shadowIndex);
@@ -1773,7 +1801,6 @@ void set_npc_shadow_scale(Shadow* shadow, f32 height, f32 npcRadius) {
     }
 }
 
-//INCLUDE_ASM(void, "a5dd0_len_114e0", set_peach_shadow_scale, Shadow* shadow, f32 scale);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 phi_f2 = 0.12f;

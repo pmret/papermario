@@ -1239,7 +1239,8 @@ typedef struct StaticShadowData {
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ StaticAnimatorNode** animModelNode;
     /* 0x0C */ void (*onCreateCallback)(Shadow* shadow);
-    /* 0x10 */ char unk_10[0x14];
+    /* 0x10 */ char unk_10[0x10];
+    /* 0x20 */ s32 unk_20;
 } StaticShadowData; // size = 0x24
 
 typedef struct PushBlockGrid {

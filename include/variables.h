@@ -96,6 +96,9 @@ extern MessagePrintState* gCurrentPrintContext;
 extern s32 D_802DB264;
 extern MessagePrintState* D_802DB268;
 
+extern StaticShadowData D_802E98BC;
+extern StaticShadowData D_802E98E0;
+extern StaticShadowData D_802E9904;
 extern s32 D_802EB390;
 extern s32 D_802EB394;
 extern MessagePrintState* D_802EB398;
