@@ -27,7 +27,7 @@ INCLUDE_ASM(s32, "pause/135EE0", pause_set_cursor_opacity);
 extern s32 D_8024EFB4;
 
 void func_80242BAC(s32 windowID, s32 posX, s32 posY) {
-    Window *window = &gWindows[windowID];
+    Window* window = &gWindows[windowID];
 
     if (D_8024EFB4 != 0
             || get_game_mode() == GAME_MODE_EXIT_FILE_SELECT
@@ -39,44 +39,7 @@ void func_80242BAC(s32 windowID, s32 posX, s32 posY) {
                 Window* window = &gWindows[i];
                 s8 parent = window->parent;
 
-                if ((parent == -1 || parent == 0x16) && (window->flags & 8) != 0) {
-                    break;
-                }
-            }
-            if (i >= 0x2C) {
-                D_8024EFB4 = 0;
-            }
-        }
-        gPauseMenuTargetPosX = gPauseMenuCursorPosX = posX;
-        gPauseMenuTargetPosY = gPauseMenuCursorPosY = posY;
-
-    } else if ((window->flags & 8) == 0 && (window->parent == -1 || (gWindows[window->parent].flags & 8) == 0)) {
-        gPauseMenuTargetPosX = gPauseMenuCursorPosX = posX;
-        gPauseMenuTargetPosY = gPauseMenuCursorPosY = posY;
-    }
-}
-#else
-INCLUDE_ASM(s32, "pause/135EE0", func_80242BAC);
-#endif
-
-// Delay slot issue with gPauseMenuCursorPosY (needs .data)
-#ifdef NON_MATCHING
-extern s32 D_8024EFB4;
-
-void func_80242D04(s32 windowID, s32 posX, s32 posY) {
-    Window *window = &gWindows[windowID];
-
-    if (D_8024EFB4 != 0
-            || get_game_mode() == GAME_MODE_EXIT_FILE_SELECT
-            || get_game_mode() == GAME_MODE_EXIT_LANGUAGE_SELECT) {
-        if (D_8024EFB4 != 0) {
-            s32 i;
-
-            for (i = 0x16; i < 0x2C; i++) {
-                Window* window = &gWindows[i];
-                s8 parent = window->parent;
-
-                if ((parent == -1 || parent == 0x16) && (window->flags & 8) != 0) {
+                if ((parent == -1 || parent == 0x16) && (window->flags & 8)) {
                     break;
                 }
             }
@@ -88,7 +51,48 @@ void func_80242D04(s32 windowID, s32 posX, s32 posY) {
         gPauseMenuCursorPosX = posX;
         gPauseMenuTargetPosY = posY;
         gPauseMenuCursorPosY = posY;
-    } else if ((window->flags & 8) == 0 && (window->parent == -1 || (gWindows[window->parent].flags & 8) == 0)) {
+
+    } else if ((window->flags & 8) == 0 && (window->parent == -1 || !(gWindows[window->parent].flags & 8))) {
+        gPauseMenuTargetPosX = posX;
+        gPauseMenuCursorPosX = posX;
+        gPauseMenuTargetPosY = posY;
+        gPauseMenuCursorPosY = posY;
+    }
+}
+#else
+INCLUDE_ASM(s32, "pause/135EE0", func_80242BAC);
+#endif
+
+// Delay slot issue with gPauseMenuCursorPosY (needs .data)
+#ifdef NON_MATCHING
+extern s32 D_8024EFB4;
+
+void func_80242D04(s32 windowID, s32 posX, s32 posY) {
+    Window* window = &gWindows[windowID];
+
+    if (D_8024EFB4 != 0
+            || get_game_mode() == GAME_MODE_EXIT_FILE_SELECT
+            || get_game_mode() == GAME_MODE_EXIT_LANGUAGE_SELECT) {
+        if (D_8024EFB4 != 0) {
+            s32 i;
+
+            for (i = 0x16; i < 0x2C; i++) {
+                Window* window = &gWindows[i];
+                s8 parent = window->parent;
+
+                if ((parent == -1 || parent == 0x16) && (window->flags & 8)) {
+                    break;
+                }
+            }
+            if (i >= 0x2C) {
+                D_8024EFB4 = 0;
+            }
+        }
+        gPauseMenuTargetPosX = posX;
+        gPauseMenuCursorPosX = posX;
+        gPauseMenuTargetPosY = posY;
+        gPauseMenuCursorPosY = posY;
+    } else if ((window->flags & 8) == 0 && (window->parent == -1 || !(gWindows[window->parent].flags & 8))) {
         gPauseMenuTargetPosX = posX;
         gPauseMenuTargetPosY = posY;
     }
@@ -236,7 +240,7 @@ s32 pause_get_total_equipped_bp_cost(void) {
 }
 
 void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy) {
-    if (ulx < -2687 || uly < -2687 || lrx <= 0 || lry <= 0) {
+    if (ulx <= -2688 || uly <= -2688 || lrx <= 0 || lry <= 0) {
         return;
     }
     if (ulx >= 1280 || uly >= 960 || lrx >= 2688 || lry >= 2688) {
@@ -245,7 +249,7 @@ void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32
     gSPScisTextureRectangle(gMasterGfxPos++, ulx, uly, lrx, lry, tileDescriptor, uls, ult, dsdx, dtdy);
 }
 
-void pause_sort_item_list(s16 *arr, s32 len, s32 (*compare)(s16*, s16 *)) {
+void pause_sort_item_list(s16* arr, s32 len, s32 (*compare)(s16*, s16 *)) {
     if (len < 2) {
         // Trivially sorted
         return;
