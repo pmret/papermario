@@ -118,7 +118,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         Actor* actor = (Actor*) evt_get_variable(script, *args++);
         s32 partIndex = evt_get_variable(script, *args++);
-        ActorPart *actorPart;
+        ActorPart* actorPart;
 
         gSpeakingActorTalkAnim = evt_get_variable(script, *args++);
         gSpeakingActorIdleAnim = evt_get_variable(script, *args++);
@@ -137,10 +137,10 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
 
     if (script->functionTemp[0] == 0) {
         Actor* actor = gSpeakingActor;
-        ActorPart *actorPart = gSpeakingActorPart;
+        ActorPart* actorPart = gSpeakingActorPart;
 
         x = actor->currentPos.x + actor->headOffset.x;
-        if ((gSpeakingActor->flags & 0x8000) == 0) {
+        if (!(gSpeakingActor->flags & 0x8000)) {
             y = actor->currentPos.y + actor->headOffset.y + actor->size.y ;
         } else {
             y = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
