@@ -1725,7 +1725,24 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", set_npc_shadow_scale);
 
 INCLUDE_ASM(void, "a5dd0_len_114e0", set_peach_shadow_scale, Shadow* shadow, f32 scale);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", is_block_on_ground);
+s32 is_block_on_ground(Entity* block) {
+    f32 x = block->position.x;
+    f32 y = block->position.y;
+    f32 z = block->position.z;
+    f32 hitYaw;
+    f32 hitPitch;
+    f32 hitLength;
+    s32 ret;
+
+    entity_raycast_down(&x, &y, &z, &hitYaw, &hitPitch, &hitLength);
+
+    ret = hitLength;
+    if (ret == 32767) {
+        ret = 0;
+    }
+
+    return ret;
+}
 
 void state_delegate_NOP(void) {
 }
