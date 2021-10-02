@@ -695,9 +695,8 @@ extern ModelList bModelList;
 extern u32* wModelSpecialDls[32];
 extern u32* bModelSpecialDls[32];
 
-
-extern ModelCustomGfxBuilder wCustomModelGfxBuilders;
-extern ModelCustomGfxBuilder bCustomModelGfxBuilders;
+extern ModelCustomGfxBuilderFunc* wCustomModelGfxBuilders;
+extern ModelCustomGfxBuilderFunc* bCustomModelGfxBuilders;
 extern ModelLocalVertexCopy** D_80152190;
 extern ModelLocalVertexCopy** D_801521D0;
 
