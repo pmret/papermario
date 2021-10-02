@@ -1420,7 +1420,7 @@ s32 create_shadow_from_data(StaticShadowData* data, f32 x, f32 y, f32 z) {
         }
     }
 
-    ASSERT(i < 60);
+    ASSERT(i < ARRAY_COUNT(*gCurrentShadowListPtr));
 
     shadow = heap_malloc(sizeof(*shadow));
     (*gCurrentShadowListPtr)[i] = shadow;
@@ -2891,12 +2891,25 @@ s32 mdl_get_next_texture_address(s32 size) {
 
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_set_all_fog_mode);
+void mdl_set_all_fog_mode(s32 fogMode) {
+    ModelList* modelList = gCurrentModels;
+    Model* model;
+    s32 fogType = fogMode; // weirdness here and the next line needed to match
+    s32 i = fogMode;
+
+    for (i = 0; i < ARRAY_COUNT(*modelList); i++) {
+        model = (*modelList)[i];
+
+        if (model != NULL) {
+            set_mdl_custom_gfx_set(model, -1, fogType);
+        }
+    }
+}
 
 void clear_render_tasks(void) {
     s32 i;
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(mdl_clearRenderTasks); i++) {
         mdl_renderTaskLists[i] = mdl_clearRenderTasks[i];
     }
 
