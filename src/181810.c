@@ -1,5 +1,5 @@
 #include "common.h"
-#include "src/battle.h"
+#include "battle/battle.h"
 
 extern MessagePrintState* gSpeakingActorPrintCtx;
 extern MessagePrintState* D_8029FA64;
