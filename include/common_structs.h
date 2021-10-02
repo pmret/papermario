@@ -1907,6 +1907,7 @@ typedef struct MenuPanel {
     /* 0x14 */ UNK_FUN_PTR(fpUpdate);
     /* 0x18 */ UNK_FUN_PTR(fpCleanup);
 } MenuPanel; // size = 0x1C
+
 #define MENU_PANEL_SELECTED_GRID_DATA(panel) \
             ((panel)->gridData[((panel)->page * (panel)->numCols * (panel)->numRows) + \
             ((panel)->numCols * (panel)->row) + \

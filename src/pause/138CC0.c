@@ -7,7 +7,6 @@ typedef struct {
     s32 baseMsgID;
 } StatsEntryData; // size = 0xC
 
-// Probably .data or .bss in this file, not used anywhere else
 extern HudElementAnim* gStatsMenuElements[12];
 extern MenuWindowBP gStatsMenuWindowBPs[1];
 extern StatsEntryData gStatsMenuEntries[11];
@@ -59,7 +58,7 @@ void pause_stats_handle_input(MenuPanel* panel) {
         while (1) {
             panel->col++;
             if (panel->col >= panel->numCols) {
-                panel->col = panel->numCols-1;
+                panel->col = panel->numCols - 1;
                 break;
             } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
                 break;
@@ -83,7 +82,7 @@ void pause_stats_handle_input(MenuPanel* panel) {
         while (1) {
             panel->row++;
             if (panel->row >= panel->numRows) {
-                panel->row = panel->numRows-1;
+                panel->row = panel->numRows - 1;
                 break;
             } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
                 break;
