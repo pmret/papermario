@@ -1908,11 +1908,6 @@ typedef struct MenuPanel {
     /* 0x18 */ UNK_FUN_PTR(fpCleanup);
 } MenuPanel; // size = 0x1C
 
-#define MENU_PANEL_SELECTED_GRID_DATA(panel) \
-            ((panel)->gridData[((panel)->page * (panel)->numCols * (panel)->numRows) + \
-            ((panel)->numCols * (panel)->row) + \
-            (panel)->col])
-
 typedef struct WindowBackground {
     /* 0x00 */ s32* imgData;
     /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8

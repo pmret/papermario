@@ -48,7 +48,10 @@ void pause_stats_handle_input(MenuPanel* panel) {
             if (panel->col < 0) {
                 panel->col = 0;
                 break;
-            } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
+            } else if (panel->selected != panel->gridData[
+                                            (panel->page * panel->numCols * panel->numRows)
+                                          + (panel->numCols * panel->row)
+                                          + (panel->col)]) {
                 break;
             }
         }
@@ -60,7 +63,10 @@ void pause_stats_handle_input(MenuPanel* panel) {
             if (panel->col >= panel->numCols) {
                 panel->col = panel->numCols - 1;
                 break;
-            } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
+            } else if (panel->selected != panel->gridData[
+                                            (panel->page * panel->numCols * panel->numRows)
+                                          + (panel->numCols * panel->row)
+                                          + (panel->col)]) {
                 break;
             }
         }
@@ -72,7 +78,10 @@ void pause_stats_handle_input(MenuPanel* panel) {
             if (panel->row < 0) {
                 panel->row = 0;
                 break;
-            } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
+            } else if (panel->selected != panel->gridData[
+                                            (panel->page * panel->numCols * panel->numRows)
+                                          + (panel->numCols * panel->row)
+                                          + (panel->col)]) {
                 break;
             }
         }
@@ -84,13 +93,19 @@ void pause_stats_handle_input(MenuPanel* panel) {
             if (panel->row >= panel->numRows) {
                 panel->row = panel->numRows - 1;
                 break;
-            } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
+            } else if (panel->selected != panel->gridData[
+                                            (panel->page * panel->numCols * panel->numRows)
+                                          + (panel->numCols * panel->row)
+                                          + (panel->col)]) {
                 break;
             }
         }
     }
 
-    panel->selected = MENU_PANEL_SELECTED_GRID_DATA(panel);
+    panel->selected = panel->gridData[
+                        (panel->page * panel->numCols * panel->numRows)
+                      + (panel->numCols * panel->row)
+                      + (panel->col)];
     if (panel->selected != initialSelection) {
         sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
     }
