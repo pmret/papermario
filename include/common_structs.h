@@ -1894,19 +1894,23 @@ typedef struct PauseMapSpace {
 
 typedef struct MenuPanel {
     /* 0x00 */ u8 initialized; //?
-    /* 0x01 */ s8 col; // might be backwards
-    /* 0x02 */ s8 row; // might be backwards
-    /* 0x03 */ u8 selected;
+    /* 0x01 */ s8 col;
+    /* 0x02 */ s8 row;
+    /* 0x03 */ u8 selected; // usually set to the current value from gridData
     /* 0x04 */ s8 page; // filemenu: 0 = select, 1 = delete, 3 = copy from, 4 = copy to, all else = save
     /* 0x05 */ s8 numCols;
     /* 0x06 */ s8 numRows;
-    /* 0x07 */ char unk_07;
-    /* 0x08 */ s8* gridData; // user value at each 2D grid point
+    /* 0x07 */ s8 numPages; // unsure
+    /* 0x08 */ u8* gridData; // user value at each 3D grid point (page, row, col)
     /* 0x0C */ UNK_FUN_PTR(fpInit);
     /* 0x10 */ UNK_FUN_PTR(fpHandleInput);
     /* 0x14 */ UNK_FUN_PTR(fpUpdate);
     /* 0x18 */ UNK_FUN_PTR(fpCleanup);
 } MenuPanel; // size = 0x1C
+#define MENU_PANEL_SELECTED_GRID_DATA(panel) \
+            ((panel)->gridData[((panel)->page * (panel)->numCols * (panel)->numRows) + \
+            ((panel)->numCols * (panel)->row) + \
+            (panel)->col])
 
 typedef struct WindowBackground {
     /* 0x00 */ s32* imgData;

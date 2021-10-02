@@ -1,5 +1,17 @@
 #include "common.h"
 
+// Probably only used here, but could theoretically be used in the main menu too
+typedef struct {
+    s32 cursorX;
+    s32 cursorY;
+    s32 baseMsgID;
+} StatsEntryData; // size = 0xC
+
+// Probably .data or .bss in this file, not used anywhere else
+extern HudElementAnim* gStatsMenuElements[12];
+extern MenuWindowBP gStatsMenuWindowBPs[1];
+extern StatsEntryData gStatsMenuEntries[11];
+
 // Fake "badge" for the None entry that appears on the equipped badges page when nothing is equipped
 #define BADGE_NONE_STANDIN 0x7FFE
 // Invalid badge ID filled in unused slots of gBadgeMenuItemIDs
@@ -7,9 +19,127 @@
 
 INCLUDE_ASM(s32, "pause/138CC0", pause_stats_draw_contents);
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_stats_init);
+void pause_stats_init(MenuPanel* panel) {
+    s32 i;
 
-INCLUDE_ASM(s32, "pause/138CC0", pause_stats_handle_input);
+    for (i = 0; i < ARRAY_COUNT(gStatsMenuIconIDs); i++) {
+        s32 iconID = create_hud_element(gStatsMenuElements[i]);
+
+        gStatsMenuIconIDs[i] = iconID;
+        set_hud_element_flags(iconID, 0x80);
+    }
+
+    for (i = 0; i < ARRAY_COUNT(gStatsMenuWindowBPs); i++) {
+        gStatsMenuWindowBPs[i].tab = panel;
+    }
+
+    setup_pause_menu_tab(gStatsMenuWindowBPs, ARRAY_COUNT(gStatsMenuWindowBPs));
+    panel->initialized = TRUE;
+}
+
+void pause_stats_handle_input(MenuPanel* panel) {
+    s32 initialSelection = panel->selected;
+    s16 adjustedBootsLevel;
+    s16 adjustedHammerLevel;
+    s32 msgOffset;
+
+    if (gPauseMenuHeldButtons & BUTTON_STICK_LEFT) {
+        while (1) {
+            panel->col--;
+            if (panel->col < 0) {
+                panel->col = 0;
+                break;
+            } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
+                break;
+            }
+        }
+    }
+
+    if (gPauseMenuHeldButtons & BUTTON_STICK_RIGHT) {
+        while (1) {
+            panel->col++;
+            if (panel->col >= panel->numCols) {
+                panel->col = panel->numCols-1;
+                break;
+            } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
+                break;
+            }
+        }
+    }
+
+    if (gPauseMenuHeldButtons & BUTTON_STICK_UP) {
+        while (1) {
+            panel->row--;
+            if (panel->row < 0) {
+                panel->row = 0;
+                break;
+            } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
+                break;
+            }
+        }
+    }
+
+    if (gPauseMenuHeldButtons & BUTTON_STICK_DOWN) {
+        while (1) {
+            panel->row++;
+            if (panel->row >= panel->numRows) {
+                panel->row = panel->numRows-1;
+                break;
+            } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
+                break;
+            }
+        }
+    }
+
+    panel->selected = MENU_PANEL_SELECTED_GRID_DATA(panel);
+    if (panel->selected != initialSelection) {
+        sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
+    }
+
+    msgOffset = 0;
+    adjustedBootsLevel = gPlayerData.bootsLevel;
+    adjustedHammerLevel = gPlayerData.hammerLevel;
+
+    adjustedBootsLevel++;
+    if (adjustedBootsLevel < 0) {
+        adjustedBootsLevel = 0;
+    }
+    if (adjustedBootsLevel > 3) {
+        adjustedBootsLevel = 3;
+    }
+
+    adjustedHammerLevel++;
+    if (adjustedHammerLevel < 0) {
+        adjustedHammerLevel = 0;
+    }
+    if (adjustedHammerLevel > 3) {
+        adjustedHammerLevel = 3;
+    }
+
+    switch (gStatsMenuEntries[panel->selected].baseMsgID) {
+        case 0x25:
+            if (adjustedBootsLevel > 1) {
+                msgOffset = adjustedBootsLevel - 1;
+            }
+            break;
+        case 0x28:
+            msgOffset = adjustedHammerLevel;
+            break;
+        case 0x2F:
+            if (evt_get_variable(NULL, EVT_SAVE_FLAG_TUTORIAL_GOT_STAR_PIECE)) {
+                msgOffset = 1;
+            }
+            break;
+    }
+
+    gPauseMenuCurrentDescMsg = pause_get_menu_msg(gStatsMenuEntries[panel->selected].baseMsgID + msgOffset);
+    gPauseMenuCurrentDescIconScript = NULL;
+
+    if (gPauseMenuPressedButtons & BUTTON_B) {
+        sfx_play_sound(SOUND_MENU_BACK);
+        gPauseMenuCurrentTab = 0;
+    }
+}
 
 void pause_stats_cleanup(void) {
     s32* iconIDs = gStatsMenuIconIDs;
@@ -302,7 +432,7 @@ void pause_badges_load_badges(s32 onlyEquipped) {
     gBadgeMenuTargetScrollPos = gBadgeMenuCurrentScrollPos = pause_badges_get_pos_y(0, 0);
 }
 
-void pause_badges_init(MenuPanel *panel) {
+void pause_badges_init(MenuPanel* panel) {
     s32 i;
 
     // This sorts the badge list and then discards the count
@@ -332,7 +462,7 @@ void pause_badges_init(MenuPanel *panel) {
     panel->initialized = TRUE;
 }
 
-void pause_badges_handle_input(void) {
+void pause_badges_handle_input(MenuPanel* panel) {
     s32 selectedIndex = gBadgeMenuSelectedIndex;
     s32 numCols = gBadgeMenuPages[gBadgeMenuCurrentPage].numCols;
 

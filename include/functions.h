@@ -249,6 +249,7 @@ s32 pause_interp_vertical_scroll(s32 deltaBefore);
 void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
 s32 pause_get_total_equipped_bp_cost(void);
 s32 pause_get_menu_msg(s32 index);
+void pause_sort_item_list(s16* arr, s32 len, s32 (*compare)(s16*, s16 *));
 
 s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
