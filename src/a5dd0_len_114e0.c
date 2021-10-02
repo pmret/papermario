@@ -2081,8 +2081,6 @@ s32 mdl_get_child_count(ModelNode* model) {
     return ret;
 }
 
-// Issue with pointer advancement in the gCurrentCustomModelGfxPtr loop (adding 8 bytes instead of 4)
-#ifdef NON_MATCHING
 void clear_model_data(void) {
     s32 i;
 
@@ -2121,8 +2119,8 @@ void clear_model_data(void) {
     }
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentCustomModelGfxPtr); i++) {
-        (*gCurrentCustomModelGfxPtr)[i].pre = 0;
-        (*gCurrentCustomModelGfxBuildersPtr)[i].pre = 0;
+        (*gCurrentCustomModelGfxPtr)[i] = 0;
+        (*gCurrentCustomModelGfxBuildersPtr)[i] = 0;
     }
 
     *gCurrentModelTreeRoot = NULL;
@@ -2149,9 +2147,6 @@ void clear_model_data(void) {
         texPannerMainU[i] = 0;
     }
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
-#endif
 
 void init_model_data(void) {
     if (!gGameStatusPtr->isBattle) {
@@ -2706,13 +2701,13 @@ void set_mdl_custom_gfx_set(Model* model, s32 customGfxIndex, u32 fogType) {
 }
 
 void set_custom_gfx(s32 customGfxIndex, Gfx* pre, Gfx* post) {
-    (*gCurrentCustomModelGfxPtr)[customGfxIndex].pre = pre;
-    (*gCurrentCustomModelGfxPtr)[customGfxIndex].post = post;
+    (*gCurrentCustomModelGfxPtr)[customGfxIndex * 2] = pre;
+    (*gCurrentCustomModelGfxPtr)[customGfxIndex * 2 + 1] = post;
 }
 
 void set_custom_gfx_builders(s32 customGfxIndex, ModelCustomGfxBuilderFunc pre, ModelCustomGfxBuilderFunc post) {
-    (*gCurrentCustomModelGfxBuildersPtr)[customGfxIndex].pre = pre;
-    (*gCurrentCustomModelGfxBuildersPtr)[customGfxIndex].post = post;
+    (*gCurrentCustomModelGfxBuildersPtr)[customGfxIndex * 2] = pre;
+    (*gCurrentCustomModelGfxBuildersPtr)[customGfxIndex * 2 + 1] = post;
 }
 
 void build_custom_gfx(void) {
@@ -2723,18 +2718,18 @@ void build_custom_gfx(void) {
 
     gSPBranchList(gMasterGfxPos++, 0x00000000);
 
-    for (i = 0; i < 0x10; i++) {
-        preFunc = (*gCurrentCustomModelGfxBuildersPtr)[i].pre;
+    for (i = 0; i < ARRAY_COUNT(*gCurrentCustomModelGfxPtr) / 2; i++) {
+        preFunc = (*gCurrentCustomModelGfxBuildersPtr)[i * 2];
 
         if (preFunc != NULL) {
-            (*gCurrentCustomModelGfxPtr)[i].pre = gMasterGfxPos;
+            (*gCurrentCustomModelGfxPtr)[i * 2] = gMasterGfxPos;
             preFunc(i);
             gSPEndDisplayList(gMasterGfxPos++);
         }
 
-        postFunc = (*gCurrentCustomModelGfxBuildersPtr)[i].post;
+        postFunc = (*gCurrentCustomModelGfxBuildersPtr)[i * 2 + 1];
         if (postFunc != NULL) {
-            (*gCurrentCustomModelGfxPtr)[i].post = gMasterGfxPos;
+            (*gCurrentCustomModelGfxPtr)[i * 2 + 1] = gMasterGfxPos;
             postFunc(i);
             gSPEndDisplayList(gMasterGfxPos++);
         }
@@ -2901,7 +2896,7 @@ void clear_render_tasks(void) {
 void clear_render_tasks_alt(void) {
     s32 i;
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(mdl_clearRenderTasks); i++) {
         mdl_renderTaskLists[i] = mdl_clearRenderTasks[i];
     }
 

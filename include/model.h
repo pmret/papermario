@@ -105,8 +105,8 @@ typedef struct ModelBlueprint {
     /* 0xC */ Matrix4s* mtx;
 } ModelBlueprint; // size = 0x10
 
-typedef ModelCustomGfx ModelCustomGfxList[32];
-typedef ModelCustomGfxBuilder ModelCustomGfxBuilderList[32];
+typedef Gfx* ModelCustomGfxList[32];
+typedef ModelCustomGfxBuilderFunc* ModelCustomGfxBuilderList[32];
 
 // In memory this is a list of ModelNodeProperty, but due to the way it uses
 // the fields (storing into the "type" field) we decided to make a struct for this
