@@ -19053,7 +19053,6 @@ gCollisionStatus = 0x8015A550; // size:0x28
 D_8015A578 = 0x8015A578; // type:data
 D_8015A57A = 0x8015A57A; // type:data
 mdl_textureHandles = 0x8015A590; // type:data
-D_8015C74C = 0x8015C74C; // type:data
 D_8015C790 = 0x8015C790; // type:data
 D_8015C7A4 = 0x8015C7A4; // type:data
 D_8015C7A8 = 0x8015C7A8; // type:data

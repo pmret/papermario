@@ -2061,7 +2061,24 @@ ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key) {
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", _load_model_textures);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", load_model_textures);
+void load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
+    s32 battleOffset = ((gGameStatusPtr->isBattle != 0) << 17);
+
+    mdl_nextTextureAddress = mdl_textureBaseAddress + battleOffset;
+
+    if (model != NULL && romOffset != 0 && size != 0) {
+        s32 i;
+
+        for (i = 0; i < ARRAY_COUNT(mdl_textureHandles); i++) {
+            mdl_textureHandles[i].gfx = NULL;
+        }
+
+        mdl_treeIterPos = 0;
+        if (model != NULL) {
+            _load_model_textures();
+        }
+    }
+}
 
 s32 mdl_get_child_count(ModelNode* model) {
     s32 ret = 0;
