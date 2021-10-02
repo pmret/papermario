@@ -415,7 +415,7 @@ void btl_update(void) {
                 }
             } else if (D_802809F6 == 0xFF) {
                 if (gBattleState != 0x23) {
-                    btl_set_state(0x23, 0xFF);
+                    btl_set_state(0x23);
                 }
             } else {
                 D_802809F6 += 10;

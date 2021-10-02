@@ -259,7 +259,9 @@ void render_curtains(void) {
     }
 
     if (!(gGameStatusPtr->contBitPattern & 1)) {
-        if ((get_game_mode() == 0x10) || (get_game_mode() == 2) || (gGameStatusPtr->demoState != 0)) {
+        if ((get_game_mode() == GAME_MODE_INTRO)
+                || (get_game_mode() == GAME_MODE_TITLE_SCREEN)
+                || (gGameStatusPtr->demoState != 0)) {
             s32 alpha = ((gGameStatusPtr->frameCounter) % 0x18) << 5;
 
             if (alpha > 255) {
