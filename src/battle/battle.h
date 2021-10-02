@@ -315,7 +315,7 @@ typedef struct BattleArea {
     /* 0x10 */ BattleList* battles;
     /* 0x14 */ StageList* stages;
     /* 0x18 */ s32 unused_18;
-    /* 0x1C */ void* dmaTable;
+    /* 0x1C */ DmaTable* dmaTable;
 } BattleArea; // size = 0x20
 
 extern BattleArea gBattleAreas[0x30];

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/battle.h"
 
 extern MessagePrintState* gSpeakingActorPrintCtx;
 extern MessagePrintState* D_8029FA64;
@@ -211,7 +212,21 @@ ApiStatus OverrideBattleDmaDest(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "181810", LoadBattleDmaData);
+ApiStatus LoadBattleDmaData(Evt* script, s32 isInitialCall) {
+    s32* moveScript = &gBattleAreas[gCurrentBattleSection].dmaTable[evt_get_variable(script, *script->ptrReadPos)];
+
+    if (moveScript == NULL) {
+        return ApiStatus_DONE2;
+    }
+    
+    if (gBattleDmaDest == 0) {
+            dma_copy(moveScript[0], moveScript[1], moveScript[2]);
+        } else {
+            dma_copy(moveScript[0], moveScript[1], gBattleDmaDest);
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802536A8(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

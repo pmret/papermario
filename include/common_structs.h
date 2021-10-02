@@ -92,6 +92,12 @@ typedef struct CamPosSettings {
     /* 0x10 */ Vec3f position;
 } CamPosSettings; // size = 0x1C
 
+typedef struct DmaTable {
+    /* 0x00 */ s32 dmaStart;
+    /* 0x04 */ s32 dmaEnd;
+    /* 0x08 */ s32 dmaDest;
+} DmaTable;
+
 typedef struct PartnerData {
     /* 0x00 */ u8 enabled;
     /* 0x01 */ s8 level;
