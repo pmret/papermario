@@ -1136,8 +1136,8 @@ glabel pause_stats_draw_contents
 /* 139D98 80246A58 1462000F */  bne       $v1, $v0, .L80246A98
 /* 139D9C 80246A5C 2404001F */   addiu    $a0, $zero, 0x1f
 /* 139DA0 80246A60 8FA80080 */  lw        $t0, 0x80($sp)
-/* 139DA4 80246A64 3C058025 */  lui       $a1, %hi(D_8024F3B0)
-/* 139DA8 80246A68 24A5F3B0 */  addiu     $a1, $a1, %lo(D_8024F3B0)
+/* 139DA4 80246A64 3C058025 */  lui       $a1, %hi(gStatsMenuEntries)
+/* 139DA8 80246A68 24A5F3B0 */  addiu     $a1, $a1, %lo(gStatsMenuEntries)
 /* 139DAC 80246A6C 91030003 */  lbu       $v1, 3($t0)
 /* 139DB0 80246A70 8FA80084 */  lw        $t0, 0x84($sp)
 /* 139DB4 80246A74 00431004 */  sllv      $v0, $v1, $v0
