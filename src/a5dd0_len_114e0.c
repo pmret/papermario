@@ -742,6 +742,7 @@ void _delete_shadow(s32 shadowIndex);
 s32 entity_get_collision_flags(Entity* entity);
 void entity_free_static_data(StaticEntityData* data);
 void update_entity_shadow_position(Entity* entity);
+s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32* hitLength);
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
 void enable_transform_group(u16 modelID);
 
