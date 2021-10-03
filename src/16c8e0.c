@@ -610,7 +610,7 @@ void btl_delete_actor(Actor* actor) {
 
     while (partsTable != NULL) {
         if (!(partsTable->flags & 0x4)) {
-            delete_shadow(partsTable->shadow);
+            delete_shadow(partsTable->shadowIndex);
         }
 
         if (partsTable->idleAnimations != NULL) {

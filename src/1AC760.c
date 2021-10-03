@@ -171,7 +171,7 @@ ApiStatus func_8027FC90(Evt* script, s32 isInitialCall) {
     battleStatus->flags1 |= 0x20;
 
     hitResult = calc_partner_damage_enemy();
-    show_damage_popup(actor->walk.goalPos.x, actor->walk.goalPos.y, actor->walk.goalPos.z, battleStatus->lastAttackDamage,
+    show_damage_popup(actor->state.goalPos.x, actor->state.goalPos.y, actor->state.goalPos.z, battleStatus->lastAttackDamage,
                       0);
     evt_set_variable(script, outVar, hitResult);
 

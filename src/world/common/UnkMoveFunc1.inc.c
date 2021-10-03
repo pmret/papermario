@@ -7,9 +7,9 @@ ApiStatus N(UnkMoveFunc1)(Evt* script, s32 isInitialCall) {
     f32 posX = playerActor->currentPos.x;
     f32 posY = playerActor->currentPos.y;
     f32 posZ = playerActor->currentPos.z;
-    f32 goalX = playerActor->walk.goalPos.x;
-    f32 goalY = playerActor->walk.goalPos.y;
-    f32 goalZ = playerActor->walk.goalPos.z;
+    f32 goalX = playerActor->state.goalPos.x;
+    f32 goalY = playerActor->state.goalPos.y;
+    f32 goalZ = playerActor->state.goalPos.z;
 
     script->varTable[0] = (dist3D(posX, posY, posZ, goalX, goalY, goalZ) * 15.0f) / 100.0f;
 

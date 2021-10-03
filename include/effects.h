@@ -54,7 +54,7 @@ typedef struct StarSpiritEffect {
     /* 0x34 */ f32 unk_34;
     /* 0x38 */ s32 unk_38;
     /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ Shadow* unk_40;
+    /* 0x40 */ s32 unk_40; // an shadowID
     /* 0x44 */ s16 unk_44;
     /* 0x46 */ s16 unk_46;
     /* 0x48 */ s16 unk_48;

@@ -42,11 +42,10 @@ pipeline {
                         def message = "${us_progress}\n${jp_progress}\n${warnings}"
 
                         if (message != "\n\n") {
-                            if (comment_id == -1) {
-                                pullRequest.comment(message)
-                            } else {
-                                pullRequest.editComment(comment_id, message)
+                            if (comment_id != -1) {
+                                pullRequest.deleteComment(comment_id)
                             }
+                            pullRequest.comment(message)
                         }
                     }
                 }

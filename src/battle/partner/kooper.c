@@ -6,22 +6,22 @@
 ApiStatus func_80238000_6F5E80(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    ActorMovement* partnerActorMovement = &partnerActor->walk;
+    ActorMovement* partnerActorMovement = &partnerActor->state;
 
     if (isInitialCall) {
-        partnerActor->walk.currentPos.x = partnerActor->currentPos.x;
-        partnerActor->walk.currentPos.y = partnerActor->currentPos.y;
-        partnerActor->walk.currentPos.z = partnerActor->currentPos.z;
+        partnerActor->state.currentPos.x = partnerActor->currentPos.x;
+        partnerActor->state.currentPos.y = partnerActor->currentPos.y;
+        partnerActor->state.currentPos.z = partnerActor->currentPos.z;
     }
 
-    add_xz_vec3f(&partnerActorMovement->currentPos, partnerActor->walk.speed, partnerActor->walk.angle);
+    add_xz_vec3f(&partnerActorMovement->currentPos, partnerActor->state.speed, partnerActor->state.angle);
 
-    if (partnerActor->walk.speed < 4.0f) {
-        play_movement_dust_effects(0, partnerActor->walk.currentPos.x, partnerActor->walk.currentPos.y,
-                                   partnerActor->walk.currentPos.z, partnerActor->walk.angle);
+    if (partnerActor->state.speed < 4.0f) {
+        play_movement_dust_effects(0, partnerActor->state.currentPos.x, partnerActor->state.currentPos.y,
+                                   partnerActor->state.currentPos.z, partnerActor->state.angle);
     } else {
-        play_movement_dust_effects(1, partnerActor->walk.currentPos.x, partnerActor->walk.currentPos.y,
-                                   partnerActor->walk.currentPos.z, partnerActor->walk.angle);
+        play_movement_dust_effects(1, partnerActor->state.currentPos.x, partnerActor->state.currentPos.y,
+                                   partnerActor->state.currentPos.z, partnerActor->state.angle);
     }
 
     partnerActorMovement->speed = partnerActorMovement->speed / 1.5;

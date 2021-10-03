@@ -118,7 +118,7 @@ INCLUDE_ASM(s32, "19FAF0", PlayerFallToGoal, Evt* script, s32 isInitialCall);
 
 ApiStatus PlayerLandJump(Evt *script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
-    ActorMovementWalk* walkMovement = &player->walk;
+    ActorState* walkMovement = &player->state;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;

@@ -946,20 +946,20 @@ ApiStatus LandJump(Evt* script, s32 isInitialCall) {
 
         actor = get_actor(actorID);
         script->functionTemp[1] = (s32)actor;
-        actor->walk.currentPos.x = actor->currentPos.x;
-        actor->walk.currentPos.y = actor->currentPos.y;
-        actor->walk.currentPos.z = actor->currentPos.z;
+        actor->state.currentPos.x = actor->currentPos.x;
+        actor->state.currentPos.y = actor->currentPos.y;
+        actor->state.currentPos.z = actor->currentPos.z;
         script->functionTemp[0] = 1;
     }
 
     actor = (Actor*)script->functionTemp[1];
-    actor->walk.currentPos.y += actor->walk.velocity;
-    actor->walk.velocity -= actor->walk.acceleration;
+    actor->state.currentPos.y += actor->state.velocity;
+    actor->state.velocity -= actor->state.acceleration;
 
-    add_xz_vec3f(&actor->walk.currentPos, actor->walk.speed, actor->walk.angle);
-    actor->currentPos.x = actor->walk.currentPos.x;
-    actor->currentPos.y = actor->walk.currentPos.y;
-    actor->currentPos.z = actor->walk.currentPos.z;
+    add_xz_vec3f(&actor->state.currentPos, actor->state.speed, actor->state.angle);
+    actor->currentPos.x = actor->state.currentPos.x;
+    actor->currentPos.y = actor->state.currentPos.y;
+    actor->currentPos.z = actor->state.currentPos.z;
 
     if (actor->currentPos.y < 0.0f) {
         actor->currentPos.y = 0.0f;

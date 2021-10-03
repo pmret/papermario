@@ -3,6 +3,7 @@
 
 void func_80200000(void);
 void func_80200080(void);
+void func_802AE000_316C00(void);
 void func_802AE000(void);
 
 void func_802B2000(void) {

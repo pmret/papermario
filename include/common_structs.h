@@ -1245,7 +1245,8 @@ typedef struct StaticShadowData {
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ StaticAnimatorNode** animModelNode;
     /* 0x0C */ void (*onCreateCallback)(Shadow* shadow);
-    /* 0x10 */ char unk_10[0x14];
+    /* 0x10 */ char unk_10[0x10];
+    /* 0x20 */ s32 unk_20;
 } StaticShadowData; // size = 0x24
 
 typedef struct PushBlockGrid {
@@ -1330,7 +1331,7 @@ typedef struct ActorPart {
     /* 0x94 */ u32* idleAnimations;
     /* 0x98 */ s16 opacity;
     /* 0x9A */ char unk_9A[2];
-    /* 0x9C */ struct Shadow* shadow;
+    /* 0x9C */ s32 shadowIndex;
     /* 0xA0 */ f32 shadowScale;
     /* 0xA4 */ s32 partTypeData[6];
     /* 0xBC */ s16 actorTypeData2b[2];
@@ -1567,7 +1568,7 @@ typedef struct ActorMovement {
     /* 0x4C */ f32 distance;
 } ActorMovement; // size = 0x50;
 
-typedef struct ActorMovementWalk {
+typedef struct ActorState { // TODO: Make the first field of this an ActorMovement
     /* 0x00 */ Vec3f currentPos;
     /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ Vec3f unk_18;
@@ -1582,19 +1583,19 @@ typedef struct ActorMovementWalk {
     /* 0x58 */ s32 animJumpRise;
     /* 0x5C */ s32 animJumpFall;
     /* 0x60 */ s32 animJumpLand;
-} ActorMovementWalk; // size = 0x64;
+    /* 0x64 */ s16 moveTime;
+    /* 0x66 */ s16 moveArcAmplitude;
+    /* 0x68 */ char unk_74[3];
+    /* 0x6B */ u8 jumpPartIndex;
+    /* 0x6C */ char unk_78[16];
+    /* 0x7C */ s32 varTable[16];
+} ActorState; // size = 0xBC;
 
 typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
     /* 0x008 */ struct ActorDesc* staticActorData;
-    /* 0x00C */ ActorMovementWalk walk;
-    /* 0x070 */ s16 moveTime;
-    /* 0x072 */ s16 moveArcAmplitude;
-    /* 0x074 */ char unk_74[3];
-    /* 0x077 */ u8 jumpPartIndex;
-    /* 0x078 */ char unk_78[16];
-    /* 0x088 */ s32 varTable[16];
+    /* 0x00C */ ActorState state;
     /* 0x0C8 */ ActorMovement fly;
     /* 0x118 */ f32 flyElapsed;
     /* 0x11C */ char unk_11C[4];
@@ -1771,7 +1772,7 @@ typedef struct PlayerStatus {
     /* 0x0B5 */ s8 prevActionState;
     /* 0x0B6 */ s8 fallState; ///< Also used as sleep state in Peach idle action
     /* 0x0B7 */ char unk_B7;
-    /* 0x0B8 */ s32 anim;
+    /* 0x0B8 */ u32 anim;
     /* 0x0BC */ u16 unk_BC;
     /* 0x0BE */ s8 renderMode;
     /* 0x0BF */ s8 unk_BF;
@@ -2065,7 +2066,7 @@ typedef struct {
     /* 0x00030 */ Matrix4s camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ Gfx mainGfx[0x2080];
     /* 0x10630 */ Gfx backgroundGfx[0x200]; // used by gfx_task_background
-    /* 0x11630 */ Matrix4s matrixStack[0x200];
+    /* 0x11630 */ Mtx matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 
 typedef struct Temp8010F250 {

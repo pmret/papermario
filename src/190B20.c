@@ -1626,7 +1626,7 @@ void create_part_shadow(ActorID actorID, s32 partIndex) {
     ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
     part->flags &= ~4;
-    part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
+    part->shadowIndex = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
     part->shadowScale = part->size.x / 24.0;
 }
 
@@ -1634,12 +1634,12 @@ void remove_part_shadow(ActorID actorID, s32 partIndex) {
     ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
     part->flags |= 4;
-    delete_shadow(part->shadow);
+    delete_shadow(part->shadowIndex);
 }
 
 void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part) {
     part->flags &= ~4;
-    part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
+    part->shadowIndex = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
     part->shadowScale = part->size.x / 24.0;
 }
 
