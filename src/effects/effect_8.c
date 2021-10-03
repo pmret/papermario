@@ -13,7 +13,7 @@ typedef struct Effect8 {
     /* 0x18 */ f32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
-    /* 0x24 */ s32 unk_24;
+    /* 0x24 */ f32 unk_24;
     /* 0x28 */ f32 unk_28;
     /* 0x2C */ f32 unk_2C;
     /* 0x30 */ char unk_30[0x40];
@@ -34,8 +34,23 @@ void fx_8_update(EffectInstance* effect);
 void fx_8_render(EffectInstance* effect);
 void fx_8_appendGfx(EffectInstance* effect);
 
-INCLUDE_ASM(s32, "effects/effect_8", func_E0010000);
+void func_E0010000(Effect8* effect) {
+    Matrix4f sp18;
+    Matrix4f sp58;
 
+    shim_guRotateF(sp18, effect->unk_24, 1.0f, 0.0f, 0.0f);
+    shim_guRotateF(sp58, effect->unk_2C, 0.0f, 0.0f, 1.0f);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guRotateF(sp58, effect->unk_28, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(sp18, sp58, sp18);
+    shim_guScaleF(&sp58, effect->unk_18, effect->unk_1C, effect->unk_20);
+    shim_guMtxCatF(sp58, sp18, sp18);
+    shim_guTranslateF(sp58, effect->unk_0C, effect->unk_10, effect->unk_14);
+    shim_guMtxCatF(sp18, sp58, sp18);
+    shim_guMtxF2L(sp18, effect->unk_30);
+}
+
+void func_E0010104(Effect8* effect);
 INCLUDE_ASM(s32, "effects/effect_8", func_E0010104);
 
 void fx_8_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
@@ -76,8 +91,8 @@ void fx_8_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
         part->unk_20 = 1.0f;
         part->unk_08 = -1;
         part->unk_06 = 60;
-        part->unk_24 = 0;
-        part->unk_2C = 0;
+        part->unk_24 = 0.0f;
+        part->unk_2C = 0.0f;
         part->unk_80 = 1.75f;
         part->unk_84 = -0.08f;
         part->unk_70 = -3.9f;
