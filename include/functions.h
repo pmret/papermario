@@ -497,6 +497,8 @@ s32 mdl_get_next_texture_address(s32);
 void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
 
+s8 set_global_byte(s32 index, s32 value);
+
 s32 entity_base_block_idle(Entity* entity);
 s32 recover_hp(s32 amt);
 s32 recover_fp(s32 amt);
