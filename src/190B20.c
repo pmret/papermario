@@ -7,7 +7,7 @@ s32 D_80280FC0[] = {
     0x000A005A, 0x00000032, 0x0003000B, 0x00000032, 0x0001002D, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010031, 0x00000032, 0x00010031, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010032, 0x00000032, 0x00010032, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x0003000A, 0x00000032, 0x0003000A, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000050, 0x0003000A, 0x00000014, 0x0003000B, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 
-MessageID bActorNames[ACTOR_TYPE_COUNT] = {
+s32 bActorNames[ACTOR_TYPE_COUNT] = {
     /* 0x00 */ MSG_actor_red_goomba,
     /* 0x01 */ MSG_actor_red_paragoomba,
     /* 0x02 */ MSG_actor_gloomba,
@@ -439,7 +439,7 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
     /* 0xD3 */ { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
 };
 
-MessageID bActorTattles[ACTOR_TYPE_COUNT] = {
+s32 bActorTattles[ACTOR_TYPE_COUNT] = {
     /* 0x00 */ NULL,
     /* 0x01 */ NULL,
     /* 0x02 */ MSG_actor_gloomba_tattle,
@@ -1031,7 +1031,7 @@ s32 D_80283744[] = {
     0x00000000, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98,
 };
 
-MessageID bMessages[] = {
+s32 bMessages[] = {
     MSG_merlee_increase_atk, MSG_merlee_increase_dmg, MSG_merlee_increase_star_points, MSG_merlee_end,
     MSG_charge_hammer, MSG_charge_hammer_more, MSG_charge_jump, MSG_charge_jump_more, MSG_charge_max,
     MSG_enemy_missed,
@@ -1047,7 +1047,7 @@ MessageID bMessages[] = {
     MSG_no_switch_used_turn, MSG_no_switch_dazed, MSG_no_switch_used_turn, MSG_no_switch_dazed, 0x001D00C3,
 };
 
-MessageID bActorMessages[] = {
+s32 bActorMessages[] = {
     MSG_party_mario, MSG_party_goombario, MSG_party_kooper, MSG_party_bombette, MSG_party_parakarry, MSG_party_goompa, MSG_party_watt, MSG_party_sushie, MSG_party_lakilester, MSG_party_bow, MSG_party_goombaria, MSG_party_twink, MSG_party_peach
 };
 

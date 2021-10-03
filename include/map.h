@@ -9,7 +9,6 @@
 // TODO: consider moving Npc here
 
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))
-typedef s32 MessageID;
 typedef Vec4f EntryList[];
 
 /// Fields other than main, entryList, entryCount, background, and tattle are initialised when the map loads.
@@ -28,7 +27,7 @@ typedef struct MapConfig {
     /* 0x34 */ char unk_34[4];
     /* 0x38 */ BackgroundHeader* background;
     /* 0x3C */ union {
-        MessageID msgID;
+        s32 msgID;
         UNK_FUN_PTR(get);
     } tattle;
 } MapConfig; // size = 0x40
@@ -226,7 +225,7 @@ typedef struct StaticNpc {
     } animations;
     /* 0x1E0 */ char unk_1E0[8];
     /* 0x1E8 */ s32* extraAnimations;
-    /* 0x1EC */ MessageID tattle;
+    /* 0x1EC */ s32 tattle;
 } StaticNpc; // size = 0x1F0
 
 enum TerritoryShape { SHAPE_CYLINDER, SHAPE_RECT };

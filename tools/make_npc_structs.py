@@ -219,7 +219,7 @@ def get_vals(fd, offset, var):
                 data = unpack_from('>H', fd, offset)[0]
                 fmt = "d"
                 offset += 2
-            elif var["type"]  == "s32" or var["type"] in ("s32", "MessageID", "s32"):
+            elif var["type"]  == "s32" or var["type"] in ("s32"):
                 poff = offset
                 offset += offset % 4
                 data = unpack_from('>i', fd, offset)[0]
