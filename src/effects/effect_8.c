@@ -16,7 +16,7 @@ typedef struct Effect8 {
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ f32 unk_28;
     /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ char unk_30[0x40];
+    /* 0x30 */ Mtx unk_30;
     /* 0x70 */ f32 unk_70;
     /* 0x74 */ f32 unk_74;
     /* 0x78 */ f32 unk_78;
@@ -34,6 +34,8 @@ void fx_8_update(EffectInstance* effect);
 void fx_8_render(EffectInstance* effect);
 void fx_8_appendGfx(EffectInstance* effect);
 
+extern Gfx D_09000E08[];
+
 void func_E0010000(Effect8* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
@@ -47,7 +49,7 @@ void func_E0010000(Effect8* effect) {
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guTranslateF(sp58, effect->unk_0C, effect->unk_10, effect->unk_14);
     shim_guMtxCatF(sp18, sp58, sp18);
-    shim_guMtxF2L(sp18, effect->unk_30);
+    shim_guMtxF2L(sp18, &effect->unk_30);
 }
 
 void func_E0010104(Effect8* effect) {
@@ -159,6 +161,31 @@ void fx_8_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-INCLUDE_ASM(s32, "effects/effect_8", func_E00104F4);
+void func_E00104F4(EffectInstance* effect) {
+    shim_remove_effect(effect);
+}
 
-INCLUDE_ASM(s32, "effects/effect_8", fx_8_appendGfx);
+//INCLUDE_ASM(s32, "effects/effect_8", fx_8_appendGfx);
+void fx_8_appendGfx(EffectInstance* effect) {
+    EffectInstance* effectTemp = effect;
+    Effect8* part = effectTemp->data;
+    s32 i;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->effect->data));
+
+    for (i = 0; i < effectTemp->numParts; i++, part++) {
+        if (part->unk_00 != 0) {
+            Gfx* dlist = D_09000E08;
+
+            gDisplayContext->matrixStack[gMatrixListPos] = part->unk_30;
+
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x70, 0x60, 0x18, part->unk_08);
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                        G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, dlist);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        }
+    }
+    gDPPipeSync(gMasterGfxPos++);
+}

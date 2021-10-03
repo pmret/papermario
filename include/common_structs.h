@@ -2066,7 +2066,7 @@ typedef struct {
     /* 0x00030 */ Matrix4s camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ Gfx mainGfx[0x2080];
     /* 0x10630 */ Gfx backgroundGfx[0x200]; // used by gfx_task_background
-    /* 0x11630 */ Matrix4s matrixStack[0x200];
+    /* 0x11630 */ Mtx matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 
 typedef struct Temp8010F250 {
