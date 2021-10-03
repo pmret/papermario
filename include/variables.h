@@ -9,8 +9,8 @@
 
 extern UiStatus gUIStatus;
 extern PlayerData gPlayerData;
-extern ActionState gPlayerActionState;
-extern PlayerAnim gPlayerAnimation;
+extern s8 gPlayerActionState;
+extern s32 gPlayerAnimation;
 extern PlayerStatus gPlayerStatus;
 extern PlayerStatus* gPlayerStatusPtr;
 extern CollisionStatus gCollisionStatus;
@@ -206,7 +206,7 @@ extern MenuWindowBP pause_map_windowBlueprints[7];
 // Badges
 extern s32 gBadgeMenuCurrentScrollPos;
 extern s32 gBadgeMenuTargetScrollPos;
-extern ItemID gBadgeMenuItemIDs[128];
+extern s16 gBadgeMenuItemIDs[128];
 extern s32 gBadgeMenuCurrentPage;
 extern PauseItemPage gBadgeMenuPages[20];
 extern s32 gBadgeMenuSelectedIndex;

@@ -10,7 +10,7 @@
 extern EffectInstance* D_8023CDA0;
 extern s32 D_8023CDA4;
 extern s32 D_8023BB98_6ECC78;
-extern MessageID bActorTattles[ACTOR_TYPE_COUNT];
+extern s32 bActorTattles[ACTOR_TYPE_COUNT];
 
 extern EvtSource N(init);
 extern EvtSource N(80239784);
@@ -124,7 +124,7 @@ ApiStatus func_80238B60_6F1C40(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor = get_actor(partnerActor->targetActorID);
-    MessageID* tattle = &bActorTattles[targetActor->actorType];
+    s32* tattle = &bActorTattles[targetActor->actorType];
 
     script->varTable[0] = *tattle;
 

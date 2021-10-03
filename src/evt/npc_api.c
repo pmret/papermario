@@ -5,7 +5,7 @@
 extern s32 D_802DAE40;
 extern s32 D_802DAE44;
 
-Npc* resolve_npc(Evt* script, NpcID npcIdOrPtr) {
+Npc* resolve_npc(Evt* script, s32 npcIdOrPtr) {
     if (npcIdOrPtr == NPC_SELF) {
         return get_npc_safe(script->owner2.npcID);
     } else if (npcIdOrPtr >= -270000000) {
@@ -29,7 +29,7 @@ void set_npc_animation(Npc* npc, u32 arg1) {
 
 ApiStatus CreateNpc(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *args++);
+    s32 npcID = evt_get_variable(script, *args++);
     s32 initialAnim = evt_get_variable(script, *args++);
     NpcBlueprint blueprint;
     Npc *npc;
@@ -59,7 +59,7 @@ ApiStatus DeleteNpc(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetNpcPointer(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *args++);
+    s32 npcID = evt_get_variable(script, *args++);
     Bytecode varNPC = *args++;
 
     evt_set_variable(script, varNPC, (s32)get_npc_safe(npcID));
@@ -68,7 +68,7 @@ ApiStatus GetNpcPointer(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *args++);
+    s32 npcID = evt_get_variable(script, *args++);
     f32 x = evt_get_variable(script, *args++);
     f32 y = evt_get_variable(script, *args++);
     f32 z = evt_get_variable(script, *args++);
@@ -91,7 +91,7 @@ ApiStatus SetNpcPos(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcRotation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *args++);
+    s32 npcID = evt_get_variable(script, *args++);
     f32 rotX = evt_get_float_variable(script, *args++);
     f32 rotY = evt_get_float_variable(script, *args++);
     f32 rotZ = evt_get_float_variable(script, *args++);
@@ -109,7 +109,7 @@ ApiStatus SetNpcRotation(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802CDE68(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcId = evt_get_variable(script, *args++);
+    s32 npcId = evt_get_variable(script, *args++);
     f32 var1 = evt_get_float_variable(script, *args++);
     Npc* npc;
 
@@ -124,7 +124,7 @@ ApiStatus func_802CDE68(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcScale(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     f32 sizeX = evt_get_float_variable(script, *ptrReadPos++);
     f32 sizeY = evt_get_float_variable(script, *ptrReadPos++);
     f32 sizeZ = evt_get_float_variable(script, *ptrReadPos++);
@@ -142,7 +142,7 @@ ApiStatus SetNpcScale(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcCollisionSize(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     s32 height = evt_get_variable(script, *ptrReadPos++);
     s32 radius = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
@@ -158,7 +158,7 @@ ApiStatus SetNpcCollisionSize(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcSpeed(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     f32 speed = evt_get_float_variable(script, *ptrReadPos);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -172,7 +172,7 @@ ApiStatus SetNpcSpeed(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcJumpscale(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     f32 jumpScale = evt_get_float_variable(script, *ptrReadPos);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -186,7 +186,7 @@ ApiStatus SetNpcJumpscale(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     s32 animation = evt_get_variable(script, *ptrReadPos);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -200,7 +200,7 @@ ApiStatus SetNpcAnimation(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetNpcAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
     Npc* npc = resolve_npc(script, npcID);
 
@@ -214,7 +214,7 @@ ApiStatus GetNpcAnimation(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcAnimationSpeed(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     f32 animationSpeed = evt_get_float_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -237,7 +237,7 @@ ApiStatus NpcMoveTo(Evt* script, s32 isInitialCall) {
     }
 
     if (script->functionTemp[0] == 0) {
-        NpcID npcID = evt_get_variable(script, *args++);
+        s32 npcID = evt_get_variable(script, *args++);
         f32 targetX = evt_get_variable(script, *args++);
         f32 targetZ = evt_get_variable(script, *args++);
         s32 duration = evt_get_variable(script, *args++);
@@ -297,7 +297,7 @@ ApiStatus _npc_jump_to(Evt* script, s32 isInitialCall, s32 snapYaw) {
     }
 
     if (script->functionTemp[0] == 0) {
-        NpcID npcID = evt_get_variable(script, *args++);
+        s32 npcID = evt_get_variable(script, *args++);
         f32 xTemp = evt_get_variable(script, *args++);
         f32 yTemp = evt_get_variable(script, *args++);
         f32 zTemp = evt_get_variable(script, *args++);
@@ -439,7 +439,7 @@ ApiStatus NpcFlyTo(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetNpcYaw(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
     Npc* npc = resolve_npc(script, npcID);
 
@@ -453,7 +453,7 @@ ApiStatus GetNpcYaw(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcYaw(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
     if (npc == NULL) {
@@ -473,7 +473,7 @@ ApiStatus InterpNpcYaw(Evt* script, s32 isInitialCall) {
     Npc* npc;
 
     if (isInitialCall) {
-        NpcID npcID = evt_get_variable(script, *args++);
+        s32 npcID = evt_get_variable(script, *args++);
 
         npc = resolve_npc(script, npcID);
         if (npc == NULL) {
@@ -521,7 +521,7 @@ ApiStatus NpcFacePlayer(Evt* script, s32 isInitialCall) {
     Npc* npc;
 
     if (isInitialCall) {
-        NpcID npcID = evt_get_variable(script, *args++);
+        s32 npcID = evt_get_variable(script, *args++);
 
         npc = resolve_npc(script, npcID);
         if (npc == NULL) {
@@ -563,8 +563,8 @@ ApiStatus NpcFaceNpc(Evt* script, s32 isInitialCall) {
     Npc* npc2;
 
     if (isInitialCall) {
-        NpcID npcID = evt_get_variable(script, *args++);
-        NpcID npcID2 = evt_get_variable(script, *args++);
+        s32 npcID = evt_get_variable(script, *args++);
+        s32 npcID2 = evt_get_variable(script, *args++);
 
         npc = resolve_npc(script, npcID2);
         if (npc == NULL) {
@@ -604,7 +604,7 @@ ApiStatus NpcFaceNpc(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *args++);
+    s32 npcID = evt_get_variable(script, *args++);
     s32 flagBits = *args++;
     s32 enable = evt_get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcID);
@@ -624,7 +624,7 @@ ApiStatus SetNpcFlagBits(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetNpcPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *args++);
+    s32 npcID = evt_get_variable(script, *args++);
     s32 a1 = *args++;
     s32 a2 = *args++;
     s32 a3 = *args++;
@@ -642,7 +642,7 @@ ApiStatus GetNpcPos(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802CF1B4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcId = evt_get_variable(script, *args++);
+    s32 npcId = evt_get_variable(script, *args++);
     Bytecode arg1 = *args;
     Npc* npc = resolve_npc(script, npcId);
 
@@ -656,7 +656,7 @@ ApiStatus func_802CF1B4(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcSprite(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcId = evt_get_variable(script, *args++);
+    s32 npcId = evt_get_variable(script, *args++);
     Bytecode arg1 = *args;
     Npc* npc = resolve_npc(script, npcId);
 
@@ -670,7 +670,7 @@ ApiStatus SetNpcSprite(Evt* script, s32 isInitialCall) {
 
 ApiStatus EnableNpcShadow(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     s32 enableShadow = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -688,7 +688,7 @@ ApiStatus EnableNpcShadow(Evt* script, s32 isInitialCall) {
 
 ApiStatus EnableNpcBlur(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     s32 enableBlur = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -706,7 +706,7 @@ ApiStatus EnableNpcBlur(Evt* script, s32 isInitialCall) {
 
 ApiStatus ClearPartnerMoveHistory(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
     if (npc == NULL) {
@@ -967,7 +967,7 @@ ApiStatus PartnerIsFlying(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802CFD30(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcId = evt_get_variable(script, *args++);
+    s32 npcId = evt_get_variable(script, *args++);
     Bytecode var1 = evt_get_variable(script, *args++);
     Bytecode var2 = evt_get_variable(script, *args++);
     Bytecode var3 = evt_get_variable(script, *args++);
@@ -985,7 +985,7 @@ ApiStatus func_802CFD30(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802CFE2C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcId = evt_get_variable(script, *args++);
+    s32 npcId = evt_get_variable(script, *args++);
     Bytecode arg1 = *args;
     Npc* npc = resolve_npc(script, npcId);
 
@@ -999,7 +999,7 @@ ApiStatus func_802CFE2C(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcPaletteSwapMode(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcId = evt_get_variable(script, *args++);
+    s32 npcId = evt_get_variable(script, *args++);
     Bytecode var1 = evt_get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcId);
 
@@ -1013,7 +1013,7 @@ ApiStatus SetNpcPaletteSwapMode(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcPaletteSwapLower(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcId = evt_get_variable(script, *args++);
+    s32 npcId = evt_get_variable(script, *args++);
     Bytecode var1 = evt_get_variable(script, *args++);
     Bytecode var2 = evt_get_variable(script, *args++);
     Bytecode var3 = evt_get_variable(script, *args++);
@@ -1030,7 +1030,7 @@ ApiStatus SetNpcPaletteSwapLower(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcPaletteSwapping(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcId = evt_get_variable(script, *args++);
+    s32 npcId = evt_get_variable(script, *args++);
     Bytecode var1 = evt_get_variable(script, *args++);
     Bytecode var2 = evt_get_variable(script, *args++);
     Bytecode var3 = evt_get_variable(script, *args++);
@@ -1052,7 +1052,7 @@ ApiStatus SetNpcPaletteSwapping(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetNpcDecoration(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     s32 value1 = evt_get_variable(script, *ptrReadPos++);
     s32 value2 = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
@@ -1067,8 +1067,8 @@ ApiStatus SetNpcDecoration(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlaySoundAtNpc(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
-    SoundID soundID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 soundID = evt_get_variable(script, *ptrReadPos++);
     s32 value2 = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -1082,7 +1082,7 @@ ApiStatus PlaySoundAtNpc(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802D0244(Evt* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *ptrReadPos++);
+    s32 npcID = evt_get_variable(script, *ptrReadPos++);
     u8 renderMode = evt_get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 

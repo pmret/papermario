@@ -228,7 +228,7 @@ s32 pause_get_total_equipped_bp_cost(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
-        ItemID itemID = gPlayerData.equippedBadges[i];
+        s16 itemID = gPlayerData.equippedBadges[i];
 
         if (itemID != ITEM_NONE) {
             s32 moveID = gItemTable[itemID].moveID;

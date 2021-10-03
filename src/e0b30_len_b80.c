@@ -17,7 +17,7 @@ MusicSettings D_8014F6F0 = {
     .unk_2C = 0
 };
 
-SongID gSongsUsingVariationFlag[] = { SONG_SPECIAL_BATTLE, SONG_TUBBA_BLUBBA_BATTLE, SONG_JR_TROOPA_BATTLE,
+s32 gSongsUsingVariationFlag[] = { SONG_SPECIAL_BATTLE, SONG_TUBBA_BLUBBA_BATTLE, SONG_JR_TROOPA_BATTLE,
                                       SONG_YOSHI_KIDS_FOUND, SONG_ITEM_UPGRADE, SONG_NEW_PARTNER,
                                     };
 
@@ -30,11 +30,11 @@ void bgm_set_target_volume(s16 volume);
 ///
 /// @see gSongsUsingVariationFlag
 /// @returns -1: no override; 0: override to variation 0; 1 override to variation 1
-s32 bgm_get_map_default_variation(SongID songID) {
+s32 bgm_get_map_default_variation(s32 songID) {
     u32 i = 0;
     Area* areas = gAreas;
     GameStatus** gameStatus = &gGameStatusPtr;
-    SongID* allowed = gSongsUsingVariationFlag;
+    s32* allowed = gSongsUsingVariationFlag;
 
     for (i = 0; i < ARRAY_COUNT(gSongsUsingVariationFlag); i++) {
         if (allowed[i] == songID) {
@@ -69,7 +69,7 @@ void bgm_reset_volume(void) {
 
 INCLUDE_ASM(s32, "e0b30_len_b80", bgm_update_music_settings);
 
-s32 _bgm_set_song(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutTime, s16 volume) {
+s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume) {
     if (gGameStatusPtr->demoState != 0) {
         return 1;
     } else {
@@ -111,7 +111,7 @@ s32 _bgm_set_song(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutTime
     }
 }
 
-s32 bgm_set_song(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutTime, s16 volume) {
+s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume) {
     MusicSettings* musicSettings = gMusicSettings;
 
     musicSettings[playerIndex].flags &= ~8;
@@ -119,7 +119,7 @@ s32 bgm_set_song(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutTime,
     return _bgm_set_song(playerIndex, songID, variation, fadeOutTime, volume);
 }
 
-s32 func_8014A964(s32 playerIndex, SongID songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5) {
+s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5) {
     if (gGameStatusPtr->demoState != 0) {
         return 1;
     } else {
@@ -273,7 +273,7 @@ void bgm_pop_song(void) {
     }
 }
 
-void bgm_push_song(SongID songID, s32 variation) {
+void bgm_push_song(s32 songID, s32 variation) {
     MusicSettings* musicSetting = &gMusicSettings[0];
 
     if (gGameStatusPtr->demoState == 0) {

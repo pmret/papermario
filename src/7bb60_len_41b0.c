@@ -360,7 +360,7 @@ void check_input_midair_jump(void) {
     }
 }
 
-PartnerID get_current_partner_id(void) {
+s8 get_current_partner_id(void) {
     return gPlayerData.currentPartner;
 }
 

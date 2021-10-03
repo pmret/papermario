@@ -54,7 +54,7 @@ typedef struct StarSpiritEffect {
     /* 0x34 */ f32 unk_34;
     /* 0x38 */ s32 unk_38;
     /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ s32 unk_40; // an shadowID
+    /* 0x40 */ s32 unk_40; // a shadowID
     /* 0x44 */ s16 unk_44;
     /* 0x46 */ s16 unk_46;
     /* 0x48 */ s16 unk_48;
@@ -138,7 +138,7 @@ typedef struct EffectGraphics {
 } EffectGraphics; // size = 0x20
 
 typedef struct EffectTableEntry {
-    /* 0x00 */ void (*entryPoint)(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 x, f32 y, f32 z);
+    /* 0x00 */ void (*entryPoint);
     /* 0x04 */ void* dmaStart;
     /* 0x08 */ void* dmaEnd;
     /* 0x0C */ void* dmaDest;

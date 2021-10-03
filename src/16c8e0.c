@@ -15,7 +15,7 @@ void* D_802809FC[] = {
 
 s32 D_80280A30 = 0xFF;
 
-extern PartnerID D_8029DA33;
+extern s8 D_8029DA33;
 extern s32 D_8029DA34;
 extern Camera D_8029DA50[ARRAY_COUNT(gCameras)];
 extern f32 D_8029EFB0;

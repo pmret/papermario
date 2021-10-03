@@ -7,7 +7,7 @@ s32 D_80280FC0[] = {
     0x000A005A, 0x00000032, 0x0003000B, 0x00000032, 0x0001002D, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010031, 0x00000032, 0x00010031, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010032, 0x00000032, 0x00010032, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x0003000A, 0x00000032, 0x0003000A, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000050, 0x0003000A, 0x00000014, 0x0003000B, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 
-MessageID bActorNames[ACTOR_TYPE_COUNT] = {
+s32 bActorNames[ACTOR_TYPE_COUNT] = {
     /* 0x00 */ MSG_actor_red_goomba,
     /* 0x01 */ MSG_actor_red_paragoomba,
     /* 0x02 */ MSG_actor_gloomba,
@@ -439,7 +439,7 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
     /* 0xD3 */ { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
 };
 
-MessageID bActorTattles[ACTOR_TYPE_COUNT] = {
+s32 bActorTattles[ACTOR_TYPE_COUNT] = {
     /* 0x00 */ NULL,
     /* 0x01 */ NULL,
     /* 0x02 */ MSG_actor_gloomba_tattle,
@@ -1031,7 +1031,7 @@ s32 D_80283744[] = {
     0x00000000, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98,
 };
 
-MessageID bMessages[] = {
+s32 bMessages[] = {
     MSG_merlee_increase_atk, MSG_merlee_increase_dmg, MSG_merlee_increase_star_points, MSG_merlee_end,
     MSG_charge_hammer, MSG_charge_hammer_more, MSG_charge_jump, MSG_charge_jump_more, MSG_charge_max,
     MSG_enemy_missed,
@@ -1047,7 +1047,7 @@ MessageID bMessages[] = {
     MSG_no_switch_used_turn, MSG_no_switch_dazed, MSG_no_switch_used_turn, MSG_no_switch_dazed, 0x001D00C3,
 };
 
-MessageID bActorMessages[] = {
+s32 bActorMessages[] = {
     MSG_party_mario, MSG_party_goombario, MSG_party_kooper, MSG_party_bombette, MSG_party_parakarry, MSG_party_goompa, MSG_party_watt, MSG_party_sushie, MSG_party_lakilester, MSG_party_bow, MSG_party_goombaria, MSG_party_twink, MSG_party_peach
 };
 
@@ -1130,13 +1130,13 @@ INCLUDE_ASM(s32, "190B20", set_animation);
 
 INCLUDE_ASM(s32, "190B20", func_80263E08);
 
-INCLUDE_ASM(void, "190B20", set_animation_rate, ActorID actorID, s32 partIndex, f32 rate);
+INCLUDE_ASM(void, "190B20", set_animation_rate, s32 actorID, s32 partIndex, f32 rate);
 
-void set_actor_yaw(ActorID actorID, s32 yaw) {
+void set_actor_yaw(s32 actorID, s32 yaw) {
     get_actor(actorID)->yaw = yaw;
 }
 
-void set_part_yaw(ActorID actorID, s32 partIndex, s32 value) {
+void set_part_yaw(s32 actorID, s32 partIndex, s32 value) {
     get_actor_part(get_actor(actorID), partIndex)->yaw = value;
 }
 
@@ -1200,7 +1200,7 @@ INCLUDE_ASM(s32, "190B20", func_80265CE8);
 
 INCLUDE_ASM(s32, "190B20", func_80265D44);
 
-s32 lookup_defense(DictionaryEntry* defenseTable, Element elementKey) {
+s32 lookup_defense(DictionaryEntry* defenseTable, s32 elementKey) {
     s32 normalDefense = 0;
 
     while (defenseTable->key != ELEMENT_END) {
@@ -1219,7 +1219,7 @@ s32 lookup_defense(DictionaryEntry* defenseTable, Element elementKey) {
     return normalDefense;
 }
 
-s32 lookup_status_chance(DictionaryEntry* statusTable, Element statusKey) {
+s32 lookup_status_chance(DictionaryEntry* statusTable, s32 statusKey) {
     s32 defaultChance = 0;
 
     while (statusTable->key != STATUS_END) {
@@ -1238,7 +1238,7 @@ s32 lookup_status_chance(DictionaryEntry* statusTable, Element statusKey) {
     return defaultChance;
 }
 
-s32 lookup_status_duration_mod(DictionaryEntry* statusTable, Element statusKey) {
+s32 lookup_status_duration_mod(DictionaryEntry* statusTable, s32 statusKey) {
     s32 defaultTurnMod = 0;
 
     while (statusTable->key != ELEMENT_END) {
@@ -1570,7 +1570,7 @@ INCLUDE_ASM(s32, "190B20", func_8026709C);
 
 INCLUDE_ASM(s32, "190B20", func_802670C8);
 
-void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationID decorationType) {
+void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationType) {
     if ((part->idleAnimations) && !(part->flags & 2)) {
         DecorationTable* decorationTable = part->decorationTable;
 
@@ -1582,7 +1582,7 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationID deco
     }
 }
 
-void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationID decorationType) {
+void add_actor_decoration(Actor* actor, s32 decorationIndex, s32 decorationType) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
         if ((part->flags & 0x100001) == 0 && part->idleAnimations && !(part->flags & 2)) {
@@ -1604,7 +1604,7 @@ void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     }
 }
 
-s32 player_team_is_ability_active(Actor* actor, Ability ability) {
+s32 player_team_is_ability_active(Actor* actor, s32 ability) {
     s32 actorGenus = actor->actorID & 0x700;
     s32 hasAbility = FALSE;
 
@@ -1622,7 +1622,7 @@ s32 player_team_is_ability_active(Actor* actor, Ability ability) {
     return hasAbility;
 }
 
-void create_part_shadow(ActorID actorID, s32 partIndex) {
+void create_part_shadow(s32 actorID, s32 partIndex) {
     ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
     part->flags &= ~4;
@@ -1630,7 +1630,7 @@ void create_part_shadow(ActorID actorID, s32 partIndex) {
     part->shadowScale = part->size.x / 24.0;
 }
 
-void remove_part_shadow(ActorID actorID, s32 partIndex) {
+void remove_part_shadow(s32 actorID, s32 partIndex) {
     ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
     part->flags |= 4;
@@ -1643,7 +1643,7 @@ void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part) {
     part->shadowScale = part->size.x / 24.0;
 }
 
-void remove_player_buffs(PlayerBuff buffs) {
+void remove_player_buffs(s32 buffs) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     Actor* partner = battleStatus->partnerActor;

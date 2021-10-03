@@ -86,7 +86,7 @@ INCLUDE_ASM(s32, "19FAF0", calc_player_damage_enemy);
 
 INCLUDE_ASM(s32, "19FAF0", dispatch_damage_event_player);
 
-s32 dispatch_damage_event_player_0(s32 damageAmount, Event event) {
+s32 dispatch_damage_event_player_0(s32 damageAmount, s32 event) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->currentAttackElement = ELEMENT_END;
@@ -94,7 +94,7 @@ s32 dispatch_damage_event_player_0(s32 damageAmount, Event event) {
     return dispatch_damage_event_player(damageAmount, event, FALSE);
 }
 
-void dispatch_damage_event_player_1(s32 damageAmount, Event event) {
+void dispatch_damage_event_player_1(s32 damageAmount, s32 event) {
     dispatch_damage_event_player(damageAmount, event, TRUE);
 }
 

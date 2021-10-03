@@ -3,7 +3,7 @@
 
 ApiStatus N(GetNpcCollisionHeight)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcID npcID = evt_get_variable(script, *args++);
+    s32 npcID = evt_get_variable(script, *args++);
     Npc* npc = get_npc_safe(npcID);
 
     if (npc != NULL) {

@@ -57,10 +57,10 @@ void render_npcs(void);
 
 void npc_move_heading(Npc* npc, f32 speed, f32 yaw);
 
-Npc* get_npc_unsafe(NpcID npcID);
+Npc* get_npc_unsafe(s32 npcID);
 
 /// @returns NULL if not found
-Npc* get_npc_safe(NpcID npcID);
+Npc* get_npc_safe(s32 npcID);
 
 void enable_npc_shadow(Npc* npc);
 
@@ -256,7 +256,7 @@ void bind_npc_interact(s32 npcID, EvtSource* npcInteractBytecode);
 /// @param npcID   ID of the npc bound to the desired enemy.
 ///
 /// @returns pointer to Enemy struct, if one is found. If one is not found, a panic occurs.
-Enemy* get_enemy(NpcID npcID);
+Enemy* get_enemy(s32 npcID);
 
 /// Same as get_enemy(), with the exception of always returning a value if an enemy is not found.
 ///

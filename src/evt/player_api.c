@@ -103,7 +103,7 @@ ApiStatus SetPlayerJumpscale(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    PlayerAnim currentAnim = evt_get_variable(script, *args++);
+    s32 currentAnim = evt_get_variable(script, *args++);
     s32 shakeAnim = 0x80003;
 
     playerNpc->currentAnim.w = currentAnim;
@@ -388,7 +388,7 @@ ApiStatus PlayerFaceNpc(Evt* script, s32 isInitialCall) {
     s32* ft3 = &script->functionTemp[3];
 
     if (isInitialCall) {
-        NpcID npcID = evt_get_variable(script, *args++);
+        s32 npcID = evt_get_variable(script, *args++);
         Npc* npc;
 
         if (npcID == NPC_SELF) {

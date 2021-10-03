@@ -242,7 +242,6 @@ enum StoryProgress {
     STORY_EPILOGUE,
 };
 
-typedef UNK_TYPE EncounterTrigger;
 enum EncounterTriggers {
     ENCOUNTER_TRIGGER_NONE = 1,
     ENCOUNTER_TRIGGER_JUMP,
@@ -252,7 +251,6 @@ enum EncounterTriggers {
     ENCOUNTER_TRIGGER_PARTNER,
 };
 
-typedef s32 SongID;
 enum SongIDs {
     SONG_TOAD_TOWN = 0,
     SONG_UNUSED_1,
@@ -407,7 +405,6 @@ enum SongIDs {
     SONG_NEW_PARTNER_J_P,
 };
 
-typedef UNK_TYPE Ability;
 enum Abilities {
     ABILITY_DODGE_MASTER,
     ABILITY_UNUSED,
@@ -467,7 +464,6 @@ enum Abilities {
     ABILITY_HEALTHY_HEALTHY,
 };
 
-typedef UNK_TYPE Emote;
 enum Emotes {
     EMOTE_EXCLAMATION,
     EMOTE_SHOCK,
@@ -477,7 +473,6 @@ enum Emotes {
     EMOTE_INVALID,
 };
 
-typedef UNK_TYPE Easing;
 enum Easings {
     EASING_LINEAR,
     EASING_QUADRATIC_IN,
@@ -494,7 +489,6 @@ enum Easings {
     EASING_COS_IN,
 };
 
-typedef UNK_TYPE SoundID;
 enum SoundIDs {
     SOUND_UNKNOWN_0,
     SOUND_MENU_BADGE_EQUIP          = 5,
@@ -640,7 +634,6 @@ enum Cams {
 
 #define LOOKUP_ITEM(itemID) gItemTable[itemID & ~0xF0000]
 
-typedef s16 ItemID;
 enum ItemIDs {
     ITEM_NONE,
     ITEM_JUMP,
@@ -1010,7 +1003,6 @@ enum ItemIDs {
 #define ITEM_LAST_BADGE ITEM_ATTACK_F_X_F5
 
 // TODO: use NPC_ANIM-like macro for player animations
-typedef UNK_TYPE PlayerAnim;
 enum PlayerAnims {
     ANIM_1                      = 1, // XXX
     ANIM_STAND_STILL            = 0x10000,
@@ -1071,7 +1063,6 @@ enum PlayerAnims {
     ANIM_90006,
 };
 
-typedef UNK_TYPE AmbientSound;
 enum AmbientSounds {
     AMBIENT_SPOOKY,
     AMBIENT_WIND,
@@ -1090,7 +1081,6 @@ enum AmbientSounds {
     AMBIENT_MUSIC       = 16,
 };
 
-typedef UNK_TYPE EncounterOutcome;
 enum EncounterOutcomes {
     OUTCOME_PLAYER_WON,
     OUTCOME_PLAYER_LOST,
@@ -1098,7 +1088,6 @@ enum EncounterOutcomes {
     OUTCOME_ENEMY_FLED,
 };
 
-typedef UNK_TYPE DecorationID;
 enum DecorationIDs {
     DECORATION_GOLDEN_FLAMES            = 1,
     DECORATION_SWEAT,
@@ -1111,7 +1100,6 @@ enum DecorationIDs {
     DECORATION_RADIAL_STAR_EMITTER      = 11,
 };
 
-typedef UNK_TYPE HitResult;
 enum HitResults {
     HIT_RESULT_TRIGGERED_EXPLODE        = -1,
     HIT_RESULT_HIT,
@@ -1123,7 +1111,6 @@ enum HitResults {
     HIT_RESULT_IMMUNE,
 };
 
-typedef UNK_TYPE Iter;
 enum Iters {
     ITER_FIRST   = -1,
     ITER_NEXT,
@@ -1131,7 +1118,6 @@ enum Iters {
     ITER_LAST    = 10,
 };
 
-typedef UNK_TYPE ActorSoundID;
 enum ActorSoundIDs {
     ACTOR_SOUND_WALK,
     ACTOR_SOUND_FLY,
@@ -1141,7 +1127,6 @@ enum ActorSoundIDs {
     ACTOR_SOUND_FLY_INCREMENT,
 };
 
-typedef UNK_TYPE Phase;
 enum Phases {
     PHASE_EXECUTE_ACTION,
     PHASE_FIRST_STRIKE,
@@ -1160,7 +1145,6 @@ enum Phases {
     PHASE_PLAYER_HAPPY          = 30,
 };
 
-typedef s32 ActorID;
 enum ActorIDs {
     ACTOR_SELF          = 0xFFFFFF81,
     ACTOR_PLAYER        = 0x0,
@@ -1191,7 +1175,6 @@ enum ActorIDs {
     ACTOR_ENEMY23,
 };
 
-typedef UNK_TYPE Element;
 enum Elements {
     ELEMENT_END,
     ELEMENT_NORMAL,
@@ -1209,7 +1192,6 @@ enum Elements {
     ELEMENT_THROW       = 15,
 };
 
-typedef UNK_TYPE Event;
 enum Events {
     EVENT_HIT_COMBO               = 9,
     EVENT_HIT,
@@ -1252,7 +1234,6 @@ enum Events {
     EVENT_REVIVE,
 };
 
-typedef UNK_TYPE HitSound;
 enum HitSounds {
     HIT_SOUND_MISS,
     HIT_SOUND_BONES,
@@ -1262,7 +1243,6 @@ enum HitSounds {
     HIT_SOUND_SHOCK,
 };
 
-typedef s8 Status;
 enum Statuses {
     STATUS_END,
     STATUS_NORMAL,
@@ -1299,13 +1279,11 @@ enum Statuses {
     STATUS_STOP_TURN_MOD,
 };
 
-typedef UNK_TYPE DoorSwing;
 enum DoorSwings {
     DOOR_SWING_OUT      = -1,
     DOOR_SWING_IN       = 1,
 };
 
-typedef UNK_TYPE ItemSpawnMode;
 enum ItemSpawnModes {
     ITEM_SPAWN_MODE_UNKNOWN_0,
     ITEM_SPAWN_MODE_DECORATION,
@@ -1337,7 +1315,6 @@ enum ItemSpawnModes {
     ITEM_SPAWN_MODE_UNKNOWN_1B,
 };
 
-typedef UNK_TYPE Location;
 enum Locations {
     LOCATION_TOAD_TOWN                  = 1,
     LOCATION_TOAD_TOWN_TUNNELS,
@@ -1377,7 +1354,6 @@ enum Locations {
     LOCATION_MARIOS_HOUSE,
 };
 
-typedef UNK_TYPE DoorSound;
 enum DoorSounds {
     DOOR_SOUND_BASIC,
     DOOR_SOUND_METAL,
@@ -1388,7 +1364,6 @@ enum DoorSounds {
     DOOR_SOUND_UNKNOWN_6,
 };
 
-typedef s8 ActionState;
 enum ActionStates {
     ACTION_STATE_IDLE,
     ACTION_STATE_WALK,
@@ -1433,7 +1408,6 @@ enum ActionStates {
     ACTION_STATE_USE_SPRING,
 };
 
-typedef s32 NpcID;
 enum NpcIDs {
     NPC_SELF         = -1,
     NPC_PLAYER       = -2,
@@ -1456,7 +1430,6 @@ enum {
     TRIGGER_POINT_BOMB          = 0x00100000,
 };
 
-typedef UNK_TYPE Button;
 enum Buttons {
     BUTTON_C_RIGHT      = 0x00000001,
     BUTTON_C_LEFT       = 0x00000002,
@@ -1478,7 +1451,6 @@ enum Buttons {
     BUTTON_STICK_RIGHT  = 0x00080000,
 };
 
-typedef UNK_TYPE PlayerBuff;
 enum PlayerBuffs {
     PLAYER_BUFF_JUMP_CHARGE     = 0x00000001,
     PLAYER_BUFF_HAMMER_CHARGE   = 0x00000002,
@@ -1493,7 +1465,6 @@ enum PlayerBuffs {
     PLAYER_BUFF_ALL             = 0xFFFFFFFF,
 };
 
-typedef UNK_TYPE StatusFlag;
 enum StatusFlags {
     STATUS_FLAG_SLEEP           = 0x00001000,
     STATUS_FLAG_STATIC          = 0x00002000,
@@ -1514,7 +1485,6 @@ enum StatusFlags {
     STATUS_FLAG_RIGHT_ON        = 0x40000000,
 };
 
-typedef UNK_TYPE DamageType;
 enum DamageTypes {
     DAMAGE_TYPE_FIRE            = 0x00000002,
     DAMAGE_TYPE_WATER           = 0x00000004,
@@ -1535,7 +1505,6 @@ enum DamageTypes {
     DAMAGE_TYPE_TRIGGER_LUCKY   = 0x80000000,
 };
 
-typedef s8 PartnerID;
 enum PartnerIDs {
     PARTNER_NONE,
     PARTNER_GOOMBARIO,

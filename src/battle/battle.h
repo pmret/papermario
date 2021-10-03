@@ -334,10 +334,10 @@ typedef DictionaryEntry DefenseTable[];
 typedef DictionaryEntry StatusTable[];
 
 typedef struct ActorSounds {
-    /* 0x00 */ SoundID walk[2];
-    /* 0x08 */ SoundID fly[2];
-    /* 0x10 */ SoundID jump;
-    /* 0x14 */ SoundID hurt;
+    /* 0x00 */ s32 walk[2];
+    /* 0x08 */ s32 fly[2];
+    /* 0x10 */ s32 jump;
+    /* 0x14 */ s32 hurt;
     /* 0x18 */ s16 delay[2]; ///< Number of frames to wait between walk/fly sounds. Negative values are in distance.
 } ActorSounds; // size = 0x20
 
