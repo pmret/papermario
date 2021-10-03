@@ -50,6 +50,7 @@ void func_E0012000(Effect9* effect) {
     shim_guMtxF2L(sp18, &effect->unk_30);
 }
 
+void func_E0012104(Effect9* effect);
 INCLUDE_ASM(s32, "effects/effect_9", func_E0012104);
 
 INCLUDE_ASM(s32, "effects/effect_9", fx_9_main);
