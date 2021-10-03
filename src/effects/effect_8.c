@@ -50,8 +50,24 @@ void func_E0010000(Effect8* effect) {
     shim_guMtxF2L(sp18, effect->unk_30);
 }
 
-void func_E0010104(Effect8* effect);
-INCLUDE_ASM(s32, "effects/effect_8", func_E0010104);
+void func_E0010104(Effect8* effect) {
+    effect->unk_70 *= 0.85;
+    effect->unk_0C += effect->unk_70 * effect->unk_90;
+    effect->unk_88 += effect->unk_8C;
+    effect->unk_84 += effect->unk_88;
+    effect->unk_80 += effect->unk_84;
+    effect->unk_10 += effect->unk_80;
+    effect->unk_14 += effect->unk_70 * effect->unk_94;
+
+    if (effect->unk_80 < 0.0f) {
+        effect->unk_88 = 0.004f;
+    }
+
+    effect->unk_24 -= 1.0f;
+    if (effect->unk_24 < -100.0f) {
+        effect->unk_24 = -100.0f;
+    }
+}
 
 void fx_8_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     EffectBlueprint bp;
