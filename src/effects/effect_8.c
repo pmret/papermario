@@ -92,7 +92,28 @@ void fx_8_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
 void fx_8_init(EffectInstance* effect) {
 }
 
-INCLUDE_ASM(s32, "effects/effect_8", fx_8_update);
+void fx_8_update(EffectInstance* effect) {
+    Effect8* part = effect->data;
+    s32 cond = FALSE;
+    s32 i;
+
+    for (i = 0; i < effect->numParts; i++, part++) {
+        if (part->unk_00 != 0) {
+            part->unk_06--;
+            if (part->unk_06 <= 0) {
+                part->unk_00 = 0;
+            } else {
+                cond = TRUE;
+                func_E0010104(part);
+                func_E0010000(part);
+            }
+        }
+    }
+
+    if (!cond) {
+        shim_remove_effect(effect);
+    }
+}
 
 void fx_8_render(EffectInstance* effect) {
     RenderTask renderTask;
