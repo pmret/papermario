@@ -18,7 +18,6 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
     s32 msgID;
     ActorID actorID;
     s32 partIndex;
-    MessagePrintState** printContext;
     s32 anim;
 
     f32 headX, headY, headZ;
@@ -43,20 +42,17 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         gSpeakingActorPart = part;
 
         headX = actor->currentPos.x + actor->headOffset.x;
-        if ((actor->flags & 0x8000) == 0) {
+        if (!(actor->flags & 0x8000)) {
             headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
         } else {
-            f32 tmp = actor->headOffset.y;
-            headY = actor->currentPos.y + tmp + (actor->size.y / 2);
+            headY = actor->currentPos.y + actor->headOffset.y + (actor->size.y / 2);
         }
+
         headZ = actor->currentPos.z + actor->headOffset.z;
         get_screen_coords(CAM_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
 
-        {
-            s32* isPrintDone = &gSpeakingActorPrintIsDone;
-            *isPrintDone = FALSE;
-            gSpeakingActorPrintCtx = msg_get_printer_for_msg(msgID2, isPrintDone);
-        }
+        gSpeakingActorPrintIsDone = FALSE;
+        gSpeakingActorPrintCtx = msg_get_printer_for_msg(msgID2, &gSpeakingActorPrintIsDone);
         msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
         script->functionTemp[0] = 0;
@@ -72,24 +68,24 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         part = gSpeakingActorPart;
 
         headX = actor->currentPos.x + actor->headOffset.x;
-        if ((actor->flags & 0x8000) == 0) {
+        if (!(actor->flags & 0x8000)) {
             headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
         } else {
             headY = actor->headOffset.y;
             headY = actor->currentPos.y + actor->headOffset.y + (actor->size.y / 2);
         }
+
         headZ = actor->currentPos.z + actor->headOffset.z;
         get_screen_coords(CAM_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
 
-        printContext = &gSpeakingActorPrintCtx;
-        msg_printer_set_origin_pos(*printContext, screenX, screenY);
+        msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
-        if ((*printContext)->stateFlags & 0x40) {
+        if (gSpeakingActorPrintCtx->stateFlags & 0x40) {
             decrement_status_menu_disabled();
             return ApiStatus_DONE1;
         }
 
-        if ((*printContext)->stateFlags & 0x80) { // "is talking" flag
+        if (gSpeakingActorPrintCtx->stateFlags & 0x80) { // "is talking" flag
             anim = gSpeakingActorTalkAnim;
         } else {
             anim = gSpeakingActorIdleAnim;
@@ -99,13 +95,12 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
             func_80263E08(actor, part, anim);
         }
 
-        if (gSpeakingActorPrintIsDone == 1) {
+        if (gSpeakingActorPrintIsDone == TRUE) {
             decrement_status_menu_disabled();
             gOverrideFlags &= ~0x10;
             return ApiStatus_DONE1;
         }
     }
-
     return ApiStatus_BLOCK;
 }
 
@@ -125,7 +120,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
         gSpeakingActorIdleAnim = evt_get_variable(script, *args++);
 
         if (actor == ACTOR_SELF) {
-            actor = script->owner1.enemyID;
+            actor = script->owner1.actorID;
         }
         actor = (s32) get_actor(actor);
         actorPart = get_actor_part((Actor*)actor, partIndex);
@@ -213,16 +208,16 @@ ApiStatus OverrideBattleDmaDest(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus LoadBattleDmaData(Evt* script, s32 isInitialCall) {
-    s32* moveScript = &gBattleAreas[gCurrentBattleSection].dmaTable[evt_get_variable(script, *script->ptrReadPos)];
+    DmaTable* moveScript = &gBattleAreas[gCurrentBattleSection].dmaTable[evt_get_variable(script, *script->ptrReadPos)];
 
     if (moveScript == NULL) {
         return ApiStatus_DONE2;
     }
-    
+
     if (gBattleDmaDest == 0) {
-            dma_copy(moveScript[0], moveScript[1], moveScript[2]);
+            dma_copy(moveScript->dmaStart, moveScript->dmaEnd, moveScript->dmaDest);
         } else {
-            dma_copy(moveScript[0], moveScript[1], gBattleDmaDest);
+            dma_copy(moveScript->dmaStart, moveScript->dmaEnd, gBattleDmaDest);
     }
 
     return ApiStatus_DONE2;
