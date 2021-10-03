@@ -85,12 +85,11 @@ ApiStatus func_802A9000_42DA10(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802A91A0_42DBB0(Evt* script, s32 isInitialCall) {
-    s16 arg;
-
     Bytecode* readPos = script->ptrReadPos;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
 
+    s16 arg;
     ApiStatus result;
 
     if (battleStatus->unk_83 != 0) {
@@ -110,7 +109,7 @@ ApiStatus func_802A91A0_42DBB0(Evt* script, s32 isInitialCall) {
         battleStatus->actionSuccess = 0;
         battleStatus->unk_86 = 0;
         actionCommandStatus->state = 0xA;
-        battleStatus->flags1 &= 0xFFFF7FFF;
+        battleStatus->flags1 &= ~0x8000;
 
         func_80269118();
         result = 2;
@@ -123,6 +122,9 @@ ApiStatus func_802A91A0_42DBB0(Evt* script, s32 isInitialCall) {
 }
 
 void func_802A92A0_42DCB0(void) {
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    BattleStatus* battleStatus = &gBattleStatus;
+
     s32 buttonsPushed;
     s32 frameCount;
     s32 buttonsAB;
@@ -131,9 +133,6 @@ void func_802A92A0_42DCB0(void) {
     s32 mashMeterIndex;
     s32 mashMeterCutoff;
     s8 adjustedFillLevel;
-
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
-    BattleStatus* battleStatus = &gBattleStatus;
 
     switch (actionCommandStatus->state) {
         case 0: {
@@ -341,11 +340,11 @@ void func_802A92A0_42DCB0(void) {
 }
 
 void func_802A97F8_42E208(void) {
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+
     s32 hudElement;
     s32 hudElementX;
     s32 hudElementY;
-
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     draw_hud_element_clipped(actionCommandStatus->hudElements[0]);
     draw_hud_element_clipped(actionCommandStatus->hudElements[2]);
@@ -362,7 +361,6 @@ void func_802A97F8_42E208(void) {
 
     draw_hud_element_clipped(actionCommandStatus->hudElements[4]);
 }
-
 
 void func_802A98E0_42E2F0(void) {
     free_hud_element(gActionCommandStatus.hudElements[0]);
