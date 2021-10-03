@@ -135,36 +135,34 @@ void func_802A92A0_42DCB0(void) {
     s8 adjustedFillLevel;
 
     switch (actionCommandStatus->state) {
-        case 0: {
-
+        case 0:
             btl_set_popup_duration(99);
 
             hudElement = actionCommandStatus->hudElements[0];
             if (actionCommandStatus->unk_61 != 0) {
                 clear_hud_element_flags(hudElement, 2);
             }
-            set_hud_element_alpha(hudElement, 0xFF);
+            set_hud_element_alpha(hudElement, 255);
 
             hudElement = actionCommandStatus->hudElements[2];
             if (actionCommandStatus->unk_61 != 0) {
                 clear_hud_element_flags(hudElement, 2);
             }
-            set_hud_element_alpha(hudElement, 0xFF);
+            set_hud_element_alpha(hudElement, 255);
 
             hudElement = actionCommandStatus->hudElements[1];
-            set_hud_element_alpha(hudElement, 0xFF);
+            set_hud_element_alpha(hudElement, 255);
             if (actionCommandStatus->unk_61 != 0) {
                 clear_hud_element_flags(hudElement, 2);
             }
 
             actionCommandStatus->state = 1;
-            return;
-        }
+            break;
         case 1:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_6C != 0) {
-                actionCommandStatus->unk_6C = actionCommandStatus->unk_6C - 1;
-                return;
+                actionCommandStatus->unk_6C--;
+                break;
             }
 
             actionCommandStatus->hudElementX += 20;
@@ -178,12 +176,12 @@ void func_802A92A0_42DCB0(void) {
                 actionCommandStatus->hudElementY);
             set_hud_element_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudElementX,
                 actionCommandStatus->hudElementY + 28);
-            return;
+            break;
         case 10:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_4E != 0) {
                 actionCommandStatus->unk_4E--;
-                return;
+                break;
             }
             set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108B80);
             set_hud_element_anim(actionCommandStatus->hudElements[2], &D_80292374);
@@ -210,7 +208,7 @@ void func_802A92A0_42DCB0(void) {
                 }
 
                 actionCommandStatus->barFillLevel = newFillLevel;
-                if (actionCommandStatus->barFillLevel << 10 < 0) {
+                if (actionCommandStatus->barFillLevel < 0) {
                     actionCommandStatus->barFillLevel = 0;
                 }
             }
@@ -243,6 +241,8 @@ void func_802A92A0_42DCB0(void) {
 
                     // Perplexing reuse of buttonsPushed here, but it fixes register allocation. Likely another
                     // subexpression from above can be put into a variable and reused instead.
+                    //
+                    // TODO: Find a way to avoid reusing buttonsPushed.
                     buttonsPushed = fillLevel / 100;
 
                     actionCommandStatus->barFillLevel += buttonsPushed;
@@ -289,6 +289,8 @@ void func_802A92A0_42DCB0(void) {
                 s16 threshold;
 
                 // Again, reusing buttonsPushed specifically for reg-alloc. See above.
+                //
+                // TODO: Find a way to avoid reusing buttonsPushed.
                 buttonsPushed = actionCommandStatus->barFillLevel;
                 if (actionCommandStatus->unk_64 == 0) {
                     buttonsPushed = 0;
@@ -321,8 +323,7 @@ void func_802A92A0_42DCB0(void) {
             } else {
                 actionCommandStatus->unk_54 -= 1;
             }
-
-            return;
+            break;
         case 12:
             if (actionCommandStatus->unk_64 == 0) {
                 actionCommandStatus->barFillLevel -= 100;
@@ -336,6 +337,7 @@ void func_802A92A0_42DCB0(void) {
             } else {
                 func_80268C9C();
             }
+            break;
     }
 }
 
