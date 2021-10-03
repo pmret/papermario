@@ -165,7 +165,6 @@ void func_E00104F4(EffectInstance* effect) {
     shim_remove_effect(effect);
 }
 
-//INCLUDE_ASM(s32, "effects/effect_8", fx_8_appendGfx);
 void fx_8_appendGfx(EffectInstance* effect) {
     EffectInstance* effectTemp = effect;
     Effect8* part = effectTemp->data;
