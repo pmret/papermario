@@ -5,7 +5,7 @@ typedef struct Effect8 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ char unk_04[0x2];
     /* 0x06 */ s16 unk_06;
-    /* 0x08 */ u8 unk_08;
+    /* 0x08 */ u8 primAlpha;
     /* 0x09 */ char unk_09[0x3];
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ f32 unk_10;
@@ -45,7 +45,7 @@ void func_E0010000(Effect8* effect) {
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guRotateF(sp58, effect->unk_28, 0.0f, 1.0f, 0.0f);
     shim_guMtxCatF(sp18, sp58, sp18);
-    shim_guScaleF(&sp58, effect->unk_18, effect->unk_1C, effect->unk_20);
+    shim_guScaleF(sp58, effect->unk_18, effect->unk_1C, effect->unk_20);
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guTranslateF(sp58, effect->unk_0C, effect->unk_10, effect->unk_14);
     shim_guMtxCatF(sp18, sp58, sp18);
@@ -107,7 +107,7 @@ void fx_8_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
         part->unk_18 = 1.0f;
         part->unk_1C = 1.0f;
         part->unk_20 = 1.0f;
-        part->unk_08 = -1;
+        part->primAlpha = 255;
         part->unk_06 = 60;
         part->unk_24 = 0.0f;
         part->unk_2C = 0.0f;
@@ -126,7 +126,7 @@ void fx_8_init(EffectInstance* effect) {
 }
 
 void fx_8_update(EffectInstance* effect) {
-    Effect8* part = effect->data;
+    Effect8* part = (Effect8*)effect->data;
     s32 cond = FALSE;
     s32 i;
 
@@ -179,7 +179,7 @@ void fx_8_appendGfx(EffectInstance* effect) {
 
             gDisplayContext->matrixStack[gMatrixListPos] = part->unk_30;
 
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x70, 0x60, 0x18, part->unk_08);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 112, 96, 24, part->primAlpha);
             gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                         G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPDisplayList(gMasterGfxPos++, dlist);
