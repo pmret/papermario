@@ -1304,7 +1304,7 @@ s32 test_player_entity_aabb(Entity* entity) {
 INCLUDE_ASM(s32, "a5dd0_len_114e0", test_player_entity_aabb);
 #endif
 
-s32 is_player_action_state(ActionState actionState) {
+s32 is_player_action_state(s8 actionState) {
     return actionState == gPlayerActionState;
 }
 

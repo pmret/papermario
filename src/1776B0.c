@@ -150,13 +150,13 @@ void func_8024E40C(s32 arg0) {
     }
 }
 
-void btl_cam_target_actor(ActorID actorID) {
+void btl_cam_target_actor(s32 actorID) {
     if (D_80280CE0 == 0) {
         D_8029F27C = actorID;
     }
 }
 
-void func_8024E45C(ActorID actorID, s32 arg1) {
+void func_8024E45C(s32 actorID, s32 arg1) {
     if (D_80280CE0 == 0) {
         D_8029F27C = actorID;
         D_8029F27E = arg1;
@@ -421,7 +421,7 @@ ApiStatus SetBattleCamYaw(Evt* script, s32 isInitialCall) {
 
 ApiStatus BattleCamTargetActor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID;
+    s32 actorID;
 
     if (D_80280CE0 != 0) {
         return ApiStatus_DONE2;
@@ -440,7 +440,7 @@ ApiStatus BattleCamTargetActor(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8024EB84(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID;
+    s32 actorID;
 
     if (D_80280CE0 != 0) {
         return ApiStatus_DONE2;

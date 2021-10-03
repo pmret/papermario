@@ -159,7 +159,7 @@ ApiStatus func_8027FC90(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hitResult;
     Actor* actor;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 outVar;
 
     if (actorID == ACTOR_SELF) {
@@ -180,7 +180,7 @@ ApiStatus func_8027FC90(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetActorLevel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Bytecode* outVar;
 
     if (actorID == ACTOR_SELF) {

@@ -16,7 +16,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
     Actor* actor;
     ActorPart* part;
     s32 msgID;
-    ActorID actorID;
+    s32 actorID;
     s32 partIndex;
     s32 anim;
 
@@ -285,7 +285,7 @@ ApiStatus func_802537C0(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlaySoundAtActor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Bytecode soundID = *args++;
     Actor* actor;
 
@@ -301,7 +301,7 @@ ApiStatus PlaySoundAtActor(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlaySoundAtPart(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     Bytecode soundID = *args++;
     ActorPart* part;
@@ -318,7 +318,7 @@ ApiStatus PlaySoundAtPart(Evt* script, s32 isInitialCall) {
 
 ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 idx = evt_get_variable(script, *args++);
     Bytecode soundID = *args++;
     Actor* actor;
@@ -336,7 +336,7 @@ ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
 
 ApiStatus StopLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 idx = evt_get_variable(script, *args++);
     Actor* actor;
 

@@ -100,7 +100,7 @@ typedef struct NpcSettings {
 } NpcSettings; // size = 0x2C
 
 typedef struct ItemDrop {
-    /* 0x00 */ ItemID item;
+    /* 0x00 */ s16 item;
     /* 0x02 */ s16 weight;
     /* 0x04 */ s16 unk_08;
 } ItemDrop; // size = 0x06
@@ -191,7 +191,7 @@ typedef struct EnemyDrops {
 } EnemyDrops; // size = 0xB8
 
 typedef struct StaticNpc {
-    /* 0x000 */ NpcID id;
+    /* 0x000 */ s32 id;
     /* 0x004 */ NpcSettings* settings;
     /* 0x008 */ Vec3f pos;
     /* 0x014 */ s32 flags;
@@ -330,7 +330,7 @@ typedef struct {
 
 #define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle }
 
-Enemy* get_enemy(NpcID npcId);
+Enemy* get_enemy(s32 npcId);
 MapConfig* get_current_map_header(void);
 
 s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s32 arg4);
@@ -340,7 +340,7 @@ extern Area gAreas[29];
 
 /// Lists the songs that are forced to use the variation determined by `map.songVariation & 1`.
 /// @see bgm_get_map_default_variation
-extern SongID gSongsUsingVariationFlag[6];
+extern s32 gSongsUsingVariationFlag[6];
 extern s16 D_8014F738;
 
 #endif

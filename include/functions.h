@@ -172,7 +172,7 @@ Trigger* create_trigger(TriggerDefinition* def);
 s32 evt_bound_script_trigger_handler(Trigger* trigger);
 Trigger* get_trigger_by_id(s32 triggerID);
 
-Actor* get_actor(ActorID actorID);
+Actor* get_actor(s32 actorID);
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 s32 add_coins(s32 amt);
 
@@ -281,7 +281,7 @@ Evt* start_script_in_group(EvtSource* source, u8 priority, u8 initialState, u8 g
 f32 get_player_normal_yaw(void);
 void set_standard_shadow_scale(Shadow* shadow, f32 scale);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
-void set_animation_rate(ActorID actorID, s32 partIndex, f32 rate);
+void set_animation_rate(s32 actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
 AnimatedMesh* get_animator_by_index(s32 arg0);
 void set_screen_overlay_params_front(u8, f32);
@@ -294,7 +294,7 @@ s32 rand_int(s32);
 void sort_items(void);
 s32 is_ability_active(s32 arg0);
 s32 is_starting_conversation(void);
-f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
+f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration);
 void sin_cos_deg(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 void set_main_pan_u(s32 texPannerID, s32 value);
@@ -313,7 +313,7 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
 s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 pickupVar);
 void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z);
 ItemEntity* get_item_entity(s32 itemEntityIndex);
-s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode itemSpawnMode, s32 pickupVar);
+s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupVar);
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
 s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
@@ -328,9 +328,9 @@ s32 enable_player_static_collisions(void);
 s32 check_input_jump(void);
 s32 check_input_hammer(void);
 
-Npc* get_npc_safe(NpcID npcId);
-Npc* get_npc_unsafe(NpcID npcId);
-Npc* resolve_npc(Evt* script, NpcID npcIdOrPtr);
+Npc* get_npc_safe(s32 npcId);
+Npc* get_npc_unsafe(s32 npcId);
+Npc* resolve_npc(Evt* script, s32 npcIdOrPtr);
 void set_npc_yaw(Npc* npcPtr, f32 angle);
 void npc_move_heading(Npc* npc, f32 speed, f32 yaw);
 void enable_npc_blur(Npc* npc);
@@ -355,18 +355,18 @@ s32 basic_hidden_window_update(void);
 void player_create_target_list(Actor* actor);
 void enemy_create_target_list(Actor* actor);
 
-void set_actor_yaw(ActorID actorID, s32 yaw);
-void set_part_yaw(ActorID actorID, s32 partIndex, s32 value);
+void set_actor_yaw(s32 actorID, s32 yaw);
+void set_part_yaw(s32 actorID, s32 partIndex, s32 value);
 
-void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationID decorationType);
-void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationID decorationType);
+void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationType);
+void add_actor_decoration(Actor* actor, s32 decorationIndex, s32 decorationType);
 void remove_part_decoration(ActorPart* part, s32 decorationIndex);
 void remove_actor_decoration(Actor* actor, s32 decorationIndex);
 
-s32 player_team_is_ability_active(Actor* actor, Ability ability);
+s32 player_team_is_ability_active(Actor* actor, s32 ability);
 
-void create_part_shadow(ActorID actorID, s32 partIndex);
-void remove_part_shadow(ActorID actorID, s32 partIndex);
+void create_part_shadow(s32 actorID, s32 partIndex);
+void remove_part_shadow(s32 actorID, s32 partIndex);
 void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part); // arg0 unused
 
 Evt* get_script_by_index(s32 index);
@@ -467,7 +467,7 @@ void crash_screen_init(void);
 void crash_screen_set_draw_info(u16* frameBufPtr, s16 width, s16 height);
 
 // Dead functions:
-//Npc* dead_get_npc_safe(NpcID npcId); // get_npc_safe
+//Npc* dead_get_npc_safe(s32 npcId); // get_npc_safe
 void func_80077BD0(s32, s32, s32, s32, s32, s32);
 void func_8006CAC0(float mf[4][4], float x, float y, float z);
 
@@ -519,11 +519,11 @@ void enable_player_shadow(void);
 s32 get_msg_lines(s32 messageID);
 void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, s32, void* drawContents, PopupMessage* popup, s32 parent);
 void set_window_update(s32 panelID, s32);
-void snd_stop_sound(SoundID soundID);
+void snd_stop_sound(s32 soundID);
 void partner_disable_input(void);
 void func_80268798(s32, s32, s32, s32);
 void func_802687E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
-void sfx_stop_sound(SongID soundID);
+void sfx_stop_sound(s32 soundID);
 void close_message(MessagePrintState* msgPrintState);
 void show_foreground_models_unchecked(void);
 void hide_foreground_models_unchecked(void);

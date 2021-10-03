@@ -37,7 +37,7 @@ extern s32 D_8010CFE8;
 
 extern WorldPartner wPartners[12];
 extern WorldPartner* wPartner;
-extern NpcID D_8010CFD0; // wPartnerNpcIndex
+extern s32 D_8010CFD0; // wPartnerNpcIndex
 extern Npc* wPartnerNpc; // wPartnerNpc
 
 s32 partner_init_get_out(Npc*);

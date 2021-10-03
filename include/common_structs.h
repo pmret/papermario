@@ -335,12 +335,12 @@ typedef struct Evt {
     /* 0x144 */ s32 id;
     /* 0x148 */ union {
         s32 enemyID;
-        ActorID actorID;
+        s32 actorID;
         struct Enemy* enemy; ///< For overworld scripts owned by an Npc
         struct Actor* actor; ///< For battle scripts
     } owner1;                ///< Initially -1
     /* 0x14C */ union {
-        NpcID npcID;
+        s32 npcID;
         s32 triggerID;
         struct Npc* npc;            ///< For overworld scripts owned by an Npc
         struct Trigger* trigger;
@@ -1659,7 +1659,7 @@ typedef struct Actor {
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
     /* 0x20C */ u32* statusTable;
-    /* 0x210 */ Status debuff;
+    /* 0x210 */ s8 debuff;
     /* 0x211 */ s8 debuffDuration;
     /* 0x212 */ s8 staticStatus; /* 0B = yes */
     /* 0x213 */ s8 staticDuration;
@@ -2077,7 +2077,7 @@ typedef struct Temp8010F250 {
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ char unk_10[0x20];
-    /* 0x30 */ SoundID unk_30;
+    /* 0x30 */ s32 unk_30;
 } Temp8010F250; // size = 0x34
 
 typedef struct PartnerActionStatus {

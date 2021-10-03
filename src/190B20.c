@@ -1130,13 +1130,13 @@ INCLUDE_ASM(s32, "190B20", set_animation);
 
 INCLUDE_ASM(s32, "190B20", func_80263E08);
 
-INCLUDE_ASM(void, "190B20", set_animation_rate, ActorID actorID, s32 partIndex, f32 rate);
+INCLUDE_ASM(void, "190B20", set_animation_rate, s32 actorID, s32 partIndex, f32 rate);
 
-void set_actor_yaw(ActorID actorID, s32 yaw) {
+void set_actor_yaw(s32 actorID, s32 yaw) {
     get_actor(actorID)->yaw = yaw;
 }
 
-void set_part_yaw(ActorID actorID, s32 partIndex, s32 value) {
+void set_part_yaw(s32 actorID, s32 partIndex, s32 value) {
     get_actor_part(get_actor(actorID), partIndex)->yaw = value;
 }
 
@@ -1200,7 +1200,7 @@ INCLUDE_ASM(s32, "190B20", func_80265CE8);
 
 INCLUDE_ASM(s32, "190B20", func_80265D44);
 
-s32 lookup_defense(DictionaryEntry* defenseTable, Element elementKey) {
+s32 lookup_defense(DictionaryEntry* defenseTable, s32 elementKey) {
     s32 normalDefense = 0;
 
     while (defenseTable->key != ELEMENT_END) {
@@ -1219,7 +1219,7 @@ s32 lookup_defense(DictionaryEntry* defenseTable, Element elementKey) {
     return normalDefense;
 }
 
-s32 lookup_status_chance(DictionaryEntry* statusTable, Element statusKey) {
+s32 lookup_status_chance(DictionaryEntry* statusTable, s32 statusKey) {
     s32 defaultChance = 0;
 
     while (statusTable->key != STATUS_END) {
@@ -1238,7 +1238,7 @@ s32 lookup_status_chance(DictionaryEntry* statusTable, Element statusKey) {
     return defaultChance;
 }
 
-s32 lookup_status_duration_mod(DictionaryEntry* statusTable, Element statusKey) {
+s32 lookup_status_duration_mod(DictionaryEntry* statusTable, s32 statusKey) {
     s32 defaultTurnMod = 0;
 
     while (statusTable->key != ELEMENT_END) {
@@ -1570,7 +1570,7 @@ INCLUDE_ASM(s32, "190B20", func_8026709C);
 
 INCLUDE_ASM(s32, "190B20", func_802670C8);
 
-void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationID decorationType) {
+void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationType) {
     if ((part->idleAnimations) && !(part->flags & 2)) {
         DecorationTable* decorationTable = part->decorationTable;
 
@@ -1582,7 +1582,7 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationID deco
     }
 }
 
-void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationID decorationType) {
+void add_actor_decoration(Actor* actor, s32 decorationIndex, s32 decorationType) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
         if ((part->flags & 0x100001) == 0 && part->idleAnimations && !(part->flags & 2)) {
@@ -1604,7 +1604,7 @@ void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     }
 }
 
-s32 player_team_is_ability_active(Actor* actor, Ability ability) {
+s32 player_team_is_ability_active(Actor* actor, s32 ability) {
     s32 actorGenus = actor->actorID & 0x700;
     s32 hasAbility = FALSE;
 
@@ -1622,7 +1622,7 @@ s32 player_team_is_ability_active(Actor* actor, Ability ability) {
     return hasAbility;
 }
 
-void create_part_shadow(ActorID actorID, s32 partIndex) {
+void create_part_shadow(s32 actorID, s32 partIndex) {
     ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
     part->flags &= ~4;
@@ -1630,7 +1630,7 @@ void create_part_shadow(ActorID actorID, s32 partIndex) {
     part->shadowScale = part->size.x / 24.0;
 }
 
-void remove_part_shadow(ActorID actorID, s32 partIndex) {
+void remove_part_shadow(s32 actorID, s32 partIndex) {
     ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
     part->flags |= 4;
@@ -1643,7 +1643,7 @@ void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part) {
     part->shadowScale = part->size.x / 24.0;
 }
 
-void remove_player_buffs(PlayerBuff buffs) {
+void remove_player_buffs(s32 buffs) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     Actor* partner = battleStatus->partnerActor;

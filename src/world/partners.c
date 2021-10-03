@@ -324,7 +324,7 @@ void partner_create_npc(void) {
     WorldPartner* partnerEntry = &wPartners[D_8010CFD8];
     Npc** partnerNpcPtr = &wPartnerNpc;
     WorldPartner** partner = &wPartner;
-    NpcID npcIndex;
+    s32 npcIndex;
     NpcBlueprint blueprint;
     NpcBlueprint* blueprintPtr;
 

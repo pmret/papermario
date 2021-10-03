@@ -872,7 +872,7 @@ void reset_status_menu(void) {
 
 // Weird order of loading stuff
 #ifdef NON_MATCHING
-s32 is_ability_active(Ability ability) {
+s32 is_ability_active(s32 ability) {
     s32 abilityMoveID;
     PlayerData* playerData = &gPlayerData;
     s32 attackFXArray[6];

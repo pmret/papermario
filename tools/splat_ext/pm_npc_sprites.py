@@ -68,7 +68,7 @@ class Sprite:
         return l
 
     def write_to_dir(self, path):
-        SpriteSheet = ET.Element("SpriteSheet", {
+        SpriteSheet = ET.s32("SpriteSheet", {
             "maxComponents": str(self.max_components),
             "paletteGroups": str(self.num_variations),
         })
