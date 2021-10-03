@@ -94,8 +94,19 @@ void fx_8_init(EffectInstance* effect) {
 
 INCLUDE_ASM(s32, "effects/effect_8", fx_8_update);
 
-INCLUDE_ASM(s32, "effects/effect_8", fx_8_render);
+void fx_8_render(EffectInstance* effect) {
+    RenderTask renderTask;
+    RenderTask* retTask;
+
+    renderTask.appendGfx = fx_8_appendGfx;
+    renderTask.appendGfxArg = effect;
+    renderTask.distance = 0;
+    renderTask.renderMode = RENDER_MODE_28;
+
+    retTask = shim_queue_render_task(&renderTask);
+    retTask->renderMode |= RENDER_MODE_2;
+}
 
 INCLUDE_ASM(s32, "effects/effect_8", func_E00104F4);
 
-INCLUDE_ASM(s32, "effects/effect_8", func_E0010510);
+INCLUDE_ASM(s32, "effects/effect_8", fx_8_appendGfx);
