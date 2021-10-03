@@ -96,7 +96,7 @@ typedef struct ModelBlueprint {
 typedef void(*ModelCustomGfxBuilderFunc)(s32 index);
 
 typedef Gfx* ModelCustomGfxList[32];
-typedef ModelCustomGfxBuilderFunc* ModelCustomGfxBuilderList[32];
+typedef ModelCustomGfxBuilderFunc ModelCustomGfxBuilderList[32];
 
 // In memory this is a list of ModelNodeProperty, but due to the way it uses
 // the fields (storing into the "type" field) we decided to make a struct for this

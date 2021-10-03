@@ -691,12 +691,11 @@ extern TileDescriptor gCurrentTileDescriptor;
 extern ModelList wModelList;
 extern ModelList bModelList;
 
-// TODO: potentially a display list, figure this out
-extern u32* wModelSpecialDls[32];
-extern u32* bModelSpecialDls[32];
+extern ModelCustomGfxList wModelSpecialDls;
+extern ModelCustomGfxList bModelSpecialDls;
 
-extern ModelCustomGfxBuilderFunc* wCustomModelGfxBuilders;
-extern ModelCustomGfxBuilderFunc* bCustomModelGfxBuilders;
+extern ModelCustomGfxBuilderList wCustomModelGfxBuilders;
+extern ModelCustomGfxBuilderList bCustomModelGfxBuilders;
 extern ModelLocalVertexCopy** D_80152190;
 extern ModelLocalVertexCopy** D_801521D0;
 
@@ -2103,13 +2102,13 @@ void clear_model_data(void) {
     s32 i;
 
     if (!gGameStatusPtr->isBattle) {
-        gCurrentModels = wModelList;
-        gCurrentTransformGroups = wTransformGroups;
-        gCurrentCustomModelGfxPtr = wModelSpecialDls;
+        gCurrentModels = &wModelList;
+        gCurrentTransformGroups = &wTransformGroups;
+        gCurrentCustomModelGfxPtr = &wModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
         gCurrentModelLocalVtxBuffers = &D_80152190;
-        mdl_currentModelTreeNodeInfo = D_80152220;
+        mdl_currentModelTreeNodeInfo = &D_80152220;
         D_801512F0 = &wBgRenderType;
         mdl_bgMultiplyColorA = 0;
         mdl_bgMultiplyColorR = 0;
@@ -2117,13 +2116,13 @@ void clear_model_data(void) {
         mdl_bgMultiplyColorB = 0;
         gCurrentFogSettings = &wFogSettings;
     } else {
-        gCurrentModels = bModelList;
-        gCurrentTransformGroups = bTransformGroups;
-        gCurrentCustomModelGfxPtr = bModelSpecialDls;
+        gCurrentModels = &bModelList;
+        gCurrentTransformGroups = &bTransformGroups;
+        gCurrentCustomModelGfxPtr = &bModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
         gCurrentModelLocalVtxBuffers = &D_801521D0;
-        mdl_currentModelTreeNodeInfo = D_80152A20;
+        mdl_currentModelTreeNodeInfo = &D_80152A20;
         D_801512F0 = &bBgRenderType;
         gCurrentFogSettings = &bFogSettings;
     }
@@ -2170,7 +2169,7 @@ void init_model_data(void) {
     if (!gGameStatusPtr->isBattle) {
         gCurrentModels = &wModelList;
         gCurrentTransformGroups = &wTransformGroups;
-        gCurrentCustomModelGfxPtr = wModelSpecialDls;
+        gCurrentCustomModelGfxPtr = &wModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
         gCurrentModelLocalVtxBuffers = &D_80152190;
@@ -2180,7 +2179,7 @@ void init_model_data(void) {
     } else {
         gCurrentModels = &bModelList;
         gCurrentTransformGroups = &bTransformGroups;
-        gCurrentCustomModelGfxPtr = bModelSpecialDls;
+        gCurrentCustomModelGfxPtr = &bModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
         gCurrentModelLocalVtxBuffers = &D_801521D0;
@@ -2886,7 +2885,7 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     oldGfxPos = gMasterGfxPos;
     gMasterGfxPos = *arg0;
 
-    copied.flags = 0x81;
+    copied.flags = 0x80 | 0x1;
     appendGfx_model(&copied);
 
     *arg0 = gMasterGfxPos;
