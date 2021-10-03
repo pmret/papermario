@@ -39,16 +39,15 @@ void fx_7_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
     Effect7* effectPart;
-    s32 numParts;
+    s32 numParts = 1;
     s32 i;
 
     bp.unk_00 = 0;
     bp.init = fx_7_init;
     bp.update = fx_7_update;
     bp.renderWorld = fx_7_render;
-    bp.unk_14 = 0;
+    bp.unk_14 = NULL;
     bp.effectIndex = 7;
-    numParts = 1;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
