@@ -1122,8 +1122,6 @@ ApiStatus VirtualEntityMoveTo(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-// float bs
-#ifdef NON_MATCHING
 ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     VirtualEntity* virtualEntity;
@@ -1159,14 +1157,13 @@ ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
         zTemp = virtualEntity->pos.z;
 
         goalPosX = virtualEntity->goalPos.x;
-        goalPosY = virtualEntity->goalPos.y;
+        yTemp = virtualEntity->goalPos.y - yTemp;
         goalPosZ = virtualEntity->goalPos.z;
 
-        goalPosY = goalPosY - yTemp;
 
         virtualEntity->moveTime = moveTime;
         virtualEntity->moveAngle = atan2(xTemp, zTemp, goalPosX, goalPosZ);
-        virtualEntity->moveDist = dist2D(zTemp, zTemp, goalPosX, goalPosZ);
+        virtualEntity->moveDist = dist2D(xTemp, zTemp, goalPosX, goalPosZ);
 
         if (virtualEntity->moveTime == 0.0f) {
             virtualEntity->moveTime = virtualEntity->moveDist / virtualEntity->moveSpeed;
@@ -1175,7 +1172,7 @@ ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
         }
 
         virtualEntity->jumpVelocity = (virtualEntity->jumpGravity * virtualEntity->moveTime / 2) +
-                                      (goalPosY / virtualEntity->moveTime);
+                                      (yTemp / virtualEntity->moveTime);
         script->functionTemp[0] = 1;
     }
 
@@ -1195,9 +1192,6 @@ ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-#else
-INCLUDE_ASM(ApiStatus, "evt/player_api", VirtualEntityJumpTo, Evt* script, s32 isInitialCall);
-#endif
 
 ApiStatus VirtualEntityLandJump(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
