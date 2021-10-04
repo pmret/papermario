@@ -21,7 +21,7 @@ ApiStatus func_802A9398_42A888(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
     battleStatus->unk_84 = 1;
     battleStatus->actionSuccess = 0;

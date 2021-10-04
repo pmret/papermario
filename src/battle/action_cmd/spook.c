@@ -25,7 +25,7 @@ ApiStatus func_802A9000_430020(void) {
     actionCommandStatus->unk_6C = 30;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
     actionCommandStatus->unk_68 = 0;
     battleStatus->actionSuccess = 0;
@@ -70,9 +70,9 @@ void func_802A97FC_43081C(void) {
     draw_hud_element_clipped(hudElement);
     get_hud_element_render_pos(hudElement, &renderPosX, &renderPosY);
     if (actionCommandStatus->unk_68 == 0) {
-        func_80268770(renderPosX, renderPosY, actionCommandStatus->unk_44 / 100);
+        func_80268770(renderPosX, renderPosY, actionCommandStatus->barFillLevel / 100);
     } else {
-        func_8026880C(renderPosX, renderPosY, actionCommandStatus->unk_44 / 100);
+        func_8026880C(renderPosX, renderPosY, actionCommandStatus->barFillLevel / 100);
     }
     draw_hud_element_clipped(actionCommandStatus->hudElements[2]);
 }
