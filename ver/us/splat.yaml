@@ -10866,6 +10866,18 @@ segments:
     - [0xE31380, data]
     - [0xE314C0]
   - [0xE31530, bin] # unk data
+  - [0xE32420, bin] # unk data
+  - [0xE35670, bin] # unk data
+  - [0xE38890, bin] # unk data
+  - [0xE3B870, bin] # unk data
+  - [0xE3E260, bin] # unk data
+  - [0xE42240, bin] # unk data
+  - [0xE4B2E0, bin] # unk data
+  - [0xE4E7F0, bin] # unk data
+  - [0xE62370, bin] # unk data
+  - [0xE62AC0, bin] # unk data
+  - [0xE639C0, bin] # unk data
+  - [0xE648D0, bin] # unk data
   - type: code
     start: 0xEA0900
     vram: 0x80240000

@@ -1242,7 +1242,7 @@ typedef Shadow* ShadowList[MAX_SHADOWS];
 typedef struct StaticShadowData {
     /* 0x00 */ u16 flags;
     /* 0x02 */ char unk_02[0x2];
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ s32* unk_04;
     /* 0x08 */ StaticAnimatorNode** animModelNode;
     /* 0x0C */ void (*onCreateCallback)(Shadow* shadow);
     /* 0x10 */ char unk_10[0x10];
