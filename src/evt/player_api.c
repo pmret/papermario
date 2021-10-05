@@ -875,7 +875,38 @@ void virtual_entity_list_update(void) {
 
 INCLUDE_ASM(void, "evt/player_api", virtual_entity_list_render_world, void);
 
-INCLUDE_ASM(s32, "evt/player_api", virtual_entity_list_render_UI);
+void virtual_entity_list_render_UI(void) {
+    Mtx sp18;
+    Mtx sp58;
+    Mtx sp98;
+    Mtx spD8;
+    Mtx sp118;
+    Mtx sp158;
+    Mtx sp198;
+    Mtx sp1D8;
+    Mtx sp218;
+    VirtualEntity* virtualEntity;
+    s32 i;
+
+    for (i = 0; i < 0x40; i++) {
+        virtualEntity = (*D_802DB7C0)[i];
+        if (virtualEntity != NULL) {
+            if (!(virtualEntity->entityModelIndex < 0 || !(get_entity_model(virtualEntity->entityModelIndex)->flags & 8))) {
+                guTranslateF(&sp18, virtualEntity->pos.x, virtualEntity->pos.y, virtualEntity->pos.z);
+                guRotateF(&sp58, virtualEntity->rot.x, 1.0f, 0.0f, 0.0f);
+                guRotateF(&sp98, virtualEntity->rot.y, 0.0f, 1.0f, 0.0f);
+                guRotateF(&spD8, virtualEntity->rot.z, 0.0f, 0.0f, 1.0f);
+                guScaleF(&sp1D8, virtualEntity->scale.x, virtualEntity->scale.y, virtualEntity->scale.z);
+                guMtxCatF(&spD8, &sp58, &sp158);
+                guMtxCatF(&sp158, &sp98, &sp118);
+                guMtxCatF(&sp1D8, &sp118, &sp158);
+                guMtxCatF(&sp158, &sp18, &sp198);
+                guMtxF2L(&sp198, &sp218);
+                draw_entity_model_E(virtualEntity->entityModelIndex, &sp218);
+            }
+        }
+    }
+}
 
 ApiStatus InitVirtualEntityList(Evt* script, s32 isInitialCall) {
     if (!gGameStatusPtr->isBattle) {
