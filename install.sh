@@ -42,6 +42,9 @@ curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/l
 echo "Downloading IDO 5.3 for Linux"
 curl -L "https://github.com/ethteck/ido-static-recomp/releases/download/per-function/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3
 
+echo "Downloading KMC GCC wrapper for Linux"
+curl -L "https://github.com/Mr-Wiseguy/kmc-gcc-wrapper/releases/download/master/kmc-gcc-wrapper-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/kmcgcc
+
 # Debian and derivatives (apt)
 if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; then
     echo "Installing packages for Debian or derivative (apt)"

@@ -52,6 +52,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     cross = "mips-linux-gnu-"
     cc = f"{BUILD_TOOLS}/cc/gcc/gcc"
     cc_ido = f"{BUILD_TOOLS}/cc/ido5.3/cc"
+    kmc_cc1 = f"{BUILD_TOOLS}/cc/kmcgcc/cc1"
+    kmc_as = f"{BUILD_TOOLS}/cc/kmcgcc/as"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
     compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
@@ -101,6 +103,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ninja.rule("cc_ido",
         description="cc_ido $in",
         command=f"{ccache}{cc_ido} {CPPFLAGS_COMMON} {cppflags} -c -mips1 -O0 -G0 -non_shared -Xfullwarn -Xcpluscomm -o $out $in",
+    )
+
+    ninja.rule("cc_kmc",
+        description="cc_kmc $in",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {kmc_cc1} -quiet -G0 -O2 -fno-common -o - | {kmc_as} -G0 -EB - -o $out'",
     )
 
     ninja.rule("cxx",
@@ -317,7 +324,7 @@ class Configure:
 
                 if task == "yay0":
                     implicit.append(YAY0_COMPRESS_TOOL)
-                elif task in ["cc", "cc_dsl", "cc_ido", "cxx"]:
+                elif task in ["cc", "cc_dsl", "cxx"]:
                     order_only.append("generated_headers_" + self.version)
 
                 ninja.build(
@@ -361,8 +368,11 @@ class Configure:
                     s = f.read()
                     if "SCRIPT(" in s or "#pragma SCRIPT" in s or "#include \"world/common/foliage.inc.c\"" in s:
                         task = "cc_dsl"
+
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
+                elif "os/" in seg.name:
+                    task = "cc_kmc"
 
                 build(entry.object_path, entry.src_paths, task, variables={"cflags": cflags})
 
