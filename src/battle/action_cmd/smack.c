@@ -63,7 +63,7 @@ ApiStatus func_802A9000_42E3A0(void) {
     actionCommandStatus->unk_6C = 30;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
     actionCommandStatus->unk_68 = 0;
     battleStatus->actionSuccess = 0;
@@ -154,7 +154,7 @@ void func_802A9298_42E638(void) {
                 break;
             }
             set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108F30);
-            actionCommandStatus->unk_44 = 0;
+            actionCommandStatus->barFillLevel = 0;
             battleStatus->unk_85 = 0;
             actionCommandStatus->unk_5C = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
@@ -167,11 +167,11 @@ void func_802A9298_42E638(void) {
             if (actionCommandStatus->unk_68 == 0) {
                 s32 index;
                 mashMeterCutoff = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals];
-                actionCommandStatus->unk_44 -=
-                    D_802A99D2_42ED72[actionCommandStatus->unk_44 / mashMeterCutoff / 20].unk_2;
+                actionCommandStatus->barFillLevel -=
+                    D_802A99D2_42ED72[actionCommandStatus->barFillLevel / mashMeterCutoff / 20].unk_2;
 
-                if (actionCommandStatus->unk_44 < 0) {
-                    actionCommandStatus->unk_44 = 0;
+                if (actionCommandStatus->barFillLevel < 0) {
+                    actionCommandStatus->barFillLevel = 0;
                 }
 
                 if (actionCommandStatus->unk_68 == 0) {
@@ -183,34 +183,34 @@ void func_802A9298_42E638(void) {
                     if ((battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) == 0 && actionCommandStatus->unk_5C) {
                         s16 phi_v1;
                         if (actionCommandStatus->unk_64 == 0) {
-                            actionCommandStatus->unk_44 += battleStatus->unk_434[actionCommandStatus->unk_50] * 13;
+                            actionCommandStatus->barFillLevel += battleStatus->unk_434[actionCommandStatus->unk_50] * 13;
                         } else {
-                            actionCommandStatus->unk_44 += battleStatus->unk_434[actionCommandStatus->unk_50] * 850 / 100;
+                            actionCommandStatus->barFillLevel += battleStatus->unk_434[actionCommandStatus->unk_50] * 850 / 100;
                         }
 
                         actionCommandStatus->unk_5C = 0;
                     }
 
                     if (battleStatus->currentButtonsPressed & BUTTON_STICK_RIGHT) {
-                        actionCommandStatus->unk_44 -= battleStatus->unk_434[actionCommandStatus->unk_50] * 11;
+                        actionCommandStatus->barFillLevel -= battleStatus->unk_434[actionCommandStatus->unk_50] * 11;
                     }
                 }
             }
 
-            if (actionCommandStatus->unk_44 < 0) {
-                actionCommandStatus->unk_44 = 0;
+            if (actionCommandStatus->barFillLevel < 0) {
+                actionCommandStatus->barFillLevel = 0;
             }
 
-            if (actionCommandStatus->unk_44 > 10000) {
+            if (actionCommandStatus->barFillLevel > 10000) {
                 hudElement = actionCommandStatus->hudElements[2];
-                actionCommandStatus->unk_44 = 10000;
+                actionCommandStatus->barFillLevel = 10000;
                 actionCommandStatus->unk_68 = 1;
                 set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 50,
                     actionCommandStatus->hudElementY + 28);
                 clear_hud_element_flags(hudElement, 2);
             }
 
-            battleStatus->unk_84 = actionCommandStatus->unk_44 / 100;
+            battleStatus->unk_84 = actionCommandStatus->barFillLevel / 100;
             sfx_adjust_env_sound_params(0x80000041, 0, 0, battleStatus->unk_84 * 12);
 
             switch (partnerActor->staticActorData->level) {
@@ -235,10 +235,10 @@ void func_802A9298_42E638(void) {
             if (actionCommandStatus->unk_54 == 0) {
                 s32 mashMeterCutoff;
 
-                if (actionCommandStatus->unk_44 == 0) {
+                if (actionCommandStatus->barFillLevel == 0) {
                     battleStatus->actionSuccess = -1;
                 } else {
-                    mashMeterCutoff = actionCommandStatus->unk_44;
+                    mashMeterCutoff = actionCommandStatus->barFillLevel;
                     battleStatus->actionSuccess = mashMeterCutoff / 100;
                 }
 
@@ -283,9 +283,9 @@ void func_802A98B0_42EC50(void) {
     draw_hud_element_clipped(hudElementID);
     get_hud_element_render_pos(hudElementID, &renderPosX, &renderPosY);
     if (actionCommandStatus->unk_68 == 0) {
-        func_80268770(renderPosX, renderPosY, actionCommandStatus->unk_44 / 100);
+        func_80268770(renderPosX, renderPosY, actionCommandStatus->barFillLevel / 100);
     } else {
-        func_8026880C(renderPosX, renderPosY, actionCommandStatus->unk_44 / 100);
+        func_8026880C(renderPosX, renderPosY, actionCommandStatus->barFillLevel / 100);
     }
     draw_hud_element_clipped(actionCommandStatus->hudElements[2]);
 }
