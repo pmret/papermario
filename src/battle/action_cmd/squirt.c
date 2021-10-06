@@ -17,12 +17,12 @@ ApiStatus func_802A9000_429D20(void) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
-    
+
     func_80268858();
     actionCommandStatus->actionCommandID = ACTION_COMMAND_SQUIRT;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
     battleStatus->unk_84 = 0;
     actionCommandStatus->hudElementX = -48;
@@ -35,10 +35,10 @@ ApiStatus func_802A9000_429D20(void) {
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
 
-    hudElement = create_hud_element(D_80108AFC);    
-    actionCommandStatus->hudElements[1] = hudElement;    
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);    
-    set_hud_element_render_depth(hudElement, 0);    
+    hudElement = create_hud_element(D_80108AFC);
+    actionCommandStatus->hudElements[1] = hudElement;
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
     return ApiStatus_DONE2;
@@ -60,7 +60,7 @@ ApiStatus func_802A911C_429E3C(Evt* script) {
     actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
     battleStatus->actionSuccess = 0;
     battleStatus->unk_86 = 0;
@@ -82,9 +82,9 @@ void func_802A9634_42A354(void) {
     draw_hud_element_clipped(hudElement);
     get_hud_element_render_pos(hudElement, &x, &y);
     if (actionCommandStatus->unk_5C == 0) {
-        func_80268798(x, y, actionCommandStatus->unk_44 / 100, 1);
+        func_80268798(x, y, actionCommandStatus->barFillLevel / 100, 1);
     } else {
-        func_802687E4(x, y, actionCommandStatus->unk_44 / 100, 1, 1);
+        func_802687E4(x, y, actionCommandStatus->barFillLevel / 100, 1, 1);
     }
 }
 
