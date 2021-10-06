@@ -94,19 +94,6 @@ ApiStatus func_802A9000_42E3A0(void) {
 
 #include "common/MashActionCommandInit.inc.c"
 
-static inline void modify_unk_85(BattleStatus* battleStatus, s32* array) {
-    s32 index;
-
-    if (battleStatus->unk_84 >= array[battleStatus->unk_85]) {
-        battleStatus->unk_85++;
-    }
-
-    // Really strange (necessary?) use of index = here.
-    if (battleStatus->unk_85 > 0 && battleStatus->unk_84 < array[index = battleStatus->unk_85 - 1]) {
-        battleStatus->unk_85--;
-    }
-}
-
 void func_802A9298_42E638(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
@@ -214,22 +201,55 @@ void func_802A9298_42E638(void) {
             sfx_adjust_env_sound_params(0x80000041, 0, 0, battleStatus->unk_84 * 12);
 
             switch (partnerActor->staticActorData->level) {
-                case 0: {
-                    modify_unk_85(battleStatus, D_802A99E4_42ED84);
-                    break;
-                }
-                case 1: {
-                    modify_unk_85(battleStatus, D_802A99F4_42ED94);
-                    break;
-                }
-                case 2: {
-                    if (actionCommandStatus->unk_64 == 0) {
-                        modify_unk_85(battleStatus, D_802A9A08_42EDA8);
-                    } else {
-                        modify_unk_85(battleStatus, D_802A9A20_42EDC0);
+                case 0:
+                    if (battleStatus->unk_84 >= D_802A99E4_42ED84[battleStatus->unk_85]) {
+                        battleStatus->unk_85++;
+                    }
+
+                    if (battleStatus->unk_85 > 0) {
+                        s32 index = battleStatus->unk_85 - 1;
+                        if (battleStatus->unk_84 < D_802A99E4_42ED84[index]) {
+                            battleStatus->unk_85--;
+                        }
                     }
                     break;
-                }
+                case 1:
+                    if (battleStatus->unk_84 >= D_802A99F4_42ED94[battleStatus->unk_85]) {
+                        battleStatus->unk_85++;
+                    }
+
+                    if (battleStatus->unk_85 > 0) {
+                        s32 index = battleStatus->unk_85 - 1;
+                        if (battleStatus->unk_84 < D_802A99F4_42ED94[index]) {
+                            battleStatus->unk_85--;
+                        }
+                    }
+                    break;
+                case 2:
+                    if (actionCommandStatus->unk_64 == 0) {
+                        if (battleStatus->unk_84 >= D_802A9A08_42EDA8[battleStatus->unk_85]) {
+                            battleStatus->unk_85++;
+                        }
+
+                        if (battleStatus->unk_85 > 0) {
+                            s32 index = battleStatus->unk_85 - 1;
+                            if (battleStatus->unk_84 < D_802A9A08_42EDA8[index]) {
+                                battleStatus->unk_85--;
+                            }
+                        }
+                    } else {
+                        if (battleStatus->unk_84 >= D_802A9A20_42EDC0[battleStatus->unk_85]) {
+                            battleStatus->unk_85++;
+                        }
+
+                        if (battleStatus->unk_85 > 0) {
+                            s32 index = battleStatus->unk_85 - 1;
+                            if (battleStatus->unk_84 < D_802A9A20_42EDC0[index]) {
+                                battleStatus->unk_85--;
+                            }
+                        }
+                    }
+                    break;
             }
 
             if (actionCommandStatus->unk_54 == 0) {
