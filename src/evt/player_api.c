@@ -873,7 +873,38 @@ void virtual_entity_list_update(void) {
     }
 }
 
-INCLUDE_ASM(void, "evt/player_api", virtual_entity_list_render_world, void);
+void virtual_entity_list_render_world(void) {
+    Matrix4f translation;
+    Matrix4f xRot;
+    Matrix4f yRot;
+    Matrix4f zRot;
+    Matrix4f sp118;
+    Matrix4f sp158;
+    Matrix4f sp198;
+    Matrix4f scale;
+    Mtx sp218;
+    VirtualEntity* virtualEntity;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
+        virtualEntity = (*D_802DB7C0)[i];
+        if (virtualEntity != NULL) {
+            if (!(virtualEntity->entityModelIndex < 0 || get_entity_model(virtualEntity->entityModelIndex)->flags & 8)) {
+                guTranslateF(translation, virtualEntity->pos.x, virtualEntity->pos.y, virtualEntity->pos.z);
+                guRotateF(xRot, virtualEntity->rot.x, 1.0f, 0.0f, 0.0f);
+                guRotateF(yRot, virtualEntity->rot.y, 0.0f, 1.0f, 0.0f);
+                guRotateF(zRot, virtualEntity->rot.z, 0.0f, 0.0f, 1.0f);
+                guScaleF(scale, virtualEntity->scale.x, virtualEntity->scale.y, virtualEntity->scale.z);
+                guMtxCatF(zRot, xRot, sp158);
+                guMtxCatF(sp158, yRot, sp118);
+                guMtxCatF(scale, sp118, sp158);
+                guMtxCatF(sp158, translation, sp198);
+                guMtxF2L(sp198, &sp218);
+                draw_entity_model_A(virtualEntity->entityModelIndex, &sp218);
+            }
+        }
+    }
+}
 
 void virtual_entity_list_render_UI(void) {
     Matrix4f translation;
