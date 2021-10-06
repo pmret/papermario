@@ -873,9 +873,71 @@ void virtual_entity_list_update(void) {
     }
 }
 
-INCLUDE_ASM(void, "evt/player_api", virtual_entity_list_render_world, void);
+void virtual_entity_list_render_world(void) {
+    Matrix4f translation;
+    Matrix4f xRot;
+    Matrix4f yRot;
+    Matrix4f zRot;
+    Matrix4f sp118;
+    Matrix4f sp158;
+    Matrix4f sp198;
+    Matrix4f scale;
+    Mtx sp218;
+    VirtualEntity* virtualEntity;
+    s32 i;
 
-INCLUDE_ASM(s32, "evt/player_api", virtual_entity_list_render_UI);
+    for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
+        virtualEntity = (*D_802DB7C0)[i];
+        if (virtualEntity != NULL) {
+            if (!(virtualEntity->entityModelIndex < 0 || get_entity_model(virtualEntity->entityModelIndex)->flags & 8)) {
+                guTranslateF(translation, virtualEntity->pos.x, virtualEntity->pos.y, virtualEntity->pos.z);
+                guRotateF(xRot, virtualEntity->rot.x, 1.0f, 0.0f, 0.0f);
+                guRotateF(yRot, virtualEntity->rot.y, 0.0f, 1.0f, 0.0f);
+                guRotateF(zRot, virtualEntity->rot.z, 0.0f, 0.0f, 1.0f);
+                guScaleF(scale, virtualEntity->scale.x, virtualEntity->scale.y, virtualEntity->scale.z);
+                guMtxCatF(zRot, xRot, sp158);
+                guMtxCatF(sp158, yRot, sp118);
+                guMtxCatF(scale, sp118, sp158);
+                guMtxCatF(sp158, translation, sp198);
+                guMtxF2L(sp198, &sp218);
+                draw_entity_model_A(virtualEntity->entityModelIndex, &sp218);
+            }
+        }
+    }
+}
+
+void virtual_entity_list_render_UI(void) {
+    Matrix4f translation;
+    Matrix4f xRot;
+    Matrix4f yRot;
+    Matrix4f zRot;
+    Matrix4f sp118;
+    Matrix4f sp158;
+    Matrix4f sp198;
+    Matrix4f scale;
+    Mtx sp218;
+    VirtualEntity* virtualEntity;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
+        virtualEntity = (*D_802DB7C0)[i];
+        if (virtualEntity != NULL) {
+            if (!(virtualEntity->entityModelIndex < 0 || !(get_entity_model(virtualEntity->entityModelIndex)->flags & 8))) {
+                guTranslateF(translation, virtualEntity->pos.x, virtualEntity->pos.y, virtualEntity->pos.z);
+                guRotateF(xRot, virtualEntity->rot.x, 1.0f, 0.0f, 0.0f);
+                guRotateF(yRot, virtualEntity->rot.y, 0.0f, 1.0f, 0.0f);
+                guRotateF(zRot, virtualEntity->rot.z, 0.0f, 0.0f, 1.0f);
+                guScaleF(scale, virtualEntity->scale.x, virtualEntity->scale.y, virtualEntity->scale.z);
+                guMtxCatF(zRot, xRot, sp158);
+                guMtxCatF(sp158, yRot, sp118);
+                guMtxCatF(scale, sp118, sp158);
+                guMtxCatF(sp158, translation, sp198);
+                guMtxF2L(sp198, &sp218);
+                draw_entity_model_E(virtualEntity->entityModelIndex, &sp218);
+            }
+        }
+    }
+}
 
 ApiStatus InitVirtualEntityList(Evt* script, s32 isInitialCall) {
     if (!gGameStatusPtr->isBattle) {
@@ -1122,8 +1184,6 @@ ApiStatus VirtualEntityMoveTo(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-// float bs
-#ifdef NON_MATCHING
 ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     VirtualEntity* virtualEntity;
@@ -1159,14 +1219,13 @@ ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
         zTemp = virtualEntity->pos.z;
 
         goalPosX = virtualEntity->goalPos.x;
-        goalPosY = virtualEntity->goalPos.y;
+        yTemp = virtualEntity->goalPos.y - yTemp;
         goalPosZ = virtualEntity->goalPos.z;
 
-        goalPosY = goalPosY - yTemp;
 
         virtualEntity->moveTime = moveTime;
         virtualEntity->moveAngle = atan2(xTemp, zTemp, goalPosX, goalPosZ);
-        virtualEntity->moveDist = dist2D(zTemp, zTemp, goalPosX, goalPosZ);
+        virtualEntity->moveDist = dist2D(xTemp, zTemp, goalPosX, goalPosZ);
 
         if (virtualEntity->moveTime == 0.0f) {
             virtualEntity->moveTime = virtualEntity->moveDist / virtualEntity->moveSpeed;
@@ -1175,7 +1234,7 @@ ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
         }
 
         virtualEntity->jumpVelocity = (virtualEntity->jumpGravity * virtualEntity->moveTime / 2) +
-                                      (goalPosY / virtualEntity->moveTime);
+                                      (yTemp / virtualEntity->moveTime);
         script->functionTemp[0] = 1;
     }
 
@@ -1195,9 +1254,6 @@ ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-#else
-INCLUDE_ASM(ApiStatus, "evt/player_api", VirtualEntityJumpTo, Evt* script, s32 isInitialCall);
-#endif
 
 ApiStatus VirtualEntityLandJump(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
