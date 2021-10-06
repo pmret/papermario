@@ -22,11 +22,6 @@ typedef struct Effect6 {
     /* 0x40 */ s32 unk_40;
 } Effect6; // size = 0x44
 
-void fx_6_init(EffectInstance* effect);
-void fx_6_update(EffectInstance* effect);
-void fx_6_render(EffectInstance* effect);
-void fx_6_appendGfx(EffectInstance* effect);
-
 static s32 sDlists[] = { 0x09002B20, 0x09002B40, 0x09002B60, 0x09002B60, 0x09002B60 };
 static s32 sDlists2[] = { 0x09002780, 0x09002868, 0x09002950, 0x09002A38, 0x09002A38 };
 
@@ -53,6 +48,11 @@ static s8 D_E000CCE0[] = { 0x00, 0x10, 0x20, 0x30, 0x01, 0x11, 0x21, 0x31, 0x02,
                            0x6F, 0x77, 0x77, 0x7F, 0xFF, 0x00, 0x00, 0x00 };
 
 static s8* D_E000CD24[4] = { &D_E000CC38, &D_E000CC48, &D_E000CC5C, &D_E000CCE0 };
+
+void fx_6_init(EffectInstance* effect);
+void fx_6_update(EffectInstance* effect);
+void fx_6_render(EffectInstance* effect);
+void fx_6_appendGfx(EffectInstance* effect);
 
 void func_E000C000(Effect6* part) {
     part->unk_18 += part->unk_1C;

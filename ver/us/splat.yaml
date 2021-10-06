@@ -2224,7 +2224,7 @@ segments:
     vram: 0xE000E000
     subsegments:
     - [0x32C110, c, effect_7]
-    - [0x32c770]
+    - [0x32C770]
   - name: effect_8
     dir: effects
     type: code
@@ -2821,7 +2821,7 @@ segments:
     vram: 0xE0096000
     subsegments:
     - [0x394280, c, effect_75]
-    - [0x394660, data]
+    - [0x394660]
   - [0x394670, bin] # effect 75 gfx
   - name: effect_76
     dir: effects

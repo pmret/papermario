@@ -372,7 +372,8 @@ class Configure:
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
                 elif "os/" in seg.name:
-                    task = "cc_kmc"
+                    pass
+                    #task = "cc_kmc"
 
                 build(entry.object_path, entry.src_paths, task, variables={"cflags": cflags})
 

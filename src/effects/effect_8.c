@@ -29,12 +29,12 @@ typedef struct Effect8 {
     /* 0x94 */ f32 unk_94;
 } Effect8; // size = 0x98
 
+extern Gfx D_09000E08[];
+
 void fx_8_init(EffectInstance* effect);
 void fx_8_update(EffectInstance* effect);
 void fx_8_render(EffectInstance* effect);
 void fx_8_appendGfx(EffectInstance* effect);
-
-extern Gfx D_09000E08[];
 
 void func_E0010000(Effect8* effect) {
     Matrix4f sp18;
