@@ -530,6 +530,9 @@ void hide_foreground_models_unchecked(void);
 void show_foreground_models(void);
 void hide_foreground_models(void);
 void btl_set_state(s32 battleState);
+void draw_entity_model_E(s32, Mtx*);
+void draw_entity_model_A(s32, Mtx*);
+void free_entity_model_by_index(s32 idx);
 
 void enforce_hpfp_limits(void);
 
