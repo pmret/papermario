@@ -3645,7 +3645,7 @@ segments:
     overlay: True
     subsegments:
     - [0x42E3A0, c, smack]
-    - [0x42ED70, data]
+    - [0x42ED70, .data, smack]
   - type: code
     start: 0x42EE20
     vram: 0x802A9000
