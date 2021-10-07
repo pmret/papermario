@@ -618,79 +618,73 @@ ApiStatus WaitForPlayerInputEnabled(Evt* script, s32 isInitialCall) {
     return !(gPlayerStatus.flags & 0x2000) * ApiStatus_DONE2;
 }
 
-//regs, the global at the end
-#ifdef NON_MATCHING
 ApiStatus func_802D2520(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 a0 = *args++;
     s32 val = evt_get_variable(script, *args++);
-    s32 a2;
-    s32 a3;
+    s32 a2, a3, a4, a5;    
 
     func_802DDFF8(a0, 0, 0, 0, 0, 0, 0);
 
     switch (val) {
         case 0:
             playerStatus->renderMode = 0xD;
-            func_802DDFF8(a0, 0, 0, 0, 0, 0, 0);
+            func_802DDFF8(a0, 0, 0, 0, 0, 0, D_802DB5B0);
             break;
         case 2:
         case 3:
             playerStatus->renderMode = 0xD;
         case 1:
-            func_802DDFF8(a0, val, 0, 0, 0, 0, 0);
+            func_802DDFF8(a0, val, 0, 0, 0, 0, D_802DB5B0);
             break;
         case 4:
             playerStatus->renderMode = 13;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
-            evt_get_variable(script, *args++);
-            func_802DDFF8(a0, 4, a2, a3, 0, 0, 0);
+            a4 = evt_get_variable(script, *args++);
+            func_802DDFF8(a0, 4, a2, a3, a4, 0, D_802DB5B0);
             break;
         case 6:
             playerStatus->renderMode = 13;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
-            evt_get_variable(script, *args++);
-            func_802DDFF8(a0, 6, a2, a3, 0, 0, 0);
+            a4 = evt_get_variable(script, *args++);
+            func_802DDFF8(a0, 6, a2, a3, a4, 0xFF, D_802DB5B0);
             break;
         case 7:
             playerStatus->renderMode = 22;
-            evt_get_variable(script, *args++);
-            func_802DDFF8(a0, 7, 0xFF, 0xFF, 0, 0, 0);
+            a5 = evt_get_variable(script, *args++);
+            func_802DDFF8(a0, 7, 0xFF, 0xFF, 0xFF, a5, D_802DB5B0);
             break;
         case 8:
             playerStatus->renderMode = 22;
-            a3 = evt_get_variable(script, *args++);
             a2 = evt_get_variable(script, *args++);
-            evt_get_variable(script, *args++);
-            evt_get_variable(script, *args++);
-            func_802DDFF8(a0, 8, a2, a3, 0, 0, 0);
+            a3 = evt_get_variable(script, *args++);
+            a4 = evt_get_variable(script, *args++);
+            a5 = evt_get_variable(script, *args++);
+            func_802DDFF8(a0, 8, a2, a3, a4, a5, D_802DB5B0);
             break;
         case 5:
             playerStatus->renderMode = 13;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
-            evt_get_variable(script, *args++);
-            func_802DDFF8(a0, 5, a2, a3, 0, 0, 0);
+            a4 = evt_get_variable(script, *args++);
+            func_802DDFF8(a0, 5, a2, a3, a4, 0, D_802DB5B0);
             break;
         case 13:
             playerStatus->renderMode = 22;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
-            evt_get_variable(script, *args++);
-            evt_get_variable(script, *args++);
-            func_802DDFF8(a0, 13, a2, a3, 0, 0, 0);
+            a4 = evt_get_variable(script, *args++);
+            a5 = evt_get_variable(script, *args++);
+            func_802DDFF8(a0, 13, a2, a3, a4, a5, D_802DB5B0);
             break;
     }
 
     D_802DB5B0 = 0;
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D2520, Evt* script, s32 isInitialCall);
-#endif
 
 ApiStatus func_802D286C(Evt* script, s32 isInitialCall) {
     s32 temp = *script->ptrReadPos;
