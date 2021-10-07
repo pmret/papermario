@@ -25,7 +25,7 @@ void fx_75_update(EffectInstance* effect);
 void fx_75_render(EffectInstance* effect);
 void fx_75_appendGfx(EffectInstance* effect);
 
-EffectInstance* fx_75_main(EffectInstanceDataThing* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+EffectInstance* fx_75_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
     Effect75* data;
@@ -95,29 +95,25 @@ void fx_75_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-//INCLUDE_ASM(s32, "effects/effect_75", fx_75_appendGfx);
-
 void fx_75_appendGfx(EffectInstance* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
-    Effect75* temp_s2;
-    s32 temp_s3;
-    f32 temp_a1;
+    Effect75* part = effect->data;
+    s32 idx = part->unk_00;
 
-    temp_s2 = effect->data;
-    temp_s3 = temp_s2->unk_00;
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->effect->data));
 
-    shim_guTranslateF(sp18, temp_s2->unk_04, temp_s2->unk_08, temp_s2->unk_0C);
+    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
     shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guScaleF(sp58, temp_s2->unk_18, temp_s2->unk_18, 1.0f);
+    shim_guScaleF(sp58, part->unk_18, part->unk_18, 1.0f);
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_E00963E0[temp_s3]);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+              G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMasterGfxPos++, D_E00963E0[idx]);
     gSPDisplayList(gMasterGfxPos++, D_09001508);
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMasterGfxPos++);

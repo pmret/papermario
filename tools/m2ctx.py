@@ -1,5 +1,6 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
+import argparse
 import os
 import sys
 import subprocess
@@ -9,27 +10,29 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = os.path.abspath(os.path.join(script_dir, ".."))
 src_dir = root_dir + "src/"
 
+# Project-specific
+CPP_FLAGS = [
+    "-Iinclude",
+    "-Isrc",
+    "-Iver/current/build/include",
+    "-D_LANGUAGE_C",
+    "-DF3DEX_GBI_2",
+    "-D_MIPS_SZLONG=32",
+    "-DSCRIPT(...)={}"
+    "-D__attribute__(...)=",
+    "-D__asm__(...)=",
+    "-ffreestanding",
+]
 
-def get_c_dir(dirname):
-    for root, dirs, files in os.walk(src_dir):
-        for directory in dirs:
-            if directory == dirname:
-                return os.path.join(root, directory)
-
-
-def get_c_file(directory):
-    for root, dirs, files in os.walk(directory):
-        for file in files:
-            if file.endswith(".c") and "data" not in file:
-                return file
-
-
-def import_c_file(in_file):
+def import_c_file(in_file) -> str:
     in_file = os.path.relpath(in_file, root_dir)
-    cpp_command = ["gcc", "-E", "-P", "-Iinclude", "-Isrc", "-Iver/current/build/include" ,"-D_LANGUAGE_C",
-                   "-ffreestanding", "-DF3DEX_GBI_2", "-D_MIPS_SZLONG=32", "-DSCRIPT(...)={}", in_file]
+    cpp_command = ["gcc", "-E", "-P", "-dM", *CPP_FLAGS, in_file]
+    cpp_command2 = ["gcc", "-E", "-P", *CPP_FLAGS, in_file]
+
+    out_text = ""
     try:
-        return subprocess.check_output(cpp_command, cwd=root_dir, encoding="utf-8")
+        out_text += subprocess.check_output(cpp_command, cwd=root_dir, encoding="utf-8")
+        out_text += subprocess.check_output(cpp_command2, cwd=root_dir, encoding="utf-8")
     except subprocess.CalledProcessError:
         print(
             "Failed to preprocess input file, when running command:\n"
@@ -38,33 +41,25 @@ def import_c_file(in_file):
             )
         sys.exit(1)
 
+    if not out_text:
+        print("Output is empty - aborting")
+        sys.exit(1)
+    return out_text
 
 def main():
-    if len(sys.argv) > 1:
-        arg = sys.argv[1]
-        if arg == "-h" or arg == "--help":
-            sys.exit("Usage: ./m2ctx.py path/to/file.c\n" \
-            "Output will be saved in the project root as ctx.c")
-        c_file_path = Path.cwd() / sys.argv[1]
-    else:
-        this_dir = Path.cwd()
-        c_dir_path = get_c_dir(this_dir.name)
-        if c_dir_path is None:
-            sys.exit("Cannot find appropriate c file dir. In argumentless mode, run this script from the c file's corresponding asm dir.")
-        c_file = get_c_file(c_dir_path)
-        c_file_path = os.path.join(c_dir_path, c_file)
+    parser = argparse.ArgumentParser(
+        description="""Create a context file which can be used for mips_to_c"""
+    )
+    parser.add_argument(
+        "c_file",
+        help="""File from which to create context""",
+    )
+    args = parser.parse_args()
 
-    processed = import_c_file(c_file_path)
-    processed_lines = processed.split("\n")
-    output = []
-
-    for line in processed_lines:
-        if ("__attribute__" not in line
-            and "__asm" not in line):
-            output.append(line)
+    output = import_c_file(args.c_file)
 
     with open(os.path.join(root_dir, "ctx.c"), "w", encoding="UTF-8") as f:
-        f.write("\n".join(output))
+        f.write(output)
 
 
 if __name__ == "__main__":

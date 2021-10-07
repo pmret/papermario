@@ -3,7 +3,7 @@
 
 typedef struct Effect8 {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ char unk_04[0x2];
+    /* 0x04 */ u16 unk_04;
     /* 0x06 */ s16 unk_06;
     /* 0x08 */ u8 primAlpha;
     /* 0x09 */ char unk_09[0x3];

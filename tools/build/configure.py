@@ -52,17 +52,20 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     cross = "mips-linux-gnu-"
     cc = f"{BUILD_TOOLS}/cc/gcc/gcc"
     cc_ido = f"{BUILD_TOOLS}/cc/ido5.3/cc"
-    kmc_cc1 = f"{BUILD_TOOLS}/cc/kmcgcc/cc1"
-    kmc_as = f"{BUILD_TOOLS}/cc/kmcgcc/as"
+    cc_kmc = f"{BUILD_TOOLS}/cc/kmcgcc/gcc"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
     compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
-    CPPFLAGS_COMMON = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
+    CPPFLAGS_COMMON = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
-    CPPFLAGS = CPPFLAGS_COMMON + " -nostdinc"
+    CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
+
+    CPPFLAGS_LIBULTRA = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
+               "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
     cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
+    kmc_cflags = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
 
     ninja.variable("python", sys.executable)
 
@@ -102,12 +105,12 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc_ido",
         description="cc_ido $in",
-        command=f"{ccache}{cc_ido} {CPPFLAGS_COMMON} {cppflags} -c -mips1 -O0 -G0 -non_shared -Xfullwarn -Xcpluscomm -o $out $in",
+        command=f"{ccache}{cc_ido} -w {CPPFLAGS_COMMON} {cppflags} -c -mips1 -O0 -G0 -non_shared -Xfullwarn -Xcpluscomm -o $out $in",
     )
 
     ninja.rule("cc_kmc",
         description="cc_kmc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {kmc_cc1} -quiet -G0 -O2 -fno-common -o - | {kmc_as} -G0 -EB - -o $out'",
+        command=f"bash -o pipefail -c 'N64ALIGN=ON VR4300MUL=ON {cc_kmc} {CPPFLAGS_LIBULTRA} {cppflags} {kmc_cflags} -O2 $cflags $in -o $out'",
     )
 
     ninja.rule("cxx",
