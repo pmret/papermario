@@ -65,7 +65,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
     cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
-    kmc_cflags = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
+    kmc_cflags = f"-c -G0 -mips2 -32 -non_shared {extra_cflags}"
 
     ninja.variable("python", sys.executable)
 
@@ -110,7 +110,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc_kmc",
         description="cc_kmc $in",
-        command=f"bash -o pipefail -c 'N64ALIGN=ON VR4300MUL=ON {cc_kmc} {CPPFLAGS_LIBULTRA} {cppflags} {kmc_cflags} -O2 $cflags $in -o $out'",
+        command=f"bash -o pipefail -c 'N64ALIGN=ON VR4300MUL=ON {cc_kmc} {CPPFLAGS_LIBULTRA} {cppflags} {kmc_cflags} $cflags $in -o $out'",
     )
 
     ninja.rule("cxx",
@@ -374,9 +374,10 @@ class Configure:
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
-                elif "os/" in seg.name:
-                    pass
-                    #task = "cc_kmc"
+                elif "kmc" in cflags:
+                    task = "cc_kmc"
+
+                cflags = cflags.replace("kmc", "")
 
                 build(entry.object_path, entry.src_paths, task, variables={"cflags": cflags})
 

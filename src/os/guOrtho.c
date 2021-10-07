@@ -1,8 +1,8 @@
 #include "common.h"
+//#include "PR/gu.h"
 
 #ifdef NON_MATCHING
-void guOrthoF(float mf[4][4], float l, float r, float b, float t,
-              float n, float f, float scale) {
+void guOrthoF(float mf[4][4], float l, float r, float b, float t, float n, float f, float scale) {
     s32 i, j;
 
     guMtxIdentF(mf);
@@ -27,13 +27,12 @@ INCLUDE_ASM(void, "os/guOrtho", guOrthoF, float mf[4][4], float l, float r, floa
 #endif
 
 #ifdef NON_MATCHING
-void guOrtho(Mtx* m, float l, float r, float b, float t,
-             float n, float f, float scale) {
+void guOrtho(Mtx* m, float l, float r, float b, float t, float n, float f, float scale) {
     float mf[4][4];
 
-    guOrthoF(mf, l, r, b, t, n, f, scale);
+	guOrthoF(mf, l, r, b, t, n, f, scale);
 
-    guMtxF2L(mf, m);
+	guMtxF2L(mf, m);
 }
 #else
 INCLUDE_ASM(void, "os/guOrtho", guOrtho, Mtx* m, float l, float r, float b, float t,

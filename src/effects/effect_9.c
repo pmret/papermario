@@ -1,35 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct Effect9 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ u16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ u8 primAlpha;
-    /* 0x09 */ s8 unk_09;
-    /* 0x0A */ char unk_0A[0x2];
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ Mtx unk_30;
-    /* 0x70 */ f32 unk_70;
-    /* 0x74 */ f32 unk_74;
-    /* 0x78 */ f32 unk_78;
-    /* 0x7C */ f32 unk_7C;
-    /* 0x80 */ f32 unk_80;
-    /* 0x84 */ f32 unk_84;
-    /* 0x88 */ f32 unk_88;
-    /* 0x8C */ f32 unk_8C;
-    /* 0x90 */ f32 unk_90;
-    /* 0x94 */ f32 unk_94;
-} Effect9; // size = 0x98
-
 extern Gfx D_09000E20[];
 extern Gfx D_09000E38[];
 
@@ -38,7 +9,7 @@ void fx_9_update(EffectInstance* effect);
 void fx_9_render(EffectInstance* effect);
 void fx_9_appendGfx(EffectInstance* effect);
 
-void func_E0012000(Effect9* effect) {
+void func_E0012000(Effect8* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
 
@@ -54,7 +25,7 @@ void func_E0012000(Effect9* effect) {
     shim_guMtxF2L(sp18, &effect->unk_30);
 }
 
-void func_E0012104(Effect9* effect) {
+void func_E0012104(Effect8* effect) {
     if (effect->unk_04 == 0 && effect->unk_78 != 0.0f && gPlayerActionState == ACTION_STATE_IDLE) {
         effect->unk_06++;
         return;
@@ -76,7 +47,7 @@ void func_E0012104(Effect9* effect) {
 void fx_9_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    Effect9* part;
+    Effect8* part;
     s32 numParts = 1;
     f32 angle;
     f32 temp;
@@ -145,7 +116,7 @@ void fx_9_init(EffectInstance* effect) {
 }
 
 void fx_9_update(EffectInstance* effect) {
-    Effect9* part = (Effect9*)effect->data;
+    Effect8* part = (Effect8*)effect->data;
     s32 cond = FALSE;
     s32 i;
 
@@ -184,10 +155,9 @@ void func_E0012548(EffectInstance* effect) {
     shim_remove_effect(effect);
 }
 
-//INCLUDE_ASM(s32, "effects/effect_9", fx_9_appendGfx);
 void fx_9_appendGfx(EffectInstance* effect) {
     EffectInstance* effectTemp = effect;
-    Effect9* part = (Effect9*)effectTemp->data;
+    Effect8* part = (Effect8*)effectTemp->data;
     Gfx* dlist;
     s32 i;
 

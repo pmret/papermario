@@ -147,7 +147,7 @@ segments:
     - [0x3D5B0, c, os/guLookAt]
     - [0x3DCC0, c, os/3dcc0_len_a60]
     - [0x3E720, c, os/3e720_len_5f0]
-    - [0x3ED10, c, os/guOrtho]
+    - [0x3ED10, c, os/guOrtho] #, kmc -O3]
     - [0x3EF90, c, os/3ef90_len_600]
     - [0x3F310, c, os/3f310_len_3c0]
     - [0x3F6D0, c, os/3f6d0_len_320]
