@@ -6,7 +6,7 @@ extern s32 D_80108AFC;
 extern s32 D_80108B28;
 extern s32 D_80292974;
 extern s32 D_80294340;
-extern s32 func_802A98B0_42EC50;
+extern s32 action_command_smack_UnkActionCommandFunc1;
 
 ApiStatus func_802A9000_428A70(Evt* script, s32 isInitialCall) {
     s32 *args = script->ptrReadPos;
@@ -30,7 +30,7 @@ ApiStatus func_802A9000_428A70(Evt* script, s32 isInitialCall) {
     battleStatus->unk_84 = 0;
     actionCommandStatus->unk_6C = 30;
     actionCommandStatus->hudElementX = -48;
-    func_802A98B0_42EC50 = 0;
+    action_command_smack_UnkActionCommandFunc1 = 0;
     actionCommandStatus->hudElementY = 80;
 
     hudElement = create_hud_element(&D_80108B28);

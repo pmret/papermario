@@ -59,22 +59,6 @@ ApiStatus func_802A9000_430020(void) {
 // wip: decomp.me/scratch/tAhNa
 INCLUDE_ASM(s32, "battle/action_cmd/spook", func_802A9298_4302B8);
 
-void func_802A97FC_43081C(void) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
-    s32 renderPosY;
-    s32 renderPosX;
-    HudElement* hudElement;
-
-    draw_hud_element_clipped(actionCommandStatus->hudElements[0]);
-    hudElement = actionCommandStatus->hudElements[1];
-    draw_hud_element_clipped(hudElement);
-    get_hud_element_render_pos(hudElement, &renderPosX, &renderPosY);
-    if (actionCommandStatus->unk_68 == 0) {
-        func_80268770(renderPosX, renderPosY, actionCommandStatus->barFillLevel / 100);
-    } else {
-        func_8026880C(renderPosX, renderPosY, actionCommandStatus->barFillLevel / 100);
-    }
-    draw_hud_element_clipped(actionCommandStatus->hudElements[2]);
-}
+#include "battle/action_cmd/common/UnkActionCommandFunc1.inc.c"
 
 #include "common/free_hud_elements.inc.c"

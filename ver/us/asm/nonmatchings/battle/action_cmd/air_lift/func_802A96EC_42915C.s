@@ -22,8 +22,8 @@ glabel func_802A96EC_42915C
 /* 42919C 802A972C 27A50010 */  addiu     $a1, $sp, 0x10
 /* 4291A0 802A9730 0C05126B */  jal       get_hud_element_render_pos
 /* 4291A4 802A9734 27A60014 */   addiu    $a2, $sp, 0x14
-/* 4291A8 802A9738 3C02802B */  lui       $v0, %hi(func_802A98B0_42EC50)
-/* 4291AC 802A973C 8C4298B0 */  lw        $v0, %lo(func_802A98B0_42EC50)($v0)
+/* 4291A8 802A9738 3C02802B */  lui       $v0, %hi(action_command_smack_UnkActionCommandFunc1)
+/* 4291AC 802A973C 8C4298B0 */  lw        $v0, %lo(action_command_smack_UnkActionCommandFunc1)($v0)
 /* 4291B0 802A9740 14400008 */  bnez      $v0, .L802A9764
 /* 4291B4 802A9744 3C0451EB */   lui      $a0, 0x51eb
 /* 4291B8 802A9748 96230044 */  lhu       $v1, 0x44($s1)
