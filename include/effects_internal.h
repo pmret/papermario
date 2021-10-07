@@ -33,7 +33,6 @@ typedef struct Effect8 {
     /* 0x94 */ f32 unk_94;
 } Effect8; // size = 0x98
 
-
 u32 func_E0200000(s32);
 
 EffectInstance* shim_create_effect_instance(EffectBlueprint* effectBp);

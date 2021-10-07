@@ -2803,7 +2803,7 @@ segments:
     vram: 0xE0092000
     subsegments:
     - [0x391D30, c, effect_73]
-    - [0x3923C0, data]
+    - [0x3923C0]
   - [0x392440, bin] # effect 73 gfx
   - name: effect_74
     dir: effects
