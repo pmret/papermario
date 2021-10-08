@@ -1213,7 +1213,7 @@ ApiStatus func_802C6E14(Evt* script) {
 
 ApiStatus evt_handle_print_debug_var(Evt* script);
 
-// Almost, some ordering stuff and such
+// TODO: Fake match, seems to be UB for some of the print calls.
 s32 evt_handle_print_debug_var(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     s32 var = *args++;
