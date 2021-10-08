@@ -22,11 +22,11 @@ typedef struct UnkVec2s {
 } UnkVec2s;
 
 UnkVec2s D_802A99D2_42ED72[] = {
-    { 0x00, 0x00, },
-    { 0x00, 0x19, },
-    { 0x00, 0x32, },
-    { 0x00, 0x4B, },
-    { 0x00, 0x4B, },
+    { 0x00, 0x00 },
+    { 0x00, 0x19 },
+    { 0x00, 0x32 },
+    { 0x00, 0x4B },
+    { 0x00, 0x4B },
 };
 
 s32 D_802A99E4_42ED84[] = {
@@ -164,10 +164,10 @@ void func_802A9298_42E638(void) {
                 if (actionCommandStatus->unk_68 == 0) {
 
                     if (battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
-                        actionCommandStatus->unk_5C = 1;
+                        actionCommandStatus->unk_5C = TRUE;
                     }
 
-                    if ((battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) == 0 && actionCommandStatus->unk_5C) {
+                    if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && actionCommandStatus->unk_5C) {
                         s16 phi_v1;
                         if (actionCommandStatus->unk_64 == 0) {
                             actionCommandStatus->barFillLevel += battleStatus->unk_434[actionCommandStatus->unk_50] * 13;
