@@ -292,22 +292,6 @@ void func_802A9298_42E638(void) {
     }
 }
 
-void func_802A98B0_42EC50(void) {
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
-    s32 renderPosX;
-    s32 renderPosY;
-    s32 hudElementID;
-
-    draw_hud_element_clipped(actionCommandStatus->hudElements[0]);
-    hudElementID = actionCommandStatus->hudElements[1];
-    draw_hud_element_clipped(hudElementID);
-    get_hud_element_render_pos(hudElementID, &renderPosX, &renderPosY);
-    if (actionCommandStatus->unk_68 == 0) {
-        func_80268770(renderPosX, renderPosY, actionCommandStatus->barFillLevel / 100);
-    } else {
-        func_8026880C(renderPosX, renderPosY, actionCommandStatus->barFillLevel / 100);
-    }
-    draw_hud_element_clipped(actionCommandStatus->hudElements[2]);
-}
+#include "common/UnkActionCommandFunc1.inc.c"
 
 #include "common/free_hud_elements.inc.c"
