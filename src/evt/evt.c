@@ -1675,10 +1675,10 @@ s32 evt_execute_next_command(Evt *script) {
     }
 }
 
-#ifdef NON_MATCHING
 s32 evt_get_variable(Evt* script, Bytecode var) {
     s32 wordIdx;
     s32 bitIdx;
+    s32 temp;
 
     if (var <= -270000000) {
         return var;
@@ -1690,11 +1690,15 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
         var += 210000000;
         wordIdx = var / 32;
         bitIdx = var % 32;
-        return (script->flagArray[wordIdx] & (1 << bitIdx)) != 0;
+        return var = (script->flagArray[wordIdx] & (1 << bitIdx)) != 0;
     } else if (var <= -180000000) {
         var += 190000000;
         var = script->array[var];
-        return (var > -270000000 && var < -220000000) ? evt_fixed_var_to_float(var) : var;
+        if (var > -270000000) {
+            if (var <= -220000000){
+                var = evt_fixed_var_to_float(var);
+            }
+        };
     } else if (var <= -160000000) {
         var += 170000000;
         return get_global_byte(var);
@@ -1709,29 +1713,35 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
         return get_area_flag(var);
     } else if (var <= -80000000) {
         var += 90000000;
-        wordIdx = var / 32;
+        wordIdx = var;
         bitIdx = var % 32;
-        return (gMapFlags[wordIdx] & (1 << bitIdx)) != 0;
+        return var = (gMapFlags[wordIdx / 32] & (1 << bitIdx)) != 0;
     } else if (var <= -60000000) {
         var += 70000000;
-        wordIdx = var / 32;
+        wordIdx = var;
         bitIdx = var % 32;
-        return (script->varFlags[wordIdx] & (1 << bitIdx)) != 0;
+        return var = (script->varFlags[wordIdx / 32] & (1 << bitIdx)) != 0;
     } else if (var <= -40000000) {
         var += 50000000;
         var = gMapVars[var];
-        return (var > -270000000 && var < -220000000) ? evt_fixed_var_to_float(var) : var;
+        if (var > -270000000) {
+            temp = -220000000;
+            if (var <= temp){
+                var = evt_fixed_var_to_float(var);
+            }
+        };
     } else if (var <= -20000000) {
         var += 30000000;
         var = script->varTable[var];
-        return (var > -270000000 && var < -220000000) ? evt_fixed_var_to_float(var) : var;
-    } else {
-        return var;
+        if (var > -270000000) {
+            temp = -220000000;
+            if (var <= temp){
+                var = evt_fixed_var_to_float(var);
+            }
+        };
     }
+        return var;
 }
-#else
-INCLUDE_ASM(s32, "evt/si", evt_get_variable, Evt* script, Bytecode var);
-#endif
 
 s32 evt_get_variable_index(Evt* script, s32 var) {
     if (-270000000 >= var) {
