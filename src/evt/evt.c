@@ -1698,7 +1698,7 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
             if (var <= -220000000){
                 var = evt_fixed_var_to_float(var);
             }
-        };
+        }
     } else if (var <= -160000000) {
         var += 170000000;
         return get_global_byte(var);
@@ -1729,7 +1729,7 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
             if (var <= temp){
                 var = evt_fixed_var_to_float(var);
             }
-        };
+        }
     } else if (var <= -20000000) {
         var += 30000000;
         var = script->varTable[var];
@@ -1738,7 +1738,7 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
             if (var <= temp){
                 var = evt_fixed_var_to_float(var);
             }
-        };
+        }
     }
         return var;
 }
