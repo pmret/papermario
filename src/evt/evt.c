@@ -1219,7 +1219,7 @@ s32 evt_handle_print_debug_var(Evt* script) {
     s32 var = *args++;
     s32 phi_t0;
 
-    do{}while(0);
+    do {} while (0);
 
     if (var <= -270000000) {
         sprintf(evtDebugPrintBuffer, "ADDR     [%08X]", var);
@@ -1305,7 +1305,7 @@ s32 evt_handle_print_debug_var(Evt* script) {
         var += 30000000;
         tableVar = script->varTable[var];
 
-        do{}while(0);
+        do {} while (0);
         
         if (tableVar <= -270000000) {
             sprintf(evtDebugPrintBuffer, "LW(%3d)  [%08X]", tableVar);
