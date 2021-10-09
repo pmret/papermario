@@ -59,6 +59,6 @@ ApiStatus func_802A9000_430020(void) {
 // wip: decomp.me/scratch/tAhNa
 INCLUDE_ASM(s32, "battle/action_cmd/spook", func_802A9298_4302B8);
 
-#include "battle/action_cmd/common/UnkActionCommandFunc1.inc.c"
+#include "common/UnkActionCommandFunc1.inc.c"
 
 #include "common/free_hud_elements.inc.c"

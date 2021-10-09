@@ -292,6 +292,6 @@ void func_802A9298_42E638(void) {
     }
 }
 
-#include "battle/action_cmd/common/UnkActionCommandFunc1.inc.c"
+#include "common/UnkActionCommandFunc1.inc.c"
 
 #include "common/free_hud_elements.inc.c"

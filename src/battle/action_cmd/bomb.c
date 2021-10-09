@@ -205,9 +205,10 @@ void func_802A928C_427CFC(void) {
             } else {
                 func_80268C9C();
             }
+            break;
     }
 }
 
-#include "battle/action_cmd/common/UnkActionCommandFunc1.inc.c"
+#include "common/UnkActionCommandFunc1.inc.c"
 
 #include "common/free_hud_elements.inc.c"

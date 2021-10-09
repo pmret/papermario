@@ -8,6 +8,6 @@ INCLUDE_ASM(s32, "battle/action_cmd/spiny_surge", func_802A916C_42EF8C);
 
 INCLUDE_ASM(s32, "battle/action_cmd/spiny_surge", func_802A9254_42F074);
 
-#include "battle/action_cmd/common/UnkActionCommandFunc1.inc.c"
+#include "common/UnkActionCommandFunc1.inc.c"
 
 #include "common/free_hud_elements.inc.c"

@@ -8,6 +8,6 @@ INCLUDE_ASM(s32, "battle/action_cmd/dizzy_shell", func_802A9000_426170);
 
 INCLUDE_ASM(s32, "battle/action_cmd/dizzy_shell", func_802A928C_4263FC);
 
-#include "battle/action_cmd/common/UnkActionCommandFunc1.inc.c"
+#include "common/UnkActionCommandFunc1.inc.c"
 
 #include "common/free_hud_elements.inc.c"
