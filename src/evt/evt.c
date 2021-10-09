@@ -1690,7 +1690,8 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
         var += 210000000;
         wordIdx = var / 32;
         bitIdx = var % 32;
-        return var = (script->flagArray[wordIdx] & (1 << bitIdx)) != 0;
+        var = (script->flagArray[wordIdx] & (1 << bitIdx)) != 0;
+        return var;
     } else if (var <= -180000000) {
         var += 190000000;
         var = script->array[var];
@@ -1715,12 +1716,14 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
         var += 90000000;
         wordIdx = var;
         bitIdx = var % 32;
-        return var = (gMapFlags[wordIdx / 32] & (1 << bitIdx)) != 0;
+        var = (gMapFlags[wordIdx / 32] & (1 << bitIdx)) != 0;
+        return var;
     } else if (var <= -60000000) {
         var += 70000000;
         wordIdx = var;
         bitIdx = var % 32;
-        return var = (script->varFlags[wordIdx / 32] & (1 << bitIdx)) != 0;
+        var = (script->varFlags[wordIdx / 32] & (1 << bitIdx)) != 0;
+        return var;
     } else if (var <= -40000000) {
         var += 50000000;
         var = gMapVars[var];
