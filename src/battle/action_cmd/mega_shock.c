@@ -17,9 +17,6 @@ void func_80268C9C(void);
 void func_80269160(void);
 void sfx_adjust_env_sound_params(s32, s32, s32, s32);
 
-void func_80268770(s32, s32, s16);
-void func_8026880C(s32, s32, s16);
-
 typedef struct structD_802A9930_42E340 {
     /* 0x00 */ s16 unk_0;
     /* 0x08 */ u16 unk_8;
