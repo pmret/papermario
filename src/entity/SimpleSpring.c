@@ -11,6 +11,7 @@ INCLUDE_ASM(s32, "entity/SimpleSpring", entity_SimpleSpring_idle);
     s32 *new_var2;
     s32 isRiding;
     s32 isColliding;
+
     new_var2 = ent->dataBuf;
     new_var = gPlayerStatus.actionState != ACTION_STATE_RIDE && (ent->collisionFlags & 1) != 0;
     if (new_var) {
@@ -59,7 +60,25 @@ INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_idle);
 
 INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_flip_over);
 
-INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_is_item_on_top);
+//INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_is_item_on_top);
+
+s32 entity_HiddenPanel_is_item_on_top(Entity* entity) {
+    ItemEntity* temp_v0;
+    s32 entityIndex;
+    s32 *args;
+    s32 phi_v0;
+
+    args = entity->dataBuf;
+    entityIndex = args[5];
+    phi_v0 = 0;
+    if ((entityIndex >= 0) &&
+    ((temp_v0 = get_item_entity(entityIndex), (temp_v0 == 0))
+    || (((temp_v0->flags & 0x10) != 0) && (fabs((f64) (entity->position.x - (f32) args[6])) <= 34.0)
+    && (phi_v0 = 1, !(fabs((f64) (entity->position.y - (f32)args[8])) <= 34.0))))) {
+
+    }
+    return phi_v0;
+}
 
 INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_init);
 
