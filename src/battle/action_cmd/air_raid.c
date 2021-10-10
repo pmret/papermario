@@ -37,24 +37,18 @@ ApiStatus func_802A9000_429320(void) {
     actionCommandStatus->hudElementY = 80;
 
     hudElement = create_hud_element(&D_80108E1C);
-    hudElement = hudElement;
-    hudElement = hudElement;
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
     hudElement = create_hud_element(&D_80108AFC);
-    hudElement = hudElement;
-    hudElement = hudElement;
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
     hudElement = create_hud_element(&D_80292974);
-    hudElement = hudElement;
-    hudElement = hudElement;
     actionCommandStatus->hudElements[2] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);

@@ -62,7 +62,7 @@ ApiStatus func_802A916C_42EF8C(Evt* script, s32 isInitialCall) {
 
     if (battleStatus->unk_83 == 0) {
         battleStatus->actionSuccess = 0;
-        return 2;
+        return ApiStatus_DONE2;
     }
 
     func_80268858();
