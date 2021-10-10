@@ -85,7 +85,7 @@ void func_802A9744_4243B4(void) {
     draw_hud_element_clipped(hudElement);
     get_hud_element_render_pos(hudElement, &x, &y);
 
-    func_80268798(x, y, (s16)actionCommandStatus->unk_44 / 100, 1);
+    func_80268798(x, y, (s16)actionCommandStatus->barFillLevel / 100, 1);
     draw_hud_element_clipped(actionCommandStatus->hudElements[3]);
     hudElement = actionCommandStatus->hudElements[2];
     if (actionCommandStatus->unk_64 == 0) {
