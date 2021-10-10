@@ -22,13 +22,14 @@ INCLUDE_ASM(s32, "EB1170", func_80240484_EB12E4);
 // LW %LO issue.
 #ifdef NON_MATCHING
 ApiStatus func_80240654_EB14B4(Evt* script, s32 isInitialCall) {
-    Bytecode* readPos = script->ptrReadPos;
-    if (isInitialCall != 0) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (isInitialCall) {
         D_802417E4_EB2644 = 0;
     }
     if (D_802417E4_EB2644 != 0) {
         D_802417E4_EB2644 = 0;
-        dead_evt_set_variable(script, *readPos, D_802417E8_EB2648);
+        dead_evt_set_variable(script, *args, D_802417E8_EB2648);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
@@ -69,6 +70,7 @@ ApiStatus func_802406E0_EB1540(Evt* script, s32 isInitialCall) {
 ApiStatus func_802409F8_EB1858(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->varTable[2]);
     u32 anim = npc->currentAnim.w;
+
     D_80244494 = anim;
     npc->currentAnim.w = (u32)script->varTable[4];
     return ApiStatus_DONE2;
