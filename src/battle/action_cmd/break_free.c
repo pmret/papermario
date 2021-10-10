@@ -13,7 +13,7 @@ s32 func_80268770(s32, s32, s16);
 ApiStatus func_802A9000_4233F0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    HudElement* hudElement;
+    s32 hudElement;
 
     battleStatus->unk_82 = 0;
     battleStatus->unk_434 = &D_80294220;
@@ -63,8 +63,40 @@ ApiStatus func_802A9000_4233F0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/action_cmd/break_free", func_802A91B0_4235A0);
+ApiStatus func_802A91B0_4235A0(Evt* script, s32 isInitialCall) {
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
 
+    if (battleStatus->unk_83 == 0) {
+        battleStatus->actionSuccess = 0;
+        return ApiStatus_DONE2;
+    }
+
+    func_80268858();
+
+    actionCommandStatus->unk_4E = evt_get_variable(script, *args++);
+    actionCommandStatus->unk_52 = evt_get_variable(script, *args++);
+    actionCommandStatus->unk_5A = evt_get_variable(script, *args++);
+    actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
+    actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
+
+    actionCommandStatus->unk_60 = 0;
+    actionCommandStatus->barFillLevel = 0;
+    actionCommandStatus->unk_46 = 0;
+    actionCommandStatus->unk_48 = 0;
+
+    battleStatus->actionSuccess = 0;
+    battleStatus->unk_86 = 0x7F;
+    battleStatus->unk_82 = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
+
+    actionCommandStatus->unk_46 = rand_int(actionCommandStatus->unk_5A);
+    actionCommandStatus->unk_5C = 0;
+    actionCommandStatus->state = 10;
+    battleStatus->flags1 &= ~0x8000;
+
+    return ApiStatus_DONE2;
+}
 INCLUDE_ASM(s32, "battle/action_cmd/break_free", func_802A92DC_4236CC);
 
 void func_802A96B8_423AA8(void) {
