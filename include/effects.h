@@ -265,7 +265,7 @@ EffectInstance* playFX_6F(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_70(s32, f32, f32, f32, f32, f32, f32, s32, s32, f32, f32);
 EffectInstance* playFX_71(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_72(s32, f32, f32, f32, f32, f32, f32, s32, s32);
-EffectInstance* playFX_73(s32, f32, f32, f32, f32, s32, s32);
+EffectInstance* playFX_73(s32, f32, f32, f32, f32, s32, s32); //returns ptr to struct unk_802BE310* in watt.c
 EffectInstance* playFX_74(s32, f32, f32, f32, f32, f32, f32, f32, f32);
 EffectInstance* playFX_75(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_76(s32, f32, f32, f32, f32, s32);

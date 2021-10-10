@@ -2,6 +2,8 @@
 #include "effects.h"
 #include "../src/world/partners.h"
 
+void force_player_anim(s32 arg0);
+
 typedef struct unk_802BE310_C {
     /* 0x00 */ char unk_00[0x28];
     /* 0x28 */ s32 unk_28;
@@ -54,13 +56,18 @@ void func_802BD23C_31CDAC(Npc* npc) {
     D_802BE310 = NULL;
 }
 
-s32 func_802BD27C_31CDEC(Evt* script, s32 isInitialCall) {
+ApiStatus func_802BD27C_31CDEC(Evt* script, s32 isInitialCall) {
     Npc* npc = script->owner2.npc;
 
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         partner_init_get_out(npc);
     }
-    return partner_get_out(npc) != FALSE;
+
+    if (partner_get_out(npc) != 0) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 
@@ -77,13 +84,12 @@ void func_802BD710_31D280(Npc* npc) {
 
 INCLUDE_ASM(s32, "world/partner/watt", func_802BD754_31D2C4);
 
-void force_player_anim(s32 arg0);
 s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Npc* npc = script->owner2.npc;
     
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         func_802BD180_31CCF0();
         partner_init_put_away(npc);
         force_player_anim(0x10002);
@@ -92,7 +98,11 @@ s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
         playerStatus->animFlags = playerStatus->animFlags & ~3;
         gGameStatusPtr->unk_7D = 0;
     }
-    return partner_put_away(npc) != FALSE;
+    if (partner_put_away(npc) != 0) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 INCLUDE_ASM(s32, "world/partner/watt", func_802BDD9C_31D90C);
@@ -107,7 +117,7 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc;
 
-    npc = get_npc_unsafe(-4);
+    npc = get_npc_unsafe(NPC_PARTNER);
     if (isInitialCall != 0) {
         script->functionTemp[0] = 0;
     }
@@ -126,8 +136,9 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
             playerStatus->heading = playerStatus->targetYaw;
             move_player(script->functionTemp[1], playerStatus->heading, *((f32*) &script->varTable[5]));
             func_802BE070_31DBE0();
-            npc->flags = (npc->flags & ~0x200) | 0x100;
-            playerStatus->animFlags = playerStatus->animFlags | 3;
+            npc->flags &= ~0x200;
+            npc->flags |= 0x100;
+            playerStatus->animFlags |= 3;
             gGameStatusPtr->unk_7D = 1;
             partnerActionStatus->actionState.b[0] = 1;
             partnerActionStatus->actionState.b[3] = 6;
@@ -138,7 +149,7 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
             func_802BE070_31DBE0();
             script->functionTemp[1]--;
             if (script->functionTemp[1] == 0) {
-                if (script->varTable[12] != 0) {
+                if (script->varTable[12]) {
                     partner_use_ability();
                 }
                 return ApiStatus_DONE2;
@@ -151,17 +162,15 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
 
 void func_802BE014_31DB84(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 currentSpeedTemp = playerStatus->currentSpeed;
+    f32 currentSpeed = playerStatus->currentSpeed;
     s32 animationID;
     
-    if (playerStatus->runSpeed <= currentSpeedTemp) {
+    if (playerStatus->runSpeed <= currentSpeed) {
         animationID = 0x60002;
+    } else if (playerStatus->walkSpeed <= currentSpeed) {
+        animationID = 0x60000;
     } else {
-        if (playerStatus->walkSpeed <= currentSpeedTemp) {
-            animationID = 0x60000;
-        } else {
-            animationID = 0x60007;
-        }
+        animationID = 0x60007;
     }
     suggest_player_anim_clearUnkFlag(animationID);
 }

@@ -7,7 +7,17 @@ static char* N(exit_str_3) = "isk_01";
 static char* N(exit_str_4) = "sbk_30";
 static char* N(exit_str_5) = "";
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A2B0", func_80240000_92A2B0);
+//INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A2B0", func_80240000_92A2B0);
+s32 func_80240000_92A2B0(void) {
+    s32 phi;
+
+    if (evt_get_variable(NULL, EVT_STORY_PROGRESS) >= -0x3E) {
+        phi = 0x00190063;
+    } else {
+        phi = 0x00190062;
+    }
+    return phi;
+}
 
 #include "world/common/UnkFunc27.inc.c"
 
