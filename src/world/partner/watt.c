@@ -3,6 +3,9 @@
 #include "../src/world/partners.h"
 
 void force_player_anim(s32 arg0);
+void func_802BE070_31DBE0(void);
+void partner_kill_ability_script(void);
+s32 partner_use_ability(void);
 
 typedef struct unk_802BE310_C {
     /* 0x00 */ char unk_00[0x28];
@@ -98,6 +101,7 @@ s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
         playerStatus->animFlags = playerStatus->animFlags & ~3;
         gGameStatusPtr->unk_7D = 0;
     }
+    
     if (partner_put_away(npc) != 0) {
         return ApiStatus_DONE1;
     } else {
@@ -109,16 +113,12 @@ INCLUDE_ASM(s32, "world/partner/watt", func_802BDD9C_31D90C);
 
 INCLUDE_ASM(s32, "world/partner/watt", func_802BDE10_31D980);
 
-void func_802BE070_31DBE0(void);
-void partner_kill_ability_script(void);
-s32 partner_use_ability(void);
 ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Npc* npc;
+    Npc* npc = get_npc_unsafe(NPC_PARTNER);
 
-    npc = get_npc_unsafe(NPC_PARTNER);
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
 
