@@ -546,6 +546,7 @@ void btl_set_state(s32 battleState);
 void draw_entity_model_E(s32, Mtx*);
 void draw_entity_model_A(s32, Mtx*);
 void free_entity_model_by_index(s32 idx);
+s32 func_802DDFF8(s32, s32, s32, s32, s32, s32, u16);
 
 void enforce_hpfp_limits(void);
 
