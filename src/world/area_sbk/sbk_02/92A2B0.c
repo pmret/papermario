@@ -26,12 +26,13 @@ s32 func_80240000_92A2B0(void) {
 #include "world/common/UnkFunc26.inc.c"
 
 ApiStatus func_80240338_92A5E8(Evt* evt, s32 isInitialCall) {
-    EffectInstance* effect = (EffectInstance*)evt_get_variable(evt, 0xFD050F80);
+    EffectInstance* effect = (EffectInstance*)evt_get_variable(evt, EVT_MAP_VAR(0));
     effect->data->unk_3C = 0;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80240364_92A614(Evt* evt, s32 isInitialCall) {
+    Bytecode* args = evt->ptrReadPos;
     u8 temp_t0;
     u8 temp_t1;
     s32 temp_t2;
@@ -46,7 +47,7 @@ ApiStatus func_80240364_92A614(Evt* evt, s32 isInitialCall) {
     u8 temp_a1;
     u8 temp_a2;
     u8 temp_a3;
-    Bytecode* args = evt->ptrReadPos;
+    
 
     if (isInitialCall) {
         get_model_env_color_parameters(&D_80245600_DB78C0, &D_80245601, &D_80245602, &D_80245603, &D_80245604, &D_80245605);
@@ -64,7 +65,6 @@ ApiStatus func_80240364_92A614(Evt* evt, s32 isInitialCall) {
     if (temp_t7 > 0) {
         temp_v1 = flo_18_80245624 + 1;
         temp_a0 = D_80245600_DB78C0;
-        
         temp_t6 = ((D_80245608 - temp_a0) * temp_v1) / temp_t7;
         temp_a1 = D_80245601;
         temp_t5 = ((D_8024560C - temp_a1) * temp_v1) / temp_t7;
