@@ -7,7 +7,7 @@
 
 .section .text, "ax"
 
-glabel osRestoreInt
+glabel __osRestoreInt
 /* 467D0 8006B3D0 40086000 */  mfc0      $t0, $12
 /* 467D4 8006B3D4 01044025 */  or        $t0, $t0, $a0
 /* 467D8 8006B3D8 40886000 */  mtc0      $t0, $12

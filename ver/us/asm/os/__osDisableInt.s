@@ -7,7 +7,7 @@
 
 .section .text, "ax"
 
-glabel osDisableInt
+glabel __osDisableInt
 /* 46760 8006B360 3C0A8009 */  lui       $t2, %hi(D_80095900)
 /* 46764 8006B364 254A5900 */  addiu     $t2, $t2, %lo(D_80095900)
 /* 46768 8006B368 8D4B0000 */  lw        $t3, ($t2)

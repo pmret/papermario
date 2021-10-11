@@ -10,7 +10,7 @@ glabel osSetEventMesg
 /* 40D64 80065964 AFB20018 */  sw        $s2, 0x18($sp)
 /* 40D68 80065968 00C09021 */  addu      $s2, $a2, $zero
 /* 40D6C 8006596C AFBF0020 */  sw        $ra, 0x20($sp)
-/* 40D70 80065970 0C01ACD8 */  jal       osDisableInt
+/* 40D70 80065970 0C01ACD8 */  jal       __osDisableInt
 /* 40D74 80065974 AFB3001C */   sw       $s3, 0x1c($sp)
 /* 40D78 80065978 001018C0 */  sll       $v1, $s0, 3
 /* 40D7C 8006597C 3C04800E */  lui       $a0, %hi(D_800D9F80)
@@ -38,7 +38,7 @@ glabel osSetEventMesg
 /* 40DD0 800659D0 3C018009 */  lui       $at, %hi(__osPreNMI)
 /* 40DD4 800659D4 AC224630 */  sw        $v0, %lo(__osPreNMI)($at)
 .L800659D8:
-/* 40DD8 800659D8 0C01ACF4 */  jal       osRestoreInt
+/* 40DD8 800659D8 0C01ACF4 */  jal       __osRestoreInt
 /* 40DDC 800659DC 02602021 */   addu     $a0, $s3, $zero
 /* 40DE0 800659E0 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 40DE4 800659E4 8FB3001C */  lw        $s3, 0x1c($sp)

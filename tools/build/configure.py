@@ -65,7 +65,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
     cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
-    kmc_cflags = f"-c -G0 -mgp32 -mfp32 -mips3 -O3 {extra_cflags}"
+    kmc_cflags = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
 
     ninja.variable("python", sys.executable)
 
