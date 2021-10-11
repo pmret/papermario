@@ -8,21 +8,22 @@ typedef struct Effect73 {
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ s32 unk_14;
-    /* 0x18 */ f32 unk_18;
+    /* 0x18 */ s32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ s32 unk_20;
 } Effect73; // size = 0x24
 
+extern Gfx D_090002C0[];
 extern Gfx D_09000330[];
 extern Gfx D_09000370[];
 extern Gfx D_090003B0[];
 extern Gfx D_090003F0[];
 extern Gfx D_09000430[];
+extern Gfx D_09000470[];
 
-Gfx* D_E0092690[] = { D_09000430, D_090003F0, D_090003B0, D_09000370, D_09000330 };
+static Gfx* sDlists[] = { D_09000430, D_090003F0, D_090003B0, D_09000370, D_09000330 };
 
-// Parameters for each part
-s32 D_E00926A4[4 * 5] = {
+static s32 sPartParams[4 * 5] = {
     1, 0, 0, 0, 100,
     2, 4, -2, 0, 100,
     3, -2, 2, 0, 70,
@@ -59,7 +60,7 @@ EffectInstance* fx_73_main(EffectInstanceDataThing* arg0, f32 arg1, f32 arg2, f3
     ASSERT(data != NULL);
 
     part->unk_00 = arg0;
-    part->unk_18 = 0.0f;
+    part->unk_18 = 0;
     part->unk_14 = 14;
     part->unk_08 = arg1;
     part->unk_0C = arg2;
@@ -67,12 +68,12 @@ EffectInstance* fx_73_main(EffectInstanceDataThing* arg0, f32 arg1, f32 arg2, f3
 
     part++;
     for (i = 1; i < numParts; i++, part++) {
-            part->unk_08 = D_E00926A4[1 + (i - 1) * 5];
-            part->unk_0C = D_E00926A4[2 + (i - 1) * 5];
-            part->unk_10 = D_E00926A4[3 + (i - 1) * 5];
+            part->unk_08 = sPartParams[1 + (i - 1) * 5];
+            part->unk_0C = sPartParams[2 + (i - 1) * 5];
+            part->unk_10 = sPartParams[3 + (i - 1) * 5];
             part->unk_04 = -1;
-            part->unk_20 = D_E00926A4[0 + (i - 1) * 5];
-            part->unk_1C = (arg4 * D_E00926A4[4 + (i - 1) * 5]) * 0.01;
+            part->unk_20 = sPartParams[0 + (i - 1) * 5];
+            part->unk_1C = (arg4 * sPartParams[4 + (i - 1) * 5]) * 0.01;
     }
     return effect;
 }
@@ -80,8 +81,86 @@ EffectInstance* fx_73_main(EffectInstanceDataThing* arg0, f32 arg1, f32 arg2, f3
 void fx_73_init(EffectInstance* effect) {
 }
 
-INCLUDE_ASM(s32, "effects/effect_73", fx_73_update);
+void fx_73_update(EffectInstance* effect) {
+    Effect73* part = (Effect73*) effect->data;
+    s32 i;
 
-INCLUDE_ASM(s32, "effects/effect_73", fx_73_render);
+    part->unk_14--;
+    part->unk_18++;
 
-INCLUDE_ASM(s32, "effects/effect_73", func_E00922A0);
+    if (part->unk_14 < 0) {
+        shim_remove_effect(effect);
+        return;
+    }
+
+    part++;
+    for (i = 1; i < effect->numParts; i++, part++) {
+        if (part->unk_20 > 0) {
+            part->unk_20--;
+        }
+
+        if (part->unk_20 <= 0) {
+            part->unk_04++;
+            if (part->unk_04 >= 10) {
+                part->unk_20 = -1;
+            }
+        }
+    }
+}
+
+void fx_73_render(EffectInstance* effect) {
+    RenderTask renderTask;
+    RenderTask* retTask;
+
+    renderTask.appendGfx = fx_73_appendGfx;
+    renderTask.appendGfxArg = effect;
+    renderTask.distance = 10;
+    renderTask.renderMode = RENDER_MODE_2D;
+
+    retTask = shim_queue_render_task(&renderTask);
+    retTask->renderMode |= RENDER_MODE_2;
+}
+
+void fx_73_appendGfx(EffectInstance* effect) {
+    Effect73* part = effect->data;
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    Mtx* spD8;
+    s32 i;
+
+    shim_guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+    spD8 = &gDisplayContext->matrixStack[gMatrixListPos++];
+    gDPPipeSync(gMasterGfxPos++);
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->effect->data));
+    shim_guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
+    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMasterGfxPos++, D_090002C0);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 15, 255);
+
+    part++;
+    for (i = 1; i < effect->numParts; i++, part++) {
+        if (part->unk_20 == 0) {
+            f32 temp_f20 = part->unk_1C;
+
+            shim_guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
+            if (temp_f20 != 1.0f) {
+                shim_guScaleF(sp58, temp_f20, temp_f20, 1.0f);
+                shim_guMtxCatF(sp58, sp18, sp18);
+            }
+            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                      G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPMatrix(gMasterGfxPos++, spD8, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, sDlists[part->unk_04 >> 1]);
+            gSPDisplayList(gMasterGfxPos++, D_09000470);
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        }
+    }
+
+    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMasterGfxPos++);
+}
