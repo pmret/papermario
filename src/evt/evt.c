@@ -9,7 +9,7 @@ Bytecode* evt_goto_end_loop(Evt* script);
 s32 evt_get_variable_index(Evt* script, s32 var);
 
 // BSS
-extern s8 evtDebugPrintBuffer[];
+extern char evtDebugPrintBuffer[];
 
 f32 evt_fixed_var_to_float(Bytecode scriptVar) {
     if (scriptVar <= -220000000) {
@@ -1213,21 +1213,22 @@ ApiStatus func_802C6E14(Evt* script) {
 
 ApiStatus evt_handle_print_debug_var(Evt* script);
 
-// Almost, some ordering stuff and such
-#ifdef NON_MATCHING
+// TODO: Fake match, seems to be UB for some of the print calls.
 s32 evt_handle_print_debug_var(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     s32 var = *args++;
     s32 phi_t0;
 
+    do {} while (0);
+
     if (var <= -270000000) {
-        sprintf(&evtDebugPrintBuffer, "ADDR     [%08X]", var);
+        sprintf(evtDebugPrintBuffer, "ADDR     [%08X]", var);
     } else if (var <= -220000000) {
-        sprintf(&evtDebugPrintBuffer, "FLOAT    [%4.2f]", evt_fixed_var_to_float(var));
+        sprintf(evtDebugPrintBuffer, "FLOAT    [%4.2f]", evt_fixed_var_to_float(var));
     } else if (var <= -200000000) {
         var += 210000000;
         phi_t0 = var % 32;
-        sprintf(&evtDebugPrintBuffer, "UF(%3d)  [%d]", var, script->flagArray[var / 32] & (1 << phi_t0));
+        sprintf(evtDebugPrintBuffer, "UF(%3d)  [%d]", var, script->flagArray[var / 32] & (1 << phi_t0));
     } else if (var <= -180000000) {
         s32 arrayVal;
 
@@ -1235,11 +1236,11 @@ s32 evt_handle_print_debug_var(Evt* script) {
         arrayVal = script->array[var];
 
         if (script->array[var] <= -270000000) {
-            sprintf(&evtDebugPrintBuffer, "UW(%3d)  [%08X]", var, arrayVal);
+            sprintf(evtDebugPrintBuffer, "UW(%3d)  [%08X]", arrayVal);
         } else if (arrayVal <= -220000000) {
-            sprintf(&evtDebugPrintBuffer, "UW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(arrayVal));
+            sprintf(evtDebugPrintBuffer, "UW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(arrayVal));
         } else {
-            sprintf(&evtDebugPrintBuffer, "UW(%3d)  [%d]", var, arrayVal);
+            sprintf(evtDebugPrintBuffer, "UW(%3d)  [%d]", var, arrayVal);
         }
     } else if (var <= -160000000) {
         s32 globalByte;
@@ -1248,11 +1249,11 @@ s32 evt_handle_print_debug_var(Evt* script) {
         globalByte = get_global_byte(var);
 
         if (globalByte <= -270000000) {
-            sprintf(&evtDebugPrintBuffer, "GSW(%3d) [%08X]", var, globalByte);
+            sprintf(evtDebugPrintBuffer, "GSW(%3d) [%08X]", globalByte);
         } else if (globalByte <= -220000000) {
-            sprintf(&evtDebugPrintBuffer, "GSW(%3d) [%4.2f]", var, evt_fixed_var_to_float(globalByte));
+            sprintf(evtDebugPrintBuffer, "GSW(%3d) [%4.2f]", var, evt_fixed_var_to_float(globalByte));
         } else {
-            sprintf(&evtDebugPrintBuffer, "GSW(%3d) [%d]", var, globalByte);
+            sprintf(evtDebugPrintBuffer, "GSW(%3d) [%d]", var, globalByte);
         }
     } else if (var <= -140000000) {
         s32 areaByte;
@@ -1261,38 +1262,42 @@ s32 evt_handle_print_debug_var(Evt* script) {
         areaByte = get_area_byte(var);
 
         if (areaByte <= -270000000) {
-            sprintf(&evtDebugPrintBuffer, "LSW(%3d) [%08X]", var, areaByte);
+            sprintf(evtDebugPrintBuffer, "LSW(%3d) [%08X]", areaByte);
         } else if (areaByte <= -220000000) {
-            sprintf(&evtDebugPrintBuffer, "LSW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(areaByte));
+            sprintf(evtDebugPrintBuffer, "LSW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(areaByte));
         } else {
-            sprintf(&evtDebugPrintBuffer, "LSW(%3d) [%d]", var, areaByte);
+            sprintf(evtDebugPrintBuffer, "LSW(%3d) [%d]", var, areaByte);
         }
     } else if (var <= -120000000) {
         var += 130000000;
-        sprintf(&evtDebugPrintBuffer, "GSWF(%3d)[%d]", var, get_global_flag(var));
+        sprintf(evtDebugPrintBuffer, "GSWF(%3d)[%d]", var, get_global_flag(var));
     } else if (var <= -100000000) {
         var += 110000000;
-        sprintf(&evtDebugPrintBuffer, "LSWF(%3d)[%d]", var, get_area_flag(var));
+        sprintf(evtDebugPrintBuffer, "LSWF(%3d)[%d]", var, get_area_flag(var));
     } else if (var <= -80000000) {
         var += 90000000;
         phi_t0 = var % 32;
-        sprintf(&evtDebugPrintBuffer, "GF(%3d)  [%d]", var, gMapFlags[var / 32] & (1 << phi_t0));
+        sprintf(evtDebugPrintBuffer, "GF(%3d)  [%d]", var, gMapFlags[var / 32] & (1 << phi_t0));
     } else if (var <= -60000000) {
         var += 70000000;
         phi_t0 = var % 32;
-        sprintf(&evtDebugPrintBuffer, "LF(%3d)  [%d]", var, script->varFlags[var / 32] & (1 << phi_t0));
+        sprintf(evtDebugPrintBuffer, "LF(%3d)  [%d]", var, script->varFlags[var / 32] & (1 << phi_t0));
     } else if (var <= -40000000) {
         s32 mapVar;
+        s32 temp;
 
-        var += 50000000;
-        mapVar = gMapVars[var];
+        do {
+            var += 50000000;
+            mapVar = gMapVars[var];
+            temp = -270000000;
+        } while (0);
 
-        if (mapVar <= -270000000) {
-            sprintf(&evtDebugPrintBuffer, "GW(%3d)  [%08X]", var, mapVar);
+        if (mapVar <= temp) {
+            sprintf(evtDebugPrintBuffer, "GW(%3d)  [%08X]", mapVar);
         } else if (mapVar <= -220000000) {
-            sprintf(&evtDebugPrintBuffer, "GW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(mapVar));
+            sprintf(evtDebugPrintBuffer, "GW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(mapVar));
         } else {
-            sprintf(&evtDebugPrintBuffer, "GW(%3d)  [%d]", var, mapVar);
+            sprintf(evtDebugPrintBuffer, "GW(%3d)  [%d]", var, mapVar);
         }
     } else if (var <= -20000000) {
         s32 tableVar;
@@ -1300,21 +1305,21 @@ s32 evt_handle_print_debug_var(Evt* script) {
         var += 30000000;
         tableVar = script->varTable[var];
 
+        do {} while (0);
+        
         if (tableVar <= -270000000) {
-            sprintf(&evtDebugPrintBuffer, "LW(%3d)  [%08X]", var, tableVar);
+            sprintf(evtDebugPrintBuffer, "LW(%3d)  [%08X]", tableVar);
         } else if (tableVar <= -220000000) {
-            sprintf(&evtDebugPrintBuffer, "LW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(tableVar));
+            sprintf(evtDebugPrintBuffer, "LW(%3d)  [%4.2f]", var, evt_fixed_var_to_float(tableVar));
         } else {
-            sprintf(&evtDebugPrintBuffer, "LW(%3d)  [%d]", var, tableVar);
+            sprintf(evtDebugPrintBuffer, "LW(%3d)  [%d]", var, tableVar);
         }
     } else {
-        sprintf(&evtDebugPrintBuffer, "         [%d]", var);
+        sprintf(evtDebugPrintBuffer, "         [%d]", var);
     }
+
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(ApiStatus, "evt/si", evt_handle_print_debug_var, Evt* script);
-#endif
 
 ApiStatus func_802C739C(Evt* script) {
     script->ptrSavedPosition = (Bytecode*)*script->ptrReadPos;
@@ -1670,10 +1675,10 @@ s32 evt_execute_next_command(Evt *script) {
     }
 }
 
-#ifdef NON_MATCHING
 s32 evt_get_variable(Evt* script, Bytecode var) {
     s32 wordIdx;
     s32 bitIdx;
+    s32 temp;
 
     if (var <= -270000000) {
         return var;
@@ -1685,11 +1690,16 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
         var += 210000000;
         wordIdx = var / 32;
         bitIdx = var % 32;
-        return (script->flagArray[wordIdx] & (1 << bitIdx)) != 0;
+        var = (script->flagArray[wordIdx] & (1 << bitIdx)) != 0;
+        return var;
     } else if (var <= -180000000) {
         var += 190000000;
         var = script->array[var];
-        return (var > -270000000 && var < -220000000) ? evt_fixed_var_to_float(var) : var;
+        if (var > -270000000) {
+            if (var <= -220000000){
+                var = evt_fixed_var_to_float(var);
+            }
+        }
     } else if (var <= -160000000) {
         var += 170000000;
         return get_global_byte(var);
@@ -1704,29 +1714,37 @@ s32 evt_get_variable(Evt* script, Bytecode var) {
         return get_area_flag(var);
     } else if (var <= -80000000) {
         var += 90000000;
-        wordIdx = var / 32;
+        wordIdx = var;
         bitIdx = var % 32;
-        return (gMapFlags[wordIdx] & (1 << bitIdx)) != 0;
+        var = (gMapFlags[wordIdx / 32] & (1 << bitIdx)) != 0;
+        return var;
     } else if (var <= -60000000) {
         var += 70000000;
-        wordIdx = var / 32;
+        wordIdx = var;
         bitIdx = var % 32;
-        return (script->varFlags[wordIdx] & (1 << bitIdx)) != 0;
+        var = (script->varFlags[wordIdx / 32] & (1 << bitIdx)) != 0;
+        return var;
     } else if (var <= -40000000) {
         var += 50000000;
         var = gMapVars[var];
-        return (var > -270000000 && var < -220000000) ? evt_fixed_var_to_float(var) : var;
+        if (var > -270000000) {
+            temp = -220000000;
+            if (var <= temp){
+                var = evt_fixed_var_to_float(var);
+            }
+        }
     } else if (var <= -20000000) {
         var += 30000000;
         var = script->varTable[var];
-        return (var > -270000000 && var < -220000000) ? evt_fixed_var_to_float(var) : var;
-    } else {
-        return var;
+        if (var > -270000000) {
+            temp = -220000000;
+            if (var <= temp){
+                var = evt_fixed_var_to_float(var);
+            }
+        }
     }
+        return var;
 }
-#else
-INCLUDE_ASM(s32, "evt/si", evt_get_variable, Evt* script, Bytecode var);
-#endif
 
 s32 evt_get_variable_index(Evt* script, s32 var) {
     if (-270000000 >= var) {
