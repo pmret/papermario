@@ -60,9 +60,9 @@ INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_idle);
 
 INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_flip_over);
 
-//INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_is_item_on_top);
+INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_is_item_on_top);
 
-s32 entity_HiddenPanel_is_item_on_top(Entity* entity) {
+/*s32 entity_HiddenPanel_is_item_on_top(Entity* entity) {
     ItemEntity* temp_v0;
     s32 entityIndex;
     s32 *args;
@@ -78,7 +78,7 @@ s32 entity_HiddenPanel_is_item_on_top(Entity* entity) {
 
     }
     return phi_v0;
-}
+}*/
 
 INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_init);
 
