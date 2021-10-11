@@ -1,7 +1,5 @@
-#include "common.h"
-//#include "PR/gu.h"
+#include "PR/gu.h"
 
-#ifdef NON_MATCHING
 void guOrthoF(float mf[4][4], float l, float r, float b, float t, float n, float f, float scale) {
     s32 i, j;
 
@@ -21,12 +19,7 @@ void guOrthoF(float mf[4][4], float l, float r, float b, float t, float n, float
         }
     }
 }
-#else
-INCLUDE_ASM(void, "os/guOrtho", guOrthoF, float mf[4][4], float l, float r, float b, float t, float n, float f,
-            float scale);
-#endif
 
-#ifdef NON_MATCHING
 void guOrtho(Mtx* m, float l, float r, float b, float t, float n, float f, float scale) {
     float mf[4][4];
 
@@ -34,7 +27,4 @@ void guOrtho(Mtx* m, float l, float r, float b, float t, float n, float f, float
 
 	guMtxF2L(mf, m);
 }
-#else
-INCLUDE_ASM(void, "os/guOrtho", guOrtho, Mtx* m, float l, float r, float b, float t,
-            float n, float f, float scale);
-#endif
+

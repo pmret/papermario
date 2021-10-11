@@ -65,7 +65,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
     cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
-    kmc_cflags = f"-c -G0 -mips2 -32 -non_shared {extra_cflags}"
+    kmc_cflags = f"-c -G0 -mgp32 -mfp32 -mips3 -O3 {extra_cflags}"
 
     ninja.variable("python", sys.executable)
 
@@ -110,7 +110,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc_kmc",
         description="cc_kmc $in",
-        command=f"bash -o pipefail -c 'N64ALIGN=ON VR4300MUL=ON {cc_kmc} {CPPFLAGS_LIBULTRA} {cppflags} {kmc_cflags} $cflags $in -o $out'",
+        command=f"bash -o pipefail -c 'N64ALIGN=ON VR4300MUL=ON {cc_kmc} {CPPFLAGS_LIBULTRA} {cppflags} {kmc_cflags} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out'",
     )
 
     ninja.rule("cxx",
