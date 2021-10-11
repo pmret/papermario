@@ -1,5 +1,3 @@
-#define MOVE_ADDU
-
 #include "common.h"
 
 s32 osEPiWriteIo(OSPiHandle* handle, u32 devAddr, u32 data) {

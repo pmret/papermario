@@ -125,9 +125,9 @@ segments:
     - [0x3BD20, c, os/nusys/nuContQueryRead]
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3BDE0, c, os/osCreatePiManager]
-    - [0x3C160, c, os/osEPiWriteIo] # MOVE_ADDU
-    - [0x3C1C0, c, os/osEPiReadIo] # MOVE_ADDU
-    - [0x3C220, c, os/osEPiStartDma] # MOVE_ADDU
+    - [0x3C160, c, os/osEPiWriteIo, kmc]
+    - [0x3C1C0, c, os/osEPiReadIo, kmc]
+    - [0x3C220, c, os/osEPiStartDma, kmc]
     - [0x3C2C0, c, os/osEPiLinkHandle]
     - [0x3C310, c, os/osCartRomInit]
     - [0x3C490, c, os/3c490_len_3c0]
@@ -204,7 +204,7 @@ segments:
     - [0x42D60, c, os/42d60_len_80]
     - [0x42DE0, c, os/42de0_len_90]
     - [0x42E70, c, os/42e70_len_390]
-    - [0x42F20, c, os/guRotate]
+    - [0x42F20, c, os/guRotate, kmc -O3]
     - [0x43200, c, os/43200_len_7c0]
     - [0x43590, c, os/43590]
     - [0x439C0, c, os/439c0_len_220]
