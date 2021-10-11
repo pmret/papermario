@@ -23,7 +23,7 @@ if [[ "$uname" == "Darwin" ]]; then
     fi
 
     # Install packages
-    brew install md5sha1sum ninja gcc nanaian/brew/mips-linux-gnu-binutils || exit 1
+    brew install md5sha1sum ninja gcc nanaian/brew/mips-linux-gnu-binutils wine || exit 1
     python3 -m pip install -U -r requirements.txt || exit 1
 
     if [[ $1 == "--extra" ]]; then
