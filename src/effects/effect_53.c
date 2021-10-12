@@ -6,14 +6,14 @@ INCLUDE_ASM(s32, "effects/effect_53", func_E006A0BC);
 
 INCLUDE_ASM(s32, "effects/effect_53", fx_53_main);
 
-void func_E006A45C(void) {
+void fx_53_init(void) {
 }
 
 INCLUDE_ASM(s32, "effects/effect_53", func_E006A464);
 
-INCLUDE_ASM(s32, "effects/effect_53", func_E006A580);
+INCLUDE_ASM(s32, "effects/effect_53", fx_53_update);
 
-INCLUDE_ASM(s32, "effects/effect_53", func_E006A814);
+INCLUDE_ASM(s32, "effects/effect_53", fx_53_render);
 
 INCLUDE_ASM(s32, "effects/effect_53", func_E006A85C);
 

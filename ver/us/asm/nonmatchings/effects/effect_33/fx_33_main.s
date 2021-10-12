@@ -24,14 +24,14 @@ glabel fx_33_main
 /* 3547EC E004204C 12600069 */  beqz      $s3, .LE00421F4
 /* 3547F0 E0042050 AFA700BC */   sw       $a3, 0xbc($sp)
 /* 3547F4 E0042054 26730001 */  addiu     $s3, $s3, 1
-/* 3547F8 E0042058 3C02E004 */  lui       $v0, %hi(func_E004222C)
-/* 3547FC E004205C 2442222C */  addiu     $v0, $v0, %lo(func_E004222C)
+/* 3547F8 E0042058 3C02E004 */  lui       $v0, %hi(fx_33_init)
+/* 3547FC E004205C 2442222C */  addiu     $v0, $v0, %lo(fx_33_init)
 /* 354800 E0042060 AFA20018 */  sw        $v0, 0x18($sp)
-/* 354804 E0042064 3C02E004 */  lui       $v0, %hi(func_E0042234)
-/* 354808 E0042068 24422234 */  addiu     $v0, $v0, %lo(func_E0042234)
+/* 354804 E0042064 3C02E004 */  lui       $v0, %hi(fx_33_update)
+/* 354808 E0042068 24422234 */  addiu     $v0, $v0, %lo(fx_33_update)
 /* 35480C E004206C AFA2001C */  sw        $v0, 0x1c($sp)
-/* 354810 E0042070 3C02E004 */  lui       $v0, %hi(func_E0042374)
-/* 354814 E0042074 24422374 */  addiu     $v0, $v0, %lo(func_E0042374)
+/* 354810 E0042070 3C02E004 */  lui       $v0, %hi(fx_33_render)
+/* 354814 E0042074 24422374 */  addiu     $v0, $v0, %lo(fx_33_render)
 /* 354818 E0042078 AFA20020 */  sw        $v0, 0x20($sp)
 /* 35481C E004207C 24020021 */  addiu     $v0, $zero, 0x21
 /* 354820 E0042080 AFA00010 */  sw        $zero, 0x10($sp)

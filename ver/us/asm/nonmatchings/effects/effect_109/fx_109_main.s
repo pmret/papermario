@@ -12,14 +12,14 @@ glabel fx_109_main
 /* 3D725C E00DA01C 27A40010 */  addiu     $a0, $sp, 0x10
 /* 3D7260 E00DA020 F7B80048 */  sdc1      $f24, 0x48($sp)
 /* 3D7264 E00DA024 4487C000 */  mtc1      $a3, $f24
-/* 3D7268 E00DA028 3C02E00E */  lui       $v0, %hi(func_E00DA0FC)
-/* 3D726C E00DA02C 2442A0FC */  addiu     $v0, $v0, %lo(func_E00DA0FC)
+/* 3D7268 E00DA028 3C02E00E */  lui       $v0, %hi(fx_109_init)
+/* 3D726C E00DA02C 2442A0FC */  addiu     $v0, $v0, %lo(fx_109_init)
 /* 3D7270 E00DA030 AFA20018 */  sw        $v0, 0x18($sp)
-/* 3D7274 E00DA034 3C02E00E */  lui       $v0, %hi(func_E00DA104)
-/* 3D7278 E00DA038 2442A104 */  addiu     $v0, $v0, %lo(func_E00DA104)
+/* 3D7274 E00DA034 3C02E00E */  lui       $v0, %hi(fx_109_update)
+/* 3D7278 E00DA038 2442A104 */  addiu     $v0, $v0, %lo(fx_109_update)
 /* 3D727C E00DA03C AFA2001C */  sw        $v0, 0x1c($sp)
-/* 3D7280 E00DA040 3C02E00E */  lui       $v0, %hi(func_E00DA1E0)
-/* 3D7284 E00DA044 2442A1E0 */  addiu     $v0, $v0, %lo(func_E00DA1E0)
+/* 3D7280 E00DA040 3C02E00E */  lui       $v0, %hi(fx_109_render)
+/* 3D7284 E00DA044 2442A1E0 */  addiu     $v0, $v0, %lo(fx_109_render)
 /* 3D7288 E00DA048 AFA20020 */  sw        $v0, 0x20($sp)
 /* 3D728C E00DA04C 2402006D */  addiu     $v0, $zero, 0x6d
 /* 3D7290 E00DA050 AFBF0030 */  sw        $ra, 0x30($sp)
