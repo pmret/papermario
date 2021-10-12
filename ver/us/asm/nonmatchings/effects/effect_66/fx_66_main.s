@@ -29,7 +29,7 @@ glabel fx_66_main
 /* 388AB4 E00840E4 F7BA00A0 */  sdc1      $f26, 0xa0($sp)
 /* 388AB8 E00840E8 F7B80098 */  sdc1      $f24, 0x98($sp)
 /* 388ABC E00840EC F7B40088 */  sdc1      $f20, 0x88($sp)
-/* 388AC0 E00840F0 0C021000 */  jal       fx_66_init
+/* 388AC0 E00840F0 0C021000 */  jal       func_E0084000
 /* 388AC4 E00840F4 AFA20018 */   sw       $v0, 0x18($sp)
 /* 388AC8 E00840F8 C7A80044 */  lwc1      $f8, 0x44($sp)
 /* 388ACC E00840FC 3C013D80 */  lui       $at, 0x3d80
@@ -91,15 +91,15 @@ glabel fx_66_main
 /* 388BA4 E00841D4 46201082 */  mul.d     $f2, $f2, $f0
 /* 388BA8 E00841D8 00000000 */  nop
 /* 388BAC E00841DC 0200202D */  daddu     $a0, $s0, $zero
-/* 388BB0 E00841E0 3C02E008 */  lui       $v0, %hi(fx_66_update)
-/* 388BB4 E00841E4 24424658 */  addiu     $v0, $v0, %lo(fx_66_update)
+/* 388BB0 E00841E0 3C02E008 */  lui       $v0, %hi(fx_66_init)
+/* 388BB4 E00841E4 24424658 */  addiu     $v0, $v0, %lo(fx_66_init)
 /* 388BB8 E00841E8 AFA20028 */  sw        $v0, 0x28($sp)
 /* 388BBC E00841EC 02530018 */  mult      $s2, $s3
-/* 388BC0 E00841F0 3C02E008 */  lui       $v0, %hi(fx_66_render)
-/* 388BC4 E00841F4 24424660 */  addiu     $v0, $v0, %lo(fx_66_render)
+/* 388BC0 E00841F0 3C02E008 */  lui       $v0, %hi(fx_66_update)
+/* 388BC4 E00841F4 24424660 */  addiu     $v0, $v0, %lo(fx_66_update)
 /* 388BC8 E00841F8 AFA2002C */  sw        $v0, 0x2c($sp)
-/* 388BCC E00841FC 3C02E008 */  lui       $v0, %hi(func_E00848E4)
-/* 388BD0 E0084200 244248E4 */  addiu     $v0, $v0, %lo(func_E00848E4)
+/* 388BCC E00841FC 3C02E008 */  lui       $v0, %hi(fx_66_render)
+/* 388BD0 E0084200 244248E4 */  addiu     $v0, $v0, %lo(fx_66_render)
 /* 388BD4 E0084204 AFA20030 */  sw        $v0, 0x30($sp)
 /* 388BD8 E0084208 00004012 */  mflo      $t0
 /* 388BDC E008420C 24020042 */  addiu     $v0, $zero, 0x42
