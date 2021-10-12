@@ -3,7 +3,7 @@
 
 #define NAMESPACE EB1170
 
-extern s32 func_80059AC8(s32 a, s32 b);
+extern s32 func_80059AC8(s32, s32);
 extern s16 D_80169B12;
 extern s32 D_802417E4_EB2644;
 extern s32 D_802417E8_EB2648;
@@ -29,7 +29,7 @@ ApiStatus func_80240654_EB14B4(Evt* script, s32 isInitialCall) {
     }
     if (D_802417E4_EB2644 != 0) {
         D_802417E4_EB2644 = 0;
-        dead_evt_set_variable(script, *args, D_802417E8_EB2648);
+        dead_evt_set_variable(script, *args++, D_802417E8_EB2648);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
@@ -39,14 +39,16 @@ INCLUDE_ASM(s32, "EB1170", func_80240654_EB14B4);
 #endif // NON_MATCHING
 
 ApiStatus func_802406A8_EB1508(Evt* script, s32 isInitialCall) {
-    D_802417E8_EB2648 = evt_get_variable(script, *script->ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+
+    D_802417E8_EB2648 = evt_get_variable(script, *args++);
     D_802417E4_EB2644 = 1;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802406E0_EB1540(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args++);
     s32 i;
 
     if (ptr != NULL) {
@@ -69,9 +71,8 @@ ApiStatus func_802406E0_EB1540(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802409F8_EB1858(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->varTable[2]);
-    u32 anim = npc->currentAnim.w;
 
-    D_80244494 = anim;
+    D_80244494 = npc->currentAnim.w;
     npc->currentAnim.w = (u32)script->varTable[4];
     return ApiStatus_DONE2;
 }
@@ -88,6 +89,8 @@ ApiStatus func_80240A68_EB18C8(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80240A8C_EB18EC(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, D_80169B12);
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, *args++, D_80169B12);
     return ApiStatus_DONE2;
 }
