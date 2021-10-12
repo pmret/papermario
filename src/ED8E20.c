@@ -44,21 +44,17 @@ INCLUDE_ASM(s32, "ED8E20", func_802400F0_ED8F10);
 #endif
 
 ApiStatus func_80240208_ED9028(Evt* script, s32 isInitialCall) {
-    script->varTable[0] = (s32)clamp_angle(gCameras[gCurrentCameraID].currentYaw + 180.0f);
+    script->varTable[0] = clamp_angle(gCameras[gCurrentCameraID].currentYaw + 180.0f);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80240274_ED9094(Evt* script, s32 isInitialCall) {
-    f32 playerZ;
-    f32 playerX;
-    f32 playerY;
-    f32 temp_a2;
     Bytecode* args = script->ptrReadPos;
+    f32 temp_a2 = evt_get_float_variable(script, *args++);
+    f32 playerX = gPlayerStatus.position.x;
+    f32 playerY = gPlayerStatus.position.y;
+    f32 playerZ = gPlayerStatus.position.z;
 
-    temp_a2 = evt_get_float_variable(script, *args++);
-    playerX = gPlayerStatus.position.x;
-    playerZ = gPlayerStatus.position.z;
-    playerY = gPlayerStatus.position.y;
     add_vec2D_polar(&playerX, &playerZ, temp_a2, gPlayerStatus.targetYaw);
     evt_set_float_variable(script, EVT_VAR(0), playerX);
     evt_set_float_variable(script, EVT_VAR(1), playerY);
