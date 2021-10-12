@@ -9,4 +9,4 @@ INCLUDE_ASM(s32, "effects/effect_120", fx_120_update);
 
 INCLUDE_ASM(s32, "effects/effect_120", fx_120_render);
 
-INCLUDE_ASM(s32, "effects/effect_120", func_E010C39C);
+INCLUDE_ASM(s32, "effects/effect_120", fx_120_appendGfx);

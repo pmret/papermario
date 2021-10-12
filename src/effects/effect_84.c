@@ -12,4 +12,4 @@ INCLUDE_ASM(s32, "effects/effect_84", fx_84_render);
 void func_E00A8318(void) {
 }
 
-INCLUDE_ASM(s32, "effects/effect_84", func_E00A8320);
+INCLUDE_ASM(s32, "effects/effect_84", fx_84_appendGfx);

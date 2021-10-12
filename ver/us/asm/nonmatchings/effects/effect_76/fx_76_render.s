@@ -5,8 +5,8 @@ glabel fx_76_render
 /* 395E4C E009829C 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 395E50 E00982A0 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 395E54 E00982A4 8C83000C */  lw        $v1, 0xc($a0)
-/* 395E58 E00982A8 3C02E00A */  lui       $v0, %hi(func_E00982EC)
-/* 395E5C E00982AC 244282EC */  addiu     $v0, $v0, %lo(func_E00982EC)
+/* 395E58 E00982A8 3C02E00A */  lui       $v0, %hi(fx_76_appendGfx)
+/* 395E5C E00982AC 244282EC */  addiu     $v0, $v0, %lo(fx_76_appendGfx)
 /* 395E60 E00982B0 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 395E64 E00982B4 2402002D */  addiu     $v0, $zero, 0x2d
 /* 395E68 E00982B8 AFA40018 */  sw        $a0, 0x18($sp)

@@ -69,8 +69,8 @@ glabel fx_32_render
 /* 353608 E0040308 0000182D */   daddu    $v1, $zero, $zero
 /* 35360C E004030C 0200202D */  daddu     $a0, $s0, $zero
 .LE0040310:
-/* 353610 E0040310 3C02E004 */  lui       $v0, %hi(func_E0040348)
-/* 353614 E0040314 24420348 */  addiu     $v0, $v0, %lo(func_E0040348)
+/* 353610 E0040310 3C02E004 */  lui       $v0, %hi(fx_32_appendGfx)
+/* 353614 E0040314 24420348 */  addiu     $v0, $v0, %lo(fx_32_appendGfx)
 /* 353618 E0040318 AC82000C */  sw        $v0, 0xc($a0)
 /* 35361C E004031C 00031023 */  negu      $v0, $v1
 /* 353620 E0040320 AC820004 */  sw        $v0, 4($a0)

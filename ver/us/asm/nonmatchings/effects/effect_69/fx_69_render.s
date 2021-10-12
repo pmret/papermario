@@ -3,8 +3,8 @@
 
 glabel fx_69_render
 /* 38CCD4 E008A6E4 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* 38CCD8 E008A6E8 3C02E009 */  lui       $v0, %hi(func_E008A728)
-/* 38CCDC E008A6EC 2442A728 */  addiu     $v0, $v0, %lo(func_E008A728)
+/* 38CCD8 E008A6E8 3C02E009 */  lui       $v0, %hi(fx_69_appendGfx)
+/* 38CCDC E008A6EC 2442A728 */  addiu     $v0, $v0, %lo(fx_69_appendGfx)
 /* 38CCE0 E008A6F0 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 38CCE4 E008A6F4 2402002D */  addiu     $v0, $zero, 0x2d
 /* 38CCE8 E008A6F8 AFA40018 */  sw        $a0, 0x18($sp)

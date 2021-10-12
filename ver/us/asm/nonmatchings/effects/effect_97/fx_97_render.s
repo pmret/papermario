@@ -3,8 +3,8 @@
 
 glabel fx_97_render
 /* 3C139C E00C21CC 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* 3C13A0 E00C21D0 3C02E00C */  lui       $v0, %hi(func_E00C221C)
-/* 3C13A4 E00C21D4 2442221C */  addiu     $v0, $v0, %lo(func_E00C221C)
+/* 3C13A0 E00C21D0 3C02E00C */  lui       $v0, %hi(fx_97_appendGfx)
+/* 3C13A4 E00C21D4 2442221C */  addiu     $v0, $v0, %lo(fx_97_appendGfx)
 /* 3C13A8 E00C21D8 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 3C13AC E00C21DC 2402000A */  addiu     $v0, $zero, 0xa
 /* 3C13B0 E00C21E0 AFA20014 */  sw        $v0, 0x14($sp)

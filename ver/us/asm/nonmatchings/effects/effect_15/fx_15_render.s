@@ -6,8 +6,8 @@ glabel fx_15_render
 /* 33202C E001E6EC 0000282D */  daddu     $a1, $zero, $zero
 /* 332030 E001E6F0 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 332034 E001E6F4 8C83000C */  lw        $v1, 0xc($a0)
-/* 332038 E001E6F8 3C02E002 */  lui       $v0, %hi(func_E001E730)
-/* 33203C E001E6FC 2442E730 */  addiu     $v0, $v0, %lo(func_E001E730)
+/* 332038 E001E6F8 3C02E002 */  lui       $v0, %hi(fx_15_appendGfx)
+/* 33203C E001E6FC 2442E730 */  addiu     $v0, $v0, %lo(fx_15_appendGfx)
 /* 332040 E001E700 AFA40018 */  sw        $a0, 0x18($sp)
 /* 332044 E001E704 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 332048 E001E708 AFA00014 */  sw        $zero, 0x14($sp)

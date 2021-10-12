@@ -11,4 +11,4 @@ INCLUDE_ASM(s32, "effects/effect_125", fx_125_render);
 
 INCLUDE_ASM(s32, "effects/effect_125", func_E01166E8);
 
-INCLUDE_ASM(s32, "effects/effect_125", func_E0116884);
+INCLUDE_ASM(s32, "effects/effect_125", fx_125_appendGfx);

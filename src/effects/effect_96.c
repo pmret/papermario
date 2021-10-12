@@ -12,4 +12,4 @@ INCLUDE_ASM(s32, "effects/effect_96", fx_96_render);
 void func_E00C0758(void) {
 }
 
-INCLUDE_ASM(s32, "effects/effect_96", func_E00C0760);
+INCLUDE_ASM(s32, "effects/effect_96", fx_96_appendGfx);

@@ -15,4 +15,4 @@ void func_E007684C(void) {
 void func_E0076854(void) {
 }
 
-INCLUDE_ASM(s32, "effects/effect_59", func_E007685C);
+INCLUDE_ASM(s32, "effects/effect_59", fx_59_appendGfx);

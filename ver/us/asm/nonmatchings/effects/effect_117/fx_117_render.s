@@ -69,8 +69,8 @@ glabel fx_117_render
 /* 3E24F8 E00EA618 0000182D */   daddu    $v1, $zero, $zero
 /* 3E24FC E00EA61C 0200202D */  daddu     $a0, $s0, $zero
 .LE00EA620:
-/* 3E2500 E00EA620 3C02E00F */  lui       $v0, %hi(func_E00EA66C)
-/* 3E2504 E00EA624 2442A66C */  addiu     $v0, $v0, %lo(func_E00EA66C)
+/* 3E2500 E00EA620 3C02E00F */  lui       $v0, %hi(fx_117_appendGfx)
+/* 3E2504 E00EA624 2442A66C */  addiu     $v0, $v0, %lo(fx_117_appendGfx)
 /* 3E2508 E00EA628 AC82000C */  sw        $v0, 0xc($a0)
 /* 3E250C E00EA62C 00031023 */  negu      $v0, $v1
 /* 3E2510 E00EA630 AC820004 */  sw        $v0, 4($a0)
