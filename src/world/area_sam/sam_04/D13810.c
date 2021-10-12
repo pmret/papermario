@@ -1,6 +1,6 @@
 #include "sam_04.h"
 
-ApiStatus func_80240240_D13810 (Evt* script, s32 isInitialCall) {
+ApiStatus func_80240240_D13810(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var = *args++;
     f32 x1 = evt_get_float_variable(script, *args++);
