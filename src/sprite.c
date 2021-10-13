@@ -385,6 +385,23 @@ INCLUDE_ASM(s32, "sprite", func_802DE8DC);
 
 INCLUDE_ASM(s32, "sprite", spr_get_npc_raster_info);
 
+/* Some WIP work on sprite raster stuff.
+s32 spr_get_npc_raster_info(spr_raster_info* outInfo, int npcSpriteID, int rasterIndex) {
+    SpriteAnimData* sprite;
+    void *temp_v1;
+
+    sprite = spr_npcSprites[npcSpriteID];
+    if (sprite == 0) {
+        return FALSE;
+    }
+    temp_v1 = sprite->rastersOffset[rasterIndex];
+    outInfo->unk0 = (s32)temp_v1->unk0;
+    outInfo->unk8 = (s32)temp_v1->unk4;
+    outInfo->unkC = (s32)temp_v1->unk5;
+    outInfo->unk4 = sprite->unk4[temp_v1->unk6];
+    return TRUE;
+}*/
+
 s32** spr_get_npc_palettes(s32 npcSpriteID) {
     SpriteAnimData* sprite = spr_npcSprites[npcSpriteID];
 
