@@ -941,7 +941,8 @@ typedef struct StaticAnimatorNode {
 } StaticAnimatorNode; // size = 0x2C
 
 typedef struct SpriteComponent {
-    /* 0x00 */ char unk_00[8];
+    /* 0x00 */ s32 initialized;
+    /* 0x04 */ s32 unk_04;
     /* 0x08 */ s16** readPos;
     /* 0x0C */ f32 waitTime;
     /* 0x10 */ s32 loopCounter;

@@ -34,6 +34,8 @@ typedef struct SpriteAnimData {
     /* 0x0C */ s32 colorVariations;
 } SpriteAnimData; // size = 0x10
 
+extern s32 D_802DF590[];
+extern s32 D_802DFA58[];
 extern s32 spr_allocateBtlComponentsOnWorldHeap;
 extern SpriteAnimData* spr_playerSprites[13];
 extern s32 spr_playerMaxComponents;
@@ -201,17 +203,78 @@ INCLUDE_ASM(s32, "sprite", spr_component_update_commands);
 
 INCLUDE_ASM(s32, "sprite", spr_component_update_finish);
 
+/*void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compList, s32 arg2, s32 palette) {
+    s32 temp_t0;
+    s32 temp_v0_2;
+    s8 temp_v0_3;
+    SpriteComponent* temp_v0;
+
+    if (comp->initialized) {
+        temp_t0 = comp->unk_04;
+        comp->compPos.x = comp->posOffset.x;
+        comp->compPos.y = comp->posOffset.y;
+        comp->compPos.z = comp->posOffset.z;
+        if ((temp_t0 & 0xF00) == 0x100) {
+            temp_v0 = compList[temp_t0 & 0xFF];
+            comp->compPos.x = comp->posOffset.x + temp_v0->compPos.x;
+            comp->compPos.y = comp->posOffset.y + temp_v0->compPos.y;
+            comp->compPos.z = comp->posOffset.z + temp_v0->compPos.z;
+        }
+        temp_v0_2 = comp->currentRaster;
+        if ((temp_v0_2 != -1) && (comp->currentRaster == -1)) {
+            temp_v0_3 = (*((temp_v0_2 * 4) + arg2))->unk6;
+            comp->unk18 = (s32) temp_v0_3;
+            if ((palette != 0) && (temp_v0_3 == 0)) {
+                comp->unk18 = palette;
+            }
+        }
+    }
+}*/
+
 INCLUDE_ASM(s32, "sprite", spr_component_update);
 
-INCLUDE_ASM(s32, "sprite", spr_init_component_anim_state);
+void spr_init_component_anim_state(SpriteComponent* comp, s16*** anim) {
+    if (anim == -1) {
+        comp->initialized = FALSE;
+        return;
+    }
+
+    comp->initialized = TRUE;
+    comp->unk_04 = 0;
+    comp->readPos = *anim;
+    comp->waitTime = 0;
+    comp->loopCounter = 0;
+    comp->currentRaster = -1;
+    comp->currentPalette = -1;
+    comp->posOffset.x = 0;
+    comp->posOffset.y = 0;
+    comp->posOffset.z = 0;
+    comp->compPos.x = 0;
+    comp->compPos.y = 0;
+    comp->compPos.z = 0;
+    comp->rotation.x = 0;
+    comp->rotation.y = 0;
+    comp->rotation.z = 0;
+    comp->scale.x = 1.0f;
+    comp->scale.y = 1.0f;
+    comp->scale.z = 1.0f;
+}
 
 INCLUDE_ASM(s32, "sprite", spr_init_anim_state);
 
-void spr_set_anim_timescale(f32 arg0) {
-    spr_animUpdateTimeScale = arg0 * 2.0f;
+void spr_set_anim_timescale(f32 timescale) {
+    spr_animUpdateTimeScale = timescale * 2.0f;
 }
 
-INCLUDE_ASM(s32, "sprite", spr_load_player_sprite);
+void spr_load_player_sprite(s32 spriteIndex) {
+    s32 ind = spriteIndex - 1;
+    SpriteAnimData* playerSprite = spr_load_sprite(ind, 1, 0);
+
+    spr_playerSprites[ind] = playerSprite;
+    if (spr_playerMaxComponents < playerSprite->maxComponents) {
+        spr_playerMaxComponents = playerSprite->maxComponents;
+    }
+}
 
 void spr_init_sprites(s32 playerSpriteSet) {
     s32 i;
@@ -281,11 +344,18 @@ INCLUDE_ASM(void, "sprite", spr_update_player_sprite, s32 arg0, s32 arg1, f32 ar
 
 INCLUDE_ASM(void, "sprite", spr_draw_player_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
-INCLUDE_ASM(s32, "sprite", func_802DDEC4);
+s32 func_802DDEC4(s32 arg0) {
+    return D_802DF590[arg0 * 3]; // The struct of D_802DF590 is probably 0xC in size with this taking the first field.
+}
 
 INCLUDE_ASM(s32, "sprite", func_802DDEE4);
 
 INCLUDE_ASM(s32, "sprite", func_802DDFF8);
+
+// There's a problem here: this matches if arg6 is an s32, but the uses of this function match if it is a u16...
+/*s32 func_802DDFF8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    return func_802DDEE4(0, -1, arg1, arg2, arg3, arg4, arg5, arg6);
+}*/
 
 INCLUDE_ASM(s32, "sprite", spr_get_player_raster_info);
 
@@ -297,7 +367,9 @@ INCLUDE_ASM(s32, "sprite", spr_update_sprite, s32 arg0, s32 arg1, f32 arg2);
 
 INCLUDE_ASM(void, "sprite", spr_draw_npc_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
 
-INCLUDE_ASM(s32, "sprite", func_802DE5C8);
+s32 func_802DE5C8(s32 arg0) {
+    return D_802DFA58[arg0 * 5]; // The struct of D_802DFA58 is probably 0x14 in size with this taking the first field.
+}
 
 INCLUDE_ASM(s32, "sprite", spr_free_sprite);
 
@@ -305,12 +377,28 @@ INCLUDE_ASM(s32, "sprite", func_802DE748);
 
 INCLUDE_ASM(s32, "sprite", func_802DE780);
 
-INCLUDE_ASM(s32, "sprite", func_802DE894);
+s32 func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    return func_802DE780(arg0, -1, arg1, arg2, arg3, arg4, arg5, arg6);
+}
 
 INCLUDE_ASM(s32, "sprite", func_802DE8DC);
 
 INCLUDE_ASM(s32, "sprite", spr_get_npc_raster_info);
 
-INCLUDE_ASM(s32*, "sprite", spr_get_npc_palettes, u16 arg0);
+s32** spr_get_npc_palettes(s32 npcSpriteID) {
+    SpriteAnimData* sprite = spr_npcSprites[npcSpriteID];
 
-INCLUDE_ASM(s32, "sprite", spr_get_npc_color_variations);
+    if (sprite != NULL) {
+        return sprite->palettesOffset;
+    }
+    return NULL;
+}
+
+s32 spr_get_npc_color_variations(s32 npcSpriteID) {
+    SpriteAnimData* sprite = spr_npcSprites[npcSpriteID];
+
+    if (sprite != NULL) {
+        return sprite->colorVariations;
+    }
+    return -1;
+}
