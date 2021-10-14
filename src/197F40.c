@@ -2057,7 +2057,27 @@ ApiStatus SetBattleState(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", WaitForState);
+ApiStatus WaitForState(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 temp_v0;
+
+    if (isInitialCall) {
+        temp_v0 = evt_get_variable(script, *ptrReadPos);
+        if (!temp_v0) {
+            battleStatus->unk_95 = 0;
+            return ApiStatus_DONE2;
+        }
+        battleStatus->unk_95 = temp_v0;
+    }
+
+    temp_v0 = battleStatus->unk_95;
+    if (temp_v0) {
+        return (gBattleState == temp_v0) * 2;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", CancelEnemyTurn);
 
