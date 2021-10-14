@@ -4,9 +4,9 @@ extern void* D_8015A578;
 
 INCLUDE_ASM(s32, "entity/SimpleSpring", entity_ScriptSpring_idle);
 
-INCLUDE_ASM(s32, "entity/SimpleSpring", entity_SimpleSpring_idle);
+#ifdef NON_EQUIVALENT
 
-/*void entity_SimpleSpring_idle(Entity* ent) {
+void entity_SimpleSpring_idle(Entity* ent) {
     int new_var;
     s32 *new_var2;
     s32 isRiding;
@@ -25,12 +25,18 @@ INCLUDE_ASM(s32, "entity/SimpleSpring", entity_SimpleSpring_idle);
         disable_player_input();
         gPlayerStatus.currentSpeed = 0;
     }
-}*/
+}
+
+#else
+
+INCLUDE_ASM(s32, "entity/SimpleSpring", entity_SimpleSpring_idle);
+
+#endif
 
 void entity_SimpleSpring_set_jump_params(Entity* ent) {
-    s32* data;
-    data = ent->dataBuf;
-    set_action_state(6);
+    s32* data = ent->dataBuf;
+
+    set_action_state(ACTION_STATE_LAUNCH);
     gPlayerStatus.gravityIntegrator[1] = 0;
     gPlayerStatus.gravityIntegrator[0] = 15.0f;
     gPlayerStatus.gravityIntegrator[2] = (f32)*data;
@@ -60,9 +66,9 @@ INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_idle);
 
 INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_flip_over);
 
-INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_is_item_on_top);
+#ifdef NON_EQUIVALENT
 
-/*s32 entity_HiddenPanel_is_item_on_top(Entity* entity) {
+s32 entity_HiddenPanel_is_item_on_top(Entity* entity) {
     ItemEntity* temp_v0;
     s32 entityIndex;
     s32 *args;
@@ -78,11 +84,16 @@ INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_is_item_on_top);
 
     }
     return phi_v0;
-}*/
+}
 
-INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_init);
+#else
 
-/*
+INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_is_item_on_top);
+
+#endif
+
+#ifdef NON_EQUIVALENT
+
 void entity_HiddenPanel_init(Entity* ent) {
     float sp58[4];
     float sp18[4];
@@ -127,4 +138,9 @@ void entity_HiddenPanel_init(Entity* ent) {
     mdl_project_tex_coords(data->unk74, temp_a1, temp_s2 + 0x34, ent->unk44);
     D_8015A578.unk1 = (u8) (D_8015A578.unk1 + 1);
 }
-*/
+
+#else
+
+INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_init);
+
+#endif
