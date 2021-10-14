@@ -1834,8 +1834,6 @@ s32 evt_get_variable_index_alt(s32 var) {
 
 INCLUDE_ASM(s32, "evt/si", evt_set_variable, Evt* script, Bytecode var, s32 value);
 
-// Tiny regalloc issue with the var <= -80000000 / -60000000 blocks
-#ifdef NON_MATCHING
 f32 evt_get_float_variable(Evt* script, Bytecode var) {
     s32 temp;
 
@@ -1857,7 +1855,8 @@ f32 evt_get_float_variable(Evt* script, Bytecode var) {
     } else if (var <= -80000000) {
         var += 90000000;
         temp = var % 32;
-        if ((gMapFlags[var / 32] & (1 << temp))) {
+        var = gMapFlags[var / 32] & (1 << temp);
+        if (var) {
             return 1.0f;
         } else {
             return 0.0f;
@@ -1865,7 +1864,8 @@ f32 evt_get_float_variable(Evt* script, Bytecode var) {
     } else if (var <= -60000000) {
         var += 70000000;
         temp = var % 32;
-        if ((script->varFlags[var / 32] & (1 << temp))) {
+        var = script->varFlags[var / 32] & (1 << temp);
+        if (var) {
             return 1.0f;
         } else {
             return 0.0f;
@@ -1880,9 +1880,6 @@ f32 evt_get_float_variable(Evt* script, Bytecode var) {
         return evt_fixed_var_to_float(var);
     }
 }
-#else
-INCLUDE_ASM(f32, "evt/si", evt_get_float_variable, Evt* script, Bytecode var);
-#endif
 
 INCLUDE_ASM(f32, "evt/si", evt_set_float_variable, Evt* script, Bytecode var, f32 value);
 
