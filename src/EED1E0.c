@@ -63,21 +63,20 @@ INCLUDE_ASM(s32, "EED1E0", func_80240C18_EEDD18);
 #include "world/common/DeadUnkPartnerPosFuncs.inc.c"
 
 ApiStatus func_80240DE8_EEDEE8(Evt* script, s32 isInitialCall) {
-    script->varTable[0] = 0;
+    script->varTable[0] = FALSE;
     if (D_80117160[0] != 0 && D_80117160[3] == 3) {
-        script->varTable[0] = 1;
+        script->varTable[0] = TRUE;
     }
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80240E18_EEDF18(Evt* script, s32 isInitialCall) {
-    script->varTable[0] = 0;
+    script->varTable[0] = FALSE;
 
     do {} while (0);
 
     if (gPlayerActionState == ACTION_STATE_GROUND_POUND || gPlayerActionState == ACTION_STATE_ULTRA_POUND) {
-        script->varTable[0] = 1;
+        script->varTable[0] = TRUE;
     }
-
     return ApiStatus_DONE2;
 }

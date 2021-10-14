@@ -22,7 +22,7 @@ ApiStatus func_80240020_ED8E40(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "ED8E20", func_80240034_ED8E54);
 
-#ifdef WIP
+#ifdef NON_EQUIVALENT
 
 // Something off with the pointers? Not sure if functionally equivalent.
 ApiStatus func_802400F0_ED8F10(Evt* script, s32 isInitialCall) {
