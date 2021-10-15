@@ -2081,7 +2081,18 @@ ApiStatus WaitForState(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "197F40", CancelEnemyTurn);
 
-INCLUDE_ASM(s32, "197F40", func_8026E260);
+ApiStatus func_8026E260(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+
+    evt_get_variable(script, *args++);
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    get_actor(actorID);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus PlayerCreateTargetList(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
