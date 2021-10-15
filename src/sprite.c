@@ -201,9 +201,9 @@ s32 spr_sign_extend_16bit(u16 val) {
 
 INCLUDE_ASM(s32, "sprite", spr_component_update_commands);
 
-INCLUDE_ASM(s32, "sprite", spr_component_update_finish);
+#ifdef NON_EQUIVALENT
 
-/*void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compList, s32 arg2, s32 palette) {
+void spr_component_update_finish(SpriteComponent* comp, SpriteComponent** compList, s32 arg2, s32 palette) {
     s32 temp_t0;
     s32 temp_v0_2;
     s8 temp_v0_3;
@@ -229,7 +229,13 @@ INCLUDE_ASM(s32, "sprite", spr_component_update_finish);
             }
         }
     }
-}*/
+}
+
+#else
+
+INCLUDE_ASM(s32, "sprite", spr_component_update_finish);
+
+#endif
 
 INCLUDE_ASM(s32, "sprite", spr_component_update);
 
@@ -350,12 +356,18 @@ s32 func_802DDEC4(s32 arg0) {
 
 INCLUDE_ASM(s32, "sprite", func_802DDEE4);
 
-INCLUDE_ASM(s32, "sprite", func_802DDFF8);
+#ifdef NON_MATCHING
 
 // There's a problem here: this matches if arg6 is an s32, but the uses of this function match if it is a u16...
-/*s32 func_802DDFF8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+s32 func_802DDFF8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6) {
     return func_802DDEE4(0, -1, arg1, arg2, arg3, arg4, arg5, arg6);
-}*/
+}
+
+#else
+
+INCLUDE_ASM(s32, "sprite", func_802DDFF8);
+
+#endif
 
 INCLUDE_ASM(s32, "sprite", spr_get_player_raster_info);
 
@@ -383,9 +395,9 @@ s32 func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
 
 INCLUDE_ASM(s32, "sprite", func_802DE8DC);
 
-INCLUDE_ASM(s32, "sprite", spr_get_npc_raster_info);
+#ifdef NON_EQUIVALENT
 
-/* Some WIP work on sprite raster stuff.
+// Some WIP work on sprite raster stuff.
 s32 spr_get_npc_raster_info(spr_raster_info* outInfo, int npcSpriteID, int rasterIndex) {
     SpriteAnimData* sprite;
     void *temp_v1;
@@ -400,7 +412,13 @@ s32 spr_get_npc_raster_info(spr_raster_info* outInfo, int npcSpriteID, int raste
     outInfo->unkC = (s32)temp_v1->unk5;
     outInfo->unk4 = sprite->unk4[temp_v1->unk6];
     return TRUE;
-}*/
+}
+
+#else
+
+INCLUDE_ASM(s32, "sprite", spr_get_npc_raster_info);
+
+#endif
 
 s32** spr_get_npc_palettes(s32 npcSpriteID) {
     SpriteAnimData* sprite = spr_npcSprites[npcSpriteID];
