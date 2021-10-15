@@ -2198,7 +2198,14 @@ ApiStatus func_8026F60C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", SetBattleVar);
+ApiStatus SetBattleVar(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 varIdx = evt_get_variable(script, *args++);
+
+    gBattleStatus.varTable[varIdx] = evt_get_variable(script, *args++);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetBattleVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
