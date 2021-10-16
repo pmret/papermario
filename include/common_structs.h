@@ -700,7 +700,7 @@ typedef struct BattleStatus {
     /* 0x092 */ s8 unk_92;
     /* 0x093 */ char unk_93;
     /* 0x094 */ s8 unk_94;
-    /* 0x095 */ char unk_95;
+    /* 0x095 */ s8 unk_95;
     /* 0x096 */ s8 hammerCharge;
     /* 0x097 */ s8 jumpCharge;
     /* 0x098 */ char unk_98;
