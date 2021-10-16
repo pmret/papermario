@@ -111,4 +111,4 @@ INCLUDE_ASM(void, "file", func, void);
 
 ## NON_MATCHING
 
-If it turns out it is _impossible_ to match something cleanly, wrap **equivalent** C code in NON_MATCHING.
+If you are unable to match a function but are sure it behaves the same, wrap **equivalent** C code in NON_MATCHING.
