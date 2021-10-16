@@ -11,7 +11,7 @@ static char* N(exit_str_7) = "";
 
 #include "world/common/UnsetCamera0MoveFlag1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_8024001C_DB792C);
+#include "common/SetAngleClamped.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_802400E4_DB79F4);
 

@@ -2057,11 +2057,42 @@ ApiStatus SetBattleState(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", WaitForState);
+ApiStatus WaitForState(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 temp_v0;
+
+    if (isInitialCall) {
+        temp_v0 = evt_get_variable(script, *ptrReadPos);
+        if (!temp_v0) {
+            battleStatus->unk_95 = 0;
+            return ApiStatus_DONE2;
+        }
+        battleStatus->unk_95 = temp_v0;
+    }
+
+    temp_v0 = battleStatus->unk_95;
+    if (temp_v0) {
+        return (gBattleState == temp_v0) * 2;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", CancelEnemyTurn);
 
-INCLUDE_ASM(s32, "197F40", func_8026E260);
+ApiStatus func_8026E260(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+
+    evt_get_variable(script, *args++);
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    get_actor(actorID);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus PlayerCreateTargetList(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -2167,7 +2198,14 @@ ApiStatus func_8026F60C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", SetBattleVar);
+ApiStatus SetBattleVar(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 varIdx = evt_get_variable(script, *args++);
+
+    gBattleStatus.varTable[varIdx] = evt_get_variable(script, *args++);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetBattleVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

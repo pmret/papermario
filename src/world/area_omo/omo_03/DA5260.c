@@ -4,7 +4,7 @@
 #include "world/common/UnsetCamera0MoveFlag1.inc.c"
 #define NAMESPACE omo_03
 
-INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_8024003C_DA527C);
+#include "common/SetAngleClamped.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_80240104_DA5344);
 
