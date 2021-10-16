@@ -94,3 +94,21 @@ Once you've matched a function, run the following:
 ```
 
 Then, go ahead and [create a pull request](https://github.com/pmret/papermario/pulls)!
+
+## NON_EQUIVALENT
+
+If you make significant progress on a function but are unable to 100% match it, feel free to wrap it in a NON_EQUIVALENT check:
+
+```c
+#ifdef NON_EQUIVALENT
+void func(void) {
+    // ...
+}
+#else
+INCLUDE_ASM(void, "file", func, void);
+#endif
+```
+
+## NON_MATCHING
+
+If you are unable to match a function but are sure it behaves the same, wrap **equivalent** C code in NON_MATCHING.
