@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 #include "battle/battle.h"
 
 extern s8 D_8029FBD4;
