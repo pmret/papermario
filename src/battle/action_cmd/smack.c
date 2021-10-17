@@ -1,5 +1,6 @@
 #include "common.h"
 #include "battle/battle.h"
+#include "hud_element.h"
 
 #define NAMESPACE action_command_smack
 

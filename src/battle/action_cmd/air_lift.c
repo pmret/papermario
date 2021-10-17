@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "battle/battle.h"
+#include "hud_element.h"
 
 #define NAMESPACE action_command_air_lift
 

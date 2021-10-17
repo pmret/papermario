@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 // Probably only used here, but could theoretically be used in the main menu too
 typedef struct {
@@ -409,7 +410,7 @@ void pause_badges_load_badges(s32 onlyEquipped) {
 
     page = &gBadgeMenuPages[0];
     i = 0;
-   
+
     for (i = 0; i < gBadgeMenuNumItems / 8; i++, page++) {
         page->listStart = i * 8;
         page->numCols = 1;

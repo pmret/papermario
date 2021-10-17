@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "battle/battle.h"
+#include "hud_element.h"
 #include "message_ids.h"
 
 s32 D_80280FC0[] = {
