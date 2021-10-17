@@ -2305,7 +2305,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
     f32 x2, y2, z2;
     s32 attackBoost;
 
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
 
@@ -2361,9 +2361,9 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 1:
             if (script->functionTemp[3] == 0) {
-                playFX_33(2, x1, y1, z1, 1.0f, 0x1E);
+                playFX_33(2, x1, y1, z1, 1.0f, 30);
                 func_8024E3D8(0x13);
-                script->functionTemp[3] = 0x1E;
+                script->functionTemp[3] = 30;
                 script->functionTemp[0] = 2;
             } else {
                 script->functionTemp[3]--;
@@ -2372,16 +2372,16 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
             break;
         case 2:
             if (script->functionTemp[3] == 0) {
-                dispatch_event_actor(actor, 0x3F);
+                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
                 func_8024E40C(2);
                 btl_cam_move(0xF);
                 actor->isGlowing = 1;
                 actor->attackBoost += attackBoost;
-                if (actor->attackBoost >= 0x15) {
-                    actor->attackBoost = 0x14U;
+                if (actor->attackBoost > 20) {
+                    actor->attackBoost = 20;
                 }
-                playFX_56(attackBoost - 1, x2, y2, z2, 1.0f, 0x3C);
-                script->functionTemp[3] = 0xF;
+                playFX_56(attackBoost - 1, x2, y2, z2, 1.0f, 60);
+                script->functionTemp[3] = 15;
                 script->functionTemp[0] = 3;
             } else {
                 script->functionTemp[3]--;
@@ -2390,7 +2390,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(0x1D, 0x3C, attackBoost);
+                btl_show_variable_battle_message(0x1D, 60, attackBoost);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -2400,7 +2400,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
         case 4:
             if (btl_is_popup_displayed() == 0) {
                 func_8024E40C(2);
-                script->functionTemp[3] = 0xA;
+                script->functionTemp[3] = 10;
                 script->functionTemp[0] = 5;
             }
             break;
