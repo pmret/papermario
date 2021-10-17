@@ -127,57 +127,27 @@ INCLUDE_ASM(ApiStatus, "evt/fx_api", ShowSleepBubble, Evt* script, s32 isInitial
 
 INCLUDE_ASM(ApiStatus, "evt/fx_api", func_802D8248, Evt* script, s32 isInitialCall);
 
-// So close aside from regalloc at the beginning
-#ifdef NON_MATCHING
 ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
-    Bytecode* args;
-    Bytecode* intArgs;
-    Bytecode* floatArgs;
-    s32 effectID;
-    EffectInstance* effectRet;
+    Bytecode* intArgs = script->ptrReadPos;
+    Bytecode* floatArgs = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
-    s32 a2;
-    s32 a6;
-    s32 a7;
-    s32 a8;
-    s32 a9;
-
+    s32 effectID = evt_get_variable(script, *intArgs++);
+    EffectInstance* effectRet = NULL;
     s32 new_var;
-    s32 iVar1;
-    s32 iVar2;
-    s32 iVar3;
-    s32 iVar4;
-    s32 iVar5;
-    s32 iVar6;
-    s32 iVar7;
-    s32 iVar8;
-    s32 iVar9;
-    s32 iVar10;
 
-    f32 fVar1;
-    f32 fVar2;
-    f32 fVar3;
-    f32 fVar4;
-    f32 fVar5;
-    f32 fVar6;
-    f32 fVar7;
-    f32 fVar8;
-    f32 fVar9;
-    f32 fVar10;
-    f32 fVar11;
+    s32 iVar1, iVar2, iVar3, iVar4, iVar5;
+    s32 iVar6, iVar7, iVar8, iVar9, iVar10;
 
-    s32 sp3C;
-    s32 sp30;
-    s32 sp38;
+    f32 fVar1, fVar2, fVar3, fVar4, fVar5, fVar6;
+    f32 fVar7, fVar8, fVar9, fVar10, fVar11;
 
-    args = script->ptrReadPos;
-    intArgs = script->ptrReadPos;
-    floatArgs = script->ptrReadPos;
+    s32 sp30, sp34, sp38, sp3C;
 
-    effectID = evt_get_variable(script, *args++); // todo maybe increment later on
+    s32 a2, a6, a7, a8, a9;
 
-    evt_get_variable(script, *intArgs++);
     evt_get_variable(script, *floatArgs++);
+    evt_get_variable(script, *args++);
 
     new_var = evt_get_variable(script, *intArgs++);
     iVar2 = evt_get_variable(script, *intArgs++);
@@ -207,19 +177,17 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     evt_get_float_variable(script, *floatArgs++);
     evt_get_float_variable(script, *floatArgs++);
 
-    args++; // 1
+    args++;
     a2 = *args++;
-    args++; // 3
-    args++; // 4
-    args++; // 5
+    args++;
+    args++;
+    args++;
     a6 = *args++;
     a7 = *args++;
     a8 = *args++;
     a9 = *args++;
 
     iVar1 = new_var;
-
-    effectRet = NULL;
 
     switch (effectID) {
         case 0:
@@ -293,8 +261,8 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             playFX_1A(iVar1, fVar2, fVar3, fVar4, iVar5);
             break;
         case 27:
-            playFX_1B(iVar1, fVar2, fVar3, fVar4, fVar5, &sp38);
-            evt_set_variable(script, a6, sp38);
+            playFX_1B(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+            evt_set_variable(script, a6, sp34);
             break;
         case 28:
             playFX_1C(iVar1, fVar2, fVar3, fVar4, iVar5);
@@ -341,8 +309,8 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             playFX_2B(iVar1, fVar2, fVar3, fVar4);
             break;
         case 32:
-            playFX_20(iVar1, fVar2, fVar3, fVar4, fVar5, &sp38);
-            evt_set_variable(script, a6, sp38);
+            playFX_20(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+            evt_set_variable(script, a6, sp34);
             break;
         case 44:
             playFX_2C(iVar1, fVar2, fVar3, fVar4);
@@ -370,12 +338,12 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             playFX_33(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
         case 52:
-            playFX_34(iVar1, fVar2, fVar3, fVar4, fVar5, &sp38);
-            evt_set_variable(script, a6, sp38);
+            playFX_34(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+            evt_set_variable(script, a6, sp34);
             break;
         case 53:
-            playFX_35(iVar1, fVar2, fVar3, fVar4, fVar5, &sp38);
-            evt_set_variable(script, a6, sp38);
+            playFX_35(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+            evt_set_variable(script, a6, sp34);
             break;
         case 54:
             effectRet = playFX_36(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
@@ -393,12 +361,12 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             playFX_3A(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7, iVar8);
             break;
         case 59:
-            playFX_3B(iVar1, fVar2, fVar3, fVar4, fVar5, &sp38);
-            evt_set_variable(script, a6, sp38);
+            playFX_3B(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+            evt_set_variable(script, a6, sp34);
             break;
         case 60:
-            playFX_3C(iVar1, fVar2, fVar3, fVar4, fVar5, &sp38);
-            evt_set_variable(script, a6, sp38);
+            playFX_3C(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+            evt_set_variable(script, a6, sp34);
             break;
         case 61:
             playFX_3D(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, &sp3C);
@@ -621,6 +589,3 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(ApiStatus, "evt/fx_api", PlayEffect, Evt* script, s32 isInitialCall);
-#endif
