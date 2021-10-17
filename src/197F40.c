@@ -2413,8 +2413,9 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
                 D_8029FBD4 = 0;
                 return ApiStatus_DONE2;
             }
+            break;
     }
-            return ApiStatus_BLOCK;
+        return ApiStatus_BLOCK;
 }
 
 INCLUDE_ASM(s32, "197F40", BoostDefense);
