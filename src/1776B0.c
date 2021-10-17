@@ -136,7 +136,7 @@ ApiStatus func_8024CE9C(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "1776B0", btl_cam_use_preset);
 
-void func_8024E3D8(arg0) {
+void func_8024E3D8(s32 arg0) {
     if (D_80280CE0 == 0) {
         D_8029F2A4 = 1;
         btl_cam_use_preset(arg0);
