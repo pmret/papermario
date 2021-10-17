@@ -128,62 +128,23 @@ INCLUDE_ASM(ApiStatus, "evt/fx_api", ShowSleepBubble, Evt* script, s32 isInitial
 INCLUDE_ASM(ApiStatus, "evt/fx_api", func_802D8248, Evt* script, s32 isInitialCall);
 
 ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
-    Bytecode* args;
-    Bytecode* intArgs;
-    Bytecode* floatArgs;
-    s32 effectID;
-    EffectInstance* effectRet;
+    Bytecode* intArgs = script->ptrReadPos;
+    Bytecode* floatArgs = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
+    s32 effectID = evt_get_variable(script, *intArgs++);
+    EffectInstance* effectRet = NULL;
     s32 new_var;
-    s32 iVar1;
-    s32 iVar2;
-    s32 iVar3;
-    s32 iVar4;
-    s32 iVar5;
-    s32 iVar6;
-    s32 iVar7;
-    s32 iVar8;
-    s32 iVar9;
-    s32 iVar10;
-    s32 iVar11;
-    s32 iVar12;
-    s32 iVar13;
 
-    f32 fVar1;
-    f32 fVar2;
-    f32 fVar3;
-    f32 fVar4;
-    f32 fVar5;
-    f32 fVar6;
-    f32 fVar7;
-    f32 fVar8;
-    f32 fVar9;
-    f32 fVar10;
-    f32 fVar11;
-    f32 fVar12;
-    f32 fVar13;
+    s32 iVar1, iVar2, iVar3, iVar4, iVar5;
+    s32 iVar6, iVar7, iVar8, iVar9, iVar10;
 
-    s32 sp30;
-    s32 sp34;
-    s32 sp38;
-    s32 sp3C;
+    f32 fVar1, fVar2, fVar3, fVar4, fVar5, fVar6;
+    f32 fVar7, fVar8, fVar9, fVar10, fVar11;
 
-    s32 a1;
-    s32 a2;
-    s32 a3;
-    s32 a4;
-    s32 a5;
-    s32 a6;
-    s32 a7;
-    s32 a8;
-    s32 a9;
+    s32 sp30, sp34, sp38, sp3C;
 
-    intArgs = script->ptrReadPos;
-    floatArgs = script->ptrReadPos;
-    args = script->ptrReadPos;
-
-
-    effectID = evt_get_variable(script, *intArgs++);
+    s32 a2, a6, a7, a8, a9;
 
     evt_get_variable(script, *floatArgs++);
     evt_get_variable(script, *args++);
@@ -198,9 +159,9 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     iVar8 = evt_get_variable(script, *intArgs++);
     iVar9 = evt_get_variable(script, *intArgs++);
     iVar10 = evt_get_variable(script, *intArgs++);
-    iVar11 = evt_get_variable(script, *intArgs++);
-    iVar12 = evt_get_variable(script, *intArgs++);
-    iVar13 = evt_get_variable(script, *intArgs++);
+    evt_get_variable(script, *intArgs++);
+    evt_get_variable(script, *intArgs++);
+    evt_get_variable(script, *intArgs++);
 
     fVar1 = evt_get_float_variable(script, *floatArgs++);
     fVar2 = evt_get_float_variable(script, *floatArgs++);
@@ -213,21 +174,20 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     fVar9 = evt_get_float_variable(script, *floatArgs++);
     fVar10 = evt_get_float_variable(script, *floatArgs++);
     fVar11 = evt_get_float_variable(script, *floatArgs++);
-    fVar12 = evt_get_float_variable(script, *floatArgs++);
-    fVar13 = evt_get_float_variable(script, *floatArgs++);
+    evt_get_float_variable(script, *floatArgs++);
+    evt_get_float_variable(script, *floatArgs++);
 
-    a1 = *args++;
+    args++;
     a2 = *args++;
-    a3 = *args++;
-    a4 = *args++;
-    a5 = *args++;
+    args++;
+    args++;
+    args++;
     a6 = *args++;
     a7 = *args++;
     a8 = *args++;
     a9 = *args++;
 
     iVar1 = new_var;
-    effectRet = NULL;
 
     switch (effectID) {
         case 0:
