@@ -183,7 +183,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     args = script->ptrReadPos;
 
 
-    effectID = evt_get_variable(script, *intArgs++); // todo maybe increment later on
+    effectID = evt_get_variable(script, *intArgs++);
 
     evt_get_variable(script, *floatArgs++);
     evt_get_variable(script, *args++);
@@ -216,11 +216,11 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     fVar12 = evt_get_float_variable(script, *floatArgs++);
     fVar13 = evt_get_float_variable(script, *floatArgs++);
 
-    a1 = *args++; // 1
+    a1 = *args++;
     a2 = *args++;
-    a3 = *args++; // 3
-    a4 = *args++; // 4
-    a5 = *args++; // 5
+    a3 = *args++;
+    a4 = *args++;
+    a5 = *args++;
     a6 = *args++;
     a7 = *args++;
     a8 = *args++;
