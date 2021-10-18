@@ -544,6 +544,7 @@ void dispatch_event_actor(Actor*, s32);
 void btl_show_variable_battle_message(s32, s32, s32);
 s32 btl_is_popup_displayed(void);
 void func_8024E3D8(s32);
+s32 inflict_status(Actor*, s32, s32);
 
 void enforce_hpfp_limits(void);
 
