@@ -1,10 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 from disasm_script import ScriptDisassembler, get_constants
 from glob import glob
 
 NAMESPACES = {
     "src/battle/area_kmr_part_1/stage/clouds.inc.c": "b_area_kmr_part_1_kmr_03",
+    "src/world/common/foliage.inc.c": "kmr_03",
 }
 
 for filename in glob("src/battle/item/*.c"):

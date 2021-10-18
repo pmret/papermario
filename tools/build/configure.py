@@ -359,7 +359,7 @@ class Configure:
                     task = "cxx"
                 with entry.src_paths[0].open() as f:
                     s = f.read()
-                    if "SCRIPT(" in s or "#pragma SCRIPT" in s or "#include \"world/common/foliage.inc.c\"" in s:
+                    if " SCRIPT(" in s or "#pragma SCRIPT" in s:
                         task = "cc_dsl"
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
