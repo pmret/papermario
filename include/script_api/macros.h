@@ -108,4 +108,6 @@
 #define EVT_CHILD_THREAD                        EVT_CMD(EVT_OP_CHILD_THREAD),
 #define EVT_END_CHILD_THREAD                    EVT_CMD(EVT_OP_END_CHILD_THREAD),
 
+#define EVT_CALL(FUNC, ...)                     EVT_CMD(EVT_OP_CALL, (Bytecode) FUNC, ##__VA_ARGS__),
+
 #endif

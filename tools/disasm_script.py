@@ -735,8 +735,14 @@ class ScriptDisassembler:
         elif opcode == 0x41: self.write_line(f"EVT_BITWISE_AND_CONST({self.var(argv[0])}, 0x{argv[1]:X})")
         elif opcode == 0x42: self.write_line(f"EVT_BITWISE_OR_CONST({self.var(argv[0])}, 0x{argv[1]:X})")
         elif opcode == 0x43:
+            func = self.addr_ref(argv[0])
             args = [*map(self.var, argv[1:])]
-            self.write_line(f"{self.addr_ref(argv[0])}({', '.join(args)})")
+            if func.startswith("evt_"):
+                # use func-specific macro
+                self.write_line(f"{func}({', '.join(args)})")
+            else:
+                args.insert(0, func)
+                self.write_line(f"EVT_CALL({', '.join(args)})")
         elif opcode == 0x44: self.write_line(f"EVT_EXEC({self.addr_ref(argv[0])})")
         elif opcode == 0x45: self.write_line(f"EVT_EXEC_GET_TID({self.addr_ref(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x46: self.write_line(f"EVT_EXEC_WAIT({self.addr_ref(argv[0])})")
