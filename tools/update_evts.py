@@ -16,6 +16,9 @@ for filename in glob("src/world/*/*/*.c"):
     map_name = filename.split("/")[3]
     NAMESPACES[filename] = map_name
 
+class UserException(Exception):
+    pass
+
 class Range:
     def __init__(self, start: int, end: int, symbol_name: str, namespace: str):
         self.start = start
@@ -97,10 +100,10 @@ def replace_old_script_macros(filename, symbol_addrs):
             try:
                 range_sym = symbol_addrs[range.symbol_name]
             except KeyError:
-                raise Exception(f"Symbol {range.symbol_name} is not in symbol_addrs")
+                raise UserException(f"Symbol {range.symbol_name} is not in symbol_addrs")
 
             if not range_sym.rom_addr:
-                raise Exception(f"Symbol {range.symbol_name} lacks a rom address in symbol_addrs")
+                raise UserException(f"Symbol {range.symbol_name} lacks a rom address in symbol_addrs")
 
             # Make local symbol map, replacing namespaced symbols with N(sym)
             local_symbol_map = {}
@@ -151,7 +154,7 @@ if __name__ == "__main__":
                 num_scripts_replaced = replace_old_script_macros(filename, symbol_addrs)
                 if num_scripts_replaced > 0:
                     print(f"{num_scripts_replaced} old script replaced in {filename}")
-            except Exception as e:
+            except UserException as e:
                 print(f"{filename} ERROR: {e}")
                 num_errors += 1
 

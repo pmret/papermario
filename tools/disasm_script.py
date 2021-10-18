@@ -176,20 +176,26 @@ def make_anim_macro(self, sprite, palette, anim):
     else:
         return f"0x{sprite:02X}{palette:02X}{anim:02X}"
 
+def remove_evt_ptr(s):
+    if s.startswith("EVT_PTR("):
+        return s[8:-1]
+    else:
+        return s
+
 def fix_args(self, func, args, info):
     global CONSTANTS
 
     new_args = []
     args = args.split(", ")
     for i,arg in enumerate(args):
-        if ((arg == "D_80000000") or arg == "EVT_PTR(D_80000000)" or (arg.startswith("D_B")) or
+        if ((remove_evt_ptr(arg) == "D_80000000") or (remove_evt_ptr(arg).startswith("D_B")) or
             (i == 0 and func == "MakeEntity" and arg.startswith("D_"))):
             if func == "MakeEntity":
                 arg = "MAKE_ENTITY_END"
             else:
-                arg = "0x" + arg[2:]
-        if "0x" in arg and int(arg, 16) >= 0xF0000000:
-            arg = f"{int(arg, 16) - 0x100000000}"
+                arg = "0x" + remove_evt_ptr(arg)[2:]
+        if "0x" in arg and int(remove_evt_ptr(arg), 16) >= 0xF0000000:
+            arg = f"{int(remove_evt_ptr(arg), 16) - 0x100000000}"
         if i in info or (i+1 == len(args) and -1 in info):
             if i+1 == len(args) and -1 in info:
                 i = -1
