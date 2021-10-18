@@ -387,6 +387,8 @@ extern s32 D_802920C0[];
 extern s32 D_802920E8[];
 extern s32 D_80292110[];
 
+extern s32 D_8029FBD0;
+
 extern s32 D_800F7BE8[];
 extern s32 D_800F7BBC[];
 
