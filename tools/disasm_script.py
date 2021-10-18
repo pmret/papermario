@@ -253,7 +253,7 @@ def fix_args(self, func, args, info):
                     if argNum in CONSTANTS["MAP_NPCS"]:
                         new_args.append(CONSTANTS["MAP_NPCS"][argNum])
                     else:
-                        new_args.append(str(i))
+                        new_args.append(str(argNum))
                 else:
                     new_args.append(CONSTANTS["NpcIDs"][argNum])
             elif info[i] == "DamageTypes":
