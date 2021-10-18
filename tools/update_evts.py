@@ -1,19 +1,32 @@
 #!/usr/bin/python3
 
-from disasm_script import ScriptDisassembler
+from disasm_script import ScriptDisassembler, get_constants
+from glob import glob
 
-NAMESPACES = {
-    "src/battle/item/thunder_bolt.c": "battle_item_thunder_bolt",
-    "src/battle/item/strange_cake.c": "battle_item_strange_cake",
-    "src/battle/item/tasty_tonic.c": "battle_item_tasty_tonic",
-    "src/battle/item/egg_missile.c": "battle_item_egg_missile",
-}
+NAMESPACES = {}
+
+for filename in glob("src/battle/item/*.c"):
+    parts = filename.split("/")[1:]
+    parts[-1] = parts[-1].split(".")[0]
+    NAMESPACES[filename] = "_".join(parts)
+
+NAMESPACES["src/battle/item/UseItem.inc.c"] = "battle_item_food"
+
+for filename in glob("src/world/*/*/*.c"):
+    map_name = filename.split("/")[3]
+    NAMESPACES[filename] = map_name
 
 class Range:
-    def __init__(self, start: int, end: int, symbol_name: str):
+    def __init__(self, start: int, end: int, symbol_name: str, namespace: str):
         self.start = start
         self.end = end
         self.symbol_name = symbol_name
+        self.namespace = namespace
+
+class Symbol:
+    def __init__(self, ram_addr, rom_addr):
+        self.ram_addr = ram_addr
+        self.rom_addr = rom_addr
 
 def parse_symbol_addrs():
     with open("ver/us/symbol_addrs.txt", "r") as f:
@@ -25,9 +38,10 @@ def parse_symbol_addrs():
         name = line[:line.find(" ")]
 
         attributes = line[line.find("//"):].split(" ")
+        ram_addr = int(line[:line.find(";")].split("=")[1].strip(), base=0)
         rom_addr = next((int(attr.split(":")[1], base=0) for attr in attributes if attr.split(":")[0] == "rom"), None)
 
-        symbol_addrs[name] = rom_addr
+        symbol_addrs[name] = Symbol(ram_addr, rom_addr)
 
     return symbol_addrs
 
@@ -38,7 +52,7 @@ def find_old_script_ranges(lines, filename):
 
     start_line_no = None
     symbol_name = None
-    namespace = NAMESPACES.get(filename, "UNK_NAMESPACE")
+    namespace = NAMESPACES.get(filename, filename.split("/")[-1].split(".")[0])
 
     for line_no, line_content in enumerate(lines):
         if "#define NAMESPACE " in line_content:
@@ -48,7 +62,7 @@ def find_old_script_ranges(lines, filename):
             start_line_no = line_no
             symbol_name = eval_namespace(line_content.split(" ")[1], namespace)
         elif "});" in line_content and start_line_no is not None:
-            yield Range(start_line_no, line_no, symbol_name)
+            yield Range(start_line_no, line_no, symbol_name, namespace)
             start_line_no = None
 
 def eval_namespace(sym, namespace):
@@ -56,11 +70,6 @@ def eval_namespace(sym, namespace):
         return namespace + "_" + sym[2:-1]
     else:
         return sym
-
-def all_source_files():
-    from glob import glob
-
-    return glob("src/**/*.c", recursive=True)
 
 def replace_old_script_macros(filename, symbol_addrs):
     with open(filename, "r") as f:
@@ -85,22 +94,42 @@ def replace_old_script_macros(filename, symbol_addrs):
             lines = lines[:range.start + 1] + lines[range.end + 1:]
 
             # Find the symbol
-            rom_addr = symbol_addrs[range.symbol_name]
+            try:
+                range_sym = symbol_addrs[range.symbol_name]
+            except KeyError:
+                raise Exception(f"Symbol {range.symbol_name} is not in symbol_addrs")
 
-            if not rom_addr:
+            if not range_sym.rom_addr:
                 raise Exception(f"Symbol {range.symbol_name} lacks a rom address in symbol_addrs")
 
+            # Make local symbol map, replacing namespaced symbols with N(sym)
+            local_symbol_map = {}
+            for sym in symbol_addrs:
+                if sym.startswith(range.namespace):
+                    key = "N(" + sym[len(range.namespace)+1:] + ")"
+                else:
+                    key = sym
+
+                symbol = symbol_addrs[sym]
+
+                if symbol.ram_addr in local_symbol_map:
+                    cur_sym_name = local_symbol_map[symbol.ram_addr][0][1]
+                    if cur_sym_name.startswith("N("):
+                        continue
+
+                local_symbol_map[symbol.ram_addr] = [[symbol.ram_addr, key]]
+
             # Disassemble the script
-            rom.seek(rom_addr)
+            rom.seek(range_sym.rom_addr)
             evt_code = ScriptDisassembler(rom,
                 script_name=range.symbol_name,
-                romstart=rom_addr,
+                romstart=range_sym.rom_addr,
                 prelude=False,
+                symbol_map=local_symbol_map,
             ).disassemble()
             lines.insert(range.start + 1, f"{evt_code}}};\n")
 
             num_scripts_replaced += 1
-            print(range.symbol_name)
 
     if num_scripts_replaced > 0:
         with open(filename, "w") as f:
@@ -109,10 +138,26 @@ def replace_old_script_macros(filename, symbol_addrs):
     return num_scripts_replaced
 
 if __name__ == "__main__":
-    symbol_addrs = parse_symbol_addrs()
+    import sys
 
-    for filename in all_source_files():
-        print(f"Updating {filename}")
-        num_scripts_replaced = replace_old_script_macros(filename, symbol_addrs)
-        #if num_scripts_replaced > 0:
-        #    break
+    symbol_addrs = parse_symbol_addrs()
+    get_constants()
+
+    num_errors = 0
+
+    if len(sys.argv) > 1:
+        for filename in sys.argv[1:]:
+            try:
+                num_scripts_replaced = replace_old_script_macros(filename, symbol_addrs)
+                if num_scripts_replaced > 0:
+                    print(f"{num_scripts_replaced} old script replaced in {filename}")
+            except Exception as e:
+                print(f"{filename} ERROR: {e}")
+                num_errors += 1
+
+        if num_errors > 0:
+            print(f"ERROR: {num_errors} files had errors.")
+            exit(1)
+    else:
+        print("warning: no files specified")
+        print("usage: ./tools/update_evts.c <files to modify>")

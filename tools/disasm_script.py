@@ -151,34 +151,16 @@ def get_constants():
     for file in sprite_path.iterdir():
         fd = file.read_text()
         for line in fd.splitlines():
-            if "#define _NPC_SPRITE_" in line:
-                enum = "NPC_SPRITE"
-            elif "#define _NPC_PALETTE_" in line:
-                enum = "NPC_PALETTE"
-            elif "#define _NPC_ANIM_" in line:
-                enum = "NPC_ANIM"
-            else:
+            if "#define NPC_ANIM_" not in line:
                 continue
 
-            name = line.split(" ",2)[1]
-            id_ = line.split("0x", 1)[1]
-            if " " in id_:
-                id_ = id_.split(" ",1)[0]
-            name = name.split(f"_{enum}_", 1)[1]
-            if enum == "NPC_SPRITE":
-                saved_name = name
-                saved_id = id_
-            else:
-                name = name.rsplit(f"{saved_name}_")[1]
+            header_file_name = file.parts[-1]
 
-            if enum == "NPC_SPRITE":
-                if int(id_, 16) not in CONSTANTS["NPC_SPRITE"]:
-                    CONSTANTS[enum][int(id_, 16)] = {"name":"", "palettes":{}, "anims":{}}
-                CONSTANTS[enum][int(id_, 16)]["name"] = name
-            elif enum == "NPC_PALETTE":
-                CONSTANTS["NPC_SPRITE"][int(saved_id, 16)]["palettes"][int(id_, 16)] = name
-            elif enum == "NPC_ANIM":
-                CONSTANTS["NPC_SPRITE"][int(saved_id, 16)]["anims"][int(id_, 16)] = name
+            name = line.split(" ",2)[1]
+            value = int(line.split("0x", 1)[1], base=16)
+
+            CONSTANTS["NPC_SPRITE"][value] = name
+            CONSTANTS["NPC_SPRITE"][str(value) + ".h"] = header_file_name
 
     return
 
@@ -186,22 +168,13 @@ def make_anim_macro(self, sprite, palette, anim):
     if sprite == 0xFF and palette == 0xFF and anim == 0xFF:
         return "-1"
 
-    call = "NPC_ANIM("
-    if sprite in CONSTANTS["NPC_SPRITE"]:
-        call += f"{CONSTANTS['NPC_SPRITE'][sprite]['name']}, "
-        if palette in CONSTANTS["NPC_SPRITE"][sprite]["palettes"]:
-            call += f"{CONSTANTS['NPC_SPRITE'][sprite]['palettes'][palette]}, "
-        else:
-            call += f"0x{palette:02X}, "
-        if anim in CONSTANTS["NPC_SPRITE"][sprite]["anims"]:
-            call += f"{CONSTANTS['NPC_SPRITE'][sprite]['anims'][anim]}"
-        else:
-            call += f"0x{anim:02X}"
-        call += ")"
-        self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][sprite]['name'])
+    value = (sprite << 16) | (palette << 8) | anim
+
+    if value in CONSTANTS["NPC_SPRITE"]:
+        self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
+        return CONSTANTS['NPC_SPRITE'][value]
     else:
-        call += f"0x{sprite:02X}, 0x{palette:02X}, 0x{anim:02X})"
-    return call
+        return f"0x{sprite:02X}{palette:02X}{anim:02X}"
 
 def fix_args(self, func, args, info):
     global CONSTANTS
@@ -211,7 +184,10 @@ def fix_args(self, func, args, info):
     for i,arg in enumerate(args):
         if ((arg == "D_80000000") or (arg.startswith("D_B")) or
             (i == 0 and func == "MakeEntity" and arg.startswith("D_"))):
-            arg = "0x" + arg[2:]
+            if func == "MakeEntity":
+                arg = "MAKE_ENTITY_END"
+            else:
+                arg = "0x" + arg[2:]
         if "0x" in arg and int(arg, 16) >= 0xF0000000:
             arg = f"{int(arg, 16) - 0x100000000}"
         if i in info or (i+1 == len(args) and -1 in info):
@@ -347,7 +323,7 @@ replace_funcs = {
 
     "JumpToGoal"                :{0:"ActorIDs"},
 
-    "MakeEntity"                :{0:"Hex", 5:"ItemIDs"},
+    "MakeEntity"                :{0:"Hex"},
     "MakeItemEntity"            :{0:"ItemIDs"},
     "ModifyColliderFlags"       :{2:"Hex"},
 
@@ -434,7 +410,7 @@ def replace_constants(self, func, args):
     return args
 
 class ScriptDisassembler:
-    def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {}, INCLUDED = {"functions": set(), "includes": set()}, prelude = True):
+    def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {"forward": [], "sprites": set(), "npcs": []}, INCLUDED = {"functions": set(), "includes": set()}, prelude = True):
         self.bytes = bytes
         self.script_name = script_name
         self.prelude = prelude
@@ -495,13 +471,14 @@ class ScriptDisassembler:
         self.prefix += line
         self.prefix += "\n"
 
-    def var(self, arg):
+    def var(self, arg, prefer_hex = False, use_evt_ptr = True):
         if arg in self.symbol_map:
-            return self.symbol_map[arg][0][1]
+            s = self.symbol_map[arg][0][1]
+            return f"EVT_PTR({s})" if use_evt_ptr else s
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
-            if v <= -220000000: return f"EVT_FIXED({(v + 230000000) / 1024})"
+            if v <= -220000000: return f"EVT_FIXED({round_fixed((v + 230000000) / 1024)})"
             elif v <= -200000000: return f"EVT_ARRAY_FLAG({v + 210000000})"
             elif v <= -180000000: return f"EVT_ARRAY({v + 190000000})"
             elif v <= -160000000: return f"EVT_SAVE_VAR({v + 170000000})"
@@ -519,6 +496,8 @@ class ScriptDisassembler:
             return f"0x{arg:X}"
         elif arg >= 0x80000000:
             return f"{arg - 0x100000000}"
+        elif prefer_hex and arg > 0:
+            return f"0x{arg:X}"
         else:
             return f"{arg}"
 
@@ -534,7 +513,7 @@ class ScriptDisassembler:
             name = self.symbol_map[addr][0][1]
             toReplace = True
             suffix = ""
-            if name.startswith("N(func_"):
+            if False and name.startswith("N(func_"):
                 prefix = "ApiStatus "
                 name = self.replace_star_rod_function_name(name[2:-1])
                 suffix = "(Evt* script, s32 isInitialCall)"
@@ -631,10 +610,10 @@ class ScriptDisassembler:
             self.write_line(f"EVT_IF_GE({self.var(argv[0])}, {self.var(argv[1])})")
             self.indent += 1
         elif opcode == 0x10:
-            self.write_line(f"EVT_IF_FLAG({self.var(argv[0])}, {self.var(argv[1])})")
+            self.write_line(f"EVT_IF_FLAG({self.var(argv[0])}, {self.var(argv[1], prefer_hex=True)})")
             self.indent += 1
         elif opcode == 0x11:
-            self.write_line(f"EVT_IF_NOT_FLAG(({self.var(argv[0])}, {self.var(argv[1])})")
+            self.write_line(f"EVT_IF_NOT_FLAG({self.var(argv[0])}, {self.var(argv[1], prefer_hex=True)})")
             self.indent += 1
         elif opcode == 0x12:
             self.indent -= 1
@@ -702,7 +681,18 @@ class ScriptDisassembler:
             self.indent -= 2
             self.write_line(f"EVT_END_SWITCH")
         elif opcode == 0x24: self.write_line(f"EVT_SET({self.var(argv[0])}, {self.var(argv[1])})")
-        elif opcode == 0x25: self.write_line(f"EVT_SET_CONST({self.var(argv[0])}, 0x{argv[1]:X})")
+        elif opcode == 0x25:
+            argNum = argv[1]
+            sprite  = (argNum & 0xFF0000) >> 16
+            palette = (argNum & 0xFF00)   >> 8
+            anim    = (argNum & 0xFF)     >> 0
+
+            if sprite > 0:
+                value = make_anim_macro(self, sprite, palette, anim)
+            else:
+                value = f"0x{argNum:08X}"
+
+            self.write_line(f"EVT_SET_CONST({self.var(argv[0])}, {value})")
         elif opcode == 0x26: self.write_line(f"EVT_SETF({self.var(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x27: self.write_line(f"EVT_ADD({self.var(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x28: self.write_line(f"EVT_SUB({self.var(argv[0])}, {self.var(argv[1])})")
@@ -736,13 +726,18 @@ class ScriptDisassembler:
         elif opcode == 0x42: self.write_line(f"EVT_BITWISE_OR_CONST({self.var(argv[0])}, 0x{argv[1]:X})")
         elif opcode == 0x43:
             func = self.addr_ref(argv[0])
-            args = [*map(self.var, argv[1:])]
+            args = [self.var(a, use_evt_ptr=True) for a in argv[1:]]
+            args_str = ', '.join(args)
+
+            args_str = replace_constants(self, func, args_str)
+
             if func.startswith("evt_"):
                 # use func-specific macro
-                self.write_line(f"{func}({', '.join(args)})")
+                self.write_line(f"{func}({args_str})")
+            elif args_str:
+                self.write_line(f"EVT_CALL({func}, {args_str})")
             else:
-                args.insert(0, func)
-                self.write_line(f"EVT_CALL({', '.join(args)})")
+                self.write_line(f"EVT_CALL({func})") # no args
         elif opcode == 0x44: self.write_line(f"EVT_EXEC({self.addr_ref(argv[0])})")
         elif opcode == 0x45: self.write_line(f"EVT_EXEC_GET_TID({self.addr_ref(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x46: self.write_line(f"EVT_EXEC_WAIT({self.addr_ref(argv[0])})")
