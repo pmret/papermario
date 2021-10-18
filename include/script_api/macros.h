@@ -3,6 +3,15 @@
 
 #include "evt.h"
 
+
+/****** INSTRUCTIONS **************************************************************************************************/
+
+// TODO: make it clear that this is an internal macro, e.g. prefix it with _
+#define EVT_CMD(opcode, argv...) \
+    opcode, \
+    /* argc */ (sizeof((Bytecode[]){argv})/sizeof(Bytecode)), \
+    ##argv
+
 #define EVT_END                                 EVT_CMD(EVT_OP_END),
 #define EVT_RETURN                              EVT_CMD(EVT_OP_RETURN),
 #define EVT_JUMP(EVT_SOURCE)                    EVT_CMD(EVT_OP_JUMP, (Bytecode) EVT_SOURCE),
@@ -108,5 +117,19 @@
 #define EVT_END_CHILD_THREAD                    EVT_CMD(EVT_OP_END_CHILD_THREAD),
 
 #define EVT_CALL(FUNC, ...)                     EVT_CMD(EVT_OP_CALL, (Bytecode) FUNC, ##__VA_ARGS__),
+
+
+/****** COMMON SCRIPTS ************************************************************************************************/
+
+#define EXIT_WALK_SCRIPT(walkDistance, exitIdx, map, entryIdx) \
+    { \
+        EVT_SET_GROUP(0x1B) \
+        EVT_CALL(UseExitHeading, walkDistance, exitIdx) \
+        EVT_EXEC(ExitWalk) \
+        EVT_CALL(GotoMap, map, entryIdx) \
+        EVT_WAIT_FRAMES(100) \
+        EVT_RETURN \
+        EVT_END \
+    }
 
 #endif

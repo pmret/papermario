@@ -137,18 +137,4 @@ typedef s32 ApiStatus;
 #define ApiStatus_REPEAT 3   /* Call again immediately */
 #define ApiStatus_FINISH 255 /* Corresponds to EVT_FINISH */
 
-#define EVT_CMD(opcode, argv...) \
-    opcode, \
-    /* argc */ (sizeof((Bytecode[]){argv})/sizeof(Bytecode)), \
-    ##argv
-
-#define EXIT_WALK_SCRIPT(walkDistance, exitIdx, map, entryIdx) \
-    SCRIPT({ \
-        group 0x1B; \
-        UseExitHeading(walkDistance, exitIdx); \
-        spawn ExitWalk; \
-        GotoMap(map, entryIdx); \
-        sleep 100; \
-    })
-
 #endif
