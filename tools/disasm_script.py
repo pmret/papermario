@@ -182,7 +182,7 @@ def fix_args(self, func, args, info):
     new_args = []
     args = args.split(", ")
     for i,arg in enumerate(args):
-        if ((arg == "D_80000000") or (arg.startswith("D_B")) or
+        if ((arg == "D_80000000") or arg == "EVT_PTR(D_80000000)" or (arg.startswith("D_B")) or
             (i == 0 and func == "MakeEntity" and arg.startswith("D_"))):
             if func == "MakeEntity":
                 arg = "MAKE_ENTITY_END"

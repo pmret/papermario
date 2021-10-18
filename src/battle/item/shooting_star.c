@@ -93,73 +93,75 @@ ApiStatus N(func_802A14D4_71DC44)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_SHOOTING_STAR;
-    await N(UseItemWithEffect);
-    spawn {
-        sleep 5;
-        UseBattleCamPreset(2);
-        MoveBattleCamOver(20);
-    }
-    N(func_802A1444_71DBB4)();
-    spawn {
-        EVT_VAR(0) = 0;
-        loop 10 {
-            PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_259);
-            N(func_802A123C_71D9AC)();
-            EVT_VAR(0) += 1;
-            sleep 5;
-            PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_25A);
-            N(func_802A123C_71D9AC)();
-            EVT_VAR(0) += 1;
-            sleep 5;
-        }
-    }
-    spawn {
-        EVT_VAR(0) = 0;
-        sleep 50;
-        loop 10 {
-            PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_25C);
-            EVT_VAR(0) += 1;
-            sleep 5;
-            PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_25D);
-            EVT_VAR(0) += 1;
-            sleep 5;
-        }
-    }
-    spawn {
-        loop 5 {
-            sleep 15;
-            StartRumble(8);
-            ShakeCam(1, 0, 5, 1.0);
-        }
-    }
-    sleep 90;
-    UseBattleCamPreset(3);
-    MoveBattleCamOver(20);
-    InitTargetIterator();
-0:
-    SetGoalToTarget(ACTOR_SELF);
-    ItemCheckHit(EVT_VAR(0), 0x10000000, 0, EVT_VAR(0), 0);
-    if (EVT_VAR(0) == 6) {
-        goto 1;
-    }
-    GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    N(func_802A1388_71DAF8)(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    GetItemPower(ITEM_SHOOTING_STAR, EVT_VAR(0), EVT_VAR(1));
-    ItemDamageEnemy(EVT_VAR(0), 0x38000100, 0, EVT_VAR(0), 32);
-1:
-    sleep 10;
-    ChooseNextTarget(0, EVT_VAR(0));
-    if (EVT_VAR(0) != -1) {
-        goto 0;
-    }
-    sleep 20;
-    UseBattleCamPreset(2);
-    MoveBattleCamOver(20);
-    await N(PlayerGoHome);
-    spawn {
-        N(func_802A14D4_71DC44)();
-    }
-    sleep 30;
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x00000083)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
+    EVT_THREAD
+        EVT_WAIT_FRAMES(5)
+        EVT_CALL(UseBattleCamPreset, 2)
+        EVT_CALL(MoveBattleCamOver, 20)
+    EVT_END_THREAD
+    EVT_CALL(N(func_802A1444_71DBB4))
+    EVT_THREAD
+        EVT_SET(EVT_VAR(0), 0)
+        EVT_LOOP(10)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_259)
+            EVT_CALL(N(func_802A123C_71D9AC))
+            EVT_ADD(EVT_VAR(0), 1)
+            EVT_WAIT_FRAMES(5)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_25A)
+            EVT_CALL(N(func_802A123C_71D9AC))
+            EVT_ADD(EVT_VAR(0), 1)
+            EVT_WAIT_FRAMES(5)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_THREAD
+        EVT_SET(EVT_VAR(0), 0)
+        EVT_WAIT_FRAMES(50)
+        EVT_LOOP(10)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_25C)
+            EVT_ADD(EVT_VAR(0), 1)
+            EVT_WAIT_FRAMES(5)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_25D)
+            EVT_ADD(EVT_VAR(0), 1)
+            EVT_WAIT_FRAMES(5)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_THREAD
+        EVT_LOOP(5)
+            EVT_WAIT_FRAMES(15)
+            EVT_CALL(StartRumble, 8)
+            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.0))
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_WAIT_FRAMES(90)
+    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_CALL(InitTargetIterator)
+    EVT_LABEL(0)
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(ItemCheckHit, EVT_VAR(0), 268435456, 0, EVT_VAR(0), 0)
+    EVT_IF_EQ(EVT_VAR(0), 6)
+        EVT_GOTO(1)
+    EVT_END_IF
+    EVT_CALL(GetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(N(func_802A1388_71DAF8), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetItemPower, ITEM_SHOOTING_STAR, EVT_VAR(0), EVT_VAR(1))
+    EVT_CALL(ItemDamageEnemy, EVT_VAR(0), 939524352, 0, EVT_VAR(0), 32)
+    EVT_LABEL(1)
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(ChooseNextTarget, 0, EVT_VAR(0))
+    EVT_IF_NE(EVT_VAR(0), -1)
+        EVT_GOTO(0)
+    EVT_END_IF
+    EVT_WAIT_FRAMES(20)
+    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_EXEC_WAIT(N(PlayerGoHome))
+    EVT_THREAD
+        EVT_CALL(N(func_802A14D4_71DC44))
+    EVT_END_THREAD
+    EVT_WAIT_FRAMES(30)
+    EVT_RETURN
+    EVT_END
+};

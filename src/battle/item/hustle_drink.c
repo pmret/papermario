@@ -36,80 +36,82 @@ ApiStatus N(func_802A12C4_726224)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_HUSTLE_DRINK;
-    await N(UseItemWithEffect);
-    await N(DrinkItem);
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_SQUISH);
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(1) += 25;
-    func_802D7520(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5);
-    N(func_802A12C4_726224)();
-    N(func_802A123C_72619C)();
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(1) += 20;
-    UseBattleCamPreset(13);
-    BattleCamTargetActor(ACTOR_SELF);
-    MoveBattleCamOver(20);
-    PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_369);
-    spawn {
-        loop 2 {
-            SetActorScale(ACTOR_SELF, 1.0, 1.0, 1.0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.1005859375, 1.0, 1.0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.2001953125, 0.9501953125, 1.0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.30078125, 0.900390625, 1.0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.3505859375, 0.8505859375, 1.0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.380859375, 0.80078125, 1.0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.400390625, 0.80078125, 1.0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.30078125, 0.8505859375, 1.0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.2001953125, 0.900390625, 1.0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.1005859375, 0.9501953125, 1.0);
-            sleep 1;
-        }
-        SetActorScale(ACTOR_SELF, 1.0, 1.0, 1.0);
-        sleep 1;
-        SetActorScale(ACTOR_SELF, 1.1005859375, 1.0, 1.0);
-        sleep 1;
-        SetActorScale(ACTOR_SELF, 1.2001953125, 0.9501953125, 1.0);
-        sleep 1;
-        SetActorScale(ACTOR_SELF, 1.30078125, 0.900390625, 1.0);
-        sleep 1;
-        SetActorScale(ACTOR_SELF, 1.3505859375, 0.8505859375, 1.0);
-        sleep 1;
-        SetActorScale(ACTOR_SELF, 1.380859375, 0.80078125, 1.0);
-        sleep 1;
-        SetActorScale(ACTOR_SELF, 1.400390625, 0.80078125, 1.0);
-        sleep 1;
-        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_208E);
-        SetActorScale(ACTOR_SELF, 0.900390625, 1.30078125, 1.0);
-        sleep 1;
-        SetActorScale(ACTOR_SELF, 0.900390625, 1.2001953125, 1.0);
-        sleep 1;
-        SetActorScale(ACTOR_SELF, 0.9501953125, 1.1005859375, 1.0);
-        sleep 1;
-        SetActorScale(ACTOR_SELF, 1.0, 1.0, 1.0);
-        sleep 1;
-        SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    }
-    loop 10 {
-        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_369);
-        PlayEffect(0x6, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        PlayEffect(0x6, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        sleep 4;
-    }
-    sleep 10;
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_RUNNING);
-    UseBattleCamPreset(2);
-    MoveBattleCamOver(20);
-    sleep 20;
-    await N(PlayerGoHome);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x00000091)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
+    EVT_EXEC_WAIT(N(DrinkItem))
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_SQUISH)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(1), 25)
+    EVT_CALL(func_802D7520, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5)
+    EVT_CALL(N(func_802A12C4_726224))
+    EVT_CALL(N(func_802A123C_72619C))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(1), 20)
+    EVT_CALL(UseBattleCamPreset, 13)
+    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_369)
+    EVT_THREAD
+        EVT_LOOP(2)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.1), EVT_FIXED(1.0), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.2), EVT_FIXED(0.95), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.3), EVT_FIXED(0.9), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.35), EVT_FIXED(0.85), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.38), EVT_FIXED(0.8), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.4), EVT_FIXED(0.8), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.3), EVT_FIXED(0.85), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.2), EVT_FIXED(0.9), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.1), EVT_FIXED(0.95), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+        EVT_END_LOOP
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.1), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.2), EVT_FIXED(0.95), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.3), EVT_FIXED(0.9), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.35), EVT_FIXED(0.85), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.38), EVT_FIXED(0.8), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.4), EVT_FIXED(0.8), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_208E)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(0.9), EVT_FIXED(1.3), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(0.9), EVT_FIXED(1.2), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(0.95), EVT_FIXED(1.1), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_END_THREAD
+    EVT_LOOP(10)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_369)
+        EVT_CALL(PlayEffect, 0x6, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, 0x6, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_WAIT_FRAMES(4)
+    EVT_END_LOOP
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_WAIT_FRAMES(20)
+    EVT_EXEC_WAIT(N(PlayerGoHome))
+    EVT_RETURN
+    EVT_END
+};

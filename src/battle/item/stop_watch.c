@@ -22,36 +22,38 @@ ApiStatus N(func_802A12D4_7270A4)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_STOP_WATCH;
-    await N(UseItemWithEffect);
-    spawn {
-        sleep 5;
-        UseBattleCamPreset(2);
-        MoveBattleCamOver(20);
-    }
-    N(FadeBackgroundToBlack)();
-    PlayEffect(0x62, 0, 0, 0, 0, 1.0, 200, 0, 0, 0, 0, 0, 0, 0);
-    PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_246);
-    sleep 200;
-    UseBattleCamPreset(3);
-    MoveBattleCamOver(20);
-    InitTargetIterator();
-0:
-    SetGoalToTarget(ACTOR_SELF);
-    ItemCheckHit(EVT_VAR(0), 0x10000000, 0, EVT_VAR(0), 0);
-    if (EVT_VAR(0) == 6) {
-        goto 1;
-    }
-    GetItemPower(ITEM_STOP_WATCH, EVT_VAR(0), EVT_VAR(1));
-    MakeStatusField(EVT_VAR(0), 0x200000, 100, EVT_VAR(0));
-    func_80252B3C(EVT_VAR(0), 0x50000000, EVT_VAR(0), 0, 32);
-1:
-    sleep 5;
-    ChooseNextTarget(0, EVT_VAR(0));
-    if (EVT_VAR(0) != -1) {
-        goto 0;
-    }
-    N(func_802A12D4_7270A4)();
-    await N(PlayerGoHome);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x00000092)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
+    EVT_THREAD
+        EVT_WAIT_FRAMES(5)
+        EVT_CALL(UseBattleCamPreset, 2)
+        EVT_CALL(MoveBattleCamOver, 20)
+    EVT_END_THREAD
+    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(PlayEffect, 0x62, 0, 0, 0, 0, EVT_FIXED(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_246)
+    EVT_WAIT_FRAMES(200)
+    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_CALL(InitTargetIterator)
+    EVT_LABEL(0)
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(ItemCheckHit, EVT_VAR(0), 268435456, 0, EVT_VAR(0), 0)
+    EVT_IF_EQ(EVT_VAR(0), 6)
+        EVT_GOTO(1)
+    EVT_END_IF
+    EVT_CALL(GetItemPower, ITEM_STOP_WATCH, EVT_VAR(0), EVT_VAR(1))
+    EVT_CALL(MakeStatusField, EVT_VAR(0), 2097152, 100, EVT_VAR(0))
+    EVT_CALL(func_80252B3C, EVT_VAR(0), 1342177280, EVT_VAR(0), 0, 32)
+    EVT_LABEL(1)
+    EVT_WAIT_FRAMES(5)
+    EVT_CALL(ChooseNextTarget, 0, EVT_VAR(0))
+    EVT_IF_NE(EVT_VAR(0), -1)
+        EVT_GOTO(0)
+    EVT_END_IF
+    EVT_CALL(N(func_802A12D4_7270A4))
+    EVT_EXEC_WAIT(N(PlayerGoHome))
+    EVT_RETURN
+    EVT_END
+};

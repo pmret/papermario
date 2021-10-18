@@ -335,153 +335,155 @@ s32 N(modelCommandList)[] = {
     0x00000002, 0x00000000,
 };
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_SLEEPY_SHEEP;
-    await N(UseItemWithEffect);
-    UseBattleCamPreset(19);
-    SetBattleCamTarget(0xFFFFFFBD, 0xFFFFFFF1, 0xFFFFFFFB);
-    SetBattleCamOffsetZ(45);
-    SetBattleCamZoom(169);
-    MoveBattleCamOver(50);
-    spawn {
-        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_364);
-        loop 7 {
-            StartRumble(2);
-            ShakeCam(1, 0, 2, 0.5);
-            ShakeCam(1, 0, 2, 1.5);
-            ShakeCam(1, 0, 2, 0.5);
-            ShakeCam(1, 0, 2, 0.2001953125);
-            ShakeCam(1, 0, 2, 0.5);
-            ShakeCam(1, 0, 2, 2.0);
-            ShakeCam(1, 0, 2, 1.5);
-            ShakeCam(1, 0, 2, 1.0);
-            ShakeCam(1, 0, 2, 0.5);
-            ShakeCam(1, 0, 2, 0.25);
-            sleep 2;
-            ShakeCam(1, 0, 2, 0.5);
-            ShakeCam(1, 0, 2, 1.5);
-            ShakeCam(1, 0, 2, 0.5);
-            ShakeCam(1, 0, 2, 0.2001953125);
-        }
-    }
-    sleep 20;
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(1) += 32;
-    ShowEmote(0, EMOTE_QUESTION, -45, 20, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10);
-    sleep 30;
-    SetActorYaw(ACTOR_PLAYER, 30);
-    sleep 1;
-    SetActorYaw(ACTOR_PLAYER, 60);
-    sleep 1;
-    SetActorYaw(ACTOR_PLAYER, 90);
-    sleep 1;
-    SetActorYaw(ACTOR_PLAYER, 120);
-    sleep 1;
-    SetActorYaw(ACTOR_PLAYER, 150);
-    sleep 1;
-    SetActorYaw(ACTOR_PLAYER, 180);
-    spawn {
-        N(func_802A123C_71E88C)();
-    }
-    InitTargetIterator();
-    spawn {
-        sleep 40;
-        N(func_802A1740_71ED90)();
-        N(func_802A1848_71EE98)();
-    }
-    UseBattleCamPreset(2);
-    MoveBattleCamOver(20);
-    sleep 8;
-    SetJumpAnimations(ACTOR_PLAYER, 0, ANIM_1002B, ANIM_1002B, ANIM_MIDAIR);
-    SetActorJumpGravity(ACTOR_PLAYER, 1.80078125);
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetGoalPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    func_80273444(15, 0, 0);
-    spawn {
-        sleep 5;
-        SetActorYaw(ACTOR_PLAYER, 150);
-        sleep 1;
-        SetActorYaw(ACTOR_PLAYER, 120);
-        sleep 1;
-        SetActorYaw(ACTOR_PLAYER, 90);
-        sleep 1;
-        SetActorYaw(ACTOR_PLAYER, 60);
-        sleep 1;
-        SetActorYaw(ACTOR_PLAYER, 30);
-        sleep 1;
-        SetActorYaw(ACTOR_PLAYER, 0);
-    }
-    sleep 40;
-    CreateVirtualEntity(EVT_VAR(10), N(modelCommandList));
-    EVT_VAR(7) = 0xFFFFFF38;
-    EVT_VAR(8) = 0;
-    EVT_VAR(9) = 0;
-    SetVirtualEntityPosition(EVT_VAR(10), EVT_VAR(7), EVT_VAR(8), EVT_VAR(9));
-    SetVirtualEntityScale(EVT_VAR(10), 0.7109375, 0.7109375, 0.7109375);
-    SetVirtualEntityMoveSpeed(EVT_VAR(10), 7.0);
-    SetVirtualEntityJumpGravity(EVT_VAR(10), 1.400390625);
-    SetOwnerTarget(0, 0);
-    SetGoalToTarget(ACTOR_PLAYER);
-    GetGoalPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(0) -= 60;
-    VirtualEntityMoveTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0);
-    GetGoalPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0);
-    PlaySoundAtActor(ACTOR_PLAYER, SOUND_HIT_BLOCK);
-    spawn {
-        SetAnimation(ACTOR_PLAYER, 0, ANIM_SHOCK_STILL);
-        SetActorScale(ACTOR_PLAYER, 1.2001953125, 0.900390625, 1.0);
-        sleep 1;
-        SetActorScale(ACTOR_PLAYER, 1.30078125, 0.80078125, 1.0);
-        sleep 3;
-        SetActorScale(ACTOR_PLAYER, 1.2001953125, 0.900390625, 1.0);
-        sleep 1;
-        SetActorScale(ACTOR_PLAYER, 1.0, 1.0, 1.0);
-    }
-    PlayEffect(0x6, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    sleep 2;
-    SetVirtualEntityJumpGravity(EVT_VAR(10), 1.400390625);
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(0) += 60;
-    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0);
-    PlayEffect(0x6, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    EVT_VAR(0) += 20;
-    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0);
-    PlayEffect(0x6, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    EVT_VAR(0) += 10;
-    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0);
-    PlayEffect(0x6, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    sleep 5;
-    spawn {
-        GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        EVT_VAR(0) += 270;
-        VirtualEntityMoveTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0);
-        DeleteVirtualEntity(EVT_VAR(10));
-    }
-    sleep 30;
-    UseBattleCamPreset(3);
-    MoveBattleCamOver(20);
-    InitTargetIterator();
-0:
-    SetGoalToTarget(ACTOR_SELF);
-    ItemCheckHit(EVT_VAR(0), 0x10000000, 0, EVT_VAR(0), 0);
-    if (EVT_VAR(0) == 6) {
-        goto 1;
-    }
-    GetItemPower(ITEM_SLEEPY_SHEEP, EVT_VAR(0), EVT_VAR(1));
-    MakeStatusField(EVT_VAR(0), 4096, 100, EVT_VAR(0));
-    func_80252B3C(EVT_VAR(0), 0x50000000, EVT_VAR(0), 0, 32);
-1:
-    sleep 5;
-    ChooseNextTarget(0, EVT_VAR(0));
-    if (EVT_VAR(0) != -1) {
-        goto 0;
-    }
-    sleep 30;
-    await N(PlayerGoHome);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x0000008F)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
+    EVT_CALL(UseBattleCamPreset, 19)
+    EVT_CALL(SetBattleCamTarget, -67, -15, -5)
+    EVT_CALL(SetBattleCamOffsetZ, 45)
+    EVT_CALL(SetBattleCamZoom, 169)
+    EVT_CALL(MoveBattleCamOver, 50)
+    EVT_THREAD
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_364)
+        EVT_LOOP(7)
+            EVT_CALL(StartRumble, 2)
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.5))
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(1.5))
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.5))
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.2))
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.5))
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(2.0))
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(1.5))
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(1.0))
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.5))
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.25))
+            EVT_WAIT_FRAMES(2)
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.5))
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(1.5))
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.5))
+            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.2))
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_WAIT_FRAMES(20)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(1), 32)
+    EVT_CALL(ShowEmote, 0, EMOTE_QUESTION, -45, 20, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
+    EVT_WAIT_FRAMES(30)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
+    EVT_WAIT_FRAMES(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
+    EVT_WAIT_FRAMES(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 90)
+    EVT_WAIT_FRAMES(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 120)
+    EVT_WAIT_FRAMES(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
+    EVT_WAIT_FRAMES(1)
+    EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
+    EVT_THREAD
+        EVT_CALL(N(func_802A123C_71E88C))
+    EVT_END_THREAD
+    EVT_CALL(InitTargetIterator)
+    EVT_THREAD
+        EVT_WAIT_FRAMES(40)
+        EVT_CALL(N(func_802A1740_71ED90))
+        EVT_CALL(N(func_802A1848_71EE98))
+    EVT_END_THREAD
+    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_WAIT_FRAMES(8)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_1002B, ANIM_1002B, ANIM_MIDAIR)
+    EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FIXED(1.8))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetGoalPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(func_80273444, 15, 0, 0)
+    EVT_THREAD
+        EVT_WAIT_FRAMES(5)
+        EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorYaw, ACTOR_PLAYER, 120)
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorYaw, ACTOR_PLAYER, 90)
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
+    EVT_END_THREAD
+    EVT_WAIT_FRAMES(40)
+    EVT_CALL(CreateVirtualEntity, EVT_VAR(10), EVT_PTR(N(modelCommandList)))
+    EVT_SET(EVT_VAR(7), -200)
+    EVT_SET(EVT_VAR(8), 0)
+    EVT_SET(EVT_VAR(9), 0)
+    EVT_CALL(SetVirtualEntityPosition, EVT_VAR(10), EVT_VAR(7), EVT_VAR(8), EVT_VAR(9))
+    EVT_CALL(SetVirtualEntityScale, EVT_VAR(10), EVT_FIXED(0.71), EVT_FIXED(0.71), EVT_FIXED(0.71))
+    EVT_CALL(SetVirtualEntityMoveSpeed, EVT_VAR(10), EVT_FIXED(7.0))
+    EVT_CALL(SetVirtualEntityJumpGravity, EVT_VAR(10), EVT_FIXED(1.4))
+    EVT_CALL(SetOwnerTarget, 0, 0)
+    EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
+    EVT_CALL(GetGoalPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_SUB(EVT_VAR(0), 60)
+    EVT_CALL(VirtualEntityMoveTo, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0)
+    EVT_CALL(GetGoalPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(VirtualEntityJumpTo, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_BLOCK)
+    EVT_THREAD
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_SHOCK_STILL)
+        EVT_CALL(SetActorScale, ACTOR_PLAYER, EVT_FIXED(1.2), EVT_FIXED(0.9), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorScale, ACTOR_PLAYER, EVT_FIXED(1.3), EVT_FIXED(0.8), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(3)
+        EVT_CALL(SetActorScale, ACTOR_PLAYER, EVT_FIXED(1.2), EVT_FIXED(0.9), EVT_FIXED(1.0))
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetActorScale, ACTOR_PLAYER, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+    EVT_END_THREAD
+    EVT_CALL(PlayEffect, 0x6, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_WAIT_FRAMES(2)
+    EVT_CALL(SetVirtualEntityJumpGravity, EVT_VAR(10), EVT_FIXED(1.4))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(0), 60)
+    EVT_CALL(VirtualEntityJumpTo, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0)
+    EVT_CALL(PlayEffect, 0x6, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_ADD(EVT_VAR(0), 20)
+    EVT_CALL(VirtualEntityJumpTo, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0)
+    EVT_CALL(PlayEffect, 0x6, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_ADD(EVT_VAR(0), 10)
+    EVT_CALL(VirtualEntityJumpTo, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0)
+    EVT_CALL(PlayEffect, 0x6, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_WAIT_FRAMES(5)
+    EVT_THREAD
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(0), 270)
+        EVT_CALL(VirtualEntityMoveTo, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0)
+        EVT_CALL(DeleteVirtualEntity, EVT_VAR(10))
+    EVT_END_THREAD
+    EVT_WAIT_FRAMES(30)
+    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_CALL(InitTargetIterator)
+    EVT_LABEL(0)
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(ItemCheckHit, EVT_VAR(0), 268435456, 0, EVT_VAR(0), 0)
+    EVT_IF_EQ(EVT_VAR(0), 6)
+        EVT_GOTO(1)
+    EVT_END_IF
+    EVT_CALL(GetItemPower, ITEM_SLEEPY_SHEEP, EVT_VAR(0), EVT_VAR(1))
+    EVT_CALL(MakeStatusField, EVT_VAR(0), 4096, 100, EVT_VAR(0))
+    EVT_CALL(func_80252B3C, EVT_VAR(0), 1342177280, EVT_VAR(0), 0, 32)
+    EVT_LABEL(1)
+    EVT_WAIT_FRAMES(5)
+    EVT_CALL(ChooseNextTarget, 0, EVT_VAR(0))
+    EVT_IF_NE(EVT_VAR(0), -1)
+        EVT_GOTO(0)
+    EVT_END_IF
+    EVT_WAIT_FRAMES(30)
+    EVT_EXEC_WAIT(N(PlayerGoHome))
+    EVT_RETURN
+    EVT_END
+};
 
 s32 D_802A3E88_7214D8[] = {
     0, 0

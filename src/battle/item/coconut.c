@@ -45,61 +45,49 @@ s32 N(modelCommandList)[] = {
     0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), &N(displayList), 0x00000002, 0x00000000,
 };
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_COCONUT;
-
-    await N(UseItemWithEffect);
-
-    UseBattleCamPreset(3);
-    MoveBattleCamOver(15);
-
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_THROW);
-    PlaySound(SOUND_THROW);
-    sleep 3;
-
-    CreateVirtualEntity(EVT_VAR(10), N(modelCommandList));
-
-    $x = 1.0;
-    MultiplyByActorScale($x);
-    SetVirtualEntityScale(EVT_VAR(10), $x, $x, $x);
-
-    GetActorPos(ACTOR_PLAYER, $x, $y, $z);
-    EVT_VAR(3) = 20;
-    EVT_VAR(4) = 42;
-    EVT_VAR(5) = 5;
-    MultiplyVec3ByActorScale(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
-    $x += EVT_VAR(3);
-    $y += EVT_VAR(4);
-    $z += EVT_VAR(5);
-    SetVirtualEntityPosition(EVT_VAR(10), $x, $y, $z);
-
-    InitTargetIterator();
-    SetGoalToTarget(ACTOR_SELF);
-    GetGoalPos(ACTOR_SELF, $x, $y, $z);
-
-    spawn {
-        $x = 0;
-        loop 18 {
-            $x += -60;
-            SetVirtualEntityRotation(EVT_VAR(10), 0, 0, $x);
-            sleep 1;
-        }
-    }
-
-    SetVirtualEntityJumpGravity(EVT_VAR(10), 0.8);
-    $z += 5;
-    VirtualEntityJumpTo(EVT_VAR(10), $x, $y, $z, 18);
-
-    GetItemPower(ITEM_COCONUT, $damage, EVT_VAR(4));
-    ApplyShrinkFromOwner($damage);
-    ItemDamageEnemy(EVT_VAR(9), 0x18000000, 0, $damage, 32);
-
-    // Bounce off
-    $x += 60;
-    $y += 0;
-    VirtualEntityJumpTo(EVT_VAR(10), $x, $y, $z, 16);
-
-    DeleteVirtualEntity(EVT_VAR(10));
-
-    await N(PlayerGoHome);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x000000AC)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
+    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(MoveBattleCamOver, 15)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_THROW)
+    EVT_CALL(PlaySound, SOUND_THROW)
+    EVT_WAIT_FRAMES(3)
+    EVT_CALL(CreateVirtualEntity, EVT_VAR(10), EVT_PTR(N(modelCommandList)))
+    EVT_SETF(EVT_VAR(0), EVT_FIXED(1.0))
+    EVT_CALL(MultiplyByActorScale, EVT_VAR(0))
+    EVT_CALL(SetVirtualEntityScale, EVT_VAR(10), EVT_VAR(0), EVT_VAR(0), EVT_VAR(0))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_SET(EVT_VAR(3), 20)
+    EVT_SET(EVT_VAR(4), 42)
+    EVT_SET(EVT_VAR(5), 5)
+    EVT_CALL(MultiplyVec3ByActorScale, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
+    EVT_ADD(EVT_VAR(0), EVT_VAR(3))
+    EVT_ADD(EVT_VAR(1), EVT_VAR(4))
+    EVT_ADD(EVT_VAR(2), EVT_VAR(5))
+    EVT_CALL(SetVirtualEntityPosition, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(InitTargetIterator)
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(GetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_THREAD
+        EVT_SET(EVT_VAR(0), 0)
+        EVT_LOOP(18)
+            EVT_ADD(EVT_VAR(0), -60)
+            EVT_CALL(SetVirtualEntityRotation, EVT_VAR(10), 0, 0, EVT_VAR(0))
+            EVT_WAIT_FRAMES(1)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_CALL(SetVirtualEntityJumpGravity, EVT_VAR(10), EVT_FIXED(0.8))
+    EVT_ADD(EVT_VAR(2), 5)
+    EVT_CALL(VirtualEntityJumpTo, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 18)
+    EVT_CALL(GetItemPower, ITEM_COCONUT, EVT_VAR(3), EVT_VAR(4))
+    EVT_CALL(ApplyShrinkFromOwner, EVT_VAR(3))
+    EVT_CALL(ItemDamageEnemy, EVT_VAR(9), 402653184, 0, EVT_VAR(3), 32)
+    EVT_ADD(EVT_VAR(0), 60)
+    EVT_ADD(EVT_VAR(1), 0)
+    EVT_CALL(VirtualEntityJumpTo, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 16)
+    EVT_CALL(DeleteVirtualEntity, EVT_VAR(10))
+    EVT_EXEC_WAIT(N(PlayerGoHome))
+    EVT_RETURN
+    EVT_END
+};
