@@ -83,7 +83,25 @@ void init_hud_element_list(void) {
     D_80159180 = 0;
 }
 
-INCLUDE_ASM(s32, "hud_element", func_801413F8);
+void func_801413F8(void) {
+    set_cam_viewport(3, 0, 0, 0x13F, 0xEF);
+    gCameras[3].updateMode = 2;
+    gCameras[3].unk_06 = 1;
+    gCameras[3].unk_20 = 0x3CBF;
+    gCameras[3].nearClip = 0x10;
+    gCameras[3].unk_1C = 0;
+    gCameras[3].unk_1E = 0;
+    gCameras[3].unk_22 = 0;
+    gCameras[3].unk_5C = 0;
+    gCameras[3].farClip = 0x4000;
+    gCameras[3].bgColor[0] = 0;
+    gCameras[3].bgColor[1] = 0;
+    gCameras[3].bgColor[2] = 0;
+    gCameras[3].unk_54 = 160.0f;
+    gCameras[3].unk_58 = -120.0f;
+    gCameras[3].vfov = 1.0f;
+    gCameras[3].flags &= ~0x6;
+}
 
 #ifdef NON_MATCHING
 s32 create_hud_element(const HudElementAnim* anim) {
@@ -301,11 +319,67 @@ void set_hud_element_tint(s32 id, s32 r, s32 g, s32 b) {
     hudElement->tint.b = b;
 }
 
-INCLUDE_ASM(void, "hud_element", create_hud_element_transform_A, s32 id);
+void create_hud_element_transform_A(s32 id) {
+    HudElement* element = hudElements[id & ~0x800];
+    HudTransform* transform = general_heap_malloc(sizeof(*transform));
 
-INCLUDE_ASM(void, "hud_element", create_hud_element_transform_B, s32 id);
+    element->hudTransform = transform;
+    ASSERT(transform != NULL);
+    element->flags.as_word |= 0x10000;
+    transform->unk_00 = func_8013A704(1);
+    transform->position.x = 0.0f;
+    transform->position.y = 0.0f;
+    transform->position.z = 0.0f;
+    transform->rotation.x = 0.0f;
+    transform->rotation.y = 0.0f;
+    transform->rotation.z = 0.0f;
+    transform->scale.x = 1.0f;
+    transform->scale.y = 1.0f;
+    transform->scale.z = 1.0f;
+    transform->pivot.x = 0;
+    transform->pivot.y = 0;
+    func_801413F8();
+}
 
-INCLUDE_ASM(void, "hud_element", create_hud_element_transform_C, s32 id);
+void create_hud_element_transform_B(s32 id) {
+    HudElement* element = hudElements[id & ~0x800];
+    HudTransform* transform = general_heap_malloc(sizeof(*transform));
+
+    element->hudTransform = transform;
+    ASSERT(transform != NULL);
+    element->flags.as_word |= 0x30000;
+    transform->unk_00 = 0;
+    transform->position.x = 0.0f;
+    transform->position.y = 0.0f;
+    transform->position.z = 0.0f;
+    transform->rotation.x = 0.0f;
+    transform->rotation.y = 0.0f;
+    transform->rotation.z = 0.0f;
+    transform->scale.x = 1.0f;
+    transform->scale.y = 1.0f;
+    transform->scale.z = 1.0f;
+    func_801413F8();
+}
+
+void create_hud_element_transform_C(s32 id) {
+    HudElement* element = hudElements[id & ~0x800];
+    HudTransform* transform = general_heap_malloc(sizeof(*transform));
+
+    element->hudTransform = transform;
+    ASSERT(transform != NULL);
+    element->flags.as_word |= 0x40030000;
+    transform->unk_00 = 0;
+    transform->position.x = 0.0f;
+    transform->position.y = 0.0f;
+    transform->position.z = 0.0f;
+    transform->rotation.x = 0.0f;
+    transform->rotation.y = 0.0f;
+    transform->rotation.z = 0.0f;
+    transform->scale.x = 1.0f;
+    transform->scale.y = 1.0f;
+    transform->scale.z = 1.0f;
+    func_801413F8();
+}
 
 void free_hud_element_transform(s32 id) {
     HudElement* hudElement = hudElements[id & ~0x800];
@@ -320,14 +394,62 @@ void free_hud_element_transform(s32 id) {
     hudElement->flags.as_word &= ~0x40030000;
 }
 
-INCLUDE_ASM(void, "hud_element", set_hud_element_transform_pos, s32 id, f32 x, f32 y, f32 z);
+void set_hud_element_transform_pos(s32 id, f32 x, f32 y, f32 z) {
+    HudElement* element = hudElements[id & ~0x800];
+    HudTransform* transform = element->hudTransform;
 
-INCLUDE_ASM(void, "hud_element", set_hud_element_transform_scale, s32 id, f32 x, f32 y, f32 z);
+    if (element->flags.as_word & 0x10000) {
+        transform->position.x = x;
+        transform->position.y = y;
+        transform->position.z = z;
+    }
+}
 
-INCLUDE_ASM(void, "hud_element", set_hud_element_transform_rotation, s32 id, f32 x, f32 y, f32 z);
+void set_hud_element_transform_scale(s32 id, f32 x, f32 y, f32 z) {
+    HudElement* element = hudElements[id & ~0x800];
+    HudTransform* transform = element->hudTransform;
 
-INCLUDE_ASM(void, "hud_element", set_hud_element_transform_rotation_pivot, s32 id, s32 dx, s32 dy);
+    if (element->flags.as_word & 0x10000) {
+        transform->scale.x = x;
+        transform->scale.y = y;
+        transform->scale.z = z;
+    }
+}
 
+void set_hud_element_transform_rotation(s32 id, f32 x, f32 y, f32 z) {
+    HudElement* element = hudElements[id & ~0x800];
+    HudTransform* transform = element->hudTransform;
+
+    if (element->flags.as_word & 0x10000) {
+        transform->rotation.x = x;
+        transform->rotation.y = y;
+        transform->rotation.z = z;
+    }
+}
+
+void set_hud_element_transform_rotation_pivot(s32 id, s32 dx, s32 dy) {
+    HudElement* element = hudElements[id & ~0x800];
+    HudTransform* transform = element->hudTransform;
+
+    if (element->flags.as_word & 0x10000) {
+        transform->pivot.x = dx;
+        transform->pivot.y = dy;
+    }
+}
+
+#ifdef NON_MATCHING
+void copy_world_hud_element_ref_to_battle(s32 worldID, s32 battleID) {
+    D_80157460[battleID & ~0x800].flags.as_word = D_80156F60[worldID & ~0x800].flags.as_word;
+}
+#else
 INCLUDE_ASM(void, "hud_element", copy_world_hud_element_ref_to_battle, s32 worldID, s32 battleID);
+#endif
 
-INCLUDE_ASM(void, "hud_element", set_hud_element_nonworld_cache, void* base, s32 size);
+void set_hud_element_nonworld_cache(void* base, s32 size) {
+    D_8014EFC0[0] = (s32)base;
+    if (base == NULL) {
+        D_8014EFC4[0] = 0x11000;
+    } else {
+        D_8014EFC4[0] = size;
+    }
+}

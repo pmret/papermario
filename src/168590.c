@@ -1,5 +1,6 @@
 #include "common.h"
 #include "filemenu.h"
+#include "hud_element.h"
 
 extern MenuWindowBP D_8024A134[1];
 

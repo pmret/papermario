@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 BSS s32 gPauseMenuHeldButtons;
 BSS s32 gPauseMenuPressedButtons;

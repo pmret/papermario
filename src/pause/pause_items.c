@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 struct struct8024F5C0 {
     char unk00[0x10];
