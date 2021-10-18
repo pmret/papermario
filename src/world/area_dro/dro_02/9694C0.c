@@ -108,7 +108,7 @@ EvtSource N(80243AF0) = {
         EVT_CMD(EVT_OP_CASE_OR_EQ, 2),
         EVT_CMD(EVT_OP_CASE_OR_EQ, 3),
         EVT_CMD(EVT_OP_END_CASE_GROUP),
-        EVT_CMD(EVT_OP_CASE_ELSE),
+        EVT_CMD(EVT_OP_CASE_DEFAULT),
             EVT_CMD(EVT_OP_CALL, SetMusicTrack, 0, 21, 0, 8),
         EVT_CMD(EVT_OP_END_CASE_GROUP),
     EVT_CMD(EVT_OP_END_SWITCH),

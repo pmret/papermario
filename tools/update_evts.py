@@ -2,6 +2,13 @@
 
 from disasm_script import ScriptDisassembler
 
+NAMESPACES = {
+    "src/battle/item/thunder_bolt.c": "battle_item_thunder_bolt",
+    "src/battle/item/strange_cake.c": "battle_item_strange_cake",
+    "src/battle/item/tasty_tonic.c": "battle_item_tasty_tonic",
+    "src/battle/item/egg_missile.c": "battle_item_egg_missile",
+}
+
 class Range:
     def __init__(self, start: int, end: int, symbol_name: str):
         self.start = start
@@ -24,14 +31,14 @@ def parse_symbol_addrs():
 
     return symbol_addrs
 
-def find_old_script_ranges(lines):
+def find_old_script_ranges(lines, filename):
     """
     Finds all ranges that contain the old SCRIPT macro.
     """
 
     start_line_no = None
     symbol_name = None
-    namespace = "UNK_NAMESPACE"
+    namespace = NAMESPACES.get(filename, "UNK_NAMESPACE")
 
     for line_no, line_content in enumerate(lines):
         if "#define NAMESPACE " in line_content:
@@ -64,7 +71,7 @@ def replace_old_script_macros(filename, symbol_addrs):
 
         while True:
             try:
-                range = next(find_old_script_ranges(lines))
+                range = next(find_old_script_ranges(lines, filename))
             except StopIteration:
                 break
 
@@ -105,6 +112,7 @@ if __name__ == "__main__":
     symbol_addrs = parse_symbol_addrs()
 
     for filename in all_source_files():
+        print(f"Updating {filename}")
         num_scripts_replaced = replace_old_script_macros(filename, symbol_addrs)
-        if num_scripts_replaced > 0:
-            break
+        #if num_scripts_replaced > 0:
+        #    break

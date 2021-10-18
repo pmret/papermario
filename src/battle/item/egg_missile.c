@@ -139,45 +139,47 @@ s32 N(modelCommandList)[] = {
     0x00000002, 0x00000000,
 };
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_EGG_MISSILE;
-    await N(UseItemWithEffect);
-    UseBattleCamPreset(3);
-    MoveBattleCamOver(15);
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_THROW);
-    PlaySound(SOUND_THROW);
-    sleep 3;
-    CreateVirtualEntity(EVT_VAR(10), N(modelCommandList));
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(0) += 20;
-    EVT_VAR(1) += 42;
-    EVT_VAR(2) += 5;
-    SetVirtualEntityPosition(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    InitTargetIterator();
-    SetGoalToTarget(ACTOR_SELF);
-    GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    spawn {
-        EVT_VAR(0) = 0;
-        loop 18 {
-            EVT_VAR(0) += 60;
-            SetVirtualEntityRotation(EVT_VAR(10), 0, 0, EVT_VAR(0));
-            sleep 1;
-        }
-    }
-    SetVirtualEntityJumpGravity(EVT_VAR(10), 1.0);
-    EVT_VAR(2) += 5;
-    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 18);
-    DeleteVirtualEntity(EVT_VAR(10));
-    PlaySound(SOUND_UNKNOWN_2010);
-    N(func_802A123C_71CF1C)(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    spawn {
-        StartRumble(5);
-        ShakeCam(1, 0, 2, 0.75);
-        ShakeCam(1, 0, 5, 1.5);
-        ShakeCam(1, 0, 4, 1.2001953125);
-        ShakeCam(1, 0, 2, 0.4501953125);
-    }
-    GetItemPower(ITEM_EGG_MISSILE, EVT_VAR(0), EVT_VAR(1));
-    ItemDamageEnemy(EVT_VAR(0), 0x18000202, 0, EVT_VAR(0), 32);
-    await N(PlayerGoHome);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0xC8)
+    EVT_EXEC_WAIT(battle_item_egg_missile_UseItemWithEffect)
+    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(MoveBattleCamOver, 15)
+    EVT_CALL(SetAnimation, 0, 0, 65558)
+    EVT_CALL(PlaySound, 1018)
+    EVT_WAIT_FRAMES(3)
+    EVT_CALL(CreateVirtualEntity, EVT_VAR(10), battle_item_egg_missile_modelCommandList)
+    EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(0), 20)
+    EVT_ADD(EVT_VAR(1), 42)
+    EVT_ADD(EVT_VAR(2), 5)
+    EVT_CALL(SetVirtualEntityPosition, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(InitTargetIterator)
+    EVT_CALL(SetGoalToTarget, -127)
+    EVT_CALL(GetGoalPos, -127, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_THREAD
+        EVT_SET(EVT_VAR(0), 0)
+        EVT_LOOP(18)
+            EVT_ADD(EVT_VAR(0), 60)
+            EVT_CALL(SetVirtualEntityRotation, EVT_VAR(10), 0, 0, EVT_VAR(0))
+            EVT_WAIT_FRAMES(1)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_CALL(SetVirtualEntityJumpGravity, EVT_VAR(10), EVT_FIXED(1.0))
+    EVT_ADD(EVT_VAR(2), 5)
+    EVT_CALL(VirtualEntityJumpTo, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 18)
+    EVT_CALL(DeleteVirtualEntity, EVT_VAR(10))
+    EVT_CALL(PlaySound, 8208)
+    EVT_CALL(battle_item_egg_missile_func_802A123C_71CF1C, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_THREAD
+        EVT_CALL(StartRumble, 5)
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.75))
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.5))
+        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FIXED(1.2001953125))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.4501953125))
+    EVT_END_THREAD
+    EVT_CALL(GetItemPower, 200, EVT_VAR(0), EVT_VAR(1))
+    EVT_CALL(ItemDamageEnemy, EVT_VAR(0), 402653698, 0, EVT_VAR(0), 32)
+    EVT_EXEC_WAIT(battle_item_egg_missile_PlayerGoHome)
+    EVT_RETURN
+    EVT_END
+};

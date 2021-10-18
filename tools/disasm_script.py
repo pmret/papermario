@@ -625,10 +625,10 @@ class ScriptDisassembler:
             self.write_line(f"EVT_IF_GT({self.var(argv[0])}, {self.var(argv[1])})")
             self.indent += 1
         elif opcode == 0x0E:
-            self.write_line(f"EVT_IF_LE{self.var(argv[0])}, {self.var(argv[1])})")
+            self.write_line(f"EVT_IF_LE({self.var(argv[0])}, {self.var(argv[1])})")
             self.indent += 1
         elif opcode == 0x0F:
-            self.write_line(f"EVT_IF_GE{self.var(argv[0])}, {self.var(argv[1])})")
+            self.write_line(f"EVT_IF_GE({self.var(argv[0])}, {self.var(argv[1])})")
             self.indent += 1
         elif opcode == 0x10:
             self.write_line(f"EVT_IF_FLAG({self.var(argv[0])}, {self.var(argv[1])})")

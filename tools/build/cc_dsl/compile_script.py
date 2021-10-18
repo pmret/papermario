@@ -412,7 +412,7 @@ class Compile(Transformer):
             return [tree.children[0], *tree.children[1]]
 
     def case_else(self, tree):
-        return [Cmd("EVT_OP_CASE_ELSE"), *tree.children[0]]
+        return [Cmd("EVT_OP_CASE_DEFAULT"), *tree.children[0]]
     def case_op(self, tree):
         if len(tree.children) == 4:
             op, expr, multi_case, block = tree.children

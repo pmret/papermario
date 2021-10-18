@@ -1438,7 +1438,7 @@ s32 evt_execute_next_command(Evt *script) {
             case EVT_OP_CASE_GE:
                 status = evt_handle_case_greater_equal(script);
                 break;
-            case EVT_OP_CASE_ELSE:
+            case EVT_OP_CASE_DEFAULT:
                 status = evt_handle_case_default(script);
                 break;
             case EVT_OP_BREAK_SWITCH:
@@ -2021,7 +2021,7 @@ Bytecode* evt_goto_next_case(Evt* script) {
             case EVT_OP_CASE_GT:
             case EVT_OP_CASE_LE:
             case EVT_OP_CASE_GE:
-            case EVT_OP_CASE_ELSE:
+            case EVT_OP_CASE_DEFAULT:
             case EVT_OP_CASE_OR_EQ:
             case EVT_OP_CASE_AND_EQ:
             case EVT_OP_END_CASE_GROUP:

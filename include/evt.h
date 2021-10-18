@@ -35,7 +35,7 @@ enum {
     EVT_OP_CASE_GT, ///< Args: expression to test for
     EVT_OP_CASE_LE, ///< Args: expression to test for
     EVT_OP_CASE_GE, ///< Args: expression to test for
-    EVT_OP_CASE_ELSE,
+    EVT_OP_CASE_DEFAULT,
     EVT_OP_CASE_OR_EQ, ///< Args: expression to test for
     EVT_OP_CASE_AND_EQ, ///< Args: expression to test for
     EVT_OP_CASE_FLAG, ///< Args: expression to test for
