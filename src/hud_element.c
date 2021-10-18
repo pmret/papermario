@@ -84,8 +84,8 @@ void init_hud_element_list(void) {
 }
 
 void func_801413F8(void) {
-    set_cam_viewport(3, 0, 0, 0x13F, (s16)0xEF);
-    gCameras[3].updateMode = 2; // 100C = 4; 1008 = 0
+    set_cam_viewport(3, 0, 0, 0x13F, 0xEF);
+    gCameras[3].updateMode = 2;
     gCameras[3].unk_06 = 1;
     gCameras[3].unk_20 = 0x3CBF;
     gCameras[3].nearClip = 0x10;
@@ -100,7 +100,7 @@ void func_801413F8(void) {
     gCameras[3].unk_54 = 160.0f;
     gCameras[3].unk_58 = -120.0f;
     gCameras[3].vfov = 1.0f;
-    gCameras[3].flags &= 0xFFF9;
+    gCameras[3].flags &= ~0x6;
 }
 
 #ifdef NON_MATCHING
@@ -438,22 +438,18 @@ void set_hud_element_transform_rotation_pivot(s32 id, s32 dx, s32 dy) {
 }
 
 #ifdef NON_MATCHING
-
 void copy_world_hud_element_ref_to_battle(s32 worldID, s32 battleID) {
     D_80157460[battleID & ~0x800].flags.as_word = D_80156F60[worldID & ~0x800].flags.as_word;
 }
-
 #else
-
 INCLUDE_ASM(void, "hud_element", copy_world_hud_element_ref_to_battle, s32 worldID, s32 battleID);
-
 #endif
 
 void set_hud_element_nonworld_cache(void* base, s32 size) {
     D_8014EFC0[0] = (s32)base;
     if (base == NULL) {
         D_8014EFC4[0] = 0x11000;
-        return;
+    } else {
+        D_8014EFC4[0] = size;
     }
-    D_8014EFC4[0] = size;
 }
