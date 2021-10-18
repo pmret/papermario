@@ -3,7 +3,9 @@
 from disasm_script import ScriptDisassembler, get_constants
 from glob import glob
 
-NAMESPACES = {}
+NAMESPACES = {
+    "src/battle/area_kmr_part_1/stage/clouds.inc.c": "b_area_kmr_part_1_kmr_03",
+}
 
 for filename in glob("src/battle/item/*.c"):
     parts = filename.split("/")[1:]
@@ -153,7 +155,7 @@ if __name__ == "__main__":
             try:
                 num_scripts_replaced = replace_old_script_macros(filename, symbol_addrs)
                 if num_scripts_replaced > 0:
-                    print(f"{num_scripts_replaced} old script replaced in {filename}")
+                    print(f"{num_scripts_replaced} old scripts replaced in {filename}")
             except UserException as e:
                 print(f"{filename} ERROR: {e}")
                 num_errors += 1
