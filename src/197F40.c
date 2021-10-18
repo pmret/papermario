@@ -2762,7 +2762,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
     f32 x2, y2, z2;
     s32 hpBoost;
     s32 flags;
-    s32 flags2
+    s32 flags2;
     s32 message;
 
     if (isInitialCall) {
