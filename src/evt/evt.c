@@ -1546,16 +1546,16 @@ s32 evt_execute_next_command(Evt *script) {
             case EVT_OP_KILL_THREAD:
                 status = evt_handle_kill(script);
                 break;
-            case EVT_OP_AND:
+            case EVT_OP_BITWISE_AND:
                 status = evt_handle_AND(script);
                 break;
-            case EVT_OP_AND_CONST:
+            case EVT_OP_BITWISE_AND_CONST:
                 status = evt_handle_AND_const(script);
                 break;
-            case EVT_OP_OR:
+            case EVT_OP_BITWISE_OR:
                 status = evt_handle_OR(script);
                 break;
-            case EVT_OP_OR_CONST:
+            case EVT_OP_BITWISE_OR_CONST:
                 status = evt_handle_OR_const(script);
                 break;
             case EVT_OP_CALL:

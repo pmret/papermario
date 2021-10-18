@@ -70,10 +70,10 @@ enum {
     EVT_OP_USE_ARRAY, ///< Args: *s32
     EVT_OP_USE_FLAGS, ///< Args: *s32
     EVT_OP_NEW_ARRAY, ///< Allocates a new array. Args: length, s32*
-    EVT_OP_AND, ///< Args: container, expression to bitwise AND with
-    EVT_OP_AND_CONST, ///< Args: container, value to bitwise AND with
-    EVT_OP_OR, ///< Args: container, expression to bitwise OR with
-    EVT_OP_OR_CONST, ///< Args: container, value to bitwise OR with
+    EVT_OP_BITWISE_AND, ///< Args: container, expression to bitwise AND with
+    EVT_OP_BITWISE_AND_CONST, ///< Args: container, value to bitwise AND with
+    EVT_OP_BITWISE_OR, ///< Args: container, expression to bitwise OR with
+    EVT_OP_BITWISE_OR_CONST, ///< Args: container, value to bitwise OR with
     EVT_OP_CALL, ///< Args: *function, ...
     EVT_OP_EXEC, ///< Args: EvtSource*
     EVT_OP_EXEC_GET_TID, ///< Args: EvtSource*, container

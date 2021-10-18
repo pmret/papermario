@@ -206,7 +206,7 @@ def fix_args(self, func, args, info):
 
             if info[i] == "Bool":
                 new_args.append(f"{'TRUE' if argNum == True else 'FALSE'}")
-            elif info[i] == "Hex":
+            elif info[i] == "Hex" and argNum > 0:
                 new_args.append(f"0x{argNum:08X}")
             elif info[i] == "CustomAnim":
                 sprite  = (argNum & 0xFF0000) >> 16
@@ -227,7 +227,7 @@ def fix_args(self, func, args, info):
                         call = f"{CONSTANTS['PlayerAnims'][argNum]}"
                 else:
                     if sprite == 0:
-                        print(f"Func {func} arg {i} ({CONSTANTS['MAP_NPCS'][int(args[0])]}) -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
+                        print(f"Func {func} arg {i} -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
                         call = f"0x{argNum:X}"
                     else:
                         call = make_anim_macro(self, sprite, palette, anim)
@@ -249,12 +249,11 @@ def fix_args(self, func, args, info):
                     enabled.append(f"0")
                 new_args.append("((" + " | ".join(enabled) + "))")
             elif info[i] == "NpcIDs":
-                if argNum not in CONSTANTS["MAP_NPCS"]:
-                    new_args.append(f"0x{argNum:X}")
-                    continue
-
                 if argNum >= 0:
-                    new_args.append(CONSTANTS["MAP_NPCS"][argNum])
+                    if argNum in CONSTANTS["MAP_NPCS"]:
+                        new_args.append(CONSTANTS["MAP_NPCS"][argNum])
+                    else:
+                        new_args.append(str(i))
                 else:
                     new_args.append(CONSTANTS["NpcIDs"][argNum])
             elif info[i] == "DamageTypes":

@@ -609,14 +609,14 @@ class Compile(Transformer):
     def set_op_and(self, tree):
         return {
             "__op__": "&",
-            "int": "EVT_OP_AND",
-            "const": "EVT_OP_AND_CONST",
+            "int": "EVT_OP_BITWISE_AND",
+            "const": "EVT_OP_BITWISE_AND_CONST",
         }
     def set_op_or(self, tree):
         return {
             "__op__": "|",
-            "int": "EVT_OP_OR",
-            "const": "EVT_OP_OR_CONST",
+            "int": "EVT_OP_BITWISE_OR",
+            "const": "EVT_OP_BITWISE_OR_CONST",
         }
 
     def variable(self, tree):
