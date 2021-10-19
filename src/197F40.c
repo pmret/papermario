@@ -2320,10 +2320,10 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
         script->functionTemp[2] = attackBoost;
 
         func_8024E40C(8);
-        btl_cam_set_zoffset(0xC);
+        btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(0xFA);
-        btl_cam_move(0xA);
+        btl_cam_move(10);
         func_8024E60C();
         if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
             btl_cam_set_zoffset(0);
@@ -2374,7 +2374,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
                 func_8024E40C(2);
-                btl_cam_move(0xF);
+                btl_cam_move(15);
                 actor->isGlowing = 1;
                 actor->attackBoost += attackBoost;
                 if (actor->attackBoost > 20) {
@@ -2409,7 +2409,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->onHitScript == NULL) || (does_script_exist(actor->onHitID) == 0)) {
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
                 D_8029FBD4 = 0;
                 return ApiStatus_DONE2;
             }
@@ -2418,13 +2418,465 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "197F40", BoostDefense);
+ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID;
+    Actor* actor;
+    f32 x1, y1, z1;
+    f32 x2, y2, z2;
+    s32 defenseBoost;
+    s32 flags;
+    s32 flags2;
 
-INCLUDE_ASM(s32, "197F40", VanishActor);
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
 
-INCLUDE_ASM(s32, "197F40", ElectrifyActor);
+    if (script->functionTemp[0] == 0) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+        defenseBoost = evt_get_variable(script, *args++);
+        actor = get_actor(actorID);
+        script->functionTemp[1] = (s32) actor;
+        script->functionTemp[2] = defenseBoost;
 
-INCLUDE_ASM(s32, "197F40", HealActor);
+        func_8024E40C(8);
+        btl_cam_set_zoffset(12);
+        btl_cam_target_actor(actor->actorID);
+        btl_cam_set_zoom(0xFA);
+        btl_cam_move(10);
+        func_8024E60C();
+        if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+            btl_cam_set_zoffset(0);
+        }
+
+        D_8029FBD4 = 1;
+        script->functionTemp[3] = 5;
+        script->functionTemp[0] = 1;
+    }
+    get_actor(script->owner1.actorID);
+    actor = (Actor*) script->functionTemp[1];
+    defenseBoost = script->functionTemp[2];
+
+    flags = actor->flags;
+    x1 = actor->currentPos.x + actor->headOffset.x;
+    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y1 = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
+    } else if (!(flags & ACTOR_FLAG_8000)) {
+        y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
+    } else {
+        y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    }
+    z1 = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    flags2 = actor->flags;
+    x2 = actor->currentPos.x + actor->headOffset.x + actor->size.x / 2;
+    if (flags2 & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y2 = actor->currentPos.y + actor->headOffset.y - actor->size.y;
+    } else if (!(flags2 & ACTOR_FLAG_8000)) {
+        y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    } else {
+        y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y * 2;
+    }
+    z2 = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    switch (script->functionTemp[0]) {
+        case 1:
+            if (script->functionTemp[3] == 0) {
+                playFX_33(2, x1, y1, z1, 1.0f, 30);
+                func_8024E3D8(0x13);
+                script->functionTemp[3] = 30;
+                script->functionTemp[0] = 2;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 2:
+            if (script->functionTemp[3] == 0) {
+                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                func_8024E40C(2);
+                btl_cam_move(15);
+                actor->isGlowing = 1;
+                actor->defenseBoost += defenseBoost;
+                if (actor->defenseBoost > 20) {
+                    actor->defenseBoost = 20;
+                }
+                playFX_56(defenseBoost + 5, x2, y2, z2, 1.0f, 60);
+                script->functionTemp[3] = 15;
+                script->functionTemp[0] = 3;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 3:
+            if (script->functionTemp[3] == 0) {
+                btl_show_variable_battle_message(0x1E, 60, defenseBoost);
+                script->functionTemp[0] = 4;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 4:
+            if (btl_is_popup_displayed() == 0) {
+                func_8024E40C(2);
+                script->functionTemp[3] = 10;
+                script->functionTemp[0] = 5;
+            }
+            break;
+        case 5:
+            if (script->functionTemp[3] != 0) {
+                script->functionTemp[3]--;
+                break;
+            }
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+                D_8029FBD4 = 0;
+                return ApiStatus_DONE2;
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID;
+    Actor* actor;
+    f32 x, y, z;
+    s32 vanished;
+    s32 flags;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+        vanished = evt_get_variable(script, *args++);
+        actor = get_actor(actorID);
+        script->functionTemp[1] = (s32) actor;
+        script->functionTemp[2] = vanished;
+
+        func_8024E40C(8);
+        btl_cam_set_zoffset(12);
+        btl_cam_target_actor(actor->actorID);
+        btl_cam_set_zoom(0xFA);
+        btl_cam_move(10);
+        func_8024E60C();
+        if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+            btl_cam_set_zoffset(0);
+        }
+
+        D_8029FBD4 = 1;
+        script->functionTemp[3] = 5;
+        script->functionTemp[0] = 1;
+    }
+    get_actor(script->owner1.actorID);
+    actor = (Actor*) script->functionTemp[1];
+    vanished = script->functionTemp[2];
+
+    flags = actor->flags;
+    x = actor->currentPos.x + actor->headOffset.x;
+    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
+    } else if (!(flags & ACTOR_FLAG_8000)) {
+        y = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
+    } else {
+        y = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    }
+    z = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    switch (script->functionTemp[0]) {
+        case 1:
+            if (script->functionTemp[3] == 0) {
+                playFX_33(3, x, y, z, 1.0f, 30);
+                func_8024E3D8(0x13);
+                script->functionTemp[3] = 0x1E;
+                script->functionTemp[0] = 2;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 2:
+            if (script->functionTemp[3] == 0) {
+                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                func_8024E40C(2);
+                btl_cam_move(15);
+                inflict_status(actor, 0xE, vanished);
+                script->functionTemp[3] = 15;
+                script->functionTemp[0] = 3;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 3:
+            if (script->functionTemp[3] == 0) {
+                btl_show_variable_battle_message(0x21, 60, vanished);
+                script->functionTemp[0] = 4;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 4:
+            if (btl_is_popup_displayed() == 0) {
+                func_8024E40C(2);
+                script->functionTemp[3] = 10;
+                script->functionTemp[0] = 5;
+            }
+            break;
+        case 5:
+            if (script->functionTemp[3] != 0) {
+                script->functionTemp[3]--;
+                break;
+            }
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+                D_8029FBD4 = 0;
+                return ApiStatus_DONE2;
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID;
+    Actor* actor;
+    f32 x, y, z;
+    s32 electrified;
+    s32 flags;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+        electrified = evt_get_variable(script, *args++);
+        actor = get_actor(actorID);
+        script->functionTemp[1] = (s32) actor;
+        script->functionTemp[2] = electrified;
+
+        func_8024E40C(8);
+        btl_cam_set_zoffset(12);
+        btl_cam_target_actor(actor->actorID);
+        btl_cam_set_zoom(0xFA);
+        btl_cam_move(10);
+        func_8024E60C();
+        if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+            btl_cam_set_zoffset(0);
+        }
+
+        D_8029FBD4 = 1;
+        script->functionTemp[3] = 5;
+        script->functionTemp[0] = 1;
+    }
+    get_actor(script->owner1.actorID);
+    actor = (Actor*) script->functionTemp[1];
+    electrified = script->functionTemp[2];
+
+    flags = actor->flags;
+    x = actor->currentPos.x + actor->headOffset.x;
+    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
+    } else if (!(flags & ACTOR_FLAG_8000)) {
+        y = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
+    } else {
+        y = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    }
+    z = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    switch (script->functionTemp[0]) {
+        case 1:
+            if (script->functionTemp[3] == 0) {
+                playFX_57(8, x, y, z, 1.0f, 30);
+                func_8024E3D8(0x13);
+                script->functionTemp[3] = 0x1E;
+                script->functionTemp[0] = 2;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 2:
+            if (script->functionTemp[3] == 0) {
+                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                func_8024E40C(2);
+                btl_cam_move(15);
+                inflict_status(actor, 0xB, electrified);
+                script->functionTemp[3] = 15;
+                script->functionTemp[0] = 3;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 3:
+            if (script->functionTemp[3] == 0) {
+                btl_show_variable_battle_message(0x22, 60, electrified);
+                script->functionTemp[0] = 4;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 4:
+            if (btl_is_popup_displayed() == 0) {
+                func_8024E40C(2);
+                script->functionTemp[3] = 10;
+                script->functionTemp[0] = 5;
+            }
+            break;
+        case 5:
+            if (script->functionTemp[3] != 0) {
+                script->functionTemp[3]--;
+                break;
+            }
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+                D_8029FBD4 = 0;
+                return ApiStatus_DONE2;
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus HealActor(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID;
+    Actor* actor;
+    f32 x1, y1, z1;
+    f32 x2, y2, z2;
+    s32 hpBoost;
+    s32 flags;
+    s32 flags2;
+    s32 message;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.enemyID;
+        }
+        hpBoost = evt_get_variable(script, *args++);
+        D_8029FBD0 = evt_get_variable(script, *args++);
+        actor = get_actor(actorID);
+        script->functionTemp[1] = (s32) actor;
+        script->functionTemp[2] = hpBoost;
+
+        func_8024E40C(8);
+        btl_cam_set_zoffset(12);
+        btl_cam_target_actor(actor->actorID);
+        btl_cam_move(10);
+        func_8024E60C();
+
+        D_8029FBD4 = 1;
+        script->functionTemp[3] = 5;
+        script->functionTemp[0] = 1;
+    }
+    get_actor(script->owner1.enemyID);
+    actor = (Actor*) script->functionTemp[1];
+    hpBoost = script->functionTemp[2];
+
+    flags = actor->flags;
+    x1 = actor->currentPos.x + actor->headOffset.x;
+    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y1 = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
+    } else if (!(flags & ACTOR_FLAG_8000)) {
+        y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
+    } else {
+        y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    }
+    z1 = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    flags2 = actor->flags;
+    x2 = actor->currentPos.x + actor->headOffset.x + actor->size.x / 2;
+    if (flags2 & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y2 = actor->currentPos.y + actor->headOffset.y - actor->size.y;
+    } else if (!(flags2 & ACTOR_FLAG_8000)) {
+        y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    } else {
+        y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y * 2;
+    }
+    z2 = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    switch (script->functionTemp[0]) {
+        case 1:
+            if (script->functionTemp[3] == 0) {
+                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                playFX_40(0, x2, y2, z2, hpBoost);
+                func_802D7460(x1, y1, z1, hpBoost);
+                script->functionTemp[3] = 30;
+                script->functionTemp[0] = 2;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 2:
+            if (script->functionTemp[3] == 0) {
+                func_8024E40C(2);
+                btl_cam_move(15);
+                actor->currentHP += hpBoost;
+                if (actor->maxHP < actor->currentHP) {
+                    actor->currentHP = actor->maxHP;
+                }
+                func_802D74C0(x1, y1, z1, hpBoost);
+                script->functionTemp[3] = 15;
+                script->functionTemp[0] = 3;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 3:
+            if (script->functionTemp[3] == 0) {
+                message = 0x20;
+                if (D_8029FBD0 == 0) {
+                    message = 0x1F;
+                }
+                btl_show_variable_battle_message(message, 60, hpBoost);
+                script->functionTemp[0] = 4;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 4:
+            if (btl_is_popup_displayed() == 0) {
+                script->functionTemp[3] = 10;
+                script->functionTemp[0] = 5;
+            }
+            break;
+        case 5:
+            if (script->functionTemp[3] != 0) {
+                script->functionTemp[3]--;
+                break;
+            }
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+                D_8029FBD4 = 0;
+                return ApiStatus_DONE2;
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus WaitForBuffDone(Evt* script, s32 isInitialCall) {
     return (D_8029FBD4 == 0) * ApiStatus_DONE2;
