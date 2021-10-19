@@ -1,4 +1,7 @@
 #include "common.h"
+#include "hud_element.h"
+
+extern s32 D_80270640[];
 
 INCLUDE_ASM(s32, "pause/13E120", pause_partners_load_portrait);
 
@@ -8,9 +11,14 @@ INCLUDE_ASM(s32, "pause/13E120", pause_partners_draw_title);
 
 INCLUDE_ASM(s32, "pause/13E120", pause_partners_draw_movelist);
 
-INCLUDE_ASM(s32, "pause/13E120", pause_partners_draw_movelist_title);
+void pause_partners_draw_movelist_title(void* menuTab, s32 x, s32 y) {
+    draw_msg(pause_get_menu_msg(0x55), x + 12, y + 1, 0xFF, -1, 1);
+}
 
-INCLUDE_ASM(s32, "pause/13E120", pause_partners_draw_movelist_flower);
+void pause_partners_draw_movelist_flower(void* menuTab, s32 x, s32 y) {
+    set_hud_element_render_pos(D_80270640[1], x + 17, y + 16);
+    draw_hud_element_3(D_80270640[1]);
+}
 
 INCLUDE_ASM(s32, "pause/13E120", pause_partners_init);
 

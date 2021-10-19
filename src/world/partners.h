@@ -26,7 +26,6 @@ typedef struct WorldPartner {
     /* 0x3C */ Bytecode* whileRiding;
 } WorldPartner; // size = 0x40
 
-extern s32 D_8010C954;
 extern s32 D_8010CFC4;
 extern Evt* D_8010CFD4;
 extern s32 D_8010CFD8;
@@ -37,7 +36,7 @@ extern s32 D_8010CFE8;
 
 extern WorldPartner wPartners[12];
 extern WorldPartner* wPartner;
-extern NpcID D_8010CFD0; // wPartnerNpcIndex
+extern s32 D_8010CFD0; // wPartnerNpcIndex
 extern Npc* wPartnerNpc; // wPartnerNpc
 
 s32 partner_init_get_out(Npc*);

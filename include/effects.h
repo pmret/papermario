@@ -54,7 +54,7 @@ typedef struct StarSpiritEffect {
     /* 0x34 */ f32 unk_34;
     /* 0x38 */ s32 unk_38;
     /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ Shadow* unk_40;
+    /* 0x40 */ s32 unk_40; // a shadowID
     /* 0x44 */ s16 unk_44;
     /* 0x46 */ s16 unk_46;
     /* 0x48 */ s16 unk_48;
@@ -104,7 +104,9 @@ typedef struct EffectInstanceData {
     /* 0x28 */ f32 unk_28;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ f32 unk_30;
-    /* 0x34 */ char unk_34[0x30];
+    /* 0x34 */ char unk_34[8];
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ char unk_40[0x24];
     /* 0x64 */ f32 unk_64;
     /* 0x68 */ char unk_68[0x18];
 } EffectInstanceData; // size = 0x80
@@ -138,7 +140,7 @@ typedef struct EffectGraphics {
 } EffectGraphics; // size = 0x20
 
 typedef struct EffectTableEntry {
-    /* 0x00 */ void (*entryPoint)(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 x, f32 y, f32 z);
+    /* 0x00 */ void (*entryPoint);
     /* 0x04 */ void* dmaStart;
     /* 0x08 */ void* dmaEnd;
     /* 0x0C */ void* dmaDest;
@@ -177,12 +179,12 @@ void playFX_17(s32, f32, f32, f32);
 void playFX_18(s32, f32, f32, f32, f32, f32, f32, s32);
 void playFX_19(s32, f32, f32, f32);
 EffectInstance* playFX_1A(s32, f32, f32, f32, s32);
-EffectInstance* playFX_1B(s32, f32, f32, f32, f32, s32);
+EffectInstance* playFX_1B(s32, f32, f32, f32, f32, s32*);
 EffectInstance* playFX_1C(s32, f32, f32, f32, s32);
 void playFX_1D(s32, f32, f32, f32, f32, s32, f32, s32);
 EffectInstance* playFX_1E(s32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* playFX_1F(s32, f32, f32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_20(s32, f32, f32, f32, f32, s32);
+EffectInstance* playFX_20(s32, f32, f32, f32, f32, s32*);
 EffectInstance* playFX_21(s32, f32, f32, f32, f32, f32, s32);
 void playFX_22(s32, f32, f32, f32, f32, f32, s32, s32);
 EffectInstance* playFX_23(u32, f32, f32, f32, f32);
@@ -191,26 +193,26 @@ EffectInstance* playFX_25(s32, f32, f32, f32);
 void playFX_26(s32, f32, f32, f32);
 EffectInstance* playFX_27(s32, f32, f32, f32, f32, s32);
 void fx_sweat(s32, f32 x, f32 y, f32 z, f32, f32, s32);
-void fx_sleep_bubble(s32, f32, f32, f32, f32, f32, s32);
+void fx_sleep_bubble(s32, f32, f32, f32, f32, f32, s32*);
 EffectInstance* playFX_2A(s32, f32, f32, f32);
 EffectInstance* playFX_2B(s32, f32, f32, f32);
 EffectInstance* playFX_2C(s32, f32, f32, f32);
 void playFX_2D(s32, f32, f32, f32, s32, s32);
 void playFX_2E(s32, f32, f32, f32, f32, s32);
-void playFX_2F(s32, f32, f32, f32, f32, s32, s32);
+void playFX_2F(s32, f32, f32, f32, f32, s32, s32*);
 void playFX_30(s32, f32, f32, f32);
 void playFX_31(s32, f32, f32, f32);
 void playFX_32(s32, f32, f32, f32, f32);
 EffectInstance* playFX_33(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_34(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_35(s32, f32, f32, f32, f32, s32);
+EffectInstance* playFX_34(s32, f32, f32, f32, f32, s32*);
+EffectInstance* playFX_35(s32, f32, f32, f32, f32, s32*);
 EffectInstance* playFX_36(s32, f32, f32, f32, f32, f32);
 EffectInstance* playFX_37(s32, f32, f32, f32, f32, f32, f32, s32, s32, s32);
 EffectInstance* playFX_38(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_39(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_3A(s32, f32, f32, f32, f32, f32, s32, s32);
-void playFX_3B(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_3C(s32, f32, f32, f32, f32, s32);
+void playFX_3B(s32, f32, f32, f32, f32, s32*);
+EffectInstance* playFX_3C(s32, f32, f32, f32, f32, s32*);
 void playFX_3D(s32, f32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* playFX_3E(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_3F(s32, f32, f32, f32, s32);
@@ -265,7 +267,7 @@ EffectInstance* playFX_6F(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_70(s32, f32, f32, f32, f32, f32, f32, s32, s32, f32, f32);
 EffectInstance* playFX_71(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_72(s32, f32, f32, f32, f32, f32, f32, s32, s32);
-EffectInstance* playFX_73(s32, f32, f32, f32, f32, s32, s32);
+EffectInstance* playFX_73(s32, f32, f32, f32, f32, s32, s32); //returns ptr to struct unk_802BE310* in watt.c
 EffectInstance* playFX_74(s32, f32, f32, f32, f32, f32, f32, f32, f32);
 EffectInstance* playFX_75(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_76(s32, f32, f32, f32, f32, s32);

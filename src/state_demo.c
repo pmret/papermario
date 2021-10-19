@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 typedef struct DemoSceneData {
     /* 0x0 */ s16 unk_0;

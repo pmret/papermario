@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 #define NAMESPACE action_command_flee
 
@@ -28,7 +29,7 @@ ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     actionCommandStatus->actionCommandID = ACTION_COMMAND_FLEE;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = actionCommandStatus->unk_5A * 100;
+    actionCommandStatus->barFillLevel = actionCommandStatus->unk_5A * 100;
     actionCommandStatus->unk_46 = rand_int(50);
     actionCommandStatus->unk_48 = 0;
     actionCommandStatus->unk_5C = 1;
@@ -149,17 +150,17 @@ void func_802A9378_422E48(void) {
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
         case 11:
             if ((battleStatus->unk_83 != 0) && ((battleStatus->currentButtonsPressed & 0x8000) != 0)) {
-                actionCommandStatus->unk_44 += (battleStatus->unk_434[actionCommandStatus->unk_50] * 180 / 100);
+                actionCommandStatus->barFillLevel += (battleStatus->unk_434[actionCommandStatus->unk_50] * 180 / 100);
             }
-            if (actionCommandStatus->unk_44 >= 10000) {
+            if (actionCommandStatus->barFillLevel >= 10000) {
                 hudElement = actionCommandStatus->hudElements[4];
-                actionCommandStatus->unk_44 = 10000;
+                actionCommandStatus->barFillLevel = 10000;
                 actionCommandStatus->unk_68 = 1;
                 set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 50, actionCommandStatus->hudElementY + 28);
                 clear_hud_element_flags(hudElement, 2);
             }
 
-            battleStatus->actionSuccess = actionCommandStatus->unk_44 / 100;
+            battleStatus->actionSuccess = actionCommandStatus->barFillLevel / 100;
             if (actionCommandStatus->unk_54 == 0) {
                 if (battleStatus->actionSuccess >= (100 - actionCommandStatus->unk_46)) {
                     battleStatus->unk_86 = 1;
@@ -230,12 +231,12 @@ void func_802A96F4_4231C4(void) {
     get_hud_element_render_pos(hudElement, &x, &y);
 
     if (D_802A9920 == 0) {
-        func_80268798(x, y, actionCommandStatus->unk_44 / 100, 1);
+        func_80268798(x, y, actionCommandStatus->barFillLevel / 100, 1);
     } else {
         if (actionCommandStatus->unk_68 == 0) {
-            func_80268798(x, y, actionCommandStatus->unk_44 / 100, 4);
+            func_80268798(x, y, actionCommandStatus->barFillLevel / 100, 4);
         } else {
-            func_8026880C(x, y, actionCommandStatus->unk_44 / 100, 4);
+            func_8026880C(x, y, actionCommandStatus->barFillLevel / 100, 4);
         }
     }
 

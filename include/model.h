@@ -85,18 +85,6 @@ typedef struct TextureHandle {
     /* 0x40 */ s32* auxPalette;
 } TextureHandle; // size = 0x44
 
-typedef void(*ModelCustomGfxBuilderFunc)(s32 index);
-
-typedef struct ModelCustomGfxBuilder {
-    /* 0x00 */ ModelCustomGfxBuilderFunc pre;
-    /* 0x00 */ ModelCustomGfxBuilderFunc post;
-} ModelCustomGfxBuilder; // size = 0x8
-
-typedef struct ModelCustomGfx {
-    /* 0x00 */ Gfx* pre;
-    /* 0x00 */ Gfx* post;
-} ModelCustomGfx; // size = 0x8
-
 typedef struct ModelBlueprint {
     /* 0x0 */ s16 flags;
     /* 0x2 */ char unk_02[0x2];
@@ -105,8 +93,10 @@ typedef struct ModelBlueprint {
     /* 0xC */ Matrix4s* mtx;
 } ModelBlueprint; // size = 0x10
 
-typedef ModelCustomGfx ModelCustomGfxList[32];
-typedef ModelCustomGfxBuilder ModelCustomGfxBuilderList[32];
+typedef void(*ModelCustomGfxBuilderFunc)(s32 index);
+
+typedef Gfx* ModelCustomGfxList[32];
+typedef ModelCustomGfxBuilderFunc ModelCustomGfxBuilderList[32];
 
 // In memory this is a list of ModelNodeProperty, but due to the way it uses
 // the fields (storing into the "type" field) we decided to make a struct for this

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 #include "battle/battle.h"
 
 extern s8 D_8029FBD4;
@@ -39,11 +40,11 @@ s32 get_nearest_home_index(f32 x, f32 y, f32 z) {
     return yVal | (xVal << 2);
 }
 
-INCLUDE_ASM(void, "197F40", set_goal_pos_to_part, f32* goalPos, ActorID target, s32 partIndex);
+INCLUDE_ASM(void, "197F40", set_goal_pos_to_part, f32* goalPos, s32 target, s32 partIndex);
 
 INCLUDE_ASM(s32, "197F40", set_part_goal_to_actor_part);
 
-void set_actor_current_position(ActorID actorID, f32 x, f32 y, f32 z) {
+void set_actor_current_position(s32 actorID, f32 x, f32 y, f32 z) {
     Actor* actor = get_actor(actorID);
 
     actor->currentPos.x = x;
@@ -51,7 +52,7 @@ void set_actor_current_position(ActorID actorID, f32 x, f32 y, f32 z) {
     actor->currentPos.z = z;
 }
 
-void set_part_absolute_position(ActorID actorID, s32 partIndex, f32 x, f32 y, f32 z) {
+void set_part_absolute_position(s32 actorID, s32 partIndex, f32 x, f32 y, f32 z) {
     Actor* actor = get_actor(actorID);
     ActorPart* actorPart;
 
@@ -71,7 +72,7 @@ void set_part_absolute_position(ActorID actorID, s32 partIndex, f32 x, f32 y, f3
     }
 }
 
-void set_actor_home_position(ActorID actorID, f32 x, f32 y, f32 z) {
+void set_actor_home_position(s32 actorID, f32 x, f32 y, f32 z) {
     Actor* actor = get_actor(actorID);
 
     actor->homePos.x = x;
@@ -79,7 +80,7 @@ void set_actor_home_position(ActorID actorID, f32 x, f32 y, f32 z) {
     actor->homePos.z = z;
 }
 
-Actor* get_actor(ActorID actorID) {
+Actor* get_actor(s32 actorID) {
     Actor* ret = NULL;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 idFlag = actorID & 0x700;
@@ -130,7 +131,7 @@ ApiStatus func_80269EAC(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetGoalToHome(Evt* script, s32 isInitialCall) {
-    ActorID actorID = evt_get_variable(script, *script->ptrReadPos);
+    s32 actorID = evt_get_variable(script, *script->ptrReadPos);
     Actor* actor;
 
     if (actorID == ACTOR_SELF) {
@@ -138,15 +139,15 @@ ApiStatus SetGoalToHome(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->walk.goalPos.x = actor->homePos.x;
-    actor->walk.goalPos.y = actor->homePos.y;
-    actor->walk.goalPos.z = actor->homePos.z;
+    actor->state.goalPos.x = actor->homePos.x;
+    actor->state.goalPos.y = actor->homePos.y;
+    actor->state.goalPos.z = actor->homePos.z;
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetIdleGoalToHome(Evt* script, s32 isInitialCall) {
-    ActorID actorID = evt_get_variable(script, *script->ptrReadPos);
+    s32 actorID = evt_get_variable(script, *script->ptrReadPos);
     Actor* actor;
 
     if (actorID == ACTOR_SELF) {
@@ -165,7 +166,7 @@ INCLUDE_ASM(s32, "197F40", SetGoalToIndex);
 
 ApiStatus GetIndexFromPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 a1 = *args++;
     Actor* actor;
 
@@ -181,7 +182,7 @@ ApiStatus GetIndexFromPos(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetIndexFromHome(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 a1 = *args++;
     Actor* actor;
 
@@ -197,7 +198,7 @@ ApiStatus GetIndexFromHome(Evt* script, s32 isInitialCall) {
 
 ApiStatus CountPlayerTargets(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 targetSelectionFlags = *args++;
     s32 outVar = *args++;
     Actor* actor;
@@ -215,7 +216,7 @@ ApiStatus CountPlayerTargets(Evt* script, s32 isInitialCall) {
 
 ApiStatus ForceHomePos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     f32 x, y, z;
     Actor* actor;
 
@@ -240,7 +241,7 @@ ApiStatus ForceHomePos(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetHomePos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     f32 x, y, z;
     Actor* actor;
 
@@ -262,7 +263,7 @@ ApiStatus SetHomePos(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetGoalToTarget(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
 
     if (actorID == ACTOR_SELF) {
@@ -270,14 +271,14 @@ ApiStatus SetGoalToTarget(Evt* script, s32 isInitialCall) {
     }
     actor = get_actor(actorID);
 
-    set_goal_pos_to_part(&actor->walk, actor->targetActorID, actor->targetPartIndex);
+    set_goal_pos_to_part(&actor->state, actor->targetActorID, actor->targetPartIndex);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetPartGoalToTarget(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     Actor* actor;
 
@@ -293,7 +294,7 @@ ApiStatus SetPartGoalToTarget(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetGoalToFirstTarget(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     SelectableTarget* target;
 
@@ -303,14 +304,14 @@ ApiStatus SetGoalToFirstTarget(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
 
     target = &actor->targetData[actor->targetIndexList[0]];
-    set_goal_pos_to_part(&actor->walk, target->actorID, target->partID);
+    set_goal_pos_to_part(&actor->state, target->actorID, target->partID);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetGoalPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     ActorMovement* walk;
     f32 x, y, z;
@@ -319,10 +320,10 @@ ApiStatus SetGoalPos(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
     actor = get_actor(actorID);
-    walk = &actor->walk;
+    walk = &actor->state;
 
     if (*args == -12345678) {
-        x = actor->walk.goalPos.x;
+        x = actor->state.goalPos.x;
     } else {
         x = evt_get_variable(script, *args);
     }
@@ -350,7 +351,7 @@ ApiStatus SetGoalPos(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetIdleGoal(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     ActorMovement* fly;
     f32 x, y, z;
@@ -389,7 +390,7 @@ ApiStatus SetIdleGoal(Evt* script, s32 isInitialCall) {
 
 ApiStatus AddGoalPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     f32 x, y, z;
 
@@ -402,16 +403,16 @@ ApiStatus AddGoalPos(Evt* script, s32 isInitialCall) {
     z = evt_get_float_variable(script, *args++);
 
     actor = get_actor(actorID);
-    actor->walk.goalPos.x += x;
-    actor->walk.goalPos.y += y;
-    actor->walk.goalPos.z += z;
+    actor->state.goalPos.x += x;
+    actor->state.goalPos.y += y;
+    actor->state.goalPos.z += z;
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetGoalPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 outX, outY, outZ;
     s32 x, y, z;
@@ -426,9 +427,9 @@ ApiStatus GetGoalPos(Evt* script, s32 isInitialCall) {
     outY = *args++;
     outZ = *args++;
 
-    x = actor->walk.goalPos.x;
-    y = actor->walk.goalPos.y;
-    z = actor->walk.goalPos.z;
+    x = actor->state.goalPos.x;
+    y = actor->state.goalPos.y;
+    z = actor->state.goalPos.z;
 
     evt_set_variable(script, outX, x);
     evt_set_variable(script, outY, y);
@@ -440,7 +441,7 @@ ApiStatus GetGoalPos(Evt* script, s32 isInitialCall) {
 // should this be renamed to GetFlyGoal ?
 ApiStatus GetIdleGoal(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 outX, outY, outZ;
     s32 x, y, z;
@@ -468,7 +469,7 @@ ApiStatus GetIdleGoal(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetPartTarget(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     Actor* actor;
     ActorPart* actorPart;
@@ -499,7 +500,7 @@ ApiStatus GetPartTarget(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetActorPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 outX, outY, outZ;
     s32 x, y, z;
@@ -527,7 +528,7 @@ ApiStatus GetActorPos(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetPartOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     ActorPart* actorPart;
     s32 outX, outY, outZ;
@@ -563,7 +564,7 @@ ApiStatus GetPartOffset(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetPartPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     ActorPart* actorPart;
     s32 outX, outY, outZ;
@@ -593,7 +594,7 @@ ApiStatus GetPartPos(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetHomePos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 outX, outY, outZ;
     s32 x, y, z;
@@ -621,7 +622,7 @@ ApiStatus GetHomePos(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetActorPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     f32 x, y, z;
 
@@ -643,7 +644,7 @@ ApiStatus SetActorPos(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 partIndex;
     f32 x, y, z;
@@ -687,7 +688,7 @@ ApiStatus SetPartPos(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetEnemyTargetOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 partIndex;
     f32 x, y;
@@ -719,7 +720,7 @@ ApiStatus SetEnemyTargetOffset(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
 
     if (actorID == ACTOR_SELF) {
@@ -733,7 +734,7 @@ ApiStatus SetAnimation(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 var1;
     ActorPart* actorPart;
     s32 a1;
@@ -754,7 +755,7 @@ ApiStatus GetAnimation(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetAnimationRate(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
 
     if (actorID == ACTOR_SELF) {
@@ -768,7 +769,7 @@ ApiStatus SetAnimationRate(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetActorYaw(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -780,7 +781,7 @@ ApiStatus SetActorYaw(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetActorYaw(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 a1;
 
     if (actorID == ACTOR_SELF) {
@@ -795,7 +796,7 @@ ApiStatus GetActorYaw(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartYaw(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -807,7 +808,7 @@ ApiStatus SetPartYaw(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetPartYaw(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     s32 a1;
 
@@ -824,7 +825,7 @@ ApiStatus GetPartYaw(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetActorJumpGravity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     f32 jumpAccel;
 
     if (actorID == ACTOR_SELF) {
@@ -832,13 +833,13 @@ ApiStatus SetActorJumpGravity(Evt* script, s32 isInitialCall) {
     }
 
     jumpAccel = evt_get_float_variable(script, *args++);
-    get_actor(actorID)->walk.acceleration = jumpAccel;
+    get_actor(actorID)->state.acceleration = jumpAccel;
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetActorIdleJumpGravity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     f32 flyJumpAccel;
 
     if (actorID == ACTOR_SELF) {
@@ -852,7 +853,7 @@ ApiStatus SetActorIdleJumpGravity(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetActorSpeed(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     f32 moveSpeed;
 
     if (actorID == ACTOR_SELF) {
@@ -860,14 +861,14 @@ ApiStatus SetActorSpeed(Evt* script, s32 isInitialCall) {
     }
 
     moveSpeed = evt_get_float_variable(script, *args++);
-    get_actor(actorID)->walk.speed = moveSpeed;
+    get_actor(actorID)->state.speed = moveSpeed;
     return ApiStatus_DONE2;
 }
 
 // SetActorFlySpeed?
 ApiStatus SetActorIdleSpeed(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     f32 flySpeed;
 
     if (actorID == ACTOR_SELF) {
@@ -881,7 +882,7 @@ ApiStatus SetActorIdleSpeed(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartJumpGravity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     f32 jumpScale;
 
@@ -898,7 +899,7 @@ ApiStatus SetPartJumpGravity(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartMoveSpeed(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     f32 moveSpeed;
 
@@ -915,7 +916,7 @@ ApiStatus SetPartMoveSpeed(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetJumpAnimations(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 jumpPartIndex;
     s32 animJumpRise;
@@ -932,17 +933,17 @@ ApiStatus SetJumpAnimations(Evt* script, s32 isInitialCall) {
     animJumpLand = *args++;
 
     actor = get_actor(actorID);
-    actor->jumpPartIndex = jumpPartIndex;
-    actor->walk.animJumpRise = animJumpRise;
-    actor->walk.animJumpFall = animJumpFall;
-    actor->walk.animJumpLand = animJumpLand;
+    actor->state.jumpPartIndex = jumpPartIndex;
+    actor->state.animJumpRise = animJumpRise;
+    actor->state.animJumpFall = animJumpFall;
+    actor->state.animJumpLand = animJumpLand;
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus AddActorPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     f32 x, y, z;
 
@@ -964,7 +965,7 @@ ApiStatus AddActorPos(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetActorDispOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     f32 x, y, z;
 
@@ -986,7 +987,7 @@ ApiStatus SetActorDispOffset(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetPartDispOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 partIndex;
     s32 outX, outY, outZ;
@@ -1022,7 +1023,7 @@ ApiStatus GetPartDispOffset(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartDispOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 partIndex;
     f32 x, y, z;
@@ -1053,7 +1054,7 @@ ApiStatus SetPartDispOffset(Evt* script, s32 isInitialCall) {
 
 ApiStatus AddPartDispOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 partIndex;
     f32 x, y, z;
@@ -1098,7 +1099,7 @@ ApiStatus func_8026BF48(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetActorVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 var1;
     s32 a2;
 
@@ -1109,14 +1110,14 @@ ApiStatus GetActorVar(Evt* script, s32 isInitialCall) {
     var1 = evt_get_variable(script, *args++);
     a2 = *args++;
 
-    evt_set_variable(script, a2, get_actor(actorID)->varTable[var1]);
+    evt_set_variable(script, a2, get_actor(actorID)->state.varTable[var1]);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetActorVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 index;
     s32 val;
 
@@ -1127,17 +1128,17 @@ ApiStatus SetActorVar(Evt* script, s32 isInitialCall) {
     index = evt_get_variable(script, *args++);
     val = evt_get_variable(script, *args++);
 
-    get_actor(actorID)->varTable[index] = val;
+    get_actor(actorID)->state.varTable[index] = val;
 
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
 ApiStatus AddActorVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 index;
     s32 val;
+    ActorState* state;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -1146,17 +1147,15 @@ ApiStatus AddActorVar(Evt* script, s32 isInitialCall) {
     index = evt_get_variable(script, *args++);
     val = evt_get_variable(script, *args++);
 
-    get_actor(actorID)->varTable[index] += val;
+    state = &get_actor(actorID)->state;
+    state->varTable[index] += val;
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "197F40", AddActorVar);
-#endif
 
 ApiStatus GetPartMovementVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     s32 tableIndex;
     s32 outVar;
@@ -1176,7 +1175,7 @@ ApiStatus GetPartMovementVar(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartMovementVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     s32 tableIndex;
     s32 val;
@@ -1196,7 +1195,7 @@ ApiStatus SetPartMovementVar(Evt* script, s32 isInitialCall) {
 
 ApiStatus AddPartMovementVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     s32 tableIndex;
     s32 val;
@@ -1216,7 +1215,7 @@ ApiStatus AddPartMovementVar(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetActorRotation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 x, y, z;
 
@@ -1247,7 +1246,7 @@ ApiStatus SetActorRotation(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetActorRotationOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 x, y, z;
 
@@ -1270,7 +1269,7 @@ ApiStatus SetActorRotationOffset(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetActorRotation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 x, y, z;
 
@@ -1293,7 +1292,7 @@ ApiStatus GetActorRotation(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartRotation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 x, y, z;
@@ -1317,7 +1316,7 @@ ApiStatus SetPartRotation(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartRotationOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 x, y, z;
@@ -1341,7 +1340,7 @@ ApiStatus SetPartRotationOffset(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetPartRotation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 x, y, z;
@@ -1365,7 +1364,7 @@ ApiStatus GetPartRotation(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetActorScale(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     f32 x, y, z;
 
@@ -1388,7 +1387,7 @@ ApiStatus SetActorScale(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetActorScaleModifier(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     f32 x, y, z;
 
@@ -1411,7 +1410,7 @@ ApiStatus SetActorScaleModifier(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetActorScale(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     f32 x, y, z;
 
@@ -1434,7 +1433,7 @@ ApiStatus GetActorScale(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartScale(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     f32 x, y, z;
@@ -1458,7 +1457,7 @@ ApiStatus SetPartScale(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetPartScale(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 x, y, z;
@@ -1520,7 +1519,7 @@ ApiStatus SetBattleFlagBits2(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetActorFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 a1;
 
     if (actorID == ACTOR_SELF) {
@@ -1535,7 +1534,7 @@ ApiStatus SetActorFlags(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetActorFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 a1;
     s32 var1;
     Actor* actor;
@@ -1559,7 +1558,7 @@ ApiStatus SetActorFlagBits(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetActorFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 a1;
 
     if (actorID == ACTOR_SELF) {
@@ -1575,7 +1574,7 @@ ApiStatus GetActorFlags(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 a1;
     s32 partIndex;
 
@@ -1593,7 +1592,7 @@ ApiStatus SetPartFlags(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 bits;
     s32 partIndex;
@@ -1620,7 +1619,7 @@ ApiStatus SetPartFlagBits(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartTargetFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 flags;
     s32 partIndex;
@@ -1640,7 +1639,7 @@ ApiStatus SetPartTargetFlags(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartTargetFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 partIndex;
     s32 bits;
@@ -1667,7 +1666,7 @@ ApiStatus SetPartTargetFlagBits(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetPartFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     ActorPart* actorPart;
     s32 a2;
@@ -1686,7 +1685,7 @@ ApiStatus GetPartFlags(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetPartTargetFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     ActorPart* actorPart;
     s32 a2;
@@ -1705,7 +1704,7 @@ ApiStatus GetPartTargetFlags(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartEventFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 flags;
     s32 partIndex;
@@ -1725,7 +1724,7 @@ ApiStatus SetPartEventFlags(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartEventBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 partIndex;
     s32 bits;
@@ -1752,7 +1751,7 @@ ApiStatus SetPartEventBits(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetPartEventFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     ActorPart* actorPart;
     s32 a2;
@@ -1771,7 +1770,7 @@ ApiStatus GetPartEventFlags(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8026D51C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 flags;
     s32 partIndex;
@@ -1791,7 +1790,7 @@ ApiStatus func_8026D51C(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8026D5A4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     ActorPart* actorPart;
     s32 partIndex;
     s32 bits;
@@ -1818,7 +1817,7 @@ ApiStatus func_8026D5A4(Evt* script, s32 isInitialCall) {
 
 ApiStatus HPBarToHome(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
 
     if (actorID == ACTOR_SELF) {
@@ -1841,7 +1840,7 @@ ApiStatus HPBarToHome(Evt* script, s32 isInitialCall) {
 
 ApiStatus HPBarToCurrent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
 
     if (actorID == ACTOR_SELF) {
@@ -1864,7 +1863,7 @@ ApiStatus HPBarToCurrent(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8026D8EC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -1877,7 +1876,7 @@ ApiStatus func_8026D8EC(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8026D940(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 x, y;
 
@@ -1905,7 +1904,7 @@ ApiStatus func_8026D940(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8026DA94(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 a, b, c, d;
 
@@ -1943,7 +1942,7 @@ ApiStatus ActorExists(Evt* script, s32 isInitialCall) {
     Bytecode isExist;
     Actor* partner = gBattleStatus.partnerActor;
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -1960,7 +1959,7 @@ ApiStatus ActorExists(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8026DEF0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     s32 a2 = *args++;
 
@@ -1975,7 +1974,7 @@ ApiStatus func_8026DEF0(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8026DF88(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     s32 a2 = *args++;
 
@@ -2059,11 +2058,42 @@ ApiStatus SetBattleState(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", WaitForState);
+ApiStatus WaitForState(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32* ptrReadPos = script->ptrReadPos;
+    s32 temp_v0;
+
+    if (isInitialCall) {
+        temp_v0 = evt_get_variable(script, *ptrReadPos);
+        if (!temp_v0) {
+            battleStatus->unk_95 = 0;
+            return ApiStatus_DONE2;
+        }
+        battleStatus->unk_95 = temp_v0;
+    }
+
+    temp_v0 = battleStatus->unk_95;
+    if (temp_v0) {
+        return (gBattleState == temp_v0) * 2;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", CancelEnemyTurn);
 
-INCLUDE_ASM(s32, "197F40", func_8026E260);
+ApiStatus func_8026E260(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+
+    evt_get_variable(script, *args++);
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    get_actor(actorID);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus PlayerCreateTargetList(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -2169,7 +2199,14 @@ ApiStatus func_8026F60C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", SetBattleVar);
+ApiStatus SetBattleVar(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 varIdx = evt_get_variable(script, *args++);
+
+    gBattleStatus.varTable[varIdx] = evt_get_variable(script, *args++);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetBattleVar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -2181,7 +2218,7 @@ ApiStatus GetBattleVar(Evt* script, s32 isInitialCall) {
 
 
 ApiStatus ResetAllActorSounds(Evt* script, s32 isInitialCall) {
-    ActorID actorID = evt_get_variable(script, *script->ptrReadPos);
+    s32 actorID = evt_get_variable(script, *script->ptrReadPos);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -2199,7 +2236,7 @@ INCLUDE_ASM(s32, "197F40", SetPartSounds);
 
 ApiStatus SetActorType(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID* actorID = evt_get_variable(script, *args++);
+    s32* actorID = evt_get_variable(script, *args++);
     Actor* enemy;
     s32 actorType;
 
@@ -2220,7 +2257,7 @@ ApiStatus SetActorType(Evt* script, s32 isInitialCall) {
 
 
 ApiStatus ShowShockEffect(Evt* script, s32 isInitialCall) {
-    ActorID actorID = evt_get_variable(script, *script->ptrReadPos);
+    s32 actorID = evt_get_variable(script, *script->ptrReadPos);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -2258,15 +2295,588 @@ ApiStatus GetActorDefenseBoost(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", BoostAttack);
+ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID;
+    Actor* actor;
+    s32 flags;
+    s32 flags2;
+    f32 x1, y1, z1;
+    f32 x2, y2, z2;
+    s32 attackBoost;
 
-INCLUDE_ASM(s32, "197F40", BoostDefense);
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
 
-INCLUDE_ASM(s32, "197F40", VanishActor);
+    if (script->functionTemp[0] == 0) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+        attackBoost = evt_get_variable(script, *args++);
+        actor = get_actor(actorID);
+        script->functionTemp[1] = (s32) actor;
+        script->functionTemp[2] = attackBoost;
 
-INCLUDE_ASM(s32, "197F40", ElectrifyActor);
+        func_8024E40C(8);
+        btl_cam_set_zoffset(12);
+        btl_cam_target_actor(actor->actorID);
+        btl_cam_set_zoom(0xFA);
+        btl_cam_move(10);
+        func_8024E60C();
+        if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+            btl_cam_set_zoffset(0);
+        }
+        D_8029FBD4 = 1;
+        script->functionTemp[3] = 5;
+        script->functionTemp[0] = 1;
+    }
+    get_actor(script->owner1.actorID);
+    actor = (Actor*) script->functionTemp[1];
+    attackBoost = script->functionTemp[2];
 
-INCLUDE_ASM(s32, "197F40", HealActor);
+    flags = actor->flags;
+    x1 = actor->currentPos.x + actor->headOffset.x;
+    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y1 = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
+    } else if (!(flags & ACTOR_FLAG_8000)) {
+        y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
+    } else {
+        y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    }
+    z1 = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    flags2 = actor->flags;
+    x2 = actor->currentPos.x + actor->headOffset.x + actor->size.x / 2;
+    if (flags2 & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y2 = actor->currentPos.y + actor->headOffset.y - actor->size.y;
+    } else if (!(flags2 & ACTOR_FLAG_8000)) {
+        y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    } else {
+        y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y * 2;
+    }
+    z2 = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    switch (script->functionTemp[0]) {
+        case 1:
+            if (script->functionTemp[3] == 0) {
+                playFX_33(2, x1, y1, z1, 1.0f, 30);
+                func_8024E3D8(0x13);
+                script->functionTemp[3] = 30;
+                script->functionTemp[0] = 2;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 2:
+            if (script->functionTemp[3] == 0) {
+                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                func_8024E40C(2);
+                btl_cam_move(15);
+                actor->isGlowing = 1;
+                actor->attackBoost += attackBoost;
+                if (actor->attackBoost > 20) {
+                    actor->attackBoost = 20;
+                }
+                playFX_56(attackBoost - 1, x2, y2, z2, 1.0f, 60);
+                script->functionTemp[3] = 15;
+                script->functionTemp[0] = 3;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 3:
+            if (script->functionTemp[3] == 0) {
+                btl_show_variable_battle_message(0x1D, 60, attackBoost);
+                script->functionTemp[0] = 4;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 4:
+            if (btl_is_popup_displayed() == 0) {
+                func_8024E40C(2);
+                script->functionTemp[3] = 10;
+                script->functionTemp[0] = 5;
+            }
+            break;
+        case 5:
+            if (script->functionTemp[3] != 0) {
+                script->functionTemp[3]--;
+                break;
+            }
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+                D_8029FBD4 = 0;
+                return ApiStatus_DONE2;
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID;
+    Actor* actor;
+    f32 x1, y1, z1;
+    f32 x2, y2, z2;
+    s32 defenseBoost;
+    s32 flags;
+    s32 flags2;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+        defenseBoost = evt_get_variable(script, *args++);
+        actor = get_actor(actorID);
+        script->functionTemp[1] = (s32) actor;
+        script->functionTemp[2] = defenseBoost;
+
+        func_8024E40C(8);
+        btl_cam_set_zoffset(12);
+        btl_cam_target_actor(actor->actorID);
+        btl_cam_set_zoom(0xFA);
+        btl_cam_move(10);
+        func_8024E60C();
+        if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+            btl_cam_set_zoffset(0);
+        }
+
+        D_8029FBD4 = 1;
+        script->functionTemp[3] = 5;
+        script->functionTemp[0] = 1;
+    }
+    get_actor(script->owner1.actorID);
+    actor = (Actor*) script->functionTemp[1];
+    defenseBoost = script->functionTemp[2];
+
+    flags = actor->flags;
+    x1 = actor->currentPos.x + actor->headOffset.x;
+    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y1 = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
+    } else if (!(flags & ACTOR_FLAG_8000)) {
+        y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
+    } else {
+        y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    }
+    z1 = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    flags2 = actor->flags;
+    x2 = actor->currentPos.x + actor->headOffset.x + actor->size.x / 2;
+    if (flags2 & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y2 = actor->currentPos.y + actor->headOffset.y - actor->size.y;
+    } else if (!(flags2 & ACTOR_FLAG_8000)) {
+        y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    } else {
+        y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y * 2;
+    }
+    z2 = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    switch (script->functionTemp[0]) {
+        case 1:
+            if (script->functionTemp[3] == 0) {
+                playFX_33(2, x1, y1, z1, 1.0f, 30);
+                func_8024E3D8(0x13);
+                script->functionTemp[3] = 30;
+                script->functionTemp[0] = 2;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 2:
+            if (script->functionTemp[3] == 0) {
+                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                func_8024E40C(2);
+                btl_cam_move(15);
+                actor->isGlowing = 1;
+                actor->defenseBoost += defenseBoost;
+                if (actor->defenseBoost > 20) {
+                    actor->defenseBoost = 20;
+                }
+                playFX_56(defenseBoost + 5, x2, y2, z2, 1.0f, 60);
+                script->functionTemp[3] = 15;
+                script->functionTemp[0] = 3;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 3:
+            if (script->functionTemp[3] == 0) {
+                btl_show_variable_battle_message(0x1E, 60, defenseBoost);
+                script->functionTemp[0] = 4;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 4:
+            if (btl_is_popup_displayed() == 0) {
+                func_8024E40C(2);
+                script->functionTemp[3] = 10;
+                script->functionTemp[0] = 5;
+            }
+            break;
+        case 5:
+            if (script->functionTemp[3] != 0) {
+                script->functionTemp[3]--;
+                break;
+            }
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+                D_8029FBD4 = 0;
+                return ApiStatus_DONE2;
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID;
+    Actor* actor;
+    f32 x, y, z;
+    s32 vanished;
+    s32 flags;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+        vanished = evt_get_variable(script, *args++);
+        actor = get_actor(actorID);
+        script->functionTemp[1] = (s32) actor;
+        script->functionTemp[2] = vanished;
+
+        func_8024E40C(8);
+        btl_cam_set_zoffset(12);
+        btl_cam_target_actor(actor->actorID);
+        btl_cam_set_zoom(0xFA);
+        btl_cam_move(10);
+        func_8024E60C();
+        if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+            btl_cam_set_zoffset(0);
+        }
+
+        D_8029FBD4 = 1;
+        script->functionTemp[3] = 5;
+        script->functionTemp[0] = 1;
+    }
+    get_actor(script->owner1.actorID);
+    actor = (Actor*) script->functionTemp[1];
+    vanished = script->functionTemp[2];
+
+    flags = actor->flags;
+    x = actor->currentPos.x + actor->headOffset.x;
+    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
+    } else if (!(flags & ACTOR_FLAG_8000)) {
+        y = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
+    } else {
+        y = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    }
+    z = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    switch (script->functionTemp[0]) {
+        case 1:
+            if (script->functionTemp[3] == 0) {
+                playFX_33(3, x, y, z, 1.0f, 30);
+                func_8024E3D8(0x13);
+                script->functionTemp[3] = 0x1E;
+                script->functionTemp[0] = 2;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 2:
+            if (script->functionTemp[3] == 0) {
+                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                func_8024E40C(2);
+                btl_cam_move(15);
+                inflict_status(actor, 0xE, vanished);
+                script->functionTemp[3] = 15;
+                script->functionTemp[0] = 3;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 3:
+            if (script->functionTemp[3] == 0) {
+                btl_show_variable_battle_message(0x21, 60, vanished);
+                script->functionTemp[0] = 4;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 4:
+            if (btl_is_popup_displayed() == 0) {
+                func_8024E40C(2);
+                script->functionTemp[3] = 10;
+                script->functionTemp[0] = 5;
+            }
+            break;
+        case 5:
+            if (script->functionTemp[3] != 0) {
+                script->functionTemp[3]--;
+                break;
+            }
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+                D_8029FBD4 = 0;
+                return ApiStatus_DONE2;
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID;
+    Actor* actor;
+    f32 x, y, z;
+    s32 electrified;
+    s32 flags;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+        electrified = evt_get_variable(script, *args++);
+        actor = get_actor(actorID);
+        script->functionTemp[1] = (s32) actor;
+        script->functionTemp[2] = electrified;
+
+        func_8024E40C(8);
+        btl_cam_set_zoffset(12);
+        btl_cam_target_actor(actor->actorID);
+        btl_cam_set_zoom(0xFA);
+        btl_cam_move(10);
+        func_8024E60C();
+        if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+            btl_cam_set_zoffset(0);
+        }
+
+        D_8029FBD4 = 1;
+        script->functionTemp[3] = 5;
+        script->functionTemp[0] = 1;
+    }
+    get_actor(script->owner1.actorID);
+    actor = (Actor*) script->functionTemp[1];
+    electrified = script->functionTemp[2];
+
+    flags = actor->flags;
+    x = actor->currentPos.x + actor->headOffset.x;
+    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
+    } else if (!(flags & ACTOR_FLAG_8000)) {
+        y = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
+    } else {
+        y = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    }
+    z = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    switch (script->functionTemp[0]) {
+        case 1:
+            if (script->functionTemp[3] == 0) {
+                playFX_57(8, x, y, z, 1.0f, 30);
+                func_8024E3D8(0x13);
+                script->functionTemp[3] = 0x1E;
+                script->functionTemp[0] = 2;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 2:
+            if (script->functionTemp[3] == 0) {
+                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                func_8024E40C(2);
+                btl_cam_move(15);
+                inflict_status(actor, 0xB, electrified);
+                script->functionTemp[3] = 15;
+                script->functionTemp[0] = 3;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 3:
+            if (script->functionTemp[3] == 0) {
+                btl_show_variable_battle_message(0x22, 60, electrified);
+                script->functionTemp[0] = 4;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 4:
+            if (btl_is_popup_displayed() == 0) {
+                func_8024E40C(2);
+                script->functionTemp[3] = 10;
+                script->functionTemp[0] = 5;
+            }
+            break;
+        case 5:
+            if (script->functionTemp[3] != 0) {
+                script->functionTemp[3]--;
+                break;
+            }
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+                D_8029FBD4 = 0;
+                return ApiStatus_DONE2;
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus HealActor(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID;
+    Actor* actor;
+    f32 x1, y1, z1;
+    f32 x2, y2, z2;
+    s32 hpBoost;
+    s32 flags;
+    s32 flags2;
+    s32 message;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        actorID = evt_get_variable(script, *args++);
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.enemyID;
+        }
+        hpBoost = evt_get_variable(script, *args++);
+        D_8029FBD0 = evt_get_variable(script, *args++);
+        actor = get_actor(actorID);
+        script->functionTemp[1] = (s32) actor;
+        script->functionTemp[2] = hpBoost;
+
+        func_8024E40C(8);
+        btl_cam_set_zoffset(12);
+        btl_cam_target_actor(actor->actorID);
+        btl_cam_move(10);
+        func_8024E60C();
+
+        D_8029FBD4 = 1;
+        script->functionTemp[3] = 5;
+        script->functionTemp[0] = 1;
+    }
+    get_actor(script->owner1.enemyID);
+    actor = (Actor*) script->functionTemp[1];
+    hpBoost = script->functionTemp[2];
+
+    flags = actor->flags;
+    x1 = actor->currentPos.x + actor->headOffset.x;
+    if (flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y1 = actor->currentPos.y + actor->headOffset.y - actor->size.y / 2;
+    } else if (!(flags & ACTOR_FLAG_8000)) {
+        y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
+    } else {
+        y1 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    }
+    z1 = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    flags2 = actor->flags;
+    x2 = actor->currentPos.x + actor->headOffset.x + actor->size.x / 2;
+    if (flags2 & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        y2 = actor->currentPos.y + actor->headOffset.y - actor->size.y;
+    } else if (!(flags2 & ACTOR_FLAG_8000)) {
+        y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y;
+    } else {
+        y2 = actor->currentPos.y + actor->headOffset.y + actor->size.y * 2;
+    }
+    z2 = actor->currentPos.z + actor->headOffset.z + 10.0f;
+
+    switch (script->functionTemp[0]) {
+        case 1:
+            if (script->functionTemp[3] == 0) {
+                dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
+                playFX_40(0, x2, y2, z2, hpBoost);
+                func_802D7460(x1, y1, z1, hpBoost);
+                script->functionTemp[3] = 30;
+                script->functionTemp[0] = 2;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 2:
+            if (script->functionTemp[3] == 0) {
+                func_8024E40C(2);
+                btl_cam_move(15);
+                actor->currentHP += hpBoost;
+                if (actor->maxHP < actor->currentHP) {
+                    actor->currentHP = actor->maxHP;
+                }
+                func_802D74C0(x1, y1, z1, hpBoost);
+                script->functionTemp[3] = 15;
+                script->functionTemp[0] = 3;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 3:
+            if (script->functionTemp[3] == 0) {
+                message = 0x20;
+                if (D_8029FBD0 == 0) {
+                    message = 0x1F;
+                }
+                btl_show_variable_battle_message(message, 60, hpBoost);
+                script->functionTemp[0] = 4;
+            } else {
+                script->functionTemp[3]--;
+                break;
+            }
+            break;
+        case 4:
+            if (btl_is_popup_displayed() == 0) {
+                script->functionTemp[3] = 10;
+                script->functionTemp[0] = 5;
+            }
+            break;
+        case 5:
+            if (script->functionTemp[3] != 0) {
+                script->functionTemp[3]--;
+                break;
+            }
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
+                D_8029FBD4 = 0;
+                return ApiStatus_DONE2;
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus WaitForBuffDone(Evt* script, s32 isInitialCall) {
     return (D_8029FBD4 == 0) * ApiStatus_DONE2;
@@ -2274,7 +2884,7 @@ ApiStatus WaitForBuffDone(Evt* script, s32 isInitialCall) {
 
 ApiStatus CopyBuffs(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actorFrom;
     Actor* actorTo;
 

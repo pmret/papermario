@@ -2,10 +2,11 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
+#include "hud_element.h"
 
 extern s32 D_802946E0[];
 
-void dispatch_event_actor(Actor* actor, Event event);
+void dispatch_event_actor(Actor* actor, s32 event);
 void func_8024EFE0(f32 x, f32 y, f32 z, s32 a, s32 b);
 void func_802664DC(f32 x, f32 y, f32 z, s32 damage);
 s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event);
@@ -28,7 +29,7 @@ s32 has_enchanted_part(Actor* actor) {
     return ret;
 }
 
-void dispatch_event_general(Actor* actor, Event event) {
+void dispatch_event_general(Actor* actor, s32 event) {
     switch (actor->actorID & 0x700) {
         case ACTOR_PLAYER:
             dispatch_event_player(event);
@@ -107,7 +108,7 @@ void play_hit_sound(Actor* actor, f32 x, f32 y, f32 z, u32 hitSound) {
     }
 }
 
-void dispatch_event_actor(Actor* actor, Event event) {
+void dispatch_event_actor(Actor* actor, s32 event) {
     Evt* onHitScript = actor->onHitScript;
     s32 onHitID = actor->onHitID;
 
@@ -797,7 +798,7 @@ s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event) {
 
 ApiStatus BindTakeTurn(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     EvtSource* takeTurnScript;
 
     if (actorID == ACTOR_SELF) {
@@ -811,7 +812,7 @@ ApiStatus BindTakeTurn(Evt* script, s32 isInitialCall) {
 
 ApiStatus PauseTakeTurn(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -824,7 +825,7 @@ ApiStatus PauseTakeTurn(Evt* script, s32 isInitialCall) {
 
 ApiStatus ResumeTakeTurn(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -837,7 +838,7 @@ ApiStatus ResumeTakeTurn(Evt* script, s32 isInitialCall) {
 
 ApiStatus BindIdle(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     EvtSource* idleCode;
     Actor* actor;
     Evt* newScriptContext;
@@ -864,7 +865,7 @@ ApiStatus BindIdle(Evt* script, s32 isInitialCall) {
 
 ApiStatus EnableIdleScript(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 var1;
     Actor* actor;
 
@@ -895,7 +896,7 @@ ApiStatus EnableIdleScript(Evt* script, s32 isInitialCall) {
 
 ApiStatus BindHandleEvent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     EvtSource* var1;
 
     if (actorID == ACTOR_SELF) {
@@ -909,7 +910,7 @@ ApiStatus BindHandleEvent(Evt* script, s32 isInitialCall) {
 
 ApiStatus BindNextTurn(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     EvtSource* var1;
 
     if (actorID == ACTOR_SELF) {
@@ -946,20 +947,20 @@ ApiStatus LandJump(Evt* script, s32 isInitialCall) {
 
         actor = get_actor(actorID);
         script->functionTemp[1] = (s32)actor;
-        actor->walk.currentPos.x = actor->currentPos.x;
-        actor->walk.currentPos.y = actor->currentPos.y;
-        actor->walk.currentPos.z = actor->currentPos.z;
+        actor->state.currentPos.x = actor->currentPos.x;
+        actor->state.currentPos.y = actor->currentPos.y;
+        actor->state.currentPos.z = actor->currentPos.z;
         script->functionTemp[0] = 1;
     }
 
     actor = (Actor*)script->functionTemp[1];
-    actor->walk.currentPos.y += actor->walk.velocity;
-    actor->walk.velocity -= actor->walk.acceleration;
+    actor->state.currentPos.y += actor->state.velocity;
+    actor->state.velocity -= actor->state.acceleration;
 
-    add_xz_vec3f(&actor->walk.currentPos, actor->walk.speed, actor->walk.angle);
-    actor->currentPos.x = actor->walk.currentPos.x;
-    actor->currentPos.y = actor->walk.currentPos.y;
-    actor->currentPos.z = actor->walk.currentPos.z;
+    add_xz_vec3f(&actor->state.currentPos, actor->state.speed, actor->state.angle);
+    actor->currentPos.x = actor->state.currentPos.x;
+    actor->currentPos.y = actor->state.currentPos.y;
+    actor->currentPos.z = actor->state.currentPos.z;
 
     if (actor->currentPos.y < 0.0f) {
         actor->currentPos.y = 0.0f;
@@ -994,7 +995,7 @@ INCLUDE_ASM(s32, "1A5830", FlyPartTo);
 
 ApiStatus GetLastEvent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 outVar;
 
     if (actorID == ACTOR_SELF) {
@@ -1008,7 +1009,7 @@ ApiStatus GetLastEvent(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetTargetActor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 targetActorID;
     Actor* actor;
 
@@ -1025,7 +1026,7 @@ ApiStatus SetTargetActor(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetEnemyHP(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s8 newHP;
     Actor* actor;
 
@@ -1049,7 +1050,7 @@ ApiStatus SetEnemyHP(Evt* script, s32 isInitialCall) {
 ApiStatus GetActorHP(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 outVar;
     s32 outVal;
@@ -1079,7 +1080,7 @@ ApiStatus GetActorHP(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetEnemyMaxHP(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 outVar;
 
     if (actorID == ACTOR_SELF) {
@@ -1097,7 +1098,7 @@ ApiStatus RemoveActor(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 i;
 
@@ -1131,7 +1132,7 @@ ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
     Actor* dropper;
     f32 playerLevel;
     f32 enemyLevel;
-    ActorID actorID;
+    s32 actorID;
     f32 ntd;
     s32 numToDrop;
 
@@ -1183,7 +1184,7 @@ ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetDefenseTable(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     u32* var2;
 
@@ -1199,7 +1200,7 @@ ApiStatus SetDefenseTable(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetStatusTable(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     u32* var1;
 
     if (actorID == ACTOR_SELF) {
@@ -1213,7 +1214,7 @@ ApiStatus SetStatusTable(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetIdleAnimations(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     u32* var2;
 
@@ -1229,7 +1230,7 @@ ApiStatus SetIdleAnimations(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8027CC10(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
 
     if (actorID == ACTOR_SELF) {
@@ -1249,7 +1250,7 @@ ApiStatus func_8027CC10(Evt* script, s32 isInitialCall) {
 ApiStatus EnemyDamageTarget(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 outVar;
     s32 hitResult;
@@ -1362,7 +1363,7 @@ ApiStatus EnemyFollowupAfflictTarget(Evt* script, s32 isInitialCall) {
 ApiStatus EnemyTestTarget(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor *actor;
     s32 outVar;
     s32 hitResult;
@@ -1433,7 +1434,7 @@ ApiStatus EnemyTestTarget(Evt *script, s32 isInitialCall) {
 
 ApiStatus DispatchDamageEvent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 damageAmount;
     s32 scriptExists;
@@ -1455,7 +1456,7 @@ ApiStatus DispatchDamageEvent(Evt* script, s32 isInitialCall) {
 
 ApiStatus DispatchEvent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -1466,7 +1467,7 @@ ApiStatus DispatchEvent(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8027D2D8(Evt* script, s32 isInitialCall) {
-    ActorID actorID = evt_get_variable(script, *script->ptrReadPos);
+    s32 actorID = evt_get_variable(script, *script->ptrReadPos);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -1477,7 +1478,7 @@ ApiStatus func_8027D2D8(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8027D32C(Evt* script, s32 isInitialCall) {
-    ActorID actorID = evt_get_variable(script, *script->ptrReadPos);
+    s32 actorID = evt_get_variable(script, *script->ptrReadPos);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -1489,7 +1490,7 @@ ApiStatus func_8027D32C(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetTargetOffset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     ActorPart* part;
     s32 x;
@@ -1513,7 +1514,7 @@ ApiStatus SetTargetOffset(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8027D434(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     ActorPart* part;
 
@@ -1529,7 +1530,7 @@ ApiStatus func_8027D434(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8027D4C8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex;
     ActorPart* part;
     s32 temp;
@@ -1553,7 +1554,7 @@ ApiStatus func_8027D4C8(Evt* script, s32 isInitialCall) {
 
 ApiStatus EnableActorBlur(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 enable = evt_get_variable(script, *args++);
     Actor* actor;
 
@@ -1574,7 +1575,7 @@ ApiStatus EnableActorBlur(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8027D628(Evt* script, s32 isInitialCall) {
-    ActorID actorID = evt_get_variable(script, *script->ptrReadPos);
+    s32 actorID = evt_get_variable(script, *script->ptrReadPos);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -1586,7 +1587,7 @@ ApiStatus func_8027D628(Evt* script, s32 isInitialCall) {
 
 ApiStatus AfflictActor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
     s32 statusTypeKey;
     s32 duration;
@@ -1625,7 +1626,7 @@ ApiStatus AfflictActor(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8027D75C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 outVar = *args++;
 
     if (actorID == ACTOR_SELF) {
@@ -1648,7 +1649,7 @@ ApiStatus YieldTurn(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetActorSize(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
     s32 x = evt_get_variable(script, *args++);
     Actor* actor;
@@ -1672,7 +1673,7 @@ ApiStatus SetActorSize(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetActorSize(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 outY = *args++;
     s32 outX = *args++;
     Actor* actor;
@@ -1689,7 +1690,7 @@ ApiStatus GetActorSize(Evt* script, s32 isInitialCall) {
 
 ApiStatus SetPartSize(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     s32 sizeY = evt_get_variable(script, *args++);
     s32 sizeX = evt_get_variable(script, *args++);
@@ -1716,7 +1717,7 @@ ApiStatus SetPartSize(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetOriginalActorType(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 outVar = *args++;
 
     if (actorID == ACTOR_SELF) {
@@ -1729,7 +1730,7 @@ ApiStatus GetOriginalActorType(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetCurrentActorType(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 outVar = *args++;
 
     if (actorID == ACTOR_SELF) {
@@ -1742,7 +1743,7 @@ ApiStatus GetCurrentActorType(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetLastDamage(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 outVar;
 
     if (actorID == ACTOR_SELF) {
@@ -1756,7 +1757,7 @@ ApiStatus GetLastDamage(Evt* script, s32 isInitialCall) {
 
 ApiStatus EnableActorGlow(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 flag;
     Actor* actor;
 
@@ -1802,8 +1803,8 @@ ApiStatus WasStatusInflicted(Evt* script, s32 isInitialCall) {
 
 ApiStatus CopyStatusEffects(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorIDTo;
-    ActorID actorIDFrom;
+    s32 actorIDTo;
+    s32 actorIDFrom;
     Actor* actorTo;
     Actor* actorFrom;
 
@@ -1833,7 +1834,7 @@ ApiStatus CopyStatusEffects(Evt* script, s32 isInitialCall) {
 
 ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 flag;
     Actor* actor;
 

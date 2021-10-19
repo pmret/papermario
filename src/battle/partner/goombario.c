@@ -10,7 +10,7 @@
 extern EffectInstance* D_8023CDA0;
 extern s32 D_8023CDA4;
 extern s32 D_8023BB98_6ECC78;
-extern MessageID bActorTattles[ACTOR_TYPE_COUNT];
+extern s32 bActorTattles[ACTOR_TYPE_COUNT];
 
 extern EvtSource N(init);
 extern EvtSource N(80239784);
@@ -40,9 +40,9 @@ ApiStatus N(func_80238000_6F10E0)(Evt* script, s32 isInitialCall) {
     f32 posX = partnerActor->currentPos.x;
     f32 posY = partnerActor->currentPos.y;
     f32 posZ = partnerActor->currentPos.z;
-    f32 goalX = partnerActor->walk.goalPos.x;
-    f32 goalY = partnerActor->walk.goalPos.y;
-    f32 goalZ = partnerActor->walk.goalPos.z;
+    f32 goalX = partnerActor->state.goalPos.x;
+    f32 goalY = partnerActor->state.goalPos.y;
+    f32 goalZ = partnerActor->state.goalPos.z;
 
     script->varTable[0] = (dist3D(posX, posY, posZ, goalX, goalY, goalZ) * 15.0f) / 100.0f;
 
@@ -79,33 +79,33 @@ INCLUDE_ASM(s32, "battle/partner/goombario", func_8023817C_6F125C);
 ApiStatus N(func_80238A20_6F1B00)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = gBattleStatus.partnerActor;
-    Vec3f* pos = &partnerActor->walk.currentPos;
+    Vec3f* pos = &partnerActor->state.currentPos;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
 
     if (script->functionTemp[0] == 0) {
-        partnerActor->walk.currentPos.x = partnerActor->currentPos.x;
-        partnerActor->walk.currentPos.y = partnerActor->currentPos.y;
-        partnerActor->walk.currentPos.z = partnerActor->currentPos.z;
+        partnerActor->state.currentPos.x = partnerActor->currentPos.x;
+        partnerActor->state.currentPos.y = partnerActor->currentPos.y;
+        partnerActor->state.currentPos.z = partnerActor->currentPos.z;
         script->functionTemp[0] = 1;
     }
 
-    if (partnerActor->walk.velocity > 0.0f) {
-        set_animation(0x100, 0, partnerActor->walk.animJumpRise);
+    if (partnerActor->state.velocity > 0.0f) {
+        set_animation(0x100, 0, partnerActor->state.animJumpRise);
     }
 
-    if (partnerActor->walk.velocity < 0.0f) {
-        set_animation(0x100, 0, partnerActor->walk.animJumpFall);
+    if (partnerActor->state.velocity < 0.0f) {
+        set_animation(0x100, 0, partnerActor->state.animJumpFall);
     }
 
-    partnerActor->walk.currentPos.y = (partnerActor->walk.currentPos.y + partnerActor->walk.velocity);
-    partnerActor->walk.velocity = (partnerActor->walk.velocity - partnerActor->walk.acceleration);
-    add_xz_vec3f(pos, partnerActor->walk.speed, partnerActor->walk.angle);
-    partnerActor->currentPos.x = partnerActor->walk.currentPos.x;
-    partnerActor->currentPos.y = partnerActor->walk.currentPos.y;
-    partnerActor->currentPos.z = partnerActor->walk.currentPos.z;
+    partnerActor->state.currentPos.y = (partnerActor->state.currentPos.y + partnerActor->state.velocity);
+    partnerActor->state.velocity = (partnerActor->state.velocity - partnerActor->state.acceleration);
+    add_xz_vec3f(pos, partnerActor->state.speed, partnerActor->state.angle);
+    partnerActor->currentPos.x = partnerActor->state.currentPos.x;
+    partnerActor->currentPos.y = partnerActor->state.currentPos.y;
+    partnerActor->currentPos.z = partnerActor->state.currentPos.z;
 
     if (partnerActor->currentPos.y < 10.0f) {
         partnerActor->currentPos.y = 10.0f;
@@ -124,7 +124,7 @@ ApiStatus func_80238B60_6F1C40(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor = get_actor(partnerActor->targetActorID);
-    MessageID* tattle = &bActorTattles[targetActor->actorType];
+    s32* tattle = &bActorTattles[targetActor->actorType];
 
     script->varTable[0] = *tattle;
 

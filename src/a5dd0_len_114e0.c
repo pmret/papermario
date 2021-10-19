@@ -100,7 +100,7 @@ s32 D_8014B400 = 0xFCFFFFFF;
 
 s32 D_8014B404[] = { 0xFFFE793C, 0xFCFFFFFF, 0xFFFE7838, 0xFCFFFFFF, 0xFFFE7838, 0xFC457FFF, 0xFFFDF838, 0xFC41FFFF, 0xFFFEF838, 0xFC127E24, 0xFFFFF3F9, 0xFC127FFF, 0xFFFFF238, 0xFC127FFF, 0xFFFFF238, 0xFC127E0A, 0xF3FFF238, 0xFC127E03, 0xFFFFF378, 0xFC147E28, 0x44FE793C, 0xFC147FFF, 0x4FFE7838, 0xFC147FFF, 0x4FFE7838, 0xFC147E0A, 0x4FFE72F8, 0xFC147E03, 0x4FFE7978, 0xFCFFFFFF, 0xFFFCF279, 0xFCFFFFFF, 0xFFFCF238, 0xFCFFFFFF, 0xFFFCF238, 0xFC157FFF, 0xFFFDF238, 0xFCFFFE03, 0xFFFCF378, 0xFC26A004, 0x1FFC93FC, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1FFC93FC, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF9883, 0xFFFFAF78, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FE03, 0x2FFD7378, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61FEC3, 0x11FCF279, 0xFC61FFFF, 0x1FFCF238, 0xFC61FFFF, 0x1FFCF238, 0xFC61FFFF, 0x1FFCF238, 0xFC61FE03, 0x1FFCF378, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, };
 
-s32 mdl_textureBaseAddress = 0x8028E000;
+u32 mdl_textureBaseAddress = 0x8028E000;
 
 s8 mdl_bgMultiplyColorA = 0;
 s8 mdl_bgMultiplyColorR = 0;
@@ -691,13 +691,11 @@ extern TileDescriptor gCurrentTileDescriptor;
 extern ModelList wModelList;
 extern ModelList bModelList;
 
-// TODO: potentially a display list, figure this out
-extern u32* wModelSpecialDls[32];
-extern u32* bModelSpecialDls[32];
+extern ModelCustomGfxList wModelSpecialDls;
+extern ModelCustomGfxList bModelSpecialDls;
 
-
-extern ModelCustomGfxBuilder wCustomModelGfxBuilders;
-extern ModelCustomGfxBuilder bCustomModelGfxBuilders;
+extern ModelCustomGfxBuilderList wCustomModelGfxBuilders;
+extern ModelCustomGfxBuilderList bCustomModelGfxBuilders;
 extern ModelLocalVertexCopy** D_80152190;
 extern ModelLocalVertexCopy** D_801521D0;
 
@@ -717,6 +715,7 @@ extern s32 texPannerMainU[MAX_TEX_PANNERS];
 extern s32 texPannerMainV[MAX_TEX_PANNERS];
 extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
+extern u32 mdl_nextTextureAddress;
 extern u16 mdl_currentTransformGroupChildIndex;
 extern ModelNode* D_80153370;
 extern u16 D_80153374;
@@ -742,6 +741,7 @@ void _delete_shadow(s32 shadowIndex);
 s32 entity_get_collision_flags(Entity* entity);
 void entity_free_static_data(StaticEntityData* data);
 void update_entity_shadow_position(Entity* entity);
+s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32* hitLength);
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
 void enable_transform_group(u16 modelID);
 
@@ -1304,7 +1304,7 @@ s32 test_player_entity_aabb(Entity* entity) {
 INCLUDE_ASM(s32, "a5dd0_len_114e0", test_player_entity_aabb);
 #endif
 
-s32 is_player_action_state(ActionState actionState) {
+s32 is_player_action_state(s8 actionState) {
     return actionState == gPlayerActionState;
 }
 
@@ -1420,7 +1420,7 @@ s32 create_shadow_from_data(StaticShadowData* data, f32 x, f32 y, f32 z) {
         }
     }
 
-    ASSERT(i < 60);
+    ASSERT(i < ARRAY_COUNT(*gCurrentShadowListPtr));
 
     shadow = heap_malloc(sizeof(*shadow));
     (*gCurrentShadowListPtr)[i] = shadow;
@@ -1596,9 +1596,60 @@ ApiStatus AssignCrateFlag(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity_shadow);
+s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
+    u16 staticFlags = entity->staticData->flags;
+    s32 type;
+    s16 shadowIndex;
 
-INCLUDE_ASM(Shadow*, "a5dd0_len_114e0", create_shadow_type, s32 type, f32 x, f32 y, f32 z);
+    if (staticFlags & 0x200) {
+        if (staticFlags & 0x800) {
+            type = 2;
+        } else {
+            type = 3;
+        }
+    } else {
+        type = ((staticFlags >> 11) ^ 1) & 1;
+    }
+
+    shadowIndex = create_shadow_type(type, x, y, z);
+    entity->shadowIndex = shadowIndex;
+
+    get_shadow_by_index(shadowIndex)->flags |= 0xC00000;
+
+    return entity->shadowIndex;
+}
+
+s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z) {
+    s32 setFlag200 = FALSE;
+    StaticShadowData* data = &D_802E98BC;
+    s32 shadowIndex;
+
+    switch (type) {
+        case 2:
+            setFlag200 = TRUE;
+        case 0:
+            data = &D_802E98BC;
+            break;
+        case 3:
+            setFlag200 = TRUE;
+        case 1:
+            data = &D_802E9904;
+            break;
+        case 5:
+            setFlag200 = TRUE;
+        case 4:
+            data = &D_802E98E0;
+            break;
+    }
+
+    shadowIndex = create_shadow_from_data(data, x, y, z);
+
+    if (setFlag200) {
+        get_shadow_by_index(shadowIndex)->flags |= 0x200;
+    }
+
+    return shadowIndex;
+}
 
 void delete_shadow(s32 shadowIndex) {
     _delete_shadow(shadowIndex);
@@ -1719,13 +1770,86 @@ s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32*
     return ret;
 }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", set_standard_shadow_scale, Shadow* shadow, f32 scale);
+void set_standard_shadow_scale(Shadow* shadow, f32 height) {
+    if (!gGameStatusPtr->isBattle) {
+        shadow->scale.x = 0.13 - (height / 2600.0f);
+    } else {
+        shadow->scale.x = 0.12 - (height / 3600.0f);
+    }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_npc_shadow_scale);
+    if (shadow->scale.x < 0.01) {
+        shadow->scale.x = 0.01f;
+    }
+    shadow->scale.z = shadow->scale.x;
+}
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", set_peach_shadow_scale, Shadow* shadow, f32 scale);
+void set_npc_shadow_scale(Shadow* shadow, f32 height, f32 npcRadius) {
+    if (!gGameStatusPtr->isBattle) {
+        shadow->scale.x = 0.13 - (height / 2600.0f);
+    } else {
+        shadow->scale.x = 0.12 - (height / 3600.0f);
+    }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", is_block_on_ground);
+    if (shadow->scale.x < 0.01) {
+        shadow->scale.x = 0.01f;
+    }
+
+    if (npcRadius > 60.0f) {
+        shadow->scale.z = shadow->scale.x * 2.0f;
+    } else {
+        shadow->scale.z = shadow->scale.x;
+    }
+}
+
+void set_peach_shadow_scale(Shadow* shadow, f32 scale) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 phi_f2 = 0.12f;
+
+    if (!gGameStatusPtr->isBattle) {
+        switch (playerStatus->anim) {
+            case 0xC0018:
+            case 0xC0019:
+            case 0xC001A:
+            case 0xD0008:
+                shadow->scale.x = 0.26f - (scale / 2600.0f);
+                if (shadow->scale.x < 0.01) {
+                    shadow->scale.x = 0.01f;
+                }
+                shadow->scale.z = 0.13f - (scale / 2600.0f);
+                if (shadow->scale.z < 0.01) {
+                    shadow->scale.z = 0.01f;
+                }
+                return;
+        }
+
+        phi_f2 = 0.16f;
+    }
+
+    shadow->scale.x = phi_f2 - (scale / 3600.0f);
+    if (shadow->scale.x < 0.01) {
+        shadow->scale.x = 0.01f;
+    }
+    shadow->scale.z = shadow->scale.x;
+}
+
+s32 is_block_on_ground(Entity* block) {
+    f32 x = block->position.x;
+    f32 y = block->position.y;
+    f32 z = block->position.z;
+    f32 hitYaw;
+    f32 hitPitch;
+    f32 hitLength;
+    s32 ret;
+
+    entity_raycast_down(&x, &y, &z, &hitYaw, &hitPitch, &hitLength);
+
+    ret = hitLength;
+    if (ret == 32767) {
+        ret = 0;
+    }
+
+    return ret;
+}
 
 void state_delegate_NOP(void) {
 }
@@ -1850,14 +1974,66 @@ void step_current_game_mode(void) {
     }
 }
 
-// similar to step_current_game_mode, but calls unk_0C
-INCLUDE_ASM(s32, "a5dd0_len_114e0", state_do_unk);
+void state_do_unk(void) {
+    GameMode* gameMode = gMainGameState;
+    s32 i;
 
-// similar to step_current_game_mode, but calls render
-INCLUDE_ASM(s32, "a5dd0_len_114e0", state_render_backUI);
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
+        if (gameMode->flags != 0) {
+            if (!(gameMode->flags & 4)) {
+                if (!(gameMode->flags & 0x10)) {
+                    gameMode->unk_0C();
+                }
+            }
+        }
+    }
+}
 
-// calls renderAux and render
-INCLUDE_ASM(s32, "a5dd0_len_114e0", state_render_frontUI);
+void state_render_backUI(void) {
+    GameMode* gameMode = gMainGameState;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
+        if (gameMode->flags != 0) {
+            if (!(gameMode->flags & 4)) {
+                if (!(gameMode->flags & 0x10)) {
+                    gameMode->render();
+                }
+            }
+        }
+    }
+}
+
+void state_render_frontUI(void) {
+    GameMode* gameMode = gMainGameState;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
+        if (gameMode->flags != 0) {
+            if (!(gameMode->flags & 4)) {
+                if (!(gameMode->flags & 2)) {
+                    if (gameMode->flags & 0x20) {
+                        gameMode->renderAux();
+                    }
+                }
+            }
+        }
+    }
+
+    // re-initialization needed - evidence of inlining? or just copy/pasting?
+    gameMode = &gMainGameState;
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++, gameMode++) {
+        if (gameMode->flags != 0) {
+            if (!(gameMode->flags & 4)) {
+                if (!(gameMode->flags & 2)) {
+                    if (gameMode->flags & 0x10) {
+                        gameMode->render();
+                    }
+                }
+            }
+        }
+    }
+}
 
 void appendGfx_model(Model* model);
 INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
@@ -1885,7 +2061,24 @@ ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key) {
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", _load_model_textures);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", load_model_textures);
+void load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
+    s32 battleOffset = ((gGameStatusPtr->isBattle != 0) << 17);
+
+    mdl_nextTextureAddress = mdl_textureBaseAddress + battleOffset;
+
+    if (model != NULL && romOffset != 0 && size != 0) {
+        s32 i;
+
+        for (i = 0; i < ARRAY_COUNT(mdl_textureHandles); i++) {
+            mdl_textureHandles[i].gfx = NULL;
+        }
+
+        mdl_treeIterPos = 0;
+        if (model != NULL) {
+            _load_model_textures();
+        }
+    }
+}
 
 s32 mdl_get_child_count(ModelNode* model) {
     s32 ret = 0;
@@ -1905,19 +2098,17 @@ s32 mdl_get_child_count(ModelNode* model) {
     return ret;
 }
 
-// Issue with pointer advancement in the gCurrentCustomModelGfxPtr loop (adding 8 bytes instead of 4)
-#ifdef NON_MATCHING
 void clear_model_data(void) {
     s32 i;
 
     if (!gGameStatusPtr->isBattle) {
-        gCurrentModels = wModelList;
-        gCurrentTransformGroups = wTransformGroups;
-        gCurrentCustomModelGfxPtr = wModelSpecialDls;
+        gCurrentModels = &wModelList;
+        gCurrentTransformGroups = &wTransformGroups;
+        gCurrentCustomModelGfxPtr = &wModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
         gCurrentModelLocalVtxBuffers = &D_80152190;
-        mdl_currentModelTreeNodeInfo = D_80152220;
+        mdl_currentModelTreeNodeInfo = &D_80152220;
         D_801512F0 = &wBgRenderType;
         mdl_bgMultiplyColorA = 0;
         mdl_bgMultiplyColorR = 0;
@@ -1925,13 +2116,13 @@ void clear_model_data(void) {
         mdl_bgMultiplyColorB = 0;
         gCurrentFogSettings = &wFogSettings;
     } else {
-        gCurrentModels = bModelList;
-        gCurrentTransformGroups = bTransformGroups;
-        gCurrentCustomModelGfxPtr = bModelSpecialDls;
+        gCurrentModels = &bModelList;
+        gCurrentTransformGroups = &bTransformGroups;
+        gCurrentCustomModelGfxPtr = &bModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
         gCurrentModelLocalVtxBuffers = &D_801521D0;
-        mdl_currentModelTreeNodeInfo = D_80152A20;
+        mdl_currentModelTreeNodeInfo = &D_80152A20;
         D_801512F0 = &bBgRenderType;
         gCurrentFogSettings = &bFogSettings;
     }
@@ -1945,8 +2136,8 @@ void clear_model_data(void) {
     }
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentCustomModelGfxPtr); i++) {
-        (*gCurrentCustomModelGfxPtr)[i].pre = 0;
-        (*gCurrentCustomModelGfxBuildersPtr)[i].pre = 0;
+        (*gCurrentCustomModelGfxPtr)[i] = 0;
+        (*gCurrentCustomModelGfxBuildersPtr)[i] = 0;
     }
 
     *gCurrentModelTreeRoot = NULL;
@@ -1973,15 +2164,12 @@ void clear_model_data(void) {
         texPannerMainU[i] = 0;
     }
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_model_data);
-#endif
 
 void init_model_data(void) {
     if (!gGameStatusPtr->isBattle) {
         gCurrentModels = &wModelList;
         gCurrentTransformGroups = &wTransformGroups;
-        gCurrentCustomModelGfxPtr = wModelSpecialDls;
+        gCurrentCustomModelGfxPtr = &wModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152214;
         gCurrentModelLocalVtxBuffers = &D_80152190;
@@ -1991,7 +2179,7 @@ void init_model_data(void) {
     } else {
         gCurrentModels = &bModelList;
         gCurrentTransformGroups = &bTransformGroups;
-        gCurrentCustomModelGfxPtr = bModelSpecialDls;
+        gCurrentCustomModelGfxPtr = &bModelSpecialDls;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
         gCurrentModelTreeRoot = &D_80152218;
         gCurrentModelLocalVtxBuffers = &D_801521D0;
@@ -2530,13 +2718,13 @@ void set_mdl_custom_gfx_set(Model* model, s32 customGfxIndex, u32 fogType) {
 }
 
 void set_custom_gfx(s32 customGfxIndex, Gfx* pre, Gfx* post) {
-    (*gCurrentCustomModelGfxPtr)[customGfxIndex].pre = pre;
-    (*gCurrentCustomModelGfxPtr)[customGfxIndex].post = post;
+    (*gCurrentCustomModelGfxPtr)[customGfxIndex * 2] = pre;
+    (*gCurrentCustomModelGfxPtr)[customGfxIndex * 2 + 1] = post;
 }
 
 void set_custom_gfx_builders(s32 customGfxIndex, ModelCustomGfxBuilderFunc pre, ModelCustomGfxBuilderFunc post) {
-    (*gCurrentCustomModelGfxBuildersPtr)[customGfxIndex].pre = pre;
-    (*gCurrentCustomModelGfxBuildersPtr)[customGfxIndex].post = post;
+    (*gCurrentCustomModelGfxBuildersPtr)[customGfxIndex * 2] = pre;
+    (*gCurrentCustomModelGfxBuildersPtr)[customGfxIndex * 2 + 1] = post;
 }
 
 void build_custom_gfx(void) {
@@ -2547,18 +2735,18 @@ void build_custom_gfx(void) {
 
     gSPBranchList(gMasterGfxPos++, 0x00000000);
 
-    for (i = 0; i < 0x10; i++) {
-        preFunc = (*gCurrentCustomModelGfxBuildersPtr)[i].pre;
+    for (i = 0; i < ARRAY_COUNT(*gCurrentCustomModelGfxPtr) / 2; i++) {
+        preFunc = (*gCurrentCustomModelGfxBuildersPtr)[i * 2];
 
         if (preFunc != NULL) {
-            (*gCurrentCustomModelGfxPtr)[i].pre = gMasterGfxPos;
+            (*gCurrentCustomModelGfxPtr)[i * 2] = gMasterGfxPos;
             preFunc(i);
             gSPEndDisplayList(gMasterGfxPos++);
         }
 
-        postFunc = (*gCurrentCustomModelGfxBuildersPtr)[i].post;
+        postFunc = (*gCurrentCustomModelGfxBuildersPtr)[i * 2 + 1];
         if (postFunc != NULL) {
-            (*gCurrentCustomModelGfxPtr)[i].post = gMasterGfxPos;
+            (*gCurrentCustomModelGfxPtr)[i * 2 + 1] = gMasterGfxPos;
             postFunc(i);
             gSPEndDisplayList(gMasterGfxPos++);
         }
@@ -2697,7 +2885,7 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     oldGfxPos = gMasterGfxPos;
     gMasterGfxPos = *arg0;
 
-    copied.flags = 0x81;
+    copied.flags = 0x80 | 0x1;
     appendGfx_model(&copied);
 
     *arg0 = gMasterGfxPos;
@@ -2707,14 +2895,38 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     }
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_next_texture_address);
+s32 mdl_get_next_texture_address(s32 size) {
+    u32 offset = mdl_nextTextureAddress - mdl_textureBaseAddress + 0x3F;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_set_all_fog_mode);
+    offset = (offset >> 6) << 6;
+
+    if (size + offset > 0x28000) {
+        return 0;
+    } else {
+        return mdl_textureBaseAddress + offset;
+    }
+
+}
+
+void mdl_set_all_fog_mode(s32 fogMode) {
+    ModelList* modelList = gCurrentModels;
+    Model* model;
+    s32 fogType = fogMode; // weirdness here and the next line needed to match
+    s32 i = fogMode;
+
+    for (i = 0; i < ARRAY_COUNT(*modelList); i++) {
+        model = (*modelList)[i];
+
+        if (model != NULL) {
+            set_mdl_custom_gfx_set(model, -1, fogType);
+        }
+    }
+}
 
 void clear_render_tasks(void) {
     s32 i;
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(mdl_clearRenderTasks); i++) {
         mdl_renderTaskLists[i] = mdl_clearRenderTasks[i];
     }
 
@@ -2725,7 +2937,7 @@ void clear_render_tasks(void) {
 void clear_render_tasks_alt(void) {
     s32 i;
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(mdl_clearRenderTasks); i++) {
         mdl_renderTaskLists[i] = mdl_clearRenderTasks[i];
     }
 

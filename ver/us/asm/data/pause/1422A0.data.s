@@ -134,7 +134,7 @@ glabel D_8024F310
 glabel D_8024F314
 .word 0x00000000, 0x00060100, D_8024F1C8, pause_tabs_init, pause_tabs_handle_input, pause_tabs_update, pause_tabs_cleanup
 
-glabel D_8024F330
+glabel gStatsMenuElements
 .word arn_03_802429D4, flo_00_npcAISettings_8024286C, 0x8024290C, D_80108558, D_801086AC, dgb_18_idle_80242A24, 0x802429FC, D_80108518, func_80242AD4_825D94, 0x802429AC, D_801083D8, 0x80242B24
 
 glabel D_8024F360
@@ -152,7 +152,7 @@ glabel D_8024F390
 glabel D_8024F3A0
 .word 0x00040105, 0x01060207, 0x02080309, 0x030A0000
 
-glabel D_8024F3B0
+glabel gStatsMenuEntries
 .word 0x00000009, 0x00000014
 
 glabel D_8024F3B8
@@ -185,7 +185,7 @@ glabel D_8024F480
 glabel D_8024F484
 .word 0x00000008
 
-glabel D_8024F488
+glabel gStatsMenuWindowBPs
 .word 0x1F000003, 0x00100121, 0x009A0000, pause_stats_draw_contents, 0x00000000, 0x16000000, 0x00000002, 0x00000000, 0x8026FBA0
 
 glabel D_8024F4AC

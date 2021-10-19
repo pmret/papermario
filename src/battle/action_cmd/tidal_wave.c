@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 #define NAMESPACE action_command_tidal_wave
 
@@ -26,7 +27,7 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
         actionCommandStatus->actionCommandID = ACTION_COMMAND_TIDAL_WAVE;
         actionCommandStatus->state = 0;
         actionCommandStatus->unk_60 = 0;
-        actionCommandStatus->unk_44 = 0;
+        actionCommandStatus->barFillLevel = 0;
         actionCommandStatus->unk_48 = 0;
         battleStatus->unk_84 = 0;
         actionCommandStatus->hudElementX = -48;
@@ -66,7 +67,7 @@ ApiStatus func_802A9138_42C828(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
     battleStatus->actionSuccess = 0;
     battleStatus->unk_84 = 0;
@@ -257,10 +258,10 @@ void N(update)(void) {
                             actionCommandStatus->hudElementX + ((actionCommandStatus->unk_5D - 1) * 20),
                             actionCommandStatus->hudElementY + 7);
                         actionCommandStatus->unk_5D++;
-                        actionCommandStatus->unk_44 +=
+                        actionCommandStatus->barFillLevel +=
                             battleStatus->unk_434[actionCommandStatus->unk_50] * 0x12;
-                        if (actionCommandStatus->unk_44 > 10000) {
-                            actionCommandStatus->unk_44 = 10000;
+                        if (actionCommandStatus->barFillLevel > 10000) {
+                            actionCommandStatus->barFillLevel = 10000;
                         }
                         actionCommandStatus->state = 11;
                         battleStatus->unk_84++;

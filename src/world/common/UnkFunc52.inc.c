@@ -6,7 +6,7 @@ ApiStatus N(UnkFunc52)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor;
 
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.enemyID;
@@ -43,7 +43,7 @@ ApiStatus N(UnkFunc52)(Evt* script, s32 isInitialCall) {
             break;
 
         case ACTOR_TYPE_DRY_BONES:
-            if (actor->varTable[8] == 1) {
+            if (actor->state.varTable[8] == 1) {
                 evt_set_variable(script, *args, -1);
                 break;
             }

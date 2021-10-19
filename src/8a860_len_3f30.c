@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 extern s32 D_8010D650;
 extern s32 D_8010D660;
@@ -131,7 +132,7 @@ void func_800F4C6C(PopupMessage* popup, s32 x, s32 y) {
         default:
             return;
     }
-    
+
     set_hud_element_render_pos(hudElement, xPos, yPos);
     set_hud_element_alpha(hudElement, D_8010D650);
     draw_hud_element_clipped(hudElement);
@@ -202,7 +203,7 @@ void create_popup_menu(PopupMenu* popup) {
     D_8010D654 = 0;
     D_8010D64C = D_8010D648;
     entryCount = otherPopup->numEntries;
-    
+
     D_8010D656 = entryCount;
     if (entryCount > 6) {
         D_8010D656 = 6;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 void pause_tabs_draw_invis(void) {
 }

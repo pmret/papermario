@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 BSS s32 gPauseMenuHeldButtons;
 BSS s32 gPauseMenuPressedButtons;
@@ -22,9 +23,84 @@ void pause_set_cursor_opacity(s32 val) {
 INCLUDE_ASM(s32, "pause/135EE0", pause_set_cursor_opacity);
 #endif
 
-INCLUDE_ASM(s32, "pause/135EE0", func_80242BAC);
+// Delay slot issue with D_8024EFB4 (needs .data)
+#ifdef NON_MATCHING
+extern s32 D_8024EFB4;
 
+void func_80242BAC(s32 windowID, s32 posX, s32 posY) {
+    Window* window = &gWindows[windowID];
+
+    if (D_8024EFB4 != 0
+            || get_game_mode() == GAME_MODE_EXIT_FILE_SELECT
+            || get_game_mode() == GAME_MODE_EXIT_LANGUAGE_SELECT) {
+        if (D_8024EFB4 != 0) {
+            s32 i;
+
+            for (i = 0x16; i < 0x2C; i++) {
+                Window* window = &gWindows[i];
+                s8 parent = window->parent;
+
+                if ((parent == -1 || parent == 0x16) && (window->flags & 8)) {
+                    break;
+                }
+            }
+            if (i >= 0x2C) {
+                D_8024EFB4 = 0;
+            }
+        }
+        gPauseMenuTargetPosX = posX;
+        gPauseMenuCursorPosX = posX;
+        gPauseMenuTargetPosY = posY;
+        gPauseMenuCursorPosY = posY;
+
+    } else if ((window->flags & 8) == 0 && (window->parent == -1 || !(gWindows[window->parent].flags & 8))) {
+        gPauseMenuTargetPosX = posX;
+        gPauseMenuCursorPosX = posX;
+        gPauseMenuTargetPosY = posY;
+        gPauseMenuCursorPosY = posY;
+    }
+}
+#else
+INCLUDE_ASM(s32, "pause/135EE0", func_80242BAC);
+#endif
+
+// Delay slot issue with gPauseMenuCursorPosY (needs .data)
+#ifdef NON_MATCHING
+extern s32 D_8024EFB4;
+
+void func_80242D04(s32 windowID, s32 posX, s32 posY) {
+    Window* window = &gWindows[windowID];
+
+    if (D_8024EFB4 != 0
+            || get_game_mode() == GAME_MODE_EXIT_FILE_SELECT
+            || get_game_mode() == GAME_MODE_EXIT_LANGUAGE_SELECT) {
+        if (D_8024EFB4 != 0) {
+            s32 i;
+
+            for (i = 0x16; i < 0x2C; i++) {
+                Window* window = &gWindows[i];
+                s8 parent = window->parent;
+
+                if ((parent == -1 || parent == 0x16) && (window->flags & 8)) {
+                    break;
+                }
+            }
+            if (i >= 0x2C) {
+                D_8024EFB4 = 0;
+            }
+        }
+        gPauseMenuTargetPosX = posX;
+        gPauseMenuCursorPosX = posX;
+        gPauseMenuTargetPosY = posY;
+        gPauseMenuCursorPosY = posY;
+    } else if ((window->flags & 8) == 0 && (window->parent == -1 || !(gWindows[window->parent].flags & 8))) {
+        gPauseMenuTargetPosX = posX;
+        gPauseMenuTargetPosY = posY;
+    }
+}
+#else
 INCLUDE_ASM(s32, "pause/135EE0", func_80242D04);
+#endif
 
 // Delay slot issue with gPauseMenuCursorTargetOpacity (needs .data)
 #ifdef NON_MATCHING
@@ -153,7 +229,7 @@ s32 pause_get_total_equipped_bp_cost(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
-        ItemID itemID = gPlayerData.equippedBadges[i];
+        s16 itemID = gPlayerData.equippedBadges[i];
 
         if (itemID != ITEM_NONE) {
             s32 moveID = gItemTable[itemID].moveID;
@@ -164,7 +240,62 @@ s32 pause_get_total_equipped_bp_cost(void) {
     return totalCost;
 }
 
-INCLUDE_ASM(void, "pause/135EE0", pause_draw_rect, s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls,
-            s32 ult, s32 dsdx, s32 dtdy);
+void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy) {
+    if (ulx <= -2688 || uly <= -2688 || lrx <= 0 || lry <= 0) {
+        return;
+    }
+    if (ulx >= 1280 || uly >= 960 || lrx >= 2688 || lry >= 2688) {
+        return;
+    }
+    gSPScisTextureRectangle(gMasterGfxPos++, ulx, uly, lrx, lry, tileDescriptor, uls, ult, dsdx, dtdy);
+}
 
-INCLUDE_ASM(s32, "pause/135EE0", pause_sort_item_list);
+void pause_sort_item_list(s16* arr, s32 len, s32 (*compare)(s16*, s16 *)) {
+    if (len < 2) {
+        // Trivially sorted
+        return;
+    } else if (len == 2) {
+        // Trivial 2-element sort
+        if (compare(&arr[0], &arr[1]) > 0) {
+            s16 temp = arr[0];
+            arr[0] = arr[1];
+            arr[1] = temp;
+        }
+        return;
+    } else {
+        // Nontrivial sort required, use shell sort
+        u32 gap = 1;
+        s16* end;
+
+        while (gap < len) {
+            gap = gap * 2 + 1;
+        }
+
+        end = &arr[len];
+        while ((gap /= 2) != 0) {
+            s16* window_end;
+
+            for (window_end = &arr[gap]; window_end < end; window_end++) {
+                s16* cur_elem = window_end - gap;
+
+                // This could be written simpler as a while loop, but the compiler figures out that it only needs to do
+                // the "cur_elem < end" check on the first iteration in that case
+                if (cur_elem >= arr && cur_elem < end) {
+                    do {
+                        s16* elem_a = cur_elem;
+                        s16* elem_b = cur_elem + gap;
+
+                        if (compare(elem_a, elem_b) > 0) {
+                            s16 temp = *elem_a;
+                            *elem_a = *elem_b;
+                            *elem_b = temp;
+                            cur_elem -= gap;
+                        } else {
+                            break;
+                        }
+                    } while (cur_elem >= arr && cur_elem < end);
+                }
+            }
+        }
+    }
+}

@@ -13,7 +13,7 @@ extern EffectGraphics gEffectGraphicsData[15];
 extern EffectInstance* gEffectInstances[96];
 extern s32 D_801A6000;
 
-#define FX_MAIN(name) void name(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 x, f32 y, f32 z);
+#define FX_MAIN(name) void name(s32); // the actual signature is going to be wrong but doesn't matter
 #define FX_ENTRY(name, gfx_name) { fx_##name##_main, effect_##name##_ROM_START, effect_##name##_ROM_END, \
                                    effect_##name##_VRAM, gfx_name##_ROM_START, gfx_name##_ROM_END }
 
@@ -403,7 +403,7 @@ void render_effects_UI(void) {
         if (effectInstance != NULL) {
             if (effectInstance->flags & 1) {
                 if (effectInstance->flags & 8) {
-                    void (*renderUI)(EffectInstance* effectInst);
+                    void (*renderUI)(EffectInstance* effect);
 
                     if (gGameStatusPtr->isBattle && !(effectInstance->flags & 4)) {
                         continue;

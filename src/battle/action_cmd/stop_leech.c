@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 #define NAMESPACE action_command_stop_leech
 
@@ -23,7 +24,7 @@ ApiStatus func_802A9000_425590(void) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
     actionCommandStatus->hudElementY = 80;
 
@@ -57,7 +58,7 @@ ApiStatus func_802A9110_4256A0(Evt* script) {
     actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
     battleStatus->actionSuccess = 0;
     battleStatus->unk_86 = 0;
@@ -107,20 +108,20 @@ void func_802A91F8_425788(void) {
                 break;
             }
             set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108B80);
-            actionCommandStatus->unk_44 = 0;
+            actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->state = 11;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
         case 11:
             btl_set_popup_duration(99);
             if (actionCommandStatus->unk_6A == 0) {
                 if ((battleStatus->currentButtonsPressed & 0x8000) != 0) {
-                    actionCommandStatus->unk_44 += battleStatus->unk_434[actionCommandStatus->unk_50];
+                    actionCommandStatus->barFillLevel += battleStatus->unk_434[actionCommandStatus->unk_50];
                 }
             } else {
-                actionCommandStatus->unk_44 += battleStatus->unk_434[actionCommandStatus->unk_50] / 6;
-                actionCommandStatus->unk_44 += rand_int((battleStatus->unk_434[actionCommandStatus->unk_50]) / 6);
+                actionCommandStatus->barFillLevel += battleStatus->unk_434[actionCommandStatus->unk_50] / 6;
+                actionCommandStatus->barFillLevel += rand_int((battleStatus->unk_434[actionCommandStatus->unk_50]) / 6);
             }
-            battleStatus->unk_84 = actionCommandStatus->unk_44 / 100;
+            battleStatus->unk_84 = actionCommandStatus->barFillLevel / 100;
             if (actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals] <= battleStatus->unk_84) {
                 actionCommandStatus->unk_54 = 0;
             }
@@ -158,7 +159,7 @@ void func_802A94A4_425A34(void) {
     hudElement = actionCommandStatus->hudElements[1];
     draw_hud_element_clipped(hudElement);
     get_hud_element_render_pos(hudElement, &x, &y);
-    func_80268798(x, y, actionCommandStatus->unk_44 / 100, 2);
+    func_80268798(x, y, actionCommandStatus->barFillLevel / 100, 2);
 }
 
 void func_802A9544_425AD4(void) {

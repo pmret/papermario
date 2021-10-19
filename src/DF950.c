@@ -4,7 +4,7 @@
 
 typedef struct SoundInstance {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ SoundID soundID;
+    /* 0x04 */ s32 soundID;
     /* 0x08 */ s32 sourceFlags;
     /* 0x0C */ u8 volume;
     /* 0x0D */ u8 pan;
@@ -290,7 +290,7 @@ void sfx_stop_env_sounds(void) {
     }
 }
 
-SoundInstance* sfx_get_env_sound_instance(SoundID soundID) {
+SoundInstance* sfx_get_env_sound_instance(s32 soundID) {
     SoundInstance* sound = D_80159AD0;
     s32 i;
 
@@ -303,7 +303,7 @@ SoundInstance* sfx_get_env_sound_instance(SoundID soundID) {
     return NULL;
 }
 
-void sfx_play_sound_looping(SoundID soundId, u8 volume, u8 pan, s16 pitchShift) {
+void sfx_play_sound_looping(s32 soundId, u8 volume, u8 pan, s16 pitchShift) {
     SoundInstance* sound = D_80159AD0;
     s32 i;
 
@@ -322,7 +322,7 @@ void sfx_play_sound_looping(SoundID soundId, u8 volume, u8 pan, s16 pitchShift) 
     snd_start_sound_with_shift(soundId, volume, pan, pitchShift);
 }
 
-void sfx_register_looping_sound_at_position(SoundID soundID, s32 flags, f32 x, f32 y, f32 z) {
+void sfx_register_looping_sound_at_position(s32 soundID, s32 flags, f32 x, f32 y, f32 z) {
     SoundInstance* sound = D_80159AD0;
     s32 i;
 
@@ -342,7 +342,7 @@ void sfx_register_looping_sound_at_position(SoundID soundID, s32 flags, f32 x, f
     sfx_play_sound_at_position(soundID, flags, x, y, z);
 }
 
-s32 sfx_adjust_env_sound_pos(SoundID soundID, s32 sourceFlags, f32 x, f32 y, f32 z) {
+s32 sfx_adjust_env_sound_pos(s32 soundID, s32 sourceFlags, f32 x, f32 y, f32 z) {
     SoundInstance* sound = sfx_get_env_sound_instance(soundID);
 
     if (sound == NULL) {
@@ -359,7 +359,7 @@ s32 sfx_adjust_env_sound_pos(SoundID soundID, s32 sourceFlags, f32 x, f32 y, f32
     return 1;
 }
 
-void func_80149A6C(SoundID soundID, s32 keepPlaying) {
+void func_80149A6C(s32 soundID, s32 keepPlaying) {
     SoundInstance* sound = sfx_get_env_sound_instance(soundID);
 
     if (sound != NULL) {
@@ -371,15 +371,15 @@ void func_80149A6C(SoundID soundID, s32 keepPlaying) {
 }
 
 #ifdef NON_MATCHING // weird & 0xFF everywhere
-void sfx_play_sound_with_params(SoundID soundID, u8 arg1, u8 arg2, s16 arg3) {
+void sfx_play_sound_with_params(s32 soundID, u8 arg1, u8 arg2, s16 arg3) {
     AlternatingSoundSet* alternatingSound;
-    
+
     if (gGameStatusPtr->demoState) {
         return;
     }
 
     if (soundID < 0) {
-        SoundID sound = soundID & 0xFF;
+        s32 sound = soundID & 0xFF;
         switch ((soundID >> 0x1C) & 7) {
             case 0:
                 sfx_play_sound_looping(D_8014F2D0[sound], arg1, arg2, arg3);
@@ -409,7 +409,7 @@ void sfx_play_sound_with_params(SoundID soundID, u8 arg1, u8 arg2, s16 arg3) {
 INCLUDE_ASM(void, "DF950", sfx_play_sound_with_params, s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 #endif
 
-void sfx_adjust_env_sound_params(SoundID soundID, u8 volume, u8 pan, s16 pitchShift) {
+void sfx_adjust_env_sound_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
     SoundInstance* sound;
 
     if (soundID < 0) {
@@ -424,8 +424,8 @@ void sfx_adjust_env_sound_params(SoundID soundID, u8 volume, u8 pan, s16 pitchSh
     }
 }
 
-void sfx_stop_sound(SoundID soundID) {
-    SoundID sound = soundID;
+void sfx_stop_sound(s32 soundID) {
+    s32 sound = soundID;
 
     if (sound < 0) {
         func_80149A6C(D_8014F2D0[sound & 0xFFFF], 0);
@@ -434,17 +434,17 @@ void sfx_stop_sound(SoundID soundID) {
     }
 }
 
-void sfx_play_sound(SoundID soundID) {
+void sfx_play_sound(s32 soundID) {
     sfx_play_sound_with_params(soundID, 0, 0, 0);
 }
 
-void sfx_play_sound_at_player(SoundID soundID, s32 arg1) {
+void sfx_play_sound_at_player(s32 soundID, s32 arg1) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     sfx_play_sound_at_position(soundID, arg1, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
 }
 
-void sfx_play_sound_at_npc(SoundID soundID, s32 arg1, s32 npcID) {
+void sfx_play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID) {
     Npc* npc = get_npc_safe(npcID);
 
     if (npc != NULL) {
@@ -452,7 +452,7 @@ void sfx_play_sound_at_npc(SoundID soundID, s32 arg1, s32 npcID) {
     }
 }
 
-INCLUDE_ASM(s32, "DF950", sfx_play_sound_at_position, SoundID soundID, s32 value2, f32 posX, f32 posY,
+INCLUDE_ASM(s32, "DF950", sfx_play_sound_at_position, s32 soundID, s32 value2, f32 posX, f32 posY,
             f32 posZ);
 
 INCLUDE_ASM(void, "DF950", sfx_get_spatialized_sound_params, f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4,

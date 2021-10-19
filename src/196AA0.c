@@ -287,9 +287,27 @@ s32 check_block_input(s32 buttonMask) {
     return block;
 }
 
-INCLUDE_ASM(void, "196AA0", func_80269118);
+void func_80269118(void) {
+    PlayerData* playerData = &gPlayerData;
+    ActionCommandStatus *actionCommandStatus = &gActionCommandStatus;
 
-INCLUDE_ASM(s32, "196AA0", func_80269160);
+    if (!actionCommandStatus->autoSucceed) {
+        if (playerData->otherHitsTaken < 9999) {
+            playerData->otherHitsTaken++;
+            actionCommandStatus->hitsTakenIsMax = FALSE;
+        } else {
+            actionCommandStatus->hitsTakenIsMax = TRUE;
+        }
+    }
+}
+
+void func_80269160(void) {
+    PlayerData* playerData = &gPlayerData;
+
+    if (!gActionCommandStatus.autoSucceed && gActionCommandStatus.hitsTakenIsMax) {
+        playerData->unk_296++;
+    }
+}
 
 ApiStatus func_8026919C(Evt* script, s32 isInitialCall) {
     gBattleStatus.unk_434 = evt_get_variable(script, *script->ptrReadPos);
@@ -330,9 +348,21 @@ ApiStatus GetActionCommandMode(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "196AA0", func_80269344);
 
-INCLUDE_ASM(s32, "196AA0", SetCommandAutoSuccess);
+ApiStatus GetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
+    evt_set_variable(script, *script->ptrReadPos, gActionCommandStatus.autoSucceed);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "196AA0", GetCommandAutoSuccess);
+ApiStatus SetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+
+    if (evt_get_variable(script, *script->ptrReadPos) != 0) {
+        actionCommandStatus->autoSucceed = TRUE;
+    } else {
+        actionCommandStatus->autoSucceed = FALSE;
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802693F0(Evt* script, s32 isInitialCall) {
     gBattleStatus.flags1 &= ~0x4000;
@@ -343,7 +373,16 @@ INCLUDE_ASM(s32, "196AA0", CloseActionCommandInfo);
 
 INCLUDE_ASM(s32, "196AA0", func_80269470);
 
-INCLUDE_ASM(s32, "196AA0", func_802694A4);
+ApiStatus func_802694A4(Evt* script, s32 isInitialCall) {
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+
+    if (evt_get_variable(script, *script->ptrReadPos) == 0) {
+        actionCommandStatus->unk_61 = FALSE;
+    } else {
+        actionCommandStatus->unk_61 = TRUE;
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetActionSuccessCopy(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);

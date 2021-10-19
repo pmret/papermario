@@ -58,7 +58,7 @@ s32 entity_base_block_idle(Entity* entity) {
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
     s32 ret = 0;
 
-    if (is_block_on_ground() != 0) {
+    if (is_block_on_ground(entity) != 0) {
         if (entity->flags & 0x200000) {
             ret = 1;
             entity_base_block_update_slow_sinking(entity);

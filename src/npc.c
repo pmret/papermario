@@ -624,7 +624,7 @@ void npc_move_heading(Npc* npc, f32 speed, f32 yaw) {
     npc->pos.z += -speed * cos;
 }
 
-Npc* get_npc_unsafe(NpcID npcID) {
+Npc* get_npc_unsafe(s32 npcID) {
     s32 i;
     Npc* npc;
 
@@ -639,7 +639,7 @@ Npc* get_npc_unsafe(NpcID npcID) {
     return npc;
 }
 
-Npc* get_npc_safe(NpcID npcID) {
+Npc* get_npc_safe(s32 npcID) {
     s32 i;
     Npc* npc;
 

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 #define NAMESPACE action_command_power_shock
 
@@ -38,7 +39,7 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->actionCommandID = ACTION_COMMAND_POWER_SHOCK;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
     actionCommandStatus->unk_46 = rand_int(100);
     actionCommandStatus->unk_6C = 30;
@@ -96,7 +97,7 @@ ApiStatus func_802A9210_42D120(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
     actionCommandStatus->unk_64 = evt_get_variable(script, *args++);
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
     battleStatus->actionSuccess = 0;
     battleStatus->unk_86 = 0;
@@ -314,11 +315,11 @@ void N(draw_hud_elements)(void) {
     get_hud_element_render_pos(hudElement, &x, &y);
 
     if (D_802A9B00 == 0) {
-        func_80268798(x, y, actionCommandStatus->unk_44 / 100, 1);
+        func_80268798(x, y, actionCommandStatus->barFillLevel / 100, 1);
     } else if (actionCommandStatus->unk_68 == 0) {
-        func_80268798(x, y, actionCommandStatus->unk_44 / 100, 4);
+        func_80268798(x, y, actionCommandStatus->barFillLevel / 100, 4);
     } else {
-        func_80268834(x, y, actionCommandStatus->unk_44 / 100, 4);
+        func_80268834(x, y, actionCommandStatus->barFillLevel / 100, 4);
     }
     hudElement = actionCommandStatus->hudElements[3];
     draw_hud_element_clipped(hudElement);

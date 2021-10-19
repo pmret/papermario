@@ -92,6 +92,12 @@ typedef struct CamPosSettings {
     /* 0x10 */ Vec3f position;
 } CamPosSettings; // size = 0x1C
 
+typedef struct DmaTable {
+    /* 0x00 */ s32 dmaStart;
+    /* 0x04 */ s32 dmaEnd;
+    /* 0x08 */ s32 dmaDest;
+} DmaTable;
+
 typedef struct PartnerData {
     /* 0x00 */ u8 enabled;
     /* 0x01 */ s8 level;
@@ -236,7 +242,7 @@ typedef struct PlayerData {
     /* 0x290 */ s16 specialBarsFilled;
     /* 0x292 */ s8 unk_292;
     /* 0x293 */ char unk_293[0x1];
-    /* 0x294 */ s16 otherHitsTaken;
+    /* 0x294 */ u16 otherHitsTaken;
     /* 0x296 */ s16 unk_296;
     /* 0x298 */ u16 hitsTaken;
     /* 0x29A */ u16 hitsBlocked;
@@ -329,12 +335,12 @@ typedef struct Evt {
     /* 0x144 */ s32 id;
     /* 0x148 */ union {
         s32 enemyID;
-        ActorID actorID;
+        s32 actorID;
         struct Enemy* enemy; ///< For overworld scripts owned by an Npc
         struct Actor* actor; ///< For battle scripts
     } owner1;                ///< Initially -1
     /* 0x14C */ union {
-        NpcID npcID;
+        s32 npcID;
         s32 triggerID;
         struct Npc* npc;            ///< For overworld scripts owned by an Npc
         struct Trigger* trigger;
@@ -694,7 +700,7 @@ typedef struct BattleStatus {
     /* 0x092 */ s8 unk_92;
     /* 0x093 */ char unk_93;
     /* 0x094 */ s8 unk_94;
-    /* 0x095 */ char unk_95;
+    /* 0x095 */ s8 unk_95;
     /* 0x096 */ s8 hammerCharge;
     /* 0x097 */ s8 jumpCharge;
     /* 0x098 */ char unk_98;
@@ -935,7 +941,8 @@ typedef struct StaticAnimatorNode {
 } StaticAnimatorNode; // size = 0x2C
 
 typedef struct SpriteComponent {
-    /* 0x00 */ char unk_00[8];
+    /* 0x00 */ s32 initialized;
+    /* 0x04 */ s32 unk_04;
     /* 0x08 */ s16** readPos;
     /* 0x0C */ f32 waitTime;
     /* 0x10 */ s32 loopCounter;
@@ -1239,7 +1246,8 @@ typedef struct StaticShadowData {
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ StaticAnimatorNode** animModelNode;
     /* 0x0C */ void (*onCreateCallback)(Shadow* shadow);
-    /* 0x10 */ char unk_10[0x14];
+    /* 0x10 */ char unk_10[0x10];
+    /* 0x20 */ s32 unk_20;
 } StaticShadowData; // size = 0x24
 
 typedef struct PushBlockGrid {
@@ -1324,7 +1332,7 @@ typedef struct ActorPart {
     /* 0x94 */ u32* idleAnimations;
     /* 0x98 */ s16 opacity;
     /* 0x9A */ char unk_9A[2];
-    /* 0x9C */ struct Shadow* shadow;
+    /* 0x9C */ s32 shadowIndex;
     /* 0xA0 */ f32 shadowScale;
     /* 0xA4 */ s32 partTypeData[6];
     /* 0xBC */ s16 actorTypeData2b[2];
@@ -1561,7 +1569,7 @@ typedef struct ActorMovement {
     /* 0x4C */ f32 distance;
 } ActorMovement; // size = 0x50;
 
-typedef struct ActorMovementWalk {
+typedef struct ActorState { // TODO: Make the first field of this an ActorMovement
     /* 0x00 */ Vec3f currentPos;
     /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ Vec3f unk_18;
@@ -1576,19 +1584,19 @@ typedef struct ActorMovementWalk {
     /* 0x58 */ s32 animJumpRise;
     /* 0x5C */ s32 animJumpFall;
     /* 0x60 */ s32 animJumpLand;
-} ActorMovementWalk; // size = 0x64;
+    /* 0x64 */ s16 moveTime;
+    /* 0x66 */ s16 moveArcAmplitude;
+    /* 0x68 */ char unk_74[3];
+    /* 0x6B */ u8 jumpPartIndex;
+    /* 0x6C */ char unk_78[16];
+    /* 0x7C */ s32 varTable[16];
+} ActorState; // size = 0xBC;
 
 typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
     /* 0x008 */ struct ActorDesc* staticActorData;
-    /* 0x00C */ ActorMovementWalk walk;
-    /* 0x070 */ s16 moveTime;
-    /* 0x072 */ s16 moveArcAmplitude;
-    /* 0x074 */ char unk_74[3];
-    /* 0x077 */ u8 jumpPartIndex;
-    /* 0x078 */ char unk_78[16];
-    /* 0x088 */ s32 varTable[16];
+    /* 0x00C */ ActorState state;
     /* 0x0C8 */ ActorMovement fly;
     /* 0x118 */ f32 flyElapsed;
     /* 0x11C */ char unk_11C[4];
@@ -1652,7 +1660,7 @@ typedef struct Actor {
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
     /* 0x20C */ u32* statusTable;
-    /* 0x210 */ Status debuff;
+    /* 0x210 */ s8 debuff;
     /* 0x211 */ s8 debuffDuration;
     /* 0x212 */ s8 staticStatus; /* 0B = yes */
     /* 0x213 */ s8 staticDuration;
@@ -1765,7 +1773,7 @@ typedef struct PlayerStatus {
     /* 0x0B5 */ s8 prevActionState;
     /* 0x0B6 */ s8 fallState; ///< Also used as sleep state in Peach idle action
     /* 0x0B7 */ char unk_B7;
-    /* 0x0B8 */ s32 anim;
+    /* 0x0B8 */ u32 anim;
     /* 0x0BC */ u16 unk_BC;
     /* 0x0BE */ s8 renderMode;
     /* 0x0BF */ s8 unk_BF;
@@ -1894,14 +1902,14 @@ typedef struct PauseMapSpace {
 
 typedef struct MenuPanel {
     /* 0x00 */ u8 initialized; //?
-    /* 0x01 */ s8 col; // might be backwards
-    /* 0x02 */ s8 row; // might be backwards
-    /* 0x03 */ u8 selected;
+    /* 0x01 */ s8 col;
+    /* 0x02 */ s8 row;
+    /* 0x03 */ u8 selected; // usually set to the current value from gridData
     /* 0x04 */ s8 page; // filemenu: 0 = select, 1 = delete, 3 = copy from, 4 = copy to, all else = save
     /* 0x05 */ s8 numCols;
     /* 0x06 */ s8 numRows;
-    /* 0x07 */ char unk_07;
-    /* 0x08 */ s8* gridData; // user value at each 2D grid point
+    /* 0x07 */ s8 numPages; // unsure
+    /* 0x08 */ u8* gridData; // user value at each 3D grid point (page, row, col)
     /* 0x0C */ UNK_FUN_PTR(fpInit);
     /* 0x10 */ UNK_FUN_PTR(fpHandleInput);
     /* 0x14 */ UNK_FUN_PTR(fpUpdate);
@@ -1953,7 +1961,7 @@ typedef struct MenuWindowBP {
 } MenuWindowBP; // size = 0x24;
 
 typedef struct {
-    /* 0x00 */ s8 flags;
+    /* 0x00 */ u8 flags;
     /* 0x01 */ s8 panelID; // ?
     /* 0x02 */ s8 unk_02; // related to heirarchy somehow - sibling? group?
     /* 0x03 */ s8 parent; // ?
@@ -2059,7 +2067,7 @@ typedef struct {
     /* 0x00030 */ Matrix4s camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ Gfx mainGfx[0x2080];
     /* 0x10630 */ Gfx backgroundGfx[0x200]; // used by gfx_task_background
-    /* 0x11630 */ Matrix4s matrixStack[0x200];
+    /* 0x11630 */ Mtx matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 
 typedef struct Temp8010F250 {
@@ -2070,7 +2078,7 @@ typedef struct Temp8010F250 {
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ char unk_10[0x20];
-    /* 0x30 */ SoundID unk_30;
+    /* 0x30 */ s32 unk_30;
 } Temp8010F250; // size = 0x34
 
 typedef struct PartnerActionStatus {
@@ -2157,7 +2165,7 @@ typedef struct ActionCommandStatus {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 hudElements[15];
     /* 0x40 */ char unk_40[0x4];
-    /* 0x44 */ s16 unk_44;
+    /* 0x44 */ s16 barFillLevel;
     /* 0x46 */ s16 unk_46;
     /* 0x48 */ s16 unk_48;
     /* 0x4A */ s16 actionCommandID; // current action command id?

@@ -9,8 +9,8 @@
 
 extern UiStatus gUIStatus;
 extern PlayerData gPlayerData;
-extern ActionState gPlayerActionState;
-extern PlayerAnim gPlayerAnimation;
+extern s8 gPlayerActionState;
+extern s32 gPlayerAnimation;
 extern PlayerStatus gPlayerStatus;
 extern PlayerStatus* gPlayerStatusPtr;
 extern CollisionStatus gCollisionStatus;
@@ -96,6 +96,9 @@ extern MessagePrintState* gCurrentPrintContext;
 extern s32 D_802DB264;
 extern MessagePrintState* D_802DB268;
 
+extern StaticShadowData D_802E98BC;
+extern StaticShadowData D_802E98E0;
+extern StaticShadowData D_802E9904;
 extern s32 D_802EB390;
 extern s32 D_802EB394;
 extern MessagePrintState* D_802EB398;
@@ -196,14 +199,12 @@ extern s32 pause_map_cursorCurrentOptionCopy;
 extern s32 pause_map_spacesInSnapRange;
 
 
-extern HudElementAnim* D_8024FA30[1];
-
 extern PauseMapSpace pause_map_spaces[34];
 extern MenuWindowBP pause_map_windowBlueprints[7];
 // Badges
 extern s32 gBadgeMenuCurrentScrollPos;
 extern s32 gBadgeMenuTargetScrollPos;
-extern ItemID gBadgeMenuItemIDs[128];
+extern s16 gBadgeMenuItemIDs[128];
 extern s32 gBadgeMenuCurrentPage;
 extern PauseItemPage gBadgeMenuPages[20];
 extern s32 gBadgeMenuSelectedIndex;
@@ -218,7 +219,6 @@ extern s32 gBadgeMenuBShowNotEnoughBP;
 extern s32 D_802703A4;
 extern s32 gBadgeMenuIconIDs[22];
 extern MenuWindowBP gBadgeMenuWindowBPs[1];
-extern HudElementAnim *gBadgeMenuElements[22];
 
 // Items
 extern s16 gItemMenuItemIDs[100];
@@ -233,7 +233,6 @@ extern s32 gItemMenuTargetScrollPos;
 extern s32 D_802705DC;
 extern s32 gItemMenuLevel;
 extern s32 gItemMenuCurrentTab;
-extern HudElement* gItemIcons[20];
 extern s32 gItemMenuScrollUpIcon;
 
 // Stats
@@ -383,6 +382,8 @@ extern s32 D_80292098[];
 extern s32 D_802920C0[];
 extern s32 D_802920E8[];
 extern s32 D_80292110[];
+
+extern s32 D_8029FBD0;
 
 extern s32 D_800F7BE8[];
 extern s32 D_800F7BBC[];

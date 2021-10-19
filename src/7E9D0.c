@@ -102,7 +102,7 @@ void set_action_state(s32 actionState) {
     }
 
     if (actionState == ACTION_STATE_HIT_FIRE || actionState == ACTION_STATE_HIT_LAVA) {
-        PartnerID partner;
+        s8 partner;
 
         if (playerStatus->unk_BF == 3) {
             actionState = ACTION_STATE_HIT_FIRE;

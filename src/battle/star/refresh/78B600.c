@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 #define NAMESPACE battle_star_refresh
 

@@ -15,8 +15,8 @@ s32 general_heap_malloc_tail(s32 size) {
     return _heap_malloc_tail(&D_802FB800, size);
 }
 
-s32 general_heap_free(s32* size) {
-    return _heap_free(&D_802FB800, size);
+s32 general_heap_free(s32* data) {
+    return _heap_free(&D_802FB800, data);
 }
 
 s32 battle_heap_create(void) {
@@ -32,18 +32,18 @@ s32 func_8002ACDC(void) {
 }
 
 void* heap_malloc(s32 size) {
-    if (gGameStatusPtr->isBattle == 0) {
+    if (!gGameStatusPtr->isBattle) {
         return general_heap_malloc(size);
     } else {
         return _heap_malloc(&D_803DA800, size);
     }
 }
 
-s32 heap_free(void* ptr) {
+s32 heap_free(void* data) {
     if (gGameStatusPtr->isBattle) {
-        return _heap_free(&D_803DA800, ptr);
+        return _heap_free(&D_803DA800, data);
     } else {
-        return general_heap_free(ptr);
+        return general_heap_free(data);
     }
 }
 

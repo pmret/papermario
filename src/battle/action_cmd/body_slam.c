@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 #define NAMESPACE action_command_body_slam
 
@@ -26,7 +27,7 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_61 = 1;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->barFillLevel = 0;
     actionCommandStatus->unk_48 = 0;
     actionCommandStatus->unk_68 = 0;
     battleStatus->actionSuccess = 0;
@@ -72,7 +73,7 @@ void N(draw_hud_elements)(void) {
     draw_hud_element_clipped(hudElement);
     get_hud_element_render_pos(hudElement, &x, &y);
     draw_hud_element_clipped(gActionCommandStatus.hudElements[3]);
-    func_80268770(x, y, gActionCommandStatus.unk_44 / 100);
+    func_80268770(x, y, gActionCommandStatus.barFillLevel / 100);
     draw_hud_element_clipped(gActionCommandStatus.hudElements[2]);
 }
 

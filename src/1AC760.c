@@ -159,7 +159,7 @@ ApiStatus func_8027FC90(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hitResult;
     Actor* actor;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     s32 outVar;
 
     if (actorID == ACTOR_SELF) {
@@ -171,7 +171,7 @@ ApiStatus func_8027FC90(Evt* script, s32 isInitialCall) {
     battleStatus->flags1 |= 0x20;
 
     hitResult = calc_partner_damage_enemy();
-    show_damage_popup(actor->walk.goalPos.x, actor->walk.goalPos.y, actor->walk.goalPos.z, battleStatus->lastAttackDamage,
+    show_damage_popup(actor->state.goalPos.x, actor->state.goalPos.y, actor->state.goalPos.z, battleStatus->lastAttackDamage,
                       0);
     evt_set_variable(script, outVar, hitResult);
 
@@ -180,7 +180,7 @@ ApiStatus func_8027FC90(Evt* script, s32 isInitialCall) {
 
 ApiStatus GetActorLevel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ActorID actorID = evt_get_variable(script, *args++);
+    s32 actorID = evt_get_variable(script, *args++);
     Bytecode* outVar;
 
     if (actorID == ACTOR_SELF) {

@@ -3,7 +3,7 @@
 #include "effects.h"
 
 ApiStatus N(StarSpiritEffectFunc1)(Evt* script, s32 isInitialCall) {
-    StarSpiritEffect* ptr = script->varTable[0];
+    StarSpiritEffect* ptr = (StarSpiritEffect*)script->varTable[0];
 
     sfx_adjust_env_sound_pos(SOUND_UNKNOWN_A2, 0, ptr->unk_00, ptr->unk_04, ptr->unk_08);
 
@@ -60,7 +60,6 @@ ApiStatus N(StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall) {
                 ptr->unk_46 = 0;
             }
             break;
-
         case 1:
             ptr->unk_46++;
             if (ptr->unk_46 >= 60) {
@@ -70,7 +69,6 @@ ApiStatus N(StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall) {
                 ptr->unk_50->unk_0C->unk_74 = 0;
             }
             break;
-
         case 2:
             ptr->unk_46++;
             if (ptr->unk_46 >= 60) {
@@ -85,7 +83,6 @@ ApiStatus N(StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall) {
                 ptr->unk_30 = 36.0f;
             }
             break;
-
         case 3:
             ptr->unk_30 = update_lerp(0, 36.0f, 19.0f, ptr->unk_46, 120);
             ptr->unk_46++;
@@ -115,7 +112,6 @@ ApiStatus N(StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall) {
                 ptr->unk_4E = 2;
             }
             break;
-
         case 2:
             ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
             ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);
@@ -129,7 +125,6 @@ ApiStatus N(StarSpiritEffectFunc3)(Evt* script, s32 isInitialCall) {
     switch (ptr->unk_48) {
         case 1:
             ptr->unk_2C = clamp_angle(ptr->unk_2C + ptr->unk_30);
-
         case 2:
             ptr->unk_54->unk_0C->unk_24.f = ptr->unk_2C;
             ptr->unk_54->unk_0C->unk_04 = ptr->unk_18;

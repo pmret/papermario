@@ -15,7 +15,7 @@ void* D_802809FC[] = {
 
 s32 D_80280A30 = 0xFF;
 
-extern PartnerID D_8029DA33;
+extern s8 D_8029DA33;
 extern s32 D_8029DA34;
 extern Camera D_8029DA50[ARRAY_COUNT(gCameras)];
 extern f32 D_8029EFB0;
@@ -415,7 +415,7 @@ void btl_update(void) {
                 }
             } else if (D_802809F6 == 0xFF) {
                 if (gBattleState != 0x23) {
-                    btl_set_state(0x23, 0xFF);
+                    btl_set_state(0x23);
                 }
             } else {
                 D_802809F6 += 10;
@@ -610,7 +610,7 @@ void btl_delete_actor(Actor* actor) {
 
     while (partsTable != NULL) {
         if (!(partsTable->flags & 0x4)) {
-            delete_shadow(partsTable->shadow);
+            delete_shadow(partsTable->shadowIndex);
         }
 
         if (partsTable->idleAnimations != NULL) {

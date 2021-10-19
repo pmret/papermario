@@ -1,9 +1,9 @@
 #include "common.h"
 
-HitResult calc_item_check_hit(void) {
+s32 calc_item_check_hit(void) {
     BattleStatus* battleStatus = &gBattleStatus;
-    ActorMovement* walk = &battleStatus->playerActor->walk;
-    ActorID actorID = battleStatus->currentTargetID;
+    ActorMovement* walk = &battleStatus->playerActor->state;
+    s32 actorID = battleStatus->currentTargetID;
     s8 currentTargetPartS8;
     u32 currentTargetPart;
     Actor* actor;

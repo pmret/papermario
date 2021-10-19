@@ -83,7 +83,7 @@ ApiStatus func_80260DD8(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    var = player->varTable[0];
+    var = player->state.varTable[0];
     if (var >= rand_int(100)) {
         script->varTable[0] = TRUE;
     } else {
