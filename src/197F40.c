@@ -2320,10 +2320,10 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
         script->functionTemp[2] = attackBoost;
 
         func_8024E40C(8);
-        btl_cam_set_zoffset(0xC);
+        btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(0xFA);
-        btl_cam_move(0xA);
+        btl_cam_move(10);
         func_8024E60C();
         if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
             btl_cam_set_zoffset(0);
@@ -2374,7 +2374,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
                 func_8024E40C(2);
-                btl_cam_move(0xF);
+                btl_cam_move(15);
                 actor->isGlowing = 1;
                 actor->attackBoost += attackBoost;
                 if (actor->attackBoost > 20) {
@@ -2409,7 +2409,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->onHitScript == NULL) || (does_script_exist(actor->onHitID) == 0)) {
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
                 D_8029FBD4 = 0;
                 return ApiStatus_DONE2;
             }
@@ -2443,10 +2443,10 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
         script->functionTemp[2] = defenseBoost;
 
         func_8024E40C(8);
-        btl_cam_set_zoffset(0xC);
+        btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(0xFA);
-        btl_cam_move(0xA);
+        btl_cam_move(10);
         func_8024E60C();
         if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
             btl_cam_set_zoffset(0);
@@ -2533,7 +2533,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->onHitScript == 0) || (does_script_exist(actor->onHitID) == 0)) {
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
                 D_8029FBD4 = 0;
                 return ApiStatus_DONE2;
             }
@@ -2565,10 +2565,10 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
         script->functionTemp[2] = vanished;
 
         func_8024E40C(8);
-        btl_cam_set_zoffset(0xC);
+        btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(0xFA);
-        btl_cam_move(0xA);
+        btl_cam_move(10);
         func_8024E60C();
         if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
             btl_cam_set_zoffset(0);
@@ -2609,7 +2609,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
                 func_8024E40C(2);
-                btl_cam_move(0xF);
+                btl_cam_move(15);
                 inflict_status(actor, 0xE, vanished);
                 script->functionTemp[3] = 15;
                 script->functionTemp[0] = 3;
@@ -2639,7 +2639,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->onHitScript == 0) || (does_script_exist(actor->onHitID) == 0)) {
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
                 D_8029FBD4 = 0;
                 return ApiStatus_DONE2;
             }
@@ -2671,10 +2671,10 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
         script->functionTemp[2] = electrified;
 
         func_8024E40C(8);
-        btl_cam_set_zoffset(0xC);
+        btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(0xFA);
-        btl_cam_move(0xA);
+        btl_cam_move(10);
         func_8024E60C();
         if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
             btl_cam_set_zoffset(0);
@@ -2715,7 +2715,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
                 func_8024E40C(2);
-                btl_cam_move(0xF);
+                btl_cam_move(15);
                 inflict_status(actor, 0xB, electrified);
                 script->functionTemp[3] = 15;
                 script->functionTemp[0] = 3;
@@ -2745,7 +2745,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->onHitScript == 0) || (does_script_exist(actor->onHitID) == 0)) {
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
                 D_8029FBD4 = 0;
                 return ApiStatus_DONE2;
             }
@@ -2781,9 +2781,9 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
         script->functionTemp[2] = hpBoost;
 
         func_8024E40C(8);
-        btl_cam_set_zoffset(0xC);
+        btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
-        btl_cam_move(0xA);
+        btl_cam_move(10);
         func_8024E60C();
 
         D_8029FBD4 = 1;
@@ -2832,7 +2832,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
         case 2:
             if (script->functionTemp[3] == 0) {
                 func_8024E40C(2);
-                btl_cam_move(0xF);
+                btl_cam_move(15);
                 actor->currentHP += hpBoost;
                 if (actor->maxHP < actor->currentHP) {
                     actor->currentHP = actor->maxHP;
@@ -2869,7 +2869,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
                 script->functionTemp[3]--;
                 break;
             }
-            if ((actor->onHitScript == 0) || (does_script_exist(actor->onHitID) == 0)) {
+            if ((actor->onHitScript == NULL) || !does_script_exist(actor->onHitID)) {
                 D_8029FBD4 = 0;
                 return ApiStatus_DONE2;
             }
