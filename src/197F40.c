@@ -2237,7 +2237,6 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
         case STATUS_STATIC:
             flags |= STATUS_FLAG_STATIC;
             break;
-
     }
 
     switch (actor->stoneStatus){
@@ -2246,7 +2245,6 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
         case STATUS_STONE:
             flags |= STATUS_FLAG_STONE;
             break;
-
     }
 
     switch (actor->koStatus){
@@ -2255,7 +2253,6 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
         case STATUS_DAZE:
             flags |= STATUS_FLAG_KO;
             break;
-
     }
 
     switch (actor->transStatus){
@@ -2264,7 +2261,6 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
         case STATUS_E:
             flags |= STATUS_FLAG_TRANSPARENT;
             break;
-
     }
 
     for (partsTable = actor->partsTable; partsTable != NULL; partsTable = partsTable->nextPart) {
