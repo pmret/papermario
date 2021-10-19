@@ -747,7 +747,7 @@ class ScriptDisassembler:
         elif opcode == 0x45: self.write_line(f"EVT_EXEC_GET_TID({self.addr_ref(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x46: self.write_line(f"EVT_EXEC_WAIT({self.addr_ref(argv[0])})")
         elif opcode == 0x47:
-            args = [self.addr_ref(argv[0]), self.trigger(argv[1]), *map(self.var, argv[2:])]
+            args = [self.addr_ref(argv[0]), self.trigger(argv[1]), self.collider_id(argv[2]), *map(self.var, argv[3:])]
             self.write_line(f"EVT_BIND_TRIGGER({', '.join(args)})")
         elif opcode == 0x48: self.write_line(f"EVT_UNBIND")
         elif opcode == 0x49: self.write_line(f"EVT_KILL_THREAD({self.var(argv[0])})")
@@ -756,7 +756,7 @@ class ScriptDisassembler:
         elif opcode == 0x4C: self.write_line(f"EVT_SET_TIMESCALE({self.var(argv[0])})")
         elif opcode == 0x4D: self.write_line(f"EVT_SET_GROUP({self.var(argv[0])})")
         elif opcode == 0x4E:
-            args = [self.addr_ref(argv[0]), self.trigger(argv[1]), *map(self.var, argv[2:])]
+            args = [self.addr_ref(argv[0]), self.trigger(argv[1]), self.collider_id(argv[2]), *map(self.var, argv[3:])]
             self.write_line(f"EVT_BIND_PADLOCK({', '.join(args)})")
         elif opcode == 0x4F: self.write_line(f"EVT_SUSPEND_GROUP({self.var(argv[0])})")
         elif opcode == 0x50: self.write_line(f"EVT_RESUME_GROUP({self.var(argv[0])})")
@@ -784,6 +784,12 @@ class ScriptDisassembler:
                 argv_str += ", "
                 argv_str += f"0x{arg:X}"
             self.write_line(f"0x{opcode:02X}{argv_str}),")
+
+    def collider_id(self, arg):
+        if arg >= 0x4000 and arg <= 0x5000:
+            return f"EVT_ENTITY_INDEX({arg - 0x4000})"
+        else:
+            return self.var(arg)
 
 class UnsupportedScript(Exception):
     pass
@@ -1255,7 +1261,7 @@ if __name__ == "__main__":
                 try:
                     script_text = script.disassemble()
 
-                    if script.instructions > 1 and "EVT_CMD" not in script_text:
+                    if script.instructions > 1 and "_EVT_CMD" not in script_text:
                         if gap and first_print:
                             potential_struct_sizes = { "StaticNpc": 0x1F0, "NpcAISettings":0x30, "NpcSettings":0x2C, "NpcGroupList":0xC }
                             gap_size = args.offset - gap_start

@@ -104,6 +104,7 @@ enum {
     EVT_OP_94,
 };
 
+// deprecated, use those in script_api/macros.h instead
 #define EVT_VAR(v)           ((v -  30000000))
 #define EVT_MAP_VAR(v)       ((v -  50000000))
 #define EVT_FLAG(v)          ((v -  70000000))
@@ -119,6 +120,7 @@ enum {
 #define EVT_LIMIT            -250000000 // TODO better name
 #define MAKE_ENTITY_END      0x80000000
 
+// deprecated, use enum GSW/GSWF
 #define EVT_STORY_PROGRESS EVT_SAVE_VAR(0)
 #define EVT_SAVE_FLAG_PLACES_VISITED EVT_SAVE_FLAG(0x7AA)
 #define EVT_SAVE_FLAG_TUTORIAL_GOT_STAR_PIECE EVT_SAVE_FLAG(101)
