@@ -2,6 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
+#include "hud_element.h"
 
 extern s32 D_802946E0[];
 

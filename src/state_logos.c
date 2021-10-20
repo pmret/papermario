@@ -1,6 +1,7 @@
 #include "common.h"
 #include "ld_addrs.h"
 #include "camera.h"
+#include "hud_element.h"
 
 void appendGfx_intro_logos();
 

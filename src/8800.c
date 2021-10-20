@@ -1,6 +1,7 @@
 #include "common.h"
 #include "camera.h"
 #include "nu/nusys.h"
+#include "hud_element.h"
 
 // D_8009A5EC bss here
 

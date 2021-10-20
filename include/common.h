@@ -4,7 +4,6 @@
 #include "ultra64.h"
 #include "types.h"
 #include "common_structs.h"
-#include "hud_element.h" // TEMP for Actor
 #include "functions.h"
 #include "variables.h"
 #include "macros.h"
