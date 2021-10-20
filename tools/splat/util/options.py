@@ -87,6 +87,9 @@ def get_build_path():
 def get_ld_script_path():
     return get_base_path() / opts.get("ld_script_path", f"{opts.get('basename')}.ld")
 
+def get_objcopy_section_path():
+    return get_base_path() / opts.get("objcopy_section_path", "objcopy_sections.txt")
+
 def get_linker_symbol_header_path() -> Optional[Path]:
     if "linker_symbol_header_path" in opts:
         return get_base_path() / str(opts["linker_symbol_header_path"])

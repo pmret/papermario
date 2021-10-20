@@ -154,11 +154,6 @@ class LinkerWriter():
         self._end_segment(segment)
 
     def save_linker_script(self):
-        self._writeln("/DISCARD/ :")
-        self._begin_block()
-        self._writeln("*(*);")
-        self._end_block()
-
         self._end_block() # SECTIONS
 
         assert self._indent_level == 0
