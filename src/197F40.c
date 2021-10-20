@@ -2185,7 +2185,7 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 a1 = *args++;
+    s32 outVar = *args++;
     Actor* actor;
     s32 actorMasked;
     s8 debuff;
@@ -2231,7 +2231,7 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
         }
     }
 
-    switch (actor->staticStatus){
+    switch (actor->staticStatus) {
         case STATUS_END:
             break;
         case STATUS_STATIC:
@@ -2239,7 +2239,7 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    switch (actor->stoneStatus){
+    switch (actor->stoneStatus) {
         case STATUS_END:
             break;
         case STATUS_STONE:
@@ -2247,7 +2247,7 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    switch (actor->koStatus){
+    switch (actor->koStatus) {
         case STATUS_END:
             break;
         case STATUS_DAZE:
@@ -2255,7 +2255,7 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    switch (actor->transStatus){
+    switch (actor->transStatus) {
         case STATUS_END:
             break;
         case STATUS_E:
@@ -2275,7 +2275,7 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
     switch (actorMasked) {
         case ACTOR_PLAYER:
         case ACTOR_PARTNER:
-            if ((battleStatus->outtaSightActive != 0)) {
+            if (battleStatus->outtaSightActive) {
                 flags |= STATUS_FLAG_TRANSPARENT;
             }
             break;
@@ -2299,11 +2299,11 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
         flags |= STATUS_FLAG_CHILL_OUT;
     }
 
-    if (player_team_is_ability_active(actor, 0x16)) {
+    if (player_team_is_ability_active(actor, ABILITY_RIGHT_ON)) {
         flags |= STATUS_FLAG_RIGHT_ON;
     }
 
-    evt_set_variable(script, a1, flags);
+    evt_set_variable(script, outVar, flags);
     return ApiStatus_DONE2;
 }
 
