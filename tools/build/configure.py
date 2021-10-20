@@ -80,7 +80,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("z64",
         description="rom $out",
-        command=f"{cross}objcopy $in $out -O binary && {BUILD_TOOLS}/rom/n64crc $out",
+        command=f"{cross}objcopy @ver/$version/build/objcopy_sections.txt $in $out -O binary && {BUILD_TOOLS}/rom/n64crc $out",
     )
 
     ninja.rule("sha1sum",
@@ -635,6 +635,7 @@ class Configure:
             "z64",
             str(self.elf_path()),
             implicit=[CRC_TOOL],
+            variables={ "version": self.version },
         )
         ninja.build(
             str(self.rom_ok_path()),
@@ -728,7 +729,7 @@ if __name__ == "__main__":
             cppflags += " -DDEBUG" # e.g. affects ASSERT macro
     elif args.debug:
         # g1 doesn't affect codegen
-        cflags += " -g1"
+        cflags += " -ggdb3 "
 
     if not args.no_warn:
         cflags += "-Wuninitialized -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"

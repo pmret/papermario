@@ -8,7 +8,7 @@ import yaml
 import pickle
 from colorama import Style, Fore
 from segtypes.segment import Segment
-from segtypes.linker_entry import LinkerWriter
+from segtypes.linker_entry import LinkerWriter, to_cname
 from util import log
 from util import options
 from util import symbols
@@ -235,6 +235,13 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
             linker_writer.add(segment)
         linker_writer.save_linker_script()
         linker_writer.save_symbol_header()
+
+        # write objcopy_sections.txt
+        objcopy_data = ""
+        for segment in all_segments:
+            objcopy_data += " -j ." + to_cname(segment.name)
+        with open(options.get_objcopy_section_path(), "w", newline="\n") as f:
+            f.write(objcopy_data)
 
     # Write undefined_funcs_auto.txt
     if options.get_create_undefined_funcs_auto():

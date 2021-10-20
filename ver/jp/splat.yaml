@@ -11,6 +11,7 @@ options:
   extensions_path: tools/splat_ext
   symbol_addrs_path: ver/jp/symbol_addrs.txt
   ld_script_path: ver/jp/papermario.ld
+  objcopy_section_path: ver/jp/build/objcopy_sections.txt
   linker_symbol_header_path: ver/jp/build/include/ld_addrs.h
   src_path: src
   asm_path: ver/jp/asm
