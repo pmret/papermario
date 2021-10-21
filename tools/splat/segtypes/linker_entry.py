@@ -66,6 +66,7 @@ class LinkerEntry:
 class LinkerWriter():
     def __init__(self):
         self.shiftable: bool = options.get("shiftable", False)
+        self.linker_discard_section: bool = options.get("linker_discard_section", True)
         self.entries: List[LinkerEntry] = []
 
         self.buffer: List[str] = []
@@ -154,6 +155,12 @@ class LinkerWriter():
         self._end_segment(segment)
 
     def save_linker_script(self):
+        if self.linker_discard_section:
+            self._writeln("/DISCARD/ :")
+            self._begin_block()
+            self._writeln("*(*);")
+            self._end_block()
+
         self._end_block() # SECTIONS
 
         assert self._indent_level == 0
