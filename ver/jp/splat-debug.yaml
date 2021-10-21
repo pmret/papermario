@@ -5,12 +5,15 @@ options:
   compiler: GCC
   mnemonic_ljust: 10
   platform: n64
+  linker_discard_section: False
 
   base_path: ../..
   target_path: ver/jp/baserom.z64
   extensions_path: tools/splat_ext
   symbol_addrs_path: ver/jp/symbol_addrs.txt
   ld_script_path: ver/jp/papermario.ld
+  create_elf_section_list_auto: True
+  elf_section_list_path: ver/jp/build/elf_sections.txt
   linker_symbol_header_path: ver/jp/build/include/ld_addrs.h
   src_path: src
   asm_path: ver/jp/asm
