@@ -69,6 +69,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
         command=f"{cross}ld -T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out",
     )
 
+    ninja.rule("genobjcopy",
+        description="generate $out",
+        command=f"$python {BUILD_TOOLS}/genobjcopy.py $in $out",
+    )
+
     ninja.rule("z64",
         description="rom $out",
         command=f"{cross}objcopy @ver/$version/build/objcopy_sections.txt $in $out -O binary && {BUILD_TOOLS}/rom/n64crc $out",
@@ -235,6 +240,9 @@ class Configure:
 
     def build_path(self) -> Path:
         return Path(f"ver/{self.version}/build")
+
+    def objcopy_sections_path(self) -> Path:
+        return self.build_path() / "objcopy_sections.txt"
 
     def undefined_syms_path(self) -> Path:
         return self.build_path() / "undefined_syms.txt"
@@ -596,6 +604,12 @@ class Configure:
             else:
                 raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")
 
+        # Create objcopy section list
+        ninja.build(
+            str(self.objcopy_sections_path()),
+            "genobjcopy",
+            str(self.build_path() / "elf_sections.txt"),
+        )
         # Run undefined_syms through cpp
         ninja.build(
             str(self.undefined_syms_path()),
@@ -608,7 +622,7 @@ class Configure:
             str(self.elf_path()),
             "ld",
             str(self.linker_script_path()),
-            implicit=[str(obj) for obj in built_objects] + [str(self.undefined_syms_path())],
+            implicit=[str(obj) for obj in built_objects] + [str(self.undefined_syms_path())] + [str(self.objcopy_sections_path())],
             variables={ "version": self.version, "mapfile": str(self.map_path()) },
         )
         ninja.build(
