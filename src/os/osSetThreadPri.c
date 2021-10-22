@@ -14,7 +14,7 @@ OSThread* __osRunningThread = NULL;
 OSThread* __osFaultedThread = NULL;
 
 void osSetThreadPri(OSThread* thread, OSPri pri) {
-    register u32 prevInt = osDisableInt();
+    register u32 prevInt = __osDisableInt();
 
     if (thread == NULL) {
         thread = __osRunningThread;
@@ -32,5 +32,5 @@ void osSetThreadPri(OSThread* thread, OSPri pri) {
         }
     }
 
-    osRestoreInt(prevInt);
+    __osRestoreInt(prevInt);
 }

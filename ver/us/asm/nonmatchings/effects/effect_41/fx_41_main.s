@@ -12,14 +12,14 @@ glabel fx_41_main
 /* 35CA9C E005201C 27A40010 */  addiu     $a0, $sp, 0x10
 /* 35CAA0 E0052020 F7B80048 */  sdc1      $f24, 0x48($sp)
 /* 35CAA4 E0052024 4487C000 */  mtc1      $a3, $f24
-/* 35CAA8 E0052028 3C02E005 */  lui       $v0, %hi(func_E00520E8)
-/* 35CAAC E005202C 244220E8 */  addiu     $v0, $v0, %lo(func_E00520E8)
+/* 35CAA8 E0052028 3C02E005 */  lui       $v0, %hi(fx_41_init)
+/* 35CAAC E005202C 244220E8 */  addiu     $v0, $v0, %lo(fx_41_init)
 /* 35CAB0 E0052030 AFA20018 */  sw        $v0, 0x18($sp)
-/* 35CAB4 E0052034 3C02E005 */  lui       $v0, %hi(func_E00520F0)
-/* 35CAB8 E0052038 244220F0 */  addiu     $v0, $v0, %lo(func_E00520F0)
+/* 35CAB4 E0052034 3C02E005 */  lui       $v0, %hi(fx_41_update)
+/* 35CAB8 E0052038 244220F0 */  addiu     $v0, $v0, %lo(fx_41_update)
 /* 35CABC E005203C AFA2001C */  sw        $v0, 0x1c($sp)
-/* 35CAC0 E0052040 3C02E005 */  lui       $v0, %hi(func_E005241C)
-/* 35CAC4 E0052044 2442241C */  addiu     $v0, $v0, %lo(func_E005241C)
+/* 35CAC0 E0052040 3C02E005 */  lui       $v0, %hi(fx_41_render)
+/* 35CAC4 E0052044 2442241C */  addiu     $v0, $v0, %lo(fx_41_render)
 /* 35CAC8 E0052048 AFA20020 */  sw        $v0, 0x20($sp)
 /* 35CACC E005204C 24020029 */  addiu     $v0, $zero, 0x29
 /* 35CAD0 E0052050 AFBF0030 */  sw        $ra, 0x30($sp)

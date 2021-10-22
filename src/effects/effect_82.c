@@ -2,14 +2,14 @@
 
 INCLUDE_ASM(s32, "effects/effect_82", fx_82_main);
 
-void func_E00A41A4(void) {
+void fx_82_init(void) {
 }
 
-INCLUDE_ASM(s32, "effects/effect_82", func_E00A41AC);
+INCLUDE_ASM(s32, "effects/effect_82", fx_82_update);
 
-INCLUDE_ASM(s32, "effects/effect_82", func_E00A45DC);
+INCLUDE_ASM(s32, "effects/effect_82", fx_82_render);
 
 void func_E00A4648(void) {
 }
 
-INCLUDE_ASM(s32, "effects/effect_82", func_E00A4650);
+INCLUDE_ASM(s32, "effects/effect_82", fx_82_appendGfx);
