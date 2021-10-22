@@ -17,7 +17,7 @@ from util import palettes
 VERSION = "0.7.10"
 
 parser = argparse.ArgumentParser(description="Split a rom given a rom, a config, and output directory")
-parser.add_argument("config", help="path to a compatible config .yaml file")
+parser.add_argument("config", help="path to a compatible config .yaml file", nargs='+')
 parser.add_argument("--target", help="path to a file to split (.z64 rom)")
 parser.add_argument("--basedir", help="a directory in which to extract the rom")
 parser.add_argument("--modes", nargs="+", default="all")
@@ -109,14 +109,42 @@ def do_statistics(seg_sizes, rom_bytes, seg_split, seg_cached):
             log.write(f"{typ:>20}: {fmt_size(tmp_size):>8} ({tmp_ratio:.2%}) {Fore.GREEN}{seg_split[typ]} split{Style.RESET_ALL}, {Style.DIM}{seg_cached[typ]} cached")
     log.write(f"{'unknown':>20}: {fmt_size(unk_size):>8} ({unk_ratio:.2%}) from unknown bin files")
 
+def merge_configs(main_config, additional_config):
+    # Merge rules are simple
+    # For each key in the dictionary
+    # - If list then append to list
+    # - If a dictionary then repeat merge on sub dictionary entries
+    # - Else assume string or number and replace entry
+
+    for curkey in additional_config:
+        if curkey not in main_config:
+            main_config[curkey] = additional_config[curkey]
+        elif type(main_config[curkey]) != type(additional_config[curkey]):
+            log.error(f"Type for key {curkey} in configs does not match")
+        else:
+            # keys exist and match, see if a list to append
+            if type(main_config[curkey]) == list:
+                main_config[curkey] += additional_config[curkey]
+            elif type(main_config[curkey]) == dict:
+                #need to merge sub areas
+                main_config[curkey] = merge_configs(main_config[curkey], additional_config[curkey])
+            else:
+                #not a list or dictionary, must be a number or string, overwrite
+                main_config[curkey] = additional_config[curkey]
+
+    return main_config
+
 def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
     global config
 
     log.write(f"splat {VERSION}")
 
     # Load config
-    with open(config_path) as f:
-        config = yaml.load(f.read(), Loader=yaml.SafeLoader)
+    config = {}
+    for entry in config_path:
+        with open(entry) as f:
+            additional_config = yaml.load(f.read(), Loader=yaml.SafeLoader)
+        config = merge_configs(config, additional_config)
 
     options.initialize(config, config_path, base_dir, target_path)
     options.set("modes", modes)
