@@ -42,7 +42,7 @@ void guRotateF(float mf[4][4], float a, float x, float y, float z) {
 	mf[0][1] = ab + zs;
 }
 #else
-INCLUDE_ASM_LIBULTRA(guRotate, guRotateF);
+INCLUDE_ASM_LIBULTRA("guRotate", guRotateF);
 #endif
 
 
@@ -55,5 +55,5 @@ void guRotate(Mtx *m, float a, float x, float y, float z) {
 	guMtxF2L(mf, m);
 }
 #else
-INCLUDE_ASM_LIBULTRA(guRotate, guRotate);
+INCLUDE_ASM_LIBULTRA("guRotate", guRotate);
 #endif

@@ -10,5 +10,5 @@ s32 osEPiLinkHandle(OSPiHandle* EPiHandle) {
     return 0;
 }
 #else
-INCLUDE_ASM_LIBULTRA(osEPiLinkHandle, osEPiLinkHandle);
+INCLUDE_ASM_LIBULTRA("osEPiLinkHandle", osEPiLinkHandle);
 #endif

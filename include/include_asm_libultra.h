@@ -13,7 +13,7 @@
         "\t.globl\t"#NAME"\n" \
         "\t.ent\t"#NAME"\n" \
         #NAME ":\n" \
-        "\t.include \"ver/"STRINGIFY(VERSION)"/asm/"FOLDER"/"#NAME".s\"\n" \
+        "\t.include \"ver/"STRINGIFY(VERSION)"/asm/os/"FOLDER"/"#NAME".s\"\n" \
         "\t.set reorder\n" \
         "\t.set at\n" \
         "\t.end\t"#NAME \

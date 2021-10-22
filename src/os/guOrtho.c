@@ -22,7 +22,8 @@ void guOrthoF(float mf[4][4], float l, float r, float b, float t, float n, float
     }
 }
 #else
-INCLUDE_ASM_LIBULTRA(guOrtho, guOrthoF);
+void guOrthoF(float mf[4][4], float l, float r, float b, float t, float n, float f, float scale);
+INCLUDE_ASM_LIBULTRA("guOrtho", guOrthoF);
 #endif
 
 #ifndef MACOS
@@ -34,5 +35,5 @@ void guOrtho(Mtx* m, float l, float r, float b, float t, float n, float f, float
 	guMtxF2L(mf, m);
 }
 #else
-INCLUDE_ASM_LIBULTRA(guOrtho, guOrtho);
+INCLUDE_ASM_LIBULTRA("guOrtho", guOrtho);
 #endif
