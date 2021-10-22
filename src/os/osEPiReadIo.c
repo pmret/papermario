@@ -1,8 +1,8 @@
-#include "common.h"
-
 #ifdef MACOS
 #define MOVE_ADDU
 #endif
+
+#include "common.h"
 
 s32 osEPiReadIo(OSPiHandle* pihandle, u32 devAddr, u32* data) {
     s32 ret;

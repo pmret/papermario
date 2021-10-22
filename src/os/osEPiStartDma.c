@@ -1,8 +1,8 @@
-#include "common.h"
-
 #ifdef MACOS
 #define MOVE_ADDU
 #endif
+
+#include "common.h"
 
 s32 osEPiStartDma(OSPiHandle* pihandle, OSIoMesg* mb, s32 direction) {
     if (!__osPiDevMgr.active) {
