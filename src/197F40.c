@@ -2329,7 +2329,6 @@ ApiStatus RemovePlayerBuffs(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetPartAlpha(Evt* script, s32 isInitialCall) {
-    
     Actor* actor;
     s32* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
@@ -2339,7 +2338,7 @@ ApiStatus SetPartAlpha(Evt* script, s32 isInitialCall) {
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
-    
+
     actor = get_actor(actorID);
     get_actor_part(actor, partIndex)->opacity = opacity;
 
