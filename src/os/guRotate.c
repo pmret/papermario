@@ -1,7 +1,9 @@
 #include "common.h"
+#include "include_asm_libultra.h"
 
 extern float D_800958C0;
 
+#ifndef MACOS
 void guRotateF(float mf[4][4], float a, float x, float y, float z) {
 	static float dtor = PI_D / 180.0;
 	float sine;
@@ -39,7 +41,12 @@ void guRotateF(float mf[4][4], float a, float x, float y, float z) {
 	mf[1][0] = ab - zs;
 	mf[0][1] = ab + zs;
 }
+#else
+INCLUDE_ASM_LIBULTRA(guRotate, guRotateF);
+#endif
 
+
+#ifndef MACOS
 void guRotate(Mtx *m, float a, float x, float y, float z) {
 	float mf[4][4];
 
@@ -47,3 +54,6 @@ void guRotate(Mtx *m, float a, float x, float y, float z) {
 
 	guMtxF2L(mf, m);
 }
+#else
+INCLUDE_ASM_LIBULTRA(guRotate, guRotate);
+#endif

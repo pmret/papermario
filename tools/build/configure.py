@@ -61,6 +61,9 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
 
+    if sys.platform == "darwin":
+        CPPFLAGS += " -DMACOS"
+
     CPPFLAGS_LIBULTRA = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
@@ -374,7 +377,7 @@ class Configure:
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
-                elif "kmc" in cflags:
+                elif "kmc" in cflags and sys.platform != "darwin":
                     task = "cc_kmc"
 
                 cflags = cflags.replace("kmc", "")
