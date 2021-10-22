@@ -31,7 +31,8 @@ def exec_shell(command: List[str]) -> str:
     ret = subprocess.run(command, stdout=subprocess.PIPE, text=True)
     return ret.stdout
 
-def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra_cflags: str, use_ccache: bool):
+def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra_cflags: str, use_ccache: bool,
+                      non_matching: bool):
     # platform-specific
     if sys.platform  == "darwin":
         iconv = "tools/iconv.py UTF-8 SHIFT-JIS"
@@ -61,8 +62,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
 
-    if sys.platform == "darwin":
-        CPPFLAGS += " -DMACOS"
+    if sys.platform == "darwin" and not non_matching:
+        CPPFLAGS += " -DKMC_ASM"
 
     CPPFLAGS_LIBULTRA = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
@@ -737,7 +738,7 @@ if __name__ == "__main__":
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
 
-    write_ninja_rules(ninja, args.cpp or "cpp", cppflags, cflags, args.ccache)
+    write_ninja_rules(ninja, args.cpp or "cpp", cppflags, cflags, args.ccache, args.non_matching)
     write_ninja_for_tools(ninja)
 
     skip_files = set()

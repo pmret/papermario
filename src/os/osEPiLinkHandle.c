@@ -1,7 +1,7 @@
 #include "common.h"
 #include "include_asm_libultra.h"
 
-#ifndef MACOS
+#ifndef KMC_ASM
 s32 osEPiLinkHandle(OSPiHandle* EPiHandle) {
     u32 saveMask = __osDisableInt();
     EPiHandle->next = __osPiTable;

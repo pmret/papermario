@@ -3,7 +3,7 @@
 
 extern float D_800958C0;
 
-#ifndef MACOS
+#ifndef KMC_ASM
 void guRotateF(float mf[4][4], float a, float x, float y, float z) {
 	static float dtor = PI_D / 180.0;
 	float sine;
@@ -46,7 +46,7 @@ INCLUDE_ASM_LIBULTRA("guRotate", guRotateF);
 #endif
 
 
-#ifndef MACOS
+#ifndef KMC_ASM
 void guRotate(Mtx *m, float a, float x, float y, float z) {
 	float mf[4][4];
 

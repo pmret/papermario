@@ -1,4 +1,4 @@
-#ifdef MACOS
+#ifdef KMC_ASM
 #define MOVE_ADDU
 #endif
 

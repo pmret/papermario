@@ -1,7 +1,7 @@
 #include "PR/gu.h"
 #include "include_asm_libultra.h"
 
-#ifndef MACOS
+#ifndef KMC_ASM
 void guOrthoF(float mf[4][4], float l, float r, float b, float t, float n, float f, float scale) {
     s32 i, j;
 
@@ -26,7 +26,7 @@ void guOrthoF(float mf[4][4], float l, float r, float b, float t, float n, float
 INCLUDE_ASM_LIBULTRA("guOrtho", guOrthoF);
 #endif
 
-#ifndef MACOS
+#ifndef KMC_ASM
 void guOrtho(Mtx* m, float l, float r, float b, float t, float n, float f, float scale) {
     float mf[4][4];
 
