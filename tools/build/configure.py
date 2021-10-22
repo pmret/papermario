@@ -296,7 +296,7 @@ class Configure:
         # ¯\_(ツ)_/¯
         return path
 
-    def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str]):
+    def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str], non_matching: bool):
         import segtypes
         import segtypes.common.data
         import segtypes.n64.Yay0
@@ -378,7 +378,7 @@ class Configure:
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
-                elif "kmc" in cflags and sys.platform != "darwin":
+                elif "kmc" in cflags and (sys.platform != "darwin" or non_matching):
                     task = "cc_kmc"
 
                 cflags = cflags.replace("kmc", "")
@@ -754,7 +754,7 @@ if __name__ == "__main__":
             first_configure = configure
 
         configure.split(not args.no_split_assets, args.split_code)
-        configure.write_ninja(ninja, skip_files)
+        configure.write_ninja(ninja, skip_files, args.non_matching)
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 
