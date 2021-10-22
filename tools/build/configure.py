@@ -245,16 +245,16 @@ class Configure:
         if code:
             modes.extend(["code", "c", "data", "rodata"])
 
-        splat_file = "splat.yaml"
+        splat_file = [str(self.version_path / "splat.yaml")]
         if debug:
-            splat_file = "splat-debug.yaml"
+            splat_file += [str(self.version_path / "splat-debug.yaml")]
 
         split.main(
-            str(self.version_path / splat_file),
+            splat_file,
             None,
             str(self.version_path / "baserom.z64"),
             modes,
-            verbose=False,
+            verbose=True,
         )
         self.linker_entries = split.linker_writer.entries[:]
         self.asset_stack = split.config["asset_stack"]
@@ -756,10 +756,10 @@ if __name__ == "__main__":
             cppflags += " -DDEBUG" # e.g. affects ASSERT macro
     elif args.debug:
         # g1 doesn't affect codegen
-        cflags += " -ggdb3 "
+        cflags += " -g1"
 
     if not args.no_warn:
-        cflags += "-Wuninitialized -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
+        cflags += " -Wuninitialized -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
 
     # add splat to python import path
     sys.path.append(str((ROOT / args.splat).resolve()))
