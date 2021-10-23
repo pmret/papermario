@@ -144,7 +144,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     s32 defense;
     s32 targetPartIdx;
     s32 event;
-    s32 statusInflicted = 0;
+    s32 statusInflicted = FALSE;
     s32 statusInflicted2 = FALSE;
     Actor *target;
     s32 new_var;
