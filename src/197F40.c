@@ -162,7 +162,23 @@ ApiStatus SetIdleGoalToHome(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", SetGoalToIndex);
+ApiStatus SetGoalToIndex(Evt* script, s32 isInitialCall) {
+    s32* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    Actor* actor;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    actor->state.goalPos.x = D_80283524[index].x;
+    actor->state.goalPos.y = D_80283524[index].y;
+    actor->state.goalPos.z = D_80283524[index].z;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetIndexFromPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -2312,7 +2328,23 @@ ApiStatus RemovePlayerBuffs(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", SetPartAlpha);
+ApiStatus SetPartAlpha(Evt* script, s32 isInitialCall) {
+    Actor* actor;
+    s32* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
+    s32 opacity = evt_get_variable(script, *args++);
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    get_actor_part(actor, partIndex)->opacity = opacity;
+
+    actor->renderMode = (opacity == 255) ? RENDER_MODE_ALPHATEST : RENDER_MODE_SURFACE_XLU_LAYER3;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", CreatePartShadow);
 
