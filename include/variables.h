@@ -112,15 +112,6 @@ extern f32 D_800F7B70[4];
 
 extern TempSetZoneEnabled* D_800D91D4;
 
-extern UNK_TYPE D_0A0031E0;
-extern UNK_TYPE D_0A001508;
-extern UNK_TYPE D_0A0031B0;
-extern UNK_TYPE D_0A0014D8;
-extern UNK_TYPE D_0A002F78;
-extern UNK_TYPE D_0A001218;
-extern UNK_TYPE D_0A003F70;
-extern UNK_TYPE D_0A002318;
-
 // Animation related
 extern AnimatedMeshList* gCurrentAnimMeshListPtr;
 
@@ -382,6 +373,8 @@ extern s32 D_80292098[];
 extern s32 D_802920C0[];
 extern s32 D_802920E8[];
 extern s32 D_80292110[];
+
+extern s32 D_8029FBD0;
 
 extern s32 D_800F7BE8[];
 extern s32 D_800F7BBC[];

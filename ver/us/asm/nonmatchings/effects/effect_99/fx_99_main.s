@@ -28,14 +28,14 @@ glabel fx_99_main
 /* 3CCA3C E00C605C AFA70084 */   sw       $a3, 0x84($sp)
 /* 3CCA40 E00C6060 24130008 */  addiu     $s3, $zero, 8
 .LE00C6064:
-/* 3CCA44 E00C6064 3C02E00C */  lui       $v0, %hi(func_E00C6394)
-/* 3CCA48 E00C6068 24426394 */  addiu     $v0, $v0, %lo(func_E00C6394)
+/* 3CCA44 E00C6064 3C02E00C */  lui       $v0, %hi(fx_99_init)
+/* 3CCA48 E00C6068 24426394 */  addiu     $v0, $v0, %lo(fx_99_init)
 /* 3CCA4C E00C606C AFA20018 */  sw        $v0, 0x18($sp)
-/* 3CCA50 E00C6070 3C02E00C */  lui       $v0, %hi(func_E00C639C)
-/* 3CCA54 E00C6074 2442639C */  addiu     $v0, $v0, %lo(func_E00C639C)
+/* 3CCA50 E00C6070 3C02E00C */  lui       $v0, %hi(fx_99_update)
+/* 3CCA54 E00C6074 2442639C */  addiu     $v0, $v0, %lo(fx_99_update)
 /* 3CCA58 E00C6078 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 3CCA5C E00C607C 3C02E00C */  lui       $v0, %hi(func_E00C6768)
-/* 3CCA60 E00C6080 24426768 */  addiu     $v0, $v0, %lo(func_E00C6768)
+/* 3CCA5C E00C607C 3C02E00C */  lui       $v0, %hi(fx_99_render)
+/* 3CCA60 E00C6080 24426768 */  addiu     $v0, $v0, %lo(fx_99_render)
 /* 3CCA64 E00C6084 AFA20020 */  sw        $v0, 0x20($sp)
 /* 3CCA68 E00C6088 24020063 */  addiu     $v0, $zero, 0x63
 /* 3CCA6C E00C608C AFA00010 */  sw        $zero, 0x10($sp)

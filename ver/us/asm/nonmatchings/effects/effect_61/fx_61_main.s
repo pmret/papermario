@@ -119,16 +119,16 @@ glabel fx_61_main
 /* 37C6FC E007A1BC 4600F782 */  mul.s     $f30, $f30, $f0
 /* 37C700 E007A1C0 00000000 */  nop
 /* 37C704 E007A1C4 0200202D */  daddu     $a0, $s0, $zero
-/* 37C708 E007A1C8 3C02E008 */  lui       $v0, %hi(func_E007A504)
-/* 37C70C E007A1CC 2442A504 */  addiu     $v0, $v0, %lo(func_E007A504)
+/* 37C708 E007A1C8 3C02E008 */  lui       $v0, %hi(fx_61_init)
+/* 37C70C E007A1CC 2442A504 */  addiu     $v0, $v0, %lo(fx_61_init)
 /* 37C710 E007A1D0 AC820008 */  sw        $v0, 8($a0)
 /* 37C714 E007A1D4 46008402 */  mul.s     $f16, $f16, $f0
 /* 37C718 E007A1D8 00000000 */  nop
-/* 37C71C E007A1DC 3C02E008 */  lui       $v0, %hi(func_E007A50C)
-/* 37C720 E007A1E0 2442A50C */  addiu     $v0, $v0, %lo(func_E007A50C)
+/* 37C71C E007A1DC 3C02E008 */  lui       $v0, %hi(fx_61_update)
+/* 37C720 E007A1E0 2442A50C */  addiu     $v0, $v0, %lo(fx_61_update)
 /* 37C724 E007A1E4 AC82000C */  sw        $v0, 0xc($a0)
-/* 37C728 E007A1E8 3C02E008 */  lui       $v0, %hi(func_E007A840)
-/* 37C72C E007A1EC 2442A840 */  addiu     $v0, $v0, %lo(func_E007A840)
+/* 37C728 E007A1E8 3C02E008 */  lui       $v0, %hi(fx_61_render)
+/* 37C72C E007A1EC 2442A840 */  addiu     $v0, $v0, %lo(fx_61_render)
 /* 37C730 E007A1F0 AC800000 */  sw        $zero, ($a0)
 /* 37C734 E007A1F4 4600E702 */  mul.s     $f28, $f28, $f0
 /* 37C738 E007A1F8 00000000 */  nop

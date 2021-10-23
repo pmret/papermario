@@ -11,7 +11,7 @@ glabel osRecvMesg
 /* 40B08 80065708 00C08821 */  addu      $s1, $a2, $zero
 /* 40B0C 8006570C AFBF0024 */  sw        $ra, 0x24($sp)
 /* 40B10 80065710 AFB3001C */  sw        $s3, 0x1c($sp)
-/* 40B14 80065714 0C01ACD8 */  jal       osDisableInt
+/* 40B14 80065714 0C01ACD8 */  jal       __osDisableInt
 /* 40B18 80065718 AFB20018 */   sw       $s2, 0x18($sp)
 /* 40B1C 8006571C 8E030008 */  lw        $v1, 8($s0)
 /* 40B20 80065720 1460000F */  bnez      $v1, .L80065760
@@ -20,7 +20,7 @@ glabel osRecvMesg
 .L8006572C:
 /* 40B2C 8006572C 16200005 */  bnez      $s1, .L80065744
 /* 40B30 80065730 02002021 */   addu     $a0, $s0, $zero
-/* 40B34 80065734 0C01ACF4 */  jal       osRestoreInt
+/* 40B34 80065734 0C01ACF4 */  jal       __osRestoreInt
 /* 40B38 80065738 02402021 */   addu     $a0, $s2, $zero
 /* 40B3C 8006573C 080195FD */  j         .L800657F4
 /* 40B40 80065740 2402FFFF */   addiu    $v0, $zero, -1
@@ -71,7 +71,7 @@ glabel osRecvMesg
 /* 40BE0 800657E0 0C019808 */  jal       osStartThread
 /* 40BE4 800657E4 00402021 */   addu     $a0, $v0, $zero
 .L800657E8:
-/* 40BE8 800657E8 0C01ACF4 */  jal       osRestoreInt
+/* 40BE8 800657E8 0C01ACF4 */  jal       __osRestoreInt
 /* 40BEC 800657EC 02402021 */   addu     $a0, $s2, $zero
 /* 40BF0 800657F0 00001021 */  addu      $v0, $zero, $zero
 .L800657F4:

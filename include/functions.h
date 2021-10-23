@@ -305,6 +305,9 @@ void set_aux_pan_v(s32 texPannerID, s32 value);
 void enable_world_fog(void);
 void set_world_fog_dist(s32 start, s32 end);
 void set_world_fog_color(s32 r, s32 g, s32 b, s32 a);
+void enable_entity_fog(void);
+void set_entity_fog_dist(s32 start, s32 end);
+void set_entity_fog_color(s32 r, s32 g, s32 b, s32 a);
 
 ModelTransformGroup* get_transform_group(s32 index);
 
@@ -471,6 +474,16 @@ void crash_screen_set_draw_info(u16* frameBufPtr, s16 width, s16 height);
 void func_80077BD0(s32, s32, s32, s32, s32, s32);
 void func_8006CAC0(float mf[4][4], float x, float y, float z);
 
+void func_800495A0(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void func_800496B8(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void func_80049C04(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void func_80049E3C(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void func_80049ECC(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void func_80049F7C(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void func_8004A124(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void func_8004A3E8(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+void func_8004A73C(Evt* script);
+
 s32 create_generic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void));
 EntityModel* get_entity_model(s32 idx);
 f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z);
@@ -544,6 +557,7 @@ void dispatch_event_actor(Actor*, s32);
 void btl_show_variable_battle_message(s32, s32, s32);
 s32 btl_is_popup_displayed(void);
 void func_8024E3D8(s32);
+s32 inflict_status(Actor*, s32, s32);
 
 void enforce_hpfp_limits(void);
 

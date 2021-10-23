@@ -12,14 +12,14 @@ glabel fx_57_main
 /* 374E6C E007201C 27A40010 */  addiu     $a0, $sp, 0x10
 /* 374E70 E0072020 F7B80048 */  sdc1      $f24, 0x48($sp)
 /* 374E74 E0072024 4487C000 */  mtc1      $a3, $f24
-/* 374E78 E0072028 3C02E007 */  lui       $v0, %hi(func_E0072148)
-/* 374E7C E007202C 24422148 */  addiu     $v0, $v0, %lo(func_E0072148)
+/* 374E78 E0072028 3C02E007 */  lui       $v0, %hi(fx_57_init)
+/* 374E7C E007202C 24422148 */  addiu     $v0, $v0, %lo(fx_57_init)
 /* 374E80 E0072030 AFA20018 */  sw        $v0, 0x18($sp)
-/* 374E84 E0072034 3C02E007 */  lui       $v0, %hi(func_E0072150)
-/* 374E88 E0072038 24422150 */  addiu     $v0, $v0, %lo(func_E0072150)
+/* 374E84 E0072034 3C02E007 */  lui       $v0, %hi(fx_57_update)
+/* 374E88 E0072038 24422150 */  addiu     $v0, $v0, %lo(fx_57_update)
 /* 374E8C E007203C AFA2001C */  sw        $v0, 0x1c($sp)
-/* 374E90 E0072040 3C02E007 */  lui       $v0, %hi(func_E007238C)
-/* 374E94 E0072044 2442238C */  addiu     $v0, $v0, %lo(func_E007238C)
+/* 374E90 E0072040 3C02E007 */  lui       $v0, %hi(fx_57_render)
+/* 374E94 E0072044 2442238C */  addiu     $v0, $v0, %lo(fx_57_render)
 /* 374E98 E0072048 AFA20020 */  sw        $v0, 0x20($sp)
 /* 374E9C E007204C 24020039 */  addiu     $v0, $zero, 0x39
 /* 374EA0 E0072050 AFBF0030 */  sw        $ra, 0x30($sp)

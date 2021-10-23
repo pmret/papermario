@@ -1,4 +1,6 @@
+#ifdef KMC_ASM
 #define MOVE_ADDU
+#endif
 
 #include "common.h"
 

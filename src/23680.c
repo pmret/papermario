@@ -182,7 +182,25 @@ void func_80049550(Evt* script, s32 arg1) {
     }
 }
 
-INCLUDE_ASM(s32, "23680", func_800495A0);
+void func_800495A0(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    npc->duration = (npcAISettings->moveTime / 2) + rand_int((npcAISettings->moveTime / 2) + 1);
+    npc->yaw = clamp_angle(npc->yaw + rand_int(60) - 30.0f);
+    npc->currentAnim.w = enemy->animList[1];
+    script->functionTemp[1] = 0;
+
+    if (enemy->territory->wander.moveSpeedOverride < 0) {
+        npc->moveSpeed = npcAISettings->moveSpeed;
+    } else {
+        npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
+    }
+
+    enemy->unk_B0 &= ~0x40;
+    enemy->unk_B0 &= ~0x20;
+    script->functionTemp[0] = 1;
+}
 
 INCLUDE_ASM(s32, "23680", func_800496B8);
 
@@ -191,7 +209,7 @@ INCLUDE_ASM(s32, "23680", func_800496B8);
 
 INCLUDE_ASM(s32, "23680", func_80049C04);
 
-void func_80049E3C(Evt* script) {
+void func_80049E3C(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -204,7 +222,7 @@ void func_80049E3C(Evt* script) {
     script->functionTemp[0] = 11;
 }
 
-void func_80049ECC(Evt* script) {
+void func_80049ECC(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
     s32 flag = FALSE;
 
@@ -225,11 +243,45 @@ void func_80049ECC(Evt* script) {
     }
 }
 
-INCLUDE_ASM(s32, "23680", func_80049F7C);
+void func_80049F7C(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 cond = FALSE;
+
+    if ((gPlayerStatusPtr->actionState == ACTION_STATE_JUMP || gPlayerStatusPtr->actionState == ACTION_STATE_BOUNCE ||
+        gPlayerStatusPtr->actionState == ACTION_STATE_HOP || gPlayerStatusPtr->actionState == ACTION_STATE_FALLING) &&
+        (f64)dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) < npc->collisionRadius)
+    {
+        cond = TRUE;
+    }
+
+    if (!cond) {
+        f32 yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        f32 angleDiff = get_clamped_angle_diff(npc->yaw, yaw);
+        s32 temp_f4 = npcAISettings->unk_1C.s;
+
+        if (temp_f4 < fabsf(angleDiff)) {
+            yaw = npc->yaw;
+            if (angleDiff < 0.0f) {
+                yaw += -npcAISettings->unk_1C.s;
+            } else {
+                yaw += temp_f4;
+            }
+        }
+        npc->yaw = clamp_angle(yaw);
+        npc->duration = (npcAISettings->unk_20 / 2) + rand_int((npcAISettings->unk_20 / 2) + 1);
+    } else {
+        npc->duration = 0;
+    }
+
+    npc->currentAnim.w = enemy->animList[3];
+    npc->moveSpeed = npcAISettings->chaseSpeed;
+    script->functionTemp[0] = 13;
+}
 
 INCLUDE_ASM(s32, "23680", func_8004A124);
 
-void func_8004A3E8(Evt* script, s32 arg1) {
+void func_8004A3E8(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

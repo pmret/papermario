@@ -68,14 +68,14 @@ glabel LE0088250_38B040
 /* 38B048 E0088258 00000000 */  nop
 /* 38B04C E008825C E7B00028 */  swc1      $f16, 0x28($sp)
 .LE0088260:
-/* 38B050 E0088260 3C02E009 */  lui       $v0, %hi(func_E00885A0)
-/* 38B054 E0088264 244285A0 */  addiu     $v0, $v0, %lo(func_E00885A0)
+/* 38B050 E0088260 3C02E009 */  lui       $v0, %hi(fx_68_init)
+/* 38B054 E0088264 244285A0 */  addiu     $v0, $v0, %lo(fx_68_init)
 /* 38B058 E0088268 AC820008 */  sw        $v0, 8($a0)
-/* 38B05C E008826C 3C02E009 */  lui       $v0, %hi(func_E00885A8)
-/* 38B060 E0088270 244285A8 */  addiu     $v0, $v0, %lo(func_E00885A8)
+/* 38B05C E008826C 3C02E009 */  lui       $v0, %hi(fx_68_update)
+/* 38B060 E0088270 244285A8 */  addiu     $v0, $v0, %lo(fx_68_update)
 /* 38B064 E0088274 AC82000C */  sw        $v0, 0xc($a0)
-/* 38B068 E0088278 3C02E009 */  lui       $v0, %hi(func_E00887A8)
-/* 38B06C E008827C 244287A8 */  addiu     $v0, $v0, %lo(func_E00887A8)
+/* 38B068 E0088278 3C02E009 */  lui       $v0, %hi(fx_68_render)
+/* 38B06C E008827C 244287A8 */  addiu     $v0, $v0, %lo(fx_68_render)
 /* 38B070 E0088280 AC820010 */  sw        $v0, 0x10($a0)
 /* 38B074 E0088284 24020044 */  addiu     $v0, $zero, 0x44
 /* 38B078 E0088288 AC800000 */  sw        $zero, ($a0)
