@@ -685,7 +685,7 @@ ApiStatus SetAnimatorFlags(Evt* script, s32 isInitialCall) {
     s32 index = evt_get_variable(script, *args++);
     s32 a1 = *args++;
     s32 enable = evt_get_variable(script, *args++);
-    AnimatedMesh* animMesh = get_animator_by_index((*gCurrentMeshAnimationListPtr)[index]->animModelID);
+    ModelAnimator* animMesh = get_animator_by_index((*gCurrentMeshAnimationListPtr)[index]->animModelID);
 
     if (enable) {
         animMesh->flags |= a1;

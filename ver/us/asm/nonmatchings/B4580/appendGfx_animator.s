@@ -81,8 +81,8 @@ glabel appendGfx_animator
 /* B5CD4 8011F5D4 A4820000 */  sh        $v0, ($a0)
 /* B5CD8 8011F5D8 3C02800A */  lui       $v0, %hi(gDisplayContext)
 /* B5CDC 8011F5DC 8C42A674 */  lw        $v0, %lo(gDisplayContext)($v0)
-/* B5CE0 8011F5E0 3C048015 */  lui       $a0, %hi(D_80153A44)
-/* B5CE4 8011F5E4 8C843A44 */  lw        $a0, %lo(D_80153A44)($a0)
+/* B5CE0 8011F5E0 3C048015 */  lui       $a0, %hi(gAnimModelFogEnabled)
+/* B5CE4 8011F5E4 8C843A44 */  lw        $a0, %lo(gAnimModelFogEnabled)($a0)
 /* B5CE8 8011F5E8 00431021 */  addu      $v0, $v0, $v1
 /* B5CEC 8011F5EC 0004202B */  sltu      $a0, $zero, $a0
 /* B5CF0 8011F5F0 10800006 */  beqz      $a0, .L8011F60C
@@ -301,10 +301,10 @@ glabel L8011F8DC_B5FDC
 /* B6004 8011F904 AC820004 */  sw        $v0, 4($a0)
 glabel L8011F908_B6008
 /* B6008 8011F908 3C070001 */  lui       $a3, 1
-/* B600C 8011F90C 3C028015 */  lui       $v0, %hi(D_80153A5C)
-/* B6010 8011F910 8C423A5C */  lw        $v0, %lo(D_80153A5C)($v0)
-/* B6014 8011F914 3C038015 */  lui       $v1, %hi(D_80153A58)
-/* B6018 8011F918 8C633A58 */  lw        $v1, %lo(D_80153A58)($v1)
+/* B600C 8011F90C 3C028015 */  lui       $v0, %hi(gAnimModelFogEnd)
+/* B6010 8011F910 8C423A5C */  lw        $v0, %lo(gAnimModelFogEnd)($v0)
+/* B6014 8011F914 3C038015 */  lui       $v1, %hi(gAnimModelFogStart)
+/* B6018 8011F918 8C633A58 */  lw        $v1, %lo(gAnimModelFogStart)($v1)
 /* B601C 8011F91C 34E7F400 */  ori       $a3, $a3, 0xf400
 /* B6020 8011F920 00431023 */  subu      $v0, $v0, $v1
 /* B6024 8011F924 14400002 */  bnez      $v0, .L8011F930

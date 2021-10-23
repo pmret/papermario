@@ -838,23 +838,60 @@ typedef struct ModelDisplayData {
     /* 0x4 */ char unk_00[0x4];
 } ModelDisplayData; // size = 0x8
 
-typedef struct AnimatedMesh {
+typedef struct AnimatorNode {
+    /* 0x00 */ Gfx* displayList;
+    /* 0x04 */ struct AnimatorNode* children[0x20];
+    /* 0x84 */ Vec3f basePos; // ?
+    /* 0x90 */ Vec3f pos;
+    /* 0x9C */ Vec3f rotation;
+    /* 0xA8 */ Vec3f scale;
+    /* 0xB4 */ Matrix4f mtx;
+    /* 0xF4 */ s16 flags;
+    /* 0xF6 */ s16 uniqueIndex;
+    /* 0xF8 */ s16 vertexStartOffset;
+    /* 0xFA */ char unk_FA[2];
+    /* 0xFC */ s32 modelID; // also ptr to vtx list? union?
+} AnimatorNode; // size = 0x100
+
+typedef struct StaticAnimatorNode {
+    /* 0x00 */ Gfx* displayList; // can sometime point to a node???
+    /* 0x04 */ Vec3s rot; /* range = -180,180 */
+    /* 0x0A */ char unk_0A[0x2];
+    /* 0x0C */ Vec3f pos;
+    /* 0x18 */ struct StaticAnimatorNode* sibling;
+    /* 0x1C */ struct StaticAnimatorNode* child;
+    /* 0x20 */ s16 vertexStartOffset;
+    /* 0x22 */ char unk_22[0x2];
+    /* 0x24 */ Vtx* vertexList;
+    /* 0x28 */ s16 modelID;
+    /* 0x2A */ char unk_2A[0x2];
+} StaticAnimatorNode; // size = 0x2C
+
+typedef struct ModelAnimator {
     /* 0x000 */ s32 flags;
     /* 0x004 */ u8 renderMode;
     /* 0x005 */ char unk_05[3];
-    /* 0x008 */ u32* animation1;
-    /* 0x00C */ u32* animation2;
-    /* 0x010 */ char unk_10[136];
+    /* 0x008 */ u32* animReadPos;
+    /* 0x00C */ u32* savedReadPos;
+    /* 0x010 */ AnimatorNode* rootNode;
+    /* 0x014 */ u8 nextUniqueID;
+    /* 0x015 */ u8 unk_15[0x7A]; // ?
+    /* 0x08F */ char unk_08F[0x1];
+    /* 0x090 */ f32 nextUpdateTime;
+    /* 0x094 */ f32 timeScale;
     /* 0x098 */ Matrix4s mtx;
-    /* 0x0D8 */ char unk_D8[500];
-    /* 0x2CC */ s32 time;
-    /* 0x2D0 */ char unk_2D0[4];
-    /* 0x2D4 */ s32 unk_2D4;
-    /* 0x2D8 */ s32 unk_2D8;
+    /* 0x0D8 */ Vtx** vertexArray;
+    /* 0x0DC */ s8* animationBuffer;
+    /* 0x0E0 */ StaticAnimatorNode* staticNodes[122];
+    /* 0x2C8 */ StaticAnimatorNode** staticRoot;
+    /* 0x2CC */ s32 treeIndexPos;
+    /* 0x2D0 */ s32 savedTreePos;
+    /* 0x2D4 */ void (*fpRenderCallback)(void);
+    /* 0x2D8 */ s32 renderCallbackArg;
     /* 0x2DC */ char unk_2DC[4];
-} AnimatedMesh; // size = 0x2E0
+} ModelAnimator; // size = 0x2E0
 
-typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
+typedef ModelAnimator* AnimatedMeshList[MAX_ANIMATED_MESHES];
 
 typedef struct PrintHandle {
     /* 0x000 */ char unk_00[16];
@@ -925,20 +962,6 @@ typedef struct ItemEntity {
     /* 0x54 */ s32 unk_54;
     /* 0x58 */ s32 unk_58;
 } ItemEntity; // size = 0x5C
-
-typedef struct StaticAnimatorNode {
-    /* 0x00 */ u32* displayList; // can sometime point to a node???
-    /* 0x04 */ Vec3s rot; /* range = -180,180 */
-    /* 0x0A */ char unk_0A[0x2];
-    /* 0x0C */ Vec3f pos;
-    /* 0x18 */ struct StaticAnimatorNode* sibling;
-    /* 0x1C */ struct StaticAnimatorNode* child;
-    /* 0x20 */ s16 vertexStartOffset;
-    /* 0x22 */ char unk_22[0x2];
-    /* 0x24 */ Vtx* vtxList;
-    /* 0x28 */ s16 modelID;
-    /* 0x2A */ char unk_2A[0x2];
-} StaticAnimatorNode; // size = 0x2C
 
 typedef struct SpriteComponent {
     /* 0x00 */ s32 initialized;

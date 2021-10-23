@@ -46,23 +46,23 @@ glabel clear_animator_list
 /* B49B4 8011E2B4 0461FFFD */  bgez      $v1, .L8011E2AC
 /* B49B8 8011E2B8 2442FFFC */   addiu    $v0, $v0, -4
 /* B49BC 8011E2BC 2402000A */  addiu     $v0, $zero, 0xa
-/* B49C0 8011E2C0 3C018015 */  lui       $at, %hi(D_80153A48)
-/* B49C4 8011E2C4 AC223A48 */  sw        $v0, %lo(D_80153A48)($at)
-/* B49C8 8011E2C8 3C018015 */  lui       $at, %hi(D_80153A4C)
-/* B49CC 8011E2CC AC223A4C */  sw        $v0, %lo(D_80153A4C)($at)
-/* B49D0 8011E2D0 3C018015 */  lui       $at, %hi(D_80153A50)
-/* B49D4 8011E2D4 AC223A50 */  sw        $v0, %lo(D_80153A50)($at)
-/* B49D8 8011E2D8 3C018015 */  lui       $at, %hi(D_80153A54)
-/* B49DC 8011E2DC AC223A54 */  sw        $v0, %lo(D_80153A54)($at)
+/* B49C0 8011E2C0 3C018015 */  lui       $at, %hi(gAnimModelFogR)
+/* B49C4 8011E2C4 AC223A48 */  sw        $v0, %lo(gAnimModelFogR)($at)
+/* B49C8 8011E2C8 3C018015 */  lui       $at, %hi(gAnimModelFogG)
+/* B49CC 8011E2CC AC223A4C */  sw        $v0, %lo(gAnimModelFogG)($at)
+/* B49D0 8011E2D0 3C018015 */  lui       $at, %hi(gAnimModelFogB)
+/* B49D4 8011E2D4 AC223A50 */  sw        $v0, %lo(gAnimModelFogB)($at)
+/* B49D8 8011E2D8 3C018015 */  lui       $at, %hi(gAnimModelFogA)
+/* B49DC 8011E2DC AC223A54 */  sw        $v0, %lo(gAnimModelFogA)($at)
 /* B49E0 8011E2E0 24020320 */  addiu     $v0, $zero, 0x320
-/* B49E4 8011E2E4 3C018015 */  lui       $at, %hi(D_80153A58)
-/* B49E8 8011E2E8 AC223A58 */  sw        $v0, %lo(D_80153A58)($at)
+/* B49E4 8011E2E4 3C018015 */  lui       $at, %hi(gAnimModelFogStart)
+/* B49E8 8011E2E8 AC223A58 */  sw        $v0, %lo(gAnimModelFogStart)($at)
 /* B49EC 8011E2EC 240203E8 */  addiu     $v0, $zero, 0x3e8
 /* B49F0 8011E2F0 3C018015 */  lui       $at, %hi(D_801512D4)
 /* B49F4 8011E2F4 AC2012D4 */  sw        $zero, %lo(D_801512D4)($at)
-/* B49F8 8011E2F8 3C018015 */  lui       $at, %hi(D_80153A44)
-/* B49FC 8011E2FC AC203A44 */  sw        $zero, %lo(D_80153A44)($at)
-/* B4A00 8011E300 3C018015 */  lui       $at, %hi(D_80153A5C)
-/* B4A04 8011E304 AC223A5C */  sw        $v0, %lo(D_80153A5C)($at)
+/* B49F8 8011E2F8 3C018015 */  lui       $at, %hi(gAnimModelFogEnabled)
+/* B49FC 8011E2FC AC203A44 */  sw        $zero, %lo(gAnimModelFogEnabled)($at)
+/* B4A00 8011E300 3C018015 */  lui       $at, %hi(gAnimModelFogEnd)
+/* B4A04 8011E304 AC223A5C */  sw        $v0, %lo(gAnimModelFogEnd)($at)
 /* B4A08 8011E308 03E00008 */  jr        $ra
 /* B4A0C 8011E30C 00000000 */   nop

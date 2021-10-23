@@ -2,29 +2,91 @@
 
 s32 D_8014C250[] = {0x0001003C, 0x00000000, 0x00000000, 0x00000000};
 
+extern s32 gAnimModelFogEnabled;
+extern s32 gAnimModelFogR;
+extern s32 gAnimModelFogG;
+extern s32 gAnimModelFogB;
+extern s32 gAnimModelFogA;
+extern s32 gAnimModelFogStart;
+extern s32 gAnimModelFogEnd;
+
 INCLUDE_ASM(s32, "B4580", animator_copy_vertices_to_buffer);
 
-INCLUDE_ASM(s32, "B4580", animator_make_mirrorZ);
+void animator_make_mirrorZ(Matrix4f mtx) {
+    guMtxIdentF(mtx);
+    mtx[0][0] = 1.0f;
+    mtx[1][1] = 1.0f;
+    mtx[2][2] = -1.0f;
+    mtx[3][3] = 1.0f;
+}
 
-INCLUDE_ASM(s32, "B4580", animator_make_mirrorY);
+void animator_make_mirrorY(Matrix4f mtx) {
+    guMtxIdentF(mtx);
+    mtx[0][0] = 1.0f;
+    mtx[1][1] = -1.0f;
+    mtx[2][2] = 1.0f;
+    mtx[3][3] = 1.0f;
+}
 
-INCLUDE_ASM(s32, "B4580", animator_make_mirrorX);
+void animator_make_mirrorX(Matrix4f mtx) {
+    guMtxIdentF(mtx);
+    mtx[0][0] = -1.0f;
+    mtx[1][1] = 1.0f;
+    mtx[2][2] = 1.0f;
+    mtx[3][3] = 1.0f;
+}
 
-INCLUDE_ASM(s32, "B4580", animator_make_identity);
+void animator_make_identity(Matrix4f mtx) {
+    guMtxIdentF(mtx);
+    mtx[0][0] = 1.0f;
+    mtx[1][1] = 1.0f;
+    mtx[2][2] = 1.0f;
+    mtx[3][3] = 1.0f;
+}
 
+AnimatorNode* get_animator_child_with_id(AnimatorNode* node, s32 id);
 INCLUDE_ASM(s32, "B4580", get_animator_child_with_id);
 
 INCLUDE_ASM(s32, "B4580", get_animator_child_for_model);
 
-INCLUDE_ASM(s32, "B4580", free_animator_nodes);
+void free_animator_nodes(AnimatorNode* root) {
+    s32 i;
+
+    for (i = 0; i < 0x20; i++) {
+        if (root->children[i] != NULL) {
+            free_animator_nodes(root->children[i]);
+        }
+    }
+    heap_free(root);
+}
 
 INCLUDE_ASM(s32, "B4580", clear_animator_list);
 
 INCLUDE_ASM(s32, "B4580", reset_animator_list);
 
-INCLUDE_ASM(s32, "B4580", delete_model_animator_node);
+void delete_model_animator_node(AnimatorNode* node) {
+    s32 i;
 
-INCLUDE_ASM(s32, "B4580", delete_model_animator_nodes);
+    node->flags = 0;
+
+    for (i = 0; i < 0x20; i++) {
+        if (node->children[i] != NULL) {
+            delete_model_animator_node(node->children[i]);
+            node->children[i] = NULL;
+        }
+    }
+
+    heap_free(node);
+}
+
+void delete_model_animator_nodes(ModelAnimator* animator) {
+    animator->nextUniqueID = 0;
+
+    if (animator->rootNode != NULL) {
+        delete_model_animator_node(animator->rootNode);
+        animator->rootNode = NULL;
+    }
+}
 
 INCLUDE_ASM(s32, "B4580", delete_model_animator);
 
@@ -53,42 +115,94 @@ INCLUDE_ASM(s32, "B4580", appendGfx_animator);
 INCLUDE_ASM(s32, "B4580", appendGfx_animator_node);
 
 INCLUDE_ASM(s32, "B4580", get_animator_node_for_tree_index);
+// AnimatorNode* get_animator_node_for_tree_index(ModelAnimator* animator, s32 arg1) {
+//     return get_animator_child_with_id(animator->rootNode, animator->unk_14[arg1]);
+// }
 
-INCLUDE_ASM(s32, "B4580", get_animator_node_with_id);
+AnimatorNode* get_animator_node_with_id(ModelAnimator* animator) {
+    return get_animator_child_for_model(animator->rootNode);
+}
 
-INCLUDE_ASM(s32, "B4580", set_animator_tree_to_node_map);
+void set_animator_tree_to_node_map(ModelAnimator* animator, s32* nodeIDs, s32 count) {
+    s32 i;
 
-AnimatedMesh* get_animator_by_index(s32 animModelID) {
+    for (i = 0; i < count; i++) {
+        animator->unk_15[i] = *nodeIDs;
+        nodeIDs++;
+    }
+}
+
+ModelAnimator* get_animator_by_index(s32 animModelID) {
     return (*gCurrentAnimMeshListPtr)[animModelID & ~0x800];
 }
 
-AnimatedMesh* set_animator_render_callback(s32 animModelID, s32 arg1, s32 arg2) {
-    AnimatedMesh* ret = (*gCurrentAnimMeshListPtr)[animModelID & ~0x800];
+ModelAnimator* set_animator_render_callback(s32 animModelID, s32 callbackArg, s32 callbackFunc) {
+    ModelAnimator* ret = (*gCurrentAnimMeshListPtr)[animModelID & ~0x800];
 
-    ret->unk_2D4 = arg2;
-    ret->unk_2D8 = arg1;
+    ret->fpRenderCallback = callbackFunc;
+    ret->renderCallbackArg = callbackArg;
     return ret;
 }
 
-INCLUDE_ASM(s32, "B4580", enable_anim_model_fog);
+void enable_anim_model_fog(void) {
+    gAnimModelFogEnabled = TRUE;
+}
 
-INCLUDE_ASM(s32, "B4580", disable_anim_model_fog);
+void disable_anim_model_fog(void) {
+    gAnimModelFogEnabled = FALSE;
+}
 
-INCLUDE_ASM(s32, "B4580", set_anim_model_fog_dist);
+void set_anim_model_fog_dist(s32 start, s32 end) {
+    gAnimModelFogStart = start;
+    gAnimModelFogEnd = end;
+}
 
-INCLUDE_ASM(s32, "B4580", set_anim_model_fog_color);
+void set_anim_model_fog_color(s32 r, s32 g, s32 b, s32 a) {
+    gAnimModelFogR = r;
+    gAnimModelFogG = g;
+    gAnimModelFogB = b;
+    gAnimModelFogA = a;
+}
 
-INCLUDE_ASM(s32, "B4580", is_anim_model_fog_enabled);
+s32 is_anim_model_fog_enabled(void) {
+    return gAnimModelFogEnabled;
+}
 
-INCLUDE_ASM(s32, "B4580", get_anim_model_fog_distance);
+void get_anim_model_fog_distance(s32* start, s32* end) {
+    *start = gAnimModelFogStart;
+    *end = gAnimModelFogEnd;
+}
 
-INCLUDE_ASM(s32, "B4580", get_anim_model_fog_color);
+void get_anim_model_fog_color(s32* r, s32* g, s32* b, s32* a) {
+    *r = gAnimModelFogR;
+    *g = gAnimModelFogG;
+    *b = gAnimModelFogB;
+    *a = gAnimModelFogA;
+}
 
-INCLUDE_ASM(s32, "B4580", set_animator_flags);
+void set_animator_flags(s32 index, s32 bits) {
+    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~0x800];
 
-INCLUDE_ASM(s32, "B4580", clear_animator_flags);
+    animator->flags |= bits;
+}
 
-INCLUDE_ASM(s32, "B4580", play_model_animation);
+void clear_animator_flags(s32 index, s32 bits) {
+    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~0x800];
+
+    animator->flags &= ~bits;
+}
+
+void play_model_animation(s32 index, s32 animPos) {
+    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~0x800];
+
+    if (animator->animationBuffer != NULL) {
+        animPos = (animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // array access?
+    }
+    animator->animReadPos = animPos;
+    animator->savedReadPos = animPos;
+    animator->treeIndexPos = 0;
+    animator->nextUpdateTime = 1.0f;
+}
 
 INCLUDE_ASM(s32, "B4580", play_model_animation_starting_from);
 

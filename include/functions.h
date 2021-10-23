@@ -283,7 +283,7 @@ void set_standard_shadow_scale(Shadow* shadow, f32 scale);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 void set_animation_rate(s32 actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
-AnimatedMesh* get_animator_by_index(s32 arg0);
+ModelAnimator* get_animator_by_index(s32 arg0);
 void set_screen_overlay_params_front(u8, f32);
 void set_screen_overlay_params_back(s32, f32);
 void set_screen_overlay_alpha(s32, f32);
