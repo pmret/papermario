@@ -2,6 +2,10 @@
 
 s32 D_8014C250[] = {0x0001003C, 0x00000000, 0x00000000, 0x00000000};
 
+extern s32 D_801512D4;
+
+extern AnimatedMeshList D_801539C0;
+extern AnimatedMeshList D_80153A00;
 extern s32 gAnimModelFogEnabled;
 extern s32 gAnimModelFogR;
 extern s32 gAnimModelFogG;
@@ -9,10 +13,11 @@ extern s32 gAnimModelFogB;
 extern s32 gAnimModelFogA;
 extern s32 gAnimModelFogStart;
 extern s32 gAnimModelFogEnd;
-extern Matrix4f D_80153A68;
-extern Matrix4f D_80153AA8;
-extern Matrix4f D_80153AE8;
-extern Matrix4f D_80153B28;
+extern Matrix4f gAnimRotMtx;
+extern Matrix4f gAnimScaleMtx;
+extern Matrix4f gAnimTranslateMtx;
+extern Matrix4f gAnimRotScaleMtx;
+extern StaticAnimatorNode** gAnimTreeRoot;
 
 INCLUDE_ASM(s32, "B4580", animator_copy_vertices_to_buffer);
 
@@ -48,10 +53,47 @@ void animator_make_identity(Matrix4f mtx) {
     mtx[3][3] = 1.0f;
 }
 
-AnimatorNode* get_animator_child_with_id(AnimatorNode* node, s32 id);
-INCLUDE_ASM(s32, "B4580", get_animator_child_with_id);
+AnimatorNode* get_animator_child_with_id(AnimatorNode* node, s32 id) {
+    s32 i;
 
-INCLUDE_ASM(s32, "B4580", get_animator_child_for_model);
+    if (node->uniqueIndex == id) {
+        return node;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(node->children); i++) {
+        if (node->children[i] != NULL) {
+            AnimatorNode* child = get_animator_child_with_id(node->children[i], id);
+
+            if (child != NULL) {
+                return child;
+            }
+
+        }
+    }
+
+    return NULL;
+}
+
+AnimatorNode* get_animator_child_for_model(AnimatorNode* node, s32 id) {
+    s32 i;
+
+    if (node->modelID == id) {
+        return node;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(node->children); i++) {
+        if (node->children[i] != NULL) {
+            AnimatorNode* child = get_animator_child_for_model(node->children[i], id);
+
+            if (child != NULL) {
+                return child;
+            }
+
+        }
+    }
+
+    return NULL;
+}
 
 void free_animator_nodes(AnimatorNode* root) {
     s32 i;
@@ -66,7 +108,22 @@ void free_animator_nodes(AnimatorNode* root) {
 
 INCLUDE_ASM(s32, "B4580", clear_animator_list);
 
-INCLUDE_ASM(s32, "B4580", reset_animator_list);
+void reset_animator_list(void) {
+    if (!gGameStatusPtr->isBattle) {
+        gCurrentAnimMeshListPtr = D_801539C0;
+    } else {
+        gCurrentAnimMeshListPtr = D_80153A00;
+    }
+
+    gAnimModelFogR = 10;
+    gAnimModelFogG = 10;
+    gAnimModelFogB = 10;
+    gAnimModelFogA = 10;
+    gAnimModelFogStart = 800;
+    D_801512D4 = 0;
+    gAnimModelFogEnabled = 0;
+    gAnimModelFogEnd = 1000;
+}
 
 void delete_model_animator_node(AnimatorNode* node) {
     s32 i;
@@ -92,7 +149,26 @@ void delete_model_animator_nodes(ModelAnimator* animator) {
     }
 }
 
-INCLUDE_ASM(s32, "B4580", delete_model_animator);
+void delete_model_animator(ModelAnimator* animator) {
+    s32 i;
+
+    animator->nextUniqueID = 0;
+
+    if (animator->rootNode != NULL) {
+        delete_model_animator_node(animator->rootNode);
+        animator->rootNode = NULL;
+
+        for (i = 0; i < ARRAY_COUNT(*gCurrentAnimMeshListPtr); i++) {
+            if ((*gCurrentAnimMeshListPtr)[i] == animator) {
+                (*gCurrentAnimMeshListPtr)[i] = NULL;
+                break;
+            }
+        }
+
+        heap_free(animator);
+        D_801512D4--;
+    }
+}
 
 INCLUDE_ASM(s32, "B4580", create_model_animator);
 
@@ -110,9 +186,9 @@ AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorN
 
     ret->flags = 0x10;
     ret->displayList = nodeBP->displayList;
-    ret->basePos.x = nodeBP->unk_04.x;
-    ret->basePos.y = nodeBP->unk_04.y;
-    ret->basePos.z = nodeBP->unk_04.z;
+    ret->basePos.x = nodeBP->basePos.x;
+    ret->basePos.y = nodeBP->basePos.y;
+    ret->basePos.z = nodeBP->basePos.z;
     ret->pos.x = 0.0f;
     ret->pos.y = 0.0f;
     ret->pos.z = 0.0f;
@@ -176,17 +252,37 @@ INCLUDE_ASM(s32, "B4580", func_8011EA54);
 
 INCLUDE_ASM(s32, "B4580", step_model_animator);
 
-INCLUDE_ASM(s32, "B4580", animator_update_model_transforms);
+void animator_update_model_transforms(ModelAnimator* animator, Mtx* rootTransform) {
+    Matrix4f flipMtx;
 
-void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx)[4], AnimatorNode* node, Matrix4s* rootTransform) {
+    if (animator->rootNode != NULL) {
+        switch (animator->flags & 0x700) {
+            case 0x100:
+                animator_make_mirrorZ(flipMtx);
+                break;
+            case 0x200:
+                animator_make_mirrorY(flipMtx);
+                break;
+            case 0x400:
+                animator_make_mirrorX(flipMtx);
+                break;
+            default:
+                animator_make_identity(flipMtx);
+                break;
+        }
+        animator_node_update_model_transform(animator, flipMtx, animator->rootNode, rootTransform);
+    }
+}
+
+void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx)[4], AnimatorNode* node, Mtx* rootTransform) {
     Matrix4f sp10;
     s32 i;
 
-    guRotateRPYF(D_80153A68, clamp_angle(node->rotation.x), clamp_angle(node->rotation.y), clamp_angle(node->rotation.z));
-    guScaleF(D_80153AA8, node->scale.x, node->scale.y, node->scale.z);
-    guTranslateF(D_80153AE8, node->basePos.x + node->pos.x, node->basePos.y + node->pos.y, node->basePos.z + node->pos.z);
-    guMtxCatF(D_80153AA8, D_80153A68, D_80153B28);
-    guMtxCatF(D_80153B28, D_80153AE8, sp10);
+    guRotateRPYF(gAnimRotMtx, clamp_angle(node->rotation.x), clamp_angle(node->rotation.y), clamp_angle(node->rotation.z));
+    guScaleF(gAnimScaleMtx, node->scale.x, node->scale.y, node->scale.z);
+    guTranslateF(gAnimTranslateMtx, node->basePos.x + node->pos.x, node->basePos.y + node->pos.y, node->basePos.z + node->pos.z);
+    guMtxCatF(gAnimScaleMtx, gAnimRotMtx, gAnimRotScaleMtx);
+    guMtxCatF(gAnimRotScaleMtx, gAnimTranslateMtx, sp10);
 
     if (!(animator->flags & 0x20000)) {
         guMtxCatF(sp10, flipMtx, sp10);
@@ -223,15 +319,15 @@ INCLUDE_ASM(s32, "B4580", get_animator_node_for_tree_index);
 //     return get_animator_child_with_id(animator->rootNode, animator->unk_14[arg1]);
 // }
 
-AnimatorNode* get_animator_node_with_id(ModelAnimator* animator) {
-    return get_animator_child_for_model(animator->rootNode);
+AnimatorNode* get_animator_node_with_id(ModelAnimator* animator, s32 id) {
+    return get_animator_child_for_model(animator->rootNode, id);
 }
 
 void set_animator_tree_to_node_map(ModelAnimator* animator, s32* nodeIDs, s32 count) {
     s32 i;
 
     for (i = 0; i < count; i++) {
-        animator->unk_15[i] = *nodeIDs;
+        animator->staticNodeIDs[i] = *nodeIDs;
         nodeIDs++;
     }
 }
@@ -300,7 +396,7 @@ void play_model_animation(s32 index, s32 animPos) {
     ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~0x800];
 
     if (animator->animationBuffer != NULL) {
-        animPos = (animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // array access?
+        animPos = (animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // TODO: array access?
     }
     animator->animReadPos = animPos;
     animator->savedReadPos = animPos;
@@ -308,18 +404,161 @@ void play_model_animation(s32 index, s32 animPos) {
     animator->nextUpdateTime = 1.0f;
 }
 
-INCLUDE_ASM(s32, "B4580", play_model_animation_starting_from);
+void play_model_animation_starting_from(s32 index, s32 animPos, s32 framesToSkip) {
+    s32 indexMasked = index & ~0x800;
+    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[indexMasked];
+    s32 i;
 
-INCLUDE_ASM(s32, "B4580", load_model_animator_node);
+    if (animator->animationBuffer != NULL) {
+        animPos = (animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // TODO: array access?
+    }
 
-INCLUDE_ASM(s32, "B4580", load_model_animator_tree);
+    animator->animReadPos = animPos;
+    animator->savedReadPos = animPos;
+    animator->treeIndexPos = 0;
+    animator->nextUpdateTime = 1.0f;
 
-INCLUDE_ASM(s32, "B4580", load_mesh_animator_node);
+    for (i = 0; i < framesToSkip; i++) {
+        update_model_animator(indexMasked);
+    }
+}
 
-INCLUDE_ASM(s32, "B4580", load_mesh_animator_tree);
+void load_model_animator_node(StaticAnimatorNode* node, ModelAnimator* animator, s32 parentNodeID, s32* treeIndexToNodeIDs) {
+    AnimatorNodeBlueprint bp;
+    AnimatorNodeBlueprint* bpPtr = &bp;
+    AnimatorNode* newNode;
+    s32 i;
 
-INCLUDE_ASM(s32, "B4580", reload_mesh_animator_node);
+    if (node != NULL) {
+        bpPtr->displayList = node->displayList;
+        bpPtr->basePos.x = 0.0f;
+        bpPtr->basePos.y = 0.0f;
+        bpPtr->basePos.z = 0.0f;
+        bpPtr->rotation.x = ((f32) node->rot.x * 180.0) / 32767.0;
+        bpPtr->rotation.y = ((f32) node->rot.y * 180.0) / 32767.0;
+        bpPtr->rotation.z = ((f32) node->rot.z * 180.0) / 32767.0;
 
-INCLUDE_ASM(s32, "B4580", reload_mesh_animator_tree);
+        newNode = add_anim_node(animator, parentNodeID, bpPtr);
+
+        if (node->modelID != 0) {
+            newNode->modelID = node->modelID - 1;
+            newNode->flags |= 0x1000;
+        }
+
+        i = 0;
+        while (gAnimTreeRoot[i] != node) {
+            i++;
+        }
+
+        treeIndexToNodeIDs[i] = newNode->uniqueIndex;
+
+        if (node->child != NULL) {
+            load_model_animator_node(node->child, animator, newNode->uniqueIndex, treeIndexToNodeIDs);
+        }
+
+        if (node->sibling != NULL) {
+            load_model_animator_node(node->sibling, animator, parentNodeID, treeIndexToNodeIDs);
+        }
+    }
+}
+
+void load_model_animator_tree(s32 index, StaticAnimatorNode** tree) {
+    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[index & ~0x800];
+    s32 nodeIDs[ARRAY_COUNT(animator->staticNodeIDs)];
+
+    if (animator != NULL && animator->flags != 0) {
+        gAnimTreeRoot = tree;
+        load_model_animator_node(*tree, animator, 0, nodeIDs);
+        set_animator_tree_to_node_map(animator, &nodeIDs, ARRAY_COUNT(animator->staticNodeIDs));
+    }
+}
+
+void load_mesh_animator_node(StaticAnimatorNode* node, ModelAnimator* animator, s32 parentNodeID, s32* treeIndexToNodeIDs) {
+    if (node != NULL) {
+        if (node->child != NULL && parentNodeID == 0) {
+            load_mesh_animator_node(node->child, animator, 0, treeIndexToNodeIDs);
+        } else {
+            do {
+                animator->staticNodes[parentNodeID] = node;
+                node = node->sibling;
+                parentNodeID++;
+            } while (node != NULL);
+        }
+    }
+}
+
+void load_mesh_animator_tree(s32 index, StaticAnimatorNode** tree) {
+    s32 indexMasked = index & ~0x800;
+    ModelAnimator* animator = (*gCurrentAnimMeshListPtr)[indexMasked];
+    s32 nodeIDs[ARRAY_COUNT(animator->staticNodeIDs)];
+    s32 i;
+
+    if (animator != NULL && animator->flags != 0) {
+        if ((*tree)->vertexStartOffset == 0) {
+            load_model_animator_tree(indexMasked, tree);
+            return;
+        }
+
+        gAnimTreeRoot = tree;
+        animator->staticRoot = tree;
+        animator->treeIndexPos = 0;
+        animator->savedTreePos = 0;
+
+        for (i = 0; i < ARRAY_COUNT(animator->staticNodes); i++) {
+            animator->staticNodes[i] = NULL;
+        }
+
+        load_mesh_animator_node(*gAnimTreeRoot, animator, 0, nodeIDs);
+        animator->flags |= 0x8000;
+    }
+}
+
+void reload_mesh_animator_node(StaticAnimatorNode* node, ModelAnimator* animator, s32 parentNodeID, s32* treeIndexToNodeIDs) {
+    AnimatorNodeBlueprint bp;
+    AnimatorNodeBlueprint* bpPtr = &bp;
+    AnimatorNode* newNode;
+    s32 i;
+
+    if (node != NULL) {
+        bpPtr->displayList = node->displayList;
+        bpPtr->basePos.x = 0.0f;
+        bpPtr->basePos.y = 0.0f;
+        bpPtr->basePos.z = 0.0f;
+        bpPtr->rotation.x = ((f32) node->rot.x * 180.0) / 32767.0;
+        bpPtr->rotation.y = ((f32) node->rot.y * 180.0) / 32767.0;
+        bpPtr->rotation.z = ((f32) node->rot.z * 180.0) / 32767.0;
+
+        newNode = add_anim_node(animator, parentNodeID, bpPtr);
+        newNode->vertexStartOffset = node->vertexStartOffset;
+        newNode->modelID = node->vertexList; // TODO see note in struct def: "also ptr to vtx list? union?"
+
+        i = 0;
+        while (gAnimTreeRoot[i] != node) {
+            i++;
+        }
+
+        treeIndexToNodeIDs[i] = newNode->uniqueIndex;
+
+        if (node->child != NULL) {
+            reload_mesh_animator_node(node->child, animator, newNode->uniqueIndex, treeIndexToNodeIDs);
+        }
+    }
+}
+
+void reload_mesh_animator_tree(ModelAnimator* animator) {
+    s32 nodeIDs[ARRAY_COUNT(animator->staticNodeIDs)];
+    s32 i;
+
+    delete_model_animator_nodes(animator);
+    gAnimTreeRoot = animator->staticRoot;
+
+    for (i = 0; i < ARRAY_COUNT(animator->staticNodes); i++) {
+        nodeIDs[i] = 0;
+    }
+
+    reload_mesh_animator_node(animator->staticNodes[animator->treeIndexPos], animator, 0, nodeIDs);
+    nodeIDs[0] = -1;
+    set_animator_tree_to_node_map(animator, nodeIDs, ARRAY_COUNT(nodeIDs));
+}
 
 INCLUDE_ASM(s32, "B4580", step_mesh_animator);

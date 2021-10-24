@@ -855,7 +855,7 @@ typedef struct AnimatorNode {
 
 typedef struct AnimatorNodeBlueprint {
     /* 0x00 */ Gfx* displayList;
-    /* 0x04 */ Vec3f unk_04;
+    /* 0x04 */ Vec3f basePos;
     /* 0x10 */ Vec3f rotation;
     /* 0x1C */ char unk_1C[0x4];
 } AnimatorNodeBlueprint; // size = 0x20
@@ -875,21 +875,21 @@ typedef struct StaticAnimatorNode {
 } StaticAnimatorNode; // size = 0x2C
 
 typedef struct ModelAnimator {
-    /* 0x000 */ s32 flags;
+    /* 0x000 */ u32 flags;
     /* 0x004 */ u8 renderMode;
     /* 0x005 */ char unk_05[3];
     /* 0x008 */ u32* animReadPos;
     /* 0x00C */ u32* savedReadPos;
     /* 0x010 */ AnimatorNode* rootNode;
     /* 0x014 */ u8 nextUniqueID;
-    /* 0x015 */ u8 unk_15[0x7A]; // ?
+    /* 0x015 */ u8 staticNodeIDs[0x7A]; // ?
     /* 0x08F */ char unk_08F[0x1];
     /* 0x090 */ f32 nextUpdateTime;
     /* 0x094 */ f32 timeScale;
     /* 0x098 */ Matrix4s mtx;
     /* 0x0D8 */ Vtx** vertexArray;
     /* 0x0DC */ s8* animationBuffer;
-    /* 0x0E0 */ StaticAnimatorNode* staticNodes[122];
+    /* 0x0E0 */ StaticAnimatorNode* staticNodes[0x7A];
     /* 0x2C8 */ StaticAnimatorNode** staticRoot;
     /* 0x2CC */ s32 treeIndexPos;
     /* 0x2D0 */ s32 savedTreePos;
@@ -1566,7 +1566,7 @@ typedef struct AnimatedModel {
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
-    /* 0x28 */ Matrix4s* mtx;
+    /* 0x28 */ Mtx* mtx;
     /* 0x2C */ char unk_2C[60];
     /* 0x68 */ u32 currentAnimData;
     /* 0x6C */ char unk_6C[4];
