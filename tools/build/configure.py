@@ -88,7 +88,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("z64",
         description="rom $out",
-        command=f"{cross}objcopy " + objcopy_sections + f"$in $out -O binary && {BUILD_TOOLS}/rom/n64crc $out",
+        command=f"{cross}objcopy {objcopy_sections} $in $out -O binary && {BUILD_TOOLS}/rom/n64crc $out",
     )
 
     ninja.rule("sha1sum",
