@@ -3,36 +3,49 @@
 
 #define NAMESPACE EC9D00
 
-INCLUDE_ASM(s32, "EC9D00", func_80240000_EC9D00);
+extern s32 D_80094900[11][4];
 
-INCLUDE_ASM(s32, "EC9D00", func_8024001C_EC9D1C);
+#include "world/common/SetOverrideFlags_40.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_8024003C_EC9D3C);
+#include "world/common/UnkFunc17.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_80240068_EC9D68);
+ApiStatus func_8024003C_EC9D3C(Evt* script, s32 isInitialCall) {
+    func_802F3B00(evt_get_variable(script, *script->ptrReadPos));
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "EC9D00", func_802400D4_EC9DD4);
-
-INCLUDE_ASM(s32, "EC9D00", func_80240120_EC9E20);
+#include "world/common/UnkFunc18.inc.c"
 
 INCLUDE_ASM(s32, "EC9D00", func_802401CC_EC9ECC);
 
-INCLUDE_ASM(s32, "EC9D00", func_8024041C_ECA11C);
+#include "world/common/SwitchToPartner.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_80240448_ECA148);
+ApiStatus func_80240448_ECA148(Evt* script, s32 isInitialCall) {
+    set_message_msg(D_80094900[gPlayerData.currentPartner][0], 0);
 
-INCLUDE_ASM(s32, "EC9D00", func_80240480_ECA180);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "EC9D00", func_80240510_ECA210);
+#include "world/common/UnkFunc20.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_80240544_ECA244);
+#include "world/common/UnkFunc39.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_802405A8_ECA2A8);
+#include "world/common/UnkFunc21.inc.c"
+
+#include "world/common/UnkFunc22.inc.c"
 
 INCLUDE_ASM(s32, "EC9D00", func_80240600_ECA300);
 
-INCLUDE_ASM(s32, "EC9D00", func_80240B38_ECA838);
+#include "world/common/UnkFunc23.inc.c"
 
 #include "world/common/DeadUnkPartnerPosFuncs.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_80240D08_ECAA08);
+// Cannot common include this due to duplicate dead symbols both referencing gPlayerActionStatus
+// dead.h would simply create a misdefine if we were to use the include, so we have to copy-paste for now
+ApiStatus N(UnkFunc40)(Evt* script, s32 isInitialCall) {
+    script->varTable[0] = 0;
+    if ((dead_gPartnerActionStatus2.actionState.b[0] != 0) && (dead_gPartnerActionStatus2.actionState.b[3]  == 3)) {
+        script->varTable[0] = 1;
+    }
+    return ApiStatus_DONE2;
+}

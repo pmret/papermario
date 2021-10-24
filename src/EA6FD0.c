@@ -1,6 +1,8 @@
 #include "dead.h"
 #include "common.h"
 
+#define NAMESPACE EA6FD0
+
 s32 func_80240000_EA6FD0(void) {
     s32 temp = evt_get_variable(NULL, EVT_STORY_PROGRESS);
 

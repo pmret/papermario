@@ -291,6 +291,7 @@ extern s32 D_800F7B44;
 extern f32 D_8010C938;
 extern f32 D_8010C990;
 extern s32 D_8010C978;
+extern Vec3s D_80283524[];
 
 extern PartnerActionStatus gPartnerActionStatus; // something with partners
 extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
@@ -396,6 +397,10 @@ extern s32 D_80108A64;
 extern s32 bMarioIdleAnims[];
 extern s32 bMarioDefendAnims[];
 extern s32 bPeachIdleAnims[];
+
+
+// Temporary dead stuff
+extern PartnerActionStatus dead_gPartnerActionStatus2;
 
 
 #endif

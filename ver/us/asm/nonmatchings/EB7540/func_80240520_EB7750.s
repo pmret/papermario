@@ -16,7 +16,7 @@ glabel func_80240520_EB7750
 /* EB7760 80240530 AFB10014 */  sw        $s1, 0x14($sp)
 /* EB7764 80240534 AFB00010 */  sw        $s0, 0x10($sp)
 /* EB7768 80240538 8E4400AC */  lw        $a0, 0xac($s2)
-/* EB776C 8024053C 0C0462EC */  jal       func_80118BB0
+/* EB776C 8024053C 0C0462EC */  jal       dead_get_entity_by_index
 /* EB7770 80240540 00A0802D */   daddu    $s0, $a1, $zero
 /* EB7774 80240544 12000004 */  beqz      $s0, .L80240558
 /* EB7778 80240548 0040882D */   daddu    $s1, $v0, $zero

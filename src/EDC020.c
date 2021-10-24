@@ -5,7 +5,7 @@
 
 extern s32 D_802429E0[];
 
-#import "world/common/DeadFoliage.inc.c"
+#include "world/common/DeadFoliage.inc.c"
 
 INCLUDE_ASM(s32, "EDC020", func_8024027C_EDC25C);
 
@@ -13,7 +13,7 @@ INCLUDE_ASM(s32, "EDC020", func_8024027C_EDC25C);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "EDC020", func_802403F0_EDC3D0);
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "EDC020", func_802405C0_EDC5A0);
 

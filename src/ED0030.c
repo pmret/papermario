@@ -1,4 +1,6 @@
 #include "dead.h"
 #include "common.h"
 
-INCLUDE_ASM(s32, "ED0030", func_80240040_ED0030);
+#define NAMESPACE ED0030
+
+#include "world/common/UnkFunc43.inc.c"

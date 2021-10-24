@@ -85,7 +85,7 @@ glabel func_80241E1C_EE83CC
 glabel L80241F54_EE8504
 /* EE8504 80241F54 02A0202D */  daddu     $a0, $s5, $zero
 /* EE8508 80241F58 0200282D */  daddu     $a1, $s0, $zero
-/* EE850C 80241F5C 0C0902C4 */  jal       func_80240B10_EE70C0
+/* EE850C 80241F5C 0C0902C4 */  jal       EE70C0_UnkNpcAIFunc23
 /* EE8510 80241F60 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241F64_EE8514
 /* EE8514 80241F64 02A0202D */  daddu     $a0, $s5, $zero
