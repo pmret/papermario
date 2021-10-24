@@ -853,6 +853,13 @@ typedef struct AnimatorNode {
     /* 0xFC */ s32 modelID; // also ptr to vtx list? union?
 } AnimatorNode; // size = 0x100
 
+typedef struct AnimatorNodeBlueprint {
+    /* 0x00 */ Gfx* displayList;
+    /* 0x04 */ Vec3f unk_04;
+    /* 0x10 */ Vec3f rotation;
+    /* 0x1C */ char unk_1C[0x4];
+} AnimatorNodeBlueprint; // size = 0x20
+
 typedef struct StaticAnimatorNode {
     /* 0x00 */ Gfx* displayList; // can sometime point to a node???
     /* 0x04 */ Vec3s rot; /* range = -180,180 */
