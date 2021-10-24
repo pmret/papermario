@@ -42,7 +42,7 @@ void state_init_battle(void) {
     D_800A0900 = 5;
 }
 
-oid state_step_battle(void) {
+void state_step_battle(void) {
     s32 phi_a0;
     u32 currentBattleSelection;
     u32 temp;
