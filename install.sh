@@ -51,7 +51,7 @@ if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; th
 
     # Add i386 arch for wine32
     # sudo dpkg --add-architecture i386
-    ${SUDO} apt install -y git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev ninja-build || exit 1
+    ${SUDO} apt install -y git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev ninja-build cpp-mips-linux-gnu || exit 1
     python3 -m pip install -U -r requirements.txt
 
     if [[ $1 == "--extra" ]]; then
