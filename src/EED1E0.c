@@ -36,7 +36,7 @@ INCLUDE_ASM(s32, "EED1E0", func_802406E0_EED7E0);
 
 #include "world/common/UnkFunc23.inc.c"
 
-#include "world/common/DeadUnkPartnerPosFuncs.inc.c"
+#include "world/common/UnkPartnerPosFuncs.inc.c"
 
 #include "world/common/UnkFunc40.inc.c"
 

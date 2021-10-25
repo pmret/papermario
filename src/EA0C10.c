@@ -103,7 +103,7 @@ INCLUDE_ASM(s32, "EA0C10", func_80242608_EA2F08);
 
 INCLUDE_ASM(s32, "EA0C10", func_8024267C_EA2F7C);
 
-#include "world/common/DeadGetItemName.inc.c"
+#include "world/common/GetItemName.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

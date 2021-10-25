@@ -3,4 +3,4 @@
 
 #define NAMESPACE ECFFF0
 
-#include "common/DeadUnk1.inc.c"
+#include "world/common/DeadUnkFunc1.inc.c"

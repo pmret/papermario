@@ -89,7 +89,11 @@
 #define set_max_SP dead_set_max_SP
 #define get_current_map_header dead_get_current_map_header
 #define gGameStatusPtr dead_gGameStatusPtr
-
+#define guTranslateF dead_guTranslateF
+#define get_model_from_list_index dead_get_model_from_list_index
+#define get_model_list_index_from_tree_index dead_get_model_list_index_from_tree_index
+#define guMtxCatF osSiRawReadIo
+#define guMtxIdentF osGetCause
 //#define sqrtf dead_sqrtf // <- This somehow breaks things
 
 #endif

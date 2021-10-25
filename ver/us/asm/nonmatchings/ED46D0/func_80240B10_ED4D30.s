@@ -31,9 +31,9 @@ glabel func_80240B10_ED4D30
 /* ED4D98 80240B78 000218C0 */  sll       $v1, $v0, 3
 /* ED4D9C 80240B7C 00431021 */  addu      $v0, $v0, $v1
 /* ED4DA0 80240B80 000210C0 */  sll       $v0, $v0, 3
-/* ED4DA4 80240B84 0C04949C */  jal       func_80125270
+/* ED4DA4 80240B84 0C04949C */  jal       dead_get_model_list_index_from_tree_index
 /* ED4DA8 80240B88 0045B021 */   addu     $s6, $v0, $a1
-/* ED4DAC 80240B8C 0C0493D1 */  jal       func_80124F44
+/* ED4DAC 80240B8C 0C0493D1 */  jal       dead_get_model_from_list_index
 /* ED4DB0 80240B90 0040202D */   daddu    $a0, $v0, $zero
 /* ED4DB4 80240B94 0040882D */  daddu     $s1, $v0, $zero
 /* ED4DB8 80240B98 27B50028 */  addiu     $s5, $sp, 0x28

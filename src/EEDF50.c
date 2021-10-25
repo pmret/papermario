@@ -1,6 +1,8 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of flo_16 (CD2C80.c)
+
 #define NAMESPACE EEDF50
 
 extern f32 D_80244070_EF1170[];

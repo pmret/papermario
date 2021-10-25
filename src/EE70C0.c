@@ -1,6 +1,8 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of flo_14 (CCBE20.c)
+
 #define NAMESPACE EE70C0
 
 extern s32 D_802453E0_EEB990[];

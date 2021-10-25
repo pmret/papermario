@@ -1,7 +1,7 @@
 #include "dead.h"
 #include "common.h"
 
-// Copy of flo_13?
+// Copy of flo_13 (CC3850.c)
 
 #define NAMESPACE EDEA00
 

@@ -14,7 +14,7 @@ extern s32 D_800B8DEC;
 
 INCLUDE_ASM(s32, "EB1170", func_80240310_EB1170);
 
-#include "world/common/DeadGetItemName.inc.c"
+#include "world/common/GetItemName.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
