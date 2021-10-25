@@ -52,7 +52,7 @@ glabel func_80240600_ECA300
 /* ECA3BC 802406BC 4480A000 */  mtc1      $zero, $f20
 /* ECA3C0 802406C0 0C0B53A3 */  jal       dead_evt_get_variable
 /* ECA3C4 802406C4 0240802D */   daddu    $s0, $s2, $zero
-/* ECA3C8 802406C8 0C0462EC */  jal       func_80118BB0
+/* ECA3C8 802406C8 0C0462EC */  jal       dead_get_entity_by_index
 /* ECA3CC 802406CC 0040202D */   daddu    $a0, $v0, $zero
 /* ECA3D0 802406D0 AE42005C */  sw        $v0, 0x5c($s2)
 .L802406D4:

@@ -26,26 +26,28 @@ ApiStatus N(func_802A12FC_72453C)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_ULTRA_SHROOM;
-    await N(UseItemWithEffect);
-    await N(EatItem);
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(0) += 0;
-    EVT_VAR(1) += 35;
-    N(func_802A123C_72447C)(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 20);
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(1) += 25;
-    EVT_VAR(2) += 5;
-    func_802D7520(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 20);
-    N(func_802A12FC_72453C)();
-    sleep 10;
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_THUMBS_UP);
-    sleep 30;
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(2) += 5;
-    func_802D75D8(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 20);
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    sleep 20;
-    await N(PlayerGoHome);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x0000008E)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
+    EVT_EXEC_WAIT(N(EatItem))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(0), 0)
+    EVT_ADD(EVT_VAR(1), 35)
+    EVT_CALL(N(func_802A123C_72447C), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 20)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(1), 25)
+    EVT_ADD(EVT_VAR(2), 5)
+    EVT_CALL(func_802D7520, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 20)
+    EVT_CALL(N(func_802A12FC_72453C))
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_THUMBS_UP)
+    EVT_WAIT_FRAMES(30)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(2), 5)
+    EVT_CALL(func_802D75D8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 20)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_WAIT_FRAMES(20)
+    EVT_EXEC_WAIT(N(PlayerGoHome))
+    EVT_RETURN
+    EVT_END
+};

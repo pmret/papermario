@@ -7,7 +7,7 @@ glabel osInsertTimer
 /* 41A98 80066698 00809021 */  addu      $s2, $a0, $zero
 /* 41A9C 8006669C AFBF001C */  sw        $ra, 0x1c($sp)
 /* 41AA0 800666A0 AFB10014 */  sw        $s1, 0x14($sp)
-/* 41AA4 800666A4 0C01ACD8 */  jal       osDisableInt
+/* 41AA4 800666A4 0C01ACD8 */  jal       __osDisableInt
 /* 41AA8 800666A8 AFB00010 */   sw       $s0, 0x10($sp)
 /* 41AAC 800666AC 3C038009 */  lui       $v1, %hi(D_80094670)
 /* 41AB0 800666B0 8C634670 */  lw        $v1, %lo(D_80094670)($v1)
@@ -62,7 +62,7 @@ glabel osInsertTimer
 /* 41B64 80066764 8CC20004 */  lw        $v0, 4($a2)
 /* 41B68 80066768 00E02021 */  addu      $a0, $a3, $zero
 /* 41B6C 8006676C AC520000 */  sw        $s2, ($v0)
-/* 41B70 80066770 0C01ACF4 */  jal       osRestoreInt
+/* 41B70 80066770 0C01ACF4 */  jal       __osRestoreInt
 /* 41B74 80066774 ACD20004 */   sw       $s2, 4($a2)
 /* 41B78 80066778 02001021 */  addu      $v0, $s0, $zero
 /* 41B7C 8006677C 02201821 */  addu      $v1, $s1, $zero

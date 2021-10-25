@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel filemenu_set_cursor_goal_pos_EA3700
-/* EA3700 80242E00 3C038011 */  lui       $v1, %hi(D_80117160)
-/* EA3704 80242E04 24637160 */  addiu     $v1, $v1, %lo(D_80117160)
+/* EA3700 80242E00 3C038011 */  lui       $v1, %hi(dead_gPartnerActionStatus2)
+/* EA3704 80242E04 24637160 */  addiu     $v1, $v1, %lo(dead_gPartnerActionStatus2)
 /* EA3708 80242E08 80620000 */  lb        $v0, ($v1)
 /* EA370C 80242E0C 10400004 */  beqz      $v0, .L80242E20
 /* EA3710 80242E10 2402FFFF */   addiu    $v0, $zero, -1

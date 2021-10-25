@@ -1,3 +1,5 @@
+rm -rf ver/*/expected
+
 mkdir -p ver/us/expected/ver/us
 cp -r ver/us/build ver/us/expected/ver/us
 

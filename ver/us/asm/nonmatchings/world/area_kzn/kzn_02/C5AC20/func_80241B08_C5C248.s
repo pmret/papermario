@@ -8,7 +8,7 @@ glabel D_80246558_C60C98
 
 .section .text
 
-glabel func_80241B08_C5C248
+glabel hzn_02_UnkNpcAIFunc34
 /* C5C248 80241B08 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* C5C24C 80241B0C AFB3004C */  sw        $s3, 0x4c($sp)
 /* C5C250 80241B10 0080982D */  daddu     $s3, $a0, $zero

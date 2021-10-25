@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ld_addrs.h"
 
 void entity_shattering_block_init(Entity* entity);
 
@@ -7,31 +8,18 @@ extern UNK_TYPE D_802E91F0;
 extern UNK_TYPE D_802E9270;
 extern UNK_TYPE D_802E92B0;
 
-extern UNK_TYPE D_0A003508;
-extern UNK_TYPE D_00E4B2E0;
-extern UNK_TYPE D_00E4E7F0;
-extern UNK_TYPE D_0A000EF8;
-extern UNK_TYPE D_0A000EF8;
-extern UNK_TYPE D_0A000EE8;
 extern UNK_TYPE D_0A000740;
-
-extern UNK_TYPE D_00E62AC0;
-extern UNK_TYPE D_00E639C0;
-extern UNK_TYPE D_00E639C0;
-extern UNK_TYPE D_00E648D0;
-extern UNK_TYPE D_00E639C0;
-extern UNK_TYPE D_00E648D0;
-extern UNK_TYPE D_00E62370;
-extern UNK_TYPE D_00E62AC0;
-
-extern UNK_TYPE D_0A0031E0;
-extern UNK_TYPE D_0A001508;
-extern UNK_TYPE D_0A0031B0;
-extern UNK_TYPE D_0A0014D8;
-extern UNK_TYPE D_0A002F78;
+extern UNK_TYPE D_0A000EE8;
+extern UNK_TYPE D_0A000EF8;
 extern UNK_TYPE D_0A001218;
-extern UNK_TYPE D_0A003F70;
+extern UNK_TYPE D_0A0014D8;
+extern UNK_TYPE D_0A001508;
 extern UNK_TYPE D_0A002318;
+extern UNK_TYPE D_0A002F78;
+extern UNK_TYPE D_0A0031B0;
+extern UNK_TYPE D_0A0031E0;
+extern UNK_TYPE D_0A003508;
+extern UNK_TYPE D_0A003F70;
 
 Gfx D_802E96F0[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
@@ -46,21 +34,21 @@ Gfx D_802E96F0[] = {
 };
 
 Gfx D_802E9738[] = {
-    gsSPDisplayList(&D_802E96F0),
+    gsSPDisplayList(D_802E96F0),
     gsDPSetTextureLUT(G_TT_NONE),
     gsDPLoadTextureTile_4b(&D_802E9170, G_IM_FMT_I, 16, 0, 0, 0, 15, 15, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
 Gfx D_802E9788[] = {
-    gsSPDisplayList(&D_802E96F0),
+    gsSPDisplayList(D_802E96F0),
     gsDPSetTextureLUT(G_TT_NONE),
     gsDPLoadTextureTile_4b(&D_802E91F0, G_IM_FMT_I, 16, 0, 0, 0, 15, 15, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
 Gfx D_802E97B0[] = {
-    gsSPDisplayList(&D_802E9738),
+    gsSPDisplayList(D_802E9738),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING | G_SHADING_SMOOTH),
     gsSPVertex(&D_802E92B0, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
@@ -68,7 +56,7 @@ Gfx D_802E97B0[] = {
 };
 
 Gfx D_802E97D8[] = {
-    gsSPDisplayList(&D_802E9788),
+    gsSPDisplayList(D_802E9788),
     gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING | G_SHADING_SMOOTH),
     gsSPVertex(&D_802E9270, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
@@ -81,30 +69,30 @@ Gfx D_802E9828[] = {
 
 // Entity "script" data; unknown if it's used or not.
 s32 D_802E9830[8] = {
-    0x00000001, 0x0000003C, (s32) &D_802E9828, 0x00000002,
+    0x00000001, 0x0000003C, (s32)D_802E9828, 0x00000002,
     0x00000000, 0x00000000, 0x00000000, 0x00000000
 };
 
 s32 D_802E9850[9] = {
     0x00000005, 0x00000800, 0x00000004, 0x00000020,
-    0x00000001, 0x0000003C, (s32) &D_802E97D8, 0x00000002,
+    0x00000001, 0x0000003C, (s32)D_802E97D8, 0x00000002,
     0x00000000
 };
 
 s32 D_802E9874[9] = {
     0x00000005, 0x00000800, 0x00000004, 0x00000020,
-    0x00000001, 0x0000003C, (s32) &D_802E97D8, 0x00000002,
+    0x00000001, 0x0000003C, (s32)D_802E97D8, 0x00000002,
     0x00000000
 };
 s32 D_802E9898[9] = {
     0x00000005, 0x00000800, 0x00000004, 0x00000020,
-    0x00000001, 0x0000003C, &D_802E97B0, 0x00000002,
+    0x00000001, 0x0000003C, (s32)D_802E97B0, 0x00000002,
     0x00000000,
 };
 
 StaticShadowData D_802E98BC = {
     .flags = 0x20,
-    .unk_04 = &D_802E9850,
+    .unk_04 = D_802E9850,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
     .unk_20 = 0x01190A19,
@@ -112,7 +100,7 @@ StaticShadowData D_802E98BC = {
 
 StaticShadowData D_802E98E0 = {
     .flags = 0x20,
-    .unk_04 = &D_802E9874,
+    .unk_04 = D_802E9874,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
     .unk_20 = 0x01190A19,
@@ -120,7 +108,7 @@ StaticShadowData D_802E98E0 = {
 
 StaticShadowData D_802E9904 = {
     .flags = 0x20,
-    .unk_04 = &D_802E9898,
+    .unk_04 = D_802E9898,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
     .unk_20 = 0x01190A19,
@@ -147,12 +135,11 @@ s32 D_802E9930[51] = {
 };
 
 s32 D_802E99FC[7] = {
-
     0x00000004, 0x00000022, 0x00000001, 0x0000003C,
     &D_0A003508, 0x00000002, 0x00000000,
 };
 
-StaticEntityData D_802E9A18 = { 0x4200, 0x0020, &D_802E99FC, {0, 0, 0, 0}, entity_SaveBlock_init, &D_802E9930, entity_block_handle_collision, &D_00E4B2E0, &D_00E4E7F0, 32, {0x19, 0x19, 0x19}};
+StaticEntityData D_802E9A18 = { 0x4200, 0x0020, &D_802E99FC, {0, 0, 0, 0}, entity_SaveBlock_init, &D_802E9930, entity_block_handle_collision, E4B2E0_ROM_START, E4B2E0_ROM_END, 32, {0x19, 0x19, 0x19}};
 
 // potential file split(?)
 s32 D_802E9A3C[1] = {
@@ -208,10 +195,10 @@ s32 D_802E9B94[7] = {
     (s32) &D_0A000740, 0x00000002, 0x00000000,
 };
 
-StaticEntityData D_802E9BB0 = { 0xA000, 0x002C, &D_802E9B78, {0, 0, 0, 0}, entity_base_switch_init,              &D_802E9A40, NULL, &D_00E62AC0, &D_00E639C0,  8, {0x16, 0x17, 0x16} };
-StaticEntityData D_802E9BD4 = { 0xAA04, 0x002C, &D_802E9B40, {0, 0, 0, 0}, entity_BlueSwitch_init,     &D_802E9AC4, NULL, &D_00E639C0, &D_00E648D0,  7, {0x16, 0x17, 0x16} };
-StaticEntityData D_802E9BF8 = { 0xAA04, 0x002C, &D_802E9B5C, {0, 0, 0, 0}, entity_HugeBlueSwitch_init, &D_802E9A88, NULL, &D_00E639C0, &D_00E648D0,  9, {0x42, 0x4B, 0x42} };
-StaticEntityData D_802E9C1C = { 0xC000, 0x002C, &D_802E9B94, {0, 0, 0, 0}, entity_base_switch_init,              &D_802E9B00, NULL, &D_00E62370, &D_00E62AC0, 10, {0x32, 0x0F, 0x32} };
+StaticEntityData D_802E9BB0 = { 0xA000, 0x002C, &D_802E9B78, {0, 0, 0, 0}, entity_base_switch_init,    &D_802E9A40, NULL, E62AC0_ROM_START, E62AC0_ROM_END, 8, {0x16, 0x17, 0x16} };
+StaticEntityData D_802E9BD4 = { 0xAA04, 0x002C, &D_802E9B40, {0, 0, 0, 0}, entity_BlueSwitch_init,     &D_802E9AC4, NULL, E639C0_ROM_START, E639C0_ROM_END, 7, {0x16, 0x17, 0x16} };
+StaticEntityData D_802E9BF8 = { 0xAA04, 0x002C, &D_802E9B5C, {0, 0, 0, 0}, entity_HugeBlueSwitch_init, &D_802E9A88, NULL, E639C0_ROM_START, E639C0_ROM_END, 9, {0x42, 0x4B, 0x42} };
+StaticEntityData D_802E9C1C = { 0xC000, 0x002C, &D_802E9B94, {0, 0, 0, 0}, entity_base_switch_init,    &D_802E9B00, NULL, E62370_ROM_START, E62370_ROM_END, 10, {0x32, 0x0F, 0x32} };
 
 s32 D_802E9C40[12] = {
     0x00000007, 0x00000020, 0x00000003, 0x00000000,
@@ -224,20 +211,13 @@ s32 D_802E9C70[7] = {
     (s32) &D_802E9828, 0x00000002, 0x00000000
 };
 
-extern UNK_TYPE D_00E32420;
-extern UNK_TYPE D_00E35670;
-extern UNK_TYPE D_00E38890;
-extern UNK_TYPE D_00E3B870;
-extern UNK_TYPE D_00E3E260;
-extern UNK_TYPE D_00E42240;
-
-StaticEntityData D_802E9C8C = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E32420, &D_00E35670, 21, {0x10, 0x10, 0x10}};
-StaticEntityData D_802E9CB0 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E35670, &D_00E38890, 22, {0x10, 0x10, 0x10}};
-StaticEntityData D_802E9CD4 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E38890, &D_00E3B870, 23, {0x10, 0x10, 0x10}};
-StaticEntityData D_802E9CF8 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E32420, &D_00E35670, 24, {0x08, 0x08, 0x08}};
-StaticEntityData D_802E9D1C = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E35670, &D_00E38890, 25, {0x08, 0x08, 0x08}};
-StaticEntityData D_802E9D40 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E38890, &D_00E3B870, 26, {0x08, 0x08, 0x08}};
-StaticEntityData D_802E9D64 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E3E260, &D_00E42240, 13, {0x08, 0x08, 0x08}};
+StaticEntityData D_802E9C8C = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E32420_ROM_START, E32420_ROM_END, 21, {0x10, 0x10, 0x10}};
+StaticEntityData D_802E9CB0 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E35670_ROM_START, E35670_ROM_END, 22, {0x10, 0x10, 0x10}};
+StaticEntityData D_802E9CD4 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E38890_ROM_START, E38890_ROM_END, 23, {0x10, 0x10, 0x10}};
+StaticEntityData D_802E9CF8 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E32420_ROM_START, E32420_ROM_END, 24, {0x08, 0x08, 0x08}};
+StaticEntityData D_802E9D1C = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E35670_ROM_START, E35670_ROM_END, 25, {0x08, 0x08, 0x08}};
+StaticEntityData D_802E9D40 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E38890_ROM_START, E38890_ROM_END, 26, {0x08, 0x08, 0x08}};
+StaticEntityData D_802E9D64 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E3E260_ROM_START, E3E260_ROM_END, 13, {0x08, 0x08, 0x08}};
 
 void entity_shattering_block_init(Entity* entity) {
     u32 type;

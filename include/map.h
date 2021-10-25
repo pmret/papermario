@@ -327,6 +327,11 @@ typedef struct {
     /* 0x08 */ s32 battle;
 } NpcGroupList[]; // size = 0x0C
 
+typedef struct QuizRequirements {
+    s32 unk_00;
+    s32 unk_04;
+} QuizRequirements; // size = 0x8
+
 #define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle }
 
 Enemy* get_enemy(s32 npcId);

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "nu/nusys.h"
 #include "hud_element.h"
+#include "ld_addrs.h"
 
 s32 D_800778A0[] = {
     &D_8038F800, &D_803B5000, &D_803DA800,
@@ -33,7 +34,6 @@ Gfx D_80077908[] = {
     gsSPEndDisplayList(),
 };
 
-
 // BSS
 extern s32 D_800A0904;
 extern s32 D_800A0908;
@@ -42,11 +42,9 @@ void state_init_battle(void) {
     D_800A0900 = 5;
 }
 
-#ifdef NON_MATCHING
 void state_step_battle(void) {
-    s32 phi_a0;
-    u32 currentBattleSection;
-    u32 unk_47B;
+    u32 currentBattleSelection;
+    u32 temp;
 
     if (D_800A0900 == 5) {
         if (nuGfxCfb[1] != nuGfxCfb_ptr) {
@@ -73,11 +71,10 @@ void state_step_battle(void) {
             func_802B20B4();
             sfx_clear_env_sounds(0);
 
-            currentBattleSection = gBattleStatus.currentBattleSection;
-            unk_47B = gBattleStatus.unk_47B;
+            currentBattleSelection = gCurrentBattleSection;
+            temp = D_800DC4EB;
 
-            // This part sucks
-            if ((gGameStatusPtr->peachFlags & 1) || (currentBattleSection == 0x26 && unk_47B == 0)) {
+            if (gGameStatusPtr->peachFlags & 1 || (currentBattleSelection == 0x26 && temp == 0)) {
                 gGameStatusPtr->peachFlags |= 1;
                 spr_init_sprites(6);
             } else {
@@ -90,7 +87,7 @@ void state_step_battle(void) {
             clear_entity_models();
             clear_animator_list();
             clear_generic_entity_list();
-            set_hud_element_nonworld_cache(0, 0);
+            set_hud_element_nonworld_cache(NULL, 0);
             clear_hud_element_cache();
             reset_status_menu();
             clear_item_entity_data();
@@ -103,7 +100,7 @@ void state_step_battle(void) {
             btl_save_world_cameras();
             load_battle_section();
             D_800A0904 = gPlayerStatusPtr->animFlags;
-            gPlayerStatusPtr->animFlags &= ~0x40;
+            gPlayerStatusPtr->animFlags &= ~PLAYER_ANIM_FLAG_40;
             D_800A0908 = get_time_freeze_mode();
             set_time_freeze_mode(TIME_FREEZE_NORMAL);
             gOverrideFlags &= ~0x8;
@@ -122,9 +119,6 @@ void state_step_battle(void) {
     func_80116674();
     update_cameras();
 }
-#else
-INCLUDE_ASM(void, "state_battle", state_step_battle, void);
-#endif
 
 void state_drawUI_battle(void) {
     draw_encounter_ui();

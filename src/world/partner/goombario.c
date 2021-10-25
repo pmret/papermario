@@ -90,38 +90,40 @@ s32 D_802BDC40_317B60[] = {
     0x00000039, 0x001B0024, 0xFFFFFFFF
 };
 
-EvtSource world_goombario_take_out = SCRIPT({
-    func_802BD188_3170A8();
-});
+EvtSource world_goombario_take_out = {
+    EVT_CALL(func_802BD188_3170A8)
+    EVT_RETURN
+    EVT_END
+};
 
 s32 D_802BDD88_317CA8 = 0x802BDF40;
 
-EvtSource world_goombario_update = SCRIPT({
-    func_802BD1D0_3170F0();
-});
+EvtSource world_goombario_update = {
+    EVT_CALL(func_802BD1D0_3170F0)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource world_goombario_use_ability = SCRIPT({
-    func_802BD5D8_3174F8(); // returns tattle message id on EVT_VAR(0), and something else on EVT_VAR(1)
+EvtSource world_goombario_use_ability = {
+    EVT_CALL(func_802BD5D8_3174F8)
+    EVT_IF_EQ(EVT_VAR(0), -1)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_IF_EQ(EVT_VAR(0), 0)
+        EVT_CALL(func_802BDB30_317A50)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_IF_EQ(EVT_VAR(1), 0)
+        EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk, NPC_ANIM_world_goombario_normal_idle, 0, EVT_VAR(0))
+    EVT_END_IF
+    EVT_WAIT_FRAMES(1)
+    EVT_CALL(func_802BDB30_317A50)
+    EVT_RETURN
+    EVT_END
+};
 
-    if (EVT_VAR(0) == -1) {
-        return;
-    }
-
-    if (EVT_VAR(0) == 0) {
-        func_802BDB30_317A50();
-        return;
-    }
-
-    if (EVT_VAR(1) == 0) {
-        SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk, NPC_ANIM_world_goombario_normal_idle, 0,
-                      EVT_VAR(0));
-    }
-
-    sleep 1;
-
-    func_802BDB30_317A50();
-});
-
-EvtSource world_goombario_put_away = SCRIPT({
-    func_802BDB84();
-});
+EvtSource world_goombario_put_away = {
+    EVT_CALL(func_802BDB84)
+    EVT_RETURN
+    EVT_END
+};

@@ -7,6 +7,7 @@ extern s32 D_802453E0_EEB990[];
 extern f32 D_802444F0_EEAAA0[];
 
 INCLUDE_ASM(s32, "EE70C0", func_80240B10_EE70C0);
+//#include "world/common/UnkNpcAIFunc23.inc.c"
 
 INCLUDE_ASM(s32, "EE70C0", func_80240CC0_EE7270);
 
@@ -38,7 +39,7 @@ INCLUDE_ASM(s32, "EE70C0", func_80241E1C_EE83CC);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "EE70C0", func_80242090_EE8640);
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "EE70C0", func_80242260_EE8810);
 

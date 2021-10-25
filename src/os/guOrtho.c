@@ -1,8 +1,8 @@
-#include "common.h"
+#include "PR/gu.h"
+#include "include_asm_libultra.h"
 
-#ifdef NON_MATCHING
-void guOrthoF(float mf[4][4], float l, float r, float b, float t,
-              float n, float f, float scale) {
+#ifndef KMC_ASM
+void guOrthoF(float mf[4][4], float l, float r, float b, float t, float n, float f, float scale) {
     s32 i, j;
 
     guMtxIdentF(mf);
@@ -22,20 +22,18 @@ void guOrthoF(float mf[4][4], float l, float r, float b, float t,
     }
 }
 #else
-INCLUDE_ASM(void, "os/guOrtho", guOrthoF, float mf[4][4], float l, float r, float b, float t, float n, float f,
-            float scale);
+void guOrthoF(float mf[4][4], float l, float r, float b, float t, float n, float f, float scale);
+INCLUDE_ASM_LIBULTRA("guOrtho", guOrthoF);
 #endif
 
-#ifdef NON_MATCHING
-void guOrtho(Mtx* m, float l, float r, float b, float t,
-             float n, float f, float scale) {
+#ifndef KMC_ASM
+void guOrtho(Mtx* m, float l, float r, float b, float t, float n, float f, float scale) {
     float mf[4][4];
 
-    guOrthoF(mf, l, r, b, t, n, f, scale);
+	guOrthoF(mf, l, r, b, t, n, f, scale);
 
-    guMtxF2L(mf, m);
+	guMtxF2L(mf, m);
 }
 #else
-INCLUDE_ASM(void, "os/guOrtho", guOrtho, Mtx* m, float l, float r, float b, float t,
-            float n, float f, float scale);
+INCLUDE_ASM_LIBULTRA("guOrtho", guOrtho);
 #endif

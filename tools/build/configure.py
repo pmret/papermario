@@ -31,7 +31,8 @@ def exec_shell(command: List[str]) -> str:
     ret = subprocess.run(command, stdout=subprocess.PIPE, text=True)
     return ret.stdout
 
-def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra_cflags: str, use_ccache: bool):
+def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra_cflags: str, use_ccache: bool,
+                      non_matching: bool):
     # platform-specific
     if sys.platform  == "darwin":
         iconv = "tools/iconv.py UTF-8 SHIFT-JIS"
@@ -52,15 +53,23 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     cross = "mips-linux-gnu-"
     cc = f"{BUILD_TOOLS}/cc/gcc/gcc"
     cc_ido = f"{BUILD_TOOLS}/cc/ido5.3/cc"
+    cc_kmc = f"{BUILD_TOOLS}/cc/kmcgcc/gcc"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
     compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
-    CPPFLAGS_COMMON = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
+    CPPFLAGS_COMMON = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
-    CPPFLAGS = CPPFLAGS_COMMON + " -nostdinc"
+    CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
+
+    if sys.platform == "darwin" and not non_matching:
+        CPPFLAGS += " -DKMC_ASM"
+
+    CPPFLAGS_LIBULTRA = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
+               "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
     cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
+    kmc_cflags = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
 
     ninja.variable("python", sys.executable)
 
@@ -85,22 +94,27 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     )
 
     ninja.rule("cc",
-        description="cc $in",
+        description="gcc $in",
         command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cc} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
-        description="cc $in $cflags",
+        description="dsl $in",
         command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {compile_script} | {iconv} > $out.i && {cc} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_ido",
-        description="cc_ido $in",
-        command=f"{ccache}{cc_ido} {CPPFLAGS_COMMON} {cppflags} -c -mips1 -O0 -G0 -non_shared -Xfullwarn -Xcpluscomm -o $out $in",
+        description="ido $in",
+        command=f"{ccache}{cc_ido} -w {CPPFLAGS_COMMON} {cppflags} -c -mips1 -O0 -G0 -non_shared -Xfullwarn -Xcpluscomm -o $out $in",
+    )
+
+    ninja.rule("cc_kmc",
+        description="kmc $in",
+        command=f"bash -o pipefail -c 'N64ALIGN=ON VR4300MUL=ON {cc_kmc} {CPPFLAGS_LIBULTRA} {cppflags} {kmc_cflags} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out'",
     )
 
     ninja.rule("cxx",
@@ -282,7 +296,7 @@ class Configure:
         # ¯\_(ツ)_/¯
         return path
 
-    def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str]):
+    def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str], non_matching: bool):
         import segtypes
         import segtypes.common.data
         import segtypes.n64.Yay0
@@ -317,7 +331,7 @@ class Configure:
 
                 if task == "yay0":
                     implicit.append(YAY0_COMPRESS_TOOL)
-                elif task in ["cc", "cc_dsl", "cc_ido", "cxx"]:
+                elif task in ["cc", "cc_dsl", "cxx"]:
                     order_only.append("generated_headers_" + self.version)
 
                 ninja.build(
@@ -359,10 +373,15 @@ class Configure:
                     task = "cxx"
                 with entry.src_paths[0].open() as f:
                     s = f.read()
-                    if "SCRIPT(" in s or "#pragma SCRIPT" in s or "#include \"world/common/foliage.inc.c\"" in s:
+                    if " SCRIPT(" in s or "#pragma SCRIPT" in s:
                         task = "cc_dsl"
+
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
+                elif "kmc" in cflags and (sys.platform != "darwin" or non_matching):
+                    task = "cc_kmc"
+
+                cflags = cflags.replace("kmc", "")
 
                 build(entry.object_path, entry.src_paths, task, variables={"cflags": cflags})
 
@@ -719,7 +738,7 @@ if __name__ == "__main__":
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
 
-    write_ninja_rules(ninja, args.cpp or "cpp", cppflags, cflags, args.ccache)
+    write_ninja_rules(ninja, args.cpp or "cpp", cppflags, cflags, args.ccache, args.non_matching)
     write_ninja_for_tools(ninja)
 
     skip_files = set()
@@ -735,7 +754,7 @@ if __name__ == "__main__":
             first_configure = configure
 
         configure.split(not args.no_split_assets, args.split_code)
-        configure.write_ninja(ninja, skip_files)
+        configure.write_ninja(ninja, skip_files, args.non_matching)
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 

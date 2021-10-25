@@ -8,14 +8,14 @@ glabel fx_69_main
 /* 38C784 E008A194 AFB30034 */  sw        $s3, 0x34($sp)
 /* 38C788 E008A198 00A0982D */  daddu     $s3, $a1, $zero
 /* 38C78C E008A19C 27A40010 */  addiu     $a0, $sp, 0x10
-/* 38C790 E008A1A0 3C02E009 */  lui       $v0, %hi(func_E008A288)
-/* 38C794 E008A1A4 2442A288 */  addiu     $v0, $v0, %lo(func_E008A288)
+/* 38C790 E008A1A0 3C02E009 */  lui       $v0, %hi(fx_69_init)
+/* 38C794 E008A1A4 2442A288 */  addiu     $v0, $v0, %lo(fx_69_init)
 /* 38C798 E008A1A8 AFA20018 */  sw        $v0, 0x18($sp)
-/* 38C79C E008A1AC 3C02E009 */  lui       $v0, %hi(func_E008A53C)
-/* 38C7A0 E008A1B0 2442A53C */  addiu     $v0, $v0, %lo(func_E008A53C)
+/* 38C79C E008A1AC 3C02E009 */  lui       $v0, %hi(fx_69_update)
+/* 38C7A0 E008A1B0 2442A53C */  addiu     $v0, $v0, %lo(fx_69_update)
 /* 38C7A4 E008A1B4 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 38C7A8 E008A1B8 3C02E009 */  lui       $v0, %hi(func_E008A6E4)
-/* 38C7AC E008A1BC 2442A6E4 */  addiu     $v0, $v0, %lo(func_E008A6E4)
+/* 38C7A8 E008A1B8 3C02E009 */  lui       $v0, %hi(fx_69_render)
+/* 38C7AC E008A1BC 2442A6E4 */  addiu     $v0, $v0, %lo(fx_69_render)
 /* 38C7B0 E008A1C0 AFA20020 */  sw        $v0, 0x20($sp)
 /* 38C7B4 E008A1C4 24020045 */  addiu     $v0, $zero, 0x45
 /* 38C7B8 E008A1C8 AFB00028 */  sw        $s0, 0x28($sp)

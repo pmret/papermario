@@ -47,16 +47,18 @@ ApiStatus N(func_802A123C_7217DC)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_STONE_CAP;
-    await N(UseItemWithEffect);
-    PlaySound(SOUND_UNKNOWN_361);
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_30009);
-    sleep 30;
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_CROUCH);
-    GetItemPower(ITEM_STONE_CAP, EVT_VAR(0), EVT_VAR(1));
-    PlaySound(SOUND_UNKNOWN_362);
-    N(func_802A123C_7217DC)();
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    sleep 20;
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x00000088)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
+    EVT_CALL(PlaySound, SOUND_UNKNOWN_361)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_30009)
+    EVT_WAIT_FRAMES(30)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_CROUCH)
+    EVT_CALL(GetItemPower, ITEM_STONE_CAP, EVT_VAR(0), EVT_VAR(1))
+    EVT_CALL(PlaySound, SOUND_UNKNOWN_362)
+    EVT_CALL(N(func_802A123C_7217DC))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_WAIT_FRAMES(20)
+    EVT_RETURN
+    EVT_END
+};

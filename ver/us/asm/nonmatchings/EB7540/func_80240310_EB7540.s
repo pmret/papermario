@@ -36,7 +36,7 @@ glabel func_80240310_EB7540
 /* EB75BC 8024038C 4482A000 */  mtc1      $v0, $f20
 /* EB75C0 80240390 00000000 */  nop
 /* EB75C4 80240394 4680A520 */  cvt.s.w   $f20, $f20
-/* EB75C8 80240398 0C0462EC */  jal       func_80118BB0
+/* EB75C8 80240398 0C0462EC */  jal       dead_get_entity_by_index
 /* EB75CC 8024039C 0240202D */   daddu    $a0, $s2, $zero
 /* EB75D0 802403A0 0040182D */  daddu     $v1, $v0, $zero
 /* EB75D4 802403A4 E4780048 */  swc1      $f24, 0x48($v1)

@@ -7,7 +7,7 @@ glabel osStartThread
 /* 41428 80066028 00808021 */  addu      $s0, $a0, $zero
 /* 4142C 8006602C AFBF001C */  sw        $ra, 0x1c($sp)
 /* 41430 80066030 AFB20018 */  sw        $s2, 0x18($sp)
-/* 41434 80066034 0C01ACD8 */  jal       osDisableInt
+/* 41434 80066034 0C01ACD8 */  jal       __osDisableInt
 /* 41438 80066038 AFB10014 */   sw       $s1, 0x14($sp)
 /* 4143C 8006603C 96030010 */  lhu       $v1, 0x10($s0)
 /* 41440 80066040 00409021 */  addu      $s2, $v0, $zero
@@ -71,7 +71,7 @@ glabel osStartThread
 /* 41510 80066110 0C01AC1B */  jal       osEnqueueAndYield
 /* 41514 80066114 24844658 */   addiu    $a0, $a0, %lo(__osRunQueue)
 .L80066118:
-/* 41518 80066118 0C01ACF4 */  jal       osRestoreInt
+/* 41518 80066118 0C01ACF4 */  jal       __osRestoreInt
 /* 4151C 8006611C 02402021 */   addu     $a0, $s2, $zero
 /* 41520 80066120 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 41524 80066124 8FB20018 */  lw        $s2, 0x18($sp)

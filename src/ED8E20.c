@@ -1,7 +1,8 @@
 #include "dead.h"
 #include "common.h"
 
-extern s16 D_80169B12;
+#define NAMESPACE ED8E20
+
 extern GameStatus* D_80079430;
 extern f32 D_800B8DEC;
 
@@ -10,13 +11,10 @@ typedef struct DokanModelInfo {
     /* 0x04 */ Vec3f position;
 } DokanModelInfo;
 
-ApiStatus func_80240000_ED8E20(Evt* script, s32 isInitialCall) {
-    gPlayerStatusPtr->animFlags |= 0x100000;
-    return ApiStatus_DONE2;
-}
+#include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 ApiStatus func_80240020_ED8E40(Evt* script, s32 isInitialCall) {
-    script->varTable[0] = (s32)D_80169B12;
+    script->varTable[0] = dead_gCollisionStatus.pushingAgainstWall;
     return ApiStatus_DONE2;
 }
 
@@ -43,26 +41,11 @@ ApiStatus func_802400F0_ED8F10(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "ED8E20", func_802400F0_ED8F10);
 #endif
 
-ApiStatus func_80240208_ED9028(Evt* script, s32 isInitialCall) {
-    script->varTable[0] = clamp_angle(gCameras[gCurrentCameraID].currentYaw + 180.0f);
-    return ApiStatus_DONE2;
-}
+#include "world/common/GetCurrentCameraYawClamped180.inc.c"
 
-ApiStatus func_80240274_ED9094(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    f32 temp_a2 = evt_get_float_variable(script, *args++);
-    f32 playerX = gPlayerStatus.position.x;
-    f32 playerY = gPlayerStatus.position.y;
-    f32 playerZ = gPlayerStatus.position.z;
-
-    add_vec2D_polar(&playerX, &playerZ, temp_a2, gPlayerStatus.targetYaw);
-    evt_set_float_variable(script, EVT_VAR(0), playerX);
-    evt_set_float_variable(script, EVT_VAR(1), playerY);
-    evt_set_float_variable(script, EVT_VAR(2), playerZ);
-    return ApiStatus_DONE2;
-}
+#include "world/common/SomeXYZFunc2.inc.c"
 
 ApiStatus func_80240318_ED9138(Evt* script, s32 isInitialCall) {
-    func_80077BD0(0, 0, 0, 0, 0, 0);
+    dead_playFX_82(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

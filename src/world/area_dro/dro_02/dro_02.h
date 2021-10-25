@@ -24,7 +24,7 @@ ApiStatus N(UnkMovePartner)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkRotatePartner)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkRotatePlayer)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkYawFunc)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024043C_9695FC)(Evt* script, s32 isInitialCall);
+ApiStatus N(UnkQuizFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc31)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802409EC_969BAC)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240A70_969C30)(Evt* script, s32 isInitialCall);

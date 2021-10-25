@@ -2,11 +2,11 @@
 
 INCLUDE_ASM(s32, "effects/effect_128", fx_128_main);
 
-void func_E011C0F4(void) {
+void fx_128_init(void) {
 }
 
-INCLUDE_ASM(s32, "effects/effect_128", func_E011C0FC);
+INCLUDE_ASM(s32, "effects/effect_128", fx_128_update);
 
-INCLUDE_ASM(s32, "effects/effect_128", func_E011C17C);
+INCLUDE_ASM(s32, "effects/effect_128", fx_128_render);
 
-INCLUDE_ASM(s32, "effects/effect_128", func_E011C1C4);
+INCLUDE_ASM(s32, "effects/effect_128", fx_128_appendGfx);

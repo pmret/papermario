@@ -1,4 +1,5 @@
 #include "jan_00.h"
+#include "effects.h"
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 
