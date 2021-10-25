@@ -458,7 +458,7 @@ void N(func_80241040_BE47F0)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
             posY = npc->pos.y;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            
+
             npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
             if (vt1 < (vt3 - posW)) {
                 enemy->varTable[0] |= 0x10;
@@ -469,7 +469,7 @@ void N(func_80241040_BE47F0)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     if ((enemy->varTable[0] & 0x11) == 0x11) {
         if (npc->flags & 8) {
             yPhi = temp_f24;
-            npc->pos.y = yPhi - vtY + (vtY * 0.09); // THIS LINE  -  yPhi = f24; vtY = f20
+            npc->pos.y = ((yPhi - vtY) * 0.09) + vtY;
         } else {
             posX = npc->pos.x;
             posY = vtY;

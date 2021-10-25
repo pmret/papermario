@@ -61,7 +61,7 @@ void func_80240D80_ECAA80(Evt* script, NpcAISettings* npcAISettings, EnemyTerrit
     phi_f26 = 0.0f;
 
     if (npc_test_move_simple_without_slipping(npc->unk_80, &subroutine_arg8, &subroutine_arg9, &subroutine_argA, npc->moveSpeed * 4.5, temp_f20,
-                      npc->collisionHeight, npc->collisionRadius) != 0) {
+                      npc->collisionHeight, npc->collisionRadius)) {
         phi_f22 = dist2D(npc->pos.x, npc->pos.z, subroutine_arg8, subroutine_argA);
 
         subroutine_argB = npc->pos.x;
@@ -69,7 +69,7 @@ void func_80240D80_ECAA80(Evt* script, NpcAISettings* npcAISettings, EnemyTerrit
         subroutine_argD = npc->pos.z;
 
         if (npc_test_move_simple_without_slipping(npc->unk_80, &subroutine_argB, &subroutine_argC, &subroutine_argD, npc->moveSpeed * 4.5,
-                          clamp_angle(temp_f20 + 35.0f), npc->collisionHeight, npc->collisionRadius) != 0) {
+                          clamp_angle(temp_f20 + 35.0f), npc->collisionHeight, npc->collisionRadius)) {
             phi_f24 = dist2D(npc->pos.x, npc->pos.z, subroutine_argB, subroutine_argD);
         }
 
@@ -78,14 +78,14 @@ void func_80240D80_ECAA80(Evt* script, NpcAISettings* npcAISettings, EnemyTerrit
         subroutine_arg10 = npc->pos.z;
 
         if (npc_test_move_simple_without_slipping(npc->unk_80, &subroutine_argE, &subroutine_argF, &subroutine_arg10, npc->moveSpeed * 4.5,
-                          clamp_angle(temp_f20 - 35.0f), npc->collisionHeight, npc->collisionRadius) != 0) {
+                          clamp_angle(temp_f20 - 35.0f), npc->collisionHeight, npc->collisionRadius)) {
             phi_f26 = dist2D(npc->pos.x, npc->pos.z, subroutine_argE, subroutine_arg10);
         }
 
         dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
 
         if ((phi_f22 < npc->moveSpeed * 1.5) && (phi_f24 < npc->moveSpeed * 1.5) && (phi_f26 < npc->moveSpeed * 1.5) &&
-            (func_800490B4(territory, enemy, npcAISettings->alertRadius, npcAISettings->unk_10.f, 0) != 0)) {
+            (func_800490B4(territory, enemy, npcAISettings->alertRadius, npcAISettings->unk_10.f, 0))) {
             phi_s3 = TRUE;
         }
 

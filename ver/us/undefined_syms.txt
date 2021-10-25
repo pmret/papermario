@@ -1839,7 +1839,5 @@ dead_gPlayerStatus = 0x80117578;
 dead_gPlayerActionState = 0x8011762C;
 dead_gPartnerActionStatus2 = 0x80117160;
 dead_gPlayerData = 0x80117840;
-D_80117848 = 0x80117848;
-dead_gPlayerData2 = 0x80117852;
 dead_gCollisionStatus = 0x80169B12;
 dead_gOverrideFlags = 0x800A15A8;

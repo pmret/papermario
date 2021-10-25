@@ -3,7 +3,7 @@
 
 #define NAMESPACE EC9D00
 
-#define dead_gPartnerActionStatus dead_gPartnerActionStatus2
+#define gPartnerActionStatus dead_gPartnerActionStatus2
 
 extern s32 D_80094900[11][4];
 
@@ -22,11 +22,7 @@ INCLUDE_ASM(s32, "EC9D00", func_802401CC_EC9ECC);
 
 #include "world/common/SwitchToPartner.inc.c"
 
-ApiStatus func_80240448_ECA148(Evt* script, s32 isInitialCall) {
-    set_message_msg(D_80094900[gPlayerData.currentPartner][0], 0);
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc19.inc.c"
 
 #include "world/common/UnkFunc20.inc.c"
 

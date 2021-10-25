@@ -81,7 +81,6 @@
 #define get_item_entity dead_get_item_entity
 #define gOverrideFlags dead_gOverrideFlags
 #define set_message_msg dead_set_message_msg
-//#define gPlayerData dead_gPlayerData2 // has to be above the other one 80117852
 #define gPlayerData dead_gPlayerData
 #define D_8008EF20 D_80094900
 #define increment_status_menu_disabled dead_increment_status_menu_disabled
