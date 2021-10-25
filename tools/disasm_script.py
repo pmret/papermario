@@ -147,38 +147,38 @@ def get_constants():
 
     #exit()
     # sprites
-    sprite_path = Path(Path(__file__).resolve().parent.parent / "ver" / "current" / "build" / "include" / "sprite" / "npc")
-    for file in sprite_path.iterdir():
-        fd = file.read_text()
-        for line in fd.splitlines():
-            if "#define _NPC_SPRITE_" in line:
-                enum = "NPC_SPRITE"
-            elif "#define _NPC_PALETTE_" in line:
-                enum = "NPC_PALETTE"
-            elif "#define _NPC_ANIM_" in line:
-                enum = "NPC_ANIM"
-            else:
-                continue
+    # sprite_path = Path(Path(__file__).resolve().parent.parent / "ver" / "current" / "build" / "include" / "sprite" / "npc")
+    # for file in sprite_path.iterdir():
+    #     fd = file.read_text()
+    #     for line in fd.splitlines():
+    #         if "#define _NPC_SPRITE_" in line:
+    #             enum = "NPC_SPRITE"
+    #         elif "#define _NPC_PALETTE_" in line:
+    #             enum = "NPC_PALETTE"
+    #         elif "#define _NPC_ANIM_" in line:
+    #             enum = "NPC_ANIM"
+    #         else:
+    #             continue
 
-            name = line.split(" ",2)[1]
-            id_ = line.split("0x", 1)[1]
-            if " " in id_:
-                id_ = id_.split(" ",1)[0]
-            name = name.split(f"_{enum}_", 1)[1]
-            if enum == "NPC_SPRITE":
-                saved_name = name
-                saved_id = id_
-            else:
-                name = name.rsplit(f"{saved_name}_")[1]
+    #         name = line.split(" ",2)[1]
+    #         id_ = line.split("0x", 1)[1]
+    #         if " " in id_:
+    #             id_ = id_.split(" ",1)[0]
+    #         name = name.split(f"_{enum}_", 1)[1]
+    #         if enum == "NPC_SPRITE":
+    #             saved_name = name
+    #             saved_id = id_
+    #         else:
+    #             name = name.rsplit(f"{saved_name}_")[1]
 
-            if enum == "NPC_SPRITE":
-                if int(id_, 16) not in CONSTANTS["NPC_SPRITE"]:
-                    CONSTANTS[enum][int(id_, 16)] = {"name":"", "palettes":{}, "anims":{}}
-                CONSTANTS[enum][int(id_, 16)]["name"] = name
-            elif enum == "NPC_PALETTE":
-                CONSTANTS["NPC_SPRITE"][int(saved_id, 16)]["palettes"][int(id_, 16)] = name
-            elif enum == "NPC_ANIM":
-                CONSTANTS["NPC_SPRITE"][int(saved_id, 16)]["anims"][int(id_, 16)] = name
+    #         if enum == "NPC_SPRITE":
+    #             if int(id_, 16) not in CONSTANTS["NPC_SPRITE"]:
+    #                 CONSTANTS[enum][int(id_, 16)] = {"name":"", "palettes":{}, "anims":{}}
+    #             CONSTANTS[enum][int(id_, 16)]["name"] = name
+    #         elif enum == "NPC_PALETTE":
+    #             CONSTANTS["NPC_SPRITE"][int(saved_id, 16)]["palettes"][int(id_, 16)] = name
+    #         elif enum == "NPC_ANIM":
+    #             CONSTANTS["NPC_SPRITE"][int(saved_id, 16)]["anims"][int(id_, 16)] = name
 
     return
 

@@ -2,8 +2,17 @@
 
 s32 D_8014C250[] = {0x0001003C, 0x00000000, 0x00000000, 0x00000000};
 
-extern s32 D_801512D4;
+extern s32 gAnimCount;
 
+typedef struct DisplayListBufferHandle {
+    /* 0x0 */ s32 mode;
+    /* 0x4 */ Gfx* addr;
+} DisplayListBufferHandle; // size = 0x8
+
+typedef DisplayListBufferHandle AnimatedMeshVertexCopyList[0x60];
+
+extern AnimatedMeshVertexCopyList D_801533C0;
+extern AnimatedMeshVertexCopyList D_801536C0;
 extern AnimatedMeshList D_801539C0;
 extern AnimatedMeshList D_80153A00;
 extern s32 gAnimModelFogEnabled;
@@ -13,11 +22,14 @@ extern s32 gAnimModelFogB;
 extern s32 gAnimModelFogA;
 extern s32 gAnimModelFogStart;
 extern s32 gAnimModelFogEnd;
+extern s32 D_80153A60;
 extern Matrix4f gAnimRotMtx;
 extern Matrix4f gAnimScaleMtx;
 extern Matrix4f gAnimTranslateMtx;
 extern Matrix4f gAnimRotScaleMtx;
 extern StaticAnimatorNode** gAnimTreeRoot;
+
+void appendGfx_animator(ModelAnimator* animator);
 
 INCLUDE_ASM(s32, "B4580", animator_copy_vertices_to_buffer);
 
@@ -106,7 +118,35 @@ void free_animator_nodes(AnimatorNode* root) {
     heap_free(root);
 }
 
-INCLUDE_ASM(s32, "B4580", clear_animator_list);
+void clear_animator_list(void) {
+    s32 i;
+
+    if (!gGameStatusPtr->isBattle) {
+        gCurrentAnimMeshListPtr = D_801539C0;
+        for (i = 0; i < ARRAY_COUNT(D_801533C0); i++) {
+            D_801533C0[i].mode = -1;
+        }
+
+        for (i = 0; i < ARRAY_COUNT(D_801536C0); i++) {
+            D_801536C0[i].mode = -1;
+        }
+    } else {
+        gCurrentAnimMeshListPtr = D_80153A00;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentAnimMeshListPtr); i++) {
+        (*gCurrentAnimMeshListPtr)[i] = NULL;
+    }
+
+    gAnimModelFogR = 10;
+    gAnimModelFogG = 10;
+    gAnimModelFogB = 10;
+    gAnimModelFogA = 10;
+    gAnimModelFogStart = 800;
+    gAnimCount = 0;
+    gAnimModelFogEnabled = 0;
+    gAnimModelFogEnd = 1000;
+}
 
 void reset_animator_list(void) {
     if (!gGameStatusPtr->isBattle) {
@@ -120,7 +160,7 @@ void reset_animator_list(void) {
     gAnimModelFogB = 10;
     gAnimModelFogA = 10;
     gAnimModelFogStart = 800;
-    D_801512D4 = 0;
+    gAnimCount = 0;
     gAnimModelFogEnabled = 0;
     gAnimModelFogEnd = 1000;
 }
@@ -166,13 +206,94 @@ void delete_model_animator(ModelAnimator* animator) {
         }
 
         heap_free(animator);
-        D_801512D4--;
+        gAnimCount--;
     }
 }
 
-INCLUDE_ASM(s32, "B4580", create_model_animator);
+s32 create_model_animator(u32* animPos) {
+    ModelAnimator* animator;
+    s32 i, j;
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentAnimMeshListPtr); i++) {
+        if ((*gCurrentAnimMeshListPtr)[i] == NULL) {
+            break;
+        }
+    }
+
+    ASSERT(i < ARRAY_COUNT(*gCurrentAnimMeshListPtr));
+
+    (*gCurrentAnimMeshListPtr)[i] = animator = heap_malloc(sizeof(*animator));
+    gAnimCount += 1;
+
+    ASSERT(animator != NULL);
+
+    animator->flags = 0x40 | 0x10 | 0x4 | 0x2 | 0x1;
+    animator->renderMode = RENDER_MODE_ALPHATEST;
+    animator->nextUpdateTime = 1.0f;
+    animator->timeScale = 1.0f;
+    animator->animReadPos = animPos;
+
+    if (animPos == NULL) {
+        animator->animReadPos = D_8014C250;
+    }
+
+    animator->savedReadPos = animPos;
+    animator->animationBuffer = NULL;
+    animator->vertexArray = NULL;
+    animator->fpRenderCallback = NULL;
+    animator->rootNode = NULL;
+    animator->nextUniqueID = 0;
+
+    for (j = 0; j < ARRAY_COUNT(animator->staticNodeIDs); j++) {
+        animator->staticNodeIDs[j] = j + 1;
+    }
+
+    if (gGameStatusPtr->isBattle) {
+        i |= 0x800;
+    }
+    return i;
+}
 
 INCLUDE_ASM(s32, "B4580", create_mesh_animator);
+// s32 create_mesh_animator(s32 animPos, s32 arg1) {
+//     ModelAnimator* animator;
+//     s32 i, j;
+
+//     for (i = 0; i < ARRAY_COUNT(*gCurrentAnimMeshListPtr); i++) {
+//         if ((*gCurrentAnimMeshListPtr)[i] == NULL) {
+//             break;
+//         }
+//     }
+
+//     ASSERT(i < ARRAY_COUNT(*gCurrentAnimMeshListPtr));
+
+//     (*gCurrentAnimMeshListPtr)[i] = animator = heap_malloc(sizeof(*animator));
+//     gAnimCount += 1;
+
+//     ASSERT(animator != NULL);
+
+//     animator->flags = 0x40 | 0x10 | 0x4 | 0x2 | 0x1;
+//     animator->renderMode = RENDER_MODE_ALPHATEST;
+//     animator->vertexArray = NULL;
+//     animator->fpRenderCallback = NULL;
+//     animator->rootNode = NULL;
+//     animator->nextUniqueID = 0;
+//     animator->animationBuffer = arg1;
+//     animator->nextUpdateTime = 1.0f;
+//     animator->timeScale = 1.0f;
+//     animPos = animator->animationBuffer + (animPos & 0xFFFFFF);
+//     animator->animReadPos = animPos;
+//     animator->savedReadPos = animPos;
+
+//     for (j = 0; j < ARRAY_COUNT(animator->staticNodeIDs); j++) {
+//         animator->staticNodeIDs[j] = j + 1;
+//     }
+
+//     if (gGameStatusPtr->isBattle) {
+//         i |= 0x800;
+//     }
+//     return i;
+// }
 
 AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorNodeBlueprint* nodeBP) {
     AnimatorNode* ret;
@@ -306,14 +427,58 @@ void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx
     }
 }
 
-INCLUDE_ASM(s32, "B4580", render_animated_model);
+void render_animated_model(s32 animatorID, Mtx* rootTransform) {
+    RenderTask rt;
+    RenderTask* rtPtr = &rt;
 
-INCLUDE_ASM(s32, "B4580", render_animated_model_with_vertices);
+    if (!gGameStatusPtr->isBattle || animatorID & 0x800) {
+        ModelAnimator* animator;
+
+        animatorID &= ~0x800;
+        animator = (*gCurrentAnimMeshListPtr)[animatorID];
+        if (animator != NULL && animator->flags != 0 && !(animator->flags & 0x40) &&
+            animator->flags & (1 << gCurrentCamID) && !(animator->flags & 0x80))
+        {
+            animator->mtx = *rootTransform;
+            animator->vertexArray = NULL;
+            rtPtr->appendGfxArg = animator;
+            rtPtr->appendGfx = &appendGfx_animator;
+            rtPtr->distance = 0;
+            rtPtr->renderMode = animator->renderMode;
+            queue_render_task(rtPtr);
+        }
+    }
+}
+
+void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32 vtxSegment, Vtx* vertexArray) {
+    RenderTask rt;
+    RenderTask* rtPtr = &rt;
+
+    if (!gGameStatusPtr->isBattle || animatorID & 0x800) {
+        ModelAnimator* animator;
+
+        animatorID &= ~0x800;
+        animator = (*gCurrentAnimMeshListPtr)[animatorID];
+        if (animator != NULL && animator->flags != 0 && !(animator->flags & 0x40) &&
+            animator->flags & (1 << gCurrentCamID) && !(animator->flags & 0x80))
+        {
+            animator->mtx = *rootTransform;
+            D_80153A60 = vtxSegment;
+            animator->vertexArray = vertexArray;
+            rtPtr->appendGfxArg = animator;
+            rtPtr->appendGfx = &appendGfx_animator;
+            rtPtr->distance = 0;
+            rtPtr->renderMode = animator->renderMode;
+            queue_render_task(rtPtr);
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "B4580", appendGfx_animator);
 
 INCLUDE_ASM(s32, "B4580", appendGfx_animator_node);
 
+AnimatorNode* get_animator_node_for_tree_index(ModelAnimator* animator, s32 treeIndex);
 INCLUDE_ASM(s32, "B4580", get_animator_node_for_tree_index);
 // AnimatorNode* get_animator_node_for_tree_index(ModelAnimator* animator, s32 arg1) {
 //     return get_animator_child_with_id(animator->rootNode, animator->unk_14[arg1]);

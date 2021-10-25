@@ -876,7 +876,7 @@ typedef struct StaticAnimatorNode {
 
 typedef struct ModelAnimator {
     /* 0x000 */ u32 flags;
-    /* 0x004 */ u8 renderMode;
+    /* 0x004 */ s8 renderMode;
     /* 0x005 */ char unk_05[3];
     /* 0x008 */ u32* animReadPos;
     /* 0x00C */ u32* savedReadPos;
@@ -886,7 +886,7 @@ typedef struct ModelAnimator {
     /* 0x08F */ char unk_08F[0x1];
     /* 0x090 */ f32 nextUpdateTime;
     /* 0x094 */ f32 timeScale;
-    /* 0x098 */ Matrix4s mtx;
+    /* 0x098 */ Mtx mtx;
     /* 0x0D8 */ Vtx** vertexArray;
     /* 0x0DC */ s8* animationBuffer;
     /* 0x0E0 */ StaticAnimatorNode* staticNodes[0x7A];
