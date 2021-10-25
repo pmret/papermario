@@ -45,52 +45,54 @@ ApiStatus N(func_802A1270_727B80)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_DIZZY_DIAL;
-    await N(UseItemWithEffect);
-    UseBattleCamPreset(2);
-    MoveBattleCamOver(20);
-    sleep 10;
-    spawn {
-        sleep 5;
-        AddBattleCamZoom(0xFFFFFF06);
-        MoveBattleCamOver(80);
-        func_8024ECF8(0, 0, 1);
-        sleep 80;
-        AddBattleCamZoom(250);
-        MoveBattleCamOver(3);
-        func_8024ECF8(0, 0, 1);
-    }
-    N(func_802A1270_727B80)();
-    spawn {
-        StartRumble(8);
-        ShakeCam(1, 0, 2, 1.0);
-        ShakeCam(1, 0, 2, 4.0);
-        ShakeCam(1, 0, 2, 3.0);
-        ShakeCam(1, 0, 2, 2.0);
-        ShakeCam(1, 0, 2, 1.0);
-        ShakeCam(1, 0, 2, 0.5);
-        sleep 10;
-        UseBattleCamPreset(3);
-        MoveBattleCamOver(10);
-        func_8024ECF8(0, 0, 0);
-    }
-    InitTargetIterator();
-0:
-    SetGoalToTarget(ACTOR_SELF);
-    ItemCheckHit(EVT_VAR(0), 0x10000000, 0, EVT_VAR(0), 0);
-    if (EVT_VAR(0) == 6) {
-        goto 1;
-    }
-    GetItemPower(ITEM_DIZZY_DIAL, EVT_VAR(0), EVT_VAR(1));
-    MakeStatusField(EVT_VAR(0), 0x40000, 100, EVT_VAR(0));
-    func_80252B3C(EVT_VAR(0), 0x50000000, EVT_VAR(0), 0, 32);
-1:
-    sleep 5;
-    ChooseNextTarget(0, EVT_VAR(0));
-    if (EVT_VAR(0) != -1) {
-        goto 0;
-    }
-    sleep 30;
-    await N(PlayerGoHome);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x0000009A)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
+    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_WAIT_FRAMES(10)
+    EVT_THREAD
+        EVT_WAIT_FRAMES(5)
+        EVT_CALL(AddBattleCamZoom, -250)
+        EVT_CALL(MoveBattleCamOver, 80)
+        EVT_CALL(func_8024ECF8, 0, 0, 1)
+        EVT_WAIT_FRAMES(80)
+        EVT_CALL(AddBattleCamZoom, 250)
+        EVT_CALL(MoveBattleCamOver, 3)
+        EVT_CALL(func_8024ECF8, 0, 0, 1)
+    EVT_END_THREAD
+    EVT_CALL(N(func_802A1270_727B80))
+    EVT_THREAD
+        EVT_CALL(StartRumble, 8)
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(1.0))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(4.0))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(3.0))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(2.0))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(1.0))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.5))
+        EVT_WAIT_FRAMES(10)
+        EVT_CALL(UseBattleCamPreset, 3)
+        EVT_CALL(MoveBattleCamOver, 10)
+        EVT_CALL(func_8024ECF8, 0, 0, 0)
+    EVT_END_THREAD
+    EVT_CALL(InitTargetIterator)
+    EVT_LABEL(0)
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(ItemCheckHit, EVT_VAR(0), 268435456, 0, EVT_VAR(0), 0)
+    EVT_IF_EQ(EVT_VAR(0), 6)
+        EVT_GOTO(1)
+    EVT_END_IF
+    EVT_CALL(GetItemPower, ITEM_DIZZY_DIAL, EVT_VAR(0), EVT_VAR(1))
+    EVT_CALL(MakeStatusField, EVT_VAR(0), 262144, 100, EVT_VAR(0))
+    EVT_CALL(func_80252B3C, EVT_VAR(0), 1342177280, EVT_VAR(0), 0, 32)
+    EVT_LABEL(1)
+    EVT_WAIT_FRAMES(5)
+    EVT_CALL(ChooseNextTarget, 0, EVT_VAR(0))
+    EVT_IF_NE(EVT_VAR(0), -1)
+        EVT_GOTO(0)
+    EVT_END_IF
+    EVT_WAIT_FRAMES(30)
+    EVT_EXEC_WAIT(N(PlayerGoHome))
+    EVT_RETURN
+    EVT_END
+};

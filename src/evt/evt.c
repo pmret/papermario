@@ -1152,7 +1152,7 @@ ApiStatus evt_handle_thread(Evt* script) {
         opcode = *endLine++;
         nargs = *endLine++;
         endLine += nargs;
-    } while (opcode != EVT_OP_END_SPAWN_THREAD);
+    } while (opcode != EVT_OP_END_THREAD);
 
     script->ptrNextLine = endLine;
     newScript = start_script_in_group((EvtSource*)startLine, script->priority, 0x60, script->groupFlags);
@@ -1189,7 +1189,7 @@ ApiStatus evt_handle_child_thread(Evt* script) {
         opcode = *endLine++;
         nargs = *endLine++;
         endLine += nargs;
-    } while (opcode != EVT_OP_END_PARALLEL_THREAD);
+    } while (opcode != EVT_OP_END_CHILD_THREAD);
 
     script->ptrNextLine = endLine;
     newScript = func_802C39F8(script, startLine, 0x60);
@@ -1306,7 +1306,7 @@ s32 evt_handle_print_debug_var(Evt* script) {
         tableVar = script->varTable[var];
 
         do {} while (0);
-        
+
         if (tableVar <= -270000000) {
             sprintf(evtDebugPrintBuffer, "LW(%3d)  [%08X]", tableVar);
         } else if (tableVar <= -220000000) {
@@ -1378,10 +1378,10 @@ s32 evt_execute_next_command(Evt *script) {
             case EVT_OP_BREAK_LOOP:
                 status = evt_handle_break_loop(script);
                 break;
-            case EVT_OP_SLEEP_FRAMES:
+            case EVT_OP_WAIT_FRAMES:
                 status = evt_handle_wait(script);
                 break;
-            case EVT_OP_SLEEP_SECS:
+            case EVT_OP_WAIT_SECS:
                 status = evt_handle_wait_seconds(script);
                 break;
             case EVT_OP_IF_EQ:
@@ -1414,10 +1414,10 @@ s32 evt_execute_next_command(Evt *script) {
             case EVT_OP_END_IF:
                 status = evt_handle_end_if(script);
                 break;
-            case EVT_OP_MATCH:
+            case EVT_OP_SWITCH:
                 status = evt_handle_switch(script);
                 break;
-            case EVT_OP_MATCH_CONST:
+            case EVT_OP_SWITCH_CONST:
                 status = evt_handle_switch_const(script);
                 break;
             case EVT_OP_CASE_EQ:
@@ -1438,19 +1438,19 @@ s32 evt_execute_next_command(Evt *script) {
             case EVT_OP_CASE_GE:
                 status = evt_handle_case_greater_equal(script);
                 break;
-            case EVT_OP_CASE_ELSE:
+            case EVT_OP_CASE_DEFAULT:
                 status = evt_handle_case_default(script);
                 break;
-            case EVT_OP_BREAK_MATCH:
+            case EVT_OP_BREAK_SWITCH:
                 status = evt_handle_break_case(script);
                 break;
-            case EVT_OP_CASE_MULTI_OR_EQ:
+            case EVT_OP_CASE_OR_EQ:
                 status = evt_handle_case_equal_OR(script);
                 break;
-            case EVT_OP_END_CASE_MULTI:
+            case EVT_OP_END_CASE_GROUP:
                 status = evt_handle_end_case_group(script);
                 break;
-            case EVT_OP_CASE_MULTI_AND_EQ:
+            case EVT_OP_CASE_AND_EQ:
                 status = evt_handle_case_equal_AND(script);
                 break;
             case EVT_OP_CASE_FLAG:
@@ -1459,7 +1459,7 @@ s32 evt_execute_next_command(Evt *script) {
             case EVT_OP_CASE_RANGE:
                 status = evt_handle_case_range(script);
                 break;
-            case EVT_OP_END_MATCH:
+            case EVT_OP_END_SWITCH:
                 status = evt_handle_end_switch(script);
                 break;
             case EVT_OP_SET:
@@ -1468,7 +1468,7 @@ s32 evt_execute_next_command(Evt *script) {
             case EVT_OP_SET_CONST:
                 status = evt_handle_set_const(script);
                 break;
-            case EVT_OP_SET_F:
+            case EVT_OP_SETF:
                 status = evt_handle_set_float(script);
                 break;
             case EVT_OP_ADD:
@@ -1486,52 +1486,52 @@ s32 evt_execute_next_command(Evt *script) {
             case EVT_OP_MOD:
                 status = evt_handle_mod(script);
                 break;
-            case EVT_OP_ADD_F:
+            case EVT_OP_ADDF:
                 status = evt_handle_addF(script);
                 break;
-            case EVT_OP_SUB_F:
+            case EVT_OP_SUBF:
                 status = evt_handle_subtractF(script);
                 break;
-            case EVT_OP_MUL_F:
+            case EVT_OP_MULF:
                 status = evt_handle_multiplyF(script);
                 break;
-            case EVT_OP_DIV_F:
+            case EVT_OP_DIVF:
                 status = evt_handle_divideF(script);
                 break;
-            case EVT_OP_USE_BUFFER:
+            case EVT_OP_USE_BUF:
                 status = evt_handle_set_int_buffer_ptr(script);
                 break;
-            case EVT_OP_BUFFER_READ_1:
+            case EVT_OP_BUF_READ1:
                 status = evt_handle_get_1_word(script);
                 break;
-            case EVT_OP_BUFFER_READ_2:
+            case EVT_OP_BUF_READ2:
                 status = evt_handle_get_2_word(script);
                 break;
-            case EVT_OP_BUFFER_READ_3:
+            case EVT_OP_BUF_READ3:
                 status = evt_handle_get_3_word(script);
                 break;
-            case EVT_OP_BUFFER_READ_4:
+            case EVT_OP_BUF_READ4:
                 status = evt_handle_get_4_word(script);
                 break;
-            case EVT_OP_BUFFER_PEEK:
+            case EVT_OP_BUF_PEEK:
                 status = evt_handle_get_Nth_word(script);
                 break;
-            case EVT_OP_USE_BUFFER_F:
+            case EVT_OP_USE_FBUF:
                 status = evt_handle_set_float_buffer_ptr(script);
                 break;
-            case EVT_OP_BUFFER_READ_1_F:
+            case EVT_OP_FBUF_READ1:
                 status = evt_handle_get_1_float(script);
                 break;
-            case EVT_OP_BUFFER_READ_2_F:
+            case EVT_OP_FBUF_READ2:
                 status = evt_handle_get_2_float(script);
                 break;
-            case EVT_OP_BUFFER_READ_3_F:
+            case EVT_OP_FBUF_READ3:
                 status = evt_handle_get_3_float(script);
                 break;
-            case EVT_OP_BUFFER_READ_4_F:
+            case EVT_OP_FBUF_READ4:
                 status = evt_handle_get_4_float(script);
                 break;
-            case EVT_OP_BUFFER_PEEK_F:
+            case EVT_OP_FBUF_PEEK:
                 status = evt_handle_get_Nth_float(script);
                 break;
             case EVT_OP_USE_ARRAY:
@@ -1543,31 +1543,31 @@ s32 evt_execute_next_command(Evt *script) {
             case EVT_OP_NEW_ARRAY:
                 status = evt_handle_allocate_array(script);
                 break;
-            case EVT_OP_KILL_SCRIPT:
+            case EVT_OP_KILL_THREAD:
                 status = evt_handle_kill(script);
                 break;
-            case EVT_OP_AND:
+            case EVT_OP_BITWISE_AND:
                 status = evt_handle_AND(script);
                 break;
-            case EVT_OP_AND_CONST:
+            case EVT_OP_BITWISE_AND_CONST:
                 status = evt_handle_AND_const(script);
                 break;
-            case EVT_OP_OR:
+            case EVT_OP_BITWISE_OR:
                 status = evt_handle_OR(script);
                 break;
-            case EVT_OP_OR_CONST:
+            case EVT_OP_BITWISE_OR_CONST:
                 status = evt_handle_OR_const(script);
                 break;
             case EVT_OP_CALL:
                 status = evt_handle_call(script);
                 break;
-            case EVT_OP_SPAWN_SCRIPT:
+            case EVT_OP_EXEC:
                 status = evt_handle_exec1(script);
                 break;
-            case EVT_OP_SPAWN_GET_ID:
+            case EVT_OP_EXEC_GET_TID:
                 status = evt_handle_exec1_get_id(script);
                 break;
-            case EVT_OP_AWAIT_SCRIPT:
+            case EVT_OP_EXEC_WAIT:
                 status = evt_handle_exec_wait(script);
                 break;
             case EVT_OP_BIND_TRIGGER:
@@ -1603,25 +1603,25 @@ s32 evt_execute_next_command(Evt *script) {
             case EVT_OP_RESUME_OTHERS:
                 status = evt_handle_resume_others(script);
                 break;
-            case EVT_OP_SUSPEND_SCRIPT:
+            case EVT_OP_SUSPEND_THREAD:
                 status = evt_handle_suspend(script);
                 break;
-            case EVT_OP_RESUME_SCRIPT:
+            case EVT_OP_RESUME_THREAD:
                 status = evt_handle_resume(script);
                 break;
-            case EVT_OP_DOES_SCRIPT_EXIST:
+            case EVT_OP_IS_THREAD_RUNNING:
                 status = evt_handle_does_script_exist(script);
                 break;
-            case EVT_OP_SPAWN_THREAD:
+            case EVT_OP_THREAD:
                 status = evt_handle_thread(script);
                 break;
-            case EVT_OP_END_SPAWN_THREAD:
+            case EVT_OP_END_THREAD:
                 status = evt_handle_end_thread(script);
                 break;
-            case EVT_OP_PARALLEL_THREAD:
+            case EVT_OP_CHILD_THREAD:
                 status = evt_handle_child_thread(script);
                 break;
-            case EVT_OP_END_PARALLEL_THREAD:
+            case EVT_OP_END_CHILD_THREAD:
                 status = evt_handle_end_child_thread(script);
                 break;
             case EVT_OP_90:
@@ -2006,10 +2006,10 @@ Bytecode* evt_goto_next_case(Evt* script) {
             case EVT_OP_END:
                 PANIC();
                 break;
-            case EVT_OP_MATCH:
+            case EVT_OP_SWITCH:
                 switchDepth++;
                 break;
-            case EVT_OP_END_MATCH:
+            case EVT_OP_END_SWITCH:
                 switchDepth--;
                 if (switchDepth == 0) {
                     return opcode;
@@ -2021,10 +2021,10 @@ Bytecode* evt_goto_next_case(Evt* script) {
             case EVT_OP_CASE_GT:
             case EVT_OP_CASE_LE:
             case EVT_OP_CASE_GE:
-            case EVT_OP_CASE_ELSE:
-            case EVT_OP_CASE_MULTI_OR_EQ:
-            case EVT_OP_CASE_MULTI_AND_EQ:
-            case EVT_OP_END_CASE_MULTI:
+            case EVT_OP_CASE_DEFAULT:
+            case EVT_OP_CASE_OR_EQ:
+            case EVT_OP_CASE_AND_EQ:
+            case EVT_OP_END_CASE_GROUP:
             case EVT_OP_CASE_RANGE:
                 if (switchDepth == 1) {
                     return opcode;

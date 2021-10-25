@@ -51,35 +51,37 @@ ApiStatus N(func_802A1420_722F60)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_THUNDER_BOLT;
-    await N(UseItemWithEffect);
-    spawn {
-        sleep 5;
-        UseBattleCamPreset(2);
-        MoveBattleCamOver(20);
-    }
-    N(FadeBackgroundToBlack)();
-    PlaySound(SOUND_UNKNOWN_365);
-    sleep 10;
-    InitTargetIterator();
-    SetGoalToTarget(ACTOR_SELF);
-    ItemCheckHit(EVT_VAR(0), 0x10000000, 0, EVT_VAR(0), 0);
-    if (EVT_VAR(0) == 6) {
-        goto 1;
-    }
-    N(func_802A123C_722D7C)();
-    sleep 5;
-    StartRumble(10);
-    ShakeCam(1, 0, 5, 1.0);
-    GetItemPower(ITEM_THUNDER_RAGE, EVT_VAR(0), EVT_VAR(1));
-    ItemDamageEnemy(EVT_VAR(0), 0x38000020, 0, EVT_VAR(0), 32);
-1:
-    sleep 5;
-    UseBattleCamPreset(3);
-    MoveBattleCamOver(20);
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    sleep 30;
-    N(func_802A1420_722F60)();
-    await N(PlayerGoHome);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x84)
+    EVT_EXEC_WAIT(battle_item_thunder_bolt_UseItemWithEffect)
+    EVT_THREAD
+        EVT_WAIT_FRAMES(5)
+        EVT_CALL(UseBattleCamPreset, 2)
+        EVT_CALL(MoveBattleCamOver, 20)
+    EVT_END_THREAD
+    EVT_CALL(battle_item_thunder_bolt_FadeBackgroundToBlack)
+    EVT_CALL(PlaySound, 869)
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(InitTargetIterator)
+    EVT_CALL(SetGoalToTarget, -127)
+    EVT_CALL(ItemCheckHit, EVT_VAR(0), 268435456, 0, EVT_VAR(0), 0)
+    EVT_IF_EQ(EVT_VAR(0), 6)
+        EVT_GOTO(1)
+    EVT_END_IF
+    EVT_CALL(battle_item_thunder_bolt_func_802A123C_722D7C)
+    EVT_WAIT_FRAMES(5)
+    EVT_CALL(StartRumble, 10)
+    EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.0))
+    EVT_CALL(GetItemPower, 130, EVT_VAR(0), EVT_VAR(1))
+    EVT_CALL(ItemDamageEnemy, EVT_VAR(0), 939524128, 0, EVT_VAR(0), 32)
+    EVT_LABEL(1)
+    EVT_WAIT_FRAMES(5)
+    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_CALL(SetAnimation, 0, 0, 65538)
+    EVT_WAIT_FRAMES(30)
+    EVT_CALL(battle_item_thunder_bolt_func_802A1420_722F60)
+    EVT_EXEC_WAIT(battle_item_thunder_bolt_PlayerGoHome)
+    EVT_RETURN
+    EVT_END
+};

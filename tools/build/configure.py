@@ -94,26 +94,26 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     )
 
     ninja.rule("cc",
-        description="cc $in",
+        description="gcc $in",
         command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cc} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
-        description="cc $in $cflags",
+        description="dsl $in",
         command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {compile_script} | {iconv} > $out.i && {cc} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_ido",
-        description="cc_ido $in",
+        description="ido $in",
         command=f"{ccache}{cc_ido} -w {CPPFLAGS_COMMON} {cppflags} -c -mips1 -O0 -G0 -non_shared -Xfullwarn -Xcpluscomm -o $out $in",
     )
 
     ninja.rule("cc_kmc",
-        description="cc_kmc $in",
+        description="kmc $in",
         command=f"bash -o pipefail -c 'N64ALIGN=ON VR4300MUL=ON {cc_kmc} {CPPFLAGS_LIBULTRA} {cppflags} {kmc_cflags} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out'",
     )
 
@@ -373,7 +373,7 @@ class Configure:
                     task = "cxx"
                 with entry.src_paths[0].open() as f:
                     s = f.read()
-                    if "SCRIPT(" in s or "#pragma SCRIPT" in s or "#include \"world/common/foliage.inc.c\"" in s:
+                    if " SCRIPT(" in s or "#pragma SCRIPT" in s:
                         task = "cc_dsl"
 
                 if seg.name.endswith("osFlash"):

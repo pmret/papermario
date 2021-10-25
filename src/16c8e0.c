@@ -22,123 +22,157 @@ extern f32 D_8029EFB0;
 extern f32 D_8029EFB4;
 extern f32 D_8029EFB8;
 
-EvtSource BtlPutPartnerAway = SCRIPT({
-    DispatchEvent(ACTOR_PARTNER, 62);
-    parallel {
-        EVT_VAR(0) = 1.0;
-        loop 10 {
-            SetActorScale(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(0), 1.0);
-            EVT_VAR(0) -= 0.1005859375;
-            sleep 1;
-        }
-    }
-    EnablePartnerBlur();
-    PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_E);
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(1) += 25;
-    SetActorJumpGravity(ACTOR_PARTNER, 1.0);
-    SetGoalPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    JumpToGoal(ACTOR_PARTNER, 10, 0, 0, 1);
-    DisablePartnerBlur();
-});
+EvtSource BtlPutPartnerAway = {
+    EVT_CALL(DispatchEvent, 256, 62)
+    EVT_CHILD_THREAD
+        EVT_SETF(EVT_VAR(0), EVT_FIXED(1.0))
+        EVT_LOOP(10)
+            EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
+            EVT_SUBF(EVT_VAR(0), EVT_FIXED(0.1005859375))
+            EVT_WAIT_FRAMES(1)
+        EVT_END_LOOP
+    EVT_END_CHILD_THREAD
+    EVT_CALL(EnablePartnerBlur)
+    EVT_CALL(PlaySoundAtActor, 0, 14)
+    EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(1), 25)
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.0))
+    EVT_CALL(SetGoalPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(JumpToGoal, 256, 10, 0, 0, 1)
+    EVT_CALL(DisablePartnerBlur)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource BtlBringPartnerOut = SCRIPT({
-    parallel {
-        EVT_VAR(0) = 0.1005859375;
-        loop 20 {
-            SetActorScale(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(0), 1.0);
-            EVT_VAR(0) += 0.05078125;
-            sleep 1;
-        }
-        SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
-    }
-    PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_D);
-    GetGoalPos(256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetActorJumpGravity(ACTOR_PARTNER, 1.0);
-    if (EVT_VAR(1) == 0) {
-        JumpToGoal(ACTOR_PARTNER, 20, 0, 0, 1);
-    } else {
-        JumpToGoal(ACTOR_PARTNER, 20, 0, 0, 1);
-    }
-    GetActorPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    ForceHomePos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-});
+EvtSource BtlBringPartnerOut = {
+    EVT_CHILD_THREAD
+        EVT_SETF(EVT_VAR(0), EVT_FIXED(0.1005859375))
+        EVT_LOOP(20)
+            EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
+            EVT_ADDF(EVT_VAR(0), EVT_FIXED(0.05078125))
+            EVT_WAIT_FRAMES(1)
+        EVT_END_LOOP
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+    EVT_END_CHILD_THREAD
+    EVT_CALL(PlaySoundAtActor, 0, 13)
+    EVT_CALL(GetGoalPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.0))
+    EVT_IF_EQ(EVT_VAR(1), 0)
+        EVT_CALL(JumpToGoal, 256, 20, 0, 0, 1)
+    EVT_ELSE
+        EVT_CALL(JumpToGoal, 256, 20, 0, 0, 1)
+    EVT_END_IF
+    EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(ForceHomePos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_RETURN
+    EVT_END
+};
 
 s8 D_80280CE0[] = { 0, 0, 0, 0 };
 s32 D_80280CE4 = -1;
 
-EvtSource CamPreset_B = SCRIPT({
-    func_80248DD0();
-});
+EvtSource CamPreset_B = {
+    EVT_CALL(func_80248DD0)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_F = SCRIPT({
-    func_80248DE4();
-});
+EvtSource CamPreset_F = {
+    EVT_CALL(func_80248DE4)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_M = SCRIPT({
-    func_80249804();
-});
+EvtSource CamPreset_M = {
+    EVT_CALL(func_80249804)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_G = SCRIPT({
-    func_8024A214();
-});
+EvtSource CamPreset_G = {
+    EVT_CALL(func_8024A214)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_I = SCRIPT({
-    func_8024A990();
-});
+EvtSource CamPreset_I = {
+    EVT_CALL(func_8024A990)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_H = SCRIPT({
-    func_8024AFE4();
-});
+EvtSource CamPreset_H = {
+    EVT_CALL(func_8024AFE4)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_N = SCRIPT({
-    func_8024B5FC();
-});
+EvtSource CamPreset_N = {
+    EVT_CALL(func_8024B5FC)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_C = SCRIPT({
-    func_8024B9A0();
-});
+EvtSource CamPreset_C = {
+    EVT_CALL(func_8024B9A0)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_D = SCRIPT({
-    func_8024BDA4();
-});
+EvtSource CamPreset_D = {
+    EVT_CALL(func_8024BDA4)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_E = SCRIPT({
-    func_8024C180();
-});
+EvtSource CamPreset_E = {
+    EVT_CALL(func_8024C180)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_J = SCRIPT({
-    func_8024C570();
-});
+EvtSource CamPreset_J = {
+    EVT_CALL(func_8024C570)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_K = SCRIPT({
-    func_8024C944();
-});
+EvtSource CamPreset_K = {
+    EVT_CALL(func_8024C944)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_L = SCRIPT({
-    func_8024CB68();
-});
+EvtSource CamPreset_L = {
+    EVT_CALL(func_8024CB68)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource CamPreset_A = SCRIPT({
-    func_8024E9B0(0, 15, 0);
-    func_8024E748(2, 550);
-    func_8024E748(3, 100);
-    func_8024E748(4, 8);
-});
+EvtSource CamPreset_A = {
+    EVT_CALL(func_8024E9B0, 0, 15, 0)
+    EVT_CALL(func_8024E748, 2, 550)
+    EVT_CALL(func_8024E748, 3, 100)
+    EVT_CALL(func_8024E748, 4, 8)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource D_80280EB8 = SCRIPT({
-    SetCamPerspective(CAM_BATTLE, 6, 25, 16, 1024);
-    SetCamViewport(CAM_BATTLE, 12, 20, 296, 200);
-    SetCamBGColor(CAM_BATTLE, 0, 0, 0);
-    SetCamEnabled(CAM_BATTLE, TRUE);
-    sleep 1;
-    InitVirtualEntityList();
-    InitAnimatedModels();
-    func_802CABE8(CAM_BATTLE, 0, 240, 100, 8);
-    func_802CAE50(CAM_BATTLE, -75, 35, 0);
-    BattleCamTargetActor(ACTOR_PLAYER);
-    func_8024CE9C();
-});
+EvtSource D_80280EB8 = {
+    EVT_CALL(SetCamPerspective, 1, 6, 25, 16, 1024)
+    EVT_CALL(SetCamViewport, 1, 12, 20, 296, 200)
+    EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
+    EVT_CALL(SetCamEnabled, 1, 1)
+    EVT_WAIT_FRAMES(1)
+    EVT_CALL(InitVirtualEntityList)
+    EVT_CALL(InitAnimatedModels)
+    EVT_CALL(func_802CABE8, 1, 0, 240, 100, 8)
+    EVT_CALL(func_802CAE50, 1, -75, 35, 0)
+    EVT_CALL(BattleCamTargetActor, 0)
+    EVT_CALL(func_8024CE9C)
+    EVT_RETURN
+    EVT_END
+};
 
 void get_dpad_input_radial(f32* angle, f32* magnitude) {
     BattleStatus* battleStatus = &gBattleStatus;

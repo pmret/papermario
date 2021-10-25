@@ -95,9 +95,11 @@ ApiStatus func_802D7BA4(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource D_802D9D50 = SCRIPT({
-    func_802D7BA4();
-});
+EvtSource D_802D9D50 = {
+    EVT_CALL(func_802D7BA4)
+    EVT_RETURN
+    EVT_END
+};
 
 ApiStatus Spawn802D9D50(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
