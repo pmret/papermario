@@ -111,7 +111,7 @@
 ///
 /// Also note that threads are never executed in parallel. If your EVT script lacks blocking commands, it will be
 /// executed all in one go, and race conditions cannot occur.
-/// 
+///
 /// The following subset of EVT commands are blocking:
 /// - EVT_EXEC_WAIT
 /// - EVT_WAIT_FRAMES
@@ -412,13 +412,13 @@
 /// - Entity ID (use EVT_ENTITY_INDEX)
 /// - Pointer to a Vec3f (for TRIGGER_POINT_BOMB only)
 ///
-/// Only one thread will run for a trigger at once. 
+/// Only one thread will run for a trigger at once.
 #define EVT_BIND_TRIGGER(EVT_SOURCE, TRIGGER, COLLIDER_ID, UNK_A3, TRIGGER_PTR_OUTVAR) \
     EVT_CMD(EVT_OP_BIND_TRIGGER, (Bytecode) EVT_SOURCE, TRIGGER, (Bytecode) COLLIDER_ID, UNK_A3, TRIGGER_PTR_OUTVAR),
 
 /// Similar to EVT_BIND_TRIGGER, but also takes arguments for the item list to show.
 #define EVT_BIND_PADLOCK(EVT_SOURCE, TRIGGER, COLLIDER_ID, ITEM_LIST, UNK_A3, TRIGGER_PTR_OUTVAR) \
-    EVT_CMD(EVT_OP_BIND_PADLOCK, (Bytecode) EVT_SOURCE, TRIGGER, (Bytecode) ITEM_LIST, UNK_A3, TRIGGER_PTR_OUTVAR),
+    EVT_CMD(EVT_OP_BIND_PADLOCK, (Bytecode) EVT_SOURCE, TRIGGER, COLLIDER_ID, (Bytecode) ITEM_LIST, UNK_A3, TRIGGER_PTR_OUTVAR),
 
 /// Unbinds the current thread from the trigger it was bound to, if any.
 #define EVT_UNBIND                              EVT_CMD(EVT_OP_UNBIND),
