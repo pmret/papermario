@@ -9,7 +9,6 @@ extern s32 D_802462F0[];
 extern s32 D_80246460_EC9D00[91];
 extern s32 D_802465CC;
 
-//INCLUDE_ASM(s32, "ECAA80", func_80240D80_ECAA80);
 void func_80240D80_ECAA80(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

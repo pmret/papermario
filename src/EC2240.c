@@ -15,8 +15,7 @@ INCLUDE_ASM(s32, "EC2240", func_80240040_EC2240);
 
 //const char* D_80244F98_EC7198 = "touch_choro\n";
 
-INCLUDE_ASM(s32, "EC2240", func_80240158_EC2358);
-/*
+#ifdef DATA_ISSUE
 ApiStatus func_80240158_EC2358(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -71,4 +70,6 @@ ApiStatus func_80240158_EC2358(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "EC2240", func_80240158_EC2358);
+#endif
