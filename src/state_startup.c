@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 void state_init_startup(void) {
     gOverrideFlags |= 0x8;

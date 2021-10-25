@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 #include "message_ids.h"
 
 void func_8024D930(PauseMapSpace* space) {

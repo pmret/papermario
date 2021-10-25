@@ -2,11 +2,11 @@
 
 INCLUDE_ASM(s32, "effects/effect_39", fx_39_main);
 
-void func_E004E15C(void) {
+void fx_39_init(void) {
 }
 
-INCLUDE_ASM(s32, "effects/effect_39", func_E004E164);
+INCLUDE_ASM(s32, "effects/effect_39", fx_39_update);
 
-INCLUDE_ASM(s32, "effects/effect_39", func_E004E1D0);
+INCLUDE_ASM(s32, "effects/effect_39", fx_39_render);
 
-INCLUDE_ASM(s32, "effects/effect_39", func_E004E214);
+INCLUDE_ASM(s32, "effects/effect_39", fx_39_appendGfx);

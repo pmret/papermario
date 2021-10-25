@@ -71,6 +71,15 @@ typedef union {
     u32 as_word;
 } HudFlags;
 
+typedef struct HudTransform {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f position;
+    /* 0x10 */ Vec3f rotation;
+    /* 0x1C */ Vec3f scale;
+    /* 0x28 */ Vec2s pivot;
+    /* 0x30 */ char unk_30[0xC4];
+} HudTransform; // size = 0xF0
+
 typedef struct HudElement {
     /* 0x00 */ HudFlags flags;
     /* 0x04 */ const HudElementAnim* readPos;
@@ -79,7 +88,7 @@ typedef struct HudElement {
     /* 0x10 */ s32* imageAddr;
     /* 0x14 */ s32* paletteAddr;
     /* 0x18 */ s32 memOffset;
-    /* 0x1C */ s32* hudTransform;
+    /* 0x1C */ HudTransform* hudTransform;
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ f32 unkImgScale[2];
@@ -100,6 +109,10 @@ typedef struct HudElement {
     /* 0x4E */ Vec2b customImageSize;
     /* 0x40 */ Vec2b customDrawSize;
 } HudElement; // size = 0x54
+
+extern HudElementAnim* D_8024FA30[1];
+extern HudElementAnim *gBadgeMenuElements[22];
+extern HudElement* gItemIcons[20];
 
 #define he_End HUD_ELEMENT_OP_End
 #define he_SetRGBA(arg0, image) HUD_ELEMENT_OP_SetRGBA, arg0, (s32)image

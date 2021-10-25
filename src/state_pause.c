@@ -2,6 +2,7 @@
 #include "ld_addrs.h"
 #include "map.h"
 #include "nu/nusys.h"
+#include "hud_element.h"
 
 s32 D_80077950[] = { 0x8038F800, 0x803B5000, &D_803DA800 };
 

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "filemenu.h"
+#include "hud_element.h"
 
 extern s32 D_80241ECC;
 extern MenuPanel D_8024A098;

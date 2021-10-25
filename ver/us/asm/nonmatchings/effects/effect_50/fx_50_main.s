@@ -23,15 +23,15 @@ glabel fx_50_main
 /* 364F58 E0064048 24110004 */  addiu     $s1, $zero, 4
 .LE006404C:
 /* 364F5C E006404C 26310001 */  addiu     $s1, $s1, 1
-/* 364F60 E0064050 3C02E006 */  lui       $v0, %hi(func_E006419C)
-/* 364F64 E0064054 2442419C */  addiu     $v0, $v0, %lo(func_E006419C)
+/* 364F60 E0064050 3C02E006 */  lui       $v0, %hi(fx_50_init)
+/* 364F64 E0064054 2442419C */  addiu     $v0, $v0, %lo(fx_50_init)
 /* 364F68 E0064058 AFA00010 */  sw        $zero, 0x10($sp)
 /* 364F6C E006405C AC820008 */  sw        $v0, 8($a0)
-/* 364F70 E0064060 3C02E006 */  lui       $v0, %hi(func_E00641A4)
-/* 364F74 E0064064 244241A4 */  addiu     $v0, $v0, %lo(func_E00641A4)
+/* 364F70 E0064060 3C02E006 */  lui       $v0, %hi(fx_50_update)
+/* 364F74 E0064064 244241A4 */  addiu     $v0, $v0, %lo(fx_50_update)
 /* 364F78 E0064068 AC82000C */  sw        $v0, 0xc($a0)
-/* 364F7C E006406C 3C02E006 */  lui       $v0, %hi(func_E00643DC)
-/* 364F80 E0064070 244243DC */  addiu     $v0, $v0, %lo(func_E00643DC)
+/* 364F7C E006406C 3C02E006 */  lui       $v0, %hi(fx_50_render)
+/* 364F80 E0064070 244243DC */  addiu     $v0, $v0, %lo(fx_50_render)
 /* 364F84 E0064074 AC820010 */  sw        $v0, 0x10($a0)
 /* 364F88 E0064078 24020032 */  addiu     $v0, $zero, 0x32
 /* 364F8C E006407C AC800014 */  sw        $zero, 0x14($a0)

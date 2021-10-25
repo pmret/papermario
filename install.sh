@@ -23,7 +23,7 @@ if [[ "$uname" == "Darwin" ]]; then
     fi
 
     # Install packages
-    brew install md5sha1sum ninja gcc nanaian/brew/mips-linux-gnu-binutils || exit 1
+    brew install md5sha1sum ninja gcc nanaian/brew/mips-linux-gnu-binutils wine || exit 1
     python3 -m pip install -U -r requirements.txt || exit 1
 
     if [[ $1 == "--extra" ]]; then
@@ -42,13 +42,16 @@ curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/l
 echo "Downloading IDO 5.3 for Linux"
 curl -L "https://github.com/ethteck/ido-static-recomp/releases/download/per-function/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3
 
+echo "Downloading KMC GCC wrapper for Linux"
+curl -L "https://github.com/Mr-Wiseguy/kmc-gcc-wrapper/releases/download/master/kmc-gcc-wrapper-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/kmcgcc
+
 # Debian and derivatives (apt)
 if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; then
     echo "Installing packages for Debian or derivative (apt)"
 
     # Add i386 arch for wine32
     # sudo dpkg --add-architecture i386
-    ${SUDO} apt install -y git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev ninja-build || exit 1
+    ${SUDO} apt install -y git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev ninja-build cpp-mips-linux-gnu || exit 1
     python3 -m pip install -U -r requirements.txt
 
     if [[ $1 == "--extra" ]]; then

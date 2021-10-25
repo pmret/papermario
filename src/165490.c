@@ -1,5 +1,6 @@
 #include "common.h"
 #include "filemenu.h"
+#include "hud_element.h"
 
 INCLUDE_ASM(s32, "165490", filemenu_draw_contents_title);
 

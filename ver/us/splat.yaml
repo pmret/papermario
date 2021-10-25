@@ -125,10 +125,10 @@ segments:
     - [0x3BD20, c, os/nusys/nuContQueryRead]
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3BDE0, c, os/osCreatePiManager]
-    - [0x3C160, c, os/osEPiWriteIo] # MOVE_ADDU
-    - [0x3C1C0, c, os/osEPiReadIo] # MOVE_ADDU
-    - [0x3C220, c, os/osEPiStartDma] # MOVE_ADDU
-    - [0x3C2C0, c, os/osEPiLinkHandle]
+    - [0x3C160, c, os/osEPiWriteIo, kmc -O3]
+    - [0x3C1C0, c, os/osEPiReadIo, kmc -O3]
+    - [0x3C220, c, os/osEPiStartDma, kmc -O3]
+    - [0x3C2C0, c, os/osEPiLinkHandle, kmc -O3]
     - [0x3C310, c, os/osCartRomInit]
     - [0x3C490, c, os/3c490_len_3c0]
     - [0x3C850, c, os/3c850_len_f0]
@@ -147,7 +147,7 @@ segments:
     - [0x3D5B0, c, os/guLookAt]
     - [0x3DCC0, c, os/3dcc0_len_a60]
     - [0x3E720, c, os/3e720_len_5f0]
-    - [0x3ED10, c, os/guOrtho]
+    - [0x3ED10, c, os/guOrtho, kmc -O3]
     - [0x3EF90, c, os/3ef90_len_600]
     - [0x3F310, c, os/3f310_len_3c0]
     - [0x3F6D0, c, os/3f6d0_len_320]
@@ -204,7 +204,7 @@ segments:
     - [0x42D60, c, os/42d60_len_80]
     - [0x42DE0, c, os/42de0_len_90]
     - [0x42E70, c, os/42e70_len_390]
-    - [0x42F20, c, os/guRotate]
+    - [0x42F20, c, os/guRotate, kmc -O3]
     - [0x43200, c, os/43200_len_7c0]
     - [0x43590, c, os/43590]
     - [0x439C0, c, os/439c0_len_220]
@@ -221,8 +221,8 @@ segments:
     - [0x45A30, c, os/45a30_len_20]
     - [0x45A50, c, os/45a50_len_3a0]
     - [0x45DF0, hasm, os/exceptasm]
-    - [0x46760, hasm, os/osDisableInt]
-    - [0x467D0, hasm, os/osRestoreInt]
+    - [0x46760, hasm, os/__osDisableInt]
+    - [0x467D0, hasm, os/__osRestoreInt]
     - [0x467F0, c, os/467f0_len_90]
     - [0x46880, c, os/46880_len_260]
     - [0x46AE0, c, os/46ae0_len_170]
@@ -2224,7 +2224,7 @@ segments:
     vram: 0xE000E000
     subsegments:
     - [0x32C110, c, effect_7]
-    - [0x32c770]
+    - [0x32C770]
   - name: effect_8
     dir: effects
     type: code
@@ -2803,7 +2803,7 @@ segments:
     vram: 0xE0092000
     subsegments:
     - [0x391D30, c, effect_73]
-    - [0x3923C0, data]
+    - [0x3923C0]
   - [0x392440, bin] # effect 73 gfx
   - name: effect_74
     dir: effects
@@ -2821,7 +2821,7 @@ segments:
     vram: 0xE0096000
     subsegments:
     - [0x394280, c, effect_75]
-    - [0x394660, data]
+    - [0x394660]
   - [0x394670, bin] # effect 75 gfx
   - name: effect_76
     dir: effects
@@ -10866,6 +10866,18 @@ segments:
     - [0xE31380, data]
     - [0xE314C0]
   - [0xE31530, bin] # unk data
+  - [0xE32420, bin] # unk data
+  - [0xE35670, bin] # unk data
+  - [0xE38890, bin] # unk data
+  - [0xE3B870, bin] # unk data
+  - [0xE3E260, bin] # unk data
+  - [0xE42240, bin] # unk data
+  - [0xE4B2E0, bin] # unk data
+  - [0xE4E7F0, bin] # unk data
+  - [0xE62370, bin] # unk data
+  - [0xE62AC0, bin] # unk data
+  - [0xE639C0, bin] # unk data
+  - [0xE648D0, bin] # unk data
   - type: code
     start: 0xEA0900
     vram: 0x80240000
