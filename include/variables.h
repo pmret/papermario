@@ -398,9 +398,7 @@ extern s32 bMarioIdleAnims[];
 extern s32 bMarioDefendAnims[];
 extern s32 bPeachIdleAnims[];
 
-
 // Temporary dead stuff
 extern PartnerActionStatus dead_gPartnerActionStatus2;
-
 
 #endif

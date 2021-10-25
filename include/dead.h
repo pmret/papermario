@@ -3,7 +3,9 @@
 #ifndef _DEAD_H_
 #define _DEAD_H_
 
-// There can be multiple dead references to a symbol, which results in ordering of these dupes being relevant
+// There can be multiple invalid references to a symbol from the dead code,
+// so some symbols here have a "2" suffix.
+
 #define gCameras dead_gCameras
 #define evt_get_variable dead_evt_get_variable
 #define evt_set_variable dead_evt_set_variable
@@ -46,7 +48,6 @@
 #define gCurrentCameraID dead_gCurrentCameraID
 #define add_vec2D_polar dead_add_vec2D_polar
 #define gCurrentCamID dead_gCurrentCamID
-#define gPartnerActionStatus dead_gPartnerActionStatus2 // has to be above the other one
 #define gPartnerActionStatus dead_gPartnerActionStatus
 #define get_npc_safe dead_get_npc_safe
 #define sfx_adjust_env_sound_pos dead_sfx_adjust_env_sound_pos
