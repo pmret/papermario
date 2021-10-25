@@ -559,6 +559,15 @@ s32 btl_is_popup_displayed(void);
 void func_8024E3D8(s32);
 s32 inflict_status(Actor*, s32, s32);
 s32 try_inflict_status(Actor*, s32, s32);
+void mdl_set_all_fog_mode(s32);
+
+void update_effects(void);
+void update_cameras(void);
+void clear_render_tasks(void);
+void clear_generic_entity_list(void);
+void clear_printers(void);
+void clear_item_entity_data(void);
+void clear_player_data(void);
 
 void enforce_hpfp_limits(void);
 
