@@ -878,8 +878,8 @@ typedef struct ModelAnimator {
     /* 0x000 */ u32 flags;
     /* 0x004 */ s8 renderMode;
     /* 0x005 */ char unk_05[3];
-    /* 0x008 */ u32* animReadPos;
-    /* 0x00C */ u32* savedReadPos;
+    /* 0x008 */ s8* animReadPos;
+    /* 0x00C */ s8* savedReadPos;
     /* 0x010 */ AnimatorNode* rootNode;
     /* 0x014 */ u8 nextUniqueID;
     /* 0x015 */ u8 staticNodeIDs[0x7A]; // ?
