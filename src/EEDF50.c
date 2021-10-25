@@ -35,10 +35,10 @@ void func_80241AA4_EEEBA4(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 
 INCLUDE_ASM(s32, "EEDF50", func_8024215C_EEF25C);
 
-INCLUDE_ASM(s32, "EEDF50", func_80242374_EEF474);
+#include "world/common/UnkNpcAIFunc13.inc.c"
 
-INCLUDE_ASM(s32, "EEDF50", func_802424A4_EEF5A4);
+#include "world/common/UnkNpcAIFunc34.inc.c"
 
-INCLUDE_ASM(s32, "EEDF50", func_80242724_EEF824);
+#include "world/common/UnkFunc45.inc.c"
 
 INCLUDE_ASM(s32, "EEDF50", func_80242780_EEF880);

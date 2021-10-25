@@ -412,4 +412,7 @@ extern StaticEntityData D_802E9D1C;
 extern StaticEntityData D_802E9D40;
 extern StaticEntityData D_802E9D64;
 
+// Temporary dead stuff
+extern PartnerActionStatus dead_gPartnerActionStatus2;
+
 #endif

@@ -530,6 +530,7 @@ enum SoundIDs {
     SOUND_UNKNOWN_167               = 359,
     SOUND_UNKNOWN_172               = 370,
     SOUND_UNKNOWN_17B               = 379,
+    SOUND_UNKNOWN_194               = 404,
     SOUND_BASIC_DOOR_OPEN           = 449,
     SOUND_BASIC_DOOR_CLOSE,
     SOUND_METAL_DOOR_OPEN,

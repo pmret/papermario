@@ -7,6 +7,6 @@
 
 #include "world/common/DeadUnkTexturePanFunc2.inc.c"
 
-INCLUDE_ASM(s32, "EC71B0", func_8024030C_EC74BC);
+#include "world/common/SpawnSunEffect.inc.c"
 
 INCLUDE_ASM(s32, "EC71B0", func_80240344_EC74F4);

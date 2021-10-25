@@ -6,8 +6,8 @@ glabel func_802402AC_EED3AC
 /* EED3B0 802402B0 AFB5002C */  sw        $s5, 0x2c($sp)
 /* EED3B4 802402B4 0080A82D */  daddu     $s5, $a0, $zero
 /* EED3B8 802402B8 AFBE0038 */  sw        $fp, 0x38($sp)
-/* EED3BC 802402BC 3C1E8011 */  lui       $fp, %hi(D_80117840)
-/* EED3C0 802402C0 27DE7840 */  addiu     $fp, $fp, %lo(D_80117840)
+/* EED3BC 802402BC 3C1E8011 */  lui       $fp, %hi(dead_gPlayerData)
+/* EED3C0 802402C0 27DE7840 */  addiu     $fp, $fp, %lo(dead_gPlayerData)
 /* EED3C4 802402C4 AFBF003C */  sw        $ra, 0x3c($sp)
 /* EED3C8 802402C8 AFB70034 */  sw        $s7, 0x34($sp)
 /* EED3CC 802402CC AFB60030 */  sw        $s6, 0x30($sp)
@@ -49,7 +49,7 @@ glabel func_802402AC_EED3AC
 /* EED458 80240358 AE300108 */  sw        $s0, 0x108($s1)
 /* EED45C 8024035C 8C420000 */  lw        $v0, ($v0)
 /* EED460 80240360 02E0282D */  daddu     $a1, $s7, $zero
-/* EED464 80240364 0C09006D */  jal       func_802401B4_EED2B4
+/* EED464 80240364 0C09006D */  jal       EED1E0_UnkFunc37
 /* EED468 80240368 AE220084 */   sw       $v0, 0x84($s1)
 /* EED46C 8024036C 0040202D */  daddu     $a0, $v0, $zero
 /* EED470 80240370 04800011 */  bltz      $a0, .L802403B8

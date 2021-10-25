@@ -4,7 +4,6 @@
 #define NAMESPACE EB1170
 
 extern s32 func_80059AC8(s32, s32);
-extern s16 D_80169B12;
 extern s32 D_802417E4_EB2644;
 extern s32 D_802417E8_EB2648;
 extern s32 D_802442D0[];
@@ -17,7 +16,7 @@ INCLUDE_ASM(s32, "EB1170", func_80240310_EB1170);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "EB1170", func_80240484_EB12E4);
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 // LW %LO issue.
 #ifdef NON_MATCHING
@@ -91,6 +90,6 @@ ApiStatus func_80240A68_EB18C8(Evt* script, s32 isInitialCall) {
 ApiStatus func_80240A8C_EB18EC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    evt_set_variable(script, *args++, D_80169B12);
+    evt_set_variable(script, *args++, dead_gCollisionStatus.pushingAgainstWall);
     return ApiStatus_DONE2;
 }

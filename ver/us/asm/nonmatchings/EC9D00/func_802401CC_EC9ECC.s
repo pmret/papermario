@@ -6,8 +6,8 @@ glabel func_802401CC_EC9ECC
 /* EC9ED0 802401D0 AFB5002C */  sw        $s5, 0x2c($sp)
 /* EC9ED4 802401D4 0080A82D */  daddu     $s5, $a0, $zero
 /* EC9ED8 802401D8 AFBE0038 */  sw        $fp, 0x38($sp)
-/* EC9EDC 802401DC 3C1E8011 */  lui       $fp, %hi(D_80117840)
-/* EC9EE0 802401E0 27DE7840 */  addiu     $fp, $fp, %lo(D_80117840)
+/* EC9EDC 802401DC 3C1E8011 */  lui       $fp, %hi(dead_gPlayerData)
+/* EC9EE0 802401E0 27DE7840 */  addiu     $fp, $fp, %lo(dead_gPlayerData)
 /* EC9EE4 802401E4 AFBF003C */  sw        $ra, 0x3c($sp)
 /* EC9EE8 802401E8 AFB70034 */  sw        $s7, 0x34($sp)
 /* EC9EEC 802401EC AFB60030 */  sw        $s6, 0x30($sp)
@@ -49,7 +49,7 @@ glabel func_802401CC_EC9ECC
 /* EC9F78 80240278 AE300108 */  sw        $s0, 0x108($s1)
 /* EC9F7C 8024027C 8C420000 */  lw        $v0, ($v0)
 /* EC9F80 80240280 02E0282D */  daddu     $a1, $s7, $zero
-/* EC9F84 80240284 0C090035 */  jal       func_802400D4_EC9DD4
+/* EC9F84 80240284 0C090035 */  jal       EC9D00_UnkFunc37
 /* EC9F88 80240288 AE220084 */   sw       $v0, 0x84($s1)
 /* EC9F8C 8024028C 0040202D */  daddu     $a0, $v0, $zero
 /* EC9F90 80240290 04800011 */  bltz      $a0, .L802402D8
