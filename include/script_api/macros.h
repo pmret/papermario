@@ -500,7 +500,7 @@
         EVT_SET_GROUP(0x1B) \
         EVT_CALL(UseExitHeading, walkDistance, exitIdx) \
         EVT_EXEC(ExitWalk) \
-        EVT_CALL(GotoMap, map, entryIdx) \
+        EVT_CALL(GotoMap, EVT_PTR(map), entryIdx) \
         EVT_WAIT_FRAMES(100) \
         EVT_RETURN \
         EVT_END \

@@ -364,7 +364,7 @@ EvtSource N(exitWalk_80244960) = {
     EVT_SET(EVT_SAVE_FLAG(761), 0)
     EVT_CALL(UseExitHeading, 60, 0)
     EVT_EXEC(ExitWalk)
-    EVT_CALL(GotoMap, "sbk_36", 1)
+    EVT_CALL(GotoMap, EVT_PTR("sbk_36"), 1)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -396,9 +396,9 @@ EvtSource N(80244A70) = {
         EVT_WAIT_FRAMES(60)
         EVT_CALL(GetEntryID, EVT_VAR(0))
         EVT_IF_EQ(EVT_VAR(0), 3)
-            EVT_CALL(GotoMap, "dro_02", 2)
+            EVT_CALL(GotoMap, EVT_PTR("dro_02"), 2)
         EVT_ELSE
-            EVT_CALL(GotoMap, "dro_02", 3)
+            EVT_CALL(GotoMap, EVT_PTR("dro_02"), 3)
         EVT_END_IF
         EVT_WAIT_FRAMES(100)
     EVT_END_THREAD
@@ -2372,8 +2372,6 @@ EvtSource N(8024B664) = {
     EVT_END
 };
 
-// Extraneous END_IF
-#ifdef NON_MATCHING
 EvtSource N(8024B6B4) = {
     EVT_CALL(N(func_80243578_95E778))
     EVT_CALL(func_802D2C14, 1)
@@ -2389,31 +2387,10 @@ EvtSource N(8024B6B4) = {
     EVT_SET(EVT_SAVE_VAR(0), -64)
     EVT_CALL(func_802D2C14, 0)
     EVT_EXEC_WAIT(N(8024B664))
-EVT_END_IF
-EVT_RETURN
-EVT_END
+    EVT_END_IF // @bug
+    EVT_RETURN
+    EVT_END
 };
-#else
-EvtSource N(8024B6B4) = {
-    EVT_CMD(EVT_OP_CALL, N(func_80243578_95E778)),
-    EVT_CMD(EVT_OP_CALL, func_802D2C14, 1),
-    EVT_CMD(EVT_OP_EXEC_WAIT, N(8024B614)),
-    EVT_CMD(EVT_OP_IF_LT, EVT_STORY_PROGRESS, -64),
-        EVT_CMD(EVT_OP_CALL, SpeakToPlayer, 6, 9699589, 9699585, 0, 852103),
-        EVT_CMD(EVT_OP_CALL, SetPlayerAnimation, 65538),
-        EVT_CMD(EVT_OP_WAIT_FRAMES, 10),
-        EVT_CMD(EVT_OP_CALL, SetPlayerAnimation, 524295),
-        EVT_CMD(EVT_OP_WAIT_FRAMES, 30),
-    EVT_CMD(EVT_OP_END_IF),
-    EVT_CMD(EVT_OP_CALL, SpeakToPlayer, 6, 9699589, 9699585, 0, 852104),
-    EVT_CMD(EVT_OP_SET, EVT_STORY_PROGRESS, -64),
-    EVT_CMD(EVT_OP_CALL, func_802D2C14, 0),
-    EVT_CMD(EVT_OP_EXEC_WAIT, N(8024B664)),
-EVT_CMD(EVT_OP_END_IF),
-EVT_CMD(EVT_OP_RETURN),
-EVT_CMD(EVT_OP_END)
-};
-#endif
 
 EvtSource N(8024B7B0) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(758), 0)
