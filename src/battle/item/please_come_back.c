@@ -4,16 +4,18 @@
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_DIZZY_DIAL;
-    await N(UseItemWithEffect);
-    SetGoalToHome(ACTOR_PLAYER);
-    SetJumpAnimations(ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009);
-    SetActorSpeed(ACTOR_PLAYER, 4.0);
-    SetActorJumpGravity(ACTOR_PLAYER, 1.80078125);
-    func_80273444(4, 0, 0);
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_8000B);
-    sleep 8;
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x0000009A)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
+    EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009)
+    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FIXED(4.0))
+    EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FIXED(1.8))
+    EVT_CALL(func_80273444, 4, 0, 0)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_8000B)
+    EVT_WAIT_FRAMES(8)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_RETURN
+    EVT_END
+};
 

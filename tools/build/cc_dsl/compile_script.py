@@ -232,7 +232,7 @@ class IfCtx(CmdCtx):
 
 class MatchCtx(CmdCtx):
     def break_opcode(self, meta):
-        return "EVT_OP_BREAK_MATCH"
+        return "EVT_OP_BREAK_SWITCH"
 
 class LoopCtx(CmdCtx):
     def break_opcode(self, meta):
@@ -397,9 +397,9 @@ class Compile(Transformer):
                 raise Exception(f"uncompiled match case: {cmd}")
 
         return [
-            Cmd("EVT_OP_MATCH", expr, meta=tree.meta),
+            Cmd("EVT_OP_SWITCH", expr, meta=tree.meta),
             *cases,
-            Cmd("EVT_OP_END_MATCH"),
+            Cmd("EVT_OP_END_SWITCH"),
         ]
     def match_const_stmt(self, tree):
         commands = self.match_stmt(tree)
@@ -412,7 +412,7 @@ class Compile(Transformer):
             return [tree.children[0], *tree.children[1]]
 
     def case_else(self, tree):
-        return [Cmd("EVT_OP_CASE_ELSE"), *tree.children[0]]
+        return [Cmd("EVT_OP_CASE_DEFAULT"), *tree.children[0]]
     def case_op(self, tree):
         if len(tree.children) == 4:
             op, expr, multi_case, block = tree.children
@@ -420,7 +420,7 @@ class Compile(Transformer):
             if not "case" in op:
                 raise CompileError(f"operation `{opcodes['__op__']}' not supported in match cases", tree.meta)
 
-            return [Cmd(op["case"], expr), *multi_case, *block, Cmd("EVT_OP_END_CASE_MULTI")]
+            return [Cmd(op["case"], expr), *multi_case, *block, Cmd("EVT_OP_END_CASE_GROUP")]
         else:
             op, expr, block = tree.children
 
@@ -431,16 +431,16 @@ class Compile(Transformer):
     def case_range(self, tree):
         if len(tree.children) == 4:
             a, b, multi_case, block = tree.children
-            return [Cmd("EVT_OP_CASE_RANGE", a, b), *multi_case, *block, Cmd("EVT_OP_END_CASE_MULTI")]
+            return [Cmd("EVT_OP_CASE_RANGE", a, b), *multi_case, *block, Cmd("EVT_OP_END_CASE_GROUP")]
         else:
             a, b, block = tree.children
             return [Cmd("EVT_OP_CASE_RANGE", a, b), *block]
     def case_multi(self, tree):
         multi_case, block = tree.children
-        return [*multi_case, *block, Cmd("EVT_OP_END_CASE_MULTI")]
+        return [*multi_case, *block, Cmd("EVT_OP_END_CASE_GROUP")]
 
     def multi_case(self, tree):
-        return [Cmd("EVT_OP_CASE_MULTI_OR_EQ", expr) for expr in tree.children]
+        return [Cmd("EVT_OP_CASE_OR_EQ", expr) for expr in tree.children]
 
     def loop_stmt(self, tree):
         expr = tree.children.pop(0) if len(tree.children) > 1 else 0
@@ -459,7 +459,7 @@ class Compile(Transformer):
         return BreakCmd(meta=tree.meta)
 
     def break_match_stmt(self, tree):
-        return Cmd("EVT_OP_BREAK_MATCH", meta=tree.meta)
+        return Cmd("EVT_OP_BREAK_SWITCH", meta=tree.meta)
 
     def break_loop_stmt(self, tree):
         return Cmd("EVT_OP_BREAK_LOOP", meta=tree.meta)
@@ -509,15 +509,15 @@ class Compile(Transformer):
     def control_type_script(self, tree):
         return {
             "__control_type__": "script",
-            "suspend": "EVT_OP_SUSPEND_SCRIPT",
-            "resume": "EVT_OP_RESUME_SCRIPT",
-            "kill": "EVT_OP_KILL_SCRIPT",
+            "suspend": "EVT_OP_SUSPEND_THREAD",
+            "resume": "EVT_OP_RESUME_THREAD",
+            "kill": "EVT_OP_KILL_THREAD",
         }
 
     def sleep_stmt(self, tree):
-        return Cmd("EVT_OP_SLEEP_FRAMES", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_WAIT_FRAMES", tree.children[0], meta=tree.meta)
     def sleep_secs_stmt(self, tree):
-        return Cmd("EVT_OP_SLEEP_SECS", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_WAIT_SECS", tree.children[0], meta=tree.meta)
 
     def bind_stmt(self, tree):
         script, trigger, target = tree.children
@@ -532,12 +532,12 @@ class Compile(Transformer):
         return Cmd("EVT_OP_UNBIND", meta=tree.meta)
 
     def spawn_stmt(self, tree):
-        return Cmd("EVT_OP_SPAWN_SCRIPT", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_EXEC", tree.children[0], meta=tree.meta)
     def spawn_set_stmt(self, tree):
         lhs, script = tree.children
-        return Cmd("EVT_OP_SPAWN_GET_ID", script, lhs, meta=tree.meta)
+        return Cmd("EVT_OP_EXEC_GET_TID", script, lhs, meta=tree.meta)
     def await_stmt(self, tree):
-        return Cmd("EVT_OP_AWAIT_SCRIPT", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_EXEC_WAIT", tree.children[0], meta=tree.meta)
     def jump_stmt(self, tree):
         return Cmd("EVT_OP_JUMP", tree.children[0], meta=tree.meta)
 
@@ -575,31 +575,31 @@ class Compile(Transformer):
             "__op__": "=",
             "int": "EVT_OP_SET",
             "const": "EVT_OP_SET_CONST",
-            "float": "EVT_OP_SET_F",
+            "float": "EVT_OP_SETF",
         }
     def set_op_add(self, tree):
         return {
             "__op__": "+",
             "int": "EVT_OP_ADD",
-            "float": "EVT_OP_ADD_F",
+            "float": "EVT_OP_ADDF",
         }
     def set_op_sub(self, tree):
         return {
             "__op__": "-",
             "int": "EVT_OP_SUB",
-            "float": "EVT_OP_SUB_F",
+            "float": "EVT_OP_SUBF",
         }
     def set_op_mul(self, tree):
         return {
             "__op__": "*",
             "int": "EVT_OP_MUL",
-            "float": "EVT_OP_MUL_F",
+            "float": "EVT_OP_MULF",
         }
     def set_op_div(self, tree):
         return {
             "__op__": "/",
             "int": "EVT_OP_DIV",
-            "float": "EVT_OP_DIV_F",
+            "float": "EVT_OP_DIVF",
         }
     def set_op_mod(self, tree):
         return {
@@ -609,14 +609,14 @@ class Compile(Transformer):
     def set_op_and(self, tree):
         return {
             "__op__": "&",
-            "int": "EVT_OP_AND",
-            "const": "EVT_OP_AND_CONST",
+            "int": "EVT_OP_BITWISE_AND",
+            "const": "EVT_OP_BITWISE_AND_CONST",
         }
     def set_op_or(self, tree):
         return {
             "__op__": "|",
-            "int": "EVT_OP_OR",
-            "const": "EVT_OP_OR_CONST",
+            "int": "EVT_OP_BITWISE_OR",
+            "const": "EVT_OP_BITWISE_OR_CONST",
         }
 
     def variable(self, tree):
@@ -664,61 +664,61 @@ class Compile(Transformer):
         for cmd in block:
             if isinstance(cmd, BaseCmd):
                 cmd.add_context(SpawnCtx())
-        return [ Cmd("EVT_OP_SPAWN_THREAD", meta=tree.meta), *block, Cmd("EVT_OP_END_SPAWN_THREAD") ]
+        return [ Cmd("EVT_OP_THREAD", meta=tree.meta), *block, Cmd("EVT_OP_END_THREAD") ]
     def parallel_block_stmt(self, tree):
         block, = tree.children
         for cmd in block:
             if isinstance(cmd, BaseCmd):
                 cmd.add_context(ParallelCtx())
-        return [ Cmd("EVT_OP_PARALLEL_THREAD", meta=tree.meta), *block, Cmd("EVT_OP_END_PARALLEL_THREAD") ]
+        return [ Cmd("EVT_OP_CHILD_THREAD", meta=tree.meta), *block, Cmd("EVT_OP_END_CHILD_THREAD") ]
 
     def entity_id(self, tree):
         expr, = tree.children
         return f"({expr} + 0x4000)"
 
     def buf_use(self, tree):
-        return Cmd("EVT_OP_USE_BUFFER", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_USE_BUF", tree.children[0], meta=tree.meta)
     def buf_read(self, tree):
         args = tree.children
         cmds = []
 
         while args:
             if len(args) >= 4:
-                cmds.append(Cmd("EVT_OP_BUFFER_READ_4", args.pop(0), args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_BUF_READ4", args.pop(0), args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
             elif len(args) == 3:
-                cmds.append(Cmd("EVT_OP_BUFFER_READ_3", args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_BUF_READ3", args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
             elif len(args) == 2:
-                cmds.append(Cmd("EVT_OP_BUFFER_READ_2", args.pop(0), args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_BUF_READ2", args.pop(0), args.pop(0), meta=tree.meta))
             elif len(args) == 1:
-                cmds.append(Cmd("EVT_OP_BUFFER_READ_1", args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_BUF_READ1", args.pop(0), meta=tree.meta))
             else:
                 break
 
         return cmds
     def buf_peek(self, tree):
-        return Cmd("EVT_OP_BUFFER_PEEK", tree.children[0], tree.children[1], meta=tree.meta)
+        return Cmd("EVT_OP_BUF_PEEK", tree.children[0], tree.children[1], meta=tree.meta)
 
     def buf_usef(self, tree):
-        return Cmd("EVT_OP_USE_BUFFER_F", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_USE_FBUF", tree.children[0], meta=tree.meta)
     def buf_readf(self, tree):
         args = tree.children
         cmds = []
 
         while args:
             if len(args) >= 4:
-                cmds.append(Cmd("EVT_OP_BUFFER_READ_4_F", args.pop(0), args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_FBUF_READ4", args.pop(0), args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
             elif len(args) == 3:
-                cmds.append(Cmd("EVT_OP_BUFFER_READ_3_F", args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_FBUF_READ3", args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
             elif len(args) == 2:
-                cmds.append(Cmd("EVT_OP_BUFFER_READ_2_F", args.pop(0), args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_FBUF_READ2", args.pop(0), args.pop(0), meta=tree.meta))
             elif len(args) == 1:
-                cmds.append(Cmd("EVT_OP_BUFFER_READ_1_F", args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_FBUF_READ1", args.pop(0), meta=tree.meta))
             else:
                 break
 
         return cmds
     def buf_peekf(self, tree):
-        return Cmd("EVT_OP_BUFFER_PEEK_F", tree.children[0], tree.children[1], meta=tree.meta)
+        return Cmd("EVT_OP_FBUF_PEEK", tree.children[0], tree.children[1], meta=tree.meta)
 
     def use_array(self, tree):
         return Cmd("EVT_OP_USE_ARRAY", tree.children[0], meta=tree.meta)
@@ -728,7 +728,7 @@ class Compile(Transformer):
         return Cmd("EVT_OP_NEW_ARRAY", tree.children[0], tree.children[1], meta=tree.meta)
 
     def does_script_exist(self, tree):
-        return Cmd("EVT_OP_DOES_SCRIPT_EXIST", tree.children[1], tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_IS_THREAD_RUNNING", tree.children[1], tree.children[0], meta=tree.meta)
 
 def compile_script(s):
     tree = script_parser.parse(s)

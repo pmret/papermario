@@ -188,365 +188,368 @@ EvtSource N(takeTurn_8021D74C);
 EvtSource N(idle_8021CE24);
 EvtSource N(handleEvent_8021D158);
 
-EvtSource N(init_8021CDD8) = SCRIPT({
-    BindTakeTurn(ACTOR_SELF, N(takeTurn_8021D74C));
-    BindIdle(ACTOR_SELF, N(idle_8021CE24));
-    BindHandleEvent(ACTOR_SELF, N(handleEvent_8021D158));
-});
+EvtSource N(init_8021CDD8) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021D74C)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021CE24)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021D158)))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(idle_8021CE24) = SCRIPT({
-10:
-    RandInt(80, EVT_VAR(0));
-    EVT_VAR(0) += 80;
-    loop EVT_VAR(0) {
-    0:
-        GetStatusFlags(ACTOR_SELF, EVT_VAR(1));
-        if (EVT_VAR(1) & 3526656) {
-            sleep 1;
-            goto 0;
-        }
-        sleep 1;
-    }
-    GetActorPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(0) += 5;
-    SetActorIdleSpeed(ACTOR_SELF, 0.6);
-    SetIdleAnimations(ACTOR_SELF, 2, N(idleAnimations_8021CD74));
-    SetIdleGoal(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    IdleFlyToGoal(ACTOR_SELF, 0, -5, 0);
-    loop 20 {
-    1:
-        GetStatusFlags(ACTOR_SELF, EVT_VAR(1));
-        if (EVT_VAR(1) & 3526656) {
-            sleep 1;
-            goto 1;
-        }
-        sleep 1;
-    }
-    GetActorPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(0) -= 5;
-    SetActorIdleSpeed(ACTOR_SELF, 0.6);
-    SetIdleGoal(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    IdleFlyToGoal(ACTOR_SELF, 0, -5, 0);
-    SetIdleAnimations(ACTOR_SELF, 2, N(idleAnimations_8021CD28));
-    loop 40 {
-    2:
-        GetStatusFlags(ACTOR_SELF, EVT_VAR(1));
-        if (EVT_VAR(1) & 3526656) {
-            sleep 1;
-            goto 2;
-        }
-        sleep 1;
-    }
-    goto 10;
-});
+EvtSource N(idle_8021CE24) = {
+    EVT_LABEL(10)
+    EVT_CALL(RandInt, 80, EVT_VAR(0))
+    EVT_ADD(EVT_VAR(0), 80)
+    EVT_LOOP(EVT_VAR(0))
+        EVT_LABEL(0)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, EVT_VAR(1))
+        EVT_IF_FLAG(EVT_VAR(1), 0x35D000)
+            EVT_WAIT_FRAMES(1)
+            EVT_GOTO(0)
+        EVT_END_IF
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(0), 5)
+    EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FIXED(0.6))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021CD74)))
+    EVT_CALL(SetIdleGoal, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, -5, 0)
+    EVT_LOOP(20)
+        EVT_LABEL(1)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, EVT_VAR(1))
+        EVT_IF_FLAG(EVT_VAR(1), 0x35D000)
+            EVT_WAIT_FRAMES(1)
+            EVT_GOTO(1)
+        EVT_END_IF
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_SUB(EVT_VAR(0), 5)
+    EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FIXED(0.6))
+    EVT_CALL(SetIdleGoal, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, -5, 0)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021CD28)))
+    EVT_LOOP(40)
+        EVT_LABEL(2)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, EVT_VAR(1))
+        EVT_IF_FLAG(EVT_VAR(1), 0x35D000)
+            EVT_WAIT_FRAMES(1)
+            EVT_GOTO(2)
+        EVT_END_IF
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_GOTO(10)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(8021D0E0) = SCRIPT({
-    ResetAllActorSounds(ACTOR_SELF);
-    SetGoalToHome(ACTOR_SELF);
-    SetActorSpeed(ACTOR_SELF, 7.0);
-    FlyToGoal(ACTOR_SELF, 0, 1, 11);
-    SetAnimation(ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_idle);
-});
+EvtSource N(8021D0E0) = {
+    EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
+    EVT_CALL(SetGoalToHome, ACTOR_SELF)
+    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FIXED(7.0))
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, 11)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_idle)
+    EVT_RETURN
+    EVT_END
+};
 
 EvtSource N(8021DF64);
 
-EvtSource N(handleEvent_8021D158) = SCRIPT({
-    UseIdleAnimation(ACTOR_SELF, FALSE);
-    EnableIdleScript(ACTOR_SELF, 0);
-    GetLastEvent(ACTOR_SELF, EVT_VAR(0));
-    match EVT_VAR(0) {
-        EVENT_HIT_COMBO, EVENT_HIT {
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_pain;
-            await DoNormalHit;
-            GetBattlePhase(EVT_VAR(0));
-            if (EVT_VAR(0) == 1) {
-                GetEncounterState(EVT_VAR(0));
-                if (EVT_VAR(0) == 4) {
-                    await N(8021DF64);
-                }
-            }
-        }
-        == EVENT_BURN_HIT {
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_burn_pain;
-            EVT_VAR(2) = (const) NPC_ANIM_paragoomba_default_burn_dead;
-            await DoBurnHit;
-        }
-        == EVENT_BURN_DEATH {
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_burn_pain;
-            EVT_VAR(2) = (const) NPC_ANIM_paragoomba_default_burn_dead;
-            await DoBurnHit;
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_burn_dead;
-            await DoDeath;
-            return;
-        }
-        == EVENT_FALL_TRIGGER {
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_pain;
-            await DoNormalHit;
-            await N(8021DF64);
-        }
-        == 15 {
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_burn_pain;
-            EVT_VAR(2) = (const) NPC_ANIM_paragoomba_default_burn_dead;
-            await DoBurnHit;
-            await N(8021DF64);
-        }
-        == EVENT_SHOCK_HIT {
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_electrocute;
-            await DoShockHit;
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_pain;
-            await DoJumpBack;
-            SetAnimation(ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_dizzy);
-            await N(8021D0E0);
-        }
-        == EVENT_SHOCK_DEATH {
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_electrocute;
-            await DoShockHit;
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_dead;
-            await DoDeath;
-            return;
-        }
-        == EVENT_STAR_BEAM, 23, EVENT_IMMUNE, EVENT_AIR_LIFT_FAILED {
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_idle;
-            await DoImmune;
-        }
-        == EVENT_DEATH {
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_pain;
-            await DoNormalHit;
-            sleep 10;
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_dead;
-            await DoDeath;
-            return;
-        }
-        == EVENT_BEGIN_FIRST_STRIKE {
-            SetActorPos(ACTOR_SELF, 20, 0, 0);
-            HPBarToCurrent(ACTOR_SELF);
-        }
-        == EVENT_END_FIRST_STRIKE {
-            SetAnimation(ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_run);
-            await N(8021D0E0);
-            HPBarToHome(ACTOR_SELF);
-        }
-        == EVENT_RECOVER_STATUS {
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_idle;
-            await DoRecover;
-        }
-        == EVENT_SCARE_AWAY {
-            SetActorFlagBits(ACTOR_SELF, 512, 0);
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_run;
-            EVT_VAR(2) = (const) NPC_ANIM_paragoomba_default_pain;
-            await DoScareAway;
-            return;
-        }
-        == EVENT_BEGIN_AIR_LIFT {
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_run;
-            await DoAirLift;
-        }
-        == EVENT_BLOW_AWAY {
-            EVT_VAR(0) = (const) 2;
-            EVT_VAR(1) = (const) NPC_ANIM_paragoomba_default_pain;
-            await DoBlowAway;
-            return;
-        }
-        else {
-        }
-    }
-    EnableIdleScript(ACTOR_SELF, -1);
-    UseIdleAnimation(ACTOR_SELF, TRUE);
-});
+EvtSource N(handleEvent_8021D158) = {
+    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(GetLastEvent, ACTOR_SELF, EVT_VAR(0))
+    EVT_SWITCH(EVT_VAR(0))
+        EVT_CASE_OR_EQ(9)
+        EVT_CASE_OR_EQ(10)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_pain)
+            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_CALL(GetBattlePhase, EVT_VAR(0))
+            EVT_IF_EQ(EVT_VAR(0), 1)
+                EVT_CALL(GetEncounterState, EVT_VAR(0))
+                EVT_IF_EQ(EVT_VAR(0), 4)
+                    EVT_EXEC_WAIT(N(8021DF64))
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_CASE_GROUP
+        EVT_CASE_EQ(14)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_burn_pain)
+            EVT_SET_CONST(EVT_VAR(2), NPC_ANIM_paragoomba_default_burn_dead)
+            EVT_EXEC_WAIT(DoBurnHit)
+        EVT_CASE_EQ(36)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_burn_pain)
+            EVT_SET_CONST(EVT_VAR(2), NPC_ANIM_paragoomba_default_burn_dead)
+            EVT_EXEC_WAIT(DoBurnHit)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_burn_dead)
+            EVT_EXEC_WAIT(DoDeath)
+            EVT_RETURN
+        EVT_CASE_EQ(12)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_pain)
+            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(N(8021DF64))
+        EVT_CASE_EQ(15)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_burn_pain)
+            EVT_SET_CONST(EVT_VAR(2), NPC_ANIM_paragoomba_default_burn_dead)
+            EVT_EXEC_WAIT(DoBurnHit)
+            EVT_EXEC_WAIT(N(8021DF64))
+        EVT_CASE_EQ(47)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_electrocute)
+            EVT_EXEC_WAIT(DoShockHit)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_pain)
+            EVT_EXEC_WAIT(DoJumpBack)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_dizzy)
+            EVT_EXEC_WAIT(N(8021D0E0))
+        EVT_CASE_EQ(38)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_electrocute)
+            EVT_EXEC_WAIT(DoShockHit)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_dead)
+            EVT_EXEC_WAIT(DoDeath)
+            EVT_RETURN
+        EVT_CASE_EQ(19)
+        EVT_CASE_OR_EQ(23)
+        EVT_CASE_OR_EQ(25)
+        EVT_CASE_OR_EQ(31)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_idle)
+            EVT_EXEC_WAIT(DoImmune)
+        EVT_END_CASE_GROUP
+        EVT_CASE_EQ(32)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_pain)
+            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_WAIT_FRAMES(10)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_dead)
+            EVT_EXEC_WAIT(DoDeath)
+            EVT_RETURN
+        EVT_CASE_EQ(56)
+            EVT_CALL(SetActorPos, ACTOR_SELF, 20, 0, 0)
+            EVT_CALL(HPBarToCurrent, ACTOR_SELF)
+        EVT_CASE_EQ(53)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_run)
+            EVT_EXEC_WAIT(N(8021D0E0))
+            EVT_CALL(HPBarToHome, ACTOR_SELF)
+        EVT_CASE_EQ(49)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_idle)
+            EVT_EXEC_WAIT(DoRecover)
+        EVT_CASE_EQ(57)
+            EVT_CALL(SetActorFlagBits, ACTOR_SELF, 512, 0)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_run)
+            EVT_SET_CONST(EVT_VAR(2), NPC_ANIM_paragoomba_default_pain)
+            EVT_EXEC_WAIT(DoScareAway)
+            EVT_RETURN
+        EVT_CASE_EQ(58)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_run)
+            EVT_EXEC_WAIT(DoAirLift)
+        EVT_CASE_EQ(22)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000002)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_paragoomba_default_pain)
+            EVT_EXEC_WAIT(DoBlowAway)
+            EVT_RETURN
+        EVT_CASE_DEFAULT
+    EVT_END_SWITCH
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, -1)
+    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(takeTurn_8021D74C) = SCRIPT({
-    UseIdleAnimation(ACTOR_SELF, FALSE);
-    EnableIdleScript(ACTOR_SELF, 0);
-    SetTargetActor(ACTOR_SELF, ACTOR_PLAYER);
-    SetGoalToTarget(ACTOR_SELF);
-    UseBattleCamPreset(63);
-    BattleCamTargetActor(ACTOR_SELF);
-    func_8024ECF8(-1, 1, 0);
-    SetAnimation(ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_run);
-    SetGoalToTarget(ACTOR_SELF);
-    AddGoalPos(ACTOR_SELF, 50, 0, 0);
-    SetActorSpeed(ACTOR_SELF, 6.0);
-    FlyToGoal(ACTOR_SELF, 0, -4, 0);
-    EnemyTestTarget(ACTOR_SELF, EVT_VAR(0), ((0)), 0, 1, 16);
-    match EVT_VAR(0) {
-        HIT_RESULT_MISS, HIT_RESULT_LUCKY {
-            EVT_VAR(10) = EVT_VAR(0);
-            sleep 10;
-            UseBattleCamPreset(66);
-            SetBattleCamZoom(300);
-            BattleCamTargetActor(ACTOR_SELF);
-            func_8024ECF8(-1, 1, 0);
-            PlaySoundAtActor(ACTOR_SELF, 0x20E0);
-            SetActorSounds(ACTOR_SELF, 2, 0, 0);
-            SetActorSpeed(ACTOR_SELF, 5.0);
-            SetActorJumpGravity(ACTOR_SELF, 1.8);
-            SetAnimation(ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_attack);
-            GetActorPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            JumpToGoal(ACTOR_SELF, 10, FALSE, FALSE, FALSE);
-            PlaySoundAtActor(ACTOR_SELF, SOUND_UNUSED_2C1);
-            SetActorSounds(ACTOR_SELF, 1, 0, 0);
-            SetGoalToTarget(ACTOR_SELF);
-            EVT_VAR(0) -= 80;
-            EVT_VAR(1) = 20;
-            SetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetActorSpeed(ACTOR_SELF, 8.0);
-            SetAnimation(ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_attack);
-            FlyToGoal(ACTOR_SELF, 0, -10, 4);
-            spawn {
-                loop 4 {
-                    PlaySoundAtActor(ACTOR_SELF, 0x20DF);
-                    sleep 4;
-                }
-            }
-            SetAnimation(ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_aim);
-            AddActorDecoration(ACTOR_SELF, 2, 0, 2);
-            SetAnimationRate(ACTOR_SELF, 2, 3.0);
-            sleep 10;
-            if (EVT_VAR(10) == 5) {
-                EnemyTestTarget(ACTOR_SELF, EVT_VAR(0), ((0x80000000)), 0, 0, 0);
-            }
-            sleep 10;
-            SetAnimationRate(ACTOR_SELF, 2, 1.0);
-            UseBattleCamPreset(2);
-            ResetAllActorSounds(ACTOR_SELF);
-            YieldTurn();
-            SetAnimation(ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_run);
-            SetActorYaw(ACTOR_SELF, 180);
-            await N(8021D0E0);
-            SetActorYaw(ACTOR_SELF, 0);
-            RemoveActorDecoration(ACTOR_SELF, 2, 0);
-            EnableIdleScript(ACTOR_SELF, -1);
-            UseIdleAnimation(ACTOR_SELF, TRUE);
-            return;
-        }
-        else {
-            sleep 10;
-            UseBattleCamPreset(66);
-            SetBattleCamZoom(300);
-            BattleCamTargetActor(ACTOR_SELF);
-            func_8024ECF8(-1, 1, 0);
-            PlaySoundAtActor(ACTOR_SELF, 0x20E0);
-            SetActorSounds(ACTOR_SELF, 2, 0, 0);
-            SetActorSpeed(ACTOR_SELF, 5.0);
-            SetActorJumpGravity(ACTOR_SELF, 1.8);
-            SetAnimation(ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_attack);
-            GetActorPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            JumpToGoal(ACTOR_SELF, 10, FALSE, FALSE, FALSE);
-            PlaySoundAtActor(ACTOR_SELF, SOUND_UNUSED_2C1);
-            SetActorSounds(ACTOR_SELF, 1, 0, 0);
-            SetGoalToTarget(ACTOR_SELF);
-            SetActorSpeed(ACTOR_SELF, 8.0);
-            SetAnimation(ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_attack);
-            FlyToGoal(ACTOR_SELF, 0, -10, 0);
-        }
-    }
-    sleep 2;
-    EnemyDamageTarget(ACTOR_SELF, EVT_VAR(0), ((0)), 0, 0, 1, 32);
-    match EVT_VAR(0) {
-        HIT_RESULT_HIT, 2 {
-            UseBattleCamPreset(2);
-            SetGoalToTarget(ACTOR_SELF);
-            AddGoalPos(ACTOR_SELF, 50, 10, 0);
-            SetActorSpeed(ACTOR_SELF, 6.0);
-            SetAnimation(ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_run);
-            FlyToGoal(ACTOR_SELF, 0, -10, 0);
-            ResetAllActorSounds(ACTOR_SELF);
-            sleep 5;
-            YieldTurn();
-            SetAnimation(ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_run);
-            await N(8021D0E0);
-        }
-    }
-    EnableIdleScript(ACTOR_SELF, -1);
-    UseIdleAnimation(ACTOR_SELF, TRUE);
-});
+EvtSource N(takeTurn_8021D74C) = {
+    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(UseBattleCamPreset, 63)
+    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
+    EVT_CALL(func_8024ECF8, -1, 1, 0)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_run)
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
+    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FIXED(6.0))
+    EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -4, 0)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, EVT_VAR(0), ((0)), 0, 1, 16)
+    EVT_SWITCH(EVT_VAR(0))
+        EVT_CASE_OR_EQ(6)
+        EVT_CASE_OR_EQ(5)
+            EVT_SET(EVT_VAR(10), EVT_VAR(0))
+            EVT_WAIT_FRAMES(10)
+            EVT_CALL(UseBattleCamPreset, 66)
+            EVT_CALL(SetBattleCamZoom, 300)
+            EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
+            EVT_CALL(func_8024ECF8, -1, 1, 0)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 8416)
+            EVT_CALL(SetActorSounds, -127, 2, 0, 0)
+            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FIXED(5.0))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FIXED(1.8))
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_attack)
+            EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_UNUSED_2C1)
+            EVT_CALL(SetActorSounds, -127, 1, 0, 0)
+            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+            EVT_SUB(EVT_VAR(0), 80)
+            EVT_SET(EVT_VAR(1), 20)
+            EVT_CALL(SetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FIXED(8.0))
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_attack)
+            EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 4)
+            EVT_THREAD
+                EVT_LOOP(4)
+                    EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 8415)
+                    EVT_WAIT_FRAMES(4)
+                EVT_END_LOOP
+            EVT_END_THREAD
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_aim)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 2, 0, 2)
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, 2, EVT_FIXED(3.0))
+            EVT_WAIT_FRAMES(10)
+            EVT_IF_EQ(EVT_VAR(10), 5)
+                EVT_CALL(EnemyTestTarget, ACTOR_SELF, EVT_VAR(0), ((0x80000000)), 0, 0, 0)
+            EVT_END_IF
+            EVT_WAIT_FRAMES(10)
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, 2, EVT_FIXED(1.0))
+            EVT_CALL(UseBattleCamPreset, 2)
+            EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
+            EVT_CALL(YieldTurn)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_run)
+            EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
+            EVT_EXEC_WAIT(N(8021D0E0))
+            EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 2, 0)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, -1)
+            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
+            EVT_RETURN
+        EVT_END_CASE_GROUP
+        EVT_CASE_DEFAULT
+            EVT_WAIT_FRAMES(10)
+            EVT_CALL(UseBattleCamPreset, 66)
+            EVT_CALL(SetBattleCamZoom, 300)
+            EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
+            EVT_CALL(func_8024ECF8, -1, 1, 0)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 8416)
+            EVT_CALL(SetActorSounds, -127, 2, 0, 0)
+            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FIXED(5.0))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FIXED(1.8))
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_attack)
+            EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
+            EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_UNUSED_2C1)
+            EVT_CALL(SetActorSounds, -127, 1, 0, 0)
+            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FIXED(8.0))
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_attack)
+            EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
+    EVT_END_SWITCH
+    EVT_WAIT_FRAMES(2)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, EVT_VAR(0), ((0)), 0, 0, 1, 32)
+    EVT_SWITCH(EVT_VAR(0))
+        EVT_CASE_OR_EQ(0)
+        EVT_CASE_OR_EQ(2)
+            EVT_CALL(UseBattleCamPreset, 2)
+            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+            EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 10, 0)
+            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FIXED(6.0))
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_run)
+            EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, 0)
+            EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
+            EVT_WAIT_FRAMES(5)
+            EVT_CALL(YieldTurn)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_paragoomba_default_run)
+            EVT_EXEC_WAIT(N(8021D0E0))
+        EVT_END_CASE_GROUP
+    EVT_END_SWITCH
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, -1)
+    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
+    EVT_RETURN
+    EVT_END
+};
 
 EvtSource N(8021E584);
 
 #include "common/StartRumbleWithParams.inc.c"
 
-EvtSource N(8021DF64) = SCRIPT({
-    func_8027D32C(-127);
-    SetPartFlags(ACTOR_SELF, 2, 131077);
-    SetPartFlags(ACTOR_SELF, 3, 1179652);
-    SetPartFlags(ACTOR_SELF, 4, 1179652);
-    SetPartFlags(ACTOR_SELF, 1, 8388612);
-    GetActorPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetPartPos(ACTOR_SELF, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetPartDispOffset(ACTOR_SELF, 3, -9, 7, -2);
-    SetPartPos(ACTOR_SELF, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetPartDispOffset(ACTOR_SELF, 4, 11, 7, -2);
-    GetLastEvent(ACTOR_SELF, EVT_VAR(0));
-    if (EVT_VAR(0) == 15) {
-        SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_burn_dead);
-    } else {
-        SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_pain);
-    }
-    SetActorSounds(ACTOR_SELF, 2, 769, 0);
-    GetActorPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(1) = 0;
-    SetActorJumpGravity(ACTOR_SELF, 0.8);
-    SetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    JumpToGoal(ACTOR_SELF, 15, FALSE, TRUE, FALSE);
-    N(StartRumbleWithParams)(100, 10);
-    spawn {
-        ShakeCam(1, 0, 5, 0.3);
-    }
-    ResetActorSounds(ACTOR_SELF, 2);
-    GetLastEvent(ACTOR_SELF, EVT_VAR(3));
-    if (EVT_VAR(3) == 15) {
-        SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_pain);
-        GetActorPos(ACTOR_SELF, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
-        EVT_VAR(4) += 10;
-        EVT_VAR(5) += 5;
-        PlayEffect(0x27, 0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1.0, 10, 0, 0, 0, 0, 0, 0, 0);
-    }
-    SetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    JumpToGoal(ACTOR_SELF, 10, FALSE, TRUE, FALSE);
-    SetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    JumpToGoal(ACTOR_SELF, 5, FALSE, TRUE, FALSE);
-    loop 10 {
-        SetPartFlagBits(ACTOR_SELF, 3, 1, 1);
-        SetPartFlagBits(ACTOR_SELF, 4, 1, 1);
-        sleep 1;
-        SetPartFlagBits(ACTOR_SELF, 3, 1, 0);
-        SetPartFlagBits(ACTOR_SELF, 4, 1, 0);
-        sleep 1;
-    }
-    SetPartFlagBits(ACTOR_SELF, 3, 1, 1);
-    SetPartFlagBits(ACTOR_SELF, 4, 1, 1);
-    GetIndexFromHome(ACTOR_SELF, EVT_VAR(0));
-    EVT_VAR(0) %= 4;
-    SetGoalToIndex(ACTOR_SELF, EVT_VAR(0));
-    GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetHomePos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle);
-    SetActorFlagBits(ACTOR_SELF, 512, 0);
-    SetStatusTable(ACTOR_SELF, N(statusTable_8021CB18));
-    SetActorType(ACTOR_SELF, ACTOR_TYPE_GOOMBA);
-    await N(8021E584);
-    SetActorFlagBits(ACTOR_SELF, 4096, 1);
-    HPBarToHome(ACTOR_SELF);
-    ResetAllActorSounds(-127);
-});
+EvtSource N(8021DF64) = {
+    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(SetPartFlags, ACTOR_SELF, 2, 131077)
+    EVT_CALL(SetPartFlags, ACTOR_SELF, 3, 1179652)
+    EVT_CALL(SetPartFlags, ACTOR_SELF, 4, 1179652)
+    EVT_CALL(SetPartFlags, ACTOR_SELF, 1, 8388612)
+    EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetPartPos, ACTOR_SELF, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetPartDispOffset, ACTOR_SELF, 3, -9, 7, -2)
+    EVT_CALL(SetPartPos, ACTOR_SELF, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetPartDispOffset, ACTOR_SELF, 4, 11, 7, -2)
+    EVT_CALL(GetLastEvent, ACTOR_SELF, EVT_VAR(0))
+    EVT_IF_EQ(EVT_VAR(0), 15)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_burn_dead)
+    EVT_ELSE
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_pain)
+    EVT_END_IF
+    EVT_CALL(SetActorSounds, -127, 2, 769, 0)
+    EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_SET(EVT_VAR(1), 0)
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FIXED(0.8))
+    EVT_CALL(SetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+    EVT_CALL(N(StartRumbleWithParams), 100, 10)
+    EVT_THREAD
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(0.3))
+    EVT_END_THREAD
+    EVT_CALL(ResetActorSounds, -127, 2)
+    EVT_CALL(GetLastEvent, ACTOR_SELF, EVT_VAR(3))
+    EVT_IF_EQ(EVT_VAR(3), 15)
+        EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_pain)
+        EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
+        EVT_ADD(EVT_VAR(4), 10)
+        EVT_ADD(EVT_VAR(5), 5)
+        EVT_CALL(PlayEffect, 0x27, 0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), EVT_FIXED(1.0), 10, 0, 0, 0, 0, 0, 0, 0)
+    EVT_END_IF
+    EVT_CALL(SetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+    EVT_CALL(SetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+    EVT_LOOP(10)
+        EVT_CALL(SetPartFlagBits, -127, 3, 1, 1)
+        EVT_CALL(SetPartFlagBits, -127, 4, 1, 1)
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(SetPartFlagBits, -127, 3, 1, 0)
+        EVT_CALL(SetPartFlagBits, -127, 4, 1, 0)
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_CALL(SetPartFlagBits, -127, 3, 1, 1)
+    EVT_CALL(SetPartFlagBits, -127, 4, 1, 1)
+    EVT_CALL(GetIndexFromHome, -127, EVT_VAR(0))
+    EVT_MOD(EVT_VAR(0), 4)
+    EVT_CALL(SetGoalToIndex, -127, EVT_VAR(0))
+    EVT_CALL(GetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetHomePos, -127, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, 512, 0)
+    EVT_CALL(SetStatusTable, -127, EVT_PTR(N(statusTable_8021CB18)))
+    EVT_CALL(SetActorType, -127, 7)
+    EVT_EXEC_WAIT(N(8021E584))
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, 4096, 1)
+    EVT_CALL(HPBarToHome, ACTOR_SELF)
+    EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
+    EVT_RETURN
+    EVT_END
+};
 
 // Copy of goomba.c follows..................
 // TODO: deduplicate
@@ -581,351 +584,351 @@ EvtSource N(takeTurn_8021F0D8);
 EvtSource N(idle_8021E5D0);
 EvtSource N(handleEvent_8021E8AC);
 
-EvtSource N(8021E584) = SCRIPT({
-    BindTakeTurn(ACTOR_SELF, N(takeTurn_8021F0D8));
-    BindIdle(ACTOR_SELF, N(idle_8021E5D0));
-    BindHandleEvent(ACTOR_SELF, N(handleEvent_8021E8AC));
-});
+EvtSource N(8021E584) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021F0D8)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021E5D0)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021E8AC)))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(idle_8021E5D0) = SCRIPT({
-10:
-    RandInt(80, EVT_VAR(0));
-    EVT_VAR(0) += 80;
-    loop EVT_VAR(0) {
-    0:
-        GetStatusFlags(ACTOR_SELF, EVT_VAR(1));
-        if (EVT_VAR(1) & 3526656) {
-            sleep 1;
-            goto 0;
-        }
-        sleep 1;
-    }
-    GetActorPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(0) += 5;
-    SetActorIdleSpeed(ACTOR_SELF, 1.0);
-    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_8021E538));
-    SetIdleGoal(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    IdleRunToGoal(ACTOR_SELF, 0);
-    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_8021E4EC));
-    loop 20 {
-    1:
-        GetStatusFlags(ACTOR_SELF, EVT_VAR(1));
-        if (EVT_VAR(1) & 3526656) {
-            sleep 1;
-            goto 1;
-        }
-        sleep 1;
-    }
-    GetActorPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(0) -= 5;
-    SetActorIdleSpeed(ACTOR_SELF, 1.0);
-    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_8021E538));
-    SetIdleGoal(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    IdleRunToGoal(ACTOR_SELF, 0);
-    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_8021E4EC));
-    loop 80 {
-    2:
-        GetStatusFlags(ACTOR_SELF, EVT_VAR(1));
-        if (EVT_VAR(1) & 3526656) {
-            sleep 1;
-            goto 2;
-        }
-        sleep 1;
-    }
-    goto 10;
-});
+EvtSource N(idle_8021E5D0) = {
+    EVT_LABEL(10)
+    EVT_CALL(RandInt, 80, EVT_VAR(0))
+    EVT_ADD(EVT_VAR(0), 80)
+    EVT_LOOP(EVT_VAR(0))
+        EVT_LABEL(0)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, EVT_VAR(1))
+        EVT_IF_FLAG(EVT_VAR(1), 0x35D000)
+            EVT_WAIT_FRAMES(1)
+            EVT_GOTO(0)
+        EVT_END_IF
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(0), 5)
+    EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FIXED(1.0))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021E538)))
+    EVT_CALL(SetIdleGoal, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(IdleRunToGoal, -127, 0)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021E4EC)))
+    EVT_LOOP(20)
+        EVT_LABEL(1)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, EVT_VAR(1))
+        EVT_IF_FLAG(EVT_VAR(1), 0x35D000)
+            EVT_WAIT_FRAMES(1)
+            EVT_GOTO(1)
+        EVT_END_IF
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_SUB(EVT_VAR(0), 5)
+    EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FIXED(1.0))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021E538)))
+    EVT_CALL(SetIdleGoal, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(IdleRunToGoal, -127, 0)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021E4EC)))
+    EVT_LOOP(80)
+        EVT_LABEL(2)
+        EVT_CALL(GetStatusFlags, ACTOR_SELF, EVT_VAR(1))
+        EVT_IF_FLAG(EVT_VAR(1), 0x35D000)
+            EVT_WAIT_FRAMES(1)
+            EVT_GOTO(2)
+        EVT_END_IF
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_GOTO(10)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(handleEvent_8021E8AC) = SCRIPT({
-    UseIdleAnimation(ACTOR_SELF, FALSE);
-    EnableIdleScript(ACTOR_SELF, FALSE);
-    SetActorScale(ACTOR_SELF, 1.0, 1.0, 1.0);
-    GetLastEvent(ACTOR_SELF, EVT_VAR(0));
-    match EVT_VAR(0) {
-        EVENT_HIT_COMBO, EVENT_HIT {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_pain;
-            await DoNormalHit;
-        }
-        == EVENT_BURN_HIT {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_burn_pain;
-            EVT_VAR(2) = (const) NPC_ANIM_goomba_normal_burn_dead;
-            await DoBurnHit;
-        }
-        == EVENT_BURN_DEATH {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_burn_pain;
-            EVT_VAR(2) = (const) NPC_ANIM_goomba_normal_burn_dead;
-            await DoBurnHit;
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_burn_dead;
-            await DoDeath;
-            return;
-        }
-        == EVENT_SPIN_SMASH_HIT {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_pain;
-            await DoSpinSmashHit;
-        }
-        == EVENT_SPIN_SMASH_DEATH {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_pain;
-            await DoSpinSmashHit;
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_dead;
-            await DoDeath;
-            return;
-        }
-        == EVENT_SHOCK_HIT {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_electrocute;
-            await DoShockHit;
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_pain;
-            await DoJumpBack;
-            JumpToGoal(ACTOR_SELF, 5, FALSE, TRUE, FALSE);
-            SetAnimationRate(ACTOR_SELF, 1, 2.0);
-            SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_dizzy);
-            SetGoalToHome(ACTOR_SELF);
-            SetActorSpeed(ACTOR_SELF, 8.0);
-            RunToGoal(ACTOR_SELF, 0, FALSE);
-            SetAnimationRate(ACTOR_SELF, 1, 1.0);
-            sleep 5;
-            SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle);
-            SetActorJumpGravity(ACTOR_SELF, 1.6);
-            JumpToGoal(ACTOR_SELF, 5, FALSE, TRUE, FALSE);
-        }
-        == EVENT_SHOCK_DEATH {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_electrocute;
-            await DoShockHit;
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_dead;
-            await DoDeath;
-            return;
-        }
-        == EVENT_STAR_BEAM, 23, EVENT_IMMUNE, EVENT_AIR_LIFT_FAILED {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_idle;
-            await DoImmune;
-        }
-        == EVENT_DEATH {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_pain;
-            await DoNormalHit;
-            sleep 10;
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_dead;
-            await DoDeath;
-            return;
-        }
-        == EVENT_END_FIRST_STRIKE {
-            SetAnimationRate(ACTOR_SELF, 1, 2.0);
-            SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_run);
-            SetGoalToHome(ACTOR_SELF);
-            SetActorSpeed(ACTOR_SELF, 4.0);
-            RunToGoal(ACTOR_SELF, 0, FALSE);
-            SetAnimationRate(ACTOR_SELF, 1, 1.0);
-            HPBarToHome(ACTOR_SELF);
-        }
-        == EVENT_RECOVER_STATUS {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_idle;
-            await DoRecover;
-        }
-        == EVENT_SCARE_AWAY {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_run;
-            EVT_VAR(2) = (const) NPC_ANIM_goomba_normal_pain;
-            await DoScareAway;
-            return;
-        }
-        == EVENT_BEGIN_AIR_LIFT {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_run;
-            await DoAirLift;
-        }
-        == EVENT_BLOW_AWAY {
-            EVT_VAR(0) = (const) 1;
-            EVT_VAR(1) = (const) NPC_ANIM_goomba_normal_pain;
-            await DoBlowAway;
-            return;
-        }
-        else {
-        }
-    }
-    SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle);
-    EnableIdleScript(ACTOR_SELF, TRUE);
-    UseIdleAnimation(ACTOR_SELF, TRUE);
-});
+EvtSource N(handleEvent_8021E8AC) = {
+    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+    EVT_CALL(GetLastEvent, ACTOR_SELF, EVT_VAR(0))
+    EVT_SWITCH(EVT_VAR(0))
+        EVT_CASE_OR_EQ(9)
+        EVT_CASE_OR_EQ(10)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_pain)
+            EVT_EXEC_WAIT(DoNormalHit)
+        EVT_END_CASE_GROUP
+        EVT_CASE_EQ(14)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_burn_pain)
+            EVT_SET_CONST(EVT_VAR(2), NPC_ANIM_goomba_normal_burn_dead)
+            EVT_EXEC_WAIT(DoBurnHit)
+        EVT_CASE_EQ(36)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_burn_pain)
+            EVT_SET_CONST(EVT_VAR(2), NPC_ANIM_goomba_normal_burn_dead)
+            EVT_EXEC_WAIT(DoBurnHit)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_burn_dead)
+            EVT_EXEC_WAIT(DoDeath)
+            EVT_RETURN
+        EVT_CASE_EQ(11)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_pain)
+            EVT_EXEC_WAIT(DoSpinSmashHit)
+        EVT_CASE_EQ(33)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_pain)
+            EVT_EXEC_WAIT(DoSpinSmashHit)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_dead)
+            EVT_EXEC_WAIT(DoDeath)
+            EVT_RETURN
+        EVT_CASE_EQ(47)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_electrocute)
+            EVT_EXEC_WAIT(DoShockHit)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_pain)
+            EVT_EXEC_WAIT(DoJumpBack)
+            EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FIXED(2.0))
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_dizzy)
+            EVT_CALL(SetGoalToHome, ACTOR_SELF)
+            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FIXED(8.0))
+            EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(5)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle)
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FIXED(1.6))
+            EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+        EVT_CASE_EQ(38)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_electrocute)
+            EVT_EXEC_WAIT(DoShockHit)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_dead)
+            EVT_EXEC_WAIT(DoDeath)
+            EVT_RETURN
+        EVT_CASE_EQ(19)
+        EVT_CASE_OR_EQ(23)
+        EVT_CASE_OR_EQ(25)
+        EVT_CASE_OR_EQ(31)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_idle)
+            EVT_EXEC_WAIT(DoImmune)
+        EVT_END_CASE_GROUP
+        EVT_CASE_EQ(32)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_pain)
+            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_WAIT_FRAMES(10)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_dead)
+            EVT_EXEC_WAIT(DoDeath)
+            EVT_RETURN
+        EVT_CASE_EQ(53)
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FIXED(2.0))
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_run)
+            EVT_CALL(SetGoalToHome, ACTOR_SELF)
+            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FIXED(4.0))
+            EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FIXED(1.0))
+            EVT_CALL(HPBarToHome, ACTOR_SELF)
+        EVT_CASE_EQ(49)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_idle)
+            EVT_EXEC_WAIT(DoRecover)
+        EVT_CASE_EQ(57)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_run)
+            EVT_SET_CONST(EVT_VAR(2), NPC_ANIM_goomba_normal_pain)
+            EVT_EXEC_WAIT(DoScareAway)
+            EVT_RETURN
+        EVT_CASE_EQ(58)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_run)
+            EVT_EXEC_WAIT(DoAirLift)
+        EVT_CASE_EQ(22)
+            EVT_SET_CONST(EVT_VAR(0), 0x00000001)
+            EVT_SET_CONST(EVT_VAR(1), NPC_ANIM_goomba_normal_pain)
+            EVT_EXEC_WAIT(DoBlowAway)
+            EVT_RETURN
+        EVT_CASE_DEFAULT
+    EVT_END_SWITCH
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
+    EVT_RETURN
+    EVT_END
+};
 
 #include "anglestuff.inc.c"
 
-EvtSource N(takeTurn_8021F0D8) = SCRIPT({
-    UseIdleAnimation(ACTOR_SELF, FALSE);
-    EnableIdleScript(ACTOR_SELF, FALSE);
-    SetTargetActor(ACTOR_SELF, ACTOR_PLAYER);
-    UseBattleCamPreset(63);
-    BattleCamTargetActor(ACTOR_SELF);
-    func_8024ECF8(-1, 1, 0);
-    SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_run);
-    SetGoalToTarget(ACTOR_SELF);
-    AddGoalPos(ACTOR_SELF, 50, 0, 0);
-    SetActorSpeed(ACTOR_SELF, 6.0);
-    RunToGoal(ACTOR_SELF, 0, FALSE);
-    SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle);
-    SetActorDispOffset(ACTOR_SELF, 0, -1, 0);
-    sleep 1;
-    SetActorDispOffset(ACTOR_SELF, 0, -2, 0);
-    sleep 5;
-    SetActorDispOffset(ACTOR_SELF, 0, 0, 0);
-    SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_headbonk);
-    EnemyTestTarget(ACTOR_SELF, EVT_VAR(0), ((0)), 0, 1, 16);
-    match EVT_VAR(0) {
-        HIT_RESULT_MISS, HIT_RESULT_LUCKY {
-            EVT_VAR(10) = EVT_VAR(0);
-            SetGoalToTarget(ACTOR_SELF);
-            GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            EVT_VAR(0) -= 10;
-            EVT_VAR(1) = 10;
-            EVT_VAR(2) += 3;
-            SetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetActorJumpGravity(ACTOR_SELF, 1.2);
-            spawn {
-                GetActorPos(ACTOR_SELF, EVT_VAR(1), EVT_VAR(2), EVT_VAR(0));
-                EVT_VAR(0) = 0;
-                loop 16 {
-                    GetActorPos(ACTOR_SELF, EVT_VAR(4), EVT_VAR(5), EVT_VAR(6));
-                    N(AngleCalculate)(EVT_VAR(1), EVT_VAR(2), EVT_VAR(4), EVT_VAR(5), EVT_VAR(0));
-                    SetActorRotation(ACTOR_SELF, 0, 0, EVT_VAR(0));
-                    EVT_VAR(1) = EVT_VAR(4);
-                    EVT_VAR(2) = EVT_VAR(5);
-                    EVT_VAR(3) = EVT_VAR(6);
-                    sleep 1;
-                }
-            }
-            spawn {
-                sleep 6;
-                SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_headbonk);
-            }
-            JumpToGoal(ACTOR_SELF, 16, FALSE, TRUE, FALSE);
-            SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_asleep);
-            SetActorScale(ACTOR_SELF, 1.1, 0.8, 1.0);
-            SetActorDispOffset(ACTOR_SELF, 0, 5, 0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.3, 0.5, 1.0);
-            SetActorDispOffset(ACTOR_SELF, 0, -2, 0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.0, 1.0, 1.0);
-            SetActorDispOffset(ACTOR_SELF, 0, 7, 0);
-            SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_pain);
-            sleep 5;
-            if (EVT_VAR(10) == 5) {
-                EnemyTestTarget(ACTOR_SELF, EVT_VAR(0), ((0x80000000)), 0, 0, 0);
-            }
-            sleep 5;
-            SetActorDispOffset(ACTOR_SELF, 0, 0, 0);
-            SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_headbonk);
-            SetGoalToTarget(ACTOR_SELF);
-            GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            EVT_VAR(0) += 20;
-            EVT_VAR(1) = 0;
-            SetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetActorJumpGravity(ACTOR_SELF, 2.0);
-            spawn {
-                sleep 4;
-                EVT_VAR(0) = 180;
-                loop 4 {
-                    EVT_VAR(0) -= 45;
-                    SetActorRotation(ACTOR_SELF, 0, 0, EVT_VAR(0));
-                    sleep 1;
-                }
-                SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_headbonk);
-            }
-            JumpToGoal(ACTOR_SELF, 15, FALSE, TRUE, FALSE);
-            SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_dizzy);
-            sleep 5;
-            UseBattleCamPreset(2);
-            YieldTurn();
-            SetActorYaw(ACTOR_SELF, 180);
-            AddActorDecoration(ACTOR_SELF, 1, 0, 2);
-            SetAnimationRate(ACTOR_SELF, 1, 2.0);
-            SetGoalToHome(ACTOR_SELF);
-            SetActorSpeed(ACTOR_SELF, 8.0);
-            RunToGoal(ACTOR_SELF, 0, FALSE);
-            SetAnimationRate(ACTOR_SELF, 1, 1.0);
-            SetActorYaw(ACTOR_SELF, 0);
-            sleep 5;
-            SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle);
-            SetActorJumpGravity(ACTOR_SELF, 1.6);
-            JumpToGoal(ACTOR_SELF, 5, FALSE, TRUE, FALSE);
-            RemoveActorDecoration(ACTOR_SELF, 1, 0);
-            EnableIdleScript(ACTOR_SELF, TRUE);
-            UseIdleAnimation(ACTOR_SELF, TRUE);
-            return;
-        }
-        else {
-            SetGoalToTarget(ACTOR_SELF);
-            SetActorJumpGravity(ACTOR_SELF, 1.2);
-            spawn {
-                GetActorPos(ACTOR_SELF, EVT_VAR(1), EVT_VAR(2), EVT_VAR(0));
-                EVT_VAR(0) = 0;
-                loop 16 {
-                    GetActorPos(ACTOR_SELF, EVT_VAR(4), EVT_VAR(5), EVT_VAR(6));
-                    N(AngleCalculate)(EVT_VAR(1), EVT_VAR(2), EVT_VAR(4), EVT_VAR(5), EVT_VAR(0));
-                    SetActorRotation(ACTOR_SELF, 0, 0, EVT_VAR(0));
-                    EVT_VAR(1) = EVT_VAR(4);
-                    EVT_VAR(2) = EVT_VAR(5);
-                    EVT_VAR(3) = EVT_VAR(6);
-                    sleep 1;
-                }
-            }
-            spawn {
-                sleep 6;
-                SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_headbonk);
-            }
-            JumpToGoal(ACTOR_SELF, 16, FALSE, TRUE, FALSE);
-            SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_pre_headbonk);
-            SetActorScale(ACTOR_SELF, 1.1, 0.8, 1.0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.3, 0.5, 1.0);
-            sleep 1;
-        }
-    }
-    EnemyDamageTarget(ACTOR_SELF, EVT_VAR(0), ((0)), 0, 0, 1, 32);
-    match EVT_VAR(0) {
-        HIT_RESULT_HIT, 2 {
-            UseBattleCamPreset(2);
-            SetActorScale(ACTOR_SELF, 1.1, 0.8, 1.0);
-            sleep 1;
-            SetActorScale(ACTOR_SELF, 1.0, 1.0, 1.0);
-            sleep 1;
-            SetActorRotation(ACTOR_SELF, 0, 0, 0);
-            SetActorDispOffset(ACTOR_SELF, 0, 0, 0);
-            SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle);
-            GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            EVT_VAR(0) += 40;
-            EVT_VAR(1) = 0;
-            SetActorJumpGravity(ACTOR_SELF, 1.8);
-            SetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            JumpToGoal(ACTOR_SELF, 10, FALSE, TRUE, FALSE);
-            EVT_VAR(0) += 30;
-            SetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            JumpToGoal(ACTOR_SELF, 8, FALSE, TRUE, FALSE);
-            EVT_VAR(0) += 20;
-            SetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            JumpToGoal(ACTOR_SELF, 6, FALSE, TRUE, FALSE);
-            SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle);
-            sleep 3;
-            YieldTurn();
-            SetAnimationRate(ACTOR_SELF, 1, 2.0);
-            SetAnimation(ACTOR_SELF, 1, NPC_ANIM_goomba_normal_run);
-            SetGoalToHome(ACTOR_SELF);
-            SetActorSpeed(ACTOR_SELF, 8.0);
-            RunToGoal(ACTOR_SELF, 0, FALSE);
-            SetAnimationRate(ACTOR_SELF, 1, 1.0);
-        }
-    }
-    EnableIdleScript(ACTOR_SELF, TRUE);
-    UseIdleAnimation(ACTOR_SELF, TRUE);
-});
+EvtSource N(takeTurn_8021F0D8) = {
+    EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    EVT_CALL(UseBattleCamPreset, 63)
+    EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
+    EVT_CALL(func_8024ECF8, -1, 1, 0)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_run)
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
+    EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FIXED(6.0))
+    EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle)
+    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
+    EVT_WAIT_FRAMES(1)
+    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
+    EVT_WAIT_FRAMES(5)
+    EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_headbonk)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, EVT_VAR(0), ((0)), 0, 1, 16)
+    EVT_SWITCH(EVT_VAR(0))
+        EVT_CASE_OR_EQ(6)
+        EVT_CASE_OR_EQ(5)
+            EVT_SET(EVT_VAR(10), EVT_VAR(0))
+            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+            EVT_CALL(GetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_SUB(EVT_VAR(0), 10)
+            EVT_SET(EVT_VAR(1), 10)
+            EVT_ADD(EVT_VAR(2), 3)
+            EVT_CALL(SetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FIXED(1.2))
+            EVT_THREAD
+                EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(1), EVT_VAR(2), EVT_VAR(0))
+                EVT_SET(EVT_VAR(0), 0)
+                EVT_LOOP(16)
+                    EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(4), EVT_VAR(5), EVT_VAR(6))
+                    EVT_CALL(N(AngleCalculate), EVT_VAR(1), EVT_VAR(2), EVT_VAR(4), EVT_VAR(5), EVT_VAR(0))
+                    EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, EVT_VAR(0))
+                    EVT_SET(EVT_VAR(1), EVT_VAR(4))
+                    EVT_SET(EVT_VAR(2), EVT_VAR(5))
+                    EVT_SET(EVT_VAR(3), EVT_VAR(6))
+                    EVT_WAIT_FRAMES(1)
+                EVT_END_LOOP
+            EVT_END_THREAD
+            EVT_THREAD
+                EVT_WAIT_FRAMES(6)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_headbonk)
+            EVT_END_THREAD
+            EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_asleep)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
+            EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 5, 0)
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
+            EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+            EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 7, 0)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_pain)
+            EVT_WAIT_FRAMES(5)
+            EVT_IF_EQ(EVT_VAR(10), 5)
+                EVT_CALL(EnemyTestTarget, ACTOR_SELF, EVT_VAR(0), ((0x80000000)), 0, 0, 0)
+            EVT_END_IF
+            EVT_WAIT_FRAMES(5)
+            EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_headbonk)
+            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+            EVT_CALL(GetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_ADD(EVT_VAR(0), 20)
+            EVT_SET(EVT_VAR(1), 0)
+            EVT_CALL(SetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FIXED(2.0))
+            EVT_THREAD
+                EVT_WAIT_FRAMES(4)
+                EVT_SET(EVT_VAR(0), 180)
+                EVT_LOOP(4)
+                    EVT_SUB(EVT_VAR(0), 45)
+                    EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, EVT_VAR(0))
+                    EVT_WAIT_FRAMES(1)
+                EVT_END_LOOP
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_headbonk)
+            EVT_END_THREAD
+            EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_dizzy)
+            EVT_WAIT_FRAMES(5)
+            EVT_CALL(UseBattleCamPreset, 2)
+            EVT_CALL(YieldTurn)
+            EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FIXED(2.0))
+            EVT_CALL(SetGoalToHome, ACTOR_SELF)
+            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FIXED(8.0))
+            EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FIXED(1.0))
+            EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
+            EVT_WAIT_FRAMES(5)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle)
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FIXED(1.6))
+            EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
+            EVT_RETURN
+        EVT_END_CASE_GROUP
+        EVT_CASE_DEFAULT
+            EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FIXED(1.2))
+            EVT_THREAD
+                EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(1), EVT_VAR(2), EVT_VAR(0))
+                EVT_SET(EVT_VAR(0), 0)
+                EVT_LOOP(16)
+                    EVT_CALL(GetActorPos, ACTOR_SELF, EVT_VAR(4), EVT_VAR(5), EVT_VAR(6))
+                    EVT_CALL(N(AngleCalculate), EVT_VAR(1), EVT_VAR(2), EVT_VAR(4), EVT_VAR(5), EVT_VAR(0))
+                    EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, EVT_VAR(0))
+                    EVT_SET(EVT_VAR(1), EVT_VAR(4))
+                    EVT_SET(EVT_VAR(2), EVT_VAR(5))
+                    EVT_SET(EVT_VAR(3), EVT_VAR(6))
+                    EVT_WAIT_FRAMES(1)
+                EVT_END_LOOP
+            EVT_END_THREAD
+            EVT_THREAD
+                EVT_WAIT_FRAMES(6)
+                EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_headbonk)
+            EVT_END_THREAD
+            EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_pre_headbonk)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+    EVT_END_SWITCH
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, EVT_VAR(0), ((0)), 0, 0, 1, 32)
+    EVT_SWITCH(EVT_VAR(0))
+        EVT_CASE_OR_EQ(0)
+        EVT_CASE_OR_EQ(2)
+            EVT_CALL(UseBattleCamPreset, 2)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
+            EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle)
+            EVT_CALL(GetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_ADD(EVT_VAR(0), 40)
+            EVT_SET(EVT_VAR(1), 0)
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FIXED(1.8))
+            EVT_CALL(SetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
+            EVT_ADD(EVT_VAR(0), 30)
+            EVT_CALL(SetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
+            EVT_ADD(EVT_VAR(0), 20)
+            EVT_CALL(SetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_idle)
+            EVT_WAIT_FRAMES(3)
+            EVT_CALL(YieldTurn)
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FIXED(2.0))
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_normal_run)
+            EVT_CALL(SetGoalToHome, ACTOR_SELF)
+            EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FIXED(8.0))
+            EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FIXED(1.0))
+        EVT_END_CASE_GROUP
+    EVT_END_SWITCH
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
+    EVT_RETURN
+    EVT_END
+};

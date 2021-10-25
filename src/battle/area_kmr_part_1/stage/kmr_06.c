@@ -6,23 +6,23 @@
 #include "clouds.inc.c"
 #include "common/UnkFogFunc.inc.c"
 
-EvtSource N(beforeBattle_80220E28) = SCRIPT({
-    SetSpriteShading(-1);
+EvtSource N(beforeBattle_80220E28) = {
+    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(N(UnkFogFunc))
+    EVT_SET(EVT_VAR(0), 1)
+    EVT_SET(EVT_VAR(2), 0)
+    EVT_EXEC(N(clouds1))
+    EVT_SET(EVT_VAR(0), 4)
+    EVT_SET(EVT_VAR(2), 70)
+    EVT_EXEC(N(clouds1))
+    EVT_RETURN
+    EVT_END
+};
 
-    N(UnkFogFunc)();
-
-    EVT_VAR(0) = 1;
-    EVT_VAR(2) = 0;
-    spawn N(clouds1);
-
-    EVT_VAR(0) = 4;
-    EVT_VAR(2) = 70;
-    spawn N(clouds1);
-});
-
-EvtSource N(afterBattle_80220EAC) = SCRIPT({
-
-});
+EvtSource N(afterBattle_80220EAC) = {
+    EVT_RETURN
+    EVT_END
+};
 
 s32 N(foregroundModelList_80220EBC)[] = {
     0x0000001D, 0x00000022, 0x00000021, 0x00000000,

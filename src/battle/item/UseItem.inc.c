@@ -1,107 +1,103 @@
 #include "common.h"
 
 /// Provide arg `TRUE` on `EVT_VAR(1)` to disable refunding.
-EvtSource N(UseItemWithEffect) = SCRIPT({
-    if (EVT_VAR(1) == 0) {
-        UseBattleCamPreset(69); // Nice
-        sleep 10;
+EvtSource N(UseItemWithEffect) = {
+    EVT_IF_EQ(EVT_VAR(1), 0)
+        EVT_CALL(UseBattleCamPreset, 69)
+        EVT_WAIT_FRAMES(10)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_208D)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_GOT_ITEM)
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(0), 18)
+        EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FIXED(4.0))
+        EVT_CALL(SetGoalPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(PlayerRunToGoal, 0)
+        EVT_ADD(EVT_VAR(1), 45)
+        EVT_SET(EVT_VAR(3), EVT_VAR(1))
+        EVT_ADD(EVT_VAR(3), 10)
+        EVT_ADD(EVT_VAR(3), 2)
+        EVT_CALL(PlayEffect, 0x33, 1, EVT_VAR(0), EVT_VAR(3), EVT_VAR(2), EVT_FIXED(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(MakeItemEntity, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 0)
+        EVT_SET(EVT_VAR(10), EVT_VAR(0))
+        EVT_CALL(N(GiveRefund))
+        EVT_WAIT_FRAMES(EVT_VAR(0))
+        EVT_WAIT_FRAMES(15)
+        EVT_CALL(N(GiveRefundCleanup))
+        EVT_CALL(RemoveItemEntity, EVT_VAR(10))
+    EVT_ELSE
+        EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_208D)
+        EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_GOT_ITEM)
+        EVT_WAIT_FRAMES(4)
+        EVT_ADD(EVT_VAR(1), 45)
+        EVT_SET(EVT_VAR(3), EVT_VAR(1))
+        EVT_ADD(EVT_VAR(3), 10)
+        EVT_ADD(EVT_VAR(3), 2)
+        EVT_CALL(PlayEffect, 0x33, 1, EVT_VAR(0), EVT_VAR(3), EVT_VAR(2), EVT_FIXED(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(MakeItemEntity, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 0)
+        EVT_SET(EVT_VAR(10), EVT_VAR(0))
+        EVT_WAIT_FRAMES(15)
+        EVT_CALL(RemoveItemEntity, EVT_VAR(10))
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
 
-        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_208D);
-        SetAnimation(ACTOR_PLAYER, 0, ANIM_GOT_ITEM);
-        GetActorPos(ACTOR_PLAYER, $x, $y, $z);
-        $x += 18;
-        SetActorSpeed(ACTOR_PLAYER, 4.0);
-        SetGoalPos(ACTOR_PLAYER, $x, $y, $z);
-        PlayerRunToGoal(ACTOR_PLAYER);
+EvtSource N(UseItem) = {
+    EVT_CALL(UseBattleCamPreset, 19)
+    EVT_CALL(SetBattleCamTarget, -85, 1, 0)
+    EVT_CALL(SetBattleCamOffsetZ, 41)
+    EVT_CALL(SetBattleCamZoom, 248)
+    EVT_CALL(MoveBattleCamOver, 30)
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_GOT_ITEM)
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(1), 45)
+    EVT_CALL(MakeItemEntity, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 0)
+    EVT_SET(EVT_VAR(14), EVT_VAR(0))
+    EVT_CALL(N(GiveRefund))
+    EVT_WAIT_FRAMES(EVT_VAR(0))
+    EVT_WAIT_FRAMES(15)
+    EVT_CALL(N(GiveRefundCleanup))
+    EVT_CALL(RemoveItemEntity, EVT_VAR(14))
+    EVT_RETURN
+    EVT_END
+};
 
-        $y += 45;
-        $effectY = $y;
-        $effectY += 10;
-        $effectY += 2;
-        PlayEffect(0x33, 1, $x, $effectY, $z, 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
-        MakeItemEntity(EVT_VAR(10), $x, $y, $z, 1, 0);
-        EVT_VAR(10) = $x;
+EvtSource N(PlayerGoHome) = {
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
+    EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
+    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FIXED(8.0))
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(PlayerRunToGoal, 0)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
+    EVT_RETURN
+    EVT_END
+};
 
-        N(GiveRefund)();
-        sleep $x;
+EvtSource N(EatItem) = {
+    EVT_THREAD
+        EVT_LOOP(4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_2095)
+            EVT_WAIT_FRAMES(10)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_EAT)
+    EVT_WAIT_FRAMES(45)
+    EVT_RETURN
+    EVT_END
+};
 
-        sleep 15;
-
-        N(GiveRefundCleanup)();
-        RemoveItemEntity(EVT_VAR(10));
-    } else {
-        // No refund.
-
-        GetActorPos(ACTOR_PLAYER, $x, $y, $z);
-        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_208D);
-        SetAnimation(ACTOR_PLAYER, 0, ANIM_GOT_ITEM);
-        sleep 4;
-
-        $y += 45;
-        $effectY = $y;
-        $effectY += 10;
-        $effectY += 2;
-        PlayEffect(0x33, 1, $x, $effectY, $z, 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
-        MakeItemEntity(EVT_VAR(10), $x, $y, $z, 1, 0);
-        EVT_VAR(10) = $x;
-
-        sleep 15;
-        RemoveItemEntity(EVT_VAR(10));
-    }
-});
-
-EvtSource N(UseItem) = SCRIPT({
-    UseBattleCamPreset(19);
-    SetBattleCamTarget(-85, 1, 0);
-    SetBattleCamOffsetZ(41);
-    SetBattleCamZoom(248);
-    MoveBattleCamOver(30);
-    sleep 10;
-
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_GOT_ITEM);
-    GetActorPos(ACTOR_PLAYER, $x, $y, $z);
-    $y += 45;
-    MakeItemEntity(EVT_VAR(10), $x, $y, $z, 1, 0);
-    EVT_VAR(14) = $x;
-
-    N(GiveRefund)();
-    sleep $x;
-
-    sleep 15;
-
-    N(GiveRefundCleanup)();
-    RemoveItemEntity(EVT_VAR(14));
-});
-
-EvtSource N(PlayerGoHome) = SCRIPT({
-    UseIdleAnimation(ACTOR_PLAYER, 0);
-    SetGoalToHome(ACTOR_PLAYER);
-    SetActorSpeed(ACTOR_PLAYER, 8.0);
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_RUNNING);
-    PlayerRunToGoal(ACTOR_PLAYER);
-
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    UseIdleAnimation(ACTOR_PLAYER, 1);
-});
-
-EvtSource N(EatItem) = SCRIPT({
-    spawn {
-        loop 4 {
-            PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
-            sleep 10;
-        }
-    }
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_EAT);
-    sleep 45;
-});
-
-EvtSource N(DrinkItem) = SCRIPT({
-    spawn {
-        loop 4 {
-            PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
-            sleep 10;
-        }
-    }
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_DRINK);
-    sleep 45;
-});
+EvtSource N(DrinkItem) = {
+    EVT_THREAD
+        EVT_LOOP(4)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_2095)
+            EVT_WAIT_FRAMES(10)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_DRINK)
+    EVT_WAIT_FRAMES(45)
+    EVT_RETURN
+    EVT_END
+};

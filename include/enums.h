@@ -542,6 +542,7 @@ enum SoundIDs {
     SOUND_METAL_GATE_OPEN,
     SOUND_METAL_GATE_CLOSE,
     SOUND_MENU_BADGE_ERROR          = 541,
+    SOUND_UNKNOWN_231               = 561,
     SOUND_UNKNOWN_246               = 582,
     SOUND_UNKNOWN_259               = 601,
     SOUND_UNKNOWN_25A,
@@ -1500,9 +1501,11 @@ enum DamageTypes {
     DAMAGE_TYPE_QUAKE           = 0x00000800,
     DAMAGE_TYPE_4000            = 0x00004000,
     DAMAGE_TYPE_THROW           = 0x00040000,
+    DAMAGE_TYPE_2000000         = 0x02000000,
     DAMAGE_TYPE_IGNORE_DEFENSE  = 0x08000000,
     DAMAGE_TYPE_NO_CONTACT      = 0x10000000,
     DAMAGE_TYPE_UNBLOCKABLE     = 0x20000000,
+    DAMAGE_TYPE_40000000        = 0x40000000,
     DAMAGE_TYPE_TRIGGER_LUCKY   = 0x80000000,
 };
 
@@ -1666,6 +1669,7 @@ enum ActorEventFlags {
     EVENT_FLAG_ILLUSORY         = 0x00000020, ///< Player attacks pass through and miss.
     EVENT_FLAG_ELECTRIFIED      = 0x00000080, ///< Player takes shock damage upon contact.
     EVENT_FLAG_EXPLOSIVE        = 0x00000200, ///< Blast and fire attacks trigger an explosion.
+    EVENT_FLAG_800              = 0x00000800,
     EVENT_FLAG_FLIPABLE         = 0x00001000, ///< Actor can be flipped; triggered by jump and quake attacks.
     EVENT_FLAG_GROUNDABLE       = 0x00004000, ///< Actor can be knocked down from flight; triggered by jump attacks.
     EVENT_FLAG_SPIKY_FRONT      = 0x00010000, ///< Player takes spike damage from hammer attacks.
@@ -1755,6 +1759,46 @@ enum GameModeIDs {
     GAME_MODE_EXIT_FILE_SELECT,
     GAME_MODE_INTRO,
     GAME_MODE_DEMO,
+};
+
+enum BattleStatusFlags1 {
+    BS_FLAGS1_0                = 0x00000000,
+    BS_FLAGS1_1                = 0x00000001, // show actors
+    BS_FLAGS1_2                = 0x00000002, // menu is open
+    BS_FLAGS1_4                = 0x00000004,
+    BS_FLAGS1_8                = 0x00000008,
+    BS_FLAGS1_10               = 0x00000010, // enable attack bonuses (power plus, etc)?
+    BS_FLAGS1_SP_EVT_ACTIVE    = 0x00000020, // enable special events (other than hit/death/immune?)
+    BS_FLAGS1_40               = 0x00000040,
+    BS_FLAGS1_80               = 0x00000080,
+    BS_FLAGS1_100              = 0x00000100,
+    BS_FLAGS1_200              = 0x00000200,
+    BS_FLAGS1_400              = 0x00000400,
+    BS_FLAGS1_800              = 0x00000800,
+    BS_FLAGS1_1000             = 0x00001000,
+    BS_FLAGS1_2000             = 0x08002000,
+    BS_FLAGS1_4000             = 0x00004000,
+    BS_FLAGS1_8000             = 0x00008000,
+    BS_FLAGS1_10000            = 0x00010000,
+    BS_FLAGS1_20000            = 0x00020000,
+    BS_FLAGS1_40000            = 0x00040000,
+    BS_FLAGS1_80000            = 0x00080000, // partner will act (partner turn?)
+    BS_FLAGS1_100000           = 0x00100000, // player in back (after pressing z)
+    BS_FLAGS1_200000           = 0x00200000, // enemy turn pending
+    BS_FLAGS1_PLAYER_DEFENDING = 0x00400000, // player is defending
+    BS_FLAGS1_800000           = 0x00800000, // don’t game over on loss
+    BS_FLAGS1_1000000          = 0x01000000,
+    BS_FLAGS1_2000000          = 0x02000000,
+    BS_FLAGS1_4000000          = 0x04000000,
+    BS_FLAGS1_8000000          = 0x08000000,
+    BS_FLAGS1_10000000         = 0x10000000, // prevent hammer charge
+    BS_FLAGS1_20000000         = 0x20000000, // prevent jump charge
+    BS_FLAGS1_40000000         = 0x40000000,
+    BS_FLAGS1_ATK_BLOCKED      = 0x80000000,
+};
+
+enum BattleStatusFlags2 {
+    BS_FLAGS2_1000000         = 0x1000000,
 };
 
 #endif

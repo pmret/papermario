@@ -47,77 +47,79 @@ ApiStatus N(func_802A1318_718B68)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_P_O_W_BLOCK;
-    await N(UseItemWithEffect);
-    sleep 10;
-    MakeEntity(0x802EA2E0, -40, 60, 0, 0, MAKE_ENTITY_END);
-    EVT_VAR(10) = EVT_VAR(0);
-    N(func_802A1318_718B68)();
-    PlayEffect(0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(0x7, 2, -30, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(0x7, 2, -40, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    sleep 20;
-    UseBattleCamPreset(2);
-    MoveBattleCamOver(20);
-    spawn {
-        sleep 15;
-        PlaySoundAtActor(ACTOR_PLAYER, SOUND_HIT_BLOCK);
-        N(func_802A123C_718A8C)();
-        PlayEffect(0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        PlayEffect(0x7, 2, -30, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        PlayEffect(0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        PlayEffect(0x7, 2, -40, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        StartRumble(4);
-        ShakeCam(1, 0, 2, 1.0);
-        ShakeCam(1, 0, 2, 3.0);
-        ShakeCam(1, 0, 2, 6.0);
-        ShakeCam(1, 0, 2, 5.0);
-        ShakeCam(1, 0, 2, 4.0);
-        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2030);
-        ShakeCam(1, 0, 2, 3.0);
-        ShakeCam(1, 0, 2, 2.0);
-        ShakeCam(1, 0, 2, 1.0);
-        ShakeCam(1, 0, 2, 0.5);
-        ShakeCam(1, 0, 2, 0.2001953125);
-    }
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(0) += 30;
-    SetActorSpeed(ACTOR_PLAYER, 4.0);
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_RUNNING);
-    SetGoalPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    PlayerRunToGoal(ACTOR_PLAYER);
-    sleep 5;
-    SetJumpAnimations(ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009);
-    SetActorJumpGravity(ACTOR_PLAYER, 0.6005859375);
-    SetGoalPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    func_80273444(20, 0, 0);
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    UseBattleCamPreset(3);
-    MoveBattleCamOver(20);
-    InitTargetIterator();
-0:
-    SetGoalToTarget(ACTOR_SELF);
-    ItemCheckHit(EVT_VAR(0), 0x10000000, 0, EVT_VAR(0), 0);
-    if (EVT_VAR(0) == 6) {
-        goto 1;
-    }
-    GetItemPower(ITEM_P_O_W_BLOCK, EVT_VAR(3), EVT_VAR(4));
-    ApplyShrinkFromOwner(EVT_VAR(3));
-    func_80269EAC(22);
-    ItemDamageEnemy(EVT_VAR(0), 0x38000400, 0, EVT_VAR(3), 32);
-1:
-    ChooseNextTarget(0, EVT_VAR(0));
-    if (EVT_VAR(0) != -1) {
-        goto 0;
-    }
-    PlayEffect(0x7, 2, -70, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(0x7, 2, -60, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(0x7, 2, -70, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(0x7, 2, -70, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    N(func_802A12E4_718B34)();
-    sleep 30;
-    await N(PlayerGoHome);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x00000090)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(MakeEntity, 0x802EA2E0, -40, 60, 0, 0, MAKE_ENTITY_END)
+    EVT_SET(EVT_VAR(10), EVT_VAR(0))
+    EVT_CALL(N(func_802A1318_718B68))
+    EVT_CALL(PlayEffect, 0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, 0x7, 2, -30, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, 0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, 0x7, 2, -40, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_WAIT_FRAMES(20)
+    EVT_CALL(UseBattleCamPreset, 2)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_THREAD
+        EVT_WAIT_FRAMES(15)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_HIT_BLOCK)
+        EVT_CALL(N(func_802A123C_718A8C))
+        EVT_CALL(PlayEffect, 0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, 0x7, 2, -30, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, 0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, 0x7, 2, -40, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(StartRumble, 4)
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(1.0))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(3.0))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(6.0))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(5.0))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(4.0))
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_2030)
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(3.0))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(2.0))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(1.0))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.5))
+        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.2))
+    EVT_END_THREAD
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(0), 30)
+    EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FIXED(4.0))
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_RUNNING)
+    EVT_CALL(SetGoalPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(PlayerRunToGoal, 0)
+    EVT_WAIT_FRAMES(5)
+    EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009)
+    EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FIXED(0.6))
+    EVT_CALL(SetGoalPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(func_80273444, 20, 0, 0)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_CALL(InitTargetIterator)
+    EVT_LABEL(0)
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(ItemCheckHit, EVT_VAR(0), 268435456, 0, EVT_VAR(0), 0)
+    EVT_IF_EQ(EVT_VAR(0), 6)
+        EVT_GOTO(1)
+    EVT_END_IF
+    EVT_CALL(GetItemPower, ITEM_P_O_W_BLOCK, EVT_VAR(3), EVT_VAR(4))
+    EVT_CALL(ApplyShrinkFromOwner, EVT_VAR(3))
+    EVT_CALL(func_80269EAC, 22)
+    EVT_CALL(ItemDamageEnemy, EVT_VAR(0), 939525120, 0, EVT_VAR(3), 32)
+    EVT_LABEL(1)
+    EVT_CALL(ChooseNextTarget, 0, EVT_VAR(0))
+    EVT_IF_NE(EVT_VAR(0), -1)
+        EVT_GOTO(0)
+    EVT_END_IF
+    EVT_CALL(PlayEffect, 0x7, 2, -70, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, 0x7, 2, -60, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, 0x7, 2, -70, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, 0x7, 2, -70, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(N(func_802A12E4_718B34))
+    EVT_WAIT_FRAMES(30)
+    EVT_EXEC_WAIT(N(PlayerGoHome))
+    EVT_RETURN
+    EVT_END
+};
