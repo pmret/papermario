@@ -321,89 +321,94 @@ s32 N(D_802A2858_732B58)[] = {
     0x00000000, 0x00000001, 0x00000002, 0x00000000, 0x00000001, 0x000000000
 };
 
-EvtSource N(script6) = SCRIPT({
-    GetMenuSelection(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    if (EVT_VAR(1) == 211) {
-        EVT_VAR(10) = (const) ITEM_KOOKY_COOKIE;
-        EVT_VAR(1) = 0;
-        await N(UseItemWithEffect);
-        await N(EatItem);
-        N(func_802A1A8C_731D8C)();
-        GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        EVT_VAR(0) += 20;
-        EVT_VAR(1) += 25;
-        N(func_802A18D8_731BD8)(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
-        GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        EVT_VAR(1) += 25;
-        func_802D7520(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
-        N(AddFP)(EVT_VAR(3));
-        sleep 10;
-        SetAnimation(ACTOR_PLAYER, 0, ANIM_THUMBS_UP);
-        sleep 30;
-        GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        func_802D75D8(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
-        SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-        sleep 20;
-        SetAnimation(ACTOR_PLAYER, 0, ANIM_GOT_ITEM);
-    } else {
-        EVT_VAR(10) = (const) ITEM_STRANGE_CAKE;
-        EVT_VAR(1) = 0;
-        await N(UseItemWithEffect);
-        await N(EatItem);
-        SetAnimation(ACTOR_PLAYER, 0, ANIM_GOT_ITEM);
-    }
-    sleep 10;
-    spawn {
-        sleep 220;
-        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_3F3);
-    }
-    PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_368);
-    N(func_802A13E4_7316E4)();
-    sleep 2;
-    match EVT_VAR(0) {
-        == 0 {
-            await N(script7);
-        }
-        == 1 {
-            await N(script8);
-        }
-        == 2 {
-            await N(script9);
-        }
-    }
-    await N(PlayerGoHome);
-});
+EvtSource N(script6) = {
+    EVT_CALL(GetMenuSelection, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_IF_EQ(EVT_VAR(1), 211)
+        EVT_SET_CONST(EVT_VAR(10), 0xD3)
+        EVT_SET(EVT_VAR(1), 0)
+        EVT_EXEC_WAIT(battle_item_strange_cake_UseItemWithEffect)
+        EVT_EXEC_WAIT(battle_item_strange_cake_EatItem)
+        EVT_CALL(battle_item_strange_cake_func_802A1A8C_731D8C)
+        EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(0), 20)
+        EVT_ADD(EVT_VAR(1), 25)
+        EVT_CALL(battle_item_strange_cake_func_802A18D8_731BD8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+        EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(1), 25)
+        EVT_CALL(func_802D7520, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+        EVT_CALL(battle_item_strange_cake_AddFP, EVT_VAR(3))
+        EVT_WAIT_FRAMES(10)
+        EVT_CALL(SetAnimation, 0, 0, 65586)
+        EVT_WAIT_FRAMES(30)
+        EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(func_802D75D8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+        EVT_CALL(SetAnimation, 0, 0, 65538)
+        EVT_WAIT_FRAMES(20)
+        EVT_CALL(SetAnimation, 0, 0, 65567)
+    EVT_ELSE
+        EVT_SET_CONST(EVT_VAR(10), 0xD2)
+        EVT_SET(EVT_VAR(1), 0)
+        EVT_EXEC_WAIT(battle_item_strange_cake_UseItemWithEffect)
+        EVT_EXEC_WAIT(battle_item_strange_cake_EatItem)
+        EVT_CALL(SetAnimation, 0, 0, 65567)
+    EVT_END_IF
+    EVT_WAIT_FRAMES(10)
+    EVT_THREAD
+        EVT_WAIT_FRAMES(220)
+        EVT_CALL(PlaySoundAtActor, 0, 1011)
+    EVT_END_THREAD
+    EVT_CALL(PlaySoundAtActor, 0, 872)
+    EVT_CALL(battle_item_strange_cake_func_802A13E4_7316E4)
+    EVT_WAIT_FRAMES(2)
+    EVT_SWITCH(EVT_VAR(0))
+        EVT_CASE_EQ(0)
+            EVT_EXEC_WAIT(battle_item_strange_cake_script7)
+        EVT_CASE_EQ(1)
+            EVT_EXEC_WAIT(battle_item_strange_cake_script8)
+        EVT_CASE_EQ(2)
+            EVT_EXEC_WAIT(battle_item_strange_cake_script9)
+    EVT_END_SWITCH
+    EVT_EXEC_WAIT(battle_item_strange_cake_PlayerGoHome)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(script7) = SCRIPT({
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(1) += 20;
-    PlayEffect(0x57, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
-    N(func_802A1AD8_731DD8)();
-    sleep 20;
-    ShowMessageBox(16, 60);
-    WaitForMessageBoxDone();
-});
+EvtSource N(script7) = {
+    EVT_CALL(SetAnimation, 0, 0, 65538)
+    EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(1), 20)
+    EVT_CALL(PlayEffect, 87, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(battle_item_strange_cake_func_802A1AD8_731DD8)
+    EVT_WAIT_FRAMES(20)
+    EVT_CALL(ShowMessageBox, 16, 60)
+    EVT_CALL(WaitForMessageBoxDone)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(script8) = SCRIPT({
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(1) += 20;
-    PlayEffect(0x33, 6, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
-    N(func_802A1B14_731E14)();
-    sleep 20;
-    ShowMessageBox(17, 60);
-    WaitForMessageBoxDone();
-});
+EvtSource N(script8) = {
+    EVT_CALL(SetAnimation, 0, 0, 65538)
+    EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(1), 20)
+    EVT_CALL(PlayEffect, 51, 6, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(battle_item_strange_cake_func_802A1B14_731E14)
+    EVT_WAIT_FRAMES(20)
+    EVT_CALL(ShowMessageBox, 17, 60)
+    EVT_CALL(WaitForMessageBoxDone)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(script9) = SCRIPT({
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_30004);
-    SetGoalToTarget(ACTOR_PLAYER);
-    GetGoalPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    spawn DoSleepHit;
-    N(func_802A1B68_731E68)();
-    sleep 20;
-    ShowMessageBox(11, 60);
-    WaitForMessageBoxDone();
-});
+EvtSource N(script9) = {
+    EVT_CALL(SetAnimation, 0, 0, 196612)
+    EVT_CALL(SetGoalToTarget, 0)
+    EVT_CALL(GetGoalPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_EXEC(DoSleepHit)
+    EVT_CALL(battle_item_strange_cake_func_802A1B68_731E68)
+    EVT_WAIT_FRAMES(20)
+    EVT_CALL(ShowMessageBox, 11, 60)
+    EVT_CALL(WaitForMessageBoxDone)
+    EVT_RETURN
+    EVT_END
+};
 

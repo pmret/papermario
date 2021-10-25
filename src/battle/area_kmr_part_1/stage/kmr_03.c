@@ -5,20 +5,22 @@
 
 #include "clouds.inc.c"
 
-EvtSource N(beforeBattle_80220188) = SCRIPT({
-    SetSpriteShading(-1);
+EvtSource N(beforeBattle_80220188) = {
+    EVT_CALL(SetSpriteShading, -1)
+    EVT_SET(EVT_VAR(0), 1)
+    EVT_SET(EVT_VAR(2), 0)
+    EVT_EXEC(N(clouds1))
+    EVT_SET(EVT_VAR(0), 4)
+    EVT_SET(EVT_VAR(2), 70)
+    EVT_EXEC(N(clouds1))
+    EVT_RETURN
+    EVT_END
+};
 
-    EVT_VAR(0) = 1; // model
-    EVT_VAR(2) = 0; // speed
-    spawn N(clouds1);
-
-    EVT_VAR(0) = 4;
-    EVT_VAR(2) = 70;
-    spawn N(clouds1);
-});
-
-EvtSource N(afterBattle_80220200) = SCRIPT({
-});
+EvtSource N(afterBattle_80220200) = {
+    EVT_RETURN
+    EVT_END
+};
 
 s32 N(foregroundModelList_80220210)[] = {
     0x00000027, 0x0000002B, 0x00000000,

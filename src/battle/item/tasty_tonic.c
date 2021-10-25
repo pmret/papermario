@@ -29,40 +29,42 @@ ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_TASTY_TONIC;
-    await N(UseItemWithEffect);
-    InitTargetIterator();
-    GetOwnerTarget(EVT_VAR(0), EVT_VAR(1));
-    if (EVT_VAR(0) == 0) {
-        await N(DrinkItem);
-        GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        EVT_VAR(1) += 25;
-        EVT_VAR(2) += 5;
-        func_802D7520(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10);
-        GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        EVT_VAR(1) += 20;
-        SetAnimation(ACTOR_PLAYER, 0, ANIM_THUMBS_UP);
-        sleep 30;
-        SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-        GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        EVT_VAR(2) += 5;
-        func_802D75D8(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10);
-        N(func_802A123C_72223C)(ACTOR_PLAYER);
-        sleep 20;
-    } else {
-        GetActorPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        EVT_VAR(1) += 25;
-        EVT_VAR(2) += 5;
-        func_802D7520(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5);
-        GetActorPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        EVT_VAR(1) += 20;
-        sleep 30;
-        GetActorPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        EVT_VAR(2) += 5;
-        func_802D75D8(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5);
-        N(func_802A123C_72223C)(ACTOR_PARTNER);
-        sleep 20;
-    }
-    await N(PlayerGoHome);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x89)
+    EVT_EXEC_WAIT(battle_item_tasty_tonic_UseItemWithEffect)
+    EVT_CALL(InitTargetIterator)
+    EVT_CALL(GetOwnerTarget, EVT_VAR(0), EVT_VAR(1))
+    EVT_IF_EQ(EVT_VAR(0), 0)
+        EVT_EXEC_WAIT(battle_item_tasty_tonic_DrinkItem)
+        EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(1), 25)
+        EVT_ADD(EVT_VAR(2), 5)
+        EVT_CALL(func_802D7520, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
+        EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(1), 20)
+        EVT_CALL(SetAnimation, 0, 0, 65586)
+        EVT_WAIT_FRAMES(30)
+        EVT_CALL(SetAnimation, 0, 0, 65538)
+        EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(2), 5)
+        EVT_CALL(func_802D75D8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
+        EVT_CALL(battle_item_tasty_tonic_func_802A123C_72223C, 0)
+        EVT_WAIT_FRAMES(20)
+    EVT_ELSE
+        EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(1), 25)
+        EVT_ADD(EVT_VAR(2), 5)
+        EVT_CALL(func_802D7520, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5)
+        EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(1), 20)
+        EVT_WAIT_FRAMES(30)
+        EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(2), 5)
+        EVT_CALL(func_802D75D8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5)
+        EVT_CALL(battle_item_tasty_tonic_func_802A123C_72223C, 256)
+        EVT_WAIT_FRAMES(20)
+    EVT_END_IF
+    EVT_EXEC_WAIT(battle_item_tasty_tonic_PlayerGoHome)
+    EVT_RETURN
+    EVT_END
+};

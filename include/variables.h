@@ -398,5 +398,18 @@ extern s32 bMarioIdleAnims[];
 extern s32 bMarioDefendAnims[];
 extern s32 bPeachIdleAnims[];
 
+// TODO: name these entity symbols
+extern StaticEntityData D_802E9A18; // entitySaveBlock
+extern StaticEntityData D_802E9BB0;
+extern StaticEntityData D_802E9BD4; // entityBlueSwitch
+extern StaticEntityData D_802E9BF8; // entityHugeBlueSwitch
+extern StaticEntityData D_802E9C1C;
+extern StaticEntityData D_802E9C8C;
+extern StaticEntityData D_802E9CB0;
+extern StaticEntityData D_802E9CD4;
+extern StaticEntityData D_802E9CF8;
+extern StaticEntityData D_802E9D1C;
+extern StaticEntityData D_802E9D40;
+extern StaticEntityData D_802E9D64;
 
 #endif

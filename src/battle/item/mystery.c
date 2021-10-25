@@ -273,48 +273,50 @@ s32 N(D_802A229C_72D84C)[8] = {
     0x0000008A, 0x0000008C, 0x00000085, 0x0000008A
 };
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_MYSTERY;
-    await N(UseItemWithEffect);
-    spawn {
-        sleep 220;
-        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_3F3);
-    }
-    PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_368);
-    N(func_802A13E4_72C994)();
-    sleep 2;
-    if (EVT_VAR(0) != ITEM_PEBBLE) {
-        jump UseMystery;
-        return;
-    }
-    CreateVirtualEntity(EVT_VAR(10), N(modelCommandList));
-    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(1) += 150;
-    SetVirtualEntityPosition(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetOwnerTarget(0, 0);
-    SetGoalToTarget(ACTOR_SELF);
-    GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    spawn {
-        EVT_VAR(0) = 0;
-        loop 18 {
-            EVT_VAR(0) += 0xFFFFFFC4;
-            SetVirtualEntityRotation(EVT_VAR(10), 0, 0, EVT_VAR(0));
-            sleep 1;
-        }
-    }
-    SetVirtualEntityJumpGravity(EVT_VAR(10), 0.6005859375);
-    EVT_VAR(2) += 5;
-    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 12);
-    spawn {
-        EVT_VAR(0) += 60;
-        EVT_VAR(1) += 0;
-        VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 16);
-        DeleteVirtualEntity(EVT_VAR(10));
-    }
-    SetTargetActor(ACTOR_SELF, 0);
-    SetGoalToTarget(ACTOR_SELF);
-    GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    N(func_802A188C_72CE3C)(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetBattleFlagBits(32, 1);
-    DispatchDamagePlayerEvent(1, EVENT_HIT);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x00000096)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
+    EVT_THREAD
+        EVT_WAIT_FRAMES(220)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_3F3)
+    EVT_END_THREAD
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_368)
+    EVT_CALL(N(func_802A13E4_72C994))
+    EVT_WAIT_FRAMES(2)
+    EVT_IF_NE(EVT_VAR(0), 133)
+        EVT_JUMP(EVT_PTR(UseMystery))
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(CreateVirtualEntity, EVT_VAR(10), EVT_PTR(N(modelCommandList)))
+    EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(1), 150)
+    EVT_CALL(SetVirtualEntityPosition, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetOwnerTarget, 0, 0)
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(GetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_THREAD
+        EVT_SET(EVT_VAR(0), 0)
+        EVT_LOOP(18)
+            EVT_ADD(EVT_VAR(0), -60)
+            EVT_CALL(SetVirtualEntityRotation, EVT_VAR(10), 0, 0, EVT_VAR(0))
+            EVT_WAIT_FRAMES(1)
+        EVT_END_LOOP
+    EVT_END_THREAD
+    EVT_CALL(SetVirtualEntityJumpGravity, EVT_VAR(10), EVT_FIXED(0.6))
+    EVT_ADD(EVT_VAR(2), 5)
+    EVT_CALL(VirtualEntityJumpTo, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 12)
+    EVT_THREAD
+        EVT_ADD(EVT_VAR(0), 60)
+        EVT_ADD(EVT_VAR(1), 0)
+        EVT_CALL(VirtualEntityJumpTo, EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 16)
+        EVT_CALL(DeleteVirtualEntity, EVT_VAR(10))
+    EVT_END_THREAD
+    EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(GetGoalPos, ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(N(func_802A188C_72CE3C), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetBattleFlagBits, 32, 1)
+    EVT_CALL(DispatchDamagePlayerEvent, 1, EVENT_HIT)
+    EVT_RETURN
+    EVT_END
+};
