@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void N(DeadUnkNpcAIFunc14)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(UnkNpcAIFunc14)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 vt5 = enemy->varTable[5];

@@ -11,7 +11,7 @@ INCLUDE_ASM(s32, "EE70C0", func_80240B10_EE70C0);
 
 INCLUDE_ASM(s32, "EE70C0", func_80240CC0_EE7270);
 
-#include "world/common/DeadUnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
@@ -27,7 +27,7 @@ void func_80241764_EE7D14(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     }
 }
 
-#include "world/common/DeadUnkNpcAIFunc14.inc.c"
+#include "world/common/UnkNpcAIFunc14.inc.c"
 
 #include "world/common/UnkNpcAIFunc3.inc.c"
 

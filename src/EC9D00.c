@@ -1,11 +1,11 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of flo_08 (CAED40.c)
+
 #define NAMESPACE EC9D00
 
 #define gPartnerActionStatus dead_gPartnerActionStatus2
-
-extern s32 D_80094900[11][4];
 
 #include "world/common/SetOverrideFlags_40.inc.c"
 

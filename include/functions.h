@@ -490,7 +490,7 @@ void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s
 void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 s32 func_8004A784(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
 void base_UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
-void DeadUnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+void UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
 s32** spr_get_npc_palettes(s32 npcSpriteID);
 void spr_draw_player_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f arg4);

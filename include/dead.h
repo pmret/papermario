@@ -87,6 +87,9 @@
 #define decrement_status_menu_disabled dead_decrement_status_menu_disabled
 #define sync_status_menu dead_sync_status_menu
 #define set_max_SP dead_set_max_SP
+#define get_current_map_header dead_get_current_map_header
+#define gGameStatusPtr dead_gGameStatusPtr
+
 //#define sqrtf dead_sqrtf // <- This somehow breaks things
 
 #endif

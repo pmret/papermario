@@ -1,7 +1,7 @@
 #include "dead.h"
 #include "common.h"
 
-// Copy of flo_00? (C9DF60)
+// Copy of flo_00 (C9DF60)
 
 #define NAMESPACE EB8E90
 
@@ -9,7 +9,7 @@
 
 #include "world/common/UnkFunc13.inc.c"
 
-#include "world/common/DeadUnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 #include "world/common/UnkFunc14.inc.c"
 

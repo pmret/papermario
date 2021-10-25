@@ -14,7 +14,7 @@ glabel func_802400F0_ED8F10
 /* ED8F18 802400F8 0080802D */  daddu     $s0, $a0, $zero
 /* ED8F1C 802400FC AFBF002C */  sw        $ra, 0x2c($sp)
 /* ED8F20 80240100 AFB20028 */  sw        $s2, 0x28($sp)
-/* ED8F24 80240104 0C017C4A */  jal       func_8005F128
+/* ED8F24 80240104 0C017C4A */  jal       dead_get_current_map_header
 /* ED8F28 80240108 AFB10024 */   sw       $s1, 0x24($sp)
 /* ED8F2C 8024010C 0200202D */  daddu     $a0, $s0, $zero
 /* ED8F30 80240110 3C05FE36 */  lui       $a1, 0xfe36
@@ -58,8 +58,8 @@ glabel func_802400F0_ED8F10
 /* ED8FC8 802401A8 44061000 */  mfc1      $a2, $f2
 /* ED8FCC 802401AC 0C0B551A */  jal       dead_evt_set_variable
 /* ED8FD0 802401B0 34A53C84 */   ori      $a1, $a1, 0x3c84
-/* ED8FD4 802401B4 3C028008 */  lui       $v0, %hi(D_80079430)
-/* ED8FD8 802401B8 8C429430 */  lw        $v0, %lo(D_80079430)($v0)
+/* ED8FD4 802401B4 3C028008 */  lui       $v0, %hi(dead_gGameStatusPtr)
+/* ED8FD8 802401B8 8C429430 */  lw        $v0, %lo(dead_gGameStatusPtr)($v0)
 /* ED8FDC 802401BC 8E03008C */  lw        $v1, 0x8c($s0)
 /* ED8FE0 802401C0 94450134 */  lhu       $a1, 0x134($v0)
 /* ED8FE4 802401C4 AFA30010 */  sw        $v1, 0x10($sp)

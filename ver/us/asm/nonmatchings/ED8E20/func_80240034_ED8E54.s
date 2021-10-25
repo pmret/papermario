@@ -14,8 +14,8 @@ glabel func_80240034_ED8E54
 /* ED8E78 80240058 08090038 */  j         .L802400E0
 /* ED8E7C 8024005C AE000084 */   sw       $zero, 0x84($s0)
 .L80240060:
-/* ED8E80 80240060 3C038008 */  lui       $v1, %hi(D_80079430)
-/* ED8E84 80240064 8C639430 */  lw        $v1, %lo(D_80079430)($v1)
+/* ED8E80 80240060 3C038008 */  lui       $v1, %hi(dead_gGameStatusPtr)
+/* ED8E84 80240064 8C639430 */  lw        $v1, %lo(dead_gGameStatusPtr)($v1)
 /* ED8E88 80240068 80620040 */  lb        $v0, 0x40($v1)
 /* ED8E8C 8024006C 80670044 */  lb        $a3, 0x44($v1)
 /* ED8E90 80240070 04420001 */  bltzl     $v0, .L80240078
@@ -35,7 +35,7 @@ glabel func_80240034_ED8E54
 /* ED8EC0 802400A0 46802120 */  cvt.s.w   $f4, $f4
 /* ED8EC4 802400A4 44806000 */  mtc1      $zero, $f12
 /* ED8EC8 802400A8 44072000 */  mfc1      $a3, $f4
-/* ED8ECC 802400AC 0C00ABDC */  jal       fio_validate_header_checksums
+/* ED8ECC 802400AC 0C00ABDC */  jal       dead_atan2
 /* ED8ED0 802400B0 46006386 */   mov.s    $f14, $f12
 /* ED8ED4 802400B4 3C014270 */  lui       $at, 0x4270
 /* ED8ED8 802400B8 44811000 */  mtc1      $at, $f2

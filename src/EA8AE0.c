@@ -2,7 +2,7 @@
 #include "common.h"
 #include "effects.h"
 
-// Copy of kzn_19?
+// Copy of kzn_19 (C8DBB0.c)
 
 #define NAMESPACE EA8AE0
 
