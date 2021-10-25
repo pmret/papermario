@@ -1,6 +1,7 @@
 #include "common.h"
 #include "nu/nusys.h"
 #include "hud_element.h"
+#include "ld_addrs.h"
 
 s32 D_800778A0[] = {
     &D_8038F800, &D_803B5000, &D_803DA800,
@@ -33,7 +34,6 @@ Gfx D_80077908[] = {
     gsSPEndDisplayList(),
 };
 
-
 // BSS
 extern s32 D_800A0904;
 extern s32 D_800A0908;
@@ -43,7 +43,6 @@ void state_init_battle(void) {
 }
 
 void state_step_battle(void) {
-    s32 phi_a0;
     u32 currentBattleSelection;
     u32 temp;
 
@@ -75,8 +74,7 @@ void state_step_battle(void) {
             currentBattleSelection = gCurrentBattleSection;
             temp = D_800DC4EB;
 
-            // This part sucks
-            if ((gGameStatusPtr->peachFlags & 1) || (currentBattleSelection == 0x26 && temp == 0)) {
+            if (gGameStatusPtr->peachFlags & 1 || (currentBattleSelection == 0x26 && temp == 0)) {
                 gGameStatusPtr->peachFlags |= 1;
                 spr_init_sprites(6);
             } else {
