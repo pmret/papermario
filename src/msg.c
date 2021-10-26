@@ -116,7 +116,7 @@ extern s32 D_802ED970;
 extern s32 D_802EE8D0;
 extern MessageCharset* gMsgCharsets[5];
 extern s32 D_802F39D0;
-extern s32* D_802F4560;
+extern s16 D_802F4560[];
 
 void load_font(s32 font);
 s32 _update_message(MessagePrintState*);
@@ -1112,7 +1112,7 @@ INCLUDE_ASM(s32, "msg", msg_draw_frame);
 
 void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out) {
     out->raster = &gMsgCharsets[font]->rasters[variation].raster[(u16)gMsgCharsets[font]->charRasterSize * charIndex];
-    out->palette = (s16*)(&D_802F4560 + palette * 0x4);
+    out->palette = &D_802F4560[palette * 8];
     out->texSize.x = gMsgCharsets[font]->texSize.x;
     out->texSize.y = gMsgCharsets[font]->texSize.y;
     out->charWidth = msg_get_draw_char_width(charIndex, font, variation, 1.0f, 0, 0);
