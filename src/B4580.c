@@ -37,7 +37,7 @@ INCLUDE_ASM(s32, "B4580", animator_copy_vertices_to_buffer);
 // Vtx* animator_copy_vertices_to_buffer(ModelAnimator* animator, AnimatorNode* node, Vtx* buffer, s32 vtxCount,
 //                                       s32 overhead, s32 startIdx) {
 //     DisplayListBufferHandle* handle;
-//     Vtx* temp_a3;
+//     Vtx* bufferMem;
 //     Vtx* phi_v1;
 //     s32 i;
 
@@ -51,10 +51,10 @@ INCLUDE_ASM(s32, "B4580", animator_copy_vertices_to_buffer);
 
 //     ASSERT(i < ARRAY_COUNT(D_801533C0));
 
-//     temp_a3 = general_heap_malloc((vtxCount + overhead) * sizeof(*buffer));
-//     handle->addr = temp_a3;
+//     bufferMem = general_heap_malloc((vtxCount + overhead) * sizeof(*buffer));
+//     handle->addr = bufferMem;
 
-//     ASSERT(temp_a3 != NULL);
+//     ASSERT(bufferMem != NULL);
 
 //     handle->mode = 3;
 //     phi_v1 = &node->fcData.vtxList[startIdx];
@@ -63,12 +63,12 @@ INCLUDE_ASM(s32, "B4580", animator_copy_vertices_to_buffer);
 //     }
 
 //     for (i = 0; i < vtxCount; i++) {
-//         *temp_a3 = *phi_v1;
+//         *bufferMem = *phi_v1;
 //         phi_v1->v.ob[0] = buffer->v.ob[0];
 //         phi_v1->v.ob[1] = buffer->v.ob[1];
 //         phi_v1->v.ob[2] = buffer->v.ob[2];
-//         temp_a3++;
 //         buffer++;
+//         bufferMem++;
 //         phi_v1++;
 //     }
 //     return handle->addr;
@@ -295,8 +295,6 @@ s32 create_model_animator(u32* animPos) {
     return i;
 }
 
-// Add order swap with the animPos line
-#ifdef NON_MATCHING
 s32 create_mesh_animator(s32 animPos, s8* animBuffer) {
     ModelAnimator* animator;
     s32 i, j;
@@ -323,7 +321,7 @@ s32 create_mesh_animator(s32 animPos, s8* animBuffer) {
     animator->animationBuffer = animBuffer;
     animator->nextUpdateTime = 1.0f;
     animator->timeScale = 1.0f;
-    animPos = animator->animationBuffer + (animPos & 0xFFFFFF);
+    animPos = (animPos & 0xFFFFFF) + (s32)animator->animationBuffer;
     animator->animReadPos = animPos;
     animator->savedReadPos = animPos;
 
@@ -336,9 +334,6 @@ s32 create_mesh_animator(s32 animPos, s8* animBuffer) {
     }
     return i;
 }
-#else
-INCLUDE_ASM(s32, "B4580", create_mesh_animator);
-#endif
 
 AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorNodeBlueprint* nodeBP) {
     AnimatorNode* ret;
