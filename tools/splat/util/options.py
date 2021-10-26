@@ -4,7 +4,7 @@ from util import log
 
 opts = {}
 
-def initialize(config: Dict, config_path: str, base_path=None, target_path=None):
+def initialize(config: Dict, config_path, base_path=None, target_path=None):
     global opts
     opts = dict(config.get("options", {}))
 
@@ -14,7 +14,7 @@ def initialize(config: Dict, config_path: str, base_path=None, target_path=None)
         if not "base_path" in opts:
             log.error("Error: Base output dir not specified as a command line arg or via the config yaml (base_path)")
 
-        opts["base_path"] = Path(config_path).parent / opts["base_path"]
+        opts["base_path"] = Path(config_path[0]).parent / opts["base_path"]
 
     if not target_path:
         if "target_path" not in opts:
@@ -76,6 +76,12 @@ def get_create_undefined_syms_auto() -> bool:
 
 def get_undefined_syms_auto_path():
     return get_base_path() / opts.get("undefined_syms_auto_path", "undefined_syms_auto.txt")
+
+def get_create_elf_section_list_auto():
+    return opts.get("create_elf_section_list_auto", False)
+
+def get_elf_section_list_path():
+    return get_base_path() / opts.get("elf_section_list_path", "elf_sections.txt")
 
 def get_symbol_addrs_path():
     return get_base_path() / opts.get("symbol_addrs_path", "symbol_addrs.txt")
