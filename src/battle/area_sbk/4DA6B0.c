@@ -2,6 +2,6 @@
 
 #define NAMESPACE b_area_sbk
 
-INCLUDE_ASM(s32, "battle/area_sbk/4DA6B0", func_802180D0_4DA6B0);
+#include "common/UnkFloatFunc3.inc.c"
 
 #include "common/GetModelPos.inc.c"

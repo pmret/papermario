@@ -1569,6 +1569,17 @@ typedef struct ActorMovement {
     /* 0x4C */ f32 distance;
 } ActorMovement; // size = 0x50;
 
+typedef struct ChainAnimationState {
+    /* 0x00 */ Vec3f currentPos;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ Vec3f scale;
+} ChainAnimationState; // size = 0x30
+
 typedef struct ActorState { // TODO: Make the first field of this an ActorMovement
     /* 0x00 */ Vec3f currentPos;
     /* 0x0C */ Vec3f goalPos;
@@ -1586,9 +1597,10 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x60 */ s32 animJumpLand;
     /* 0x64 */ s16 moveTime;
     /* 0x66 */ s16 moveArcAmplitude;
-    /* 0x68 */ char unk_74[3];
+    /* 0x68 */ char unk_68[3];
     /* 0x6B */ u8 jumpPartIndex;
-    /* 0x6C */ char unk_78[16];
+    /* 0x6C */ ChainAnimationState* unk_6C;
+    /* 0x70 */ char unk_70[12];
     /* 0x7C */ s32 varTable[16];
 } ActorState; // size = 0xBC;
 
