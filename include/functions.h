@@ -470,8 +470,6 @@ void crash_screen_init(void);
 void crash_screen_set_draw_info(u16* frameBufPtr, s16 width, s16 height);
 
 // Dead functions:
-void dead_guTranslateF(float mf[4][4], float x, float y, float z);
-
 void func_800495A0(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
 void func_800496B8(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
 void func_80049C04(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
