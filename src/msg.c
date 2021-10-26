@@ -1110,5 +1110,11 @@ INCLUDE_ASM(s32, "msg", msg_draw_speech_arrow);
 
 INCLUDE_ASM(s32, "msg", msg_draw_frame);
 
-void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out);
-INCLUDE_ASM(void, "msg", msg_get_glyph, s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out);
+void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out) {
+    out->raster = &gMsgCharsets[font]->rasters[variation].raster[(u16)gMsgCharsets[font]->charRasterSize * charIndex];
+    out->palette = (s16*)(&D_802F4560 + palette * 0x4);
+    out->texSize.x = gMsgCharsets[font]->texSize.x;
+    out->texSize.y = gMsgCharsets[font]->texSize.y;
+    out->charWidth = msg_get_draw_char_width(charIndex, font, variation, 1.0f, 0, 0);
+    out->charHeight = out->texSize.y;
+}
