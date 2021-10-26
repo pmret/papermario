@@ -1,7 +1,7 @@
 #include "dead.h"
 #include "common.h"
 
-// Has some relation to flo_12 (CC0E70.c) but it's rearranged and some stuff is differnet, so hard to tell
+// Has some relation to flo_12 (CC0E70.c) but it's rearranged and some stuff is different, so hard to tell
 
 #define NAMESPACE EB1170
 
