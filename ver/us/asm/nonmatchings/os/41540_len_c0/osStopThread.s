@@ -6,7 +6,7 @@ glabel osStopThread
 /* 41544 80066144 AFB00010 */  sw        $s0, 0x10($sp)
 /* 41548 80066148 00808021 */  addu      $s0, $a0, $zero
 /* 4154C 8006614C AFBF0018 */  sw        $ra, 0x18($sp)
-/* 41550 80066150 0C01ACD8 */  jal       osDisableInt
+/* 41550 80066150 0C01ACD8 */  jal       __osDisableInt
 /* 41554 80066154 AFB10014 */   sw       $s1, 0x14($sp)
 /* 41558 80066158 24030004 */  addiu     $v1, $zero, 4
 /* 4155C 8006615C 12000002 */  beqz      $s0, .L80066168
@@ -45,7 +45,7 @@ glabel osStopThread
 /* 415D0 800661D0 0C019880 */  jal       osDequeueThread
 /* 415D4 800661D4 A6020010 */   sh       $v0, 0x10($s0)
 .L800661D8:
-/* 415D8 800661D8 0C01ACF4 */  jal       osRestoreInt
+/* 415D8 800661D8 0C01ACF4 */  jal       __osRestoreInt
 /* 415DC 800661DC 02202021 */   addu     $a0, $s1, $zero
 /* 415E0 800661E0 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 415E4 800661E4 8FB10014 */  lw        $s1, 0x14($sp)

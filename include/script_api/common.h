@@ -2,7 +2,7 @@
 #define _SCRIPT_API_COMMON_H_
 
 #include "common_structs.h"
-#include "evt.h"
+#include "macros.h"
 
 ApiStatus FadeBackgroundToBlack(Evt* script, s32 isInitialCall);
 ApiStatus UnfadeBackgroundFromBlack(Evt* script, s32 isInitialCall);

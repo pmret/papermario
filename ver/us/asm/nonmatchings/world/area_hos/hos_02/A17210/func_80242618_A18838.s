@@ -8,7 +8,7 @@ glabel D_80244E78_A1B098
 
 .section .text
 
-glabel func_80242618_A18838
+glabel hos_02_UnkNpcAIFunc34
 /* A18838 80242618 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* A1883C 8024261C AFB3004C */  sw        $s3, 0x4c($sp)
 /* A18840 80242620 0080982D */  daddu     $s3, $a0, $zero

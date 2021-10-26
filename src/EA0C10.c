@@ -105,7 +105,7 @@ INCLUDE_ASM(s32, "EA0C10", func_8024267C_EA2F7C);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "EA0C10", func_802427F0_EA30F0);
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "EA0C10", func_802429C0_EA32C0);
 

@@ -25,9 +25,8 @@ def handle_file(f_path, try_rename_file=False):
     for rename in renames:
         f_text = re.sub(r"(?:\b)" + rename + r"(?:\b)", renames[rename], f_text)
 
-    if f_text != f_text_orig:
-        with open(f_path, "w", newline="\n") as f:
-            f.write(f_text)
+    with open(f_path, "w", newline="\n") as f:
+        f.write(f_text)
 
 
 # Read Star Rod's output file
@@ -48,7 +47,7 @@ for root, dirs, files in os.walk(asm_dir):
 
             handle_file(f_path, True)
 
-# Delete old names of renamed asm files
+# Delete old versions of newly saved asm files
 print("Deleting old asm files")
 for d in deletes:
     os.remove(d)

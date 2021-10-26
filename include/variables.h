@@ -112,15 +112,6 @@ extern f32 D_800F7B70[4];
 
 extern TempSetZoneEnabled* D_800D91D4;
 
-extern UNK_TYPE D_0A0031E0;
-extern UNK_TYPE D_0A001508;
-extern UNK_TYPE D_0A0031B0;
-extern UNK_TYPE D_0A0014D8;
-extern UNK_TYPE D_0A002F78;
-extern UNK_TYPE D_0A001218;
-extern UNK_TYPE D_0A003F70;
-extern UNK_TYPE D_0A002318;
-
 // Animation related
 extern AnimatedMeshList* gCurrentAnimMeshListPtr;
 
@@ -300,6 +291,7 @@ extern s32 D_800F7B44;
 extern f32 D_8010C938;
 extern f32 D_8010C990;
 extern s32 D_8010C978;
+extern Vec3s D_80283524[];
 
 extern PartnerActionStatus gPartnerActionStatus; // something with partners
 extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
@@ -406,5 +398,21 @@ extern s32 bMarioIdleAnims[];
 extern s32 bMarioDefendAnims[];
 extern s32 bPeachIdleAnims[];
 
+// TODO: name these entity symbols
+extern StaticEntityData D_802E9A18; // entitySaveBlock
+extern StaticEntityData D_802E9BB0;
+extern StaticEntityData D_802E9BD4; // entityBlueSwitch
+extern StaticEntityData D_802E9BF8; // entityHugeBlueSwitch
+extern StaticEntityData D_802E9C1C;
+extern StaticEntityData D_802E9C8C;
+extern StaticEntityData D_802E9CB0;
+extern StaticEntityData D_802E9CD4;
+extern StaticEntityData D_802E9CF8;
+extern StaticEntityData D_802E9D1C;
+extern StaticEntityData D_802E9D40;
+extern StaticEntityData D_802E9D64;
+
+// Temporary dead stuff
+extern PartnerActionStatus dead_gPartnerActionStatus2;
 
 #endif

@@ -1,0 +1,4 @@
+options:
+  linker_discard_section: False
+  create_elf_section_list_auto: True
+  elf_section_list_path: ver/jp/build/elf_sections.txt

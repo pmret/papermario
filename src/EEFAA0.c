@@ -1,6 +1,8 @@
 #include "dead.h"
 #include "common.h"
 
+#define NAMESPACE EEFAA0
+
 // Copy from flo_16/UnkFunc44
 ApiStatus func_802429A0_EEFAA0(Evt* script, s32 isInitialCall) {
     script->varTable[0] = 0;

@@ -14,6 +14,7 @@ expected/
 /tools/to_rename.txt
 /ver/current
 /ver/*/assets
+ctx.c.m2c
 
 # Build artifacts
 build.ninja

@@ -123,7 +123,7 @@ glabel L80242A7C_A18C9C
 glabel L80242A8C_A18CAC
 /* A18CAC 80242A8C 0280202D */  daddu     $a0, $s4, $zero
 /* A18CB0 80242A90 0200282D */  daddu     $a1, $s0, $zero
-/* A18CB4 80242A94 0C090986 */  jal       func_80242618_A18838
+/* A18CB4 80242A94 0C090986 */  jal       hos_02_UnkNpcAIFunc34
 /* A18CB8 80242A98 0260302D */   daddu    $a2, $s3, $zero
 /* A18CBC 80242A9C 08090AAE */  j         .L80242AB8
 /* A18CC0 80242AA0 0000102D */   daddu    $v0, $zero, $zero

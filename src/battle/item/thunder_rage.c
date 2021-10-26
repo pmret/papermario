@@ -51,41 +51,43 @@ ApiStatus N(func_802A1354_71B4F4)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = SCRIPT({
-    EVT_VAR(10) = (const) ITEM_THUNDER_RAGE;
-    await N(UseItemWithEffect);
-    parallel {
-        sleep 5;
-        UseBattleCamPreset(2);
-        MoveBattleCamOver(20);
-    }
-    N(FadeBackgroundToBlack)();
-    PlaySound(SOUND_UNKNOWN_365);
-    sleep 10;
-    InitTargetIterator();
-0:
-    SetGoalToTarget(ACTOR_SELF);
-    ItemCheckHit(EVT_VAR(0), 0x10000000, 0, EVT_VAR(0), 0);
-    if (EVT_VAR(0) == 6) {
-        goto 1;
-    }
-    N(func_802A1354_71B4F4)();
-    sleep 5;
-    StartRumble(10);
-    ShakeCam(1, 0, 5, 1.0);
-    SetGoalToTarget(ACTOR_SELF);
-    GetItemPower(ITEM_THUNDER_RAGE, EVT_VAR(0), EVT_VAR(1));
-    ItemDamageEnemy(EVT_VAR(0), 0x38000020, 0, EVT_VAR(0), 32);
-1:
-    sleep 5;
-    ChooseNextTarget(0, EVT_VAR(0));
-    if (EVT_VAR(0) != -1) {
-        goto 0;
-    }
-    UseBattleCamPreset(3);
-    MoveBattleCamOver(20);
-    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    sleep 30;
-    N(func_802A12D4_71B474)();
-    await N(PlayerGoHome);
-});
+EvtSource N(main) = {
+    EVT_SET_CONST(EVT_VAR(10), 0x00000082)
+    EVT_EXEC_WAIT(N(UseItemWithEffect))
+    EVT_CHILD_THREAD
+        EVT_WAIT_FRAMES(5)
+        EVT_CALL(UseBattleCamPreset, 2)
+        EVT_CALL(MoveBattleCamOver, 20)
+    EVT_END_CHILD_THREAD
+    EVT_CALL(N(FadeBackgroundToBlack))
+    EVT_CALL(PlaySound, SOUND_UNKNOWN_365)
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(InitTargetIterator)
+    EVT_LABEL(0)
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(ItemCheckHit, EVT_VAR(0), 268435456, 0, EVT_VAR(0), 0)
+    EVT_IF_EQ(EVT_VAR(0), 6)
+        EVT_GOTO(1)
+    EVT_END_IF
+    EVT_CALL(N(func_802A1354_71B4F4))
+    EVT_WAIT_FRAMES(5)
+    EVT_CALL(StartRumble, 10)
+    EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.0))
+    EVT_CALL(SetGoalToTarget, ACTOR_SELF)
+    EVT_CALL(GetItemPower, ITEM_THUNDER_RAGE, EVT_VAR(0), EVT_VAR(1))
+    EVT_CALL(ItemDamageEnemy, EVT_VAR(0), 939524128, 0, EVT_VAR(0), 32)
+    EVT_LABEL(1)
+    EVT_WAIT_FRAMES(5)
+    EVT_CALL(ChooseNextTarget, 0, EVT_VAR(0))
+    EVT_IF_NE(EVT_VAR(0), -1)
+        EVT_GOTO(0)
+    EVT_END_IF
+    EVT_CALL(UseBattleCamPreset, 3)
+    EVT_CALL(MoveBattleCamOver, 20)
+    EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
+    EVT_WAIT_FRAMES(30)
+    EVT_CALL(N(func_802A12D4_71B474))
+    EVT_EXEC_WAIT(N(PlayerGoHome))
+    EVT_RETURN
+    EVT_END
+};

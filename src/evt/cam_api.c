@@ -1,15 +1,19 @@
 #include "common.h"
 #include "camera.h"
 
-EvtSource ShakeCam1 = SCRIPT({
-    group 0;
-    ShakeCam(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1.0);
-});
+EvtSource ShakeCam1 = {
+    EVT_SET_GROUP(0)
+    EVT_CALL(ShakeCam, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.0))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource ShakeCamX = SCRIPT({
-    group 0;
-    ShakeCam(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
-});
+EvtSource ShakeCamX = {
+    EVT_SET_GROUP(0)
+    EVT_CALL(ShakeCam, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+    EVT_RETURN
+    EVT_END
+};
 
 ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

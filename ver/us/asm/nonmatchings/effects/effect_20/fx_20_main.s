@@ -12,14 +12,14 @@ glabel fx_20_main
 /* 33CE0C E002801C 27A40010 */  addiu     $a0, $sp, 0x10
 /* 33CE10 E0028020 F7B80050 */  sdc1      $f24, 0x50($sp)
 /* 33CE14 E0028024 4487C000 */  mtc1      $a3, $f24
-/* 33CE18 E0028028 3C02E003 */  lui       $v0, %hi(func_E0028240)
-/* 33CE1C E002802C 24428240 */  addiu     $v0, $v0, %lo(func_E0028240)
+/* 33CE18 E0028028 3C02E003 */  lui       $v0, %hi(fx_20_init)
+/* 33CE1C E002802C 24428240 */  addiu     $v0, $v0, %lo(fx_20_init)
 /* 33CE20 E0028030 AFA20018 */  sw        $v0, 0x18($sp)
-/* 33CE24 E0028034 3C02E003 */  lui       $v0, %hi(func_E0028248)
-/* 33CE28 E0028038 24428248 */  addiu     $v0, $v0, %lo(func_E0028248)
+/* 33CE24 E0028034 3C02E003 */  lui       $v0, %hi(fx_20_update)
+/* 33CE28 E0028038 24428248 */  addiu     $v0, $v0, %lo(fx_20_update)
 /* 33CE2C E002803C AFA2001C */  sw        $v0, 0x1c($sp)
-/* 33CE30 E0028040 3C02E003 */  lui       $v0, %hi(func_E00284E8)
-/* 33CE34 E0028044 244284E8 */  addiu     $v0, $v0, %lo(func_E00284E8)
+/* 33CE30 E0028040 3C02E003 */  lui       $v0, %hi(fx_20_render)
+/* 33CE34 E0028044 244284E8 */  addiu     $v0, $v0, %lo(fx_20_render)
 /* 33CE38 E0028048 AFA20020 */  sw        $v0, 0x20($sp)
 /* 33CE3C E002804C 24020014 */  addiu     $v0, $zero, 0x14
 /* 33CE40 E0028050 AFBF0038 */  sw        $ra, 0x38($sp)

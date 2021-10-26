@@ -162,7 +162,23 @@ ApiStatus SetIdleGoalToHome(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", SetGoalToIndex);
+ApiStatus SetGoalToIndex(Evt* script, s32 isInitialCall) {
+    s32* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 index = evt_get_variable(script, *args++);
+    Actor* actor;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    actor->state.goalPos.x = D_80283524[index].x;
+    actor->state.goalPos.y = D_80283524[index].y;
+    actor->state.goalPos.z = D_80283524[index].z;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetIndexFromPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -2181,14 +2197,154 @@ INCLUDE_ASM(s32, "197F40", UseIdleAnimation);
 
 INCLUDE_ASM(s32, "197F40", func_8026F1A0);
 
-INCLUDE_ASM(s32, "197F40", GetStatusFlags);
+ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 outVar = *args++;
+    Actor* actor;
+    s32 actorMasked;
+    s8 debuff;
+    s8 staticStatus;
+    s8 stoneStatus;
+    s8 koStatus;
+    s8 transStatus;
+    ActorPart* partsTable;
+    s32 flags;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.enemyID;
+    }
+    actor = get_actor(actorID);
+    debuff = actor->debuff;
+    actorMasked = actor->actorID & 0x700;
+    flags = 0;
+
+    if (debuff != STATUS_END) {
+        if (debuff == STATUS_STOP) {
+            flags |= STATUS_FLAG_STOP;
+        }
+        if (debuff == STATUS_FROZEN) {
+            flags |= STATUS_FLAG_FROZEN;
+        }
+        if (debuff == STATUS_SLEEP) {
+            flags |= STATUS_FLAG_SLEEP;
+        }
+        if (debuff == STATUS_PARALYZE) {
+            flags |= STATUS_FLAG_PARALYZE;
+        }
+        if (debuff == STATUS_DIZZY) {
+            flags |= STATUS_FLAG_DIZZY;
+        }
+        if (debuff == STATUS_FEAR) {
+            flags |= STATUS_FLAG_FEAR;
+        }
+        if (debuff == STATUS_POISON) {
+            flags |= STATUS_FLAG_POISON;
+        }
+        if (debuff == STATUS_SHRINK) {
+            flags |= STATUS_FLAG_SHRINK;
+        }
+    }
+
+    switch (actor->staticStatus) {
+        case STATUS_END:
+            break;
+        case STATUS_STATIC:
+            flags |= STATUS_FLAG_STATIC;
+            break;
+    }
+
+    switch (actor->stoneStatus) {
+        case STATUS_END:
+            break;
+        case STATUS_STONE:
+            flags |= STATUS_FLAG_STONE;
+            break;
+    }
+
+    switch (actor->koStatus) {
+        case STATUS_END:
+            break;
+        case STATUS_DAZE:
+            flags |= STATUS_FLAG_KO;
+            break;
+    }
+
+    switch (actor->transStatus) {
+        case STATUS_END:
+            break;
+        case STATUS_E:
+            flags |= STATUS_FLAG_TRANSPARENT;
+            break;
+    }
+
+    for (partsTable = actor->partsTable; partsTable != NULL; partsTable = partsTable->nextPart) {
+            if (partsTable->flags & 0x100) {
+                flags |= STATUS_FLAG_TRANSPARENT;
+            }
+            if (partsTable->eventFlags & EVENT_FLAG_ILLUSORY) {
+                flags |= STATUS_FLAG_TRANSPARENT;
+            }
+    }
+
+    switch (actorMasked) {
+        case ACTOR_PLAYER:
+        case ACTOR_PARTNER:
+            if (battleStatus->outtaSightActive) {
+                flags |= STATUS_FLAG_TRANSPARENT;
+            }
+            break;
+        case ACTOR_ENEMY0:
+            break;
+    }
+
+    if (actor->isGlowing) {
+        flags |= STATUS_FLAG_GLOWING;
+    }
+
+    if (actor->attackBoost) {
+        flags |= STATUS_FLAG_ATTACK_BOOST;
+    }
+
+    if (actor->defenseBoost) {
+        flags |= STATUS_FLAG_DEFENSE_BOOST;
+    }
+
+    if (actor->chillOutAmount) {
+        flags |= STATUS_FLAG_CHILL_OUT;
+    }
+
+    if (player_team_is_ability_active(actor, ABILITY_RIGHT_ON)) {
+        flags |= STATUS_FLAG_RIGHT_ON;
+    }
+
+    evt_set_variable(script, outVar, flags);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus RemovePlayerBuffs(Evt* script, s32 isInitialCall) {
     remove_player_buffs(*script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", SetPartAlpha);
+ApiStatus SetPartAlpha(Evt* script, s32 isInitialCall) {
+    Actor* actor;
+    s32* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
+    s32 opacity = evt_get_variable(script, *args++);
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    get_actor_part(actor, partIndex)->opacity = opacity;
+
+    actor->renderMode = (opacity == 255) ? RENDER_MODE_ALPHATEST : RENDER_MODE_SURFACE_XLU_LAYER3;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", CreatePartShadow);
 

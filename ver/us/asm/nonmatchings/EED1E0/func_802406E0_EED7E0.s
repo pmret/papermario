@@ -52,7 +52,7 @@ glabel func_802406E0_EED7E0
 /* EED89C 8024079C 4480A000 */  mtc1      $zero, $f20
 /* EED8A0 802407A0 0C0B53A3 */  jal       dead_evt_get_variable
 /* EED8A4 802407A4 0240802D */   daddu    $s0, $s2, $zero
-/* EED8A8 802407A8 0C0462EC */  jal       func_80118BB0
+/* EED8A8 802407A8 0C0462EC */  jal       dead_get_entity_by_index
 /* EED8AC 802407AC 0040202D */   daddu    $a0, $v0, $zero
 /* EED8B0 802407B0 AE42005C */  sw        $v0, 0x5c($s2)
 .L802407B4:

@@ -44,18 +44,26 @@ ApiStatus GoombariaPutAway(Evt* script, s32 isInitialCall) {
     return partner_put_away(owner) != 0;
 }
 
-EvtSource world_goombaria_take_out = SCRIPT({
-    GoombariaTakeOut();
-});
+EvtSource world_goombaria_take_out = {
+    EVT_CALL(GoombariaTakeOut)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource world_goombaria_update = SCRIPT({
-    GoombariaUpdate();
-});
+EvtSource world_goombaria_update = {
+    EVT_CALL(GoombariaUpdate)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource world_goombaria_use_ability = SCRIPT({
-    GoombariaUseAbility();
-});
+EvtSource world_goombaria_use_ability = {
+    EVT_CALL(GoombariaUseAbility)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource world_goombaria_put_away = SCRIPT({
-    GoombariaPutAway();
-});
+EvtSource world_goombaria_put_away = {
+    EVT_CALL(GoombariaPutAway)
+    EVT_RETURN
+    EVT_END
+};
