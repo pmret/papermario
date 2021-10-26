@@ -34,6 +34,45 @@ void appendGfx_animator(ModelAnimator* animator);
 Vtx* animator_copy_vertices_to_buffer(ModelAnimator* animator, AnimatorNode* node, Vtx* buffer, s32 vtxCount,
                                       s32 overhead, s32 startIdx);
 INCLUDE_ASM(s32, "B4580", animator_copy_vertices_to_buffer);
+// Vtx* animator_copy_vertices_to_buffer(ModelAnimator* animator, AnimatorNode* node, Vtx* buffer, s32 vtxCount,
+//                                       s32 overhead, s32 startIdx) {
+//     DisplayListBufferHandle* handle;
+//     Vtx* temp_a3;
+//     Vtx* phi_v1;
+//     s32 i;
+
+
+//     for (i = 0; i < ARRAY_COUNT(D_801533C0); i++) {
+//         handle = &D_801533C0[i];
+//         if (handle->mode < 0) {
+//             break;
+//         }
+//     }
+
+//     ASSERT(i < ARRAY_COUNT(D_801533C0));
+
+//     temp_a3 = general_heap_malloc((vtxCount + overhead) * sizeof(*buffer));
+//     handle->addr = temp_a3;
+
+//     ASSERT(temp_a3 != NULL);
+
+//     handle->mode = 3;
+//     phi_v1 = &node->fcData.vtxList[startIdx];
+//     if (animator->vertexArray != NULL) {
+//         buffer = ((s32) buffer & 0xFFFFFF) + animator->vertexArray;
+//     }
+
+//     for (i = 0; i < vtxCount; i++) {
+//         *temp_a3 = *phi_v1;
+//         phi_v1->v.ob[0] = buffer->v.ob[0];
+//         phi_v1->v.ob[1] = buffer->v.ob[1];
+//         phi_v1->v.ob[2] = buffer->v.ob[2];
+//         temp_a3++;
+//         buffer++;
+//         phi_v1++;
+//     }
+//     return handle->addr;
+// }
 
 void animator_make_mirrorZ(Matrix4f mtx) {
     guMtxIdentF(mtx);
@@ -91,7 +130,7 @@ AnimatorNode* get_animator_child_with_id(AnimatorNode* node, s32 id) {
 AnimatorNode* get_animator_child_for_model(AnimatorNode* node, s32 id) {
     s32 i;
 
-    if (node->modelID == id) {
+    if (node->fcData.modelID == id) {
         return node;
     }
 
@@ -418,7 +457,7 @@ void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx
     copy_matrix(sp10, node->mtx[0]);
 
     if (node->flags & 0x1000) {
-        Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(node->modelID));
+        Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(node->fcData.modelID));
 
         copy_matrix(sp10, model->transformMatrix);
         guMtxL2F(sp10, rootTransform);
@@ -612,7 +651,7 @@ void load_model_animator_node(StaticAnimatorNode* node, ModelAnimator* animator,
         newNode = add_anim_node(animator, parentNodeID, bpPtr);
 
         if (node->modelID != 0) {
-            newNode->modelID = node->modelID - 1;
+            newNode->fcData.modelID = node->modelID - 1;
             newNode->flags |= 0x1000;
         }
 
@@ -701,7 +740,7 @@ void reload_mesh_animator_node(StaticAnimatorNode* node, ModelAnimator* animator
 
         newNode = add_anim_node(animator, parentNodeID, bpPtr);
         newNode->vertexStartOffset = node->vertexStartOffset;
-        newNode->modelID = node->vertexList; // TODO see note in struct def: "also ptr to vtx list? union?"
+        newNode->fcData.modelID = node->vertexList; // TODO see note in struct def: "also ptr to vtx list? union?"
 
         i = 0;
         while (gAnimTreeRoot[i] != node) {

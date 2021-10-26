@@ -850,7 +850,10 @@ typedef struct AnimatorNode {
     /* 0xF6 */ s16 uniqueIndex;
     /* 0xF8 */ s16 vertexStartOffset;
     /* 0xFA */ char unk_FA[2];
-    /* 0xFC */ s32 modelID; // also ptr to vtx list? union?
+    /* 0xFC */ union {
+                    s32 modelID;
+                    Vtx* vtxList;
+                } fcData;
 } AnimatorNode; // size = 0x100
 
 typedef struct AnimatorNodeBlueprint {
