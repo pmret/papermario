@@ -1,7 +1,7 @@
 #include "dead.h"
 #include "common.h"
 
-// Copy of flo_08? (CAFAC0)
+// Copy of flo_08 (CAFAC0.c)
 
 #define NAMESPACE ECAA80
 

@@ -3,4 +3,4 @@
 
 #define NAMESPACE ED00D0
 
-#include "world/common/DeadFoliage.inc.c"
+#include "world/common/foliage.inc.c"

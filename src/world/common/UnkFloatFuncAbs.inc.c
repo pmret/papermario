@@ -1,8 +1,8 @@
 #include "common.h"
 #include "map.h"
 
-// Same as (Dead)UnkFloatFunc with an extra abs on diff
-ApiStatus N(DeadUnkFloatFuncAbs)(Evt* script, s32 isInitialCall) {
+// Same as UnkFloatFunc with an extra abs on diff
+ApiStatus N(UnkFloatFuncAbs)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a1 = *args++;
     s32 var0 = evt_get_variable(script, a1);

@@ -1,18 +1,17 @@
 #include "dead.h"
 #include "common.h"
 
-// This whole file seems to be a dead/unused flo map?
-// It especially shares a lot of familiarities with flo_19
+// Copy of flo_19 (CE36F0.c)
 
 #define NAMESPACE EFEB00
 
-#include "world/common/DeadUnkTexturePanFunc.inc.c"
+#include "world/common/UnkTexturePanFunc.inc.c"
 
-#include "world/common/DeadUnkTexturePanFunc2.inc.c"
+#include "world/common/UnkTexturePanFunc2.inc.c"
 
-#include "common/DeadUnk1.inc.c"
+#include "world/common/DeadUnkFunc1.inc.c"
 
-#include "common/DeadUnkFloatFuncAbs.inc.c"
+#include "world/common/UnkFloatFuncAbs.inc.c"
 
 ApiStatus func_802404D0_EFEFD0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -59,5 +58,5 @@ ApiStatus func_80240784_EFF284(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "common/DeadUnkFloatFunc.inc.c"
+#include "common/UnkFloatFunc.inc.c"
 
