@@ -48,6 +48,7 @@ s32 D_8014EE10[] = { 0x80156920, };
 
 s16 D_8014EE14 = 0;
 
+// padding
 s16 D_8014EE16 = { 0x0000 };
 
 s32 D_8014EE18[] = { 0x90909000, 0x90909000, 0xFFFFFF00, 0xFFFFFF00, 0x00007800, 0x00000000, 0xFFFFFF00, 0xFFFFFF00,
@@ -58,7 +59,7 @@ s32 D_8014EE40[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
 
 s32 D_8014EE50[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x02000000, };
 
-s16 D_8014EE60 = 300;
+u16 D_8014EE60 = 300;
 
 // padding
 s16 D_8014EE62[] = {0};
@@ -81,13 +82,22 @@ s32 D_8014EF64[] = { 0x00014358, 0x00018200, 0x0001A858, 0x0001E830, 0x00029458,
                      0x000C0490, 0x000C49B8, 0x000C6150, 0x000CA380, 0x00000000, 0x00000000, 0x00000000,
                    };
 
-extern s32 D_80156948[];
-extern s32 D_80156950;
+extern s32* D_80156948[2];
+extern s32* D_80156950;
 extern UnkD0A70StructList* D_80156954;
+extern s8 D_80156958[2];
+extern s32 D_80156960[2];
+extern s32 D_80156968[2];
+extern s8 D_80156970;
+
 extern Unk8Struct D_80156F20[8];
 
-void func_8013C048(UnkD0A70Struct*);
+void func_8013A93C(UnkD0A70Struct*);
+void func_8013A9C8(UnkD0A70Struct*);
+void func_8013A9E8(UnkD0A70Struct*);
 void func_8013BC88(UnkD0A70Struct*);
+void func_8013C048(UnkD0A70Struct*);
+void func_8013C220(UnkD0A70Struct*);
 void func_8013C3F0(UnkD0A70Struct*);
 void func_8013EE68(UnkD0A70Struct*);
 void func_8013F1F8(UnkD0A70Struct*);
@@ -96,14 +106,43 @@ void func_8013A370(s16 arg0) {
     D_8014EE60 = arg0;
 }
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013A37C);
+void func_8013A37C(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(D_80156948); i++) {
+        D_80156948[i] = _heap_malloc(&gSpriteHeapPtr, D_8014EE60 * 0x10);
+    }
+
+    D_80156954 = (UnkD0A70StructList*)_heap_malloc(&gSpriteHeapPtr, ARRAY_COUNT(*D_80156954) * sizeof((*D_80156954)[0]));
+
+    for (i = 0; i < ARRAY_COUNT(*D_80156954); i++) {
+        func_8013A9E8(&(*D_80156954)[i]);
+        func_8013A9C8(&(*D_80156954)[i]);
+    }
+
+    for (i = 0; i < ARRAY_COUNT(D_80156958); i++) {
+        D_80156958[i] = -1;
+        D_80156960[i] = 0;
+        D_80156968[i] = 0;
+        D_80156970 = 0;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(D_80156F20); i++) {
+        D_80156F20[i].unk_00 = 0;
+        D_80156F20[i].unk_04 = 0;
+        D_80156F20[i].unk_05 = 0;
+    }
+
+    D_8014EE14 = 0;
+    D_80156950 = D_80156948[gCurrentDisplayContextIndex];
+}
 
 void func_8013A4D0(void) {
     s32 i;
 
     D_80156950 = D_80156948[gCurrentDisplayContextIndex];
     D_8014EE14 = 0;
-    func_8013A9E8(D_80156954);
+    func_8013A9E8(&(*D_80156954)[0]);
 
     (*D_80156954)[0].unk_14 |= 1;
 
