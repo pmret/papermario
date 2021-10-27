@@ -1,7 +1,7 @@
 #include "common.h"
 
 typedef struct {
-    /* 0x00 */ char unk_00[0x1];
+    /* 0x00 */ s8 unk_00;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ s8 unk_02;
     /* 0x03 */ s8 unk_03;
@@ -15,15 +15,9 @@ typedef struct {
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s16 unk_10;
     /* 0x14 */ s32 unk_14;
-    /* 0x18 */ char unk_18[0x10];
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ char unk_2C[0x8];
-    /* 0x34 */ s32 unk_34;
-    /* 0x38 */ s32 unk_38;
-    /* 0x3C */ f32 unk_3C;
-    /* 0x40 */ f32 unk_40;
-    /* 0x44 */ f32 unk_44;
-    /* 0x48 */ char unk_48[0x14];
+    /* 0x18 */ char unk_18[0x4];
+    /* 0x1C */ s32 unk_1C[2][4];
+    /* 0x3C */ f32 unk_3C[2][4];
     /* 0x5C */ s32* unk_5C;
     /* 0x60 */ s16 unk_60;
     /* 0x62 */ char unk_62[0x2];
@@ -33,7 +27,7 @@ typedef struct {
     /* 0x70 */ s32* unk_70;
     /* 0x74 */ s32* unk_74;
     /* 0x78 */ char unk_78[0x4];
-} UnkD0A70Struct ; // size = 0x7C
+} UnkD0A70Struct; // size = 0x7C
 
 typedef struct Unk8Struct {
     /* 0x00 */ s32* unk_00;
@@ -94,7 +88,7 @@ extern Unk8Struct D_80156F20[8];
 
 void func_8013A93C(UnkD0A70Struct*);
 void func_8013A9C8(UnkD0A70Struct*);
-void func_8013A9E8(UnkD0A70Struct*);
+//void func_8013A9E8(UnkD0A70Struct*);
 void func_8013BC88(UnkD0A70Struct*);
 void func_8013C048(UnkD0A70Struct*);
 void func_8013C220(UnkD0A70Struct*);
@@ -207,7 +201,51 @@ void func_8013A6E8(void) {
     func_8013A650();
 }
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013A704);
+s32 func_8013A704(s32 arg0) {
+    s32 count;
+    s32 cond;
+    s32 iPrev;
+    s32 ret;
+    s32 i;
+
+    count = 0;
+    for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
+        if (!((*D_80156954)[i].unk_14 & 1)) {
+            count++;
+        }
+    }
+
+    if (count < arg0) {
+        return -1;
+    }
+
+    ret = 0;
+    cond = FALSE;
+    count = 0;
+    iPrev = -1;
+    for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
+        if (!((*D_80156954)[i].unk_14 & 1)) {
+            if (!cond) {
+                ret = i;
+                cond = TRUE;
+            } else {
+                (*D_80156954)[iPrev].unk_10 = i;
+            }
+
+            (*D_80156954)[i].unk_00 = i;
+            func_8013A9E8(&(*D_80156954)[i]);
+            count++;
+            (*D_80156954)[i].unk_14 |= 1;
+            iPrev = i;
+            if (count == arg0) {
+                (*D_80156954)[i].unk_10 = -1;
+                break;
+            }
+        }
+    }
+
+    return ret;
+}
 
 void func_8013A854(u32 idx) {
     if (idx < 90) {
@@ -277,60 +315,39 @@ void func_8013A9C8(UnkD0A70Struct* arg0) {
     arg0->unk_60 = 0;
 }
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013A9E8);
-// void func_8013A9E8(UnkD0A70Struct* arg0) {
-//     s32 phi_a1;
-//     s32 l;
-//     s32 j;
-//     s32 phi_a1_2;
-//     s32 k;
-//     s32 i;
+void func_8013A9E8(UnkD0A70Struct* arg0) {
+    s32 i;
+    s32 j;
 
-//     arg0->unk_10 = -1;
-//     arg0->unk_05 = 0;
-//     arg0->unk_06 = 0;
-//     arg0->unk_14 = 0;
-//     arg0->unk_01 = 0;
-//     arg0->unk_02 = 0;
-//     arg0->unk_08 = 0;
-//     arg0->unk_0A = 0;
-//     arg0->unk_0C = 0;
-//     arg0->unk_0E = 0;
-//     arg0->unk_28 = 0xFF;
-//     arg0->unk_38 = 0xFF;
-//     arg0->unk_03 = 0;
-//     arg0->unk_04 = 0;
-//     arg0->unk_08 = 0;
-//     arg0->unk_0A = 0;
-//     j = 0;
-//     i = 0;
+    arg0->unk_10 = -1;
+    arg0->unk_05 = 0;
+    arg0->unk_06 = 0;
+    arg0->unk_14 = 0;
+    arg0->unk_01 = 0;
+    arg0->unk_02 = 0;
+    arg0->unk_08 = 0;
+    arg0->unk_0A = 0;
+    arg0->unk_0C = 0;
+    arg0->unk_0E = 0;
+    arg0->unk_1C[0][3] = 255;
+    arg0->unk_1C[1][3] = 255;
+    arg0->unk_03 = 0;
+    arg0->unk_04 = 0;
+    arg0->unk_08 = 0;
+    arg0->unk_0A = 0;
 
-//     do {
-//         phi_a1 = j * 0x10;
-//         l = 0;
-// loop_2:
-//         (arg0 + phi_a1)->unk1C = 0;
-//         l++;
-//         phi_a1 += 4;
-//         if (l < 4) {
-//             goto loop_2;
-//         }
-//         j++;
-//     } while (j < 2);
+    for (i = 0; i < ARRAY_COUNT(arg0->unk_1C); i++) {
+        for (j = 0; j < ARRAY_COUNT(arg0->unk_1C[0]); j++) {
+            arg0->unk_1C[i][j] = 0;
+        }
+    }
 
-//     do {
-//         phi_a1_2 = i * 0x10;
-//         k = 0;
-// loop_6:
-//         (arg0 + phi_a1_2)->unk3C = 0;
-//         k++;
-//         phi_a1_2 += 4;
-//         if (k < 4) {
-//             goto loop_6;
-//         }
-//         i++;
-//     } while (i < 2);
-// }
+    for (i = 0; i < ARRAY_COUNT(arg0->unk_3C); i++) {
+        for (j = 0; j < ARRAY_COUNT(arg0->unk_3C[0]); j++) {
+            arg0->unk_3C[i][j] = 0;
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013AA9C);
 
@@ -349,7 +366,7 @@ INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013AF70);
 void func_8013B0EC(UnkD0A70Struct* arg0) {
     switch (arg0->unk_01) {
         case 3:
-            if (arg0->unk_34 == 0) {
+            if (arg0->unk_1C[1][2] == 0) {
                 arg0->unk_03 = 1;
                 arg0->unk_04 = 16;
             } else {
@@ -401,9 +418,9 @@ INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013E2F0);
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013E904);
 
 void func_8013EE48(UnkD0A70Struct* arg0) {
-    arg0->unk_3C = 0.0f;
-    arg0->unk_40 = 50.0f;
-    arg0->unk_44 = 30.0f;
+    arg0->unk_3C[0][0] = 0.0f;
+    arg0->unk_3C[0][1] = 50.0f;
+    arg0->unk_3C[0][2] = 30.0f;
 }
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013EE68);
