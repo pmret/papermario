@@ -480,6 +480,7 @@ INCLUDE_ASM(s32, "evt/cam_api", AdjustCam, Evt* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "evt/cam_api", ResetCam, Evt* script, s32 isInitialCall);
 
+// TODO SPLIT
 void update_animated_models(void) {
     s32 i;
 
@@ -487,7 +488,7 @@ void update_animated_models(void) {
         AnimatedModel* anim = (*gCurrentMeshAnimationListPtr)[i];
 
         if (anim->animModelID >= 0) {
-            func_8011EA54(anim->animModelID, &anim->mtx);
+            update_animated_model(anim->animModelID, &anim->mtx);
         }
     }
 }

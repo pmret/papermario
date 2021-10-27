@@ -29,50 +29,54 @@ extern Matrix4f gAnimTranslateMtx;
 extern Matrix4f gAnimRotScaleMtx;
 extern StaticAnimatorNode** gAnimTreeRoot;
 
+s32 step_model_animator(ModelAnimator* animator);
 void appendGfx_animator(ModelAnimator* animator);
+s32 step_mesh_animator(ModelAnimator* animator);
 
-Vtx* animator_copy_vertices_to_buffer(ModelAnimator* animator, AnimatorNode* node, Vtx* buffer, s32 vtxCount,
-                                      s32 overhead, s32 startIdx);
+// reg swap
+#ifdef NON_MATCHING
+Vtx* animator_copy_vertices_to_buffer(ModelAnimator* animator, AnimatorNode* node, Vec3s* buffer, s32 vtxCount,
+                                      s32 overhead, s32 startIdx) {
+    DisplayListBufferHandle* handle;
+    Vtx* bufferMem;
+    Vtx* phi_v1;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(D_801533C0); i++) {
+        handle = &D_801533C0[i];
+        if (handle->mode < 0) {
+            break;
+        }
+    }
+
+    ASSERT(i < ARRAY_COUNT(D_801533C0));
+
+    bufferMem = general_heap_malloc((vtxCount + overhead) * sizeof(*bufferMem));
+    handle->addr = bufferMem;
+
+    ASSERT(bufferMem != NULL);
+
+    handle->mode = 3;
+    phi_v1 = &node->fcData.vtxList[startIdx];
+
+    if (animator->vertexArray != NULL) {
+        buffer = ((s32)buffer & 0xFFFFFF) + (s32)animator->vertexArray;
+    }
+
+    for (i = 0; i < vtxCount; i++) {
+        *bufferMem = *phi_v1;
+        bufferMem->v.ob[0] = buffer->x;
+        bufferMem->v.ob[1] = buffer->y;
+        bufferMem->v.ob[2] = buffer->z;
+        bufferMem++;
+        buffer++;
+        phi_v1++;
+    }
+    return handle->addr;
+}
+#else
 INCLUDE_ASM(s32, "B4580", animator_copy_vertices_to_buffer);
-// Vtx* animator_copy_vertices_to_buffer(ModelAnimator* animator, AnimatorNode* node, Vtx* buffer, s32 vtxCount,
-//                                       s32 overhead, s32 startIdx) {
-//     DisplayListBufferHandle* handle;
-//     Vtx* bufferMem;
-//     Vtx* phi_v1;
-//     s32 i;
-
-
-//     for (i = 0; i < ARRAY_COUNT(D_801533C0); i++) {
-//         handle = &D_801533C0[i];
-//         if (handle->mode < 0) {
-//             break;
-//         }
-//     }
-
-//     ASSERT(i < ARRAY_COUNT(D_801533C0));
-
-//     bufferMem = general_heap_malloc((vtxCount + overhead) * sizeof(*buffer));
-//     handle->addr = bufferMem;
-
-//     ASSERT(bufferMem != NULL);
-
-//     handle->mode = 3;
-//     phi_v1 = &node->fcData.vtxList[startIdx];
-//     if (animator->vertexArray != NULL) {
-//         buffer = ((s32) buffer & 0xFFFFFF) + animator->vertexArray;
-//     }
-
-//     for (i = 0; i < vtxCount; i++) {
-//         *bufferMem = *phi_v1;
-//         phi_v1->v.ob[0] = buffer->v.ob[0];
-//         phi_v1->v.ob[1] = buffer->v.ob[1];
-//         phi_v1->v.ob[2] = buffer->v.ob[2];
-//         buffer++;
-//         bufferMem++;
-//         phi_v1++;
-//     }
-//     return handle->addr;
-// }
+#endif
 
 void animator_make_mirrorZ(Matrix4f mtx) {
     guMtxIdentF(mtx);
@@ -407,9 +411,119 @@ AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorN
     return ret;
 }
 
-INCLUDE_ASM(s32, "B4580", update_model_animator);
+void update_model_animator(s32 animatorID) {
+    if (!gGameStatusPtr->isBattle || animatorID & 0x800) {
+        ModelAnimator* animator;
 
-INCLUDE_ASM(s32, "B4580", func_8011EA54);
+        animatorID &= ~0x800;
+        animator = (*gCurrentAnimMeshListPtr)[animatorID];
+
+        if (animator != NULL && animator->flags != 0) {
+            s32 temp = 0;
+
+            if (!(animator->flags & 0x40000)) {
+                animator->flags &= ~0x40;
+                animator->nextUpdateTime -= animator->timeScale;
+                if (animator->nextUpdateTime <= 0.0f) {
+                    if (!(animator->flags & 0x8000)) {
+                        do {
+                            temp = step_model_animator(animator);
+                        } while (temp > 0);
+                    } else {
+                        animator->nextUpdateTime = 1.0f;
+                        reload_mesh_animator_tree(animator);
+                        do {
+                            temp = step_mesh_animator(animator);
+                        } while (temp > 0);
+                    }
+                }
+
+                if (temp != -1) {
+                    s32 i;
+
+                    animator_update_model_transforms(animator, NULL);
+
+                    for (i = 0; i < ARRAY_COUNT(D_801533C0); i++) {
+                        if (D_801533C0[i].mode >= 0) {
+                            D_801533C0[i].mode--;
+                            if (D_801533C0[i].mode == 0) {
+                                D_801533C0[i].mode = -1;
+                                general_heap_free(D_801533C0[i].addr);
+                            }
+                        }
+                    }
+
+                    for (i = 0; i < ARRAY_COUNT(D_801536C0); i++) {
+                        if (D_801536C0[i].mode >= 0) {
+                            D_801536C0[i].mode--;
+                            if (D_801536C0[i].mode == 0) {
+                                D_801536C0[i].mode = -1;
+                                general_heap_free(D_801536C0[i].addr);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+void update_animated_model(s32 animatorID, Mtx* mtx) {
+    if (!gGameStatusPtr->isBattle || animatorID & 0x800) {
+        ModelAnimator* animator;
+
+        animatorID &= ~0x800;
+        animator = (*gCurrentAnimMeshListPtr)[animatorID];
+
+        if (animator != NULL && animator->flags != 0) {
+            s32 temp = 0;
+
+            if (!(animator->flags & 0x40000)) {
+                animator->flags &= ~0x40;
+                animator->nextUpdateTime -= animator->timeScale;
+                if (animator->nextUpdateTime <= 0.0f) {
+                    if (!(animator->flags & 0x8000)) {
+                        do {
+                            temp = step_model_animator(animator);
+                        } while (temp > 0);
+                    } else {
+                        animator->nextUpdateTime = 1.0f;
+                        reload_mesh_animator_tree(animator);
+                        do {
+                            temp = step_mesh_animator(animator);
+                        } while (temp > 0);
+                    }
+                }
+
+                if (temp != -1) {
+                    s32 i;
+
+                    animator_update_model_transforms(animator, mtx);
+
+                    for (i = 0; i < ARRAY_COUNT(D_801533C0); i++) {
+                        if (D_801533C0[i].mode >= 0) {
+                            D_801533C0[i].mode--;
+                            if (D_801533C0[i].mode == 0) {
+                                D_801533C0[i].mode = -1;
+                                general_heap_free(D_801533C0[i].addr);
+                            }
+                        }
+                    }
+
+                    for (i = 0; i < ARRAY_COUNT(D_801536C0); i++) {
+                        if (D_801536C0[i].mode >= 0) {
+                            D_801536C0[i].mode--;
+                            if (D_801536C0[i].mode == 0) {
+                                D_801536C0[i].mode = -1;
+                                general_heap_free(D_801536C0[i].addr);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "B4580", step_model_animator);
 
