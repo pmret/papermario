@@ -1,6 +1,9 @@
 #include "dead.h"
 #include "common.h"
 
+// Should be related to flo_00
+// The function is in (C9DF20.c) the loading zones in (C9DF60.c)
+
 #define NAMESPACE EB8E50
 
 const char ascii_EC2000[] = "mac_01";

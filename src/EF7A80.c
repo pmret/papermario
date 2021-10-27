@@ -1,15 +1,16 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of flo_18 (CDC6A0.c)
+
 #define NAMESPACE EF7A80
 
-#include "world/common/DeadUnkTexturePanFunc.inc.c"
+#include "world/common/UnkTexturePanFunc.inc.c"
 
-#include "world/common/DeadUnkTexturePanFunc2.inc.c"
+#include "world/common/UnkTexturePanFunc2.inc.c"
 
-#include "common/DeadUnk1.inc.c"
+#include "world/common/DeadUnkFunc1.inc.c"
 
-// Copy from flo_18
 typedef struct unk_effect {
     char unk_00[0x30];
     s32 unk_30;
@@ -38,4 +39,4 @@ ApiStatus func_80240340_EF7DC0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "common/DeadUnkFloatFunc.inc.c"
+#include "common/UnkFloatFunc.inc.c"

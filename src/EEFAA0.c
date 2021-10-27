@@ -1,6 +1,8 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of flo_16 (CD4770.c)
+
 #define NAMESPACE EEFAA0
 
 // Copy from flo_16/UnkFunc44

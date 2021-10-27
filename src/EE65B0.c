@@ -1,13 +1,13 @@
 #include "dead.h"
 #include "common.h"
 
-// Copy of flo_14?
+// Copy of flo_14 (CCB310.c)
 
 #define NAMESPACE EE65B0
 
-#include "world/common/DeadUnkTexturePanFunc.inc.c"
+#include "world/common/UnkTexturePanFunc.inc.c"
 
-#include "world/common/DeadUnkTexturePanFunc2.inc.c"
+#include "world/common/UnkTexturePanFunc2.inc.c"
 
 ApiStatus func_8024030C_EE68BC(Evt *script, s32 isInitialCall) {
     dead_playFX_82(0, 0, 0, 0, 0, 0);

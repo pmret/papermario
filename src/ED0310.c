@@ -1,6 +1,8 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of flo_09 (CB5320.c)
+
 #define NAMESPACE ED0310
 
 extern f32 D_8024365C_ED364C[];
@@ -9,7 +11,7 @@ extern f32 D_8024365C_ED364C[];
 
 INCLUDE_ASM(s32, "ED0310", func_802404D0_ED04C0);
 
-#include "world/common/DeadUnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
@@ -25,7 +27,7 @@ void func_80240F74_ED0F64(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     }
 }
 
-#include "world/common/DeadUnkNpcAIFunc14.inc.c"
+#include "world/common/UnkNpcAIFunc14.inc.c"
 
 #include "world/common/UnkNpcAIFunc3.inc.c"
 
