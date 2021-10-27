@@ -1,5 +1,41 @@
 #include "common.h"
 
+typedef struct {
+    /* 0x00 */ char unk_00[0x1];
+    /* 0x01 */ u8 unk_01;
+    /* 0x02 */ char unk_02[0x01];
+    /* 0x03 */ s8 unk_03;
+    /* 0x04 */ s8 unk_04;
+    /* 0x05 */ s8 unk_05;
+    /* 0x06 */ s8 unk_06;
+    /* 0x07 */ char unk_07[0x9];
+    /* 0x10 */ s16 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ char unk_18[0x1C];
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ char unk_38[0x4];
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ f32 unk_44;
+    /* 0x48 */ char unk_48[0x14];
+    /* 0x5C */ s32 unk_5C;
+    /* 0x60 */ s16 unk_60;
+    /* 0x62 */ char unk_62[0x2];
+    /* 0x64 */ s32 unk_64;
+    /* 0x68 */ s32 unk_68;
+    /* 0x6C */ s32 unk_6C;
+    /* 0x70 */ s32 unk_70;
+    /* 0x74 */ s32 unk_74;
+    /* 0x78 */ char unk_78[0x4];
+} UnkD0A70Struct ; // size = 0x7C
+
+typedef struct Unk8Struct {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s8 unk_04;
+    /* 0x05 */ s8 unk_05;
+    /* 0x06 */ char unk_06[0x2];
+} Unk8Struct; // size = 0x8
+
 s32 D_8014EE10[] = { 0x80156920, };
 
 s32 D_8014EE14[] = { 0x00000000, };
@@ -35,24 +71,10 @@ s32 D_8014EF64[] = { 0x00014358, 0x00018200, 0x0001A858, 0x0001E830, 0x00029458,
                      0x000C0490, 0x000C49B8, 0x000C6150, 0x000CA380, 0x00000000, 0x00000000, 0x00000000,
                    };
 
-typedef struct {
-    /* 0x00 */ char unk_00[0x1];
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ char unk_02[0x01];
-    /* 0x03 */ s8 unk_03;
-    /* 0x04 */ s8 unk_04;
-    /* 0x05 */ s8 unk_05;
-    /* 0x06 */ s8 unk_06;
-    /* 0x07 */ char unk_07[0x9];
-    /* 0x10 */ s16 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ char unk_18[0x1C];
-    /* 0x34 */ s32 unk_34;
-    /* 0x38 */ char unk_38[0x44];
-} UnkD0A70Struct ; // size = 0x7C
-
 typedef UnkD0A70Struct UnkD0A70StructList[90];
+
 extern UnkD0A70StructList* D_80156954;
+extern Unk8Struct D_80156F20[8];
 
 void func_8013A370(s16 arg0) {
     D_8014EE60 = arg0;
@@ -62,7 +84,18 @@ INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013A37C);
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013A4D0);
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013A610);
+void func_8013A610(s32 arg0, s8 arg1) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(D_80156F20); i++) {
+        if (D_80156F20[i].unk_00 == 0) {
+            D_80156F20[i].unk_00 = arg0;
+            D_80156F20[i].unk_04 = 4;
+            D_80156F20[i].unk_05 = arg1;
+            return;
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013A650);
 
@@ -108,9 +141,37 @@ UnkD0A70Struct* func_8013A920(s32 idx) {
     return &(*D_80156954)[idx];
 }
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013A93C);
+void func_8013A93C(UnkD0A70Struct* arg0) {
+    if (arg0->unk_64 != 0) {
+        arg0->unk_64 = 0;
+    }
+    if (arg0->unk_68 != 0) {
+        func_8013A610(arg0->unk_68, 1);
+        arg0->unk_68 = 0;
+    }
+    if (arg0->unk_6C != 0) {
+        func_8013A610(arg0->unk_6C, 1);
+        arg0->unk_6C = 0;
+    }
+    if (arg0->unk_70 != 0) {
+        func_8013A610(arg0->unk_70, 1);
+        arg0->unk_70 = 0;
+    }
+    if (arg0->unk_74 != 0) {
+        func_8013A610(arg0->unk_74, 1);
+        arg0->unk_74 = 0;
+    }
+}
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013A9C8);
+void func_8013A9C8(UnkD0A70Struct* arg0) {
+    arg0->unk_64 = 0;
+    arg0->unk_68 = 0;
+    arg0->unk_6C = 0;
+    arg0->unk_70 = 0;
+    arg0->unk_74 = 0;
+    arg0->unk_5C = 0;
+    arg0->unk_60 = 0;
+}
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013A9E8);
 
@@ -157,8 +218,8 @@ void func_8013B0EC(UnkD0A70Struct* arg0) {
     }
 
     switch (arg0->unk_06) {
-        case 0xB:
-        case 0xC:
+        case 11:
+        case 12:
             func_8013F1F8(arg0);
             break;
     }
@@ -182,7 +243,11 @@ INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013E2F0);
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013E904);
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013EE48);
+void func_8013EE48(UnkD0A70Struct* arg0) {
+    arg0->unk_3C = 0.0f;
+    arg0->unk_40 = 50.0f;
+    arg0->unk_44 = 30.0f;
+}
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013EE68);
 
