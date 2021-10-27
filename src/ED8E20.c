@@ -48,7 +48,6 @@ ApiStatus N(DeadGetEntryPos)(Evt* script, s32 isInitialCall) {
     osSyncPrintf("[%d] dokan get pos  (no=%d)  pos=%d, %d, %d,  dir=%d\n\0\0\0flo_23\0\0flo_12\0\0flo_11", dead_gGameStatusPtr->frameCounter, script->varTable[0], script->varTable[1], script->varTable[2], script->varTable[3], script->varTable[4]);
     return ApiStatus_DONE2;
 }
-}
 
 // Variation of GetEntryPos with a debug print at the end
 ApiStatus func_802400F0_ED8F10(Evt* script, s32 isInitialCall) {
