@@ -1,6 +1,6 @@
 #include "common.h"
 
-s32 D_8014C250[] = {0x0001003C, 0x00000000, 0x00000000, 0x00000000};
+s8 D_8014C250[] = {0x00, 0x01, 0x00, 0x3C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 extern s32 gAnimCount;
 
@@ -30,7 +30,11 @@ extern Matrix4f gAnimRotScaleMtx;
 extern StaticAnimatorNode** gAnimTreeRoot;
 
 s32 step_model_animator(ModelAnimator* animator);
+void animator_update_model_transforms(ModelAnimator* animator, Mtx* rootTransform);
+void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx)[4], AnimatorNode* node,
+                                          Mtx* rootTransform);
 void appendGfx_animator(ModelAnimator* animator);
+void reload_mesh_animator_tree(ModelAnimator* animator);
 s32 step_mesh_animator(ModelAnimator* animator);
 
 // reg swap
@@ -167,7 +171,7 @@ void clear_animator_list(void) {
     s32 i;
 
     if (!gGameStatusPtr->isBattle) {
-        gCurrentAnimMeshListPtr = D_801539C0;
+        gCurrentAnimMeshListPtr = &D_801539C0;
         for (i = 0; i < ARRAY_COUNT(D_801533C0); i++) {
             D_801533C0[i].mode = -1;
         }
@@ -176,7 +180,7 @@ void clear_animator_list(void) {
             D_801536C0[i].mode = -1;
         }
     } else {
-        gCurrentAnimMeshListPtr = D_80153A00;
+        gCurrentAnimMeshListPtr = &D_80153A00;
     }
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentAnimMeshListPtr); i++) {
@@ -195,9 +199,9 @@ void clear_animator_list(void) {
 
 void reset_animator_list(void) {
     if (!gGameStatusPtr->isBattle) {
-        gCurrentAnimMeshListPtr = D_801539C0;
+        gCurrentAnimMeshListPtr = &D_801539C0;
     } else {
-        gCurrentAnimMeshListPtr = D_80153A00;
+        gCurrentAnimMeshListPtr = &D_80153A00;
     }
 
     gAnimModelFogR = 10;
@@ -255,7 +259,7 @@ void delete_model_animator(ModelAnimator* animator) {
     }
 }
 
-s32 create_model_animator(u32* animPos) {
+s32 create_model_animator(s8* animPos) {
     ModelAnimator* animator;
     s32 i, j;
 
@@ -326,8 +330,8 @@ s32 create_mesh_animator(s32 animPos, s8* animBuffer) {
     animator->nextUpdateTime = 1.0f;
     animator->timeScale = 1.0f;
     animPos = (animPos & 0xFFFFFF) + (s32)animator->animationBuffer;
-    animator->animReadPos = animPos;
-    animator->savedReadPos = animPos;
+    animator->animReadPos = (s8*)animPos;
+    animator->savedReadPos = (s8*)animPos;
 
     for (j = 0; j < ARRAY_COUNT(animator->staticNodeIDs); j++) {
         animator->staticNodeIDs[j] = j + 1;
@@ -549,7 +553,8 @@ void animator_update_model_transforms(ModelAnimator* animator, Mtx* rootTransfor
     }
 }
 
-void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx)[4], AnimatorNode* node, Mtx* rootTransform) {
+void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx)[4], AnimatorNode* node,
+                                          Mtx* rootTransform) {
     Matrix4f sp10;
     s32 i;
 
@@ -563,7 +568,7 @@ void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx
         guMtxCatF(sp10, flipMtx, sp10);
     }
 
-    copy_matrix(sp10, node->mtx[0]);
+    copy_matrix(sp10, node->mtx);
 
     if (node->flags & 0x1000) {
         Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(node->fcData.modelID));
@@ -717,8 +722,8 @@ void play_model_animation(s32 index, s32 animPos) {
     if (animator->animationBuffer != NULL) {
         animPos = (animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // TODO: array access?
     }
-    animator->animReadPos = animPos;
-    animator->savedReadPos = animPos;
+    animator->animReadPos = (s8*)animPos;
+    animator->savedReadPos = (s8*)animPos;
     animator->treeIndexPos = 0;
     animator->nextUpdateTime = 1.0f;
 }
@@ -732,8 +737,8 @@ void play_model_animation_starting_from(s32 index, s32 animPos, s32 framesToSkip
         animPos = (animPos & 0xFFFFFF) + (s32)animator->animationBuffer; // TODO: array access?
     }
 
-    animator->animReadPos = animPos;
-    animator->savedReadPos = animPos;
+    animator->animReadPos = (s8*)animPos;
+    animator->savedReadPos = (s8*)animPos;
     animator->treeIndexPos = 0;
     animator->nextUpdateTime = 1.0f;
 
@@ -788,7 +793,7 @@ void load_model_animator_tree(s32 index, StaticAnimatorNode** tree) {
     if (animator != NULL && animator->flags != 0) {
         gAnimTreeRoot = tree;
         load_model_animator_node(*tree, animator, 0, nodeIDs);
-        set_animator_tree_to_node_map(animator, &nodeIDs, ARRAY_COUNT(animator->staticNodeIDs));
+        set_animator_tree_to_node_map(animator, nodeIDs, ARRAY_COUNT(animator->staticNodeIDs));
     }
 }
 
@@ -849,7 +854,7 @@ void reload_mesh_animator_node(StaticAnimatorNode* node, ModelAnimator* animator
 
         newNode = add_anim_node(animator, parentNodeID, bpPtr);
         newNode->vertexStartOffset = node->vertexStartOffset;
-        newNode->fcData.modelID = node->vertexList; // TODO see note in struct def: "also ptr to vtx list? union?"
+        newNode->fcData.vtxList = node->vertexList;
 
         i = 0;
         while (gAnimTreeRoot[i] != node) {
