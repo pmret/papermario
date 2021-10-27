@@ -3,5 +3,5 @@
 
 #define NAMESPACE EF8010
 
-#import "world/common/foliage.inc.c"
+#include "world/common/foliage.inc.c"
 

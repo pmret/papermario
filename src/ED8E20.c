@@ -8,13 +8,13 @@
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 // Variation of GetCurrentFloor that is non-equivalent
-ApiStatus func_80240020_ED8E40(Evt* script, s32 isInitialCall) {
+ApiStatus N(DeadGetCurrentFloor)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = dead_gCollisionStatus.pushingAgainstWall;
     return ApiStatus_DONE2;
 }
 
 // Variation of UnkFunc25 that is non-equivalent
-ApiStatus func_80240034_ED8E54(Evt* script, s32 isInitialCall) {
+ApiStatus N(DeadUnkFunc25)(Evt* script, s32 isInitialCall) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     s32 stickX, stickY;
 
@@ -37,7 +37,7 @@ ApiStatus func_80240034_ED8E54(Evt* script, s32 isInitialCall) {
 }
 
 // Variation of GetEntryPos with a debug print at the end
-ApiStatus func_802400F0_ED8F10(Evt* script, s32 isInitialCall) {
+ApiStatus N(DeadGetEntryPos)(Evt* script, s32 isInitialCall) {
     MapConfig* mapConfig = get_current_map_header();
     s32 index = evt_get_variable(script, EVT_VAR(0));
 
