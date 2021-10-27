@@ -1,6 +1,9 @@
 #include "common.h"
 #include "map.h"
 
+void func_800EB2A4(s32 arg0);
+void disable_npc_shadow(Npc* npc);
+
 ApiStatus N(UnkFunc41)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerData* playerData = &gPlayerData;

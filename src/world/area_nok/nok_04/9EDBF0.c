@@ -65,10 +65,10 @@ static char* N(exit_str_1) = "";
 #include "common/UnkFloatFunc.inc.c"
 
 ApiStatus func_80240314_9EDF04(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
     f32 temp_f6;
     s32 temp_s0_3;
     s32 temp_s2;
-    Bytecode* args = script->ptrReadPos;
     
     temp_s2 = evt_get_variable(script, *args++);
     temp_s0_3 = evt_get_variable(script, *args++);
@@ -79,7 +79,8 @@ ApiStatus func_80240314_9EDF04(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802403C0_9EDFB0(Evt* script) {
+ApiStatus func_802403C0_9EDFB0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
     f32 temp_f4;
     f32 temp_f6;
     f32 temp_f8;
@@ -87,7 +88,6 @@ ApiStatus func_802403C0_9EDFB0(Evt* script) {
     s32 temp_a0;
     s32 temp_s0_3;
     s32 temp_s2;
-    Bytecode* args = script->ptrReadPos;
     s32 phi_s0;
     unk_D_80241440* d802413F8;
 
@@ -95,7 +95,7 @@ ApiStatus func_802403C0_9EDFB0(Evt* script) {
     temp_s0_3 = evt_get_variable(script, *args++);
     temp_a0 = evt_get_variable(script, *args++);
     phi_s0 = temp_s0_3;
-    d802413F8 = &D_802413F8_9EEFE8;
+    d802413F8 = &D_802413F8_9EEFE8; //needed to match
 
     if (temp_s0_3 < 0) {
         phi_s0 = temp_s0_3 + 0xF;
@@ -186,9 +186,9 @@ ApiStatus func_80240630_9EE220(Evt* script, s32 isInitialCall) {
 ApiStatus func_802406C4_9EE2B4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Evt* script2;
+    EvtSource* phi_a0;
     s32 temp_s1_2;
     s32 temp_s2;
-    EvtSource* phi_a0;
     
     temp_s1_2 = evt_get_variable(script, *args++);
     temp_s2 = evt_get_variable(script, *args++);

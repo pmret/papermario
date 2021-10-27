@@ -57,9 +57,65 @@ void npc_get_slip_vector(f32* outX, f32* outZ, f32 aX, f32 aZ, f32 bX, f32 bZ) {
     *outX = (aX - (dotProduct * bX)) * 0.5f;
     *outZ = (aZ - (dotProduct * bZ)) * 0.5f;
 }
+             
+s32 npc_test_move_with_slipping(s32 ignoreFlags, f32 *x, f32 *y, f32 *z, f32 length, f32 yaw, f32 radius) {
+    f32 sp60;
+    f32 sp5C;
+    f32 sp58;
+    f32 sp54;
+    f32 sp50;
+    f32 sp4C;
+    f32 sp48;
+    f32 sp44;
+    f32 sp40;
+    f32 sp3C;
+    f32 sp38;
+    f32 temp_f0;
+    f32 temp_f20;
+    f32 temp_f22;
+    f32 temp_f26;
+    f32 temp_f28;
+    f32 temp_f2;
+    s32 temp_s0;
+    s32 phi_s5;
+    s32 phi_s2 = -1;
+    f32 a;
+    f32 b;
 
-s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 radius);
-INCLUDE_ASM(s32, "759b0_len_61b0", npc_test_move_with_slipping, s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 radius);
+    sin_cos_rad((yaw * TAU) / 360.0f, &sp38, &sp3C);
+    temp_f28 = length * sp38;
+    temp_f22 = length + radius + (radius * 0.5f);
+    temp_f2 = -sp3C;
+    sp3C = temp_f2;
+    sp4C = temp_f22;
+    temp_f26 = length * temp_f2;
+    temp_s0 = npc_raycast_general(ignoreFlags, *x - (radius * sp38 * 0.5f), *y, *z - (radius * temp_f2 * 0.5f), sp38,
+                                    0.0f, temp_f2, &sp40, &sp44, &sp48, &sp4C, &sp50, &sp54, &sp58);
+    phi_s5 = 0;
+
+    if ((temp_s0 >= 0) && (sp4C <= temp_f22)) {
+        temp_f0 = atan2(0.0f, 0.0f, sqrtf((sp50 * sp50) + (sp58 * sp58)), -sp54);
+        if ((temp_f0 > 60.0f) && (temp_f0 < 90.0f)) {
+            phi_s5 = 1;
+        }
+
+        temp_f20 = sp4C - (length + radius + (radius * 0.5f));
+        a = temp_f20 * sp38;
+        b = temp_f20 * sp3C;
+        npc_get_slip_vector(&sp5C, &sp60, temp_f28, temp_f26, sp50, sp58);
+        *x += a + sp5C;
+        *z += b + sp60;
+        D_8010C978 = temp_s0;
+        phi_s2 = temp_s0;
+    }
+
+    if (phi_s5 == 0) {
+        *x += temp_f28;
+        *z += temp_f26;
+    }
+
+    return phi_s2;
+}
 
 s32 npc_test_move_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 radius) {
     s32 ret = -1;
@@ -92,6 +148,7 @@ s32 npc_test_move_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 
         D_8010C978 = hitID;
         ret = hitID;
     }
+    
     *x += temp1;
     *z += temp2;
     return ret;

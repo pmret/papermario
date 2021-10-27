@@ -1,5 +1,6 @@
 #include "common.h"
 #include "../partners.h"
+#include "effects.h"
 
 extern unkPartnerStruct* D_802BFE7C_3239CC;
 
@@ -8,6 +9,10 @@ extern s32 D_802BFF00;
 extern s32 D_802BFF04;
 extern s32 D_802BFF08;
 extern s32 D_802BFF0C;
+
+extern s32 D_802BFF24;
+extern s32 D_802BFF18;
+extern s32 D_802BFF14;
 
 s32 func_802BD7DC(void);
 
@@ -100,13 +105,62 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD678_3211C8);
+void func_802BD678_3211C8(Npc* npc) {
+    unkPartnerStruct* temp_v1;
+
+    if (D_8010C954 != 0) {
+        temp_v1 = D_802BFE7C_3239CC;
+        D_8010C954 = 0;
+        npc->flags = temp_v1->unk_08;
+        temp_v1->unk_04 = 0;
+        partner_clear_player_tracking(npc);
+    }
+}
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD6BC_32120C);
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD7DC);
 
-INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD99C_3214EC);
+f64 fabs(f64 temp);
+s32 func_802BD99C_3214EC(Npc* partner, f32 arg1, f32 arg2) {
+    f32 sp28;
+    f32 sp2C;
+    f32 sp30;
+    f32 sp34;
+    f32 sp38;
+    f32 sp3C;
+    f32 sp40;
+    f32 sp44;
+    f32* temp_a1;
+    f32* temp_a2;
+    f32* temp_a3;
+    f32* temp_v0;
+    f32 temp_f4;
+
+    temp_a1 = &sp28;
+    temp_a2 = &sp2C;
+    temp_a3 = &sp30;
+    sp34 = arg2;
+    temp_v0 = &sp34;
+    D_802BFF24 = 0;
+    sp28 = gPlayerStatus.position.x;
+    sp30 = gPlayerStatus.position.z;
+    sp2C = gPlayerStatus.position.y + arg1;
+    if (player_raycast_below_cam_relative(&gPlayerStatus, temp_a1, temp_a2, temp_a3, temp_v0, &sp38, &sp3C, &sp40, &sp44) >= 0) {
+        temp_f4 = sp2C - partner->moveToPos.y;
+        if (temp_f4 != 0.0f) {
+            if ((fabs(temp_f4) < 10.0)) {
+                D_802BFF24 = temp_f4;
+                partner->moveToPos.y = sp2C;
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+        return 1;
+    }
+    return 0;
+}
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BDA90_3215E0);
 
@@ -119,7 +173,7 @@ INCLUDE_ASM(s32, "world/partner/lakilester", func_802BE724_322274);
 ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
-    Camera* cam = &gCameras;
+    Camera* cam = gCameras;
     Npc* partner = script->owner2.npc;
     f32 sp2C;
     f32 sp28;
