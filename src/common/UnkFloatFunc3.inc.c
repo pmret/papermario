@@ -3,20 +3,17 @@
 
 ApiStatus N(UnkFloatFunc3)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-
+    s32 destBytecode1;
+    s32 destBytecode2;
+    s32 destBytecode3;
     f32 x;
     f32 y;
     f32 float3;
     f32 angle;
-
-    s32 destBytecode1;
-    s32 destBytecode2;
-    s32 destBytecode3;
-
     // Seems to be necessary to get the stack allocations to line up.
     s8 unused[0x40];
 
-    angle = (f64)evt_get_variable(script, *args++) / 10.0f;
+    angle = evt_get_variable(script, *args++) / 10.0;
     angle = angle * TAU;
     angle = angle / 360.0f;
 

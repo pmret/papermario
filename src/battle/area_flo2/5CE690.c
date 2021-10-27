@@ -121,15 +121,11 @@ ApiStatus func_80218924_5CEFB4(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802189FC_5CF08C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    f32 posZ;
-    f32 posY;
-    f32 posX;
-    Flo02Struct2* temp_s2;
+    Flo02Struct2* temp_s2 = evt_get_variable(script, *args++);
+    f32 posX = evt_get_float_variable(script, *args++);
+    f32 posY = evt_get_float_variable(script, *args++);
+    f32 posZ = evt_get_float_variable(script, *args++);
 
-    temp_s2 = evt_get_variable(script, *args++);
-    posX = evt_get_float_variable(script, *args++);
-    posY = evt_get_float_variable(script, *args++);
-    posZ = evt_get_float_variable(script, *args++);
     temp_s2->unk_0C->pos.x = posX;
     temp_s2->unk_0C->pos.y = posY;
     temp_s2->unk_0C->pos.z = posZ;

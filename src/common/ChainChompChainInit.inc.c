@@ -3,12 +3,12 @@
 ApiStatus N(ChainChompChainInit)(Evt* script, s32 isInitialCall) {
     Actor* actor = get_actor(script->owner1.actor);
     ActorPart* actorPart;
-    ChainAnimationState* it;
+    ChainCompChainAnimationState* it;
     s32 partOffset = 3;
     f32 x, y, z;
     s32 i;
 
-    it = heap_malloc(8 * sizeof(ChainAnimationState));
+    it = heap_malloc(8 * sizeof(ChainCompChainAnimationState));
     actor->state.unk_6C = it;
 
     x = actor->currentPos.x + 12.0;

@@ -13,8 +13,9 @@ INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", b_area_isk_part_2_ChainChompCh
 
 ApiStatus func_8021866C_4EFB0C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 var1 = *args++;
 
-    evt_get_variable(script, args[1]);
+    evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
