@@ -15,6 +15,7 @@ extern s32 D_802BFF18;
 extern s32 D_802BFF14;
 
 s32 func_802BD7DC(void);
+s32 partner_use_ability(void);
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD100_320C50);
 
@@ -122,58 +123,60 @@ INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD6BC_32120C);
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD7DC);
 
 f64 fabs(f64 temp);
-s32 func_802BD99C_3214EC(Npc* partner, f32 arg1, f32 arg2) {
-    f32 sp28;
-    f32 sp2C;
-    f32 sp30;
-    f32 sp34;
-    f32 sp38;
-    f32 sp3C;
-    f32 sp40;
-    f32 sp44;
-    f32* temp_a1;
-    f32* temp_a2;
-    f32* temp_a3;
-    f32* temp_v0;
+s32 func_802BD99C_3214EC(Npc* partner, f32 yOffset, f32 zOffset) {
+    f32 outX = gPlayerStatus.position.x;
+    f32 outY = gPlayerStatus.position.y + yOffset;
+    f32 outZ = gPlayerStatus.position.z;
+    f32 outLength = zOffset;
+    f32 hitRx, hitRz;
+    f32 hitDirX, hitDirZ;
     f32 temp_f4;
-
-    temp_a1 = &sp28;
-    temp_a2 = &sp2C;
-    temp_a3 = &sp30;
-    sp34 = arg2;
-    temp_v0 = &sp34;
+    
     D_802BFF24 = 0;
-    sp28 = gPlayerStatus.position.x;
-    sp30 = gPlayerStatus.position.z;
-    sp2C = gPlayerStatus.position.y + arg1;
-    if (player_raycast_below_cam_relative(&gPlayerStatus, temp_a1, temp_a2, temp_a3, temp_v0, &sp38, &sp3C, &sp40, &sp44) >= 0) {
-        temp_f4 = sp2C - partner->moveToPos.y;
+    
+    if (player_raycast_below_cam_relative(&gPlayerStatus, &outX, &outY, &outZ, &outLength, &hitRx, &hitRz, &hitDirX, &hitDirZ) >= 0) {
+        temp_f4 = outY - partner->moveToPos.y;
         if (temp_f4 != 0.0f) {
             if ((fabs(temp_f4) < 10.0)) {
                 D_802BFF24 = temp_f4;
-                partner->moveToPos.y = sp2C;
-                return 1;
+                partner->moveToPos.y = outY;
+                return TRUE;
             } else {
-                return 0;
+                return FALSE;
             }
         }
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BDA90_3215E0);
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BDDD8_321928);
 
-INCLUDE_ASM(s32, "world/partner/lakilester", func_802BE6A0_3221F0);
+void func_802BE6A0_3221F0(f32* arg0) {
+    f32 hitDirZ;
+    f32 hitDirX;
+    f32 hitRz;
+    f32 hitRx;
+    f32 sp28;
+    f32 sp2C;
+    f32 colliderHeight = gPlayerStatus.colliderHeight;
+    
+    *arg0 = gPlayerStatus.position.y + colliderHeight;
+    sp28 = gPlayerStatus.position.x;
+    sp2C = gPlayerStatus.position.z;
+    
+    player_raycast_below_cam_relative(&gPlayerStatus, &sp28, arg0, &sp2C, &colliderHeight, &hitRx, &hitRz, &hitDirX, &hitDirZ);
+}
+
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BE724_322274);
 
 ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
-    Camera* cam = gCameras;
+    Camera* cam = &gCameras[0];
     Npc* partner = script->owner2.npc;
     f32 sp2C;
     f32 sp28;
@@ -299,10 +302,43 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "world/partner/lakilester", func_802BFA00_323550);
+void func_802BFA00_323550(Npc* npc) {
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-INCLUDE_ASM(s32, "world/partner/lakilester", func_802BFAA8_3235F8);
+    if (D_802BFF0C != 0) {
+        partnerActionStatus->npc = *npc;
+        partnerActionStatus->actionState.b[1] = 1;
+        enable_player_static_collisions();
+        enable_player_input();
+        set_action_state(0);
+        partner_clear_player_tracking(npc);
+    }
 
-INCLUDE_ASM(s32, "world/partner/lakilester", func_802BFB44_323694);
+    partnerActionStatus->actionState.b[3] = 8;
+    D_802BFF18 = 0;
+}
+
+void func_802BFAA8_3235F8(Npc* npc) {
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+
+    if (partnerActionStatus->actionState.b[1] != 0) {
+        if (D_802BFF0C != 0) {
+            *npc = partnerActionStatus->npc;
+            gGameStatusPtr->unk_7D = 1;
+            set_action_state(0x21);
+            partnerActionStatus->actionState.b[3] = 0;
+            partnerActionStatus->actionState.b[0] = 0;
+            disable_player_input();
+            partner_use_ability();
+        }
+    }
+}
+
+void func_802BFB44_323694(f32 arg0) {
+    Camera* currentCamera = &gCameras[gCurrentCameraID];
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    
+    add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, arg0, currentCamera->currentYaw);
+}
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BFBA0_3236F0);

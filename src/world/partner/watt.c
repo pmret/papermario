@@ -109,9 +109,25 @@ s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
     }
 }
 
-INCLUDE_ASM(s32, "world/partner/watt", func_802BDD9C_31D90C);
+void func_802BDD9C_31D90C(Npc* npc) {
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-INCLUDE_ASM(s32, "world/partner/watt", func_802BDE10_31D980);
+    if (D_802BE30C != 0) {
+        partnerActionStatus->npc = *npc;
+        partnerActionStatus->actionState.b[1] = 1;
+        partner_clear_player_tracking(npc);
+    }
+
+    func_802BD180_31CCF0();
+}
+
+void func_802BDE10_31D980(Npc* npc) {
+    if (gPartnerActionStatus.actionState.b[1]) {
+        *npc = gPartnerActionStatus.npc;
+        partner_use_ability();
+        func_802BD100_31CC70(npc);
+    }
+}
 
 ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;

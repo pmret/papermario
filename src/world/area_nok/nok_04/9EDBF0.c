@@ -1,6 +1,6 @@
 #include "nok_04.h"
 
-typedef struct unk_D_80241440_2 {
+typedef struct Unk80241440_2 {
     /* 0x00 */ f32 unk_00;
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -18,8 +18,9 @@ typedef struct unk_D_80241440_2 {
     /* 0x38 */ f32 unk_38;
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ f32 unk_40;
-} unk_D_80241440_2; //sizeof 0x44
-typedef struct unk_D_80241440 {
+} Unk80241440_2; //sizeof 0x44
+
+typedef struct Unk80241440 {
     /* 0x00 */ f32 unk_00;
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -36,11 +37,11 @@ typedef struct unk_D_80241440 {
     /* 0x34 */ f32 unk_34;
     /* 0x38 */ f32 unk_38;
     /* 0x3C */ f32 unk_3C;
-    /* 0x40 */ unk_D_80241440_2* unk_40;
-    /* 0x44 */ unk_D_80241440_2* unk_44;
-} unk_D_80241440; //sizeof 0x48
+    /* 0x40 */ Unk80241440_2* unk_40;
+    /* 0x44 */ Unk80241440_2* unk_44;
+} Unk80241440; //sizeof 0x48
 
-extern unk_D_80241440 D_802413F8_9EEFE8;
+extern Unk80241440 D_802413F8_9EEFE8;
 extern s32 D_80241440_9EF030[12];
 extern s32 D_80241438_9EF028;
 extern s32 D_8024143C_9EF02C;
@@ -66,13 +67,10 @@ static char* N(exit_str_1) = "";
 
 ApiStatus func_80240314_9EDF04(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    f32 temp_f6;
-    s32 temp_s0_3;
-    s32 temp_s2;
-    
-    temp_s2 = evt_get_variable(script, *args++);
-    temp_s0_3 = evt_get_variable(script, *args++);
-    temp_f6 = evt_get_variable(script, *args++);
+    s32 temp_s2 = evt_get_variable(script, *args++);
+    s32 temp_s0_3 = evt_get_variable(script, *args++);
+    f32 temp_f6 = evt_get_variable(script, *args++);
+ 
     D_802413F8_9EEFE8.unk_00 = temp_s2;
     D_802413F8_9EEFE8.unk_08 = temp_f6;
     D_802413F8_9EEFE8.unk_04 = temp_s0_3 + 4.0f;
@@ -81,21 +79,15 @@ ApiStatus func_80240314_9EDF04(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802403C0_9EDFB0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 temp_s2 = evt_get_variable(script, *args++);
+    s32 temp_s0_3 = evt_get_variable(script, *args++);
+    s32 temp_a0 = evt_get_variable(script, *args++);
+    s32 phi_s0 = temp_s0_3;
+    Unk80241440* d802413F8 = &D_802413F8_9EEFE8; //needed to match
     f32 temp_f4;
     f32 temp_f6;
     f32 temp_f8;
     f32 temp_f10;
-    s32 temp_a0;
-    s32 temp_s0_3;
-    s32 temp_s2;
-    s32 phi_s0;
-    unk_D_80241440* d802413F8;
-
-    temp_s2 = evt_get_variable(script, *args++);
-    temp_s0_3 = evt_get_variable(script, *args++);
-    temp_a0 = evt_get_variable(script, *args++);
-    phi_s0 = temp_s0_3;
-    d802413F8 = &D_802413F8_9EEFE8; //needed to match
 
     if (temp_s0_3 < 0) {
         phi_s0 = temp_s0_3 + 0xF;
@@ -185,13 +177,11 @@ ApiStatus func_80240630_9EE220(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802406C4_9EE2B4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    s32 temp_s1_2 = evt_get_variable(script, *args++);
+    s32 temp_s2 = evt_get_variable(script, *args++);
     Evt* script2;
     EvtSource* phi_a0;
-    s32 temp_s1_2;
-    s32 temp_s2;
     
-    temp_s1_2 = evt_get_variable(script, *args++);
-    temp_s2 = evt_get_variable(script, *args++);
     temp_s1_2 %= 6;
 
     if (temp_s1_2 >= 4) {
@@ -204,11 +194,13 @@ ApiStatus func_802406C4_9EE2B4(Evt* script, s32 isInitialCall) {
 
     phi_a0 = &D_80241470_9EF060;
     
-    if (temp_s2 != 0) {
-        phi_a0 = &D_80241470_9EF060;
-        if (temp_s2 == 1) {
+    switch (temp_s2) {
+        case 0:
+            phi_a0 = &D_80241470_9EF060;
+            break;
+        case 1:
             phi_a0 = &D_8024161C_9EF20C;
-        }
+            break;
     }
 
     script2 = start_script(phi_a0, 1, 0);
@@ -236,7 +228,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_80240814_9EE404);
 
 ApiStatus func_80240E4C_9EEA3C(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
-        D_80243254_9F0E44 = 0; // FALSE
+        D_80243254_9F0E44 = FALSE;
     }
     
     if (D_80243254_9F0E44) {
@@ -247,6 +239,6 @@ ApiStatus func_80240E4C_9EEA3C(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80240E70_9EEA60(Evt* script, s32 isInitialCall) {
-    D_80243254_9F0E44 = 1;
+    D_80243254_9F0E44 = TRUE;
     return ApiStatus_DONE2;
 }
