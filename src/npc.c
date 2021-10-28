@@ -1,6 +1,5 @@
 #include "common.h"
 #include "map.h"
-#include "npc.h"
 #include "effects.h"
 
 extern s16 D_8010C97A;
@@ -1624,7 +1623,7 @@ void draw_first_strike_ui(void) {
 void npc_dyn_entity_draw_no_op(void) {
 }
 
-void make_npcs(s8 flags, s8 mapID, s32* npcGroupList) {
+void make_npcs(s32 flags, s32 mapID, s32* npcGroupList) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 i;
     s32 j;

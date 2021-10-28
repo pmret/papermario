@@ -1,5 +1,6 @@
 #include "common.h"
 #include "map.h"
+#include "model.h"
 
 void N(foliage_setup_shear_mtx)(Matrix4f mtx, f32 scale, f32 xAmount, f32 zAmount) {
     osGetCause(mtx);

@@ -9,9 +9,19 @@ extern s32 D_8010C958;
 
 extern s32 D_802BDF60;
 
-void func_802B72C0_E22870();
+void func_802B72C0_E22870(void);
 
+s32 func_800E0208(void);
+void func_800E0330(void);
+void func_800E0374(void);
+void func_800E04D0(void);
 void func_800E0514(void);
+void func_800E0658(void);
+void func_800E069C(void);
+void func_800E0AD0(void);
+void func_800E0B14(void);
+void update_partner_timers(void);
+void update_player_shadow(void);
 
 s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ, f32* outLength, f32* hitRx, f32* hitRz,
                          f32* hitDirX, f32* hitDirZ) {

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "npc.h"
+#include "map.h"
 #include "effects.h"
 
 typedef struct SneakyParasolUnk {

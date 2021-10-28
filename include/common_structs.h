@@ -392,7 +392,7 @@ typedef struct Entity {
     /* 0x74 */ char unk_74[60];
     /* 0xB0 */ float effectiveSize;
     /* 0xB4 */ char unk_B4[4];
-    /* 0xB8 */ Matrix4s transformMatrix;
+    /* 0xB8 */ Mtx transformMatrix;
 } Entity; // size = 0xF8
 
 typedef Entity* EntityList[MAX_ENTITIES];
@@ -715,7 +715,7 @@ typedef struct BattleStatus {
     /* 0x0A4 */ s8 cloudNineTurnsLeft;
     /* 0x0A5 */ u8 cloudNineDodgeChance; /* = 50% */
     /* 0x0A6 */ char unk_A6[2];
-    /* 0x0A8 */ s32 cloudNineEffect;
+    /* 0x0A8 */ struct EffectInstance* cloudNineEffect;
     /* 0x0AC */ char unk_AC;
     /* 0x0AD */ s8 unk_AD;
     /* 0x0AE */ s8 hammerLossTurns;
@@ -1268,7 +1268,7 @@ typedef struct Shadow {
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Vec3f rotation;
     /* 0x34 */ char unk_34[0x4];
-    /* 0x38 */ Matrix4s transformMatrix;
+    /* 0x38 */ Mtx transformMatrix;
 } Shadow; // size = 0x78
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
@@ -1569,8 +1569,7 @@ typedef struct AnimatedModel {
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
-    /* 0x28 */ Mtx* mtx;
-    /* 0x2C */ char unk_2C[60];
+    /* 0x28 */ Mtx mtx;
     /* 0x68 */ u32 currentAnimData;
     /* 0x6C */ char unk_6C[4];
 } AnimatedModel; // size = 0x70
@@ -1692,7 +1691,7 @@ typedef struct Actor {
     /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
-    /* 0x20C */ u32* statusTable;
+    /* 0x20C */ struct DictionaryEntry* statusTable;
     /* 0x210 */ s8 debuff;
     /* 0x211 */ s8 debuffDuration;
     /* 0x212 */ s8 staticStatus; /* 0B = yes */
@@ -2125,7 +2124,8 @@ typedef struct PartnerActionStatus {
     /* 0x00C */ s32 pressedButtons;
     /* 0x010 */ s32 heldButtons;
     /* 0x014 */ s8 inputDisabled;
-    /* 0x015 */ char unk_15[0x343];
+    /* 0x015 */ char unk_15[0x3];
+    /* 0x018 */ Npc unk_18;
     /* 0x358 */ s32 unk_358;
     /* 0x35C */ char unk_35C[0x4];
 } PartnerActionStatus; // size = 0x360

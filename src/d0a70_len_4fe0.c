@@ -88,7 +88,7 @@ extern Unk8Struct D_80156F20[8];
 
 void func_8013A93C(UnkD0A70Struct*);
 void func_8013A9C8(UnkD0A70Struct*);
-//void func_8013A9E8(UnkD0A70Struct*);
+void func_8013A9E8(UnkD0A70Struct*);
 void func_8013BC88(UnkD0A70Struct*);
 void func_8013C048(UnkD0A70Struct*);
 void func_8013C220(UnkD0A70Struct*);

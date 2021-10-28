@@ -11,7 +11,6 @@
 
 #define UNK_ALPHA_FUNC_NPC 10
 
-extern s16 gCurrentCamID;
 extern s16 MessagePlural;
 extern s16 MessageSingular;
 

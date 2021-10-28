@@ -1,3 +1,6 @@
+#include "functions.h"
+#include "map.h"
+
 void state_world_draw_aux_ui(void);
 
 void state_init_world(void) {

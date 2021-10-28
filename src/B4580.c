@@ -1,4 +1,4 @@
-#include "common.h"
+#include "model.h"
 
 s8 D_8014C250[] = {0x00, 0x01, 0x00, 0x3C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
@@ -28,14 +28,6 @@ extern Matrix4f gAnimScaleMtx;
 extern Matrix4f gAnimTranslateMtx;
 extern Matrix4f gAnimRotScaleMtx;
 extern StaticAnimatorNode** gAnimTreeRoot;
-
-s32 step_model_animator(ModelAnimator* animator);
-void animator_update_model_transforms(ModelAnimator* animator, Mtx* rootTransform);
-void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx)[4], AnimatorNode* node,
-                                          Mtx* rootTransform);
-void appendGfx_animator(ModelAnimator* animator);
-void reload_mesh_animator_tree(ModelAnimator* animator);
-s32 step_mesh_animator(ModelAnimator* animator);
 
 // reg swap
 #ifdef NON_MATCHING
@@ -472,7 +464,7 @@ void update_model_animator(s32 animatorID) {
     }
 }
 
-void update_animated_model(s32 animatorID, Mtx* mtx) {
+void update_model_animator_with_transform(s32 animatorID, Mtx* mtx) {
     if (!gGameStatusPtr->isBattle || animatorID & 0x800) {
         ModelAnimator* animator;
 
