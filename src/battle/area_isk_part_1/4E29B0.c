@@ -7,13 +7,13 @@ extern EffectInstance* D_80224D60;
 extern EffectInstance* D_80224D64;
 extern s32 D_80224920_4EF060;
 
-#include "common/ChainChompChainInit.inc.c"
+#include "common/ChompChainInit.inc.c"
 
-#include "common/ChainChompChainUpdateHelperFunc.inc.c"
+#include "common/ChompChainUpdateHelperFunc.inc.c"
 
-#include "common/ChainChompChainUpdateHelperFunc2.inc.c"
+#include "common/ChompChainUpdateHelperFunc2.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_isk_part_1/4E29B0", b_area_isk_part_1_ChainChompChainUpdate);
+INCLUDE_ASM(s32, "battle/area_isk_part_1/4E29B0", b_area_isk_part_1_ChompChainUpdate);
 
 // Clover's suggestion: isk_bt04_CreateTorchFX
 // Reason: this sort of additional namespacing is required because the isk battle source includes the data for each of the stages

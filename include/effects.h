@@ -185,7 +185,7 @@ EffectInstance* playFX_1C(s32, f32, f32, f32, s32);
 void playFX_1D(s32, f32, f32, f32, f32, s32, f32, s32);
 EffectInstance* playFX_1E(s32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* playFX_1F(s32, f32, f32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_20(s32, f32, f32, f32, f32, s32*);
+EffectInstance* playFX_20(s32, f32, f32, f32, f32, EffectInstance*);
 EffectInstance* playFX_21(s32, f32, f32, f32, f32, f32, s32);
 void playFX_22(s32, f32, f32, f32, f32, f32, s32, s32);
 EffectInstance* playFX_23(u32, f32, f32, f32, f32);

@@ -1,14 +1,14 @@
 #include "common.h"
 
-ApiStatus N(ChainChompChainInit)(Evt* script, s32 isInitialCall) {
+ApiStatus N(ChompChainInit)(Evt* script, s32 isInitialCall) {
     Actor* actor = get_actor(script->owner1.actor);
     ActorPart* actorPart;
-    ChainCompChainAnimationState* it;
+    ChompChainAnimationState* it;
     s32 partOffset = 3;
     f32 x, y, z;
     s32 i;
 
-    it = heap_malloc(8 * sizeof(ChainCompChainAnimationState));
+    it = heap_malloc(8 * sizeof(ChompChainAnimationState));
     actor->state.unk_6C = it;
 
     x = actor->currentPos.x + 12.0;

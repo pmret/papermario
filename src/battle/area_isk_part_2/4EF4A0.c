@@ -3,13 +3,13 @@
 
 #define NAMESPACE b_area_isk_part_2
 
-#include "common/ChainChompChainInit.inc.c"
+#include "common/ChompChainInit.inc.c"
 
-#include "common/ChainChompChainUpdateHelperFunc.inc.c"
+#include "common/ChompChainUpdateHelperFunc.inc.c"
 
-#include "common/ChainChompChainUpdateHelperFunc2.inc.c"
+#include "common/ChompChainUpdateHelperFunc2.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", b_area_isk_part_2_ChainChompChainUpdate);
+INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", b_area_isk_part_2_ChompChainUpdate);
 
 ApiStatus func_8021866C_4EFB0C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

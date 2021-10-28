@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel b_area_isk_part_2_ChainChompChainUpdate
+glabel b_area_isk_part_2_ChompChainUpdate
 /* 4EF6FC 8021825C 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* 4EF700 80218260 AFB00020 */  sw        $s0, 0x20($sp)
 /* 4EF704 80218264 0080802D */  daddu     $s0, $a0, $zero
@@ -157,7 +157,7 @@ glabel b_area_isk_part_2_ChainChompChainUpdate
 /* 4EF938 80218498 4602A081 */  sub.s     $f2, $f20, $f2
 /* 4EF93C 8021849C 4406B000 */  mfc1      $a2, $f22
 /* 4EF940 802184A0 44051000 */  mfc1      $a1, $f2
-/* 4EF944 802184A4 0C08607A */  jal       b_area_isk_part_2_ChainChompChainUpdateHelperFunc2
+/* 4EF944 802184A4 0C08607A */  jal       b_area_isk_part_2_ChompChainUpdateHelperFunc2
 /* 4EF948 802184A8 27A40018 */   addiu    $a0, $sp, 0x18
 /* 4EF94C 802184AC C7A00018 */  lwc1      $f0, 0x18($sp)
 /* 4EF950 802184B0 3C013FE0 */  lui       $at, 0x3fe0
@@ -216,7 +216,7 @@ glabel b_area_isk_part_2_ChainChompChainUpdate
 /* 4EFA10 80218570 8E050018 */  lw        $a1, 0x18($s0)
 .L80218574:
 /* 4EFA14 80218574 4406B000 */  mfc1      $a2, $f22
-/* 4EFA18 80218578 0C086054 */  jal       b_area_isk_part_2_ChainChompChainUpdateHelperFunc
+/* 4EFA18 80218578 0C086054 */  jal       b_area_isk_part_2_ChompChainUpdateHelperFunc
 /* 4EFA1C 8021857C 0240202D */   daddu    $a0, $s2, $zero
 /* 4EFA20 80218580 C6000018 */  lwc1      $f0, 0x18($s0)
 /* 4EFA24 80218584 3C014010 */  lui       $at, 0x4010

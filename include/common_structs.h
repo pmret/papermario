@@ -1569,7 +1569,7 @@ typedef struct ActorMovement {
     /* 0x4C */ f32 distance;
 } ActorMovement; // size = 0x50;
 
-typedef struct ChainCompChainAnimationState {
+typedef struct ChompChainAnimationState {
     /* 0x00 */ Vec3f currentPos;
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ f32 unk_10;
@@ -1578,7 +1578,7 @@ typedef struct ChainCompChainAnimationState {
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ Vec3f scale;
-} ChainCompChainAnimationState; // size = 0x30
+} ChompChainAnimationState; // size = 0x30
 
 typedef struct ActorState { // TODO: Make the first field of this an ActorMovement
     /* 0x00 */ Vec3f currentPos;
@@ -1599,7 +1599,7 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x66 */ s16 moveArcAmplitude;
     /* 0x68 */ char unk_68[3];
     /* 0x6B */ u8 jumpPartIndex;
-    /* 0x6C */ ChainCompChainAnimationState* unk_6C;
+    /* 0x6C */ ChompChainAnimationState* unk_6C;
     /* 0x70 */ char unk_70[12];
     /* 0x7C */ s32 varTable[16];
 } ActorState; // size = 0xBC;
