@@ -181,14 +181,14 @@ ApiStatus func_802406C4_9EE2B4(Evt* script, s32 isInitialCall) {
     s32 temp_s2 = evt_get_variable(script, *args++);
     Evt* script2;
     EvtSource* phi_a0;
-    
+
     temp_s1_2 %= 6;
 
     if (temp_s1_2 >= 4) {
         temp_s1_2 = 6 - temp_s1_2;
     }
 
-    if (does_script_exist(script->varTable[temp_s1_2 + 6]) != 0) {
+    if (does_script_exist(script->varTable[temp_s1_2 + 6])) {
         kill_script_by_ID(script->varTable[temp_s1_2 + 6]);
     }
 

@@ -58,29 +58,20 @@ void npc_get_slip_vector(f32* outX, f32* outZ, f32 aX, f32 aZ, f32 bX, f32 bZ) {
     *outZ = (aZ - (dotProduct * bZ)) * 0.5f;
 }
              
-s32 npc_test_move_with_slipping(s32 ignoreFlags, f32 *x, f32 *y, f32 *z, f32 length, f32 yaw, f32 radius) {
-    f32 outY;
-    f32 outX;
-    f32 bZ;
+s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 radius) {
+    f32 outX, outY;
+    f32 bX, bZ;
     f32 hitNy;
-    f32 bX;
     f32 hitDepth;
-    f32 hitZ;
-    f32 hitY;
-    f32 hitX;
-    f32 outCosTheta;
-    f32 outSinTheta;
-    f32 temp_f0;
-    f32 temp_f20;
-    f32 temp_f22;
-    f32 aZ;
-    f32 aX;
+    f32 hitX, hitY, hitZ;
+    f32 outSinTheta, outCosTheta;
+    f32 temp_f0, temp_f20, temp_f22;
+    f32 aX, aZ;
     f32 inverseOutCosTheta;
     s32 raycastHitID;
     s32 phi_s5;
     s32 phi_s2 = -1;
-    f32 a;
-    f32 b;
+    f32 a, b;
 
     sin_cos_rad((yaw * TAU) / 360.0f, &outSinTheta, &outCosTheta);
     aX = length * outSinTheta;
