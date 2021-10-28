@@ -1,11 +1,11 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of flo_08 (CAED40.c)
+
 #define NAMESPACE EC9D00
 
 #define gPartnerActionStatus dead_gPartnerActionStatus2
-
-extern s32 D_80094900[11][4];
 
 #include "world/common/SetOverrideFlags_40.inc.c"
 
@@ -36,6 +36,6 @@ INCLUDE_ASM(s32, "EC9D00", func_80240600_ECA300);
 
 #include "world/common/UnkFunc23.inc.c"
 
-#include "world/common/DeadUnkPartnerPosFuncs.inc.c"
+#include "world/common/UnkPartnerPosFuncs.inc.c"
 
 #include "world/common/UnkFunc40.inc.c"

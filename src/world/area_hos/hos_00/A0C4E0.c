@@ -23,7 +23,12 @@ ApiStatus N(func_802407F0_A0C4E0)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_00/A0C4E0", func_80240908_A0C5F8);
+ApiStatus N(EnableActionCommands)(Evt* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+
+    playerData->hasActionCommands = TRUE;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_hos/hos_00/A0C4E0", func_8024091C_A0C60C);
 

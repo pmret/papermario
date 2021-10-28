@@ -1,6 +1,8 @@
 #include "dead.h"
 #include "common.h"
 
+// Has some relation to flo_12 (CC0E70.c) but it's rearranged and some stuff is different, so hard to tell
+
 #define NAMESPACE EB1170
 
 extern s32 func_80059AC8(s32, s32);
@@ -12,7 +14,7 @@ extern s32 D_800B8DEC;
 
 INCLUDE_ASM(s32, "EB1170", func_80240310_EB1170);
 
-#include "world/common/DeadGetItemName.inc.c"
+#include "world/common/GetItemName.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

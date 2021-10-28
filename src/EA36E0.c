@@ -3,7 +3,7 @@
 
 #define NAMESPACE EA36E0
 
-// Copy of kzn_17?
+// Copy of kzn_17 (C887B0.c)
 
 #define UNK_FUNC_50_VAR1 -583.0
 #define UNK_FUNC_50_VAR2 165.0

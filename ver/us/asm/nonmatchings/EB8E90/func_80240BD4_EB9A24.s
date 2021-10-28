@@ -162,7 +162,7 @@ glabel L80240DF4_EB9C44
 glabel L80240E0C_EB9C5C
 /* EB9C5C 80240E0C 02A0202D */  daddu     $a0, $s5, $zero
 /* EB9C60 80240E10 0260282D */  daddu     $a1, $s3, $zero
-/* EB9C64 80240E14 0C090110 */  jal       EB8E90_DeadUnkNpcAIFunc1
+/* EB9C64 80240E14 0C090110 */  jal       EB8E90_UnkNpcAIFunc1
 /* EB9C68 80240E18 0280302D */   daddu    $a2, $s4, $zero
 glabel L80240E1C_EB9C6C
 /* EB9C6C 80240E1C 02A0202D */  daddu     $a0, $s5, $zero
