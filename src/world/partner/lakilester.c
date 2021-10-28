@@ -9,10 +9,13 @@ extern s32 D_802BFF00;
 extern s32 D_802BFF04;
 extern s32 D_802BFF08;
 extern s32 D_802BFF0C;
-
-extern s32 D_802BFF24;
-extern s32 D_802BFF18;
+extern s32 D_802BFF10;
 extern s32 D_802BFF14;
+extern s32 D_802BFF18;
+extern s32 D_802BFF1C;
+extern s32 D_802BFF20;
+extern s32 D_802BFF24;
+extern s32 D_802BFF28;
 
 extern s16 D_8010C97A;
 
@@ -20,11 +23,63 @@ s32 func_802BD7DC(void);
 s32 partner_use_ability(void);
 f64 fabs(f64 temp);
 
-INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD100_320C50);
+void func_802BD100_320C50(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Npc* npc = get_npc_unsafe(-4);
+    s32 playerFlags = playerStatus->flags;
+    Camera* currentCamera;
+    f32 playerSpeedCopy;
+    s32 temp_v0_2;
 
-INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD21C_320D6C);
+    if (playerFlags & 0x4000) {
+        playerSpeedCopy = playerStatus->currentSpeed;
+        if (playerFlags & 0x40000) {
+            playerSpeedCopy *= 0.5f;
+        }
 
-INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD29C_320DEC);
+        add_vec2D_polar(&npc->pos.x, &npc->pos.z, playerSpeedCopy, playerStatus->heading);
+        npc->yaw = playerStatus->targetYaw;
+    }
+
+    temp_v0_2 = abs(D_802BFF18);
+    playerStatus->position.x = npc->pos.x;
+    playerStatus->position.y = npc->pos.y + 10.0f + (temp_v0_2 * 0.34f);
+    playerStatus->position.z = npc->pos.z;
+    currentCamera = &gCameras[gCurrentCameraID];
+    add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 2.0f, currentCamera->currentYaw);
+}
+
+void func_802BD21C_320D6C(Npc* npc) {
+    npc->collisionHeight = 0x26;
+    npc->collisionRadius = 0x24;
+    npc->unk_80 = 0x10000;
+    D_802BFF18 = 0;
+    D_802BFF04 = 0;
+    D_802BFF08 = 0;
+    D_802BFF0C = 0;
+    D_802BFF10 = 1;
+    D_802BFF1C = 0;
+    D_802BFF20 = 0;
+    D_802BFF24 = 0;
+    D_802BFF28 = 0;
+    npc->moveToPos.x = npc->pos.x;
+    npc->moveToPos.y = npc->pos.y;
+    npc->moveToPos.z = npc->pos.z;
+}
+
+ApiStatus func_802BD29C_320DEC(Evt* evt, s32 isInitialCall) {
+    s32 npcID = evt->owner2.npcID;
+
+    if (isInitialCall != 0) {
+        partner_init_get_out(npcID);
+    }
+
+    if (partner_get_out(npcID) > 0U) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
 
 ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
@@ -39,9 +94,11 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
         mem_clear(D_802BFE7C_3239CC, sizeof(*D_802BFE7C_3239CC));
         D_8010C954 = 0;
     }
+
     playerData->unk_2F4[8]++;
     npc->flags |= 0x10000;
     entity = D_8010C954;
+    
     if (entity == NULL) {
         partner_flying_update_player_tracking(npc);
         partner_flying_update_motion(npc);
@@ -121,7 +178,24 @@ void func_802BD678_3211C8(Npc* npc) {
     }
 }
 
-INCLUDE_ASM(s32, "world/partner/lakilester", func_802BD6BC_32120C);
+void func_802BD6BC_32120C(f32* arg0, f32* arg1) {
+    f32 temp_f24 = gPartnerActionStatus.stickX;
+    f32 temp_f26 = gPartnerActionStatus.stickY;
+    f32 temp_f22 = -temp_f26;
+    f32 atan = atan2(0.0f, 0.0f, temp_f24, temp_f22);
+    f32 temp = clamp_angle(atan + gCameras->currentYaw);
+    f32 phi_f20 = 0.0f;
+    
+    if (dist2D(0.0f, 0.0f, temp_f24, temp_f22) >= 1.0) {
+        phi_f20 = 3.0f;
+        if ((temp_f24 * temp_f24) + (temp_f26 * temp_f26) > 3025.0f) {
+            phi_f20 = 6.0f;
+        }
+    }
+    
+    *arg0 = temp;
+    *arg1 = phi_f20;
+}
 
 s32 func_802BD7DC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -465,4 +539,92 @@ void func_802BFB44_323694(f32 arg0) {
     add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, arg0, currentCamera->currentYaw);
 }
 
-INCLUDE_ASM(s32, "world/partner/lakilester", func_802BFBA0_3236F0);
+s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Npc* npc = get_npc_unsafe(-4);
+    f32 temp_f0;
+    f32 temp_f2;
+    f32 temp_f4;
+    f32* temp_s0_2;
+    s32 temp_v0_2;
+    s32 tempVar;
+    
+    if (isInitialCall != 0) {
+        script->functionTemp[0] = 0;
+    }
+
+    tempVar = script->functionTemp[0];
+
+    switch (tempVar) {
+        case 0:
+            if (script->varTable[12] == 0) {
+                temp_f0 = playerStatus->position.x;
+                npc->pos.x = temp_f0;
+                npc->moveToPos.x = temp_f0;
+                temp_f4 = playerStatus->position.z;
+                npc->pos.z = temp_f4;
+                npc->moveToPos.z = temp_f4;
+                playerStatus->position.y = npc->pos.y + 10.0f;
+                partner_kill_ability_script();
+            } else {
+                set_action_state(0x21);
+                disable_player_static_collisions();
+                disable_player_input();
+                npc->moveToPos.x = npc->pos.x = playerStatus->position.x;
+                npc->moveToPos.y = npc->pos.y = playerStatus->position.y;
+                npc->moveToPos.z = npc->pos.z = playerStatus->position.z;
+                playerStatus->position.y = npc->pos.y + 10.0f;
+            }
+
+            script->functionTemp[1] = script->varTable[4];
+            temp_s0_2 = &script->varTable[5];
+            temp_f2 = atan2(npc->pos.x, npc->pos.z, script->varTable[1], script->varTable[3]);
+            npc->yaw = temp_f2;
+
+            if (script->varTable[12] != 0) {
+                if (temp_f2 >= 0.0f && temp_f2 <= 180.0f) {
+                    npc->yawCamOffset = temp_f2;
+                    npc->isFacingAway = 1;
+                }
+            }
+
+            sfx_play_sound_at_npc(0x295, 0, -4);
+            playerStatus->anim = 0x8000E;
+            playerStatus->unk_BC = 0;
+            playerStatus->flags |= 0x10000000;
+            func_802BFB44_323694(2.0f);
+            gGameStatusPtr->unk_7D = 1;
+            npc->flags |= 0x100;
+            npc->moveSpeed = *temp_s0_2;
+            npc->jumpScale = 0.0f;
+            D_802BFF10 = 0;
+            D_802BFF18 = 0;
+            script->functionTemp[0] = 1;
+            break;
+            
+        case 1:
+            npc_move_heading(npc, npc->moveSpeed, npc->yaw);
+            playerStatus->position.x = npc->pos.x;
+            playerStatus->position.y = npc->pos.y + 10.0f;
+            playerStatus->position.z = npc->pos.z;
+            playerStatus->targetYaw = npc->yaw;
+            func_802BFB44_323694(2.0f);
+            script->functionTemp[1] -= 1;
+            
+            if (script->functionTemp[1] == 0) {
+                if (script->varTable[12] != 0) {
+                    partnerActionStatus->actionState.b[1] = tempVar;
+                    set_action_state(0x21);
+                    partnerActionStatus->actionState.b[3] = 0;
+                    partnerActionStatus->actionState.b[0] = 0;
+                    partner_use_ability();
+                    enable_player_static_collisions();
+                    enable_player_input();
+                }
+                return ApiStatus_DONE2;
+            }
+    }
+
+    return ApiStatus_BLOCK;
+}
