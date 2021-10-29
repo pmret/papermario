@@ -551,6 +551,7 @@ enum SoundIDs {
     SOUND_UNKNOWN_262               = 610,
     SOUND_UNKNOWN_282               = 642,
     SOUND_BOW_SPOOK                 = 657,
+    SOUND_UNKNOWN_295               = 661,
     SOUND_UNUSED_2C1                = 705,
     SOUND_SMOKE_BURST               = 717,
     SOUND_DAYZEE_SONG               = 727,

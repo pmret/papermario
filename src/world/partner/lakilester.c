@@ -281,7 +281,6 @@ void func_802BDA90_3215E0(Npc* npc) {
     f32 x = npc->pos.x;
     f32 y = npc->moveToPos.y;
     f32 z = npc->pos.z;
-    f32 temp_f0_2;
 
     if (npc_test_move_complex_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20)) {
         npc->flags |= 0x6000;
@@ -292,12 +291,12 @@ void func_802BDA90_3215E0(Npc* npc) {
         npc->flags &= ~0x6000;
     }
 
-    temp_f0_2 = clamp_angle(npc->yaw + 45.0f);
+    temp_f0 = clamp_angle(npc->yaw + 45.0f);
     x = npc->pos.x;
     y = npc->moveToPos.y;
     z = npc->pos.z;
 
-    if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20)) {
+    if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20)) {
         npc->pos.x = x;
         npc->pos.z = z;
         npc->flags |= 0x2000;
@@ -305,12 +304,12 @@ void func_802BDA90_3215E0(Npc* npc) {
         npc->flags &= ~0x2000;
     }
 
-    temp_f0_2 = clamp_angle(npc->yaw - 45.0f);
+    temp_f0 = clamp_angle(npc->yaw - 45.0f);
     x = npc->pos.x;
     y = npc->moveToPos.y;
     z = npc->pos.z;
 
-    if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20)) {
+    if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20)) {
         npc->pos.x = x;
         npc->pos.z = z;
         npc->flags |= 0x2000;
@@ -318,12 +317,12 @@ void func_802BDA90_3215E0(Npc* npc) {
         npc->flags &= ~0x2000;
     }
 
-    temp_f0_2 = clamp_angle(npc->yaw + 45.0f + 180.0f);
+    temp_f0 = clamp_angle(npc->yaw + 45.0f + 180.0f);
     x = npc->pos.x;
     y = npc->moveToPos.y;
     z = npc->pos.z;
 
-    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20)) {
+    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20)) {
         npc->flags |= 0x2000;
         npc->pos.x = x;
         npc->pos.z = z;
@@ -331,12 +330,12 @@ void func_802BDA90_3215E0(Npc* npc) {
         npc->flags &= ~0x2000;
     }
 
-    temp_f0_2 = clamp_angle((npc->yaw - 45.0f) + 180.0f);
+    temp_f0 = clamp_angle(npc->yaw - 45.0f + 180.0f);
     x = npc->pos.x;
     y = npc->moveToPos.y;
     z = npc->pos.z;
 
-    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20)) {
+    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20)) {
         npc->flags |= 0x2000;
         npc->pos.x = x;
         npc->pos.z = z;
@@ -350,14 +349,15 @@ void func_802BDDD8_321928(Npc* npc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
-    f32 sp28, sp2C, sp3C, sp40, sp44, sp48, sp4C, sp50, sp54;
+    f32 sp3C, sp40, sp44, sp48, sp4C, sp50, sp54;
+    f32 sp28 = 0.0f;
+    f32 sp2C = 0.0f;
     f32 x, y, z;
     f32 temp_f0_3;
     s32 raycastBelowResult;
     s32 phi_a3;
     f32 phi_f20;
-    sp28 = 0.0f;
-    sp2C = 0.0f;
+
 
     func_802BD6BC_32120C(&sp28, &sp2C);
 
@@ -381,10 +381,10 @@ void func_802BDDD8_321928(Npc* npc) {
 
             if (D_802BFF20 < 0x3C) {
                 phi_a3 = update_lerp(0,  0.0f, 100.0f, D_802BFF20, 60);
-                sfx_play_sound_with_params(0x295, 0, 0x40, phi_a3);
+                sfx_play_sound_with_params(SOUND_UNKNOWN_295, 0, 0x40, phi_a3);
             } else {
                 phi_a3 = update_lerp(0, 100.0f, 0.0f, D_802BFF20 - 60, 60);
-                sfx_play_sound_with_params(0x295, 0, 0x40, phi_a3);
+                sfx_play_sound_with_params(SOUND_UNKNOWN_295, 0, 0x40, phi_a3);
                 
             }
         }
@@ -410,14 +410,14 @@ void func_802BDDD8_321928(Npc* npc) {
         if (npc_test_move_complex_with_slipping(npc->unk_80, &x, &y, &z, npc->moveSpeed, npc->yaw,
             npc->collisionHeight, npc->collisionRadius) != 0) {
                 
-            if (D_802BFF10 != 0) {
+            if (D_802BFF10) {
                 collisionStatus->pushingAgainstWall = D_8010C97A;
             }
-            npc->pos.x = npc->pos.x + ((x - npc->pos.x) / 5.0f);
-            npc->pos.z = npc->pos.z + ((z - npc->pos.z) / 5.0f);
+            npc->pos.x += (x - npc->pos.x) / 5.0f;
+            npc->pos.z += (z - npc->pos.z) / 5.0f;
         } else {
             npc_move_heading(npc, npc->moveSpeed, sp28);
-            if (D_802BFF10 != 0) {
+            if (D_802BFF10) {
                 collisionStatus->pushingAgainstWall = -1;
             }
         }
@@ -430,8 +430,8 @@ void func_802BDDD8_321928(Npc* npc) {
         if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, npc->moveSpeed, sp28,
             npc->collisionHeight, npc->collisionRadius) != 0) {
 
-            npc->pos.x = npc->pos.x + ((x - npc->pos.x) / 5.0f);
-            npc->pos.z = npc->pos.z + ((z - npc->pos.z) / 5.0f);
+            npc->pos.x += (x - npc->pos.x) / 5.0f;
+            npc->pos.z += (z - npc->pos.z) / 5.0f;
         }
         
         sp28 = clamp_angle(npc->yaw + 30.0f);
@@ -441,8 +441,8 @@ void func_802BDDD8_321928(Npc* npc) {
         if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, npc->moveSpeed, sp28,
             npc->collisionHeight, npc->collisionRadius) != 0) {
 
-            npc->pos.x = npc->pos.x + ((x - npc->pos.x) / 5.0f);
-            npc->pos.z = npc->pos.z + ((z - npc->pos.z) / 5.0f);
+            npc->pos.x += (x - npc->pos.x) / 5.0f;
+            npc->pos.z += (z - npc->pos.z) / 5.0f;
         }
 
         func_8003D660(npc, 1);
@@ -456,8 +456,8 @@ void func_802BDDD8_321928(Npc* npc) {
         if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 4.0f, sp28, npc->collisionHeight,
             npc->collisionRadius) != 0) {
 
-            npc->pos.x = npc->pos.x + ((x - npc->pos.x) / 5.0f);
-            npc->pos.z = npc->pos.z + ((z - npc->pos.z) / 5.0f);
+            npc->pos.x += (x - npc->pos.x) / 5.0f;
+            npc->pos.z += (z - npc->pos.z) / 5.0f;
         }
 
         sp28 = 270.0f;
