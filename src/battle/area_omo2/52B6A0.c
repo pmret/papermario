@@ -5,5 +5,3 @@
 #include "common/FadeBackgroundToBlack.inc.c"
 
 #include "common/UnfadeBackgroundToBlack.inc.c"
-
-
