@@ -83,12 +83,12 @@ s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 len
     raycastHitID = npc_raycast_general(ignoreFlags, *x - (radius * outSinTheta * 0.5f), *y,
                                         *z - (radius * inverseOutCosTheta * 0.5f), outSinTheta,
                                         0.0f, inverseOutCosTheta, &hitX, &hitY, &hitZ, &hitDepth, &bX, &hitNy, &bZ);
-    phi_s5 = 0;
+    phi_s5 = FALSE;
 
-    if ((raycastHitID >= 0) && (hitDepth <= temp_f22)) {
-        temp_f0 = atan2(0.0f, 0.0f, sqrtf( (bX * bX) + (bZ * bZ) ), -hitNy);
+    if (raycastHitID >= 0 && hitDepth <= temp_f22) {
+        temp_f0 = atan2(0.0f, 0.0f, sqrtf(SQ(bX) + SQ(bZ)), -hitNy);
         if ((temp_f0 > 60.0f) && (temp_f0 < 90.0f)) {
-            phi_s5 = 1;
+            phi_s5 = TRUE;
         }
 
         temp_f20 = hitDepth - (length + radius + (radius * 0.5f));

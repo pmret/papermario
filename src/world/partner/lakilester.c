@@ -54,8 +54,8 @@ void func_802BD100_320C50(void) {
 }
 
 void func_802BD21C_320D6C(Npc* npc) {
-    npc->collisionHeight = 0x26;
-    npc->collisionRadius = 0x24;
+    npc->collisionHeight = 38;
+    npc->collisionRadius = 36;
     npc->unk_80 = 0x10000;
     D_802BFF18 = 0;
     D_802BFF04 = 0;
@@ -229,6 +229,7 @@ s32 func_802BD7DC(void) {
                                                       &hitDirX, &hitDirZ);
     colliderTypeID = raycastResult;
 
+    //TODO find better match
     if (outLength <= 16.0f && colliderTypeID >= 0) {
         if (!(colliderTypeID & 0x4000) || !(get_entity_type(colliderTypeID) - 0x2E < 2)){
             colliderTypeID = get_collider_type_by_id(colliderTypeID) & 0xFF;
@@ -261,7 +262,7 @@ s32 func_802BD99C_3214EC(Npc* partner, f32 yOffset, f32 zOffset) {
     if (player_raycast_below_cam_relative(&gPlayerStatus, &outX, &outY, &outZ, &outLength, &hitRx, &hitRz, &hitDirX, &hitDirZ) >= 0) {
         temp_f4 = outY - partner->moveToPos.y;
         if (temp_f4 != 0.0f) {
-            if ((fabs(temp_f4) < 10.0)) {
+            if (fabs(temp_f4) < 10.0) {
                 D_802BFF24 = temp_f4;
                 partner->moveToPos.y = outY;
                 return TRUE;
@@ -280,11 +281,7 @@ void func_802BDA90_3215E0(Npc* npc) {
     f32 x = npc->pos.x;
     f32 y = npc->moveToPos.y;
     f32 z = npc->pos.z;
-
     f32 temp_f0_2;
-    f32 temp_f0_3;
-    f32 temp_f0_4;
-    f32 temp_f0_5;
 
     if (npc_test_move_complex_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20) != 0) {
         npc->flags |= 0x6000;
@@ -308,12 +305,12 @@ void func_802BDA90_3215E0(Npc* npc) {
         npc->flags &= ~0x2000;
     }
 
-    temp_f0_3 = clamp_angle(npc->yaw - 45.0f);
+    temp_f0_2 = clamp_angle(npc->yaw - 45.0f);
     x = npc->pos.x;
     y = npc->moveToPos.y;
     z = npc->pos.z;
 
-    if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_3, npc->collisionHeight, temp_f20) != 0) {
+    if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20) != 0) {
         npc->pos.x = x;
         npc->pos.z = z;
         npc->flags |= 0x2000;
@@ -321,12 +318,12 @@ void func_802BDA90_3215E0(Npc* npc) {
         npc->flags &= ~0x2000;
     }
 
-    temp_f0_4 = clamp_angle(npc->yaw + 45.0f + 180.0f);
+    temp_f0_2 = clamp_angle(npc->yaw + 45.0f + 180.0f);
     x = npc->pos.x;
     y = npc->moveToPos.y;
     z = npc->pos.z;
 
-    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_4, npc->collisionHeight, temp_f20) != 0) {
+    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20) != 0) {
         npc->flags |= 0x2000;
         npc->pos.x = x;
         npc->pos.z = z;
@@ -334,12 +331,12 @@ void func_802BDA90_3215E0(Npc* npc) {
         npc->flags &= ~0x2000;
     }
 
-    temp_f0_5 = clamp_angle((npc->yaw - 45.0f) + 180.0f);
+    temp_f0_2 = clamp_angle((npc->yaw - 45.0f) + 180.0f);
     x = npc->pos.x;
     y = npc->moveToPos.y;
     z = npc->pos.z;
 
-    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_5, npc->collisionHeight, temp_f20) != 0) {
+    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20) != 0) {
         npc->flags |= 0x2000;
         npc->pos.x = x;
         npc->pos.z = z;
@@ -348,41 +345,20 @@ void func_802BDA90_3215E0(Npc* npc) {
     }
 }
 
-
 #ifdef NON_MATCHING
 void func_802BDDD8_321928(Npc* npc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
-    f32 sp54;
-    f32 sp50;
-    f32 sp4C;
-    f32 sp48;
-    f32 sp44;
-    f32 sp40;
-    f32 sp3C;
-    f32 z;
-    f32 y;
-    f32 x;
-    f32 sp2C;
-    f32 sp28;
+    f32 sp28, sp2C, sp3C, sp40, sp44, sp48, sp4C, sp50, sp54;
+    f32 x, y, z;
     f32 temp_f0_3;
-    f32 temp_f2;
-    s16* temp_v1_2;
     s32 raycastBelowResult;
-    s32 temp_v0;
-    f32 phi_a1;
-    f32 phi_a2;
     s32 phi_a3;
     f32 phi_f20;
-    u32 phi_v0;
-    f32 temp1;
-    f32 temp2;
-    f32 tempLerp;
-    f32 tempFloatVar;
-
     sp28 = 0.0f;
     sp2C = 0.0f;
+
     func_802BD6BC_32120C(&sp28, &sp2C);
 
     if ((get_collider_type_by_id(npc->unk_84) & 0xFF) == 3) {
@@ -398,16 +374,16 @@ void func_802BDDD8_321928(Npc* npc) {
     if (sp2C != 0.0f) {
         D_802BFF1C += 1;
         D_802BFF20 += 1;
-        if ((D_802BFF1C & 7) == 0) {
-            if (D_802BFF20 >= 0x78) {
+        if (!(D_802BFF1C & 7)) {
+            if (D_802BFF20 >= 120) {
                 D_802BFF20 = 0;
             }
 
             if (D_802BFF20 < 0x3C) {
-                phi_a3 = update_lerp(0,  0.0f, 100.0f, D_802BFF20, 0x3C);
+                phi_a3 = update_lerp(0,  0.0f, 100.0f, D_802BFF20, 60);
                 sfx_play_sound_with_params(0x295, 0, 0x40, phi_a3);
             } else {
-                phi_a3 = update_lerp(0, 100.0f, 0.0f, D_802BFF20 - 0x3C, 0x3C);
+                phi_a3 = update_lerp(0, 100.0f, 0.0f, D_802BFF20 - 60, 60);
                 sfx_play_sound_with_params(0x295, 0, 0x40, phi_a3);
                 
             }
@@ -745,7 +721,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
     s32 temp_v0_2;
     s32 tempVar;
     
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
 
