@@ -227,7 +227,7 @@ s32 calc_enemy_test_target(Actor* actor) {
     }
 
     if (target2->stoneStatus == STATUS_STONE) {
-            return HIT_RESULT_IMMUNE;  
+        return HIT_RESULT_IMMUNE;  
     }
         
     if (target2->staticStatus == STATUS_STATIC) {
@@ -235,7 +235,6 @@ s32 calc_enemy_test_target(Actor* actor) {
     }
 
     return HIT_RESULT_HIT;
-
 }
 
 s32 calc_enemy_damage_target(Actor* attacker) {
