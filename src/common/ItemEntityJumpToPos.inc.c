@@ -1,7 +1,7 @@
 #include "common.h"
 
 ApiStatus N(ItemEntityJumpToPos)(Evt* script, s32 isInitialCall) {
-    struct {
+    struct JumpState {
      /* 0x00 */ Vec3f pos;
      /* 0x0C */ f32 moveAngle;
      /* 0x10 */ f32 jumpAccel;
@@ -17,7 +17,7 @@ ApiStatus N(ItemEntityJumpToPos)(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         jumpState = heap_malloc(sizeof(*jumpState));
-        script->functionTemp[0] = jumpState;
+        script->functionTemp[0] = (s32) jumpState;
         jumpState->itemEntityIndex = evt_get_variable(script, *args++);
         jumpState->pos.x = evt_get_float_variable(script, *args++);
         jumpState->pos.y = evt_get_float_variable(script, *args++);
@@ -39,7 +39,7 @@ ApiStatus N(ItemEntityJumpToPos)(Evt* script, s32 isInitialCall) {
     jumpState = script->functionTemp[0];
     item = get_item_entity(jumpState->itemEntityIndex);
     if (!item) {
-        heap_free(script->functionTemp[0]);
+        heap_free((void*) script->functionTemp[0]);
         return ApiStatus_DONE2;
     }
 
@@ -53,7 +53,7 @@ ApiStatus N(ItemEntityJumpToPos)(Evt* script, s32 isInitialCall) {
         item->position.y = jumpState->pos.y;
         item->position.z = jumpState->pos.z;
         jumpState->jumpVelocity = 0.0f;
-        heap_free(script->functionTemp[0]);
+        heap_free((void*) script->functionTemp[0]);
         return ApiStatus_DONE1;
     }
 
