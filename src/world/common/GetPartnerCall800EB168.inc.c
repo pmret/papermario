@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(GetPartnerCall800EB168)(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, *script->ptrReadPos, gPlayerData.currentPartner);

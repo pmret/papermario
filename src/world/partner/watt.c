@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "../src/world/partners.h"
-#include "map.h"
+#include "npc.h"
 
 void force_player_anim(s32 arg0);
 void func_802BE070_31DBE0(void);

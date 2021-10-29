@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(GetEncounterEnemyIsOwner)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;

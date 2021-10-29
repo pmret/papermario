@@ -3,7 +3,7 @@
 #include "common.h"
 #include "world/partners.h"
 #include "world/actions.h"
-#include "map.h"
+#include "npc.h"
 
 extern s32 D_8010C924;
 extern s32 D_8010C964;

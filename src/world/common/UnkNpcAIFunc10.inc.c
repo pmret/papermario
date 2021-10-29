@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 void N(UnkNpcAIFunc10)(Evt* script) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);

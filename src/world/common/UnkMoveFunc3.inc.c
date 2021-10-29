@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(UnkMoveFunc3)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

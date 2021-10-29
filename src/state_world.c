@@ -1,5 +1,5 @@
 #include "functions.h"
-#include "map.h"
+#include "npc.h"
 
 void state_world_draw_aux_ui(void);
 

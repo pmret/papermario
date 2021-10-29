@@ -1,6 +1,6 @@
 #include "common.h"
 #include "../partners.h"
-#include "map.h"
+#include "npc.h"
 
 extern s32 D_802BE0C0;
 extern s32 D_802BE0C4;

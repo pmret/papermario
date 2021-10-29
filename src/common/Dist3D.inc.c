@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(Dist3D)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

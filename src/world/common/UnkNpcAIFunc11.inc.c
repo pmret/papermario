@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 #include "effects.h"
 
 void N(UnkNpcAIFunc11)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* arg2) {

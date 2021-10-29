@@ -1,7 +1,7 @@
 #include "common.h"
 #include "ld_addrs.h"
 #include "partners.h"
-#include "map.h"
+#include "npc.h"
 
 #include "partner/goombario.h"
 #include "sprite/npc/world_goombario.h"

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 #include "sprite.h"
 
 typedef struct struct802E89B0 {

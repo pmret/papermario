@@ -851,9 +851,9 @@ typedef struct AnimatorNode {
     /* 0xF8 */ s16 vertexStartOffset;
     /* 0xFA */ char unk_FA[2];
     /* 0xFC */ union {
-                    s32 modelID;
-                    Vtx* vtxList;
-                } fcData;
+    /*      */   s32 modelID;
+    /*      */   Vtx* vtxList;
+    /*      */ } fcData;
 } AnimatorNode; // size = 0x100
 
 typedef struct AnimatorNodeBlueprint {

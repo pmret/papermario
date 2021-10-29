@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(UnkTexturePanFunc2)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(GetCurrentCameraYawClamped180)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = clamp_angle(gCameras[gCurrentCameraID].currentYaw + 180.0f);

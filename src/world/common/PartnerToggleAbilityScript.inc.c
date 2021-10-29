@@ -1,6 +1,6 @@
 #include "common.h"
 #include "../partners.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(PartnerSuspendAbilityScript)(Evt* script, s32 isInitialCall) {
     if (gPlayerData.currentPartner == PARTNER_NONE) {

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 #ifndef PARTY_IMAGE
 #error "Define PARTY_IMAGE to the asset name to use LoadPartyImage."

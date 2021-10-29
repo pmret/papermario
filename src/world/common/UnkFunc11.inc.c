@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(UnkFunc11)(Evt* script, s32 isInitialCall) {
     s32 var = evt_get_variable(script, *script->ptrReadPos);

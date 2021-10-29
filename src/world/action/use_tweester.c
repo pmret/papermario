@@ -1,6 +1,6 @@
 #include "common.h"
 #include "../partners.h"
-#include "map.h"
+#include "npc.h"
 
 typedef struct unkTweesterStruct{
     /* 0x000 */ s32 unk_00;
