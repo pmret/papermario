@@ -90,7 +90,7 @@ ApiStatus func_802403C0_9EDFB0(Evt* script, s32 isInitialCall) {
     f32 temp_f10;
 
     if (temp_s0_3 < 0) {
-        phi_s0 = temp_s0_3 + 0xF;
+        phi_s0 = temp_s0_3 + 15;
     }
 
     temp_f8 = phi_s0 >> 4;

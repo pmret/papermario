@@ -283,7 +283,7 @@ void func_802BDA90_3215E0(Npc* npc) {
     f32 z = npc->pos.z;
     f32 temp_f0_2;
 
-    if (npc_test_move_complex_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20) != 0) {
+    if (npc_test_move_complex_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20)) {
         npc->flags |= 0x6000;
         npc->unk_86 = D_8010C97A;
         npc->pos.x = x;
@@ -297,7 +297,7 @@ void func_802BDA90_3215E0(Npc* npc) {
     y = npc->moveToPos.y;
     z = npc->pos.z;
 
-    if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20) != 0) {
+    if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20)) {
         npc->pos.x = x;
         npc->pos.z = z;
         npc->flags |= 0x2000;
@@ -310,7 +310,7 @@ void func_802BDA90_3215E0(Npc* npc) {
     y = npc->moveToPos.y;
     z = npc->pos.z;
 
-    if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20) != 0) {
+    if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20)) {
         npc->pos.x = x;
         npc->pos.z = z;
         npc->flags |= 0x2000;
@@ -323,7 +323,7 @@ void func_802BDA90_3215E0(Npc* npc) {
     y = npc->moveToPos.y;
     z = npc->pos.z;
 
-    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20) != 0) {
+    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20)) {
         npc->flags |= 0x2000;
         npc->pos.x = x;
         npc->pos.z = z;
@@ -336,7 +336,7 @@ void func_802BDA90_3215E0(Npc* npc) {
     y = npc->moveToPos.y;
     z = npc->pos.z;
 
-    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20) != 0) {
+    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0_2, npc->collisionHeight, temp_f20)) {
         npc->flags |= 0x2000;
         npc->pos.x = x;
         npc->pos.z = z;
