@@ -2,6 +2,7 @@
 #include "ld_addrs.h"
 #include "camera.h"
 #include "hud_element.h"
+#include "sprite.h"
 
 void appendGfx_intro_logos();
 

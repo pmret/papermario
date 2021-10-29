@@ -846,7 +846,7 @@ void reload_mesh_animator_node(StaticAnimatorNode* node, ModelAnimator* animator
 
         newNode = add_anim_node(animator, parentNodeID, bpPtr);
         newNode->vertexStartOffset = node->vertexStartOffset;
-        newNode->fcData.vtxList = node->vertexList;
+        newNode->fcData.vtxList = node->vtxList;
 
         i = 0;
         while (gAnimTreeRoot[i] != node) {

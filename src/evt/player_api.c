@@ -1,5 +1,6 @@
 #include "common.h"
 #include "map.h"
+#include "sprite.h"
 
 Npc* playerNpc = (Npc*) 0x802DB270; // XXX: raw ptr
 

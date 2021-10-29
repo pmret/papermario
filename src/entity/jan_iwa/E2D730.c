@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite.h"
 
 extern StaticEntityData D_802BC7D0_E2F100;
 extern f32 D_802BCE20;
@@ -72,7 +73,7 @@ void func_802BB298_E2DBC8(Entity* entity) {
         y = entity->position.y + 100.0f;
         z = entity->position.z;
     }
-    
+
     data->unk_28 = x;
     data->unk_2A = y;
     data->unk_2C = z;

@@ -2,6 +2,7 @@
 #include "nu/nusys.h"
 #include "ld_addrs.h"
 #include "hud_element.h"
+#include "sprite.h"
 
 s8 D_80074020 = 1;
 s8 D_80074021 = 5;
@@ -172,7 +173,7 @@ void gfx_draw_frame(void) {
 
     gSPMatrix(gMasterGfxPos++, D_800741A8, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    spr_render_init(gDisplayContext, &gMasterGfxPos);
+    spr_render_init();
 
     if (!(gOverrideFlags & 2)) {
         render_frame(0);

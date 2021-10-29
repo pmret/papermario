@@ -3,6 +3,7 @@
 #include "map.h"
 #include "camera.h"
 #include "hud_element.h"
+#include "sprite.h"
 
 #define ASSET_TABLE_ROM_START 0x1E40000
 #define ASSET_TABLE_HEADER_SIZE 0x20
