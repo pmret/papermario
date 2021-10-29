@@ -158,7 +158,7 @@ s32 spr_draw_player_sprite(s32 arg0, s32 yaw, s32 arg2, s16** paletteList, Matri
 
 s32 func_802DDEC4(s32 arg0);
 
-//s32 func_802DDEE4(); // TODO
+s32 func_802DDEE4(s32, s32, s32, s32, s32, s32, s32, s32);
 
 // TODO: problem with arg6, see the NON_MATCHING in sprite.c
 s32 func_802DDFF8(s32, s32, s32, s32, s32, s32, u16);

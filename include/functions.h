@@ -539,7 +539,6 @@ void btl_set_state(s32 battleState);
 void draw_entity_model_E(s32, Mtx*);
 void draw_entity_model_A(s32, Mtx*);
 void free_entity_model_by_index(s32 idx);
-s32 func_802DDFF8(s32, s32, s32, s32, s32, s32, u16);
 void func_8024E40C(s32);
 void btl_cam_set_zoffset(s16);
 void btl_cam_target_actor(s32);
