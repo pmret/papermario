@@ -1,38 +1,41 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of flo_08 (CAED40.c)
+
 #define NAMESPACE EC9D00
 
-INCLUDE_ASM(s32, "EC9D00", func_80240000_EC9D00);
+#define gPartnerActionStatus dead_gPartnerActionStatus2
 
-INCLUDE_ASM(s32, "EC9D00", func_8024001C_EC9D1C);
+#include "world/common/SetOverrideFlags_40.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_8024003C_EC9D3C);
+#include "world/common/UnkFunc17.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_80240068_EC9D68);
+ApiStatus func_8024003C_EC9D3C(Evt* script, s32 isInitialCall) {
+    func_802F3B00(evt_get_variable(script, *script->ptrReadPos));
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "EC9D00", func_802400D4_EC9DD4);
-
-INCLUDE_ASM(s32, "EC9D00", func_80240120_EC9E20);
+#include "world/common/UnkFunc18.inc.c"
 
 INCLUDE_ASM(s32, "EC9D00", func_802401CC_EC9ECC);
 
-INCLUDE_ASM(s32, "EC9D00", func_8024041C_ECA11C);
+#include "world/common/SwitchToPartner.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_80240448_ECA148);
+#include "world/common/UnkFunc19.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_80240480_ECA180);
+#include "world/common/UnkFunc20.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_80240510_ECA210);
+#include "world/common/UnkFunc39.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_80240544_ECA244);
+#include "world/common/UnkFunc21.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_802405A8_ECA2A8);
+#include "world/common/UnkFunc22.inc.c"
 
 INCLUDE_ASM(s32, "EC9D00", func_80240600_ECA300);
 
-INCLUDE_ASM(s32, "EC9D00", func_80240B38_ECA838);
+#include "world/common/UnkFunc23.inc.c"
 
-#include "world/common/DeadUnkPartnerPosFuncs.inc.c"
+#include "world/common/UnkPartnerPosFuncs.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_80240D08_ECAA08);
+#include "world/common/UnkFunc40.inc.c"

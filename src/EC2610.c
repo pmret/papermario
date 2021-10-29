@@ -3,4 +3,4 @@
 
 #define NAMESPACE EC2610
 
-#import "world/common/DeadFoliage.inc.c"
+#include "world/common/foliage.inc.c"

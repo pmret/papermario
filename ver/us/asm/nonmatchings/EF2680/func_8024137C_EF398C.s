@@ -104,7 +104,7 @@ glabel L802414C4_EF3AD4
 glabel L802414DC_EF3AEC
 /* EF3AEC 802414DC 02A0202D */  daddu     $a0, $s5, $zero
 /* EF3AF0 802414E0 0200282D */  daddu     $a1, $s0, $zero
-/* EF3AF4 802414E4 0C090212 */  jal       EF2680_DeadUnkNpcAIFunc1
+/* EF3AF4 802414E4 0C090212 */  jal       EF2680_UnkNpcAIFunc1
 /* EF3AF8 802414E8 0260302D */   daddu    $a2, $s3, $zero
 glabel L802414EC_EF3AFC
 /* EF3AFC 802414EC 02A0202D */  daddu     $a0, $s5, $zero
@@ -128,7 +128,7 @@ glabel L80241514_EF3B24
 glabel L8024152C_EF3B3C
 /* EF3B3C 8024152C 02A0202D */  daddu     $a0, $s5, $zero
 /* EF3B40 80241530 0200282D */  daddu     $a1, $s0, $zero
-/* EF3B44 80241534 0C09034C */  jal       EF2680_DeadUnkNpcAIFunc14
+/* EF3B44 80241534 0C09034C */  jal       EF2680_UnkNpcAIFunc14
 /* EF3B48 80241538 0260302D */   daddu    $a2, $s3, $zero
 /* EF3B4C 8024153C 0809055C */  j         .L80241570
 /* EF3B50 80241540 0000102D */   daddu    $v0, $zero, $zero

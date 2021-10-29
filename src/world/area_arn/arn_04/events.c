@@ -458,6 +458,7 @@ void N(func_80241040_BE47F0)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
             posY = npc->pos.y;
             posZ = npc->pos.z;
             posW = 1000.0f;
+
             npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
             if (vt1 < (vt3 - posW)) {
                 enemy->varTable[0] |= 0x10;

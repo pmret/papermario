@@ -1,16 +1,19 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of flo_14 (CCBE20.c)
+
 #define NAMESPACE EE70C0
 
 extern s32 D_802453E0_EEB990[];
 extern f32 D_802444F0_EEAAA0[];
 
 INCLUDE_ASM(s32, "EE70C0", func_80240B10_EE70C0);
+//#include "world/common/UnkNpcAIFunc23.inc.c"
 
 INCLUDE_ASM(s32, "EE70C0", func_80240CC0_EE7270);
 
-#include "world/common/DeadUnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
@@ -26,7 +29,7 @@ void func_80241764_EE7D14(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     }
 }
 
-#include "world/common/DeadUnkNpcAIFunc14.inc.c"
+#include "world/common/UnkNpcAIFunc14.inc.c"
 
 #include "world/common/UnkNpcAIFunc3.inc.c"
 
@@ -38,7 +41,7 @@ INCLUDE_ASM(s32, "EE70C0", func_80241E1C_EE83CC);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "EE70C0", func_80242090_EE8640);
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "EE70C0", func_80242260_EE8810);
 

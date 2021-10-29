@@ -1,6 +1,8 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of flo_16 (CD2C80.c)
+
 #define NAMESPACE EEDF50
 
 extern f32 D_80244070_EF1170[];
@@ -9,7 +11,7 @@ extern f32 D_80244070_EF1170[];
 
 INCLUDE_ASM(s32, "EEDF50", func_80241000_EEE100);
 
-#include "world/common/DeadUnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
@@ -25,7 +27,7 @@ void func_80241AA4_EEEBA4(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     }
 }
 
-#include "world/common/DeadUnkNpcAIFunc14.inc.c"
+#include "world/common/UnkNpcAIFunc14.inc.c"
 
 #include "world/common/UnkNpcAIFunc3.inc.c"
 
@@ -35,10 +37,10 @@ void func_80241AA4_EEEBA4(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 
 INCLUDE_ASM(s32, "EEDF50", func_8024215C_EEF25C);
 
-INCLUDE_ASM(s32, "EEDF50", func_80242374_EEF474);
+#include "world/common/UnkNpcAIFunc13.inc.c"
 
-INCLUDE_ASM(s32, "EEDF50", func_802424A4_EEF5A4);
+#include "world/common/UnkNpcAIFunc34.inc.c"
 
-INCLUDE_ASM(s32, "EEDF50", func_80242724_EEF824);
+#include "world/common/UnkFunc45.inc.c"
 
 INCLUDE_ASM(s32, "EEDF50", func_80242780_EEF880);

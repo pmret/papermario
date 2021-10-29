@@ -1,6 +1,8 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of kzn_17 (C85DC0.c)
+
 #define NAMESPACE EA0C10
 
 const char ascii_EA6D70[] = "kzn_11";
@@ -54,9 +56,9 @@ s32 N(UnkNpcAIFunc26)(Evt* script) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "EA0C10", func_802406CC_EA0FCC); // Should be relatively similar UnkFunc7
+INCLUDE_ASM(s32, "EA0C10", func_802406CC_EA0FCC); // Similar to UnkFunc7
 
-INCLUDE_ASM(s32, "EA0C10", func_8024097C_EA127C);
+INCLUDE_ASM(s32, "EA0C10", func_8024097C_EA127C); // Similar to UnkNpcAIFunc27
 
 #include "world/common/UnkNpcAIFunc31.inc.c"
 
@@ -84,7 +86,7 @@ INCLUDE_ASM(s32, "EA0C10", func_80241AE0_EA23E0);
 
 INCLUDE_ASM(s32, "EA0C10", func_802420FC_EA29FC);
 
-INCLUDE_ASM(s32, "EA0C10", func_80242568_EA2E68);
+INCLUDE_ASM(s32, "EA0C10", func_80242568_EA2E68); // Similar to AwaitPlayerNearNpc
 
 ApiStatus func_802425B0_EA2EB0(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -101,11 +103,11 @@ INCLUDE_ASM(s32, "EA0C10", func_80242608_EA2F08);
 
 INCLUDE_ASM(s32, "EA0C10", func_8024267C_EA2F7C);
 
-#include "world/common/DeadGetItemName.inc.c"
+#include "world/common/GetItemName.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-INCLUDE_ASM(s32, "EA0C10", func_802427F0_EA30F0);
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "EA0C10", func_802429C0_EA32C0);
 

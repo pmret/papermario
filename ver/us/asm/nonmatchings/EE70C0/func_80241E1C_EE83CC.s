@@ -85,7 +85,7 @@ glabel func_80241E1C_EE83CC
 glabel L80241F54_EE8504
 /* EE8504 80241F54 02A0202D */  daddu     $a0, $s5, $zero
 /* EE8508 80241F58 0200282D */  daddu     $a1, $s0, $zero
-/* EE850C 80241F5C 0C0902C4 */  jal       func_80240B10_EE70C0
+/* EE850C 80241F5C 0C0902C4 */  jal       EE70C0_UnkNpcAIFunc23
 /* EE8510 80241F60 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241F64_EE8514
 /* EE8514 80241F64 02A0202D */  daddu     $a0, $s5, $zero
@@ -97,7 +97,7 @@ glabel L80241F64_EE8514
 glabel L80241F7C_EE852C
 /* EE852C 80241F7C 02A0202D */  daddu     $a0, $s5, $zero
 /* EE8530 80241F80 0200282D */  daddu     $a1, $s0, $zero
-/* EE8534 80241F84 0C0904BA */  jal       EE70C0_DeadUnkNpcAIFunc1
+/* EE8534 80241F84 0C0904BA */  jal       EE70C0_UnkNpcAIFunc1
 /* EE8538 80241F88 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241F8C_EE853C
 /* EE853C 80241F8C 02A0202D */  daddu     $a0, $s5, $zero
@@ -121,7 +121,7 @@ glabel L80241FB4_EE8564
 glabel L80241FCC_EE857C
 /* EE857C 80241FCC 02A0202D */  daddu     $a0, $s5, $zero
 /* EE8580 80241FD0 0200282D */  daddu     $a1, $s0, $zero
-/* EE8584 80241FD4 0C0905F4 */  jal       EE70C0_DeadUnkNpcAIFunc14
+/* EE8584 80241FD4 0C0905F4 */  jal       EE70C0_UnkNpcAIFunc14
 /* EE8588 80241FD8 0260302D */   daddu    $a2, $s3, $zero
 /* EE858C 80241FDC 08090804 */  j         .L80242010
 /* EE8590 80241FE0 0000102D */   daddu    $v0, $zero, $zero

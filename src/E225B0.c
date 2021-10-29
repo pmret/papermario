@@ -1,6 +1,5 @@
 #include "common.h"
 
-
 typedef struct struct802B7C78 {
     /* 0x00 */ f32 x;
     /* 0x04 */ f32 y;

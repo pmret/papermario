@@ -3,6 +3,9 @@
 #ifndef _DEAD_H_
 #define _DEAD_H_
 
+// There can be multiple invalid references to a symbol from the dead code,
+// so some symbols here have a "2" suffix.
+
 #define gCameras dead_gCameras
 #define evt_get_variable dead_evt_get_variable
 #define evt_set_variable dead_evt_set_variable
@@ -55,6 +58,42 @@
 #define playFX_7B dead_playFX_7B
 #define dist3D dead_dist3D
 #define subtract_hp dead_subtract_hp
+#define get_entity_by_index dead_get_entity_by_index
+#define playFX_52 dead_playFX_52
+#define playFX_33 dead_playFX_33
+#define set_screen_overlay_color dead_set_screen_overlay_color
+#define set_screen_overlay_params_front dead_set_screen_overlay_params_front
+#define playFX_82 dead_playFX_82
+#define set_message_images dead_set_message_images
+#define general_heap_free dead_general_heap_free
+#define decode_yay0 dead_decode_yay0
+#define load_asset_by_name dead_load_asset_by_name
+#define gCollisionStatus dead_gCollisionStatus
+#define switch_to_partner dead_switch_to_partner
+#define set_npc_yaw dead_set_npc_yaw
+#define disable_npc_shadow dead_disable_npc_shadow
+#define func_800EB2A4 func_800F2E98
+#define partner_clear_player_tracking dead_partner_clear_player_tracking
+#define sfx_play_sound_with_params dead_sfx_play_sound_with_params
+#define sfx_get_spatialized_sound_params dead_sfx_get_spatialized_sound_params
+#define npc_test_move_simple_without_slipping dead_npc_test_move_simple_without_slipping
+#define func_8003D660 func_80041080
+#define get_item_entity dead_get_item_entity
+#define gOverrideFlags dead_gOverrideFlags
+#define set_message_msg dead_set_message_msg
+#define gPlayerData dead_gPlayerData
+#define D_8008EF20 D_80094900
+#define increment_status_menu_disabled dead_increment_status_menu_disabled
+#define decrement_status_menu_disabled dead_decrement_status_menu_disabled
+#define sync_status_menu dead_sync_status_menu
+#define set_max_SP dead_set_max_SP
+#define get_current_map_header dead_get_current_map_header
+#define gGameStatusPtr dead_gGameStatusPtr
+#define guTranslateF dead_guTranslateF
+#define get_model_from_list_index dead_get_model_from_list_index
+#define get_model_list_index_from_tree_index dead_get_model_list_index_from_tree_index
+#define guMtxCatF osSiRawReadIo
+#define guMtxIdentF osGetCause
 //#define sqrtf dead_sqrtf // <- This somehow breaks things
 
 #endif
