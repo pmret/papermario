@@ -455,7 +455,6 @@ void state_step_demo(void);
 void state_drawUI_demo(void);
 
 void func_802B2078(void);
-void spr_update_player_sprite(s32, s32, f32);
 
 void initialize_curtains(void);
 void update_curtains(void);
@@ -492,10 +491,6 @@ s32 func_8004A784(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5
 void base_UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 void UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
-s32** spr_get_npc_palettes(s32 npcSpriteID);
-void spr_draw_player_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f arg4);
-void spr_draw_npc_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
-s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 
@@ -544,7 +539,6 @@ void btl_set_state(s32 battleState);
 void draw_entity_model_E(s32, Mtx*);
 void draw_entity_model_A(s32, Mtx*);
 void free_entity_model_by_index(s32 idx);
-s32 func_802DDFF8(s32, s32, s32, s32, s32, s32, u16);
 void func_8024E40C(s32);
 void btl_cam_set_zoffset(s16);
 void btl_cam_target_actor(s32);

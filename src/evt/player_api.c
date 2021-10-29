@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite.h"
 
 Npc* playerNpc = (Npc*) 0x802DB270; // XXX: raw ptr
 
@@ -623,7 +624,7 @@ ApiStatus func_802D2520(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 a0 = *args++;
     s32 val = evt_get_variable(script, *args++);
-    s32 a2, a3, a4, a5;    
+    s32 a2, a3, a4, a5;
 
     func_802DDFF8(a0, 0, 0, 0, 0, 0, 0);
 
