@@ -3,8 +3,8 @@
 
 .section .rodata
 
-glabel D_80150BC0
-.word 0x80131E38, 0x80131E44, 0x80131EC4, 0x80131E98, 0x80131EA4, 0x00000000
+glabel jtbl_80150BC0
+.word L80131E38, L80131E44, L80131EC4, L80131E98, L80131EA4, 0
 
 .section .text
 
@@ -22,8 +22,8 @@ glabel item_entity_update
 /* C84FC 80131DFC 304200FF */  andi      $v0, $v0, 0xff
 /* C8500 80131E00 14400033 */  bnez      $v0, .L80131ED0
 /* C8504 80131E04 00000000 */   nop
-/* C8508 80131E08 3C138015 */  lui       $s3, %hi(D_80150BC0)
-/* C850C 80131E0C 26730BC0 */  addiu     $s3, $s3, %lo(D_80150BC0)
+/* C8508 80131E08 3C138015 */  lui       $s3, %hi(jtbl_80150BC0)
+/* C850C 80131E0C 26730BC0 */  addiu     $s3, $s3, %lo(jtbl_80150BC0)
 .L80131E10:
 /* C8510 80131E10 8E510024 */  lw        $s1, 0x24($s2)
 /* C8514 80131E14 8E230000 */  lw        $v1, ($s1)
@@ -35,9 +35,11 @@ glabel item_entity_update
 /* C852C 80131E2C 8C420000 */  lw        $v0, ($v0)
 /* C8530 80131E30 00400008 */  jr        $v0
 /* C8534 80131E34 00000000 */   nop
+glabel L80131E38
 /* C8538 80131E38 2402003C */  addiu     $v0, $zero, 0x3c
 /* C853C 80131E3C 0804C7B4 */  j         .L80131ED0
 /* C8540 80131E40 A242002E */   sb       $v0, 0x2e($s2)
+glabel L80131E44
 /* C8544 80131E44 92220003 */  lbu       $v0, 3($s1)
 /* C8548 80131E48 A242002E */  sb        $v0, 0x2e($s2)
 /* C854C 80131E4C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
@@ -61,9 +63,11 @@ glabel item_entity_update
 /* C858C 80131E8C A242002D */  sb        $v0, 0x2d($s2)
 /* C8590 80131E90 0804C7B4 */  j         .L80131ED0
 /* C8594 80131E94 AE510024 */   sw       $s1, 0x24($s2)
+glabel L80131E98
 /* C8598 80131E98 AE510028 */  sw        $s1, 0x28($s2)
 /* C859C 80131E9C 0804C784 */  j         .L80131E10
 /* C85A0 80131EA0 AE510024 */   sw       $s1, 0x24($s2)
+glabel L80131EA4
 /* C85A4 80131EA4 8E240000 */  lw        $a0, ($s1)
 /* C85A8 80131EA8 26310004 */  addiu     $s1, $s1, 4
 /* C85AC 80131EAC 8E300000 */  lw        $s0, ($s1)
@@ -72,6 +76,7 @@ glabel item_entity_update
 /* C85B8 80131EB8 0050102A */  slt       $v0, $v0, $s0
 /* C85BC 80131EBC 5040FFD4 */  beql      $v0, $zero, .L80131E10
 /* C85C0 80131EC0 AE510024 */   sw       $s1, 0x24($s2)
+glabel L80131EC4
 /* C85C4 80131EC4 8E420028 */  lw        $v0, 0x28($s2)
 /* C85C8 80131EC8 0804C784 */  j         .L80131E10
 /* C85CC 80131ECC AE420024 */   sw       $v0, 0x24($s2)

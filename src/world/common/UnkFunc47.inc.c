@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(UnkFunc47)(Evt* script, s32 isInitialCall) {
     f32 x = script->varTable[0] - gPlayerStatus.position.x;

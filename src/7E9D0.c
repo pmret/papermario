@@ -72,7 +72,7 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", phys_peach_update);
 void set_action_state(s32 actionState) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
-    UNK_TYPE* unknownStruct = &D_8010F250;
+    Temp8010F250* unknownStruct = &D_8010F250;
 
     if (playerStatus->flags & 0x200) {
         playerStatus->flags &= ~0x200;
@@ -144,8 +144,8 @@ void set_action_state(s32 actionState) {
     playerStatus->flags &= ~0x20000;
     playerStatus->animFlags &= ~0x10000;
 
-    if (unknownStruct[0xC]) {
-        sfx_stop_sound(unknownStruct[0xC]);
+    if (unknownStruct->unk_30 != 0) {
+        sfx_stop_sound(unknownStruct->unk_30);
     }
 
     if (playerStatus->unk_D8) {

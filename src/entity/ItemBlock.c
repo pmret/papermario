@@ -210,7 +210,7 @@ void entity_HiddenItemBlock_init(Entity* entity) {
 }
 
 void entity_ItemlessBlock_init(Entity* entity) {
-    AnimatedMesh* animMesh;
+    ModelAnimator* animMesh;
 
     entity_base_block_init(entity);
     entity->renderSetupFunc = entity_ItemBlock_setupGfx;

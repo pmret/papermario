@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(UnkTexturePanFunc)(Evt* script, s32 isInitialCall) {
     script->varTable[9] += script->varTable[1];

@@ -4,7 +4,7 @@
 /// See also tst_11, which has a more primitive reflection implementation.
 
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 #include "sprite.h"
 
 enum Reflection {

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 typedef struct struct802E7DE0 {
     /* 0x000 */ s32 unk_000;

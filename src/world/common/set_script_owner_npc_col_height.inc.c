@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 void N(set_script_owner_npc_col_height)(Evt* script, NpcAISettings* aiSettings,
                                         EnemyTerritoryThing* territory) {

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "model.h"
 
 typedef struct LavaReset {
     /* 0x00 */ s32 colliderID;

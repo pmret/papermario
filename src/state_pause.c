@@ -1,6 +1,6 @@
 #include "common.h"
 #include "ld_addrs.h"
-#include "map.h"
+#include "npc.h"
 #include "nu/nusys.h"
 #include "hud_element.h"
 #include "sprite.h"

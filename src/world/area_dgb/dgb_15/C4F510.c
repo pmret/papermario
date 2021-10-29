@@ -2,8 +2,6 @@
 #include "message_ids.h"
 #include "sprite/npc/world_tubba.h"
 
-extern s16 gCurrentCamID;
-
 enum {
     NPC_WORLD_TUBBA,
 };
