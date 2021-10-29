@@ -392,7 +392,7 @@ typedef struct Entity {
     /* 0x74 */ char unk_74[60];
     /* 0xB0 */ float effectiveSize;
     /* 0xB4 */ char unk_B4[4];
-    /* 0xB8 */ Matrix4s transformMatrix;
+    /* 0xB8 */ Mtx transformMatrix;
 } Entity; // size = 0xF8
 
 typedef Entity* EntityList[MAX_ENTITIES];
@@ -713,9 +713,9 @@ typedef struct BattleStatus {
     /* 0x09F */ char unk_9F;
     /* 0x0A0 */ s32* unk_A0;
     /* 0x0A4 */ s8 cloudNineTurnsLeft;
-    /* 0x0A5 */ u8 cloudNineDodgeChance; /* = 50% */
+    /* 0x0A5 */ s8 cloudNineDodgeChance; /* = 50% */
     /* 0x0A6 */ char unk_A6[2];
-    /* 0x0A8 */ s32 cloudNineEffect;
+    /* 0x0A8 */ struct EffectInstance* cloudNineEffect;
     /* 0x0AC */ char unk_AC;
     /* 0x0AD */ s8 unk_AD;
     /* 0x0AE */ s8 hammerLossTurns;
@@ -838,23 +838,70 @@ typedef struct ModelDisplayData {
     /* 0x4 */ char unk_00[0x4];
 } ModelDisplayData; // size = 0x8
 
-typedef struct AnimatedMesh {
-    /* 0x000 */ s32 flags;
-    /* 0x004 */ u8 renderMode;
-    /* 0x005 */ char unk_05[3];
-    /* 0x008 */ u32* animation1;
-    /* 0x00C */ u32* animation2;
-    /* 0x010 */ char unk_10[136];
-    /* 0x098 */ Matrix4s mtx;
-    /* 0x0D8 */ char unk_D8[500];
-    /* 0x2CC */ s32 time;
-    /* 0x2D0 */ char unk_2D0[4];
-    /* 0x2D4 */ s32 unk_2D4;
-    /* 0x2D8 */ s32 unk_2D8;
-    /* 0x2DC */ char unk_2DC[4];
-} AnimatedMesh; // size = 0x2E0
+typedef struct AnimatorNode {
+    /* 0x00 */ Gfx* displayList;
+    /* 0x04 */ struct AnimatorNode* children[0x20];
+    /* 0x84 */ Vec3f basePos; // ?
+    /* 0x90 */ Vec3f pos;
+    /* 0x9C */ Vec3f rotation;
+    /* 0xA8 */ Vec3f scale;
+    /* 0xB4 */ Matrix4f mtx;
+    /* 0xF4 */ s16 flags;
+    /* 0xF6 */ s16 uniqueIndex;
+    /* 0xF8 */ s16 vertexStartOffset;
+    /* 0xFA */ char unk_FA[2];
+    /* 0xFC */ union {
+    /*      */   s32 modelID;
+    /*      */   Vtx* vtxList;
+    /*      */ } fcData;
+} AnimatorNode; // size = 0x100
 
-typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
+typedef struct AnimatorNodeBlueprint {
+    /* 0x00 */ Gfx* displayList;
+    /* 0x04 */ Vec3f basePos;
+    /* 0x10 */ Vec3f rotation;
+    /* 0x1C */ char unk_1C[0x4];
+} AnimatorNodeBlueprint; // size = 0x20
+
+typedef struct StaticAnimatorNode {
+    /* 0x00 */ Gfx* displayList; // can sometime point to a node???
+    /* 0x04 */ Vec3s rot; /* range = -180,180 */
+    /* 0x0A */ char unk_0A[0x2];
+    /* 0x0C */ Vec3f pos;
+    /* 0x18 */ struct StaticAnimatorNode* sibling;
+    /* 0x1C */ struct StaticAnimatorNode* child;
+    /* 0x20 */ s16 vertexStartOffset;
+    /* 0x22 */ char unk_22[0x2];
+    /* 0x24 */ Vtx* vtxList;
+    /* 0x28 */ s16 modelID;
+    /* 0x2A */ char unk_2A[0x2];
+} StaticAnimatorNode; // size = 0x2C
+
+typedef struct ModelAnimator {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ s8 renderMode;
+    /* 0x005 */ char unk_05[3];
+    /* 0x008 */ s8* animReadPos;
+    /* 0x00C */ s8* savedReadPos;
+    /* 0x010 */ AnimatorNode* rootNode;
+    /* 0x014 */ u8 nextUniqueID;
+    /* 0x015 */ u8 staticNodeIDs[0x7A]; // ?
+    /* 0x08F */ char unk_08F[0x1];
+    /* 0x090 */ f32 nextUpdateTime;
+    /* 0x094 */ f32 timeScale;
+    /* 0x098 */ Mtx mtx;
+    /* 0x0D8 */ Vtx** vertexArray;
+    /* 0x0DC */ s8* animationBuffer;
+    /* 0x0E0 */ StaticAnimatorNode* staticNodes[0x7A];
+    /* 0x2C8 */ StaticAnimatorNode** staticRoot;
+    /* 0x2CC */ s32 treeIndexPos;
+    /* 0x2D0 */ s32 savedTreePos;
+    /* 0x2D4 */ void (*fpRenderCallback)(void);
+    /* 0x2D8 */ s32 renderCallbackArg;
+    /* 0x2DC */ char unk_2DC[4];
+} ModelAnimator; // size = 0x2E0
+
+typedef ModelAnimator* AnimatedMeshList[MAX_ANIMATED_MESHES];
 
 typedef struct PrintHandle {
     /* 0x000 */ char unk_00[16];
@@ -925,35 +972,6 @@ typedef struct ItemEntity {
     /* 0x54 */ s32 unk_54;
     /* 0x58 */ s32 unk_58;
 } ItemEntity; // size = 0x5C
-
-typedef struct StaticAnimatorNode {
-    /* 0x00 */ u32* displayList; // can sometime point to a node???
-    /* 0x04 */ Vec3s rot; /* range = -180,180 */
-    /* 0x0A */ char unk_0A[0x2];
-    /* 0x0C */ Vec3f pos;
-    /* 0x18 */ struct StaticAnimatorNode* sibling;
-    /* 0x1C */ struct StaticAnimatorNode* child;
-    /* 0x20 */ s16 vertexStartOffset;
-    /* 0x22 */ char unk_22[0x2];
-    /* 0x24 */ Vtx* vtxList;
-    /* 0x28 */ s16 modelID;
-    /* 0x2A */ char unk_2A[0x2];
-} StaticAnimatorNode; // size = 0x2C
-
-typedef struct SpriteComponent {
-    /* 0x00 */ s32 initialized;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s16** readPos;
-    /* 0x0C */ f32 waitTime;
-    /* 0x10 */ s32 loopCounter;
-    /* 0x14 */ s32 currentRaster;
-    /* 0x18 */ s32 currentPalette;
-    /* 0x1C */ Vec3f posOffset;
-    /* 0x28 */ Vec3f compPos;
-    /* 0x34 */ Vec3f rotation;
-    /* 0x40 */ Vec3f scale;
-    /* 0x4C */ char unk_4C[4];
-} SpriteComponent; // size = 0x50
 
 typedef struct MessagePrintState {
     /* 0x000 */ s8* srcBuffer;
@@ -1235,7 +1253,7 @@ typedef struct Shadow {
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Vec3f rotation;
     /* 0x34 */ char unk_34[0x4];
-    /* 0x38 */ Matrix4s transformMatrix;
+    /* 0x38 */ Mtx transformMatrix;
 } Shadow; // size = 0x78
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
@@ -1536,8 +1554,7 @@ typedef struct AnimatedModel {
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
-    /* 0x28 */ Matrix4s* mtx;
-    /* 0x2C */ char unk_2C[60];
+    /* 0x28 */ Mtx mtx;
     /* 0x68 */ u32 currentAnimData;
     /* 0x6C */ char unk_6C[4];
 } AnimatedModel; // size = 0x70
@@ -1671,7 +1688,7 @@ typedef struct Actor {
     /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
-    /* 0x20C */ u32* statusTable;
+    /* 0x20C */ struct DictionaryEntry* statusTable;
     /* 0x210 */ s8 debuff;
     /* 0x211 */ s8 debuffDuration;
     /* 0x212 */ s8 staticStatus; /* 0B = yes */

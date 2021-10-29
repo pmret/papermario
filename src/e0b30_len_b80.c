@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 MusicSettings D_8014F6F0 = {
     .flags = 0,

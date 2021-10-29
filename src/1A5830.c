@@ -133,7 +133,109 @@ void dispatch_event_actor(Actor* actor, s32 event) {
     }
 }
 
-INCLUDE_ASM(s32, "1A5830", calc_enemy_test_target);
+s32 calc_enemy_test_target(Actor* actor) {
+    PlayerData* playerData = &gPlayerData;
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 targetID = battleStatus->currentTargetID;
+    s32 targetPartIdx = battleStatus->currentTargetPart;
+    Actor* target;
+    Actor* target2;
+    ActorPart* targetPart;
+    s32 actorMasked;
+    s32 hitResult;
+
+    battleStatus->currentTargetID2 = battleStatus->currentTargetID;
+    battleStatus->currentTargetPart2 = battleStatus->currentTargetPart;
+
+    target = get_actor(targetID);
+    if (target == NULL) {
+        return HIT_RESULT_HIT;
+    }
+
+    targetPart = get_actor_part(target, targetPartIdx);
+    ASSERT(targetPart != NULL);
+
+    actorMasked = targetID & 0x700;
+    switch (actorMasked) {
+        case ACTOR_PLAYER:
+            target->currentHP = playerData->curHP;
+            break;
+        case ACTOR_PARTNER:
+            target->currentHP = 127;
+            break;
+        case ACTOR_ENEMY0:
+            break;
+    }
+
+    if (battleStatus->currentAttackElement & DAMAGE_TYPE_TRIGGER_LUCKY) {
+        dispatch_event_general(target, EVENT_LUCKY);
+        return HIT_RESULT_HIT;
+    }
+
+    hitResult = HIT_RESULT_HIT;
+    target2 = target;
+    if (targetPart->eventFlags & EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transStatus == STATUS_E) {
+        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_MAGIC)) {
+            hitResult = HIT_RESULT_MISS;
+        }
+    }
+
+    if (hitResult == HIT_RESULT_MISS) {
+        return HIT_RESULT_MISS;
+    }
+    hitResult = HIT_RESULT_HIT;
+    switch (actorMasked) {
+        case ACTOR_PLAYER:
+            if (battleStatus->cloudNineTurnsLeft) {
+                if (rand_int(100) < (s8) battleStatus->cloudNineDodgeChance) {
+                    hitResult = 6;
+                    break;
+                }
+            } else {
+                if (player_team_is_ability_active(target2, ABILITY_PRETTY_LUCKY)) {
+                    if (rand_int(100) < 10) {
+                        hitResult = HIT_RESULT_LUCKY;
+                        break;
+                    }
+                }
+                if (player_team_is_ability_active(target2, ABILITY_CLOSE_CALL) && (target2->currentHP < 6)) {
+                    if (rand_int(100) < 30) {
+                        hitResult = HIT_RESULT_LUCKY;
+                        break;
+                    }
+                }
+                if (player_team_is_ability_active(target2, ABILITY_LUCKY_DAY)) {
+                    if (rand_int(100) < 20) {
+                        hitResult = HIT_RESULT_LUCKY;
+                        break;
+                    }
+                }
+            }
+            break;
+        case ACTOR_PARTNER:
+            break;
+        case ACTOR_ENEMY0:
+            break;
+    }
+
+    if (hitResult == HIT_RESULT_MISS) {
+        return HIT_RESULT_MISS;
+    }
+
+    if (hitResult == HIT_RESULT_LUCKY) {
+        return HIT_RESULT_LUCKY;
+    }
+
+    if (target2->stoneStatus == STATUS_STONE) {
+        return HIT_RESULT_IMMUNE;  
+    }
+        
+    if (target2->staticStatus == STATUS_STATIC) {
+        return HIT_RESULT_HIT_STATIC;
+    }
+
+    return HIT_RESULT_HIT;
+}
 
 s32 calc_enemy_damage_target(Actor* attacker) {
     BattleStatus* battleStatus = &gBattleStatus;

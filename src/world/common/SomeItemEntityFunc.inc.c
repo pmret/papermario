@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(SomeItemEntityFunc)(Evt* script, s32 isInitialCall) {
     ItemEntity* itemEntity = get_item_entity(script->varTable[0]);

@@ -3,6 +3,7 @@
 #include "nu/nusys.h"
 #include "camera.h"
 #include "hud_element.h"
+#include "sprite.h"
 
 s32 D_80077980[] = { &D_8038F800, &D_803B5000, &D_803DA800, };
 

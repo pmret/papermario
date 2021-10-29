@@ -2,7 +2,6 @@
 #include "message_ids.h"
 #include "sprite/npc/world_clubba.h"
 
-extern s16 gCurrentCamID;
 extern Npc* wPartnerNpc;
 
 enum {

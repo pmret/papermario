@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(IsRightOnEquipped)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = FALSE;

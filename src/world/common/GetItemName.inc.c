@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(GetItemName)(Evt* script, s32 isInitialCall) {
     Bytecode a0 = *script->ptrReadPos;

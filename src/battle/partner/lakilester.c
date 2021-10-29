@@ -37,11 +37,11 @@ ApiStatus func_80238A6C_70C77C(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "battle/partner/lakilester", func_80238B50_70C860);
 
 ApiStatus func_80238C14_70C924(Evt* script, s32 isInitialCall) {
-    s32 effect = gBattleStatus.cloudNineEffect;
+    EffectInstance* effect = gBattleStatus.cloudNineEffect;
 
     if (effect != NULL) {
         remove_effect(effect);
-        gBattleStatus.cloudNineEffect = 0;
+        gBattleStatus.cloudNineEffect = NULL;
         gBattleStatus.cloudNineTurnsLeft = 0;
         return ApiStatus_DONE2;
     }

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 #include "camera.h"
 
 ApiStatus N(SetCamera0Flag1000)(Evt* script, s32 isInitialCall) {

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "../src/world/partners.h"
+#include "npc.h"
 
 void force_player_anim(s32 arg0);
 void func_802BE070_31DBE0(void);
@@ -91,7 +92,7 @@ s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Npc* npc = script->owner2.npc;
-    
+
     if (isInitialCall) {
         func_802BD180_31CCF0();
         partner_init_put_away(npc);
@@ -101,7 +102,7 @@ s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
         playerStatus->animFlags = playerStatus->animFlags & ~3;
         gGameStatusPtr->unk_7D = 0;
     }
-    
+
     if (partner_put_away(npc) != 0) {
         return ApiStatus_DONE1;
     } else {
@@ -172,7 +173,7 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
             }
             break;
     }
-    
+
     return ApiStatus_BLOCK;
 }
 
@@ -180,7 +181,7 @@ void func_802BE014_31DB84(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 currentSpeed = playerStatus->currentSpeed;
     s32 animationID;
-    
+
     if (playerStatus->runSpeed <= currentSpeed) {
         animationID = 0x60002;
     } else if (playerStatus->walkSpeed <= currentSpeed) {

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(UnkFunc44)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = 0;

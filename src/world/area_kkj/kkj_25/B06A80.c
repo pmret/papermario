@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_25/B06A80", func_802400AC_B06AAC);
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_25/B06A80", func_802400FC_B06AFC);
+#include "world/common/SetEntityPositionF.inc.c"
 
 #include "world/common/GetEntityPosition.inc.c"
 

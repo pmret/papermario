@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite.h"
 
 s32 func_80254250(void) {
     s32 ret;

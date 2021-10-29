@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 #include "effects.h"
 
 ApiStatus SetEncounterStatusFlags(Evt* script, s32 isInitialCall) {

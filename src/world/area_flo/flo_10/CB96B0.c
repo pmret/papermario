@@ -1,5 +1,6 @@
 #include "flo_10.h"
 #include "nu/nusys.h"
+#include "model.h"
 
 void N(func_802404B0_CB96B0)(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 INCLUDE_ASM(void, "world/area_flo/flo_10/CB96B0", flo_10_func_802404B0_CB96B0);
