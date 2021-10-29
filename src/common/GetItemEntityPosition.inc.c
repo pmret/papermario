@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(GetItemEntityPosition)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

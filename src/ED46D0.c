@@ -1,7 +1,7 @@
 #include "dead.h"
 #include "common.h",
 
-// Copy of flo_10? (CBP6B0.c)
+// Copy of flo_10 (CBP6B0.c)
 
 #define NAMESPACE ED46D0
 

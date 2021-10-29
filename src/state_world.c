@@ -1,3 +1,6 @@
+#include "functions.h"
+#include "npc.h"
+
 void state_world_draw_aux_ui(void);
 
 void state_init_world(void) {

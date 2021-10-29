@@ -2,8 +2,6 @@
 
 #define NAMESPACE E20110
 
-extern s32 D_8010C958;
-
 #include "common/UnkAngleFunc1.inc.c"
 
 INCLUDE_ASM(s32, "E20110", func_802B70B4_E201C4);

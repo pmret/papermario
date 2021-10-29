@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall) {
     increment_status_menu_disabled();

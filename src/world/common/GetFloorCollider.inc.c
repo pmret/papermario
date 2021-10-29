@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(GetFloorCollider)(Evt* script, s32 isInitialCall) {
     CollisionStatus* collisionStatus = &gCollisionStatus;

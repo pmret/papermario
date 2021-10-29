@@ -11,7 +11,7 @@ const char* ascii_EC7180 = "flo_18\0";
 
 INCLUDE_ASM(s32, "EC2240", func_80240040_EC2240);
 
-#include "world/common/DeadGetItemName.inc.c"
+#include "world/common/GetItemName.inc.c"
 
 //const char* D_80244F98_EC7198 = "touch_choro\n";
 

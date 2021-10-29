@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 extern s32 D_800A0F40;
 extern PopupMessage D_800A0BC0[32];

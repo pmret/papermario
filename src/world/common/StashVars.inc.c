@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
     static s32** varTable = NULL;

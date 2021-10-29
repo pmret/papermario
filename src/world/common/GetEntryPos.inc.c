@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(GetEntryPos)(Evt* script, s32 isInitialCall) {
     MapConfig* mapConfig = get_current_map_header();
