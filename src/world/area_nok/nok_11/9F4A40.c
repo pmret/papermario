@@ -112,4 +112,10 @@ ApiStatus N(func_80241AE0_9F6520)(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241F08_9F6948);
 
-INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241F30_9F6970);
+ApiStatus func_80241F30_9F6970(Evt* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+
+    playerData->coins -= 100;
+
+    return ApiStatus_DONE2;
+}

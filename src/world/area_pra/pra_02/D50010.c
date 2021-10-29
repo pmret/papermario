@@ -80,7 +80,7 @@ ApiStatus N(func_80241274_D51264)(Evt* script, s32 isInitialCall) {
 }
 */
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241310_D51300);
+#include "world/common/SetEntityPositionF.inc.c"
 
 #include "world/common/GetEntityPosition.inc.c"
 

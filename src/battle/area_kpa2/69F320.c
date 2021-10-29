@@ -14,9 +14,13 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_802181E4_69F3E4);
 #include "common/FadeBackgroundToBlack.inc.c"
 #define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218620_69F820);
+#define NAMESPACE dup2_b_area_kpa2
+#include "common/UnfadeBackgroundToBlack.inc.c"
+#define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_802186A0_69F8A0);
+#define NAMESPACE dup2_b_area_kpa2
+#include "common/RemoveChillOut.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_802186D0_69F8D0);
 
@@ -32,9 +36,13 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80218F58_6A0158);
 #include "common/FadeBackgroundToBlack.inc.c"
 #define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219394_6A0594);
+#define NAMESPACE dup3_b_area_kpa2
+#include "common/UnfadeBackgroundToBlack.inc.c"
+#define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219414_6A0614);
+#define NAMESPACE dup3_b_area_kpa2
+#include "common/RemoveChillOut.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219444_6A0644);
 
@@ -44,9 +52,13 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219818_6A0A18);
 #include "common/GetJumpHammerCharge.inc.c"
 #define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219CD4_6A0ED4);
+#define NAMESPACE dup3_b_area_kpa2
+#include "common/GetPlayerHpPercent.inc.c"
+#define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219D44_6A0F44);
+#define NAMESPACE dup3_b_area_kpa2
+#include "common/ItemEntityJumpToPos.inc.c"
+#define NAMESPACE b_area_kpa2
 
 #define NAMESPACE dup_b_area_kpa2
 #include "common/GetItemEntityPosition.inc.c"
@@ -54,7 +66,9 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219D44_6A0F44);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219FFC_6A11FC);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A1B8_6A13B8);
+#define NAMESPACE dup_b_area_kpa2
+#include "common/CanPlayerLoseAction.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A254_6A1454);
 
@@ -68,9 +82,13 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A318_6A1518);
 #include "common/FadeBackgroundToBlack.inc.c"
 #define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A754_6A1954);
+#define NAMESPACE dup4_b_area_kpa2
+#include "common/UnfadeBackgroundToBlack.inc.c"
+#define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A7D4_6A19D4);
+#define NAMESPACE dup4_b_area_kpa2
+#include "common/RemoveChillOut.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A804_6A1A04);
 
@@ -80,15 +98,21 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021ABD8_6A1DD8);
 #include "common/GetJumpHammerCharge.inc.c"
 #define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B08C_6A228C);
+#define NAMESPACE dup6_b_area_kpa2
+#include "common/GetPlayerHpPercent.inc.c"
+#define NAMESPACE b_area_kpa2
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B0FC_6A22FC);
+#define NAMESPACE dup6_b_area_kpa2
+#include "common/ItemEntityJumpToPos.inc.c"
+#define NAMESPACE b_area_kpa2
 
 #include "common/GetItemEntityPosition.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B3B4_6A25B4);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B570_6A2770);
+#define NAMESPACE dup6_b_area_kpa2
+#include "common/CanPlayerLoseAction.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B60C_6A280C);
 

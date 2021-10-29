@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "sam_08";
 
 INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_80240000_D2BD30);
 
-INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_80240448_D2C178);
+#include "world/common/SetEntityPositionF.inc.c"
 
 #include "world/common/GetEntityPosition.inc.c"
 

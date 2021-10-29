@@ -1,7 +1,16 @@
+
+.set noat
+.set noreorder
+.set gp=64
+.macro glabel label
+    .global \label
+    .type \label, @function
+    \label:
+.endm
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80218700_685130
+glabel b_area_kpa_UnkSfxFunc
 /* 685130 80218700 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 685134 80218704 AFB20020 */  sw        $s2, 0x20($sp)
 /* 685138 80218708 0080902D */  daddu     $s2, $a0, $zero

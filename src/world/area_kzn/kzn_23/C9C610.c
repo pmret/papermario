@@ -1,6 +1,6 @@
 #include "kzn_23.h"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_23/C9C610", func_80240310_C9C610);
+#include "world/common/SetEntityPositionF.inc.c"
 
 #include "world/common/GetEntityPosition.inc.c"
 
