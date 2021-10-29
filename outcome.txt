@@ -1,0 +1,6 @@
+enum outcome {
+    OUTCOME_PLAYER_WON          = 0x00000000,
+    OUTCOME_PLAYER_LOST         = 0x00000001,
+    OUTCOME_PLAYER_FLED         = 0x00000002,
+    OUTCOME_ENEMY_FLED          = 0x00000003,
+};

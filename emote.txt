@@ -1,0 +1,8 @@
+enum emote {
+    EMOTE_EXCLAMATION        = 0x00000000,
+    EMOTE_SHOCK              = 0x00000001,
+    EMOTE_QUESTION           = 0x00000002,
+    EMOTE_FRUSTRATION        = 0x00000003,
+    EMOTE_ELLIPSIS           = 0x00000004,
+    EMOTE_INVALID            = 0x00000005,
+};
