@@ -4,6 +4,11 @@
 // todo consider symbol
 #define MSG_ROM_START 0x1B83000
 
+typedef struct UnkMsgStruct8 {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ char unk_02[0xE];
+} UnkMsgStruct8; // size = 0x16
+
 extern s32 D_802EF0D0;
 
 s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
@@ -116,7 +121,7 @@ extern s32 D_802ED970;
 extern s32 D_802EE8D0;
 extern MessageCharset* gMsgCharsets[5];
 extern s32 D_802F39D0;
-extern s32* D_802F4560;
+extern UnkMsgStruct8 D_802F4560[];
 
 void load_font(s32 font);
 s32 _update_message(MessagePrintState*);
@@ -1110,5 +1115,11 @@ INCLUDE_ASM(s32, "msg", msg_draw_speech_arrow);
 
 INCLUDE_ASM(s32, "msg", msg_draw_frame);
 
-void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out);
-INCLUDE_ASM(void, "msg", msg_get_glyph, s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out);
+void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out) {
+    out->raster = &gMsgCharsets[font]->rasters[variation].raster[(u16)gMsgCharsets[font]->charRasterSize * charIndex];
+    out->palette = &D_802F4560[palette].unk_00;
+    out->texSize.x = gMsgCharsets[font]->texSize.x;
+    out->texSize.y = gMsgCharsets[font]->texSize.y;
+    out->charWidth = msg_get_draw_char_width(charIndex, font, variation, 1.0f, 0, 0);
+    out->charHeight = out->texSize.y;
+}

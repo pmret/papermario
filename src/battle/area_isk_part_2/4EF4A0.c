@@ -1,17 +1,35 @@
 #include "common.h"
+#include "effects.h"
 
 #define NAMESPACE b_area_isk_part_2
 
-INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", func_80218000_4EF4A0);
+#include "common/ChompChainInit.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", func_80218150_4EF5F0);
+#include "common/ChompChainUpdateHelperFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", func_802181E8_4EF688);
+#include "common/ChompChainUpdateHelperFunc2.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", func_8021825C_4EF6FC);
+INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", b_area_isk_part_2_ChompChainUpdate);
 
-INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", func_8021866C_4EFB0C);
+ApiStatus func_8021866C_4EFB0C(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = *args++;
+
+    evt_get_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 #include "common/UnkBattleFunc1.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_isk_part_2/4EF4A0", func_8021875C_4EFBFC);
+ApiStatus func_8021875C_4EFBFC(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    EffectInstance* effect = playFX_4C(2, var1, 150.0f, var3, var2, -0.5f, -0.9f, 0.5f, 60);
+
+    effect->data->unk_30 = 0;
+    effect->data->unk_38 = 0;
+    effect->data->unk_34 = 0;
+    return ApiStatus_DONE2;
+}

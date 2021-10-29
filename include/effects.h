@@ -104,7 +104,8 @@ typedef struct EffectInstanceData {
     /* 0x28 */ f32 unk_28;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ f32 unk_30;
-    /* 0x34 */ char unk_34[8];
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ char unk_40[0x24];
     /* 0x64 */ f32 unk_64;
@@ -184,7 +185,7 @@ EffectInstance* playFX_1C(s32, f32, f32, f32, s32);
 void playFX_1D(s32, f32, f32, f32, f32, s32, f32, s32);
 EffectInstance* playFX_1E(s32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* playFX_1F(s32, f32, f32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_20(s32, f32, f32, f32, f32, s32*);
+EffectInstance* playFX_20(s32, f32, f32, f32, f32, EffectInstance*);
 EffectInstance* playFX_21(s32, f32, f32, f32, f32, f32, s32);
 void playFX_22(s32, f32, f32, f32, f32, f32, s32, s32);
 EffectInstance* playFX_23(u32, f32, f32, f32, f32);
