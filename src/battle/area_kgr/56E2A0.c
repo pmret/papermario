@@ -4,7 +4,7 @@
 
 #include "common/UnkBattleFunc1.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_kgr/56E2A0", func_802180CC_56E36C);
+#include "common/ItemEntityJumpToPos.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kgr/56E2A0", func_802182E4_56E584);
 

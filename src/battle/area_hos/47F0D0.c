@@ -2,7 +2,7 @@
 
 #define NAMESPACE b_area_hos
 
-INCLUDE_ASM(s32, "battle/area_hos/47F0D0", func_80218020_47F0D0);
+#include "common/UnkSfxFunc.inc.c"
 
 #include "common/ShrinkActor.inc.c"
 
