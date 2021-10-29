@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(UnkFunc39)(Evt* script, s32 isInitialCall) {
     EffectGraphics* effect = (EffectGraphics*)evt_get_variable(script, *script->ptrReadPos);

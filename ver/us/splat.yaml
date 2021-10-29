@@ -735,6 +735,7 @@ segments:
     - [0xE92D0, c, evt]
     - [0xED510, c, map_api]
     - [0xEF070, c, cam_api]
+    - [0xF1470, c, model_api]
     - [0xF2470, c, npc_api]
     - [0xF4C60, c, msg_api]
     - [0xF5750, c, player_api]

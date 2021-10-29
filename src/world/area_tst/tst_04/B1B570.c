@@ -1,4 +1,5 @@
 #include "tst_04.h"
+#include "sprite.h"
 
 static char* N(exit_str_0) = "tst_03";
 static char* N(exit_str_1) = "";

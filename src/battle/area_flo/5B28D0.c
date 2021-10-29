@@ -14,7 +14,6 @@ extern char* D_80233564_5CCA14[11];
 extern char* D_80233870_5CCD20[11];
 extern char* D_80233950_5CCE00[11];
 
-
 ApiStatus func_80219420_5B28D0(Evt* script, s32 isInitialCall) {
     s32 var1 = 0;
     u32 i;

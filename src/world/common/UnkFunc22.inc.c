@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(UnkFunc22)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(-4);

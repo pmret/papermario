@@ -1,6 +1,8 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of kzn_23 (C9C610.c)
+
 #define NAMESPACE EB7540
 
 INCLUDE_ASM(s32, "EB7540", func_80240310_EB7540);

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 void func_8011B950(u16, s32, s32, s32);
 

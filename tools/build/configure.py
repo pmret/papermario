@@ -254,7 +254,7 @@ class Configure:
             None,
             str(self.version_path / "baserom.z64"),
             modes,
-            verbose=True,
+            verbose=False,
         )
         self.linker_entries = split.linker_writer.entries[:]
         self.asset_stack = split.config["asset_stack"]

@@ -1,19 +1,20 @@
 #include "dead.h"
 #include "common.h"
 
+// Copy of flo_25 (CF2C10.c)
+
 #define NAMESPACE EF2680
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
 INCLUDE_ASM(s32, "EF2680", func_80240220_EF2830);
 
-#include "world/common/DeadUnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-// Copy from flo_25 (CF2C10.c)
 extern f32 D_802444BC_EF6ACC[];
 
 void func_80240CC4_EF32D4(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
@@ -26,7 +27,7 @@ void func_80240CC4_EF32D4(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     }
 }
 
-#include "world/common/DeadUnkNpcAIFunc14.inc.c"
+#include "world/common/UnkNpcAIFunc14.inc.c"
 
 #include "world/common/UnkNpcAIFunc3.inc.c"
 

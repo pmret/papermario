@@ -187,6 +187,7 @@ INCLUDE_ASM(s32, "C50A0", item_entity_update);
 INCLUDE_ASM(s32, "C50A0", update_item_entities);
 
 INCLUDE_ASM(s32, "C50A0", appendGfx_item_entity);
+void appendGfx_item_entity(ItemEntity* itemEntity);
 
 INCLUDE_ASM(s32, "C50A0", draw_item_entities);
 
@@ -244,7 +245,21 @@ void remove_item_entity_by_index(s32 index) {
     D_801565A4 = 0;
 }
 
-INCLUDE_ASM(s32, "C50A0", func_80133A94);
+void func_80133A94(s32 idx, s32 itemID) {
+    ItemEntity* item = D_801565A0[idx];
+
+    item->itemID = itemID;
+
+    item->flags |= 0x4000;
+    item->flags &= ~0x40000;
+
+    if (gItemTable[itemID].typeFlags & 0x1000) {
+        item->flags |= 0x40000;
+        item->flags &= ~0x4000;
+    }
+
+    item_entity_load(item);
+}
 
 s32 test_item_player_collision(ItemEntity* itemEntity);
 INCLUDE_ASM(s32, "C50A0", test_item_player_collision);

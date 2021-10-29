@@ -3,6 +3,7 @@
 #include "battle/battle.h"
 #include "hud_element.h"
 #include "message_ids.h"
+#include "model.h"
 
 s32 D_80280FC0[] = {
     0x000A005A, 0x00000032, 0x0003000B, 0x00000032, 0x0001002D, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010031, 0x00000032, 0x00010031, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010032, 0x00000032, 0x00010032, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x0003000A, 0x00000032, 0x0003000A, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000050, 0x0003000A, 0x00000014, 0x0003000B, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -1008,8 +1009,8 @@ ActorPartDesc bMarioParts[] = {
 Vec3s D_80283524[] = {
     { 0x0005, 0x0000, 0xFFEC },
     { 0x002D, 0x0000, 0xFFFB },
-    { 0x0055, 0x0000, 0x000A }, 
-    { 0x007D, 0x0000, 0x0019 }, 
+    { 0x0055, 0x0000, 0x000A },
+    { 0x007D, 0x0000, 0x0019 },
     { 0x000A, 0x0032, 0xFFEC },
     { 0x0032, 0x002D, 0xFFFB },
     { 0x005A, 0x0032, 0x000A },
@@ -1068,6 +1069,7 @@ s32 bActorMessages[] = {
 
 s32 D_802838F8 = 0;
 
+void create_target_list(Actor* actor, s32 arg1);
 INCLUDE_ASM(s32, "190B20", create_target_list);
 
 void player_create_target_list(Actor* actor) {
@@ -1407,7 +1409,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
     return TRUE;
 }
 
-s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
+s32 get_defense(Actor* actor, DictionaryEntry* defenseTable, s32 elementFlags) {
     s32 defense;
     s32 minDefense = 0xFF;
 
@@ -1712,7 +1714,7 @@ void remove_player_buffs(s32 buffs) {
         battleStatus->cloudNineTurnsLeft = 0;
         battleStatus->unk_43C->unk_0C->unk_1A = 0;
         remove_effect(battleStatus->cloudNineEffect);
-        battleStatus->cloudNineEffect = 0;
+        battleStatus->cloudNineEffect = NULL;
     }
 
     if (partner != NULL && (buffs & 0x10000)) {

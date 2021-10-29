@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(UnkMoveFunc1)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

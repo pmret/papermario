@@ -4,7 +4,8 @@
 /// See also tst_11, which has a more primitive reflection implementation.
 
 #include "common.h"
-#include "map.h"
+#include "npc.h"
+#include "sprite.h"
 
 enum Reflection {
     REFLECTION_FLOOR_WALL,
@@ -189,9 +190,11 @@ void N(reflection_setup_floor)(void) {
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->distance = -screenZ;
-        renderTaskPtr->appendGfx = (!(playerStatus->flags & 0x20000) ?
-                                    N(reflection_render_floor) :
-                                    N(reflection_render_floor_fancy));
+        renderTaskPtr->appendGfx = (void (*)(void*)) (
+            !(playerStatus->flags & 0x20000)
+                ? N(reflection_render_floor)
+                : N(reflection_render_floor_fancy)
+        );
         queue_render_task(renderTaskPtr);
     }
 }
@@ -226,7 +229,7 @@ void N(reflection_render_floor)(PlayerStatus* playerStatus) {
 }
 
 void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
-    Matrix4f main;
+    Matrix4f mtx;
     Matrix4f translation;
     Matrix4f rotation;
     Matrix4f scale;
@@ -267,8 +270,8 @@ void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
             func_802DDEE4(1, -1, 6, tint, tint, tint, 255, 0);
 
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
-            guRotateF(main, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
-            guMtxCatF(rotation, main, main);
+            guRotateF(mtx, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+            guMtxCatF(rotation, mtx, mtx);
             px = playerStatus->position.x;
             py = playerStatus->position.y;
             pz = playerStatus->position.z;
@@ -286,24 +289,24 @@ void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
             px = playerStatus->position.x;
             pz = playerStatus->position.z;
             func_802DDEE4(1, -1, 7, 0, 0, 0, 0x40, 0);
-            guRotateF(main, yaw, 0.0f, -1.0f, 0.0f);
+            guRotateF(mtx, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
-            guRotateF(main, blurAngle, 0.0f, 1.0f, 0.0f);
-            guMtxCatF(rotation, main, main);
+            guRotateF(mtx, blurAngle, 0.0f, 1.0f, 0.0f);
+            guMtxCatF(rotation, mtx, mtx);
         }
 
         guTranslateF(translation, 0.0f, -playerStatus->colliderHeight * 0.5f, 0.0f);
-        guMtxCatF(translation, main, main);
+        guMtxCatF(translation, mtx, mtx);
         guRotateF(rotation, yaw, 0.0f, 1.0f, 0.0f);
-        guMtxCatF(main, rotation, main);
+        guMtxCatF(mtx, rotation, mtx);
         guRotateF(rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
-        guMtxCatF(main, rotation, main);
+        guMtxCatF(mtx, rotation, mtx);
         guTranslateF(translation, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
-        guMtxCatF(main, translation, main);
+        guMtxCatF(mtx, translation, mtx);
         guScaleF(scale, SPRITE_WORLD_SCALE, -SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
-        guMtxCatF(main, scale, main);
+        guMtxCatF(mtx, scale, mtx);
         guTranslateF(translation, px, -py, pz);
-        guMtxCatF(main, translation, main);
+        guMtxCatF(mtx, translation, mtx);
 
         if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
             flags = 0x10000001;
@@ -311,7 +314,7 @@ void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
             flags = 1;
         }
 
-        spr_draw_player_sprite(flags, 0, 0, 0, &main);
+        spr_draw_player_sprite(flags, 0, 0, NULL, mtx);
     }
 }
 

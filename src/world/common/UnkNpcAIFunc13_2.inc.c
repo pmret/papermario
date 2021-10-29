@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 void N(UnkNpcAIFunc13_2)(Evt* script, NpcAISettings* aiSettings, s32 arg2) {
     Enemy* enemy = script->owner1.enemy;

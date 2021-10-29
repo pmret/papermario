@@ -1,7 +1,7 @@
 #include "dead.h"
 #include "common.h"
 
-// Copy of flo_13?
+// Copy of flo_13 (CC3850.c)
 
 #define NAMESPACE EDEA00
 
@@ -13,7 +13,7 @@ extern f32 D_802441DC_EE2B9C[];
 
 INCLUDE_ASM(s32, "EDEA00", func_80240374_EDED34);
 
-#include "world/common/DeadUnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
@@ -29,7 +29,7 @@ void func_80240E18_EDF7D8(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     }
 }
 
-#include "world/common/DeadUnkNpcAIFunc14.inc.c"
+#include "world/common/UnkNpcAIFunc14.inc.c"
 
 #include "world/common/UnkNpcAIFunc3.inc.c"
 

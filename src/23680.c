@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 INCLUDE_ASM(s32, "23680", spawn_drops);
 

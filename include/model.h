@@ -138,4 +138,14 @@ typedef enum ShapeTypes {
 typedef ModelTreeInfo ModelTreeInfoList[0x200];
 extern ModelTreeInfoList* mdl_currentModelTreeNodeInfo;
 
+void update_model_animator_with_transform(s32 animatorID, Mtx* mtx);
+s32 step_model_animator(ModelAnimator* animator);
+void animator_update_model_transforms(ModelAnimator* animator, Mtx* rootTransform);
+void render_animated_model(s32 animatorID, Mtx* rootTransform);
+void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx)[4], AnimatorNode* node,
+                                          Mtx* rootTransform);
+void appendGfx_animator(ModelAnimator* animator);
+void reload_mesh_animator_tree(ModelAnimator* animator);
+s32 step_mesh_animator(ModelAnimator* animator);
+
 #endif

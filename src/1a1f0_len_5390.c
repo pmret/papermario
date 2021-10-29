@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 #include "effects.h"
 
 extern s16 D_8009A668;

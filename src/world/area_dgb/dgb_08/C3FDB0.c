@@ -4,8 +4,6 @@
 #include "sprite/npc/world_clubba.h"
 #include "sprite/npc/world_tubba.h"
 
-extern s16 gCurrentCamID;
-
 enum {
     NPC_WORLD_CLUBBA7,
     NPC_WORLD_CLUBBA0,

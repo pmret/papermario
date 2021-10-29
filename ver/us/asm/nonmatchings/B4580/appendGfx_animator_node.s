@@ -119,8 +119,8 @@ glabel appendGfx_animator_node
 /* B6310 8011FC10 24020400 */  addiu     $v0, $zero, 0x400
 /* B6314 8011FC14 AD02002C */  sw        $v0, 0x2c($t0)
 .L8011FC18:
-/* B6318 8011FC18 3C028015 */  lui       $v0, %hi(D_80153A44)
-/* B631C 8011FC1C 8C423A44 */  lw        $v0, %lo(D_80153A44)($v0)
+/* B6318 8011FC18 3C028015 */  lui       $v0, %hi(gAnimModelFogEnabled)
+/* B631C 8011FC1C 8C423A44 */  lw        $v0, %lo(gAnimModelFogEnabled)($v0)
 /* B6320 8011FC20 1440000C */  bnez      $v0, .L8011FC54
 /* B6324 8011FC24 3C04FC12 */   lui      $a0, 0xfc12
 /* B6328 8011FC28 3C05FCFF */  lui       $a1, 0xfcff

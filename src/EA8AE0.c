@@ -2,16 +2,16 @@
 #include "common.h"
 #include "effects.h"
 
-// Copy of kzn_19?
+// Copy of kzn_19 (C8DBB0.c)
 
 #define NAMESPACE EA8AE0
 
 extern s32 D_80248388[];
 extern s32 D_80248380;
 
-#include "world/common/DeadUnkTexturePanFunc.inc.c"
+#include "world/common/UnkTexturePanFunc.inc.c"
 
-#include "world/common/DeadUnkTexturePanFunc2.inc.c"
+#include "world/common/UnkTexturePanFunc2.inc.c"
 
 #include "world/common/StarSpiritEffectFunc.inc.c"
 
@@ -41,7 +41,7 @@ INCLUDE_ASM(s32, "EA8AE0", func_8024140C_EA9EEC);
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241468_EA9F48);
 
-#include "world/common/DeadGetItemName.inc.c"
+#include "world/common/GetItemName.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

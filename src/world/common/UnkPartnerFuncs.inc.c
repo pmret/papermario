@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(UnkRotatePartner)(Evt* script, s32 isInitialCall) {
     Npc* partner = get_npc_unsafe(NPC_PARTNER);
