@@ -45,6 +45,5 @@
         "**/.splat_cache": true,
         ".ninja*": true,
         "ver/current": true
-    },
-    "C_Cpp.dimInactiveRegions": false
+    }
 }

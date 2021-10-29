@@ -136,18 +136,6 @@ INCLUDE_ASM(s32, "sprite", spr_init_quad_cache);
 
 INCLUDE_ASM(s32, "sprite", spr_get_cached_quad);
 
-/* extern s32* D_802DFE44;
-extern s32 D_802DFE48[];
-
-s32 spr_get_cached_quad(s32 arg0) {
-    s32 *temp_v1;
-
-    temp_v1 = D_802DFE48[arg0];
-    *temp_v1 = (s32) (*temp_v1 | 0x1F);
-    return D_802DFE44[arg0 << 6];
-}
-*/
-
 INCLUDE_ASM(s32, "sprite", spr_make_quad_for_size);
 
 INCLUDE_ASM(s32, "sprite", spr_get_quad_for_size);
