@@ -1,29 +1,22 @@
 #include "common.h"
 
-#ifndef ITEMENTITYJUMPTOPOS_INC_C
-#define ITEMENTITYJUMPTOPOS_INC_C
-
-typedef struct ItemEntityJumpState {
-    /* 0x00 */ Vec3f pos;
-    /* 0x0C */ f32 moveAngle;
-    /* 0x10 */ f32 jumpAccel;
-    /* 0x14 */ f32 moveSpeed;
-    /* 0x18 */ f32 jumpVelocity;
-    /* 0x1C */ s32 moveTime;
-    /* 0x20 */ s32 itemEntityIndex;
-} ItemEntityJumpState; // size = 0x24
-
-#endif
-
 ApiStatus N(ItemEntityJumpToPos)(Evt* script, s32 isInitialCall) {
+    struct {
+     /* 0x00 */ Vec3f pos;
+     /* 0x0C */ f32 moveAngle;
+     /* 0x10 */ f32 jumpAccel;
+     /* 0x14 */ f32 moveSpeed;
+     /* 0x18 */ f32 jumpVelocity;
+     /* 0x1C */ s32 moveTime;
+     /* 0x20 */ s32 itemEntityIndex;
+    }* jumpState;
     Bytecode* args = script->ptrReadPos;
-    ItemEntityJumpState* jumpState;
     ItemEntity* item;
     f32 moveDist;
     f32 temp_f2;
 
     if (isInitialCall) {
-        jumpState = heap_malloc(0x24);
+        jumpState = heap_malloc(sizeof(*jumpState));
         script->functionTemp[0] = jumpState;
         jumpState->itemEntityIndex = evt_get_variable(script, *args++);
         jumpState->pos.x = evt_get_float_variable(script, *args++);
