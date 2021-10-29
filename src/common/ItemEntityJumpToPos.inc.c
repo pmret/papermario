@@ -1,14 +1,14 @@
 #include "common.h"
 
 ApiStatus N(ItemEntityJumpToPos)(Evt* script, s32 isInitialCall) {
-    struct JumpState {
-     /* 0x00 */ Vec3f pos;
-     /* 0x0C */ f32 moveAngle;
-     /* 0x10 */ f32 jumpAccel;
-     /* 0x14 */ f32 moveSpeed;
-     /* 0x18 */ f32 jumpVelocity;
-     /* 0x1C */ s32 moveTime;
-     /* 0x20 */ s32 itemEntityIndex;
+    struct {
+        /* 0x00 */ Vec3f pos;
+        /* 0x0C */ f32 moveAngle;
+        /* 0x10 */ f32 jumpAccel;
+        /* 0x14 */ f32 moveSpeed;
+        /* 0x18 */ f32 jumpVelocity;
+        /* 0x1C */ s32 moveTime;
+        /* 0x20 */ s32 itemEntityIndex;
     }* jumpState;
     Bytecode* args = script->ptrReadPos;
     ItemEntity* item;
@@ -36,7 +36,7 @@ ApiStatus N(ItemEntityJumpToPos)(Evt* script, s32 isInitialCall) {
         jumpState->moveSpeed = moveDist / temp_f2;
     }
 
-    jumpState = script->functionTemp[0];
+    jumpState = (void*) script->functionTemp[0];
     item = get_item_entity(jumpState->itemEntityIndex);
     if (!item) {
         heap_free((void*) script->functionTemp[0]);
