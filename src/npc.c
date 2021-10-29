@@ -2,6 +2,7 @@
 #include "map.h"
 #include "npc.h"
 #include "effects.h"
+#include "sprite.h"
 
 extern s16 D_8010C97A;
 extern s32 D_8010C978;

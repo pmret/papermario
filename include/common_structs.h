@@ -940,21 +940,6 @@ typedef struct StaticAnimatorNode {
     /* 0x2A */ char unk_2A[0x2];
 } StaticAnimatorNode; // size = 0x2C
 
-typedef struct SpriteComponent {
-    /* 0x00 */ s32 initialized;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s16** readPos;
-    /* 0x0C */ f32 waitTime;
-    /* 0x10 */ s32 loopCounter;
-    /* 0x14 */ s32 currentRaster;
-    /* 0x18 */ s32 currentPalette;
-    /* 0x1C */ Vec3f posOffset;
-    /* 0x28 */ Vec3f compPos;
-    /* 0x34 */ Vec3f rotation;
-    /* 0x40 */ Vec3f scale;
-    /* 0x4C */ char unk_4C[4];
-} SpriteComponent; // size = 0x50
-
 typedef struct MessagePrintState {
     /* 0x000 */ s8* srcBuffer;
     /* 0x004 */ s16 printBufferPos;

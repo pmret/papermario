@@ -5,6 +5,7 @@
 
 #include "common.h"
 #include "map.h"
+#include "sprite.h"
 
 enum Reflection {
     REFLECTION_FLOOR_WALL,

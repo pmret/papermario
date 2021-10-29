@@ -1,38 +1,4 @@
-#include "common.h"
-
-struct spr_playerCurrentAnimInfo {
-    /* 0x00 */ SpriteComponent** componentList;
-    /* 0x04 */ s32 animID;
-    /* 0x08 */ s32 unk_08;
-}; // size = 0xC
-
-struct D_802DFA48 {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
-}; // size = 0x14
-
-typedef struct PlayerSpriteSet {
-    /// Number of cache entries.
-    /* 0x00 */ s32 cacheSize;
-
-    /// Maximum raster size.
-    /* 0x04 */ s32 rasterSize;
-
-    /// Flags saying which rasters to load into the cache in spr_init_sprites(), with each bit corresponding to the Nth
-    /// raster (with LSB = raster 0).
-    /* 0x08 */ s32 initiallyLoaded;
-} PlayerSpriteSet; // size = 0xC
-
-/// Sprite data header.
-typedef struct SpriteAnimData {
-    /* 0x00 */ s32** rastersOffset;
-    /* 0x04 */ s32** palettesOffset;
-    /* 0x08 */ s32 maxComponents;
-    /* 0x0C */ s32 colorVariations;
-} SpriteAnimData; // size = 0x10
+#include "sprite.h"
 
 extern s32 D_802DF590[];
 extern s32 D_802DFA58[];

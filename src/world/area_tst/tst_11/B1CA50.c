@@ -1,4 +1,5 @@
 #include "tst_11.h"
+#include "sprite.h"
 
 void func_8024003C_B1CA8C(void);
 void func_80240100_B1CB50(PlayerStatus*);
