@@ -271,7 +271,7 @@ EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA0C4, 165, 0, 380, 20, MAKE_ENTITY_END);
     MakeEntity(0x802EA564, -170, 0, 370, 43, ITEM_COIN, MAKE_ENTITY_END);
     AssignBlockFlag(EVT_SAVE_FLAG(50));
-    MakeEntity(0x802EAA54, 345, 75, -250, 0, ITEM_WATER, MAKE_ENTITY_END);
+    MakeEntity(0x802EAA54, 345, 75, -250, 0, ITEM_BAKING_WATER, MAKE_ENTITY_END);
     MakeItemEntity(ITEM_COIN, 345, 205, -250, 17, EVT_SAVE_FLAG(56));
     MakeItemEntity(ITEM_COIN, 345, 230, -250, 17, EVT_SAVE_FLAG(57));
     MakeItemEntity(ITEM_COIN, 345, 255, -250, 17, EVT_SAVE_FLAG(58));

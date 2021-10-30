@@ -1,6 +1,0 @@
-enum camID {
-    CAM_DEFAULT      = 0x00000000,
-    CAM_BATTLE       = 0x00000001,
-    CAM_TATTLE       = 0x00000002,
-    CAM_CAM3         = 0x00000003,
-};

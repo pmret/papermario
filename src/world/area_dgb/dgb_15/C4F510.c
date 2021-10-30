@@ -41,7 +41,7 @@ static s32 N(pad_19B4)[] = {
 };
 
 s32 N(itemList_802419C0)[] = {
-    ITEM_CASTLE_KEY1,
+    ITEM_TUBBA_CASTLE_KEY,
     ITEM_NONE,
 };
 

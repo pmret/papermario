@@ -1,8 +1,0 @@
-enum encounterTrigger {
-    ENCOUNTER_TRIGGER_NONE                            = 0x00000001,
-    ENCOUNTER_TRIGGER_JUMP                            = 0x00000002,
-    ENCOUNTER_TRIGGER_SPIN                            = 0x00000003,
-    ENCOUNTER_TRIGGER_HAMMER                          = 0x00000004,
-    ENCOUNTER_TRIGGER_CONVERSATION                    = 0x00000005,
-    ENCOUNTER_TRIGGER_PARTNER                         = 0x00000006,
-};

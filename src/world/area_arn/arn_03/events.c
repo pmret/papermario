@@ -463,7 +463,7 @@ EvtSource N(interact_8024254C) = SCRIPT({
             EVT_VAR(0) = 118;
             EVT_VAR(1) = 1;
             await N(80241C6C);
-            AddKeyItem(ITEM_PACKAGE);
+            AddKeyItem(ITEM_KOOT_PACKAGE);
             EVT_MAP_VAR(0) = 0;
             EVT_SAVE_FLAG(1015) = 1;
             EVT_SAVE_FLAG(1020) = 0;

@@ -169,7 +169,7 @@ EvtSource N(enterDoubleDoor_80242D1C) = SCRIPT({
 });
 
 s32 N(itemList_80242F28)[] = {
-    ITEM_CASTLE_KEY1,
+    ITEM_TUBBA_CASTLE_KEY,
     ITEM_NONE,
 };
 

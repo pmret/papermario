@@ -80,7 +80,7 @@ void func_802B6048_E24F18(s32 arg0) {
     exec_ShakeCamX(0, 2, s2temp, phi_f24);
     playFX_1D(0, xTemp, yTemp, zTemp, phi_s1, phi_s3, 0, (s2temp + 3) * 3);
 
-    switch (is_ability_active(ABILITY_ATTACK_F_X)) {
+    switch (is_ability_active(ABILITY_ATTACK_FX)) {
         case 1:
             soundID = 0x372;
             break;

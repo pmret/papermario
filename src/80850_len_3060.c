@@ -950,7 +950,7 @@ s32 is_ability_active(s32 ability) {
             case ABILITY_FEELING_FINE:
                 abilityMoveID = 0x43;
                 break;
-            case ABILITY_ATTACK_F_X:
+            case ABILITY_ATTACK_FX:
                 if (badgeMoveID == 0x54) {
                     attackFXArray[attackFXIndex++] = 1;
                     ret = -1;

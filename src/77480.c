@@ -307,7 +307,7 @@ void phys_update_standard(void) {
 
     check_input_midair_jump();
 
-    if (playerStatus->actionState != ACTION_STATE_SLIDE) {
+    if (playerStatus->actionState != ACTION_STATE_SLIDING) {
         collision_main_lateral();
         collision_check_player_overlaps();
 
