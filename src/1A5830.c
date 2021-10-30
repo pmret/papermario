@@ -227,9 +227,9 @@ s32 calc_enemy_test_target(Actor* actor) {
     }
 
     if (target2->stoneStatus == STATUS_STONE) {
-        return HIT_RESULT_IMMUNE;  
+        return HIT_RESULT_IMMUNE;
     }
-        
+
     if (target2->staticStatus == STATUS_STATIC) {
         return HIT_RESULT_HIT_STATIC;
     }
@@ -313,7 +313,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     }
     if ((battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE) && (target->flags & ACTOR_FLAG_FLYING)) {
         play_hit_sound(attacker, state->goalPos.x, state->goalPos.y, state->goalPos.z, 1);
-        return HIT_RESULT_MISS_QUAKE;
+        return HIT_RESULT_QUAKE_IMMUNE;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
         playFX_24(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 0x18);
@@ -463,10 +463,10 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     if (damage <= 0) {
         target->hpChangeCounter = 0;
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_40000000)) {
-            hitResult = HIT_RESULT_MISS_QUAKE;
+            hitResult = HIT_RESULT_QUAKE_IMMUNE;
             event = EVENT_23;
         } else {
-            hitResult = HIT_RESULT_MISS_QUAKE;
+            hitResult = HIT_RESULT_QUAKE_IMMUNE;
             event = EVENT_23;
             if (target->currentHP <= 0) {
                 event = EVENT_DEATH;
@@ -550,7 +550,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                 event = EVENT_BURN_HIT;
             }
             if (event == EVENT_DEATH) {
-                event = EVENT_41;
+                event = EVENT_REVIVE;
             }
             isFire = TRUE;
         }
@@ -558,13 +558,13 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
     if (gBattleStatus.flags1 & BS_FLAGS1_ATK_BLOCKED) {
         if (event == EVENT_HIT_COMBO) {
-            event = EVENT_24;
+            event = EVENT_BURN_DEATH;
         }
         if (event == EVENT_HIT) {
             event = EVENT_BLOCK;
         }
         if (event == EVENT_23) {
-            event = EVENT_24;
+            event = EVENT_BURN_DEATH;
         }
         if (event == EVENT_IMMUNE) {
             event = EVENT_BLOCK;
@@ -1252,9 +1252,9 @@ ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
         s32 i;
 
         if (dropper->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
-            spawnMode = ITEM_SPAWN_MODE_UNKNOWN_19;
+            spawnMode = ITEM_SPAWN_MODE_TOSS_FADE3;
         } else {
-            spawnMode = ITEM_SPAWN_MODE_UNKNOWN_17;
+            spawnMode = ITEM_SPAWN_MODE_TOSS_FADE1;
         }
 
         for (i = 0; i < numToDrop; i++) {

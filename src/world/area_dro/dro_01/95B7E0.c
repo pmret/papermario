@@ -2400,7 +2400,7 @@ EvtSource N(8024B7B0) = {
         EVT_SET(EVT_VAR(0), 119)
         EVT_SET(EVT_VAR(1), 1)
         EVT_EXEC_WAIT(N(8024B5B4))
-        EVT_CALL(AddKeyItem, ITEM_RED_JAR)
+        EVT_CALL(AddKeyItem, ITEM_KOOT_RED_JAR)
         EVT_SET(EVT_SAVE_FLAG(758), 1)
         EVT_WAIT_FRAMES(20)
         EVT_CALL(func_802D2C14, 0)

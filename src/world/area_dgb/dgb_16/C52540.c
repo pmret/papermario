@@ -99,7 +99,7 @@ static s32 N(pad_1774)[] = {
 };
 
 EvtSource N(80241780) = SCRIPT({
-    MakeItemEntity(ITEM_CASTLE_KEY1, -235, 25, -165, 17, EVT_SAVE_FLAG(1069));
+    MakeItemEntity(ITEM_TUBBA_CASTLE_KEY, -235, 25, -165, 17, EVT_SAVE_FLAG(1069));
 });
 
 static s32 N(pad_17B4)[] = {

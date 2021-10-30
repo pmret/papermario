@@ -86,7 +86,7 @@ void set_action_state(s32 actionState) {
             actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK ||
             actionState == ACTION_STATE_RUN || actionState == ACTION_STATE_JUMP ||
             actionState == ACTION_STATE_BOUNCE || actionState == ACTION_STATE_HOP ||
-            actionState == ACTION_STATE_LAUNCH || actionState == ACTION_STATE_LAND_ON_SWITCH ||
+            actionState == ACTION_STATE_LAUNCH || actionState == ACTION_STATE_LANDING_ON_SWITCH ||
             actionState == ACTION_STATE_FALLING || actionState == ACTION_STATE_STEP_DOWN ||
             actionState == ACTION_STATE_LAND || actionState == ACTION_STATE_STEP_DOWN_LAND
         ) {
@@ -120,7 +120,7 @@ void set_action_state(s32 actionState) {
         }
     }
 
-    if (actionState == ACTION_STATE_SLIDE) {
+    if (actionState == ACTION_STATE_SLIDING) {
         playerStatus->flags |= 0x10;
         playerStatus->moveFrames = 0;
         playerStatus->flags &= ~0x4000;
@@ -260,7 +260,7 @@ void func_800E63A4(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (arg0 != 0) {
-        set_action_state(ACTION_STATE_SNEAKY_PARASOL);
+        set_action_state(ACTION_STATE_USE_SNEAKY_PARASOL);
     } else {
         playerStatus->animFlags &= ~PLAYER_ANIM_FLAG_IN_DISGUISE;
         gGameStatusPtr->peachFlags &= ~0x2;
@@ -292,7 +292,7 @@ void peach_check_for_parasol_input(void) {
                 }
             }
         } else if (gGameStatusPtr->peachFlags & 4 && playerStatus->pressedButtons & B_BUTTON) {
-            set_action_state(ACTION_STATE_SNEAKY_PARASOL);
+            set_action_state(ACTION_STATE_USE_SNEAKY_PARASOL);
         }
     }
 }

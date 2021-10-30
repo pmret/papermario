@@ -224,7 +224,7 @@ ApiStatus AddKeyItem(Evt* script, s32 isInitialCall) {
     s32 itemID = evt_get_variable(script, value);
     s32 i;
 
-    if (itemID == ITEM_FORTRESS_KEY) {
+    if (itemID == ITEM_KOOPA_FORTRESS_KEY) {
         playerData->fortressKeyCount++;
         return ApiStatus_DONE2;
     }
