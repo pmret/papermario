@@ -1,5 +1,6 @@
 #include "common.h"
 #include "hud_element.h"
+#include "fio.h"
 #include "sprite.h"
 
 void state_init_startup(void) {

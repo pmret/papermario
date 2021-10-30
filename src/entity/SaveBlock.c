@@ -1,4 +1,5 @@
 #include "common.h"
+#include "fio.h"
 
 typedef struct struct802E10F4 {
     char unk_0[4];
