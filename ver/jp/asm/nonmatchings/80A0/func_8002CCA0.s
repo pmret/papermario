@@ -88,7 +88,7 @@ glabel func_8002CCA0
 /* 81D8 8002CDD8 AFB1001C */  sw        $s1, 0x1c($sp)
 /* 81DC 8002CDDC AFB00018 */  sw        $s0, 0x18($sp)
 /* 81E0 8002CDE0 AC400000 */  sw        $zero, ($v0)
-/* 81E4 8002CDE4 0C017C2C */  jal       func_8005F0B0
+/* 81E4 8002CDE4 0C017C2C */  jal       nuGfxDisplayOff
 /* 81E8 8002CDE8 0000902D */   daddu    $s2, $zero, $zero
 /* 81EC 8002CDEC 3C10800A */  lui       $s0, %hi(D_8009C4F8)
 /* 81F0 8002CDF0 2610C4F8 */  addiu     $s0, $s0, %lo(D_8009C4F8)

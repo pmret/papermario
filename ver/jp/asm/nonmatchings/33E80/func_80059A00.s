@@ -45,8 +45,8 @@ glabel func_80059A00
 /* 34E94 80059A94 26520001 */   addiu    $s2, $s2, 1
 /* 34E98 80059A98 8E030010 */  lw        $v1, 0x10($s0)
 /* 34E9C 80059A9C 8C620000 */  lw        $v0, ($v1)
-/* 34EA0 80059AA0 3C048007 */  lui       $a0, %hi(D_8007417C)
-/* 34EA4 80059AA4 8C84417C */  lw        $a0, %lo(D_8007417C)($a0)
+/* 34EA0 80059AA0 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* 34EA4 80059AA4 8C84417C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* 34EA8 80059AA8 00531024 */  and       $v0, $v0, $s3
 /* 34EAC 80059AAC AC620000 */  sw        $v0, ($v1)
 /* 34EB0 80059AB0 80820070 */  lb        $v0, 0x70($a0)

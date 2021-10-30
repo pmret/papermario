@@ -35,8 +35,8 @@ glabel func_80059C44
 /* 350B8 80059CB8 30620008 */  andi      $v0, $v1, 8
 /* 350BC 80059CBC 5040009E */  beql      $v0, $zero, .L80059F38
 /* 350C0 80059CC0 26520001 */   addiu    $s2, $s2, 1
-/* 350C4 80059CC4 3C028007 */  lui       $v0, %hi(D_8007417C)
-/* 350C8 80059CC8 8C42417C */  lw        $v0, %lo(D_8007417C)($v0)
+/* 350C4 80059CC4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 350C8 80059CC8 8C42417C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 350CC 80059CCC 80420070 */  lb        $v0, 0x70($v0)
 /* 350D0 80059CD0 10400005 */  beqz      $v0, .L80059CE8
 /* 350D4 80059CD4 30620004 */   andi     $v0, $v1, 4

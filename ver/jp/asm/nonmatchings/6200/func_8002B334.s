@@ -9,8 +9,8 @@ glabel func_8002B334
 /* 6744 8002B344 AFB10014 */  sw        $s1, 0x14($sp)
 /* 6748 8002B348 0C00AC45 */  jal       func_8002B114
 /* 674C 8002B34C AFB00010 */   sw       $s0, 0x10($sp)
-/* 6750 8002B350 3C118007 */  lui       $s1, %hi(D_8007417C)
-/* 6754 8002B354 2631417C */  addiu     $s1, $s1, %lo(D_8007417C)
+/* 6750 8002B350 3C118007 */  lui       $s1, %hi(gGameStatusPtr)
+/* 6754 8002B354 2631417C */  addiu     $s1, $s1, %lo(gGameStatusPtr)
 /* 6758 8002B358 8E220000 */  lw        $v0, ($s1)
 /* 675C 8002B35C 0C00AD7C */  jal       func_8002B5F0
 /* 6760 8002B360 A0520166 */   sb       $s2, 0x166($v0)

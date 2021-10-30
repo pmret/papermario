@@ -27,8 +27,8 @@ glabel func_80043F58
 /* 1F3A8 80043FA8 8E050000 */  lw        $a1, ($s0)
 /* 1F3AC 80043FAC 0C0B1EAF */  jal       func_802C7ABC
 /* 1F3B0 80043FB0 0040802D */   daddu    $s0, $v0, $zero
-/* 1F3B4 80043FB4 3C038007 */  lui       $v1, %hi(D_8007417C)
-/* 1F3B8 80043FB8 8C63417C */  lw        $v1, %lo(D_8007417C)($v1)
+/* 1F3B4 80043FB4 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 1F3B8 80043FB8 8C63417C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 1F3BC 80043FBC 0200202D */  daddu     $a0, $s0, $zero
 /* 1F3C0 80043FC0 8465008C */  lh        $a1, 0x8c($v1)
 /* 1F3C4 80043FC4 0C00F8CE */  jal       func_8003E338

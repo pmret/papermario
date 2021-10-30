@@ -15,7 +15,7 @@ glabel func_80069798
 /* 44BC0 800697C0 AFB40070 */  sw        $s4, 0x70($sp)
 /* 44BC4 800697C4 AFB20068 */  sw        $s2, 0x68($sp)
 /* 44BC8 800697C8 AFB00060 */  sw        $s0, 0x60($sp)
-/* 44BCC 800697CC 0C019674 */  jal       func_800659D0
+/* 44BCC 800697CC 0C019674 */  jal       osGetCount
 /* 44BD0 800697D0 AE620000 */   sw       $v0, ($s3)
 /* 44BD4 800697D4 AE620004 */  sw        $v0, 4($s3)
 /* 44BD8 800697D8 8EA20008 */  lw        $v0, 8($s5)

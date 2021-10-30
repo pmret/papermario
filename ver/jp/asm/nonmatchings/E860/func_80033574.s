@@ -46,8 +46,8 @@ glabel func_80033574
 /* EA10 80033610 00000000 */   nop
 /* EA14 80033614 0C00EB9A */  jal       func_8003AE68
 /* EA18 80033618 00000000 */   nop
-/* EA1C 8003361C 3C108007 */  lui       $s0, %hi(D_8007417C)
-/* EA20 80033620 2610417C */  addiu     $s0, $s0, %lo(D_8007417C)
+/* EA1C 8003361C 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* EA20 80033620 2610417C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* EA24 80033624 8E030000 */  lw        $v1, ($s0)
 /* EA28 80033628 24020001 */  addiu     $v0, $zero, 1
 /* EA2C 8003362C 0C016AD4 */  jal       func_8005AB50
