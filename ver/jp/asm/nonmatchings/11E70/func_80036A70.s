@@ -22,8 +22,8 @@ glabel func_80036A70
 /* 11EB4 80036AB4 00000000 */   nop
 /* 11EB8 80036AB8 0C053A2B */  jal       func_8014E8AC
 /* 11EBC 80036ABC 0000202D */   daddu    $a0, $zero, $zero
-/* 11EC0 80036AC0 3C038007 */  lui       $v1, %hi(D_8007417C)
-/* 11EC4 80036AC4 2463417C */  addiu     $v1, $v1, %lo(D_8007417C)
+/* 11EC0 80036AC0 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 11EC4 80036AC4 2463417C */  addiu     $v1, $v1, %lo(gGameStatusPtr)
 /* 11EC8 80036AC8 8C620000 */  lw        $v0, ($v1)
 /* 11ECC 80036ACC A04000AC */  sb        $zero, 0xac($v0)
 /* 11ED0 80036AD0 8C620000 */  lw        $v0, ($v1)

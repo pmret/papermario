@@ -9,8 +9,8 @@ glabel func_80033B00
 /* EF10 80033B10 AFB00018 */  sw        $s0, 0x18($sp)
 /* EF14 80033B14 0C00AAF0 */  jal       func_8002ABC0
 /* EF18 80033B18 F7B40028 */   sdc1     $f20, 0x28($sp)
-/* EF1C 80033B1C 3C128007 */  lui       $s2, %hi(D_8007417C)
-/* EF20 80033B20 2652417C */  addiu     $s2, $s2, %lo(D_8007417C)
+/* EF1C 80033B1C 3C128007 */  lui       $s2, %hi(gGameStatusPtr)
+/* EF20 80033B20 2652417C */  addiu     $s2, $s2, %lo(gGameStatusPtr)
 /* EF24 80033B24 8E420000 */  lw        $v0, ($s2)
 /* EF28 80033B28 A04000AC */  sb        $zero, 0xac($v0)
 /* EF2C 80033B2C 8E420000 */  lw        $v0, ($s2)

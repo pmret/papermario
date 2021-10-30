@@ -36,8 +36,8 @@ glabel func_80033850
 /* ECCC 800338CC 00000000 */   nop
 /* ECD0 800338D0 0C016A28 */  jal       func_8005A8A0
 /* ECD4 800338D4 00000000 */   nop
-/* ECD8 800338D8 3C108007 */  lui       $s0, %hi(D_8007417C)
-/* ECDC 800338DC 2610417C */  addiu     $s0, $s0, %lo(D_8007417C)
+/* ECD8 800338D8 3C108007 */  lui       $s0, %hi(gGameStatusPtr)
+/* ECDC 800338DC 2610417C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* ECE0 800338E0 8E040000 */  lw        $a0, ($s0)
 /* ECE4 800338E4 0040902D */  daddu     $s2, $v0, $zero
 /* ECE8 800338E8 84830086 */  lh        $v1, 0x86($a0)

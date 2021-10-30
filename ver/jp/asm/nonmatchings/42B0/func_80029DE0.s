@@ -3,8 +3,8 @@
 
 glabel func_80029DE0
 /* 51E0 80029DE0 44806000 */  mtc1      $zero, $f12
-/* 51E4 80029DE4 3C028007 */  lui       $v0, %hi(D_8007417C)
-/* 51E8 80029DE8 8C42417C */  lw        $v0, %lo(D_8007417C)($v0)
+/* 51E4 80029DE4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 51E8 80029DE8 8C42417C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 51EC 80029DEC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 51F0 80029DF0 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 51F4 80029DF4 8C460128 */  lw        $a2, 0x128($v0)

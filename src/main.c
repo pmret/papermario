@@ -7,7 +7,12 @@ void gfxRetrace_Callback(s32);
 void gfxPreNMI_Callback(void);
 void gfx_task_main(void);
 
+// TODO: name these symbols the same, this is just a shift
+#ifdef VERSION_US
 extern s32 D_80073E00;
+#else
+extern s32 D_80073DE0;
+#endif
 extern u16* D_80073E04;
 extern s16 D_80073E08;
 extern s16 D_80073E0A;
@@ -17,8 +22,16 @@ extern OSViMode _osViModeNtscLan1;
 extern OSViMode _osViModeMPalLan1;
 
 void boot_main(void) {
-    OSViMode* viMode;
-
+#ifdef VERSION_JP
+    if (osTvType == OS_TV_NTSC) {
+        nuGfxDisplayOff();
+        osViSetMode(&_osViModeNtscLan1);
+        osViSetSpecialFeatures(OS_VI_GAMMA_OFF | OS_VI_GAMMA_DITHER_OFF | OS_VI_DIVOT_ON | OS_VI_DITHER_FILTER_ON);
+        nuGfxDisplayOff();
+    } else {
+        PANIC();
+    }
+#else // VERSION_JP
     if (osTvType == OS_TV_NTSC) {
         osViSetMode(&_osViModeNtscLan1);
         osViSetSpecialFeatures(OS_VI_GAMMA_OFF | OS_VI_GAMMA_DITHER_OFF | OS_VI_DIVOT_ON | OS_VI_DITHER_FILTER_ON);
@@ -31,12 +44,20 @@ void boot_main(void) {
 
     nuGfxDisplayOff();
     crash_screen_init();
+#endif
+
     is_debug_init();
     nuGfxInit();
     gGameStatusPtr->contBitPattern = nuContInit();
+#ifdef VERSION_US
     func_8002D160();
     func_802B2000();
     func_802B203C();
+#else
+    func_8002CA00();
+    func_802B2000();
+    func_802B203C();
+#endif
     nuGfxFuncSet((NUGfxFunc) gfxRetrace_Callback);
     nuGfxPreNMIFuncSet(gfxPreNMI_Callback);
     gRandSeed += osGetCount();
@@ -45,6 +66,7 @@ void boot_main(void) {
     while (TRUE) {}
 }
 
+#ifdef VERSION_US
 void gfxRetrace_Callback(s32 arg0) {
     if (D_80073E00 != 0) {
         if (D_80073E00 == 1) {
@@ -79,6 +101,9 @@ void gfxRetrace_Callback(s32 arg0) {
         }
     }
 }
+#else
+INCLUDE_ASM(s32, "main", gfxRetrace_Callback);
+#endif
 
 //gfx stuff
 #ifdef NON_MATCHING
@@ -153,10 +178,18 @@ void gfx_task_main(void) {
     gCurrentDisplayContextIndex ^= 1;
 }
 #else
-INCLUDE_ASM(void, "1370_len_7d0", gfx_task_main);
+    #ifdef VERSION_US
+INCLUDE_ASM(void, "main", gfx_task_main);
+    #else
+INCLUDE_ASM(s32, "main", func_80026148);
+    #endif
 #endif
 
 void gfxPreNMI_Callback(void) {
+#ifdef VERSION_US
     D_80073E00 = 1;
+#else
+    D_80073DE0 = 1;
+#endif
     nuContRmbForceStop();
 }
