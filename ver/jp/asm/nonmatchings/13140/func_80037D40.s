@@ -3,8 +3,8 @@
 
 glabel func_80037D40
 /* 13140 80037D40 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 13144 80037D44 3C048007 */  lui       $a0, %hi(D_8007417C)
-/* 13148 80037D48 2484417C */  addiu     $a0, $a0, %lo(D_8007417C)
+/* 13144 80037D44 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* 13148 80037D48 2484417C */  addiu     $a0, $a0, %lo(gGameStatusPtr)
 /* 1314C 80037D4C AFBF0010 */  sw        $ra, 0x10($sp)
 /* 13150 80037D50 8C830000 */  lw        $v1, ($a0)
 /* 13154 80037D54 80620071 */  lb        $v0, 0x71($v1)

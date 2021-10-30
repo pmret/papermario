@@ -67,7 +67,7 @@ glabel func_80066BE0
 /* 420C4 80066CC4 3C01800A */  lui       $at, %hi(D_8009A5C4)
 /* 420C8 80066CC8 1220000A */  beqz      $s1, .L80066CF4
 /* 420CC 80066CCC AC22A5C4 */   sw       $v0, %lo(D_8009A5C4)($at)
-/* 420D0 80066CD0 0C019674 */  jal       func_800659D0
+/* 420D0 80066CD0 0C019674 */  jal       osGetCount
 /* 420D4 80066CD4 00008821 */   addu     $s1, $zero, $zero
 /* 420D8 80066CD8 00408021 */  addu      $s0, $v0, $zero
 /* 420DC 80066CDC 02001821 */  addu      $v1, $s0, $zero
@@ -78,7 +78,7 @@ glabel func_80066BE0
 /* 420F0 80066CF0 AC23A5EC */  sw        $v1, %lo(D_8009A5EC)($at)
 .L80066CF4:
 /* 420F4 80066CF4 3C10800A */  lui       $s0, %hi(D_8009A5A8)
-/* 420F8 80066CF8 0C019674 */  jal       func_800659D0
+/* 420F8 80066CF8 0C019674 */  jal       osGetCount
 /* 420FC 80066CFC 8E10A5A8 */   lw       $s0, %lo(D_8009A5A8)($s0)
 /* 42100 80066D00 3C01800A */  lui       $at, %hi(D_8009A5A8)
 /* 42104 80066D04 AC22A5A8 */  sw        $v0, %lo(D_8009A5A8)($at)
