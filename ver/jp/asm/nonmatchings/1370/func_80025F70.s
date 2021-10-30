@@ -24,7 +24,7 @@ glabel func_80025F70
 /* 13B8 80025FB8 080097EE */  j         .L80025FB8
 /* 13BC 80025FBC 00000000 */   nop
 .L80025FC0:
-/* 13C0 80025FC0 0C009718 */  jal       func_80025C60
+/* 13C0 80025FC0 0C009718 */  jal       is_debug_init
 /* 13C4 80025FC4 00000000 */   nop
 /* 13C8 80025FC8 0C017C84 */  jal       func_8005F210
 /* 13CC 80025FCC 00000000 */   nop
