@@ -10,8 +10,8 @@ glabel func_8006CA70
 /* 47E84 8006CA84 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 47E88 8006CA88 0C019250 */  jal       func_80064940
 /* 47E8C 8006CA8C 24050060 */   addiu    $a1, $zero, 0x60
-/* 47E90 8006CA90 3C038000 */  lui       $v1, %hi(D_80000300)
-/* 47E94 8006CA94 8C630300 */  lw        $v1, %lo(D_80000300)($v1)
+/* 47E90 8006CA90 3C038000 */  lui       $v1, %hi(osTvType)
+/* 47E94 8006CA94 8C630300 */  lw        $v1, %lo(osTvType)($v1)
 /* 47E98 8006CA98 3C018009 */  lui       $at, %hi(D_80095960)
 /* 47E9C 8006CA9C AC305960 */  sw        $s0, %lo(D_80095960)($at)
 /* 47EA0 8006CAA0 26100030 */  addiu     $s0, $s0, 0x30

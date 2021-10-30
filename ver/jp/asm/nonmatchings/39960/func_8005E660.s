@@ -19,8 +19,8 @@ glabel func_8005E660
 /* 39A98 8005E698 326200FF */  andi      $v0, $s3, 0xff
 /* 39A9C 8005E69C AC82000C */  sw        $v0, 0xc($a0)
 /* 39AA0 8005E6A0 A0830011 */  sb        $v1, 0x11($a0)
-/* 39AA4 8005E6A4 3C028000 */  lui       $v0, %hi(D_80000300)
-/* 39AA8 8005E6A8 8C420300 */  lw        $v0, %lo(D_80000300)($v0)
+/* 39AA4 8005E6A4 3C028000 */  lui       $v0, %hi(osTvType)
+/* 39AA8 8005E6A8 8C420300 */  lw        $v0, %lo(osTvType)($v0)
 /* 39AAC 8005E6AC A483F996 */  sh        $v1, -0x66a($a0)
 /* 39AB0 8005E6B0 2483F994 */  addiu     $v1, $a0, -0x66c
 /* 39AB4 8005E6B4 AC800000 */  sw        $zero, ($a0)
