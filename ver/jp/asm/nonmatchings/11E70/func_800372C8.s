@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel func_800372C8
-/* 126C8 800372C8 3C028007 */  lui       $v0, %hi(D_8007417C)
-/* 126CC 800372CC 8C42417C */  lw        $v0, %lo(D_8007417C)($v0)
+/* 126C8 800372C8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 126CC 800372CC 8C42417C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 126D0 800372D0 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 126D4 800372D4 AFBF0030 */  sw        $ra, 0x30($sp)
 /* 126D8 800372D8 AFB7002C */  sw        $s7, 0x2c($sp)
@@ -23,8 +23,8 @@ glabel func_800372C8
 /* 12710 80037310 8C2283C0 */  lw        $v0, %lo(D_800983C0)($at)
 /* 12714 80037314 00400008 */  jr        $v0
 /* 12718 80037318 00000000 */   nop
-/* 1271C 8003731C 3C028007 */  lui       $v0, %hi(D_8007417C)
-/* 12720 80037320 8C42417C */  lw        $v0, %lo(D_8007417C)($v0)
+/* 1271C 8003731C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 12720 80037320 8C42417C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 12724 80037324 804300AF */  lb        $v1, 0xaf($v0)
 /* 12728 80037328 804200B0 */  lb        $v0, 0xb0($v0)
 /* 1272C 8003732C 44836000 */  mtc1      $v1, $f12
@@ -41,8 +41,8 @@ glabel func_800372C8
 /* 12758 80037358 44806000 */  mtc1      $zero, $f12
 /* 1275C 8003735C 0800DCE8 */  j         .L800373A0
 /* 12760 80037360 00000000 */   nop
-/* 12764 80037364 3C038007 */  lui       $v1, %hi(D_8007417C)
-/* 12768 80037368 8C63417C */  lw        $v1, %lo(D_8007417C)($v1)
+/* 12764 80037364 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 12768 80037368 8C63417C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 1276C 8003736C 806200AF */  lb        $v0, 0xaf($v1)
 /* 12770 80037370 806300B0 */  lb        $v1, 0xb0($v1)
 /* 12774 80037374 2442FFFF */  addiu     $v0, $v0, -1

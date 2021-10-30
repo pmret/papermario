@@ -2,6 +2,7 @@
 #include "ld_addrs.h"
 #include "battle.h"
 #include "hud_element.h"
+#include "sprite.h"
 
 extern s32 D_800DC060;
 extern Stage* D_800DC064;

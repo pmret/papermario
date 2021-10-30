@@ -1,7 +1,7 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
-s32 N(UnkFunc28)(Npc* npc);
+void N(UnkFunc28)(Npc* npc);
 
 ApiStatus N(UnkFunc31)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
@@ -18,7 +18,7 @@ ApiStatus N(GetNpcUnsafeOwner2)(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-s32 N(UnkFunc28)(Npc* npc) {
+void N(UnkFunc28)(Npc* npc) {
     Camera* camera = &gCameras[gCurrentCamID];
 
     if (*((s32*)npc->blurBuf) & 1) {

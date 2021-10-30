@@ -4,8 +4,8 @@
 glabel func_8002B290
 /* 6690 8002B290 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 6694 8002B294 AFB20018 */  sw        $s2, 0x18($sp)
-/* 6698 8002B298 3C128007 */  lui       $s2, %hi(D_8007417C)
-/* 669C 8002B29C 2652417C */  addiu     $s2, $s2, %lo(D_8007417C)
+/* 6698 8002B298 3C128007 */  lui       $s2, %hi(gGameStatusPtr)
+/* 669C 8002B29C 2652417C */  addiu     $s2, $s2, %lo(gGameStatusPtr)
 /* 66A0 8002B2A0 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 66A4 8002B2A4 AFB10014 */  sw        $s1, 0x14($sp)
 /* 66A8 8002B2A8 AFB00010 */  sw        $s0, 0x10($sp)

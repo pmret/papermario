@@ -1,5 +1,6 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
+#include "model.h"
 
 typedef struct FoliageModelList {
     s32 count;

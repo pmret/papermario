@@ -2,7 +2,7 @@
 
 #define NAMESPACE b_area_kzn
 
-INCLUDE_ASM(s32, "battle/area_kzn/58C2F0", func_80218000_58C2F0);
+#include "common/UnkSfxFunc.inc.c"
 
 #include "common/UnkBattleFunc1.inc.c"
 

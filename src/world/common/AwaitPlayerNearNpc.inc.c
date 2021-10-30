@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 ApiStatus N(func_80240814_97BE44)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(script->owner2.npcID);

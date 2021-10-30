@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 // Same as UnkFloatFunc with an extra abs on diff
 ApiStatus N(UnkFloatFuncAbs)(Evt* script, s32 isInitialCall) {

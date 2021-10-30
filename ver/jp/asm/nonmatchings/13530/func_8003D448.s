@@ -5,8 +5,8 @@ glabel func_8003D448
 /* 18848 8003D448 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* 1884C 8003D44C AFB00030 */  sw        $s0, 0x30($sp)
 /* 18850 8003D450 0080802D */  daddu     $s0, $a0, $zero
-/* 18854 8003D454 3C038007 */  lui       $v1, %hi(D_8007417C)
-/* 18858 8003D458 8C63417C */  lw        $v1, %lo(D_8007417C)($v1)
+/* 18854 8003D454 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
+/* 18858 8003D458 8C63417C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 1885C 8003D45C AFBF0038 */  sw        $ra, 0x38($sp)
 /* 18860 8003D460 AFB10034 */  sw        $s1, 0x34($sp)
 /* 18864 8003D464 84620086 */  lh        $v0, 0x86($v1)

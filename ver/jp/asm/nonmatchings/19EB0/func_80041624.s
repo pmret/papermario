@@ -59,8 +59,8 @@ glabel func_80041624
 /* 1CAF4 800416F4 4600C686 */  mov.s     $f26, $f24
 /* 1CAF8 800416F8 4600B706 */  mov.s     $f28, $f22
 .L800416FC:
-/* 1CAFC 800416FC 3C028007 */  lui       $v0, %hi(D_8007417C)
-/* 1CB00 80041700 8C42417C */  lw        $v0, %lo(D_8007417C)($v0)
+/* 1CAFC 800416FC 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 1CB00 80041700 8C42417C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 1CB04 80041704 80430071 */  lb        $v1, 0x71($v0)
 /* 1CB08 80041708 24020002 */  addiu     $v0, $zero, 2
 /* 1CB0C 8004170C 1462003C */  bne       $v1, $v0, .L80041800

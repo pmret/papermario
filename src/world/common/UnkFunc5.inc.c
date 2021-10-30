@@ -1,5 +1,5 @@
 #include "common.h"
-#include "map.h"
+#include "npc.h"
 
 void N(UnkFunc5)(Npc* npc, Enemy* enemy, Evt* script, NpcAISettings* aiSettings) {
     f32 posX, posY, posZ, posW;

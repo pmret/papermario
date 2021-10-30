@@ -103,31 +103,31 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cc} {cflags} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cc} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
         description="dsl $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {compile_script} | {iconv} > $out.i && {cc} {cflags} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {compile_script} | {iconv} > $out.i && {cc} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_ido",
         description="ido $in",
-        command=f"{ccache}{cc_ido} -w {CPPFLAGS_COMMON} {cppflags} -c -mips1 -O0 -G0 -non_shared -Xfullwarn -Xcpluscomm -o $out $in",
+        command=f"{ccache}{cc_ido} -w {CPPFLAGS_COMMON} {cppflags} $cppflags -c -mips1 -O0 -G0 -non_shared -Xfullwarn -Xcpluscomm -o $out $in",
     )
 
     ninja.rule("cc_kmc",
         description="kmc $in",
-        command=f"bash -o pipefail -c 'N64ALIGN=ON VR4300MUL=ON {cc_kmc} {CPPFLAGS_LIBULTRA} {cppflags} {kmc_cflags} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out'",
+        command=f"bash -o pipefail -c 'N64ALIGN=ON VR4300MUL=ON {cc_kmc} {CPPFLAGS_LIBULTRA} {cppflags} $cppflags {kmc_cflags} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out'",
     )
 
     ninja.rule("cxx",
         description="cxx $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cxx} {cflags} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cxx} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -254,7 +254,7 @@ class Configure:
             None,
             str(self.version_path / "baserom.z64"),
             modes,
-            verbose=True,
+            verbose=False,
         )
         self.linker_entries = split.linker_writer.entries[:]
         self.asset_stack = split.config["asset_stack"]
@@ -398,7 +398,10 @@ class Configure:
 
                 cflags = cflags.replace("kmc", "")
 
-                build(entry.object_path, entry.src_paths, task, variables={"cflags": cflags})
+                build(entry.object_path, entry.src_paths, task, variables={
+                    "cflags": cflags,
+                    "cppflags": f"-DVERSION_{self.version.upper()}",
+                })
 
                 # images embedded inside data aren't linked, but they do need to be built into .inc.c files
                 if isinstance(seg, segtypes.common.group.CommonSegGroup):

@@ -176,7 +176,6 @@ void btl_set_popup_duration(s32 duration) {
     }
 }
 #else
-void btl_set_popup_duration(s32 duration);
 INCLUDE_ASM(void, "17D6A0", btl_set_popup_duration);
 #endif
 
