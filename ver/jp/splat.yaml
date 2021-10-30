@@ -34,7 +34,7 @@ segments:
     subsegments:
     - [0x1000, hasm, entry_point]
     - [0x1060, c, is_debug]
-    - [0x1370, c, 1370_len_7d0]
+    - [0x1370, c, main]
     - [0x1B10, c, jp/1B10] # 1B40
     - [0x2570, c, jp/2570]
     - [0x3BC0, c, jp/3BC0]

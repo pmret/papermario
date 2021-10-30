@@ -102,7 +102,7 @@ void gfxRetrace_Callback(s32 arg0) {
     }
 }
 #else
-INCLUDE_ASM(s32, "1370", gfxRetrace_Callback);
+INCLUDE_ASM(s32, "main", gfxRetrace_Callback);
 #endif
 
 //gfx stuff
@@ -179,9 +179,9 @@ void gfx_task_main(void) {
 }
 #else
     #ifdef VERSION_US
-INCLUDE_ASM(void, "1370_len_7d0", gfx_task_main);
+INCLUDE_ASM(void, "main", gfx_task_main);
     #else
-INCLUDE_ASM(s32, "1370", func_80026148);
+INCLUDE_ASM(s32, "main", func_80026148);
     #endif
 #endif
 
