@@ -595,8 +595,8 @@ s8 check_conversation_trigger(void) {
         playerStatus->flags |= 0x2000000;
         if (playerStatus->pressedButtons & BUTTON_A) {
             close_status_menu();
-            gCurrentEncounter.hitType = 5;
-            enemy->encountered = 5;
+            gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_CONVERSATION;
+            enemy->encountered = ENCOUNTER_TRIGGER_CONVERSATION;
             encounterStatus->currentEncounter = encounter;
             encounterStatus->currentEnemy = enemy;
             encounterStatus->eFirstStrike = FIRST_STRIKE_PLAYER;
