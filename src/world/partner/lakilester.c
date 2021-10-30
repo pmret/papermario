@@ -23,7 +23,7 @@ s32 func_802BD7DC(void);
 s32 partner_use_ability(void);
 f32 get_player_normal_pitch(void);
 void partner_kill_ability_script(void);
-f64 fabs(f64 temp);
+f64 fabs(f64 val);
 
 extern f64 D_802BFEF8;
 
@@ -96,7 +96,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         partner_flying_enable(npc, 1);
         mem_clear(D_802BFE7C_3239CC, sizeof(*D_802BFE7C_3239CC));
-        D_8010C954 = 0;
+        D_8010C954 = NULL;
     }
 
     playerData->unk_2F4[8]++;
@@ -163,7 +163,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
 
             if (--D_802BFE7C_3239CC->unk_00 == 0) {
                 D_802BFE7C_3239CC->unk_04 = 0;
-                D_8010C954 = 0;
+                D_8010C954 = NULL;
             }
             break;
     }
@@ -173,9 +173,9 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
 void func_802BD678_3211C8(Npc* npc) {
     unkPartnerStruct* temp_v1;
 
-    if (D_8010C954 != 0) {
+    if (D_8010C954 != NULL) {
         temp_v1 = D_802BFE7C_3239CC;
-        D_8010C954 = 0;
+        D_8010C954 = NULL;
         npc->flags = temp_v1->unk_08;
         temp_v1->unk_04 = 0;
         partner_clear_player_tracking(npc);
@@ -192,7 +192,7 @@ void func_802BD6BC_32120C(f32* arg0, f32* arg1) {
     
     if (dist2D(0.0f, 0.0f, temp_f24, temp_f22) >= 1.0) {
         phi_f20 = 3.0f;
-        if ((temp_f24 * temp_f24) + (temp_f26 * temp_f26) > 3025.0f) {
+        if ((SQ(temp_f24)) + (SQ(temp_f26)) > 3025.0f) {
             phi_f20 = 6.0f;
         }
     }
@@ -214,7 +214,7 @@ s32 func_802BD7DC(void) {
     s32 ret;
 
     if (playerStatus->animFlags & 0x20000000) {
-        playerStatus->animFlags &= 0xDFFFFFFF;
+        playerStatus->animFlags &= ~0x20000000;
         return TRUE;
     }
 
@@ -679,7 +679,7 @@ void func_802BFA00_323550(Npc* npc) {
         partnerActionStatus->actionState.b[1] = 1;
         enable_player_static_collisions();
         enable_player_input();
-        set_action_state(0);
+        set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(npc);
     }
 
@@ -694,7 +694,7 @@ void func_802BFAA8_3235F8(Npc* npc) {
         if (D_802BFF0C != 0) {
             *npc = partnerActionStatus->npc;
             gGameStatusPtr->unk_7D = 1;
-            set_action_state(0x21);
+            set_action_state(ACTION_STATE_RIDE);
             partnerActionStatus->actionState.b[3] = 0;
             partnerActionStatus->actionState.b[0] = 0;
             disable_player_input();
@@ -739,7 +739,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
                 playerStatus->position.y = npc->pos.y + 10.0f;
                 partner_kill_ability_script();
             } else {
-                set_action_state(0x21);
+                set_action_state(ACTION_STATE_RIDE);
                 disable_player_static_collisions();
                 disable_player_input();
                 npc->moveToPos.x = npc->pos.x = playerStatus->position.x;
@@ -786,7 +786,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
             if (script->functionTemp[1] == 0) {
                 if (script->varTable[12] != 0) {
                     partnerActionStatus->actionState.b[1] = tempVar;
-                    set_action_state(0x21);
+                    set_action_state(ACTION_STATE_RIDE);
                     partnerActionStatus->actionState.b[3] = 0;
                     partnerActionStatus->actionState.b[0] = 0;
                     partner_use_ability();

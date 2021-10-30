@@ -18,7 +18,7 @@ typedef struct Unk80241440_2 {
     /* 0x38 */ f32 unk_38;
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ f32 unk_40;
-} Unk80241440_2; //sizeof 0x44
+} Unk80241440_2; //size = 0x44
 
 typedef struct Unk80241440 {
     /* 0x00 */ f32 unk_00;
@@ -39,7 +39,7 @@ typedef struct Unk80241440 {
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ Unk80241440_2* unk_40;
     /* 0x44 */ Unk80241440_2* unk_44;
-} Unk80241440; //sizeof 0x48
+} Unk80241440; //size = 0x48
 
 extern Unk80241440 D_802413F8_9EEFE8;
 extern s32 D_80241440_9EF030[12];
