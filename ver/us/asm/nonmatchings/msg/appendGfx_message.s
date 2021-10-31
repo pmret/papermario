@@ -100,8 +100,8 @@ glabel appendGfx_message
 /* BE494 80127D94 AFBE0108 */  sw        $fp, 0x108($sp)
 /* BE498 80127D98 0080F02D */  daddu     $fp, $a0, $zero
 /* BE49C 80127D9C AFB000E8 */  sw        $s0, 0xe8($sp)
-/* BE4A0 80127DA0 3C108015 */  lui       $s0, %hi(gMessageDrawStatePtr)
-/* BE4A4 80127DA4 26105D74 */  addiu     $s0, $s0, %lo(gMessageDrawStatePtr)
+/* BE4A0 80127DA0 3C108015 */  lui       $s0, %hi(msg_drawState)
+/* BE4A4 80127DA4 26105D74 */  addiu     $s0, $s0, %lo(msg_drawState)
 /* BE4A8 80127DA8 AFB100EC */  sw        $s1, 0xec($sp)
 /* BE4AC 80127DAC 8FB10154 */  lw        $s1, 0x154($sp)
 /* BE4B0 80127DB0 97B80152 */  lhu       $t8, 0x152($sp)
@@ -213,16 +213,16 @@ glabel appendGfx_message
 /* BE648 80127F48 37180400 */  ori       $t8, $t8, 0x400
 /* BE64C 80127F4C AFB900C4 */  sw        $t9, 0xc4($sp)
 /* BE650 80127F50 3C190701 */  lui       $t9, 0x701
-/* BE654 80127F54 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* BE658 80127F58 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* BE654 80127F54 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* BE658 80127F58 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* BE65C 80127F5C 37390050 */  ori       $t9, $t9, 0x50
 /* BE660 80127F60 A7A00080 */  sh        $zero, 0x80($sp)
 /* BE664 80127F64 AFB800C8 */  sw        $t8, 0xc8($sp)
 /* BE668 80127F68 AFB900CC */  sw        $t9, 0xcc($sp)
 /* BE66C 80127F6C AC400020 */  sw        $zero, 0x20($v0)
 .L80127F70:
-/* BE670 80127F70 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* BE674 80127F74 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* BE670 80127F70 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* BE674 80127F74 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* BE678 80127F78 8C62004C */  lw        $v0, 0x4c($v1)
 /* BE67C 80127F7C 8C630020 */  lw        $v1, 0x20($v1)
 /* BE680 80127F80 00431021 */  addu      $v0, $v0, $v1
@@ -237,8 +237,8 @@ glabel appendGfx_message
 /* BE6A4 80127FA4 00400008 */  jr        $v0
 /* BE6A8 80127FA8 00000000 */   nop
 glabel L80127FAC_BE6AC
-/* BE6AC 80127FAC 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* BE6B0 80127FB0 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* BE6AC 80127FAC 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* BE6B0 80127FB0 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* BE6B4 80127FB4 9482003C */  lhu       $v0, 0x3c($a0)
 /* BE6B8 80127FB8 A4800042 */  sh        $zero, 0x42($a0)
 /* BE6BC 80127FBC 00021080 */  sll       $v0, $v0, 2
@@ -274,8 +274,8 @@ glabel L80127FAC_BE6AC
 /* BE734 80128034 0804A9B1 */  j         L8012A6C4_C0DC4
 /* BE738 80128038 A4820034 */   sh       $v0, 0x34($a0)
 glabel L8012803C_BE73C
-/* BE73C 8012803C 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* BE740 80128040 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* BE73C 8012803C 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* BE740 80128040 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* BE744 80128044 8C83004C */  lw        $v1, 0x4c($a0)
 /* BE748 80128048 8C820020 */  lw        $v0, 0x20($a0)
 /* BE74C 8012804C 00621821 */  addu      $v1, $v1, $v0
@@ -286,8 +286,8 @@ glabel L8012803C_BE73C
 /* BE760 80128060 0804AFDC */  j         L8012BF70_C2670
 /* BE764 80128064 A483003E */   sh       $v1, 0x3e($a0)
 glabel L80128068_BE768
-/* BE768 80128068 3C078015 */  lui       $a3, %hi(gMessageDrawStatePtr)
-/* BE76C 8012806C 8CE75D74 */  lw        $a3, %lo(gMessageDrawStatePtr)($a3)
+/* BE768 80128068 3C078015 */  lui       $a3, %hi(msg_drawState)
+/* BE76C 8012806C 8CE75D74 */  lw        $a3, %lo(msg_drawState)($a3)
 /* BE770 80128070 8CE2004C */  lw        $v0, 0x4c($a3)
 /* BE774 80128074 8CE30020 */  lw        $v1, 0x20($a3)
 /* BE778 80128078 94E5003C */  lhu       $a1, 0x3c($a3)
@@ -301,8 +301,8 @@ glabel L80128068_BE768
 /* BE798 80128098 0804AFD2 */  j         .L8012BF48
 /* BE79C 8012809C 8CE70010 */   lw       $a3, 0x10($a3)
 glabel L801280A0_BE7A0
-/* BE7A0 801280A0 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* BE7A4 801280A4 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* BE7A0 801280A0 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* BE7A4 801280A4 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* BE7A8 801280A8 8C620020 */  lw        $v0, 0x20($v1)
 /* BE7AC 801280AC 8C63004C */  lw        $v1, 0x4c($v1)
 /* BE7B0 801280B0 00431021 */  addu      $v0, $v0, $v1
@@ -341,8 +341,8 @@ glabel L801280DC_BE7DC
 /* BE82C 8012812C 462C0002 */  mul.d     $f0, $f0, $f12
 /* BE830 80128130 00000000 */  nop
 /* BE834 80128134 97D50510 */  lhu       $s5, 0x510($fp)
-/* BE838 80128138 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* BE83C 8012813C 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* BE838 80128138 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* BE83C 8012813C 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* BE840 80128140 87C3045A */  lh        $v1, 0x45a($fp)
 /* BE844 80128144 97C20516 */  lhu       $v0, 0x516($fp)
 /* BE848 80128148 87C4045C */  lh        $a0, 0x45c($fp)
@@ -430,8 +430,8 @@ glabel L801280DC_BE7DC
 /* BE97C 8012827C 0804A0A7 */  j         .L8012829C
 /* BE980 80128280 A4A20048 */   sh       $v0, 0x48($a1)
 .L80128284:
-/* BE984 80128284 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* BE988 80128288 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* BE984 80128284 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* BE988 80128288 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* BE98C 8012828C 2403001A */  addiu     $v1, $zero, 0x1a
 /* BE990 80128290 A4430046 */  sh        $v1, 0x46($v0)
 /* BE994 80128294 24030006 */  addiu     $v1, $zero, 6
@@ -508,8 +508,8 @@ glabel L801280DC_BE7DC
 /* BEA88 80128388 2C420002 */  sltiu     $v0, $v0, 2
 /* BEA8C 8012838C 10400004 */  beqz      $v0, .L801283A0
 /* BEA90 80128390 24190001 */   addiu    $t9, $zero, 1
-/* BEA94 80128394 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* BEA98 80128398 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* BEA94 80128394 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* BEA98 80128398 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* BEA9C 8012839C A059002B */  sb        $t9, 0x2b($v0)
 .L801283A0:
 /* BEAA0 801283A0 93C204F8 */  lbu       $v0, 0x4f8($fp)
@@ -738,8 +738,8 @@ glabel L801280DC_BE7DC
 /* BEE10 80128710 4600E1A1 */  cvt.d.s   $f6, $f28
 /* BEE14 80128714 46203182 */  mul.d     $f6, $f6, $f0
 /* BEE18 80128718 00000000 */  nop
-/* BEE1C 8012871C 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* BEE20 80128720 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* BEE1C 8012871C 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* BEE20 80128720 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* BEE24 80128724 4600E30D */  trunc.w.s $f12, $f28
 /* BEE28 80128728 44046000 */  mfc1      $a0, $f12
 /* BEE2C 8012872C 00000000 */  nop
@@ -877,8 +877,8 @@ glabel L801280DC_BE7DC
 /* BF02C 8012892C 24190003 */  addiu     $t9, $zero, 3
 /* BF030 80128930 10590466 */  beq       $v0, $t9, .L80129ACC
 /* BF034 80128934 24020014 */   addiu    $v0, $zero, 0x14
-/* BF038 80128938 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* BF03C 8012893C 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* BF038 80128938 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* BF03C 8012893C 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* BF040 80128940 AC820000 */  sw        $v0, ($a0)
 /* BF044 80128944 87C30458 */  lh        $v1, 0x458($fp)
 /* BF048 80128948 87C5045C */  lh        $a1, 0x45c($fp)
@@ -898,11 +898,11 @@ glabel L8012897C_BF07C
 /* BF07C 8012897C 0000A82D */  daddu     $s5, $zero, $zero
 /* BF080 80128980 97D20514 */  lhu       $s2, 0x514($fp)
 /* BF084 80128984 97D30516 */  lhu       $s3, 0x516($fp)
-/* BF088 80128988 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* BF08C 8012898C 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* BF088 80128988 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* BF08C 8012898C 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* BF090 80128990 A040002B */  sb        $zero, 0x2b($v0)
-/* BF094 80128994 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* BF098 80128998 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* BF094 80128994 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* BF098 80128998 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* BF09C 8012899C 2402000C */  addiu     $v0, $zero, 0xc
 /* BF0A0 801289A0 A4620046 */  sh        $v0, 0x46($v1)
 /* BF0A4 801289A4 24020006 */  addiu     $v0, $zero, 6
@@ -1106,8 +1106,8 @@ glabel L8012897C_BF07C
 /* BF390 80128C90 0200282D */  daddu     $a1, $s0, $zero
 /* BF394 80128C94 0240302D */  daddu     $a2, $s2, $zero
 /* BF398 80128C98 24820002 */  addiu     $v0, $a0, 2
-/* BF39C 80128C9C 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* BF3A0 80128CA0 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* BF39C 80128C9C 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* BF3A0 80128CA0 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* BF3A4 80128CA4 0260382D */  daddu     $a3, $s3, $zero
 /* BF3A8 80128CA8 AC620000 */  sw        $v0, ($v1)
 /* BF3AC 80128CAC 24A20002 */  addiu     $v0, $a1, 2
@@ -1129,8 +1129,8 @@ glabel L8012897C_BF07C
 /* BF3EC 80128CEC AFA30014 */   sw       $v1, 0x14($sp)
 /* BF3F0 80128CF0 0C04B0B8 */  jal       msg_reset_gfx_state
 /* BF3F4 80128CF4 329400FF */   andi     $s4, $s4, 0xff
-/* BF3F8 80128CF8 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* BF3FC 80128CFC 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* BF3F8 80128CF8 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* BF3FC 80128CFC 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* BF400 80128D00 A7B400AE */  sh        $s4, 0xae($sp)
 /* BF404 80128D04 8C820020 */  lw        $v0, 0x20($a0)
 /* BF408 80128D08 94830034 */  lhu       $v1, 0x34($a0)
@@ -1142,8 +1142,8 @@ glabel L8012897C_BF07C
 /* BF420 80128D20 0804AFDC */  j         L8012BF70_C2670
 /* BF424 80128D24 A4830034 */   sh       $v1, 0x34($a0)
 glabel L80128D28_BF428
-/* BF428 80128D28 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* BF42C 80128D2C 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* BF428 80128D28 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* BF42C 80128D2C 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* BF430 80128D30 24020010 */  addiu     $v0, $zero, 0x10
 /* BF434 80128D34 24190003 */  addiu     $t9, $zero, 3
 /* BF438 80128D38 A4A20046 */  sh        $v0, 0x46($a1)
@@ -1259,8 +1259,8 @@ glabel L80128D28_BF428
 /* BF5E8 80128EE8 97C70516 */  lhu       $a3, 0x516($fp)
 /* BF5EC 80128EEC 24020006 */  addiu     $v0, $zero, 6
 /* BF5F0 80128EF0 AFA20010 */  sw        $v0, 0x10($sp)
-/* BF5F4 80128EF4 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* BF5F8 80128EF8 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* BF5F4 80128EF4 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* BF5F8 80128EF8 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* BF5FC 80128EFC 9043002B */  lbu       $v1, 0x2b($v0)
 /* BF600 80128F00 320200FF */  andi      $v0, $s0, 0xff
 /* BF604 80128F04 AFB10018 */  sw        $s1, 0x18($sp)
@@ -1270,16 +1270,16 @@ glabel L80128D28_BF428
 /* BF614 80128F14 AFA30014 */   sw       $v1, 0x14($sp)
 /* BF618 80128F18 0C04B0B8 */  jal       msg_reset_gfx_state
 /* BF61C 80128F1C 321000FF */   andi     $s0, $s0, 0xff
-/* BF620 80128F20 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* BF624 80128F24 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* BF620 80128F20 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* BF624 80128F24 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* BF628 80128F28 8C620020 */  lw        $v0, 0x20($v1)
 /* BF62C 80128F2C 0804AAD4 */  j         .L8012AB50
 /* BF630 80128F30 A7B000AE */   sh       $s0, 0xae($sp)
 glabel L80128F34_BF634
 /* BF634 80128F34 24020012 */  addiu     $v0, $zero, 0x12
 /* BF638 80128F38 2404001C */  addiu     $a0, $zero, 0x1c
-/* BF63C 80128F3C 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* BF640 80128F40 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* BF63C 80128F3C 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* BF640 80128F40 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* BF644 80128F44 A4620046 */  sh        $v0, 0x46($v1)
 /* BF648 80128F48 2402000B */  addiu     $v0, $zero, 0xb
 /* BF64C 80128F4C A4620048 */  sh        $v0, 0x48($v1)
@@ -1298,8 +1298,8 @@ glabel L80128F34_BF634
 /* BF680 80128F80 2739C770 */  addiu     $t9, $t9, %lo(D_802EC770)
 /* BF684 80128F84 3C16802F */  lui       $s6, %hi(D_802ECD10)
 /* BF688 80128F88 26D6CD10 */  addiu     $s6, $s6, %lo(D_802ECD10)
-/* BF68C 80128F8C 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* BF690 80128F90 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* BF68C 80128F8C 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* BF690 80128F90 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* BF694 80128F94 24020048 */  addiu     $v0, $zero, 0x48
 /* BF698 80128F98 AFB900C0 */  sw        $t9, 0xc0($sp)
 /* BF69C 80128F9C A7C20516 */  sh        $v0, 0x516($fp)
@@ -1309,16 +1309,16 @@ glabel L80128F34_BF634
 .L80128FAC:
 /* BF6AC 80128FAC 3C18802F */  lui       $t8, %hi(D_802EC7F0)
 /* BF6B0 80128FB0 2718C7F0 */  addiu     $t8, $t8, %lo(D_802EC7F0)
-/* BF6B4 80128FB4 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* BF6B8 80128FB8 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* BF6B4 80128FB4 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* BF6B8 80128FB8 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* BF6BC 80128FBC 3C16802F */  lui       $s6, %hi(D_802ECD30)
 /* BF6C0 80128FC0 26D6CD30 */  addiu     $s6, $s6, %lo(D_802ECD30)
 /* BF6C4 80128FC4 AFB800C0 */  sw        $t8, 0xc0($sp)
 /* BF6C8 80128FC8 A444004A */  sh        $a0, 0x4a($v0)
 .L80128FCC:
 /* BF6CC 80128FCC 24020022 */  addiu     $v0, $zero, 0x22
-/* BF6D0 80128FD0 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* BF6D4 80128FD4 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* BF6D0 80128FD0 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* BF6D4 80128FD4 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* BF6D8 80128FD8 24190002 */  addiu     $t9, $zero, 2
 /* BF6DC 80128FDC AC820000 */  sw        $v0, ($a0)
 /* BF6E0 80128FE0 24020028 */  addiu     $v0, $zero, 0x28
@@ -1780,8 +1780,8 @@ glabel L801296EC_BFDEC
 /* BFDF4 801296F4 24050020 */  addiu     $a1, $zero, 0x20
 /* BFDF8 801296F8 2402000C */  addiu     $v0, $zero, 0xc
 /* BFDFC 801296FC 00A0302D */  daddu     $a2, $a1, $zero
-/* BFE00 80129700 3C078015 */  lui       $a3, %hi(gMessageDrawStatePtr)
-/* BFE04 80129704 8CE75D74 */  lw        $a3, %lo(gMessageDrawStatePtr)($a3)
+/* BFE00 80129700 3C078015 */  lui       $a3, %hi(msg_drawState)
+/* BFE04 80129704 8CE75D74 */  lw        $a3, %lo(msg_drawState)($a3)
 /* BFE08 80129708 2411002B */  addiu     $s1, $zero, 0x2b
 /* BFE0C 8012970C 24180005 */  addiu     $t8, $zero, 5
 /* BFE10 80129710 A4E20046 */  sh        $v0, 0x46($a3)
@@ -1806,8 +1806,8 @@ glabel L801296EC_BFDEC
 /* BFE5C 8012975C 2442FFEC */  addiu     $v0, $v0, -0x14
 /* BFE60 80129760 A7C20484 */  sh        $v0, 0x484($fp)
 /* BFE64 80129764 A0E0002B */  sb        $zero, 0x2b($a3)
-/* BFE68 80129768 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* BFE6C 8012976C 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* BFE68 80129768 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* BFE6C 8012976C 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* BFE70 80129770 0000382D */  daddu     $a3, $zero, $zero
 /* BFE74 80129774 A440004A */  sh        $zero, 0x4a($v0)
 /* BFE78 80129778 2402001B */  addiu     $v0, $zero, 0x1b
@@ -1874,8 +1874,8 @@ glabel L801296EC_BFDEC
 /* BFF60 80129860 2405001C */  addiu     $a1, $zero, 0x1c
 /* BFF64 80129864 240600F0 */  addiu     $a2, $zero, 0xf0
 /* BFF68 80129868 24020006 */  addiu     $v0, $zero, 6
-/* BFF6C 8012986C 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* BFF70 80129870 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* BFF6C 8012986C 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* BFF70 80129870 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* BFF74 80129874 2407003A */  addiu     $a3, $zero, 0x3a
 /* BFF78 80129878 AFA20010 */  sw        $v0, 0x10($sp)
 /* BFF7C 8012987C 9062002B */  lbu       $v0, 0x2b($v1)
@@ -1928,14 +1928,14 @@ glabel L801296EC_BFDEC
 /* C0038 80129938 24070002 */   addiu    $a3, $zero, 2
 /* C003C 8012993C 0C04B0B8 */  jal       msg_reset_gfx_state
 /* C0040 80129940 327300FF */   andi     $s3, $s3, 0xff
-/* C0044 80129944 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C0048 80129948 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C0044 80129944 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C0048 80129948 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C004C 8012994C 8C620020 */  lw        $v0, 0x20($v1)
 /* C0050 80129950 0804AAD4 */  j         .L8012AB50
 /* C0054 80129954 A7B300AE */   sh       $s3, 0xae($sp)
 glabel L80129958_C0058
-/* C0058 80129958 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C005C 8012995C 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C0058 80129958 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C005C 8012995C 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C0060 80129960 94640034 */  lhu       $a0, 0x34($v1)
 /* C0064 80129964 24020010 */  addiu     $v0, $zero, 0x10
 /* C0068 80129968 A4620046 */  sh        $v0, 0x46($v1)
@@ -1994,8 +1994,8 @@ glabel L80129958_C0058
 /* C0138 80129A38 0804A6B3 */  j         .L80129ACC
 /* C013C 80129A3C 00000000 */   nop
 glabel L80129A40_C0140
-/* C0140 80129A40 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C0144 80129A44 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C0140 80129A40 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C0144 80129A44 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C0148 80129A48 2402003C */  addiu     $v0, $zero, 0x3c
 /* C014C 80129A4C A7C2045A */  sh        $v0, 0x45a($fp)
 /* C0150 80129A50 2402006E */  addiu     $v0, $zero, 0x6e
@@ -2039,8 +2039,8 @@ glabel L80129ADC_C01DC
 /* C01E0 80129AE0 2402000C */  addiu     $v0, $zero, 0xc
 /* C01E4 80129AE4 1462000A */  bne       $v1, $v0, .L80129B10
 /* C01E8 80129AE8 2402000B */   addiu    $v0, $zero, 0xb
-/* C01EC 80129AEC 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C01F0 80129AF0 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C01EC 80129AEC 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C01F0 80129AF0 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C01F4 80129AF4 93C30487 */  lbu       $v1, 0x487($fp)
 /* C01F8 80129AF8 90420050 */  lbu       $v0, 0x50($v0)
 /* C01FC 80129AFC 0043102B */  sltu      $v0, $v0, $v1
@@ -2059,8 +2059,8 @@ glabel L80129ADC_C01DC
 /* C022C 80129B2C 0043102A */  slt       $v0, $v0, $v1
 /* C0230 80129B30 10400009 */  beqz      $v0, .L80129B58
 /* C0234 80129B34 00A0182D */   daddu    $v1, $a1, $zero
-/* C0238 80129B38 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C023C 80129B3C 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0238 80129B38 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C023C 80129B3C 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0240 80129B40 90420050 */  lbu       $v0, 0x50($v0)
 /* C0244 80129B44 0045102B */  sltu      $v0, $v0, $a1
 /* C0248 80129B48 14400025 */  bnez      $v0, .L80129BE0
@@ -2068,8 +2068,8 @@ glabel L80129ADC_C01DC
 /* C0250 80129B50 0804A6F8 */  j         .L80129BE0
 /* C0254 80129B54 A7B90080 */   sh       $t9, 0x80($sp)
 .L80129B58:
-/* C0258 80129B58 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C025C 80129B5C 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0258 80129B58 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C025C 80129B5C 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0260 80129B60 90440050 */  lbu       $a0, 0x50($v0)
 /* C0264 80129B64 0064102B */  sltu      $v0, $v1, $a0
 /* C0268 80129B68 10400003 */  beqz      $v0, .L80129B78
@@ -2106,8 +2106,8 @@ glabel L80129ADC_C01DC
 /* C02D8 80129BD8 04420001 */  bltzl     $v0, .L80129BE0
 /* C02DC 80129BDC A7A0008E */   sh       $zero, 0x8e($sp)
 .L80129BE0:
-/* C02E0 80129BE0 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C02E4 80129BE4 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C02E0 80129BE0 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C02E4 80129BE4 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C02E8 80129BE8 90620050 */  lbu       $v0, 0x50($v1)
 /* C02EC 80129BEC 24420001 */  addiu     $v0, $v0, 1
 /* C02F0 80129BF0 0804A9B1 */  j         L8012A6C4_C0DC4
@@ -2117,8 +2117,8 @@ glabel L80129BF8_C02F8
 /* C02FC 80129BFC 0804AFDC */  j         L8012BF70_C2670
 /* C0300 80129C00 A7B80080 */   sh       $t8, 0x80($sp)
 glabel L80129C04_C0304
-/* C0304 80129C04 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C0308 80129C08 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C0304 80129C04 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C0308 80129C08 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C030C 80129C0C 8C620020 */  lw        $v0, 0x20($v1)
 /* C0310 80129C10 8C64004C */  lw        $a0, 0x4c($v1)
 /* C0314 80129C14 24420001 */  addiu     $v0, $v0, 1
@@ -2134,8 +2134,8 @@ glabel L80129C04_C0304
 /* C033C 80129C3C 00400008 */  jr        $v0
 /* C0340 80129C40 00000000 */   nop
 glabel L80129C44_C0344
-/* C0344 80129C44 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C0348 80129C48 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C0344 80129C44 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C0348 80129C48 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C034C 80129C4C 8C820020 */  lw        $v0, 0x20($a0)
 /* C0350 80129C50 8C83004C */  lw        $v1, 0x4c($a0)
 /* C0354 80129C54 00431021 */  addu      $v0, $v0, $v1
@@ -2149,8 +2149,8 @@ glabel L80129C44_C0344
 /* C0374 80129C74 0804AFDC */  j         L8012BF70_C2670
 /* C0378 80129C78 A485003C */   sh       $a1, 0x3c($a0)
 glabel L80129C7C_C037C
-/* C037C 80129C7C 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C0380 80129C80 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C037C 80129C7C 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C0380 80129C80 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C0384 80129C84 8C830020 */  lw        $v1, 0x20($a0)
 /* C0388 80129C88 8C82004C */  lw        $v0, 0x4c($a0)
 /* C038C 80129C8C 00621821 */  addu      $v1, $v1, $v0
@@ -2161,8 +2161,8 @@ glabel L80129C7C_C037C
 /* C03A0 80129CA0 0804AFDC */  j         L8012BF70_C2670
 /* C03A4 80129CA4 A483003E */   sh       $v1, 0x3e($a0)
 glabel L80129CA8_C03A8
-/* C03A8 80129CA8 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C03AC 80129CAC 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C03A8 80129CA8 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C03AC 80129CAC 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C03B0 80129CB0 8C820020 */  lw        $v0, 0x20($a0)
 /* C03B4 80129CB4 8C83004C */  lw        $v1, 0x4c($a0)
 /* C03B8 80129CB8 00431021 */  addu      $v0, $v0, $v1
@@ -2176,8 +2176,8 @@ glabel L80129CA8_C03A8
 /* C03D8 80129CD8 0804AFDC */  j         L8012BF70_C2670
 /* C03DC 80129CDC A485004A */   sh       $a1, 0x4a($a0)
 glabel L80129CE0_C03E0
-/* C03E0 80129CE0 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C03E4 80129CE4 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C03E0 80129CE0 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C03E4 80129CE4 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C03E8 80129CE8 8C820020 */  lw        $v0, 0x20($a0)
 /* C03EC 80129CEC 8C83004C */  lw        $v1, 0x4c($a0)
 /* C03F0 80129CF0 00431021 */  addu      $v0, $v0, $v1
@@ -2185,8 +2185,8 @@ glabel L80129CE0_C03E0
 /* C03F8 80129CF8 0804AAD1 */  j         L8012AB44_C1244
 /* C03FC 80129CFC A0820040 */   sb       $v0, 0x40($a0)
 glabel L80129D00_C0400
-/* C0400 80129D00 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C0404 80129D04 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C0400 80129D00 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C0404 80129D04 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C0408 80129D08 8C820020 */  lw        $v0, 0x20($a0)
 /* C040C 80129D0C 8C83004C */  lw        $v1, 0x4c($a0)
 /* C0410 80129D10 00431021 */  addu      $v0, $v0, $v1
@@ -2270,8 +2270,8 @@ glabel L80129E38_C0538
 /* C0538 80129E38 3C06E300 */  lui       $a2, 0xe300
 /* C053C 80129E3C 34C61201 */  ori       $a2, $a2, 0x1201
 /* C0540 80129E40 8EE20000 */  lw        $v0, ($s7)
-/* C0544 80129E44 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C0548 80129E48 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C0544 80129E44 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C0548 80129E48 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C054C 80129E4C 0040282D */  daddu     $a1, $v0, $zero
 /* C0550 80129E50 24420008 */  addiu     $v0, $v0, 8
 /* C0554 80129E54 8C830020 */  lw        $v1, 0x20($a0)
@@ -2287,8 +2287,8 @@ glabel L80129E38_C0538
 /* C057C 80129E7C 0804AFDC */  j         L8012BF70_C2670
 /* C0580 80129E80 ACA20004 */   sw       $v0, 4($a1)
 glabel L80129E84_C0584
-/* C0584 80129E84 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C0588 80129E88 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C0584 80129E84 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C0588 80129E88 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C058C 80129E8C 8CA30020 */  lw        $v1, 0x20($a1)
 /* C0590 80129E90 8CA2004C */  lw        $v0, 0x4c($a1)
 /* C0594 80129E94 00621821 */  addu      $v1, $v1, $v0
@@ -2302,8 +2302,8 @@ glabel L80129E84_C0584
 /* C05B4 80129EB4 0804AFDC */  j         L8012BF70_C2670
 /* C05B8 80129EB8 A4A30042 */   sh       $v1, 0x42($a1)
 glabel L80129EBC_C05BC
-/* C05BC 80129EBC 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C05C0 80129EC0 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C05BC 80129EBC 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C05C0 80129EC0 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C05C4 80129EC4 8C830020 */  lw        $v1, 0x20($a0)
 /* C05C8 80129EC8 8C82004C */  lw        $v0, 0x4c($a0)
 /* C05CC 80129ECC 00621821 */  addu      $v1, $v1, $v0
@@ -2312,8 +2312,8 @@ glabel L80129EBC_C05BC
 /* C05D8 80129ED8 0804A7DA */  j         .L80129F68
 /* C05DC 80129EDC 24420002 */   addiu    $v0, $v0, 2
 glabel L80129EE0_C05E0
-/* C05E0 80129EE0 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C05E4 80129EE4 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C05E0 80129EE0 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C05E4 80129EE4 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C05E8 80129EE8 8C820020 */  lw        $v0, 0x20($a0)
 /* C05EC 80129EEC 8C83004C */  lw        $v1, 0x4c($a0)
 /* C05F0 80129EF0 00431021 */  addu      $v0, $v0, $v1
@@ -2326,8 +2326,8 @@ glabel L80129EE0_C05E0
 /* C060C 80129F0C 0804AFDC */  j         L8012BF70_C2670
 /* C0610 80129F10 A4830042 */   sh       $v1, 0x42($a0)
 glabel L80129F14_C0614
-/* C0614 80129F14 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C0618 80129F18 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C0614 80129F14 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C0618 80129F18 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C061C 80129F1C 8C820020 */  lw        $v0, 0x20($a0)
 /* C0620 80129F20 8C83004C */  lw        $v1, 0x4c($a0)
 /* C0624 80129F24 00431021 */  addu      $v0, $v0, $v1
@@ -2338,8 +2338,8 @@ glabel L80129F14_C0614
 /* C0638 80129F38 0804A7DA */  j         .L80129F68
 /* C063C 80129F3C 00651821 */   addu     $v1, $v1, $a1
 glabel L80129F40_C0640
-/* C0640 80129F40 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C0644 80129F44 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C0640 80129F40 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C0644 80129F44 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C0648 80129F48 8C820020 */  lw        $v0, 0x20($a0)
 /* C064C 80129F4C 8C83004C */  lw        $v1, 0x4c($a0)
 /* C0650 80129F50 00431021 */  addu      $v0, $v0, $v1
@@ -2353,8 +2353,8 @@ glabel L80129F40_C0640
 /* C066C 80129F6C 0804AFDC */  j         L8012BF70_C2670
 /* C0670 80129F70 A4830044 */   sh       $v1, 0x44($a0)
 glabel L80129F74_C0674
-/* C0674 80129F74 3C0B8015 */  lui       $t3, %hi(gMessageDrawStatePtr)
-/* C0678 80129F78 8D6B5D74 */  lw        $t3, %lo(gMessageDrawStatePtr)($t3)
+/* C0674 80129F74 3C0B8015 */  lui       $t3, %hi(msg_drawState)
+/* C0678 80129F78 8D6B5D74 */  lw        $t3, %lo(msg_drawState)($t3)
 /* C067C 80129F7C 8D620020 */  lw        $v0, 0x20($t3)
 /* C0680 80129F80 8D63004C */  lw        $v1, 0x4c($t3)
 /* C0684 80129F84 00431021 */  addu      $v0, $v0, $v1
@@ -2430,8 +2430,8 @@ glabel L80129F74_C0674
 /* C0798 8012A098 8D840000 */  lw        $a0, ($t4)
 /* C079C 8012A09C 0C04BA68 */  jal       draw_ci_image_with_clipping
 /* C07A0 8012A0A0 8D87000C */   lw       $a3, 0xc($t4)
-/* C07A4 8012A0A4 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C07A8 8012A0A8 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C07A4 8012A0A4 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C07A8 8012A0A8 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C07AC 8012A0AC 94820034 */  lhu       $v0, 0x34($a0)
 /* C07B0 8012A0B0 8C830020 */  lw        $v1, 0x20($a0)
 /* C07B4 8012A0B4 34420012 */  ori       $v0, $v0, 0x12
@@ -2456,8 +2456,8 @@ glabel L8012A0C8_C07C8
 /* C07FC 8012A0FC 4620030D */  trunc.w.d $f12, $f0
 /* C0800 8012A100 44106000 */  mfc1      $s0, $f12
 .L8012A104:
-/* C0804 8012A104 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0808 8012A108 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0804 8012A104 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0808 8012A108 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C080C 8012A10C 8C430020 */  lw        $v1, 0x20($v0)
 /* C0810 8012A110 8C42004C */  lw        $v0, 0x4c($v0)
 /* C0814 8012A114 27A40050 */  addiu     $a0, $sp, 0x50
@@ -2470,8 +2470,8 @@ glabel L8012A0C8_C07C8
 /* C0830 8012A130 00A22825 */   or       $a1, $a1, $v0
 /* C0834 8012A134 104000FA */  beqz      $v0, .L8012A520
 /* C0838 8012A138 00000000 */   nop
-/* C083C 8012A13C 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C0840 8012A140 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C083C 8012A13C 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C0840 8012A140 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C0844 8012A144 97C6045A */  lhu       $a2, 0x45a($fp)
 /* C0848 8012A148 97C8045C */  lhu       $t0, 0x45c($fp)
 /* C084C 8012A14C 97B90066 */  lhu       $t9, 0x66($sp)
@@ -2520,8 +2520,8 @@ glabel L8012A0C8_C07C8
 /* C08F8 8012A1F8 8FA6005C */  lw        $a2, 0x5c($sp)
 /* C08FC 8012A1FC 0C04BA68 */  jal       draw_ci_image_with_clipping
 /* C0900 8012A200 24070002 */   addiu    $a3, $zero, 2
-/* C0904 8012A204 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C0908 8012A208 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C0904 8012A204 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C0908 8012A208 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C090C 8012A20C 94620034 */  lhu       $v0, 0x34($v1)
 /* C0910 8012A210 34420010 */  ori       $v0, $v0, 0x10
 /* C0914 8012A214 0804A948 */  j         .L8012A520
@@ -2549,8 +2549,8 @@ glabel L8012A21C_C091C
 .L8012A268:
 /* C0968 8012A268 3C048016 */  lui       $a0, %hi(D_80159B50)
 /* C096C 8012A26C 24849B50 */  addiu     $a0, $a0, %lo(D_80159B50)
-/* C0970 8012A270 3C088015 */  lui       $t0, %hi(gMessageDrawStatePtr)
-/* C0974 8012A274 8D085D74 */  lw        $t0, %lo(gMessageDrawStatePtr)($t0)
+/* C0970 8012A270 3C088015 */  lui       $t0, %hi(msg_drawState)
+/* C0974 8012A274 8D085D74 */  lw        $t0, %lo(msg_drawState)($t0)
 /* C0978 8012A278 97C6045A */  lhu       $a2, 0x45a($fp)
 /* C097C 8012A27C 97C9045C */  lhu       $t1, 0x45c($fp)
 /* C0980 8012A280 97B90066 */  lhu       $t9, 0x66($sp)
@@ -2599,15 +2599,15 @@ glabel L8012A21C_C091C
 /* C0A2C 8012A32C 3063FFFF */  andi      $v1, $v1, 0xffff
 /* C0A30 8012A330 0C04BA68 */  jal       draw_ci_image_with_clipping
 /* C0A34 8012A334 AFA3002C */   sw       $v1, 0x2c($sp)
-/* C0A38 8012A338 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C0A3C 8012A33C 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C0A38 8012A338 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C0A3C 8012A33C 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C0A40 8012A340 94620034 */  lhu       $v0, 0x34($v1)
 /* C0A44 8012A344 34420010 */  ori       $v0, $v0, 0x10
 /* C0A48 8012A348 0804A9B1 */  j         L8012A6C4_C0DC4
 /* C0A4C 8012A34C A4620034 */   sh       $v0, 0x34($v1)
 glabel L8012A350_C0A50
-/* C0A50 8012A350 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0A54 8012A354 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0A50 8012A350 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0A54 8012A354 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0A58 8012A358 8C430020 */  lw        $v1, 0x20($v0)
 /* C0A5C 8012A35C 8C42004C */  lw        $v0, 0x4c($v0)
 /* C0A60 8012A360 00622821 */  addu      $a1, $v1, $v0
@@ -2632,14 +2632,14 @@ glabel L8012A350_C0A50
 /* C0AA4 8012A3A4 03C72821 */  addu      $a1, $fp, $a3
 /* C0AA8 8012A3A8 24090012 */  addiu     $t1, $zero, 0x12
 /* C0AAC 8012A3AC 0080302D */  daddu     $a2, $a0, $zero
-/* C0AB0 8012A3B0 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0AB4 8012A3B4 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0AB0 8012A3B0 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0AB4 8012A3B4 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0AB8 8012A3B8 24080013 */  addiu     $t0, $zero, 0x13
 .L8012A3BC:
 /* C0ABC 8012A3BC 8C440020 */  lw        $a0, 0x20($v0)
 .L8012A3C0:
-/* C0AC0 8012A3C0 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0AC4 8012A3C4 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0AC0 8012A3C0 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0AC4 8012A3C4 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0AC8 8012A3C8 8C42004C */  lw        $v0, 0x4c($v0)
 /* C0ACC 8012A3CC 00821821 */  addu      $v1, $a0, $v0
 /* C0AD0 8012A3D0 9062FFFF */  lbu       $v0, -1($v1)
@@ -2659,8 +2659,8 @@ glabel L8012A350_C0A50
 /* C0B08 8012A408 0804A929 */  j         .L8012A4A4
 /* C0B0C 8012A40C 24840004 */   addiu    $a0, $a0, 4
 .L8012A410:
-/* C0B10 8012A410 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0B14 8012A414 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0B10 8012A410 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0B14 8012A414 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0B18 8012A418 8C42004C */  lw        $v0, 0x4c($v0)
 /* C0B1C 8012A41C 00441821 */  addu      $v1, $v0, $a0
 /* C0B20 8012A420 90620000 */  lbu       $v0, ($v1)
@@ -2678,13 +2678,13 @@ glabel L8012A350_C0A50
 /* C0B50 8012A450 24840001 */   addiu    $a0, $a0, 1
 /* C0B54 8012A454 90620003 */  lbu       $v0, 3($v1)
 /* C0B58 8012A458 A0A20470 */  sb        $v0, 0x470($a1)
-/* C0B5C 8012A45C 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0B60 8012A460 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0B5C 8012A45C 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0B60 8012A460 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0B64 8012A464 0804A8EF */  j         .L8012A3BC
 /* C0B68 8012A468 00000000 */   nop
 .L8012A46C:
-/* C0B6C 8012A46C 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0B70 8012A470 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0B6C 8012A46C 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0B70 8012A470 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0B74 8012A474 8C42004C */  lw        $v0, 0x4c($v0)
 /* C0B78 8012A478 00441821 */  addu      $v1, $v0, $a0
 /* C0B7C 8012A47C 90620000 */  lbu       $v0, ($v1)
@@ -2701,8 +2701,8 @@ glabel L8012A350_C0A50
 /* C0BA4 8012A4A4 0804A8F0 */  j         .L8012A3C0
 /* C0BA8 8012A4A8 24840001 */   addiu    $a0, $a0, 1
 .L8012A4AC:
-/* C0BAC 8012A4AC 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C0BB0 8012A4B0 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C0BAC 8012A4AC 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C0BB0 8012A4B0 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C0BB4 8012A4B4 8CA2004C */  lw        $v0, 0x4c($a1)
 /* C0BB8 8012A4B8 ACA40020 */  sw        $a0, 0x20($a1)
 /* C0BBC 8012A4BC 00443021 */  addu      $a2, $v0, $a0
@@ -2734,8 +2734,8 @@ glabel L8012A350_C0A50
 .L8012A51C:
 /* C0C1C 8012A51C A4620474 */  sh        $v0, 0x474($v1)
 .L8012A520:
-/* C0C20 8012A520 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C0C24 8012A524 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C0C20 8012A520 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C0C24 8012A524 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C0C28 8012A528 8C620020 */  lw        $v0, 0x20($v1)
 /* C0C2C 8012A52C 24420004 */  addiu     $v0, $v0, 4
 /* C0C30 8012A530 0804AFDC */  j         L8012BF70_C2670
@@ -2748,15 +2748,15 @@ glabel L8012A350_C0A50
 /* C0C44 8012A544 0804AFDC */  j         L8012BF70_C2670
 /* C0C48 8012A548 ACA20020 */   sw       $v0, 0x20($a1)
 glabel L8012A54C_C0C4C
-/* C0C4C 8012A54C 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C0C50 8012A550 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C0C4C 8012A54C 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C0C50 8012A550 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C0C54 8012A554 8C620020 */  lw        $v0, 0x20($v1)
 /* C0C58 8012A558 24420003 */  addiu     $v0, $v0, 3
 /* C0C5C 8012A55C 0804AFDC */  j         L8012BF70_C2670
 /* C0C60 8012A560 AC620020 */   sw       $v0, 0x20($v1)
 glabel L8012A564_C0C64
-/* C0C64 8012A564 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C0C68 8012A568 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C0C64 8012A564 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C0C68 8012A568 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C0C6C 8012A56C 97B80076 */  lhu       $t8, 0x76($sp)
 /* C0C70 8012A570 8CA20020 */  lw        $v0, 0x20($a1)
 /* C0C74 8012A574 8CA3004C */  lw        $v1, 0x4c($a1)
@@ -2787,8 +2787,8 @@ glabel L8012A564_C0C64
 /* C0CD8 8012A5D8 0804A9E9 */  j         .L8012A7A4
 /* C0CDC 8012A5DC 24420002 */   addiu    $v0, $v0, 2
 glabel L8012A5E0_C0CE0
-/* C0CE0 8012A5E0 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C0CE4 8012A5E4 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C0CE0 8012A5E0 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C0CE4 8012A5E4 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C0CE8 8012A5E8 8C820020 */  lw        $v0, 0x20($a0)
 /* C0CEC 8012A5EC 8C83004C */  lw        $v1, 0x4c($a0)
 /* C0CF0 8012A5F0 00431021 */  addu      $v0, $v0, $v1
@@ -2800,8 +2800,8 @@ glabel L8012A5E0_C0CE0
 /* C0D08 8012A608 0804AAD0 */  j         .L8012AB40
 /* C0D0C 8012A60C 3042FFDF */   andi     $v0, $v0, 0xffdf
 .L8012A610:
-/* C0D10 8012A610 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0D14 8012A614 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0D10 8012A610 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0D14 8012A614 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0D18 8012A618 94430034 */  lhu       $v1, 0x34($v0)
 /* C0D1C 8012A61C 94440042 */  lhu       $a0, 0x42($v0)
 /* C0D20 8012A620 34630020 */  ori       $v1, $v1, 0x20
@@ -2810,8 +2810,8 @@ glabel L8012A5E0_C0CE0
 /* C0D2C 8012A62C 0804AAD1 */  j         L8012AB44_C1244
 /* C0D30 8012A630 A4440042 */   sh       $a0, 0x42($v0)
 glabel L8012A634_C0D34
-/* C0D34 8012A634 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C0D38 8012A638 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C0D34 8012A634 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C0D38 8012A638 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C0D3C 8012A63C 8C820020 */  lw        $v0, 0x20($a0)
 /* C0D40 8012A640 8C83004C */  lw        $v1, 0x4c($a0)
 /* C0D44 8012A644 00431021 */  addu      $v0, $v0, $v1
@@ -2824,8 +2824,8 @@ glabel L8012A654_C0D54
 /* C0D5C 8012A65C 0804A9B1 */  j         L8012A6C4_C0DC4
 /* C0D60 8012A660 00000000 */   nop
 glabel L8012A664_C0D64
-/* C0D64 8012A664 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0D68 8012A668 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0D64 8012A664 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0D68 8012A668 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0D6C 8012A66C 94440042 */  lhu       $a0, 0x42($v0)
 /* C0D70 8012A670 8C430020 */  lw        $v1, 0x20($v0)
 /* C0D74 8012A674 94450044 */  lhu       $a1, 0x44($v0)
@@ -2835,8 +2835,8 @@ glabel L8012A664_C0D64
 /* C0D84 8012A684 0804AFDC */  j         L8012BF70_C2670
 /* C0D88 8012A688 AC430020 */   sw       $v1, 0x20($v0)
 glabel L8012A68C_C0D8C
-/* C0D8C 8012A68C 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0D90 8012A690 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0D8C 8012A68C 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0D90 8012A690 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0D94 8012A694 94440024 */  lhu       $a0, 0x24($v0)
 /* C0D98 8012A698 8C430020 */  lw        $v1, 0x20($v0)
 /* C0D9C 8012A69C 94450026 */  lhu       $a1, 0x26($v0)
@@ -2846,20 +2846,20 @@ glabel L8012A68C_C0D8C
 /* C0DAC 8012A6AC 0804AFDC */  j         L8012BF70_C2670
 /* C0DB0 8012A6B0 AC430020 */   sw       $v1, 0x20($v0)
 glabel L8012A6B4_C0DB4
-/* C0DB4 8012A6B4 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C0DB8 8012A6B8 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C0DB4 8012A6B4 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C0DB8 8012A6B8 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C0DBC 8012A6BC 9062004B */  lbu       $v0, 0x4b($v1)
 /* C0DC0 8012A6C0 A0620028 */  sb        $v0, 0x28($v1)
 glabel L8012A6C4_C0DC4
-/* C0DC4 8012A6C4 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C0DC8 8012A6C8 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C0DC4 8012A6C4 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C0DC8 8012A6C8 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C0DCC 8012A6CC 8C620020 */  lw        $v0, 0x20($v1)
 /* C0DD0 8012A6D0 24420001 */  addiu     $v0, $v0, 1
 /* C0DD4 8012A6D4 0804AFDC */  j         L8012BF70_C2670
 /* C0DD8 8012A6D8 AC620020 */   sw       $v0, 0x20($v1)
 glabel L8012A6DC_C0DDC
-/* C0DDC 8012A6DC 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0DE0 8012A6E0 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0DDC 8012A6DC 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0DE0 8012A6E0 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0DE4 8012A6E4 8C430020 */  lw        $v1, 0x20($v0)
 /* C0DE8 8012A6E8 90440028 */  lbu       $a0, 0x28($v0)
 /* C0DEC 8012A6EC 24630001 */  addiu     $v1, $v1, 1
@@ -2867,8 +2867,8 @@ glabel L8012A6DC_C0DDC
 /* C0DF4 8012A6F4 0804AFDC */  j         L8012BF70_C2670
 /* C0DF8 8012A6F8 AC430020 */   sw       $v1, 0x20($v0)
 glabel L8012A6FC_C0DFC
-/* C0DFC 8012A6FC 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C0E00 8012A700 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C0DFC 8012A6FC 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C0E00 8012A700 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C0E04 8012A704 8C620020 */  lw        $v0, 0x20($v1)
 /* C0E08 8012A708 8C63004C */  lw        $v1, 0x4c($v1)
 /* C0E0C 8012A70C 00431021 */  addu      $v0, $v0, $v1
@@ -2882,15 +2882,15 @@ glabel L8012A6FC_C0DFC
 /* C0E2C 8012A72C 00400008 */  jr        $v0
 /* C0E30 8012A730 00000000 */   nop
 glabel L8012A734_C0E34
-/* C0E34 8012A734 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0E38 8012A738 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0E34 8012A734 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0E38 8012A738 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0E3C 8012A73C 8C430038 */  lw        $v1, 0x38($v0)
 /* C0E40 8012A740 8C440020 */  lw        $a0, 0x20($v0)
 /* C0E44 8012A744 0804AA54 */  j         .L8012A950
 /* C0E48 8012A748 34630001 */   ori      $v1, $v1, 1
 glabel L8012A74C_C0E4C
-/* C0E4C 8012A74C 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0E50 8012A750 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0E4C 8012A74C 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0E50 8012A750 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0E54 8012A754 8C430038 */  lw        $v1, 0x38($v0)
 /* C0E58 8012A758 8C440020 */  lw        $a0, 0x20($v0)
 /* C0E5C 8012A75C 0804AA54 */  j         .L8012A950
@@ -2898,8 +2898,8 @@ glabel L8012A74C_C0E4C
 glabel L8012A764_C0E64
 /* C0E64 8012A764 3C06FC70 */  lui       $a2, 0xfc70
 /* C0E68 8012A768 34C6FEE1 */  ori       $a2, $a2, 0xfee1
-/* C0E6C 8012A76C 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C0E70 8012A770 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C0E6C 8012A76C 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C0E70 8012A770 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C0E74 8012A774 8EE40000 */  lw        $a0, ($s7)
 /* C0E78 8012A778 8CA20038 */  lw        $v0, 0x38($a1)
 /* C0E7C 8012A77C 0080182D */  daddu     $v1, $a0, $zero
@@ -2920,8 +2920,8 @@ glabel L8012A7AC_C0EAC
 /* C0EB0 8012A7B0 3529FEE5 */  ori       $t1, $t1, 0xfee5
 /* C0EB4 8012A7B4 3C0811FC */  lui       $t0, 0x11fc
 /* C0EB8 8012A7B8 3C030001 */  lui       $v1, 1
-/* C0EBC 8012A7BC 3C068015 */  lui       $a2, %hi(gMessageDrawStatePtr)
-/* C0EC0 8012A7C0 8CC65D74 */  lw        $a2, %lo(gMessageDrawStatePtr)($a2)
+/* C0EBC 8012A7BC 3C068015 */  lui       $a2, %hi(msg_drawState)
+/* C0EC0 8012A7C0 8CC65D74 */  lw        $a2, %lo(msg_drawState)($a2)
 /* C0EC4 8012A7C4 8EE50000 */  lw        $a1, ($s7)
 /* C0EC8 8012A7C8 8CC20038 */  lw        $v0, 0x38($a2)
 /* C0ECC 8012A7CC 00A0382D */  daddu     $a3, $a1, $zero
@@ -2951,8 +2951,8 @@ glabel L8012A7AC_C0EAC
 /* C0F2C 8012A82C 0804AFDC */  j         L8012BF70_C2670
 /* C0F30 8012A830 ACC20020 */   sw       $v0, 0x20($a2)
 glabel L8012A834_C0F34
-/* C0F34 8012A834 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C0F38 8012A838 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C0F34 8012A834 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C0F38 8012A838 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C0F3C 8012A83C 8CA20038 */  lw        $v0, 0x38($a1)
 /* C0F40 8012A840 8CA40020 */  lw        $a0, 0x20($a1)
 /* C0F44 8012A844 8CA3004C */  lw        $v1, 0x4c($a1)
@@ -2964,15 +2964,15 @@ glabel L8012A834_C0F34
 /* C0F5C 8012A85C 0804AFDB */  j         .L8012BF6C
 /* C0F60 8012A860 A3A300B8 */   sb       $v1, 0xb8($sp)
 glabel L8012A864_C0F64
-/* C0F64 8012A864 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0F68 8012A868 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0F64 8012A864 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0F68 8012A868 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0F6C 8012A86C 8C430038 */  lw        $v1, 0x38($v0)
 /* C0F70 8012A870 8C440020 */  lw        $a0, 0x20($v0)
 /* C0F74 8012A874 0804AA54 */  j         .L8012A950
 /* C0F78 8012A878 34630040 */   ori      $v1, $v1, 0x40
 glabel L8012A87C_C0F7C
-/* C0F7C 8012A87C 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C0F80 8012A880 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C0F7C 8012A87C 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C0F80 8012A880 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C0F84 8012A884 8CA20038 */  lw        $v0, 0x38($a1)
 /* C0F88 8012A888 8CA40020 */  lw        $a0, 0x20($a1)
 /* C0F8C 8012A88C 8CA3004C */  lw        $v1, 0x4c($a1)
@@ -2984,50 +2984,50 @@ glabel L8012A87C_C0F7C
 /* C0FA4 8012A8A4 0804AFDB */  j         .L8012BF6C
 /* C0FA8 8012A8A8 A7A300B6 */   sh       $v1, 0xb6($sp)
 glabel L8012A8AC_C0FAC
-/* C0FAC 8012A8AC 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0FB0 8012A8B0 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0FAC 8012A8AC 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0FB0 8012A8B0 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0FB4 8012A8B4 8C430038 */  lw        $v1, 0x38($v0)
 /* C0FB8 8012A8B8 8C440020 */  lw        $a0, 0x20($v0)
 /* C0FBC 8012A8BC 0804AA54 */  j         .L8012A950
 /* C0FC0 8012A8C0 34630200 */   ori      $v1, $v1, 0x200
 glabel L8012A8C4_C0FC4
-/* C0FC4 8012A8C4 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0FC8 8012A8C8 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0FC4 8012A8C4 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0FC8 8012A8C8 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0FCC 8012A8CC 8C430038 */  lw        $v1, 0x38($v0)
 /* C0FD0 8012A8D0 8C440020 */  lw        $a0, 0x20($v0)
 /* C0FD4 8012A8D4 0804AA54 */  j         .L8012A950
 /* C0FD8 8012A8D8 34630400 */   ori      $v1, $v1, 0x400
 glabel L8012A8DC_C0FDC
-/* C0FDC 8012A8DC 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0FE0 8012A8E0 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0FDC 8012A8DC 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0FE0 8012A8E0 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0FE4 8012A8E4 8C430038 */  lw        $v1, 0x38($v0)
 /* C0FE8 8012A8E8 8C440020 */  lw        $a0, 0x20($v0)
 /* C0FEC 8012A8EC 0804AA54 */  j         .L8012A950
 /* C0FF0 8012A8F0 34630800 */   ori      $v1, $v1, 0x800
 glabel L8012A8F4_C0FF4
-/* C0FF4 8012A8F4 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C0FF8 8012A8F8 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C0FF4 8012A8F4 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C0FF8 8012A8F8 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C0FFC 8012A8FC 8C430038 */  lw        $v1, 0x38($v0)
 /* C1000 8012A900 8C440020 */  lw        $a0, 0x20($v0)
 /* C1004 8012A904 0804AA54 */  j         .L8012A950
 /* C1008 8012A908 34631000 */   ori      $v1, $v1, 0x1000
 glabel L8012A90C_C100C
-/* C100C 8012A90C 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C1010 8012A910 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C100C 8012A90C 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C1010 8012A910 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C1014 8012A914 8C430038 */  lw        $v1, 0x38($v0)
 /* C1018 8012A918 8C440020 */  lw        $a0, 0x20($v0)
 /* C101C 8012A91C 0804AA54 */  j         .L8012A950
 /* C1020 8012A920 34632000 */   ori      $v1, $v1, 0x2000
 glabel L8012A924_C1024
-/* C1024 8012A924 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C1028 8012A928 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C1024 8012A924 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C1028 8012A928 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C102C 8012A92C 8C430038 */  lw        $v1, 0x38($v0)
 /* C1030 8012A930 8C440020 */  lw        $a0, 0x20($v0)
 /* C1034 8012A934 0804AA54 */  j         .L8012A950
 /* C1038 8012A938 34634000 */   ori      $v1, $v1, 0x4000
 glabel L8012A93C_C103C
-/* C103C 8012A93C 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C1040 8012A940 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C103C 8012A93C 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C1040 8012A940 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C1044 8012A944 8C430038 */  lw        $v1, 0x38($v0)
 /* C1048 8012A948 8C440020 */  lw        $a0, 0x20($v0)
 /* C104C 8012A94C 34638000 */  ori       $v1, $v1, 0x8000
@@ -3037,8 +3037,8 @@ glabel L8012A93C_C103C
 /* C1058 8012A958 0804AFDC */  j         L8012BF70_C2670
 /* C105C 8012A95C AC440020 */   sw       $a0, 0x20($v0)
 glabel L8012A960_C1060
-/* C1060 8012A960 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C1064 8012A964 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C1060 8012A960 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C1064 8012A964 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C1068 8012A968 8C620020 */  lw        $v0, 0x20($v1)
 /* C106C 8012A96C 8C63004C */  lw        $v1, 0x4c($v1)
 /* C1070 8012A970 00431021 */  addu      $v0, $v0, $v1
@@ -3052,56 +3052,56 @@ glabel L8012A960_C1060
 /* C1090 8012A990 00400008 */  jr        $v0
 /* C1094 8012A994 00000000 */   nop
 glabel L8012A998_C1098
-/* C1098 8012A998 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C109C 8012A99C 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C1098 8012A998 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C109C 8012A99C 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C10A0 8012A9A0 8C430038 */  lw        $v1, 0x38($v0)
 /* C10A4 8012A9A4 0804AAAB */  j         .L8012AAAC
 /* C10A8 8012A9A8 2404FFFE */   addiu    $a0, $zero, -2
 glabel L8012A9AC_C10AC
-/* C10AC 8012A9AC 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C10B0 8012A9B0 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C10AC 8012A9AC 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C10B0 8012A9B0 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C10B4 8012A9B4 8C430038 */  lw        $v1, 0x38($v0)
 /* C10B8 8012A9B8 0804AAAB */  j         .L8012AAAC
 /* C10BC 8012A9BC 2404FFFD */   addiu    $a0, $zero, -3
 glabel L8012A9C0_C10C0
-/* C10C0 8012A9C0 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C10C4 8012A9C4 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C10C0 8012A9C0 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C10C4 8012A9C4 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C10C8 8012A9C8 8C430038 */  lw        $v1, 0x38($v0)
 /* C10CC 8012A9CC 0804AAAB */  j         .L8012AAAC
 /* C10D0 8012A9D0 2404FFFB */   addiu    $a0, $zero, -5
 glabel L8012A9D4_C10D4
-/* C10D4 8012A9D4 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C10D8 8012A9D8 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C10D4 8012A9D4 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C10D8 8012A9D8 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C10DC 8012A9DC 3C03FFFE */  lui       $v1, 0xfffe
 /* C10E0 8012A9E0 8C820038 */  lw        $v0, 0x38($a0)
 /* C10E4 8012A9E4 0804AAB3 */  j         .L8012AACC
 /* C10E8 8012A9E8 3463FFFF */   ori      $v1, $v1, 0xffff
 glabel L8012A9EC_C10EC
-/* C10EC 8012A9EC 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C10F0 8012A9F0 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C10EC 8012A9EC 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C10F0 8012A9F0 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C10F4 8012A9F4 8C430038 */  lw        $v1, 0x38($v0)
 /* C10F8 8012A9F8 0804AAAB */  j         .L8012AAAC
 /* C10FC 8012A9FC 2404FFDF */   addiu    $a0, $zero, -0x21
 glabel L8012AA00_C1100
-/* C1100 8012AA00 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C1104 8012AA04 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C1100 8012AA00 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C1104 8012AA04 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C1108 8012AA08 0804AA91 */  j         .L8012AA44
 /* C110C 8012AA0C 2405FFBF */   addiu    $a1, $zero, -0x41
 glabel L8012AA10_C1110
-/* C1110 8012AA10 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C1114 8012AA14 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C1110 8012AA10 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C1114 8012AA14 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C1118 8012AA18 8C430038 */  lw        $v1, 0x38($v0)
 /* C111C 8012AA1C 0804AAAB */  j         .L8012AAAC
 /* C1120 8012AA20 2404FF7F */   addiu    $a0, $zero, -0x81
 glabel L8012AA24_C1124
-/* C1124 8012AA24 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C1128 8012AA28 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C1124 8012AA24 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C1128 8012AA28 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C112C 8012AA2C 8C430038 */  lw        $v1, 0x38($v0)
 /* C1130 8012AA30 0804AAAB */  j         .L8012AAAC
 /* C1134 8012AA34 2404FDFF */   addiu    $a0, $zero, -0x201
 glabel L8012AA38_C1138
-/* C1138 8012AA38 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C113C 8012AA3C 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C1138 8012AA38 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C113C 8012AA3C 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C1140 8012AA40 2405FBFF */  addiu     $a1, $zero, -0x401
 .L8012AA44:
 /* C1144 8012AA44 8C820038 */  lw        $v0, 0x38($a0)
@@ -3112,26 +3112,26 @@ glabel L8012AA38_C1138
 /* C1158 8012AA58 0804AAD1 */  j         L8012AB44_C1244
 /* C115C 8012AA5C A4830034 */   sh       $v1, 0x34($a0)
 glabel L8012AA60_C1160
-/* C1160 8012AA60 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C1164 8012AA64 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C1160 8012AA60 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C1164 8012AA64 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C1168 8012AA68 8C430038 */  lw        $v1, 0x38($v0)
 /* C116C 8012AA6C 0804AAAB */  j         .L8012AAAC
 /* C1170 8012AA70 2404F7FF */   addiu    $a0, $zero, -0x801
 glabel L8012AA74_C1174
-/* C1174 8012AA74 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C1178 8012AA78 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C1174 8012AA74 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C1178 8012AA78 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C117C 8012AA7C 8C430038 */  lw        $v1, 0x38($v0)
 /* C1180 8012AA80 0804AAAB */  j         .L8012AAAC
 /* C1184 8012AA84 2404EFFF */   addiu    $a0, $zero, -0x1001
 glabel L8012AA88_C1188
-/* C1188 8012AA88 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C118C 8012AA8C 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C1188 8012AA88 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C118C 8012AA8C 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C1190 8012AA90 8C430038 */  lw        $v1, 0x38($v0)
 /* C1194 8012AA94 0804AAAB */  j         .L8012AAAC
 /* C1198 8012AA98 2404DFFF */   addiu    $a0, $zero, -0x2001
 glabel L8012AA9C_C119C
-/* C119C 8012AA9C 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C11A0 8012AAA0 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C119C 8012AA9C 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C11A0 8012AAA0 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C11A4 8012AAA4 8C430038 */  lw        $v1, 0x38($v0)
 /* C11A8 8012AAA8 2404BFFF */  addiu     $a0, $zero, -0x4001
 .L8012AAAC:
@@ -3139,8 +3139,8 @@ glabel L8012AA9C_C119C
 /* C11B0 8012AAB0 0804AAD1 */  j         L8012AB44_C1244
 /* C11B4 8012AAB4 AC430038 */   sw       $v1, 0x38($v0)
 glabel L8012AAB8_C11B8
-/* C11B8 8012AAB8 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C11BC 8012AABC 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C11B8 8012AAB8 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C11BC 8012AABC 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C11C0 8012AAC0 3C03FFFF */  lui       $v1, 0xffff
 /* C11C4 8012AAC4 8C820038 */  lw        $v0, 0x38($a0)
 /* C11C8 8012AAC8 34637FFF */  ori       $v1, $v1, 0x7fff
@@ -3149,8 +3149,8 @@ glabel L8012AAB8_C11B8
 /* C11D0 8012AAD0 0804AAD1 */  j         L8012AB44_C1244
 /* C11D4 8012AAD4 AC820038 */   sw       $v0, 0x38($a0)
 glabel L8012AAD8_C11D8
-/* C11D8 8012AAD8 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C11DC 8012AADC 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C11D8 8012AAD8 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C11DC 8012AADC 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C11E0 8012AAE0 8C820020 */  lw        $v0, 0x20($a0)
 /* C11E4 8012AAE4 8C83004C */  lw        $v1, 0x4c($a0)
 /* C11E8 8012AAE8 00431021 */  addu      $v0, $v0, $v1
@@ -3158,16 +3158,16 @@ glabel L8012AAD8_C11D8
 /* C11F0 8012AAF0 10400010 */  beqz      $v0, .L8012AB34
 /* C11F4 8012AAF4 241900FF */   addiu    $t9, $zero, 0xff
 /* C11F8 8012AAF8 A082002E */  sb        $v0, 0x2e($a0)
-/* C11FC 8012AAFC 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C1200 8012AB00 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C11FC 8012AAFC 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C1200 8012AB00 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C1204 8012AB04 9062002E */  lbu       $v0, 0x2e($v1)
 /* C1208 8012AB08 14590006 */  bne       $v0, $t9, .L8012AB24
 /* C120C 8012AB0C 00000000 */   nop
 /* C1210 8012AB10 97C20514 */  lhu       $v0, 0x514($fp)
 /* C1214 8012AB14 00021042 */  srl       $v0, $v0, 1
 /* C1218 8012AB18 A062002E */  sb        $v0, 0x2e($v1)
-/* C121C 8012AB1C 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C1220 8012AB20 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C121C 8012AB1C 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C1220 8012AB20 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 .L8012AB24:
 /* C1224 8012AB24 94620034 */  lhu       $v0, 0x34($v1)
 /* C1228 8012AB28 344200C0 */  ori       $v0, $v0, 0xc0
@@ -3180,16 +3180,16 @@ glabel L8012AAD8_C11D8
 .L8012AB40:
 /* C1240 8012AB40 A4820034 */  sh        $v0, 0x34($a0)
 glabel L8012AB44_C1244
-/* C1244 8012AB44 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C1248 8012AB48 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C1244 8012AB44 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C1248 8012AB48 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C124C 8012AB4C 8C620020 */  lw        $v0, 0x20($v1)
 .L8012AB50:
 /* C1250 8012AB50 24420002 */  addiu     $v0, $v0, 2
 /* C1254 8012AB54 0804AFDC */  j         L8012BF70_C2670
 /* C1258 8012AB58 AC620020 */   sw       $v0, 0x20($v1)
 glabel L8012AB5C_C125C
-/* C125C 8012AB5C 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C1260 8012AB60 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C125C 8012AB5C 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C1260 8012AB60 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C1264 8012AB64 94420034 */  lhu       $v0, 0x34($v0)
 /* C1268 8012AB68 30420002 */  andi      $v0, $v0, 2
 /* C126C 8012AB6C 10400010 */  beqz      $v0, .L8012ABB0
@@ -3210,8 +3210,8 @@ glabel L8012AB5C_C125C
 /* C12A8 8012ABA8 2442C500 */  addiu     $v0, $v0, %lo(D_8014C500)
 /* C12AC 8012ABAC AC620004 */  sw        $v0, 4($v1)
 .L8012ABB0:
-/* C12B0 8012ABB0 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C12B4 8012ABB4 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C12B0 8012ABB0 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C12B4 8012ABB4 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C12B8 8012ABB8 C4A00010 */  lwc1      $f0, 0x10($a1)
 /* C12BC 8012ABBC 94A20034 */  lhu       $v0, 0x34($a1)
 /* C12C0 8012ABC0 C4A20014 */  lwc1      $f2, 0x14($a1)
@@ -3230,8 +3230,8 @@ glabel L8012AB5C_C125C
 /* C12F4 8012ABF4 00441021 */  addu      $v0, $v0, $a0
 /* C12F8 8012ABF8 A4A20042 */  sh        $v0, 0x42($a1)
 .L8012ABFC:
-/* C12FC 8012ABFC 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C1300 8012AC00 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C12FC 8012ABFC 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C1300 8012AC00 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C1304 8012AC04 94820034 */  lhu       $v0, 0x34($a0)
 /* C1308 8012AC08 30420040 */  andi      $v0, $v0, 0x40
 /* C130C 8012AC0C 10400007 */  beqz      $v0, .L8012AC2C
@@ -3251,8 +3251,8 @@ glabel L8012AB5C_C125C
 /* C1340 8012AC40 00621821 */  addu      $v1, $v1, $v0
 /* C1344 8012AC44 00838821 */  addu      $s1, $a0, $v1
 .L8012AC48:
-/* C1348 8012AC48 3C068015 */  lui       $a2, %hi(gMessageDrawStatePtr)
-/* C134C 8012AC4C 8CC65D74 */  lw        $a2, %lo(gMessageDrawStatePtr)($a2)
+/* C1348 8012AC48 3C068015 */  lui       $a2, %hi(msg_drawState)
+/* C134C 8012AC4C 8CC65D74 */  lw        $a2, %lo(msg_drawState)($a2)
 /* C1350 8012AC50 97B8006E */  lhu       $t8, 0x6e($sp)
 /* C1354 8012AC54 97B9007E */  lhu       $t9, 0x7e($sp)
 /* C1358 8012AC58 94C3003C */  lhu       $v1, 0x3c($a2)
@@ -3378,8 +3378,8 @@ glabel L8012AB5C_C125C
 /* C1530 8012AE30 34630010 */  ori       $v1, $v1, 0x10
 /* C1534 8012AE34 A4C30034 */  sh        $v1, 0x34($a2)
 .L8012AE38:
-/* C1538 8012AE38 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C153C 8012AE3C 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C1538 8012AE38 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C153C 8012AE3C 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C1540 8012AE40 8C420038 */  lw        $v0, 0x38($v0)
 /* C1544 8012AE44 30420001 */  andi      $v0, $v0, 1
 /* C1548 8012AE48 10400011 */  beqz      $v0, .L8012AE90
@@ -3401,8 +3401,8 @@ glabel L8012AB5C_C125C
 /* C1588 8012AE88 00431023 */  subu      $v0, $v0, $v1
 /* C158C 8012AE8C 02629821 */  addu      $s3, $s3, $v0
 .L8012AE90:
-/* C1590 8012AE90 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C1594 8012AE94 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C1590 8012AE90 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C1594 8012AE94 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C1598 8012AE98 8C820038 */  lw        $v0, 0x38($a0)
 /* C159C 8012AE9C 30420002 */  andi      $v0, $v0, 2
 /* C15A0 8012AEA0 10400063 */  beqz      $v0, .L8012B030
@@ -3449,8 +3449,8 @@ glabel L8012AB5C_C125C
 /* C1644 8012AF44 00102400 */  sll       $a0, $s0, 0x10
 /* C1648 8012AF48 0C00A4F5 */  jal       cosine
 /* C164C 8012AF4C 00042403 */   sra      $a0, $a0, 0x10
-/* C1650 8012AF50 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C1654 8012AF54 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C1650 8012AF50 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C1654 8012AF54 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C1658 8012AF58 C4420010 */  lwc1      $f2, 0x10($v0)
 /* C165C 8012AF5C 3C013FF0 */  lui       $at, 0x3ff0
 /* C1660 8012AF60 44816800 */  mtc1      $at, $f13
@@ -3485,8 +3485,8 @@ glabel L8012AB5C_C125C
 /* C16D4 8012AFD4 44116000 */  mfc1      $s1, $f12
 /* C16D8 8012AFD8 0C00A4F5 */  jal       cosine
 /* C16DC 8012AFDC 00042403 */   sra      $a0, $a0, 0x10
-/* C16E0 8012AFE0 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C16E4 8012AFE4 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C16E0 8012AFE0 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C16E4 8012AFE4 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C16E8 8012AFE8 C4420014 */  lwc1      $f2, 0x14($v0)
 /* C16EC 8012AFEC 3C013FF0 */  lui       $at, 0x3ff0
 /* C16F0 8012AFF0 44816800 */  mtc1      $at, $f13
@@ -3506,8 +3506,8 @@ glabel L8012AB5C_C125C
 /* C1728 8012B028 4620130D */  trunc.w.d $f12, $f2
 /* C172C 8012B02C 44136000 */  mfc1      $s3, $f12
 .L8012B030:
-/* C1730 8012B030 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C1734 8012B034 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C1730 8012B030 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C1734 8012B034 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C1738 8012B038 8C620038 */  lw        $v0, 0x38($v1)
 /* C173C 8012B03C 30420200 */  andi      $v0, $v0, 0x200
 /* C1740 8012B040 1040005A */  beqz      $v0, .L8012B1AC
@@ -3545,8 +3545,8 @@ glabel L8012AB5C_C125C
 /* C17C0 8012B0C0 00102400 */  sll       $a0, $s0, 0x10
 /* C17C4 8012B0C4 0C00A4F5 */  jal       cosine
 /* C17C8 8012B0C8 00042403 */   sra      $a0, $a0, 0x10
-/* C17CC 8012B0CC 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C17D0 8012B0D0 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C17CC 8012B0CC 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C17D0 8012B0D0 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C17D4 8012B0D4 C4420010 */  lwc1      $f2, 0x10($v0)
 /* C17D8 8012B0D8 3C013FF0 */  lui       $at, 0x3ff0
 /* C17DC 8012B0DC 44816800 */  mtc1      $at, $f13
@@ -3581,8 +3581,8 @@ glabel L8012AB5C_C125C
 /* C1850 8012B150 44116000 */  mfc1      $s1, $f12
 /* C1854 8012B154 0C00A4F5 */  jal       cosine
 /* C1858 8012B158 00042403 */   sra      $a0, $a0, 0x10
-/* C185C 8012B15C 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C1860 8012B160 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C185C 8012B15C 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C1860 8012B160 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C1864 8012B164 C4420014 */  lwc1      $f2, 0x14($v0)
 /* C1868 8012B168 3C013FF0 */  lui       $at, 0x3ff0
 /* C186C 8012B16C 44816800 */  mtc1      $at, $f13
@@ -3602,8 +3602,8 @@ glabel L8012AB5C_C125C
 /* C18A4 8012B1A4 4620130D */  trunc.w.d $f12, $f2
 /* C18A8 8012B1A8 44136000 */  mfc1      $s3, $f12
 .L8012B1AC:
-/* C18AC 8012B1AC 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C18B0 8012B1B0 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C18AC 8012B1AC 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C18B0 8012B1B0 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C18B4 8012B1B4 8CA60038 */  lw        $a2, 0x38($a1)
 /* C18B8 8012B1B8 30C20040 */  andi      $v0, $a2, 0x40
 /* C18BC 8012B1BC 10400019 */  beqz      $v0, .L8012B224
@@ -3698,8 +3698,8 @@ glabel L8012AB5C_C125C
 /* C1A10 8012B310 4620230D */  trunc.w.d $f12, $f4
 /* C1A14 8012B314 44126000 */  mfc1      $s2, $f12
 .L8012B318:
-/* C1A18 8012B318 3C028015 */  lui       $v0, %hi(gMessageDrawStatePtr)
-/* C1A1C 8012B31C 8C425D74 */  lw        $v0, %lo(gMessageDrawStatePtr)($v0)
+/* C1A18 8012B318 3C028015 */  lui       $v0, %hi(msg_drawState)
+/* C1A1C 8012B31C 8C425D74 */  lw        $v0, %lo(msg_drawState)($v0)
 /* C1A20 8012B320 94420034 */  lhu       $v0, 0x34($v0)
 /* C1A24 8012B324 30420002 */  andi      $v0, $v0, 2
 /* C1A28 8012B328 14400005 */  bnez      $v0, .L8012B340
@@ -3817,8 +3817,8 @@ glabel L8012AB5C_C125C
 .L8012B4C8:
 /* C1BC8 8012B4C8 18400288 */  blez      $v0, .L8012BEEC
 /* C1BCC 8012B4CC 00000000 */   nop
-/* C1BD0 8012B4D0 3C068015 */  lui       $a2, %hi(gMessageDrawStatePtr)
-/* C1BD4 8012B4D4 8CC65D74 */  lw        $a2, %lo(gMessageDrawStatePtr)($a2)
+/* C1BD0 8012B4D0 3C068015 */  lui       $a2, %hi(msg_drawState)
+/* C1BD4 8012B4D4 8CC65D74 */  lw        $a2, %lo(msg_drawState)($a2)
 /* C1BD8 8012B4D8 8CC30038 */  lw        $v1, 0x38($a2)
 /* C1BDC 8012B4DC 30620800 */  andi      $v0, $v1, 0x800
 /* C1BE0 8012B4E0 10400092 */  beqz      $v0, .L8012B72C
@@ -3878,8 +3878,8 @@ glabel L8012AB5C_C125C
 /* C1CB8 8012B5B8 0804ADC5 */  j         .L8012B714
 /* C1CBC 8012B5BC E4C6001C */   swc1     $f6, 0x1c($a2)
 .L8012B5C0:
-/* C1CC0 8012B5C0 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C1CC4 8012B5C4 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C1CC0 8012B5C0 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C1CC4 8012B5C4 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C1CC8 8012B5C8 8C820020 */  lw        $v0, 0x20($a0)
 /* C1CCC 8012B5CC 8C83004C */  lw        $v1, 0x4c($a0)
 /* C1CD0 8012B5D0 00431021 */  addu      $v0, $v0, $v1
@@ -4013,8 +4013,8 @@ glabel L8012AB5C_C125C
 /* C1EC4 8012B7C4 0804AEF7 */  j         .L8012BBDC
 /* C1EC8 8012B7C8 E4C2001C */   swc1     $f2, 0x1c($a2)
 .L8012B7CC:
-/* C1ECC 8012B7CC 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C1ED0 8012B7D0 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C1ECC 8012B7CC 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C1ED0 8012B7D0 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C1ED4 8012B7D4 8C820020 */  lw        $v0, 0x20($a0)
 /* C1ED8 8012B7D8 8C83004C */  lw        $v1, 0x4c($a0)
 /* C1EDC 8012B7DC 00431021 */  addu      $v0, $v0, $v1
@@ -4128,8 +4128,8 @@ glabel L8012AB5C_C125C
 /* C2084 8012B984 00000000 */  nop
 /* C2088 8012B988 46241102 */  mul.d     $f4, $f2, $f4
 /* C208C 8012B98C 00000000 */  nop
-/* C2090 8012B990 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C2094 8012B994 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C2090 8012B990 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C2094 8012B994 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C2098 8012B998 C4600010 */  lwc1      $f0, 0x10($v1)
 /* C209C 8012B99C 46080002 */  mul.s     $f0, $f0, $f8
 /* C20A0 8012B9A0 00000000 */  nop
@@ -4203,8 +4203,8 @@ glabel L8012AB5C_C125C
 /* C21AC 8012BAAC 00000000 */  nop
 /* C21B0 8012BAB0 46241102 */  mul.d     $f4, $f2, $f4
 /* C21B4 8012BAB4 00000000 */  nop
-/* C21B8 8012BAB8 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C21BC 8012BABC 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C21B8 8012BAB8 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C21BC 8012BABC 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C21C0 8012BAC0 C4600010 */  lwc1      $f0, 0x10($v1)
 /* C21C4 8012BAC4 46080002 */  mul.s     $f0, $f0, $f8
 /* C21C8 8012BAC8 00000000 */  nop
@@ -4248,8 +4248,8 @@ glabel L8012AB5C_C125C
 /* C225C 8012BB5C 00000000 */  nop
 /* C2260 8012BB60 462C0002 */  mul.d     $f0, $f0, $f12
 /* C2264 8012BB64 00000000 */  nop
-/* C2268 8012BB68 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C226C 8012BB6C 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C2268 8012BB68 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C226C 8012BB6C 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C2270 8012BB70 C4620010 */  lwc1      $f2, 0x10($v1)
 /* C2274 8012BB74 46081082 */  mul.s     $f2, $f2, $f8
 /* C2278 8012BB78 00000000 */  nop
@@ -4329,15 +4329,15 @@ glabel L8012BC6C_C236C
 /* C2378 8012BC78 00191400 */  sll       $v0, $t9, 0x10
 /* C237C 8012BC7C 10620007 */  beq       $v1, $v0, .L8012BC9C
 /* C2380 8012BC80 00033C03 */   sra      $a3, $v1, 0x10
-/* C2384 8012BC84 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C2388 8012BC88 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C2384 8012BC84 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C2388 8012BC88 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C238C 8012BC8C 94620034 */  lhu       $v0, 0x34($v1)
 /* C2390 8012BC90 A7B8009E */  sh        $t8, 0x9e($sp)
 /* C2394 8012BC94 34420010 */  ori       $v0, $v0, 0x10
 /* C2398 8012BC98 A4620034 */  sh        $v0, 0x34($v1)
 .L8012BC9C:
-/* C239C 8012BC9C 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C23A0 8012BCA0 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C239C 8012BC9C 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C23A0 8012BCA0 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C23A4 8012BCA4 8CA20038 */  lw        $v0, 0x38($a1)
 /* C23A8 8012BCA8 30428000 */  andi      $v0, $v0, 0x8000
 /* C23AC 8012BCAC 10400047 */  beqz      $v0, .L8012BDCC
@@ -4410,8 +4410,8 @@ glabel L8012BC6C_C236C
 /* C24B8 8012BDB8 AEE20000 */  sw        $v0, ($s7)
 /* C24BC 8012BDBC AC660008 */  sw        $a2, 8($v1)
 /* C24C0 8012BDC0 AC65000C */  sw        $a1, 0xc($v1)
-/* C24C4 8012BDC4 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C24C8 8012BDC8 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C24C4 8012BDC4 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C24C8 8012BDC8 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 .L8012BDCC:
 /* C24CC 8012BDCC 8CA20038 */  lw        $v0, 0x38($a1)
 /* C24D0 8012BDD0 30420020 */  andi      $v0, $v0, 0x20
@@ -4456,8 +4456,8 @@ glabel L8012BC6C_C236C
 /* C2564 8012BE64 03C0202D */  daddu     $a0, $fp, $zero
 .L8012BE68:
 /* C2568 8012BE68 26520001 */  addiu     $s2, $s2, 1
-/* C256C 8012BE6C 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C2570 8012BE70 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C256C 8012BE6C 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C2570 8012BE70 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C2574 8012BE74 97B900A6 */  lhu       $t9, 0xa6($sp)
 /* C2578 8012BE78 8CA2004C */  lw        $v0, 0x4c($a1)
 /* C257C 8012BE7C 8CA30020 */  lw        $v1, 0x20($a1)
@@ -4490,16 +4490,16 @@ glabel L8012BC6C_C236C
 /* C25E4 8012BEE4 0C04B0C9 */  jal       msg_draw_char
 /* C25E8 8012BEE8 AFA20014 */   sw       $v0, 0x14($sp)
 .L8012BEEC:
-/* C25EC 8012BEEC 3C048015 */  lui       $a0, %hi(gMessageDrawStatePtr)
-/* C25F0 8012BEF0 8C845D74 */  lw        $a0, %lo(gMessageDrawStatePtr)($a0)
+/* C25EC 8012BEEC 3C048015 */  lui       $a0, %hi(msg_drawState)
+/* C25F0 8012BEF0 8C845D74 */  lw        $a0, %lo(msg_drawState)($a0)
 /* C25F4 8012BEF4 94830034 */  lhu       $v1, 0x34($a0)
 /* C25F8 8012BEF8 30620002 */  andi      $v0, $v1, 2
 /* C25FC 8012BEFC 10400002 */  beqz      $v0, .L8012BF08
 /* C2600 8012BF00 3062FFFD */   andi     $v0, $v1, 0xfffd
 /* C2604 8012BF04 A4820034 */  sh        $v0, 0x34($a0)
 .L8012BF08:
-/* C2608 8012BF08 3C038015 */  lui       $v1, %hi(gMessageDrawStatePtr)
-/* C260C 8012BF0C 8C635D74 */  lw        $v1, %lo(gMessageDrawStatePtr)($v1)
+/* C2608 8012BF08 3C038015 */  lui       $v1, %hi(msg_drawState)
+/* C260C 8012BF0C 8C635D74 */  lw        $v1, %lo(msg_drawState)($v1)
 /* C2610 8012BF10 8C620030 */  lw        $v0, 0x30($v1)
 /* C2614 8012BF14 8C64004C */  lw        $a0, 0x4c($v1)
 /* C2618 8012BF18 8C650020 */  lw        $a1, 0x20($v1)
@@ -4517,8 +4517,8 @@ glabel L8012BC6C_C236C
 .L8012BF48:
 /* C2648 8012BF48 0C04977D */  jal       msg_get_draw_char_width
 /* C264C 8012BF4C 00000000 */   nop
-/* C2650 8012BF50 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C2654 8012BF54 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C2650 8012BF50 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C2654 8012BF54 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C2658 8012BF58 94A30042 */  lhu       $v1, 0x42($a1)
 /* C265C 8012BF5C 8CA40020 */  lw        $a0, 0x20($a1)
 /* C2660 8012BF60 00621821 */  addu      $v1, $v1, $v0

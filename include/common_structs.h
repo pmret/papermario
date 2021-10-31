@@ -1007,9 +1007,9 @@ typedef struct MessagePrintState {
     /* 0x487 */ u8 unkArraySize;
     /* 0x488 */ s16 lineEndPos[4];
     /* 0x490 */ char unk_490[0x38];
-    /* 0x4C8 */ s16 unk_4C8;
+    /* 0x4C8 */ u16 unk_4C8;
     /* 0x4CA */ s16 unk_4CA;
-    /* 0x4CC */ s16 unk_4CC;
+    /* 0x4CC */ u16 unk_4CC;
     /* 0x4CE */ s8 maxOption;
     /* 0x4CF */ char unk_4CF[0x1];
     /* 0x4D0 */ s16 cursorPosX[6];
@@ -1028,7 +1028,7 @@ typedef struct MessagePrintState {
     /* 0x500 */ s16 delayFlags; // ?
     /* 0x502 */ char unk_502[0x2];
     /* 0x504 */ s32* closedWritebackBool; // if not null, writes 1 here when message closes
-    /* 0x508 */ s8 style;
+    /* 0x508 */ u8 style;
     /* 0x509 */ u8 fadeInCounter;
     /* 0x50A */ Vec2s initOpenPos; // where the message originates from, in screen-space coords
     /* 0x50E */ Vec2s openStartPos;
@@ -1049,14 +1049,14 @@ typedef struct MessagePrintState {
     /* 0x52C */ Vec2s varImageScreenPos; // in addition, posX=0 is taken as 'dont draw'
     /* 0x530 */ s8 varImgHasBorder;
     /* 0x531 */ u8 varImgFinalAlpha;
-    /* 0x532 */ s8 varImgAlphaFadeStep; // how much to fade in per frame
-    /* 0x533 */ s8 varImageDisplayState; // 0 = fade in, 1 = fully visible, 2 = fade out
+    /* 0x532 */ u8 varImgAlphaFadeStep; // how much to fade in per frame
+    /* 0x533 */ u8 varImageDisplayState; // 0 = fade in, 1 = fully visible, 2 = fade out
     /* 0x534 */ s16 varImageFadeTimer; // frames faded in
     /* 0x536 */ s16 msgHeight;
-    /* 0x538 */ s16 msgWidth;
+    /* 0x538 */ u16 msgWidth;
     /* 0x53A */ s8 maxLineChars;
     /* 0x53B */ s8 numLines;
-    /* 0x53C */ s8 maxLinesPerPage;
+    /* 0x53C */ u8 maxLinesPerPage;
     /* 0x53D */ char unk_53D[0x3];
     /* 0x540 */ f32 sizeScale;
     /* 0x544 */ s32* letterBackgroundImg;
@@ -1073,26 +1073,27 @@ typedef struct MessageDrawState {
     /* 0x18 */ Vec2f charScale;
     /* 0x20 */ s32 drawBufferPos; // msg gets printed here and read for display
     /* 0x24 */ s16 savedPos[2];
-    /* 0x28 */ s8 savedColor;
+    /* 0x28 */ u8 savedColor;
     /* 0x29 */ u8 unk_29;
     /* 0x2A */ char unk_2A[0x1];
-    /* 0x2B */ s8 framePalette;
+    /* 0x2B */ u8 framePalette;
     /* 0x2C */ s8 unk_2C;
-    /* 0x2D */ char unk_2D[0x1];
-    /* 0x2E */ s8 centerPos;
+    /* 0x2D */ u8 unk_2D;
+    /* 0x2E */ u8 centerPos;
     /* 0x2F */ char unk_2F[0x1];
     /* 0x30 */ s32 visiblePrintedCount;
-    /* 0x34 */ s16 printModeFlags; // C0 = center, 10 = drawing image
+    /* 0x34 */ u16 printModeFlags; // C0 = center, 10 = drawing image
     /* 0x36 */ char unk_36[0x2];
     /* 0x38 */ s32 effectFlags;
-    /* 0x3C */ s16 font; // 0 or 1
-    /* 0x3E */ s16 fontVariant;
-    /* 0x40 */ s16 currentPosX;
-    /* 0x42 */ s16 nextPos[2];
+    /* 0x3C */ u16 font; // 0 or 1
+    /* 0x3E */ u16 fontVariant;
+    /* 0x40 */ u8 currentPosX;
+    /* 0x41 */ char unk_41;
+    /* 0x42 */ u16 nextPos[2];
     /* 0x46 */ s16 textStartPos[2]; // relative to textbox
     /* 0x4A */ s16 textColor;
-    /* 0x4C */ s8* printBuffer;
-    /* 0x50 */ s8 nextCounter; // related to closing mssages and cmd FA
+    /* 0x4C */ u8* printBuffer;
+    /* 0x50 */ u8 nextCounter; // related to closing mssages and cmd FA
     /* 0x51 */ char unk_51[0x3];
 } MessageDrawState; // size = 0x54
 
@@ -1100,14 +1101,14 @@ typedef struct MessageCharData {
     /* 0x0 */ s8* raster;
     /* 0x4 */ u8* charWidthTable;
     /* 0x8 */ u8 monospaceWidth;
-    /* 0x9 */ s8 baseHeightOffset;
+    /* 0x9 */ u8 baseHeightOffset;
     /* 0xA */ char unk_0A[0x2];
 } MessageCharData; // size = 0xC
 
 typedef struct MessageCharset {
     /* 0x0 */ Vec2b texSize;
     /* 0x2 */ s8 unk_02;
-    /* 0x3 */ s8 newLineY;
+    /* 0x3 */ u8 newLineY;
     /* 0x4 */ s16 charRasterSize; // in bytes
     /* 0x6 */ char unk_06[0x2];
     /* 0x8 */ MessageCharData* rasters;

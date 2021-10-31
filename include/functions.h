@@ -72,6 +72,9 @@ RenderTask* queue_render_task(RenderTask* task);
 
 void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 
+s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s32 posX,
+                                s32 posY, s32 clipULx, s32 clipULy, s32 clipLRx, s32 clipRLy, u8 opacity);
+
 // append gfx funcs
 void func_80257B28(s32);
 void func_8025595C(Actor*);

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "ld_addrs.h"
+#include "sprite.h"
 
 // todo consider symbol
 #define MSG_ROM_START 0x1B83000
@@ -8,6 +9,17 @@ typedef struct UnkMsgStruct8 {
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ char unk_02[0xE];
 } UnkMsgStruct8; // size = 0x16
+
+typedef struct UnkImage14 {
+    /* 0x00 */ s32* raster;
+    /* 0x04 */ s32* palette;
+    /* 0x08 */ u16 width;
+    /* 0x0A */ u16 height;
+    /* 0x0C */ s32 format;
+    /* 0x10 */ s32 bitDepth;
+} UnkImage14; // size = 0x14
+
+typedef UnkImage14* UnkImage14List[1];
 
 extern s32 D_802EF0D0;
 
@@ -105,14 +117,14 @@ u8 D_8014C588[] = { 105, 100, 77, 57, 40, 27, 16, 8, 3, 0, 0, 0, 0, 0, 0, 0, 0, 
 // BSS
 extern s32 gMsgBGScrollAmtX;
 extern u16 gMsgGlobalWaveCounter;
-extern s32 gMsgVarImages; // message images?
+extern UnkImage14List gMsgVarImages;
 extern s32 gMsgBGScrollAmtY;
 extern s32 D_80151338;
 extern char gMessageBuffers[][1024];
 extern u8 gMessageMsgVars[3][32];
 extern s16 D_80155C98;
 extern Matrix4s gMessageWindowProjMatrix[2];
-extern MessageDrawState* gMessageDrawStatePtr;
+extern MessageDrawState* msg_drawState;
 
 // another file?
 extern s32 D_802ED550;
@@ -129,6 +141,9 @@ void appendGfx_message(MessagePrintState*, s16, s16, u16, u16, u16, u8);
 void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY);
 void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
                            s32* maxLinesPerPage, s32* arg6, s32 charset);
+void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 charIndex, s32 palette, s32 posX, s32 posY);
+void msg_draw_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 posX, u16 posY, u16 sizeX, u16 sizeY);
+void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 palette, s32 fading, u8 bgAlpha, u8 frameAlpha);
 
 
 void clear_character_set(void) {
@@ -802,8 +817,8 @@ s32 cancel_message(MessagePrintState* msgPrintState) {
     return 1;
 }
 
-void set_message_images(s32* images) {
-    gMsgVarImages = images;
+void set_message_images(UnkImage14List images) {
+    *gMsgVarImages = images;
 }
 
 // loop crap
@@ -1007,7 +1022,7 @@ void msg_draw_rewind_arrow(s32 printerIndex) {
 
     if (printer->rewindArrowBlinkCounter < 6) {
         draw_ci_image_with_clipping(&D_802ED550, 0x18, 0x18, 2, 0, &D_802ED670, printer->rewindArrowPos.x,
-                                    printer->rewindArrowPos.y, 0xA, 0xA, 0x12C, 0xDC, 0xFF);
+                                    printer->rewindArrowPos.y, 10, 10, 300, 220, 255);
     }
 
     printer->rewindArrowBlinkCounter++;
@@ -1065,7 +1080,1456 @@ void draw_message_window(MessagePrintState* printer) {
     }
 }
 
+extern s32 D_8015131C;
+extern MessageDrawState D_80155D20;
+extern s32 D_80159B50;
+extern s32 D_8015C7E0;
+extern s16 D_802EB644[22];
+extern s32 D_802EC5F0;
+extern s32 D_802EC670;
+extern s32 D_802EC6F0;
+extern s32 D_802EC770;
+extern s32 D_802EC7F0;
+extern s32 D_802EC870[];
+extern s32 D_802EC970[];
+extern s32 D_802ECAB0[];
+extern s32 D_802ECBF0[];
+extern s32 D_802ECCF0[];
+extern s32 D_802ECD10;
+extern s32 D_802ECD30;
+
+#ifdef NON_MATCHING
+void msg_draw_speech_bubble(MessagePrintState* printer, s32 posX, s32 posY, s32 straightWidth, s32 curveWidth,
+                            s32 height, f32 scaleX, f32 scaleY, u8 opacity);
+
+void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 additionalOffsetX, u16 additionalOffsetY, u16 flag, u8 alpha) {
+    SpriteRasterInfo sp50;
+    s16 sp66;
+    s16 sp6E;
+    u16 sp76;
+    u16 sp7E;
+    u16 sp80bool;
+    u16 sp8E;
+    u16 sp96;
+    s16 sp9E;
+    s16 spA6;
+    s16 spAE;
+    u16 spB6;
+    u8 spB8;
+    f32 spBC;
+    s32 *spC0;
+    MessageCharData *temp_a3_4;
+    MessageCharset *temp_t0_2;
+    f32 temp_f10;
+    f32 temp_f20;
+    f32 temp_f20_3;
+    f32 temp_f22_2;
+    f32 temp_f24;
+    f32 temp_f26;
+    f32 temp_f28;
+    f32 temp_f28_2;
+    f32 temp_f2_2;
+    f32 temp_f30;
+    f32 temp_f30_2;
+    f32 temp_f4_3;
+    f32 temp_f6_3;
+    f32 temp_f6_4;
+    f32 temp_f8;
+    f32 temp_f8_2;
+    f32 temp_f8_3;
+    f32 temp_f8_4;
+    f32 temp_f8_5;
+    f64 temp_f0;
+    u32 temp_f0_2;
+    f64 temp_f0_4;
+    f64 temp_f0_5;
+    f64 temp_f20_2;
+    f64 temp_f22;
+    f64 temp_f2;
+    f64 temp_f2_3;
+    f64 temp_f2_4;
+    f64 temp_f2_5;
+    f64 temp_f2_6;
+    f64 temp_f4;
+    f64 temp_f4_2;
+    f64 temp_f4_4;
+    f64 temp_f4_5;
+    f64 temp_f6;
+    f64 temp_f6_2;
+    s16 temp_a1_20;
+    s16 temp_lo;
+    s16 temp_s0_2;
+    s16 temp_s0_3;
+    s16 temp_s0_7;
+    s16 temp_s0_8;
+    s16 temp_s1_2;
+    s16 temp_s1_6;
+    s32 temp_a0_32;
+    s32 temp_a0_44;
+    s32 temp_a0_45;
+    s32 temp_a0_5;
+    s32 temp_a0_6;
+    s32 temp_a2;
+    s32 temp_f12_2;
+    s32 temp_f12_4;
+    s32 temp_f12_6;
+    s32 temp_f12_7;
+    s32 temp_f12_8;
+    s32 temp_s0_4;
+    s32 temp_s0_5;
+    s32 temp_s0_6;
+    s32 temp_s1;
+    s32 temp_s1_3;
+    s32 temp_s1_4;
+    s32 temp_s1_5;
+    s32 temp_s1_7;
+    s32 temp_s1_8;
+    s32 i;
+    s16 temp_s3;
+    s32 temp_s3_3;
+    s32 temp_s3_4;
+    s16 temp_s4;
+    s32 temp_s4_2;
+    s32 temp_v0_65;
+    s32 temp_v0_68;
+    s32 temp_v0_69;
+    s8 *temp_a1_11;
+    u8 *temp_a2_2;
+    s8 *temp_v1_27;
+    s8 *temp_v1_30;
+    s8 *temp_v1_33;
+    s8 *temp_v1_34;
+    s8 *temp_v1_35;
+    s8 *temp_v1_57;
+    s8 *temp_v1_58;
+    u16 temp_s2;
+    u16 temp_s3_2;
+    s16 temp_s5;
+    s16 temp_s6;
+    u16 temp_v0_25;
+    u16 temp_v1_20;
+    u32 temp_a0_49;
+    u8 temp_a0_10;
+    u8 temp_a0_15;
+    u8 temp_a0_16;
+    u8 envColor;
+    u8 temp_a0_51;
+    u8 temp_a1_25;
+    u8 temp_a1_26;
+    u8 temp_a1_6;
+    u8 temp_a3_3;
+    u8 temp_s0_9;
+    u8 temp_v0_16;
+    u8 temp_v0_18;
+    u8 temp_v0_22;
+    u8 temp_v0_23;
+    u8 temp_v0_27;
+    u8 temp_v0_28;
+    u8 temp_v0_33;
+    u8 temp_v0_58;
+    s16 temp_v0_70;
+    u8 temp_v1_15;
+    u8 temp_v1_18;
+    u8 temp_v1_19;
+    u8 temp_v1_69;
+    UnkImage14 *msgVarImage;
+    UnkImage14 *temp_t4;
+    s32 phi_s0;
+    s32 phi_a2;
+    s32 phi_a0;
+    s16 phi_a2_2;
+    s16 phi_a0_2;
+    s16 phi_s0_3;
+    s32 phi_v1_2;
+    s32 phi_s2_2;
+    s32 phi_s1_3;
+    s16 phi_a0_3;
+    s16 phi_s0_4;
+    u16 phi_s2_3;
+    u16 phi_s3;
+    s32 phi_s5;
+    s32 phi_s4;
+    s32 fading;
+    s32 phi_s0_5;
+    u16 phi_t8;
+    s32 *phi_s6;
+    s32 phi_s1_5;
+    s32 phi_s2_4;
+    s32 phi_s3_2;
+    s32 phi_v0_3;
+    s32 phi_a0_4;
+    u16 phi_t5;
+    u16 phi_s0_6;
+    u16 phi_t3;
+    s32 phi_a0_6;
+    s32 phi_a0_7;
+    s16 phi_s1_6;
+    s32 phi_a0_14;
+    s16 phi_s2_5;
+    f64 phi_f2;
+    f32 phi_f8;
+    s16 charPosX;
+    s16 charPosY;
+    s32 phi_s0_7;
+    s32 phi_s1_8;
+    s16 phi_v0_16;
+    s32 varImgHasBorderCond;
+    u8 phi_s0_8;
+    s16 phi_s1_9;
+    s32 phi_a0_17;
+    s16 phi_s2_7;
+    s16 phi_s1_10;
+    f32 phi_f2_2;
+    s16 phi_s3_4;
+    f32 phi_f0;
+    u8 phi_s0_10;
+    s32 varImgHasBorder;
+
+    sp66 = posX;
+    sp6E = posY;
+    sp76 = additionalOffsetX;
+    sp7E = additionalOffsetY;
+    msg_drawState = &D_80155D20;
+    msg_drawState->printBuffer = printer->printBuffer;
+    msg_drawState->printModeFlags = 0;
+    if (gMasterGfxPos != D_80151338) {
+        msg_reset_gfx_state();
+    }
+    msg_drawState->printModeFlags |= (0x100 | 1);
+    sp8E = 0xFF;
+    if (flag & 1) {
+        sp8E = alpha;
+    }
+    msg_drawState->textStartPos[0] = 0;
+    msg_drawState->textStartPos[1] = 0;
+    msg_drawState->clipX[0] = 0;
+    msg_drawState->clipY[0] = 0;
+    msg_drawState->clipX[1] = SCREEN_WIDTH - 1;
+    msg_drawState->clipY[1] = SCREEN_HEIGHT - 1;
+    msg_drawState->msgScale.x = 1.0f;
+    msg_drawState->msgScale.y = 1.0f;
+    msg_drawState->unk_29 = 0;
+    msg_drawState->framePalette = 0;
+    msg_drawState->unk_2C = 0;
+    msg_drawState->visiblePrintedCount = 0;
+    msg_drawState->centerPos = 0;
+    msg_drawState->fontVariant = 0;
+    msg_drawState->currentPosX = 0;
+    msg_drawState->nextCounter = 0;
+    msg_drawState->nextPos[0] = 0;
+    msg_drawState->nextPos[1] = 0;
+    msg_drawState->font = 0;
+    msg_drawState->effectFlags = 0;
+    msg_drawState->textColor = 0;
+    sp96 = 0xFF;
+    spAE = 0xFF;
+    spB6 = 0;
+    spB8 = 0;
+    sp9E = -1;
+
+    if (flag & 2) {
+        msg_drawState->font = 1;
+    }
+    if (flag & 4) {
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+    }
+
+    msg_drawState->drawBufferPos = 0;
+    sp80bool = FALSE;
+
+    do {
+        switch (msg_drawState->printBuffer[msg_drawState->drawBufferPos]) {
+            case 0xF0:
+                msg_drawState->nextPos[0] = 0;
+                msg_drawState->nextPos[1] += (s32) ((msg_drawState->msgScale.y * gMsgCharsets[msg_drawState->font]->newLineY) + D_802EB644[printer->style]);
+                if (msg_drawState->printModeFlags & 0x40) {
+                    msg_drawState->printModeFlags |= 0x80;
+                }
+                msg_drawState->drawBufferPos++;
+                break;
+            case 0xF9:
+                msg_drawState->drawBufferPos++;
+                break;
+            case 0xF1:
+            case 0xF2:
+            case 0xF3:
+            case 0xF4:
+                msg_drawState->fontVariant = msg_drawState->printBuffer[msg_drawState->drawBufferPos] - 0xF1;
+                msg_drawState->drawBufferPos++;
+                break;
+            case 0xF5:
+            case 0xF6:
+            case 0xF7:
+                msg_drawState->nextPos[0] += msg_get_draw_char_width(msg_drawState->printBuffer[msg_drawState->drawBufferPos], msg_drawState->font, msg_drawState->fontVariant, msg_drawState->msgScale.x, msg_drawState->currentPosX, msg_drawState->printModeFlags);
+                msg_drawState->drawBufferPos++;
+                break;
+            case 0xF8:
+                switch (msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1]) {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        if (printer->windowState == 2 && printer->fadeInCounter == 0) {
+                            printer->openStartPos.x = printer->initOpenPos.x;
+                            printer->openStartPos.y = printer->initOpenPos.y;
+                        }
+                        temp_s6 = printer->openStartPos.x;
+                        temp_s5 = printer->openStartPos.y;
+                        temp_s4 = printer->windowBasePos.x + ((f32) printer->windowSize.x * 0.5);
+                        temp_s3 = printer->windowBasePos.y + ((f32) printer->windowSize.y * 0.5);
+                        msg_drawState->textColor = 10;
+                        msg_drawState->printModeFlags |= 0x10;
+                        phi_s0_3 = 0xDA;
+
+                        if (printer->style == 1 || printer->style == 2 || printer->style == 3) {
+                            printer->windowBasePos.x = 22;
+                            printer->windowBasePos.y = 13;
+                            printer->windowSize.x = 296;
+                            printer->windowSize.y = 68;
+                            msg_drawState->textStartPos[0] = 26;
+                            msg_drawState->textStartPos[1] = 6;
+                            printer->rewindArrowPos.x = 276;
+                            printer->rewindArrowPos.y = 57;
+                            phi_s2_2 = 32;
+                            phi_s1_3 = 68;
+                        } else {
+                            switch (printer->maxLinesPerPage) {
+                                case 1:
+                                    msg_drawState->textStartPos[0] = 18;
+                                    msg_drawState->textStartPos[1] = 10;
+                                    phi_s2_2 = 24;
+                                    break;
+                                case 2:
+                                    msg_drawState->textStartPos[0] = 22;
+                                    msg_drawState->textStartPos[1] = 6;
+                                    phi_s2_2 = 28;
+                                    break;
+                                case 3:
+                                    msg_drawState->textStartPos[0] = 26;
+                                    msg_drawState->textStartPos[1] = 8;
+                                    phi_s2_2 = 32;
+                                    break;
+                                default:
+                                    msg_drawState->textStartPos[0] = 26;
+                                    msg_drawState->textStartPos[1] = 6;
+                                    phi_s2_2 = 32;
+                                    break;
+                            }
+
+                            phi_s0 = printer->msgWidth;
+                            if (phi_s0 > 256) {
+                                phi_s0 = 256;
+                            }
+                            if (phi_s0 < 70) {
+                                phi_s0 = 70;
+                            }
+                            temp_s0_2 = phi_s0 - 12;
+                            printer->windowSize.x = temp_s0_2 + (phi_s2_2 * 2);
+                            temp_s1 = (printer->maxLinesPerPage * 14) + 16;
+                            phi_s0_3 = temp_s0_2;
+                            if (temp_s1 > 68) {
+                                temp_s1 = 68;
+                            }
+                            if (temp_s1 < 36) {
+                                temp_s1 = 36;
+                            }
+                            temp_a2 = (u16) printer->openStartPos.x - printer->windowSize.x / 2;
+                            printer->windowSize.y = temp_s1;
+                            phi_a2 = temp_a2;
+                            phi_s1_3 = (s32) temp_s1;
+                            if (temp_a2 < 18) {
+                                phi_a2 = 18;
+                            }
+                            phi_a2_2 = (s16) phi_a2;
+                            if ((phi_a2 + printer->windowSize.x) > 302) {
+                                phi_a2_2 = 302 - printer->windowSize.x;
+                            }
+                            temp_a0_5 = (u16) printer->openStartPos.y - (printer->windowSize.y + 38);
+                            phi_a0 = temp_a0_5;
+                            if (temp_a0_5 < 20) {
+                                phi_a0 = 20;
+                            }
+                            phi_a0_2 = phi_a0;
+                            if ((phi_a0 + printer->windowSize.y) > 170) {
+                                phi_a0_2 = 170 - printer->windowSize.y;
+                            }
+                            printer->windowBasePos.x = phi_a2_2;
+                            printer->windowBasePos.y = phi_a0_2;
+                            printer->rewindArrowPos.x = (printer->windowSize.x + phi_a2_2) - 30;
+                            printer->rewindArrowPos.y = (printer->windowSize.y + phi_a0_2) - 18;
+                        }
+
+                        if (printer->windowState == 11 || printer->windowState == 12) {
+                            msg_drawState->framePalette = 1;
+                        }
+
+                        if (printer->windowState == 2) {
+                            s32 blah;
+                            spBC = update_lerp(0, 0.07f, 1.0f, printer->fadeInCounter, 7);
+                            temp_f30 = update_lerp(0, 0.3f, 1.0f, printer->fadeInCounter, 7);
+                            temp_f28 = update_lerp(0, 96.0f, 200.0f, printer->fadeInCounter, 7);
+                            temp_f20 = update_lerp(11, temp_s5, temp_s3, printer->fadeInCounter, 7);
+                            blah = update_lerp(11, temp_s6, temp_s4, printer->fadeInCounter, 7);
+
+                            msg_draw_speech_bubble(printer, (s16) (s32) (f32) (((f64) blah - ((f64) ((f32) printer->windowSize.x * spBC) * 0.5)) + 0.5), (s16) (s32) (f32) (((f64) temp_f20 - ((f64) ((f32) printer->windowSize.y * temp_f30) * 0.5)) + 0.5), phi_s0_3, 0, 0, 1.0f, 1.0f, temp_f28);
+                            printer->fadeInCounter++;
+                            if (printer->fadeInCounter == 7) {
+                                printer->windowState = 4;
+                            }
+                        } else if (printer->windowState == 3) {
+                            printer->fadeOutCounter++;
+                            spBC = update_lerp(0, 1.0f, 0.6f, printer->fadeOutCounter & 0xFF, 5);
+                            temp_f2 = (f64) ((f32) printer->windowSize.x * spBC) * 0.5;
+                            temp_f30_2 = update_lerp(0, 1.0f, 0.8f, printer->fadeOutCounter, 5);
+                            temp_f0 = (f64) ((f32) printer->windowSize.y * temp_f30_2) * 0.5;
+                            temp_f22 = (f64) (f32) (s16) temp_s4;
+                            temp_f20_2 = (f64) (f32) (s16) temp_s3;
+                            temp_f24 = (f32) ((temp_f22 - temp_f2) + 0.5);
+                            temp_f22_2 = (f32) ((temp_f22 + temp_f2) - 0.5);
+                            temp_f26 = (f32) ((temp_f20_2 - temp_f0) + 0.5);
+                            temp_f20_3 = (f32) ((temp_f20_2 + temp_f0) - 0.5);
+                            temp_f28_2 = update_lerp(0, 255.0f, 64.0f, printer->fadeOutCounter, 5);
+                            temp_f6 = (f64) temp_f28_2 * 0.35;
+                            temp_a0_6 = (s32) temp_f28_2;
+                            spAE = (u16) temp_a0_6;
+                            msg_drawState->clipX[0] = (s32) (temp_f24 + (f32) msg_drawState->textStartPos[0]);
+                            msg_drawState->clipY[0] = (s32) (temp_f26 + (f32) msg_drawState->textStartPos[1]);
+                            msg_drawState->clipX[1] = (s32) (temp_f22_2 - (f32) msg_drawState->textStartPos[0]);
+                            msg_drawState->clipY[1] = (s32) (temp_f20_3 - (f32) msg_drawState->textStartPos[1]);
+                            sp8E = (u16) (s32) temp_f6;
+
+                            msg_draw_speech_bubble(printer, (s16) (s32) temp_f24, (s16) temp_f26, phi_s0_3, 0, 0, 1.0f, 1.0f, temp_f28_2);
+                            if (printer->fadeOutCounter >= 5) {
+                                printer->stateFlags |= 1;
+                            }
+                        } else {
+                            msg_draw_speech_bubble(printer, (s16) (s32) (f32) (sp66 + printer->windowBasePos.x), (s16) (s32) (f32) (sp6E + printer->windowBasePos.y), phi_s0_3, phi_s2_2, phi_s1_3, 1.0f, 1.0f, 0xFF);
+                            if (((u32) ((u16) printer->openStartPos.x - 20) <= 280) && ((u32) printer->openStartPos.y <= 220)) {
+                                msg_draw_speech_arrow(printer);
+                            }
+                        }
+
+                        if (printer->windowState != 3) {
+                            msg_drawState->clipX[0] = 20;
+                            msg_drawState->clipX[1] = 300;
+                            msg_drawState->clipY[0] = printer->windowOffsetPos.y + printer->windowBasePos.y + msg_drawState->textStartPos[1];
+                            msg_drawState->clipY[1] = (msg_drawState->clipY[0] + printer->windowSize.y) - 16;
+                        }
+                        msg_reset_gfx_state();
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 19:
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 5:
+                        temp_s2 = printer->windowSize.x;
+                        temp_s3_2 = printer->windowSize.y;
+                        msg_drawState->framePalette = 0;
+                        msg_drawState->textStartPos[0] = 12;
+                        msg_drawState->textStartPos[1] = 6;
+                        phi_s2_3 = temp_s2;
+                        phi_s3 = temp_s3_2;
+                        phi_s5 = 0;
+                        phi_s4 = 0xFF;
+                        phi_s2_3 = temp_s2;
+                        phi_s3 = temp_s3_2;
+                        if (printer->windowState == 2) {
+                            printer->fadeInCounter++;
+                            if (printer->fadeInCounter == 6) {
+                                printer->windowState = 4;
+                            }
+                            temp_f10 = (f32) (((f32) printer->fadeInCounter * (4.0 / 3.0)) + 0.2);
+                            temp_f4 = (f64) ((f32) temp_s2 * temp_f10);
+                            temp_f6_2 = (f64) ((f32) temp_s3_2 * temp_f10);
+                            temp_f12_6 = (s32) (temp_f4 + 0.5);
+                            temp_f12_7 = (s32) (temp_f6_2 + 0.5);
+                            phi_s1_9 = (s16) (s32) ((f64) (f32) ((f64) (f32) (printer->windowBasePos.x + ((s32) (temp_s2 + ((u32) temp_s2 >> 0x1F)) >> 1)) - (temp_f4 * 0.5)) + 0.5);
+                            phi_s0_4 = (s16) (s32) ((f64) (f32) ((f64) (f32) (printer->windowBasePos.y + ((s32) temp_s3_2 / 2)) - (temp_f6_2 * 0.5)) + 0.5);
+                            phi_s2_3 = (u16) temp_f12_6;
+                            phi_s3 = (u16) temp_f12_7;
+                            if (temp_f12_6 < 0x18) {
+                                phi_s2_3 = 0x18;
+                            }
+                            if (temp_f12_7 < 0x18) {
+                                phi_s3 = 0x18;
+                            }
+                            temp_f0_2 = temp_f10 * 255.0;
+
+                            sp8E = (u16) (s32) ((f64) temp_f0_2 * 0.6);
+                            goto block_88;
+                        }
+                        if (printer->windowState == 3) {
+                            printer->fadeOutCounter++;
+                            if (printer->fadeOutCounter >= 5) {
+                                printer->stateFlags |= 1;
+                            }
+                            temp_s4_2 = ~(printer->fadeOutCounter * 0x2E);
+                            temp_f12_8 = (s32) ((f64) (temp_s4_2 & 0xFF) * 0.6);
+                            sp8E = (u16) temp_f12_8;
+                            phi_s5 = 1;
+                            phi_s4 = temp_s4_2;
+                            if ((s32) (s16) temp_f12_8 >= 32) {
+                                sp8E = temp_f12_8 - 32;
+                            }
+                            phi_a0_3 = printer->windowBasePos.x;
+                            phi_s0_4 = printer->windowBasePos.y;
+                        } else {
+                            temp_s1_2 = printer->windowBasePos.x;
+                            temp_s0_3 = printer->windowBasePos.y;
+                            msg_draw_prim_rect(255, 32, 32, 0, temp_s1_2 - 1, temp_s0_3 - 1, temp_s2 + 2, temp_s3_2 + 2);
+                            phi_s1_9 = temp_s1_2;
+                            phi_s0_4 = temp_s0_3;
+        block_88:
+                            phi_a0_3 = phi_s1_9;
+                        }
+                        msg_drawState->clipX[0] = phi_a0_3 + 2;
+                        msg_drawState->clipY[0] = phi_s0_4 + 2;
+                        msg_drawState->clipX[1] = (phi_a0_3 + phi_s2_3) - 2;
+                        msg_drawState->clipY[1] = (phi_s0_4 + phi_s3) - 2;
+                        msg_draw_frame(phi_a0_3, phi_s0_4, phi_s2_3, phi_s3, 5, (s32) (u8) msg_drawState->framePalette, phi_s5, phi_s4, phi_s4);
+                        msg_reset_gfx_state();
+                        spAE = phi_s4 & 0xFF;
+                        msg_drawState->textColor = 0xA;
+                        msg_drawState->drawBufferPos += 2;
+                        msg_drawState->printModeFlags |= 0x10;
+                        break;
+                    case 6:
+                    case 12:
+                    case 13:
+                    case 15:
+                        msg_drawState->textStartPos[0] = 16;
+                        msg_drawState->textStartPos[1] = 3;
+                        msg_drawState->clipX[0] = printer->windowBasePos.x + 5;
+                        msg_drawState->clipY[0] = printer->windowBasePos.y + 4;
+                        msg_drawState->clipX[1] = printer->windowBasePos.x + printer->windowSize.x - 8;
+                        msg_drawState->clipY[1] = printer->windowBasePos.y + printer->windowSize.y - 5;
+                        printer->rewindArrowPos.x = msg_drawState->clipX[1] - 17;
+                        printer->rewindArrowPos.y = msg_drawState->clipY[1] - 17;
+                        msg_drawState->textColor = 0;
+                        msg_draw_prim_rect(255, 32, 32, 0, printer->windowBasePos.x + 3, printer->windowBasePos.y - 1,printer->windowSize.x - 6, 1);
+                        msg_draw_prim_rect(32, 255, 32, 0, printer->windowBasePos.x + 3, printer->windowBasePos.y + printer->windowSize.y, printer->windowSize.x - 6, 1);
+                        temp_v0_16 = printer->windowState;
+                        fading = 0;
+                        phi_s0_5 = 0xFF;
+                        if (temp_v0_16 == 2) {
+                            temp_s0_4 = (printer->fadeInCounter * 0x30) + 0x50;
+                            sp8E = (temp_s0_4 & 0xFF) - 0x30;
+                            printer->fadeInCounter++;
+                            fading = 1;
+                            phi_s0_5 = temp_s0_4;
+                            if (printer->fadeInCounter == 4) {
+                                printer->windowState = printer->fadeInCounter;
+                                fading = 1;
+                            }
+                        } else if (temp_v0_16 == 3) {
+                            temp_s0_5 = -0x30 - ((printer->fadeOutCounter * 5) << 3);
+                            sp8E = (temp_s0_5 & 0xFF) - 0x30;
+                            printer->fadeOutCounter++;
+                            fading = 1;
+                            phi_s0_5 = temp_s0_5;
+                            if (printer->fadeOutCounter == 4) {
+                                printer->stateFlags |= 1;
+                                fading = 1;
+                            }
+                        }
+
+                        msg_draw_frame(printer->windowBasePos.x, printer->windowBasePos.y, printer->windowSize.x, printer->windowSize.y, 6, msg_drawState->framePalette, fading, phi_s0_5, phi_s0_5);
+                        msg_reset_gfx_state();
+                        spAE = phi_s0_5 & 0xFF;
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 7:
+                    case 8:
+                        msg_drawState->textStartPos[0] = 0x12;
+                        msg_drawState->textStartPos[1] = 0xB;
+                        printer->windowBasePos.x = 20;
+                        printer->windowBasePos.y = 28;
+                        printer->windowSize.x = 280;
+                        msg_drawState->framePalette = 0xF;
+                        phi_s1_5 = 0xFF;
+                        if (printer->style == 7) {
+                            spC0 = &D_802EC770;
+                            printer->windowSize.y = 72;
+                            msg_drawState->textColor = 0x18;
+                            phi_s6 = &D_802ECD10;
+                        } else {
+                            spC0 = &D_802EC7F0;
+                            msg_drawState->textColor = 0x1C;
+                            phi_s6 = &D_802ECD30;
+                        }
+                        msg_drawState->clipX[0] = 34;
+                        msg_drawState->clipY[0] = 40;
+                        msg_drawState->clipX[1] = 283;
+                        msg_drawState->clipY[1] = printer->windowSize.y + 17;
+                        printer->rewindArrowPos.x = msg_drawState->clipX[1] - 16;
+                        printer->rewindArrowPos.y = msg_drawState->clipY[1] - 9;
+                        temp_v1_15 = printer->windowState;
+                        if (temp_v1_15 == 2) {
+                            temp_v0_18 = printer->fadeInCounter;
+                            temp_s1_3 = (temp_v0_18 << 6) + 0x50;
+                            sp8E = (temp_s1_3 & 0xFF) - 0x30;
+                            printer->fadeInCounter++;
+                            phi_t8 = temp_s1_3 & 0xFF;
+                            phi_s1_5 = temp_s1_3;
+                            if (printer->fadeInCounter == 3) {
+                                printer->windowState = 4;
+                            }
+                        } else {
+                            phi_t8 = temp_s1_3 & 0xFF;
+                            if (temp_v1_15 == 3) {
+                                temp_s1_4 = -0x30 - (printer->fadeOutCounter * 0x30);
+                                sp8E = (temp_s1_4 & 0xFF) - 0x30;
+                                printer->fadeOutCounter++;
+                                phi_t8 = temp_s1_4 & 0xFF;
+                                phi_s1_5 = temp_s1_4;
+                                if (printer->fadeOutCounter == 3) {
+                                    printer->stateFlags |= 1;
+                                }
+                            }
+                        }
+                        spAE = phi_t8;
+                        temp_s1_5 = phi_s1_5 & 0xFF;
+                        draw_ci_image_with_clipping(&D_802EC5F0, 16, 16, 2, 0, phi_s6, 20, 28, 10, 10, 310, 230, temp_s1_5);
+                        draw_ci_image_with_clipping(&D_802EC670, 16, 16, 2, 0, phi_s6, 284, 28, 10, 10, 310, 230, temp_s1_5);
+                        draw_ci_image_with_clipping(&D_802EC6F0, 16, 16, 2, 0, phi_s6, 20, (s32) ((printer->windowSize.y + 12) << 0x10U) >> 0x10U, 10, 10, 310, 230, temp_s1_5);
+                        draw_ci_image_with_clipping(spC0, 16, 16, 2, 0, phi_s6, 284, (s32) ((printer->windowSize.y + 0xC) << 0x10U) >> 0x10U, 10, 10, 310, 230, temp_s1_5);
+                        gDPLoadTextureTile_4b(gMasterGfxPos++, D_802EC870, G_IM_FMT_CI, 32, 0, 0, 0, 31, 15, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+                        gSPTextureRectangle(gMasterGfxPos++, 0x0090, 0x0070, 0x0470, 0x00B0, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+                        gDPLoadTextureTile_4b(gMasterGfxPos++, D_802EC970, G_IM_FMT_CI, 16, 0, 0, 0, 15, 31, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+                        gSPTextureRectangle(gMasterGfxPos++, 0x0050, 0x00B0, 0x0090, printer->windowSize.y + 12, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+                        gDPLoadTextureTile_4b(gMasterGfxPos++, D_802ECAB0, G_IM_FMT_CI, 16, 0, 0, 0, 15, 31, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, 5, G_TX_NOLOD, G_TX_NOLOD);
+                        gSPTextureRectangle(gMasterGfxPos++, 0x0470, 0x00B0, 0x04B0, printer->windowSize.y + 12, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+                        gDPLoadTextureTile_4b(gMasterGfxPos++, D_802ECBF0, G_IM_FMT_CI, 32, 0, 0, 0, 31, 15, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 4, G_TX_NOLOD, G_TX_NOLOD);
+                        gSPTextureRectangle(gMasterGfxPos++, 0x0090, printer->windowSize.y + 12, 0x0470, printer->windowSize.y + 12, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+                        gDPLoadTextureTile_4b(gMasterGfxPos++, D_802ECCF0, G_IM_FMT_CI, 8, 0, 0, 0, 7, 7, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 3, 3, G_TX_NOLOD, G_TX_NOLOD);
+                        gSPTextureRectangle(gMasterGfxPos++, 0x0090, 0x00B0, 0x0470, printer->windowSize.y + 12, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+                        msg_reset_gfx_state();
+                    case 9:
+                        msg_drawState->textStartPos[0] = 0xC;
+                        msg_drawState->textStartPos[1] = 5;
+                        printer->windowBasePos.x = 40;
+                        printer->windowBasePos.y = 28;
+                        msg_drawState->clipX[0] = 45;
+                        msg_drawState->clipY[0] = 32;
+                        msg_drawState->clipX[1] = 272;
+                        msg_drawState->clipY[1] = 81;
+                        printer->rewindArrowPos.x = msg_drawState->clipX[1] - 0x15;
+                        printer->rewindArrowPos.y = msg_drawState->clipY[1] - 0x14;
+                        msg_drawState->framePalette = 0;
+                        msg_drawState->textColor = 0;
+                        msg_draw_prim_rect(255, 32, 32, 0, 43, 27, 234, 1);
+                        msg_draw_prim_rect(32, 255, 32, 0, 43, 86, 234, 1);
+                        temp_v0_22 = printer->windowState;
+                        phi_s2_4 = 0;
+                        phi_s3_2 = 0xFF;
+                        if (temp_v0_22 == 2) {
+                            temp_v0_23 = printer->fadeInCounter;
+                            temp_s3_3 = (temp_v0_23 << 6) + 0x50;
+                            sp8E = (temp_s3_3 & 0xFF) - 0x30;
+                            printer->fadeInCounter++;
+                            phi_s3_2 = temp_s3_3;
+                            if (printer->fadeInCounter == 3) {
+                                printer->windowState = 4;
+                            }
+                            goto block_113;
+                        }
+                        if (temp_v0_22 == 3) {
+                            temp_a0_15 = printer->fadeOutCounter;
+                            temp_s3_4 = -0x30 - (temp_a0_15 * 0x30);
+                            temp_a0_16 = temp_a0_15 + 1;
+                            sp8E = (temp_s3_4 & 0xFF) - 0x30;
+                            printer->fadeOutCounter = temp_a0_16;
+                            phi_s3_2 = temp_s3_4;
+                            if ((temp_a0_16 & 0xFF) == 3) {
+                                printer->stateFlags |= 1;
+                            }
+        block_113:
+                            phi_s2_4 = 1;
+                        }
+                        // todo fix temp_s0_6 = phi_s3_2 & 0xFF;
+                        msg_draw_frame(0x28, 0x1C, 0xF0U, 0x3AU, 6, (s32) (u8) msg_drawState->framePalette, phi_s2_4, phi_s3_2, phi_s3_2);
+                        draw_ci_image_with_clipping(printer->letterBackgroundImg, 150, 105, 2, 0, printer->letterBackgroundPal, 85, 97, 10, 10, 300, 220, temp_s0_6);
+                        draw_ci_image_with_clipping(printer->letterContentImg, 70, 95, 2, 1, printer->letterContentPal, 160, 102, 10, 10, 300, 220, temp_s0_6);
+                        msg_reset_gfx_state();
+                        spAE = phi_s3_2 & 0xFF;
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 10:
+                    case 11:
+                        msg_drawState->textStartPos[0] = 0x10;
+                        msg_drawState->textStartPos[1] = 4;
+                        msg_drawState->clipX[0] = 0;
+                        msg_drawState->clipX[1] = SCREEN_WIDTH - 1;
+                        msg_drawState->clipY[0] = 0;
+                        msg_drawState->clipY[1] = SCREEN_HEIGHT - 1;
+                        msg_drawState->textColor = 0;
+                        msg_drawState->printModeFlags |= 0x10;
+                        if (printer->windowState == 13 || printer->windowState == 14) {
+                            printer->windowBasePos.x = 0;
+                            printer->windowBasePos.y = 0;
+                        } else {
+                            printer->windowBasePos.x = 160 - printer->windowSize.x / 2;
+                            printer->windowBasePos.y = 56;
+                            draw_box(0, 0, printer->windowBasePos.x, 56, 0, printer->windowSize.x, printer->windowSize.y, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+                        }
+                        msg_reset_gfx_state();
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 14:
+                        printer->windowBasePos.x = 60;
+                        printer->windowBasePos.y = 110;
+                        printer->windowSize.x = 200;
+                        printer->windowSize.y = 50;
+                        msg_drawState->textStartPos[0] = 0;
+                        msg_drawState->textStartPos[1] = -2;
+                        msg_drawState->clipX[0] = printer->windowBasePos.x;
+                        msg_drawState->clipY[0] = printer->windowBasePos.y;
+                        msg_drawState->clipX[1] = printer->windowBasePos.x + printer->windowSize.x;
+                        msg_drawState->clipY[1] = printer->windowBasePos.y + printer->windowSize.y;
+                        printer->rewindArrowPos.x = printer->windowBasePos.x + printer->windowSize.x - 10;
+                        printer->rewindArrowPos.y = printer->windowBasePos.y + printer->windowSize.y - 10;
+                        msg_reset_gfx_state();
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                }
+                break;
+            case 0xFA:
+                temp_v1_18 = printer->windowState;
+                if (temp_v1_18 == 0xC) {
+                    if (msg_drawState->nextCounter >= printer->unkArraySize) {
+                        sp80bool = TRUE;
+                    }
+                } else if (temp_v1_18 == 0xB) {
+                    if (printer->curLinePos < (u16) printer->lineEndPos[printer->unkArraySize]) {
+                        if (msg_drawState->nextCounter >= printer->unkArraySize) {
+                            sp80bool = TRUE;
+                        }
+                    } else {
+                        if (printer->unkArraySize < msg_drawState->nextCounter) {
+                            sp80bool = TRUE;
+                        } else if (msg_drawState->nextCounter >= printer->unkArraySize) {
+                            temp_v1_19 = (u8) printer->maxLinesPerPage;
+                            phi_a0_4 = 0x24;
+                            if (temp_v1_19 >= 2) {
+                                phi_v0_3 = 0x30;
+                                if (temp_v1_19 == 2) {
+                                    phi_v0_3 = 0x20;
+                                }
+                                temp_v1_20 = (u16) printer->unk_4C8;
+                                if ((s32) temp_v1_20 < phi_v0_3) {
+                                    if ((u32) temp_v1_20 < 0x11U) {
+                                        phi_a0_4 = 0x38;
+                                    }
+                                    temp_v0_25 = 0xFF - (phi_a0_4 * (u16) printer->unk_4CC);
+                                    sp8E = temp_v0_25;
+                                    if (temp_v0_25 & 0x8000) {
+                                        sp8E = 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                msg_drawState->nextCounter++;
+                msg_drawState->drawBufferPos++;
+                break;
+            case 0xFB:
+                sp80bool = TRUE;
+                break;
+            case 0xFF:
+                msg_drawState->drawBufferPos++;
+                switch (msg_drawState->printBuffer[msg_drawState->drawBufferPos]) {
+                    case 0:
+                        temp_a1_6 = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        msg_drawState->drawBufferPos += 2;
+                        msg_drawState->printModeFlags |= 0x10;
+                        msg_drawState->font = (s16) temp_a1_6;
+                        break;
+                    case 1:
+                        msg_drawState->fontVariant = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 4:
+                        msg_drawState->textColor = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        msg_drawState->printModeFlags |= 0x10;
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 5:
+                        msg_drawState->currentPosX = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 6:
+                        temp_v0_27 = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        msg_drawState->msgScale.x = (f32) ((u32) temp_v0_27 >> 4) + ((f32) (temp_v0_27 & 0xF) * 0.0625f);
+                        temp_v0_28 = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 2];
+                        temp_f2_2 = (f32) ((u32) temp_v0_28 >> 4) + ((f32) (temp_v0_28 & 0xF) * 0.0625f);
+                        temp_f4_2 = (f64) msg_drawState->msgScale.x;
+                        msg_drawState->drawBufferPos += 3;
+                        msg_drawState->msgScale.y = temp_f2_2;
+                        if (temp_f4_2 > 1.0 || temp_f2_2 > 1.0) {
+                            gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+                        } else if (temp_f4_2 < 1.0 || temp_f2_2 < 1.0) {
+                            gDPSetTextureFilter(gMasterGfxPos++, G_TF_AVERAGE);
+                        }
+                        break;
+                    case 7:
+                        msg_drawState->msgScale.x = 1.0f;
+                        msg_drawState->msgScale.y = 1.0f;
+                        msg_drawState->drawBufferPos++;
+                        gDPSetTextureFilter(gMasterGfxPos++, G_TF_AVERAGE);
+                        break;
+                    case 8:
+                        temp_v1_27 = &msg_drawState->printBuffer[msg_drawState->drawBufferPos];
+                        msg_drawState->nextPos[0] = temp_v1_27[2] + (temp_v1_27[1] << 8);
+                        msg_drawState->drawBufferPos += 3;
+                        break;
+                    case 9:
+                        msg_drawState->nextPos[1] = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 10:
+                        msg_drawState->nextPos[0] += msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 11:
+                        msg_drawState->nextPos[1] += msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 12:
+                        msg_drawState->nextPos[1] -=  msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 14:
+                        temp_t4 = &(*gMsgVarImages)[msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1]];
+                        phi_t5 = sp8E;
+                        if ((s32) (s16) sp8E < 0xFF) {
+                            phi_t5 = (u16) (s32) ((f64) (s16) sp8E * 0.7);
+                        }
+                        draw_ci_image_with_clipping(temp_t4->raster, temp_t4->width, temp_t4->height, temp_t4->format, temp_t4->bitDepth, temp_t4->palette, (s32) (s16) (((u16) msg_drawState->nextPos[0] + ((u16) msg_drawState->textStartPos[0] + ((u16) printer->windowBasePos.x + (u16) sp66))) - sp76), (s32) (s16) (((u16) msg_drawState->nextPos[1] + ((u16) msg_drawState->textStartPos[1] + ((u16) printer->windowBasePos.y + (u16) sp6E))) - sp7E), (s32) msg_drawState->clipX[0], (s32) msg_drawState->clipY[1], (msg_drawState->clipX[1] - msg_drawState->clipX[0]) & 0xFFFF, (msg_drawState->clipY[1] - msg_drawState->clipY[0]) & 0xFFFF, phi_t5 & 0xFF);
+                        msg_drawState->printModeFlags |= 0x10 | 0x2;
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 15:
+                        phi_s0_6 = sp8E;
+                        if ((s32) (s16) sp8E < 0xFF) {
+                            phi_s0_6 = (u16) (s32) ((f64) (s16) sp8E * 0.7);
+                        }
+                        temp_v1_30 = &msg_drawState->printBuffer[msg_drawState->drawBufferPos];
+                        if (spr_get_npc_raster_info(&sp50, (temp_v1_30[1] << 8) | temp_v1_30[2], temp_v1_30[3]) != 0) {
+                            draw_ci_image_with_clipping(sp50.raster, sp50.width, sp50.height, 2, 0, sp50.defaultPal, (s32) (s16) (((u16) msg_drawState->nextPos[0] + ((u16) msg_drawState->textStartPos[0] + ((u16) printer->windowBasePos.x + (u16) sp66))) - sp76), (s32) (s16) (((u16) msg_drawState->nextPos[1] + ((u16) msg_drawState->textStartPos[1] + ((u16) printer->windowBasePos.y + (u16) sp6E))) - sp7E), (s32) msg_drawState->clipX[0], (s32) msg_drawState->clipY[0], (msg_drawState->clipX[1] - msg_drawState->clipX[0]) & 0xFFFF, (msg_drawState->clipY[1] - msg_drawState->clipY[0]) & 0xFFFF, phi_s0_6 & 0xFF);
+                            msg_drawState->printModeFlags |= 0x10;
+                        }
+                        msg_drawState->drawBufferPos += 4;
+                        break;
+                    case 16:
+                        if (D_8015131C != 0) {
+                            phi_t3 = sp8E;
+                            if ((s32) (s16) sp8E < 0xFF) {
+                                phi_t3 = (u16) (s32) ((f64) (s16) sp8E * 0.7);
+                            }
+                            draw_ci_image_with_clipping(&D_80159B50, 0x20U, 0x20U, 2, 0, &D_8015C7E0, (s32) (s16) (((u16) msg_drawState->nextPos[0] + ((u16) msg_drawState->textStartPos[0] + ((u16) printer->windowBasePos.x + (u16) sp66))) - sp76), (s32) (s16) (((u16) msg_drawState->nextPos[1] + ((u16) msg_drawState->textStartPos[1] + ((u16) printer->windowBasePos.y + (u16) sp6E))) - sp7E), (s32) msg_drawState->clipX[0], (s32) msg_drawState->clipY[0], (msg_drawState->clipX[1] - msg_drawState->clipX[0]) & 0xFFFF, (msg_drawState->clipY[1] - msg_drawState->clipY[0]) & 0xFFFF, phi_t3 & 0xFF);
+                            msg_drawState->printModeFlags |= 0x10;
+                        }
+                        msg_drawState->drawBufferPos++;
+                        break;
+                    case 17:
+                        temp_a1_11 = &msg_drawState->printBuffer[msg_drawState->drawBufferPos];
+                        temp_a3_3 = temp_a1_11[1];
+                        if (printer->animTimers[temp_a3_3] == -1) {
+                            printer->animTimers[temp_a3_3] = (s16) temp_a1_11[3];
+                        }
+                        if (printer->animTimers[temp_a3_3] == 0) {
+                            printer->currentAnimFrame[temp_a3_3] = (u8) printer->currentAnimFrame[temp_a3_3] + 1;
+                        }
+        loop_175:
+                        phi_a0_6 = msg_drawState->drawBufferPos;
+        loop_176:
+                        temp_v1_33 = &msg_drawState->printBuffer[phi_a0_6];
+                        phi_a0_7 = phi_a0_6;
+                        if ((temp_v1_33[-1] == 0xFF) && ((u8) temp_v1_33[0] == 0x11) && (temp_v1_33[1] == temp_a3_3)) {
+                            if (temp_v1_33[2] != (u8) printer->currentAnimFrame[temp_a3_3]) {
+                                phi_a0_17 = phi_a0_6 + 4;
+                                phi_a0_6 = phi_a0_17 + 1;
+                                goto loop_176;
+                            }
+                        } else {
+                            temp_v1_34 = &msg_drawState->printBuffer[phi_a0_6];
+                            if ((u8) temp_v1_34[0] != 0xFF) {
+                                phi_a0_6 += 1;
+                                goto loop_176;
+                            }
+                            if ((temp_v1_34[1] == 0x12) && (temp_v1_34[2] == temp_a3_3)) {
+                                phi_a0_7 = phi_a0_6 + 1;
+                                if (printer->animTimers[temp_a3_3] == 0) {
+                                    printer->currentAnimFrame[temp_a3_3] = (s8) temp_v1_34[3];
+                                    goto loop_175;
+                                }
+                            } else {
+                                temp_v1_35 = &msg_drawState->printBuffer[phi_a0_6];
+                                if ((u8) temp_v1_35[0] != 0xFF) {
+                                    phi_a0_6 += 1;
+                                    goto loop_176;
+                                }
+                                if (temp_v1_35[1] != 0x13) {
+                                    phi_a0_6 += 1;
+                                    goto loop_176;
+                                }
+                                temp_a0_32 = phi_a0_6 + 1;
+                                phi_a0_7 = temp_a0_32;
+                                phi_a0_17 = temp_a0_32;
+                                if (temp_v1_35[2] != temp_a3_3) {
+                                    phi_a0_6 = phi_a0_17 + 1;
+                                    goto loop_176;
+                                }
+                            }
+                        }
+                        msg_drawState->drawBufferPos = phi_a0_7;
+                        temp_a2_2 = &msg_drawState->printBuffer[msg_drawState->drawBufferPos];
+
+                        switch (temp_a2_2[0]) {
+                            case 0x11:
+                                if (printer->animTimers[temp_a3_3] == 0) {
+                                    if (temp_a2_2[3] == 0) {
+                                        printer->animTimers[temp_a3_3] = -2;
+                                    } else {
+                                        printer->animTimers[temp_a3_3] = temp_a2_2[3];
+                                    }
+                                }
+                                msg_drawState->drawBufferPos += 4;
+                                break;
+                            case 0x12:
+                                msg_drawState->drawBufferPos += 3;
+                                break;
+                            case 0x13:
+                                msg_drawState->drawBufferPos += 2;
+                                break;
+                        }
+                        break;
+                    case 18:
+                        msg_drawState->drawBufferPos += 3;
+                        break;
+                    case 20:
+                        printer->cursorPosX[msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1]] = (((u16) msg_drawState->textStartPos[0] + (u16) msg_drawState->nextPos[0]) - sp76) - 6;
+                        printer->cursorPosY[msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1]] = (((u16) msg_drawState->textStartPos[1] + (u16) msg_drawState->nextPos[1]) - sp7E) - 1;
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 21:
+                        temp_v0_33 = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        if (temp_v0_33 != 0xFF) {
+                            msg_drawState->unk_2D = (s8) temp_v0_33;
+                            msg_drawState->printModeFlags |= 0x20;
+                            msg_drawState->nextPos[0] += 0xE;
+                        } else {
+                            msg_drawState->printModeFlags &= ~0x20;
+                        }
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 22:
+                        msg_drawState->framePalette = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 23:
+                        msg_reset_gfx_state();
+                        msg_drawState->drawBufferPos++;
+                        break;
+                    case 24:
+                        msg_drawState->savedPos[0] = msg_drawState->nextPos[0];
+                        msg_drawState->savedPos[1] = msg_drawState->nextPos[1];
+                        msg_drawState->drawBufferPos++;
+                        break;
+                    case 25:
+                        msg_drawState->nextPos[0] = msg_drawState->savedPos[0];
+                        msg_drawState->nextPos[1] = msg_drawState->savedPos[1];
+                        msg_drawState->drawBufferPos++;
+                        break;
+                    case 26:
+                        msg_drawState->savedColor = msg_drawState->textColor;
+                        msg_drawState->drawBufferPos++;
+                        break;
+                    case 27:
+                        msg_drawState->textColor = msg_drawState->savedColor;
+                        msg_drawState->drawBufferPos++;
+                        break;
+                    case 28:
+                        switch (msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1]) {
+                            case 0:
+                                msg_drawState->effectFlags |= 1;
+                                msg_drawState->drawBufferPos += 2;
+                                break;
+                            case 1:
+                                msg_drawState->effectFlags |= 2;
+                                msg_drawState->drawBufferPos += 2;
+                                break;
+                            case 2:
+                                msg_drawState->effectFlags |= 4;
+                                gDPSetCombineLERP(gMasterGfxPos++, NOISE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, NOISE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0);
+                                msg_drawState->drawBufferPos += 2;
+                                break;
+                            case 3:
+                                msg_drawState->effectFlags |= 0x10000;
+                                envColor = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 2];
+                                gDPSetEnvColor(gMasterGfxPos++, envColor, envColor, envColor, 0);
+                                gDPSetCombineLERP(gMasterGfxPos++, NOISE, TEXEL0, ENVIRONMENT, TEXEL0, 0, 0, 0, TEXEL0, NOISE, TEXEL0, ENVIRONMENT, TEXEL0, 0, 0, 0, TEXEL0);
+                                msg_drawState->drawBufferPos += 3;
+                                break;
+                            case 5:
+                                msg_drawState->effectFlags |= 0x20;
+                                spB8 = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 2];
+                                msg_drawState->drawBufferPos += 3;
+                            case 6:
+                                msg_drawState->effectFlags |= 0x40;
+                                msg_drawState->drawBufferPos += 2;
+                                break;
+                            case 7:
+                                msg_drawState->effectFlags |= 0x80;
+                                spB6 = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 2];
+                                msg_drawState->drawBufferPos += 3;
+                            case 8:
+                                msg_drawState->effectFlags |= 0x200;
+                                msg_drawState->drawBufferPos += 2;
+                                break;
+                            case 9:
+                                msg_drawState->effectFlags |= 0x400;
+                                msg_drawState->drawBufferPos += 2;
+                                break;
+                            case 10:
+                                msg_drawState->effectFlags |= 0x800;
+                                msg_drawState->drawBufferPos += 2;
+                                break;
+                            case 11:
+                                msg_drawState->effectFlags |= 0x1000;
+                                msg_drawState->drawBufferPos += 2;
+                                break;
+                            case 12:
+                                msg_drawState->effectFlags |= 0x2000;
+                                msg_drawState->drawBufferPos += 2;
+                                break;
+                            case 13:
+                                msg_drawState->effectFlags |= 0x4000;
+                                msg_drawState->drawBufferPos += 2;
+                                break;
+                            case 14:
+                                msg_drawState->effectFlags |= 0x8000;
+                                msg_drawState->drawBufferPos += 2;
+                                break;
+                        }
+                        break;
+                    case 29:
+                        switch (msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1]) {
+                            case 0:
+                                msg_drawState->effectFlags &= ~0x1;
+                                break;
+                            case 1:
+                                msg_drawState->effectFlags &= ~0x2;
+                                break;
+                            case 2:
+                                msg_drawState->effectFlags &= ~0x4;
+                                break;
+                            case 3:
+                                msg_drawState->effectFlags &= ~0x10000;
+                                break;
+                            case 5:
+                                msg_drawState->effectFlags &= ~0x20;
+                                break;
+                            case 6:
+                                msg_drawState->effectFlags &= ~0x40;
+                                msg_drawState->printModeFlags |= 0x10;
+                                break;
+                            case 7:
+                                msg_drawState->effectFlags &= ~0x80;
+                                break;
+                            case 8:
+                                msg_drawState->effectFlags &= ~0x200;
+                                break;
+                            case 9:
+                                msg_drawState->effectFlags &= ~0x200;
+                                msg_drawState->printModeFlags |= 0x10;
+                                break;
+                            case 10:
+                                msg_drawState->effectFlags &= ~0x800;
+                                break;
+                            case 11:
+                                msg_drawState->effectFlags &= ~0x1000;
+                                break;
+                            case 12:
+                                msg_drawState->effectFlags &= ~0x2000;
+                                break;
+                            case 13:
+                                msg_drawState->effectFlags &= ~0x4000;
+                                break;
+                            case 14:
+                                msg_drawState->effectFlags &= ~0x8000;
+                                break;
+                        }
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                    case 30:
+                        temp_v0_58 = msg_drawState->printBuffer[msg_drawState->drawBufferPos + 1];
+                        if (temp_v0_58 != 0) {
+                            msg_drawState->centerPos = temp_v0_58;
+                            if (msg_drawState->centerPos == 0xFF) {
+                                msg_drawState->centerPos = printer->windowSize.x / 2;
+                            }
+                            msg_drawState->printModeFlags |= 0xC0;
+                        } else {
+                            msg_drawState->nextPos[0] = 0;
+                            msg_drawState->printModeFlags &= ~0xC0;
+                        }
+                        msg_drawState->drawBufferPos += 2;
+                        break;
+                }
+                break;
+            default:
+                if (msg_drawState->printModeFlags & 2) {
+                    sp96 = 0xFF;
+                    gDPPipeSync(gMasterGfxPos++);
+                    gSPDisplayList(gMasterGfxPos++, D_8014C500);
+                }
+                msg_drawState->charScale.x = msg_drawState->msgScale.x;
+                msg_drawState->charScale.y = msg_drawState->msgScale.y;
+                if (msg_drawState->printModeFlags & 0x80) {
+                    msg_drawState->printModeFlags &= ~0x80;
+                    msg_drawState->nextPos[0] += msg_drawState->centerPos - printer->msgWidth / 2;
+                }
+                if (msg_drawState->printModeFlags & 0x40) {
+                    phi_s1_6 = (u16) msg_drawState->nextPos[0] + ((u16) printer->windowBasePos.x + (u16) sp66);
+                } else {
+                    phi_s1_6 = (u16) msg_drawState->nextPos[0] + ((u16) msg_drawState->textStartPos[0] + ((u16) printer->windowBasePos.x + (u16) sp66));
+                }
+                temp_t0_2 = gMsgCharsets[msg_drawState->font];
+                temp_a3_4 = &temp_t0_2->rasters[msg_drawState->fontVariant];
+                temp_a1_20 = (s8) temp_a3_4->baseHeightOffset + (((u16) msg_drawState->nextPos[1] + ((u16) msg_drawState->textStartPos[1] + ((u16) printer->windowBasePos.y + (u16) sp6E))) - sp7E);
+                if (((s16) sp8E != 0) && ((s32) phi_s1_6 < msg_drawState->clipX[1]) && ((s32) temp_a1_20 < msg_drawState->clipY[1]) && (msg_drawState->clipX[0] < (phi_s1_6 + (s32) (msg_drawState->msgScale.x * (f32) temp_a3_4->monospaceWidth))) && (msg_drawState->clipY[0] < (temp_a1_20 + (s32) ((msg_drawState->msgScale.y * (f32) (u8) temp_t0_2->newLineY) + D_802EB644[printer->style])))) {
+                    spA6 = msg_drawState->textColor;
+                    phi_s2_7 = (s16) sp8E;
+                    if (msg_drawState->effectFlags & 0x20) {
+                        phi_s2_7 = (s16) (s32) ((f64) (f32) (s16) sp8E * 0.35);
+                    }
+                    phi_s2_5 = phi_s2_7;
+                    if ((printer->windowState == 7) && (((u16) msg_drawState->printModeFlags & 0x20) != 0)) {
+                        if (msg_drawState->unk_2D == printer->currentOption) {
+                            msg_drawState->effectFlags |= 0x8600;
+                        } else {
+                            spA6 = msg_drawState->textColor;
+                            msg_drawState->effectFlags &= ~0x400;
+                            msg_drawState->effectFlags &= ~0x200;
+                            msg_drawState->effectFlags &= ~0x8000;
+                            msg_drawState->printModeFlags = (u16) msg_drawState->printModeFlags | 0x10;
+                        }
+                    }
+                    if (msg_drawState->effectFlags & 1) {
+                        phi_s1_6 += rand_int(10000) % 2;
+                        temp_a1_20 += rand_int(10000) % 2;
+                    }
+                    if (msg_drawState->effectFlags & 2) {
+                        temp_f2_3 = (f64) msg_drawState->msgScale.x - 1.0;
+                        temp_s0_7 = (printer->effectFrameCounter * (s32) (20.0 - (temp_f2_3 * 5.0))) - (msg_drawState->visiblePrintedCount * (s32) (45.0 - (temp_f2_3 * 15.0)));
+                        temp_s1_7 = (s32) ((f64) phi_s1_6 + ((f64) cosine(temp_s0_7) * (((f64) msg_drawState->msgScale.x - 1.0) + 1.6)));
+                        phi_s1_6 = (s16) temp_s1_7;
+                        temp_a1_20 = (s16) (s32) ((f64) temp_a1_20 + ((f64) cosine((s16) (s32) ((f64) temp_s0_7 + 180.0 + 90.0)) * (((f64) msg_drawState->msgScale.y - 1.0) + 1.6)));
+                    }
+                    phi_s1_10 = phi_s1_6;
+                    phi_s3_4 = temp_a1_20;
+                    if (msg_drawState->effectFlags & 0x200) {
+                        temp_s0_8 = (gMsgGlobalWaveCounter * (s32) (20.0 - (((f64) msg_drawState->msgScale.x - 1.0) * 5.0))) - (msg_drawState->visiblePrintedCount * 0x2D);
+                        temp_s1_8 = (s32) ((f64) phi_s1_6 + ((f64) cosine(temp_s0_8) * (((f64) msg_drawState->msgScale.x - 1.0) + 1.6)));
+                        phi_s1_10 = (s16) temp_s1_8;
+                        phi_s3_4 = (s16) (s32) ((f64) temp_a1_20 + ((f64) cosine((s16) (s32) ((f64) temp_s0_8 + 180.0 + 90.0)) * (((f64) msg_drawState->msgScale.y - 1.0) + 1.6)));
+                    }
+                    charPosX = phi_s1_10;
+                    charPosY = phi_s3_4;
+                    if (msg_drawState->effectFlags & 0x40) {
+                        temp_a0_44 = msg_drawState->visiblePrintedCount - ((printer->effectFrameCounter / 3) & 0xFFFF);
+                        temp_a0_44 = abs(temp_a0_44);
+                        spA6 = temp_a0_44 - (((temp_a0_44 / 10) - (temp_a0_44 >> 0x1F)) * 0xA);
+                    }
+                    if (msg_drawState->effectFlags & 0x400) {
+                        temp_a0_45 = msg_drawState->visiblePrintedCount - ((gGameStatusPtr->frameCounter / 3) & 0xFFFF);
+                        phi_a0_14 = temp_a0_45;
+                        if (temp_a0_45 < 0) {
+                            phi_a0_14 = -temp_a0_45;
+                        }
+                        spA6 = phi_a0_14 - (((phi_a0_14 / 10) - (phi_a0_14 >> 0x1F)) * 0xA);
+                    }
+                    if (msg_drawState->effectFlags & 0x80) {
+                        gDPSetAlphaDither(gMasterGfxPos++, G_AD_NOISE);
+                        gDPSetAlphaCompare(gMasterGfxPos++, G_AC_DITHER);
+                        phi_s2_5 = (s16) (s32) ((f64) spB6 * ((f64) phi_s2_7 / 255.0));
+                    }
+                    if ((((u16) msg_drawState->printModeFlags & 2)) || (((phi_s2_5 << 0x10) != (sp96 << 0x10)))) {
+                        if (((s32) (s16) sp96 < 0xFF) && ((s32) phi_s2_5 < 0xFF)) {
+                            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, phi_s2_5);
+                        }
+                        if (((s16) sp96 == 0xFF) && ((s32) phi_s2_5 < 0xFF)) {
+                            gDPPipeSync(gMasterGfxPos++);
+                            if (printer->stateFlags & 0x4000) {
+                                gDPSetRenderMode(gMasterGfxPos++, IM_RD | CVG_DST_CLAMP | ZMODE_XLU | FORCE_BL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), IM_RD | CVG_DST_CLAMP | ZMODE_XLU | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
+                                gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                            } else {
+                                gDPSetRenderMode(gMasterGfxPos++, IM_RD | CVG_DST_SAVE | ZMODE_XLU | FORCE_BL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), IM_RD | CVG_DST_SAVE | ZMODE_XLU | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
+                                gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                            }
+                            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, phi_s2_5);
+                        } else if (((s32) (s16) sp96 < 0xFF) && (phi_s2_5 == 0xFF)) {
+                            gDPPipeSync(gMasterGfxPos++);
+                            gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+                            gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+                        }
+                        sp96 = (u16) phi_s2_5;
+                    }
+                    if (phi_s2_5 > 0) {
+                        if (msg_drawState->effectFlags & 0x800) {
+                            temp_v1_57 = &msg_drawState->printBuffer[msg_drawState->drawBufferPos];
+                            temp_a1_25 = temp_v1_57[1];
+                            if ((temp_a1_25 != 0xF0) && (temp_v1_57[2] != 0xF0) && (temp_v1_57[3] != 0xF0) && (temp_v1_57[4] != 0xF0)) {
+                                if ((temp_a1_25 == 0xFB) && (printer->windowState == 4)) {
+                                    temp_f6_3 = (f32) ((f64) msg_drawState->msgScale.y * 1.7);
+                                    msg_drawState->charScale.x = (f32) ((f64) msg_drawState->msgScale.x * 1.7);
+                                    temp_f8 = (f32) (((f64) temp_f6_3 / 1.7) * 6.0);
+                                    msg_drawState->charScale.y = temp_f6_3;
+                                    phi_f2_2 = (f32) phi_s1_10 - temp_f8;
+                                    phi_f0 = (f32) phi_s3_4 - temp_f8;
+                                    charPosX = (s16) (s32) phi_f2_2;
+                                    charPosY = (s16) (s32) phi_f0;
+                                }
+                                if ((msg_drawState->printBuffer[msg_drawState->drawBufferPos + 2] == 0xFB) && (printer->windowState == 4)) {
+                                    temp_f6_4 = (f32) ((f64) msg_drawState->msgScale.y * 1.4);
+                                    msg_drawState->charScale.x = (f32) ((f64) msg_drawState->msgScale.x * 1.4);
+                                    temp_f8_2 = (f32) (((f64) temp_f6_4 / 1.4) * 3.0);
+                                    msg_drawState->charScale.y = temp_f6_4;
+                                    phi_f2_2 = (f32) phi_s1_10 - temp_f8_2;
+                                    phi_f0 = (f32) phi_s3_4 - temp_f8_2;
+                                    charPosX = (s16) (s32) phi_f2_2;
+                                    charPosY = (s16) (s32) phi_f0;
+                                }
+                                if ((msg_drawState->printBuffer[msg_drawState->drawBufferPos + 3] == 0xFB) && (printer->windowState == 4)) {
+                                    temp_f4_3 = (f32) ((f64) msg_drawState->msgScale.y * 1.2);
+                                    msg_drawState->charScale.x = (f32) ((f64) msg_drawState->msgScale.x * 1.2);
+                                    temp_f8_3 = (f32) (2.0 * ((f64) temp_f4_3 / 1.2));
+                                    msg_drawState->charScale.y = temp_f4_3;
+                                    phi_f2_2 = (f32) phi_s1_10 - temp_f8_3;
+                                    phi_f0 = (f32) phi_s3_4 - temp_f8_3;
+                                    charPosX = (s16) (s32) phi_f2_2;
+                                    charPosY = (s16) (s32) phi_f0;
+                                }
+                            }
+                        } else if (msg_drawState->effectFlags & 0x1000) {
+                            temp_v1_58 = &msg_drawState->printBuffer[msg_drawState->drawBufferPos];
+                            temp_a1_26 = temp_v1_58[1];
+                            if ((temp_a1_26 != 0xF0) && (temp_v1_58[2] != 0xF0) && (temp_v1_58[3] != 0xF0) && (temp_v1_58[3] != 0xF0)) {
+                                if ((temp_a1_26 == 0xFB) && (printer->windowState == 4)) {
+                                    msg_drawState->charScale.x = (f32) ((f64) msg_drawState->msgScale.x * 0.3);
+                                    msg_drawState->charScale.y = (f32) ((f64) msg_drawState->msgScale.y * 0.3);
+                                    charPosX = phi_s1_10 + 5;
+                                    charPosY = phi_s3_4 + 5;
+                                } else {
+                                    if ((msg_drawState->printBuffer[msg_drawState->drawBufferPos + 2] == 0xFB) && (printer->windowState == 4)) {
+                                        msg_drawState->charScale.x = (f32) ((f64) msg_drawState->msgScale.x * 0.5);
+                                        msg_drawState->charScale.y = (f32) ((f64) msg_drawState->msgScale.y * 0.5);
+                                        charPosX = phi_s1_10 + 3;
+                                        charPosY = phi_s3_4 + 3;
+                                    } else if ((msg_drawState->printBuffer[msg_drawState->drawBufferPos + 3] == 0xFB) && (printer->windowState == 4)) {
+                                        msg_drawState->charScale.x = (f32) ((f64) msg_drawState->msgScale.x * 0.75);
+                                        msg_drawState->charScale.y = (f32) ((f64) msg_drawState->msgScale.y * 0.75);
+                                        charPosX = phi_s1_10 + 2;
+                                        charPosY = phi_s3_4 + 2;
+                                    }
+                                }
+                            }
+                        } else {
+                            if (msg_drawState->effectFlags & 0x2000) {
+                                temp_v0_65 = rand_int(10000);
+                                temp_f8_4 = (f32) ((((f64) (f32) ((f64) (f32) (temp_v0_65 - (((temp_v0_65 / 101) - (temp_v0_65 >> 0x1F)) * 0x65)) / 100.0) * 0.5) + 1.0) - 0.25);
+                                temp_f2_4 = (f64) temp_f8_4;
+                                phi_f2 = temp_f2_4;
+                                phi_f8 = temp_f8_4;
+                                if (temp_f2_4 > 1.0) {
+                                    msg_drawState->charScale.x = msg_drawState->msgScale.x * temp_f8_4;
+                                    temp_f4_4 = (temp_f2_4 * 8.0) - 8.5;
+                                    msg_drawState->charScale.y = msg_drawState->msgScale.y * temp_f8_4;
+                                    charPosX = (s16) (s32) ((f64) phi_s1_10 - temp_f4_4);
+                                    charPosY = (f64) phi_s3_4 - temp_f4_4;
+                                }
+                                goto block_355;
+                            }
+                            if (msg_drawState->effectFlags & 0x4000) {
+                                temp_a0_49 = (printer->effectFrameCounter * 0xF) - (msg_drawState->visiblePrintedCount * 0xF);
+                                temp_f8_5 = (f32) (((f64) cosine((s16) (temp_a0_49 - ((((temp_a0_49 >> 3) / 45)) * 360))) * 0.25) + 1.0);
+                                temp_f2_5 = (f64) temp_f8_5;
+                                phi_f2 = temp_f2_5;
+                                phi_f8 = temp_f8_5;
+                                if (temp_f2_5 > 1.0) {
+                                    msg_drawState->charScale.x = msg_drawState->msgScale.x * temp_f8_5;
+                                    msg_drawState->charScale.y = msg_drawState->msgScale.y * temp_f8_5;
+                                    temp_f4_5 = (temp_f2_5 * 8.0) - 8.5;
+                                    charPosX = (s16) (s32) ((f64) phi_s1_10 - temp_f4_5);
+                                    charPosY = (f64) phi_s3_4 - temp_f4_5;
+                                }
+    block_355:
+                                if (phi_f2 < 0.0) {
+                                    msg_drawState->charScale.x = msg_drawState->msgScale.x * phi_f8;
+                                    msg_drawState->charScale.y = msg_drawState->msgScale.y * phi_f8;
+                                    temp_f2_6 = 8.0 - (phi_f2 * 16.0 * 0.5);
+                                    charPosX = (s16) (s32) ((f64) phi_s1_10 + temp_f2_6);
+                                    charPosY = (f64) phi_s3_4 + temp_f2_6;
+                                }
+                            }
+                        }
+                        if ((printer->windowState == 11 || printer->windowState == 12) &&
+                            (printer->style == 1 || printer->style == 2 || printer->style == 3 || printer->style == 4))
+                        {
+                            switch (spA6) {       /* switch 6 */
+                                case 10:                    /* switch 6 */
+                                    spA6 = 0x40;
+                                    break;
+                                case 32:                    /* switch 6 */
+                                    spA6 = 0x41;
+                                    break;
+                                case 34:                    /* switch 6 */
+                                    spA6 = 0x42;
+                                    break;
+                                case 35:                    /* switch 6 */
+                                    spA6 = 0x43;
+                                    break;
+                                case 37:                    /* switch 6 */
+                                    spA6 = 0x44;
+                                    break;
+                                default:                    /* switch 6 */
+                                    spA6 = 0x40;
+                                    break;
+                            }
+                        }
+                        if (spA6 != sp9E) {
+                            sp9E = spA6;
+                            msg_drawState->printModeFlags |= 0x10;
+                        }
+                        if ((msg_drawState->effectFlags & 0x8000) && (phi_s2_5 == 0xFF)) {
+                            gDPPipeSync(gMasterGfxPos++);
+                            gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+                            gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+                            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 40, 40, 40, 72);
+                            msg_draw_char(printer, msg_drawState, (u8) msg_drawState->printBuffer[msg_drawState->drawBufferPos], spA6, charPosX + 2, charPosY + 2);
+                            gDPPipeSync(gMasterGfxPos++);
+                            gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+                            gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+                        }
+
+
+
+                        if (msg_drawState->effectFlags & 0x20) {
+                            for (i = 0; i < 5; i++) {
+                                phi_s0_7 = charPosX;
+                                phi_s1_8 = (s32) charPosY;
+                                if (spB8 != 2) {
+                                    temp_v0_68 = rand_int(10000);
+                                    phi_s0_7 = charPosX - 1 + (temp_v0_68 - (((temp_v0_68 / 3) - (temp_v0_68 >> 0x1F)) * 3));
+                                }
+                                if (spB8 != 1) {
+                                    temp_v0_69 = rand_int(10000);
+                                    phi_s1_8 = charPosY - 1 + (temp_v0_69 - (((temp_v0_69 / 3) - (temp_v0_69 >> 0x1F)) * 3));
+                                }
+                                msg_draw_char(printer, msg_drawState, (u8) msg_drawState->printBuffer[msg_drawState->drawBufferPos], spA6, phi_s0_7, phi_s1_8);
+                            }
+                        } else {
+                            msg_draw_char(printer, msg_drawState, *(msg_drawState->printBuffer + msg_drawState->drawBufferPos), spA6, charPosX, charPosY);
+                        }
+                    }
+                }
+                if (msg_drawState->printModeFlags & 0x2) {
+                    msg_drawState->printModeFlags &= ~0x2;
+                }
+                msg_drawState->visiblePrintedCount += 1;
+                msg_drawState->nextPos[0] += msg_get_draw_char_width(msg_drawState->printBuffer[msg_drawState->drawBufferPos], msg_drawState->font, msg_drawState->fontVariant, msg_drawState->msgScale.x, msg_drawState->currentPosX, msg_drawState->printModeFlags);
+                msg_drawState->drawBufferPos++;
+                break;
+        }
+    } while (!sp80bool);
+
+    varImgHasBorder = FALSE;
+    varImgHasBorderCond = FALSE;
+    if (printer->varImageScreenPos.x != 0) {
+        temp_s0_9 = printer->varImgFinalAlpha;
+        temp_a0_51 = printer->varImgHasBorder;
+        msgVarImage = &(*gMsgVarImages)[printer->currentImageIndex];
+        phi_s0_10 = temp_s0_9;
+        phi_s0_8 = temp_s0_9;
+        if ((s32) temp_a0_51 >= 0) {
+            if ((s32) temp_a0_51 >= 2) {
+                phi_v0_16 = temp_s0_9 << 0x10;
+                if (temp_a0_51 != 2) {
+
+                } else {
+                    temp_f0_4 = ((f64) (f32) (s16) spAE / 255.0) * (f64) (f32) printer->varImgFinalAlpha;
+                    temp_f0_4 = fabs(temp_f0_4);
+                    goto block_411;
+                }
+                goto block_414;
+            }
+            if (temp_a0_51 != 0) {
+                varImgHasBorder = TRUE;
+            }
+            temp_v1_69 = printer->varImageDisplayState;
+            varImgHasBorderCond = varImgHasBorder;
+            if (temp_v1_69 != 1) {
+                if ((s32) temp_v1_69 < 2) {
+                    phi_v0_16 = temp_s0_9 << 0x10;
+                    if (temp_v1_69 != 0) {
+
+                    } else {
+                        temp_lo = ++printer->varImageFadeTimer * (u8) printer->varImgAlphaFadeStep;
+                        phi_v0_16 = temp_lo << 0x10;
+                        phi_s0_8 = (u8) temp_lo;
+                        if ((s32) temp_lo >= (s32) printer->varImgFinalAlpha) {
+                            printer->varImageFadeTimer = 0;
+                            printer->varImageDisplayState = 1;
+                            phi_s0_10 = printer->varImgFinalAlpha;
+                            goto block_413;
+                        }
+                    }
+                    goto block_414;
+                }
+                phi_v0_16 = temp_s0_9 << 0x10;
+                if (temp_v1_69 != 2) {
+                    goto block_414;
+                }
+                temp_v0_70 = printer->varImgFinalAlpha - (printer->varImgAlphaFadeStep * ++printer->varImageFadeTimer);
+
+                phi_s0_8 = temp_v0_70;
+                if (temp_v0_70 <= 0) {
+                    printer->varImageScreenPos.x = 0;
+                    phi_s0_10 = temp_v0_70;
+                    goto block_413;
+                }
+                goto block_415;
+            }
+            temp_f0_5 = ((f64) (f32) (s16) spAE / 255.0) * (f32) printer->varImgFinalAlpha;
+            phi_s0_10 = temp_f0_5;
+block_412:
+block_411:
+            goto block_413;
+        }
+block_413:
+        phi_v0_16 = phi_s0_10 << 0x10;
+        phi_s0_8 = phi_s0_10;
+block_414:
+        if (phi_v0_16 > 0) {
+block_415:
+            if (varImgHasBorderCond) {
+                draw_box(0, 0xF, (u16) printer->varImageScreenPos.x - 7, (u16) printer->varImageScreenPos.y - 7, 0,
+                        msgVarImage->width + 0xF, msgVarImage->height + 0xE, phi_s0_8 & 0xFF, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+            }
+            draw_ci_image_with_clipping(msgVarImage->raster, msgVarImage->width, msgVarImage->height,
+                                        msgVarImage->format, msgVarImage->bitDepth, msgVarImage->palette,
+                                        printer->varImageScreenPos.x, printer->varImageScreenPos.y, 0, 0,
+                                        SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1, phi_s0_8);
+        }
+    }
+    gDPPipeSync(gMasterGfxPos++);
+    D_80151338 = gMasterGfxPos;
+}
+#else
 INCLUDE_ASM(void, "msg", appendGfx_message, MessagePrintState* printer, s16 arg1, s16 arg2, u16 arg3, u16 arg4, u16 arg5, u8 arg6);
+#endif
 
 void msg_reset_gfx_state(void) {
     gDPPipeSync(gMasterGfxPos++);
@@ -1074,7 +2538,7 @@ void msg_reset_gfx_state(void) {
 
 INCLUDE_ASM(s32, "msg", msg_draw_char);
 
-void msg_draw_prim_rect(u8 r, u8 g, u8 b, u8 a, s32 posX, s32 posY, s32 sizeX, s32 sizeY) {
+void msg_draw_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 posX, u16 posY, u16 sizeX, u16 sizeY) {
     u16 lrX = posX + sizeX;
     u16 lrY = posY + sizeY;
 
@@ -1096,7 +2560,7 @@ void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, 
     gDPPipeSync(gMasterGfxPos++);
     gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
 
-    switch (gMessageDrawStatePtr->unk_29) {
+    switch (msg_drawState->unk_29) {
         case 0:
             gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
             break;
