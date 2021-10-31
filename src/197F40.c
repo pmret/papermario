@@ -1942,7 +1942,92 @@ ApiStatus func_8026DA94(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", SummonEnemy);
+ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32* args = script->ptrReadPos;
+    Actor* actor1;
+    Actor* actor2;
+    s16* enemyIDs;
+    s32 numEnemies;
+    s32 i, j;
+    u16 enemyID1, enemyID2;
+    s32 priority1, priority2;
+    s32 tempPriority;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+    
+    switch (script->functionTemp[0]) {
+        case 0:
+            script->functionTemp[1] = create_actor(evt_get_variable(script, *args++));
+            script->functionTemp[2] = evt_get_variable(script, *args++);
+            script->functionTemp[0] = 1;
+            break;
+        case 1:
+            actor2 = (Actor*) script->functionTemp[1];
+            if (does_script_exist(actor2->takeTurnID) == FALSE) {
+                enemyIDs = battleStatus->enemyIDs;
+                if (battleStatus->unk_170 == 0) {
+                    numEnemies = 0;
+                    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                        if (battleStatus->enemyActors[i]) {
+                            battleStatus->enemyIDs[numEnemies++] = i | 0x200;
+                        }
+                    }
+                    battleStatus->numEnemyActors = numEnemies;
+                    if (script->functionTemp[2] != 0) {
+                        tempPriority = -1000;
+                    } else {
+                        tempPriority = 1000;
+                    }
+                    enemyIDs = battleStatus->enemyIDs;
+                    for (i = 0; i < numEnemies - 1; i++) {
+                        for (j = i + 1; j < numEnemies; j++) {
+                            enemyID1 = enemyIDs[i];
+                            actor1 = battleStatus->enemyActors[(u8) enemyID1];
+                            priority1 = actor1->turnPriority;
+                            if (actor1 == actor2) {
+                                priority1 += tempPriority;
+                            }
+                            enemyID2 = enemyIDs[j];
+                            actor1 = battleStatus->enemyActors[(u8) enemyID2];
+                            priority2 = actor1->turnPriority;
+                            if (actor1 == actor2) {
+                                priority2 += tempPriority;
+                            }
+                            if (priority1 < priority2) {
+                                enemyIDs[i] = enemyID2;
+                                enemyIDs[j] = enemyID1;
+                            }
+                        }
+                    }
+                } else {
+                    numEnemies = battleStatus->numEnemyActors;
+                    for (i = 0; i < numEnemies; i++){
+                        if (battleStatus->enemyActors[(u8) enemyIDs[i]] == actor2) {
+                            enemyIDs[i] = -1;
+                        }
+                    }
+                    if (script->functionTemp[2] == 0) {
+                        for (i = numEnemies; i >= battleStatus->unk_170; i--) {
+                            battleStatus->enemyIDs[i] = battleStatus->enemyIDs[i - 1];
+                        }
+                        battleStatus->enemyIDs[battleStatus->unk_170 - 1] = actor2->actorID;
+                        battleStatus->numEnemyActors++;
+                        battleStatus->unk_170++;
+                    } else {
+                        battleStatus->enemyIDs[battleStatus->numEnemyActors] = actor2->actorID;
+                        battleStatus->numEnemyActors++;
+                    }
+                }
+                script->varTable[0] = actor2->actorID;
+                return ApiStatus_DONE2;
+            }
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus GetOwnerID(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, *script->ptrReadPos, script->owner1.actorID);
@@ -2193,7 +2278,27 @@ INCLUDE_ASM(s32, "197F40", RemoveActorDecoration);
 
 INCLUDE_ASM(s32, "197F40", ModifyActorDecoration);
 
-INCLUDE_ASM(s32, "197F40", UseIdleAnimation);
+ApiStatus UseIdleAnimation(Evt* script, s32 isInitialCall) {
+    Actor* actor;
+    s32* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 temp_s0_3 = evt_get_variable(script, *args++);
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    if (temp_s0_3 == 0) {
+        actor->flags &= ~ACTOR_FLAG_4000000;
+        actor->flags &= ~ACTOR_FLAG_8000000;
+        func_80266E40(actor);
+    } else {
+        actor->flags |= ACTOR_FLAG_4000000;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", func_8026F1A0);
 
@@ -2346,9 +2451,31 @@ ApiStatus SetPartAlpha(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", CreatePartShadow);
+ApiStatus CreatePartShadow(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
 
-INCLUDE_ASM(s32, "197F40", RemovePartShadow);
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    create_part_shadow(actorID, partIndex);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus RemovePartShadow(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    remove_part_shadow(actorID, partIndex);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_8026F60C(Evt* script, s32 isInitialCall) {
     gBattleStatus.unk_8D = evt_get_variable(script, *script->ptrReadPos);
