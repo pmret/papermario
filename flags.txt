@@ -1,0 +1,178 @@
+enum battleFlags2 {
+    BATTLEFLAGS2_NO_TARGET_AVAILABLE             = 0x00001000,
+};
+
+enum buttons {
+    BUTTONS_A                = 0x00008000,
+    BUTTONS_B                = 0x00004000,
+    BUTTONS_Z                = 0x00002000,
+    BUTTONS_START            = 0x00001000,
+    BUTTONS_D_UP             = 0x00000800,
+    BUTTONS_D_DOWN           = 0x00000400,
+    BUTTONS_D_LEFT           = 0x00000200,
+    BUTTONS_D_RIGHT          = 0x00000100,
+    BUTTONS_L                = 0x00000020,
+    BUTTONS_R                = 0x00000010,
+    BUTTONS_C_UP             = 0x00000008,
+    BUTTONS_C_DOWN           = 0x00000004,
+    BUTTONS_C_LEFT           = 0x00000002,
+    BUTTONS_C_RIGHT          = 0x00000001,
+};
+
+enum enemyFlags {
+    ENEMYFLAGS_IGNORE_TOUCH             = 0x01000000,
+    ENEMYFLAGS_IGNORE_JUMP              = 0x02000000,
+    ENEMYFLAGS_IGNORE_HAMMER            = 0x04000000,
+};
+
+enum entityFlags {
+    ENTITYFLAGS_HIDDEN                                       = 0x00000001,
+    ENTITYFLAGS_DRAW_IF_CLOSE_HIDE_MODE1                     = 0x00000002,
+    ENTITYFLAGS_HAS_DYNAMIC_SHADOW                           = 0x00000004,
+    ENTITYFLAGS_HAS_ANIMATED_MODEL                           = 0x00000008,
+    ENTITYFLAGS_SKIP_UPDATE_TRANSFORM_MATRIX                 = 0x00000010,
+    ENTITYFLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX          = 0x00000020,
+    ENTITYFLAGS_CONTINUOUS_COLLISION                         = 0x00000040,
+    ENTITYFLAGS_SET_SHADOW_FLAG200                           = 0x00000200,
+    ENTITYFLAGS_SQUARE_SHADOW                                = 0x00000800,
+    ENTITYFLAGS_SHOWS_INSPECT_PROMPT                         = 0x00001000,
+    ENTITYFLAGS_ALWAYS_FACE_CAMERA                           = 0x00002000,
+    ENTITYFLAGS_DETECTED_COLLISION                           = 0x00010000,
+    ENTITYFLAGS_BLOCK_BEING_HIT                              = 0x00020000,
+    ENTITYFLAGS_DRAW_IF_CLOSE_HIDE_MODE2                     = 0x00040000,
+    ENTITYFLAGS_IGNORE_DISTANCE_CULLING                      = 0x00080000,
+    ENTITYFLAGS_BOUND_SCRIPT_DIRTY                           = 0x01000000,
+    ENTITYFLAGS_PENDING_FULL_DELETE                          = 0x04000000,
+    ENTITYFLAGS_PENDING_INSTANCE_DELETE                      = 0x20000000,
+    ENTITYFLAGS_SKIP_UPDATE                                  = 0x40000000,
+    ENTITYFLAGS_CREATED                                      = 0x80000000,
+};
+
+enum globalOverrides {
+    GLOBALOVERRIDES_DISABLE_RENDER_WORLD                       = 0x00000002,
+    GLOBALOVERRIDES_DRAW                                       = 0x00000010,
+    GLOBALOVERRIDES_ENABLE_TRANSITION_STENCIL                  = 0x00000020,
+    GLOBALOVERRIDES_DO                                         = 0x00000040,
+    GLOBALOVERRIDES_DISABLE_BATTLES                            = 0x00000100,
+    GLOBALOVERRIDES_DO                                         = 0x00000400,
+    GLOBALOVERRIDES_DO                                         = 0x00000800,
+    GLOBALOVERRIDES_X                                          = 0x00%0XY00,
+    GLOBALOVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS               = 0x00010000,
+    GLOBALOVERRIDES_DISABLE_MENUS                              = 0x00040000,
+    GLOBALOVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS              = 0x00100000,
+    GLOBALOVERRIDES_CANT_PICK_UP_ITEMS                         = 0x00200000,
+};
+
+enum modelFlags {
+    MODELFLAGS_ENABLED                          = 0x00000002,
+    MODELFLAGS_TRANSFORM_GROUP_MEMBER           = 0x00000008,
+    MODELFLAGS_USES_CUSTOM_GFX                  = 0x00000010,
+    MODELFLAGS_HAS_LOCAL_VERTEX_COPY            = 0x00000080,
+    MODELFLAGS_USE_CAMERA_UNK_MATRIX            = 0x00000100,
+    MODELFLAGS_SET                              = 0x000%0200,
+    MODELFLAGS_HAS_TRANSFORM_APPLIED            = 0x00000400,
+    MODELFLAGS_HAS_TEX_PANNER                   = 0x00000800,
+    MODELFLAGS_USES_TRANSFORM_MATRIX            = 0x00001000,
+};
+
+enum playerFlags1 {
+    PLAYERFLAGS1_JUMPING                          = 0x00000002,
+    PLAYERFLAGS1_FALLING                          = 0x00000004,
+    PLAYERFLAGS1_INPUT_DISABLED                   = 0x00002000,
+    PLAYERFLAGS1_HAS_CONVERSATION_NPC             = 0x02000000,
+    PLAYERFLAGS1_CAMERA_DOESNT_FOLLOW             = 0x04000000,
+    PLAYERFLAGS1_ACTION_STATE_CHANGED             = 0x80000000,
+};
+
+enum playerFlags2 {
+    PLAYERFLAGS2_HOLDING_WATT                          = 0x00000001,
+    PLAYERFLAGS2_INTERACT_PROMPT_AVAILABLE             = 0x00000010,
+    PLAYERFLAGS2_SPEECH_PROMPT_AVAILABLE               = 0x00000020,
+    PLAYERFLAGS2_USING_PULSE_STONE                     = 0x00000080,
+    PLAYERFLAGS2_GET_STAR_SPIRIT                       = 0x00000200,
+    PLAYERFLAGS2_SHIVERING                             = 0x00000400,
+    PLAYERFLAGS2_USING_PEACH_PHYSICS                   = 0x00001000,
+    PLAYERFLAGS2_IN_DISGUISE                           = 0x00002000,
+    PLAYERFLAGS2_8_BIT_MARIO                           = 0x00004000,
+    PLAYERFLAGS2_SPINNING                              = 0x00010000,
+};
+
+enum damageType {
+    DAMAGETYPE_AIR_LIFT                        = 0x00008000,
+    DAMAGETYPE_SPINY_SURGE                     = 0x00010000,
+    DAMAGETYPE_SHELL_CRACK                     = 0x00020000,
+    DAMAGETYPE_THROW                           = 0x00040000,
+    DAMAGETYPE_POWER_BOUNCE                    = 0x00100000,
+    DAMAGETYPE_QUAKE_HAMMER                    = 0x00200000,
+    DAMAGETYPE_REMOVE_BUFFS                    = 0x00400000,
+    DAMAGETYPE_PEACH_BEAM                      = 0x00800000,
+    DAMAGETYPE_MULTI_BOUNCE                    = 0x01000000,
+    DAMAGETYPE_UNBLOCKABLE                     = 0x02000000,
+    DAMAGETYPE_SPIN_SMASH                      = 0x04000000,
+    DAMAGETYPE_IGNORE_DEFENSE                  = 0x08000000,
+    DAMAGETYPE_NO_CONTACT                      = 0x10000000,
+    DAMAGETYPE_NO_OTHER_DAMAGE_POPUPS          = 0x20000000,
+    DAMAGETYPE_STATUS_ALWAYS_HITS              = 0x40000000,
+    DAMAGETYPE_TRIGGER_LUCKY                   = 0x80000000,
+    DAMAGETYPE_FIRE                            = 0x00000002,
+    DAMAGETYPE_WATER                           = 0x00000004,
+    DAMAGETYPE_ICE                             = 0x00000008,
+    DAMAGETYPE_MAGIC                           = 0x00000010,
+    DAMAGETYPE_ELECTRIC                        = 0x00000020,
+    DAMAGETYPE_SMASH                           = 0x00000040,
+    DAMAGETYPE_JUMP                            = 0x00000080,
+    DAMAGETYPE_COSMIC                          = 0x00000100,
+    DAMAGETYPE_BLAST                           = 0x00000200,
+    DAMAGETYPE_P_O_W                           = 0x00000400,
+    DAMAGETYPE_QUAKE                           = 0x00000800,
+    DAMAGETYPE_FEAR                            = 0x00001000,
+};
+
+enum debuffType {
+    DEBUFFTYPE_SLEEP                 = 0x00001000,
+    DEBUFFTYPE_STATIC                = 0x00002000,
+    DEBUFFTYPE_FROZEN                = 0x00004000,
+    DEBUFFTYPE_PARALYZED             = 0x00010000,
+    DEBUFFTYPE_POISON                = 0x00020000,
+    DEBUFFTYPE_DIZZY                 = 0x00040000,
+    DEBUFFTYPE_SHRINK                = 0x00080000,
+    DEBUFFTYPE_STONE                 = 0x00100000,
+    DEBUFFTYPE_STOP                  = 0x00200000,
+    DEBUFFTYPE_DAZE                  = 0x01000000,
+    DEBUFFTYPE_INVISIBLE             = 0x04000000,
+};
+
+enum playerBuff {
+    PLAYERBUFF_ALL                        = 0x0FFFFFFF,
+    PLAYERBUFF_JUMP_CHARGE                = 0x00000001,
+    PLAYERBUFF_HAMMER_CHARGE              = 0x00000002,
+    PLAYERBUFF_STONE                      = 0x00000008,
+    PLAYERBUFF_HUSTLE                     = 0x00000010,
+    PLAYERBUFF_STATIC                     = 0x00000020,
+    PLAYERBUFF_TRANSPARENT                = 0x00000040,
+    PLAYERBUFF_CLOUD_NINE                 = 0x00000080,
+    PLAYERBUFF_TURBO_CHARGE               = 0x00000100,
+    PLAYERBUFF_WATER_BLOCK                = 0x00000200,
+    PLAYERBUFF_PARTNER_GLOWING            = 0x00010000,
+};
+
+enum statusFlags {
+    STATUSFLAGS_SLEEP                     = 0x00001000,
+    STATUSFLAGS_STATIC                    = 0x00002000,
+    STATUSFLAGS_FROZEN                    = 0x00004000,
+    STATUSFLAGS_FEAR                      = 0x00008000,
+    STATUSFLAGS_PARALYZE                  = 0x00010000,
+    STATUSFLAGS_POISON                    = 0x00020000,
+    STATUSFLAGS_DIZZY                     = 0x00040000,
+    STATUSFLAGS_SHRINK                    = 0x00080000,
+    STATUSFLAGS_STONE                     = 0x00100000,
+    STATUSFLAGS_STOP                      = 0x00200000,
+    STATUSFLAGS_K_O                       = 0x01000000,
+    STATUSFLAGS_GLOWING                   = 0x02000000,
+    STATUSFLAGS_TRANSPARENT               = 0x04000000,
+    STATUSFLAGS_ATTACK_BOOST              = 0x08000000,
+    STATUSFLAGS_DEFENSE_BOOST             = 0x10000000,
+    STATUSFLAGS_CHILL_OUT                 = 0x20000000,
+    STATUSFLAGS_RIGHT_ON                  = 0x40000000,
+};
+
