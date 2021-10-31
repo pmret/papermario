@@ -233,12 +233,12 @@ enum StoryProgress {
 };
 
 enum EncounterTriggers {
-    ENCOUNTER_TRIGGER_NONE                            = 0x00000001,
-    ENCOUNTER_TRIGGER_JUMP                            = 0x00000002,
-    ENCOUNTER_TRIGGER_SPIN                            = 0x00000003,
-    ENCOUNTER_TRIGGER_HAMMER                          = 0x00000004,
-    ENCOUNTER_TRIGGER_CONVERSATION                    = 0x00000005,
-    ENCOUNTER_TRIGGER_PARTNER                         = 0x00000006,
+    ENCOUNTER_TRIGGER_NONE                            = 1,
+    ENCOUNTER_TRIGGER_JUMP                            = 2,
+    ENCOUNTER_TRIGGER_SPIN                            = 3,
+    ENCOUNTER_TRIGGER_HAMMER                          = 4,
+    ENCOUNTER_TRIGGER_CONVERSATION                    = 5,
+    ENCOUNTER_TRIGGER_PARTNER                         = 6,
 };
 
 enum SongIDs {
@@ -455,28 +455,28 @@ enum Abilities {
 };
 
 enum Emotes {
-    EMOTE_EXCLAMATION        = 0x00000000,
-    EMOTE_SHOCK              = 0x00000001,
-    EMOTE_QUESTION           = 0x00000002,
-    EMOTE_FRUSTRATION        = 0x00000003,
-    EMOTE_ELLIPSIS           = 0x00000004,
-    EMOTE_INVALID            = 0x00000005,
+    EMOTE_EXCLAMATION        = 0,
+    EMOTE_SHOCK              = 1,
+    EMOTE_QUESTION           = 2,
+    EMOTE_FRUSTRATION        = 3,
+    EMOTE_ELLIPSIS           = 4,
+    EMOTE_INVALID            = 5,
 };
 
 enum Easings {
-    EASING_LINEAR                   = 0x00000000,
-    EASING_QUADRATIC_IN             = 0x00000001,
-    EASING_CUBIC_IN                 = 0x00000002,
-    EASING_QUARTIC_IN               = 0x00000003,
-    EASING_QUADRATIC_OUT            = 0x00000004,
-    EASING_CUBIC_OUT                = 0x00000005,
-    EASING_QUARTIC_OUT              = 0x00000006,
-    EASING_COS_SLOW_OVERSHOOT       = 0x00000007,
-    EASING_COS_FAST_OVERSHOOT       = 0x00000008,
-    EASING_COS_BOUNCE               = 0x00000009,
-    EASING_COS_IN_OUT               = 0x0000000A,
-    EASING_SIN_OUT                  = 0x0000000B,
-    EASING_COS_IN                   = 0x0000000C,
+    EASING_LINEAR                   = 0,
+    EASING_QUADRATIC_IN             = 1,
+    EASING_CUBIC_IN                 = 2,
+    EASING_QUARTIC_IN               = 3,
+    EASING_QUADRATIC_OUT            = 4,
+    EASING_CUBIC_OUT                = 5,
+    EASING_QUARTIC_OUT              = 6,
+    EASING_COS_SLOW_OVERSHOOT       = 7,
+    EASING_COS_FAST_OVERSHOOT       = 8,
+    EASING_COS_BOUNCE               = 9,
+    EASING_COS_IN_OUT               = 10,
+    EASING_SIN_OUT                  = 11,
+    EASING_COS_IN                   = 12,
 };
 
 enum SoundIDs {
@@ -620,10 +620,10 @@ enum SoundIDs {
 };
 
 enum Cams {
-    CAM_DEFAULT      = 0x00000000,
-    CAM_BATTLE       = 0x00000001,
-    CAM_TATTLE       = 0x00000002,
-    CAM_CAM3         = 0x00000003,
+    CAM_DEFAULT      = 0,
+    CAM_BATTLE       = 1,
+    CAM_TATTLE       = 2,
+    CAM_CAM3         = 3,
 };
 
 #define LOOKUP_ITEM(itemID) gItemTable[itemID & ~0xF0000]
@@ -1064,28 +1064,28 @@ enum PlayerAnims {
 };
 
 enum AmbientSounds {
-    AMBIENT_SPOOKY             = 0x00000000,
-    AMBIENT_WIND               = 0x00000001,
-    AMBIENT_BEACH              = 0x00000002,
-    AMBIENT_JUNGLE             = 0x00000003,
-    AMBIENT_UNDER_SEA1         = 0x00000004,
-    AMBIENT_UNDER_SEA2         = 0x00000005,
-    AMBIENT_SILENCE            = 0x00000006,
-    AMBIENT_UNDER_SEA3         = 0x00000007,
-    AMBIENT_UNDER_SEA4         = 0x00000008,
-    AMBIENT_EXIT_SEA           = 0x00000009,
-    AMBIENT_UNDER_SEA5         = 0x0000000A,
-    AMBIENT_UNDER_SEA6         = 0x0000000B,
-    AMBIENT_BIRDS              = 0x0000000C,
-    AMBIENT_SEA                = 0x0000000D,
-    AMBIENT_MUSIC              = 0x00000010,
+    AMBIENT_SPOOKY             = 0,
+    AMBIENT_WIND               = 1,
+    AMBIENT_BEACH              = 2,
+    AMBIENT_JUNGLE             = 3,
+    AMBIENT_UNDER_SEA1         = 4,
+    AMBIENT_UNDER_SEA2         = 5,
+    AMBIENT_SILENCE            = 6,
+    AMBIENT_UNDER_SEA3         = 7,
+    AMBIENT_UNDER_SEA4         = 8,
+    AMBIENT_EXIT_SEA           = 9,
+    AMBIENT_UNDER_SEA5         = 10,
+    AMBIENT_UNDER_SEA6         = 11,
+    AMBIENT_BIRDS              = 12,
+    AMBIENT_SEA                = 13,
+    AMBIENT_MUSIC              = 16,
 };
 
 enum EncounterOutcomes {
-    OUTCOME_PLAYER_WON          = 0x00000000,
-    OUTCOME_PLAYER_LOST         = 0x00000001,
-    OUTCOME_PLAYER_FLED         = 0x00000002,
-    OUTCOME_ENEMY_FLED          = 0x00000003,
+    OUTCOME_PLAYER_WON          = 0,
+    OUTCOME_PLAYER_LOST         = 1,
+    OUTCOME_PLAYER_FLED         = 2,
+    OUTCOME_ENEMY_FLED          = 3,
 };
 
 enum DecorationIDs {
@@ -1101,14 +1101,14 @@ enum DecorationIDs {
 };
 
 enum HitResults {
-    HIT_RESULT_TRIGGERED_EXPLODE           = 0xFFFFFFFF,
-    HIT_RESULT_HIT                         = 0x00000000,
-    HIT_RESULT_QUAKE_IMMUNE                = 0x00000002,
-    HIT_RESULT_LANDED_ON_SPIKE             = 0x00000004,
-    HIT_RESULT_LUCKY                       = 0x00000005,
-    HIT_RESULT_MISS                        = 0x00000006,
-    HIT_RESULT_HIT_STATIC                  = 0x00000007,
-    HIT_RESULT_IMMUNE                      = 0x00000008,
+    HIT_RESULT_TRIGGERED_EXPLODE           = -1,
+    HIT_RESULT_HIT                         = 0,
+    HIT_RESULT_QUAKE_IMMUNE                = 2,
+    HIT_RESULT_LANDED_ON_SPIKE             = 4,
+    HIT_RESULT_LUCKY                       = 5,
+    HIT_RESULT_MISS                        = 6,
+    HIT_RESULT_HIT_STATIC                  = 7,
+    HIT_RESULT_IMMUNE                      = 8,
 };
 
 enum Iters {
@@ -1128,21 +1128,21 @@ enum ActorSoundIDs {
 };
 
 enum Phases {
-    PHASE_EXECUTE_ACTION            = 0x00000000,
-    PHASE_FIRST_STRIKE              = 0x00000001,
-    PHASE_RUN_AWAY_START            = 0x00000003,
-    PHASE_RUN_AWAY_RESET            = 0x00000004,
-    PHASE_USE_DEFEND                = 0x00000006,
-    PHASE_RUN_AWAY_FAIL             = 0x00000007,
-    PHASE_USE_LIFE_SHROOM           = 0x00000008,
-    PHASE_PLAYER_BEGIN              = 0x0000000A,
-    PHASE_ENEMY_END                 = 0x0000000B,
-    PHASE_ENEMY_BEGIN               = 0x0000000C,
-    PHASE_PLAYER_END                = 0x0000000D,
-    PHASE_MERLEE_ATTACK_BONUS       = 0x00000014,
-    PHASE_MERLEE_DEFENSE_BONUS      = 0x00000015,
-    PHASE_MERLEE_EXP_BONUS          = 0x00000016,
-    PHASE_PLAYER_HAPPY              = 0x0000001E,
+    PHASE_EXECUTE_ACTION            = 0,
+    PHASE_FIRST_STRIKE              = 1,
+    PHASE_RUN_AWAY_START            = 3,
+    PHASE_RUN_AWAY_RESET            = 4,
+    PHASE_USE_DEFEND                = 6,
+    PHASE_RUN_AWAY_FAIL             = 7,
+    PHASE_USE_LIFE_SHROOM           = 8,
+    PHASE_PLAYER_BEGIN              = 10,
+    PHASE_ENEMY_END                 = 11,
+    PHASE_ENEMY_BEGIN               = 12,
+    PHASE_PLAYER_END                = 13,
+    PHASE_MERLEE_ATTACK_BONUS       = 20,
+    PHASE_MERLEE_DEFENSE_BONUS      = 21,
+    PHASE_MERLEE_EXP_BONUS          = 22,
+    PHASE_PLAYER_HAPPY              = 30,
 };
 
 enum ActorIDs {
@@ -1237,12 +1237,12 @@ enum Events {
 };
 
 enum HitSounds {
-    HIT_SOUND_MISS             = 0x00000000,
-    HIT_SOUND_BONES            = 0x00000001,
-    HIT_SOUND_NORMAL           = 0x00000002,
-    HIT_SOUND_FIRE             = 0x00000003,
-    HIT_SOUND_ICE              = 0x00000004,
-    HIT_SOUND_SHOCK            = 0x00000005,
+    HIT_SOUND_MISS             = 0,
+    HIT_SOUND_BONES            = 1,
+    HIT_SOUND_NORMAL           = 2,
+    HIT_SOUND_FIRE             = 3,
+    HIT_SOUND_ICE              = 4,
+    HIT_SOUND_SHOCK            = 5,
 };
 
 enum Statuses {
@@ -1281,8 +1281,8 @@ enum Statuses {
 };
 
 enum doorSwing {
-    DOOR_SWING_IN             = 0xFFFFFFFF,
-    DOOR_SWING_OUT            = 0x00000001,
+    DOOR_SWING_IN             = -1,
+    DOOR_SWING_OUT            = 1,
 };
 
 enum ItemSpawnModes {
@@ -1313,7 +1313,7 @@ enum ItemSpawnModes {
     ITEM_SPAWN_MODE_TOSS_FADE2                                   = 0x00000018,
     ITEM_SPAWN_MODE_TOSS_FADE3                                   = 0x00000019,
     ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL                      = 0x0000001A,
-    ITEM_SPAWN_MODE_UNKNOWN_1B                                   = 0x0000001A,
+    ITEM_SPAWN_MODE_UNKNOWN_1B                                   = 0x0000001B,
 };
 
 enum Locations {
@@ -1356,13 +1356,13 @@ enum Locations {
 };
 
 enum DoorSounds {
-    DOOR_SOUNDS_BASIC               = 0x00000000,
-    DOOR_SOUNDS_METAL               = 0x00000001,
-    DOOR_SOUNDS_LARGE               = 0x00000002,
-    DOOR_SOUNDS_CREAKY              = 0x00000003,
-    DOOR_SOUNDS_GATE                = 0x00000004,
-    DOOR_SOUNDS_DOOR                = 0x00000005,
-    DOOR_SOUNDS_UNUSED              = 0x00000006,
+    DOOR_SOUNDS_BASIC               = 0,
+    DOOR_SOUNDS_METAL               = 1,
+    DOOR_SOUNDS_LARGE               = 2,
+    DOOR_SOUNDS_CREAKY              = 3,
+    DOOR_SOUNDS_GATE                = 4,
+    DOOR_SOUNDS_DOOR                = 5,
+    DOOR_SOUNDS_UNUSED              = 6,
 };
 
 enum ActionStates {
