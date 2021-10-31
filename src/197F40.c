@@ -2347,7 +2347,7 @@ ApiStatus SetPartAlpha(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus CreatePartShadow(Evt* script, s32 isInitialCall) {
-    s32* args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
 
@@ -2360,7 +2360,7 @@ ApiStatus CreatePartShadow(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus RemovePartShadow(Evt* script, s32 isInitialCall) {
-    s32* args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
 
