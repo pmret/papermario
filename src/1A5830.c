@@ -419,7 +419,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     switch (actorMasked) {
         case ACTOR_PLAYER:
             // TODO figure out how to better write target->debuff >= STATUS_POISON
-            if ((target->debuff == 0 || target->debuff >= STATUS_POISON) && (target->stoneStatus == STATUS_END) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_2000000)) {
+            if ((target->debuff == 0 || target->debuff >= STATUS_POISON) && (target->stoneStatus == STATUS_END) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                 s32 blocked;
 
                 if (player_team_is_ability_active(target, ABILITY_BERSERKER)) {
@@ -441,7 +441,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
             break;
         case ACTOR_PARTNER:
             if (target->stoneStatus == STATUS_END) {
-                if (target->koStatus == STATUS_END && !(battleStatus->currentAttackElement & DAMAGE_TYPE_2000000)) {
+                if (target->koStatus == STATUS_END && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                     if (check_block_input(BUTTON_A)) {
                         damage = 0;
                         sfx_play_sound_at_position(SOUND_UNKNOWN_231, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -462,7 +462,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     event = EVENT_HIT_COMBO;
     if (damage <= 0) {
         target->hpChangeCounter = 0;
-        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_40000000)) {
+        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_SPIN_SMASH)) {
             hitResult = HIT_RESULT_QUAKE_IMMUNE;
             event = EVENT_23;
         } else {
