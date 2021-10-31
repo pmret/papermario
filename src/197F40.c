@@ -1964,7 +1964,6 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
             script->functionTemp[2] = evt_get_variable(script, *args++);
             script->functionTemp[0] = 1;
             break;
-
         case 1:
             actor2 = script->functionTemp[1];
             if (does_script_exist(actor2->takeTurnID) == FALSE) {
@@ -1976,14 +1975,12 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
                             battleStatus->enemyIDs[numEnemies++] = i | 0x200;
                         }
                     }
-
                     battleStatus->numEnemyActors = numEnemies;
                     if (script->functionTemp[2] != 0) {
                         tempPriority = -1000;
                     } else {
                         tempPriority = 1000;
                     }
-
                     enemyIDs = battleStatus->enemyIDs;
                     for (i = 0; i < numEnemies - 1; i++) {
                         for (j = i + 1; j < numEnemies; j++) {
