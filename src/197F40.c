@@ -2281,7 +2281,27 @@ INCLUDE_ASM(s32, "197F40", RemoveActorDecoration);
 
 INCLUDE_ASM(s32, "197F40", ModifyActorDecoration);
 
-INCLUDE_ASM(s32, "197F40", UseIdleAnimation);
+ApiStatus UseIdleAnimation(Evt* script, s32 isInitialCall) {
+    Actor* actor;
+    s32* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 temp_s0_3 = evt_get_variable(script, *args++);
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    if (temp_s0_3 == 0) {
+        actor->flags &= ~ACTOR_FLAG_4000000;
+        actor->flags &= ~ACTOR_FLAG_8000000;
+        func_80266E40(actor);
+    } else {
+        actor->flags |= ACTOR_FLAG_4000000;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", func_8026F1A0);
 
