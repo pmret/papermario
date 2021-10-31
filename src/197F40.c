@@ -2272,9 +2272,42 @@ INCLUDE_ASM(s32, "197F40", func_8026ED20);
 
 INCLUDE_ASM(s32, "197F40", func_8026EDE4);
 
-INCLUDE_ASM(s32, "197F40", AddActorDecoration);
+ApiStatus AddActorDecoration(Evt* script, s32 isInitialCall) {
+    s32* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
+    s32 decorationIndex = evt_get_variable(script, *args++);
+    s32 decorationType = evt_get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
 
-INCLUDE_ASM(s32, "197F40", RemoveActorDecoration);
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.enemyID;
+    }
+
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partIndex);
+    add_part_decoration(actorPart, decorationIndex, decorationType);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus RemoveActorDecoration(Evt* script, s32 isInitialCall) {
+    s32* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
+    s32 decorationIndex = evt_get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.enemyID;
+    }
+
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partIndex);
+    remove_part_decoration(actorPart, decorationIndex);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", ModifyActorDecoration);
 
