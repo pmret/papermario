@@ -282,6 +282,7 @@ Evt* start_script_in_group(EvtSource* source, u8 priority, u8 initialState, u8 g
 f32 get_player_normal_yaw(void);
 void set_standard_shadow_scale(Shadow* shadow, f32 scale);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
+void set_animation(s32 actorID, s32, s32 animationIndex);
 void set_animation_rate(s32 actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
 ModelAnimator* get_animator_by_index(s32 arg0);

@@ -5,7 +5,7 @@
 
 #define NAMESPACE EB7540
 
-INCLUDE_ASM(s32, "EB7540", func_80240310_EB7540);
+#include "world/common/SetEntityPositionF.inc.c"
 
 #include "world/common/GetEntityPosition.inc.c"
 

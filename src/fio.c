@@ -1,16 +1,6 @@
-#include "common.h"
+#include "fio.h"
 
 char magicSaveString[] = "Mario Story 006";
-
-extern s32 logicalSaveInfo[4][2]; // 0x8009BA30
-extern s32 physicalSaveInfo[6][2]; // 0x8009BA50
-extern s32 nextAvailableSavePage; // 0x8009BA80
-extern s32 D_800D95E8[];
-extern s32 D_8009A6B0[];
-
-void fio_serialize_state(void);
-void fio_erase_flash(s32 pageNum);
-void fio_write_flash(s32 pageNum, s32* readBuffer, s32 numBytes);
 
 s32 get_spirits_rescued(void) {
     s32 storyProgress = evt_get_variable(NULL, EVT_STORY_PROGRESS);

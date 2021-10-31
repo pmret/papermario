@@ -21,7 +21,8 @@
                 "_LANGUAGE_C",
                 "_MIPS_SZLONG=32",
                 "SCRIPT(...)={}",
-                "VERSION=us"
+                "VERSION=us",
+                "VERSION_US"
             ],
             "cStandard": "c89",
             "cppStandard": "c++17"

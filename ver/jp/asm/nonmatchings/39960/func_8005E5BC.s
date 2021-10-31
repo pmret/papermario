@@ -11,7 +11,7 @@ glabel func_8005E5BC
 /* 399D4 8005E5D4 24040002 */  addiu     $a0, $zero, 2
 /* 399D8 8005E5D8 0C017998 */  jal       func_8005E660
 /* 399DC 8005E5DC 24050001 */   addiu    $a1, $zero, 1
-/* 399E0 8005E5E0 0C019B8C */  jal       func_80066E30
+/* 399E0 8005E5E0 0C019B8C */  jal       osViSetSpecialFeatures
 /* 399E4 8005E5E4 2404005A */   addiu    $a0, $zero, 0x5a
 /* 399E8 8005E5E8 3C10800A */  lui       $s0, %hi(D_800A2230)
 /* 399EC 8005E5EC 26102230 */  addiu     $s0, $s0, %lo(D_800A2230)
@@ -21,8 +21,8 @@ glabel func_8005E5BC
 /* 399FC 8005E5FC 24428570 */  addiu     $v0, $v0, %lo(D_800B8570)
 /* 39A00 8005E600 AFA20010 */  sw        $v0, 0x10($sp)
 /* 39A04 8005E604 2402000A */  addiu     $v0, $zero, 0xa
-/* 39A08 8005E608 3C068002 */  lui       $a2, %hi(func_80025F70)
-/* 39A0C 8005E60C 24C65F70 */  addiu     $a2, $a2, %lo(func_80025F70)
+/* 39A08 8005E608 3C068002 */  lui       $a2, %hi(boot_main)
+/* 39A0C 8005E60C 24C65F70 */  addiu     $a2, $a2, %lo(boot_main)
 /* 39A10 8005E610 0000382D */  daddu     $a3, $zero, $zero
 /* 39A14 8005E614 0C01978C */  jal       func_80065E30
 /* 39A18 8005E618 AFA20014 */   sw       $v0, 0x14($sp)

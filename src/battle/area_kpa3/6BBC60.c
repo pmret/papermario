@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_802180D0_6BBC60);
 
-INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_80218960_6BC4F0);
+#include "common/ActorJumpToPos.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_80218AB4_6BC644);
 
