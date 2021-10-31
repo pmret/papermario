@@ -462,12 +462,12 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     event = EVENT_HIT_COMBO;
     if (damage <= 0) {
         target->hpChangeCounter = 0;
-        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_SPIN_SMASH)) {
+        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
             hitResult = HIT_RESULT_QUAKE_IMMUNE;
-            event = EVENT_23;
+            event = EVENT_UNKNOWN_TRIGGER;
         } else {
             hitResult = HIT_RESULT_QUAKE_IMMUNE;
-            event = EVENT_23;
+            event = EVENT_UNKNOWN_TRIGGER;
             if (target->currentHP <= 0) {
                 event = EVENT_DEATH;
             }
@@ -504,7 +504,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         if (event == EVENT_HIT_COMBO) {
             event = EVENT_HIT;
         }
-        if (event == EVENT_23) {
+        if (event == EVENT_UNKNOWN_TRIGGER) {
             event = EVENT_IMMUNE;
         }
         if (target->currentHP <= 0 && event == EVENT_IMMUNE) {
@@ -537,7 +537,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                 if (event == EVENT_HIT_COMBO) {
                     event = EVENT_FLIP_TRIGGER;
                 }
-                if (event == EVENT_23) {
+                if (event == EVENT_UNKNOWN_TRIGGER) {
                     event = EVENT_FLIP_TRIGGER;
                 }
             }
@@ -550,7 +550,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                 event = EVENT_BURN_HIT;
             }
             if (event == EVENT_DEATH) {
-                event = EVENT_REVIVE;
+                event = EVENT_FIRE_DEATH;
             }
             isFire = TRUE;
         }
@@ -558,13 +558,13 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
     if (gBattleStatus.flags1 & BS_FLAGS1_ATK_BLOCKED) {
         if (event == EVENT_HIT_COMBO) {
-            event = EVENT_BURN_DEATH;
+            event = EVENT_18;
         }
         if (event == EVENT_HIT) {
             event = EVENT_BLOCK;
         }
-        if (event == EVENT_23) {
-            event = EVENT_BURN_DEATH;
+        if (event == EVENT_UNKNOWN_TRIGGER) {
+            event = EVENT_18;
         }
         if (event == EVENT_IMMUNE) {
             event = EVENT_BLOCK;
@@ -633,7 +633,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                             }
 
                             if (statusInflicted) {
-                                if (event == EVENT_23) {
+                                if (event == EVENT_UNKNOWN_TRIGGER) {
                                     event = EVENT_HIT_COMBO;
                                 }
                                 if (event == EVENT_IMMUNE) {
@@ -675,7 +675,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                         // immune star fx?
                         func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, -3);
                     }
-                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_SMASH)) {
+                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_SMASH)) {
                     show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 1);
                     func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                 } else {
@@ -689,7 +689,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                     if (!statusInflicted2 && !statusInflicted) {
                         func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
                     }
-                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_SMASH)) {
+                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_SMASH)) {
                     show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
                     func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                 } else {
@@ -834,7 +834,7 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
         if (dispatchEvent == EVENT_HIT_COMBO) {
             dispatchEvent = EVENT_HIT;
         }
-        if (dispatchEvent == EVENT_23) {
+        if (dispatchEvent == EVENT_UNKNOWN_TRIGGER) {
             dispatchEvent = EVENT_IMMUNE;
         }
     }
