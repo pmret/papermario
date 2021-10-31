@@ -76,7 +76,7 @@ EvtSource N(init_8021CDD8);
 
 ActorPartDesc N(partsTable_8021CC70)[] = {
     {
-        .flags = PART_FLAG_INVISIBLE | PART_FLAG_NO_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
@@ -88,19 +88,19 @@ ActorPartDesc N(partsTable_8021CC70)[] = {
         .unk_1C = 246,
     },
     {
-        .flags = PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
         .idleAnimations = N(idleAnimations_8021CD28),
         .defenseTable = N(defenseTable_8021CB0C),
-        .eventFlags = EVENT_FLAG_GROUNDABLE,
+        .eventFlags = ACTOR_EVENT_FLAG_GROUNDABLE,
         .elementImmunityFlags = 0,
         .unk_1C = 246,
     },
     {
-        .flags = PART_FLAG_INVISIBLE | PART_FLAG_NO_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = 3,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -16, 24 },
@@ -112,7 +112,7 @@ ActorPartDesc N(partsTable_8021CC70)[] = {
         .unk_1C = 246,
     },
     {
-        .flags = PART_FLAG_INVISIBLE | PART_FLAG_NO_TARGET,
+        .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = 4,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -16, 24 },

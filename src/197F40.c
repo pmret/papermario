@@ -2283,7 +2283,7 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
             if (partsTable->flags & 0x100) {
                 flags |= STATUS_FLAG_TRANSPARENT;
             }
-            if (partsTable->eventFlags & EVENT_FLAG_ILLUSORY) {
+            if (partsTable->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
                 flags |= STATUS_FLAG_TRANSPARENT;
             }
     }

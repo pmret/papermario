@@ -1682,41 +1682,108 @@ enum RenderMode {
 };
 
 enum ActorFlags {
-    ACTOR_FLAG_DISABLED         = 0x00000001, ///< Disables the actor.
-    ACTOR_FLAG_NO_SHADOW        = 0x00000004, ///< Hide shadow.
-    ACTOR_FLAG_FLYING           = 0x00000200, ///< Quake Hammer can't hit.
-    ACTOR_FLAG_HP_OFFSET_BELOW  = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down).
-    ACTOR_FLAG_TARGET_ONLY      = 0x00004000, ///< Battle ends even if undefeated. No turn.
-    ACTOR_FLAG_8000             = 0x00008000,
-    ACTOR_FLAG_80000            = 0x00080000,
-    ACTOR_FLAG_NO_ATTACK        = 0x00200000, ///< Skip attack turn.
-    ACTOR_FLAG_NO_DMG_APPLY     = 0x00400000, ///< Damage is not applied to actor HP.
-    ACTOR_FLAG_NO_DMG_POPUP     = 0x02000000, ///< Hide damage popup.
-    ACTOR_FLAG_4000000          = 0x04000000,
-    ACTOR_FLAG_8000000          = 0x08000000,
-    ACTOR_FLAG_10000000         = 0x10000000,
+    ACTOR_FLAG_DISABLED          = 0x00000001, ///< Disables the actor.
+    ACTOR_FLAG_2                 = 0x00000002,
+    ACTOR_FLAG_NO_SHADOW         = 0x00000004, ///< Hide shadow.
+    ACTOR_FLAG_8                 = 0x00000008,
+    ACTOR_FLAG_10                = 0x00000010,
+    ACTOR_FLAG_20                = 0x00000020,
+    ACTOR_FLAG_40                = 0x00000040,
+    ACTOR_FLAG_80                = 0x00000080,
+    ACTOR_FLAG_100               = 0x00000100,
+    ACTOR_FLAG_FLYING            = 0x00000200, ///< Quake Hammer can't hit.
+    ACTOR_FLAG_400               = 0x00000400,
+    ACTOR_FLAG_HP_OFFSET_BELOW   = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down).
+    ACTOR_FLAG_1000              = 0x00001000,
+    ACTOR_FLAG_2000              = 0x00002000,
+    ACTOR_FLAG_TARGET_ONLY       = 0x00004000, ///< Battle ends even if undefeated. No turn.
+    ACTOR_FLAG_8000              = 0x00008000,
+    ACTOR_FLAG_10000             = 0x00010000,
+    ACTOR_FLAG_20000             = 0x00020000,
+    ACTOR_FLAG_40000             = 0x00040000,
+    ACTOR_FLAG_80000             = 0x00080000,
+    ACTOR_FLAG_100000            = 0x00100000,
+    ACTOR_FLAG_NO_ATTACK         = 0x00200000, ///< Skip attack turn.
+    ACTOR_FLAG_NO_DMG_APPLY      = 0x00400000, ///< Damage is not applied to actor HP.
+    ACTOR_FLAG_800000            = 0x00800000,
+    ACTOR_FLAG_1000000           = 0x01000000,
+    ACTOR_FLAG_NO_DMG_POPUP      = 0x02000000, ///< Hide damage popup.
+    ACTOR_FLAG_4000000           = 0x04000000,
+    ACTOR_FLAG_8000000           = 0x08000000,
+    ACTOR_FLAG_10000000          = 0x10000000,
+    ACTOR_FLAG_20000000          = 0x20000000,
+    ACTOR_FLAG_40000000          = 0x40000000,
+    ACTOR_FLAG_80000000          = 0x80000000,
 };
 
 enum ActorPartFlags {
-    PART_FLAG_INVISIBLE         = 0x00000001,
-    PART_FLAG_2000              = 0x00002000, ///< Plays extra hurt SFX?
-    PART_FLAG_NO_TARGET         = 0x00020000, ///< Cannot be targeted.
-    PART_FLAG_MULTI_TARGET      = 0x00800000, ///< Can be targeted with multi-target attacks (e.g. Star Storm).
+    ACTOR_PART_FLAG_INVISIBLE         = 0x00000001,
+    ACTOR_PART_FLAG_2                 = 0x00000002,
+    ACTOR_PART_FLAG_4                 = 0x00000004,
+    ACTOR_PART_FLAG_8                 = 0x00000008,
+    ACTOR_PART_FLAG_10                = 0x00000010,
+    ACTOR_PART_FLAG_20                = 0x00000020,
+    ACTOR_PART_FLAG_40                = 0x00000040,
+    ACTOR_PART_FLAG_80                = 0x00000080,
+    ACTOR_PART_FLAG_100               = 0x00000100,
+    ACTOR_PART_FLAG_200               = 0x00000200,
+    ACTOR_PART_FLAG_400               = 0x00000400,
+    ACTOR_PART_FLAG_800               = 0x00000800,
+    ACTOR_PART_FLAG_1000              = 0x00001000,
+    ACTOR_PART_FLAG_2000              = 0x00002000, ///< Plays extra hurt SFX?
+    ACTOR_PART_FLAG_4000              = 0x00004000,
+    ACTOR_PART_FLAG_8000              = 0x00008000,
+    ACTOR_PART_FLAG_10000             = 0x00010000,
+    ACTOR_PART_FLAG_NO_TARGET         = 0x00020000, ///< Cannot be targeted.
+    ACTOR_PART_FLAG_40000             = 0x00040000,
+    ACTOR_PART_FLAG_80000             = 0x00080000,
+    ACTOR_PART_FLAG_100000            = 0x00100000,
+    ACTOR_PART_FLAG_200000            = 0x00200000,
+    ACTOR_PART_FLAG_400000            = 0x00400000,
+    ACTOR_PART_FLAG_MULTI_TARGET      = 0x00800000, ///< Can be targeted with multi-target attacks (e.g. Star Storm).
+    ACTOR_PART_FLAG_1000000           = 0x01000000,
+    ACTOR_PART_FLAG_2000000           = 0x02000000,
+    ACTOR_PART_FLAG_4000000           = 0x04000000,
+    ACTOR_PART_FLAG_8000000           = 0x08000000,
+    ACTOR_PART_FLAG_10000000          = 0x10000000,
+    ACTOR_PART_FLAG_20000000          = 0x20000000,
+    ACTOR_PART_FLAG_40000000          = 0x40000000,
+    ACTOR_PART_FLAG_80000000          = 0x80000000,
 };
 
 enum ActorEventFlags {
-    EVENT_FLAG_FIREY            = 0x00000002, ///< Player takes burn damage upon contact.
-    EVENT_FLAG_ICY              = 0x00000008, ///< No known effect, but is used.
-    EVENT_FLAG_SPIKY_TOP        = 0x00000010, ///< Player takes spike damage from jump attacks.
-    EVENT_FLAG_ILLUSORY         = 0x00000020, ///< Player attacks pass through and miss.
-    EVENT_FLAG_ELECTRIFIED      = 0x00000080, ///< Player takes shock damage upon contact.
-    EVENT_FLAG_EXPLOSIVE        = 0x00000200, ///< Blast and fire attacks trigger an explosion.
-    EVENT_FLAG_800              = 0x00000800,
-    EVENT_FLAG_FLIPABLE         = 0x00001000, ///< Actor can be flipped; triggered by jump and quake attacks.
-    EVENT_FLAG_GROUNDABLE       = 0x00004000, ///< Actor can be knocked down from flight; triggered by jump attacks.
-    EVENT_FLAG_SPIKY_FRONT      = 0x00010000, ///< Player takes spike damage from hammer attacks.
-    EVENT_FLAG_ENCHANTED        = 0x00040000, ///< Actor glows and listens for the Star Beam event.
-    EVENT_FLAG_POWER_BOUNCE     = 0x00100000, ///< Actor listens for Power Bounce events.
+    ACTOR_EVENT_FLAG_1                = 0x00000001,
+    ACTOR_EVENT_FLAG_FIREY            = 0x00000002, ///< Player takes burn damage upon contact.
+    ACTOR_EVENT_FLAG_4                = 0x00000004,
+    ACTOR_EVENT_FLAG_ICY              = 0x00000008, ///< No known effect, but is used.
+    ACTOR_EVENT_FLAG_SPIKY_TOP        = 0x00000010, ///< Player takes spike damage from jump attacks.
+    ACTOR_EVENT_FLAG_ILLUSORY         = 0x00000020, ///< Player attacks pass through and miss.
+    ACTOR_EVENT_FLAG_40               = 0x00000040,
+    ACTOR_EVENT_FLAG_ELECTRIFIED      = 0x00000080, ///< Player takes shock damage upon contact.
+    ACTOR_EVENT_FLAG_100              = 0x00000100,
+    ACTOR_EVENT_FLAG_EXPLOSIVE        = 0x00000200, ///< Blast and fire attacks trigger an explosion.
+    ACTOR_EVENT_FLAG_400              = 0x00000400,
+    ACTOR_EVENT_FLAG_800              = 0x00000800,
+    ACTOR_EVENT_FLAG_FLIPABLE         = 0x00001000, ///< Actor can be flipped; triggered by jump and quake attacks.
+    ACTOR_EVENT_FLAG_2000             = 0x00002000,
+    ACTOR_EVENT_FLAG_GROUNDABLE       = 0x00004000, ///< Actor can be knocked down from flight; triggered by jump attacks.
+    ACTOR_EVENT_FLAG_8000             = 0x00008000,
+    ACTOR_EVENT_FLAG_SPIKY_FRONT      = 0x00010000, ///< Player takes spike damage from hammer attacks.
+    ACTOR_EVENT_FLAG_20000            = 0x00020000,
+    ACTOR_EVENT_FLAG_ENCHANTED        = 0x00040000, ///< Actor glows and listens for the Star Beam event.
+    ACTOR_EVENT_FLAG_80000            = 0x00080000,
+    ACTOR_EVENT_FLAG_POWER_BOUNCE     = 0x00100000, ///< Actor listens for Power Bounce events.
+    ACTOR_EVENT_FLAG_200000           = 0x00200000,
+    ACTOR_EVENT_FLAG_400000           = 0x00400000,
+    ACTOR_EVENT_FLAG_800000           = 0x00800000,
+    ACTOR_EVENT_FLAG_1000000          = 0x01000000,
+    ACTOR_EVENT_FLAG_2000000          = 0x02000000,
+    ACTOR_EVENT_FLAG_4000000          = 0x04000000,
+    ACTOR_EVENT_FLAG_8000000          = 0x08000000,
+    ACTOR_EVENT_FLAG_10000000         = 0x10000000,
+    ACTOR_EVENT_FLAG_20000000         = 0x20000000,
+    ACTOR_EVENT_FLAG_40000000         = 0x40000000,
+    ACTOR_EVENT_FLAG_80000000         = 0x80000000,
 };
 
 // TODO alex struct
@@ -2075,14 +2142,38 @@ enum GlobalOverrides {
 };
 
 enum ModelFlags {
-    MODEL_FLAGS_ENABLED                          = 0x00000002,
-    MODEL_FLAGS_TRANSFORM_GROUP_MEMBER           = 0x00000008,
-    MODEL_FLAGS_USES_CUSTOM_GFX                  = 0x00000010,
-    MODEL_FLAGS_HAS_LOCAL_VERTEX_COPY            = 0x00000080,
-    MODEL_FLAGS_USE_CAMERA_UNK_MATRIX            = 0x00000100,
-    MODEL_FLAGS_HAS_TRANSFORM_APPLIED            = 0x00000400,
-    MODEL_FLAGS_HAS_TEX_PANNER                   = 0x00000800,
-    MODEL_FLAGS_USES_TRANSFORM_MATRIX            = 0x00001000,
+    MODEL_FLAGS_FLAG_1                  = 0x00000001,
+    MODEL_FLAGS_ENABLED                 = 0x00000002,
+    MODEL_FLAGS_FLAG_4                  = 0x00000004,
+    MODEL_FLAGS_TRANSFORM_GROUP_MEMBER  = 0x00000008,
+    MODEL_FLAGS_USES_CUSTOM_GFX         = 0x00000010,
+    MODEL_FLAGS_FLAG_20                 = 0x00000020,
+    MODEL_FLAGS_FLAG_40                 = 0x00000040,
+    MODEL_FLAGS_HAS_LOCAL_VERTEX_COPY   = 0x00000080,
+    MODEL_FLAGS_USE_CAMERA_UNK_MATRIX   = 0x00000100,
+    MODEL_FLAGS_FLAG_200                = 0x00000200,
+    MODEL_FLAGS_HAS_TRANSFORM_APPLIED   = 0x00000400,
+    MODEL_FLAGS_HAS_TEX_PANNER          = 0x00000800,
+    MODEL_FLAGS_USES_TRANSFORM_MATRIX   = 0x00001000,
+    MODEL_FLAGS_FLAG_2000               = 0x00002000,
+    MODEL_FLAGS_FLAG_4000               = 0x00004000,
+    MODEL_FLAGS_FLAG_8000               = 0x00008000,
+    MODEL_FLAGS_FLAG_10000              = 0x00010000,
+    MODEL_FLAGS_FLAG_20000              = 0x00020000,
+    MODEL_FLAGS_FLAG_40000              = 0x00040000,
+    MODEL_FLAGS_FLAG_80000              = 0x00080000,
+    MODEL_FLAGS_FLAG_100000             = 0x00100000,
+    MODEL_FLAGS_FLAG_200000             = 0x00200000,
+    MODEL_FLAGS_FLAG_400000             = 0x00400000,
+    MODEL_FLAGS_FLAG_800000             = 0x00800000,
+    MODEL_FLAGS_FLAG_1000000            = 0x01000000,
+    MODEL_FLAGS_FLAG_2000000            = 0x02000000,
+    MODEL_FLAGS_FLAG_4000000            = 0x04000000,
+    MODEL_FLAGS_FLAG_8000000            = 0x08000000,
+    MODEL_FLAGS_FLAG_10000000           = 0x10000000,
+    MODEL_FLAGS_FLAG_20000000           = 0x20000000,
+    MODEL_FLAGS_FLAG_40000000           = 0x40000000,
+    MODEL_FLAGS_FLAG_80000000           = 0x80000000,
 };
 
 enum EntityFlags {
@@ -2093,25 +2184,66 @@ enum EntityFlags {
     ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX                 = 0x00000010,
     ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX          = 0x00000020,
     ENTITY_FLAGS_CONTINUOUS_COLLISION                         = 0x00000040,
+    ENTITY_FLAGS_80                                           = 0x00000080,
+    ENTITY_FLAGS_100                                          = 0x00000100,
     ENTITY_FLAGS_SET_SHADOW_FLAG200                           = 0x00000200,
+    ENTITY_FLAGS_400                                          = 0x00000400,
     ENTITY_FLAGS_SQUARE_SHADOW                                = 0x00000800,
     ENTITY_FLAGS_SHOWS_INSPECT_PROMPT                         = 0x00001000,
     ENTITY_FLAGS_ALWAYS_FACE_CAMERA                           = 0x00002000,
+    ENTITY_FLAGS_4000                                         = 0x00004000,
+    ENTITY_FLAGS_8000                                         = 0x00008000,
     ENTITY_FLAGS_DETECTED_COLLISION                           = 0x00010000,
     ENTITY_FLAGS_BLOCK_BEING_HIT                              = 0x00020000,
     ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2                     = 0x00040000,
     ENTITY_FLAGS_IGNORE_DISTANCE_CULLING                      = 0x00080000,
+    ENTITY_FLAGS_10000                                        = 0x00100000,
+    ENTITY_FLAGS_20000                                        = 0x00200000,
+    ENTITY_FLAGS_40000                                        = 0x00400000,
+    ENTITY_FLAGS_80000                                        = 0x00800000,
     ENTITY_FLAGS_BOUND_SCRIPT_DIRTY                           = 0x01000000,
+    ENTITY_FLAGS_200000                                       = 0x02000000,
     ENTITY_FLAGS_PENDING_FULL_DELETE                          = 0x04000000,
+    ENTITY_FLAGS_800000                                       = 0x08000000,
+    ENTITY_FLAGS_100000                                       = 0x10000000,
     ENTITY_FLAGS_PENDING_INSTANCE_DELETE                      = 0x20000000,
     ENTITY_FLAGS_SKIP_UPDATE                                  = 0x40000000,
     ENTITY_FLAGS_CREATED                                      = 0x80000000,
 };
 
 enum EnemyFlags {
-    ENEMY_FLAGS_IGNORE_TOUCH             = 0x01000000,
-    ENEMY_FLAGS_IGNORE_JUMP              = 0x02000000,
-    ENEMY_FLAGS_IGNORE_HAMMER            = 0x04000000,
+    ENEMY_FLAGS_1                 = 0x00000001,
+    ENEMY_FLAGS_2                 = 0x00000002,
+    ENEMY_FLAGS_4                 = 0x00000004,
+    ENEMY_FLAGS_8                 = 0x00000008,
+    ENEMY_FLAGS_10                = 0x00000010,
+    ENEMY_FLAGS_20                = 0x00000020,
+    ENEMY_FLAGS_40                = 0x00000040,
+    ENEMY_FLAGS_80                = 0x00000080,
+    ENEMY_FLAGS_100               = 0x00000100,
+    ENEMY_FLAGS_200               = 0x00000200,
+    ENEMY_FLAGS_400               = 0x00000400,
+    ENEMY_FLAGS_800               = 0x00000800,
+    ENEMY_FLAGS_1000              = 0x00001000,
+    ENEMY_FLAGS_2000              = 0x00002000,
+    ENEMY_FLAGS_4000              = 0x00004000,
+    ENEMY_FLAGS_8000              = 0x00008000,
+    ENEMY_FLAGS_10000             = 0x00010000,
+    ENEMY_FLAGS_20000             = 0x00020000,
+    ENEMY_FLAGS_40000             = 0x00040000,
+    ENEMY_FLAGS_80000             = 0x00080000,
+    ENEMY_FLAGS_100000            = 0x00100000,
+    ENEMY_FLAGS_200000            = 0x00200000,
+    ENEMY_FLAGS_400000            = 0x00400000,
+    ENEMY_FLAGS_800000            = 0x00800000,
+    ENEMY_FLAGS_IGNORE_TOUCH      = 0x01000000,
+    ENEMY_FLAGS_IGNORE_JUMP       = 0x02000000,
+    ENEMY_FLAGS_IGNORE_HAMMER     = 0x04000000,
+    ENEMY_FLAGS_8000000           = 0x08000000,
+    ENEMY_FLAGS_10000000          = 0x10000000,
+    ENEMY_FLAGS_20000000          = 0x20000000,
+    ENEMY_FLAGS_40000000          = 0x40000000,
+    ENEMY_FLAGS_80000000          = 0x80000000,
 };
 
 #endif

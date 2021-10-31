@@ -174,7 +174,7 @@ s32 calc_enemy_test_target(Actor* actor) {
 
     hitResult = HIT_RESULT_HIT;
     target2 = target;
-    if (targetPart->eventFlags & EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transStatus == STATUS_E) {
+    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transStatus == STATUS_E) {
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_MAGIC)) {
             hitResult = HIT_RESULT_MISS;
         }
@@ -287,11 +287,11 @@ s32 calc_enemy_damage_target(Actor* attacker) {
             break;
     }
 
-    if (targetPart->eventFlags & EVENT_FLAG_ILLUSORY) {
+    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
         return HIT_RESULT_MISS;
     }
 
-    if (target->transStatus == STATUS_E || targetPart->eventFlags & EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)) {
+    if (target->transStatus == STATUS_E || targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)) {
         return HIT_RESULT_MISS;
     }
 
@@ -303,7 +303,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         return HIT_RESULT_HIT;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_BLAST) {
-        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT) && (targetPart->eventFlags & EVENT_FLAG_EXPLOSIVE)) {
+        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT) && (targetPart->eventFlags & ACTOR_EVENT_FLAG_EXPLOSIVE)) {
             do {
                 play_hit_sound(attacker, state->goalPos.x, state->goalPos.y, state->goalPos.z, 3);
             } while (0); // TODO ?
@@ -331,7 +331,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     }
 
     if (!(attacker->staticStatus == STATUS_STATIC)) {
-        if ((target->staticStatus == STATUS_STATIC) || (targetPart->eventFlags & EVENT_FLAG_ELECTRIFIED)) {
+        if ((target->staticStatus == STATUS_STATIC) || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)) {
             if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_NO_CONTACT))) {
                 if (!(battleStatus->currentAttackEventSuppression & 8)) {
                     if (!has_enchanted_part(attacker)) {
@@ -478,7 +478,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         target->hpChangeCounter -= damage;
         battleStatus->lastAttackDamage = 0;
         hitResult = HIT_RESULT_HIT;
-        if (!(targetPart->flags & PART_FLAG_2000)) {
+        if (!(targetPart->flags & ACTOR_PART_FLAG_2000)) {
             if (!(gBattleStatus.flags1 & BS_FLAGS1_2000000)) {
                 if (!(target->flags & ACTOR_FLAG_NO_DMG_APPLY)) {
                     target->currentHP -= damage;
@@ -520,7 +520,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (battleStatus->currentAttackElement & (DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_JUMP)) {
-            if (targetPart->eventFlags & EVENT_FLAG_FLIPABLE) {
+            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE) {
                 if (event == EVENT_HIT) {
                     event = EVENT_FLIP_TRIGGER;
                 }
@@ -533,7 +533,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
     if (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) {
         if (battleStatus->currentAttackElement & (DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_JUMP)) {
-            if (targetPart->eventFlags & EVENT_FLAG_FLIPABLE) {
+            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE) {
                 if (event == EVENT_HIT_COMBO) {
                     event = EVENT_FLIP_TRIGGER;
                 }
@@ -720,7 +720,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         play_hit_sound(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, hitSound);
     }
 
-    if ((battleStatus->lastAttackDamage <= 0 && !statusInflicted2 && !isEnchanted) || targetPart->flags & PART_FLAG_2000) {
+    if ((battleStatus->lastAttackDamage <= 0 && !statusInflicted2 && !isEnchanted) || targetPart->flags & ACTOR_PART_FLAG_2000) {
         sfx_play_sound_at_position(SOUND_10C, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
@@ -783,7 +783,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     func_80266ADC(target);
     if ((
             attacker->staticStatus != STATUS_STATIC
-            && (target->staticStatus == STATUS_STATIC || (targetPart->eventFlags & EVENT_FLAG_ELECTRIFIED))
+            && (target->staticStatus == STATUS_STATIC || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED))
         )
         && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
         && !(battleStatus->currentAttackEventSuppression & 8)

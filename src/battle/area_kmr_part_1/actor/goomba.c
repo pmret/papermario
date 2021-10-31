@@ -40,7 +40,7 @@ EvtSource N(init_802197AC);
 
 ActorPartDesc N(partsTable_802196C8)[] = {
     {
-        .flags = PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
