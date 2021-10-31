@@ -2260,7 +2260,22 @@ ApiStatus GetPlayerActorID(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "197F40", func_8026E9A0);
 
-INCLUDE_ASM(s32, "197F40", GetDistanceToGoal);
+ApiStatus GetDistanceToGoal(Evt* script, s32 isInitialCall) {
+    s32* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 outVar = *args;
+    Actor* actor;
+    f32 dist;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    dist = dist2D(actor->currentPos.x, actor->currentPos.z, actor->state.goalPos.x, actor->state.goalPos.z);
+    evt_set_variable(script, outVar, dist);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", func_8026EA7C);
 
