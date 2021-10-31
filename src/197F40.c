@@ -2263,7 +2263,7 @@ INCLUDE_ASM(s32, "197F40", func_8026E9A0);
 ApiStatus GetDistanceToGoal(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 outVar = *args;
+    s32 outVar = *args++;
     Actor* actor;
     f32 dist;
 
