@@ -2307,7 +2307,7 @@ ApiStatus AddActorDecoration(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus RemoveActorDecoration(Evt* script, s32 isInitialCall) {
-    s32* args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     s32 decorationIndex = evt_get_variable(script, *args++);
