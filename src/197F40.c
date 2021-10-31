@@ -2346,9 +2346,31 @@ ApiStatus SetPartAlpha(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", CreatePartShadow);
+ApiStatus CreatePartShadow(Evt* script, s32 isInitialCall) {
+    s32* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
 
-INCLUDE_ASM(s32, "197F40", RemovePartShadow);
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    create_part_shadow(actorID, partIndex);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus RemovePartShadow(Evt* script, s32 isInitialCall) {
+    s32* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    remove_part_shadow(actorID, partIndex);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_8026F60C(Evt* script, s32 isInitialCall) {
     gBattleStatus.unk_8D = evt_get_variable(script, *script->ptrReadPos);
