@@ -560,6 +560,7 @@ enum SoundIDs {
     SOUND_MOLE_DIG                  = 0x00000322,
     SOUND_MOLE_POP                  = 0x00000323,
     SOUND_UNKNOWN_32E               = 0x0000032E,
+    SOUND_UNKNOWN_359               = 0x00000359,
     SOUND_UNKNOWN_361               = 0x00000361,
     SOUND_UNKNOWN_362               = 0x00000362,
     SOUND_UNKNOWN_363               = 0x00000363,
