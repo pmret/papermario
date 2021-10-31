@@ -1965,7 +1965,7 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 1;
             break;
         case 1:
-            actor2 = script->functionTemp[1];
+            actor2 = (Actor*) script->functionTemp[1];
             if (does_script_exist(actor2->takeTurnID) == FALSE) {
                 enemyIDs = battleStatus->enemyIDs;
                 if (battleStatus->unk_170 == 0) {
