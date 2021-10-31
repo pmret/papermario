@@ -192,7 +192,7 @@ void func_802BD6BC_32120C(f32* arg0, f32* arg1) {
     
     if (dist2D(0.0f, 0.0f, temp_f24, temp_f22) >= 1.0) {
         phi_f20 = 3.0f;
-        if ((SQ(temp_f24)) + (SQ(temp_f26)) > 3025.0f) {
+        if (SQ(temp_f24) + SQ(temp_f26) > 3025.0f) {
             phi_f20 = 6.0f;
         }
     }
