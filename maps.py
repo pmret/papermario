@@ -663,6 +663,8 @@ headers = glob("src/world/*/*/*.h")
 
 for header in headers:
     map_name = header.split("/")[-1].split(".")[0]
+    area_name = map_name.split("_")[0]
+
     desc = ""
     for a in maps:
         if len(a) != 2:
@@ -671,10 +673,20 @@ for header in headers:
         if k == map_name:
             desc = v
             break
+
+    area_desc = ""
+    for a in maps:
+        if len(a) != 2:
+            continue
+        k,v = a
+        if k == area_name:
+            area_desc = v
+            break
+
     with open(header, "r") as f:
         dog = f.read()
     with open(header, "w") as f:
         f.write(f"/// @file {map_name}.h\n")
-        f.write(f"/// @brief {desc}\n")
+        f.write(f"/// @brief {area_desc} - {desc}\n")
         f.write(f"\n")
         f.write(dog)
