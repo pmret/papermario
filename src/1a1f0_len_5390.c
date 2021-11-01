@@ -590,7 +590,7 @@ s8 check_conversation_trigger(void) {
         }
     }
 
-    if (!(playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) && npc != NULL && !is_picking_up_item()) {
+    if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) && npc != NULL && !is_picking_up_item()) {
         playerStatus->unk_C8 = npc;
         playerStatus->flags |= 0x2000000;
         if (playerStatus->pressedButtons & BUTTON_A) {

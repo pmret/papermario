@@ -218,7 +218,7 @@ void check_input_spin(void) {
     Temp8010F250* temp_8010F250 = &D_8010F250;
     Temp8010F250* temp2 = temp_8010F250;
 
-    if (!(playerStatus->flags & (PLAYER_ANIM_FLAG_8BIT_MARIO | PLAYER_ANIM_FLAG_PEACH_PHYSICS)) &&
+    if (!(playerStatus->flags & (PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO | PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) &&
         !(playerStatus->animFlags & 1) &&
         !(playerStatus->currentButtons & D_CBUTTONS) &&
         !is_ability_active(ABILITY_SLOW_GO)) {
@@ -262,7 +262,7 @@ void func_800E63A4(s32 arg0) {
     if (arg0 != 0) {
         set_action_state(ACTION_STATE_USE_SNEAKY_PARASOL);
     } else {
-        playerStatus->animFlags &= ~PLAYER_ANIM_FLAG_IN_DISGUISE;
+        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE;
         gGameStatusPtr->peachFlags &= ~0x2;
         playerStatus->peachDisguise = 0;
         free_npc_by_index(D_8010C96C);
@@ -282,7 +282,7 @@ void peach_check_for_parasol_input(void) {
             D_8010C92C--;
             if (D_8010C92C == 0) {
                 if (gGameStatusPtr->peachFlags & 2) {
-                    playerStatus->animFlags |= PLAYER_ANIM_FLAG_IN_DISGUISE;
+                    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE;
                     gGameStatusPtr->peachFlags |= 2;
 
                     disguiseNpc = peach_make_disguise_npc(gGameStatusPtr->peachDisguise);

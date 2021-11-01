@@ -1827,7 +1827,7 @@ void hide_foreground_models_unchecked(void) {
             s32 id = *idList++;
             if (id >= 0) {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
-                model->flags |= 2;
+                model->flags |= MODEL_FLAGS_ENABLED;
             }
         }
     }
@@ -1842,7 +1842,7 @@ void show_foreground_models_unchecked(void) {
             s32 id = *idList++;
             if (id >= 0) {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
-                model->flags &= ~2;
+                model->flags &= ~MODEL_FLAGS_ENABLED;
             }
         }
     }
@@ -1859,7 +1859,7 @@ void hide_foreground_models(void) {
                 break;
             } else {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
-                model->flags |= 2;
+                model->flags |= MODEL_FLAGS_ENABLED;
             }
 
         }
@@ -1877,7 +1877,7 @@ void show_foreground_models(void) {
                 break;
             } else {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
-                model->flags &= ~2;
+                model->flags &= ~MODEL_FLAGS_ENABLED;
             }
         }
     }

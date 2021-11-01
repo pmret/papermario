@@ -236,7 +236,7 @@ void update_player(void) {
         }
     }
 
-    if (!(playerStatus->animFlags & PLAYER_ANIM_FLAG_PEACH_PHYSICS)) {
+    if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
         func_800EFD08();
     }
 
@@ -249,7 +249,7 @@ void update_player(void) {
     gameStatus->playerYaw = playerStatus->currentYaw;
 
     check_input_open_menus();
-    if (!(playerStatus->animFlags & PLAYER_ANIM_FLAG_PEACH_PHYSICS)) {
+    if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
         check_input_status_menu();
     }
 
@@ -314,7 +314,7 @@ void phys_update_standard(void) {
         if (
             collision_main_above() < 0 &&
             playerStatus->decorationList == 0 &&
-            playerStatus->animFlags & PLAYER_ANIM_FLAG_PEACH_PHYSICS
+            playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS
         ) {
             func_800E4F10();
         }
@@ -468,7 +468,7 @@ s32 enable_player_input(void) {
 void func_800E01DC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->animFlags & PLAYER_ANIM_FLAG_INTERACT_PROMPT) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) {
         playerStatus->flags |= 0x8000000;
     }
 }
@@ -517,14 +517,14 @@ INCLUDE_ASM(s32, "77480", check_for_ispy);
 #endif
 
 void func_800E0330(void) {
-    if ((gPlayerStatusPtr->animFlags & PLAYER_ANIM_FLAG_100) && (D_8010C93C != NULL)) {
+    if ((gPlayerStatusPtr->animFlags & PLAYER_STATUS_ANIM_FLAGS_100) && (D_8010C93C != NULL)) {
         func_802B7000_E225B0();
     }
 }
 
 void func_800E0374(void) {
     D_8010C93C = NULL;
-    gPlayerStatusPtr->animFlags &= ~PLAYER_ANIM_FLAG_100;
+    gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_100;
 }
 
 INCLUDE_ASM(s32, "77480", check_for_pulse_stone);

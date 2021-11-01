@@ -91,7 +91,7 @@ s32 D_802E9898[9] = {
 };
 
 StaticShadowData D_802E98BC = {
-    .flags = 0x20,
+    .flags = SHADOW_FLAGS_20,
     .unk_04 = D_802E9850,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
@@ -99,7 +99,7 @@ StaticShadowData D_802E98BC = {
 };
 
 StaticShadowData D_802E98E0 = {
-    .flags = 0x20,
+    .flags = SHADOW_FLAGS_20,
     .unk_04 = D_802E9874,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
@@ -107,7 +107,7 @@ StaticShadowData D_802E98E0 = {
 };
 
 StaticShadowData D_802E9904 = {
-    .flags = 0x20,
+    .flags = SHADOW_FLAGS_20,
     .unk_04 = D_802E9898,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
