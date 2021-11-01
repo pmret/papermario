@@ -1,3 +1,6 @@
+/// @file kmr_12.h
+/// @brief Goomba Region - Goomba Road 4
+
 #include "common.h"
 #include "map.h"
 #include "../kmr.h"

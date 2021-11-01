@@ -1,3 +1,6 @@
+/// @file arn_07.h
+/// @brief Gusty Gulch - Windmill Exterior
+
 #include "common.h"
 #include "map.h"
 #include "../arn.h"

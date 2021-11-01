@@ -1,3 +1,6 @@
+/// @file dgb_18.h
+/// @brief Tubba's Castle - Master Bedroom (3F)
+
 #include "common.h"
 #include "map.h"
 

@@ -1,3 +1,6 @@
+/// @file iwa_04.h
+/// @brief Mt Rugged - Suspension Bridge
+
 #include "common.h"
 #include "map.h"
 

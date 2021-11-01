@@ -2,7 +2,7 @@
 
 #define NAMESPACE b_area_omo
 
-INCLUDE_ASM(s32, "battle/area_omo/512E50", func_80218880_512E50);
+#include "common/ItemEntityJumpToPos.inc.c"
 
 #include "common/GetItemEntityPosition.inc.c"
 

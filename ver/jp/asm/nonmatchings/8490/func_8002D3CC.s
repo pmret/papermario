@@ -364,8 +364,8 @@ glabel func_8002D3CC
 /* 8D30 8002D930 A5280000 */  sh        $t0, ($t1)
 /* 8D34 8002D934 0C019F18 */  jal       func_80067C60
 /* 8D38 8002D938 E7B40010 */   swc1     $f20, 0x10($sp)
-/* 8D3C 8002D93C 3C048007 */  lui       $a0, %hi(D_8007417C)
-/* 8D40 8002D940 8C84417C */  lw        $a0, %lo(D_8007417C)($a0)
+/* 8D3C 8002D93C 3C048007 */  lui       $a0, %hi(gGameStatusPtr)
+/* 8D40 8002D940 8C84417C */  lw        $a0, %lo(gGameStatusPtr)($a0)
 /* 8D44 8002D944 90820082 */  lbu       $v0, 0x82($a0)
 /* 8D48 8002D948 96C300A8 */  lhu       $v1, 0xa8($s6)
 /* 8D4C 8002D94C 00021600 */  sll       $v0, $v0, 0x18

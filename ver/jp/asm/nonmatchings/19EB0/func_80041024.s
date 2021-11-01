@@ -108,8 +108,8 @@ glabel func_80041024
 /* 1C5A0 800411A0 0801057E */  j         .L800415F8
 /* 1C5A4 800411A4 00000000 */   nop
 .L800411A8:
-/* 1C5A8 800411A8 3C028007 */  lui       $v0, %hi(D_8007417C)
-/* 1C5AC 800411AC 8C42417C */  lw        $v0, %lo(D_8007417C)($v0)
+/* 1C5A8 800411A8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 1C5AC 800411AC 8C42417C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 1C5B0 800411B0 80420074 */  lb        $v0, 0x74($v0)
 /* 1C5B4 800411B4 24110002 */  addiu     $s1, $zero, 2
 /* 1C5B8 800411B8 14510009 */  bne       $v0, $s1, .L800411E0

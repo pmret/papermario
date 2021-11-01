@@ -57,9 +57,57 @@ void npc_get_slip_vector(f32* outX, f32* outZ, f32 aX, f32 aZ, f32 bX, f32 bZ) {
     *outX = (aX - (dotProduct * bX)) * 0.5f;
     *outZ = (aZ - (dotProduct * bZ)) * 0.5f;
 }
+             
+s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 radius) {
+    f32 outX, outY;
+    f32 bX, bZ;
+    f32 hitNy;
+    f32 hitDepth;
+    f32 hitX, hitY, hitZ;
+    f32 outSinTheta, outCosTheta;
+    f32 temp_f0, temp_f20, temp_f22;
+    f32 aX, aZ;
+    f32 inverseOutCosTheta;
+    s32 raycastHitID;
+    s32 phi_s5;
+    s32 phi_s2 = -1;
+    f32 a, b;
 
-s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 radius);
-INCLUDE_ASM(s32, "759b0_len_61b0", npc_test_move_with_slipping, s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 radius);
+    sin_cos_rad((yaw * TAU) / 360.0f, &outSinTheta, &outCosTheta);
+    aX = length * outSinTheta;
+    temp_f22 = length + radius + (radius * 0.5f);
+    inverseOutCosTheta = -outCosTheta;
+    outCosTheta = inverseOutCosTheta;
+    hitDepth = temp_f22;
+    aZ = length * inverseOutCosTheta;
+    raycastHitID = npc_raycast_general(ignoreFlags, *x - (radius * outSinTheta * 0.5f), *y,
+                                        *z - (radius * inverseOutCosTheta * 0.5f), outSinTheta,
+                                        0.0f, inverseOutCosTheta, &hitX, &hitY, &hitZ, &hitDepth, &bX, &hitNy, &bZ);
+    phi_s5 = FALSE;
+
+    if (raycastHitID >= 0 && hitDepth <= temp_f22) {
+        temp_f0 = atan2(0.0f, 0.0f, sqrtf(SQ(bX) + SQ(bZ)), -hitNy);
+        if (temp_f0 > 60.0f && temp_f0 < 90.0f) {
+            phi_s5 = TRUE;
+        }
+
+        temp_f20 = hitDepth - (length + radius + (radius * 0.5f));
+        a = temp_f20 * outSinTheta;
+        b = temp_f20 * outCosTheta;
+        npc_get_slip_vector(&outX, &outY, aX, aZ, bX, bZ);
+        *x += a + outX;
+        *z += b + outY;
+        D_8010C978 = raycastHitID;
+        phi_s2 = raycastHitID;
+    }
+
+    if (phi_s5 == 0) {
+        *x += aX;
+        *z += aZ;
+    }
+
+    return phi_s2;
+}
 
 s32 npc_test_move_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 radius) {
     s32 ret = -1;
@@ -92,6 +140,7 @@ s32 npc_test_move_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 
         D_8010C978 = hitID;
         ret = hitID;
     }
+    
     *x += temp1;
     *z += temp2;
     return ret;

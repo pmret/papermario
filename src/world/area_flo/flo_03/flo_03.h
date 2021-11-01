@@ -1,3 +1,6 @@
+/// @file flo_03.h
+/// @brief Flower Fields - (East) Petunia's Field
+
 #include "common.h"
 #include "map.h"
 

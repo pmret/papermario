@@ -1,3 +1,6 @@
+/// @file arn_11.h
+/// @brief Gusty Gulch - Tubba's Heart Chamber
+
 #include "common.h"
 #include "map.h"
 #include "../arn.h"

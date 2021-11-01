@@ -1,3 +1,6 @@
+/// @file sbk_01.h
+/// @brief Dry Dry Desert - N3W2
+
 #include "common.h"
 #include "map.h"
 

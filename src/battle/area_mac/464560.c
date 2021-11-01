@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "battle/area_mac/464560", func_80218100_464590);
 
 INCLUDE_ASM(s32, "battle/area_mac/464560", func_80218300_464790);
 
-INCLUDE_ASM(s32, "battle/area_mac/464560", func_80218B90_465020);
+#include "common/ActorJumpToPos.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_mac/464560", func_80218CE4_465174);
 

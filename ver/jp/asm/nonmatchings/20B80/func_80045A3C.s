@@ -22,8 +22,8 @@ glabel func_80045A3C
 /* 20E80 80045A80 24020002 */  addiu     $v0, $zero, 2
 /* 20E84 80045A84 080116B6 */  j         .L80045AD8
 /* 20E88 80045A88 A2020016 */   sb       $v0, 0x16($s0)
-/* 20E8C 80045A8C 3C028007 */  lui       $v0, %hi(D_8007417C)
-/* 20E90 80045A90 8C42417C */  lw        $v0, %lo(D_8007417C)($v0)
+/* 20E8C 80045A8C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
+/* 20E90 80045A90 8C42417C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 20E94 80045A94 8C420010 */  lw        $v0, 0x10($v0)
 /* 20E98 80045A98 3042C000 */  andi      $v0, $v0, 0xc000
 /* 20E9C 80045A9C 54400001 */  bnel      $v0, $zero, .L80045AA4

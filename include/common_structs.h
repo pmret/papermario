@@ -733,7 +733,7 @@ typedef struct BattleStatus {
     /* 0x0DC */ struct Actor* partnerActor;
     /* 0x0E0 */ struct Actor* enemyActors[24];
     /* 0x140 */ s16 enemyIDs[24];
-    /* 0x170 */ char unk_170;
+    /* 0x170 */ s8 unk_170;
     /* 0x171 */ s8 numEnemyActors;
     /* 0x172 */ s16 currentTurnEnemyID;
     /* 0x174 */ struct Actor* currentTurnEnemy;
@@ -1675,7 +1675,7 @@ typedef struct Actor {
     /* 0x1E8 */ s32 onHitID;
     /* 0x1EC */ s32 onTurnChangeID;
     /* 0x1F0 */ s8 lastEventType;
-    /* 0x1F1 */ u8 turnPriority;
+    /* 0x1F1 */ s8 turnPriority;
     /* 0x1F2 */ u8 enemyIndex; /* actorID = this | 200 */
     /* 0x1F3 */ u8 numParts;
     /* 0x1F4 */ struct ActorPart* partsTable;
@@ -2121,8 +2121,8 @@ typedef struct PartnerActionStatus {
     /* 0x00C */ s32 pressedButtons;
     /* 0x010 */ s32 heldButtons;
     /* 0x014 */ s8 inputDisabled;
-    /* 0x015 */ char unk_15[0x3];
-    /* 0x018 */ Npc unk_18;
+    /* 0x015 */ char unk_15[3];
+    /* 0x018 */ Npc npc;
     /* 0x358 */ s32 unk_358;
     /* 0x35C */ char unk_35C[0x4];
 } PartnerActionStatus; // size = 0x360
