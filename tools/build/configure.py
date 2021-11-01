@@ -70,6 +70,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
     kmc_cflags = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
+    kmc_cflags = kmc_cflags.replace("-ggdb3","-g1")
 
     ninja.variable("python", sys.executable)
 
@@ -759,7 +760,7 @@ if __name__ == "__main__":
             cppflags += " -DDEBUG" # e.g. affects ASSERT macro
     elif args.debug:
         # g1 doesn't affect codegen
-        cflags += " -g1"
+        cflags += " -ggdb3"
 
     if not args.no_warn:
         cflags += " -Wuninitialized -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
