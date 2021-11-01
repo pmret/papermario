@@ -1,3 +1,6 @@
+/// @file obk_09.h
+/// @brief Boo's Mansion - Lady Bow's Room
+
 #include "common.h"
 #include "map.h"
 

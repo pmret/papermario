@@ -1,3 +1,6 @@
+/// @file arn_02.h
+/// @brief Gusty Gulch - Wasteland Ascent 1
+
 #include "common.h"
 #include "map.h"
 #include "../arn.h"

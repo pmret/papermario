@@ -1,3 +1,6 @@
+/// @file dgb_01.h
+/// @brief Tubba's Castle - Great Hall
+
 #include "common.h"
 #include "map.h"
 
