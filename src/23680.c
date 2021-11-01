@@ -43,7 +43,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
 
     amt += currentEncounter->coinsEarned;
 
-    if (enemy->flags & 0x840000) {
+    if (enemy->flags & (ENEMY_FLAGS_800000 | ENEMY_FLAGS_40000))) {
         amt = 0;
     }
 
@@ -101,7 +101,7 @@ s32 func_80048F0C(void) {
             for (j = 0; j < encounter->count; j++) {
                 Enemy* enemy = encounter->enemy[j];
 
-                if (enemy != NULL && !(enemy->flags & 0x20)) {
+                if (enemy != NULL && !(enemy->flags & ENEMY_FLAGS_20)) {
                     get_npc_unsafe(enemy->npcID);
                 }
             }

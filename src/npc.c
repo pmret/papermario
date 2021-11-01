@@ -1719,10 +1719,10 @@ void kill_enemy(Enemy* enemy) {
         }
     }
 
-    if (!(enemy->flags & 4)) {
-        if (!(enemy->flags & 8) || (enemy == encounterStatus->currentEnemy)) {
-            if (!(enemy->flags & 1)) {
-                if (!(enemy->flags & 0x10)) {
+    if (!(enemy->flags & ENEMY_FLAGS_4)) {
+        if (!(enemy->flags & ENEMY_FLAGS_8) || (enemy == encounterStatus->currentEnemy)) {
+            if (!(enemy->flags & ENEMY_FLAGS_1)) {
+                if (!(enemy->flags & ENEMY_FLAGS_10)) {
                     COPY_set_defeated((s8)encounterStatus->mapID, encounter->encounterID + i);
                 }
             }
