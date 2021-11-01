@@ -661,7 +661,7 @@ void enable_npc_shadow(Npc* npc) {
 
     if (!(npc->flags & NPC_FLAG_HAS_SHADOW)) {
         shadow = get_shadow_by_index(npc->shadowIndex);
-        shadow->flags &= ~1;
+        shadow->flags &= ~SHADOW_FLAGS_1;
         npc->flags = npc->flags | (NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW);
     }
 }
@@ -671,7 +671,7 @@ void disable_npc_shadow(Npc* npc) {
 
     if (npc->flags & NPC_FLAG_HAS_SHADOW) {
         shadow = get_shadow_by_index(npc->shadowIndex);
-        shadow->flags |= 1;
+        shadow->flags |= SHADOW_FLAGS_1;
         npc->flags &= ~NPC_FLAG_HAS_SHADOW;
         npc->flags &= ~NPC_FLAG_DIRTY_SHADOW;
     }
@@ -1493,7 +1493,7 @@ void init_encounter_status(void) {
         currentEncounter->encounterList[i] = 0;
     }
 
-    currentEncounter->flags = 0;
+    currentEncounter->flags = ENCOUNTER_STATUS_FLAGS_0;
     currentEncounter->numEncounters = 0;
     currentEncounter->eFirstStrike = 0;
     currentEncounter->hitType = 0;

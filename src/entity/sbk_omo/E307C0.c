@@ -87,7 +87,7 @@ void func_802BC558_E30EA8(Entity* entity) {
 INCLUDE_ASM(s32, "entity/sbk_omo/E307C0", func_802BC570_E30EC0);
 
 void func_802BC99C_E312EC(Entity* entity) {
-    if (!(entity->flags & 0x2000000)) {
+    if (!(entity->flags & ENTITY_FLAGS_2000000)) {
         exec_entity_commandlist(entity);
     }
 }

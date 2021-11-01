@@ -153,9 +153,9 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 currentItemSlot = evt_get_variable(script, *script->ptrReadPos);
 
-    if (!(shop->flags & 8)) {
+    if (!(shop->flags & SHOP_FLAGS_8)) {
         shop->currentItemSlot = currentItemSlot;
-        shop->flags |= 1;
+        shop->flags |= SHOP_FLAGS_1;
         func_800E98EC();
         shop->unk_358 = 5;
 
@@ -170,7 +170,7 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall) {
             childScript->varTable[0] = currentItemSlot;
             D_80286520 = childScript;
             D_80286524 = childScript->id;
-            shop->flags |= 8;
+            shop->flags |= SHOP_FLAGS_8;
             return ApiStatus_BLOCK;
         } else {
             return ApiStatus_DONE2;
@@ -179,7 +179,7 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    shop->flags &= ~0x8;
+    shop->flags &= ~SHOP_FLAGS_8;
     enable_player_static_collisions();
     enable_player_input();
     return ApiStatus_DONE2;
@@ -325,7 +325,7 @@ void draw_shop_items(void) {
     f32 inX, inY, inZ;
     ShopItemEntity* shopItemEntities;
 
-    if (shop->flags & 1) {
+    if (shop->flags & SHOP_FLAGS_1) {
         set_window_update(10, basic_window_update);
         set_window_update(11, basic_window_update);
     } else {
@@ -333,7 +333,7 @@ void draw_shop_items(void) {
         set_window_update(11, basic_hidden_window_update);
     }
 
-    if (shop->flags & 1) {
+    if (shop->flags & SHOP_FLAGS_1) {
         camera = &gCameras[gCurrentCameraID];
         staticItems = shop->staticInventory;
         shopItemEntities = gGameStatusPtr->shopItemEntities;
@@ -377,7 +377,7 @@ void draw_shop_items(void) {
     if (shop->unk_358 > 0) {
         shop->unk_358--;
     } else {
-        shop->flags &= ~0x1;
+        shop->flags &= ~SHOP_FLAGS_1;
         func_800E9900();
     }
 }
