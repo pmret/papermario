@@ -280,7 +280,7 @@ extern s32 D_80104BEC;
 
 extern s32 D_8010C920;
 extern s32 D_8010C940;
-extern s32 D_8010C954;
+extern Entity* D_8010C954;
 extern s32 D_8010C958;
 extern s32 D_8010C95C;
 extern s32 D_8010C96C;

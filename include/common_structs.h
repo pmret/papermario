@@ -2121,8 +2121,8 @@ typedef struct PartnerActionStatus {
     /* 0x00C */ s32 pressedButtons;
     /* 0x010 */ s32 heldButtons;
     /* 0x014 */ s8 inputDisabled;
-    /* 0x015 */ char unk_15[0x3];
-    /* 0x018 */ Npc unk_18;
+    /* 0x015 */ char unk_15[3];
+    /* 0x018 */ Npc npc;
     /* 0x358 */ s32 unk_358;
     /* 0x35C */ char unk_35C[0x4];
 } PartnerActionStatus; // size = 0x360
