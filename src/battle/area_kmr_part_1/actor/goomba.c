@@ -47,8 +47,8 @@ ActorPartDesc N(partsTable_802196C8)[] = {
         .opacity = 255,
         .idleAnimations = N(idleAnimations_80219714),
         .defenseTable = N(defenseTable_80219610),
-        .eventFlags = 0,
-        .elementImmunityFlags = 0,
+        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_0,
         .unk_1C = 246,
     },
 };
