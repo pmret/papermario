@@ -35,7 +35,7 @@ ApiStatus func_80238CE0_700A60(Evt* script, s32 isInitialCall) {
         airLiftChance = 0;
     }
 
-    if (targetActorPart->eventFlags & 0x20) {
+    if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
         airLiftChance = 0;
     }
 

@@ -83,8 +83,8 @@ ActorPartDesc N(partsTable_8021CC70)[] = {
         .opacity = 255,
         .idleAnimations = N(idleAnimations_8021E4EC),
         .defenseTable = N(defenseTable_8021CB00),
-        .eventFlags = 0,
-        .elementImmunityFlags = 0,
+        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_0,
         .unk_1C = 246,
     },
     {
@@ -96,7 +96,7 @@ ActorPartDesc N(partsTable_8021CC70)[] = {
         .idleAnimations = N(idleAnimations_8021CD28),
         .defenseTable = N(defenseTable_8021CB0C),
         .eventFlags = ACTOR_EVENT_FLAG_GROUNDABLE,
-        .elementImmunityFlags = 0,
+        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_0,
         .unk_1C = 246,
     },
     {
@@ -107,8 +107,8 @@ ActorPartDesc N(partsTable_8021CC70)[] = {
         .opacity = 255,
         .idleAnimations = N(idleAnimations_8021CDC0),
         .defenseTable = N(defenseTable_8021CB00),
-        .eventFlags = 0,
-        .elementImmunityFlags = 0,
+        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_0,
         .unk_1C = 246,
     },
     {
@@ -119,8 +119,8 @@ ActorPartDesc N(partsTable_8021CC70)[] = {
         .opacity = 255,
         .idleAnimations = N(idleAnimations_8021CDCC),
         .defenseTable = N(defenseTable_8021CB00),
-        .eventFlags = 0,
-        .elementImmunityFlags = 0,
+        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_0,
         .unk_1C = 246,
     },
 };
