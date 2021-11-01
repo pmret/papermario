@@ -1656,12 +1656,12 @@ enum PlayerStatusFlags {
 /// @see PlayerStatus::animFlags
 enum PlayerStatusAnimFlags {
     PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT                          = 0x00000001,
-    PLAYER_STATUS_ANIM_FLAGS_2                                = 0x00000002,
-    PLAYER_STATUS_ANIM_FLAGS_4                                = 0x00000004,
-    PLAYER_STATUS_ANIM_FLAGS_8                                = 0x00000008,
+    PLAYER_STATUS_ANIM_FLAGS_2                                     = 0x00000002,
+    PLAYER_STATUS_ANIM_FLAGS_4                                     = 0x00000004,
+    PLAYER_STATUS_ANIM_FLAGS_8                                     = 0x00000008,
     PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE             = 0x00000010, ///< ! prompt
     PLAYER_STATUS_ANIM_FLAGS_SPEECH_PROMPT_AVAILABLE               = 0x00000020, ///< (...) prompt
-    PLAYER_STATUS_ANIM_FLAGS_40                               = 0x00000040,
+    PLAYER_STATUS_ANIM_FLAGS_40                                    = 0x00000040,
     PLAYER_STATUS_ANIM_FLAGS_USING_PULSE_STONE                     = 0x00000080,
     PLAYER_STATUS_ANIM_FLAGS_100                                   = 0x00000100,
     PLAYER_STATUS_ANIM_FLAGS_GET_STAR_SPIRIT                       = 0x00000200, ///< Sets action state to ACTION_STATE_GET_STAR_SPIRIT on idle
@@ -1669,7 +1669,7 @@ enum PlayerStatusAnimFlags {
     PLAYER_STATUS_ANIM_FLAGS_800                                   = 0x00000800,
     PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS                   = 0x00001000,
     PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE                           = 0x00002000,
-    PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO                           = 0x00004000,
+    PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO                            = 0x00004000,
     PLAYER_STATUS_ANIM_FLAGS_8000                                  = 0x00008000,
     PLAYER_STATUS_ANIM_FLAGS_SPINNING                              = 0x00010000,
     PLAYER_STATUS_ANIM_FLAGS_20000                                 = 0x00020000,
