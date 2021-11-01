@@ -1,3 +1,6 @@
+/// @file kzn_06.h
+/// @brief Mt Lavalava - Flowing Lava Puzzle
+
 #include "common.h"
 #include "map.h"
 

@@ -1,3 +1,6 @@
+/// @file flo_11.h
+/// @brief Flower Fields - (West) Maze
+
 #include "common.h"
 #include "map.h"
 

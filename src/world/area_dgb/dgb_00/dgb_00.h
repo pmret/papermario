@@ -1,3 +1,6 @@
+/// @file dgb_00.h
+/// @brief Tubba's Castle - Escape Scene
+
 #include "common.h"
 #include "map.h"
 

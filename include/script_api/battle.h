@@ -48,7 +48,6 @@ ApiStatus FXRecoverHP(Evt* script, s32 isInitialCall);
 ApiStatus FXRecoverFP(Evt* script, s32 isInitialCall);
 ApiStatus IncrementPlayerHP(Evt* script, s32 isInitialCall);
 ApiStatus IncrementPlayerFP(Evt* script, s32 isInitialCall);
-ApiStatus create_actor(Evt* script, s32 isInitialCall);
 ApiStatus StartRumbleWithParams(Evt* script, s32 isInitialCall);
 ApiStatus LoadItemScript(Evt* script, s32 isInitialCall);
 ApiStatus LoadFreeItemScript(Evt* script, s32 isInitialCall);
