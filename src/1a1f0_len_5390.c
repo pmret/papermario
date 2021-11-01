@@ -503,7 +503,7 @@ s8 check_conversation_trigger(void) {
     if (gPartnerActionStatus.actionState.b[0] != 0) {
         return FALSE;
     }
-    
+
     encounter = NULL;
     npc = NULL;
     enemy = NULL;
@@ -523,15 +523,15 @@ s8 check_conversation_trigger(void) {
                 continue;
             }
 
-            if (encounterEnemy->flags & 0x80000020) {
+            if (encounterEnemy->flags & (ENEMY_FLAGS_80000000 | ENEMY_FLAGS_20)) {
                 continue;
             }
 
-            if (!(encounterEnemy->flags & 1)) {
+            if (!(encounterEnemy->flags & ENEMY_FLAGS_1)) {
                 continue;
             }
 
-            if ((encounterEnemy->flags & 0x8000000) || encounterEnemy->interactBytecode == NULL) {
+            if ((encounterEnemy->flags & ENEMY_FLAGS_8000000) || encounterEnemy->interactBytecode == NULL) {
                 continue;
             }
 
@@ -568,7 +568,7 @@ s8 check_conversation_trigger(void) {
                 continue;
             }
 
-            if (!(encounterEnemy->flags & 0x10000) && encounterNpc->flags & 0x20000000) {
+            if (!(encounterEnemy->flags & ENEMY_FLAGS_10000) && encounterNpc->flags & 0x20000000) {
                 xTemp = npcX;
                 yTemp = npcY;
                 zTemp = npcZ;

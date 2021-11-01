@@ -13,7 +13,7 @@ ApiStatus N(UnkFunc7)(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->flags |= 0x102;
-        enemy->flags |= 0x1F300000;
+        enemy->flags |= ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000;
         npc->pos.x = 0.0f;
         npc->pos.y = -1000.0f;
         npc->pos.z = 0.0f;
@@ -46,7 +46,7 @@ ApiStatus N(UnkFunc7)(Evt* script, s32 isInitialCall) {
                 enemy->unk_10.z = npc->pos.z;
 
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-                enemy->flags &= 0xE0EFFFFF;
+                enemy->flags &= ~(ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000);
                 npc->duration = 0;
                 script->functionTemp[0] = 1;
             }
@@ -60,7 +60,7 @@ ApiStatus N(UnkFunc7)(Evt* script, s32 isInitialCall) {
                 enemy->unk_07 = 0;
             }
             if (enemy2->varTable[0] == 4) {
-                enemy->flags |= 0x1F100000;
+                enemy->flags |= ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000;
                 npc->pos.x = 0.0f;
                 npc->pos.y = -1000.0f;
                 npc->pos.z = 0.0f;

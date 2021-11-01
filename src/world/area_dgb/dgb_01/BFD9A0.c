@@ -1287,9 +1287,9 @@ ApiStatus N(func_802430C0_C00940)(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
-        } else if (enemy->flags & 0x40000000) {
+        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
-            enemy->flags &= ~0x40000000;
+            enemy->flags &= ~ENEMY_FLAGS_40000000;
         }
 
         posX = npc->pos.x;
@@ -1493,7 +1493,7 @@ StaticNpc N(npcGroup_80246090) = {
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_80245D80),
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .movement = { -180, 100, 230, 35, 0, -32767, 0, 0, 0, 0, 450, 1000, 1, 1 },
@@ -1524,7 +1524,7 @@ StaticNpc N(npcGroup_80246280) = {
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_80245E44),
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .movement = { 180, 100, 230, 35, 0, -32767, 0, 0, 0, 0, 450, 1000, 1, 1 },
@@ -1555,7 +1555,7 @@ StaticNpc N(npcGroup_80246470) = {
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_80245F08),
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .movement = { -180, 100, -230, 35, 0, -32767, 0, 0, 0, 0, 450, 1000, 1, 1 },
@@ -1586,7 +1586,7 @@ StaticNpc N(npcGroup_80246660) = {
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_80245FCC),
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .movement = { 180, 100, -230, 35, 0, -32767, 0, 0, 0, 0, 450, 1000, 1, 1 },
@@ -1632,7 +1632,7 @@ StaticNpc N(npcGroup_80246880) = {
     .flags = NPC_FLAG_200000,
     .init = &N(init_80245784),
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
@@ -1663,7 +1663,7 @@ StaticNpc N(npcGroup_80246A70) = {
     .flags = NPC_FLAG_200000,
     .init = &N(init_80245814),
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 5,
     .itemDrops = {
         { ITEM_SUPER_SHROOM, 10, 0 },
@@ -1702,7 +1702,7 @@ StaticNpc N(npcGroup_80246C60) = {
     .flags = NPC_FLAG_200000,
     .init = &N(init_80245CF0),
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 5,
     .itemDrops = {
         { ITEM_SUPER_SHROOM, 10, 0 },

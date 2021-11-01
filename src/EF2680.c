@@ -232,7 +232,7 @@ ApiStatus func_8024299C_EF4FAC(Evt* script, s32 isInitialCall) {
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
-        enemy->flags |= 0x200000;
+        enemy->flags |= ENEMY_FLAGS_200000;
         npc->flags = (npc->flags & ~0x200) | 8;
         enemy->varTable[10] = 0;
         enemy->varTable[11] = -1;

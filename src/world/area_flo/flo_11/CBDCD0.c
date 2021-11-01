@@ -751,7 +751,7 @@ StaticNpc N(npcGroup_80242CF4)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000,
         .init = &N(init_80242B58),
         .yaw = 270,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 25,
         .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
@@ -788,7 +788,7 @@ StaticNpc N(npcGroup_80242CF4)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000,
         .init = &N(init_80242C38),
         .yaw = 270,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 25,
         .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
