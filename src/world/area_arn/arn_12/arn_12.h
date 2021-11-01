@@ -1,3 +1,6 @@
+/// @file arn_12.h
+/// @brief Gusty Gulch - Tunnel 2
+
 #include "common.h"
 #include "map.h"
 #include "../arn.h"

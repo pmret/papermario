@@ -1,3 +1,6 @@
+/// @file dgb_09.h
+/// @brief Tubba's Castle - West Hall (2F)
+
 #include "common.h"
 #include "map.h"
 

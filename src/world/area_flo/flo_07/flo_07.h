@@ -1,3 +1,6 @@
+/// @file flo_07.h
+/// @brief Flower Fields - (SW) Posie and Crystal Tree
+
 #include "common.h"
 #include "map.h"
 

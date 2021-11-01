@@ -1,3 +1,6 @@
+/// @file dgb_10.h
+/// @brief Tubba's Castle - Sealed Room (2F)
+
 #include "common.h"
 #include "map.h"
 

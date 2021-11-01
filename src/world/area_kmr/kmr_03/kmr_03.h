@@ -1,3 +1,6 @@
+/// @file kmr_03.h
+/// @brief Goomba Region - Bottom of the Cliff
+
 #include "common.h"
 #include "map.h"
 #include "../kmr.h"

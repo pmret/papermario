@@ -1,3 +1,6 @@
+/// @file flo_17.h
+/// @brief Flower Fields - (NE) Fallen Logs
+
 #include "common.h"
 #include "map.h"
 

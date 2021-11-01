@@ -1,3 +1,6 @@
+/// @file arn_03.h
+/// @brief Gusty Gulch - Ghost Town 1
+
 #include "common.h"
 #include "map.h"
 #include "message_ids.h"

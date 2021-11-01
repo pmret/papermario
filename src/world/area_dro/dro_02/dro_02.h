@@ -1,3 +1,6 @@
+/// @file dro_02.h
+/// @brief Dry Dry Outpost - Outpost 2
+
 #include "common.h"
 #include "map.h"
 
