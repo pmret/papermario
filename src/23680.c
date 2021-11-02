@@ -33,7 +33,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
     }
 
     if (is_ability_active(ABILITY_MONEY_MONEY)) {
-        minCoinBonus *=  2;
+        minCoinBonus *= 2;
     }
 
     minCoinBonus += currentEncounter->coinsEarned;
