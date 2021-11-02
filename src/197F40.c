@@ -2277,7 +2277,23 @@ ApiStatus GetDistanceToGoal(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", func_8026EA7C);
+ApiStatus func_8026EA7C(Evt* script, s32 isInitialCall) {
+    s32* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
+    s32 temp_s3 = evt_get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partIndex);
+    func_80266D6C(actorPart, temp_s3);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", func_8026EB20);
 
