@@ -3,59 +3,51 @@
 
 INCLUDE_ASM(s32, "23680", spawn_drops);
 
-// The issues here are only in the beginning where max and min are flipped
-#ifdef NON_MATCHING
 s32 get_coin_drop_amount(Enemy* enemy) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
-    s32 amt;
-    s32 mx;
-    s32 diff;
+    EnemyDrops* enemyDrops = enemy->drops;
+    s32 maxCoinBonus = enemyDrops->maxCoinBonus;
+    s32 minCoinBonus = enemyDrops->minCoinBonus;
+    s32 minTemp = enemyDrops->minCoinBonus;
 
-    amt = enemy->drops->minCoinBonus;
-    mx = enemy->drops->maxCoinBonus;
-
-    if (enemy->drops->minCoinBonus > enemy->drops->maxCoinBonus) {
-        amt = enemy->drops->maxCoinBonus;
-        mx = enemy->drops->minCoinBonus;
+    if (maxCoinBonus < minCoinBonus) {
+        minCoinBonus = enemyDrops->maxCoinBonus;
+        maxCoinBonus = enemyDrops->minCoinBonus;
     }
 
-    diff = mx - amt;
-
-    if ((amt < 0) || (diff != 0)) {
-        amt = rand_int(diff) + amt;
+    minTemp = maxCoinBonus - minCoinBonus;
+    if ((minCoinBonus < 0) || (minTemp != 0)) {
+        minCoinBonus = rand_int(minTemp) - -minCoinBonus;
     }
 
-    if (amt < 0) {
-        amt = 0;
+    if (minCoinBonus < 0) {
+        minCoinBonus = 0;
     }
 
     if (is_ability_active(ABILITY_PAY_OFF)) {
-        amt += currentEncounter->damageTaken / 2;
+        minCoinBonus += currentEncounter->damageTaken / 2;
     }
-
-    if (currentEncounter->merleeCoinBonus != 0) {
-        amt *= 3;
+    
+    if (currentEncounter->merleeCoinBonus) {
+        minCoinBonus *= 3;
     }
 
     if (is_ability_active(ABILITY_MONEY_MONEY)) {
-        amt *= 2;
+        minCoinBonus *=  2;
     }
 
-    amt += currentEncounter->coinsEarned;
+    minCoinBonus += currentEncounter->coinsEarned;
 
     if (enemy->flags & 0x840000) {
-        amt = 0;
+        minCoinBonus = 0;
     }
 
-    if (amt > 20) {
-        amt = 20;
+    if (minCoinBonus > 20) {
+        minCoinBonus = 20;
     }
 
-    return amt;
+    return minCoinBonus;
 }
-#else
-INCLUDE_ASM(s32, "23680", get_coin_drop_amount);
-#endif
 
 void func_80048E34(Enemy* enemy, s32 arg1, s32 arg2) {
     Evt* newScript;
