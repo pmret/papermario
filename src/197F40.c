@@ -2360,7 +2360,7 @@ ApiStatus ModifyActorDecoration(Evt* script, s32 isInitialCall) {
     decorationtable->unk_8C6[temp_s4].unk04 = evt_get_variable(script, *args++);
     decorationtable->unk_8C6[temp_s4].unk08 = evt_get_variable(script, *args++);
     decorationtable->unk_8C6[temp_s4].unk0C = evt_get_variable(script, *args++);
-    return 2;
+    return ApiStatus_DONE2;
 }
 
 ApiStatus UseIdleAnimation(Evt* script, s32 isInitialCall) {
