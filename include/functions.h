@@ -370,6 +370,8 @@ void create_part_shadow(s32 actorID, s32 partIndex);
 void remove_part_shadow(s32 actorID, s32 partIndex);
 void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part); // arg0 unused
 
+extern func_80266D6C(ActorPart*, UNK_TYPE arg0); //arg0 unused
+
 Evt* get_script_by_index(s32 index);
 
 s32 get_lava_reset_pos(f32* x, f32* y, f32* z);
