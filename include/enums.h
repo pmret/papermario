@@ -2882,14 +2882,14 @@ enum ModelTransformGroupFlags {
 };
 
 enum NpcDropFlags {
-    NPC_DROP_FLAGS_1                 = 0x00000001,
-    NPC_DROP_FLAGS_2                 = 0x00000002,
-    NPC_DROP_FLAGS_4                 = 0x00000004,
-    NPC_DROP_FLAGS_8                 = 0x00000008,
-    NPC_DROP_FLAGS_10                = 0x00000010,
-    NPC_DROP_FLAGS_20                = 0x00000020,
-    NPC_DROP_FLAGS_40                = 0x00000040,
-    NPC_DROP_FLAGS_80                = 0x00000080,
+    NPC_DROP_FLAGS_1                 = 0x01,
+    NPC_DROP_FLAGS_2                 = 0x02,
+    NPC_DROP_FLAGS_4                 = 0x04,
+    NPC_DROP_FLAGS_8                 = 0x08,
+    NPC_DROP_FLAGS_10                = 0x10,
+    NPC_DROP_FLAGS_20                = 0x20,
+    NPC_DROP_FLAGS_40                = 0x40,
+    NPC_DROP_FLAGS_80                = 0x80,
 };
 
 enum ElementImmunityFlags {
