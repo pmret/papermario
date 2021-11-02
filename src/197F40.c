@@ -2278,7 +2278,7 @@ ApiStatus GetDistanceToGoal(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8026EA7C(Evt* script, s32 isInitialCall) {
-    s32* args = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partIndex = evt_get_variable(script, *args++);
     s32 temp_s3 = evt_get_variable(script, *args++);
