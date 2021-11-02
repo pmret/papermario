@@ -1426,6 +1426,17 @@ typedef struct CollisionStatus {
     /* 0x1C */ Vec3f bombetteExplosionPos;
 } CollisionStatus; // size = 0x28
 
+typedef struct DecorationUnk {
+               s16 unk00;
+               s16 unk04;
+               s16 unk08;
+               s16 unk0C;
+               s16 unk10;
+               s16 unk14;
+               s16 unk18;
+               s16 unk1C;
+} DecorationUnk;
+
 typedef struct DecorationTable {
     /* 0x000 */ char unk_00[1729];
     /* 0x6C1 */ s8 unk_6C1;
@@ -1466,7 +1477,7 @@ typedef struct DecorationTable {
     /* 0x8BA */ u8 unk_8BA[2];
     /* 0x8BC */ u8 unk_8BC[2];
     /* 0x8C0 */ s16 unk_8C0[4];
-    /* 0x8BE */ s16 decorationUnk unk_8C6[2];
+    /* 0x8BE */ decorationUnk unk_8C6[2];
 } DecorationTable; // size = 0x8E8
 
 typedef struct ShopOwner {
