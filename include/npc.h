@@ -136,7 +136,7 @@ typedef struct StaticNpc {
     /* 0x018 */ EvtSource* init;
     /* 0x01C */ char unk_1C[8];
     /* 0x024 */ s32 yaw;
-    /* 0x028 */ s8 dropFlags; // TODO: use EnemyDrops (requires tons of map edits)
+    /* 0x028 */ u8 dropFlags; // TODO: use EnemyDrops (requires tons of map edits)
     /* 0x029 */ s8 itemDropChance; // %
     /* 0x02A */ ItemDrop itemDrops[8];
     /* 0x05A */ StatDrop heartDrops[8];
@@ -177,7 +177,7 @@ typedef struct {
 #define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle }
 
 typedef struct EnemyDrops {
-    /* 0x00 */ s8 dropFlags;
+    /* 0x00 */ u8 dropFlags;
     /* 0x01 */ s8 itemDropChance; // %
     /* 0x02 */ ItemDrop itemDrops[8];
     /* 0x32 */ StatDrop heartDrops[8];
