@@ -1477,7 +1477,7 @@ typedef struct DecorationTable {
     /* 0x8BA */ u8 unk_8BA[2];
     /* 0x8BC */ u8 unk_8BC[2];
     /* 0x8C0 */ s16 unk_8C0[4];
-    /* 0x8BE */ DecorationUnk unk_8C6[2];
+    /* 0x8C6 */ DecorationUnk unk_8C6[2];
 } DecorationTable; // size = 0x8E8
 
 typedef struct ShopOwner {
