@@ -27,7 +27,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
     if (is_ability_active(ABILITY_PAY_OFF)) {
         minCoinBonus += currentEncounter->damageTaken / 2;
     }
-    
+
     if (currentEncounter->merleeCoinBonus) {
         minCoinBonus *= 3;
     }
