@@ -389,7 +389,7 @@ s32 create_generic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)
     (*gCurrentDynamicEntityListPtr)[i] = newDynEntity = heap_malloc(sizeof(DynamicEntity));
     ASSERT(newDynEntity != NULL);
 
-    newDynEntity->flags = 3;
+    newDynEntity->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
     newDynEntity->update = updateFunc;
     if (updateFunc == NULL) {
         newDynEntity->update = &stub_generic_entity_delegate;
@@ -420,7 +420,7 @@ s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(voi
     (*gCurrentDynamicEntityListPtr)[i] = newDynEntity = heap_malloc(sizeof(DynamicEntity));
     ASSERT(newDynEntity != NULL);
 
-    newDynEntity->flags = 7;
+    newDynEntity->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
     newDynEntity->update = updateFunc;
     if (updateFunc == NULL) {
         newDynEntity->update = &stub_generic_entity_delegate;
@@ -451,7 +451,7 @@ s32 create_generic_entity_backUI(void (*updateFunc)(void), void (*drawFunc)(void
     (*gCurrentDynamicEntityListPtr)[i] = newDynEntity = heap_malloc(sizeof(DynamicEntity));
     ASSERT(newDynEntity != NULL);
 
-    newDynEntity->flags = 0xB;
+    newDynEntity->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1 | ENTITY_FLAGS_HAS_ANIMATED_MODEL;
     newDynEntity->update = updateFunc;
     if (updateFunc == NULL) {
         newDynEntity->update = &stub_generic_entity_delegate;
