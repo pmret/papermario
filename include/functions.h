@@ -144,7 +144,6 @@ void peach_set_disguise_anim(s32);
 void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, s32 opacity,
               s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
               s32 drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
-s32 get_msg_width(s32 msgID, u16 charset);
 
 s32 partner_player_can_pause(void);
 s32 disable_player_static_collisions(void);
@@ -498,7 +497,6 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
 s32 func_8011CFBC(void);
 s32 set_screen_overlay_center_worldpos(void);
 s32 mdl_get_next_texture_address(s32);
-void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
 
 s8 set_global_byte(s32 index, s32 value);
@@ -520,7 +518,6 @@ s32 func_80268224(s32);
 void func_80149A6C(s32, s32);
 void func_800EF300(void);
 void enable_player_shadow(void);
-s32 get_msg_lines(s32 messageID);
 void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, s32, void* drawContents, PopupMessage* popup, s32 parent);
 void set_window_update(s32 panelID, s32);
 void snd_stop_sound(s32 soundID);
@@ -528,7 +525,6 @@ void partner_disable_input(void);
 void func_80268798(s32, s32, s32, s32);
 void func_802687E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void sfx_stop_sound(s32 soundID);
-void close_message(MessagePrintState* msgPrintState);
 void show_foreground_models_unchecked(void);
 void hide_foreground_models_unchecked(void);
 void show_foreground_models(void);
@@ -555,7 +551,6 @@ void update_effects(void);
 void update_cameras(void);
 void clear_render_tasks(void);
 void clear_generic_entity_list(void);
-void clear_printers(void);
 void clear_item_entity_data(void);
 void clear_player_data(void);
 

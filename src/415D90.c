@@ -1,4 +1,4 @@
-#include "common.h"
+#include "msg.h"
 #include "hud_element.h"
 
 extern s32 D_80104A28;
