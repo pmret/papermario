@@ -209,7 +209,7 @@ void reset_animator_list(void) {
 void delete_model_animator_node(AnimatorNode* node) {
     s32 i;
 
-    node->flags = 0;
+    node->flags = ANIMATOR_NODE_FLAGS_0;
 
     for (i = 0; i < ARRAY_COUNT(node->children); i++) {
         if (node->children[i] != NULL) {
@@ -312,7 +312,7 @@ s32 create_mesh_animator(s32 animPos, s8* animBuffer) {
 
     ASSERT(animator != NULL);
 
-    animator->flags = 0x40 | 0x10 | 0x4 | 0x2 | 0x1;
+    animator->flags = MODEL_ANIMATOR_FLAGS_40 | MODEL_ANIMATOR_FLAGS_10 | MODEL_ANIMATOR_FLAGS_4 | MODEL_ANIMATOR_FLAGS_2 | MODEL_ANIMATOR_FLAGS_1;
     animator->renderMode = RENDER_MODE_ALPHATEST;
     animator->vertexArray = NULL;
     animator->fpRenderCallback = NULL;
@@ -345,7 +345,7 @@ AnimatorNode* add_anim_node(ModelAnimator* animator, s32 parentNodeID, AnimatorN
     ret = heap_malloc(sizeof(*ret));
     ASSERT(ret != NULL);
 
-    ret->flags = 0x10;
+    ret->flags = ANIMATOR_NODE_FLAGS_10;
     ret->displayList = nodeBP->displayList;
     ret->basePos.x = nodeBP->basePos.x;
     ret->basePos.y = nodeBP->basePos.y;
@@ -562,7 +562,7 @@ void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx
 
     copy_matrix(sp10, node->mtx);
 
-    if (node->flags & 0x1000) {
+    if (node->flags & ANIMATOR_NODE_FLAGS_1000) {
         Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(node->fcData.modelID));
 
         copy_matrix(sp10, model->transformMatrix);
@@ -758,7 +758,7 @@ void load_model_animator_node(StaticAnimatorNode* node, ModelAnimator* animator,
 
         if (node->modelID != 0) {
             newNode->fcData.modelID = node->modelID - 1;
-            newNode->flags |= 0x1000;
+            newNode->flags |= ANIMATOR_NODE_FLAGS_1000;
         }
 
         i = 0;

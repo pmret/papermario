@@ -2215,6 +2215,7 @@ enum ModelFlags {
     MODEL_FLAGS_FLAG_80000000           = 0x80000000,
 };
 
+// DynamicEntity, Entity, ItemEntity
 enum EntityFlags {
     ENTITY_FLAGS_HIDDEN                                       = 0x00000001,
     ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1                     = 0x00000002,
@@ -2283,41 +2284,6 @@ enum EnemyFlags {
     ENEMY_FLAGS_20000000          = 0x20000000,
     ENEMY_FLAGS_40000000          = 0x40000000,
     ENEMY_FLAGS_80000000          = 0x80000000,
-};
-
-enum DynamicFlags {
-   DYNAMIC_FLAGS_1                 = 0x00000001,
-   DYNAMIC_FLAGS_2                 = 0x00000002,
-   DYNAMIC_FLAGS_4                 = 0x00000004,
-   DYNAMIC_FLAGS_8                 = 0x00000008,
-   DYNAMIC_FLAGS_10                = 0x00000010,
-   DYNAMIC_FLAGS_20                = 0x00000020,
-   DYNAMIC_FLAGS_40                = 0x00000040,
-   DYNAMIC_FLAGS_80                = 0x00000080,
-   DYNAMIC_FLAGS_100               = 0x00000100,
-   DYNAMIC_FLAGS_200               = 0x00000200,
-   DYNAMIC_FLAGS_400               = 0x00000400,
-   DYNAMIC_FLAGS_800               = 0x00000800,
-   DYNAMIC_FLAGS_1000              = 0x00001000,
-   DYNAMIC_FLAGS_2000              = 0x00002000,
-   DYNAMIC_FLAGS_4000              = 0x00004000,
-   DYNAMIC_FLAGS_8000              = 0x00008000,
-   DYNAMIC_FLAGS_10000             = 0x00010000,
-   DYNAMIC_FLAGS_20000             = 0x00020000,
-   DYNAMIC_FLAGS_40000             = 0x00040000,
-   DYNAMIC_FLAGS_80000             = 0x00080000,
-   DYNAMIC_FLAGS_100000            = 0x00100000,
-   DYNAMIC_FLAGS_200000            = 0x00200000,
-   DYNAMIC_FLAGS_400000            = 0x00400000,
-   DYNAMIC_FLAGS_800000            = 0x00800000,
-   DYNAMIC_FLAGS_1000000           = 0x01000000,
-   DYNAMIC_FLAGS_2000000           = 0x02000000,
-   DYNAMIC_FLAGS_4000000           = 0x04000000,
-   DYNAMIC_FLAGS_8000000           = 0x08000000,
-   DYNAMIC_FLAGS_10000000          = 0x10000000,
-   DYNAMIC_FLAGS_20000000          = 0x20000000,
-   DYNAMIC_FLAGS_40000000          = 0x40000000,
-   DYNAMIC_FLAGS_80000000          = 0x80000000,
 };
 
 enum MusicSettingsFlags {
@@ -2496,6 +2462,7 @@ enum StaticMoveFlags {
 };
 
 enum AnimatorNodeFlags {
+    ANIMATOR_NODE_FLAGS_0                 = 0x00000000,
     ANIMATOR_NODE_FLAGS_1                 = 0x00000001,
     ANIMATOR_NODE_FLAGS_2                 = 0x00000002,
     ANIMATOR_NODE_FLAGS_4                 = 0x00000004,
@@ -2531,6 +2498,7 @@ enum AnimatorNodeFlags {
 };
 
 enum ModelAnimatorFlags {
+    MODEL_ANIMATOR_FLAGS_0                 = 0x00000000,
     MODEL_ANIMATOR_FLAGS_1                 = 0x00000001,
     MODEL_ANIMATOR_FLAGS_2                 = 0x00000002,
     MODEL_ANIMATOR_FLAGS_4                 = 0x00000004,
