@@ -7,46 +7,46 @@ s32 get_coin_drop_amount(Enemy* enemy) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     EnemyDrops* enemyDrops = enemy->drops;
     s32 maxCoinBonus = enemyDrops->maxCoinBonus;
-    s32 minCoinBonus = enemyDrops->minCoinBonus;
+    s32 amt = enemyDrops->minCoinBonus;
     s32 minTemp = enemyDrops->minCoinBonus;
 
     if (maxCoinBonus < minCoinBonus) {
-        minCoinBonus = enemyDrops->maxCoinBonus;
+        amt = enemyDrops->maxCoinBonus;
         maxCoinBonus = enemyDrops->minCoinBonus;
     }
 
-    minTemp = maxCoinBonus - minCoinBonus;
-    if ((minCoinBonus < 0) || (minTemp != 0)) {
-        minCoinBonus = rand_int(minTemp) - -minCoinBonus;
+    minTemp = maxCoinBonus - amt;
+    if ((amt < 0) || (minTemp != 0)) {
+        amt = rand_int(minTemp) - -amt;
     }
 
-    if (minCoinBonus < 0) {
-        minCoinBonus = 0;
+    if (amt < 0) {
+        amt = 0;
     }
 
     if (is_ability_active(ABILITY_PAY_OFF)) {
-        minCoinBonus += currentEncounter->damageTaken / 2;
+        amt += currentEncounter->damageTaken / 2;
     }
 
     if (currentEncounter->merleeCoinBonus) {
-        minCoinBonus *= 3;
+        amt *= 3;
     }
 
     if (is_ability_active(ABILITY_MONEY_MONEY)) {
-        minCoinBonus *= 2;
+        amt *= 2;
     }
 
-    minCoinBonus += currentEncounter->coinsEarned;
+    amt += currentEncounter->coinsEarned;
 
     if (enemy->flags & 0x840000) {
-        minCoinBonus = 0;
+        amt = 0;
     }
 
-    if (minCoinBonus > 20) {
-        minCoinBonus = 20;
+    if (amt > 20) {
+        amt = 20;
     }
 
-    return minCoinBonus;
+    return amt;
 }
 
 void func_80048E34(Enemy* enemy, s32 arg1, s32 arg2) {
