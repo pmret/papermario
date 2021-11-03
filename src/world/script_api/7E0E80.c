@@ -1,8 +1,5 @@
-#include "common.h"
+#include "msg.h"
 #include "hud_element.h"
-
-extern s32 MessagePlural;
-extern s32 MessageSingular;
 
 extern s32 D_80286520;
 extern s32 D_80286524;

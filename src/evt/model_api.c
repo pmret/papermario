@@ -1,3 +1,4 @@
+#include "common.h"
 #include "model.h"
 
 void update_animated_models(void) {

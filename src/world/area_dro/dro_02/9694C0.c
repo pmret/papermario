@@ -13,9 +13,6 @@
 
 #define UNK_ALPHA_FUNC_NPC 10
 
-extern s16 MessagePlural;
-extern s16 MessageSingular;
-
 enum {
     NPC_ARCHEOLOGIST,
     NPC_DRYITE0,

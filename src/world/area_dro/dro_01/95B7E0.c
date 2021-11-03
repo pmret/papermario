@@ -8,11 +8,9 @@
 #include "sprite/npc/mouser.h"
 #include "sprite/npc/three_sisters.h"
 #include "sprite/npc/world_parakarry.h"
+#include "msg.h"
 
 #define UNK_ALPHA_FUNC_NPC 10
-
-extern s16 MessagePlural;
-extern s16 MessageSingular;
 
 enum {
     NPC_MOUSER0,
