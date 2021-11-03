@@ -1427,15 +1427,15 @@ typedef struct CollisionStatus {
 } CollisionStatus; // size = 0x28
 
 typedef struct DecorationUnk {
-               s16 unk00;
-               s16 unk04;
-               s16 unk08;
-               s16 unk0C;
-               s16 unk10;
-               s16 unk14;
-               s16 unk18;
-               s16 unk1C;
-} DecorationUnk;
+    /* 0x00 */ s16 unk00;
+    /* 0x04 */ s16 unk04;
+    /* 0x08 */ s16 unk08;
+    /* 0x0C */ s16 unk0C;
+    /* 0x10 */ s16 unk10;
+    /* 0x14 */ s16 unk14;
+    /* 0x18 */ s16 unk18;
+    /* 0x1C */ s16 unk1C;
+} DecorationUnk; //size = 0x20
 
 typedef struct DecorationTable {
     /* 0x000 */ char unk_00[1729];
