@@ -10,7 +10,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
     s32 amt = enemyDrops->minCoinBonus;
     s32 minTemp = enemyDrops->minCoinBonus;
 
-    if (maxCoinBonus < minCoinBonus) {
+    if (maxCoinBonus < amt) {
         amt = enemyDrops->maxCoinBonus;
         maxCoinBonus = enemyDrops->minCoinBonus;
     }
