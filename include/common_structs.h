@@ -1435,7 +1435,7 @@ typedef struct DecorationUnk {
     /* 0x14 */ s16 unk14;
     /* 0x18 */ s16 unk18;
     /* 0x1C */ s16 unk1C;
-} DecorationUnk; //size = 0x20
+} DecorationUnk; // size = 0x20
 
 typedef struct DecorationTable {
     /* 0x000 */ char unk_00[1729];
