@@ -1146,6 +1146,7 @@ s32 count_power_plus(s32 arg0) {
     pp = 0;
     for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
         u8 moveID = gItemTable[gPlayerData.equippedBadges[i]].moveID;
+
         if (gMoveTable[moveID].battleSubmenu == 7 && moveID == 0x3B) {
             if (gBattleStatus.flags1 & BS_FLAGS1_10 || arg0 & 0x80) {
                 pp++;
