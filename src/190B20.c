@@ -1144,7 +1144,7 @@ s32 count_power_plus(s32 arg0) {
         return 0;
     }
 
-    for(pp = 0, i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
+    for (pp = 0, i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
         moveID = gItemTable[gPlayerData.equippedBadges[i]].moveID;
         if (gMoveTable[moveID].battleSubmenu == 7 && moveID == 0x3B) {
             if (gBattleStatus.flags1 & BS_FLAGS1_10 || arg0 & 0x80) {
