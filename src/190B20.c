@@ -1135,7 +1135,26 @@ INCLUDE_ASM(s32, "190B20", func_802636E4);
 
 INCLUDE_ASM(s32, "190B20", func_80263914);
 
-INCLUDE_ASM(s32, "190B20", count_power_plus);
+s32 count_power_plus(s32 arg0) {
+    s32 i;
+    u8 moveID;
+    s32 pp;
+
+    if (gGameStatusPtr->peachFlags & 1) {
+        return 0;
+    }
+
+    for(pp = 0, i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
+        moveID = gItemTable[gPlayerData.equippedBadges[i]].moveID;
+        if (gMoveTable[moveID].battleSubmenu == 7 && moveID == 0x3B) {
+            if (gBattleStatus.flags1 & BS_FLAGS1_10 || arg0 & 0x80) {
+                pp++;
+            }
+        }
+    }
+
+    return pp;
+}
 
 INCLUDE_ASM(s32, "190B20", deduct_current_move_fp);
 
