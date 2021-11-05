@@ -171,7 +171,7 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
             }
         }
 
-        if (!(curNode->next)) {
+        if (!curNode->next) {
             break;
         }
     }
@@ -184,7 +184,7 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
         // or if we just need to return the whole block
         if (foundNodeLength >= newNodeSize) {
             // room to split and add another free block after this one, do so
-            curNode->next = (HeapNode*)((((u8*)curNode) + foundNodeLength) - size);
+            curNode->next = (HeapNode*)((u8*)curNode + foundNodeLength - size);
             curNode->length = foundNodeLength - newNodeSize;
             curNode->allocated = FALSE;
 
