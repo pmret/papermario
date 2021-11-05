@@ -1806,4 +1806,17 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_1000000         = 0x1000000,
 };
 
+enum MsgWindowStates {
+    MSG_WINDOW_STATE_DONE               = 0x0,
+    MSG_WINDOW_STATE_INIT               = 0x1,
+    MSG_WINDOW_STATE_OPENING            = 0x2,
+    MSG_WINDOW_STATE_CLOSING            = 0x3,
+    MSG_WINDOW_STATE_PRINTING           = 0x4,
+    MSG_WINDOW_STATE_WAITING            = 0x5,
+    MSG_WINDOW_STATE_SCROLLING          = 0x6,
+    MSG_WINDOW_STATE_WAITING_FOR_CHOICE = 0x7,
+    MSG_WINDOW_STATE_SCROLLING_BACK     = 0x8,
+    MSG_WINDOW_STATE_VIEWING_PREV       = 0x9,
+};
+
 #endif
