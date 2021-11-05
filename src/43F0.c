@@ -136,7 +136,7 @@ void* _heap_malloc(HeapNode* head, u32 size) {
             pPrevHeapNode->length = smallestBlockFound;
 
             // update the entry id on allocation
-            //note, usage of a single ID from above will result in wrong code
+            // note, usage of a single ID from above will result in wrong code
             HeapEntryID2 = heap_nextMallocID;
             pPrevHeapNode->allocated = TRUE;
             heap_nextMallocID = HeapEntryID2 + 1;
