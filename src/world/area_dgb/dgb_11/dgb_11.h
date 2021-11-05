@@ -1,3 +1,6 @@
+/// @file dgb_11.h
+/// @brief Tubba's Castle - Covered Tables Room (1F)
+
 #include "common.h"
 #include "map.h"
 

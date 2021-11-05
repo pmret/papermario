@@ -733,7 +733,7 @@ typedef struct BattleStatus {
     /* 0x0DC */ struct Actor* partnerActor;
     /* 0x0E0 */ struct Actor* enemyActors[24];
     /* 0x140 */ s16 enemyIDs[24];
-    /* 0x170 */ char unk_170;
+    /* 0x170 */ s8 unk_170;
     /* 0x171 */ s8 numEnemyActors;
     /* 0x172 */ s16 currentTurnEnemyID;
     /* 0x174 */ struct Actor* currentTurnEnemy;
@@ -1427,6 +1427,17 @@ typedef struct CollisionStatus {
     /* 0x1C */ Vec3f bombetteExplosionPos;
 } CollisionStatus; // size = 0x28
 
+typedef struct DecorationUnk {
+    /* 0x00 */ s16 unk00;
+    /* 0x04 */ s16 unk04;
+    /* 0x08 */ s16 unk08;
+    /* 0x0C */ s16 unk0C;
+    /* 0x10 */ s16 unk10;
+    /* 0x14 */ s16 unk14;
+    /* 0x18 */ s16 unk18;
+    /* 0x1C */ s16 unk1C;
+} DecorationUnk; // size = 0x20
+
 typedef struct DecorationTable {
     /* 0x000 */ char unk_00[1729];
     /* 0x6C1 */ s8 unk_6C1;
@@ -1466,8 +1477,8 @@ typedef struct DecorationTable {
     /* 0x8B8 */ s8 decorationType[2];
     /* 0x8BA */ u8 unk_8BA[2];
     /* 0x8BC */ u8 unk_8BC[2];
-    /* 0x8C0 */ s16 unk_8C0[6];
-    /* 0x8BE */ char unk_8BE[30];
+    /* 0x8C0 */ s16 unk_8C0[4];
+    /* 0x8C6 */ DecorationUnk unk_8C6[2];
 } DecorationTable; // size = 0x8E8
 
 typedef struct ShopOwner {
@@ -1676,7 +1687,7 @@ typedef struct Actor {
     /* 0x1E8 */ s32 onHitID;
     /* 0x1EC */ s32 onTurnChangeID;
     /* 0x1F0 */ s8 lastEventType;
-    /* 0x1F1 */ u8 turnPriority;
+    /* 0x1F1 */ s8 turnPriority;
     /* 0x1F2 */ u8 enemyIndex; /* actorID = this | 200 */
     /* 0x1F3 */ u8 numParts;
     /* 0x1F4 */ struct ActorPart* partsTable;
@@ -2122,8 +2133,8 @@ typedef struct PartnerActionStatus {
     /* 0x00C */ s32 pressedButtons;
     /* 0x010 */ s32 heldButtons;
     /* 0x014 */ s8 inputDisabled;
-    /* 0x015 */ char unk_15[0x3];
-    /* 0x018 */ Npc unk_18;
+    /* 0x015 */ char unk_15[3];
+    /* 0x018 */ Npc npc;
     /* 0x358 */ s32 unk_358;
     /* 0x35C */ char unk_35C[0x4];
 } PartnerActionStatus; // size = 0x360

@@ -1,3 +1,6 @@
+/// @file arn_09.h
+/// @brief Gusty Gulch - Windmill Tunnel Entry
+
 #include "common.h"
 #include "map.h"
 #include "../arn.h"

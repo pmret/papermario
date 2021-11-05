@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8005F0E0
+glabel nuGfxDisplayOn
 /* 3A4E0 8005F0E0 24020080 */  addiu     $v0, $zero, 0x80
 /* 3A4E4 8005F0E4 3C01800A */  lui       $at, %hi(D_8009A5D8)
 /* 3A4E8 8005F0E8 AC22A5D8 */  sw        $v0, %lo(D_8009A5D8)($at)

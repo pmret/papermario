@@ -371,7 +371,9 @@ s32 player_team_is_ability_active(Actor* actor, s32 ability);
 
 void create_part_shadow(s32 actorID, s32 partIndex);
 void remove_part_shadow(s32 actorID, s32 partIndex);
-void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part); // arg0 unused
+void create_part_shadow_by_ref(s32 arg0, ActorPart* part);
+
+s32 func_80266D6C(ActorPart*, s32);
 
 Evt* get_script_by_index(s32 index);
 

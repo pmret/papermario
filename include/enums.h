@@ -551,6 +551,7 @@ enum SoundIDs {
     SOUND_UNKNOWN_262               = 610,
     SOUND_UNKNOWN_282               = 642,
     SOUND_BOW_SPOOK                 = 657,
+    SOUND_UNKNOWN_295               = 661,
     SOUND_UNUSED_2C1                = 705,
     SOUND_SMOKE_BURST               = 717,
     SOUND_DAYZEE_SONG               = 727,
@@ -1654,6 +1655,8 @@ enum ActorFlags {
     ACTOR_FLAG_NO_ATTACK        = 0x00200000, ///< Skip attack turn.
     ACTOR_FLAG_NO_DMG_APPLY     = 0x00400000, ///< Damage is not applied to actor HP.
     ACTOR_FLAG_NO_DMG_POPUP     = 0x02000000, ///< Hide damage popup.
+    ACTOR_FLAG_4000000          = 0x04000000,
+    ACTOR_FLAG_8000000          = 0x08000000,
     ACTOR_FLAG_10000000         = 0x10000000,
 };
 

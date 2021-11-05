@@ -469,38 +469,28 @@ void update_encounters_conversation(void) {
 void draw_encounters_conversation(void) {
 }
 
-// Mostly stack diffs, some issues with accessing fields from EncounterStatus at the very end
-#ifdef NON_MATCHING
 s8 check_conversation_trigger(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* camera = &gCameras[gCurrentCameraID];
-    f32 npcX;
-    f32 npcY;
-    f32 npcZ;
+    EncounterStatus* encounterStatus = &gCurrentEncounter;
+    f32 npcX, npcY, npcZ;
     f32 angle;
-    f32 playerColliderRadius;
+    f32 deltaX, deltaZ;
+    Encounter* encounter;
+    f32 playerX, playerY, playerZ;
     f32 playerColliderHeight;
-    f32 deltaX;
-    f32 deltaZ;
-    f32 playerX;
-    f32 playerY;
-    f32 playerZ;
+    f32 playerColliderRadius;
     f32 length;
     f32 npcCollisionHeight;
     f32 npcCollisionRadius;
-    Encounter* encounter;
     Encounter* encounterTemp;
     Npc* npc;
     Npc* encounterNpc;
     Enemy* enemy;
     Enemy* encounterEnemy;
     f32 minLength;
-    f32 xTemp;
-    f32 yTemp;
-    f32 zTemp;
-
-    s32 i;
-    s32 j;
+    f32 xTemp, yTemp, zTemp;
+    s32 i, j;
 
     playerStatus->unk_C8 = NULL;
     playerStatus->flags &= ~0x2000000;
@@ -510,105 +500,111 @@ s8 check_conversation_trigger(void) {
     playerY = playerStatus->position.y;
     playerZ = playerStatus->position.z;
 
-    if (gPartnerActionStatus.actionState.b[0] == 0) {
-        encounter = NULL;
-        npc = NULL;
-        enemy = NULL;
-        minLength = 65535.0f;
+    if (gPartnerActionStatus.actionState.b[0] != 0) {
+        return FALSE;
+    }
+    
+    encounter = NULL;
+    npc = NULL;
+    enemy = NULL;
+    minLength = 65535.0f;
 
-        for (i = 0; i < gCurrentEncounter.numEncounters; i++) {
-            encounterTemp = gCurrentEncounter.encounterList[i];
+    for (i = 0; i < encounterStatus->numEncounters; i++) {
+        encounterTemp = encounterStatus->encounterList[i];
 
-            if (encounterTemp == NULL) {
+        if (encounterTemp == NULL) {
+            continue;
+        }
+
+        for (j = 0; j < encounterTemp->count; j++) {
+            encounterEnemy = encounterTemp->enemy[j];
+
+            if (encounterEnemy == NULL) {
                 continue;
             }
 
-            for (j = 0; j < encounterTemp->count; j++) {
-                encounterEnemy = encounterTemp->enemy[j];
+            if (encounterEnemy->flags & 0x80000020) {
+                continue;
+            }
 
-                if (encounterEnemy == NULL) {
+            if (!(encounterEnemy->flags & 1)) {
+                continue;
+            }
+
+            if ((encounterEnemy->flags & 0x8000000) || encounterEnemy->interactBytecode == NULL) {
+                continue;
+            }
+
+            encounterNpc = get_npc_unsafe(encounterEnemy->npcID);
+
+            npcX = encounterNpc->pos.x;
+            npcY = encounterNpc->pos.y;
+            npcZ = encounterNpc->pos.z;
+            deltaX = npcX - playerX;
+            deltaZ = npcZ - playerZ;
+            npcCollisionHeight = encounterNpc->collisionHeight;
+            npcCollisionRadius = encounterNpc->collisionRadius;
+            length = sqrtf(SQ(deltaX) + SQ(deltaZ));
+
+            if ((playerColliderRadius + npcCollisionRadius <= length) ||
+                (npcY + npcCollisionHeight < playerY) ||
+                (playerY + playerColliderHeight < npcY)) {
+                continue;
+            }
+
+            if (clamp_angle(playerStatus->spriteFacingAngle) < 180.0f) {
+                angle = clamp_angle(camera->currentYaw - 120.0f);
+                if (playerStatus->trueAnimation & 0x1000000) {
+                    angle = clamp_angle(angle + 60.0f);
+                }
+            } else {
+                angle = clamp_angle(camera->currentYaw + 120.0f);
+                if (playerStatus->trueAnimation & 0x1000000) {
+                    angle = clamp_angle(angle - 60.0f);
+                }
+            }
+
+            if (fabsf(get_clamped_angle_diff(angle, atan2(playerX, playerZ, npcX, npcZ))) > 90.0f) {
+                continue;
+            }
+
+            if (!(encounterEnemy->flags & 0x10000) && encounterNpc->flags & 0x20000000) {
+                xTemp = npcX;
+                yTemp = npcY;
+                zTemp = npcZ;
+
+                if (npc_test_move_taller_with_slipping(0, &xTemp, &yTemp, &zTemp, length,
+                                                        atan2(npcX, npcZ, playerX, playerZ),
+                                                        npcCollisionHeight,
+                                                        2.0f * npcCollisionRadius) != 0) {
                     continue;
                 }
+            }
 
-                if (!(encounterEnemy->flags & 0x80000020)) {
-                    if (encounterEnemy->flags & 1) {
-                        if (!(encounterEnemy->flags & 0x8000000) && encounterEnemy->interactBytecode != NULL) {
-                            encounterNpc = get_npc_unsafe(encounterEnemy->npcID);
-
-                            npcX = encounterNpc->pos.x;
-                            npcY = encounterNpc->pos.y;
-                            npcZ = encounterNpc->pos.z;
-                            deltaX = npcX - playerX;
-                            deltaZ = npcZ - playerZ;
-                            npcCollisionHeight = encounterNpc->collisionHeight;
-                            npcCollisionRadius = encounterNpc->collisionRadius;
-                            length = sqrtf(SQ(deltaX) + SQ(deltaZ));
-
-                            if (!(playerColliderRadius + npcCollisionRadius <= length) &&
-                                !(npcY + npcCollisionHeight < playerY) &&
-                                !(playerY + playerColliderHeight < npcY)) {
-
-                                if (clamp_angle(playerStatus->spriteFacingAngle) < 180.0f) {
-                                    angle = clamp_angle(camera->currentYaw - 120.0f);
-                                    if (playerStatus->trueAnimation & 0x1000000) {
-                                        angle = clamp_angle(angle + 60.0f);
-                                    }
-                                } else {
-                                    angle = clamp_angle(camera->currentYaw + 120.0f);
-                                    if (playerStatus->trueAnimation & 0x1000000) {
-                                        angle = clamp_angle(angle - 60.0f);
-                                    }
-                                }
-
-                                if (fabsf(get_clamped_angle_diff(angle, atan2(playerX, playerZ, npcX, npcZ))) > 90.0f) {
-                                    continue;
-                                }
-
-                                if (!(encounterEnemy->flags & 0x10000) && encounterNpc->flags & 0x20000000) {
-                                    xTemp = npcX;
-                                    yTemp = npcY;
-                                    zTemp = npcZ;
-
-                                    if (npc_test_move_taller_with_slipping(0, &xTemp, &yTemp, &zTemp, length,
-                                                                            atan2(npcX, npcZ, playerX, playerZ),
-                                                                            npcCollisionHeight,
-                                                                            2.0f * npcCollisionRadius) != 0) {
-                                        continue;
-                                    }
-                                }
-
-                                if (length < minLength) {
-                                    minLength = length;
-                                    encounter = encounterTemp;
-                                    npc = encounterNpc;
-                                    enemy = encounterEnemy;
-                                }
-                            }
-                        }
-                    }
-                }
+            if (length < minLength) {
+                minLength = length;
+                encounter = encounterTemp;
+                npc = encounterNpc;
+                enemy = encounterEnemy;
             }
         }
+    }
 
-        if (!(playerStatus->animFlags & 0x4000) && npc != NULL && !is_picking_up_item()) {
-            playerStatus->unk_C8 = npc;
-            playerStatus->flags |= 0x2000000;
-            if (playerStatus->pressedButtons & BUTTON_A) {
-                close_status_menu();
-                enemy->encountered = 5;
-                gCurrentEncounter.hitType = 5;
-                gCurrentEncounter.currentEncounter = encounter;
-                gCurrentEncounter.currentEnemy = enemy;
-                gCurrentEncounter.eFirstStrike = FIRST_STRIKE_PLAYER;
-                return TRUE;
-            }
+    if (!(playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) && npc != NULL && !is_picking_up_item()) {
+        playerStatus->unk_C8 = npc;
+        playerStatus->flags |= 0x2000000;
+        if (playerStatus->pressedButtons & BUTTON_A) {
+            close_status_menu();
+            gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_CONVERSATION;
+            enemy->encountered = ENCOUNTER_TRIGGER_CONVERSATION;
+            encounterStatus->currentEncounter = encounter;
+            encounterStatus->currentEnemy = enemy;
+            encounterStatus->eFirstStrike = FIRST_STRIKE_PLAYER;
+            return TRUE;
         }
     }
     return FALSE;
 }
-#else
-INCLUDE_ASM(s32, "1a1f0_len_5390", check_conversation_trigger);
-#endif
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", create_encounters);
 

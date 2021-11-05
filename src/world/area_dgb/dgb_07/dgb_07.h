@@ -1,3 +1,6 @@
+/// @file dgb_07.h
+/// @brief Tubba's Castle - Study (1F)
+
 #include "common.h"
 #include "map.h"
 

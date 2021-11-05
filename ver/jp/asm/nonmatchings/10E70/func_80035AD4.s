@@ -5,8 +5,8 @@ glabel func_80035AD4
 /* 10ED4 80035AD4 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 10ED8 80035AD8 24020004 */  addiu     $v0, $zero, 4
 /* 10EDC 80035ADC AFB10014 */  sw        $s1, 0x14($sp)
-/* 10EE0 80035AE0 3C118007 */  lui       $s1, %hi(D_8007417C)
-/* 10EE4 80035AE4 2631417C */  addiu     $s1, $s1, %lo(D_8007417C)
+/* 10EE0 80035AE0 3C118007 */  lui       $s1, %hi(gGameStatusPtr)
+/* 10EE4 80035AE4 2631417C */  addiu     $s1, $s1, %lo(gGameStatusPtr)
 /* 10EE8 80035AE8 AFB00010 */  sw        $s0, 0x10($sp)
 /* 10EEC 80035AEC 3C10800A */  lui       $s0, %hi(D_8009E750)
 /* 10EF0 80035AF0 2610E750 */  addiu     $s0, $s0, %lo(D_8009E750)

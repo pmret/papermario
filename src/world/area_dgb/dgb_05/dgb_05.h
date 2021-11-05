@@ -1,3 +1,6 @@
+/// @file dgb_05.h
+/// @brief Tubba's Castle - Stairs Above Basement
+
 #include "common.h"
 #include "map.h"
 
