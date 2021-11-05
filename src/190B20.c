@@ -1157,7 +1157,22 @@ s32 count_power_plus(s32 arg0) {
     return pp;
 }
 
-INCLUDE_ASM(s32, "190B20", deduct_current_move_fp);
+void deduct_current_move_fp(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Actor* actor = battleStatus->playerActor;
+    s32 fpCost = gMoveTable[battleStatus->selectedMoveID].costFP;
+
+    if (fpCost != 0) {
+        fpCost = fpCost - player_team_is_ability_active(actor, ABILITY_FLOWER_SAVER);
+        fpCost = fpCost - player_team_is_ability_active(actor, ABILITY_FLOWER_FANATIC) * 2;
+        if (fpCost < 1) {
+            fpCost = 1;
+        }
+    }
+
+    playerData->curFP = playerData->curFP - fpCost;
+}
 
 INCLUDE_ASM(s32, "190B20", reset_actor_turn_info);
 
