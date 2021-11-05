@@ -74,9 +74,9 @@ HeapNode* _heap_create(s32* addr, u32 size) {
     }
 }
 
-#define _heap_alloc_and_update_id(node) { \
+#define _HEAP_ALLOC_AND_UPDATE_ID(node) { \
     u16 HeapEntryID = heap_nextMallocID; \
-    node->allocated = 1; \
+    node->allocated = TRUE; \
     heap_nextMallocID = HeapEntryID + 1; \
     node->entryID = HeapEntryID; \
 }
@@ -100,9 +100,9 @@ void* _heap_malloc(HeapNode* head, u32 size) {
 
     // find the smallest block we can fit into in the free list
     for (curHeapNode = head; ; curHeapNode = curHeapNode->next) {
-        if (curHeapNode->allocated == 0) {
+        if (!curHeapNode->allocated) {
             curBlockLength = curHeapNode->length;
-            if ((curBlockLength >= size) && (curBlockLength < smallestBlockFound || smallestBlockFound == 0)) {
+            if ((curBlockLength >= size) && (curBlockLength < smallestBlockFound || !smallestBlockFound)) {
                 pPrevHeapNode = curHeapNode;
                 smallestBlockFound = curBlockLength;
                 nextHeapNode = curHeapNode->next;
@@ -123,20 +123,20 @@ void* _heap_malloc(HeapNode* head, u32 size) {
             // update previous to the proper size for the block being returned
             pPrevHeapNode->next = (HeapNode *)((u8 *)pPrevHeapNode + newBlockSize);
             pPrevHeapNode->length = size;
-            _heap_alloc_and_update_id(pPrevHeapNode);
+            _HEAP_ALLOC_AND_UPDATE_ID(pPrevHeapNode);
 
             // setup the new heap block entry
             curHeapNode = pPrevHeapNode->next;
             curHeapNode->next = nextHeapNode;
             curHeapNode->length = smallestBlockFound - newBlockSize;
-            curHeapNode->allocated = 0;
+            curHeapNode->allocated = FALSE;
         } else {
             // take this entry out of the free linked list and mark as allocated
             pPrevHeapNode->next = nextHeapNode;
             pPrevHeapNode->length = smallestBlockFound;
 
             // update the entry id on allocation
-            _heap_alloc_and_update_id(pPrevHeapNode);
+            _HEAP_ALLOC_AND_UPDATE_ID(pPrevHeapNode);
         }
         return (u8 *)pPrevHeapNode + sizeof(HeapNode);
     }
@@ -186,21 +186,21 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
             // room to split and add another free block after this one, do so
             curNode->next = (HeapNode *)((((u8*) curNode) + foundNodeLength) - size);
             curNode->length = foundNodeLength - newNodeSize;
-            curNode->allocated = 0;
+            curNode->allocated = FALSE;
 
             curNode = curNode->next;
             curNode->next = nextNode;
             curNode->length = size;
-            curNode->allocated = 1;
+            curNode->allocated = TRUE;
 
         } else {
             // just return this actual block
             curNode->next = nextNode;
             curNode->length = foundNodeLength;
-            curNode->allocated = 1;
+            curNode->allocated = TRUE;
         }
 
-        return (u8*)curNode + 0x10;
+        return (u8*)curNode + sizeof(HeapNode);
     }
 
     // did not find a block
