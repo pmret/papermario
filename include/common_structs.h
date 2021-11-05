@@ -811,7 +811,7 @@ typedef struct StaticMove {
     /* 0x04 */ s32 flags;
     /* 0x08 */ s32 worldDescID;
     /* 0x0C */ s32 menuDescID;
-    /* 0x10 */ u8 battleSubmenu;
+    /* 0x10 */ s8 battleSubmenu;
     /* 0x11 */ u8 costFP;
     /* 0x12 */ s8 costBP;
     /* 0x13 */ u8 actionCommandID;
