@@ -121,7 +121,7 @@ void* _heap_malloc(HeapNode* head, u32 size) {
     if (smallestBlockFound) {
         if (smallestBlockFound >= newBlockSize) {
             // update previous to the proper size for the block being returned
-            pPrevHeapNode->next = (HeapNode *)((u8 *)pPrevHeapNode + newBlockSize);
+            pPrevHeapNode->next = (HeapNode*)((u8*)pPrevHeapNode + newBlockSize);
             pPrevHeapNode->length = size;
             _HEAP_ALLOC_AND_UPDATE_ID(pPrevHeapNode);
 
@@ -138,7 +138,7 @@ void* _heap_malloc(HeapNode* head, u32 size) {
             // update the entry id on allocation
             _HEAP_ALLOC_AND_UPDATE_ID(pPrevHeapNode);
         }
-        return (u8 *)pPrevHeapNode + sizeof(HeapNode);
+        return (u8*)pPrevHeapNode + sizeof(HeapNode);
     }
     return NULL;
 }
@@ -151,7 +151,7 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
     HeapNode* nextNode;
 
     size = ALIGN16(size);
-    foundNode = (HeapNode *) NULL;
+    foundNode = NULL;
 
     // make sure we have a size to allocate
     if (!size) {
@@ -184,7 +184,7 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
         // or if we just need to return the whole block
         if (foundNodeLength >= newNodeSize) {
             // room to split and add another free block after this one, do so
-            curNode->next = (HeapNode *)((((u8*) curNode) + foundNodeLength) - size);
+            curNode->next = (HeapNode*)((((u8*)curNode) + foundNodeLength) - size);
             curNode->length = foundNodeLength - newNodeSize;
             curNode->allocated = FALSE;
 
