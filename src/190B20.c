@@ -1174,7 +1174,31 @@ void deduct_current_move_fp(void) {
     playerData->curFP = playerData->curFP - fpCost;
 }
 
-INCLUDE_ASM(s32, "190B20", reset_actor_turn_info);
+void reset_actor_turn_info(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* actor;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        actor = battleStatus->enemyActors[i];
+        if (actor != NULL) {
+            actor->hpChangeCounter = 0;
+            actor->damageCounter = 0;
+            actor->unk_204[0] = 0;
+        }
+
+    }
+    actor = battleStatus->playerActor;
+    actor->hpChangeCounter = 0;
+    actor->damageCounter = 0;
+    actor->unk_204[0] = 0;
+    actor = battleStatus->partnerActor;
+    if (actor != NULL) {
+        actor->hpChangeCounter = 0;
+        actor->damageCounter = 0;
+        actor->unk_204[0] = 0;
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", func_80263CC4);
 
