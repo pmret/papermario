@@ -81,7 +81,7 @@ HeapNode* _heap_create(s32* addr, u32 size) {
     node->entryID = HeapEntryID; \
 }
 
-s32* _heap_malloc(HeapNode* head, s32 size) {
+void* _heap_malloc(HeapNode* head, u32 size) {
     HeapNode* nextHeapNode;
     HeapNode* pPrevHeapNode = 0;
     u32 newBlockSize;
@@ -108,7 +108,7 @@ s32* _heap_malloc(HeapNode* head, s32 size) {
                 nextHeapNode = curHeapNode->next;
             }
         }
-        if (!(curHeapNode->next)) {
+        if (!curHeapNode->next) {
             break;
         }
     }
@@ -121,7 +121,7 @@ s32* _heap_malloc(HeapNode* head, s32 size) {
     if (smallestBlockFound) {
         if (smallestBlockFound >= newBlockSize) {
             //update previous to the proper size for the block being returned
-            pPrevHeapNode->next = (u8 *)pPrevHeapNode + newBlockSize;
+            pPrevHeapNode->next = (HeapNode *)((u8 *)pPrevHeapNode + newBlockSize);
             pPrevHeapNode->length = size;
             _heap_alloc_and_update_id(pPrevHeapNode);
 
@@ -138,13 +138,12 @@ s32* _heap_malloc(HeapNode* head, s32 size) {
             //update the entry id on allocation
             _heap_alloc_and_update_id(pPrevHeapNode);
         }
-        return (s32 *)((u8 *)pPrevHeapNode + sizeof(HeapNode));
+        return (u8 *)pPrevHeapNode + sizeof(HeapNode);
     }
     return NULL;
 }
 
 void* _heap_malloc_tail(HeapNode* head, u32 size) {
-    s32 new_var;
     HeapNode *curNode;
     u32 newNodeSize;
     u32 foundNodeLength;
@@ -172,11 +171,9 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
         if (!(curNode->next)) {
             break;
         }
-
     }
 
     newNodeSize = size + sizeof(HeapNode);
-
     if (foundNodeLength != 0) {
         curNode = foundNode;
         if (foundNodeLength >= newNodeSize) {
