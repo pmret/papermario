@@ -996,7 +996,7 @@ typedef struct MessagePrintState {
     /* 0x468 */ s8 lineCount;
     /* 0x469 */ char unk_469[0x3];
     /* 0x46C */ s32 unk_46C;
-    /* 0x470 */ s8 currentAnimFrame[4];
+    /* 0x470 */ u8 currentAnimFrame[4];
     /* 0x474 */ s16 animTimers[4];
     /* 0x47C */ s8 rewindArrowAnimState;
     /* 0x47D */ char unk_47D[0x1];
@@ -1005,7 +1005,7 @@ typedef struct MessagePrintState {
     /* 0x482 */ Vec2s rewindArrowPos;
     /* 0x486 */ s8 currentLine;
     /* 0x487 */ u8 unkArraySize;
-    /* 0x488 */ s16 lineEndPos[4];
+    /* 0x488 */ u16 lineEndPos[4];
     /* 0x490 */ char unk_490[0x38];
     /* 0x4C8 */ u16 unk_4C8;
     /* 0x4CA */ s16 unk_4CA;
@@ -1031,7 +1031,7 @@ typedef struct MessagePrintState {
     /* 0x508 */ u8 style;
     /* 0x509 */ u8 fadeInCounter;
     /* 0x50A */ Vec2s initOpenPos; // where the message originates from, in screen-space coords
-    /* 0x50E */ Vec2s openStartPos;
+    /* 0x50E */ Vec2su openStartPos;
     /* 0x512 */ u8 fadeOutCounter;
     /* 0x513 */ char unk_513[0x1];
     /* 0x514 */ Vec2su windowSize;
@@ -1046,8 +1046,8 @@ typedef struct MessagePrintState {
     /* 0x528 */ s16 varBufferReadPos;
     /* 0x52A */ s8 unk_52A;
     /* 0x52B */ u8 currentImageIndex;
-    /* 0x52C */ Vec2s varImageScreenPos; // in addition, posX=0 is taken as 'dont draw'
-    /* 0x530 */ s8 varImgHasBorder;
+    /* 0x52C */ Vec2su varImageScreenPos; // in addition, posX=0 is taken as 'dont draw'
+    /* 0x530 */ u8 varImgHasBorder;
     /* 0x531 */ u8 varImgFinalAlpha;
     /* 0x532 */ u8 varImgAlphaFadeStep; // how much to fade in per frame
     /* 0x533 */ u8 varImageDisplayState; // 0 = fade in, 1 = fully visible, 2 = fade out
@@ -1084,7 +1084,7 @@ typedef struct MessageDrawState {
     /* 0x30 */ s32 visiblePrintedCount;
     /* 0x34 */ u16 printModeFlags; // C0 = center, 10 = drawing image
     /* 0x36 */ char unk_36[0x2];
-    /* 0x38 */ s32 effectFlags;
+    /* 0x38 */ u32 effectFlags;
     /* 0x3C */ u16 font; // 0 or 1
     /* 0x3E */ u16 fontVariant;
     /* 0x40 */ u8 currentPosX;
