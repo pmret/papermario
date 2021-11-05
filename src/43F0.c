@@ -177,7 +177,7 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
     if (foundNodeLength != 0) {
         curNode = foundNode;
         if (foundNodeLength >= newNodeSize) {
-            curNode->next = (((u8*) curNode) + foundNodeLength) - size;
+            curNode->next = (HeapNode *)((((u8*) curNode) + foundNodeLength) - size);
             curNode->length = foundNodeLength - newNodeSize;
             curNode->allocated = 0;
 
