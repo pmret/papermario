@@ -2277,7 +2277,23 @@ ApiStatus GetDistanceToGoal(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", func_8026EA7C);
+ApiStatus func_8026EA7C(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
+    s32 temp_s3 = evt_get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partIndex);
+    func_80266D6C(actorPart, temp_s3);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", func_8026EB20);
 
@@ -2324,7 +2340,28 @@ ApiStatus RemoveActorDecoration(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", ModifyActorDecoration);
+ApiStatus ModifyActorDecoration(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
+    s32 temp_s4 = evt_get_variable(script, *args++);
+    ActorPart* actorPart;
+    DecorationTable* decorationtable;
+    Actor* actor;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partIndex);
+    decorationtable = actorPart->decorationTable;
+    decorationtable->unk_8C6[temp_s4].unk00 = evt_get_variable(script, *args++);
+    decorationtable->unk_8C6[temp_s4].unk04 = evt_get_variable(script, *args++);
+    decorationtable->unk_8C6[temp_s4].unk08 = evt_get_variable(script, *args++);
+    decorationtable->unk_8C6[temp_s4].unk0C = evt_get_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus UseIdleAnimation(Evt* script, s32 isInitialCall) {
     Actor* actor;
