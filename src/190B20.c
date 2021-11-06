@@ -1069,6 +1069,9 @@ s32 bActorMessages[] = {
 
 s32 D_802838F8 = 0;
 
+//
+extern Bytecode D_80293820[];
+
 void create_target_list(Actor* actor, s32 arg1);
 INCLUDE_ASM(s32, "190B20", create_target_list);
 
@@ -1145,7 +1148,9 @@ INCLUDE_ASM(s32, "190B20", deduct_current_move_fp);
 
 INCLUDE_ASM(s32, "190B20", reset_actor_turn_info);
 
-INCLUDE_ASM(s32, "190B20", func_80263CC4);
+void func_80263CC4(s32 arg0) {
+    start_script(D_80293820, 0xA, 0)->varTable[0] = arg0;
+}
 
 INCLUDE_ASM(s32, "190B20", set_animation);
 
@@ -1596,7 +1601,20 @@ void func_80266F60(ActorPart* part) {
     }
 }
 
-INCLUDE_ASM(s32, "190B20", func_80266F8C);
+void func_80266F8C(Actor* actor) {
+    ActorPart* actorPart = &actor->partsTable[0];
+
+    while (actorPart != NULL) {
+        DecorationTable* decorationTable = actorPart->decorationTable;
+
+        do {
+            if (!(actorPart->flags & 0x100001) && actorPart->idleAnimations != NULL && !(actorPart->flags & 2)) {
+                decorationTable->unk_750 = 0;
+            }
+        } while (0); // todo improve match
+        actorPart = actorPart->nextPart;
+    }
+}
 
 void func_80266FD8(ActorPart* part, s32 arg1) {
     if (part->idleAnimations != NULL && !(part->flags & 2)) {
