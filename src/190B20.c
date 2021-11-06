@@ -1628,7 +1628,19 @@ void func_8026709C(ActorPart* part) {
     }
 }
 
-INCLUDE_ASM(s32, "190B20", func_802670C8);
+void func_802670C8(Actor* actor) {
+    ActorPart* partIt;
+
+   for (partIt = actor->partsTable; partIt != NULL; partIt = partIt->nextPart) {
+        DecorationTable* decorationTable = partIt->decorationTable;
+
+        do {
+            if (!(partIt->flags & 0x100001) && (partIt->idleAnimations != NULL) && !(partIt->flags & 2)) {
+                decorationTable->unk_764 = 0;
+            }
+        } while (0); // TODO make match better
+    }
+}
 
 void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationType) {
     if ((part->idleAnimations) && !(part->flags & 2)) {
