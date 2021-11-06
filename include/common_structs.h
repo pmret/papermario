@@ -827,7 +827,7 @@ typedef struct CollisionData {
 
 typedef struct ModelGroupData {
     /* 0x00 */ UNK_PTR transformMatrix;
-    /* 0x04 */ UNK_PTR lightingGroup;
+    /* 0x04 */ Lightsn* lightingGroup;
     /* 0x08 */ s32 numLights;
     /* 0x0C */ s32 numChildren;
     /* 0x10 */ struct ModelNode** childList;
@@ -1736,22 +1736,6 @@ typedef struct Actor {
     /* 0x438 */ s32 x[2]; /* ??? see FUN_80253974 */
     /* 0x440 */ struct HudElement* ptrDefuffIcon;
 } Actor; // size = 0x444
-
-typedef struct TileDescriptor {
-    /* 0x00 */ s8 name[32];
-    /* 0x20 */ s16 auxW;
-    /* 0x22 */ s16 mainW;
-    /* 0x24 */ s16 auxH;
-    /* 0x26 */ s16 mainH;
-    /* 0x28 */ char unk_28;
-    /* 0x29 */ u8 extraTiles;
-    /* 0x2A */ u8 colorCombine;
-    /* 0x2B */ u8 fmt;
-    /* 0x2C */ u8 bitDepth;
-    /* 0x2D */ u8 wrapH;
-    /* 0x2E */ u8 wrapV;
-    /* 0x2F */ u8 filtering;
-} TileDescriptor; // size = 0x30
 
 typedef struct BackgroundHeader {
     /* 0x00 */ void* raster;

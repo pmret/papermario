@@ -88,9 +88,7 @@ s32 D_8014AFB0 = 0xFF;
 
 s32 D_8014AFB4[] = {0, 0, 0};
 
-Gfx* D_8014AFC0[] = { D_8014B7F8, D_8014B910, D_8014B820, D_8014B938, D_8014B848, D_8014B960, D_8014B870, D_8014B988, D_8014B898, D_8014BA20, D_8014B9B0, D_8014BAC0, D_8014B8C0, D_8014B9D8, D_8014B8E8, D_8014BA00 };
-
-Gfx* D_8014B000[] = { D_8014BB60, D_8014BC78, D_8014BB88, D_8014BCA0, D_8014BBB0, D_8014BCC8, D_8014BBD8, D_8014BCF8, D_8014BC00, D_8014BD88, D_8014BD18, D_8014BC28, D_8014BD40, D_8014BC50, D_8014BD68, D_8014BE78, D_8014BF90, D_8014BEA0, D_8014BFB8, D_8014BEC8, D_8014BFE0, D_8014BEF0, D_8014C008, D_8014BF18, D_8014C098, D_8014C028, D_8014BF40, D_8014C050, D_8014BF68, D_8014C078, D_8014BA48, D_8014BA70, D_8014BA98, D_8014BDB0, D_8014BDD8, D_8014BE00, D_8014C0C0, D_8014C0E8, D_8014C110, D_8014BB10, D_8014BB38, D_8014BE28, D_8014BE50, D_8014C138, D_8014C160, NULL };
+Gfx* D_8014AFC0[] = { D_8014B7F8, D_8014B910, D_8014B820, D_8014B938, D_8014B848, D_8014B960, D_8014B870, D_8014B988, D_8014B898, D_8014BA20, D_8014B9B0, D_8014BAC0, D_8014B8C0, D_8014B9D8, D_8014B8E8, D_8014BA00, D_8014BB60, D_8014BC78, D_8014BB88, D_8014BCA0, D_8014BBB0, D_8014BCC8, D_8014BBD8, D_8014BCF8, D_8014BC00, D_8014BD88, D_8014BD18, D_8014BC28, D_8014BD40, D_8014BC50, D_8014BD68, D_8014BE78, D_8014BF90, D_8014BEA0, D_8014BFB8, D_8014BEC8, D_8014BFE0, D_8014BEF0, D_8014C008, D_8014BF18, D_8014C098, D_8014C028, D_8014BF40, D_8014C050, D_8014BF68, D_8014C078, D_8014BA48, D_8014BA70, D_8014BA98, D_8014BDB0, D_8014BDD8, D_8014BE00, D_8014C0C0, D_8014C0E8, D_8014C110, D_8014BB10, D_8014BB38, D_8014BE28, D_8014BE50, D_8014C138, D_8014C160, NULL };
 
 s32 D_8014B0B8 = 0xFCFFFFFF;
 
@@ -102,10 +100,10 @@ s32 D_8014B404[] = { 0xFFFE793C, 0xFCFFFFFF, 0xFFFE7838, 0xFCFFFFFF, 0xFFFE7838,
 
 u32 mdl_textureBaseAddress = 0x8028E000;
 
-s8 mdl_bgMultiplyColorA = 0;
-s8 mdl_bgMultiplyColorR = 0;
-s8 mdl_bgMultiplyColorG = 0;
-s8 mdl_bgMultiplyColorB = 0;
+u8 mdl_bgMultiplyColorA = 0;
+u8 mdl_bgMultiplyColorR = 0;
+u8 mdl_bgMultiplyColorG = 0;
+u8 mdl_bgMultiplyColorB = 0;
 
 s8 mdl_renderModelFogPrimColorR = 0;
 s8 mdl_renderModelFogPrimColorG = 0;
@@ -1491,12 +1489,28 @@ s32 MakeEntity(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", SetEntityCullMode);
+ApiStatus SetEntityCullMode(Evt* script, s32 isInitialCall) {
+    Entity* entity = get_entity_by_index(gLastCreatedEntityIndex);
+    Bytecode* args = script->ptrReadPos;
+    s32 mode = evt_get_variable(script, *args++);
+
+    if (mode == 0) {
+        entity->flags |= 2;
+    } else if (mode == 1) {
+        entity->flags |= 0x40000;
+    } else if (mode == 2) {
+        entity->flags |= 0x40002;
+    } else {
+        entity->flags |= 0xC0002;
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus UseDynamicShadow(Evt* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(gLastCreatedEntityIndex);
+    Bytecode* args = script->ptrReadPos;
 
-    if (evt_get_variable(script, *script->ptrReadPos)) {
+    if (evt_get_variable(script, *args++)) {
         Shadow* shadow;
 
         entity->flags |= 4;
@@ -2037,6 +2051,644 @@ void state_render_frontUI(void) {
 
 void appendGfx_model(Model* model);
 INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
+// void appendGfx_model(Model* model) {
+//     ModelNode* modelNode;
+//     u16 sp36;
+//     s32 sp38;
+//     s32 sp44;
+//     Gfx* temp_a2_5;
+//     Gfx* temp_a2_6;
+//     Gfx* temp_a3_3;
+//     Gfx* temp_t3_2;
+//     ModelNodeProperty* modelProp;
+//     s32 fogMin;
+//     s32 temp_a0_14;
+//     s32 temp_a1_13;
+//     s32 temp_a2_4;
+//     s32 invAlpha;
+//     s32 temp_a3_4;
+//     s32 temp_hi;
+//     s32 temp_t0_2;
+//     s32 temp_t0_3;
+//     s32 temp_t1_2;
+//     s32 temp_t1_3;
+//     s32 temp_t2_2;
+//     s32 temp_v0_35;
+//     s32 temp_v0_36;
+//     s32 temp_v0_47;
+//     s32 temp_v0_50;
+//     s32 fogMax;
+//     s32 temp_v1_34;
+//     s32 temp_v1_35;
+//     s32 temp_v1_37;
+//     u16 modelFlags;
+//     u32 temp_v1_28;
+//     u8 alpha;
+//     s8 renderMode;
+//     TextureHandle* textureHandle;
+//     Lightsn* lightingGroup;
+//     TileDescriptor* tileDesc;
+//     u32 phi_fp;
+//     s32 phi_v1;
+//     s32 dlistIdx3;
+//     s32 dlistIdx;
+//     s32 dlistIdx2;
+//     s32 phi_v1_3;
+//     s32 phi_v0_4;
+//     s32 phi_s7;
+//     s32 phi_s3;
+
+//     modelFlags = model->flags;
+//     modelNode = model->modelNode;
+//     //phi_fp = saved_reg_fp;
+//     phi_s7 = 1;
+//     sp38 = 2;
+
+//     if (model->textureID != 0) {
+//         textureHandle = &mdl_textureHandles[model->textureID + model->textureVariation];
+//         tileDesc = &textureHandle->desc;
+//         if (textureHandle->gfx != NULL) {
+//             sp44 = 0;
+//             phi_fp = textureHandle->desc.extraTiles;
+//         } else {
+//             sp44 = 0;
+//             tileDesc = NULL;
+//         }
+//     } else {
+//         textureHandle = NULL;
+//         sp44 = 0;
+//         tileDesc = NULL;
+//     }
+
+//     renderMode = model->renderMode;
+//     phi_s3 = 1;
+//     if (tileDesc != NULL && (phi_fp != 0) && phi_fp < 4) {
+//         phi_s3 = 2;
+//     }
+//     if ((tileDesc != NULL || ((s32) (s8) renderMode < 0x11)) && gCurrentFogSettings->enabled && !(modelFlags & 0x40)) {
+//         phi_s3 = 3;
+//         sp44 = 1;
+//     }
+
+//     switch (model->customGfxIndex >> 4) {
+//         case 1:
+//             phi_s3 += 3;
+//             sp44 = 2;
+//             break;
+//         case 2:
+//             if (renderMode < 0x11) {
+//                 // todo remove temps?
+//                 fogMin = mdl_renderModelFogStart;
+//                 fogMax = mdl_renderModelFogEnd - fogMin;
+//                 sp44 = 3;
+
+//                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, mdl_renderModelFogPrimColorR, mdl_renderModelFogPrimColorG,
+//                                 mdl_renderModelFogPrimColorB, mdl_renderModelFogPrimColorA);
+//                 gDPSetFogColor(gMasterGfxPos++, mdl_renderModelFogColorR, mdl_renderModelFogPrimColorG, mdl_renderModelFogPrimColorB,
+//                                mdl_renderModelFogPrimColorA);
+//                 gSPFogPosition(gMasterGfxPos++, fogMin, fogMax);
+//                 phi_s3 += 9;
+//             }
+//             break;
+//         case 3:
+//             phi_s3 = 2;
+//             sp44 = 4;
+//             gDPSetPrimColor(gMasterGfxPos++, 0, 0, gRenderModelPrimR, gRenderModelPrimG, gRenderModelPrimB, 255);
+//             gDPSetEnvColor(gMasterGfxPos++, gRenderModelEnvR, gRenderModelEnvG, gRenderModelEnvB, 255);
+//             break;
+//     }
+
+//     gDPPipeSync(gMasterGfxPos++);
+//     if (model->groupData != NULL) {
+//         lightingGroup = model->groupData->lightingGroup;
+//         if (lightingGroup != NULL) {
+//             switch (model->groupData->numLights) {
+//                 case 0:
+//                     gSPSetLights0(gMasterGfxPos++, (*lightingGroup));
+//                     break;
+//                 case 1:
+//                     gSPSetLights1(gMasterGfxPos++, (*lightingGroup));
+//                     break;
+//                 case 2:
+//                     gSPSetLights2(gMasterGfxPos++, (*lightingGroup));
+//                     break;
+//                 case 3:
+//                     gSPSetLights3(gMasterGfxPos++, (*lightingGroup));
+//                     break;
+//                 case 4:
+//                     gSPSetLights4(gMasterGfxPos++, (*lightingGroup));
+//                     break;
+//                 case 5:
+//                     gSPSetLights5(gMasterGfxPos++, (*lightingGroup));
+//                     break;
+//                 case 6:
+//                     gSPSetLights6(gMasterGfxPos++, (*lightingGroup));
+//                     break;
+//                 case 7:
+//                     gSPSetLights7(gMasterGfxPos++, (*lightingGroup));
+//                     break;
+//             }
+//         }
+//     }
+
+//     if (tileDesc != 0) {
+//         if (phi_fp == 3 || phi_fp == 4) {
+//             modelProp = get_model_property(modelNode, MODEL_PROP_KEY_SPECIAL);
+//             if (modelProp != NULL) {
+//                 func_801180E8(tileDesc, &gMasterGfxPos, textureHandle->raster, textureHandle->palette, textureHandle->auxRaster, textureHandle->auxPalette, (modelProp->data.s >> 0xC) & 0xF, (modelProp->data.s >> 0x10) & 0xF, modelProp->dataType & 0xFFF, ((s32) modelProp->dataType >> 0xC) & 0xFFF);
+//             } else {
+//                 gSPDisplayList(gMasterGfxPos++, textureHandle->gfx);
+//             }
+//         } else {
+//             gSPDisplayList(gMasterGfxPos++, textureHandle->gfx);
+//         }
+//     } else {
+//         gSPTexture(gMasterGfxPos++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+//         gDPSetCombineMode(gMasterGfxPos++, G_CC_SHADE, G_CC_SHADE);
+//         gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
+//         gDPSetAlphaDither(gMasterGfxPos++, G_AD_PATTERN);
+//     }
+
+//     if ((sp44 != 0) || ((s8) renderMode == 0xD) || ((s8) renderMode == 0xF)) {
+//         phi_v1 = 0;
+//         if (tileDesc != 0) {
+//             temp_v1_28 = (u32) tileDesc->colorCombine >> 0xA;
+//             if (temp_v1_28 < 3U) {
+//                 phi_v1 = (phi_fp * 3) + ((((u32) tileDesc->colorCombine >> 8) & 3) + 1);
+//             } else {
+//                 phi_v1 = temp_v1_28 + 0xA;
+//             }
+//         }
+//         if (((s8) renderMode != 0xD) && ((s8) renderMode != 0xF)) {
+//             temp_v0_35 = ((phi_v1 * 5) + sp44) * 8;
+//             gMasterGfxPos->words.w0 = *(&D_8014B0B8 + temp_v0_35);
+//             gMasterGfxPos->words.w1 = *(D_8014B0BC + temp_v0_35);
+//         } else {
+//             temp_v0_36 = ((phi_v1 * 5) + sp44) * 8;
+//             gMasterGfxPos->words.w0 = *(&D_8014B400 + temp_v0_36);
+//             gMasterGfxPos->words.w1 = *(D_8014B404 + temp_v0_36);
+//         }
+//         gMasterGfxPos++;
+//     }
+
+//     switch (phi_s3) {
+//         case 1:
+//             switch (renderMode) {
+//                 case 3:
+//                     dlistIdx2 = 1;
+//                     break;
+//                 case 5:
+//                     dlistIdx2 = 2;
+//                     break;
+//                 case 7:
+//                     dlistIdx2 = 3;
+//                     break;
+//                 case 9:
+//                     dlistIdx2 = 4;
+//                     break;
+//                 case 13:
+//                     dlistIdx2 = 6;
+//                     break;
+//                 case 15:
+//                     dlistIdx2 = 7;
+//                     break;
+//                 case 41:
+//                     dlistIdx2 = 9;
+//                     break;
+//                 case 17:
+//                 case 22:
+//                 case 34:
+//                     dlistIdx2 = 8;
+//                     break;
+//                 case 19:
+//                     dlistIdx2 = 10;
+//                     break;
+//                 case 21:
+//                     dlistIdx2 = 11;
+//                     break;
+//                 case 26:
+//                     dlistIdx2 = 12;
+//                     break;
+//                 case 28:
+//                     dlistIdx2 = 13;
+//                     break;
+//                 case 38:
+//                     dlistIdx2 = 14;
+//                     break;
+//                 case 4:
+//                     dlistIdx2 = 46;
+//                     break;
+//                 case 16:
+//                     dlistIdx2 = 47;
+//                     break;
+//                 case 20:
+//                     dlistIdx2 = 48;
+//                     break;
+//                 case 46:
+//                     dlistIdx2 = 55;
+//                     break;
+//                 case 47:
+//                     dlistIdx2 = 56;
+//                     break;
+//                 case 1:
+//                 case 2:
+//                 default:
+//                     dlistIdx2 = 0;
+//                     break;
+//             }
+//             gSPDisplayList(gMasterGfxPos++, D_8014AFC0[dlistIdx2]);
+//             break;
+//         case 2:
+//             switch (renderMode) {
+//                 case 3:
+//                     dlistIdx2 = 17;
+//                     break;
+//                 case 5:
+//                     dlistIdx2 = 18;
+//                     break;
+//                 case 7:
+//                     dlistIdx2 = 19;
+//                     break;
+//                 case 9:
+//                     dlistIdx2 = 20;
+//                     break;
+//                 case 13:
+//                     dlistIdx2 = 22;
+//                     break;
+//                 case 15:
+//                     dlistIdx2 = 23;
+//                     break;
+//                 case 17:
+//                 case 22:
+//                 case 34:
+//                     dlistIdx2 = 24;
+//                     break;
+//                 case 41:
+//                     dlistIdx2 = 25;
+//                     break;
+//                 case 19:
+//                     dlistIdx2 = 26;
+//                     break;
+//                 case 26:
+//                     dlistIdx2 = 27;
+//                     break;
+//                 case 28:
+//                     dlistIdx2 = 28;
+//                     break;
+//                 case 38:
+//                     dlistIdx2 = 29;
+//                     break;
+//                 case 4:
+//                     dlistIdx2 = 49;
+//                     break;
+//                 case 16:
+//                     dlistIdx2 = 50;
+//                     break;
+//                 case 20:
+//                     dlistIdx2 = 51;
+//                     break;
+//                 case 46:
+//                     dlistIdx2 = 57;
+//                     break;
+//                 case 47:
+//                     dlistIdx2 = 58;
+//                     break;
+//                 case 1:
+//                 case 2:
+//                 default:
+//                     dlistIdx2 = 16;
+//                     break;
+//             }
+//             gSPDisplayList(gMasterGfxPos++, D_8014AFC0[dlistIdx2]);
+//             break;
+//         case 3:
+//             switch (renderMode) {
+//                 case 3:
+//                     dlistIdx3 = 32;
+//                     break;
+//                 case 5:
+//                     dlistIdx3 = 33;
+//                     break;
+//                 case 7:
+//                     dlistIdx3 = 34;
+//                     break;
+//                 case 9:
+//                     dlistIdx3 = 35;
+//                     break;
+//                 case 13:
+//                     dlistIdx3 = 37;
+//                     break;
+//                 case 15:
+//                     dlistIdx3 = 38;
+//                     break;
+//                 case 17:
+//                 case 22:
+//                 case 34:
+//                     dlistIdx3 = 39;
+//                     break;
+//                 case 41:
+//                     dlistIdx3 = 40;
+//                     break;
+//                 case 19:
+//                     dlistIdx3 = 41;
+//                     break;
+//                 case 26:
+//                     dlistIdx3 = 42;
+//                     break;
+//                 case 28:
+//                     dlistIdx3 = 43;
+//                     break;
+//                 case 38:
+//                     dlistIdx3 = 44;
+//                     break;
+//                 case 4:
+//                     dlistIdx3 = 52;
+//                     break;
+//                 case 16:
+//                     dlistIdx3 = 53;
+//                     break;
+//                 case 20:
+//                     dlistIdx3 = 54;
+//                     break;
+//                 case 46:
+//                     dlistIdx3 = 59;
+//                     break;
+//                 case 47:
+//                     dlistIdx3 = 60;
+//                     break;
+//                 case 1:
+//                 case 2:
+//                 default:
+//                     dlistIdx3 = 31;
+//                     break;
+//             }
+//             gSPDisplayList(gMasterGfxPos++, D_8014AFC0[dlistIdx3]);
+//             gDPSetFogColor(gMasterGfxPos++, gCurrentFogSettings->r, gCurrentFogSettings->g, gCurrentFogSettings->b, gCurrentFogSettings->a);
+//             gSPFogPosition(gMasterGfxPos++, gCurrentFogSettings->startDistance,
+//                                             gCurrentFogSettings->endDistance - gCurrentFogSettings->startDistance);
+//             break;
+//         case 4:
+//         case 5:
+//             if (mdl_bgMultiplyColorA != 255) {
+//                 gSPDisplayList(gMasterGfxPos++, D_8014AFC0[16]);
+//                 switch (renderMode) {
+//                     case 1:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_SURF2);
+//                         break;
+//                     case 3:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_OPA_SURF2);
+//                         break;
+//                     case 5:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_DECAL2);
+//                         break;
+//                     case 7:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_OPA_DECAL2);
+//                         break;
+//                     case 9:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_INTER2);
+//                         break;
+//                     case 13:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_TEX_EDGE2);
+//                         break;
+//                     case 15:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_TEX_EDGE2);
+//                         break;
+//                     case 17:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
+//                         break;
+//                     case 22:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
+//                         break;
+//                     case 34:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_SURF2);
+//                         break;
+//                     case 19:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_XLU_SURF2);
+//                         break;
+//                     case 26:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_DECAL2);
+//                         break;
+//                     case 28:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_DECAL2);
+//                         break;
+//                     case 38:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_XLU_INTER2);
+//                         break;
+//                     case 4:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_OPA_SURF2);
+//                         break;
+//                     case 16:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_TEX_EDGE2);
+//                         break;
+//                     case 20:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_XLU_SURF2);
+//                         break;
+//                     case 46:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_ZB_CLD_SURF2);
+//                         break;
+//                     case 47:
+//                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_CLD_SURF2);
+//                         break;
+//                 }
+//                 gDPSetFogColor(gMasterGfxPos++, gCurrentFogSettings->r, gCurrentFogSettings->g, gCurrentFogSettings->b,
+//                                mdl_bgMultiplyColorA);
+//                 gDPSetBlendColor(gMasterGfxPos++, mdl_bgMultiplyColorR, mdl_bgMultiplyColorG, mdl_bgMultiplyColorB, 255);
+//                 gSPFogPosition(gMasterGfxPos++, 970, 1000);
+//                 break;
+//             }
+//             break;
+//         case 6:
+//             switch (renderMode) {
+//                 case 3:
+//                     dlistIdx = 32;
+//                     break;
+//                 case 5:
+//                     dlistIdx = 33;
+//                     break;
+//                 case 7:
+//                     dlistIdx = 34;
+//                     break;
+//                 case 9:
+//                     dlistIdx = 35;
+//                     break;
+//                 case 13:
+//                     dlistIdx = 37;
+//                     break;
+//                 case 15:
+//                     dlistIdx = 38;
+//                     break;
+//                 case 17:
+//                 case 22:
+//                 case 34:
+//                     dlistIdx = 39;
+//                     break;
+//                 case 41:
+//                     dlistIdx = 40;
+//                     break;
+//                 case 19:
+//                     dlistIdx = 41;
+//                     break;
+//                 case 26:
+//                     dlistIdx = 42;
+//                     break;
+//                 case 28:
+//                     dlistIdx = 43;
+//                     break;
+//                 case 38:
+//                     dlistIdx = 44;
+//                     break;
+//                 case 4:
+//                     dlistIdx = 52;
+//                     break;
+//                 case 16:
+//                     dlistIdx = 53;
+//                     break;
+//                 case 20:
+//                     dlistIdx = 54;
+//                     break;
+//                 case 46:
+//                     dlistIdx = 59;
+//                     break;
+//                 case 47:
+//                     dlistIdx = 60;
+//                     break;
+//                 case 1:
+//                 case 2:
+//                 default:
+//                     dlistIdx = 31;
+//                     break;
+//             }
+//             gSPDisplayList(gMasterGfxPos++, D_8014AFC0[dlistIdx]);
+//             alpha = mdl_bgMultiplyColorA;
+//             invAlpha = 255 - alpha;
+//             temp_v1_34 = (gCurrentFogSettings->startDistance * invAlpha) + (alpha * 900);
+//             temp_v0_47 = (gCurrentFogSettings->endDistance * invAlpha) + (alpha * 1000);
+//             temp_t0_2 = (gCurrentFogSettings->r * invAlpha) + ((u8) mdl_bgMultiplyColorR * alpha);
+//             temp_hi = MULT_HI(temp_t0_2, 0x80808081);
+
+//             temp_v0_50 = (gCurrentFogSettings->g * invAlpha) + (mdl_bgMultiplyColorG * alpha);
+//             temp_a1_13 = (gCurrentFogSettings->b * invAlpha) + (mdl_bgMultiplyColorB * alpha);
+
+//             temp_t3_2->words.w0 = 0xF8000000;
+//             temp_t3_2->words.w1 = ((((s32) (temp_hi + temp_t0_2) >> 7) - (temp_t0_2 >> 0x1F)) << 0x18) | (((((s32) (MULT_HI(temp_v0_50, 0x80808081) + temp_v0_50) >> 7) - (temp_v0_50 >> 0x1F)) & 0xFF) << 0x10) | (((((s32) (MULT_HI(temp_a1_13, 0x80808081) + temp_a1_13) >> 7) - (temp_a1_13 >> 0x1F)) & 0xFF) << 8) | gCurrentFogSettings->a;
+
+
+//             temp_a0_14 = ((s32) (MULT_HI(temp_v1_34, 0x80808081) + temp_v1_34) >> 7) - (temp_v1_34 >> 0x1F);
+//             temp_v1_35 = (((s32) (MULT_HI(temp_v0_47, 0x80808081) + temp_v0_47) >> 7) - (temp_v0_47 >> 0x1F)) - temp_a0_14;
+//             temp_t1_2 = 0x1F400 / temp_v1_35;
+//             temp_a2_4 = (s32) ((0x1F4 - temp_a0_14) << 8) / temp_v1_35;
+//             temp_a3_3->words.w0 = 0xDB080000;
+//             temp_a3_3->words.w1 = (temp_t1_2 << 0x10) | (temp_a2_4 & 0xFFFF);
+//             break;
+//         case 10:
+//         case 11:
+//             switch (renderMode) {
+//                 case 5:
+//                     dlistIdx2 = 33;
+//                     break;
+//                 case 9:
+//                     dlistIdx2 = 35;
+//                     break;
+//                 case 13:
+//                     dlistIdx2 = 37;
+//                     break;
+//                 case 46:
+//                     dlistIdx2 = 59;
+//                     break;
+//                 case 47:
+//                     dlistIdx2 = 60;
+//                     break;
+//                 default:
+//                     dlistIdx2 = 31;
+//                     break;
+//             }
+//             gSPDisplayList(gMasterGfxPos++, D_8014AFC0[dlistIdx2]);
+//             break;
+//     }
+
+//     if (!(model->flags & 8)) {
+//         if (!(model->flags & 0x2000)) {
+//             gSPMatrix(gMasterGfxPos++, model->currentSpecialMatrix, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+//             if (1 != 0) {
+//                 phi_s7 = 0;
+//             }
+//             if (sp38 != 0) {
+//                 sp38 = 0;
+//             }
+//         }
+//     } else {
+//         sp38 = 0;
+//         if (!(model->flags & 0x2000)) {
+//             gSPMatrix(gMasterGfxPos++, model->currentSpecialMatrix, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+//             if (1 != 0) {
+//                 phi_s7 = 0;
+//             }
+//         }
+//     }
+
+//     if (model->flags & 0x10) {
+//         sp36 = (model->customGfxIndex & 0xF) * 2;
+//         if ((*gCurrentCustomModelGfxPtr)[sp36] != NULL) {
+//             gSPDisplayList(gMasterGfxPos++, (*gCurrentCustomModelGfxPtr)[sp36]);
+//         }
+//     }
+
+//     if (tileDesc != NULL) {
+//         if (model->flags & 0x800) {
+//             temp_a3_4 = (s32) texPannerMainU[model->texPannerID] >> 8;
+//             temp_t0_3 = (s32) texPannerMainV[model->texPannerID] >> 8;
+//             temp_t2_2 = (s32) texPannerAuxV[model->texPannerID] >> 8;
+//             temp_t1_3 = (s32) texPannerAuxU[model->texPannerID] >> 8;
+
+//             switch (phi_fp) {
+//                 case 2:
+//                     temp_a2_6->words.w0 = ((temp_a3_4 & 0xFFF) << 0xC) | ((temp_t0_3 & 0xFFF) | 0xF2000000);
+//                     temp_a2_6->words.w1 = (((((tileDesc->mainW - 1) * 4) + temp_a3_4) & 0xFFF) << 0xC) | ((((((u32) tileDesc->mainH >> 1) - 1) * 4) + temp_t0_3) & 0xFFF);
+//                     gMasterGfxPos->words.w0 = ((temp_t1_3 & 0xFFF) << 0xC) | ((temp_t2_2 & 0xFFF) | 0xF2000000);
+//                     phi_v1_3 = ((((tileDesc->mainW - 1) * 4) + temp_t1_3) & 0xFFF) << 0xC;
+//                     phi_v0_4 = ((((((u32) tileDesc->mainH >> 1) - 1) * 4) + temp_t2_2) & 0xFFF) | 0x1000000;
+//                     gMasterGfxPos->words.w1 = phi_v1_3 | phi_v0_4;
+//                     break;
+//                 case 3:
+//                     temp_v1_37 = temp_a3_4 & 0xFFF;
+//                     temp_a2_5->words.w0 = (temp_v1_37 << 0xC) | ((temp_t0_3 & 0xFFF) | 0xF2000000);
+//                     temp_a2_5->words.w1 = (((((tileDesc->mainW - 1) * 4) + temp_a3_4) & 0xFFF) << 0xC) | ((((tileDesc->mainH - 1) * 4) + temp_t0_3) & 0xFFF);
+//                     gMasterGfxPos->words.w0 = ((temp_t1_3 & 0xFFF) << 0xC) | ((temp_t2_2 & 0xFFF) | 0xF2000000);
+//                     phi_v1_3 = ((((tileDesc->auxW - 1) * 4) + temp_t1_3) & 0xFFF) << 0xC;
+//                     phi_v0_4 = ((((tileDesc->auxH - 1) * 4) + temp_t2_2) & 0xFFF) | 0x1000000;
+//                     gMasterGfxPos->words.w1 = phi_v1_3 | phi_v0_4;
+//                     break;
+//                 default:
+//                     temp_v1_37 = temp_a3_4 & 0xFFF;
+//                     phi_v1_3 = ((((tileDesc->mainW - 1) * 4) + temp_a3_4) & 0xFFF) << 0xC;
+//                     phi_v0_4 = (((tileDesc->mainH - 1) * 4) + temp_t0_3) & 0xFFF;
+//                     gMasterGfxPos->words.w0 = (temp_v1_37 << 0xC) | ((temp_t0_3 & 0xFFF) | 0xF2000000);
+//                     gMasterGfxPos->words.w1 = phi_v1_3 | phi_v0_4;
+//                     break;
+//             }
+//         }
+//     }
+
+//     if (model->flags & 0x100) {
+//         gSPMatrix(gMasterGfxPos++, gCameras[gCurrentCamID].unkMatrix, sp38 | phi_s7 | G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+//         if (phi_s7 != 0) {
+//             phi_s7 = 0;
+//         }
+//     }
+//     if (!(model->flags & 0x80)) {
+//         gSPDisplayList(gMasterGfxPos++, modelNode->displayData->displayList);
+//     }
+//     if (model->flags & 0x10) {
+//         sp36++;
+//         if ((*gCurrentCustomModelGfxPtr)[sp36] != NULL) {
+//             gSPDisplayList(gMasterGfxPos++, (*gCurrentCustomModelGfxPtr)[sp36]);
+//         }
+//     }
+//     if (phi_s7 == 0) {
+//         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+//     }
+//     gDPPipeSync(gMasterGfxPos++);
+// }
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80114B58);
 
@@ -2248,7 +2900,7 @@ void func_80117D00(Model* model) {
                     newModel.currentSpecialMatrix = mdl->currentSpecialMatrix;
                     newModel.modelNode = modelNode->groupData->childList[i];
                     newModel.texPannerID = mdl->texPannerID;
-                    newModel.specialDisplayListID = mdl->specialDisplayListID;
+                    newModel.customGfxIndex = mdl->customGfxIndex;
 
                     if (newModel.modelNode->type == SHAPE_TYPE_MODEL) {
                         prop = get_model_property(newModel.modelNode, MODEL_PROP_KEY_RENDER_MODE);
@@ -2263,7 +2915,7 @@ void func_80117D00(Model* model) {
                     }
 
                     newModel.textureID = (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID;
-                    newModel.unk_A9 = 0;
+                    newModel.textureVariation = 0;
                     func_80117D00(&newModel);
                 }
             }
@@ -2707,14 +3359,14 @@ void set_aux_pan_v(s32 texPannerID, s32 value) {
 
 void set_mdl_custom_gfx_set(Model* model, s32 customGfxIndex, u32 fogType) {
     if (customGfxIndex == -1) {
-        customGfxIndex = model->specialDisplayListID & 15;
+        customGfxIndex = model->customGfxIndex & 15;
     }
 
     if (fogType == -1) {
-        fogType = model->specialDisplayListID / 16;
+        fogType = model->customGfxIndex / 16;
     }
 
-    model->specialDisplayListID = (customGfxIndex & 15) + ((fogType & 15) * 16);
+    model->customGfxIndex = (customGfxIndex & 15) + ((fogType & 15) * 16);
 }
 
 void set_custom_gfx(s32 customGfxIndex, Gfx* pre, Gfx* post) {

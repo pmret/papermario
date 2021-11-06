@@ -2480,7 +2480,6 @@ func_8014AFA0 = 0x8014AFA0; // type:func rom:0xE16A0
 D_8014AFB0 = 0x8014AFB0; // type:data rom:0xE16B0
 D_8014AFB4 = 0x8014AFB4; // type:data rom:0xE16B4
 D_8014AFC0 = 0x8014AFC0; // type:data rom:0xE16C0
-D_8014B000 = 0x8014B000; // type:data rom:0xE1700
 D_8014B0B8 = 0x8014B0B8; // type:data rom:0xE17B8
 D_8014B0BC = 0x8014B0BC; // type:data rom:0xE17BC
 D_8014B400 = 0x8014B400; // type:data rom:0xE1B00

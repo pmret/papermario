@@ -177,7 +177,7 @@ ApiStatus SetModelTexVariant(Evt* script, s32 isInitialCall) {
     Bytecode treeIndex = evt_get_variable(script, *args++);
     Bytecode var2 = evt_get_variable(script, *args++);
 
-    get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex))->unk_A9 = var2;
+    get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex))->textureVariation = var2;
     return ApiStatus_DONE2;
 }
 

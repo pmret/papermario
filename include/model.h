@@ -35,11 +35,11 @@ typedef struct Model {
     /* 0x58 */ Matrix4f transformMatrix;
     /* 0x98 */ Vec3f center;
     /* 0xA4 */ u8 texPannerID;
-    /* 0xA5 */ u8 specialDisplayListID;
+    /* 0xA5 */ u8 customGfxIndex;
     /* 0xA6 */ s8 renderMode;
-    /* 0xA7 */ char unk_A7;
+    /* 0xA7 */ s8 matrixMode;
     /* 0xA8 */ u8 textureID;
-    /* 0xA9 */ u8 unk_A9;
+    /* 0xA9 */ s8 textureVariation;
     /* 0xAA */ char unk_AA[6];
 } Model; // size = 0xB0
 
@@ -75,6 +75,21 @@ typedef struct ModelTreeInfo {
     /* 0x02 */ s8 textureID;
     /* 0x03 */ char unk_03;
 } ModelTreeInfo; // size = 0x04
+
+typedef struct TileDescriptor {
+    /* 0x00 */ s8 name[32];
+    /* 0x20 */ u16 auxW;
+    /* 0x22 */ u16 mainW;
+    /* 0x24 */ u16 auxH;
+    /* 0x26 */ u16 mainH;
+    /* 0x28 */ char unk_28;
+    /* 0x29 */ u8 extraTiles;
+    /* 0x2A */ u16 colorCombine;
+    /* 0x2C */ u8 bitDepth;
+    /* 0x2D */ u8 wrapH;
+    /* 0x2E */ u8 wrapV;
+    /* 0x2F */ u8 filtering;
+} TileDescriptor; // size = 0x30
 
 typedef struct TextureHandle {
     /* 0x00 */ Gfx* gfx;
