@@ -1439,9 +1439,11 @@ typedef struct DecorationUnk {
 } DecorationUnk; // size = 0x20
 
 typedef struct DecorationTable {
-    /* 0x000 */ char unk_00[1729];
+    /* 0x000 */ char unk_00[0x6C0];
+    /* 0x6C0 */ s8 unk_6C0;
     /* 0x6C1 */ s8 unk_6C1;
-    /* 0x6C2 */ char unk_6C2[11];
+    /* 0x6C2 */ s8 unk_6C2;
+    /* 0x6C3 */ char unk_6C3[10];
     /* 0x6CD */ s8 unk_6CD;
     /* 0x6CE */ char unk_6CE[6];
     /* 0x6D4 */ s32* unk_6D4;
@@ -1696,7 +1698,9 @@ typedef struct Actor {
     /* 0x1FC */ s16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
-    /* 0x204 */ char unk_204[3];
+    /* 0x204 */ s8 unk_204;
+    /* 0x205 */ char unk_205[0x1];
+    /* 0x206 */ s8 unk_206;
     /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];

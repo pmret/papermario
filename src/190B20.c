@@ -1082,9 +1082,13 @@ void enemy_create_target_list(Actor* actor) {
 
 INCLUDE_ASM(s32, "190B20", func_80263064);
 
-INCLUDE_ASM(s32, "190B20", func_80263230);
+void func_80263230(s32 arg0, s32 arg1) {
+    func_80263064(arg0, arg1, 0);
+}
 
-INCLUDE_ASM(s32, "190B20", func_8026324C);
+void func_8026324C(s32 arg0, s32 arg1) {
+    func_80263064(arg0, arg1, 1);
+}
 
 INCLUDE_ASM(s32, "190B20", func_80263268);
 
@@ -1513,13 +1517,21 @@ INCLUDE_ASM(void, "190B20", func_802666E4, Actor* actor, f32 arg1, f32 arg2, f32
 
 INCLUDE_ASM(void, "190B20", func_802667F0, s32 arg0, Actor* arg1, f32 arg2, f32 arg3, f32 arg4);
 
-INCLUDE_ASM(void, "190B20", func_80266970, Actor* target);
+void func_80266970(Actor* target) {
+    target->unk_204 = 0;
+}
 
 INCLUDE_ASM(s32, "190B20", func_80266978);
 
-INCLUDE_ASM(s32, "190B20", func_80266ADC);
+void func_80266ADC(Actor* target) {
+    target->unk_206 = -1;
+    target->flags |= 0x80000;
+}
 
-INCLUDE_ASM(s32, "190B20", func_80266AF8);
+void func_80266AF8(Actor* target) {
+    target->unk_206 = 0;
+    target->flags &= ~0x80000;
+}
 
 INCLUDE_ASM(s32, "190B20", func_80266B14);
 
@@ -1542,20 +1554,47 @@ s32 inflict_status_set_duration(Actor* actor, s32 statusTypeKey, s32 statusDurat
     return 0;
 }
 
+void func_80266D6C(ActorPart* part, s32 arg1) {
+    if (part->idleAnimations != NULL && !(part->flags & 2)) {
+        DecorationTable* decorationTable = part->decorationTable;
 
-INCLUDE_ASM(s32, "190B20", func_80266D6C);
+        if (decorationTable->unk_6C0 != arg1) {
+            decorationTable->unk_6C0 = arg1;
+            decorationTable->unk_6C2 = 0;
+            decorationTable->unk_6C1 = 1;
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", func_80266DAC);
 
-INCLUDE_ASM(s32, "190B20", func_80266E14);
+void func_80266E14(ActorPart* part) {
+    if (part->idleAnimations != NULL && !(part->flags & 2)) {
+        part->decorationTable->unk_6C0 = 0;
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", func_80266E40);
 
-INCLUDE_ASM(s32, "190B20", func_80266EA8);
+void func_80266EA8(ActorPart* part, s32 arg1) {
+    if (part->idleAnimations != NULL && !(part->flags & 2)) {
+        DecorationTable* decorationTable = part->decorationTable;
+
+        if (decorationTable->unk_750 != arg1) {
+            decorationTable->unk_750 = arg1;
+            decorationTable->unk_752 = 0;
+            decorationTable->unk_751 = 1;
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", func_80266EE8);
 
-INCLUDE_ASM(s32, "190B20", func_80266F60);
+void func_80266F60(ActorPart* part) {
+    if (part->idleAnimations != NULL && !(part->flags & 2)) {
+        part->decorationTable->unk_750 = 0;
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", func_80266F8C);
 
@@ -1583,7 +1622,11 @@ void func_80267018(Actor* actor, s32 arg1) {
     }
 }
 
-INCLUDE_ASM(s32, "190B20", func_8026709C);
+void func_8026709C(ActorPart* part) {
+    if (part->idleAnimations != NULL && !(part->flags & 2)) {
+        part->decorationTable->unk_764 = 0;
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", func_802670C8);
 
