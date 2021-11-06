@@ -215,7 +215,51 @@ void func_80257B88(void) {
     func_802571F0(1, gBattleStatus.partnerActor);
 }
 
-INCLUDE_ASM(s32, "182B30", update_player_actor_shadow);
+void update_player_actor_shadow(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Camera* camera = &gCameras[CAM_BATTLE];
+    Actor* player = battleStatus->playerActor;
+    ActorPart* parts = player->partsTable;
+    Shadow* shadow;
+    f32 x, y, z, scale;
+
+    parts->unk_8C = spr_update_player_sprite(0, parts->currentAnimation, parts->animationRate);
+
+    if (player->flags & 0x10000000) {
+        func_802549F4(player);
+    }
+
+    shadow = get_shadow_by_index(player->shadow);
+    shadow->flags &= ~0x1;
+
+    if (!battleStatus->outtaSightActive) {
+        shadow->unk_05 = 128;
+    } else {
+        shadow->unk_05 = 40;
+    }
+
+    scale = 32767.0f;
+    x = player->currentPos.x + player->headOffset.x;
+    z = player->currentPos.z + player->headOffset.z;
+    y = player->currentPos.y + player->headOffset.y + 12.0;
+    npc_raycast_down_sides(0, &x, &y, &z, &scale);
+
+    if (scale > 200.0f) {
+        shadow->flags |= 1;
+    }
+    shadow->position.x = x;
+    shadow->position.y = y;
+    shadow->position.z = z;
+    shadow->rotation.y = clamp_angle(player->yaw - camera->currentYaw);
+    set_standard_shadow_scale(shadow, scale);
+    shadow->scale.x *= player->shadowScale * player->scalingFactor;
+
+    if (parts->opacity >= 255 && !(parts->flags & 0x100)) {
+        player->renderMode = RENDER_MODE_ALPHATEST;
+    } else {
+        player->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
+    }
+}
 
 INCLUDE_ASM(void, "182B30", func_80257DA4);
 
