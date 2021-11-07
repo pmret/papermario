@@ -1,7 +1,7 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-s32 D_80074270 = 0;
+u16 heap_nextMallocID = 0;
 
 f32 D_80074274[] = {
     0.0f, 0.017452f, 0.034899f, 0.052336f, 0.069756f, 0.087156f, 0.104528f, 0.121869f, 0.139173f,
@@ -74,9 +74,142 @@ HeapNode* _heap_create(s32* addr, u32 size) {
     }
 }
 
-INCLUDE_ASM(s32, "43F0", _heap_malloc);
+void* _heap_malloc(HeapNode* head, u32 size) {
+    HeapNode* nextHeapNode;
+    HeapNode* pPrevHeapNode = NULL;
+    u32 newBlockSize;
+    u32 curBlockLength;
+    HeapNode* curHeapNode;
+    u32 smallestBlockFound;
+    u16 HeapEntryID;
+    u16 HeapEntryID2;
 
-INCLUDE_ASM(s32, "43F0", _heap_malloc_tail);
+    // must allocate 16 bytes or more at minimum or fail
+    size = ALIGN16(size);
+    if (!size) {
+        return NULL;
+    }
+
+    smallestBlockFound = 0;
+    nextHeapNode = NULL;
+
+    // find the smallest block we can fit into in the free list
+    for (curHeapNode = head; ; curHeapNode = curHeapNode->next) {
+        if (!curHeapNode->allocated) {
+            curBlockLength = curHeapNode->length;
+            if ((curBlockLength >= size) && (curBlockLength < smallestBlockFound || !smallestBlockFound)) {
+                pPrevHeapNode = curHeapNode;
+                smallestBlockFound = curBlockLength;
+                nextHeapNode = curHeapNode->next;
+            }
+        }
+        if (!curHeapNode->next) {
+            break;
+        }
+    }
+
+
+    // find out the required block size with header
+    newBlockSize = size + sizeof(HeapNode);
+
+    // if we found a block see if we need to split it up
+    if (smallestBlockFound) {
+        if (smallestBlockFound >= newBlockSize) {
+            // update previous to the proper size for the block being returned
+            pPrevHeapNode->next = (HeapNode*)((u8*)pPrevHeapNode + newBlockSize);
+            pPrevHeapNode->length = size;
+
+            // update the entry id on allocation
+            HeapEntryID = heap_nextMallocID;
+            pPrevHeapNode->allocated = TRUE;
+            heap_nextMallocID = HeapEntryID + 1;
+            pPrevHeapNode->entryID = HeapEntryID;
+
+            // setup the new heap block entry
+            curHeapNode = pPrevHeapNode->next;
+            curHeapNode->next = nextHeapNode;
+            curHeapNode->length = smallestBlockFound - newBlockSize;
+            curHeapNode->allocated = FALSE;
+        } else {
+            // take this entry out of the free linked list and mark as allocated
+            pPrevHeapNode->next = nextHeapNode;
+            pPrevHeapNode->length = smallestBlockFound;
+
+            // update the entry id on allocation
+            // note, usage of a single ID from above will result in wrong code
+            HeapEntryID2 = heap_nextMallocID;
+            pPrevHeapNode->allocated = TRUE;
+            heap_nextMallocID = HeapEntryID2 + 1;
+            pPrevHeapNode->entryID = HeapEntryID2;
+        }
+        return (u8*)pPrevHeapNode + sizeof(HeapNode);
+    }
+    return NULL;
+}
+
+void* _heap_malloc_tail(HeapNode* head, u32 size) {
+    HeapNode* curNode;
+    u32 newNodeSize;
+    u32 foundNodeLength;
+    HeapNode* foundNode;
+    HeapNode* nextNode;
+
+    size = ALIGN16(size);
+    foundNode = NULL;
+
+    // make sure we have a size to allocate
+    if (!size) {
+        return NULL;
+    }
+
+    foundNodeLength = 0;
+    nextNode = NULL;
+
+    // find the smallest block we can fit into
+    for (curNode = head; ; curNode = curNode->next) {
+        if (!curNode->allocated) {
+            if (curNode->length >= size) {
+                foundNode = curNode;
+                foundNodeLength = curNode->length;
+                nextNode = curNode->next;
+            }
+        }
+
+        if (!curNode->next) {
+            break;
+        }
+    }
+
+    newNodeSize = size + sizeof(HeapNode);
+    if (foundNodeLength != 0) {
+        curNode = foundNode;
+
+        // we found a block to use, see if we can split it and return a portion
+        // or if we just need to return the whole block
+        if (foundNodeLength >= newNodeSize) {
+            // room to split and add another free block after this one, do so
+            curNode->next = (HeapNode*)((u8*)curNode + foundNodeLength - size);
+            curNode->length = foundNodeLength - newNodeSize;
+            curNode->allocated = FALSE;
+
+            curNode = curNode->next;
+            curNode->next = nextNode;
+            curNode->length = size;
+            curNode->allocated = TRUE;
+
+        } else {
+            // just return this actual block
+            curNode->next = nextNode;
+            curNode->length = foundNodeLength;
+            curNode->allocated = TRUE;
+        }
+
+        return (u8*)curNode + sizeof(HeapNode);
+    }
+
+    // did not find a block
+    return NULL;
+}
 
 INCLUDE_ASM(s32, "43F0", _heap_free);
 
