@@ -391,7 +391,7 @@ extern s32 D_8029C890[12][5];
 // Heap?
 extern s32 D_8038F800;
 extern s32 D_803B5000;
-extern HeapNode* heap_battleHead;
+extern HeapNode heap_battleHead;
 
 extern s32 D_80108A64;
 extern s32 bMarioIdleAnims[];
