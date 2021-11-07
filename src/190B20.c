@@ -1157,9 +1157,49 @@ s32 count_power_plus(s32 arg0) {
     return pp;
 }
 
-INCLUDE_ASM(s32, "190B20", deduct_current_move_fp);
+void deduct_current_move_fp(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Actor* actor = battleStatus->playerActor;
+    s32 fpCost = gMoveTable[battleStatus->selectedMoveID].costFP;
 
-INCLUDE_ASM(s32, "190B20", reset_actor_turn_info);
+    if (fpCost != 0) {
+        fpCost -= player_team_is_ability_active(actor, ABILITY_FLOWER_SAVER);
+        fpCost -= player_team_is_ability_active(actor, ABILITY_FLOWER_FANATIC) * 2;
+        if (fpCost < 1) {
+            fpCost = 1;
+        }
+    }
+
+    playerData->curFP -= fpCost;
+}
+
+void reset_actor_turn_info(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* actor;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        actor = battleStatus->enemyActors[i];
+        if (actor != NULL) {
+            actor->hpChangeCounter = 0;
+            actor->damageCounter = 0;
+            actor->unk_204[0] = 0;
+        }
+
+    }
+    actor = battleStatus->playerActor;
+    actor->hpChangeCounter = 0;
+    actor->damageCounter = 0;
+    actor->unk_204[0] = 0;
+
+    actor = battleStatus->partnerActor;
+    if (actor != NULL) {
+        actor->hpChangeCounter = 0;
+        actor->damageCounter = 0;
+        actor->unk_204[0] = 0;
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", func_80263CC4);
 
