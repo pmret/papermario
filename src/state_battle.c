@@ -5,7 +5,7 @@
 #include "sprite.h"
 
 s32 D_800778A0[] = {
-    &D_8038F800, &D_803B5000, &D_803DA800,
+    &D_8038F800, &D_803B5000, &heap_battleHead,
 };
 
 s32 D_800778AC[] = {

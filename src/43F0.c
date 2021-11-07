@@ -211,7 +211,7 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
     return NULL;
 }
 
-u32 _heap_free(HeapNode* heapNodeList, void* addr_to_free) {
+u32 _heap_free(HeapNode* heapNodeList, void* addrToFree) {
     u32 curNodeLength;
     HeapNode* nextNode;
     HeapNode* nodeToFreeHeader;
@@ -219,13 +219,13 @@ u32 _heap_free(HeapNode* heapNodeList, void* addr_to_free) {
     HeapNode* outNode;
 
     // if no address to free then return
-    if (!addr_to_free) {
+    if (addrToFree == NULL) {
         return TRUE;
     }
 
     // if we are not allocated then ignore this request
-    nodeToFreeHeader = (HeapNode*)((u8 *)addr_to_free - sizeof(HeapNode));
-    if (nodeToFreeHeader->allocated == 0) {
+    nodeToFreeHeader = (HeapNode*)((u8*)addrToFree - sizeof(HeapNode));
+    if (!nodeToFreeHeader->allocated) {
         return TRUE;
     }
 
@@ -253,7 +253,7 @@ u32 _heap_free(HeapNode* heapNodeList, void* addr_to_free) {
 
         // if the node being freed is before the current node being looked at then we
         // moved past our current node, bail out. Also bail if we hit the end of the list
-        if (nodeToFreeHeader < tempNode || !heapNodeList) {
+        if (nodeToFreeHeader < tempNode || heapNodeList == NULL) {
             goto done;
         }
 
