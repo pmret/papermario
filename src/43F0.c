@@ -241,36 +241,31 @@ u32 _heap_free(HeapNode* heapNodeList, void* addrToFree) {
     }
 
     // walk the full heap node list looking for the block before our current entry
-    tempNode = heapNodeList;
-    while(1) {
+    for (tempNode = heapNodeList;1; tempNode = tempNode->next) {
         // get the pointer to the next block, if it matches the block being freed then
         // exit the search as we know tempNode points to the block prior to the current
         // block being freed
         heapNodeList = tempNode->next;
         if (heapNodeList == nodeToFreeHeader) {
+
+            // we found the node prior to us, if it is not allocated then adjust our total
+            // size to include it then change the header node pointer to point to the block
+            // before us allowing that block to be updated with a new size and to point to the block
+            // after us
+            if (!tempNode->allocated) {
+                curNodeLength += sizeof(HeapNode) + tempNode->length;
+                nodeToFreeHeader = tempNode;
+            }
             break;
         }
 
         // if the node being freed is before the current node being looked at then we
         // moved past our current node, bail out. Also bail if we hit the end of the list
-        if (nodeToFreeHeader < tempNode || heapNodeList == NULL) {
-            goto done;
+        if (nodeToFreeHeader < tempNode || !heapNodeList) {
+            break;
         }
-
-        // update our temp node to point to the next entry we got earlier
-        tempNode = tempNode->next;
     };
 
-    // we found the node prior to us, if it is not allocated then adjust our total
-    // size to include it then change the header node pointer to point to the block
-    // before us allowing that block to be updated with a new size and to point to the block
-    // after us
-    if (!tempNode->allocated) {
-        curNodeLength += sizeof(HeapNode) + tempNode->length;
-        nodeToFreeHeader = tempNode;
-    }
-
-done:
     // update the node being free'd with a proper size and pointer to the next node that is
     // allocated
     outNode = nodeToFreeHeader;
