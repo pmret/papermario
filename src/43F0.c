@@ -211,7 +211,74 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
     return NULL;
 }
 
-INCLUDE_ASM(s32, "43F0", _heap_free);
+u32 _heap_free(HeapNode* heapNodeList, void* addr_to_free) {
+    u32 curNodeLength;
+    HeapNode* nextNode;
+    HeapNode* nodeToFreeHeader;
+    HeapNode* tempNode;
+    HeapNode* outNode;
+
+    // if no address to free then return
+    if (!addr_to_free) {
+        return TRUE;
+    }
+
+    // if we are not allocated then ignore this request
+    nodeToFreeHeader = (HeapNode*)((u8 *)addr_to_free - sizeof(HeapNode));
+    if (nodeToFreeHeader->allocated == 0) {
+        return TRUE;
+    }
+
+    nextNode = nodeToFreeHeader->next;
+    curNodeLength = nodeToFreeHeader->length;
+    outNode = nextNode;
+
+    // see if the next node after us is allocated, if not then adjust our size
+    // to include it and point nextNode to be the node after as it must be allocated
+    if (nextNode && !nextNode->allocated) {
+        curNodeLength += nextNode->length + sizeof(HeapNode);
+        nextNode = nextNode->next;
+    }
+
+    // walk the full heap node list looking for the block before our current entry
+    tempNode = heapNodeList;
+    while(1) {
+        // get the pointer to the next block, if it matches the block being freed then
+        // exit the search as we know tempNode points to the block prior to the current
+        // block being freed
+        heapNodeList = tempNode->next;
+        if (heapNodeList == nodeToFreeHeader) {
+            break;
+        }
+
+        // if the node being freed is before the current node being looked at then we
+        // moved past our current node, bail out. Also bail if we hit the end of the list
+        if (nodeToFreeHeader < tempNode || !heapNodeList) {
+            goto done;
+        }
+
+        // update our temp node to point to the next entry we got earlier
+        tempNode = tempNode->next;
+    };
+
+    // we found the node prior to us, if it is not allocated then adjust our total
+    // size to include it then change the header node pointer to point to the block
+    // before us allowing that block to be updated with a new size and to point to the block
+    // after us
+    if (!tempNode->allocated) {
+        curNodeLength += sizeof(HeapNode) + tempNode->length;
+        nodeToFreeHeader = tempNode;
+    }
+
+done:
+    // update the node being free'd with a proper size and pointer to the next node that is
+    // allocated
+    outNode = nodeToFreeHeader;
+    outNode->next = nextNode;
+    outNode->length = curNodeLength;
+    outNode->allocated = FALSE;
+    return FALSE;
+}
 
 INCLUDE_ASM(s32, "43F0", _heap_realloc);
 
