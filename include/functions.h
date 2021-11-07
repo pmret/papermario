@@ -23,7 +23,8 @@ f32 signF(f32 val);
 
 void* heap_malloc(s32 size);
 void* _heap_malloc(HeapNode* head, u32 size);
-HeapNode* _heap_create(s32* addr, u32 size);
+u32 _heap_free(HeapNode* heapNodeList, void* addrToFree);
+HeapNode* _heap_create(HeapNode* addr, u32 size);
 s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
 void copy_matrix(Matrix4f src, Matrix4f dest);
 
