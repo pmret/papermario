@@ -244,7 +244,7 @@ u32 _heap_free(HeapNode* heapNodeList, void* addrToFree) {
 
     // walk the full heap node list looking for the block before our current entry
     tempNode = heapNodeList;
-    while(1) {
+    while (1) {
         // get the pointer to the next block, if it matches the block being freed then
         // exit the search as we know tempNode points to the block prior to the current
         // block being freed
@@ -268,6 +268,7 @@ u32 _heap_free(HeapNode* heapNodeList, void* addrToFree) {
             break;
         }
 
+        // move to the next node
         tempNode = tempNode->next;
     }
 
