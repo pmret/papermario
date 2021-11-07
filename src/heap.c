@@ -1,8 +1,8 @@
 #include "common.h"
 
-extern HeapNode heap_collisionHead; //D_80268000
-extern HeapNode heap_generalHead; //D_802FB800
-extern HeapNode heap_battleHead; //D_803DA800
+extern HeapNode heap_collisionHead;
+extern HeapNode heap_generalHead;
+extern HeapNode heap_battleHead;
 
 HeapNode* general_heap_create(void) {
     return _heap_create(&heap_generalHead, 0x54000);
