@@ -59,7 +59,7 @@ f32 length2D(f32 x, f32 y) {
     return sqrtf(SQ(x) + SQ(y));
 }
 
-HeapNode* _heap_create(s32* addr, u32 size) {
+HeapNode* _heap_create(HeapNode* addr, u32 size) {
     if (size < 32) {
         return (HeapNode*)-1;
     } else {

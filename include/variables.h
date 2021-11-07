@@ -384,7 +384,7 @@ extern s32 D_802C05CC;
 
 extern s16 gCurrentCamID;
 
-extern s32 gSpriteHeapPtr;
+extern HeapNode gSpriteHeapPtr;
 
 extern s32 D_8029C890[12][5];
 
