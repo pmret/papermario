@@ -187,7 +187,7 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
         // we found a block to use, see if we can split it and return a portion
         // or if we just need to return the whole block
         if (foundNodeLength >= newNodeSize) {
-            // room to split and add another free block before this one, do so
+            // add a free block before this one
             // this is where this function differs from heap_malloc, it returns
             // the end of the block instead of the beginning when splitting it up
             curNode->next = (HeapNode*)((u8*)curNode + foundNodeLength - size);
@@ -246,15 +246,12 @@ u32 _heap_free(HeapNode* heapNodeList, void* addrToFree) {
     tempNode = heapNodeList;
     while (1) {
         // get the pointer to the next block, if it matches the block being freed then
-        // exit the search as we know tempNode points to the block prior to the current
-        // block being freed
+        // exit the search
         heapNodeList = tempNode->next;
         if (heapNodeList == nodeToFreeHeader) {
 
             // we found the node prior to us, if it is not allocated then adjust our total
-            // size to include it then change the header node pointer to point to the block
-            // before us allowing that block to be updated with a new size and to point to the block
-            // after us
+            // size to include it and change the header node pointer to point that block
             if (!tempNode->allocated) {
                 curNodeLength += sizeof(HeapNode) + tempNode->length;
                 nodeToFreeHeader = tempNode;
