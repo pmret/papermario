@@ -4,7 +4,7 @@ import json
 import glob
 import os
 
-print_funcs = True
+print_funcs = False
 
 sizes = {}
 

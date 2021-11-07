@@ -1817,6 +1817,11 @@ enum MsgWindowStates {
     MSG_WINDOW_STATE_WAITING_FOR_CHOICE = 0x7,
     MSG_WINDOW_STATE_SCROLLING_BACK     = 0x8,
     MSG_WINDOW_STATE_VIEWING_PREV       = 0x9,
+    MSG_WINDOW_STATE_A                  = 0xA,
+    MSG_WINDOW_STATE_B                  = 0xB,
+    MSG_WINDOW_STATE_C                  = 0xC,
+    MSG_WINDOW_STATE_D                  = 0xD,
+    MSG_WINDOW_STATE_E                  = 0xE,
 };
 
 #endif
