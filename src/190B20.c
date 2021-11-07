@@ -1171,7 +1171,7 @@ void deduct_current_move_fp(void) {
         }
     }
 
-    playerData->curFP = playerData->curFP - fpCost;
+    playerData->curFP -= fpCost;
 }
 
 void reset_actor_turn_info(void) {
