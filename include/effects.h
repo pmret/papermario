@@ -65,6 +65,41 @@ typedef struct StarSpiritEffect {
     /* 0x54 */ struct StarSpiritEffectUnkStruct* unk_54;
 } StarSpiritEffect; // size = 0x58
 
+// Used by effects 8 and 9 (TODO: better name)
+typedef struct Effect8 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ u16 unk_04;
+    /* 0x06 */ s16 unk_06;
+    /* 0x08 */ u8 primAlpha;
+    /* 0x09 */ s8 unk_09;
+    /* 0x0A */ char unk_0A[0x2];
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ Mtx unk_30;
+    /* 0x70 */ f32 unk_70;
+    /* 0x74 */ f32 unk_74;
+    /* 0x78 */ f32 unk_78;
+    /* 0x7C */ f32 unk_7C;
+    /* 0x80 */ f32 unk_80;
+    /* 0x84 */ f32 unk_84;
+    /* 0x88 */ f32 unk_88;
+    /* 0x8C */ f32 unk_8C;
+    /* 0x90 */ f32 unk_90;
+    /* 0x94 */ f32 unk_94;
+} Effect8; // size = 0x98
+
+typedef struct Effect12 {
+    /* 0x00 */ char unk_00[0x28];
+    /* 0x28 */ f32 unk_28;
+} Effect12; // size = 0x2C
+
 // TODO figure out what this actually is
 // playFX_4E invokes gEffectTable[78]'s entryPoint function
 // playFX_6F invokes gEffectTable[111]'s entryPoint function
@@ -116,7 +151,7 @@ typedef struct EffectInstance {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 numParts;
-    /* 0x0C */ EffectInstanceData* data;
+    /* 0x0C */ void* data; // often but not always EffectInstanceData
     /* 0x10 */ struct EffectGraphics* effect;
 } EffectInstance;
 

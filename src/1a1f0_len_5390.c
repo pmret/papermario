@@ -143,8 +143,8 @@ ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
     effectInstanceData->pos.z = merlee->pos.z + 5.0f;
 
     if (D_800A0BB8 == 2) {
-        D_800A0BA8->data->unk_30 = 0.00001f;
-        D_800A0BAC->data->unk_30 = 0.00001f;
+        ((EffectInstanceData*)D_800A0BA8->data)->unk_30 = 0.00001f;
+        ((EffectInstanceData*)D_800A0BAC->data)->unk_30 = 0.00001f;
         D_800A0BA8->flags |= 0x10;
         D_800A0BAC->flags |= 0x10;
         return ApiStatus_DONE1;
@@ -503,7 +503,7 @@ s8 check_conversation_trigger(void) {
     if (gPartnerActionStatus.actionState.b[0] != 0) {
         return FALSE;
     }
-    
+
     encounter = NULL;
     npc = NULL;
     enemy = NULL;
