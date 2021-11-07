@@ -1164,8 +1164,8 @@ void deduct_current_move_fp(void) {
     s32 fpCost = gMoveTable[battleStatus->selectedMoveID].costFP;
 
     if (fpCost != 0) {
-        fpCost = fpCost - player_team_is_ability_active(actor, ABILITY_FLOWER_SAVER);
-        fpCost = fpCost - player_team_is_ability_active(actor, ABILITY_FLOWER_FANATIC) * 2;
+        fpCost -= player_team_is_ability_active(actor, ABILITY_FLOWER_SAVER);
+        fpCost -= player_team_is_ability_active(actor, ABILITY_FLOWER_FANATIC) * 2;
         if (fpCost < 1) {
             fpCost = 1;
         }
@@ -1192,6 +1192,7 @@ void reset_actor_turn_info(void) {
     actor->hpChangeCounter = 0;
     actor->damageCounter = 0;
     actor->unk_204[0] = 0;
+
     actor = battleStatus->partnerActor;
     if (actor != NULL) {
         actor->hpChangeCounter = 0;
