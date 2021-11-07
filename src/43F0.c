@@ -187,7 +187,9 @@ void* _heap_malloc_tail(HeapNode* head, u32 size) {
         // we found a block to use, see if we can split it and return a portion
         // or if we just need to return the whole block
         if (foundNodeLength >= newNodeSize) {
-            // room to split and add another free block after this one, do so
+            // room to split and add another free block before this one, do so
+            // this is where this function differs from heap_malloc, it returns
+            // the end of the block instead of the beginning when splitting it up
             curNode->next = (HeapNode*)((u8*)curNode + foundNodeLength - size);
             curNode->length = foundNodeLength - newNodeSize;
             curNode->allocated = FALSE;
