@@ -18,8 +18,8 @@ glabel spr_allocate_components
 /* 1023FC 802DF30C 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* 102400 802DF310 10600003 */  beqz      $v1, .L802DF320
 /* 102404 802DF314 AFBF0018 */   sw       $ra, 0x18($sp)
-/* 102408 802DF318 3C048030 */  lui       $a0, %hi(D_802FB800)
-/* 10240C 802DF31C 2484B800 */  addiu     $a0, $a0, %lo(D_802FB800)
+/* 102408 802DF318 3C048030 */  lui       $a0, %hi(heap_generalHead)
+/* 10240C 802DF31C 2484B800 */  addiu     $a0, $a0, %lo(heap_generalHead)
 .L802DF320:
 /* 102410 802DF320 0C00A41B */  jal       _heap_malloc
 /* 102414 802DF324 00000000 */   nop

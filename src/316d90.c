@@ -43,6 +43,6 @@ void func_802AE000(void) {
     if (((u32)battle_heap_create >> 0x1C) == 8) {
         (battle_heap_create)();
     } else {
-        _heap_create(&D_803DA800, 0x10000);
+        _heap_create(&heap_battleHead, 0x10000);
     }
 }

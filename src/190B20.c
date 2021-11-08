@@ -1142,11 +1142,71 @@ INCLUDE_ASM(s32, "190B20", func_802636E4);
 
 INCLUDE_ASM(s32, "190B20", func_80263914);
 
-INCLUDE_ASM(s32, "190B20", count_power_plus);
+s32 count_power_plus(s32 arg0) {
+    s32 pp;
+    s32 i;
 
-INCLUDE_ASM(s32, "190B20", deduct_current_move_fp);
+    if (gGameStatusPtr->peachFlags & 1) {
+        return 0;
+    }
 
-INCLUDE_ASM(s32, "190B20", reset_actor_turn_info);
+    pp = 0;
+    for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
+        u8 moveID = gItemTable[gPlayerData.equippedBadges[i]].moveID;
+
+        if (gMoveTable[moveID].battleSubmenu == 7 && moveID == 0x3B) {
+            if (gBattleStatus.flags1 & BS_FLAGS1_10 || arg0 & 0x80) {
+                pp++;
+            }
+        }
+    }
+
+    return pp;
+}
+
+void deduct_current_move_fp(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Actor* actor = battleStatus->playerActor;
+    s32 fpCost = gMoveTable[battleStatus->selectedMoveID].costFP;
+
+    if (fpCost != 0) {
+        fpCost -= player_team_is_ability_active(actor, ABILITY_FLOWER_SAVER);
+        fpCost -= player_team_is_ability_active(actor, ABILITY_FLOWER_FANATIC) * 2;
+        if (fpCost < 1) {
+            fpCost = 1;
+        }
+    }
+
+    playerData->curFP -= fpCost;
+}
+
+void reset_actor_turn_info(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* actor;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        actor = battleStatus->enemyActors[i];
+        if (actor != NULL) {
+            actor->hpChangeCounter = 0;
+            actor->damageCounter = 0;
+            actor->unk_204 = 0;
+        }
+
+    }
+    actor = battleStatus->playerActor;
+    actor->hpChangeCounter = 0;
+    actor->damageCounter = 0;
+    actor->unk_204 = 0;
+
+    actor = battleStatus->partnerActor;
+    if (actor != NULL) {
+        actor->hpChangeCounter = 0;
+        actor->damageCounter = 0;
+        actor->unk_204 = 0;
+    }
+}
 
 void func_80263CC4(s32 arg0) {
     start_script(D_80293820, 0xA, 0)->varTable[0] = arg0;

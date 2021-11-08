@@ -106,10 +106,10 @@ typedef struct PartnerData {
 
 typedef struct HeapNode {
     /* 0x00 */ struct HeapNode* next;
-    /* 0x04 */ s32 length;
+    /* 0x04 */ u32 length;
     /* 0x08 */ u16 allocated;
-    /* 0x0A */ s16 entryID;
-    /* 0x0C */ s32 capacity;
+    /* 0x0A */ u16 entryID;
+    /* 0x0C */ u32 capacity;
 } HeapNode; // size = 0x10
 
 /// Ring buffer of an NPC's position over the past 20 frames.
@@ -811,8 +811,8 @@ typedef struct StaticMove {
     /* 0x04 */ s32 flags;
     /* 0x08 */ s32 worldDescID;
     /* 0x0C */ s32 menuDescID;
-    /* 0x10 */ u8 battleSubmenu;
-    /* 0x11 */ u8 costFP;
+    /* 0x10 */ s8 battleSubmenu;
+    /* 0x11 */ s8 costFP;
     /* 0x12 */ s8 costBP;
     /* 0x13 */ u8 actionCommandID;
 } StaticMove; // size = 0x14
