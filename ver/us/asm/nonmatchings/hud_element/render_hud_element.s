@@ -360,7 +360,7 @@ glabel render_hud_element
 /* D9848 80143148 8FC40000 */  lw        $a0, ($fp)
 /* D984C 8014314C 00A0382D */  daddu     $a3, $a1, $zero
 .L80143150:
-/* D9850 80143150 0C04EAA7 */  jal       func_8013AA9C
+/* D9850 80143150 0C04EAA7 */  jal       sprfx_update
 /* D9854 80143154 00000000 */   nop
 /* D9858 80143158 8EE20010 */  lw        $v0, 0x10($s7)
 /* D985C 8014315C 8FAE02B8 */  lw        $t6, 0x2b8($sp)
@@ -397,7 +397,7 @@ glabel render_hud_element
 /* D98D0 801431D0 27A502A0 */  addiu     $a1, $sp, 0x2a0
 .L801431D4:
 /* D98D4 801431D4 24060040 */  addiu     $a2, $zero, 0x40
-/* D98D8 801431D8 0C04EBDC */  jal       func_8013AF70
+/* D98D8 801431D8 0C04EBDC */  jal       sprfx_appendGfx_component
 /* D98DC 801431DC 27A70060 */   addiu    $a3, $sp, 0x60
 /* D98E0 801431E0 08050D8F */  j         .L8014363C
 /* D98E4 801431E4 3C03D838 */   lui      $v1, 0xd838

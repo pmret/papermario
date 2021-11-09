@@ -100,8 +100,8 @@ glabel func_8013B1B0
 /* D19E0 8013B2E0 54600001 */  bnel      $v1, $zero, .L8013B2E8
 /* D19E4 8013B2E4 24090001 */   addiu    $t1, $zero, 1
 .L8013B2E8:
-/* D19E8 8013B2E8 3C028015 */  lui       $v0, %hi(D_8014EE10)
-/* D19EC 8013B2EC 8C42EE10 */  lw        $v0, %lo(D_8014EE10)($v0)
+/* D19E8 8013B2E8 3C028015 */  lui       $v0, %hi(sprfx_currentImage)
+/* D19EC 8013B2EC 8C42EE10 */  lw        $v0, %lo(sprfx_currentImage)($v0)
 /* D19F0 8013B2F0 3C018015 */  lui       $at, %hi(D_80151050)
 /* D19F4 8013B2F4 D4221050 */  ldc1      $f2, %lo(D_80151050)($at)
 /* D19F8 8013B2F8 90430024 */  lbu       $v1, 0x24($v0)

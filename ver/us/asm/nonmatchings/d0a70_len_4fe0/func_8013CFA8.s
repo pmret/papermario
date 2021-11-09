@@ -35,8 +35,8 @@ glabel func_8013CFA8
 /* D3720 8013D020 ACA30004 */  sw        $v1, 4($a1)
 /* D3724 8013D024 24430008 */  addiu     $v1, $v0, 8
 /* D3728 8013D028 AC830000 */  sw        $v1, ($a0)
-/* D372C 8013D02C 3C058015 */  lui       $a1, %hi(D_8014EE10)
-/* D3730 8013D030 8CA5EE10 */  lw        $a1, %lo(D_8014EE10)($a1)
+/* D372C 8013D02C 3C058015 */  lui       $a1, %hi(sprfx_currentImage)
+/* D3730 8013D030 8CA5EE10 */  lw        $a1, %lo(sprfx_currentImage)($a1)
 /* D3734 8013D034 3C03FD10 */  lui       $v1, 0xfd10
 /* D3738 8013D038 AC430000 */  sw        $v1, ($v0)
 /* D373C 8013D03C 24430010 */  addiu     $v1, $v0, 0x10
@@ -83,8 +83,8 @@ glabel func_8013CFA8
 /* D37DC 8013D0DC 3694001C */  ori       $s4, $s4, 0x1c
 /* D37E0 8013D0E0 00159100 */  sll       $s2, $s5, 4
 .L8013D0E4:
-/* D37E4 8013D0E4 3C048015 */  lui       $a0, %hi(D_80156950)
-/* D37E8 8013D0E8 8C846950 */  lw        $a0, %lo(D_80156950)($a0)
+/* D37E4 8013D0E4 3C048015 */  lui       $a0, %hi(sprfx_vtxBuf)
+/* D37E8 8013D0E8 8C846950 */  lw        $a0, %lo(sprfx_vtxBuf)($a0)
 /* D37EC 8013D0EC 02442021 */  addu      $a0, $s2, $a0
 /* D37F0 8013D0F0 94820008 */  lhu       $v0, 8($a0)
 /* D37F4 8013D0F4 9483000A */  lhu       $v1, 0xa($a0)
@@ -154,8 +154,8 @@ glabel func_8013CFA8
 /* D38F0 8013D1F0 AE020000 */  sw        $v0, ($s0)
 /* D38F4 8013D1F4 24A20030 */  addiu     $v0, $a1, 0x30
 /* D38F8 8013D1F8 AE020000 */  sw        $v0, ($s0)
-/* D38FC 8013D1FC 3C048015 */  lui       $a0, %hi(D_8014EE10)
-/* D3900 8013D200 8C84EE10 */  lw        $a0, %lo(D_8014EE10)($a0)
+/* D38FC 8013D1FC 3C048015 */  lui       $a0, %hi(sprfx_currentImage)
+/* D3900 8013D200 8C84EE10 */  lw        $a0, %lo(sprfx_currentImage)($a0)
 /* D3904 8013D204 24A20038 */  addiu     $v0, $a1, 0x38
 /* D3908 8013D208 AE020000 */  sw        $v0, ($s0)
 /* D390C 8013D20C 94820008 */  lhu       $v0, 8($a0)
@@ -342,8 +342,8 @@ glabel func_8013CFA8
 /* D3BC4 8013D4C4 3C060002 */  lui       $a2, 2
 /* D3BC8 8013D4C8 34C60406 */  ori       $a2, $a2, 0x406
 /* D3BCC 8013D4CC 8E030000 */  lw        $v1, ($s0)
-/* D3BD0 8013D4D0 3C028015 */  lui       $v0, %hi(D_80156950)
-/* D3BD4 8013D4D4 8C426950 */  lw        $v0, %lo(D_80156950)($v0)
+/* D3BD0 8013D4D0 3C028015 */  lui       $v0, %hi(sprfx_vtxBuf)
+/* D3BD4 8013D4D4 8C426950 */  lw        $v0, %lo(sprfx_vtxBuf)($v0)
 /* D3BD8 8013D4D8 0060202D */  daddu     $a0, $v1, $zero
 /* D3BDC 8013D4DC 24630008 */  addiu     $v1, $v1, 8
 /* D3BE0 8013D4E0 00521021 */  addu      $v0, $v0, $s2
@@ -389,8 +389,8 @@ glabel func_8013CFA8
 /* D3C6C 8013D56C AE020000 */  sw        $v0, ($s0)
 /* D3C70 8013D570 25020010 */  addiu     $v0, $t0, 0x10
 /* D3C74 8013D574 AE020000 */  sw        $v0, ($s0)
-/* D3C78 8013D578 3C048015 */  lui       $a0, %hi(D_8014EE10)
-/* D3C7C 8013D57C 8C84EE10 */  lw        $a0, %lo(D_8014EE10)($a0)
+/* D3C78 8013D578 3C048015 */  lui       $a0, %hi(sprfx_currentImage)
+/* D3C7C 8013D57C 8C84EE10 */  lw        $a0, %lo(sprfx_currentImage)($a0)
 /* D3C80 8013D580 25020018 */  addiu     $v0, $t0, 0x18
 /* D3C84 8013D584 AE020000 */  sw        $v0, ($s0)
 /* D3C88 8013D588 94820008 */  lhu       $v0, 8($a0)
@@ -585,8 +585,8 @@ glabel func_8013CFA8
 /* D3F4C 8013D84C 3C050002 */  lui       $a1, 2
 /* D3F50 8013D850 34A50406 */  ori       $a1, $a1, 0x406
 /* D3F54 8013D854 8E070000 */  lw        $a3, ($s0)
-/* D3F58 8013D858 3C028015 */  lui       $v0, %hi(D_80156950)
-/* D3F5C 8013D85C 8C426950 */  lw        $v0, %lo(D_80156950)($v0)
+/* D3F58 8013D858 3C028015 */  lui       $v0, %hi(sprfx_vtxBuf)
+/* D3F5C 8013D85C 8C426950 */  lw        $v0, %lo(sprfx_vtxBuf)($v0)
 /* D3F60 8013D860 00E0182D */  daddu     $v1, $a3, $zero
 /* D3F64 8013D864 24E70008 */  addiu     $a3, $a3, 8
 /* D3F68 8013D868 00521021 */  addu      $v0, $v0, $s2
@@ -712,8 +712,8 @@ glabel func_8013CFA8
 /* D412C 8013DA2C 3C060002 */  lui       $a2, 2
 /* D4130 8013DA30 34C60406 */  ori       $a2, $a2, 0x406
 /* D4134 8013DA34 8E030000 */  lw        $v1, ($s0)
-/* D4138 8013DA38 3C028015 */  lui       $v0, %hi(D_80156950)
-/* D413C 8013DA3C 8C426950 */  lw        $v0, %lo(D_80156950)($v0)
+/* D4138 8013DA38 3C028015 */  lui       $v0, %hi(sprfx_vtxBuf)
+/* D413C 8013DA3C 8C426950 */  lw        $v0, %lo(sprfx_vtxBuf)($v0)
 /* D4140 8013DA40 0060202D */  daddu     $a0, $v1, $zero
 /* D4144 8013DA44 24630008 */  addiu     $v1, $v1, 8
 /* D4148 8013DA48 00521021 */  addu      $v0, $v0, $s2

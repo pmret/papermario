@@ -27,8 +27,8 @@ glabel func_8013E904
 /* D505C 8013E95C 3C11800A */  lui       $s1, %hi(gDisplayContext)
 /* D5060 8013E960 2631A674 */  addiu     $s1, $s1, %lo(gDisplayContext)
 /* D5064 8013E964 96040000 */  lhu       $a0, ($s0)
-/* D5068 8013E968 3C068015 */  lui       $a2, %hi(D_8014EE10)
-/* D506C 8013E96C 8CC6EE10 */  lw        $a2, %lo(D_8014EE10)($a2)
+/* D5068 8013E968 3C068015 */  lui       $a2, %hi(sprfx_currentImage)
+/* D506C 8013E96C 8CC6EE10 */  lw        $a2, %lo(sprfx_currentImage)($a2)
 /* D5070 8013E970 8E230000 */  lw        $v1, ($s1)
 /* D5074 8013E974 3C014059 */  lui       $at, 0x4059
 /* D5078 8013E978 44811800 */  mtc1      $at, $f3

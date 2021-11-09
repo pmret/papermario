@@ -149,8 +149,8 @@ glabel func_8013EE68
 /* D5720 8013F020 0044A823 */  subu      $s5, $v0, $a0
 /* D5724 8013F024 1AA00067 */  blez      $s5, .L8013F1C4
 /* D5728 8013F028 0280882D */   daddu    $s1, $s4, $zero
-/* D572C 8013F02C 3C168015 */  lui       $s6, %hi(D_80156950)
-/* D5730 8013F030 26D66950 */  addiu     $s6, $s6, %lo(D_80156950)
+/* D572C 8013F02C 3C168015 */  lui       $s6, %hi(sprfx_vtxBuf)
+/* D5730 8013F030 26D66950 */  addiu     $s6, $s6, %lo(sprfx_vtxBuf)
 /* D5734 8013F034 0280982D */  daddu     $s3, $s4, $zero
 .L8013F038:
 /* D5738 8013F038 44931000 */  mtc1      $s3, $f2

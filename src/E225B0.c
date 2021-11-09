@@ -34,8 +34,8 @@ extern void (*D_8010C93C)(void);
 extern struct802B7C78* D_802B7C78_E23228;
 extern struct8015A578 D_8015A578;
 
-void func_8013AA9C(s32, s32, s32, s32, s32, s32, s32);
-void func_8013AF70(s32, UnknownCommand*, s32, Matrix4f*);
+void sprfx_update(s32, s32, s32, s32, s32, s32, s32);
+void sprfx_appendGfx_component(s32, UnknownCommand*, s32, Matrix4f*);
 void func_802B735C_E2290C(void);
 
 void func_802B7000_E225B0(void) {
@@ -89,7 +89,7 @@ void func_802B7000_E225B0(void) {
                 command.unk_04 = &D_802B7BE0_E23190;
                 break;
         }
-        func_8013AA9C(0, 7, 0xFF, 0xFF, 0xFF, D_802B7C78_E23228->unk_28, 0);
+        sprfx_update(0, 7, 0xFF, 0xFF, 0xFF, D_802B7C78_E23228->unk_28, 0);
 
         command.unk_00 = &D_802B7580_E22B30;
         command.unk_08 = 0x38;
@@ -98,7 +98,7 @@ void func_802B7000_E225B0(void) {
         command.unk_0E = 0x2E;
         command.unk_10 = 0xFF;
 
-        func_8013AF70(0, &command, 0, &matrix2);
+        sprfx_appendGfx_component(0, &command, 0, &matrix2);
         gSPPopMatrix(gMasterGfxPos++, 0);
     }
 }

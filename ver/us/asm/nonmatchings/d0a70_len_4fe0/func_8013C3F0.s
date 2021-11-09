@@ -33,7 +33,7 @@ glabel func_8013C3F0
 /* D2B2C 8013C42C 4600028D */  trunc.w.s $f10, $f0
 /* D2B30 8013C430 44165000 */  mfc1      $s6, $f10
 /* D2B34 8013C434 8E4D0024 */  lw        $t5, 0x24($s2)
-/* D2B38 8013C438 0C04F088 */  jal       func_8013C220
+/* D2B38 8013C438 0C04F088 */  jal       sprfx_load_gfx
 /* D2B3C 8013C43C AFAD0014 */   sw       $t5, 0x14($sp)
 /* D2B40 8013C440 0040982D */  daddu     $s3, $v0, $zero
 /* D2B44 8013C444 126002CC */  beqz      $s3, .L8013CF78
@@ -147,8 +147,8 @@ glabel func_8013C3F0
 /* D2CDC 8013C5DC 46020103 */   div.s    $f4, $f0, $f2
 /* D2CE0 8013C5E0 3C098007 */  lui       $t1, %hi(gCurrentDisplayContextIndex)
 /* D2CE4 8013C5E4 252941F4 */  addiu     $t1, $t1, %lo(gCurrentDisplayContextIndex)
-/* D2CE8 8013C5E8 3C0B8015 */  lui       $t3, %hi(D_8014EE10)
-/* D2CEC 8013C5EC 256BEE10 */  addiu     $t3, $t3, %lo(D_8014EE10)
+/* D2CE8 8013C5E8 3C0B8015 */  lui       $t3, %hi(sprfx_currentImage)
+/* D2CEC 8013C5EC 256BEE10 */  addiu     $t3, $t3, %lo(sprfx_currentImage)
 /* D2CF0 8013C5F0 3C0C8000 */  lui       $t4, 0x8000
 /* D2CF4 8013C5F4 03C0302D */  daddu     $a2, $fp, $zero
 /* D2CF8 8013C5F8 0140382D */  daddu     $a3, $t2, $zero

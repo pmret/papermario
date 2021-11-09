@@ -3353,16 +3353,16 @@ ApiStatus N(func_802416FC_96A8BC)(Evt* script, s32 isInitialCall) {
     N(D_8024EFCC) = script;
 
     ret = func_8013A704(1);
-    func_8013AA9C(ret, 5, 0xF, 1, 1, 0, 0x800);
+    sprfx_update(ret, 5, 0xF, 1, 1, 0, 0x800);
     evt_set_variable(script, EVT_ARRAY(0), ret);
     ret = func_8013A704(1);
-    func_8013AA9C(ret, 5, 0x10, 1, 1, 0, 0x800);
+    sprfx_update(ret, 5, 0x10, 1, 1, 0, 0x800);
     evt_set_variable(script, EVT_ARRAY(1), ret);
     ret = func_8013A704(1);
-    func_8013AA9C(ret, 5, 0x11, 1, 1, 0, 0x800);
+    sprfx_update(ret, 5, 0x11, 1, 1, 0, 0x800);
     evt_set_variable(script, EVT_ARRAY(2), ret);
     ret = func_8013A704(1);
-    func_8013AA9C(ret, 5, 0x12, 1, 1, 0, 0x800);
+    sprfx_update(ret, 5, 0x12, 1, 1, 0, 0x800);
     evt_set_variable(script, EVT_ARRAY(3), ret);
 
     evt_set_variable(script, EVT_ARRAY(7), create_generic_entity_world(N(func_8024240C_96B5CC), N(func_80242EAC_96C06C)));

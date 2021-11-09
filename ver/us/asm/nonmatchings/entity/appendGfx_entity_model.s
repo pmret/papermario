@@ -757,7 +757,7 @@ glabel L801218AC_B7FAC
 /* B837C 80121C7C 0000202D */  daddu     $a0, $zero, $zero
 /* B8380 80121C80 27A50090 */  addiu     $a1, $sp, 0x90
 /* B8384 80121C84 0080302D */  daddu     $a2, $a0, $zero
-/* B8388 80121C88 0C04EBDC */  jal       func_8013AF70
+/* B8388 80121C88 0C04EBDC */  jal       sprfx_appendGfx_component
 /* B838C 80121C8C 0200382D */   daddu    $a3, $s0, $zero
 .L80121C90:
 /* B8390 80121C90 3C03D838 */  lui       $v1, 0xd838

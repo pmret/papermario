@@ -226,7 +226,7 @@ glabel func_80242FA4_803824
 /* 803B98 80243318 00021023 */  negu      $v0, $v0
 /* 803B9C 8024331C A7A20024 */  sh        $v0, 0x24($sp)
 /* 803BA0 80243320 8E440000 */  lw        $a0, ($s2)
-/* 803BA4 80243324 0C04EBDC */  jal       func_8013AF70
+/* 803BA4 80243324 0C04EBDC */  jal       sprfx_appendGfx_component
 /* 803BA8 80243328 0260382D */   daddu    $a3, $s3, $zero
 /* 803BAC 8024332C 3C04D838 */  lui       $a0, 0xd838
 /* 803BB0 80243330 8E220000 */  lw        $v0, ($s1)

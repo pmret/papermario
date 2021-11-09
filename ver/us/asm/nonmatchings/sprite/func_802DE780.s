@@ -47,7 +47,7 @@ glabel func_802DE780
 /* 101910 802DE820 8FA80060 */  lw        $t0, 0x60($sp)
 /* 101914 802DE824 02A0282D */  daddu     $a1, $s5, $zero
 /* 101918 802DE828 AFBE0018 */  sw        $fp, 0x18($sp)
-/* 10191C 802DE82C 0C04EAA7 */  jal       func_8013AA9C
+/* 10191C 802DE82C 0C04EAA7 */  jal       sprfx_update
 /* 101920 802DE830 AFA80014 */   sw       $t0, 0x14($sp)
 /* 101924 802DE834 12A00004 */  beqz      $s5, .L802DE848
 /* 101928 802DE838 00000000 */   nop
