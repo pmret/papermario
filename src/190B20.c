@@ -1148,7 +1148,7 @@ void func_80263914(void) {
 
     battleStatus->submenuMoveCount = partner->staticActorData->level + 2;
      // First move is changed each level
-    battleStatus->submenuMoves[0] = playerData->currentPartner * 6 +  0x7D + partner->staticActorData->level;
+    battleStatus->submenuMoves[0] = playerData->currentPartner * 6 + 0x7D + partner->staticActorData->level;
 
     for (i = 1; i < battleStatus->submenuMoveCount; i++) {
         battleStatus->submenuMoves[i] = playerData->currentPartner * 6 + 0x7F + i;
