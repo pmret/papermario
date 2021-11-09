@@ -1154,7 +1154,7 @@ void func_80263914(void) {
         battleStatus->submenuMoves[i] = playerData->currentPartner * 6 + 0x7F + i;
     }
 
-    phi_s6 = 0;
+    phi_s6 = FALSE;
     for (i = 0; i < battleStatus->submenuMoveCount; i++){
             StaticMove* move = &gMoveTable[battleStatus->submenuMoves[i]];
             fpCost = move->costFP;
@@ -1172,7 +1172,7 @@ void func_80263914(void) {
 
             player_create_target_list(partner);
             if (partner->targetListLength != 0){
-                phi_s6 = 1;
+                phi_s6 = TRUE;
                 battleStatus->submenuEnabled[i] = 1;
             }
 
@@ -1190,7 +1190,7 @@ void func_80263914(void) {
 
     }
 
-    if (phi_s6 == 0) {
+    if (!phi_s6) {
         battleStatus->unk_7D[3] = -1;
     } else {
         battleStatus->unk_7D[3] = 1;
