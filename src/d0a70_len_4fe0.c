@@ -52,17 +52,6 @@ typedef struct Unk10Struct {
     /* 0x24 */ u8 gfxOtherModeD;
 } Unk10Struct; // size = 0x25
 
-typedef struct SprFXGfxDescriptor {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ u16 unk_08;
-    /* 0x0A */ u16 unk_0A;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x0E */ s16 unk_0E;
-} SprFXGfxDescriptor; // size = 0x10
-
 typedef SpriteEffect SpriteEffectList[90];
 
 // BSS
