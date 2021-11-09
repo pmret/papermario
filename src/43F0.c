@@ -283,7 +283,6 @@ void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize) {
     HeapNode* nextNode;
     HeapNode* curHeapAlloc;
     HeapNode* newFreeBlock;
-    u32 needNewAllocation;
     u32 newNodeLength;
     HeapNode* nodeToUpdate;
 
@@ -303,10 +302,7 @@ void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize) {
     nodeToUpdate = nextNode;
     if (nextNode && !nextNode->allocated) {
         nextNode = nextNode->next;
-
-        needNewAllocation = newNodeLength + sizeof(HeapNode);
-        needNewAllocation = needNewAllocation + nodeToUpdate->length;
-        newNodeLength = needNewAllocation;
+        newNodeLength += sizeof(HeapNode) + nodeToUpdate->length;
     }
 
     // check if the current block or current + next block (if free) are too small
