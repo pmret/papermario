@@ -1129,11 +1129,223 @@ s32 btl_check_player_defeated(void) {
     return TRUE;
 }
 
-INCLUDE_ASM(s32, "190B20", func_802634B8);
+void func_802634B8(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Actor* player = battleStatus->playerActor;
+    StaticMove* move;
+    s32 i;
+    s32 moveCount;
+    s32 phi_s6;
+    s32 fpCost;
 
-INCLUDE_ASM(s32, "190B20", func_802636E4);
+    if (playerData->bootsLevel == -1) {
+        battleStatus->unk_7D[1] = 0;
+        return;
+    }
 
-INCLUDE_ASM(s32, "190B20", func_80263914);
+    for (i = 0; i < ARRAY_COUNT(battleStatus->submenuMoves); i++) {
+        battleStatus->submenuMoves[i] = 0;
+    }
+
+    moveCount = 1;    
+    battleStatus->submenuMoves[0] = playerData->bootsLevel + 26;
+    battleStatus->submenuIcons[0] = 0x155;
+    do {
+        for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
+            s16 badges = playerData->equippedBadges[i];
+            if (badges != 0) {
+                StaticMove* moveTable = gMoveTable;
+                u8 moveID = gItemTable[badges].moveID;
+                move = &moveTable[moveID];
+                if ((s8) move->battleSubmenu == 2) {
+                    battleStatus->submenuMoves[moveCount] =  moveID;
+                    battleStatus->submenuIcons[moveCount] = playerData->equippedBadges[i];
+                    moveCount++;
+                }
+            }
+        }
+    } while (0);
+    battleStatus->submenuMoveCount = moveCount;
+
+    phi_s6 = FALSE;
+    for (i = 0; i < battleStatus->submenuMoveCount; i++) {
+            move = &gMoveTable[battleStatus->submenuMoves[i]];
+            fpCost = move->costFP;
+            if (fpCost != 0) {
+                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
+                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_FANATIC) * 2;
+                if (fpCost < 1) {
+                    fpCost = 1;
+                }
+            }
+            battleStatus->moveCategory = 0;
+            battleStatus->selectedItemID = playerData->bootsLevel;
+            battleStatus->currentTargetListFlags = move->flags;
+            player_create_target_list(player);
+            if (player->targetListLength != 0) {
+                phi_s6 = TRUE;
+                battleStatus->submenuEnabled[i] = 1;
+            }
+
+            if (playerData->curFP < fpCost) {
+                battleStatus->submenuEnabled[i] = 0;
+            }
+            if (player->targetListLength == 0) {
+                battleStatus->submenuEnabled[i] = -2;
+            }
+            if ((gBattleStatus.flags2 & BS_FLAGS2_1000) != 0) {
+                battleStatus->submenuEnabled[moveCount] = -1;
+            }
+    }
+
+    if (!phi_s6) {
+        battleStatus->unk_7D[1] = -1;
+    } else {
+        battleStatus->unk_7D[1] = 1;
+    }
+}
+
+void func_802636E4(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Actor* player = battleStatus->playerActor;
+    StaticMove* move;
+    s32 i;
+    s32 moveCount;
+    s32 phi_s6;
+    s32 fpCost;
+
+    if (playerData->hammerLevel == -1) {
+        battleStatus->unk_7D[2] = 0;
+        return;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->submenuMoves); i++) {
+        battleStatus->submenuMoves[i] = 0;
+    }
+
+    moveCount = 1;    
+    battleStatus->submenuMoves[0] = playerData->hammerLevel + 3;
+    battleStatus->submenuIcons[0] = 0x155;
+    do {
+        for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
+            s16 badges = playerData->equippedBadges[i];
+            if (badges != 0) {
+                StaticMove* moveTable = gMoveTable;
+                u8 moveID = gItemTable[badges].moveID;
+                move = &moveTable[moveID];
+                if ((s8) move->battleSubmenu == 1) {
+                    battleStatus->submenuMoves[moveCount] =  moveID;
+                    battleStatus->submenuIcons[moveCount] = playerData->equippedBadges[i];
+                    moveCount++;
+                }
+            }
+        }
+    } while (0);
+    battleStatus->submenuMoveCount = moveCount;
+
+    phi_s6 = FALSE;
+    for (i = 0; i < battleStatus->submenuMoveCount; i++) {
+            move = &gMoveTable[battleStatus->submenuMoves[i]];
+            fpCost = move->costFP;
+            if (fpCost != 0) {
+                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
+                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_FANATIC) * 2;
+                if (fpCost < 1) {
+                    fpCost = 1;
+                }
+            }
+            battleStatus->moveCategory = 1;
+            battleStatus->selectedItemID = playerData->hammerLevel;
+            battleStatus->currentTargetListFlags = move->flags;
+            player_create_target_list(player);
+            if (player->targetListLength != 0) {
+                phi_s6 = TRUE;
+                battleStatus->submenuEnabled[i] = 1;
+            }
+
+            if (playerData->curFP < fpCost) {
+                battleStatus->submenuEnabled[i] = 0;
+            }
+            if (player->targetListLength == 0) {
+                battleStatus->submenuEnabled[i] = -2;
+            }
+            if ((gBattleStatus.flags2 & BS_FLAGS2_1000) != 0) {
+                battleStatus->submenuEnabled[moveCount] = -1;
+            }
+    }
+
+    if (!phi_s6) {
+        battleStatus->unk_7D[2] = -1;
+    } else {
+        battleStatus->unk_7D[2] = 1;
+    }
+}
+
+void func_80263914(void) {
+    PlayerData* playerData = &gPlayerData;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    Actor* partner = battleStatus->partnerActor;
+    s32 fpCost;
+    s32 i;
+    s32 phi_s6;
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->submenuMoves); i++) {
+        battleStatus->submenuMoves[i] = 0;
+    }
+
+    battleStatus->submenuMoveCount = partner->staticActorData->level + 2;
+     // First move is changed each level
+    battleStatus->submenuMoves[0] = playerData->currentPartner * 6 + 0x7D + partner->staticActorData->level;
+
+    for (i = 1; i < battleStatus->submenuMoveCount; i++) {
+        battleStatus->submenuMoves[i] = playerData->currentPartner * 6 + 0x7F + i;
+    }
+
+    phi_s6 = FALSE;
+    for (i = 0; i < battleStatus->submenuMoveCount; i++){
+            StaticMove* move = &gMoveTable[battleStatus->submenuMoves[i]];
+            fpCost = move->costFP;
+            if (fpCost != 0) {
+                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
+                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_FANATIC) * 2;
+                if (fpCost < 1) {
+                    fpCost = 1;
+                }
+            }
+
+            battleStatus->moveCategory = 5;
+            battleStatus->selectedItemID = partner->staticActorData->level;
+            battleStatus->currentTargetListFlags = move->flags;
+
+            player_create_target_list(partner);
+            if (partner->targetListLength != 0){
+                phi_s6 = TRUE;
+                battleStatus->submenuEnabled[i] = 1;
+            }
+
+            if (partner->targetListLength == 0) {
+                battleStatus->submenuEnabled[i] = -2;
+            }
+
+            if (playerData->curFP < fpCost) {
+                battleStatus->submenuEnabled[i] = 0;
+            }
+
+            if (gBattleStatus.flags2 & BS_FLAGS2_1000) {
+                battleStatus->submenuEnabled[i] = -1;
+            }
+
+    }
+
+    if (!phi_s6) {
+        battleStatus->unk_7D[3] = -1;
+    } else {
+        battleStatus->unk_7D[3] = 1;
+    }
+}
 
 s32 count_power_plus(s32 arg0) {
     s32 pp;

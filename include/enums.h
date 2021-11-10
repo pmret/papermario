@@ -2161,7 +2161,7 @@ enum BattleStatusFlags1 {
 
 enum BattleStatusFlags2 {
     BS_FLAGS2_NO_TARGET_AVAILABLE             = 0x00001000,
-    BS_FLAGS2_1000000                         = 0x1000000,
+    BS_FLAGS2_1000000                         = 0x01000000,
 };
 
 enum DebuffTypes {
@@ -2904,6 +2904,5 @@ enum ElementImmunityFlags {
     ELEMENT_IMMUNITY_FLAGS_20000000          = 0x20000000,
     ELEMENT_IMMUNITY_FLAGS_40000000          = 0x40000000,
     ELEMENT_IMMUNITY_FLAGS_80000000          = 0x80000000,
-};
 
 #endif
