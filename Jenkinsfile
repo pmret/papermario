@@ -29,7 +29,6 @@ pipeline {
             steps {
                 script {
                     if (env.CHANGE_ID) {
-                        sh 'python3 progress.py'
                         def us_progress = sh(returnStdout: true, script: "python3 progress.py us --pr-comment").trim()
                         def jp_progress = sh(returnStdout: true, script: "python3 progress.py jp --pr-comment").trim()
                         def warnings = sh(returnStdout: true, script: "./tools/warnings_count/check_new_warnings.sh --jenkins").trim()
@@ -40,8 +39,6 @@ pipeline {
                                 comment_id = comment.id
                             }
                         }
-
-                        echo "${us_progress}"
 
                         def message = "${us_progress}\n${jp_progress}\n${warnings}"
 
@@ -94,9 +91,9 @@ pipeline {
             }
         }
     }
-    // post {
-    //     always {
-    //         cleanWs()
-    //     }
-    // }
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
