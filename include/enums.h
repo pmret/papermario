@@ -1803,6 +1803,7 @@ enum BattleStatusFlags1 {
 };
 
 enum BattleStatusFlags2 {
+    BS_FLAGS2_1000            = 0x1000,
     BS_FLAGS2_1000000         = 0x1000000,
 };
 
