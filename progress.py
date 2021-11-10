@@ -91,6 +91,9 @@ def main(args):
 
     matching_size, nonmatching_size = get_funcs_sizes(func_sizes, matching_funcs, nonmatching_funcs)
 
+    print("\nMatching funcs:\n" + matching_funcs)
+    print("\nNonmatching funcs:\n" + nonmatching_funcs)
+
     if len(all_funcs) == 0:
         funcs_matching_ratio = 0.0
         matching_ratio = 0.0
