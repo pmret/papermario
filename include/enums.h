@@ -2904,5 +2904,6 @@ enum ElementImmunityFlags {
     ELEMENT_IMMUNITY_FLAGS_20000000          = 0x20000000,
     ELEMENT_IMMUNITY_FLAGS_40000000          = 0x40000000,
     ELEMENT_IMMUNITY_FLAGS_80000000          = 0x80000000,
-
+};
+    
 #endif
