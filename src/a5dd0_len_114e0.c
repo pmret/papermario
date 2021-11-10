@@ -90,13 +90,303 @@ s32 D_8014AFB4[] = {0, 0, 0};
 
 Gfx* D_8014AFC0[] = { D_8014B7F8, D_8014B910, D_8014B820, D_8014B938, D_8014B848, D_8014B960, D_8014B870, D_8014B988, D_8014B898, D_8014BA20, D_8014B9B0, D_8014BAC0, D_8014B8C0, D_8014B9D8, D_8014B8E8, D_8014BA00, D_8014BB60, D_8014BC78, D_8014BB88, D_8014BCA0, D_8014BBB0, D_8014BCC8, D_8014BBD8, D_8014BCF8, D_8014BC00, D_8014BD88, D_8014BD18, D_8014BC28, D_8014BD40, D_8014BC50, D_8014BD68, D_8014BE78, D_8014BF90, D_8014BEA0, D_8014BFB8, D_8014BEC8, D_8014BFE0, D_8014BEF0, D_8014C008, D_8014BF18, D_8014C098, D_8014C028, D_8014BF40, D_8014C050, D_8014BF68, D_8014C078, D_8014BA48, D_8014BA70, D_8014BA98, D_8014BDB0, D_8014BDD8, D_8014BE00, D_8014C0C0, D_8014C0E8, D_8014C110, D_8014BB10, D_8014BB38, D_8014BE28, D_8014BE50, D_8014C138, D_8014C160, NULL };
 
-s32 D_8014B0B8 = 0xFCFFFFFF;
+Gfx D_8014B0B8[21][5] = {
+    {
+        gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+        gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
+        gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
+        gsDPSetCombineLERP(SHADE, 0, PRIMITIVE_ALPHA, PRIMITIVE, 0, 0, 0, SHADE, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(SHADE, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    }, {
+        gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_MODULATEIA),
+        gsDPSetCombineMode(G_CC_MODULATEIDECALA, G_CC_PASS2),
+        gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_PASS2),
+        gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, PRIMITIVE, PRIMITIVE_ALPHA, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    }, {
+        gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_BLENDRGBA),
+        gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_PASS2),
+        gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_PASS2),
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE_ALPHA, PRIMITIVE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, SHADE, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+        gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_PASS2),
+        gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_PASS2),
+        gsDPSetCombineLERP(TEXEL0, 0, PRIMITIVE_ALPHA, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, PRIMITIVE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, PRIMITIVE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, PRIMITIVE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, COMBINED, 0, SHADE, 0),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, COMBINED, 0, SHADE, 0),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, COMBINED, 0, SHADE, 0),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, COMBINED, 0, SHADE, 0),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, COMBINED, 0, SHADE, 0),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, COMBINED, 0, SHADE, 0),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, COMBINED, 0, SHADE, 0),
+    },
+    {
+        gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, TEXEL1, SHADE, 0, 0, 0, 0, SHADE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, TEXEL1, SHADE, 0, 0, 0, 0, SHADE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, TEXEL1, SHADE, 0, 0, 0, 0, SHADE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, TEXEL1, SHADE, 0, 0, 0, 0, SHADE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, TEXEL1, SHADE, 0, SHADE, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0, 1, TEXEL1, TEXEL0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0, 1, TEXEL1, TEXEL0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0, 1, TEXEL1, TEXEL0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0, 1, TEXEL1, TEXEL0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0, 1, TEXEL1, TEXEL0, COMBINED, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0, 1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0, TEXEL0, 1, TEXEL1, TEXEL0, TEXEL1, TEXEL0, COMBINED, TEXEL0_ALPHA, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0),
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0, TEXEL0, 1, TEXEL1, TEXEL0, TEXEL1, TEXEL0, COMBINED, TEXEL0_ALPHA, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0),
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0, TEXEL0, 1, TEXEL1, TEXEL0, TEXEL1, TEXEL0, COMBINED, TEXEL0_ALPHA, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0),
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0, TEXEL0, 1, TEXEL1, TEXEL0, TEXEL1, TEXEL0, COMBINED, TEXEL0_ALPHA, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0),
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0, TEXEL0, 1, TEXEL1, TEXEL0, TEXEL1, TEXEL0, COMBINED, TEXEL0_ALPHA, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0),
+    },
+    {
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+    },
+    {
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+    },
+    {
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+    },
+};
 
-s32 D_8014B0BC[] = { 0xFFFE793C, 0xFCFFFFFF, 0xFFFE7838, 0xFCFFFFFF, 0xFFFE7838, 0xFC457FFF, 0xFFFDF838, 0xFC41FFFF, 0xFFFEF838, 0xFC121824, 0xFF33FFFF, 0xFC127FFF, 0xFFFFF238, 0xFC1219FF, 0xFFFFFE38, 0xFC127E0A, 0xF3FFF238, 0xFC121803, 0xFFFFFF78, 0xFC147E28, 0x44FE793C, 0xFC147FFF, 0x4FFE7838, 0xFC147FFF, 0x4FFE7838, 0xFC147E0A, 0x4FFE72F8, 0xFC147E03, 0x4FFE7978, 0xFCFFFFFF, 0xFFFCF279, 0xFCFFFFFF, 0xFFFCF238, 0xFCFFFFFF, 0xFFFCF238, 0xFC157FFF, 0xFFFDF238, 0xFCFFFE03, 0xFFFCF378, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC20A204, 0xFF13FFFF, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFF13FFFF, 0xFC20A204, 0xFF13FFFF, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFF13FFFF, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFF13FFFF, 0xFC20A204, 0xFF13FFFF, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFF13FFFF, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFF13FFFF, 0xFC20A204, 0xFF13FFFF, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFF13FFFF, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFF13FFFF, 0xFC20A204, 0xFF13FFFF, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFF13FFFF, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFF13FFFF, 0xFC20A204, 0xFF13FFFF, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFF13FFFF, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFF13FFFF, 0xFC20A204, 0xFF13FFFF, 0xFC20A203, 0xFF13FF7F, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF9883, 0xFFFFAF78, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FE03, 0x2FFD7378, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61FEC3, 0x11FCF279, 0xFC61FFFF, 0x1FFCF238, 0xFC61FFFF, 0x1FFCF238, 0xFC61FFFF, 0x1FFCF238, 0xFC61FE03, 0x1FFCF378, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, };
-
-s32 D_8014B400 = 0xFCFFFFFF;
-
-s32 D_8014B404[] = { 0xFFFE793C, 0xFCFFFFFF, 0xFFFE7838, 0xFCFFFFFF, 0xFFFE7838, 0xFC457FFF, 0xFFFDF838, 0xFC41FFFF, 0xFFFEF838, 0xFC127E24, 0xFFFFF3F9, 0xFC127FFF, 0xFFFFF238, 0xFC127FFF, 0xFFFFF238, 0xFC127E0A, 0xF3FFF238, 0xFC127E03, 0xFFFFF378, 0xFC147E28, 0x44FE793C, 0xFC147FFF, 0x4FFE7838, 0xFC147FFF, 0x4FFE7838, 0xFC147E0A, 0x4FFE72F8, 0xFC147E03, 0x4FFE7978, 0xFCFFFFFF, 0xFFFCF279, 0xFCFFFFFF, 0xFFFCF238, 0xFCFFFFFF, 0xFFFCF238, 0xFC157FFF, 0xFFFDF238, 0xFCFFFE03, 0xFFFCF378, 0xFC26A004, 0x1FFC93FC, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1FFC93FC, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF9883, 0xFFFFAF78, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FE03, 0x2FFD7378, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61FEC3, 0x11FCF279, 0xFC61FFFF, 0x1FFCF238, 0xFC61FFFF, 0x1FFCF238, 0xFC61FFFF, 0x1FFCF238, 0xFC61FE03, 0x1FFCF378, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, };
+Gfx D_8014B400[21][5] = {
+    {
+        gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+        gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
+        gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
+        gsDPSetCombineLERP(SHADE, 0, PRIMITIVE_ALPHA, PRIMITIVE, 0, 0, 0, SHADE, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(SHADE, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineMode(G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA),
+        gsDPSetCombineMode(G_CC_MODULATEIDECALA, G_CC_PASS2),
+        gsDPSetCombineMode(G_CC_MODULATEIDECALA, G_CC_PASS2),
+        gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, PRIMITIVE, PRIMITIVE_ALPHA, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_BLENDRGBA),
+        gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_PASS2),
+        gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_PASS2),
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE_ALPHA, PRIMITIVE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, SHADE, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+        gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_PASS2),
+        gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_PASS2),
+        gsDPSetCombineLERP(TEXEL0, 0, PRIMITIVE_ALPHA, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEI2),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEI2),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, PRIMITIVE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, PRIMITIVE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(G_CC_TRILERP, G_CC_MODULATEIA2),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, SHADE, PRIMITIVE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, TEXEL1, TEXEL0, LOD_FRACTION, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, COMBINED, 0, SHADE, 0),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, TEXEL1, SHADE, 0, 0, 0, 0, SHADE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, TEXEL1, SHADE, 0, 0, 0, 0, SHADE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, TEXEL1, SHADE, 0, 0, 0, 0, SHADE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, TEXEL1, SHADE, 0, 0, 0, 0, SHADE, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, TEXEL1, SHADE, 0, SHADE, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0, 1, TEXEL1, TEXEL0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0, 1, TEXEL1, TEXEL0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0, 1, TEXEL1, TEXEL0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0, 1, TEXEL1, TEXEL0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0, 1, TEXEL1, TEXEL0, COMBINED, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0, 1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+        gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+    },
+    {
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0, TEXEL0, 1, TEXEL1, TEXEL0, TEXEL1, TEXEL0, COMBINED, TEXEL0_ALPHA, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0),
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0, TEXEL0, 1, TEXEL1, TEXEL0, TEXEL1, TEXEL0, COMBINED, TEXEL0_ALPHA, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0),
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0, TEXEL0, 1, TEXEL1, TEXEL0, TEXEL1, TEXEL0, COMBINED, TEXEL0_ALPHA, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0),
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0, TEXEL0, 1, TEXEL1, TEXEL0, TEXEL1, TEXEL0, COMBINED, TEXEL0_ALPHA, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0),
+        gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0, TEXEL0, 1, TEXEL1, TEXEL0, TEXEL1, TEXEL0, COMBINED, TEXEL0_ALPHA, TEXEL0, 1, TEXEL0, TEXEL1, TEXEL0),
+    },
+    {
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+    },
+    {
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+    },
+    {
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+        gsDPSetCombineLERP(NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1, NOISE, 0, SHADE_ALPHA, 0, 0, 0, 0, 1),
+    },
+};
 
 u32 mdl_textureBaseAddress = 0x8028E000;
 
@@ -2049,39 +2339,23 @@ void state_render_frontUI(void) {
     }
 }
 
-void appendGfx_model(Model* model);
+// void appendGfx_model(Model* model);
 INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 // void appendGfx_model(Model* model) {
+//     Gfx** gfx;
 //     ModelNode* modelNode;
 //     u16 sp36;
 //     s32 sp38;
 //     s32 sp44;
-//     Gfx* temp_a2_5;
-//     Gfx* temp_a2_6;
-//     Gfx* temp_a3_3;
-//     Gfx* temp_t3_2;
 //     ModelNodeProperty* modelProp;
-//     s32 fogMin;
 //     s32 temp_a0_14;
-//     s32 temp_a1_13;
-//     s32 temp_a2_4;
 //     s32 invAlpha;
-//     s32 temp_a3_4;
-//     s32 temp_hi;
-//     s32 temp_t0_2;
-//     s32 temp_t0_3;
-//     s32 temp_t1_2;
-//     s32 temp_t1_3;
-//     s32 temp_t2_2;
-//     s32 temp_v0_35;
-//     s32 temp_v0_36;
-//     s32 temp_v0_47;
-//     s32 temp_v0_50;
-//     s32 fogMax;
-//     s32 temp_v1_34;
+//     s32 tpMainU;
+//     s32 tpMainV;
+//     s32 tpAuxU;
+//     s32 tpAuxV;
 //     s32 temp_v1_35;
-//     s32 temp_v1_37;
-//     u16 modelFlags;
+//     s32 modelFlags;
 //     u32 temp_v1_28;
 //     u8 alpha;
 //     s8 renderMode;
@@ -2093,33 +2367,30 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 //     s32 dlistIdx3;
 //     s32 dlistIdx;
 //     s32 dlistIdx2;
-//     s32 phi_v1_3;
-//     s32 phi_v0_4;
-//     s32 phi_s7;
+//     s32 gMtxPush;
 //     s32 phi_s3;
 
+//     gfx = &gMasterGfxPos;
 //     modelFlags = model->flags;
 //     modelNode = model->modelNode;
 //     //phi_fp = saved_reg_fp;
-//     phi_s7 = 1;
+//     gMtxPush = TRUE;
 //     sp38 = 2;
 
 //     if (model->textureID != 0) {
 //         textureHandle = &mdl_textureHandles[model->textureID + model->textureVariation];
 //         tileDesc = &textureHandle->desc;
 //         if (textureHandle->gfx != NULL) {
-//             sp44 = 0;
 //             phi_fp = textureHandle->desc.extraTiles;
 //         } else {
-//             sp44 = 0;
 //             tileDesc = NULL;
 //         }
 //     } else {
 //         textureHandle = NULL;
-//         sp44 = 0;
 //         tileDesc = NULL;
 //     }
 
+//     sp44 = 0;
 //     renderMode = model->renderMode;
 //     phi_s3 = 1;
 //     if (tileDesc != NULL && (phi_fp != 0) && phi_fp < 4) {
@@ -2137,76 +2408,73 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 //             break;
 //         case 2:
 //             if (renderMode < 0x11) {
-//                 // todo remove temps?
-//                 fogMin = mdl_renderModelFogStart;
-//                 fogMax = mdl_renderModelFogEnd - fogMin;
 //                 sp44 = 3;
 
-//                 gDPSetPrimColor(gMasterGfxPos++, 0, 0, mdl_renderModelFogPrimColorR, mdl_renderModelFogPrimColorG,
+//                 gDPSetPrimColor((*gfx)++, 0, 0, mdl_renderModelFogPrimColorR, mdl_renderModelFogPrimColorG,
 //                                 mdl_renderModelFogPrimColorB, mdl_renderModelFogPrimColorA);
-//                 gDPSetFogColor(gMasterGfxPos++, mdl_renderModelFogColorR, mdl_renderModelFogPrimColorG, mdl_renderModelFogPrimColorB,
+//                 gDPSetFogColor((*gfx)++, mdl_renderModelFogColorR, mdl_renderModelFogPrimColorG, mdl_renderModelFogPrimColorB,
 //                                mdl_renderModelFogPrimColorA);
-//                 gSPFogPosition(gMasterGfxPos++, fogMin, fogMax);
+//                 gSPFogPosition((*gfx)++, mdl_renderModelFogStart, mdl_renderModelFogEnd);
 //                 phi_s3 += 9;
 //             }
 //             break;
 //         case 3:
 //             phi_s3 = 2;
 //             sp44 = 4;
-//             gDPSetPrimColor(gMasterGfxPos++, 0, 0, gRenderModelPrimR, gRenderModelPrimG, gRenderModelPrimB, 255);
-//             gDPSetEnvColor(gMasterGfxPos++, gRenderModelEnvR, gRenderModelEnvG, gRenderModelEnvB, 255);
+//             gDPSetPrimColor((*gfx)++, 0, 0, gRenderModelPrimR, gRenderModelPrimG, gRenderModelPrimB, 255);
+//             gDPSetEnvColor((*gfx)++, gRenderModelEnvR, gRenderModelEnvG, gRenderModelEnvB, 255);
 //             break;
 //     }
 
-//     gDPPipeSync(gMasterGfxPos++);
+//     gDPPipeSync((*gfx)++);
 //     if (model->groupData != NULL) {
 //         lightingGroup = model->groupData->lightingGroup;
 //         if (lightingGroup != NULL) {
 //             switch (model->groupData->numLights) {
 //                 case 0:
-//                     gSPSetLights0(gMasterGfxPos++, (*lightingGroup));
+//                     gSPSetLights0((*gfx)++, (*lightingGroup));
 //                     break;
 //                 case 1:
-//                     gSPSetLights1(gMasterGfxPos++, (*lightingGroup));
+//                     gSPSetLights1((*gfx)++, (*lightingGroup));
 //                     break;
 //                 case 2:
-//                     gSPSetLights2(gMasterGfxPos++, (*lightingGroup));
+//                     gSPSetLights2((*gfx)++, (*lightingGroup));
 //                     break;
 //                 case 3:
-//                     gSPSetLights3(gMasterGfxPos++, (*lightingGroup));
+//                     gSPSetLights3((*gfx)++, (*lightingGroup));
 //                     break;
 //                 case 4:
-//                     gSPSetLights4(gMasterGfxPos++, (*lightingGroup));
+//                     gSPSetLights4((*gfx)++, (*lightingGroup));
 //                     break;
 //                 case 5:
-//                     gSPSetLights5(gMasterGfxPos++, (*lightingGroup));
+//                     gSPSetLights5((*gfx)++, (*lightingGroup));
 //                     break;
 //                 case 6:
-//                     gSPSetLights6(gMasterGfxPos++, (*lightingGroup));
+//                     gSPSetLights6((*gfx)++, (*lightingGroup));
 //                     break;
 //                 case 7:
-//                     gSPSetLights7(gMasterGfxPos++, (*lightingGroup));
+//                     gSPSetLights7((*gfx)++, (*lightingGroup));
 //                     break;
 //             }
 //         }
 //     }
 
-//     if (tileDesc != 0) {
+//     if (tileDesc != NULL) {
 //         if (phi_fp == 3 || phi_fp == 4) {
 //             modelProp = get_model_property(modelNode, MODEL_PROP_KEY_SPECIAL);
 //             if (modelProp != NULL) {
 //                 func_801180E8(tileDesc, &gMasterGfxPos, textureHandle->raster, textureHandle->palette, textureHandle->auxRaster, textureHandle->auxPalette, (modelProp->data.s >> 0xC) & 0xF, (modelProp->data.s >> 0x10) & 0xF, modelProp->dataType & 0xFFF, ((s32) modelProp->dataType >> 0xC) & 0xFFF);
 //             } else {
-//                 gSPDisplayList(gMasterGfxPos++, textureHandle->gfx);
+//                 gSPDisplayList((*gfx)++, textureHandle->gfx);
 //             }
 //         } else {
-//             gSPDisplayList(gMasterGfxPos++, textureHandle->gfx);
+//             gSPDisplayList((*gfx)++, textureHandle->gfx);
 //         }
 //     } else {
-//         gSPTexture(gMasterGfxPos++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
-//         gDPSetCombineMode(gMasterGfxPos++, G_CC_SHADE, G_CC_SHADE);
-//         gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
-//         gDPSetAlphaDither(gMasterGfxPos++, G_AD_PATTERN);
+//         gSPTexture((*gfx)++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+//         gDPSetCombineMode((*gfx)++, G_CC_SHADE, G_CC_SHADE);
+//         gDPSetColorDither((*gfx)++, G_CD_MAGICSQ);
+//         gDPSetAlphaDither((*gfx)++, G_AD_PATTERN);
 //     }
 
 //     if ((sp44 != 0) || ((s8) renderMode == 0xD) || ((s8) renderMode == 0xF)) {
@@ -2220,15 +2488,11 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 //             }
 //         }
 //         if (((s8) renderMode != 0xD) && ((s8) renderMode != 0xF)) {
-//             temp_v0_35 = ((phi_v1 * 5) + sp44) * 8;
-//             gMasterGfxPos->words.w0 = *(&D_8014B0B8 + temp_v0_35);
-//             gMasterGfxPos->words.w1 = *(D_8014B0BC + temp_v0_35);
+//             *gMasterGfxPos = D_8014B0B8[phi_v1][sp44];
 //         } else {
-//             temp_v0_36 = ((phi_v1 * 5) + sp44) * 8;
-//             gMasterGfxPos->words.w0 = *(&D_8014B400 + temp_v0_36);
-//             gMasterGfxPos->words.w1 = *(D_8014B404 + temp_v0_36);
+//             *gMasterGfxPos = D_8014B400[phi_v1][sp44];
 //         }
-//         gMasterGfxPos++;
+//         (*gfx)++;
 //     }
 
 //     switch (phi_s3) {
@@ -2296,7 +2560,7 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 //                     dlistIdx2 = 0;
 //                     break;
 //             }
-//             gSPDisplayList(gMasterGfxPos++, D_8014AFC0[dlistIdx2]);
+//             gSPDisplayList((*gfx)++, D_8014AFC0[dlistIdx2]);
 //             break;
 //         case 2:
 //             switch (renderMode) {
@@ -2359,7 +2623,7 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 //                     dlistIdx2 = 16;
 //                     break;
 //             }
-//             gSPDisplayList(gMasterGfxPos++, D_8014AFC0[dlistIdx2]);
+//             gSPDisplayList((*gfx)++, D_8014AFC0[dlistIdx2]);
 //             break;
 //         case 3:
 //             switch (renderMode) {
@@ -2422,15 +2686,14 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 //                     dlistIdx3 = 31;
 //                     break;
 //             }
-//             gSPDisplayList(gMasterGfxPos++, D_8014AFC0[dlistIdx3]);
-//             gDPSetFogColor(gMasterGfxPos++, gCurrentFogSettings->r, gCurrentFogSettings->g, gCurrentFogSettings->b, gCurrentFogSettings->a);
-//             gSPFogPosition(gMasterGfxPos++, gCurrentFogSettings->startDistance,
-//                                             gCurrentFogSettings->endDistance - gCurrentFogSettings->startDistance);
+//             gSPDisplayList((*gfx)++, D_8014AFC0[dlistIdx3]);
+//             gDPSetFogColor((*gfx)++, gCurrentFogSettings->r, gCurrentFogSettings->g, gCurrentFogSettings->b, gCurrentFogSettings->a);
+//             gSPFogPosition((*gfx)++, gCurrentFogSettings->startDistance, gCurrentFogSettings->endDistance);
 //             break;
 //         case 4:
 //         case 5:
 //             if (mdl_bgMultiplyColorA != 255) {
-//                 gSPDisplayList(gMasterGfxPos++, D_8014AFC0[16]);
+//                 gSPDisplayList((*gfx)++, D_8014AFC0[16]);
 //                 switch (renderMode) {
 //                     case 1:
 //                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_SURF2);
@@ -2490,10 +2753,10 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 //                         gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_CLD_SURF2);
 //                         break;
 //                 }
-//                 gDPSetFogColor(gMasterGfxPos++, gCurrentFogSettings->r, gCurrentFogSettings->g, gCurrentFogSettings->b,
+//                 gDPSetFogColor((*gfx)++, gCurrentFogSettings->r, gCurrentFogSettings->g, gCurrentFogSettings->b,
 //                                mdl_bgMultiplyColorA);
-//                 gDPSetBlendColor(gMasterGfxPos++, mdl_bgMultiplyColorR, mdl_bgMultiplyColorG, mdl_bgMultiplyColorB, 255);
-//                 gSPFogPosition(gMasterGfxPos++, 970, 1000);
+//                 gDPSetBlendColor((*gfx)++, mdl_bgMultiplyColorR, mdl_bgMultiplyColorG, mdl_bgMultiplyColorB, 255);
+//                 gSPFogPosition((*gfx)++, 970, 1000);
 //                 break;
 //             }
 //             break;
@@ -2558,27 +2821,18 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 //                     dlistIdx = 31;
 //                     break;
 //             }
-//             gSPDisplayList(gMasterGfxPos++, D_8014AFC0[dlistIdx]);
+//             gSPDisplayList((*gfx)++, D_8014AFC0[dlistIdx]);
 //             alpha = mdl_bgMultiplyColorA;
 //             invAlpha = 255 - alpha;
-//             temp_v1_34 = (gCurrentFogSettings->startDistance * invAlpha) + (alpha * 900);
-//             temp_v0_47 = (gCurrentFogSettings->endDistance * invAlpha) + (alpha * 1000);
-//             temp_t0_2 = (gCurrentFogSettings->r * invAlpha) + ((u8) mdl_bgMultiplyColorR * alpha);
-//             temp_hi = MULT_HI(temp_t0_2, 0x80808081);
+//             temp_a0_14 = ((gCurrentFogSettings->startDistance * invAlpha) + (alpha * 900)) / 255;
+//             temp_v1_35 = ((gCurrentFogSettings->endDistance * invAlpha) + (alpha * 1000)) / 255;
 
-//             temp_v0_50 = (gCurrentFogSettings->g * invAlpha) + (mdl_bgMultiplyColorG * alpha);
-//             temp_a1_13 = (gCurrentFogSettings->b * invAlpha) + (mdl_bgMultiplyColorB * alpha);
-
-//             temp_t3_2->words.w0 = 0xF8000000;
-//             temp_t3_2->words.w1 = ((((s32) (temp_hi + temp_t0_2) >> 7) - (temp_t0_2 >> 0x1F)) << 0x18) | (((((s32) (MULT_HI(temp_v0_50, 0x80808081) + temp_v0_50) >> 7) - (temp_v0_50 >> 0x1F)) & 0xFF) << 0x10) | (((((s32) (MULT_HI(temp_a1_13, 0x80808081) + temp_a1_13) >> 7) - (temp_a1_13 >> 0x1F)) & 0xFF) << 8) | gCurrentFogSettings->a;
-
-
-//             temp_a0_14 = ((s32) (MULT_HI(temp_v1_34, 0x80808081) + temp_v1_34) >> 7) - (temp_v1_34 >> 0x1F);
-//             temp_v1_35 = (((s32) (MULT_HI(temp_v0_47, 0x80808081) + temp_v0_47) >> 7) - (temp_v0_47 >> 0x1F)) - temp_a0_14;
-//             temp_t1_2 = 0x1F400 / temp_v1_35;
-//             temp_a2_4 = (s32) ((0x1F4 - temp_a0_14) << 8) / temp_v1_35;
-//             temp_a3_3->words.w0 = 0xDB080000;
-//             temp_a3_3->words.w1 = (temp_t1_2 << 0x10) | (temp_a2_4 & 0xFFFF);
+//             gDPSetFogColor((*gfx)++,
+//                            ((gCurrentFogSettings->r * invAlpha) + (mdl_bgMultiplyColorR * alpha)) / 255,
+//                            ((gCurrentFogSettings->g * invAlpha) + (mdl_bgMultiplyColorG * alpha)) / 255,
+//                            ((gCurrentFogSettings->b * invAlpha) + (mdl_bgMultiplyColorB * alpha)) / 255,
+//                            gCurrentFogSettings->a);
+//             gSPFogPosition((*gfx)++, temp_a0_14, temp_v1_35);
 //             break;
 //         case 10:
 //         case 11:
@@ -2602,15 +2856,15 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 //                     dlistIdx2 = 31;
 //                     break;
 //             }
-//             gSPDisplayList(gMasterGfxPos++, D_8014AFC0[dlistIdx2]);
+//             gSPDisplayList((*gfx)++, D_8014AFC0[dlistIdx2]);
 //             break;
 //     }
 
 //     if (!(model->flags & 8)) {
 //         if (!(model->flags & 0x2000)) {
-//             gSPMatrix(gMasterGfxPos++, model->currentSpecialMatrix, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-//             if (1 != 0) {
-//                 phi_s7 = 0;
+//             gSPMatrix((*gfx)++, model->currentSpecialMatrix, gMtxPush | G_MTX_LOAD | G_MTX_MODELVIEW);
+//             if (gMtxPush) {
+//                 gMtxPush = FALSE;
 //             }
 //             if (sp38 != 0) {
 //                 sp38 = 0;
@@ -2619,9 +2873,9 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 //     } else {
 //         sp38 = 0;
 //         if (!(model->flags & 0x2000)) {
-//             gSPMatrix(gMasterGfxPos++, model->currentSpecialMatrix, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-//             if (1 != 0) {
-//                 phi_s7 = 0;
+//             gSPMatrix((*gfx)++, model->currentSpecialMatrix, gMtxPush | G_MTX_MUL | G_MTX_MODELVIEW);
+//             if (gMtxPush) {
+//                 gMtxPush = FALSE;
 //             }
 //         }
 //     }
@@ -2629,65 +2883,52 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 //     if (model->flags & 0x10) {
 //         sp36 = (model->customGfxIndex & 0xF) * 2;
 //         if ((*gCurrentCustomModelGfxPtr)[sp36] != NULL) {
-//             gSPDisplayList(gMasterGfxPos++, (*gCurrentCustomModelGfxPtr)[sp36]);
+//             gSPDisplayList((*gfx)++, (*gCurrentCustomModelGfxPtr)[sp36]);
 //         }
 //     }
 
 //     if (tileDesc != NULL) {
 //         if (model->flags & 0x800) {
-//             temp_a3_4 = (s32) texPannerMainU[model->texPannerID] >> 8;
-//             temp_t0_3 = (s32) texPannerMainV[model->texPannerID] >> 8;
-//             temp_t2_2 = (s32) texPannerAuxV[model->texPannerID] >> 8;
-//             temp_t1_3 = (s32) texPannerAuxU[model->texPannerID] >> 8;
+//             tpMainU = (s32) texPannerMainU[model->texPannerID] >> 8;
+//             tpMainV = (s32) texPannerMainV[model->texPannerID] >> 8;
+//             tpAuxV = (s32) texPannerAuxV[model->texPannerID] >> 8;
+//             tpAuxU = (s32) texPannerAuxU[model->texPannerID] >> 8;
 
 //             switch (phi_fp) {
 //                 case 2:
-//                     temp_a2_6->words.w0 = ((temp_a3_4 & 0xFFF) << 0xC) | ((temp_t0_3 & 0xFFF) | 0xF2000000);
-//                     temp_a2_6->words.w1 = (((((tileDesc->mainW - 1) * 4) + temp_a3_4) & 0xFFF) << 0xC) | ((((((u32) tileDesc->mainH >> 1) - 1) * 4) + temp_t0_3) & 0xFFF);
-//                     gMasterGfxPos->words.w0 = ((temp_t1_3 & 0xFFF) << 0xC) | ((temp_t2_2 & 0xFFF) | 0xF2000000);
-//                     phi_v1_3 = ((((tileDesc->mainW - 1) * 4) + temp_t1_3) & 0xFFF) << 0xC;
-//                     phi_v0_4 = ((((((u32) tileDesc->mainH >> 1) - 1) * 4) + temp_t2_2) & 0xFFF) | 0x1000000;
-//                     gMasterGfxPos->words.w1 = phi_v1_3 | phi_v0_4;
+//                     gDPSetTileSize((*gfx)++, G_TX_RENDERTILE, (((tileDesc->mainW - 1) * 4) + tpMainU), (((tileDesc->mainH >> 1) - 1) * 4), tpMainU, tpMainV);
+//                     gDPSetTileSize((*gfx)++, 1, (((tileDesc->mainW - 1) * 4) + tpAuxU), ((((u32) tileDesc->mainH >> 1) - 1) * 4), tpAuxU, tpAuxV);
 //                     break;
 //                 case 3:
-//                     temp_v1_37 = temp_a3_4 & 0xFFF;
-//                     temp_a2_5->words.w0 = (temp_v1_37 << 0xC) | ((temp_t0_3 & 0xFFF) | 0xF2000000);
-//                     temp_a2_5->words.w1 = (((((tileDesc->mainW - 1) * 4) + temp_a3_4) & 0xFFF) << 0xC) | ((((tileDesc->mainH - 1) * 4) + temp_t0_3) & 0xFFF);
-//                     gMasterGfxPos->words.w0 = ((temp_t1_3 & 0xFFF) << 0xC) | ((temp_t2_2 & 0xFFF) | 0xF2000000);
-//                     phi_v1_3 = ((((tileDesc->auxW - 1) * 4) + temp_t1_3) & 0xFFF) << 0xC;
-//                     phi_v0_4 = ((((tileDesc->auxH - 1) * 4) + temp_t2_2) & 0xFFF) | 0x1000000;
-//                     gMasterGfxPos->words.w1 = phi_v1_3 | phi_v0_4;
+//                     gDPSetTileSize((*gfx)++, G_TX_RENDERTILE, (((tileDesc->mainW - 1) * 4) + tpMainU), (((tileDesc->mainH - 1) * 4) + tpMainV), tpMainU, tpMainV);
+//                     gDPSetTileSize((*gfx)++, 1, (((tileDesc->auxW - 1) * 4) + tpAuxU), (((tileDesc->auxH - 1) * 4) + tpAuxV), tpAuxU, tpAuxV);
 //                     break;
 //                 default:
-//                     temp_v1_37 = temp_a3_4 & 0xFFF;
-//                     phi_v1_3 = ((((tileDesc->mainW - 1) * 4) + temp_a3_4) & 0xFFF) << 0xC;
-//                     phi_v0_4 = (((tileDesc->mainH - 1) * 4) + temp_t0_3) & 0xFFF;
-//                     gMasterGfxPos->words.w0 = (temp_v1_37 << 0xC) | ((temp_t0_3 & 0xFFF) | 0xF2000000);
-//                     gMasterGfxPos->words.w1 = phi_v1_3 | phi_v0_4;
+//                     gDPSetTileSize((*gfx)++, G_TX_RENDERTILE, (((tileDesc->mainW - 1) * 4) + tpMainU), (((tileDesc->mainH - 1) * 4) + tpMainV), tpMainU, tpMainV);
 //                     break;
 //             }
 //         }
 //     }
 
 //     if (model->flags & 0x100) {
-//         gSPMatrix(gMasterGfxPos++, gCameras[gCurrentCamID].unkMatrix, sp38 | phi_s7 | G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-//         if (phi_s7 != 0) {
-//             phi_s7 = 0;
+//         gSPMatrix((*gfx)++, gCameras[gCurrentCamID].unkMatrix, sp38 | gMtxPush | G_MTX_MUL | G_MTX_MODELVIEW);
+//         if (gMtxPush) {
+//             gMtxPush = FALSE;
 //         }
 //     }
 //     if (!(model->flags & 0x80)) {
-//         gSPDisplayList(gMasterGfxPos++, modelNode->displayData->displayList);
+//         gSPDisplayList((*gfx)++, modelNode->displayData->displayList);
 //     }
 //     if (model->flags & 0x10) {
 //         sp36++;
 //         if ((*gCurrentCustomModelGfxPtr)[sp36] != NULL) {
-//             gSPDisplayList(gMasterGfxPos++, (*gCurrentCustomModelGfxPtr)[sp36]);
+//             gSPDisplayList((*gfx)++, (*gCurrentCustomModelGfxPtr)[sp36]);
 //         }
 //     }
-//     if (phi_s7 == 0) {
-//         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+//     if (!gMtxPush) {
+//         gSPPopMatrix((*gfx)++, G_MTX_MODELVIEW);
 //     }
-//     gDPPipeSync(gMasterGfxPos++);
+//     gDPPipeSync((*gfx)++);
 // }
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80114B58);

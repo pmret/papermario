@@ -1,9 +1,10 @@
 #include "common.h"
+#include "ld_addrs.h"
 
 typedef struct {
-    /* 0x00 */ s8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ s8 unk_02;
+    /* 0x00 */ s8 arrayIdx;
+    /* 0x01 */ u8 meshType;
+    /* 0x02 */ s8 renderType;
     /* 0x03 */ u8 subdivX;
     /* 0x04 */ u8 subdivY;
     /* 0x05 */ s8 unk_05;
@@ -29,16 +30,16 @@ typedef struct {
     /* 0x78 */ char unk_78[0x4];
 } SpriteEffect; // size = 0x7C
 
-typedef struct Unk8Struct {
-    /* 0x00 */ s32* unk_00;
-    /* 0x04 */ u8 unk_04;
-    /* 0x05 */ u8 unk_05;
+typedef struct SprFxDataCache {
+    /* 0x00 */ s32* data;
+    /* 0x04 */ u8 staleCooldownTimer;
+    /* 0x05 */ u8 usingContextualHeap;
     /* 0x06 */ char unk_06[0x2];
-} Unk8Struct; // size = 0x8
+} SprFxDataCache; // size = 0x8
 
-typedef struct Unk10Struct {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
+typedef struct SprFxImageRec {
+    /* 0x00 */ s8* raster;
+    /* 0x04 */ s8* palette;
     /* 0x08 */ u16 width;
     /* 0x0A */ u16 height;
     /* 0x0C */ s16 xOffset;
@@ -50,12 +51,23 @@ typedef struct Unk10Struct {
     /* 0x1E */ s16 unk_1E;
     /* 0x20 */ char unk_20[0x4];
     /* 0x24 */ u8 gfxOtherModeD;
-} Unk10Struct; // size = 0x25
+} SprFxImageRec; // size = 0x25
+
+typedef struct SprFxGfxDescriptor {
+    /* 0x00 */ Vtx* vtx;
+    /* 0x04 */ Gfx* gfx;
+    /* 0x08 */ u16 vtxCount;
+    /* 0x0A */ u16 gfxCount;
+    /* 0x0C */ s8 unk_0C;
+    /* 0x0D */ s8 unk_0D;
+    /* 0x0E */ s8 unk_0E;
+    /* 0x0F */ s8 unk_0F;
+} SprFxGfxDescriptor; // size = 0x10
 
 typedef SpriteEffect SpriteEffectList[90];
 
 // BSS
-extern Unk10Struct D_80156920; // todo not sure on the type
+extern SprFxImageRec D_80156920; // todo not sure on the type
 extern Vtx* D_80156948[2];
 extern Vtx* sprfx_vtxBuf;
 extern SpriteEffectList* D_80156954;
@@ -63,9 +75,10 @@ extern s8 D_80156958[2];
 extern s32 D_80156960[2];
 extern s32 D_80156968[2];
 extern s8 D_80156970;
+extern SprFxGfxDescriptor sprfx_groupDescriptors[4];
 
 // Data
-Unk10Struct* sprfx_currentImage = &D_80156920;
+SprFxImageRec* sprfx_currentImage = &D_80156920;
 
 u16 sprfx_vtxCount = 0;
 
@@ -100,12 +113,13 @@ s32 D_8014EE98[] = { 0x00441208, 0x00111208, 0x00000000, 0x00441208, 0x00111208,
                      0x00441208, 0x00111208, 0x00000000,
                    };
 
-s32 D_8014EF64[] = { 0x00014358, 0x00018200, 0x0001A858, 0x0001E830, 0x00029458, 0x000314E0, 0x00033498, 0x00038988,
-                     0x00039228, 0x0005B7A8, 0x0007CF10, 0x00086490, 0x00096258, 0x000A1820, 0x000ACDE8, 0x000BBF68,
-                     0x000C0490, 0x000C49B8, 0x000C6150, 0x000CA380, 0x00000000, 0x00000000, 0x00000000,
-                   };
+s32 sprfx_groupOffsets[] = {
+    0x00014358, 0x00018200, 0x0001A858, 0x0001E830, 0x00029458, 0x000314E0, 0x00033498, 0x00038988, 0x00039228,
+    0x0005B7A8, 0x0007CF10, 0x00086490, 0x00096258, 0x000A1820, 0x000ACDE8, 0x000BBF68, 0x000C0490, 0x000C49B8,
+    0x000C6150, 0x000CA380
+};
 
-extern Unk8Struct D_80156F20[8];
+extern SprFxDataCache sprfx_gfxDataCache[8];
 
 void sprfx_clear_effect_gfx(SpriteEffect*);
 void sprfx_clear_effect_data(SpriteEffect*);
@@ -142,10 +156,10 @@ void sprfx_init(void) {
         D_80156970 = 0;
     }
 
-    for (i = 0; i < ARRAY_COUNT(D_80156F20); i++) {
-        D_80156F20[i].unk_00 = 0;
-        D_80156F20[i].unk_04 = 0;
-        D_80156F20[i].unk_05 = 0;
+    for (i = 0; i < ARRAY_COUNT(sprfx_gfxDataCache); i++) {
+        sprfx_gfxDataCache[i].data = NULL;
+        sprfx_gfxDataCache[i].staleCooldownTimer = 0;
+        sprfx_gfxDataCache[i].usingContextualHeap = FALSE;
     }
 
     sprfx_vtxCount = 0;
@@ -185,11 +199,11 @@ void func_8013A4D0(void) {
 void sprfx_add_to_gfx_cache(s32* data, s8 usingContextualHeap) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_80156F20); i++) {
-        if (D_80156F20[i].unk_00 == NULL) {
-            D_80156F20[i].unk_00 = data;
-            D_80156F20[i].unk_04 = 4;
-            D_80156F20[i].unk_05 = usingContextualHeap;
+    for (i = 0; i < ARRAY_COUNT(sprfx_gfxDataCache); i++) {
+        if (sprfx_gfxDataCache[i].data == NULL) {
+            sprfx_gfxDataCache[i].data = data;
+            sprfx_gfxDataCache[i].staleCooldownTimer = 4;
+            sprfx_gfxDataCache[i].usingContextualHeap = usingContextualHeap;
             return;
         }
     }
@@ -198,21 +212,21 @@ void sprfx_add_to_gfx_cache(s32* data, s8 usingContextualHeap) {
 void sprfx_update_gfx_cache(void) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_80156F20); i++) {
-        if (D_80156F20[i].unk_00 != 0) {
-            D_80156F20[i].unk_04--;
+    for (i = 0; i < ARRAY_COUNT(sprfx_gfxDataCache); i++) {
+        if (sprfx_gfxDataCache[i].data != NULL) {
+            sprfx_gfxDataCache[i].staleCooldownTimer--;
 
-            if (D_80156F20[i].unk_04 == 0) {
-                if (D_80156F20[i].unk_05 != 0) {
-                    heap_free(D_80156F20[i].unk_00);
-                    D_80156F20[i].unk_00 = NULL;
+            if (sprfx_gfxDataCache[i].staleCooldownTimer == 0) {
+                if (sprfx_gfxDataCache[i].usingContextualHeap) {
+                    heap_free(sprfx_gfxDataCache[i].data);
+                    sprfx_gfxDataCache[i].data = NULL;
                 } else {
-                    general_heap_free(D_80156F20[i].unk_00);
-                    D_80156F20[i].unk_00 = NULL;
+                    general_heap_free(sprfx_gfxDataCache[i].data);
+                    sprfx_gfxDataCache[i].data = NULL;
                 }
 
-                D_80156F20[i].unk_04 = 0;
-                D_80156F20[i].unk_05 = 0;
+                sprfx_gfxDataCache[i].staleCooldownTimer = 0;
+                sprfx_gfxDataCache[i].usingContextualHeap = FALSE;
             }
         }
     }
@@ -253,7 +267,7 @@ s32 func_8013A704(s32 arg0) {
                 (*D_80156954)[iPrev].unk_10 = i;
             }
 
-            (*D_80156954)[i].unk_00 = i;
+            (*D_80156954)[i].arrayIdx = i;
             sprfx_init_effect(&(*D_80156954)[i]);
             count++;
             (*D_80156954)[i].flags |= 1;
@@ -344,8 +358,8 @@ void sprfx_init_effect(SpriteEffect* effect) {
     effect->unk_05 = 0;
     effect->unk_06 = 0;
     effect->flags = 0;
-    effect->unk_01 = 0;
-    effect->unk_02 = 0;
+    effect->meshType = 0;
+    effect->renderType = 0;
     effect->firstVtxIdx = 0;
     effect->lastVtxIdx = 0;
     effect->unk_0C = 0;
@@ -382,7 +396,7 @@ void sprfx_set_effect_flags(s32 idx, u16 flagBits, s32 mode) {
     }
 }
 
-s32 sprfx_appendGfx_component(s32 idx, Unk10Struct* image, u32 flagBits, Matrix4f mtx) {
+s32 sprfx_appendGfx_component(s32 idx, SprFxImageRec* image, u32 flagBits, Matrix4f mtx) {
     SpriteEffect* effect = &(*D_80156954)[idx];
     s32 ret = 0;
 
@@ -390,10 +404,10 @@ s32 sprfx_appendGfx_component(s32 idx, Unk10Struct* image, u32 flagBits, Matrix4
         return 0;
     }
 
-    effect->unk_00 = idx;
+    effect->arrayIdx = idx;
     effect->flags |= flagBits;
-    sprfx_currentImage->unk_00 = image->unk_00;
-    sprfx_currentImage->unk_04 = image->unk_04;
+    sprfx_currentImage->raster = image->raster;
+    sprfx_currentImage->palette = image->palette;
     sprfx_currentImage->width = image->width;
     sprfx_currentImage->height = image->height;
     sprfx_currentImage->xOffset = image->xOffset;
@@ -417,8 +431,8 @@ s32 sprfx_appendGfx_component(s32 idx, Unk10Struct* image, u32 flagBits, Matrix4
         effect->unk_1C[0][0] = -1;
         effect->unk_1C[1][0] = -1;
         effect->unk_05 = 0;
-        effect->unk_01 = 0;
-        effect->unk_02 = 0;
+        effect->meshType = 0;
+        effect->renderType = 0;
         effect->flags &= ~0x1980;
         sprfx_clear_effect_gfx(effect);
         ret = 1;
@@ -427,8 +441,8 @@ s32 sprfx_appendGfx_component(s32 idx, Unk10Struct* image, u32 flagBits, Matrix4
     } else if (effect->flags & 0x20000) {
         effect->unk_05 = 0;
         effect->unk_06 = 0;
-        effect->unk_01 = 0;
-        effect->unk_02 = 0;
+        effect->meshType = 0;
+        effect->renderType = 0;
         effect->unk_1C[0][0] = -1;
         effect->unk_1C[1][0] = -1;
         effect->flags &= 1;
@@ -438,7 +452,7 @@ s32 sprfx_appendGfx_component(s32 idx, Unk10Struct* image, u32 flagBits, Matrix4
 }
 
 void func_8013B0EC(SpriteEffect* effect) {
-    switch (effect->unk_01) {
+    switch (effect->meshType) {
         case 3:
             if (effect->unk_1C[1][2] == 0) {
                 effect->subdivX = 1;
@@ -524,7 +538,67 @@ void func_8013C048(SpriteEffect* effect) {
     effect->lastVtxIdx = sprfx_vtxCount - 1;
 }
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", sprfx_load_gfx);
+//INCLUDE_ASM(s32, "d0a70_len_4fe0", sprfx_load_gfx);
+void sprfx_load_gfx(SpriteEffect* effect) {
+    Gfx* temp_s0;
+    Gfx* temp_s1_2;
+    SprFxGfxDescriptor* descriptor;
+    s32* temp_s1;
+    u32 temp_a2;
+    u32* temp_a1;
+    u32* phi_a1;
+    u32* phi_a0;
+    s32 startAddr = _24B7F0_ROM_START;
+    s32* gfxPos;
+    u32 gfxOp;
+
+    temp_s1 = sprfx_groupOffsets[effect->unk_1C[0][0]] + startAddr;
+    descriptor = &sprfx_groupDescriptors[(u8) effect->arrayIdx];
+
+    if (effect->unk_64 != temp_s1) {
+        effect->unk_64 = temp_s1;
+
+        dma_copy(effect->unk_64, effect->unk_64 + 0x10, descriptor);
+
+        if (effect->unk_68 != NULL) {
+            sprfx_add_to_gfx_cache(effect->unk_68, 1);
+            effect->unk_68 = NULL;
+        }
+        if (effect->unk_6C != NULL) {
+            sprfx_add_to_gfx_cache(effect->unk_6C, 1);
+            effect->unk_6C = NULL;
+        }
+        if (effect->unk_70 != NULL) {
+            sprfx_add_to_gfx_cache(effect->unk_70, 1);
+            effect->unk_70 = NULL;
+        }
+        if (effect->unk_74 != NULL) {
+            sprfx_add_to_gfx_cache(effect->unk_74, 1);
+            effect->unk_74 = NULL;
+        }
+        effect->unk_68 = heap_malloc((u16) descriptor->vtxCount * 0x10);
+        effect->unk_6C = heap_malloc((u16) descriptor->vtxCount * 0x10);
+        effect->unk_70 = heap_malloc((u16) descriptor->gfxCount * 8);
+        effect->unk_74 = heap_malloc((u16) descriptor->gfxCount * 8);
+        temp_s1_2 = descriptor->gfx + startAddr;
+        temp_s0 = &temp_s1_2[descriptor->gfxCount];
+        dma_copy(temp_s1_2, &temp_s1_2[descriptor->gfxCount], effect->unk_70);
+        dma_copy(temp_s1_2, &temp_s1_2[descriptor->gfxCount], effect->unk_74);
+
+        do {
+            gfxPos = (u32 *)effect->unk_70[0];
+            do {
+                gfxOp = *gfxPos;
+                if (gfxOp >> 0x18 == 1) {
+                    gfxPos[1] = (u32)(effect->unk_68 + ((s32)(gfxPos[1] - (s32)descriptor->vtx) / 3) * 4);
+                }
+                gfxPos = gfxPos + 2;
+            } while (gfxOp >> 0x18 != 0xdf);
+
+            effect = ((s32)effect) + 1;
+        } while ((s32)effect < (s32)&effect->firstVtxIdx);
+    }
+}
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013C3F0);
 
