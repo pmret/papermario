@@ -201,7 +201,6 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
         if ((enemy != NULL && (
             !(enemy->flags & 8) || enemy == currentEncounter->currentEnemy)
             ) && enemy->hitBytecode != NULL) {
-            Evt* hitEvtInstance;
             enemy->encountered = TRUE;
 
             script = start_script(enemy->hitBytecode, 10, 0);
