@@ -1194,7 +1194,7 @@ void func_802634B8(void) {
             if (player->targetListLength == 0) {
                 battleStatus->submenuEnabled[i] = -2;
             }
-            if ((gBattleStatus.flags2 & BS_FLAGS2_1000) != 0) {
+            if ((gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) != 0) {
                 battleStatus->submenuEnabled[moveCount] = -1;
             }
     }
@@ -1271,7 +1271,7 @@ void func_802636E4(void) {
             if (player->targetListLength == 0) {
                 battleStatus->submenuEnabled[i] = -2;
             }
-            if ((gBattleStatus.flags2 & BS_FLAGS2_1000) != 0) {
+            if ((gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) != 0) {
                 battleStatus->submenuEnabled[moveCount] = -1;
             }
     }
@@ -1334,7 +1334,7 @@ void func_80263914(void) {
                 battleStatus->submenuEnabled[i] = 0;
             }
 
-            if (gBattleStatus.flags2 & BS_FLAGS2_1000) {
+            if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
                 battleStatus->submenuEnabled[i] = -1;
             }
 
