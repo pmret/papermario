@@ -166,13 +166,12 @@ ApiStatus StartBattleWith(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-#ifdef NON_MATCHING // regalloc
 ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
-    Encounter* encounter;
-    s32 i;
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     Enemy* enemy = script->owner1.enemy;
     s32 songID = evt_get_variable(script, *script->ptrReadPos);
+    Encounter* encounter;
+    s32 i;
 
     resume_all_group(1);
 
@@ -205,14 +204,14 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
             Evt* hitEvtInstance;
             enemy->encountered = TRUE;
 
-            hitEvtInstance = start_script(enemy->hitBytecode, 10, 0);
-            enemy->hitScript = hitEvtInstance;
-            enemy->hitScriptID = hitEvtInstance->id;
+            script = start_script(enemy->hitBytecode, 10, 0);
+            enemy->hitScript = script;
+            enemy->hitScriptID = script->id;
 
-            hitEvtInstance = enemy->hitScript;
-            hitEvtInstance->owner1.enemy = enemy;
-            hitEvtInstance->owner2.npcID = enemy->npcID;
-            hitEvtInstance->groupFlags = enemy->scriptGroup;
+            script = enemy->hitScript;
+            script->owner1.enemy = enemy;
+            script->owner2.npcID = enemy->npcID;
+            script->groupFlags = enemy->scriptGroup;
         }
     }
 
@@ -225,9 +224,6 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_DONE1;
 }
-#else
-INCLUDE_ASM(s32, "encounter_api", StartBossBattle, Evt* script, s32 isInitialCall);
-#endif
 
 ApiStatus SetBattleMusic(Evt* script, s32 isInitialCall) {
     Bytecode songID = evt_get_variable(script, *script->ptrReadPos);
