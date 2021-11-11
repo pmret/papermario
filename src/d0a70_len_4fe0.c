@@ -538,67 +538,67 @@ void func_8013C048(SpriteEffect* effect) {
     effect->lastVtxIdx = sprfx_vtxCount - 1;
 }
 
-//INCLUDE_ASM(s32, "d0a70_len_4fe0", sprfx_load_gfx);
-void sprfx_load_gfx(SpriteEffect* effect) {
-    Gfx* temp_s0;
-    Gfx* temp_s1_2;
-    SprFxGfxDescriptor* descriptor;
-    s32* temp_s1;
-    u32 temp_a2;
-    u32* temp_a1;
-    u32* phi_a1;
-    u32* phi_a0;
-    s32 startAddr = _24B7F0_ROM_START;
-    s32* gfxPos;
-    u32 gfxOp;
+INCLUDE_ASM(s32, "d0a70_len_4fe0", sprfx_load_gfx);
+// void sprfx_load_gfx(SpriteEffect* effect) {
+//     Gfx* temp_s0;
+//     Gfx* temp_s1_2;
+//     SprFxGfxDescriptor* descriptor;
+//     s32* temp_s1;
+//     u32 temp_a2;
+//     u32* temp_a1;
+//     u32* phi_a1;
+//     u32* phi_a0;
+//     s32 startAddr = _24B7F0_ROM_START;
+//     s32* gfxPos;
+//     u32 gfxOp;
 
-    temp_s1 = sprfx_groupOffsets[effect->unk_1C[0][0]] + startAddr;
-    descriptor = &sprfx_groupDescriptors[(u8) effect->arrayIdx];
+//     temp_s1 = sprfx_groupOffsets[effect->unk_1C[0][0]] + startAddr;
+//     descriptor = &sprfx_groupDescriptors[(u8) effect->arrayIdx];
 
-    if (effect->unk_64 != temp_s1) {
-        effect->unk_64 = temp_s1;
+//     if (effect->unk_64 != temp_s1) {
+//         effect->unk_64 = temp_s1;
 
-        dma_copy(effect->unk_64, effect->unk_64 + 0x10, descriptor);
+//         dma_copy(effect->unk_64, effect->unk_64 + 0x10, descriptor);
 
-        if (effect->unk_68 != NULL) {
-            sprfx_add_to_gfx_cache(effect->unk_68, 1);
-            effect->unk_68 = NULL;
-        }
-        if (effect->unk_6C != NULL) {
-            sprfx_add_to_gfx_cache(effect->unk_6C, 1);
-            effect->unk_6C = NULL;
-        }
-        if (effect->unk_70 != NULL) {
-            sprfx_add_to_gfx_cache(effect->unk_70, 1);
-            effect->unk_70 = NULL;
-        }
-        if (effect->unk_74 != NULL) {
-            sprfx_add_to_gfx_cache(effect->unk_74, 1);
-            effect->unk_74 = NULL;
-        }
-        effect->unk_68 = heap_malloc((u16) descriptor->vtxCount * 0x10);
-        effect->unk_6C = heap_malloc((u16) descriptor->vtxCount * 0x10);
-        effect->unk_70 = heap_malloc((u16) descriptor->gfxCount * 8);
-        effect->unk_74 = heap_malloc((u16) descriptor->gfxCount * 8);
-        temp_s1_2 = descriptor->gfx + startAddr;
-        temp_s0 = &temp_s1_2[descriptor->gfxCount];
-        dma_copy(temp_s1_2, &temp_s1_2[descriptor->gfxCount], effect->unk_70);
-        dma_copy(temp_s1_2, &temp_s1_2[descriptor->gfxCount], effect->unk_74);
+//         if (effect->unk_68 != NULL) {
+//             sprfx_add_to_gfx_cache(effect->unk_68, 1);
+//             effect->unk_68 = NULL;
+//         }
+//         if (effect->unk_6C != NULL) {
+//             sprfx_add_to_gfx_cache(effect->unk_6C, 1);
+//             effect->unk_6C = NULL;
+//         }
+//         if (effect->unk_70 != NULL) {
+//             sprfx_add_to_gfx_cache(effect->unk_70, 1);
+//             effect->unk_70 = NULL;
+//         }
+//         if (effect->unk_74 != NULL) {
+//             sprfx_add_to_gfx_cache(effect->unk_74, 1);
+//             effect->unk_74 = NULL;
+//         }
+//         effect->unk_68 = heap_malloc((u16) descriptor->vtxCount * 0x10);
+//         effect->unk_6C = heap_malloc((u16) descriptor->vtxCount * 0x10);
+//         effect->unk_70 = heap_malloc((u16) descriptor->gfxCount * 8);
+//         effect->unk_74 = heap_malloc((u16) descriptor->gfxCount * 8);
+//         temp_s1_2 = descriptor->gfx + startAddr;
+//         temp_s0 = &temp_s1_2[descriptor->gfxCount];
+//         dma_copy(temp_s1_2, &temp_s1_2[descriptor->gfxCount], effect->unk_70);
+//         dma_copy(temp_s1_2, &temp_s1_2[descriptor->gfxCount], effect->unk_74);
 
-        do {
-            gfxPos = (u32 *)effect->unk_70[0];
-            do {
-                gfxOp = *gfxPos;
-                if (gfxOp >> 0x18 == 1) {
-                    gfxPos[1] = (u32)(effect->unk_68 + ((s32)(gfxPos[1] - (s32)descriptor->vtx) / 3) * 4);
-                }
-                gfxPos = gfxPos + 2;
-            } while (gfxOp >> 0x18 != 0xdf);
+//         do {
+//             gfxPos = (u32 *)effect->unk_70[0];
+//             do {
+//                 gfxOp = *gfxPos;
+//                 if (gfxOp >> 0x18 == 1) {
+//                     gfxPos[1] = (u32)(effect->unk_68 + ((s32)(gfxPos[1] - (s32)descriptor->vtx) / 3) * 4);
+//                 }
+//                 gfxPos = gfxPos + 2;
+//             } while (gfxOp >> 0x18 != 0xdf);
 
-            effect = ((s32)effect) + 1;
-        } while ((s32)effect < (s32)&effect->firstVtxIdx);
-    }
-}
+//             effect = ((s32)effect) + 1;
+//         } while ((s32)effect < (s32)&effect->firstVtxIdx);
+//     }
+// }
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013C3F0);
 
