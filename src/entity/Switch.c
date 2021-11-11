@@ -488,7 +488,7 @@ void entity_BlueSwitch_init(Entity* entity) {
     if (D_8015C7D0[0] == 1) {
         if (D_802EB3A0 != NULL) {
             temp->attachedEntity = D_802EB3A0;
-            entity->flags |= 1;
+            entity->flags |= ENTITY_FLAGS_HIDDEN;
             return;
         }
     } else {

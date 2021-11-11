@@ -180,7 +180,7 @@ ApiStatus N(func_802A1740_71ED90)(Evt* script, s32 isInitialCall) {
         Actor* targetActor = get_actor(target->actorID);
         ActorPart* targetPart = get_actor_part(targetActor, target->partID);
 
-        if ((targetActor->transStatus == 0) && !(targetPart->eventFlags & 0x20)) {
+        if ((targetActor->transStatus == 0) && !(targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
             targetActor->yaw += 33.0f;
             targetActor->yaw = clamp_angle(targetActor->yaw);
         }
@@ -213,7 +213,7 @@ ApiStatus N(func_802A1848_71EE98)(Evt* script, s32 isInitialCall) {
 
         if (targetActor != NULL) {
             ActorPart* targetPart = get_actor_part(targetActor, target->partID);
-            if ((targetActor->transStatus == 0) && !(targetPart->eventFlags & 0x20)) {
+            if ((targetActor->transStatus == 0) && !(targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
                 if (targetActor->yaw < 360.0f) {
                     targetActor->yaw += 33.0f;
                     if (targetActor->yaw >= 360.0f) {

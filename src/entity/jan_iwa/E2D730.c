@@ -100,8 +100,8 @@ void func_802BB648_E2DF78(Entity* entity) {
     structE2D730* data = (structE2D730*)entity->dataBuf;
 
     if ((gPlayerStatus.animFlags & 0x10) && (entity->collisionFlags & 0x48)) {
-        if (entity->flags & 0x1000) {
-            entity->flags &= ~0x1000;
+        if (entity->flags & ENTITY_FLAGS_SHOWS_INSPECT_PROMPT) {
+            entity->flags &= ~ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
             temp_a1_2 = (structE2D730*)get_entity_by_index(data->unk_04)->dataBuf;
             if (temp_a1_2->unk_00 == 0) {
                 temp_a1_2->unk_00 = 1;

@@ -47,7 +47,7 @@ StaticNpc N(npcGroup_802440F4) = {
     .pos = { 440.0f, 145.0f, 15.0f },
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 10,
     .itemDrops = {
         { ITEM_THUNDER_RAGE, 10, 0 },
@@ -83,7 +83,7 @@ StaticNpc N(npcGroup_802442E4) = {
     .pos = { 600.0f, 145.0f, 15.0f },
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 10,
     .itemDrops = {
         { ITEM_THUNDER_RAGE, 10, 0 },

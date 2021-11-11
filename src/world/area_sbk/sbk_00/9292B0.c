@@ -36,7 +36,7 @@ StaticNpc N(npcGroup_80240388) = {
     .pos = { -40.0f, 0.0f, 160.0f },
     .flags = NPC_FLAG_NO_Y_MOVEMENT,
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
     .itemDrops = {
         { ITEM_DRIED_FRUIT, 9, 0 },
@@ -73,7 +73,7 @@ StaticNpc N(npcGroup_80240578) = {
     .pos = { 245.0f, 0.0f, 75.0f },
     .flags = NPC_FLAG_NO_Y_MOVEMENT,
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
     .itemDrops = {
         { ITEM_DRIED_FRUIT, 9, 0 },

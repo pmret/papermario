@@ -37,7 +37,7 @@ ApiStatus N(func_802A1354_71B4F4)(Evt* script, s32 isInitialCall) {
         scaleX = (actor->size.x + (actor->size.x >> 2)) * actor->scalingFactor;
         scaleY = (actor->size.y - 2) * actor->scalingFactor;
 
-        if (actor->flags & 0x8000) {
+        if (actor->flags & ACTOR_FLAG_8000) {
             posY -= actor->size.y / 2;
         }
 

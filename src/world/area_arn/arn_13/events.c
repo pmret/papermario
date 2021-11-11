@@ -167,7 +167,7 @@ StaticNpc N(npcGroup_802407EC) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_80240720),
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
@@ -196,7 +196,7 @@ StaticNpc N(npcGroup_802409DC) = {
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_8024076C),
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 20,
     { ITEM_DRIED_SHROOM, 10, 0 },
     .heartDrops = STANDARD_HEART_DROPS(2),

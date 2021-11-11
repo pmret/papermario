@@ -130,8 +130,8 @@ void btl_state_update_switch_to_player(void) {
         for (i = 0; i < ARRAY_COUNT(gBattleStatus.enemyActors); i++) {
             Actor* enemy = gBattleStatus.enemyActors[i];
             if (enemy != NULL) {
-                enemy->flags |= 0x80000;
-                enemy->flags |= 0x8000000;
+                enemy->flags |= ENEMY_FLAGS_80000;
+                enemy->flags |= ENEMY_FLAGS_8000000;
             }
         }
 
@@ -165,8 +165,8 @@ void btl_state_update_switch_to_partner(void) {
         for (i = 0; i < ARRAY_COUNT(gBattleStatus.enemyActors); i++) {
             Actor* enemy = gBattleStatus.enemyActors[i];
             if (enemy != NULL) {
-                enemy->flags |= 0x80000;
-                enemy->flags |= 0x8000000;
+                enemy->flags |= ENEMY_FLAGS_80000;
+                enemy->flags |= ENEMY_FLAGS_8000000;
             }
         }
 

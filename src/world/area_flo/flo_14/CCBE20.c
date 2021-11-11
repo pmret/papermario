@@ -163,7 +163,7 @@ StaticNpc N(npcGroup_80244B20) = {
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_4000,
     .init = &N(init_80244ADC),
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
@@ -193,7 +193,7 @@ StaticNpc N(npcGroup_80244D10) = {
     .pos = { -175.0f, 55.0f, 15.0f },
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
     .itemDrops = {
         { ITEM_MAPLE_SYRUP, 6, 0 },

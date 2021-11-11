@@ -63,7 +63,7 @@ INCLUDE_ASM(s32, "entity/Chest", entity_Chest_setupGfx);
 void entity_Chest_check_opened(Entity* entity) {
     Chest* data = (Chest*)entity->dataBuf;
     if ((data->unk_00 != 0xFFFF) && (get_global_flag(data->unk_00) != 0)) {
-        entity->flags |= 0x4000;
+        entity->flags |= ENTITY_FLAGS_4000;
         data->unk_10 = -1;
         data->unk_08 = -28.7f;
         set_entity_commandlist(entity, &D_802EAD7C);
@@ -81,19 +81,19 @@ void entity_Chest_idle(Entity* entity) {
     if ((!(playerStatus->animFlags & 1)) &&
         (!(entity->collisionFlags & 1)) &&
         ((angle <= 40.0f) || (angle >= 320.0f))) {
-        entity->flags |= 0x1000;
+        entity->flags |= ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
         if ((playerStatus->animFlags & 0x10) && (entity->collisionFlags & 8)) {
             exec_entity_commandlist(entity);
             data = (Chest*)entity->dataBuf;
             data->unk_04 = 0;
-            entity->flags &= ~0x1000;
+            entity->flags &= ~ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
             if (data->unk_10 != 0) {
                 disable_player_input();
             }
             func_800EF3E4();
         }
     } else {
-        entity->flags &= ~0x1000;
+        entity->flags &= ~ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
     }
 }
 
@@ -140,7 +140,7 @@ void entity_Chest_close(Entity* entity) {
             data->unk_06--;
             if (data->unk_06 == 0) {
                 data->unk_04++;
-                entity->flags |= 0x4000;
+                entity->flags |= ENTITY_FLAGS_4000;
             }
             break;
         case 4:

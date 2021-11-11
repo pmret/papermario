@@ -366,7 +366,7 @@ void state_step_exit_file_select(void) {
                 Window* window = &gWindows[i];
 
                 if (window->parent == 44 || window->parent == -1) {
-                    flagSum += window->flags & 8;
+                    flagSum += window->flags & WINDOW_FLAGS_8;
                 }
             }
 

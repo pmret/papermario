@@ -126,7 +126,7 @@ StaticNpc N(npcGroup_80243840) = {
     .pos = { -350.0f, 180.0f, 150.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 20,
     { ITEM_DRIED_SHROOM, 10, 0 },
     .heartDrops = STANDARD_HEART_DROPS(2),
@@ -160,7 +160,7 @@ StaticNpc N(npcGroup_80243A30) = {
     .pos = { 360.0f, 208.0f, 100.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 20,
     { ITEM_DRIED_SHROOM, 10, 0 },
     .heartDrops = STANDARD_HEART_DROPS(2),
@@ -194,7 +194,7 @@ StaticNpc N(npcGroup_80243C20) = {
     .pos = { 150.0f, 177.0f, 160.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .minCoinBonus = 1,
@@ -227,7 +227,7 @@ StaticNpc N(npcGroup_80243E10) = {
     .pos = { 550.0f, 230.0f, 125.0f },
     .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .minCoinBonus = 1,
@@ -377,9 +377,9 @@ ApiStatus N(func_80240B94_BE4344)(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
-        } else if (enemy->flags & 0x40000000) {
+        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
-            enemy->flags &= ~0x40000000;
+            enemy->flags &= ~ENEMY_FLAGS_40000000;
         }
 
         posX = npc->pos.x;

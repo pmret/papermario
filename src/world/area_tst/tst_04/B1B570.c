@@ -86,7 +86,7 @@ void func_8024029C_B1B80C(void) {
 
     if (playerStatus->flags & 1) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
-        entityModel->flags |= 0x200;
+        entityModel->flags |= MODEL_FLAGS_FLAG_200;
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
                           &screenX, &screenY, &screenZ);

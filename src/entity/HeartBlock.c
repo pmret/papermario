@@ -37,7 +37,7 @@ void entity_HeartBlockContent__reset(Entity* entity) {
     entity->renderSetupFunc = entity_HeartBlockContent_setupGfx;
     entity->alpha = 255;
     temp_s0 = (struct802E4B10*)entity->dataBuf;
-    entity->flags |= 0x2000;
+    entity->flags |= ENTITY_FLAGS_ALWAYS_FACE_CAMERA;
     someEntity = get_entity_by_index(temp_s0->unk_00);
 
     if (temp_s0->unk_09 == 0) {
@@ -135,7 +135,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             data->unk_14 -= 1.0f;
             if (data->unk_14 <= 2.0f) {
                 data->unk_01++;
-                entity->flags &= ~0x2000;
+                entity->flags &= ~ENTITY_FLAGS_ALWAYS_FACE_CAMERA;
                 data->unk_54 = -10.0f;
                 entity_set_render_script(entity, &D_802EA744);
                 entity->renderSetupFunc = &entity_HeartBlockContent_setupGfx;

@@ -59,7 +59,7 @@ s32 entity_base_block_idle(Entity* entity) {
     s32 ret = 0;
 
     if (is_block_on_ground(entity) != 0) {
-        if (entity->flags & 0x200000) {
+        if (entity->flags & ENTITY_FLAGS_200000) {
             ret = 1;
             entity_base_block_update_slow_sinking(entity);
             if (temp->unk_10 != -1) {
@@ -79,7 +79,7 @@ void entity_base_block_init(Entity* entity) {
     temp->unk_10 = -1;
     temp->unk_14 = entity->position.y;
     temp->unk_0E = -1;
-    entity->flags &= ~0x200000;
+    entity->flags &= ~ENTITY_FLAGS_200000;
 }
 
 void entity_inactive_block_hit_init(Entity* entity) {
@@ -152,7 +152,7 @@ void entity_MulticoinBlock_spawn_coin(Entity* entity) {
         set_entity_commandlist(get_entity_by_index(create_entity(&D_802EA07C, entity->position.x, entity->position.y,
                                entity->position.z,
                                entity->rotation.y, 0x80000000)), &D_802E9E54);
-        entity->flags |= 0x20000020;
+        entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
     }
 }
 
@@ -184,7 +184,7 @@ void entity_MulticoinBlock_idle(Entity* entity) {
     entity_base_block_idle(entity);
     if (temp->unk_03 != 0) {
         create_entity(&D_802EA07C, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
-        entity->flags |= 0x20000020;
+        entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
     }
 }
 
@@ -196,7 +196,7 @@ void entity_MulticoinBlock_check_if_inactive(Entity* entity) {
     if (temp->unk_0A != 0xFFFF) {
         if (get_global_flag(temp->unk_0A) != 0) {
             create_entity(&D_802EA07C, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
-            entity->flags |= 0x20000020;
+            entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
         }
     }
 }
@@ -333,7 +333,7 @@ s32 entity_init_HammerBlock_small(Entity* entity) {
     temp->unk_10 = -1;
     temp->unk_14 = entity->position.y;
     temp->unk_0E = -1;
-    entity->flags &= ~0x200000;
+    entity->flags &= ~ENTITY_FLAGS_200000;
     entity->scale.x = 0.5f;
     entity->scale.y = 0.5f;
     entity->scale.z = 0.5f;
