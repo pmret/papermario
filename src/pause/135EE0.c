@@ -40,7 +40,7 @@ void func_80242BAC(s32 windowID, s32 posX, s32 posY) {
                 Window* window = &gWindows[i];
                 s8 parent = window->parent;
 
-                if ((parent == -1 || parent == 0x16) && (window->flags & 8)) {
+                if ((parent == -1 || parent == 0x16) && (window->flags & WINDOW_FLAGS_8)) {
                     break;
                 }
             }
@@ -53,7 +53,7 @@ void func_80242BAC(s32 windowID, s32 posX, s32 posY) {
         gPauseMenuTargetPosY = posY;
         gPauseMenuCursorPosY = posY;
 
-    } else if ((window->flags & 8) == 0 && (window->parent == -1 || !(gWindows[window->parent].flags & 8))) {
+    } else if ((window->flags & WINDOW_FLAGS_88 == 0 && (window->parent == -1 || !(gWindows[window->parent].flags & 8))) {
         gPauseMenuTargetPosX = posX;
         gPauseMenuCursorPosX = posX;
         gPauseMenuTargetPosY = posY;
@@ -81,7 +81,7 @@ void func_80242D04(s32 windowID, s32 posX, s32 posY) {
                 Window* window = &gWindows[i];
                 s8 parent = window->parent;
 
-                if ((parent == -1 || parent == 0x16) && (window->flags & 8)) {
+                if ((parent == -1 || parent == 0x16) && (window->flags & WINDOW_FLAGS_8)) {
                     break;
                 }
             }
@@ -93,7 +93,7 @@ void func_80242D04(s32 windowID, s32 posX, s32 posY) {
         gPauseMenuCursorPosX = posX;
         gPauseMenuTargetPosY = posY;
         gPauseMenuCursorPosY = posY;
-    } else if ((window->flags & 8) == 0 && (window->parent == -1 || !(gWindows[window->parent].flags & 8))) {
+    } else if ((window->flags & WINDOW_FLAGS_8) == 0 && (window->parent == -1 || !(gWindows[window->parent].flags & 8))) {
         gPauseMenuTargetPosX = posX;
         gPauseMenuTargetPosY = posY;
     }

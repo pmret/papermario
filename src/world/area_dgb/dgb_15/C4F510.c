@@ -41,7 +41,7 @@ static s32 N(pad_19B4)[] = {
 };
 
 s32 N(itemList_802419C0)[] = {
-    ITEM_CASTLE_KEY1,
+    ITEM_TUBBA_CASTLE_KEY,
     ITEM_NONE,
 };
 
@@ -358,7 +358,7 @@ StaticNpc N(npcGroup_802428C0) = {
     .flags = NPC_FLAG_100 | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
     .init = &N(init_802427EC),
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 5,
     .itemDrops = {
         { ITEM_SUPER_SHROOM, 10, 0 },
@@ -589,9 +589,9 @@ ApiStatus N(func_80241464_C50974)(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
-        } else if (enemy->flags & 0x40000000) {
+        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
-            enemy->flags &= ~0x40000000;
+            enemy->flags &= ~ENEMY_FLAGS_40000000;
         }
 
         posX = npc->pos.x;

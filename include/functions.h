@@ -22,8 +22,10 @@ OSThread* osGetActiveQueue(void);
 f32 signF(f32 val);
 
 void* heap_malloc(s32 size);
-s32* _heap_malloc(HeapNode* head, s32 size);
-HeapNode* _heap_create(s32* addr, u32 size);
+void* _heap_malloc(HeapNode* head, u32 size);
+u32 _heap_free(HeapNode* heapNodeList, void* addrToFree);
+void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize);
+HeapNode* _heap_create(HeapNode* addr, u32 size);
 s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
 void copy_matrix(Matrix4f src, Matrix4f dest);
 
@@ -368,7 +370,9 @@ s32 player_team_is_ability_active(Actor* actor, s32 ability);
 
 void create_part_shadow(s32 actorID, s32 partIndex);
 void remove_part_shadow(s32 actorID, s32 partIndex);
-void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part); // arg0 unused
+void create_part_shadow_by_ref(s32 arg0, ActorPart* part);
+
+s32 func_80266D6C(ActorPart*, s32);
 
 Evt* get_script_by_index(s32 index);
 

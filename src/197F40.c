@@ -561,7 +561,7 @@ ApiStatus GetPartOffset(Evt* script, s32 isInitialCall) {
     outY = *args++;
     outZ = *args++;
 
-    if (!(actorPart->flags & 0x100000)) {
+    if (!(actorPart->flags & ACTOR_PART_FLAG_100000)) {
         x = actorPart->partOffset.x;
         y = actorPart->partOffset.y;
         z = actorPart->partOffset.z;
@@ -687,7 +687,7 @@ ApiStatus SetPartPos(Evt* script, s32 isInitialCall) {
         case 0x200:
             actorPart = get_actor_part(actor, partIndex);
 
-            if (!(actorPart->flags & 0x100000)) {
+            if (!(actorPart->flags & ACTOR_PART_FLAG_100000)) {
                 actorPart->partOffset.x = x;
                 actorPart->partOffset.y = y;
                 actorPart->partOffset.z = z;
@@ -1020,7 +1020,7 @@ ApiStatus GetPartDispOffset(Evt* script, s32 isInitialCall) {
 
     actorPart = get_actor_part(get_actor(actorID), partIndex);
 
-    if (!(actorPart->flags & 0x100000)) {
+    if (!(actorPart->flags & ACTOR_PART_FLAG_100000)) {
         x = actorPart->partOffset.x;
         y = actorPart->partOffset.y;
         z = actorPart->partOffset.z;
@@ -1055,7 +1055,7 @@ ApiStatus SetPartDispOffset(Evt* script, s32 isInitialCall) {
     z = evt_get_float_variable(script, *args++);
     actorPart = get_actor_part(get_actor(actorID), partIndex);
 
-    if (!(actorPart->flags & 0x100000)) {
+    if (!(actorPart->flags & ACTOR_PART_FLAG_100000)) {
         actorPart->partOffset.x = x;
         actorPart->partOffset.y = y;
         actorPart->partOffset.z = z;
@@ -1086,7 +1086,7 @@ ApiStatus AddPartDispOffset(Evt* script, s32 isInitialCall) {
     z = evt_get_float_variable(script, *args++);
     actorPart = get_actor_part(get_actor(actorID), partIndex);
 
-    if (!(actorPart->flags & 0x100000)) {
+    if (!(actorPart->flags & ACTOR_PART_FLAG_100000)) {
         actorPart->partOffset.x += x;
         actorPart->partOffset.y += y;
         actorPart->partOffset.z += z;
@@ -1845,7 +1845,7 @@ ApiStatus HPBarToHome(Evt* script, s32 isInitialCall) {
     actor->healthBarPosition.y = actor->homePos.y + actor->staticActorData->hpBarOffset.y;
     actor->healthBarPosition.z = actor->homePos.z;
 
-    if (actor->flags & 0x800) {
+    if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
         actor->healthBarPosition.y = actor->homePos.y - actor->size.y - actor->staticActorData->hpBarOffset.y;
     }
 
@@ -1868,7 +1868,7 @@ ApiStatus HPBarToCurrent(Evt* script, s32 isInitialCall) {
     actor->healthBarPosition.y = actor->currentPos.y + actor->staticActorData->hpBarOffset.y;
     actor->healthBarPosition.z = actor->currentPos.z;
 
-    if (actor->flags & 0x800) {
+    if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
         actor->healthBarPosition.y = actor->currentPos.y - actor->size.y - actor->staticActorData->hpBarOffset.y;
     }
 
@@ -1911,7 +1911,7 @@ ApiStatus func_8026D940(Evt* script, s32 isInitialCall) {
     actor->healthBarPosition.y = actor->homePos.y + actor->staticActorData->hpBarOffset.y + actor->unk_198.y;
     actor->healthBarPosition.z = actor->homePos.z;
 
-    if (actor->flags & 0x800) {
+    if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
         actor->healthBarPosition.y = actor->homePos.y - actor->size.y;
     }
 
@@ -2277,7 +2277,23 @@ ApiStatus GetDistanceToGoal(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", func_8026EA7C);
+ApiStatus func_8026EA7C(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
+    s32 temp_s3 = evt_get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partIndex);
+    func_80266D6C(actorPart, temp_s3);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", func_8026EB20);
 
@@ -2324,7 +2340,28 @@ ApiStatus RemoveActorDecoration(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", ModifyActorDecoration);
+ApiStatus ModifyActorDecoration(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
+    s32 temp_s4 = evt_get_variable(script, *args++);
+    ActorPart* actorPart;
+    DecorationTable* decorationtable;
+    Actor* actor;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+    
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partIndex);
+    decorationtable = actorPart->decorationTable;
+    decorationtable->unk_8C6[temp_s4].unk00 = evt_get_variable(script, *args++);
+    decorationtable->unk_8C6[temp_s4].unk04 = evt_get_variable(script, *args++);
+    decorationtable->unk_8C6[temp_s4].unk08 = evt_get_variable(script, *args++);
+    decorationtable->unk_8C6[temp_s4].unk0C = evt_get_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus UseIdleAnimation(Evt* script, s32 isInitialCall) {
     Actor* actor;
@@ -2436,7 +2473,7 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
             if (partsTable->flags & 0x100) {
                 flags |= STATUS_FLAG_TRANSPARENT;
             }
-            if (partsTable->eventFlags & EVENT_FLAG_ILLUSORY) {
+            if (partsTable->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
                 flags |= STATUS_FLAG_TRANSPARENT;
             }
     }

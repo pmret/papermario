@@ -42,7 +42,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         gSpeakingActorPart = part;
 
         headX = actor->currentPos.x + actor->headOffset.x;
-        if (!(actor->flags & 0x8000)) {
+        if (!(actor->flags & ACTOR_FLAG_8000)) {
             headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
         } else {
             headY = actor->currentPos.y + actor->headOffset.y + (actor->size.y / 2);
@@ -68,7 +68,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         part = gSpeakingActorPart;
 
         headX = actor->currentPos.x + actor->headOffset.x;
-        if (!(actor->flags & 0x8000)) {
+        if (!(actor->flags & ACTOR_FLAG_8000)) {
             headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
         } else {
             headY = actor->headOffset.y;
@@ -136,7 +136,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
         ActorPart* actorPart = gSpeakingActorPart;
 
         x = actor->currentPos.x + actor->headOffset.x;
-        if (!(gSpeakingActor->flags & 0x8000)) {
+        if (!(gSpeakingActor->flags & ACTOR_FLAG_8000)) {
             y = actor->currentPos.y + actor->headOffset.y + actor->size.y ;
         } else {
             y = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
@@ -403,7 +403,7 @@ s32 is_actor_hp_bar_visible(Actor* actor) {
     }
 
     flags = get_global_byte((actor->actorType >> 3) + 365);
-    if (actor->flags & 0x1000) {
+    if (actor->flags & ACTOR_FLAG_1000) {
         flags |= battleStatus->tattleFlags[actor->actorType >> 3];
     }
     return (flags >> (actor->actorType & 7)) & 1;

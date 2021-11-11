@@ -33,7 +33,7 @@ ApiStatus CreateNpc(Evt* script, s32 isInitialCall) {
     NpcBlueprint blueprint;
     Npc *npc;
 
-    blueprint.flags = 0;
+    blueprint.flags = NPC_FLAG_0;
     blueprint.initialAnim = initialAnim;
     blueprint.onUpdate = NULL;
     blueprint.onRender = NULL;

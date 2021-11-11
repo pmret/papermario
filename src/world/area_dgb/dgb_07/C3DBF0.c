@@ -184,7 +184,7 @@ StaticNpc N(npcGroup_80241A7C)[] = {
         .pos = { -500.0f, 0.0f, -240.0f },
         .flags = NPC_FLAG_NO_Y_MOVEMENT,
         .yaw = 270,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 5,
         .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
@@ -221,7 +221,7 @@ StaticNpc N(npcGroup_80241A7C)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {

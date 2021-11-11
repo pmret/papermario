@@ -3,26 +3,21 @@
 
 INCLUDE_ASM(s32, "23680", spawn_drops);
 
-// The issues here are only in the beginning where max and min are flipped
-#ifdef NON_MATCHING
 s32 get_coin_drop_amount(Enemy* enemy) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
-    s32 amt;
-    s32 mx;
-    s32 diff;
+    EnemyDrops* enemyDrops = enemy->drops;
+    s32 maxCoinBonus = enemyDrops->maxCoinBonus;
+    s32 amt = enemyDrops->minCoinBonus;
+    s32 minTemp = enemyDrops->minCoinBonus;
 
-    amt = enemy->drops->minCoinBonus;
-    mx = enemy->drops->maxCoinBonus;
-
-    if (enemy->drops->minCoinBonus > enemy->drops->maxCoinBonus) {
-        amt = enemy->drops->maxCoinBonus;
-        mx = enemy->drops->minCoinBonus;
+    if (maxCoinBonus < amt) {
+        amt = enemyDrops->maxCoinBonus;
+        maxCoinBonus = enemyDrops->minCoinBonus;
     }
 
-    diff = mx - amt;
-
-    if ((amt < 0) || (diff != 0)) {
-        amt = rand_int(diff) + amt;
+    minTemp = maxCoinBonus - amt;
+    if ((amt < 0) || (minTemp != 0)) {
+        amt = rand_int(minTemp) - -amt;
     }
 
     if (amt < 0) {
@@ -33,7 +28,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
         amt += currentEncounter->damageTaken / 2;
     }
 
-    if (currentEncounter->merleeCoinBonus != 0) {
+    if (currentEncounter->merleeCoinBonus) {
         amt *= 3;
     }
 
@@ -43,7 +38,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
 
     amt += currentEncounter->coinsEarned;
 
-    if (enemy->flags & 0x840000) {
+    if (enemy->flags & (ENEMY_FLAGS_800000 | ENEMY_FLAGS_40000)) {
         amt = 0;
     }
 
@@ -53,9 +48,6 @@ s32 get_coin_drop_amount(Enemy* enemy) {
 
     return amt;
 }
-#else
-INCLUDE_ASM(s32, "23680", get_coin_drop_amount);
-#endif
 
 void func_80048E34(Enemy* enemy, s32 arg1, s32 arg2) {
     Evt* newScript;
@@ -101,7 +93,7 @@ s32 func_80048F0C(void) {
             for (j = 0; j < encounter->count; j++) {
                 Enemy* enemy = encounter->enemy[j];
 
-                if (enemy != NULL && !(enemy->flags & 0x20)) {
+                if (enemy != NULL && !(enemy->flags & ENEMY_FLAGS_20)) {
                     get_npc_unsafe(enemy->npcID);
                 }
             }

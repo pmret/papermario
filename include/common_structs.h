@@ -106,10 +106,10 @@ typedef struct PartnerData {
 
 typedef struct HeapNode {
     /* 0x00 */ struct HeapNode* next;
-    /* 0x04 */ s32 length;
+    /* 0x04 */ u32 length;
     /* 0x08 */ u16 allocated;
-    /* 0x0A */ s16 entryID;
-    /* 0x0C */ s32 capacity;
+    /* 0x0A */ u16 entryID;
+    /* 0x0C */ u32 capacity;
 } HeapNode; // size = 0x10
 
 /// Ring buffer of an NPC's position over the past 20 frames.
@@ -766,7 +766,7 @@ typedef struct BattleStatus {
     /* 0x1AA */ char unk_1AA[4];
     /* 0x1AE */ s16 submenuIcons[24]; /* icon IDs */
     /* 0x1DE */ u8 submenuMoves[24]; /* move IDs */
-    /* 0x1F6 */ u8 submenuEnabled[24];
+    /* 0x1F6 */ s8 submenuEnabled[24];
     /* 0x20E */ u8 submenuMoveCount;
     /* 0x20F */ char unk_20F;
     /* 0x210 */ s32 currentButtonsDown;
@@ -811,8 +811,8 @@ typedef struct StaticMove {
     /* 0x04 */ s32 flags;
     /* 0x08 */ s32 worldDescID;
     /* 0x0C */ s32 menuDescID;
-    /* 0x10 */ u8 battleSubmenu;
-    /* 0x11 */ u8 costFP;
+    /* 0x10 */ s8 battleSubmenu;
+    /* 0x11 */ s8 costFP;
     /* 0x12 */ s8 costBP;
     /* 0x13 */ u8 actionCommandID;
 } StaticMove; // size = 0x14
@@ -1426,6 +1426,17 @@ typedef struct CollisionStatus {
     /* 0x1C */ Vec3f bombetteExplosionPos;
 } CollisionStatus; // size = 0x28
 
+typedef struct DecorationUnk {
+    /* 0x00 */ s16 unk00;
+    /* 0x04 */ s16 unk04;
+    /* 0x08 */ s16 unk08;
+    /* 0x0C */ s16 unk0C;
+    /* 0x10 */ s16 unk10;
+    /* 0x14 */ s16 unk14;
+    /* 0x18 */ s16 unk18;
+    /* 0x1C */ s16 unk1C;
+} DecorationUnk; // size = 0x20
+
 typedef struct DecorationTable {
     /* 0x000 */ char unk_00[1729];
     /* 0x6C1 */ s8 unk_6C1;
@@ -1465,8 +1476,8 @@ typedef struct DecorationTable {
     /* 0x8B8 */ s8 decorationType[2];
     /* 0x8BA */ u8 unk_8BA[2];
     /* 0x8BC */ u8 unk_8BC[2];
-    /* 0x8C0 */ s16 unk_8C0[6];
-    /* 0x8BE */ char unk_8BE[30];
+    /* 0x8C0 */ s16 unk_8C0[4];
+    /* 0x8C6 */ DecorationUnk unk_8C6[2];
 } DecorationTable; // size = 0x8E8
 
 typedef struct ShopOwner {
