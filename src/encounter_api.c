@@ -131,7 +131,7 @@ void start_battle(Evt* script, s32 songID) {
     for (i = 0; i < encounter->count; i++) {
         enemy = encounter->enemy[i];
         if ((enemy != NULL && (
-            !(enemy->flags & 8) || enemy == currentEncounter->currentEnemy)
+            !(enemy->flags & ENEMY_FLAGS_8) || enemy == currentEncounter->currentEnemy)
             ) && enemy->hitBytecode != NULL) {
             Evt* hitEvtInstance;
             enemy->encountered = TRUE;
@@ -200,7 +200,7 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
     for (i = 0; i < encounter->count; i++) {
         enemy = encounter->enemy[i];
         if ((enemy != NULL && (
-            !(enemy->flags & 8) || enemy == currentEncounter->currentEnemy)
+            !(enemy->flags & ENEMY_FLAGS_8) || enemy == currentEncounter->currentEnemy)
             ) && enemy->hitBytecode != NULL) {
             Evt* hitEvtInstance;
             enemy->encountered = TRUE;

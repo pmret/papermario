@@ -105,7 +105,7 @@ ApiStatus func_80238784_704274(Evt* script, s32 isInitialCall) {
     if (targetActor->transStatus == 14) {
         statusChance = 0;
     }
-    if (targetActorPart->eventFlags & 0x20) {
+    if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
         statusChance = 0;
     }
 
@@ -178,7 +178,7 @@ ApiStatus N(AverageTargetParalyzeChance)(Evt* script, s32 isInitialCall) {
             targetActorDescBaseStatusChance = 0;
         }
 
-        if (targetActorPart->eventFlags & 0x20) {
+        if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
             targetActorDescBaseStatusChance = 0;
         }
 

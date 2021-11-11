@@ -516,7 +516,7 @@ StaticNpc N(npcGroup_8024398C) = {
     .pos = { -350.0f, 0.0f, 40.0f },
     .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
     .itemDrops = {
         { ITEM_MAPLE_SYRUP, 6, 0 },
@@ -553,7 +553,7 @@ StaticNpc N(npcGroup_80243B7C) = {
     .pos = { 260.0f, 0.0f, 75.0f },
     .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
     .itemDrops = {
         { ITEM_MAPLE_SYRUP, 6, 0 },
@@ -590,7 +590,7 @@ StaticNpc N(npcGroup_80243D6C) = {
     .pos = { -50.0f, 55.0f, 90.0f },
     .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
     .itemDrops = {
         { ITEM_MAPLE_SYRUP, 6, 0 },
@@ -629,7 +629,7 @@ StaticNpc N(npcGroup_80243F5C) = {
     .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
     .init = &N(init_80243954),
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 15,
     .itemDrops = {
         { ITEM_MAPLE_SYRUP, 6, 0 },

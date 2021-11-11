@@ -60,13 +60,13 @@ ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall) {
     Model* model = get_model_from_list_index(modelListIndex);
     Matrix4f mtx;
 
-    if (!(model->flags & 0x400)) {
+    if (!(model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED)) {
         guTranslateF(model->transformMatrix, 0.0f, dy, 0.0f);
         N(foliage_setup_shear_mtx)(mtx, scale, dx, dz);
         guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
         guTranslateF(mtx, 0.0f, -dy, 0.0f);
         guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
-        model->flags |= 0x1400;
+        model->flags |= (MODEL_FLAGS_HAS_TRANSFORM_APPLIED | MODEL_FLAGS_USES_TRANSFORM_MATRIX);
     } else {
         guTranslateF(mtx, 0.0f, dy, 0.0f);
         guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);

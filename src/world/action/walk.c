@@ -20,7 +20,7 @@ void func_802B6288_E23968(void) {
     s32 phi_s3;
 
     phi_s3 = 0;
-    if (playerStatus->animFlags & PLAYER_ANIM_FLAG_PEACH_PHYSICS) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         func_802B6738_E23E18();
         return;
     }
@@ -34,10 +34,10 @@ void func_802B6288_E23968(void) {
         if (!(playerStatus->flags & 0x00004000)) {
             playerStatus->currentSpeed = playerStatus->runSpeed;
         }
-        if (playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) {
+        if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
             phi_a0 = 0x90003;
         } else {
-            if (!(playerStatus->animFlags & PLAYER_ANIM_FLAG_HOLDING_ITEM)) {
+            if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
                 phi_a0 = 0x10005;
             } else {
                 phi_a0 = 0x60002;
@@ -106,7 +106,7 @@ void func_802B6288_E23968(void) {
 }
 
 void func_802B6550_E23C30(void) {
-    if (!(gPlayerStatus.animFlags & PLAYER_ANIM_FLAG_IN_DISGUISE)) {
+    if (!(gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
         if (!(gGameStatusPtr->peachFlags & 0x10)) {
             suggest_player_anim_clearUnkFlag(D_802B6910_E23FF0[gGameStatusPtr->peachAnimIdx]);
             return;
@@ -166,7 +166,7 @@ void func_802B6738_E23E18(void) {
             playerStatus->currentSpeed = playerStatus->runSpeed;
         }
 
-        if (!(playerStatus->animFlags & PLAYER_ANIM_FLAG_IN_DISGUISE)) {
+        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
             gameStatus = gGameStatusPtr;
             if (!(gameStatus->peachFlags & 0x10)) {
                 if (!gameStatus->peachAnimIdx) {

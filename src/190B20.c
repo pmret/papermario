@@ -1194,7 +1194,7 @@ void func_802634B8(void) {
             if (player->targetListLength == 0) {
                 battleStatus->submenuEnabled[i] = -2;
             }
-            if ((gBattleStatus.flags2 & BS_FLAGS2_1000) != 0) {
+            if ((gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) != 0) {
                 battleStatus->submenuEnabled[moveCount] = -1;
             }
     }
@@ -1271,7 +1271,7 @@ void func_802636E4(void) {
             if (player->targetListLength == 0) {
                 battleStatus->submenuEnabled[i] = -2;
             }
-            if ((gBattleStatus.flags2 & BS_FLAGS2_1000) != 0) {
+            if ((gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) != 0) {
                 battleStatus->submenuEnabled[moveCount] = -1;
             }
     }
@@ -1334,7 +1334,7 @@ void func_80263914(void) {
                 battleStatus->submenuEnabled[i] = 0;
             }
 
-            if (gBattleStatus.flags2 & BS_FLAGS2_1000) {
+            if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
                 battleStatus->submenuEnabled[i] = -1;
             }
 
@@ -1832,7 +1832,7 @@ INCLUDE_ASM(s32, "190B20", func_80266F60);
 INCLUDE_ASM(s32, "190B20", func_80266F8C);
 
 void func_80266FD8(ActorPart* part, s32 arg1) {
-    if (part->idleAnimations != NULL && !(part->flags & 2)) {
+    if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
         DecorationTable* decorationTable = part->decorationTable;
 
         if (decorationTable->unk_764 != arg1) {
@@ -1847,7 +1847,7 @@ void func_80267018(Actor* actor, s32 arg1) {
     ActorPart* actorPart = &actor->partsTable[0];
 
     while (actorPart != NULL) {
-        if (!(actorPart->flags & 0x100001) && actorPart->decorationTable != NULL && !(actorPart->flags & 2) &&
+        if (!(actorPart->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) && actorPart->decorationTable != NULL && !(actorPart->flags & ACTOR_PART_FLAG_2) &&
             actorPart->idleAnimations != NULL) {
             func_80266FD8(actorPart, arg1);
         }
@@ -1860,7 +1860,7 @@ INCLUDE_ASM(s32, "190B20", func_8026709C);
 INCLUDE_ASM(s32, "190B20", func_802670C8);
 
 void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationType) {
-    if ((part->idleAnimations) && !(part->flags & 2)) {
+    if ((part->idleAnimations) && !(part->flags & ACTOR_PART_FLAG_2)) {
         DecorationTable* decorationTable = part->decorationTable;
 
         _remove_part_decoration(part, decorationIndex);
@@ -1874,7 +1874,7 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationTyp
 void add_actor_decoration(Actor* actor, s32 decorationIndex, s32 decorationType) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if ((part->flags & 0x100001) == 0 && part->idleAnimations && !(part->flags & 2)) {
+        if ((part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) == 0 && part->idleAnimations && !(part->flags & ACTOR_PART_FLAG_2)) {
             add_part_decoration(part, decorationIndex, decorationType);
         }
     }
@@ -1887,7 +1887,7 @@ void remove_part_decoration(ActorPart* part, s32 decorationIndex) {
 void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if ((part->flags & 0x100001) == 0 && part->idleAnimations && !(part->flags & 2)) {
+        if ((part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) == 0 && part->idleAnimations && !(part->flags & ACTOR_PART_FLAG_2)) {
             remove_part_decoration(part, decorationIndex);
         }
     }
@@ -1914,7 +1914,7 @@ s32 player_team_is_ability_active(Actor* actor, s32 ability) {
 void create_part_shadow(s32 actorID, s32 partIndex) {
     ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
-    part->flags &= ~4;
+    part->flags &= ~ACTOR_PART_FLAG_4;
     part->shadowIndex = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
     part->shadowScale = part->size.x / 24.0;
 }
@@ -1922,12 +1922,12 @@ void create_part_shadow(s32 actorID, s32 partIndex) {
 void remove_part_shadow(s32 actorID, s32 partIndex) {
     ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
-    part->flags |= 4;
+    part->flags |= ACTOR_PART_FLAG_4;
     delete_shadow(part->shadowIndex);
 }
 
 void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part) {
-    part->flags &= ~4;
+    part->flags &= ~ACTOR_PART_FLAG_4;
     part->shadowIndex = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
     part->shadowScale = part->size.x / 24.0;
 }
@@ -2039,7 +2039,7 @@ void hide_foreground_models_unchecked(void) {
             s32 id = *idList++;
             if (id >= 0) {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
-                model->flags |= 2;
+                model->flags |= MODEL_FLAGS_ENABLED;
             }
         }
     }
@@ -2054,7 +2054,7 @@ void show_foreground_models_unchecked(void) {
             s32 id = *idList++;
             if (id >= 0) {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
-                model->flags &= ~2;
+                model->flags &= ~MODEL_FLAGS_ENABLED;
             }
         }
     }
@@ -2071,7 +2071,7 @@ void hide_foreground_models(void) {
                 break;
             } else {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
-                model->flags |= 2;
+                model->flags |= MODEL_FLAGS_ENABLED;
             }
 
         }
@@ -2089,7 +2089,7 @@ void show_foreground_models(void) {
                 break;
             } else {
                 Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(id));
-                model->flags &= ~2;
+                model->flags &= ~MODEL_FLAGS_ENABLED;
             }
         }
     }

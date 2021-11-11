@@ -81,7 +81,7 @@ s32 load_entity_model(s32* cmdList) {
     }
     ASSERT(newEntityModel != NULL);
 
-    newEntityModel->flags = 0x17;
+    newEntityModel->flags = (ENTITY_MODEL_FLAGS_1 | ENTITY_MODEL_FLAGS_2 | ENTITY_MODEL_FLAGS_4 | ENTITY_MODEL_FLAGS_10);
     newEntityModel->renderMode = 1;
     newEntityModel->displayList = NULL;
     newEntityModel->cmdListReadPos = cmdList;
@@ -124,7 +124,7 @@ s32 ALT_load_entity_model(s32* cmdList) {
     newEntityModel->displayList = newDisplayList = heap_malloc(sizeof(Gfx) * 2);
     ASSERT(newDisplayList != NULL);
 
-    newEntityModel->flags = 0x417;
+    newEntityModel->flags = (ENTITY_MODEL_FLAGS_1 | ENTITY_MODEL_FLAGS_2 | ENTITY_MODEL_FLAGS_4 | ENTITY_MODEL_FLAGS_10 | ENTITY_MODEL_FLAGS_400);
     newEntityModel->renderMode = 1;
     newEntityModel->cmdListReadPos = cmdList;
     newEntityModel->nextFrameTime = 1.0f;
@@ -150,9 +150,9 @@ void exec_entity_model_commandlist(s32 idx) {
         idx &= ~0x800;
         entityModel = (*gCurrentEntityModelList)[idx];
         if (entityModel != NULL && (entityModel->flags)) {
-            if (!(entityModel->flags & 0x20)) {
-                if (!(entityModel->flags & 0x20000)) {
-                    entityModel->flags &= ~0x100;
+            if (!(entityModel->flags & ENTITY_MODEL_FLAGS_20)) {
+                if (!(entityModel->flags & ENTITY_MODEL_FLAGS_20000)) {
+                    entityModel->flags &= ~ENTITY_MODEL_FLAGS_100;
                     entityModel->nextFrameTime -= entityModel->timeScale;
                     if (entityModel->nextFrameTime <= 0.0f) {
                         while (step_entity_model_commandlist(entityModel));
@@ -252,7 +252,7 @@ void free_entity_model_by_index(s32 idx) {
     EntityModel* entityModel = (*gCurrentEntityModelList)[index];
 
     if (entityModel != NULL && entityModel->flags) {
-        if (entityModel->flags & 0x400) {
+        if (entityModel->flags & ENTITY_MODEL_FLAGS_400) {
             heap_free(entityModel->displayList);
         }
         {
@@ -310,7 +310,7 @@ void func_80122F8C(s32 idx, s32 newFlags) {
 void func_80122FB8(s32 idx, s32 newFlags) {
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
 
-    entityModel->flags = (entityModel->flags & ~0xF) | newFlags;
+    entityModel->flags = (entityModel->flags & ~(ENTITY_MODEL_FLAGS_1 | ENTITY_MODEL_FLAGS_2 | ENTITY_MODEL_FLAGS_4 | ENTITY_MODEL_FLAGS_8)) | newFlags;
 }
 
 void enable_entity_fog(void) {
@@ -389,7 +389,7 @@ s32 create_generic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)
     (*gCurrentDynamicEntityListPtr)[i] = newDynEntity = heap_malloc(sizeof(DynamicEntity));
     ASSERT(newDynEntity != NULL);
 
-    newDynEntity->flags = 3;
+    newDynEntity->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
     newDynEntity->update = updateFunc;
     if (updateFunc == NULL) {
         newDynEntity->update = &stub_generic_entity_delegate;
@@ -420,7 +420,7 @@ s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(voi
     (*gCurrentDynamicEntityListPtr)[i] = newDynEntity = heap_malloc(sizeof(DynamicEntity));
     ASSERT(newDynEntity != NULL);
 
-    newDynEntity->flags = 7;
+    newDynEntity->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1 | ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
     newDynEntity->update = updateFunc;
     if (updateFunc == NULL) {
         newDynEntity->update = &stub_generic_entity_delegate;
@@ -451,7 +451,7 @@ s32 create_generic_entity_backUI(void (*updateFunc)(void), void (*drawFunc)(void
     (*gCurrentDynamicEntityListPtr)[i] = newDynEntity = heap_malloc(sizeof(DynamicEntity));
     ASSERT(newDynEntity != NULL);
 
-    newDynEntity->flags = 0xB;
+    newDynEntity->flags = ENTITY_FLAGS_HIDDEN | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1 | ENTITY_FLAGS_HAS_ANIMATED_MODEL;
     newDynEntity->update = updateFunc;
     if (updateFunc == NULL) {
         newDynEntity->update = &stub_generic_entity_delegate;
@@ -473,7 +473,7 @@ void update_generic_entities(void) {
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
         DynamicEntity* entity = (*gCurrentDynamicEntityListPtr)[i];
         if (entity != NULL) {
-            entity->flags &= ~2;
+            entity->flags &= ~ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
             entity->update();
         }
     }
@@ -484,8 +484,8 @@ void render_generic_entities_world(void) {
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
         DynamicEntity* entity = (*gCurrentDynamicEntityListPtr)[i];
-        if (entity != NULL && !(entity->flags & 2)) {
-            if (!(entity->flags & 4)) {
+        if (entity != NULL && !(entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1)) {
+            if (!(entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW)) {
                 entity->draw();
             }
         }
@@ -497,8 +497,8 @@ void render_generic_entities_frontUI(void) {
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
         DynamicEntity* entity = (*gCurrentDynamicEntityListPtr)[i];
-        if (entity != NULL && !(entity->flags & 2)) {
-            if (entity->flags & 4) {
+        if (entity != NULL && !(entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1)) {
+            if (entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW) {
                 entity->draw();
             }
         }
@@ -510,8 +510,8 @@ void render_generic_entities_backUI(void) {
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
         DynamicEntity* entity = (*gCurrentDynamicEntityListPtr)[i];
-        if (entity != NULL && !(entity->flags & 2)) {
-            if (entity->flags & 8) {
+        if (entity != NULL && !(entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1)) {
+            if (entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL) {
                 entity->draw();
             }
         }
