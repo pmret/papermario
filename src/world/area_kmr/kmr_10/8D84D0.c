@@ -30,7 +30,7 @@ ApiStatus N(func_80240000_8D84D0)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/CheckItemFlags40.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // 0x1E4 is probably a linker constant. We need to learn more about animations,
 // play_model_animation, and entity->unk_14 before we can tackle this
 ApiStatus func_802402BC_8D878C(Evt* script, s32 isInitialCall) {

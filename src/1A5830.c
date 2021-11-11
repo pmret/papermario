@@ -801,7 +801,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 }
 
 // part before the first conditional needs work
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEvent, s32 stopMotion) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActorMovementWalk* walk;
@@ -1181,7 +1181,7 @@ ApiStatus GetEnemyMaxHP(Evt* script, s32 isInitialCall) {
 }
 
 // battlestatus shtuff
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 ApiStatus RemoveActor(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     EncounterStatus* currentEncounter = &gCurrentEncounter;

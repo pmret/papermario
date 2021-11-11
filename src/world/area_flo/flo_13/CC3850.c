@@ -1186,7 +1186,7 @@ NpcGroupList N(npcGroupList_80247984) = {
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void N(func_802404D0_CB54D0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -1561,7 +1561,7 @@ void N(func_80241B68_CC5378)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 }
 
 // enemy2 is being copied to a0
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 ApiStatus N(func_80241DB8_CC55C8)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;

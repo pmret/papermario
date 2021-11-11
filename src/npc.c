@@ -440,7 +440,7 @@ INCLUDE_ASM(void, "npc", update_npcs, void);
 
 INCLUDE_ASM(f32, "npc", npc_get_render_yaw);
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // float regalloc
 void appendGfx_npc(Npc* npc) {
     Matrix4f subroutine_arg6;
@@ -1194,7 +1194,7 @@ Npc* npc_find_closest_simple(f32 x, f32 y, f32 z, f32 radius) {
 }
 
 // Needs work
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 npc_find_standing_on_entity(s32 arg0) {
     s32 entityIndex = (arg0 | 0x4000);
     s32 yTemp = get_entity_by_index(entityIndex)->position.y - 10.0f;
@@ -1255,7 +1255,7 @@ s32 npc_get_collider_below(Npc* npc) {
     return 0;
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // Rodata issue. Most likely the last function in the TU with a jumptable.
 void func_8003D3BC(Npc* npc) {
     s32 temp_s4 = npc->unk_98;
@@ -1338,7 +1338,7 @@ void func_8003D624(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     func_8003D3BC(npc);
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // Rodata padding issue. Most likely belongs to a separate TU than the function above with the switch.
 void func_8003D660(Npc* npc, s32 arg1) {
     PartnerActionStatus* temp = &gPartnerActionStatus;
@@ -1667,7 +1667,7 @@ s32 kill_encounter(Enemy* enemy) {
     }
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // regalloc. s2/s3 switched
 void kill_enemy(Enemy* enemy) {
     EncounterStatus* encounterStatus = &gCurrentEncounter;

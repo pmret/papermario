@@ -166,7 +166,7 @@ ApiStatus StartBattleWith(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-#ifdef NON_MATCHING // regalloc
+#ifdef NON_EQUIVALENT // regalloc
 ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
     Encounter* encounter;
     s32 i;

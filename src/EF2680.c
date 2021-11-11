@@ -192,7 +192,7 @@ INCLUDE_ASM(s32, "EF2680", func_80242530_EF4B40);
 
 // This should be roughly like this and is a copy from CD7350 (func_80242918_CD9BF8), but with the little extra block
 // at the beginning. I have to assume that is has to roughly look like below, but I can't get it to match.
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 ApiStatus func_8024299C_EF4FAC(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

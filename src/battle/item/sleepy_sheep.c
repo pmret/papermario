@@ -6,7 +6,7 @@
 
 #include "ItemRefund.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 
 extern Vec3f D_802A3F88;
 extern s32* D_802A3F58;

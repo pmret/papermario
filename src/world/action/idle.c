@@ -80,7 +80,7 @@ void world_action_idle_update(void) {
     }
 }
 
-#ifndef NON_MATCHING
+#ifndef NON_EQUIVALENT
 INCLUDE_ASM(void, "world/action/idle", func_802B61E4_E23444, void);
 #else
 void func_802B61E4_E23444(void) {

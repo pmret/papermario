@@ -94,7 +94,7 @@ s32 func_802BB374_E2DCA4(void);
 INCLUDE_ASM(s32, "entity/jan_iwa/E2D730", func_802BB374_E2DCA4);
 
 // regalloc, play_model_animation weirdness
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void func_802BB648_E2DF78(Entity* entity) {
     structE2D730* temp_a1_2;
     structE2D730* data = (structE2D730*)entity->dataBuf;
@@ -150,7 +150,7 @@ void func_802BB98C_E2E2BC(Entity* entity) {
     add_vec2D_polar(&gPlayerStatus.position.x, &gPlayerStatus.position.z, data->unk_08, data->unk_04.f);
 }
 
-#ifdef NON_MATCHING // play_model_animation weirdness, branch likely in case 0
+#ifdef NON_EQUIVALENT // play_model_animation weirdness, branch likely in case 0
 void func_802BB9E0_E2E310(Entity* entity) {
     structE2D730* data = (structE2D730*)entity->dataBuf;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;

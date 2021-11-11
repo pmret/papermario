@@ -397,7 +397,7 @@ EvtSource N(makeEntities) = SCRIPT({
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // second npc_raycast_down_sides call
 void N(func_802401B0_C366E0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -941,7 +941,7 @@ ApiStatus N(func_8024240C_C3893C)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc18.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 
 typedef struct {
     s32 unk_00[8];

@@ -357,7 +357,7 @@ EvtSource N(802413F0) = SCRIPT({
     EVT_MAP_FLAG(2) = 0;
 });
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 EvtSource N(80241ED4) = SCRIPT({
     EVT_VAR(0) = 0;
     EVT_VAR(1) = 0;
@@ -558,7 +558,7 @@ EvtSource N(80242620) = SCRIPT({
     sleep 30;
 });
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 EvtSource N(80242910) = SCRIPT({
     EVT_VAR(0) = 0;
     EVT_VAR(1) = 0;

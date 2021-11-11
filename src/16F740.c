@@ -7,7 +7,7 @@ extern s32 D_80280A30;
 extern s32 D_8029F254;
 
 // Almost good but some reorderings at the beginning
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void btl_merlee_on_start_turn(void) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;

@@ -60,7 +60,7 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E2BB0);
 INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_jump);
 
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // Rodata issue.
 extern s32 D_800F7B50;
 
@@ -103,7 +103,7 @@ void phys_init_integrator_for_current_state(void) {
 }
 #else
 INCLUDE_ASM(void, "7bb60_len_41b0", phys_init_integrator_for_current_state, void);
-#endif // NON_MATCHING
+#endif // NON_EQUIVALENT
 
 // This function is wack. This weird stuff is needed to match
 void gravity_use_fall_parms(void) {
@@ -216,7 +216,7 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", collision_main_lateral);
 
 s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1, f32 arg2);
 //something weird with hitID
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1, f32 arg2) {
     f32 angle = 0.0f;
     s32 ret = -1;

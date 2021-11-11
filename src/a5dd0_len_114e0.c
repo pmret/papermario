@@ -905,7 +905,7 @@ void set_entity_commandlist(Entity* entity, s32* entityScript) {
 }
 
 // Ordering issues with the savedReadPos cases (4 and 5)
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 step_entity_commandlist(Entity* entity) {
     s32* args = entity->scriptReadPos;
     s32 ret;
@@ -1282,7 +1282,7 @@ s32 entity_get_collision_flags(Entity* entity) {
 INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_interacts_with_current_partner);
 
 // float bs
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 test_player_entity_aabb(Entity* entity) {
     f32 temp_f4;
     f32 colliderDiameter;
@@ -1865,7 +1865,7 @@ void clear_game_modes(void) {
 }
 
 // weird ordering at the beginning
-#ifndef NON_MATCHING
+#ifndef NON_EQUIVALENT
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_next_game_mode);
 #else
 GameMode* set_next_game_mode(GameMode* arg0) {
@@ -2210,7 +2210,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_create_model);
 
 // The global here is getting optimized out because nothing is happening to it. Very weird
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void func_80116674(void) {
     s32 i;
 
@@ -2367,7 +2367,7 @@ void load_data_for_models(ModelNode* model, s32 romOffset, s32 size) {
 }
 
 // tiny reg swap in the first loop
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth) {
     Matrix4f sp10;
     Matrix4f sp50;
