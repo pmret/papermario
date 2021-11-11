@@ -179,8 +179,8 @@ ApiStatus StartBossBattle(Evt* script, s32 isInitialCall) {
     enemy->encountered = TRUE;
     currentEncounter->currentEnemy = enemy;
     currentEncounter->currentEncounter = currentEncounter->encounterList[enemy->encounterIndex];
-    currentEncounter->eFirstStrike = 0;
-    currentEncounter->allowFleeing = 1;
+    currentEncounter->eFirstStrike = FIRST_STRIKE_NONE;
+    currentEncounter->allowFleeing = TRUE;
     currentEncounter->songID = songID;
     currentEncounter->unk_18 = -1;
 
