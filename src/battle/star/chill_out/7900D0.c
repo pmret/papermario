@@ -35,13 +35,13 @@ ApiStatus func_802A163C_79070C(Evt* script, s32 isInitialCall) {
     Actor* actor = get_actor(script->owner1.actorID);
     Actor* target = get_actor(actor->targetActorID);
     ActorPart* part = get_actor_part(target, actor->targetPartIndex);
-    s32 flag1 = 0x400000; // these manual flag ones are necessary to match. once we figure out flags, we can add more
-    s32 flag2 = 0x80000;
+    s32 flag1 = ACTOR_FLAG_NO_DMG_APPLY; // these manual flag ones are necessary to match. once we figure out flags, we can add more
+    s32 flag2 = ACTOR_EVENT_FLAG_80000;
 
     script->varTable[0] = 0;
 
-    if ((target->flags & 0x4000) || (target->flags & flag1) || (target->flags & 0x2000) ||
-        (part->eventFlags & 0x40000) || (part->eventFlags & flag2)) {
+    if ((target->flags & ACTOR_FLAG_TARGET_ONLY) || (target->flags & flag1) || (target->flags & ACTOR_FLAG_2000) ||
+        (part->eventFlags & ACTOR_EVENT_FLAG_ENCHANTED) || (part->eventFlags & flag2)) {
         return ApiStatus_DONE2;
     }
 

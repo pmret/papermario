@@ -19,9 +19,9 @@ void func_802B6000_E24040(void) {
 
     phys_init_integrator_for_current_state();
 
-    if (playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
         temp_v1 = 0x90005;
-    } else if (!(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
+    } else if (!(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
         temp_v1 = 0x10007;
     } else {
         temp_v1 = 0x60009;
@@ -47,7 +47,7 @@ void func_802B60B4_E240F4(void) {
         }
 
         if (playerStatus->actionState == ACTION_STATE_JUMP) {
-            if (playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) {
+            if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
                 sfx_play_sound_at_player(SOUND_JUMP_8BIT_MARIO, 0);
             }
             else {
@@ -56,9 +56,9 @@ void func_802B60B4_E240F4(void) {
         }
     }
 
-    if (playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
         phi_a0 = 0x90005;
-    } else if (!(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
+    } else if (!(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
         phi_a0 = 0x10007;
     } else {
         phi_a0 = 0x60009;
@@ -97,7 +97,7 @@ void func_802B6198_E241D8(void) {
         playerStatus->flags |= 4;
 
 
-        if (!(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
+        if (!(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
             phi_a0 = 0x10008;
         } else {
             phi_a0 = 0x6000A;
@@ -114,7 +114,7 @@ void func_802B6198_E241D8(void) {
 void func_802B6294_E242D4(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->animFlags & PLAYER_ANIM_FLAG_PEACH_PHYSICS) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         func_802B647C_E244BC();
         return;
     }
@@ -125,9 +125,9 @@ void func_802B6294_E242D4(void) {
         playerStatus->flags &= ~0x8000000A;
         playerStatus->flags |= 4;
 
-        if (playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) {
+        if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
             phi_a0 = 0x90005;
-        } else  if (!(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
+        } else  if (!(playerStatus->animFlags & (PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT | PLAYER_STATUS_ANIM_FLAGS_2))) {
             phi_a0 = 0x10008;
         } else {
             phi_a0 = 0x6000A;
@@ -149,7 +149,7 @@ void func_802B6348_E24388(void) {
     f32 sp30;
     f32 sp34;
 
-    if (playerStatus->animFlags & PLAYER_ANIM_FLAG_PEACH_PHYSICS) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         func_802B6508_E24548();
         return;
     }
@@ -185,7 +185,7 @@ void func_802B647C_E244BC(void) {
         playerStatus->flags &= ~0xA;
         playerStatus->flags |= 4;
 
-        if (!(playerStatus->animFlags & PLAYER_ANIM_FLAG_PEACH_PHYSICS)) {
+        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
             temp_v1 = 0x10008;
         } else {
             temp_v1 = 0xA0006;
@@ -206,7 +206,7 @@ void func_802B6508_E24548(void) {
         playerStatus->flags |= 4;
         gCameras[0].moveFlags |= 1;
 
-        if (playerStatus->animFlags & PLAYER_ANIM_FLAG_PEACH_PHYSICS) {
+        if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
             suggest_player_anim_clearUnkFlag(0xA0006);
         }
     }

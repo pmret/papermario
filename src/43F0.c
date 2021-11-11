@@ -278,7 +278,73 @@ u32 _heap_free(HeapNode* heapNodeList, void* addrToFree) {
     return FALSE;
 }
 
-INCLUDE_ASM(s32, "43F0", _heap_realloc);
+void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize) {
+    u32 newSizeAligned;
+    HeapNode* nextNode;
+    HeapNode* curHeapAlloc;
+    HeapNode* newFreeBlock;
+    u32 newNodeLength;
+    HeapNode* nodeToUpdate;
+
+    curHeapAlloc = (HeapNode*)((u8*)addr - sizeof(HeapNode));
+    newSizeAligned = ALIGN16(newSize);
+
+    // check if the realloc is on an allocated node otherwise fail
+    if (!curHeapAlloc->allocated) {
+        return NULL;
+    }
+
+    nextNode = curHeapAlloc->next;
+    newNodeLength = curHeapAlloc->length;
+
+    // if we have a node after us and it isn't allocated then
+    // adjust the length and next node pointers to include the node after us
+    nodeToUpdate = nextNode;
+    if (nextNode && !nextNode->allocated) {
+        nextNode = nextNode->next;
+        newNodeLength += sizeof(HeapNode) + nodeToUpdate->length;
+    }
+
+    // check if the current block or current + next block (if free) are too small
+    nodeToUpdate = curHeapAlloc;
+    if (newNodeLength < newSizeAligned) {
+        // too small, allocatr a new node, copy data to it then free the current one
+        curHeapAlloc = _heap_malloc(heapNodeList, newSizeAligned);
+        if (curHeapAlloc == NULL) {
+            return NULL;
+        }
+
+        // minor interest note, copy the size of the newly allocated size
+        // instead of just how much data used to be stored, this results in copying
+        // excessive data
+        memcpy(curHeapAlloc, addr, newSizeAligned);
+        _heap_free(heapNodeList, addr);
+        return curHeapAlloc;
+    }
+
+    // see if there is room to add a new free block after us
+    if (newSizeAligned + sizeof(HeapNode) < newNodeLength) {
+        // room for a free block, create it
+        newFreeBlock = (HeapNode*)((u8*)addr + newSizeAligned);
+
+        // update current node
+        nodeToUpdate->next = newFreeBlock;
+        nodeToUpdate->length = newSizeAligned;
+
+        // create new node after the current one
+        nodeToUpdate = newFreeBlock;
+        nodeToUpdate->next = nextNode;
+        nodeToUpdate->length = (newNodeLength - newSizeAligned) - sizeof(HeapNode);
+        nodeToUpdate->allocated = FALSE;
+    } else {
+        // no room, update our next and length
+        nodeToUpdate->next = nextNode;
+        nodeToUpdate->length = newNodeLength;
+    }
+
+    // return the location we were at
+    return addr;
+}
 
 f32 cosine(s16 arg0) {
     s16 temp360;

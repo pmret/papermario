@@ -169,7 +169,7 @@ EvtSource N(enterDoubleDoor_80242D1C) = SCRIPT({
 });
 
 s32 N(itemList_80242F28)[] = {
-    ITEM_CASTLE_KEY1,
+    ITEM_TUBBA_CASTLE_KEY,
     ITEM_NONE,
 };
 
@@ -527,7 +527,7 @@ StaticNpc N(npcGroup_80243DE8)[] = {
         .pos = { 180.0f, 0.0f, -122.0f },
         .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
         .yaw = 270,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 5,
         .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
@@ -563,7 +563,7 @@ StaticNpc N(npcGroup_80243DE8)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
@@ -595,7 +595,7 @@ StaticNpc N(npcGroup_802441C8)[] = {
         .pos = { -272.0f, 0.0f, -135.0f },
         .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
         .yaw = 270,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 5,
         .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
@@ -631,7 +631,7 @@ StaticNpc N(npcGroup_802441C8)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
@@ -664,7 +664,7 @@ StaticNpc N(npcGroup_802445A8)[] = {
         .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
         .init = &N(init_80243D94),
         .yaw = 90,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 5,
         .itemDrops = {
             { ITEM_SUPER_SHROOM, 10, 0 },
@@ -700,7 +700,7 @@ StaticNpc N(npcGroup_802445A8)[] = {
         .pos = { 0.0f, -1000.0f, 0.0f },
         .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
         .yaw = 0,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
@@ -884,9 +884,9 @@ ApiStatus N(func_802416B4_C32B94)(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
-        } else if (enemy->flags & 0x40000000) {
+        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
-            enemy->flags &= ~0x40000000;
+            enemy->flags &= ~ENEMY_FLAGS_40000000;
         }
 
         posX = npc->pos.x;

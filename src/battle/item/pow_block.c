@@ -25,7 +25,7 @@ ApiStatus N(func_802A123C_718A8C)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_802A12E4_718B34)(Evt* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(script->varTable[10]);
 
-    entity->flags |= 0x20000000;
+    entity->flags |= ENTITY_FLAGS_PENDING_INSTANCE_DELETE;
 
     return ApiStatus_DONE2;
 }

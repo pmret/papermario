@@ -23,9 +23,9 @@ ApiStatus TranslateModel(Evt* script, s32 isInitialCall) {
     z = evt_get_float_variable(script, *args++);
     model = get_model_from_list_index(modelIndex);
 
-    if (!(model->flags & 0x400)) {
+    if (!(model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED)) {
         guTranslateF(model->transformMatrix, x, y, z);
-        model->flags |= 0x1400;
+        model->flags |= (MODEL_FLAGS_HAS_TRANSFORM_APPLIED | MODEL_FLAGS_USES_TRANSFORM_MATRIX);
     } else {
         Matrix4f mtx;
 
@@ -46,9 +46,9 @@ ApiStatus RotateModel(Evt* script, s32 isInitialCall) {
     f32 z = evt_get_float_variable(script, *args++);
     Model* model = get_model_from_list_index(modelListIndex);
 
-    if (!(model->flags & 0x400)) {
+    if (!(model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED)) {
         guRotateF(model->transformMatrix, a, x, y, z);
-        model->flags |= 0x1400;
+        model->flags |= (MODEL_FLAGS_HAS_TRANSFORM_APPLIED | MODEL_FLAGS_USES_TRANSFORM_MATRIX);
     } else {
         Matrix4f mtx;
 
@@ -73,9 +73,9 @@ ApiStatus ScaleModel(Evt* script, s32 isInitialCall) {
     z = evt_get_float_variable(script, *args++);
     model = get_model_from_list_index(modelIndex);
 
-    if (!(model->flags & 0x400)) {
+    if (!(model->flags & MODEL_FLAGS_HAS_TRANSFORM_APPLIED)) {
         guScaleF(model->transformMatrix, x, y, z);
-        model->flags |= 0x1400;
+        model->flags |= (MODEL_FLAGS_HAS_TRANSFORM_APPLIED | MODEL_FLAGS_USES_TRANSFORM_MATRIX);
     } else {
         Matrix4f mtx;
 
@@ -100,7 +100,7 @@ ApiStatus InvalidateModelTransform(Evt* script, s32 isInitialCall) {
     Bytecode modelID = evt_get_variable(script, *args++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
 
-    model->flags &= ~0x400;
+    model->flags &= ~MODEL_FLAGS_HAS_TRANSFORM_APPLIED;
     return ApiStatus_DONE2;
 }
 
@@ -137,7 +137,7 @@ ApiStatus SetTexPanner(Evt* script, s32 isInitialCall) {
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
     set_tex_panner(model, var2);
-    model->flags |= 0x800;
+    model->flags |= MODEL_FLAGS_HAS_TEX_PANNER;
     return ApiStatus_DONE2;
 }
 
@@ -148,9 +148,9 @@ ApiStatus SetCustomGfxEnabled(Evt* script, s32 isInitialCall) {
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
     if (enable) {
-        model->flags |= 0x10;
+        model->flags |= MODEL_FLAGS_USES_CUSTOM_GFX;
     } else {
-        model->flags &= ~0x10;
+        model->flags &= ~MODEL_FLAGS_USES_CUSTOM_GFX;
     }
     return ApiStatus_DONE2;
 }
@@ -167,7 +167,7 @@ ApiStatus SetModelCustomGfx(Evt* script, s32 isInitialCall) {
 
     set_mdl_custom_gfx_set(model, var2, var3);
     if (var2 != -1) {
-        model->flags |= 0x10;
+        model->flags |= MODEL_FLAGS_USES_CUSTOM_GFX;
     }
     return ApiStatus_DONE2;
 }
@@ -188,9 +188,9 @@ ApiStatus EnableTexPanning(Evt* script, s32 isInitialCall) {
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
     if (flag) {
-        model->flags |= 0x800;
+        model->flags |= MODEL_FLAGS_HAS_TEX_PANNER;
     } else {
-        model->flags &= ~0x800;
+        model->flags &= ~MODEL_FLAGS_HAS_TEX_PANNER;
     }
     return ApiStatus_DONE2;
 }
@@ -202,9 +202,9 @@ ApiStatus EnableModel(Evt* script, s32 isInitialCall) {
     Model* model = get_model_from_list_index(listIndex);
 
     if (flag != 0) {
-        model->flags &= ~0x2;
+        model->flags &= ~MODEL_FLAGS_ENABLED;
     } else {
-        model->flags |= 0x2;
+        model->flags |= MODEL_FLAGS_ENABLED;
     }
     return ApiStatus_DONE2;
 }
@@ -318,10 +318,10 @@ ApiStatus TranslateGroup(Evt* script, s32 isInitialCall) {
 
     transformGroup = get_transform_group(index);
 
-    index = transformGroup->flags & 0x400; // TODO fix weird match
+    index = transformGroup->flags & MODEL_TRANSFORM_GROUP_FLAGS_400; // TODO fix weird match
     if (!index) {
         guTranslateF(transformGroup->matrixB, x, y, z);
-        transformGroup->flags |= 0x1400;
+        transformGroup->flags |= (MODEL_TRANSFORM_GROUP_FLAGS_400 | MODEL_TRANSFORM_GROUP_FLAGS_1000);
     } else {
         Matrix4f mtx;
 
@@ -352,9 +352,9 @@ ApiStatus RotateGroup(Evt* script, s32 isInitialCall) {
 
     transformGroup = get_transform_group(index);
 
-    if (!(transformGroup->flags & 0x400)) {
+    if (!(transformGroup->flags & MODEL_TRANSFORM_GROUP_FLAGS_400)) {
         guRotateF(transformGroup->matrixB, a, x, y, z);
-        transformGroup->flags |= 0x1400;
+        transformGroup->flags |= (MODEL_TRANSFORM_GROUP_FLAGS_400 | MODEL_TRANSFORM_GROUP_FLAGS_1000);
     } else {
         Matrix4f mtx;
 
@@ -385,10 +385,10 @@ ApiStatus ScaleGroup(Evt* script, s32 isInitialCall) {
 
     transformGroup = get_transform_group(index);
 
-    index = transformGroup->flags & 0x400; // TODO fix weird match
+    index = transformGroup->flags & MODEL_TRANSFORM_GROUP_FLAGS_400; // TODO fix weird match
     if (!(index)) {
         guScaleF(transformGroup->matrixB, x, y, z);
-        transformGroup->flags |= 0x1400;
+        transformGroup->flags |= (MODEL_TRANSFORM_GROUP_FLAGS_400 | MODEL_TRANSFORM_GROUP_FLAGS_1000);
     } else {
         Matrix4f mtx;
 
@@ -427,9 +427,9 @@ ApiStatus EnableGroup(Evt* script, s32 isInitialCall) {
     for (index = transformGroup->minChildModelIndex; index <= transformGroup->maxChildModelIndex; index++) {
         Model* model = get_model_from_list_index(index);
         if (flagUnset) {
-            model->flags &= ~0x2;
+            model->flags &= ~MODEL_FLAGS_ENABLED;
         } else {
-            model->flags |= 0x2;
+            model->flags |= MODEL_FLAGS_ENABLED;
         }
     }
 
@@ -608,10 +608,10 @@ void set_zone_enabled(s32 zoneID, s32 enabled) {
 
     switch (enabled) {
         case 0:
-            unkStruct->flags |= 0x10000;
+            unkStruct->flags |= TEMP_SET_ZONE_ENABLED_FLAGS_10000;
             break;
         case 1:
-            unkStruct->flags &= ~0x10000;
+            unkStruct->flags &= ~TEMP_SET_ZONE_ENABLED_FLAGS_10000;
             break;
     }
 }
@@ -628,10 +628,10 @@ ApiStatus SetZoneEnabled(Evt* script, s32 isInitialCall) {
 
     switch (enabled) {
         case FALSE:
-            unkStruct->flags |= 0x10000;
+            unkStruct->flags |= TEMP_SET_ZONE_ENABLED_FLAGS_10000;
             break;
         case TRUE:
-            unkStruct->flags &= ~0x10000;
+            unkStruct->flags &= ~TEMP_SET_ZONE_ENABLED_FLAGS_10000;
             break;
     }
 

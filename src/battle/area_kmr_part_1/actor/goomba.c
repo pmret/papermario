@@ -40,15 +40,15 @@ EvtSource N(init_802197AC);
 
 ActorPartDesc N(partsTable_802196C8)[] = {
     {
-        .flags = PART_FLAG_MULTI_TARGET,
+        .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
         .idleAnimations = N(idleAnimations_80219714),
         .defenseTable = N(defenseTable_80219610),
-        .eventFlags = 0,
-        .elementImmunityFlags = 0,
+        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_0,
         .unk_1C = 246,
     },
 };

@@ -21,7 +21,7 @@ void world_action_idle_update(void) {
     PlayerData* playerData = &gPlayerData;
     s32 wasMoving = FALSE;
 
-    if (playerStatus->animFlags & PLAYER_ANIM_FLAG_PEACH_PHYSICS) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         func_802B61E4_E23444();
         return;
     }
@@ -40,9 +40,9 @@ void world_action_idle_update(void) {
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_8C = 0.0f;
 
-        if (playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) {
+        if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
             anim = 0x90002;
-        } else if (!(playerStatus->animFlags & PLAYER_ANIM_FLAG_HOLDING_ITEM)) {
+        } else if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) {
             anim = 0x10002;
         } else if ((s8)playerStatus->prevActionState == ACTION_STATE_IDLE) {
             anim = 0x60005;
@@ -52,7 +52,7 @@ void world_action_idle_update(void) {
         suggest_player_anim_clearUnkFlag(anim);
     }
 
-    if (playerStatus->animFlags & PLAYER_ANIM_FLAG_GET_STAR_SPIRIT) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_GET_STAR_SPIRIT) {
         set_action_state(ACTION_STATE_GET_STAR_SPIRIT);
     } else {
         f32 angle;
@@ -96,7 +96,7 @@ void func_802B61E4_E23444(void) {
         playerStatus->currentSpeed = 0.0f;
         playerStatus->flags &= ~0xE;
 
-        if (!(playerStatus->animFlags & PLAYER_ANIM_FLAG_IN_DISGUISE)) {
+        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
             if (!(gGameStatusPtr->peachFlags & 0x10)) {
                 suggest_player_anim_clearUnkFlag(world_action_idle_peachAnims[gGameStatusPtr->peachAnimIdx]);
             } else {

@@ -31,7 +31,7 @@ INCLUDE_ASM(s32, "182B30", enable_actor_blur);
 void disable_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
-    if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & 2)) {
+    if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & ACTOR_PART_FLAG_2)) {
         DecorationTable* decorationTable = actorPart->decorationTable;
 
         if (decorationTable->unk_7DB != 0) {
@@ -46,7 +46,7 @@ void disable_actor_blur(Actor* actor) {
 void reset_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
-    if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & 2)) {
+    if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & ACTOR_PART_FLAG_2)) {
         DecorationTable* decorationTable = actorPart->decorationTable;
 
         if (decorationTable->unk_7DB != 0) {
@@ -62,7 +62,7 @@ void reset_actor_blur(Actor* actor) {
 void func_80254610(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
 
-    if (actorPart->idleAnimations != NULL && !(actorPart->flags & 2)) {
+    if (actorPart->idleAnimations != NULL && !(actorPart->flags & ACTOR_PART_FLAG_2)) {
         DecorationTable* decorationTable = actorPart->decorationTable;
 
         decorationTable->unk_7DB = 0;

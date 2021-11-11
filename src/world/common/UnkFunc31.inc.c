@@ -45,8 +45,8 @@ ApiStatus N(UnkAlphaFunc)(Evt* script, s32 isInitialCall) {
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* itemEntity = get_item_entity(i);
 
-            if (itemEntity != NULL && itemEntity->flags & 0x10) {
-                itemEntity->flags |= 0x8000000;
+            if (itemEntity != NULL && itemEntity->flags & ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX) {
+                itemEntity->flags |= ENTITY_FLAGS_8000000;
             }
         }
 
@@ -95,7 +95,7 @@ ApiStatus N(UnkFunc29)(Evt* script, s32 isInitialCall) {
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             Entity* entity = get_item_entity(i);
             if (entity != NULL && entity->flags & 0x10) {
-                entity->flags &= ~0x08000000;
+                entity->flags &= ~ENTITY_FLAGS_8000000;
             }
         }
 

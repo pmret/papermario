@@ -766,7 +766,7 @@ typedef struct BattleStatus {
     /* 0x1AA */ char unk_1AA[4];
     /* 0x1AE */ s16 submenuIcons[24]; /* icon IDs */
     /* 0x1DE */ u8 submenuMoves[24]; /* move IDs */
-    /* 0x1F6 */ u8 submenuEnabled[24];
+    /* 0x1F6 */ s8 submenuEnabled[24];
     /* 0x20E */ u8 submenuMoveCount;
     /* 0x20F */ char unk_20F;
     /* 0x210 */ s32 currentButtonsDown;

@@ -23,7 +23,7 @@ void func_8024003C_B1CA8C(void) {
 
     if (playerStatus->flags & 1) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
-        entityModel->flags |= 0x200;
+        entityModel->flags |= MODEL_FLAGS_FLAG_200;
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
                           &screenX, &screenY, &screenZ);
@@ -74,7 +74,7 @@ void func_802402F4_B1CD44(void) {
 
     if (playerStatus->flags & 1) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
-        entityModel->flags |= 0x200;
+        entityModel->flags |= MODEL_FLAGS_FLAG_200;
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,
                           &screenX, &screenY, &screenZ);

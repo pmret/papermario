@@ -65,7 +65,7 @@ Trigger* create_trigger(TriggerDefinition* def) {
 
     ASSERT(ret != NULL);
 
-    ret->flags.flags = def->flags | 1;
+    ret->flags.flags = def->flags | TRIGGER_DEFINITION_FLAGS_1;
     ret->params1 = def->colliderIndex;
     ret->params2 = def->flagIndex;
     ret->unk_28 = def->unk_1C;

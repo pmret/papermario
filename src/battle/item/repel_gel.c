@@ -9,7 +9,7 @@ ApiStatus N(func_802A123C_72DDAC)(Evt* script, s32 isInitialCall) {
 
     inflict_status(player, STATUS_E, script->varTable[0]);
     player->status = 0;
-    part->flags |= 0x100;
+    part->flags |= ACTOR_PART_FLAG_100;
 
     return ApiStatus_DONE2;
 }

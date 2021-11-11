@@ -105,7 +105,7 @@ void func_80248170(s32 idx) {
     Window* window = &gWindows[idx];
 
     if (window->updateCounter == 8) {
-        window->flags &= ~0x8;
+        window->flags &= ~WINDOW_FLAGS_8;
         set_window_update(idx, 1);
     }
 }
