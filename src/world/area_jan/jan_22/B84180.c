@@ -62,9 +62,9 @@ ApiStatus N(func_80240B94_B84D14)(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
-        } else if (enemy->flags & 0x40000000) {
+        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
-            enemy->flags &= ~0x40000000;
+            enemy->flags &= ~ENEMY_FLAGS_40000000;
         }
 
         posX = npc->pos.x;

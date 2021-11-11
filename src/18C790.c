@@ -19,25 +19,28 @@ ApiStatus func_8025E044(Evt* script, s32 isInitialCall) {
     EntityModel* model;
 
     model = get_entity_model(*virtual_entity_get_by_index(script->varTable[6]));
-    model->flags &= 0xFFFF000F;
-    model->flags |= 0x8;
+    model->flags &= ~MODEL_FLAGS_MASK_FFF0 ;
+    model->flags |= MODEL_FLAGS_TRANSFORM_GROUP_MEMBER;
     model = get_entity_model(*virtual_entity_get_by_index(script->varTable[7]));
-    model->flags &= 0xFFFF000F;
-    model->flags |= 0x8;
+    model->flags &= ~MODEL_FLAGS_MASK_FFF0 ;
+    model->flags |= MODEL_FLAGS_TRANSFORM_GROUP_MEMBER;
     model = get_entity_model(*virtual_entity_get_by_index(script->varTable[8]));
-    model->flags &= 0xFFFF000F;
-    model->flags |= 0x8;
+    model->flags &= ~MODEL_FLAGS_MASK_FFF0 ;
+    model->flags |= MODEL_FLAGS_TRANSFORM_GROUP_MEMBER;
     model = get_entity_model(*virtual_entity_get_by_index(script->varTable[9]));
-    model->flags &= 0xFFFF000F;
-    model->flags |= 0x8;
+    model->flags &= ~MODEL_FLAGS_MASK_FFF0 ;
+    model->flags |= MODEL_FLAGS_TRANSFORM_GROUP_MEMBER;
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_8025E108(Evt* script, s32 isInitialCall) {
     EntityModel* model = get_entity_model(*virtual_entity_get_by_index(script->varTable[9]));
-    model->flags &= 0xFFFF000F;
-    model->flags |= 0x8;
+    model->flags &= ~(MODEL_FLAGS_USES_CUSTOM_GFX | MODEL_FLAGS_FLAG_20 | MODEL_FLAGS_FLAG_40
+        | MODEL_FLAGS_HAS_LOCAL_VERTEX_COPY | MODEL_FLAGS_USE_CAMERA_UNK_MATRIX | MODEL_FLAGS_FLAG_200
+        | MODEL_FLAGS_HAS_TRANSFORM_APPLIED | MODEL_FLAGS_HAS_TEX_PANNER | MODEL_FLAGS_USES_TRANSFORM_MATRIX
+        | MODEL_FLAGS_FLAG_2000 | MODEL_FLAGS_FLAG_4000 | MODEL_FLAGS_FLAG_8000);
+    model->flags |= MODEL_FLAGS_TRANSFORM_GROUP_MEMBER;
 
     return ApiStatus_DONE2;
 }

@@ -126,7 +126,7 @@ void gravity_use_fall_parms(void) {
 }
 
 void phys_update_falling(void) {
-    if (gPlayerStatus.actionState != ACTION_STATE_LAND_ON_SWITCH && gPlayerStatus.actionState != ACTION_STATE_BOUNCE) {
+    if (gPlayerStatus.actionState != ACTION_STATE_LANDING_ON_SWITCH && gPlayerStatus.actionState != ACTION_STATE_BOUNCE) {
         s32* colliderID;
 
         gPlayerStatus.position.y = player_check_collision_below(func_800E34D8(), &colliderID);
@@ -333,8 +333,8 @@ void func_800E4F10(void) {
     playerStatus->position.x = x;
     playerStatus->position.z = z;
 
-    if (tempB != 0 && temp < 0 && playerStatus->actionState != ACTION_STATE_18 && playerStatus->currentSpeed != 0.0f) {
-        set_action_state(ACTION_STATE_18);
+    if (tempB != 0 && temp < 0 && playerStatus->actionState != ACTION_STATE_STEP_UP_PEACH && playerStatus->currentSpeed != 0.0f) {
+        set_action_state(ACTION_STATE_STEP_UP_PEACH);
     }
 }
 

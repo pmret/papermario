@@ -661,7 +661,7 @@ Trigger* bind_trigger(EvtSource* script, s32 flags, s32 triggerFlagIndex, s32 tr
     Trigger* trigger;
     TriggerDefinition def;
 
-    def.flags = flags | 0x1000000;
+    def.flags = flags | TRIGGER_DEFINITION_FLAGS_1000000;
     def.flagIndex = triggerFlagIndex;
     def.unk_14 = 0;
     def.function = evt_bound_script_trigger_handler;

@@ -18,7 +18,7 @@ s32 has_enchanted_part(Actor* actor) {
     s32 ret = FALSE;
 
     while (partIt != NULL) {
-        if (partIt->eventFlags & 0xC0000) {
+        if (partIt->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_80000)) {
             ret = TRUE;
             break;
         } else {
@@ -174,7 +174,7 @@ s32 calc_enemy_test_target(Actor* actor) {
 
     hitResult = HIT_RESULT_HIT;
     target2 = target;
-    if (targetPart->eventFlags & EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transStatus == STATUS_E) {
+    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transStatus == STATUS_E) {
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_MAGIC)) {
             hitResult = HIT_RESULT_MISS;
         }
@@ -227,9 +227,9 @@ s32 calc_enemy_test_target(Actor* actor) {
     }
 
     if (target2->stoneStatus == STATUS_STONE) {
-        return HIT_RESULT_IMMUNE;  
+        return HIT_RESULT_IMMUNE;
     }
-        
+
     if (target2->staticStatus == STATUS_STATIC) {
         return HIT_RESULT_HIT_STATIC;
     }
@@ -287,11 +287,11 @@ s32 calc_enemy_damage_target(Actor* attacker) {
             break;
     }
 
-    if (targetPart->eventFlags & EVENT_FLAG_ILLUSORY) {
+    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
         return HIT_RESULT_MISS;
     }
 
-    if (target->transStatus == STATUS_E || targetPart->eventFlags & EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)) {
+    if (target->transStatus == STATUS_E || targetPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)) {
         return HIT_RESULT_MISS;
     }
 
@@ -303,7 +303,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         return HIT_RESULT_HIT;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_BLAST) {
-        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT) && (targetPart->eventFlags & EVENT_FLAG_EXPLOSIVE)) {
+        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT) && (targetPart->eventFlags & ACTOR_EVENT_FLAG_EXPLOSIVE)) {
             do {
                 play_hit_sound(attacker, state->goalPos.x, state->goalPos.y, state->goalPos.z, 3);
             } while (0); // TODO ?
@@ -313,7 +313,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     }
     if ((battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE) && (target->flags & ACTOR_FLAG_FLYING)) {
         play_hit_sound(attacker, state->goalPos.x, state->goalPos.y, state->goalPos.z, 1);
-        return HIT_RESULT_MISS_QUAKE;
+        return HIT_RESULT_QUAKE_IMMUNE;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
         playFX_24(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 0x18);
@@ -331,7 +331,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     }
 
     if (!(attacker->staticStatus == STATUS_STATIC)) {
-        if ((target->staticStatus == STATUS_STATIC) || (targetPart->eventFlags & EVENT_FLAG_ELECTRIFIED)) {
+        if ((target->staticStatus == STATUS_STATIC) || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)) {
             if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_ELECTRIC | DAMAGE_TYPE_NO_CONTACT))) {
                 if (!(battleStatus->currentAttackEventSuppression & 8)) {
                     if (!has_enchanted_part(attacker)) {
@@ -419,7 +419,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     switch (actorMasked) {
         case ACTOR_PLAYER:
             // TODO figure out how to better write target->debuff >= STATUS_POISON
-            if ((target->debuff == 0 || target->debuff >= STATUS_POISON) && (target->stoneStatus == STATUS_END) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_2000000)) {
+            if ((target->debuff == 0 || target->debuff >= STATUS_POISON) && (target->stoneStatus == STATUS_END) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                 s32 blocked;
 
                 if (player_team_is_ability_active(target, ABILITY_BERSERKER)) {
@@ -441,7 +441,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
             break;
         case ACTOR_PARTNER:
             if (target->stoneStatus == STATUS_END) {
-                if (target->koStatus == STATUS_END && !(battleStatus->currentAttackElement & DAMAGE_TYPE_2000000)) {
+                if (target->koStatus == STATUS_END && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                     if (check_block_input(BUTTON_A)) {
                         damage = 0;
                         sfx_play_sound_at_position(SOUND_UNKNOWN_231, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -462,12 +462,12 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     event = EVENT_HIT_COMBO;
     if (damage <= 0) {
         target->hpChangeCounter = 0;
-        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_40000000)) {
-            hitResult = HIT_RESULT_MISS_QUAKE;
-            event = EVENT_23;
+        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
+            hitResult = HIT_RESULT_QUAKE_IMMUNE;
+            event = EVENT_UNKNOWN_TRIGGER;
         } else {
-            hitResult = HIT_RESULT_MISS_QUAKE;
-            event = EVENT_23;
+            hitResult = HIT_RESULT_QUAKE_IMMUNE;
+            event = EVENT_UNKNOWN_TRIGGER;
             if (target->currentHP <= 0) {
                 event = EVENT_DEATH;
             }
@@ -478,7 +478,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         target->hpChangeCounter -= damage;
         battleStatus->lastAttackDamage = 0;
         hitResult = HIT_RESULT_HIT;
-        if (!(targetPart->flags & PART_FLAG_2000)) {
+        if (!(targetPart->flags & ACTOR_PART_FLAG_2000)) {
             if (!(gBattleStatus.flags1 & BS_FLAGS1_2000000)) {
                 if (!(target->flags & ACTOR_FLAG_NO_DMG_APPLY)) {
                     target->currentHP -= damage;
@@ -504,7 +504,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         if (event == EVENT_HIT_COMBO) {
             event = EVENT_HIT;
         }
-        if (event == EVENT_23) {
+        if (event == EVENT_UNKNOWN_TRIGGER) {
             event = EVENT_IMMUNE;
         }
         if (target->currentHP <= 0 && event == EVENT_IMMUNE) {
@@ -520,7 +520,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (battleStatus->currentAttackElement & (DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_JUMP)) {
-            if (targetPart->eventFlags & EVENT_FLAG_FLIPABLE) {
+            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE) {
                 if (event == EVENT_HIT) {
                     event = EVENT_FLIP_TRIGGER;
                 }
@@ -533,11 +533,11 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
     if (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) {
         if (battleStatus->currentAttackElement & (DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_JUMP)) {
-            if (targetPart->eventFlags & EVENT_FLAG_FLIPABLE) {
+            if (targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE) {
                 if (event == EVENT_HIT_COMBO) {
                     event = EVENT_FLIP_TRIGGER;
                 }
-                if (event == EVENT_23) {
+                if (event == EVENT_UNKNOWN_TRIGGER) {
                     event = EVENT_FLIP_TRIGGER;
                 }
             }
@@ -550,7 +550,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                 event = EVENT_BURN_HIT;
             }
             if (event == EVENT_DEATH) {
-                event = EVENT_41;
+                event = EVENT_FIRE_DEATH;
             }
             isFire = TRUE;
         }
@@ -558,13 +558,13 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
     if (gBattleStatus.flags1 & BS_FLAGS1_ATK_BLOCKED) {
         if (event == EVENT_HIT_COMBO) {
-            event = EVENT_24;
+            event = EVENT_18;
         }
         if (event == EVENT_HIT) {
             event = EVENT_BLOCK;
         }
-        if (event == EVENT_23) {
-            event = EVENT_24;
+        if (event == EVENT_UNKNOWN_TRIGGER) {
+            event = EVENT_18;
         }
         if (event == EVENT_IMMUNE) {
             event = EVENT_BLOCK;
@@ -633,7 +633,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                             }
 
                             if (statusInflicted) {
-                                if (event == EVENT_23) {
+                                if (event == EVENT_UNKNOWN_TRIGGER) {
                                     event = EVENT_HIT_COMBO;
                                 }
                                 if (event == EVENT_IMMUNE) {
@@ -675,7 +675,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                         // immune star fx?
                         func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, -3);
                     }
-                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_SMASH)) {
+                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_SMASH)) {
                     show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 1);
                     func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                 } else {
@@ -689,7 +689,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                     if (!statusInflicted2 && !statusInflicted) {
                         func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
                     }
-                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_SMASH)) {
+                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_SMASH)) {
                     show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
                     func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                 } else {
@@ -720,7 +720,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         play_hit_sound(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, hitSound);
     }
 
-    if ((battleStatus->lastAttackDamage <= 0 && !statusInflicted2 && !isEnchanted) || targetPart->flags & PART_FLAG_2000) {
+    if ((battleStatus->lastAttackDamage <= 0 && !statusInflicted2 && !isEnchanted) || targetPart->flags & ACTOR_PART_FLAG_2000) {
         sfx_play_sound_at_position(SOUND_10C, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
@@ -783,7 +783,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     func_80266ADC(target);
     if ((
             attacker->staticStatus != STATUS_STATIC
-            && (target->staticStatus == STATUS_STATIC || (targetPart->eventFlags & EVENT_FLAG_ELECTRIFIED))
+            && (target->staticStatus == STATUS_STATIC || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED))
         )
         && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
         && !(battleStatus->currentAttackEventSuppression & 8)
@@ -834,7 +834,7 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
         if (dispatchEvent == EVENT_HIT_COMBO) {
             dispatchEvent = EVENT_HIT;
         }
-        if (dispatchEvent == EVENT_23) {
+        if (dispatchEvent == EVENT_UNKNOWN_TRIGGER) {
             dispatchEvent = EVENT_IMMUNE;
         }
     }
@@ -1252,9 +1252,9 @@ ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
         s32 i;
 
         if (dropper->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
-            spawnMode = ITEM_SPAWN_MODE_UNKNOWN_19;
+            spawnMode = ITEM_SPAWN_MODE_TOSS_FADE3;
         } else {
-            spawnMode = ITEM_SPAWN_MODE_UNKNOWN_17;
+            spawnMode = ITEM_SPAWN_MODE_TOSS_FADE1;
         }
 
         for (i = 0; i < numToDrop; i++) {

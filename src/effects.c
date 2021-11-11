@@ -329,8 +329,8 @@ void update_effects(void) {
 
         for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
             if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
-                if (!(effectGraphics->flags & FX_GRAPHICS_2)) {
-                    effectGraphics->flags |= FX_GRAPHICS_2;
+                if (!(effectGraphics->flags & FX_GRAPHICS_FLAGS_2)) {
+                    effectGraphics->flags |= FX_GRAPHICS_FLAGS_2;
                     effectGraphics->freeDelay = 3;
                 }
             }
@@ -339,18 +339,18 @@ void update_effects(void) {
         for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
             EffectInstance* effectInstance = gEffectInstances[i];
 
-            if (effectInstance != NULL && (effectInstance->flags & 1)) {
-                effectInstance->effect->flags &= ~0x2;
+            if (effectInstance != NULL && (effectInstance->flags & EFFECT_INSTANCE_FLAGS_1)) {
+                effectInstance->effect->flags &= ~FX_GRAPHICS_FLAGS_2;
 
                 if (gGameStatusPtr->isBattle) {
-                    if (effectInstance->flags & 4) {
+                    if (effectInstance->flags & EFFECT_INSTANCE_FLAGS_4) {
                         effectInstance->effect->update(effectInstance);
-                        effectInstance->flags |= 8;
+                        effectInstance->flags |= EFFECT_INSTANCE_FLAGS_8;
                     }
                 } else {
-                    if (!(effectInstance->flags & 4)) {
+                    if (!(effectInstance->flags & EFFECT_INSTANCE_FLAGS_4)) {
                         effectInstance->effect->update(effectInstance);
-                        effectInstance->flags |= 8;
+                        effectInstance->flags |= EFFECT_INSTANCE_FLAGS_8;
                     }
                 }
             }
@@ -358,7 +358,7 @@ void update_effects(void) {
 
         for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
             if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
-                if (effectGraphics->flags & FX_GRAPHICS_2) {
+                if (effectGraphics->flags & FX_GRAPHICS_FLAGS_2) {
                     if (effectGraphics->freeDelay != 0) {
                         effectGraphics->freeDelay--;
                     } else {
@@ -401,15 +401,15 @@ void render_effects_UI(void) {
         EffectInstance* effectInstance = gEffectInstances[i];
 
         if (effectInstance != NULL) {
-            if (effectInstance->flags & 1) {
-                if (effectInstance->flags & 8) {
+            if (effectInstance->flags & EFFECT_INSTANCE_FLAGS_1) {
+                if (effectInstance->flags & EFFECT_INSTANCE_FLAGS_8) {
                     void (*renderUI)(EffectInstance* effect);
 
-                    if (gGameStatusPtr->isBattle && !(effectInstance->flags & 4)) {
+                    if (gGameStatusPtr->isBattle && !(effectInstance->flags & EFFECT_INSTANCE_FLAGS_4)) {
                         continue;
                     }
 
-                    if (!gGameStatusPtr->isBattle && effectInstance->flags & 4) {
+                    if (!gGameStatusPtr->isBattle && effectInstance->flags & EFFECT_INSTANCE_FLAGS_4) {
                         continue;
                     }
 

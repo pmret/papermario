@@ -107,7 +107,7 @@ ApiStatus N(AverageTargetStatusChance)(Evt* script, s32 isInitialCall) {
             targetActorDescBaseStatusChance = 0;
         }
 
-        if (targetActorPart->eventFlags & 0x20) {
+        if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
             targetActorDescBaseStatusChance = 0;
         }
 

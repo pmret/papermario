@@ -158,7 +158,7 @@ void func_802B6000_E26710(void) {
             }
             break;
         case 11:
-            set_action_state(ACTION_STATE_LAND_ON_SWITCH);
+            set_action_state(ACTION_STATE_LANDING_ON_SWITCH);
             playerStatus->fallState++;
             enable_player_input();
             break;
