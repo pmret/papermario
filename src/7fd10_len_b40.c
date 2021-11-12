@@ -13,7 +13,7 @@ void func_800E6860(void) {
 }
 
 // playerStatus getting coppied to a0 - how? inlining?
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 func_800E6904(void) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     //PlayerStatus* playerStatus = &gPlayerStatus; // doesn't change codegen to use it, so commented out for now

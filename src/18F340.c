@@ -202,7 +202,7 @@ ApiStatus ConsumeLifeShroom(Evt *script, s32 isInitialCall) {
 }
 
 // TODO something wrong with the struct breakdown for BattleStatus
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;

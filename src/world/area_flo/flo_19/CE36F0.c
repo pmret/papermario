@@ -17,7 +17,7 @@ MapConfig N(config) = {
 };
 
 // Extraneous END_CASE_MULTI
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 EvtSource N(802409C0) = SCRIPT({
     GetEntryID(EVT_VAR(0));
     match EVT_VAR(0) {

@@ -189,7 +189,7 @@ EvtSource N(updateTexturePan_802417A0) = SCRIPT({
 const char N(flo_10_name_hack)[];
 
 // BUG: missing END_SPAWN_THREADs
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 EvtSource N(8024183C) = SCRIPT({
     DisablePlayerInput(TRUE);
     TranslateGroup(100, 0, 45, 0);

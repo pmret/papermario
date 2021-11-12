@@ -148,7 +148,7 @@ void peach_set_disguise_anim(s32);
 
 void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
               s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
-              s32 drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
+              void* drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
 s32 get_msg_width(s32 msgID, u16 charset);
 
 s32 partner_player_can_pause(void);
@@ -376,6 +376,7 @@ void remove_part_shadow(s32 actorID, s32 partIndex);
 void create_part_shadow_by_ref(s32 arg0, ActorPart* part);
 
 void func_80266D6C(ActorPart*, s32);
+char* int_to_string(s32, char*, s32);
 
 Evt* get_script_by_index(s32 index);
 

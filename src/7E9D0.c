@@ -81,7 +81,7 @@ void set_action_state(s32 actionState) {
 
     if (playerStatus->animFlags & 0x4000) {
         // TODO figure this out
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
         if (
             actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK ||
             actionState == ACTION_STATE_RUN || actionState == ACTION_STATE_JUMP ||
@@ -316,7 +316,7 @@ void peach_sync_disguise_npc(void) {
 }
 
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 Npc* peach_make_disguise_npc(s32 peachDisguise) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     NpcBlueprint blueprint;

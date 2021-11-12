@@ -188,7 +188,7 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", ShowShopPurchaseDialog, Evt* script, s32 isInitialCall);
 
 //dumb stuff
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 extern s32 D_8008A680[337][2];
 
 void shop_open_item_select_popup(s32 mode) {
@@ -312,7 +312,7 @@ void shop_draw_item_desc(s32 arg0, s32 posX, s32 posY) {
 }
 
 // Problems with the struct iteration
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void draw_shop_items(void) {
     Shop* shop = gGameStatusPtr->mapShop;
     StaticInventoryItem* staticItems;

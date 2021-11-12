@@ -401,7 +401,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
 }
 
 // Ordering shtuff
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height) {
     Camera* camera = &gCameras[id];
 

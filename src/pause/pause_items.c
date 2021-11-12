@@ -53,7 +53,7 @@ INCLUDE_ASM(s32, "pause/pause_items", pause_items_draw_contents);
 
 extern u32 D_802705C4;
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void pause_items_load_items(s32 invItems) {
     PlayerData* playerData = &gPlayerData;
     s32 i;

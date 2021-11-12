@@ -107,7 +107,7 @@ ApiStatus func_802A9210_42D120(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void func_802A9310_42D220(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;

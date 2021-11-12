@@ -4,7 +4,7 @@
 extern f64 D_8023C060_70BD00;
 extern s32 D_8023C070;
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 ApiStatus func_80238000_707CA0(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;

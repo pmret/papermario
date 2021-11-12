@@ -33,7 +33,7 @@ ApiStatus func_80240000_B1B570(Evt* script, s32 isInitialCall) {
 }
 
 // float shenanigans
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 ApiStatus func_802400FC_B1B66C(Evt* script,  s32 isInitialCall) {
     Npc* npc = get_npc_safe(NPC_PARTNER);
 
