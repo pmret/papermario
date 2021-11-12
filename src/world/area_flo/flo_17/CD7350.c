@@ -389,7 +389,7 @@ StaticNpc N(npcGroup_80244688) = {
     .pos = { -185.0f, 90.0f, 10.0f },
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .yaw = 270,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 25,
     .itemDrops = {
         { ITEM_SUPER_SHROOM, 2, 0 },
@@ -428,7 +428,7 @@ StaticNpc N(npcGroup_80244878) = {
     .pos = { 200.0f, 90.0f, -25.0f },
     .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .yaw = 90,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .itemDropChance = 25,
     .itemDrops = {
         { ITEM_SUPER_SHROOM, 2, 0 },
@@ -467,7 +467,7 @@ StaticNpc N(npcGroup_80244A68) = {
     .pos = { 0.0f, -1000.0f, 0.0f },
     .flags = NPC_FLAG_4 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .yaw = 0,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 1,
@@ -499,7 +499,7 @@ StaticNpc N(npcGroup_80244C58) = {
     .pos = { 0.0f, -1000.0f, 0.0f },
     .flags = NPC_FLAG_4 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .yaw = 0,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 1,
@@ -531,7 +531,7 @@ StaticNpc N(npcGroup_80244E48) = {
     .pos = { 0.0f, -1000.0f, 0.0f },
     .flags = NPC_FLAG_4 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .yaw = 0,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 1,
@@ -563,7 +563,7 @@ StaticNpc N(npcGroup_80245038) = {
     .pos = { 0.0f, -1000.0f, 0.0f },
     .flags = NPC_FLAG_4 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .yaw = 0,
-    .dropFlags = 0x80,
+    .dropFlags = NPC_DROP_FLAGS_80,
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 1,
@@ -1168,9 +1168,9 @@ ApiStatus N(func_802424D8_CD97B8)(Evt* script, s32 isInitialCall) {
             script->functionTemp[1] = 0;
             fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &var);
             enemy->unk_B0 &= ~4;
-        } else if (enemy->flags & 0x40000000) {
+        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;
-            enemy->flags &= ~0x40000000;
+            enemy->flags &= ~ENEMY_FLAGS_40000000;
         }
     }
 
@@ -1292,7 +1292,7 @@ ApiStatus N(func_80242918_CD9BF8)(Evt* script, s32 isInitialCall) {
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
-        enemy->flags |= 0x200000;
+        enemy->flags |= ENEMY_FLAGS_200000;
         npc->flags = (npc->flags & ~0x200) | 8;
         enemy->varTable[10] = 0;
         enemy->varTable[11] = -1;

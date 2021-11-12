@@ -331,7 +331,7 @@ void partner_create_npc(void) {
     blueprintPtr = &blueprint;
     dma_copy(partnerEntry->dmaStart, partnerEntry->dmaEnd, partnerEntry->dmaDest);
 
-    blueprint.flags = 0x4000100;
+    blueprint.flags = NPC_FLAG_PARTICLE | NPC_FLAG_100;
     blueprint.initialAnim = (*partner)->idle;
     blueprint.onUpdate = NULL;
     blueprint.onRender = NULL;

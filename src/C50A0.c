@@ -108,20 +108,20 @@ ItemEntity* get_item_entity(s32 itemEntityIndex) {
 void item_entity_disable_shadow(ItemEntity* itemEntity) {
     Shadow* shadow;
 
-    itemEntity->flags |= 0x40;
+    itemEntity->flags |= ENTITY_FLAGS_CONTINUOUS_COLLISION;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
-        shadow->flags |= 1;
+        shadow->flags |= SHADOW_FLAGS_1;
     }
 }
 
 void item_entity_enable_shadow(ItemEntity* itemEntity) {
     Shadow* shadow;
 
-    itemEntity->flags &= ~0x40;
+    itemEntity->flags &= ~ENTITY_FLAGS_CONTINUOUS_COLLISION;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
-        shadow->flags &= ~1;
+        shadow->flags &= ~SHADOW_FLAGS_1;
     }
 }
 
@@ -250,12 +250,12 @@ void func_80133A94(s32 idx, s32 itemID) {
 
     item->itemID = itemID;
 
-    item->flags |= 0x4000;
-    item->flags &= ~0x40000;
+    item->flags |= ENTITY_FLAGS_4000;
+    item->flags &= ~ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
 
     if (gItemTable[itemID].typeFlags & 0x1000) {
-        item->flags |= 0x40000;
-        item->flags &= ~0x4000;
+        item->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
+        item->flags &= ~ENTITY_FLAGS_4000;
     }
 
     item_entity_load(item);
@@ -270,7 +270,7 @@ void set_item_entity_flags(s32 index, s32 flags) {
     ItemEntity* itemEntity = D_801565A0[index];
 
     itemEntity->flags |= flags;
-    if (itemEntity->flags & 0x200000) {
+    if (itemEntity->flags & ENTITY_FLAGS_200000) {
         D_801565A8 = 1;
     }
 }
@@ -284,7 +284,7 @@ void clear_item_entity_flags(s32 index, s32 flags) {
 void func_801341B0(s32 index) {
     ItemEntity* itemEntity = D_801565A0[index];
     gOverrideFlags |= 0x40;
-    itemEntity->flags |= 0x100;
+    itemEntity->flags |= ENTITY_FLAGS_100;
 }
 
 /// @returns TRUE when "you got X" popup is on-screen

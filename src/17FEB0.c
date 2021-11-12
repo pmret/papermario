@@ -18,7 +18,7 @@ s32 calc_item_check_hit(void) {
         actorPart = get_actor_part(actor, currentTargetPart);
         ASSERT(actorPart != NULL);
 
-        if (!(actorPart->eventFlags & 0x20)) {
+        if (!(actorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
             if (actor->transStatus == 0xE) {
                 return HIT_RESULT_MISS;
             }
@@ -26,7 +26,7 @@ s32 calc_item_check_hit(void) {
                 sfx_play_sound_at_position(0x10C, 0, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
                 return HIT_RESULT_IMMUNE;
             }
-            if ((battleStatus->currentAttackElement & 0x80) && (actorPart->eventFlags & 0x10)) {
+            if ((battleStatus->currentAttackElement & 0x80) && (actorPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP)) {
                 sfx_play_sound_at_position(0xE9, 0, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
                 return HIT_RESULT_LANDED_ON_SPIKE;
             }

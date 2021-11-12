@@ -1001,7 +1001,7 @@ ApiStatus evt_handle_bind(Evt* script) {
     Bytecode triggerOut = *args++;
     TriggerDefinition def;
 
-    def.flags = eventType | 0x1000000;
+    def.flags = eventType | TRIGGER_DEFINITION_FLAGS_1000000;
     def.flagIndex = evt_get_variable(script, colliderIDVar);
     def.colliderIndex = evt_get_variable_index(script, colliderIDVar);
     def.inputArg3 = a3;
@@ -1120,7 +1120,7 @@ ApiStatus evt_handle_bind_lock(Evt* script) {
     s32 a5 = *args++;
     TriggerDefinition def;
 
-    def.flags = eventType | 0x1000000;
+    def.flags = eventType | TRIGGER_DEFINITION_FLAGS_1000000;
     def.flagIndex = evt_get_variable(script, colliderIDVar);
     def.colliderIndex = evt_get_variable_index(script, colliderIDVar);
     def.unk_1C = itemList;

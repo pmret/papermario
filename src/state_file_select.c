@@ -5,7 +5,7 @@
 #include "hud_element.h"
 #include "sprite.h"
 
-s32 D_80077980[] = { &D_8038F800, &D_803B5000, &D_803DA800, };
+s32 D_80077980[] = { &D_8038F800, &D_803B5000, &heap_battleHead, };
 
 NUPiOverlaySegment D_8007798C = {
     .romStart = _163400_ROM_START,
@@ -366,7 +366,7 @@ void state_step_exit_file_select(void) {
                 Window* window = &gWindows[i];
 
                 if (window->parent == 44 || window->parent == -1) {
-                    flagSum += window->flags & 8;
+                    flagSum += window->flags & WINDOW_FLAGS_8;
                 }
             }
 

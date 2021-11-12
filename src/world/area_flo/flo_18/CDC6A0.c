@@ -1482,7 +1482,7 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_400000,
         .init = &N(init_80245B90),
         .yaw = 90,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 25,
         .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
@@ -1520,7 +1520,7 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_400000,
         .init = &N(init_80245C04),
         .yaw = 270,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 25,
         .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
@@ -1558,7 +1558,7 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_400000,
         .init = &N(init_80245C78),
         .yaw = 270,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 25,
         .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
@@ -1596,7 +1596,7 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_400000,
         .init = &N(init_80245AA8),
         .yaw = 90,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 25,
         .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },
@@ -1634,7 +1634,7 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_400000,
         .init = &N(init_80245B30),
         .yaw = 270,
-        .dropFlags = 0x80,
+        .dropFlags = NPC_DROP_FLAGS_80,
         .itemDropChance = 25,
         .itemDrops = {
             { ITEM_SUPER_SHROOM, 2, 0 },

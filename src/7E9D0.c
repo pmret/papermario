@@ -86,7 +86,7 @@ void set_action_state(s32 actionState) {
             actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK ||
             actionState == ACTION_STATE_RUN || actionState == ACTION_STATE_JUMP ||
             actionState == ACTION_STATE_BOUNCE || actionState == ACTION_STATE_HOP ||
-            actionState == ACTION_STATE_LAUNCH || actionState == ACTION_STATE_LAND_ON_SWITCH ||
+            actionState == ACTION_STATE_LAUNCH || actionState == ACTION_STATE_LANDING_ON_SWITCH ||
             actionState == ACTION_STATE_FALLING || actionState == ACTION_STATE_STEP_DOWN ||
             actionState == ACTION_STATE_LAND || actionState == ACTION_STATE_STEP_DOWN_LAND
         ) {
@@ -120,7 +120,7 @@ void set_action_state(s32 actionState) {
         }
     }
 
-    if (actionState == ACTION_STATE_SLIDE) {
+    if (actionState == ACTION_STATE_SLIDING) {
         playerStatus->flags |= 0x10;
         playerStatus->moveFrames = 0;
         playerStatus->flags &= ~0x4000;
@@ -218,7 +218,7 @@ void check_input_spin(void) {
     Temp8010F250* temp_8010F250 = &D_8010F250;
     Temp8010F250* temp2 = temp_8010F250;
 
-    if (!(playerStatus->flags & (PLAYER_ANIM_FLAG_8BIT_MARIO | PLAYER_ANIM_FLAG_PEACH_PHYSICS)) &&
+    if (!(playerStatus->flags & (PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO | PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) &&
         !(playerStatus->animFlags & 1) &&
         !(playerStatus->currentButtons & D_CBUTTONS) &&
         !is_ability_active(ABILITY_SLOW_GO)) {
@@ -260,9 +260,9 @@ void func_800E63A4(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (arg0 != 0) {
-        set_action_state(ACTION_STATE_SNEAKY_PARASOL);
+        set_action_state(ACTION_STATE_USE_SNEAKY_PARASOL);
     } else {
-        playerStatus->animFlags &= ~PLAYER_ANIM_FLAG_IN_DISGUISE;
+        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE;
         gGameStatusPtr->peachFlags &= ~0x2;
         playerStatus->peachDisguise = 0;
         free_npc_by_index(D_8010C96C);
@@ -282,7 +282,7 @@ void peach_check_for_parasol_input(void) {
             D_8010C92C--;
             if (D_8010C92C == 0) {
                 if (gGameStatusPtr->peachFlags & 2) {
-                    playerStatus->animFlags |= PLAYER_ANIM_FLAG_IN_DISGUISE;
+                    playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE;
                     gGameStatusPtr->peachFlags |= 2;
 
                     disguiseNpc = peach_make_disguise_npc(gGameStatusPtr->peachDisguise);
@@ -292,7 +292,7 @@ void peach_check_for_parasol_input(void) {
                 }
             }
         } else if (gGameStatusPtr->peachFlags & 4 && playerStatus->pressedButtons & B_BUTTON) {
-            set_action_state(ACTION_STATE_SNEAKY_PARASOL);
+            set_action_state(ACTION_STATE_USE_SNEAKY_PARASOL);
         }
     }
 }

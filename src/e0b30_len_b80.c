@@ -79,7 +79,7 @@ s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s
 
         if (!gGameStatusPtr->musicEnabled) {
             func_800559C4(musicSetting->songName);
-            musicSetting->flags &= ~1;
+            musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_1;
 
             return 1;
         } else {
@@ -91,9 +91,9 @@ s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s
             if (musicSetting->songID == songID && musicSetting->variation == variation) {
                 bgm_set_target_volume(volume);
 
-                if (musicSetting->flags & 4) {
+                if (musicSetting->flags & MUSIC_SETTINGS_FLAGS_4) {
                     func_80055B80(musicSetting->songName);
-                    musicSetting->flags &= ~4;
+                    musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_4;
                 }
 
                 return 2;
@@ -104,7 +104,7 @@ s32 _bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s
             musicSetting->variation = variation;
             musicSetting->fadeOutTime = fadeOutTime;
             musicSetting->unk_02 = 1;
-            musicSetting->flags &= ~2;
+            musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_2;
 
             return 1;
         }
@@ -128,7 +128,7 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
 
         if (!gGameStatusPtr->musicEnabled) {
             func_800559C4(musicSetting->songName);
-            musicSetting->flags &= ~1;
+            musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_1;
 
             return 1;
         } else {
@@ -142,9 +142,9 @@ s32 func_8014A964(s32 playerIndex, s32 songID, s32 variation, s32 fadeInTime, s1
             musicSetting->unk_0E = arg5;
             musicSetting->songID = songID;
             musicSetting->variation = variation;
-            musicSetting->flags |= 0x20;
+            musicSetting->flags |= MUSIC_SETTINGS_FLAGS_20;
             musicSetting->unk_02 = 1;
-            musicSetting->flags &= ~2;
+            musicSetting->flags &= ~MUSIC_SETTINGS_FLAGS_2;
 
             return 1;
         }
@@ -155,11 +155,11 @@ s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2) {
     MusicSettings* musicSettings = gMusicSettings;
     MusicSettings* musicSetting = &musicSettings[playerIndex];
 
-    if (!(musicSetting->flags & 1)) {
+    if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
         return 0;
     }
 
-    if (!(musicSetting->flags & 2)) {
+    if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_2)) {
         return 0;
     }
 
@@ -182,7 +182,7 @@ s32 func_8014AB0C(s32 playerIndex, s16 arg1) {
     MusicSettings* musicSettings = gMusicSettings;
     MusicSettings* musicSetting = &musicSettings[playerIndex];
 
-    if (!(musicSetting->flags & 1)) {
+    if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
         return 0;
     }
 
@@ -193,7 +193,7 @@ s32 func_8014AB60(s32 playerIndex, s16 arg1) {
     MusicSettings* musicSettings = gMusicSettings;
     MusicSettings* musicSetting = &musicSettings[playerIndex];
 
-    if (!(musicSetting->flags & 1)) {
+    if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
         return 0;
     }
 
@@ -204,7 +204,7 @@ s32 func_8014ABB4(s32 playerIndex, s16 arg1) {
     MusicSettings* musicSettings = gMusicSettings;
     MusicSettings* musicSetting = &musicSettings[playerIndex];
 
-    if (!(musicSetting->flags & 1)) {
+    if (!(musicSetting->flags & MUSIC_SETTINGS_FLAGS_1)) {
         return 0;
     }
 
@@ -268,7 +268,7 @@ void bgm_pop_song(void) {
     MusicSettings* musicSetting = &gMusicSettings[0];
 
     if (gGameStatusPtr->demoState == 0) {
-        musicSetting->flags |= 8;
+        musicSetting->flags |= MUSIC_SETTINGS_FLAGS_8;
         _bgm_set_song(0, musicSetting->unk_24, musicSetting->unk_28, 0, 8);
     }
 }
@@ -280,7 +280,7 @@ void bgm_push_song(s32 songID, s32 variation) {
         musicSetting->unk_24 = musicSetting->songID;
         musicSetting->unk_28 = musicSetting->variation;
         musicSetting->unk_2C = musicSetting->songName;
-        musicSetting->flags |= 4;
+        musicSetting->flags |= MUSIC_SETTINGS_FLAGS_4;
         bgm_set_song(0, songID, variation, 500, 8);
     }
 }
@@ -292,7 +292,7 @@ void bgm_pop_battle_song(void) {
         if (gOverrideFlags & 0x20000) {
             gOverrideFlags &= ~0x20000;
         } else {
-            musicSetting->flags |= 8;
+            musicSetting->flags |= MUSIC_SETTINGS_FLAGS_8;
             _bgm_set_song(0, musicSetting->unk_24, musicSetting->unk_28, 0, 8);
             func_80055590(0, 250);
         }
@@ -307,7 +307,7 @@ void bgm_push_battle_song(void) {
         musicSetting->unk_24 = musicSetting->songID;
         musicSetting->unk_28 = musicSetting->variation;
         musicSetting->unk_2C = musicSetting->songName;
-        musicSetting->flags |= 4;
+        musicSetting->flags |= MUSIC_SETTINGS_FLAGS_4;
         bgm_set_song(0, musicSetting->unk_1C, musicSetting->unk_20, 500, 8);
     }
 }
