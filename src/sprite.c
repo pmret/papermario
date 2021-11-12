@@ -322,7 +322,7 @@ s32 func_802DDEC4(s32 arg0) {
 
 INCLUDE_ASM(s32, "sprite", func_802DDEE4);
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 
 // There's a problem here: this matches if arg6 is an s32, but the uses of this function match if it is a u16...
 s32 func_802DDFF8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, u16 arg6) {

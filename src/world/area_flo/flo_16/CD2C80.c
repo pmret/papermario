@@ -343,7 +343,7 @@ EvtSource N(802451C4) = SCRIPT({
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // second npc_raycast_down_sides call
 void N(func_80241000_CD2E30)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;

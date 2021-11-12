@@ -3,7 +3,7 @@
 
 #include "ItemRefund.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 ApiStatus N(func_802A123C_71D9AC)(Evt* script, s32 isInitialCall) {
     s32 c8 = 200;
     s32 temp_s1 = 100 + rand_int(c8);

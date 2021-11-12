@@ -203,7 +203,7 @@ void entity_MulticoinBlock_check_if_inactive(Entity* entity) {
 
 extern s32 D_802E9E80;
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // tail merge + rodata
 s32 entity_block_handle_collision(Entity* entity) {
     u8 bVar1;

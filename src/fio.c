@@ -36,7 +36,7 @@ s32 fio_calc_header_checksum(void) {
     return sum;
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 fio_validate_header_checksums(void) {
     SaveData* saveData = D_800D95E8;
 

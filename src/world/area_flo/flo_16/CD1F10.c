@@ -422,7 +422,7 @@ ApiStatus N(func_8024011C_CD1F4C)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc18.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 typedef struct {
     s32 unk_00[8];
     char unk_20[0x64];

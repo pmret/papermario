@@ -541,7 +541,7 @@ void func_802A4A10(void) {
 INCLUDE_ASM(s32, "415D90", func_802A4A54);
 
 // getting there but needs work
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void func_802A5290(s32 arg0, s32 x, s32 y) {
     s16 temp_s1;
     s16 temp_s1_3;
@@ -658,7 +658,7 @@ void func_802A5738(s32 arg0, s32 x, s32 y) {
 }
 
 // regalloc, arg setting order dumbness
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void func_802A57C8(s32 arg0, s32 x, s32 y) {
     x += 11;
     y += 6;
@@ -760,7 +760,7 @@ s32 func_802A58D0(void) {
 INCLUDE_ASM(s32, "415D90", btl_state_update_player_menu);
 
 //requires above to be decomped
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void btl_state_draw_player_menu(void) {
     switch (gBattleState2) {
         case 1:

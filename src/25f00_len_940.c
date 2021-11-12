@@ -32,7 +32,7 @@ extern NUDMABuffer* D_800A3BD4;
 
 // s32 nuAuDmaCallBack(s32 addr, s32 len, void* state, s32 arg3);
 // WIP
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 arg3) {
     NUDMABuffer *temp_s1;
     NUDMABuffer *temp_a1;

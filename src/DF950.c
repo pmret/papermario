@@ -370,7 +370,7 @@ void func_80149A6C(s32 soundID, s32 keepPlaying) {
     }
 }
 
-#ifdef NON_MATCHING // weird & 0xFF everywhere
+#ifdef NON_EQUIVALENT // weird & 0xFF everywhere
 void sfx_play_sound_with_params(s32 soundID, u8 arg1, u8 arg2, s16 arg3) {
     AlternatingSoundSet* alternatingSound;
 

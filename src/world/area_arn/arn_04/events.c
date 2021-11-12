@@ -430,7 +430,7 @@ ApiStatus N(func_80240B94_BE4344)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 //second npc_raycast_down_sides call
 void N(func_80241040_BE47F0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;

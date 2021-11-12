@@ -396,7 +396,7 @@ INCLUDE_ASM(s32, "30450", func_80055CC4);
 
 s32 func_80055CE8(s32 songName, s32* arg1, BGMPlayer** player);
 // We need to figure out what currentTrackData is a list of
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 func_80055CE8(s32 songName, s32* arg1, BGMPlayer** player) {
     UnkAl19E0* temp_a3 = D_8009A5C0;
     s32 ret = 0;

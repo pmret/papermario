@@ -611,7 +611,7 @@ EvtSource N(makeEntities) = SCRIPT({
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // second npc_raycast_down_sides call
 void N(func_80241040_BE47F0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -982,7 +982,7 @@ void N(func_80241A14_CD8CF4)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 }
 
 // enemy2 is being copied to a0
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 ApiStatus N(func_80241C64_CD8F44)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
