@@ -1165,7 +1165,7 @@ NpcGroupList N(npcGroupList_802478E8) = {
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void N(func_80240B00_BED8F0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

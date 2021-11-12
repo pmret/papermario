@@ -169,7 +169,7 @@ void func_800F4D28(PopupMessage* popup, s32 x, s32 y) {
     }
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void create_popup_menu(PopupMenu* popup) {
     PopupMenu* otherPopup;
     s8 entryCount;

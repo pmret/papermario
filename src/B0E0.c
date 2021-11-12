@@ -9,7 +9,7 @@ void func_80030210(Camera* camera, f32 arg1, f32 arg2, s32 arg3);
 
 void update_camera_mode_unused(Camera* camera);
 // Issues with zero float temp?
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void update_camera_mode_unused(Camera* camera) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 temp_f30;
@@ -202,7 +202,7 @@ INCLUDE_ASM(s32, "B0E0", update_camera_from_controller);
 
 void update_camera_zone_interp(Camera* camera);
 // Mostly issues with the switch
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void update_camera_zone_interp(Camera* camera) {
     CameraControlSettings* cs;
     f32 targetX;

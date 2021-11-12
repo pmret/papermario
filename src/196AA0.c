@@ -91,7 +91,7 @@ void func_80268858(void) {
 }
 
 // action_cmd_current_main - calls current action command's main func
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void func_80268938(void) {
     enum ActionCommand ac;
 

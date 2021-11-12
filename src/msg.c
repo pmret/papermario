@@ -413,7 +413,7 @@ MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback
     return _msg_get_printer_for_msg(msgID, donePrintingWriteback, 0);
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 MessagePrintState* _msg_get_printer_for_msg(s32 msgID, s32* donePrintingWriteback, s32 arg2) {
     if (msgID != 0) {
         s8* srcBuffer = (s8*) msgID;
@@ -506,7 +506,7 @@ void set_message_images(UnkImage14List images) {
 }
 
 // loop crap
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void set_message_msg(s32 msgID, s32 index) {
     u8* buffer = msgID;
     u8* mallocSpace = NULL;
@@ -559,7 +559,7 @@ void close_message(MessagePrintState* msgPrintState) {
 
 // so close, just some dumb control flow thing at the beginning
 s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags) {
     u8* charWidthTable;
     f32 baseWidth;
@@ -623,7 +623,7 @@ s32 get_msg_lines(s32 msgID) {
 }
 
 // some weird stacky msgIDy stuff
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style) {
     s32 width;
     MessagePrintState stackPrinter;

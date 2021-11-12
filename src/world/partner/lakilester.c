@@ -344,7 +344,7 @@ void func_802BDA90_3215E0(Npc* npc) {
     }
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void func_802BDDD8_321928(Npc* npc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;

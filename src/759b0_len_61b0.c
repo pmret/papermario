@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_up_corners);
 s32 npc_raycast_general(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
                         f32* hitY, f32* hitZ, f32* outDepth, f32* hitNx, f32* hitNy, f32* hitNz);
 // Dumb float regalloc
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 npc_raycast_general(s32 flags, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
                         f32* hitY, f32* hitZ, f32* outDepth, f32* hitNx, f32* hitNy, f32* hitNz) {
     s32 entityID;

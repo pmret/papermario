@@ -106,7 +106,7 @@ INCLUDE_ASM(s32, "main", gfxRetrace_Callback);
 #endif
 
 //gfx stuff
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void gfx_task_main(void) {
     u16 t;
     s32 temp_a0_3;

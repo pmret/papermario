@@ -549,7 +549,7 @@ INCLUDE_ASM(s32, "2e230_len_2190", snd_load_BK_to_bank, s32 bkFileOffset, SoundB
 void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, s32 instrumentCount,
                                 u8 arg4);
 // float weirdness
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, Instruments instruments, u32 instrumentCount,
                                 u8 arg4) {
     SoundBank* sb = bank;

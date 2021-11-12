@@ -589,7 +589,7 @@ ApiStatus N(func_8024046C_CCB77C)(Evt* script, s32 isInitialCall) {
 }
 
 // graphics macros
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 mdl_get_copied_gfx(s32);
 void mdl_get_copied_vertices(s32, s32*, s32*, s32*);
 void guMtxF2L(Matrix4f, Mtx* m);

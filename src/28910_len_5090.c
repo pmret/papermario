@@ -4,7 +4,7 @@ INCLUDE_ASM(void, "28910_len_5090", func_8004D510, BGMPlayer* arg0);
 
 // Return values are being pushed into v0 in the wrong place
 // May depend on data decomp
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 BGMPlayer* snd_get_player_with_song_name(s32 songString) {
     UnkAl19E0* temp_v1 = D_8009A664->data;
 
@@ -417,7 +417,7 @@ void snd_BGMCmd_F7_SubTrackReverbType(BGMPlayer* player, BGMPlayerTrack* track) 
 }
 
 // unk_D4 type shenanigans
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void snd_BGMCmd_FD(BGMPlayer* player, BGMPlayerTrack* track) {
     func_800560BC(player->unk_234, track->unk_5C, player->unk_D4.u16 >> 8);
 }
