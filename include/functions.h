@@ -74,6 +74,9 @@ RenderTask* queue_render_task(RenderTask* task);
 
 void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 
+s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,
+                                s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity);
+
 // append gfx funcs
 void func_80257B28(s32);
 void func_8025595C(Actor*);
@@ -143,9 +146,9 @@ s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
 void peach_set_disguise_anim(s32);
 
-void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, s32 opacity,
+void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
               s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
-              s32 drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
+              void* drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
 s32 get_msg_width(s32 msgID, u16 charset);
 
 s32 partner_player_can_pause(void);
@@ -373,6 +376,7 @@ void remove_part_shadow(s32 actorID, s32 partIndex);
 void create_part_shadow_by_ref(s32 arg0, ActorPart* part);
 
 s32 func_80266D6C(ActorPart*, s32);
+char* int_to_string(s32, char*, s32);
 
 Evt* get_script_by_index(s32 index);
 
