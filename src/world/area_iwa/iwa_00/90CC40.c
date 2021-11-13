@@ -3,8 +3,7 @@
 static char* N(exit_str_0) = "iwa_10";
 static char* N(exit_str_1) = "iwa_01";
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_00/90CC40", func_80240000_90CC40);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240000_90CC40)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -22,7 +21,9 @@ ApiStatus N(func_80240000_90CC40)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_iwa/iwa_00/90CC40", func_80240000_90CC40);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 

@@ -4,8 +4,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_28/D7B2A0", func_80240000_D7B2A0);
 
 #include "world/common/reflection.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_28/D7B2A0", func_80240F50_D7C1F0);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240F50_D7C1F0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -23,7 +22,9 @@ ApiStatus N(func_80240F50_D7C1F0)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_pra/pra_28/D7B2A0", func_80240F50_D7C1F0);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 

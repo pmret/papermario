@@ -3,8 +3,7 @@
 static char* N(exit_str_0) = "omo_03";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240000_DAD400);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240000_DAD400)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -22,7 +21,9 @@ ApiStatus N(func_80240000_DAD400)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240000_DAD400);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 
@@ -46,8 +47,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240550_DAD950);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240FF4_DAE3F4);
-/*
+#if 0 // NON_MATCHING
 void N(func_80240FF4_DAE3F4)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -57,7 +57,9 @@ void N(func_80240FF4_DAE3F4)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         script->functionTemp[0] = 12;
     }
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240FF4_DAE3F4);
+#endif
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -67,8 +69,7 @@ void N(func_80240FF4_DAE3F4)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802416AC_DAEAAC);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802416AC_DAEAAC)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
@@ -128,7 +129,9 @@ ApiStatus N(func_802416AC_DAEAAC)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802416AC_DAEAAC);
+#endif
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241898_DAEC98);
 

@@ -1,7 +1,6 @@
 #include "kmr_20.h"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED440", func_80241620_8ED440);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241620_8ED440)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -19,7 +18,9 @@ ApiStatus N(func_80241620_8ED440)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED440", func_80241620_8ED440);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 

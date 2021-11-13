@@ -2,8 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_tik/tik_15/890190", func_802405F0_890190);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_15/890190", func_80240960_890500);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240960_890500)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -21,7 +20,9 @@ ApiStatus N(func_80240960_890500)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_tik/tik_15/890190", func_80240960_890500);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 

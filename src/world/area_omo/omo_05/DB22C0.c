@@ -29,8 +29,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240C04_DB2EC4);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802416A8_DB3968);
-/*
+#if 0 // NON_MATCHING
 void N(func_802416A8_DB3968)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -40,7 +39,9 @@ void N(func_802416A8_DB3968)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         script->functionTemp[0] = 12;
     }
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802416A8_DB3968);
+#endif
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -50,8 +51,7 @@ void N(func_802416A8_DB3968)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80241D60_DB4020);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241D60_DB4020)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
@@ -111,14 +111,15 @@ ApiStatus N(func_80241D60_DB4020)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80241D60_DB4020);
+#endif
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242178_DB4438);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80242178_DB4438)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -134,10 +135,11 @@ ApiStatus N(func_80242178_DB4438)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242178_DB4438);
+#endif
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802421CC_DB448C);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802421CC_DB448C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -145,10 +147,11 @@ ApiStatus N(func_802421CC_DB448C)(Evt* script, s32 isInitialCall) {
     N(D_80243098_DB5358) = TRUE;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802421CC_DB448C);
+#endif
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242204_DB44C4);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80242204_DB44C4)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -167,14 +170,15 @@ ApiStatus N(func_80242204_DB44C4)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242204_DB44C4);
+#endif
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802422A0_DB4560);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242328_DB45E8);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802423C8_DB4688);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802423C8_DB4688)(Evt *script, s32 isInitialCall) {
     s32 i;
 
@@ -185,4 +189,6 @@ ApiStatus N(func_802423C8_DB4688)(Evt *script, s32 isInitialCall) {
     N(D_8024592C) = 0;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802423C8_DB4688);
+#endif

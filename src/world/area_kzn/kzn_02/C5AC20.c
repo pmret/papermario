@@ -10,8 +10,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80240690_C5ADD0);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241134_C5B874);
-/*
+#if 0 // NON_MATCHING
 void N(func_80241134_C5B874)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -21,7 +20,9 @@ void N(func_80241134_C5B874)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         script->functionTemp[0] = 12;
     }
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241134_C5B874);
+#endif
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -31,8 +32,7 @@ void N(func_80241134_C5B874)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_802417EC_C5BF2C);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802417EC_C5BF2C)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
@@ -92,7 +92,9 @@ ApiStatus N(func_802417EC_C5BF2C)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_802417EC_C5BF2C);
+#endif
 
 #include "world/common/UnkNpcAIFunc13.inc.c"
 
@@ -101,8 +103,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241B08_C5C248);
 
 #include "world/common/UnkFunc45.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241DE4_C5C524);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241DE4_C5C524)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
@@ -162,12 +163,13 @@ ApiStatus N(func_80241DE4_C5C524)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241DE4_C5C524);
+#endif
 
 static char* N(exit_str_0) = "kzn_02";
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241FCC_C5C70C);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241FCC_C5C70C)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -185,7 +187,9 @@ ApiStatus N(func_80241FCC_C5C70C)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241FCC_C5C70C);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 
@@ -193,8 +197,7 @@ ApiStatus N(func_80241FCC_C5C70C)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80242310_C5CA50);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80242310_C5CA50)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -210,10 +213,11 @@ ApiStatus N(func_80242310_C5CA50)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80242310_C5CA50);
+#endif
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80242364_C5CAA4);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80242364_C5CAA4)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -221,10 +225,11 @@ ApiStatus N(func_80242364_C5CAA4)(Evt* script, s32 isInitialCall) {
     N(D_80244A74_C5F1B4) = TRUE;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80242364_C5CAA4);
+#endif
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_8024239C_C5CADC);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_8024239C_C5CADC)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -243,14 +248,15 @@ ApiStatus N(func_8024239C_C5CADC)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_8024239C_C5CADC);
+#endif
 
 #include "world/common/SetManyVars.inc.c"
 
 #include "world/common/UnkYawFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_802426B4_C5CDF4);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802426B4_C5CDF4)(Evt *script, s32 isInitialCall) {
     Npc *npc = get_npc_unsafe(script->varTable[2]);
 
@@ -258,12 +264,15 @@ ApiStatus N(func_802426B4_C5CDF4)(Evt *script, s32 isInitialCall) {
     npc->currentAnim = script->varTable[4];
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_802426B4_C5CDF4);
+#endif
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_802426F8_C5CE38);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802426F8_C5CE38)(Evt *script, s32 isInitialCall) {
     get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_802426F8_C5CE38);
+#endif

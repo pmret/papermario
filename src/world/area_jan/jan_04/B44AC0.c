@@ -1,7 +1,6 @@
 #include "jan_04.h"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_04/B44AC0", func_80240350_B44AC0);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240350_B44AC0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -19,7 +18,9 @@ ApiStatus N(func_80240350_B44AC0)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_jan/jan_04/B44AC0", func_80240350_B44AC0);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 

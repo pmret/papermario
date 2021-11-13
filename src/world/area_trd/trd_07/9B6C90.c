@@ -20,8 +20,7 @@ INCLUDE_ASM(s32, "world/area_trd/trd_07/9B6C90", func_80240C94_9B7614);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_07/9B6C90", func_80241738_9B80B8);
-/*
+#if 0 // NON_MATCHING
 void N(func_80241738_9B80B8)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -31,7 +30,9 @@ void N(func_80241738_9B80B8)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         script->functionTemp[0] = 12;
     }
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_trd/trd_07/9B6C90", func_80241738_9B80B8);
+#endif
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -41,8 +42,7 @@ void N(func_80241738_9B80B8)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_07/9B6C90", func_80241DF0_9B8770);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241DF0_9B8770)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
@@ -102,7 +102,9 @@ ApiStatus N(func_80241DF0_9B8770)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_trd/trd_07/9B6C90", func_80241DF0_9B8770);
+#endif
 
 INCLUDE_ASM(s32, "world/area_trd/trd_07/9B6C90", func_80241FDC_9B895C);
 

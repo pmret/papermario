@@ -14,8 +14,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_802415A0_87B180);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80242044_87BC24);
-/*
+#if 0 // NON_MATCHING
 void N(func_80242044_87BC24)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -25,7 +24,9 @@ void N(func_80242044_87BC24)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         script->functionTemp[0] = 12;
     }
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80242044_87BC24);
+#endif
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 

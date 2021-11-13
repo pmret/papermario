@@ -32,8 +32,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80240C18_DCD8E8);
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80241AE0_DCE7B0);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241AE0_DCE7B0)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -117,7 +116,9 @@ ApiStatus N(func_80241AE0_DCE7B0)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80241AE0_DCE7B0);
+#endif
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80241DDC_DCEAAC);
 

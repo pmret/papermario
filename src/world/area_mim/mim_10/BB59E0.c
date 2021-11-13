@@ -5,15 +5,16 @@ static char* N(exit_str_1) = "mim_01";
 static char* N(exit_str_2) = "kmr_22";
 static char* N(exit_str_3) = "";
 
-INCLUDE_ASM(s32, "world/area_mim/mim_10/BB59E0", func_80240000_BB59E0);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240000_BB59E0)(Evt *script, s32 isInitialCall) {
     if (gPlayerStatus.position.y >= -210.0f) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_mim/mim_10/BB59E0", func_80240000_BB59E0);
+#endif
 
 INCLUDE_ASM(s32, "world/area_mim/mim_10/BB59E0", func_80240030_BB5A10);
 

@@ -1,7 +1,6 @@
 #include "osr_01.h"
 
-INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_80240360_AB0350);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240360_AB0350)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -19,7 +18,9 @@ ApiStatus N(func_80240360_AB0350)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_80240360_AB0350);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 
@@ -27,8 +28,7 @@ ApiStatus N(func_80240360_AB0350)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_802406A4_AB0694);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802406A4_AB0694)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -44,10 +44,11 @@ ApiStatus N(func_802406A4_AB0694)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_802406A4_AB0694);
+#endif
 
-INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_802406F8_AB06E8);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802406F8_AB06E8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -55,10 +56,11 @@ ApiStatus N(func_802406F8_AB06E8)(Evt* script, s32 isInitialCall) {
     N(D_8024121C_AB120C) = TRUE;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_802406F8_AB06E8);
+#endif
 
-INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_80240730_AB0720);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240730_AB0720)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -77,14 +79,15 @@ ApiStatus N(func_80240730_AB0720)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_80240730_AB0720);
+#endif
 
 #include "world/common/SetManyVars.inc.c"
 
 #include "world/common/UnkYawFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_80240A48_AB0A38);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240A48_AB0A38)(Evt *script, s32 isInitialCall) {
     Npc *npc = get_npc_unsafe(script->varTable[2]);
 
@@ -92,12 +95,15 @@ ApiStatus N(func_80240A48_AB0A38)(Evt *script, s32 isInitialCall) {
     npc->currentAnim = script->varTable[4];
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_80240A48_AB0A38);
+#endif
 
-INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_80240A8C_AB0A7C);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240A8C_AB0A7C)(Evt *script, s32 isInitialCall) {
     get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_osr/osr_01/AB0350", func_80240A8C_AB0A7C);
+#endif

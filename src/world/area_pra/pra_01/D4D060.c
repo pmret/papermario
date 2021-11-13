@@ -13,8 +13,7 @@ ApiStatus func_80240F60_D4DFA0(Evt* script, s32 isInitialCall) {
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802411AC_D4E1EC);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802411AC_D4E1EC)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -30,10 +29,11 @@ ApiStatus N(func_802411AC_D4E1EC)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802411AC_D4E1EC);
+#endif
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241200_D4E240);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241200_D4E240)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -41,10 +41,11 @@ ApiStatus N(func_80241200_D4E240)(Evt* script, s32 isInitialCall) {
     N(D_80241F94_D4EFD4) = TRUE;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241200_D4E240);
+#endif
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241238_D4E278);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241238_D4E278)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -63,10 +64,11 @@ ApiStatus N(func_80241238_D4E278)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241238_D4E278);
+#endif
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802412D4_D4E314);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802412D4_D4E314)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -85,7 +87,9 @@ ApiStatus N(func_802412D4_D4E314)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802412D4_D4E314);
+#endif
 
 ApiStatus PostChapter7StatUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

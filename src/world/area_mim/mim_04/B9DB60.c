@@ -16,8 +16,7 @@ INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80240AAC_B9E40C);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80240DF0_B9E750);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80241014_B9E974);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241014_B9E974)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -35,6 +34,8 @@ ApiStatus N(func_80241014_B9E974)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80241014_B9E974);
+#endif
 
 #include "world/common/GetItemName.inc.c"

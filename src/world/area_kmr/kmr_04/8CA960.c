@@ -6,8 +6,7 @@
 #include "world/common/CheckPartnerFlags1000.inc.c"
 #define NAMESPACE kmr_04
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_04/8CA960", func_802402C8_8CABC8);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802402C8_8CABC8)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -25,7 +24,9 @@ ApiStatus N(func_802402C8_8CABC8)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kmr/kmr_04/8CA960", func_802402C8_8CABC8);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 

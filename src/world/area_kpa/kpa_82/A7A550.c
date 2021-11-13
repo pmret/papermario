@@ -4,8 +4,7 @@
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_82/A7A550", func_8024027C_A7A77C);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_8024027C_A7A77C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -21,10 +20,11 @@ ApiStatus N(func_8024027C_A7A77C)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kpa/kpa_82/A7A550", func_8024027C_A7A77C);
+#endif
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_82/A7A550", func_802402D0_A7A7D0);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802402D0_A7A7D0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -32,10 +32,11 @@ ApiStatus N(func_802402D0_A7A7D0)(Evt* script, s32 isInitialCall) {
     N(D_80240C20_A7B120) = TRUE;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kpa/kpa_82/A7A550", func_802402D0_A7A7D0);
+#endif
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_82/A7A550", func_80240308_A7A808);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240308_A7A808)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -54,10 +55,11 @@ ApiStatus N(func_80240308_A7A808)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kpa/kpa_82/A7A550", func_80240308_A7A808);
+#endif
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_82/A7A550", func_802403A4_A7A8A4);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802403A4_A7A8A4)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -76,4 +78,6 @@ ApiStatus N(func_802403A4_A7A8A4)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kpa/kpa_82/A7A550", func_802403A4_A7A8A4);
+#endif

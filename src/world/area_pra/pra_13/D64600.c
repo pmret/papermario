@@ -6,8 +6,7 @@
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_8024114C_D6572C);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_8024114C_D6572C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -23,10 +22,11 @@ ApiStatus N(func_8024114C_D6572C)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_8024114C_D6572C);
+#endif
 
-INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802411A0_D65780);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802411A0_D65780)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -34,10 +34,11 @@ ApiStatus N(func_802411A0_D65780)(Evt* script, s32 isInitialCall) {
     N(D_802422CC_D668AC) = TRUE;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802411A0_D65780);
+#endif
 
-INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802411D8_D657B8);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802411D8_D657B8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -56,10 +57,11 @@ ApiStatus N(func_802411D8_D657B8)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802411D8_D657B8);
+#endif
 
-INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80241274_D65854);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241274_D65854)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -78,17 +80,20 @@ ApiStatus N(func_80241274_D65854)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80241274_D65854);
+#endif
 
 INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80241310_D658F0);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802413A4_D65984);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802413A4_D65984)(Evt* script, s32 isInitialCall) {
     switch_to_partner(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802413A4_D65984);
+#endif
 
 INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802413D0_D659B0);
 

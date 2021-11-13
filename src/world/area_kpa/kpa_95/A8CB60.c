@@ -22,8 +22,7 @@
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80240C74_A8D6F4);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240C74_A8D6F4)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -107,7 +106,9 @@ ApiStatus N(func_80240C74_A8D6F4)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80240C74_A8D6F4);
+#endif
 
 #include "world/common/set_script_owner_npc_anim.inc.c"
 

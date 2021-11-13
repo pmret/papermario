@@ -1,7 +1,6 @@
 #include "kmr_02.h"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B3A10", func_802439A0_8B3A10);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802439A0_8B3A10)(Evt *script, s32 isInitialCall) {
     s32 var;
     void* temp_s0 = load_asset_by_name("party_pokopi", &var);
@@ -18,4 +17,6 @@ ApiStatus N(func_802439A0_8B3A10)(Evt *script, s32 isInitialCall) {
     set_message_images(&N(D_8024BA90));
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B3A10", func_802439A0_8B3A10);
+#endif

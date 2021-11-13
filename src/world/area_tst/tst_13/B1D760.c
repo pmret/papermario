@@ -1,7 +1,6 @@
 #include "tst_13.h"
 
-INCLUDE_ASM(s32, "world/area_tst/tst_13/B1D760", func_80240000_B1D760);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240000_B1D760)(Evt *script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 *array = script->array;
@@ -17,10 +16,11 @@ ApiStatus N(func_80240000_B1D760)(Evt *script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_tst/tst_13/B1D760", func_80240000_B1D760);
+#endif
 
-INCLUDE_ASM(s32, "world/area_tst/tst_13/B1D760", func_802400A0_B1D800);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802400A0_B1D800)(Evt *script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 distance;
@@ -37,6 +37,8 @@ ApiStatus N(func_802400A0_B1D800)(Evt *script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_tst/tst_13/B1D760", func_802400A0_B1D800);
+#endif
 
 INCLUDE_ASM(s32, "world/area_tst/tst_13/B1D760", func_8024013C_B1D89C);

@@ -2,8 +2,7 @@
 
 static char* N(exit_str_0) = "omo_13";
 
-INCLUDE_ASM(s32, "world/area_omo/omo_01/D9B150", func_80240260_D9B150);
-/*
+#if 0 // NON_MATCHING
 void N(func_80240260_D9B150)(Evt *script, NpcAISettings *npcAISettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -112,10 +111,11 @@ void N(func_80240260_D9B150)(Evt *script, NpcAISettings *npcAISettings, EnemyTer
     }
     script->functionTemp[0] = 0xD;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_01/D9B150", func_80240260_D9B150);
+#endif
 
-INCLUDE_ASM(s32, "world/area_omo/omo_01/D9B150", func_80240844_D9B734);
-/*
+#if 0 // NON_MATCHING
 void N(func_80240844_D9B734)(Evt *script, NpcAISettings *npcAISettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -143,10 +143,11 @@ void N(func_80240844_D9B734)(Evt *script, NpcAISettings *npcAISettings, EnemyTer
         }
     }
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_01/D9B150", func_80240844_D9B734);
+#endif
 
-INCLUDE_ASM(s32, "world/area_omo/omo_01/D9B150", func_802409A8_D9B898);
-/*
+#if 0 // NON_MATCHING
 void N(func_802409A8_D9B898)(Evt *script, NpcAISettings *npcAISettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -156,6 +157,8 @@ void N(func_802409A8_D9B898)(Evt *script, NpcAISettings *npcAISettings, EnemyTer
         script->functionTemp[0] = NULL;
     }
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_01/D9B150", func_802409A8_D9B898);
+#endif
 
 INCLUDE_ASM(s32, "world/area_omo/omo_01/D9B150", func_802409EC_D9B8DC);

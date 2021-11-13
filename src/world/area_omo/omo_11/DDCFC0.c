@@ -4,13 +4,14 @@
 
 #include "world/common/UnkFunc17.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_802407CC_DDCFFC);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802407CC_DDCFFC)(Evt* script, s32 isInitialCall) {
     switch_to_partner(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_802407CC_DDCFFC);
+#endif
 
 #include "world/common/UnkFunc18.inc.c"
 
@@ -28,8 +29,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_8024095C_DDD18C);
 
 #include "world/common/UnkFunc22.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_80240D90_DDD5C0);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240D90_DDD5C0)(Evt *script, s32 isInitialCall) {
     Bytecode *args = script->ptrReadPos;
     Npc* npc = get_npc_safe(-4);
@@ -156,7 +156,9 @@ ApiStatus N(func_80240D90_DDD5C0)(Evt *script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_80240D90_DDD5C0);
+#endif
 
 #include "world/common/UnkFunc23.inc.c"
 

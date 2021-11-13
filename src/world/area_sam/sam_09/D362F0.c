@@ -3,8 +3,7 @@
 static char* N(exit_str_0) = "sam_08";
 static char* N(exit_str_1) = "sam_10";
 
-INCLUDE_ASM(s32, "world/area_sam/sam_09/D362F0", func_80240000_D362F0);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240000_D362F0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -22,7 +21,9 @@ ApiStatus N(func_80240000_D362F0)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_sam/sam_09/D362F0", func_80240000_D362F0);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 

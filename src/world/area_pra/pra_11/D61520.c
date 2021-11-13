@@ -2,8 +2,7 @@
 
 #include "world/common/reflection.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80240F20_D62420);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240F20_D62420)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -21,7 +20,9 @@ ApiStatus N(func_80240F20_D62420)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80240F20_D62420);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 

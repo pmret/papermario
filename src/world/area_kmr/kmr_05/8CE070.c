@@ -13,8 +13,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_05/8CE070", func_802401B0_8CE220);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_05/8CE070", func_80240C54_8CECC4);
-/*
+#if 0 // NON_MATCHING
 void N(func_80240C54_8CECC4)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -24,7 +23,9 @@ void N(func_80240C54_8CECC4)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         script->functionTemp[0] = 12;
     }
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kmr/kmr_05/8CE070", func_80240C54_8CECC4);
+#endif
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 

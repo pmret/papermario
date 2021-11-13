@@ -84,21 +84,23 @@ PlayerSpriteSet spr_playerSpriteSets[] = {
     /* Peach */ {  6, 0x900, 0x00003C00 },
 };
 
+#if 0 // NON_MATCHING
+extern s32* gSpriteHeapPtr;
+extern s32** D_802DFE44;
+extern s32* D_802DFE9C;
+
+void spr_init_quad_cache(void) {
+    s32 i;
+    s32* phi_v0;
+    D_802DFE44 = _heap_malloc(&gSpriteHeapPtr, 0x580);
+
+    for (i = 21; i >= 0; i--) {
+        D_802DFE44[i] = -1;
+    }
+}
+#else
 INCLUDE_ASM(s32, "sprite", spr_init_quad_cache);
-
-// extern s32* gSpriteHeapPtr;
-// extern s32** D_802DFE44;
-// extern s32* D_802DFE9C;
-
-// void spr_init_quad_cache(void) {
-//     s32 i;
-//     s32* phi_v0;
-//     D_802DFE44 = _heap_malloc(&gSpriteHeapPtr, 0x580);
-
-//     for (i = 21; i >= 0; i--) {
-//         D_802DFE44[i] = -1;
-//     }
-// }
+#endif
 
 INCLUDE_ASM(s32, "sprite", spr_get_cached_quad);
 

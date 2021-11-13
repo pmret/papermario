@@ -17,8 +17,7 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/SomeXYZFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802402E0_9D7300);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802402E0_9D7300)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -36,7 +35,9 @@ ApiStatus N(func_802402E0_9D7300)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802402E0_9D7300);
+#endif
 
 #define NAMESPACE dup_nok_02
 #include "world/common/GetItemName.inc.c"
@@ -50,8 +51,7 @@ ApiStatus N(func_802402E0_9D7300)(Evt* script, s32 isInitialCall) {
 #include "world/common/AddPlayerHandsOffset.inc.c"
 #define NAMESPACE nok_02
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240624_9D7644);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240624_9D7644)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -67,10 +67,11 @@ ApiStatus N(func_80240624_9D7644)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240624_9D7644);
+#endif
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240678_9D7698);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240678_9D7698)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -78,10 +79,11 @@ ApiStatus N(func_80240678_9D7698)(Evt* script, s32 isInitialCall) {
     N(D_80245434_9DC454) = TRUE;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240678_9D7698);
+#endif
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802406B0_9D76D0);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802406B0_9D76D0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -100,4 +102,6 @@ ApiStatus N(func_802406B0_9D76D0)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802406B0_9D76D0);
+#endif

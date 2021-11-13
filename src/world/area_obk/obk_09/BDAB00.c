@@ -2,8 +2,7 @@
 
 static char* N(exit_str_0) = "obk_01\0";
 
-INCLUDE_ASM(s32, "world/area_obk/obk_09/BDAB00", func_80240350_BDAB00);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240350_BDAB00)(Evt *script, s32 isInitialCall) {
     s32 var;
     void* temp_s0 = load_asset_by_name("party_pokopi", &var);
@@ -20,4 +19,6 @@ ApiStatus N(func_80240350_BDAB00)(Evt *script, s32 isInitialCall) {
     set_message_images(&N(D_8024BA90));
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_obk/obk_09/BDAB00", func_80240350_BDAB00);
+#endif

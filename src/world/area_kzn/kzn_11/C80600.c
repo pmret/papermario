@@ -10,8 +10,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_11/C80600", func_80240610_C807B0);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_11/C80600", func_802410B4_C81254);
-/*
+#if 0 // NON_MATCHING
 void N(func_802410B4_C81254)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -21,7 +20,9 @@ void N(func_802410B4_C81254)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         script->functionTemp[0] = 12;
     }
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_11/C80600", func_802410B4_C81254);
+#endif
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -31,8 +32,7 @@ void N(func_802410B4_C81254)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_11/C80600", func_8024176C_C8190C);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_8024176C_C8190C)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
@@ -92,7 +92,9 @@ ApiStatus N(func_8024176C_C8190C)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_11/C80600", func_8024176C_C8190C);
+#endif
 
 #include "world/common/UnkNpcAIFunc13.inc.c"
 
@@ -101,8 +103,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_11/C80600", func_80241A88_C81C28);
 
 #include "world/common/UnkFunc45.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_11/C80600", func_80241D64_C81F04);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241D64_C81F04)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
@@ -162,7 +163,9 @@ ApiStatus N(func_80241D64_C81F04)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_11/C80600", func_80241D64_C81F04);
+#endif
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_11/C80600", func_80241F4C_C820EC);
 

@@ -32,8 +32,7 @@ INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80240844_9A8C34);
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241818_9A9C08);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241818_9A9C08)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -117,7 +116,9 @@ ApiStatus N(func_80241818_9A9C08)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241818_9A9C08);
+#endif
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241B14_9A9F04);
 
@@ -133,8 +134,7 @@ INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241FC8_9AA3B8);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80242A6C_9AAE5C);
-/*
+#if 0 // NON_MATCHING
 void N(func_80242A6C_9AAE5C)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -144,7 +144,9 @@ void N(func_80242A6C_9AAE5C)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         script->functionTemp[0] = 12;
     }
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80242A6C_9AAE5C);
+#endif
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -154,8 +156,7 @@ void N(func_80242A6C_9AAE5C)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80243124_9AB514);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80243124_9AB514)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
@@ -215,7 +216,9 @@ ApiStatus N(func_80243124_9AB514)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80243124_9AB514);
+#endif
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80243310_9AB700);
 

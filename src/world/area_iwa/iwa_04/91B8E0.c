@@ -9,8 +9,7 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240080_91B960);
 
 #include "world/common/UnkNpcAIFunc18.inc.c"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240254_91BB34);
-/*
+#if 0 // NON_MATCHING
 void N(func_80240254_91BB34)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -29,7 +28,9 @@ void N(func_80240254_91BB34)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
     script->functionTemp[1]--;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240254_91BB34);
+#endif
 
 #include "world/common/UnkNpcAIFunc21.inc.c"
 
@@ -41,8 +42,7 @@ void N(func_80240254_91BB34)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
 #include "world/common/UnkNpcAIFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240714_91BFF4);
-/*
+#if 0 // NON_MATCHING
 void N(func_80240714_91BFF4)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -69,12 +69,13 @@ void N(func_80240714_91BFF4)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         script->functionTemp[0] = 0x16;
     }
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240714_91BFF4);
+#endif
 
 #include "world/common/UnkFunc10.inc.c"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240A04_91C2E4);
-/*
+#if 0 // NON_MATCHING
 void N(func_80240A04_91C2E4)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -90,7 +91,9 @@ void N(func_80240A04_91C2E4)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         script->functionTemp[0] = 0x29;
     }
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240A04_91C2E4);
+#endif
 
 #include "world/common/UnkFunc9.inc.c"
 

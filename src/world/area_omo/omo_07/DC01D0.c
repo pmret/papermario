@@ -1,7 +1,6 @@
 #include "omo_07.h"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DC01D0", func_80242F20_DC01D0);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80242F20_DC01D0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -19,7 +18,9 @@ ApiStatus N(func_80242F20_DC01D0)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_omo/omo_07/DC01D0", func_80242F20_DC01D0);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 

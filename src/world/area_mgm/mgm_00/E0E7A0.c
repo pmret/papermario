@@ -39,8 +39,7 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0E7A0", func_80240E74_E0F614);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240E74_E0F614)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -124,6 +123,8 @@ ApiStatus N(func_80240E74_E0F614)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0E7A0", func_80240E74_E0F614);
+#endif
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0E7A0", func_80241170_E0F910);

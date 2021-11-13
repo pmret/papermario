@@ -1,7 +1,6 @@
 #include "kpa_14.h"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240380_A57830);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240380_A57830)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -19,7 +18,9 @@ ApiStatus N(func_80240380_A57830)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240380_A57830);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 

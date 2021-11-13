@@ -22,8 +22,7 @@
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243104_7EDE14);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80243104_7EDE14)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -107,12 +106,13 @@ ApiStatus N(func_80243104_7EDE14)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243104_7EDE14);
+#endif
 
 static char* N(exit_str_0) = "mac_01";
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243400_7EE110);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80243400_7EE110)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -130,7 +130,9 @@ ApiStatus N(func_80243400_7EE110)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243400_7EE110);
+#endif
 
 #define NAMESPACE dup_mac_00
 #include "world/common/GetItemName.inc.c"
@@ -144,8 +146,7 @@ ApiStatus N(func_80243400_7EE110)(Evt* script, s32 isInitialCall) {
 #include "world/common/AddPlayerHandsOffset.inc.c"
 #define NAMESPACE mac_00
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243744_7EE454);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80243744_7EE454)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -161,10 +162,11 @@ ApiStatus N(func_80243744_7EE454)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243744_7EE454);
+#endif
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243798_7EE4A8);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80243798_7EE4A8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -172,10 +174,11 @@ ApiStatus N(func_80243798_7EE4A8)(Evt* script, s32 isInitialCall) {
     N(D_8024ED4C_7F9A5C) = TRUE;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243798_7EE4A8);
+#endif
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_802437D0_7EE4E0);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802437D0_7EE4E0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -194,7 +197,9 @@ ApiStatus N(func_802437D0_7EE4E0)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_802437D0_7EE4E0);
+#endif
 
 #define NAMESPACE dup_mac_00
 #include "world/common/SetManyVars.inc.c"
@@ -204,8 +209,7 @@ ApiStatus N(func_802437D0_7EE4E0)(Evt* script, s32 isInitialCall) {
 #include "world/common/UnkYawFunc.inc.c"
 #define NAMESPACE mac_00
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243AE8_7EE7F8);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80243AE8_7EE7F8)(Evt *script, s32 isInitialCall) {
     Npc *npc = get_npc_unsafe(script->varTable[2]);
 
@@ -213,12 +217,15 @@ ApiStatus N(func_80243AE8_7EE7F8)(Evt *script, s32 isInitialCall) {
     npc->currentAnim = script->varTable[4];
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243AE8_7EE7F8);
+#endif
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243B2C_7EE83C);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80243B2C_7EE83C)(Evt *script, s32 isInitialCall) {
     get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243B2C_7EE83C);
+#endif

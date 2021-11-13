@@ -35,8 +35,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_8024095C_93FF0C);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240B64_940114);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240DDC_94038C);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240DDC_94038C)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -54,7 +53,9 @@ ApiStatus N(func_80240DDC_94038C)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240DDC_94038C);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 
@@ -62,8 +63,7 @@ ApiStatus N(func_80240DDC_94038C)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241120_9406D0);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241120_9406D0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -79,10 +79,11 @@ ApiStatus N(func_80241120_9406D0)(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241120_9406D0);
+#endif
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241174_940724);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241174_940724)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
@@ -90,10 +91,11 @@ ApiStatus N(func_80241174_940724)(Evt* script, s32 isInitialCall) {
     N(D_80242058_941608) = TRUE;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241174_940724);
+#endif
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802411AC_94075C);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802411AC_94075C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -112,10 +114,11 @@ ApiStatus N(func_802411AC_94075C)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802411AC_94075C);
+#endif
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241248_9407F8);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241248_9407F8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = evt_get_variable(script, *args);
@@ -134,14 +137,15 @@ ApiStatus N(func_80241248_9407F8)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241248_9407F8);
+#endif
 
 #include "world/common/SetManyVars.inc.c"
 
 #include "world/common/UnkYawFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241560_940B10);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80241560_940B10)(Evt *script, s32 isInitialCall) {
     Npc *npc = get_npc_unsafe(script->varTable[2]);
 
@@ -149,14 +153,17 @@ ApiStatus N(func_80241560_940B10)(Evt *script, s32 isInitialCall) {
     npc->currentAnim = script->varTable[4];
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80241560_940B10);
+#endif
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802415A4_940B54);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_802415A4_940B54)(Evt *script, s32 isInitialCall) {
     get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_802415A4_940B54);
+#endif
 
 #include "world/common/foliage.inc.c"

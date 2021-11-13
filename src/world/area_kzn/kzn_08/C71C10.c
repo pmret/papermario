@@ -1,7 +1,6 @@
 #include "kzn_08.h"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71C10", func_80240790_C71C10);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240790_C71C10)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -19,7 +18,9 @@ ApiStatus N(func_80240790_C71C10)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71C10", func_80240790_C71C10);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 

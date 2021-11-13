@@ -1,7 +1,6 @@
 #include "trd_00.h"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_00/999F80", func_80240310_999F80);
-/*
+#if 0 // NON_MATCHING
 ApiStatus N(func_80240310_999F80)(Evt* script, s32 isInitialCall) {
     s32 i;
 
@@ -19,7 +18,9 @@ ApiStatus N(func_80240310_999F80)(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_trd/trd_00/999F80", func_80240310_999F80);
+#endif
 
 #include "world/common/GetItemName.inc.c"
 
