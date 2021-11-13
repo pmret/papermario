@@ -399,7 +399,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             effectRet = playFX_45(iVar1, iVar2);
             break;
         case 70:
-            effectRet = playFX_46_whirlwind(iVar1, a2, fVar3, iVar4);
+            effectRet = playFX_46_whirlwind(iVar1, &a2, fVar3, iVar4);
             break;
         case 71:
             effectRet = playFX_47(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
