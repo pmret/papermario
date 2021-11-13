@@ -1,14 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-typedef struct WhirlwindEffectStruct {
-    /* 0x00 */ char unk_00[40];
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-} WhirlwindEffectStruct;
-
-WhirlwindEffectStruct effectStruct;
+EffectWhirlwind effectStruct;
 
 ApiStatus N(UnkWhirlwindEffectFunc)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
