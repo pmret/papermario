@@ -136,7 +136,7 @@ glabel fx_107_main
 /* 3D5218 E00D61F8 8C226EB8 */  lw        $v0, %lo(jtbl_E00D6EB8)($at)
 /* 3D521C E00D61FC 00400008 */  jr        $v0
 /* 3D5220 E00D6200 00000000 */   nop
-glabel LE00D6204_3D5224
+dlabel LE00D6204_3D5224
 /* 3D5224 E00D6204 0C080138 */  jal       shim_rand_int
 /* 3D5228 E00D6208 2404000A */   addiu    $a0, $zero, 0xa
 /* 3D522C E00D620C 44821000 */  mtc1      $v0, $f2
@@ -161,7 +161,7 @@ glabel LE00D6204_3D5224
 /* 3D5278 E00D6258 AE000004 */  sw        $zero, 4($s0)
 /* 3D527C E00D625C 08035982 */  j         .LE00D6608
 /* 3D5280 E00D6260 46201087 */   neg.d    $f2, $f2
-glabel LE00D6264_3D5284
+dlabel LE00D6264_3D5284
 /* 3D5284 E00D6264 0C080138 */  jal       shim_rand_int
 /* 3D5288 E00D6268 2404000A */   addiu    $a0, $zero, 0xa
 /* 3D528C E00D626C 44821000 */  mtc1      $v0, $f2
@@ -185,7 +185,7 @@ glabel LE00D6264_3D5284
 /* 3D52D4 E00D62B4 AE16FFD4 */  sw        $s6, -0x2c($s0)
 /* 3D52D8 E00D62B8 08035982 */  j         .LE00D6608
 /* 3D52DC E00D62BC AE000004 */   sw       $zero, 4($s0)
-glabel LE00D62C0_3D52E0
+dlabel LE00D62C0_3D52E0
 /* 3D52E0 E00D62C0 0C080138 */  jal       shim_rand_int
 /* 3D52E4 E00D62C4 2404000A */   addiu    $a0, $zero, 0xa
 /* 3D52E8 E00D62C8 02330018 */  mult      $s1, $s3
@@ -210,7 +210,7 @@ glabel LE00D62C0_3D52E0
 /* 3D5334 E00D6314 AE1EFFD4 */  sw        $fp, -0x2c($s0)
 /* 3D5338 E00D6318 08035985 */  j         .LE00D6614
 /* 3D533C E00D631C AE000004 */   sw       $zero, 4($s0)
-glabel LE00D6320_3D5340
+dlabel LE00D6320_3D5340
 /* 3D5340 E00D6320 0C080138 */  jal       shim_rand_int
 /* 3D5344 E00D6324 2404000A */   addiu    $a0, $zero, 0xa
 /* 3D5348 E00D6328 02330018 */  mult      $s1, $s3
@@ -235,7 +235,7 @@ glabel LE00D6320_3D5340
 /* 3D5394 E00D6374 AE1EFFD4 */  sw        $fp, -0x2c($s0)
 /* 3D5398 E00D6378 08035985 */  j         .LE00D6614
 /* 3D539C E00D637C AE000004 */   sw       $zero, 4($s0)
-glabel LE00D6380_3D53A0
+dlabel LE00D6380_3D53A0
 /* 3D53A0 E00D6380 0C080138 */  jal       shim_rand_int
 /* 3D53A4 E00D6384 2404000A */   addiu    $a0, $zero, 0xa
 /* 3D53A8 E00D6388 44821000 */  mtc1      $v0, $f2
@@ -261,7 +261,7 @@ glabel LE00D6380_3D53A0
 /* 3D53F8 E00D63D8 44813000 */  mtc1      $at, $f6
 /* 3D53FC E00D63DC 08035980 */  j         .LE00D6600
 /* 3D5400 E00D63E0 46241080 */   add.d    $f2, $f2, $f4
-glabel LE00D63E4_3D5404
+dlabel LE00D63E4_3D5404
 /* 3D5404 E00D63E4 0C080138 */  jal       shim_rand_int
 /* 3D5408 E00D63E8 2404000A */   addiu    $a0, $zero, 0xa
 /* 3D540C E00D63EC 44821000 */  mtc1      $v0, $f2
@@ -306,7 +306,7 @@ glabel LE00D63E4_3D5404
 /* 3D54A8 E00D6488 AE82002C */  sw        $v0, 0x2c($s4)
 /* 3D54AC E00D648C 08035987 */  j         .LE00D661C
 /* 3D54B0 E00D6490 AE9E0030 */   sw       $fp, 0x30($s4)
-glabel LE00D6494_3D54B4
+dlabel LE00D6494_3D54B4
 /* 3D54B4 E00D6494 0C080138 */  jal       shim_rand_int
 /* 3D54B8 E00D6498 2404000A */   addiu    $a0, $zero, 0xa
 /* 3D54BC E00D649C 44821000 */  mtc1      $v0, $f2
@@ -345,7 +345,7 @@ glabel LE00D6494_3D54B4
 /* 3D5540 E00D6520 46202120 */  cvt.s.d   $f4, $f4
 /* 3D5544 E00D6524 08035987 */  j         .LE00D661C
 /* 3D5548 E00D6528 E604FFF8 */   swc1     $f4, -8($s0)
-glabel LE00D652C_3D554C
+dlabel LE00D652C_3D554C
 /* 3D554C E00D652C 0C080138 */  jal       shim_rand_int
 /* 3D5550 E00D6530 2404000A */   addiu    $a0, $zero, 0xa
 /* 3D5554 E00D6534 3C01E00D */  lui       $at, %hi(D_E00D6F00)
@@ -375,7 +375,7 @@ glabel LE00D652C_3D554C
 /* 3D55B4 E00D6594 2402001E */  addiu     $v0, $zero, 0x1e
 /* 3D55B8 E00D6598 08035982 */  j         .LE00D6608
 /* 3D55BC E00D659C AE02FFD4 */   sw       $v0, -0x2c($s0)
-glabel LE00D65A0_3D55C0
+dlabel LE00D65A0_3D55C0
 /* 3D55C0 E00D65A0 0C080138 */  jal       shim_rand_int
 /* 3D55C4 E00D65A4 2404000A */   addiu    $a0, $zero, 0xa
 /* 3D55C8 E00D65A8 44821000 */  mtc1      $v0, $f2

@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_8010BF30
+dlabel jtbl_8010BF30
 .word L800E6DD8_80288, L800E6F14_803C4, L800E6FC8_80478, L800E7044_804F4, L800E7090_80540, L800E726C_8071C, L800E726C_8071C, L800E726C_8071C, L800E726C_8071C, L800E726C_8071C, L800E7208_806B8, 0
 
 .section .text
@@ -73,7 +73,7 @@ glabel check_input_open_menus
 /* 8027C 800E6DCC 8C22BF30 */  lw        $v0, %lo(jtbl_8010BF30)($at)
 /* 80280 800E6DD0 00400008 */  jr        $v0
 /* 80284 800E6DD4 00000000 */   nop
-glabel L800E6DD8_80288
+dlabel L800E6DD8_80288
 /* 80288 800E6DD8 0220202D */  daddu     $a0, $s1, $zero
 /* 8028C 800E6DDC 0C039A77 */  jal       can_pause
 /* 80290 800E6DE0 0200282D */   daddu    $a1, $s0, $zero
@@ -160,7 +160,7 @@ glabel L800E6DD8_80288
 /* 803B8 800E6F08 A422CCFE */  sh        $v0, %lo(D_8010CCFE)($at)
 /* 803BC 800E6F0C 08039C9B */  j         L800E726C_8071C
 /* 803C0 800E6F10 00000000 */   nop
-glabel L800E6F14_803C4
+dlabel L800E6F14_803C4
 /* 803C4 800E6F14 0C039A41 */  jal       func_800E6904
 /* 803C8 800E6F18 00000000 */   nop
 /* 803CC 800E6F1C 1040000B */  beqz      $v0, .L800E6F4C
@@ -208,7 +208,7 @@ glabel L800E6F14_803C4
 /* 8046C 800E6FBC 34630040 */  ori       $v1, $v1, 0x40
 /* 80470 800E6FC0 08039C9B */  j         L800E726C_8071C
 /* 80474 800E6FC4 AC430000 */   sw       $v1, ($v0)
-glabel L800E6FC8_80478
+dlabel L800E6FC8_80478
 /* 80478 800E6FC8 3C038011 */  lui       $v1, %hi(D_8010CCF8)
 /* 8047C 800E6FCC 8463CCF8 */  lh        $v1, %lo(D_8010CCF8)($v1)
 /* 80480 800E6FD0 24020002 */  addiu     $v0, $zero, 2
@@ -242,7 +242,7 @@ glabel L800E6FC8_80478
 /* 804E8 800E7038 24420001 */  addiu     $v0, $v0, 1
 /* 804EC 800E703C 08039C9B */  j         L800E726C_8071C
 /* 804F0 800E7040 A4620000 */   sh       $v0, ($v1)
-glabel L800E7044_804F4
+dlabel L800E7044_804F4
 /* 804F4 800E7044 2402FFFF */  addiu     $v0, $zero, -1
 /* 804F8 800E7048 8643032C */  lh        $v1, 0x32c($s2)
 /* 804FC 800E704C 10620087 */  beq       $v1, $v0, L800E726C_8071C
@@ -262,7 +262,7 @@ glabel L800E7044_804F4
 /* 80534 800E7084 24630001 */  addiu     $v1, $v1, 1
 /* 80538 800E7088 08039C9B */  j         L800E726C_8071C
 /* 8053C 800E708C A4430000 */   sh       $v1, ($v0)
-glabel L800E7090_80540
+dlabel L800E7090_80540
 /* 80540 800E7090 3C038011 */  lui       $v1, %hi(D_8010CCFA)
 /* 80544 800E7094 2463CCFA */  addiu     $v1, $v1, %lo(D_8010CCFA)
 /* 80548 800E7098 94620000 */  lhu       $v0, ($v1)
@@ -366,7 +366,7 @@ glabel L800E7090_80540
 /* 806AC 800E71FC ACA20000 */   sw       $v0, ($a1)
 /* 806B0 800E7200 08039C9B */  j         L800E726C_8071C
 /* 806B4 800E7204 00000000 */   nop
-glabel L800E7208_806B8
+dlabel L800E7208_806B8
 /* 806B8 800E7208 3C038011 */  lui       $v1, %hi(D_8010CCFA)
 /* 806BC 800E720C 2463CCFA */  addiu     $v1, $v1, %lo(D_8010CCFA)
 /* 806C0 800E7210 94620000 */  lhu       $v0, ($v1)
@@ -392,7 +392,7 @@ glabel L800E7208_806B8
 /* 80710 800E7260 AC820000 */   sw       $v0, ($a0)
 /* 80714 800E7264 0C03BD80 */  jal       partner_enable_input
 /* 80718 800E7268 00000000 */   nop
-glabel L800E726C_8071C
+dlabel L800E726C_8071C
 /* 8071C 800E726C 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 80720 800E7270 8FB40020 */  lw        $s4, 0x20($sp)
 /* 80724 800E7274 8FB3001C */  lw        $s3, 0x1c($sp)

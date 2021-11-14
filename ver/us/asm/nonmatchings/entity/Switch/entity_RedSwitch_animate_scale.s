@@ -3,58 +3,58 @@
 
 .section .rodata
 
-glabel jtbl_802EB010
+dlabel jtbl_802EB010
 .word L802E17EC_10306C, L802E1894_103114, L802E1938_1031B8, L802E19E0_103260, L802E1A84_103304, L802E1B18_103398
 
-glabel D_802EB028
+dlabel D_802EB028
 .double 0.3
 
-glabel D_802EB030
+dlabel D_802EB030
 .double 0.01
 
-glabel D_802EB038
+dlabel D_802EB038
 .double -0.2
 
-glabel D_802EB040
+dlabel D_802EB040
 .double -0.01
 
-glabel D_802EB048
+dlabel D_802EB048
 .double 0.15
 
-glabel D_802EB050
+dlabel D_802EB050
 .double 0.01
 
-glabel D_802EB058
+dlabel D_802EB058
 .double -0.1
 
-glabel D_802EB060
+dlabel D_802EB060
 .double -0.01
 
-glabel D_802EB068
+dlabel D_802EB068
 .double 0.01
 
-glabel jtbl_802EB070
+dlabel jtbl_802EB070
 .word L802E1B48_1033C8, L802E1BF0_103470, L802E1C94_103514, L802E1D38_1035B8, L802E1DDC_10365C, L802E1E6C_1036EC
 
-glabel D_802EB088
+dlabel D_802EB088
 .double -0.01
 
-glabel D_802EB090
+dlabel D_802EB090
 .double 0.1
 
-glabel D_802EB098
+dlabel D_802EB098
 .double 0.01
 
-glabel D_802EB0A0
+dlabel D_802EB0A0
 .double -0.3
 
-glabel D_802EB0A8
+dlabel D_802EB0A8
 .double -0.01
 
-glabel D_802EB0B0
+dlabel D_802EB0B0
 .double 0.01
 
-glabel D_802EB0B8
+dlabel D_802EB0B8
 .double -0.01
 
 .section .text
@@ -77,7 +77,7 @@ glabel entity_RedSwitch_animate_scale
 /* 103060 802E17E0 8C22B010 */  lw        $v0, %lo(jtbl_802EB010)($at)
 /* 103064 802E17E4 00400008 */  jr        $v0
 /* 103068 802E17E8 00000000 */   nop
-glabel L802E17EC_10306C
+dlabel L802E17EC_10306C
 /* 10306C 802E17EC C602001C */  lwc1      $f2, 0x1c($s0)
 /* 103070 802E17F0 3C01802F */  lui       $at, %hi(D_802EB028)
 /* 103074 802E17F4 D420B028 */  ldc1      $f0, %lo(D_802EB028)($at)
@@ -121,7 +121,7 @@ glabel L802E17EC_10306C
 /* 103108 802E1888 00000000 */   nop
 /* 10310C 802E188C 080B86C1 */  j         .L802E1B04
 /* 103110 802E1890 00000000 */   nop
-glabel L802E1894_103114
+dlabel L802E1894_103114
 /* 103114 802E1894 C602001C */  lwc1      $f2, 0x1c($s0)
 /* 103118 802E1898 3C01802F */  lui       $at, %hi(D_802EB038)
 /* 10311C 802E189C D420B038 */  ldc1      $f0, %lo(D_802EB038)($at)
@@ -164,7 +164,7 @@ glabel L802E1894_103114
 /* 1031AC 802E192C 00000000 */   nop
 /* 1031B0 802E1930 080B86C1 */  j         .L802E1B04
 /* 1031B4 802E1934 00000000 */   nop
-glabel L802E1938_1031B8
+dlabel L802E1938_1031B8
 /* 1031B8 802E1938 C602001C */  lwc1      $f2, 0x1c($s0)
 /* 1031BC 802E193C 3C01802F */  lui       $at, %hi(D_802EB048)
 /* 1031C0 802E1940 D420B048 */  ldc1      $f0, %lo(D_802EB048)($at)
@@ -208,7 +208,7 @@ glabel L802E1938_1031B8
 /* 103254 802E19D4 00000000 */   nop
 /* 103258 802E19D8 080B86C1 */  j         .L802E1B04
 /* 10325C 802E19DC 00000000 */   nop
-glabel L802E19E0_103260
+dlabel L802E19E0_103260
 /* 103260 802E19E0 C602001C */  lwc1      $f2, 0x1c($s0)
 /* 103264 802E19E4 3C01802F */  lui       $at, %hi(D_802EB058)
 /* 103268 802E19E8 D420B058 */  ldc1      $f0, %lo(D_802EB058)($at)
@@ -251,7 +251,7 @@ glabel L802E19E0_103260
 /* 1032F8 802E1A78 00000000 */   nop
 /* 1032FC 802E1A7C 080B86C1 */  j         .L802E1B04
 /* 103300 802E1A80 00000000 */   nop
-glabel L802E1A84_103304
+dlabel L802E1A84_103304
 /* 103304 802E1A84 C6000014 */  lwc1      $f0, 0x14($s0)
 /* 103308 802E1A88 C6220054 */  lwc1      $f2, 0x54($s1)
 /* 10330C 802E1A8C 46020001 */  sub.s     $f0, $f0, $f2
@@ -291,7 +291,7 @@ glabel L802E1A84_103304
 /* 10338C 802E1B0C 24420001 */  addiu     $v0, $v0, 1
 /* 103390 802E1B10 080B86C7 */  j         .L802E1B1C
 /* 103394 802E1B14 A2020010 */   sb       $v0, 0x10($s0)
-glabel L802E1B18_103398
+dlabel L802E1B18_103398
 /* 103398 802E1B18 26520001 */  addiu     $s2, $s2, 1
 .L802E1B1C:
 /* 10339C 802E1B1C C6200054 */  lwc1      $f0, 0x54($s1)
@@ -305,7 +305,7 @@ glabel L802E1B18_103398
 /* 1033BC 802E1B3C 8C22B070 */  lw        $v0, %lo(jtbl_802EB070)($at)
 /* 1033C0 802E1B40 00400008 */  jr        $v0
 /* 1033C4 802E1B44 00000000 */   nop
-glabel L802E1B48_1033C8
+dlabel L802E1B48_1033C8
 /* 1033C8 802E1B48 C602001C */  lwc1      $f2, 0x1c($s0)
 /* 1033CC 802E1B4C 3C01BFE0 */  lui       $at, 0xbfe0
 /* 1033D0 802E1B50 44810800 */  mtc1      $at, $f1
@@ -349,7 +349,7 @@ glabel L802E1B48_1033C8
 /* 103464 802E1BE4 00000000 */   nop
 /* 103468 802E1BE8 080B8796 */  j         .L802E1E58
 /* 10346C 802E1BEC 00000000 */   nop
-glabel L802E1BF0_103470
+dlabel L802E1BF0_103470
 /* 103470 802E1BF0 C602001C */  lwc1      $f2, 0x1c($s0)
 /* 103474 802E1BF4 3C01802F */  lui       $at, %hi(D_802EB090)
 /* 103478 802E1BF8 D420B090 */  ldc1      $f0, %lo(D_802EB090)($at)
@@ -392,7 +392,7 @@ glabel L802E1BF0_103470
 /* 103508 802E1C88 00000000 */   nop
 /* 10350C 802E1C8C 080B8796 */  j         .L802E1E58
 /* 103510 802E1C90 00000000 */   nop
-glabel L802E1C94_103514
+dlabel L802E1C94_103514
 /* 103514 802E1C94 C602001C */  lwc1      $f2, 0x1c($s0)
 /* 103518 802E1C98 3C01802F */  lui       $at, %hi(D_802EB0A0)
 /* 10351C 802E1C9C D420B0A0 */  ldc1      $f0, %lo(D_802EB0A0)($at)
@@ -435,7 +435,7 @@ glabel L802E1C94_103514
 /* 1035AC 802E1D2C 00000000 */   nop
 /* 1035B0 802E1D30 080B8796 */  j         .L802E1E58
 /* 1035B4 802E1D34 00000000 */   nop
-glabel L802E1D38_1035B8
+dlabel L802E1D38_1035B8
 /* 1035B8 802E1D38 C602001C */  lwc1      $f2, 0x1c($s0)
 /* 1035BC 802E1D3C 44800000 */  mtc1      $zero, $f0
 /* 1035C0 802E1D40 44800800 */  mtc1      $zero, $f1
@@ -478,7 +478,7 @@ glabel L802E1D38_1035B8
 /* 103650 802E1DD0 00000000 */   nop
 /* 103654 802E1DD4 080B8796 */  j         .L802E1E58
 /* 103658 802E1DD8 00000000 */   nop
-glabel L802E1DDC_10365C
+dlabel L802E1DDC_10365C
 /* 10365C 802E1DDC C6000018 */  lwc1      $f0, 0x18($s0)
 /* 103660 802E1DE0 C6220058 */  lwc1      $f2, 0x58($s1)
 /* 103664 802E1DE4 46020001 */  sub.s     $f0, $f0, $f2
@@ -517,7 +517,7 @@ glabel L802E1DDC_10365C
 /* 1036E0 802E1E60 24420001 */  addiu     $v0, $v0, 1
 /* 1036E4 802E1E64 080B879C */  j         .L802E1E70
 /* 1036E8 802E1E68 A2020011 */   sb       $v0, 0x11($s0)
-glabel L802E1E6C_1036EC
+dlabel L802E1E6C_1036EC
 /* 1036EC 802E1E6C 26520001 */  addiu     $s2, $s2, 1
 .L802E1E70:
 /* 1036F0 802E1E70 0C0B854F */  jal       entity_switch_fall_down

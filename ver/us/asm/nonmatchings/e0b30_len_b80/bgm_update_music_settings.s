@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_80151290
+dlabel jtbl_80151290
 .word L8014A7A0_E0EA0, L8014A5AC_E0CAC, L8014A64C_E0D4C, L8014A68C_E0D8C, L8014A644_E0D44, L8014A698_E0D98, 0, 0
 
 .section .text
@@ -35,7 +35,7 @@ glabel bgm_update_music_settings
 /* E0CA0 8014A5A0 8C221290 */  lw        $v0, %lo(jtbl_80151290)($at)
 /* E0CA4 8014A5A4 00400008 */  jr        $v0
 /* E0CA8 8014A5A8 00000000 */   nop
-glabel L8014A5AC_E0CAC
+dlabel L8014A5AC_E0CAC
 /* E0CAC 8014A5AC 96230000 */  lhu       $v1, ($s1)
 /* E0CB0 8014A5B0 30620001 */  andi      $v0, $v1, 1
 /* E0CB4 8014A5B4 1040001D */  beqz      $v0, .L8014A62C
@@ -80,10 +80,10 @@ glabel L8014A5AC_E0CAC
 /* E0D38 8014A638 96220000 */  lhu       $v0, ($s1)
 /* E0D3C 8014A63C 00551024 */  and       $v0, $v0, $s5
 /* E0D40 8014A640 A6220000 */  sh        $v0, ($s1)
-glabel L8014A644_E0D44
+dlabel L8014A644_E0D44
 /* E0D44 8014A644 080529E8 */  j         L8014A7A0_E0EA0
 /* E0D48 8014A648 A6140000 */   sh       $s4, ($s0)
-glabel L8014A64C_E0D4C
+dlabel L8014A64C_E0D4C
 /* E0D4C 8014A64C 96230000 */  lhu       $v1, ($s1)
 /* E0D50 8014A650 00751024 */  and       $v0, $v1, $s5
 /* E0D54 8014A654 30630001 */  andi      $v1, $v1, 1
@@ -100,11 +100,11 @@ glabel L8014A64C_E0D4C
 /* E0D80 8014A680 24020003 */  addiu     $v0, $zero, 3
 /* E0D84 8014A684 080529E8 */  j         L8014A7A0_E0EA0
 /* E0D88 8014A688 A6020000 */   sh       $v0, ($s0)
-glabel L8014A68C_E0D8C
+dlabel L8014A68C_E0D8C
 /* E0D8C 8014A68C 24020004 */  addiu     $v0, $zero, 4
 /* E0D90 8014A690 080529E8 */  j         L8014A7A0_E0EA0
 /* E0D94 8014A694 A6020000 */   sh       $v0, ($s0)
-glabel L8014A698_E0D98
+dlabel L8014A698_E0D98
 /* E0D98 8014A698 96230000 */  lhu       $v1, ($s1)
 /* E0D9C 8014A69C 30620008 */  andi      $v0, $v1, 8
 /* E0DA0 8014A6A0 14400029 */  bnez      $v0, .L8014A748
@@ -177,7 +177,7 @@ glabel L8014A698_E0D98
 /* E0E98 8014A798 3042FFF7 */  andi      $v0, $v0, 0xfff7
 .L8014A79C:
 /* E0E9C 8014A79C A6220000 */  sh        $v0, ($s1)
-glabel L8014A7A0_E0EA0
+dlabel L8014A7A0_E0EA0
 /* E0EA0 8014A7A0 26520001 */  addiu     $s2, $s2, 1
 .L8014A7A4:
 /* E0EA4 8014A7A4 26100030 */  addiu     $s0, $s0, 0x30

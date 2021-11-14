@@ -2,8 +2,8 @@
 
 .section .data
 
-glabel D_E00B07E0
+dlabel D_E00B07E0
 .double 0.3
 
-glabel D_E00B07E8
+dlabel D_E00B07E8
 .double 0.1

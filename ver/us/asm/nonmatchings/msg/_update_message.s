@@ -3,13 +3,13 @@
 
 .section .rodata
 
-glabel D_80150370
+dlabel D_80150370
 .double 3.8
 
-glabel D_80150378
+dlabel D_80150378
 .double 122.0
 
-glabel jtbl_80150380
+dlabel jtbl_80150380
 .word L80123E98_BA598, L80124174_BA874, L80124174_BA874, L80123E50_BA550, L80124174_BA874, L80123F2C_BA62C, L80124174_BA874, L80124174_BA874, L80124174_BA874, L80124174_BA874, L80124018_BA718, L80124174_BA874, L80124174_BA874, L80124174_BA874
 
 .section .text
@@ -415,7 +415,7 @@ glabel _update_message
 /* BA544 80123E44 8C220380 */  lw        $v0, %lo(jtbl_80150380)($at)
 /* BA548 80123E48 00400008 */  jr        $v0
 /* BA54C 80123E4C 00000000 */   nop
-glabel L80123E50_BA550
+dlabel L80123E50_BA550
 /* BA550 80123E50 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* BA554 80123E54 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* BA558 80123E58 8C430010 */  lw        $v1, 0x10($v0)
@@ -434,7 +434,7 @@ glabel L80123E50_BA550
 /* BA58C 80123E8C 24020001 */   addiu    $v0, $zero, 1
 /* BA590 80123E90 34620100 */  ori       $v0, $v1, 0x100
 /* BA594 80123E94 AE0204FC */  sw        $v0, 0x4fc($s0)
-glabel L80123E98_BA598
+dlabel L80123E98_BA598
 /* BA598 80123E98 24020001 */  addiu     $v0, $zero, 1
 .L80123E9C:
 /* BA59C 80123E9C 920304F8 */  lbu       $v1, 0x4f8($s0)
@@ -478,7 +478,7 @@ glabel L80123E98_BA598
 /* BA620 80123F20 0000302D */   daddu    $a2, $zero, $zero
 /* BA624 80123F24 0804905D */  j         L80124174_BA874
 /* BA628 80123F28 00000000 */   nop
-glabel L80123F2C_BA62C
+dlabel L80123F2C_BA62C
 /* BA62C 80123F2C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* BA630 80123F30 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* BA634 80123F34 8C420010 */  lw        $v0, 0x10($v0)
@@ -544,7 +544,7 @@ glabel L80123F2C_BA62C
 /* BA70C 8012400C 02021021 */  addu      $v0, $s0, $v0
 /* BA710 80124010 0804905D */  j         L80124174_BA874
 /* BA714 80124014 A4430488 */   sh       $v1, 0x488($v0)
-glabel L80124018_BA718
+dlabel L80124018_BA718
 /* BA718 80124018 960204CC */  lhu       $v0, 0x4cc($s0)
 /* BA71C 8012401C 92030487 */  lbu       $v1, 0x487($s0)
 /* BA720 80124020 24420001 */  addiu     $v0, $v0, 1
@@ -642,7 +642,7 @@ glabel L80124018_BA718
 /* BA868 80124168 A20204F8 */  sb        $v0, 0x4f8($s0)
 /* BA86C 8012416C A200047C */  sb        $zero, 0x47c($s0)
 /* BA870 80124170 A600047E */  sh        $zero, 0x47e($s0)
-glabel L80124174_BA874
+dlabel L80124174_BA874
 /* BA874 80124174 8E0204FC */  lw        $v0, 0x4fc($s0)
 /* BA878 80124178 30420001 */  andi      $v0, $v0, 1
 /* BA87C 8012417C 1040001B */  beqz      $v0, .L801241EC

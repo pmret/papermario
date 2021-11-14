@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_802EB2F0
+dlabel jtbl_802EB2F0
 .word L802E7264_108AE4, L802E72B4_108B34, L802E72D8_108B58, L802E7358_108BD8, L802E73DC_108C5C, L802E741C_108C9C
 
 .section .text
@@ -22,7 +22,7 @@ glabel entity_Chest_open
 /* 108AD8 802E7258 8C22B2F0 */  lw        $v0, %lo(jtbl_802EB2F0)($at)
 /* 108ADC 802E725C 00400008 */  jr        $v0
 /* 108AE0 802E7260 00000000 */   nop
-glabel L802E7264_108AE4
+dlabel L802E7264_108AE4
 /* 108AE4 802E7264 C6020008 */  lwc1      $f2, 8($s0)
 /* 108AE8 802E7268 3C013F80 */  lui       $at, 0x3f80
 /* 108AEC 802E726C 44810000 */  mtc1      $at, $f0
@@ -44,7 +44,7 @@ glabel L802E7264_108AE4
 /* 108B28 802E72A8 92020005 */  lbu       $v0, 5($s0)
 /* 108B2C 802E72AC 080B9D05 */  j         .L802E7414
 /* 108B30 802E72B0 A2030006 */   sb       $v1, 6($s0)
-glabel L802E72B4_108B34
+dlabel L802E72B4_108B34
 /* 108B34 802E72B4 92020006 */  lbu       $v0, 6($s0)
 /* 108B38 802E72B8 2442FFFF */  addiu     $v0, $v0, -1
 /* 108B3C 802E72BC A2020006 */  sb        $v0, 6($s0)
@@ -54,7 +54,7 @@ glabel L802E72B4_108B34
 /* 108B4C 802E72CC 92020005 */  lbu       $v0, 5($s0)
 /* 108B50 802E72D0 080B9D05 */  j         .L802E7414
 /* 108B54 802E72D4 AE00000C */   sw       $zero, 0xc($s0)
-glabel L802E72D8_108B58
+dlabel L802E72D8_108B58
 /* 108B58 802E72D8 C600000C */  lwc1      $f0, 0xc($s0)
 /* 108B5C 802E72DC 3C014080 */  lui       $at, 0x4080
 /* 108B60 802E72E0 44811000 */  mtc1      $at, $f2
@@ -88,7 +88,7 @@ glabel L802E72D8_108B58
 /* 108BCC 802E734C 46020082 */  mul.s     $f2, $f0, $f2
 /* 108BD0 802E7350 080B9CF3 */  j         .L802E73CC
 /* 108BD4 802E7354 00000000 */   nop
-glabel L802E7358_108BD8
+dlabel L802E7358_108BD8
 /* 108BD8 802E7358 C600000C */  lwc1      $f0, 0xc($s0)
 /* 108BDC 802E735C 3C013F80 */  lui       $at, 0x3f80
 /* 108BE0 802E7360 44811000 */  mtc1      $at, $f2
@@ -124,7 +124,7 @@ glabel L802E7358_108BD8
 /* 108C50 802E73D0 46020001 */  sub.s     $f0, $f0, $f2
 /* 108C54 802E73D4 080B9D07 */  j         L802E741C_108C9C
 /* 108C58 802E73D8 E6000008 */   swc1     $f0, 8($s0)
-glabel L802E73DC_108C5C
+dlabel L802E73DC_108C5C
 /* 108C5C 802E73DC 92020006 */  lbu       $v0, 6($s0)
 /* 108C60 802E73E0 2442FFFF */  addiu     $v0, $v0, -1
 /* 108C64 802E73E4 A2020006 */  sb        $v0, 6($s0)
@@ -143,7 +143,7 @@ glabel L802E73DC_108C5C
 .L802E7414:
 /* 108C94 802E7414 24420001 */  addiu     $v0, $v0, 1
 /* 108C98 802E7418 A2020005 */  sb        $v0, 5($s0)
-glabel L802E741C_108C9C
+dlabel L802E741C_108C9C
 /* 108C9C 802E741C 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 108CA0 802E7420 8FB00010 */  lw        $s0, 0x10($sp)
 /* 108CA4 802E7424 03E00008 */  jr        $ra

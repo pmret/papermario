@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_80243FA0_E12740
+dlabel jtbl_80243FA0_E12740
 .word L80241588_E0FD28, L802415A4_E0FD44, L80241604_E0FDA4, L8024163C_E0FDDC, L80241658_E0FDF8, 0, 0, 0
 
 .section .text
@@ -27,7 +27,7 @@ glabel func_80241540_E0FCE0
 /* E0FD1C 8024157C 8C223FA0 */  lw        $v0, %lo(jtbl_80243FA0_E12740)($at)
 /* E0FD20 80241580 00400008 */  jr        $v0
 /* E0FD24 80241584 00000000 */   nop
-glabel L80241588_E0FD28
+dlabel L80241588_E0FD28
 /* E0FD28 80241588 2404021C */  addiu     $a0, $zero, 0x21c
 /* E0FD2C 8024158C 0000282D */  daddu     $a1, $zero, $zero
 /* E0FD30 80241590 00A0302D */  daddu     $a2, $a1, $zero
@@ -35,7 +35,7 @@ glabel L80241588_E0FD28
 /* E0FD38 80241598 AE000004 */  sw        $zero, 4($s0)
 /* E0FD3C 8024159C 0C015478 */  jal       snd_start_sound
 /* E0FD40 802415A0 AE020000 */   sw       $v0, ($s0)
-glabel L802415A4_E0FD44
+dlabel L802415A4_E0FD44
 /* E0FD44 802415A4 3C054200 */  lui       $a1, 0x4200
 /* E0FD48 802415A8 8E020004 */  lw        $v0, 4($s0)
 /* E0FD4C 802415AC 3C06437F */  lui       $a2, 0x437f
@@ -60,7 +60,7 @@ glabel L802415A4_E0FD44
 /* E0FD98 802415F8 AE02000C */  sw        $v0, 0xc($s0)
 /* E0FD9C 802415FC 080905A8 */  j         .L802416A0
 /* E0FDA0 80241600 AE020010 */   sw       $v0, 0x10($s0)
-glabel L80241604_E0FDA4
+dlabel L80241604_E0FDA4
 /* E0FDA4 80241604 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* E0FDA8 80241608 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* E0FDAC 8024160C 240200FF */  addiu     $v0, $zero, 0xff
@@ -76,7 +76,7 @@ glabel L80241604_E0FDA4
 /* E0FDD0 80241630 24020003 */  addiu     $v0, $zero, 3
 /* E0FDD4 80241634 1462001A */  bne       $v1, $v0, .L802416A0
 /* E0FDD8 80241638 00000000 */   nop
-glabel L8024163C_E0FDDC
+dlabel L8024163C_E0FDDC
 /* E0FDDC 8024163C 240400CA */  addiu     $a0, $zero, 0xca
 /* E0FDE0 80241640 0000282D */  daddu     $a1, $zero, $zero
 /* E0FDE4 80241644 00A0302D */  daddu     $a2, $a1, $zero
@@ -84,7 +84,7 @@ glabel L8024163C_E0FDDC
 /* E0FDEC 8024164C AE000004 */  sw        $zero, 4($s0)
 /* E0FDF0 80241650 0C015478 */  jal       snd_start_sound
 /* E0FDF4 80241654 AE020000 */   sw       $v0, ($s0)
-glabel L80241658_E0FDF8
+dlabel L80241658_E0FDF8
 /* E0FDF8 80241658 0000202D */  daddu     $a0, $zero, $zero
 /* E0FDFC 8024165C C6000010 */  lwc1      $f0, 0x10($s0)
 /* E0FE00 80241660 46800020 */  cvt.s.w   $f0, $f0

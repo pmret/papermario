@@ -3,10 +3,10 @@
 
 .section .rodata
 
-glabel D_802455F8_DB78B8
+dlabel D_802455F8_DB78B8
 .double 0.09
 
-glabel D_80245600_DB78C0
+dlabel D_80245600_DB78C0
 .byte 0x3F, 0xB7, 0x0A, 0x3D, 0x70, 0xA3, 0xD7, 0x0A
 
 .section .text

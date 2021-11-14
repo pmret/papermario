@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_80245F20_AD4060
+dlabel D_80245F20_AD4060
 .double 0.3, 2.8165885703910132e+209
 
 .section .text

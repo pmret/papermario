@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_800983E0
+dlabel jtbl_800983E0
 .word L80037718_12B18, L8003768C_12A8C, L800376BC_12ABC, L80037718_12B18, L800376C8_12AC8, L800376D4_12AD4
 
 .section .text
@@ -30,7 +30,7 @@ glabel appendGfx_title_screen
 /* 12A80 80037680 8C2283E0 */  lw        $v0, %lo(jtbl_800983E0)($at)
 /* 12A84 80037684 00400008 */  jr        $v0
 /* 12A88 80037688 00000000 */   nop
-glabel L8003768C_12A8C
+dlabel L8003768C_12A8C
 /* 12A8C 8003768C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 12A90 80037690 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 12A94 80037694 804300AF */  lb        $v1, 0xaf($v0)
@@ -43,15 +43,15 @@ glabel L8003768C_12A8C
 /* 12AB0 800376B0 46800020 */  cvt.s.w   $f0, $f0
 /* 12AB4 800376B4 0800DDC2 */  j         .L80037708
 /* 12AB8 800376B8 46006303 */   div.s    $f12, $f12, $f0
-glabel L800376BC_12ABC
+dlabel L800376BC_12ABC
 /* 12ABC 800376BC 44806000 */  mtc1      $zero, $f12
 /* 12AC0 800376C0 0800DDC4 */  j         .L80037710
 /* 12AC4 800376C4 00000000 */   nop
-glabel L800376C8_12AC8
+dlabel L800376C8_12AC8
 /* 12AC8 800376C8 44806000 */  mtc1      $zero, $f12
 /* 12ACC 800376CC 0800DDC4 */  j         .L80037710
 /* 12AD0 800376D0 00000000 */   nop
-glabel L800376D4_12AD4
+dlabel L800376D4_12AD4
 /* 12AD4 800376D4 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* 12AD8 800376D8 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 12ADC 800376DC 806200AF */  lb        $v0, 0xaf($v1)
@@ -71,7 +71,7 @@ glabel L800376D4_12AD4
 .L80037710:
 /* 12B10 80037710 0C00DE5A */  jal       title_screen_draw_images
 /* 12B14 80037714 46006386 */   mov.s    $f14, $f12
-glabel L80037718_12B18
+dlabel L80037718_12B18
 /* 12B18 80037718 3C03FF10 */  lui       $v1, 0xff10
 /* 12B1C 8003771C 3463013F */  ori       $v1, $v1, 0x13f
 /* 12B20 80037720 3C10800A */  lui       $s0, %hi(gMasterGfxPos)

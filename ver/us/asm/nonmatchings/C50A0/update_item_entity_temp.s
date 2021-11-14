@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_80150E20
+dlabel jtbl_80150E20
 .word L801357A8_CBEA8, L80135B24_CC224, L80135E48_CC548, L80135E78_CC578, L80135F08_CC608, L80135F78_CC678, L8013637C_CCA7C, L8013637C_CCA7C, L80135F94_CC694, L80135FE8_CC6E8, L8013610C_CC80C, L8013614C_CC84C, L8013629C_CC99C, L801362D0_CC9D0, L80136310_CCA10, 0
 
 .section .text
@@ -62,7 +62,7 @@ glabel update_item_entity_temp
 /* CBE9C 8013579C 8C220E20 */  lw        $v0, %lo(jtbl_80150E20)($at)
 /* CBEA0 801357A0 00400008 */  jr        $v0
 /* CBEA4 801357A4 00000000 */   nop
-glabel L801357A8_CBEA8
+dlabel L801357A8_CBEA8
 /* CBEA8 801357A8 8E220000 */  lw        $v0, ($s1)
 /* CBEAC 801357AC 3C030200 */  lui       $v1, 0x200
 /* CBEB0 801357B0 00431024 */  and       $v0, $v0, $v1
@@ -311,7 +311,7 @@ glabel L801357A8_CBEA8
 /* CC218 80135B18 AC3268E4 */  sw        $s2, %lo(D_801568E4)($at)
 /* CC21C 80135B1C 0804D8DF */  j         L8013637C_CCA7C
 /* CC220 80135B20 00000000 */   nop
-glabel L80135B24_CC224
+dlabel L80135B24_CC224
 /* CC224 80135B24 3C038015 */  lui       $v1, %hi(D_801568E4)
 /* CC228 80135B28 8C6368E4 */  lw        $v1, %lo(D_801568E4)($v1)
 /* CC22C 80135B2C 24020009 */  addiu     $v0, $zero, 9
@@ -526,7 +526,7 @@ glabel L80135B24_CC224
 /* CC53C 80135E3C 24020003 */  addiu     $v0, $zero, 3
 /* CC540 80135E40 0804D8DF */  j         L8013637C_CCA7C
 /* CC544 80135E44 A222001A */   sb       $v0, 0x1a($s1)
-glabel L80135E48_CC548
+dlabel L80135E48_CC548
 /* CC548 80135E48 3C038016 */  lui       $v1, %hi(gWindows)
 /* CC54C 80135E4C 24639D50 */  addiu     $v1, $v1, %lo(gWindows)
 /* CC550 80135E50 90620180 */  lbu       $v0, 0x180($v1)
@@ -539,7 +539,7 @@ glabel L80135E48_CC548
 /* CC56C 80135E6C 24020004 */   addiu    $v0, $zero, 4
 /* CC570 80135E70 0804D8DF */  j         L8013637C_CCA7C
 /* CC574 80135E74 A222001A */   sb       $v0, 0x1a($s1)
-glabel L80135E78_CC578
+dlabel L80135E78_CC578
 /* CC578 80135E78 86220018 */  lh        $v0, 0x18($s1)
 /* CC57C 80135E7C 00021140 */  sll       $v0, $v0, 5
 /* CC580 80135E80 3C018008 */  lui       $at, %hi(gItemTable+0x18)
@@ -579,7 +579,7 @@ glabel L80135E78_CC578
 .L80135F00:
 /* CC600 80135F00 0804D8DF */  j         L8013637C_CCA7C
 /* CC604 80135F04 A222001A */   sb       $v0, 0x1a($s1)
-glabel L80135F08_CC608
+dlabel L80135F08_CC608
 /* CC608 80135F08 86230018 */  lh        $v1, 0x18($s1)
 /* CC60C 80135F0C 00031140 */  sll       $v0, $v1, 5
 /* CC610 80135F10 3C018008 */  lui       $at, %hi(gItemTable+0x18)
@@ -610,7 +610,7 @@ glabel L80135F08_CC608
 /* CC66C 80135F6C 24020006 */  addiu     $v0, $zero, 6
 /* CC670 80135F70 0804D8DF */  j         L8013637C_CCA7C
 /* CC674 80135F74 A222001A */   sb       $v0, 0x1a($s1)
-glabel L80135F78_CC678
+dlabel L80135F78_CC678
 /* CC678 80135F78 3C038015 */  lui       $v1, %hi(D_801568F8)
 /* CC67C 80135F7C 8C6368F8 */  lw        $v1, %lo(D_801568F8)($v1)
 /* CC680 80135F80 24020001 */  addiu     $v0, $zero, 1
@@ -618,7 +618,7 @@ glabel L80135F78_CC678
 /* CC688 80135F88 00000000 */   nop
 /* CC68C 80135F8C 3C018015 */  lui       $at, %hi(D_801565A4)
 /* CC690 80135F90 A42065A4 */  sh        $zero, %lo(D_801565A4)($at)
-glabel L80135F94_CC694
+dlabel L80135F94_CC694
 /* CC694 80135F94 8E220000 */  lw        $v0, ($s1)
 /* CC698 80135F98 3C030200 */  lui       $v1, 0x200
 /* CC69C 80135F9C 00431024 */  and       $v0, $v0, $v1
@@ -641,7 +641,7 @@ glabel L80135F94_CC694
 /* CC6DC 80135FDC 8C8468E0 */  lw        $a0, %lo(D_801568E0)($a0)
 /* CC6E0 80135FE0 0804D8D5 */  j         .L80136354
 /* CC6E4 80135FE4 00000000 */   nop
-glabel L80135FE8_CC6E8
+dlabel L80135FE8_CC6E8
 /* CC6E8 80135FE8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* CC6EC 80135FEC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* CC6F0 80135FF0 8C420010 */  lw        $v0, 0x10($v0)
@@ -717,7 +717,7 @@ glabel L80135FE8_CC6E8
 /* CC800 80136100 AC2068E4 */  sw        $zero, %lo(D_801568E4)($at)
 /* CC804 80136104 0804D8DF */  j         L8013637C_CCA7C
 /* CC808 80136108 A222001A */   sb       $v0, 0x1a($s1)
-glabel L8013610C_CC80C
+dlabel L8013610C_CC80C
 /* CC80C 8013610C 3C038016 */  lui       $v1, %hi(gWindows)
 /* CC810 80136110 24639D50 */  addiu     $v1, $v1, %lo(gWindows)
 /* CC814 80136114 90620180 */  lbu       $v0, 0x180($v1)
@@ -734,7 +734,7 @@ glabel L8013610C_CC80C
 /* CC840 80136140 2402000C */   addiu    $v0, $zero, 0xc
 /* CC844 80136144 0804D8DF */  j         L8013637C_CCA7C
 /* CC848 80136148 A222001A */   sb       $v0, 0x1a($s1)
-glabel L8013614C_CC84C
+dlabel L8013614C_CC84C
 /* CC84C 8013614C 3C158015 */  lui       $s5, %hi(D_801568E4)
 /* CC850 80136150 26B568E4 */  addiu     $s5, $s5, %lo(D_801568E4)
 /* CC854 80136154 8EA20000 */  lw        $v0, ($s5)
@@ -822,7 +822,7 @@ glabel L8013614C_CC84C
 /* CC990 80136290 2402000D */  addiu     $v0, $zero, 0xd
 /* CC994 80136294 0804D8DF */  j         L8013637C_CCA7C
 /* CC998 80136298 A222001A */   sb       $v0, 0x1a($s1)
-glabel L8013629C_CC99C
+dlabel L8013629C_CC99C
 /* CC99C 8013629C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* CC9A0 801362A0 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* CC9A4 801362A4 8C420010 */  lw        $v0, 0x10($v0)
@@ -836,7 +836,7 @@ glabel L8013629C_CC99C
 /* CC9C4 801362C4 2402000E */  addiu     $v0, $zero, 0xe
 /* CC9C8 801362C8 0804D8DF */  j         L8013637C_CCA7C
 /* CC9CC 801362CC A222001A */   sb       $v0, 0x1a($s1)
-glabel L801362D0_CC9D0
+dlabel L801362D0_CC9D0
 /* CC9D0 801362D0 3C038016 */  lui       $v1, %hi(gWindows)
 /* CC9D4 801362D4 24639D50 */  addiu     $v1, $v1, %lo(gWindows)
 /* CC9D8 801362D8 90620180 */  lbu       $v0, 0x180($v1)
@@ -853,7 +853,7 @@ glabel L801362D0_CC9D0
 /* CCA04 80136304 2402000F */   addiu    $v0, $zero, 0xf
 /* CCA08 80136308 0804D8DF */  j         L8013637C_CCA7C
 /* CCA0C 8013630C A222001A */   sb       $v0, 0x1a($s1)
-glabel L80136310_CCA10
+dlabel L80136310_CCA10
 /* CCA10 80136310 3C040001 */  lui       $a0, 1
 /* CCA14 80136314 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* CCA18 80136318 34840002 */   ori      $a0, $a0, 2
@@ -882,7 +882,7 @@ glabel L80136310_CCA10
 /* CCA70 80136370 00000000 */   nop
 /* CCA74 80136374 3C018015 */  lui       $at, %hi(D_801565A4)
 /* CCA78 80136378 A42065A4 */  sh        $zero, %lo(D_801565A4)($at)
-glabel L8013637C_CCA7C
+dlabel L8013637C_CCA7C
 /* CCA7C 8013637C 8FBF0038 */  lw        $ra, 0x38($sp)
 /* CCA80 80136380 8FB50034 */  lw        $s5, 0x34($sp)
 /* CCA84 80136384 8FB40030 */  lw        $s4, 0x30($sp)

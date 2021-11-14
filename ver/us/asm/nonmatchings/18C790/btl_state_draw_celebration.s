@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_8029D550
+dlabel jtbl_8029D550
 .word L80260208_18EAE8, L80260300_18EBE0, L80260774_18F054, L80260774_18F054, L80260800_18F0E0, L80260838_18F118, L80260838_18F118, L80260838_18F118, L80260300_18EBE0, L80260300_18EBE0, L80260838_18F118, L80260838_18F118, L80260838_18F118, L80260838_18F118, L80260810_18F0F0, 0
 
 .section .text
@@ -28,7 +28,7 @@ glabel btl_state_draw_celebration
 /* 18EADC 802601FC 8C22D550 */  lw        $v0, %lo(jtbl_8029D550)($at)
 /* 18EAE0 80260200 00400008 */  jr        $v0
 /* 18EAE4 80260204 00000000 */   nop
-glabel L80260208_18EAE8
+dlabel L80260208_18EAE8
 /* 18EAE8 80260208 0C097FE3 */  jal       btl_draw_upgrade_windows
 /* 18EAEC 8026020C 0000202D */   daddu    $a0, $zero, $zero
 /* 18EAF0 80260210 24050080 */  addiu     $a1, $zero, 0x80
@@ -93,7 +93,7 @@ glabel L80260208_18EAE8
 /* 18EBD4 802602F4 2694001C */   addiu    $s4, $s4, 0x1c
 /* 18EBD8 802602F8 0809820E */  j         L80260838_18F118
 /* 18EBDC 802602FC 00000000 */   nop
-glabel L80260300_18EBE0
+dlabel L80260300_18EBE0
 /* 18EBE0 80260300 3C02800E */  lui       $v0, %hi(gBattleStatus)
 /* 18EBE4 80260304 2442C070 */  addiu     $v0, $v0, %lo(gBattleStatus)
 /* 18EBE8 80260308 80430048 */  lb        $v1, 0x48($v0)
@@ -397,7 +397,7 @@ glabel L80260300_18EBE0
 /* 18F048 80260768 0220202D */   daddu    $a0, $s1, $zero
 /* 18F04C 8026076C 0809820E */  j         L80260838_18F118
 /* 18F050 80260770 00000000 */   nop
-glabel L80260774_18F054
+dlabel L80260774_18F054
 /* 18F054 80260774 0C097FE3 */  jal       btl_draw_upgrade_windows
 /* 18F058 80260778 24040001 */   addiu    $a0, $zero, 1
 /* 18F05C 8026077C 3C10802A */  lui       $s0, %hi(D_8029FA80)
@@ -435,12 +435,12 @@ glabel L80260774_18F054
 /* 18F0D4 802607F4 C4224150 */  lwc1      $f2, %lo(D_80284150)($at)
 /* 18F0D8 802607F8 0809820B */  j         .L8026082C
 /* 18F0DC 802607FC 468010A0 */   cvt.s.w  $f2, $f2
-glabel L80260800_18F0E0
+dlabel L80260800_18F0E0
 /* 18F0E0 80260800 3C018028 */  lui       $at, %hi(D_80284150)
 /* 18F0E4 80260804 C4224150 */  lwc1      $f2, %lo(D_80284150)($at)
 /* 18F0E8 80260808 0809820B */  j         .L8026082C
 /* 18F0EC 8026080C 468010A0 */   cvt.s.w  $f2, $f2
-glabel L80260810_18F0F0
+dlabel L80260810_18F0F0
 /* 18F0F0 80260810 3C058028 */  lui       $a1, %hi(D_80284150)
 /* 18F0F4 80260814 8CA54150 */  lw        $a1, %lo(D_80284150)($a1)
 /* 18F0F8 80260818 10A00007 */  beqz      $a1, L80260838_18F118
@@ -452,7 +452,7 @@ glabel L80260810_18F0F0
 /* 18F10C 8026082C 44051000 */  mfc1      $a1, $f2
 /* 18F110 80260830 0C04DF62 */  jal       set_screen_overlay_params_front
 /* 18F114 80260834 0000202D */   daddu    $a0, $zero, $zero
-glabel L80260838_18F118
+dlabel L80260838_18F118
 /* 18F118 80260838 3C03800E */  lui       $v1, %hi(gBattleState2)
 /* 18F11C 8026083C 8C63C4DC */  lw        $v1, %lo(gBattleState2)($v1)
 /* 18F120 80260840 28620007 */  slti      $v0, $v1, 7

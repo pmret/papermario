@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_80248470_9269E0
+dlabel D_80248470_9269E0
 .ascii "party_pareta\0\0\0\0"
 
 .section .text

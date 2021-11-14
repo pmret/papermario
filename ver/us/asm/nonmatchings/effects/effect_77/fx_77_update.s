@@ -30,7 +30,7 @@ glabel fx_77_update
 /* 396750 E009A1A0 8C22AA60 */  lw        $v0, %lo(jtbl_E009AA60)($at)
 /* 396754 E009A1A4 00400008 */  jr        $v0
 /* 396758 E009A1A8 00000000 */   nop
-glabel LE009A1AC_39675C
+dlabel LE009A1AC_39675C
 /* 39675C E009A1AC 8E23003C */  lw        $v1, 0x3c($s1)
 /* 396760 E009A1B0 8E220020 */  lw        $v0, 0x20($s1)
 /* 396764 E009A1B4 C6200028 */  lwc1      $f0, 0x28($s1)
@@ -71,7 +71,7 @@ glabel LE009A1AC_39675C
 /* 3967F0 E009A240 E6280010 */  swc1      $f8, 0x10($s1)
 /* 3967F4 E009A244 080268E0 */  j         .LE009A380
 /* 3967F8 E009A248 AE22002C */   sw       $v0, 0x2c($s1)
-glabel LE009A24C_3967FC
+dlabel LE009A24C_3967FC
 /* 3967FC E009A24C 8E220030 */  lw        $v0, 0x30($s1)
 /* 396800 E009A250 2442FFFF */  addiu     $v0, $v0, -1
 /* 396804 E009A254 1C40004A */  bgtz      $v0, .LE009A380
@@ -81,7 +81,7 @@ glabel LE009A24C_3967FC
 /* 396814 E009A264 2402000A */  addiu     $v0, $zero, 0xa
 /* 396818 E009A268 080268E0 */  j         .LE009A380
 /* 39681C E009A26C AE220030 */   sw       $v0, 0x30($s1)
-glabel LE009A270_396820
+dlabel LE009A270_396820
 /* 396820 E009A270 8E220030 */  lw        $v0, 0x30($s1)
 /* 396824 E009A274 2442FFFF */  addiu     $v0, $v0, -1
 /* 396828 E009A278 1C400041 */  bgtz      $v0, .LE009A380
@@ -89,7 +89,7 @@ glabel LE009A270_396820
 /* 396830 E009A280 24020003 */  addiu     $v0, $zero, 3
 /* 396834 E009A284 080268E0 */  j         .LE009A380
 /* 396838 E009A288 AE22002C */   sw       $v0, 0x2c($s1)
-glabel LE009A28C_39683C
+dlabel LE009A28C_39683C
 /* 39683C E009A28C C6200010 */  lwc1      $f0, 0x10($s1)
 /* 396840 E009A290 3C013F80 */  lui       $at, 0x3f80
 /* 396844 E009A294 44811000 */  mtc1      $at, $f2
@@ -130,7 +130,7 @@ glabel LE009A28C_39683C
 /* 3968D0 E009A320 24020014 */  addiu     $v0, $zero, 0x14
 /* 3968D4 E009A324 080268E0 */  j         .LE009A380
 /* 3968D8 E009A328 AE220030 */   sw       $v0, 0x30($s1)
-glabel LE009A32C_3968DC
+dlabel LE009A32C_3968DC
 /* 3968DC E009A32C 8E220030 */  lw        $v0, 0x30($s1)
 /* 3968E0 E009A330 2442FFFF */  addiu     $v0, $v0, -1
 /* 3968E4 E009A334 1C400012 */  bgtz      $v0, .LE009A380
@@ -138,7 +138,7 @@ glabel LE009A32C_3968DC
 /* 3968EC E009A33C 24020005 */  addiu     $v0, $zero, 5
 /* 3968F0 E009A340 080268E0 */  j         .LE009A380
 /* 3968F4 E009A344 AE22002C */   sw       $v0, 0x2c($s1)
-glabel LE009A348_3968F8
+dlabel LE009A348_3968F8
 /* 3968F8 E009A348 2862000A */  slti      $v0, $v1, 0xa
 /* 3968FC E009A34C 10400005 */  beqz      $v0, .LE009A364
 /* 396900 E009A350 00031040 */   sll      $v0, $v1, 1

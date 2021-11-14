@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_80099B20
+dlabel jtbl_80099B20
 .word L800613D4_3C7D4, L800612F4_3C6F4, L80061328_3C728, L800613E4_3C7E4, L800613E4_3C7E4, L8006135C_3C75C, L80061398_3C798, 0
 
 .section .text
@@ -171,7 +171,7 @@ glabel osDevMgrMain
 /* 3C6E8 800612E8 8C229B20 */  lw        $v0, %lo(jtbl_80099B20)($at)
 /* 3C6EC 800612EC 00400008 */  jr        $v0
 /* 3C6F0 800612F0 00000000 */   nop
-glabel L800612F4_3C6F4
+dlabel L800612F4_3C6F4
 /* 3C6F4 800612F4 8E440010 */  lw        $a0, 0x10($s2)
 /* 3C6F8 800612F8 27A5001C */  addiu     $a1, $sp, 0x1c
 /* 3C6FC 800612FC 0C0195BC */  jal       osRecvMesg
@@ -185,7 +185,7 @@ glabel L800612F4_3C6F4
 /* 3C71C 8006131C 00002021 */   addu     $a0, $zero, $zero
 /* 3C720 80061320 080184FA */  j         .L800613E8
 /* 3C724 80061324 00000000 */   nop
-glabel L80061328_3C728
+dlabel L80061328_3C728
 /* 3C728 80061328 8E440010 */  lw        $a0, 0x10($s2)
 /* 3C72C 8006132C 27A5001C */  addiu     $a1, $sp, 0x1c
 /* 3C730 80061330 0C0195BC */  jal       osRecvMesg
@@ -199,7 +199,7 @@ glabel L80061328_3C728
 /* 3C750 80061350 24040001 */   addiu    $a0, $zero, 1
 /* 3C754 80061354 080184FA */  j         .L800613E8
 /* 3C758 80061358 00000000 */   nop
-glabel L8006135C_3C75C
+dlabel L8006135C_3C75C
 /* 3C75C 8006135C 8E440010 */  lw        $a0, 0x10($s2)
 /* 3C760 80061360 27A5001C */  addiu     $a1, $sp, 0x1c
 /* 3C764 80061364 0C0195BC */  jal       osRecvMesg
@@ -215,7 +215,7 @@ glabel L8006135C_3C75C
 /* 3C78C 8006138C 00002821 */   addu     $a1, $zero, $zero
 /* 3C790 80061390 080184FA */  j         .L800613E8
 /* 3C794 80061394 00000000 */   nop
-glabel L80061398_3C798
+dlabel L80061398_3C798
 /* 3C798 80061398 8E440010 */  lw        $a0, 0x10($s2)
 /* 3C79C 8006139C 27A5001C */  addiu     $a1, $sp, 0x1c
 /* 3C7A0 800613A0 0C0195BC */  jal       osRecvMesg
@@ -231,12 +231,12 @@ glabel L80061398_3C798
 /* 3C7C8 800613C8 24050001 */   addiu    $a1, $zero, 1
 /* 3C7CC 800613CC 080184FA */  j         .L800613E8
 /* 3C7D0 800613D0 00000000 */   nop
-glabel L800613D4_3C7D4
+dlabel L800613D4_3C7D4
 /* 3C7D4 800613D4 8FA50018 */  lw        $a1, 0x18($sp)
 /* 3C7D8 800613D8 8CA40004 */  lw        $a0, 4($a1)
 /* 3C7DC 800613DC 0C019608 */  jal       osSendMesg
 /* 3C7E0 800613E0 00003021 */   addu     $a2, $zero, $zero
-glabel L800613E4_3C7E4
+dlabel L800613E4_3C7E4
 /* 3C7E4 800613E4 2402FFFF */  addiu     $v0, $zero, -1
 .L800613E8:
 /* 3C7E8 800613E8 1440FF35 */  bnez      $v0, .L800610C0

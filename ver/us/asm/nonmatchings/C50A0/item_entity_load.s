@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_80150A80
+dlabel jtbl_80150A80
 .word L801313BC_C7ABC, L801311B8_C78B8, L80131188_C7888, L80131188_C7888, L801311B0_C78B0, 0
 
 .section .text
@@ -33,7 +33,7 @@ glabel item_entity_load
 /* C787C 8013117C 26D6C310 */  addiu     $s6, $s6, -0x3cf0
 /* C7880 80131180 AFD00024 */  sw        $s0, 0x24($fp)
 /* C7884 80131184 AFD00028 */  sw        $s0, 0x28($fp)
-glabel L80131188_C7888
+dlabel L80131188_C7888
 /* C7888 80131188 8E030000 */  lw        $v1, ($s0)
 /* C788C 8013118C 2C620005 */  sltiu     $v0, $v1, 5
 /* C7890 80131190 1040FFFD */  beqz      $v0, L80131188_C7888
@@ -44,10 +44,10 @@ glabel L80131188_C7888
 /* C78A4 801311A4 8C220A80 */  lw        $v0, %lo(jtbl_80150A80)($at)
 /* C78A8 801311A8 00400008 */  jr        $v0
 /* C78AC 801311AC 00000000 */   nop
-glabel L801311B0_C78B0
+dlabel L801311B0_C78B0
 /* C78B0 801311B0 0804C462 */  j         L80131188_C7888
 /* C78B4 801311B4 26100008 */   addiu    $s0, $s0, 8
-glabel L801311B8_C78B8
+dlabel L801311B8_C78B8
 /* C78B8 801311B8 26100004 */  addiu     $s0, $s0, 4
 /* C78BC 801311BC 8E060000 */  lw        $a2, ($s0)
 /* C78C0 801311C0 26100004 */  addiu     $s0, $s0, 4
@@ -195,7 +195,7 @@ glabel L801311B8_C78B8
 /* C7AB0 801313B0 02429021 */  addu      $s2, $s2, $v0
 /* C7AB4 801313B4 0804C4BB */  j         .L801312EC
 /* C7AB8 801313B8 26310001 */   addiu    $s1, $s1, 1
-glabel L801313BC_C7ABC
+dlabel L801313BC_C7ABC
 /* C7ABC 801313BC 0C04C775 */  jal       item_entity_update
 /* C7AC0 801313C0 03C0202D */   daddu    $a0, $fp, $zero
 /* C7AC4 801313C4 8FBF0034 */  lw        $ra, 0x34($sp)

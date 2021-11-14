@@ -3,22 +3,22 @@
 
 .section .rodata
 
-glabel D_80150A08
+dlabel D_80150A08
 .double 0.7
 
-glabel D_80150A10
+dlabel D_80150A10
 .double 0.005
 
-glabel D_80150A18
+dlabel D_80150A18
 .double 0.67
 
-glabel D_80150A20
+dlabel D_80150A20
 .double 0.3
 
-glabel D_80150A28
+dlabel D_80150A28
 .double 0.005
 
-glabel D_80150A30
+dlabel D_80150A30
 .double 0.38, 0.0
 
 .section .text

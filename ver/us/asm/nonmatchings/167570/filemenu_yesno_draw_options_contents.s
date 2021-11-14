@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_8024BFE8
+dlabel jtbl_8024BFE8
 .word L80246D64_1675C4, L80246D64_1675C4, L80246D64_1675C4, L80246D64_1675C4, L80246D64_1675C4, 0
 
 .section .text
@@ -30,7 +30,7 @@ glabel filemenu_yesno_draw_options_contents
 /* 1675B8 80246D58 8C22BFE8 */  lw        $v0, %lo(jtbl_8024BFE8)($at)
 /* 1675BC 80246D5C 00400008 */  jr        $v0
 /* 1675C0 80246D60 00000000 */   nop
-glabel L80246D64_1675C4
+dlabel L80246D64_1675C4
 /* 1675C4 80246D64 2413001C */  addiu     $s3, $zero, 0x1c
 /* 1675C8 80246D68 24120004 */  addiu     $s2, $zero, 4
 /* 1675CC 80246D6C 0260882D */  daddu     $s1, $s3, $zero
