@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 #define NAMESPACE b_area_sam
 
@@ -6,9 +7,9 @@ INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218000_623BA0);
 
 #include "common/ActorJumpToPos.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_802189E4_624584);
+#include "common/UnkActorSizeFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218A90_624630);
+#include "common/UnkEffect6CFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218AF4_624694);
 
@@ -16,9 +17,11 @@ INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218B2C_6246CC);
 
 #include "common/UnkBattleFunc1.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218C40_6247E0);
+#include "common/UnkActorPosFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218D64_624904);
+#define NAMESPACE dup_b_area_sam
+#include "common/UnkActorPosFunc.inc.c"
+#define NAMESPACE b_area_sam
 
 INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218E88_624A28);
 
