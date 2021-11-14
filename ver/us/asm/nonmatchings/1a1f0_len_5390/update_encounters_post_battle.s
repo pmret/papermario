@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_80098698
+dlabel jtbl_80098698
 .word L80042198_1D598, L800421AC_1D5AC, L800421C0_1D5C0, L800421E8_1D5E8, L800421D4_1D5D4, 0
 
 .section .text
@@ -183,31 +183,31 @@ glabel update_encounters_post_battle
 /* 1D58C 8004218C 8C228698 */  lw        $v0, %lo(jtbl_80098698)($at)
 /* 1D590 80042190 00400008 */  jr        $v0
 /* 1D594 80042194 00000000 */   nop
-glabel L80042198_1D598
+dlabel L80042198_1D598
 /* 1D598 80042198 2402000A */  addiu     $v0, $zero, 0xa
 /* 1D59C 8004219C 3C01800A */  lui       $at, %hi(D_8009A5D0)
 /* 1D5A0 800421A0 AC22A5D0 */  sw        $v0, %lo(D_8009A5D0)($at)
 /* 1D5A4 800421A4 08010BD3 */  j         .L80042F4C
 /* 1D5A8 800421A8 00000000 */   nop
-glabel L800421AC_1D5AC
+dlabel L800421AC_1D5AC
 /* 1D5AC 800421AC 240200C8 */  addiu     $v0, $zero, 0xc8
 /* 1D5B0 800421B0 3C01800A */  lui       $at, %hi(D_8009A5D0)
 /* 1D5B4 800421B4 AC22A5D0 */  sw        $v0, %lo(D_8009A5D0)($at)
 /* 1D5B8 800421B8 08010BD3 */  j         .L80042F4C
 /* 1D5BC 800421BC 00000000 */   nop
-glabel L800421C0_1D5C0
+dlabel L800421C0_1D5C0
 /* 1D5C0 800421C0 24020064 */  addiu     $v0, $zero, 0x64
 /* 1D5C4 800421C4 3C01800A */  lui       $at, %hi(D_8009A5D0)
 /* 1D5C8 800421C8 AC22A5D0 */  sw        $v0, %lo(D_8009A5D0)($at)
 /* 1D5CC 800421CC 08010BD3 */  j         .L80042F4C
 /* 1D5D0 800421D0 00000000 */   nop
-glabel L800421D4_1D5D4
+dlabel L800421D4_1D5D4
 /* 1D5D4 800421D4 2402012C */  addiu     $v0, $zero, 0x12c
 /* 1D5D8 800421D8 3C01800A */  lui       $at, %hi(D_8009A5D0)
 /* 1D5DC 800421DC AC22A5D0 */  sw        $v0, %lo(D_8009A5D0)($at)
 /* 1D5E0 800421E0 08010BD3 */  j         .L80042F4C
 /* 1D5E4 800421E4 00000000 */   nop
-glabel L800421E8_1D5E8
+dlabel L800421E8_1D5E8
 /* 1D5E8 800421E8 24020190 */  addiu     $v0, $zero, 0x190
 /* 1D5EC 800421EC 3C01800A */  lui       $at, %hi(D_8009A5D0)
 /* 1D5F0 800421F0 AC22A5D0 */  sw        $v0, %lo(D_8009A5D0)($at)

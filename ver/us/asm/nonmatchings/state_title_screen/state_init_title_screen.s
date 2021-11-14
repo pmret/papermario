@@ -3,10 +3,10 @@
 
 .section .rodata
 
-glabel D_80098390
+dlabel D_80098390
 .ascii "title_data\0\0"
 
-glabel D_8009839C
+dlabel D_8009839C
 .ascii "title_bg\0\0\0\0"
 
 .section .text

@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_80098590
+dlabel jtbl_80098590
 .word L8003D750_18B50, L8003D764_18B64, L8003D764_18B64, L8003D764_18B64, L8003D764_18B64, L8003D6E8_18AE8, L8003D6FC_18AFC, L8003D710_18B10, L8003D73C_18B3C, 0, 0, 0
 
 .section .text
@@ -43,19 +43,19 @@ glabel func_8003D660
 /* 18ADC 8003D6DC 8C228590 */  lw        $v0, %lo(jtbl_80098590)($at)
 /* 18AE0 8003D6E0 00400008 */  jr        $v0
 /* 18AE4 8003D6E4 00000000 */   nop
-glabel L8003D6E8_18AE8
+dlabel L8003D6E8_18AE8
 /* 18AE8 8003D6E8 0200202D */  daddu     $a0, $s0, $zero
 /* 18AEC 8003D6EC 0C00F68E */  jal       func_8003DA38
 /* 18AF0 8003D6F0 0220282D */   daddu    $a1, $s1, $zero
 /* 18AF4 8003D6F4 0800F5DC */  j         .L8003D770
 /* 18AF8 8003D6F8 00000000 */   nop
-glabel L8003D6FC_18AFC
+dlabel L8003D6FC_18AFC
 /* 18AFC 8003D6FC 0200202D */  daddu     $a0, $s0, $zero
 /* 18B00 8003D700 0C00F70E */  jal       func_8003DC38
 /* 18B04 8003D704 0220282D */   daddu    $a1, $s1, $zero
 /* 18B08 8003D708 0800F5DC */  j         .L8003D770
 /* 18B0C 8003D70C 00000000 */   nop
-glabel L8003D710_18B10
+dlabel L8003D710_18B10
 /* 18B10 8003D710 82420000 */  lb        $v0, ($s2)
 /* 18B14 8003D714 10400004 */  beqz      $v0, .L8003D728
 /* 18B18 8003D718 24020008 */   addiu    $v0, $zero, 8
@@ -68,19 +68,19 @@ glabel L8003D710_18B10
 /* 18B30 8003D730 0220282D */   daddu    $a1, $s1, $zero
 /* 18B34 8003D734 0800F5DC */  j         .L8003D770
 /* 18B38 8003D738 00000000 */   nop
-glabel L8003D73C_18B3C
+dlabel L8003D73C_18B3C
 /* 18B3C 8003D73C 0200202D */  daddu     $a0, $s0, $zero
 /* 18B40 8003D740 0C00F835 */  jal       func_8003E0D4
 /* 18B44 8003D744 0220282D */   daddu    $a1, $s1, $zero
 /* 18B48 8003D748 0800F5DC */  j         .L8003D770
 /* 18B4C 8003D74C 00000000 */   nop
-glabel L8003D750_18B50
+dlabel L8003D750_18B50
 /* 18B50 8003D750 0200202D */  daddu     $a0, $s0, $zero
 /* 18B54 8003D754 0C00F874 */  jal       func_8003E1D0
 /* 18B58 8003D758 0220282D */   daddu    $a1, $s1, $zero
 /* 18B5C 8003D75C 0800F5DC */  j         .L8003D770
 /* 18B60 8003D760 00000000 */   nop
-glabel L8003D764_18B64
+dlabel L8003D764_18B64
 /* 18B64 8003D764 0200202D */  daddu     $a0, $s0, $zero
 /* 18B68 8003D768 0C00F5E2 */  jal       func_8003D788
 /* 18B6C 8003D76C 0220282D */   daddu    $a1, $s1, $zero

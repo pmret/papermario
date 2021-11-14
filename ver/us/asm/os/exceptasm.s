@@ -7,10 +7,10 @@
 
 .section .rodata
 
-glabel jtbl_80099D80
+dlabel jtbl_80099D80
 .word 0x141818, 0x1C1C1C1C, 0x20202020, 0x20202020, 0x40808, 0xC0C0C0C, 0x10101010, 0x10101010
 
-glabel jtbl_80099DA0
+dlabel jtbl_80099DA0
 .word L8006AF00_46300, L8006AEC4_462C4, L8006AEA0_462A0, L8006ACC8_460C8, L8006AC80_46080, L8006AE3C_4623C, L8006AC44_46044, L8006AC50_46050, L8006AC5C_4605C, 0, 0, 0
 
 .section .text, "ax"
@@ -174,15 +174,15 @@ glabel func_8006AA34
 /* 46038 8006AC38 8C2A9DA0 */  lw        $t2, %lo(jtbl_80099DA0)($at)
 /* 4603C 8006AC3C 01400008 */  jr        $t2
 /* 46040 8006AC40 00000000 */   nop
-glabel L8006AC44_46044
+dlabel L8006AC44_46044
 /* 46044 8006AC44 2401DFFF */  addiu     $at, $zero, -0x2001
 /* 46048 8006AC48 1000FFF0 */  b         .L8006AC0C
 /* 4604C 8006AC4C 02018024 */   and      $s0, $s0, $at
-glabel L8006AC50_46050
+dlabel L8006AC50_46050
 /* 46050 8006AC50 2401BFFF */  addiu     $at, $zero, -0x4001
 /* 46054 8006AC54 1000FFED */  b         .L8006AC0C
 /* 46058 8006AC58 02018024 */   and      $s0, $s0, $at
-glabel L8006AC5C_4605C
+dlabel L8006AC5C_4605C
 /* 4605C 8006AC5C 40095800 */  mfc0      $t1, $11
 /* 46060 8006AC60 40895800 */  mtc0      $t1, $11
 /* 46064 8006AC64 24040018 */  addiu     $a0, $zero, 0x18
@@ -192,7 +192,7 @@ glabel L8006AC5C_4605C
 /* 46074 8006AC74 34217FFF */  ori       $at, $at, 0x7fff
 /* 46078 8006AC78 1000FFE4 */  b         .L8006AC0C
 /* 4607C 8006AC7C 02018024 */   and      $s0, $s0, $at
-glabel L8006AC80_46080
+dlabel L8006AC80_46080
 /* 46080 8006AC80 2401F7FF */  addiu     $at, $zero, -0x801
 /* 46084 8006AC84 02018024 */  and       $s0, $s0, $at
 /* 46088 8006AC88 3C098009 */  lui       $t1, %hi(D_80095910)
@@ -212,7 +212,7 @@ glabel L8006AC80_46080
 /* 460BC 8006ACBC 24040010 */   addiu    $a0, $zero, 0x10
 /* 460C0 8006ACC0 1000FFD2 */  b         .L8006AC0C
 /* 460C4 8006ACC4 00000000 */   nop
-glabel L8006ACC8_460C8
+dlabel L8006ACC8_460C8
 /* 460C8 8006ACC8 3C11A430 */  lui       $s1, %hi(D_A4300008)
 /* 460CC 8006ACCC 8E310008 */  lw        $s1, %lo(D_A4300008)($s1)
 /* 460D0 8006ACD0 3C088009 */  lui       $t0, %hi(D_80095900)
@@ -315,7 +315,7 @@ glabel L8006ACC8_460C8
 /* 46230 8006AE30 2401FBFF */  addiu     $at, $zero, -0x401
 /* 46234 8006AE34 1000FF75 */  b         .L8006AC0C
 /* 46238 8006AE38 02018024 */   and      $s0, $s0, $at
-glabel L8006AE3C_4623C
+dlabel L8006AE3C_4623C
 /* 4623C 8006AE3C 8F5B0118 */  lw        $k1, 0x118($k0)
 /* 46240 8006AE40 2401EFFF */  addiu     $at, $zero, -0x1001
 /* 46244 8006AE44 0361D824 */  and       $k1, $k1, $at
@@ -342,7 +342,7 @@ glabel L8006AE3C_4623C
 /* 46294 8006AE94 0361D824 */  and       $k1, $k1, $at
 /* 46298 8006AE98 10000019 */  b         .L8006AF00
 /* 4629C 8006AE9C AD5B0118 */   sw       $k1, 0x118($t2)
-glabel L8006AEA0_462A0
+dlabel L8006AEA0_462A0
 /* 462A0 8006AEA0 2401FDFF */  addiu     $at, $zero, -0x201
 /* 462A4 8006AEA4 01014024 */  and       $t0, $t0, $at
 /* 462A8 8006AEA8 40886800 */  mtc0      $t0, $13
@@ -352,7 +352,7 @@ glabel L8006AEA0_462A0
 /* 462B8 8006AEB8 2401FDFF */  addiu     $at, $zero, -0x201
 /* 462BC 8006AEBC 1000FF53 */  b         .L8006AC0C
 /* 462C0 8006AEC0 02018024 */   and      $s0, $s0, $at
-glabel L8006AEC4_462C4
+dlabel L8006AEC4_462C4
 /* 462C4 8006AEC4 2401FEFF */  addiu     $at, $zero, -0x101
 /* 462C8 8006AEC8 01014024 */  and       $t0, $t0, $at
 /* 462CC 8006AECC 40886800 */  mtc0      $t0, $13
@@ -370,7 +370,7 @@ glabel L8006AEC4_462C4
 /* 462F8 8006AEF8 10000001 */  b         .L8006AF00
 /* 462FC 8006AEFC 00000000 */   nop
 .L8006AF00:
-glabel L8006AF00_46300
+dlabel L8006AF00_46300
 /* 46300 8006AF00 8F490004 */  lw        $t1, 4($k0)
 /* 46304 8006AF04 3C0A8009 */  lui       $t2, %hi(__osRunQueue)
 /* 46308 8006AF08 8D4A4658 */  lw        $t2, %lo(__osRunQueue)($t2)

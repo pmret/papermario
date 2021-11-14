@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_802AB808
+dlabel jtbl_802AB808
 .word L802A38AC_41863C, L802A3718_4184A8, L802A2CE4_417A74, L802A3490_418220, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A38DC_41866C, L802A3974_418704, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A399C_41872C, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3A20_4187B0, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3C6C_4189FC, L802A3A78_418808, L802A3A9C_41882C, L802A3BC0_418950, 0
 
 .section .text
@@ -33,7 +33,7 @@ glabel func_802A2C84
 /* 417A68 802A2CD8 8C22B808 */  lw        $v0, %lo(jtbl_802AB808)($at)
 /* 417A6C 802A2CDC 00400008 */  jr        $v0
 /* 417A70 802A2CE0 00000000 */   nop
-glabel L802A2CE4_417A74
+dlabel L802A2CE4_417A74
 /* 417A74 802A2CE4 3C05802B */  lui       $a1, %hi(battle_menu_moveScrollLine)
 /* 417A78 802A2CE8 80A5D10C */  lb        $a1, %lo(battle_menu_moveScrollLine)($a1)
 /* 417A7C 802A2CEC 3C04802B */  lui       $a0, %hi(battle_menu_moveCursorPos)
@@ -555,7 +555,7 @@ glabel L802A2CE4_417A74
 /* 418214 802A3484 A422D112 */  sh        $v0, %lo(D_802AD112)($at)
 /* 418218 802A3488 080A8F1C */  j         .L802A3C70
 /* 41821C 802A348C 0000102D */   daddu    $v0, $zero, $zero
-glabel L802A3490_418220
+dlabel L802A3490_418220
 /* 418220 802A3490 3C050001 */  lui       $a1, 1
 /* 418224 802A3494 3C04802B */  lui       $a0, %hi(battle_menu_moveCursorPos)
 /* 418228 802A3498 2484D109 */  addiu     $a0, $a0, %lo(battle_menu_moveCursorPos)
@@ -730,7 +730,7 @@ glabel L802A3490_418220
 /* 41849C 802A370C 00000000 */   nop
 /* 4184A0 802A3710 080A8F19 */  j         .L802A3C64
 /* 4184A4 802A3714 2402FFFE */   addiu    $v0, $zero, -2
-glabel L802A3718_4184A8
+dlabel L802A3718_4184A8
 /* 4184A8 802A3718 3C02802B */  lui       $v0, %hi(battle_menu_moveOptionCount)
 /* 4184AC 802A371C 8C42D4A4 */  lw        $v0, %lo(battle_menu_moveOptionCount)($v0)
 /* 4184B0 802A3720 1840000F */  blez      $v0, .L802A3760
@@ -839,7 +839,7 @@ glabel L802A3718_4184A8
 /* 418630 802A38A0 00000000 */   nop
 /* 418634 802A38A4 080A8E5D */  j         L802A3974_418704
 /* 418638 802A38A8 00000000 */   nop
-glabel L802A38AC_41863C
+dlabel L802A38AC_41863C
 /* 41863C 802A38AC 3C02802B */  lui       $v0, %hi(battle_menu_hasSpiritsMenu)
 /* 418640 802A38B0 8C42D4A0 */  lw        $v0, %lo(battle_menu_hasSpiritsMenu)($v0)
 /* 418644 802A38B4 14400005 */  bnez      $v0, .L802A38CC
@@ -853,7 +853,7 @@ glabel L802A38AC_41863C
 /* 418660 802A38D0 00000000 */   nop
 /* 418664 802A38D4 080A8F1C */  j         .L802A3C70
 /* 418668 802A38D8 240200FF */   addiu    $v0, $zero, 0xff
-glabel L802A38DC_41866C
+dlabel L802A38DC_41866C
 /* 41866C 802A38DC 24040001 */  addiu     $a0, $zero, 1
 /* 418670 802A38E0 0C051F9F */  jal       set_window_update
 /* 418674 802A38E4 24050002 */   addiu    $a1, $zero, 2
@@ -896,7 +896,7 @@ glabel L802A38DC_41866C
 /* 4186F8 802A3968 8C22D1F8 */  lw        $v0, %lo(battle_menu_moveOptionIndexMap)($at)
 /* 4186FC 802A396C 080A8E82 */  j         .L802A3A08
 /* 418700 802A3970 2403000B */   addiu    $v1, $zero, 0xb
-glabel L802A3974_418704
+dlabel L802A3974_418704
 /* 418704 802A3974 3C03802B */  lui       $v1, %hi(battle_menu_moveCursorPos)
 /* 418708 802A3978 8063D109 */  lb        $v1, %lo(battle_menu_moveCursorPos)($v1)
 /* 41870C 802A397C 00031080 */  sll       $v0, $v1, 2
@@ -907,7 +907,7 @@ glabel L802A3974_418704
 /* 418720 802A3990 AC23D600 */  sw        $v1, %lo(battle_menu_moveOptionActive)($at)
 /* 418724 802A3994 080A8F1C */  j         .L802A3C70
 /* 418728 802A3998 24420001 */   addiu    $v0, $v0, 1
-glabel L802A399C_41872C
+dlabel L802A399C_41872C
 /* 41872C 802A399C 24040001 */  addiu     $a0, $zero, 1
 /* 418730 802A39A0 0C051F9F */  jal       set_window_update
 /* 418734 802A39A4 0080282D */   daddu    $a1, $a0, $zero
@@ -944,7 +944,7 @@ glabel L802A399C_41872C
 /* 4187A4 802A3A14 AC24D600 */  sw        $a0, %lo(battle_menu_moveOptionActive)($at)
 /* 4187A8 802A3A18 080A8F1C */  j         .L802A3C70
 /* 4187AC 802A3A1C 24420001 */   addiu    $v0, $v0, 1
-glabel L802A3A20_4187B0
+dlabel L802A3A20_4187B0
 /* 4187B0 802A3A20 24040001 */  addiu     $a0, $zero, 1
 /* 4187B4 802A3A24 0C051F9F */  jal       set_window_update
 /* 4187B8 802A3A28 24050009 */   addiu    $a1, $zero, 9
@@ -969,7 +969,7 @@ glabel L802A3A20_4187B0
 /* 4187FC 802A3A6C 24050002 */   addiu    $a1, $zero, 2
 /* 418800 802A3A70 080A8F19 */  j         .L802A3C64
 /* 418804 802A3A74 2402FFFF */   addiu    $v0, $zero, -1
-glabel L802A3A78_418808
+dlabel L802A3A78_418808
 /* 418808 802A3A78 2402FFFF */  addiu     $v0, $zero, -1
 /* 41880C 802A3A7C 0040182D */  daddu     $v1, $v0, $zero
 /* 418810 802A3A80 3C01802B */  lui       $at, %hi(battle_menu_moveOptionActive)
@@ -979,7 +979,7 @@ glabel L802A3A78_418808
 /* 418820 802A3A90 A023D108 */  sb        $v1, %lo(battle_menu_moveState)($at)
 /* 418824 802A3A94 080A8F1C */  j         .L802A3C70
 /* 418828 802A3A98 00000000 */   nop
-glabel L802A3A9C_41882C
+dlabel L802A3A9C_41882C
 /* 41882C 802A3A9C 24040001 */  addiu     $a0, $zero, 1
 /* 418830 802A3AA0 0C051F9F */  jal       set_window_update
 /* 418834 802A3AA4 24050002 */   addiu    $a1, $zero, 2
@@ -1056,7 +1056,7 @@ glabel L802A3A9C_41882C
 /* 418944 802A3BB4 A023D108 */  sb        $v1, %lo(battle_menu_moveState)($at)
 /* 418948 802A3BB8 080A8F1C */  j         .L802A3C70
 /* 41894C 802A3BBC 2402FFFF */   addiu    $v0, $zero, -1
-glabel L802A3BC0_418950
+dlabel L802A3BC0_418950
 /* 418950 802A3BC0 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 418954 802A3BC4 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 418958 802A3BC8 8C420010 */  lw        $v0, 0x10($v0)
@@ -1105,7 +1105,7 @@ glabel L802A3BC0_418950
 .L802A3C64:
 /* 4189F4 802A3C64 3C01802B */  lui       $at, %hi(battle_menu_moveState)
 /* 4189F8 802A3C68 A022D108 */  sb        $v0, %lo(battle_menu_moveState)($at)
-glabel L802A3C6C_4189FC
+dlabel L802A3C6C_4189FC
 /* 4189FC 802A3C6C 0000102D */  daddu     $v0, $zero, $zero
 .L802A3C70:
 /* 418A00 802A3C70 8FBF0044 */  lw        $ra, 0x44($sp)

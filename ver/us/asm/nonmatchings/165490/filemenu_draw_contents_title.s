@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel jtbl_8024BF70
+dlabel jtbl_8024BF70
 .word L80244C74_1654D4, L80244C80_1654E0, L80244CA4_165504, L80244C8C_1654EC, L80244C98_1654F8, 0
 
 .section .text
@@ -26,23 +26,23 @@ glabel filemenu_draw_contents_title
 /* 1654C8 80244C68 8C22BF70 */  lw        $v0, %lo(jtbl_8024BF70)($at)
 /* 1654CC 80244C6C 00400008 */  jr        $v0
 /* 1654D0 80244C70 00000000 */   nop
-glabel L80244C74_1654D4
+dlabel L80244C74_1654D4
 /* 1654D4 80244C74 24040001 */  addiu     $a0, $zero, 1
 /* 1654D8 80244C78 0809132B */  j         .L80244CAC
 /* 1654DC 80244C7C 24110009 */   addiu    $s1, $zero, 9
-glabel L80244C80_1654E0
+dlabel L80244C80_1654E0
 /* 1654E0 80244C80 24040002 */  addiu     $a0, $zero, 2
 /* 1654E4 80244C84 0809132B */  j         .L80244CAC
 /* 1654E8 80244C88 24110008 */   addiu    $s1, $zero, 8
-glabel L80244C8C_1654EC
+dlabel L80244C8C_1654EC
 /* 1654EC 80244C8C 24040004 */  addiu     $a0, $zero, 4
 /* 1654F0 80244C90 0809132B */  j         .L80244CAC
 /* 1654F4 80244C94 24110019 */   addiu    $s1, $zero, 0x19
-glabel L80244C98_1654F8
+dlabel L80244C98_1654F8
 /* 1654F8 80244C98 24040005 */  addiu     $a0, $zero, 5
 /* 1654FC 80244C9C 0809132B */  j         .L80244CAC
 /* 165500 80244CA0 24110010 */   addiu    $s1, $zero, 0x10
-glabel L80244CA4_165504
+dlabel L80244CA4_165504
 /* 165504 80244CA4 24040003 */  addiu     $a0, $zero, 3
 /* 165508 80244CA8 2411000A */  addiu     $s1, $zero, 0xa
 .L80244CAC:

@@ -3,10 +3,10 @@
 
 .section .rodata
 
-glabel jtbl_80243900_A4BEC0
+dlabel jtbl_80243900_A4BEC0
 .word L80240D0C_A492CC, L80240D3C_A492FC, L80240F68_A49528, L80240FAC_A4956C, L80241004_A495C4, 0
 
-glabel D_80243918_A4BED8
+dlabel D_80243918_A4BED8
 .double 90.0
 
 .section .text
@@ -75,7 +75,7 @@ glabel func_80240C18_A491D8
 /* A492C0 80240D00 8C223900 */  lw        $v0, %lo(jtbl_80243900_A4BEC0)($at)
 /* A492C4 80240D04 00400008 */  jr        $v0
 /* A492C8 80240D08 00000000 */   nop
-glabel L80240D0C_A492CC
+dlabel L80240D0C_A492CC
 /* A492CC 80240D0C 3C01C47A */  lui       $at, 0xc47a
 /* A492D0 80240D10 44810000 */  mtc1      $at, $f0
 /* A492D4 80240D14 24020014 */  addiu     $v0, $zero, 0x14
@@ -88,7 +88,7 @@ glabel L80240D0C_A492CC
 /* A492F0 80240D30 E620003C */  swc1      $f0, 0x3c($s1)
 /* A492F4 80240D34 AE40006C */  sw        $zero, 0x6c($s2)
 /* A492F8 80240D38 AEC20070 */  sw        $v0, 0x70($s6)
-glabel L80240D3C_A492FC
+dlabel L80240D3C_A492FC
 /* A492FC 80240D3C 8E50006C */  lw        $s0, 0x6c($s2)
 /* A49300 80240D40 24020001 */  addiu     $v0, $zero, 1
 /* A49304 80240D44 160200EC */  bne       $s0, $v0, .L802410F8
@@ -229,7 +229,7 @@ glabel L80240D3C_A492FC
 /* A4951C 80240F5C A630008E */  sh        $s0, 0x8e($s1)
 /* A49520 80240F60 0809043E */  j         .L802410F8
 /* A49524 80240F64 AED50070 */   sw       $s5, 0x70($s6)
-glabel L80240F68_A49528
+dlabel L80240F68_A49528
 /* A49528 80240F68 9622008E */  lhu       $v0, 0x8e($s1)
 /* A4952C 80240F6C 2442FFFF */  addiu     $v0, $v0, -1
 /* A49530 80240F70 A622008E */  sh        $v0, 0x8e($s1)
@@ -248,7 +248,7 @@ glabel L80240F68_A49528
 /* A49560 80240FA0 46020000 */  add.s     $f0, $f0, $f2
 /* A49564 80240FA4 0809043E */  j         .L802410F8
 /* A49568 80240FA8 E620003C */   swc1     $f0, 0x3c($s1)
-glabel L80240FAC_A4956C
+dlabel L80240FAC_A4956C
 /* A4956C 80240FAC 862200A8 */  lh        $v0, 0xa8($s1)
 /* A49570 80240FB0 3C013FE0 */  lui       $at, 0x3fe0
 /* A49574 80240FB4 44810800 */  mtc1      $at, $f1
@@ -271,7 +271,7 @@ glabel L80240FAC_A4956C
 /* A495B8 80240FF8 A620008E */  sh        $zero, 0x8e($s1)
 /* A495BC 80240FFC 0809043E */  j         .L802410F8
 /* A495C0 80241000 AEC20070 */   sw       $v0, 0x70($s6)
-glabel L80241004_A495C4
+dlabel L80241004_A495C4
 /* A495C4 80241004 9622008E */  lhu       $v0, 0x8e($s1)
 /* A495C8 80241008 24420001 */  addiu     $v0, $v0, 1
 /* A495CC 8024100C A622008E */  sh        $v0, 0x8e($s1)

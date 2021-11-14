@@ -20,7 +20,7 @@ glabel func_802A92A0_42F980
 /* 42F9BC 802A92DC 8C229900 */  lw        $v0, %lo(jtbl_802A9900_42FFE0)($at)
 /* 42F9C0 802A92E0 00400008 */  jr        $v0
 /* 42F9C4 802A92E4 00000000 */   nop
-glabel L802A92E8_42F9C8
+dlabel L802A92E8_42F9C8
 /* 42F9C8 802A92E8 0C093EB1 */  jal       btl_set_popup_duration
 /* 42F9CC 802A92EC 24040063 */   addiu    $a0, $zero, 0x63
 /* 42F9D0 802A92F0 82220061 */  lb        $v0, 0x61($s1)
@@ -56,7 +56,7 @@ glabel L802A92E8_42F9C8
 /* 42FA3C 802A935C 24020001 */  addiu     $v0, $zero, 1
 /* 42FA40 802A9360 080AA5E5 */  j         L802A9794_42FE74
 /* 42FA44 802A9364 A622004C */   sh       $v0, 0x4c($s1)
-glabel L802A9368_42FA48
+dlabel L802A9368_42FA48
 /* 42FA48 802A9368 0C093EB1 */  jal       btl_set_popup_duration
 /* 42FA4C 802A936C 24040063 */   addiu    $a0, $zero, 0x63
 /* 42FA50 802A9370 8622006C */  lh        $v0, 0x6c($s1)
@@ -93,7 +93,7 @@ glabel L802A9368_42FA48
 /* 42FAC4 802A93E4 24C6001C */   addiu    $a2, $a2, 0x1c
 /* 42FAC8 802A93E8 080AA5E5 */  j         L802A9794_42FE74
 /* 42FACC 802A93EC 00000000 */   nop
-glabel L802A93F0_42FAD0
+dlabel L802A93F0_42FAD0
 /* 42FAD0 802A93F0 0C093EB1 */  jal       btl_set_popup_duration
 /* 42FAD4 802A93F4 24040063 */   addiu    $a0, $zero, 0x63
 /* 42FAD8 802A93F8 8622004E */  lh        $v0, 0x4e($s1)
@@ -119,7 +119,7 @@ glabel L802A93F0_42FAD0
 /* 42FB24 802A9444 A220005C */  sb        $zero, 0x5c($s1)
 /* 42FB28 802A9448 A622004C */  sh        $v0, 0x4c($s1)
 /* 42FB2C 802A944C A6230054 */  sh        $v1, 0x54($s1)
-glabel L802A9450_42FB30
+dlabel L802A9450_42FB30
 /* 42FB30 802A9450 0C093EB1 */  jal       btl_set_popup_duration
 /* 42FB34 802A9454 24040063 */   addiu    $a0, $zero, 0x63
 /* 42FB38 802A9458 86220068 */  lh        $v0, 0x68($s1)
@@ -333,7 +333,7 @@ glabel L802A9450_42FB30
 /* 42FE24 802A9744 2402000C */  addiu     $v0, $zero, 0xc
 /* 42FE28 802A9748 080AA5E5 */  j         L802A9794_42FE74
 /* 42FE2C 802A974C A622004C */   sh       $v0, 0x4c($s1)
-glabel L802A9750_42FE30
+dlabel L802A9750_42FE30
 /* 42FE30 802A9750 86220064 */  lh        $v0, 0x64($s1)
 /* 42FE34 802A9754 14400007 */  bnez      $v0, .L802A9774
 /* 42FE38 802A9758 00000000 */   nop
@@ -354,7 +354,7 @@ glabel L802A9750_42FE30
 .L802A978C:
 /* 42FE6C 802A978C 0C09A327 */  jal       func_80268C9C
 /* 42FE70 802A9790 00000000 */   nop
-glabel L802A9794_42FE74
+dlabel L802A9794_42FE74
 /* 42FE74 802A9794 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 42FE78 802A9798 8FB20018 */  lw        $s2, 0x18($sp)
 /* 42FE7C 802A979C 8FB10014 */  lw        $s1, 0x14($sp)

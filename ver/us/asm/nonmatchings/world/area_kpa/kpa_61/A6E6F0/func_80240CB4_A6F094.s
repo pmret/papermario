@@ -3,10 +3,10 @@
 
 .section .rodata
 
-glabel jtbl_80243D50_A72130
+dlabel jtbl_80243D50_A72130
 .word L80240DA8_A6F188, L80240DD8_A6F1B8, L80241004_A6F3E4, L80241048_A6F428, L802410A0_A6F480, 0
 
-glabel D_80243D68_A72148
+dlabel D_80243D68_A72148
 .double 90.0
 
 .section .text
@@ -75,7 +75,7 @@ glabel func_80240CB4_A6F094
 /* A6F17C 80240D9C 8C223D50 */  lw        $v0, %lo(jtbl_80243D50_A72130)($at)
 /* A6F180 80240DA0 00400008 */  jr        $v0
 /* A6F184 80240DA4 00000000 */   nop
-glabel L80240DA8_A6F188
+dlabel L80240DA8_A6F188
 /* A6F188 80240DA8 3C01C47A */  lui       $at, 0xc47a
 /* A6F18C 80240DAC 44810000 */  mtc1      $at, $f0
 /* A6F190 80240DB0 24020014 */  addiu     $v0, $zero, 0x14
@@ -88,7 +88,7 @@ glabel L80240DA8_A6F188
 /* A6F1AC 80240DCC E620003C */  swc1      $f0, 0x3c($s1)
 /* A6F1B0 80240DD0 AE40006C */  sw        $zero, 0x6c($s2)
 /* A6F1B4 80240DD4 AEC20070 */  sw        $v0, 0x70($s6)
-glabel L80240DD8_A6F1B8
+dlabel L80240DD8_A6F1B8
 /* A6F1B8 80240DD8 8E50006C */  lw        $s0, 0x6c($s2)
 /* A6F1BC 80240DDC 24020001 */  addiu     $v0, $zero, 1
 /* A6F1C0 80240DE0 160200EC */  bne       $s0, $v0, .L80241194
@@ -229,7 +229,7 @@ glabel L80240DD8_A6F1B8
 /* A6F3D8 80240FF8 A630008E */  sh        $s0, 0x8e($s1)
 /* A6F3DC 80240FFC 08090465 */  j         .L80241194
 /* A6F3E0 80241000 AED50070 */   sw       $s5, 0x70($s6)
-glabel L80241004_A6F3E4
+dlabel L80241004_A6F3E4
 /* A6F3E4 80241004 9622008E */  lhu       $v0, 0x8e($s1)
 /* A6F3E8 80241008 2442FFFF */  addiu     $v0, $v0, -1
 /* A6F3EC 8024100C A622008E */  sh        $v0, 0x8e($s1)
@@ -248,7 +248,7 @@ glabel L80241004_A6F3E4
 /* A6F41C 8024103C 46020000 */  add.s     $f0, $f0, $f2
 /* A6F420 80241040 08090465 */  j         .L80241194
 /* A6F424 80241044 E620003C */   swc1     $f0, 0x3c($s1)
-glabel L80241048_A6F428
+dlabel L80241048_A6F428
 /* A6F428 80241048 862200A8 */  lh        $v0, 0xa8($s1)
 /* A6F42C 8024104C 3C013FE0 */  lui       $at, 0x3fe0
 /* A6F430 80241050 44810800 */  mtc1      $at, $f1
@@ -271,7 +271,7 @@ glabel L80241048_A6F428
 /* A6F474 80241094 A620008E */  sh        $zero, 0x8e($s1)
 /* A6F478 80241098 08090465 */  j         .L80241194
 /* A6F47C 8024109C AEC20070 */   sw       $v0, 0x70($s6)
-glabel L802410A0_A6F480
+dlabel L802410A0_A6F480
 /* A6F480 802410A0 9622008E */  lhu       $v0, 0x8e($s1)
 /* A6F484 802410A4 24420001 */  addiu     $v0, $v0, 1
 /* A6F488 802410A8 A622008E */  sh        $v0, 0x8e($s1)

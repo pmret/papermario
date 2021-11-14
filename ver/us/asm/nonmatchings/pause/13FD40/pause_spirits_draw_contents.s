@@ -3,19 +3,19 @@
 
 .section .rodata
 
-glabel D_80270050
+dlabel D_80270050
 .double 0.4321
 
-glabel D_80270058
+dlabel D_80270058
 .double 0.02
 
-glabel D_80270060
+dlabel D_80270060
 .double 0.1324
 
-glabel D_80270068
+dlabel D_80270068
 .double 0.01
 
-glabel D_80270070
+dlabel D_80270070
 .double 0.0432, 0.0
 
 .section .text

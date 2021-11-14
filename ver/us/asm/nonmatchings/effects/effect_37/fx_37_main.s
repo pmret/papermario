@@ -123,7 +123,7 @@ glabel fx_37_main
 /* 358660 E004A1A0 8C22AE80 */  lw        $v0, %lo(jtbl_E004AE80)($at)
 /* 358664 E004A1A4 00400008 */  jr        $v0
 /* 358668 E004A1A8 00000000 */   nop
-glabel LE004A1AC_35866C
+dlabel LE004A1AC_35866C
 /* 35866C E004A1AC 240300FF */  addiu     $v1, $zero, 0xff
 /* 358670 E004A1B0 2402007A */  addiu     $v0, $zero, 0x7a
 /* 358674 E004A1B4 A2220052 */  sb        $v0, 0x52($s1)
@@ -134,7 +134,7 @@ glabel LE004A1AC_35866C
 /* 358688 E004A1C8 A2230051 */  sb        $v1, 0x51($s1)
 /* 35868C E004A1CC 080128A4 */  j         .LE004A290
 /* 358690 E004A1D0 A2230054 */   sb       $v1, 0x54($s1)
-glabel LE004A1D4_358694
+dlabel LE004A1D4_358694
 /* 358694 E004A1D4 2402007D */  addiu     $v0, $zero, 0x7d
 /* 358698 E004A1D8 A2220050 */  sb        $v0, 0x50($s1)
 /* 35869C E004A1DC 24020078 */  addiu     $v0, $zero, 0x78
@@ -146,7 +146,7 @@ glabel LE004A1D4_358694
 /* 3586B4 E004A1F4 A2220054 */  sb        $v0, 0x54($s1)
 /* 3586B8 E004A1F8 080128A4 */  j         .LE004A290
 /* 3586BC E004A1FC 240200F0 */   addiu    $v0, $zero, 0xf0
-glabel LE004A200_3586C0
+dlabel LE004A200_3586C0
 /* 3586C0 E004A200 240200DC */  addiu     $v0, $zero, 0xdc
 /* 3586C4 E004A204 A2220050 */  sb        $v0, 0x50($s1)
 /* 3586C8 E004A208 240200D2 */  addiu     $v0, $zero, 0xd2
@@ -158,7 +158,7 @@ glabel LE004A200_3586C0
 /* 3586E0 E004A220 A2220054 */  sb        $v0, 0x54($s1)
 /* 3586E4 E004A224 080128A4 */  j         .LE004A290
 /* 3586E8 E004A228 240200FA */   addiu    $v0, $zero, 0xfa
-glabel LE004A22C_3586EC
+dlabel LE004A22C_3586EC
 /* 3586EC E004A22C 240200E1 */  addiu     $v0, $zero, 0xe1
 /* 3586F0 E004A230 A2220050 */  sb        $v0, 0x50($s1)
 /* 3586F4 E004A234 240200CC */  addiu     $v0, $zero, 0xcc
@@ -171,7 +171,7 @@ glabel LE004A22C_3586EC
 /* 358710 E004A250 A2220054 */  sb        $v0, 0x54($s1)
 /* 358714 E004A254 080128A4 */  j         .LE004A290
 /* 358718 E004A258 240200AB */   addiu    $v0, $zero, 0xab
-glabel LE004A25C_35871C
+dlabel LE004A25C_35871C
 /* 35871C E004A25C 24020032 */  addiu     $v0, $zero, 0x32
 /* 358720 E004A260 AE220028 */  sw        $v0, 0x28($s1)
 /* 358724 E004A264 240200D0 */  addiu     $v0, $zero, 0xd0
