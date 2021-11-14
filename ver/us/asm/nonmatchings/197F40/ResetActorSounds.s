@@ -4,7 +4,7 @@
 .section .rodata
 
 dlabel jtbl_8029D7D8
-.word L8026F8D4_19E1B4, L8026F914_19E1F4, L8026F954_19E234, L8026F978_19E258, L8026F99C_19E27C, L8026F9C0_19E2A0
+.word .L8026F8D4_19E1B4, .L8026F914_19E1F4, .L8026F954_19E234, .L8026F978_19E258, .L8026F99C_19E27C, .L8026F9C0_19E2A0
 
 .section .text
 
@@ -49,7 +49,7 @@ glabel ResetActorSounds
 /* 19E1A8 8026F8C8 8C22D7D8 */  lw        $v0, %lo(jtbl_8029D7D8)($at)
 /* 19E1AC 8026F8CC 00400008 */  jr        $v0
 /* 19E1B0 8026F8D0 00000000 */   nop
-dlabel L8026F8D4_19E1B4
+.L8026F8D4_19E1B4:
 /* 19E1B4 8026F8D4 90830136 */  lbu       $v1, 0x136($a0)
 /* 19E1B8 8026F8D8 000310C0 */  sll       $v0, $v1, 3
 /* 19E1BC 8026F8DC 00431023 */  subu      $v0, $v0, $v1
@@ -66,7 +66,7 @@ dlabel L8026F8D4_19E1B4
 /* 19E1E8 8026F908 8C22146C */  lw        $v0, %lo(bActorSoundTable+0x4)($at)
 /* 19E1EC 8026F90C 0809BE78 */  j         .L8026F9E0
 /* 19E1F0 8026F910 AC8201A0 */   sw       $v0, 0x1a0($a0)
-dlabel L8026F914_19E1F4
+.L8026F914_19E1F4:
 /* 19E1F4 8026F914 90830136 */  lbu       $v1, 0x136($a0)
 /* 19E1F8 8026F918 000310C0 */  sll       $v0, $v1, 3
 /* 19E1FC 8026F91C 00431023 */  subu      $v0, $v0, $v1
@@ -83,7 +83,7 @@ dlabel L8026F914_19E1F4
 /* 19E228 8026F948 8C221474 */  lw        $v0, %lo(bActorSoundTable+0xC)($at)
 /* 19E22C 8026F94C 0809BE78 */  j         .L8026F9E0
 /* 19E230 8026F950 AC8201A8 */   sw       $v0, 0x1a8($a0)
-dlabel L8026F954_19E234
+.L8026F954_19E234:
 /* 19E234 8026F954 90820136 */  lbu       $v0, 0x136($a0)
 /* 19E238 8026F958 000218C0 */  sll       $v1, $v0, 3
 /* 19E23C 8026F95C 00621823 */  subu      $v1, $v1, $v0
@@ -93,7 +93,7 @@ dlabel L8026F954_19E234
 /* 19E24C 8026F96C 8C421478 */  lw        $v0, %lo(bActorSoundTable+0x10)($v0)
 /* 19E250 8026F970 0809BE78 */  j         .L8026F9E0
 /* 19E254 8026F974 AC8201AC */   sw       $v0, 0x1ac($a0)
-dlabel L8026F978_19E258
+.L8026F978_19E258:
 /* 19E258 8026F978 90820136 */  lbu       $v0, 0x136($a0)
 /* 19E25C 8026F97C 000218C0 */  sll       $v1, $v0, 3
 /* 19E260 8026F980 00621823 */  subu      $v1, $v1, $v0
@@ -103,7 +103,7 @@ dlabel L8026F978_19E258
 /* 19E270 8026F990 8C42147C */  lw        $v0, %lo(bActorSoundTable+0x14)($v0)
 /* 19E274 8026F994 0809BE78 */  j         .L8026F9E0
 /* 19E278 8026F998 AC8201B0 */   sw       $v0, 0x1b0($a0)
-dlabel L8026F99C_19E27C
+.L8026F99C_19E27C:
 /* 19E27C 8026F99C 90820136 */  lbu       $v0, 0x136($a0)
 /* 19E280 8026F9A0 000218C0 */  sll       $v1, $v0, 3
 /* 19E284 8026F9A4 00621823 */  subu      $v1, $v1, $v0
@@ -113,7 +113,7 @@ dlabel L8026F99C_19E27C
 /* 19E294 8026F9B4 94421480 */  lhu       $v0, %lo(bActorSoundTable+0x18)($v0)
 /* 19E298 8026F9B8 0809BE78 */  j         .L8026F9E0
 /* 19E29C 8026F9BC A48201B4 */   sh       $v0, 0x1b4($a0)
-dlabel L8026F9C0_19E2A0
+.L8026F9C0_19E2A0:
 /* 19E2A0 8026F9C0 90820136 */  lbu       $v0, 0x136($a0)
 /* 19E2A4 8026F9C4 000218C0 */  sll       $v1, $v0, 3
 /* 19E2A8 8026F9C8 00621823 */  subu      $v1, $v1, $v0

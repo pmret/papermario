@@ -4,7 +4,7 @@
 .section .rodata
 
 dlabel jtbl_80151220
-.word L80146030_DC730, L801461A0_DC8A0, L80146044_DC744, L8014607C_DC77C, L801461A0_DC8A0, 0, 0, 0
+.word .L80146030_DC730, .L801461A0_DC8A0, .L80146044_DC744, .L8014607C_DC77C, .L801461A0_DC8A0, 0, 0, 0
 
 .section .text
 
@@ -105,13 +105,13 @@ glabel appendGfx_background_texture
 /* DC724 80146024 8C221220 */  lw        $v0, %lo(jtbl_80151220)($at)
 /* DC728 80146028 00400008 */  jr        $v0
 /* DC72C 8014602C 00000000 */   nop
-dlabel L80146030_DC730
+.L80146030_DC730:
 /* DC730 80146030 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* DC734 80146034 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* DC738 80146038 94620148 */  lhu       $v0, 0x148($v1)
 /* DC73C 8014603C 0805186C */  j         .L801461B0
 /* DC740 80146040 3042FFFD */   andi     $v0, $v0, 0xfffd
-dlabel L80146044_DC744
+.L80146044_DC744:
 /* DC744 80146044 3C078007 */  lui       $a3, %hi(gGameStatusPtr)
 /* DC748 80146048 8CE7419C */  lw        $a3, %lo(gGameStatusPtr)($a3)
 /* DC74C 8014604C 93A60028 */  lbu       $a2, 0x28($sp)
@@ -126,7 +126,7 @@ dlabel L80146044_DC744
 /* DC770 80146070 34420002 */  ori       $v0, $v0, 2
 /* DC774 80146074 0805186D */  j         .L801461B4
 /* DC778 80146078 A4E20148 */   sh       $v0, 0x148($a3)
-dlabel L8014607C_DC77C
+.L8014607C_DC77C:
 /* DC77C 8014607C 240700FF */  addiu     $a3, $zero, 0xff
 /* DC780 80146080 93A8002B */  lbu       $t0, 0x2b($sp)
 /* DC784 80146084 8FA20018 */  lw        $v0, 0x18($sp)
@@ -200,7 +200,7 @@ dlabel L8014607C_DC77C
 /* DC894 80146194 00431023 */  subu      $v0, $v0, $v1
 /* DC898 80146198 0805186D */  j         .L801461B4
 /* DC89C 8014619C AFA20024 */   sw       $v0, 0x24($sp)
-dlabel L801461A0_DC8A0
+.L801461A0_DC8A0:
 /* DC8A0 801461A0 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* DC8A4 801461A4 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* DC8A8 801461A8 94620148 */  lhu       $v0, 0x148($v1)
