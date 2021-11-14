@@ -8,4 +8,6 @@ INCLUDE_ASM(s32, "battle/area_pra2/660E10", func_802186C0_660E10);
 
 #include "common/UnkFloatFunc2.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_pra2/660E10", func_802189E0_661130);
+void func_802189E0_661130(void) {
+    enable_background_wave();
+}
