@@ -406,6 +406,8 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
 
 void func_80138D88(s32, s32, s32, s32, f32);
 
+void enable_background_wave(void);
+
 // State funcs
 void state_init_startup(void);
 void state_step_startup(void);
