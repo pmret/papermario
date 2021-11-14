@@ -4,7 +4,7 @@
 .section .rodata
 
 dlabel jtbl_800982C0
-.word L800344A8_F8A8, L800344A8_F8A8, L800344A8_F8A8, L80034628_FA28, L80034628_FA28, L80034628_FA28, L800347A8_FBA8, L800347A8_FBA8, L800347A8_FBA8, L800347A8_FBA8
+.word .L800344A8_F8A8, .L800344A8_F8A8, .L800344A8_F8A8, .L80034628_FA28, .L80034628_FA28, .L80034628_FA28, .L800347A8_FBA8, .L800347A8_FBA8, .L800347A8_FBA8, .L800347A8_FBA8
 
 .section .text
 
@@ -74,7 +74,7 @@ glabel appendGfx_intro_logos
 /* F89C 8003449C 8C2282C0 */  lw        $v0, %lo(jtbl_800982C0)($at)
 /* F8A0 800344A0 00400008 */  jr        $v0
 /* F8A4 800344A4 00000000 */   nop
-dlabel L800344A8_F8A8
+.L800344A8_F8A8:
 /* F8A8 800344A8 0000502D */  daddu     $t2, $zero, $zero
 /* F8AC 800344AC 3C02800A */  lui       $v0, %hi(gMasterGfxPos)
 /* F8B0 800344B0 2442A66C */  addiu     $v0, $v0, %lo(gMasterGfxPos)
@@ -172,7 +172,7 @@ dlabel L800344A8_F8A8
 /* FA1C 8003461C AC60004C */   sw       $zero, 0x4c($v1)
 /* FA20 80034620 0800D248 */  j         .L80034920
 /* FA24 80034624 00000000 */   nop
-dlabel L80034628_FA28
+.L80034628_FA28:
 /* FA28 80034628 0000502D */  daddu     $t2, $zero, $zero
 /* FA2C 8003462C 3C02800A */  lui       $v0, %hi(gMasterGfxPos)
 /* FA30 80034630 2442A66C */  addiu     $v0, $v0, %lo(gMasterGfxPos)
@@ -270,7 +270,7 @@ dlabel L80034628_FA28
 /* FB9C 8003479C AC60004C */   sw       $zero, 0x4c($v1)
 /* FBA0 800347A0 0800D248 */  j         .L80034920
 /* FBA4 800347A4 00000000 */   nop
-dlabel L800347A8_FBA8
+.L800347A8_FBA8:
 /* FBA8 800347A8 0000502D */  daddu     $t2, $zero, $zero
 /* FBAC 800347AC 3C02800A */  lui       $v0, %hi(gMasterGfxPos)
 /* FBB0 800347B0 2442A66C */  addiu     $v0, $v0, %lo(gMasterGfxPos)

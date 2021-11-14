@@ -4,7 +4,7 @@
 .section .rodata
 
 dlabel jtbl_802EB330
-.word L802E7B2C_1093AC, L802E7B3C_1093BC, L802E7B50_1093D0, L802E7B64_1093E4, L802E7B74_1093F4, L802E7B7C_1093FC, 0, 0
+.word .L802E7B2C_1093AC, .L802E7B3C_1093BC, .L802E7B50_1093D0, .L802E7B64_1093E4, .L802E7B74_1093F4, .L802E7B7C_1093FC, 0, 0
 
 .section .text
 
@@ -27,32 +27,32 @@ glabel entity_GiantChest_give_equipment
 /* 1093A0 802E7B20 8C22B330 */  lw        $v0, %lo(jtbl_802EB330)($at)
 /* 1093A4 802E7B24 00400008 */  jr        $v0
 /* 1093A8 802E7B28 00000000 */   nop
-dlabel L802E7B2C_1093AC
+.L802E7B2C_1093AC:
 /* 1093AC 802E7B2C 3C018011 */  lui       $at, %hi(gPlayerData)
 /* 1093B0 802E7B30 A020F290 */  sb        $zero, %lo(gPlayerData)($at)
 /* 1093B4 802E7B34 080B9EE2 */  j         .L802E7B88
 /* 1093B8 802E7B38 00000000 */   nop
-dlabel L802E7B3C_1093BC
+.L802E7B3C_1093BC:
 /* 1093BC 802E7B3C 24020001 */  addiu     $v0, $zero, 1
 /* 1093C0 802E7B40 3C018011 */  lui       $at, %hi(gPlayerData)
 /* 1093C4 802E7B44 A022F290 */  sb        $v0, %lo(gPlayerData)($at)
 /* 1093C8 802E7B48 080B9EE2 */  j         .L802E7B88
 /* 1093CC 802E7B4C 00000000 */   nop
-dlabel L802E7B50_1093D0
+.L802E7B50_1093D0:
 /* 1093D0 802E7B50 24020002 */  addiu     $v0, $zero, 2
 /* 1093D4 802E7B54 3C018011 */  lui       $at, %hi(gPlayerData)
 /* 1093D8 802E7B58 A022F290 */  sb        $v0, %lo(gPlayerData)($at)
 /* 1093DC 802E7B5C 080B9EE2 */  j         .L802E7B88
 /* 1093E0 802E7B60 00000000 */   nop
-dlabel L802E7B64_1093E4
+.L802E7B64_1093E4:
 /* 1093E4 802E7B64 3C018011 */  lui       $at, %hi(gPlayerData+0x1)
 /* 1093E8 802E7B68 A020F291 */  sb        $zero, %lo(gPlayerData+0x1)($at)
 /* 1093EC 802E7B6C 080B9EE2 */  j         .L802E7B88
 /* 1093F0 802E7B70 00000000 */   nop
-dlabel L802E7B74_1093F4
+.L802E7B74_1093F4:
 /* 1093F4 802E7B74 080B9EE0 */  j         .L802E7B80
 /* 1093F8 802E7B78 24020001 */   addiu    $v0, $zero, 1
-dlabel L802E7B7C_1093FC
+.L802E7B7C_1093FC:
 /* 1093FC 802E7B7C 24020002 */  addiu     $v0, $zero, 2
 .L802E7B80:
 /* 109400 802E7B80 3C018011 */  lui       $at, %hi(gPlayerData+0x1)

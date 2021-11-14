@@ -4,7 +4,7 @@
 .section .rodata
 
 dlabel jtbl_800986B0
-.word L80045DB4_211B4, L80045DC0_211C0, L80045DCC_211CC, L80045E08_21208, L80045E14_21214, 0
+.word .L80045DB4_211B4, .L80045DC0_211C0, .L80045DCC_211CC, .L80045E08_21208, .L80045E14_21214, 0
 
 .section .text
 
@@ -23,15 +23,15 @@ glabel update_merlee_message
 /* 211A8 80045DA8 8C2286B0 */  lw        $v0, %lo(jtbl_800986B0)($at)
 /* 211AC 80045DAC 00400008 */  jr        $v0
 /* 211B0 80045DB0 00000000 */   nop
-dlabel L80045DB4_211B4
+.L80045DB4_211B4:
 /* 211B4 80045DB4 24020001 */  addiu     $v0, $zero, 1
 /* 211B8 80045DB8 08011786 */  j         .L80045E18
 /* 211BC 80045DBC A2020016 */   sb       $v0, 0x16($s0)
-dlabel L80045DC0_211C0
+.L80045DC0_211C0:
 /* 211C0 80045DC0 24020002 */  addiu     $v0, $zero, 2
 /* 211C4 80045DC4 08011786 */  j         .L80045E18
 /* 211C8 80045DC8 A2020016 */   sb       $v0, 0x16($s0)
-dlabel L80045DCC_211CC
+.L80045DCC_211CC:
 /* 211CC 80045DCC 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 211D0 80045DD0 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 211D4 80045DD4 8C420010 */  lw        $v0, 0x10($v0)
@@ -49,11 +49,11 @@ dlabel L80045DCC_211CC
 /* 211FC 80045DFC 24020003 */  addiu     $v0, $zero, 3
 /* 21200 80045E00 08011786 */  j         .L80045E18
 /* 21204 80045E04 A2020016 */   sb       $v0, 0x16($s0)
-dlabel L80045E08_21208
+.L80045E08_21208:
 /* 21208 80045E08 24020004 */  addiu     $v0, $zero, 4
 /* 2120C 80045E0C 08011786 */  j         .L80045E18
 /* 21210 80045E10 A2020016 */   sb       $v0, 0x16($s0)
-dlabel L80045E14_21214
+.L80045E14_21214:
 /* 21214 80045E14 24040001 */  addiu     $a0, $zero, 1
 .L80045E18:
 /* 21218 80045E18 10800008 */  beqz      $a0, .L80045E3C

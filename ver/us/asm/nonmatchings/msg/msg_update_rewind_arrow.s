@@ -4,7 +4,7 @@
 .section .rodata
 
 dlabel jtbl_801506F8
-.word L80126874_BCF74, L80126884_BCF84, L801268D8_BCFD8, L80126900_BD000, L8012698C_BD08C, 0
+.word .L80126874_BCF74, .L80126884_BCF84, .L801268D8_BCFD8, .L80126900_BD000, .L8012698C_BD08C, 0
 
 dlabel D_80150710
 .double 0.2
@@ -69,12 +69,12 @@ glabel msg_update_rewind_arrow
 /* BCF68 80126868 8C2206F8 */  lw        $v0, %lo(jtbl_801506F8)($at)
 /* BCF6C 8012686C 00400008 */  jr        $v0
 /* BCF70 80126870 00000000 */   nop
-dlabel L80126874_BCF74
+.L80126874_BCF74:
 /* BCF74 80126874 24020001 */  addiu     $v0, $zero, 1
 /* BCF78 80126878 A620047E */  sh        $zero, 0x47e($s1)
 /* BCF7C 8012687C A6200480 */  sh        $zero, 0x480($s1)
 /* BCF80 80126880 A222047C */  sb        $v0, 0x47c($s1)
-dlabel L80126884_BCF84
+.L80126884_BCF84:
 /* BCF84 80126884 8622047E */  lh        $v0, 0x47e($s1)
 /* BCF88 80126888 3C018015 */  lui       $at, %hi(D_80150710)
 /* BCF8C 8012688C D4220710 */  ldc1      $f2, %lo(D_80150710)($at)
@@ -96,7 +96,7 @@ dlabel L80126884_BCF84
 /* BCFCC 801268CC 28420004 */  slti      $v0, $v0, 4
 /* BCFD0 801268D0 08049A83 */  j         .L80126A0C
 /* BCFD4 801268D4 46200720 */   cvt.s.d  $f28, $f0
-dlabel L801268D8_BCFD8
+.L801268D8_BCFD8:
 /* BCFD8 801268D8 9622047E */  lhu       $v0, 0x47e($s1)
 /* BCFDC 801268DC 24420001 */  addiu     $v0, $v0, 1
 /* BCFE0 801268E0 A622047E */  sh        $v0, 0x47e($s1)
@@ -107,7 +107,7 @@ dlabel L801268D8_BCFD8
 /* BCFF4 801268F4 24020003 */   addiu    $v0, $zero, 3
 /* BCFF8 801268F8 08049A86 */  j         .L80126A18
 /* BCFFC 801268FC A620047E */   sh       $zero, 0x47e($s1)
-dlabel L80126900_BD000
+.L80126900_BD000:
 /* BD000 80126900 0000202D */  daddu     $a0, $zero, $zero
 /* BD004 80126904 8627047E */  lh        $a3, 0x47e($s1)
 /* BD008 80126908 3C01437F */  lui       $at, 0x437f
@@ -143,7 +143,7 @@ dlabel L80126900_BD000
 /* BD080 80126980 46000106 */   mov.s    $f4, $f0
 /* BD084 80126984 08049A85 */  j         .L80126A14
 /* BD088 80126988 24020004 */   addiu    $v0, $zero, 4
-dlabel L8012698C_BD08C
+.L8012698C_BD08C:
 /* BD08C 8012698C 0000202D */  daddu     $a0, $zero, $zero
 /* BD090 80126990 8627047E */  lh        $a3, 0x47e($s1)
 /* BD094 80126994 3C014360 */  lui       $at, 0x4360
