@@ -503,6 +503,7 @@ enum SoundIDs {
     SOUND_E1                        = 0x000000E1,
     SOUND_E2                        = 0x000000E2,
     SOUND_E3                        = 0x000000E3,
+    SOUND_E7                        = 0x000000E7,
     SOUND_E9                        = 0x000000E9,
     SOUND_EA                        = 0x000000EA,
     SOUND_FREEZE                    = 0x000000EB,
@@ -618,6 +619,7 @@ enum SoundIDs {
     SOUND_SPELL_CAST5               = 0x000020D8,
     SOUND_UNKNOWN_20F6              = 0x000020F6,
     SOUND_UNKNOWN_2106              = 0x00002106,
+    SOUND_UNKNOWN_2107              = 0x00002107,
 };
 
 enum Cams {
@@ -2160,8 +2162,14 @@ enum BattleStatusFlags1 {
 };
 
 enum BattleStatusFlags2 {
+    BS_FLAGS2_2                               = 0x00000002,
+    BS_FLAGS2_4                               = 0x00000004,
+    BS_FLAGS2_8                               = 0x00000008,
+    BS_FLAGS2_10                              = 0x00000010,
+    BS_FLAGS2_40                              = 0x00000040,
     BS_FLAGS2_NO_TARGET_AVAILABLE             = 0x00001000,
     BS_FLAGS2_1000000                         = 0x01000000,
+    BS_FLAGS2_2000000                         = 0x02000000,
 };
 
 enum DebuffTypes {

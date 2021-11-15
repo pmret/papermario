@@ -406,6 +406,23 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
 
 void func_80138D88(s32, s32, s32, s32, f32);
 
+void btl_cam_set_target_pos(f32, f32, f32);
+void deduct_current_move_fp(void);
+void load_partner_actor(void);
+void dispatch_event_partner(s32);
+void dispatch_event_player(s32);
+s32 btl_are_all_enemies_defeated(void);
+s32 btl_check_player_defeated(void);
+void btl_show_battle_message(s32, s32);
+void btl_update_ko_status(void);
+void reset_actor_turn_info(void);
+void reset_all_actor_sounds(Actor*);
+void decrement_status_menu_disabled(void);
+void increment_status_menu_disabled(void);
+void btl_delete_actor(Actor* actor);
+void remove_status_debuff(s16);
+s32 find_item(s32);
+
 // State funcs
 void state_init_startup(void);
 void state_step_startup(void);
