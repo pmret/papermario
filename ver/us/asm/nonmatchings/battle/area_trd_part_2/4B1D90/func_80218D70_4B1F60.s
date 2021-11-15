@@ -28,7 +28,7 @@ glabel func_80218D70_4B1F60
 /* 4B1FB8 80218DC8 080863C0 */  j         .L80218F00
 /* 4B1FBC 80218DCC 2622FFFF */   addiu    $v0, $s1, -1
 .L80218DD0:
-/* 4B1FC0 80218DD0 0C086334 */  jal       func_80218CD0_4B1EC0
+/* 4B1FC0 80218DD0 0C086334 */  jal       b_area_trd_part_2_UnkEnemyFunc
 /* 4B1FC4 80218DD4 24040003 */   addiu    $a0, $zero, 3
 /* 4B1FC8 80218DD8 C4400138 */  lwc1      $f0, 0x138($v0)
 /* 4B1FCC 80218DDC E7A00020 */  swc1      $f0, 0x20($sp)
@@ -36,7 +36,7 @@ glabel func_80218D70_4B1F60
 /* 4B1FD4 80218DE4 E7A00024 */  swc1      $f0, 0x24($sp)
 /* 4B1FD8 80218DE8 C4400140 */  lwc1      $f0, 0x140($v0)
 /* 4B1FDC 80218DEC 24040006 */  addiu     $a0, $zero, 6
-/* 4B1FE0 80218DF0 0C086334 */  jal       func_80218CD0_4B1EC0
+/* 4B1FE0 80218DF0 0C086334 */  jal       b_area_trd_part_2_UnkEnemyFunc
 /* 4B1FE4 80218DF4 E7A00028 */   swc1     $f0, 0x28($sp)
 /* 4B1FE8 80218DF8 C4400138 */  lwc1      $f0, 0x138($v0)
 /* 4B1FEC 80218DFC E7A0002C */  swc1      $f0, 0x2c($sp)
@@ -46,7 +46,7 @@ glabel func_80218D70_4B1F60
 /* 4B1FFC 80218E0C 080863BE */  j         .L80218EF8
 /* 4B2000 80218E10 E7A00034 */   swc1     $f0, 0x34($sp)
 .L80218E14:
-/* 4B2004 80218E14 0C086334 */  jal       func_80218CD0_4B1EC0
+/* 4B2004 80218E14 0C086334 */  jal       b_area_trd_part_2_UnkEnemyFunc
 /* 4B2008 80218E18 24040003 */   addiu    $a0, $zero, 3
 /* 4B200C 80218E1C C4400138 */  lwc1      $f0, 0x138($v0)
 /* 4B2010 80218E20 E7A00020 */  swc1      $f0, 0x20($sp)
@@ -54,7 +54,7 @@ glabel func_80218D70_4B1F60
 /* 4B2018 80218E28 E7A00024 */  swc1      $f0, 0x24($sp)
 /* 4B201C 80218E2C C4400140 */  lwc1      $f0, 0x140($v0)
 /* 4B2020 80218E30 24040005 */  addiu     $a0, $zero, 5
-/* 4B2024 80218E34 0C086334 */  jal       func_80218CD0_4B1EC0
+/* 4B2024 80218E34 0C086334 */  jal       b_area_trd_part_2_UnkEnemyFunc
 /* 4B2028 80218E38 E7A00028 */   swc1     $f0, 0x28($sp)
 /* 4B202C 80218E3C C4400138 */  lwc1      $f0, 0x138($v0)
 /* 4B2030 80218E40 E7A0002C */  swc1      $f0, 0x2c($sp)
@@ -62,7 +62,7 @@ glabel func_80218D70_4B1F60
 /* 4B2038 80218E48 E7A00030 */  swc1      $f0, 0x30($sp)
 /* 4B203C 80218E4C C4400140 */  lwc1      $f0, 0x140($v0)
 /* 4B2040 80218E50 24040006 */  addiu     $a0, $zero, 6
-/* 4B2044 80218E54 0C086334 */  jal       func_80218CD0_4B1EC0
+/* 4B2044 80218E54 0C086334 */  jal       b_area_trd_part_2_UnkEnemyFunc
 /* 4B2048 80218E58 E7A00034 */   swc1     $f0, 0x34($sp)
 /* 4B204C 80218E5C C4400138 */  lwc1      $f0, 0x138($v0)
 /* 4B2050 80218E60 E7A00038 */  swc1      $f0, 0x38($sp)
@@ -72,7 +72,7 @@ glabel func_80218D70_4B1F60
 /* 4B2060 80218E70 080863BE */  j         .L80218EF8
 /* 4B2064 80218E74 E7A00040 */   swc1     $f0, 0x40($sp)
 .L80218E78:
-/* 4B2068 80218E78 0C086334 */  jal       func_80218CD0_4B1EC0
+/* 4B2068 80218E78 0C086334 */  jal       b_area_trd_part_2_UnkEnemyFunc
 /* 4B206C 80218E7C 24040003 */   addiu    $a0, $zero, 3
 /* 4B2070 80218E80 C4400138 */  lwc1      $f0, 0x138($v0)
 /* 4B2074 80218E84 E7A00020 */  swc1      $f0, 0x20($sp)
@@ -80,7 +80,7 @@ glabel func_80218D70_4B1F60
 /* 4B207C 80218E8C E7A00024 */  swc1      $f0, 0x24($sp)
 /* 4B2080 80218E90 C4400140 */  lwc1      $f0, 0x140($v0)
 /* 4B2084 80218E94 24040004 */  addiu     $a0, $zero, 4
-/* 4B2088 80218E98 0C086334 */  jal       func_80218CD0_4B1EC0
+/* 4B2088 80218E98 0C086334 */  jal       b_area_trd_part_2_UnkEnemyFunc
 /* 4B208C 80218E9C E7A00028 */   swc1     $f0, 0x28($sp)
 /* 4B2090 80218EA0 C4400138 */  lwc1      $f0, 0x138($v0)
 /* 4B2094 80218EA4 E7A0002C */  swc1      $f0, 0x2c($sp)
@@ -88,7 +88,7 @@ glabel func_80218D70_4B1F60
 /* 4B209C 80218EAC E7A00030 */  swc1      $f0, 0x30($sp)
 /* 4B20A0 80218EB0 C4400140 */  lwc1      $f0, 0x140($v0)
 /* 4B20A4 80218EB4 24040005 */  addiu     $a0, $zero, 5
-/* 4B20A8 80218EB8 0C086334 */  jal       func_80218CD0_4B1EC0
+/* 4B20A8 80218EB8 0C086334 */  jal       b_area_trd_part_2_UnkEnemyFunc
 /* 4B20AC 80218EBC E7A00034 */   swc1     $f0, 0x34($sp)
 /* 4B20B0 80218EC0 C4400138 */  lwc1      $f0, 0x138($v0)
 /* 4B20B4 80218EC4 E7A00038 */  swc1      $f0, 0x38($sp)
@@ -96,7 +96,7 @@ glabel func_80218D70_4B1F60
 /* 4B20BC 80218ECC E7A0003C */  swc1      $f0, 0x3c($sp)
 /* 4B20C0 80218ED0 C4400140 */  lwc1      $f0, 0x140($v0)
 /* 4B20C4 80218ED4 24040006 */  addiu     $a0, $zero, 6
-/* 4B20C8 80218ED8 0C086334 */  jal       func_80218CD0_4B1EC0
+/* 4B20C8 80218ED8 0C086334 */  jal       b_area_trd_part_2_UnkEnemyFunc
 /* 4B20CC 80218EDC E7A00040 */   swc1     $f0, 0x40($sp)
 /* 4B20D0 80218EE0 C4400138 */  lwc1      $f0, 0x138($v0)
 /* 4B20D4 80218EE4 E7A00044 */  swc1      $f0, 0x44($sp)
