@@ -563,9 +563,9 @@ void btl_state_update_change_partner(void) {
     Actor* player = battleStatus->playerActor;
     Actor* partner = battleStatus->partnerActor;
     ActorState* state = &player->state;
+    PlayerData* playerData = &gPlayerData;
     Actor* enemyActor;
     Evt* script;
-    PlayerData* playerData = &gPlayerData;
     s32 i;
 
     switch (gBattleState2) {
