@@ -278,6 +278,7 @@ void btl_state_update_victory(void) {
             gBattleStatus.flags2 &= ~BS_FLAGS2_4;
             gBattleStatus.flags2 &= ~BS_FLAGS2_8;
             gBattleStatus.flags2 &= ~BS_FLAGS2_10;
+
             gBattleStatus.flags1 &= ~BS_FLAGS1_8;
             if (player->koStatus == 0xD) {
                 dispatch_event_player(0x34);
@@ -336,10 +337,14 @@ void btl_state_update_victory(void) {
 
     if (gBattleState2 == 0xC) {
         if (partner->state.moveTime != 0) {
-            partner->currentPos.x += (partner->state.goalPos.x - partner->currentPos.x) / partner->state.moveTime;
-            partner->currentPos.z += (partner->state.goalPos.z - partner->currentPos.z) / partner->state.moveTime;
-            player->currentPos.x += (partner->state.currentPos.x - player->currentPos.x) / partner->state.moveTime;
-            player->currentPos.z += (partner->state.currentPos.z - player->currentPos.z) / partner->state.moveTime;
+            partner->currentPos.x += (partner->state.goalPos.x - partner->currentPos.x)
+                                                            / partner->state.moveTime;
+            partner->currentPos.z += (partner->state.goalPos.z - partner->currentPos.z)
+                                                            / partner->state.moveTime;
+            player->currentPos.x += (partner->state.currentPos.x - player->currentPos.x)
+                                                            / partner->state.moveTime;
+            player->currentPos.z += (partner->state.currentPos.z - player->currentPos.z)
+                                                            / partner->state.moveTime;
         }
         partner->currentPos.z += sin_rad((partner->state.angle * TAU) / 360.0f) * 16.0f;
         partner->yaw = clamp_angle(-partner->state.angle);
@@ -394,7 +399,8 @@ void btl_state_update_victory(void) {
                 battleStatus->incrementStarPointDelay = 0x14;
                 battleStatus->unk_8A = 0;
                 gBattleState2 = 4;
-                battleStatus->pendingStarPoints = battleStatus->totalStarPoints + battleStatus->pendingStarPoints + battleStatus->pendingStarPoints;
+                battleStatus->pendingStarPoints = battleStatus->totalStarPoints
+                                        + battleStatus->pendingStarPoints + battleStatus->pendingStarPoints;
             }
         }
     }
@@ -414,10 +420,8 @@ void btl_state_update_victory(void) {
         if (gBattleStatus.flags1 & BS_FLAGS1_20000) {
             if (!(gBattleStatus.flags2 & BS_FLAGS2_2000000)) {
                 bgm_set_song(0, -1, 0, 0x5DC, 8);
-                btl_set_state(0x20);
-            } else {
-                btl_set_state(0x20);
             }
+            btl_set_state(0x20);
         } else {
             btl_set_state(0x21);
         }
@@ -535,7 +539,7 @@ void btl_state_update_defeat(void) {
     if (gBattleState2 == 0xA) {
         currentEncounter->battleOutcome = OUTCOME_PLAYER_LOST;
         if (!(gBattleStatus.flags2 & BS_FLAGS2_2000000)) {
-            bgm_set_song(0, ~0, 0, 0x5DC, 8);
+            bgm_set_song(0, -1, 0, 0x5DC, 8);
         }
         btl_set_state(0x20);
     }
@@ -619,9 +623,7 @@ void btl_state_update_change_partner(void) {
                 partner->currentPos.y = player->currentPos.y + 25.0f;
                 partner->currentPos.z = player->currentPos.z;
                 gBattleState2 = 4;
-                break;
             }
-        default:
             break;
         case 4:
             partner = battleStatus->partnerActor;
@@ -770,7 +772,9 @@ void btl_state_update_partner_move(void) {
             }
             gBattleStatus.flags1 &= ~BS_FLAGS1_100;
 
-            if ((partner->onHitScript == NULL || does_script_exist(partner->onHitID) == FALSE) && ((partner->onHitScript = NULL, player->onHitScript == NULL) || does_script_exist(player->onHitID) == FALSE)) {
+            if ((partner->onHitScript == NULL || does_script_exist(partner->onHitID) == FALSE)
+                && ((partner->onHitScript = NULL, player->onHitScript == NULL)
+                    || does_script_exist(player->onHitID) == FALSE)) {
                 player->onHitScript = NULL;
                 for (phi_s3 = FALSE, i = 0; i < 24; i++) {
                     enemyActor = battleStatus->enemyActors[i];
@@ -813,7 +817,7 @@ void btl_state_update_partner_move(void) {
                                 partner->isGlowing = 0;
                                 gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
                             }
-                            if (btl_check_player_defeated() == 0) {
+                            if (btl_check_player_defeated() == FALSE) {
                                 for (i = 0; i < 24; i++) {
                                     enemyActor = battleStatus->enemyActors[i];
                                     if (enemyActor != NULL) {
