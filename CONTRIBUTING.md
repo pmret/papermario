@@ -103,7 +103,7 @@ Sometimes when working on a function, for various reasons, you'll be unable to m
 
 If you are working on a function but can't figure out how to tackle certain parts, or you're sure that it's not equivalent, you can wrap it in NON_EQUIVALENT.
 
-Please make a best-effort attempt to any function you put in a PR, though. Half-finished functions aren't necessarily much use to the next decomper.
+Please make a best-effort attempt on any function you put in a PR, though. Half-finished functions aren't necessarily much use to the next decomper.
 
 ```c
 // can't figure out the MULT_HI() stuff
