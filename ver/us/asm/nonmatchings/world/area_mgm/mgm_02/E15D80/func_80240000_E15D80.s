@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_802484E0_E1E260
+dlabel D_802484E0_E1E260
 .double 59.0
 
 .section .text

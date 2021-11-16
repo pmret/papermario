@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_80270040
+dlabel D_80270040
 .double 0.01
 
 .section .text

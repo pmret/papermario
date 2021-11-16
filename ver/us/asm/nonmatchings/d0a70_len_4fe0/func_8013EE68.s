@@ -3,25 +3,25 @@
 
 .section .rodata
 
-glabel D_80151100
+dlabel D_80151100
 .double 10.3
 
-glabel D_80151108
+dlabel D_80151108
 .double 360.0
 
-glabel D_80151110
+dlabel D_80151110
 .double 11.2
 
-glabel D_80151118
+dlabel D_80151118
 .double 360.0
 
-glabel D_80151120
+dlabel D_80151120
 .double 10.8
 
-glabel D_80151128
+dlabel D_80151128
 .double 360.0
 
-glabel D_80151130
+dlabel D_80151130
 .double 360.0
 
 .section .text

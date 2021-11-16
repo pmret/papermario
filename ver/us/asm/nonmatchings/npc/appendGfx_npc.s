@@ -3,22 +3,22 @@
 
 .section .rodata
 
-glabel D_80098480
+dlabel D_80098480
 .double 0.7142857142857143
 
-glabel D_80098488
+dlabel D_80098488
 .double 0.7142857142857143
 
-glabel D_80098490
+dlabel D_80098490
 .double 0.7142857142857143
 
-glabel D_80098498
+dlabel D_80098498
 .double 0.7142857142857143
 
-glabel D_800984A0
+dlabel D_800984A0
 .double 0.7142857142857143
 
-glabel D_800984A8
+dlabel D_800984A8
 .double 0.7142857142857143
 
 .section .text

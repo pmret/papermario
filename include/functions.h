@@ -352,6 +352,8 @@ void sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32
 void sfx_play_sound_at_player(s32 soundID, s32 arg0);
 void sfx_play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID);
 s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
+void bgm_set_battle_song(s32, s32);
+void bgm_push_battle_song(void);
 void func_801497FC(s32 arg0);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
 
@@ -405,6 +407,8 @@ void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
 void func_80138D88(s32, s32, s32, s32, f32);
+
+void enable_background_wave(void);
 
 // State funcs
 void state_init_startup(void);

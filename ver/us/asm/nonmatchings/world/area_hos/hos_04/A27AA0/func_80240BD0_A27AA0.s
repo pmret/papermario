@@ -3,8 +3,8 @@
 
 .section .rodata
 
-glabel jtbl_80243358_A2A228
-.word L80240C38_A27B08, L80240CA4_A27B74, L80240CCC_A27B9C, L80240D60_A27C30, L80240D0C_A27BDC, 0
+dlabel jtbl_80243358_A2A228
+.word .L80240C38_A27B08, .L80240CA4_A27B74, .L80240CCC_A27B9C, .L80240D60_A27C30, .L80240D0C_A27BDC, 0
 
 .section .text
 
@@ -29,14 +29,14 @@ glabel func_80240BD0_A27AA0
 /* A27AE0 80240C10 3C038024 */  lui       $v1, %hi(D_80243250_A2A120)
 /* A27AE4 80240C14 8C633250 */  lw        $v1, %lo(D_80243250_A2A120)($v1)
 /* A27AE8 80240C18 2C620005 */  sltiu     $v0, $v1, 5
-/* A27AEC 80240C1C 10400050 */  beqz      $v0, L80240D60_A27C30
+/* A27AEC 80240C1C 10400050 */  beqz      $v0, .L80240D60_A27C30
 /* A27AF0 80240C20 00031080 */   sll      $v0, $v1, 2
 /* A27AF4 80240C24 3C018024 */  lui       $at, %hi(jtbl_80243358_A2A228)
 /* A27AF8 80240C28 00220821 */  addu      $at, $at, $v0
 /* A27AFC 80240C2C 8C223358 */  lw        $v0, %lo(jtbl_80243358_A2A228)($at)
 /* A27B00 80240C30 00400008 */  jr        $v0
 /* A27B04 80240C34 00000000 */   nop
-glabel L80240C38_A27B08
+.L80240C38_A27B08:
 /* A27B08 80240C38 3C048024 */  lui       $a0, %hi(D_80243258_A2A128)
 /* A27B0C 80240C3C 8C843258 */  lw        $a0, %lo(D_80243258_A2A128)($a0)
 /* A27B10 80240C40 8C830000 */  lw        $v1, ($a0)
@@ -66,7 +66,7 @@ glabel L80240C38_A27B08
 /* A27B68 80240C98 AC233380 */  sw        $v1, %lo(filemenu_update_show_name_input)($at)
 /* A27B6C 80240C9C 08090359 */  j         .L80240D64
 /* A27B70 80240CA0 24040001 */   addiu    $a0, $zero, 1
-glabel L80240CA4_A27B74
+.L80240CA4_A27B74:
 /* A27B74 80240CA4 3C038024 */  lui       $v1, %hi(filemenu_update_show_name_input)
 /* A27B78 80240CA8 24633380 */  addiu     $v1, $v1, %lo(filemenu_update_show_name_input)
 /* A27B7C 80240CAC 8C620000 */  lw        $v0, ($v1)
@@ -77,12 +77,12 @@ glabel L80240CA4_A27B74
 /* A27B90 80240CC0 AC223250 */  sw        $v0, %lo(D_80243250_A2A120)($at)
 /* A27B94 80240CC4 08090359 */  j         .L80240D64
 /* A27B98 80240CC8 24040001 */   addiu    $a0, $zero, 1
-glabel L80240CCC_A27B9C
+.L80240CCC_A27B9C:
 /* A27B9C 80240CCC 3C048024 */  lui       $a0, %hi(D_80243254_A2A124)
 /* A27BA0 80240CD0 24843254 */  addiu     $a0, $a0, %lo(D_80243254_A2A124)
 /* A27BA4 80240CD4 8C820000 */  lw        $v0, ($a0)
 /* A27BA8 80240CD8 2442FFF6 */  addiu     $v0, $v0, -0xa
-/* A27BAC 80240CDC 04410020 */  bgez      $v0, L80240D60_A27C30
+/* A27BAC 80240CDC 04410020 */  bgez      $v0, .L80240D60_A27C30
 /* A27BB0 80240CE0 AC820000 */   sw       $v0, ($a0)
 /* A27BB4 80240CE4 3C028024 */  lui       $v0, %hi(D_80243258_A2A128)
 /* A27BB8 80240CE8 24423258 */  addiu     $v0, $v0, %lo(D_80243258_A2A128)
@@ -94,14 +94,14 @@ glabel L80240CCC_A27B9C
 /* A27BD0 80240D00 AC430000 */   sw       $v1, ($v0)
 /* A27BD4 80240D04 08090356 */  j         .L80240D58
 /* A27BD8 80240D08 00000000 */   nop
-glabel L80240D0C_A27BDC
+.L80240D0C_A27BDC:
 /* A27BDC 80240D0C 3C038024 */  lui       $v1, %hi(filemenu_update_show_name_input)
 /* A27BE0 80240D10 24633380 */  addiu     $v1, $v1, %lo(filemenu_update_show_name_input)
 /* A27BE4 80240D14 8C620000 */  lw        $v0, ($v1)
 /* A27BE8 80240D18 10400003 */  beqz      $v0, .L80240D28
 /* A27BEC 80240D1C 2442FFFF */   addiu    $v0, $v0, -1
 .L80240D20:
-/* A27BF0 80240D20 08090358 */  j         L80240D60_A27C30
+/* A27BF0 80240D20 08090358 */  j         .L80240D60_A27C30
 /* A27BF4 80240D24 AC620000 */   sw       $v0, ($v1)
 .L80240D28:
 /* A27BF8 80240D28 3C028024 */  lui       $v0, %hi(D_80243258_A2A128)
@@ -120,7 +120,7 @@ glabel L80240D0C_A27BDC
 .L80240D58:
 /* A27C28 80240D58 3C018024 */  lui       $at, %hi(D_80243250_A2A120)
 /* A27C2C 80240D5C AC203250 */  sw        $zero, %lo(D_80243250_A2A120)($at)
-glabel L80240D60_A27C30
+.L80240D60_A27C30:
 /* A27C30 80240D60 24040001 */  addiu     $a0, $zero, 1
 .L80240D64:
 /* A27C34 80240D64 27B00018 */  addiu     $s0, $sp, 0x18

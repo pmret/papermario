@@ -3,3 +3,8 @@
     .type \label, @function
     \label:
 .endm
+
+.macro dlabel label
+    .global \label
+    \label:
+.endm

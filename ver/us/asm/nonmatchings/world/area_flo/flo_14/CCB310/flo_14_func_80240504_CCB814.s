@@ -2,10 +2,10 @@
 .set noreorder # don't insert nops after branches
 
 .section .rodata
-glabel flo_14_D_80245320_CD0630
+dlabel flo_14_D_80245320_CD0630
 .double 0.04
 
-glabel flo_14_D_80245328_CD0638
+dlabel flo_14_D_80245328_CD0638
 .double 0.98
 
 .section .text

@@ -3,10 +3,10 @@
 
 .section .rodata
 
-glabel D_802466C0_EA6FC0
+dlabel D_802466C0_EA6FC0
 .double -583.0
 
-glabel D_802466C8_EA6FC8
+dlabel D_802466C8_EA6FC8
 .double 165.0
 
 .section .text

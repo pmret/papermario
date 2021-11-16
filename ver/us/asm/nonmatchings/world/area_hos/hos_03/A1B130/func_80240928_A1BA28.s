@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_8024BD60_A26E60
+dlabel D_8024BD60_A26E60
 .double 1.05, 0.0
 
 .section .text

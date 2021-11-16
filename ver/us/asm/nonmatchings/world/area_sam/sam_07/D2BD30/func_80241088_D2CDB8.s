@@ -3,22 +3,22 @@
 
 .section .rodata
 
-glabel D_80243F18_D2FC48
+dlabel D_80243F18_D2FC48
 .double 380.0
 
-glabel D_80243F20_D2FC50
+dlabel D_80243F20_D2FC50
 .double -380.0
 
-glabel D_80243F28_D2FC58
+dlabel D_80243F28_D2FC58
 .double 305.0
 
-glabel D_80243F30_D2FC60
+dlabel D_80243F30_D2FC60
 .double 375.0
 
-glabel D_80243F38_D2FC68
+dlabel D_80243F38_D2FC68
 .double 45.0
 
-glabel D_80243F40_D2FC70
+dlabel D_80243F40_D2FC70
 .double 150.0, 0.0
 
 .section .text

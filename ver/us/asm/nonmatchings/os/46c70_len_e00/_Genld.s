@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_80099E30
+dlabel D_80099E30
 .ascii "0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
 
 .section .text

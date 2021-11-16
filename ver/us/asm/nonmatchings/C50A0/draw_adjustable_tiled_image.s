@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_80150A50
+dlabel D_80150A50
 .double 0.01, 0.0
 
 .section .text

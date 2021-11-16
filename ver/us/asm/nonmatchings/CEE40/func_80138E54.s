@@ -3,16 +3,16 @@
 
 .section .rodata
 
-glabel D_80150F80
+dlabel D_80150F80
 .double 0.14
 
-glabel D_80150F88
+dlabel D_80150F88
 .double 0.9
 
-glabel D_80150F90
+dlabel D_80150F90
 .double 0.05
 
-glabel D_80150F98
+dlabel D_80150F98
 .double 0.07
 
 .section .text

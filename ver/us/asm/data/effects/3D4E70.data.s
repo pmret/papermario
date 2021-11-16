@@ -2,14 +2,14 @@
 
 .section .data
 
-glabel D_E00D2500
+dlabel D_E00D2500
 .byte 0x00, 0x1E, 0x50, 0x78, 0x70, 0x68, 0x64, 0x00
 
-glabel D_E00D2508
+dlabel D_E00D2508
 .byte 0x5E, 0x5C, 0x64, 0x69, 0x6B, 0x69, 0x64, 0x00
 
-glabel D_E00D2510
+dlabel D_E00D2510
 .double 0.6
 
-glabel D_E00D2518
+dlabel D_E00D2518
 .double 0.01

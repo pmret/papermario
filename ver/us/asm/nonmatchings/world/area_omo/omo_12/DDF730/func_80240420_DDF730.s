@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_80243168_DE2478
+dlabel D_80243168_DE2478
 .ascii "party_akari\0\0\0\0\0\0\0\0\0\0\0\0\0"
 
 .section .text

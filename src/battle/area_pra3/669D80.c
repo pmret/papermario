@@ -6,9 +6,9 @@ INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218000_669D80);
 
 #include "common/ActorJumpToPos.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_802189E4_66A764);
+#include "common/UnkActorSizeFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218A90_66A810);
+#include "common/UnkEffect6CFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218AF4_66A874);
 
@@ -20,7 +20,7 @@ INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218B2C_66A8AC);
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218C40_66A9C0);
 
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218D64_66AAE4);
+#include "common/UnkActorPosFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218E88_66AC08);
 

@@ -3,10 +3,10 @@
 
 .section .rodata
 
-glabel D_80245858_C859F8
+dlabel D_80245858_C859F8
 .double 0.09
 
-glabel D_80245860_C85A00
+dlabel D_80245860_C85A00
 .double 0.09
 
 .section .text

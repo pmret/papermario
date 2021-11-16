@@ -3,16 +3,16 @@
 
 .section .rodata
 
-glabel D_80244FA0_ADAE70
+dlabel D_80244FA0_ADAE70
 .double 0.1
 
-glabel D_80244FA8_ADAE78
+dlabel D_80244FA8_ADAE78
 .double 1.3
 
-glabel D_80244FB0_ADAE80
+dlabel D_80244FB0_ADAE80
 .double 0.4
 
-glabel D_80244FB8_ADAE88
+dlabel D_80244FB8_ADAE88
 .double 0.2, 7.370960555125578e+228, 1.1479345603117537e+195
 
 .section .text
