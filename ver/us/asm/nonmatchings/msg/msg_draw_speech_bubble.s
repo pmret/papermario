@@ -338,8 +338,8 @@ glabel msg_draw_speech_bubble
 /* C381C 8012D11C ACA30004 */  sw        $v1, 4($a1)
 /* C3820 8012D120 24430008 */  addiu     $v1, $v0, 8
 /* C3824 8012D124 AC830000 */  sw        $v1, ($a0)
-/* C3828 8012D128 3C058015 */  lui       $a1, %hi(gMessageDrawStatePtr)
-/* C382C 8012D12C 8CA55D74 */  lw        $a1, %lo(gMessageDrawStatePtr)($a1)
+/* C3828 8012D128 3C058015 */  lui       $a1, %hi(msg_drawState)
+/* C382C 8012D12C 8CA55D74 */  lw        $a1, %lo(msg_drawState)($a1)
 /* C3830 8012D130 3C03FD10 */  lui       $v1, 0xfd10
 /* C3834 8012D134 AC430000 */  sw        $v1, ($v0)
 /* C3838 8012D138 90A5002B */  lbu       $a1, 0x2b($a1)

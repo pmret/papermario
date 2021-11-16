@@ -6,9 +6,9 @@ INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_802180D0_6BBC60);
 
 #include "common/ActorJumpToPos.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_80218AB4_6BC644);
+#include "common/UnkActorSizeFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_80218B60_6BC6F0);
+#include "common/UnkEffect6CFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_80218BC4_6BC754);
 
@@ -18,9 +18,11 @@ INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_80218BFC_6BC78C);
 #include "common/UnkBattleFunc1.inc.c"
 #define NAMESPACE b_area_kpa3
 
-INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_80218D10_6BC8A0);
+#include "common/UnkActorPosFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_80218E34_6BC9C4);
+#define NAMESPACE dup_b_area_kpa3
+#include "common/UnkActorPosFunc.inc.c"
+#define NAMESPACE b_area_kpa3
 
 INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_80218F58_6BCAE8);
 

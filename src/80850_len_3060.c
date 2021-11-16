@@ -390,7 +390,7 @@ void initialize_status_menu(void) {
 }
 
 // close but maybe just regalloc remaining?
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits) {
     s8 digits[4];
     s32 i;
@@ -871,7 +871,7 @@ void reset_status_menu(void) {
 }
 
 // Weird order of loading stuff
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 is_ability_active(s32 ability) {
     s32 abilityMoveID;
     PlayerData* playerData = &gPlayerData;

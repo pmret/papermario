@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_802462C0_B4AA30
+dlabel D_802462C0_B4AA30
 .ascii "party_opuku\0flo_00\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
 
 .section .text

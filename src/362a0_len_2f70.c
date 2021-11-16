@@ -144,7 +144,7 @@ extern s32 D_800A4240;
 extern f32 D_800A4244;
 extern f32 D_800A4254;
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 f32 test_up_ray_collider(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw) {
     CollisionData* collisionData = &gCollisionData;
     f32 cosTheta;

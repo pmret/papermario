@@ -47,7 +47,7 @@ INCLUDE_ASM(s32, "1AC760", calc_partner_test_enemy);
 INCLUDE_ASM(s32, "1AC760", calc_partner_damage_enemy);
 
 //Some slight stack / ordering issues at the beginning
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;

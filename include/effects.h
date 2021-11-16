@@ -149,6 +149,13 @@ typedef struct EffectTableEntry {
     /* 0x14 */ void* graphicsDmaEnd;
 } EffectTableEntry; // size = 0x18
 
+typedef struct EffectWhirlwind {
+    /* 0x00 */ char unk_00[40];
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+} EffectWhirlwind; 
+
 EffectInstance* create_effect_instance(EffectBlueprint* effectBp);
 void remove_effect(EffectInstance*);
 s32 load_effect(s32 effectIndex);
@@ -223,7 +230,7 @@ EffectInstance* playFX_42(s32, s32, s32, f32, s32, s32);
 EffectInstance* playFX_43(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_44(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_45(s32, s32);
-EffectInstance* playFX_46_whirlwind(s32, s32, f32, s32);
+EffectInstance* playFX_46_whirlwind(s32, EffectWhirlwind*, f32, s32);
 EffectInstance* playFX_47(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_48(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_49(s32, f32, f32, f32, f32, s32);

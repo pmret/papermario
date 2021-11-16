@@ -518,7 +518,7 @@ INCLUDE_ASM(void, "entity/Switch", entity_shattering_init_pieces, Entity* entity
 
 INCLUDE_ASM(void, "entity/Switch", entity_shattering_idle, Entity* entity);
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // display list issues
 void entity_shattering_setupGfx(s32 entityIndex) {
     Gfx* temp_s2;

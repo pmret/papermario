@@ -3,10 +3,10 @@
 
 .section .rodata
 
-glabel D_80099B60
+dlabel D_80099B60
 .double -1.0
 
-glabel D_80099B68
+dlabel D_80099B68
 .word 0x3FF00000, 0x00000000
 
 .section .text

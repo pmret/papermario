@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_800988C0
+dlabel D_800988C0
 .word 0x8004E5A8, 0x8004E54C, 0x8004E574, 0x8004E584, 0x8004E594, 0x00000000
 
 .section .text

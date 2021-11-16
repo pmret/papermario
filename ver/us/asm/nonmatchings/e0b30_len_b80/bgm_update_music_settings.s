@@ -3,8 +3,8 @@
 
 .section .rodata
 
-glabel jtbl_80151290
-.word L8014A7A0_E0EA0, L8014A5AC_E0CAC, L8014A64C_E0D4C, L8014A68C_E0D8C, L8014A644_E0D44, L8014A698_E0D98, 0, 0
+dlabel jtbl_80151290
+.word .L8014A7A0_E0EA0, .L8014A5AC_E0CAC, .L8014A64C_E0D4C, .L8014A68C_E0D8C, .L8014A644_E0D44, .L8014A698_E0D98, 0, 0
 
 .section .text
 
@@ -35,7 +35,7 @@ glabel bgm_update_music_settings
 /* E0CA0 8014A5A0 8C221290 */  lw        $v0, %lo(jtbl_80151290)($at)
 /* E0CA4 8014A5A4 00400008 */  jr        $v0
 /* E0CA8 8014A5A8 00000000 */   nop
-glabel L8014A5AC_E0CAC
+.L8014A5AC_E0CAC:
 /* E0CAC 8014A5AC 96230000 */  lhu       $v1, ($s1)
 /* E0CB0 8014A5B0 30620001 */  andi      $v0, $v1, 1
 /* E0CB4 8014A5B4 1040001D */  beqz      $v0, .L8014A62C
@@ -68,7 +68,7 @@ glabel L8014A5AC_E0CAC
 /* E0D14 8014A614 0C0156EE */  jal       func_80055BB8
 /* E0D18 8014A618 240500FA */   addiu    $a1, $zero, 0xfa
 .L8014A61C:
-/* E0D1C 8014A61C 50400060 */  beql      $v0, $zero, L8014A7A0_E0EA0
+/* E0D1C 8014A61C 50400060 */  beql      $v0, $zero, .L8014A7A0_E0EA0
 /* E0D20 8014A620 A6130000 */   sh       $s3, ($s0)
 /* E0D24 8014A624 080529E9 */  j         .L8014A7A4
 /* E0D28 8014A628 26520001 */   addiu    $s2, $s2, 1
@@ -80,14 +80,14 @@ glabel L8014A5AC_E0CAC
 /* E0D38 8014A638 96220000 */  lhu       $v0, ($s1)
 /* E0D3C 8014A63C 00551024 */  and       $v0, $v0, $s5
 /* E0D40 8014A640 A6220000 */  sh        $v0, ($s1)
-glabel L8014A644_E0D44
-/* E0D44 8014A644 080529E8 */  j         L8014A7A0_E0EA0
+.L8014A644_E0D44:
+/* E0D44 8014A644 080529E8 */  j         .L8014A7A0_E0EA0
 /* E0D48 8014A648 A6140000 */   sh       $s4, ($s0)
-glabel L8014A64C_E0D4C
+.L8014A64C_E0D4C:
 /* E0D4C 8014A64C 96230000 */  lhu       $v1, ($s1)
 /* E0D50 8014A650 00751024 */  and       $v0, $v1, $s5
 /* E0D54 8014A654 30630001 */  andi      $v1, $v1, 1
-/* E0D58 8014A658 1060FFFA */  beqz      $v1, L8014A644_E0D44
+/* E0D58 8014A658 1060FFFA */  beqz      $v1, .L8014A644_E0D44
 /* E0D5C 8014A65C A6220000 */   sh       $v0, ($s1)
 /* E0D60 8014A660 8E040016 */  lw        $a0, 0x16($s0)
 /* E0D64 8014A664 0C01567F */  jal       func_800559FC
@@ -98,13 +98,13 @@ glabel L8014A64C_E0D4C
 /* E0D78 8014A678 3042FFFE */  andi      $v0, $v0, 0xfffe
 /* E0D7C 8014A67C A6220000 */  sh        $v0, ($s1)
 /* E0D80 8014A680 24020003 */  addiu     $v0, $zero, 3
-/* E0D84 8014A684 080529E8 */  j         L8014A7A0_E0EA0
+/* E0D84 8014A684 080529E8 */  j         .L8014A7A0_E0EA0
 /* E0D88 8014A688 A6020000 */   sh       $v0, ($s0)
-glabel L8014A68C_E0D8C
+.L8014A68C_E0D8C:
 /* E0D8C 8014A68C 24020004 */  addiu     $v0, $zero, 4
-/* E0D90 8014A690 080529E8 */  j         L8014A7A0_E0EA0
+/* E0D90 8014A690 080529E8 */  j         .L8014A7A0_E0EA0
 /* E0D94 8014A694 A6020000 */   sh       $v0, ($s0)
-glabel L8014A698_E0D98
+.L8014A698_E0D98:
 /* E0D98 8014A698 96230000 */  lhu       $v1, ($s1)
 /* E0D9C 8014A69C 30620008 */  andi      $v0, $v1, 8
 /* E0DA0 8014A6A0 14400029 */  bnez      $v0, .L8014A748
@@ -112,14 +112,14 @@ glabel L8014A698_E0D98
 /* E0DA8 8014A6A8 8E04000E */  lw        $a0, 0xe($s0)
 /* E0DAC 8014A6AC 04810003 */  bgez      $a0, .L8014A6BC
 /* E0DB0 8014A6B0 00000000 */   nop
-/* E0DB4 8014A6B4 080529E8 */  j         L8014A7A0_E0EA0
+/* E0DB4 8014A6B4 080529E8 */  j         .L8014A7A0_E0EA0
 /* E0DB8 8014A6B8 A6000000 */   sh       $zero, ($s0)
 .L8014A6BC:
 /* E0DBC 8014A6BC 0C015635 */  jal       snd_load_song
 /* E0DC0 8014A6C0 0240282D */   daddu    $a1, $s2, $zero
 /* E0DC4 8014A6C4 3403FFFF */  ori       $v1, $zero, 0xffff
 /* E0DC8 8014A6C8 0062182B */  sltu      $v1, $v1, $v0
-/* E0DCC 8014A6CC 10600034 */  beqz      $v1, L8014A7A0_E0EA0
+/* E0DCC 8014A6CC 10600034 */  beqz      $v1, .L8014A7A0_E0EA0
 /* E0DD0 8014A6D0 AE020016 */   sw       $v0, 0x16($s0)
 /* E0DD4 8014A6D4 96220000 */  lhu       $v0, ($s1)
 /* E0DD8 8014A6D8 30420020 */  andi      $v0, $v0, 0x20
@@ -150,7 +150,7 @@ glabel L8014A698_E0D98
 /* E0E34 8014A734 96220000 */  lhu       $v0, ($s1)
 /* E0E38 8014A738 34420001 */  ori       $v0, $v0, 1
 /* E0E3C 8014A73C A6220000 */  sh        $v0, ($s1)
-/* E0E40 8014A740 080529E8 */  j         L8014A7A0_E0EA0
+/* E0E40 8014A740 080529E8 */  j         .L8014A7A0_E0EA0
 /* E0E44 8014A744 A6000000 */   sh       $zero, ($s0)
 .L8014A748:
 /* E0E48 8014A748 10400005 */  beqz      $v0, .L8014A760
@@ -177,7 +177,7 @@ glabel L8014A698_E0D98
 /* E0E98 8014A798 3042FFF7 */  andi      $v0, $v0, 0xfff7
 .L8014A79C:
 /* E0E9C 8014A79C A6220000 */  sh        $v0, ($s1)
-glabel L8014A7A0_E0EA0
+.L8014A7A0_E0EA0:
 /* E0EA0 8014A7A0 26520001 */  addiu     $s2, $s2, 1
 .L8014A7A4:
 /* E0EA4 8014A7A4 26100030 */  addiu     $s0, $s0, 0x30

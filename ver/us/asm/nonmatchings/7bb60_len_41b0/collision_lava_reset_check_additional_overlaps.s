@@ -3,10 +3,10 @@
 
 .section .rodata
 
-glabel D_8010BEF0
+dlabel D_8010BEF0
 .double 90.0
 
-glabel D_8010BEF8
+dlabel D_8010BEF8
 .double 180.0
 
 .section .text

@@ -30,7 +30,7 @@ extern Matrix4f gAnimRotScaleMtx;
 extern StaticAnimatorNode** gAnimTreeRoot;
 
 // reg swap
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 Vtx* animator_copy_vertices_to_buffer(ModelAnimator* animator, AnimatorNode* node, Vec3s* buffer, s32 vtxCount,
                                       s32 overhead, s32 startIdx) {
     DisplayListBufferHandle* handle;

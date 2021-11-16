@@ -6,7 +6,7 @@
 
 #include "ItemRefund.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 
 extern s32 D_802A25E4;
 extern HudElement* D_802A2DF4;
@@ -44,7 +44,7 @@ ApiStatus N(func_802A123C_73153C)(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(ApiStatus, "battle/item/strange_cake", battle_item_strange_cake_func_802A123C_73153C);
 #endif
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 
 extern s32 D_802A2DEC;
 extern s32 D_802A2DF0;

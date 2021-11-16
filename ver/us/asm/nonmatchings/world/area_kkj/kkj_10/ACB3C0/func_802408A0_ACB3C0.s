@@ -3,10 +3,10 @@
 
 .section .rodata
 
-glabel D_80243600_ACE120
+dlabel D_80243600_ACE120
 .double 90.0
 
-glabel D_80243608_ACE128
+dlabel D_80243608_ACE128
 .double 270.0
 
 .section .text

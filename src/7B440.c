@@ -36,7 +36,7 @@ void update_player_input(void) {
     }
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void reset_player_status(void) {
     s32* temp8010C92C = &D_8010C92C;
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -180,7 +180,7 @@ void game_input_to_move_vector(f32* arg0, f32* arg1) {
 }
 
 // tail merge crap
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void func_800E24F8(void) {
     Shadow* playerShadow = get_shadow_by_index(gPlayerStatus.shadowID);
     Camera* camera = &gCameras[0];

@@ -493,7 +493,7 @@ void player_render_interact_prompts(void) {
 }
 
 // Weird control flow / issue with loading linker addrs
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 extern s8 D_8015A57A;
 void check_for_ispy(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;

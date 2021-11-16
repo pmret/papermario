@@ -3,22 +3,22 @@
 
 .section .rodata
 
-glabel D_80245948_BAA0C8
+dlabel D_80245948_BAA0C8
 .double 380.0
 
-glabel D_80245950_BAA0D0
+dlabel D_80245950_BAA0D0
 .double -380.0
 
-glabel D_80245958_BAA0D8
+dlabel D_80245958_BAA0D8
 .double 305.0
 
-glabel D_80245960_BAA0E0
+dlabel D_80245960_BAA0E0
 .double 375.0
 
-glabel D_80245968_BAA0E8
+dlabel D_80245968_BAA0E8
 .double 45.0
 
-glabel D_80245970_BAA0F0
+dlabel D_80245970_BAA0F0
 .double 150.0
 
 .section .text

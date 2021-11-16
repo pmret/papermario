@@ -378,7 +378,7 @@ s32 sign(s32 val) {
 }
 
 // D_800743E0 index needs to add the upper 32 bits from func_8006DDC0 ret
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 
 typedef struct {
     u8 unk_00[39];

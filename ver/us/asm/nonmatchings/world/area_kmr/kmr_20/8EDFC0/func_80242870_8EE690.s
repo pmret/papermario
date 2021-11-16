@@ -3,8 +3,8 @@
 
 .section .rodata
 
-glabel jtbl_80253040_8FEE60
-.word L802428B4_8EE6D4, L802428DC_8EE6FC, L8024293C_8EE75C, L80242974_8EE794, L80242990_8EE7B0, 0, 0, 0
+dlabel jtbl_80253040_8FEE60
+.word .L802428B4_8EE6D4, .L802428DC_8EE6FC, .L8024293C_8EE75C, .L80242974_8EE794, .L80242990_8EE7B0, 0, 0, 0
 
 .section .text
 
@@ -26,7 +26,7 @@ glabel func_80242870_8EE690
 /* 8EE6C8 802428A8 8C223040 */  lw        $v0, %lo(jtbl_80253040_8FEE60)($at)
 /* 8EE6CC 802428AC 00400008 */  jr        $v0
 /* 8EE6D0 802428B0 00000000 */   nop
-glabel L802428B4_8EE6D4
+.L802428B4_8EE6D4:
 /* 8EE6D4 802428B4 2404021C */  addiu     $a0, $zero, 0x21c
 /* 8EE6D8 802428B8 0000282D */  daddu     $a1, $zero, $zero
 /* 8EE6DC 802428BC 00A0302D */  daddu     $a2, $a1, $zero
@@ -37,7 +37,7 @@ glabel L802428B4_8EE6D4
 /* 8EE6F0 802428D0 AE000004 */  sw        $zero, 4($s0)
 /* 8EE6F4 802428D4 0C015478 */  jal       snd_start_sound
 /* 8EE6F8 802428D8 A6020000 */   sh       $v0, ($s0)
-glabel L802428DC_8EE6FC
+.L802428DC_8EE6FC:
 /* 8EE6FC 802428DC 3C054200 */  lui       $a1, 0x4200
 /* 8EE700 802428E0 8E020004 */  lw        $v0, 4($s0)
 /* 8EE704 802428E4 3C06437F */  lui       $a2, 0x437f
@@ -62,7 +62,7 @@ glabel L802428DC_8EE6FC
 /* 8EE750 80242930 A602001A */  sh        $v0, 0x1a($s0)
 /* 8EE754 80242934 08090A7A */  j         .L802429E8
 /* 8EE758 80242938 A602001C */   sh       $v0, 0x1c($s0)
-glabel L8024293C_8EE75C
+.L8024293C_8EE75C:
 /* 8EE75C 8024293C 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* 8EE760 80242940 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 8EE764 80242944 240200FF */  addiu     $v0, $zero, 0xff
@@ -78,7 +78,7 @@ glabel L8024293C_8EE75C
 /* 8EE788 80242968 24020003 */  addiu     $v0, $zero, 3
 /* 8EE78C 8024296C 1462001E */  bne       $v1, $v0, .L802429E8
 /* 8EE790 80242970 00000000 */   nop
-glabel L80242974_8EE794
+.L80242974_8EE794:
 /* 8EE794 80242974 240400CA */  addiu     $a0, $zero, 0xca
 /* 8EE798 80242978 0000282D */  daddu     $a1, $zero, $zero
 /* 8EE79C 8024297C 00A0302D */  daddu     $a2, $a1, $zero
@@ -86,7 +86,7 @@ glabel L80242974_8EE794
 /* 8EE7A4 80242984 AE000004 */  sw        $zero, 4($s0)
 /* 8EE7A8 80242988 0C015478 */  jal       snd_start_sound
 /* 8EE7AC 8024298C A6020000 */   sh       $v0, ($s0)
-glabel L80242990_8EE7B0
+.L80242990_8EE7B0:
 /* 8EE7B0 80242990 0000202D */  daddu     $a0, $zero, $zero
 /* 8EE7B4 80242994 8E020004 */  lw        $v0, 4($s0)
 /* 8EE7B8 80242998 8603001C */  lh        $v1, 0x1c($s0)
