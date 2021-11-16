@@ -741,7 +741,6 @@ void btl_state_update_partner_move(void) {
                 gBattleState2 = 2;
             }
             break;
-
         case 2:
             for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
                 enemyActor = battleStatus->enemyActors[i];
