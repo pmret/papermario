@@ -3,10 +3,10 @@
 
 .section .rodata
 
-glabel D_80253030_8FEE50
+dlabel D_80253030_8FEE50
 .double 0.65
 
-glabel D_80253038_8FEE58
+dlabel D_80253038_8FEE58
 .double 0.55
 
 .section .text

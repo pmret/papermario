@@ -88,7 +88,7 @@ glabel fx_34_appendGfx
 /* 3559C8 E0044A68 8C224F00 */  lw        $v0, %lo(jtbl_E0044F00)($at)
 /* 3559CC E0044A6C 00400008 */  jr        $v0
 /* 3559D0 E0044A70 00000000 */   nop
-glabel LE0044A74_3559D4
+dlabel LE0044A74_3559D4
 /* 3559D4 E0044A74 3C013F80 */  lui       $at, 0x3f80
 /* 3559D8 E0044A78 4481C000 */  mtc1      $at, $f24
 /* 3559DC E0044A7C 3C013F00 */  lui       $at, 0x3f00
@@ -98,7 +98,7 @@ glabel LE0044A74_3559D4
 /* 3559EC E0044A8C 4481A000 */  mtc1      $at, $f20
 /* 3559F0 E0044A90 080112CC */  j         .LE0044B30
 /* 3559F4 E0044A94 00000000 */   nop
-glabel LE0044A98_3559F8
+dlabel LE0044A98_3559F8
 /* 3559F8 E0044A98 3C013F80 */  lui       $at, 0x3f80
 /* 3559FC E0044A9C 4481C000 */  mtc1      $at, $f24
 /* 355A00 E0044AA0 3C013F4C */  lui       $at, 0x3f4c
@@ -122,7 +122,7 @@ glabel LE0044A98_3559F8
 /* 355A48 E0044AE8 AC660000 */  sw        $a2, ($v1)
 /* 355A4C E0044AEC 080112CC */  j         .LE0044B30
 /* 355A50 E0044AF0 AC650004 */   sw       $a1, 4($v1)
-glabel LE0044AF4_355A54
+dlabel LE0044AF4_355A54
 /* 355A54 E0044AF4 3C013FB3 */  lui       $at, 0x3fb3
 /* 355A58 E0044AF8 34213333 */  ori       $at, $at, 0x3333
 /* 355A5C E0044AFC 4481B000 */  mtc1      $at, $f22
@@ -131,7 +131,7 @@ glabel LE0044AF4_355A54
 /* 355A68 E0044B08 4481A000 */  mtc1      $at, $f20
 /* 355A6C E0044B0C 080112CC */  j         .LE0044B30
 /* 355A70 E0044B10 4600B606 */   mov.s    $f24, $f22
-glabel LE0044B14_355A74
+dlabel LE0044B14_355A74
 /* 355A74 E0044B14 3C013F33 */  lui       $at, 0x3f33
 /* 355A78 E0044B18 34213333 */  ori       $at, $at, 0x3333
 /* 355A7C E0044B1C 4481A000 */  mtc1      $at, $f20

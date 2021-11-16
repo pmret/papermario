@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_80248760_DCCB30
+dlabel D_80248760_DCCB30
 .double 0.6
 
 .section .text

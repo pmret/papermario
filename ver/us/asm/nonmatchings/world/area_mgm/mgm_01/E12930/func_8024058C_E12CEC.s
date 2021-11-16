@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_802435E0_E15D40
+dlabel D_802435E0_E15D40
 .double 35.0
 
 .section .text

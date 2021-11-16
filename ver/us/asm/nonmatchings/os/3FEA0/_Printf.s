@@ -3,13 +3,13 @@
 
 .section .rodata
 
-glabel D_80099BF0
+dlabel D_80099BF0
 .ascii " +-#0\0\0\0"
 
-glabel D_80099BF8
+dlabel D_80099BF8
 .word 0x00000001, 0x00000002, 0x00000004, 0x00000008, 0x00000010, 0x00000000
 
-glabel D_80099C10
+dlabel D_80099C10
 .ascii "hlL\0\0\0\0\0"
 
 .section .text

@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_80257F10_8C7F80
+dlabel D_80257F10_8C7F80
 .ascii "party_kurio\0\0\0\0\0"
 
 .section .text

@@ -2,35 +2,35 @@
 
 .section .data
 
-glabel D_E004AE60
+dlabel D_E004AE60
 .word 0x090009A0, 0x090009A0, 0x09000A80, 0x09000A80, 0x09000A80, 0x09000A80, 0x00000000, 0x00000000
 
-glabel jtbl_E004AE80
+dlabel jtbl_E004AE80
 .word LE004A1AC_35866C, LE004A1AC_35866C, LE004A1D4_358694, LE004A200_3586C0, LE004A25C_35871C, LE004A22C_3586EC
 
-glabel D_E004AE98
+dlabel D_E004AE98
 .double 0.8
 
-glabel D_E004AEA0
+dlabel D_E004AEA0
 .double 0.94
 
-glabel D_E004AEA8
+dlabel D_E004AEA8
 .double 1.002
 
-glabel D_E004AEB0
+dlabel D_E004AEB0
 .word 0xE004A4F8, 0xE004A4F8, 0xE004A51C, 0xE004A548, 0xE004A584, 0xE004A51C
 
-glabel D_E004AEC8
+dlabel D_E004AEC8
 .double 0.8
 
-glabel D_E004AED0
+dlabel D_E004AED0
 .double 0.9
 
-glabel D_E004AED8
+dlabel D_E004AED8
 .double 0.99
 
-glabel D_E004AEE0
+dlabel D_E004AEE0
 .double 0.95
 
-glabel D_E004AEE8
+dlabel D_E004AEE8
 .double 0.3

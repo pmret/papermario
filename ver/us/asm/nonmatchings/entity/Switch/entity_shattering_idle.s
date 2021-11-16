@@ -3,19 +3,19 @@
 
 .section .rodata
 
-glabel D_802EB138
+dlabel D_802EB138
 .double 360.0
 
-glabel D_802EB140
+dlabel D_802EB140
 .double 0.3
 
-glabel D_802EB148
+dlabel D_802EB148
 .double 1.2
 
-glabel D_802EB150
+dlabel D_802EB150
 .double -12.2
 
-glabel D_802EB158
+dlabel D_802EB158
 .double 6.283180236816406
 
 .section .text
