@@ -226,7 +226,7 @@ glabel func_80240310_B06D10
 /* B07084 80240684 00021023 */  negu      $v0, $v0
 /* B07088 80240688 A7A20024 */  sh        $v0, 0x24($sp)
 /* B0708C 8024068C 8E440000 */  lw        $a0, ($s2)
-/* B07090 80240690 0C04EBDC */  jal       sprfx_appendGfx_component
+/* B07090 80240690 0C04EBDC */  jal       fold_appendGfx_component
 /* B07094 80240694 0260382D */   daddu    $a3, $s3, $zero
 /* B07098 80240698 3C04D838 */  lui       $a0, 0xd838
 /* B0709C 8024069C 8E220000 */  lw        $v0, ($s1)

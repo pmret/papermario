@@ -399,7 +399,7 @@ glabel dro_02_func_8024190C_96AACC
 /* 96B0DC 80241F1C 0040202D */  daddu     $a0, $v0, $zero
 /* 96B0E0 80241F20 27A50098 */  addiu     $a1, $sp, 0x98
 /* 96B0E4 80241F24 24060030 */  addiu     $a2, $zero, 0x30
-/* 96B0E8 80241F28 0C04EBDC */  jal       sprfx_appendGfx_component
+/* 96B0E8 80241F28 0C04EBDC */  jal       fold_appendGfx_component
 /* 96B0EC 80241F2C 27A70018 */   addiu    $a3, $sp, 0x18
 /* 96B0F0 80241F30 3C05D838 */  lui       $a1, 0xd838
 /* 96B0F4 80241F34 8FC30000 */  lw        $v1, ($fp)
@@ -481,7 +481,7 @@ glabel dro_02_func_8024190C_96AACC
 /* 96B218 80242058 27B60098 */  addiu     $s6, $sp, 0x98
 /* 96B21C 8024205C 02C0282D */  daddu     $a1, $s6, $zero
 /* 96B220 80242060 24060030 */  addiu     $a2, $zero, 0x30
-/* 96B224 80242064 0C04EBDC */  jal       sprfx_appendGfx_component
+/* 96B224 80242064 0C04EBDC */  jal       fold_appendGfx_component
 /* 96B228 80242068 27A70018 */   addiu    $a3, $sp, 0x18
 /* 96B22C 8024206C 3C05F4AC */  lui       $a1, 0xf4ac
 /* 96B230 80242070 8EA40000 */  lw        $a0, ($s5)
@@ -490,7 +490,7 @@ glabel dro_02_func_8024190C_96AACC
 /* 96B23C 8024207C 0040202D */  daddu     $a0, $v0, $zero
 /* 96B240 80242080 02C0282D */  daddu     $a1, $s6, $zero
 /* 96B244 80242084 24060030 */  addiu     $a2, $zero, 0x30
-/* 96B248 80242088 0C04EBDC */  jal       sprfx_appendGfx_component
+/* 96B248 80242088 0C04EBDC */  jal       fold_appendGfx_component
 /* 96B24C 8024208C 27A70018 */   addiu    $a3, $sp, 0x18
 /* 96B250 80242090 0260202D */  daddu     $a0, $s3, $zero
 /* 96B254 80242094 8FC20000 */  lw        $v0, ($fp)
@@ -565,7 +565,7 @@ glabel dro_02_func_8024190C_96AACC
 /* 96B368 802421A8 0040202D */  daddu     $a0, $v0, $zero
 /* 96B36C 802421AC 02C0282D */  daddu     $a1, $s6, $zero
 /* 96B370 802421B0 24060010 */  addiu     $a2, $zero, 0x10
-/* 96B374 802421B4 0C04EBDC */  jal       sprfx_appendGfx_component
+/* 96B374 802421B4 0C04EBDC */  jal       fold_appendGfx_component
 /* 96B378 802421B8 27A70018 */   addiu    $a3, $sp, 0x18
 /* 96B37C 802421BC 8FC30000 */  lw        $v1, ($fp)
 /* 96B380 802421C0 0060202D */  daddu     $a0, $v1, $zero

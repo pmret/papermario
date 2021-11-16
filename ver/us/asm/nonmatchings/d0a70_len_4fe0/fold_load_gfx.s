@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel sprfx_load_gfx
+glabel fold_load_gfx
 /* D2920 8013C220 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* D2924 8013C224 AFB20018 */  sw        $s2, 0x18($sp)
 /* D2928 8013C228 0080902D */  daddu     $s2, $a0, $zero
@@ -13,11 +13,11 @@ glabel sprfx_load_gfx
 /* D2940 8013C240 3C100025 */  lui       $s0, 0x25
 /* D2944 8013C244 2610B7F0 */  addiu     $s0, $s0, -0x4810
 /* D2948 8013C248 00021080 */  sll       $v0, $v0, 2
-/* D294C 8013C24C 3C018015 */  lui       $at, %hi(sprfx_groupOffsets)
+/* D294C 8013C24C 3C018015 */  lui       $at, %hi(fold_groupOffsets)
 /* D2950 8013C250 00220821 */  addu      $at, $at, $v0
-/* D2954 8013C254 8C22EF64 */  lw        $v0, %lo(sprfx_groupOffsets)($at)
-/* D2958 8013C258 3C048015 */  lui       $a0, %hi(sprfx_groupDescriptors)
-/* D295C 8013C25C 24846980 */  addiu     $a0, $a0, %lo(sprfx_groupDescriptors)
+/* D2954 8013C254 8C22EF64 */  lw        $v0, %lo(fold_groupOffsets)($at)
+/* D2958 8013C258 3C048015 */  lui       $a0, %hi(fold_groupDescriptors)
+/* D295C 8013C25C 24846980 */  addiu     $a0, $a0, %lo(fold_groupDescriptors)
 /* D2960 8013C260 00508821 */  addu      $s1, $v0, $s0
 /* D2964 8013C264 92420000 */  lbu       $v0, ($s2)
 /* D2968 8013C268 8E430064 */  lw        $v1, 0x64($s2)
@@ -32,28 +32,28 @@ glabel sprfx_load_gfx
 /* D298C 8013C28C 8E440068 */  lw        $a0, 0x68($s2)
 /* D2990 8013C290 10800004 */  beqz      $a0, .L8013C2A4
 /* D2994 8013C294 00000000 */   nop
-/* D2998 8013C298 0C04E984 */  jal       sprfx_add_to_gfx_cache
+/* D2998 8013C298 0C04E984 */  jal       fold_add_to_gfx_cache
 /* D299C 8013C29C 24050001 */   addiu    $a1, $zero, 1
 /* D29A0 8013C2A0 AE400068 */  sw        $zero, 0x68($s2)
 .L8013C2A4:
 /* D29A4 8013C2A4 8E44006C */  lw        $a0, 0x6c($s2)
 /* D29A8 8013C2A8 10800004 */  beqz      $a0, .L8013C2BC
 /* D29AC 8013C2AC 00000000 */   nop
-/* D29B0 8013C2B0 0C04E984 */  jal       sprfx_add_to_gfx_cache
+/* D29B0 8013C2B0 0C04E984 */  jal       fold_add_to_gfx_cache
 /* D29B4 8013C2B4 24050001 */   addiu    $a1, $zero, 1
 /* D29B8 8013C2B8 AE40006C */  sw        $zero, 0x6c($s2)
 .L8013C2BC:
 /* D29BC 8013C2BC 8E440070 */  lw        $a0, 0x70($s2)
 /* D29C0 8013C2C0 10800004 */  beqz      $a0, .L8013C2D4
 /* D29C4 8013C2C4 00000000 */   nop
-/* D29C8 8013C2C8 0C04E984 */  jal       sprfx_add_to_gfx_cache
+/* D29C8 8013C2C8 0C04E984 */  jal       fold_add_to_gfx_cache
 /* D29CC 8013C2CC 24050001 */   addiu    $a1, $zero, 1
 /* D29D0 8013C2D0 AE400070 */  sw        $zero, 0x70($s2)
 .L8013C2D4:
 /* D29D4 8013C2D4 8E440074 */  lw        $a0, 0x74($s2)
 /* D29D8 8013C2D8 10800004 */  beqz      $a0, .L8013C2EC
 /* D29DC 8013C2DC 00000000 */   nop
-/* D29E0 8013C2E0 0C04E984 */  jal       sprfx_add_to_gfx_cache
+/* D29E0 8013C2E0 0C04E984 */  jal       fold_add_to_gfx_cache
 /* D29E4 8013C2E4 24050001 */   addiu    $a1, $zero, 1
 /* D29E8 8013C2E8 AE400074 */  sw        $zero, 0x74($s2)
 .L8013C2EC:

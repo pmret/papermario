@@ -729,7 +729,7 @@ glabel L80122980_B9080
 /* B9410 80122D10 0000202D */  daddu     $a0, $zero, $zero
 /* B9414 80122D14 27A50090 */  addiu     $a1, $sp, 0x90
 /* B9418 80122D18 0080302D */  daddu     $a2, $a0, $zero
-/* B941C 80122D1C 0C04EBDC */  jal       sprfx_appendGfx_component
+/* B941C 80122D1C 0C04EBDC */  jal       fold_appendGfx_component
 /* B9420 80122D20 0200382D */   daddu    $a3, $s0, $zero
 .L80122D24:
 /* B9424 80122D24 3C03D838 */  lui       $v1, 0xd838

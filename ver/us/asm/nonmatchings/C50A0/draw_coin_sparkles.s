@@ -246,7 +246,7 @@ glabel draw_coin_sparkles
 /* C75D0 80130ED0 00021FC2 */  srl       $v1, $v0, 0x1f
 /* C75D4 80130ED4 00431021 */  addu      $v0, $v0, $v1
 /* C75D8 80130ED8 00021043 */  sra       $v0, $v0, 1
-/* C75DC 80130EDC 0C04EBDC */  jal       sprfx_appendGfx_component
+/* C75DC 80130EDC 0C04EBDC */  jal       fold_appendGfx_component
 /* C75E0 80130EE0 A7A20126 */   sh       $v0, 0x126($sp)
 /* C75E4 80130EE4 3C03D838 */  lui       $v1, 0xd838
 /* C75E8 80130EE8 8E020000 */  lw        $v0, ($s0)

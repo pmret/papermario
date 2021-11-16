@@ -14,7 +14,7 @@ glabel D_80151030
 
 .section .text
 
-glabel sprfx_update
+glabel fold_update
 /* D119C 8013AA9C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* D11A0 8013AAA0 AFB00010 */  sw        $s0, 0x10($sp)
 /* D11A4 8013AAA4 00C0802D */  daddu     $s0, $a2, $zero
@@ -45,9 +45,9 @@ glabel sprfx_update
 /* D1208 8013AB08 00000000 */   nop
 glabel L8013AB0C_D120C
 /* D120C 8013AB0C 8E300014 */  lw        $s0, 0x14($s1)
-/* D1210 8013AB10 0C04EA4F */  jal       sprfx_clear_effect_gfx
+/* D1210 8013AB10 0C04EA4F */  jal       fold_clear_state_gfx
 /* D1214 8013AB14 0220202D */   daddu    $a0, $s1, $zero
-/* D1218 8013AB18 0C04EA7A */  jal       sprfx_init_effect
+/* D1218 8013AB18 0C04EA7A */  jal       fold_init_state
 /* D121C 8013AB1C 0220202D */   daddu    $a0, $s1, $zero
 /* D1220 8013AB20 2402FFFF */  addiu     $v0, $zero, -1
 /* D1224 8013AB24 A2200005 */  sb        $zero, 5($s1)

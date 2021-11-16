@@ -229,7 +229,7 @@ glabel func_80240020_9AE720
 /* 9AEA98 80240398 00021FC2 */  srl       $v1, $v0, 0x1f
 /* 9AEA9C 8024039C 00431021 */  addu      $v0, $v0, $v1
 /* 9AEAA0 802403A0 00021043 */  sra       $v0, $v0, 1
-/* 9AEAA4 802403A4 0C04EBDC */  jal       sprfx_appendGfx_component
+/* 9AEAA4 802403A4 0C04EBDC */  jal       fold_appendGfx_component
 /* 9AEAA8 802403A8 A7A20026 */   sh       $v0, 0x26($sp)
 /* 9AEAAC 802403AC 3C05D838 */  lui       $a1, 0xd838
 /* 9AEAB0 802403B0 3C03800A */  lui       $v1, %hi(gMasterGfxPos)

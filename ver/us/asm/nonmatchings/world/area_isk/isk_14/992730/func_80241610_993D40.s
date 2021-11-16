@@ -290,7 +290,7 @@ glabel func_80241610_993D40
 /* 9941B0 80241A80 A7A80022 */  sh        $t0, 0x22($sp)
 /* 9941B4 80241A84 E7C0003C */  swc1      $f0, 0x3c($fp)
 /* 9941B8 80241A88 A7A20024 */  sh        $v0, 0x24($sp)
-/* 9941BC 80241A8C 0C04EBDC */  jal       sprfx_appendGfx_component
+/* 9941BC 80241A8C 0C04EBDC */  jal       fold_appendGfx_component
 /* 9941C0 80241A90 A7A80026 */   sh       $t0, 0x26($sp)
 /* 9941C4 80241A94 3C04D838 */  lui       $a0, 0xd838
 /* 9941C8 80241A98 8EE20000 */  lw        $v0, ($s7)

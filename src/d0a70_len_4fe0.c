@@ -28,16 +28,16 @@ typedef struct {
     /* 0x70 */ s32* unk_70;
     /* 0x74 */ s32* unk_74;
     /* 0x78 */ char unk_78[0x4];
-} SpriteEffect; // size = 0x7C
+} FoldState; // size = 0x7C
 
-typedef struct SprFxDataCache {
+typedef struct FoldDataCache {
     /* 0x00 */ s32* data;
     /* 0x04 */ u8 staleCooldownTimer;
     /* 0x05 */ u8 usingContextualHeap;
     /* 0x06 */ char unk_06[0x2];
-} SprFxDataCache; // size = 0x8
+} FoldDataCache; // size = 0x8
 
-typedef struct SprFxImageRec {
+typedef struct FoldImageRec {
     /* 0x00 */ s8* raster;
     /* 0x04 */ s8* palette;
     /* 0x08 */ u16 width;
@@ -51,9 +51,9 @@ typedef struct SprFxImageRec {
     /* 0x1E */ s16 unk_1E;
     /* 0x20 */ char unk_20[0x4];
     /* 0x24 */ u8 gfxOtherModeD;
-} SprFxImageRec; // size = 0x25
+} FoldImageRec; // size = 0x25
 
-typedef struct SprFxGfxDescriptor {
+typedef struct FoldGfxDescriptor {
     /* 0x00 */ Vtx* vtx;
     /* 0x04 */ Gfx* gfx;
     /* 0x08 */ u16 vtxCount;
@@ -62,25 +62,25 @@ typedef struct SprFxGfxDescriptor {
     /* 0x0D */ s8 unk_0D;
     /* 0x0E */ s8 unk_0E;
     /* 0x0F */ s8 unk_0F;
-} SprFxGfxDescriptor; // size = 0x10
+} FoldGfxDescriptor; // size = 0x10
 
-typedef SpriteEffect SpriteEffectList[90];
+typedef FoldState FoldStateList[90];
 
 // BSS
-extern SprFxImageRec D_80156920; // todo not sure on the type
+extern FoldImageRec D_80156920; // todo not sure on the type
 extern Vtx* D_80156948[2];
-extern Vtx* sprfx_vtxBuf;
-extern SpriteEffectList* D_80156954;
+extern Vtx* fold_vtxBuf;
+extern FoldStateList* D_80156954;
 extern s8 D_80156958[2];
 extern s32 D_80156960[2];
 extern s32 D_80156968[2];
 extern s8 D_80156970;
-extern SprFxGfxDescriptor sprfx_groupDescriptors[4];
+extern FoldGfxDescriptor fold_groupDescriptors[4];
 
 // Data
-SprFxImageRec* sprfx_currentImage = &D_80156920;
+FoldImageRec* fold_currentImage = &D_80156920;
 
-u16 sprfx_vtxCount = 0;
+u16 fold_vtxCount = 0;
 
 // padding?
 s16 D_8014EE16 = 0;
@@ -113,40 +113,40 @@ s32 D_8014EE98[] = { 0x00441208, 0x00111208, 0x00000000, 0x00441208, 0x00111208,
                      0x00441208, 0x00111208, 0x00000000,
                    };
 
-s32 sprfx_groupOffsets[] = {
+s32 fold_groupOffsets[] = {
     0x00014358, 0x00018200, 0x0001A858, 0x0001E830, 0x00029458, 0x000314E0, 0x00033498, 0x00038988, 0x00039228,
     0x0005B7A8, 0x0007CF10, 0x00086490, 0x00096258, 0x000A1820, 0x000ACDE8, 0x000BBF68, 0x000C0490, 0x000C49B8,
     0x000C6150, 0x000CA380
 };
 
-extern SprFxDataCache sprfx_gfxDataCache[8];
+extern FoldDataCache fold_gfxDataCache[8];
 
-void sprfx_clear_effect_gfx(SpriteEffect*);
-void sprfx_clear_effect_data(SpriteEffect*);
-void sprfx_init_effect(SpriteEffect*);
-void func_8013BC88(SpriteEffect*);
-void func_8013C048(SpriteEffect*);
-void sprfx_load_gfx(SpriteEffect*);
-void func_8013C3F0(SpriteEffect*);
-void func_8013EE68(SpriteEffect*);
-void func_8013F1F8(SpriteEffect*);
+void fold_clear_state_gfx(FoldState*);
+void fold_clear_state_data(FoldState*);
+void fold_init_state(FoldState*);
+void func_8013BC88(FoldState*);
+void func_8013C048(FoldState*);
+void fold_load_gfx(FoldState*);
+void func_8013C3F0(FoldState*);
+void func_8013EE68(FoldState*);
+void func_8013F1F8(FoldState*);
 
 void func_8013A370(s16 arg0) {
     D_8014EE60 = arg0;
 }
 
-void sprfx_init(void) {
+void fold_init(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_80156948); i++) {
         D_80156948[i] = _heap_malloc(&gSpriteHeapPtr, D_8014EE60 * sizeof(*(D_80156948[0])));
     }
 
-    D_80156954 = (SpriteEffectList*)_heap_malloc(&gSpriteHeapPtr, ARRAY_COUNT(*D_80156954) * sizeof((*D_80156954)[0]));
+    D_80156954 = (FoldStateList*)_heap_malloc(&gSpriteHeapPtr, ARRAY_COUNT(*D_80156954) * sizeof((*D_80156954)[0]));
 
     for (i = 0; i < ARRAY_COUNT(*D_80156954); i++) {
-        sprfx_init_effect(&(*D_80156954)[i]);
-        sprfx_clear_effect_data(&(*D_80156954)[i]);
+        fold_init_state(&(*D_80156954)[i]);
+        fold_clear_state_data(&(*D_80156954)[i]);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_80156958); i++) {
@@ -156,28 +156,28 @@ void sprfx_init(void) {
         D_80156970 = 0;
     }
 
-    for (i = 0; i < ARRAY_COUNT(sprfx_gfxDataCache); i++) {
-        sprfx_gfxDataCache[i].data = NULL;
-        sprfx_gfxDataCache[i].staleCooldownTimer = 0;
-        sprfx_gfxDataCache[i].usingContextualHeap = FALSE;
+    for (i = 0; i < ARRAY_COUNT(fold_gfxDataCache); i++) {
+        fold_gfxDataCache[i].data = NULL;
+        fold_gfxDataCache[i].staleCooldownTimer = 0;
+        fold_gfxDataCache[i].usingContextualHeap = FALSE;
     }
 
-    sprfx_vtxCount = 0;
-    sprfx_vtxBuf = D_80156948[gCurrentDisplayContextIndex];
+    fold_vtxCount = 0;
+    fold_vtxBuf = D_80156948[gCurrentDisplayContextIndex];
 }
 
 void func_8013A4D0(void) {
     s32 i;
 
-    sprfx_vtxBuf = D_80156948[gCurrentDisplayContextIndex];
-    sprfx_vtxCount = 0;
-    sprfx_init_effect(&(*D_80156954)[0]);
+    fold_vtxBuf = D_80156948[gCurrentDisplayContextIndex];
+    fold_vtxCount = 0;
+    fold_init_state(&(*D_80156954)[0]);
 
     (*D_80156954)[0].flags |= 1;
 
     for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
         if (((*D_80156954)[i].flags & 1) && (*D_80156954)[i].unk_05 != 5) {
-            sprfx_clear_effect_gfx(&(*D_80156954)[i]);
+            fold_clear_state_gfx(&(*D_80156954)[i]);
         }
     }
 
@@ -196,44 +196,44 @@ void func_8013A4D0(void) {
     }
 }
 
-void sprfx_add_to_gfx_cache(s32* data, s8 usingContextualHeap) {
+void fold_add_to_gfx_cache(s32* data, s8 usingContextualHeap) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(sprfx_gfxDataCache); i++) {
-        if (sprfx_gfxDataCache[i].data == NULL) {
-            sprfx_gfxDataCache[i].data = data;
-            sprfx_gfxDataCache[i].staleCooldownTimer = 4;
-            sprfx_gfxDataCache[i].usingContextualHeap = usingContextualHeap;
+    for (i = 0; i < ARRAY_COUNT(fold_gfxDataCache); i++) {
+        if (fold_gfxDataCache[i].data == NULL) {
+            fold_gfxDataCache[i].data = data;
+            fold_gfxDataCache[i].staleCooldownTimer = 4;
+            fold_gfxDataCache[i].usingContextualHeap = usingContextualHeap;
             return;
         }
     }
 }
 
-void sprfx_update_gfx_cache(void) {
+void fold_update_gfx_cache(void) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(sprfx_gfxDataCache); i++) {
-        if (sprfx_gfxDataCache[i].data != NULL) {
-            sprfx_gfxDataCache[i].staleCooldownTimer--;
+    for (i = 0; i < ARRAY_COUNT(fold_gfxDataCache); i++) {
+        if (fold_gfxDataCache[i].data != NULL) {
+            fold_gfxDataCache[i].staleCooldownTimer--;
 
-            if (sprfx_gfxDataCache[i].staleCooldownTimer == 0) {
-                if (sprfx_gfxDataCache[i].usingContextualHeap) {
-                    heap_free(sprfx_gfxDataCache[i].data);
-                    sprfx_gfxDataCache[i].data = NULL;
+            if (fold_gfxDataCache[i].staleCooldownTimer == 0) {
+                if (fold_gfxDataCache[i].usingContextualHeap) {
+                    heap_free(fold_gfxDataCache[i].data);
+                    fold_gfxDataCache[i].data = NULL;
                 } else {
-                    general_heap_free(sprfx_gfxDataCache[i].data);
-                    sprfx_gfxDataCache[i].data = NULL;
+                    general_heap_free(fold_gfxDataCache[i].data);
+                    fold_gfxDataCache[i].data = NULL;
                 }
 
-                sprfx_gfxDataCache[i].staleCooldownTimer = 0;
-                sprfx_gfxDataCache[i].usingContextualHeap = FALSE;
+                fold_gfxDataCache[i].staleCooldownTimer = 0;
+                fold_gfxDataCache[i].usingContextualHeap = FALSE;
             }
         }
     }
 }
 
 void func_8013A6E8(void) {
-    sprfx_update_gfx_cache();
+    fold_update_gfx_cache();
 }
 
 s32 func_8013A704(s32 arg0) {
@@ -268,7 +268,7 @@ s32 func_8013A704(s32 arg0) {
             }
 
             (*D_80156954)[i].arrayIdx = i;
-            sprfx_init_effect(&(*D_80156954)[i]);
+            fold_init_state(&(*D_80156954)[i]);
             count++;
             (*D_80156954)[i].flags |= 1;
             iPrev = i;
@@ -314,79 +314,79 @@ s16 func_8013A8E0(s32 idx) {
     }
 }
 
-SpriteEffect* sprfx_get_sprite_effect(s32 idx) {
+FoldState* fold_get_state(s32 idx) {
     return &(*D_80156954)[idx];
 }
 
-void sprfx_clear_effect_gfx(SpriteEffect* effect) {
-    if (effect->unk_64 != 0) {
-        effect->unk_64 = 0;
+void fold_clear_state_gfx(FoldState* state) {
+    if (state->unk_64 != 0) {
+        state->unk_64 = 0;
     }
-    if (effect->unk_68 != 0) {
-        sprfx_add_to_gfx_cache(effect->unk_68, 1);
-        effect->unk_68 = 0;
+    if (state->unk_68 != 0) {
+        fold_add_to_gfx_cache(state->unk_68, 1);
+        state->unk_68 = 0;
     }
-    if (effect->unk_6C != 0) {
-        sprfx_add_to_gfx_cache(effect->unk_6C, 1);
-        effect->unk_6C = 0;
+    if (state->unk_6C != 0) {
+        fold_add_to_gfx_cache(state->unk_6C, 1);
+        state->unk_6C = 0;
     }
-    if (effect->unk_70 != 0) {
-        sprfx_add_to_gfx_cache(effect->unk_70, 1);
-        effect->unk_70 = 0;
+    if (state->unk_70 != 0) {
+        fold_add_to_gfx_cache(state->unk_70, 1);
+        state->unk_70 = 0;
     }
-    if (effect->unk_74 != 0) {
-        sprfx_add_to_gfx_cache(effect->unk_74, 1);
-        effect->unk_74 = 0;
+    if (state->unk_74 != 0) {
+        fold_add_to_gfx_cache(state->unk_74, 1);
+        state->unk_74 = 0;
     }
 }
 
-void sprfx_clear_effect_data(SpriteEffect* effect) {
-    effect->unk_64 = 0;
-    effect->unk_68 = 0;
-    effect->unk_6C = 0;
-    effect->unk_70 = 0;
-    effect->unk_74 = 0;
-    effect->buf = NULL;
-    effect->bufSize = 0;
+void fold_clear_state_data(FoldState* state) {
+    state->unk_64 = 0;
+    state->unk_68 = 0;
+    state->unk_6C = 0;
+    state->unk_70 = 0;
+    state->unk_74 = 0;
+    state->buf = NULL;
+    state->bufSize = 0;
 }
 
-void sprfx_init_effect(SpriteEffect* effect) {
+void fold_init_state(FoldState* state) {
     s32 i;
     s32 j;
 
-    effect->unk_10 = -1;
-    effect->unk_05 = 0;
-    effect->unk_06 = 0;
-    effect->flags = 0;
-    effect->meshType = 0;
-    effect->renderType = 0;
-    effect->firstVtxIdx = 0;
-    effect->lastVtxIdx = 0;
-    effect->unk_0C = 0;
-    effect->unk_0E = 0;
-    effect->unk_1C[0][3] = 255;
-    effect->unk_1C[1][3] = 255;
-    effect->subdivX = 0;
-    effect->subdivY = 0;
-    effect->firstVtxIdx = 0;
-    effect->lastVtxIdx = 0;
+    state->unk_10 = -1;
+    state->unk_05 = 0;
+    state->unk_06 = 0;
+    state->flags = 0;
+    state->meshType = 0;
+    state->renderType = 0;
+    state->firstVtxIdx = 0;
+    state->lastVtxIdx = 0;
+    state->unk_0C = 0;
+    state->unk_0E = 0;
+    state->unk_1C[0][3] = 255;
+    state->unk_1C[1][3] = 255;
+    state->subdivX = 0;
+    state->subdivY = 0;
+    state->firstVtxIdx = 0;
+    state->lastVtxIdx = 0;
 
-    for (i = 0; i < ARRAY_COUNT(effect->unk_1C); i++) {
-        for (j = 0; j < ARRAY_COUNT(effect->unk_1C[0]); j++) {
-            effect->unk_1C[i][j] = 0;
+    for (i = 0; i < ARRAY_COUNT(state->unk_1C); i++) {
+        for (j = 0; j < ARRAY_COUNT(state->unk_1C[0]); j++) {
+            state->unk_1C[i][j] = 0;
         }
     }
 
-    for (i = 0; i < ARRAY_COUNT(effect->unk_3C); i++) {
-        for (j = 0; j < ARRAY_COUNT(effect->unk_3C[0]); j++) {
-            effect->unk_3C[i][j] = 0;
+    for (i = 0; i < ARRAY_COUNT(state->unk_3C); i++) {
+        for (j = 0; j < ARRAY_COUNT(state->unk_3C[0]); j++) {
+            state->unk_3C[i][j] = 0;
         }
     }
 }
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", sprfx_update);
+INCLUDE_ASM(s32, "d0a70_len_4fe0", fold_update);
 
-void sprfx_set_effect_flags(s32 idx, u16 flagBits, s32 mode) {
+void fold_set_state_flags(s32 idx, u16 flagBits, s32 mode) {
     if ((*D_80156954)[idx].flags & 1) {
         if (mode) {
             (*D_80156954)[idx].flags |= flagBits;
@@ -396,93 +396,93 @@ void sprfx_set_effect_flags(s32 idx, u16 flagBits, s32 mode) {
     }
 }
 
-s32 sprfx_appendGfx_component(s32 idx, SprFxImageRec* image, u32 flagBits, Matrix4f mtx) {
-    SpriteEffect* effect = &(*D_80156954)[idx];
+s32 fold_appendGfx_component(s32 idx, FoldImageRec* image, u32 flagBits, Matrix4f mtx) {
+    FoldState* state = &(*D_80156954)[idx];
     s32 ret = 0;
 
     if (image->unk_10 == 0) {
         return 0;
     }
 
-    effect->arrayIdx = idx;
-    effect->flags |= flagBits;
-    sprfx_currentImage->raster = image->raster;
-    sprfx_currentImage->palette = image->palette;
-    sprfx_currentImage->width = image->width;
-    sprfx_currentImage->height = image->height;
-    sprfx_currentImage->xOffset = image->xOffset;
-    sprfx_currentImage->yOffset =  image->yOffset;
-    sprfx_currentImage->unk_18 = 0;
-    sprfx_currentImage->unk_1E = 0;
-    sprfx_currentImage->gfxOtherModeD = image->unk_10;
+    state->arrayIdx = idx;
+    state->flags |= flagBits;
+    fold_currentImage->raster = image->raster;
+    fold_currentImage->palette = image->palette;
+    fold_currentImage->width = image->width;
+    fold_currentImage->height = image->height;
+    fold_currentImage->xOffset = image->xOffset;
+    fold_currentImage->yOffset =  image->yOffset;
+    fold_currentImage->unk_18 = 0;
+    fold_currentImage->unk_1E = 0;
+    fold_currentImage->gfxOtherModeD = image->unk_10;
 
     if ((u32)idx >= 90) {
         return 0;
     }
 
-    if (idx >= 90 || effect == NULL) {
+    if (idx >= 90 || state == NULL) {
         return 0;
     }
 
-    func_8013B0EC(effect);
-    func_8013B1B0(effect, mtx);
+    func_8013B0EC(state);
+    func_8013B1B0(state, mtx);
 
-    if (effect->flags & 0x1000) {
-        effect->unk_1C[0][0] = -1;
-        effect->unk_1C[1][0] = -1;
-        effect->unk_05 = 0;
-        effect->meshType = 0;
-        effect->renderType = 0;
-        effect->flags &= ~0x1980;
-        sprfx_clear_effect_gfx(effect);
+    if (state->flags & 0x1000) {
+        state->unk_1C[0][0] = -1;
+        state->unk_1C[1][0] = -1;
+        state->unk_05 = 0;
+        state->meshType = 0;
+        state->renderType = 0;
+        state->flags &= ~0x1980;
+        fold_clear_state_gfx(state);
         ret = 1;
-    } else if (effect->flags & 0x4000) {
+    } else if (state->flags & 0x4000) {
         ret = 2;
-    } else if (effect->flags & 0x20000) {
-        effect->unk_05 = 0;
-        effect->unk_06 = 0;
-        effect->meshType = 0;
-        effect->renderType = 0;
-        effect->unk_1C[0][0] = -1;
-        effect->unk_1C[1][0] = -1;
-        effect->flags &= 1;
+    } else if (state->flags & 0x20000) {
+        state->unk_05 = 0;
+        state->unk_06 = 0;
+        state->meshType = 0;
+        state->renderType = 0;
+        state->unk_1C[0][0] = -1;
+        state->unk_1C[1][0] = -1;
+        state->flags &= 1;
         ret = 1;
     }
     return ret;
 }
 
-void func_8013B0EC(SpriteEffect* effect) {
-    switch (effect->meshType) {
+void func_8013B0EC(FoldState* state) {
+    switch (state->meshType) {
         case 3:
-            if (effect->unk_1C[1][2] == 0) {
-                effect->subdivX = 1;
-                effect->subdivY = 16;
+            if (state->unk_1C[1][2] == 0) {
+                state->subdivX = 1;
+                state->subdivY = 16;
             } else {
-                effect->subdivX = 1;
-                effect->subdivY = 1;
+                state->subdivX = 1;
+                state->subdivY = 1;
             }
         case 1:
-            func_8013C048(effect);
+            func_8013C048(state);
             break;
         case 2:
-            func_8013C3F0(effect);
+            func_8013C3F0(state);
             break;
         case 0:
         case 4:
-            func_8013BC88(effect);
+            func_8013BC88(state);
             break;
         default:
             return;
     }
 
-    if (effect->unk_05 == 4) {
-        func_8013EE68(effect);
+    if (state->unk_05 == 4) {
+        func_8013EE68(state);
     }
 
-    switch (effect->unk_06) {
+    switch (state->unk_06) {
         case 11:
         case 12:
-            func_8013F1F8(effect);
+            func_8013F1F8(state);
             break;
     }
 }
@@ -491,7 +491,7 @@ INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013B1B0);
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013BC88);
 
-void func_8013C048(SpriteEffect* effect) {
+void func_8013C048(FoldState* state) {
     f32 divSizeX;
     f32 divSizeY;
     f32 posX;
@@ -501,48 +501,48 @@ void func_8013C048(SpriteEffect* effect) {
     Vtx* vtx;
     s32 i;
 
-    effect->firstVtxIdx = sprfx_vtxCount;
-    divSizeX = sprfx_currentImage->width / (f32) effect->subdivX;
-    divSizeY = sprfx_currentImage->height / (f32) effect->subdivY;
-    posY = sprfx_currentImage->yOffset;
+    state->firstVtxIdx = fold_vtxCount;
+    divSizeX = fold_currentImage->width / (f32) state->subdivX;
+    divSizeY = fold_currentImage->height / (f32) state->subdivY;
+    posY = fold_currentImage->yOffset;
     texV = 0.0f;
-    vtx = &sprfx_vtxBuf[sprfx_vtxCount];
+    vtx = &fold_vtxBuf[fold_vtxCount];
 
-    for (i = 0; i <= effect->subdivY; i++) {
+    for (i = 0; i <= state->subdivY; i++) {
         s32 j;
 
-        if (i == effect->subdivY) {
-            texV = sprfx_currentImage->height;
-            posY = sprfx_currentImage->yOffset - sprfx_currentImage->height;
+        if (i == state->subdivY) {
+            texV = fold_currentImage->height;
+            posY = fold_currentImage->yOffset - fold_currentImage->height;
         }
 
-        posX = sprfx_currentImage->xOffset;
+        posX = fold_currentImage->xOffset;
         texU = 0.0f;
-        for (j = 0; j <= effect->subdivX; vtx++, j++) {
-            if (j == effect->subdivX) {
-                texU = sprfx_currentImage->width;
-                posX = sprfx_currentImage->xOffset + sprfx_currentImage->width;
+        for (j = 0; j <= state->subdivX; vtx++, j++) {
+            if (j == state->subdivX) {
+                texU = fold_currentImage->width;
+                posX = fold_currentImage->xOffset + fold_currentImage->width;
             }
             vtx->n.ob[0] = posX;
             vtx->n.ob[1] = posY;
             vtx->n.ob[2] = 0;
             vtx->n.tc[0] = ((s32) texU + 256) * 32;
             vtx->n.tc[1] = ((s32) texV + 256) * 32;
-            sprfx_vtxCount++;
+            fold_vtxCount++;
             posX += divSizeX;
             texU += divSizeX;
         }
         posY -= divSizeY;
         texV += divSizeY;
     }
-    effect->lastVtxIdx = sprfx_vtxCount - 1;
+    state->lastVtxIdx = fold_vtxCount - 1;
 }
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", sprfx_load_gfx);
-// void sprfx_load_gfx(SpriteEffect* effect) {
+INCLUDE_ASM(s32, "d0a70_len_4fe0", fold_load_gfx);
+// void fold_load_gfx(FoldState* state) {
 //     Gfx* temp_s0;
 //     Gfx* temp_s1_2;
-//     SprFxGfxDescriptor* descriptor;
+//     FoldGfxDescriptor* descriptor;
 //     s32* temp_s1;
 //     u32 temp_a2;
 //     u32* temp_a1;
@@ -552,51 +552,51 @@ INCLUDE_ASM(s32, "d0a70_len_4fe0", sprfx_load_gfx);
 //     s32* gfxPos;
 //     u32 gfxOp;
 
-//     temp_s1 = sprfx_groupOffsets[effect->unk_1C[0][0]] + startAddr;
-//     descriptor = &sprfx_groupDescriptors[(u8) effect->arrayIdx];
+//     temp_s1 = fold_groupOffsets[state->unk_1C[0][0]] + startAddr;
+//     descriptor = &fold_groupDescriptors[(u8) state->arrayIdx];
 
-//     if (effect->unk_64 != temp_s1) {
-//         effect->unk_64 = temp_s1;
+//     if (state->unk_64 != temp_s1) {
+//         state->unk_64 = temp_s1;
 
-//         dma_copy(effect->unk_64, effect->unk_64 + 0x10, descriptor);
+//         dma_copy(state->unk_64, state->unk_64 + 0x10, descriptor);
 
-//         if (effect->unk_68 != NULL) {
-//             sprfx_add_to_gfx_cache(effect->unk_68, 1);
-//             effect->unk_68 = NULL;
+//         if (state->unk_68 != NULL) {
+//             fold_add_to_gfx_cache(state->unk_68, 1);
+//             state->unk_68 = NULL;
 //         }
-//         if (effect->unk_6C != NULL) {
-//             sprfx_add_to_gfx_cache(effect->unk_6C, 1);
-//             effect->unk_6C = NULL;
+//         if (state->unk_6C != NULL) {
+//             fold_add_to_gfx_cache(state->unk_6C, 1);
+//             state->unk_6C = NULL;
 //         }
-//         if (effect->unk_70 != NULL) {
-//             sprfx_add_to_gfx_cache(effect->unk_70, 1);
-//             effect->unk_70 = NULL;
+//         if (state->unk_70 != NULL) {
+//             fold_add_to_gfx_cache(state->unk_70, 1);
+//             state->unk_70 = NULL;
 //         }
-//         if (effect->unk_74 != NULL) {
-//             sprfx_add_to_gfx_cache(effect->unk_74, 1);
-//             effect->unk_74 = NULL;
+//         if (state->unk_74 != NULL) {
+//             fold_add_to_gfx_cache(state->unk_74, 1);
+//             state->unk_74 = NULL;
 //         }
-//         effect->unk_68 = heap_malloc((u16) descriptor->vtxCount * 0x10);
-//         effect->unk_6C = heap_malloc((u16) descriptor->vtxCount * 0x10);
-//         effect->unk_70 = heap_malloc((u16) descriptor->gfxCount * 8);
-//         effect->unk_74 = heap_malloc((u16) descriptor->gfxCount * 8);
+//         state->unk_68 = heap_malloc((u16) descriptor->vtxCount * 0x10);
+//         state->unk_6C = heap_malloc((u16) descriptor->vtxCount * 0x10);
+//         state->unk_70 = heap_malloc((u16) descriptor->gfxCount * 8);
+//         state->unk_74 = heap_malloc((u16) descriptor->gfxCount * 8);
 //         temp_s1_2 = descriptor->gfx + startAddr;
 //         temp_s0 = &temp_s1_2[descriptor->gfxCount];
-//         dma_copy(temp_s1_2, &temp_s1_2[descriptor->gfxCount], effect->unk_70);
-//         dma_copy(temp_s1_2, &temp_s1_2[descriptor->gfxCount], effect->unk_74);
+//         dma_copy(temp_s1_2, &temp_s1_2[descriptor->gfxCount], state->unk_70);
+//         dma_copy(temp_s1_2, &temp_s1_2[descriptor->gfxCount], state->unk_74);
 
 //         do {
-//             gfxPos = (u32 *)effect->unk_70[0];
+//             gfxPos = (u32 *)state->unk_70[0];
 //             do {
 //                 gfxOp = *gfxPos;
 //                 if (gfxOp >> 0x18 == 1) {
-//                     gfxPos[1] = (u32)(effect->unk_68 + ((s32)(gfxPos[1] - (s32)descriptor->vtx) / 3) * 4);
+//                     gfxPos[1] = (u32)(state->unk_68 + ((s32)(gfxPos[1] - (s32)descriptor->vtx) / 3) * 4);
 //                 }
 //                 gfxPos = gfxPos + 2;
 //             } while (gfxOp >> 0x18 != 0xdf);
 
 //             effect = ((s32)effect) + 1;
-//         } while ((s32)effect < (s32)&effect->firstVtxIdx);
+//         } while ((s32)effect < (s32)&state->firstVtxIdx);
 //     }
 // }
 
@@ -610,23 +610,23 @@ INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013E2F0);
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013E904);
 
-void func_8013EE48(SpriteEffect* effect) {
-    effect->unk_3C[0][0] = 0.0f;
-    effect->unk_3C[0][1] = 50.0f;
-    effect->unk_3C[0][2] = 30.0f;
+void func_8013EE48(FoldState* state) {
+    state->unk_3C[0][0] = 0.0f;
+    state->unk_3C[0][1] = 50.0f;
+    state->unk_3C[0][2] = 30.0f;
 }
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013EE68);
 
-void func_8013F1F8(SpriteEffect* effect) {
-    f32 alpha = (f32)sprfx_currentImage->gfxOtherModeD / 255.0;
-    s32 vtxCount = effect->lastVtxIdx - effect->firstVtxIdx;
+void func_8013F1F8(FoldState* state) {
+    f32 alpha = (f32)fold_currentImage->gfxOtherModeD / 255.0;
+    s32 vtxCount = state->lastVtxIdx - state->firstVtxIdx;
     s32 i;
 
     for (i = 0; i <= vtxCount; i++) {
-        sprfx_vtxBuf[effect->firstVtxIdx + i].v.cn[0] = effect->buf[i * 4 + 0];
-        sprfx_vtxBuf[effect->firstVtxIdx + i].v.cn[1] = effect->buf[i * 4 + 1];
-        sprfx_vtxBuf[effect->firstVtxIdx + i].v.cn[2] = effect->buf[i * 4 + 2];
-        sprfx_vtxBuf[effect->firstVtxIdx + i].v.cn[3] = effect->buf[i * 4 + 3] * alpha;
+        fold_vtxBuf[state->firstVtxIdx + i].v.cn[0] = state->buf[i * 4 + 0];
+        fold_vtxBuf[state->firstVtxIdx + i].v.cn[1] = state->buf[i * 4 + 1];
+        fold_vtxBuf[state->firstVtxIdx + i].v.cn[2] = state->buf[i * 4 + 2];
+        fold_vtxBuf[state->firstVtxIdx + i].v.cn[3] = state->buf[i * 4 + 3] * alpha;
     }
 }
