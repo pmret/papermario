@@ -95,11 +95,18 @@ Once you've matched a function, run the following:
 
 Then, go ahead and [create a pull request](https://github.com/pmret/papermario/pulls)!
 
-## NON_EQUIVALENT
+## Trouble matching a function
 
-If you make significant progress on a function but are unable to 100% match it, feel free to wrap it in a NON_EQUIVALENT check:
+Sometimes when working on a function, for various reasons, you'll be unable to match it. The following two sections describe what labels we give these functions and when. Any time you wrap a function in a label like this, please leave a comment above the function with a brief description of the issue(s).
+
+### NON_EQUIVALENT
+
+If you are working on a function but can't figure out how to tackle certain parts, or you're sure that it's not equivalent, you can wrap it in NON_EQUIVALENT.
+
+Please make a best-effort attempt to any function you put in a PR, though. Half-finished functions aren't necessarily much use to the next decomper.
 
 ```c
+// can't figure out the MULT_HI() stuff
 #ifdef NON_EQUIVALENT
 void func(void) {
     // ...
@@ -109,6 +116,19 @@ INCLUDE_ASM(void, "file", func, void);
 #endif
 ```
 
-## NON_MATCHING
+### NON_MATCHING
 
-If you are unable to match a function but are sure it behaves the same, wrap **equivalent** C code in NON_MATCHING.
+If you are unable to 100% match a function but think it's equivalent in behavior, you can wrap the C code in NON_MATCHING.
+
+ ```c
+// s3/s4 swap
+#ifdef NON_MATCHING
+void func(void) {
+    // ...
+}
+#else
+INCLUDE_ASM(void, "file", func, void);
+#endif
+```
+
+Once the project is shiftable, NON_MATCHING functions will be used in place of the included ASM.
