@@ -84,7 +84,7 @@ PlayerSpriteSet spr_playerSpriteSets[] = {
     /* Peach */ {  6, 0x900, 0x00003C00 },
 };
 
-#if 0 // NON_MATCHING
+#ifdef NON_MATCHING
 extern s32* gSpriteHeapPtr;
 extern s32** D_802DFE44;
 extern s32* D_802DFE9C;

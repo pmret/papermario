@@ -6,9 +6,8 @@
 
 #include "world/common/GetEntityPosition.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_04/B451F0", func_80240BE8_B45358);
 // Can't get this to match because the const array above is in "discarded section .data"
-/*
+#ifdef NON_MATCHING
 ApiStatus func_80240BE8_B45358(Evt* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(script->varTable[10]);
 
@@ -28,7 +27,10 @@ ApiStatus func_80240BE8_B45358(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/area_jan/jan_04/B451F0", func_80240BE8_B45358);
+#endif
+
 INCLUDE_ASM(s32, "world/area_jan/jan_04/B451F0", func_80240D0C_B4547C);
 
 #define NAMESPACE dup_jan_04

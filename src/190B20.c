@@ -1997,7 +1997,7 @@ void remove_player_buffs(s32 buffs) {
 
 INCLUDE_ASM(s32, "190B20", btl_update_ko_status);
 
-#if 0 // NON_MATCHING
+#ifdef NON_MATCHING
 extern s32 D_80293970;
 
 void btl_appendGfx_prim_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, s16 arg7) {
