@@ -1918,7 +1918,7 @@ enum EffectGfxDataFlags {
 };
 
 enum MoveIDs {
-    MOVE_NONE                    = 0x00000000,
+    MOVE_NONE                       = 0x00000000,
     MOVE_UNUSED_01                  = 0x00000001,
     MOVE_UNUSED_02                  = 0x00000002,
     MOVE_HAMMER1                    = 0x00000003,
