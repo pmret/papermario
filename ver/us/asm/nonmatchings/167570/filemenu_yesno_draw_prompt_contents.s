@@ -3,8 +3,8 @@
 
 .section .rodata
 
-glabel jtbl_8024C000
-.word L80246E6C_1676CC, L80246F9C_1677FC, L80246FDC_16783C, L80246F00_167760, L802470D4_167934, 0
+dlabel jtbl_8024C000
+.word .L80246E6C_1676CC, .L80246F9C_1677FC, .L80246FDC_16783C, .L80246F00_167760, .L802470D4_167934, 0
 
 .section .text
 
@@ -27,7 +27,7 @@ glabel filemenu_yesno_draw_prompt_contents
 /* 1676C0 80246E60 8C22C000 */  lw        $v0, %lo(jtbl_8024C000)($at)
 /* 1676C4 80246E64 00400008 */  jr        $v0
 /* 1676C8 80246E68 00000000 */   nop
-glabel L80246E6C_1676CC
+.L80246E6C_1676CC:
 /* 1676CC 80246E6C 0C0926A9 */  jal       filemenu_get_menu_message
 /* 1676D0 80246E70 24040010 */   addiu    $a0, $zero, 0x10
 /* 1676D4 80246E74 0040202D */  daddu     $a0, $v0, $zero
@@ -65,7 +65,7 @@ glabel L80246E6C_1676CC
 /* 167754 80246EF4 0040202D */  daddu     $a0, $v0, $zero
 /* 167758 80246EF8 08091C59 */  j         .L80247164
 /* 16775C 80246EFC 26650063 */   addiu    $a1, $s3, 0x63
-glabel L80246F00_167760
+.L80246F00_167760:
 /* 167760 80246F00 0C0926A9 */  jal       filemenu_get_menu_message
 /* 167764 80246F04 24040016 */   addiu    $a0, $zero, 0x16
 /* 167768 80246F08 0040202D */  daddu     $a0, $v0, $zero
@@ -105,7 +105,7 @@ glabel L80246F00_167760
 /* 1677F0 80246F90 0220282D */  daddu     $a1, $s1, $zero
 /* 1677F4 80246F94 08091C5A */  j         .L80247168
 /* 1677F8 80246F98 26860012 */   addiu    $a2, $s4, 0x12
-glabel L80246F9C_1677FC
+.L80246F9C_1677FC:
 /* 1677FC 80246F9C 0C0926A9 */  jal       filemenu_get_menu_message
 /* 167800 80246FA0 24040011 */   addiu    $a0, $zero, 0x11
 /* 167804 80246FA4 0040202D */  daddu     $a0, $v0, $zero
@@ -122,7 +122,7 @@ glabel L80246F9C_1677FC
 /* 167830 80246FD0 0200282D */  daddu     $a1, $s0, $zero
 /* 167834 80246FD4 08091C5A */  j         .L80247168
 /* 167838 80246FD8 26860012 */   addiu    $a2, $s4, 0x12
-glabel L80246FDC_16783C
+.L80246FDC_16783C:
 /* 16783C 80246FDC 0C0926A9 */  jal       filemenu_get_menu_message
 /* 167840 80246FE0 24040013 */   addiu    $a0, $zero, 0x13
 /* 167844 80246FE4 0040202D */  daddu     $a0, $v0, $zero
@@ -187,7 +187,7 @@ glabel L80246FDC_16783C
 /* 167928 802470C8 26650046 */  addiu     $a1, $s3, 0x46
 /* 16792C 802470CC 08091C5A */  j         .L80247168
 /* 167930 802470D0 26860026 */   addiu    $a2, $s4, 0x26
-glabel L802470D4_167934
+.L802470D4_167934:
 /* 167934 802470D4 0C0926A9 */  jal       filemenu_get_menu_message
 /* 167938 802470D8 24040019 */   addiu    $a0, $zero, 0x19
 /* 16793C 802470DC 0040202D */  daddu     $a0, $v0, $zero

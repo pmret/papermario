@@ -3,16 +3,16 @@
 
 .section .rodata
 
-glabel D_80243880_B7A030
+dlabel D_80243880_B7A030
 .double 0.02
 
-glabel D_80243888_B7A038
+dlabel D_80243888_B7A038
 .double 0.1
 
-glabel D_80243890_B7A040
+dlabel D_80243890_B7A040
 .double 0.3
 
-glabel D_80243898_B7A048
+dlabel D_80243898_B7A048
 .double 0.6
 
 .section .text

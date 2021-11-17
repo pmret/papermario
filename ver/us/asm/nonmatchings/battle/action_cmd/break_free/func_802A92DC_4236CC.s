@@ -19,7 +19,7 @@ glabel func_802A92DC_4236CC
 /* 423704 802A9314 8C229840 */  lw        $v0, %lo(jtbl_802A9840_423C30)($at)
 /* 423708 802A9318 00400008 */  jr        $v0
 /* 42370C 802A931C 00000000 */   nop
-glabel L802A9320_423710
+dlabel L802A9320_423710
 /* 423710 802A9320 0C093EB1 */  jal       btl_set_popup_duration
 /* 423714 802A9324 24040063 */   addiu    $a0, $zero, 0x63
 /* 423718 802A9328 8E300004 */  lw        $s0, 4($s1)
@@ -65,7 +65,7 @@ glabel L802A9320_423710
 /* 4237A8 802A93B8 24020001 */  addiu     $v0, $zero, 1
 /* 4237AC 802A93BC 080AA5A9 */  j         L802A96A4_423A94
 /* 4237B0 802A93C0 A622004C */   sh       $v0, 0x4c($s1)
-glabel L802A93C4_4237B4
+dlabel L802A93C4_4237B4
 /* 4237B4 802A93C4 0C093EB1 */  jal       btl_set_popup_duration
 /* 4237B8 802A93C8 24040063 */   addiu    $a0, $zero, 0x63
 /* 4237BC 802A93CC 96220056 */  lhu       $v0, 0x56($s1)
@@ -101,7 +101,7 @@ glabel L802A93C4_4237B4
 /* 423830 802A9440 24C60011 */   addiu    $a2, $a2, 0x11
 /* 423834 802A9444 080AA5A9 */  j         L802A96A4_423A94
 /* 423838 802A9448 00000000 */   nop
-glabel L802A944C_42383C
+dlabel L802A944C_42383C
 /* 42383C 802A944C 0C093EB1 */  jal       btl_set_popup_duration
 /* 423840 802A9450 24040063 */   addiu    $a0, $zero, 0x63
 /* 423844 802A9454 8622004E */  lh        $v0, 0x4e($s1)
@@ -120,7 +120,7 @@ glabel L802A944C_42383C
 /* 423874 802A9484 2402000B */  addiu     $v0, $zero, 0xb
 /* 423878 802A9488 A622004C */  sh        $v0, 0x4c($s1)
 /* 42387C 802A948C A6230054 */  sh        $v1, 0x54($s1)
-glabel L802A9490_423880
+dlabel L802A9490_423880
 /* 423880 802A9490 0C093EB1 */  jal       btl_set_popup_duration
 /* 423884 802A9494 24040063 */   addiu    $a0, $zero, 0x63
 /* 423888 802A9498 8222005C */  lb        $v0, 0x5c($s1)
@@ -260,7 +260,7 @@ glabel L802A9490_423880
 /* 423A68 802A9678 2402000C */  addiu     $v0, $zero, 0xc
 /* 423A6C 802A967C 080AA5A9 */  j         L802A96A4_423A94
 /* 423A70 802A9680 A622004C */   sh       $v0, 0x4c($s1)
-glabel L802A9684_423A74
+dlabel L802A9684_423A74
 /* 423A74 802A9684 86220054 */  lh        $v0, 0x54($s1)
 /* 423A78 802A9688 96230054 */  lhu       $v1, 0x54($s1)
 /* 423A7C 802A968C 10400003 */  beqz      $v0, .L802A969C
@@ -270,7 +270,7 @@ glabel L802A9684_423A74
 .L802A969C:
 /* 423A8C 802A969C 0C09A327 */  jal       func_80268C9C
 /* 423A90 802A96A0 00000000 */   nop
-glabel L802A96A4_423A94
+dlabel L802A96A4_423A94
 /* 423A94 802A96A4 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 423A98 802A96A8 8FB10014 */  lw        $s1, 0x14($sp)
 /* 423A9C 802A96AC 8FB00010 */  lw        $s0, 0x10($sp)

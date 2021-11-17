@@ -2,23 +2,23 @@
 
 .section .data
 
-glabel D_E00287E0
+dlabel D_E00287E0
 .double 0.3
 
-glabel D_E00287E8
+dlabel D_E00287E8
 .double 0.8
 
-glabel D_E00287F0
+dlabel D_E00287F0
 .double 0.2
 
-glabel D_E00287F8
+dlabel D_E00287F8
 .double 0.94
 
-glabel D_E0028800
+dlabel D_E0028800
 .double 0.05
 
-glabel D_E0028808
+dlabel D_E0028808
 .double 0.95
 
-glabel D_E0028810
+dlabel D_E0028810
 .double 0.92, 0.0

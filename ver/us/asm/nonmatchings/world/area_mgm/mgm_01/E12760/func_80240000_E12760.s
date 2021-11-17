@@ -3,22 +3,22 @@
 
 .section .rodata
 
-glabel D_802435B0_E15D10
+dlabel D_802435B0_E15D10
 .double -95.0
 
-glabel D_802435B8_E15D18
+dlabel D_802435B8_E15D18
 .double 95.0
 
-glabel D_802435C0_E15D20
+dlabel D_802435C0_E15D20
 .double -0.35
 
-glabel D_802435C8_E15D28
+dlabel D_802435C8_E15D28
 .double 0.3
 
-glabel D_802435D0_E15D30
+dlabel D_802435D0_E15D30
 .double 0.35
 
-glabel D_802435D8_E15D38
+dlabel D_802435D8_E15D38
 .double 0.8
 
 .section .text

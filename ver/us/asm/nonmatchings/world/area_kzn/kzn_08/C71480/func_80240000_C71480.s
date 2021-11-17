@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_802455D0_C76A50
+dlabel D_802455D0_C76A50
 .double 0.2, 5.4309136021427385e+209
 
 .section .text

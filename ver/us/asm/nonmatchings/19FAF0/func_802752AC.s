@@ -3,34 +3,34 @@
 
 .section .rodata
 
-glabel D_8029D8E8
+dlabel D_8029D8E8
 .double 0.53
 
-glabel D_8029D8F0
+dlabel D_8029D8F0
 .double 0.01
 
-glabel D_8029D8F8
+dlabel D_8029D8F8
 .double 0.53
 
-glabel D_8029D900
+dlabel D_8029D900
 .double 0.01
 
-glabel D_8029D908
+dlabel D_8029D908
 .double 16.5
 
-glabel D_8029D910
+dlabel D_8029D910
 .double 0.53
 
-glabel D_8029D918
+dlabel D_8029D918
 .double 0.01
 
-glabel D_8029D920
+dlabel D_8029D920
 .double 0.53
 
-glabel D_8029D928
+dlabel D_8029D928
 .double 0.01
 
-glabel D_8029D930
+dlabel D_8029D930
 .double 33.0
 
 .section .text

@@ -19,4 +19,4 @@ CheckOptions:
   #  value: CamelCase
   #- key: readability-identifier-naming.GlobalVariablePrefix
   #  value: g
-HeaderFilterRegex: '(src|include)\/[^P].*\.h' # ignore inclue/PR/
+HeaderFilterRegex: '(src|include)\/[^P].*\.h' # ignore include/PR/

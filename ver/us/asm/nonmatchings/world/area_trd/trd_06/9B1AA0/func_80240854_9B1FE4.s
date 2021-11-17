@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_802451C8_9B6958
+dlabel D_802451C8_9B6958
 .double 0.7142857142857143, 8.427663053820148e+252
 
 .section .text
