@@ -1918,7 +1918,7 @@ enum EffectGfxDataFlags {
 };
 
 enum MoveIDs {
-    MOVE_NOTHING                    = 0x00000000,
+    MOVE_NONE                    = 0x00000000,
     MOVE_UNUSED_01                  = 0x00000001,
     MOVE_UNUSED_02                  = 0x00000002,
     MOVE_HAMMER1                    = 0x00000003,
@@ -2171,6 +2171,25 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_NO_TARGET_AVAILABLE             = 0x00001000,
     BS_FLAGS2_1000000                         = 0x01000000,
     BS_FLAGS2_2000000                         = 0x02000000,
+};
+
+enum BattleStates2 {
+    BATTLE_STATES2_UNK_0                 = 0x00000000,
+    BATTLE_STATES2_UNK_1                 = 0x00000001,
+    BATTLE_STATES2_UNK_2                 = 0x00000002,
+    BATTLE_STATES2_UNK_3                 = 0x00000003,
+    BATTLE_STATES2_UNK_4                 = 0x00000004,
+    BATTLE_STATES2_UNK_5                 = 0x00000005,
+    BATTLE_STATES2_UNK_6                 = 0x00000006,
+    BATTLE_STATES2_UNK_7                 = 0x00000007,
+    BATTLE_STATES2_PLAYER_DEFEATED       = 0x0000000A,
+    BATTLE_STATES2_UNK_B                 = 0x0000000B,
+    BATTLE_STATES2_UNK_C                 = 0x0000000C,
+    BATTLE_STATES2_UNK_14                = 0x00000014,
+    BATTLE_STATES2_UNK_15                = 0x00000015,
+    BATTLE_STATES2_UNK_16                = 0x00000016,
+    BATTLE_STATES2_UNK_1E                = 0x0000001E,
+    BATTLE_STATES2_UNK_46                = 0x00000046,
 };
 
 enum DebuffTypes {
