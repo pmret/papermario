@@ -118,7 +118,7 @@ INCLUDE_ASM(void, "file", func, void);
 
 ### NON_MATCHING
 
-If you are unable to 100% match a function but think it's equivalent in behavior, you can wrap the C code in NON_MATCHING.
+If you are unable to 100% match a function but are fairly certain it's equivalent in behavior, you can wrap the C code in NON_MATCHING.
 
  ```c
 // s3/s4 swap
