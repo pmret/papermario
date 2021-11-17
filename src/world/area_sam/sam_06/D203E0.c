@@ -10,19 +10,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80240700_D20590);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-#if 0 // NON_MATCHING
-void N(func_802411A4_D21034)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->pos.y += N(D_802441B8_D24048)[npc->duration++];
-    if (npc->duration >= 5) {
-        script->functionTemp[0] = 12;
-    }
-}
-#else
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802411A4_D21034);
-#endif
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -32,91 +20,9 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802411A4_D21034);
 
 #include "world/common/UnkFunc5.inc.c"
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_8024185C_D216EC)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Bytecode* args = script->ptrReadPos;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = evt_get_variable(script, *args);
-
-    territory.unk_00 = 0;
-    territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 120.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall) {
-        N(func_80241738_D215C8)(npc, enemy, script, aiSettings);
-    }
-
-    npc->unk_AB = -2;
-
-    if (enemy->unk_B0 & 4) {
-        if (enemy->unk_B4 != 0) {
-            return ApiStatus_BLOCK;
-        }
-        enemy->unk_B0 &= ~4;
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-#include "world/common/UnkNpcAIFunc23.inc.c"
-        case 1:
-            N(func_80240700_D20590)(script, aiSettings, territoryPtr);
-            break;
-        case 2:
-            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
-        case 3:
-            N(func_80240DE8_D20C78)(script, aiSettings, territoryPtr);
-            break;
-        case 10:
-            N(UnkNpcAIFunc2)(script, aiSettings, territoryPtr);
-        case 11:
-            N(func_802411A4_D21034)(script, aiSettings, territoryPtr);
-            break;
-        case 12:
-            N(UnkNpcAIFunc14)(script, aiSettings, territoryPtr);
-            break;
-        case 13:
-            N(UnkNpcAIFunc3)(script, aiSettings, territoryPtr);
-            break;
-        case 14:
-            N(func_802413A8_D21238)(script, aiSettings, territoryPtr);
-            break;
-    }
-
-    return ApiStatus_BLOCK;
-}
-#else
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_8024185C_D216EC);
-#endif
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_80241A48_D218D8)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_802443D0_D24260) == NULL) {
-        N(D_802443D0_D24260) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_802443D0_D24260)[i] = script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_802443D0_D24260)[i];
-        }
-        heap_free(N(D_802443D0_D24260));
-        N(D_802443D0_D24260) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
-#else
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241A48_D218D8);
-#endif
 
 #include "world/common/GetItemName.inc.c"
 
@@ -124,83 +30,13 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241A48_D218D8);
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_80241D8C_D21C1C)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        N(D_80244434_D242C4) = FALSE;
-    }
-
-    if (N(D_80244434_D242C4)) {
-        N(D_80244434_D242C4) = FALSE;
-        evt_set_variable(script, *args, N(D_80244438_D242C8));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-#else
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241D8C_D21C1C);
-#endif
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_80241DE0_D21C70)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    N(D_80244438_D242C8) = evt_get_variable(script, *args);
-    N(D_80244434_D242C4) = TRUE;
-    return ApiStatus_DONE2;
-}
-#else
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241DE0_D21C70);
-#endif
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_80241E18_D21CA8)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_80244A20)[i] = ptr[i];
-        }
-        N(D_80244A20)[i] = 0;
-    } else {
-        for (i = 0; i < 0x70; i++) {
-            N(D_80244A20)[i] = i + 16;
-            N(D_80244A20)[112] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
-#else
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241E18_D21CA8);
-#endif
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_80241EB4_D21D44)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_80244A20)[i] = ptr[i];
-        }
-        N(D_80244A20)[i] = 0;
-    } else {
-        for (i = 0; i < 0x70; i++) {
-            N(D_80244A20)[i] = i + 16;
-            N(D_80244A20)[112] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
-#else
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241EB4_D21D44);
-#endif
 
 #include "world/common/Call800E9894.inc.c"
 
@@ -226,25 +62,8 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241EB4_D21D44);
 
 #include "world/common/UnkYawFunc.inc.c"
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_802424C8_D22358)(Evt *script, s32 isInitialCall) {
-    Npc *npc = get_npc_unsafe(script->varTable[2]);
-
-    D_8024E1B4 = npc->currentAnim;
-    npc->currentAnim = script->varTable[4];
-    return ApiStatus_DONE2;
-}
-#else
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802424C8_D22358);
-#endif
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_8024250C_D2239C)(Evt *script, s32 isInitialCall) {
-    get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
-    return ApiStatus_DONE2;
-}
-#else
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_8024250C_D2239C);
-#endif
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242538_D223C8);

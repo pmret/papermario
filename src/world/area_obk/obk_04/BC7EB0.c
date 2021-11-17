@@ -20,27 +20,7 @@ INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240624_BC8484);
 
 INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240910_BC8770);
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_80240940_BC87A0)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80243A10_BCB870) == NULL) {
-        N(D_80243A10_BCB870) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80243A10_BCB870)[i] = script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80243A10_BCB870)[i];
-        }
-        heap_free(N(D_80243A10_BCB870));
-        N(D_80243A10_BCB870) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
-#else
 INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240940_BC87A0);
-#endif
 
 #include "world/common/GetItemName.inc.c"
 

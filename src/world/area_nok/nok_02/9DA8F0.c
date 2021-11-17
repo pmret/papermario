@@ -10,105 +10,15 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_802438D0_9DA8F0);
 #include "world/common/AddPlayerHandsOffset.inc.c"
 #define NAMESPACE nok_02
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_80243BEC_9DAC0C)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        N(D_80252400_9E9420) = FALSE;
-    }
-
-    if (N(D_80252400_9E9420)) {
-        N(D_80252400_9E9420) = FALSE;
-        evt_set_variable(script, *args, N(D_80252404_9E9424));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-#else
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243BEC_9DAC0C);
-#endif
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_80243C40_9DAC60)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    N(D_80252404_9E9424) = evt_get_variable(script, *args);
-    N(D_80252400_9E9420) = TRUE;
-    return ApiStatus_DONE2;
-}
-#else
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243C40_9DAC60);
-#endif
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_80243C78_9DAC98)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_80244A20)[i] = ptr[i];
-        }
-        N(D_80244A20)[i] = 0;
-    } else {
-        for (i = 0; i < 0x70; i++) {
-            N(D_80244A20)[i] = i + 16;
-            N(D_80244A20)[112] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
-#else
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243C78_9DAC98);
-#endif
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_80243D14_9DAD34)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_80244A20)[i] = ptr[i];
-        }
-        N(D_80244A20)[i] = 0;
-    } else {
-        for (i = 0; i < 0x70; i++) {
-            N(D_80244A20)[i] = i + 16;
-            N(D_80244A20)[112] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
-#else
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243D14_9DAD34);
-#endif
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_80243DB0_9DADD0)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80252720_9E9740) == NULL) {
-        N(D_80252720_9E9740) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80252720_9E9740)[i] = script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80252720_9E9740)[i];
-        }
-        heap_free(N(D_80252720_9E9740));
-        N(D_80252720_9E9740) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
-#else
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243DB0_9DADD0);
-#endif
 
 #define NAMESPACE dup2_nok_02
 #include "world/common/GetItemName.inc.c"

@@ -26,19 +26,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80241164_DF0004);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-#if 0 // NON_MATCHING
-void N(func_80241C08_DF0AA8)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->pos.y += N(D_80246184_DF5024)[npc->duration++];
-    if (npc->duration >= 5) {
-        script->functionTemp[0] = 12;
-    }
-}
-#else
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80241C08_DF0AA8);
-#endif
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -48,69 +36,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80241C08_DF0AA8);
 
 #include "world/common/UnkFunc5.inc.c"
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_802422C0_DF1160)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Bytecode* args = script->ptrReadPos;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = evt_get_variable(script, *args);
-
-    territory.unk_00 = 0;
-    territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 120.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall) {
-        N(func_8024219C_DF103C)(npc, enemy, script, aiSettings);
-    }
-
-    npc->unk_AB = -2;
-
-    if (enemy->unk_B0 & 4) {
-        if (enemy->unk_B4 != 0) {
-            return ApiStatus_BLOCK;
-        }
-        enemy->unk_B0 &= ~4;
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-#include "world/common/UnkNpcAIFunc23.inc.c"
-        case 1:
-            N(func_80241164_DF0004)(script, aiSettings, territoryPtr);
-            break;
-        case 2:
-            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
-        case 3:
-            N(func_8024184C_DF06EC)(script, aiSettings, territoryPtr);
-            break;
-        case 10:
-            N(UnkNpcAIFunc2)(script, aiSettings, territoryPtr);
-        case 11:
-            N(func_80241C08_DF0AA8)(script, aiSettings, territoryPtr);
-            break;
-        case 12:
-            N(UnkNpcAIFunc14)(script, aiSettings, territoryPtr);
-            break;
-        case 13:
-            N(UnkNpcAIFunc3)(script, aiSettings, territoryPtr);
-            break;
-        case 14:
-            N(func_80241E0C_DF0CAC)(script, aiSettings, territoryPtr);
-            break;
-    }
-
-    return ApiStatus_BLOCK;
-}
-#else
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802422C0_DF1160);
-#endif
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802424AC_DF134C);
 

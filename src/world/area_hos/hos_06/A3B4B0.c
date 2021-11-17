@@ -1,26 +1,6 @@
 #include "hos_06.h"
 
-#if 0 // NON_MATCHING
-ApiStatus N(func_80241FD0_A3B4B0)(Evt* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80245E80_A3F360) == NULL) {
-        N(D_80245E80_A3F360) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80245E80_A3F360)[i] = script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80245E80_A3F360)[i];
-        }
-        heap_free(N(D_80245E80_A3F360));
-        N(D_80245E80_A3F360) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
-#else
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3B4B0", func_80241FD0_A3B4B0);
-#endif
 
 #define NAMESPACE dup_hos_06
 #include "world/common/GetItemName.inc.c"
