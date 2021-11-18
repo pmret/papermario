@@ -23,10 +23,8 @@ typedef struct {
     /* 0x60 */ s16 bufSize;
     /* 0x62 */ char unk_62[0x2];
     /* 0x64 */ s32* unk_64;
-    /* 0x68 */ s32* unk_68;
-    /* 0x6C */ s32* unk_6C;
-    /* 0x70 */ s32* unk_70;
-    /* 0x74 */ s32* unk_74;
+    /* 0x68 */ s32* unk_68[2];
+    /* 0x70 */ s32* unk_70[2];
     /* 0x78 */ char unk_78[0x4];
 } FoldState; // size = 0x7C
 
@@ -124,6 +122,8 @@ extern FoldDataCache fold_gfxDataCache[8];
 void fold_clear_state_gfx(FoldState*);
 void fold_clear_state_data(FoldState*);
 void fold_init_state(FoldState*);
+void func_8013B0EC(FoldState* state);
+void func_8013B1B0(FoldState* state, Matrix4f mtx);
 void func_8013BC88(FoldState*);
 void func_8013C048(FoldState*);
 void fold_load_gfx(FoldState*);
@@ -322,30 +322,30 @@ void fold_clear_state_gfx(FoldState* state) {
     if (state->unk_64 != 0) {
         state->unk_64 = 0;
     }
-    if (state->unk_68 != 0) {
-        fold_add_to_gfx_cache(state->unk_68, 1);
-        state->unk_68 = 0;
+    if (state->unk_68[0] != 0) {
+        fold_add_to_gfx_cache(state->unk_68[0], 1);
+        state->unk_68[0] = 0;
     }
-    if (state->unk_6C != 0) {
-        fold_add_to_gfx_cache(state->unk_6C, 1);
-        state->unk_6C = 0;
+    if (state->unk_68[1] != 0) {
+        fold_add_to_gfx_cache(state->unk_68[1], 1);
+        state->unk_68[1] = 0;
     }
-    if (state->unk_70 != 0) {
-        fold_add_to_gfx_cache(state->unk_70, 1);
-        state->unk_70 = 0;
+    if (state->unk_70[0] != 0) {
+        fold_add_to_gfx_cache(state->unk_70[0], 1);
+        state->unk_70[0] = 0;
     }
-    if (state->unk_74 != 0) {
-        fold_add_to_gfx_cache(state->unk_74, 1);
-        state->unk_74 = 0;
+    if (state->unk_70[1] != 0) {
+        fold_add_to_gfx_cache(state->unk_70[1], 1);
+        state->unk_70[1] = 0;
     }
 }
 
 void fold_clear_state_data(FoldState* state) {
     state->unk_64 = 0;
-    state->unk_68 = 0;
-    state->unk_6C = 0;
-    state->unk_70 = 0;
-    state->unk_74 = 0;
+    state->unk_68[0] = 0;
+    state->unk_68[1] = 0;
+    state->unk_70[0] = 0;
+    state->unk_70[1] = 0;
     state->buf = NULL;
     state->bufSize = 0;
 }
@@ -538,67 +538,69 @@ void func_8013C048(FoldState* state) {
     state->lastVtxIdx = fold_vtxCount - 1;
 }
 
+// Issues with the loop
+#ifdef NON_EQUIVALENT
+void fold_load_gfx(FoldState* state) {
+    Gfx* temp_s0;
+    Gfx* temp_s1_2;
+    FoldGfxDescriptor* descriptor;
+    s32* temp_s1;
+    s32 startAddr = _24B7F0_ROM_START;
+    Gwords* gfxPos;
+    u32 gfxOp;
+    s32 i;
+
+    temp_s1 = fold_groupOffsets[state->unk_1C[0][0]] + startAddr;
+    descriptor = &fold_groupDescriptors[(u8) state->arrayIdx];
+
+    if (state->unk_64 != temp_s1) {
+        state->unk_64 = temp_s1;
+
+        dma_copy(state->unk_64, (s32)state->unk_64 + 0x10, descriptor);
+
+        if (state->unk_68[0] != NULL) {
+            fold_add_to_gfx_cache(state->unk_68[0], 1);
+            state->unk_68[0] = NULL;
+        }
+        if (state->unk_68[1] != NULL) {
+            fold_add_to_gfx_cache(state->unk_68[1], 1);
+            state->unk_68[1] = NULL;
+        }
+        if (state->unk_70[0] != NULL) {
+            fold_add_to_gfx_cache(state->unk_70[0], 1);
+            state->unk_70[0] = NULL;
+        }
+        if (state->unk_70[1] != NULL) {
+            fold_add_to_gfx_cache(state->unk_70[1], 1);
+            state->unk_70[1] = NULL;
+        }
+        state->unk_68[0] = heap_malloc((u16) descriptor->vtxCount * 0x10);
+        state->unk_68[1] = heap_malloc((u16) descriptor->vtxCount * 0x10);
+        state->unk_70[0] = heap_malloc((u16) descriptor->gfxCount * 8);
+        state->unk_70[1] = heap_malloc((u16) descriptor->gfxCount * 8);
+        temp_s1_2 = (s32)descriptor->gfx + startAddr;
+        temp_s0 = &temp_s1_2[descriptor->gfxCount];
+        dma_copy(temp_s1_2, temp_s0, state->unk_70[0]);
+        dma_copy(temp_s1_2, temp_s0, state->unk_70[1]);
+
+
+        gfxPos = &state->unk_70[0]->words;
+
+        for (i = 0; i < 2; i++) {
+            gfxOp = state->unk_70[i]->words.w0;
+            if (gfxOp >> 0x18 == 1) {
+                state->unk_70[i]->words.w1 = (u32)(state->unk_68[i] + ((s32)(state->unk_70[i]->words.w1 - (s32)descriptor->vtx) / 3) * 4);
+            }
+
+            if (gfxOp != 0xDF) {
+                break;
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "d0a70_len_4fe0", fold_load_gfx);
-// void fold_load_gfx(FoldState* state) {
-//     Gfx* temp_s0;
-//     Gfx* temp_s1_2;
-//     FoldGfxDescriptor* descriptor;
-//     s32* temp_s1;
-//     u32 temp_a2;
-//     u32* temp_a1;
-//     u32* phi_a1;
-//     u32* phi_a0;
-//     s32 startAddr = _24B7F0_ROM_START;
-//     s32* gfxPos;
-//     u32 gfxOp;
-
-//     temp_s1 = fold_groupOffsets[state->unk_1C[0][0]] + startAddr;
-//     descriptor = &fold_groupDescriptors[(u8) state->arrayIdx];
-
-//     if (state->unk_64 != temp_s1) {
-//         state->unk_64 = temp_s1;
-
-//         dma_copy(state->unk_64, state->unk_64 + 0x10, descriptor);
-
-//         if (state->unk_68 != NULL) {
-//             fold_add_to_gfx_cache(state->unk_68, 1);
-//             state->unk_68 = NULL;
-//         }
-//         if (state->unk_6C != NULL) {
-//             fold_add_to_gfx_cache(state->unk_6C, 1);
-//             state->unk_6C = NULL;
-//         }
-//         if (state->unk_70 != NULL) {
-//             fold_add_to_gfx_cache(state->unk_70, 1);
-//             state->unk_70 = NULL;
-//         }
-//         if (state->unk_74 != NULL) {
-//             fold_add_to_gfx_cache(state->unk_74, 1);
-//             state->unk_74 = NULL;
-//         }
-//         state->unk_68 = heap_malloc((u16) descriptor->vtxCount * 0x10);
-//         state->unk_6C = heap_malloc((u16) descriptor->vtxCount * 0x10);
-//         state->unk_70 = heap_malloc((u16) descriptor->gfxCount * 8);
-//         state->unk_74 = heap_malloc((u16) descriptor->gfxCount * 8);
-//         temp_s1_2 = descriptor->gfx + startAddr;
-//         temp_s0 = &temp_s1_2[descriptor->gfxCount];
-//         dma_copy(temp_s1_2, &temp_s1_2[descriptor->gfxCount], state->unk_70);
-//         dma_copy(temp_s1_2, &temp_s1_2[descriptor->gfxCount], state->unk_74);
-
-//         do {
-//             gfxPos = (u32 *)state->unk_70[0];
-//             do {
-//                 gfxOp = *gfxPos;
-//                 if (gfxOp >> 0x18 == 1) {
-//                     gfxPos[1] = (u32)(state->unk_68 + ((s32)(gfxPos[1] - (s32)descriptor->vtx) / 3) * 4);
-//                 }
-//                 gfxPos = gfxPos + 2;
-//             } while (gfxOp >> 0x18 != 0xdf);
-
-//             effect = ((s32)effect) + 1;
-//         } while ((s32)effect < (s32)&state->firstVtxIdx);
-//     }
-// }
+#endif
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013C3F0);
 
@@ -616,7 +618,89 @@ void func_8013EE48(FoldState* state) {
     state->unk_3C[0][2] = 30.0f;
 }
 
+// Float stuff
+#ifdef NON_MATCHING
+void func_8013EE68(FoldState* state) {
+    Vtx* temp_s0;
+    Vtx* temp_s0_2;
+    Vtx* temp_s0_3;
+    f32 temp_f0_7;
+    f32 temp_f20;
+    f32 temp_f20_2;
+    f32 temp_f20_3;
+    f32 temp_f22;
+    f32 temp_f24;
+    f32 temp_fblah;
+    f32 temp_f2;
+    s32 temp_s5;
+    f32 phi_f8;
+    f32 phi_f6;
+    f32 phi_f4;
+    s32 phi_s3;
+    s32 phi_s4;
+    s32 i;
+
+    phi_f8 = (f32) gGameStatusPtr->frameCounter / 10.3;
+    while (phi_f8 > 360.0) {
+        phi_f8 -= 360.0;
+    }
+
+    phi_f6 = (f32) (gGameStatusPtr->frameCounter + 40) / 11.2;
+    while (phi_f6 > 360.0) {
+        phi_f6 -= 360.0;
+    }
+
+    phi_f4 = (f32) (gGameStatusPtr->frameCounter + 25) / 10.8;
+    while (phi_f4 > 360.0) {
+        phi_f4 -= 360.0;
+    }
+
+    state->unk_3C[0][0] = phi_f8;
+    state->unk_3C[0][1] = phi_f6;
+    state->unk_3C[0][2] = phi_f4;
+
+    if (state->unk_3C[0][0] >= 360.0) {
+        state->unk_3C[0][0] -= 360.0;
+    }
+
+    if (state->unk_3C[0][1] >= 360.0) {
+        state->unk_3C[0][1] -= 360.0;
+    }
+
+    if (state->unk_3C[0][2] >= 360.0) {
+        state->unk_3C[0][2] -= 360.0;
+    }
+
+    phi_s4 = 0;
+    phi_s3 = 0;
+    temp_s5 = (state->lastVtxIdx - state->firstVtxIdx) - state->subdivX;
+    for (i = 0; i < temp_s5; i++) {
+        temp_f2 = phi_s3;
+        temp_f0_7 = phi_s4 * 180;
+
+        temp_fblah = state->unk_3C[0][0] + temp_f2 + temp_f0_7;
+        temp_f22 = state->unk_3C[0][1] + temp_f2 + temp_f0_7;
+        temp_f24 = state->unk_3C[0][2] + temp_f2 + temp_f0_7;
+
+        temp_s0 = &fold_vtxBuf[state->firstVtxIdx + i];
+        temp_f20 = temp_s0->v.ob[0];
+        temp_s0->v.ob[0] = (temp_f20 + (sin_rad(temp_fblah) * state->unk_1C[0][0]));
+        temp_s0_2 = &fold_vtxBuf[state->firstVtxIdx + i];
+        temp_f20_2 = temp_s0_2->v.ob[1];
+        temp_s0_2->v.ob[1] = (temp_f20_2 + (sin_rad(temp_f22) * state->unk_1C[0][1]));
+        temp_s0_3 = &fold_vtxBuf[state->firstVtxIdx + i];
+        temp_f20_3 = temp_s0_3->v.ob[2];
+        temp_s0_3->v.ob[2] = (temp_f20_3 + (sin_rad(temp_f24) * state->unk_1C[0][2]));
+        phi_s3 += 45;
+        if ((i % (s32) (state->subdivX + 1)) == 0) {
+            phi_s3 = 0;
+            phi_s4 = !phi_s4;
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013EE68);
+#endif
 
 void func_8013F1F8(FoldState* state) {
     f32 alpha = (f32)fold_currentImage->gfxOtherModeD / 255.0;
