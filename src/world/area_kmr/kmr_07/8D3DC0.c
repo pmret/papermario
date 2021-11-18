@@ -37,17 +37,4 @@ ApiStatus func_80240A6C_8D482C(Evt* script, s32 isInitialCall) {
 }
 #else
 INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_80240A6C_8D482C);
-/*
-ApiStatus N(func_80240A6C_8D482C)(void) {
-    Entity* entity = get_entity_by_index(evt_get_variable(NULL, 0xFD050F80));
-
-    if (entity == NULL) {
-        return ApiStatus_BLOCK;
-    }
-
-    play_model_animation(entity->virtualModelIndex, &D_000001E4);
-
-    return ApiStatus_DONE2;
-}
-*/
 #endif

@@ -7,78 +7,12 @@
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_8024114C_D5113C);
-/*
-ApiStatus N(func_8024114C_D5113C)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    if (isInitialCall) {
-        N(D_80242ACC_D52ABC) = FALSE;
-    }
-
-    if (N(D_80242ACC_D52ABC)) {
-        N(D_80242ACC_D52ABC) = FALSE;
-        evt_set_variable(script, *args, N(D_80242AD0_D52AC0));
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
-*/
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802411A0_D51190);
-/*
-ApiStatus N(func_802411A0_D51190)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    N(D_80242AD0_D52AC0) = evt_get_variable(script, *args);
-    N(D_80242ACC_D52ABC) = TRUE;
-    return ApiStatus_DONE2;
-}
-*/
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802411D8_D511C8);
-/*
-ApiStatus N(func_802411D8_D511C8)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_80244A20)[i] = ptr[i];
-        }
-        N(D_80244A20)[i] = 0;
-    } else {
-        for (i = 0; i < 0x70; i++) {
-            N(D_80244A20)[i] = i + 16;
-            N(D_80244A20)[112] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
-*/
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241274_D51264);
-/*
-ApiStatus N(func_80241274_D51264)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
-    s32 i;
-
-    if (ptr != NULL) {
-        for (i = 0; ptr[i] != 0; i++) {
-            N(D_80244A20)[i] = ptr[i];
-        }
-        N(D_80244A20)[i] = 0;
-    } else {
-        for (i = 0; i < 0x70; i++) {
-            N(D_80244A20)[i] = i + 16;
-            N(D_80244A20)[112] = 0;
-        }
-    }
-    return ApiStatus_DONE2;
-}
-*/
 
 #include "world/common/SetEntityPositionF.inc.c"
 

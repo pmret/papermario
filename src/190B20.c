@@ -2070,29 +2070,32 @@ void remove_player_buffs(s32 buffs) {
 
 INCLUDE_ASM(s32, "190B20", btl_update_ko_status);
 
+#ifdef NON_EQUIVALENT
+extern s32 D_80293970;
+
+void btl_appendGfx_prim_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, s16 arg7) {
+    gDPPipeSync(gMasterGfxPos++);
+    gSPDisplayList(gMasterGfxPos++, &D_80293970);
+
+    if ((arg3 & 0xFF) == 0xFF) {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
+    } else {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+    }
+
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, arg0, arg1, arg2, arg3);
+    gDPFillRectangle(gMasterGfxPos++, arg4, arg5, arg6, arg7);
+    gDPPipeSync(gMasterGfxPos++);
+
+    gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+    gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+}
+#else
 void btl_appendGfx_prim_quad(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
 INCLUDE_ASM(s32, "190B20", btl_appendGfx_prim_quad, u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
-// extern s32 D_80293970;
-
-// void btl_appendGfx_prim_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, s16 arg7) {
-//     gDPPipeSync(gMasterGfxPos++);
-//     gSPDisplayList(gMasterGfxPos++, &D_80293970);
-
-//     if ((arg3 & 0xFF) == 0xFF) {
-//         gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-//         gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
-//     } else {
-//         gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-//         gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-//     }
-
-//     gDPSetPrimColor(gMasterGfxPos++, 0, 0, arg0, arg1, arg2, arg3);
-//     gDPFillRectangle(gMasterGfxPos++, arg4, arg5, arg6, arg7);
-//     gDPPipeSync(gMasterGfxPos++);
-
-//     gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
-//     gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
-// }
+#endif
 
 void btl_draw_prim_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
     u16 new_var = arg4 + arg6;
