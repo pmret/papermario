@@ -7,7 +7,7 @@
 #include "world/common/GetEntityPosition.inc.c"
 
 // Can't get this to match because the const array above is in "discarded section .data"
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 ApiStatus func_80240BE8_B45358(Evt* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(script->varTable[10]);
 
