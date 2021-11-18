@@ -1069,7 +1069,6 @@ s32 bActorMessages[] = {
 
 s32 D_802838F8 = 0;
 
-//
 extern Bytecode D_80293820[];
 
 void create_target_list(Actor* actor, s32 arg1);
@@ -1155,7 +1154,7 @@ void func_802634B8(void) {
         battleStatus->submenuMoves[i] = 0;
     }
 
-    moveCount = 1;    
+    moveCount = 1;
     battleStatus->submenuMoves[0] = playerData->bootsLevel + 26;
     battleStatus->submenuIcons[0] = 0x155;
     do {
@@ -1232,7 +1231,7 @@ void func_802636E4(void) {
         battleStatus->submenuMoves[i] = 0;
     }
 
-    moveCount = 1;    
+    moveCount = 1;
     battleStatus->submenuMoves[0] = playerData->hammerLevel + 3;
     battleStatus->submenuIcons[0] = 0x155;
     do {
