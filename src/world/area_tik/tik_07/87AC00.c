@@ -15,17 +15,6 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_802415A0_87B180);
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80242044_87BC24);
-/*
-void N(func_80242044_87BC24)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->pos.y += N(D_80244CB0_87E890)[npc->duration++];
-    if (npc->duration >= 5) {
-        script->functionTemp[0] = 12;
-    }
-}
-*/
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
