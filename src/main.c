@@ -105,7 +105,7 @@ void gfxRetrace_Callback(s32 arg0) {
 INCLUDE_ASM(s32, "main", gfxRetrace_Callback);
 #endif
 
-//gfx stuff
+// the loops & gSPTextureRectangle
 #ifdef NON_EQUIVALENT
 void gfx_task_main(void) {
     u16 t;
@@ -139,15 +139,8 @@ void gfx_task_main(void) {
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, 0, 0, 0, TEXEL0, 0, 0, 0, 0, 0, 0, 0, TEXEL0);
     gDPSetAlphaCompare(gMasterGfxPos++, G_AC_THRESHOLD);
     gDPSetBlendColor(gMasterGfxPos++, 0, 0, 0, 127);
-    gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_I, G_IM_SIZ_8b, 64, &D_80073E10);
-    gDPSetTile(gMasterGfxPos++, G_IM_FMT_I, G_IM_SIZ_8b, 8, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-               G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-    gDPLoadSync(gMasterGfxPos++);
-    gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 254, 28);
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetTile(gMasterGfxPos++, G_IM_FMT_I, G_IM_SIZ_4b, 8, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-               G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 508, 28);
+    gDPLoadTextureTile_4b(gMasterGfxPos++, &D_80073E10, G_IM_FMT_I, 128, 0, 0, 0, 127, 7, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                          G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     for (i = 0; i < 20; i++) {
         temp_s3 = ((i * 8) + 168) * 4;

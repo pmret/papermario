@@ -80,8 +80,8 @@ glabel func_8013E2F0
 /* D4B1C 8013E41C AD020000 */  sw        $v0, ($t0)
 /* D4B20 8013E420 24E20028 */  addiu     $v0, $a3, 0x28
 /* D4B24 8013E424 AD020000 */  sw        $v0, ($t0)
-/* D4B28 8013E428 3C038015 */  lui       $v1, %hi(D_8014EE10)
-/* D4B2C 8013E42C 8C63EE10 */  lw        $v1, %lo(D_8014EE10)($v1)
+/* D4B28 8013E428 3C038015 */  lui       $v1, %hi(fold_currentImage)
+/* D4B2C 8013E42C 8C63EE10 */  lw        $v1, %lo(fold_currentImage)($v1)
 /* D4B30 8013E430 24E20030 */  addiu     $v0, $a3, 0x30
 /* D4B34 8013E434 AD020000 */  sw        $v0, ($t0)
 /* D4B38 8013E438 8C640004 */  lw        $a0, 4($v1)
@@ -142,8 +142,8 @@ glabel func_8013E2F0
 /* D4C10 8013E510 00A0202D */  daddu     $a0, $a1, $zero
 /* D4C14 8013E514 24A50008 */  addiu     $a1, $a1, 8
 /* D4C18 8013E518 ACE50000 */  sw        $a1, ($a3)
-/* D4C1C 8013E51C 3C068015 */  lui       $a2, %hi(D_8014EE10)
-/* D4C20 8013E520 8CC6EE10 */  lw        $a2, %lo(D_8014EE10)($a2)
+/* D4C1C 8013E51C 3C068015 */  lui       $a2, %hi(fold_currentImage)
+/* D4C20 8013E520 8CC6EE10 */  lw        $a2, %lo(fold_currentImage)($a2)
 /* D4C24 8013E524 24A20008 */  addiu     $v0, $a1, 8
 /* D4C28 8013E528 ACE20000 */  sw        $v0, ($a3)
 /* D4C2C 8013E52C 94C20008 */  lhu       $v0, 8($a2)
@@ -265,8 +265,8 @@ glabel func_8013E2F0
 .L8013E6F4:
 /* D4DF4 8013E6F4 240EFFFF */  addiu     $t6, $zero, -1
 .L8013E6F8:
-/* D4DF8 8013E6F8 3C028015 */  lui       $v0, %hi(D_8014EE10)
-/* D4DFC 8013E6FC 8C42EE10 */  lw        $v0, %lo(D_8014EE10)($v0)
+/* D4DF8 8013E6F8 3C028015 */  lui       $v0, %hi(fold_currentImage)
+/* D4DFC 8013E6FC 8C42EE10 */  lw        $v0, %lo(fold_currentImage)($v0)
 /* D4E00 8013E700 0280202D */  daddu     $a0, $s4, $zero
 /* D4E04 8013E704 94470008 */  lhu       $a3, 8($v0)
 /* D4E08 8013E708 9442000A */  lhu       $v0, 0xa($v0)
@@ -293,8 +293,8 @@ glabel func_8013E2F0
 /* D4E54 8013E754 00A0202D */  daddu     $a0, $a1, $zero
 /* D4E58 8013E758 24A50008 */  addiu     $a1, $a1, 8
 /* D4E5C 8013E75C ACE50000 */  sw        $a1, ($a3)
-/* D4E60 8013E760 3C068015 */  lui       $a2, %hi(D_8014EE10)
-/* D4E64 8013E764 8CC6EE10 */  lw        $a2, %lo(D_8014EE10)($a2)
+/* D4E60 8013E760 3C068015 */  lui       $a2, %hi(fold_currentImage)
+/* D4E64 8013E764 8CC6EE10 */  lw        $a2, %lo(fold_currentImage)($a2)
 /* D4E68 8013E768 24A20008 */  addiu     $v0, $a1, 8
 /* D4E6C 8013E76C ACE20000 */  sw        $v0, ($a3)
 /* D4E70 8013E770 94C20008 */  lhu       $v0, 8($a2)

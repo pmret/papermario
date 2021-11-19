@@ -377,7 +377,7 @@ void create_part_shadow(s32 actorID, s32 partIndex);
 void remove_part_shadow(s32 actorID, s32 partIndex);
 void create_part_shadow_by_ref(s32 arg0, ActorPart* part);
 
-s32 func_80266D6C(ActorPart*, s32);
+void func_80266D6C(ActorPart*, s32);
 char* int_to_string(s32, char*, s32);
 
 Evt* get_script_by_index(s32 index);

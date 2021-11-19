@@ -120,7 +120,7 @@ glabel func_802B71E8_E202F8
 /* E204C4 802B73B4 24020440 */  addiu     $v0, $zero, 0x440
 /* E204C8 802B73B8 AFA00010 */  sw        $zero, 0x10($sp)
 /* E204CC 802B73BC AFA00014 */  sw        $zero, 0x14($sp)
-/* E204D0 802B73C0 0C04EAA7 */  jal       func_8013AA9C
+/* E204D0 802B73C0 0C04EAA7 */  jal       fold_update
 /* E204D4 802B73C4 AFA20018 */   sw       $v0, 0x18($sp)
 /* E204D8 802B73C8 0000202D */  daddu     $a0, $zero, $zero
 /* E204DC 802B73CC 8E820000 */  lw        $v0, ($s4)
@@ -131,12 +131,12 @@ glabel func_802B71E8_E202F8
 /* E204F0 802B73E0 24020448 */  addiu     $v0, $zero, 0x448
 /* E204F4 802B73E4 AFA20018 */  sw        $v0, 0x18($sp)
 /* E204F8 802B73E8 00C0382D */  daddu     $a3, $a2, $zero
-/* E204FC 802B73EC 0C04EAA7 */  jal       func_8013AA9C
+/* E204FC 802B73EC 0C04EAA7 */  jal       fold_update
 /* E20500 802B73F0 AFA60010 */   sw       $a2, 0x10($sp)
 /* E20504 802B73F4 0000202D */  daddu     $a0, $zero, $zero
 /* E20508 802B73F8 27A50020 */  addiu     $a1, $sp, 0x20
 /* E2050C 802B73FC 0080302D */  daddu     $a2, $a0, $zero
-/* E20510 802B7400 0C04EBDC */  jal       func_8013AF70
+/* E20510 802B7400 0C04EBDC */  jal       fold_appendGfx_component
 /* E20514 802B7404 0220382D */   daddu    $a3, $s1, $zero
 /* E20518 802B7408 3C04D838 */  lui       $a0, 0xd838
 /* E2051C 802B740C 8E420000 */  lw        $v0, ($s2)

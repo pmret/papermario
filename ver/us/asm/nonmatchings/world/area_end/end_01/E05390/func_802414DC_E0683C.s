@@ -38,7 +38,7 @@ glabel func_802414DC_E0683C
 /* E068C0 80241560 00C0382D */  daddu     $a3, $a2, $zero
 /* E068C4 80241564 00C0A82D */  daddu     $s5, $a2, $zero
 /* E068C8 80241568 AFB50010 */  sw        $s5, 0x10($sp)
-/* E068CC 8024156C 0C04EAA7 */  jal       func_8013AA9C
+/* E068CC 8024156C 0C04EAA7 */  jal       fold_update
 /* E068D0 80241570 AFA00018 */   sw       $zero, 0x18($sp)
 /* E068D4 80241574 3C013F80 */  lui       $at, 0x3f80
 /* E068D8 80241578 4481D000 */  mtc1      $at, $f26
@@ -143,7 +143,7 @@ glabel func_802414DC_E0683C
 /* E06A64 80241704 46200007 */  neg.d     $f0, $f0
 /* E06A68 80241708 4620008D */  trunc.w.d $f2, $f0
 /* E06A6C 8024170C 44021000 */  mfc1      $v0, $f2
-/* E06A70 80241710 0C04EBDC */  jal       func_8013AF70
+/* E06A70 80241710 0C04EBDC */  jal       fold_appendGfx_component
 /* E06A74 80241714 A7A2002C */   sh       $v0, 0x2c($sp)
 /* E06A78 80241718 3C04D838 */  lui       $a0, 0xd838
 /* E06A7C 8024171C 8E020000 */  lw        $v0, ($s0)

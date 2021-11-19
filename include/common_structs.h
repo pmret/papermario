@@ -827,7 +827,7 @@ typedef struct CollisionData {
 
 typedef struct ModelGroupData {
     /* 0x00 */ UNK_PTR transformMatrix;
-    /* 0x04 */ UNK_PTR lightingGroup;
+    /* 0x04 */ Lightsn* lightingGroup;
     /* 0x08 */ s32 numLights;
     /* 0x0C */ s32 numChildren;
     /* 0x10 */ struct ModelNode** childList;
@@ -1439,9 +1439,11 @@ typedef struct DecorationUnk {
 } DecorationUnk; // size = 0x20
 
 typedef struct DecorationTable {
-    /* 0x000 */ char unk_00[1729];
+    /* 0x000 */ char unk_00[0x6C0];
+    /* 0x6C0 */ s8 unk_6C0;
     /* 0x6C1 */ s8 unk_6C1;
-    /* 0x6C2 */ char unk_6C2[11];
+    /* 0x6C2 */ s8 unk_6C2;
+    /* 0x6C3 */ char unk_6C3[10];
     /* 0x6CD */ s8 unk_6CD;
     /* 0x6CE */ char unk_6CE[6];
     /* 0x6D4 */ s32* unk_6D4;
@@ -1510,17 +1512,17 @@ typedef struct StaticPriceItem {
 
 typedef struct PopupMenu {
     /* 0x000 */ s32* ptrIcon[32];
-    /* 0x080 */ char unk_80[4];
+    /* 0x080 */ char unk_80[0x4];
     /* 0x084 */ s32 nameMsg[32];
-    /* 0x104 */ char unk_104[4];
+    /* 0x104 */ char unk_104[0x4];
     /* 0x108 */ s32 userIndex[32]; // used to map menu order to a user-ID for each item
-    /* 0x188 */ char unk_188[4];
+    /* 0x188 */ char unk_188[0x4];
     /* 0x18C */ s32 enabled[32];
-    /* 0x20C */ char unk_20C[4];
+    /* 0x20C */ char unk_20C[0x4];
     /* 0x210 */ s32 value[32]; // sale price, etc
-    /* 0x290 */ char unk_290[4];
+    /* 0x290 */ char unk_290[0x4];
     /* 0x294 */ s32 descMsg[32];
-    /* 0x314 */ char unk_314[4];
+    /* 0x314 */ char unk_314[0x4];
     /* 0x318 */ s32 popupType; // C = keys
     /* 0x31C */ s32 unk_31C;
     /* 0x320 */ s32 unk_320;
@@ -1534,7 +1536,7 @@ typedef struct Shop {
     /* 0x000 */ s16 flags;
     /* 0x002 */ s16 numItems;
     /* 0x004 */ s16 numSpecialPrices;
-    /* 0x006 */ char unk_06[2];
+    /* 0x006 */ char unk_06[0x2];
     /* 0x008 */ s32 currentItemSlot;
     /* 0x00C */ s32 selectedStoreItemSlot;
     /* 0x010 */ ShopOwner* owner;
@@ -1696,7 +1698,9 @@ typedef struct Actor {
     /* 0x1FC */ s16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
-    /* 0x204 */ char unk_204[3];
+    /* 0x204 */ s8 unk_204;
+    /* 0x205 */ char unk_205[0x1];
+    /* 0x206 */ s8 unk_206;
     /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
@@ -1736,22 +1740,6 @@ typedef struct Actor {
     /* 0x438 */ s32 x[2]; /* ??? see FUN_80253974 */
     /* 0x440 */ struct HudElement* ptrDefuffIcon;
 } Actor; // size = 0x444
-
-typedef struct TileDescriptor {
-    /* 0x00 */ s8 name[32];
-    /* 0x20 */ s16 auxW;
-    /* 0x22 */ s16 mainW;
-    /* 0x24 */ s16 auxH;
-    /* 0x26 */ s16 mainH;
-    /* 0x28 */ char unk_28;
-    /* 0x29 */ u8 extraTiles;
-    /* 0x2A */ u8 colorCombine;
-    /* 0x2B */ u8 fmt;
-    /* 0x2C */ u8 bitDepth;
-    /* 0x2D */ u8 wrapH;
-    /* 0x2E */ u8 wrapV;
-    /* 0x2F */ u8 filtering;
-} TileDescriptor; // size = 0x30
 
 typedef struct BackgroundHeader {
     /* 0x00 */ void* raster;
@@ -2104,7 +2092,8 @@ typedef struct struct802E4B10 {
 // END ENTITY-SPECIFIC STRUCTS
 
 typedef struct {
-    /* 0x00000 */ LookAt lookAt[2];
+    /* 0x00000 */ LookAt lookAt;
+    /* 0x00020 */ char unk_20[0x10];
     /* 0x00030 */ Matrix4s camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ Gfx mainGfx[0x2080];
     /* 0x10630 */ Gfx backgroundGfx[0x200]; // used by gfx_task_background

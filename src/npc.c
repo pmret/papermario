@@ -1007,7 +1007,7 @@ void npc_update_decoration_bowser_aura(Npc* npc, s32 idx) {
 }
 
 void npc_remove_decoration_bowser_aura(Npc* npc, s32 idx) {
-    npc->decorations[idx]->data->unk_2C = 5;
+    ((EffectInstanceData*)npc->decorations[idx]->data)->unk_2C = 5;
 }
 
 void npc_update_decoration_sweat(Npc* npc, s32 idx) {

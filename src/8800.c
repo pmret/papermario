@@ -45,7 +45,7 @@ void update_cameras(void) {
                     break;
             }
 
-            guLookAtReflectF(cam->viewMtxPlayer, &gDisplayContext->lookAt[0], cam->lookAt_eye.x, cam->lookAt_eye.y, cam->lookAt_eye.z, cam->lookAt_obj.x, cam->lookAt_obj.y, cam->lookAt_obj.z, 0, 1.0f, 0);
+            guLookAtReflectF(cam->viewMtxPlayer, &gDisplayContext->lookAt, cam->lookAt_eye.x, cam->lookAt_eye.y, cam->lookAt_eye.z, cam->lookAt_obj.x, cam->lookAt_obj.y, cam->lookAt_obj.z, 0, 1.0f, 0);
 
             if (!(cam->flags & CAM_FLAG_ORTHO)) {
                 if (cam->flags & CAM_FLAG_LEAD_PLAYER) {

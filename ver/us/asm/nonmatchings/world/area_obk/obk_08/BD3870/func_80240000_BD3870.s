@@ -226,7 +226,7 @@ glabel func_80240000_BD3870
 /* BD3BE4 80240374 00021023 */  negu      $v0, $v0
 /* BD3BE8 80240378 A7A20024 */  sh        $v0, 0x24($sp)
 /* BD3BEC 8024037C 8E440000 */  lw        $a0, ($s2)
-/* BD3BF0 80240380 0C04EBDC */  jal       func_8013AF70
+/* BD3BF0 80240380 0C04EBDC */  jal       fold_appendGfx_component
 /* BD3BF4 80240384 0260382D */   daddu    $a3, $s3, $zero
 /* BD3BF8 80240388 3C04D838 */  lui       $a0, 0xd838
 /* BD3BFC 8024038C 8E220000 */  lw        $v0, ($s1)

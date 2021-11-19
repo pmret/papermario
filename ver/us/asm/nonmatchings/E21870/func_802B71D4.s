@@ -199,7 +199,7 @@ glabel func_802B71D4
 /* E21D04 802B7494 2402002E */  addiu     $v0, $zero, 0x2e
 /* E21D08 802B7498 A7A200A6 */  sh        $v0, 0xa6($sp)
 /* E21D0C 802B749C 240200FF */  addiu     $v0, $zero, 0xff
-/* E21D10 802B74A0 0C04EBDC */  jal       func_8013AF70
+/* E21D10 802B74A0 0C04EBDC */  jal       fold_appendGfx_component
 /* E21D14 802B74A4 A3A200A8 */   sb       $v0, 0xa8($sp)
 /* E21D18 802B74A8 3C05D838 */  lui       $a1, 0xd838
 /* E21D1C 802B74AC 3C03800A */  lui       $v1, %hi(gMasterGfxPos)

@@ -236,7 +236,7 @@ glabel spr_appendGfx_component
 /* FFD54 802DCC64 A7A300AC */  sh        $v1, 0xac($sp)
 /* FFD58 802DCC68 A7B200AE */  sh        $s2, 0xae($sp)
 /* FFD5C 802DCC6C A3B500B0 */  sb        $s5, 0xb0($sp)
-/* FFD60 802DCC70 0C04EBDC */  jal       func_8013AF70
+/* FFD60 802DCC70 0C04EBDC */  jal       fold_appendGfx_component
 /* FFD64 802DCC74 AFA200A0 */   sw       $v0, 0xa0($sp)
 /* FFD68 802DCC78 24030001 */  addiu     $v1, $zero, 1
 /* FFD6C 802DCC7C 14430006 */  bne       $v0, $v1, .L802DCC98

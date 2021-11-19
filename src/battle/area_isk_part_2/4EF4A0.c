@@ -28,8 +28,8 @@ ApiStatus func_8021875C_4EFBFC(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     EffectInstance* effect = playFX_4C(2, var1, 150.0f, var3, var2, -0.5f, -0.9f, 0.5f, 60);
 
-    effect->data->unk_30 = 0;
-    effect->data->unk_38 = 0;
-    effect->data->unk_34 = 0;
+    ((EffectInstanceData*)effect->data)->unk_30 = 0;
+    ((EffectInstanceData*)effect->data)->unk_38 = 0;
+    ((EffectInstanceData*)effect->data)->unk_34 = 0;
     return ApiStatus_DONE2;
 }

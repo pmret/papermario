@@ -1069,6 +1069,8 @@ s32 bActorMessages[] = {
 
 s32 D_802838F8 = 0;
 
+extern Bytecode D_80293820[];
+
 void create_target_list(Actor* actor, s32 arg1);
 INCLUDE_ASM(s32, "190B20", create_target_list);
 
@@ -1082,9 +1084,13 @@ void enemy_create_target_list(Actor* actor) {
 
 INCLUDE_ASM(s32, "190B20", func_80263064);
 
-INCLUDE_ASM(s32, "190B20", func_80263230);
+void func_80263230(s32 arg0, s32 arg1) {
+    func_80263064(arg0, arg1, 0);
+}
 
-INCLUDE_ASM(s32, "190B20", func_8026324C);
+void func_8026324C(s32 arg0, s32 arg1) {
+    func_80263064(arg0, arg1, 1);
+}
 
 INCLUDE_ASM(s32, "190B20", func_80263268);
 
@@ -1148,7 +1154,7 @@ void func_802634B8(void) {
         battleStatus->submenuMoves[i] = 0;
     }
 
-    moveCount = 1;    
+    moveCount = 1;
     battleStatus->submenuMoves[0] = playerData->bootsLevel + 26;
     battleStatus->submenuIcons[0] = 0x155;
     do {
@@ -1225,7 +1231,7 @@ void func_802636E4(void) {
         battleStatus->submenuMoves[i] = 0;
     }
 
-    moveCount = 1;    
+    moveCount = 1;
     battleStatus->submenuMoves[0] = playerData->hammerLevel + 3;
     battleStatus->submenuIcons[0] = 0x155;
     do {
@@ -1396,24 +1402,26 @@ void reset_actor_turn_info(void) {
         if (actor != NULL) {
             actor->hpChangeCounter = 0;
             actor->damageCounter = 0;
-            actor->unk_204[0] = 0;
+            actor->unk_204 = 0;
         }
 
     }
     actor = battleStatus->playerActor;
     actor->hpChangeCounter = 0;
     actor->damageCounter = 0;
-    actor->unk_204[0] = 0;
+    actor->unk_204 = 0;
 
     actor = battleStatus->partnerActor;
     if (actor != NULL) {
         actor->hpChangeCounter = 0;
         actor->damageCounter = 0;
-        actor->unk_204[0] = 0;
+        actor->unk_204 = 0;
     }
 }
 
-INCLUDE_ASM(s32, "190B20", func_80263CC4);
+void func_80263CC4(s32 arg0) {
+    start_script(D_80293820, 0xA, 0)->varTable[0] = arg0;
+}
 
 INCLUDE_ASM(s32, "190B20", set_animation);
 
@@ -1785,13 +1793,21 @@ INCLUDE_ASM(void, "190B20", func_802666E4, Actor* actor, f32 arg1, f32 arg2, f32
 
 INCLUDE_ASM(void, "190B20", func_802667F0, s32 arg0, Actor* arg1, f32 arg2, f32 arg3, f32 arg4);
 
-INCLUDE_ASM(void, "190B20", func_80266970, Actor* target);
+void func_80266970(Actor* target) {
+    target->unk_204 = 0;
+}
 
 INCLUDE_ASM(s32, "190B20", func_80266978);
 
-INCLUDE_ASM(s32, "190B20", func_80266ADC);
+void func_80266ADC(Actor* target) {
+    target->unk_206 = -1;
+    target->flags |= 0x80000;
+}
 
-INCLUDE_ASM(s32, "190B20", func_80266AF8);
+void func_80266AF8(Actor* target) {
+    target->unk_206 = 0;
+    target->flags &= ~0x80000;
+}
 
 INCLUDE_ASM(s32, "190B20", func_80266B14);
 
@@ -1814,22 +1830,65 @@ s32 inflict_status_set_duration(Actor* actor, s32 statusTypeKey, s32 statusDurat
     return 0;
 }
 
+void func_80266D6C(ActorPart* part, s32 arg1) {
+    if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
+        DecorationTable* decorationTable = part->decorationTable;
 
-INCLUDE_ASM(s32, "190B20", func_80266D6C);
+        if (decorationTable->unk_6C0 != arg1) {
+            decorationTable->unk_6C0 = arg1;
+            decorationTable->unk_6C2 = 0;
+            decorationTable->unk_6C1 = 1;
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", func_80266DAC);
 
-INCLUDE_ASM(s32, "190B20", func_80266E14);
+void func_80266E14(ActorPart* part) {
+    if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
+        part->decorationTable->unk_6C0 = 0;
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", func_80266E40);
 
-INCLUDE_ASM(s32, "190B20", func_80266EA8);
+void func_80266EA8(ActorPart* part, s32 arg1) {
+    if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
+        DecorationTable* decorationTable = part->decorationTable;
+
+        if (decorationTable->unk_750 != arg1) {
+            decorationTable->unk_750 = arg1;
+            decorationTable->unk_752 = 0;
+            decorationTable->unk_751 = 1;
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", func_80266EE8);
 
-INCLUDE_ASM(s32, "190B20", func_80266F60);
+void func_80266F60(ActorPart* part) {
+    if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
+        part->decorationTable->unk_750 = 0;
+    }
+}
 
-INCLUDE_ASM(s32, "190B20", func_80266F8C);
+void func_80266F8C(Actor* actor) {
+    ActorPart* actorPart = &actor->partsTable[0];
+
+    while (actorPart != NULL) {
+        DecorationTable* decorationTable = actorPart->decorationTable;
+
+        do {
+            if (!(actorPart->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
+                actorPart->idleAnimations != NULL &&
+                !(actorPart->flags & ACTOR_PART_FLAG_2))
+            {
+                decorationTable->unk_750 = 0;
+            }
+        } while (0); // todo improve match
+        actorPart = actorPart->nextPart;
+    }
+}
 
 void func_80266FD8(ActorPart* part, s32 arg1) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
@@ -1847,17 +1906,35 @@ void func_80267018(Actor* actor, s32 arg1) {
     ActorPart* actorPart = &actor->partsTable[0];
 
     while (actorPart != NULL) {
-        if (!(actorPart->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) && actorPart->decorationTable != NULL && !(actorPart->flags & ACTOR_PART_FLAG_2) &&
-            actorPart->idleAnimations != NULL) {
+        if (!(actorPart->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) &&
+            actorPart->decorationTable != NULL && !(actorPart->flags & ACTOR_PART_FLAG_2) &&
+            actorPart->idleAnimations != NULL)
+        {
             func_80266FD8(actorPart, arg1);
         }
         actorPart = actorPart->nextPart;
     }
 }
 
-INCLUDE_ASM(s32, "190B20", func_8026709C);
+void func_8026709C(ActorPart* part) {
+    if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
+        part->decorationTable->unk_764 = 0;
+    }
+}
 
-INCLUDE_ASM(s32, "190B20", func_802670C8);
+void func_802670C8(Actor* actor) {
+    ActorPart* partIt;
+
+   for (partIt = actor->partsTable; partIt != NULL; partIt = partIt->nextPart) {
+        DecorationTable* decorationTable = partIt->decorationTable;
+
+        do {
+            if (!(partIt->flags & 0x100001) && (partIt->idleAnimations != NULL) && !(partIt->flags & 2)) {
+                decorationTable->unk_764 = 0;
+            }
+        } while (0); // TODO make match better
+    }
+}
 
 void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationType) {
     if ((part->idleAnimations) && !(part->flags & ACTOR_PART_FLAG_2)) {
@@ -1874,7 +1951,9 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationTyp
 void add_actor_decoration(Actor* actor, s32 decorationIndex, s32 decorationType) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if ((part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) == 0 && part->idleAnimations && !(part->flags & ACTOR_PART_FLAG_2)) {
+        if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) && part->idleAnimations &&
+            !(part->flags & ACTOR_PART_FLAG_2))
+        {
             add_part_decoration(part, decorationIndex, decorationType);
         }
     }
@@ -1887,7 +1966,9 @@ void remove_part_decoration(ActorPart* part, s32 decorationIndex) {
 void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if ((part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) == 0 && part->idleAnimations && !(part->flags & ACTOR_PART_FLAG_2)) {
+        if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) && part->idleAnimations &&
+            !(part->flags & ACTOR_PART_FLAG_2))
+        {
             remove_part_decoration(part, decorationIndex);
         }
     }

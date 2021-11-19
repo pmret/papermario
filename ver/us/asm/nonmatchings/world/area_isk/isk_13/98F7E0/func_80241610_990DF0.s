@@ -331,12 +331,12 @@ glabel func_80241610_990DF0
 /* 9912FC 80241B1C 8EE40004 */  lw        $a0, 4($s7)
 /* 991300 80241B20 4600218D */  trunc.w.s $f6, $f4
 /* 991304 80241B24 44073000 */  mfc1      $a3, $f6
-/* 991308 80241B28 0C04EAA7 */  jal       func_8013AA9C
+/* 991308 80241B28 0C04EAA7 */  jal       fold_update
 /* 99130C 80241B2C 24050008 */   addiu    $a1, $zero, 8
 /* 991310 80241B30 27A50020 */  addiu     $a1, $sp, 0x20
 /* 991314 80241B34 0000302D */  daddu     $a2, $zero, $zero
 /* 991318 80241B38 8EE40004 */  lw        $a0, 4($s7)
-/* 99131C 80241B3C 0C04EBDC */  jal       func_8013AF70
+/* 99131C 80241B3C 0C04EBDC */  jal       fold_appendGfx_component
 /* 991320 80241B40 27A70048 */   addiu    $a3, $sp, 0x48
 /* 991324 80241B44 3C05D838 */  lui       $a1, 0xd838
 /* 991328 80241B48 3C03800A */  lui       $v1, %hi(gMasterGfxPos)

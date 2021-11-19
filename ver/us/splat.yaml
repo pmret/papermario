@@ -2249,7 +2249,7 @@ segments:
     vram: 0xE0014000
     subsegments:
     - [0x32E490, c, effect_10]
-    - [0x32EC10, data]
+    - [0x32EC10]
   - [0x32EC50, bin] # effect 10,11 gfx
   - name: effect_11
     dir: effects
