@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_802435F0_ACE110
+dlabel D_802435F0_ACE110
 .double 0.3, 2.8165885703910132e+209
 
 .section .text

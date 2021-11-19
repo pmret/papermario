@@ -231,7 +231,7 @@ void bgm_set_target_volume(s16 volume) {
 }
 
 //Data loading shenanigans
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void bgm_update_volume(void) {
     s16* currentVolume;
     s16 compareVolume;

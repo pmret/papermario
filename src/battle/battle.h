@@ -339,7 +339,7 @@ typedef struct ActorSounds {
     /* 0x10 */ s32 jump;
     /* 0x14 */ s32 hurt;
     /* 0x18 */ s16 delay[2]; ///< Number of frames to wait between walk/fly sounds. Negative values are in distance.
-} ActorSounds; // size = 0x20
+} ActorSounds; // size = 0x1C
 
 typedef struct ActorOffsets {
     /* 0x00 */ Vec3b tattleCam;

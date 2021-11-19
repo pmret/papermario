@@ -41,7 +41,7 @@ ApiStatus func_802A15B4_795894(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 ApiStatus func_802A1628_795908(Evt* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
     s32 flags = targetActor->flags;

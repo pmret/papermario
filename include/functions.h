@@ -74,6 +74,9 @@ RenderTask* queue_render_task(RenderTask* task);
 
 void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 
+s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,
+                                s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity);
+
 // append gfx funcs
 void func_80257B28(s32);
 void func_8025595C(Actor*);
@@ -143,9 +146,9 @@ s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
 void peach_set_disguise_anim(s32);
 
-void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, s32 opacity,
+void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
               s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
-              s32 drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
+              void* drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
 s32 get_msg_width(s32 msgID, u16 charset);
 
 s32 partner_player_can_pause(void);
@@ -349,6 +352,8 @@ void sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32
 void sfx_play_sound_at_player(s32 soundID, s32 arg0);
 void sfx_play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID);
 s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
+void bgm_set_battle_song(s32, s32);
+void bgm_push_battle_song(void);
 void func_801497FC(s32 arg0);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
 
@@ -373,6 +378,7 @@ void remove_part_shadow(s32 actorID, s32 partIndex);
 void create_part_shadow_by_ref(s32 arg0, ActorPart* part);
 
 s32 func_80266D6C(ActorPart*, s32);
+char* int_to_string(s32, char*, s32);
 
 Evt* get_script_by_index(s32 index);
 
@@ -401,6 +407,25 @@ void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
 void func_80138D88(s32, s32, s32, s32, f32);
+
+void btl_cam_set_target_pos(f32, f32, f32);
+void deduct_current_move_fp(void);
+void load_partner_actor(void);
+void dispatch_event_partner(s32);
+void dispatch_event_player(s32);
+s32 btl_are_all_enemies_defeated(void);
+s32 btl_check_player_defeated(void);
+void btl_show_battle_message(s32, s32);
+void btl_update_ko_status(void);
+void reset_actor_turn_info(void);
+void reset_all_actor_sounds(Actor*);
+void decrement_status_menu_disabled(void);
+void increment_status_menu_disabled(void);
+void btl_delete_actor(Actor* actor);
+void remove_status_debuff(s16);
+s32 find_item(s32);
+
+void enable_background_wave(void);
 
 // State funcs
 void state_init_startup(void);

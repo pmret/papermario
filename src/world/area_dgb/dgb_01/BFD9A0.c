@@ -488,7 +488,7 @@ NpcAISettings N(npcAISettings_80244D24) = {
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // second npc_raycast_down_sides call
 void N(func_802402D0_BFDB50)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;

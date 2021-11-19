@@ -15,7 +15,7 @@ void nuBoot(void) {
     osStartThread(&D_800A4270);
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void boot_idle(void) {
     nuIdleFunc = NULL;
 

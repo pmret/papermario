@@ -3,10 +3,10 @@
 
 .section .rodata
 
-glabel D_8029D388
+dlabel D_8029D388
 .double 0.4
 
-glabel D_8029D390
+dlabel D_8029D390
 .double 0.7142857142857143
 
 .section .text

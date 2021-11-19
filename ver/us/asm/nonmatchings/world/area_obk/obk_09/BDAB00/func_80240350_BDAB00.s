@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_802429E8_BDD198
+dlabel D_802429E8_BDD198
 .ascii "party_resa\0\0omo_03\0\0\0\0\0\0"
 
 .section .text

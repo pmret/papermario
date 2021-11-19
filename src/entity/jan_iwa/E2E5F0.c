@@ -52,7 +52,7 @@ void func_802BC050_E2E980(Entity* entity) {
     }
 }
 
-#ifdef NON_MATCHING // play_model_animation weirdness
+#ifdef NON_EQUIVALENT // play_model_animation weirdness
 void func_802BC0B8_E2E9E8(Entity* entity) {
     play_model_animation(entity->virtualModelIndex, 0x60);
     disable_player_input();

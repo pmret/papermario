@@ -3,8 +3,8 @@
 
 .section .rodata
 
-glabel jtbl_8029CBE0
-.word L80248B54_177434, L80248BA4_177484, L80248C0C_1774EC, L80248C90_177570, L80248CAC_17758C, 0, 0, 0
+dlabel jtbl_8029CBE0
+.word .L80248B54_177434, .L80248BA4_177484, .L80248C0C_1774EC, .L80248C90_177570, .L80248CAC_17758C, 0, 0, 0
 
 .section .text
 
@@ -28,7 +28,7 @@ glabel btl_state_update_end_demo_battle
 /* 177428 80248B48 8C22CBE0 */  lw        $v0, %lo(jtbl_8029CBE0)($at)
 /* 17742C 80248B4C 00400008 */  jr        $v0
 /* 177430 80248B50 00000000 */   nop
-glabel L80248B54_177434
+.L80248B54_177434:
 /* 177434 80248B54 3C038028 */  lui       $v1, %hi(D_802809F6)
 /* 177438 80248B58 846309F6 */  lh        $v1, %lo(D_802809F6)($v1)
 /* 17743C 80248B5C 2402FFFF */  addiu     $v0, $zero, -1
@@ -51,7 +51,7 @@ glabel L80248B54_177434
 /* 177478 80248B98 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 /* 17747C 80248B9C 08092358 */  j         .L80248D60
 /* 177480 80248BA0 00000000 */   nop
-glabel L80248BA4_177484
+.L80248BA4_177484:
 /* 177484 80248BA4 3C038028 */  lui       $v1, %hi(D_802809F6)
 /* 177488 80248BA8 846309F6 */  lh        $v1, %lo(D_802809F6)($v1)
 /* 17748C 80248BAC 2402FFFF */  addiu     $v0, $zero, -1
@@ -81,7 +81,7 @@ glabel L80248BA4_177484
 /* 1774E0 80248C00 AC640000 */   sw       $a0, ($v1)
 /* 1774E4 80248C04 08092358 */  j         .L80248D60
 /* 1774E8 80248C08 00000000 */   nop
-glabel L80248C0C_1774EC
+.L80248C0C_1774EC:
 /* 1774EC 80248C0C 240200FF */  addiu     $v0, $zero, 0xff
 /* 1774F0 80248C10 3C04800E */  lui       $a0, %hi(gBattleStatus)
 /* 1774F4 80248C14 2484C070 */  addiu     $a0, $a0, %lo(gBattleStatus)
@@ -118,7 +118,7 @@ glabel L80248C0C_1774EC
 /* 177564 80248C84 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 /* 177568 80248C88 08092358 */  j         .L80248D60
 /* 17756C 80248C8C AE4300C0 */   sw       $v1, 0xc0($s2)
-glabel L80248C90_177570
+.L80248C90_177570:
 /* 177570 80248C90 8E4400C0 */  lw        $a0, 0xc0($s2)
 /* 177574 80248C94 0C0B1059 */  jal       does_script_exist
 /* 177578 80248C98 00000000 */   nop
@@ -126,7 +126,7 @@ glabel L80248C90_177570
 /* 177580 80248CA0 24020004 */   addiu    $v0, $zero, 4
 /* 177584 80248CA4 3C01800E */  lui       $at, %hi(gBattleState2)
 /* 177588 80248CA8 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
-glabel L80248CAC_17758C
+.L80248CAC_17758C:
 /* 17758C 80248CAC 0C0B1045 */  jal       kill_all_scripts
 /* 177590 80248CB0 0000882D */   daddu    $s1, $zero, $zero
 /* 177594 80248CB4 0240802D */  daddu     $s0, $s2, $zero

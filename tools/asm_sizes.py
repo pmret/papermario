@@ -1,5 +1,6 @@
 #! /usr/bin/python3
 
+import json
 import glob
 import os
 
@@ -53,4 +54,4 @@ for thing in sorted(sizes.keys(), key=lambda x: sizes[x][4]):
         print(thing.ljust(25) + str(val))
 
 if print_funcs:
-    print(dict(sorted(funcs.items(), key=lambda f: f[1])))
+    print(json.dumps(dict(sorted(funcs.items(), key=lambda f: f[1])), indent=4))

@@ -4,10 +4,15 @@
 
 #include "common/StartRumbleWithParams.inc.c"
 
+// Requires data migration to match
+#ifdef NON_MATCHING
+#include "common/UnkWhirlwindEffectFunc.inc.c"
+#else
 INCLUDE_ASM(s32, "battle/area_trd_part_2/4B1D90", func_80218BF8_4B1DE8);
+#endif
 
-INCLUDE_ASM(s32, "battle/area_trd_part_2/4B1D90", func_80218CD0_4B1EC0);
+#include "common/UnkEnemyFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_trd_part_2/4B1D90", func_80218D70_4B1F60);
 
-INCLUDE_ASM(s32, "battle/area_trd_part_2/4B1D90", func_80219308_4B24F8);
+#include "common/GetLastActorEventType.inc.c"

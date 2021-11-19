@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_80244B40_A10830
+dlabel D_80244B40_A10830
 .double 1.570796
 
 .section .text

@@ -3,13 +3,13 @@
 
 .section .rodata
 
-glabel D_8029CC30
+dlabel D_8029CC30
 .double 0.01
 
-glabel D_8029CC38
+dlabel D_8029CC38
 .double 0.01
 
-glabel D_8029CC40
+dlabel D_8029CC40
 .double 0.01
 
 .section .text

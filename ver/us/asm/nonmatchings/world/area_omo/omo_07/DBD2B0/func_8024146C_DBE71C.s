@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_80246F18_DC41C8
+dlabel D_80246F18_DC41C8
 .double 0.6
 
 .section .text

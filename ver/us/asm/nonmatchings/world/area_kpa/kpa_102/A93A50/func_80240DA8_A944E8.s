@@ -3,13 +3,13 @@
 
 .section .rodata
 
-glabel D_80245B30_A99270
+dlabel D_80245B30_A99270
 .double 180.0
 
-glabel D_80245B38_A99278
+dlabel D_80245B38_A99278
 .double 90.0
 
-glabel D_80245B40_A99280
+dlabel D_80245B40_A99280
 .double 1.2
 
 .section .text

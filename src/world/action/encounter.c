@@ -4,7 +4,7 @@
 extern f32 D_802B6770_E27C80;
 
 //wip - not good yet
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void func_802B6000_E28A30(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -31,7 +31,7 @@ INCLUDE_ASM(s32, "world/action/encounter", func_802B6000_E28A30);
 #endif
 
 //wip - not good yet
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void func_802B609C_E28ACC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 

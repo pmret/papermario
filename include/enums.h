@@ -503,6 +503,7 @@ enum SoundIDs {
     SOUND_E1                        = 0x000000E1,
     SOUND_E2                        = 0x000000E2,
     SOUND_E3                        = 0x000000E3,
+    SOUND_E7                        = 0x000000E7,
     SOUND_E9                        = 0x000000E9,
     SOUND_EA                        = 0x000000EA,
     SOUND_FREEZE                    = 0x000000EB,
@@ -618,6 +619,7 @@ enum SoundIDs {
     SOUND_SPELL_CAST5               = 0x000020D8,
     SOUND_UNKNOWN_20F6              = 0x000020F6,
     SOUND_UNKNOWN_2106              = 0x00002106,
+    SOUND_UNKNOWN_2107              = 0x00002107,
 };
 
 enum Cams {
@@ -1226,6 +1228,7 @@ enum Events {
     EVENT_BURN_CONTACT                = 0x0000002C,
     EVENT_SHOCK_HIT                   = 0x0000002F,
     EVENT_RECOVER_STATUS              = 0x00000031,
+    EVENT_34                          = 0x00000034,
     EVENT_END_FIRST_STRIKE            = 0x00000035,
     EVENT_LUCKY                       = 0x00000037,
     EVENT_BEGIN_FIRST_STRIKE          = 0x00000038,
@@ -1915,7 +1918,7 @@ enum EffectGfxDataFlags {
 };
 
 enum MoveIDs {
-    MOVE_NOTHING                    = 0x00000000,
+    MOVE_NONE                       = 0x00000000,
     MOVE_UNUSED_01                  = 0x00000001,
     MOVE_UNUSED_02                  = 0x00000002,
     MOVE_HAMMER1                    = 0x00000003,
@@ -2160,8 +2163,33 @@ enum BattleStatusFlags1 {
 };
 
 enum BattleStatusFlags2 {
+    BS_FLAGS2_2                               = 0x00000002,
+    BS_FLAGS2_4                               = 0x00000004,
+    BS_FLAGS2_8                               = 0x00000008,
+    BS_FLAGS2_10                              = 0x00000010,
+    BS_FLAGS2_40                              = 0x00000040,
     BS_FLAGS2_NO_TARGET_AVAILABLE             = 0x00001000,
     BS_FLAGS2_1000000                         = 0x01000000,
+    BS_FLAGS2_2000000                         = 0x02000000,
+};
+
+enum BattleStates2 {
+    BATTLE_STATES2_UNK_0                 = 0x00000000,
+    BATTLE_STATES2_UNK_1                 = 0x00000001,
+    BATTLE_STATES2_UNK_2                 = 0x00000002,
+    BATTLE_STATES2_UNK_3                 = 0x00000003,
+    BATTLE_STATES2_UNK_4                 = 0x00000004,
+    BATTLE_STATES2_UNK_5                 = 0x00000005,
+    BATTLE_STATES2_UNK_6                 = 0x00000006,
+    BATTLE_STATES2_UNK_7                 = 0x00000007,
+    BATTLE_STATES2_PLAYER_DEFEATED       = 0x0000000A,
+    BATTLE_STATES2_UNK_B                 = 0x0000000B,
+    BATTLE_STATES2_UNK_C                 = 0x0000000C,
+    BATTLE_STATES2_UNK_14                = 0x00000014,
+    BATTLE_STATES2_UNK_15                = 0x00000015,
+    BATTLE_STATES2_UNK_16                = 0x00000016,
+    BATTLE_STATES2_UNK_1E                = 0x0000001E,
+    BATTLE_STATES2_UNK_46                = 0x00000046,
 };
 
 enum DebuffTypes {
@@ -2905,5 +2933,23 @@ enum ElementImmunityFlags {
     ELEMENT_IMMUNITY_FLAGS_40000000          = 0x40000000,
     ELEMENT_IMMUNITY_FLAGS_80000000          = 0x80000000,
 };
-    
+
+enum MsgWindowStates {
+    MSG_WINDOW_STATE_DONE               = 0x0,
+    MSG_WINDOW_STATE_INIT               = 0x1,
+    MSG_WINDOW_STATE_OPENING            = 0x2,
+    MSG_WINDOW_STATE_CLOSING            = 0x3,
+    MSG_WINDOW_STATE_PRINTING           = 0x4,
+    MSG_WINDOW_STATE_WAITING            = 0x5,
+    MSG_WINDOW_STATE_SCROLLING          = 0x6,
+    MSG_WINDOW_STATE_WAITING_FOR_CHOICE = 0x7,
+    MSG_WINDOW_STATE_SCROLLING_BACK     = 0x8,
+    MSG_WINDOW_STATE_VIEWING_PREV       = 0x9,
+    MSG_WINDOW_STATE_A                  = 0xA,
+    MSG_WINDOW_STATE_B                  = 0xB,
+    MSG_WINDOW_STATE_C                  = 0xC,
+    MSG_WINDOW_STATE_D                  = 0xD,
+    MSG_WINDOW_STATE_E                  = 0xE,
+};
+
 #endif

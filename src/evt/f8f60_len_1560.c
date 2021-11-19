@@ -269,7 +269,7 @@ ApiStatus func_802D4D88(Evt* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 // most likely functionally equivalent, lots of issues though.
 void load_path_data(s32 numVecs, f32* arg1, struct Vec3f* arg2, struct Vec3f* arg3) {
     struct Vec3f* temp_s4;

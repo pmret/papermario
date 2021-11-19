@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_80097D30
+dlabel D_80097D30
 .ascii "File:%s Line:%d  %s \n"
 
 .section .text

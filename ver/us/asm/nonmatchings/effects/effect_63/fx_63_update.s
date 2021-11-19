@@ -30,7 +30,7 @@ glabel fx_63_update
 /* 37F984 E007E264 8C22EC48 */  lw        $v0, %lo(jtbl_E007EC48)($at)
 /* 37F988 E007E268 00400008 */  jr        $v0
 /* 37F98C E007E26C 00000000 */   nop
-glabel LE007E270_37F990
+dlabel LE007E270_37F990
 /* 37F990 E007E270 0C080150 */  jal       shim_load_effect
 /* 37F994 E007E274 2404002D */   addiu    $a0, $zero, 0x2d
 /* 37F998 E007E278 C6020008 */  lwc1      $f2, 8($s0)
@@ -51,7 +51,7 @@ glabel LE007E270_37F990
 /* 37F9D4 E007E2B4 AE000038 */  sw        $zero, 0x38($s0)
 /* 37F9D8 E007E2B8 0801F909 */  j         .LE007E424
 /* 37F9DC E007E2BC AE000040 */   sw       $zero, 0x40($s0)
-glabel LE007E2C0_37F9E0
+dlabel LE007E2C0_37F9E0
 /* 37F9E0 E007E2C0 28620008 */  slti      $v0, $v1, 8
 /* 37F9E4 E007E2C4 14400004 */  bnez      $v0, .LE007E2D8
 /* 37F9E8 E007E2C8 00000000 */   nop
@@ -74,7 +74,7 @@ glabel LE007E2C0_37F9E0
 /* 37FA28 E007E308 46200020 */  cvt.s.d   $f0, $f0
 /* 37FA2C E007E30C 0801F90B */  j         .LE007E42C
 /* 37FA30 E007E310 E6000030 */   swc1     $f0, 0x30($s0)
-glabel LE007E314_37FA34
+dlabel LE007E314_37FA34
 /* 37FA34 E007E314 28620002 */  slti      $v0, $v1, 2
 /* 37FA38 E007E318 14400004 */  bnez      $v0, .LE007E32C
 /* 37FA3C E007E31C 24020001 */   addiu    $v0, $zero, 1
@@ -84,7 +84,7 @@ glabel LE007E314_37FA34
 .LE007E32C:
 /* 37FA4C E007E32C 0801F90B */  j         .LE007E42C
 /* 37FA50 E007E330 AE020034 */   sw       $v0, 0x34($s0)
-glabel LE007E334_37FA54
+dlabel LE007E334_37FA54
 /* 37FA54 E007E334 2862000F */  slti      $v0, $v1, 0xf
 /* 37FA58 E007E338 14400004 */  bnez      $v0, .LE007E34C
 /* 37FA5C E007E33C 24020002 */   addiu    $v0, $zero, 2
@@ -94,7 +94,7 @@ glabel LE007E334_37FA54
 .LE007E34C:
 /* 37FA6C E007E34C 0801F90B */  j         .LE007E42C
 /* 37FA70 E007E350 AE020034 */   sw       $v0, 0x34($s0)
-glabel LE007E354_37FA74
+dlabel LE007E354_37FA74
 /* 37FA74 E007E354 2862002D */  slti      $v0, $v1, 0x2d
 /* 37FA78 E007E358 14400004 */  bnez      $v0, .LE007E36C
 /* 37FA7C E007E35C 24020003 */   addiu    $v0, $zero, 3
@@ -116,7 +116,7 @@ glabel LE007E354_37FA74
 /* 37FAB4 E007E394 44810000 */  mtc1      $at, $f0
 /* 37FAB8 E007E398 0801F90B */  j         .LE007E42C
 /* 37FABC E007E39C E6000030 */   swc1     $f0, 0x30($s0)
-glabel LE007E3A0_37FAC0
+dlabel LE007E3A0_37FAC0
 /* 37FAC0 E007E3A0 2862000A */  slti      $v0, $v1, 0xa
 /* 37FAC4 E007E3A4 54400004 */  bnel      $v0, $zero, .LE007E3B8
 /* 37FAC8 E007E3A8 AE000034 */   sw       $zero, 0x34($s0)
@@ -128,7 +128,7 @@ glabel LE007E3A0_37FAC0
 /* 37FADC E007E3BC 44810000 */  mtc1      $at, $f0
 /* 37FAE0 E007E3C0 0801F90B */  j         .LE007E42C
 /* 37FAE4 E007E3C4 E600002C */   swc1     $f0, 0x2c($s0)
-glabel LE007E3C8_37FAE8
+dlabel LE007E3C8_37FAE8
 /* 37FAE8 E007E3C8 C6040028 */  lwc1      $f4, 0x28($s0)
 /* 37FAEC E007E3CC 3C014210 */  lui       $at, 0x4210
 /* 37FAF0 E007E3D0 44810000 */  mtc1      $at, $f0

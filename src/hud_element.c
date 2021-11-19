@@ -103,7 +103,7 @@ void func_801413F8(void) {
     gCameras[3].flags &= ~0x6;
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 s32 create_hud_element(const HudElementAnim* anim) {
     HudElement *hudElement;
     s32 id;
@@ -437,7 +437,7 @@ void set_hud_element_transform_rotation_pivot(s32 id, s32 dx, s32 dy) {
     }
 }
 
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void copy_world_hud_element_ref_to_battle(s32 worldID, s32 battleID) {
     D_80157460[battleID & ~0x800].flags.as_word = D_80156F60[worldID & ~0x800].flags.as_word;
 }

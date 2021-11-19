@@ -3,7 +3,7 @@
 
 .section .rodata
 
-glabel D_802451D8_9B6968
+dlabel D_802451D8_9B6968
 .ascii "party_pinki\0\0\0\0\0\0\0\0\0\0\0\0\0"
 
 .section .text
