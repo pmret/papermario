@@ -11,41 +11,36 @@ extern s32 D_802BEC54;
 extern s32 D_802BEB40_31CB60;
 extern s32 D_802BEC64;
 
-INCLUDE_ASM(s32, "world/partner/kooper", func_802BD100_31B120);
-
-/*
 s32 func_802BD100_31B120(void) {
-    if (D_8010C978 > 0) {
-        if (D_8010C978 & 0x4000) {
-            return entity_interacts_with_current_partner(D_8010C978 & ~0x4000);
-        }
-    } else {
+    if (D_8010C978 < 0) {
         return 0;
     }
+    
+    if (!(D_8010C978 & 0x4000)) {
+        return 0;
+    }
+    
+    return entity_interacts_with_current_partner(D_8010C978 & ~0x4000);
 }
-*/
 
 void func_802BD144_31B164(void) {
-    if ((D_8010C978 >= 0) && (D_8010C978 & 0x4000)) {
+    if (D_8010C978 >= 0 && D_8010C978 & 0x4000) {
         entity_interacts_with_current_partner(D_8010C978 & ~0x4000);
     }
 }
 
-INCLUDE_ASM(s32, "world/partner/kooper", func_802BD17C_31B19C);
-
-/*
 s32 func_802BD17C_31B19C(Npc* npc) {
     D_802BEC68 = test_item_entity_position(npc->pos.x, npc->pos.y, npc->pos.z, npc->collisionRadius);
     
-    if (D_802BEC68 >= 0) {
+    if (D_802BEC68 < 0) {
+        return 0;
+    } else {
         D_802BEC6C = 1;
         gOverrideFlags |= 0x40;
         set_item_entity_flags(D_802BEC68, 0x200000);
         return 1;
     }
-    return 0;
 }
-*/
 
 void func_802BD200_31B220(Npc* npc) {
     npc->collisionHeight = 0x25;
@@ -53,9 +48,6 @@ void func_802BD200_31B220(Npc* npc) {
     npc->unk_80 = 0x00010000;
     D_802BEC54 = 0;
 }
-
-//INCLUDE_ASM(s32, "world/partner/kooper", func_802BD228_31B248);
-
 
 s32 func_802BD228_31B248(Evt* script, s32 isInitialCall) {
     Npc* npc = script->owner2.npc;
@@ -71,16 +63,14 @@ s32 func_802BD228_31B248(Evt* script, s32 isInitialCall) {
     }
 }
 
-s32 func_802BD260_31B280(Evt* evt, s32 arg1) {
+s32 func_802BD260_31B280(Evt* evt, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* npc;
-    f32 sp10;
-    f32 sp14;
-    f32 tempY;
+    f32 sp10, sp14, tempY;
     Entity* entity;
 
     npc = evt->owner2.npc;
-    if (arg1 != 0) {
+    if (isInitialCall != 0) {
         partner_walking_enable(npc, 1);
         mem_clear(D_802BEB60_31CB80, sizeof(*D_802BEB60_31CB80));
         D_8010C954 = 0;
@@ -155,7 +145,6 @@ s32 func_802BD260_31B280(Evt* evt, s32 arg1) {
     return 0;
 }
 
-//INCLUDE_ASM(s32, "world/partner/kooper", func_802BD5F4_31B614);
 void func_802BD5F4_31B614(Npc* npc) {
     if (D_8010C954 != NULL) {
         D_8010C954 = NULL;
