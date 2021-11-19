@@ -1785,13 +1785,14 @@ ApiStatus SetEntityCullMode(Evt* script, s32 isInitialCall) {
     s32 mode = evt_get_variable(script, *args++);
 
     if (mode == 0) {
-        entity->flags |= 2;
+        entity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
     } else if (mode == 1) {
-        entity->flags |= 0x40000;
+        entity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
     } else if (mode == 2) {
-        entity->flags |= 0x40002;
+        entity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2 | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
     } else {
-        entity->flags |= 0xC0002;
+        entity->flags |= ENTITY_FLAGS_IGNORE_DISTANCE_CULLING | ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2 |
+                         ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1;
     }
     return ApiStatus_DONE2;
 }

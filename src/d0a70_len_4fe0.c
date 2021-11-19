@@ -173,16 +173,16 @@ void func_8013A4D0(void) {
     fold_vtxCount = 0;
     fold_init_state(&(*D_80156954)[0]);
 
-    (*D_80156954)[0].flags |= 1;
+    (*D_80156954)[0].flags |= FOLD_STATE_FLAGS_1;
 
     for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
-        if (((*D_80156954)[i].flags & 1) && (*D_80156954)[i].unk_05 != 5) {
+        if (((*D_80156954)[i].flags & FOLD_STATE_FLAGS_1) && (*D_80156954)[i].unk_05 != 5) {
             fold_clear_state_gfx(&(*D_80156954)[i]);
         }
     }
 
     for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
-        if ((*D_80156954)[i].flags & 1 && (*D_80156954)[i].buf != NULL) {
+        if ((*D_80156954)[i].flags & FOLD_STATE_FLAGS_1 && (*D_80156954)[i].buf != NULL) {
             s32 temp = (*D_80156954)[i].unk_06; // TODO find a better way to match
 
             if (temp == 11 || (*D_80156954)[i].unk_06 == 12) {
@@ -245,7 +245,7 @@ s32 func_8013A704(s32 arg0) {
 
     count = 0;
     for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
-        if (!((*D_80156954)[i].flags & 1)) {
+        if (!((*D_80156954)[i].flags & FOLD_STATE_FLAGS_1)) {
             count++;
         }
     }
@@ -259,7 +259,7 @@ s32 func_8013A704(s32 arg0) {
     count = 0;
     iPrev = -1;
     for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
-        if (!((*D_80156954)[i].flags & 1)) {
+        if (!((*D_80156954)[i].flags & FOLD_STATE_FLAGS_1)) {
             if (!cond) {
                 ret = i;
                 cond = TRUE;
@@ -270,7 +270,7 @@ s32 func_8013A704(s32 arg0) {
             (*D_80156954)[i].arrayIdx = i;
             fold_init_state(&(*D_80156954)[i]);
             count++;
-            (*D_80156954)[i].flags |= 1;
+            (*D_80156954)[i].flags |= FOLD_STATE_FLAGS_1;
             iPrev = i;
             if (count == arg0) {
                 (*D_80156954)[i].unk_10 = -1;
@@ -284,7 +284,7 @@ s32 func_8013A704(s32 arg0) {
 
 void func_8013A854(u32 idx) {
     if (idx < 90) {
-        (*D_80156954)[idx].flags = 0;
+        (*D_80156954)[idx].flags = FOLD_STATE_FLAGS_0;
         (*D_80156954)[idx].unk_10 = -1;
     }
 }
@@ -357,7 +357,7 @@ void fold_init_state(FoldState* state) {
     state->unk_10 = -1;
     state->unk_05 = 0;
     state->unk_06 = 0;
-    state->flags = 0;
+    state->flags = FOLD_STATE_FLAGS_0;
     state->meshType = 0;
     state->renderType = 0;
     state->firstVtxIdx = 0;
@@ -387,7 +387,7 @@ void fold_init_state(FoldState* state) {
 INCLUDE_ASM(s32, "d0a70_len_4fe0", fold_update);
 
 void fold_set_state_flags(s32 idx, u16 flagBits, s32 mode) {
-    if ((*D_80156954)[idx].flags & 1) {
+    if ((*D_80156954)[idx].flags & FOLD_STATE_FLAGS_1) {
         if (mode) {
             (*D_80156954)[idx].flags |= flagBits;
         } else {
@@ -427,25 +427,25 @@ s32 fold_appendGfx_component(s32 idx, FoldImageRec* image, u32 flagBits, Matrix4
     func_8013B0EC(state);
     func_8013B1B0(state, mtx);
 
-    if (state->flags & 0x1000) {
+    if (state->flags & FOLD_STATE_FLAGS_1000) {
         state->unk_1C[0][0] = -1;
         state->unk_1C[1][0] = -1;
         state->unk_05 = 0;
         state->meshType = 0;
         state->renderType = 0;
-        state->flags &= ~0x1980;
+        state->flags &= ~(FOLD_STATE_FLAGS_1000 | FOLD_STATE_FLAGS_800 | FOLD_STATE_FLAGS_100 | FOLD_STATE_FLAGS_80);
         fold_clear_state_gfx(state);
         ret = 1;
-    } else if (state->flags & 0x4000) {
+    } else if (state->flags & FOLD_STATE_FLAGS_4000) {
         ret = 2;
-    } else if (state->flags & 0x20000) {
+    } else if (state->flags & FOLD_STATE_FLAGS_20000) {
         state->unk_05 = 0;
         state->unk_06 = 0;
         state->meshType = 0;
         state->renderType = 0;
         state->unk_1C[0][0] = -1;
         state->unk_1C[1][0] = -1;
-        state->flags &= 1;
+        state->flags &= FOLD_STATE_FLAGS_1;
         ret = 1;
     }
     return ret;

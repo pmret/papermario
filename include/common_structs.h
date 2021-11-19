@@ -1512,17 +1512,17 @@ typedef struct StaticPriceItem {
 
 typedef struct PopupMenu {
     /* 0x000 */ s32* ptrIcon[32];
-    /* 0x080 */ char unk_80[4];
+    /* 0x080 */ char unk_80[0x4];
     /* 0x084 */ s32 nameMsg[32];
-    /* 0x104 */ char unk_104[4];
+    /* 0x104 */ char unk_104[0x4];
     /* 0x108 */ s32 userIndex[32]; // used to map menu order to a user-ID for each item
-    /* 0x188 */ char unk_188[4];
+    /* 0x188 */ char unk_188[0x4];
     /* 0x18C */ s32 enabled[32];
-    /* 0x20C */ char unk_20C[4];
+    /* 0x20C */ char unk_20C[0x4];
     /* 0x210 */ s32 value[32]; // sale price, etc
-    /* 0x290 */ char unk_290[4];
+    /* 0x290 */ char unk_290[0x4];
     /* 0x294 */ s32 descMsg[32];
-    /* 0x314 */ char unk_314[4];
+    /* 0x314 */ char unk_314[0x4];
     /* 0x318 */ s32 popupType; // C = keys
     /* 0x31C */ s32 unk_31C;
     /* 0x320 */ s32 unk_320;
@@ -1536,7 +1536,7 @@ typedef struct Shop {
     /* 0x000 */ s16 flags;
     /* 0x002 */ s16 numItems;
     /* 0x004 */ s16 numSpecialPrices;
-    /* 0x006 */ char unk_06[2];
+    /* 0x006 */ char unk_06[0x2];
     /* 0x008 */ s32 currentItemSlot;
     /* 0x00C */ s32 selectedStoreItemSlot;
     /* 0x010 */ ShopOwner* owner;

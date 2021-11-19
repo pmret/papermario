@@ -225,12 +225,12 @@ void update_player_actor_shadow(void) {
 
     parts->unk_8C = spr_update_player_sprite(0, parts->currentAnimation, parts->animationRate);
 
-    if (player->flags & 0x10000000) {
+    if (player->flags & ACTOR_FLAG_10000000) {
         func_802549F4(player);
     }
 
     shadow = get_shadow_by_index(player->shadow);
-    shadow->flags &= ~0x1;
+    shadow->flags &= ~SHADOW_FLAGS_1;
 
     if (!battleStatus->outtaSightActive) {
         shadow->unk_05 = 128;
@@ -245,7 +245,7 @@ void update_player_actor_shadow(void) {
     npc_raycast_down_sides(0, &x, &y, &z, &scale);
 
     if (scale > 200.0f) {
-        shadow->flags |= 1;
+        shadow->flags |= SHADOW_FLAGS_1;
     }
     shadow->position.x = x;
     shadow->position.y = y;
