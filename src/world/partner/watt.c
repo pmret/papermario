@@ -100,7 +100,7 @@ ApiStatus func_802BD2B4_31CE24(Evt *script, s32 isInitialCall) {
     Npc* npc = script->owner2.npc;
     
     if (gPartnerActionStatus.actionState.b[1] == 0) {
-        if (isInitialCall != 0) {
+        if (isInitialCall) {
             partner_flying_enable(npc, 1);
             mem_clear(D_802BE274_31DDE4, sizeof(unk_802BE274_31DDE4));
             D_8010C954 = NULL;
@@ -132,77 +132,71 @@ ApiStatus func_802BD2B4_31CE24(Evt *script, s32 isInitialCall) {
             }
 
             return 0;
+        }
+        switch (D_802BE274_31DDE4->unk_04) {
+            case 0:
+                D_802BE274_31DDE4->unk_04 = 1;
+                D_802BE274_31DDE4->unk_08 = npc->flags;
+                D_802BE274_31DDE4->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
+                D_802BE274_31DDE4->unk_10 = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
+                D_802BE274_31DDE4->unk_14 = 6.0f;
+                D_802BE274_31DDE4->unk_18 = 50.0f;
+                D_802BE274_31DDE4->unk_00 = 0x78;
+                npc->flags |= 0x40148;
+                npc->flags &= ~0x200;
+            case 1:
+                sin_cos_rad((D_802BE274_31DDE4->unk_10 * TAU) / 360.0f, &sp10, &sp14);
+                npc->pos.x = (entity->position.x + (sp10 * D_802BE274_31DDE4->unk_0C));
+                npc->pos.z = (entity->position.z - (sp14 * D_802BE274_31DDE4->unk_0C));
+                D_802BE274_31DDE4->unk_10 = clamp_angle(D_802BE274_31DDE4->unk_10 - D_802BE274_31DDE4->unk_14);
 
-        } else {
-                switch (D_802BE274_31DDE4->unk_04) {
-                    case 0:
-                        D_802BE274_31DDE4->unk_04 = 1;
-                        D_802BE274_31DDE4->unk_08 = npc->flags;
-                        D_802BE274_31DDE4->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
-                        D_802BE274_31DDE4->unk_10 = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
-                        D_802BE274_31DDE4->unk_14 = 6.0f;
-                        D_802BE274_31DDE4->unk_18 = 50.0f;
-                        D_802BE274_31DDE4->unk_00 = 0x78;
-                        npc->flags |= 0x40148;
-                        npc->flags &= ~0x200;
-                    case 1:
-                        sin_cos_rad((D_802BE274_31DDE4->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-                        npc->pos.x = (entity->position.x + (sp10 * D_802BE274_31DDE4->unk_0C));
-                        npc->pos.z = (entity->position.z - (sp14 * D_802BE274_31DDE4->unk_0C));
-                        D_802BE274_31DDE4->unk_10 = clamp_angle(D_802BE274_31DDE4->unk_10 - D_802BE274_31DDE4->unk_14);
-
-                        if (D_802BE274_31DDE4->unk_0C > 20.0f) {
-                            D_802BE274_31DDE4->unk_0C--;
-                        } else if (D_802BE274_31DDE4->unk_0C < 19.0f) {
-                            D_802BE274_31DDE4->unk_0C++;
-                        }
-
-                        temp_f0 = sin_rad((D_802BE274_31DDE4->unk_18 * TAU) / 360.0f);
-                        D_802BE274_31DDE4->unk_18 += 3.0f;
-
-                        new_var = temp_f0 * 3.0f;
-
-                        if (D_802BE274_31DDE4->unk_18 > 150.0f) {
-                            D_802BE274_31DDE4->unk_18 = 150.0f;
-                        }
-                        
-                        npc->pos.y += new_var;
-                        npc->renderYaw = clamp_angle(360.0f - D_802BE274_31DDE4->unk_10);
-                        D_802BE274_31DDE4->unk_14 += D_802BE2F0_31DE60;
-
-                        if (D_802BE274_31DDE4->unk_14 > 40.0f) {
-                            D_802BE274_31DDE4->unk_14 = 40.0f;
-                        }
-
-                        if (--D_802BE274_31DDE4->unk_00 == 0) {
-                            D_802BE274_31DDE4->unk_04++;
-                        }
-                        break;
-
-                    case 2:
-                        npc->flags = D_802BE274_31DDE4->unk_08;
-                        D_802BE274_31DDE4->unk_00 = 0x1E;
-                        D_802BE274_31DDE4->unk_04++;
-                        break;
-                    case 3:
-                        partner_flying_update_player_tracking(npc);
-                        partner_flying_update_motion(npc);
-                        if (--D_802BE274_31DDE4->unk_00 == 0) {
-                            D_802BE274_31DDE4->unk_04 = 0;
-                            D_8010C954 = NULL;
-                        }
-
-                        break;
+                if (D_802BE274_31DDE4->unk_0C > 20.0f) {
+                    D_802BE274_31DDE4->unk_0C--;
+                } else if (D_802BE274_31DDE4->unk_0C < 19.0f) {
+                    D_802BE274_31DDE4->unk_0C++;
                 }
-            }
+
+                temp_f0 = sin_rad((D_802BE274_31DDE4->unk_18 * TAU) / 360.0f);
+                D_802BE274_31DDE4->unk_18 += 3.0f;
+
+                new_var = temp_f0 * 3.0f;
+
+                if (D_802BE274_31DDE4->unk_18 > 150.0f) {
+                    D_802BE274_31DDE4->unk_18 = 150.0f;
+                }
+                
+                npc->pos.y += new_var;
+                npc->renderYaw = clamp_angle(360.0f - D_802BE274_31DDE4->unk_10);
+                D_802BE274_31DDE4->unk_14 += D_802BE2F0_31DE60;
+
+                if (D_802BE274_31DDE4->unk_14 > 40.0f) {
+                    D_802BE274_31DDE4->unk_14 = 40.0f;
+                }
+
+                if (--D_802BE274_31DDE4->unk_00 == 0) {
+                    D_802BE274_31DDE4->unk_04++;
+                }
+                break;
+            case 2:
+                npc->flags = D_802BE274_31DDE4->unk_08;
+                D_802BE274_31DDE4->unk_00 = 0x1E;
+                D_802BE274_31DDE4->unk_04++;
+                break;
+            case 3:
+                partner_flying_update_player_tracking(npc);
+                partner_flying_update_motion(npc);
+                if (--D_802BE274_31DDE4->unk_00 == 0) {
+                    D_802BE274_31DDE4->unk_04 = 0;
+                    D_8010C954 = NULL;
+                }
+                break;
+        }
 
         if (D_802BE310 != 0) {
             D_802BE310->unk_0C->unk_04 = npc->pos.x;
             D_802BE310->unk_0C->unk_08 = npc->pos.y + 13.0f;
             D_802BE310->unk_0C->unk_0C = npc->pos.z;
         }
-
-        return 0;
     }
     return 0;
 }
@@ -335,7 +329,7 @@ void func_802BE070_31DBE0(void) {
     if (gPartnerActionStatus.actionState.b[0] != 0) {
         spriteFacingAngle = gPlayerStatusPtr->spriteFacingAngle;
         if ((spriteFacingAngle < 90.0f) || (spriteFacingAngle > 270.0f)) {
-            if (!(gPlayerStatusPtr->trueAnimation & 0x1000000)) {
+            if (!(gPlayerStatusPtr->trueAnimation & NPC_FLAG_1000000)) {
                 phi_v1 = -5;
                 temp = 0.6f;
             } else {
@@ -343,7 +337,7 @@ void func_802BE070_31DBE0(void) {
                 temp = 0.6f;
             }
         } else {
-            if (!(gPlayerStatusPtr->trueAnimation & 0x1000000)) {
+            if (!(gPlayerStatusPtr->trueAnimation & NPC_FLAG_1000000)) {
                 phi_v1 = 5;
                 temp = 0.6f;
             } else {

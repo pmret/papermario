@@ -1,14 +1,14 @@
 #include "common.h"
 #include "../src/world/partners.h"
 #include "npc.h"
+#include "effects.h"
 
 extern unkPartnerStruct* D_802BFDF8_320B68;
 extern s32 D_802BFEEC;
 extern f32 D_802BFEE0;
-extern void func_802BD368_31E0D8(s32, f32, f32, f32, f32, f32);
-extern void playFX_23(s32, f32, f32, f32, s32);
-extern s32 partner_use_ability(void);
-extern void partner_kill_ability_script(void);
+void func_802BD368_31E0D8(s32, f32, f32, f32, f32, f32);
+s32 partner_use_ability(void);
+void partner_kill_ability_script(void);
 extern s32 D_802BFEE4;
 extern s32 D_802BFEE8;
 extern s32 D_802BFEF0;
@@ -21,7 +21,7 @@ extern s16 D_8010C97A;
 void func_802BD100_31DE70(void) {
     Npc* partnerNPC = get_npc_unsafe(NPC_PARTNER);
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Camera* cam =  gCameras;
+    Camera* cam = &gCameras[0];
     s32 phi_v1;
 
     playerStatus->position.x = partnerNPC->pos.x;
@@ -74,11 +74,12 @@ void func_802BD368_31E0D8(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
     
     if (npc_raycast_down_ahead(arg0, &arg1, &arg2, &arg3, &sp20, arg4, arg5) == 0) {
         collisionStatus->currentFloor = -1;
-        return;
+    } else {
+        collisionStatus->currentFloor = D_8010C97A;
+        D_802BFEE0 = arg2;
     }
 
-    collisionStatus->currentFloor = D_8010C97A;
-    D_802BFEE0 = arg2;
+
 }
 
 INCLUDE_ASM(s32, "world/partner/sushie", func_802BD414_31E184);
@@ -102,8 +103,8 @@ s32 func_802BE280_31EFF0(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32 arg4, f3
 INCLUDE_ASM(s32, "world/partner/sushie", func_802BE3A4_31F114);
 
 void func_802BF520_320290(Npc* npc) {
-    npc->collisionHeight = 0x18;
-    npc->collisionRadius = 0x24;
+    npc->collisionHeight = 24;
+    npc->collisionRadius = 36;
     npc->unk_80 = 0x10000;
     D_802BFEEC = 0;
     D_802BFEE4 = 0;
@@ -115,7 +116,7 @@ void func_802BF520_320290(Npc* npc) {
 s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
     Npc* npc = script->owner2.npc;
  
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         partner_init_get_out(npc);
     }
 
@@ -221,9 +222,9 @@ void func_802BF920_320690(Npc* npc) {
 s32 func_802BF964_3206D4(Evt* script, s32 isInitialCall) {
     Npc* npc = script->owner2.npc;
 
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         partner_init_put_away(npc);
-        gPlayerStatusPtr->animFlags &= 0xFFBFFFFF;
+        gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_400000;
     }
 
     if (partner_put_away(npc)) {
@@ -262,7 +263,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
     f32 temp_f0;
     s32 funcTemp0;
 
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         script->functionTemp[0] = 0;
         D_802BFEE0 = playerStatus->position.y;
     }
@@ -287,7 +288,8 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             partnerNPC->moveToPos.x = partnerNPC->pos.x;
             partnerNPC->moveToPos.y = partnerNPC->pos.y;
             partnerNPC->moveToPos.z = partnerNPC->pos.z;
-            partnerNPC->flags = (partnerNPC->flags | 0x108) & ~0x200;
+            partnerNPC->flags |= NPC_FLAG_100 | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            partnerNPC->flags &= ~NPC_FLAG_GRAVITY;
             disable_npc_shadow(partnerNPC);
             disable_player_shadow();
 
