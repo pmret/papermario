@@ -1951,7 +1951,7 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationTyp
 void add_actor_decoration(Actor* actor, s32 decorationIndex, s32 decorationType) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if ((part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) == 0 && part->idleAnimations &&
+        if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) && part->idleAnimations &&
             !(part->flags & ACTOR_PART_FLAG_2))
         {
             add_part_decoration(part, decorationIndex, decorationType);
