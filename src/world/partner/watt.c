@@ -7,6 +7,7 @@ void force_player_anim(s32 arg0);
 void func_802BE070_31DBE0(void);
 void partner_kill_ability_script(void);
 s32 partner_use_ability(void);
+void func_802BD1AC_31CD1C(s32 arg0);
 extern s32 D_802BE278_31DDE8;
 extern f64 D_802BE2F0_31DE60;
 extern s32 D_802BE250_31DDC0;
@@ -96,7 +97,7 @@ ApiStatus func_802BD2B4_31CE24(Evt *script, s32 isInitialCall) {
     f32 sp10, sp14;
     f32 new_var;
     f32 temp_f0;
-    Npc* npc = script->owner2.npcID;
+    Npc* npc = script->owner2.npc;
     
     if (gPartnerActionStatus.actionState.b[1] == 0) {
         if (isInitialCall != 0) {
@@ -115,12 +116,12 @@ ApiStatus func_802BD2B4_31CE24(Evt *script, s32 isInitialCall) {
             if (npc->moveSpeed != 0.0f) {
                 if (D_802BE278_31DDE8 == 0) {
                     D_802BE278_31DDE8 = 1;
-                    func_802BD1AC_31CD1C(D_802BE278_31DDE8);
+                    func_802BD1AC_31CD1C(1);
                     npc->currentAnim.w = 0x60003;
                 }
             } else if (D_802BE278_31DDE8 != 0) {
                 D_802BE278_31DDE8 = 0;
-                func_802BD1AC_31CD1C(D_802BE278_31DDE8);
+                func_802BD1AC_31CD1C(0);
                 npc->currentAnim.w = 0x60001;
             }
 
