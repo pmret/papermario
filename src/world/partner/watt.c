@@ -22,15 +22,14 @@ typedef struct unk_802BE310_C {
     /* 0x24 */ s32 unk_24;
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ char unk_2C[0x0C];
-} unk_802BE310_C;
+} unk_802BE310_C; // size = 0x38
 
 typedef struct unk_802BE310 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ unk_802BE310_C* unk_0C;
-    /* 0x10 */
-} unk_802BE310;
+} unk_802BE310; //size = 0x10
 
 typedef struct unk_802BE274_31DDE4 {
     /* 0x00 */ s32 unk_00;
@@ -40,7 +39,7 @@ typedef struct unk_802BE274_31DDE4 {
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;
     /* 0x18 */ f32 unk_18;
-} unk_802BE274_31DDE4; //sizeof 0x1C
+} unk_802BE274_31DDE4; //size = 0x1C
 
 extern s32 D_802BE300;
 extern s32 D_802BE304;
@@ -133,6 +132,7 @@ ApiStatus func_802BD2B4_31CE24(Evt *script, s32 isInitialCall) {
 
             return 0;
         }
+        
         switch (D_802BE274_31DDE4->unk_04) {
             case 0:
                 D_802BE274_31DDE4->unk_04 = 1;

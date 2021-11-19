@@ -78,8 +78,6 @@ void func_802BD368_31E0D8(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
         collisionStatus->currentFloor = D_8010C97A;
         D_802BFEE0 = arg2;
     }
-
-
 }
 
 INCLUDE_ASM(s32, "world/partner/sushie", func_802BD414_31E184);
