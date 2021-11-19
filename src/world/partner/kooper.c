@@ -1,30 +1,27 @@
 #include "common.h"
+#include "../src/world/partners.h"
 
 extern unkPartnerStruct* D_802BEB60_31CB80;
 s32 entity_interacts_with_current_partner(s32);
 s32 test_item_entity_position(f32, f32, f32, f32);
-s32 partner_get_out(s32);
-s32 partner_init_get_out(s32);
-s32 partner_init_put_away(s32);
-s32 partner_put_away(s32);    
+s32 partner_use_ability(void);
 extern s32 D_802BEC68;
 extern s32 D_802BEC6C;
 extern s32 D_802BEC54;
 extern s32 D_802BEB40_31CB60;
-extern f64 D_802BEC38_31CC58;
-extern f64 D_802BEC40_31CC60;
+extern s32 D_802BEC64;
 
 INCLUDE_ASM(s32, "world/partner/kooper", func_802BD100_31B120);
+
 /*
 s32 func_802BD100_31B120(void) {
-
-    if (D_8010C978 >= 0) {
+    if (D_8010C978 > 0) {
         if (D_8010C978 & 0x4000) {
             return entity_interacts_with_current_partner(D_8010C978 & ~0x4000);
         }
+    } else {
+        return 0;
     }
-
-    return 0;
 }
 */
 
@@ -61,7 +58,7 @@ void func_802BD200_31B220(Npc* npc) {
 
 
 s32 func_802BD228_31B248(Evt* script, s32 isInitialCall) {
-    s32 npc = script->owner2.npcID;
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall != 0) {
         partner_init_get_out(npc);
@@ -171,7 +168,7 @@ void func_802BD5F4_31B614(Npc* npc) {
 INCLUDE_ASM(s32, "world/partner/kooper", func_802BD638_31B658);
 
 s32 func_802BE7E0_31C800(Evt* script, s32 isInitialCall) {
-    s32 npc = script->owner2.npcID;
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
         partner_init_put_away(npc);
@@ -217,6 +214,39 @@ s32 func_802BE818_31C838(Npc *npcKooper, Npc *npc2) {
 }
 */
 
-INCLUDE_ASM(s32, "world/partner/kooper", func_802BEA24_31CA44);
+void func_802BEA24_31CA44(Npc* npc) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-INCLUDE_ASM(s32, "world/partner/kooper", func_802BEB10_31CB30);
+    D_802BEC54 = 0;
+
+    if (gPartnerActionStatus.actionState.b[0] != 0) {
+        if (gPartnerActionStatus.actionState.b[0] == 2) {
+            D_802BEC54 = 1;
+        }
+
+        if (D_802BEC64 != 0) {
+            enable_player_input();
+            D_802BEC64 = 0;
+        }
+
+        D_802BEB40_31CB60 = 0;
+        playerStatus->flags &= -3;
+        npc->jumpVelocity = 0.0f;
+        npc->flags &= ~0x800;
+        npc->flags &= ~0x40;
+        sfx_stop_sound(0x284);
+        set_action_state(0);
+        partner_clear_player_tracking(npc);
+        disable_npc_blur(npc);
+        partnerActionStatus->actionState.b[3] = 0;
+        partnerActionStatus->actionState.b[0] = 0;
+    }
+}
+
+void func_802BEB10_31CB30(Npc* npc) {
+    if (D_802BEC54) {
+        partner_clear_player_tracking(npc);
+        partner_use_ability();
+    }
+}
