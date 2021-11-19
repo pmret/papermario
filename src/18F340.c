@@ -353,8 +353,8 @@ ApiStatus func_802616F4(Evt* script, s32 isInitialCall) {
     effectInstanceData->pos.z = merlee->pos.z + 5.0f;
 
     if (D_8029FBA4 == 2) {
-        D_8029FB98->data->unk_30 = 0.00001f;
-        D_8029FB9C->data->unk_30 = 0.00001f;
+        ((EffectInstanceData*)D_8029FB98->data)->unk_30 = 0.00001f;
+        ((EffectInstanceData*)D_8029FB9C->data)->unk_30 = 0.00001f;
         D_8029FB98->flags |= 0x10;
         D_8029FB9C->flags |= 0x10;
         return ApiStatus_DONE1;

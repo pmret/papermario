@@ -299,12 +299,12 @@ glabel func_80241610_97F0E0
 /* 97F574 80241AA4 00C0102D */  daddu     $v0, $a2, $zero
 /* 97F578 80241AA8 AFA20010 */  sw        $v0, 0x10($sp)
 /* 97F57C 80241AAC AFA00018 */  sw        $zero, 0x18($sp)
-/* 97F580 80241AB0 0C04EAA7 */  jal       func_8013AA9C
+/* 97F580 80241AB0 0C04EAA7 */  jal       fold_update
 /* 97F584 80241AB4 AFA30014 */   sw       $v1, 0x14($sp)
 /* 97F588 80241AB8 27A50020 */  addiu     $a1, $sp, 0x20
 /* 97F58C 80241ABC 0000302D */  daddu     $a2, $zero, $zero
 /* 97F590 80241AC0 8FC40000 */  lw        $a0, ($fp)
-/* 97F594 80241AC4 0C04EBDC */  jal       func_8013AF70
+/* 97F594 80241AC4 0C04EBDC */  jal       fold_appendGfx_component
 /* 97F598 80241AC8 0220382D */   daddu    $a3, $s1, $zero
 /* 97F59C 80241ACC 3C04D838 */  lui       $a0, 0xd838
 /* 97F5A0 80241AD0 8EE20000 */  lw        $v0, ($s7)

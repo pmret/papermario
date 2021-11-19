@@ -4,7 +4,11 @@
 #include "common.h"
 #include "include_asm.h"
 
+#ifndef M2CTX
 #define BSS __attribute__ ((section (".bss")))
+#else
+#define BSS static
+#endif
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 

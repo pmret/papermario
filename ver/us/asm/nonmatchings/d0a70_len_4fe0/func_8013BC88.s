@@ -3,8 +3,8 @@
 
 glabel func_8013BC88
 /* D2388 8013BC88 0080C02D */  daddu     $t8, $a0, $zero
-/* D238C 8013BC8C 3C068015 */  lui       $a2, %hi(D_8014EE10)
-/* D2390 8013BC90 24C6EE10 */  addiu     $a2, $a2, %lo(D_8014EE10)
+/* D238C 8013BC8C 3C068015 */  lui       $a2, %hi(fold_currentImage)
+/* D2390 8013BC90 24C6EE10 */  addiu     $a2, $a2, %lo(fold_currentImage)
 /* D2394 8013BC94 8CC40000 */  lw        $a0, ($a2)
 /* D2398 8013BC98 94830008 */  lhu       $v1, 8($a0)
 /* D239C 8013BC9C 24021000 */  addiu     $v0, $zero, 0x1000
@@ -27,11 +27,11 @@ glabel func_8013BC88
 .L8013BCD8:
 /* D23D8 8013BCD8 01A0502D */  daddu     $t2, $t5, $zero
 /* D23DC 8013BCDC 00C0782D */  daddu     $t7, $a2, $zero
-/* D23E0 8013BCE0 3C028015 */  lui       $v0, %hi(D_8014EE14)
-/* D23E4 8013BCE4 2442EE14 */  addiu     $v0, $v0, %lo(D_8014EE14)
+/* D23E0 8013BCE0 3C028015 */  lui       $v0, %hi(fold_vtxCount)
+/* D23E4 8013BCE4 2442EE14 */  addiu     $v0, $v0, %lo(fold_vtxCount)
 /* D23E8 8013BCE8 0040482D */  daddu     $t1, $v0, $zero
-/* D23EC 8013BCEC 3C068015 */  lui       $a2, %hi(D_80156950)
-/* D23F0 8013BCF0 24C66950 */  addiu     $a2, $a2, %lo(D_80156950)
+/* D23EC 8013BCEC 3C068015 */  lui       $a2, %hi(fold_vtxBuf)
+/* D23F0 8013BCF0 24C66950 */  addiu     $a2, $a2, %lo(fold_vtxBuf)
 /* D23F4 8013BCF4 24072000 */  addiu     $a3, $zero, 0x2000
 /* D23F8 8013BCF8 00C0602D */  daddu     $t4, $a2, $zero
 /* D23FC 8013BCFC 8488000E */  lh        $t0, 0xe($a0)
@@ -236,8 +236,8 @@ glabel func_8013BC88
 /* D2704 8013C004 0804EF93 */  j         .L8013BE4C
 /* D2708 8013C008 014D5021 */   addu     $t2, $t2, $t5
 .L8013C00C:
-/* D270C 8013C00C 3C028015 */  lui       $v0, %hi(D_8014EE14)
-/* D2710 8013C010 9442EE14 */  lhu       $v0, %lo(D_8014EE14)($v0)
+/* D270C 8013C00C 3C028015 */  lui       $v0, %hi(fold_vtxCount)
+/* D2710 8013C010 9442EE14 */  lhu       $v0, %lo(fold_vtxCount)($v0)
 /* D2714 8013C014 97040008 */  lhu       $a0, 8($t8)
 /* D2718 8013C018 24030001 */  addiu     $v1, $zero, 1
 /* D271C 8013C01C A3030003 */  sb        $v1, 3($t8)

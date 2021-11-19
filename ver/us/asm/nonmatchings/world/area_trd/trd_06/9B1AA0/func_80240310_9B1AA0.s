@@ -242,7 +242,7 @@ glabel func_80240310_9B1AA0
 /* 9B1E48 802406B8 000317C2 */  srl       $v0, $v1, 0x1f
 /* 9B1E4C 802406BC 00621821 */  addu      $v1, $v1, $v0
 /* 9B1E50 802406C0 00031843 */  sra       $v1, $v1, 1
-/* 9B1E54 802406C4 0C04EBDC */  jal       func_8013AF70
+/* 9B1E54 802406C4 0C04EBDC */  jal       fold_appendGfx_component
 /* 9B1E58 802406C8 A7A30026 */   sh       $v1, 0x26($sp)
 /* 9B1E5C 802406CC 3C05D838 */  lui       $a1, 0xd838
 /* 9B1E60 802406D0 3C03800A */  lui       $v1, %hi(gMasterGfxPos)

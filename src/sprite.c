@@ -256,7 +256,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
 
     spr_allocateBtlComponentsOnWorldHeap = FALSE;
     _heap_create(&gSpriteHeapPtr, 0x40000);
-    func_8013A37C();
+    fold_init();
 
     for (i = 0; i < ARRAY_COUNT(spr_playerSprites); i++) {
         SpriteAnimData** playerSprites = spr_playerSprites;

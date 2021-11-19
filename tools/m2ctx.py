@@ -22,6 +22,7 @@ CPP_FLAGS = [
     "-D__attribute__(...)=",
     "-D__asm__(...)=",
     "-ffreestanding",
+    "-DM2CTX",
 ]
 
 def import_c_file(in_file) -> str:

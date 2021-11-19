@@ -418,9 +418,9 @@ glabel func_801180E8
 /* AEDE8 801186E8 3C168015 */  lui       $s6, %hi(D_8014B0B8)
 /* AEDEC 801186EC 02C2B021 */  addu      $s6, $s6, $v0
 /* AEDF0 801186F0 8ED6B0B8 */  lw        $s6, %lo(D_8014B0B8)($s6)
-/* AEDF4 801186F4 3C108015 */  lui       $s0, %hi(D_8014B0BC)
+/* AEDF4 801186F4 3C108015 */  lui       $s0, %hi(D_8014B0B8 + 0x4)
 /* AEDF8 801186F8 02028021 */  addu      $s0, $s0, $v0
-/* AEDFC 801186FC 8E10B0BC */  lw        $s0, %lo(D_8014B0BC)($s0)
+/* AEDFC 801186FC 8E10B0BC */  lw        $s0, %lo(D_8014B0B8 + 0x4)($s0)
 /* AEE00 80118700 AC760000 */  sw        $s6, ($v1)
 /* AEE04 80118704 AC700004 */  sw        $s0, 4($v1)
 /* AEE08 80118708 8F040000 */  lw        $a0, ($t8)
