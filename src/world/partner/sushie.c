@@ -39,33 +39,27 @@ void func_802BD100_31DE70(void) {
 }
 
 void func_802BD20C_31DF7C(f32* arg0, f32* arg1) {
-    f32 temp_f0;
-    f32 temp_f0_2;
     f32 temp_f22;
-    f32 temp_f2;
-    f32 temp_f2_2;
     f32 phi_f20;
-
-    temp_f2 = gPartnerActionStatus.stickY;
-    temp_f0 = gPartnerActionStatus.stickX;
+    f32 temp_f2 = gPartnerActionStatus.stickY;
+    f32 temp_f0 = gPartnerActionStatus.stickX;
+    
     D_802BFDB0_320B20 = temp_f0;
     D_802BFDB4_320B24 = temp_f2;
     temp_f22 = clamp_angle(atan2(0.0f, 0.0f, temp_f0, -temp_f2) + gCameras->currentYaw);
     phi_f20 = 0.0f;
 
-    //TODO make not garbage to read
-    if ((dist2D(0.0f, 0.0f, D_802BFDB0_320B20, -D_802BFDB4_320B24) >= 1.0) && ((temp_f0_2 = D_802BFDB0_320B20, temp_f2_2 = D_802BFDB4_320B24, !(((temp_f0_2 * temp_f0_2) + (temp_f2_2 * temp_f2_2)) > 3025.0f)) || (phi_f20 = 4.0f, (D_802BFEE4 != 0)))) {
-        phi_f20 = 2.0f;
-    }
-
-/*
     if (dist2D(0.0f, 0.0f, D_802BFDB0_320B20, -D_802BFDB4_320B24) >= 1.0) {
-        phi_f20 = 4.0f;
-        if ( !((SQ(D_802BFDB0_320B20)) + (SQ(D_802BFDB4_320B24)) > 3025.0f) || D_802BFEE4 != 0) {
+        if (SQ(D_802BFDB0_320B20) + SQ(D_802BFDB4_320B24) > 3025.0f) {
+            if (D_802BFEE4) {
+                phi_f20 = 2.0f;
+            } else {
+                phi_f20 = 4.0f;
+            }
+        } else {
             phi_f20 = 2.0f;
         }
     }
-*/
 
     *arg0 = temp_f22;
     *arg1 = phi_f20;
@@ -132,21 +126,21 @@ s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus func_802BF5A0_320310(Evt* evt, s32 arg1) {
-    Npc* npc;
+ApiStatus func_802BF5A0_320310(Evt* evt, s32 isInitialCall) {
+    Npc* npc = evt->owner2.npc;
     Entity* entity;
     f32 sp10;
     f32 sp14;
     f32 tempY;
 
-    npc = evt->owner2.npc;
-    if (arg1 != 0) {
+    if (isInitialCall) {
         partner_walking_enable(npc, 1);
         mem_clear(D_802BFDF8_320B68, sizeof(*D_802BFDF8_320B68));
         D_8010C954 = 0;
     }
 
     entity = D_8010C954;
+    
     if (entity == NULL) {
         partner_walking_update_player_tracking(npc);
         partner_walking_update_motion(npc);
