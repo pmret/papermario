@@ -1966,7 +1966,7 @@ void remove_part_decoration(ActorPart* part, s32 decorationIndex) {
 void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if ((part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) == 0 && part->idleAnimations &&
+        if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) && part->idleAnimations &&
             !(part->flags & ACTOR_PART_FLAG_2))
         {
             remove_part_decoration(part, decorationIndex);
