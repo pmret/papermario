@@ -124,7 +124,7 @@ ApiStatus func_802BD2B4_31CE24(Evt *script, s32 isInitialCall) {
                 npc->currentAnim.w = 0x60001;
             }
 
-            if (D_802BE310 != 0) {
+            if (D_802BE310 != NULL) {
                 D_802BE310->unk_0C->unk_04 = npc->pos.x;
                 D_802BE310->unk_0C->unk_08 = npc->pos.y + 13.0f;
                 D_802BE310->unk_0C->unk_0C = npc->pos.z;
@@ -156,7 +156,7 @@ ApiStatus func_802BD2B4_31CE24(Evt *script, s32 isInitialCall) {
                     D_802BE274_31DDE4->unk_0C++;
                 }
 
-                temp_f0 = sin_rad((D_802BE274_31DDE4->unk_18 * TAU) / 360.0f);
+                temp_f0 = sin_rad(D_802BE274_31DDE4->unk_18 * TAU / 360.0f);
                 D_802BE274_31DDE4->unk_18 += 3.0f;
 
                 new_var = temp_f0 * 3.0f;
@@ -346,16 +346,16 @@ void func_802BE070_31DBE0(void) {
             }
         }
 
-        temp_f20 = ((((camera->currentYaw + 270.0f) - gPlayerStatusPtr->spriteFacingAngle) + phi_v1) * TAU) / 360.0f;
+        temp_f20 = (camera->currentYaw + 270.0f - gPlayerStatusPtr->spriteFacingAngle + phi_v1) * TAU / 360.0f;
 
         playerStatus = gPlayerStatusPtr;
         partnerNPC = wPartnerNpc;
-        partnerNPC->pos.x = playerStatus->position.x + ((sin_rad(temp_f20) * gPlayerStatusPtr->colliderDiameter) * temp);
+        partnerNPC->pos.x = playerStatus->position.x + (sin_rad(temp_f20) * gPlayerStatusPtr->colliderDiameter * temp);
 
         new_var2 = wPartnerNpc;
         playerStatus = gPlayerStatusPtr;
         partnerNPC = new_var2;
-        partnerNPC->pos.z = playerStatus->position.z - ((cos_rad(temp_f20) * gPlayerStatusPtr->colliderDiameter) * temp);
+        partnerNPC->pos.z = playerStatus->position.z - (cos_rad(temp_f20) * gPlayerStatusPtr->colliderDiameter * temp);
         
         wPartnerNpc->yaw = gPlayerStatusPtr->targetYaw;
         wPartnerNpc->pos.y = gPlayerStatusPtr->position.y + 5.0f;

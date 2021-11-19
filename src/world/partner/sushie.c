@@ -35,7 +35,7 @@ void func_802BD100_31DE70(void) {
         phi_v1 = 8;
     }
 
-    playerStatus->position.z -= cos_rad(((((cam->currentYaw + playerStatus->spriteFacingAngle) - 90.0f) + phi_v1) * TAU) / 360.0f) * -4.0f;
+    playerStatus->position.z -= cos_rad((((cam->currentYaw + playerStatus->spriteFacingAngle) - 90.0f) + phi_v1) * TAU / 360.0f) * -4.0f;
 }
 
 void func_802BD20C_31DF7C(f32* arg0, f32* arg1) {
@@ -209,7 +209,7 @@ ApiStatus func_802BF5A0_320310(Evt* evt, s32 isInitialCall) {
 }
 
 void func_802BF920_320690(Npc* npc) {
-    if (D_8010C954 != 0) {
+    if (D_8010C954 != NULL) {
         D_8010C954 = NULL;
         npc->flags = D_802BFDF8_320B68->unk_08;
         D_802BFDF8_320B68->unk_04 = 0;
