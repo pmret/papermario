@@ -221,7 +221,7 @@ void update_player_actor_shadow(void) {
     Actor* player = battleStatus->playerActor;
     ActorPart* parts = player->partsTable;
     Shadow* shadow;
-    f32 x, y, z, scale;
+    f32 x, y, z, distance;
 
     parts->unk_8C = spr_update_player_sprite(0, parts->currentAnimation, parts->animationRate);
 
@@ -238,20 +238,20 @@ void update_player_actor_shadow(void) {
         shadow->unk_05 = 40;
     }
 
-    scale = 32767.0f;
+    distance = 32767.0f;
     x = player->currentPos.x + player->headOffset.x;
     z = player->currentPos.z + player->headOffset.z;
     y = player->currentPos.y + player->headOffset.y + 12.0;
-    npc_raycast_down_sides(0, &x, &y, &z, &scale);
+    npc_raycast_down_sides(0, &x, &y, &z, &distance);
 
-    if (scale > 200.0f) {
+    if (distance > 200.0f) {
         shadow->flags |= SHADOW_FLAGS_1;
     }
     shadow->position.x = x;
     shadow->position.y = y;
     shadow->position.z = z;
     shadow->rotation.y = clamp_angle(player->yaw - camera->currentYaw);
-    set_standard_shadow_scale(shadow, scale);
+    set_standard_shadow_scale(shadow, distance);
     shadow->scale.x *= player->shadowScale * player->scalingFactor;
 
     if (parts->opacity >= 255 && !(parts->flags & 0x100)) {

@@ -1831,7 +1831,7 @@ s32 inflict_status_set_duration(Actor* actor, s32 statusTypeKey, s32 statusDurat
 }
 
 void func_80266D6C(ActorPart* part, s32 arg1) {
-    if (part->idleAnimations != NULL && !(part->flags & 2)) {
+    if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
         DecorationTable* decorationTable = part->decorationTable;
 
         if (decorationTable->unk_6C0 != arg1) {
@@ -1845,7 +1845,7 @@ void func_80266D6C(ActorPart* part, s32 arg1) {
 INCLUDE_ASM(s32, "190B20", func_80266DAC);
 
 void func_80266E14(ActorPart* part) {
-    if (part->idleAnimations != NULL && !(part->flags & 2)) {
+    if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
         part->decorationTable->unk_6C0 = 0;
     }
 }
@@ -1853,7 +1853,7 @@ void func_80266E14(ActorPart* part) {
 INCLUDE_ASM(s32, "190B20", func_80266E40);
 
 void func_80266EA8(ActorPart* part, s32 arg1) {
-    if (part->idleAnimations != NULL && !(part->flags & 2)) {
+    if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
         DecorationTable* decorationTable = part->decorationTable;
 
         if (decorationTable->unk_750 != arg1) {
@@ -1867,7 +1867,7 @@ void func_80266EA8(ActorPart* part, s32 arg1) {
 INCLUDE_ASM(s32, "190B20", func_80266EE8);
 
 void func_80266F60(ActorPart* part) {
-    if (part->idleAnimations != NULL && !(part->flags & 2)) {
+    if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
         part->decorationTable->unk_750 = 0;
     }
 }
@@ -1879,7 +1879,10 @@ void func_80266F8C(Actor* actor) {
         DecorationTable* decorationTable = actorPart->decorationTable;
 
         do {
-            if (!(actorPart->flags & 0x100001) && actorPart->idleAnimations != NULL && !(actorPart->flags & 2)) {
+            if (!(actorPart->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
+                actorPart->idleAnimations != NULL &&
+                !(actorPart->flags & ACTOR_PART_FLAG_2))
+            {
                 decorationTable->unk_750 = 0;
             }
         } while (0); // todo improve match
@@ -1903,8 +1906,10 @@ void func_80267018(Actor* actor, s32 arg1) {
     ActorPart* actorPart = &actor->partsTable[0];
 
     while (actorPart != NULL) {
-        if (!(actorPart->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) && actorPart->decorationTable != NULL && !(actorPart->flags & ACTOR_PART_FLAG_2) &&
-            actorPart->idleAnimations != NULL) {
+        if (!(actorPart->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) &&
+            actorPart->decorationTable != NULL && !(actorPart->flags & ACTOR_PART_FLAG_2) &&
+            actorPart->idleAnimations != NULL)
+        {
             func_80266FD8(actorPart, arg1);
         }
         actorPart = actorPart->nextPart;
@@ -1912,7 +1917,7 @@ void func_80267018(Actor* actor, s32 arg1) {
 }
 
 void func_8026709C(ActorPart* part) {
-    if (part->idleAnimations != NULL && !(part->flags & 2)) {
+    if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
         part->decorationTable->unk_764 = 0;
     }
 }
@@ -1946,7 +1951,9 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, s32 decorationTyp
 void add_actor_decoration(Actor* actor, s32 decorationIndex, s32 decorationType) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if ((part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) == 0 && part->idleAnimations && !(part->flags & ACTOR_PART_FLAG_2)) {
+        if ((part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) == 0 && part->idleAnimations &&
+            !(part->flags & ACTOR_PART_FLAG_2))
+        {
             add_part_decoration(part, decorationIndex, decorationType);
         }
     }
@@ -1959,7 +1966,9 @@ void remove_part_decoration(ActorPart* part, s32 decorationIndex) {
 void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if ((part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) == 0 && part->idleAnimations && !(part->flags & ACTOR_PART_FLAG_2)) {
+        if ((part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) == 0 && part->idleAnimations &&
+            !(part->flags & ACTOR_PART_FLAG_2))
+        {
             remove_part_decoration(part, decorationIndex);
         }
     }

@@ -2955,7 +2955,7 @@ enum MsgWindowStates {
 enum FoldStateFlags {
     FOLD_STATE_FLAGS_0                 = 0x00000000,
     FOLD_STATE_FLAGS_1                 = 0x00000001,
-    FOLD_STATE_FLAGS_80               = 0x00000080,
+    FOLD_STATE_FLAGS_80                = 0x00000080,
     FOLD_STATE_FLAGS_100               = 0x00000100,
     FOLD_STATE_FLAGS_800               = 0x00000800,
     FOLD_STATE_FLAGS_1000              = 0x00001000,
