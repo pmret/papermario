@@ -5,11 +5,21 @@ extern unkPartnerStruct* D_802BEB60_31CB80;
 s32 entity_interacts_with_current_partner(s32);
 s32 test_item_entity_position(f32, f32, f32, f32);
 s32 partner_use_ability(void);
+s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
 extern s32 D_802BEC68;
 extern s32 D_802BEC6C;
 extern s32 D_802BEC54;
 extern s32 D_802BEB40_31CB60;
 extern s32 D_802BEC64;
+extern s32 D_802BEC58;
+extern f32 D_802BEC70;
+extern f32 D_802BEC74;
+extern f32 D_802BEC78;
+extern s32 D_802BEC50;
+extern s32 D_802BEC60;
+extern s32 D_802BEC5C;
+extern s16 D_8010C97A;
+void playFX_18(s32, f32, f32, f32, f32, f32, f32, s32);
 
 s32 func_802BD100_31B120(void) {
     if (D_8010C978 < 0) {
@@ -37,40 +47,40 @@ s32 func_802BD17C_31B19C(Npc* npc) {
     } else {
         D_802BEC6C = 1;
         gOverrideFlags |= 0x40;
-        set_item_entity_flags(D_802BEC68, 0x200000);
+        set_item_entity_flags(D_802BEC68, ENTITY_FLAGS_200000);
         return 1;
     }
 }
 
 void func_802BD200_31B220(Npc* npc) {
-    npc->collisionHeight = 0x25;
-    npc->collisionRadius = 0x18;
+    npc->collisionHeight = 37;
+    npc->collisionRadius = 24;
     npc->unk_80 = 0x00010000;
     D_802BEC54 = 0;
 }
 
-s32 func_802BD228_31B248(Evt* script, s32 isInitialCall) {
+ApiStatus func_802BD228_31B248(Evt* script, s32 isInitialCall) {
     Npc* npc = script->owner2.npc;
 
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         partner_init_get_out(npc);
     }
 
     if (partner_get_out(npc)) {
-        return 1;
+        return ApiStatus_DONE1;
     } else {
-        return 0;
+        return ApiStatus_BLOCK;
     }
 }
 
-s32 func_802BD260_31B280(Evt* evt, s32 isInitialCall) {
+ApiStatus func_802BD260_31B280(Evt* evt, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* npc;
     f32 sp10, sp14, tempY;
     Entity* entity;
 
     npc = evt->owner2.npc;
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         partner_walking_enable(npc, 1);
         mem_clear(D_802BEB60_31CB80, sizeof(*D_802BEB60_31CB80));
         D_8010C954 = 0;
@@ -81,7 +91,7 @@ s32 func_802BD260_31B280(Evt* evt, s32 isInitialCall) {
     if (entity == NULL) {
         partner_walking_update_player_tracking(npc);
         partner_walking_update_motion(npc);
-        return 0;
+        return ApiStatus_BLOCK;
     }
 
     switch (D_802BEB60_31CB80->unk_04) {
@@ -142,7 +152,7 @@ s32 func_802BD260_31B280(Evt* evt, s32 isInitialCall) {
             }
             break;
     }
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
 void func_802BD5F4_31B614(Npc* npc) {
@@ -154,9 +164,426 @@ void func_802BD5F4_31B614(Npc* npc) {
     }
 }
 
-INCLUDE_ASM(s32, "world/partner/kooper", func_802BD638_31B658);
+#ifdef NON_EQUIVALENT
+ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
+    Camera* cam;
+    ItemEntity* itemGrabbed;
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Npc* npc = script->owner2.npc;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+    f32 sp20, sp24, sp28, sp2C;
+    s32 phi_v0_4 = 0;
+    f32 temp_f20_2;
+    f32 temp_f20_3;
+    f32 temp_f20_4;
+    f32 temp_f20_5;
+    f32 temp_f20_6;
+    f32 phi_f0;
+    f32 phi_f0_3;
+    s32 tempVar;
+    f32 clamp;
+    f32 colheight;
+    
+    if (currentEncounter->unk_08 == 0) {
+        if (isInitialCall) {
+            func_802BD5F4_31B614(npc);
+            if (playerStatus->animFlags & 0x100000) {
+                return ApiStatus_DONE2;
+            }
 
-s32 func_802BE7E0_31C800(Evt* script, s32 isInitialCall) {
+            if (D_802BEC54 == 0) {
+                tempVar = playerStatus->actionState;
+                if (tempVar < 3U) {
+                    script->functionTemp[0] = 20;
+                } else {
+                    return ApiStatus_DONE2;
+                }
+                
+            }
+
+            else if (partnerActionStatus->actionState.b[0] == 0) {
+                partnerActionStatus->actionState.b[0] = 1;
+                partnerActionStatus->actionState.b[3] = 2;
+                script->functionTemp[0] = 5;
+                npc->currentAnim.w = 0x20009;
+                D_802BEC50 = 30;
+            }
+        }
+        
+        switch (script->functionTemp[0]) {
+        case 20:
+            if (playerStatus->statusMenuCounterinputEnabledCounter == 0) {
+                if (playerStatus->decorationList == 0) {
+                    if (npc->flags & 0x1000) {
+                        disable_player_input();
+                        script->functionTemp[2] = playerStatus->statusMenuCounterinputEnabledCounter;
+                        D_802BEC64 = 1;
+                        D_802BEB40_31CB60 = 0;
+                        D_802BEC6C = 0;
+                        npc->flags &= ~0xA08;
+                        npc->flags |= 0x140;
+                        partnerActionStatus->actionState.b[3] = 2;
+                        partnerActionStatus->actionState.b[0] = 1;
+                        D_802BEC58 = func_800EF4E0();
+                        enable_npc_blur(npc);
+                        npc->duration = 4;
+                        npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
+                        script->functionTemp[0]++;
+                    } else {
+                        return ApiStatus_DONE2;
+                    }
+                } else {
+                    return ApiStatus_DONE2;
+                }
+            } else {
+                return ApiStatus_DONE2;
+            }
+            break;
+
+        case 21:
+            if ((((u8)playerStatus->actionState - 0x15) < 3U) || (playerStatus->decorationList != 0)) {
+                suggest_player_anim_clearUnkFlag(0x10002);
+                script->functionTemp[0] = 0;
+                break;
+            } else {
+                suggest_player_anim_clearUnkFlag(0x10006);
+                
+                D_802BEC70 = playerStatus->position.x;
+                npc->moveToPos.x = D_802BEC70;
+                D_802BEC74 = playerStatus->position.y;
+                npc->moveToPos.y = D_802BEC74;
+                D_802BEC78 = playerStatus->position.z;
+                npc->moveToPos.z = D_802BEC78;
+                
+                npc->currentAnim.w = 0x20005;
+                
+
+                add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, playerStatus->colliderDiameter / 3, playerStatus->targetYaw);
+                
+                clamp = clamp_angle(playerStatus->targetYaw + ((D_802BEC58 != 0) ? 90.0f : -90.0f));
+
+                add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, playerStatus->colliderDiameter / 4, clamp);
+                
+                npc->pos.x = (npc->pos.x + ((npc->moveToPos.x - npc->pos.x) / npc->duration));
+                npc->pos.y = (npc->pos.y + ((npc->moveToPos.y - npc->pos.y) / npc->duration));
+                npc->pos.z = (npc->pos.z + ((npc->moveToPos.z - npc->pos.z) / npc->duration));
+                npc->duration -= 1;
+
+                if (npc->duration << 0x10) {
+                    break;
+                }
+                disable_npc_blur(npc);
+                if (script->functionTemp[2] < playerStatus->statusMenuCounterinputEnabledCounter) {
+                    if (!(playerStatus->animFlags & 0x100000)) {
+                        suggest_player_anim_clearUnkFlag(0x10002);
+                    } else {
+                        suggest_player_anim_clearUnkFlag(0x10005);
+                    }
+                    script->functionTemp[0] = 0;
+                    break;
+                } else {
+                    npc->yaw = playerStatus->targetYaw;
+                    npc->jumpVelocity = 18.0f;
+                    npc->jumpScale = 3.0f;
+
+                    npc->currentAnim.w = 0x2000A;
+                    npc->collisionHeight = 12;
+                    
+                    npc->moveToPos.y = playerStatus->position.y;
+                    npc->moveToPos.z = playerStatus->position.y + (playerStatus->colliderHeight / 3);
+
+                    playerStatus->flags |= 2;
+                    gCameras->moveFlags |= 1;
+                    
+                    
+                    suggest_player_anim_clearUnkFlag(0x10007);
+                    D_802BEC60 = 0;
+                    sfx_play_sound_at_npc(0x2081, 0, -4);
+                    script->functionTemp[0] = 2;
+                }
+            }
+        
+        case 2:
+            if (((u8)playerStatus->actionState - 0x15) >= 3U) {
+                npc->jumpVelocity -= npc->jumpScale;
+                playerStatus->position.y += npc->jumpVelocity;
+                if (npc->jumpVelocity < 0.0f) {
+                    if (D_802BEC60 == 0) {
+                        D_802BEC60 = 1;
+                        suggest_player_anim_clearUnkFlag(0x10008);
+                    }
+                }
+
+                colheight = playerStatus->colliderHeight / 2;
+                
+                sp20 = playerStatus->position.x;
+                sp24 = playerStatus->position.y;
+                sp28 = playerStatus->position.z;
+
+                sp24 += colheight - npc->jumpVelocity;
+                sp24 -= npc->jumpVelocity;
+
+                sp2C = playerStatus->colliderHeight / 2;
+
+                if ((npc_raycast_up(0x10000, &sp20, &sp24, &sp28, &sp2C) != 0) && (sp2C < colheight)) {
+                    collisionStatus->currentCeiling = D_8010C97A;
+                    playerStatus->position.y = sp24 - playerStatus->colliderHeight;
+                    func_802BD144_31B164();
+                }
+
+                if (!(npc->jumpVelocity > 0.0f) && (playerStatus->position.y < npc->moveToPos.z)) {
+                    D_802BEC5C = 0;
+                    npc->flags &= ~0x100;
+                    partnerActionStatus->actionState.b[3] = 2;
+                    partnerActionStatus->actionState.b[0] = 2;
+                    npc->rotation.z = 0.0f;
+                    npc->planarFlyDist = 0.0f;
+                    npc->moveSpeed = 8.0f;
+                    npc->currentAnim.w = 0x20009;
+                    D_802BEB40_31CB60 = 1;
+                    temp_f20_2 = sin_deg(playerStatus->targetYaw);
+                    playFX_18(3, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, temp_f20_2, -1.0f, -cos_deg(playerStatus->targetYaw), 3);
+                    start_bounce_b();
+
+                    if (D_802BEC64 != 0) {
+                        enable_player_input();
+                        D_802BEC64 = 0;
+                    }
+
+                    script->functionTemp[0] = 3;
+                    D_802BEC60 = 0;
+                    gCameras->moveFlags |= 1;
+                    sfx_play_sound_at_npc(0x283, 0, -4);
+                    sfx_play_sound_at_npc(0x284, 0, -4);
+                }
+            } else {
+                script->functionTemp[0] = 0;
+            }
+            break;
+        case 3:
+            if (((u8)playerStatus->actionState - 0x15) > 1U) {
+                sp20 = npc->pos.x;
+                sp24 = npc->pos.y;
+                sp28 = npc->pos.z;
+
+                if (npc_test_move_taller_with_slipping(0x8000, &sp20, &sp24, &sp28, npc->moveSpeed, npc->yaw - 20.0f, npc->collisionHeight, (npc->collisionRadius / 2)) != 0) {
+                    if (func_802BD100_31B120() == 0) {
+                        sfx_play_sound_at_npc(0x10C, 0, -4);
+                    }
+
+                    temp_f20_3 = sin_deg(npc->yaw);
+                    playFX_18(3, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, temp_f20_3, -1.0f, -cos_deg(npc->yaw), 1);
+                    sfx_play_sound_at_npc(0, 0, -4);
+                    script->functionTemp[0] = 7;
+                    break;
+                }
+
+                sp20 = npc->pos.x;
+                sp24 = npc->pos.y;
+                sp28 = npc->pos.z;
+
+                if ((npc_test_move_taller_with_slipping(0x8000, &sp20, &sp24, &sp28, npc->moveSpeed, npc->yaw + 20.0f, npc->collisionHeight, npc->collisionRadius / 2) == 0) && (sp20 = npc->pos.x, sp24 = npc->pos.y, sp28 = npc->pos.z, (npc_test_move_taller_with_slipping(0x8000, &sp20, &sp24, &sp28, npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius / 2) == 0))) {
+                    npc->pos.x = sp20;
+                    npc->pos.y = sp24;
+                    npc->pos.z = sp28;
+                    npc->planarFlyDist += npc->moveSpeed;
+                    func_8003D660(npc, 1);
+                    npc->moveSpeed += 2.0;
+
+                    if (npc->moveSpeed > 14.0) {
+                        npc->moveSpeed = 14.0f;
+                    }
+
+                    if ((func_800397E8(npc, 6.0f) == 0) && ((playerStatus->flags & 6) == 0)) {
+                        npc->pos.y = (npc->pos.y + ((playerStatus->position.y - npc->pos.y) / 10.0f));
+                    }
+
+                    npc_do_other_npc_collision(npc);
+
+                    if ((npc->flags & 0x2000000) == 0) {
+                        if (func_802BD17C_31B19C(npc) != 0) {
+                            sfx_play_sound_at_npc(0x286, 0, -4);
+                            temp_f20_4 = sin_deg(npc->yaw);
+                            playFX_18(3, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, temp_f20_4, -1.0f, -cos_deg(npc->yaw), 1);
+                            sfx_play_sound_at_npc(0, 0, -4);
+                            script->functionTemp[0] = 4;
+                            D_802BEC50 = 8;
+                            npc->moveSpeed -= 4.0;
+                            if (npc->moveSpeed < 0.01) {
+                                npc->moveSpeed = 0.01f;
+                                npc->planarFlyDist += 1.0;
+                            }
+                        }
+                        else if (D_802BEB40_31CB60 == 2) {
+                            sfx_play_sound_at_npc(0, 0, -4);
+                            script->functionTemp[0] = 5;
+                            D_802BEC50 = 30;
+                            npc->moveSpeed = 0.0f;
+                        } else {
+                            if (npc->planarFlyDist > 140.0f) {
+                                label2:
+                                script->functionTemp[0] = 7;
+                                npc->moveSpeed = 0.0f;
+                                sfx_play_sound_at_npc(0, 0, -4);
+                            }
+                            
+                            else if (npc->planarFlyDist > 105.0f) {
+                                npc->moveSpeed -= 4.0;
+                                if (npc->moveSpeed < 0.01) {
+                                    npc->moveSpeed = 0.01f;
+                                    npc->planarFlyDist += 1.0;
+                                }
+                            }
+                            break;
+                        }
+                    } else {
+                        goto label2;
+                    }
+                } else {
+                    if (func_802BD100_31B120() == 0) {
+                        sfx_play_sound_at_npc(0x10C, 0, -4);
+                    }
+
+                    temp_f20_3 = sin_deg(npc->yaw);
+                    playFX_18(3, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, temp_f20_3, -1.0f, -cos_deg(npc->yaw), 1);
+                    sfx_play_sound_at_npc(0, 0, -4);
+                    script->functionTemp[0] = 7;
+                }
+            } else {
+                script->functionTemp[0] = 0;
+            }
+            break;
+        case 4:
+            sp20 = npc->pos.x;
+            sp24 = npc->pos.y;
+            sp28 = npc->pos.z;
+
+            npc_test_move_taller_with_slipping(0x8000, &sp20, &sp24, &sp28, npc->moveSpeed, npc->yaw, npc->collisionHeight, ( npc->collisionRadius / 2));
+            npc->pos.x = sp20;
+            npc->pos.y = sp24;
+            npc->pos.z = sp28;
+
+            npc->planarFlyDist += npc->moveSpeed;
+            func_8003D660(npc, 1);
+            npc->moveSpeed -= 6.0;
+
+            if (npc->moveSpeed < 0.01) {
+                npc->moveSpeed = 0.01f;
+                npc->planarFlyDist += 1.0;
+            }
+
+            if (D_802BEC50 == 0) {
+                script->functionTemp[0] = 7;
+            }
+            D_802BEC50--;
+            break;
+            
+        case 5:
+            if (D_802BEC50 != 0) {
+                D_802BEC50--;
+            } else {
+                script->functionTemp[0] = 7;
+            }
+            break;
+        }
+
+        if (script->functionTemp[0] == 7) {
+            npc->flags |= 0x100;
+            if (((u8)playerStatus->actionState - 0x15) < 2U) {
+                script->functionTemp[0] = 0;
+            } else {
+                temp_f20_5 = atan2(D_802BEC70, D_802BEC78, npc->pos.x, npc->pos.z);
+                npc->yaw = temp_f20_5 + (get_clamped_angle_diff(npc->yaw, temp_f20_5) * 0.125f);
+                npc_move_heading(npc, -npc->moveSpeed, npc->yaw);
+                npc->planarFlyDist -= npc->moveSpeed;
+                func_8003D660(npc, 1);
+                npc->moveSpeed += 1.3333333333333333;
+
+                if (npc->moveSpeed > 14.0) {
+                    npc->moveSpeed = 14.0f;
+                }
+
+                if (func_800397E8(npc, 6.0f) == 0) {
+                    npc->pos.y = (npc->pos.y + ((playerStatus->position.y - npc->pos.y) / 10.0f));
+                }
+
+                sp20 = npc->pos.x;
+                sp24 = npc->pos.y;
+                sp28 = npc->pos.z;
+
+                if (npc_test_move_taller_with_slipping(0x8000, &sp20, &sp24, &sp28, npc->moveSpeed, clamp_angle(npc->yaw + 180.0f), npc->collisionHeight, npc->collisionRadius) != 0) {
+                    npc->pos.x = sp20;
+                    npc->pos.y = sp24;
+                    npc->pos.z = sp28;
+                    sfx_play_sound_at_npc(0x10C, 0, -4);
+                    temp_f20_6 = sin_deg(npc->yaw + 180.0f);
+                    playFX_18(3, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, temp_f20_6, -1.0f, -cos_deg(npc->yaw + 180.0f), 1);
+                    script->functionTemp[0] = 0;
+                } else {
+                    if (D_802BEC6C != 0) {
+                        itemGrabbed = get_item_entity(D_802BEC68);
+                        sp20 = npc->pos.x;
+                        sp24 = npc->pos.y + 8.0f;
+                        sp28 = npc->pos.z;
+
+                        clamp = clamp_angle(playerStatus->targetYaw - ((D_802BEC58) ? 90.0f : -90.0f));
+
+                        add_vec2D_polar(&sp20, &sp28, 4.0f, clamp);
+                        itemGrabbed->position.x = sp20;
+                        itemGrabbed->position.y = sp24;
+                        itemGrabbed->position.z = sp28;
+                    }
+
+                    if (npc->planarFlyDist + 15.0f < npc->moveSpeed) {
+                        script->functionTemp[0] = 0;
+                    } else if (npc->planarFlyDist + 15.0f < 35.0f) {
+                        npc->moveSpeed -= 4.0;
+                        if (npc->moveSpeed < 4.0) {
+                            npc->moveSpeed = 4.0;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (script->functionTemp[0] == 0) {
+            if (D_802BEC64 != 0) {
+                enable_player_input();
+                D_802BEC64 = 0;
+            }
+
+            D_802BEB40_31CB60 = 0;
+            npc->flags |= 0x100;
+            npc->flags &= ~0x840;
+            partnerActionStatus->actionState.b[3] = 0;
+            partnerActionStatus->actionState.b[0] = 0;
+            npc->jumpVelocity = 0.0f;
+            npc->collisionHeight = 24;
+            npc->currentAnim.w = 0x20000 | 4;
+            sfx_stop_sound(0x284);
+            disable_npc_blur(npc);
+
+            if (D_802BEC6C != 0) {
+                func_801341B0(D_802BEC68);
+                D_802BEC6C = 0;
+            }
+
+            D_802BEC54 = 0;
+            partner_clear_player_tracking(npc);
+            return ApiStatus_DONE2;
+        }
+        /* Duplicate return node #104. Try simplifying control flow for better match */
+        return ApiStatus_BLOCK;
+    }
+    return ApiStatus_BLOCK;
+}
+#else
+INCLUDE_ASM(s32, "world/partner/kooper", func_802BD638_31B658);
+#endif
+
+ApiStatus func_802BE7E0_31C800(Evt* script, s32 isInitialCall) {
     Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
@@ -164,44 +591,66 @@ s32 func_802BE7E0_31C800(Evt* script, s32 isInitialCall) {
     }
 
     if (partner_put_away(npc)) {
-        return 1;
+        return ApiStatus_DONE1;
     } else {
-        return 0;
+        return ApiStatus_BLOCK;
     }
 }
 
-INCLUDE_ASM(s32, "world/partner/kooper", func_802BE818_31C838);
-/*
-s32 func_802BE818_31C838(Npc *npcKooper, Npc *npc2) {
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    f32 sp30;
-    f32 sp2C;
-    f32 sp28;
-    f32 sp24;
-    f32 sp20;
-    f32 *temp_a1;
-    f32 *temp_a2;
-    f32 *temp_a3;
+#ifdef NON_EQUIVALENT
+s32 func_802BE818_31C838(Npc* npcKooper, Npc* npc2) { //test if kooper hit npc
+    f32 npcKooperXTemp, npcKooperYTemp, npcKooperZTemp, npcX, npcY, npcZ, npcKooperX, npcKooperY, npcKooperZ, npcCollisionHeight, npcKooperHeight;
     f32 temp_f0;
     f32 temp_f20;
-    f32 temp_f22;
-    f32 temp_f22_2;
-    f32 temp_f24;
+    f32 npcDistanceToKooperX;
     f32 temp_f24_2;
-    f32 temp_f26;
-    f32 temp_f28;
-    f32 temp_f30;
-    f32 temp_f8;
+    f32 kooperCollisionRadius;
+    f32 npcCollisionRadius;
+    //D_802BEB40_31CB60 can kooper start battle with enemies bool
 
-    if ((D_802BEB40_31CB60 != 0) && (temp_f22 = npcKooper->pos.x, temp_f24 = npcKooper->pos.z, temp_f30 = npc2->pos.x, temp_f8 = npc2->pos.z, sp30 = temp_f8, sp34 = (f32) npc2->collisionHeight, sp3C = (f32) npcKooper->collisionHeight, sp2C = npc2->pos.y, sp38 = npcKooper->pos.y, temp_f28 = (f32) ((f64) npc2->collisionRadius * D_802BEC38_31CC58), temp_f26 = (f32) ((f64) npcKooper->collisionRadius * D_802BEC40_31CC60), temp_f20 = atan2(temp_f30, temp_f8, temp_f22, temp_f24), temp_f0 = dist2D(temp_f30, sp30, temp_f22, temp_f24), temp_a2 = &sp24, temp_a3 = &sp28, temp_a1 = &sp20, sp20 = npcKooper->pos.x, sp24 = npcKooper->pos.y, sp28 = npcKooper->pos.z, (npc_test_move_taller_with_slipping(0, temp_a1, temp_a2, temp_a3, temp_f0, temp_f20, sp3C, temp_f26 + temp_f28) == 0)) && !((sp2C + sp34) < sp38) && !((sp38 + sp3C) < sp2C) && (temp_f22_2 = temp_f30 - temp_f22, temp_f24_2 = sp30 - temp_f24, !(((temp_f26 * temp_f26) + (temp_f28 * temp_f28)) <= ((temp_f22_2 * temp_f22_2) + (temp_f24_2 * temp_f24_2))))) {
-        D_802BEB40_31CB60 = 2;
-        return 1;
+    if (D_802BEB40_31CB60) {
+        npcX = npc2->pos.x;
+        npcY = npc2->pos.y;
+        npcZ = npc2->pos.z;
+        npcKooperX = npcKooper->pos.x;
+        npcKooperY = npcKooper->pos.y;
+        npcKooperZ = npcKooper->pos.z;
+
+        npcCollisionHeight = npc2->collisionHeight;
+        npcCollisionRadius = npc2->collisionRadius * 0.55;
+        npcKooperHeight = npcKooper->collisionHeight;
+        kooperCollisionRadius = npcKooper->collisionRadius * 0.8;
+
+        temp_f20 = atan2(npcX, npcZ, npcKooperX, npcKooperZ);
+        temp_f0 = dist2D(npcX, npcZ, npcKooperX, npcKooperZ);
+
+        npcKooperX = npcKooper->pos.x;
+        npcKooperXTemp = npcKooper->pos.x;
+        npcKooperYTemp = npcKooper->pos.y;
+        npcKooperZTemp = npcKooper->pos.z;
+
+        if (npc_test_move_taller_with_slipping(0, &npcKooperXTemp, &npcKooperYTemp, &npcKooperZTemp, temp_f0, temp_f20, npcKooperHeight, npcCollisionRadius + kooperCollisionRadius) == 0) {
+            if (!((npcCollisionHeight + npcY) > npcKooperY)) {
+                if (!((npcKooperHeight + npcCollisionHeight) < npcY)) {
+                    npcDistanceToKooperX = npcX - npcKooperX;
+                    npcKooperX = SQ(kooperCollisionRadius) + SQ(npcCollisionRadius);
+                    npcKooperZ = npcZ - npcKooperZ;
+                    if (npcKooperX <= (SQ(npcDistanceToKooperX) + SQ(npcKooperZ))) {
+                        D_802BEB40_31CB60 = 2;
+                        return TRUE; //npc hit
+                    } else {
+                        return FALSE;
+                    }
+                }
+            }
+        }
     }
-    return 0;
+
+    return FALSE; //npc not hit
 }
-*/
+#else
+INCLUDE_ASM(s32, "world/partner/kooper", func_802BE818_31C838);
+#endif
 
 void func_802BEA24_31CA44(Npc* npc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -214,7 +663,7 @@ void func_802BEA24_31CA44(Npc* npc) {
             D_802BEC54 = 1;
         }
 
-        if (D_802BEC64 != 0) {
+        if (D_802BEC64) {
             enable_player_input();
             D_802BEC64 = 0;
         }
