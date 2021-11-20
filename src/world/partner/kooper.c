@@ -1,5 +1,6 @@
 #include "common.h"
 
+extern s32 D_802BEC54;
 extern unkPartnerStruct* D_802BEB60_31CB80;
 
 INCLUDE_ASM(s32, "world/partner/kooper", func_802BD100_31B120);
@@ -8,14 +9,10 @@ INCLUDE_ASM(s32, "world/partner/kooper", func_802BD144_31B164);
 
 INCLUDE_ASM(s32, "world/partner/kooper", func_802BD17C_31B19C);
 
-//INCLUDE_ASM(s32, "world/partner/kooper", func_802BD200_31B220);
-
-extern s32 D_802BEC54;
-
 void func_802BD200_31B220(Npc* npc) {
-    npc->collisionHeight = 0x25;
-    npc->collisionRadius = 0x18;
-    npc->unk_80 = 0x00010000;
+    npc->collisionHeight = 37;
+    npc->collisionRadius = 24;
+    npc->unk_80 = 0x10000;
     D_802BEC54 = 0;
 }
 
