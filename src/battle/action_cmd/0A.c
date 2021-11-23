@@ -4,6 +4,7 @@
 #define NAMESPACE action_command_0A
 
 extern s32 D_802942E0;
+extern s32 D_80108B80;
 extern HudElementAnim D_80292974;
 extern HudElementAnim D_80108AFC;
 extern HudElementAnim D_80108B28;
