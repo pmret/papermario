@@ -506,14 +506,9 @@ s32 advance_rng(void) {
 }
 
 f32 rand_float(void) {
-    s32 temp_v0 = advance_rng() & 0x7FFF;
-    f64 temp_f2 = temp_v0;
+    u32 temp_v0 = advance_rng() & 0x7FFF;
 
-    if (temp_v0 < 0) {
-        temp_f2 += 4294967296.0;
-    }
-
-    return temp_f2 * 3.0517578125e-05;
+    return temp_v0 / 32768.0;
 }
 
 s32 func_80029994(s32 arg0) {
