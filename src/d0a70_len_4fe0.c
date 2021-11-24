@@ -20,7 +20,7 @@ typedef struct {
     /* 0x1C */ s32 unk_1C[2][4];
     /* 0x3C */ f32 unk_3C[2][4];
     /* 0x5C */ u8* buf;
-    /* 0x60 */ s16 bufSize;
+    /* 0x60 */ u16 bufSize;
     /* 0x62 */ char unk_62[0x2];
     /* 0x64 */ s32* unk_64;
     /* 0x68 */ s32* unk_68[2];
@@ -384,7 +384,195 @@ void fold_init_state(FoldState* state) {
     }
 }
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", fold_update);
+void fold_update(u32 idx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    FoldState* state = &(*D_80156954)[idx];
+    s32 oldFlags;
+    s32 t1;
+
+    if (!(state->flags & FOLD_STATE_FLAGS_1) || (idx >= 90)) {
+        return;
+    }
+
+    switch (arg1) {
+        case 0:
+        case 3:
+            oldFlags = state->flags;
+            fold_clear_state_gfx(state);
+            fold_init_state(state);
+            state->flags = oldFlags;
+            state->unk_05 = 0;
+            state->unk_06 = 0;
+            state->meshType = 0;
+            state->renderType = 0;
+            state->unk_1C[0][0] = -1;
+            state->unk_1C[1][0] = -1;
+            state->flags &= FOLD_STATE_FLAGS_1;
+
+            if (arg6 != 0) {
+                state->flags |= arg6;
+            } else {
+                state->flags = state->flags; // required to match
+            }
+            return;
+        case 1:
+            state->unk_05 = 0;
+            state->renderType = 0;
+            state->unk_1C[0][0] = -1;
+            return;
+        case 2:
+            state->unk_06 = 0;
+            state->meshType = 0;
+            state->unk_1C[1][0] = -1;
+            return;
+        case 17:
+            if (state->buf != NULL) {
+                heap_free(state->buf);
+            }
+            state->bufSize = arg2 * 4;
+            state->buf = heap_malloc(state->bufSize);
+            return;
+        case 15:
+        case 16:
+            if (arg1 == state->unk_06 && arg2 == state->unk_1C[1][0] && arg3 == state->unk_1C[1][1]) {
+                return;
+            }
+            break;
+        case 5:
+            if (state->unk_05 == arg1 && state->unk_1C[0][0] == arg2 && state->unk_1C[0][1] == arg3 &&
+                state->unk_1C[0][2] == arg4)
+            {
+                return;
+            }
+            break;
+        default:
+            if (arg1 != 0xD && state->unk_06 == 0xD) {
+                state->meshType = 0;
+                state->subdivX = 1;
+                state->subdivY = 1;
+            }
+            break;
+    }
+
+    if (arg1 != 5 && state->unk_05 == 5) {
+        state->unk_05 = 0;
+    }
+
+    if (arg1 == 4 || arg1 == 5) {
+        state->unk_05 = arg1;
+        state->unk_1C[0][0] = arg2;
+        state->unk_1C[0][1] = arg3;
+        state->unk_1C[0][2] = arg4;
+        state->unk_1C[0][3] = arg5;
+    } else if (arg1 >= 6 && arg1 <= 16) {
+        state->unk_06 = arg1;
+        state->unk_1C[1][0] = arg2;
+        state->unk_1C[1][1] = arg3;
+        state->unk_1C[1][2] = arg4;
+        state->unk_1C[1][3] = arg5;
+    }
+
+    state->flags &= FOLD_STATE_FLAGS_1;
+    if (arg6 != 0) {
+        state->flags |= arg6;
+    }
+    state->meshType = 0;
+
+    switch (arg1) {
+        case 3:
+            state->meshType = 0;
+            state->renderType = 0;
+            break;
+        case 4:
+            state->subdivX = 4;
+            state->subdivY = 4;
+            state->meshType = 1;
+            func_8013EE48(state);
+            break;
+        case 5:
+            state->meshType = 2;
+            state->renderType = 0xB;
+            state->unk_3C[0][0] = 0.0f;
+            state->unk_3C[0][1] = 0.0f;
+            state->flags |= FOLD_STATE_FLAGS_200;
+            break;
+        case 6:
+        case 7:
+        case 8:
+            if (arg2 >= 0xFF && arg3 >= 0xFF && arg4 >= 0xFF && arg5 >= 0xFF) {
+                state->renderType = 0;
+            } else if (arg5 >= 0xFF) {
+                state->renderType = 1;
+            } else if (arg2 >= 0xFF && arg3 >= 0xFF && arg4 >= 0xFF) {
+                state->renderType = 2;
+            } else {
+                state->renderType = 3;
+            }
+            break;
+        case 9:
+        case 10:
+            if (arg5 == 255.0) {
+                state->renderType = 4;
+            } else {
+                state->renderType = 5;
+            }
+            break;
+        case 11:
+            if (arg2 < state->bufSize) {
+                t1 = (u32) arg3 >> 0x18; // required to match
+                state->buf[arg2 * 4 + 0] = (u32) arg3 >> 0x18;
+                state->buf[arg2 * 4 + 1] = (u32) arg3 >> 0x10;
+                state->buf[arg2 * 4 + 2] = (u32) arg3 >> 0x08;
+                do {
+                    state->buf[arg2 * 4 + 3] = arg3;
+                } while (0); // required to match
+
+                state->meshType = 0;
+
+                if ((arg3 & 0xFF) == 0xFF) {
+                    state->renderType = 6;
+                } else {
+                    state->renderType = 8;
+                }
+            }
+            break;
+        case 12:
+            if (arg2 < state->bufSize) {
+                t1 = (u32) arg3 >> 0x18; // required to match
+                state->buf[arg2 * 4 + 0] = t1;
+                state->buf[arg2 * 4 + 1] = (u32) arg3 >> 0x10;
+                state->buf[arg2 * 4 + 2] = (u32) arg3 >> 0x08;
+                do {
+                    state->buf[arg2 * 4 + 3] = arg3;
+                } while (0); // required to match
+
+                state->meshType = 0;
+
+                if ((arg3 & 0xFF) == 0xFF) {
+                    state->renderType = 9;
+                } else {
+                    state->renderType = 0xA;
+                }
+            }
+            break;
+        case 13:
+            state->renderType = 0xC;
+            break;
+        case 14:
+            state->renderType = 0xD;
+            break;
+        case 15:
+        case 16:
+            state->meshType = 4;
+            if (arg3 >= 0xFF) {
+                state->renderType = 0xE;
+            } else {
+                state->renderType = 0xF;
+            }
+            state->unk_3C[1][0] = 0.0f;
+            state->unk_3C[1][1] = 0.0f;
+            break;
+    }
+}
 
 void fold_set_state_flags(s32 idx, u16 flagBits, s32 mode) {
     if ((*D_80156954)[idx].flags & FOLD_STATE_FLAGS_1) {
@@ -489,7 +677,77 @@ void func_8013B0EC(FoldState* state) {
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013B1B0);
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013BC88);
+void func_8013BC88(FoldState* state) {
+    s32 yOffset;
+    s32 xOffset;
+    s32 widthIncrement;
+    s32 heightIncrement;
+    s32 heightIncrement120;
+    s32 temp2;
+    s32 i;
+
+    widthIncrement = 0x1000 / fold_currentImage->width;
+    if (widthIncrement > fold_currentImage->height) {
+        widthIncrement = fold_currentImage->height;
+    }
+
+    xOffset = fold_currentImage->xOffset;
+    yOffset = fold_currentImage->yOffset;
+    state->firstVtxIdx = fold_vtxCount;
+
+    fold_vtxBuf[fold_vtxCount].v.ob[0] = xOffset;
+    fold_vtxBuf[fold_vtxCount].v.ob[1] = yOffset;
+    fold_vtxBuf[fold_vtxCount].v.ob[2] = 0;
+    fold_vtxBuf[fold_vtxCount].v.tc[0] = 0x2000;
+    fold_vtxBuf[fold_vtxCount].v.tc[1] = temp2 = 0x2000; // required to match
+    fold_vtxBuf[fold_vtxCount].v.cn[0] = 240;
+    fold_vtxBuf[fold_vtxCount].v.cn[1] = 240;
+    fold_vtxBuf[fold_vtxCount].v.cn[2] = 240;
+    fold_vtxBuf[fold_vtxCount + 1].v.ob[0] = fold_currentImage->width + xOffset;
+    fold_vtxBuf[fold_vtxCount + 1].v.ob[1] = yOffset;
+    fold_vtxBuf[fold_vtxCount + 1].v.ob[2] = 0;
+    fold_vtxBuf[fold_vtxCount + 1].v.tc[0] = (fold_currentImage->width + 256) * 32;
+    fold_vtxBuf[fold_vtxCount + 1].v.tc[1] = temp2;
+    fold_vtxBuf[fold_vtxCount + 1].v.cn[0] = 120;
+    fold_vtxBuf[fold_vtxCount + 1].v.cn[1] = 120;
+    fold_vtxBuf[fold_vtxCount + 1].v.cn[2] = 120;
+
+    for (i = widthIncrement; ; i += widthIncrement) {
+        heightIncrement = (i * 120) / fold_currentImage->height;
+        heightIncrement120 = heightIncrement + 120;
+        fold_vtxCount += 2;
+        fold_vtxBuf[fold_vtxCount].v.ob[0] = xOffset;
+        fold_vtxBuf[fold_vtxCount].v.ob[1] = yOffset - widthIncrement;
+        fold_vtxBuf[fold_vtxCount].v.ob[2] = 0;
+        fold_vtxBuf[fold_vtxCount].v.tc[0] = 0x2000;
+        fold_vtxBuf[fold_vtxCount].v.tc[1] = (i + 256) * 32;
+        fold_vtxBuf[fold_vtxCount].v.cn[0] = heightIncrement120;
+        fold_vtxBuf[fold_vtxCount].v.cn[1] = heightIncrement120;
+        fold_vtxBuf[fold_vtxCount].v.cn[2] = heightIncrement120;
+        fold_vtxBuf[fold_vtxCount + 1].v.ob[0] = fold_currentImage->width + xOffset;
+        fold_vtxBuf[fold_vtxCount + 1].v.ob[1] = yOffset - widthIncrement;
+        fold_vtxBuf[fold_vtxCount + 1].v.ob[2] = 0;
+        fold_vtxBuf[fold_vtxCount + 1].v.tc[0] = (fold_currentImage->width + 256) * 32;
+        fold_vtxBuf[fold_vtxCount + 1].v.tc[1] = (i + 256) * 32;
+        fold_vtxBuf[fold_vtxCount + 1].v.cn[0] = heightIncrement;
+        fold_vtxBuf[fold_vtxCount + 1].v.cn[1] = heightIncrement;
+        fold_vtxBuf[fold_vtxCount + 1].v.cn[2] = heightIncrement;
+
+        if (i != fold_currentImage->height) {
+            yOffset -= widthIncrement;
+            if (fold_currentImage->height < i + widthIncrement) {
+                widthIncrement = fold_currentImage->height - i;
+            }
+        } else {
+            fold_vtxCount += 2;
+            break;
+        }
+    }
+
+    state->lastVtxIdx = fold_vtxCount - 1;
+    state->subdivX = 1;
+    state->subdivY = ((state->lastVtxIdx - state->firstVtxIdx) - 1) / 2;
+}
 
 void func_8013C048(FoldState* state) {
     f32 divSizeX;
