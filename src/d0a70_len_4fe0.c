@@ -4,7 +4,7 @@
 typedef struct {
     /* 0x00 */ s8 arrayIdx;
     /* 0x01 */ u8 meshType;
-    /* 0x02 */ s8 renderType;
+    /* 0x02 */ u8 renderType;
     /* 0x03 */ u8 subdivX;
     /* 0x04 */ u8 subdivY;
     /* 0x05 */ s8 unk_05;
@@ -25,7 +25,7 @@ typedef struct {
     /* 0x64 */ s32* unk_64;
     /* 0x68 */ s32* unk_68[2];
     /* 0x70 */ s32* unk_70[2];
-    /* 0x78 */ char unk_78[0x4];
+    /* 0x78 */ s32 unk_78;
 } FoldState; // size = 0x7C
 
 typedef struct FoldDataCache {
@@ -62,6 +62,13 @@ typedef struct FoldGfxDescriptor {
     /* 0x0F */ s8 unk_0F;
 } FoldGfxDescriptor; // size = 0x10
 
+typedef struct FoldC {
+    /* 0x0 */ s32 unk_00;
+    /* 0x4 */ s32 unk_04;
+    /* 0x8 */ u8 flags; // only checks 1 so far. some kind of switch?
+    /* 0x9 */ char unk_09[0x3];
+} FoldC; // size = 0xC
+
 typedef FoldState FoldStateList[90];
 
 // BSS
@@ -83,9 +90,29 @@ u16 fold_vtxCount = 0;
 // padding?
 s16 D_8014EE16 = 0;
 
-s32 D_8014EE18[] = { 0x90909000, 0x90909000, 0xFFFFFF00, 0xFFFFFF00, 0x00007800, 0x00000000, 0xFFFFFF00, 0xFFFFFF00,
-                     0x00008800, 0x00000000,
-                   };
+Lights2 D_8014EE18 = {
+    .a = {
+        .l = {
+            .col = { 144, 144, 144 },
+            .colc = { 144, 144, 144 },
+        }
+    },
+    .l = {
+        {
+            .l = {
+                .col = { 255, 255, 255 },
+                .colc = { 255, 255, 255 },
+                .dir = { 0, 0, 120}
+            }
+        }, {
+            .l = {
+                .col = { 255, 255, 255 },
+                .colc = { 255, 255, 255 },
+                .dir = { 0, 0, 136}
+            }
+        }
+    }
+};
 
 s32 D_8014EE40[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
 
@@ -98,18 +125,35 @@ s16 D_8014EE62 = 0;
 s16 D_8014EE64 = 0;
 s16 D_8014EE66 = 0;
 
-s32 D_8014EE68[] = { 0xD9FDF9FF, 0x00000000, 0xD9FFFFFF, 0x00200005, 0xD7000002, 0xFFFFFFFF, 0xE2001E01, 0x00000000,
-                     0xE3000A11, 0x00082CF0, 0xDF000000, 0x00000000,
-                   };
+Gfx D_8014EE68[] = {
+    gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
+    gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH),
+    gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
+    gsDPSetAlphaCompare(G_AC_NONE),
+    gsSPSetOtherMode(G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18,
+                     G_AD_DISABLE | G_CD_DISABLE | G_TC_FILT | G_TF_BILERP | G_TP_PERSP),
+    gsSPEndDisplayList(),
+};
 
-s32 D_8014EE98[] = { 0x00441208, 0x00111208, 0x00000000, 0x00441208, 0x00111208, 0x00000000, 0x00404B40, 0x00104B40,
-                     0x01000000, 0x00404B40, 0x00104B40, 0x01000000, 0x00441208, 0x00111208, 0x00000000, 0x00404B40,
-                     0x00104B40, 0x01000000, 0x00441208, 0x00111208, 0x00000000, 0x00404B40, 0x00104B40, 0x01000000,
-                     0x00404B40, 0x00104B40, 0x01000000, 0x00441208, 0x00111208, 0x00000000, 0x00404B40, 0x00104B40,
-                     0x01000000, 0x00441208, 0x00111208, 0x00000000, 0x00404B40, 0x00104B40, 0x01000000, 0x00441208,
-                     0x00111208, 0x00000000, 0x00441208, 0x00111208, 0x00000000, 0x00404B40, 0x00104B40, 0x01000000,
-                     0x00441208, 0x00111208, 0x00000000,
-                   };
+FoldC D_8014EE98[17] = {
+    { 0x00441208, 0x00111208, 0 },
+    { 0x00441208, 0x00111208, 0 },
+    { 0x00404B40, 0x00104B40, 1 },
+    { 0x00404B40, 0x00104B40, 1 },
+    { 0x00441208, 0x00111208, 0 },
+    { 0x00404B40, 0x00104B40, 1 },
+    { 0x00441208, 0x00111208, 0 },
+    { 0x00404B40, 0x00104B40, 1 },
+    { 0x00404B40, 0x00104B40, 1 },
+    { 0x00441208, 0x00111208, 0 },
+    { 0x00404B40, 0x00104B40, 1 },
+    { 0x00441208, 0x00111208, 0 },
+    { 0x00404B40, 0x00104B40, 1 },
+    { 0x00441208, 0x00111208, 0 },
+    { 0x00441208, 0x00111208, 0 },
+    { 0x00404B40, 0x00104B40, 1 },
+    { 0x00441208, 0x00111208, 0 },
+};
 
 s32 fold_groupOffsets[] = {
     0x00014358, 0x00018200, 0x0001A858, 0x0001E830, 0x00029458, 0x000314E0, 0x00033498, 0x00038988, 0x00039228,
@@ -119,17 +163,21 @@ s32 fold_groupOffsets[] = {
 
 extern FoldDataCache fold_gfxDataCache[8];
 
-void fold_clear_state_gfx(FoldState*);
-void fold_clear_state_data(FoldState*);
-void fold_init_state(FoldState*);
+void fold_clear_state_gfx(FoldState* state);
+void fold_clear_state_data(FoldState* state);
+void fold_init_state(FoldState* state);
 void func_8013B0EC(FoldState* state);
 void func_8013B1B0(FoldState* state, Matrix4f mtx);
-void func_8013BC88(FoldState*);
-void func_8013C048(FoldState*);
-void fold_load_gfx(FoldState*);
-void func_8013C3F0(FoldState*);
-void func_8013EE68(FoldState*);
-void func_8013F1F8(FoldState*);
+void func_8013BC88(FoldState* state);
+void func_8013C048(FoldState* state);
+void fold_load_gfx(FoldState* state);
+void func_8013C3F0(FoldState* state);
+void func_8013CFA8(FoldState*, Matrix4f mtx);
+void func_8013DAB4(FoldState*, Matrix4f mtx);
+void func_8013E2F0(FoldState*, Matrix4f mtx);
+void func_8013E904(FoldState*, Matrix4f mtx);
+void func_8013EE68(FoldState* state);
+void func_8013F1F8(FoldState* state);
 
 void func_8013A370(s16 arg0) {
     D_8014EE60 = arg0;
@@ -675,7 +723,242 @@ void func_8013B0EC(FoldState* state) {
     }
 }
 
-INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013B1B0);
+//INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013B1B0);
+void func_8013B1B0(FoldState* state, f32 (*mtx)[4]) {
+    s16 cond = FALSE;
+    s32 primColor = state->unk_1C[1][3];
+    s32 renderType = state->renderType;
+    s8 angle1;
+    s8 angle2;
+    f32 alphaComp;
+    s32 blendColor;
+    FoldC* foldC;
+    s32 c0;
+    s32 c1;
+    s32 t1;
+    s32 t2;
+
+    gDPPipeSync(gMasterGfxPos++);
+
+    if (!(state->flags & 0x10)) {
+        gSPDisplayList(gMasterGfxPos++, D_8014EE68);
+        if (state->flags & FOLD_STATE_FLAGS_10000) {
+            gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+        }
+        if (state->flags & 2) {
+            gSPSetGeometryMode(gMasterGfxPos++, G_CULL_BACK);
+        }
+        if (state->flags & 4) {
+            gSPSetGeometryMode(gMasterGfxPos++, G_CULL_FRONT);
+        }
+
+        foldC = &D_8014EE98[state->renderType];
+
+        c0 = foldC->unk_00;
+        c1 = foldC->unk_04;
+        if (foldC->flags & 1) {
+            cond = TRUE;
+        }
+
+        alphaComp = (f32) fold_currentImage->gfxOtherModeD / 255.0;
+
+        if (!cond && (fold_currentImage->gfxOtherModeD < 0xFF)) {
+            state->unk_1C[1][3] = 0xFF;
+            switch (state->renderType) {
+                case 0:
+                case 11:
+                    renderType = 2;
+                    break;
+                case 1:
+                case 4:
+                    renderType = 3;
+                    break;
+                case 9:
+                    renderType = 10;
+                    break;
+            }
+            primColor = state->unk_1C[1][3] * alphaComp;
+            c0 = 0x404B40;
+            c1 = 0x104B40;
+            cond = TRUE;
+        }
+
+        if ((state->flags & 0x400) && !cond) {
+            c0 &= ~0x200;
+            c1 &= ~0x200;
+            c0 |= 0x2040;
+            c1 |= 0x2040;
+        }
+
+        if (state->flags & 0x40) {
+            gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER);
+        } else {
+            gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER);
+            if (cond) {
+                c0 |= 0x10;
+                c1 |= 0x10;
+            } else {
+                c0 |= 0x30;
+                c1 |= 0x30;
+            }
+        }
+        state->unk_78 = c1;
+        gDPSetRenderMode(gMasterGfxPos++, c0, c1);
+
+        switch (renderType) {
+            case 1:
+                gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
+                gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
+                break;
+            case 2:
+                if (primColor <= 0) {
+                    return;
+                }
+                gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0,
+                                  TEXEL0, 0, PRIMITIVE, 0);
+                gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, primColor);
+                break;
+            case 3:
+                if (primColor <= 0) {
+                    return;
+                }
+                gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+                gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1],
+                                state->unk_1C[1][2], primColor);
+                break;
+            case 4:
+                gDPSetCombineLERP(gMasterGfxPos++, 1, PRIMITIVE, TEXEL0, PRIMITIVE, 0, 0, 0, TEXEL0, 1, PRIMITIVE,
+                                  TEXEL0, PRIMITIVE, 0, 0, 0, TEXEL0);
+                gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
+                break;
+            case 5:
+                if (primColor <= 0) {
+                    return;
+                }
+                gDPSetCombineLERP(gMasterGfxPos++, 1, 0, TEXEL0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 1, 0, TEXEL0,
+                                  PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+                gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1],
+                                state->unk_1C[1][2], primColor);
+                break;
+            case 6:
+                gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
+                gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+                gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+                break;
+            case 9:
+                gDPSetCombineLERP(gMasterGfxPos++, 1, SHADE, TEXEL0, SHADE, 0, 0, 0, TEXEL0, 1, SHADE, TEXEL0, SHADE,
+                                  0, 0, 0, TEXEL0);
+                gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+                gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+                break;
+            case 7:
+                gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0,
+                                  SHADE, 0);
+                gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+                gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+                break;
+            case 8:
+                gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+                gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+                gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+                break;
+            case 10:
+                gDPSetCombineLERP(gMasterGfxPos++, 1, SHADE, TEXEL0, SHADE, TEXEL0, 0, SHADE, 0, 1, SHADE, TEXEL0,
+                                  SHADE, TEXEL0, 0, SHADE, 0);
+                gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+                gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+                break;
+            case 11:
+                if (state->flags & 0xA000) {
+                    Camera* currentCam = &gCameras[gCurrentCameraID];
+
+                    gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
+                    gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
+
+                    angle1 = cosine(currentCam->currentYaw) * 120.0f;
+                    angle2 = cosine(currentCam->currentYaw + 90.0f) * 120.0f;
+                    t1 = -angle1;
+                    t2 = -angle2;
+                    D_8014EE18.l[0].l.dir[0] = t1;
+                    D_8014EE18.l[1].l.dir[0] = angle1;
+                    D_8014EE18.l[0].l.dir[2] = angle2;
+                    D_8014EE18.l[1].l.dir[2] = t2;
+                    gSPSetLights2(gMasterGfxPos++, D_8014EE18);
+                    break;
+                }
+                gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+                break;
+            case 12:
+                if (state->unk_1C[1][0] == 0) {
+                    primColor = state->unk_1C[1][3] * alphaComp;
+                    gDPSetCombineLERP(gMasterGfxPos++, NOISE, PRIMITIVE, PRIMITIVE, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
+                                      NOISE, PRIMITIVE, PRIMITIVE, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][1], state->unk_1C[1][1],
+                                    state->unk_1C[1][1],primColor);
+                } else if (state->unk_1C[1][0] == 1) {
+                    primColor = state->unk_1C[1][3] * alphaComp;
+                    gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0,
+                                      TEXEL0, 0, PRIMITIVE, 0);
+                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, primColor);
+                    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_DITHER);
+                } else if (state->unk_1C[1][0] == 2) {
+                    blendColor = state->unk_1C[1][3] + state->unk_1C[1][1];
+                    if (blendColor > 255) {
+                        blendColor = 255;
+                    }
+
+                    primColor = state->unk_1C[1][3] * alphaComp;
+                    gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0,
+                                      TEXEL0, 0, PRIMITIVE, 0);
+                    gDPSetAlphaDither(gMasterGfxPos++, G_AD_NOISE);
+                    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_THRESHOLD);
+                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, primColor);
+                    gDPSetBlendColor(gMasterGfxPos++, 0, 0, 0, blendColor);
+                }
+                break;
+            case 13:
+                gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0,
+                                  TEXEL0);
+                gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
+                break;
+            case 0:
+            case 14:
+            case 16:
+                gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+                break;
+            case 15:
+                gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0,
+                                  PRIMITIVE, 0);
+                gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, state->unk_1C[1][1]);
+                break;
+        }
+    }
+
+    switch (state->meshType) {
+        case 0:
+            func_8013CFA8(state, mtx);
+            break;
+        case 1:
+        case 3:
+            func_8013DAB4(state, mtx);
+            break;
+        case 2:
+            func_8013E2F0(state, mtx);
+            break;
+        case 4:
+            func_8013CFA8(state, mtx);
+            gDPPipeSync(gMasterGfxPos++);
+            func_8013E904(state, mtx);
+            break;
+    }
+
+    gDPPipeSync(gMasterGfxPos++);
+
+    if (state->renderType == 0xC) {
+        gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+        gDPSetAlphaDither(gMasterGfxPos++, G_AD_DISABLE);
+    }
+}
 
 void func_8013BC88(FoldState* state) {
     s32 yOffset;

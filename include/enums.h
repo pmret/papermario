@@ -2961,6 +2961,7 @@ enum FoldStateFlags {
     FOLD_STATE_FLAGS_800               = 0x00000800,
     FOLD_STATE_FLAGS_1000              = 0x00001000,
     FOLD_STATE_FLAGS_4000              = 0x00004000,
+    FOLD_STATE_FLAGS_10000             = 0x00010000,
     FOLD_STATE_FLAGS_20000             = 0x00020000,
 };
 
