@@ -1,6 +1,5 @@
 #include "common.h"
 #include "effects_internal.h"
-
 typedef struct Effect7 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ u16 unk_04;

@@ -1,6 +1,5 @@
 #include "common.h"
 #include "effects_internal.h"
-
 extern Gfx D_090000E0[];
 extern Gfx D_090001B8[];
 
