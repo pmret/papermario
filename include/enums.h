@@ -2953,16 +2953,22 @@ enum MsgWindowStates {
 };
 
 enum FoldStateFlags {
-    FOLD_STATE_FLAGS_0                 = 0x00000000,
-    FOLD_STATE_FLAGS_1                 = 0x00000001,
-    FOLD_STATE_FLAGS_80                = 0x00000080,
-    FOLD_STATE_FLAGS_100               = 0x00000100,
-    FOLD_STATE_FLAGS_200               = 0x00000200,
-    FOLD_STATE_FLAGS_800               = 0x00000800,
-    FOLD_STATE_FLAGS_1000              = 0x00001000,
-    FOLD_STATE_FLAGS_4000              = 0x00004000,
-    FOLD_STATE_FLAGS_10000             = 0x00010000,
-    FOLD_STATE_FLAGS_20000             = 0x00020000,
+    FOLD_STATE_FLAG_ENABLED           = 0x00000001,
+    FOLD_STATE_FLAG_G_CULL_BACK       = 0x00000002,
+    FOLD_STATE_FLAG_G_CULL_FRONT      = 0x00000004,
+    FOLD_STATE_FLAG_10                = 0x00000010,
+    FOLD_STATE_FLAG_40                = 0x00000040,
+    FOLD_STATE_FLAG_80                = 0x00000080,
+    FOLD_STATE_FLAG_100               = 0x00000100,
+    FOLD_STATE_FLAG_200               = 0x00000200,
+    FOLD_STATE_FLAG_400               = 0x00000400,
+    FOLD_STATE_FLAG_800               = 0x00000800,
+    FOLD_STATE_FLAG_1000              = 0x00001000,
+    FOLD_STATE_FLAG_2000              = 0x00002000,
+    FOLD_STATE_FLAG_4000              = 0x00004000,
+    FOLD_STATE_FLAG_8000              = 0x00008000,
+    FOLD_STATE_FLAG_10000             = 0x00010000,
+    FOLD_STATE_FLAG_20000             = 0x00020000,
 };
 
 #endif
