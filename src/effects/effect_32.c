@@ -8,6 +8,8 @@ typedef struct Effect32 {
     /* 0x0C */ f32 unk_0C;
 } Effect32; // size = 0x??
 
+void fx_32_appendGfx(EffectInstance* effect);
+
 u32 D_E0040840[2] = { 0xFF6DFF5C, 0x66BFFF4B };
 
 s8 D_E0040848[56] = { 0x32, 0x00, 0x00, 0x00, 0x09, 0x00, 0x08, 0x00, 0xFF, 0xFF, 0xFF, 0x00, 0xFF, 0x20, 0x00, 0x4B, 0x64, 0x00, 0x00, 0x00, 0x09, 0x00, 0x08, 0x00, 0xFF, 0x00, 0xFF, 0x5C, 0x6B, 0xA8, 0xFF, 0x4B, 0x0A, 0x00, 0x00, 0x00, 0x09, 0x00, 0x08, 0x00, 0xFF, 0xFF, 0xFF, 0xF4, 0xF7, 0xAF, 0xAF, 0x16, 0x1E, 0x00, 0x00, 0x00, 0x09, 0x00, 0x08, 0x00 };
@@ -21,11 +23,10 @@ void fx_32_init(void) {
 
 INCLUDE_ASM(s32, "effects/effect_32", fx_32_update);
 
-void fx_32_appendGfx(EffectInstance* effect);
 void fx_32_render(EffectInstance* effect) {
     Effect32* effect32 = effect->data;
     RenderTask renderTask;
-    RenderTask* renderTaskTemp = &renderTask;
+    RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
     s32 outDist;
     f32 outX;
@@ -46,12 +47,12 @@ void fx_32_render(EffectInstance* effect) {
         outDist = 0;
     }
     
-    renderTaskTemp->appendGfx = fx_32_appendGfx;
-    renderTaskTemp->distance = -outDist;
-    renderTaskTemp->appendGfxArg = effect;
-    renderTaskTemp->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
+    renderTaskPtr->appendGfx = fx_32_appendGfx;
+    renderTaskPtr->distance = -outDist;
+    renderTaskPtr->appendGfxArg = effect;
+    renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
-    shim_queue_render_task(renderTaskTemp);
+    shim_queue_render_task(renderTaskPtr);
 }
 
 INCLUDE_ASM(s32, "effects/effect_32", fx_32_appendGfx);

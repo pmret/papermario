@@ -6,6 +6,8 @@ typedef struct Effect55 {
     /* 0x14 */ f32 unk_14;
 } Effect55; // size = 0x??
 
+void fx_55_appendGfx(EffectInstance* effect);
+
 INCLUDE_ASM(s32, "effects/effect_55", fx_55_main);
 
 void fx_55_init(void) {
@@ -13,7 +15,6 @@ void fx_55_init(void) {
 
 INCLUDE_ASM(s32, "effects/effect_55", fx_55_update);
 
-void fx_55_appendGfx(EffectInstance* effect);
 void fx_55_render(EffectInstance *effect) {
     Effect55* effect55 = effect->data;
     RenderTask renderTask;

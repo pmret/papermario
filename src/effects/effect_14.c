@@ -7,6 +7,8 @@ typedef struct Effect14 {
     /* 0x08 */ f32 zPos; //zPos
 } Effect14; // size = 0x??
 
+void fx_14_appendGfx(EffectInstance* effect);
+
 INCLUDE_ASM(s32, "effects/effect_14", fx_14_main);
 
 void fx_14_init(void) {
@@ -14,40 +16,39 @@ void fx_14_init(void) {
 
 INCLUDE_ASM(s32, "effects/effect_14", fx_14_update);
 
-void fx_14_appendGfx(EffectInstance* effect);
 void fx_14_render(EffectInstance* effect) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Effect14* effect14 = effect->data;
     RenderTask renderTask;
-    RenderTask* renderTaskTemp = &renderTask;
+    RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
-    f32 effectPosVar = effect14->xPos;
-    f32 playerPosVar = playerStatus->position.x;
+    f32 effectPos = effect14->xPos;
+    f32 playerPos = playerStatus->position.x;
     
-    if ((effectPosVar - playerPosVar) > 200) {
-        effect14->xPos = effectPosVar - 400;
+    if (effectPos - playerPos > 200) {
+        effect14->xPos = effectPos - 400;
     } else {
-        if ((playerPosVar - effectPosVar) > 200) {
-            effect14->xPos = effectPosVar + 400;
+        if (playerPos - effectPos > 200) {
+            effect14->xPos = effectPos + 400;
         }
     }
 
-    effectPosVar = effect14->zPos;
-    playerPosVar = playerStatus->position.z;
-    if ((effectPosVar - playerPosVar) > 200) {
-        effect14->zPos = effectPosVar - 400;
+    effectPos = effect14->zPos;
+    playerPos = playerStatus->position.z;
+    if (effectPos - playerPos > 200) {
+        effect14->zPos = effectPos - 400;
     } else {
-        if ((playerPosVar - effectPosVar) > 200) {
-            effect14->zPos = effectPosVar + 400;
+        if (playerPos - effectPos > 200) {
+            effect14->zPos = effectPos + 400;
         }
     }
 
-    renderTaskTemp->appendGfx = &fx_14_appendGfx;
-    renderTaskTemp->appendGfxArg = effect;
-    renderTaskTemp->distance = 0;
-    renderTaskTemp->renderMode = RENDER_MODE_2D;
+    renderTaskPtr->appendGfx = &fx_14_appendGfx;
+    renderTaskPtr->appendGfxArg = effect;
+    renderTaskPtr->distance = 0;
+    renderTaskPtr->renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(renderTaskTemp);
+    retTask = shim_queue_render_task(renderTaskPtr);
     retTask->renderMode |= RENDER_MODE_2;
 }
 

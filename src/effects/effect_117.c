@@ -23,7 +23,7 @@ void fx_117_appendGfx(EffectInstance* effect);
 void fx_117_render(EffectInstance* effect) {
     Effect117* effect117 = effect->data;
     RenderTask renderTask;
-    RenderTask* renderTaskTemp = &renderTask;
+    RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
     s32 outDist;
     f32 outX;
@@ -44,12 +44,12 @@ void fx_117_render(EffectInstance* effect) {
         outDist = 0;
     }
     
-    renderTaskTemp->appendGfx = fx_117_appendGfx;
-    renderTaskTemp->distance = -outDist;
-    renderTaskTemp->appendGfxArg = effect;
-    renderTaskTemp->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
+    renderTaskPtr->appendGfx = fx_117_appendGfx;
+    renderTaskPtr->distance = -outDist;
+    renderTaskPtr->appendGfxArg = effect;
+    renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
-    retTask = shim_queue_render_task(renderTaskTemp);
+    retTask = shim_queue_render_task(renderTaskPtr);
     retTask->renderMode |= RENDER_MODE_2;
 }
 

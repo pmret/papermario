@@ -6,6 +6,8 @@ typedef struct Effect94 {
     /* 0x0C */ f32 unk_0C;
 } Effect94; // size = 0x??
 
+void fx_94_appendGfx(EffectInstance* effect);
+
 INCLUDE_ASM(s32, "effects/effect_94", fx_94_main);
 
 void fx_94_init(void) {
@@ -17,7 +19,6 @@ f32 func_E00BC1D8(f32 arg0) {
 
 INCLUDE_ASM(s32, "effects/effect_94", fx_94_update);
 
-void fx_94_appendGfx(EffectInstance* effect);
 void fx_94_render(EffectInstance *effect) {
     Effect94* effect94 = effect->data;
     RenderTask renderTask;
@@ -26,7 +27,7 @@ void fx_94_render(EffectInstance *effect) {
 
     renderTask.appendGfx = fx_94_appendGfx;
     renderTask.appendGfxArg = effect;
-    if (gGameStatusPtr->isBattle == 1) {
+    if (gGameStatusPtr->isBattle == TRUE) {
         renderTask.distance = effect94->unk_0C + 1000.0f;
     } else {
         renderTask.distance = 10;

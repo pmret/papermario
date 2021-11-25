@@ -1,6 +1,8 @@
 #include "common.h"
 #include "effects_internal.h"
 
+void fx_124_appendGfx(EffectInstance* effect);
+
 INCLUDE_ASM(s32, "effects/effect_124", fx_124_main);
 
 void fx_124_init(void) {
@@ -8,7 +10,6 @@ void fx_124_init(void) {
 
 INCLUDE_ASM(s32, "effects/effect_124", fx_124_update);
 
-void fx_124_appendGfx(EffectInstance* effect);
 void fx_124_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
