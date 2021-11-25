@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
+
 typedef struct Effect6 {
     /* 0x00 */ u16 type;
     /* 0x02 */ char unk_02[0x2];

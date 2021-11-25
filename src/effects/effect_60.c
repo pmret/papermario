@@ -5,7 +5,6 @@ typedef struct Effect60 {
     /* 0x00 */ s32 unk_00;
 } Effect60; // size = 0x??
 
-
 INCLUDE_ASM(s32, "effects/effect_60", fx_60_main);
 
 void fx_60_init(void) {

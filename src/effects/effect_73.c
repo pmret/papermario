@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
+
 typedef struct Effect73 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
+
 extern Gfx D_09000E08[];
 
 void fx_8_init(EffectInstance* effect);

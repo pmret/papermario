@@ -2443,7 +2443,7 @@ segments:
     vram: 0xE0040000
     subsegments:
     - [0x353300, c, effect_32]
-    - [0x353B40, data]
+    - [0x353B40]
   - [0x353BB0, bin] # effect 32 gfx
   - name: effect_33
     dir: effects
@@ -3186,7 +3186,7 @@ segments:
     vram: 0xE00EA000
     subsegments:
     - [0x3E1EE0, c, effect_117]
-    - [0x3E2930, data]
+    - [0x3E2930]
   - [0x3E2960, bin] # effect 117 gfx
   - name: effect_119
     dir: effects

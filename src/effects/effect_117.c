@@ -8,6 +8,10 @@ typedef struct Effect117 {
     /* 0x0C */ f32 unk_0C;
 } Effect117; // size = 0x??
 
+s32 D_E00EAA50[2] = { 0x09001A00, 0x09001A20 };
+
+s32 D_E00EAA58[2] = { 0x09001910, 0x00000000 };
+
 INCLUDE_ASM(s32, "effects/effect_117", fx_117_main);
 
 void fx_117_init(void) {
