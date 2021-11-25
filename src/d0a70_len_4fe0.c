@@ -65,13 +65,13 @@ typedef struct FoldGfxDescriptor {
 typedef struct FoldRenderMode {
     /* 0x0 */ s32 mode1;
     /* 0x4 */ s32 mode2;
-    /* 0x8 */ u8 flags; // only checks 1 so far. some kind of switch?
+    /* 0x8 */ u8 flags; // only checks TRUE so far. some kind of switch?
 } FoldRenderMode; // size = 0xC
 
 typedef FoldState FoldStateList[90];
 
 // BSS
-extern FoldImageRec D_80156920; // todo not sure on the type
+extern FoldImageRec D_80156920;
 extern Vtx* D_80156948[2];
 extern Vtx* fold_vtxBuf;
 extern FoldStateList* D_80156954;
@@ -85,9 +85,6 @@ extern FoldGfxDescriptor fold_groupDescriptors[4];
 FoldImageRec* fold_currentImage = &D_80156920;
 
 u16 fold_vtxCount = 0;
-
-// padding?
-s16 D_8014EE16 = 0;
 
 Lights2 D_8014EE18 = {
     .a = {
@@ -119,11 +116,6 @@ s32 D_8014EE50[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x02000000, };
 
 u16 D_8014EE60 = 300;
 
-// padding?
-s16 D_8014EE62 = 0;
-s16 D_8014EE64 = 0;
-s16 D_8014EE66 = 0;
-
 Gfx D_8014EE68[] = {
     gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
     gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH),
@@ -135,23 +127,23 @@ Gfx D_8014EE68[] = {
 };
 
 FoldRenderMode D_8014EE98[17] = {
-    { 0x00441208, 0x00111208, 0 },
-    { 0x00441208, 0x00111208, 0 },
-    { 0x00404B40, 0x00104B40, 1 },
-    { 0x00404B40, 0x00104B40, 1 },
-    { 0x00441208, 0x00111208, 0 },
-    { 0x00404B40, 0x00104B40, 1 },
-    { 0x00441208, 0x00111208, 0 },
-    { 0x00404B40, 0x00104B40, 1 },
-    { 0x00404B40, 0x00104B40, 1 },
-    { 0x00441208, 0x00111208, 0 },
-    { 0x00404B40, 0x00104B40, 1 },
-    { 0x00441208, 0x00111208, 0 },
-    { 0x00404B40, 0x00104B40, 1 },
-    { 0x00441208, 0x00111208, 0 },
-    { 0x00441208, 0x00111208, 0 },
-    { 0x00404B40, 0x00104B40, 1 },
-    { 0x00441208, 0x00111208, 0 },
+    { 0x00441208, 0x00111208, FALSE },
+    { 0x00441208, 0x00111208, FALSE },
+    { 0x00404B40, 0x00104B40, TRUE },
+    { 0x00404B40, 0x00104B40, TRUE },
+    { 0x00441208, 0x00111208, FALSE },
+    { 0x00404B40, 0x00104B40, TRUE },
+    { 0x00441208, 0x00111208, FALSE },
+    { 0x00404B40, 0x00104B40, TRUE },
+    { 0x00404B40, 0x00104B40, TRUE },
+    { 0x00441208, 0x00111208, FALSE },
+    { 0x00404B40, 0x00104B40, TRUE },
+    { 0x00441208, 0x00111208, FALSE },
+    { 0x00404B40, 0x00104B40, TRUE },
+    { 0x00441208, 0x00111208, FALSE },
+    { 0x00441208, 0x00111208, FALSE },
+    { 0x00404B40, 0x00104B40, TRUE },
+    { 0x00441208, 0x00111208, FALSE },
 };
 
 s32 fold_groupOffsets[] = {
