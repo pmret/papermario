@@ -1149,26 +1149,24 @@ void func_8013EE48(FoldState* state) {
     state->unk_3C[0][2] = 30.0f;
 }
 
-// Float stuff
+// Reg swaps in the loop
 #ifdef NON_MATCHING
 void func_8013EE68(FoldState* state) {
-    Vtx* temp_s0;
-    Vtx* temp_s0_2;
-    Vtx* temp_s0_3;
-    f32 temp_f0_7;
+    Vtx* v1;
+    Vtx* v2;
+    Vtx* v3;
     f32 temp_f20;
     f32 temp_f20_2;
     f32 temp_f20_3;
-    f32 temp_f22;
-    f32 temp_f24;
-    f32 temp_fblah;
-    f32 temp_f2;
-    s32 temp_s5;
+    f32 angle2;
+    f32 angle3;
+    f32 angle1;
+    s32 amt;
     f32 phi_f8;
     f32 phi_f6;
     f32 phi_f4;
-    s32 phi_s3;
-    s32 phi_s4;
+    s32 angleInc;
+    s32 sign;
     s32 i;
 
     phi_f8 = (f32) gGameStatusPtr->frameCounter / 10.3;
@@ -1202,30 +1200,31 @@ void func_8013EE68(FoldState* state) {
         state->unk_3C[0][2] -= 360.0;
     }
 
-    phi_s4 = 0;
-    phi_s3 = 0;
-    temp_s5 = (state->lastVtxIdx - state->firstVtxIdx) - state->subdivX;
-    for (i = 0; i < temp_s5; i++) {
-        temp_f2 = phi_s3;
-        temp_f0_7 = phi_s4 * 180;
+    sign = 0;
+    angleInc = 0;
+    amt = (state->lastVtxIdx - state->firstVtxIdx) - state->subdivX;
 
-        temp_fblah = state->unk_3C[0][0] + temp_f2 + temp_f0_7;
-        temp_f22 = state->unk_3C[0][1] + temp_f2 + temp_f0_7;
-        temp_f24 = state->unk_3C[0][2] + temp_f2 + temp_f0_7;
+    for (i = 0; i < amt; i++) {
+        angle1 = state->unk_3C[0][0] + (angleInc * 45) + (sign * 180);
+        angle2 = state->unk_3C[0][1] + (angleInc * 45) + (sign * 180);
+        angle3 = state->unk_3C[0][2] + (angleInc * 45) + (sign * 180);
 
-        temp_s0 = &fold_vtxBuf[state->firstVtxIdx + i];
-        temp_f20 = temp_s0->v.ob[0];
-        temp_s0->v.ob[0] = (temp_f20 + (sin_rad(temp_fblah) * state->unk_1C[0][0]));
-        temp_s0_2 = &fold_vtxBuf[state->firstVtxIdx + i];
-        temp_f20_2 = temp_s0_2->v.ob[1];
-        temp_s0_2->v.ob[1] = (temp_f20_2 + (sin_rad(temp_f22) * state->unk_1C[0][1]));
-        temp_s0_3 = &fold_vtxBuf[state->firstVtxIdx + i];
-        temp_f20_3 = temp_s0_3->v.ob[2];
-        temp_s0_3->v.ob[2] = (temp_f20_3 + (sin_rad(temp_f24) * state->unk_1C[0][2]));
-        phi_s3 += 45;
+        v1 = &fold_vtxBuf[state->firstVtxIdx + i];
+        temp_f20 = v1->v.ob[0];
+        v1->v.ob[0] = (temp_f20 + (sin_rad(angle1) * state->unk_1C[0][0]));
+
+        v2 = &fold_vtxBuf[state->firstVtxIdx + i];
+        temp_f20_2 = v2->v.ob[1];
+        v2->v.ob[1] = (temp_f20_2 + (sin_rad(angle2) * state->unk_1C[0][1]));
+
+        v3 = &fold_vtxBuf[state->firstVtxIdx + i];
+        temp_f20_3 = v3->v.ob[2];
+        v3->v.ob[2] = (temp_f20_3 + (sin_rad(angle3) * state->unk_1C[0][2]));
+
+        angleInc++;
         if ((i % (s32) (state->subdivX + 1)) == 0) {
-            phi_s3 = 0;
-            phi_s4 = !phi_s4;
+            angleInc = 0;
+            sign = !sign;
         }
     }
 }
