@@ -598,55 +598,56 @@ ApiStatus func_802BE7E0_31C800(Evt* script, s32 isInitialCall) {
 }
 
 #ifdef NON_EQUIVALENT
-s32 func_802BE818_31C838(Npc* npcKooper, Npc* npc2) { //test if kooper hit npc
-    f32 npcKooperXTemp, npcKooperYTemp, npcKooperZTemp, npcX, npcY, npcZ, npcKooperX, npcKooperY, npcKooperZ, npcCollisionHeight, npcKooperHeight;
-    f32 temp_f0;
-    f32 temp_f20;
+s32 func_802BE818_31C838(Npc* npcKooper, Npc* npc2) {
+    f32 npcKooperXTemp, npcKooperYTemp, npcKooperZTemp;
+    f32 npcX, npcY, npcZ;
+    f32 npcKooperX, npcKooperY, npcKooperZ;
+    f32 npcCollisionHeight, kooperCollisionHeight;
+    f32 npcCollisionRadius, kooperCollisionRadius;
+    f32 temp_f0, temp_f20;
     f32 npcDistanceToKooperX;
-    f32 temp_f24_2;
-    f32 kooperCollisionRadius;
-    f32 npcCollisionRadius;
-    //D_802BEB40_31CB60 can kooper start battle with enemies bool
+    f32 new_var2;
 
     if (D_802BEB40_31CB60) {
         npcX = npc2->pos.x;
         npcY = npc2->pos.y;
         npcZ = npc2->pos.z;
-        npcKooperX = npcKooper->pos.x;
+
+        npcDistanceToKooperX = npcKooper->pos.x;
+        npcKooperX = npcDistanceToKooperX;
         npcKooperY = npcKooper->pos.y;
         npcKooperZ = npcKooper->pos.z;
-
+        
         npcCollisionHeight = npc2->collisionHeight;
-        npcCollisionRadius = npc2->collisionRadius * 0.55;
-        npcKooperHeight = npcKooper->collisionHeight;
-        kooperCollisionRadius = npcKooper->collisionRadius * 0.8;
+        npcCollisionRadius = npc2->collisionRadius * 0.8;
+        kooperCollisionHeight = npcKooper->collisionHeight;
+        kooperCollisionRadius = npcKooper->collisionRadius * 0.55;
 
         temp_f20 = atan2(npcX, npcZ, npcKooperX, npcKooperZ);
         temp_f0 = dist2D(npcX, npcZ, npcKooperX, npcKooperZ);
 
-        npcKooperX = npcKooper->pos.x;
+        npcKooperX = npcDistanceToKooperX;
         npcKooperXTemp = npcKooper->pos.x;
         npcKooperYTemp = npcKooper->pos.y;
         npcKooperZTemp = npcKooper->pos.z;
 
-        if (npc_test_move_taller_with_slipping(0, &npcKooperXTemp, &npcKooperYTemp, &npcKooperZTemp, temp_f0, temp_f20, npcKooperHeight, npcCollisionRadius + kooperCollisionRadius) == 0) {
-            if (!((npcCollisionHeight + npcY) > npcKooperY)) {
-                if (!((npcKooperHeight + npcCollisionHeight) < npcY)) {
+        if (npc_test_move_taller_with_slipping(0, &npcKooperXTemp, &npcKooperYTemp, &npcKooperZTemp, temp_f0, temp_f20, kooperCollisionHeight, kooperCollisionRadius + npcCollisionRadius) == 0) {
+            if (!((npcKooperY) > npcCollisionHeight + npcY)) {
+                if (!((kooperCollisionHeight + npcCollisionHeight) < npcY)) {
                     npcDistanceToKooperX = npcX - npcKooperX;
-                    npcKooperX = SQ(kooperCollisionRadius) + SQ(npcCollisionRadius);
+                    new_var2 = SQ(npcDistanceToKooperX);
+                    npcKooperX = (SQ(kooperCollisionRadius)) + (SQ(npcCollisionRadius));
                     npcKooperZ = npcZ - npcKooperZ;
-                    if (npcKooperX <= (SQ(npcDistanceToKooperX) + SQ(npcKooperZ))) {
+                    if (!(npcKooperX <= (new_var2 + (SQ(npcKooperZ))))) {
                         D_802BEB40_31CB60 = 2;
-                        return TRUE; //npc hit
-                    } else {
-                        return FALSE;
+                        return 1;
                     }
                 }
             }
         }
     }
 
-    return FALSE; //npc not hit
+    return 0;
 }
 #else
 INCLUDE_ASM(s32, "world/partner/kooper", func_802BE818_31C838);

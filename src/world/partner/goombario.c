@@ -6,6 +6,18 @@ ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall);
 ApiStatus func_802BD1D0_3170F0(Evt* script, s32 isInitialCall);
 ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall);
 ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall);
+extern s32 D_802BDF60;
+typedef struct unk_802BDD88_317CA8 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 flags;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+} unk_802BDD88_317CA8; //size = 0x1C
+
+extern unk_802BDD88_317CA8* D_802BDD88_317CA8;
 
 s32 func_802BD100_317020(s32 arg0) {
     s32 i;
@@ -25,11 +37,124 @@ void world_goombario_init(Npc* partner) {
     partner->collisionRadius = 20;
 }
 
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD188_3170A8, Evt* script, s32 isInitialCall);
+ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall) {
+    Npc* npc = script->owner2.npc;
 
+    D_802BDF60 = -1;
+    if (isInitialCall) {
+        partner_init_get_out(npc);
+    }
+
+    if (partner_get_out(npc) != 0) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
+}
+
+#ifdef NON_EQUIVALENT
+ApiStatus func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+    Entity* entity;
+    unk_802BDD88_317CA8* new_var;
+    f32 sp10, sp14;
+    f32 temp_f0;
+    Npc* npc = script->owner2.npc;
+    
+    if (isInitialCall) {
+        partner_walking_enable(npc, 1);
+        mem_clear(D_802BDD88_317CA8, 0x1C);
+        D_8010C954 = NULL;
+    }
+
+    entity = D_8010C954;
+    playerData->unk_2F4[1] += 1;
+
+    if (entity == NULL) {
+        partner_walking_update_player_tracking(npc);
+        partner_walking_update_motion(npc);
+        return 0;
+    }
+
+    switch(D_802BDD88_317CA8->unk_04) {
+        case 0:
+            D_802BDD88_317CA8->unk_04 = 1;
+            D_802BDD88_317CA8->flags = npc->flags;
+            D_802BDD88_317CA8->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
+            D_802BDD88_317CA8->unk_10 = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
+            D_802BDD88_317CA8->unk_14 = 6.0f;
+            D_802BDD88_317CA8->unk_18 = 50.0f;
+            D_802BDD88_317CA8->unk_00 = 0x78;
+            npc->flags |= 0x40148;
+            npc->flags &= ~0x200;
+
+        case 1:
+            sin_cos_rad((D_802BDD88_317CA8->unk_10 * TAU) / 360.0f, &sp10, &sp14);
+            npc->pos.x = entity->position.x + (sp10 * D_802BDD88_317CA8->unk_0C);
+            npc->pos.z = entity->position.z - (sp14 * D_802BDD88_317CA8->unk_0C);
+            D_802BDD88_317CA8->unk_10 = clamp_angle(D_802BDD88_317CA8->unk_10 - D_802BDD88_317CA8->unk_14);
+
+            if (D_802BDD88_317CA8->unk_0C > 20.0f) {
+                D_802BDD88_317CA8->unk_0C--;
+            }
+
+            if (D_802BDD88_317CA8->unk_0C < 19.0f) {
+                D_802BDD88_317CA8->unk_0C++;
+            }
+
+            temp_f0 = sin_rad((D_802BDD88_317CA8->unk_18 * TAU) / 360.0f);
+            D_802BDD88_317CA8->unk_18 += 3.0f;
+
+            if (D_802BDD88_317CA8->unk_18 > 150.0f) {
+                D_802BDD88_317CA8->unk_18 = 150.0f;
+            }
+
+            npc->pos.y = npc->pos.y + (temp_f0 * 3.0f);
+            npc->renderYaw = clamp_angle(360.0f - D_802BDD88_317CA8->unk_10);
+            D_802BDD88_317CA8->unk_14 += 0.8;
+
+            if (D_802BDD88_317CA8->unk_14 > 40.0f) {
+                D_802BDD88_317CA8->unk_14 = 40.0f;
+            }
+
+            D_802BDD88_317CA8->unk_00--;
+
+            if (D_802BDD88_317CA8->unk_00 == 0) {
+                D_802BDD88_317CA8->unk_04++;
+            }
+            
+            break;
+        case 2:
+            npc->flags = D_802BDD88_317CA8->unk_08;
+            D_802BDD88_317CA8->unk_00 = 0x1E;
+            D_802BDD88_317CA8->unk_04++;
+            break;
+        case 3:
+            partner_walking_update_player_tracking(npc);
+            partner_walking_update_motion(npc);
+            D_802BDD88_317CA8->unk_00--;
+
+            if (D_802BDD88_317CA8->unk_00 == 0) {
+                D_802BDD88_317CA8->unk_04 = 0;
+                entity = NULL;
+            }
+            break;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD1D0_3170F0, Evt* script, s32 isInitialCall);
+#endif
 
-INCLUDE_ASM(s32, "world/partner/goombario", func_802BD564_317484);
+void func_802BD564_317484(Npc* goombario) {
+
+    if (D_8010C954) {
+        D_8010C954 = 0;
+        goombario->flags = D_802BDD88_317CA8->flags;
+        D_802BDD88_317CA8->unk_04 = 0;
+        partner_clear_player_tracking (goombario);
+    }
+}
 
 s32 world_goombario_can_pause(Npc* partner) {
     s32 new_var;
@@ -50,7 +175,24 @@ s32 world_goombario_can_pause(Npc* partner) {
 // has big jumptable at rodata 802BDE88
 INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, Evt* script, s32 isInitialCall);
 
+#ifdef NON_EQUIVALENT //something with the symbol is broken
+ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+
+    set_time_freeze_mode(0);
+
+    if (D_802BDF64_3248B4 != 0) {
+        D_802BDF64_3248B4 = 0;
+        enable_player_input();
+    }
+
+    partnerActionStatus->actionState.b[0] = 0;
+    partnerActionStatus->actionState.b[3] = 0;
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BDB30_317A50, Evt* script, s32 isInitialCall);
+#endif
 
 ApiStatus func_802BDB84(Evt* script, s32 isInitialCall) {
     s32 unk = script->owner2.npc; // todo what is this?
@@ -96,7 +238,7 @@ EvtSource world_goombario_take_out = {
     EVT_END
 };
 
-s32 D_802BDD88_317CA8 = 0x802BDF40;
+unk_802BDD88_317CA8* D_802BDD88_317CA8 = 0x802BDF40;
 
 EvtSource world_goombario_update = {
     EVT_CALL(func_802BD1D0_3170F0)
