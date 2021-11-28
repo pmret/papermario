@@ -2266,4 +2266,13 @@ typedef struct struct8015A578 {
     /* 0x08 */ f32 unk_08;
 } struct8015A578; // size = 0x0C
 
+typedef struct SaveMetadata {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ char unk_04[0x3];
+    /* 0x07 */ s8 unk_07[8];
+    /* 0x0F */ char unk_0F[0x1];
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+} SaveMetadata; // size = 0x18
+
 #endif

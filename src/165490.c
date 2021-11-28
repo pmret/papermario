@@ -2,6 +2,10 @@
 #include "filemenu.h"
 #include "hud_element.h"
 
+extern SaveMetadata D_800779C4[4];
+extern u8 D_80077A24[4];
+extern s8 D_8024C098;
+
 void filemenu_draw_contents_title(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -93,8 +97,35 @@ void filemenu_draw_contents_option_center(
     s32 baseX, s32 baseY,
     s32 width, s32 height,
     s32 opacity, s32 darkening
-);
-INCLUDE_ASM(s32, "165490", filemenu_draw_contents_option_center);
+) {
+    s32 msgIdx;
+    s32 xOffset;
+    s32 yOffset;
+
+    switch (menu->page) {
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+            msgIdx = 10;
+            xOffset = 18;
+            yOffset = 0;
+            if ((menu->unk_00.s & 0xFFFF00) == 0x10200) {
+                filemenu_set_cursor_goal_pos(54, baseX + 8, baseY + 8);
+            }
+            break;
+        default:
+            msgIdx = 11;
+            xOffset = 14;
+            yOffset = 0;
+            if ((menu->unk_00.s & 0xFFFF00) == 0x010200) {
+                filemenu_set_cursor_goal_pos(54, baseX + 4, baseY + 8);
+            }
+            break;
+    }
+
+    filemenu_draw_message(filemenu_get_menu_message(msgIdx), baseX + xOffset, baseY + yOffset + 2, 255, 0, 1);
+}
 
 void filemenu_draw_contents_option_right(
     MenuPanel* menu,
@@ -110,9 +141,34 @@ void filemenu_draw_contents_option_right(
     }
 }
 
+void filemenu_draw_contents_file_info(
+    s32 fileIdx, MenuPanel* menu,
+    s32 baseX, s32 baseY,
+    s32 width, s32 height,
+    s32 opacity, s32 darkening
+);
 INCLUDE_ASM(s32, "165490", filemenu_draw_contents_file_info);
 
-INCLUDE_ASM(s32, "165490", filemenu_draw_contents_file_title);
+void filemenu_draw_contents_file_title(
+    s32 fileIdx,
+    MenuPanel* menu,
+    s32 baseX, s32 baseY,
+    s32 width, s32 height,
+    s32 opacity, s32 darkening)
+{
+    if (D_8024C098 == 0 && menu->unk_00.c.selected == fileIdx) {
+        filemenu_set_cursor_goal_pos(fileIdx + 60, baseX - 3, baseY + 8);
+    }
+
+    filemenu_draw_message(filemenu_get_menu_message(26), baseX + 5, baseY + 1, 255, 0, 1);
+
+    if (D_80077A24[fileIdx] == 0) {
+        draw_number(fileIdx + 1, baseX + 33, baseY + 1, 1, 0, 255, 2);
+    } else {
+        draw_number(fileIdx + 1, baseX + 33, baseY + 1, 1, 0, 255, 2);
+        filemenu_draw_file_name(D_800779C4[fileIdx].unk_07, 8, baseX + 46, baseY + 1, 255, 0, 1, 9);
+    }
+}
 
 void filemenu_draw_contents_file_0_info(
     MenuPanel* menu,
