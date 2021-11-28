@@ -2,7 +2,7 @@
 #include "ld_addrs.h"
 
 typedef struct {
-    /* 0x00 */ s8 arrayIdx;
+    /* 0x00 */ u8 arrayIdx;
     /* 0x01 */ u8 meshType;
     /* 0x02 */ u8 renderType;
     /* 0x03 */ u8 subdivX;
@@ -110,9 +110,19 @@ Lights2 D_8014EE18 = {
     }
 };
 
-s32 D_8014EE40[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
+Vp D_8014EE40 = {
+    .vp = {
+        .vscale = { 640, 480, 511, 0 },
+        .vtrans = { 640, 480, 511, 0 },
+    }
+};
 
-s32 D_8014EE50[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x02000000, };
+Vp D_8014EE50 = {
+    .vp = {
+        .vscale = { 640, 480, 511, 0 },
+        .vtrans = { 640, 480, 512, 0 },
+    }
+};
 
 u16 D_8014EE60 = 300;
 
@@ -1135,7 +1145,178 @@ INCLUDE_ASM(s32, "d0a70_len_4fe0", fold_load_gfx);
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013C3F0);
 
+//blah
+#ifdef NON_MATCHING
+void func_8013CFA8(FoldState* state, Matrix4f mtx) {
+    s32 i;
+
+    if (!(state->flags & FOLD_STATE_FLAG_20)) {
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
+        gDPLoadTLUT_pal16(gMasterGfxPos++, 0, fold_currentImage->palette);
+    }
+
+    i = state->firstVtxIdx;
+
+    while (1) {
+        Camera* cam;
+        s32 uls = (fold_vtxBuf[i + 0].v.tc[0] >> 0x5) - 0x100;
+        s32 ult = (fold_vtxBuf[i + 0].v.tc[1] >> 0x5) - 0x100;
+        s32 lrs = (fold_vtxBuf[i + 3].v.tc[0] >> 0x5) - 0x100;
+        s32 lrt = (fold_vtxBuf[i + 3].v.tc[1] >> 0x5) - 0x100;
+        s32 someFlags = FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000;
+        s32 alpha;
+        s32 alpha2;
+
+        if (!(state->flags & 0x20)) {
+            if ((*D_80151328 & 1) && (state->arrayIdx != 0)) {
+                if (state->flags & someFlags) {
+                    if (state->renderType == 0 || state->renderType == 2 || state->renderType == 15 ||
+                        state->renderType == 7)
+                    {
+                        gDPLoadMultiTile_4b(gMasterGfxPos++, fold_currentImage->raster, 0x0000, 1, G_IM_FMT_CI,
+                                            fold_currentImage->width, fold_currentImage->height, uls, ult, lrs, lrt, 0,
+                                            G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 8, 8,
+                                            G_TX_NOLOD, G_TX_NOLOD);
+                        gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 0, 0x0000, G_TX_RENDERTILE, 1,
+                                G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0,
+                                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP,
+                                   G_TX_NOMASK, G_TX_NOLOD);
+                        gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 252, 0);
+
+                        alpha = 255;
+                        switch (state->renderType) {
+                            case 0:
+                                break;
+                            case 2:
+                            case 15:
+                                alpha = state->unk_1C[1][3];
+                                break;
+                            case 7:
+                                alpha = -1;
+                                break;
+                        }
+
+                        if (*D_80151328 & 2) {
+                            if ((D_80156954[0][0].arrayIdx != 0) && (state->flags & someFlags)) {
+                                cam = &gCameras[gCurrentCamID];
+
+                                if (gGameStatusPtr->isBattle == 2) {
+                                    gSPViewport(gMasterGfxPos++, &D_8014EE50);
+                                } else {
+                                    gSPViewport(gMasterGfxPos++, &cam->vpAlt);
+                                }
+
+                                gDPSetRenderMode(gMasterGfxPos++, G_RM_PASS, state->unk_78);
+
+                                if (alpha == -1) {
+                                    gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL1, 0, 0, 0, 0, 0, 0, 1, 0, 1);
+                                } else {
+                                    gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha);
+                                    gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0, 0, 0, 1, 0, 1);
+                                }
+
+                                gSPVertex(gMasterGfxPos++, &fold_vtxBuf[i], 4, 0);
+                                gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+                                gDPPipeSync(gMasterGfxPos++);
+                            }
+                        }
+                        render_shaded_sprite(mtx, uls, ult, lrs, lrt, alpha, state->unk_78);
+                        goto block_60;
+                    }
+                }
+            }
+
+            gDPLoadTextureTile_4b(gMasterGfxPos++, fold_currentImage->raster, G_IM_FMT_CI, fold_currentImage->width,
+                                  fold_currentImage->height, uls, ult, lrs, lrt, 0,
+                                  G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD);
+
+            if (*D_80151328 & 2) {
+                if (state->arrayIdx != 0) {
+                    alpha2 = 255;
+
+                    if (state->flags & someFlags) {
+                        cam = &gCameras[gCurrentCamID];
+
+                        if (gGameStatusPtr->isBattle == 2) {
+                            gSPViewport(gMasterGfxPos++, &D_8014EE50);
+                        } else {
+                            gSPViewport(gMasterGfxPos++, &cam->vpAlt);
+                        }
+
+                        if (alpha2 == 255) {
+                            gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+                        } else {
+                            gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2);
+                        }
+
+                        switch (state->renderType) {
+                            case 0:
+                                alpha2 = 255;
+                                break;
+                            case 2:
+                            case 15:
+                                alpha2 = state->unk_1C[1][3];
+                                break;
+                            case 7:
+                                alpha2 = -1;
+                                break;
+                        }
+
+                        if (alpha2 == -1) {
+                            gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL0, 0, 0, 0, 0, 0, SHADE, 0,
+                                            TEXEL0, 0);
+                        } else {
+                            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha2);
+                            gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0,
+                                            ENVIRONMENT, 0, TEXEL0, 0);
+                        }
+
+                        gSPVertex(gMasterGfxPos++, &fold_vtxBuf[i], 4, 0);
+                        gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+                        gDPPipeSync(gMasterGfxPos++);
+
+                        if (alpha2 == 255) {
+                            gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+                        } else {
+                            gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2);
+                        }
+
+                        gDPSetEnvColor(gMasterGfxPos++, 100, 100, 100, 255);
+                        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha2);
+                        gDPSetCombineLERP(gMasterGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0, SHADE,
+                                        ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0);
+                        gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
+                    }
+                }
+            }
+        }
+
+    block_60:
+        if ((*D_80151328 & 2) && D_80156954[0][0].arrayIdx != 0 && (state->flags & someFlags)) {
+            cam = &gCameras[gCurrentCamID];
+            if (gGameStatusPtr->isBattle == 2) {
+                gSPViewport(gMasterGfxPos++, &D_8014EE40);
+                D_8014EE50.vp.vtrans[0] = D_8014EE40.vp.vtrans[0] + gGameStatusPtr->unk_82;
+                D_8014EE50.vp.vtrans[1] = D_8014EE40.vp.vtrans[1] + gGameStatusPtr->unk_83;
+            } else {
+                gSPViewport(gMasterGfxPos++, &cam->vp);
+            }
+        }
+
+        gSPVertex(gMasterGfxPos++, &fold_vtxBuf[i], 4, 0);
+        gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+
+        if (i + 3 >= state->lastVtxIdx) {
+            break;
+        }
+
+        i += 2;
+    }
+}
+#else
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013CFA8);
+#endif
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013DAB4);
 

@@ -2957,6 +2957,7 @@ enum FoldStateFlags {
     FOLD_STATE_FLAG_G_CULL_BACK       = 0x00000002,
     FOLD_STATE_FLAG_G_CULL_FRONT      = 0x00000004,
     FOLD_STATE_FLAG_10                = 0x00000010,
+    FOLD_STATE_FLAG_20                = 0x00000020,
     FOLD_STATE_FLAG_40                = 0x00000040,
     FOLD_STATE_FLAG_80                = 0x00000080,
     FOLD_STATE_FLAG_100               = 0x00000100,
@@ -2969,6 +2970,8 @@ enum FoldStateFlags {
     FOLD_STATE_FLAG_8000              = 0x00008000,
     FOLD_STATE_FLAG_10000             = 0x00010000,
     FOLD_STATE_FLAG_20000             = 0x00020000,
+    FOLD_STATE_FLAG_80000             = 0x00080000,
+    FOLD_STATE_FLAG_100000            = 0x00100000,
 };
 
 #endif

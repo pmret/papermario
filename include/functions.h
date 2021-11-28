@@ -77,6 +77,11 @@ void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,
                                 s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity);
 
+// file menu stuff
+void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);
+s8* filemenu_get_menu_message(s32 idx);
+void filemenu_draw_message(s8*, s32 posX, s32 posY, s32 alpha, s32 color, s32 flags);
+
 // append gfx funcs
 void func_80257B28(s32);
 void func_8025595C(Actor*);

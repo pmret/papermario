@@ -1930,10 +1930,15 @@ typedef struct PauseMapSpace {
 } PauseMapSpace; // size = 0x14
 
 typedef struct MenuPanel {
-    /* 0x00 */ u8 initialized; //?
+    /* 0x00 */ union {
+    /*      */ s32 s;
+    /*      */ struct {
+    /* 0x00 */ u8 initialized;
     /* 0x01 */ s8 col;
     /* 0x02 */ s8 row;
     /* 0x03 */ u8 selected; // usually set to the current value from gridData
+                } c;
+    } unk_00;
     /* 0x04 */ s8 page; // filemenu: 0 = select, 1 = delete, 3 = copy from, 4 = copy to, all else = save
     /* 0x05 */ s8 numCols;
     /* 0x06 */ s8 numRows;
