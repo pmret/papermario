@@ -4,7 +4,6 @@
 extern unkPartnerStruct* D_802BEB60_31CB80;
 s32 entity_interacts_with_current_partner(s32);
 s32 test_item_entity_position(f32, f32, f32, f32);
-s32 partner_use_ability(void);
 s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
 extern s32 D_802BEC68;
 extern s32 D_802BEC6C;
@@ -671,13 +670,16 @@ void func_802BEA24_31CA44(Npc* npc) {
 
         D_802BEB40_31CB60 = 0;
         playerStatus->flags &= -3;
+
         npc->jumpVelocity = 0.0f;
         npc->flags &= ~0x800;
         npc->flags &= ~0x40;
+
         sfx_stop_sound(0x284);
         set_action_state(0);
         partner_clear_player_tracking(npc);
         disable_npc_blur(npc);
+
         partnerActionStatus->actionState.b[3] = 0;
         partnerActionStatus->actionState.b[0] = 0;
     }

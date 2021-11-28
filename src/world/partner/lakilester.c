@@ -20,7 +20,6 @@ extern f32 D_802BFF28;
 extern s16 D_8010C97A;
 
 s32 func_802BD7DC(void);
-s32 partner_use_ability(void);
 f32 get_player_normal_pitch(void);
 void partner_kill_ability_script(void);
 f64 fabs(f64 val);
@@ -674,7 +673,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
 void func_802BFA00_323550(Npc* npc) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-    if (D_802BFF0C != 0) {
+    if (D_802BFF0C) {
         partnerActionStatus->npc = *npc;
         partnerActionStatus->actionState.b[1] = 1;
         enable_player_static_collisions();
@@ -691,7 +690,7 @@ void func_802BFAA8_3235F8(Npc* npc) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     if (partnerActionStatus->actionState.b[1] != 0) {
-        if (D_802BFF0C != 0) {
+        if (D_802BFF0C) {
             *npc = partnerActionStatus->npc;
             gGameStatusPtr->unk_7D = 1;
             set_action_state(ACTION_STATE_RIDE);
@@ -714,9 +713,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_unsafe(NPC_PARTNER);
-    f32 temp_f0;
-    f32 temp_f2;
-    f32 temp_f4;
+    f32 temp_f0, temp_f2, temp_f4;
     f32* temp_s0_2;
     s32 temp_v0_2;
     s32 tempVar;

@@ -8,24 +8,28 @@ void world_twink_init(Npc* partner) {
 }
 
 ApiStatus TwinkTakeOut(Evt* script, s32 isInitialCall) {
-    Npc* owner = script->owner2.npc;
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_get_out(owner);
+        partner_init_get_out(npc);
     }
-    return partner_get_out(owner) != 0;
+    if (partner_get_out(npc)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus TwinkUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    Npc* owner = script->owner2.npc;
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_flying_enable(owner, TRUE);
+        partner_flying_enable(npc, TRUE);
     }
 
-    partner_flying_update_player_tracking(owner);
-    partner_flying_update_motion(owner);
+    partner_flying_update_player_tracking(npc);
+    partner_flying_update_motion(npc);
     playerData->unk_2F4[PARTNER_TWINK]++;
 
     return ApiStatus_BLOCK;
@@ -36,12 +40,17 @@ ApiStatus TwinkUseAbility(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus TwinkPutAway(Evt* script, s32 isInitialCall) {
-    Npc* owner = script->owner2.npc;
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_put_away(owner);
+        partner_init_put_away(npc);
     }
-    return partner_put_away(owner) != 0;
+
+    if (partner_put_away(npc)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 EvtSource world_twink_take_out = SCRIPT({

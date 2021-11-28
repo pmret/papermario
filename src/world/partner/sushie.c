@@ -7,7 +7,6 @@ extern unkPartnerStruct* D_802BFDF8_320B68;
 extern s32 D_802BFEEC;
 extern f32 D_802BFEE0;
 void func_802BD368_31E0D8(s32, f32, f32, f32, f32, f32);
-s32 partner_use_ability(void);
 void partner_kill_ability_script(void);
 extern s32 D_802BFEE4;
 extern s32 D_802BFEE8;
@@ -125,8 +124,8 @@ s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus func_802BF5A0_320310(Evt* evt, s32 isInitialCall) {
-    Npc* npc = evt->owner2.npc;
+ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
+    Npc* npc = script->owner2.npc;
     Entity* entity;
     f32 sp10;
     f32 sp14;
@@ -236,7 +235,7 @@ s32 func_802BF964_3206D4(Evt* script, s32 isInitialCall) {
 void func_802BF9B8_320728(Npc* npc) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-    if (D_802BFEEC != 0) {
+    if (D_802BFEEC) {
         partnerActionStatus->npc = *npc;
         partnerActionStatus->actionState.b[1] = 1;
         enable_player_static_collisions();
@@ -307,6 +306,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
         case 1:
             npc_move_heading(partnerNPC, partnerNPC->moveSpeed, partnerNPC->yaw);
             func_802BD100_31DE70();
+
             if (!(script->functionTemp[1] & 3)) {
                 playFX_23(0, partnerNPC->pos.x, partnerNPC->moveToPos.y + (partnerNPC->collisionHeight * 0.5f), partnerNPC->pos.z, 0);
             }

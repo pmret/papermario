@@ -44,16 +44,14 @@ ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall) {
     }
 }
 
-s32 func_802BD1D0_3170F0(Evt* evt, s32 arg1) {
+s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Entity* temp_s2;
     Npc* npc;
-    f32 sp10;
-    f32 sp14;
-    f32 tempY;
+    f32 sp10, sp14, tempY;
 
-    npc = evt->owner2.npc;
-    if (arg1 != 0) {
+    npc = script->owner2.npc;
+    if (isInitialCall != 0) {
         partner_walking_enable(npc, 1);
         mem_clear(D_802BDD88_317CA8, sizeof(*D_802BDD88_317CA8));
         D_8010C954 = 0;
@@ -200,6 +198,7 @@ void world_goombario_pre_battle(Npc* partner) {
         actionStatus->actionState.b[3] = 0;
         disable_npc_blur(partner);
     }
+
     actionStatus->actionState.b[3] = 1;
 }
 

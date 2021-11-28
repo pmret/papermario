@@ -1,10 +1,8 @@
 #include "common.h"
 #include "goompa.h"
-
-static s32 goompa_802BD600;
+#include "../src/world/partners.h"
 
 extern unkPartnerStruct* D_802BD58C_324E9C;
-
 ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall);
 
 void world_goompa_init(Npc* partner) {
@@ -13,12 +11,16 @@ void world_goompa_init(Npc* partner) {
 }
 
 ApiStatus GoompaTakeOut(Evt* script, s32 isInitialCall) {
-    Npc* owner = script->owner2.npc;
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_get_out(owner);
+        partner_init_get_out(npc);
     }
-    return partner_get_out(owner) != 0;
+    if (partner_get_out(npc)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus func_802BD14C_324A5C(Evt* evt, s32 isInitialCall) {
@@ -117,12 +119,16 @@ ApiStatus GoompaUseAbility(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus GoompaPutAway(Evt* script, s32 isInitialCall) {
-    Npc* owner = script->owner2.npc;
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_put_away(owner);
+        partner_init_put_away(npc);
     }
-    return partner_put_away(owner) != 0;
+    if (partner_put_away(npc)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 EvtSource world_goompa_take_out = {
@@ -131,7 +137,7 @@ EvtSource world_goompa_take_out = {
     EVT_END
 };
 
-unkPartnerStruct* D_802BD58C_324E9C = &goompa_802BD600;
+unkPartnerStruct* D_802BD58C_324E9C = (unkPartnerStruct*)0x802BD600;
 
 EvtSource world_goompa_update = {
     EVT_CALL(func_802BD14C_324A5C)

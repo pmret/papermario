@@ -207,12 +207,11 @@ void func_802BE6E8_319438(Npc* npc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     f32 phi_f12;
-
     f32* new_var0;
     f32* new_var1;
 
     if (partnerActionStatus->actionState.b[0] != 0) {
-        if (D_802BE92C != 0) {
+        if (D_802BE92C) {
             enable_player_input();
         }
 

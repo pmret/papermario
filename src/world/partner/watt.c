@@ -6,7 +6,6 @@
 void force_player_anim(s32 arg0);
 void func_802BE070_31DBE0(void);
 void partner_kill_ability_script(void);
-s32 partner_use_ability(void);
 void func_802BD1AC_31CD1C(s32 arg0);
 extern s32 D_802BE278_31DDE8;
 extern f64 D_802BE2F0_31DE60;
