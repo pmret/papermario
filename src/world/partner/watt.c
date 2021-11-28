@@ -89,7 +89,7 @@ ApiStatus func_802BD27C_31CDEC(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus func_802BD2B4_31CE24(Evt *script, s32 isInitialCall) {
+ApiStatus func_802BD2B4_31CE24(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Entity* entity;
     f32 sp10, sp14;

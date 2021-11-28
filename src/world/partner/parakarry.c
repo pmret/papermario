@@ -39,12 +39,8 @@ ApiStatus func_802BD148_3196B8(Evt* script, s32 isInitialCall) {
 s32 func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Entity* temp_s2;
-    Npc* npc;
-    f32 sp10;
-    f32 sp14;
-    f32 tempY;
-
-    npc = script->owner2.npc;
+    Npc* npc = script->owner2.npc;
+    f32 sp10, sp14, tempY;
 
     if (isInitialCall) {
         partner_flying_enable(npc, 1);

@@ -70,8 +70,8 @@ void func_802BD21C_320D6C(Npc* npc) {
     npc->moveToPos.z = npc->pos.z;
 }
 
-ApiStatus func_802BD29C_320DEC(Evt* evt, s32 isInitialCall) {
-    Npc* npc = evt->owner2.npc;
+ApiStatus func_802BD29C_320DEC(Evt* script, s32 isInitialCall) {
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
         partner_init_get_out(npc);

@@ -23,13 +23,13 @@ ApiStatus GoompaTakeOut(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus func_802BD14C_324A5C(Evt* evt, s32 isInitialCall) {
+ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* npc;
     f32 sp10, sp14, tempY;
     Entity* entity;
 
-    npc = evt->owner2.npc;
+    npc = script->owner2.npc;
     if (isInitialCall) {
         partner_walking_enable(npc, 1);
         mem_clear(D_802BD58C_324E9C, sizeof(*D_802BD58C_324E9C));

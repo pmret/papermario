@@ -27,15 +27,15 @@ void func_802BD2D8_318028(Npc* npc) {
 }
 
 ApiStatus func_802BD300_318050(Evt* script, s32 isInitialCall) {
-    Npc* unk = script->owner2.npc; // todo what is this
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_get_out(unk);
+        partner_init_get_out(npc);
     }
-    return partner_get_out(unk) != 0;
+    return partner_get_out(npc) != 0;
 }
 
-ApiStatus func_802BD338_318088(Evt* evt, s32 arg1) {
+ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* npc;
     f32 sp10;
@@ -43,8 +43,8 @@ ApiStatus func_802BD338_318088(Evt* evt, s32 arg1) {
     f32 tempY;
     Entity* entity;
 
-    npc = evt->owner2.npc;
-    if (arg1 != 0) {
+    npc = script->owner2.npc;
+    if (isInitialCall != 0) {
         partner_walking_enable(npc, 1);
         mem_clear(D_802BE89C_3195EC, sizeof(*D_802BE89C_3195EC));
         D_8010C954 = 0;
@@ -156,7 +156,7 @@ ApiStatus func_802BE4E8_319238(Evt* script, s32 isInitialCall) {
     }
 }
 
-s32 func_802BE520_319270(Npc *npc1, Npc *npc2) {
+s32 func_802BE520_319270(Npc* npc1, Npc* npc2) {
     f32 sp20, sp24, sp28;
     f32 temp_f6, temp_f20, temp_f22, temp_f24, temp_f26, temp_f28;
     s32 slippingResult;

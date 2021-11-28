@@ -26,24 +26,29 @@ ApiStatus func_802BD130_323A80(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         partner_init_get_out(owner);
     }
-    return partner_get_out(owner) != 0;
+
+    if (partner_get_out(owner)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* npc = script->owner2.npc;
     Entity* entity;
-    f32 sp10;
-    f32 sp14;
-    f32 tempY;
+    f32 sp10, sp14, tempY;
 
     if (isInitialCall) {
         partner_flying_enable(npc, 1);
         mem_clear(D_802BDFFC_32494C, sizeof(*D_802BDFFC_32494C));
-        D_8010C954 = 0;
+        D_8010C954 = NULL;
     }
+
     entity = D_8010C954;
     playerData->unk_2F4[9]++;
+
     if (entity == NULL) {
         partner_flying_update_player_tracking(npc);
         partner_flying_update_motion(npc);
@@ -105,8 +110,8 @@ ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
 }
 
 void func_802BD4FC_323E4C(Npc* partner) {
-    if (D_8010C954 != 0) {
-        D_8010C954 = 0;
+    if (D_8010C954 != NULL) {
+        D_8010C954 = NULL;
         partner->flags = D_802BDFFC_32494C->unk_08;
         D_802BDFFC_32494C->unk_04 = 0;
         partner_clear_player_tracking(partner);
@@ -259,6 +264,7 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
                 }
                 break;
             }
+
             func_802BDDF0_324740(npc);
             return ApiStatus_DONE2;
         case 1:
@@ -278,6 +284,7 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
                 npc->pos.z = playerStatus->position.z - D_802BE0EC;
                 break;
             }
+
             func_802BDDF0_324740(npc);
             return ApiStatus_DONE2;
         case 2:
@@ -285,6 +292,7 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
                 func_802BDDF0_324740(npc);
                 return ApiStatus_DONE2;
             }
+
             npc->pos.x = playerStatus->position.x - D_802BE0E4;
             npc->pos.y = playerStatus->position.y - D_802BE0E8;
             npc->pos.z = playerStatus->position.z - D_802BE0EC;
@@ -335,6 +343,7 @@ void func_802BDDF0_324740(Npc* partner) {
     partner->flags &= ~0x42;
     D_802BE0C4 = FALSE;
     actionState = ACTION_STATE_IDLE;
+
     if (playerStatus->flags & 0x800) {
         actionState = ACTION_STATE_HIT_LAVA;
     }
@@ -357,6 +366,7 @@ ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
         }
         func_802BDDF0_324740(partner);
     }
+    
     if (partner_put_away(partner)) {
         return ApiStatus_DONE1;
     } else {

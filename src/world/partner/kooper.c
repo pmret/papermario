@@ -72,13 +72,12 @@ ApiStatus func_802BD228_31B248(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus func_802BD260_31B280(Evt* evt, s32 isInitialCall) {
+ApiStatus func_802BD260_31B280(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    Npc* npc;
-    f32 sp10, sp14, tempY;
     Entity* entity;
+    Npc* npc = script->owner2.npc;
+    f32 sp10, sp14, tempY;
 
-    npc = evt->owner2.npc;
     if (isInitialCall) {
         partner_walking_enable(npc, 1);
         mem_clear(D_802BEB60_31CB80, sizeof(*D_802BEB60_31CB80));
@@ -87,6 +86,7 @@ ApiStatus func_802BD260_31B280(Evt* evt, s32 isInitialCall) {
 
     playerData->unk_2F4[2]++;
     entity = D_8010C954;
+    
     if (entity == NULL) {
         partner_walking_update_player_tracking(npc);
         partner_walking_update_motion(npc);
