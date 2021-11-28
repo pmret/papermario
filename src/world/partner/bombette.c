@@ -26,7 +26,6 @@ void func_802BD2D8_318028(Npc* npc) {
     
 }
 
-
 ApiStatus func_802BD300_318050(Evt* script, s32 isInitialCall) {
     Npc* unk = script->owner2.npc; // todo what is this
 
@@ -144,27 +143,27 @@ s32 func_802BD748(void) {
 INCLUDE_ASM(s32, "world/partner/bombette", func_802BD758_3184A8);
 
 ApiStatus func_802BE4E8_319238(Evt* script, s32 isInitialCall) {
-    Npc* npc = script->owner2.npc; // todo what is this
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
         partner_init_put_away(npc);
     }
-    return partner_put_away(npc) != 0;
+
+    if (partner_put_away(npc)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 s32 func_802BE520_319270(Npc *npc1, Npc *npc2) {
     f32 sp20, sp24, sp28;
+    f32 temp_f6, temp_f20, temp_f22, temp_f24, temp_f26, temp_f28;
     s32 slippingResult;
-    f32 temp_f0_2;
-    f32 temp_f20;
-    f32 temp_f22;
-    f32 temp_f24;
-    f32 temp_f26;
-    f32 temp_f28;
+    f32 distance;
     s32 ret;
-    f32 temp_f6;
     f32 temp2;
-    f32 anotherTemp;
+    f32 height;
 
     if (D_802BE928 == 0) {
         return 0;
@@ -173,44 +172,44 @@ s32 func_802BE520_319270(Npc *npc1, Npc *npc2) {
     temp_f26 = npc2->pos.x;
     temp_f28 = npc1->pos.x;
 
-    sp20 = temp_f26 - temp_f28;
+    sp20 = npc2->pos.x - npc1->pos.x;
     sp24 = (npc2->pos.y + (f32)(npc2->collisionHeight * 0.5) - npc1->pos.y);
-    temp_f6 = npc2->collisionRadius * 0.55;
-    anotherTemp = 35.0f;
     temp_f22 = npc2->pos.z;
     temp_f24 = npc1->pos.z;
     sp28 = temp_f22 - temp_f24;
+    temp_f6 = npc2->collisionRadius * 0.55;
+    height = 35.0f;
+
     temp2 = sqrtf(SQ(sp20) + SQ(sp24) + SQ(sp28));
     ret = 0;
 
-    if (temp2 < (temp_f6 + anotherTemp)) {
+    if (temp2 < (temp_f6 + height)) {
         ret = 1;
     }
 
     temp_f20 = atan2(temp_f26, temp_f22, temp_f28, temp_f24);
-    temp_f0_2 = dist2D(temp_f26, temp_f22, temp_f28, temp_f24);
+    distance = dist2D(temp_f26, temp_f22, temp_f28, temp_f24);
 
     sp20 = npc1->pos.x;
     sp24 = npc1->pos.y;
     sp28 = npc1->pos.z;
 
-    slippingResult = npc_test_move_taller_with_slipping(0, &sp20, &sp24, &sp28, temp_f0_2, temp_f20, anotherTemp, 2.0f);
+    slippingResult = npc_test_move_taller_with_slipping(0, &sp20, &sp24, &sp28, distance, temp_f20, height, 2.0f);
 
-    if (slippingResult != 0) {
+    if (slippingResult) {
         return 0;
     }
 
     return ret;
 }
 
-
-#ifdef NON_MATCHING
 void func_802BE6E8_319438(Npc* npc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     f32 phi_f12;
-    f32* npcXPos;
-    f32* npcYpos;
+
+    f32* new_var0;
+    f32* new_var1;
 
     if (partnerActionStatus->actionState.b[0] != 0) {
         if (D_802BE92C != 0) {
@@ -229,18 +228,14 @@ void func_802BE6E8_319438(Npc* npc) {
         partnerActionStatus->actionState.b[3] = 0;
 
         npc->pos.x = playerStatus->position.x;
-        npcXPos = &npc->pos.x;
         npc->pos.y = playerStatus->position.y;
-        npcYpos = &npc->pos.z;
         npc->pos.z = playerStatus->position.z;
 
         if (D_802BE920 == 0) {
-            phi_f12 = playerStatus->targetYaw + 90.0f;
+            add_vec2D_polar(&npc->pos.x, &npc->pos.z, playerStatus->colliderDiameter / 4, clamp_angle(playerStatus->targetYaw + 90.0f));
         } else {
-            phi_f12 = playerStatus->targetYaw - 90.0f;
+            add_vec2D_polar(&npc->pos.x, &npc->pos.z, playerStatus->colliderDiameter / 4, clamp_angle(playerStatus->targetYaw - 90.0f));
         }
-        
-        add_vec2D_polar(npcXPos, npcYpos, playerStatus->colliderDiameter / 4, clamp_angle(phi_f12));
 
         npc->jumpVelocity = 0.0f;
         npc->pos.y = playerStatus->position.y;
@@ -258,9 +253,6 @@ void func_802BE6E8_319438(Npc* npc) {
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "world/partner/bombette", func_802BE6E8_319438);
-#endif
 
 EvtSource D_802BE880_3195D0 = {
     EVT_CALL(func_802BD300_318050)

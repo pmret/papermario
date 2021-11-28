@@ -10,7 +10,6 @@ static char* N(exit_str_1) = "\0\0\0\0";
 static char* N(exit_str_2) = "sam_11";
 static char* N(exit_str_3) = "flo_19";
 
-//INCLUDE_ASM(s32, "EB9D90", func_80240F40_EB9D90);
 ApiStatus func_80240F40_EB9D90(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = *args++;

@@ -1,16 +1,39 @@
 #include "common.h"
+#include "../src/world/partners.h"
 
 extern struct unkPartnerStruct* D_802BEAAC_31B01C;
+extern s32 D_802BEBC0_31CBE0;
 
-INCLUDE_ASM(s32, "world/partner/parakarry", func_802BD100_319670);
+extern s32 D_802BEBB0;
+extern s32 D_802BEBB4;
+extern s32 D_802BEBB8;
+extern s32 D_802BEBBC;
+extern s32 D_802BEBC4;
+
+
+void func_802BD100_319670(Npc* npc) {
+    npc->collisionHeight = 37;
+    npc->collisionRadius = 40;
+    D_802BEBB0 = 0;
+    D_802BEBC0_31CBE0 = 0;
+    D_802BEBB4 = 0;
+    D_802BEBB8 = 0;
+    D_802BEBBC = 0;
+    D_802BEBC4 = 0;
+}
 
 ApiStatus func_802BD148_3196B8(Evt* script, s32 isInitialCall) {
-    Npc* unk = script->owner2.npc; // todo what is this
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_get_out(unk);
+        partner_init_get_out(npc);
     }
-    return partner_get_out(unk) != 0;
+
+    if (partner_get_out(npc)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 s32 func_802BD180_3196F0(Evt* evt, s32 arg1) {
@@ -96,21 +119,90 @@ s32 func_802BD180_3196F0(Evt* evt, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM(s32, "world/partner/parakarry", func_802BD514_319A84);
+void func_802BD514_319A84(Npc* parakarry) {
+    if (D_8010C954) {
+        D_8010C954 = 0;
+        parakarry->flags = D_802BEAAC_31B01C->unk_08;
+        D_802BEAAC_31B01C->unk_04 = 0;
+        partner_clear_player_tracking (parakarry);
+    }
+}
 
-INCLUDE_ASM(s32, "world/partner/parakarry", func_802BD558_319AC8);
+s32 func_802BD558_319AC8(void) {
+    f32 sp28, sp2C, sp30, sp34, sp38, sp3C, sp40, sp44;
+    f32 colliderBaseHeight;
+    s32 temp_s1;
+
+    colliderBaseHeight = gPlayerStatus.colliderHeight;
+    sp28 = gPlayerStatus.position.x;
+    sp2C = gPlayerStatus.position.y + (colliderBaseHeight * 0.5);
+    sp30 = gPlayerStatus.position.z;
+    sp34 = colliderBaseHeight * 0.5f;
+    
+    temp_s1 = player_raycast_below_cam_relative(&gPlayerStatus, &sp28, &sp2C, &sp30, &sp34, &sp38, &sp3C, &sp40, &sp44);
+
+    if (((get_collider_type_by_id(temp_s1) & 0xFF) - 2) < 2U) {
+        gPlayerStatus.unk_BF = 2;
+        D_802BEBC0_31CBE0 = 0x15;
+        gPlayerStatus.flags |= 0x800;
+    }
+
+    return temp_s1;
+}
 
 INCLUDE_ASM(s32, "world/partner/parakarry", func_802BD660_319BD0);
 
 ApiStatus func_802BE8D4_31AE44(Evt* script, s32 isInitialCall) {
-    s32 unk = script->owner2.npc; // todo what is this
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_put_away(unk);
+        partner_init_put_away(npc);
     }
-    return partner_put_away(unk) != 0;
+
+    if (partner_put_away(npc)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-INCLUDE_ASM(s32, "world/partner/parakarry", func_802BE90C_31AE7C);
+void func_802BE90C_31AE7C(Npc* npc) {
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-INCLUDE_ASM(s32, "world/partner/parakarry", func_802BE9D0_31AF40);
+    if (D_802BEBB0) {
+        if (D_802BEBB8) {
+            enable_player_static_collisions();
+        }
+
+        if (D_802BEBB4 != 0) {
+            enable_player_input();
+        }
+
+        set_action_state(0);
+        partnerActionStatus->npc = *npc;
+        partnerActionStatus->actionState.b[1] = 1;
+        partner_clear_player_tracking(npc);
+    }
+
+    partnerActionStatus->actionState.b[3] = 4;
+}
+
+void func_802BE9D0_31AF40(Npc* npc) {
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+
+    if (partnerActionStatus->actionState.b[1] != 0) {
+        if (D_802BEBB8) {
+            disable_player_static_collisions();
+        }
+        if (D_802BEBB4) {
+            disable_player_input();
+        }
+
+        set_action_state(0x21);
+        *npc = partnerActionStatus->npc;
+        partnerActionStatus->actionState.b[3] = 0;
+        partnerActionStatus->actionState.b[0] = 0;
+        partner_clear_player_tracking(npc);
+        partner_use_ability();
+    }
+}

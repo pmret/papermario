@@ -1,23 +1,15 @@
 #include "common.h"
 #include "sprite/npc/world_goombario.h"
 #include "goombario.h"
+#include "../src/world/partners.h"
 
 ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall);
 ApiStatus func_802BD1D0_3170F0(Evt* script, s32 isInitialCall);
 ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall);
 ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall);
 extern s32 D_802BDF60;
-typedef struct unk_802BDD88_317CA8 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 flags;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-} unk_802BDD88_317CA8; //size = 0x1C
 
-extern unk_802BDD88_317CA8* D_802BDD88_317CA8;
+extern unkPartnerStruct* D_802BDD88_317CA8;
 
 s32 func_802BD100_317020(s32 arg0) {
     s32 i;
@@ -52,77 +44,70 @@ ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall) {
     }
 }
 
-#ifdef NON_EQUIVALENT
-ApiStatus func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
+s32 func_802BD1D0_3170F0(Evt* evt, s32 arg1) {
     PlayerData* playerData = &gPlayerData;
-    Entity* entity;
-    unk_802BDD88_317CA8* new_var;
-    f32 sp10, sp14;
-    f32 temp_f0;
-    Npc* npc = script->owner2.npc;
-    
-    if (isInitialCall) {
+    Entity* temp_s2;
+    Npc* npc;
+    f32 sp10;
+    f32 sp14;
+    f32 tempY;
+
+    npc = evt->owner2.npc;
+    if (arg1 != 0) {
         partner_walking_enable(npc, 1);
-        mem_clear(D_802BDD88_317CA8, 0x1C);
-        D_8010C954 = NULL;
+        mem_clear(D_802BDD88_317CA8, sizeof(*D_802BDD88_317CA8));
+        D_8010C954 = 0;
     }
-
-    entity = D_8010C954;
-    playerData->unk_2F4[1] += 1;
-
-    if (entity == NULL) {
+    playerData->unk_2F4[1]++;
+    temp_s2 = D_8010C954;
+    if (temp_s2 == NULL) {
         partner_walking_update_player_tracking(npc);
         partner_walking_update_motion(npc);
         return 0;
     }
 
-    switch(D_802BDD88_317CA8->unk_04) {
+    switch (D_802BDD88_317CA8->unk_04) {
         case 0:
             D_802BDD88_317CA8->unk_04 = 1;
-            D_802BDD88_317CA8->flags = npc->flags;
-            D_802BDD88_317CA8->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
-            D_802BDD88_317CA8->unk_10 = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
+            D_802BDD88_317CA8->unk_08 = npc->flags;
+            D_802BDD88_317CA8->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, temp_s2->position.x, temp_s2->position.z));
+            D_802BDD88_317CA8->unk_10 = atan2(temp_s2->position.x, temp_s2->position.z, npc->pos.x, npc->pos.z);
             D_802BDD88_317CA8->unk_14 = 6.0f;
             D_802BDD88_317CA8->unk_18 = 50.0f;
             D_802BDD88_317CA8->unk_00 = 0x78;
             npc->flags |= 0x40148;
             npc->flags &= ~0x200;
-
         case 1:
             sin_cos_rad((D_802BDD88_317CA8->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-            npc->pos.x = entity->position.x + (sp10 * D_802BDD88_317CA8->unk_0C);
-            npc->pos.z = entity->position.z - (sp14 * D_802BDD88_317CA8->unk_0C);
-            D_802BDD88_317CA8->unk_10 = clamp_angle(D_802BDD88_317CA8->unk_10 - D_802BDD88_317CA8->unk_14);
 
+            npc->pos.x = temp_s2->position.x + (sp10 * D_802BDD88_317CA8->unk_0C);
+            npc->pos.z = temp_s2->position.z - (sp14 * D_802BDD88_317CA8->unk_0C);
+
+            D_802BDD88_317CA8->unk_10 = clamp_angle(D_802BDD88_317CA8->unk_10 - D_802BDD88_317CA8->unk_14);
             if (D_802BDD88_317CA8->unk_0C > 20.0f) {
                 D_802BDD88_317CA8->unk_0C--;
-            }
-
-            if (D_802BDD88_317CA8->unk_0C < 19.0f) {
+            } else if (D_802BDD88_317CA8->unk_0C < 19.0f) {
                 D_802BDD88_317CA8->unk_0C++;
             }
 
-            temp_f0 = sin_rad((D_802BDD88_317CA8->unk_18 * TAU) / 360.0f);
+            tempY = sin_rad((D_802BDD88_317CA8->unk_18 * TAU) / 360.0f) * 3.0f;
+
             D_802BDD88_317CA8->unk_18 += 3.0f;
 
             if (D_802BDD88_317CA8->unk_18 > 150.0f) {
                 D_802BDD88_317CA8->unk_18 = 150.0f;
             }
+            npc->pos.y += tempY;
 
-            npc->pos.y = npc->pos.y + (temp_f0 * 3.0f);
             npc->renderYaw = clamp_angle(360.0f - D_802BDD88_317CA8->unk_10);
             D_802BDD88_317CA8->unk_14 += 0.8;
-
             if (D_802BDD88_317CA8->unk_14 > 40.0f) {
                 D_802BDD88_317CA8->unk_14 = 40.0f;
             }
 
-            D_802BDD88_317CA8->unk_00--;
-
-            if (D_802BDD88_317CA8->unk_00 == 0) {
+            if (--D_802BDD88_317CA8->unk_00 == 0) {
                 D_802BDD88_317CA8->unk_04++;
             }
-            
             break;
         case 2:
             npc->flags = D_802BDD88_317CA8->unk_08;
@@ -132,25 +117,20 @@ ApiStatus func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
         case 3:
             partner_walking_update_player_tracking(npc);
             partner_walking_update_motion(npc);
-            D_802BDD88_317CA8->unk_00--;
 
-            if (D_802BDD88_317CA8->unk_00 == 0) {
+            if (--D_802BDD88_317CA8->unk_00 == 0) {
                 D_802BDD88_317CA8->unk_04 = 0;
-                entity = NULL;
+                D_8010C954 = 0;
             }
             break;
     }
     return 0;
 }
-#else
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD1D0_3170F0, Evt* script, s32 isInitialCall);
-#endif
 
 void func_802BD564_317484(Npc* goombario) {
-
     if (D_8010C954) {
         D_8010C954 = 0;
-        goombario->flags = D_802BDD88_317CA8->flags;
+        goombario->flags = D_802BDD88_317CA8->unk_08;
         D_802BDD88_317CA8->unk_04 = 0;
         partner_clear_player_tracking (goombario);
     }
@@ -195,13 +175,17 @@ INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BDB30_317A50, Evt* scr
 #endif
 
 ApiStatus func_802BDB84(Evt* script, s32 isInitialCall) {
-    s32 unk = script->owner2.npc; // todo what is this?
+    Npc* npc = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_put_away(unk);
+        partner_init_put_away(npc);
     }
 
-    return partner_put_away(unk) != 0;
+    if (partner_put_away(npc)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 void world_goombario_pre_battle(Npc* partner) {
@@ -238,7 +222,7 @@ EvtSource world_goombario_take_out = {
     EVT_END
 };
 
-unk_802BDD88_317CA8* D_802BDD88_317CA8 = 0x802BDF40;
+unkPartnerStruct* D_802BDD88_317CA8 = (unkPartnerStruct*)0x802BDF40;
 
 EvtSource world_goombario_update = {
     EVT_CALL(func_802BD1D0_3170F0)
