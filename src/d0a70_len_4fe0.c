@@ -1,5 +1,6 @@
 #include "common.h"
 #include "ld_addrs.h"
+#include "sprite.h"
 
 typedef struct {
     /* 0x00 */ u8 arrayIdx;
@@ -177,6 +178,7 @@ void func_8013CFA8(FoldState*, Matrix4f mtx);
 void func_8013DAB4(FoldState*, Matrix4f mtx);
 void func_8013E2F0(FoldState*, Matrix4f mtx);
 void func_8013E904(FoldState*, Matrix4f mtx);
+void func_8013EE48(FoldState* state);
 void func_8013EE68(FoldState* state);
 void func_8013F1F8(FoldState* state);
 
@@ -1145,8 +1147,6 @@ INCLUDE_ASM(s32, "d0a70_len_4fe0", fold_load_gfx);
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013C3F0);
 
-//blah
-#ifdef NON_MATCHING
 void func_8013CFA8(FoldState* state, Matrix4f mtx) {
     s32 i;
 
@@ -1168,132 +1168,133 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
         s32 alpha2;
 
         if (!(state->flags & 0x20)) {
-            if ((*D_80151328 & 1) && (state->arrayIdx != 0)) {
-                if (state->flags & someFlags) {
-                    if (state->renderType == 0 || state->renderType == 2 || state->renderType == 15 ||
-                        state->renderType == 7)
-                    {
-                        gDPLoadMultiTile_4b(gMasterGfxPos++, fold_currentImage->raster, 0x0000, 1, G_IM_FMT_CI,
-                                            fold_currentImage->width, fold_currentImage->height, uls, ult, lrs, lrt, 0,
-                                            G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 8, 8,
-                                            G_TX_NOLOD, G_TX_NOLOD);
-                        gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 0, 0x0000, G_TX_RENDERTILE, 1,
-                                G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-                        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0,
-                                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP,
-                                   G_TX_NOMASK, G_TX_NOLOD);
-                        gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 252, 0);
+            if ((D_80151328->flags & 1) &&
+                (state->arrayIdx != 0) &&
+                (state->flags & someFlags) &&
+                (state->renderType == 0 || state->renderType == 2 || state->renderType == 15 || state->renderType == 7))
+            {
+                gDPScrollMultiTile2_4b(gMasterGfxPos++,
+                    fold_currentImage->raster, G_IM_FMT_CI,
+                    fold_currentImage->width, fold_currentImage->height, // img size
+                    uls, ult, // top left
+                    lrs - 1, lrt - 1, // bottom right
+                    0, // palette
+                    G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, // clamp wrap mirror
+                    8, 8, // mask
+                    G_TX_NOLOD, G_TX_NOLOD, // shift,
+                    0x100, 0x100); // scroll
+                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0,
+                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP,
+                            G_TX_NOMASK, G_TX_NOLOD);
+                gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 252, 0);
 
-                        alpha = 255;
-                        switch (state->renderType) {
-                            case 0:
-                                break;
-                            case 2:
-                            case 15:
-                                alpha = state->unk_1C[1][3];
-                                break;
-                            case 7:
-                                alpha = -1;
-                                break;
-                        }
-
-                        if (*D_80151328 & 2) {
-                            if ((D_80156954[0][0].arrayIdx != 0) && (state->flags & someFlags)) {
-                                cam = &gCameras[gCurrentCamID];
-
-                                if (gGameStatusPtr->isBattle == 2) {
-                                    gSPViewport(gMasterGfxPos++, &D_8014EE50);
-                                } else {
-                                    gSPViewport(gMasterGfxPos++, &cam->vpAlt);
-                                }
-
-                                gDPSetRenderMode(gMasterGfxPos++, G_RM_PASS, state->unk_78);
-
-                                if (alpha == -1) {
-                                    gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL1, 0, 0, 0, 0, 0, 0, 1, 0, 1);
-                                } else {
-                                    gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha);
-                                    gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0, 0, 0, 1, 0, 1);
-                                }
-
-                                gSPVertex(gMasterGfxPos++, &fold_vtxBuf[i], 4, 0);
-                                gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
-                                gDPPipeSync(gMasterGfxPos++);
-                            }
-                        }
-                        render_shaded_sprite(mtx, uls, ult, lrs, lrt, alpha, state->unk_78);
-                        goto block_60;
-                    }
+                alpha = 255;
+                switch (state->renderType) {
+                    case 0:
+                        break;
+                    case 2:
+                    case 15:
+                        alpha = state->unk_1C[1][3];
+                        break;
+                    case 7:
+                        alpha = -1;
+                        break;
                 }
-            }
 
-            gDPLoadTextureTile_4b(gMasterGfxPos++, fold_currentImage->raster, G_IM_FMT_CI, fold_currentImage->width,
-                                  fold_currentImage->height, uls, ult, lrs, lrt, 0,
-                                  G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD);
+                if ((D_80151328->flags & 2) && (D_80156954[0][0].arrayIdx != 0) && (state->flags & someFlags)) {
+                    cam = &gCameras[gCurrentCamID];
 
-            if (*D_80151328 & 2) {
-                if (state->arrayIdx != 0) {
-                    alpha2 = 255;
-
-                    if (state->flags & someFlags) {
-                        cam = &gCameras[gCurrentCamID];
-
-                        if (gGameStatusPtr->isBattle == 2) {
-                            gSPViewport(gMasterGfxPos++, &D_8014EE50);
-                        } else {
-                            gSPViewport(gMasterGfxPos++, &cam->vpAlt);
-                        }
-
-                        if (alpha2 == 255) {
-                            gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
-                        } else {
-                            gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2);
-                        }
-
-                        switch (state->renderType) {
-                            case 0:
-                                alpha2 = 255;
-                                break;
-                            case 2:
-                            case 15:
-                                alpha2 = state->unk_1C[1][3];
-                                break;
-                            case 7:
-                                alpha2 = -1;
-                                break;
-                        }
-
-                        if (alpha2 == -1) {
-                            gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL0, 0, 0, 0, 0, 0, SHADE, 0,
-                                            TEXEL0, 0);
-                        } else {
-                            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha2);
-                            gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0,
-                                            ENVIRONMENT, 0, TEXEL0, 0);
-                        }
-
-                        gSPVertex(gMasterGfxPos++, &fold_vtxBuf[i], 4, 0);
-                        gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
-                        gDPPipeSync(gMasterGfxPos++);
-
-                        if (alpha2 == 255) {
-                            gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
-                        } else {
-                            gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2);
-                        }
-
-                        gDPSetEnvColor(gMasterGfxPos++, 100, 100, 100, 255);
-                        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha2);
-                        gDPSetCombineLERP(gMasterGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0, SHADE,
-                                        ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0);
-                        gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
+                    if (gGameStatusPtr->isBattle == 2) {
+                        gSPViewport(gMasterGfxPos++, &D_8014EE50);
+                    } else {
+                        gSPViewport(gMasterGfxPos++, &cam->vpAlt);
                     }
+
+                    gDPSetRenderMode(gMasterGfxPos++, G_RM_PASS, state->unk_78);
+
+                    if (alpha == -1) {
+                        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL1, 0, 0, 0, 0, 0, 0,
+                                            0, 0, COMBINED);
+                    } else {
+                        gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha);
+                        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0,
+                                            0, 0, 0, 0, COMBINED);
+                    }
+
+                    gSPVertex(gMasterGfxPos++, &fold_vtxBuf[i], 4, 0);
+                    gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+                    gDPPipeSync(gMasterGfxPos++);
+                }
+                render_shaded_sprite(mtx, uls, ult, lrs, lrt, alpha, state->unk_78);
+            } else {
+                gDPScrollTextureTile_4b(gMasterGfxPos++,
+                    fold_currentImage->raster, G_IM_FMT_CI,
+                    fold_currentImage->width, fold_currentImage->height, // img size
+                    uls, ult, // top left
+                    lrs - 1, lrt - 1, // bottom right
+                    0, // palette
+                    G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, // clamp wrap mirror
+                    8, 8, // mask
+                    G_TX_NOLOD, G_TX_NOLOD, // shift,
+                    0x100, 0x100); // scroll
+
+                if ((D_80151328->flags & 2) && state->arrayIdx != 0 && (state->flags & someFlags)) {
+                    alpha2 = 255;
+                    cam = &gCameras[gCurrentCamID];
+
+                    if (gGameStatusPtr->isBattle == 2) {
+                        gSPViewport(gMasterGfxPos++, &D_8014EE50);
+                    } else {
+                        gSPViewport(gMasterGfxPos++, &cam->vpAlt);
+                    }
+
+                    if (alpha2 == 255) {
+                        gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+                    } else {
+                        gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2);
+                    }
+
+                    switch (state->renderType) {
+                        case 0:
+                            alpha2 = 255;
+                            break;
+                        case 2:
+                        case 15:
+                            alpha2 = state->unk_1C[1][3];
+                            break;
+                        case 7:
+                            alpha2 = -1;
+                            break;
+                    }
+
+                    if (alpha2 == -1) {
+                        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL0, 0, 0, 0, 0, 0, SHADE, 0, TEXEL0, 0);
+                    } else {
+                        gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha2);
+                        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0,
+                                        ENVIRONMENT, 0, TEXEL0, 0);
+                    }
+
+                    gSPVertex(gMasterGfxPos++, &fold_vtxBuf[i], 4, 0);
+                    gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+                    gDPPipeSync(gMasterGfxPos++);
+
+                    if (alpha2 == 255) {
+                        gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+                    } else {
+                        gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2);
+                    }
+
+                    gDPSetEnvColor(gMasterGfxPos++, 100, 100, 100, 255);
+                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha2);
+                    gDPSetCombineLERP(gMasterGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0, SHADE,
+                                    ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0);
+                    gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
                 }
             }
         }
 
-    block_60:
-        if ((*D_80151328 & 2) && D_80156954[0][0].arrayIdx != 0 && (state->flags & someFlags)) {
+        if ((D_80151328->flags & 2) && D_80156954[0][0].arrayIdx != 0 && (state->flags & someFlags)) {
             cam = &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
                 gSPViewport(gMasterGfxPos++, &D_8014EE40);
@@ -1314,9 +1315,6 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
         i += 2;
     }
 }
-#else
-INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013CFA8);
-#endif
 
 INCLUDE_ASM(s32, "d0a70_len_4fe0", func_8013DAB4);
 

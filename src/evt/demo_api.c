@@ -10,9 +10,9 @@ INCLUDE_ASM(ApiStatus, "evt/demo_api", SetSpriteShading, Evt* script, s32 isInit
 
 ApiStatus EnableSpriteShading(Evt* script, s32 isInitialCall) {
     if (evt_get_variable(script, *script->ptrReadPos) != 0) {
-        *D_80151328 |= 1;
+        D_80151328->flags |= 1;
     } else {
-        *D_80151328 &= ~1;
+        D_80151328->flags &= ~1;
     }
     return ApiStatus_DONE2;
 }

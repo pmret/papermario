@@ -2268,11 +2268,30 @@ typedef struct struct8015A578 {
 
 typedef struct SaveMetadata {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ char unk_04[0x3];
+    /* 0x04 */ u8 unk_04;
+    /* 0x05 */ char unk_05[0x1];
+    /* 0x06 */ s8 unk_06;
     /* 0x07 */ s8 unk_07[8];
     /* 0x0F */ char unk_0F[0x1];
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
 } SaveMetadata; // size = 0x18
+
+typedef struct SpriteShadingLightSource {
+    /* 0x00 */ s8 flags;
+    /* 0x01 */ s8 rgb[3];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 falloff;
+    /* 0x14 */ s8 unk_14;
+    /* 0x15 */ char unk_15[0x3];
+} SpriteShadingLightSource; // size = 0x18
+
+typedef struct SpriteShadingProfile {
+    /* 0x00 */ s16 flags;
+    /* 0x02 */ char unk_02[0x2];
+    /* 0x04 */ SpriteShadingLightSource sources[7];
+    /* 0xAC */ s8 ambientColor[3];
+    /* 0xAF */ s8 ambientPower; // ?
+} SpriteShadingProfile; // size = 0xB0
 
 #endif
