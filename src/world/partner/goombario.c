@@ -46,18 +46,19 @@ ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall) {
 
 s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
+    Npc* npc = script->owner2.npc;
     Entity* temp_s2;
-    Npc* npc;
     f32 sp10, sp14, tempY;
 
-    npc = script->owner2.npc;
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         partner_walking_enable(npc, 1);
         mem_clear(D_802BDD88_317CA8, sizeof(*D_802BDD88_317CA8));
         D_8010C954 = 0;
     }
+
     playerData->unk_2F4[1]++;
     temp_s2 = D_8010C954;
+
     if (temp_s2 == NULL) {
         partner_walking_update_player_tracking(npc);
         partner_walking_update_motion(npc);
@@ -72,16 +73,16 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
             D_802BDD88_317CA8->unk_10 = atan2(temp_s2->position.x, temp_s2->position.z, npc->pos.x, npc->pos.z);
             D_802BDD88_317CA8->unk_14 = 6.0f;
             D_802BDD88_317CA8->unk_18 = 50.0f;
-            D_802BDD88_317CA8->unk_00 = 0x78;
-            npc->flags |= 0x40148;
-            npc->flags &= ~0x200;
+            D_802BDD88_317CA8->unk_00 = 120;
+            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
+            npc->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad((D_802BDD88_317CA8->unk_10 * TAU) / 360.0f, &sp10, &sp14);
 
             npc->pos.x = temp_s2->position.x + (sp10 * D_802BDD88_317CA8->unk_0C);
             npc->pos.z = temp_s2->position.z - (sp14 * D_802BDD88_317CA8->unk_0C);
-
             D_802BDD88_317CA8->unk_10 = clamp_angle(D_802BDD88_317CA8->unk_10 - D_802BDD88_317CA8->unk_14);
+
             if (D_802BDD88_317CA8->unk_0C > 20.0f) {
                 D_802BDD88_317CA8->unk_0C--;
             } else if (D_802BDD88_317CA8->unk_0C < 19.0f) {
@@ -89,16 +90,17 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
             }
 
             tempY = sin_rad((D_802BDD88_317CA8->unk_18 * TAU) / 360.0f) * 3.0f;
-
             D_802BDD88_317CA8->unk_18 += 3.0f;
 
             if (D_802BDD88_317CA8->unk_18 > 150.0f) {
                 D_802BDD88_317CA8->unk_18 = 150.0f;
             }
+
             npc->pos.y += tempY;
 
             npc->renderYaw = clamp_angle(360.0f - D_802BDD88_317CA8->unk_10);
             D_802BDD88_317CA8->unk_14 += 0.8;
+
             if (D_802BDD88_317CA8->unk_14 > 40.0f) {
                 D_802BDD88_317CA8->unk_14 = 40.0f;
             }
@@ -109,7 +111,7 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
             break;
         case 2:
             npc->flags = D_802BDD88_317CA8->unk_08;
-            D_802BDD88_317CA8->unk_00 = 0x1E;
+            D_802BDD88_317CA8->unk_00 = 30;
             D_802BDD88_317CA8->unk_04++;
             break;
         case 3:
@@ -173,13 +175,13 @@ INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BDB30_317A50, Evt* scr
 #endif
 
 ApiStatus func_802BDB84(Evt* script, s32 isInitialCall) {
-    Npc* npc = script->owner2.npc;
+    Npc* goombario = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_put_away(npc);
+        partner_init_put_away(goombario);
     }
 
-    if (partner_put_away(npc)) {
+    if (partner_put_away(goombario)) {
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;

@@ -188,7 +188,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
     if (currentEncounter->unk_08 == 0) {
         if (isInitialCall) {
             func_802BD5F4_31B614(npc);
-            if (playerStatus->animFlags & 0x100000) {
+            if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100000) {
                 return ApiStatus_DONE2;
             }
 

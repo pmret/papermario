@@ -125,11 +125,10 @@ s32 func_802BD540_323E90(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 tempX, tempZ;
 
-
     if (gGameStatusPtr->areaID != 0x10) {
         return -1;
     } else {
-        if ((gPlayerStatus.extraVelocity.x != 0.0f) || ((gPlayerStatus.extraVelocity.z != 0.0f))) {
+        if (gPlayerStatus.extraVelocity.x != 0.0f || gPlayerStatus.extraVelocity.z != 0.0f) {
             temp_f22 = atan2(0.0f, 0.0f, gPlayerStatus.extraVelocity.x, gPlayerStatus.extraVelocity.z);
             temp_f12 = temp_f22 + 180.0f;
             sp20 = gPlayerStatus.position.x;
@@ -139,7 +138,7 @@ s32 func_802BD540_323E90(void) {
             return player_test_lateral_overlap(0, &gPlayerStatus, &sp20, &sp28, &sp24, gPlayerStatus.colliderDiameter, temp_f22);
         }
         
-    return -1;
+        return -1;
     }
 }
 #else

@@ -2,9 +2,6 @@
 #include "../src/world/partners.h"
 
 extern s32 D_802BE934;
-//extern f64 D_802BE900_319650;
-
-//extern struct unkPartnerStruct* D_802BE89C_3195EC;
 extern s32 D_802BE92C;
 extern s32 D_802BE928;
 extern s32 D_802BE924;
@@ -23,7 +20,6 @@ void func_802BD2D8_318028(Npc* npc) {
     npc->collisionRadius = 24;
     D_802BE928 = 0;
     D_802BE924 = 0;
-    
 }
 
 ApiStatus func_802BD300_318050(Evt* script, s32 isInitialCall) {
@@ -37,21 +33,20 @@ ApiStatus func_802BD300_318050(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    Npc* npc;
-    f32 sp10;
-    f32 sp14;
-    f32 tempY;
+    Npc* npc = script->owner2.npc;
+    f32 sp10, sp14, tempY;
     Entity* entity;
 
-    npc = script->owner2.npc;
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         partner_walking_enable(npc, 1);
         mem_clear(D_802BE89C_3195EC, sizeof(*D_802BE89C_3195EC));
         D_8010C954 = 0;
     }
+
     playerData->unk_2F4[3]++;
     npc->flags |= 0x10000;
     entity = D_8010C954;
+
     if (entity == NULL) {
         partner_walking_update_player_tracking(npc);
         partner_walking_update_motion(npc);
@@ -166,7 +161,7 @@ s32 func_802BE520_319270(Npc* npc1, Npc* npc2) {
     f32 height;
 
     if (D_802BE928 == 0) {
-        return 0;
+        return FALSE;
     }
 
     temp_f26 = npc2->pos.x;
@@ -181,10 +176,10 @@ s32 func_802BE520_319270(Npc* npc1, Npc* npc2) {
     height = 35.0f;
 
     temp2 = sqrtf(SQ(sp20) + SQ(sp24) + SQ(sp28));
-    ret = 0;
+    ret = FALSE;
 
     if (temp2 < (temp_f6 + height)) {
-        ret = 1;
+        ret = TRUE;
     }
 
     temp_f20 = atan2(temp_f26, temp_f22, temp_f28, temp_f24);
@@ -197,7 +192,7 @@ s32 func_802BE520_319270(Npc* npc1, Npc* npc2) {
     slippingResult = npc_test_move_taller_with_slipping(0, &sp20, &sp24, &sp28, distance, temp_f20, height, 2.0f);
 
     if (slippingResult) {
-        return 0;
+        return FALSE;
     }
 
     return ret;
@@ -218,7 +213,7 @@ void func_802BE6E8_319438(Npc* npc) {
         D_802BE928 = 0;
         playerStatus->flags &= -3;
         npc->jumpVelocity = 0.0f;
-        npc->flags &= -0x801;
+        npc->flags &= ~0x800;
 
         set_action_state(0);
         partner_clear_player_tracking(npc);
@@ -241,8 +236,6 @@ void func_802BE6E8_319438(Npc* npc) {
         npc->rotation.x = 0.0f;
         npc->rotation.z = 0.0f;
         npc->currentAnim.w = 0x30003;
-        
-
         partner_clear_player_tracking(npc);
         disable_npc_blur(npc);
 
