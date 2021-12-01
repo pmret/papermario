@@ -14,7 +14,6 @@ extern s32 D_802A43D0;
 ApiStatus func_802A10C8_759678(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
-    BattleStatus* battleStatus2 = battleStatus; // TODO: macro?
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
@@ -27,10 +26,10 @@ ApiStatus func_802A10C8_759678(Evt* script, s32 isInitialCall) {
         *var4 = 1;
     }
 
-    battleStatus2->hammerCharge += 2;
+    battleStatus->hammerCharge += 2;
 
-    if (battleStatus2->hammerCharge > 99) {
-        (* &battleStatus)->hammerCharge = 99; // TODO: macro?
+    if (battleStatus->hammerCharge > 99) {
+        battleStatus->hammerCharge = 99;
     }
 
     battleStatus->jumpCharge = 0;
