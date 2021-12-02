@@ -1447,7 +1447,15 @@ typedef struct DecorationTable {
     /* 0x6CD */ s8 unk_6CD;
     /* 0x6CE */ char unk_6CE[6];
     /* 0x6D4 */ s32* unk_6D4;
-    /* 0x6D8 */ char unk_6D8[120];
+    /* 0x6D8 */ char unk_6D8[0x67];
+    /* 0x740 */ s16 unk_740;
+    /* 0x742 */ s16 unk_742;
+    /* 0x744 */ s16 unk_744;
+    /* 0x746 */ s16 unk_746;
+    /* 0x748 */ s16 unk_748;
+    /* 0x74A */ s16 unk_74A;
+    /* 0x74C */ s16 unk_74C;
+    /* 0x74E */ s16 unk_74E;
     /* 0x750 */ s8 unk_750;
     /* 0x751 */ s8 unk_751;
     /* 0x752 */ s8 unk_752;
