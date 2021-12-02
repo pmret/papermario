@@ -506,14 +506,9 @@ s32 advance_rng(void) {
 }
 
 f32 rand_float(void) {
-    s32 temp_v0 = advance_rng() & 0x7FFF;
-    f64 temp_f2 = temp_v0;
+    u32 temp_v0 = advance_rng() & 0x7FFF;
 
-    if (temp_v0 < 0) {
-        temp_f2 += 4294967296.0;
-    }
-
-    return temp_f2 * 3.0517578125e-05;
+    return temp_v0 / 32768.0;
 }
 
 s32 func_80029994(s32 arg0) {
@@ -801,7 +796,6 @@ void appendGfx_startup_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 
     gDPPipeSync(gMasterGfxPos++);
     gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
     gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
-
 }
 
 void startup_draw_prim_rect_COPY(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a) {

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects_internal.h"
 
 INCLUDE_ASM(s32, "effects/effect_30", fx_30_main);
 

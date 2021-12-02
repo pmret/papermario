@@ -1714,6 +1714,7 @@ enum RenderMode {
     RENDER_MODE_SURFACE_XLU_NO_ZB                = 0x00000014,
     RENDER_MODE_SURFXLU_ZB_ZUPD                  = 0x00000015,
     RENDER_MODE_SURFACE_XLU_LAYER2               = 0x00000016,
+    RENDER_MODE_17                               = 0x00000017,
     RENDER_MODE_DECAL_XLU                        = 0x0000001A,
     RENDER_MODE_DECAL_XLU_NOAA                   = 0x0000001C,
     RENDER_MODE_SHADOW                           = 0x00000020,
