@@ -688,7 +688,7 @@ typedef struct BattleStatus {
     /* 0x085 */ s8 unk_85;
     /* 0x086 */ s8 unk_86;
     /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
-    /* 0x088 */ u8 itemUsesLeft; /* set to 2 for doublke dip, 3 for triple */
+    /* 0x088 */ s8 itemUsesLeft; /* set to 2 for doublke dip, 3 for triple */
     /* 0x089 */ u8 hpDrainCount;
     /* 0x08A */ s8 unk_8A;
     /* 0x08B */ s8 hustleTurns; /* numTurns from hustle drink, normally 0 */
@@ -1447,7 +1447,7 @@ typedef struct DecorationTable {
     /* 0x6CD */ s8 unk_6CD;
     /* 0x6CE */ char unk_6CE[6];
     /* 0x6D4 */ s32* unk_6D4;
-    /* 0x6D8 */ char unk_6D8[0x67];
+    /* 0x6D8 */ char unk_6D8[0x68];
     /* 0x740 */ s16 unk_740;
     /* 0x742 */ s16 unk_742;
     /* 0x744 */ s16 unk_744;
