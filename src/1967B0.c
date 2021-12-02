@@ -29,13 +29,13 @@ ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
     sort_items();
 
     if (battleStatus->selectedMoveID == MOVE_DOUBLE_DIP) {
-        if ((s8) battleStatus->itemUsesLeft == 2) {
+        if (battleStatus->itemUsesLeft == 2) {
             deduct_current_move_fp();
         }
     }
 
     if (battleStatus->selectedMoveID == MOVE_TRIPLE_DIP) {
-        if ((s8) battleStatus->itemUsesLeft == 3) {
+        if (battleStatus->itemUsesLeft == 3) {
             deduct_current_move_fp();
         }
     }
