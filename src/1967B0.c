@@ -57,7 +57,7 @@ ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
 
     dma_copy(gBattleItemTable[i].romStart, gBattleItemTable[i].romEnd, gBattleItemTable[i].vramStart);
 
-    script->varTable[0] = gBattleItemTable[i].vramEnd;
+    script->varTable[0] = (s32) gBattleItemTable[i].vramEnd;
     script->varTable[1] = 0;
 
     return ApiStatus_DONE2;
