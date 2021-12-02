@@ -1552,7 +1552,7 @@ typedef struct Shop {
 typedef struct Encounter {
     /* 0x00 */ s32 count;
     /* 0x04 */ struct Enemy* enemy[16];
-    /* 0x44 */ u16 battle;
+    /* 0x44 */ s16 battle;
     /* 0x46 */ s16 stage;
     /* 0x48 */ s16 encounterID;
     /* 0x4A */ char unk_4C[0x12];
@@ -1865,7 +1865,10 @@ typedef struct EncounterStatus {
     /* 0x094 */ s32 unk_94;
     /* 0x098 */ s32 fadeOutAccel;
     /* 0x09C */ s32 battleStartCountdown;
-    /* 0x0A0 */ char unk_A0[16];
+    /* 0x0A0 */ s8 unk_A0;
+    /* 0x0A1 */ char unk_A1[0x1];
+    /* 0x0A2 */ s16 unk_A2;
+    /* 0x0A4 */ char unk_A4[0xC];
     /* 0x0B0 */ s32 defeatFlags[60][12];
     /* 0xFB0 */ s16 recentMaps[2];
     /* 0xFB4 */ char unk_FB4[4];

@@ -620,6 +620,10 @@ enum SoundIDs {
     SOUND_UNKNOWN_20F6              = 0x000020F6,
     SOUND_UNKNOWN_2106              = 0x00002106,
     SOUND_UNKNOWN_2107              = 0x00002107,
+    SOUND_UNKNOWN_2111              = 0x00002111,
+    SOUND_UNKNOWN_2112              = 0x00002112,
+    SOUND_UNKNOWN_2113              = 0x00002113,
+    SOUND_UNKNOWN_2114              = 0x00002114,
 };
 
 enum Cams {

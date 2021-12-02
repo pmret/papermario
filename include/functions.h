@@ -104,6 +104,10 @@ s32 general_heap_free(void* data);
 
 s32 integer_log(s32 number, u32 base);
 
+void set_battle_formation(s32);
+void set_battle_stage(s32);
+void load_battle(s32);
+
 void entity_Shadow_init(Shadow* entity);
 void entity_SaveBlock_idle(Entity* entity);
 void entity_SaveBlock_pause_game(void);
