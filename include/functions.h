@@ -100,7 +100,9 @@ s32 can_trigger_loading_zone(void);
 void func_802667F0(s32, Actor*, f32, f32, f32);
 
 void* general_heap_malloc(s32 size);
-s32 general_heap_free(s32* data);
+s32 general_heap_free(void* data);
+
+s32 integer_log(s32 number, u32 base);
 
 void entity_Shadow_init(Shadow* entity);
 void entity_SaveBlock_idle(Entity* entity);

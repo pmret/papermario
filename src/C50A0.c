@@ -24,17 +24,12 @@ INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
 
 INCLUDE_ASM(s32, "C50A0", draw_tiled_image);
 
-s32 integer_log(s32 number, s32 base) {
-    f64 temp_f0;
+s32 integer_log(s32 number, u32 base) {
     f32 fNumber = number;
     s32 ret = 1;
 
     while (TRUE) {
-        temp_f0 = base;
-        if (base < 0) {
-            temp_f0 += 4294967296.0;
-        }
-        fNumber /= (f32)temp_f0;
+        fNumber /= base;
         if (fNumber <= 1.0) {
             return ret;
         }
