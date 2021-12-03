@@ -943,11 +943,6 @@ s32 D_8014C188[] = { 0xFFFE7960, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000,
 
 s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
 
-// TODO BSS to sort out
-extern ModelNode** gCurrentModelTreeRoot;
-extern ModelTransformGroupList wTransformGroups;
-extern ModelTransformGroupList bTransformGroups;
-
 // BSS
 static s32 B_801512B0[2];
 static ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
@@ -957,6 +952,7 @@ static s32 gEntityHeapBase;
 static s32 D_801512C8;
 BSS ModelList* gCurrentModels;
 static s32 D_801512D0[4];
+extern ModelNode** gCurrentModelTreeRoot;
 static ModelTransformGroupList* gCurrentTransformGroups;
 static s8 gMsgGlobalWaveCounter[0x4];
 static ModelCustomGfxList* gCurrentCustomModelGfxPtr;
@@ -978,6 +974,9 @@ extern TileDescriptor gCurrentTileDescriptor;
 
 extern ModelList wModelList;
 extern ModelList bModelList;
+
+extern ModelTransformGroupList wTransformGroups;
+extern ModelTransformGroupList bTransformGroups;
 
 extern ModelCustomGfxList wModelSpecialDls;
 extern ModelCustomGfxList bModelSpecialDls;
@@ -1569,28 +1568,28 @@ s32 entity_get_collision_flags(Entity* entity) {
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_interacts_with_current_partner);
 
-// float bs
-#ifdef NON_EQUIVALENT
 s32 test_player_entity_aabb(Entity* entity) {
-    f32 temp_f4;
-    f32 colliderDiameter;
+    f32 yTemp = entity->position.y - (gPlayerStatus.position.y + gPlayerStatus.colliderHeight);
+    f32 xCollRadius;
+    f32 zCollRadius;
+    f32 xDist;
+    f32 zDist;
 
-    temp_f4 = entity->position.y - (gPlayerStatus.position.y + gPlayerStatus.colliderHeight);
-    if (temp_f4 > 0.0f || gPlayerStatus.colliderHeight + entity->aabb.y < fabsf(temp_f4)) {
+    if (yTemp > 0.0f || gPlayerStatus.colliderHeight + entity->aabb.y < fabsf(yTemp)) {
         return 0;
     }
 
-    if ((gPlayerStatus.colliderDiameter + entity->aabb.x) * 0.5 < fabsf(gPlayerStatus.position.x - entity->position.x)) {
+    xCollRadius = (gPlayerStatus.colliderDiameter + entity->aabb.x) * 0.5;
+    xDist = fabsf(gPlayerStatus.position.x - entity->position.x);
+    zCollRadius = ((gPlayerStatus.colliderDiameter + entity->aabb.z) * 0.5);
+    zDist = fabsf(gPlayerStatus.position.z - entity->position.z);
+
+    if (xCollRadius < xDist || zCollRadius < zDist) {
         return 0;
     }
-    if ((gPlayerStatus.colliderDiameter + entity->aabb.z) * 0.5 < fabsf(gPlayerStatus.position.z - entity->position.z)) {
-        return 0;
-    }
+
     return 1;
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", test_player_entity_aabb);
-#endif
 
 s32 is_player_action_state(s8 actionState) {
     return actionState == gPlayerActionState;
@@ -1633,6 +1632,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80110E58);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80110F10);
 
+void entity_anim_make_vertex_pointers(StaticEntityData* entityData, void* baseAddr, Vtx* baseVtx);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_anim_make_vertex_pointers);
 
 s32 is_entity_data_loaded(Entity* entity, StaticEntityData* entityData, s32* loadedStart, s32* loadedEnd);
@@ -2531,8 +2531,19 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116698);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", render_models);
 
-void appendGfx_model_group(Model* model);
-INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model_group, Model*);
+void appendGfx_model_group(Model* model) {
+    s32 modelTreeDepth = (*mdl_currentModelTreeNodeInfo)[model->modelID].treeDepth;
+    s32 i;
+
+    for (i = model->modelID - 1; i >= 0; i--) {
+        if (modelTreeDepth >= (*mdl_currentModelTreeNodeInfo)[i].treeDepth) {
+            break;
+        }
+    }
+
+    mdl_treeIterPos = i + 1;
+    func_80117D00(model);
+}
 
 void func_80117D00(Model* model) {
     Model* mdl = model; // temps needed to match
@@ -3140,7 +3151,59 @@ void get_model_env_color_parameters(u8* primR, u8* primG, u8* primB, u8* envR, u
     *envB = gRenderModelEnvB;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_vertex_count);
+void mdl_get_vertex_count(Gfx* gfx, s32* numVertices, s32* baseVtx, s32* gfxCount, Vtx* baseAddr) {
+    s8 stuff[2];
+
+    s32 temp_t0_2;
+    u32 w0, w1;
+    u32 cmd;
+    u32 temp_v1;
+    s32 minVtx;
+    s32 maxVtx;
+    u32 phi_v1;
+
+    minVtx = 0;
+    maxVtx = 0;
+
+    if (gfx == NULL) {
+        *numVertices = maxVtx;
+        *baseVtx = minVtx;
+    } else {
+        Gfx* baseGfx = gfx;
+
+        do {
+            w0 = gfx->words.w0;
+            w1 = gfx->words.w1;
+            cmd = w0 >> 0x18;
+
+            if (cmd == G_DL_NOPUSH) {
+                phi_v1 = w1;
+                if (baseAddr != NULL) {
+                    phi_v1 = (phi_v1 & 0xFFFF) + (s32)baseAddr;
+                }
+
+                temp_t0_2 = (w0 >> 0xC) & 0xFF;
+                if (minVtx == 0) {
+                    minVtx = phi_v1;
+                    maxVtx = phi_v1 + (temp_t0_2 * 0x10);
+                }
+                temp_v1 = phi_v1 + (temp_t0_2 * 0x10);
+                if (maxVtx < temp_v1) {
+                    maxVtx = temp_v1;
+                }
+                if (minVtx > temp_v1) {
+                    minVtx = temp_v1;
+                }
+            }
+            gfx++;
+        } while (cmd != G_ENDDL);
+
+        *numVertices = (maxVtx - minVtx) >> 4;
+        *baseVtx = minVtx;
+        *gfxCount = gfx - baseGfx;
+        w1 = gfx->words.w1; // TODO required to match
+    }
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_update_vtx_pointers);
 

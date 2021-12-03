@@ -1,6 +1,8 @@
 #include "common.h"
+#include "battle/battle.h"
 #include "npc.h"
 #include "effects.h"
+#include "hud_element.h"
 
 extern s32 D_80077C40;
 
