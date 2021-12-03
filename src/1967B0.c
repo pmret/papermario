@@ -63,7 +63,43 @@ ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "1967B0", LoadFreeItemScript);
+ApiStatus LoadFreeItemScript(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* actor = battleStatus->playerActor;
+    StaticItem* item = &gItemTable[battleStatus->selectedItemID];
+    SelectableTarget* target;
+    s32* itemPtr;
+    s32 i;
+
+    battleStatus->currentTargetListFlags = item->targetFlags | 0x8000;
+    battleStatus->currentAttackElement = 0;
+
+    player_create_target_list(actor);
+    target = &actor->targetData[actor->targetIndexList[0]];
+
+    battleStatus->currentTargetID = target->actorID;
+    battleStatus->currentTargetPart = target->partID;
+
+    itemPtr = &D_80293B80[0];
+    for (i = 0; *itemPtr != ITEM_NONE; i++, itemPtr++) {
+        if (*itemPtr == battleStatus->selectedItemID){
+            break;
+        }
+    }
+
+    if (*itemPtr == ITEM_NONE) {
+        if (item->typeFlags & 0x80) {
+            i = 0;
+        } else {
+            i = 1;
+        }
+    }
+
+    dma_copy(gBattleItemTable[i].romStart, gBattleItemTable[i].romEnd, gBattleItemTable[i].vramStart);
+    script->varTable[0] = (s32) gBattleItemTable[i].vramEnd;
+    script->varTable[1] = 1;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus LoadMoveScript(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
