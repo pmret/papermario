@@ -1,14 +1,19 @@
 #include "common.h"
 #include "ld_addrs.h"
 
-extern s32 D_8010C920;
+#define E21870_VRAM_DEF 0x802B7000
+#define E225B0_VRAM_DEF 0x802B7000
+
+extern UNK_FUN_PTR(D_8010C920);
 extern UNK_FUN_PTR(D_8010C93C);
 extern s32 D_8010C940;
 extern s32 D_8010C950;
 extern s32 D_8010C958;
 
 extern s32 D_802BDF60;
+extern s8 D_8015A57A;
 
+s32 func_802B7140(void);
 void func_802B72C0_E22870(void);
 
 s32 func_800E0208(void);
@@ -492,30 +497,20 @@ void player_render_interact_prompts(void) {
     func_800E0330();
 }
 
-// Weird control flow / issue with loading linker addrs
-#ifdef NON_EQUIVALENT
-extern s8 D_8015A57A;
 void check_for_ispy(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (D_8015A57A != 0) {
-        if (D_8010C93C == 0) {
-            if (!(playerStatus->animFlags & 0x30)) {
-                dma_copy(E225B0_ROM_START, E225B0_ROM_END, E225B0_VRAM);
-                D_8010C93C = func_802B72C0_E22870;
-            }
-        } if (D_8010C93C == 0) {
-            return;
+    if (D_8015A57A != 0 && D_8010C93C == NULL) {
+        if (!(playerStatus->animFlags & 0x30)) {
+            dma_copy(E225B0_ROM_START, E225B0_ROM_END, E225B0_VRAM_DEF);
+            D_8010C93C = func_802B72C0_E22870;
         }
     }
-    if (D_8010C93C != 0) {
+
+    if (D_8010C93C != NULL) {
         D_8010C93C();
     }
 }
-#else
-INCLUDE_ASM(s32, "77480", check_for_ispy);
-#endif
-
 void func_800E0330(void) {
     if ((gPlayerStatusPtr->animFlags & PLAYER_STATUS_ANIM_FLAGS_100) && (D_8010C93C != NULL)) {
         func_802B7000_E225B0();
@@ -527,7 +522,43 @@ void func_800E0374(void) {
     gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_100;
 }
 
-INCLUDE_ASM(s32, "77480", check_for_pulse_stone);
+void check_for_pulse_stone(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 dx, dy;
+
+    if (D_8010C920 == NULL) {
+        if (gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_100) {
+            return;
+        }
+
+        if (gGameStatusPtr->areaID != AREA_SBK || gGameStatusPtr->isBattle) {
+            return;
+        }
+
+        dx = abs(gGameStatusPtr->mapID % 7 - 2);
+        dy = gGameStatusPtr->mapID / 7;
+        if ((dx + dy) > 5) {
+            return;
+        }
+
+        if (!(gPlayerStatus.animFlags & (PLAYER_STATUS_ANIM_FLAGS_USING_PULSE_STONE | PLAYER_STATUS_ANIM_FLAGS_40))) {
+            return;
+        }
+
+        if (gPlayerStatus.flags & 0x20 || gPlayerStatus.statusMenuCounterinputEnabledCounter) {
+            return;
+        }
+
+        if (!(gPlayerStatus.animFlags & (PLAYER_STATUS_ANIM_FLAGS_SPEECH_PROMPT_AVAILABLE | PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE))) {
+            dma_copy(E21870_ROM_START, E21870_ROM_END, E21870_VRAM_DEF);
+            D_8010C920 = &func_802B7140;
+        }
+    }
+
+    if (D_8010C920 != NULL) {
+        D_8010C920();
+    }
+}
 
 void func_800E04D0(void) {
     if ((gPlayerStatusPtr->animFlags & 0x40) && (D_8010C920 != 0)) {
