@@ -42,7 +42,7 @@ ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
     
     itemPtr = &D_80293B80[0];
     for (i = 0; *itemPtr != ITEM_NONE; i++, itemPtr++) {
-        if (*itemPtr == battleStatus->selectedItemID){
+        if (*itemPtr == battleStatus->selectedItemID) {
             break;
         }
     }
