@@ -2297,7 +2297,29 @@ ApiStatus func_8026EA7C(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "197F40", func_8026EB20);
 
-INCLUDE_ASM(s32, "197F40", func_8026EBF8);
+ApiStatus func_8026EBF8(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 partIndex = evt_get_variable(script, *args++);
+    DecorationTable* table;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.enemyID;
+    }
+
+    table = get_actor_part(get_actor(actorID), partIndex)->decorationTable;
+
+    table->unk_740 = evt_get_variable(script, *args++);
+    table->unk_742 = evt_get_variable(script, *args++);
+    table->unk_744 = evt_get_variable(script, *args++);
+    table->unk_746 = evt_get_variable(script, *args++);
+    table->unk_748 = evt_get_variable(script, *args++);
+    table->unk_74A = evt_get_variable(script, *args++);
+    table->unk_74C = evt_get_variable(script, *args++);
+    table->unk_74E = evt_get_variable(script, *args++);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", func_8026ED20);
 
