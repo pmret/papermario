@@ -11,12 +11,12 @@ void world_goompa_init(Npc* partner) {
 }
 
 ApiStatus GoompaTakeOut(Evt* script, s32 isInitialCall) {
-    Npc* npc = script->owner2.npc;
+    Npc* goompa = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_get_out(npc);
+        partner_init_get_out(goompa);
     }
-    if (partner_get_out(npc)) {
+    if (partner_get_out(goompa)) {
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;
@@ -25,40 +25,41 @@ ApiStatus GoompaTakeOut(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    Npc* npc;
+    Npc* goompa = script->owner2.npc;
     f32 sp10, sp14, tempY;
     Entity* entity;
 
-    npc = script->owner2.npc;
     if (isInitialCall) {
-        partner_walking_enable(npc, 1);
+        partner_walking_enable(goompa, 1);
         mem_clear(D_802BD58C_324E9C, sizeof(*D_802BD58C_324E9C));
         D_8010C954 = 0;
     }
 
     playerData->unk_2F4[5]++;
     entity = D_8010C954;
+
     if (entity == NULL) {
-        partner_walking_update_player_tracking(npc);
-        partner_walking_update_motion(npc);
+        partner_walking_update_player_tracking(goompa);
+        partner_walking_update_motion(goompa);
         return ApiStatus_BLOCK;
     }
 
     switch (D_802BD58C_324E9C->unk_04) {
         case 0:
             D_802BD58C_324E9C->unk_04 = 1;
-            D_802BD58C_324E9C->unk_08 = npc->flags;
-            D_802BD58C_324E9C->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
-            D_802BD58C_324E9C->unk_10 = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
+            D_802BD58C_324E9C->flags = goompa->flags;
+            D_802BD58C_324E9C->unk_0C = fabsf(dist2D(goompa->pos.x, goompa->pos.z,
+                                                    entity->position.x, entity->position.z));
+            D_802BD58C_324E9C->unk_10 = atan2(entity->position.x, entity->position.z, goompa->pos.x, goompa->pos.z);
             D_802BD58C_324E9C->unk_14 = 6.0f;
             D_802BD58C_324E9C->unk_18 = 50.0f;
             D_802BD58C_324E9C->unk_00 = 120;
-            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
-            npc->flags &= ~NPC_FLAG_GRAVITY;
+            goompa->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
+            goompa->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad((D_802BD58C_324E9C->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-            npc->pos.x = entity->position.x + (sp10 * D_802BD58C_324E9C->unk_0C);
-            npc->pos.z = entity->position.z - (sp14 * D_802BD58C_324E9C->unk_0C);
+            goompa->pos.x = entity->position.x + (sp10 * D_802BD58C_324E9C->unk_0C);
+            goompa->pos.z = entity->position.z - (sp14 * D_802BD58C_324E9C->unk_0C);
             D_802BD58C_324E9C->unk_10 = clamp_angle(D_802BD58C_324E9C->unk_10 - D_802BD58C_324E9C->unk_14);
 
             if (D_802BD58C_324E9C->unk_0C > 20.0f) {
@@ -74,8 +75,8 @@ ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall) {
                 D_802BD58C_324E9C->unk_18 = 150.0f;
             }
 
-            npc->pos.y += tempY;
-            npc->renderYaw = clamp_angle(360.0f - D_802BD58C_324E9C->unk_10);
+            goompa->pos.y += tempY;
+            goompa->renderYaw = clamp_angle(360.0f - D_802BD58C_324E9C->unk_10);
             D_802BD58C_324E9C->unk_14 += 0.8;
 
             if (D_802BD58C_324E9C->unk_14 > 40.0f) {
@@ -87,13 +88,13 @@ ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall) {
             }
             break;
         case 2:
-            npc->flags = D_802BD58C_324E9C->unk_08;
+            goompa->flags = D_802BD58C_324E9C->flags;
             D_802BD58C_324E9C->unk_00 = 30;
             D_802BD58C_324E9C->unk_04++;
             break;
         case 3:
-            partner_walking_update_player_tracking(npc);
-            partner_walking_update_motion(npc);
+            partner_walking_update_player_tracking(goompa);
+            partner_walking_update_motion(goompa);
 
             if (--D_802BD58C_324E9C->unk_00 == 0) {
                 D_802BD58C_324E9C->unk_04 = 0;
@@ -104,12 +105,12 @@ ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-void func_802BD4E0_324DF0(Npc* npc) {
+void func_802BD4E0_324DF0(Npc* goompa) {
     if (D_8010C954 != NULL) {
         D_8010C954 = NULL;
-        npc->flags = D_802BD58C_324E9C->unk_08;
+        goompa->flags = D_802BD58C_324E9C->flags;
         D_802BD58C_324E9C->unk_04 = 0;
-        partner_clear_player_tracking(npc);
+        partner_clear_player_tracking(goompa);
     }
 }
 
@@ -118,12 +119,13 @@ ApiStatus GoompaUseAbility(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus GoompaPutAway(Evt* script, s32 isInitialCall) {
-    Npc* npc = script->owner2.npc;
+    Npc* goompa = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_put_away(npc);
+        partner_init_put_away(goompa);
     }
-    if (partner_put_away(npc)) {
+
+    if (partner_put_away(goompa)) {
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;

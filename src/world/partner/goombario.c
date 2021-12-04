@@ -17,27 +17,27 @@ s32 func_802BD100_317020(s32 arg0) {
     for (i = 0; i < 0x40; i++) {
         Trigger* trigger = get_trigger_by_id(i);
 
-        if (trigger != NULL && trigger->flags.flags & 0x100 && trigger->params2 == arg0) {
+        if (trigger != NULL && trigger->flags.flags & TRIGGER_WALL_PRESS_A && trigger->params2 == arg0) {
             return trigger->unk_2C;
         }
     }
     return 0;
 }
 
-void world_goombario_init(Npc* partner) {
-    partner->collisionHeight = 24;
-    partner->collisionRadius = 20;
+void world_goombario_init(Npc* goombario) {
+    goombario->collisionHeight = 24;
+    goombario->collisionRadius = 20;
 }
 
 ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall) {
-    Npc* npc = script->owner2.npc;
-
+    Npc* goombario = script->owner2.npc;
     D_802BDF60 = -1;
+
     if (isInitialCall) {
-        partner_init_get_out(npc);
+        partner_init_get_out(goombario);
     }
 
-    if (partner_get_out(npc) != 0) {
+    if (partner_get_out(goombario)) {
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;
@@ -47,7 +47,7 @@ ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall) {
 s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Npc* npc = script->owner2.npc;
-    Entity* temp_s2;
+    Entity* entity;
     f32 sp10, sp14, tempY;
 
     if (isInitialCall) {
@@ -57,9 +57,9 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
     }
 
     playerData->unk_2F4[1]++;
-    temp_s2 = D_8010C954;
+    entity = D_8010C954;
 
-    if (temp_s2 == NULL) {
+    if (entity == NULL) {
         partner_walking_update_player_tracking(npc);
         partner_walking_update_motion(npc);
         return 0;
@@ -68,9 +68,9 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
     switch (D_802BDD88_317CA8->unk_04) {
         case 0:
             D_802BDD88_317CA8->unk_04 = 1;
-            D_802BDD88_317CA8->unk_08 = npc->flags;
-            D_802BDD88_317CA8->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, temp_s2->position.x, temp_s2->position.z));
-            D_802BDD88_317CA8->unk_10 = atan2(temp_s2->position.x, temp_s2->position.z, npc->pos.x, npc->pos.z);
+            D_802BDD88_317CA8->flags = npc->flags;
+            D_802BDD88_317CA8->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
+            D_802BDD88_317CA8->unk_10 = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
             D_802BDD88_317CA8->unk_14 = 6.0f;
             D_802BDD88_317CA8->unk_18 = 50.0f;
             D_802BDD88_317CA8->unk_00 = 120;
@@ -79,8 +79,8 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
         case 1:
             sin_cos_rad((D_802BDD88_317CA8->unk_10 * TAU) / 360.0f, &sp10, &sp14);
 
-            npc->pos.x = temp_s2->position.x + (sp10 * D_802BDD88_317CA8->unk_0C);
-            npc->pos.z = temp_s2->position.z - (sp14 * D_802BDD88_317CA8->unk_0C);
+            npc->pos.x = entity->position.x + (sp10 * D_802BDD88_317CA8->unk_0C);
+            npc->pos.z = entity->position.z - (sp14 * D_802BDD88_317CA8->unk_0C);
             D_802BDD88_317CA8->unk_10 = clamp_angle(D_802BDD88_317CA8->unk_10 - D_802BDD88_317CA8->unk_14);
 
             if (D_802BDD88_317CA8->unk_0C > 20.0f) {
@@ -110,7 +110,7 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
             }
             break;
         case 2:
-            npc->flags = D_802BDD88_317CA8->unk_08;
+            npc->flags = D_802BDD88_317CA8->flags;
             D_802BDD88_317CA8->unk_00 = 30;
             D_802BDD88_317CA8->unk_04++;
             break;
@@ -130,20 +130,21 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
 void func_802BD564_317484(Npc* goombario) {
     if (D_8010C954) {
         D_8010C954 = 0;
-        goombario->flags = D_802BDD88_317CA8->unk_08;
+        goombario->flags = D_802BDD88_317CA8->flags;
         D_802BDD88_317CA8->unk_04 = 0;
         partner_clear_player_tracking (goombario);
     }
 }
 
-s32 world_goombario_can_pause(Npc* partner) {
+s32 world_goombario_can_pause(Npc* goombario) {
+    PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
     s32 new_var;
 
-    if (gPartnerActionStatus.actionState.b[0] != 0) {
+    if (goombarioActionStatus->actionState.b[0] != 0) {
         return FALSE;
     }
 
-    if ((partner->flags & 0x1800) != 0x1000) {
+    if ((goombario->flags & (NPC_FLAG_1000 | NPC_FLAG_NO_Y_MOVEMENT)) != NPC_FLAG_1000) {
         return new_var = 0;
         do { } while (new_var); // why though
     }
@@ -157,7 +158,7 @@ INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, Evt* scr
 
 #ifdef NON_EQUIVALENT //something with the symbol is broken
 ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
     set_time_freeze_mode(0);
 
@@ -166,8 +167,8 @@ ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
         enable_player_input();
     }
 
-    partnerActionStatus->actionState.b[0] = 0;
-    partnerActionStatus->actionState.b[3] = 0;
+    goombarioActionStatus->actionState.b[0] = 0;
+    goombarioActionStatus->actionState.b[3] = 0;
     return ApiStatus_DONE2;
 }
 #else
@@ -188,20 +189,20 @@ ApiStatus func_802BDB84(Evt* script, s32 isInitialCall) {
     }
 }
 
-void world_goombario_pre_battle(Npc* partner) {
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+void world_goombario_pre_battle(Npc* goombario) {
+    PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
-    if (actionStatus->actionState.b[0] != 0) {
+    if (goombarioActionStatus->actionState.b[0] != 0) {
         set_time_freeze_mode(TIME_FREEZE_NORMAL);
         enable_player_input();
         CancelMessageAndBlock();
-        partner_clear_player_tracking(partner);
-        actionStatus->actionState.b[0] = 0;
-        actionStatus->actionState.b[3] = 0;
-        disable_npc_blur(partner);
+        partner_clear_player_tracking(goombario);
+        goombarioActionStatus->actionState.b[0] = 0;
+        goombarioActionStatus->actionState.b[3] = 0;
+        disable_npc_blur(goombario);
     }
 
-    actionStatus->actionState.b[3] = 1;
+    goombarioActionStatus->actionState.b[3] = 1;
 }
 
 s32 D_802BDC40_317B60[] = {
@@ -241,7 +242,8 @@ EvtSource world_goombario_use_ability = {
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(EVT_VAR(1), 0)
-        EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk, NPC_ANIM_world_goombario_normal_idle, 0, EVT_VAR(0))
+        EVT_CALL(SpeakToPlayer, NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk,
+                 NPC_ANIM_world_goombario_normal_idle, 0, EVT_VAR(0))
     EVT_END_IF
     EVT_WAIT_FRAMES(1)
     EVT_CALL(func_802BDB30_317A50)

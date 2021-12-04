@@ -34,7 +34,8 @@ void func_802BD100_31DE70(void) {
         phi_v1 = 8;
     }
 
-    playerStatus->position.z -= cos_rad((((cam->currentYaw + playerStatus->spriteFacingAngle) - 90.0f) + phi_v1) * TAU / 360.0f) * -4.0f;
+    playerStatus->position.z -= cos_rad((cam->currentYaw + playerStatus->spriteFacingAngle - 90.0f + phi_v1) *
+                                        TAU / 360.0f) * -4.0f;
 }
 
 void func_802BD20C_31DF7C(f32* arg0, f32* arg1) {
@@ -99,10 +100,10 @@ s32 func_802BE280_31EFF0(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32 arg4, f3
 
 INCLUDE_ASM(s32, "world/partner/sushie", func_802BE3A4_31F114);
 
-void func_802BF520_320290(Npc* npc) {
-    npc->collisionHeight = 24;
-    npc->collisionRadius = 36;
-    npc->unk_80 = 0x10000;
+void func_802BF520_320290(Npc* sushie) {
+    sushie->collisionHeight = 24;
+    sushie->collisionRadius = 36;
+    sushie->unk_80 = 0x10000;
     D_802BFEEC = 0;
     D_802BFEE4 = 0;
     D_802BFEE8 = 0;
@@ -111,13 +112,13 @@ void func_802BF520_320290(Npc* npc) {
 }
 
 s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
-    Npc* npc = script->owner2.npc;
+    Npc* sushie = script->owner2.npc;
  
     if (isInitialCall) {
-        partner_init_get_out(npc);
+        partner_init_get_out(sushie);
     }
 
-    if (partner_get_out(npc)) {
+    if (partner_get_out(sushie)) {
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;
@@ -125,14 +126,12 @@ s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
-    Npc* npc = script->owner2.npc;
+    Npc* sushie = script->owner2.npc;
     Entity* entity;
-    f32 sp10;
-    f32 sp14;
-    f32 tempY;
+    f32 sp10, sp14, tempY;
 
     if (isInitialCall) {
-        partner_walking_enable(npc, 1);
+        partner_walking_enable(sushie, 1);
         mem_clear(D_802BFDF8_320B68, sizeof(*D_802BFDF8_320B68));
         D_8010C954 = 0;
     }
@@ -140,29 +139,29 @@ ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
     entity = D_8010C954;
     
     if (entity == NULL) {
-        partner_walking_update_player_tracking(npc);
-        partner_walking_update_motion(npc);
+        partner_walking_update_player_tracking(sushie);
+        partner_walking_update_motion(sushie);
         return ApiStatus_BLOCK;
     }
 
     switch (D_802BFDF8_320B68->unk_04) {
         case 0:
             D_802BFDF8_320B68->unk_04 = 1;
-            D_802BFDF8_320B68->unk_08 = npc->flags;
-            D_802BFDF8_320B68->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
-            D_802BFDF8_320B68->unk_10 = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
+            D_802BFDF8_320B68->flags = sushie->flags;
+            D_802BFDF8_320B68->unk_0C = fabsf(dist2D(sushie->pos.x, sushie->pos.z,
+                                                     entity->position.x, entity->position.z));
+            D_802BFDF8_320B68->unk_10 = atan2(entity->position.x, entity->position.z, sushie->pos.x, sushie->pos.z);
             D_802BFDF8_320B68->unk_14 = 6.0f;
             D_802BFDF8_320B68->unk_18 = 50.0f;
-            D_802BFDF8_320B68->unk_00 = 0x78;
-            npc->flags |= 0x40148;
-            npc->flags &= ~0x200;
+            D_802BFDF8_320B68->unk_00 = 120;
+            sushie->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            sushie->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad((D_802BFDF8_320B68->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-
-            npc->pos.x = entity->position.x + (sp10 * D_802BFDF8_320B68->unk_0C);
-            npc->pos.z = entity->position.z - (sp14 * D_802BFDF8_320B68->unk_0C);
-
+            sushie->pos.x = entity->position.x + (sp10 * D_802BFDF8_320B68->unk_0C);
+            sushie->pos.z = entity->position.z - (sp14 * D_802BFDF8_320B68->unk_0C);
             D_802BFDF8_320B68->unk_10 = clamp_angle(D_802BFDF8_320B68->unk_10 - D_802BFDF8_320B68->unk_14);
+
             if (D_802BFDF8_320B68->unk_0C > 20.0f) {
                 D_802BFDF8_320B68->unk_0C--;
             } else if (D_802BFDF8_320B68->unk_0C < 19.0f) {
@@ -170,16 +169,16 @@ ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
             }
 
             tempY = sin_rad((D_802BFDF8_320B68->unk_18 * TAU) / 360.0f) * 3.0f;
-
             D_802BFDF8_320B68->unk_18 += 3.0f;
 
             if (D_802BFDF8_320B68->unk_18 > 150.0f) {
                 D_802BFDF8_320B68->unk_18 = 150.0f;
             }
-            npc->pos.y += tempY;
 
-            npc->renderYaw = clamp_angle(360.0f - D_802BFDF8_320B68->unk_10);
+            sushie->pos.y += tempY;
+            sushie->renderYaw = clamp_angle(360.0f - D_802BFDF8_320B68->unk_10);
             D_802BFDF8_320B68->unk_14 += 0.8;
+
             if (D_802BFDF8_320B68->unk_14 > 40.0f) {
                 D_802BFDF8_320B68->unk_14 = 40.0f;
             }
@@ -189,13 +188,13 @@ ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
             }
             break;
         case 2:
-            npc->flags = D_802BFDF8_320B68->unk_08;
-            D_802BFDF8_320B68->unk_00 = 0x1E;
+            sushie->flags = D_802BFDF8_320B68->flags;
+            D_802BFDF8_320B68->unk_00 = 30;
             D_802BFDF8_320B68->unk_04++;
             break;
         case 3:
-            partner_walking_update_player_tracking(npc);
-            partner_walking_update_motion(npc);
+            partner_walking_update_player_tracking(sushie);
+            partner_walking_update_motion(sushie);
 
             if (--D_802BFDF8_320B68->unk_00 == 0) {
                 D_802BFDF8_320B68->unk_04 = 0;
@@ -207,24 +206,24 @@ ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-void func_802BF920_320690(Npc* npc) {
+void func_802BF920_320690(Npc* sushie) {
     if (D_8010C954 != NULL) {
         D_8010C954 = NULL;
-        npc->flags = D_802BFDF8_320B68->unk_08;
+        sushie->flags = D_802BFDF8_320B68->flags;
         D_802BFDF8_320B68->unk_04 = 0;
-        partner_clear_player_tracking(npc);
+        partner_clear_player_tracking(sushie);
     }
 }
 
 s32 func_802BF964_3206D4(Evt* script, s32 isInitialCall) {
-    Npc* npc = script->owner2.npc;
+    Npc* sushie = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_put_away(npc);
+        partner_init_put_away(sushie);
         gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_400000;
     }
 
-    if (partner_put_away(npc)) {
+    if (partner_put_away(sushie)) {
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;
@@ -232,24 +231,26 @@ s32 func_802BF964_3206D4(Evt* script, s32 isInitialCall) {
 
 }
 
-void func_802BF9B8_320728(Npc* npc) {
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+void func_802BF9B8_320728(Npc* sushie) {
+    PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
 
     if (D_802BFEEC) {
-        partnerActionStatus->npc = *npc;
-        partnerActionStatus->actionState.b[1] = 1;
+        sushieActionStatus->npc = *sushie;
+        sushieActionStatus->actionState.b[1] = 1;
         enable_player_static_collisions();
         enable_player_input();
         set_action_state(0);
-        partner_clear_player_tracking(npc);
+        partner_clear_player_tracking(sushie);
     }
 
-    partnerActionStatus->actionState.b[3] = 7;
+    sushieActionStatus->actionState.b[3] = 7;
 }
 
-void func_802BFA58_3207C8(Npc* npc) {
-    if (gPartnerActionStatus.actionState.b[1] != 0) {
-        *npc = gPartnerActionStatus.npc;
+void func_802BFA58_3207C8(Npc* sushie) {
+    PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
+    
+    if (sushieActionStatus->actionState.b[1] != 0) {
+        *sushie = sushieActionStatus->npc;
         partner_use_ability();
     }
 }
@@ -275,7 +276,8 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             partnerNPC->pos.x = playerStatus->position.x;
             partnerNPC->pos.z = playerStatus->position.z;
             partnerNPC->pos.y = playerStatus->position.y;
-            func_802BD368_31E0D8(partnerNPC->unk_80, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z, partnerNPC->yaw, partnerNPC->collisionRadius * 0.5f);
+            func_802BD368_31E0D8(partnerNPC->unk_80, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z,
+                                partnerNPC->yaw, partnerNPC->collisionRadius * 0.5f);
             partnerNPC->pos.y = D_802BFEE0 - (partnerNPC->collisionHeight * 0.5f);
             temp_f0 = atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);
             partnerNPC->currentAnim.w = 0x7000A;
@@ -290,7 +292,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             disable_npc_shadow(partnerNPC);
             disable_player_shadow();
 
-            if (script->varTable[0xC] == 0) {
+            if (script->varTable[12] == 0) {
                 partner_kill_ability_script();
             } else {
                 suggest_player_anim_setUnkFlag(0x8000F);
@@ -308,13 +310,14 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             func_802BD100_31DE70();
 
             if (!(script->functionTemp[1] & 3)) {
-                playFX_23(0, partnerNPC->pos.x, partnerNPC->moveToPos.y + (partnerNPC->collisionHeight * 0.5f), partnerNPC->pos.z, 0);
+                playFX_23(0, partnerNPC->pos.x, partnerNPC->moveToPos.y +
+                        (partnerNPC->collisionHeight * 0.5f), partnerNPC->pos.z, 0);
             }
 
             script->functionTemp[1]--;
             if (script->functionTemp[1] == 0) {
-                if (script->varTable[0xC] == funcTemp0) {
-                    set_action_state(0x21);
+                if (script->varTable[12] == funcTemp0) {
+                    set_action_state(ACTION_STATE_RIDE);
                     partner_use_ability();
                     return ApiStatus_DONE2;
                 }

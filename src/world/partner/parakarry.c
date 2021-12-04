@@ -11,9 +11,9 @@ extern s32 D_802BEBBC;
 extern s32 D_802BEBC4;
 
 
-void func_802BD100_319670(Npc* npc) {
-    npc->collisionHeight = 37;
-    npc->collisionRadius = 40;
+void func_802BD100_319670(Npc* parakarry) {
+    parakarry->collisionHeight = 37;
+    parakarry->collisionRadius = 40;
     D_802BEBB0 = 0;
     D_802BEBC0_31CBE0 = 0;
     D_802BEBB4 = 0;
@@ -23,13 +23,13 @@ void func_802BD100_319670(Npc* npc) {
 }
 
 ApiStatus func_802BD148_3196B8(Evt* script, s32 isInitialCall) {
-    Npc* npc = script->owner2.npc;
+    Npc* parakarry = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_get_out(npc);
+        partner_init_get_out(parakarry);
     }
 
-    if (partner_get_out(npc)) {
+    if (partner_get_out(parakarry)) {
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;
@@ -38,42 +38,42 @@ ApiStatus func_802BD148_3196B8(Evt* script, s32 isInitialCall) {
 
 s32 func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    Entity* temp_s2;
-    Npc* npc = script->owner2.npc;
+    Entity* entity;
+    Npc* parakarry = script->owner2.npc;
     f32 sp10, sp14, tempY;
 
     if (isInitialCall) {
-        partner_flying_enable(npc, 1);
+        partner_flying_enable(parakarry, 1);
         mem_clear(D_802BEAAC_31B01C, sizeof(*D_802BEAAC_31B01C));
         D_8010C954 = 0;
     }
 
     playerData->unk_2F4[4]++;
-    temp_s2 = D_8010C954;
+    entity = D_8010C954;
 
-    if (temp_s2 == NULL) {
-        partner_flying_update_player_tracking(npc);
-        partner_flying_update_motion(npc);
+    if (entity == NULL) {
+        partner_flying_update_player_tracking(parakarry);
+        partner_flying_update_motion(parakarry);
         return 0;
     }
 
     switch (D_802BEAAC_31B01C->unk_04) {
         case 0:
             D_802BEAAC_31B01C->unk_04 = 1;
-            D_802BEAAC_31B01C->unk_08 = npc->flags;
-            D_802BEAAC_31B01C->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, temp_s2->position.x, temp_s2->position.z));
-            D_802BEAAC_31B01C->unk_10 = atan2(temp_s2->position.x, temp_s2->position.z, npc->pos.x, npc->pos.z);
+            D_802BEAAC_31B01C->flags = parakarry->flags;
+            D_802BEAAC_31B01C->unk_0C = fabsf(dist2D(parakarry->pos.x, parakarry->pos.z,
+                                                     entity->position.x, entity->position.z));
+            D_802BEAAC_31B01C->unk_10 = atan2(entity->position.x, entity->position.z,
+                                              parakarry->pos.x, parakarry->pos.z);
             D_802BEAAC_31B01C->unk_14 = 6.0f;
             D_802BEAAC_31B01C->unk_18 = 50.0f;
-            D_802BEAAC_31B01C->unk_00 = 0x78;
-            npc->flags |= 0x40148;
-            npc->flags &= ~0x200;
+            D_802BEAAC_31B01C->unk_00 = 120;
+            parakarry->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            parakarry->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad((D_802BEAAC_31B01C->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-
-            npc->pos.x = temp_s2->position.x + (sp10 * D_802BEAAC_31B01C->unk_0C);
-            npc->pos.z = temp_s2->position.z - (sp14 * D_802BEAAC_31B01C->unk_0C);
-
+            parakarry->pos.x = entity->position.x + (sp10 * D_802BEAAC_31B01C->unk_0C);
+            parakarry->pos.z = entity->position.z - (sp14 * D_802BEAAC_31B01C->unk_0C);
             D_802BEAAC_31B01C->unk_10 = clamp_angle(D_802BEAAC_31B01C->unk_10 - D_802BEAAC_31B01C->unk_14);
 
             if (D_802BEAAC_31B01C->unk_0C > 20.0f) {
@@ -83,16 +83,14 @@ s32 func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
             }
 
             tempY = sin_rad((D_802BEAAC_31B01C->unk_18 * TAU) / 360.0f) * 3.0f;
-
             D_802BEAAC_31B01C->unk_18 += 3.0f;
 
             if (D_802BEAAC_31B01C->unk_18 > 150.0f) {
                 D_802BEAAC_31B01C->unk_18 = 150.0f;
             }
 
-            npc->pos.y += tempY;
-
-            npc->renderYaw = clamp_angle(360.0f - D_802BEAAC_31B01C->unk_10);
+            parakarry->pos.y += tempY;
+            parakarry->renderYaw = clamp_angle(360.0f - D_802BEAAC_31B01C->unk_10);
             D_802BEAAC_31B01C->unk_14 += 0.8;
 
             if (D_802BEAAC_31B01C->unk_14 > 40.0f) {
@@ -104,13 +102,13 @@ s32 func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
             }
             break;
         case 2:
-            npc->flags = D_802BEAAC_31B01C->unk_08;
-            D_802BEAAC_31B01C->unk_00 = 0x1E;
+            parakarry->flags = D_802BEAAC_31B01C->flags;
+            D_802BEAAC_31B01C->unk_00 = 30;
             D_802BEAAC_31B01C->unk_04++;
             break;
         case 3:
-            partner_flying_update_player_tracking(npc);
-            partner_flying_update_motion(npc);
+            partner_flying_update_player_tracking(parakarry);
+            partner_flying_update_motion(parakarry);
 
             if (--D_802BEAAC_31B01C->unk_00 == 0) {
                 D_802BEAAC_31B01C->unk_04 = 0;
@@ -124,7 +122,7 @@ s32 func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
 void func_802BD514_319A84(Npc* parakarry) {
     if (D_8010C954) {
         D_8010C954 = 0;
-        parakarry->flags = D_802BEAAC_31B01C->unk_08;
+        parakarry->flags = D_802BEAAC_31B01C->flags;
         D_802BEAAC_31B01C->unk_04 = 0;
         partner_clear_player_tracking (parakarry);
     }
@@ -132,44 +130,44 @@ void func_802BD514_319A84(Npc* parakarry) {
 
 s32 func_802BD558_319AC8(void) {
     f32 sp28, sp2C, sp30, sp34, sp38, sp3C, sp40, sp44;
-    f32 colliderBaseHeight;
-    s32 temp_s1;
+    f32 colliderBaseHeight = gPlayerStatus.colliderHeight;
+    s32 raycastResult;
 
-    colliderBaseHeight = gPlayerStatus.colliderHeight;
     sp28 = gPlayerStatus.position.x;
     sp2C = gPlayerStatus.position.y + (colliderBaseHeight * 0.5);
     sp30 = gPlayerStatus.position.z;
     sp34 = colliderBaseHeight * 0.5f;
     
-    temp_s1 = player_raycast_below_cam_relative(&gPlayerStatus, &sp28, &sp2C, &sp30, &sp34, &sp38, &sp3C, &sp40, &sp44);
+    raycastResult = player_raycast_below_cam_relative(&gPlayerStatus, &sp28, &sp2C, &sp30, &sp34, &sp38,
+                                                      &sp3C, &sp40, &sp44);
 
-    if (((get_collider_type_by_id(temp_s1) & 0xFF) - 2) < 2U) {
+    if (((get_collider_type_by_id(raycastResult) & 0xFF) - 2) < 2U) {
         gPlayerStatus.unk_BF = 2;
         D_802BEBC0_31CBE0 = 0x15;
-        gPlayerStatus.flags |= 0x800;
+        gPlayerStatus.flags |= PLAYER_STATUS_FLAGS_800;
     }
 
-    return temp_s1;
+    return raycastResult;
 }
 
 INCLUDE_ASM(s32, "world/partner/parakarry", func_802BD660_319BD0);
 
 ApiStatus func_802BE8D4_31AE44(Evt* script, s32 isInitialCall) {
-    Npc* npc = script->owner2.npc;
+    Npc* parakarry = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_put_away(npc);
+        partner_init_put_away(parakarry);
     }
 
-    if (partner_put_away(npc)) {
+    if (partner_put_away(parakarry)) {
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;
     }
 }
 
-void func_802BE90C_31AE7C(Npc* npc) {
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+void func_802BE90C_31AE7C(Npc* parakarry) {
+    PartnerActionStatus* parakarryActionStatus = &gPartnerActionStatus;
 
     if (D_802BEBB0) {
         if (D_802BEBB8) {
@@ -181,18 +179,18 @@ void func_802BE90C_31AE7C(Npc* npc) {
         }
 
         set_action_state(0);
-        partnerActionStatus->npc = *npc;
-        partnerActionStatus->actionState.b[1] = 1;
-        partner_clear_player_tracking(npc);
+        parakarryActionStatus->npc = *parakarry;
+        parakarryActionStatus->actionState.b[1] = 1;
+        partner_clear_player_tracking(parakarry);
     }
 
-    partnerActionStatus->actionState.b[3] = 4;
+    parakarryActionStatus->actionState.b[3] = 4;
 }
 
-void func_802BE9D0_31AF40(Npc* npc) {
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+void func_802BE9D0_31AF40(Npc* parakarry) {
+    PartnerActionStatus* parakarryActionStatus = &gPartnerActionStatus;
 
-    if (partnerActionStatus->actionState.b[1] != 0) {
+    if (parakarryActionStatus->actionState.b[1] != 0) {
         if (D_802BEBB8) {
             disable_player_static_collisions();
         }
@@ -200,11 +198,11 @@ void func_802BE9D0_31AF40(Npc* npc) {
             disable_player_input();
         }
 
-        set_action_state(0x21);
-        *npc = partnerActionStatus->npc;
-        partnerActionStatus->actionState.b[3] = 0;
-        partnerActionStatus->actionState.b[0] = 0;
-        partner_clear_player_tracking(npc);
+        set_action_state(ACTION_STATE_RIDE);
+        *parakarry = parakarryActionStatus->npc;
+        parakarryActionStatus->actionState.b[3] = 0;
+        parakarryActionStatus->actionState.b[0] = 0;
+        partner_clear_player_tracking(parakarry);
         partner_use_ability();
     }
 }
