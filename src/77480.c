@@ -10,9 +10,10 @@ extern s32 D_8010C940;
 extern s32 D_8010C950;
 extern s32 D_8010C958;
 
-extern s32 D_802BDF60;
+extern s32 D_802BDF60;func_802B7140
 extern s8 D_8015A57A;
 
+void func_802B7140(void);
 void func_802B72C0_E22870(void);
 
 s32 func_800E0208(void);
