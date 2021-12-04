@@ -128,7 +128,7 @@ ApiStatus func_802BD2B4_31CE24(Evt* script, s32 isInitialCall) {
                 D_802BE274_31DDE4->unk_04 = 1;
                 D_802BE274_31DDE4->flags = watt->flags;
                 D_802BE274_31DDE4->unk_0C = fabsf(dist2D(watt->pos.x, watt->pos.z,
-                                                        entity->position.x, entity->position.z));
+                                                         entity->position.x, entity->position.z));
                 D_802BE274_31DDE4->unk_10 = atan2(entity->position.x, entity->position.z, watt->pos.x, watt->pos.z);
                 D_802BE274_31DDE4->unk_14 = 6.0f;
                 D_802BE274_31DDE4->unk_18 = 50.0f;
