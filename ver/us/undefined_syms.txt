@@ -142,7 +142,6 @@ bStaticEntityDataSize = 0x80151660;
 wStaticEntityData = 0x80151668;
 D_801516DC = 0x801516DC;
 bStaticEntityData = 0x801516E8;
-D_801516F4 = 0x801516F4;
 D_801516FC = 0x801516FC;
 gMainGameState = 0x80151700;
 gCurrentTileDescriptor = 0x80151740;

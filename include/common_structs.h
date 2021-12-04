@@ -388,8 +388,7 @@ typedef struct Entity {
     /* 0x54 */ Vec3f scale;
     /* 0x60 */ Vec3f rotation;
     /* 0x6C */ f32 shadowPosY;
-    /* 0x70 */ Matrix4f* inverseTransformMatrix; /* world-to-local */
-    /* 0x74 */ char unk_74[60];
+    /* 0x70 */ Matrix4f inverseTransformMatrix; /* world-to-local */
     /* 0xB0 */ float effectiveSize;
     /* 0xB4 */ char unk_B4[4];
     /* 0xB8 */ Mtx transformMatrix;

@@ -18974,7 +18974,6 @@ bStaticEntityDataSize = 0x80151660; // type:data
 wStaticEntityData = 0x80151668; // type:data
 D_801516DC = 0x801516DC; // type:data
 bStaticEntityData = 0x801516E8; // type:data
-D_801516F4 = 0x801516F4; // type:data
 D_801516FC = 0x801516FC; // type:data
 gMainGameState = 0x80151700; //
 gCurrentTileDescriptor = 0x80151740; // type:data

@@ -960,6 +960,9 @@ static s32 gLastCreatedEntityIndex;
 static s8 B_801512F0[0x410];
 static GameMode gMainGameState[2]; // TODO rename
 
+
+
+extern s32 D_80151300;
 extern s32 D_80151324;
 extern s32 D_8015132C;
 extern s32 D_80151330;
@@ -969,6 +972,8 @@ extern s32 bStaticEntityDataSize;
 
 extern StaticEntityData* wStaticEntityData[30];
 extern StaticEntityData* bStaticEntityData[4];
+
+extern s32* D_801516F4;
 
 extern TileDescriptor gCurrentTileDescriptor;
 
@@ -1015,6 +1020,8 @@ extern s32 mdl_renderTaskCount; // num render task entries?
 extern s8 D_8015A578;
 extern TextureHandle mdl_textureHandles[128];
 extern RenderTask mdl_clearRenderTasks[3][0x100];
+
+extern s32 D_801A7000; // todo ???
 
 void update_shadows(void);
 s32 step_entity_commandlist(Entity* entity);
@@ -1413,11 +1420,65 @@ void render_shadows(void) {
     }
 }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", update_entity_transform_matrix, Entity* entity);
+void update_entity_transform_matrix(Entity* entity) {
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    Matrix4f spD8;
+    Matrix4f sp118;
+    Matrix4f sp158;
+    Matrix4f sp198;
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", update_shadow_transform_matrix, Shadow* shadow);
+    if (entity->updateMatrixOverride != NULL) {
+        entity->updateMatrixOverride(entity);
+        return;
+    }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", update_entity_inverse_rotation_matrix, Entity* entity);
+    guTranslateF(sp58, entity->position.x, entity->position.y, entity->position.z);
+    guRotateF(spD8, entity->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(sp118, entity->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp158, entity->rotation.z, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp158, spD8, sp18);
+    guMtxCatF(sp18, sp118, sp98);
+    guScaleF(sp198, entity->scale.x, entity->scale.y, entity->scale.z);
+    guMtxCatF(sp198, sp98, sp18);
+    guMtxCatF(sp18, sp58, sp98);
+    guMtxF2L(sp98, &entity->transformMatrix);
+}
+
+void update_shadow_transform_matrix(Shadow* shadow) {
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    Matrix4f spD8;
+    Matrix4f sp118;
+    Matrix4f sp158;
+    Matrix4f sp198;
+
+    guTranslateF(sp58, shadow->position.x, shadow->position.y, shadow->position.z);
+    guRotateF(sp118, shadow->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(spD8, shadow->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp158, shadow->rotation.z, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp158, sp118, sp98);
+    guMtxCatF(spD8, sp98, sp98);
+    guScaleF(sp198, shadow->scale.x, shadow->scale.y, shadow->scale.z);
+    guMtxCatF(sp198, sp98, sp18);
+    guMtxCatF(sp18, sp58, sp98);
+    guMtxF2L(sp98, &shadow->transformMatrix);
+}
+
+void update_entity_inverse_rotation_matrix(Entity* entity) {
+    Matrix4f sp18;
+    Matrix4f sp58;
+
+    guRotateF(sp18, -entity->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -entity->rotation.z, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp18, sp58, sp18);
+    guRotateF(sp58, -entity->rotation.x, 1.0f, 0.0f, 0.0f);
+    guMtxCatF(sp18, sp58, entity->inverseTransformMatrix);
+
+    entity->effectiveSize = sqrtf(((SQ(entity->aabb.x) + SQ(entity->aabb.z)) * 0.25f) + SQ(entity->aabb.y));
+}
 
 Entity* get_entity_by_index(s32 index) {
     return (*gCurrentEntityListPtr)[index & 0xFFF];
@@ -1628,7 +1689,25 @@ void load_area_specific_entity_data(void) {
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_entity_data);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80110E58);
+void func_80110E58(void) {
+    if (!gGameStatusPtr->isBattle) {
+        D_80151300 = 0x80250000;
+        gEntityHeapBase = 0x80267FF0;
+        func_80110F10();
+    } else {
+        s32 i;
+
+        for (i = 0; i < 4; i++) {
+            bStaticEntityData[i] = 0;
+        }
+        D_80151300 = &D_801A7000;
+        gEntityHeapBase = D_80151300 + 0x3000;
+    }
+    gCurrentEntityListPtr = get_entity_list();
+    gCurrentShadowListPtr = get_shadow_list();
+    D_801512C0 = 0;
+    D_80151324 = 0;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80110F10);
 
@@ -1694,6 +1773,39 @@ s32 func_80111790(void) {
 }
 
 INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, StaticEntityData* data);
+// void entity_free_static_data(StaticEntityData* data) {
+//     StaticEntityData* temp_a0;
+//     StaticEntityData** temp_s1;
+//     s32 temp_v1;
+//     s32* temp_v1_2;
+//     s32 size;
+//     s32 i;
+
+
+//     for (i = 0; i < ARRAY_COUNT(wStaticEntityData); i++) {
+//         if (wStaticEntityData[i] == NULL) {
+//             break;
+//         }
+//     }
+
+//     if (i < ARRAY_COUNT(wStaticEntityData)) {
+//         s32 j = i - 1;
+//         temp_s1 = &wStaticEntityData[j];
+//         temp_a0 = *temp_s1;
+//         if (temp_a0 == data) {
+//             if (temp_a0->flags & 8) {
+//                 temp_v1_2 = temp_a0->dmaStart;
+//                 size = ((s32) (temp_v1_2[1] - temp_v1_2[0]) >> 2) + ((s32) (temp_v1_2[3] - temp_v1_2[2]) >> 2);
+//             } else {
+//                 size = (s32) (temp_a0->dmaEnd - temp_a0->dmaStart) >> 2;
+//             }
+//             if (func_80111790() == 0) {
+//                 *temp_s1 = NULL;
+//                 wStaticEntityDataSize -= size;
+//             }
+//         }
+//     }
+// }
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, StaticEntityData* data, s32 x, s32 y, s32 z, s32 arg4,
             ...);
@@ -2364,7 +2476,27 @@ ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key) {
     return NULL;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", _load_model_textures);
+void _load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
+    if (model->type != 2) {
+        if (model->groupData != NULL) {
+            s32 numChildren = model->groupData->numChildren;
+
+            if (numChildren != 0) {
+                s32 i;
+
+                for (i = 0; i < numChildren; i++) {
+                    _load_model_textures(model->groupData->childList[i], romOffset, size);
+                }
+            }
+        }
+    } else {
+        char* textureName = (char*)get_model_property(model, MODEL_PROP_KEY_TEXTURE_NAME);
+        if (textureName != NULL) {
+            load_tile_header(textureName, romOffset, size);
+        }
+    }
+    mdl_treeIterPos++;
+}
 
 void load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
     s32 battleOffset = ((gGameStatusPtr->isBattle != 0) << 17);
@@ -2380,7 +2512,7 @@ void load_model_textures(ModelNode* model, s32 romOffset, s32 size) {
 
         mdl_treeIterPos = 0;
         if (model != NULL) {
-            _load_model_textures();
+            _load_model_textures(model, romOffset, size);
         }
     }
 }
