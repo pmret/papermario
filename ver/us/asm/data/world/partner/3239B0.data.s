@@ -11,19 +11,19 @@ dlabel D_802BFE7C_3239CC
 dlabel D_802BFEE0
 .word 0x00000002
 
-dlabel D_802BFEE4
+dlabel bullshit_802BFEE4
 .word 0x00000000
 
-dlabel D_802BFEE8
+dlabel bullshit_802BFEE8
 .word 0x00000001
 
 dlabel D_802BFEEC
 .word 0x00000000
 
-dlabel D_802BFEF0
+dlabel bullshit_802BFEF0
 .byte 0x3F, 0xE9, 0x99, 0x99
 
-dlabel D_802BFEF4
+dlabel bullshit_802BFEF4
 .word 0x9999999A
 
 dlabel D_802BFEF8
