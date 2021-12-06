@@ -131,7 +131,7 @@ EvtSource world_goompa_take_out = {
     EVT_END
 };
 
-unkPartnerStruct* D_802BD58C_324E9C = (unkPartnerStruct*)0x802BD600;
+unkPartnerStruct* D_802BD58C_324E9C = &D_802BD600;
 
 EvtSource world_goompa_update = {
     EVT_CALL(func_802BD14C_324A5C)

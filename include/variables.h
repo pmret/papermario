@@ -383,6 +383,7 @@ extern s32 D_800F7BBC[];
 //partner temporary space
 extern unkPartnerStruct D_802BE940;
 extern unkPartnerStruct D_802BDF40;
+extern unkPartnerStruct D_802BD600;
 
 //various
 extern s32 D_802C05CC;
