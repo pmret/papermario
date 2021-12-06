@@ -1618,8 +1618,8 @@ enum NpcFlags {
     NPC_FLAG_ENABLE_HIT_SCRIPT = 0x00000008,
     NPC_FLAG_HAS_SHADOW        = 0x00000010, ///< Set by default and by enable_npc_shadow
     NPC_FLAG_NO_AI             = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
-    NPC_FLAG_80                = 0x00000080, // TODO
     NPC_FLAG_40                = 0x00000040,
+    NPC_FLAG_80                = 0x00000080, // TODO
     NPC_FLAG_100               = 0x00000100, // TODO
     NPC_FLAG_GRAVITY           = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
     NPC_FLAG_LOCK_ANIMS        = 0x00000400, ///< Do not allow scripts to change animation
@@ -1650,9 +1650,18 @@ enum NpcFlags {
 enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_JUMPING                          = 0x00000002,
     PLAYER_STATUS_FLAGS_FALLING                          = 0x00000004,
+    PLAYER_STATUS_FLAGS_100                              = 0x00000100,
+    PLAYER_STATUS_FLAGS_200                              = 0x00000200,
+    PLAYER_STATUS_FLAGS_400                              = 0x00000400,
+    PLAYER_STATUS_FLAGS_800                              = 0x00000800,
+    PLAYER_STATUS_FLAGS_1000                             = 0x00001000,
     PLAYER_STATUS_FLAGS_INPUT_DISABLED                   = 0x00002000,
+    PLAYER_STATUS_FLAGS_4000                             = 0x00004000,
+    PLAYER_STATUS_FLAGS_8000                             = 0x00008000,
+    PLAYER_STATUS_FLAGS_40000                            = 0x00040000,
     PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
     PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
+    PLAYER_STATUS_FLAGS_10000000                         = 0x10000000,
     PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED             = 0x80000000,
 };
 
@@ -2210,6 +2219,7 @@ enum DebuffTypes {
 enum GlobalOverrides {
     GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD                       = 0x00000002,
     GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL                  = 0x00000020,
+    GLOBAL_OVERRIDES_40                                         = 0x00000040,
     GLOBAL_OVERRIDES_DISABLE_BATTLES                            = 0x00000100,
     GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS               = 0x00010000,
     GLOBAL_OVERRIDES_DISABLE_MENUS                              = 0x00040000,
