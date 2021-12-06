@@ -384,6 +384,7 @@ extern s32 D_800F7BBC[];
 extern unkPartnerStruct D_802BE940;
 extern unkPartnerStruct D_802BDF40;
 extern unkPartnerStruct D_802BD600;
+extern unkPartnerStruct D_802BFF30;
 
 //various
 extern s32 D_802C05CC;

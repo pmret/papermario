@@ -2147,7 +2147,8 @@ segments:
     overlay: True
     subsegments:
     - [0x320c50, c, lakilester]
-    - [0x3239b0, data]
+    - [0x3239b0, .data, lakilester]
+    - [0x323a40, .rodata, lakilester]
   - type: code
     dir: world/partner
     name: world_partner_bow

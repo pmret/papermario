@@ -800,3 +800,42 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
+
+//data
+EvtSource D_802BFE60_3239B0 = {
+    EVT_CALL(func_802BD29C_320DEC)
+    EVT_RETURN
+    EVT_END
+};
+
+unkPartnerStruct* D_802BFE7C_3239CC = &D_802BFF30;
+
+ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall);
+
+EvtSource D_802BFE7C_3239D0 = {
+    EVT_CALL(func_802BD2D4_320E24)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource D_802BFE98_323A08 = {
+    EVT_CALL(func_802BE724_322274)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource D_802BFEB4_323A24 = {
+    EVT_CALL(func_802BF4F0_323040)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource D_802BFED0_323A40 = {
+    EVT_CALL(func_802BFBA0_3236F0)
+    EVT_RETURN
+    EVT_END
+};
+
+//rodata
+//f64 D_802BFEF0_323A40 = 0.8;
+//f64 D_802BFEF8_323A48 = 1.8;
