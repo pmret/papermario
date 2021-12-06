@@ -14,9 +14,12 @@ with open(sys.argv[1]) as f:
             if len(words) != 0:
                 join = ", ".join(words)
                 typedef = "s32"
-            else:
+            elif len(bytes) != 0:
                 join = ", ".join(bytes)
                 typedef = "s8"
+            else:
+                typedef = "s32"
+                join = "/* LIKELY A BUG IN migrate_data_to_c.py */"
             print(f"{typedef} {label}[] = {{ {join} }};")
 
     for line in lines:
