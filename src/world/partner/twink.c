@@ -13,11 +13,8 @@ ApiStatus TwinkTakeOut(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         partner_init_get_out(twink);
     }
-    if (partner_get_out(twink)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+
+    return partner_get_out(twink) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 ApiStatus TwinkUpdate(Evt* script, s32 isInitialCall) {
@@ -46,11 +43,7 @@ ApiStatus TwinkPutAway(Evt* script, s32 isInitialCall) {
         partner_init_put_away(twink);
     }
 
-    if (partner_put_away(twink)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_put_away(twink) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 EvtSource world_twink_take_out = SCRIPT({

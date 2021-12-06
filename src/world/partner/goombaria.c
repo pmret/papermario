@@ -13,11 +13,8 @@ ApiStatus GoombariaTakeOut(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         partner_init_get_out(goombaria);
     }
-    if (partner_get_out(goombaria)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+
+    return partner_get_out(goombaria) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 ApiStatus GoombariaUpdate(Evt* script, s32 isInitialCall) {
@@ -46,11 +43,7 @@ ApiStatus GoombariaPutAway(Evt* script, s32 isInitialCall) {
         partner_init_put_away(goombaria);
     }
 
-    if (partner_put_away(goombaria)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_put_away(goombaria) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 EvtSource world_goombaria_take_out = {

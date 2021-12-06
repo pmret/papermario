@@ -68,11 +68,7 @@ ApiStatus func_802BD228_31B248(Evt* script, s32 isInitialCall) {
         partner_init_get_out(kooper);
     }
 
-    if (partner_get_out(kooper)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_get_out(kooper) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 ApiStatus func_802BD260_31B280(Evt* script, s32 isInitialCall) {
@@ -605,11 +601,7 @@ ApiStatus func_802BE7E0_31C800(Evt* script, s32 isInitialCall) {
         partner_init_put_away(kooper);
     }
 
-    if (partner_put_away(kooper)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_put_away(kooper) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 #ifdef NON_EQUIVALENT

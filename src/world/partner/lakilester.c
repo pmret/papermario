@@ -77,11 +77,7 @@ ApiStatus func_802BD29C_320DEC(Evt* script, s32 isInitialCall) {
         partner_init_get_out(lakilester);
     }
 
-    if (partner_get_out(lakilester)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_get_out(lakilester) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
@@ -206,7 +202,7 @@ s32 func_802BD7DC(void) {
     f32 hitDirX, hitDirZ;
     f32 hitRx, hitRz;
     f32 outX, outY, outZ, outLength;
-    Npc *npc = get_npc_unsafe(NPC_PARTNER);
+    Npc* npc = get_npc_unsafe(NPC_PARTNER);
     s32 colliderTypeID;
     s32 raycastResult;
     s32 ret;

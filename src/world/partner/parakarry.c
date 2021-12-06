@@ -29,14 +29,10 @@ ApiStatus func_802BD148_3196B8(Evt* script, s32 isInitialCall) {
         partner_init_get_out(parakarry);
     }
 
-    if (partner_get_out(parakarry)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_get_out(parakarry) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-s32 func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
+ApiStatus func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Entity* entity;
     Npc* parakarry = script->owner2.npc;
@@ -54,7 +50,7 @@ s32 func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
     if (entity == NULL) {
         partner_flying_update_player_tracking(parakarry);
         partner_flying_update_motion(parakarry);
-        return 0;
+        return ApiStatus_BLOCK;
     }
 
     switch (D_802BEAAC_31B01C->unk_04) {
@@ -116,7 +112,7 @@ s32 func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
             }
             break;
     }
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
 void func_802BD514_319A84(Npc* parakarry) {
@@ -159,11 +155,7 @@ ApiStatus func_802BE8D4_31AE44(Evt* script, s32 isInitialCall) {
         partner_init_put_away(parakarry);
     }
 
-    if (partner_put_away(parakarry)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_put_away(parakarry) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 void func_802BE90C_31AE7C(Npc* parakarry) {
@@ -178,7 +170,7 @@ void func_802BE90C_31AE7C(Npc* parakarry) {
             enable_player_input();
         }
 
-        set_action_state(0);
+        set_action_state(ACTION_STATE_IDLE);
         parakarryActionStatus->npc = *parakarry;
         parakarryActionStatus->actionState.b[1] = 1;
         partner_clear_player_tracking(parakarry);

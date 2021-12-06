@@ -118,11 +118,7 @@ s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
         partner_init_get_out(sushie);
     }
 
-    if (partner_get_out(sushie)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_get_out(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
@@ -223,12 +219,7 @@ s32 func_802BF964_3206D4(Evt* script, s32 isInitialCall) {
         gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_400000;
     }
 
-    if (partner_put_away(sushie)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
-
+    return partner_put_away(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 void func_802BF9B8_320728(Npc* sushie) {
@@ -239,7 +230,7 @@ void func_802BF9B8_320728(Npc* sushie) {
         sushieActionStatus->actionState.b[1] = 1;
         enable_player_static_collisions();
         enable_player_input();
-        set_action_state(0);
+        set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(sushie);
     }
 

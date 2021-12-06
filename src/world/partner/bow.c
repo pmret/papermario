@@ -28,12 +28,7 @@ ApiStatus func_802BD130_323A80(Evt* script, s32 isInitialCall) {
         partner_init_get_out(bow);
     }
 
-    if (partner_get_out(bow)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
-
+    return partner_get_out(bow) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
@@ -377,11 +372,7 @@ ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
         func_802BDDF0_324740(bow);
     }
     
-    if (partner_put_away(bow)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_put_away(bow) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 void func_802BDF64_3248B4(Npc* bow) {

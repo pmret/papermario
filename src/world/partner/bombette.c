@@ -71,11 +71,7 @@ ApiStatus func_802BD300_318050(Evt* script, s32 isInitialCall) {
         partner_init_get_out(bombette);
     }
 
-    if (partner_get_out(bombette)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_get_out(bombette) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
@@ -192,11 +188,7 @@ ApiStatus func_802BE4E8_319238(Evt* script, s32 isInitialCall) {
         partner_init_put_away(bombette);
     }
 
-    if (partner_put_away(bombette)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_put_away(bombette) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 s32 func_802BE520_319270(Npc* bombette, Npc* enemy) {
@@ -262,7 +254,7 @@ void func_802BE6E8_319438(Npc* bombette) {
         bombette->jumpVelocity = 0.0f;
         bombette->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
 
-        set_action_state(0);
+        set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(bombette);
 
         bombetteActionStatus->actionState.b[0] = 0;
@@ -301,7 +293,7 @@ EvtSource bombetteGetOut = {
     EVT_END
 };
 
-unkPartnerStruct* D_802BE89C_3195EC = (unkPartnerStruct*)0x802BE940;
+unkPartnerStruct* D_802BE89C_3195EC = &D_802BE940;
 
 EvtSource bombetteUpdate = {
     EVT_CALL(func_802BD338_318088)
@@ -320,6 +312,3 @@ EvtSource bombettePutAway = {
     EVT_RETURN
     EVT_END
 };
-
-
-

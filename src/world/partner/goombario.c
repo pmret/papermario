@@ -37,11 +37,7 @@ ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall) {
         partner_init_get_out(goombario);
     }
 
-    if (partner_get_out(goombario)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_get_out(goombario) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
@@ -182,11 +178,7 @@ ApiStatus func_802BDB84(Evt* script, s32 isInitialCall) {
         partner_init_put_away(goombario);
     }
 
-    if (partner_put_away(goombario)) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_put_away(goombario) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 void world_goombario_pre_battle(Npc* goombario) {
@@ -224,7 +216,7 @@ EvtSource world_goombario_take_out = {
     EVT_END
 };
 
-unkPartnerStruct* D_802BDD88_317CA8 = (unkPartnerStruct*)0x802BDF40;
+unkPartnerStruct* D_802BDD88_317CA8 = &D_802BDF40;
 
 EvtSource world_goombario_update = {
     EVT_CALL(func_802BD1D0_3170F0)
