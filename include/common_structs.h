@@ -1645,7 +1645,7 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
 
 typedef struct Actor {
     /* 0x000 */ s32 flags;
-    /* 0x004 */ char unk_04[4];
+    /* 0x004 */ s32 flags2;
     /* 0x008 */ struct ActorDesc* staticActorData;
     /* 0x00C */ ActorState state;
     /* 0x0C8 */ ActorMovement fly;
