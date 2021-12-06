@@ -11,12 +11,12 @@ glabel clear_screen_overlays
 /* CE820 80138120 3C01BF80 */  lui       $at, 0xbf80
 /* CE824 80138124 44810000 */  mtc1      $at, $f0
 /* CE828 80138128 2402FFFF */  addiu     $v0, $zero, -1
-/* CE82C 8013812C 3C018015 */  lui       $at, %hi(D_80156900)
-/* CE830 80138130 AC226900 */  sw        $v0, %lo(D_80156900)($at)
-/* CE834 80138134 3C018015 */  lui       $at, %hi(D_80156908)
-/* CE838 80138138 AC226908 */  sw        $v0, %lo(D_80156908)($at)
-/* CE83C 8013813C 3C018015 */  lui       $at, %hi(D_80156904)
-/* CE840 80138140 E4206904 */  swc1      $f0, %lo(D_80156904)($at)
+/* CE82C 8013812C 3C018015 */  lui       $at, %hi(screen_overlay_frontType)
+/* CE830 80138130 AC226900 */  sw        $v0, %lo(screen_overlay_frontType)($at)
+/* CE834 80138134 3C018015 */  lui       $at, %hi(screen_overlay_backType)
+/* CE838 80138138 AC226908 */  sw        $v0, %lo(screen_overlay_backType)($at)
+/* CE83C 8013813C 3C018015 */  lui       $at, %hi(screen_overlay_frontZoom)
+/* CE840 80138140 E4206904 */  swc1      $f0, %lo(screen_overlay_frontZoom)($at)
 /* CE844 80138144 3C018015 */  lui       $at, %hi(D_8015690C)
 /* CE848 80138148 E420690C */  swc1      $f0, %lo(D_8015690C)($at)
 .L8013814C:

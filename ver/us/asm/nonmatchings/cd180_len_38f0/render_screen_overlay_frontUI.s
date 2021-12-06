@@ -3,15 +3,15 @@
 
 glabel render_screen_overlay_frontUI
 /* CE8A0 801381A0 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* CE8A4 801381A4 3C048015 */  lui       $a0, %hi(D_80156900)
-/* CE8A8 801381A8 24846900 */  addiu     $a0, $a0, %lo(D_80156900)
+/* CE8A4 801381A4 3C048015 */  lui       $a0, %hi(screen_overlay_frontType)
+/* CE8A8 801381A8 24846900 */  addiu     $a0, $a0, %lo(screen_overlay_frontType)
 /* CE8AC 801381AC AFBF0010 */  sw        $ra, 0x10($sp)
 /* CE8B0 801381B0 8C830000 */  lw        $v1, ($a0)
 /* CE8B4 801381B4 2402FFFF */  addiu     $v0, $zero, -1
 /* CE8B8 801381B8 10620016 */  beq       $v1, $v0, .L80138214
 /* CE8BC 801381BC 00000000 */   nop
-/* CE8C0 801381C0 3C018015 */  lui       $at, %hi(D_80156904)
-/* CE8C4 801381C4 C4226904 */  lwc1      $f2, %lo(D_80156904)($at)
+/* CE8C0 801381C0 3C018015 */  lui       $at, %hi(screen_overlay_frontZoom)
+/* CE8C4 801381C4 C4226904 */  lwc1      $f2, %lo(screen_overlay_frontZoom)($at)
 /* CE8C8 801381C8 3C01BF80 */  lui       $at, 0xbf80
 /* CE8CC 801381CC 44810000 */  mtc1      $at, $f0
 /* CE8D0 801381D0 00000000 */  nop

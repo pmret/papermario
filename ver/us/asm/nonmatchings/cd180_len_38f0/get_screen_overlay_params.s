@@ -12,8 +12,8 @@ glabel get_screen_overlay_params
 /* CE4D8 80137DD8 3C028015 */  lui       $v0, %hi(D_80156903)
 /* CE4DC 80137DDC 90426903 */  lbu       $v0, %lo(D_80156903)($v0)
 /* CE4E0 80137DE0 A0A20000 */  sb        $v0, ($a1)
-/* CE4E4 80137DE4 3C018015 */  lui       $at, %hi(D_80156904)
-/* CE4E8 80137DE8 C4206904 */  lwc1      $f0, %lo(D_80156904)($at)
+/* CE4E4 80137DE4 3C018015 */  lui       $at, %hi(screen_overlay_frontZoom)
+/* CE4E8 80137DE8 C4206904 */  lwc1      $f0, %lo(screen_overlay_frontZoom)($at)
 /* CE4EC 80137DEC 03E00008 */  jr        $ra
 /* CE4F0 80137DF0 E4C00000 */   swc1     $f0, ($a2)
 .L80137DF4:

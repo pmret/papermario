@@ -605,16 +605,14 @@ void show_first_strike_message(void) {
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", update_encounters_post_battle);
 
-s32 draw_encounters_post_battle(void) {
+void draw_encounters_post_battle(void) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 ret = currentEncounter->fadeOutAccel;
 
     if (ret != 0) {
         set_screen_overlay_params_front(0, currentEncounter->fadeOutAmount);
-        ret = set_screen_overlay_color(0, 0, 0, 0);
+        set_screen_overlay_color(0, 0, 0, 0);
     }
-
-    return ret;
 }
 
 void update_encounters_conversation(void) {

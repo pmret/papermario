@@ -3,8 +3,8 @@
 
 glabel render_screen_overlay_backUI
 /* CE920 80138220 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* CE924 80138224 3C048015 */  lui       $a0, %hi(D_80156908)
-/* CE928 80138228 24846908 */  addiu     $a0, $a0, %lo(D_80156908)
+/* CE924 80138224 3C048015 */  lui       $a0, %hi(screen_overlay_backType)
+/* CE928 80138228 24846908 */  addiu     $a0, $a0, %lo(screen_overlay_backType)
 /* CE92C 8013822C AFBF0010 */  sw        $ra, 0x10($sp)
 /* CE930 80138230 8C830000 */  lw        $v1, ($a0)
 /* CE934 80138234 2402FFFF */  addiu     $v0, $zero, -1

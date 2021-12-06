@@ -718,6 +718,18 @@ segments:
     - [0xE2960, .data, entity]
     - [0xE2980, .data, msg]
     - [0xE2CA0, data]
+    #- [0xE2DF0, .data, cd180_len_38f0]
+    - start: 0xE2DF0
+      type: .data
+      name: cd180_len_38f0
+      subsegments:
+      - [0xE2DF0, .data, cd180_len_38f0]
+      - [0xE2E00, i4, ui/star_silhouette, 32, 64]
+      - [0xE3200, i4, ui/mario_head_silhouette, 64, 64]
+      - [0xE3A00, i4, ui/quarter_circle_silhouette, 32, 32]
+      - [0xE3C00, i8, ui/flame_thing_silhouette, 64, 64]
+      - [0xE4C00]
+    - [0xE5490, data]
     - [0xE5510, .data, d0a70_len_4fe0]
     - [0xE56C0, .data, hud_element]
     - [0xE5820, .data, dc470_len_14c0]
