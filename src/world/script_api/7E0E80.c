@@ -422,7 +422,268 @@ s32 shop_get_sell_price(s32 itemID) {
     return gItemTable[itemID].sellValue;
 }
 
-INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", ShowShopOwnerDialog, Evt* script, s32 isInitialCall);
+//INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", ShowShopOwnerDialog, Evt* script, s32 isInitialCall);
+ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
+    GameStatus* gameStatus = gGameStatusPtr;
+    PlayerData* playerData = &gPlayerData;
+    Shop* shop = gameStatus->mapShop;
+    StaticItem* item;
+
+    if (isInitialCall) {
+        script->functionTemp[1] = shop_owner_begin_speech(4);
+        script->functionTemp[0] = 4;
+    }
+
+    switch (script->functionTemp[0]) {
+        case 0:
+        case 9:
+        case 42:
+            if (does_script_exist(script->functionTemp[1]) == 0) {
+                script->functionTemp[0] = 10;
+            }
+            break;
+        case 2:
+            if (shop_update_item_select_popup(shop->selectedStoreItemSlot) == 1) {
+                script->functionTemp[0] = 21;
+                script->functionTemp[1] = 15;
+            }     
+            break;
+        case 3:
+            if (does_script_exist(script->functionTemp[1]) == 0) {
+                script->functionTemp[0] = 31;
+                script->functionTemp[2] = 0;
+                D_80286538 = msg_get_printer_for_msg(0x1E0002, &script->functionTemp[2]);
+            }
+            break;
+        case 5:
+            if (shop_update_item_select_popup(&shop->selectedStoreItemSlot) == 1) {
+                script->functionTemp[0] = 51;
+                script->functionTemp[1] = 15;
+            }
+            break;
+        case 4:
+            if (does_script_exist(script->functionTemp[1]) == 0) {
+                script->functionTemp[0] = 10;
+                script->functionTemp[2] = 0;
+                D_80286538 = msg_get_printer_for_msg(0x1E0003, &script->functionTemp[2]);
+            }
+            break;    
+        case 7:
+            if (shop_update_item_select_popup(&shop->selectedStoreItemSlot) == 1) {
+                script->functionTemp[0] = 71;
+                script->functionTemp[1] = 15;
+            }
+            break;
+        case 10:
+            if (shop->owner != NULL) {
+                if (shop->owner->unk_14 != 0) {
+                    start_script(shop->owner->unk_14, 1, 0);
+                }
+            }
+            open_status_menu_short();
+            return ApiStatus_DONE1;
+        case 12:
+            if (script->functionTemp[2] == 1) {
+                if (D_80286538->currentOption == 0) {
+                    script->functionTemp[1] = shop_owner_end_speech();
+                    script->functionTemp[0] = 201;
+                    func_800E96C8();
+                    break;
+                }
+                func_800E96C8();
+                script->functionTemp[1] = shop_owner_reset_speech(22);
+                script->functionTemp[0] = 9;
+            }
+            break;
+        case 21:
+            if (script->functionTemp[1] <= 0) {
+                shop_close_item_select_popup();
+                if (shop->selectedStoreItemSlot >= 0) {
+                    item = &gItemTable[playerData->invItems[shop->selectedStoreItemSlot]];
+                    script->functionTemp[1] = shop_owner_buy_dialog(8, item->nameMsg, shop_get_sell_price(playerData->invItems[shop->selectedStoreItemSlot]), -1);
+                    show_coin_counter();
+                    script->functionTemp[0] = 3;
+                } else {
+                    script->functionTemp[1] = shop_owner_begin_speech(22);
+                    script->functionTemp[0] = 9;
+                }
+            } else {
+                script->functionTemp[1]--;
+            }
+            break;
+        case 31:
+            if (script->functionTemp[2] == 1) {
+                if (D_80286538->currentOption == 0) {
+                    add_coins(shop_get_sell_price(playerData->invItems[shop->selectedStoreItemSlot]));
+                    playerData->invItems[shop->selectedStoreItemSlot] = 0;
+                    if (get_item_count() == 0) {
+                        script->functionTemp[1] = shop_owner_reset_speech(11);
+                        script->functionTemp[0] = 9;
+                        hide_coin_counter();
+                        break;
+                    }
+                    script->functionTemp[1] = shop_owner_reset_speech(10);
+                    script->functionTemp[0] = 32;
+                    break;
+                }
+                script->functionTemp[1] = shop_owner_reset_speech(9);
+                script->functionTemp[0] = 32;
+                hide_coin_counter();
+            }
+            break;
+        case 32:
+            if (does_script_exist(script->functionTemp[1]) == 0) {
+                script->functionTemp[0] = 12;
+                script->functionTemp[2] = 0;
+                D_80286538 = msg_get_printer_for_msg(0x1E0004, &script->functionTemp[2]);
+                break;
+            }
+            break;
+        case 41:
+            if (script->functionTemp[2] == 1) {
+                if (D_80286538->currentOption != script->functionTemp[2]) {
+                    switch (D_80286538->currentOption) {
+                        case 0:
+                            script->functionTemp[1] = shop_owner_continue_speech(5);
+                            script->functionTemp[0] = 0;
+                            break;
+                        case 2:
+                            if (get_item_count(script->functionTemp[2]) == 0) {
+                                script->functionTemp[1] = shop_owner_continue_speech(12);
+                                script->functionTemp[0] = 9;
+                                break;
+                            }
+                            if (get_stored_empty_count() == 0) {
+                                script->functionTemp[1] = shop_owner_continue_speech(13);
+                            }
+                            script->functionTemp[1] = shop_owner_continue_speech_with_quantity(14, get_stored_empty_count());
+                            script->functionTemp[0] = 501;
+                        case 3:
+                            if (get_stored_count(script->functionTemp[2]) == 0) {
+                                script->functionTemp[1] = shop_owner_continue_speech(17);
+                            }
+                            if (get_item_empty_count() == 0) {
+                                script->functionTemp[1] = shop_owner_continue_speech(18);
+                                script->functionTemp[0] = 9;
+                                break;
+                            }
+                            script->functionTemp[1] = shop_owner_continue_speech(19);
+                            script->functionTemp[0] = 701;
+                        default:
+                            script->functionTemp[1] = shop_owner_end_speech();
+                            script->functionTemp[0] = 42;
+                    }
+                } else {
+                    if (get_item_count(script->functionTemp[2]) == 0) {
+                        script->functionTemp[1] = shop_owner_continue_speech(6);
+                    }
+                    script->functionTemp[1] = shop_owner_continue_speech(7);
+                    script->functionTemp[0] = 201;
+                }
+            }
+            break;
+        case 51:
+            if (script->functionTemp[1] <= 0) {
+                shop_close_item_select_popup();
+                if (shop->selectedStoreItemSlot >= 0) {
+                    if (store_item(playerData->invItems[shop->selectedStoreItemSlot]) >= 0) {
+                        playerData->invItems[shop->selectedStoreItemSlot] = 0;
+                    }
+                    if ((get_item_count() == 0) || (get_stored_empty_count() == 0)) {
+                        script->functionTemp[1] = shop_owner_begin_speech(15);
+                        script->functionTemp[0] = 9;
+                    }
+                    script->functionTemp[1] = shop_owner_begin_speech(16);
+                    script->functionTemp[0] = 52;
+                } else {
+                    script->functionTemp[1] = shop_owner_begin_speech(22);
+                    script->functionTemp[0] = 9;
+                }
+            } else { 
+                script->functionTemp[1]--;
+            }
+            break;
+        case 52:
+            if (does_script_exist(script->functionTemp[1]) == 0) {
+                script->functionTemp[0] = 71;
+                script->functionTemp[2] = 0;
+                D_80286538 = msg_get_printer_for_msg(0x1E0005, &script->functionTemp[2]);
+            }
+            break;
+        case 53:
+            if (script->functionTemp[2] == 1) {
+                if (D_80286538->currentOption == 0) {
+                    script->functionTemp[1] = shop_owner_end_speech();
+                    script->functionTemp[0] = 501;
+                } else {
+                    script->functionTemp[1] = shop_owner_reset_speech(22);
+                    script->functionTemp[0] = 9;
+                }
+            }
+            break;
+        case 71:
+            if (script->functionTemp[1] > 0) {
+                script->functionTemp[1]--;
+            } else {
+                shop_close_item_select_popup();
+                if (shop->selectedStoreItemSlot >= 0) {
+                    if (add_item(playerData->storedItems[shop->selectedStoreItemSlot]) >= 0) {
+                        playerData->storedItems[shop->selectedStoreItemSlot] = 0;
+                    }
+                    if (get_item_empty_count() == 0 || get_stored_count() == 0) {
+                        script->functionTemp[1] = shop_owner_begin_speech(20);
+                        script->functionTemp[0] = 9;
+                        break;
+                    }
+                    script->functionTemp[1] = shop_owner_begin_speech(21);
+                    script->functionTemp[0] = 72;
+                } else {
+                    script->functionTemp[1] = shop_owner_begin_speech(22);
+                    script->functionTemp[0] = 9;
+                }
+            }
+            break;
+        case 72:
+            if (does_script_exist(script->functionTemp[1]) == 0) {
+                script->functionTemp[0] = 73;
+                script->functionTemp[2] = 0;
+                D_80286538 = msg_get_printer_for_msg(0x1E0005, &script->functionTemp[2]);
+            }
+            break;
+        case 73:
+            if (script->functionTemp[2] == 1) {
+                if (D_80286538->currentOption == 0) {
+                    script->functionTemp[1] = shop_owner_end_speech();
+                    script->functionTemp[0] = 701;
+                } else {
+                    script->functionTemp[1] = shop_owner_reset_speech(22);
+                    script->functionTemp[0] = 9;
+                }
+            }
+            break;
+        case 201:
+            if (does_script_exist(script->functionTemp[1]) == 0) {
+                shop_open_item_select_popup(0);
+                script->functionTemp[0] = 2;
+            }
+            break;
+        case 501:
+            if (does_script_exist(script->functionTemp[1]) == 0) {
+                shop_open_item_select_popup(1);
+                script->functionTemp[0] = 5;
+            }
+            break;
+        case 701:
+            if (does_script_exist(script->functionTemp[1]) == 0) {
+                shop_open_item_select_popup(2);
+                script->functionTemp[0] = 7;
+            }
+            break;
+        default:
+            break;
+    }
+    return ApiStatus_BLOCK;
+}
 
 void shop_draw_item_name(s32 arg0, s32 posX, s32 posY) {
     Shop* shop = gGameStatusPtr->mapShop;
@@ -514,8 +775,9 @@ void draw_shop_items(void) {
 INCLUDE_ASM(s32, "world/script_api/7E0E80", draw_shop_items);
 #endif
 
-//INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", MakeShop, Evt* script, s32 isInitialCall);
-/*
+// This should be equivalent to the original code but there is some funny business with
+// the evt_get_variable's at the beginning that makes absolutely no sense.
+#ifdef NON_MATCHING
 s32 MakeShop(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ShopItemLocation* staticItemPositions = evt_get_variable(script, *args++);
@@ -523,148 +785,8 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
     StaticPriceItem* staticPriceList = evt_get_variable(script, *args++);
     s32 inventoryItemFlags = evt_get_variable(script, *args++);
     Shop* shop = heap_malloc(sizeof(Shop));
-    f32 sp28;
-    f32 sp2C;
-    f32 sp30;
-    f32 sp34;
-    f32 sp38;
-    f32 sp3C;
-    GameStatus* temp_a0_2;
-    GameStatus* temp_v1;
-    Model* temp_v0;
-    ShopItemLocation* temp_s5_2;
-    StaticInventoryItem* temp_s3_3;
-    StaticInventoryItem* temp_s3_4;
-    f32 temp_f2;
-    s16 temp_a0;
-    s16 temp_s2_2;
-    s32 temp_a0_3;
-    s32* temp_s0_2;
-    s32* temp_s0_3;
-    s32* temp_s1_2;
-    s32* temp_s3_2;
-    s32 phi_s3;
-    s32 numShopItems;
-    s32 phi_s1;
-    s16 phi_s2_2;
-    ShopItemLocation* phi_s5;
-    s16 phi_s2_3;
-    StaticInventoryItem* phi_s3_2;
-    u16* phi_s1_2;
-    s16 phi_s2_4;
-    s16 phi_s2_5;
-
-    gGameStatusPtr->mapShop = shop;
-    shop->staticItemPositions = staticItemPositions;
-    shop->staticInventory = staticInventory;
-    shop->staticPriceList = staticPriceList;
-    shop->inventoryItemFlags = inventoryItemFlags;
-
-    numShopItems = 0;
-    phi_s2_2 = 0;
-    phi_s2_3 = 0;
-    phi_s2_4 = 0;
-    phi_s2_5 = 0;
-
-
-    numShopItems = 0;
-    phi_s3 = staticInventory->unk_00;
-    while (phi_s3 != 0) {
-        numShopItems++;
-        phi_s3_2 = staticInventory++;
-        phi_s3 = phi_s3_2->unk_00;
-    }
-
-
-    shop->numItems = numShopItems;
-    /*
-    if (staticInventory != 0) {
-        do {
-            temp_s3_2 = phi_s3 + 0xC;
-            numShopItems = phi_s2_4 + 1;
-            phi_s3 = (s32) temp_s3_2;
-            numShopItems = numShopItems;
-            phi_s2_4 = numShopItems;
-        } while (*temp_s3_2 != 0);
-    }
- 
-    shop->numItems = numShopItems;
-
-
-    if (staticPriceList != 0) {
-        phi_s1 = staticPriceList;
-        if (staticPriceList != 0) {
-            do {
-                temp_s1_2 = phi_s1 + 0xC;
-                temp_s2_2 = phi_s2_5 + 1;
-                phi_s1 = (s32) temp_s1_2;
-                phi_s2_2 = temp_s2_2;
-                phi_s2_5 = temp_s2_2;
-            } while (*temp_s1_2 != 0);
-        }
-    }
-    temp_a0 = shop->numItems;
-    shop->numSpecialPrices = phi_s2_2;
-    if ((s32) temp_a0 > 0) {
-        gGameStatusPtr->shopItemEntities = heap_malloc(temp_a0 * 0x10);
-    }
-    temp_s3_3 = shop->staticInventory;
-    temp_s5_2 = shop->staticItemPositions;
-    phi_s5 = temp_s5_2;
-    phi_s3_2 = temp_s3_3;
-    if (temp_s3_3->unk_00 != 0) {
-        phi_s1_2 = &temp_s5_2->triggerColliderID;
-        do {
-            get_model_center_and_size(phi_s5->posModelID, &sp28, &sp2C, &sp30, &sp34, &sp38, &sp3C);
-            temp_v1 = gGameStatusPtr;
-            temp_f2 = sp2C + 6.0f;
-            temp_v1->shopItemEntities[phi_s2_3].pos.x = sp28;
-            temp_v1->shopItemEntities[phi_s2_3].pos.y = temp_f2;
-            temp_v1->shopItemEntities[phi_s2_3].pos.z = sp30;
-            sp2C = temp_f2;
-            temp_v0 = get_model_from_list_index(get_model_list_index_from_tree_index((s32) phi_s5->posModelID));
-            temp_v0->flags |= 4;
-            temp_a0_2 = gGameStatusPtr;
-            temp_a0_2->shopItemEntities[phi_s2_3].index = make_item_entity_nodelay(phi_s3_2->unk_00 | shop->inventoryItemFlags, sp28, temp_f2, sp30, 1, 0);
-            temp_s3_4 = phi_s3_2 + 0xC;
-            set_item_entity_flags(temp_a0_2->shopItemEntities[phi_s2_3].index, 0x4000);
-            bind_trigger_1(D_80283F58_7E4DD8, 0x80, *phi_s1_2, phi_s2_3, 0, 3);
-            bind_trigger_1(D_80283F58_7E4DD8, 0x800, *phi_s1_2, phi_s2_3, 0, 3);
-            phi_s5 += 4;
-            phi_s2_3 += 1;
-            phi_s3_2 = temp_s3_4;
-            phi_s1_2 += 4;
-        } while (temp_s3_4->unk_00 != 0);
-    }
-    temp_a0_3 = create_hud_element((s32 (*)[0]) D_80080868);
-    shop->costIconID = temp_a0_3;
-    set_hud_element_flags(temp_a0_3, 0x80);
-    clear_hud_element_flags(shop->costIconID, 0x8000);
-    get_generic_entity(create_generic_entity_frontUI(NULL, draw_shop_items));
-    set_window_properties(0xA, 0x64, 0x42, 0x78, 0x1C, 0, shop_draw_item_name, NULL, -1);
-    set_window_properties(0xB, 0x20, 0xB8, 0x100, 0x20, 1, shop_draw_item_desc, NULL, -1);
-    D_8014F150[10] = 9;
-    D_8014F150[11] = 3;
-    shop->currentItemSlot = 0;
-    shop->selectedStoreItemSlot = 0;
-    shop->flags = 0;
-    shop->owner = NULL;
-    return 2;
-}
-*/
-
-void bind_trigger_1(s32, s32, u16, s32, s32, s32);
-s32 MakeShop(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    ShopItemLocation* staticItemPositions = evt_get_variable(script, *args++);
-    StaticInventoryItem* staticInventory = evt_get_variable(script, *args++);
-    StaticPriceItem* staticPriceList = evt_get_variable(script, *args++);
-    s32 inventoryItemFlags = evt_get_variable(script, *args++);
-    Shop* shop = heap_malloc(sizeof(Shop));
-    //ShopItemLocation* itemPosition;
     Model* model;
     u16* triggerCollider;
-    s32 numSpecialPriceItems;
     s32 numShopItems;
     f32 centerX;
     f32 centerY;
@@ -672,9 +794,8 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
     f32 sizeX;
     f32 sizeY;
     f32 sizeZ;
-    s32 itemID;
     s32 item;
-
+    
     gGameStatusPtr->mapShop = shop;
     shop->staticItemPositions = staticItemPositions;
     shop->staticInventory = staticInventory;
@@ -692,40 +813,38 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
     
     numShopItems = 0;
     if (staticPriceList != NULL) {
-        itemID = staticPriceList->itemID;
-        while (itemID != 0) {
+        item = staticPriceList->itemID;
+        while (item != 0) {
             numShopItems++;
             staticPriceList++;
-            itemID = staticPriceList->itemID;
+            item = staticPriceList->itemID;
         }
     }
     shop->numSpecialPrices = numShopItems;
     
     if (shop->numItems > 0) {
-        gGameStatusPtr->shopItemEntities = heap_malloc(shop->numItems * sizeof(ShopItemEntity));
+        gGameStatusPtr->shopItemEntities = heap_malloc(sizeof(ShopItemEntity) * shop->numItems);
     }
     
     staticInventory = shop->staticInventory;
     staticItemPositions = shop->staticItemPositions;
-    if (staticInventory->unk_00 != 0) {
-        numShopItems = 0;
-        while (staticInventory->unk_00 != 0) {
-            triggerCollider = &staticItemPositions->triggerColliderID;
-            get_model_center_and_size(staticItemPositions->posModelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
-            centerY += 6;
-            gGameStatusPtr->shopItemEntities[numShopItems].pos.x = centerX;
-            gGameStatusPtr->shopItemEntities[numShopItems].pos.y = centerY;
-            gGameStatusPtr->shopItemEntities[numShopItems].pos.z = centerZ;
-            model = get_model_from_list_index(get_model_list_index_from_tree_index(staticItemPositions->posModelID));
-            model->flags |= MODEL_FLAGS_FLAG_4;
-            gGameStatusPtr->shopItemEntities[numShopItems].index = make_item_entity_nodelay(staticInventory->unk_00 | shop->inventoryItemFlags, centerX, centerY, centerZ, 1, 0);
-            set_item_entity_flags(gGameStatusPtr->shopItemEntities[numShopItems].index, 0x4000);
-            bind_trigger_1(D_80283F58_7E4DD8, 0x80, *triggerCollider, numShopItems, 0, 3);
-            bind_trigger_1(D_80283F58_7E4DD8, 0x800, *triggerCollider, numShopItems, 0, 3);
-            staticItemPositions++;
-            staticInventory++;
-            numShopItems++;
-        }
+    numShopItems = 0;
+    while (staticInventory->unk_00 != 0) {
+        triggerCollider = &staticItemPositions->triggerColliderID;
+        get_model_center_and_size(staticItemPositions->posModelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+        centerY += 6;
+        gGameStatusPtr->shopItemEntities[numShopItems].pos.x = centerX;
+        gGameStatusPtr->shopItemEntities[numShopItems].pos.y = centerY;
+        gGameStatusPtr->shopItemEntities[numShopItems].pos.z = centerZ;
+        model = get_model_from_list_index(get_model_list_index_from_tree_index(staticItemPositions->posModelID));
+        model->flags |= MODEL_FLAGS_FLAG_4;
+        gGameStatusPtr->shopItemEntities[numShopItems].index = make_item_entity_nodelay(staticInventory->unk_00 | shop->inventoryItemFlags, centerX, centerY, centerZ, 1, 0);
+        set_item_entity_flags(gGameStatusPtr->shopItemEntities[numShopItems].index, 0x4000);
+        bind_trigger_1(D_80283F58_7E4DD8, 0x80, *triggerCollider, numShopItems, 0, 3);
+        bind_trigger_1(D_80283F58_7E4DD8, 0x800, *triggerCollider, numShopItems, 0, 3);
+        staticItemPositions++;
+        staticInventory++;
+        numShopItems++;
     }
 
     shop->costIconID = create_hud_element(&D_80080868);
@@ -743,6 +862,9 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
+#else
+INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", MakeShop, Evt* script, s32 isInitialCall);
+#endif
 
 ApiStatus MakeShopOwner(Evt* script, s32 isInitialCall) {
     Shop* mapShop = gGameStatusPtr->mapShop;
