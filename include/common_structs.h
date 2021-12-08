@@ -1495,19 +1495,19 @@ typedef struct ShopOwner {
     /* 0x00 */ s32 npcID;
     /* 0x04 */ s32 idleAnim;
     /* 0x08 */ s32 talkAnim;
-    /* 0x0C */ char unk_0C[0x4];
+    /* 0x0C */ Evt* unk_0C;
     /* 0x10 */ Bytecode* unkScript;
-    /* 0x14 */ char unk_14[0x4];
+    /* 0x14 */ EvtSource* unk_14;
     /* 0x18 */ s32* shopMsgIDs;
 } ShopOwner;
 
 typedef struct ShopItemLocation {
-    /* 0x0 */ s16 posModelID;
-    /* 0x2 */ s16 triggerColliderID;
+    /* 0x0 */ u16 posModelID;
+    /* 0x2 */ u16 triggerColliderID;
 } ShopItemLocation; // size = 0x4
 
 typedef struct StaticInventoryItem {
-    /* 0x0 */ s32 unk_00;
+    /* 0x0 */ u32 unk_00;
     /* 0x4 */ s32 price;
     /* 0x8 */ s32 unk_08;
 } StaticInventoryItem; // size = 0xC
