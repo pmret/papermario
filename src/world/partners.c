@@ -37,8 +37,9 @@ extern s16 D_8010CFCE;
 extern s32 D_802C0000;
 extern s32 D_8010CFB8;
 extern s32 D_8010CFBC;
+extern s32 D_8010CFCC;
 
-extern struct struct8015A578* D_8010CD38;
+extern struct Vec3f* D_8010CD38;
 
 typedef struct struct8010CD38{
     /* 0x00 */ s8 unk_00;
@@ -299,7 +300,37 @@ void remove_consumable(void) {
     sort_items();
 }
 
-INCLUDE_ASM(s32, "world/partners", func_800EA4B0);
+s32 func_800EA4B0(s32 arg0) {
+    s32 ret = 1;
+
+    if (arg0 >= 0) {
+        if ((arg0 & 0x4000) != 0) {
+            switch (get_entity_type(arg0)) {
+                case 0x7:
+                case 0x8:
+                case 0x9:
+                case 0xA:
+                case 0x2E:
+                case 0x2F:
+                case 0x32:
+                case 0x35:
+                case 0x36:
+                case 0x37:
+                case 0x38:
+                case 0x39:
+                case 0x3A:
+                case 0x3B:
+                case 0x3C:
+                    ret = 0;
+                    break;
+                default:
+                    ret = 1;
+                    break;
+            }
+        }
+    }
+    return ret;
+}
 
 s32 partner_is_idle(Npc* partner) {
     return gPartnerActionStatus.actionState.b[0] == 0;
@@ -309,7 +340,37 @@ s32 world_partner_can_player_pause_default(Npc* partner) {
     return TRUE;
 }
 
-INCLUDE_ASM(s32, "world/partners", func_800EA52C);
+s32 func_800EA52C(s32 arg0) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    u32 playerActionState = playerStatus->actionState;
+    s32 ret = 0;
+
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_800) {
+        return 0;
+    }
+
+    if (playerActionState < ACTION_STATE_JUMP) {
+        ret = 1;
+    }
+
+    if (arg0 == 9) {
+        if (playerActionState == ACTION_STATE_RIDE) {
+            ret = 1;
+        }
+    } else {
+        if (arg0 == 4) {
+            if ((playerActionState != ACTION_STATE_RIDE) && (playerActionState != ACTION_STATE_IDLE) && (playerActionState != ACTION_STATE_WALK)) {
+                if (playerActionState == ACTION_STATE_RUN) {
+                    ret = 1;
+                }
+            } else {
+                ret = 1;
+            }
+        }
+    }
+    
+    return ret;
+}
 
 s32 partner_is_flying(void) {
     return !wPartner->isFlying;
