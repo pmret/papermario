@@ -1507,7 +1507,7 @@ typedef struct ShopItemLocation {
 } ShopItemLocation; // size = 0x4
 
 typedef struct StaticInventoryItem {
-    /* 0x0 */ u32 unk_00;
+    /* 0x0 */ u32 itemID;
     /* 0x4 */ s32 price;
     /* 0x8 */ s32 unk_08;
 } StaticInventoryItem; // size = 0xC
