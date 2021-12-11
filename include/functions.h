@@ -47,7 +47,6 @@ void gravity_use_fall_parms(void);
 f32 get_clamped_angle_diff(f32, f32);
 s32 intro_logos_fade_out(s16 addAlpha);
 
-void _render_transition_stencil(s32, f32, s32);
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
 s32 create_entity(StaticEntityData*, s32, s32, s32, s32, ...);
@@ -305,7 +304,7 @@ ModelAnimator* get_animator_by_index(s32 arg0);
 void set_screen_overlay_params_front(u8, f32);
 void set_screen_overlay_params_back(u8, f32);
 void set_screen_overlay_alpha(s32, f32);
-void get_screen_overlay_params(s32, f32*, f32*);
+void get_screen_overlay_params(s32, u8*, f32*);
 void set_screen_overlay_color(s32, u8, u8, u8);
 void set_screen_overlay_center(s32, s32, s32, s32);
 s32 rand_int(s32);
@@ -537,7 +536,7 @@ void* load_asset_by_name(const char* assetName, u32* decompressedSize);
 
 void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
 s32 func_8011CFBC(void);
-s32 set_screen_overlay_center_worldpos(void);
+void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z);
 s32 mdl_get_next_texture_address(s32);
 void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);

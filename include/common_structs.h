@@ -1501,8 +1501,8 @@ typedef struct ShopOwner {
 } ShopOwner;
 
 typedef struct ShopItemLocation {
-    /* 0x0 */ s16 posModelID;
-    /* 0x2 */ s16 triggerColliderID;
+    /* 0x0 */ u16 posModelID;
+    /* 0x2 */ u16 triggerColliderID;
 } ShopItemLocation; // size = 0x4
 
 typedef struct StaticInventoryItem {
