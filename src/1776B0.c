@@ -25,7 +25,10 @@ extern s8 D_8029F2A4;
 extern s8 D_8029F2A5;
 extern s8 D_8029F2A6;
 extern s8 D_8029F2A7;
-extern s32 (*D_8029F2B4)[0];
+extern f32 D_8029F2A8;
+extern f32 D_8029F2AC;
+extern f32 D_8029F2B0;
+extern EvtSource* D_8029F2B4;
 
 s8 D_80280CE0 = 0;
 s32 D_80280CE4 = -1;
@@ -148,15 +151,278 @@ INCLUDE_ASM(s32, "1776B0", func_8024A990);
 
 INCLUDE_ASM(s32, "1776B0", func_8024AFE4);
 
-INCLUDE_ASM(s32, "1776B0", func_8024B5FC);
+ApiStatus func_8024B5FC(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[1];
+    f32 x, y, z;
+    f32 invAngle;
+    f32 angle;
 
-INCLUDE_ASM(s32, "1776B0", func_8024B9A0);
+    x = D_8029F270;
+    y = D_8029F274;
+    z = D_8029F278;
 
-INCLUDE_ASM(s32, "1776B0", func_8024BDA4);
+    if (isInitialCall) {
+        D_8029F28C = camera->unk_1E;
+        D_8029F294 = camera->unk_22;
+        D_8029F290 = camera->unk_24;
+        D_8029F298 = camera->unk_26 / 256;
+        D_8029F2A8 = camera->unk_54;
+        D_8029F2AC = camera->unk_58;
+        D_8029F2B0 = camera->unk_5C;
+        D_8029F2A0 = D_8029F29E;
+    }
 
-INCLUDE_ASM(s32, "1776B0", func_8024C180);
+    if (D_8029F2A5 == 0) {
+        angle = D_8029F29E;
+        angle /= D_8029F2A0;
+        angle = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - angle) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+    } else {
+        angle = D_8029F29E;
+        angle /= D_8029F2A0;
+    }
 
-INCLUDE_ASM(s32, "1776B0", func_8024C570);
+    invAngle = 1.0f - angle;
+    camera->unk_54 = (D_8029F2A8 * angle) + (x * invAngle);
+    camera->unk_58 = (D_8029F2AC * angle) + (y * invAngle);
+    camera->unk_5C = (D_8029F2B0 * angle) + (z * invAngle);
+    camera->unk_26 = ((D_8029F298 * angle) + (D_8029F286 * invAngle)) * 256.0f;
+    camera->unk_1E = (D_8029F28C * angle) + (D_8029F280 * invAngle);
+    camera->unk_24 = (D_8029F290 * angle) + (D_8029F282 * invAngle);
+    camera->unk_22 = (D_8029F294 * angle) + (D_8029F284 * invAngle);
+
+    if (D_8029F29E == 0) {
+        D_8029F29C = 1;
+    } else {
+        D_8029F29E--;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_8024B9A0(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[1];
+    f32 x, y, z;
+    f32 invAngle;
+    f32 angle;
+
+    if (isInitialCall) {
+        D_8029F270 = 0.0f;
+        D_8029F278 = 0.0f;
+        D_8029F282 = 0;
+        D_8029F284 = 8;
+        D_8029F286 = 0;
+        D_8029F274 = 60.0f;
+        if (D_8029F2A4 != 0) {
+            camera->unk_58 = 60.0f;
+            camera->unk_26 = 0;
+            camera->unk_24 = 0;
+            camera->unk_22 = 8;
+            camera->unk_54 = D_8029F270;
+            camera->unk_5C = D_8029F270;
+            camera->unk_1E = D_8029F280;
+        }
+        D_8029F28C = camera->unk_1E;
+        D_8029F294 = camera->unk_22;
+        D_8029F290 = camera->unk_24;
+        D_8029F298 = camera->unk_26 / 256;
+        D_8029F2A8 = camera->unk_54;
+        D_8029F2AC = camera->unk_58;
+        D_8029F2B0 = camera->unk_5C;
+        D_8029F2A0 = D_8029F29E;
+    }
+
+    x = D_8029F270;
+    y = D_8029F274;
+    z = D_8029F278;
+
+    if (D_8029F2A5 == 0) {
+        angle = D_8029F29E;
+        angle /= D_8029F2A0;
+        angle = 1.0f - sin_rad(sin_rad((1.0f - angle) * PI_S / 2) * PI_S / 2);
+    } else {
+        angle = D_8029F29E;
+        angle /= D_8029F2A0;
+    }
+
+    invAngle = 1.0f - angle;
+    camera->unk_54 = (D_8029F2A8 * angle) + (x * invAngle);
+    camera->unk_58 = (D_8029F2AC * angle) + (y * invAngle);
+    camera->unk_5C = (D_8029F2B0 * angle) + (z * invAngle);
+    camera->unk_26 = ((D_8029F298 * angle) + (D_8029F286 * invAngle)) * 256.0f;
+    camera->unk_1E = (D_8029F28C * angle) + (D_8029F280 * invAngle);
+    camera->unk_24 = (D_8029F290 * angle) + (D_8029F282 * invAngle);
+    camera->unk_22 = (D_8029F294 * angle) + (D_8029F284 * invAngle);
+
+    if (D_8029F29E == 0) {
+        D_8029F29C = 1;
+    } else {
+        D_8029F29E--;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_8024BDA4(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[1];
+    f32 x, y, z;
+    f32 invAngle;
+    f32 angle;
+
+    if (isInitialCall) {
+        D_8029F284 = 8;
+        D_8029F270 = 35.0f;
+        D_8029F278 = 0.0f;
+        D_8029F282 = 0;
+        D_8029F274 = 60.0f;
+        D_8029F28C = camera->unk_1E;
+        D_8029F294 = camera->unk_22;
+        D_8029F290 = camera->unk_24;
+        D_8029F298 = camera->unk_26 / 256;
+        D_8029F2A8 = camera->unk_54;
+        D_8029F2AC = camera->unk_58;
+        D_8029F2B0 = camera->unk_5C;
+        D_8029F2A0 = D_8029F29E;
+    }
+
+    x = D_8029F270;
+    y = D_8029F274;
+    z = D_8029F278;
+
+    if (D_8029F2A5 == 0) {
+        angle = D_8029F29E;
+        angle /= D_8029F2A0;
+        angle = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - angle) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+    } else {
+        angle = D_8029F29E;
+        angle /= D_8029F2A0;
+    }
+
+    invAngle = 1.0f - angle;
+    camera->unk_54 = (D_8029F2A8 * angle) + (x * invAngle);
+    camera->unk_58 = (D_8029F2AC * angle) + (y * invAngle);
+    camera->unk_5C = (D_8029F2B0 * angle) + (z * invAngle);
+    camera->unk_26 = ((D_8029F298 * angle) + (D_8029F286 * invAngle)) * 256.0f;
+    camera->unk_1E = (D_8029F28C * angle) + (D_8029F280 * invAngle);
+    camera->unk_24 = (D_8029F290 * angle) + (D_8029F282 * invAngle);
+    camera->unk_22 = (D_8029F294 * angle) + (D_8029F284 * invAngle);
+
+    if (D_8029F29E == 0) {
+        D_8029F29C = 1;
+    } else {
+        D_8029F29E--;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_8024C180(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[1];
+    f32 x, y, z;
+    f32 invAngle;
+    f32 angle;
+
+    if (isInitialCall) {
+        D_8029F270 = 35.0f;
+        D_8029F274 = camera->unk_58;
+        if (D_8029F274 < 60.0f) {
+            D_8029F274 = 60.0f;
+        }
+        D_8029F284 = 8;
+        D_8029F278 = 0.0f;
+        D_8029F282 = 0;
+        D_8029F28C = camera->unk_1E;
+        D_8029F294 = camera->unk_22;
+        D_8029F290 = camera->unk_24;
+        D_8029F298 = camera->unk_26 / 256;
+        D_8029F2A8 = camera->unk_54;
+        D_8029F2AC = camera->unk_58;
+        D_8029F2B0 = camera->unk_5C;
+        D_8029F2A0 = D_8029F29E;
+    }
+
+    x = D_8029F270;
+    y = D_8029F274;
+    z = D_8029F278;
+
+    if (D_8029F2A5 == 0) {
+        angle = D_8029F29E;
+        angle /= D_8029F2A0;
+        angle = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - angle) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+    } else {
+        angle = D_8029F29E;
+        angle /= D_8029F2A0;
+    }
+
+    invAngle = 1.0f - angle;
+    camera->unk_54 = (D_8029F2A8 * angle) + (x * invAngle);
+    camera->unk_58 = (D_8029F2AC * angle) + (y * invAngle);
+    camera->unk_5C = (D_8029F2B0 * angle) + (z * invAngle);
+    camera->unk_26 = ((D_8029F298 * angle) + (D_8029F286 * invAngle)) * 256.0f;
+    camera->unk_1E = (D_8029F28C * angle) + (D_8029F280 * invAngle);
+    camera->unk_24 = (D_8029F290 * angle) + (D_8029F282 * invAngle);
+    camera->unk_22 = (D_8029F294 * angle) + (D_8029F284 * invAngle);
+
+    if (D_8029F29E == 0) {
+        D_8029F29C = 1;
+    } else {
+        D_8029F29E--;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_8024C570(Evt* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[1];
+    f32 x, y, z;
+    f32 invAngle;
+    f32 angle;
+
+    if (isInitialCall) {
+        if (D_8029F2A4 != 0) {
+            D_8029F270 = camera->unk_54;
+            D_8029F274 = camera->unk_58;
+            D_8029F278 = camera->unk_5C;
+        }
+        D_8029F28C = camera->unk_1E;
+        D_8029F294 = camera->unk_22;
+        D_8029F290 = camera->unk_24;
+        D_8029F298 = camera->unk_26 / 256;
+        D_8029F2A8 = camera->unk_54;
+        D_8029F2AC = camera->unk_58;
+        D_8029F2B0 = camera->unk_5C;
+        D_8029F2A0 = D_8029F29E;
+    }
+
+    x = D_8029F270;
+    y = D_8029F274;
+    z = D_8029F278;
+
+    if (D_8029F2A5 == 0) {
+        angle = D_8029F29E;
+        angle /= D_8029F2A0;
+        angle = 1.0f - sin_rad(sin_rad(sin_rad((1.0f - angle) * PI_S / 2) * PI_S / 2) * PI_S / 2);
+    } else {
+        angle = D_8029F29E;
+        angle /= D_8029F2A0;
+    }
+
+    invAngle = 1.0f - angle;
+    camera->unk_54 = (D_8029F2A8 * angle) + (x * invAngle);
+    camera->unk_58 = (D_8029F2AC * angle) + (y * invAngle);
+    camera->unk_5C = (D_8029F2B0 * angle) + (z * invAngle);
+    camera->unk_26 = ((D_8029F298 * angle) + (D_8029F286 * invAngle)) * 256.0f;
+    camera->unk_1E = (D_8029F28C * angle) + (D_8029F280 * invAngle);
+    camera->unk_24 = (D_8029F290 * angle) + (D_8029F282 * invAngle);
+    camera->unk_22 = (D_8029F294 * angle) + (D_8029F284 * invAngle);
+
+    if (D_8029F29E == 0) {
+        D_8029F29C = 1;
+    } else {
+        D_8029F29E--;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_8024C944(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[1];

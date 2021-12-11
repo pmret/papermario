@@ -2,6 +2,7 @@
 #define _SCRIPT_API_MACROS_H_
 
 #include "evt.h"
+#include "stdlib/stdarg.h"
 
 /****** EXPRESSIONS ***************************************************************************************************/
 
@@ -125,10 +126,18 @@
 ///         Bytecode argv[argc];
 ///     }
 /// This macro expands to the given opcode and argv, with argc calculated automatically.
+
+#ifndef PERMUTER
 #define EVT_CMD(opcode, argv...) \
     opcode, \
     (sizeof((Bytecode[]){argv})/sizeof(Bytecode)), \
     ##argv
+#else
+#define EVT_CMD(opcode, argv...) \
+    opcode, \
+    0, \
+    ##argv
+#endif
 
 /// Signals the end of EVT script data. A script missing this will likely crash on load.
 #define EVT_END                                 EVT_CMD(EVT_OP_END),
