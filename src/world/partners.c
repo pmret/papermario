@@ -304,7 +304,7 @@ s32 func_800EA4B0(s32 arg0) {
     s32 ret = 1;
 
     if (arg0 >= 0) {
-        if ((arg0 & 0x4000) != 0) {
+        if (arg0 & 0x4000) {
             switch (get_entity_type(arg0)) {
                 case 0x7:
                 case 0x8:
@@ -357,15 +357,13 @@ s32 func_800EA52C(s32 arg0) {
         if (playerActionState == ACTION_STATE_RIDE) {
             ret = 1;
         }
-    } else {
-        if (arg0 == 4) {
-            if ((playerActionState != ACTION_STATE_RIDE) && (playerActionState != ACTION_STATE_IDLE) && (playerActionState != ACTION_STATE_WALK)) {
-                if (playerActionState == ACTION_STATE_RUN) {
-                    ret = 1;
-                }
-            } else {
+    } else if (arg0 == 4) {
+        if ((playerActionState != ACTION_STATE_RIDE) && (playerActionState != ACTION_STATE_IDLE) && (playerActionState != ACTION_STATE_WALK)) {
+            if (playerActionState == ACTION_STATE_RUN) {
                 ret = 1;
             }
+        } else {
+            ret = 1;
         }
     }
     

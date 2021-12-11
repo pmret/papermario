@@ -11,7 +11,6 @@ extern s32 D_80286520;
 extern s32 D_80286524;
 extern s32 D_80286530;
 extern s32 D_80286534;
-extern s8 D_8008F072[];
 extern Evt* D_8028652C;
 extern HudElementAnim* D_80080868;
 extern s32 D_8014F150[64];
@@ -214,7 +213,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
         D_80286534 = 0;
         bpCost = -1;
         if (shopItem->typeFlags & ITEM_TYPE_FLAGS_40) {
-            bpCost = D_8008F072[shopItem->moveID * 0x14];
+            bpCost = gMoveTable[shopItem->moveID].costBP;
         }
         script->functionTemp[1] = shop_owner_buy_dialog(0, shopItem->nameMsg, shopInventory->price, bpCost);
         script->functionTemp[0] = 0;
@@ -259,28 +258,28 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
             }
             break;
         case 1:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 D_80286534 = 0;
                 D_80286530 = shopInventory->itemID;
                 script->functionTemp[0] = 10;
             }
             break;
         case 4:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 D_80286534 = 5;
                 D_80286530 = shopInventory->itemID;
                 script->functionTemp[0] = 10;
             }
             break;
         case 5:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 D_80286534 = 1;
                 D_80286530 = shopInventory->itemID;
                 script->functionTemp[0] = 10;
             }
             break;
         case 6:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 D_80286534 = 3;
                 D_80286530 = shopInventory->itemID;
                 script->functionTemp[0] = 10;
@@ -303,7 +302,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
             break;
         case 11:
             shopOwnerScript = D_8028652C;
-            if (shopOwnerScript == 0 || does_script_exist(shopOwnerScript->id) == 0) {
+            if (shopOwnerScript == NULL || !does_script_exist(shopOwnerScript->id)) {
                 decrement_status_menu_disabled();
                 func_800E96C8();
                 return ApiStatus_DONE1;
@@ -436,7 +435,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 4:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = 41;
                 script->functionTemp[2] = 0;
                 D_80286538 = msg_get_printer_for_msg(0x1E0003, &script->functionTemp[2]);
@@ -494,7 +493,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             }
             break;
         case 201:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 shop_open_item_select_popup(0);
                 script->functionTemp[0] = 2;
             }
@@ -522,7 +521,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             }
             break;
         case 3:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = 31;
                 script->functionTemp[2] = 0;
                 D_80286538 = msg_get_printer_for_msg(0x1E0002, &script->functionTemp[2]);
@@ -549,7 +548,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             }
             break;
         case 32:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = 12;
                 script->functionTemp[2] = 0;
                 D_80286538 = msg_get_printer_for_msg(0x1E0004, &script->functionTemp[2]);
@@ -604,7 +603,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             }
             break;
         case 52:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = 53;
                 script->functionTemp[2] = 0;
                 D_80286538 = msg_get_printer_for_msg(0x1E0005, &script->functionTemp[2]);
@@ -622,7 +621,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             }
             break;
         case 701:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 shop_open_item_select_popup(2);
                 script->functionTemp[0] = 7;
             }
@@ -657,7 +656,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             }
             break;
         case 72:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = 73;
                 script->functionTemp[2] = 0;
                 D_80286538 = msg_get_printer_for_msg(0x1E0005, &script->functionTemp[2]);
@@ -677,7 +676,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
         case 0:
         case 9:
         case 42:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = 0;
                 script->functionTemp[0] = 10;
             }
@@ -690,8 +689,6 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             }
             open_status_menu_short();
             return ApiStatus_DONE1;
-        default:
-            break;
     }
     return ApiStatus_BLOCK;
 }
