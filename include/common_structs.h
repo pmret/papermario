@@ -557,9 +557,9 @@ typedef struct Camera {
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
-    /* 0x054 */ f32 unk_54;
-    /* 0x058 */ f32 unk_58;
-    /* 0x05C */ f32 unk_5C;
+    /* 0x054 */ f32 unk_54; // x-related
+    /* 0x058 */ f32 unk_58; // y-related
+    /* 0x05C */ f32 unk_5C; // z-related
     /* 0x060 */ Vec3f targetPos;
     /* 0x06C */ f32 currentYaw;
     /* 0x070 */ f32 unk_70;
