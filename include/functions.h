@@ -592,4 +592,24 @@ void clear_player_data(void);
 
 void enforce_hpfp_limits(void);
 
+void func_800E98EC(void);
+void func_800E9900(void);
+void show_coin_counter(void);
+s32 add_item(s32 itemID);
+s32 add_badge(s32 itemID);
+void func_800E96C8(void);
+void hide_popup_menu(void);
+void destroy_popup_menu(void);
+void func_800E98C4(void);
+s32 get_item_count(void);
+s32 get_stored_empty_count(void);
+s32 get_stored_count(void);
+s32 get_item_empty_count(void);
+void shop_open_item_select_popup(s32 mode);
+void hide_coin_counter(void);
+void set_message_msg(s32 msgID, s32 index);
+void set_message_value(s32 value, s32 index);
+s32 store_item(s32 itemID);
+void open_status_menu_short(void);
+
 #endif
