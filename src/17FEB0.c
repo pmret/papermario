@@ -126,7 +126,7 @@ s32 calc_item_damage_enemy(void) {
             }
         }
 
-        sp18 = (targetActorPart->partFlags3 & battleStatus->currentAttackElement) != 0;
+        sp18 = targetActorPart->partFlags3 & battleStatus->currentAttackElement; // TODO
         if (targetActorPart->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_80000)) {
             battleStatus->currentAttackElement &= ~DAMAGE_TYPE_IGNORE_DEFENSE;
         }
@@ -147,15 +147,17 @@ s32 calc_item_damage_enemy(void) {
 
         attackDamage -= targetActorDefense;
         targetActor->hpChangeCounter = 0;
-        if (attackDamage <= 0) {
+        if (attackDamage <= 0) { // TODO
             targetActor->hpChangeCounter = 0;
-            phi_fp = 2;
+            
             if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
+                phi_fp = 2;
+                dispatchEvent = 23;
                 sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
+            } else {
+                dispatchEvent = 23;
+                battleStatus->lastAttackDamage = 0;
             }
-
-            battleStatus->lastAttackDamage = 0;
-            dispatchEvent = 23;
         } else {
             targetActor->damageCounter += attackDamage;
             targetActor->hpChangeCounter -= attackDamage;
@@ -207,82 +209,81 @@ s32 calc_item_damage_enemy(void) {
         }
 
         if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-            if (battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS) {
-                dispatchEvent = 25;
-                if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ENCHANTED) {
-                    wasStatusInflicted = 1;
-                    dispatchEvent = 19;
-                }
-                if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_400000) {
-                    wasStatusInflicted = 1;
-                    dispatchEvent = 19;
-                }
-                if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_80000) {
-                    dispatchEvent = 29;
-                }
-                phi_fp = 0;
-                goto block_68;
-            }
-            goto block_80;
-        }
-block_68:
-        if (battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS) {
-            if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-                if (targetActor->attackBoost <= 0 && targetActor->defenseBoost <= 0) {
-                    if (targetActor->staticStatus == 0) {
-                        if (targetActor->transStatus != 0) {
-                            goto block_74;
-                        }
-                    } else {
-                        goto block_75;
-                    }
-                } else {
-block_74:
-block_75:
-                    targetActor->attackBoost = 0;
-                    targetActor->defenseBoost = 0;
-                    targetActor->isGlowing = 0;
-                    dispatchEvent = 10;
-                    if (targetActor->staticStatus != 0) {
-                        targetActor->staticStatus = 0;
-                        targetActor->staticDuration = 0;
-                        remove_status_static(targetActor->hudElementDataIndex);
-                    }
-                    if (targetActor->transStatus != 0) {
-                        targetActor->transStatus = 0;
-                        targetActor->transDuration = 0;
-                        remove_status_transparent(targetActor->hudElementDataIndex);
-                    }
-                    wasStatusInflicted = 1;
-                    phi_fp = 0;
-                }
+            if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS)) {
                 goto block_80;
             }
-        } else {
+
+            dispatchEvent = 25;
+            if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ENCHANTED) {
+                dispatchEvent = 19;
+                wasStatusInflicted = 1;
+            }
+
+            if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_400000) {
+                dispatchEvent = 19;
+                wasStatusInflicted = 1;
+            }
+
+            if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_80000) {
+                dispatchEvent = 29;
+            }
+            phi_fp = 0;
+        }
+
+        if (battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS && gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE && targetActor->attackBoost <= 0 && targetActor->defenseBoost <= 0 && targetActor->staticStatus == 0 && targetActor->transStatus == 0) {
+            targetActor->attackBoost = 0;
+            targetActor->defenseBoost = 0;
+            targetActor->isGlowing = 0;
+            dispatchEvent = 10;
+
+            if (targetActor->staticStatus != 0) {
+                targetActor->staticStatus = 0;
+                targetActor->staticDuration = 0;
+                remove_status_static(targetActor->hudElementDataIndex);
+            }
+
+            if (targetActor->transStatus != 0) {
+                targetActor->transStatus = 0;
+                targetActor->transDuration = 0;
+                remove_status_transparent(targetActor->hudElementDataIndex);
+            }
+
+            wasStatusInflicted = 1;
+            phi_fp = 0;
+        } 
 block_80:
+        if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
+            if (battleStatus->currentAttackElement & DAMAGE_TYPE_PEACH_BEAM) {
+                dispatchEvent = 25;
+                if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ENCHANTED) {
+                    dispatchEvent = 20;
+                    wasStatusInflicted = 1;
+                }
+                if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_80000) {
+                    dispatchEvent = 20;
+                    wasStatusInflicted = 1;
+                }
+            }
             if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-                if (battleStatus->currentAttackElement & DAMAGE_TYPE_PEACH_BEAM) {
-                    dispatchEvent = 25;
-                    if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ENCHANTED) {
-                        dispatchEvent = 20;
-                        wasStatusInflicted = 1;
+                if (battleStatus->currentAttackElement & DAMAGE_TYPE_SPIN_SMASH) {
+                    if (dispatchEvent == 10) {
+                        dispatchEvent = 11;
                     }
-                    if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_80000) {
-                        dispatchEvent = 20;
-                        wasStatusInflicted = 1;
+                    if (dispatchEvent == 32) {
+                        dispatchEvent = 33;
                     }
                 }
                 if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-                    if (battleStatus->currentAttackElement & DAMAGE_TYPE_SPIN_SMASH) {
+                    if (battleStatus->currentAttackElement & (DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POW) && targetActorPart->eventFlags & ACTOR_EVENT_FLAG_GROUNDABLE) {
                         if (dispatchEvent == 10) {
-                            dispatchEvent = 11;
+                            dispatchEvent = 12;
                         }
-                        if (dispatchEvent == 32) {
-                            dispatchEvent = 33;
+                        if (dispatchEvent == 25) {
+                            dispatchEvent = 12;
                         }
                     }
                     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-                        if (battleStatus->currentAttackElement & (DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POW) && targetActorPart->eventFlags & ACTOR_EVENT_FLAG_GROUNDABLE) {
+                        if (battleStatus->currentAttackElement & DAMAGE_TYPE_POW && targetActorPart->eventFlags & ACTOR_EVENT_FLAG_800000) {
                             if (dispatchEvent == 10) {
                                 dispatchEvent = 12;
                             }
@@ -291,68 +292,58 @@ block_80:
                             }
                         }
                         if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-                            if (battleStatus->currentAttackElement & DAMAGE_TYPE_POW && targetActorPart->eventFlags & ACTOR_EVENT_FLAG_800000) {
+                            if (battleStatus->currentAttackElement & (DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE) && targetActorPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE) {
                                 if (dispatchEvent == 10) {
-                                    dispatchEvent = 12;
+                                    dispatchEvent = 13;
                                 }
                                 if (dispatchEvent == 25) {
-                                    dispatchEvent = 12;
+                                    dispatchEvent = 13;
                                 }
                             }
                             if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-                                if (battleStatus->currentAttackElement & (DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE) && targetActorPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE) {
+                                if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
                                     if (dispatchEvent == 10) {
-                                        dispatchEvent = 13;
+                                        dispatchEvent = 14;
                                     }
-                                    if (dispatchEvent == 25) {
-                                        dispatchEvent = 13;
+                                    if (dispatchEvent == 32) {
+                                        dispatchEvent = 36;
                                     }
+                                    isFireDamage = 1;
                                 }
-                                if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-                                    if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
-                                        if (dispatchEvent == 10) {
-                                            dispatchEvent = 14;
-                                        }
-                                        if (dispatchEvent == 32) {
-                                            dispatchEvent = 36;
-                                        }
-                                        isFireDamage = 1;
+                                if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE && battleStatus->lastAttackDamage >= 0 && dispatchEvent != 32 && dispatchEvent != 33 && dispatchEvent != 34) {
+                                    if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && try_inflict_status(targetActor, STATUS_SHRINK, STATUS_SHRINK_TURN_MOD)) {
+                                        wasStatusInflicted = 1;
                                     }
-                                    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE && battleStatus->lastAttackDamage >= 0 && dispatchEvent != 32 && dispatchEvent != 33 && dispatchEvent != 34) {
-                                        if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && try_inflict_status(targetActor, STATUS_SHRINK, STATUS_SHRINK_TURN_MOD)) {
-                                            wasStatusInflicted = 1;
+                                    if (battleStatus->currentAttackStatus & STATUS_FLAG_POISON && try_inflict_status(targetActor, STATUS_POISON, STATUS_POISON_TURN_MOD)) {
+                                        wasStatusInflicted = 1;
+                                    }
+                                    if (battleStatus->currentAttackStatus & STATUS_FLAG_STONE && try_inflict_status(targetActor, STATUS_STONE, STATUS_STONE_TURN_MOD)) {
+                                        wasStatusInflicted = 1;
+                                    }
+                                    if (battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP && try_inflict_status(targetActor, STATUS_SLEEP, STATUS_SLEEP_TURN_MOD)) {
+                                        wasStatusInflicted = 1;
+                                    }
+                                    if (battleStatus->currentAttackStatus & STATUS_FLAG_STOP && try_inflict_status(targetActor, STATUS_STOP, STATUS_STOP_TURN_MOD)) {
+                                        wasStatusInflicted = 1;
+                                    }
+                                    if (battleStatus->currentAttackStatus & STATUS_FLAG_STATIC && try_inflict_status(targetActor, STATUS_STATIC, STATUS_STATIC_TURN_MOD)) {
+                                        wasStatusInflicted = 1;
+                                    }
+                                    if (battleStatus->currentAttackStatus & STATUS_FLAG_FEAR && try_inflict_status(targetActor, STATUS_FEAR, STATUS_FEAR_TURN_MOD)) {
+                                        wasStatusInflicted = 1;
+                                    }
+                                    if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(targetActor, STATUS_PARALYZE, STATUS_PARALYZE_TURN_MOD)) {
+                                        wasStatusInflicted = 1;
+                                    }
+                                    if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(targetActor, STATUS_DIZZY, STATUS_DIZZY_TURN_MOD)) {
+                                        wasStatusInflicted = 1;
+                                    }
+                                    if (wasStatusInflicted != 0) {
+                                        if (dispatchEvent == 23) {
+                                            dispatchEvent = 9;
                                         }
-                                        if (battleStatus->currentAttackStatus & STATUS_FLAG_POISON && try_inflict_status(targetActor, STATUS_POISON, STATUS_POISON_TURN_MOD)) {
-                                            wasStatusInflicted = 1;
-                                        }
-                                        if (battleStatus->currentAttackStatus & STATUS_FLAG_STONE && try_inflict_status(targetActor, STATUS_STONE, STATUS_STONE_TURN_MOD)) {
-                                            wasStatusInflicted = 1;
-                                        }
-                                        if (battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP && try_inflict_status(targetActor, STATUS_SLEEP, STATUS_SLEEP_TURN_MOD)) {
-                                            wasStatusInflicted = 1;
-                                        }
-                                        if (battleStatus->currentAttackStatus & STATUS_FLAG_STOP && try_inflict_status(targetActor, STATUS_STOP, STATUS_STOP_TURN_MOD)) {
-                                            wasStatusInflicted = 1;
-                                        }
-                                        if (battleStatus->currentAttackStatus & STATUS_FLAG_STATIC && try_inflict_status(targetActor, STATUS_STATIC, STATUS_STATIC_TURN_MOD)) {
-                                            wasStatusInflicted = 1;
-                                        }
-                                        if (battleStatus->currentAttackStatus & STATUS_FLAG_FEAR && try_inflict_status(targetActor, STATUS_FEAR, STATUS_FEAR_TURN_MOD)) {
-                                            wasStatusInflicted = 1;
-                                        }
-                                        if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(targetActor, STATUS_PARALYZE, STATUS_PARALYZE_TURN_MOD)) {
-                                            wasStatusInflicted = 1;
-                                        }
-                                        if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(targetActor, STATUS_DIZZY, STATUS_DIZZY_TURN_MOD)) {
-                                            wasStatusInflicted = 1;
-                                        }
-                                        if (wasStatusInflicted != 0) {
-                                            if (dispatchEvent == 23) {
-                                                dispatchEvent = 9;
-                                            }
-                                            if (dispatchEvent == 25) {
-                                                dispatchEvent = 10;
-                                            }
+                                        if (dispatchEvent == 25) {
+                                            dispatchEvent = 10;
                                         }
                                     }
                                 }
@@ -365,14 +356,15 @@ block_80:
 
         baseStatusChance = (battleStatus->statusChance * targetActor->staticActorData->baseStatusChance) / 100;
         if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE && battleStatus->currentAttackElement & DAMAGE_TYPE_FEAR) {
-            dispatchEvent = 25;
+            //dispatchEvent = 25;
             if (rand_int(99) < baseStatusChance) {
+                dispatchEvent = 25;
                 phi_fp = 2;
                 if (targetActor->debuff - 3 >= 6) {
                     phi_fp = 2;
                     if (!(targetActor->flags & ACTOR_FLAG_400)) {
                         sp1C = 1;
-                        gBattleStatus.flags1 |= (BS_FLAGS1_1 | BS_FLAGS1_8 | BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE);
+                        gBattleStatus.flags1 |= (BS_FLAGS1_1 | BS_FLAGS1_8 | BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40);
                         sfx_play_sound_at_position(SOUND_UNKNOWN_231, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
                         gBattleStatus.flags1 |= BS_FLAGS1_40;
                         wasStatusInflicted = 1;
@@ -398,7 +390,7 @@ block_80:
         }
 
         dispatch_event_actor(targetActor, dispatchEvent);
-        if (currentTargetID & 0x700 == 0x100) {
+        if (currentTargetID & 0x700 == 0x100) { // TODO
             if (battleStatus->lastAttackDamage > 0 && gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
                 inflict_status(targetActor, 13, battleStatus->lastAttackDamage);
             }
@@ -436,18 +428,21 @@ block_80:
             }
 
             if (battleStatus->lastAttackDamage <= 0) {
-                goto block_204;
+                if (wasStatusInflicted) {
+                    if (targetActorPart->flags & ACTOR_FLAG_2000) {
+                        sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
+                    }
+                }
             }
-            goto block_205;
-        }
-block_204:
-        if (wasStatusInflicted) {
-block_205:
             if (targetActorPart->flags & ACTOR_FLAG_2000) {
-                goto block_206;
+                sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
+            }
+        }
+        if (wasStatusInflicted) {
+            if (targetActorPart->flags & ACTOR_FLAG_2000) {
+                sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
             }
         } else {
-block_206:
             sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
         }
 
