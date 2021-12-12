@@ -61,7 +61,7 @@ s32 calc_item_damage_enemy(void) {
     s32 attackDamage;
     s32 targetActorDefense;
     s32 dispatchEvent;
-    s32 sp18;
+    u32 sp18;
     s32 phi_a0_2;
     s32 phi_fp;
     
@@ -77,12 +77,15 @@ s32 calc_item_damage_enemy(void) {
     }
 
     targetActorPart = get_actor_part(targetActor, currentTargetPartID);
-    if (targetActorPart != NULL) {
+    currentTargetID &= 0x700;
+    if (targetActorPart == NULL) {
+        while (1);
+    } else {
         targetActor->lastDamageTaken = 0;
         if (gBattleStatus.flags1 & BS_FLAGS1_80000) {
-            actorState = &partnerActor->state;
-        } else {
             actorState = &playerActor->state;
+        } else {
+            actorState = &partnerActor->state;
         }
 
         phi_a0_2 = 0;
@@ -109,7 +112,7 @@ s32 calc_item_damage_enemy(void) {
             if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
                 return 6;
             }
-            if (targetActor->transStatus == 14 || targetActorPart->eventFlags & ACTOR_EVENT_FLAG_800 && battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE) {
+            if (targetActor->transStatus == 14 || targetActorPart->eventFlags & ACTOR_EVENT_FLAG_800 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)) {
                 return 6;
             }
         }
@@ -126,7 +129,7 @@ s32 calc_item_damage_enemy(void) {
             }
         }
 
-        sp18 = targetActorPart->partFlags3 & battleStatus->currentAttackElement; // TODO
+        sp18 = (targetActorPart->partFlags3 & battleStatus->currentAttackElement) != 0; // TODO 3a8
         if (targetActorPart->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_80000)) {
             battleStatus->currentAttackElement &= ~DAMAGE_TYPE_IGNORE_DEFENSE;
         }
@@ -147,7 +150,7 @@ s32 calc_item_damage_enemy(void) {
 
         attackDamage -= targetActorDefense;
         targetActor->hpChangeCounter = 0;
-        if (attackDamage <= 0) { // TODO
+        if (attackDamage <= 0) { // TODO 434
             targetActor->hpChangeCounter = 0;
             
             if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
@@ -155,8 +158,8 @@ s32 calc_item_damage_enemy(void) {
                 dispatchEvent = 23;
                 sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
             } else {
-                dispatchEvent = 23;
                 battleStatus->lastAttackDamage = 0;
+                dispatchEvent = 23;
             }
         } else {
             targetActor->damageCounter += attackDamage;
@@ -234,7 +237,7 @@ s32 calc_item_damage_enemy(void) {
             targetActor->attackBoost = 0;
             targetActor->defenseBoost = 0;
             targetActor->isGlowing = 0;
-            dispatchEvent = 10;
+            dispatchEvent = 10;  // TODO 660
 
             if (targetActor->staticStatus != 0) {
                 targetActor->staticStatus = 0;
@@ -354,7 +357,7 @@ block_80:
             }
         }
 
-        baseStatusChance = (battleStatus->statusChance * targetActor->staticActorData->baseStatusChance) / 100;
+        baseStatusChance = (battleStatus->statusChance * targetActor->staticActorData->baseStatusChance) / 100;   // TODO a70
         if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE && battleStatus->currentAttackElement & DAMAGE_TYPE_FEAR) {
             //dispatchEvent = 25;
             if (rand_int(99) < baseStatusChance) {
@@ -366,7 +369,6 @@ block_80:
                         sp1C = 1;
                         gBattleStatus.flags1 |= (BS_FLAGS1_1 | BS_FLAGS1_8 | BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40);
                         sfx_play_sound_at_position(SOUND_UNKNOWN_231, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
-                        gBattleStatus.flags1 |= BS_FLAGS1_40;
                         wasStatusInflicted = 1;
                         dispatchEvent = 57;
                         phi_fp = 0;
@@ -377,7 +379,7 @@ block_80:
             }
         }
 
-        battleStatus->wasStatusInflicted = wasStatusInflicted;
+        battleStatus->wasStatusInflicted = wasStatusInflicted;  // TODO b8c
         if (sp1C != 0 && (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200) || gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200) && gBattleStatus.flags1 & BS_FLAGS1_80 && battleStatus->lastAttackDamage > 0) && (sfx_play_sound_at_position(0x231, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z), battleStatus->lastAttackDamage > 0) || battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS && sp1C != 0) {
             if (!(gBattleStatus.flags1 & BS_FLAGS1_40)) {
                 phi_a0_2 = 3;
@@ -390,7 +392,7 @@ block_80:
         }
 
         dispatch_event_actor(targetActor, dispatchEvent);
-        if (currentTargetID & 0x700 == 0x100) { // TODO
+        if (currentTargetID == 0x100) { 
             if (battleStatus->lastAttackDamage > 0 && gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
                 inflict_status(targetActor, 13, battleStatus->lastAttackDamage);
             }
@@ -426,23 +428,8 @@ block_80:
                     sfx_play_sound_at_position(SOUND_E9, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
                 }
             }
-
-            if (battleStatus->lastAttackDamage <= 0) {
-                if (wasStatusInflicted) {
-                    if (targetActorPart->flags & ACTOR_FLAG_2000) {
-                        sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
-                    }
-                }
-            }
-            if (targetActorPart->flags & ACTOR_FLAG_2000) {
-                sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
-            }
         }
-        if (wasStatusInflicted) {
-            if (targetActorPart->flags & ACTOR_FLAG_2000) {
-                sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
-            }
-        } else {
+        if (battleStatus->lastAttackDamage <= 0 && wasStatusInflicted && targetActorPart->flags & ACTOR_FLAG_2000) {
             sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
         }
 
@@ -519,8 +506,6 @@ block_80:
         }
         return phi_fp;
     }
-loop_5:
-    goto loop_5;
 }
 
 ApiStatus ItemDamageEnemy(Evt* script, s32 isInitialCall) {
