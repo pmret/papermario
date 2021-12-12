@@ -273,7 +273,7 @@ EvtSource N(802424E8) = SCRIPT({
         GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         GetNpcPos(NPC_SELF, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
         if (EVT_VAR(3) != EVT_VAR(6)) {
-            PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_20F6, 65538);
+            PlaySoundAtNpc(NPC_SELF, SOUND_20F6, 65538);
             GetDist2D(EVT_VAR(10), EVT_VAR(0), EVT_VAR(2), EVT_VAR(3), EVT_VAR(5));
             match EVT_VAR(10) {
                 < 200 {

@@ -50,7 +50,7 @@ void func_802B6000_E291A0(void) {
             gCameras[0].targetPos.z = playerStatus->position.z;
             tempCollision = player_check_collision_below(D_802B62D0, &sp10);
             if (sp10 >= 0) {
-                sfx_play_sound_at_player(SOUND_UNKNOWN_162, 0);
+                sfx_play_sound_at_player(SOUND_162, 0);
                 suggest_player_anim_setUnkFlag(0x80003);
                 playerStatus->position.y = tempCollision;
                 D_802B62E0 = 0xA;

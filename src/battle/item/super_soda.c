@@ -167,7 +167,7 @@ EvtSource N(main) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(GetOwnerTarget, EVT_VAR(0), EVT_VAR(1))
     EVT_IF_EQ(EVT_VAR(0), 0)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_2095)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_DRINK)
         EVT_WAIT_FRAMES(45)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))

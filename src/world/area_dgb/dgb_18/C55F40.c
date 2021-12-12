@@ -144,7 +144,7 @@ EvtSource N(idle_80241654) = SCRIPT({
     FadeOutMusic(0, 500);
     loop 3 {
         SetPlayerAnimation(ANIM_8001E);
-        PlaySoundAt(SOUND_UNKNOWN_20F6, 0, 382, 0, 218);
+        PlaySoundAt(SOUND_20F6, 0, 382, 0, 218);
         ShakeCam(0, 0, 5, 1.0);
         sleep 20;
         SetPlayerAnimation(ANIM_10002);
@@ -179,7 +179,7 @@ EvtSource N(idle_80241654) = SCRIPT({
     }
     spawn {
         loop 3 {
-            PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_20F6, 0);
+            PlaySoundAtNpc(NPC_SELF, SOUND_20F6, 0);
             ShakeCam(0, 0, 5, 0.30078125);
             sleep 5;
         }
@@ -213,14 +213,14 @@ EvtSource N(idle_80241654) = SCRIPT({
             if (EVT_VAR(0) == 1) {
                 break loop;
             }
-            PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_20F6, 0);
+            PlaySoundAtNpc(NPC_SELF, SOUND_20F6, 0);
             ShakeCam(0, 0, 5, 0.30078125);
             sleep 9;
             GetSelfVar(0, EVT_VAR(0));
             if (EVT_VAR(0) == 1) {
                 break loop;
             }
-            PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_20F6, 0);
+            PlaySoundAtNpc(NPC_SELF, SOUND_20F6, 0);
             ShakeCam(0, 0, 2, 0.150390625);
             sleep 12;
         }
@@ -310,7 +310,7 @@ EvtSource N(idle_80241654) = SCRIPT({
     sleep 15;
     SetNpcAnimation(NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_24);
     sleep 30;
-    PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2038, 0);
+    PlaySoundAtNpc(NPC_SELF, SOUND_2038, 0);
     sleep 30;
     spawn {
         SetSelfVar(1, 0);
@@ -319,12 +319,12 @@ EvtSource N(idle_80241654) = SCRIPT({
             if (EVT_VAR(0) == 1) {
                 break loop;
             }
-            PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2039, 0);
+            PlaySoundAtNpc(NPC_SELF, SOUND_2039, 0);
             RandInt(10, EVT_VAR(1));
             EVT_VAR(1) += 15;
             ShowSleepBubble(0, 0, 0, 2, 628, 121, 127, EVT_VAR(1), EVT_VAR(0));
             sleep 48;
-            PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2038, 0);
+            PlaySoundAtNpc(NPC_SELF, SOUND_2038, 0);
             RandInt(10, EVT_VAR(1));
             EVT_VAR(1) += 10;
             func_802D8248(EVT_VAR(0), EVT_VAR(1));
@@ -351,7 +351,7 @@ EvtSource N(idle_80242494) = SCRIPT({
     sleep 15;
     SetNpcAnimation(NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_24);
     sleep 30;
-    PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2038, 0);
+    PlaySoundAtNpc(NPC_SELF, SOUND_2038, 0);
     sleep 30;
     spawn {
         SetSelfVar(1, 0);
@@ -360,12 +360,12 @@ EvtSource N(idle_80242494) = SCRIPT({
             if (EVT_VAR(0) == 1) {
                 break loop;
             }
-            PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2039, 0);
+            PlaySoundAtNpc(NPC_SELF, SOUND_2039, 0);
             RandInt(10, EVT_VAR(1));
             EVT_VAR(1) += 15;
             ShowSleepBubble(0, 0, 0, 2, 628, 121, 127, EVT_VAR(1), EVT_VAR(0));
             sleep 48;
-            PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2038, 0);
+            PlaySoundAtNpc(NPC_SELF, SOUND_2038, 0);
             RandInt(10, EVT_VAR(1));
             EVT_VAR(1) += 10;
             func_802D8248(EVT_VAR(0), EVT_VAR(1));
@@ -376,13 +376,13 @@ EvtSource N(idle_80242494) = SCRIPT({
 
 EvtSource N(npcAI_802426B0) = SCRIPT({
     group 11;
-    PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2039, 0);
+    PlaySoundAtNpc(NPC_SELF, SOUND_2039, 0);
     ShowSleepBubble(0, 0, 50, 2, 552, 111, 128, 30, EVT_VAR(0));
     sleep 360;
     func_802D8248(EVT_VAR(0), 20);
     SetNpcVar(-1, 1, 2);
     sleep 20;
-    PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2F1, 0);
+    PlaySoundAtNpc(NPC_SELF, SOUND_2F1, 0);
     SetNpcAnimation(NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_19);
     sleep 30;
     spawn {

@@ -429,10 +429,10 @@ EvtSource N(npcAI_80244D7C) = SCRIPT({
     spawn N(80244D08);
     spawn {
         loop {
-            PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_20F6, 4194304);
+            PlaySoundAtNpc(NPC_SELF, SOUND_20F6, 4194304);
             ShakeCam(0, 0, 5, 2.0);
             sleep 5;
-            PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_20F6, 4194304);
+            PlaySoundAtNpc(NPC_SELF, SOUND_20F6, 4194304);
             ShakeCam(0, 0, 2, 1.0);
             sleep 8;
         }

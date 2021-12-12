@@ -428,10 +428,10 @@ void update_encounters_pre_battle(void) {
                     currentEncounter->unk_A2 = 3;
                 }
 
-                sfx_stop_sound(SOUND_UNKNOWN_2111);
-                sfx_stop_sound(SOUND_UNKNOWN_2112);
-                sfx_stop_sound(SOUND_UNKNOWN_2113);
-                sfx_stop_sound(SOUND_UNKNOWN_2114);
+                sfx_stop_sound(SOUND_2111);
+                sfx_stop_sound(SOUND_2112);
+                sfx_stop_sound(SOUND_2113);
+                sfx_stop_sound(SOUND_2114);
                 set_battle_formation(0);
                 set_battle_stage(encounter->stage);
                 load_battle(encounter->battle);

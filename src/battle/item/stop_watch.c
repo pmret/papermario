@@ -32,7 +32,7 @@ EvtSource N(main) = {
     EVT_END_THREAD
     EVT_CALL(N(FadeBackgroundToBlack))
     EVT_CALL(PlayEffect, 0x62, 0, 0, 0, 0, EVT_FIXED(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_246)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_246)
     EVT_WAIT_FRAMES(200)
     EVT_CALL(UseBattleCamPreset, 3)
     EVT_CALL(MoveBattleCamOver, 20)

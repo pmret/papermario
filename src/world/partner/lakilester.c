@@ -381,10 +381,10 @@ void func_802BDDD8_321928(Npc* npc) {
 
             if (D_802BFF20 < 0x3C) {
                 phi_a3 = update_lerp(0,  0.0f, 100.0f, D_802BFF20, 60);
-                sfx_play_sound_with_params(SOUND_UNKNOWN_295, 0, 0x40, phi_a3);
+                sfx_play_sound_with_params(SOUND_295, 0, 0x40, phi_a3);
             } else {
                 phi_a3 = update_lerp(0, 100.0f, 0.0f, D_802BFF20 - 60, 60);
-                sfx_play_sound_with_params(SOUND_UNKNOWN_295, 0, 0x40, phi_a3);
+                sfx_play_sound_with_params(SOUND_295, 0, 0x40, phi_a3);
                 
             }
         }

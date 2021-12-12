@@ -333,7 +333,7 @@ EvtSource N(interact_802412BC) = SCRIPT({
             PanToTarget(0, 0, 1);
             WaitForCam(0, 1.0);
             SetNpcAnimation(NPC_DAYZEE, NPC_ANIM_dayzee_Palette_00_Anim_D);
-            PlaySoundAtNpc(NPC_DAYZEE, SOUND_UNKNOWN_262, 0);
+            PlaySoundAtNpc(NPC_DAYZEE, SOUND_262, 0);
             ShowEmote(1, EMOTE_EXCLAMATION, 45, 30, 1, 0, 0, 0, 0);
             sleep 15;
             SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0056));
@@ -512,7 +512,7 @@ EvtSource N(idle_8024219C) = SCRIPT({
                     } else {
                         EVT_VAR(1) = 10;
                     }
-                    PlaySoundAtNpc(NPC_MONTY_MOLE0, SOUND_UNKNOWN_262, 0);
+                    PlaySoundAtNpc(NPC_MONTY_MOLE0, SOUND_262, 0);
                     ShowEmote(2, EMOTE_EXCLAMATION, 0, EVT_VAR(1), 1, 0, 0, 0, 0);
                     sleep EVT_VAR(1);
                     SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
@@ -588,7 +588,7 @@ EvtSource N(idle_80242618) = SCRIPT({
                     } else {
                         EVT_VAR(1) = 10;
                     }
-                    PlaySoundAtNpc(NPC_MONTY_MOLE1, SOUND_UNKNOWN_262, 0);
+                    PlaySoundAtNpc(NPC_MONTY_MOLE1, SOUND_262, 0);
                     ShowEmote(3, EMOTE_EXCLAMATION, 0, EVT_VAR(1), 1, 0, 0, 0, 0);
                     sleep EVT_VAR(1);
                     SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
@@ -664,7 +664,7 @@ EvtSource N(idle_80242A94) = SCRIPT({
                     } else {
                         EVT_VAR(1) = 10;
                     }
-                    PlaySoundAtNpc(NPC_MONTY_MOLE2, SOUND_UNKNOWN_262, 0);
+                    PlaySoundAtNpc(NPC_MONTY_MOLE2, SOUND_262, 0);
                     ShowEmote(4, EMOTE_EXCLAMATION, 0, EVT_VAR(1), 1, 0, 0, 0, 0);
                     sleep EVT_VAR(1);
                     SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
@@ -740,7 +740,7 @@ EvtSource N(idle_80242F10) = SCRIPT({
                     } else {
                         EVT_VAR(1) = 10;
                     }
-                    PlaySoundAtNpc(NPC_MONTY_MOLE3, SOUND_UNKNOWN_262, 0);
+                    PlaySoundAtNpc(NPC_MONTY_MOLE3, SOUND_262, 0);
                     ShowEmote(5, EMOTE_EXCLAMATION, 0, EVT_VAR(1), 1, 0, 0, 0, 0);
                     sleep EVT_VAR(1);
                     SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
