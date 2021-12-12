@@ -602,4 +602,7 @@ void clear_player_data(void);
 
 void enforce_hpfp_limits(void);
 
+void func_8024EFE0(f32 x, f32 y, f32 z, s32 a, s32 b, s32 c);
+void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a);
+
 #endif
