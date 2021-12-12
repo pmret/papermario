@@ -420,7 +420,7 @@ typedef struct StaticEntityData {
 
 typedef struct MusicSettings {
     /* 0x00 */ u16 flags;
-    /* 0x02 */ u16 unk_02;
+    /* 0x02 */ s16 unk_02;
     /* 0x04 */ s32 fadeOutTime;
     /* 0x08 */ s32 fadeInTime;
     /* 0x0C */ s16 unk_0C;
