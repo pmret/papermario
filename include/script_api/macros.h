@@ -133,6 +133,7 @@
     (sizeof((Bytecode[]){argv})/sizeof(Bytecode)), \
     ##argv
 #else
+// This definition that passes in 0 for the number of args is used for pycparser since it can't handle varargs
 #define EVT_CMD(opcode, argv...) \
     opcode, \
     0, \

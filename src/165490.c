@@ -112,7 +112,7 @@ void filemenu_draw_contents_option_center(
             msgIdx = 10;
             xOffset = 18;
             yOffset = 0;
-            if ((menu->unk_00.s & 0xFFFF00) == 0x10200) {
+            if ((menu->unk_00.s & 0xFFFF00) == 0x010200) {
                 filemenu_set_cursor_goal_pos(54, baseX + 8, baseY + 8);
             }
             break;
