@@ -2261,7 +2261,7 @@ typedef struct PopupMessage {
 typedef struct unkPartnerStruct {
     /* 0x000 */ s32 unk_00;
     /* 0x004 */ s32 unk_04;
-    /* 0x008 */ s32 unk_08;
+    /* 0x008 */ s32 flags;
     /* 0x00c */ f32 unk_0C;
     /* 0x010 */ f32 unk_10;
     /* 0x014 */ f32 unk_14;

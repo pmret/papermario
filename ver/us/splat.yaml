@@ -2112,7 +2112,7 @@ segments:
     overlay: True
     subsegments:
     - [0x317e50, c, bombette]
-    - [0x3195d0, data]
+    - [0x3195d0]
   - type: code
     dir: world/partner
     name: world_partner_parakarry

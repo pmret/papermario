@@ -2,30 +2,31 @@
 #include "goombaria.h"
 #include "../partners.h"
 
-void world_goombaria_init(Npc* partner) {
-    partner->collisionHeight = 24;
-    partner->collisionRadius = 20;
+void world_goombaria_init(Npc* goombaria) {
+    goombaria->collisionHeight = 24;
+    goombaria->collisionRadius = 20;
 }
 
 ApiStatus GoombariaTakeOut(Evt* script, s32 isInitialCall) {
-    Npc* owner = script->owner2.npc;
+    Npc* goombaria = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_get_out(owner);
+        partner_init_get_out(goombaria);
     }
-    return partner_get_out(owner) != 0;
+
+    return partner_get_out(goombaria) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 ApiStatus GoombariaUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    Npc* owner = script->owner2.npc;
+    Npc* goombaria = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_walking_enable(owner, TRUE);
+        partner_walking_enable(goombaria, TRUE);
     }
 
-    partner_walking_update_player_tracking(owner);
-    partner_walking_update_motion(owner);
+    partner_walking_update_player_tracking(goombaria);
+    partner_walking_update_motion(goombaria);
     playerData->unk_2F4[PARTNER_GOOMBARIA]++;
 
     return ApiStatus_BLOCK;
@@ -36,12 +37,13 @@ ApiStatus GoombariaUseAbility(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus GoombariaPutAway(Evt* script, s32 isInitialCall) {
-    Npc* owner = script->owner2.npc;
+    Npc* goombaria = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_put_away(owner);
+        partner_init_put_away(goombaria);
     }
-    return partner_put_away(owner) != 0;
+
+    return partner_put_away(goombaria) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 EvtSource world_goombaria_take_out = {
