@@ -24,6 +24,7 @@ NUCallBackList nuContCallBack = {
     0,
 };
 
+// BSS
 extern OSMesg nuContWaitMesgBuf;
 extern OSMesg nuContDataMutexBuf;
 extern OSMesgQueue nuContDataMutexQ;

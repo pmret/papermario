@@ -139,7 +139,7 @@ s32 func_8004B9E4(SoundManager* manager, s32 arg1) {
                 manager->unk_8C = a1;
                 manager->soundData->unk_40[1].unk_00 = 6;
                 manager->soundData->unk_40[1].unk_01 = 1;
-                D_8007F1F8 = manager->unk_64[a1];
+                D_8007F1F8[0] = manager->unk_64[a1];
             }
             manager->unk_8D = manager->unk_84[a1];
         } else {

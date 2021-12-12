@@ -18589,7 +18589,6 @@ D_800B4314 = 0x800B4314; // type:data
 D_800B4318 = 0x800B4318; // type:data
 gOsPiMessageQueue = 0x800B4380; // type:data
 gEffectInstances = 0x800B4398; // type:data
-D_800B4514 = 0x800B4514; // type:data
 CartRomHandle = 0x800B4518; // type:data
 D_800B451C = 0x800B451C; // type:data
 D_800B451D = 0x800B451D; // type:data
