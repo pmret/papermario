@@ -40,7 +40,8 @@ s32 calc_item_check_hit(void) {
     return HIT_RESULT_HIT;
 }
 
-//INCLUDE_ASM(s32, "17FEB0", calc_item_damage_enemy);
+// Almost matching besides the parts that are marked as "TODO"
+#ifdef NON_MATCHING
 s32 calc_item_damage_enemy(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
@@ -507,6 +508,9 @@ block_80:
         return phi_fp;
     }
 }
+#else
+INCLUDE_ASM(s32, "17FEB0", calc_item_damage_enemy);
+#endif
 
 ApiStatus ItemDamageEnemy(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
