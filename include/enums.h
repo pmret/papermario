@@ -505,7 +505,7 @@ enum SoundIDs {
     SOUND_E3                        = 0x000000E3,
     SOUND_E7                        = 0x000000E7,
     SOUND_E9                        = 0x000000E9,
-    SOUND_EA                        = 0x000000EA,
+    SOUND_FIRE                      = 0x000000EA,
     SOUND_FREEZE                    = 0x000000EB,
     SOUND_10C                       = 0x0000010C,
     SOUND_10D                       = 0x0000010D,
@@ -576,7 +576,7 @@ enum SoundIDs {
     SOUND_UNKNOWN_377               = 0x00000377,
     SOUND_UNKNOWN_379               = 0x00000379,
     SOUND_37A                       = 0x0000037A,
-    SOUND_37B                       = 0x0000037B,
+    SOUND_ELECTRIC                  = 0x0000037B,
     SOUND_GENERAL_WHISTLE           = 0x00000395,
     SOUND_OPEN_SHELL                = 0x000003D4,
     SOUND_JUMP_3E2                  = 0x000003E2,
@@ -1513,6 +1513,7 @@ enum DamageTypes {
     DAMAGE_TYPE_POW                        = 0x00000400,
     DAMAGE_TYPE_QUAKE                      = 0x00000800,
     DAMAGE_TYPE_FEAR                       = 0x00001000,
+    DAMAGE_TYPE_2000                       = 0x00002000,
     DAMAGE_TYPE_4000                       = 0x00004000,
     DAMAGE_TYPE_AIR_LIFT                   = 0x00008000,
     DAMAGE_TYPE_SPINY_SURGE                = 0x00010000,
@@ -1618,8 +1619,8 @@ enum NpcFlags {
     NPC_FLAG_ENABLE_HIT_SCRIPT = 0x00000008,
     NPC_FLAG_HAS_SHADOW        = 0x00000010, ///< Set by default and by enable_npc_shadow
     NPC_FLAG_NO_AI             = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
-    NPC_FLAG_80                = 0x00000080, // TODO
     NPC_FLAG_40                = 0x00000040,
+    NPC_FLAG_80                = 0x00000080, // TODO
     NPC_FLAG_100               = 0x00000100, // TODO
     NPC_FLAG_GRAVITY           = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
     NPC_FLAG_LOCK_ANIMS        = 0x00000400, ///< Do not allow scripts to change animation
@@ -1650,9 +1651,18 @@ enum NpcFlags {
 enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_JUMPING                          = 0x00000002,
     PLAYER_STATUS_FLAGS_FALLING                          = 0x00000004,
+    PLAYER_STATUS_FLAGS_100                              = 0x00000100,
+    PLAYER_STATUS_FLAGS_200                              = 0x00000200,
+    PLAYER_STATUS_FLAGS_400                              = 0x00000400,
+    PLAYER_STATUS_FLAGS_800                              = 0x00000800,
+    PLAYER_STATUS_FLAGS_1000                             = 0x00001000,
     PLAYER_STATUS_FLAGS_INPUT_DISABLED                   = 0x00002000,
+    PLAYER_STATUS_FLAGS_4000                             = 0x00004000,
+    PLAYER_STATUS_FLAGS_8000                             = 0x00008000,
+    PLAYER_STATUS_FLAGS_40000                            = 0x00040000,
     PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
     PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
+    PLAYER_STATUS_FLAGS_10000000                         = 0x10000000,
     PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED             = 0x80000000,
 };
 
@@ -2210,6 +2220,7 @@ enum DebuffTypes {
 enum GlobalOverrides {
     GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD                       = 0x00000002,
     GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL                  = 0x00000020,
+    GLOBAL_OVERRIDES_40                                         = 0x00000040,
     GLOBAL_OVERRIDES_DISABLE_BATTLES                            = 0x00000100,
     GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS               = 0x00010000,
     GLOBAL_OVERRIDES_DISABLE_MENUS                              = 0x00040000,

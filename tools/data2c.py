@@ -17,7 +17,6 @@ def find_dir(query):
 
 parser = argparse.ArgumentParser(description="Tool to translate .data.s files into .c compatible data arrays")
 
-
 for root, dirs, files in os.walk(data_dir):
     for f in files:
         file_path = os.fspath(os.path.join(root, f))

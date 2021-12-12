@@ -43,6 +43,7 @@ s32 partner_init_get_out(Npc*);
 s32 partner_get_out(Npc*);
 s32 partner_init_put_away(Npc* partner);
 s32 partner_put_away(Npc* partner);
+s32 partner_use_ability(void);
 void partner_do_player_collision(Npc* partner);
 void partner_walking_follow_player(Npc* partner);
 s32 func_800EA52C(s32);

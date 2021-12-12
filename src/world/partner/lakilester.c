@@ -20,7 +20,6 @@ extern f32 D_802BFF28;
 extern s16 D_8010C97A;
 
 s32 func_802BD7DC(void);
-s32 partner_use_ability(void);
 f32 get_player_normal_pitch(void);
 void partner_kill_ability_script(void);
 f64 fabs(f64 val);
@@ -29,26 +28,26 @@ extern f64 D_802BFEF8;
 
 void func_802BD100_320C50(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Npc* npc = get_npc_unsafe(NPC_PARTNER);
+    Npc* lakilester = get_npc_unsafe(NPC_PARTNER);
     s32 playerFlags = playerStatus->flags;
     Camera* currentCamera;
     f32 playerSpeedCopy;
     s32 temp_v0_2;
 
-    if (playerFlags & 0x4000) {
+    if (playerFlags & PLAYER_STATUS_FLAGS_4000) {
         playerSpeedCopy = playerStatus->currentSpeed;
-        if (playerFlags & 0x40000) {
+        if (playerFlags & PLAYER_STATUS_FLAGS_40000) {
             playerSpeedCopy *= 0.5f;
         }
 
-        add_vec2D_polar(&npc->pos.x, &npc->pos.z, playerSpeedCopy, playerStatus->heading);
-        npc->yaw = playerStatus->targetYaw;
+        add_vec2D_polar(&lakilester->pos.x, &lakilester->pos.z, playerSpeedCopy, playerStatus->heading);
+        lakilester->yaw = playerStatus->targetYaw;
     }
 
     temp_v0_2 = abs(D_802BFF18);
-    playerStatus->position.x = npc->pos.x;
-    playerStatus->position.y = npc->pos.y + 10.0f + (temp_v0_2 * 0.34f);
-    playerStatus->position.z = npc->pos.z;
+    playerStatus->position.x = lakilester->pos.x;
+    playerStatus->position.y = lakilester->pos.y + 10.0f + (temp_v0_2 * 0.34f);
+    playerStatus->position.z = lakilester->pos.z;
     currentCamera = &gCameras[gCurrentCameraID];
     add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 2.0f, currentCamera->currentYaw);
 }
@@ -71,62 +70,57 @@ void func_802BD21C_320D6C(Npc* npc) {
     npc->moveToPos.z = npc->pos.z;
 }
 
-ApiStatus func_802BD29C_320DEC(Evt* evt, s32 isInitialCall) {
-    Npc* npc = evt->owner2.npc;
+ApiStatus func_802BD29C_320DEC(Evt* script, s32 isInitialCall) {
+    Npc* lakilester = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_get_out(npc);
+        partner_init_get_out(lakilester);
     }
 
-    if (partner_get_out(npc) > 0U) {
-        return ApiStatus_DONE1;
-    } else {
-        return ApiStatus_BLOCK;
-    }
+    return partner_get_out(lakilester) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
+    Npc* lakilester = script->owner2.npc;
     Entity* entity;
-    Npc* npc = script->owner2.npc;
     f32 sp10;
     f32 sp14;
     f32 tempY;
 
     if (isInitialCall) {
-        partner_flying_enable(npc, 1);
+        partner_flying_enable(lakilester, 1);
         mem_clear(D_802BFE7C_3239CC, sizeof(*D_802BFE7C_3239CC));
         D_8010C954 = NULL;
     }
 
     playerData->unk_2F4[8]++;
-    npc->flags |= 0x10000;
+    lakilester->flags |= NPC_FLAG_DIRTY_SHADOW;
     entity = D_8010C954;
     
     if (entity == NULL) {
-        partner_flying_update_player_tracking(npc);
-        partner_flying_update_motion(npc);
+        partner_flying_update_player_tracking(lakilester);
+        partner_flying_update_motion(lakilester);
         return ApiStatus_BLOCK;
     }
 
     switch (D_802BFE7C_3239CC->unk_04) {
         case 0:
             D_802BFE7C_3239CC->unk_04 = 1;
-            D_802BFE7C_3239CC->unk_08 = npc->flags;
-            D_802BFE7C_3239CC->unk_0C = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
-            D_802BFE7C_3239CC->unk_10 = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
+            D_802BFE7C_3239CC->flags = lakilester->flags;
+            D_802BFE7C_3239CC->unk_0C = fabsf(dist2D(lakilester->pos.x, lakilester->pos.z, entity->position.x, entity->position.z));
+            D_802BFE7C_3239CC->unk_10 = atan2(entity->position.x, entity->position.z, lakilester->pos.x, lakilester->pos.z);
             D_802BFE7C_3239CC->unk_14 = 6.0f;
             D_802BFE7C_3239CC->unk_18 = 50.0f;
-            D_802BFE7C_3239CC->unk_00 = 0x78;
-            npc->flags |= 0x40148;
-            npc->flags &= ~0x200;
+            D_802BFE7C_3239CC->unk_00 = 120;
+            lakilester->flags |= NPC_FLAG_40000 | NPC_FLAG_100 | NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            lakilester->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
             sin_cos_rad((D_802BFE7C_3239CC->unk_10 * TAU) / 360.0f, &sp10, &sp14);
-
-            npc->pos.x = entity->position.x + (sp10 * D_802BFE7C_3239CC->unk_0C);
-            npc->pos.z = entity->position.z - (sp14 * D_802BFE7C_3239CC->unk_0C);
-
+            lakilester->pos.x = entity->position.x + (sp10 * D_802BFE7C_3239CC->unk_0C);
+            lakilester->pos.z = entity->position.z - (sp14 * D_802BFE7C_3239CC->unk_0C);
             D_802BFE7C_3239CC->unk_10 = clamp_angle(D_802BFE7C_3239CC->unk_10 - D_802BFE7C_3239CC->unk_14);
+
             if (D_802BFE7C_3239CC->unk_0C > 20.0f) {
                 D_802BFE7C_3239CC->unk_0C--;
             } else if (D_802BFE7C_3239CC->unk_0C < 19.0f) {
@@ -134,16 +128,16 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
             }
 
             tempY = sin_rad((D_802BFE7C_3239CC->unk_18 * TAU) / 360.0f) * 3.0f;
-
             D_802BFE7C_3239CC->unk_18 += 3.0f;
 
             if (D_802BFE7C_3239CC->unk_18 > 150.0f) {
                 D_802BFE7C_3239CC->unk_18 = 150.0f;
             }
-            npc->pos.y += tempY;
 
-            npc->renderYaw = clamp_angle(360.0f - D_802BFE7C_3239CC->unk_10);
+            lakilester->pos.y += tempY;
+            lakilester->renderYaw = clamp_angle(360.0f - D_802BFE7C_3239CC->unk_10);
             D_802BFE7C_3239CC->unk_14 += D_802BFEF0;
+
             if (D_802BFE7C_3239CC->unk_14 > 40.0f) {
                 D_802BFE7C_3239CC->unk_14 = 40.0f;
             }
@@ -153,13 +147,13 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
             }
             break;
         case 2:
-            npc->flags = D_802BFE7C_3239CC->unk_08;
-            D_802BFE7C_3239CC->unk_00 = 0x1E;
+            lakilester->flags = D_802BFE7C_3239CC->flags;
+            D_802BFE7C_3239CC->unk_00 = 30;
             D_802BFE7C_3239CC->unk_04++;
             break;
         case 3:
-            partner_flying_update_player_tracking(npc);
-            partner_flying_update_motion(npc);
+            partner_flying_update_player_tracking(lakilester);
+            partner_flying_update_motion(lakilester);
 
             if (--D_802BFE7C_3239CC->unk_00 == 0) {
                 D_802BFE7C_3239CC->unk_04 = 0;
@@ -176,15 +170,16 @@ void func_802BD678_3211C8(Npc* npc) {
     if (D_8010C954 != NULL) {
         temp_v1 = D_802BFE7C_3239CC;
         D_8010C954 = NULL;
-        npc->flags = temp_v1->unk_08;
+        npc->flags = temp_v1->flags;
         temp_v1->unk_04 = 0;
         partner_clear_player_tracking(npc);
     }
 }
 
 void func_802BD6BC_32120C(f32* arg0, f32* arg1) {
-    f32 temp_f24 = gPartnerActionStatus.stickX;
-    f32 temp_f26 = gPartnerActionStatus.stickY;
+    PartnerActionStatus* lakilesterActionStatus = &gPartnerActionStatus;
+    f32 temp_f24 = lakilesterActionStatus->stickX;
+    f32 temp_f26 = lakilesterActionStatus->stickY;
     f32 temp_f22 = -temp_f26;
     f32 atan = atan2(0.0f, 0.0f, temp_f24, temp_f22);
     f32 temp = clamp_angle(atan + gCameras->currentYaw);
@@ -206,15 +201,14 @@ s32 func_802BD7DC(void) {
     Camera* currentCamera;
     f32 hitDirX, hitDirZ;
     f32 hitRx, hitRz;
-    f32 outLength;
-    f32 outX, outY, outZ;
-    Npc *npc = get_npc_unsafe(NPC_PARTNER);
+    f32 outX, outY, outZ, outLength;
+    Npc* npc = get_npc_unsafe(NPC_PARTNER);
     s32 colliderTypeID;
     s32 raycastResult;
     s32 ret;
 
-    if (playerStatus->animFlags & 0x20000000) {
-        playerStatus->animFlags &= ~0x20000000;
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_20000000) {
+        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_20000000;
         return TRUE;
     }
 
@@ -259,7 +253,8 @@ s32 func_802BD99C_3214EC(Npc* partner, f32 yOffset, f32 zOffset) {
     
     D_802BFF24 = 0;
     
-    if (player_raycast_below_cam_relative(&gPlayerStatus, &outX, &outY, &outZ, &outLength, &hitRx, &hitRz, &hitDirX, &hitDirZ) >= 0) {
+    if (player_raycast_below_cam_relative(&gPlayerStatus, &outX, &outY, &outZ, &outLength, &hitRx, &hitRz,
+                                          &hitDirX, &hitDirZ) >= 0) {
         temp_f4 = outY - partner->moveToPos.y;
         if (temp_f4 != 0.0f) {
             if (fabs(temp_f4) < 10.0) {
@@ -275,72 +270,72 @@ s32 func_802BD99C_3214EC(Npc* partner, f32 yOffset, f32 zOffset) {
     return FALSE;
 }
 
-void func_802BDA90_3215E0(Npc* npc) {
-    f32 temp_f20 = npc->collisionRadius * 0.8f;
-    f32 temp_f0 = clamp_angle(npc->yaw);
-    f32 x = npc->pos.x;
-    f32 y = npc->moveToPos.y;
-    f32 z = npc->pos.z;
+void func_802BDA90_3215E0(Npc* lakilester) {
+    f32 temp_f20 = lakilester->collisionRadius * 0.8f;
+    f32 temp_f0 = clamp_angle(lakilester->yaw);
+    f32 x = lakilester->pos.x;
+    f32 y = lakilester->moveToPos.y;
+    f32 z = lakilester->pos.z;
 
-    if (npc_test_move_complex_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20)) {
-        npc->flags |= 0x6000;
-        npc->unk_86 = D_8010C97A;
-        npc->pos.x = x;
-        npc->pos.z = z;
+    if (npc_test_move_complex_with_slipping(lakilester->unk_80, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+        lakilester->flags |= (NPC_FLAG_4000 | NPC_FLAG_NO_PROJECT_SHADOW);
+        lakilester->unk_86 = D_8010C97A;
+        lakilester->pos.x = x;
+        lakilester->pos.z = z;
     } else {
-        npc->flags &= ~0x6000;
+        lakilester->flags &= ~(NPC_FLAG_4000 | NPC_FLAG_NO_PROJECT_SHADOW);
     }
 
-    temp_f0 = clamp_angle(npc->yaw + 45.0f);
-    x = npc->pos.x;
-    y = npc->moveToPos.y;
-    z = npc->pos.z;
+    temp_f0 = clamp_angle(lakilester->yaw + 45.0f);
+    x = lakilester->pos.x;
+    y = lakilester->moveToPos.y;
+    z = lakilester->pos.z;
 
-    if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20)) {
-        npc->pos.x = x;
-        npc->pos.z = z;
-        npc->flags |= 0x2000;
+    if (npc_test_move_taller_with_slipping(lakilester->unk_80, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+        lakilester->pos.x = x;
+        lakilester->pos.z = z;
+        lakilester->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
     } else {
-        npc->flags &= ~0x2000;
+        lakilester->flags &= ~NPC_FLAG_NO_PROJECT_SHADOW;
     }
 
-    temp_f0 = clamp_angle(npc->yaw - 45.0f);
-    x = npc->pos.x;
-    y = npc->moveToPos.y;
-    z = npc->pos.z;
+    temp_f0 = clamp_angle(lakilester->yaw - 45.0f);
+    x = lakilester->pos.x;
+    y = lakilester->moveToPos.y;
+    z = lakilester->pos.z;
 
-    if (npc_test_move_taller_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20)) {
-        npc->pos.x = x;
-        npc->pos.z = z;
-        npc->flags |= 0x2000;
+    if (npc_test_move_taller_with_slipping(lakilester->unk_80, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+        lakilester->pos.x = x;
+        lakilester->pos.z = z;
+        lakilester->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
     } else {
-        npc->flags &= ~0x2000;
+        lakilester->flags &= ~NPC_FLAG_NO_PROJECT_SHADOW;
     }
 
-    temp_f0 = clamp_angle(npc->yaw + 45.0f + 180.0f);
-    x = npc->pos.x;
-    y = npc->moveToPos.y;
-    z = npc->pos.z;
+    temp_f0 = clamp_angle(lakilester->yaw + 45.0f + 180.0f);
+    x = lakilester->pos.x;
+    y = lakilester->moveToPos.y;
+    z = lakilester->pos.z;
 
-    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20)) {
-        npc->flags |= 0x2000;
-        npc->pos.x = x;
-        npc->pos.z = z;
+    if (npc_test_move_simple_with_slipping(lakilester->unk_80, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+        lakilester->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
+        lakilester->pos.x = x;
+        lakilester->pos.z = z;
     } else {
-        npc->flags &= ~0x2000;
+        lakilester->flags &= ~NPC_FLAG_NO_PROJECT_SHADOW;
     }
 
-    temp_f0 = clamp_angle(npc->yaw - 45.0f + 180.0f);
-    x = npc->pos.x;
-    y = npc->moveToPos.y;
-    z = npc->pos.z;
+    temp_f0 = clamp_angle(lakilester->yaw - 45.0f + 180.0f);
+    x = lakilester->pos.x;
+    y = lakilester->moveToPos.y;
+    z = lakilester->pos.z;
 
-    if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 0.0f, temp_f0, npc->collisionHeight, temp_f20)) {
-        npc->flags |= 0x2000;
-        npc->pos.x = x;
-        npc->pos.z = z;
+    if (npc_test_move_simple_with_slipping(lakilester->unk_80, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+        lakilester->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
+        lakilester->pos.x = x;
+        lakilester->pos.z = z;
     } else {
-        npc->flags &= ~0x2000;
+        lakilester->flags &= ~NPC_FLAG_NO_PROJECT_SHADOW;
     }
 }
 
@@ -532,16 +527,17 @@ INCLUDE_ASM(s32, "world/partner/lakilester", func_802BDDD8_321928);
 #endif
 
 s32 func_802BE6A0_3221F0(f32* arg0) {
+    f32 colliderHeight = gPlayerStatus.colliderHeight;
     f32 hitDirX, hitDirZ;
     f32 hitRx, hitRz;
     f32 sp28, sp2C;
-    f32 colliderHeight = gPlayerStatus.colliderHeight;
     
     *arg0 = gPlayerStatus.position.y + colliderHeight;
     sp28 = gPlayerStatus.position.x;
     sp2C = gPlayerStatus.position.z;
     
-    player_raycast_below_cam_relative(&gPlayerStatus, &sp28, arg0, &sp2C, &colliderHeight, &hitRx, &hitRz, &hitDirX, &hitDirZ);
+    player_raycast_below_cam_relative(&gPlayerStatus, &sp28, arg0, &sp2C, &colliderHeight, &hitRx, &hitRz,
+                                      &hitDirX, &hitDirZ);
 }
 
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BE724_322274);
@@ -550,16 +546,16 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Camera* cam = &gCameras[0];
-    Npc* partner = script->owner2.npc;
+    Npc* lakilester = script->owner2.npc;
     f32 sp20, sp24, sp28, sp2C;
     f32 yaw;
 
     if (isInitialCall) {
         D_802BFF00 = (D_802BFF0C == 0) ? 3 : 0;
-        partner_init_put_away(partner);
+        partner_init_put_away(lakilester);
         func_802BD7DC();
-        playerStatus->animFlags &= ~0x400000;
-        playerStatus->flags |= 0x100;
+        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_400000;
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_100;
     }
 
     switch (D_802BFF00) {
@@ -567,24 +563,24 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
             func_802BD7DC();
             yaw = cam->currentYaw;
             if ((playerStatus->spriteFacingAngle >= 90.0f) && (playerStatus->spriteFacingAngle < 270.0f)) {
-                partner->yaw = (yaw + 180.0f) - 90.0f;
+                lakilester->yaw = (yaw + 180.0f) - 90.0f;
             } else {
-                partner->yaw = (yaw + 0.0f) - 90.0f;
+                lakilester->yaw = (yaw + 0.0f) - 90.0f;
             }
 
             sp2C = dist2D(playerStatus->position.x, playerStatus->position.z,
-                          partner->moveToPos.x, partner->moveToPos.z);
-            partner->duration = 14;
+                          lakilester->moveToPos.x, lakilester->moveToPos.z);
+            lakilester->duration = 14;
 
-            if (partner->moveToPos.y > partner->pos.y ) {
-                partner->jumpVelocity = (partner->moveToPos.y - partner->pos.y) / 14.0f + 6.0f;
+            if (lakilester->moveToPos.y > lakilester->pos.y ) {
+                lakilester->jumpVelocity = (lakilester->moveToPos.y - lakilester->pos.y) / 14.0f + 6.0f;
             } else {
-                partner->jumpVelocity = 6.0f;
+                lakilester->jumpVelocity = 6.0f;
             }
-            partner->jumpScale = 1.2f;
-            partner->moveSpeed = sp2C / partner->duration;
-            partner->yaw = atan2(playerStatus->position.x, playerStatus->position.z,
-                                 partner->moveToPos.x, partner->moveToPos.z);
+            lakilester->jumpScale = 1.2f;
+            lakilester->moveSpeed = sp2C / lakilester->duration;
+            lakilester->yaw = atan2(playerStatus->position.x, playerStatus->position.z,
+                                 lakilester->moveToPos.x, lakilester->moveToPos.z);
             suggest_player_anim_clearUnkFlag(0x10006);
             D_802BFF00++;
             break;
@@ -592,15 +588,15 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
             suggest_player_anim_clearUnkFlag(0x10007);
             D_802BFF00++;
         case 2:
-            playerStatus->position.y += partner->jumpVelocity;
-            partner->jumpVelocity -= partner->jumpScale;
+            playerStatus->position.y += lakilester->jumpVelocity;
+            lakilester->jumpVelocity -= lakilester->jumpScale;
             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z,
-                            partner->moveSpeed, partner->yaw);
+                            lakilester->moveSpeed, lakilester->yaw);
             func_800E4AD8(0);
-            if (partner->jumpVelocity <= 0.0f) {
-                playerStatus->flags |= 4;
-                if (partner->jumpVelocity < -10.0) {
-                    partner->jumpVelocity = -10.0f;
+            if (lakilester->jumpVelocity <= 0.0f) {
+                playerStatus->flags |= PLAYER_STATUS_FLAGS_FALLING;
+                if (lakilester->jumpVelocity < -10.0) {
+                    lakilester->jumpVelocity = -10.0f;
                 }
             }
             sp20 = playerStatus->position.x;
@@ -608,7 +604,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
             sp28 = playerStatus->position.z;
             sp2C = playerStatus->colliderHeight;
             if (npc_raycast_down_ahead(0, &sp20, &sp24, &sp28, &sp2C,
-                                       partner->yaw, partner->collisionRadius)) {
+                                       lakilester->yaw, lakilester->collisionRadius)) {
 
                 D_802BFF00 = 3;
                 playerStatus->position.y = sp24;
@@ -622,48 +618,55 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
 
     switch (D_802BFF00) {
         case 3:
-            partner->flags &= ~0x48;
+            lakilester->flags &= ~(NPC_FLAG_40 | NPC_FLAG_ENABLE_HIT_SCRIPT);
+
             if (D_802BFF08) {
                 D_802BFF08 = FALSE;
                 enable_player_static_collisions();
             }
+
             enable_player_shadow();
-            if (playerStatus->flags & 0x800) {
+
+            if (playerStatus->flags & PLAYER_STATUS_FLAGS_800) {
                 partnerActionStatus->actionState.b[3] = 0;
                 partnerActionStatus->actionState.b[0] = 0;
                 if (D_802BFF04) {
                     D_802BFF04 = FALSE;
                     enable_player_input();
                 }
+
                 gGameStatusPtr->unk_7D = 0;
                 D_802BFF0C = 0;
-                partner_clear_player_tracking(partner);
+                partner_clear_player_tracking(lakilester);
                 set_action_state(ACTION_STATE_HIT_FIRE);
                 return ApiStatus_DONE1;
             }
+
             if (D_802BFF0C == 0) {
                 phys_main_collision_below();
             } else {
                 set_action_state(ACTION_STATE_FALLING);
                 gravity_use_fall_parms();
             }
+
             D_802BFF00++;
             break;
         case 4:
             partnerActionStatus->actionState.b[3] = 0;
             partnerActionStatus->actionState.b[0] = 0;
-            playerStatus->flags &= -0x101;
+            playerStatus->flags &= ~PLAYER_STATUS_FLAGS_100;
+
             if (D_802BFF04) {
                 D_802BFF04 = FALSE;
                 enable_player_input();
             }
             gGameStatusPtr->unk_7D = 0;
             D_802BFF0C = 0;
-            partner_clear_player_tracking(partner);
+            partner_clear_player_tracking(lakilester);
             D_802BFF00++;
             break;
         case 5:
-            if (partner_put_away(partner) == FALSE) {
+            if (partner_put_away(lakilester) == FALSE) {
                 break;
             }
             return ApiStatus_DONE1;
@@ -674,7 +677,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
 void func_802BFA00_323550(Npc* npc) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-    if (D_802BFF0C != 0) {
+    if (D_802BFF0C) {
         partnerActionStatus->npc = *npc;
         partnerActionStatus->actionState.b[1] = 1;
         enable_player_static_collisions();
@@ -691,7 +694,7 @@ void func_802BFAA8_3235F8(Npc* npc) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     if (partnerActionStatus->actionState.b[1] != 0) {
-        if (D_802BFF0C != 0) {
+        if (D_802BFF0C) {
             *npc = partnerActionStatus->npc;
             gGameStatusPtr->unk_7D = 1;
             set_action_state(ACTION_STATE_RIDE);
@@ -714,9 +717,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_unsafe(NPC_PARTNER);
-    f32 temp_f0;
-    f32 temp_f2;
-    f32 temp_f4;
+    f32 temp_f0, temp_f2, temp_f4;
     f32* temp_s0_2;
     s32 temp_v0_2;
     s32 tempVar;
@@ -763,10 +764,10 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
             sfx_play_sound_at_npc(0x295, 0, -4);
             playerStatus->anim = 0x8000E;
             playerStatus->unk_BC = 0;
-            playerStatus->flags |= 0x10000000;
+            playerStatus->flags |= PLAYER_STATUS_FLAGS_10000000;
             func_802BFB44_323694(2.0f);
             gGameStatusPtr->unk_7D = 1;
-            npc->flags |= 0x100;
+            npc->flags |= NPC_FLAG_100;
             npc->moveSpeed = *temp_s0_2;
             npc->jumpScale = 0.0f;
             D_802BFF10 = 0;

@@ -2,30 +2,31 @@
 #include "../partners.h"
 #include "twink.h"
 
-void world_twink_init(Npc* partner) {
-    partner->collisionHeight = 20;
-    partner->collisionRadius = 20;
+void world_twink_init(Npc* twink) {
+    twink->collisionHeight = 20;
+    twink->collisionRadius = 20;
 }
 
 ApiStatus TwinkTakeOut(Evt* script, s32 isInitialCall) {
-    Npc* owner = script->owner2.npc;
+    Npc* twink = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_get_out(owner);
+        partner_init_get_out(twink);
     }
-    return partner_get_out(owner) != 0;
+
+    return partner_get_out(twink) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 ApiStatus TwinkUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    Npc* owner = script->owner2.npc;
+    Npc* twink = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_flying_enable(owner, TRUE);
+        partner_flying_enable(twink, TRUE);
     }
 
-    partner_flying_update_player_tracking(owner);
-    partner_flying_update_motion(owner);
+    partner_flying_update_player_tracking(twink);
+    partner_flying_update_motion(twink);
     playerData->unk_2F4[PARTNER_TWINK]++;
 
     return ApiStatus_BLOCK;
@@ -36,12 +37,13 @@ ApiStatus TwinkUseAbility(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus TwinkPutAway(Evt* script, s32 isInitialCall) {
-    Npc* owner = script->owner2.npc;
+    Npc* twink = script->owner2.npc;
 
     if (isInitialCall) {
-        partner_init_put_away(owner);
+        partner_init_put_away(twink);
     }
-    return partner_put_away(owner) != 0;
+
+    return partner_put_away(twink) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
 EvtSource world_twink_take_out = SCRIPT({
