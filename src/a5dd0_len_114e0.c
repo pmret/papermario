@@ -1773,39 +1773,6 @@ s32 func_80111790(void) {
 }
 
 INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, StaticEntityData* data);
-// void entity_free_static_data(StaticEntityData* data) {
-//     StaticEntityData* temp_a0;
-//     StaticEntityData** temp_s1;
-//     s32 temp_v1;
-//     s32* temp_v1_2;
-//     s32 size;
-//     s32 i;
-
-
-//     for (i = 0; i < ARRAY_COUNT(wStaticEntityData); i++) {
-//         if (wStaticEntityData[i] == NULL) {
-//             break;
-//         }
-//     }
-
-//     if (i < ARRAY_COUNT(wStaticEntityData)) {
-//         s32 j = i - 1;
-//         temp_s1 = &wStaticEntityData[j];
-//         temp_a0 = *temp_s1;
-//         if (temp_a0 == data) {
-//             if (temp_a0->flags & 8) {
-//                 temp_v1_2 = temp_a0->dmaStart;
-//                 size = ((s32) (temp_v1_2[1] - temp_v1_2[0]) >> 2) + ((s32) (temp_v1_2[3] - temp_v1_2[2]) >> 2);
-//             } else {
-//                 size = (s32) (temp_a0->dmaEnd - temp_a0->dmaStart) >> 2;
-//             }
-//             if (func_80111790() == 0) {
-//                 *temp_s1 = NULL;
-//                 wStaticEntityDataSize -= size;
-//             }
-//         }
-//     }
-// }
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, StaticEntityData* data, s32 x, s32 y, s32 z, s32 arg4,
             ...);
