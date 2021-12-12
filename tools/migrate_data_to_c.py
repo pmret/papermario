@@ -27,9 +27,9 @@ def data_to_c(file_path):
             if symbol.startswith("jtbl_"):
                 output += "dlabel " + symbol + "\n" + ".word " + data.replace("L", ".L") + "\n\n"
             else:
-                output += "s32 " + symbol + "[] = {" + data + "};\n\n"
+                output += "s32 " + symbol + "[] = { " + data + " };\n\n"
         elif type == "byte":
-            output += "s8 " + symbol + "[] = {" + data + "};\n\n"
+            output += "s8 " + symbol + "[] = { " + data + " };\n\n"
         else:
             output += all + "\n\n"
 
