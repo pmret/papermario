@@ -1,13 +1,13 @@
 #include "common.h"
 #include "effects_internal.h"
 
-s32 D_E009EDF0[] = {0x09001490};
+s32 D_E009EDF0[] = { 0x09001490 };
 
-s32 D_E009EDF4[] = {0x090014B0};
+s32 D_E009EDF4[] = { 0x090014B0 };
 
-s32 D_E009EDF8[] = {0x090014D0};
+s32 D_E009EDF8[] = { 0x090014D0 };
 
-s32 D_E009EDFC[] = {0x090014F0};
+s32 D_E009EDFC[] = { 0x090014F0 };
 
 void fx_79_appendGfx(EffectInstance* effect);
 
