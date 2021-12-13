@@ -5,7 +5,7 @@ EvtSource N(UseItemWithEffect) = {
     EVT_IF_EQ(EVT_VAR(1), 0)
         EVT_CALL(UseBattleCamPreset, 69)
         EVT_WAIT_FRAMES(10)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_208D)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_GOT_ITEM)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_ADD(EVT_VAR(0), 18)
@@ -26,7 +26,7 @@ EvtSource N(UseItemWithEffect) = {
         EVT_CALL(RemoveItemEntity, EVT_VAR(10))
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_208D)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208D)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_GOT_ITEM)
         EVT_WAIT_FRAMES(4)
         EVT_ADD(EVT_VAR(1), 45)
@@ -79,7 +79,7 @@ EvtSource N(PlayerGoHome) = {
 EvtSource N(EatItem) = {
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_2095)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
             EVT_WAIT_FRAMES(10)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -92,7 +92,7 @@ EvtSource N(EatItem) = {
 EvtSource N(DrinkItem) = {
     EVT_THREAD
         EVT_LOOP(4)
-            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_2095)
+            EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
             EVT_WAIT_FRAMES(10)
         EVT_END_LOOP
     EVT_END_THREAD

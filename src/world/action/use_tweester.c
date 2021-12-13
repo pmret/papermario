@@ -35,7 +35,7 @@ void func_802B6000_E2A340(void) {
         D_802B6350_E2A690->unk_14 = 6.0f;
         D_802B6350_E2A690->unk_18 = 50.0f;
         D_802B6350_E2A690->unk_00 = 0x78;
-        sfx_play_sound_at_player(SOUND_UNKNOWN_2F6, 0);
+        sfx_play_sound_at_player(SOUND_2F6, 0);
     }
 
     switch (playerStatus->fallState) {

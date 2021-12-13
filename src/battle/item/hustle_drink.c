@@ -51,7 +51,7 @@ EvtSource N(main) = {
     EVT_CALL(UseBattleCamPreset, 13)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 20)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_369)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_369)
     EVT_THREAD
         EVT_LOOP(2)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
@@ -89,7 +89,7 @@ EvtSource N(main) = {
         EVT_WAIT_FRAMES(1)
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(1.4), EVT_FIXED(0.8), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_208E)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208E)
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(0.9), EVT_FIXED(1.3), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FIXED(0.9), EVT_FIXED(1.2), EVT_FIXED(1.0))
@@ -101,7 +101,7 @@ EvtSource N(main) = {
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
     EVT_END_THREAD
     EVT_LOOP(10)
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_369)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_369)
         EVT_CALL(PlayEffect, 0x6, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_CALL(PlayEffect, 0x6, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_WAIT_FRAMES(4)

@@ -52,7 +52,7 @@ void func_802B6060_E27570(void) {
         D_802B6798 = 0.0f;
         D_802B679C = 0;
         suggest_player_anim_clearUnkFlag(0x1000A);
-        sfx_play_sound_at_player(SOUND_UNKNOWN_167, 0);
+        sfx_play_sound_at_player(SOUND_167, 0);
         gCameras[0].moveFlags |= 1;
     }
     tempCurrentSpeed = playerStatus->currentSpeed;
@@ -100,7 +100,7 @@ void func_802B6060_E27570(void) {
             }
             sin_cos_rad((D_802B6790 * TAU) / 360.0f, &sp4C, &sp50);
             playerStatus->position.y += fabsf((sp4C / sp50) * playerStatus->currentSpeed);
-            snd_stop_sound(SOUND_UNKNOWN_167);
+            snd_stop_sound(SOUND_167);
             break;
         case 1:
             sp28 = playerStatus->position.x;
@@ -115,7 +115,7 @@ void func_802B6060_E27570(void) {
                 }
                 playerStatus->currentSpeed -= tempCurrentSpeed;
                 if (playerStatus->currentSpeed <= 0.0f) {
-                    sfx_play_sound_at_player(SOUND_UNKNOWN_172, 0);
+                    sfx_play_sound_at_player(SOUND_172, 0);
                     suggest_player_anim_setUnkFlag(0x10031);
                     playerStatus->fallState = 6;
                     playerStatus->framesOnGround = 15;
@@ -148,7 +148,7 @@ void func_802B6060_E27570(void) {
             if (sp48 >= 0) {
                 D_802B678C = -1;
                 suggest_player_anim_setUnkFlag(0x80003);
-                sfx_play_sound_at_player(SOUND_UNKNOWN_162, 0);
+                sfx_play_sound_at_player(SOUND_162, 0);
                 playerStatus->fallState++;
             }
             break;
@@ -169,7 +169,7 @@ void func_802B6060_E27570(void) {
             }
             if (playerStatus->unk_BC != 0) {
                 suggest_player_anim_setUnkFlag(0x10031);
-                sfx_play_sound_at_player(SOUND_UNKNOWN_172, 0);
+                sfx_play_sound_at_player(SOUND_172, 0);
                 playerStatus->framesOnGround = 15;
                 playerStatus->fallState++;
             }

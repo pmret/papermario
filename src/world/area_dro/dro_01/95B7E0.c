@@ -422,7 +422,7 @@ EvtSource N(enterWalk_80244C14) = {
                 EVT_CALL(SetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
                 EVT_CALL(SetPlayerPos, EVT_VAR(0), -1000, EVT_VAR(2))
                 EVT_WAIT_FRAMES(30)
-                EVT_CALL(PlaySound, SOUND_UNKNOWN_208E)
+                EVT_CALL(PlaySound, SOUND_208E)
                 EVT_SET(EVT_SAVE_FLAG(1939), 1)
                 EVT_WAIT_FRAMES(30)
                 EVT_CALL(SetPlayerActionState, 0)

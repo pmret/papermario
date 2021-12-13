@@ -192,4 +192,6 @@ s32** spr_get_npc_palettes(s32 npcSpriteID);
 
 s32 spr_get_npc_color_variations(s32 npcSpriteID);
 
+void render_shaded_sprite(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s32 alpha, s32);
+
 #endif

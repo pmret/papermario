@@ -285,7 +285,7 @@ EvtSource N(80243D94) = SCRIPT({
         PlaySound(0x212E);
         N(func_80242F08_C39438)(70, 70);
         sleep 27;
-        PlaySound(SOUND_UNKNOWN_208E);
+        PlaySound(SOUND_208E);
         N(func_80242F08_C39438)(50, 50);
     }
     spawn {

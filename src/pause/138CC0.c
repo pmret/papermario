@@ -34,25 +34,25 @@ void pause_stats_init(MenuPanel* panel) {
     }
 
     setup_pause_menu_tab(gStatsMenuWindowBPs, ARRAY_COUNT(gStatsMenuWindowBPs));
-    panel->initialized = TRUE;
+    panel->unk_00.c.initialized = TRUE;
 }
 
 void pause_stats_handle_input(MenuPanel* panel) {
-    s32 initialSelection = panel->selected;
+    s32 initialSelection = panel->unk_00.c.selected;
     s16 adjustedBootsLevel;
     s16 adjustedHammerLevel;
     s32 msgOffset;
 
     if (gPauseMenuHeldButtons & BUTTON_STICK_LEFT) {
         while (1) {
-            panel->col--;
-            if (panel->col < 0) {
-                panel->col = 0;
+            panel->unk_00.c.col--;
+            if (panel->unk_00.c.col < 0) {
+                panel->unk_00.c.col = 0;
                 break;
-            } else if (panel->selected != panel->gridData[
+            } else if (panel->unk_00.c.selected != panel->gridData[
                                             (panel->page * panel->numCols * panel->numRows)
-                                          + (panel->numCols * panel->row)
-                                          + (panel->col)]) {
+                                          + (panel->numCols * panel->unk_00.c.row)
+                                          + (panel->unk_00.c.col)]) {
                 break;
             }
         }
@@ -60,14 +60,14 @@ void pause_stats_handle_input(MenuPanel* panel) {
 
     if (gPauseMenuHeldButtons & BUTTON_STICK_RIGHT) {
         while (1) {
-            panel->col++;
-            if (panel->col >= panel->numCols) {
-                panel->col = panel->numCols - 1;
+            panel->unk_00.c.col++;
+            if (panel->unk_00.c.col >= panel->numCols) {
+                panel->unk_00.c.col = panel->numCols - 1;
                 break;
-            } else if (panel->selected != panel->gridData[
+            } else if (panel->unk_00.c.selected != panel->gridData[
                                             (panel->page * panel->numCols * panel->numRows)
-                                          + (panel->numCols * panel->row)
-                                          + (panel->col)]) {
+                                          + (panel->numCols * panel->unk_00.c.row)
+                                          + (panel->unk_00.c.col)]) {
                 break;
             }
         }
@@ -75,14 +75,14 @@ void pause_stats_handle_input(MenuPanel* panel) {
 
     if (gPauseMenuHeldButtons & BUTTON_STICK_UP) {
         while (1) {
-            panel->row--;
-            if (panel->row < 0) {
-                panel->row = 0;
+            panel->unk_00.c.row--;
+            if (panel->unk_00.c.row < 0) {
+                panel->unk_00.c.row = 0;
                 break;
-            } else if (panel->selected != panel->gridData[
+            } else if (panel->unk_00.c.selected != panel->gridData[
                                             (panel->page * panel->numCols * panel->numRows)
-                                          + (panel->numCols * panel->row)
-                                          + (panel->col)]) {
+                                          + (panel->numCols * panel->unk_00.c.row)
+                                          + (panel->unk_00.c.col)]) {
                 break;
             }
         }
@@ -90,24 +90,24 @@ void pause_stats_handle_input(MenuPanel* panel) {
 
     if (gPauseMenuHeldButtons & BUTTON_STICK_DOWN) {
         while (1) {
-            panel->row++;
-            if (panel->row >= panel->numRows) {
-                panel->row = panel->numRows - 1;
+            panel->unk_00.c.row++;
+            if (panel->unk_00.c.row >= panel->numRows) {
+                panel->unk_00.c.row = panel->numRows - 1;
                 break;
-            } else if (panel->selected != panel->gridData[
+            } else if (panel->unk_00.c.selected != panel->gridData[
                                             (panel->page * panel->numCols * panel->numRows)
-                                          + (panel->numCols * panel->row)
-                                          + (panel->col)]) {
+                                          + (panel->numCols * panel->unk_00.c.row)
+                                          + (panel->unk_00.c.col)]) {
                 break;
             }
         }
     }
 
-    panel->selected = panel->gridData[
+    panel->unk_00.c.selected = panel->gridData[
                         (panel->page * panel->numCols * panel->numRows)
-                      + (panel->numCols * panel->row)
-                      + (panel->col)];
-    if (panel->selected != initialSelection) {
+                      + (panel->numCols * panel->unk_00.c.row)
+                      + (panel->unk_00.c.col)];
+    if (panel->unk_00.c.selected != initialSelection) {
         sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
     }
 
@@ -131,7 +131,7 @@ void pause_stats_handle_input(MenuPanel* panel) {
         adjustedHammerLevel = 3;
     }
 
-    switch (gStatsMenuEntries[panel->selected].baseMsgID) {
+    switch (gStatsMenuEntries[panel->unk_00.c.selected].baseMsgID) {
         case 0x25:
             if (adjustedBootsLevel > 1) {
                 msgOffset = adjustedBootsLevel - 1;
@@ -147,7 +147,7 @@ void pause_stats_handle_input(MenuPanel* panel) {
             break;
     }
 
-    gPauseMenuCurrentDescMsg = pause_get_menu_msg(gStatsMenuEntries[panel->selected].baseMsgID + msgOffset);
+    gPauseMenuCurrentDescMsg = pause_get_menu_msg(gStatsMenuEntries[panel->unk_00.c.selected].baseMsgID + msgOffset);
     gPauseMenuCurrentDescIconScript = NULL;
 
     if (gPauseMenuPressedButtons & BUTTON_B) {
@@ -459,7 +459,7 @@ void pause_badges_init(MenuPanel* panel) {
 
     pause_badges_load_badges(FALSE);
     if (gBadgeMenuItemIDs[0] == BADGE_NONE_STANDIN) {
-        panel->initialized = FALSE;
+        panel->unk_00.c.initialized = FALSE;
         return;
     }
 
@@ -474,7 +474,7 @@ void pause_badges_init(MenuPanel* panel) {
         gBadgeMenuWindowBPs[i].tab = panel;
     }
     setup_pause_menu_tab(gBadgeMenuWindowBPs, ARRAY_COUNT(gBadgeMenuWindowBPs));
-    panel->initialized = TRUE;
+    panel->unk_00.c.initialized = TRUE;
 }
 
 void pause_badges_handle_input(MenuPanel* panel) {

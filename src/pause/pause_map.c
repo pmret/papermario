@@ -112,7 +112,7 @@ void pause_map_init(MenuPanel* tab) {
         pause_map_cameraY = -209.0f;
     }
 
-    tab->initialized = 1;
+    tab->unk_00.c.initialized = TRUE;
 }
 
 void pause_map_handle_input(void) {

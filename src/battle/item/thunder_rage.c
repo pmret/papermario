@@ -60,7 +60,7 @@ EvtSource N(main) = {
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_CHILD_THREAD
     EVT_CALL(N(FadeBackgroundToBlack))
-    EVT_CALL(PlaySound, SOUND_UNKNOWN_365)
+    EVT_CALL(PlaySound, SOUND_365)
     EVT_WAIT_FRAMES(10)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)

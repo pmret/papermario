@@ -99,7 +99,7 @@ EvtSource N(npcAI_80240B50) = SCRIPT({
             }
             DisablePlayerInput(TRUE);
             SetNpcAux(NPC_GOOMPA, 0);
-            PlaySoundAtNpc(NPC_GOOMPA, SOUND_UNKNOWN_262, 0);
+            PlaySoundAtNpc(NPC_GOOMPA, SOUND_262, 0);
             ShowEmote(0, EMOTE_EXCLAMATION, 45, 15, 1, 0, 0, 0, 0);
             sleep 15;
             NpcFacePlayer(NPC_SELF, 5);
