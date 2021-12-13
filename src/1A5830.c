@@ -431,7 +431,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                 if (blocked) {
                     damage--;
                     damage -= player_team_is_ability_active(target, ABILITY_DAMAGE_DODGE);
-                    sfx_play_sound_at_position(SOUND_UNKNOWN_231, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                    sfx_play_sound_at_position(SOUND_231, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     func_802667F0(0, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     gBattleStatus.flags1 |= BS_FLAGS1_ATK_BLOCKED;
                     break;
@@ -444,7 +444,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                 if (target->koStatus == STATUS_END && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                     if (check_block_input(BUTTON_A)) {
                         damage = 0;
-                        sfx_play_sound_at_position(SOUND_UNKNOWN_231, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                        sfx_play_sound_at_position(SOUND_231, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                         func_802667F0(0, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                         gBattleStatus.flags1 |= BS_FLAGS1_ATK_BLOCKED;
                         break;
@@ -705,7 +705,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
         func_80267018(target, 1);
 
-        if (attacker->actorTypeData1[5] != SOUND_UNKNOWN_0) {
+        if (attacker->actorTypeData1[5] != SOUND_0) {
             sfx_play_sound_at_position(attacker->actorTypeData1[5], 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         }
 

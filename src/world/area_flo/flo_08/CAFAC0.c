@@ -75,7 +75,7 @@ EvtSource N(80242014) = SCRIPT({
         PlaySound(0x212E);
         N(UnkFunc23)(70, 70);
         sleep 27;
-        PlaySound(SOUND_UNKNOWN_208E);
+        PlaySound(SOUND_208E);
         N(UnkFunc23)(50, 50);
     }
     spawn {
@@ -445,7 +445,7 @@ EvtSource N(interact_80243214) = SCRIPT({
                 N(func_80241B5C_CB089C)(EVT_VAR(0));
                 MakeItemEntity(EVT_VAR(8), -695, 20, -29, 1, 0);
                 EVT_VAR(7) = EVT_VAR(0);
-                PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2095, 0);
+                PlaySoundAtNpc(NPC_SELF, SOUND_2095, 0);
                 SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_3);
                 sleep 20;
                 RemoveItemEntity(EVT_VAR(7));

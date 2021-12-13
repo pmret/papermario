@@ -82,7 +82,6 @@ extern EncounterStatus gCurrentEncounter;
 extern s8* D_801512F0;
 extern s16 D_80151308;
 extern s32 D_80151310;
-extern s16* D_80151328;
 
 extern s32 D_8010C92C;
 extern s16 D_8010CD00;
@@ -149,6 +148,8 @@ extern s32 D_800A0960;
 extern s32 D_800A0964;
 extern s8 D_800A0B94;
 extern s16 D_800A0BB8;
+
+extern SpriteShadingProfile* D_80151328;
 
 
 extern Window gWindows[64];

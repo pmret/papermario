@@ -1,7 +1,12 @@
 #include "common.h"
+#include "battle/battle.h"
 #include "npc.h"
 #include "effects.h"
+#include "hud_element.h"
 
+extern s32 D_80077C40;
+
+extern s8 D_8009A654;
 extern s16 D_8009A668;
 extern s32 D_800A0BA0;
 extern f32 D_800A0BA4;
@@ -145,8 +150,8 @@ ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
     if (D_800A0BB8 == 2) {
         ((EffectInstanceData*)D_800A0BA8->data)->unk_30 = 0.00001f;
         ((EffectInstanceData*)D_800A0BAC->data)->unk_30 = 0.00001f;
-        D_800A0BA8->flags |= 0x10;
-        D_800A0BAC->flags |= 0x10;
+        D_800A0BA8->flags |= EFFECT_INSTANCE_FLAGS_10;
+        D_800A0BAC->flags |= EFFECT_INSTANCE_FLAGS_10;
         return ApiStatus_DONE1;
     }
 
@@ -223,9 +228,9 @@ ApiStatus OnDefeatEnemy(Evt* script, s32 isInitialCall) {
     }
 
     if (script->functionTemp[1] & 1) {
-        npc->flags &= ~2;
+        npc->flags &= ~NPC_FLAG_2;
     } else {
-        npc->flags |= 2;
+        npc->flags |= NPC_FLAG_2;
     }
 
     if (script->functionTemp[1] == 15) {
@@ -244,7 +249,7 @@ ApiStatus OnDefeatEnemy(Evt* script, s32 isInitialCall) {
     script->functionTemp[1] -= 1;
 
     if (script->functionTemp[1] == 0) {
-        npc->flags |= 2;
+        npc->flags |= NPC_FLAG_2;
         return ApiStatus_DONE1;
     }
 
@@ -282,7 +287,209 @@ INCLUDE_ASM(s32, "1a1f0_len_5390", update_encounters_neutral);
 void draw_encounters_neutral(void) {
 }
 
-INCLUDE_ASM(s32, "1a1f0_len_5390", update_encounters_pre_battle);
+void update_encounters_pre_battle(void) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    PlayerData* playerData = &gPlayerData;
+    Encounter* encounter;
+    Enemy* enemy;
+    s32 i;
+    s32 j;
+
+    switch (D_8009A5D0) {
+        case 0:
+            currentEncounter->fadeOutAmount = 0;
+            currentEncounter->unk_94 = 1;
+            currentEncounter->fadeOutAccel = 1;
+            currentEncounter->unk_08 = -1;
+            D_8009A654 = 0;
+            D_80077C40 = 0;
+            suspend_all_group(0x10);
+
+            for (i = 0; i < currentEncounter->numEncounters; i++) {
+                encounter = currentEncounter->encounterList[i];
+
+                if (encounter != NULL) {
+                    for (j = 0; j < encounter->count; j++) {
+                        enemy = encounter->enemy[j];
+                        if (enemy != NULL && !(enemy->flags & NPC_FLAG_NO_AI)) {
+                            if (enemy->aiScript != NULL) {
+                                suspend_all_script(enemy->aiScriptID);
+                            }
+                            if (enemy->auxScript != NULL) {
+                                suspend_all_script(enemy->auxScriptID);
+                            }
+                        }
+                    }
+                }
+            }
+
+            enemy = currentEncounter->currentEnemy;
+            if ((enemy->flags & NPC_FLAG_MOTION_BLUR) && currentEncounter->unk_12 == 0) {
+                currentEncounter->unk_94 = 0;
+                currentEncounter->battleStartCountdown = 0;
+                partner_handle_before_battle();
+                D_8009A5D0 = 3;
+                return;
+            }
+
+            if (gGameStatusPtr->debugEnemyContact == 2) {
+                currentEncounter->unk_94 = 0;
+                currentEncounter->battleStartCountdown = 10;
+                partner_handle_before_battle();
+                D_8009A5D0 = 2;
+                return;
+            }
+
+            enemy = currentEncounter->currentEnemy;
+            if (currentEncounter->hitType != 1 &&
+                currentEncounter->hitType != 3 &&
+                is_ability_active(ABILITY_FIRST_ATTACK) &&
+                (playerData->level >= enemy->npcSettings->level) &&
+                !(enemy->flags & ENEMY_FLAGS_40) &&
+                currentEncounter->unk_12 == 0)
+            {
+                currentEncounter->unk_94 = 0;
+                currentEncounter->battleStartCountdown = 0xA;
+                D_80077C40 = 1;
+                D_8009A5D0 = 2;
+                return;
+            }
+
+            enemy = currentEncounter->currentEnemy;
+            if ((
+                    (is_ability_active(ABILITY_BUMP_ATTACK)) &&
+                    (playerData->level >= enemy->npcSettings->level) &&
+                    (!(enemy->flags & ENEMY_FLAGS_40) &&
+                    (currentEncounter->unk_12 == 0))
+                ) || (
+                    (enemy = currentEncounter->currentEnemy,
+                    (currentEncounter->hitType == 3)) &&
+                    (is_ability_active(ABILITY_SPIN_ATTACK)) &&
+                    playerData->level >= enemy->npcSettings->level &&
+                    !(enemy->flags & ENEMY_FLAGS_40) &&
+                    currentEncounter->unk_12 == 0
+                ))
+            {
+                currentEncounter->battleStartCountdown = 10;
+                D_80077C40 = 1;
+                currentEncounter->unk_94 = 0;
+                D_8009A5D0 = 2;
+                return;
+            }
+
+            if (currentEncounter->songID < 0) {
+                switch (currentEncounter->eFirstStrike) {
+                    case 0:
+                        bgm_set_battle_song(SONG_NORMAL_BATTLE, FIRST_STRIKE_NONE);
+                        break;
+                    case 1:
+                        bgm_set_battle_song(SONG_NORMAL_BATTLE, FIRST_STRIKE_PLAYER);
+                        break;
+                    case 2:
+                        bgm_set_battle_song(SONG_NORMAL_BATTLE, FIRST_STRIKE_ENEMY);
+                        break;
+                }
+            } else {
+                bgm_set_battle_song(currentEncounter->songID, FIRST_STRIKE_NONE);
+            }
+            bgm_push_battle_song();
+            D_8009A654 = 1;
+            currentEncounter->battleStartCountdown = 10;
+            D_8009A5D0 = 1;
+        case 1:
+            if (currentEncounter->fadeOutAmount == 255) {
+                if (currentEncounter->battleStartCountdown != 0) {
+                    currentEncounter->battleStartCountdown--;
+                    break;
+                }
+
+                encounter = currentEncounter->currentEncounter;
+                for (i = 0; i < encounter->count; i++) {
+                    enemy = encounter->enemy[i];
+                    if (enemy != NULL &&
+                        ((!(enemy->flags & NPC_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->currentEnemy)) &&
+                        !(enemy->flags & NPC_FLAG_NO_AI) &&
+                        enemy->hitScript != NULL)
+                    {
+                        kill_script_by_ID(enemy->hitScriptID);
+                        enemy->hitScript = NULL;
+                    }
+                }
+
+                partner_handle_before_battle();
+                currentEncounter->unk_A0 = 0;
+                currentEncounter->unk_A2 = 0;
+
+                enemy = currentEncounter->currentEnemy;
+                currentEncounter->unk_10 = enemy->unk_B5;
+
+                if (is_ability_active(ABILITY_DIZZY_ATTACK) && currentEncounter->hitType == 3) {
+                    currentEncounter->unk_A0 = 4;
+                    currentEncounter->unk_A2 = 3;
+                }
+
+                sfx_stop_sound(SOUND_2111);
+                sfx_stop_sound(SOUND_2112);
+                sfx_stop_sound(SOUND_2113);
+                sfx_stop_sound(SOUND_2114);
+                set_battle_formation(0);
+                set_battle_stage(encounter->stage);
+                load_battle(encounter->battle);
+                currentEncounter->unk_07 = 1;
+                currentEncounter->unk_08 = 0;
+                currentEncounter->merleeCoinBonus = 0;
+                currentEncounter->damageTaken = 0;
+                currentEncounter->coinsEarned = 0;
+                currentEncounter->fadeOutAccel = 0;
+                currentEncounter->fadeOutAmount = 255;
+                set_screen_overlay_params_front(0, 255.0f);
+                gGameState = 5;
+                D_8009A678 = 1;
+                D_8009A5D0 = 0;
+            }
+            break;
+        case 2:
+            if (currentEncounter->battleStartCountdown != 0) {
+                currentEncounter->battleStartCountdown--;
+                break;
+            }
+
+            encounter = currentEncounter->currentEncounter;
+            for (i = 0; i < encounter->count; i++) {
+                enemy = encounter->enemy[i];
+                if (enemy != NULL &&
+                    (!(enemy->flags & NPC_FLAG_ENABLE_HIT_SCRIPT) || enemy == currentEncounter->currentEnemy) &&
+                    !(enemy->flags & NPC_FLAG_NO_AI) &&
+                    (enemy->hitScript != 0))
+                {
+                    kill_script_by_ID(enemy->hitScriptID);
+                    enemy->hitScript = NULL;
+                }
+            }
+
+            currentEncounter->unk_08 = 1;
+            currentEncounter->unk_07 = 1;
+            currentEncounter->battleOutcome = 0;
+            currentEncounter->merleeCoinBonus = 0;
+            currentEncounter->damageTaken = 0;
+            gGameState = 5;
+            currentEncounter->coinsEarned = 0;
+            currentEncounter->fadeOutAccel = 0;
+            currentEncounter->fadeOutAmount = 0;
+            D_8009A678 = 1;
+            D_8009A5D0 = 0;
+            break;
+        case 3:
+            currentEncounter->battleOutcome = 4;
+            currentEncounter->unk_08 = 1;
+            currentEncounter->fadeOutAmount = 0;
+            currentEncounter->fadeOutAccel = 0;
+            gGameState = 5;
+            D_8009A678 = 1;
+            D_8009A5D0 = 0;
+            break;
+    }
+}
 
 void draw_encounters_pre_battle(void) {
     EncounterStatus* encounter = &gCurrentEncounter;
@@ -398,16 +605,14 @@ void show_first_strike_message(void) {
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", update_encounters_post_battle);
 
-s32 draw_encounters_post_battle(void) {
+void draw_encounters_post_battle(void) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 ret = currentEncounter->fadeOutAccel;
 
     if (ret != 0) {
         set_screen_overlay_params_front(0, currentEncounter->fadeOutAmount);
-        ret = set_screen_overlay_color(0, 0, 0, 0);
+        set_screen_overlay_color(0, 0, 0, 0);
     }
-
-    return ret;
 }
 
 void update_encounters_conversation(void) {
@@ -493,7 +698,7 @@ s8 check_conversation_trigger(void) {
     s32 i, j;
 
     playerStatus->unk_C8 = NULL;
-    playerStatus->flags &= ~0x2000000;
+    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC;
     playerColliderHeight = playerStatus->colliderHeight;
     playerColliderRadius = playerStatus->colliderDiameter / 2;
     playerX = playerStatus->position.x;
@@ -592,7 +797,7 @@ s8 check_conversation_trigger(void) {
 
     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) && npc != NULL && !is_picking_up_item()) {
         playerStatus->unk_C8 = npc;
-        playerStatus->flags |= 0x2000000;
+        playerStatus->flags |= PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC;
         if (playerStatus->pressedButtons & BUTTON_A) {
             close_status_menu();
             gCurrentEncounter.hitType = ENCOUNTER_TRIGGER_CONVERSATION;

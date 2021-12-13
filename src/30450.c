@@ -366,8 +366,8 @@ void func_800559E0(void) {
     func_8004DA74();
 }
 
-void func_800559FC(void) {
-    snd_is_song_playing();
+s32 func_800559FC(void) {
+    return snd_is_song_playing();
 }
 
 INCLUDE_ASM(s32, "30450", snd_set_song_variation_fade);

@@ -250,9 +250,9 @@ EvtSource N(80243EF0) = SCRIPT({
     func_802D2B6C();
     SetPlayerAnimation(0x8000A);
     spawn {
-        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_20F6, 0);
+        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_20F6, 0);
         sleep 5;
-        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_20F6, 0);
+        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_20F6, 0);
         sleep 5;
     }
     spawn {
@@ -261,7 +261,7 @@ EvtSource N(80243EF0) = SCRIPT({
     sleep 30;
     spawn {
         loop 12 {
-            PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_20F6, 0);
+            PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_20F6, 0);
             sleep 5;
         }
     }
@@ -362,10 +362,10 @@ EvtSource N(80243EF0) = SCRIPT({
         NpcMoveTo(NPC_WORLD_TUBBA, 176, 0, 0);
     }
     spawn {
-        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_20F6, 0);
+        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_20F6, 0);
         ShakeCam(0, 0, 5, 0.30078125);
         sleep 5;
-        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_20F6, 0);
+        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_20F6, 0);
         ShakeCam(0, 0, 2, 0.150390625);
         sleep 8;
     }
@@ -389,10 +389,10 @@ EvtSource N(80243EF0) = SCRIPT({
     }
     spawn {
         loop {
-            PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_20F6, 0);
+            PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_20F6, 0);
             ShakeCam(0, 0, 5, 0.30078125);
             sleep 5;
-            PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_20F6, 0);
+            PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_20F6, 0);
             ShakeCam(0, 0, 2, 0.150390625);
             sleep 8;
         }
@@ -1409,10 +1409,10 @@ EvtSource N(idle_8024598C) = SCRIPT({
     }
     spawn {
         loop {
-            PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_20F6, 4194304);
+            PlaySoundAtNpc(NPC_SELF, SOUND_20F6, 4194304);
             ShakeCam(0, 0, 5, 2.0);
             sleep 5;
-            PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_20F6, 4194304);
+            PlaySoundAtNpc(NPC_SELF, SOUND_20F6, 4194304);
             ShakeCam(0, 0, 2, 1.0);
             sleep 8;
         }

@@ -388,8 +388,7 @@ typedef struct Entity {
     /* 0x54 */ Vec3f scale;
     /* 0x60 */ Vec3f rotation;
     /* 0x6C */ f32 shadowPosY;
-    /* 0x70 */ Matrix4f* inverseTransformMatrix; /* world-to-local */
-    /* 0x74 */ char unk_74[60];
+    /* 0x70 */ Matrix4f inverseTransformMatrix; /* world-to-local */
     /* 0xB0 */ float effectiveSize;
     /* 0xB4 */ char unk_B4[4];
     /* 0xB8 */ Mtx transformMatrix;
@@ -421,7 +420,7 @@ typedef struct StaticEntityData {
 
 typedef struct MusicSettings {
     /* 0x00 */ u16 flags;
-    /* 0x02 */ u16 unk_02;
+    /* 0x02 */ s16 unk_02;
     /* 0x04 */ s32 fadeOutTime;
     /* 0x08 */ s32 fadeInTime;
     /* 0x0C */ s16 unk_0C;
@@ -558,9 +557,9 @@ typedef struct Camera {
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
-    /* 0x054 */ f32 unk_54;
-    /* 0x058 */ f32 unk_58;
-    /* 0x05C */ f32 unk_5C;
+    /* 0x054 */ f32 unk_54; // x-related
+    /* 0x058 */ f32 unk_58; // y-related
+    /* 0x05C */ f32 unk_5C; // z-related
     /* 0x060 */ Vec3f targetPos;
     /* 0x06C */ f32 currentYaw;
     /* 0x070 */ f32 unk_70;
@@ -1502,8 +1501,8 @@ typedef struct ShopOwner {
 } ShopOwner;
 
 typedef struct ShopItemLocation {
-    /* 0x0 */ s16 posModelID;
-    /* 0x2 */ s16 triggerColliderID;
+    /* 0x0 */ u16 posModelID;
+    /* 0x2 */ u16 triggerColliderID;
 } ShopItemLocation; // size = 0x4
 
 typedef struct StaticInventoryItem {
@@ -1560,7 +1559,7 @@ typedef struct Shop {
 typedef struct Encounter {
     /* 0x00 */ s32 count;
     /* 0x04 */ struct Enemy* enemy[16];
-    /* 0x44 */ u16 battle;
+    /* 0x44 */ s16 battle;
     /* 0x46 */ s16 stage;
     /* 0x48 */ s16 encounterID;
     /* 0x4A */ char unk_4C[0x12];
@@ -1873,7 +1872,10 @@ typedef struct EncounterStatus {
     /* 0x094 */ s32 unk_94;
     /* 0x098 */ s32 fadeOutAccel;
     /* 0x09C */ s32 battleStartCountdown;
-    /* 0x0A0 */ char unk_A0[16];
+    /* 0x0A0 */ s8 unk_A0;
+    /* 0x0A1 */ char unk_A1[0x1];
+    /* 0x0A2 */ s16 unk_A2;
+    /* 0x0A4 */ char unk_A4[0xC];
     /* 0x0B0 */ s32 defeatFlags[60][12];
     /* 0xFB0 */ s16 recentMaps[2];
     /* 0xFB4 */ char unk_FB4[4];
@@ -1938,10 +1940,15 @@ typedef struct PauseMapSpace {
 } PauseMapSpace; // size = 0x14
 
 typedef struct MenuPanel {
-    /* 0x00 */ u8 initialized; //?
-    /* 0x01 */ s8 col;
-    /* 0x02 */ s8 row;
-    /* 0x03 */ u8 selected; // usually set to the current value from gridData
+    /* 0x00 */ union {
+    /*      */ s32 s;
+    /*      */ struct {
+    /* 0x00 */  u8 initialized;
+    /* 0x01 */  s8 col;
+    /* 0x02 */  s8 row;
+    /* 0x03 */  u8 selected; // usually set to the current value from gridData
+    /*      */ } c;
+    /*      */ } unk_00;
     /* 0x04 */ s8 page; // filemenu: 0 = select, 1 = delete, 3 = copy from, 4 = copy to, all else = save
     /* 0x05 */ s8 numCols;
     /* 0x06 */ s8 numRows;
@@ -2268,5 +2275,33 @@ typedef struct struct8015A578 {
     /* 0x03 */ u8 unk_03[5];
     /* 0x08 */ f32 unk_08;
 } struct8015A578; // size = 0x0C
+
+typedef struct SaveMetadata {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ u8 unk_04;
+    /* 0x05 */ char unk_05[0x1];
+    /* 0x06 */ s8 unk_06;
+    /* 0x07 */ s8 unk_07[8];
+    /* 0x0F */ char unk_0F[0x1];
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+} SaveMetadata; // size = 0x18
+
+typedef struct SpriteShadingLightSource {
+    /* 0x00 */ s8 flags;
+    /* 0x01 */ s8 rgb[3];
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 falloff;
+    /* 0x14 */ s8 unk_14;
+    /* 0x15 */ char unk_15[0x3];
+} SpriteShadingLightSource; // size = 0x18
+
+typedef struct SpriteShadingProfile {
+    /* 0x00 */ s16 flags;
+    /* 0x02 */ char unk_02[0x2];
+    /* 0x04 */ SpriteShadingLightSource sources[7];
+    /* 0xAC */ s8 ambientColor[3];
+    /* 0xAF */ s8 ambientPower; // ?
+} SpriteShadingProfile; // size = 0xB0
 
 #endif
