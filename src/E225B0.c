@@ -161,7 +161,7 @@ void func_802B735C_E2290C(void) {
         case 2:
             temp_a0->scale = 0.57f;
             temp_a0->unk_24 += 1;
-            sfx_play_sound_at_player(SOUND_UNKNOWN_17B, 0);
+            sfx_play_sound_at_player(SOUND_17B, 0);
             break;
         case 3:
             temp_a0->scale = 0.53f;

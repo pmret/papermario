@@ -76,7 +76,7 @@ EvtSource N(main) = {
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(6.0))
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(5.0))
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(4.0))
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_2030)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2030)
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(3.0))
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(2.0))
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(1.0))

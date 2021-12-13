@@ -38,7 +38,7 @@ EvtSource N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x00000080)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(N(FadeBackgroundToBlack))
-    EVT_CALL(PlaySound, SOUND_UNKNOWN_377)
+    EVT_CALL(PlaySound, SOUND_377)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_PLANT)
     EVT_THREAD
         EVT_WAIT_FRAMES(50)
@@ -66,9 +66,9 @@ EvtSource N(main) = {
         EVT_WAIT_FRAMES(25)
         EVT_LOOP(12)
             EVT_WAIT_FRAMES(1)
-            EVT_CALL(PlaySound, SOUND_UNKNOWN_202C)
+            EVT_CALL(PlaySound, SOUND_202C)
             EVT_WAIT_FRAMES(2)
-            EVT_CALL(PlaySound, SOUND_UNKNOWN_202D)
+            EVT_CALL(PlaySound, SOUND_202D)
             EVT_WAIT_FRAMES(1)
         EVT_END_LOOP
     EVT_END_THREAD

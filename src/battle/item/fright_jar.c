@@ -32,7 +32,7 @@ EvtSource N(main) = {
         EVT_CALL(MoveBattleCamOver, 50)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_CROUCH)
-    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_367)
+    EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_367)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(0), -40)
     EVT_ADD(EVT_VAR(1), 5)

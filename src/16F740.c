@@ -912,7 +912,7 @@ void btl_state_update_partner_move(void) {
                         break;
                 }
 
-                sfx_play_sound(SOUND_UNKNOWN_2107);
+                sfx_play_sound(SOUND_2107);
                 btl_show_battle_message(phi_s0, 0x3C);
 
                 for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {

@@ -54,8 +54,8 @@ glabel filemenu_yesno_draw_options_contents
 /* 167610 80246DB0 AFA00010 */  sw        $zero, 0x10($sp)
 /* 167614 80246DB4 0C09265F */  jal       filemenu_draw_message
 /* 167618 80246DB8 AFA00014 */   sw       $zero, 0x14($sp)
-/* 16761C 80246DBC 3C038025 */  lui       $v1, %hi(D_8024C098_C09918)
-/* 167620 80246DC0 8063C098 */  lb        $v1, %lo(D_8024C098_C09918)($v1)
+/* 16761C 80246DBC 3C038025 */  lui       $v1, %hi(D_8024C098)
+/* 167620 80246DC0 8063C098 */  lb        $v1, %lo(D_8024C098)($v1)
 /* 167624 80246DC4 24020001 */  addiu     $v0, $zero, 1
 /* 167628 80246DC8 1462000C */  bne       $v1, $v0, .L80246DFC
 /* 16762C 80246DCC 00000000 */   nop

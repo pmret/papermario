@@ -40,7 +40,7 @@ ApiStatus func_8024046C_EE6A1C(Evt* script, s32 isInitialCall) {
     script->functionTemp[0] = evt_get_variable(script, *args++);
     script->functionTemp[1] = evt_get_variable(script, *args++);
     script->functionTemp[2] = evt_get_variable(script, *args++);
-    sfx_adjust_env_sound_pos(SOUND_UNKNOWN_194, 0, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
+    sfx_adjust_env_sound_pos(SOUND_194, 0, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
 
     return ApiStatus_DONE2;
 }

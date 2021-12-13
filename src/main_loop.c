@@ -3,6 +3,7 @@
 #include "ld_addrs.h"
 #include "hud_element.h"
 #include "sprite.h"
+#include "overlay.h"
 
 s8 D_80074020 = 1;
 s8 D_80074021 = 5;
@@ -221,7 +222,7 @@ void gfx_draw_frame(void) {
         switch (D_800741A2) {
             case 0:
             case 1:
-                _render_transition_stencil(7, D_800741A0, 0);
+                _render_transition_stencil(7, D_800741A0, NULL);
                 break;
         }
     }

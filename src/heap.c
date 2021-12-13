@@ -16,7 +16,7 @@ s32 general_heap_malloc_tail(s32 size) {
     return _heap_malloc_tail(&heap_generalHead, size);
 }
 
-s32 general_heap_free(s32* data) {
+s32 general_heap_free(void* data) {
     return _heap_free(&heap_generalHead, data);
 }
 

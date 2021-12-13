@@ -681,7 +681,7 @@ EvtSource N(interact_802437C8) = SCRIPT({
                               0x0079));
                 NpcFacePlayer(NPC_SELF, 1);
                 SetNpcAnimation(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_1);
-                PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_262, 0);
+                PlaySoundAtNpc(NPC_SELF, SOUND_262, 0);
                 ShowEmote(-1, EMOTE_EXCLAMATION, 0, 15, 1, 0, 0, 0, 0);
                 sleep 15;
                 SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_1, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,

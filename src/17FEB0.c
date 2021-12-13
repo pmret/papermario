@@ -1,4 +1,7 @@
 #include "common.h"
+#include "battle/battle.h"
+#include "script_api/battle.h"
+#include "effects.h"
 
 s32 calc_item_check_hit(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -26,7 +29,7 @@ s32 calc_item_check_hit(void) {
                 sfx_play_sound_at_position(0x10C, 0, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
                 return HIT_RESULT_IMMUNE;
             }
-            if ((battleStatus->currentAttackElement & 0x80) && (actorPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP)) {
+            if ((battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP) && (actorPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP)) {
                 sfx_play_sound_at_position(0xE9, 0, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
                 return HIT_RESULT_LANDED_ON_SPIKE;
             }
@@ -55,31 +58,31 @@ ApiStatus ItemDamageEnemy(Evt* script, s32 isInitialCall) {
     a5 = *args++;
 
     if ((a5 & 0x30) == 0x30) {
-        battleStatus->flags1 |= 0x30;
+        gBattleStatus.flags1 |= (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE);
     } else if (a5 & flag) {
-        battleStatus->flags1 = (battleStatus->flags1 | flag) & ~0x20;
+        gBattleStatus.flags1 = (gBattleStatus.flags1 | flag) & ~BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (a5 & 0x20) {
-        battleStatus->flags1 = (battleStatus->flags1 & ~flag) | 0x20;
+        gBattleStatus.flags1 = (gBattleStatus.flags1 & ~flag) | BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
-        battleStatus->flags1 = (battleStatus->flags1 & ~flag) & ~0x20;
+        gBattleStatus.flags1 = (gBattleStatus.flags1 & ~flag) & ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
     if (a5 & 0x40) {
-        gBattleStatus.flags1 |= 0x40;
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
-        gBattleStatus.flags1 &= ~0x40;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
 
     if (a5 & 0x200) {
-        gBattleStatus.flags1 |= 0x200;
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
-        gBattleStatus.flags1 &= ~0x200;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
 
     if (a5 & 0x80) {
-        gBattleStatus.flags1 |= 0x80;
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
-        gBattleStatus.flags1 &= ~0x80;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
     actor = get_actor(script->owner1.actorID);
@@ -123,31 +126,31 @@ ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall) {
     a5 = *args++;
 
     if ((a5 & 0x30) == 0x30) {
-        battleStatus->flags1 |= 0x30;
+        gBattleStatus.flags1 |= (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE);
     } else if (a5 & flag) {
-        battleStatus->flags1 = (battleStatus->flags1 | flag) & ~0x20;
+        gBattleStatus.flags1 = (gBattleStatus.flags1 | flag) & ~BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (a5 & 0x20) {
-        battleStatus->flags1 = (battleStatus->flags1 & ~flag) | 0x20;
+        gBattleStatus.flags1 = (gBattleStatus.flags1 & ~flag) | BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
-        battleStatus->flags1 = (battleStatus->flags1 & ~flag) & ~0x20;
+        gBattleStatus.flags1 = (gBattleStatus.flags1 & ~flag) & ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
     if (a5 & 0x40) {
-        gBattleStatus.flags1 |= 0x40;
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
-        gBattleStatus.flags1 &= ~0x40;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
 
     if (a5 & 0x200) {
-        gBattleStatus.flags1 |= 0x200;
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
-        gBattleStatus.flags1 &= ~0x200;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
 
     if (a5 & 0x80) {
-        gBattleStatus.flags1 |= 0x80;
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
-        gBattleStatus.flags1 &= ~0x80;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
     actor = get_actor(script->owner1.actorID);
@@ -190,31 +193,31 @@ ApiStatus func_80252B3C(Evt* script, s32 isInitialCall) {
     a5 = *args++;
 
     if ((a5 & 0x30) == 0x30) {
-        battleStatus->flags1 |= 0x30;
+        gBattleStatus.flags1 |= (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE);
     } else if (a5 & flag) {
-        battleStatus->flags1 = (battleStatus->flags1 | flag) & ~0x20;
+        gBattleStatus.flags1 = (gBattleStatus.flags1 | flag) & ~BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (a5 & 0x20) {
-        battleStatus->flags1 = (battleStatus->flags1 & ~flag) | 0x20;
+        gBattleStatus.flags1 = (gBattleStatus.flags1 & ~flag) | BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
-        battleStatus->flags1 = (battleStatus->flags1 & ~flag) & ~0x20;
+        gBattleStatus.flags1 = (gBattleStatus.flags1 & ~flag) & ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
     if (a5 & 0x40) {
-        gBattleStatus.flags1 |= 0x40;
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
-        gBattleStatus.flags1 &= ~0x40;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
 
     if (a5 & 0x200) {
-        gBattleStatus.flags1 |= 0x200;
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
-        gBattleStatus.flags1 &= ~0x200;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
 
     if (a5 & 0x80) {
-        gBattleStatus.flags1 |= 0x80;
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
-        gBattleStatus.flags1 &= ~0x80;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
     actor = get_actor(script->owner1.actorID);
@@ -257,31 +260,31 @@ ApiStatus ItemCheckHit(Evt* script, s32 isInitialCall) {
     a5 = *args++;
 
     if ((a5 & 0x30) == 0x30) {
-        battleStatus->flags1 |= 0x30;
+        gBattleStatus.flags1 |= (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE);
     } else if (a5 & flag) {
-        battleStatus->flags1 = (battleStatus->flags1 | flag) & ~0x20;
+        gBattleStatus.flags1 = (gBattleStatus.flags1 | flag) & ~BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (a5 & 0x20) {
-        battleStatus->flags1 = (battleStatus->flags1 & ~flag) | 0x20;
+        gBattleStatus.flags1 = (gBattleStatus.flags1 & ~flag) | BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
-        battleStatus->flags1 = (battleStatus->flags1 & ~flag) & ~0x20;
+        gBattleStatus.flags1 = (gBattleStatus.flags1 & ~flag) & ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
     if (a5 & 0x40) {
-        gBattleStatus.flags1 |= 0x40;
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
-        gBattleStatus.flags1 &= ~0x40;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
 
     if (a5 & 0x200) {
-        gBattleStatus.flags1 |= 0x200;
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
-        gBattleStatus.flags1 &= ~0x200;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
 
     if (a5 & 0x80) {
-        gBattleStatus.flags1 |= 0x80;
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
-        gBattleStatus.flags1 &= ~0x80;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
     actor = get_actor(script->owner1.actorID);
