@@ -9,8 +9,8 @@ dlabel jtbl_8010C8A8
 .section .text
 
 glabel popup_menu_draw_title_contents
-/* 8DAF8 800F4648 3C028011 */  lui       $v0, %hi(D_8010D69C)
-/* 8DAFC 800F464C 8C42D69C */  lw        $v0, %lo(D_8010D69C)($v0)
+/* 8DAF8 800F4648 3C028011 */  lui       $v0, %hi(gPopupMenu)
+/* 8DAFC 800F464C 8C42D69C */  lw        $v0, %lo(gPopupMenu)($v0)
 /* 8DB00 800F4650 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 8DB04 800F4654 AFBF0034 */  sw        $ra, 0x34($sp)
 /* 8DB08 800F4658 AFB40030 */  sw        $s4, 0x30($sp)
@@ -29,8 +29,8 @@ glabel popup_menu_draw_title_contents
 /* 8DB3C 800F468C 00400008 */  jr        $v0
 /* 8DB40 800F4690 00000000 */   nop
 .L800F4694_8DB44:
-/* 8DB44 800F4694 3C138011 */  lui       $s3, %hi(D_8010D69C)
-/* 8DB48 800F4698 2673D69C */  addiu     $s3, $s3, %lo(D_8010D69C)
+/* 8DB44 800F4694 3C138011 */  lui       $s3, %hi(gPopupMenu)
+/* 8DB48 800F4698 2673D69C */  addiu     $s3, $s3, %lo(gPopupMenu)
 /* 8DB4C 800F469C 8E620000 */  lw        $v0, ($s3)
 /* 8DB50 800F46A0 8C43031C */  lw        $v1, 0x31c($v0)
 /* 8DB54 800F46A4 24080001 */  addiu     $t0, $zero, 1

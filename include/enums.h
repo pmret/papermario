@@ -1454,6 +1454,7 @@ enum Triggers {
 };
 
 enum Buttons {
+    BUTTON_NONE         = 0x00000000,
     BUTTON_C_RIGHT      = 0x00000001,
     BUTTON_C_LEFT       = 0x00000002,
     BUTTON_C_DOWN       = 0x00000004,

@@ -691,6 +691,8 @@ segments:
       - [0x9DA58]
       - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
     - [0x9DE60, data]
+    - [0xA2D40, .data, 8a860_len_3f30]
+    - [0xA2D90, data]
     - [0xA5100] # bss at 8010C920
   - type: code
     start: 0xA5DD0

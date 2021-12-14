@@ -18,8 +18,8 @@ glabel func_800F4944
 /* 8DE0C 800F495C 24D10007 */  addiu     $s1, $a2, 7
 /* 8DE10 800F4960 104000A9 */  beqz      $v0, .L800F4C08
 /* 8DE14 800F4964 AFBF0020 */   sw       $ra, 0x20($sp)
-/* 8DE18 800F4968 3C028011 */  lui       $v0, %hi(D_8010D69C)
-/* 8DE1C 800F496C 8C42D69C */  lw        $v0, %lo(D_8010D69C)($v0)
+/* 8DE18 800F4968 3C028011 */  lui       $v0, %hi(gPopupMenu)
+/* 8DE1C 800F496C 8C42D69C */  lw        $v0, %lo(gPopupMenu)($v0)
 /* 8DE20 800F4970 8C430318 */  lw        $v1, 0x318($v0)
 /* 8DE24 800F4974 2C62000E */  sltiu     $v0, $v1, 0xe
 /* 8DE28 800F4978 104000A3 */  beqz      $v0, .L800F4C08
