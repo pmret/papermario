@@ -57,8 +57,8 @@ glabel clear_entity_data
 .L80110D7C:
 /* A747C 80110D7C 3C018015 */  lui       $at, %hi(bStaticEntityDataSize)
 /* A7480 80110D80 AC201660 */  sw        $zero, %lo(bStaticEntityDataSize)($at)
-/* A7484 80110D84 3C028015 */  lui       $v0, %hi(D_801516F4)
-/* A7488 80110D88 244216F4 */  addiu     $v0, $v0, %lo(D_801516F4)
+/* A7484 80110D84 3C028015 */  lui       $v0, %hi(bStaticEntityData + 0xC)
+/* A7488 80110D88 244216F4 */  addiu     $v0, $v0, %lo(bStaticEntityData + 0xC)
 .L80110D8C:
 /* A748C 80110D8C AC400000 */  sw        $zero, ($v0)
 /* A7490 80110D90 2484FFFF */  addiu     $a0, $a0, -1

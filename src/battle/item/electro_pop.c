@@ -91,7 +91,7 @@ EvtSource N(main) = {
     EVT_CALL(GetActorPos, ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 20)
     EVT_CALL(PlayEffect, 0x57, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlaySound, SOUND_UNKNOWN_379)
+    EVT_CALL(PlaySound, SOUND_379)
     EVT_CALL(GetItemPower, ITEM_VOLT_SHROOM, EVT_VAR(0), EVT_VAR(1))
     EVT_CALL(N(func_802A123C_7307DC))
     EVT_WAIT_FRAMES(40)

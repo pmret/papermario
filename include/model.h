@@ -71,7 +71,7 @@ typedef struct ModelLocalVertexCopy {
 
 typedef struct ModelTreeInfo {
     /* 0x00 */ u8 modelIndex;
-    /* 0x01 */ s8 treeDepth;
+    /* 0x01 */ u8 treeDepth;
     /* 0x02 */ s8 textureID;
     /* 0x03 */ char unk_03;
 } ModelTreeInfo; // size = 0x04

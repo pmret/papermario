@@ -171,7 +171,7 @@ NpcSettings N(npcSettings_80243DA0) = {
 
 EvtSource N(80243DCC) = SCRIPT({
     loop {
-        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_20F6, 0);
+        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_20F6, 0);
         ShakeCam(0, 0, 3, 0.80078125);
     }
 });

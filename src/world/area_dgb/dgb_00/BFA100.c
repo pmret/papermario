@@ -189,7 +189,7 @@ EvtSource N(80240F50) = SCRIPT({
         sleep EVT_VAR(0);
         if (EVT_MAP_VAR(0) == 0) {
             DisablePlayerInput(TRUE);
-            PlaySoundAt(SOUND_UNKNOWN_B4, 0, 240, 10, -125);
+            PlaySoundAt(SOUND_B4, 0, 240, 10, -125);
             ShakeCam(0, 0, 20, 2.0);
             ShowMessageAtScreenPos(MESSAGE_ID(0x0E, 0x00EF), 160, 40);
             DisablePlayerInput(FALSE);
@@ -227,10 +227,10 @@ EvtSource N(8024103C) = SCRIPT({
     SpeakToPlayer(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x00DB));
     SpeakToPlayer(NPC_BOO4, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x00DC));
     SpeakToPlayer(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x00DD));
-    PlaySoundAt(SOUND_UNKNOWN_B4, 0, 240, 10, -125);
+    PlaySoundAt(SOUND_B4, 0, 240, 10, -125);
     ShakeCam(0, 0, 20, 2.0);
     sleep 10;
-    PlaySoundAt(SOUND_UNKNOWN_B4, 0, 240, 10, -125);
+    PlaySoundAt(SOUND_B4, 0, 240, 10, -125);
     ShakeCam(0, 0, 20, 2.0);
     InterpNpcYaw(NPC_BOO0, 90, 1);
     ShowMessageAtScreenPos(MESSAGE_ID(0x0E, 0x00DE), 160, 40);
@@ -244,12 +244,12 @@ EvtSource N(8024103C) = SCRIPT({
 EvtSource N(802413F4) = SCRIPT({
     SetPlayerSpeed(8.0);
     PlayerMoveTo(184, -44, 0);
-    PlaySoundAtNpc(NPC_BOO0, SOUND_UNKNOWN_262, 0);
-    PlaySoundAtNpc(NPC_BOO1, SOUND_UNKNOWN_262, 0);
-    PlaySoundAtNpc(NPC_BOO2, SOUND_UNKNOWN_262, 0);
-    PlaySoundAtNpc(NPC_BOO3, SOUND_UNKNOWN_262, 0);
-    PlaySoundAtNpc(NPC_BOO4, SOUND_UNKNOWN_262, 0);
-    PlaySoundAtNpc(NPC_BOO5, SOUND_UNKNOWN_262, 0);
+    PlaySoundAtNpc(NPC_BOO0, SOUND_262, 0);
+    PlaySoundAtNpc(NPC_BOO1, SOUND_262, 0);
+    PlaySoundAtNpc(NPC_BOO2, SOUND_262, 0);
+    PlaySoundAtNpc(NPC_BOO3, SOUND_262, 0);
+    PlaySoundAtNpc(NPC_BOO4, SOUND_262, 0);
+    PlaySoundAtNpc(NPC_BOO5, SOUND_262, 0);
     ShowEmote(0, EMOTE_EXCLAMATION, 45, 20, 1, 0, 0, 0, 0);
     ShowEmote(1, EMOTE_EXCLAMATION, 45, 20, 1, 0, 0, 0, 0);
     ShowEmote(2, EMOTE_EXCLAMATION, 45, 20, 1, 0, 0, 0, 0);
@@ -308,10 +308,10 @@ EvtSource N(802413F4) = SCRIPT({
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     PanToTarget(0, 0, 0);
-    PlaySoundAt(SOUND_UNKNOWN_B4, 0, 240, 10, -125);
+    PlaySoundAt(SOUND_B4, 0, 240, 10, -125);
     ShakeCam(0, 0, 20, 2.0);
     sleep 5;
-    PlaySoundAt(SOUND_UNKNOWN_B4, 0, 240, 10, -125);
+    PlaySoundAt(SOUND_B4, 0, 240, 10, -125);
     ShakeCam(0, 0, 20, 2.0);
     ShowMessageAtScreenPos(MESSAGE_ID(0x0E, 0x00E7), 160, 40);
     await N(80240B08);
@@ -597,7 +597,7 @@ EvtSource N(80242B84) = SCRIPT({
     DisablePlayerPhysics(TRUE);
     DisablePartnerAI(0);
     SetNpcPos(NPC_PARTNER, 320, 10, -160);
-    PlaySound(SOUND_UNKNOWN_32E);
+    PlaySound(SOUND_32E);
     spawn {
         loop 180 {
             GetNpcPos(NPC_SENTINEL, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
@@ -641,7 +641,7 @@ EvtSource N(80242B84) = SCRIPT({
     SetNpcPos(NPC_SENTINEL, 175, 85, -33);
     SetNpcAnimation(NPC_SENTINEL, NPC_ANIM_sentinel_Palette_00_Anim_9);
     sleep 20;
-    PlaySoundAtNpc(NPC_SENTINEL, SOUND_UNKNOWN_2F7, 0);
+    PlaySoundAtNpc(NPC_SENTINEL, SOUND_2F7, 0);
     SetNpcAnimation(NPC_SENTINEL, NPC_ANIM_sentinel_Palette_00_Anim_2);
     SetNpcPos(NPC_SENTINEL, 175, 70, -33);
     spawn {
@@ -658,7 +658,7 @@ EvtSource N(80242B84) = SCRIPT({
     }
     SetPlayerJumpscale(0);
     PlayerJump1(175, 0, -35, 10);
-    PlaySoundAtNpc(NPC_SENTINEL, SOUND_UNKNOWN_162, 0);
+    PlaySoundAtNpc(NPC_SENTINEL, SOUND_162, 0);
     SetPlayerAnimation(ANIM_80003);
     spawn {
         sleep 2;

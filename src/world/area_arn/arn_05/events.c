@@ -478,7 +478,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
 
 EvtSource N(80242BEC) = SCRIPT({
     loop EVT_VAR(0) {
-        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_20F6, 0);
+        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_20F6, 0);
         ShakeCam(0, 0, 10, 0.5);
         sleep 5;
     }
@@ -487,7 +487,7 @@ EvtSource N(80242BEC) = SCRIPT({
 EvtSource N(80242C50) = SCRIPT({
     DisablePlayerInput(TRUE);
     NpcFacePlayer(NPC_BOO2, 1);
-    PlaySoundAtNpc(NPC_BOO2, SOUND_UNKNOWN_262, 0);
+    PlaySoundAtNpc(NPC_BOO2, SOUND_262, 0);
     ShowEmote(2, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
     sleep 20;
     GetNpcPos(NPC_BOO2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
@@ -510,12 +510,12 @@ EvtSource N(80242C50) = SCRIPT({
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     SpeakToPlayer(NPC_BOO2, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00A0));
-    PlaySoundAt(SOUND_UNKNOWN_20F6, 0, 450, 200, 160);
+    PlaySoundAt(SOUND_20F6, 0, 450, 200, 160);
     ShakeCam(0, 0, 20, 0.80078125);
-    PlaySoundAtNpc(NPC_BOO0, SOUND_UNKNOWN_262, 0);
-    PlaySoundAtNpc(NPC_BOO1, SOUND_UNKNOWN_262, 0);
-    PlaySoundAtNpc(NPC_BOO2, SOUND_UNKNOWN_262, 0);
-    PlaySoundAtNpc(NPC_BOO4, SOUND_UNKNOWN_262, 0);
+    PlaySoundAtNpc(NPC_BOO0, SOUND_262, 0);
+    PlaySoundAtNpc(NPC_BOO1, SOUND_262, 0);
+    PlaySoundAtNpc(NPC_BOO2, SOUND_262, 0);
+    PlaySoundAtNpc(NPC_BOO4, SOUND_262, 0);
     ShowEmote(0, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
     ShowEmote(1, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
     ShowEmote(2, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
@@ -595,8 +595,8 @@ EvtSource N(80242C50) = SCRIPT({
     NpcFaceNpc(NPC_BOO0, NPC_WORLD_TUBBA, 1);
     NpcFaceNpc(NPC_BOO1, NPC_WORLD_TUBBA, 1);
     SetNpcPos(NPC_BOO2, 272, 190, 214);
-    PlaySoundAtNpc(NPC_BOO0, SOUND_UNKNOWN_262, 0);
-    PlaySoundAtNpc(NPC_BOO1, SOUND_UNKNOWN_262, 0);
+    PlaySoundAtNpc(NPC_BOO0, SOUND_262, 0);
+    PlaySoundAtNpc(NPC_BOO1, SOUND_262, 0);
     ShowEmote(0, EMOTE_EXCLAMATION, 45, 20, 1, 0, 0, 0, 0);
     ShowEmote(1, EMOTE_EXCLAMATION, 45, 20, 1, 0, 0, 0, 0);
     spawn {
@@ -678,7 +678,7 @@ EvtSource N(80242C50) = SCRIPT({
     PanToTarget(0, 0, 1);
     spawn {
         sleep 50;
-        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_315, 0);
+        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_315, 0);
     }
     sleep 40;
     SetNpcPos(NPC_BOO2, 0, -1000, 0);

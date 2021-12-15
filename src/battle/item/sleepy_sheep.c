@@ -344,7 +344,7 @@ EvtSource N(main) = {
     EVT_CALL(SetBattleCamZoom, 169)
     EVT_CALL(MoveBattleCamOver, 50)
     EVT_THREAD
-        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_UNKNOWN_364)
+        EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_364)
         EVT_LOOP(7)
             EVT_CALL(StartRumble, 2)
             EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.5))

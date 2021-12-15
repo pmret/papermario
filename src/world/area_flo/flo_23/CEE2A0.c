@@ -215,7 +215,7 @@ EvtSource N(interact_80241564) = SCRIPT({
                 N(func_80240C2C_CEEE8C)(EVT_VAR(0));
                 MakeItemEntity(EVT_VAR(8), 385, 20, -34, 1, 0);
                 EVT_VAR(7) = EVT_VAR(0);
-                PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2095, 0);
+                PlaySoundAtNpc(NPC_SELF, SOUND_2095, 0);
                 SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_3);
                 sleep 20;
                 RemoveItemEntity(EVT_VAR(7));

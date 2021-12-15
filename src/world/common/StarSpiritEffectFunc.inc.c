@@ -5,7 +5,7 @@
 ApiStatus N(StarSpiritEffectFunc1)(Evt* script, s32 isInitialCall) {
     StarSpiritEffect* ptr = (StarSpiritEffect*)script->varTable[0];
 
-    sfx_adjust_env_sound_pos(SOUND_UNKNOWN_A2, 0, ptr->unk_00, ptr->unk_04, ptr->unk_08);
+    sfx_adjust_env_sound_pos(SOUND_A2, 0, ptr->unk_00, ptr->unk_04, ptr->unk_08);
 
     if (ptr->unk_44 < 2) {
         return ApiStatus_BLOCK;

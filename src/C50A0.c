@@ -25,7 +25,6 @@ INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
 INCLUDE_ASM(s32, "C50A0", draw_tiled_image);
 
 s32 integer_log(s32 number, u32 base) {
-    f64 temp_f0;
     f32 fNumber = number;
     s32 ret = 1;
 

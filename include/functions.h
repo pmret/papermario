@@ -47,7 +47,6 @@ void gravity_use_fall_parms(void);
 f32 get_clamped_angle_diff(f32, f32);
 s32 intro_logos_fade_out(s16 addAlpha);
 
-void _render_transition_stencil(s32, f32, s32);
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
 s32 create_entity(StaticEntityData*, s32, s32, s32, s32, ...);
@@ -77,6 +76,11 @@ void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,
                                 s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity);
 
+// file menu stuff
+void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);
+s8* filemenu_get_menu_message(s32 idx);
+void filemenu_draw_message(s8*, s32 posX, s32 posY, s32 alpha, s32 color, s32 flags);
+
 // append gfx funcs
 void func_80257B28(s32);
 void func_8025595C(Actor*);
@@ -95,7 +99,13 @@ s32 can_trigger_loading_zone(void);
 void func_802667F0(s32, Actor*, f32, f32, f32);
 
 void* general_heap_malloc(s32 size);
-s32 general_heap_free(s32* data);
+s32 general_heap_free(void* data);
+
+s32 integer_log(s32 number, u32 base);
+
+void set_battle_formation(s32);
+void set_battle_stage(s32);
+void load_battle(s32);
 
 void entity_Shadow_init(Shadow* entity);
 void entity_SaveBlock_idle(Entity* entity);
@@ -292,10 +302,10 @@ void set_animation_rate(s32 actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
 ModelAnimator* get_animator_by_index(s32 arg0);
 void set_screen_overlay_params_front(u8, f32);
-void set_screen_overlay_params_back(s32, f32);
+void set_screen_overlay_params_back(u8, f32);
 void set_screen_overlay_alpha(s32, f32);
-void get_screen_overlay_params(s32, f32*, f32*);
-s32 set_screen_overlay_color(s32, u8, u8, u8);
+void get_screen_overlay_params(s32, u8*, f32*);
+void set_screen_overlay_color(s32, u8, u8, u8);
 void set_screen_overlay_center(s32, s32, s32, s32);
 s32 rand_int(s32);
 void sort_items(void);
@@ -328,6 +338,7 @@ void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
 s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
 DynamicEntity* get_generic_entity(s32 idx);
+Trigger* bind_trigger_1(EvtSource* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1, s32 priority);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 
@@ -407,6 +418,7 @@ void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
 void func_80138D88(s32, s32, s32, s32, f32);
+void func_8013A4D0(void);
 
 void btl_cam_set_target_pos(f32, f32, f32);
 void deduct_current_move_fp(void);
@@ -526,7 +538,7 @@ void* load_asset_by_name(const char* assetName, u32* decompressedSize);
 
 void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
 s32 func_8011CFBC(void);
-s32 set_screen_overlay_center_worldpos(void);
+void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z);
 s32 mdl_get_next_texture_address(s32);
 void draw_msg(s32 msgID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
@@ -591,6 +603,25 @@ void clear_player_data(void);
 
 void enforce_hpfp_limits(void);
 
+void func_800E98EC(void);
+void func_800E9900(void);
+void show_coin_counter(void);
+s32 add_item(s32 itemID);
+s32 add_badge(s32 itemID);
+void func_800E96C8(void);
+void hide_popup_menu(void);
+void destroy_popup_menu(void);
+void func_800E98C4(void);
+s32 get_item_count(void);
+s32 get_stored_empty_count(void);
+s32 get_stored_count(void);
+s32 get_item_empty_count(void);
+void shop_open_item_select_popup(s32 mode);
+void hide_coin_counter(void);
+void set_message_msg(s32 msgID, s32 index);
+void set_message_value(s32 value, s32 index);
+s32 store_item(s32 itemID);
+void open_status_menu_short(void);
 void func_8024EFE0(f32 x, f32 y, f32 z, s32 a, s32 b, s32 c);
 void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a);
 
