@@ -224,7 +224,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
     
     switch (script->functionTemp[0]) {
         case 0:
-            if (does_script_exist(script->functionTemp[1]) == 0) {
+            if (!does_script_exist(script->functionTemp[1])) {
                 script->functionTemp[0] = 100;
                 script->functionTemp[2] = 0;
                 D_80286528 = msg_get_printer_for_msg(0x1E0001, &script->functionTemp[2]);
