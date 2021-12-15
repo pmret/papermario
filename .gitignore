@@ -15,6 +15,7 @@ expected/
 /ver/current
 /ver/*/assets
 ctx.c.m2c
+/data2c
 
 # Build artifacts
 build.ninja
