@@ -448,7 +448,7 @@ void appendGfx_npc(Npc* npc) {
     f32 temp_f22 = npc_get_render_yaw();
 
     guTranslateF(subroutine_arg6, npc->pos.x, npc->pos.y + npc->unk_AB, npc->pos.z);
-    if (npc->flags & NPC_FLAG_80) {
+    if (npc->flags & NPC_FLAG_UPSIDE_DOWN) {
         mtx_ident_mirror_y(subroutine_arg16);
         guMtxCatF(subroutine_arg16, subroutine_arg6, subroutine_arg6);
     }
@@ -502,7 +502,7 @@ void appendGfx_npc(Npc* npc) {
 
     if (npc->flags & NPC_FLAG_REFLECT_WALL) {
         guTranslateF(subroutine_arg6, npc->pos.x, npc->pos.y + npc->unk_AB, -npc->pos.z);
-        if (npc->flags & NPC_FLAG_80) {
+        if (npc->flags & NPC_FLAG_UPSIDE_DOWN) {
             mtx_ident_mirror_y(subroutine_arg16);
             guMtxCatF(subroutine_arg16, subroutine_arg6, subroutine_arg6);
         }
