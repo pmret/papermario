@@ -574,11 +574,11 @@ void func_800E0514(void) {
 
 s32 has_valid_conversation_npc(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32* unk_C8 = playerStatus->unk_C8;
+    Npc* unk_C8 = playerStatus->unk_C8;
     s32 ret = 0;
     s32 cond;
 
-    if (unk_C8 != NULL && !(*unk_C8 & 0x10000000)) {
+    if (unk_C8 != NULL && !(unk_C8->flags & 0x10000000)) {
         cond = (playerStatus->flags & 0x2002000) == 0x2000000;
         ret = cond;
     }
