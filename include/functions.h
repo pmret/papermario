@@ -602,7 +602,7 @@ void clear_item_entity_data(void);
 void clear_player_data(void);
 
 void enforce_hpfp_limits(void);
-
+s32 should_collider_allow_interact(s32);
 void func_800E98EC(void);
 void func_800E9900(void);
 void show_coin_counter(void);
