@@ -1,5 +1,7 @@
 #include "types.h"
 
+// This file exists to enforce the order of BSS symbols, since they were reordered in the original rom.
+
 #ifndef M2CTX
 #define BSS __attribute__ ((section (".bss")))
 #else
