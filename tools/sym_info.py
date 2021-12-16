@@ -22,18 +22,14 @@ parser.add_argument(
     action="store_true",
     help="use the map file in expected/build/ instead of build/"
 )
-args = parser.parse_args()
 
-mymap = os.path.join(root_dir, "ver", "current", "build", "papermario.map")
-if args.use_expected:
-    mymap = os.path.join(root_dir, "ver", "current", "expected", "build", "papermario.map")
+def get_map(expected: bool = False):
+    mymap = os.path.join(root_dir, "ver", "current", "build", "papermario.map")
+    if expected:
+        mymap = os.path.join(root_dir, "ver", "current", "expected", "build", "papermario.map")
+    return mymap
 
-if not os.path.isfile(mymap):
-    print(f"{mymap} must exist.")
-    exit(1)
-
-
-def search_address(target_addr):
+def search_address(target_addr, map=get_map()):
     is_ram = target_addr & 0x80000000
     ram_offset = None
     prev_ram = 0
@@ -42,7 +38,7 @@ def search_address(target_addr):
     cur_file = "<no file>"
     prev_file = cur_file
     prev_line = ""
-    with open(mymap) as f:
+    with open(map) as f:
         for line in f:
             if "load address" in line:
                 # Ignore .bss sections if we're looking for a ROM address
@@ -88,12 +84,11 @@ def search_address(target_addr):
 
     return "at end of rom?"
 
-
-def search_symbol(target_sym):
+def search_symbol(target_sym, map=get_map()):
     ram_offset = None
     cur_file = "<no file>"
     prev_line = ""
-    with open(mymap) as f:
+    with open(map) as f:
         for line in f:
             if "load address" in line:
                 ram = int(line[16 : 16 + 18], 0)
@@ -127,16 +122,24 @@ def search_symbol(target_sym):
 
     return None
 
+if __name__ == "__main__":
+    args = parser.parse_args()
 
-try:
-    target_addr = int(args.name, 0)
-    print(args.name, "is", search_address(target_addr))
-except ValueError:
-    sym_info = search_symbol(args.name)
-    if sym_info is not None:
-        sym_rom = sym_info[0]
-        sym_file = sym_info[1]
-        sym_ram = sym_info[2]
-        print(f"Symbol {args.name} (RAM: 0x{sym_ram:08X}, ROM: 0x{sym_rom:06X}, {sym_file})")
-    else:
-        print(f"Symbol {args.name} not found in map file {mymap}")
+    map = get_map(args.use_expected)
+
+    if not os.path.isfile(map):
+        print(f"{map} must exist.")
+        exit(1)
+
+    try:
+        target_addr = int(args.name, 0)
+        print(args.name, "is", search_address(target_addr))
+    except ValueError:
+        sym_info = search_symbol(args.name)
+        if sym_info is not None:
+            sym_rom = sym_info[0]
+            sym_file = sym_info[1]
+            sym_ram = sym_info[2]
+            print(f"Symbol {args.name} (RAM: 0x{sym_ram:08X}, ROM: 0x{sym_rom:06X}, {sym_file})")
+        else:
+            print(f"Symbol {args.name} not found in map file {map}")

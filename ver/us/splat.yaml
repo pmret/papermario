@@ -41,6 +41,7 @@ segments:
     start: 0x1000
     vram: 0x80025C00
     subsegments:
+    - [0x1000, c, bss]
     - [0x1000, hasm, entry_point]
     - [0x1060, c, is_debug]
     - [0x1370, c, main]
@@ -2872,7 +2873,7 @@ segments:
     vram: 0xE009E000
     subsegments:
     - [0x39FF20, c, effect_79]
-    - [0x3A0D10, data]
+    - [0x3A0D10]
   - [0x3A0D60, bin] # effect 79 gfx
   - name: effect_80
     dir: effects
@@ -2889,7 +2890,7 @@ segments:
     vram: 0xE00A2000
     subsegments:
     - [0x3A2990, c, effect_81]
-    - [0x3A3360, data]
+    - [0x3A3360]
   - [0x3A33D0, bin] # effect 81 gfx
   - name: effect_82
     dir: effects
@@ -2898,7 +2899,7 @@ segments:
     vram: 0xE00A4000
     subsegments:
     - [0x3A37E0, c, effect_82]
-    - [0x3A42B0, data]
+    - [0x3A42B0]
   - [0x3A4320, bin] # effect 82 gfx
   - name: effect_83
     dir: effects
@@ -2915,7 +2916,7 @@ segments:
     vram: 0xE00A8000
     subsegments:
     - [0x3A70F0, c, effect_84]
-    - [0x3A7710, data]
+    - [0x3A7710]
   - [0x3A77A0, bin] # effect 84 gfx
   - name: effect_85
     dir: effects
@@ -2924,7 +2925,7 @@ segments:
     vram: 0xE00AA000
     subsegments:
     - [0x3AA920, c, effect_85]
-    - [0x3AAFE0, data]
+    - [0x3AAFE0]
   - [0x3AB030, bin] # effect 85 gfx
   - name: effect_86
     dir: effects
@@ -2933,7 +2934,7 @@ segments:
     vram: 0xE00AC000
     subsegments:
     - [0x3AEE20, c, effect_86]
-    - [0x3AF5D0, data]
+    - [0x3AF5D0]
   - [0x3AF700, bin] # effect 86 gfx
   - name: effect_87
     dir: effects
@@ -2950,7 +2951,7 @@ segments:
     vram: 0xE00B0000
     subsegments:
     - [0x3B3EB0, c, effect_88]
-    - [0x3B4690, data]
+    - [0x3B4690]
   - [0x3B46A0, bin] # effect 88 gfx
   - name: effect_89
     dir: effects
@@ -2959,7 +2960,7 @@ segments:
     vram: 0xE00B2000
     subsegments:
     - [0x3B4790, c, effect_89]
-    - [0x3B5330, data]
+    - [0x3B5330]
   - [0x3B5340, bin] # effect 89 gfx
   - name: effect_90
     dir: effects
@@ -2968,7 +2969,7 @@ segments:
     vram: 0xE00B4000
     subsegments:
     - [0x3B5CF0, c, effect_90]
-    - [0x3B69E0, data]
+    - [0x3B69E0]
   - [0x3B6BF0, bin] # effect 90 gfx
   - name: effect_91
     dir: effects
@@ -2977,7 +2978,7 @@ segments:
     vram: 0xE00B6000
     subsegments:
     - [0x3B7160, c, effect_91]
-    - [0x3B78B0, data]
+    - [0x3B78B0]
   - [0x3B78D0, bin] # effect 91 gfx
   - name: effect_92
     dir: effects
@@ -2986,7 +2987,7 @@ segments:
     vram: 0xE00B8000
     subsegments:
     - [0x3B7B80, c, effect_92]
-    - [0x3B8470, data]
+    - [0x3B8470]
   - [0x3B8860, bin] # effect 92 gfx
   - name: effect_93
     dir: effects
@@ -2995,7 +2996,7 @@ segments:
     vram: 0xE00BA000
     subsegments:
     - [0x3B8BD0, c, effect_93]
-    - [0x3B9A50, data]
+    - [0x3B9A50]
   - [0x3B9A70, bin] # effect 93 gfx
   - name: effect_94
     dir: effects
@@ -3004,7 +3005,7 @@ segments:
     vram: 0xE00BC000
     subsegments:
     - [0x3BA030, c, effect_94]
-    - [0x3BAC60, data]
+    - [0x3BAC60]
   - [0x3BAEA0, bin] # effect 94 gfx
   - name: effect_95
     dir: effects

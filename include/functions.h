@@ -338,6 +338,7 @@ void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
 s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
 DynamicEntity* get_generic_entity(s32 idx);
+Trigger* bind_trigger_1(EvtSource* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1, s32 priority);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 
@@ -602,6 +603,25 @@ void clear_player_data(void);
 
 void enforce_hpfp_limits(void);
 
+void func_800E98EC(void);
+void func_800E9900(void);
+void show_coin_counter(void);
+s32 add_item(s32 itemID);
+s32 add_badge(s32 itemID);
+void func_800E96C8(void);
+void hide_popup_menu(void);
+void destroy_popup_menu(void);
+void func_800E98C4(void);
+s32 get_item_count(void);
+s32 get_stored_empty_count(void);
+s32 get_stored_count(void);
+s32 get_item_empty_count(void);
+void shop_open_item_select_popup(s32 mode);
+void hide_coin_counter(void);
+void set_message_msg(s32 msgID, s32 index);
+void set_message_value(s32 value, s32 index);
+s32 store_item(s32 itemID);
+void open_status_menu_short(void);
 void func_8024EFE0(f32 x, f32 y, f32 z, s32 a, s32 b, s32 c);
 void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a);
 

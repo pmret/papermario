@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-import sys
+import sym_info
 from pathlib import Path
 
 _script_lib = None
@@ -1230,7 +1230,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("file", type=str, help="File to dissassemble from")
-    parser.add_argument("offset", type=lambda x: int(x, 16), default=0, help="Offset to start dissassembling from")
+    parser.add_argument("offset", help="Offset to start dissassembling from")
     parser.add_argument("-end", "-e", "--e", type=lambda x: int(x, 16), default=0, dest="end", required=False, help="End offset to stop dissassembling from.\nOnly used as a way to find valid scripts.")
     parser.add_argument("-vram", "-v", "--v", type=lambda x: int(x, 16), default=0, dest="vram", required=False, help="VRAM start will be tracked and used for the script output name")
     parser.add_argument("-si", "--si", action="store_true", default=False, dest="si", required=False, help="Force si script output")
@@ -1248,14 +1248,23 @@ if __name__ == "__main__":
     INCLUDES_NEEDED["npcs"] = {}
     INCLUDES_NEEDED["sprites"] = set()
 
-    if args.end > args.offset:
+    try:
+        offset = int(args.offset, 0)
+    except ValueError:
+        info = sym_info.search_symbol(args.offset)
+        if info is None:
+            print(f"{args.offset} is not a valid symbol name")
+            exit(1)
+        offset = info[0]
+
+    if args.end > offset:
         # Search the given memory range and report scripts
         with open(args.file, "rb") as f:
             gap = False
             first_print = False
 
-            while args.offset < args.end:
-                f.seek(args.offset)
+            while offset < args.end:
+                f.seek(offset)
 
                 script = ScriptDSLDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
                 try:
@@ -1264,7 +1273,7 @@ if __name__ == "__main__":
                     if script.instructions > 1 and "_EVT_CMD" not in script_text:
                         if gap and first_print:
                             potential_struct_sizes = { "StaticNpc": 0x1F0, "NpcAISettings":0x30, "NpcSettings":0x2C, "NpcGroupList":0xC }
-                            gap_size = args.offset - gap_start
+                            gap_size = offset - gap_start
                             potential_struct = "Unknown data"
                             potential_count = 1
                             for k,v in potential_struct_sizes.items():
@@ -1272,36 +1281,36 @@ if __name__ == "__main__":
                                     potential_struct = k
                                     potential_count = gap_size // v
 
-                            print(f"========== 0x{gap_size:X} byte gap ({potential_count} {potential_struct}?) 0x{gap_start:X} - 0x{args.offset:X} ==========")
+                            print(f"========== 0x{gap_size:X} byte gap ({potential_count} {potential_struct}?) 0x{gap_start:X} - 0x{offset:X} ==========")
                             print()
                             gap = False
                         #print(f"EvtSource read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                         #      f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
                         #print()
                         vram = f"{args.vram:X}_" if vram_base > 0 else f""
-                        script_text = script_text.replace("EvtSource script = SCRIPT({", f"EvtSource N(D_{vram}{args.offset:X}) = " + "SCRIPT({")
+                        script_text = script_text.replace("EvtSource script = SCRIPT({", f"EvtSource N(D_{vram}{offset:X}) = " + "SCRIPT({")
                         print(script_text, end="")
                         print()
-                        #print(f"Valid script found at 0x{args.offset:X}")
-                        args.vram += script.end_pos - args.offset
-                        args.offset = script.end_pos
+                        #print(f"Valid script found at 0x{offset:X}")
+                        args.vram += script.end_pos - offset
+                        offset = script.end_pos
                         first_print = True
                     else:
                         if not gap:
-                            gap_start = args.offset
+                            gap_start = offset
                             gap = True
-                        args.offset += 4
+                        offset += 4
                         args.vram += 4
                 except Exception:
                     if not gap:
-                        gap_start = args.offset
+                        gap_start = offset
                         gap = True
-                    args.offset += 4
+                    offset += 4
                     args.vram += 4
     else:
         with open(args.file, "rb") as f:
 
-            f.seek(args.offset)
+            f.seek(offset)
 
             script = ScriptDSLDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
 
@@ -1317,5 +1326,5 @@ if __name__ == "__main__":
                     print(script_text, end="")
 
                 except UnsupportedScript:
-                    f.seek(args.offset)
+                    f.seek(offset)
                     print(ScriptDisassembler(f).disassemble(), end="")

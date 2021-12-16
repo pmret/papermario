@@ -1,6 +1,15 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel jtbl_E00A4AD0
+.word .LE00A40F4_3A38D4, .LE00A40FC_3A38DC, .LE00A4108_3A38E8, .LE00A4114_3A38F4, .LE00A4120_3A3900, .LE00A412C_3A390C, .LE00A4138_3A3918
+
+dlabel D_E00A4AF0
+.double 0.1
+
+.section .text
 glabel fx_82_main
 /* 3A37E0 E00A4000 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 3A37E4 E00A4004 F7B60040 */  sdc1      $f22, 0x40($sp)
@@ -67,30 +76,30 @@ glabel fx_82_main
 /* 3A38C8 E00A40E8 8C224AD0 */  lw        $v0, %lo(jtbl_E00A4AD0)($at)
 /* 3A38CC E00A40EC 00400008 */  jr        $v0
 /* 3A38D0 E00A40F0 00000000 */   nop
-dlabel LE00A40F4_3A38D4
+.LE00A40F4_3A38D4:
 /* 3A38D4 E00A40F4 0802905E */  j         .LE00A4178
 /* 3A38D8 E00A40F8 AC60001C */   sw       $zero, 0x1c($v1)
-dlabel LE00A40FC_3A38DC
+.LE00A40FC_3A38DC:
 /* 3A38DC E00A40FC 24020002 */  addiu     $v0, $zero, 2
 /* 3A38E0 E00A4100 0802905E */  j         .LE00A4178
 /* 3A38E4 E00A4104 AC62001C */   sw       $v0, 0x1c($v1)
-dlabel LE00A4108_3A38E8
+.LE00A4108_3A38E8:
 /* 3A38E8 E00A4108 24020004 */  addiu     $v0, $zero, 4
 /* 3A38EC E00A410C 0802905E */  j         .LE00A4178
 /* 3A38F0 E00A4110 AC62001C */   sw       $v0, 0x1c($v1)
-dlabel LE00A4114_3A38F4
+.LE00A4114_3A38F4:
 /* 3A38F4 E00A4114 24020006 */  addiu     $v0, $zero, 6
 /* 3A38F8 E00A4118 0802905E */  j         .LE00A4178
 /* 3A38FC E00A411C AC62001C */   sw       $v0, 0x1c($v1)
-dlabel LE00A4120_3A3900
+.LE00A4120_3A3900:
 /* 3A3900 E00A4120 24020007 */  addiu     $v0, $zero, 7
 /* 3A3904 E00A4124 0802905E */  j         .LE00A4178
 /* 3A3908 E00A4128 AC62001C */   sw       $v0, 0x1c($v1)
-dlabel LE00A412C_3A390C
+.LE00A412C_3A390C:
 /* 3A390C E00A412C 24020008 */  addiu     $v0, $zero, 8
 /* 3A3910 E00A4130 0802905E */  j         .LE00A4178
 /* 3A3914 E00A4134 AC62001C */   sw       $v0, 0x1c($v1)
-dlabel LE00A4138_3A3918
+.LE00A4138_3A3918:
 /* 3A3918 E00A4138 24020009 */  addiu     $v0, $zero, 9
 /* 3A391C E00A413C 0802905E */  j         .LE00A4178
 /* 3A3920 E00A4140 AC62001C */   sw       $v0, 0x1c($v1)
