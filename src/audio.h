@@ -554,7 +554,7 @@ extern UnkAl0* D_80078E54;
 extern s8 D_80078E58;
 extern s16 D_80078E5A;
 extern s8 D_80078E5C;
-extern s32* D_8007F1F8; // points to 80078290
+extern s32 D_8007F1F8[1]; // points to 80078290
 
 extern UnkAl19E0* D_8009A5C0;
 extern BGMPlayer* D_8009A5CC;

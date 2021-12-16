@@ -511,3 +511,5 @@ void load_demo_battle(u32 index) {
     gOverrideFlags &= ~0x8;
     load_battle(battleID);
 }
+
+static const f32 padding[] = { 0.0f, 0.0f };

@@ -199,7 +199,7 @@ void crash_screen_print_fpcsr(u32 value) {
         if (value & flag) {
             crash_screen_printf(132, 155, "(%s)", gFPCSRFaultCauses[i]);
             break;
-            
+
             do {} while (0);
         }
 
