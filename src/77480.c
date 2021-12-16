@@ -29,6 +29,7 @@ void func_800E0AD0(void);
 void func_800E0B14(void);
 void update_partner_timers(void);
 void update_player_shadow(void);
+void check_for_interactables(void);
 
 s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ, f32* outLength, f32* hitRx, f32* hitRz,
                          f32* hitDirX, f32* hitDirZ) {
