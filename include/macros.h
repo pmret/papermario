@@ -1,7 +1,7 @@
 #ifndef _MACROS_H_
 #define _MACROS_H_
 
-#include "common.h"
+#include "types.h"
 #include "include_asm.h"
 
 #ifndef M2CTX
