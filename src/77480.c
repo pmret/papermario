@@ -7,10 +7,8 @@
 
 extern UNK_FUN_PTR(D_8010C920);
 extern UNK_FUN_PTR(D_8010C93C);
-extern UNK_FUN_PTR(D_8010C958);
 extern s32 D_8010C940;
 extern s32 D_8010C950;
-extern s32 D_8010C958;
 
 extern s32 D_802BDF60;
 extern s8 D_8015A57A;
