@@ -668,7 +668,7 @@ void check_for_interactables(void) {
                     }
                 }
             } else {
-                if (phys_can_player_interact() == FALSE) {
+                if (!phys_can_player_interact()) {
                     phi_s2 = 1;
                     playerStatus->unk_C6 = -1;
                     playerStatus->flags &= ~PLAYER_STATUS_FLAGS_8000000;
