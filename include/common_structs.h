@@ -678,8 +678,11 @@ typedef struct BattleStatus {
     /* 0x079 */ u8 pendingStarPoints; /* how many to add */
     /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
     /* 0x07B */ u8 damageTaken;
-    /* 0x07C */ u8 changePartnerAllowed;
-    /* 0x07D */ char unk_7D[4];
+    /* 0x07C */ s8 changePartnerAllowed;
+    /* 0x07D */ s8 unk_7D;
+    /* 0x07E */ s8 unk_7E;
+    /* 0x07F */ s8 unk_7F;
+    /* 0x080 */ s8 unk_80;
     /* 0x081 */ s8 actionSuccess;
     /* 0x082 */ char unk_82;
     /* 0x083 */ s8 unk_83;

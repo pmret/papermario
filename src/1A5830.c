@@ -7,7 +7,7 @@
 extern s32 D_802946E0[];
 
 void dispatch_event_actor(Actor* actor, s32 event);
-void func_8024EFE0(f32 x, f32 y, f32 z, s32 a, s32 b, s32 c);
+void func_8024EFE0(f32 x, f32 y, f32 z, s32, s32, s32);
 void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a);
 s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event);
 s32 func_80263230(Actor*, Actor*);

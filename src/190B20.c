@@ -4,6 +4,7 @@
 #include "hud_element.h"
 #include "message_ids.h"
 #include "model.h"
+#include "sprite.h"
 
 s32 D_80280FC0[] = {
     0x000A005A, 0x00000032, 0x0003000B, 0x00000032, 0x0001002D, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010031, 0x00000032, 0x00010031, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010032, 0x00000032, 0x00010032, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x0003000A, 0x00000032, 0x0003000A, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000050, 0x0003000A, 0x00000014, 0x0003000B, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -1069,9 +1070,19 @@ s32 bActorMessages[] = {
 
 s32 D_802838F8 = 0;
 
-extern Gfx D_80293970[];
-
+// BSS
 extern Bytecode D_80293820[];
+extern f32 D_802938A4;
+extern s16 D_802938A8;
+extern Gfx D_80293970[];
+extern s32 D_802939C0;
+extern s32 D_802939C4[0];
+extern s32 D_80293A10[0];
+extern s32 D_80293A34[0];
+extern s32 D_80293A58[0];
+extern s32 D_80293A7C[0];
+extern s32 D_80293AA0[0];
+extern s32 D_80293AC4[0];
 
 void create_target_list(Actor* actor, s32 arg1);
 INCLUDE_ASM(s32, "190B20", create_target_list);
@@ -1094,9 +1105,75 @@ void func_8026324C(s32 arg0, s32 arg1) {
     func_80263064(arg0, arg1, 1);
 }
 
-INCLUDE_ASM(s32, "190B20", func_80263268);
+void func_80263268(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Actor* partner = battleStatus->partnerActor;
 
-INCLUDE_ASM(s32, "190B20", func_80263300);
+    battleStatus->changePartnerAllowed = 0;
+    if (partner != NULL) {
+        s32 partnersEnabled;
+        s32 i;
+
+        battleStatus->changePartnerAllowed = 1;
+        partnersEnabled = 0;
+
+        for (i = 0; i < ARRAY_COUNT(playerData->partners); i++) {
+            if (playerData->partners[i].enabled) {
+                partnersEnabled++;
+            }
+        }
+
+        if (partnersEnabled >= 2) {
+            if (partner->koStatus == STATUS_DAZE) {
+                battleStatus->changePartnerAllowed = 0;
+            } else if (partner->debuff == 7) {
+                battleStatus->changePartnerAllowed = 0;
+            } else if (playerData->currentPartner == PARTNER_GOOMPA) {
+                battleStatus->changePartnerAllowed = -1;
+            }
+        } else {
+            battleStatus->changePartnerAllowed = -1;
+        }
+    } else {
+        battleStatus->changePartnerAllowed = -1;
+    }
+}
+
+void func_80263300(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    PlayerData* playerData = &gPlayerData;
+    s32 cond;
+    s32 i;
+
+    battleStatus->unk_7D = 0;
+    cond = FALSE;
+
+    for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
+        s16 itemID = playerData->invItems[i];
+
+        if (itemID != 0) {
+            StaticItem* staticItem = &gItemTable[itemID];
+
+            if (staticItem->typeFlags & 2) {
+                battleStatus->moveCategory = 2;
+                battleStatus->selectedItemID = playerData->invItems[i];
+                battleStatus->currentTargetListFlags = staticItem->targetFlags;
+                player_create_target_list(player);
+
+                if (player->targetListLength != 0) {
+                    battleStatus->unk_7D += 1;
+                    cond = TRUE;
+                }
+            }
+        }
+    }
+
+    if (!cond) {
+        battleStatus->unk_7D = 0;
+    }
+}
 
 s32 btl_are_all_enemies_defeated(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -1105,15 +1182,13 @@ s32 btl_are_all_enemies_defeated(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-        s32 flagEnemyDefeated = 0x404000;
+        s32 flagEnemyDefeated = ENEMY_FLAGS_400000 | ENEMY_FLAGS_4000;
         enemy = battleStatus->enemyActors[i];
 
         // If currentEnemyFlags signify that the enemy isn't dead yet...
-        if (enemy != NULL) {
-            if (!(enemy->flags & flagEnemyDefeated)) {
-                // Countinue the battle
-                enemiesStillAlive = TRUE;
-            }
+        if (enemy != NULL && !(enemy->flags & flagEnemyDefeated)) {
+            // Countinue the battle
+            enemiesStillAlive = TRUE;
         }
     }
     return !enemiesStillAlive;
@@ -1148,7 +1223,7 @@ void func_802634B8(void) {
     s32 fpCost;
 
     if (playerData->bootsLevel == -1) {
-        battleStatus->unk_7D[1] = 0;
+        battleStatus->unk_7E = 0;
         return;
     }
 
@@ -1165,8 +1240,9 @@ void func_802634B8(void) {
             if (badges != 0) {
                 StaticMove* moveTable = gMoveTable;
                 u8 moveID = gItemTable[badges].moveID;
+
                 move = &moveTable[moveID];
-                if ((s8) move->battleSubmenu == 2) {
+                if (move->battleSubmenu == 2) {
                     battleStatus->submenuMoves[moveCount] =  moveID;
                     battleStatus->submenuIcons[moveCount] = playerData->equippedBadges[i];
                     moveCount++;
@@ -1178,39 +1254,39 @@ void func_802634B8(void) {
 
     phi_s6 = FALSE;
     for (i = 0; i < battleStatus->submenuMoveCount; i++) {
-            move = &gMoveTable[battleStatus->submenuMoves[i]];
-            fpCost = move->costFP;
-            if (fpCost != 0) {
-                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
-                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_FANATIC) * 2;
-                if (fpCost < 1) {
-                    fpCost = 1;
-                }
+        move = &gMoveTable[battleStatus->submenuMoves[i]];
+        fpCost = move->costFP;
+        if (fpCost != 0) {
+            fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
+            fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_FANATIC) * 2;
+            if (fpCost < 1) {
+                fpCost = 1;
             }
-            battleStatus->moveCategory = 0;
-            battleStatus->selectedItemID = playerData->bootsLevel;
-            battleStatus->currentTargetListFlags = move->flags;
-            player_create_target_list(player);
-            if (player->targetListLength != 0) {
-                phi_s6 = TRUE;
-                battleStatus->submenuEnabled[i] = 1;
-            }
+        }
+        battleStatus->moveCategory = 0;
+        battleStatus->selectedItemID = playerData->bootsLevel;
+        battleStatus->currentTargetListFlags = move->flags;
+        player_create_target_list(player);
+        if (player->targetListLength != 0) {
+            phi_s6 = TRUE;
+            battleStatus->submenuEnabled[i] = 1;
+        }
 
-            if (playerData->curFP < fpCost) {
-                battleStatus->submenuEnabled[i] = 0;
-            }
-            if (player->targetListLength == 0) {
-                battleStatus->submenuEnabled[i] = -2;
-            }
-            if ((gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) != 0) {
-                battleStatus->submenuEnabled[moveCount] = -1;
-            }
+        if (playerData->curFP < fpCost) {
+            battleStatus->submenuEnabled[i] = 0;
+        }
+        if (player->targetListLength == 0) {
+            battleStatus->submenuEnabled[i] = -2;
+        }
+        if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
+            battleStatus->submenuEnabled[moveCount] = -1;
+        }
     }
 
     if (!phi_s6) {
-        battleStatus->unk_7D[1] = -1;
+        battleStatus->unk_7E = -1;
     } else {
-        battleStatus->unk_7D[1] = 1;
+        battleStatus->unk_7E = 1;
     }
 }
 
@@ -1225,7 +1301,7 @@ void func_802636E4(void) {
     s32 fpCost;
 
     if (playerData->hammerLevel == -1) {
-        battleStatus->unk_7D[2] = 0;
+        battleStatus->unk_7F = 0;
         return;
     }
 
@@ -1279,15 +1355,15 @@ void func_802636E4(void) {
             if (player->targetListLength == 0) {
                 battleStatus->submenuEnabled[i] = -2;
             }
-            if ((gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) != 0) {
+            if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
                 battleStatus->submenuEnabled[moveCount] = -1;
             }
     }
 
     if (!phi_s6) {
-        battleStatus->unk_7D[2] = -1;
+        battleStatus->unk_7F = -1;
     } else {
-        battleStatus->unk_7D[2] = 1;
+        battleStatus->unk_7F = 1;
     }
 }
 
@@ -1349,9 +1425,9 @@ void func_80263914(void) {
     }
 
     if (!phi_s6) {
-        battleStatus->unk_7D[3] = -1;
+        battleStatus->unk_80 = -1;
     } else {
-        battleStatus->unk_7D[3] = 1;
+        battleStatus->unk_80 = 1;
     }
 }
 
@@ -1367,7 +1443,7 @@ s32 count_power_plus(s32 arg0) {
     for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
         u8 moveID = gItemTable[gPlayerData.equippedBadges[i]].moveID;
 
-        if (gMoveTable[moveID].battleSubmenu == 7 && moveID == 0x3B) {
+        if (gMoveTable[moveID].battleSubmenu == 7 && moveID == MOVE_POWER_PLUS) {
             if (gBattleStatus.flags1 & BS_FLAGS1_10 || arg0 & 0x80) {
                 pp++;
             }
@@ -1425,11 +1501,91 @@ void func_80263CC4(s32 arg0) {
     start_script(D_80293820, 0xA, 0)->varTable[0] = arg0;
 }
 
-INCLUDE_ASM(s32, "190B20", set_animation);
+void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
+    if (animationIndex >= 0) {
+        Actor* actor = get_actor(actorID);
+        ActorPart* part;
 
-INCLUDE_ASM(s32, "190B20", func_80263E08);
+        switch (actorID & 0x700) {
+            case 0x0:
+                part = &actor->partsTable[0];
+                if (part->currentAnimation != animationIndex) {
+                    part->currentAnimation = animationIndex;
+                    spr_update_player_sprite(0, animationIndex, part->animationRate);
+                }
+                break;
+            case 0x100:
+                if (partIdx != 0) {
+                    part = get_actor_part(actor, partIdx);
 
-INCLUDE_ASM(void, "190B20", set_animation_rate, s32 actorID, s32 partIndex, f32 rate);
+                    if (part == NULL) {
+                        part = &actor->partsTable[0];
+                    }
+                } else {
+                    part = &actor->partsTable[0];
+                }
+
+                if (part->currentAnimation != animationIndex) {
+                    part->currentAnimation = animationIndex;
+                    spr_update_sprite(part->unk_84, animationIndex, part->animationRate);
+                    part->unk_8C = func_802DE5C8(part->unk_84);
+                }
+                break;
+            case 0x200:
+                part = get_actor_part(actor, partIdx);
+                if (part->currentAnimation != animationIndex) {
+                    part->currentAnimation = animationIndex;
+                    spr_update_sprite(part->unk_84, animationIndex, part->animationRate);
+                    part->unk_8C = func_802DE5C8(part->unk_84);
+                }
+                break;
+        }
+    }
+}
+
+void func_80263E08(Actor* actor, ActorPart* part, s32 anim) {
+    if (anim >= 0) {
+        switch (actor->actorID & 0x700) {
+            case 0x0:
+                if (part->currentAnimation != anim) {
+                    part->currentAnimation = anim;
+                    spr_update_player_sprite(0, anim, part->animationRate);
+                }
+                break;
+            case 0x100:
+            case 0x200:
+                if (part->currentAnimation != anim) {
+                    part->currentAnimation = anim;
+                    spr_update_sprite(part->unk_84, anim, part->animationRate);
+                    part->unk_8C = func_802DE5C8(part->unk_84);
+                }
+                break;
+        }
+    }
+}
+
+void set_animation_rate(s32 actorID, s32 partIndex, f32 rate) {
+    Actor* actor = get_actor(actorID);
+    ActorPart* part;
+
+    switch (actorID & 0x700) {
+        case ACTOR_PARTNER:
+            if (partIndex != 0) {
+                part = get_actor_part(actor, partIndex);
+                if (part != NULL) {
+                    part->animationRate = rate;
+                    return;
+                }
+            }
+            actor->partsTable[0].animationRate = rate;
+            break;
+        case ACTOR_PLAYER:
+        case ACTOR_ENEMY0:
+            part = get_actor_part(actor, partIndex);
+            part->animationRate = rate;
+            break;
+    }
+}
 
 void set_actor_yaw(s32 actorID, s32 yaw) {
     get_actor(actorID)->yaw = yaw;
@@ -1439,9 +1595,45 @@ void set_part_yaw(s32 actorID, s32 partIndex, s32 value) {
     get_actor_part(get_actor(actorID), partIndex)->yaw = value;
 }
 
-INCLUDE_ASM(s32, "190B20", func_80263FE8);
+void func_80263FE8(s32 actorID, s32 partIndex, s32 flags) {
+    Actor* actor = get_actor(actorID);
+    ActorPart* part;
 
-INCLUDE_ASM(s32, "190B20", func_80264084);
+    switch (actorID & 0x700) {
+        case ACTOR_PLAYER:
+            actor->flags |= flags;
+            break;
+        case ACTOR_PARTNER:
+        case ACTOR_ENEMY0:
+            if (partIndex == 0) {
+                actor->flags |= flags;
+            } else {
+                part = get_actor_part(actor, partIndex);
+                part->flags |= flags;
+            }
+            break;
+    }
+}
+
+void func_80264084(s32 actorID, s32 partIndex, s32 flags) {
+    Actor* actor = get_actor(actorID);
+    ActorPart* part;
+
+    switch (actorID & 0x700) {
+        case ACTOR_PLAYER:
+            actor->flags &= ~flags;
+            break;
+        case ACTOR_PARTNER:
+        case ACTOR_ENEMY0:
+            if (partIndex == 0) {
+                actor->flags &= ~flags;
+            } else {
+                part = get_actor_part(actor, partIndex);
+                part->flags &= ~flags;
+            }
+            break;
+    }
+}
 
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg) {
     f32 angleRad = angleDeg * TAU / 360.0f;
@@ -1470,7 +1662,28 @@ void add_xz_vec3f_copy2(Vec3f* vector, f32 speed, f32 angleDeg) {
     vector->z += -speed * cosAngleRad;
 }
 
+// matching after data migration
+#ifdef NON_MATCHING
+void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg) {
+    f32 temp_f0;
+    f32 temp_f20;
+    f32 temp_f20_2;
+
+    if (var0 == 2) {
+        fx_land(0, xPos, yPos + 0.0f, zPos, D_802938A4);
+    } else if (var0 == 1) {
+        D_802938A8 = 4;
+    } else if (D_802938A8++ >= 4) {
+        D_802938A8 = 0;
+        temp_f20 = (clamp_angle(-angleDeg) * TAU) / 360.0f;
+        temp_f20_2 = sin_rad(temp_f20);
+        temp_f0 = cos_rad(temp_f20);
+        fx_walk(0, xPos + (temp_f20_2 * 24.0f * 0.2f), yPos + 1.5f, zPos + (temp_f0 * 24.0f * 0.2f), temp_f20_2, temp_f0);
+    }
+}
+#else
 INCLUDE_ASM(void, "190B20", play_movement_dust_effects, s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
+#endif
 
 ActorPart* get_actor_part(Actor* actor, s32 partIndex) {
     ActorPart* part = &actor->partsTable[0];
@@ -1588,7 +1801,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                             if (target->actorID != ACTOR_PARTNER) {
                                 effect = target->unk_228;
                                 if (effect != NULL) {
-                                    effect->flags |= 0x10;
+                                    effect->flags |= EFFECT_INSTANCE_FLAGS_10;
                                 }
                                 target->unk_228 = playFX_81(0, target->currentPos.x, target->currentPos.y,
                                                             target->currentPos.z, 1.0f, 0);
@@ -1792,6 +2005,31 @@ INCLUDE_ASM(void, "190B20", show_damage_popup, f32 x, f32 y, f32 z, s32 damageAm
 INCLUDE_ASM(s32, "190B20", func_80266684);
 
 INCLUDE_ASM(void, "190B20", func_802666E4, Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16 arg4);
+//void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage);
+// void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage) {
+//     BattleStatus* battleStatus = &gBattleStatus;
+//     s32 phi_t0;
+
+//     if (damage < 3) {
+//         phi_t0 = 0;
+//     } else if (damage < 5) {
+//         phi_t0 = 1;
+//     } else if (damage < 9) {
+//         phi_t0 = 2;
+//     } else {
+//         phi_t0 = 3;
+//     }
+
+//     if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
+//         playFX_24(0, x, y, z, 1.0f, 24);
+//     } else if (battleStatus->currentAttackElement & DAMAGE_TYPE_ELECTRIC) {
+//         func_80251474();
+//     } else if (battleStatus->currentAttackElement & DAMAGE_TYPE_WATER) {
+//         playFX_5F(0, x, y, z, 1.0f, 24);
+//     } else {
+//         playFX_43(0, x, y, z, 1.0f, phi_t0);
+//     }
+// }
 
 INCLUDE_ASM(void, "190B20", func_802667F0, s32 arg0, Actor* arg1, f32 arg2, f32 arg3, f32 arg4);
 
@@ -1803,15 +2041,30 @@ INCLUDE_ASM(s32, "190B20", func_80266978);
 
 void func_80266ADC(Actor* target) {
     target->unk_206 = -1;
-    target->flags |= 0x80000;
+    target->flags |= ACTOR_FLAG_80000;
 }
 
 void func_80266AF8(Actor* target) {
     target->unk_206 = 0;
-    target->flags &= ~0x80000;
+    target->flags &= ~ACTOR_FLAG_80000;
 }
 
-INCLUDE_ASM(s32, "190B20", func_80266B14);
+void func_80266B14(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gBattleStatus.enemyActors); i++) {
+        Actor* enemy = gBattleStatus.enemyActors[i];
+
+        if (enemy != NULL) {
+            if (enemy->unk_206 > 0) {
+                enemy->unk_206--;
+                if (enemy->unk_206 == 0) {
+                    enemy->flags &= ~ENEMY_FLAGS_80000;
+                }
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", try_inflict_status);
 
@@ -1844,7 +2097,16 @@ void func_80266D6C(ActorPart* part, s32 arg1) {
     }
 }
 
-INCLUDE_ASM(s32, "190B20", func_80266DAC);
+void func_80266DAC(Actor* actor, s32 arg1) {
+    ActorPart* partIt = &actor->partsTable[0];
+
+    while (partIt != NULL) {
+        if (!(partIt->flags & 1) && (partIt->idleAnimations != NULL) && !(partIt->flags & 2)) {
+            func_80266D6C(partIt, arg1);
+        }
+        partIt = partIt->nextPart;
+    }
+}
 
 void func_80266E14(ActorPart* part) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
@@ -1866,7 +2128,19 @@ void func_80266EA8(ActorPart* part, s32 arg1) {
     }
 }
 
-INCLUDE_ASM(s32, "190B20", func_80266EE8);
+void func_80266EE8(Actor* actor, s32 arg1) {
+    ActorPart* partIt = &actor->partsTable[0];
+
+    while (partIt != NULL) {
+        if (!(partIt->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
+            (partIt->idleAnimations != NULL) &&
+            !(partIt->flags & 2))
+        {
+            func_80266EA8(partIt, arg1);
+        }
+        partIt = partIt->nextPart;
+    }
+}
 
 void func_80266F60(ActorPart* part) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
@@ -1931,7 +2205,10 @@ void func_802670C8(Actor* actor) {
         DecorationTable* decorationTable = partIt->decorationTable;
 
         do {
-            if (!(partIt->flags & 0x100001) && (partIt->idleAnimations != NULL) && !(partIt->flags & 2)) {
+            if (!(partIt->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
+                (partIt->idleAnimations != NULL) &&
+                !(partIt->flags & 2))
+            {
                 decorationTable->unk_764 = 0;
             }
         } while (0); // TODO make match better
@@ -1980,15 +2257,17 @@ s32 player_team_is_ability_active(Actor* actor, s32 ability) {
     s32 actorGenus = actor->actorID & 0x700;
     s32 hasAbility = FALSE;
 
-    if (actorGenus != 0x100) {
-        // Separate ifs required to match
-        if (actorGenus <= 0x100) {
-            if (actorGenus == 0 && !(gBattleStatus.flags2 & 0x40)) {
+    switch (actorGenus) {
+        case ACTOR_PLAYER:
+            if (!(gBattleStatus.flags2 & BS_FLAGS2_40)) {
                 hasAbility = is_ability_active(ability);
             }
-        }
-    } else {
-        hasAbility = is_partner_ability_active(ability);
+            break;
+        case ACTOR_PARTNER:
+            hasAbility = is_partner_ability_active(ability);
+            break;
+        case ACTOR_ENEMY0:
+            break;
     }
 
     return hasAbility;
@@ -2023,11 +2302,11 @@ void remove_player_buffs(s32 buffs) {
 
     if (buffs & 1) {
         battleStatus->jumpCharge = 0;
-        battleStatus->flags1 &= ~0x20000000;
+        battleStatus->flags1 &= ~BS_FLAGS1_20000000;
     }
     if (buffs & 2) {
         battleStatus->hammerCharge = 0;
-        battleStatus->flags1 &= ~0x10000000;
+        battleStatus->flags1 &= ~BS_FLAGS1_10000000;
     }
     if (buffs & 8) {
         player->stoneDuration = 0;
@@ -2035,7 +2314,7 @@ void remove_player_buffs(s32 buffs) {
     }
     if (buffs & 0x10) {
         battleStatus->hustleTurns = 0;
-        battleStatus->flags1 &= ~0x04000000;
+        battleStatus->flags1 &= ~BS_FLAGS1_4000000;
     }
     if (buffs & 0x20 && (player->staticStatus != 0)) {
         player->staticDuration = 0;
@@ -2059,7 +2338,7 @@ void remove_player_buffs(s32 buffs) {
         playFX_5F(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
 
         battleStatus->unk_A0 = NULL;
-        sfx_play_sound(0x299);
+        sfx_play_sound(SOUND_299);
     }
     if (buffs & 0x100 && (battleStatus->turboChargeTurnsLeft != 0)) {
         battleStatus->turboChargeTurnsLeft = 0;
@@ -2074,11 +2353,51 @@ void remove_player_buffs(s32 buffs) {
 
     if (partner != NULL && (buffs & 0x10000)) {
         partner->isGlowing = FALSE;
-        gBattleStatus.flags1 &= ~0x40000000;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
     }
 }
 
-INCLUDE_ASM(s32, "190B20", btl_update_ko_status);
+void btl_update_ko_status(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    Actor* partner = battleStatus->partnerActor;
+    s32 koDuration = player->koDuration;
+    s32 i;
+
+    player->koDuration = player->debuffDuration;
+    if (player->koDuration > 0) {
+        player->koStatus = STATUS_DAZE;
+        player->ptrDefuffIcon->ptrPropertyList[15] = player->koDuration;
+
+        if (koDuration == 0) {
+            sfx_play_sound(SOUND_2107);
+        }
+    }
+
+    if (partner != NULL) {
+        if (partner->koDuration < partner->debuffDuration) {
+            partner->koStatus = STATUS_DAZE;
+            partner->koDuration = partner->debuffDuration;
+        }
+
+        if (partner->koDuration > 0) {
+            partner->koStatus = STATUS_DAZE;
+            partner->ptrDefuffIcon->ptrPropertyList[15] = partner->koDuration;
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        Actor* enemy = battleStatus->enemyActors[i];
+
+        if (enemy != NULL) {
+            enemy->koDuration = enemy->debuffDuration;
+            if (enemy->koDuration > 0) {
+                enemy->koStatus = STATUS_DAZE;
+                enemy->ptrDefuffIcon->ptrPropertyList[15] = enemy->koDuration;
+            }
+        }
+    }
+}
 
 void btl_appendGfx_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bottom) {
     gDPPipeSync(gMasterGfxPos++);
@@ -2100,14 +2419,37 @@ void btl_appendGfx_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 righ
     gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 }
 
-void btl_draw_prim_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
-    u16 new_var = arg4 + arg6;
-    u16 new_var2 = arg5 + arg7;
+void btl_draw_prim_quad(s32 r, s32 g, s32 b, s32 a, s32 left, s32 top, s32 arg6, s32 arg7) {
+    u16 right = left + arg6;
+    u16 bottom = top + arg7;
 
-    btl_appendGfx_prim_quad(arg0, arg1, arg2, arg3, arg4, arg5, new_var, new_var2);
+    btl_appendGfx_prim_quad(r, g, b, a, left, top, right, bottom);
 }
 
-INCLUDE_ASM(s32, "190B20", reset_all_actor_sounds);
+void reset_all_actor_sounds(Actor* actor) {
+    ActorPart* partIt = &actor->partsTable[0];
+
+    actor->actorTypeData1[0] = bActorSoundTable[actor->actorType].walk[0];
+    actor->actorTypeData1[1] = bActorSoundTable[actor->actorType].walk[1];
+    actor->actorTypeData1[2] = bActorSoundTable[actor->actorType].fly[0];
+    actor->actorTypeData1[3] = bActorSoundTable[actor->actorType].fly[1];
+    actor->actorTypeData1[4] = bActorSoundTable[actor->actorType].jump;
+    actor->actorTypeData1[5] = bActorSoundTable[actor->actorType].hurt;
+    actor->actorTypeData1b[0] = bActorSoundTable[actor->actorType].delay[0];
+    actor->actorTypeData1b[1] = bActorSoundTable[actor->actorType].delay[1];
+
+    while (partIt != NULL) {
+        partIt->partTypeData[0] = actor->actorTypeData1[0];
+        partIt->partTypeData[1] = actor->actorTypeData1[1];
+        partIt->partTypeData[2] = actor->actorTypeData1[2];
+        partIt->partTypeData[3] = actor->actorTypeData1[3];
+        partIt->partTypeData[4] = actor->actorTypeData1[4];
+        partIt->partTypeData[5] = actor->actorTypeData1[5];
+        partIt->actorTypeData2b[0] = actor->actorTypeData1b[0];
+        partIt->actorTypeData2b[1] = actor->actorTypeData1b[1];
+        partIt = partIt->nextPart;
+    }
+}
 
 void hide_foreground_models_unchecked(void) {
     FGModelData* data = gBattleStatus.foregroundModelData;
@@ -2177,5 +2519,38 @@ void show_foreground_models(void) {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-INCLUDE_ASM(s32, "190B20", start_rumble_type);
+void start_rumble_type(u32 arg0) {
+    if (D_802939C0 != 0) {
+        kill_script_by_ID(D_802939C0);
+    }
 
+    switch (arg0) {
+        case 0:
+            break;
+        case 1:
+            D_802939C0 = start_script(D_802939C4, 0xA, 0x20)->id;
+            break;
+        case 2:
+            D_802939C0 = start_script(D_80293A10, 0xA, 0x20)->id;
+            break;
+        case 3:
+            D_802939C0 = start_script(D_80293A34, 0xA, 0x20)->id;
+            break;
+        case 4:
+            D_802939C0 = start_script(D_80293A58, 0xA, 0x20)->id;
+            break;
+        case 5:
+            D_802939C0 = start_script(D_80293A7C, 0xA, 0x20)->id;
+            break;
+        case 6:
+            D_802939C0 = start_script(D_80293AA0, 0xA, 0x20)->id;
+            break;
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+            D_802939C0 = start_script(D_80293AC4, 0xA, 0x20)->id;
+            break;
+    }
+}

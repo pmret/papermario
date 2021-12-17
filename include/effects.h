@@ -189,7 +189,7 @@ typedef struct EffectWhirlwind {
     /* 0x28 */ f32 unk_28;
     /* 0x2C */ f32 unk_2C;
     /* 0x30 */ f32 unk_30;
-} EffectWhirlwind; 
+} EffectWhirlwind;
 
 EffectInstance* create_effect_instance(EffectBlueprint* effectBp);
 void remove_effect(EffectInstance*);

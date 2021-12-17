@@ -51,7 +51,7 @@ u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
 s32 create_entity(StaticEntityData*, s32, s32, s32, s32, ...);
 void entity_shattering_idle(Entity* entity);
-void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s16 damage);
+void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage);
 
 void step_game_loop(void);
 s32 resume_all_group(s32 groupFlags);
@@ -622,7 +622,7 @@ void set_message_msg(s32 msgID, s32 index);
 void set_message_value(s32 value, s32 index);
 s32 store_item(s32 itemID);
 void open_status_menu_short(void);
-void func_8024EFE0(f32 x, f32 y, f32 z, s32 a, s32 b, s32 c);
+void func_8024EFE0(f32 x, f32 y, f32 z, s32, s32, s32);
 void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a);
 
 #endif

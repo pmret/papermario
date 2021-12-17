@@ -16,10 +16,12 @@ ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall) {
     if (actor->koStatus != 0) {
         actor->koDuration = 0;
         actor->koStatus = 0;
-        if (id != 0) {
-            if (id == 0x100) {
+
+        switch (id) {
+            case ACTOR_PLAYER:
+                break;
+            case ACTOR_PARTNER:
                 dispatch_event_partner(0x31);
-            }
         }
         actor->ptrDefuffIcon->ptrPropertyList[15] = 0;
     }

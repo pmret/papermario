@@ -57,13 +57,13 @@ void set_part_absolute_position(s32 actorID, s32 partIndex, f32 x, f32 y, f32 z)
     ActorPart* actorPart;
 
     switch (actorID & 0x700) {
-        case 0:
+        case ACTOR_PLAYER:
             actor->currentPos.x = x;
             actor->currentPos.y = y;
             actor->currentPos.z = z;
             break;
-        case 0x100:
-        case 0x200:
+        case ACTOR_PARTNER:
+        case ACTOR_ENEMY0:
             actorPart = get_actor_part(actor, partIndex);
             actorPart->absolutePosition.x = x;
             actorPart->absolutePosition.y = y;
@@ -87,13 +87,13 @@ Actor* get_actor(s32 actorID) {
     u32 idIdx = (u8)actorID;
 
     switch (idFlag) {
-        case 0:
+        case ACTOR_PLAYER:
             ret = battleStatus->playerActor;
             break;
-        case 0x100:
+        case ACTOR_PARTNER:
             ret = battleStatus->partnerActor;
             break;
-        case 0x200:
+        case ACTOR_ENEMY0:
             ret = battleStatus->enemyActors[idIdx];
             break;
     }
@@ -678,13 +678,13 @@ ApiStatus SetPartPos(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
 
     switch (actorID & 0x700) {
-        case 0:
+        case ACTOR_PLAYER:
             actor->currentPos.x = x;
             actor->currentPos.y = y;
             actor->currentPos.z = z;
             break;
-        case 0x100:
-        case 0x200:
+        case ACTOR_PARTNER:
+        case ACTOR_ENEMY0:
             actorPart = get_actor_part(actor, partIndex);
 
             if (!(actorPart->flags & ACTOR_PART_FLAG_100000)) {
@@ -721,10 +721,10 @@ ApiStatus SetEnemyTargetOffset(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
 
     switch (actorID & 0x700) {
-        case 0:
+        case ACTOR_PLAYER:
             break;
-        case 0x100:
-        case 0x200:
+        case ACTOR_PARTNER:
+        case ACTOR_ENEMY0:
             actorPart = get_actor_part(actor, partIndex);
             actorPart->targetOffset.x = x;
             actorPart->targetOffset.y = y;
@@ -1957,7 +1957,7 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
-    
+
     switch (script->functionTemp[0]) {
         case 0:
             script->functionTemp[1] = create_actor(evt_get_variable(script, *args++));
@@ -2374,7 +2374,7 @@ ApiStatus ModifyActorDecoration(Evt* script, s32 isInitialCall) {
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
-    
+
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partIndex);
     decorationtable = actorPart->decorationTable;
