@@ -1702,252 +1702,221 @@ ActorPart* get_actor_part(Actor* actor, s32 partIndex) {
     return NULL;
 }
 
-INCLUDE_ASM(s32, "190B20", load_player_actor);
-// void load_player_actor(void) {
-//     Actor* temp_s0;
-//     Actor* temp_v0;
-//     ActorDesc* temp_v1_2;
-//     ActorPart* temp_s1;
-//     ActorPart* temp_v0_2;
-//     ActorPartMovement* temp_v0_4;
-//     DecorationTable* temp_a1;
-//     DecorationTable* temp_v0_3;
-//     s32 temp_a0;
-//     s32 temp_v1_4;
-//     s32 temp_v1_5;
-//     u8 temp_v1;
-//     u8 temp_v1_3;
-//     s32* phi_v1;
-//     s32 phi_a0;
-//     DecorationTable* phi_a0_2;
-//     s32 phi_v1_2;
-//     DecorationTable* phi_a0_3;
-//     s32 phi_v1_3;
-//     s32 i;
+void load_player_actor(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player;
+    ActorPart* part;
+    DecorationTable* decorationTable;
+    ActorPartMovement* partMovement;
+    s32 i;
 
-//     temp_v0 = heap_malloc(sizeof(temp_v0));
-//     temp_s0 = temp_v0;
-//     gBattleStatus.playerActor = temp_v0;
-//     if (temp_s0 == 0) {
-// loop_1:
-//         goto loop_1;
-//     }
-//     temp_v1 = (u8) gBattleStatus.unk_93;
-//     gBattleStatus.unk_93 = temp_v1 + 1;
-//     temp_s0->unk_134 = temp_v1;
-//     temp_s0->footStepCounter = 0;
-//     temp_s0->flags = 0;
-//     temp_s0->staticActorData = &bPlayerActorDesc;
-//     temp_s0->actorType = bPlayerActorDesc.type;
-//     if (((gBattleStatus.flags2 & 0x40) != 0) || (((u8) gGameStatusPtr->demoFlags & 2) != 0)) {
-//         temp_s0->currentPos.x = -130.0f;
-//         temp_s0->homePos.x = -130.0f;
-//         temp_s0->currentPos.y = 0.0f;
-//         temp_s0->homePos.y = 0.0f;
-//         temp_s0->currentPos.z = -10.0f;
-//         temp_s0->homePos.z = -10.0f;
-//     } else {
-//         temp_s0->currentPos.x = -95.0f;
-//         temp_s0->homePos.x = -95.0f;
-//         temp_s0->currentPos.y = 0.0f;
-//         temp_s0->homePos.y = 0.0f;
-//         temp_s0->currentPos.z = 0.0f;
-//         temp_s0->homePos.z = 0.0f;
-//     }
-//     temp_v1_2 = temp_s0->staticActorData;
-//     temp_s0->headOffset.x = 0;
-//     temp_s0->headOffset.y = 0;
-//     temp_s0->headOffset.z = 0;
-//     temp_s0->rotation.x = 0.0f;
-//     temp_s0->rotation.y = 0.0f;
-//     temp_s0->rotation.z = 0.0f;
-//     temp_s0->rotationPivotOffset.x = 0;
-//     temp_s0->rotationPivotOffset.y = 0;
-//     temp_s0->rotationPivotOffset.z = 0;
-//     temp_s0->unk_19A = 0;
-//     temp_s0->yaw = 0.0f;
-//     temp_s0->renderMode = 0xD;
-//     temp_s0->scale.x = 1.0f;
-//     temp_s0->scale.y = 1.0f;
-//     temp_s0->scale.z = 1.0f;
-//     temp_s0->scaleModifier.x = 1.0f;
-//     temp_s0->scaleModifier.y = 1.0f;
-//     temp_s0->scaleModifier.z = 1.0f;
-//     temp_s0->size.x = (u8) temp_v1_2->size.x;
-//     temp_s0->actorID = 0;
-//     temp_s0->healthBarPosition.x = (s16) (s32) temp_s0->currentPos.x;
-//     temp_s0->scalingFactor = 1.0f;
-//     temp_s0->unk_200 = NULL;
-//     temp_s0->healthBarPosition.y = (s16) (s32) temp_s0->currentPos.y;
-//     temp_s0->healthBarPosition.z = (s16) (s32) temp_s0->currentPos.z;
-//     temp_s0->size.y = (u8) temp_v1_2->size.y;
-//     temp_s0->unk_204 = 0;
-//     temp_s0->unk_205 = 0;
-//     temp_v1_3 = temp_s0->actorType;
-//     temp_s0->unk_194 = 0;
-//     temp_s0->unk_195 = 0;
-//     temp_s0->unk_196 = 0;
-//     temp_s0->unk_197 = 0;
-//     temp_s0->idleScriptSource = NULL;
-//     temp_s0->takeTurnScriptSource = NULL;
-//     temp_s0->onHitScriptSource = NULL;
-//     temp_s0->onTurnChanceScriptSource = NULL;
-//     temp_s0->idleScript = NULL;
-//     temp_s0->takeTurnScript = NULL;
-//     temp_s0->onHitScript = NULL;
-//     temp_s0->onTurnChangeScript = NULL;
-//     temp_s0->turnPriority = 0;
-//     temp_s0->statusTable = (DictionaryEntry* ) bPlayerStatusTable;
-//     temp_s0->debuff = 0;
-//     temp_s0->debuffDuration = 0;
-//     temp_s0->staticStatus = 0;
-//     temp_s0->staticDuration = 0;
-//     temp_s0->stoneStatus = 0;
-//     temp_s0->stoneDuration = 0;
-//     temp_s0->koStatus = 0;
-//     temp_s0->koDuration = 0;
-//     temp_s0->transStatus = 0;
-//     temp_s0->transDuration = 0;
-//     temp_s0->isGlowing = 0;
-//     temp_s0->unk_21E = 0;
-//     temp_s0->unk_21D = 0;
-//     temp_s0->attackBoost = 0;
-//     temp_s0->defenseBoost = 0;
-//     temp_s0->chillOutAmount = 0;
-//     temp_s0->chillOutTurns = 0;
-//     temp_s0->status = 0;
-//     temp_s0->actorTypeData1[0] = bActorSoundTable[temp_v1_3].walk[0];
-//     temp_s0->actorTypeData1[1] = *(&bActorSoundTable->walk[1] + (temp_v1_3 * 0x1C));
-//     temp_s0->actorTypeData1[2] = *(bActorSoundTable->fly + (temp_v1_3 * 0x1C));
-//     temp_s0->actorTypeData1[3] = *(&bActorSoundTable->fly[1] + (temp_v1_3 * 0x1C));
-//     temp_s0->actorTypeData1[4] = *(&bActorSoundTable->jump + (temp_v1_3 * 0x1C));
-//     temp_s0->actorTypeData1[5] = *(&bActorSoundTable->hurt + (temp_v1_3 * 0x1C));
-//     temp_s0->actorTypeData1b[0] = (s16) *(bActorSoundTable->delay + (temp_v1_3 * 0x1C));
-//     temp_s0->actorTypeData1b[1] = (s16) *(&bActorSoundTable->delay[1] + (temp_v1_3 * 0x1C));
+    battleStatus->playerActor = heap_malloc(sizeof(*player));
+    player = battleStatus->playerActor;
 
-//     for (i = 0; i < 2; i++) {
-//         temp_s0->unk_438[i] = 0;
-//     }
+    ASSERT(player != NULL);
 
-//     temp_v0_2 = heap_malloc(sizeof(temp_v0_2));
-//     temp_s1 = temp_v0_2;
-//     temp_s0->partsTable = temp_s1;
+    player->unk_134 = battleStatus->unk_93++;
+    player->footStepCounter = 0;
+    player->flags = 0;
+    player->staticActorData = &bPlayerActorDesc;
+    player->actorType = bPlayerActorDesc.type;
 
-//     ASSERT(temp_s1 != NULL)
+    if ((gBattleStatus.flags2 & 0x40) || (gGameStatusPtr->demoFlags & 2)) {
+        player->homePos.x = player->currentPos.x = -130.0f;
+        player->homePos.y = player->currentPos.y = 0.0f;
+        player->homePos.z = player->currentPos.z = -10.0f;
+    } else {
+        player->homePos.x = player->currentPos.x = -95.0f;
+        player->homePos.y = player->currentPos.y = 0.0f;
+        player->homePos.z = player->currentPos.z = 0.0f;
+    }
 
-//     temp_s0->numParts = 1;
-//     temp_s1->staticData = bMarioParts;
-//     temp_s1->partOffset.x = 0;
-//     temp_s1->partOffset.x = 0xC;
-//     temp_s1->partOffset.y = 0;
-//     temp_s1->partOffset.y = 0x20;
-//     temp_s1->partOffset.z = 0;
-//     temp_s1->partOffset.z = 5;
-//     temp_s1->decorationTable = NULL;
-//     temp_s1->flags = 0;
-//     temp_s1->targetFlags = 0;
-//     temp_s1->partOffsetFloat.x = 0.0f;
-//     temp_s1->partOffsetFloat.y = 0.0f;
-//     temp_s1->partOffsetFloat.z = 0.0f;
-//     temp_s1->rotationPivotOffset.x = 0;
-//     temp_s1->rotationPivotOffset.y = 0;
-//     temp_s1->rotationPivotOffset.z = 0;
-//     temp_s1->visualOffset.x = 0;
-//     temp_s1->visualOffset.y = 0;
-//     temp_s1->visualOffset.z = 0;
-//     temp_s1->absolutePosition.x = 0.0f;
-//     temp_s1->absolutePosition.y = 0.0f;
-//     temp_s1->absolutePosition.z = 0.0f;
-//     temp_s1->defenseTable = (u32* ) bMarioDefenseTable;
-//     if ((gBattleStatus.flags2 & 0x40) != 0) {
-//         temp_s1->idleAnimations = (u32* ) bPeachIdleAnims;
-//     } else {
-//         temp_s1->idleAnimations = (u32* ) bMarioIdleAnims;
-//     }
-//     temp_s1->eventFlags = 0;
-//     temp_s1->partFlags3 = 0;
-//     temp_s1->opacity = 0xFF;
-//     temp_s1->size.y = temp_s0->size.y;
-//     temp_s1->yaw = 0.0f;
-//     temp_s1->targetOffset.x = 0;
-//     temp_s1->targetOffset.y = 0;
-//     temp_s1->unk_70 = 0;
-//     temp_s1->rotation.x = 0.0f;
-//     temp_s1->rotation.y = 0.0f;
-//     temp_s1->rotation.z = 0.0f;
-//     temp_s1->scale.x = 1.0f;
-//     temp_s1->scale.y = 1.0f;
-//     temp_s1->scale.z = 1.0f;
-//     temp_s1->verticalStretch = 1;
-//     temp_s1->unkOffset[0] = 0;
-//     temp_s1->unkOffset[1] = 0;
-//     temp_s1->animationRate = 1.0f;
-//     temp_s1->size.x = temp_s0->size.x;
-//     temp_s1->currentAnimation = func_80265CE8(temp_s1->idleAnimations, 1U);
-//     temp_s1->nextPart = NULL;
-//     temp_s1->partTypeData[0] = bActorSoundTable[temp_s0->actorType].walk[0];
-//     temp_s1->partTypeData[1] = *(&bActorSoundTable->walk[1] + (temp_s0->actorType * 0x1C));
-//     temp_s1->partTypeData[2] = *(bActorSoundTable->fly + (temp_s0->actorType * 0x1C));
-//     temp_s1->partTypeData[3] = *(&bActorSoundTable->fly[1] + (temp_s0->actorType * 0x1C));
-//     temp_s1->partTypeData[4] = *(&bActorSoundTable->jump + (temp_s0->actorType * 0x1C));
-//     temp_s1->partTypeData[5] = *(&bActorSoundTable->hurt + (temp_s0->actorType * 0x1C));
-//     temp_s1->actorTypeData2b[0] = (s16) *(bActorSoundTable->delay + (temp_s0->actorType * 0x1C));
-//     temp_s1->actorTypeData2b[1] = (s16) *(&bActorSoundTable->delay[1] + (temp_s0->actorType * 0x1C));
-//     if (temp_s1->idleAnimations != 0) {
-//         temp_v0_3 = heap_malloc(0x8E8);
-//         temp_a1 = temp_v0_3;
-//         temp_s1->decorationTable = temp_v0_3;
-//         if (temp_a1 == 0) {
-// loop_15:
-//             goto loop_15;
-//         }
-//         temp_a1->unk_6C0 = 0;
-//         temp_a1->unk_750 = 0;
-//         temp_a1->unk_764 = 0;
-//         temp_a1->unk_768 = 0;
-//         temp_a1->unk_7D8 = 0;
-//         temp_a1->unk_7D9 = 0;
-//         phi_a0_2 = temp_a1;
-//         phi_v1_2 = 0;
-//         phi_v1_3 = 0;
-//         do {
-//             phi_a0_2->posX[0] = (s16) (s32) temp_s0->currentPos.x;
-//             phi_a0_2->posY[0] = (s16) (s32) temp_s0->currentPos.y;
-//             temp_v1_4 = phi_v1_2 + 1;
-//             phi_a0_2->posZ[0] = (s16) (s32) temp_s0->currentPos.z;
-//             phi_a0_2 += 2;
-//             phi_v1_2 = temp_v1_4;
-//         } while (temp_v1_4 < 0x10);
-//         temp_a1->unk_7DA = 3;
-//         temp_a1->unk_7DB = 0;
-//         temp_a1->effectType = 0;
-//         phi_a0_3 = temp_a1;
-//         do {
-//             phi_a0_3->unk_8B0[0] = NULL;
-//             temp_v1_5 = phi_v1_3 + 1;
-//             temp_a1->decorationType[phi_v1_3] = 0;
-//             phi_a0_3 += 4;
-//             phi_v1_3 = temp_v1_5;
-//         } while (temp_v1_5 < 2);
-//         goto block_20;
-//     }
-// block_20:
-//     temp_v0_4 = heap_malloc(0x8C);
-//     temp_s1->movement = temp_v0_4;
-//     if (temp_v0_4 == 0) {
-// loop_21:
-//         goto loop_21;
-//     }
-//     temp_s0->shadow = create_shadow_type(0, temp_s0->currentPos.x, temp_s0->currentPos.y, temp_s0->currentPos.z);
-//     temp_s0->shadowScale = (f32) ((f64) temp_s0->size.x / 24.0);
-//     temp_s0->hudElementDataIndex = create_status_icon_set();
-//     temp_s0->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
-//     temp_s0->unk_228 = NULL;
-//     if (is_ability_active(0x13) != 0) {
-//         temp_s0->staticStatus = 0xB;
-//         temp_s0->staticDuration = 0x7F;
-//     }
-// }
+    player->headOffset.x = 0;
+    player->headOffset.y = 0;
+    player->headOffset.z = 0;
+    player->rotation.x = 0.0f;
+    player->rotation.y = 0.0f;
+    player->rotation.z = 0.0f;
+    player->rotationPivotOffset.x = 0;
+    player->rotationPivotOffset.y = 0;
+    player->rotationPivotOffset.z = 0;
+    player->unk_19A = 0;
+    player->yaw = 0.0f;
+    player->renderMode = 0xD;
+    player->scale.x = 1.0f;
+    player->scale.y = 1.0f;
+    player->scale.z = 1.0f;
+    player->scaleModifier.x = 1.0f;
+    player->scaleModifier.y = 1.0f;
+    player->scaleModifier.z = 1.0f;
+    player->size.x = player->staticActorData->size.x;
+    player->size.y = player->staticActorData->size.y;
+    player->actorID = 0;
+    player->healthBarPosition.x = player->currentPos.x;
+    player->healthBarPosition.y = player->currentPos.y;
+    player->healthBarPosition.z = player->currentPos.z;
+    player->scalingFactor = 1.0f;
+    player->unk_200 = NULL;
+    player->unk_204 = 0;
+    player->unk_205 = 0;
+    player->unk_194 = 0;
+    player->unk_195 = 0;
+    player->unk_196 = 0;
+    player->unk_197 = 0;
+    player->idleScriptSource = NULL;
+    player->takeTurnScriptSource = NULL;
+    player->onHitScriptSource = NULL;
+    player->onTurnChanceScriptSource = NULL;
+    player->idleScript = NULL;
+    player->takeTurnScript = NULL;
+    player->onHitScript = NULL;
+    player->onTurnChangeScript = NULL;
+    player->turnPriority = 0;
+    player->statusTable = bPlayerStatusTable;
+    player->debuff = 0;
+    player->debuffDuration = 0;
+    player->staticStatus = 0;
+    player->staticDuration = 0;
+    player->stoneStatus = 0;
+    player->stoneDuration = 0;
+    player->koStatus = 0;
+    player->koDuration = 0;
+    player->transStatus = 0;
+    player->transDuration = 0;
+    player->isGlowing = 0;
+    player->unk_21E = 0;
+    player->unk_21D = 0;
+    player->attackBoost = 0;
+    player->defenseBoost = 0;
+    player->chillOutAmount = 0;
+    player->chillOutTurns = 0;
+    player->status = 0;
+    player->actorTypeData1[0] = bActorSoundTable[player->actorType].walk[0];
+    player->actorTypeData1[1] = bActorSoundTable[player->actorType].walk[1];
+    player->actorTypeData1[2] = bActorSoundTable[player->actorType].fly[0];
+    player->actorTypeData1[3] = bActorSoundTable[player->actorType].fly[1];
+    player->actorTypeData1[4] = bActorSoundTable[player->actorType].jump;
+    player->actorTypeData1[5] = bActorSoundTable[player->actorType].hurt;
+    player->actorTypeData1b[0] = bActorSoundTable[player->actorType].delay[0];
+    player->actorTypeData1b[1] = bActorSoundTable[player->actorType].delay[1];
+
+    for (i = 0; i < ARRAY_COUNT(player->unk_438); i++) {
+        player->unk_438[i] = 0;
+    }
+
+    part = heap_malloc(sizeof(*part));
+    player->partsTable = part;
+
+    ASSERT(part != NULL)
+
+    player->numParts = 1;
+    part->staticData = bMarioParts;
+    part->partOffset.x = 0;
+    part->partOffset.y = 0;
+    part->partOffset.z = 0;
+    part->partOffset.x = 12;
+    part->partOffset.y = 32;
+    part->partOffset.z = 5;
+    part->decorationTable = NULL;
+    part->flags = 0;
+    part->targetFlags = 0;
+    part->partOffsetFloat.x = 0.0f;
+    part->partOffsetFloat.y = 0.0f;
+    part->partOffsetFloat.z = 0.0f;
+    part->rotationPivotOffset.x = 0;
+    part->rotationPivotOffset.y = 0;
+    part->rotationPivotOffset.z = 0;
+    part->visualOffset.x = 0;
+    part->visualOffset.y = 0;
+    part->visualOffset.z = 0;
+    part->absolutePosition.x = 0.0f;
+    part->absolutePosition.y = 0.0f;
+    part->absolutePosition.z = 0.0f;
+    part->defenseTable = bMarioDefenseTable;
+
+    if (gBattleStatus.flags2 & BS_FLAGS2_40) {
+        part->idleAnimations = bPeachIdleAnims;
+    } else {
+        part->idleAnimations = bMarioIdleAnims;
+    }
+
+    part->eventFlags = 0;
+    part->partFlags3 = 0;
+    part->opacity = 0xFF;
+    part->size.y = player->size.y;
+    part->size.x = player->size.x;
+    part->yaw = 0.0f;
+    part->targetOffset.x = 0;
+    part->targetOffset.y = 0;
+    part->unk_70 = 0;
+    part->rotation.x = 0.0f;
+    part->rotation.y = 0.0f;
+    part->rotation.z = 0.0f;
+    part->scale.x = 1.0f;
+    part->scale.y = 1.0f;
+    part->scale.z = 1.0f;
+    part->verticalStretch = 1;
+    part->unkOffset[0] = 0;
+    part->unkOffset[1] = 0;
+    part->animationRate = 1.0f;
+    part->currentAnimation = func_80265CE8(part->idleAnimations, 1U);
+    part->nextPart = NULL;
+    part->partTypeData[0] = bActorSoundTable[player->actorType].walk[0];
+    part->partTypeData[1] = bActorSoundTable[player->actorType].walk[1];
+    part->partTypeData[2] = bActorSoundTable[player->actorType].fly[0];
+    part->partTypeData[3] = bActorSoundTable[player->actorType].fly[1];
+    part->partTypeData[4] = bActorSoundTable[player->actorType].jump;
+    part->partTypeData[5] = bActorSoundTable[player->actorType].hurt;
+    part->actorTypeData2b[0] = bActorSoundTable[player->actorType].delay[0];
+    part->actorTypeData2b[1] = bActorSoundTable[player->actorType].delay[1];
+
+    if (part->idleAnimations != NULL) {
+        s32 j;
+
+        part->decorationTable = heap_malloc(sizeof(*decorationTable));
+        decorationTable = part->decorationTable;
+
+        ASSERT(decorationTable != NULL);
+
+        decorationTable->unk_6C0 = 0;
+        decorationTable->unk_750 = 0;
+        decorationTable->unk_764 = 0;
+        decorationTable->unk_768 = 0;
+        decorationTable->unk_7D8 = 0;
+        decorationTable->unk_7D9 = 0;
+
+        for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
+            decorationTable->posX[j] = player->currentPos.x;
+            decorationTable->posY[j] = player->currentPos.y;
+            decorationTable->posZ[j] = player->currentPos.z;
+        }
+
+        decorationTable->unk_7DA = 3;
+        decorationTable->unk_7DB = 0;
+        decorationTable->effectType = 0;
+
+        for (j = 0; j < ARRAY_COUNT(decorationTable->unk_8B0); j++) {
+            decorationTable->unk_8B0[j] = NULL;
+            decorationTable->decorationType[j] = 0;
+        }
+    }
+
+    partMovement = heap_malloc(sizeof(*partMovement));
+    part->movement = partMovement;
+
+    ASSERT(partMovement != NULL);
+
+    player->shadow = create_shadow_type(0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+    player->shadowScale = player->size.x / 24.0;
+    player->hudElementDataIndex = create_status_icon_set();
+    player->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
+    player->unk_228 = NULL;
+
+    if (is_ability_active(ABILITY_ZAP_TAP)) {
+        player->staticStatus = 0xB;
+        player->staticDuration = 127;
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", load_partner_actor);
 

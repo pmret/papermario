@@ -700,7 +700,7 @@ typedef struct BattleStatus {
     /* 0x08F */ char unk_8F[1];
     /* 0x090 */ s16 unk_90;
     /* 0x092 */ s8 unk_92;
-    /* 0x093 */ char unk_93;
+    /* 0x093 */ s8 unk_93;
     /* 0x094 */ s8 unk_94;
     /* 0x095 */ s8 unk_95;
     /* 0x096 */ s8 hammerCharge;
@@ -1729,8 +1729,7 @@ typedef struct Actor {
     /* 0x21A */ char unk_21A[2];
     /* 0x21C */ u8 status;
     /* 0x21D */ s8 unk_21D;
-    /* 0x21E */ s8 unk_21E;
-    /* 0x21F */ char unk_21F[0x1];
+    /* 0x21E */ s16 unk_21E;
     /* 0x220 */ s8 isGlowing;
     /* 0x221 */ s8 attackBoost;
     /* 0x222 */ s8 defenseBoost;
