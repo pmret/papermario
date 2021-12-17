@@ -701,7 +701,7 @@ void check_for_interactables(void) {
     }
 
     if (D_8010C958 == NULL) {
-        dma_copy(E20110_ROM_START, E20EB0_ROM_END, (void *) E20110_VRAM_DEF);
+        dma_copy(E20110_ROM_START, E20110_ROM_END, (void *) E20110_VRAM_DEF);
         D_8010C958 = &func_802B70B4_E201C4;
 
     }
