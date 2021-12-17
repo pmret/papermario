@@ -711,6 +711,10 @@ void check_for_interactables(void) {
     }
 }
 
+
+// TODO: Remove after func_800E24F8 is matching.
+static const pad[3] = { 0.0f, 0.0f, 0.0f };
+
 void func_800E0AD0(void) {
     if ((gPlayerStatusPtr->animFlags & 0x10) && (D_8010C958 != 0)) {
         func_802B71E8_E202F8();
