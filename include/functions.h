@@ -434,7 +434,16 @@ void reset_all_actor_sounds(Actor*);
 void decrement_status_menu_disabled(void);
 void increment_status_menu_disabled(void);
 void btl_delete_actor(Actor* actor);
-void remove_status_debuff(s16);
+void remove_status_4(s32);
+void remove_status_debuff(s32);
+void remove_status_icon_boost_hammer(s32);
+void remove_status_icon_boost_jump(s32);
+void remove_status_icon_boost_partner(s32);
+void remove_status_icon_danger(s32);
+void remove_status_icon_peril(s32);
+void remove_status_icon_surprise(s32);
+void remove_status_static(s32);
+void remove_status_transparent(s32);
 s32 find_item(s32);
 
 void enable_background_wave(void);

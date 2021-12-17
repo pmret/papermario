@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "hud_element.h"
 
 typedef struct HudComplexStatusIcon {
 	/* 0x0 */ s8 active;
@@ -58,16 +59,6 @@ void update_merlee_message(PopupMessage* popup);
 void draw_merlee_message(PopupMessage* popup);
 void func_80045BC8(void);
 void func_80045FB4(void);
-void remove_status_4(s32);
-void remove_status_debuff(s32);
-void remove_status_icon_boost_hammer(s32);
-void remove_status_icon_boost_jump(s32);
-void remove_status_icon_boost_partner(s32);
-void remove_status_icon_danger(s32);
-void remove_status_icon_peril(s32);
-void remove_status_icon_surprise(s32);
-void remove_status_static(s32);
-void remove_status_transparent(s32);
 
 void func_80045AC0(void) {
     s32 i;
