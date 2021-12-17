@@ -1,6 +1,49 @@
 #include "common.h"
 #include "npc.h"
 
+typedef struct HudComplexStatusIcon {
+	/* 0x000 */ s8 active;
+	/* 0x001 */ s8 removing;
+	/* 0x002 */ char unk_02[6];
+	/* 0x008 */ s32 hudElemIndex;
+	/* 0x00C */ s32 null;
+} HudComplexStatusIcon;/* size = 0x10 */
+
+typedef struct HudSimpleStatusIcon {
+	/* 0x000 */ s8 active;
+	/* 0x001 */ s8 removing;
+	/* 0x004 */ s32 hudElemIndex;
+} HudSimpleStatusIcon;/* size = 0x8 */
+
+typedef struct HudStatusIcon {
+	/* 0x000 */ s32 flags;
+	/* 0x004 */ Vec3f worldPos;
+	/* 0x010 */ f32 status1Radius;
+	/* 0x014 */ f32 status1OffsetY;
+	/* 0x018 */ f32 status2Radius;
+	/* 0x01C */ f32 status2OffsetY;
+	/* 0x020 */ f32 status3Radius;
+	/* 0x024 */ f32 status3OffsetY;
+	/* 0x028 */ f32 status4Radius;
+	/* 0x02C */ f32 status4OffsetY;
+	/* 0x030 */ f32 offsetY;
+	/* 0x034 */ f32 null;
+	/* 0x038 */ HudComplexStatusIcon status1;
+	/* 0x048 */ HudComplexStatusIcon status2;
+	/* 0x058 */ HudComplexStatusIcon status3;
+	/* 0x068 */ HudComplexStatusIcon status4;
+	/* 0x078 */ HudSimpleStatusIcon boostJump;
+	/* 0x080 */ s32 prevIndexBoostJump;
+	/* 0x084 */ HudSimpleStatusIcon boostHammer;
+	/* 0x08C */ s32 prevIndexBoostHammer;
+	/* 0x090 */ HudSimpleStatusIcon boostPartner;
+	/* 0x098 */ HudSimpleStatusIcon surprise;
+	/* 0x0A0 */ HudSimpleStatusIcon peril;
+	/* 0x0A8 */ HudSimpleStatusIcon danger;
+} HudStatusIcon;/* size = 0xB0 */
+
+extern HudStatusIcon *D_800A0F44;
+
 extern s32 D_800A0F40;
 extern PopupMessage D_800A0BC0[32];
 extern s16 D_80078160[];
