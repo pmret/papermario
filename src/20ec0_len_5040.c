@@ -367,7 +367,7 @@ void enable_status_icon_boost_jump(s32 iconID) {
     statusIcon->flags |= 0x40;
 }
 
-void create_status_boost_hammer(s32 iconID) {
+void create_status_icon_boost_hammer(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
     s32 hudElement;
 
