@@ -1703,6 +1703,251 @@ ActorPart* get_actor_part(Actor* actor, s32 partIndex) {
 }
 
 INCLUDE_ASM(s32, "190B20", load_player_actor);
+// void load_player_actor(void) {
+//     Actor* temp_s0;
+//     Actor* temp_v0;
+//     ActorDesc* temp_v1_2;
+//     ActorPart* temp_s1;
+//     ActorPart* temp_v0_2;
+//     ActorPartMovement* temp_v0_4;
+//     DecorationTable* temp_a1;
+//     DecorationTable* temp_v0_3;
+//     s32 temp_a0;
+//     s32 temp_v1_4;
+//     s32 temp_v1_5;
+//     u8 temp_v1;
+//     u8 temp_v1_3;
+//     s32* phi_v1;
+//     s32 phi_a0;
+//     DecorationTable* phi_a0_2;
+//     s32 phi_v1_2;
+//     DecorationTable* phi_a0_3;
+//     s32 phi_v1_3;
+//     s32 i;
+
+//     temp_v0 = heap_malloc(sizeof(temp_v0));
+//     temp_s0 = temp_v0;
+//     gBattleStatus.playerActor = temp_v0;
+//     if (temp_s0 == 0) {
+// loop_1:
+//         goto loop_1;
+//     }
+//     temp_v1 = (u8) gBattleStatus.unk_93;
+//     gBattleStatus.unk_93 = temp_v1 + 1;
+//     temp_s0->unk_134 = temp_v1;
+//     temp_s0->footStepCounter = 0;
+//     temp_s0->flags = 0;
+//     temp_s0->staticActorData = &bPlayerActorDesc;
+//     temp_s0->actorType = bPlayerActorDesc.type;
+//     if (((gBattleStatus.flags2 & 0x40) != 0) || (((u8) gGameStatusPtr->demoFlags & 2) != 0)) {
+//         temp_s0->currentPos.x = -130.0f;
+//         temp_s0->homePos.x = -130.0f;
+//         temp_s0->currentPos.y = 0.0f;
+//         temp_s0->homePos.y = 0.0f;
+//         temp_s0->currentPos.z = -10.0f;
+//         temp_s0->homePos.z = -10.0f;
+//     } else {
+//         temp_s0->currentPos.x = -95.0f;
+//         temp_s0->homePos.x = -95.0f;
+//         temp_s0->currentPos.y = 0.0f;
+//         temp_s0->homePos.y = 0.0f;
+//         temp_s0->currentPos.z = 0.0f;
+//         temp_s0->homePos.z = 0.0f;
+//     }
+//     temp_v1_2 = temp_s0->staticActorData;
+//     temp_s0->headOffset.x = 0;
+//     temp_s0->headOffset.y = 0;
+//     temp_s0->headOffset.z = 0;
+//     temp_s0->rotation.x = 0.0f;
+//     temp_s0->rotation.y = 0.0f;
+//     temp_s0->rotation.z = 0.0f;
+//     temp_s0->rotationPivotOffset.x = 0;
+//     temp_s0->rotationPivotOffset.y = 0;
+//     temp_s0->rotationPivotOffset.z = 0;
+//     temp_s0->unk_19A = 0;
+//     temp_s0->yaw = 0.0f;
+//     temp_s0->renderMode = 0xD;
+//     temp_s0->scale.x = 1.0f;
+//     temp_s0->scale.y = 1.0f;
+//     temp_s0->scale.z = 1.0f;
+//     temp_s0->scaleModifier.x = 1.0f;
+//     temp_s0->scaleModifier.y = 1.0f;
+//     temp_s0->scaleModifier.z = 1.0f;
+//     temp_s0->size.x = (u8) temp_v1_2->size.x;
+//     temp_s0->actorID = 0;
+//     temp_s0->healthBarPosition.x = (s16) (s32) temp_s0->currentPos.x;
+//     temp_s0->scalingFactor = 1.0f;
+//     temp_s0->unk_200 = NULL;
+//     temp_s0->healthBarPosition.y = (s16) (s32) temp_s0->currentPos.y;
+//     temp_s0->healthBarPosition.z = (s16) (s32) temp_s0->currentPos.z;
+//     temp_s0->size.y = (u8) temp_v1_2->size.y;
+//     temp_s0->unk_204 = 0;
+//     temp_s0->unk_205 = 0;
+//     temp_v1_3 = temp_s0->actorType;
+//     temp_s0->unk_194 = 0;
+//     temp_s0->unk_195 = 0;
+//     temp_s0->unk_196 = 0;
+//     temp_s0->unk_197 = 0;
+//     temp_s0->idleScriptSource = NULL;
+//     temp_s0->takeTurnScriptSource = NULL;
+//     temp_s0->onHitScriptSource = NULL;
+//     temp_s0->onTurnChanceScriptSource = NULL;
+//     temp_s0->idleScript = NULL;
+//     temp_s0->takeTurnScript = NULL;
+//     temp_s0->onHitScript = NULL;
+//     temp_s0->onTurnChangeScript = NULL;
+//     temp_s0->turnPriority = 0;
+//     temp_s0->statusTable = (DictionaryEntry* ) bPlayerStatusTable;
+//     temp_s0->debuff = 0;
+//     temp_s0->debuffDuration = 0;
+//     temp_s0->staticStatus = 0;
+//     temp_s0->staticDuration = 0;
+//     temp_s0->stoneStatus = 0;
+//     temp_s0->stoneDuration = 0;
+//     temp_s0->koStatus = 0;
+//     temp_s0->koDuration = 0;
+//     temp_s0->transStatus = 0;
+//     temp_s0->transDuration = 0;
+//     temp_s0->isGlowing = 0;
+//     temp_s0->unk_21E = 0;
+//     temp_s0->unk_21D = 0;
+//     temp_s0->attackBoost = 0;
+//     temp_s0->defenseBoost = 0;
+//     temp_s0->chillOutAmount = 0;
+//     temp_s0->chillOutTurns = 0;
+//     temp_s0->status = 0;
+//     temp_s0->actorTypeData1[0] = bActorSoundTable[temp_v1_3].walk[0];
+//     temp_s0->actorTypeData1[1] = *(&bActorSoundTable->walk[1] + (temp_v1_3 * 0x1C));
+//     temp_s0->actorTypeData1[2] = *(bActorSoundTable->fly + (temp_v1_3 * 0x1C));
+//     temp_s0->actorTypeData1[3] = *(&bActorSoundTable->fly[1] + (temp_v1_3 * 0x1C));
+//     temp_s0->actorTypeData1[4] = *(&bActorSoundTable->jump + (temp_v1_3 * 0x1C));
+//     temp_s0->actorTypeData1[5] = *(&bActorSoundTable->hurt + (temp_v1_3 * 0x1C));
+//     temp_s0->actorTypeData1b[0] = (s16) *(bActorSoundTable->delay + (temp_v1_3 * 0x1C));
+//     temp_s0->actorTypeData1b[1] = (s16) *(&bActorSoundTable->delay[1] + (temp_v1_3 * 0x1C));
+
+//     for (i = 0; i < 2; i++) {
+//         temp_s0->unk_438[i] = 0;
+//     }
+
+//     temp_v0_2 = heap_malloc(sizeof(temp_v0_2));
+//     temp_s1 = temp_v0_2;
+//     temp_s0->partsTable = temp_s1;
+
+//     ASSERT(temp_s1 != NULL)
+
+//     temp_s0->numParts = 1;
+//     temp_s1->staticData = bMarioParts;
+//     temp_s1->partOffset.x = 0;
+//     temp_s1->partOffset.x = 0xC;
+//     temp_s1->partOffset.y = 0;
+//     temp_s1->partOffset.y = 0x20;
+//     temp_s1->partOffset.z = 0;
+//     temp_s1->partOffset.z = 5;
+//     temp_s1->decorationTable = NULL;
+//     temp_s1->flags = 0;
+//     temp_s1->targetFlags = 0;
+//     temp_s1->partOffsetFloat.x = 0.0f;
+//     temp_s1->partOffsetFloat.y = 0.0f;
+//     temp_s1->partOffsetFloat.z = 0.0f;
+//     temp_s1->rotationPivotOffset.x = 0;
+//     temp_s1->rotationPivotOffset.y = 0;
+//     temp_s1->rotationPivotOffset.z = 0;
+//     temp_s1->visualOffset.x = 0;
+//     temp_s1->visualOffset.y = 0;
+//     temp_s1->visualOffset.z = 0;
+//     temp_s1->absolutePosition.x = 0.0f;
+//     temp_s1->absolutePosition.y = 0.0f;
+//     temp_s1->absolutePosition.z = 0.0f;
+//     temp_s1->defenseTable = (u32* ) bMarioDefenseTable;
+//     if ((gBattleStatus.flags2 & 0x40) != 0) {
+//         temp_s1->idleAnimations = (u32* ) bPeachIdleAnims;
+//     } else {
+//         temp_s1->idleAnimations = (u32* ) bMarioIdleAnims;
+//     }
+//     temp_s1->eventFlags = 0;
+//     temp_s1->partFlags3 = 0;
+//     temp_s1->opacity = 0xFF;
+//     temp_s1->size.y = temp_s0->size.y;
+//     temp_s1->yaw = 0.0f;
+//     temp_s1->targetOffset.x = 0;
+//     temp_s1->targetOffset.y = 0;
+//     temp_s1->unk_70 = 0;
+//     temp_s1->rotation.x = 0.0f;
+//     temp_s1->rotation.y = 0.0f;
+//     temp_s1->rotation.z = 0.0f;
+//     temp_s1->scale.x = 1.0f;
+//     temp_s1->scale.y = 1.0f;
+//     temp_s1->scale.z = 1.0f;
+//     temp_s1->verticalStretch = 1;
+//     temp_s1->unkOffset[0] = 0;
+//     temp_s1->unkOffset[1] = 0;
+//     temp_s1->animationRate = 1.0f;
+//     temp_s1->size.x = temp_s0->size.x;
+//     temp_s1->currentAnimation = func_80265CE8(temp_s1->idleAnimations, 1U);
+//     temp_s1->nextPart = NULL;
+//     temp_s1->partTypeData[0] = bActorSoundTable[temp_s0->actorType].walk[0];
+//     temp_s1->partTypeData[1] = *(&bActorSoundTable->walk[1] + (temp_s0->actorType * 0x1C));
+//     temp_s1->partTypeData[2] = *(bActorSoundTable->fly + (temp_s0->actorType * 0x1C));
+//     temp_s1->partTypeData[3] = *(&bActorSoundTable->fly[1] + (temp_s0->actorType * 0x1C));
+//     temp_s1->partTypeData[4] = *(&bActorSoundTable->jump + (temp_s0->actorType * 0x1C));
+//     temp_s1->partTypeData[5] = *(&bActorSoundTable->hurt + (temp_s0->actorType * 0x1C));
+//     temp_s1->actorTypeData2b[0] = (s16) *(bActorSoundTable->delay + (temp_s0->actorType * 0x1C));
+//     temp_s1->actorTypeData2b[1] = (s16) *(&bActorSoundTable->delay[1] + (temp_s0->actorType * 0x1C));
+//     if (temp_s1->idleAnimations != 0) {
+//         temp_v0_3 = heap_malloc(0x8E8);
+//         temp_a1 = temp_v0_3;
+//         temp_s1->decorationTable = temp_v0_3;
+//         if (temp_a1 == 0) {
+// loop_15:
+//             goto loop_15;
+//         }
+//         temp_a1->unk_6C0 = 0;
+//         temp_a1->unk_750 = 0;
+//         temp_a1->unk_764 = 0;
+//         temp_a1->unk_768 = 0;
+//         temp_a1->unk_7D8 = 0;
+//         temp_a1->unk_7D9 = 0;
+//         phi_a0_2 = temp_a1;
+//         phi_v1_2 = 0;
+//         phi_v1_3 = 0;
+//         do {
+//             phi_a0_2->posX[0] = (s16) (s32) temp_s0->currentPos.x;
+//             phi_a0_2->posY[0] = (s16) (s32) temp_s0->currentPos.y;
+//             temp_v1_4 = phi_v1_2 + 1;
+//             phi_a0_2->posZ[0] = (s16) (s32) temp_s0->currentPos.z;
+//             phi_a0_2 += 2;
+//             phi_v1_2 = temp_v1_4;
+//         } while (temp_v1_4 < 0x10);
+//         temp_a1->unk_7DA = 3;
+//         temp_a1->unk_7DB = 0;
+//         temp_a1->effectType = 0;
+//         phi_a0_3 = temp_a1;
+//         do {
+//             phi_a0_3->unk_8B0[0] = NULL;
+//             temp_v1_5 = phi_v1_3 + 1;
+//             temp_a1->decorationType[phi_v1_3] = 0;
+//             phi_a0_3 += 4;
+//             phi_v1_3 = temp_v1_5;
+//         } while (temp_v1_5 < 2);
+//         goto block_20;
+//     }
+// block_20:
+//     temp_v0_4 = heap_malloc(0x8C);
+//     temp_s1->movement = temp_v0_4;
+//     if (temp_v0_4 == 0) {
+// loop_21:
+//         goto loop_21;
+//     }
+//     temp_s0->shadow = create_shadow_type(0, temp_s0->currentPos.x, temp_s0->currentPos.y, temp_s0->currentPos.z);
+//     temp_s0->shadowScale = (f32) ((f64) temp_s0->size.x / 24.0);
+//     temp_s0->hudElementDataIndex = create_status_icon_set();
+//     temp_s0->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
+//     temp_s0->unk_228 = NULL;
+//     if (is_ability_active(0x13) != 0) {
+//         temp_s0->staticStatus = 0xB;
+//         temp_s0->staticDuration = 0x7F;
+//     }
+// }
 
 INCLUDE_ASM(s32, "190B20", load_partner_actor);
 
@@ -1710,7 +1955,65 @@ INCLUDE_ASM(s32, "190B20", create_actor);
 
 INCLUDE_ASM(s32, "190B20", func_80265CE8);
 
-INCLUDE_ASM(s32, "190B20", func_80265D44);
+s32 func_80265D44(s32 arg0) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Actor* player = battleStatus->playerActor;
+    u32* anim = &player->partsTable->idleAnimations[0];
+    s32 ret;
+
+    if (anim == NULL) {
+        return 0;
+    }
+    ret = 0;
+
+    if (!(battleStatus->flags2 & BS_FLAGS2_40)) {
+        if (playerData->curHP < 6) {
+            if (arg0 == 1) {
+                arg0 = 26;
+            }
+
+            if (arg0 == 18) {
+                arg0 = 22;
+            }
+
+            if (arg0 == 28) {
+                arg0 = 29;
+            }
+        }
+
+        if (player->debuff == 9) {
+            if (arg0 == 1) {
+                arg0 = 26;
+            }
+
+            if (arg0 == 18) {
+                arg0 = 22;
+            }
+
+            if (arg0 == 28) {
+                arg0 = 29;
+            }
+        }
+
+        if (player->debuff == 4 && arg0 == 18) {
+            arg0 = 24;
+        }
+    }
+
+    while (*anim != NULL) {
+        if (*anim == 1) {
+            ret = anim[1];
+        }
+        if (*anim == arg0) {
+            ret = anim[1];
+            break;
+        }
+        anim += 2;
+    }
+
+    return ret;
+}
 
 s32 lookup_defense(DictionaryEntry* defenseTable, s32 elementKey) {
     s32 normalDefense = 0;
@@ -2066,7 +2369,60 @@ void func_80266B14(void) {
     }
 }
 
+#ifdef NON_MATCHING
+s32 try_inflict_status(Actor* actor, s32 statusTypeKey, s32 statusKey) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 phi_s0;
+    s32 duration;
+
+    if (battleStatus->statusChance == 0xFE) {
+        duration = battleStatus->statusDuration;
+        return inflict_status_set_duration(actor, statusTypeKey, statusKey,
+                                           duration + lookup_status_duration_mod(actor->statusTable, statusKey));
+    }
+
+    duration = 0;
+
+    if (actor->statusTable != NULL) {
+        if (!(battleStatus->currentAttackStatus & 0x40000000)) {
+            phi_s0 = lookup_status_chance(actor->statusTable, statusTypeKey);
+        } else {
+            if (lookup_status_chance(actor->statusTable, statusTypeKey) != 0) {
+                phi_s0 = 100;
+            } else {
+                goto meow;
+            }
+        }
+
+        if (phi_s0 > 0) {
+            phi_s0 = (phi_s0 * battleStatus->statusChance) / 100;
+            if (phi_s0 > 0 && phi_s0 >= rand_int(100)) {
+                duration = lookup_status_duration_mod(actor->statusTable, statusKey) + 3;
+            }
+        }
+    } else {
+        duration = 3;
+    }
+
+// TODO remove this label (required to match)
+meow:
+    if (duration > 0) {
+        if (battleStatus->currentAttackStatus < 0) {
+            duration = battleStatus->statusDuration;
+            duration += lookup_status_duration_mod(actor->statusTable, statusKey);
+            inflict_status(actor, statusTypeKey, duration);
+        } else {
+            inflict_status(actor, statusTypeKey, duration);
+
+        }
+    } else {
+        duration = 0;
+    }
+    return duration;
+}
+#else
 INCLUDE_ASM(s32, "190B20", try_inflict_status);
+#endif
 
 s32 inflict_status_set_duration(Actor* actor, s32 statusTypeKey, s32 statusDurationKey, s32 duration) {
     s32 var0 = duration;
