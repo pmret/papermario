@@ -1213,6 +1213,7 @@ enum Events {
     EVENT_SPIN_SMASH_LAUNCH_HIT       = 0x00000011,
     EVENT_SHELL_CRACK_HIT             = 0x00000012,
     EVENT_STAR_BEAM                   = 0x00000013,
+    EVENT_14                          = 0x00000014,
     EVENT_POWER_BOUNCE_HIT            = 0x00000015,
     EVENT_BLOW_AWAY                   = 0x00000016,
     EVENT_UNKNOWN_TRIGGER             = 0x00000017,
@@ -1221,6 +1222,7 @@ enum Events {
     EVENT_BLOCK                       = 0x0000001A,
     EVENT_SPIKE_TAUNT                 = 0x0000001B,
     EVENT_BURN_TAUNT                  = 0x0000001C,
+    EVENT_1D                          = 0x0000001D,
     EVENT_AIR_LIFT_FAILED             = 0x0000001F,
     EVENT_DEATH                       = 0x00000020,
     EVENT_SPIN_SMASH_DEATH            = 0x00000021,
@@ -1657,6 +1659,7 @@ enum NpcFlags {
     NPC_FLAG_20000000                = 0x20000000,
     NPC_FLAG_NO_ANIMS_LOADED         = 0x40000000, ///< Npc has no animations loaded
     NPC_FLAG_80000000                = 0x80000000,
+};
 
 enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_JUMPING                          = 0x00000002,
