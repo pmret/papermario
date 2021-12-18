@@ -1,6 +1,7 @@
 #include "common.h"
 #include "ld_addrs.h"
 
+#define E20110_VRAM_DEF 0x802B7000
 #define E21870_VRAM_DEF 0x802B7000
 #define E225B0_VRAM_DEF 0x802B7000
 
@@ -8,13 +9,13 @@ extern UNK_FUN_PTR(D_8010C920);
 extern UNK_FUN_PTR(D_8010C93C);
 extern s32 D_8010C940;
 extern s32 D_8010C950;
-extern s32 D_8010C958;
 
 extern s32 D_802BDF60;
 extern s8 D_8015A57A;
 
 s32 func_802B7140(void);
 void func_802B72C0_E22870(void);
+void func_802B70B4_E201C4(void);
 
 s32 func_800E0208(void);
 void func_800E0330(void);
@@ -27,6 +28,7 @@ void func_800E0AD0(void);
 void func_800E0B14(void);
 void update_partner_timers(void);
 void update_player_shadow(void);
+void check_for_interactables(void);
 
 s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ, f32* outLength, f32* hitRx, f32* hitRz,
                          f32* hitDirX, f32* hitDirZ) {
@@ -573,11 +575,11 @@ void func_800E0514(void) {
 
 s32 has_valid_conversation_npc(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32* unk_C8 = playerStatus->unk_C8;
+    Npc* unk_C8 = playerStatus->unk_C8;
     s32 ret = 0;
     s32 cond;
 
-    if (unk_C8 != NULL && !(*unk_C8 & 0x10000000)) {
+    if (unk_C8 != NULL && !(unk_C8->flags & 0x10000000)) {
         cond = (playerStatus->flags & 0x2002000) == 0x2000000;
         ret = cond;
     }
@@ -603,7 +605,115 @@ void func_800E06C0(s32 arg0) {
 
 INCLUDE_ASM(s32, "77480", func_800E06D8);
 
-INCLUDE_ASM(s32, "77480", check_for_interactables);
+void check_for_interactables(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Npc* npc = gPlayerStatus.unk_C8;
+    s32 phi_s2;
+
+    if ((playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100) || D_8010C940 || D_8010C920) {
+        return;
+    }
+
+    if (D_8010C958 == NULL) {
+        s32 phi_s0 = gCollisionStatus.currentWall;
+
+        if (playerStatus->statusMenuCounterinputEnabledCounter != 0) {
+            if (gPlayerStatus.unk_C6 != phi_s0) {
+                gPlayerStatus.unk_C6 = phi_s0;
+            }
+            return;
+        }
+
+        if (playerStatus->decorationList != NULL) {
+            return;
+        }
+
+        if (phi_s0 == -1) {
+            s32 floor = gCollisionStatus.currentFloor;
+
+            if ((floor >= 0) && (floor & 0x4000)) {
+                phi_s2 = 1;
+                phi_s0 = floor;
+                switch (get_entity_type(floor)) {
+                    case 0x3:
+                    case 0x4:
+                    case 0x5:
+                    case 0x6:
+                    case 0xC:
+                    case 0x32:
+                    case 0x33:
+                        phi_s0 = -1;
+                        break;
+                }
+            } else if (((playerStatus->flags & (PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC | PLAYER_STATUS_FLAGS_INPUT_DISABLED)) == PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC)
+                         && (npc != NULL) && (npc->flags & NPC_FLAG_10000000)) {
+                phi_s0 = npc->npcID | 0x2000;
+                if (playerStatus->unk_C6 == phi_s0) {
+                    return;
+                }
+                phi_s2 = 0;
+            } else {
+                playerStatus->unk_C6 = -1;
+                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_8000000;
+                return;
+            }
+        } else {
+            if (!(phi_s0 & 0x4000)) {
+                phi_s2 = 0;
+                if (!(phi_s0 & 0x2000)) {
+                    if (!should_collider_allow_interact(phi_s0)) {
+                        playerStatus->unk_C6 = -1;
+                        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_8000000;
+                        return;
+                    }
+                }
+            } else {
+                if (!phys_can_player_interact()) {
+                    phi_s2 = 1;
+                    playerStatus->unk_C6 = -1;
+                    playerStatus->flags &= ~PLAYER_STATUS_FLAGS_8000000;
+                    return;
+                }
+                phi_s2 = 1;
+            }
+        }
+        if (playerStatus->unk_C6 == phi_s0) {
+            if ((playerStatus->flags & PLAYER_STATUS_FLAGS_8000000)) {
+                return;
+            }
+        } else {
+            playerStatus->flags &= ~PLAYER_STATUS_FLAGS_8000000;
+        }
+
+        playerStatus->unk_C6 = phi_s0;
+        if ((phi_s2 == 0) || phi_s0 >= 0 && get_entity_by_index(phi_s0)->flags & ENTITY_FLAGS_SHOWS_INSPECT_PROMPT) {
+            if (playerStatus->actionState == ACTION_STATE_IDLE || playerStatus->actionState == ACTION_STATE_WALK || playerStatus->actionState == ACTION_STATE_RUN) {
+                playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE;
+                func_800EF3D4(2);
+            }
+        }
+    }
+
+    if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE)) {
+        func_800EF3D4(0);
+        repartner_set_tether_distance();
+        return;
+    }
+
+    if (D_8010C958 == NULL) {
+        dma_copy(E20110_ROM_START, E20110_ROM_END, (void *) E20110_VRAM_DEF);
+        D_8010C958 = &func_802B70B4_E201C4;
+
+    }
+
+    if (D_8010C958 != NULL) {
+        D_8010C958();
+    }
+}
+
+
+// TODO: Remove after func_800E24F8 is matching.
+static const pad[3] = { 0.0f, 0.0f, 0.0f };
 
 void func_800E0AD0(void) {
     if ((gPlayerStatusPtr->animFlags & 0x10) && (D_8010C958 != 0)) {
