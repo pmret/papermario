@@ -41,6 +41,7 @@ segments:
     start: 0x1000
     vram: 0x80025C00
     subsegments:
+    - [0x1000, c, bss]
     - [0x1000, hasm, entry_point]
     - [0x1060, c, is_debug]
     - [0x1370, c, main]

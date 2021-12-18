@@ -1,6 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .text
 glabel func_800E0B90
 /* 7A040 800E0B90 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
 /* 7A044 800E0B94 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)

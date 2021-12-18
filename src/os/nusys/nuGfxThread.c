@@ -3,7 +3,7 @@
 
 void gfxThread(void);
 
-extern s32 nuContWaitMesgBuf;
+extern OSMesg nuContWaitMesgBuf;
 extern OSThread D_800B1B90;
 extern OSMesg nuGfxMesgBuf[NU_GFX_MESGS];
 
