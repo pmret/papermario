@@ -4172,6 +4172,7 @@ segments:
     - [0x6BBB90, c]
     - [0x6BBC60, c]
     - [0x6BD250, data]
+    - [0x6CBF90]
   - dir: battle/area_kpa4
     type: code
     start: 0x6CC070
