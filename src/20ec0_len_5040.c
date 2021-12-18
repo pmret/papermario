@@ -262,9 +262,23 @@ void remove_all_status_icons(s32 iconID) {
 
 INCLUDE_ASM(s32, "20ec0_len_5040", set_status_icons_properties);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_800477F4);
+void func_800477F4(s32 iconID, f32 offsetY, f32 arg2) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_80047820);
+    statusIcon->offsetY = offsetY;
+    statusIcon->unk_34 = arg2;
+}
+
+void func_80047820(s32 iconID, s32 arg1) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    statusIcon->flags &= ~STATUS_ICON_FLAG_DEBUFF;
+    if (statusIcon->status1.active != arg1) {
+        remove_status_debuff(iconID);
+        statusIcon->status1.active = arg1;
+        statusIcon->status1.unk_02 = 1;
+    }
+}
 
 void remove_status_debuff(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
@@ -285,7 +299,16 @@ void enable_status_1(s32 iconID) {
     statusIcon->flags |= STATUS_ICON_FLAG_DEBUFF;
 }
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_80047928);
+void func_80047928(s32 iconID, s32 arg1) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    statusIcon->flags &= ~STATUS_ICON_FLAG_STATIC;
+    if (statusIcon->status2.active != arg1) {
+        remove_status_static(iconID);
+        statusIcon->status2.active = arg1;
+        statusIcon->status2.unk_02 = 1;
+    }
+}
 
 void remove_status_static(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
@@ -306,7 +329,16 @@ void enable_status_2(s32 iconID) {
     statusIcon->flags |= STATUS_ICON_FLAG_STATIC;
 }
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_80047A30);
+void func_80047A30(s32 iconID, s32 arg1) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    statusIcon->flags &= ~STATUS_ICON_FLAG_TRANSPARENT;
+    if (statusIcon->status3.active != arg1) {
+        remove_status_transparent(iconID);
+        statusIcon->status3.active = arg1;
+        statusIcon->status3.unk_02 = 1;
+    }
+}
 
 void remove_status_transparent(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
