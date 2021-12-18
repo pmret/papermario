@@ -96,6 +96,7 @@ f32 func_800E34D8(void);
 void func_800E4AD8(s32 arg0);
 f32 player_check_collision_below(f32, s32* colliderID);
 s32 can_trigger_loading_zone(void);
+void func_80266684(void);
 void func_802667F0(s32, Actor*, f32, f32, f32);
 
 void* general_heap_malloc(s32 size);

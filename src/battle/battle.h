@@ -254,7 +254,7 @@ typedef struct ActorDesc {
     /* 0x0A */ char unk_0A[2];
     /* 0x0C */ struct ActorPartDesc* partsData;
     /* 0x10 */ Bytecode* script;
-    /* 0x14 */ s32* statusTable;
+    /* 0x14 */ DictionaryEntry* statusTable;
     /* 0x18 */ u8 escapeChance;
     /* 0x19 */ u8 airLiftChance;
     /* 0x1A */ u8 spookChance;
@@ -323,11 +323,6 @@ extern BattleArea gBattleAreas[0x30];
 #define BATTLE(name, formation, stage) { name, ARRAY_COUNT(formation), (Formation*) formation, stage }
 
 // TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
-
-typedef struct DictionaryEntry {
-    /* 0x00 */ s32 key;
-    /* 0x04 */ s32 value;
-} DictionaryEntry; // size = 0x08
 
 typedef DictionaryEntry DefenseTable[];
 

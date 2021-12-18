@@ -1070,10 +1070,11 @@ s32 bActorMessages[] = {
 
 s32 D_802838F8 = 0;
 
-// BSS
-extern Bytecode D_80293820[];
+extern EvtSource D_80293820;
 extern f32 D_802938A4;
 extern s16 D_802938A8;
+extern EffectInstance* gDamageCountEffects[24];
+extern s32 gDamageCountTimers[24];
 extern Gfx D_80293970[];
 extern s32 D_802939C0;
 extern s32 D_802939C4[0];
@@ -1083,6 +1084,8 @@ extern s32 D_80293A58[0];
 extern s32 D_80293A7C[0];
 extern s32 D_80293AA0[0];
 extern s32 D_80293AC4[0];
+
+s32 func_80265CE8(u32*, s32);
 
 void create_target_list(Actor* actor, s32 arg1);
 INCLUDE_ASM(s32, "190B20", create_target_list);
@@ -1095,6 +1098,7 @@ void enemy_create_target_list(Actor* actor) {
     create_target_list(actor, 1);
 }
 
+void func_80263064(s32, s32, s32);
 INCLUDE_ASM(s32, "190B20", func_80263064);
 
 void func_80263230(s32 arg0, s32 arg1) {
@@ -1498,7 +1502,7 @@ void reset_actor_turn_info(void) {
 }
 
 void func_80263CC4(s32 arg0) {
-    start_script(D_80293820, 0xA, 0)->varTable[0] = arg0;
+    start_script(&D_80293820, 10, 0)->varTable[0] = arg0;
 }
 
 void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
@@ -1721,7 +1725,7 @@ void load_player_actor(void) {
     player->staticActorData = &bPlayerActorDesc;
     player->actorType = bPlayerActorDesc.type;
 
-    if ((gBattleStatus.flags2 & 0x40) || (gGameStatusPtr->demoFlags & 2)) {
+    if ((gBattleStatus.flags2 & BS_FLAGS2_40) || (gGameStatusPtr->demoFlags & 2)) {
         player->homePos.x = player->currentPos.x = -130.0f;
         player->homePos.y = player->currentPos.y = 0.0f;
         player->homePos.z = player->currentPos.z = -10.0f;
@@ -1742,7 +1746,7 @@ void load_player_actor(void) {
     player->rotationPivotOffset.z = 0;
     player->unk_19A = 0;
     player->yaw = 0.0f;
-    player->renderMode = 0xD;
+    player->renderMode = RENDER_MODE_ALPHATEST;
     player->scale.x = 1.0f;
     player->scale.y = 1.0f;
     player->scale.z = 1.0f;
@@ -1913,7 +1917,7 @@ void load_player_actor(void) {
     player->unk_228 = NULL;
 
     if (is_ability_active(ABILITY_ZAP_TAP)) {
-        player->staticStatus = 0xB;
+        player->staticStatus = STATUS_STATIC;
         player->staticDuration = 127;
     }
 }
@@ -1922,7 +1926,26 @@ INCLUDE_ASM(s32, "190B20", load_partner_actor);
 
 INCLUDE_ASM(s32, "190B20", create_actor);
 
-INCLUDE_ASM(s32, "190B20", func_80265CE8);
+s32 func_80265CE8(u32* anim, s32 arg1) {
+    s32 ret;
+
+    if (anim == 0) {
+        return 0;
+    }
+
+    ret = 0;
+    while (*anim != NULL) {
+        if (*anim == 1) {
+            ret = anim[1];
+        }
+        if (*anim == arg1) {
+            ret = anim[1];
+            break;
+        }
+        anim += 2;
+    }
+    return ret;
+}
 
 s32 func_80265D44(s32 arg0) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -2274,7 +2297,20 @@ INCLUDE_ASM(s32, "190B20", func_802664DC);
 
 INCLUDE_ASM(void, "190B20", show_damage_popup, f32 x, f32 y, f32 z, s32 damageAmount, s32 arg4);
 
-INCLUDE_ASM(s32, "190B20", func_80266684);
+void func_80266684(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gDamageCountEffects); i++) {
+        if (gDamageCountEffects[i] != NULL) {
+            gDamageCountTimers[i]--;
+            if (gDamageCountTimers[i] == 0) {
+                // TODO use actual effect instance struct when we know what it is
+                ((s32**)gDamageCountEffects[i])[3][12] = 5;
+                gDamageCountEffects[i] = NULL;
+            }
+        }
+    };
+}
 
 INCLUDE_ASM(void, "190B20", func_802666E4, Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16 arg4);
 //void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage);
@@ -2338,6 +2374,7 @@ void func_80266B14(void) {
     }
 }
 
+// dumb label
 #ifdef NON_MATCHING
 s32 try_inflict_status(Actor* actor, s32 statusTypeKey, s32 statusKey) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -2426,7 +2463,10 @@ void func_80266DAC(Actor* actor, s32 arg1) {
     ActorPart* partIt = &actor->partsTable[0];
 
     while (partIt != NULL) {
-        if (!(partIt->flags & 1) && (partIt->idleAnimations != NULL) && !(partIt->flags & 2)) {
+        if (!(partIt->flags & ACTOR_PART_FLAG_INVISIBLE) &&
+           (partIt->idleAnimations != NULL) &&
+           !(partIt->flags & ACTOR_PART_FLAG_2))
+        {
             func_80266D6C(partIt, arg1);
         }
         partIt = partIt->nextPart;
@@ -2439,7 +2479,27 @@ void func_80266E14(ActorPart* part) {
     }
 }
 
-INCLUDE_ASM(s32, "190B20", func_80266E40);
+void func_80266E40(Actor* actor) {
+    ActorPart* partIt = actor->partsTable;
+    s8 e = 0xE;
+    s8 f = 0xF;
+
+    while (partIt != NULL) {
+        DecorationTable* decorationTable = partIt->decorationTable;
+
+        do {
+            if (!(partIt->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
+                (partIt->idleAnimations != NULL) &&
+                !(partIt->flags & ACTOR_PART_FLAG_2))
+            {
+                if (decorationTable->unk_6C0 != e && decorationTable->unk_6C0 != f) {
+                    decorationTable->unk_6C0 = 0;
+                }
+            }
+        } while (0); // required to match
+        partIt = partIt->nextPart;
+    }
+}
 
 void func_80266EA8(ActorPart* part, s32 arg1) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
@@ -2459,7 +2519,7 @@ void func_80266EE8(Actor* actor, s32 arg1) {
     while (partIt != NULL) {
         if (!(partIt->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
             (partIt->idleAnimations != NULL) &&
-            !(partIt->flags & 2))
+            !(partIt->flags & ACTOR_PART_FLAG_2))
         {
             func_80266EA8(partIt, arg1);
         }
@@ -2486,7 +2546,7 @@ void func_80266F8C(Actor* actor) {
             {
                 decorationTable->unk_750 = 0;
             }
-        } while (0); // todo improve match
+        } while (0); // required to match
         actorPart = actorPart->nextPart;
     }
 }
@@ -2532,7 +2592,7 @@ void func_802670C8(Actor* actor) {
         do {
             if (!(partIt->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
                 (partIt->idleAnimations != NULL) &&
-                !(partIt->flags & 2))
+                !(partIt->flags & ACTOR_PART_FLAG_2))
             {
                 decorationTable->unk_764 = 0;
             }
