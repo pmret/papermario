@@ -1236,6 +1236,7 @@ enum Events {
     EVENT_BURN_CONTACT                = 0x0000002C,
     EVENT_SHOCK_HIT                   = 0x0000002F,
     EVENT_RECOVER_STATUS              = 0x00000031,
+    EVENT_32                          = 0x00000032,
     EVENT_34                          = 0x00000034,
     EVENT_END_FIRST_STRIKE            = 0x00000035,
     EVENT_LUCKY                       = 0x00000037,
