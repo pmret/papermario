@@ -2,6 +2,19 @@
 #include "npc.h"
 #include "hud_element.h"
 
+enum StoryProgress {
+    STATUS_ICON_FLAG_DEBUFF        = 0x004,
+    STATUS_ICON_FLAG_STATIC        = 0x008,
+    STATUS_ICON_FLAG_TRANSPARENT   = 0x010,
+    STATUS_ICON_FLAG_STATUS_4      = 0x020,
+    STATUS_ICON_FLAG_BOOST_JUMP    = 0x040,
+    STATUS_ICON_FLAG_BOOST_HAMMER  = 0x080,
+    STATUS_ICON_FLAG_BOOST_PARTNER = 0x100,
+    STATUS_ICON_FLAG_SURPRISE      = 0x200,
+    STATUS_ICON_FLAG_PERIL         = 0x400,
+    STATUS_ICON_FLAG_DANGER        = 0x800,
+};
+
 typedef struct HudComplexStatusIcon {
 	/* 0x0 */ s8 active;
 	/* 0x1 */ s8 removing;
@@ -11,40 +24,40 @@ typedef struct HudComplexStatusIcon {
 	/* 0x5 */ s8 unk_05;
 	/* 0x8 */ s32 hudElemIndex;
 	/* 0xC */ s32 unk_0C;
-} HudComplexStatusIcon;/* size = 0x10 */
+} HudComplexStatusIcon; // size = 0x10
 
 typedef struct HudSimpleStatusIcon {
 	/* 0x0 */ s8 active;
 	/* 0x1 */ s8 removing;
 	/* 0x4 */ s32 hudElemIndex;
-} HudSimpleStatusIcon;/* size = 0x8 */
+} HudSimpleStatusIcon; // size = 0x8
 
 typedef struct HudStatusIcon {
-	/* 0x000 */ s32 flags;
-	/* 0x004 */ Vec3f worldPos;
-	/* 0x010 */ f32 status1Radius;
-	/* 0x014 */ f32 status1OffsetY;
-	/* 0x018 */ f32 status2Radius;
-	/* 0x01C */ f32 status2OffsetY;
-	/* 0x020 */ f32 status3Radius;
-	/* 0x024 */ f32 status3OffsetY;
-	/* 0x028 */ f32 status4Radius;
-	/* 0x02C */ f32 status4OffsetY;
-	/* 0x030 */ f32 offsetY;
-	/* 0x034 */ f32 unk_34;
-	/* 0x038 */ HudComplexStatusIcon status1;
-	/* 0x048 */ HudComplexStatusIcon status2;
-	/* 0x058 */ HudComplexStatusIcon status3;
-	/* 0x068 */ HudComplexStatusIcon status4;
-	/* 0x078 */ HudSimpleStatusIcon boostJump;
-	/* 0x080 */ s32 prevIndexBoostJump;
-	/* 0x084 */ HudSimpleStatusIcon boostHammer;
-	/* 0x08C */ s32 prevIndexBoostHammer;
-	/* 0x090 */ HudSimpleStatusIcon boostPartner;
-	/* 0x098 */ HudSimpleStatusIcon surprise;
-	/* 0x0A0 */ HudSimpleStatusIcon peril;
-	/* 0x0A8 */ HudSimpleStatusIcon danger;
-} HudStatusIcon;/* size = 0xB0 */
+	/* 0x00 */ s32 flags;
+	/* 0x04 */ Vec3f worldPos;
+	/* 0x10 */ f32 status1Radius;
+	/* 0x14 */ f32 status1OffsetY;
+	/* 0x18 */ f32 status2Radius;
+	/* 0x1C */ f32 status2OffsetY;
+	/* 0x20 */ f32 status3Radius;
+	/* 0x24 */ f32 status3OffsetY;
+	/* 0x28 */ f32 status4Radius;
+	/* 0x2C */ f32 status4OffsetY;
+	/* 0x30 */ f32 offsetY;
+	/* 0x34 */ f32 unk_34;
+	/* 0x38 */ HudComplexStatusIcon status1;
+	/* 0x48 */ HudComplexStatusIcon status2;
+	/* 0x58 */ HudComplexStatusIcon status3;
+	/* 0x68 */ HudComplexStatusIcon status4;
+	/* 0x78 */ HudSimpleStatusIcon boostJump;
+	/* 0x80 */ s32 prevIndexBoostJump;
+	/* 0x84 */ HudSimpleStatusIcon boostHammer;
+	/* 0x8C */ s32 prevIndexBoostHammer;
+	/* 0x90 */ HudSimpleStatusIcon boostPartner;
+	/* 0x98 */ HudSimpleStatusIcon surprise;
+	/* 0xA0 */ HudSimpleStatusIcon peril;
+	/* 0xA8 */ HudSimpleStatusIcon danger;
+} HudStatusIcon; // size = 0xB0
 
 extern HudStatusIcon *D_800A0F44;
 extern HudElementAnim D_80108A14[];
@@ -256,7 +269,7 @@ INCLUDE_ASM(s32, "20ec0_len_5040", func_80047820);
 void remove_status_debuff(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    if (statusIcon->status1.active != FALSE && statusIcon->status1.removing == FALSE) {
+    if (statusIcon->status1.active && !statusIcon->status1.removing) {
         statusIcon->status1.removing = statusIcon->status1.active;
         statusIcon->status1.unk_03 = TRUE;
         statusIcon->status1.active = FALSE;
@@ -269,7 +282,7 @@ void remove_status_debuff(s32 iconID) {
 void enable_status_1(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    statusIcon->flags |= 0x4;
+    statusIcon->flags |= STATUS_ICON_FLAG_DEBUFF;
 }
 
 INCLUDE_ASM(s32, "20ec0_len_5040", func_80047928);
@@ -277,7 +290,7 @@ INCLUDE_ASM(s32, "20ec0_len_5040", func_80047928);
 void remove_status_static(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    if (statusIcon->status2.active != FALSE && statusIcon->status2.removing == FALSE) {
+    if (statusIcon->status2.active && !statusIcon->status2.removing) {
         statusIcon->status2.removing = statusIcon->status2.active;
         statusIcon->status2.unk_03 = TRUE;
         statusIcon->status2.active = FALSE;
@@ -290,7 +303,7 @@ void remove_status_static(s32 iconID) {
 void enable_status_2(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    statusIcon->flags |= 0x8;
+    statusIcon->flags |= STATUS_ICON_FLAG_STATIC;
 }
 
 INCLUDE_ASM(s32, "20ec0_len_5040", func_80047A30);
@@ -298,7 +311,7 @@ INCLUDE_ASM(s32, "20ec0_len_5040", func_80047A30);
 void remove_status_transparent(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    if (statusIcon->status3.active != FALSE && statusIcon->status3.removing == FALSE) {
+    if (statusIcon->status3.active && !statusIcon->status3.removing) {
         statusIcon->status3.removing = statusIcon->status3.active;
         statusIcon->status3.unk_03 = TRUE;
         statusIcon->status3.active = FALSE;
@@ -311,7 +324,7 @@ void remove_status_transparent(s32 iconID) {
 void enable_status_3(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    statusIcon->flags |= 0x10;
+    statusIcon->flags |= STATUS_ICON_FLAG_TRANSPARENT;
 }
 
 INCLUDE_ASM(s32, "20ec0_len_5040", func_80047B38);
@@ -319,7 +332,7 @@ INCLUDE_ASM(s32, "20ec0_len_5040", func_80047B38);
 void remove_status_4(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    if (statusIcon->status4.active != FALSE && statusIcon->status4.removing == FALSE) {
+    if (statusIcon->status4.active && !statusIcon->status4.removing) {
         statusIcon->status4.removing = statusIcon->status4.active;
         statusIcon->status4.unk_03 = TRUE;
         statusIcon->status4.active = FALSE;
@@ -332,15 +345,15 @@ void remove_status_4(s32 iconID) {
 void enable_status_4(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    statusIcon->flags |= 0x20;
+    statusIcon->flags |= STATUS_ICON_FLAG_STATUS_4;
 }
 
 void create_status_icon_boost_jump(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
     s32 hudElement;
 
-    statusIcon->flags &= ~0x40;
-    if (statusIcon->boostJump.active == FALSE) {
+    statusIcon->flags &= ~STATUS_ICON_FLAG_BOOST_JUMP;
+    if (!statusIcon->boostJump.active) {
         statusIcon->boostJump.active = TRUE;
         hudElement = create_hud_element(D_8010701C);
         set_hud_element_flags(hudElement, 2);
@@ -352,7 +365,7 @@ void create_status_icon_boost_jump(s32 iconID) {
 void remove_status_icon_boost_jump(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    if (statusIcon->boostJump.active != FALSE) {
+    if (statusIcon->boostJump.active) {
         s32 hudElemIndex = statusIcon->boostJump.hudElemIndex;
         statusIcon->boostJump.active = FALSE;
         statusIcon->boostJump.removing = TRUE;
@@ -364,15 +377,15 @@ void remove_status_icon_boost_jump(s32 iconID) {
 void enable_status_icon_boost_jump(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    statusIcon->flags |= 0x40;
+    statusIcon->flags |= STATUS_ICON_FLAG_BOOST_JUMP;
 }
 
 void create_status_icon_boost_hammer(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
     s32 hudElement;
 
-    statusIcon->flags &= ~0x80;
-    if (statusIcon->boostHammer.active == FALSE) {
+    statusIcon->flags &= ~STATUS_ICON_FLAG_BOOST_HAMMER;
+    if (!statusIcon->boostHammer.active) {
         statusIcon->boostHammer.active = TRUE;
         hudElement = create_hud_element(D_80107314);
         set_hud_element_flags(hudElement, 2);
@@ -384,7 +397,7 @@ void create_status_icon_boost_hammer(s32 iconID) {
 void remove_status_icon_boost_hammer(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    if (statusIcon->boostHammer.active != FALSE) {
+    if (statusIcon->boostHammer.active) {
         s32 hudElemIndex = statusIcon->boostHammer.hudElemIndex;
         statusIcon->boostHammer.active = FALSE;
         statusIcon->boostHammer.removing = FALSE;
@@ -396,15 +409,15 @@ void remove_status_icon_boost_hammer(s32 iconID) {
 void enable_status_icon_boost_hammer(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    statusIcon->flags |= 0x80;
+    statusIcon->flags |= STATUS_ICON_FLAG_BOOST_HAMMER;
 }
 
 void create_status_icon_boost_partner(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
     s32 hudElement;
 
-    statusIcon->flags &= ~0x100;
-    if (statusIcon->boostPartner.active == FALSE) {
+    statusIcon->flags &= ~STATUS_ICON_FLAG_BOOST_PARTNER;
+    if (!statusIcon->boostPartner.active) {
         statusIcon->boostPartner.active = TRUE;
         hudElement = create_hud_element(D_801075E0);
         set_hud_element_flags(hudElement, 2);
@@ -416,7 +429,7 @@ void create_status_icon_boost_partner(s32 iconID) {
 void remove_status_icon_boost_partner(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    if (statusIcon->boostPartner.active != FALSE) {
+    if (statusIcon->boostPartner.active) {
         statusIcon->boostPartner.active = FALSE;
         free_hud_element(statusIcon->boostPartner.hudElemIndex);
     }
@@ -425,15 +438,15 @@ void remove_status_icon_boost_partner(s32 iconID) {
 void enable_status_icon_boost_partner(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    statusIcon->flags |= 0x100;
+    statusIcon->flags |= STATUS_ICON_FLAG_BOOST_PARTNER;
 }
 
 void create_status_icon_surprise(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
     s32 hudElement;
 
-    statusIcon->flags &= ~0x200;
-    if (statusIcon->surprise.active == FALSE) {
+    statusIcon->flags &= ~STATUS_ICON_FLAG_SURPRISE;
+    if (!statusIcon->surprise.active) {
         statusIcon->surprise.active = TRUE;
         hudElement = create_hud_element(D_8010760C);
         set_hud_element_flags(hudElement, 2);
@@ -445,7 +458,7 @@ void create_status_icon_surprise(s32 iconID) {
 void remove_status_icon_surprise(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    if (statusIcon->surprise.active != FALSE) {
+    if (statusIcon->surprise.active) {
         statusIcon->surprise.active = FALSE;
         free_hud_element(statusIcon->surprise.hudElemIndex);
     }
@@ -454,15 +467,15 @@ void remove_status_icon_surprise(s32 iconID) {
 void enable_status_icon_surprise(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    statusIcon->flags |= 0x200;
+    statusIcon->flags |= STATUS_ICON_FLAG_SURPRISE;
 }
 
 void create_status_icon_peril(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
     s32 hudElement;
 
-    statusIcon->flags &= ~0x400;
-    if (statusIcon->peril.active == FALSE) {
+    statusIcon->flags &= ~STATUS_ICON_FLAG_PERIL;
+    if (!statusIcon->peril.active) {
         statusIcon->peril.active = TRUE;
         hudElement = create_hud_element(D_801089C4);
         set_hud_element_flags(hudElement, 2);
@@ -474,7 +487,7 @@ void create_status_icon_peril(s32 iconID) {
 void remove_status_icon_peril(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    if (statusIcon->peril.active != FALSE) {
+    if (statusIcon->peril.active) {
         statusIcon->peril.active = FALSE;
         free_hud_element(statusIcon->peril.hudElemIndex);
     }
@@ -483,15 +496,15 @@ void remove_status_icon_peril(s32 iconID) {
 void enable_status_icon_peril(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    statusIcon->flags |= 0x400;
+    statusIcon->flags |= STATUS_ICON_FLAG_PERIL;
 }
 
 void create_status_icon_danger(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
     s32 hudElement;
 
-    statusIcon->flags &= ~0x800;
-    if (statusIcon->danger.active == FALSE) {
+    statusIcon->flags &= ~STATUS_ICON_FLAG_DANGER;
+    if (!statusIcon->danger.active) {
         statusIcon->danger.active = TRUE;
         hudElement = create_hud_element(D_80108A14);
         set_hud_element_flags(hudElement, 2);
@@ -503,7 +516,7 @@ void create_status_icon_danger(s32 iconID) {
 void remove_status_icon_danger(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    if (statusIcon->danger.active != FALSE) {
+    if (statusIcon->danger.active) {
         statusIcon->danger.active = FALSE;
         free_hud_element(statusIcon->danger.hudElemIndex);
     }
@@ -512,5 +525,5 @@ void remove_status_icon_danger(s32 iconID) {
 void enable_status_icon_danger(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    statusIcon->flags |= 0x800;
+    statusIcon->flags |= STATUS_ICON_FLAG_DANGER;
 }
