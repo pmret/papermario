@@ -1631,7 +1631,7 @@ enum NpcFlags {
     NPC_FLAG_HAS_SHADOW              = 0x00000010, ///< Set by default and by enable_npc_shadow
     NPC_FLAG_NO_AI                   = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
     NPC_FLAG_40                      = 0x00000040,
-    NPC_FLAG_UPSIDE_DOWN             = 0x00000080, ///< Render NPC's upside-down
+    NPC_FLAG_UPSIDE_DOWN             = 0x00000080, ///< Render NPCs upside-down
     NPC_FLAG_100                     = 0x00000100, // TODO
     NPC_FLAG_GRAVITY                 = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
     NPC_FLAG_LOCK_ANIMS              = 0x00000400, ///< Do not allow scripts to change animation
