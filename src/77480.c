@@ -610,7 +610,7 @@ void check_for_interactables(void) {
     Npc* npc = gPlayerStatus.unk_C8;
     s32 phi_s2;
 
-    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100 || D_8010C940 || D_8010C920) {
+    if ((playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_100) || D_8010C940 || D_8010C920) {
         return;
     }
 
@@ -658,10 +658,10 @@ void check_for_interactables(void) {
                 return;
             }
         } else {
-            if ((phi_s0 & 0x4000) == 0) {
+            if (!(phi_s0 & 0x4000)) {
                 phi_s2 = 0;
-                if ((phi_s0 & 0x2000) == 0) {
-                    if (should_collider_allow_interact(phi_s0) == FALSE) {
+                if (!(phi_s0 & 0x2000)) {
+                    if (!should_collider_allow_interact(phi_s0)) {
                         playerStatus->unk_C6 = -1;
                         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_8000000;
                         return;
@@ -687,7 +687,7 @@ void check_for_interactables(void) {
 
         playerStatus->unk_C6 = phi_s0;
         if ((phi_s2 == 0) || phi_s0 >= 0 && get_entity_by_index(phi_s0)->flags & ENTITY_FLAGS_SHOWS_INSPECT_PROMPT) {
-            if ((u8) playerStatus->actionState < 3) {
+            if (playerStatus->actionState == ACTION_STATE_IDLE || playerStatus->actionState == ACTION_STATE_WALK || playerStatus->actionState == ACTION_STATE_RUN) {
                 playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE;
                 func_800EF3D4(2);
             }
