@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "hud_element.h"
 
-enum StoryProgress {
+enum StatusIconFlag {
     STATUS_ICON_FLAG_DEBUFF        = 0x004,
     STATUS_ICON_FLAG_STATIC        = 0x008,
     STATUS_ICON_FLAG_TRANSPARENT   = 0x010,
