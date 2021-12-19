@@ -28,7 +28,7 @@ ApiStatus func_802180CC_584A0C(Evt* script, s32 isInitialCall) {
     temp_s3 = evt_get_variable(script, *args++);
     temp_s1 = evt_get_variable(script, *args++);
     temp_s0_9 = evt_get_variable(script, *args++);
-    effect = playFX_6F(1, temp_s6, temp_s5, temp_s4, temp_f20, temp_s2);
+    effect = (Effect6FInstance*)playFX_6F(1, temp_s6, temp_s5, temp_s4, temp_f20, temp_s2);
     effect->data->rotation.z = temp_s3;
     effect->data->scale.x = temp_s1;
     effect->data->scale.y = temp_s0_9;

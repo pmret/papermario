@@ -95,7 +95,6 @@ INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80219524_6250C4);
 #include "common/UnkBattleFunc1.inc.c"
 #define NAMESPACE b_area_sam
 
-//INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_802196BC_62525C);
 ApiStatus func_802196BC_62525C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Effect6FInstance* effect;
@@ -117,7 +116,7 @@ ApiStatus func_802196BC_62525C(Evt* script, s32 isInitialCall) {
     temp_s3 = evt_get_variable(script, *args++);
     temp_s1 = evt_get_variable(script, *args++);
     temp_s0_9 = evt_get_variable(script, *args++);
-    effect = playFX_6F(1, temp_s6, temp_s5, temp_s4, temp_f20, temp_s2);
+    effect = (Effect6FInstance*)playFX_6F(1, temp_s6, temp_s5, temp_s4, temp_f20, temp_s2);
     effect->data->rotation.z = temp_s3;
     effect->data->scale.x = temp_s1;
     effect->data->scale.y = temp_s0_9;
