@@ -653,6 +653,9 @@ void func_80268770(s32, s32, s32);
 void func_80268C9C(void);
 void func_802B6CF0_E2B3A0(void);
 void func_80269160(void);
+void load_tattle_flags(s32);
+void remove_consumable(void);
+void delete_shadow(s32);
 
 void clear_player_status(void);
 void clear_entity_models(void);

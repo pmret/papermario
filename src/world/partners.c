@@ -39,6 +39,9 @@ extern s32 D_8010CFB8;
 extern s32 D_8010CFBC;
 extern s32 D_8010CFCC;
 
+extern s32 D_801083D8[];
+extern s32 D_80108068[];
+
 extern struct Vec3f* D_8010CD38;
 
 typedef struct struct8010CD38{
@@ -366,7 +369,7 @@ s32 func_800EA52C(s32 arg0) {
             ret = 1;
         }
     }
-    
+
     return ret;
 }
 

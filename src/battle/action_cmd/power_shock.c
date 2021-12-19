@@ -3,21 +3,16 @@
 
 #define NAMESPACE action_command_power_shock
 
-extern const HudElementAnim D_80108AFC;
-extern const HudElementAnim D_80108B28;
-extern const HudElementAnim D_80108B80;
-extern const HudElementAnim D_80109244;
-extern const HudElementAnim D_80292974;
+extern const HudElementAnim D_80108AFC[];
+extern const HudElementAnim D_80108B28[];
+extern const HudElementAnim D_80108B80[];
+extern const HudElementAnim D_80109244[];
+extern const HudElementAnim D_80292974[];
 extern s32 D_802943A0[];
 extern s16 D_802A9AA2_42D9B2[];
 extern s32 D_802A9B00;
 
-// Function declarations; should ideally be moved to functions.h / 196AA0.c header?
-s32 func_80268224(s32);
-void func_80268798(s32, s32, s32, s32);
 void func_80268834(s32, s32, s32, s32);
-void func_80268858(void);
-void func_80269118(void);
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

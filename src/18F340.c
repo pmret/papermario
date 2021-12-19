@@ -135,7 +135,7 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_8029FBA0 = create_hud_element(&D_80108A64);
+        D_8029FBA0 = create_hud_element(D_80108A64);
         set_hud_element_render_pos(D_8029FBA0, iconPosX + 36, iconPosY - 63);
     }
 
