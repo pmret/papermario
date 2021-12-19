@@ -2304,4 +2304,26 @@ typedef struct SpriteShadingProfile {
     /* 0xAF */ s8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
 
+typedef struct UnkDuplighost {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ ActorPart* actorPart1;
+    /* 0x18 */ ActorPart* actorPart2;
+    /* 0x1C */ char unk_1C[4];
+} UnkDuplighost;
+
+typedef struct UnkStruct1 {
+    /* 0x00 */ char unk_00[8];
+    /* 0x08 */ f32 unk_08;
+} UnkStruct1;
+
+typedef struct UnkStruct0 {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ char unk_04[8];
+    /* 0x0C */ UnkStruct1* unk_0C;
+} UnkStruct0;
+
 #endif
