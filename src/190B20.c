@@ -1,10 +1,19 @@
 #include "common.h"
+#include "nu/nusys.h"
 #include "effects.h"
 #include "battle/battle.h"
 #include "hud_element.h"
 #include "message_ids.h"
 #include "model.h"
 #include "sprite.h"
+
+typedef struct Temp14 {
+    /* 0x00 */ s32 dmaStart;
+    /* 0x04 */ s32 dmaEnd;
+    /* 0x08 */ s32 dmaDest;
+    /* 0x0C */ ActorDesc* actorDesc;
+    /* 0x10 */ s32 y;
+} Temp14; // size = 0x14
 
 s32 D_80280FC0[] = {
     0x000A005A, 0x00000032, 0x0003000B, 0x00000032, 0x0001002D, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010031, 0x00000032, 0x00010031, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010032, 0x00000032, 0x00010032, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x0003000A, 0x00000032, 0x0003000A, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000050, 0x0003000A, 0x00000014, 0x0003000B, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -1070,6 +1079,8 @@ s32 bActorMessages[] = {
 
 s32 D_802838F8 = 0;
 
+extern Temp14 D_80283F10[];
+
 extern EvtSource D_80293820;
 extern f32 D_802938A4;
 extern s16 D_802938A8;
@@ -1713,6 +1724,7 @@ void load_player_actor(void) {
     DecorationTable* decorationTable;
     ActorPartMovement* partMovement;
     s32 i;
+    s32 j;
 
     battleStatus->playerActor = heap_malloc(sizeof(*player));
     player = battleStatus->playerActor;
@@ -1922,7 +1934,259 @@ void load_player_actor(void) {
     }
 }
 
-INCLUDE_ASM(s32, "190B20", load_partner_actor);
+void load_partner_actor(void) {
+    PlayerData* playerData = &gPlayerData;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partnerActor;
+    ActorDesc* actorDesc;
+    Evt* takeTurnScript;
+    s32 partCount;
+    s32 currentPartner;
+    Temp14* partnerData;
+    f32 x;
+    f32 y;
+    f32 z;
+    ActorPart* part;
+    s32 i;
+    s32 i2;
+
+    currentPartner = playerData->currentPartner;
+    battleStatus->partnerActor = NULL;
+
+    if (currentPartner != PARTNER_NONE) {
+        partnerData = &D_80283F10[currentPartner];
+        actorDesc = partnerData->actorDesc;
+
+        ASSERT(actorDesc != NULL);
+
+        nuPiReadRom(partnerData->dmaStart, partnerData->dmaDest, partnerData->dmaEnd - partnerData->dmaStart);
+        if ((gBattleStatus.flags2 & 0x40) || (gGameStatusPtr->demoFlags & 2)) {
+            x = -95.0f;
+            y = partnerData->y;
+            z = 0.0f;
+            gBattleStatus.flags1 |= 0x100000;
+        } else {
+            x = -130.0f;
+            y = partnerData->y;
+            z = -10.0f;
+        }
+        partCount = actorDesc->partCount;
+        battleStatus->partnerActor = heap_malloc(sizeof(*partnerActor));
+        partnerActor = battleStatus->partnerActor;
+
+        ASSERT(partnerActor != NULL);
+
+        actorDesc->level = playerData->partners[playerData->currentPartner].level;
+        partnerActor->unk_134 = battleStatus->unk_93++;
+        partnerActor->footStepCounter = 0;
+        partnerActor->staticActorData = actorDesc;
+        partnerActor->actorType = actorDesc->type;
+        partnerActor->flags = actorDesc->flags;
+        partnerActor->homePos.x = partnerActor->currentPos.x = x;
+        partnerActor->homePos.y = partnerActor->currentPos.y = y;
+        partnerActor->homePos.z = partnerActor->currentPos.z = z;
+        partnerActor->headOffset.x = 0;
+        partnerActor->headOffset.y = 0;
+        partnerActor->headOffset.z = 0;
+        partnerActor->currentHP = actorDesc->maxHP;
+        partnerActor->numParts = partCount;
+        partnerActor->idleScriptSource = NULL;
+        partnerActor->takeTurnScriptSource = actorDesc->script;
+        partnerActor->onHitScriptSource = NULL;
+        partnerActor->onTurnChanceScriptSource = NULL;
+        partnerActor->idleScript = NULL;
+        partnerActor->takeTurnScript = NULL;
+        partnerActor->onHitScript = NULL;
+        partnerActor->onTurnChangeScript = NULL;
+        partnerActor->turnPriority = 0;
+        partnerActor->enemyIndex = 0;
+        partnerActor->yaw = 0.0f;
+        partnerActor->rotation.x = 0.0f;
+        partnerActor->rotation.y = 0.0f;
+        partnerActor->rotation.z = 0.0f;
+        partnerActor->rotationPivotOffset.x = 0;
+        partnerActor->rotationPivotOffset.y = 0;
+        partnerActor->rotationPivotOffset.z = 0;
+        partnerActor->scale.x = 1.0f;
+        partnerActor->scale.y = 1.0f;
+        partnerActor->scale.z = 1.0f;
+        partnerActor->scaleModifier.x = 1.0f;
+        partnerActor->scaleModifier.y = 1.0f;
+        partnerActor->scaleModifier.z = 1.0f;
+        partnerActor->unk_19A = 0;
+        partnerActor->size.x = actorDesc->size.x;
+        partnerActor->size.y = actorDesc->size.y;
+        partnerActor->healthBarPosition.x = partnerActor->homePos.x;
+        partnerActor->healthBarPosition.y = partnerActor->homePos.y;
+        partnerActor->healthBarPosition.z = partnerActor->homePos.z;
+        partnerActor->scalingFactor = 1.0f;
+        partnerActor->unk_200 = NULL;
+        partnerActor->unk_204 = 0;
+        partnerActor->unk_205 = 0;
+        partnerActor->unk_194 = 0;
+        partnerActor->unk_195 = 0;
+        partnerActor->unk_196 = 0;
+        partnerActor->unk_197 = 0;
+        partnerActor->renderMode = RENDER_MODE_ALPHATEST;
+        partnerActor->actorID = ACTOR_PARTNER;
+        partnerActor->statusTable = actorDesc->statusTable;
+        partnerActor->debuff = 0;
+        partnerActor->debuffDuration = 0;
+        partnerActor->staticStatus = 0;
+        partnerActor->staticDuration = 0;
+        partnerActor->stoneStatus = 0;
+        partnerActor->stoneDuration = 0;
+        partnerActor->koStatus = 0;
+        partnerActor->koDuration = 0;
+        partnerActor->transStatus = 0;
+        partnerActor->transDuration = 0;
+        partnerActor->isGlowing = 0;
+        partnerActor->unk_21E = 0;
+        partnerActor->unk_21D = 0;
+        partnerActor->attackBoost = 0;
+        partnerActor->defenseBoost = 0;
+        partnerActor->chillOutAmount = 0;
+        partnerActor->chillOutTurns = 0;
+        partnerActor->status = 0;
+        partnerActor->actorTypeData1[0] = bActorSoundTable[partnerActor->actorType].walk[0];
+        partnerActor->actorTypeData1[1] = bActorSoundTable[partnerActor->actorType].walk[1];
+        partnerActor->actorTypeData1[2] = bActorSoundTable[partnerActor->actorType].fly[0];
+        partnerActor->actorTypeData1[3] = bActorSoundTable[partnerActor->actorType].fly[1];
+        partnerActor->actorTypeData1[4] = bActorSoundTable[partnerActor->actorType].jump;
+        partnerActor->actorTypeData1[5] = bActorSoundTable[partnerActor->actorType].hurt;
+        partnerActor->actorTypeData1b[0] = bActorSoundTable[partnerActor->actorType].delay[0];
+        partnerActor->actorTypeData1b[1] = bActorSoundTable[partnerActor->actorType].delay[1];
+
+        for (i2 = 0; i2 < ARRAY_COUNT(partnerActor->unk_438); i2++) {
+            partnerActor->unk_438[i2] = 0;
+        }
+
+        part = heap_malloc(sizeof(*part));
+        partnerActor->partsTable = part;
+
+        ASSERT(part != NULL);
+
+        for (i = 0; i < partCount; i++) {
+            ActorPartDesc* actorPartDesc = &actorDesc->partsData[i];
+            part->decorationTable = NULL;
+            part->staticData = actorPartDesc;
+
+            part->flags = actorPartDesc->flags | 4;
+            part->targetFlags = 0;
+
+            part->partOffsetFloat.x = part->partOffset.x = actorPartDesc->posOffset.x;
+            part->partOffsetFloat.y = part->partOffset.y = actorPartDesc->posOffset.y;
+            part->partOffsetFloat.z = part->partOffset.z = actorPartDesc->posOffset.z;
+
+            part->visualOffset.x = 0;
+            part->visualOffset.y = 0;
+            part->visualOffset.z = 0;
+            part->absolutePosition.x = 0.0f;
+            part->absolutePosition.y = 0.0f;
+            part->absolutePosition.z = 0.0f;
+            part->defenseTable = actorPartDesc->defenseTable;
+            part->idleAnimations = actorPartDesc->idleAnimations;
+            part->eventFlags = actorPartDesc->eventFlags;
+            part->partFlags3 = actorPartDesc->elementImmunityFlags;
+            part->opacity = actorPartDesc->opacity;
+            part->size.y = partnerActor->size.y;
+            part->size.x = partnerActor->size.x;
+            part->yaw = 0.0f;
+            part->targetOffset.x = actorPartDesc->targetOffset.x;
+            part->targetOffset.y = actorPartDesc->targetOffset.y;
+            part->unk_70 = 0;
+            part->rotationPivotOffset.x = 0;
+            part->rotationPivotOffset.y = 0;
+            part->rotationPivotOffset.z = 0;
+            part->rotation.x = 0.0f;
+            part->rotation.y = 0.0f;
+            part->rotation.z = 0.0f;
+            part->scale.x = 1.0f;
+            part->scale.y = 1.0f;
+            part->scale.z = 1.0f;
+            part->verticalStretch = 1;
+            part->unkOffset[0] = 0;
+            part->unkOffset[1] = 0;
+            part->partTypeData[0] = bActorSoundTable[partnerActor->actorType].walk[0];
+            part->partTypeData[1] = bActorSoundTable[partnerActor->actorType].walk[1];
+            part->partTypeData[2] = bActorSoundTable[partnerActor->actorType].fly[0];
+            part->partTypeData[3] = bActorSoundTable[partnerActor->actorType].fly[1];
+            part->partTypeData[4] = bActorSoundTable[partnerActor->actorType].jump;
+            part->partTypeData[5] = bActorSoundTable[partnerActor->actorType].hurt;
+            part->actorTypeData2b[0] = bActorSoundTable[partnerActor->actorType].delay[0];
+            part->actorTypeData2b[1] = bActorSoundTable[partnerActor->actorType].delay[1];
+
+            if (part->idleAnimations != NULL) {
+                DecorationTable* decorationTable;
+                s32 j;
+
+                part->decorationTable  = heap_malloc(sizeof(*decorationTable));
+                decorationTable = part->decorationTable;
+
+                ASSERT(decorationTable != NULL);
+
+                decorationTable->unk_6C0 = 0;
+                decorationTable->unk_750 = 0;
+                decorationTable->unk_764 = 0;
+                decorationTable->unk_768 = 0;
+                decorationTable->unk_7D8 = 0;
+                decorationTable->unk_7D9 = 0;
+
+                for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
+                    decorationTable->posX[j] = partnerActor->currentPos.x;
+                    decorationTable->posY[j] = partnerActor->currentPos.y;
+                    decorationTable->posZ[j] = partnerActor->currentPos.z;
+                }
+
+                decorationTable->unk_7DA = 3;
+                decorationTable->unk_7DB = 0;
+                decorationTable->effectType = 0;
+
+                for (j = 0; j < ARRAY_COUNT(decorationTable->unk_8B0); j++) {
+                    decorationTable->unk_8B0[j] = NULL;
+                    decorationTable->decorationType[j] = 0;
+                }
+            }
+
+            if (part->flags >= 0) {
+                part->movement = heap_malloc(sizeof(*part->movement));
+                ASSERT(part->movement != NULL);
+            }
+
+            part->animationRate = 1.0f;
+            part->currentAnimation = 0;
+            part->unk_84 = -1;
+
+            if (part->idleAnimations != NULL) {
+                part->currentAnimation = func_80265CE8(part->idleAnimations, 1);
+                part->unk_84 = spr_load_npc_sprite(part->currentAnimation | 0x80000000, NULL);
+            }
+
+            if (i + 1 >= partCount) {
+                part->nextPart = NULL;
+                continue;
+            }
+
+            part->nextPart = heap_malloc(sizeof(*part->nextPart));
+            part = part->nextPart;
+            if (part == NULL) {
+                PANIC();
+            }
+
+            part->nextPart = NULL;
+        }
+
+        partnerActor->shadow = create_shadow_type(0, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z);
+        partnerActor->shadowScale = partnerActor->size.x / 24.0;
+        partnerActor->hudElementDataIndex = create_status_icon_set();
+        partnerActor->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
+        partnerActor->unk_228 = NULL;
+
+        takeTurnScript = start_script(partnerActor->takeTurnScriptSource, 10, 0);
+        partnerActor->takeTurnID = takeTurnScript->id;
+        takeTurnScript->owner1.actorID = ACTOR_PARTNER;
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", create_actor);
 

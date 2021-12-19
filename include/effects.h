@@ -153,7 +153,7 @@ typedef struct EffectInstance {
     /* 0x08 */ s32 numParts;
     /* 0x0C */ void* data; // often but not always EffectInstanceData
     /* 0x10 */ struct EffectGraphics* effect;
-} EffectInstance;
+} EffectInstance; // size = 0x14
 
 typedef struct EffectBlueprint {
     /* 0x00 */ s32 unk_00;
