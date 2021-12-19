@@ -1828,7 +1828,7 @@ typedef struct PlayerStatus {
     /* 0x0C4 */ char unk_C4;
     /* 0x0C5 */ s8 unk_C5;
     /* 0x0C6 */ s16 unk_C6;
-    /* 0x0C8 */ s32* unk_C8;
+    /* 0x0C8 */ Npc* unk_C8;
     /* 0x0CC */ s32 shadowID;
     /* 0x0D0 */ f32* unk_D0;
     /* 0x0D4 */ f32 unk_D4;

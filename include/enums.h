@@ -1654,6 +1654,7 @@ enum NpcFlags {
     ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_NO_Y_MOVEMENT is set when an NPC falls out-of-bounds)
     NPC_FLAG_PARTICLE          = 0x04000000,
     NPC_FLAG_8000000           = 0x08000000,
+    NPC_FLAG_10000000          = 0x10000000,
     NPC_FLAG_NO_ANIMS_LOADED   = 0x40000000, ///< Npc has no animations loaded
     NPC_FLAG_80000000          = 0x80000000,
 };
@@ -1672,6 +1673,7 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_40000                            = 0x00040000,
     PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
     PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
+    PLAYER_STATUS_FLAGS_8000000                          = 0x08000000,
     PLAYER_STATUS_FLAGS_10000000                         = 0x10000000,
     PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED             = 0x80000000,
 };

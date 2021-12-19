@@ -1,5 +1,73 @@
 #include "common.h"
 #include "npc.h"
+#include "hud_element.h"
+
+enum StatusIconFlag {
+    STATUS_ICON_FLAG_DEBUFF        = 0x004,
+    STATUS_ICON_FLAG_STATIC        = 0x008,
+    STATUS_ICON_FLAG_TRANSPARENT   = 0x010,
+    STATUS_ICON_FLAG_STATUS_4      = 0x020,
+    STATUS_ICON_FLAG_BOOST_JUMP    = 0x040,
+    STATUS_ICON_FLAG_BOOST_HAMMER  = 0x080,
+    STATUS_ICON_FLAG_BOOST_PARTNER = 0x100,
+    STATUS_ICON_FLAG_SURPRISE      = 0x200,
+    STATUS_ICON_FLAG_PERIL         = 0x400,
+    STATUS_ICON_FLAG_DANGER        = 0x800,
+};
+
+typedef struct HudComplexStatusIcon {
+	/* 0x0 */ s8 active;
+	/* 0x1 */ s8 removing;
+	/* 0x2 */ s8 unk_02;
+	/* 0x3 */ s8 unk_03;
+	/* 0x4 */ s8 unk_04;
+	/* 0x5 */ s8 unk_05;
+	/* 0x8 */ s32 hudElemIndex;
+	/* 0xC */ s32 unk_0C;
+} HudComplexStatusIcon; // size = 0x10
+
+typedef struct HudSimpleStatusIcon {
+	/* 0x0 */ s8 active;
+	/* 0x1 */ s8 removing;
+	/* 0x4 */ s32 hudElemIndex;
+} HudSimpleStatusIcon; // size = 0x8
+
+typedef struct HudStatusIcon {
+	/* 0x00 */ s32 flags;
+	/* 0x04 */ Vec3f worldPos;
+	/* 0x10 */ f32 status1Radius;
+	/* 0x14 */ f32 status1OffsetY;
+	/* 0x18 */ f32 status2Radius;
+	/* 0x1C */ f32 status2OffsetY;
+	/* 0x20 */ f32 status3Radius;
+	/* 0x24 */ f32 status3OffsetY;
+	/* 0x28 */ f32 status4Radius;
+	/* 0x2C */ f32 status4OffsetY;
+	/* 0x30 */ f32 offsetY;
+	/* 0x34 */ f32 unk_34;
+	/* 0x38 */ HudComplexStatusIcon status1;
+	/* 0x48 */ HudComplexStatusIcon status2;
+	/* 0x58 */ HudComplexStatusIcon status3;
+	/* 0x68 */ HudComplexStatusIcon status4;
+	/* 0x78 */ HudSimpleStatusIcon boostJump;
+	/* 0x80 */ s32 prevIndexBoostJump;
+	/* 0x84 */ HudSimpleStatusIcon boostHammer;
+	/* 0x8C */ s32 prevIndexBoostHammer;
+	/* 0x90 */ HudSimpleStatusIcon boostPartner;
+	/* 0x98 */ HudSimpleStatusIcon surprise;
+	/* 0xA0 */ HudSimpleStatusIcon peril;
+	/* 0xA8 */ HudSimpleStatusIcon danger;
+} HudStatusIcon; // size = 0xB0
+
+extern HudStatusIcon *D_800A0F44;
+extern HudElementAnim D_80108A14[];
+extern HudElementAnim D_801089C4[];
+extern HudElementAnim D_8010760C[];
+extern HudElementAnim D_801075E0[];
+extern HudElementAnim D_80107314[];
+extern HudElementAnim D_8010701C[];
+extern HudElementAnim* D_8010717C[];
+extern HudElementAnim* D_80107474[];
 
 extern s32 D_800A0F40;
 extern PopupMessage D_800A0BC0[32];
@@ -176,68 +244,318 @@ INCLUDE_ASM(s32, "20ec0_len_5040", draw_all_status_icons);
 
 INCLUDE_ASM(s32, "20ec0_len_5040", create_status_icon_set);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_all_status_icons);
+void remove_all_status_icons(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    remove_status_debuff(iconID);
+    remove_status_static(iconID);
+    remove_status_transparent(iconID);
+    remove_status_4(iconID);
+    remove_status_icon_boost_jump(iconID);
+    remove_status_icon_boost_hammer(iconID);
+    remove_status_icon_boost_partner(iconID);
+    remove_status_icon_surprise(iconID);
+    remove_status_icon_peril(iconID);
+    remove_status_icon_danger(iconID);
+    statusIcon->flags = 0;
+}
 
 INCLUDE_ASM(s32, "20ec0_len_5040", set_status_icons_properties);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_800477F4);
+void func_800477F4(s32 iconID, f32 offsetY, f32 arg2) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_80047820);
+    statusIcon->offsetY = offsetY;
+    statusIcon->unk_34 = arg2;
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_debuff);
+void func_80047820(s32 iconID, s32 arg1) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_1);
+    statusIcon->flags &= ~STATUS_ICON_FLAG_DEBUFF;
+    if (statusIcon->status1.active != arg1) {
+        remove_status_debuff(iconID);
+        statusIcon->status1.active = arg1;
+        statusIcon->status1.unk_02 = 1;
+    }
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_80047928);
+void remove_status_debuff(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_static);
+    if (statusIcon->status1.active && !statusIcon->status1.removing) {
+        statusIcon->status1.removing = statusIcon->status1.active;
+        statusIcon->status1.unk_03 = TRUE;
+        statusIcon->status1.active = FALSE;
+        statusIcon->status1.unk_02 = FALSE;
+        statusIcon->status1.unk_05 = 10;
+        statusIcon->status1.unk_0C = statusIcon->status1.hudElemIndex;
+    }
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_2);
+void enable_status_1(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_80047A30);
+    statusIcon->flags |= STATUS_ICON_FLAG_DEBUFF;
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_transparent);
+void func_80047928(s32 iconID, s32 arg1) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_3);
+    statusIcon->flags &= ~STATUS_ICON_FLAG_STATIC;
+    if (statusIcon->status2.active != arg1) {
+        remove_status_static(iconID);
+        statusIcon->status2.active = arg1;
+        statusIcon->status2.unk_02 = 1;
+    }
+}
+
+void remove_status_static(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    if (statusIcon->status2.active && !statusIcon->status2.removing) {
+        statusIcon->status2.removing = statusIcon->status2.active;
+        statusIcon->status2.unk_03 = TRUE;
+        statusIcon->status2.active = FALSE;
+        statusIcon->status2.unk_02 = FALSE;
+        statusIcon->status2.unk_05 = 10;
+        statusIcon->status2.unk_0C = statusIcon->status2.hudElemIndex;
+    }
+}
+
+void enable_status_2(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    statusIcon->flags |= STATUS_ICON_FLAG_STATIC;
+}
+
+void func_80047A30(s32 iconID, s32 arg1) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    statusIcon->flags &= ~STATUS_ICON_FLAG_TRANSPARENT;
+    if (statusIcon->status3.active != arg1) {
+        remove_status_transparent(iconID);
+        statusIcon->status3.active = arg1;
+        statusIcon->status3.unk_02 = 1;
+    }
+}
+
+void remove_status_transparent(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    if (statusIcon->status3.active && !statusIcon->status3.removing) {
+        statusIcon->status3.removing = statusIcon->status3.active;
+        statusIcon->status3.unk_03 = TRUE;
+        statusIcon->status3.active = FALSE;
+        statusIcon->status3.unk_02 = FALSE;
+        statusIcon->status3.unk_05 = 10;
+        statusIcon->status3.unk_0C = statusIcon->status3.hudElemIndex;
+    }
+}
+
+void enable_status_3(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    statusIcon->flags |= STATUS_ICON_FLAG_TRANSPARENT;
+}
 
 INCLUDE_ASM(s32, "20ec0_len_5040", func_80047B38);
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_4);
+void remove_status_4(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_4);
+    if (statusIcon->status4.active && !statusIcon->status4.removing) {
+        statusIcon->status4.removing = statusIcon->status4.active;
+        statusIcon->status4.unk_03 = TRUE;
+        statusIcon->status4.active = FALSE;
+        statusIcon->status4.unk_02 = FALSE;
+        statusIcon->status4.unk_05 = 10;
+        statusIcon->status4.unk_0C = statusIcon->status4.hudElemIndex;
+    }
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", create_status_icon_boost_jump);
+void enable_status_4(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_icon_boost_jump);
+    statusIcon->flags |= STATUS_ICON_FLAG_STATUS_4;
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_icon_boost_jump);
+void create_status_icon_boost_jump(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+    s32 hudElement;
 
-INCLUDE_ASM(s32, "20ec0_len_5040", create_status_icon_boost_hammer);
+    statusIcon->flags &= ~STATUS_ICON_FLAG_BOOST_JUMP;
+    if (!statusIcon->boostJump.active) {
+        statusIcon->boostJump.active = TRUE;
+        hudElement = create_hud_element(D_8010701C);
+        set_hud_element_flags(hudElement, 2);
+        set_hud_element_flags(hudElement, 0x80);
+        statusIcon->boostJump.hudElemIndex = hudElement;
+    }
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_icon_boost_hammer);
+void remove_status_icon_boost_jump(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_icon_boost_hammer);
+    if (statusIcon->boostJump.active) {
+        s32 hudElemIndex = statusIcon->boostJump.hudElemIndex;
+        statusIcon->boostJump.active = FALSE;
+        statusIcon->boostJump.removing = TRUE;
+        statusIcon->prevIndexBoostJump = hudElemIndex;
+        set_hud_element_anim(hudElemIndex, &D_8010717C[0]);
+    }
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", create_status_icon_boost_partner);
+void enable_status_icon_boost_jump(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_icon_boost_partner);
+    statusIcon->flags |= STATUS_ICON_FLAG_BOOST_JUMP;
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_icon_boost_partner);
+void create_status_icon_boost_hammer(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+    s32 hudElement;
 
-INCLUDE_ASM(s32, "20ec0_len_5040", create_status_icon_surprise);
+    statusIcon->flags &= ~STATUS_ICON_FLAG_BOOST_HAMMER;
+    if (!statusIcon->boostHammer.active) {
+        statusIcon->boostHammer.active = TRUE;
+        hudElement = create_hud_element(D_80107314);
+        set_hud_element_flags(hudElement, 2);
+        set_hud_element_flags(hudElement, 0x80);
+        statusIcon->boostHammer.hudElemIndex = hudElement;
+    }
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_icon_surprise);
+void remove_status_icon_boost_hammer(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_icon_surprise);
+    if (statusIcon->boostHammer.active) {
+        s32 hudElemIndex = statusIcon->boostHammer.hudElemIndex;
+        statusIcon->boostHammer.active = FALSE;
+        statusIcon->boostHammer.removing = FALSE;
+        statusIcon->prevIndexBoostHammer = hudElemIndex;
+        set_hud_element_anim(hudElemIndex, &D_80107474[0]);
+    }
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", create_status_icon_peril);
+void enable_status_icon_boost_hammer(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_icon_peril);
+    statusIcon->flags |= STATUS_ICON_FLAG_BOOST_HAMMER;
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_icon_peril);
+void create_status_icon_boost_partner(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+    s32 hudElement;
 
-INCLUDE_ASM(s32, "20ec0_len_5040", create_status_icon_danger);
+    statusIcon->flags &= ~STATUS_ICON_FLAG_BOOST_PARTNER;
+    if (!statusIcon->boostPartner.active) {
+        statusIcon->boostPartner.active = TRUE;
+        hudElement = create_hud_element(D_801075E0);
+        set_hud_element_flags(hudElement, 2);
+        set_hud_element_flags(hudElement, 0x80);
+        statusIcon->boostPartner.hudElemIndex = hudElement;
+    }
+}
 
-INCLUDE_ASM(s32, "20ec0_len_5040", remove_status_icon_danger);
+void remove_status_icon_boost_partner(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-INCLUDE_ASM(s32, "20ec0_len_5040", enable_status_icon_danger);
+    if (statusIcon->boostPartner.active) {
+        statusIcon->boostPartner.active = FALSE;
+        free_hud_element(statusIcon->boostPartner.hudElemIndex);
+    }
+}
+
+void enable_status_icon_boost_partner(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    statusIcon->flags |= STATUS_ICON_FLAG_BOOST_PARTNER;
+}
+
+void create_status_icon_surprise(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+    s32 hudElement;
+
+    statusIcon->flags &= ~STATUS_ICON_FLAG_SURPRISE;
+    if (!statusIcon->surprise.active) {
+        statusIcon->surprise.active = TRUE;
+        hudElement = create_hud_element(D_8010760C);
+        set_hud_element_flags(hudElement, 2);
+        set_hud_element_flags(hudElement, 0x80);
+        statusIcon->surprise.hudElemIndex = hudElement;
+    }
+}
+
+void remove_status_icon_surprise(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    if (statusIcon->surprise.active) {
+        statusIcon->surprise.active = FALSE;
+        free_hud_element(statusIcon->surprise.hudElemIndex);
+    }
+}
+
+void enable_status_icon_surprise(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    statusIcon->flags |= STATUS_ICON_FLAG_SURPRISE;
+}
+
+void create_status_icon_peril(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+    s32 hudElement;
+
+    statusIcon->flags &= ~STATUS_ICON_FLAG_PERIL;
+    if (!statusIcon->peril.active) {
+        statusIcon->peril.active = TRUE;
+        hudElement = create_hud_element(D_801089C4);
+        set_hud_element_flags(hudElement, 2);
+        set_hud_element_flags(hudElement, 0x80);
+        statusIcon->peril.hudElemIndex = hudElement;
+    }
+}
+
+void remove_status_icon_peril(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    if (statusIcon->peril.active) {
+        statusIcon->peril.active = FALSE;
+        free_hud_element(statusIcon->peril.hudElemIndex);
+    }
+}
+
+void enable_status_icon_peril(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    statusIcon->flags |= STATUS_ICON_FLAG_PERIL;
+}
+
+void create_status_icon_danger(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+    s32 hudElement;
+
+    statusIcon->flags &= ~STATUS_ICON_FLAG_DANGER;
+    if (!statusIcon->danger.active) {
+        statusIcon->danger.active = TRUE;
+        hudElement = create_hud_element(D_80108A14);
+        set_hud_element_flags(hudElement, 2);
+        set_hud_element_flags(hudElement, 0x80);
+        statusIcon->danger.hudElemIndex = hudElement;
+    }
+}
+
+void remove_status_icon_danger(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    if (statusIcon->danger.active) {
+        statusIcon->danger.active = FALSE;
+        free_hud_element(statusIcon->danger.hudElemIndex);
+    }
+}
+
+void enable_status_icon_danger(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    statusIcon->flags |= STATUS_ICON_FLAG_DANGER;
+}
