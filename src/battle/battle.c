@@ -14,8 +14,8 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kmr_part_1),
         .name = "エリア ＫＭＲ その１",
-        .battles = b_area_kmr_part_1_formationTable,
-        .stages = b_area_kmr_part_1_stageTable,
+        .battles = &b_area_kmr_part_1_formationTable,
+        .stages = &b_area_kmr_part_1_stageTable,
     },
     {
         AREA(area_kmr_part_2),

@@ -4,7 +4,6 @@
 #include "sprite.h"
 
 extern s16 D_8010C97A;
-extern s32 D_8010C978;
 
 extern f32 D_80077C10;
 extern s16 D_80077C14;

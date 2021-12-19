@@ -1,10 +1,6 @@
 #include "common.h"
 #include "../actions.h"
 
-void player_input_to_move_vector(f32* angle, f32* magnitude);
-s32 check_input_jump(void);
-s32 check_input_hammer(void);
-
 void func_802B61E4_E23444(void);
 
 s32 world_action_idle_peachAnims[] = {

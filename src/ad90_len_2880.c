@@ -1,7 +1,5 @@
 #include "common.h"
 
-void update_camera_mode_6(Camera*);
-
 // types, floats, and other shtuff
 #ifdef NON_EQUIVALENT
 void update_camera_mode_6(Camera* camera) {

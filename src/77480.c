@@ -17,7 +17,6 @@ s32 func_802B7140(void);
 void func_802B72C0_E22870(void);
 void func_802B70B4_E201C4(void);
 
-s32 func_800E0208(void);
 void func_800E0330(void);
 void func_800E0374(void);
 void func_800E04D0(void);

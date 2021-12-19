@@ -215,7 +215,7 @@ f32 clamp_angle(f32 theta);
 s32 sign(s32 value);
 s32 func_80055448(s32);
 s32 func_80055464(s32, s32);
-void func_800561A4(s32);
+s32 func_800E0208(void);
 
 s32 battle_heap_create(void);
 void filemenu_init(s32);
@@ -633,5 +633,33 @@ s32 store_item(s32 itemID);
 void open_status_menu_short(void);
 void func_8024EFE0(f32 x, f32 y, f32 z, s32 a, s32 b, s32 c);
 void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a);
+
+void initialize_collision(void);
+void render_entities(void);
+void render_player(void);
+void render_generic_entities_world(void);
+void render_effects_world(void);
+s32 get_asset_offset(char*, s32*);
+void initialize_status_menu(void);
+void set_background_size(s16, s16, s16, s16);
+void read_background_size(BackgroundHeader*);
+void set_max_SP(s8);
+void sync_status_menu(void);
+void create_cameras_a(void);
+void reset_background_settings(void);
+void func_80138188(void);
+
+void clear_player_status(void);
+void clear_entity_models(void);
+void clear_animator_list(void);
+void clear_model_data(void);
+void clear_sprite_shading_data(void);
+void clear_character_set(void);
+void clear_game_modes(void);
+void clear_trigger_data(void);
+void clear_script_list(void);
+void clear_entity_data(s32);
+void clear_effect_data(void);
+void clear_area_flags(void);
 
 #endif

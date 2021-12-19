@@ -37,7 +37,7 @@ typedef struct {
 } AssetHeader; // size = 0x1C
 
 void load_map_script_lib(void) {
-    dma_copy((s32)&world_script_api_ROM_START, (s32)&world_script_api_ROM_END, &world_script_api_VRAM);
+    dma_copy((u8 *) &world_script_api_ROM_START, (u8 *) &world_script_api_ROM_END, &world_script_api_VRAM);
 }
 
 void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
@@ -221,17 +221,17 @@ void* load_asset_by_name(const char* assetName, u32* decompressedSize) {
     AssetHeader* curAsset;
     void* ret;
 
-    dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
+    dma_copy((u8* ) ASSET_TABLE_FIRST_ENTRY, (u8* ) ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
     assetTableBuffer = heap_malloc(firstHeader.offset);
     curAsset = &assetTableBuffer[0];
-    dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
+    dma_copy((u8* ) ASSET_TABLE_FIRST_ENTRY, (u8* ) ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
     while (strcmp(curAsset->name, assetName) != 0) {
         curAsset++;
     }
     *decompressedSize = curAsset->decompressedLength;
     ret = general_heap_malloc(curAsset->compressedLength);
-    dma_copy(ASSET_TABLE_FIRST_ENTRY + curAsset->offset,
-             ASSET_TABLE_FIRST_ENTRY + curAsset->offset + curAsset->compressedLength, ret);
+    dma_copy((u8* ) ASSET_TABLE_FIRST_ENTRY + curAsset->offset,
+             (u8* ) ASSET_TABLE_FIRST_ENTRY + curAsset->offset + curAsset->compressedLength, ret);
     heap_free(assetTableBuffer);
     return ret;
 }
@@ -242,10 +242,10 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
     AssetHeader* curAsset;
     s32 ret;
 
-    dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
+    dma_copy((u8* ) ASSET_TABLE_FIRST_ENTRY, (u8* ) ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
     assetTableBuffer = heap_malloc(firstHeader.offset);
     curAsset = &assetTableBuffer[0];
-    dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
+    dma_copy((u8* ) ASSET_TABLE_FIRST_ENTRY, (u8* ) ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
     while (strcmp(curAsset->name, assetName) != 0) {
         curAsset++;
     }
