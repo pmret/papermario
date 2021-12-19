@@ -17,9 +17,7 @@ s32 func_80268224(s32);
 void func_80268798(s32, s32, s32, s32);
 void func_80268834(s32, s32, s32, s32);
 void func_80268858(void);
-void func_80268C9C(void);
 void func_80269118(void);
-void func_80269160(void);
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

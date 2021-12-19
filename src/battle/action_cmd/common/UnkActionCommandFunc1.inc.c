@@ -1,8 +1,5 @@
 #include "common.h"
 
-void func_80268770(s32, s32, s32);
-void func_8026880C(s32, s32, s32);
-
 void N(UnkActionCommandFunc1)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 

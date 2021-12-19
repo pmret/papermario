@@ -577,6 +577,7 @@ void set_window_update(s32 panelID, s32);
 void snd_stop_sound(s32 soundID);
 void partner_disable_input(void);
 void func_80268798(s32, s32, s32, s32);
+void func_8026880C(s32, s32, s32);
 void func_802687E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void sfx_stop_sound(s32 soundID);
 void close_message(MessagePrintState* msgPrintState);
@@ -648,6 +649,10 @@ void sync_status_menu(void);
 void create_cameras_a(void);
 void reset_background_settings(void);
 void func_80138188(void);
+void func_80268770(s32, s32, s32);
+void func_80268C9C(void);
+void func_802B6CF0_E2B3A0(void);
+void func_80269160(void);
 
 void clear_player_status(void);
 void clear_entity_models(void);

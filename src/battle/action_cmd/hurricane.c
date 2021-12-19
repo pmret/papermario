@@ -3,9 +3,6 @@
 
 #define NAMESPACE action_command_hurricane
 
-void func_80268770(s32, s32, s16);
-void func_8026880C(s32, s32, s16);
-
 extern s32 D_80294420;
 extern HudElementAnim D_80108AFC;
 extern HudElementAnim D_80108B28;

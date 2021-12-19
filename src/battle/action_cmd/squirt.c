@@ -3,14 +3,14 @@
 
 #define NAMESPACE action_command_squirt
 
-extern s32 D_80108AFC[];
-extern s32 D_80108B28[];
+extern HudElementAnim D_80108AFC[];
+extern HudElementAnim D_80108B28[];
 extern s32 D_80294380;
 
 ApiStatus func_802A9000_429D20(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    HudElement* hudElement;
+    s32 hudElement;
 
     battleStatus->unk_82 = 5;
     battleStatus->unk_434 = &D_80294380;

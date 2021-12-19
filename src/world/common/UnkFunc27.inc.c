@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "model.h"
 
 void func_8011B950(u16, s32, s32, s32);
 
