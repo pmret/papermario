@@ -4,7 +4,6 @@
 
 extern s32 D_800F7F00[];
 extern s32 D_800F7F40[];
-extern s32 D_8008EF20[11][4];
 
 enum {
     NPC_SENTINEL,
@@ -129,7 +128,7 @@ NpcAISettings N(npcAISettings_802435B4) = {
     .unk_2C = 1,
 };
 
-const char N(dgb_00_name_hack)[];
+extern const char N(dgb_00_name_hack)[];
 
 EvtSource N(npcAI_802435E4) = SCRIPT({
     SetSelfVar(0, 0);
@@ -572,7 +571,7 @@ ApiStatus N(func_8024130C_C3783C)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = evt_get_variable(script, *args);
+    NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;

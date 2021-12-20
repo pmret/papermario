@@ -221,17 +221,17 @@ void* load_asset_by_name(const char* assetName, u32* decompressedSize) {
     AssetHeader* curAsset;
     void* ret;
 
-    dma_copy((u8* ) ASSET_TABLE_FIRST_ENTRY, (u8* ) ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
+    dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY, (u8*) ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
     assetTableBuffer = heap_malloc(firstHeader.offset);
     curAsset = &assetTableBuffer[0];
-    dma_copy((u8* ) ASSET_TABLE_FIRST_ENTRY, (u8* ) ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
+    dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY, (u8*) ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
     while (strcmp(curAsset->name, assetName) != 0) {
         curAsset++;
     }
     *decompressedSize = curAsset->decompressedLength;
     ret = general_heap_malloc(curAsset->compressedLength);
-    dma_copy((u8* ) ASSET_TABLE_FIRST_ENTRY + curAsset->offset,
-             (u8* ) ASSET_TABLE_FIRST_ENTRY + curAsset->offset + curAsset->compressedLength, ret);
+    dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY + curAsset->offset,
+             (u8*) ASSET_TABLE_FIRST_ENTRY + curAsset->offset + curAsset->compressedLength, ret);
     heap_free(assetTableBuffer);
     return ret;
 }
@@ -242,10 +242,10 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
     AssetHeader* curAsset;
     s32 ret;
 
-    dma_copy((u8* ) ASSET_TABLE_FIRST_ENTRY, (u8* ) ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
+    dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY, (u8*) ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
     assetTableBuffer = heap_malloc(firstHeader.offset);
     curAsset = &assetTableBuffer[0];
-    dma_copy((u8* ) ASSET_TABLE_FIRST_ENTRY, (u8* ) ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
+    dma_copy((u8*) ASSET_TABLE_FIRST_ENTRY, (u8*) ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
     while (strcmp(curAsset->name, assetName) != 0) {
         curAsset++;
     }

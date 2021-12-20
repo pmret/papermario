@@ -282,7 +282,7 @@ typedef struct Enemy {
 s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s32 arg4);
 
 /// The default Npc::onUpdate and Npc::onRender callback.
-void STUB_npc_callback(void);
+void STUB_npc_callback(Npc*);
 
 void mtx_ident_mirror_y(Matrix4f mtx);
 

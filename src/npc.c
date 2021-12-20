@@ -18,7 +18,7 @@ extern s32 D_80077C34;
 extern s16 D_80077C38;
 extern s16 D_80077C3A;
 
-void STUB_npc_callback(void) {
+void STUB_npc_callback(Npc* npc) {
 }
 
 void mtx_ident_mirror_y(Matrix4f mtx) {
