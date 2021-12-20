@@ -186,7 +186,7 @@ EvtSource N(updateTexturePan_802417A0) = SCRIPT({
     N(UnkTexturePanFunc2)();
 });
 
-const char N(flo_10_name_hack)[];
+extern const char N(flo_10_name_hack)[];
 
 // BUG: missing END_SPAWN_THREADs
 #ifdef NON_EQUIVALENT
@@ -231,32 +231,32 @@ EvtSource N(8024183C) = SCRIPT({
 });
 #else
 EvtSource N(8024183C) = {
-    EVT_CMD(EVT_OP_CALL, DisablePlayerInput, 1),
-    EVT_CMD(EVT_OP_CALL, TranslateGroup, 100, 0, 45, 0),
-    EVT_CMD(EVT_OP_CALL, UseSettingsFrom, 0, 170, 0, 160),
-    EVT_CMD(EVT_OP_CALL, SetPanTarget, 0, 170, -90, 160),
-    EVT_CMD(EVT_OP_CALL, SetCamDistance, 0, 800),
-    EVT_CMD(EVT_OP_CALL, SetCamPitch, 0, EVT_FIXED(18.5), EVT_FIXED(-7.5)),
-    EVT_CMD(EVT_OP_CALL, SetCamPosA, 0, EVT_FIXED(-300.0), EVT_FIXED(200.0)),
-    EVT_CMD(EVT_OP_CALL, SetCamPosB, 0, EVT_FIXED(300.0), EVT_FIXED(-150.0)),
-    EVT_CMD(EVT_OP_CALL, SetCamSpeed, 0, EVT_FIXED(90.0)),
-    EVT_CMD(EVT_OP_CALL, PanToTarget, 0, 0, 1),
-    EVT_CMD(EVT_OP_CALL, PlaySound, 0x80000050),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(DisablePlayerInput), 1),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateGroup), 100, 0, 45, 0),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(UseSettingsFrom), 0, 170, 0, 160),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(SetPanTarget), 0, 170, -90, 160),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(SetCamDistance), 0, 800),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(SetCamPitch), 0, EVT_FIXED(18.5), EVT_FIXED(-7.5)),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(SetCamPosA), 0, EVT_FIXED(-300.0), EVT_FIXED(200.0)),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(SetCamPosB), 0, EVT_FIXED(300.0), EVT_FIXED(-150.0)),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(SetCamSpeed), 0, EVT_FIXED(90.0)),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(PanToTarget), 0, 0, 1),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(PlaySound), 0x80000050),
     EVT_CMD(EVT_OP_THREAD),
-        EVT_CMD(EVT_OP_CALL, MakeLerp, 80, 90, 10, 0),
+        EVT_CMD(EVT_OP_CALL, EVT_PTR(MakeLerp), 80, 90, 10, 0),
         EVT_CMD(EVT_OP_LABEL, 0),
-        EVT_CMD(EVT_OP_CALL, UpdateLerp),
-        EVT_CMD(EVT_OP_CALL, RotateModel, 101, EVT_VAR(0), 1, 0, 0),
-        EVT_CMD(EVT_OP_CALL, RotateModel, 103, EVT_VAR(0), 1, 0, 0),
+        EVT_CMD(EVT_OP_CALL, EVT_PTR(UpdateLerp)),
+        EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 101, EVT_VAR(0), 1, 0, 0),
+        EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 103, EVT_VAR(0), 1, 0, 0),
         EVT_CMD(EVT_OP_IF_EQ, EVT_VAR(1), 1),
             EVT_CMD(EVT_OP_WAIT_FRAMES, 1),
             EVT_CMD(EVT_OP_GOTO, 0),
         EVT_CMD(EVT_OP_END_IF),
         EVT_CMD(EVT_OP_THREAD),
-            EVT_CMD(EVT_OP_CALL, MakeLerp, 45, 100, 150, 0),
+            EVT_CMD(EVT_OP_CALL, EVT_PTR(MakeLerp), 45, 100, 150, 0),
             EVT_CMD(EVT_OP_LOOP, 0),
-                EVT_CMD(EVT_OP_CALL, UpdateLerp),
-                EVT_CMD(EVT_OP_CALL, TranslateGroup, 100, 0, EVT_VAR(0), 0),
+                EVT_CMD(EVT_OP_CALL, EVT_PTR(UpdateLerp)),
+                EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateGroup), 100, 0, EVT_VAR(0), 0),
                 EVT_CMD(EVT_OP_WAIT_FRAMES, 1),
                 EVT_CMD(EVT_OP_IF_EQ, EVT_VAR(1), 0),
                     EVT_CMD(EVT_OP_BREAK_LOOP),
@@ -264,7 +264,7 @@ EvtSource N(8024183C) = {
             EVT_CMD(EVT_OP_END_LOOP),
             EVT_CMD(EVT_OP_WAIT_FRAMES, 30),
             EVT_CMD(EVT_OP_SET, EVT_STORY_PROGRESS, STORY_CH6_FILLED_SPRING_WITH_WATER),
-            EVT_CMD(EVT_OP_CALL, GotoMap, N(flo_10_name_hack), 2),
+            EVT_CMD(EVT_OP_CALL, EVT_PTR(GotoMap), EVT_PTR(N(flo_10_name_hack)), 2),
             EVT_CMD(EVT_OP_WAIT_FRAMES, 100),
             EVT_CMD(EVT_OP_RETURN),
             EVT_CMD(EVT_OP_END)

@@ -405,7 +405,7 @@ NpcSettings N(npcSettings_8024296C) = {
     .level = 99,
 };
 
-const char N(flo_07_name_hack)[];
+extern const char N(flo_07_name_hack)[];
 
 EvtSource N(80242998) = SCRIPT({
     DisablePlayerInput(TRUE);
@@ -1311,7 +1311,7 @@ f32 N(D_80245E88_CA3DA8)[] = {
     300.0f, 400.0f, 200.0f, 287.0f,
 };
 
-const char N(sam_11_name_hack)[];
+extern const char N(sam_11_name_hack)[];
 
 EvtSource N(80245EB8) = SCRIPT({
     SetPlayerPos(-400, 0, 200);
@@ -1634,7 +1634,7 @@ EvtSource N(80247770) = SCRIPT({
     UpdateColliderTransform(46);
 });
 
-const char N(flo_19_name_hack)[];
+extern const char N(flo_19_name_hack)[];
 
 EvtSource N(802477EC) = SCRIPT({
     if (EVT_AREA_FLAG(44) == 0) {

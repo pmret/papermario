@@ -408,7 +408,7 @@ EvtSource N(80241ED4) = {
     EVT_CMD(EVT_OP_SETF, EVT_VAR(5), EVT_FIXED(3.0)),
     EVT_CMD(EVT_OP_THREAD),
         EVT_CMD(EVT_OP_WAIT_FRAMES, 10),
-        EVT_CMD(EVT_OP_CALL, PlaySoundAtCollider, 19, 486, 0),
+        EVT_CMD(EVT_OP_CALL, EVT_PTR(PlaySoundAtCollider), 19, 486, 0),
     EVT_CMD(EVT_OP_END_THREAD),
     EVT_CMD(EVT_OP_LOOP, 300),
         EVT_CMD(EVT_OP_ADDF, EVT_VAR(4), EVT_FIXED(-0.5)),
@@ -425,19 +425,19 @@ EvtSource N(80241ED4) = {
             EVT_CMD(EVT_OP_END_IF),
         EVT_CMD(EVT_OP_END_IF),
     EVT_CMD(EVT_OP_END_IF), // BUG: extraneous END_IF
-    EVT_CMD(EVT_OP_CALL, TranslateModel, 31, -78, 19, 2),
-    EVT_CMD(EVT_OP_CALL, TranslateModel, 32, -78, 19, 2),
-    EVT_CMD(EVT_OP_CALL, TranslateModel, 31, EVT_VAR(0), EVT_VAR(1), 0),
-    EVT_CMD(EVT_OP_CALL, TranslateModel, 32, EVT_VAR(0), EVT_VAR(1), 0),
-    EVT_CMD(EVT_OP_CALL, RotateModel, 31, EVT_VAR(2), 0, 0, 1),
-    EVT_CMD(EVT_OP_CALL, RotateModel, 32, EVT_VAR(2), 0, 0, 1),
-    EVT_CMD(EVT_OP_CALL, TranslateModel, 31, 78, -19, -2),
-    EVT_CMD(EVT_OP_CALL, TranslateModel, 32, 78, -19, -2),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 31, -78, 19, 2),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 32, -78, 19, 2),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 31, EVT_VAR(0), EVT_VAR(1), 0),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 32, EVT_VAR(0), EVT_VAR(1), 0),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 31, EVT_VAR(2), 0, 0, 1),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 32, EVT_VAR(2), 0, 0, 1),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 31, 78, -19, -2),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 32, 78, -19, -2),
     EVT_CMD(EVT_OP_WAIT_FRAMES, 1),
 EVT_CMD(EVT_OP_END_LOOP),
 EVT_CMD(EVT_OP_LABEL, 0),
 EVT_CMD(EVT_OP_WAIT_FRAMES, 30),
-EVT_CMD(EVT_OP_CALL, ModifyColliderFlags, 0, 19, 0x7FFFFE00),
+EVT_CMD(EVT_OP_CALL, EVT_PTR(ModifyColliderFlags), 0, 19, 0x7FFFFE00),
 EVT_CMD(EVT_OP_RETURN),
 EVT_CMD(EVT_OP_END)
 };
@@ -605,7 +605,7 @@ EvtSource N(80242910) = {
     EVT_CMD(EVT_OP_SETF, EVT_VAR(5), EVT_FIXED(3.0)),
     EVT_CMD(EVT_OP_THREAD),
         EVT_CMD(EVT_OP_WAIT_FRAMES, 15),
-        EVT_CMD(EVT_OP_CALL, PlaySoundAtCollider, 18, 486, 0),
+        EVT_CMD(EVT_OP_CALL, EVT_PTR(PlaySoundAtCollider), 18, 486, 0),
     EVT_CMD(EVT_OP_END_THREAD),
     EVT_CMD(EVT_OP_LOOP, 300),
         EVT_CMD(EVT_OP_ADDF, EVT_VAR(4), EVT_FIXED(-0.5)),
@@ -622,10 +622,10 @@ EvtSource N(80242910) = {
             EVT_CMD(EVT_OP_END_IF),
         EVT_CMD(EVT_OP_END_IF),
     EVT_CMD(EVT_OP_END_IF), // BUG: extraneous END_IF
-    EVT_CMD(EVT_OP_CALL, TranslateModel, 29, 124, 17, 3),
-    EVT_CMD(EVT_OP_CALL, TranslateModel, 29, EVT_VAR(0), EVT_VAR(1), 0),
-    EVT_CMD(EVT_OP_CALL, RotateModel, 29, EVT_VAR(2), 0, 0, -1),
-    EVT_CMD(EVT_OP_CALL, TranslateModel, 29, -124, -17, -3),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 29, 124, 17, 3),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 29, EVT_VAR(0), EVT_VAR(1), 0),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(RotateModel), 29, EVT_VAR(2), 0, 0, -1),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateModel), 29, -124, -17, -3),
     EVT_CMD(EVT_OP_WAIT_FRAMES, 1),
 EVT_CMD(EVT_OP_END_LOOP),
 EVT_CMD(EVT_OP_LABEL, 0),
@@ -932,16 +932,16 @@ EvtSource N(802436BC) = SCRIPT({
 NpcSettings N(npcSettings_80243F10) = {
     .height = 32,
     .radius = 24,
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 20,
-};
+}; 
 
 NpcSettings N(npcSettings_80243F3C) = {
     .height = 34,
     .radius = 24,
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 26,
 };
 
@@ -1680,7 +1680,13 @@ static s32 N(pad_66B4)[] = {
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-void playFX_82();
+// It seems like playFX_82 was not properly defined for this file. Having a proper
+// declaration makes it not match.
+#ifdef AVOID_UB
+void playFX_82(s32, f32, f32, f32, f32, s32);
+#else
+void playFX_82(s32, s32, s32, s32, s32, s32);
+#endif
 
 ApiStatus N(func_8024030C_CDC9AC)(Evt* script, s32 isInitialCall) {
     playFX_82(1, 0, 0, 0, 0, 0);
@@ -1704,7 +1710,7 @@ typedef struct N(temp) {
 } N(temp);
 
 ApiStatus N(func_80240340_CDC9E0)(Evt* script, s32 isInitialCall) {
-    N(temp)* ptr = script->varTable[15];
+    N(temp)* ptr = (N(temp)*) script->varTable[15];
 
     ptr->unk_0C->unk_30 = 69;
     ptr->unk_0C->unk_34 = 255;

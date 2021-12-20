@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-void N(UnkNpcAIFunc12)(Evt* script, NpcAISettings* aiSettings, s32 arg2) {
+void N(UnkNpcAIFunc12)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territoryPtr) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 temp;

@@ -890,7 +890,7 @@ INCLUDE_ASM(void, "world/partners", partner_clear_player_tracking, Npc* partner)
 
 s32 func_800EF4E0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     s32 ret;
 
     if (playerStatus->unk_90 == 0.0f) {

@@ -48,5 +48,7 @@ void partner_do_player_collision(Npc* partner);
 void partner_walking_follow_player(Npc* partner);
 s32 func_800EA52C(s32);
 s32 func_800EF4E0(void);
+void partner_suspend_ability_script(void);
+void partner_resume_ability_script(void);
 
 #endif
