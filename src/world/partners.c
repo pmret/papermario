@@ -30,6 +30,8 @@
 #include "partner/twink.h"
 #include "sprite/npc/twink.h"
 
+extern s32 D_80108068[];
+extern s32 D_801083D8[];
 extern f32 D_8010CFC0;
 extern s16 D_8010CFC8;
 extern s16 D_8010CFCA;
@@ -38,9 +40,6 @@ extern s32 D_802C0000;
 extern s32 D_8010CFB8;
 extern s32 D_8010CFBC;
 extern s32 D_8010CFCC;
-
-extern s32 D_801083D8[];
-extern s32 D_80108068[];
 
 extern struct Vec3f* D_8010CD38;
 
