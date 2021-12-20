@@ -266,18 +266,6 @@ extern s16 gCurrentDoorSoundsSet;
 extern s32 D_800D9620;
 extern UNK_TYPE D_800E92D8;
 extern UNK_TYPE D_80147574;
-extern UNK_TYPE D_80109270;
-extern UNK_TYPE D_80108558;
-
-extern s32 D_80108248;
-extern s32 D_80108518;
-extern s32 D_80108270;
-extern s32 D_80108538;
-extern s32 D_80080FC4;
-extern s32 D_801086AC;
-extern s32 D_801083D8;
-extern s32 D_80108068;
-extern s32 D_80104BEC;
 
 extern UNK_FUN_PTR(D_8010C920);
 extern s32 D_8010C940;
@@ -400,7 +388,6 @@ extern s32 D_8038F800;
 extern s32 D_803B5000;
 extern HeapNode heap_battleHead;
 
-extern s32 D_80108A64;
 extern s32 bMarioIdleAnims[];
 extern s32 bMarioDefendAnims[];
 extern s32 bPeachIdleAnims[];

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "hud_element.h"
 
-static HudElement* itemIcon;
+static s32 itemIcon;
 
 // Returns time to sleep for on $x.
 ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
@@ -40,7 +40,7 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
         posZ = player->currentPos.z;
 
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconX, &iconY, &iconZ);
-        itemIcon = create_hud_element(&D_80108A64);
+        itemIcon = create_hud_element(D_80108A64);
         set_hud_element_render_pos(itemIcon, iconX + 36, iconY - 63);
     }
 

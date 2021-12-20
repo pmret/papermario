@@ -375,7 +375,7 @@ void update_effects(void) {
     }
 }
 
-s32 render_effects_world(void) {
+void render_effects_world(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {

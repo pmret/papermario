@@ -4,11 +4,6 @@
 
 #define NAMESPACE action_command_smack
 
-void func_80268C9C(void);
-void func_80269160(void);
-void func_80268770(s32, s32, s32);
-void func_8026880C(s32, s32, s32);
-void btl_set_popup_duration(s32 duration);
 void sfx_adjust_env_sound_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
 
 extern HudElementAnim D_80108AFC;

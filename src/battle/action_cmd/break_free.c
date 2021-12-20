@@ -9,8 +9,6 @@ extern HudElementAnim D_80108AFC;
 extern HudElementAnim D_802928F8;
 extern HudElementAnim D_80109244;
 
-s32 func_80268770(s32, s32, s16);
-
 ApiStatus func_802A9000_4233F0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
@@ -131,7 +129,6 @@ void func_802A96B8_423AA8(void) {
     draw_hud_element_clipped(hudElements[2]);
     draw_hud_element_clipped(hudElements[3]);
 }
-
 
 void func_802A97FC_423BEC(void) {
     free_hud_element(gActionCommandStatus.hudElements[0]);

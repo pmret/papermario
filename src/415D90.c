@@ -1,7 +1,6 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern s32 D_80104A28;
 extern s32 D_80107D48;
 extern s32 D_80107D98;
 extern s32 D_80107CA8;
@@ -28,8 +27,8 @@ extern u8 D_802AD000;
 extern u8 D_802AD001;
 extern s16 D_802AD006;
 extern s16 D_802AD008;
-extern s32* D_802AD010;
-extern s32* D_802AD028;
+extern s32 D_802AD010[];
+extern s32 D_802AD028[];
 extern s32 D_802AD040;
 extern s32 D_802AD044;
 extern s32 D_802AD048;
@@ -87,7 +86,7 @@ extern s32 D_802AD66C;
 extern s8 D_802AD673;
 extern s32 D_802AD678[];
 extern s32 D_802AD690[];
-extern s32* D_802AD6C0[];
+extern s32 D_802AD6C0[];
 extern s32 D_802AD6D4;
 
 s16 D_802AB340[] = { 0x001C, 0x0028 };
@@ -104,9 +103,9 @@ s32 D_802AB390[] = { &D_80108974, 0x8010899C };
 
 s32 D_802AB398[] = { &D_80108974, 0x8010899C, 0x80107990, 0x801079BC, 0x801079E8, 0x80107A14, 0x80107A40, 0x80107A6C, 0x80107A98, 0x80107AC4, 0x80107AF0, 0x80107B1C, 0x80107B48, 0x80107B74, 0x80107BA0, 0x80107BCC, 0x80107BF8, 0x80107C24, 0x80107C50, 0x80107C7C, &D_80108974, 0x8010899C, &D_80108974, 0x8010899C };
 
-s32 D_802AB3F8[] = { &D_80107CA8, &D_80107CF8, &D_80107D48, &D_80107D98, &D_80107DE8, &D_80107CA8, &D_80107E88, &D_80107ED8, &D_80107F28, &D_80107E38, &D_80107FC8, &D_80107FC8, &D_80107FC8, &D_80107FC8, &D_80107FC8, &D_80107FC8 };
+s32* D_802AB3F8[] = { &D_80107CA8, &D_80107CF8, &D_80107D48, &D_80107D98, &D_80107DE8, &D_80107CA8, &D_80107E88, &D_80107ED8, &D_80107F28, &D_80107E38, &D_80107FC8, &D_80107FC8, &D_80107FC8, &D_80107FC8, &D_80107FC8, &D_80107FC8 };
 
-s32 D_802AB438[] = { &D_80107CD0, &D_80107D20, &D_80107D70, &D_80107DC0, &D_80107E10, &D_80107CD0, &D_80107EB0, &D_80107F00, &D_80107F50, &D_80107E60, &D_80107FF0, &D_80107FF0, &D_80107FF0, &D_80107FF0, &D_80107FF0, &D_80107FF0 };
+s32* D_802AB438[] = { &D_80107CD0, &D_80107D20, &D_80107D70, &D_80107DC0, &D_80107E10, &D_80107CD0, &D_80107EB0, &D_80107F00, &D_80107F50, &D_80107E60, &D_80107FF0, &D_80107FF0, &D_80107FF0, &D_80107FF0, &D_80107FF0, &D_80107FF0 };
 
 s32 D_802AB478[] = { 0x80292200 };
 
@@ -182,8 +181,8 @@ void func_802A10B8(void) {
     s32 i;
 
     for (i = 0; i < main_menu_numOptions; i++) {
-        s32* icons1 = &D_802AD010;
-        s32* icons2 = &D_802AD028;
+        s32* icons1 = D_802AD010;
+        s32* icons2 = D_802AD028;
 
         free_hud_element(icons1[i]);
         free_hud_element(icons2[i]);
@@ -201,6 +200,7 @@ void func_802A10B8(void) {
 
 INCLUDE_ASM(s32, "415D90", func_802A11B0);
 
+void btl_draw_menu_wheel(void);
 INCLUDE_ASM(s32, "415D90", btl_draw_menu_wheel);
 
 // Very similar to func_802A45D8 - maybe can be used to reduce fake matches there
@@ -282,7 +282,7 @@ void func_802A2910(void) {
     s32* moveOptionCostUnitIconIDs;
     s32 i;
 
-    moveOptionIconIDs = &battle_menu_moveOptionIconIDs;
+    moveOptionIconIDs = battle_menu_moveOptionIconIDs;
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
         set_hud_element_tint(moveOptionIconIDs[i], 255, 255, 255);
@@ -293,13 +293,13 @@ void func_802A2910(void) {
     set_hud_element_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
     set_hud_element_tint(battle_menu_moveTitleIcon, 255, 255, 255);
 
-    moveOptionCostUnitIconIDs = &battle_menu_moveOptionCostUnitIconIDs;
+    moveOptionCostUnitIconIDs = battle_menu_moveOptionCostUnitIconIDs;
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
         set_hud_element_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    set_hud_element_anim(battle_menu_moveCursorIcon, &D_80104A28);
+    set_hud_element_anim(battle_menu_moveCursorIcon, D_80104A28);
     set_window_update(1, 5);
 
     if (!battle_menu_hasSpiritsMenu) {
@@ -333,7 +333,7 @@ void func_802A2AB8(void) {
     }
     set_window_update(8, 1);
 
-    moveOptionIconIDs = &battle_menu_moveOptionIconIDs;
+    moveOptionIconIDs = battle_menu_moveOptionIconIDs;
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
         set_hud_element_tint(moveOptionIconIDs[i], 255, 255, 255);
@@ -344,13 +344,13 @@ void func_802A2AB8(void) {
     set_hud_element_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
     set_hud_element_tint(battle_menu_moveTitleIcon, 255, 255, 255);
 
-    moveOptionCostUnitIconIDs = &battle_menu_moveOptionCostUnitIconIDs;
+    moveOptionCostUnitIconIDs = battle_menu_moveOptionCostUnitIconIDs;
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
         set_hud_element_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    set_hud_element_anim(battle_menu_moveCursorIcon, &D_80104A28);
+    set_hud_element_anim(battle_menu_moveCursorIcon, D_80104A28);
     battle_menu_moveTextColor = 10;
     D_802AD10F = 1;
     battle_menu_moveState = 20;
@@ -501,7 +501,7 @@ void func_802A47E0(void) {
     set_hud_element_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
     set_hud_element_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
     set_hud_element_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
-    set_hud_element_anim(D_802AD618, &D_80104A28);
+    set_hud_element_anim(D_802AD618, D_80104A28);
     set_window_update(6, 5);
     set_window_update(7, 5);
     set_window_update(8, 1);
@@ -525,7 +525,7 @@ void func_802A48FC(void) {
     set_hud_element_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
     set_hud_element_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
     set_hud_element_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
-    set_hud_element_anim(D_802AD618, &D_80104A28);
+    set_hud_element_anim(D_802AD618, D_80104A28);
     D_802AD614 = 10;
     D_802AD60B = 1;
     D_802AD604 = 20;

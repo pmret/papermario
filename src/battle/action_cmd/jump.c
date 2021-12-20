@@ -6,12 +6,12 @@
 extern s32 D_802941C0;
 
 // icon id's for hud elements
-extern s32 D_80108B28;
-extern s32 D_80292A2C;
-extern s32 D_80108B54;
+extern HudElementAnim D_80108B28[];
+extern HudElementAnim D_80292A2C[];
+extern HudElementAnim D_80108B54[];
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
-    HudElement* hudElement;
+    s32 hudElement;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     gBattleStatus.unk_82 = 1;
@@ -30,14 +30,14 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_60 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(&D_80108B28);
+    hudElement = create_hud_element(D_80108B28);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_alpha(hudElement, 0xFF);
 
-    hudElement = create_hud_element(&D_80292A2C);
+    hudElement = create_hud_element(D_80292A2C);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
@@ -48,7 +48,7 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802A9120_421B10(Evt* script, s32 isInitialCall) {
-    HudElement* hudElement;
+    s32 hudElement;
 
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
@@ -84,7 +84,7 @@ ApiStatus func_802A9120_421B10(Evt* script, s32 isInitialCall) {
 void N(update)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    HudElement* hudElement;
+    s32 hudElement;
     s32 temp_s0_3;
 
     switch (actionCommandStatus->state) {
@@ -126,7 +126,7 @@ void N(update)(void) {
 
             temp_s0_3 = battleStatus->unk_434[actionCommandStatus->unk_50];
             if (((actionCommandStatus->unk_4E - temp_s0_3) - 2) <= 0) {
-                set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108B54);
+                set_hud_element_anim(actionCommandStatus->hudElements[0], D_80108B54);
             }
             if (((battleStatus->currentButtonsPressed & 0x8000) != 0) && (actionCommandStatus->autoSucceed == 0)) {
                 actionCommandStatus->unk_60 = 1;

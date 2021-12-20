@@ -17,7 +17,7 @@ ApiStatus func_802A9000_428A70(Evt* script, s32 isInitialCall) {
     s32 *args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
-    HudElement* hudElement;
+    s32 hudElement;
 
     battleStatus->unk_434 = &D_80294340;
     battleStatus->unk_82 = 0;

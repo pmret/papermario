@@ -14,7 +14,6 @@ extern s16 D_80155D8C;
 extern s16 D_80155D8E;
 extern s16 D_80155D90;
 
-void delete_shadow(s16);
 void draw_item_entities(void);
 void func_80132D94(void);
 

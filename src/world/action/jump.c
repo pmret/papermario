@@ -3,6 +3,9 @@
 extern f32 D_8010C960;
 extern f32 D_8010C97C;
 
+void func_802B6508_E24548(void);
+void func_802B647C_E244BC(void);
+
 void func_802B6000_E24040(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;

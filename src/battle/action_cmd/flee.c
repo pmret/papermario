@@ -3,23 +3,21 @@
 
 #define NAMESPACE action_command_flee
 
-extern s32 D_80108AFC;
-extern s32 D_80108B28;
-extern s32 D_80109244;
-extern s32 D_802928F8;
-extern s32 D_80292974;
+extern HudElementAnim D_80108AFC[];
+extern HudElementAnim D_80108B28[];
+extern HudElementAnim D_80109244[];
+extern HudElementAnim D_802928F8[];
+extern HudElementAnim D_80292974[];
 extern s32 D_80294200;
 extern s32 D_802A9920;
-extern s32 D_80108B80;
-extern s32 D_802A9920;
-extern s32 D_802A9920;
+extern HudElementAnim D_80108B80[];
 
 ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 xOffset;
-    HudElement* hudElement;
+    s32 hudElement;
 
     battleStatus->unk_82 = 0;
     battleStatus->unk_434 = &D_80294200;
@@ -40,25 +38,25 @@ ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     D_802A9920 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(&D_80108B28);
+    hudElement = create_hud_element(D_80108B28);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(&D_80108AFC);
+    hudElement = create_hud_element(D_80108AFC);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(&D_802928F8);
+    hudElement = create_hud_element(D_802928F8);
     actionCommandStatus->hudElements[2] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(&D_80109244);
+    hudElement = create_hud_element(D_80109244);
     actionCommandStatus->hudElements[3] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
@@ -68,7 +66,7 @@ ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     set_hud_element_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudElementX - xOffset, actionCommandStatus->hudElementY + 17);
     set_hud_element_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudElementX - xOffset, actionCommandStatus->hudElementY - 1);
 
-    hudElement = create_hud_element(&D_80292974);
+    hudElement = create_hud_element(D_80292974);
     actionCommandStatus->hudElements[4] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
@@ -98,7 +96,7 @@ ApiStatus func_802A92A0_422D70(Evt* script) {
 
 void func_802A9378_422E48(void) {
     s32 temp;
-    HudElement* hudElement;
+    s32 hudElement;
     BattleStatus* battleStatus = &gBattleStatus;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
@@ -144,7 +142,7 @@ void func_802A9378_422E48(void) {
                 break;
             }
 
-            set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108B80);
+            set_hud_element_anim(actionCommandStatus->hudElements[0], D_80108B80);
             D_802A9920 = 1;
             actionCommandStatus->state = 11;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
@@ -209,7 +207,7 @@ void func_802A96F4_4231C4(void) {
     s32 y;
     s32 x;
     s32 temp_a1;
-    HudElement* hudElement;
+    s32 hudElement;
     s32 temp_v1;
 
     BattleStatus* battleStatus = &gBattleStatus;
@@ -236,7 +234,7 @@ void func_802A96F4_4231C4(void) {
         if (actionCommandStatus->unk_68 == 0) {
             func_80268798(x, y, actionCommandStatus->barFillLevel / 100, 4);
         } else {
-            func_8026880C(x, y, actionCommandStatus->barFillLevel / 100, 4);
+            func_8026880C(x, y, actionCommandStatus->barFillLevel / 100);
         }
     }
 

@@ -7,7 +7,6 @@
 
 extern UNK_FUN_PTR(D_8010C920);
 extern UNK_FUN_PTR(D_8010C93C);
-extern s32 D_8010C940;
 extern s32 D_8010C950;
 
 extern s32 D_802BDF60;
@@ -17,7 +16,6 @@ s32 func_802B7140(void);
 void func_802B72C0_E22870(void);
 void func_802B70B4_E201C4(void);
 
-s32 func_800E0208(void);
 void func_800E0330(void);
 void func_800E0374(void);
 void func_800E04D0(void);
@@ -713,7 +711,7 @@ void check_for_interactables(void) {
 
 
 // TODO: Remove after func_800E24F8 is matching.
-static const pad[3] = { 0.0f, 0.0f, 0.0f };
+static const s32 pad[3] = { 0.0f, 0.0f, 0.0f };
 
 void func_800E0AD0(void) {
     if ((gPlayerStatusPtr->animFlags & 0x10) && (D_8010C958 != 0)) {

@@ -183,8 +183,8 @@ NpcSettings N(npcSettings_80241538) = {
     .height = 21,
     .radius = 22,
     .ai = &N(npcAI_802414C8),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 19,
 };
 
@@ -485,7 +485,7 @@ ApiStatus N(func_802402C0_CEE520)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_802402F8_CEE558)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
+    s32* ptr = (s32*) evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {
@@ -516,7 +516,7 @@ ApiStatus N(func_80240728_CEE988)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = evt_get_variable(script, *args);
+    NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args);
     s32 var;
 
     territory.unk_00 = 0;

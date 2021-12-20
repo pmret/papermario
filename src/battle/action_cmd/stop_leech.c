@@ -3,14 +3,15 @@
 
 #define NAMESPACE action_command_stop_leech
 
-extern s32 D_80108AFC;
-extern s32 D_80108B28;
+extern HudElementAnim D_80108B80[];
+extern HudElementAnim D_80108AFC[];
+extern HudElementAnim D_80108B28[];
 extern s32 D_80294260;
 
 ApiStatus func_802A9000_425590(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    HudElement* hudElement;
+    s32 hudElement;
 
     battleStatus->unk_82 = 5;
     battleStatus->unk_434 = &D_80294260;
@@ -28,13 +29,13 @@ ApiStatus func_802A9000_425590(void) {
     actionCommandStatus->unk_48 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(&D_80108B28);
+    hudElement = create_hud_element(D_80108B28);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
 
-    hudElement = create_hud_element(&D_80108AFC);
+    hudElement = create_hud_element(D_80108AFC);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
@@ -68,12 +69,10 @@ ApiStatus func_802A9110_4256A0(Evt* script) {
     return ApiStatus_DONE2;
 }
 
-extern s32 D_80108B80;
-
 void func_802A91F8_425788(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
-    HudElement* hudElement;
+    s32 hudElement;
     s16 hudElementX;
 
     switch (actionCommandStatus->state) {
@@ -107,7 +106,7 @@ void func_802A91F8_425788(void) {
                 actionCommandStatus->unk_4E -= 1;
                 break;
             }
-            set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108B80);
+            set_hud_element_anim(actionCommandStatus->hudElements[0], D_80108B80);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->state = 11;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
@@ -150,7 +149,7 @@ void func_802A91F8_425788(void) {
 void func_802A94A4_425A34(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     s32 x, y;
-    HudElement* hudElement;
+    s32 hudElement;
 
     if (actionCommandStatus->unk_6A == 0) {
         draw_hud_element_clipped(actionCommandStatus->hudElements[0]);
