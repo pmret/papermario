@@ -35,3 +35,26 @@ extern NpcGroupList N(npcGroupList_80246E50);
 extern NpcGroupList N(npcGroupList_80246ED4);
 extern NpcGroupList N(npcGroupList_80246E8C);
 extern NpcGroupList N(npcGroupList_80246F1C);
+
+extern Gfx D_80247F70_C057F0[];
+extern Gfx D_80248FF0_C06870[];
+extern Gfx D_80249870_C070F0[];
+extern Gfx D_80249CF0_C07570[];
+extern Gfx D_8024A170_C079F0[];
+extern Gfx D_8024A5F0_C07E70[];
+extern Gfx D_8024AE70_C086F0[];
+extern Gfx D_8024B6F0_C08F70[];
+extern Gfx D_8024BCF8_C09578[];
+
+extern Mtx N(D_802536A0_C10F20);
+extern Mtx N(D_802536E0_C10F60);
+extern Mtx N(D_80253720_C10FA0);
+extern Mtx N(D_80253760_C10FE0);
+extern Mtx N(D_802537A0_C11020);
+extern Mtx N(D_802537E0_C11060);
+extern Mtx N(D_80253820_C110A0);
+extern Mtx N(D_80253860_C110E0);
+extern Mtx N(D_802538A0_C11120);
+extern Mtx N(D_802538E0_C11160);
+extern Mtx N(D_80253920_C111A0);
+extern Mtx N(D_80253960_C111E0);
