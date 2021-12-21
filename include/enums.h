@@ -505,8 +505,8 @@ enum SoundIDs {
     SOUND_E3                        = 0x000000E3,
     SOUND_E7                        = 0x000000E7,
     SOUND_E9                        = 0x000000E9,
-    SOUND_FIRE                      = 0x000000EA,
-    SOUND_FREEZE                    = 0x000000EB,
+    SOUND_FIRE_DAMAGE               = 0x000000EA,
+    SOUND_FREEZE_DAMAGE             = 0x000000EB,
     SOUND_10C                       = 0x0000010C,
     SOUND_10D                       = 0x0000010D,
     SOUND_STEP1                     = 0x00000141,
@@ -578,7 +578,7 @@ enum SoundIDs {
     SOUND_377                       = 0x00000377,
     SOUND_379                       = 0x00000379,
     SOUND_37A                       = 0x0000037A,
-    SOUND_ELECTRIC                  = 0x0000037B,
+    SOUND_ELECTRIC_DAMAGE           = 0x0000037B,
     SOUND_GENERAL_WHISTLE           = 0x00000395,
     SOUND_OPEN_SHELL                = 0x000003D4,
     SOUND_JUMP_3E2                  = 0x000003E2,
@@ -1213,6 +1213,7 @@ enum Events {
     EVENT_SPIN_SMASH_LAUNCH_HIT       = 0x00000011,
     EVENT_SHELL_CRACK_HIT             = 0x00000012,
     EVENT_STAR_BEAM                   = 0x00000013,
+    EVENT_14                          = 0x00000014,
     EVENT_POWER_BOUNCE_HIT            = 0x00000015,
     EVENT_BLOW_AWAY                   = 0x00000016,
     EVENT_UNKNOWN_TRIGGER             = 0x00000017,
@@ -1221,6 +1222,7 @@ enum Events {
     EVENT_BLOCK                       = 0x0000001A,
     EVENT_SPIKE_TAUNT                 = 0x0000001B,
     EVENT_BURN_TAUNT                  = 0x0000001C,
+    EVENT_1D                          = 0x0000001D,
     EVENT_AIR_LIFT_FAILED             = 0x0000001F,
     EVENT_DEATH                       = 0x00000020,
     EVENT_SPIN_SMASH_DEATH            = 0x00000021,
@@ -1236,6 +1238,7 @@ enum Events {
     EVENT_BURN_CONTACT                = 0x0000002C,
     EVENT_SHOCK_HIT                   = 0x0000002F,
     EVENT_RECOVER_STATUS              = 0x00000031,
+    EVENT_32                          = 0x00000032,
     EVENT_34                          = 0x00000034,
     EVENT_END_FIRST_STRIKE            = 0x00000035,
     EVENT_LUCKY                       = 0x00000037,
@@ -1620,41 +1623,42 @@ enum Areas {
 };
 
 enum NpcFlags {
-    NPC_FLAG_0                 = 0x00000000,
-    NPC_FLAG_PASSIVE           = 0x00000001, ///< Collision does not trigger battle
-    NPC_FLAG_2                 = 0x00000002,
-    NPC_FLAG_4                 = 0x00000004,
-    NPC_FLAG_ENABLE_HIT_SCRIPT = 0x00000008,
-    NPC_FLAG_HAS_SHADOW        = 0x00000010, ///< Set by default and by enable_npc_shadow
-    NPC_FLAG_NO_AI             = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
-    NPC_FLAG_40                = 0x00000040,
-    NPC_FLAG_80                = 0x00000080, // TODO
-    NPC_FLAG_100               = 0x00000100, // TODO
-    NPC_FLAG_GRAVITY           = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
-    NPC_FLAG_LOCK_ANIMS        = 0x00000400, ///< Do not allow scripts to change animation
-    NPC_FLAG_NO_Y_MOVEMENT     = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
-    NPC_FLAG_1000              = 0x00001000,
-    NPC_FLAG_NO_PROJECT_SHADOW = 0x00002000, ///< Draw shadow at base of sprite instead of projecting to ground
-    NPC_FLAG_4000              = 0x00004000,
-    NPC_FLAG_8000              = 0x00008000,
-    NPC_FLAG_DIRTY_SHADOW      = 0x00010000, ///< Set if shadow model is dirty (needs to be repositioned etc.)
-    NPC_FLAG_REFLECT_WALL      = 0x00020000, ///< Mirror rendering across z=0
-    NPC_FLAG_40000             = 0x00040000, ///< Yaw?
-    NPC_FLAG_REFLECT_FLOOR     = 0x00080000, ///< Mirror rendering across y=0
-    NPC_FLAG_MOTION_BLUR       = 0x00100000, ///< Gives motion blur effect as NPC moves. Set by enable_npc_blur
-    NPC_FLAG_200000            = 0x00200000,
-    NPC_FLAG_400000            = 0x00400000,
-    NPC_FLAG_NO_DROPS          = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
-    NPC_FLAG_1000000           = 0x01000000, // TODO. fails assert in set_npc_sprite
-    NPC_FLAG_2000000           = 0x02000000,
+    NPC_FLAG_0                       = 0x00000000,
+    NPC_FLAG_PASSIVE                 = 0x00000001, ///< Collision does not trigger battle
+    NPC_FLAG_2                       = 0x00000002,
+    NPC_FLAG_4                       = 0x00000004,
+    NPC_FLAG_ENABLE_HIT_SCRIPT       = 0x00000008,
+    NPC_FLAG_HAS_SHADOW              = 0x00000010, ///< Set by default and by enable_npc_shadow
+    NPC_FLAG_NO_AI                   = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
+    NPC_FLAG_40                      = 0x00000040,
+    NPC_FLAG_UPSIDE_DOWN             = 0x00000080, ///< Render NPCs upside-down
+    NPC_FLAG_100                     = 0x00000100, // TODO
+    NPC_FLAG_GRAVITY                 = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
+    NPC_FLAG_LOCK_ANIMS              = 0x00000400, ///< Do not allow scripts to change animation
+    NPC_FLAG_NO_Y_MOVEMENT           = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
+    NPC_FLAG_1000                    = 0x00001000,
+    NPC_FLAG_NO_PROJECT_SHADOW       = 0x00002000, ///< Draw shadow at base of sprite instead of projecting to ground
+    NPC_FLAG_4000                    = 0x00004000,
+    NPC_FLAG_8000                    = 0x00008000,
+    NPC_FLAG_DIRTY_SHADOW            = 0x00010000, ///< Set if shadow model is dirty (needs to be repositioned etc.)
+    NPC_FLAG_REFLECT_WALL            = 0x00020000, ///< Mirror rendering across z=0
+    NPC_FLAG_40000                   = 0x00040000, ///< Yaw?
+    NPC_FLAG_REFLECT_FLOOR           = 0x00080000, ///< Mirror rendering across y=0
+    NPC_FLAG_MOTION_BLUR             = 0x00100000, ///< Gives motion blur effect as NPC moves. Set by enable_npc_blur
+    NPC_FLAG_200000                  = 0x00200000,
+    NPC_FLAG_400000                  = 0x00400000,
+    NPC_FLAG_NO_DROPS                = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
+    NPC_FLAG_1000000                 = 0x01000000, // TODO. fails assert in set_npc_sprite
+    NPC_FLAG_SIMPLIFIED_PHYSICS      = 0x02000000,
     /// Use simpler, faster physics calculations:
     ///  - Perform only one lateral collision test during motion
     ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_NO_Y_MOVEMENT is set when an NPC falls out-of-bounds)
-    NPC_FLAG_PARTICLE          = 0x04000000,
-    NPC_FLAG_8000000           = 0x08000000,
-    NPC_FLAG_10000000          = 0x10000000,
-    NPC_FLAG_NO_ANIMS_LOADED   = 0x40000000, ///< Npc has no animations loaded
-    NPC_FLAG_80000000          = 0x80000000,
+    NPC_FLAG_PARTICLE                = 0x04000000,
+    NPC_FLAG_8000000                 = 0x08000000,
+    NPC_FLAG_10000000                = 0x10000000,
+    NPC_FLAG_20000000                = 0x20000000,
+    NPC_FLAG_NO_ANIMS_LOADED         = 0x40000000, ///< Npc has no animations loaded
+    NPC_FLAG_80000000                = 0x80000000,
 };
 
 enum PlayerStatusFlags {
