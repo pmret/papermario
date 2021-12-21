@@ -133,7 +133,7 @@ s32 calc_item_damage_enemy(void) {
         targetActorDefense += targetActor->defenseBoost;
     }
     attackDamage = battleStatus->currentAttackDamage;
-    if (attackDamage >= 100) {
+    if (attackDamage > 99) {
         attackDamage = 99;
     }
     if (attackDamage <= 0) {
@@ -158,7 +158,7 @@ s32 calc_item_damage_enemy(void) {
         battleStatus->lastAttackDamage = 0;
         dispatchEvent = EVENT_HIT_COMBO;
         phi_fp = 0;
-        if (((targetActorPart->flags & ACTOR_PART_FLAG_2000) == 0) && sp18 == 0 && ((targetActorPart->targetFlags & ACTOR_PART_FLAG_4) == 0)) {
+        if (!(targetActorPart->flags & ACTOR_PART_FLAG_2000) && sp18 == 0 && !(targetActorPart->targetFlags & ACTOR_PART_FLAG_4)) {
             targetActor->currentHP -= attackDamage;
             if (targetActor->currentHP <= 0) {
                 targetActor->currentHP = 0;
