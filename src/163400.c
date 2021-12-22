@@ -106,7 +106,6 @@ void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
         D_80249B94 = posX;
         D_80249BA4 = posY;
         D_80249B98 = posY;
-
     } else if (!(window->flags & 0x8) && (window->parent == -1 || !(gWindows[window->parent].flags & 8))) {
         D_80249BA0 = posX;
         D_80249BA4 = posY;
