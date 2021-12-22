@@ -29,7 +29,7 @@ ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall) {
 ApiStatus LoadAnimatedModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = evt_get_variable(script, *args++);
-    s32 var1 = evt_get_variable(script, *args++);
+    StaticAnimatorNode** var1 = (StaticAnimatorNode**) evt_get_variable(script, *args++);
     AnimatedModel* animModel = (*gCurrentMeshAnimationListPtr)[index];
     s32 animModelID = create_model_animator(0);
 
