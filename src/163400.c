@@ -81,7 +81,37 @@ void filemenu_set_cursor_alpha(s32 arg0) {
     filemenu_cursorGoalAlpha2 = arg0;
 }
 
-INCLUDE_ASM(s32, "163400", filemenu_set_cursor_goal_pos);
+void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
+    Window* window = &gWindows[windowID];
+
+    if (D_80249BB0 != 0
+            || get_game_mode() == GAME_MODE_EXIT_FILE_SELECT
+            || get_game_mode() == GAME_MODE_EXIT_LANGUAGE_SELECT) {
+        if (D_80249BB0 != 0) {
+            s32 i;
+
+            for (i = 0x2C; i < 0x40; i++) {
+                Window* window = &gWindows[i];
+                s8 parent = window->parent;
+
+                if ((parent == -1 || parent == 0x2C) && (window->flags & 8)) {
+                    break;
+                }
+            }
+            if (i >= 0x40) {
+                D_80249BB0 = 0;
+            }
+        }
+        D_80249BA0 = posX;
+        D_80249B94 = posX;
+        D_80249BA4 = posY;
+        D_80249B98 = posY;
+
+    } else if (!(window->flags & 0x8) && (window->parent == -1 || !(gWindows[window->parent].flags & 8))) {
+        D_80249BA0 = posX;
+        D_80249BA4 = posY;
+    }
+}
 
 INCLUDE_ASM(s32, "163400", filemenu_update_cursor);
 
