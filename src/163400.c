@@ -84,10 +84,10 @@ void filemenu_set_cursor_alpha(s32 arg0) {
 void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
     Window* window = &gWindows[windowID];
 
-    if (D_80249BB0 != 0
+    if (D_80249BB0[0] != 0
             || get_game_mode() == 0xF
             || get_game_mode() == 0xD) {
-        if (D_80249BB0 != 0) {
+        if (D_80249BB0[0] != 0) {
             s32 i;
 
             for (i = 0x2C; i < 0x40; i++) {
@@ -99,7 +99,7 @@ void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
                 }
             }
             if (i >= 0x40) {
-                D_80249BB0 = 0;
+                D_80249BB0[0] = 0;
             }
         }
         D_80249BA0 = posX;
