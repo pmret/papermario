@@ -85,8 +85,8 @@ void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
     Window* window = &gWindows[windowID];
 
     if (D_80249BB0 != 0
-            || get_game_mode() == GAME_MODE_EXIT_FILE_SELECT
-            || get_game_mode() == GAME_MODE_EXIT_LANGUAGE_SELECT) {
+            || get_game_mode() == 0xF
+            || get_game_mode() == 0xD) {
         if (D_80249BB0 != 0) {
             s32 i;
 
