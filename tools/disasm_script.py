@@ -212,14 +212,6 @@ def fix_args(self, func, args, info):
                 continue
             argNum = int(arg, 0)
 
-#valid_enums = {"StoryProgress", "ItemIDs", "PlayerAnims",
-#               "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
-#               "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags", "Statuses", "Elements",
-#               "DamageTypes", "HitResults", "ActorFlags", "ActorPartFlags",
-#               "ActorEventFlags", "ElementFlags", "EncounterTriggers", "Abilities",
-#               "Easings", "DecorationIDs", "HitResults", "Phases", "ItemSpawnModes",
-#               "ActionStates", "Triggers", "Buttons", "ActionCommand", "MoveIDs"}
-
             if info[i] == "Bool":
                 new_args.append(f"{'TRUE' if argNum == True else 'FALSE'}")
             elif info[i] == "Hex" and argNum > 0:
@@ -658,10 +650,6 @@ class ScriptDisassembler:
             self.indent -= 1
             self.write_line(f"EVT_END_IF")
         elif opcode == 0x14:
-            if self.var(argv[0]) == "EVT_SAVE_VAR(0)":
-                story_switch = True
-            else:
-                story_switch = False
             self.write_line(f"EVT_SWITCH({self.var(argv[0])})")
             self.indent += 2
         elif opcode == 0x15:
@@ -766,12 +754,9 @@ class ScriptDisassembler:
         elif opcode == 0x43:
             func = self.addr_ref(argv[0])
             args = [self.var(a, use_evt_ptr=True) for a in argv[1:]]
-            #print(argv)
-            args_str = ', '.join(args)
-            #print(args_str)
 
+            args_str = ', '.join(args)
             args_str = replace_constants(self, func, args_str)
-            #print(args_str)
 
             if func.startswith("evt_"):
                 # use func-specific macro
