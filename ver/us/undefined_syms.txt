@@ -67,6 +67,10 @@ D_7012BC11 = 0x7012BC11;
 D_80026AC7 = 0x80026AC7;
 D_8004AA85 = 0x8004AA85;
 
+// RSP Microcodes
+rspbootTextStart = 0xB0000B70;
+rspbootTextEnd = 0xB0000C70;
+
 gBackgroundImage = 0x80200000;
 func_80242040_8B20B0 = 0x80242040;
 spiked_goomba = 0x8021B0AC;

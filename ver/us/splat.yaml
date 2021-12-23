@@ -36,7 +36,7 @@ segments:
     vram: 0xA4000040
     subsegments:
     - [0x0040, asm, boot]
-    - [0x0B70, bin, bootcode_font]
+    - [0x0B70, bin, rspboot_font]
   - type: code
     start: 0x1000
     vram: 0x80025C00
