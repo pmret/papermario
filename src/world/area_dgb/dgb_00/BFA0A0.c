@@ -21,19 +21,19 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_00_tattle },
 };
 
-EvtSource N(80240110) = SCRIPT({
-    match EVT_STORY_PROGRESS {
-        < STORY_CH3_TUBBA_WOKE_UP {
-            SetMusicTrack(0, SONG_GUSTY_GULCH, 0, 8);
-        }
-        < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
-            SetMusicTrack(0, SONG_TUBBA_ESCAPE, 0, 8);
-        } else {
-            SetMusicTrack(0, SONG_GUSTY_GULCH, 0, 8);
-        }
-    }
-    ClearAmbientSounds(250);
-});
+EvtSource N(80240110) = {
+    EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_CASE_LT(-29)
+            EVT_CALL(SetMusicTrack, 0, SONG_GUSTY_GULCH, 0, 8)
+        EVT_CASE_LT(-16)
+            EVT_CALL(SetMusicTrack, 0, SONG_TUBBA_ESCAPE, 0, 8)
+        EVT_CASE_DEFAULT
+            EVT_CALL(SetMusicTrack, 0, SONG_GUSTY_GULCH, 0, 8)
+    EVT_END_SWITCH
+    EVT_CALL(ClearAmbientSounds, 250)
+    EVT_RETURN
+    EVT_END
+};
 
 static s32 N(pad_1B8)[] = {
     0x00000000, 0x00000000,
@@ -41,89 +41,92 @@ static s32 N(pad_1B8)[] = {
 
 EvtSource N(exitWalk_802401C0) = EXIT_WALK_SCRIPT(60,  0, "arn_04",  1);
 
-EvtSource N(exitDoubleDoor_8024021C) = SCRIPT({
-    group 27;
-    DisablePlayerInput(TRUE);
-    UseDoorSounds(3);
-    EVT_VAR(0) = 1;
-    EVT_VAR(1) = 18;
-    EVT_VAR(2) = 5;
-    EVT_VAR(3) = 7;
-    spawn ExitDoubleDoor;
-    sleep 17;
-    GotoMap("dgb_01", 0);
-    sleep 100;
-});
+EvtSource N(exitDoubleDoor_8024021C) = {
+    EVT_SET_GROUP(27)
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_CALL(UseDoorSounds, 3)
+    EVT_SET(EVT_VAR(0), 1)
+    EVT_SET(EVT_VAR(1), 18)
+    EVT_SET(EVT_VAR(2), 5)
+    EVT_SET(EVT_VAR(3), 7)
+    EVT_EXEC(ExitDoubleDoor)
+    EVT_WAIT_FRAMES(17)
+    EVT_CALL(GotoMap, "dgb_01", 0)
+    EVT_WAIT_FRAMES(100)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(802402D0) = SCRIPT({
-    bind N(exitWalk_802401C0) TRIGGER_FLOOR_ABOVE 15;
-    match EVT_STORY_PROGRESS {
-        < STORY_CH3_TUBBA_SMASHED_THE_BRIDGES {
-            bind N(exitDoubleDoor_8024021C) TRIGGER_WALL_PRESS_A 18;
-        }
-        < STORY_CH3_ESCAPED_TUBBAS_MANOR {}
-        < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
-            spawn N(80240F50);
-            await N(80241AA0);
-        } else {
-            bind N(exitDoubleDoor_8024021C) TRIGGER_WALL_PRESS_A 18;
-        }
-    }
-});
+EvtSource N(802402D0) = {
+    EVT_BIND_TRIGGER(N(exitWalk_802401C0), TRIGGER_FLOOR_ABOVE, 15, 1, 0)
+    EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_CASE_LT(-28)
+            EVT_BIND_TRIGGER(N(exitDoubleDoor_8024021C), TRIGGER_WALL_PRESS_A, 18, 1, 0)
+        EVT_CASE_LT(-25)
+        EVT_CASE_LT(-16)
+            EVT_EXEC(N(80240F50))
+            EVT_EXEC_WAIT(N(80241AA0))
+        EVT_CASE_DEFAULT
+            EVT_BIND_TRIGGER(N(exitDoubleDoor_8024021C), TRIGGER_WALL_PRESS_A, 18, 1, 0)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(enterDoubleDoor_8024038C) = SCRIPT({
-    GetLoadType(EVT_VAR(1));
-    if (EVT_VAR(1) == 1) {
-        spawn EnterSavePoint;
-        spawn N(802402D0);
-        return;
-    }
-    GetEntryID(EVT_VAR(0));
-    match EVT_VAR(0) {
-        == 0 {
-            EVT_VAR(0) = N(802402D0);
-            spawn EnterWalk;
-            sleep 1;
-        }
-        == 1 {
-            if (EVT_STORY_PROGRESS >= STORY_CH3_TUBBA_SMASHED_THE_BRIDGES) {
-                if (EVT_STORY_PROGRESS < STORY_CH3_ESCAPED_TUBBAS_MANOR) {
-                    spawn N(802402D0);
-                    spawn {
-                        await N(8024103C);
-                        await N(802413F4);
-                    }
-                    return;
-                }
-            }
-            UseDoorSounds(3);
-            EVT_VAR(2) = 5;
-            EVT_VAR(3) = 7;
-            await EnterDoubleDoor;
-            spawn N(802402D0);
-        }
-        == 2 {
-            spawn N(802402D0);
-            spawn N(80242B84);
-        }
-    }
-});
+EvtSource N(enterDoubleDoor_8024038C) = {
+    EVT_CALL(GetLoadType, EVT_VAR(1))
+    EVT_IF_EQ(EVT_VAR(1), 1)
+        EVT_EXEC(EnterSavePoint)
+        EVT_EXEC(N(802402D0))
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(GetEntryID, EVT_VAR(0))
+    EVT_SWITCH(EVT_VAR(0))
+        EVT_CASE_EQ(0)
+            EVT_SET(EVT_VAR(0), EVT_PTR(N(802402D0)))
+            EVT_EXEC(EnterWalk)
+            EVT_WAIT_FRAMES(1)
+        EVT_CASE_EQ(1)
+            EVT_IF_GE(EVT_SAVE_VAR(0), -28)
+                EVT_IF_LT(EVT_SAVE_VAR(0), -25)
+                    EVT_EXEC(N(802402D0))
+                    EVT_THREAD
+                        EVT_EXEC_WAIT(N(8024103C))
+                        EVT_EXEC_WAIT(N(802413F4))
+                    EVT_END_THREAD
+                    EVT_RETURN
+                EVT_END_IF
+            EVT_END_IF
+            EVT_CALL(UseDoorSounds, 3)
+            EVT_SET(EVT_VAR(2), 5)
+            EVT_SET(EVT_VAR(3), 7)
+            EVT_EXEC_WAIT(EnterDoubleDoor)
+            EVT_EXEC(N(802402D0))
+        EVT_CASE_EQ(2)
+            EVT_EXEC(N(802402D0))
+            EVT_EXEC(N(80242B84))
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(main) = SCRIPT({
-    EVT_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
-    EVT_SAVE_FLAG(1978) = 1;
-    SetSpriteShading(-1);
-    SetCamPerspective(0, 3, 25, 16, 4096);
-    SetCamBGColor(0, 0, 0, 0);
-    SetCamLeadPlayer(0, 0);
-    SetCamEnabled(0, 1);
-    GetEntryID(EVT_VAR(0));
-    if (EVT_VAR(0) == 2) {
-        MakeNpcs(0, N(npcGroupList_80243740));
-    } else {
-        MakeNpcs(0, N(npcGroupList_802436EC));
-    }
-    await N(makeEntities);
-    spawn N(80240110);
-    spawn N(enterDoubleDoor_8024038C);
-});
+EvtSource N(main) = {
+    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_SET(EVT_SAVE_FLAG(1978), 1)
+    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
+    EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
+    EVT_CALL(SetCamLeadPlayer, 0, 0)
+    EVT_CALL(SetCamEnabled, 0, 1)
+    EVT_CALL(GetEntryID, EVT_VAR(0))
+    EVT_IF_EQ(EVT_VAR(0), 2)
+        EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80243740)))
+    EVT_ELSE
+        EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802436EC)))
+    EVT_END_IF
+    EVT_EXEC_WAIT(N(makeEntities))
+    EVT_EXEC(N(80240110))
+    EVT_EXEC(N(enterDoubleDoor_8024038C))
+    EVT_RETURN
+    EVT_END
+};
