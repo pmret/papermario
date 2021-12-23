@@ -4,6 +4,6 @@
 #include "common.h"
 #include "script_api/map.h"
 
-// TODO
+void world_kooper_init(Npc*);
 
 #endif
