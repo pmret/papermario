@@ -76,10 +76,10 @@ glabel create_audio_system
 /* 26018 8004AC18 3C08800E */  lui       $t0, %hi(rspbootUcodeBuffer)
 /* 2601C 8004AC1C 25089780 */  addiu     $t0, $t0, %lo(rspbootUcodeBuffer)
 /* 26020 8004AC20 24070100 */  addiu     $a3, $zero, 0x100
-/* 26024 8004AC24 3C068007 */  lui       $a2, %hi(D_800731A0)
-/* 26028 8004AC28 24C631A0 */  addiu     $a2, $a2, %lo(D_800731A0)
-/* 2602C 8004AC2C 3C058009 */  lui       $a1, %hi(D_80097A80)
-/* 26030 8004AC30 24A57A80 */  addiu     $a1, $a1, %lo(D_80097A80)
+/* 26024 8004AC24 3C068007 */  lui       $a2, %hi(n_aspMainTextStart)
+/* 26028 8004AC28 24C631A0 */  addiu     $a2, $a2, %lo(n_aspMainTextStart)
+/* 2602C 8004AC2C 3C058009 */  lui       $a1, %hi(n_aspMainDataStart)
+/* 26030 8004AC30 24A57A80 */  addiu     $a1, $a1, %lo(n_aspMainDataStart)
 /* 26034 8004AC34 24040800 */  addiu     $a0, $zero, 0x800
 /* 26038 8004AC38 3C03800A */  lui       $v1, %hi(D_800A3520)
 /* 2603C 8004AC3C 24633520 */  addiu     $v1, $v1, %lo(D_800A3520)
