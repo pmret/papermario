@@ -751,9 +751,12 @@ class ScriptDisassembler:
         elif opcode == 0x43:
             func = self.addr_ref(argv[0])
             args = [self.var(a, use_evt_ptr=True) for a in argv[1:]]
+            #print(args)
             args_str = ', '.join(args)
+            #print(args_str)
 
             args_str = replace_constants(self, func, args_str)
+            #print(args_str)
 
             if func.startswith("evt_"):
                 # use func-specific macro
