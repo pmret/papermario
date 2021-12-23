@@ -3,6 +3,7 @@
 import sym_info
 from pathlib import Path
 
+
 _script_lib = None
 def script_lib(offset):
     global _script_lib
@@ -67,12 +68,14 @@ def script_lib(offset):
             _script_lib[k] = sorted(_script_lib[k], key=lambda x: x[0])
     return _script_lib
 
+
 def round_fixed(f: float) -> float:
     g = f * 100.0
     whole = round(g)
     if abs(g - whole) <= 100.0/1024.0:
         f = whole / 100.0
     return f
+
 
 # Grab CONSTANTS from the include/ folder to save manual work
 CONSTANTS = {}
@@ -164,6 +167,7 @@ def get_constants():
 
     return
 
+
 def make_anim_macro(self, sprite, palette, anim):
     if sprite == 0xFF and palette == 0xFF and anim == 0xFF:
         return "-1"
@@ -176,11 +180,13 @@ def make_anim_macro(self, sprite, palette, anim):
     else:
         return f"0x{sprite:02X}{palette:02X}{anim:02X}"
 
+
 def remove_evt_ptr(s):
     if s.startswith("EVT_PTR("):
         return s[8:-1]
     else:
         return s
+
 
 def fix_args(self, func, args, info):
     global CONSTANTS
@@ -283,6 +289,7 @@ def fix_args(self, func, args, info):
         else:
             new_args.append(f"{arg}")
     return ", ".join(new_args)
+
 
 replace_funcs = {
     "AddActorDecoration"        :{0:"ActorIDs"},
@@ -402,6 +409,7 @@ replace_funcs = {
     "SetPartDispOffset"         :{0:"ActorIDs"},
 }
 
+
 def replace_constants(self, func, args):
     global replace_funcs
 
@@ -413,6 +421,7 @@ def replace_constants(self, func, args):
             argsZ[0] = f"0x{int(argsZ[0], 10):X}"
         args = ", ".join(argsZ)
     return args
+
 
 class ScriptDisassembler:
     def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {"forward": [], "sprites": set(), "npcs": []}, INCLUDED = {"functions": set(), "includes": set()}, prelude = True):
@@ -580,7 +589,7 @@ class ScriptDisassembler:
             self.indent -= 1
 
             if self.prelude:
-                self.prefix_line(f"EvtSource {self.script_name} = {{")
+                self.prefix_line(f"EvtSource {self.script_name}= {{")
                 self.write_line("};")
 
             self.done = True
@@ -791,438 +800,9 @@ class ScriptDisassembler:
         else:
             return self.var(arg)
 
+
 class UnsupportedScript(Exception):
     pass
-
-class ScriptDSLDisassembler(ScriptDisassembler):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        # True: case block
-        # CASE: single condition
-        # MULTI: multi-condition(s)
-        # MATCH: match block
-        self.case_stack = []
-        # stores the variable type the case is switching on
-        self.case_variable = ""
-        self.save_variable = ""
-        self.was_multi_case = False
-
-    @property
-    def in_case(self):
-        return self.case_stack[-1] if self.case_stack else False
-
-    def var(self, arg):
-        if arg in self.symbol_map and arg >= 0x80000000:
-            return self.symbol_map[arg][0][1]
-        elif type(arg) is str:
-            return arg
-
-        v = arg - 2**32 # convert to s32
-        if v > -250000000:
-            if v <= -220000000: return str(round_fixed((v + 230000000) / 1024))
-            elif v <= -200000000: return f"EVT_ARRAY_FLAG({v + 210000000})"
-            elif v <= -180000000: return f"EVT_ARRAY({v + 190000000})"
-            elif v <= -160000000:
-                if v + 170000000 == 0:
-                    self.save_variable = "EVT_STORY_PROGRESS"
-                elif v + 170000000 == 425:
-                    self.save_variable = "EVT_WORLD_LOCATION"
-                else:
-                    self.save_variable = f"EVT_SAVE_VAR({v + 170000000})"
-                return self.save_variable
-            elif v <= -140000000: return f"EVT_AREA_VAR({v + 150000000})"
-            elif v <= -120000000: return f"EVT_SAVE_FLAG({v + 130000000})"
-            elif v <= -100000000: return f"EVT_AREA_FLAG({v + 110000000})"
-            elif v <= -80000000: return f"EVT_MAP_FLAG({v + 90000000})"
-            elif v <= -60000000: return f"EVT_FLAG({v + 70000000})"
-            elif v <= -40000000: return f"EVT_MAP_VAR({v + 50000000})"
-            elif v <= -20000000: return f"EVT_VAR({v + 30000000})"
-
-        if arg == 0xFFFFFFFF:
-            return "-1"
-        elif (arg & 0xFF000000) == 0x80000000:
-            return f"0x{arg:X}"
-        elif arg >= 0x80000000:
-            return f"{arg - 0x100000000}"
-        else:
-            return f"{arg}"
-
-    # TODO: use map's collider names when split
-    def collider_id(self, arg):
-        if arg >= 0x4000 and arg <= 0x5000:
-            return f"entity({arg - 0x4000})"
-        else:
-            return arg
-
-    def is_float(self, var):
-        try:
-            float(var)
-            return True
-        except Exception:
-            return False
-
-    def replace_enum(self, var, case=False):
-        varO = self.var(var)
-
-        if case:
-            self.save_variable = ""
-
-        try:
-            var = int(varO, 0)
-        except Exception:
-            return varO
-
-        if var > 0x10000000:
-            var -= 0x100000000
-
-        # put cases for replacing vars here
-        if case and "handleEvent" in self.script_name and var in CONSTANTS["Events"]:
-            return CONSTANTS["Events"][var]
-        elif case and "takeTurn" in self.script_name and var in CONSTANTS["HitResults"]:
-            return CONSTANTS["HitResults"][var]
-        elif ((    case and self.case_variable == "EVT_STORY_PROGRESS") or
-            (not case and self.save_variable == "EVT_STORY_PROGRESS")):
-            if var in CONSTANTS["StoryProgress"]:
-                return CONSTANTS["StoryProgress"][var]
-        elif ((    case and self.case_variable == "EVT_WORLD_LOCATION") or
-              (not case and self.save_variable == "EVT_WORLD_LOCATION")):
-            if var in CONSTANTS["Locations"]:
-                return CONSTANTS["Locations"][var]
-
-        return varO
-
-    def disassemble_command(self, opcode, argc, argv):
-        # hacky hacky
-        if opcode == 0x43 and len(argv) > 1 and argv[-1] == 0x80000000:
-            argv[-1] = "MAKE_ENTITY_END"
-
-        # write case block braces
-        if self.in_case == "CASE" or self.in_case == "MULTI":
-            if opcode == 0x1D: # multi case
-                pass
-            elif 0x16 <= opcode <= 0x21: # standard case conditions
-                # open and close empty case
-                self.out += " {}\n"
-
-                self.case_stack.pop()
-                assert self.in_case == "MATCH"
-
-                self.was_multi_case = False
-            else:
-                # open case
-                self.out += " {\n"
-
-                self.case_stack.append(True)
-
-                self.indent += 1
-        elif self.in_case != "MATCH" and 0x16 <= opcode <= 0x21: # new case, not including the first
-            assert self.case_stack.pop() == True
-            self.was_multi_case = self.case_stack.pop() == "MULTI"
-            assert self.in_case == "MATCH"
-
-            self.indent -= 1
-            self.write_line("}")
-
-        #print(f"Op 0x{opcode:2X} saved_var \"{self.save_variable}\" case_var \"{self.case_variable}\"")
-        # case variables need to be saved ahead of time, since they span many instructions
-        if ((self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "EVT_STORY_PROGRESS") or
-            (self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "EVT_WORLD_LOCATION")):
-            argv[0] = self.replace_enum(argv[0], case=True)
-
-        if opcode == 0x01:
-            if self.out.endswith("return;\n"):
-                # implicit return; break
-                self.out = self.out[:-8].rstrip() + "\n"
-            else:
-                self.write_line("break;")
-
-            self.indent -= 1
-
-            self.INCLUDED["functions"].add(self.script_name)
-
-            self.prefix_line(f"EvtSource {self.script_name} = SCRIPT({{")
-            self.write_line("});")
-
-            self.done = True
-        elif opcode == 0x02: self.write_line(f"return;")
-        elif opcode == 0x03:
-            self.indent -= 1
-            self.write_line(f"{self.var(argv[0])}:")
-            self.indent += 1
-        elif opcode == 0x04: self.write_line(f"goto {self.var(argv[0])};")
-        elif opcode == 0x05:
-            if argv[0] == 0:
-                self.write_line("loop {")
-            else:
-                self.write_line(f"loop {self.var(argv[0])} {{")
-            self.indent += 1
-        elif opcode == 0x06:
-            self.indent -= 1
-            self.write_line("}")
-        elif opcode == 0x07: self.write_line(f"break loop;")
-        elif opcode == 0x08: self.write_line(f"sleep {self.var(argv[0])};")
-        elif opcode == 0x09: self.write_line(f"sleep {self.var(argv[0])} secs;")
-        elif opcode == 0x0A:
-            varA = self.replace_enum(argv[0])
-            varB = self.replace_enum(argv[1])
-            if varB in SAVE_VARS:
-                varA = self.replace_enum(argv[0])
-            self.write_line(f"if ({varA} == {varB}) {{")
-            self.indent += 1
-        elif opcode == 0x0B:
-            varA = self.replace_enum(argv[0])
-            varB = self.replace_enum(argv[1])
-            if varB in SAVE_VARS:
-                varA = self.replace_enum(argv[0])
-            self.write_line(f"if ({varA} != {varB}) {{")
-            self.indent += 1
-        elif opcode == 0x0C:
-            varA = self.replace_enum(argv[0])
-            varB = self.replace_enum(argv[1])
-            if varB in SAVE_VARS:
-                varA = self.replace_enum(argv[0])
-            self.write_line(f"if ({varA} < {varB}) {{")
-            self.indent += 1
-        elif opcode == 0x0D:
-            varA = self.replace_enum(argv[0])
-            varB = self.replace_enum(argv[1])
-            if varB in SAVE_VARS:
-                varA = self.replace_enum(argv[0])
-            self.write_line(f"if ({varA} > {varB}) {{")
-            self.indent += 1
-        elif opcode == 0x0E:
-            varA = self.replace_enum(argv[0])
-            varB = self.replace_enum(argv[1])
-            if varB in SAVE_VARS:
-                varA = self.replace_enum(argv[0])
-            self.write_line(f"if ({varA} <= {varB}) {{")
-            self.indent += 1
-        elif opcode == 0x0F:
-            varA = self.replace_enum(argv[0])
-            varB = self.replace_enum(argv[1])
-            if varB in SAVE_VARS:
-                varA = self.replace_enum(argv[0])
-            self.write_line(f"if ({varA} >= {varB}) {{")
-            self.indent += 1
-        elif opcode == 0x10:
-            self.write_line(f"if ({self.var(argv[0])} & {self.var(argv[1])}) {{")
-            self.indent += 1
-        elif opcode == 0x11:
-            self.write_line(f"if ({self.var(argv[0])} !& {self.var(argv[1])}) {{")
-            self.indent += 1
-        elif opcode == 0x12:
-            self.indent -= 1
-            self.write_line("} else {")
-            self.indent += 1
-        elif opcode == 0x13:
-            self.indent -= 1
-            self.write_line("}")
-        elif opcode == 0x14:
-            self.write_line(f"match {self.var(argv[0])} {{")
-            self.indent += 1
-            self.case_variable = self.var(argv[0])
-            self.case_stack.append("MATCH")
-        elif opcode == 0x15:
-            self.write_line(f"matchc {self.var(argv[0])} {{")
-            self.indent += 1
-            self.case_variable = self.var(argv[0])
-            self.case_stack.append("MATCH")
-        elif opcode == 0x16:
-            self.case_stack.append("CASE")
-            self.write(f"== {self.replace_enum(argv[0], True)}")
-        elif opcode == 0x17:
-            self.case_stack.append("CASE")
-            self.write(f"!= {self.replace_enum(argv[0], True)}")
-        elif opcode == 0x18:
-            self.case_stack.append("CASE")
-            self.write(f"< {self.replace_enum(argv[0], True)}")
-        elif opcode == 0x19:
-            self.case_stack.append("CASE")
-            self.write(f"> {self.replace_enum(argv[0], True)}")
-        elif opcode == 0x1A:
-            self.case_stack.append("CASE")
-            self.write(f"<= {self.replace_enum(argv[0], True)}")
-        elif opcode == 0x1B:
-            self.case_stack.append("CASE")
-            self.write(f">= {self.replace_enum(argv[0], True)}")
-        elif opcode == 0x1C:
-            self.case_stack.append("CASE")
-            self.write(f"else")
-        elif opcode == 0x1D:
-            if self.in_case == "CASE" or self.in_case == "MULTI":
-                self.out += f", {self.replace_enum(argv[0], True)}"
-
-                # replace(!) CASE with MULTI
-                self.case_stack.pop()
-                self.case_stack.append("MULTI")
-            else:
-                self.write(f"{self.replace_enum(argv[0], True)}")
-                self.case_stack.append("MULTI")
-        # opcode 0x1E?
-        elif opcode == 0x1F:
-            self.case_stack.append("CASE")
-            self.write_line(f"? {self.replace_enum(argv[0], True)}")
-        elif opcode == 0x20:
-            #if not self.was_multi_case:
-            #    raise UnsupportedScript("unexpected END_MULTI_CASE")
-            pass
-        elif opcode == 0x21:
-            self.case_stack.append("CASE")
-            self.write(f"{self.replace_enum(argv[0], True)} ... {self.replace_enum(argv[1], True)}")
-        elif opcode == 0x22: self.write_line("break match;")
-        elif opcode == 0x23:
-            # close open case if needed
-            if self.in_case != "MATCH":
-                self.case_stack.pop() == True
-                self.case_stack.pop() in ["MULTI", "CASE"]
-
-                self.indent -= 1
-                self.write_line("}")
-
-            assert self.case_stack.pop() == "MATCH"
-
-            self.indent -= 1
-            self.case_variable = ""
-            self.write_line("}")
-        elif opcode == 0x24:
-            varA = self.replace_enum(argv[0])
-            varB = self.replace_enum(argv[1])
-            if varB.startswith("script_"):
-                varB = "N(" + varB + ")"
-            self.write_line(f"{varA} = {varB};")
-        elif opcode == 0x25:
-            varA = self.replace_enum(argv[0])
-            argNum = argv[1]
-
-            sprite  = (argNum & 0xFF0000) >> 16
-            palette = (argNum & 0xFF00)   >> 8
-            anim    = (argNum & 0xFF)     >> 0
-
-            call = make_anim_macro(self, sprite, palette, anim)
-
-            if "0x" in call:
-                call = self.var(argNum)
-
-            self.write_line(f"{varA} = (const) {call};")
-        elif opcode == 0x26:
-            lhs = self.var(argv[1])
-            if self.is_float(lhs):
-                self.write_line(f"{self.var(argv[0])} = {lhs};")
-            else:
-                self.write_line(f"{self.var(argv[0])} = (float) {lhs};")
-        elif opcode == 0x27: self.write_line(f"{self.var(argv[0])} += {self.var(argv[1])};")
-        elif opcode == 0x28: self.write_line(f"{self.var(argv[0])} -= {self.var(argv[1])};")
-        elif opcode == 0x29: self.write_line(f"{self.var(argv[0])} *= {self.var(argv[1])};")
-        elif opcode == 0x2A: self.write_line(f"{self.var(argv[0])} /= {self.var(argv[1])};")
-        elif opcode == 0x2B: self.write_line(f"{self.var(argv[0])} %= {self.var(argv[1])};")
-        elif opcode == 0x2C:
-            lhs = self.var(argv[1])
-            if self.is_float(lhs):
-                self.write_line(f"{self.var(argv[0])} += {lhs};")
-            else:
-                self.write_line(f"{self.var(argv[0])} += (float) {lhs};")
-        elif opcode == 0x2D:
-            lhs = self.var(argv[1])
-            if self.is_float(lhs):
-                self.write_line(f"{self.var(argv[0])} -= {lhs};")
-            else:
-                self.write_line(f"{self.var(argv[0])} -= (float) {lhs};")
-        elif opcode == 0x2E:
-            lhs = self.var(argv[1])
-            if self.is_float(lhs):
-                self.write_line(f"{self.var(argv[0])} *= {lhs};")
-            else:
-                self.write_line(f"{self.var(argv[0])} *= (float) {lhs};")
-        elif opcode == 0x2F:
-            lhs = self.var(argv[1])
-            if self.is_float(lhs):
-                self.write_line(f"{self.var(argv[0])} /= {lhs};")
-            else:
-                self.write_line(f"{self.var(argv[0])} /= (float) {lhs};")
-        elif opcode == 0x30: self.write_line(f"buf_use {self.addr_ref(argv[0])};")
-        elif opcode == 0x31: self.write_line(f"buf_read {self.var(argv[0])};")
-        elif opcode == 0x32: self.write_line(f"buf_read {self.var(argv[0])} {self.var(argv[1])};")
-        elif opcode == 0x33: self.write_line(f"buf_read {self.var(argv[0])} {self.var(argv[1])} {self.var(argv[2])};")
-        elif opcode == 0x34: self.write_line(f"buf_read {self.var(argv[0])} {self.var(argv[1])} {self.var(argv[2])} {self.var(argv[3])};")
-        elif opcode == 0x35: self.write_line(f"buf_peek {self.var(argv[0])} {self.var(argv[1])};")
-        elif opcode == 0x36: self.write_line(f"buf_usef {self.var(argv[0])};")
-        elif opcode == 0x37: self.write_line(f"buf_readf {self.var(argv[0])};")
-        elif opcode == 0x38: self.write_line(f"buf_readf {self.var(argv[0])} {self.var(argv[1])};")
-        elif opcode == 0x39: self.write_line(f"buf_readf {self.var(argv[0])} {self.var(argv[1])} {self.var(argv[2])};")
-        elif opcode == 0x3A: self.write_line(f"buf_readf {self.var(argv[0])} {self.var(argv[1])} {self.var(argv[2])} {self.var(argv[3])};")
-        elif opcode == 0x3B: self.write_line(f"buf_peekf {self.var(argv[0])} {self.var(argv[1])};")
-        elif opcode == 0x3C: self.write_line(f"arr_use {self.addr_ref(argv[0])};")
-        elif opcode == 0x3D: self.write_line(f"flags_use {self.addr_ref(argv[0])};")
-        elif opcode == 0x3E: self.write_line(f"arr_new {self.var(argv[0])} {self.addr_ref(argv[1])};")
-        elif opcode == 0x3F: self.write_line(f"{self.var(argv[0])} &= {self.var(argv[1])};")
-        elif opcode == 0x40: self.write_line(f"{self.var(argv[0])} |= {self.var(argv[1])};")
-        elif opcode == 0x41: self.write_line(f"{self.var(argv[0])} &= (const) 0x{argv[1]:X};")
-        elif opcode == 0x42: self.write_line(f"{self.var(argv[0])} |= (const) 0x{argv[1]:X};")
-        elif opcode == 0x43:
-            addr = argv[0]
-            if addr in self.symbol_map:
-                func_name = self.addr_ref(addr)
-                for i,arg in enumerate(argv):
-                    argv[i] = self.replace_star_rod_prefix(arg, isArg=True)
-                argv_str = ", ".join(self.var(arg) for arg in argv[1:])
-                argv_str = replace_constants(self, func_name, argv_str)
-
-                self.write_line(f"{func_name}({argv_str});")
-            else:
-                print(f"script API function {addr:X} is not present in symbol_addrs.txt, please add it")
-                exit(1)
-        elif opcode == 0x44:
-            name = self.addr_ref(argv[0])
-            if name.startswith("N("):
-                self.INCLUDED["functions"].add(name)
-            self.write_line(f"spawn {name};")
-        elif opcode == 0x45: self.write_line(f"{self.var(argv[1])} = spawn {self.addr_ref(argv[0])};")
-        elif opcode == 0x46:
-            name = self.addr_ref(argv[0])
-            if name.startswith("N("):
-                self.INCLUDED["functions"].add(name)
-            self.write_line(f"await {name};")
-        elif opcode == 0x47:
-            assert argv[3] == 1
-            if argv[4] != 0:
-                self.write_line(f"{self.var(argv[4])} = bind {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.collider_id(argv[2])};")
-            else:
-                self.write_line(f"bind {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.collider_id(argv[2])};")
-        elif opcode == 0x48: self.write_line(f"unbind;")
-        elif opcode == 0x49: self.write_line(f"kill {self.var(argv[0])};")
-        elif opcode == 0x4A: self.write_line(f"jump {self.var(argv[0])};")
-        elif opcode == 0x4B: self.write_line(f"priority ({self.var(argv[0])};")
-        elif opcode == 0x4C: self.write_line(f"timescale {self.var(argv[0])};")
-        elif opcode == 0x4D: self.write_line(f"group {self.var(argv[0])};")
-        elif opcode == 0x4E:
-            assert argv[4] == 0
-            assert argv[5] == 1
-            self.write_line(f"bind_padlock {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.collider_id(argv[2])} {self.addr_ref(argv[3])};")
-        elif opcode == 0x4F: self.write_line(f"suspend group {self.var(argv[0])};")
-        elif opcode == 0x50: self.write_line(f"resume group {self.var(argv[0])};")
-        elif opcode == 0x51: self.write_line(f"suspend others {self.var(argv[0])};")
-        elif opcode == 0x52: self.write_line(f"resume others {self.var(argv[0])};")
-        elif opcode == 0x53: self.write_line(f"suspend {self.var(argv[0])};")
-        elif opcode == 0x54: self.write_line(f"resume {self.var(argv[0])};")
-        elif opcode == 0x55: self.write_line(f"{self.var(argv[1])} = does_script_exist {self.var(argv[0])};")
-        elif opcode == 0x56:
-            self.write_line("spawn {")
-            self.indent += 1
-        elif opcode == 0x57:
-            self.indent -= 1
-            self.write_line("}")
-        elif opcode == 0x58:
-            self.write_line("parallel {")
-            self.indent += 1
-        elif opcode == 0x59:
-            self.indent -= 1
-            self.write_line("}")
-        else:
-            raise UnsupportedScript(f"DSL does not support script opcode 0x{opcode:X}")
-
-        # reset this at the end of each instruction
-        self.save_variable = ""
 
 
 if __name__ == "__main__":
@@ -1266,7 +846,7 @@ if __name__ == "__main__":
             while offset < args.end:
                 f.seek(offset)
 
-                script = ScriptDSLDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
+                script = ScriptDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
                 try:
                     script_text = script.disassemble()
 
@@ -1312,7 +892,7 @@ if __name__ == "__main__":
 
             f.seek(offset)
 
-            script = ScriptDSLDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
+            script = ScriptDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
 
             if args.si:
                 print(ScriptDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED).disassemble(), end="")
