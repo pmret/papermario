@@ -274,6 +274,16 @@ def fix_args(self, func, args, info):
                 if not enabled:
                     enabled.append(f"0")
                 new_args.append("((" + " | ".join(enabled) + "))")
+            elif info[i] == "SoundIDs":
+                if argNum in CONSTANTS["SoundIDs"]:
+                    new_args.append(CONSTANTS["SoundIDs"][argNum])
+                else:
+                    new_args.append("0x%X" % argNum)
+            elif info[i] == "StoryProgress":
+                if argNum in CONSTANTS["StoryProgress"]:
+                    new_args.append(CONSTANTS["StoryProgress"][argNum])
+                else:
+                    new_args.append(str(argNum))
             elif argNum in CONSTANTS[info[i]]:
                 new_args.append(f"{CONSTANTS[info[i]][argNum]}")
             else:
