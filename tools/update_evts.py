@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from .disasm_script import ScriptDisassembler, get_constants
+from disasm_script import ScriptDisassembler, get_constants
 from glob import glob
 
 NAMESPACES = {
