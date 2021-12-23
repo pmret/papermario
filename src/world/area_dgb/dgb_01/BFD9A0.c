@@ -48,7 +48,7 @@ EvtSource N(exitDoubleDoor_80243550) = {
     EVT_SET(EVT_VAR(3), 57)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_00", 1)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_00"), 1)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -64,7 +64,7 @@ EvtSource N(exitDoubleDoor_80243604) = {
     EVT_SET(EVT_VAR(3), 36)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_02", 1)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_02"), 1)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -80,7 +80,7 @@ EvtSource N(exitDoubleDoor_802436B8) = {
     EVT_SET(EVT_VAR(3), 39)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_08", 0)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_08"), 0)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -96,7 +96,7 @@ EvtSource N(exitDoubleDoor_8024376C) = {
     EVT_SET(EVT_VAR(3), 31)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_09", 1)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_09"), 1)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -112,7 +112,7 @@ EvtSource N(exitDoubleDoor_80243820) = {
     EVT_SET(EVT_VAR(3), 44)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_08", 1)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_08"), 1)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -128,7 +128,7 @@ EvtSource N(exitDoubleDoor_802438D4) = {
     EVT_SET(EVT_VAR(3), 26)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_17", 1)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_17"), 1)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -144,7 +144,7 @@ EvtSource N(exitDoubleDoor_80243988) = {
     EVT_SET(EVT_VAR(3), 49)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_18", 0)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_18"), 0)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -1103,7 +1103,7 @@ EvtSource N(npcAI_80244D54) = {
         EVT_CALL(NpcJump0, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
     EVT_END_THREAD
     EVT_WAIT_FRAMES(30)
-    EVT_CALL(GotoMap, N(dgb_00_name_hack), 2)
+    EVT_CALL(GotoMap, EVT_PTR(N(dgb_00_name_hack)), 2)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -1374,7 +1374,7 @@ const char N(dgb_08_name_hack)[];
 
 EvtSource N(defeat_802457D8) = {
     EVT_CALL(N(UnkFunc1))
-    EVT_CALL(GotoMap, N(dgb_08_name_hack), 1)
+    EVT_CALL(GotoMap, EVT_PTR(N(dgb_08_name_hack)), 1)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -1458,7 +1458,7 @@ EvtSource N(idle_8024598C) = {
 
 EvtSource N(defeat_80245CB4) = {
     EVT_CALL(N(UnkFunc1))
-    EVT_CALL(GotoMap, N(dgb_00_name_hack), 1)
+    EVT_CALL(GotoMap, EVT_PTR(N(dgb_00_name_hack)), 1)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END

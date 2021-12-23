@@ -56,7 +56,7 @@ EvtSource N(exitDoubleDoor_80242910) = {
     EVT_SET(EVT_VAR(3), 34)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_02", 0)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_02"), 0)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -72,7 +72,7 @@ EvtSource N(exitDoubleDoor_802429C4) = {
     EVT_SET(EVT_VAR(3), 44)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_09", 0)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_09"), 0)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -88,7 +88,7 @@ EvtSource N(exitDoubleDoor_80242A78) = {
     EVT_SET(EVT_VAR(3), 31)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_04", 0)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_04"), 0)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -106,7 +106,7 @@ EvtSource N(exitSingleDoor_80242B88) = {
     EVT_SET(EVT_VAR(3), 1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_05", 0)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_05"), 0)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -122,7 +122,7 @@ EvtSource N(exitDoubleDoor_80242C3C) = {
     EVT_SET(EVT_VAR(3), 41)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_14", 0)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_14"), 0)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END

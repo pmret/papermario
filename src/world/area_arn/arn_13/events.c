@@ -11,7 +11,7 @@ EvtSource N(exitSingleDoor_80240100) = {
     EVT_SET(EVT_VAR(3), -1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "arn_12", 1)
+    EVT_CALL(GotoMap, EVT_PTR("arn_12"), 1)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -26,7 +26,7 @@ EvtSource N(exitSingleDoor_802401A4) = {
     EVT_SET(EVT_VAR(3), 1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "arn_11", 0)
+    EVT_CALL(GotoMap, EVT_PTR("arn_11"), 0)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END

@@ -766,7 +766,7 @@ class ScriptDisassembler:
             elif func == "GotoMap" or func == "GotoMapSpecial":
                 args = [self.var(a, use_evt_ptr=True) for a in argv[2:]]
                 args_str = ', '.join(args)
-                self.write_line(f"EVT_CALL({func}, UNK_STR_{argv[1]:X}, {args_str})")
+                self.write_line(f"EVT_CALL({func}, EVT_PTR(UNK_STR_{argv[1]:X}), {args_str})")
             elif args_str:
                 self.write_line(f"EVT_CALL({func}, {args_str})")
             else:
