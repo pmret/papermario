@@ -86,9 +86,11 @@ def get_constants():
 
     valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims",
         "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
-        "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags",
-        "Events", "Statuses", "Elements", "DamageTypes", "HitResults",
-        "ActorFlags", "ActorPartFlags", "ActorEventFlags", "ElementFlags" }
+        "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags", "Statuses", "Elements",
+        "DamageTypes", "HitResults", "ActorFlags", "ActorPartFlags",
+        "ActorEventFlags", "ElementFlags", "EncounterTriggers", "Abilities",
+        "Easings", "DecorationIDs", "HitResults", "Phases", "ItemSpawnModes",
+        "ActionStates", "Triggers", "Buttons", "ActionCommand", "MoveIDs" }
     for enum in valid_enums:
         CONSTANTS[enum] = {}
     CONSTANTS["NPC_SPRITE"] = {}
@@ -210,6 +212,14 @@ def fix_args(self, func, args, info):
                 continue
             argNum = int(arg, 0)
 
+#valid_enums = {"StoryProgress", "ItemIDs", "PlayerAnims",
+#               "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
+#               "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags", "Statuses", "Elements",
+#               "DamageTypes", "HitResults", "ActorFlags", "ActorPartFlags",
+#               "ActorEventFlags", "ElementFlags", "EncounterTriggers", "Abilities",
+#               "Easings", "DecorationIDs", "HitResults", "Phases", "ItemSpawnModes",
+#               "ActionStates", "Triggers", "Buttons", "ActionCommand", "MoveIDs"}
+
             if info[i] == "Bool":
                 new_args.append(f"{'TRUE' if argNum == True else 'FALSE'}")
             elif info[i] == "Hex" and argNum > 0:
@@ -280,6 +290,7 @@ def fix_args(self, func, args, info):
                 else:
                     new_args.append("0x%X" % argNum)
             elif info[i] == "StoryProgress":
+                print(info[i])
                 if argNum in CONSTANTS["StoryProgress"]:
                     new_args.append(CONSTANTS["StoryProgress"][argNum])
                 else:
@@ -599,7 +610,7 @@ class ScriptDisassembler:
             self.indent -= 1
 
             if self.prelude:
-                self.prefix_line(f"EvtSource {self.script_name}= {{")
+                self.prefix_line(f"EvtSource {self.script_name} = {{")
                 self.write_line("};")
 
             self.done = True
@@ -647,6 +658,10 @@ class ScriptDisassembler:
             self.indent -= 1
             self.write_line(f"EVT_END_IF")
         elif opcode == 0x14:
+            if self.var(argv[0]) == "EVT_SAVE_VAR(0)":
+                story_switch = True
+            else:
+                story_switch = False
             self.write_line(f"EVT_SWITCH({self.var(argv[0])})")
             self.indent += 2
         elif opcode == 0x15:
@@ -751,7 +766,7 @@ class ScriptDisassembler:
         elif opcode == 0x43:
             func = self.addr_ref(argv[0])
             args = [self.var(a, use_evt_ptr=True) for a in argv[1:]]
-            #print(args)
+            #print(argv)
             args_str = ', '.join(args)
             #print(args_str)
 
@@ -761,6 +776,12 @@ class ScriptDisassembler:
             if func.startswith("evt_"):
                 # use func-specific macro
                 self.write_line(f"{func}({args_str})")
+            # Since the map ascii for map transitions is global, and several of them share the same RAM address,
+            # or ar not migrated, we have to create a placeholder
+            elif func == "GotoMap" or func == "GotoMapSpecial":
+                args = [self.var(a, use_evt_ptr=True) for a in argv[2:]]
+                args_str = ', '.join(args)
+                self.write_line(f"EVT_CALL({func}, UNK_STR_{argv[1]:X}, {args_str})")
             elif args_str:
                 self.write_line(f"EVT_CALL({func}, {args_str})")
             else:
@@ -859,7 +880,7 @@ if __name__ == "__main__":
             while offset < args.end:
                 f.seek(offset)
 
-                script = ScriptDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
+                script = ScriptDisassembler(f, args.offset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
                 try:
                     script_text = script.disassemble()
 
@@ -905,10 +926,10 @@ if __name__ == "__main__":
 
             f.seek(offset)
 
-            script = ScriptDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
+            script = ScriptDisassembler(f, args.offset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
 
             if args.si:
-                print(ScriptDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED).disassemble(), end="")
+                print(ScriptDisassembler(f, args.offset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED).disassemble(), end="")
             else:
                 try:
                     script_text = script.disassemble()
