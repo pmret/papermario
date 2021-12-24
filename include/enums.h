@@ -1544,37 +1544,6 @@ enum DamageTypes {
     DAMAGE_TYPE_TRIGGER_LUCKY              = 0x80000000,
 };
 
-enum damageType {
-    DAMAGETYPE_FIRE                            = 0x00000002,
-    DAMAGETYPE_WATER                           = 0x00000004,
-    DAMAGETYPE_ICE                             = 0x00000008,
-    DAMAGETYPE_MAGIC                           = 0x00000010,
-    DAMAGETYPE_ELECTRIC                        = 0x00000020,
-    DAMAGETYPE_SMASH                           = 0x00000040,
-    DAMAGETYPE_JUMP                            = 0x00000080,
-    DAMAGETYPE_COSMIC                          = 0x00000100,
-    DAMAGETYPE_BLAST                           = 0x00000200,
-    DAMAGETYPE_POW                             = 0x00000400,
-    DAMAGETYPE_QUAKE                           = 0x00000800,
-    DAMAGETYPE_FEAR                            = 0x00001000,
-    DAMAGETYPE_AIR_LIFT                        = 0x00008000,
-    DAMAGETYPE_SPINY_SURGE                     = 0x00010000,
-    DAMAGETYPE_SHELL_CRACK                     = 0x00020000,
-    DAMAGETYPE_THROW                           = 0x00040000,
-    DAMAGETYPE_POWER_BOUNCE                    = 0x00100000,
-    DAMAGETYPE_QUAKE_HAMMER                    = 0x00200000,
-    DAMAGETYPE_REMOVE_BUFFS                    = 0x00400000,
-    DAMAGETYPE_PEACH_BEAM                      = 0x00800000,
-    DAMAGETYPE_MULTI_BOUNCE                    = 0x01000000,
-    DAMAGETYPE_UNBLOCKABLE                     = 0x02000000,
-    DAMAGETYPE_SPIN_SMASH                      = 0x04000000,
-    DAMAGETYPE_IGNORE_DEFENSE                  = 0x08000000,
-    DAMAGETYPE_NO_CONTACT                      = 0x10000000,
-    DAMAGETYPE_NO_OTHER_DAMAGE_POPUPS          = 0x20000000,
-    DAMAGETYPE_STATUS_ALWAYS_HITS              = 0x40000000,
-    DAMAGETYPE_TRIGGER_LUCKY                   = 0x80000000,
-};
-
 enum PartnerIDs {
     PARTNER_NONE                = 0x00000000,
     PARTNER_GOOMBARIO           = 0x00000001,
