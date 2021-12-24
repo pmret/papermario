@@ -834,7 +834,3 @@ EvtSource D_802BFED0_323A40 = {
     EVT_RETURN
     EVT_END
 };
-
-//rodata
-//f64 D_802BFEF0_323A40 = 0.8;
-//f64 D_802BFEF8_323A48 = 1.8;

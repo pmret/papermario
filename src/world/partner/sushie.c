@@ -8,11 +8,11 @@ extern s32 D_802BFEEC;
 extern f32 D_802BFEE0;
 void func_802BD368_31E0D8(s32, f32, f32, f32, f32, f32);
 void partner_kill_ability_script(void);
-extern s32 bullshit_802BFEE4;
-extern s32 bullshit_802BFEE8;
-extern s32 bullshit_802BFEF0;
-extern s32 bullshit_802BFEF4;
-extern f32 bullshit_802BFEFC;
+extern s32 bss_802BFEE4;
+extern s32 bss_802BFEE8;
+extern s32 bss_802BFEF0;
+extern s32 bss_802BFEF4;
+extern f32 bss_802BFEFC;
 extern f32 D_802BFDB0_320B20;
 extern f32 D_802BFDB4_320B24;
 extern s16 D_8010C97A;
@@ -52,7 +52,7 @@ void func_802BD20C_31DF7C(f32* arg0, f32* arg1) {
 
     if (dist2D(0.0f, 0.0f, D_802BFDB0_320B20, -D_802BFDB4_320B24) >= 1.0) {
         if (SQ(D_802BFDB0_320B20) + SQ(D_802BFDB4_320B24) > 3025.0f) {
-            if (bullshit_802BFEE4) {
+            if (bss_802BFEE4) {
                 phi_f20 = 2.0f;
             } else {
                 phi_f20 = 4.0f;
@@ -106,10 +106,10 @@ void func_802BF520_320290(Npc* sushie) {
     sushie->collisionRadius = 36;
     sushie->unk_80 = 0x10000;
     D_802BFEEC = 0;
-    bullshit_802BFEE4 = 0;
-    bullshit_802BFEE8 = 0;
-    bullshit_802BFEF0 = 0;
-    bullshit_802BFEF4 = 0;
+    bss_802BFEE4 = 0;
+    bss_802BFEE8 = 0;
+    bss_802BFEF0 = 0;
+    bss_802BFEF4 = 0;
 }
 
 s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {

@@ -42,12 +42,12 @@ ApiStatus func_80219304_624EA4(Evt* script, s32 isInitialCall) {
 
     unkDuplighost->flags = 0;
 
-    if (unkDuplighost->actorPart1 != NULL) {
-        unkDuplighost->actorPart1->flags |= 0x10;
+    if (unkDuplighost->effect1 != NULL) {
+        unkDuplighost->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
     }
 
-    if (unkDuplighost->actorPart2 != NULL) {
-        unkDuplighost->actorPart2->flags |= 0x10;
+    if (unkDuplighost->effect2 != NULL) {
+        unkDuplighost->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
     }
     
     return ApiStatus_DONE2;
@@ -95,33 +95,4 @@ INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80219524_6250C4);
 #include "common/UnkBattleFunc1.inc.c"
 #define NAMESPACE b_area_sam
 
-ApiStatus func_802196BC_62525C(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    Effect6FInstance* effect;
-    f32 temp_f20;
-    s32 temp_s0_9;
-    s32 temp_s1;
-    s32 temp_s2;
-    s32 temp_s3;
-    s32 temp_s4;
-    s32 temp_s5;
-    s32 temp_s6;
-
-    evt_get_variable(script, *args++);
-    temp_s6 = evt_get_variable(script, *args++);
-    temp_s5 = evt_get_variable(script, *args++);
-    temp_s4 = evt_get_variable(script, *args++);
-    temp_f20 = evt_get_float_variable(script, *args++);
-    temp_s2 = evt_get_variable(script, *args++);
-    temp_s3 = evt_get_variable(script, *args++);
-    temp_s1 = evt_get_variable(script, *args++);
-    temp_s0_9 = evt_get_variable(script, *args++);
-    effect = (Effect6FInstance*)playFX_6F(1, temp_s6, temp_s5, temp_s4, temp_f20, temp_s2);
-    effect->data->rotation.z = temp_s3;
-    effect->data->scale.x = temp_s1;
-    effect->data->scale.y = temp_s0_9;
-    effect->data->color.x = 255; // red
-    effect->data->color.y = 255; // green
-    effect->data->color.z = 255; // blue
-    return ApiStatus_DONE2;
-}
+#include "common/UnkEffect6FFunc.inc.c"

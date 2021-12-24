@@ -35,12 +35,12 @@ ApiStatus func_80219304_66B084(Evt* script, s32 isInitialCall) {
 
     unkDuplighost->flags = 0;
 
-    if (unkDuplighost->actorPart1 != NULL) {
-        unkDuplighost->actorPart1->flags |= 0x10;
+    if (unkDuplighost->effect1 != NULL) {
+        unkDuplighost->effect1->flags |= 0x10;
     }
 
-    if (unkDuplighost->actorPart2 != NULL) {
-        unkDuplighost->actorPart2->flags |= 0x10;
+    if (unkDuplighost->effect2 != NULL) {
+        unkDuplighost->effect2->flags |= 0x10;
     }
     
     return ApiStatus_DONE2;

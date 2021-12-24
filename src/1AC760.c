@@ -264,7 +264,7 @@ ApiStatus func_8027FC90(Evt* script, s32 isInitialCall) {
 
     outVar = *args++;
     actor = get_actor(actorID);
-    battleStatus->flags1 |= 0x20;
+    battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
 
     hitResult = calc_partner_damage_enemy();
     show_damage_popup(actor->state.goalPos.x, actor->state.goalPos.y, actor->state.goalPos.z, battleStatus->lastAttackDamage,
@@ -307,41 +307,41 @@ ApiStatus PartnerDamageEnemy(Evt* script, s32 isInitialCall) {
     flags = *args++;
 
     if ((flags & 0x30) == 0x30) {
-        battleStatus->flags1 |= 0x10;
-        battleStatus->flags1 |= 0x20;
+        battleStatus->flags1 |= BS_FLAGS1_10;
+        battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (flags & 0x10) {
-        battleStatus->flags1 |= 0x10;
-        battleStatus->flags1 &= ~0x20;
+        battleStatus->flags1 |= BS_FLAGS1_10;
+        battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (flags & 0x20) {
-        battleStatus->flags1 &= ~0x10;
-        battleStatus->flags1 |= 0x20;
+        battleStatus->flags1 &= ~BS_FLAGS1_10;
+        battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
-        battleStatus->flags1 &= ~0x10;
-        battleStatus->flags1 &= ~0x20;
+        battleStatus->flags1 &= ~BS_FLAGS1_10;
+        battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
     if (flags & 0x40) {
-        gBattleStatus.flags1 |= 0x40;
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
-        gBattleStatus.flags1 &= -0x41;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
 
     if (flags & 0x200) {
-        gBattleStatus.flags1 |= 0x200;
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
-        gBattleStatus.flags1 &= -0x201;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
 
     if (flags & 0x80) {
-        gBattleStatus.flags1 |= 0x80;
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
-        gBattleStatus.flags1 &= -0x81;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
     if (flags & 0x800) {
-        gBattleStatus.flags1 |= 0x800;
+        gBattleStatus.flags1 |= BS_FLAGS1_800;
     } else {
-        gBattleStatus.flags1 &= -0x801;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_800;
     }
 
     statusChance = battleStatus->currentAttackStatus;
@@ -387,38 +387,38 @@ ApiStatus PartnerAfflictEnemy(Evt* script, s32 isInitialCall) {
     flags = *args++;
 
     if ((flags & 0x30) == 0x30) {
-        battleStatus->flags1 |= 0x10;
-        battleStatus->flags1 |= 0x20;
+        battleStatus->flags1 |= BS_FLAGS1_10;
+        battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (flags & 0x10) {
-        battleStatus->flags1 |= 0x10;
-        battleStatus->flags1 &= ~0x20;
+        battleStatus->flags1 |= BS_FLAGS1_10;
+        battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (flags & 0x20) {
-        battleStatus->flags1 &= ~0x10;
-        battleStatus->flags1 |= 0x20;
+        battleStatus->flags1 &= ~BS_FLAGS1_10;
+        battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
-        battleStatus->flags1 &= ~0x10;
-        battleStatus->flags1 &= ~0x20;
+        battleStatus->flags1 &= ~BS_FLAGS1_10;
+        battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
     if (flags & 0x40) {
-        gBattleStatus.flags1 |= 0x40;
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
-        gBattleStatus.flags1 &= ~0x40;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
     if (flags & 0x200) {
-        gBattleStatus.flags1 |= 0x200;
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
-        gBattleStatus.flags1 &= ~0x200;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
     if (flags & 0x80) {
-        gBattleStatus.flags1 |= 0x80;
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
-        gBattleStatus.flags1 &= ~0x80;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
     if (flags & 0x800) {
-        gBattleStatus.flags1 |= 0x800;
+        gBattleStatus.flags1 |= BS_FLAGS1_800;
     } else {
-        gBattleStatus.flags1 &= ~0x800;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_800;
     }
 
     statusChance = battleStatus->currentAttackStatus;
@@ -463,38 +463,38 @@ ApiStatus PartnerPowerBounceEnemy(Evt* script, s32 isInitialCall) {
     flags = *args++;
     
     if ((flags & 0x30) == 0x30) {
-        battleStatus->flags1 |= 0x10;
-        battleStatus->flags1 |= 0x20;
+        battleStatus->flags1 |= BS_FLAGS1_10;
+        battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (flags & 0x10) {
-        battleStatus->flags1 |= 0x10;
-        battleStatus->flags1 &= ~0x20;
+        battleStatus->flags1 |= BS_FLAGS1_10;
+        battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (flags & 0x20) {
-        battleStatus->flags1 &= ~0x10;
-        battleStatus->flags1 |= 0x20;
+        battleStatus->flags1 &= ~BS_FLAGS1_10;
+        battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
-        battleStatus->flags1 &= ~0x10;
-        battleStatus->flags1 &= ~0x20;
+        battleStatus->flags1 &= ~BS_FLAGS1_10;
+        battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
     if (flags & 0x40) {
-        gBattleStatus.flags1 |= 0x40;
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
-        gBattleStatus.flags1 &= ~0x40;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
     if (flags & 0x200) {
-        gBattleStatus.flags1 |= 0x200;
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
-        gBattleStatus.flags1 &= ~0x200;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
     if (flags & 0x80) {
-        gBattleStatus.flags1 |= 0x80;
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
-        gBattleStatus.flags1 &= ~0x80;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
     if (flags & 0x800) {
-        gBattleStatus.flags1 |= 0x800;
+        gBattleStatus.flags1 |= BS_FLAGS1_800;
     } else {
-        gBattleStatus.flags1 &= ~0x800;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_800;
     }
 
     statusChance = battleStatus->currentAttackStatus;
@@ -541,41 +541,41 @@ ApiStatus PartnerTestEnemy(Evt* script, s32 isInitialCall) {
     flags = *args++;
 
     if ((flags & 0x30) == 0x30) {
-        battleStatus->flags1 |= 0x10;
-        battleStatus->flags1 |= 0x20;
+        battleStatus->flags1 |= BS_FLAGS1_10;
+        battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (flags & 0x10) {
-        battleStatus->flags1 |= 0x10;
-        battleStatus->flags1 &= ~0x20;
+        battleStatus->flags1 |= BS_FLAGS1_10;
+        battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     } else if (flags & 0x20) {
-        battleStatus->flags1 &= ~0x10;
-        battleStatus->flags1 |= 0x20;
+        battleStatus->flags1 &= ~BS_FLAGS1_10;
+        battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
     } else {
-        battleStatus->flags1 &= ~0x10;
-        battleStatus->flags1 &= ~0x20;
+        battleStatus->flags1 &= ~BS_FLAGS1_10;
+        battleStatus->flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
     }
 
     if (flags & 0x40) {
-        gBattleStatus.flags1 |= 0x40;
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
     } else {
-        gBattleStatus.flags1 &= -0x41;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
     }
 
     if (flags & 0x200) {
-        gBattleStatus.flags1 |= 0x200;
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
     } else {
-        gBattleStatus.flags1 &= -0x201;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
     }
 
     if (flags & 0x80) {
-        gBattleStatus.flags1 |= 0x80;
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
     } else {
-        gBattleStatus.flags1 &= -0x81;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
     if (flags & 0x800) {
-        gBattleStatus.flags1 |= 0x800;
+        gBattleStatus.flags1 |= BS_FLAGS1_800;
     } else {
-        gBattleStatus.flags1 &= -0x801;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_800;
     }
 
     statusChance = battleStatus->currentAttackStatus;

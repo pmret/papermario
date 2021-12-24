@@ -2310,9 +2310,9 @@ typedef struct UnkDuplighost {
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
-    /* 0x14 */ ActorPart* actorPart1;
-    /* 0x18 */ ActorPart* actorPart2;
-    /* 0x1C */ char unk_1C[4];
+    /* 0x14 */ struct EffectInstance* effect1;
+    /* 0x18 */ struct EffectInstance* effect2;
+    /* 0x1C */ s32 debuff;
 } UnkDuplighost;
 
 typedef struct UnkStruct1 {

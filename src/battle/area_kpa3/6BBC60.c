@@ -43,12 +43,12 @@ ApiStatus func_802193D4_6BCF64(Evt* script, s32 isInitialCall) {
 
     unkDuplighost->flags = 0;
 
-    if (unkDuplighost->actorPart1 != NULL) {
-        unkDuplighost->actorPart1->flags |= 0x10;
+    if (unkDuplighost->effect1 != NULL) {
+        unkDuplighost->effect1->flags |= EFFECT_INSTANCE_FLAGS_10;
     }
 
-    if (unkDuplighost->actorPart2 != NULL) {
-        unkDuplighost->actorPart2->flags |= 0x10;
+    if (unkDuplighost->effect2 != NULL) {
+        unkDuplighost->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
     }
     
     return ApiStatus_DONE2;
@@ -91,38 +91,3 @@ ApiStatus func_80219588_6BD118(Evt* script, s32 isInitialCall) {
 }
 
 INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_802195F4_6BD184);
-/*
-ApiStatus func_802195F4_6BD184(Evt* script, s32 isInitialCall) {
-    s32 temp_s0 = evt_get_variable(script, *script->ptrReadPos);
-    s32* phi_a0 = NULL;
-    
-    switch (temp_s0) {
-    case 1:
-        phi_a0 = &D_8021E990_6C2520;
-        break;
-    case 2:
-        phi_a0 = &D_80220644_6C41D4;
-        break;
-    case 3:
-        phi_a0 = &D_802218A4_6C5434;
-        break;
-    case 4:
-        phi_a0 = &D_80222830_6C63C0;
-        break;
-    case 9:
-        phi_a0 = &D_80223C00_6C7790;
-        break;
-    case 6:
-        phi_a0 = &D_80224AFC_6C868C;
-        break;
-    case 7:
-        phi_a0 = &D_80226494_6CA024;
-        break;
-    case 8:
-        phi_a0 = &D_80227734_6CB2C4;
-        break;
-    }
-    phi_a0->unk8 = (s32) get_actor(script->owner1.enemyID)->turnPriority;
-    return 2;
-}
-*/
