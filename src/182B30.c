@@ -39,7 +39,7 @@ void enable_actor_blur(Actor* actor) {
     numParts = actor->numParts;
 
     for (i = 0; i < numParts; i++) {
-        if ((partsTable->idleAnimations != 0) && ((partsTable->flags & 2) == 0)) {
+        if (partsTable->idleAnimations != NULL && !(partsTable->flags & ACTOR_PART_FLAG_2)) {
             decorationTable = partsTable->decorationTable;
             decorationTable->unk_7D8 = 0;
             decorationTable->unk_7D9 = 0;
