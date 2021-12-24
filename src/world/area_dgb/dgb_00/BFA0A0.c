@@ -51,7 +51,7 @@ EvtSource N(exitDoubleDoor_8024021C) = {
     EVT_SET(EVT_VAR(3), 7)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_01", 0)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_01"), 0)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END

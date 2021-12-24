@@ -48,7 +48,7 @@ EvtSource N(exitSingleDoor_80243210) = {
     EVT_SET(EVT_VAR(3), 1)
     EVT_EXEC(ExitSingleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_06", 0)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_06"), 0)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -64,7 +64,7 @@ EvtSource N(exitDoubleDoor_802432C4) = {
     EVT_SET(EVT_VAR(3), 11)
     EVT_EXEC(ExitDoubleDoor)
     EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, "dgb_03", 0)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_03"), 0)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
@@ -193,7 +193,7 @@ EvtSource N(npcAI_802435E4) = {
         EVT_CALL(NpcJump0, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
     EVT_END_THREAD
     EVT_WAIT_FRAMES(30)
-    EVT_CALL(GotoMap, N(dgb_00_name_hack), 2)
+    EVT_CALL(GotoMap, EVT_PTR(N(dgb_00_name_hack)), 2)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
