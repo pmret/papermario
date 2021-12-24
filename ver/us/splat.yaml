@@ -255,7 +255,7 @@ segments:
     - [0x4AC90, pm_effect_loads, effect_loads]
     - [0x4DF30, c, battle/battle]
     - [0x4E5A0, bin, n_aspMain_text]
-    - [0x4F200, data, 1000_len_60]
+    - [0x4F200, data]
     - [0x4F410, .data, main]
     - [0x4F420, .data, main_loop]
     - [0x4F660, .data, rumble]
