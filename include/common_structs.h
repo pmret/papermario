@@ -765,7 +765,7 @@ typedef struct BattleStatus {
     /* 0x1AA */ char unk_1AA[4];
     /* 0x1AE */ s16 submenuIcons[24]; /* icon IDs */
     /* 0x1DE */ u8 submenuMoves[24]; /* move IDs */
-    /* 0x1F6 */ s8 submenuStatus[24]; ///< 1 = enabled, 0 = not enough FP, -1,-2 = no targets
+    /* 0x1F6 */ s8 submenuStatus[24]; ///< @see enum BattleSubmenuStatus
     /* 0x20E */ u8 submenuMoveCount;
     /* 0x20F */ char unk_20F;
     /* 0x210 */ s32 currentButtonsDown;
@@ -804,11 +804,6 @@ typedef struct TextureHeader {
     /* 0x2E */ u8 wrapV;
     /* 0x2F */ u8 filtering;
 } TextureHeader; // size = 0x30
-
-enum BattleSubmenu {
-    BATTLE_SUBMENU_HAMMER       = 1,
-    BATTLE_SUBMENU_JUMP         = 2,
-};
 
 typedef struct StaticMove {
     /* 0x00 */ s32 moveNameID;

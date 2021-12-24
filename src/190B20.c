@@ -1204,20 +1204,20 @@ void btl_init_menu_boots(void) {
             // If there are targets, enable the move
             if (player->targetListLength != 0) {
                 hasAnyBadgeMoves = TRUE;
-                battleStatus->submenuStatus[i] = 1;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_ENABLED;
             }
 
             // If you don't have enough FP, disable the move
             if (playerData->curFP < fpCost) {
-                battleStatus->submenuStatus[i] = 0;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NOT_ENOUGH_FP;
             }
 
             // If there are no targets available, disable the move
             if (player->targetListLength == 0) {
-                battleStatus->submenuStatus[i] = -2;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS_2;
             }
             if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
-                battleStatus->submenuStatus[moveCount] = -1;
+                battleStatus->submenuStatus[moveCount] = BATTLE_SUBMENU_STATUS_NO_TARGETS;
             }
     }
 
@@ -1308,10 +1308,10 @@ void btl_init_menu_hammer(void) {
 
             // If there are no targets available, disable the move
             if (player->targetListLength == 0) {
-                battleStatus->submenuStatus[i] = -2;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS_2;
             }
             if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
-                battleStatus->submenuStatus[moveCount] = -1;
+                battleStatus->submenuStatus[moveCount] = BATTLE_SUBMENU_STATUS_NO_TARGETS;
             }
     }
 
@@ -1385,18 +1385,18 @@ void btl_init_menu_partner(void) {
 
             if (partner->targetListLength != 0){
                 hasAnyBadgeMoves = TRUE;
-                battleStatus->submenuStatus[i] = 1;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_ENABLED;
             }
 
             if (partner->targetListLength == 0) {
-                battleStatus->submenuStatus[i] = -2;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS_2;
             }
 
             if (playerData->curFP < fpCost) {
-                battleStatus->submenuStatus[i] = 0;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NOT_ENOUGH_FP;
             }
             if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
-                battleStatus->submenuStatus[i] = -1;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS;
             }
 
     }

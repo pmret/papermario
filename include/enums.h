@@ -3023,4 +3023,16 @@ enum FoldStateFlags {
     FOLD_STATE_FLAG_100000            = 0x00100000,
 };
 
+enum BattleSubmenu {
+    BATTLE_SUBMENU_HAMMER       = 1,
+    BATTLE_SUBMENU_JUMP         = 2,
+};
+
+enum BattleSubmenuStatus {
+    BATTLE_SUBMENU_STATUS_ENABLED           = 1,
+    BATTLE_SUBMENU_STATUS_NOT_ENOUGH_FP     = 0,
+    BATTLE_SUBMENU_STATUS_NO_TARGETS        = -1,
+    BATTLE_SUBMENU_STATUS_NO_TARGETS_2      = -2, // TODO: determine difference, probably uses a different error message
+};
+
 #endif
