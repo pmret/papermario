@@ -7,45 +7,39 @@ EvtSource N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
 
 EvtSource N(exitWalk_8024114C) = EXIT_WALK_SCRIPT(60,  1, "arn_04",  0);
 
-EvtSource N(802411A8) = {
-    EVT_BIND_TRIGGER(N(exitWalk_802410F0), TRIGGER_FLOOR_ABOVE, 1, 1, 0)
-    EVT_BIND_TRIGGER(N(exitWalk_8024114C), TRIGGER_FLOOR_ABOVE, 6, 1, 0)
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(802411A8) = SCRIPT({
+    bind N(exitWalk_802410F0) TRIGGER_FLOOR_ABOVE 1;
+    bind N(exitWalk_8024114C) TRIGGER_FLOOR_ABOVE 6;
+});
 
-EvtSource N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 34)
-    EVT_CALL(SetSpriteShading, -1)
-    EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
-    EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
-    EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80241A9C)))
-    EVT_EXEC_WAIT(N(makeEntities))
-    EVT_EXEC(N(80241040))
-    EVT_SET(EVT_VAR(0), EVT_PTR(N(802411A8)))
-    EVT_EXEC(EnterWalk)
-    EVT_WAIT_FRAMES(1)
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(main) = SCRIPT({
+    EVT_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
+    SetSpriteShading(-1);
+    SetCamPerspective(0, 3, 25, 16, 4096);
+    SetCamBGColor(0, 0, 0, 0);
+    SetCamEnabled(0, 1);
+    MakeNpcs(0, N(npcGroupList_80241A9C));
+    await N(makeEntities);
+    spawn N(80241040);
+    EVT_VAR(0) = N(802411A8);
+    spawn EnterWalk;
+    sleep 1;
+});
 
 static s32 N(pad_12C4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(makeEntities) = {
-    EVT_CALL(MakeItemEntity, ITEM_DIZZY_DIAL, -248, 193, 45, 17, EVT_SAVE_FLAG(1005))
-    EVT_CALL(MakeItemEntity, ITEM_LETTER07, 536, 260, 227, 17, EVT_SAVE_FLAG(1006))
-    EVT_CALL(MakeEntity, 0x802EA564, -350, 172, 170, 0, 343, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1002))
-    EVT_CALL(MakeEntity, 0x802EA564, 225, 265, 30, 0, 343, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1003))
-    EVT_CALL(MakeEntity, 0x802EA564, 275, 265, 150, 0, 151, MAKE_ENTITY_END)
-    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1004))
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(makeEntities) = SCRIPT({
+    MakeItemEntity(ITEM_DIZZY_DIAL, -248, 193, 45, 17, EVT_SAVE_FLAG(1005));
+    MakeItemEntity(ITEM_LETTER07, 536, 260, 227, 17, EVT_SAVE_FLAG(1006));
+    MakeEntity(0x802EA564, -350, 172, 170, 0, ITEM_COIN, MAKE_ENTITY_END);
+    AssignBlockFlag(EVT_SAVE_FLAG(1002));
+    MakeEntity(0x802EA564, 225, 265, 30, 0, ITEM_COIN, MAKE_ENTITY_END);
+    AssignBlockFlag(EVT_SAVE_FLAG(1003));
+    MakeEntity(0x802EA564, 275, 265, 150, 0, ITEM_REPEL_GEL, MAKE_ENTITY_END);
+    AssignBlockFlag(EVT_SAVE_FLAG(1004));
+});
 
 NpcAISettings N(npcAISettings_802413D0) = {
     .moveSpeed = 1.8f,
@@ -60,11 +54,9 @@ NpcAISettings N(npcAISettings_802413D0) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80241400) = {
-    EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_802413D0)))
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(npcAI_80241400) = SCRIPT({
+    DoBasicAI(N(npcAISettings_802413D0));
+});
 
 NpcSettings N(npcSettings_80241420) = {
     .height = 20,
@@ -89,11 +81,9 @@ NpcAISettings N(npcAISettings_8024144C) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_8024147C) = {
-    EVT_CALL(N(func_80240C90_BDDE40), EVT_PTR(N(npcAISettings_8024144C)), 8)
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(npcAI_8024147C) = SCRIPT({
+    N(func_80240C90_BDDE40)(N(npcAISettings_8024144C), 8);
+});
 
 NpcSettings N(npcSettings_802414A0) = {
     .height = 24,

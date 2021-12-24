@@ -11,302 +11,280 @@ enum {
     NPC_YAKKEY,
 };
 
-EvtSource N(802403B0) = {
-    EVT_SET_GROUP(27)
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(ClearDefeatedEnemies)
-    EVT_SET(EVT_VAR(0), 0)
-    EVT_SET(EVT_VAR(1), 6)
-    EVT_SET(EVT_VAR(2), 0)
-    EVT_SET(EVT_VAR(4), 1)
-    EVT_SET(EVT_VAR(3), -1)
-    EVT_EXEC(0x80285DFC)
-    EVT_WAIT_FRAMES(17)
-    EVT_CALL(GotoMap, EVT_PTR("arn_07"), 0)
-    EVT_WAIT_FRAMES(100)
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(802403B0) = SCRIPT({
+    group 27;
+    DisablePlayerInput(TRUE);
+    ClearDefeatedEnemies();
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 6;
+    EVT_VAR(2) = 0;
+    EVT_VAR(4) = 1;
+    EVT_VAR(3) = -1;
+    spawn 0x80285DFC;
+    sleep 17;
+    GotoMap("arn_07", 0);
+    sleep 100;
+});
 
-EvtSource N(80240470) = {
-    EVT_BIND_TRIGGER(N(802403B0), TRIGGER_WALL_PRESS_A, 6, 1, 0)
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(80240470) = SCRIPT({
+    bind N(802403B0) TRIGGER_WALL_PRESS_A 6;
+});
 
-EvtSource N(8024049C) = {
-    EVT_CALL(GetLoadType, EVT_VAR(1))
-    EVT_IF_EQ(EVT_VAR(1), 1)
-        EVT_EXEC(EnterSavePoint)
-        EVT_EXEC(N(80240470))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_CALL(GetEntryID, EVT_VAR(0))
-    EVT_SWITCH(EVT_VAR(0))
-        EVT_CASE_EQ(0)
-            EVT_SET(EVT_VAR(4), 1)
-            EVT_SET(EVT_VAR(2), 0)
-            EVT_SET(EVT_VAR(3), -1)
-            EVT_EXEC_WAIT(0x80285E24)
-            EVT_SET(EVT_AREA_FLAG(1), 0)
-            EVT_EXEC(N(80240470))
-        EVT_CASE_EQ(1)
-            EVT_CALL(DisablePlayerInput, TRUE)
-            EVT_CALL(DisablePlayerPhysics, TRUE)
-            EVT_IF_EQ(EVT_SAVE_VAR(0), -18)
-                EVT_CALL(SetPlayerPos, 1000, 1000, 0)
-                EVT_CALL(SetNpcPos, NPC_PARTNER, 1000, 1000, 0)
-                EVT_CALL(RotateModel, 0, 80, 0, -1, 0)
-                EVT_CALL(RotateModel, 1, 80, 0, -1, 0)
-                EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_6)
-                EVT_CALL(SetNpcJumpscale, 0, EVT_FIXED(2.5))
-                EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
-                EVT_CALL(NpcJump0, 0, -50, 0, 50, 10)
-                EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_7)
-                EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_6)
-                EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
-                EVT_CALL(NpcJump0, 0, -110, 0, 110, 10)
-                EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_7)
-                EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_6)
-                EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
-                EVT_CALL(NpcJump0, 0, -180, 0, 180, 10)
-                EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_7)
-                EVT_WAIT_FRAMES(1)
-                EVT_CALL(MakeLerp, 80, 0, 10, 0)
-                EVT_LOOP(0)
-                    EVT_CALL(UpdateLerp)
-                    EVT_CALL(RotateModel, 0, EVT_VAR(0), 0, -1, 0)
-                    EVT_CALL(RotateModel, 1, EVT_VAR(0), 0, -1, 0)
-                    EVT_WAIT_FRAMES(1)
-                    EVT_IF_EQ(EVT_VAR(1), 0)
-                        EVT_BREAK_LOOP
-                    EVT_END_IF
-                EVT_END_LOOP
-                EVT_CALL(PlaySoundAtCollider, 6, 450, 0)
-                EVT_WAIT_FRAMES(20)
-                EVT_CALL(SetPlayerPos, 0, 0, 0)
-                EVT_CALL(SetNpcPos, NPC_PARTNER, 0, 0, 0)
-                EVT_SET(EVT_SAVE_VAR(0), -17)
-            EVT_END_IF
-            EVT_CALL(DisablePlayerPhysics, FALSE)
-            EVT_CALL(SetPlayerJumpscale, EVT_FIXED(2.0))
-            EVT_CALL(PlayerJump, -10, 0, 75, 18)
-            EVT_CALL(DisablePlayerInput, FALSE)
-            EVT_EXEC(N(80240470))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(8024049C) = SCRIPT({
+    GetLoadType(EVT_VAR(1));
+    if (EVT_VAR(1) == 1) {
+        spawn EnterSavePoint;
+        spawn N(80240470);
+        return;
+    }
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
+        == 0 {
+            EVT_VAR(4) = 1;
+            EVT_VAR(2) = 0;
+            EVT_VAR(3) = -1;
+            await 0x80285E24;
+            EVT_AREA_FLAG(1) = 0;
+            spawn N(80240470);
+        }
+        == 1 {
+            DisablePlayerInput(TRUE);
+            DisablePlayerPhysics(TRUE);
+            if (EVT_STORY_PROGRESS == STORY_CH3_HEART_ESCAPED_WELL) {
+                SetPlayerPos(1000, 1000, 0);
+                SetNpcPos(NPC_PARTNER, 1000, 1000, 0);
+                RotateModel(0, 80, 0, -1, 0);
+                RotateModel(1, 80, 0, -1, 0);
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_6);
+                SetNpcJumpscale(NPC_TUBBAS_HEART, 2.5);
+                PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+                NpcJump0(NPC_TUBBAS_HEART, -50, 0, 50, 10);
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_7);
+                sleep 1;
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_6);
+                PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+                NpcJump0(NPC_TUBBAS_HEART, -110, 0, 110, 10);
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_7);
+                sleep 1;
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_6);
+                PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+                NpcJump0(NPC_TUBBAS_HEART, -180, 0, 180, 10);
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_7);
+                sleep 1;
+                MakeLerp(80, 0, 10, 0);
+                loop {
+                    UpdateLerp();
+                    RotateModel(0, EVT_VAR(0), 0, -1, 0);
+                    RotateModel(1, EVT_VAR(0), 0, -1, 0);
+                    sleep 1;
+                    if (EVT_VAR(1) == 0) {
+                        break loop;
+                    }
+                }
+                PlaySoundAtCollider(6, 450, 0);
+                sleep 20;
+                SetPlayerPos(0, 0, 0);
+                SetNpcPos(NPC_PARTNER, 0, 0, 0);
+                EVT_STORY_PROGRESS = STORY_CH3_HEART_ESCAPED_WINDY_MILL;
+            }
+            DisablePlayerPhysics(FALSE);
+            SetPlayerJumpscale(2.0);
+            PlayerJump(-10, 0, 75, 18);
+            DisablePlayerInput(FALSE);
+            spawn N(80240470);
+        }
+    }
+});
 
-EvtSource N(main) = {
-    EVT_SET(EVT_SAVE_VAR(425), 35)
-    EVT_CALL(SetSpriteShading, -1)
-    EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
-    EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
-    EVT_CALL(SetCamLeadPlayer, 0, 0)
-    EVT_CALL(SetCamEnabled, 0, 1)
-    EVT_SET(EVT_SAVE_FLAG(1979), 1)
-    EVT_IF_GE(EVT_SAVE_VAR(0), -12)
-        EVT_SET(EVT_SAVE_FLAG(1016), 0)
-        EVT_SET(EVT_SAVE_FLAG(1017), 0)
-        EVT_SET(EVT_SAVE_FLAG(1018), 0)
-    EVT_END_IF
-    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80241828)))
-    EVT_EXEC_WAIT(N(makeEntities))
-    EVT_EXEC(N(80240BA0))
-    EVT_CALL(GetDemoState, EVT_VAR(0))
-    EVT_IF_NE(EVT_VAR(0), 0)
-        EVT_EXEC_WAIT(N(8024118C))
-        EVT_RETURN
-    EVT_END_IF
-    EVT_EXEC(N(8024049C))
-    EVT_EXEC(N(80240B50))
-    EVT_EXEC(N(80240300))
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(main) = SCRIPT({
+    EVT_WORLD_LOCATION = LOCATION_WINDY_MILL;
+    SetSpriteShading(-1);
+    SetCamPerspective(0, 3, 25, 16, 4096);
+    SetCamBGColor(0, 0, 0, 0);
+    SetCamLeadPlayer(0, 0);
+    SetCamEnabled(0, 1);
+    EVT_SAVE_FLAG(1979) = 1;
+    if (EVT_STORY_PROGRESS >= STORY_CH4_FRYING_PAN_STOLEN) {
+        EVT_SAVE_FLAG(1016) = 0;
+        EVT_SAVE_FLAG(1017) = 0;
+        EVT_SAVE_FLAG(1018) = 0;
+    }
+    MakeNpcs(0, N(npcGroupList_80241828));
+    await N(makeEntities);
+    spawn N(80240BA0);
+    GetDemoState(EVT_VAR(0));
+    if (EVT_VAR(0) != 0) {
+        await N(8024118C);
+        return;
+    }
+    spawn N(8024049C);
+    spawn N(80240B50);
+    spawn N(80240300);
+});
 
 static s32 N(pad_A6C) = {
     0x00000000,
 };
 
-EvtSource N(80240A70) = {
-    EVT_LOOP(0)
-        EVT_IF_NE(EVT_SAVE_VAR(0), -18)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT_FRAMES(1)
-    EVT_END_LOOP
-    EVT_CALL(N(func_8024008C_BF482C))
-    EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(N(func_80240000_BF47A0))
-    EVT_SET(EVT_AREA_FLAG(1), 1)
-    EVT_IF_LT(EVT_SAVE_VAR(0), -23)
-        EVT_SET(EVT_SAVE_VAR(0), -23)
-    EVT_END_IF
-    EVT_CALL(GotoMap, EVT_PTR("arn_09"), 1)
-    EVT_WAIT_FRAMES(100)
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(80240A70) = SCRIPT({
+    loop {
+        if (EVT_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WELL) {
+            break loop;
+        }
+        sleep 1;
+    }
+    N(func_8024008C_BF482C)();
+    DisablePlayerInput(TRUE);
+    DisablePlayerPhysics(TRUE);
+    N(func_80240000_BF47A0)();
+    EVT_AREA_FLAG(1) = 1;
+    if (EVT_STORY_PROGRESS < STORY_CH3_WENT_DOWN_THE_WELL) {
+        EVT_STORY_PROGRESS = STORY_CH3_WENT_DOWN_THE_WELL;
+    }
+    GotoMap("arn_09", 1);
+    sleep 100;
+});
 
-EvtSource N(80240B50) = {
-    EVT_CALL(SetCamProperties, 0, EVT_FIXED(90.0), 0, 0, 0, EVT_FIXED(470.0), EVT_FIXED(17.0), EVT_FIXED(-7.0))
-    EVT_EXEC(N(80240A70))
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(80240B50) = SCRIPT({
+    SetCamProperties(0, 90.0, 0, 0, 0, 470.0, 17.0, -7.0);
+    spawn N(80240A70);
+});
 
 static s32 N(pad_B98)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(80240BA0) = {
-    EVT_CALL(PlaySound, 0x8000004B)
-    EVT_THREAD
-        EVT_SET(EVT_VAR(0), 0)
-        EVT_LABEL(10)
-        EVT_CALL(RotateModel, 9, EVT_VAR(0), 0, 0, 1)
-        EVT_CALL(RotateModel, 15, EVT_VAR(0), 0, 0, 1)
-        EVT_CALL(RotateModel, 11, EVT_VAR(0), 0, 0, 1)
-        EVT_CALL(RotateModel, 13, EVT_VAR(0), 0, 0, -1)
-        EVT_CALL(RotateModel, 17, EVT_VAR(0), 0, 0, -1)
-        EVT_ADD(EVT_VAR(0), 1)
-        EVT_WAIT_FRAMES(1)
-        EVT_GOTO(10)
-    EVT_END_THREAD
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(80240BA0) = SCRIPT({
+    PlaySound(0x8000004B);
+    spawn {
+        EVT_VAR(0) = 0;
+10:
+        RotateModel(9, EVT_VAR(0), 0, 0, 1);
+        RotateModel(15, EVT_VAR(0), 0, 0, 1);
+        RotateModel(11, EVT_VAR(0), 0, 0, 1);
+        RotateModel(13, EVT_VAR(0), 0, 0, -1);
+        RotateModel(17, EVT_VAR(0), 0, 0, -1);
+        EVT_VAR(0) += 1;
+        sleep 1;
+        goto 10;
+    }
+});
 
 static s32 N(pad_CB4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80240CC0) = {
-    EVT_CALL(N(func_802400C0_BF4860))
-    EVT_CALL(DemoJoystickXY, 2, 0)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 12, 4)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 28, 11)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 47, 22)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 68, 38)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 67, 48)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 64, 59)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 64, 62)
-    EVT_WAIT_FRAMES(4)
-    EVT_CALL(DemoSetButtons, 32768)
-    EVT_WAIT_FRAMES(10)
-    EVT_CALL(DemoJoystickXY, 64, 58)
-    EVT_CALL(DemoSetButtons, 0)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 70, 34)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 77, -2)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 74, -23)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 71, -36)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 69, -44)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 67, -49)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 30, -30)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 0, 0)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 0, -1)
-    EVT_WAIT_FRAMES(8)
-    EVT_CALL(DemoSetButtons, 32768)
-    EVT_WAIT_FRAMES(2)
-    EVT_CALL(DemoJoystickXY, 0, -2)
-    EVT_WAIT_FRAMES(2)
-    EVT_CALL(DemoJoystickXY, 0, -1)
-    EVT_WAIT_FRAMES(2)
-    EVT_CALL(DemoJoystickXY, 0, 0)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoSetButtons, 0)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 1, 0)
-    EVT_WAIT_FRAMES(1)
-    EVT_CALL(DemoJoystickXY, 0, 0)
-    EVT_CALL(N(func_802400D4_BF4874))
-    EVT_CALL(DemoSetButtons, 32768)
-    EVT_WAIT_FRAMES(12)
-    EVT_CALL(DemoSetButtons, 0)
-    EVT_WAIT_FRAMES(20)
-    EVT_IF_EQ(EVT_SAVE_FLAG(9), 1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(EVT_SAVE_FLAG(9), 1)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("arn_08"), 2, 2)
-    EVT_WAIT_FRAMES(100)
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(80240CC0) = SCRIPT({
+    N(func_802400C0_BF4860)();
+    DemoJoystickXY(2, 0);
+    sleep 1;
+    DemoJoystickXY(12, 4);
+    sleep 1;
+    DemoJoystickXY(28, 11);
+    sleep 1;
+    DemoJoystickXY(47, 22);
+    sleep 1;
+    DemoJoystickXY(68, 38);
+    sleep 1;
+    DemoJoystickXY(67, 48);
+    sleep 1;
+    DemoJoystickXY(64, 59);
+    sleep 1;
+    DemoJoystickXY(64, 62);
+    sleep 4;
+    DemoSetButtons(32768);
+    sleep 10;
+    DemoJoystickXY(64, 58);
+    DemoSetButtons(0);
+    sleep 1;
+    DemoJoystickXY(70, 34);
+    sleep 1;
+    DemoJoystickXY(77, -2);
+    sleep 1;
+    DemoJoystickXY(74, -23);
+    sleep 1;
+    DemoJoystickXY(71, -36);
+    sleep 1;
+    DemoJoystickXY(69, -44);
+    sleep 1;
+    DemoJoystickXY(67, -49);
+    sleep 1;
+    DemoJoystickXY(30, -30);
+    sleep 1;
+    DemoJoystickXY(0, 0);
+    sleep 1;
+    DemoJoystickXY(0, -1);
+    sleep 8;
+    DemoSetButtons(32768);
+    sleep 2;
+    DemoJoystickXY(0, -2);
+    sleep 2;
+    DemoJoystickXY(0, -1);
+    sleep 2;
+    DemoJoystickXY(0, 0);
+    sleep 1;
+    DemoSetButtons(0);
+    sleep 1;
+    DemoJoystickXY(1, 0);
+    sleep 1;
+    DemoJoystickXY(0, 0);
+    N(func_802400D4_BF4874)();
+    DemoSetButtons(32768);
+    sleep 12;
+    DemoSetButtons(0);
+    sleep 20;
+    if (EVT_SAVE_FLAG(9) == 1) {
+        return;
+    }
+    EVT_SAVE_FLAG(9) = 1;
+    GotoMapSpecial("arn_08", 2, 2);
+    sleep 100;
+});
 
-EvtSource N(802410AC) = {
-    EVT_WAIT_FRAMES(10)
-    EVT_LOOP(0)
-        EVT_CALL(GetDemoState, EVT_VAR(0))
-        EVT_IF_EQ(EVT_VAR(0), 2)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-        EVT_WAIT_FRAMES(1)
-    EVT_END_LOOP
-    EVT_IF_EQ(EVT_SAVE_FLAG(9), 1)
-        EVT_RETURN
-    EVT_END_IF
-    EVT_SET(EVT_SAVE_FLAG(9), 1)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("arn_08"), 2, 3)
-    EVT_WAIT_FRAMES(35)
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(802410AC) = SCRIPT({
+    sleep 10;
+    loop {
+        GetDemoState(EVT_VAR(0));
+        if (EVT_VAR(0) == 2) {
+            break loop;
+        }
+        sleep 1;
+    }
+    if (EVT_SAVE_FLAG(9) == 1) {
+        return;
+    }
+    EVT_SAVE_FLAG(9) = 1;
+    GotoMapSpecial("arn_08", 2, 3);
+    sleep 35;
+});
 
-EvtSource N(8024116C) = {
-    EVT_CALL(N(func_802400F4_BF4894))
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(8024116C) = SCRIPT({
+    N(func_802400F4_BF4894)();
+});
 
 s32 N(D_80241188_BF5928) = {
     0x00000000,
 };
 
-EvtSource N(8024118C) = {
-    EVT_CALL(SetCamProperties, 0, EVT_FIXED(90.0), 0, 0, 0, EVT_FIXED(470.0), EVT_FIXED(17.0), EVT_FIXED(-7.0))
-    EVT_CALL(N(func_8024019C_BF493C))
-    EVT_SET(EVT_SAVE_FLAG(9), 0)
-    EVT_EXEC(N(802410AC))
-    EVT_EXEC(N(80240CC0))
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(8024118C) = SCRIPT({
+    SetCamProperties(0, 90.0, 0, 0, 0, 470.0, 17.0, -7.0);
+    N(func_8024019C_BF493C)();
+    EVT_SAVE_FLAG(9) = 0;
+    spawn N(802410AC);
+    spawn N(80240CC0);
+});
 
 static s32 N(pad_11FC) = {
     0x00000000,
 };
 
-EvtSource N(80241200) = {
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(80241200) = SCRIPT({
 
-EvtSource N(80241210) = {
-    EVT_RETURN
-    EVT_END
-};
+});
+
+EvtSource N(80241210) = SCRIPT({
+
+});
 
 NpcSettings N(npcSettings_80241220) = {
     .height = 24,
@@ -322,47 +300,45 @@ NpcSettings N(npcSettings_8024124C) = {
     .level = 13,
 };
 
-EvtSource N(idle_80241278) = {
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(idle_80241278) = SCRIPT({
 
-EvtSource N(init_80241288) = {
-    EVT_IF_NE(EVT_SAVE_VAR(0), -18)
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
-    EVT_ELSE
-        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80241278)))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
+});
 
-EvtSource N(interact_802412E8) = {
-    EVT_SWITCH(EVT_SAVE_VAR(0))
-        EVT_CASE_LT(8)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BA))
-        EVT_CASE_LT(42)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BB))
-        EVT_CASE_LT(61)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BC))
-        EVT_CASE_LT(90)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BD))
-        EVT_CASE_GE(90)
-            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BE))
-    EVT_END_SWITCH
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(init_80241288) = SCRIPT({
+    if (EVT_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WELL) {
+        SetNpcPos(NPC_SELF, 0, -1000, 0);
+    } else {
+        BindNpcIdle(NPC_SELF, N(idle_80241278));
+    }
+});
 
-EvtSource N(init_802413E8) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), -12)
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
-    EVT_ELSE
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802412E8)))
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(interact_802412E8) = SCRIPT({
+    match EVT_STORY_PROGRESS {
+        < STORY_CH5_WHALE_MOUTH_OPEN {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BA));
+        }
+        < STORY_CH6_FLOWER_GATE_OPEN {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BB));
+        }
+        < STORY_CH7_INVITED_TO_STARBORN_VALLEY {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BC));
+        }
+        < STORY_CH8_OPENED_PATH_TO_STAR_WAY {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BD));
+        }
+        >= STORY_CH8_OPENED_PATH_TO_STAR_WAY {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BE));
+        }
+    }
+});
+
+EvtSource N(init_802413E8) = SCRIPT({
+    if (EVT_STORY_PROGRESS < STORY_CH4_FRYING_PAN_STOLEN) {
+        SetNpcPos(NPC_SELF, 0, -1000, 0);
+    } else {
+        BindNpcInteract(NPC_SELF, N(interact_802412E8));
+    }
+});
 
 StaticNpc N(npcGroup_80241448) = {
     .id = NPC_TUBBAS_HEART,
@@ -435,13 +411,11 @@ static s32 N(pad_184C) = {
     0x00000000,
 };
 
-EvtSource N(makeEntities) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), -23)
-        EVT_CALL(MakeEntity, 0x802BCE84, 0, 30, 0, 0, MAKE_ENTITY_END)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
+EvtSource N(makeEntities) = SCRIPT({
+    if (EVT_STORY_PROGRESS < STORY_CH3_WENT_DOWN_THE_WELL) {
+        MakeEntity(0x802BCE84, 0, 30, 0, 0, MAKE_ENTITY_END);
+    }
+});
 
 ApiStatus N(func_802400C0_BF4860)(Evt* script, s32 isInitialCall) {
     gPlayerData.bootsLevel = 1;

@@ -86,11 +86,9 @@ def get_constants():
 
     valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims",
         "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
-        "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags", "Statuses", "Elements",
-        "DamageTypes", "HitResults", "ActorFlags", "ActorPartFlags",
-        "ActorEventFlags", "ElementFlags", "EncounterTriggers", "Abilities",
-        "Easings", "DecorationIDs", "HitResults", "Phases", "ItemSpawnModes",
-        "ActionStates", "Triggers", "Buttons", "ActionCommand", "MoveIDs" }
+        "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags",
+        "Events", "Statuses", "Elements", "DamageTypes", "HitResults",
+        "ActorFlags", "ActorPartFlags", "ActorEventFlags", "ElementFlags" }
     for enum in valid_enums:
         CONSTANTS[enum] = {}
     CONSTANTS["NPC_SPRITE"] = {}
@@ -276,17 +274,6 @@ def fix_args(self, func, args, info):
                 if not enabled:
                     enabled.append(f"0")
                 new_args.append("((" + " | ".join(enabled) + "))")
-            elif info[i] == "SoundIDs":
-                if argNum in CONSTANTS["SoundIDs"]:
-                    new_args.append(CONSTANTS["SoundIDs"][argNum])
-                else:
-                    new_args.append("0x%X" % argNum)
-            elif info[i] == "StoryProgress":
-                print(info[i])
-                if argNum in CONSTANTS["StoryProgress"]:
-                    new_args.append(CONSTANTS["StoryProgress"][argNum])
-                else:
-                    new_args.append(str(argNum))
             elif argNum in CONSTANTS[info[i]]:
                 new_args.append(f"{CONSTANTS[info[i]][argNum]}")
             else:
@@ -602,7 +589,7 @@ class ScriptDisassembler:
             self.indent -= 1
 
             if self.prelude:
-                self.prefix_line(f"EvtSource {self.script_name} = {{")
+                self.prefix_line(f"EvtSource {self.script_name}= {{")
                 self.write_line("};")
 
             self.done = True
@@ -754,19 +741,13 @@ class ScriptDisassembler:
         elif opcode == 0x43:
             func = self.addr_ref(argv[0])
             args = [self.var(a, use_evt_ptr=True) for a in argv[1:]]
-
             args_str = ', '.join(args)
+
             args_str = replace_constants(self, func, args_str)
 
             if func.startswith("evt_"):
                 # use func-specific macro
                 self.write_line(f"{func}({args_str})")
-            # Since the map ascii for map transitions is global, and several of them share the same RAM address,
-            # or ar not migrated, we have to create a placeholder
-            elif func == "GotoMap" or func == "GotoMapSpecial":
-                args = [self.var(a, use_evt_ptr=True) for a in argv[2:]]
-                args_str = ', '.join(args)
-                self.write_line(f"EVT_CALL({func}, EVT_PTR(UNK_STR_{argv[1]:X}), {args_str})")
             elif args_str:
                 self.write_line(f"EVT_CALL({func}, {args_str})")
             else:
@@ -865,7 +846,7 @@ if __name__ == "__main__":
             while offset < args.end:
                 f.seek(offset)
 
-                script = ScriptDisassembler(f, args.offset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
+                script = ScriptDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
                 try:
                     script_text = script.disassemble()
 
@@ -911,10 +892,10 @@ if __name__ == "__main__":
 
             f.seek(offset)
 
-            script = ScriptDisassembler(f, args.offset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
+            script = ScriptDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
 
             if args.si:
-                print(ScriptDisassembler(f, args.offset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED).disassemble(), end="")
+                print(ScriptDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED).disassemble(), end="")
             else:
                 try:
                     script_text = script.disassemble()
