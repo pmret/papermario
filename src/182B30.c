@@ -26,7 +26,39 @@ void mtx_mirror_y(Matrix4f arg0) {
     (arg0)[3][3] = 1.0f;
 }
 
-INCLUDE_ASM(s32, "182B30", enable_actor_blur);
+void enable_actor_blur(Actor* actor) {
+    ActorPart* partsTable = actor->partsTable;
+    DecorationTable* decorationTable = partsTable->decorationTable;
+    s32 i, j;
+    s32 numParts;
+
+    decorationTable->effectType = 0;
+    decorationTable->unk_7DB++;
+    actor->flags |= ACTOR_FLAG_10000000;
+    partsTable = actor->partsTable;
+    numParts = actor->numParts;
+
+    for (i = 0; i < numParts; i++) {
+        if (partsTable->idleAnimations != NULL && !(partsTable->flags & ACTOR_PART_FLAG_2)) {
+            decorationTable = partsTable->decorationTable;
+            decorationTable->unk_7D8 = 0;
+            decorationTable->unk_7D9 = 0;
+            for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
+                decorationTable->posX[j] = partsTable->currentPos.x;
+                decorationTable->posY[j] = partsTable->currentPos.y;
+                decorationTable->posZ[j] = partsTable->currentPos.z;
+                decorationTable->scale[j] = actor->yaw;
+                decorationTable->rotationPivotOffsetX[j] = (s32)(actor->rotationPivotOffset.x * actor->scalingFactor);
+                decorationTable->rotationPivotOffsetY[j] = (s32)(actor->rotationPivotOffset.y * actor->scalingFactor);
+
+                decorationTable->rotX[j] = clamp_angle(actor->rotation.x) * 0.5f;
+                decorationTable->rotY[j] = clamp_angle(actor->rotation.y) * 0.5f;
+                decorationTable->rotZ[j] = clamp_angle(actor->rotation.z) * 0.5f;
+            }
+        }
+        partsTable = partsTable->nextPart;
+    }
+}
 
 void disable_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;

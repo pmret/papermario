@@ -1698,7 +1698,7 @@ typedef struct Actor {
     /* 0x1F0 */ s8 lastEventType;
     /* 0x1F1 */ s8 turnPriority;
     /* 0x1F2 */ u8 enemyIndex; /* actorID = this | 200 */
-    /* 0x1F3 */ u8 numParts;
+    /* 0x1F3 */ s8 numParts;
     /* 0x1F4 */ struct ActorPart* partsTable;
     /* 0x1F8 */ s16 lastDamageTaken;
     /* 0x1FA */ u16 hpChangeCounter;
