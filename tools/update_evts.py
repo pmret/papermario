@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import re
 
-from disasm_script import ScriptDisassembler, get_constants
+from .disasm_script import ScriptDisassembler, get_constants
 from glob import glob
 import os
 
