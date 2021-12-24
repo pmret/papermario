@@ -231,7 +231,7 @@ glabel btl_state_update_partner_menu
 /* 41D2A4 802A8514 24020006 */   addiu    $v0, $zero, 6
 /* 41D2A8 802A8518 A282005C */  sb        $v0, 0x5c($s4)
 .L802A851C:
-/* 41D2AC 802A851C 0C098E45 */  jal       func_80263914
+/* 41D2AC 802A851C 0C098E45 */  jal       btl_init_menu_partner
 /* 41D2B0 802A8520 00000000 */   nop
 /* 41D2B4 802A8524 0C098C9A */  jal       func_80263268
 /* 41D2B8 802A8528 00000000 */   nop

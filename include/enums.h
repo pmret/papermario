@@ -2074,54 +2074,72 @@ enum MoveIDs {
     MOVE_PEACH_BEAM                 = 0x00000080,
     MOVE_PEACH_FOCUS                = 0x00000081,
     MOVE_TWINK_DASH                 = 0x00000082,
+
+    // Goombario moves
     MOVE_HEADBONK1                  = 0x00000083,
     MOVE_HEADBONK2                  = 0x00000084,
     MOVE_HEADBONK3                  = 0x00000085,
     MOVE_TATTLE                     = 0x00000086,
     MOVE_CHARGE                     = 0x00000087,
     MOVE_MULTIBONK                  = 0x00000088,
+
+    // Kooper moves
     MOVE_SHELL_TOSS1                = 0x00000089,
     MOVE_SHELL_TOSS2                = 0x0000008A,
     MOVE_SHELL_TOSS3                = 0x0000008B,
     MOVE_POWER_SHELL                = 0x0000008C,
     MOVE_DIZZY_SHELL                = 0x0000008D,
     MOVE_FIRE_SHELL                 = 0x0000008E,
+
+    // Bombette moves
     MOVE_BODY_SLAM1                 = 0x0000008F,
     MOVE_BODY_SLAM2                 = 0x00000090,
     MOVE_BODY_SLAM3                 = 0x00000091,
     MOVE_BOMB                       = 0x00000092,
     MOVE_POWER_BOMB                 = 0x00000093,
     MOVE_MEGA_BOMB                  = 0x00000094,
+
+    // Parakarry moves
     MOVE_SKY_DIVE1                  = 0x00000095,
     MOVE_SKY_DIVE2                  = 0x00000096,
     MOVE_SKY_DIVE3                  = 0x00000097,
     MOVE_SHELL_SHOT                 = 0x00000098,
     MOVE_AIR_LIFT                   = 0x00000099,
     MOVE_AIR_RAID                   = 0x0000009A,
+
+    // Goompa moves
     MOVE_UNUSED_LONE_FOOL1          = 0x0000009B,
     MOVE_UNUSED_LONE_FOOL2          = 0x0000009C,
     MOVE_UNUSED_LONE_FOOL3          = 0x0000009D,
     MOVE_UNUSED_MUMBLE              = 0x0000009E,
     MOVE_UNUSED_PREACH              = 0x0000009F,
     MOVE_UNUSED_AWAKENING           = 0x000000A0,
+
+    // Watt moves
     MOVE_ELECTRO_DASH1              = 0x000000A1,
     MOVE_ELECTRO_DASH2              = 0x000000A2,
     MOVE_ELECTRO_DASH3              = 0x000000A3,
     MOVE_POWER_SHOCK                = 0x000000A4,
     MOVE_TURBO_CHARGE               = 0x000000A5,
     MOVE_MEGA_SHOCK                 = 0x000000A6,
+
+    // Sushie moves
     MOVE_BELLY_FLOP1                = 0x000000A7,
     MOVE_BELLY_FLOP2                = 0x000000A8,
     MOVE_BELLY_FLOP3                = 0x000000A9,
     MOVE_SQUIRT                     = 0x000000AA,
     MOVE_WATER_BLOCK                = 0x000000AB,
     MOVE_TIDAL_WAVE                 = 0x000000AC,
+
+    // Lakilester moves
     MOVE_SPINY_FLIP1                = 0x000000AD,
     MOVE_SPINY_FLIP2                = 0x000000AE,
     MOVE_SPINY_FLIP3                = 0x000000AF,
     MOVE_SPINY_SURGE                = 0x000000B0,
     MOVE_CLOUD_NINE                 = 0x000000B1,
     MOVE_HURRICANE                  = 0x000000B2,
+
+    // Bow moves
     MOVE_SMACK1                     = 0x000000B3,
     MOVE_SMACK2                     = 0x000000B4,
     MOVE_SMACK3                     = 0x000000B5,

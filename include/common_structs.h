@@ -679,7 +679,7 @@ typedef struct BattleStatus {
     /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
     /* 0x07B */ u8 damageTaken;
     /* 0x07C */ u8 changePartnerAllowed;
-    /* 0x07D */ char unk_7D[4];
+    /* 0x07D */ s8 menuStatus[4]; ///< -1 = automatically pick the first move, 0 = disabled, 1 = enabled
     /* 0x081 */ s8 actionSuccess;
     /* 0x082 */ char unk_82;
     /* 0x083 */ s8 unk_83;
@@ -736,7 +736,7 @@ typedef struct BattleStatus {
     /* 0x171 */ s8 numEnemyActors;
     /* 0x172 */ s16 currentTurnEnemyID;
     /* 0x174 */ struct Actor* currentTurnEnemy;
-    /* 0x178 */ s8 moveCategory;
+    /* 0x178 */ s8 moveCategory; ///< 0 = jump, 1 = hammer, 5 = partner, ...
     /* 0x179 */ char unk_179;
     /* 0x17A */ s16 selectedItemID;
     /* 0x17C */ s16 selectedMoveID;
@@ -765,7 +765,7 @@ typedef struct BattleStatus {
     /* 0x1AA */ char unk_1AA[4];
     /* 0x1AE */ s16 submenuIcons[24]; /* icon IDs */
     /* 0x1DE */ u8 submenuMoves[24]; /* move IDs */
-    /* 0x1F6 */ s8 submenuEnabled[24];
+    /* 0x1F6 */ s8 submenuStatus[24]; ///< 1 = enabled, 0 = not enough FP, -1,-2 = no targets
     /* 0x20E */ u8 submenuMoveCount;
     /* 0x20F */ char unk_20F;
     /* 0x210 */ s32 currentButtonsDown;
@@ -805,12 +805,17 @@ typedef struct TextureHeader {
     /* 0x2F */ u8 filtering;
 } TextureHeader; // size = 0x30
 
+enum BattleSubmenu {
+    BATTLE_SUBMENU_HAMMER       = 1,
+    BATTLE_SUBMENU_JUMP         = 2,
+};
+
 typedef struct StaticMove {
     /* 0x00 */ s32 moveNameID;
     /* 0x04 */ s32 flags;
     /* 0x08 */ s32 worldDescID;
     /* 0x0C */ s32 menuDescID;
-    /* 0x10 */ s8 battleSubmenu;
+    /* 0x10 */ s8 battleSubmenu; ///< @see enum BattleSubmenu
     /* 0x11 */ s8 costFP;
     /* 0x12 */ s8 costBP;
     /* 0x13 */ u8 actionCommandID;
