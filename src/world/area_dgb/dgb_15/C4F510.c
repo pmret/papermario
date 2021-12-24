@@ -87,7 +87,7 @@ EvtSource N(exitSingleDoor_80241B30) = SCRIPT({
     sleep 100;
 });
 
-const N(pad_XXXX)[] = { 0, 0 };
+const s32 N(pad_XXXX)[] = { 0, 0 };
 
 EvtSource N(80241BE4) = SCRIPT({
     bind N(exitDoubleDoor_802419C8) TRIGGER_WALL_PRESS_A 19;
@@ -328,7 +328,7 @@ EvtSource N(npcAI_8024274C) = SCRIPT({
     N(func_80241464_C50974)(N(npcAISettings_8024271C));
 });
 
-const char N(dgb_14_name_hack)[];
+extern const char N(dgb_14_name_hack)[];
 
 EvtSource N(defeat_802427B0) = SCRIPT({
     N(UnkFunc1)();

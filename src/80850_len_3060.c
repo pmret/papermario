@@ -4,6 +4,16 @@
 extern s32 D_800F7FA8;
 extern s32 D_800F7F80[10];
 
+extern HudElementAnim D_80108248[];
+extern HudElementAnim D_80108518[];
+extern HudElementAnim D_80108270[];
+extern HudElementAnim D_80108538[];
+extern HudElementAnim D_80080FC4[];
+extern HudElementAnim D_801086AC[];
+extern HudElementAnim D_801083D8[];
+extern HudElementAnim D_80108068[];
+extern HudElementAnim D_80104BEC[];
+
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;
     s32 i;
@@ -320,68 +330,68 @@ void initialize_status_menu(void) {
 
     close_status_menu();
 
-    iconIndex = create_hud_element(&D_80108248);
+    iconIndex = create_hud_element(D_80108248);
     uiStatus->hpIconIndexes[0] = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(&D_80108518);
+    iconIndex = create_hud_element(D_80108518);
     uiStatus->hpIconIndexes[1] = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(&D_80108270);
+    iconIndex = create_hud_element(D_80108270);
     uiStatus->fpIconIndexes[0] = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(&D_80108538);
+    iconIndex = create_hud_element(D_80108538);
     uiStatus->fpIconIndexes[1] = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(&D_80108558);
+    iconIndex = create_hud_element(D_80108558);
     uiStatus->coinIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(&D_80080FC4);
+    iconIndex = create_hud_element(D_80080FC4);
     uiStatus->coinIconIndex2 = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(&D_801086AC);
+    iconIndex = create_hud_element(D_801086AC);
     uiStatus->starpointsIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(&D_80104BEC);
+    iconIndex = create_hud_element(D_80104BEC);
     uiStatus->starpointsIconIndex2 = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    newVar = create_hud_element(&D_80108068);
+    newVar = create_hud_element(D_80108068);
     iconIndex = newVar;
     uiStatus->iconIndex8 = iconIndex;
     set_hud_element_flags(iconIndex, 0x82);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(&D_80108068);
+    iconIndex = create_hud_element(D_80108068);
     uiStatus->iconIndex9 = iconIndex;
     set_hud_element_flags(iconIndex, 0x82);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(&D_80108068);
+    iconIndex = create_hud_element(D_80108068);
     uiStatus->iconIndexA = iconIndex;
     set_hud_element_flags(iconIndex, 0x82);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(&D_80108068);
+    iconIndex = create_hud_element(D_80108068);
     uiStatus->iconIndexB = iconIndex;
     set_hud_element_flags(iconIndex, 0x82);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(&D_801083D8);
+    iconIndex = create_hud_element(D_801083D8);
     uiStatus->iconIndexC = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
@@ -518,11 +528,11 @@ void show_coin_counter(void) {
     if (uiStatus->unk_6C[0] == 0) {
         set_window_properties(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, coin_counter_draw_content, 0, -1);
         set_window_update(0x14, basic_window_update);
-        index = create_hud_element(&D_80109270);
+        index = create_hud_element(D_80109270);
         uiStatus->iconIndex10 = index;
         set_hud_element_flags(index, 0x80);
         set_hud_element_tint(index, 0xff, 0xff, 0xff);
-        index = create_hud_element(&D_80108558);
+        index = create_hud_element(D_80108558);
         uiStatus->iconIndex11 = index;
         set_hud_element_flags(index, 0x80);
         set_hud_element_tint(index, 0xff, 0xff, 0xff);

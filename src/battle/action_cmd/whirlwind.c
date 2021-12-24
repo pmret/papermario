@@ -70,14 +70,14 @@ INCLUDE_ASM(s32, "battle/action_cmd/whirlwind", func_802A91E0_423E50);
 INCLUDE_ASM(s32, "battle/action_cmd/whirlwind", func_802A92F0_423F60);
 
 // hud element scripts
-extern s32* D_802AA888_4254F8[];
-extern s32* D_802AA8A0_425510[];
+extern HudElementAnim* D_802AA888_4254F8[];
+extern HudElementAnim* D_802AA8A0_425510[];
 
 void func_802A9744_4243B4(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 x, y;
-    HudElement* hudElement;
+    s32 hudElement;
 
     if (actionCommandStatus->unk_6A == 0) {
         draw_hud_element_clipped(actionCommandStatus->hudElements[0]);
@@ -86,7 +86,7 @@ void func_802A9744_4243B4(void) {
     draw_hud_element_clipped(hudElement);
     get_hud_element_render_pos(hudElement, &x, &y);
 
-    func_80268798(x, y, (s16)actionCommandStatus->barFillLevel / 100, 1);
+    func_80268798(x, y, (s16) actionCommandStatus->barFillLevel / 100, 1);
     draw_hud_element_clipped(actionCommandStatus->hudElements[3]);
     hudElement = actionCommandStatus->hudElements[2];
     if (actionCommandStatus->unk_64 == 0) {

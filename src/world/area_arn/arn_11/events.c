@@ -5,108 +5,122 @@ enum {
     NPC_TUBBAS_HEART,
 };
 
-EvtSource N(802400F0) = SCRIPT({
-    SetCamType(0, 6, 1);
-    SetCamSpeed(0, 3.0);
-    UseSettingsFrom(0, 60, 30, 0);
-    SetPanTarget(0, 60, 30, 0);
-    SetCamPitch(0, 20.0, -13.0);
-    SetCamDistance(0, 275);
-    PanToTarget(0, 0, 1);
-    WaitForCam(0, 1.0);
-});
+EvtSource N(802400F0) = {
+    EVT_CALL(SetCamType, 0, 6, 1)
+    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(3.0))
+    EVT_CALL(UseSettingsFrom, 0, 60, 30, 0)
+    EVT_CALL(SetPanTarget, 0, 60, 30, 0)
+    EVT_CALL(SetCamPitch, 0, EVT_FIXED(20.0), EVT_FIXED(-13.0))
+    EVT_CALL(SetCamDistance, 0, 275)
+    EVT_CALL(PanToTarget, 0, 0, 1)
+    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(802401BC) = SCRIPT({
-    DisablePlayerInput(TRUE);
-    sleep 30;
-    SetPlayerSpeed(3.0);
-    PlayerMoveTo(6, 0, 0);
-    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BF));
-    sleep 10;
-    SetPlayerAnimation(ANIM_80007);
-    sleep 40;
-    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00C0));
-    SetPlayerAnimation(ANIM_10002);
-    sleep 10;
-    SetPlayerAnimation(0x90000);
-    sleep 30;
-    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00C1));
-    SetPlayerAnimation(ANIM_10002);
-    sleep 20;
-    SetPlayerAnimation(0x90000);
-    spawn {
-        SetNpcJumpscale(NPC_TUBBAS_HEART, 2.5);
-        GetNpcPos(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
-        NpcJump0(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10);
-        sleep 1;
-        PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
-        NpcJump0(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10);
-    }
-    sleep 40;
-    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00C2));
-    SetPlayerAnimation(0x90000);
-    sleep 10;
-    SetNpcVar(0, 0, 1);
-    DisablePlayerInput(FALSE);
-});
+EvtSource N(802401BC) = {
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_WAIT_FRAMES(30)
+    EVT_CALL(SetPlayerSpeed, EVT_FIXED(3.0))
+    EVT_CALL(PlayerMoveTo, 6, 0, 0)
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BF))
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(SetPlayerAnimation, ANIM_80007)
+    EVT_WAIT_FRAMES(40)
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00C0))
+    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(SetPlayerAnimation, 589824)
+    EVT_WAIT_FRAMES(30)
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00C1))
+    EVT_CALL(SetPlayerAnimation, ANIM_10002)
+    EVT_WAIT_FRAMES(20)
+    EVT_CALL(SetPlayerAnimation, 589824)
+    EVT_THREAD
+        EVT_CALL(SetNpcJumpscale, 0, EVT_FIXED(2.5))
+        EVT_CALL(GetNpcPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
+        EVT_CALL(NpcJump0, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(PlaySoundAtNpc, 0, 0x20C8, 0)
+        EVT_CALL(NpcJump0, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10)
+    EVT_END_THREAD
+    EVT_WAIT_FRAMES(40)
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00C2))
+    EVT_CALL(SetPlayerAnimation, 589824)
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(SetNpcVar, 0, 0, 1)
+    EVT_CALL(DisablePlayerInput, FALSE)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(exitSingleDoor_80240428) = SCRIPT({
-    group 27;
-    DisablePlayerInput(TRUE);
-    EVT_VAR(0) = 0;
-    EVT_VAR(1) = 2;
-    EVT_VAR(2) = 0;
-    EVT_VAR(3) = -1;
-    spawn ExitSingleDoor;
-    sleep 17;
-    GotoMap("arn_13", 1);
-    sleep 100;
-});
+EvtSource N(exitSingleDoor_80240428) = {
+    EVT_SET_GROUP(27)
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_SET(EVT_VAR(0), 0)
+    EVT_SET(EVT_VAR(1), 2)
+    EVT_SET(EVT_VAR(2), 0)
+    EVT_SET(EVT_VAR(3), -1)
+    EVT_EXEC(ExitSingleDoor)
+    EVT_WAIT_FRAMES(17)
+    EVT_CALL(GotoMap, EVT_PTR("arn_13"), 1)
+    EVT_WAIT_FRAMES(100)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(802404CC) = SCRIPT({
-    bind N(exitSingleDoor_80240428) TRIGGER_WALL_PRESS_A 2;
-});
+EvtSource N(802404CC) = {
+    EVT_BIND_TRIGGER(N(exitSingleDoor_80240428), TRIGGER_WALL_PRESS_A, 2, 1, 0)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(enterSingleDoor_802404F8) = SCRIPT({
-    DisablePlayerInput(TRUE);
-    EVT_VAR(2) = 0;
-    EVT_VAR(3) = -1;
-    await EnterSingleDoor;
-    spawn N(802404CC);
-    if (EVT_STORY_PROGRESS < STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
-        sleep 10;
-        spawn N(802400F0);
-        spawn N(802401BC);
-        sleep 1;
-    }
-    DisablePlayerInput(FALSE);
-});
+EvtSource N(enterSingleDoor_802404F8) = {
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_SET(EVT_VAR(2), 0)
+    EVT_SET(EVT_VAR(3), -1)
+    EVT_EXEC_WAIT(EnterSingleDoor)
+    EVT_EXEC(N(802404CC))
+    EVT_IF_LT(EVT_SAVE_VAR(0), -22)
+        EVT_WAIT_FRAMES(10)
+        EVT_EXEC(N(802400F0))
+        EVT_EXEC(N(802401BC))
+        EVT_WAIT_FRAMES(1)
+    EVT_END_IF
+    EVT_CALL(DisablePlayerInput, FALSE)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(main) = SCRIPT({
-    EVT_WORLD_LOCATION = LOCATION_WINDY_MILL;
-    SetSpriteShading(524290);
-    SetCamPerspective(0, 3, 25, 16, 4096);
-    SetCamBGColor(0, 0, 0, 0);
-    SetCamLeadPlayer(0, 0);
-    SetCamEnabled(0, 1);
-    MakeNpcs(0, N(npcGroupList_802410DC));
-    spawn N(80240050);
-    spawn N(enterSingleDoor_802404F8);
-    sleep 1;
-});
+EvtSource N(main) = {
+    EVT_SET(EVT_SAVE_VAR(425), 35)
+    EVT_CALL(SetSpriteShading, 524290)
+    EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
+    EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
+    EVT_CALL(SetCamLeadPlayer, 0, 0)
+    EVT_CALL(SetCamEnabled, 0, 1)
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_802410DC)))
+    EVT_EXEC(N(80240050))
+    EVT_EXEC(N(enterSingleDoor_802404F8))
+    EVT_WAIT_FRAMES(1)
+    EVT_RETURN
+    EVT_END
+};
 
 static s32 N(pad_674)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80240680) = SCRIPT({
+EvtSource N(80240680) = {
+    EVT_RETURN
+    EVT_END
+};
 
-});
-
-EvtSource N(80240690) = SCRIPT({
-
-});
+EvtSource N(80240690) = {
+    EVT_RETURN
+    EVT_END
+};
 
 NpcSettings N(npcSettings_802406A0) = {
     .height = 24,
@@ -116,54 +130,60 @@ NpcSettings N(npcSettings_802406A0) = {
     .level = 13,
 };
 
-EvtSource N(idle_802406CC) = SCRIPT({
-    loop {
-        GetSelfVar(0, EVT_VAR(0));
-        if (EVT_VAR(0) != 0) {
-            break loop;
-        }
-        sleep 1;
-    }
-    spawn {
-        SetCamType(0, 6, 1);
-        SetCamSpeed(0, 4.0);
-        GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        EVT_VAR(0) += 50;
-        UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        SetCamDistance(0, 3000);
-        PanToTarget(0, 0, 1);
-        WaitForCam(0, 1.0);
-    }
-    StartBossBattle(11);
-});
+EvtSource N(idle_802406CC) = {
+    EVT_LOOP(0)
+        EVT_CALL(GetSelfVar, 0, EVT_VAR(0))
+        EVT_IF_NE(EVT_VAR(0), 0)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_THREAD
+        EVT_CALL(SetCamType, 0, 6, 1)
+        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(4.0))
+        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(0), 50)
+        EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(SetCamDistance, 0, 3000)
+        EVT_CALL(PanToTarget, 0, 0, 1)
+        EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_END_THREAD
+    EVT_CALL(StartBossBattle, 11)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(8024081C) = SCRIPT({
-    sleep 15;
-    PlaySoundAtCollider(2, 449, 0);
-    MakeLerp(0, 80, 10, 0);
-    loop {
-        UpdateLerp();
-        RotateModel(0, EVT_VAR(0), 0, -1, 0);
-        sleep 1;
-        if (EVT_VAR(1) == 0) {
-            break loop;
-        }
-    }
-});
+EvtSource N(8024081C) = {
+    EVT_WAIT_FRAMES(15)
+    EVT_CALL(PlaySoundAtCollider, 2, 449, 0)
+    EVT_CALL(MakeLerp, 0, 80, 10, 0)
+    EVT_LOOP(0)
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(RotateModel, 0, EVT_VAR(0), 0, -1, 0)
+        EVT_WAIT_FRAMES(1)
+        EVT_IF_EQ(EVT_VAR(1), 0)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+    EVT_END_LOOP
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(802408D8) = SCRIPT({
-    MakeLerp(80, 0, 10, 0);
-    loop {
-        UpdateLerp();
-        RotateModel(0, EVT_VAR(0), 0, -1, 0);
-        sleep 1;
-        if (EVT_VAR(1) == 0) {
-            break loop;
-        }
-    }
-    PlaySoundAtCollider(2, 450, 0);
-});
+EvtSource N(802408D8) = {
+    EVT_CALL(MakeLerp, 80, 0, 10, 0)
+    EVT_LOOP(0)
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(RotateModel, 0, EVT_VAR(0), 0, -1, 0)
+        EVT_WAIT_FRAMES(1)
+        EVT_IF_EQ(EVT_VAR(1), 0)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+    EVT_END_LOOP
+    EVT_CALL(PlaySoundAtCollider, 2, 450, 0)
+    EVT_RETURN
+    EVT_END
+};
 
 s32 N(intTable_80240988)[] = {
     0x00000064, 0x0000001E, 0x00000046, 0x00000019, 0x0000001E, 0x00000050, 0xFFFFD8F0, 0x00000000,
@@ -171,81 +191,85 @@ s32 N(intTable_80240988)[] = {
     0x00000000, 0x00000000, 0xFFFFD8F0, 0x00000000, 0x00000000,
 };
 
-EvtSource N(defeat_802409DC) = SCRIPT({
-    spawn {
-        SetCamType(0, 6, 1);
-        SetCamSpeed(0, 90.0);
-        GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        EVT_VAR(0) += 50;
-        UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        SetCamDistance(0, 450);
-        PanToTarget(0, 0, 1);
-    }
-    sleep 10;
-    PlayerFaceNpc(0, 1);
-    loop 2 {
-        GetNpcPos(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-        SetNpcJumpscale(NPC_TUBBAS_HEART, 2.5);
-        PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
-        NpcJump0(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 12);
-        sleep 1;
-    }
-    spawn {
-        sleep 10;
-        SetCamType(0, 4, 1);
-        SetCamSpeed(0, 2.0);
-        SetCamPitch(0, 17.0, -7.0);
-        SetCamDistance(0, 450);
-        SetCamPosA(0, -56, 70);
-        SetCamPosB(0, -90, 40);
-        SetCamPosC(0, 0, 0);
-        PanToTarget(0, 0, 1);
-    }
-    PlayerFaceNpc(0, 1);
-    buf_use N(intTable_80240988);
-    loop {
-        buf_read EVT_VAR(0) EVT_VAR(1) EVT_VAR(2);
-        if (EVT_VAR(0) == -10000) {
-            break loop;
-        }
-        PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
-        NpcJump0(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 12);
-        sleep 1;
-    }
-    spawn N(8024081C);
-    loop {
-        buf_read EVT_VAR(0) EVT_VAR(1) EVT_VAR(2);
-        if (EVT_VAR(0) == -10000) {
-            break loop;
-        }
-        PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
-        NpcJump0(NPC_TUBBAS_HEART, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 12);
-        sleep 1;
-    }
-    spawn N(802408D8);
-    sleep 30;
-    SetCamType(0, 6, 1);
-    SetCamSpeed(0, 90.0);
-    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetCamDistance(0, 450);
-    PanToTarget(0, 0, 1);
-    WaitForCam(0, 1.0);
-    PanToTarget(0, 0, 0);
-    EVT_STORY_PROGRESS = STORY_CH3_HEART_FLED_FIRST_TUNNEL;
-});
+EvtSource N(defeat_802409DC) = {
+    EVT_THREAD
+        EVT_CALL(SetCamType, 0, 6, 1)
+        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+        EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(0), 50)
+        EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(SetCamDistance, 0, 450)
+        EVT_CALL(PanToTarget, 0, 0, 1)
+    EVT_END_THREAD
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(PlayerFaceNpc, 0, 1)
+    EVT_LOOP(2)
+        EVT_CALL(GetNpcPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_CALL(SetNpcJumpscale, 0, EVT_FIXED(2.5))
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
+        EVT_CALL(NpcJump0, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 12)
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_THREAD
+        EVT_WAIT_FRAMES(10)
+        EVT_CALL(SetCamType, 0, 4, 1)
+        EVT_CALL(SetCamSpeed, 0, EVT_FIXED(2.0))
+        EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-7.0))
+        EVT_CALL(SetCamDistance, 0, 450)
+        EVT_CALL(SetCamPosA, 0, -56, 70)
+        EVT_CALL(SetCamPosB, 0, -90, 40)
+        EVT_CALL(SetCamPosC, 0, 0, 0)
+        EVT_CALL(PanToTarget, 0, 0, 1)
+    EVT_END_THREAD
+    EVT_CALL(PlayerFaceNpc, 0, 1)
+    EVT_USE_BUF(EVT_PTR(N(intTable_80240988)))
+    EVT_LOOP(0)
+        EVT_BUF_READ3(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_IF_EQ(EVT_VAR(0), -10000)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
+        EVT_CALL(NpcJump0, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 12)
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_EXEC(N(8024081C))
+    EVT_LOOP(0)
+        EVT_BUF_READ3(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+        EVT_IF_EQ(EVT_VAR(0), -10000)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+        EVT_CALL(PlaySoundAtNpc, NPC_SELF, 0x20C8, 0)
+        EVT_CALL(NpcJump0, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 12)
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_EXEC(N(802408D8))
+    EVT_WAIT_FRAMES(30)
+    EVT_CALL(SetCamType, 0, 6, 1)
+    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+    EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetCamDistance, 0, 450)
+    EVT_CALL(PanToTarget, 0, 0, 1)
+    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_CALL(PanToTarget, 0, 0, 0)
+    EVT_SET(EVT_SAVE_VAR(0), -22)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(init_80240E70) = SCRIPT({
-    if (EVT_STORY_PROGRESS >= STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
-        RemoveNpc(NPC_SELF);
-    } else {
-        SetSelfVar(0, 0);
-        BindNpcIdle(NPC_SELF, N(idle_802406CC));
-        BindNpcDefeat(NPC_SELF, N(defeat_802409DC));
-    }
-});
+EvtSource N(init_80240E70) = {
+    EVT_IF_GE(EVT_SAVE_VAR(0), -22)
+        EVT_CALL(RemoveNpc, NPC_SELF)
+    EVT_ELSE
+        EVT_CALL(SetSelfVar, 0, 0)
+        EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_802406CC)))
+        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802409DC)))
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
 
 StaticNpc N(npcGroup_80240EEC) = {
     .id = NPC_TUBBAS_HEART,

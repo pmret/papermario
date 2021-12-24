@@ -30,6 +30,8 @@
 #include "partner/twink.h"
 #include "sprite/npc/twink.h"
 
+extern s32 D_80108068[];
+extern s32 D_801083D8[];
 extern f32 D_8010CFC0;
 extern s16 D_8010CFC8;
 extern s16 D_8010CFCA;
@@ -366,7 +368,7 @@ s32 func_800EA52C(s32 arg0) {
             ret = 1;
         }
     }
-    
+
     return ret;
 }
 
@@ -887,7 +889,7 @@ INCLUDE_ASM(void, "world/partners", partner_clear_player_tracking, Npc* partner)
 
 s32 func_800EF4E0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Camera* cameras = &gCameras;
+    Camera* cameras = gCameras;
     s32 ret;
 
     if (playerStatus->unk_90 == 0.0f) {

@@ -309,8 +309,8 @@ typedef struct StageListRow {
 
 typedef struct BattleArea {
     /* 0x00 */ char* name; ///< JP debug name.
-    /* 0x04 */ s32 dmaStart;
-    /* 0x08 */ s32 dmaEnd;
+    /* 0x04 */ void* dmaStart;
+    /* 0x08 */ void* dmaEnd;
     /* 0x0C */ void* dmaDest;
     /* 0x10 */ BattleList* battles;
     /* 0x14 */ StageList* stages;

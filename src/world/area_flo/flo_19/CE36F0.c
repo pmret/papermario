@@ -36,11 +36,11 @@ EvtSource N(802409C0) = SCRIPT({
 });
 #else
 EvtSource N(802409C0) = {
-    EVT_CMD(EVT_OP_CALL, GetEntryID, EVT_VAR(0)),
+    EVT_CMD(EVT_OP_CALL, EVT_PTR(GetEntryID), EVT_VAR(0)),
     EVT_CMD(EVT_OP_SWITCH, EVT_VAR(0)),
         EVT_CMD(EVT_OP_CASE_OR_EQ, 0),
         EVT_CMD(EVT_OP_CASE_OR_EQ, 1),
-            EVT_CMD(EVT_OP_CALL, SetMusicTrack, 0, SONG_CLOUDY_CLIMB, 0, 8),
+            EVT_CMD(EVT_OP_CALL, EVT_PTR(SetMusicTrack), 0, SONG_CLOUDY_CLIMB, 0, 8),
         EVT_CMD(EVT_OP_END_CASE_GROUP),
         EVT_CMD(EVT_OP_CASE_OR_EQ, 2),
         EVT_CMD(EVT_OP_CASE_OR_EQ, 7),
@@ -48,8 +48,8 @@ EvtSource N(802409C0) = {
         EVT_CMD(EVT_OP_CASE_EQ, 3),
             EVT_CMD(EVT_OP_IF_NE, EVT_AREA_FLAG(44), 0),
             EVT_CMD(EVT_OP_ELSE),
-                EVT_CMD(EVT_OP_CALL, FadeOutMusic, 1, 3000),
-                EVT_CMD(EVT_OP_CALL, FadeInMusic, 0, 50, 0, 3000, 0, 127),
+                EVT_CMD(EVT_OP_CALL, EVT_PTR(FadeOutMusic), 1, 3000),
+                EVT_CMD(EVT_OP_CALL, EVT_PTR(FadeInMusic), 0, 50, 0, 3000, 0, 127),
             EVT_CMD(EVT_OP_END_IF),
         EVT_CMD(EVT_OP_END_CASE_GROUP),
     EVT_CMD(EVT_OP_END_SWITCH),
@@ -662,7 +662,13 @@ EvtSource N(80242FD0) = SCRIPT({
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-void playFX_82();
+// It seems like playFX_82 was not properly defined for this file. Having a proper
+// declaration makes it not match.
+#ifdef AVOID_UB
+void playFX_82(s32, f32, f32, f32, f32, s32);
+#else
+void playFX_82(s32, s32, s32, s32, s32, s32);
+#endif
 
 ApiStatus N(func_8024030C_CE39FC)(Evt* script, s32 isInitialCall) {
     playFX_82(1, 0, 0, 0, 0, 0);

@@ -22,13 +22,13 @@ s32* D_80249B80[] = { &D_80241ECC };
 MenuPanel* filemenu_menus[4] = { &D_8024A098, &D_8024A114, &D_8024A158, &D_8024A1D8 };
 s32 D_80249B94 = 160;
 s32 D_80249B98 = -120;
-s32 D_80249B9C[] = {0};
+s32 D_80249B9C = 0;
 s32 D_80249BA0 = 160;
-s32 D_80249BA4[] = { -120 };
+s32 D_80249BA4 = -120;
 s32 filemenu_cursorGoalAlpha = 0;
 s32 filemenu_cursorGoalAlpha2 = 0;
 s32 D_80249BB0[] = { 0x00000001, 0x00000000 };
-s32 D_80249BB8[] = { 0x00000000 };
+s32 D_80249BB8 = 0;
 s16 D_80249BBC[16] = { 315, 303, 283, 260, 235, 210, 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
 s16 D_80249BDC[16] = { 315, 303, 283, 260, 235, 210, 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
 s16 D_80249BFC[16] = { 157, 151, 141, 130, 117, 105, 92, 80, 67, 55, 42, 30, 18, 8, 2, 0 };
@@ -81,9 +81,103 @@ void filemenu_set_cursor_alpha(s32 arg0) {
     filemenu_cursorGoalAlpha2 = arg0;
 }
 
-INCLUDE_ASM(s32, "163400", filemenu_set_cursor_goal_pos);
+void filemenu_set_cursor_goal_pos(s32 windowID, s32 posX, s32 posY) {
+    Window* window = &gWindows[windowID];
 
-INCLUDE_ASM(s32, "163400", filemenu_update_cursor);
+    if (D_80249BB0[0] != 0
+            || get_game_mode() == GAME_MODE_END_FILE_SELECT
+            || get_game_mode() == GAME_MODE_END_LANGUAGE_SELECT) {
+        if (D_80249BB0[0] != 0) {
+            s32 i;
+
+            for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
+                Window* window = &gWindows[i];
+                s8 parent = window->parent;
+
+                if ((parent == -1 || parent == 0x2C) && (window->flags & 8)) {
+                    break;
+                }
+            }
+            if (i >= ARRAY_COUNT(gWindows)) {
+                D_80249BB0[0] = 0;
+            }
+        }
+        D_80249BA0 = posX;
+        D_80249B94 = posX;
+        D_80249BA4 = posY;
+        D_80249B98 = posY;
+    } else if (!(window->flags & 0x8) && (window->parent == -1 || !(gWindows[window->parent].flags & 8))) {
+        D_80249BA0 = posX;
+        D_80249BA4 = posY;
+    }
+}
+
+void filemenu_update_cursor(void) {
+    s32 targetPosX = D_80249BA0;
+    s32 targetPosY = D_80249BA4;
+    s32 xDelta;
+    s32 yDelta;
+    s32 i;
+
+    xDelta = (targetPosX - D_80249B94) * 0.5;
+    yDelta = (targetPosY - D_80249B98) * 0.5;
+
+    if ((targetPosX != D_80249B94) || (targetPosY != D_80249B98)) {
+        if ((xDelta == 0) && (yDelta == 0)) {
+            D_80249B94 = targetPosX;
+            D_80249B98 = targetPosY;
+        }
+    }
+
+    D_80249B94 += xDelta;
+    D_80249B98 += yDelta;
+
+    if (filemenu_cursorGoalAlpha == 0) {    
+        D_80249B9C -= 128;
+        if (D_80249B9C < 0) {
+            D_80249B9C = 0;
+        }
+    } else {
+        D_80249B9C += 32;
+        if (D_80249B9C > 255) {
+            D_80249B9C = 255;
+        }
+    }
+    
+    for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
+        Window* window = &gWindows[i];
+        s8 parent = window->parent;
+
+        if ((parent == -1 || parent == 0x2C) && (window->flags & 8)) {
+            break;
+        }
+    }
+
+    if (D_80249BB8 == 0) {
+        if (filemenu_cursorGoalAlpha == 0) {
+            D_80249BB8 = 1;
+        }
+    }
+
+    if (i >= ARRAY_COUNT(gWindows)) {
+        if (filemenu_cursorGoalAlpha2 == 0xFF) {
+            if (D_80249BB8 != 0) {
+                D_80249BB8--;
+                if (D_80249BB8 == 0) {
+                    D_80249B94 = D_80249BA0;
+                    D_80249B98 = D_80249BA4;
+                }
+            }
+        } 
+        if (D_80249BB8 == 0) {
+            filemenu_cursorGoalAlpha = filemenu_cursorGoalAlpha2;
+        }
+    } else if (filemenu_cursorGoalAlpha == 0) {
+        D_80249BB8 = 1;
+    }
+
+    filemenu_cursorGoalAlpha2 = 0xFF;
+}
 
 INCLUDE_ASM(s32, "163400", filemenu_update);
 
@@ -440,7 +534,7 @@ void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
     s32 temp_a1;
 
     filemenu_update_cursor();
-    temp_a1 = *D_80249B9C;
+    temp_a1 = D_80249B9C;
     if (temp_a1 > 0) {
         if (temp_a1 > 255) {
             temp_a1 = 255;

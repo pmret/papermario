@@ -2,7 +2,6 @@
 #include "hud_element.h"
 
 extern s32 D_80104A00[0];
-extern s32 D_80104A28[0];
 extern s32 D_80104C10[0];
 extern s32 D_80107798[0];
 extern s32 D_801077E4[0];

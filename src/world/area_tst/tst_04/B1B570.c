@@ -139,13 +139,10 @@ ApiStatus func_80240510_B1BA80(Evt* script, s32 isInitialCall) {
 void func_80240574_B1BAE4(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
-    if (partner == NULL) {
-        return ApiStatus_DONE2;
+    if (partner != NULL) {
+        partner->flags |= 0x20000;
+        partner->flags |= 0x80000;
     }
-
-    partner->flags |= 0x20000;
-    partner->flags |= 0x80000;
-    return ApiStatus_DONE2;
 }
 
 void func_802405B0_B1BB20(void) {

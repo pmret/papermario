@@ -110,6 +110,10 @@ typedef struct HudElement {
     /* 0x40 */ Vec2b customDrawSize;
 } HudElement; // size = 0x54
 
+extern HudElementAnim D_80104A28[];
+extern HudElementAnim D_80108558[];
+extern HudElementAnim D_80108A64[];
+extern HudElementAnim D_80109270[];
 extern HudElementAnim* D_8024FA30[1];
 extern HudElementAnim *gBadgeMenuElements[22];
 extern HudElement* gItemIcons[20];

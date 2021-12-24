@@ -1162,7 +1162,7 @@ void func_80263300(void) {
     s32 cond;
     s32 i;
 
-    battleStatus->unk_7D = 0;
+    battleStatus->menuStatus[0] = 0;
     cond = FALSE;
 
     for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
@@ -1178,7 +1178,7 @@ void func_80263300(void) {
                 player_create_target_list(player);
 
                 if (player->targetListLength != 0) {
-                    battleStatus->unk_7D += 1;
+                    battleStatus->menuStatus[0] += 1;
                     cond = TRUE;
                 }
             }
@@ -1186,7 +1186,7 @@ void func_80263300(void) {
     }
 
     if (!cond) {
-        battleStatus->unk_7D = 0;
+        battleStatus->menuStatus[0] = 0;
     }
 }
 
@@ -1227,49 +1227,57 @@ s32 btl_check_player_defeated(void) {
     return TRUE;
 }
 
-void func_802634B8(void) {
+
+void btl_init_menu_boots(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Actor* player = battleStatus->playerActor;
     StaticMove* move;
     s32 i;
     s32 moveCount;
-    s32 phi_s6;
+    s32 hasAnyBadgeMoves;
     s32 fpCost;
 
+    // If you don't have boots equipped, disable this menu
     if (playerData->bootsLevel == -1) {
-        battleStatus->unk_7E = 0;
+        battleStatus->menuStatus[1] = 0;
         return;
     }
 
     for (i = 0; i < ARRAY_COUNT(battleStatus->submenuMoves); i++) {
-        battleStatus->submenuMoves[i] = 0;
+        battleStatus->submenuMoves[i] = MOVE_NONE;
     }
 
+    // Standard jump move
     moveCount = 1;
-    battleStatus->submenuMoves[0] = playerData->bootsLevel + 26;
-    battleStatus->submenuIcons[0] = 0x155;
+    battleStatus->submenuMoves[0] = playerData->bootsLevel + MOVE_JUMP1;
+    battleStatus->submenuIcons[0] = ITEM_PARTNER_ATTACK;
+
+    // Jump badges
     do {
         for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
-            s16 badges = playerData->equippedBadges[i];
-            if (badges != 0) {
+            s16 badge = playerData->equippedBadges[i];
+            if (badge != ITEM_NONE) {
                 StaticMove* moveTable = gMoveTable;
-                u8 moveID = gItemTable[badges].moveID;
+                u8 moveID = gItemTable[badge].moveID;
 
                 move = &moveTable[moveID];
-                if (move->battleSubmenu == 2) {
-                    battleStatus->submenuMoves[moveCount] =  moveID;
+                if (move->battleSubmenu == BATTLE_SUBMENU_JUMP) {
+                    battleStatus->submenuMoves[moveCount] = moveID;
                     battleStatus->submenuIcons[moveCount] = playerData->equippedBadges[i];
                     moveCount++;
                 }
             }
         }
     } while (0);
+
     battleStatus->submenuMoveCount = moveCount;
 
-    phi_s6 = FALSE;
+    hasAnyBadgeMoves = FALSE;
     for (i = 0; i < battleStatus->submenuMoveCount; i++) {
         move = &gMoveTable[battleStatus->submenuMoves[i]];
+
+        // Calculate FP cost
         fpCost = move->costFP;
         if (fpCost != 0) {
             fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
@@ -1278,45 +1286,57 @@ void func_802634B8(void) {
                 fpCost = 1;
             }
         }
+
+        // See if there are any targets for this move
         battleStatus->moveCategory = 0;
         battleStatus->selectedItemID = playerData->bootsLevel;
-        battleStatus->currentTargetListFlags = move->flags;
+        battleStatus->currentTargetListFlags = move->flags; // Controls target filters
         player_create_target_list(player);
+
+        // If there are targets, enable the move
         if (player->targetListLength != 0) {
-            phi_s6 = TRUE;
-            battleStatus->submenuEnabled[i] = 1;
+            hasAnyBadgeMoves = TRUE;
+            battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_ENABLED;
         }
 
+        // If you don't have enough FP, disable the move
         if (playerData->curFP < fpCost) {
-            battleStatus->submenuEnabled[i] = 0;
+            battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NOT_ENOUGH_FP;
         }
+
+        // If there are no targets available, disable the move
         if (player->targetListLength == 0) {
-            battleStatus->submenuEnabled[i] = -2;
+            battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS_2;
         }
         if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
-            battleStatus->submenuEnabled[moveCount] = -1;
+            battleStatus->submenuStatus[moveCount] = BATTLE_SUBMENU_STATUS_NO_TARGETS;
         }
     }
 
-    if (!phi_s6) {
-        battleStatus->unk_7E = -1;
+    if (!hasAnyBadgeMoves) {
+        // Only the standard jump is available - no badge moves.
+        // Selecting this submenu should immediately pick the standard jump move
+        battleStatus->menuStatus[1] = -1;
     } else {
-        battleStatus->unk_7E = 1;
+        // Enable this submenu
+        battleStatus->menuStatus[1] = 1;
     }
 }
 
-void func_802636E4(void) {
+
+void btl_init_menu_hammer(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Actor* player = battleStatus->playerActor;
     StaticMove* move;
     s32 i;
     s32 moveCount;
-    s32 phi_s6;
+    s32 hasAnyBadgeMoves;
     s32 fpCost;
 
+    // If you don't have a hammer, disable this menu
     if (playerData->hammerLevel == -1) {
-        battleStatus->unk_7F = 0;
+        battleStatus->menuStatus[2] = 0;
         return;
     }
 
@@ -1324,29 +1344,35 @@ void func_802636E4(void) {
         battleStatus->submenuMoves[i] = 0;
     }
 
+    // Standard hammer move
     moveCount = 1;
-    battleStatus->submenuMoves[0] = playerData->hammerLevel + 3;
-    battleStatus->submenuIcons[0] = 0x155;
+    battleStatus->submenuMoves[0] = playerData->hammerLevel + MOVE_HAMMER1;
+    battleStatus->submenuIcons[0] = ITEM_PARTNER_ATTACK;
+
+    // Hammer badges
     do {
         for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
-            s16 badges = playerData->equippedBadges[i];
-            if (badges != 0) {
+            s16 badge = playerData->equippedBadges[i];
+            if (badge != MOVE_NONE) {
                 StaticMove* moveTable = gMoveTable;
-                u8 moveID = gItemTable[badges].moveID;
+                u8 moveID = gItemTable[badge].moveID;
                 move = &moveTable[moveID];
-                if ((s8) move->battleSubmenu == 1) {
-                    battleStatus->submenuMoves[moveCount] =  moveID;
+                if (move->battleSubmenu == BATTLE_SUBMENU_HAMMER) {
+                    battleStatus->submenuMoves[moveCount] = moveID;
                     battleStatus->submenuIcons[moveCount] = playerData->equippedBadges[i];
                     moveCount++;
                 }
             }
         }
     } while (0);
+
     battleStatus->submenuMoveCount = moveCount;
 
-    phi_s6 = FALSE;
+    hasAnyBadgeMoves = FALSE;
     for (i = 0; i < battleStatus->submenuMoveCount; i++) {
             move = &gMoveTable[battleStatus->submenuMoves[i]];
+
+            // Calculate FP cost
             fpCost = move->costFP;
             if (fpCost != 0) {
                 fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
@@ -1355,57 +1381,87 @@ void func_802636E4(void) {
                     fpCost = 1;
                 }
             }
+
+            // See if there are any targets for this move
             battleStatus->moveCategory = 1;
             battleStatus->selectedItemID = playerData->hammerLevel;
             battleStatus->currentTargetListFlags = move->flags;
             player_create_target_list(player);
+
+            // If there are targets, enable the move
             if (player->targetListLength != 0) {
-                phi_s6 = TRUE;
-                battleStatus->submenuEnabled[i] = 1;
+                hasAnyBadgeMoves = TRUE;
+                battleStatus->submenuStatus[i] = 1;
             }
 
+            // If you don't have enough FP, disable the move
             if (playerData->curFP < fpCost) {
-                battleStatus->submenuEnabled[i] = 0;
+                battleStatus->submenuStatus[i] = 0;
             }
+
+            // If there are no targets available, disable the move
             if (player->targetListLength == 0) {
-                battleStatus->submenuEnabled[i] = -2;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS_2;
             }
             if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
-                battleStatus->submenuEnabled[moveCount] = -1;
+                battleStatus->submenuStatus[moveCount] = BATTLE_SUBMENU_STATUS_NO_TARGETS;
             }
     }
 
-    if (!phi_s6) {
-        battleStatus->unk_7F = -1;
+    if (!hasAnyBadgeMoves) {
+        // Only the standard hammer is available - no badge moves.
+        // Selecting this submenu should immediately pick the standard hammer move
+        battleStatus->menuStatus[2] = -1;
     } else {
-        battleStatus->unk_7F = 1;
+        // Enable this submenu
+        battleStatus->menuStatus[2] = 1;
     }
 }
 
-void func_80263914(void) {
+void btl_init_menu_partner(void) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     Actor* partner = battleStatus->partnerActor;
     s32 fpCost;
     s32 i;
-    s32 phi_s6;
+    s32 hasAnyBadgeMoves;
 
     for (i = 0; i < ARRAY_COUNT(battleStatus->submenuMoves); i++) {
         battleStatus->submenuMoves[i] = 0;
     }
 
-    battleStatus->submenuMoveCount = partner->staticActorData->level + 2;
-     // First move is changed each level
-    battleStatus->submenuMoves[0] = playerData->currentPartner * 6 + 0x7D + partner->staticActorData->level;
+    // In the move table (enum MoveIDs), partners get move IDs set up like this:
+    //
+    //  Move ID offset | Description          | Goombario example
+    // ----------------+----------------------+-------------------
+    //  0              | No rank only         | Headbonk
+    //  1              | Super rank only      | Headbonk (2)
+    //  2              | Ultra rank only      | Headbonk (3)
+    //  3              | Always unlocked      | Tattle
+    //  4              | Unlocked after super | Charge
+    //  5              | Unlocked after ultra | Multibonk
 
+    battleStatus->submenuMoveCount = partner->staticActorData->level + 2;
+
+    // Offsets 0,1,2
+    battleStatus->submenuMoves[0] =
+        playerData->currentPartner * 6
+        + (MOVE_HEADBONK1 - 6)
+        + partner->staticActorData->level;
+
+    // Offsets 3,4,5
     for (i = 1; i < battleStatus->submenuMoveCount; i++) {
-        battleStatus->submenuMoves[i] = playerData->currentPartner * 6 + 0x7F + i;
+        battleStatus->submenuMoves[i] =
+            playerData->currentPartner * 6
+            + (MOVE_TATTLE - 6)
+            + (i - 1);
     }
 
-    phi_s6 = FALSE;
+    hasAnyBadgeMoves = FALSE;
     for (i = 0; i < battleStatus->submenuMoveCount; i++){
             StaticMove* move = &gMoveTable[battleStatus->submenuMoves[i]];
+
             fpCost = move->costFP;
             if (fpCost != 0) {
                 fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
@@ -1418,31 +1474,30 @@ void func_80263914(void) {
             battleStatus->moveCategory = 5;
             battleStatus->selectedItemID = partner->staticActorData->level;
             battleStatus->currentTargetListFlags = move->flags;
-
             player_create_target_list(partner);
+
             if (partner->targetListLength != 0){
-                phi_s6 = TRUE;
-                battleStatus->submenuEnabled[i] = 1;
+                hasAnyBadgeMoves = TRUE;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_ENABLED;
             }
 
             if (partner->targetListLength == 0) {
-                battleStatus->submenuEnabled[i] = -2;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS_2;
             }
 
             if (playerData->curFP < fpCost) {
-                battleStatus->submenuEnabled[i] = 0;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NOT_ENOUGH_FP;
             }
-
             if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
-                battleStatus->submenuEnabled[i] = -1;
+                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS;
             }
 
     }
 
-    if (!phi_s6) {
-        battleStatus->unk_80 = -1;
+    if (!hasAnyBadgeMoves) {
+        battleStatus->menuStatus[3] = -1;
     } else {
-        battleStatus->unk_80 = 1;
+        battleStatus->menuStatus[3] = 1;
     }
 }
 

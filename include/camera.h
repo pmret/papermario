@@ -15,4 +15,12 @@ enum {
     CAM_FLAG_1000 = 0x1000,
 };
 
+void update_camera_mode_0(Camera*);
+void update_camera_mode_1(Camera*);
+void update_camera_mode_2(Camera*);
+void update_camera_mode_4(Camera*);
+void update_camera_mode_5(Camera*);
+void update_camera_mode_6(Camera*);
+void create_camera_leadplayer_matrix(Camera*);
+
 #endif

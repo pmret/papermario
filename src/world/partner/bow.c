@@ -139,7 +139,7 @@ s32 func_802BD540_323E90(void) {
             return player_test_lateral_overlap(0, &gPlayerStatus, &sp20, &sp28, &sp24,
                                                gPlayerStatus.colliderDiameter, temp_f22);
         }
-        
+
         return -1;
     }
 }
@@ -371,7 +371,7 @@ ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
         }
         func_802BDDF0_324740(bow);
     }
-    
+
     return partner_put_away(bow) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 

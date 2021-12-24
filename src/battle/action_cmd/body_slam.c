@@ -3,16 +3,16 @@
 
 #define NAMESPACE action_command_body_slam
 
-extern s32 D_80108AFC;
-extern s32 D_80108B28;
-extern s32 D_8029275C;
-extern s32 D_80292BAC;
+extern HudElementAnim D_80108AFC[];
+extern HudElementAnim D_80108B28[];
+extern HudElementAnim D_8029275C[];
+extern HudElementAnim D_80292BAC[];
 extern s32 D_80294320;
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    HudElement* hudElement;
+    s32 hudElement;
 
     battleStatus->unk_82 = 100;
     battleStatus->unk_434 = &D_80294320;
@@ -34,25 +34,25 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(&D_80108B28);
+    hudElement = create_hud_element(D_80108B28);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(&D_80108AFC);
+    hudElement = create_hud_element(D_80108AFC);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(&D_80292BAC);
+    hudElement = create_hud_element(D_80292BAC);
     actionCommandStatus->hudElements[3] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(&D_8029275C);
+    hudElement = create_hud_element(D_8029275C);
     actionCommandStatus->hudElements[2] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 41, actionCommandStatus->hudElementY + 22);
     set_hud_element_render_depth(hudElement, 0);
@@ -66,7 +66,7 @@ INCLUDE_ASM(s32, "battle/action_cmd/body_slam", func_802A92D4_4285B4);
 
 void N(draw_hud_elements)(void) {
     s32 x, y;
-    HudElement* hudElement;
+    s32 hudElement;
 
     draw_hud_element_clipped(gActionCommandStatus.hudElements[0]);
     hudElement = gActionCommandStatus.hudElements[1];

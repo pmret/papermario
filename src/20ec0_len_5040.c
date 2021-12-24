@@ -66,8 +66,8 @@ extern HudElementAnim D_8010760C[];
 extern HudElementAnim D_801075E0[];
 extern HudElementAnim D_80107314[];
 extern HudElementAnim D_8010701C[];
-extern HudElementAnim* D_8010717C[];
-extern HudElementAnim* D_80107474[];
+extern HudElementAnim D_8010717C[];
+extern HudElementAnim D_80107474[];
 
 extern s32 D_800A0F40;
 extern PopupMessage D_800A0BC0[32];

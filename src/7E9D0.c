@@ -7,7 +7,6 @@
 
 extern s32 D_8010C924;
 extern s32 D_8010C964;
-extern s32 D_8010C96C; // npc list index
 extern s32 gSpinHistoryBufferPos;
 extern s16 D_8010C9B0;
 extern s32 gSpinHistoryPosY[5];
@@ -149,7 +148,7 @@ void set_action_state(s32 actionState) {
     }
 
     if (playerStatus->unk_D8) {
-        playerStatus->unk_D8[3][9] = 0xA;
+        playerStatus->unk_D8[3][9] = 0xA; // TODO: Substruct? Currently UB.
         playerStatus->unk_D8 = NULL;
     }
 }
