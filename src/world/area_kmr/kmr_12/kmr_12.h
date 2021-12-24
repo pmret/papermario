@@ -18,3 +18,5 @@ extern  EvtSource N(PlayMusic);
 extern  EvtSource N(MakeEntities);
 extern  EvtSource N(ReadWestSign);
 extern NpcGroupList N(npcGroupList);
+
+extern s32 D_802EAFDC;

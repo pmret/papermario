@@ -24,13 +24,15 @@ NpcAISettings N(npcAISettings_80244028) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80244058) = SCRIPT({
-    SetSelfVar(0, 1);
-    SetSelfVar(5, 0);
-    SetSelfVar(6, 0);
-    SetSelfVar(1, 600);
-    N(func_80242754_CD4584)(N(npcAISettings_80244028));
-});
+EvtSource N(npcAI_80244058) = {
+    EVT_CALL(SetSelfVar, 0, 1)
+    EVT_CALL(SetSelfVar, 5, 0)
+    EVT_CALL(SetSelfVar, 6, 0)
+    EVT_CALL(SetSelfVar, 1, 600)
+    EVT_CALL(N(func_80242754_CD4584), EVT_PTR(N(npcAISettings_80244028)))
+    EVT_RETURN
+    EVT_END
+};
 
 NpcSettings N(npcSettings_802440C8) = {
     .height = 24,
@@ -123,223 +125,231 @@ static s32 N(pad_44F8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(80244500) = SCRIPT({
-    N(func_80242940_CD4770)();
-    if (EVT_VAR(0) == 0) {
-        return;
-    }
-    DisablePlayerInput(TRUE);
-    if (EVT_AREA_FLAG(41) == 0) {
-        EVT_VAR(5) = 0;
-        EVT_VAR(6) = 50;
-        EVT_VAR(7) = 0;
-        EVT_VAR(8) = 180;
-        EVT_AREA_FLAG(41) = 1;
-    } else {
-        EVT_VAR(5) = 50;
-        EVT_VAR(6) = 0;
-        EVT_VAR(7) = 180;
-        EVT_VAR(8) = 0;
-        EVT_AREA_FLAG(41) = 0;
-    }
-    sleep 15;
-    PlaySound(0x204D);
-    spawn {
-        ShakeCam(0, 0, 30, 0.80078125);
-        ShakeCam(0, 0, 5, 0.2001953125);
-    }
-    MakeLerp(EVT_VAR(5), EVT_VAR(6), 30, 0);
-    loop {
-        UpdateLerp();
-        TranslateModel(94, 0, EVT_VAR(0), 0);
-        TranslateGroup(97, 0, EVT_VAR(0), 0);
-        TranslateModel(108, 0, EVT_VAR(0), 0);
-        TranslateGroup(111, 0, EVT_VAR(0), 0);
-        RotateGroup(97, EVT_VAR(7), 1, 0, 0);
-        RotateGroup(111, EVT_VAR(7), 1, 0, 0);
-        UpdateColliderTransform(26);
-        UpdateColliderTransform(27);
-        UpdateColliderTransform(32);
-        UpdateColliderTransform(33);
-        sleep 1;
-        if (EVT_VAR(1) == 0) {
-            break loop;
-        }
-    }
-    DisablePlayerInput(FALSE);
-    sleep 10;
-    MakeLerp(EVT_VAR(7), EVT_VAR(8), 15, 0);
-    loop {
-        UpdateLerp();
-        TranslateModel(94, 0, EVT_VAR(6), 0);
-        TranslateGroup(97, 0, EVT_VAR(6), 0);
-        TranslateModel(108, 0, EVT_VAR(6), 0);
-        TranslateGroup(111, 0, EVT_VAR(6), 0);
-        RotateGroup(97, EVT_VAR(0), 1, 0, 0);
-        RotateGroup(111, EVT_VAR(0), 1, 0, 0);
-        sleep 1;
-        if (EVT_VAR(1) == 0) {
-            break loop;
-        }
-    }
-});
+EvtSource N(80244500) = {
+    EVT_CALL(N(func_80242940_CD4770))
+    EVT_IF_EQ(EVT_VAR(0), 0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_IF_EQ(EVT_AREA_FLAG(41), 0)
+        EVT_SET(EVT_VAR(5), 0)
+        EVT_SET(EVT_VAR(6), 50)
+        EVT_SET(EVT_VAR(7), 0)
+        EVT_SET(EVT_VAR(8), 180)
+        EVT_SET(EVT_AREA_FLAG(41), 1)
+    EVT_ELSE
+        EVT_SET(EVT_VAR(5), 50)
+        EVT_SET(EVT_VAR(6), 0)
+        EVT_SET(EVT_VAR(7), 180)
+        EVT_SET(EVT_VAR(8), 0)
+        EVT_SET(EVT_AREA_FLAG(41), 0)
+    EVT_END_IF
+    EVT_WAIT_FRAMES(15)
+    EVT_CALL(PlaySound, 0x204D)
+    EVT_THREAD
+        EVT_CALL(ShakeCam, 0, 0, 30, EVT_FIXED(0.8))
+        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FIXED(0.2))
+    EVT_END_THREAD
+    EVT_CALL(MakeLerp, EVT_VAR(5), EVT_VAR(6), 30, 0)
+    EVT_LOOP(0)
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(TranslateModel, 94, 0, EVT_VAR(0), 0)
+        EVT_CALL(TranslateGroup, 97, 0, EVT_VAR(0), 0)
+        EVT_CALL(TranslateModel, 108, 0, EVT_VAR(0), 0)
+        EVT_CALL(TranslateGroup, 111, 0, EVT_VAR(0), 0)
+        EVT_CALL(RotateGroup, 97, EVT_VAR(7), 1, 0, 0)
+        EVT_CALL(RotateGroup, 111, EVT_VAR(7), 1, 0, 0)
+        EVT_CALL(UpdateColliderTransform, 26)
+        EVT_CALL(UpdateColliderTransform, 27)
+        EVT_CALL(UpdateColliderTransform, 32)
+        EVT_CALL(UpdateColliderTransform, 33)
+        EVT_WAIT_FRAMES(1)
+        EVT_IF_EQ(EVT_VAR(1), 0)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+    EVT_END_LOOP
+    EVT_CALL(DisablePlayerInput, FALSE)
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(MakeLerp, EVT_VAR(7), EVT_VAR(8), 15, 0)
+    EVT_LOOP(0)
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(TranslateModel, 94, 0, EVT_VAR(6), 0)
+        EVT_CALL(TranslateGroup, 97, 0, EVT_VAR(6), 0)
+        EVT_CALL(TranslateModel, 108, 0, EVT_VAR(6), 0)
+        EVT_CALL(TranslateGroup, 111, 0, EVT_VAR(6), 0)
+        EVT_CALL(RotateGroup, 97, EVT_VAR(0), 1, 0, 0)
+        EVT_CALL(RotateGroup, 111, EVT_VAR(0), 1, 0, 0)
+        EVT_WAIT_FRAMES(1)
+        EVT_IF_EQ(EVT_VAR(1), 0)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+    EVT_END_LOOP
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(802448FC) = SCRIPT({
-    N(func_80242940_CD4770)();
-    if (EVT_VAR(0) == 0) {
-        return;
-    }
-    DisablePlayerInput(TRUE);
-    if (EVT_AREA_FLAG(42) == 0) {
-        EVT_VAR(5) = 0;
-        EVT_VAR(6) = 50;
-        EVT_VAR(7) = 0;
-        EVT_VAR(8) = 180;
-        EVT_AREA_FLAG(42) = 1;
-    } else {
-        EVT_VAR(5) = 50;
-        EVT_VAR(6) = 0;
-        EVT_VAR(7) = 180;
-        EVT_VAR(8) = 0;
-        EVT_AREA_FLAG(42) = 0;
-    }
-    sleep 15;
-    PlaySound(0x204D);
-    spawn {
-        ShakeCam(0, 0, 30, 0.80078125);
-        ShakeCam(0, 0, 5, 0.2001953125);
-    }
-    MakeLerp(EVT_VAR(5), EVT_VAR(6), 30, 0);
-    loop {
-        UpdateLerp();
-        TranslateModel(101, 0, EVT_VAR(0), 0);
-        TranslateGroup(104, 0, EVT_VAR(0), 0);
-        TranslateModel(115, 0, EVT_VAR(0), 0);
-        TranslateGroup(118, 0, EVT_VAR(0), 0);
-        TranslateModel(129, 0, EVT_VAR(0), 0);
-        TranslateGroup(132, 0, EVT_VAR(0), 0);
-        RotateGroup(104, EVT_VAR(7), 1, 0, 0);
-        RotateGroup(118, EVT_VAR(7), 1, 0, 0);
-        RotateGroup(132, EVT_VAR(7), 1, 0, 0);
-        UpdateColliderTransform(29);
-        UpdateColliderTransform(30);
-        UpdateColliderTransform(35);
-        UpdateColliderTransform(36);
-        UpdateColliderTransform(41);
-        UpdateColliderTransform(42);
-        sleep 1;
-        if (EVT_VAR(1) == 0) {
-            break loop;
-        }
-    }
-    DisablePlayerInput(FALSE);
-    sleep 10;
-    MakeLerp(EVT_VAR(7), EVT_VAR(8), 15, 0);
-    loop {
-        UpdateLerp();
-        TranslateModel(101, 0, EVT_VAR(6), 0);
-        TranslateGroup(104, 0, EVT_VAR(6), 0);
-        TranslateModel(115, 0, EVT_VAR(6), 0);
-        TranslateGroup(118, 0, EVT_VAR(6), 0);
-        TranslateModel(129, 0, EVT_VAR(6), 0);
-        TranslateGroup(132, 0, EVT_VAR(6), 0);
-        RotateGroup(104, EVT_VAR(0), 1, 0, 0);
-        RotateGroup(118, EVT_VAR(0), 1, 0, 0);
-        RotateGroup(132, EVT_VAR(0), 1, 0, 0);
-        sleep 1;
-        if (EVT_VAR(1) == 0) {
-            break loop;
-        }
-    }
-});
+EvtSource N(802448FC) = {
+    EVT_CALL(N(func_80242940_CD4770))
+    EVT_IF_EQ(EVT_VAR(0), 0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_IF_EQ(EVT_AREA_FLAG(42), 0)
+        EVT_SET(EVT_VAR(5), 0)
+        EVT_SET(EVT_VAR(6), 50)
+        EVT_SET(EVT_VAR(7), 0)
+        EVT_SET(EVT_VAR(8), 180)
+        EVT_SET(EVT_AREA_FLAG(42), 1)
+    EVT_ELSE
+        EVT_SET(EVT_VAR(5), 50)
+        EVT_SET(EVT_VAR(6), 0)
+        EVT_SET(EVT_VAR(7), 180)
+        EVT_SET(EVT_VAR(8), 0)
+        EVT_SET(EVT_AREA_FLAG(42), 0)
+    EVT_END_IF
+    EVT_WAIT_FRAMES(15)
+    EVT_CALL(PlaySound, 0x204D)
+    EVT_THREAD
+        EVT_CALL(ShakeCam, 0, 0, 30, EVT_FIXED(0.8))
+        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FIXED(0.2))
+    EVT_END_THREAD
+    EVT_CALL(MakeLerp, EVT_VAR(5), EVT_VAR(6), 30, 0)
+    EVT_LOOP(0)
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(TranslateModel, 101, 0, EVT_VAR(0), 0)
+        EVT_CALL(TranslateGroup, 104, 0, EVT_VAR(0), 0)
+        EVT_CALL(TranslateModel, 115, 0, EVT_VAR(0), 0)
+        EVT_CALL(TranslateGroup, 118, 0, EVT_VAR(0), 0)
+        EVT_CALL(TranslateModel, 129, 0, EVT_VAR(0), 0)
+        EVT_CALL(TranslateGroup, 132, 0, EVT_VAR(0), 0)
+        EVT_CALL(RotateGroup, 104, EVT_VAR(7), 1, 0, 0)
+        EVT_CALL(RotateGroup, 118, EVT_VAR(7), 1, 0, 0)
+        EVT_CALL(RotateGroup, 132, EVT_VAR(7), 1, 0, 0)
+        EVT_CALL(UpdateColliderTransform, 29)
+        EVT_CALL(UpdateColliderTransform, 30)
+        EVT_CALL(UpdateColliderTransform, 35)
+        EVT_CALL(UpdateColliderTransform, 36)
+        EVT_CALL(UpdateColliderTransform, 41)
+        EVT_CALL(UpdateColliderTransform, 42)
+        EVT_WAIT_FRAMES(1)
+        EVT_IF_EQ(EVT_VAR(1), 0)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+    EVT_END_LOOP
+    EVT_CALL(DisablePlayerInput, FALSE)
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(MakeLerp, EVT_VAR(7), EVT_VAR(8), 15, 0)
+    EVT_LOOP(0)
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(TranslateModel, 101, 0, EVT_VAR(6), 0)
+        EVT_CALL(TranslateGroup, 104, 0, EVT_VAR(6), 0)
+        EVT_CALL(TranslateModel, 115, 0, EVT_VAR(6), 0)
+        EVT_CALL(TranslateGroup, 118, 0, EVT_VAR(6), 0)
+        EVT_CALL(TranslateModel, 129, 0, EVT_VAR(6), 0)
+        EVT_CALL(TranslateGroup, 132, 0, EVT_VAR(6), 0)
+        EVT_CALL(RotateGroup, 104, EVT_VAR(0), 1, 0, 0)
+        EVT_CALL(RotateGroup, 118, EVT_VAR(0), 1, 0, 0)
+        EVT_CALL(RotateGroup, 132, EVT_VAR(0), 1, 0, 0)
+        EVT_WAIT_FRAMES(1)
+        EVT_IF_EQ(EVT_VAR(1), 0)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+    EVT_END_LOOP
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(80244DC8) = SCRIPT({
-    N(func_80242940_CD4770)();
-    if (EVT_VAR(0) == 0) {
-        return;
-    }
-    DisablePlayerInput(TRUE);
-    if (EVT_AREA_FLAG(43) == 0) {
-        EVT_VAR(5) = 0;
-        EVT_VAR(6) = -50;
-        EVT_VAR(7) = 0;
-        EVT_VAR(8) = 180;
-        EVT_AREA_FLAG(43) = 1;
-    } else {
-        EVT_VAR(5) = -50;
-        EVT_VAR(6) = 0;
-        EVT_VAR(7) = 180;
-        EVT_VAR(8) = 0;
-        EVT_AREA_FLAG(43) = 0;
-    }
-    sleep 15;
-    PlaySound(0x204D);
-    spawn {
-        ShakeCam(0, 0, 30, 0.80078125);
-        ShakeCam(0, 0, 5, 0.2001953125);
-    }
-    MakeLerp(EVT_VAR(5), EVT_VAR(6), 30, 0);
-    loop {
-        UpdateLerp();
-        TranslateModel(122, 0, EVT_VAR(0), 0);
-        TranslateGroup(125, 0, EVT_VAR(0), 0);
-        TranslateModel(136, 0, EVT_VAR(0), 0);
-        TranslateGroup(139, 0, EVT_VAR(0), 0);
-        RotateGroup(125, EVT_VAR(7), 1, 0, 0);
-        RotateGroup(139, EVT_VAR(7), 1, 0, 0);
-        UpdateColliderTransform(38);
-        UpdateColliderTransform(39);
-        UpdateColliderTransform(44);
-        UpdateColliderTransform(45);
-        sleep 1;
-        if (EVT_VAR(1) == 0) {
-            break loop;
-        }
-    }
-    DisablePlayerInput(FALSE);
-    sleep 10;
-    MakeLerp(EVT_VAR(7), EVT_VAR(8), 15, 0);
-    loop {
-        UpdateLerp();
-        TranslateModel(122, 0, EVT_VAR(6), 0);
-        TranslateGroup(125, 0, EVT_VAR(6), 0);
-        TranslateModel(136, 0, EVT_VAR(6), 0);
-        TranslateGroup(139, 0, EVT_VAR(6), 0);
-        RotateGroup(125, EVT_VAR(0), 1, 0, 0);
-        RotateGroup(139, EVT_VAR(0), 1, 0, 0);
-        sleep 1;
-        if (EVT_VAR(1) == 0) {
-            break loop;
-        }
-    }
-});
+EvtSource N(80244DC8) = {
+    EVT_CALL(N(func_80242940_CD4770))
+    EVT_IF_EQ(EVT_VAR(0), 0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_IF_EQ(EVT_AREA_FLAG(43), 0)
+        EVT_SET(EVT_VAR(5), 0)
+        EVT_SET(EVT_VAR(6), -50)
+        EVT_SET(EVT_VAR(7), 0)
+        EVT_SET(EVT_VAR(8), 180)
+        EVT_SET(EVT_AREA_FLAG(43), 1)
+    EVT_ELSE
+        EVT_SET(EVT_VAR(5), -50)
+        EVT_SET(EVT_VAR(6), 0)
+        EVT_SET(EVT_VAR(7), 180)
+        EVT_SET(EVT_VAR(8), 0)
+        EVT_SET(EVT_AREA_FLAG(43), 0)
+    EVT_END_IF
+    EVT_WAIT_FRAMES(15)
+    EVT_CALL(PlaySound, 0x204D)
+    EVT_THREAD
+        EVT_CALL(ShakeCam, 0, 0, 30, EVT_FIXED(0.8))
+        EVT_CALL(ShakeCam, 0, 0, 5, EVT_FIXED(0.2))
+    EVT_END_THREAD
+    EVT_CALL(MakeLerp, EVT_VAR(5), EVT_VAR(6), 30, 0)
+    EVT_LOOP(0)
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(TranslateModel, 122, 0, EVT_VAR(0), 0)
+        EVT_CALL(TranslateGroup, 125, 0, EVT_VAR(0), 0)
+        EVT_CALL(TranslateModel, 136, 0, EVT_VAR(0), 0)
+        EVT_CALL(TranslateGroup, 139, 0, EVT_VAR(0), 0)
+        EVT_CALL(RotateGroup, 125, EVT_VAR(7), 1, 0, 0)
+        EVT_CALL(RotateGroup, 139, EVT_VAR(7), 1, 0, 0)
+        EVT_CALL(UpdateColliderTransform, 38)
+        EVT_CALL(UpdateColliderTransform, 39)
+        EVT_CALL(UpdateColliderTransform, 44)
+        EVT_CALL(UpdateColliderTransform, 45)
+        EVT_WAIT_FRAMES(1)
+        EVT_IF_EQ(EVT_VAR(1), 0)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+    EVT_END_LOOP
+    EVT_CALL(DisablePlayerInput, FALSE)
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(MakeLerp, EVT_VAR(7), EVT_VAR(8), 15, 0)
+    EVT_LOOP(0)
+        EVT_CALL(UpdateLerp)
+        EVT_CALL(TranslateModel, 122, 0, EVT_VAR(6), 0)
+        EVT_CALL(TranslateGroup, 125, 0, EVT_VAR(6), 0)
+        EVT_CALL(TranslateModel, 136, 0, EVT_VAR(6), 0)
+        EVT_CALL(TranslateGroup, 139, 0, EVT_VAR(6), 0)
+        EVT_CALL(RotateGroup, 125, EVT_VAR(0), 1, 0, 0)
+        EVT_CALL(RotateGroup, 139, EVT_VAR(0), 1, 0, 0)
+        EVT_WAIT_FRAMES(1)
+        EVT_IF_EQ(EVT_VAR(1), 0)
+            EVT_BREAK_LOOP
+        EVT_END_IF
+    EVT_END_LOOP
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(802451C4) = SCRIPT({
-    EVT_AREA_FLAG(41) = 0;
-    EVT_AREA_FLAG(42) = 0;
-    EVT_AREA_FLAG(43) = 0;
-    ParentColliderToModel(26, 94);
-    ParentColliderToModel(27, 94);
-    ParentColliderToModel(29, 101);
-    ParentColliderToModel(30, 101);
-    ParentColliderToModel(32, 108);
-    ParentColliderToModel(33, 108);
-    ParentColliderToModel(35, 115);
-    ParentColliderToModel(36, 115);
-    ParentColliderToModel(38, 122);
-    ParentColliderToModel(39, 122);
-    ParentColliderToModel(41, 129);
-    ParentColliderToModel(42, 129);
-    ParentColliderToModel(44, 136);
-    ParentColliderToModel(45, 136);
-    bind N(80244500) TRIGGER_FLOOR_TOUCH 26;
-    bind N(802448FC) TRIGGER_FLOOR_TOUCH 29;
-    bind N(80244500) TRIGGER_FLOOR_TOUCH 32;
-    bind N(802448FC) TRIGGER_FLOOR_TOUCH 35;
-    bind N(80244DC8) TRIGGER_FLOOR_TOUCH 38;
-    bind N(802448FC) TRIGGER_FLOOR_TOUCH 41;
-    bind N(80244DC8) TRIGGER_FLOOR_TOUCH 44;
-});
+EvtSource N(802451C4) = {
+    EVT_SET(EVT_AREA_FLAG(41), 0)
+    EVT_SET(EVT_AREA_FLAG(42), 0)
+    EVT_SET(EVT_AREA_FLAG(43), 0)
+    EVT_CALL(ParentColliderToModel, 26, 94)
+    EVT_CALL(ParentColliderToModel, 27, 94)
+    EVT_CALL(ParentColliderToModel, 29, 101)
+    EVT_CALL(ParentColliderToModel, 30, 101)
+    EVT_CALL(ParentColliderToModel, 32, 108)
+    EVT_CALL(ParentColliderToModel, 33, 108)
+    EVT_CALL(ParentColliderToModel, 35, 115)
+    EVT_CALL(ParentColliderToModel, 36, 115)
+    EVT_CALL(ParentColliderToModel, 38, 122)
+    EVT_CALL(ParentColliderToModel, 39, 122)
+    EVT_CALL(ParentColliderToModel, 41, 129)
+    EVT_CALL(ParentColliderToModel, 42, 129)
+    EVT_CALL(ParentColliderToModel, 44, 136)
+    EVT_CALL(ParentColliderToModel, 45, 136)
+    EVT_BIND_TRIGGER(N(80244500), TRIGGER_FLOOR_TOUCH, 26, 1, 0)
+    EVT_BIND_TRIGGER(N(802448FC), TRIGGER_FLOOR_TOUCH, 29, 1, 0)
+    EVT_BIND_TRIGGER(N(80244500), TRIGGER_FLOOR_TOUCH, 32, 1, 0)
+    EVT_BIND_TRIGGER(N(802448FC), TRIGGER_FLOOR_TOUCH, 35, 1, 0)
+    EVT_BIND_TRIGGER(N(80244DC8), TRIGGER_FLOOR_TOUCH, 38, 1, 0)
+    EVT_BIND_TRIGGER(N(802448FC), TRIGGER_FLOOR_TOUCH, 41, 1, 0)
+    EVT_BIND_TRIGGER(N(80244DC8), TRIGGER_FLOOR_TOUCH, 44, 1, 0)
+    EVT_RETURN
+    EVT_END
+};
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 

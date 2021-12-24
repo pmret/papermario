@@ -43,3 +43,4 @@ extern s32 N(D_80241FB0_CB0CF0)[];
 extern s16 N(D_80241FB8_CB0CF8)[];
 extern s32 N(D_80241FC8_CB0D08)[8][2];
 extern f32 N(D_80242008_CB0D48)[3];
+extern s32 D_802462C0_B4AA30;
