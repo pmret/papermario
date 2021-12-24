@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-import tools.sym_info as sym_info
+import sym_info
 from pathlib import Path
 
 
