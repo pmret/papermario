@@ -224,7 +224,7 @@ ApiStatus MakeOwnerTargetIndex(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
     s32 numTargets = actor->targetListLength;
-    s8* targetList = &actor->targetIndexList;
+    s8* targetList = actor->targetIndexList;
     s32 arg1 = evt_get_variable(script, *args++);
     s32 arg2 = evt_get_variable(script, *args++);
     s32 otherArg = *args++;
@@ -277,7 +277,7 @@ ApiStatus func_8027FC90(Evt* script, s32 isInitialCall) {
 ApiStatus GetActorLevel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    Bytecode* outVar;
+    Bytecode outVar;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.enemyID;
@@ -293,7 +293,7 @@ ApiStatus PartnerDamageEnemy(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
-    Actor* enemy = get_actor(script->owner1.enemy);
+    Actor* enemy = get_actor(script->owner1.enemyID);
     s32 temp_s4 = *args++;
     s32 flags;
     s32 damageResult;
@@ -526,7 +526,7 @@ ApiStatus PartnerTestEnemy(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
-    Actor* enemy = get_actor(script->owner1.enemy);
+    Actor* enemy = get_actor(script->owner1.enemyID);
     s32 temp_s4;
     s32 flags;
     s32 damageResult;
@@ -609,7 +609,7 @@ ApiStatus func_8028070C(Evt* script, s32 isInitialCall) {
     battleStatus->currentTargetID = actor->targetActorID;
     battleStatus->currentTargetPart = actor->targetPartIndex;
 
-    if (dispatch_damage_event_partner_0(damageAmount, event, battleStatus) >= 0) {
+    if (dispatch_damage_event_partner_0(damageAmount, event, (s32) battleStatus) >= 0) {
         return does_script_exist_by_ref(script) ? ApiStatus_DONE2 : ApiStatus_BLOCK;
     }
 
