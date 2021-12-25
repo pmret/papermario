@@ -1475,12 +1475,12 @@ typedef struct DecorationTable {
     /* 0x7FC */ s16 posX[16];
     /* 0x81C */ s16 posY[16];
     /* 0x83C */ s16 posZ[16];
-    /* 0x85C */ u8 rotationPivotOffsetX[16];
-    /* 0x86C */ u8 rotationPivotOffsetY[16];
+    /* 0x85C */ s8 rotationPivotOffsetX[16];
+    /* 0x86C */ s8 rotationPivotOffsetY[16];
     /* 0x87C */ u8 rotX[16];
     /* 0x88C */ u8 rotY[16];
     /* 0x89C */ u8 rotZ[16];
-    /* 0x8AC */ u8 effectType; /* 0 =  blur, 14 = none? */
+    /* 0x8AC */ s8 effectType; /* 0 =  blur, 14 = none? */
     /* 0x8AD */ char unk_8AD[3];
     /* 0x8B0 */ struct Temp8025D160* unk_8B0[2];
     /* 0x8B8 */ s8 decorationType[2];
