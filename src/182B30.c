@@ -190,6 +190,7 @@ void func_802549F4(Actor* actor) {
 
     if (!(partsTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partsTable->idleAnimations != NULL) {
         s32 i = decorationTable->unk_7D9;
+
         decorationTable->posX[i] = partsTable->currentPos.x;
         decorationTable->posY[i] = partsTable->currentPos.y;
         decorationTable->posZ[i] = partsTable->currentPos.z;
@@ -203,14 +204,119 @@ void func_802549F4(Actor* actor) {
         decorationTable->rotZ[i] = clamp_angle(actor->rotation.z) * 0.5f;
 
         i++;
-        if (i >= 0x10) {
+        if (i >= ARRAY_COUNT(decorationTable->posX)) {
             i = 0;
         }
         decorationTable->unk_7D9 = i;
     }
 }
 
-INCLUDE_ASM(void, "182B30", func_80254C50);
+void func_80254C50(Actor* actor) {
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    Matrix4f spD8;
+    Matrix4f sp118;
+    Matrix4f sp158;
+    Matrix4f sp198;
+    Matrix4f sp1D8;
+    Matrix4f sp218;
+    Matrix4f sp258;
+    s32 scale;
+    ActorPart* partTable;
+    DecorationTable* decorationTable;
+    f32 rotX, rotY, rotZ;
+    s32 temp_s0_2;
+    s32 temp_v1;
+    s32 temp_s0;
+    s32 temp_s1;
+    s32 phi_s6;
+    s32 phi_s4;
+    f32 x, y, z;
+
+    partTable = actor->partsTable;
+    decorationTable = partTable->decorationTable;
+    if (decorationTable->effectType != 0) {
+        decorationTable->effectType = decorationTable->effectType - 1;
+        if (decorationTable->effectType == 0) {
+            actor->flags &= ~ACTOR_FLAG_10000000;
+            return;
+        }
+    }
+
+    if (!(partTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partTable->idleAnimations != NULL) {
+        s32 sp298 = 0;
+        s32 sp29C = 0;
+        s32 i = decorationTable->unk_7D9;
+
+        while (1) {
+            i--;
+            sp298 += 1;
+            if (i < 0) {
+                i = 0xF;
+            }
+            if (i == decorationTable->unk_7D9) {
+                break;
+            }
+
+            if (sp298 >= 3) {
+                sp298 = 0;
+                sp29C++;
+
+                if (decorationTable->unk_7DA < sp29C) {
+                    break;
+                }
+                temp_v1 = partTable->opacity;
+                x = decorationTable->posX[i];
+                y = decorationTable->posY[i];
+                z = decorationTable->posZ[i];
+
+                scale = decorationTable->scale[i];
+
+                temp_s0 = decorationTable->rotationPivotOffsetX[i];
+                temp_s1 = decorationTable->rotationPivotOffsetY[i];
+
+                rotX = decorationTable->rotX[i] * 2;
+                rotY = decorationTable->rotY[i] * 2;
+                rotZ = decorationTable->rotZ[i] * 2;
+
+
+                phi_s6 = 0x78;
+                phi_s4 = 0x14;
+                if (temp_v1 < 0x32) {
+                    phi_s6 = 0x32;
+                    phi_s4 = 8;
+                } else if (temp_v1 < 0x64) {
+                    phi_s6 = 0x46;
+                    phi_s4 = 0xA;
+                } else if (temp_v1 < 0x96) {
+                    phi_s6 = 0x64;
+                    phi_s4 = 0xF;
+                }
+
+                guTranslateF(sp1D8, x, y, z);
+                guTranslateF(sp158, -temp_s0, -temp_s1, 0.0f);
+                guTranslateF(sp198, temp_s0, temp_s1, 0.0f);
+                guRotateF(sp18, rotX, 1.0f, 0.0f, 0.0f);
+                guRotateF(sp58, rotY, 0.0f, 1.0f, 0.0f);
+                guRotateF(sp98, rotZ, 0.0f, 0.0f, 1.0f);
+                guMtxCatF(sp18, sp58, sp218);
+                guMtxCatF(sp218, sp98, spD8);
+                guScaleF(&sp118, actor->scale.x * 0.7142857142857143 * actor->scalingFactor,
+                                actor->scale.y * 0.7142857142857143 * actor->scalingFactor * partTable->verticalStretch,
+                                actor->scale.z * 0.7142857142857143);
+                guMtxCatF(sp118, sp158, sp258);
+                guMtxCatF(sp258, spD8, sp218);
+                guMtxCatF(sp218, sp198, sp258);
+                guMtxCatF(sp258, sp1D8, sp218);
+                temp_s0_2 = partTable->opacity;
+                partTable->opacity = phi_s6 - (sp29C * phi_s4);
+                func_802591EC(0, partTable, clamp_angle(scale + 0xB4), &sp218, 1);
+                partTable->opacity = temp_s0_2;
+            } 
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "182B30", func_802550BC);
 
