@@ -89,7 +89,7 @@ void func_80257B48(s32);
 void func_8025599C(s32);
 void func_80257B88(void);
 void func_80257DA4(void);
-void func_80254C50(void);
+void func_80254C50(Actor*);
 void func_80258E14(void);
 
 f32 func_800E34D8(void);
