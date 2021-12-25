@@ -2274,7 +2274,7 @@ segments:
     vram: 0xE0016000
     subsegments:
     - [0x32EE30, c, effect_11]
-    - [0x32F550, data]
+    - [0x32F550]
   - name: effect_12
     dir: effects
     type: code
