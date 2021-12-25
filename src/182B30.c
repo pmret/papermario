@@ -184,7 +184,31 @@ void func_802549C0(void) {
     decorationTable->effectType = 1;
 }
 
-INCLUDE_ASM(s32, "182B30", func_802549F4);
+void func_802549F4(Actor* actor) {
+    ActorPart* partsTable = actor->partsTable;
+    DecorationTable* decorationTable = partsTable->decorationTable;
+
+    if (!(partsTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partsTable->idleAnimations != NULL) {
+        s32 i = decorationTable->unk_7D9;
+        decorationTable->posX[i] = partsTable->currentPos.x;
+        decorationTable->posY[i] = partsTable->currentPos.y;
+        decorationTable->posZ[i] = partsTable->currentPos.z;
+        decorationTable->scale[i] = actor->yaw;
+
+        decorationTable->rotationPivotOffsetX[i] = (s32)(actor->rotationPivotOffset.x * actor->scalingFactor);
+        decorationTable->rotationPivotOffsetY[i] = (s32)(actor->rotationPivotOffset.y * actor->scalingFactor);
+
+        decorationTable->rotX[i] = clamp_angle(actor->rotation.x) * 0.5f;
+        decorationTable->rotY[i] = clamp_angle(actor->rotation.y) * 0.5f;
+        decorationTable->rotZ[i] = clamp_angle(actor->rotation.z) * 0.5f;
+
+        i++;
+        if (i >= 0x10) {
+            i = 0;
+        }
+        decorationTable->unk_7D9 = i;
+    }
+}
 
 INCLUDE_ASM(void, "182B30", func_80254C50);
 
