@@ -20,6 +20,8 @@ MapConfig N(config) = {
     .tattle = { MSG_kmr_03_tattle },
 };
 
-EvtSource N(802406C0) = SCRIPT({
-    SetMusicTrack(0, SONG_PLEASANT_PATH, 0, 8);
-});
+EvtSource N(802406C0) = {
+    EVT_CALL(SetMusicTrack, 0, SONG_PLEASANT_PATH, 0, 8)
+    EVT_RETURN
+    EVT_END
+};

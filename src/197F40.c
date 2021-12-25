@@ -2379,9 +2379,9 @@ ApiStatus ModifyActorDecoration(Evt* script, s32 isInitialCall) {
     actorPart = get_actor_part(actor, partIndex);
     decorationtable = actorPart->decorationTable;
     decorationtable->unk_8C6[temp_s4].unk00 = evt_get_variable(script, *args++);
+    decorationtable->unk_8C6[temp_s4].unk02 = evt_get_variable(script, *args++);
     decorationtable->unk_8C6[temp_s4].unk04 = evt_get_variable(script, *args++);
-    decorationtable->unk_8C6[temp_s4].unk08 = evt_get_variable(script, *args++);
-    decorationtable->unk_8C6[temp_s4].unk0C = evt_get_variable(script, *args++);
+    decorationtable->unk_8C6[temp_s4].unk06 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 

@@ -27,135 +27,145 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_03_tattle },
 };
 
-EvtSource N(802406A0) = SCRIPT({
-    GetEntryID(EVT_VAR(0));
-    if (EVT_VAR(0) == 2) {
-        SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
-    } else {
-        match EVT_STORY_PROGRESS {
-            <= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
-                if (EVT_SAVE_FLAG(1411) == 0) {
-                    SetMusicTrack(0, SONG_MONTY_MOLE_ASSAULT, 0, 8);
-                } else {
-                    SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-                }
-            }
-            < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
-                SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-            } else {
-                SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
-            }
-        }
-    }
-});
+EvtSource N(802406A0) = {
+    EVT_CALL(GetEntryID, EVT_VAR(0))
+    EVT_IF_EQ(EVT_VAR(0), 2)
+        EVT_CALL(SetMusicTrack, 0, SONG_SUNSHINE_RETURNS, 0, 8)
+    EVT_ELSE
+        EVT_SWITCH(EVT_SAVE_VAR(0))
+            EVT_CASE_LE(44)
+                EVT_IF_EQ(EVT_SAVE_FLAG(1411), 0)
+                    EVT_CALL(SetMusicTrack, 0, SONG_MONTY_MOLE_ASSAULT, 0, 8)
+                EVT_ELSE
+                    EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
+                EVT_END_IF
+            EVT_CASE_LT(53)
+                EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
+            EVT_CASE_DEFAULT
+                EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_SUNNY, 0, 8)
+        EVT_END_SWITCH
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(802407C0) = SCRIPT({
-    if (EVT_STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
-        if (EVT_SAVE_FLAG(1411) == 1) {
-            PushSong(137, 0);
-        }
-    }
-});
+EvtSource N(802407C0) = {
+    EVT_IF_GE(EVT_SAVE_VAR(0), 44)
+        EVT_IF_EQ(EVT_SAVE_FLAG(1411), 1)
+            EVT_CALL(PushSong, 137, 0)
+        EVT_END_IF
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(80240814) = SCRIPT({
-    if (EVT_STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
-        if (EVT_SAVE_FLAG(1411) == 1) {
-            FadeOutMusic(0, 250);
-            sleep 10;
-            PopSong();
-        }
-    }
-});
+EvtSource N(80240814) = {
+    EVT_IF_GE(EVT_SAVE_VAR(0), 44)
+        EVT_IF_EQ(EVT_SAVE_FLAG(1411), 1)
+            EVT_CALL(FadeOutMusic, 0, 250)
+            EVT_WAIT_FRAMES(10)
+            EVT_CALL(PopSong)
+        EVT_END_IF
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(80240880) = SCRIPT({
-    group 11;
-    EVT_VAR(10) = EVT_VAR(0);
-    EVT_VAR(11) = EVT_VAR(1);
-    EVT_VAR(12) = EVT_VAR(2);
-    EVT_VAR(13) = EVT_VAR(3);
-    EVT_VAR(14) = EVT_VAR(4);
-    EVT_VAR(12) -= EVT_VAR(0);
-    EVT_VAR(13) -= EVT_VAR(1);
-    EVT_VAR(0) = (float) EVT_VAR(12);
-    EVT_VAR(0) /= 100.0;
-    EVT_VAR(15) = 100.0;
-    EVT_VAR(15) /= (float) EVT_VAR(0);
-    EVT_VAR(15) += 11;
-    EVT_VAR(5) = 200;
-    EVT_VAR(5) /= EVT_VAR(15);
-    EVT_VAR(5) += 1;
-    loop EVT_VAR(5) {
-        RandInt(EVT_VAR(12), EVT_VAR(0));
-        RandInt(EVT_VAR(13), EVT_VAR(1));
-        RandInt(199, EVT_VAR(2));
-        EVT_VAR(3) = 210;
-        EVT_VAR(3) -= EVT_VAR(2);
-        EVT_VAR(0) += EVT_VAR(10);
-        EVT_VAR(1) += EVT_VAR(11);
-        EVT_VAR(2) += EVT_VAR(14);
-        PlayEffect(0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    }
-    sleep EVT_VAR(15);
-0:
-    RandInt(EVT_VAR(12), EVT_VAR(0));
-    RandInt(EVT_VAR(13), EVT_VAR(1));
-    EVT_VAR(0) += EVT_VAR(10);
-    EVT_VAR(1) += EVT_VAR(11);
-    PlayEffect(0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    sleep EVT_VAR(15);
-    goto 0;
-});
+EvtSource N(80240880) = {
+    EVT_SET_GROUP(11)
+    EVT_SET(EVT_VAR(10), EVT_VAR(0))
+    EVT_SET(EVT_VAR(11), EVT_VAR(1))
+    EVT_SET(EVT_VAR(12), EVT_VAR(2))
+    EVT_SET(EVT_VAR(13), EVT_VAR(3))
+    EVT_SET(EVT_VAR(14), EVT_VAR(4))
+    EVT_SUB(EVT_VAR(12), EVT_VAR(0))
+    EVT_SUB(EVT_VAR(13), EVT_VAR(1))
+    EVT_SETF(EVT_VAR(0), EVT_VAR(12))
+    EVT_DIVF(EVT_VAR(0), EVT_FIXED(100.0))
+    EVT_SETF(EVT_VAR(15), EVT_FIXED(100.0))
+    EVT_DIVF(EVT_VAR(15), EVT_VAR(0))
+    EVT_ADD(EVT_VAR(15), 11)
+    EVT_SET(EVT_VAR(5), 200)
+    EVT_DIV(EVT_VAR(5), EVT_VAR(15))
+    EVT_ADD(EVT_VAR(5), 1)
+    EVT_LOOP(EVT_VAR(5))
+        EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
+        EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
+        EVT_CALL(RandInt, 199, EVT_VAR(2))
+        EVT_SET(EVT_VAR(3), 210)
+        EVT_SUB(EVT_VAR(3), EVT_VAR(2))
+        EVT_ADD(EVT_VAR(0), EVT_VAR(10))
+        EVT_ADD(EVT_VAR(1), EVT_VAR(11))
+        EVT_ADD(EVT_VAR(2), EVT_VAR(14))
+        EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(2), EVT_VAR(1), EVT_VAR(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_END_LOOP
+    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_LABEL(0)
+    EVT_CALL(RandInt, EVT_VAR(12), EVT_VAR(0))
+    EVT_CALL(RandInt, EVT_VAR(13), EVT_VAR(1))
+    EVT_ADD(EVT_VAR(0), EVT_VAR(10))
+    EVT_ADD(EVT_VAR(1), EVT_VAR(11))
+    EVT_CALL(PlayEffect, 0xD, EVT_VAR(0), EVT_VAR(14), EVT_VAR(1), 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_WAIT_FRAMES(EVT_VAR(15))
+    EVT_GOTO(0)
+    EVT_RETURN
+    EVT_END
+};
 
 EvtSource N(exitWalk_80240B2C) = EXIT_WALK_SCRIPT(60,  0, "flo_09",  1);
 
 EvtSource N(exitWalk_80240B88) = EXIT_WALK_SCRIPT(60,  1, "flo_22",  0);
 
-EvtSource N(80240BE4) = SCRIPT({
-    bind N(exitWalk_80240B2C) TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_80240B88) TRIGGER_FLOOR_ABOVE 4;
-});
+EvtSource N(80240BE4) = {
+    EVT_BIND_TRIGGER(N(exitWalk_80240B2C), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
+    EVT_BIND_TRIGGER(N(exitWalk_80240B88), TRIGGER_FLOOR_ABOVE, 4, 1, 0)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(main) = SCRIPT({
-    EVT_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
-    SetSpriteShading(-1);
-    SetCamLeadPlayer(0, 0);
-    SetCamPerspective(0, 3, 25, 16, 4096);
-    SetCamBGColor(0, 0, 0, 0);
-    SetCamEnabled(0, 1);
-    EVT_AREA_FLAG(27) = 0;
-    EVT_AREA_FLAG(28) = 0;
-    EVT_AREA_VAR(1) = 0;
-    MakeNpcs(0, N(npcGroupList_8024442C));
-    await N(makeEntities);
-    await N(80241EF4);
-    spawn N(80244E54);
-    spawn N(80244ED0);
-    ModifyColliderFlags(3, 9, 0x00000006);
-    EVT_VAR(0) = -145;
-    EVT_VAR(1) = -335;
-    EVT_VAR(2) = 182;
-    EVT_VAR(3) = -180;
-    EVT_VAR(4) = 0;
-    spawn N(80240880);
-    EVT_VAR(0) = 200;
-    EVT_VAR(1) = -170;
-    EVT_VAR(2) = 310;
-    EVT_VAR(3) = 150;
-    EVT_VAR(4) = 0;
-    spawn N(80240880);
-    GetEntryID(EVT_VAR(0));
-    if (EVT_VAR(0) == 2) {
-        spawn N(80240FFC);
-    } else {
-        ModifyColliderFlags(0, 1, 0x7FFFFE00);
-        EVT_VAR(0) = N(80240BE4);
-        spawn EnterWalk;
-    }
-    await N(802406A0);
-    if (EVT_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
-        N(func_80240000_CA72A0)();
-    }
-});
+EvtSource N(main) = {
+    EVT_SET(EVT_SAVE_VAR(425), 38)
+    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetCamLeadPlayer, 0, 0)
+    EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
+    EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
+    EVT_CALL(SetCamEnabled, 0, 1)
+    EVT_SET(EVT_AREA_FLAG(27), 0)
+    EVT_SET(EVT_AREA_FLAG(28), 0)
+    EVT_SET(EVT_AREA_VAR(1), 0)
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_8024442C)))
+    EVT_EXEC_WAIT(N(makeEntities))
+    EVT_EXEC_WAIT(N(80241EF4))
+    EVT_EXEC(N(80244E54))
+    EVT_EXEC(N(80244ED0))
+    EVT_CALL(ModifyColliderFlags, 3, 9, 0x00000006)
+    EVT_SET(EVT_VAR(0), -145)
+    EVT_SET(EVT_VAR(1), -335)
+    EVT_SET(EVT_VAR(2), 182)
+    EVT_SET(EVT_VAR(3), -180)
+    EVT_SET(EVT_VAR(4), 0)
+    EVT_EXEC(N(80240880))
+    EVT_SET(EVT_VAR(0), 200)
+    EVT_SET(EVT_VAR(1), -170)
+    EVT_SET(EVT_VAR(2), 310)
+    EVT_SET(EVT_VAR(3), 150)
+    EVT_SET(EVT_VAR(4), 0)
+    EVT_EXEC(N(80240880))
+    EVT_CALL(GetEntryID, EVT_VAR(0))
+    EVT_IF_EQ(EVT_VAR(0), 2)
+        EVT_EXEC(N(80240FFC))
+    EVT_ELSE
+        EVT_CALL(ModifyColliderFlags, 0, 1, 0x7FFFFE00)
+        EVT_SET(EVT_VAR(0), EVT_PTR(N(80240BE4)))
+        EVT_EXEC(EnterWalk)
+    EVT_END_IF
+    EVT_EXEC_WAIT(N(802406A0))
+    EVT_IF_GE(EVT_SAVE_VAR(0), 53)
+        EVT_CALL(N(func_80240000_CA72A0))
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
 
 static s32 N(pad_EA4)[] = {
     0x00000000, 0x00000000, 0x00000000,
@@ -175,15 +185,19 @@ NpcSettings N(npcSettings_80240EDC) = {
 
 s32** N(D_80240F08_CA81A8) = NULL;
 
-EvtSource N(80240F0C) = SCRIPT({
-    ShowGotItem(EVT_VAR(0), 1, 0);
-    return;
-});
+EvtSource N(80240F0C) = {
+    EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
+    EVT_RETURN
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(80240F3C) = SCRIPT({
-    ShowGotItem(EVT_VAR(0), 1, 16);
-    return;
-});
+EvtSource N(80240F3C) = {
+    EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 16)
+    EVT_RETURN
+    EVT_RETURN
+    EVT_END
+};
 
 s32 N(intTable_80240F6C)[] = {
     0xFFFFFF9C, 0x00000000, 0x000000D2, 0xFFFFFF60, 0x00000000, 0x0000011D, 0xFFFFFFDD, 0x00000000,
@@ -205,677 +219,686 @@ s32 N(intTable_80240FD8)[] = {
     0x0000008C,
 };
 
-EvtSource N(80240FFC) = SCRIPT({
-    DisablePlayerInput(TRUE);
-    DisablePlayerPhysics(TRUE);
-    SetNpcYaw(NPC_PETUNIA, 90);
-    GetNpcPos(NPC_PETUNIA, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    SetCamDistance(0, 300);
-    SetCamPitch(0, 17.0, -9.5);
-    SetCamPosA(0, -27, 0);
-    SetCamPosB(0, 0, -50);
-    SetCamSpeed(0, 90.0);
-    PanToTarget(0, 0, 1);
-    WaitForCam(0, 1.0);
-    sleep 20;
-    SpeakToPlayer(NPC_PETUNIA, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00C8));
-    SetNpcAnimation(NPC_PETUNIA, NPC_ANIM_petunia_Palette_00_Anim_3);
-    sleep 10;
-    GotoMap("flo_18", 1);
-    sleep 100;
-});
+EvtSource N(80240FFC) = {
+    EVT_CALL(DisablePlayerInput, TRUE)
+    EVT_CALL(DisablePlayerPhysics, TRUE)
+    EVT_CALL(SetNpcYaw, 0, 90)
+    EVT_CALL(GetNpcPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(SetCamDistance, 0, 300)
+    EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-9.5))
+    EVT_CALL(SetCamPosA, 0, -27, 0)
+    EVT_CALL(SetCamPosB, 0, 0, -50)
+    EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+    EVT_CALL(PanToTarget, 0, 0, 1)
+    EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+    EVT_WAIT_FRAMES(20)
+    EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00C8))
+    EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_3)
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(GotoMap, EVT_PTR("flo_18"), 1)
+    EVT_WAIT_FRAMES(100)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(npcAI_8024119C) = SCRIPT({
-    N(func_80240158_CA73F8)();
-});
+EvtSource N(npcAI_8024119C) = {
+    EVT_CALL(N(func_80240158_CA73F8))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(defeat_802411B8) = SCRIPT({
-    GetBattleOutcome(EVT_VAR(0));
-    match EVT_VAR(0) {
-        == 0 {
-            EVT_SAVE_FLAG(1366) = 1;
-            DoNpcDefeat();
-        }
-        == 1 {}
-        == 2 {
-        }
-    }
-});
+EvtSource N(defeat_802411B8) = {
+    EVT_CALL(GetBattleOutcome, EVT_VAR(0))
+    EVT_SWITCH(EVT_VAR(0))
+        EVT_CASE_EQ(0)
+            EVT_SET(EVT_SAVE_FLAG(1366), 1)
+            EVT_CALL(DoNpcDefeat)
+        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(2)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(8024122C) = SCRIPT({
-    GetPlayerPos(EVT_VAR(3), EVT_VAR(1), EVT_VAR(2));
-    GetNpcPos(NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    EVT_VAR(0) += EVT_VAR(3);
-    EVT_VAR(0) /= 2;
-    SetCamProperties(0, EVT_VAR(4), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 300, 20.0, -9.5);
-});
+EvtSource N(8024122C) = {
+    EVT_CALL(GetPlayerPos, EVT_VAR(3), EVT_VAR(1), EVT_VAR(2))
+    EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_ADD(EVT_VAR(0), EVT_VAR(3))
+    EVT_DIV(EVT_VAR(0), 2)
+    EVT_CALL(SetCamProperties, 0, EVT_VAR(4), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 300, EVT_FIXED(20.0), EVT_FIXED(-9.5))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(interact_802412BC) = SCRIPT({
-    await N(802407C0);
-    match EVT_STORY_PROGRESS {
-        < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
-            EVT_MAP_VAR(14) = 1;
-            EVT_VAR(4) = (int) 3.5;
-            await N(8024122C);
-            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0050));
-            SetNpcAnimation(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_6);
-            SetPlayerAnimation(ANIM_NOD_YES);
-            sleep 20;
-            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0051));
-            SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM_monty_mole_Palette_01_Anim_12);
-            SetNpcYaw(NPC_MONTY_MOLE0, 270);
-            GetNpcPos(NPC_MONTY_MOLE0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetCamSpeed(0, 90.0);
-            SetCamPitch(0, 17.0, -8.0);
-            SetCamDistance(0, 200);
-            PanToTarget(0, 0, 1);
-            WaitForCam(0, 1.0);
-            sleep 20;
-            PlaySoundAtNpc(NPC_MONTY_MOLE0, SOUND_MOLE_SURFACE, 0);
-            SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM_monty_mole_Palette_01_Anim_16);
-            sleep 10;
-            PlaySoundAtNpc(NPC_MONTY_MOLE0, 0x263, 0);
-            ShowEmote(2, EMOTE_QUESTION, -45, 30, 1, 0, 0, 0, 0);
-            GetNpcPos(NPC_MONTY_MOLE1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0052));
-            SetNpcYaw(NPC_MONTY_MOLE1, 90);
-            SetNpcPos(NPC_MONTY_MOLE1, 0, -1000, 0);
-            UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetCamDistance(0, 200);
-            SetCamPitch(0, 17.0, -8.0);
-            PanToTarget(0, 0, 1);
-            WaitForCam(0, 1.0);
-            SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM_monty_mole_Palette_01_Anim_0);
-            sleep 20;
-            PlaySoundAtNpc(NPC_MONTY_MOLE1, SOUND_MOLE_SURFACE, 0);
-            SetNpcPos(NPC_MONTY_MOLE1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-            sleep 20;
-            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0053));
-            SetNpcYaw(NPC_MONTY_MOLE2, 270);
-            GetNpcPos(NPC_MONTY_MOLE2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetCamDistance(0, 200);
-            SetCamPitch(0, 17.0, -8.0);
-            PanToTarget(0, 0, 1);
-            WaitForCam(0, 1.0);
-            sleep 20;
-            SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM_monty_mole_Palette_01_Anim_14);
-            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0054));
-            SetNpcYaw(NPC_MONTY_MOLE3, 270);
-            GetNpcPos(NPC_MONTY_MOLE3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetCamDistance(0, 200);
-            SetCamPitch(0, 17.0, -9.0);
-            PanToTarget(0, 0, 1);
-            WaitForCam(0, 1.0);
-            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_6);
-            sleep 20;
-            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_7);
-            sleep 20;
-            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_8);
-            sleep 20;
-            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_16);
-            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0055));
-            SetNpcPos(NPC_DAYZEE, -233, 0, -217);
-            GetNpcPos(NPC_DAYZEE, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            SetCamDistance(0, 300);
-            SetCamPitch(0, 17.0, -9.0);
-            PanToTarget(0, 0, 1);
-            WaitForCam(0, 1.0);
-            SetNpcAnimation(NPC_DAYZEE, NPC_ANIM_dayzee_Palette_00_Anim_D);
-            PlaySoundAtNpc(NPC_DAYZEE, SOUND_262, 0);
-            ShowEmote(1, EMOTE_EXCLAMATION, 45, 30, 1, 0, 0, 0, 0);
-            sleep 15;
-            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0056));
-            EVT_VAR(4) = (int) 90.0;
-            await N(8024122C);
-            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0057));
-            SetEnemyFlagBits(1, 1, 0);
-            SetEnemyFlagBits(2, 1, 0);
-            SetEnemyFlagBits(3, 1, 0);
-            SetEnemyFlagBits(4, 1, 0);
-            SetEnemyFlagBits(5, 1, 0);
-            BindNpcAI(NPC_DAYZEE, N(npcAI_8024119C));
-            EVT_MAP_VAR(14) = 0;
-            EVT_MAP_VAR(15) = 60;
-            EVT_STORY_PROGRESS = STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES;
-        }
-        == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
-            if (EVT_SAVE_FLAG(1411) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0,
-                              MESSAGE_ID(0x11, 0x0058));
-                SetNpcAnimation(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_6);
-            } else {
-                EVT_VAR(4) = (int) 3.5;
-                await N(8024122C);
-                SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_8, NPC_ANIM_petunia_Palette_00_Anim_3, 0,
-                              MESSAGE_ID(0x11, 0x0059));
-                EndSpeech(-1, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0);
-                SetNpcAnimation(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_4);
-                sleep 20;
-                SetNpcAnimation(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_1);
-                EVT_VAR(0) = 88;
-                EVT_VAR(1) = 1;
-                await N(80240F0C);
-                AddKeyItem(ITEM_MAGICAL_BEAN);
-                sleep 20;
-                SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0,
-                              MESSAGE_ID(0x11, 0x005A));
-                EndSpeech(-1, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0);
-                EVT_STORY_PROGRESS = STORY_CH6_GOT_MAGICAL_BEAN;
-            }
-        }
-        < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x005B));
-        }
-        < STORY_CH6_RETURNED_TO_TOAD_TOWN {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x005C));
-        } else {
-            if (EVT_AREA_VAR(1) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0,
-                              MESSAGE_ID(0x11, 0x005D));
-                EVT_AREA_VAR(1) = 1;
-            } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0,
-                              MESSAGE_ID(0x11, 0x005E));
-            }
-        }
-    }
-    ResetCam(0, 8.0);
-    await N(80240814);
-});
+EvtSource N(interact_802412BC) = {
+    EVT_EXEC_WAIT(N(802407C0))
+    EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_CASE_LT(44)
+            EVT_SET(EVT_MAP_VAR(14), 1)
+            EVT_SET(EVT_VAR(4), EVT_FIXED(3.5))
+            EVT_EXEC_WAIT(N(8024122C))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0050))
+            EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_6)
+            EVT_CALL(SetPlayerAnimation, ANIM_NOD_YES)
+            EVT_WAIT_FRAMES(20)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0051))
+            EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_12)
+            EVT_CALL(SetNpcYaw, 2, 270)
+            EVT_CALL(GetNpcPos, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+            EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-8.0))
+            EVT_CALL(SetCamDistance, 0, 200)
+            EVT_CALL(PanToTarget, 0, 0, 1)
+            EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(20)
+            EVT_CALL(PlaySoundAtNpc, 2, SOUND_MOLE_SURFACE, 0)
+            EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_16)
+            EVT_WAIT_FRAMES(10)
+            EVT_CALL(PlaySoundAtNpc, 2, 0x263, 0)
+            EVT_CALL(ShowEmote, 2, EMOTE_QUESTION, -45, 30, 1, 0, 0, 0, 0)
+            EVT_CALL(GetNpcPos, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0052))
+            EVT_CALL(SetNpcYaw, 3, 90)
+            EVT_CALL(SetNpcPos, 3, 0, -1000, 0)
+            EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetCamDistance, 0, 200)
+            EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-8.0))
+            EVT_CALL(PanToTarget, 0, 0, 1)
+            EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+            EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_0)
+            EVT_WAIT_FRAMES(20)
+            EVT_CALL(PlaySoundAtNpc, 3, SOUND_MOLE_SURFACE, 0)
+            EVT_CALL(SetNpcPos, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+            EVT_WAIT_FRAMES(20)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0053))
+            EVT_CALL(SetNpcYaw, 4, 270)
+            EVT_CALL(GetNpcPos, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetCamDistance, 0, 200)
+            EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-8.0))
+            EVT_CALL(PanToTarget, 0, 0, 1)
+            EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+            EVT_WAIT_FRAMES(20)
+            EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_monty_mole_Palette_01_Anim_14)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0054))
+            EVT_CALL(SetNpcYaw, 5, 270)
+            EVT_CALL(GetNpcPos, 5, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetCamDistance, 0, 200)
+            EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-9.0))
+            EVT_CALL(PanToTarget, 0, 0, 1)
+            EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+            EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_6)
+            EVT_WAIT_FRAMES(20)
+            EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_7)
+            EVT_WAIT_FRAMES(20)
+            EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_8)
+            EVT_WAIT_FRAMES(20)
+            EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_16)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0055))
+            EVT_CALL(SetNpcPos, 1, -233, 0, -217)
+            EVT_CALL(GetNpcPos, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(UseSettingsFrom, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetPanTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(SetCamDistance, 0, 300)
+            EVT_CALL(SetCamPitch, 0, EVT_FIXED(17.0), EVT_FIXED(-9.0))
+            EVT_CALL(PanToTarget, 0, 0, 1)
+            EVT_CALL(WaitForCam, 0, EVT_FIXED(1.0))
+            EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_dayzee_Palette_00_Anim_D)
+            EVT_CALL(PlaySoundAtNpc, 1, SOUND_262, 0)
+            EVT_CALL(ShowEmote, 1, EMOTE_EXCLAMATION, 45, 30, 1, 0, 0, 0, 0)
+            EVT_WAIT_FRAMES(15)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0056))
+            EVT_SET(EVT_VAR(4), EVT_FIXED(90.0))
+            EVT_EXEC_WAIT(N(8024122C))
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0057))
+            EVT_CALL(SetEnemyFlagBits, 1, 1, 0)
+            EVT_CALL(SetEnemyFlagBits, 2, 1, 0)
+            EVT_CALL(SetEnemyFlagBits, 3, 1, 0)
+            EVT_CALL(SetEnemyFlagBits, 4, 1, 0)
+            EVT_CALL(SetEnemyFlagBits, 5, 1, 0)
+            EVT_CALL(BindNpcAI, 1, EVT_PTR(N(npcAI_8024119C)))
+            EVT_SET(EVT_MAP_VAR(14), 0)
+            EVT_SET(EVT_MAP_VAR(15), 60)
+            EVT_SET(EVT_SAVE_VAR(0), 44)
+        EVT_CASE_EQ(44)
+            EVT_IF_EQ(EVT_SAVE_FLAG(1411), 0)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0058))
+                EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_6)
+            EVT_ELSE
+                EVT_SET(EVT_VAR(4), EVT_FIXED(3.5))
+                EVT_EXEC_WAIT(N(8024122C))
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_8, NPC_ANIM_petunia_Palette_00_Anim_3, 0, MESSAGE_ID(0x11, 0x0059))
+                EVT_CALL(EndSpeech, -1, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_4)
+                EVT_WAIT_FRAMES(20)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_1)
+                EVT_SET(EVT_VAR(0), 88)
+                EVT_SET(EVT_VAR(1), 1)
+                EVT_EXEC_WAIT(N(80240F0C))
+                EVT_CALL(AddKeyItem, ITEM_MAGICAL_BEAN)
+                EVT_WAIT_FRAMES(20)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x005A))
+                EVT_CALL(EndSpeech, -1, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0)
+                EVT_SET(EVT_SAVE_VAR(0), 45)
+            EVT_END_IF
+        EVT_CASE_LT(53)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x005B))
+        EVT_CASE_LT(60)
+            EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x005C))
+        EVT_CASE_DEFAULT
+            EVT_IF_EQ(EVT_AREA_VAR(1), 0)
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x005D))
+                EVT_SET(EVT_AREA_VAR(1), 1)
+            EVT_ELSE
+                EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x005E))
+            EVT_END_IF
+    EVT_END_SWITCH
+    EVT_CALL(ResetCam, 0, EVT_FIXED(8.0))
+    EVT_EXEC_WAIT(N(80240814))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(init_80241DA4) = SCRIPT({
-    BindNpcInteract(NPC_SELF, N(interact_802412BC));
-    if (EVT_SAVE_FLAG(1411) == 0) {
-        SetNpcAnimation(NPC_PETUNIA, NPC_ANIM_petunia_Palette_00_Anim_6);
-    } else {
-        SetNpcAnimation(NPC_PETUNIA, NPC_ANIM_petunia_Palette_00_Anim_1);
-    }
-});
+EvtSource N(init_80241DA4) = {
+    EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802412BC)))
+    EVT_IF_EQ(EVT_SAVE_FLAG(1411), 0)
+        EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_6)
+    EVT_ELSE
+        EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_1)
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(init_80241E10) = SCRIPT({
-    BindNpcDefeat(NPC_SELF, N(defeat_802411B8));
-    EnableNpcShadow(NPC_DAYZEE, FALSE);
-    match EVT_STORY_PROGRESS {
-        < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
-            SetNpcPos(NPC_DAYZEE, 0, -1000, 0);
-        } else {
-            if (EVT_SAVE_FLAG(1366) == 0) {
-                SetEnemyFlagBits(1, 1, 0);
-                BindNpcIdle(NPC_SELF, N(npcAI_8024119C));
-            } else {
-                SetNpcPos(NPC_DAYZEE, 0, -1000, 0);
-            }
-        }
-    }
-});
+EvtSource N(init_80241E10) = {
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802411B8)))
+    EVT_CALL(EnableNpcShadow, 1, FALSE)
+    EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_CASE_LT(44)
+            EVT_CALL(SetNpcPos, 1, 0, -1000, 0)
+        EVT_CASE_DEFAULT
+            EVT_IF_EQ(EVT_SAVE_FLAG(1366), 0)
+                EVT_CALL(SetEnemyFlagBits, 1, 1, 0)
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(npcAI_8024119C)))
+            EVT_ELSE
+                EVT_CALL(SetNpcPos, 1, 0, -1000, 0)
+            EVT_END_IF
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(80241EF4) = SCRIPT({
-    EVT_MAP_VAR(14) = 0;
-    EVT_MAP_VAR(10) = 0;
-    EVT_MAP_VAR(11) = 0;
-    EVT_MAP_VAR(12) = 0;
-    EVT_MAP_VAR(13) = 0;
-    EVT_MAP_VAR(15) = 100;
-});
+EvtSource N(80241EF4) = {
+    EVT_SET(EVT_MAP_VAR(14), 0)
+    EVT_SET(EVT_MAP_VAR(10), 0)
+    EVT_SET(EVT_MAP_VAR(11), 0)
+    EVT_SET(EVT_MAP_VAR(12), 0)
+    EVT_SET(EVT_MAP_VAR(13), 0)
+    EVT_SET(EVT_MAP_VAR(15), 100)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(defeat_80241F64) = SCRIPT({
-    GetBattleOutcome(EVT_VAR(0));
-    match EVT_VAR(0) {
-        == 0 {
-            GetSelfNpcID(EVT_VAR(0));
-            match EVT_VAR(0) {
-                == 2 {
-                    EVT_SAVE_FLAG(1367) = 1;
-                }
-                == 3 {
-                    EVT_SAVE_FLAG(1368) = 1;
-                }
-                == 4 {
-                    EVT_SAVE_FLAG(1369) = 1;
-                }
-                == 5 {
-                    EVT_SAVE_FLAG(1370) = 1;
-                }
-            }
-            EVT_VAR(0) = 0;
-            EVT_VAR(0) += EVT_SAVE_FLAG(1367);
-            EVT_VAR(0) += EVT_SAVE_FLAG(1368);
-            EVT_VAR(0) += EVT_SAVE_FLAG(1369);
-            EVT_VAR(0) += EVT_SAVE_FLAG(1370);
-            if (EVT_VAR(0) != 4) {
-                SetNpcAnimation(NPC_PETUNIA, NPC_ANIM_petunia_Palette_00_Anim_6);
-            } else {
-                SetNpcAnimation(NPC_PETUNIA, NPC_ANIM_petunia_Palette_00_Anim_1);
-                EVT_SAVE_FLAG(1411) = 1;
-                await N(802406A0);
-            }
-            DoNpcDefeat();
-        }
-        == 1 {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM_monty_mole_Palette_01_Anim_1);
-        }
-        == 2 {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM_monty_mole_Palette_01_Anim_1);
-        }
-    }
-});
+EvtSource N(defeat_80241F64) = {
+    EVT_CALL(GetBattleOutcome, EVT_VAR(0))
+    EVT_SWITCH(EVT_VAR(0))
+        EVT_CASE_EQ(0)
+            EVT_CALL(GetSelfNpcID, EVT_VAR(0))
+            EVT_SWITCH(EVT_VAR(0))
+                EVT_CASE_EQ(2)
+                    EVT_SET(EVT_SAVE_FLAG(1367), 1)
+                EVT_CASE_EQ(3)
+                    EVT_SET(EVT_SAVE_FLAG(1368), 1)
+                EVT_CASE_EQ(4)
+                    EVT_SET(EVT_SAVE_FLAG(1369), 1)
+                EVT_CASE_EQ(5)
+                    EVT_SET(EVT_SAVE_FLAG(1370), 1)
+            EVT_END_SWITCH
+            EVT_SET(EVT_VAR(0), 0)
+            EVT_ADD(EVT_VAR(0), EVT_SAVE_FLAG(1367))
+            EVT_ADD(EVT_VAR(0), EVT_SAVE_FLAG(1368))
+            EVT_ADD(EVT_VAR(0), EVT_SAVE_FLAG(1369))
+            EVT_ADD(EVT_VAR(0), EVT_SAVE_FLAG(1370))
+            EVT_IF_NE(EVT_VAR(0), 4)
+                EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_6)
+            EVT_ELSE
+                EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_1)
+                EVT_SET(EVT_SAVE_FLAG(1411), 1)
+                EVT_EXEC_WAIT(N(802406A0))
+            EVT_END_IF
+            EVT_CALL(DoNpcDefeat)
+        EVT_CASE_EQ(1)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_monty_mole_Palette_01_Anim_1)
+        EVT_CASE_EQ(2)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_monty_mole_Palette_01_Anim_1)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(hit_80242138) = SCRIPT({
-    if (EVT_STORY_PROGRESS == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
-        GetOwnerEncounterTrigger(EVT_VAR(0));
-        if (EVT_VAR(0) != 1) {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM_monty_mole_Palette_01_Anim_5);
-        }
-    }
-});
+EvtSource N(hit_80242138) = {
+    EVT_IF_EQ(EVT_SAVE_VAR(0), 44)
+        EVT_CALL(GetOwnerEncounterTrigger, EVT_VAR(0))
+        EVT_IF_NE(EVT_VAR(0), 1)
+            EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_monty_mole_Palette_01_Anim_5)
+        EVT_END_IF
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(idle_8024219C) = SCRIPT({
-    loop {
-        if (EVT_MAP_VAR(10) == 0) {
-            if (EVT_AREA_FLAG(23) == 1) {
-                goto 0;
-            }
-            EVT_VAR(3) = 1;
-        } else {
-        0:
-            GetNpcPos(NPC_MONTY_MOLE0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            IsPlayerWithin(EVT_VAR(0), EVT_VAR(2), EVT_MAP_VAR(15), EVT_VAR(3));
-        }
-        GetCurrentPartner(EVT_VAR(9));
-        if (EVT_VAR(9) == 9) {
-            EVT_VAR(3) = 0;
-        }
-        if (EVT_MAP_VAR(14) == 1) {
-            EVT_VAR(3) = 0;
-        }
-        if (EVT_VAR(3) == 1) {
-            if (EVT_AREA_FLAG(23) == 0) {
-                SetNpcFlagBits(NPC_MONTY_MOLE0, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
-                NpcFacePlayer(NPC_MONTY_MOLE0, 1);
-                sleep 1;
-                EVT_AREA_FLAG(23) = 1;
-                if (EVT_MAP_VAR(10) != 0) {
-                    if (EVT_STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
-                        EVT_VAR(1) = 4;
-                    } else {
-                        EVT_VAR(1) = 10;
-                    }
-                    PlaySoundAtNpc(NPC_MONTY_MOLE0, SOUND_262, 0);
-                    ShowEmote(2, EMOTE_EXCLAMATION, 0, EVT_VAR(1), 1, 0, 0, 0, 0);
-                    sleep EVT_VAR(1);
-                    SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
-                }
-                PlaySoundAtNpc(NPC_MONTY_MOLE0, SOUND_MOLE_DIG, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM_monty_mole_Palette_01_Anim_11);
-                sleep 20;
-                if (EVT_SAVE_FLAG(1367) == 0) {
-                    SetNpcPos(NPC_MONTY_MOLE0, 0, -50, 0);
-                }
-                sleep 45;
-            }
-        } else {
-            if (EVT_AREA_FLAG(23) == 1) {
-                if (EVT_SAVE_FLAG(1367) == 0) {
-                    RandInt(2, EVT_VAR(0));
-                    EVT_VAR(0) += 1;
-                    buf_use N(intTable_80240F6C);
-                    loop EVT_VAR(0) {
-                        buf_read EVT_VAR(1) EVT_VAR(2) EVT_VAR(3);
-                    }
-                    SetNpcPos(NPC_MONTY_MOLE0, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
-                }
-                SetNpcFlagBits(NPC_MONTY_MOLE0, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
-                EVT_AREA_FLAG(23) = 0;
-                NpcFacePlayer(NPC_MONTY_MOLE0, 1);
-                sleep 1;
-                PlaySoundAtNpc(NPC_MONTY_MOLE0, SOUND_MOLE_SURFACE, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-                sleep 10;
-                SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), FALSE);
-                RandInt(30, EVT_VAR(0));
-                EVT_VAR(0) += 60;
-                EVT_MAP_VAR(10) = EVT_VAR(0);
-            } else {
-                if (EVT_MAP_VAR(10) > 0) {
-                    EVT_MAP_VAR(10) -= 1;
-                }
-            }
-        }
-        sleep 1;
-    }
-});
+EvtSource N(idle_8024219C) = {
+    EVT_LOOP(0)
+        EVT_IF_EQ(EVT_MAP_VAR(10), 0)
+            EVT_IF_EQ(EVT_AREA_FLAG(23), 1)
+                EVT_GOTO(0)
+            EVT_END_IF
+            EVT_SET(EVT_VAR(3), 1)
+        EVT_ELSE
+            EVT_LABEL(0)
+            EVT_CALL(GetNpcPos, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(IsPlayerWithin, EVT_VAR(0), EVT_VAR(2), EVT_MAP_VAR(15), EVT_VAR(3))
+        EVT_END_IF
+        EVT_CALL(GetCurrentPartner, EVT_VAR(9))
+        EVT_IF_EQ(EVT_VAR(9), 9)
+            EVT_SET(EVT_VAR(3), 0)
+        EVT_END_IF
+        EVT_IF_EQ(EVT_MAP_VAR(14), 1)
+            EVT_SET(EVT_VAR(3), 0)
+        EVT_END_IF
+        EVT_IF_EQ(EVT_VAR(3), 1)
+            EVT_IF_EQ(EVT_AREA_FLAG(23), 0)
+                EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE)
+                EVT_CALL(NpcFacePlayer, 2, 1)
+                EVT_WAIT_FRAMES(1)
+                EVT_SET(EVT_AREA_FLAG(23), 1)
+                EVT_IF_NE(EVT_MAP_VAR(10), 0)
+                    EVT_IF_LT(EVT_SAVE_VAR(0), 44)
+                        EVT_SET(EVT_VAR(1), 4)
+                    EVT_ELSE
+                        EVT_SET(EVT_VAR(1), 10)
+                    EVT_END_IF
+                    EVT_CALL(PlaySoundAtNpc, 2, SOUND_262, 0)
+                    EVT_CALL(ShowEmote, 2, EMOTE_EXCLAMATION, 0, EVT_VAR(1), 1, 0, 0, 0, 0)
+                    EVT_WAIT_FRAMES(EVT_VAR(1))
+                    EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), TRUE)
+                EVT_END_IF
+                EVT_CALL(PlaySoundAtNpc, 2, SOUND_MOLE_DIG, 0)
+                EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_11)
+                EVT_WAIT_FRAMES(20)
+                EVT_IF_EQ(EVT_SAVE_FLAG(1367), 0)
+                    EVT_CALL(SetNpcPos, 2, 0, -50, 0)
+                EVT_END_IF
+                EVT_WAIT_FRAMES(45)
+            EVT_END_IF
+        EVT_ELSE
+            EVT_IF_EQ(EVT_AREA_FLAG(23), 1)
+                EVT_IF_EQ(EVT_SAVE_FLAG(1367), 0)
+                    EVT_CALL(RandInt, 2, EVT_VAR(0))
+                    EVT_ADD(EVT_VAR(0), 1)
+                    EVT_USE_BUF(EVT_PTR(N(intTable_80240F6C)))
+                    EVT_LOOP(EVT_VAR(0))
+                        EVT_BUF_READ3(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+                    EVT_END_LOOP
+                    EVT_CALL(SetNpcPos, 2, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+                EVT_END_IF
+                EVT_CALL(SetNpcFlagBits, 2, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE)
+                EVT_SET(EVT_AREA_FLAG(23), 0)
+                EVT_CALL(NpcFacePlayer, 2, 1)
+                EVT_WAIT_FRAMES(1)
+                EVT_CALL(PlaySoundAtNpc, 2, SOUND_MOLE_SURFACE, 0)
+                EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+                EVT_WAIT_FRAMES(10)
+                EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), FALSE)
+                EVT_CALL(RandInt, 30, EVT_VAR(0))
+                EVT_ADD(EVT_VAR(0), 60)
+                EVT_SET(EVT_MAP_VAR(10), EVT_VAR(0))
+            EVT_ELSE
+                EVT_IF_GT(EVT_MAP_VAR(10), 0)
+                    EVT_SUB(EVT_MAP_VAR(10), 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(idle_80242618) = SCRIPT({
-    loop {
-        if (EVT_MAP_VAR(11) == 0) {
-            if (EVT_AREA_FLAG(24) == 1) {
-                goto 0;
-            }
-            EVT_VAR(3) = 1;
-        } else {
-        0:
-            GetNpcPos(NPC_MONTY_MOLE1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            IsPlayerWithin(EVT_VAR(0), EVT_VAR(2), EVT_MAP_VAR(15), EVT_VAR(3));
-        }
-        GetCurrentPartner(EVT_VAR(9));
-        if (EVT_VAR(9) == 9) {
-            EVT_VAR(3) = 0;
-        }
-        if (EVT_MAP_VAR(14) == 1) {
-            EVT_VAR(3) = 0;
-        }
-        if (EVT_VAR(3) == 1) {
-            if (EVT_AREA_FLAG(24) == 0) {
-                SetNpcFlagBits(NPC_MONTY_MOLE1, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
-                NpcFacePlayer(NPC_MONTY_MOLE1, 1);
-                sleep 1;
-                EVT_AREA_FLAG(24) = 1;
-                if (EVT_MAP_VAR(11) != 0) {
-                    if (EVT_STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
-                        EVT_VAR(1) = 4;
-                    } else {
-                        EVT_VAR(1) = 10;
-                    }
-                    PlaySoundAtNpc(NPC_MONTY_MOLE1, SOUND_262, 0);
-                    ShowEmote(3, EMOTE_EXCLAMATION, 0, EVT_VAR(1), 1, 0, 0, 0, 0);
-                    sleep EVT_VAR(1);
-                    SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
-                }
-                PlaySoundAtNpc(NPC_MONTY_MOLE1, SOUND_MOLE_DIG, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM_monty_mole_Palette_01_Anim_11);
-                sleep 20;
-                if (EVT_SAVE_FLAG(1368) == 0) {
-                    SetNpcPos(NPC_MONTY_MOLE1, 0, -50, 0);
-                }
-                sleep 45;
-            }
-        } else {
-            if (EVT_AREA_FLAG(24) == 1) {
-                if (EVT_SAVE_FLAG(1368) == 0) {
-                    RandInt(2, EVT_VAR(0));
-                    EVT_VAR(0) += 1;
-                    buf_use N(intTable_80240F90);
-                    loop EVT_VAR(0) {
-                        buf_read EVT_VAR(1) EVT_VAR(2) EVT_VAR(3);
-                    }
-                    SetNpcPos(NPC_MONTY_MOLE1, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
-                }
-                SetNpcFlagBits(NPC_MONTY_MOLE1, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
-                EVT_AREA_FLAG(24) = 0;
-                NpcFacePlayer(NPC_MONTY_MOLE1, 1);
-                sleep 1;
-                PlaySoundAtNpc(NPC_MONTY_MOLE1, SOUND_MOLE_SURFACE, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-                sleep 10;
-                SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), FALSE);
-                RandInt(35, EVT_VAR(0));
-                EVT_VAR(0) += 55;
-                EVT_MAP_VAR(11) = EVT_VAR(0);
-            } else {
-                if (EVT_MAP_VAR(11) > 0) {
-                    EVT_MAP_VAR(11) -= 1;
-                }
-            }
-        }
-        sleep 1;
-    }
-});
+EvtSource N(idle_80242618) = {
+    EVT_LOOP(0)
+        EVT_IF_EQ(EVT_MAP_VAR(11), 0)
+            EVT_IF_EQ(EVT_AREA_FLAG(24), 1)
+                EVT_GOTO(0)
+            EVT_END_IF
+            EVT_SET(EVT_VAR(3), 1)
+        EVT_ELSE
+            EVT_LABEL(0)
+            EVT_CALL(GetNpcPos, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(IsPlayerWithin, EVT_VAR(0), EVT_VAR(2), EVT_MAP_VAR(15), EVT_VAR(3))
+        EVT_END_IF
+        EVT_CALL(GetCurrentPartner, EVT_VAR(9))
+        EVT_IF_EQ(EVT_VAR(9), 9)
+            EVT_SET(EVT_VAR(3), 0)
+        EVT_END_IF
+        EVT_IF_EQ(EVT_MAP_VAR(14), 1)
+            EVT_SET(EVT_VAR(3), 0)
+        EVT_END_IF
+        EVT_IF_EQ(EVT_VAR(3), 1)
+            EVT_IF_EQ(EVT_AREA_FLAG(24), 0)
+                EVT_CALL(SetNpcFlagBits, 3, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE)
+                EVT_CALL(NpcFacePlayer, 3, 1)
+                EVT_WAIT_FRAMES(1)
+                EVT_SET(EVT_AREA_FLAG(24), 1)
+                EVT_IF_NE(EVT_MAP_VAR(11), 0)
+                    EVT_IF_LT(EVT_SAVE_VAR(0), 44)
+                        EVT_SET(EVT_VAR(1), 4)
+                    EVT_ELSE
+                        EVT_SET(EVT_VAR(1), 10)
+                    EVT_END_IF
+                    EVT_CALL(PlaySoundAtNpc, 3, SOUND_262, 0)
+                    EVT_CALL(ShowEmote, 3, EMOTE_EXCLAMATION, 0, EVT_VAR(1), 1, 0, 0, 0, 0)
+                    EVT_WAIT_FRAMES(EVT_VAR(1))
+                    EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), TRUE)
+                EVT_END_IF
+                EVT_CALL(PlaySoundAtNpc, 3, SOUND_MOLE_DIG, 0)
+                EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_11)
+                EVT_WAIT_FRAMES(20)
+                EVT_IF_EQ(EVT_SAVE_FLAG(1368), 0)
+                    EVT_CALL(SetNpcPos, 3, 0, -50, 0)
+                EVT_END_IF
+                EVT_WAIT_FRAMES(45)
+            EVT_END_IF
+        EVT_ELSE
+            EVT_IF_EQ(EVT_AREA_FLAG(24), 1)
+                EVT_IF_EQ(EVT_SAVE_FLAG(1368), 0)
+                    EVT_CALL(RandInt, 2, EVT_VAR(0))
+                    EVT_ADD(EVT_VAR(0), 1)
+                    EVT_USE_BUF(EVT_PTR(N(intTable_80240F90)))
+                    EVT_LOOP(EVT_VAR(0))
+                        EVT_BUF_READ3(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+                    EVT_END_LOOP
+                    EVT_CALL(SetNpcPos, 3, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+                EVT_END_IF
+                EVT_CALL(SetNpcFlagBits, 3, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE)
+                EVT_SET(EVT_AREA_FLAG(24), 0)
+                EVT_CALL(NpcFacePlayer, 3, 1)
+                EVT_WAIT_FRAMES(1)
+                EVT_CALL(PlaySoundAtNpc, 3, SOUND_MOLE_SURFACE, 0)
+                EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+                EVT_WAIT_FRAMES(10)
+                EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), FALSE)
+                EVT_CALL(RandInt, 35, EVT_VAR(0))
+                EVT_ADD(EVT_VAR(0), 55)
+                EVT_SET(EVT_MAP_VAR(11), EVT_VAR(0))
+            EVT_ELSE
+                EVT_IF_GT(EVT_MAP_VAR(11), 0)
+                    EVT_SUB(EVT_MAP_VAR(11), 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(idle_80242A94) = SCRIPT({
-    loop {
-        if (EVT_MAP_VAR(12) == 0) {
-            if (EVT_AREA_FLAG(25) == 1) {
-                goto 0;
-            }
-            EVT_VAR(3) = 1;
-        } else {
-        0:
-            GetNpcPos(NPC_MONTY_MOLE2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            IsPlayerWithin(EVT_VAR(0), EVT_VAR(2), EVT_MAP_VAR(15), EVT_VAR(3));
-        }
-        GetCurrentPartner(EVT_VAR(9));
-        if (EVT_VAR(9) == 9) {
-            EVT_VAR(3) = 0;
-        }
-        if (EVT_MAP_VAR(14) == 1) {
-            EVT_VAR(3) = 0;
-        }
-        if (EVT_VAR(3) == 1) {
-            if (EVT_AREA_FLAG(25) == 0) {
-                SetNpcFlagBits(NPC_MONTY_MOLE2, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
-                NpcFacePlayer(NPC_MONTY_MOLE2, 1);
-                sleep 1;
-                EVT_AREA_FLAG(25) = 1;
-                if (EVT_MAP_VAR(12) != 0) {
-                    if (EVT_STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
-                        EVT_VAR(1) = 4;
-                    } else {
-                        EVT_VAR(1) = 10;
-                    }
-                    PlaySoundAtNpc(NPC_MONTY_MOLE2, SOUND_262, 0);
-                    ShowEmote(4, EMOTE_EXCLAMATION, 0, EVT_VAR(1), 1, 0, 0, 0, 0);
-                    sleep EVT_VAR(1);
-                    SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
-                }
-                PlaySoundAtNpc(NPC_MONTY_MOLE2, SOUND_MOLE_DIG, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM_monty_mole_Palette_01_Anim_11);
-                sleep 20;
-                if (EVT_SAVE_FLAG(1369) == 0) {
-                    SetNpcPos(NPC_MONTY_MOLE2, 0, -50, 0);
-                }
-                sleep 45;
-            }
-        } else {
-            if (EVT_AREA_FLAG(25) == 1) {
-                if (EVT_SAVE_FLAG(1369) == 0) {
-                    RandInt(2, EVT_VAR(0));
-                    EVT_VAR(0) += 1;
-                    buf_use N(intTable_80240FB4);
-                    loop EVT_VAR(0) {
-                        buf_read EVT_VAR(1) EVT_VAR(2) EVT_VAR(3);
-                    }
-                    SetNpcPos(NPC_MONTY_MOLE2, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
-                }
-                SetNpcFlagBits(NPC_MONTY_MOLE2, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
-                EVT_AREA_FLAG(25) = 0;
-                NpcFacePlayer(NPC_MONTY_MOLE2, 1);
-                sleep 1;
-                PlaySoundAtNpc(NPC_MONTY_MOLE2, SOUND_MOLE_SURFACE, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-                sleep 10;
-                SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), FALSE);
-                RandInt(40, EVT_VAR(0));
-                EVT_VAR(0) += 50;
-                EVT_MAP_VAR(12) = EVT_VAR(0);
-            } else {
-                if (EVT_MAP_VAR(12) > 0) {
-                    EVT_MAP_VAR(12) -= 1;
-                }
-            }
-        }
-        sleep 1;
-    }
-});
+EvtSource N(idle_80242A94) = {
+    EVT_LOOP(0)
+        EVT_IF_EQ(EVT_MAP_VAR(12), 0)
+            EVT_IF_EQ(EVT_AREA_FLAG(25), 1)
+                EVT_GOTO(0)
+            EVT_END_IF
+            EVT_SET(EVT_VAR(3), 1)
+        EVT_ELSE
+            EVT_LABEL(0)
+            EVT_CALL(GetNpcPos, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(IsPlayerWithin, EVT_VAR(0), EVT_VAR(2), EVT_MAP_VAR(15), EVT_VAR(3))
+        EVT_END_IF
+        EVT_CALL(GetCurrentPartner, EVT_VAR(9))
+        EVT_IF_EQ(EVT_VAR(9), 9)
+            EVT_SET(EVT_VAR(3), 0)
+        EVT_END_IF
+        EVT_IF_EQ(EVT_MAP_VAR(14), 1)
+            EVT_SET(EVT_VAR(3), 0)
+        EVT_END_IF
+        EVT_IF_EQ(EVT_VAR(3), 1)
+            EVT_IF_EQ(EVT_AREA_FLAG(25), 0)
+                EVT_CALL(SetNpcFlagBits, 4, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE)
+                EVT_CALL(NpcFacePlayer, 4, 1)
+                EVT_WAIT_FRAMES(1)
+                EVT_SET(EVT_AREA_FLAG(25), 1)
+                EVT_IF_NE(EVT_MAP_VAR(12), 0)
+                    EVT_IF_LT(EVT_SAVE_VAR(0), 44)
+                        EVT_SET(EVT_VAR(1), 4)
+                    EVT_ELSE
+                        EVT_SET(EVT_VAR(1), 10)
+                    EVT_END_IF
+                    EVT_CALL(PlaySoundAtNpc, 4, SOUND_262, 0)
+                    EVT_CALL(ShowEmote, 4, EMOTE_EXCLAMATION, 0, EVT_VAR(1), 1, 0, 0, 0, 0)
+                    EVT_WAIT_FRAMES(EVT_VAR(1))
+                    EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), TRUE)
+                EVT_END_IF
+                EVT_CALL(PlaySoundAtNpc, 4, SOUND_MOLE_DIG, 0)
+                EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_monty_mole_Palette_01_Anim_11)
+                EVT_WAIT_FRAMES(20)
+                EVT_IF_EQ(EVT_SAVE_FLAG(1369), 0)
+                    EVT_CALL(SetNpcPos, 4, 0, -50, 0)
+                EVT_END_IF
+                EVT_WAIT_FRAMES(45)
+            EVT_END_IF
+        EVT_ELSE
+            EVT_IF_EQ(EVT_AREA_FLAG(25), 1)
+                EVT_IF_EQ(EVT_SAVE_FLAG(1369), 0)
+                    EVT_CALL(RandInt, 2, EVT_VAR(0))
+                    EVT_ADD(EVT_VAR(0), 1)
+                    EVT_USE_BUF(EVT_PTR(N(intTable_80240FB4)))
+                    EVT_LOOP(EVT_VAR(0))
+                        EVT_BUF_READ3(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+                    EVT_END_LOOP
+                    EVT_CALL(SetNpcPos, 4, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+                EVT_END_IF
+                EVT_CALL(SetNpcFlagBits, 4, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE)
+                EVT_SET(EVT_AREA_FLAG(25), 0)
+                EVT_CALL(NpcFacePlayer, 4, 1)
+                EVT_WAIT_FRAMES(1)
+                EVT_CALL(PlaySoundAtNpc, 4, SOUND_MOLE_SURFACE, 0)
+                EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+                EVT_WAIT_FRAMES(10)
+                EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), FALSE)
+                EVT_CALL(RandInt, 40, EVT_VAR(0))
+                EVT_ADD(EVT_VAR(0), 50)
+                EVT_SET(EVT_MAP_VAR(12), EVT_VAR(0))
+            EVT_ELSE
+                EVT_IF_GT(EVT_MAP_VAR(12), 0)
+                    EVT_SUB(EVT_MAP_VAR(12), 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(idle_80242F10) = SCRIPT({
-    loop {
-        if (EVT_MAP_VAR(13) == 0) {
-            if (EVT_AREA_FLAG(26) == 1) {
-                goto 0;
-            }
-            EVT_VAR(3) = 1;
-        } else {
-        0:
-            GetNpcPos(NPC_MONTY_MOLE3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-            IsPlayerWithin(EVT_VAR(0), EVT_VAR(2), EVT_MAP_VAR(15), EVT_VAR(3));
-        }
-        GetCurrentPartner(EVT_VAR(9));
-        if (EVT_VAR(9) == 9) {
-            EVT_VAR(3) = 0;
-        }
-        if (EVT_MAP_VAR(14) == 1) {
-            EVT_VAR(3) = 0;
-        }
-        if (EVT_VAR(3) == 1) {
-            if (EVT_AREA_FLAG(26) == 0) {
-                SetNpcFlagBits(NPC_MONTY_MOLE3, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
-                NpcFacePlayer(NPC_MONTY_MOLE3, 1);
-                sleep 1;
-                EVT_AREA_FLAG(26) = 1;
-                if (EVT_MAP_VAR(13) != 0) {
-                    if (EVT_STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
-                        EVT_VAR(1) = 4;
-                    } else {
-                        EVT_VAR(1) = 10;
-                    }
-                    PlaySoundAtNpc(NPC_MONTY_MOLE3, SOUND_262, 0);
-                    ShowEmote(5, EMOTE_EXCLAMATION, 0, EVT_VAR(1), 1, 0, 0, 0, 0);
-                    sleep EVT_VAR(1);
-                    SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
-                }
-                PlaySoundAtNpc(NPC_MONTY_MOLE3, SOUND_MOLE_DIG, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_11);
-                sleep 20;
-                if (EVT_SAVE_FLAG(1370) == 0) {
-                    SetNpcPos(NPC_MONTY_MOLE3, 0, -50, 0);
-                }
-                sleep 45;
-            }
-        } else {
-            if (EVT_AREA_FLAG(26) == 1) {
-                if (EVT_SAVE_FLAG(1370) == 0) {
-                    RandInt(2, EVT_VAR(0));
-                    EVT_VAR(0) += 1;
-                    buf_use N(intTable_80240FD8);
-                    loop EVT_VAR(0) {
-                        buf_read EVT_VAR(1) EVT_VAR(2) EVT_VAR(3);
-                    }
-                    SetNpcPos(NPC_MONTY_MOLE3, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
-                }
-                SetNpcFlagBits(NPC_MONTY_MOLE3, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
-                EVT_AREA_FLAG(26) = 0;
-                NpcFacePlayer(NPC_MONTY_MOLE3, 1);
-                sleep 1;
-                PlaySoundAtNpc(NPC_MONTY_MOLE3, SOUND_MOLE_SURFACE, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-                sleep 10;
-                SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), FALSE);
-                RandInt(45, EVT_VAR(0));
-                EVT_VAR(0) += 45;
-                EVT_MAP_VAR(13) = EVT_VAR(0);
-            } else {
-                if (EVT_MAP_VAR(13) > 0) {
-                    EVT_MAP_VAR(13) -= 1;
-                }
-            }
-        }
-        sleep 1;
-    }
-});
+EvtSource N(idle_80242F10) = {
+    EVT_LOOP(0)
+        EVT_IF_EQ(EVT_MAP_VAR(13), 0)
+            EVT_IF_EQ(EVT_AREA_FLAG(26), 1)
+                EVT_GOTO(0)
+            EVT_END_IF
+            EVT_SET(EVT_VAR(3), 1)
+        EVT_ELSE
+            EVT_LABEL(0)
+            EVT_CALL(GetNpcPos, 5, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+            EVT_CALL(IsPlayerWithin, EVT_VAR(0), EVT_VAR(2), EVT_MAP_VAR(15), EVT_VAR(3))
+        EVT_END_IF
+        EVT_CALL(GetCurrentPartner, EVT_VAR(9))
+        EVT_IF_EQ(EVT_VAR(9), 9)
+            EVT_SET(EVT_VAR(3), 0)
+        EVT_END_IF
+        EVT_IF_EQ(EVT_MAP_VAR(14), 1)
+            EVT_SET(EVT_VAR(3), 0)
+        EVT_END_IF
+        EVT_IF_EQ(EVT_VAR(3), 1)
+            EVT_IF_EQ(EVT_AREA_FLAG(26), 0)
+                EVT_CALL(SetNpcFlagBits, 5, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE)
+                EVT_CALL(NpcFacePlayer, 5, 1)
+                EVT_WAIT_FRAMES(1)
+                EVT_SET(EVT_AREA_FLAG(26), 1)
+                EVT_IF_NE(EVT_MAP_VAR(13), 0)
+                    EVT_IF_LT(EVT_SAVE_VAR(0), 44)
+                        EVT_SET(EVT_VAR(1), 4)
+                    EVT_ELSE
+                        EVT_SET(EVT_VAR(1), 10)
+                    EVT_END_IF
+                    EVT_CALL(PlaySoundAtNpc, 5, SOUND_262, 0)
+                    EVT_CALL(ShowEmote, 5, EMOTE_EXCLAMATION, 0, EVT_VAR(1), 1, 0, 0, 0, 0)
+                    EVT_WAIT_FRAMES(EVT_VAR(1))
+                    EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), TRUE)
+                EVT_END_IF
+                EVT_CALL(PlaySoundAtNpc, 5, SOUND_MOLE_DIG, 0)
+                EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_11)
+                EVT_WAIT_FRAMES(20)
+                EVT_IF_EQ(EVT_SAVE_FLAG(1370), 0)
+                    EVT_CALL(SetNpcPos, 5, 0, -50, 0)
+                EVT_END_IF
+                EVT_WAIT_FRAMES(45)
+            EVT_END_IF
+        EVT_ELSE
+            EVT_IF_EQ(EVT_AREA_FLAG(26), 1)
+                EVT_IF_EQ(EVT_SAVE_FLAG(1370), 0)
+                    EVT_CALL(RandInt, 2, EVT_VAR(0))
+                    EVT_ADD(EVT_VAR(0), 1)
+                    EVT_USE_BUF(EVT_PTR(N(intTable_80240FD8)))
+                    EVT_LOOP(EVT_VAR(0))
+                        EVT_BUF_READ3(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+                    EVT_END_LOOP
+                    EVT_CALL(SetNpcPos, 5, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+                EVT_END_IF
+                EVT_CALL(SetNpcFlagBits, 5, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE)
+                EVT_SET(EVT_AREA_FLAG(26), 0)
+                EVT_CALL(NpcFacePlayer, 5, 1)
+                EVT_WAIT_FRAMES(1)
+                EVT_CALL(PlaySoundAtNpc, 5, SOUND_MOLE_SURFACE, 0)
+                EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+                EVT_WAIT_FRAMES(10)
+                EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_10000000)), FALSE)
+                EVT_CALL(RandInt, 45, EVT_VAR(0))
+                EVT_ADD(EVT_VAR(0), 45)
+                EVT_SET(EVT_MAP_VAR(13), EVT_VAR(0))
+            EVT_ELSE
+                EVT_IF_GT(EVT_MAP_VAR(13), 0)
+                    EVT_SUB(EVT_MAP_VAR(13), 1)
+                EVT_END_IF
+            EVT_END_IF
+        EVT_END_IF
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(init_8024338C) = SCRIPT({
-    BindNpcHit(-1, N(hit_80242138));
-    BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
-    EnableNpcShadow(NPC_MONTY_MOLE0, FALSE);
-    match EVT_STORY_PROGRESS {
-        < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
-            BindNpcIdle(NPC_SELF, N(idle_8024219C));
-            SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-        }
-        == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
-            if (EVT_SAVE_FLAG(1367) == 0) {
-                BindNpcIdle(NPC_SELF, N(idle_8024219C));
-                SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-                SetEnemyFlagBits(2, 1, 0);
-            } else {
-                SetNpcPos(NPC_MONTY_MOLE0, 0, -1000, 0);
-            }
-        } else {
-            SetNpcPos(NPC_MONTY_MOLE0, 0, -1000, 0);
-        }
-    }
-});
+EvtSource N(init_8024338C) = {
+    EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
+    EVT_CALL(EnableNpcShadow, 2, FALSE)
+    EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_CASE_LT(44)
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024219C)))
+            EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+        EVT_CASE_EQ(44)
+            EVT_IF_EQ(EVT_SAVE_FLAG(1367), 0)
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024219C)))
+                EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+                EVT_CALL(SetEnemyFlagBits, 2, 1, 0)
+            EVT_ELSE
+                EVT_CALL(SetNpcPos, 2, 0, -1000, 0)
+            EVT_END_IF
+        EVT_CASE_DEFAULT
+            EVT_CALL(SetNpcPos, 2, 0, -1000, 0)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(init_802434CC) = SCRIPT({
-    BindNpcHit(-1, N(hit_80242138));
-    BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
-    EnableNpcShadow(NPC_MONTY_MOLE1, FALSE);
-    match EVT_STORY_PROGRESS {
-        < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
-            BindNpcIdle(NPC_SELF, N(idle_80242618));
-            SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-        }
-        == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
-            if (EVT_SAVE_FLAG(1368) == 0) {
-                BindNpcIdle(NPC_SELF, N(idle_80242618));
-                SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-                SetEnemyFlagBits(3, 1, 0);
-            } else {
-                SetNpcPos(NPC_MONTY_MOLE1, 0, -1000, 0);
-            }
-        } else {
-            SetNpcPos(NPC_MONTY_MOLE1, 0, -1000, 0);
-        }
-    }
-});
+EvtSource N(init_802434CC) = {
+    EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
+    EVT_CALL(EnableNpcShadow, 3, FALSE)
+    EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_CASE_LT(44)
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242618)))
+            EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+        EVT_CASE_EQ(44)
+            EVT_IF_EQ(EVT_SAVE_FLAG(1368), 0)
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242618)))
+                EVT_CALL(SetNpcAnimation, 3, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+                EVT_CALL(SetEnemyFlagBits, 3, 1, 0)
+            EVT_ELSE
+                EVT_CALL(SetNpcPos, 3, 0, -1000, 0)
+            EVT_END_IF
+        EVT_CASE_DEFAULT
+            EVT_CALL(SetNpcPos, 3, 0, -1000, 0)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(init_8024360C) = SCRIPT({
-    BindNpcHit(-1, N(hit_80242138));
-    BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
-    EnableNpcShadow(NPC_MONTY_MOLE2, FALSE);
-    match EVT_STORY_PROGRESS {
-        < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
-            BindNpcIdle(NPC_SELF, N(idle_80242A94));
-            SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-        }
-        == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
-            if (EVT_SAVE_FLAG(1369) == 0) {
-                BindNpcIdle(NPC_SELF, N(idle_80242A94));
-                SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-                SetEnemyFlagBits(4, 1, 0);
-            } else {
-                SetNpcPos(NPC_MONTY_MOLE2, 0, -1000, 0);
-            }
-        } else {
-            SetNpcPos(NPC_MONTY_MOLE2, 0, -1000, 0);
-        }
-    }
-});
+EvtSource N(init_8024360C) = {
+    EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
+    EVT_CALL(EnableNpcShadow, 4, FALSE)
+    EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_CASE_LT(44)
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242A94)))
+            EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+        EVT_CASE_EQ(44)
+            EVT_IF_EQ(EVT_SAVE_FLAG(1369), 0)
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242A94)))
+                EVT_CALL(SetNpcAnimation, 4, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+                EVT_CALL(SetEnemyFlagBits, 4, 1, 0)
+            EVT_ELSE
+                EVT_CALL(SetNpcPos, 4, 0, -1000, 0)
+            EVT_END_IF
+        EVT_CASE_DEFAULT
+            EVT_CALL(SetNpcPos, 4, 0, -1000, 0)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(init_8024374C) = SCRIPT({
-    BindNpcHit(-1, N(hit_80242138));
-    BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
-    EnableNpcShadow(NPC_MONTY_MOLE3, FALSE);
-    match EVT_STORY_PROGRESS {
-        < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
-            BindNpcIdle(NPC_SELF, N(idle_80242F10));
-            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-        }
-        == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
-            if (EVT_SAVE_FLAG(1370) == 0) {
-                BindNpcIdle(NPC_SELF, N(idle_80242F10));
-                SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_10);
-                SetEnemyFlagBits(5, 1, 0);
-            } else {
-                SetNpcPos(NPC_MONTY_MOLE3, 0, -1000, 0);
-            }
-        } else {
-            SetNpcPos(NPC_MONTY_MOLE3, 0, -1000, 0);
-        }
-    }
-});
+EvtSource N(init_8024374C) = {
+    EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
+    EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
+    EVT_CALL(EnableNpcShadow, 5, FALSE)
+    EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_CASE_LT(44)
+            EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242F10)))
+            EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+        EVT_CASE_EQ(44)
+            EVT_IF_EQ(EVT_SAVE_FLAG(1370), 0)
+                EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242F10)))
+                EVT_CALL(SetNpcAnimation, 5, NPC_ANIM_monty_mole_Palette_01_Anim_10)
+                EVT_CALL(SetEnemyFlagBits, 5, 1, 0)
+            EVT_ELSE
+                EVT_CALL(SetNpcPos, 5, 0, -1000, 0)
+            EVT_END_IF
+        EVT_CASE_DEFAULT
+            EVT_CALL(SetNpcPos, 5, 0, -1000, 0)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
 
 StaticNpc N(npcGroup_8024388C) = {
     .id = NPC_PETUNIA,
@@ -1179,23 +1202,28 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(triggerCoord_80244E44) = { -208.0f, 0.0f, -182.0f, 0.0f };
 
-EvtSource N(80244E54) = SCRIPT({
-    EVT_AREA_FLAG(27) = 0;
-    EVT_AREA_FLAG(28) = 0;
-    EVT_VAR(0) = N(tree1);
-    bind N(shakeTree) TRIGGER_WALL_HAMMER 16;
-    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80244E44);
-});
+EvtSource N(80244E54) = {
+    EVT_SET(EVT_AREA_FLAG(27), 0)
+    EVT_SET(EVT_AREA_FLAG(28), 0)
+    EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))
+    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 16, 1, 0)
+    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_80244E44)), 1, 0)
+    EVT_RETURN
+    EVT_END
+};
 
 static s32 N(pad_4ECC) = {
     0x00000000,
 };
 
-EvtSource N(80244ED0) = SCRIPT({
+EvtSource N(80244ED0) = {
+    EVT_RETURN
+    EVT_END
+};
 
-});
-
-EvtSource N(makeEntities) = SCRIPT({
-    MakeEntity(0x802EAB04, -175, 0, 150, 0, ITEM_MAP, MAKE_ENTITY_END);
-    AssignPanelFlag(EVT_SAVE_FLAG(1404));
-});
+EvtSource N(makeEntities) = {
+    EVT_CALL(MakeEntity, 0x802EAB04, -175, 0, 150, 0, 8, MAKE_ENTITY_END)
+    EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(1404))
+    EVT_RETURN
+    EVT_END
+};

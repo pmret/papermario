@@ -1433,14 +1433,14 @@ typedef struct CollisionStatus {
 
 typedef struct DecorationUnk {
     /* 0x00 */ s16 unk00;
+    /* 0x02 */ s16 unk02;
     /* 0x04 */ s16 unk04;
+    /* 0x06 */ s16 unk06;
     /* 0x08 */ s16 unk08;
+    /* 0x0A */ s16 unk0A;
     /* 0x0C */ s16 unk0C;
-    /* 0x10 */ s16 unk10;
-    /* 0x14 */ s16 unk14;
-    /* 0x18 */ s16 unk18;
-    /* 0x1C */ s16 unk1C;
-} DecorationUnk; // size = 0x20
+    /* 0x0E */ s16 unk0E;
+} DecorationUnk; // size = 0x10
 
 typedef struct DecorationTable {
     /* 0x000 */ char unk_00[0x6C0];
@@ -1649,7 +1649,7 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
 
 typedef struct Actor {
     /* 0x000 */ s32 flags;
-    /* 0x004 */ char unk_04[4];
+    /* 0x004 */ s32 flags2;
     /* 0x008 */ struct ActorDesc* staticActorData;
     /* 0x00C */ ActorState state;
     /* 0x0C8 */ ActorMovement fly;
@@ -2310,5 +2310,27 @@ typedef struct SpriteShadingProfile {
     /* 0xAC */ s8 ambientColor[3];
     /* 0xAF */ s8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
+
+typedef struct UnkDuplighost {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ struct EffectInstance* effect1;
+    /* 0x18 */ struct EffectInstance* effect2;
+    /* 0x1C */ s32 debuff;
+} UnkDuplighost;
+
+typedef struct UnkStruct1 {
+    /* 0x00 */ char unk_00[8];
+    /* 0x08 */ f32 unk_08;
+} UnkStruct1;
+
+typedef struct UnkStruct0 {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ char unk_04[8];
+    /* 0x0C */ UnkStruct1* unk_0C;
+} UnkStruct0;
 
 #endif

@@ -136,7 +136,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
 
             lakilester->pos.y += tempY;
             lakilester->renderYaw = clamp_angle(360.0f - D_802BFE7C_3239CC->unk_10);
-            D_802BFE7C_3239CC->unk_14 += D_802BFEF0;
+            D_802BFE7C_3239CC->unk_14 += 0.8;
 
             if (D_802BFE7C_3239CC->unk_14 > 40.0f) {
                 D_802BFE7C_3239CC->unk_14 = 40.0f;
@@ -516,7 +516,7 @@ void func_802BDDD8_321928(Npc* npc) {
     collisionStatus->currentFloor = -1;
     playerStatus->decorationList = playerStatus->decorationList + 1;
     npc->unk_84 = -1;
-    npc->jumpScale += D_802BFEF8;
+    npc->jumpScale += 1.8;
 
     if (npc->jumpScale > 12.0f) {
         npc->jumpScale = 12.0f;
@@ -540,6 +540,7 @@ s32 func_802BE6A0_3221F0(f32* arg0) {
                                       &hitDirX, &hitDirZ);
 }
 
+ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BE724_322274);
 
 ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
@@ -800,3 +801,36 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
+
+//data
+EvtSource D_802BFE60_3239B0 = {
+    EVT_CALL(func_802BD29C_320DEC)
+    EVT_RETURN
+    EVT_END
+};
+
+unkPartnerStruct* D_802BFE7C_3239CC = &D_802BFF30;
+
+EvtSource D_802BFE7C_3239D0 = {
+    EVT_CALL(func_802BD2D4_320E24)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource D_802BFE98_323A08 = {
+    EVT_CALL(func_802BE724_322274)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource D_802BFEB4_323A24 = {
+    EVT_CALL(func_802BF4F0_323040)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource D_802BFED0_323A40 = {
+    EVT_CALL(func_802BFBA0_3236F0)
+    EVT_RETURN
+    EVT_END
+};
