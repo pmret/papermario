@@ -1336,7 +1336,7 @@ typedef struct ActorPart {
     /* 0x6C */ Vec2s targetOffset;
     /* 0x70 */ s16 unk_70;
     /* 0x72 */ Vec2bu size;
-    /* 0x74 */ u8 verticalStretch;
+    /* 0x74 */ s8 verticalStretch;
     /* 0x75 */ s8 unk_75;
     /* 0x76 */ s8 unk_76;
     /* 0x77 */ char unk_77[1];
