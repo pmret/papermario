@@ -222,6 +222,8 @@ void func_80254C50(Actor* actor) {
     Matrix4f sp1D8;
     Matrix4f sp218;
     Matrix4f sp258;
+    s32 sp298;
+    s32 sp29C;
     s32 scale;
     ActorPart* partTable;
     DecorationTable* decorationTable;
@@ -230,6 +232,7 @@ void func_80254C50(Actor* actor) {
     s32 temp_v1;
     s32 temp_s0;
     s32 temp_s1;
+    s32 i;
     s32 phi_s6;
     s32 phi_s4;
     f32 x, y, z;
@@ -245,9 +248,9 @@ void func_80254C50(Actor* actor) {
     }
 
     if (!(partTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partTable->idleAnimations != NULL) {
-        s32 sp298 = 0;
-        s32 sp29C = 0;
-        s32 i = decorationTable->unk_7D9;
+        sp298 = 0;
+        sp29C = 0;
+        i = decorationTable->unk_7D9;
 
         while (1) {
             i--;
