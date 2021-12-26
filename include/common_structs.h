@@ -1766,7 +1766,7 @@ typedef struct PlayerStatus {
     /* 0x004 */ u32 animFlags;
     /* 0x008 */ s16 framesOnGround; /* Number of frames since last jump landed */
     /* 0x00A */ s8 unk_0A;
-    /* 0x00A */ char unk_0B;
+    /* 0x00B */ char unk_0B;
     /* 0x00C */ s8 peachDisguise;
     /* 0x00D */ s8 unk_0D;
     /* 0x00E */ u8 alpha1;

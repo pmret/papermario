@@ -788,10 +788,9 @@ INCLUDE_ASM(void, "77480", render_player_model);
 void appendGfx_player(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Matrix4f sp20, sp60, spA0, spE0;
-    f32 temp_f0;
+    f32 temp_f0 = -gCameras[gCurrentCamID].currentYaw;
     s32 phi_a0;
 
-    temp_f0 = -gCameras[gCurrentCamID].currentYaw;
     if (playerStatus->actionState == 0x11) {
         guScaleF(spE0, (5.0f / 7.0f), (5.0f / 7.0f), (5.0f / 7.0f));
         guRotateF(sp20, temp_f0, 0.0f, 1.0f, 0.0f);
