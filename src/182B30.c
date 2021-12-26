@@ -320,7 +320,39 @@ void func_80254C50(Actor* actor) {
     }
 }
 
-INCLUDE_ASM(s32, "182B30", func_802550BC);
+void func_802550BC(s32 arg0, Actor* actor) {
+    s32 numParts = actor->numParts;
+    ActorPart* partsTable = actor->partsTable;
+    DecorationTable* decorationTable;
+    s32 i, j;
+
+    for (i = 0; i < numParts; i++) {
+        if (partsTable->flags & ACTOR_PART_FLAG_INVISIBLE || partsTable->idleAnimations == NULL || partsTable->flags & ACTOR_PART_FLAG_2) {
+            partsTable = partsTable->nextPart;
+        } else {
+            decorationTable = partsTable->decorationTable;
+            j = decorationTable->unk_7D9;
+
+            decorationTable->posX[j] = partsTable->currentPos.x;
+            decorationTable->posY[j] = partsTable->currentPos.y;
+            decorationTable->posZ[j] = partsTable->currentPos.z;
+            decorationTable->scale[j] = actor->yaw;
+
+            decorationTable->rotationPivotOffsetX[j] = actor->rotationPivotOffset.x;
+            decorationTable->rotationPivotOffsetY[j] = actor->rotationPivotOffset.y;
+
+            decorationTable->rotX[j] = clamp_angle(actor->rotation.x) * 0.5f;
+            decorationTable->rotY[j] = clamp_angle(actor->rotation.y) * 0.5f;
+            decorationTable->rotZ[j] = clamp_angle(actor->rotation.z) * 0.5f;
+
+            j++;
+            if (j >= ARRAY_COUNT(decorationTable->posX)) {
+                j = 0;
+            }
+            decorationTable->unk_7D9 = j;
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "182B30", func_802552EC);
 
