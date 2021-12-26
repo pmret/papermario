@@ -237,7 +237,7 @@ void func_80254C50(Actor* actor) {
     partTable = actor->partsTable;
     decorationTable = partTable->decorationTable;
     if (decorationTable->effectType != 0) {
-        decorationTable->effectType = decorationTable->effectType - 1;
+        decorationTable->effectType--;
         if (decorationTable->effectType == 0) {
             actor->flags &= ~ACTOR_FLAG_10000000;
             return;
@@ -280,18 +280,17 @@ void func_80254C50(Actor* actor) {
                 rotY = decorationTable->rotY[i] * 2;
                 rotZ = decorationTable->rotZ[i] * 2;
 
-
-                phi_s6 = 0x78;
-                phi_s4 = 0x14;
-                if (temp_v1 < 0x32) {
-                    phi_s6 = 0x32;
+                phi_s6 = 120;
+                phi_s4 = 20;
+                if (temp_v1 < 50) {
+                    phi_s6 = 50;
                     phi_s4 = 8;
-                } else if (temp_v1 < 0x64) {
-                    phi_s6 = 0x46;
-                    phi_s4 = 0xA;
-                } else if (temp_v1 < 0x96) {
-                    phi_s6 = 0x64;
-                    phi_s4 = 0xF;
+                } else if (temp_v1 < 100) {
+                    phi_s6 = 70;
+                    phi_s4 = 10;
+                } else if (temp_v1 < 150) {
+                    phi_s6 = 100;
+                    phi_s4 = 15;
                 }
 
                 guTranslateF(sp1D8, x, y, z);
@@ -302,9 +301,9 @@ void func_80254C50(Actor* actor) {
                 guRotateF(sp98, rotZ, 0.0f, 0.0f, 1.0f);
                 guMtxCatF(sp18, sp58, sp218);
                 guMtxCatF(sp218, sp98, spD8);
-                guScaleF(&sp118, actor->scale.x * 0.7142857142857143 * actor->scalingFactor,
-                                actor->scale.y * 0.7142857142857143 * actor->scalingFactor * partTable->verticalStretch,
-                                actor->scale.z * 0.7142857142857143);
+                guScaleF(sp118, actor->scale.x * (5.0 / 7.0) * actor->scalingFactor,
+                                actor->scale.y * (5.0 / 7.0) * actor->scalingFactor * partTable->verticalStretch,
+                                actor->scale.z * (5.0 / 7.0));
                 guMtxCatF(sp118, sp158, sp258);
                 guMtxCatF(sp258, spD8, sp218);
                 guMtxCatF(sp218, sp198, sp258);
