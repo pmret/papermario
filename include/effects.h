@@ -2,7 +2,6 @@
 #define _EFFECTS_H_
 
 #include "types.h"
-#include "common_structs.h"
 
 typedef struct {
     char unk_00[0x38];
@@ -94,6 +93,54 @@ typedef struct Effect8 {
     /* 0x90 */ f32 unk_90;
     /* 0x94 */ f32 unk_94;
 } Effect8; // size = 0x98
+
+typedef struct Effect10 {
+    /* 0x00 */ s32 alive;
+    /* 0x04 */ char unk_04[0x2];
+    /* 0x06 */ s16 lifetime;
+    /* 0x08 */ u8 alpha;
+    /* 0x09 */ char unk_09[0x3];
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ s32 unk_40;
+    /* 0x44 */ f32 unk_44;
+    /* 0x48 */ f32 unk_48;
+} Effect10; // size = 0x4C
+
+typedef struct Effect11 {
+    /* 0x00 */ s32 alive;
+    /* 0x04 */ u16 unk_04;
+    /* 0x06 */ s16 lifetime;
+    /* 0x08 */ u8 alpha;
+    /* 0x09 */ char unk_09[0x3];
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ char unk_34[0x4];
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ s32 unk_44;
+    /* 0x48 */ char unk_48[0x8];
+} Effect11; // size = 0x50
 
 typedef struct Effect12 {
     /* 0x00 */ char unk_00[0x28];

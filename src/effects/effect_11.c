@@ -9,30 +9,6 @@ void fx_11_update(EffectInstance* effect);
 void fx_11_render(EffectInstance* effect);
 void fx_11_appendGfx(EffectInstance* effect);
 
-typedef struct Effect11 {
-    /* 0x00 */ s32 alive;
-    /* 0x04 */ u16 unk_04;
-    /* 0x06 */ s16 lifetime;
-    /* 0x08 */ u8 alpha;
-    /* 0x09 */ char unk_09[0x3];
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ char unk_34[0x4];
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ f32 unk_3C;
-    /* 0x40 */ f32 unk_40;
-    /* 0x44 */ s32 unk_44;
-    /* 0x48 */ char unk_48[0x8];
-} Effect11; // size = 0x50
-
 void fx_11_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     EffectBlueprint bp;
     EffectInstance* effect;
