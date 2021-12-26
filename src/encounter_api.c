@@ -60,7 +60,37 @@ ApiStatus MakeNpcs(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "encounter_api", RemoveNpc, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "encounter_api", RemoveEncounter, Evt* script, s32 isInitialCall);
+ApiStatus RemoveEncounter(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* enemy = script->owner1.enemy;
+    s32 id = evt_get_variable(script, *args++);
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    ApiStatus ret = ApiStatus_DONE1;
+    s32 i, j;
+
+    if ((s32)enemy != NPC_SELF && (id == NPC_SELF || enemy->npcID == id)) {
+        id = enemy->npcID;
+        ret = ApiStatus_FINISH;
+    } else {
+        get_enemy(id);
+    }
+
+    for (i = 0; i < currentEncounter->numEncounters; i++) {
+        Encounter* encounter = currentEncounter->encounterList[i];
+
+        if (encounter != NULL) {
+            for (j = 0; j < encounter->count; j++) {
+                enemy = encounter->enemy[j];
+                if (enemy != NULL && enemy->npcID == id) {
+                    kill_encounter(enemy);
+                    return ret;
+                }
+            }
+        }
+    }
+
+    return ret;
+}
 
 ApiStatus GetBattleOutcome(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, *script->ptrReadPos, gCurrentEncounter.battleOutcome);
@@ -234,7 +264,55 @@ ApiStatus SetBattleMusic(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "encounter_api", BindNpcAI, Evt* script, s32 isInitialCall);
+ApiStatus BindNpcAI(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* enemy = script->owner1.enemy;
+    s32 id = evt_get_variable(script, *args++);
+    EvtSource* newScriptSource = (EvtSource*)evt_get_variable(script, *args++);
+    Evt* scriptTemp = script;
+    ApiStatus ret = ApiStatus_DONE2;
+    Evt* aiScript;
+    s32 phi_s1;
+
+    if ((s32)enemy != NPC_SELF && (id == NPC_SELF || enemy->npcID == id)) {
+        id = enemy->npcID;
+
+        while (TRUE) {
+            if (scriptTemp->blockingParent != NULL) {
+                scriptTemp = scriptTemp->blockingParent;
+            } else {
+                break;
+            }
+        }
+
+        aiScript = enemy->aiScript;
+        if (scriptTemp == aiScript) {
+            ret = ApiStatus_FINISH;
+        }
+    } else {
+        enemy = get_enemy(id);
+    }
+
+    if (enemy->flags & ENEMY_FLAGS_1) {
+        phi_s1 = 10;
+    } else {
+        phi_s1 = 11;
+    }
+
+    if (enemy->aiScript != NULL) {
+        kill_script_by_ID(enemy->aiScriptID);
+    }
+
+    enemy->unk_C8 = 100;
+    enemy->aiBytecode = newScriptSource;
+    scriptTemp = start_script(newScriptSource, 10, 0);
+    enemy->aiScript = scriptTemp;
+    enemy->aiScriptID = scriptTemp->id;
+    scriptTemp->owner1.enemyID = (s32)enemy;
+    scriptTemp->owner2.npcID = id;
+    scriptTemp->groupFlags = phi_s1;
+    return ret;
+}
 
 ApiStatus BindNpcIdle(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -309,7 +387,50 @@ ApiStatus EnableNpcAI(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "encounter_api", SetNpcAux, Evt* script, s32 isInitialCall);
+ApiStatus SetNpcAux(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* enemy = script->owner1.enemy;
+    s32 id = evt_get_variable(script, *args++);
+    EvtSource* newScriptSource = (EvtSource*)evt_get_variable(script, *args++);
+    Evt* scriptTemp = script;
+    ApiStatus ret = ApiStatus_DONE2;
+    Evt* auxScript;
+
+    if ((s32)enemy != NPC_SELF && (id == NPC_SELF || enemy->npcID == id)) {
+        id = enemy->npcID;
+
+        while (TRUE) {
+            if (scriptTemp->blockingParent != NULL) {
+                scriptTemp = scriptTemp->blockingParent;
+            } else {
+                break;
+            }
+        }
+
+        auxScript = enemy->auxScript;
+        if (scriptTemp == auxScript) {
+            ret = ApiStatus_FINISH;
+        }
+    } else {
+        enemy = get_enemy(id);
+        auxScript = enemy->auxScript;
+    }
+
+    if (auxScript != NULL) {
+        kill_script_by_ID(enemy->auxScriptID);
+    }
+
+    if (newScriptSource != NULL) {
+        enemy->auxBytecode = newScriptSource;
+        scriptTemp = start_script(newScriptSource, 10, 0);
+        enemy->auxScript = scriptTemp;
+        enemy->auxScriptID = scriptTemp->id;
+        scriptTemp->owner1.enemyID = (s32)enemy;
+        scriptTemp->owner2.npcID = id;
+        scriptTemp->groupFlags = script->groupFlags;
+    }
+    return ret;
+}
 
 ApiStatus BindNpcAux(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
