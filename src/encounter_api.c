@@ -1,6 +1,7 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
+#include "battle/battle.h"
 
 ApiStatus SetEncounterStatusFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -58,7 +59,57 @@ ApiStatus MakeNpcs(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "encounter_api", RemoveNpc, Evt* script, s32 isInitialCall);
+ApiStatus RemoveNpc(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Enemy* enemy = script->owner1.enemy;
+    ApiStatus ret = ApiStatus_DONE1;
+    s32 id = evt_get_variable(script, *args++);
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    s32 i, j;
+
+    if ((s32)enemy != NPC_SELF) {
+        if (id == NPC_SELF) {
+            id = enemy->npcID;
+            ret = ApiStatus_FINISH;
+        } else {
+            if (enemy->npcID == id) {
+                Evt* scriptTemp = script;
+
+                while (TRUE) {
+                    if (scriptTemp->blockingParent != NULL) {
+                        scriptTemp = scriptTemp->blockingParent;
+                    } else {
+                        break;
+                    }
+                }
+
+                if (scriptTemp == enemy->aiScript) {
+                    ret = ApiStatus_FINISH;
+                }
+            } else {
+                get_enemy(id);
+            }
+        }
+    } else {
+        get_enemy(id);
+    }
+
+    for (i = 0; i < currentEncounter->numEncounters; i++) {
+        Encounter* encounter = currentEncounter->encounterList[i];
+
+        if (encounter != NULL) {
+            for (j = 0; j < encounter->count; j++) {
+                enemy = encounter->enemy[j];
+                if (enemy != NULL && enemy->npcID == id) {
+                    kill_enemy(enemy);
+                    return ret;
+                }
+            }
+        }
+    }
+
+    return ret;
+}
 
 ApiStatus RemoveEncounter(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -318,7 +369,7 @@ ApiStatus BindNpcIdle(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* owner = script->owner1.enemy;
     s32 npcID = evt_get_variable(script, *args++);
-    Bytecode* aiBytecode = (Bytecode*)evt_get_variable(script, *args);
+    EvtSource* aiBytecode = (EvtSource*)evt_get_variable(script, *args);
 
     if (npcID == NPC_SELF) {
         npcID = owner->npcID;
@@ -436,7 +487,7 @@ ApiStatus BindNpcAux(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcId = evt_get_variable(script, *args++);
-    Bytecode* auxBytecode = (Bytecode*)evt_get_variable(script, *args);
+    EvtSource* auxBytecode = (EvtSource*)evt_get_variable(script, *args);
 
     if (npcId == NPC_SELF) {
         npcId = npc->npcID;
@@ -508,7 +559,7 @@ ApiStatus BindNpcInteract(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcId = evt_get_variable(script, *args++);
-    Bytecode* interactBytecode = (Bytecode*)evt_get_variable(script, *args);
+    EvtSource* interactBytecode = (EvtSource*)evt_get_variable(script, *args);
 
     if (npcId == NPC_SELF) {
         npcId = npc->npcID;
@@ -528,7 +579,7 @@ ApiStatus BindNpcHit(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcId = evt_get_variable(script, *args++);
-    Bytecode* hitBytecode = (Bytecode*)evt_get_variable(script, *args);
+    EvtSource* hitBytecode = (EvtSource*)evt_get_variable(script, *args);
 
     if (npcId == NPC_SELF) {
         npcId = npc->npcID;
@@ -548,7 +599,7 @@ ApiStatus BindNpcDefeat(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Enemy* npc = script->owner1.enemy;
     s32 npcId = evt_get_variable(script, *args++);
-    Bytecode* defeatBytecode = (Bytecode*)evt_get_variable(script, *args);
+    EvtSource* defeatBytecode = (EvtSource*)evt_get_variable(script, *args);
 
     if (npcId == -1) {
         npcId = npc->npcID;

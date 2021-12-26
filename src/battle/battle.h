@@ -343,4 +343,7 @@ typedef struct ActorOffsets {
 
 extern BattleList* D_800DC4FC;
 
+void func_80072BCC(s32 arg0);
+void load_demo_battle(u32 index);
+
 #endif
