@@ -16,10 +16,10 @@ void fx_11_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     s32 numParts = 1;
     s32 i;
 
+    bp.unk_00 = 0;
     bp.init = fx_11_init;
     bp.update = fx_11_update;
     bp.renderWorld = fx_11_render;
-    bp.unk_00 = 0;
     bp.unk_14 = 0;
     bp.effectIndex = 11;
 
