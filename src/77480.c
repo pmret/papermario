@@ -791,7 +791,7 @@ void appendGfx_player(void) {
     f32 temp_f0 = -gCameras[gCurrentCamID].currentYaw;
     s32 phi_a0;
 
-    if (playerStatus->actionState == 0x11) {
+    if (playerStatus->actionState == ACTION_STATE_SLIDING) {
         guScaleF(spE0, (5.0f / 7.0f), (5.0f / 7.0f), (5.0f / 7.0f));
         guRotateF(sp20, temp_f0, 0.0f, 1.0f, 0.0f);
         guMtxCatF(spE0, sp20, sp20);
