@@ -1633,6 +1633,9 @@ enum NpcFlags {
 enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_JUMPING                          = 0x00000002,
     PLAYER_STATUS_FLAGS_FALLING                          = 0x00000004,
+    PLAYER_STATUS_FLAGS_10                               = 0x00000010,
+    PLAYER_STATUS_FLAGS_20                               = 0x00000020,
+    PLAYER_STATUS_FLAGS_80                               = 0x00000080,
     PLAYER_STATUS_FLAGS_100                              = 0x00000100,
     PLAYER_STATUS_FLAGS_200                              = 0x00000200,
     PLAYER_STATUS_FLAGS_400                              = 0x00000400,
