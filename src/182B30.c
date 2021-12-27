@@ -500,9 +500,9 @@ void func_802552EC(s32 arg0, Actor* actor) {
             flags = ACTOR_PART_FLAG_80000000;
             temp = phi_fp - l * phi_s6;
             if (arg0 == 0) {
-                spr_draw_npc_sprite(partTable->unk_84 | flags, scale, temp, 0, &sp1D8);
+                spr_draw_npc_sprite(partTable->unk_84 | flags, scale, temp, 0, sp1D8);
             } else {
-                spr_draw_npc_sprite(partTable->unk_84 | flags, clamp_angle(scale + 0xB4), temp, 0, &sp1D8);
+                spr_draw_npc_sprite(partTable->unk_84 | flags, clamp_angle(scale + 0xB4), temp, 0, sp1D8);
             }
         }
     }
@@ -516,8 +516,8 @@ void func_8025595C(Actor* actor) {
     func_802552EC(0, actor);
 }
 
-void func_8025597C(s32 arg0) {
-    func_802550BC(1, arg0);
+void func_8025597C(Actor* actor) {
+    func_802550BC(1, actor);
 }
 
 void func_8025599C(s32 arg0) {
