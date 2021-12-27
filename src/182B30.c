@@ -431,10 +431,13 @@ void func_802552EC(s32 arg0, Actor* actor) {
                 j = 15;
             }
 
-            if (j == decorationTable->unk_7D9 || k < 3) {
+            if (j == decorationTable->unk_7D9) {
                 break;
             }
 
+            if (k < 3) {
+                continue;
+            }
 
             k = 0;
             l++;
