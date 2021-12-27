@@ -508,8 +508,8 @@ void func_802552EC(s32 arg0, Actor* actor) {
     }
 }
 
-void func_8025593C(s32 arg0) {
-    func_802550BC(0, arg0);
+void func_8025593C(Actor* actor) {
+    func_802550BC(0, actor);
 }
 
 void func_8025595C(Actor* actor) {
@@ -520,8 +520,8 @@ void func_8025597C(Actor* actor) {
     func_802550BC(1, actor);
 }
 
-void func_8025599C(s32 arg0) {
-    func_802552EC(1, arg0);
+void func_8025599C(Actor* actor) {
+    func_802552EC(1, actor);
 }
 
 INCLUDE_ASM(s32, "182B30", update_actor_shadow);
