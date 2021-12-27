@@ -354,7 +354,159 @@ void func_802550BC(s32 arg0, Actor* actor) {
     }
 }
 
-INCLUDE_ASM(s32, "182B30", func_802552EC);
+void func_802552EC(s32 arg0, Actor* actor) {
+    DecorationTable* decorationTable;
+    ActorPart* partTable;
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    Matrix4f spD8;
+    Matrix4f sp118;
+    Matrix4f sp158;
+    Matrix4f sp198;
+    Matrix4f sp1D8;
+    Matrix4f sp218;
+    Matrix4f sp258;
+    Matrix4f sp298;
+    Matrix4f sp2D8;
+    s32 numParts;
+    s32 i, j, k, l;
+    f32 x, y, z;
+    f32 rotX, rotY, rotZ;
+    s32 scale;
+    s32 opacity;
+    s32 pivotX;
+    s32 pivotY;
+    s32 phi_fp;
+    s32 phi_s6;
+    s32 temp;
+    s32 flags;
+
+    guRotateF(sp18, actor->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(sp58, actor->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp98, actor->rotation.z, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp18, sp58, sp198);
+    guMtxCatF(sp198, sp98, spD8);
+    guScaleF(sp118, actor->scale.x * (5.0 / 7.0) * actor->scalingFactor,
+                    actor->scale.y * (5.0 / 7.0) * actor->scalingFactor, 
+                    actor->scale.z * (5.0 / 7.0));
+    guMtxCatF(sp118, spD8, sp298);
+
+    numParts = actor->numParts;
+    partTable = actor->partsTable;
+    for (i = 0; i < numParts; i++) {
+        if ((partTable->idleAnimations == NULL) || (partTable->flags & ACTOR_PART_FLAG_2)) {  
+            partTable = partTable->nextPart;
+            continue; 
+        }
+
+        decorationTable = partTable->decorationTable;
+        if (decorationTable->effectType != 0) {
+            decorationTable->effectType--;
+            if (decorationTable->effectType == 0) {
+                actor->flags &= ~ACTOR_FLAG_10000000;
+                partTable = partTable->nextPart;
+                continue;
+            }
+        }
+
+        if (partTable->flags & ACTOR_PART_FLAG_INVISIBLE) {
+            partTable = partTable->nextPart;
+            continue;
+        }
+
+        if (partTable->flags & ACTOR_PART_FLAG_100000) {
+            guScaleF(sp2D8, actor->scale.x * (5.0 / 7.0), actor->scale.y * (5.0 / 7.0), actor->scale.z * (5.0 / 7.0));
+        }
+
+        j = decorationTable->unk_7D9;
+        k = 0;
+        l = 0;
+
+        while (1) {
+            j--;
+            k++;
+
+            if (j < 0) {
+                j = 15;
+            }
+
+            if (j == decorationTable->unk_7D9 || k < 3) {
+                break;
+            }
+
+
+            k = 0;
+            l++;
+
+            if (decorationTable->unk_7DA < l) {
+                break;
+            }
+
+            opacity = partTable->opacity;
+
+            x = decorationTable->posX[j];
+            y = decorationTable->posY[j];
+            z = decorationTable->posZ[j];
+
+            scale = decorationTable->scale[j];
+
+            pivotX = decorationTable->rotationPivotOffsetX[j];
+            pivotY = decorationTable->rotationPivotOffsetY[j];
+
+            rotX = decorationTable->rotX[j] * 2;
+            rotY = decorationTable->rotY[j] * 2;
+            rotZ = decorationTable->rotZ[j] * 2;
+
+            phi_fp = 120;
+            phi_s6 = 20;
+            if (opacity < 50) {
+                phi_fp = 50;
+                phi_s6 = 8;
+            } else if (opacity < 100) {
+                phi_fp = 70;
+                phi_s6 = 10;
+            } else if (opacity < 150) {
+                phi_fp = 100;
+                phi_s6 = 15;
+            }
+
+            if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                guTranslateF(sp218, -pivotX, -pivotY, 0.0f);
+                guTranslateF(sp258, pivotX, pivotY, 0.0f);
+            } else {
+                guTranslateF(sp218, -pivotX, pivotY, 0.0f);
+                guTranslateF(sp258, pivotX, -pivotY, 0.0f);
+            }
+
+            guTranslateF(sp158, x, y, z);
+            guRotateF(sp18, rotX, 1.0f, 0.0f, 0.0f);
+            guRotateF(sp58, rotY, 0.0f, 1.0f, 0.0f);
+            guRotateF(sp98, rotZ, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(sp58, sp18, sp198);
+            guMtxCatF(sp198, sp98, spD8);
+            guScaleF(sp118, partTable->scale.x, partTable->scale.y * partTable->verticalStretch, partTable->scale.z);
+            guMtxCatF(sp118, sp218, sp1D8);
+            guMtxCatF(sp1D8, spD8, sp198);
+            guMtxCatF(sp198, sp258, sp1D8);
+
+            if (!(partTable->flags & ACTOR_PART_FLAG_100000)) {
+                guMtxCatF(sp1D8, sp298, sp198);
+            } else {
+                guMtxCatF(sp1D8, sp2D8, sp198);
+            }
+            guMtxCatF(sp198, sp158, sp1D8);
+
+            flags = ACTOR_PART_FLAG_80000000;
+            temp = phi_fp - l * phi_s6;
+            if (arg0 == 0) {
+                spr_draw_npc_sprite(partTable->unk_84 | flags, scale, temp, 0, &sp1D8);
+            } else {
+                spr_draw_npc_sprite(partTable->unk_84 | flags, clamp_angle(scale + 0xB4), temp, 0, &sp1D8);
+            }
+        }
+    }
+}
 
 void func_8025593C(s32 arg0) {
     func_802550BC(0, arg0);
