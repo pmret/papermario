@@ -1,22 +1,22 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern s32 D_80104A00[0];
-extern s32 D_80104C10[0];
-extern s32 D_80107798[0];
-extern s32 D_801077E4[0];
-extern s32 D_8010790C[0];
-extern s32 D_80109298;
-extern s32 D_801092C0;
-extern s32 D_801092E8;
-extern s32 D_80109310;
+extern HudElementAnim D_80104A00[0];
+extern HudElementAnim D_80104C10[0];
+extern HudElementAnim D_80107798[0];
+extern HudElementAnim D_801077E4[0];
+extern HudElementAnim D_8010790C[0];
+extern HudElementAnim D_80109298;
+extern HudElementAnim D_801092C0;
+extern HudElementAnim D_801092E8;
+extern HudElementAnim D_80109310;
 
-extern s32 D_80109890[] = { &D_80109298, &D_801092E8 };
-extern s32 D_80109898[] = { &D_801092C0, &D_80109310 };
-extern s16 D_801098A0[] = {
+HudElementAnim* D_80109890[] = { &D_80109298, &D_801092E8 };
+HudElementAnim* D_80109898[] = { &D_801092C0, &D_80109310 };
+s16 D_801098A0[] = {
     0x008C, 0x008C, 0x008D, 0x007C, 0x0086, 0x0077, 0x008D, 0x008D, 0x006C, 0x008D, 0x0084, 0x0084, 0x008D, 0x008C,
 };
-extern s16 D_801098BC[] = {
+s16 D_801098BC[] = {
     0x0089, 0x0085, 0x0089, 0x009A, 0x00A4, 0x0122, 0x0089, 0x0089, 0x00A7, 0x0089, 0x0089, 0x0093, 0x0089, 0x0089,
     0x0000, 0x0000, 0x0000, 0x0000,
 };
@@ -63,8 +63,6 @@ extern s32 D_8010D6A4;
 
 void func_800E9894(void);
 s8 func_800E98D4(void);
-void open_status_menu_short(void);
-void func_800E98C4(void);
 
 enum PopupTypes {
     POPUP_TYPE_USE_ITEM,
@@ -203,13 +201,13 @@ s32 popup_menu_update(void) {
                 set_hud_element_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == 5) {
-                D_8010D660 = create_hud_element(&D_80108558);
+                D_8010D660 = create_hud_element(D_80108558);
                 elementID = D_8010D660;
                 set_hud_element_flags(elementID, 0x80);
                 set_hud_element_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == 3 || gPopupMenu->popupType == 4) {
-                D_8010D664 = create_hud_element(&D_80109270);
+                D_8010D664 = create_hud_element(D_80109270);
                 elementID = D_8010D664;
                 set_hud_element_flags(elementID, 0x80);
                 set_hud_element_tint(elementID, 255, 255, 255);
@@ -558,7 +556,7 @@ s32 popup_menu_update(void) {
                             buttons = BUTTON_B;
                             break;
                         default:
-                            buttons = BUTTON_NONE;
+                            buttons = 0;
                             break;
                     }
 
@@ -582,7 +580,7 @@ s32 popup_menu_update(void) {
 
                     switch (gPopupMenu->popupType) {
                         default:
-                            buttons = BUTTON_NONE;
+                            buttons = 0;
                             break;
                         case 0:
                             buttons = BUTTON_C_RIGHT;

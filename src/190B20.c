@@ -7,16 +7,24 @@
 #include "model.h"
 #include "sprite.h"
 
-typedef struct Temp14 {
+typedef struct PartnerDMAData {
     /* 0x00 */ s32 dmaStart;
     /* 0x04 */ s32 dmaEnd;
     /* 0x08 */ s32 dmaDest;
     /* 0x0C */ ActorDesc* actorDesc;
     /* 0x10 */ s32 y;
-} Temp14; // size = 0x14
+} PartnerDMAData; // size = 0x14
 
 s32 D_80280FC0[] = {
-    0x000A005A, 0x00000032, 0x0003000B, 0x00000032, 0x0001002D, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010031, 0x00000032, 0x00010031, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010032, 0x00000032, 0x00010032, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x0003000A, 0x00000032, 0x0003000A, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000050, 0x0003000A, 0x00000014, 0x0003000B, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x000A005A, 0x00000032, 0x0003000B, 0x00000032, 0x0001002D, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032,
+    0x00010031, 0x00000032, 0x00010031, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010032, 0x00000032,
+    0x00010032, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x0003000A, 0x00000032, 0x0003000A, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000050, 0x0003000A, 0x00000014, 0x0003000B, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 
 s32 bActorNames[ACTOR_TYPE_COUNT] = {
@@ -1010,51 +1018,59 @@ ActorPartDesc bMarioParts[] = {
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 32 },
-        .opacity = 0xFF,
+        .opacity = 255,
         .idleAnimations = bMarioIdleAnims,
         .defenseTable = bMarioDefenseTable,
     },
 };
 
 Vec3s D_80283524[] = {
-    { 0x0005, 0x0000, 0xFFEC },
-    { 0x002D, 0x0000, 0xFFFB },
-    { 0x0055, 0x0000, 0x000A },
-    { 0x007D, 0x0000, 0x0019 },
-    { 0x000A, 0x0032, 0xFFEC },
-    { 0x0032, 0x002D, 0xFFFB },
-    { 0x005A, 0x0032, 0x000A },
-    { 0x0082, 0x0037, 0x0019 },
-    { 0x000F, 0x0055, 0xFFEC },
-    { 0x0037, 0x0050, 0xFFFB },
-    { 0x005F, 0x0055, 0x000A },
-    { 0x0087, 0x005A, 0x0019 },
-    { 0x000F, 0x007D, 0xFFEC },
-    { 0x0037, 0x0078, 0xFFFB },
-    { 0x005F, 0x007D, 0x000A },
-    { 0x0087, 0x0082, 0x0019 },
-    { 0x0069, 0x0000, 0x0000 },
+    { 5, 0, -20 },
+    { 45, 0, -5 },
+    { 85, 0, 10 },
+    { 125, 0, 25 },
+    { 10, 50, -20 },
+    { 50, 45, -5 },
+    { 90, 50, 10 },
+    { 130, 55, 25 },
+    { 15, 85, -20 },
+    { 55, 80, -5 },
+    { 95, 85, 10 },
+    { 135, 90, 25 },
+    { 15, 125, -20 },
+    { 55, 120, -5 },
+    { 95, 125, 10 },
+    { 135, 130, 25 },
+    { 105, 0, 0 },
 };
 
-s32 D_8028358C[] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                     &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C,
-                     0x00000000,
-                   };
+// TODO: what is this, and look into warnings that are silenced via casts
+s32* D_8028358C[] = {
+    (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1,
+    (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C,
+    (s32*)D_8028358C, (s32*)D_8028358C, 0
+};
 
-s16 D_802835D0[] = { 0x1C, 0x28 };
+s16 D_802835D0[] = { 28, 40 };
 s16 D_802835D4[] = { 0, -2 };
 s16 D_802835D8[] = { 0, -12 };
 
 f32 D_802835DC[] = {
-    0.0f, 4.5, 0.0f, 1.0f, 4.0f, 0.0f, 2.0f, 3.0f, 0.0f, 3.0f, 2.0f, 0.0f, 3.5f, 1.0f, 0.0f, 4.0f, 0.0f, 0.0f, 4.5, 0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 4.5, 0.0f, 0.0f, 4.0f, 0.0f, 0.0f, 3.5f, -1.0f, 0.0f, 3.0f, -2.0f, 0.0f, 2.0f, -3.0f, 0.0f, 1.0f, -4.0f, 0.0f, 0.0f, -4.5f, 0.0f,
+    0.0f, 4.5, 0.0f, 1.0f, 4.0f, 0.0f, 2.0f, 3.0f, 0.0f, 3.0f, 2.0f, 0.0f, 3.5f, 1.0f, 0.0f, 4.0f, 0.0f, 0.0f, 4.5,
+    0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 4.5, 0.0f, 0.0f, 4.0f, 0.0f, 0.0f, 3.5f, -1.0f, 0.0f, 3.0f, -2.0f, 0.0f, 2.0f, -3.0f,
+    0.0f, 1.0f, -4.0f, 0.0f, 0.0f, -4.5f, 0.0f,
 };
 
 f32 D_80283690[] = {
-    1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f,
+    1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f,
+    0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.0f, 1.0f,
+    1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f,
 };
 
+// TODO fix raw ptrs
 s32 D_80283744[] = {
-    0x00000000, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98,
+    0x00000000, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98,
+    0x80283D98, 0x80283D98,
 };
 
 s32 bMessages[] = {
@@ -1079,7 +1095,7 @@ s32 bActorMessages[] = {
 
 s32 D_802838F8 = 0;
 
-extern Temp14 D_80283F10[];
+extern PartnerDMAData D_80283F10[];
 
 extern EvtSource D_80293820;
 extern f32 D_802938A4;
@@ -1088,18 +1104,19 @@ extern EffectInstance* gDamageCountEffects[24];
 extern s32 gDamageCountTimers[24];
 extern Gfx D_80293970[];
 extern s32 D_802939C0;
-extern s32 D_802939C4[0];
-extern s32 D_80293A10[0];
-extern s32 D_80293A34[0];
-extern s32 D_80293A58[0];
-extern s32 D_80293A7C[0];
-extern s32 D_80293AA0[0];
-extern s32 D_80293AC4[0];
+extern EvtSource D_802939C4;
+extern EvtSource D_80293A10;
+extern EvtSource D_80293A34;
+extern EvtSource D_80293A58;
+extern EvtSource D_80293A7C;
+extern EvtSource D_80293AA0;
+extern EvtSource D_80293AC4;
 
 s32 func_80265CE8(u32*, s32);
 
 void create_target_list(Actor* actor, s32 arg1);
 INCLUDE_ASM(s32, "190B20", create_target_list);
+void func_80266DAC(Actor* actor, s32 arg1);
 
 void player_create_target_list(Actor* actor) {
     create_target_list(actor, 0);
@@ -1142,7 +1159,7 @@ void func_80263268(void) {
         if (partnersEnabled >= 2) {
             if (partner->koStatus == STATUS_DAZE) {
                 battleStatus->changePartnerAllowed = 0;
-            } else if (partner->debuff == 7) {
+            } else if (partner->debuff == STATUS_FROZEN) {
                 battleStatus->changePartnerAllowed = 0;
             } else if (playerData->currentPartner == PARTNER_GOOMPA) {
                 battleStatus->changePartnerAllowed = -1;
@@ -1257,6 +1274,7 @@ void btl_init_menu_boots(void) {
     do {
         for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
             s16 badge = playerData->equippedBadges[i];
+
             if (badge != ITEM_NONE) {
                 StaticMove* moveTable = gMoveTable;
                 u8 moveID = gItemTable[badge].moveID;
@@ -1577,14 +1595,14 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
         ActorPart* part;
 
         switch (actorID & 0x700) {
-            case 0x0:
+            case ACTOR_PLAYER:
                 part = &actor->partsTable[0];
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
                     spr_update_player_sprite(0, animationIndex, part->animationRate);
                 }
                 break;
-            case 0x100:
+            case ACTOR_PARTNER:
                 if (partIdx != 0) {
                     part = get_actor_part(actor, partIdx);
 
@@ -1601,7 +1619,7 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
                     part->unk_8C = func_802DE5C8(part->unk_84);
                 }
                 break;
-            case 0x200:
+            case ACTOR_ENEMY0:
                 part = get_actor_part(actor, partIdx);
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
@@ -1616,14 +1634,14 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
 void func_80263E08(Actor* actor, ActorPart* part, s32 anim) {
     if (anim >= 0) {
         switch (actor->actorID & 0x700) {
-            case 0x0:
+            case ACTOR_PLAYER:
                 if (part->currentAnimation != anim) {
                     part->currentAnimation = anim;
                     spr_update_player_sprite(0, anim, part->animationRate);
                 }
                 break;
-            case 0x100:
-            case 0x200:
+            case ACTOR_PARTNER:
+            case ACTOR_ENEMY0:
                 if (part->currentAnimation != anim) {
                     part->currentAnimation = anim;
                     spr_update_sprite(part->unk_84, anim, part->animationRate);
@@ -1781,8 +1799,7 @@ void load_player_actor(void) {
     s32 i;
     s32 j;
 
-    battleStatus->playerActor = heap_malloc(sizeof(*player));
-    player = battleStatus->playerActor;
+    player = battleStatus->playerActor = heap_malloc(sizeof(*player));
 
     ASSERT(player != NULL);
 
@@ -1997,7 +2014,7 @@ void load_partner_actor(void) {
     Evt* takeTurnScript;
     s32 partCount;
     s32 currentPartner;
-    Temp14* partnerData;
+    PartnerDMAData* partnerData;
     f32 x;
     f32 y;
     f32 z;
@@ -2266,7 +2283,7 @@ s32 func_80265CE8(u32* anim, s32 arg1) {
     return ret;
 }
 
-s32 func_80265D44(s32 arg0) {
+s32 func_80265D44(s32 animID) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Actor* player = battleStatus->playerActor;
@@ -2278,37 +2295,38 @@ s32 func_80265D44(s32 arg0) {
     }
     ret = 0;
 
+    // TODO use animation id enum once it exists
     if (!(battleStatus->flags2 & BS_FLAGS2_40)) {
         if (playerData->curHP < 6) {
-            if (arg0 == 1) {
-                arg0 = 26;
+            if (animID == 1) {
+                animID = 26;
             }
 
-            if (arg0 == 18) {
-                arg0 = 22;
+            if (animID == 18) {
+                animID = 22;
             }
 
-            if (arg0 == 28) {
-                arg0 = 29;
-            }
-        }
-
-        if (player->debuff == 9) {
-            if (arg0 == 1) {
-                arg0 = 26;
-            }
-
-            if (arg0 == 18) {
-                arg0 = 22;
-            }
-
-            if (arg0 == 28) {
-                arg0 = 29;
+            if (animID == 28) {
+                animID = 29;
             }
         }
 
-        if (player->debuff == 4 && arg0 == 18) {
-            arg0 = 24;
+        if (player->debuff == STATUS_POISON) {
+            if (animID == 1) {
+                animID = 26;
+            }
+
+            if (animID == 18) {
+                animID = 22;
+            }
+
+            if (animID == 28) {
+                animID = 29;
+            }
+        }
+
+        if (player->debuff == STATUS_DIZZY && animID == 18) {
+            animID = 24;
         }
     }
 
@@ -2316,7 +2334,7 @@ s32 func_80265D44(s32 arg0) {
         if (*anim == 1) {
             ret = anim[1];
         }
-        if (*anim == arg0) {
+        if (*anim == animID) {
             ret = anim[1];
             break;
         }
@@ -2773,6 +2791,7 @@ void func_80266E14(ActorPart* part) {
     }
 }
 
+// TODO: improve match
 void func_80266E40(Actor* actor) {
     ActorPart* partIt = actor->partsTable;
     s8 e = 0xE;
@@ -2923,6 +2942,7 @@ void remove_part_decoration(ActorPart* part, s32 decorationIndex) {
 
 void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     ActorPart* part;
+
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
         if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) && part->idleAnimations &&
             !(part->flags & ACTOR_PART_FLAG_2))
@@ -3207,22 +3227,22 @@ void start_rumble_type(u32 arg0) {
         case 0:
             break;
         case 1:
-            D_802939C0 = start_script(D_802939C4, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_802939C4, 0xA, 0x20)->id;
             break;
         case 2:
-            D_802939C0 = start_script(D_80293A10, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293A10, 0xA, 0x20)->id;
             break;
         case 3:
-            D_802939C0 = start_script(D_80293A34, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293A34, 0xA, 0x20)->id;
             break;
         case 4:
-            D_802939C0 = start_script(D_80293A58, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293A58, 0xA, 0x20)->id;
             break;
         case 5:
-            D_802939C0 = start_script(D_80293A7C, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293A7C, 0xA, 0x20)->id;
             break;
         case 6:
-            D_802939C0 = start_script(D_80293AA0, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293AA0, 0xA, 0x20)->id;
             break;
         case 7:
         case 8:

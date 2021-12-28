@@ -1261,6 +1261,8 @@ enum HitSounds {
     HIT_SOUND_SHOCK            = 5,
 };
 
+// Player.debuff
+// Partner.debuff
 enum Statuses {
     STATUS_END                     = 0x00000000,
     STATUS_NORMAL                  = 0x00000001,
@@ -1458,7 +1460,6 @@ enum Triggers {
 };
 
 enum Buttons {
-    BUTTON_NONE         = 0x00000000,
     BUTTON_C_RIGHT      = 0x00000001,
     BUTTON_C_LEFT       = 0x00000002,
     BUTTON_C_DOWN       = 0x00000004,
