@@ -8,12 +8,10 @@ extern s32 D_802BE0E4;
 extern s32 D_802BE0E8;
 extern s32 D_802BE0EC;
 
-extern struct unkPartnerStruct* D_802BDFFC_32494C;
-
 void func_802BDDF0_324740(Npc* partner);
 s32 func_802BD540_323E90(void);
 
-void func_802BD100_323A50(Npc* bow) {
+void world_bow_init(Npc* bow) {
     bow->collisionHeight = 26;
     bow->collisionRadius = 24;
     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
@@ -30,6 +28,14 @@ ApiStatus func_802BD130_323A80(Evt* script, s32 isInitialCall) {
 
     return partner_get_out(bow) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
+
+EvtSource world_bow_take_out = {
+    EVT_CALL(func_802BD130_323A80)
+    EVT_RETURN
+    EVT_END
+};
+
+struct unkPartnerStruct* D_802BDFFC_32494C = 0x802BE0C8;
 
 ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
@@ -109,6 +115,12 @@ ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
     }
     return 0;
 }
+
+EvtSource world_bow_update = {
+    EVT_CALL(func_802BD168_323AB8)
+    EVT_RETURN
+    EVT_END
+};
 
 void func_802BD4FC_323E4C(Npc* bow) {
     if (D_8010C954 != NULL) {
@@ -330,6 +342,12 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+EvtSource world_bow_use_ability = {
+    EVT_CALL(func_802BD694_323FE4)
+    EVT_RETURN
+    EVT_END
+};
+
 void func_802BDDF0_324740(Npc* bow) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
@@ -375,7 +393,13 @@ ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
     return partner_put_away(bow) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-void func_802BDF64_3248B4(Npc* bow) {
+EvtSource world_bow_put_away = {
+    EVT_CALL(func_802BDF08_324858)
+    EVT_RETURN
+    EVT_END
+};
+
+void world_bow_pre_battle(Npc* bow) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     if (D_802BE0C0) {

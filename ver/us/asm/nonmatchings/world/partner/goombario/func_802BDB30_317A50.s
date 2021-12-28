@@ -7,8 +7,8 @@ glabel func_802BDB30_317A50
 /* 317A58 802BDB38 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 317A5C 802BDB3C 0C009C22 */  jal       set_time_freeze_mode
 /* 317A60 802BDB40 AFB00010 */   sw       $s0, 0x10($sp)
-/* 317A64 802BDB44 3C03802C */  lui       $v1, %hi(func_802BDF64_3248B4)
-/* 317A68 802BDB48 2463DF64 */  addiu     $v1, $v1, %lo(func_802BDF64_3248B4)
+/* 317A64 802BDB44 3C03802C */  lui       $v1, %hi(D_802BDF64)
+/* 317A68 802BDB48 2463DF64 */  addiu     $v1, $v1, %lo(D_802BDF64)
 /* 317A6C 802BDB4C 8C620000 */  lw        $v0, ($v1)
 /* 317A70 802BDB50 3C108011 */  lui       $s0, %hi(gPartnerActionStatus)
 /* 317A74 802BDB54 2610EBB0 */  addiu     $s0, $s0, %lo(gPartnerActionStatus)

@@ -24,8 +24,6 @@ f32 get_player_normal_pitch(void);
 void partner_kill_ability_script(void);
 f64 fabs(f64 val);
 
-extern f64 D_802BFEF8;
-
 void func_802BD100_320C50(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* lakilester = get_npc_unsafe(NPC_PARTNER);
@@ -52,7 +50,7 @@ void func_802BD100_320C50(void) {
     add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 2.0f, currentCamera->currentYaw);
 }
 
-void func_802BD21C_320D6C(Npc* npc) {
+void world_lakilester_init(Npc* npc) {
     npc->collisionHeight = 38;
     npc->collisionRadius = 36;
     npc->unk_80 = 0x10000;
@@ -79,6 +77,14 @@ ApiStatus func_802BD29C_320DEC(Evt* script, s32 isInitialCall) {
 
     return partner_get_out(lakilester) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
+
+EvtSource world_lakilester_take_out = {
+    EVT_CALL(func_802BD29C_320DEC)
+    EVT_RETURN
+    EVT_END
+};
+
+unkPartnerStruct* D_802BFE7C_3239CC = &D_802BFF30;
 
 ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
@@ -163,6 +169,12 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
+
+EvtSource world_lakilester_update = {
+    EVT_CALL(func_802BD2D4_320E24)
+    EVT_RETURN
+    EVT_END
+};
 
 void func_802BD678_3211C8(Npc* npc) {
     unkPartnerStruct* temp_v1;
@@ -543,6 +555,12 @@ s32 func_802BE6A0_3221F0(f32* arg0) {
 ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BE724_322274);
 
+EvtSource world_lakilester_use_ability = {
+    EVT_CALL(func_802BE724_322274)
+    EVT_RETURN
+    EVT_END
+};
+
 ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
@@ -675,7 +693,13 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-void func_802BFA00_323550(Npc* npc) {
+EvtSource world_lakilester_put_away = {
+    EVT_CALL(func_802BF4F0_323040)
+    EVT_RETURN
+    EVT_END
+};
+
+void world_lakilester_pre_battle(Npc* npc) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     if (D_802BFF0C) {
@@ -691,7 +715,7 @@ void func_802BFA00_323550(Npc* npc) {
     D_802BFF18 = 0;
 }
 
-void func_802BFAA8_3235F8(Npc* npc) {
+void world_lakilester_post_battle(Npc* npc) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     if (partnerActionStatus->actionState.b[1] != 0) {
@@ -802,34 +826,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-//data
-EvtSource D_802BFE60_3239B0 = {
-    EVT_CALL(func_802BD29C_320DEC)
-    EVT_RETURN
-    EVT_END
-};
-
-unkPartnerStruct* D_802BFE7C_3239CC = &D_802BFF30;
-
-EvtSource D_802BFE7C_3239D0 = {
-    EVT_CALL(func_802BD2D4_320E24)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtSource D_802BFE98_323A08 = {
-    EVT_CALL(func_802BE724_322274)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtSource D_802BFEB4_323A24 = {
-    EVT_CALL(func_802BF4F0_323040)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtSource D_802BFED0_323A40 = {
+EvtSource world_lakilester_while_riding = {
     EVT_CALL(func_802BFBA0_3236F0)
     EVT_RETURN
     EVT_END

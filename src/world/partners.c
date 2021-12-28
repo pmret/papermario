@@ -18,13 +18,16 @@
 #include "partner/goompa.h"
 #include "sprite/npc/goompa.h"
 
+#include "partner/watt.h"
 #include "sprite/npc/world_watt.h"
 
 #include "partner/sushie.h"
 #include "sprite/npc/world_sushie.h"
 
+#include "partner/lakilester.h"
 #include "sprite/npc/world_lakilester.h"
 
+#include "partner/bow.h"
 #include "sprite/npc/world_bow.h"
 
 #include "partner/goombaria.h"
@@ -175,16 +178,16 @@ WorldPartner wPartners[12] = {
         .dmaEnd = &world_partner_watt_ROM_END,
         .dmaDest = &world_partner_watt_VRAM,
         .isFlying = TRUE,
-        .init = 0x802BD23C,
-        .takeOut = 0x802BE258,
-        .update = 0x802BE27C,
-        .useAbility = 0x802BE298,
-        .putAway = 0x802BE2B4,
+        .init = world_watt_init,
+        .takeOut = world_watt_take_out,
+        .update = world_watt_update,
+        .useAbility = world_watt_use_ability,
+        .putAway = world_watt_put_away,
         .idle = NPC_ANIM_world_watt_Palette_00_Anim_1,
         .canPlayerPause = world_partner_can_player_pause_default,
-        .preBattle = 0x802BDD9C,
-        .postBattle = 0x802BDE10,
-        .whileRiding = 0x802BE2D0,
+        .preBattle = world_watt_pre_battle,
+        .postBattle = world_watt_post_battle,
+        .whileRiding = world_watt_while_riding,
     },
     {
         // Sushie
@@ -209,16 +212,16 @@ WorldPartner wPartners[12] = {
         .dmaEnd = &world_partner_lakilester_ROM_END,
         .dmaDest = &world_partner_lakilester_VRAM,
         .isFlying = TRUE,
-        .init = 0x802BD21C,
-        .takeOut = 0x802BFE60,
-        .update = 0x802BFE80,
-        .useAbility = 0x802BFE9C,
-        .putAway = 0x802BFEB8,
+        .init = world_lakilester_init,
+        .takeOut = world_lakilester_take_out,
+        .update = world_lakilester_update,
+        .useAbility = world_lakilester_use_ability,
+        .putAway = world_lakilester_put_away,
         .idle = NPC_ANIM_world_lakilester_Palette_00_Anim_1,
         .canPlayerPause = world_partner_can_player_pause_default,
-        .preBattle = 0x802BFA00,
-        .postBattle = 0x802BFAA8,
-        .whileRiding = 0x802BFED4,
+        .preBattle = world_lakilester_pre_battle,
+        .postBattle = world_lakilester_post_battle,
+        .whileRiding = world_lakilester_while_riding,
     },
     {
         // Bow
@@ -226,15 +229,15 @@ WorldPartner wPartners[12] = {
         .dmaEnd = &world_partner_bow_ROM_END,
         .dmaDest = &world_partner_bow_VRAM,
         .isFlying = TRUE,
-        .init = 0x802BD100,
-        .takeOut = 0x802BDFE0,
-        .update = 0x802BE000,
-        .useAbility = 0x802BE01C,
-        .putAway = 0x802BE038,
+        .init = world_bow_init,
+        .takeOut = world_bow_take_out,
+        .update = world_bow_update,
+        .useAbility = world_bow_use_ability,
+        .putAway = world_bow_put_away,
         .idle = NPC_ANIM_world_bow_Palette_00_Anim_1,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = world_partner_can_player_pause_default,
-        .preBattle = 0x802BDF64,
+        .preBattle = world_bow_pre_battle,
     },
     {
         // Goombaria
