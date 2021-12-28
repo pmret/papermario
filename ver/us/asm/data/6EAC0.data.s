@@ -18,7 +18,7 @@ dlabel D_80093B94
 .word D_80093B84, 0x00000000, 0x00000000
 
 dlabel nugfx_ucode
-.word 0x80096030, 0x80097660
+.word gspF3DEX2kawase_fifo_text_bin, gspF3DEX2kawase_fifo_data_bin
 
 dlabel FrameBuf
 .word D_8038F800, D_803B5000, heap_battleHead, 0x00000000

@@ -8,24 +8,28 @@ EvtSource N(exitWalk_80243480) = EXIT_WALK_SCRIPT(60,  0, "arn_02",  1);
 
 EvtSource N(exitWalk_802434DC) = EXIT_WALK_SCRIPT(60,  1, "dgb_00",  0);
 
-EvtSource N(80243538) = SCRIPT({
-    bind N(exitWalk_80243480) TRIGGER_FLOOR_ABOVE 1;
-    bind N(exitWalk_802434DC) TRIGGER_FLOOR_ABOVE 6;
-});
+EvtSource N(80243538) = {
+    EVT_BIND_TRIGGER(N(exitWalk_80243480), TRIGGER_FLOOR_ABOVE, 1, 1, 0)
+    EVT_BIND_TRIGGER(N(exitWalk_802434DC), TRIGGER_FLOOR_ABOVE, 6, 1, 0)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(main) = SCRIPT({
-    EVT_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
-    SetSpriteShading(-1);
-    SetCamPerspective(0, 3, 25, 16, 4096);
-    SetCamBGColor(0, 0, 0, 0);
-    SetCamEnabled(0, 1);
-    MakeNpcs(0, N(npcGroupList_80244000));
-    await N(makeEntities);
-    spawn N(802433D0);
-    EVT_VAR(0) = N(80243538);
-    spawn EnterWalk;
-    sleep 1;
-});
+EvtSource N(main) = {
+    EVT_SET(EVT_SAVE_VAR(425), 34)
+    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
+    EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
+    EVT_CALL(SetCamEnabled, 0, 1)
+    EVT_CALL(MakeNpcs, 0, EVT_PTR(N(npcGroupList_80244000)))
+    EVT_EXEC_WAIT(N(makeEntities))
+    EVT_EXEC(N(802433D0))
+    EVT_SET(EVT_VAR(0), EVT_PTR(N(80243538)))
+    EVT_EXEC(EnterWalk)
+    EVT_WAIT_FRAMES(1)
+    EVT_RETURN
+    EVT_END
+};
 
 static s32 N(pad_3654)[] = {
     0x00000000, 0x00000000, 0x00000000,
@@ -44,9 +48,11 @@ NpcAISettings N(npcAISettings_80243660) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80243690) = SCRIPT({
-    N(func_80240B94_BE4344)(N(npcAISettings_80243660));
-});
+EvtSource N(npcAI_80243690) = {
+    EVT_CALL(N(func_80240B94_BE4344), EVT_PTR(N(npcAISettings_80243660)))
+    EVT_RETURN
+    EVT_END
+};
 
 NpcSettings N(npcSettings_802436B0) = {
     .height = 20,
@@ -75,13 +81,15 @@ NpcAISettings N(npcAISettings_802436F4) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80243724) = SCRIPT({
-    SetSelfVar(0, 1);
-    SetSelfVar(5, -850);
-    SetSelfVar(6, 60);
-    SetSelfVar(1, 700);
-    N(func_8024219C_BE594C)(N(npcAISettings_802436F4));
-});
+EvtSource N(npcAI_80243724) = {
+    EVT_CALL(SetSelfVar, 0, 1)
+    EVT_CALL(SetSelfVar, 5, -850)
+    EVT_CALL(SetSelfVar, 6, 60)
+    EVT_CALL(SetSelfVar, 1, 700)
+    EVT_CALL(N(func_8024219C_BE594C), EVT_PTR(N(npcAISettings_802436F4)))
+    EVT_RETURN
+    EVT_END
+};
 
 NpcSettings N(npcSettings_80243794) = {
     .height = 18,
@@ -107,9 +115,11 @@ NpcAISettings N(npcAISettings_802437C0) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_802437F0) = SCRIPT({
-    N(func_80243018_BE67C8)(N(npcAISettings_802437C0), 8);
-});
+EvtSource N(npcAI_802437F0) = {
+    EVT_CALL(N(func_80243018_BE67C8), EVT_PTR(N(npcAISettings_802437C0)), 8)
+    EVT_RETURN
+    EVT_END
+};
 
 NpcSettings N(npcSettings_80243814) = {
     .height = 24,
@@ -266,15 +276,17 @@ static s32 N(pad_403C)[] = {
     0x00000000,
 };
 
-EvtSource N(makeEntities) = SCRIPT({
-    MakeEntity(0x802EA564, 450, 285, 120, 0, ITEM_SUPER_SHROOM, MAKE_ENTITY_END);
-    AssignBlockFlag(EVT_SAVE_FLAG(1008));
-    MakeEntity(0x802EA564, 720, 333, 75, 0, ITEM_COIN, MAKE_ENTITY_END);
-    AssignBlockFlag(EVT_SAVE_FLAG(1009));
-    MakeEntity(0x802EA0E8, 600, 290, 200, 0, MAKE_ENTITY_END);
-    AssignBlockFlag(EVT_SAVE_FLAG(1010));
-    MakeItemEntity(ITEM_STAR_PIECE, 540, 230, 13, 17, EVT_SAVE_FLAG(1019));
-});
+EvtSource N(makeEntities) = {
+    EVT_CALL(MakeEntity, 0x802EA564, 450, 285, 120, 0, 140, MAKE_ENTITY_END)
+    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1008))
+    EVT_CALL(MakeEntity, 0x802EA564, 720, 333, 75, 0, 343, MAKE_ENTITY_END)
+    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1009))
+    EVT_CALL(MakeEntity, 0x802EA0E8, 600, 290, 200, 0, MAKE_ENTITY_END)
+    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1010))
+    EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 540, 230, 13, 17, EVT_SAVE_FLAG(1019))
+    EVT_RETURN
+    EVT_END
+};
 
 #include "world/common/UnkNpcAIFunc24.inc.c"
 

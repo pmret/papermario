@@ -191,6 +191,26 @@ typedef struct EffectWhirlwind {
     /* 0x30 */ f32 unk_30;
 } EffectWhirlwind; 
 
+typedef struct Effect6FData {
+    /* 0x00 */ EffectInstanceDataThing* unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3i rotation;
+    /* 0x1C */ Vec3i scale;
+    /* 0x28 */ Vec3i color;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ char unk_40[0x4];
+} Effect6FData; // size = 0x44
+
+typedef struct Effect6FInstance {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32 effectIndex;
+    /* 0x08 */ s32 numParts;
+    /* 0x0C */ Effect6FData* data;
+    /* 0x10 */ struct EffectGraphics* effect;
+} Effect6FInstance;
+
 EffectInstance* create_effect_instance(EffectBlueprint* effectBp);
 void remove_effect(EffectInstance*);
 s32 load_effect(s32 effectIndex);

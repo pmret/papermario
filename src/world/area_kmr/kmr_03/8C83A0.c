@@ -37,22 +37,24 @@ FoliageVectorList N(treeEffectVectors_Tree1) = {
     },
 };
 
-EvtSource N(tree1_Callback) = SCRIPT({
-    if (EVT_SAVE_FLAG(53) == TRUE) {
-        return;
-    }
-    if (EVT_MAP_FLAG(10) == TRUE) {
-        return;
-    }
-    sleep 10;
-    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
-    if (EVT_VAR(0) < -30) {
-        MakeItemEntity(ITEM_MUSHROOM, -23, 100, 35, 13, EVT_SAVE_FLAG(53));
-    } else {
-        MakeItemEntity(ITEM_MUSHROOM, -85, 100, 16, 13, EVT_SAVE_FLAG(53));
-    }
-    EVT_MAP_FLAG(10) = 1;
-});
+EvtSource N(tree1_Callback) = {
+    EVT_IF_EQ(EVT_SAVE_FLAG(53), 1)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_IF_EQ(EVT_MAP_FLAG(10), 1)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_WAIT_FRAMES(10)
+    EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
+    EVT_IF_LT(EVT_VAR(0), -30)
+        EVT_CALL(MakeItemEntity, ITEM_MUSHROOM, -23, 100, 35, 13, EVT_SAVE_FLAG(53))
+    EVT_ELSE
+        EVT_CALL(MakeItemEntity, ITEM_MUSHROOM, -85, 100, 16, 13, EVT_SAVE_FLAG(53))
+    EVT_END_IF
+    EVT_SET(EVT_MAP_FLAG(10), 1)
+    EVT_RETURN
+    EVT_END
+};
 
 ShakeTreeConfig N(tree1) = {
     .leaves = &N(treeModelList_Tree1_Leaves),
@@ -63,12 +65,13 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(tree1Point) = { -42.0f, 0.0f, -13.0f, 0.0f };
 
-EvtSource N(802422B8) = SCRIPT({
-    EVT_VAR(0) = N(bush1);
-    bind N(searchBush) TRIGGER_WALL_PRESS_A 53;
-
-    EVT_VAR(0) = N(tree1);
-    bind N(shakeTree) TRIGGER_WALL_HAMMER 52;
-    bind N(shakeTree) TRIGGER_POINT_BOMB N(tree1Point);
-});
+EvtSource N(802422B8) = {
+    EVT_SET(EVT_VAR(0), EVT_PTR(N(bush1)))
+    EVT_BIND_TRIGGER(N(searchBush), TRIGGER_WALL_PRESS_A, 53, 1, 0)
+    EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))
+    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 52, 1, 0)
+    EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(tree1Point)), 1, 0)
+    EVT_RETURN
+    EVT_END
+};
 

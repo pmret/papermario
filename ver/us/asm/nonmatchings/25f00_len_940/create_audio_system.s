@@ -73,13 +73,13 @@ glabel create_audio_system
 /* 2600C 8004AC0C 26520004 */   addiu    $s2, $s2, 4
 /* 26010 8004AC10 0000882D */  daddu     $s1, $zero, $zero
 /* 26014 8004AC14 24090002 */  addiu     $t1, $zero, 2
-/* 26018 8004AC18 3C08800E */  lui       $t0, %hi(D_800D9780)
-/* 2601C 8004AC1C 25089780 */  addiu     $t0, $t0, %lo(D_800D9780)
+/* 26018 8004AC18 3C08800E */  lui       $t0, %hi(rspbootUcodeBuffer)
+/* 2601C 8004AC1C 25089780 */  addiu     $t0, $t0, %lo(rspbootUcodeBuffer)
 /* 26020 8004AC20 24070100 */  addiu     $a3, $zero, 0x100
-/* 26024 8004AC24 3C068007 */  lui       $a2, %hi(D_800731A0)
-/* 26028 8004AC28 24C631A0 */  addiu     $a2, $a2, %lo(D_800731A0)
-/* 2602C 8004AC2C 3C058009 */  lui       $a1, %hi(D_80097A80)
-/* 26030 8004AC30 24A57A80 */  addiu     $a1, $a1, %lo(D_80097A80)
+/* 26024 8004AC24 3C068007 */  lui       $a2, %hi(n_aspMain_text_bin)
+/* 26028 8004AC28 24C631A0 */  addiu     $a2, $a2, %lo(n_aspMain_text_bin)
+/* 2602C 8004AC2C 3C058009 */  lui       $a1, %hi(n_aspMain_data_bin)
+/* 26030 8004AC30 24A57A80 */  addiu     $a1, $a1, %lo(n_aspMain_data_bin)
 /* 26034 8004AC34 24040800 */  addiu     $a0, $zero, 0x800
 /* 26038 8004AC38 3C03800A */  lui       $v1, %hi(D_800A3520)
 /* 2603C 8004AC3C 24633520 */  addiu     $v1, $v1, %lo(D_800A3520)

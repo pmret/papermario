@@ -14,9 +14,11 @@ MapConfig N(config) = {
     .tattle = { MSG_kmr_12_tattle },
 };
 
-EvtSource N(PlayMusic) = SCRIPT({
-    SetMusicTrack(0, SONG_PLEASANT_PATH, 0, 8);
-});
+EvtSource N(PlayMusic) = {
+    EVT_CALL(SetMusicTrack, 0, SONG_PLEASANT_PATH, 0, 8)
+    EVT_RETURN
+    EVT_END
+};
 
 ApiStatus GetGoomba(Evt* script, s32 isInitialCall) {
     script->varTable[0] = get_enemy_safe(NPC_GOOMBA);

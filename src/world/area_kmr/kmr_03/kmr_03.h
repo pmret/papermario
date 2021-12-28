@@ -17,3 +17,5 @@ extern EvtSource N(80242340);
 extern EvtSource N(802406C0);
 extern EvtSource N(main);
 extern EvtSource N(makeEntities);
+
+extern s32 D_802EA0C4;

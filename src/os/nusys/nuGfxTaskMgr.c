@@ -16,7 +16,7 @@ extern NUScTask nuGfxTask[NU_GFX_TASK_NUM];
 extern s32 D_800DA040;
 extern s32 D_800B91D0;
 extern s32 D_800D91D0;
-extern void D_800D9780;
+extern u8 rspbootUcodeBuffer[];
 extern u32 nuGfxCfbCounter;
 extern OSMesgQueue D_800DA47C;
 
@@ -71,8 +71,8 @@ void nuGfxTaskMgrInit(void) {
         nuGfxTask[i].msgQ = &D_800DAC90;
         nuGfxTask[i].list.t.type = M_GFXTASK;
         nuGfxTask[i].list.t.flags = 0;
-        dma_copy((u8* )0xB0000B70, (u8* )0xB0000C70, &D_800D9780);
-        nuGfxTask[i].list.t.ucode_boot = &D_800D9780;
+        dma_copy((u8* )0xB0000B70, (u8* )0xB0000C70, rspbootUcodeBuffer);
+        nuGfxTask[i].list.t.ucode_boot = rspbootUcodeBuffer;
         nuGfxTask[i].list.t.ucode_boot_size = 0x100;
         nuGfxTask[i].list.t.ucode_size = SP_UCODE_SIZE;
         nuGfxTask[i].list.t.ucode_data_size = SP_UCODE_DATA_SIZE;

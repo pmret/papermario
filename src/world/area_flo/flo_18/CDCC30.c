@@ -2,6 +2,7 @@
 
 #include "world/common/foliage.inc.c"
 
-EvtSource N(80247024) = SCRIPT({
-
-});
+EvtSource N(80247024) = {
+    EVT_RETURN
+    EVT_END
+};

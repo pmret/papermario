@@ -1544,37 +1544,6 @@ enum DamageTypes {
     DAMAGE_TYPE_TRIGGER_LUCKY              = 0x80000000,
 };
 
-enum damageType {
-    DAMAGETYPE_FIRE                            = 0x00000002,
-    DAMAGETYPE_WATER                           = 0x00000004,
-    DAMAGETYPE_ICE                             = 0x00000008,
-    DAMAGETYPE_MAGIC                           = 0x00000010,
-    DAMAGETYPE_ELECTRIC                        = 0x00000020,
-    DAMAGETYPE_SMASH                           = 0x00000040,
-    DAMAGETYPE_JUMP                            = 0x00000080,
-    DAMAGETYPE_COSMIC                          = 0x00000100,
-    DAMAGETYPE_BLAST                           = 0x00000200,
-    DAMAGETYPE_POW                             = 0x00000400,
-    DAMAGETYPE_QUAKE                           = 0x00000800,
-    DAMAGETYPE_FEAR                            = 0x00001000,
-    DAMAGETYPE_AIR_LIFT                        = 0x00008000,
-    DAMAGETYPE_SPINY_SURGE                     = 0x00010000,
-    DAMAGETYPE_SHELL_CRACK                     = 0x00020000,
-    DAMAGETYPE_THROW                           = 0x00040000,
-    DAMAGETYPE_POWER_BOUNCE                    = 0x00100000,
-    DAMAGETYPE_QUAKE_HAMMER                    = 0x00200000,
-    DAMAGETYPE_REMOVE_BUFFS                    = 0x00400000,
-    DAMAGETYPE_PEACH_BEAM                      = 0x00800000,
-    DAMAGETYPE_MULTI_BOUNCE                    = 0x01000000,
-    DAMAGETYPE_UNBLOCKABLE                     = 0x02000000,
-    DAMAGETYPE_SPIN_SMASH                      = 0x04000000,
-    DAMAGETYPE_IGNORE_DEFENSE                  = 0x08000000,
-    DAMAGETYPE_NO_CONTACT                      = 0x10000000,
-    DAMAGETYPE_NO_OTHER_DAMAGE_POPUPS          = 0x20000000,
-    DAMAGETYPE_STATUS_ALWAYS_HITS              = 0x40000000,
-    DAMAGETYPE_TRIGGER_LUCKY                   = 0x80000000,
-};
-
 enum PartnerIDs {
     PARTNER_NONE                = 0x00000000,
     PARTNER_GOOMBARIO           = 0x00000001,
@@ -2074,54 +2043,72 @@ enum MoveIDs {
     MOVE_PEACH_BEAM                 = 0x00000080,
     MOVE_PEACH_FOCUS                = 0x00000081,
     MOVE_TWINK_DASH                 = 0x00000082,
+
+    // Goombario moves
     MOVE_HEADBONK1                  = 0x00000083,
     MOVE_HEADBONK2                  = 0x00000084,
     MOVE_HEADBONK3                  = 0x00000085,
     MOVE_TATTLE                     = 0x00000086,
     MOVE_CHARGE                     = 0x00000087,
     MOVE_MULTIBONK                  = 0x00000088,
+
+    // Kooper moves
     MOVE_SHELL_TOSS1                = 0x00000089,
     MOVE_SHELL_TOSS2                = 0x0000008A,
     MOVE_SHELL_TOSS3                = 0x0000008B,
     MOVE_POWER_SHELL                = 0x0000008C,
     MOVE_DIZZY_SHELL                = 0x0000008D,
     MOVE_FIRE_SHELL                 = 0x0000008E,
+
+    // Bombette moves
     MOVE_BODY_SLAM1                 = 0x0000008F,
     MOVE_BODY_SLAM2                 = 0x00000090,
     MOVE_BODY_SLAM3                 = 0x00000091,
     MOVE_BOMB                       = 0x00000092,
     MOVE_POWER_BOMB                 = 0x00000093,
     MOVE_MEGA_BOMB                  = 0x00000094,
+
+    // Parakarry moves
     MOVE_SKY_DIVE1                  = 0x00000095,
     MOVE_SKY_DIVE2                  = 0x00000096,
     MOVE_SKY_DIVE3                  = 0x00000097,
     MOVE_SHELL_SHOT                 = 0x00000098,
     MOVE_AIR_LIFT                   = 0x00000099,
     MOVE_AIR_RAID                   = 0x0000009A,
+
+    // Goompa moves
     MOVE_UNUSED_LONE_FOOL1          = 0x0000009B,
     MOVE_UNUSED_LONE_FOOL2          = 0x0000009C,
     MOVE_UNUSED_LONE_FOOL3          = 0x0000009D,
     MOVE_UNUSED_MUMBLE              = 0x0000009E,
     MOVE_UNUSED_PREACH              = 0x0000009F,
     MOVE_UNUSED_AWAKENING           = 0x000000A0,
+
+    // Watt moves
     MOVE_ELECTRO_DASH1              = 0x000000A1,
     MOVE_ELECTRO_DASH2              = 0x000000A2,
     MOVE_ELECTRO_DASH3              = 0x000000A3,
     MOVE_POWER_SHOCK                = 0x000000A4,
     MOVE_TURBO_CHARGE               = 0x000000A5,
     MOVE_MEGA_SHOCK                 = 0x000000A6,
+
+    // Sushie moves
     MOVE_BELLY_FLOP1                = 0x000000A7,
     MOVE_BELLY_FLOP2                = 0x000000A8,
     MOVE_BELLY_FLOP3                = 0x000000A9,
     MOVE_SQUIRT                     = 0x000000AA,
     MOVE_WATER_BLOCK                = 0x000000AB,
     MOVE_TIDAL_WAVE                 = 0x000000AC,
+
+    // Lakilester moves
     MOVE_SPINY_FLIP1                = 0x000000AD,
     MOVE_SPINY_FLIP2                = 0x000000AE,
     MOVE_SPINY_FLIP3                = 0x000000AF,
     MOVE_SPINY_SURGE                = 0x000000B0,
     MOVE_CLOUD_NINE                 = 0x000000B1,
     MOVE_HURRICANE                  = 0x000000B2,
+
+    // Bow moves
     MOVE_SMACK1                     = 0x000000B3,
     MOVE_SMACK2                     = 0x000000B4,
     MOVE_SMACK3                     = 0x000000B5,
@@ -3003,6 +2990,18 @@ enum FoldStateFlags {
     FOLD_STATE_FLAG_20000             = 0x00020000,
     FOLD_STATE_FLAG_80000             = 0x00080000,
     FOLD_STATE_FLAG_100000            = 0x00100000,
+};
+
+enum BattleSubmenu {
+    BATTLE_SUBMENU_HAMMER       = 1,
+    BATTLE_SUBMENU_JUMP         = 2,
+};
+
+enum BattleSubmenuStatus {
+    BATTLE_SUBMENU_STATUS_ENABLED           = 1,
+    BATTLE_SUBMENU_STATUS_NOT_ENOUGH_FP     = 0,
+    BATTLE_SUBMENU_STATUS_NO_TARGETS        = -1,
+    BATTLE_SUBMENU_STATUS_NO_TARGETS_2      = -2, // TODO: determine difference, probably uses a different error message
 };
 
 #endif
