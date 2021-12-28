@@ -294,11 +294,14 @@ def do_cross_query():
     print(ccount.most_common(100))
 
 
-parser = argparse.ArgumentParser(description="Tools to assist with decomp")
-parser.add_argument("query", help="function or file")
-parser.add_argument("--threshold", help="score threshold between 0 and 1 (higher is more restrictive)", type=float, default=0.9, required=False)
-parser.add_argument("--num-out", help="number of functions to display", type=int, default=100, required=False)
-parser.add_argument("--generate-templates", help="automatically generate templates in `all` and `short` mode", action='store_true', required=False)
+parser = argparse.ArgumentParser(description="Tool to find duplicates for a specific function or to find all duplicates across the codebase.")
+group = parser.add_mutually_exclusive_group()
+group.add_argument("-a", "--all", help="find ALL duplicates and output them into a file", action='store_true', required=False)
+group.add_argument("-c", "--cross", help="do a cross query over the codebase", action='store_true', required=False)
+group.add_argument("-s", "--short", help="find MOST duplicates besides some very small duplicates. Cuts the runtime in half with minimal loss", action='store_true', required=False)
+parser.add_argument("query", help="function or file", nargs='?', default=None)
+parser.add_argument("-t", "--threshold", help="score threshold between 0 and 1 (higher is more restrictive)", type=float, default=0.9, required=False)
+parser.add_argument("-n", "--num-out", help="number of functions to display", type=int, default=100, required=False)
 
 args = parser.parse_args()
 
@@ -315,14 +318,17 @@ if query_dir is not None:
     for f_name in files:
         do_query(f_name[:-2])
 else:
-    if args.query == "cross":
+    if args.cross:
         args.threshold = 0.985
         do_cross_query()
-    elif args.query == "all":
+    elif args.all:
         args.threshold = 0.985
         all_matches(True)
-    elif args.query == "short":
+    elif args.short:
         args.threshold = 0.985
         all_matches(False)
     else:
-        do_query(args.query)
+        if args.query is None:
+            parser.print_help()
+        else:
+            do_query(args.query)

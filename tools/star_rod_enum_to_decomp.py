@@ -6,13 +6,6 @@ import re
 import os
 from glob import glob
 
-parser = argparse.ArgumentParser(description='Convert a StarRod enum into an enum that is in decomp format')
-parser.add_argument("query", help="StarRod enum file")
-#parser.add_argument("-p", "--prefix", help="specify a prefix for the enum elements", type=str, required=False)
-parser.add_argument("-r", "--recursive", help="recursively convert all files to enums", type=bool, required=False)
-
-args = parser.parse_args()
-
 
 def create_enum(file_content, prefix, ordering):
     ret = ""
@@ -34,11 +27,11 @@ def create_enum(file_content, prefix, ordering):
 
     for (key, value) in re.findall(r'(\S+)\s+=\s+(\S+)', file_content):
         if ordering:
-            key = '_'.join(re.sub(r'([A-Z])', r' \1', key).split()).replace("H_P", "HP").replace("F_P", "FP").replace("J_P", "JP").replace("N_P_C", "NPC").replace("__", "_").replace("-", "")
+            key = '_'.join(re.sub(r'([A-Z]{1,2})', r' \1', key).split()).replace("N_P_C", "NPC").replace("__", "_").replace("-", "")
             key = prefix.upper() + '_{:<{width}}'.format(key, width=max_size + 2).upper()
             ret += "    " + key + " = 0x" + '{:>{fill}{width}}'.format(value, fill=0, width=8) + ",\n"
         else:
-            value = '_'.join(re.sub(r'([A-Z])', r' \1', value).split()).replace("H_P", "HP").replace("F_P", "FP").replace("J_P", "JP").replace("N_P_C", "NPC").replace("__", "_").replace("-", "")
+            value = '_'.join(re.sub(r'([A-Z]{1,2})', r' \1', value).split()).replace("N_P_C", "NPC").replace("__", "_").replace("-", "")
             value = prefix.upper() + '_{:<{width}}'.format(value, width=max_size + 2).upper()
             ret += "    " + value + " = 0x" + '{:>{fill}{width}}'.format(key, fill=0, width=8) + ",\n"
 
@@ -111,6 +104,13 @@ def main(args):
     file = open("" + enum_name + ".txt", "w+")
     file.write(ret)
     file.close()
+
+
+parser = argparse.ArgumentParser(description='Convert a StarRod enum into an enum that is in decomp format')
+parser.add_argument("query", help="StarRod enum file")
+parser.add_argument("-r", "--recursive", help="recursively convert all files to enums", type=bool, required=False)
+
+args = parser.parse_args()
 
 
 if __name__ == "__main__":
