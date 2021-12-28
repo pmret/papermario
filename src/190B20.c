@@ -1,12 +1,30 @@
 #include "common.h"
+#include "nu/nusys.h"
 #include "effects.h"
 #include "battle/battle.h"
 #include "hud_element.h"
 #include "message_ids.h"
 #include "model.h"
+#include "sprite.h"
+
+typedef struct PartnerDMAData {
+    /* 0x00 */ s32 dmaStart;
+    /* 0x04 */ s32 dmaEnd;
+    /* 0x08 */ s32 dmaDest;
+    /* 0x0C */ ActorDesc* actorDesc;
+    /* 0x10 */ s32 y;
+} PartnerDMAData; // size = 0x14
 
 s32 D_80280FC0[] = {
-    0x000A005A, 0x00000032, 0x0003000B, 0x00000032, 0x0001002D, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010031, 0x00000032, 0x00010031, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010032, 0x00000032, 0x00010032, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x0003000A, 0x00000032, 0x0003000A, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000050, 0x0003000A, 0x00000014, 0x0003000B, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x000A005A, 0x00000032, 0x0003000B, 0x00000032, 0x0001002D, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032,
+    0x00010031, 0x00000032, 0x00010031, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x00010032, 0x00000032,
+    0x00010032, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000032, 0x0003000A, 0x00000032, 0x0003000A, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000050, 0x0003000A, 0x00000014, 0x0003000B, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 
 s32 bActorNames[ACTOR_TYPE_COUNT] = {
@@ -1000,51 +1018,59 @@ ActorPartDesc bMarioParts[] = {
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 32 },
-        .opacity = 0xFF,
+        .opacity = 255,
         .idleAnimations = bMarioIdleAnims,
         .defenseTable = bMarioDefenseTable,
     },
 };
 
-Vec3s D_80283524[] = {
-    { 0x0005, 0x0000, 0xFFEC },
-    { 0x002D, 0x0000, 0xFFFB },
-    { 0x0055, 0x0000, 0x000A },
-    { 0x007D, 0x0000, 0x0019 },
-    { 0x000A, 0x0032, 0xFFEC },
-    { 0x0032, 0x002D, 0xFFFB },
-    { 0x005A, 0x0032, 0x000A },
-    { 0x0082, 0x0037, 0x0019 },
-    { 0x000F, 0x0055, 0xFFEC },
-    { 0x0037, 0x0050, 0xFFFB },
-    { 0x005F, 0x0055, 0x000A },
-    { 0x0087, 0x005A, 0x0019 },
-    { 0x000F, 0x007D, 0xFFEC },
-    { 0x0037, 0x0078, 0xFFFB },
-    { 0x005F, 0x007D, 0x000A },
-    { 0x0087, 0x0082, 0x0019 },
-    { 0x0069, 0x0000, 0x0000 },
+Vec3s btl_actorHomePositions[] = {
+    { 5, 0, -20 },
+    { 45, 0, -5 },
+    { 85, 0, 10 },
+    { 125, 0, 25 },
+    { 10, 50, -20 },
+    { 50, 45, -5 },
+    { 90, 50, 10 },
+    { 130, 55, 25 },
+    { 15, 85, -20 },
+    { 55, 80, -5 },
+    { 95, 85, 10 },
+    { 135, 90, 25 },
+    { 15, 125, -20 },
+    { 55, 120, -5 },
+    { 95, 125, 10 },
+    { 135, 130, 25 },
+    { 105, 0, 0 },
 };
 
-s32 D_8028358C[] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
-                     &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C,
-                     0x00000000,
-                   };
+// TODO: what is this, and look into warnings that are silenced via casts
+s32* D_8028358C[] = {
+    (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1, (s32*)-1,
+    (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C, (s32*)D_8028358C,
+    (s32*)D_8028358C, (s32*)D_8028358C, 0
+};
 
-s16 D_802835D0[] = { 0x1C, 0x28 };
+s16 D_802835D0[] = { 28, 40 };
 s16 D_802835D4[] = { 0, -2 };
 s16 D_802835D8[] = { 0, -12 };
 
 f32 D_802835DC[] = {
-    0.0f, 4.5, 0.0f, 1.0f, 4.0f, 0.0f, 2.0f, 3.0f, 0.0f, 3.0f, 2.0f, 0.0f, 3.5f, 1.0f, 0.0f, 4.0f, 0.0f, 0.0f, 4.5, 0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 4.5, 0.0f, 0.0f, 4.0f, 0.0f, 0.0f, 3.5f, -1.0f, 0.0f, 3.0f, -2.0f, 0.0f, 2.0f, -3.0f, 0.0f, 1.0f, -4.0f, 0.0f, 0.0f, -4.5f, 0.0f,
+    0.0f, 4.5, 0.0f, 1.0f, 4.0f, 0.0f, 2.0f, 3.0f, 0.0f, 3.0f, 2.0f, 0.0f, 3.5f, 1.0f, 0.0f, 4.0f, 0.0f, 0.0f, 4.5,
+    0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 4.5, 0.0f, 0.0f, 4.0f, 0.0f, 0.0f, 3.5f, -1.0f, 0.0f, 3.0f, -2.0f, 0.0f, 2.0f, -3.0f,
+    0.0f, 1.0f, -4.0f, 0.0f, 0.0f, -4.5f, 0.0f,
 };
 
 f32 D_80283690[] = {
-    1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f,
+    1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f,
+    0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.0f, 1.0f, 1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f, 1.1f, 1.1f, 1.1f, 1.0f, 1.0f,
+    1.0f, 0.8f, 0.8f, 0.8f, 0.9f, 0.9f, 0.9f,
 };
 
+// TODO fix raw ptrs
 s32 D_80283744[] = {
-    0x00000000, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98,
+    0x00000000, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98, 0x80283D98,
+    0x80283D98, 0x80283D98,
 };
 
 s32 bMessages[] = {
@@ -1069,12 +1095,28 @@ s32 bActorMessages[] = {
 
 s32 D_802838F8 = 0;
 
-extern Gfx D_80293970[];
+extern PartnerDMAData D_80283F10[];
 
-extern Bytecode D_80293820[];
+extern EvtSource D_80293820;
+extern f32 D_802938A4;
+extern s16 D_802938A8;
+extern EffectInstance* gDamageCountEffects[24];
+extern s32 gDamageCountTimers[24];
+extern Gfx D_80293970[];
+extern s32 D_802939C0;
+extern EvtSource D_802939C4;
+extern EvtSource D_80293A10;
+extern EvtSource D_80293A34;
+extern EvtSource D_80293A58;
+extern EvtSource D_80293A7C;
+extern EvtSource D_80293AA0;
+extern EvtSource D_80293AC4;
+
+s32 func_80265CE8(u32*, s32);
 
 void create_target_list(Actor* actor, s32 arg1);
 INCLUDE_ASM(s32, "190B20", create_target_list);
+void func_80266DAC(Actor* actor, s32 arg1);
 
 void player_create_target_list(Actor* actor) {
     create_target_list(actor, 0);
@@ -1084,6 +1126,7 @@ void enemy_create_target_list(Actor* actor) {
     create_target_list(actor, 1);
 }
 
+void func_80263064(s32, s32, s32);
 INCLUDE_ASM(s32, "190B20", func_80263064);
 
 void func_80263230(s32 arg0, s32 arg1) {
@@ -1094,9 +1137,75 @@ void func_8026324C(s32 arg0, s32 arg1) {
     func_80263064(arg0, arg1, 1);
 }
 
-INCLUDE_ASM(s32, "190B20", func_80263268);
+void func_80263268(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Actor* partner = battleStatus->partnerActor;
 
-INCLUDE_ASM(s32, "190B20", func_80263300);
+    battleStatus->changePartnerAllowed = 0;
+    if (partner != NULL) {
+        s32 partnersEnabled;
+        s32 i;
+
+        battleStatus->changePartnerAllowed = 1;
+        partnersEnabled = 0;
+
+        for (i = 0; i < ARRAY_COUNT(playerData->partners); i++) {
+            if (playerData->partners[i].enabled) {
+                partnersEnabled++;
+            }
+        }
+
+        if (partnersEnabled >= 2) {
+            if (partner->koStatus == STATUS_DAZE) {
+                battleStatus->changePartnerAllowed = 0;
+            } else if (partner->debuff == STATUS_FROZEN) {
+                battleStatus->changePartnerAllowed = 0;
+            } else if (playerData->currentPartner == PARTNER_GOOMPA) {
+                battleStatus->changePartnerAllowed = -1;
+            }
+        } else {
+            battleStatus->changePartnerAllowed = -1;
+        }
+    } else {
+        battleStatus->changePartnerAllowed = -1;
+    }
+}
+
+void func_80263300(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    PlayerData* playerData = &gPlayerData;
+    s32 cond;
+    s32 i;
+
+    battleStatus->menuStatus[0] = 0;
+    cond = FALSE;
+
+    for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
+        s16 itemID = playerData->invItems[i];
+
+        if (itemID != 0) {
+            StaticItem* staticItem = &gItemTable[itemID];
+
+            if (staticItem->typeFlags & 2) {
+                battleStatus->moveCategory = 2;
+                battleStatus->selectedItemID = playerData->invItems[i];
+                battleStatus->currentTargetListFlags = staticItem->targetFlags;
+                player_create_target_list(player);
+
+                if (player->targetListLength != 0) {
+                    battleStatus->menuStatus[0] += 1;
+                    cond = TRUE;
+                }
+            }
+        }
+    }
+
+    if (!cond) {
+        battleStatus->menuStatus[0] = 0;
+    }
+}
 
 s32 btl_are_all_enemies_defeated(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -1105,15 +1214,13 @@ s32 btl_are_all_enemies_defeated(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-        s32 flagEnemyDefeated = 0x404000;
+        s32 flagEnemyDefeated = ENEMY_FLAGS_400000 | ENEMY_FLAGS_4000;
         enemy = battleStatus->enemyActors[i];
 
         // If currentEnemyFlags signify that the enemy isn't dead yet...
-        if (enemy != NULL) {
-            if (!(enemy->flags & flagEnemyDefeated)) {
-                // Countinue the battle
-                enemiesStillAlive = TRUE;
-            }
+        if (enemy != NULL && !(enemy->flags & flagEnemyDefeated)) {
+            // Countinue the battle
+            enemiesStillAlive = TRUE;
         }
     }
     return !enemiesStillAlive;
@@ -1136,6 +1243,7 @@ s32 btl_check_player_defeated(void) {
     btl_set_state(0x1B);
     return TRUE;
 }
+
 
 void btl_init_menu_boots(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -1166,9 +1274,11 @@ void btl_init_menu_boots(void) {
     do {
         for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
             s16 badge = playerData->equippedBadges[i];
+
             if (badge != ITEM_NONE) {
                 StaticMove* moveTable = gMoveTable;
                 u8 moveID = gItemTable[badge].moveID;
+
                 move = &moveTable[moveID];
                 if (move->battleSubmenu == BATTLE_SUBMENU_JUMP) {
                     battleStatus->submenuMoves[moveCount] = moveID;
@@ -1183,42 +1293,42 @@ void btl_init_menu_boots(void) {
 
     hasAnyBadgeMoves = FALSE;
     for (i = 0; i < battleStatus->submenuMoveCount; i++) {
-            move = &gMoveTable[battleStatus->submenuMoves[i]];
+        move = &gMoveTable[battleStatus->submenuMoves[i]];
 
-            // Calculate FP cost
-            fpCost = move->costFP;
-            if (fpCost != 0) {
-                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
-                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_FANATIC) * 2;
-                if (fpCost < 1) {
-                    fpCost = 1;
-                }
+        // Calculate FP cost
+        fpCost = move->costFP;
+        if (fpCost != 0) {
+            fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
+            fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_FANATIC) * 2;
+            if (fpCost < 1) {
+                fpCost = 1;
             }
+        }
 
-            // See if there are any targets for this move
-            battleStatus->moveCategory = 0;
-            battleStatus->selectedItemID = playerData->bootsLevel;
-            battleStatus->currentTargetListFlags = move->flags; // Controls target filters
-            player_create_target_list(player);
+        // See if there are any targets for this move
+        battleStatus->moveCategory = 0;
+        battleStatus->selectedItemID = playerData->bootsLevel;
+        battleStatus->currentTargetListFlags = move->flags; // Controls target filters
+        player_create_target_list(player);
 
-            // If there are targets, enable the move
-            if (player->targetListLength != 0) {
-                hasAnyBadgeMoves = TRUE;
-                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_ENABLED;
-            }
+        // If there are targets, enable the move
+        if (player->targetListLength != 0) {
+            hasAnyBadgeMoves = TRUE;
+            battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_ENABLED;
+        }
 
-            // If you don't have enough FP, disable the move
-            if (playerData->curFP < fpCost) {
-                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NOT_ENOUGH_FP;
-            }
+        // If you don't have enough FP, disable the move
+        if (playerData->curFP < fpCost) {
+            battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NOT_ENOUGH_FP;
+        }
 
-            // If there are no targets available, disable the move
-            if (player->targetListLength == 0) {
-                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS_2;
-            }
-            if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
-                battleStatus->submenuStatus[moveCount] = BATTLE_SUBMENU_STATUS_NO_TARGETS;
-            }
+        // If there are no targets available, disable the move
+        if (player->targetListLength == 0) {
+            battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS_2;
+        }
+        if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
+            battleStatus->submenuStatus[moveCount] = BATTLE_SUBMENU_STATUS_NO_TARGETS;
+        }
     }
 
     if (!hasAnyBadgeMoves) {
@@ -1230,6 +1340,7 @@ void btl_init_menu_boots(void) {
         battleStatus->menuStatus[1] = 1;
     }
 }
+
 
 void btl_init_menu_hammer(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -1420,7 +1531,7 @@ s32 count_power_plus(s32 arg0) {
     for (i = 0; i < ARRAY_COUNT(gPlayerData.equippedBadges); i++) {
         u8 moveID = gItemTable[gPlayerData.equippedBadges[i]].moveID;
 
-        if (gMoveTable[moveID].battleSubmenu == 7 && moveID == 0x3B) {
+        if (gMoveTable[moveID].battleSubmenu == 7 && moveID == MOVE_POWER_PLUS) {
             if (gBattleStatus.flags1 & BS_FLAGS1_10 || arg0 & 0x80) {
                 pp++;
             }
@@ -1475,14 +1586,94 @@ void reset_actor_turn_info(void) {
 }
 
 void func_80263CC4(s32 arg0) {
-    start_script(D_80293820, 0xA, 0)->varTable[0] = arg0;
+    start_script(&D_80293820, 10, 0)->varTable[0] = arg0;
 }
 
-INCLUDE_ASM(s32, "190B20", set_animation);
+void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
+    if (animationIndex >= 0) {
+        Actor* actor = get_actor(actorID);
+        ActorPart* part;
 
-INCLUDE_ASM(s32, "190B20", func_80263E08);
+        switch (actorID & 0x700) {
+            case ACTOR_PLAYER:
+                part = &actor->partsTable[0];
+                if (part->currentAnimation != animationIndex) {
+                    part->currentAnimation = animationIndex;
+                    spr_update_player_sprite(0, animationIndex, part->animationRate);
+                }
+                break;
+            case ACTOR_PARTNER:
+                if (partIdx != 0) {
+                    part = get_actor_part(actor, partIdx);
 
-INCLUDE_ASM(void, "190B20", set_animation_rate, s32 actorID, s32 partIndex, f32 rate);
+                    if (part == NULL) {
+                        part = &actor->partsTable[0];
+                    }
+                } else {
+                    part = &actor->partsTable[0];
+                }
+
+                if (part->currentAnimation != animationIndex) {
+                    part->currentAnimation = animationIndex;
+                    spr_update_sprite(part->unk_84, animationIndex, part->animationRate);
+                    part->unk_8C = func_802DE5C8(part->unk_84);
+                }
+                break;
+            case ACTOR_ENEMY0:
+                part = get_actor_part(actor, partIdx);
+                if (part->currentAnimation != animationIndex) {
+                    part->currentAnimation = animationIndex;
+                    spr_update_sprite(part->unk_84, animationIndex, part->animationRate);
+                    part->unk_8C = func_802DE5C8(part->unk_84);
+                }
+                break;
+        }
+    }
+}
+
+void func_80263E08(Actor* actor, ActorPart* part, s32 anim) {
+    if (anim >= 0) {
+        switch (actor->actorID & 0x700) {
+            case ACTOR_PLAYER:
+                if (part->currentAnimation != anim) {
+                    part->currentAnimation = anim;
+                    spr_update_player_sprite(0, anim, part->animationRate);
+                }
+                break;
+            case ACTOR_PARTNER:
+            case ACTOR_ENEMY0:
+                if (part->currentAnimation != anim) {
+                    part->currentAnimation = anim;
+                    spr_update_sprite(part->unk_84, anim, part->animationRate);
+                    part->unk_8C = func_802DE5C8(part->unk_84);
+                }
+                break;
+        }
+    }
+}
+
+void set_animation_rate(s32 actorID, s32 partIndex, f32 rate) {
+    Actor* actor = get_actor(actorID);
+    ActorPart* part;
+
+    switch (actorID & 0x700) {
+        case ACTOR_PARTNER:
+            if (partIndex != 0) {
+                part = get_actor_part(actor, partIndex);
+                if (part != NULL) {
+                    part->animationRate = rate;
+                    return;
+                }
+            }
+            actor->partsTable[0].animationRate = rate;
+            break;
+        case ACTOR_PLAYER:
+        case ACTOR_ENEMY0:
+            part = get_actor_part(actor, partIndex);
+            part->animationRate = rate;
+            break;
+    }
+}
 
 void set_actor_yaw(s32 actorID, s32 yaw) {
     get_actor(actorID)->yaw = yaw;
@@ -1492,9 +1683,45 @@ void set_part_yaw(s32 actorID, s32 partIndex, s32 value) {
     get_actor_part(get_actor(actorID), partIndex)->yaw = value;
 }
 
-INCLUDE_ASM(s32, "190B20", func_80263FE8);
+void func_80263FE8(s32 actorID, s32 partIndex, s32 flags) {
+    Actor* actor = get_actor(actorID);
+    ActorPart* part;
 
-INCLUDE_ASM(s32, "190B20", func_80264084);
+    switch (actorID & 0x700) {
+        case ACTOR_PLAYER:
+            actor->flags |= flags;
+            break;
+        case ACTOR_PARTNER:
+        case ACTOR_ENEMY0:
+            if (partIndex == 0) {
+                actor->flags |= flags;
+            } else {
+                part = get_actor_part(actor, partIndex);
+                part->flags |= flags;
+            }
+            break;
+    }
+}
+
+void func_80264084(s32 actorID, s32 partIndex, s32 flags) {
+    Actor* actor = get_actor(actorID);
+    ActorPart* part;
+
+    switch (actorID & 0x700) {
+        case ACTOR_PLAYER:
+            actor->flags &= ~flags;
+            break;
+        case ACTOR_PARTNER:
+        case ACTOR_ENEMY0:
+            if (partIndex == 0) {
+                actor->flags &= ~flags;
+            } else {
+                part = get_actor_part(actor, partIndex);
+                part->flags &= ~flags;
+            }
+            break;
+    }
+}
 
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg) {
     f32 angleRad = angleDeg * TAU / 360.0f;
@@ -1523,7 +1750,28 @@ void add_xz_vec3f_copy2(Vec3f* vector, f32 speed, f32 angleDeg) {
     vector->z += -speed * cosAngleRad;
 }
 
+// matching after data migration
+#ifdef NON_MATCHING
+void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg) {
+    f32 temp_f0;
+    f32 temp_f20;
+    f32 temp_f20_2;
+
+    if (var0 == 2) {
+        fx_land(0, xPos, yPos + 0.0f, zPos, D_802938A4);
+    } else if (var0 == 1) {
+        D_802938A8 = 4;
+    } else if (D_802938A8++ >= 4) {
+        D_802938A8 = 0;
+        temp_f20 = (clamp_angle(-angleDeg) * TAU) / 360.0f;
+        temp_f20_2 = sin_rad(temp_f20);
+        temp_f0 = cos_rad(temp_f20);
+        fx_walk(0, xPos + (temp_f20_2 * 24.0f * 0.2f), yPos + 1.5f, zPos + (temp_f0 * 24.0f * 0.2f), temp_f20_2, temp_f0);
+    }
+}
+#else
 INCLUDE_ASM(void, "190B20", play_movement_dust_effects, s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
+#endif
 
 ActorPart* get_actor_part(Actor* actor, s32 partIndex) {
     ActorPart* part = &actor->partsTable[0];
@@ -1542,15 +1790,559 @@ ActorPart* get_actor_part(Actor* actor, s32 partIndex) {
     return NULL;
 }
 
-INCLUDE_ASM(s32, "190B20", load_player_actor);
+void load_player_actor(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player;
+    ActorPart* part;
+    DecorationTable* decorationTable;
+    ActorPartMovement* partMovement;
+    s32 i;
+    s32 j;
 
-INCLUDE_ASM(s32, "190B20", load_partner_actor);
+    player = battleStatus->playerActor = heap_malloc(sizeof(*player));
+
+    ASSERT(player != NULL);
+
+    player->unk_134 = battleStatus->unk_93++;
+    player->footStepCounter = 0;
+    player->flags = 0;
+    player->staticActorData = &bPlayerActorDesc;
+    player->actorType = bPlayerActorDesc.type;
+
+    if ((gBattleStatus.flags2 & BS_FLAGS2_40) || (gGameStatusPtr->demoFlags & 2)) {
+        player->homePos.x = player->currentPos.x = -130.0f;
+        player->homePos.y = player->currentPos.y = 0.0f;
+        player->homePos.z = player->currentPos.z = -10.0f;
+    } else {
+        player->homePos.x = player->currentPos.x = -95.0f;
+        player->homePos.y = player->currentPos.y = 0.0f;
+        player->homePos.z = player->currentPos.z = 0.0f;
+    }
+
+    player->headOffset.x = 0;
+    player->headOffset.y = 0;
+    player->headOffset.z = 0;
+    player->rotation.x = 0.0f;
+    player->rotation.y = 0.0f;
+    player->rotation.z = 0.0f;
+    player->rotationPivotOffset.x = 0;
+    player->rotationPivotOffset.y = 0;
+    player->rotationPivotOffset.z = 0;
+    player->unk_19A = 0;
+    player->yaw = 0.0f;
+    player->renderMode = RENDER_MODE_ALPHATEST;
+    player->scale.x = 1.0f;
+    player->scale.y = 1.0f;
+    player->scale.z = 1.0f;
+    player->scaleModifier.x = 1.0f;
+    player->scaleModifier.y = 1.0f;
+    player->scaleModifier.z = 1.0f;
+    player->size.x = player->staticActorData->size.x;
+    player->size.y = player->staticActorData->size.y;
+    player->actorID = 0;
+    player->healthBarPosition.x = player->currentPos.x;
+    player->healthBarPosition.y = player->currentPos.y;
+    player->healthBarPosition.z = player->currentPos.z;
+    player->scalingFactor = 1.0f;
+    player->unk_200 = NULL;
+    player->unk_204 = 0;
+    player->unk_205 = 0;
+    player->unk_194 = 0;
+    player->unk_195 = 0;
+    player->unk_196 = 0;
+    player->unk_197 = 0;
+    player->idleScriptSource = NULL;
+    player->takeTurnScriptSource = NULL;
+    player->onHitScriptSource = NULL;
+    player->onTurnChanceScriptSource = NULL;
+    player->idleScript = NULL;
+    player->takeTurnScript = NULL;
+    player->onHitScript = NULL;
+    player->onTurnChangeScript = NULL;
+    player->turnPriority = 0;
+    player->statusTable = bPlayerStatusTable;
+    player->debuff = 0;
+    player->debuffDuration = 0;
+    player->staticStatus = 0;
+    player->staticDuration = 0;
+    player->stoneStatus = 0;
+    player->stoneDuration = 0;
+    player->koStatus = 0;
+    player->koDuration = 0;
+    player->transStatus = 0;
+    player->transDuration = 0;
+    player->isGlowing = 0;
+    player->unk_21E = 0;
+    player->unk_21D = 0;
+    player->attackBoost = 0;
+    player->defenseBoost = 0;
+    player->chillOutAmount = 0;
+    player->chillOutTurns = 0;
+    player->status = 0;
+    player->actorTypeData1[0] = bActorSoundTable[player->actorType].walk[0];
+    player->actorTypeData1[1] = bActorSoundTable[player->actorType].walk[1];
+    player->actorTypeData1[2] = bActorSoundTable[player->actorType].fly[0];
+    player->actorTypeData1[3] = bActorSoundTable[player->actorType].fly[1];
+    player->actorTypeData1[4] = bActorSoundTable[player->actorType].jump;
+    player->actorTypeData1[5] = bActorSoundTable[player->actorType].hurt;
+    player->actorTypeData1b[0] = bActorSoundTable[player->actorType].delay[0];
+    player->actorTypeData1b[1] = bActorSoundTable[player->actorType].delay[1];
+
+    for (i = 0; i < ARRAY_COUNT(player->unk_438); i++) {
+        player->unk_438[i] = 0;
+    }
+
+    part = heap_malloc(sizeof(*part));
+    player->partsTable = part;
+
+    ASSERT(part != NULL)
+
+    player->numParts = 1;
+    part->staticData = bMarioParts;
+    part->partOffset.x = 0;
+    part->partOffset.y = 0;
+    part->partOffset.z = 0;
+    part->partOffset.x = 12;
+    part->partOffset.y = 32;
+    part->partOffset.z = 5;
+    part->decorationTable = NULL;
+    part->flags = 0;
+    part->targetFlags = 0;
+    part->partOffsetFloat.x = 0.0f;
+    part->partOffsetFloat.y = 0.0f;
+    part->partOffsetFloat.z = 0.0f;
+    part->rotationPivotOffset.x = 0;
+    part->rotationPivotOffset.y = 0;
+    part->rotationPivotOffset.z = 0;
+    part->visualOffset.x = 0;
+    part->visualOffset.y = 0;
+    part->visualOffset.z = 0;
+    part->absolutePosition.x = 0.0f;
+    part->absolutePosition.y = 0.0f;
+    part->absolutePosition.z = 0.0f;
+    part->defenseTable = bMarioDefenseTable;
+
+    if (gBattleStatus.flags2 & BS_FLAGS2_40) {
+        part->idleAnimations = bPeachIdleAnims;
+    } else {
+        part->idleAnimations = bMarioIdleAnims;
+    }
+
+    part->eventFlags = 0;
+    part->partFlags3 = 0;
+    part->opacity = 255;
+    part->size.y = player->size.y;
+    part->size.x = player->size.x;
+    part->yaw = 0.0f;
+    part->targetOffset.x = 0;
+    part->targetOffset.y = 0;
+    part->unk_70 = 0;
+    part->rotation.x = 0.0f;
+    part->rotation.y = 0.0f;
+    part->rotation.z = 0.0f;
+    part->scale.x = 1.0f;
+    part->scale.y = 1.0f;
+    part->scale.z = 1.0f;
+    part->verticalStretch = 1;
+    part->unkOffset[0] = 0;
+    part->unkOffset[1] = 0;
+    part->animationRate = 1.0f;
+    part->currentAnimation = func_80265CE8(part->idleAnimations, 1U);
+    part->nextPart = NULL;
+    part->partTypeData[0] = bActorSoundTable[player->actorType].walk[0];
+    part->partTypeData[1] = bActorSoundTable[player->actorType].walk[1];
+    part->partTypeData[2] = bActorSoundTable[player->actorType].fly[0];
+    part->partTypeData[3] = bActorSoundTable[player->actorType].fly[1];
+    part->partTypeData[4] = bActorSoundTable[player->actorType].jump;
+    part->partTypeData[5] = bActorSoundTable[player->actorType].hurt;
+    part->actorTypeData2b[0] = bActorSoundTable[player->actorType].delay[0];
+    part->actorTypeData2b[1] = bActorSoundTable[player->actorType].delay[1];
+
+    if (part->idleAnimations != NULL) {
+        s32 j;
+
+        part->decorationTable = heap_malloc(sizeof(*decorationTable));
+        decorationTable = part->decorationTable;
+
+        ASSERT(decorationTable != NULL);
+
+        decorationTable->unk_6C0 = 0;
+        decorationTable->unk_750 = 0;
+        decorationTable->unk_764 = 0;
+        decorationTable->unk_768 = 0;
+        decorationTable->unk_7D8 = 0;
+        decorationTable->unk_7D9 = 0;
+
+        for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
+            decorationTable->posX[j] = player->currentPos.x;
+            decorationTable->posY[j] = player->currentPos.y;
+            decorationTable->posZ[j] = player->currentPos.z;
+        }
+
+        decorationTable->unk_7DA = 3;
+        decorationTable->unk_7DB = 0;
+        decorationTable->effectType = 0;
+
+        for (j = 0; j < ARRAY_COUNT(decorationTable->unk_8B0); j++) {
+            decorationTable->unk_8B0[j] = NULL;
+            decorationTable->decorationType[j] = 0;
+        }
+    }
+
+    partMovement = heap_malloc(sizeof(*partMovement));
+    part->movement = partMovement;
+
+    ASSERT(partMovement != NULL);
+
+    player->shadow = create_shadow_type(0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+    player->shadowScale = player->size.x / 24.0;
+    player->hudElementDataIndex = create_status_icon_set();
+    player->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
+    player->unk_228 = NULL;
+
+    if (is_ability_active(ABILITY_ZAP_TAP)) {
+        player->staticStatus = STATUS_STATIC;
+        player->staticDuration = 127;
+    }
+}
+
+void load_partner_actor(void) {
+    PlayerData* playerData = &gPlayerData;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partnerActor;
+    ActorDesc* actorDesc;
+    Evt* takeTurnScript;
+    s32 partCount;
+    s32 currentPartner;
+    PartnerDMAData* partnerData;
+    f32 x;
+    f32 y;
+    f32 z;
+    ActorPart* part;
+    s32 i;
+    s32 i2;
+
+    currentPartner = playerData->currentPartner;
+    battleStatus->partnerActor = NULL;
+
+    if (currentPartner != PARTNER_NONE) {
+        partnerData = &D_80283F10[currentPartner];
+        actorDesc = partnerData->actorDesc;
+
+        ASSERT(actorDesc != NULL);
+
+        nuPiReadRom(partnerData->dmaStart, partnerData->dmaDest, partnerData->dmaEnd - partnerData->dmaStart);
+        if ((gBattleStatus.flags2 & BS_FLAGS2_40) || (gGameStatusPtr->demoFlags & 2)) {
+            x = -95.0f;
+            y = partnerData->y;
+            z = 0.0f;
+            gBattleStatus.flags1 |= BS_FLAGS1_100000;
+        } else {
+            x = -130.0f;
+            y = partnerData->y;
+            z = -10.0f;
+        }
+        partCount = actorDesc->partCount;
+        battleStatus->partnerActor = heap_malloc(sizeof(*partnerActor));
+        partnerActor = battleStatus->partnerActor;
+
+        ASSERT(partnerActor != NULL);
+
+        actorDesc->level = playerData->partners[playerData->currentPartner].level;
+        partnerActor->unk_134 = battleStatus->unk_93++;
+        partnerActor->footStepCounter = 0;
+        partnerActor->staticActorData = actorDesc;
+        partnerActor->actorType = actorDesc->type;
+        partnerActor->flags = actorDesc->flags;
+        partnerActor->homePos.x = partnerActor->currentPos.x = x;
+        partnerActor->homePos.y = partnerActor->currentPos.y = y;
+        partnerActor->homePos.z = partnerActor->currentPos.z = z;
+        partnerActor->headOffset.x = 0;
+        partnerActor->headOffset.y = 0;
+        partnerActor->headOffset.z = 0;
+        partnerActor->currentHP = actorDesc->maxHP;
+        partnerActor->numParts = partCount;
+        partnerActor->idleScriptSource = NULL;
+        partnerActor->takeTurnScriptSource = actorDesc->script;
+        partnerActor->onHitScriptSource = NULL;
+        partnerActor->onTurnChanceScriptSource = NULL;
+        partnerActor->idleScript = NULL;
+        partnerActor->takeTurnScript = NULL;
+        partnerActor->onHitScript = NULL;
+        partnerActor->onTurnChangeScript = NULL;
+        partnerActor->turnPriority = 0;
+        partnerActor->enemyIndex = 0;
+        partnerActor->yaw = 0.0f;
+        partnerActor->rotation.x = 0.0f;
+        partnerActor->rotation.y = 0.0f;
+        partnerActor->rotation.z = 0.0f;
+        partnerActor->rotationPivotOffset.x = 0;
+        partnerActor->rotationPivotOffset.y = 0;
+        partnerActor->rotationPivotOffset.z = 0;
+        partnerActor->scale.x = 1.0f;
+        partnerActor->scale.y = 1.0f;
+        partnerActor->scale.z = 1.0f;
+        partnerActor->scaleModifier.x = 1.0f;
+        partnerActor->scaleModifier.y = 1.0f;
+        partnerActor->scaleModifier.z = 1.0f;
+        partnerActor->unk_19A = 0;
+        partnerActor->size.x = actorDesc->size.x;
+        partnerActor->size.y = actorDesc->size.y;
+        partnerActor->healthBarPosition.x = partnerActor->homePos.x;
+        partnerActor->healthBarPosition.y = partnerActor->homePos.y;
+        partnerActor->healthBarPosition.z = partnerActor->homePos.z;
+        partnerActor->scalingFactor = 1.0f;
+        partnerActor->unk_200 = NULL;
+        partnerActor->unk_204 = 0;
+        partnerActor->unk_205 = 0;
+        partnerActor->unk_194 = 0;
+        partnerActor->unk_195 = 0;
+        partnerActor->unk_196 = 0;
+        partnerActor->unk_197 = 0;
+        partnerActor->renderMode = RENDER_MODE_ALPHATEST;
+        partnerActor->actorID = ACTOR_PARTNER;
+        partnerActor->statusTable = actorDesc->statusTable;
+        partnerActor->debuff = 0;
+        partnerActor->debuffDuration = 0;
+        partnerActor->staticStatus = 0;
+        partnerActor->staticDuration = 0;
+        partnerActor->stoneStatus = 0;
+        partnerActor->stoneDuration = 0;
+        partnerActor->koStatus = 0;
+        partnerActor->koDuration = 0;
+        partnerActor->transStatus = 0;
+        partnerActor->transDuration = 0;
+        partnerActor->isGlowing = 0;
+        partnerActor->unk_21E = 0;
+        partnerActor->unk_21D = 0;
+        partnerActor->attackBoost = 0;
+        partnerActor->defenseBoost = 0;
+        partnerActor->chillOutAmount = 0;
+        partnerActor->chillOutTurns = 0;
+        partnerActor->status = 0;
+        partnerActor->actorTypeData1[0] = bActorSoundTable[partnerActor->actorType].walk[0];
+        partnerActor->actorTypeData1[1] = bActorSoundTable[partnerActor->actorType].walk[1];
+        partnerActor->actorTypeData1[2] = bActorSoundTable[partnerActor->actorType].fly[0];
+        partnerActor->actorTypeData1[3] = bActorSoundTable[partnerActor->actorType].fly[1];
+        partnerActor->actorTypeData1[4] = bActorSoundTable[partnerActor->actorType].jump;
+        partnerActor->actorTypeData1[5] = bActorSoundTable[partnerActor->actorType].hurt;
+        partnerActor->actorTypeData1b[0] = bActorSoundTable[partnerActor->actorType].delay[0];
+        partnerActor->actorTypeData1b[1] = bActorSoundTable[partnerActor->actorType].delay[1];
+
+        for (i2 = 0; i2 < ARRAY_COUNT(partnerActor->unk_438); i2++) {
+            partnerActor->unk_438[i2] = 0;
+        }
+
+        part = heap_malloc(sizeof(*part));
+        partnerActor->partsTable = part;
+
+        ASSERT(part != NULL);
+
+        for (i = 0; i < partCount; i++) {
+            ActorPartDesc* actorPartDesc = &actorDesc->partsData[i];
+            part->decorationTable = NULL;
+            part->staticData = actorPartDesc;
+
+            part->flags = actorPartDesc->flags | ACTOR_PART_FLAG_4;
+            part->targetFlags = 0;
+
+            part->partOffsetFloat.x = part->partOffset.x = actorPartDesc->posOffset.x;
+            part->partOffsetFloat.y = part->partOffset.y = actorPartDesc->posOffset.y;
+            part->partOffsetFloat.z = part->partOffset.z = actorPartDesc->posOffset.z;
+
+            part->visualOffset.x = 0;
+            part->visualOffset.y = 0;
+            part->visualOffset.z = 0;
+            part->absolutePosition.x = 0.0f;
+            part->absolutePosition.y = 0.0f;
+            part->absolutePosition.z = 0.0f;
+            part->defenseTable = actorPartDesc->defenseTable;
+            part->idleAnimations = actorPartDesc->idleAnimations;
+            part->eventFlags = actorPartDesc->eventFlags;
+            part->partFlags3 = actorPartDesc->elementImmunityFlags;
+            part->opacity = actorPartDesc->opacity;
+            part->size.y = partnerActor->size.y;
+            part->size.x = partnerActor->size.x;
+            part->yaw = 0.0f;
+            part->targetOffset.x = actorPartDesc->targetOffset.x;
+            part->targetOffset.y = actorPartDesc->targetOffset.y;
+            part->unk_70 = 0;
+            part->rotationPivotOffset.x = 0;
+            part->rotationPivotOffset.y = 0;
+            part->rotationPivotOffset.z = 0;
+            part->rotation.x = 0.0f;
+            part->rotation.y = 0.0f;
+            part->rotation.z = 0.0f;
+            part->scale.x = 1.0f;
+            part->scale.y = 1.0f;
+            part->scale.z = 1.0f;
+            part->verticalStretch = 1;
+            part->unkOffset[0] = 0;
+            part->unkOffset[1] = 0;
+            part->partTypeData[0] = bActorSoundTable[partnerActor->actorType].walk[0];
+            part->partTypeData[1] = bActorSoundTable[partnerActor->actorType].walk[1];
+            part->partTypeData[2] = bActorSoundTable[partnerActor->actorType].fly[0];
+            part->partTypeData[3] = bActorSoundTable[partnerActor->actorType].fly[1];
+            part->partTypeData[4] = bActorSoundTable[partnerActor->actorType].jump;
+            part->partTypeData[5] = bActorSoundTable[partnerActor->actorType].hurt;
+            part->actorTypeData2b[0] = bActorSoundTable[partnerActor->actorType].delay[0];
+            part->actorTypeData2b[1] = bActorSoundTable[partnerActor->actorType].delay[1];
+
+            if (part->idleAnimations != NULL) {
+                DecorationTable* decorationTable;
+                s32 j;
+
+                part->decorationTable  = heap_malloc(sizeof(*decorationTable));
+                decorationTable = part->decorationTable;
+
+                ASSERT(decorationTable != NULL);
+
+                decorationTable->unk_6C0 = 0;
+                decorationTable->unk_750 = 0;
+                decorationTable->unk_764 = 0;
+                decorationTable->unk_768 = 0;
+                decorationTable->unk_7D8 = 0;
+                decorationTable->unk_7D9 = 0;
+
+                for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
+                    decorationTable->posX[j] = partnerActor->currentPos.x;
+                    decorationTable->posY[j] = partnerActor->currentPos.y;
+                    decorationTable->posZ[j] = partnerActor->currentPos.z;
+                }
+
+                decorationTable->unk_7DA = 3;
+                decorationTable->unk_7DB = 0;
+                decorationTable->effectType = 0;
+
+                for (j = 0; j < ARRAY_COUNT(decorationTable->unk_8B0); j++) {
+                    decorationTable->unk_8B0[j] = NULL;
+                    decorationTable->decorationType[j] = 0;
+                }
+            }
+
+            if (part->flags >= 0) {
+                part->movement = heap_malloc(sizeof(*part->movement));
+                ASSERT(part->movement != NULL);
+            }
+
+            part->animationRate = 1.0f;
+            part->currentAnimation = 0;
+            part->unk_84 = -1;
+
+            if (part->idleAnimations != NULL) {
+                part->currentAnimation = func_80265CE8(part->idleAnimations, 1);
+                part->unk_84 = spr_load_npc_sprite(part->currentAnimation | 0x80000000, NULL);
+            }
+
+            if (i + 1 >= partCount) {
+                part->nextPart = NULL;
+                continue;
+            }
+
+            part->nextPart = heap_malloc(sizeof(*part->nextPart));
+            part = part->nextPart;
+            if (part == NULL) {
+                PANIC();
+            }
+
+            part->nextPart = NULL;
+        }
+
+        partnerActor->shadow = create_shadow_type(0, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z);
+        partnerActor->shadowScale = partnerActor->size.x / 24.0;
+        partnerActor->hudElementDataIndex = create_status_icon_set();
+        partnerActor->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
+        partnerActor->unk_228 = NULL;
+
+        takeTurnScript = start_script(partnerActor->takeTurnScriptSource, 10, 0);
+        partnerActor->takeTurnID = takeTurnScript->id;
+        takeTurnScript->owner1.actorID = ACTOR_PARTNER;
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", create_actor);
 
-INCLUDE_ASM(s32, "190B20", func_80265CE8);
+s32 func_80265CE8(u32* anim, s32 arg1) {
+    s32 ret;
 
-INCLUDE_ASM(s32, "190B20", func_80265D44);
+    if (anim == 0) {
+        return 0;
+    }
+
+    ret = 0;
+    while (*anim != NULL) {
+        if (*anim == 1) {
+            ret = anim[1];
+        }
+        if (*anim == arg1) {
+            ret = anim[1];
+            break;
+        }
+        anim += 2;
+    }
+    return ret;
+}
+
+s32 func_80265D44(s32 animID) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Actor* player = battleStatus->playerActor;
+    u32* anim = &player->partsTable->idleAnimations[0];
+    s32 ret;
+
+    if (anim == NULL) {
+        return 0;
+    }
+    ret = 0;
+
+    // TODO use animation id enum once it exists
+    if (!(battleStatus->flags2 & BS_FLAGS2_40)) {
+        if (playerData->curHP < 6) {
+            if (animID == 1) {
+                animID = 26;
+            }
+
+            if (animID == 18) {
+                animID = 22;
+            }
+
+            if (animID == 28) {
+                animID = 29;
+            }
+        }
+
+        if (player->debuff == STATUS_POISON) {
+            if (animID == 1) {
+                animID = 26;
+            }
+
+            if (animID == 18) {
+                animID = 22;
+            }
+
+            if (animID == 28) {
+                animID = 29;
+            }
+        }
+
+        if (player->debuff == STATUS_DIZZY && animID == 18) {
+            animID = 24;
+        }
+    }
+
+    while (*anim != NULL) {
+        if (*anim == 1) {
+            ret = anim[1];
+        }
+        if (*anim == animID) {
+            ret = anim[1];
+            break;
+        }
+        anim += 2;
+    }
+
+    return ret;
+}
 
 s32 lookup_defense(DictionaryEntry* defenseTable, s32 elementKey) {
     s32 normalDefense = 0;
@@ -1641,7 +2433,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                             if (target->actorID != ACTOR_PARTNER) {
                                 effect = target->unk_228;
                                 if (effect != NULL) {
-                                    effect->flags |= 0x10;
+                                    effect->flags |= EFFECT_INSTANCE_FLAGS_10;
                                 }
                                 target->unk_228 = playFX_81(0, target->currentPos.x, target->currentPos.y,
                                                             target->currentPos.z, 1.0f, 0);
@@ -1746,7 +2538,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
 
 s32 get_defense(Actor* actor, DictionaryEntry* defenseTable, s32 elementFlags) {
     s32 defense;
-    s32 minDefense = 0xFF;
+    s32 minDefense = 255;
 
     if (defenseTable != NULL) {
         if (elementFlags & 2) {
@@ -1819,9 +2611,9 @@ s32 get_defense(Actor* actor, DictionaryEntry* defenseTable, s32 elementFlags) {
     }
 
     // If no element flags were set, fall back to normal defense.
-    if (minDefense == 0xFF) {
+    if (minDefense == 255) {
         defense = lookup_defense(defenseTable, ELEMENT_NORMAL);
-        if (defense < 0xFF) {
+        if (defense < 255) {
             minDefense = defense;
         }
     }
@@ -1842,7 +2634,20 @@ INCLUDE_ASM(s32, "190B20", func_802664DC);
 
 INCLUDE_ASM(void, "190B20", show_damage_popup, f32 x, f32 y, f32 z, s32 damageAmount, s32 arg4);
 
-INCLUDE_ASM(s32, "190B20", func_80266684);
+void func_80266684(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gDamageCountEffects); i++) {
+        if (gDamageCountEffects[i] != NULL) {
+            gDamageCountTimers[i]--;
+            if (gDamageCountTimers[i] == 0) {
+                // TODO use actual effect instance struct when we know what it is
+                ((s32**)gDamageCountEffects[i])[3][12] = 5;
+                gDamageCountEffects[i] = NULL;
+            }
+        }
+    };
+}
 
 INCLUDE_ASM(void, "190B20", func_802666E4, Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16 arg4);
 
@@ -1856,17 +2661,86 @@ INCLUDE_ASM(s32, "190B20", func_80266978);
 
 void func_80266ADC(Actor* target) {
     target->unk_206 = -1;
-    target->flags |= 0x80000;
+    target->flags |= ACTOR_FLAG_80000;
 }
 
 void func_80266AF8(Actor* target) {
     target->unk_206 = 0;
-    target->flags &= ~0x80000;
+    target->flags &= ~ACTOR_FLAG_80000;
 }
 
-INCLUDE_ASM(s32, "190B20", func_80266B14);
+void func_80266B14(void) {
+    s32 i;
 
+    for (i = 0; i < ARRAY_COUNT(gBattleStatus.enemyActors); i++) {
+        Actor* enemy = gBattleStatus.enemyActors[i];
+
+        if (enemy != NULL) {
+            if (enemy->unk_206 > 0) {
+                enemy->unk_206--;
+                if (enemy->unk_206 == 0) {
+                    enemy->flags &= ~ENEMY_FLAGS_80000;
+                }
+            }
+        }
+    }
+}
+
+// dumb label
+#ifdef NON_MATCHING
+s32 try_inflict_status(Actor* actor, s32 statusTypeKey, s32 statusKey) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 phi_s0;
+    s32 duration;
+
+    if (battleStatus->statusChance == 0xFE) {
+        duration = battleStatus->statusDuration;
+        return inflict_status_set_duration(actor, statusTypeKey, statusKey,
+                                           duration + lookup_status_duration_mod(actor->statusTable, statusKey));
+    }
+
+    duration = 0;
+
+    if (actor->statusTable != NULL) {
+        if (!(battleStatus->currentAttackStatus & 0x40000000)) {
+            phi_s0 = lookup_status_chance(actor->statusTable, statusTypeKey);
+        } else {
+            if (lookup_status_chance(actor->statusTable, statusTypeKey) != 0) {
+                phi_s0 = 100;
+            } else {
+                goto meow;
+            }
+        }
+
+        if (phi_s0 > 0) {
+            phi_s0 = (phi_s0 * battleStatus->statusChance) / 100;
+            if (phi_s0 > 0 && phi_s0 >= rand_int(100)) {
+                duration = lookup_status_duration_mod(actor->statusTable, statusKey) + 3;
+            }
+        }
+    } else {
+        duration = 3;
+    }
+
+// TODO remove this label (required to match)
+meow:
+    if (duration > 0) {
+        if (battleStatus->currentAttackStatus < 0) {
+            duration = battleStatus->statusDuration;
+            duration += lookup_status_duration_mod(actor->statusTable, statusKey);
+            inflict_status(actor, statusTypeKey, duration);
+        } else {
+            inflict_status(actor, statusTypeKey, duration);
+
+        }
+    } else {
+        duration = 0;
+    }
+    return duration;
+}
+#else
 INCLUDE_ASM(s32, "190B20", try_inflict_status);
+#endif
 
 s32 inflict_status_set_duration(Actor* actor, s32 statusTypeKey, s32 statusDurationKey, s32 duration) {
     s32 var0 = duration;
@@ -1897,7 +2771,19 @@ void func_80266D6C(ActorPart* part, s32 arg1) {
     }
 }
 
-INCLUDE_ASM(s32, "190B20", func_80266DAC);
+void func_80266DAC(Actor* actor, s32 arg1) {
+    ActorPart* partIt = &actor->partsTable[0];
+
+    while (partIt != NULL) {
+        if (!(partIt->flags & ACTOR_PART_FLAG_INVISIBLE) &&
+           (partIt->idleAnimations != NULL) &&
+           !(partIt->flags & ACTOR_PART_FLAG_2))
+        {
+            func_80266D6C(partIt, arg1);
+        }
+        partIt = partIt->nextPart;
+    }
+}
 
 void func_80266E14(ActorPart* part) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
@@ -1905,7 +2791,28 @@ void func_80266E14(ActorPart* part) {
     }
 }
 
-INCLUDE_ASM(s32, "190B20", func_80266E40);
+// TODO: improve match
+void func_80266E40(Actor* actor) {
+    ActorPart* partIt = actor->partsTable;
+    s8 e = 0xE;
+    s8 f = 0xF;
+
+    while (partIt != NULL) {
+        DecorationTable* decorationTable = partIt->decorationTable;
+
+        do {
+            if (!(partIt->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
+                (partIt->idleAnimations != NULL) &&
+                !(partIt->flags & ACTOR_PART_FLAG_2))
+            {
+                if (decorationTable->unk_6C0 != e && decorationTable->unk_6C0 != f) {
+                    decorationTable->unk_6C0 = 0;
+                }
+            }
+        } while (0); // required to match
+        partIt = partIt->nextPart;
+    }
+}
 
 void func_80266EA8(ActorPart* part, s32 arg1) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
@@ -1919,7 +2826,19 @@ void func_80266EA8(ActorPart* part, s32 arg1) {
     }
 }
 
-INCLUDE_ASM(s32, "190B20", func_80266EE8);
+void func_80266EE8(Actor* actor, s32 arg1) {
+    ActorPart* partIt = &actor->partsTable[0];
+
+    while (partIt != NULL) {
+        if (!(partIt->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
+            (partIt->idleAnimations != NULL) &&
+            !(partIt->flags & ACTOR_PART_FLAG_2))
+        {
+            func_80266EA8(partIt, arg1);
+        }
+        partIt = partIt->nextPart;
+    }
+}
 
 void func_80266F60(ActorPart* part) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
@@ -1940,7 +2859,7 @@ void func_80266F8C(Actor* actor) {
             {
                 decorationTable->unk_750 = 0;
             }
-        } while (0); // todo improve match
+        } while (0); // required to match
         actorPart = actorPart->nextPart;
     }
 }
@@ -1984,7 +2903,10 @@ void func_802670C8(Actor* actor) {
         DecorationTable* decorationTable = partIt->decorationTable;
 
         do {
-            if (!(partIt->flags & 0x100001) && (partIt->idleAnimations != NULL) && !(partIt->flags & 2)) {
+            if (!(partIt->flags & (ACTOR_PART_FLAG_100000 | ACTOR_PART_FLAG_INVISIBLE)) &&
+                (partIt->idleAnimations != NULL) &&
+                !(partIt->flags & ACTOR_PART_FLAG_2))
+            {
                 decorationTable->unk_764 = 0;
             }
         } while (0); // TODO make match better
@@ -2020,6 +2942,7 @@ void remove_part_decoration(ActorPart* part, s32 decorationIndex) {
 
 void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     ActorPart* part;
+
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
         if (!(part->flags & (ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_100000)) && part->idleAnimations &&
             !(part->flags & ACTOR_PART_FLAG_2))
@@ -2033,15 +2956,17 @@ s32 player_team_is_ability_active(Actor* actor, s32 ability) {
     s32 actorGenus = actor->actorID & 0x700;
     s32 hasAbility = FALSE;
 
-    if (actorGenus != 0x100) {
-        // Separate ifs required to match
-        if (actorGenus <= 0x100) {
-            if (actorGenus == 0 && !(gBattleStatus.flags2 & 0x40)) {
+    switch (actorGenus) {
+        case ACTOR_PLAYER:
+            if (!(gBattleStatus.flags2 & BS_FLAGS2_40)) {
                 hasAbility = is_ability_active(ability);
             }
-        }
-    } else {
-        hasAbility = is_partner_ability_active(ability);
+            break;
+        case ACTOR_PARTNER:
+            hasAbility = is_partner_ability_active(ability);
+            break;
+        case ACTOR_ENEMY0:
+            break;
     }
 
     return hasAbility;
@@ -2076,11 +3001,11 @@ void remove_player_buffs(s32 buffs) {
 
     if (buffs & 1) {
         battleStatus->jumpCharge = 0;
-        battleStatus->flags1 &= ~0x20000000;
+        battleStatus->flags1 &= ~BS_FLAGS1_20000000;
     }
     if (buffs & 2) {
         battleStatus->hammerCharge = 0;
-        battleStatus->flags1 &= ~0x10000000;
+        battleStatus->flags1 &= ~BS_FLAGS1_10000000;
     }
     if (buffs & 8) {
         player->stoneDuration = 0;
@@ -2088,7 +3013,7 @@ void remove_player_buffs(s32 buffs) {
     }
     if (buffs & 0x10) {
         battleStatus->hustleTurns = 0;
-        battleStatus->flags1 &= ~0x04000000;
+        battleStatus->flags1 &= ~BS_FLAGS1_4000000;
     }
     if (buffs & 0x20 && (player->staticStatus != 0)) {
         player->staticDuration = 0;
@@ -2112,7 +3037,7 @@ void remove_player_buffs(s32 buffs) {
         playFX_5F(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
 
         battleStatus->unk_A0 = NULL;
-        sfx_play_sound(0x299);
+        sfx_play_sound(SOUND_299);
     }
     if (buffs & 0x100 && (battleStatus->turboChargeTurnsLeft != 0)) {
         battleStatus->turboChargeTurnsLeft = 0;
@@ -2127,11 +3052,51 @@ void remove_player_buffs(s32 buffs) {
 
     if (partner != NULL && (buffs & 0x10000)) {
         partner->isGlowing = FALSE;
-        gBattleStatus.flags1 &= ~0x40000000;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
     }
 }
 
-INCLUDE_ASM(s32, "190B20", btl_update_ko_status);
+void btl_update_ko_status(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    Actor* partner = battleStatus->partnerActor;
+    s32 koDuration = player->koDuration;
+    s32 i;
+
+    player->koDuration = player->debuffDuration;
+    if (player->koDuration > 0) {
+        player->koStatus = STATUS_DAZE;
+        player->ptrDefuffIcon->ptrPropertyList[15] = player->koDuration;
+
+        if (koDuration == 0) {
+            sfx_play_sound(SOUND_2107);
+        }
+    }
+
+    if (partner != NULL) {
+        if (partner->koDuration < partner->debuffDuration) {
+            partner->koStatus = STATUS_DAZE;
+            partner->koDuration = partner->debuffDuration;
+        }
+
+        if (partner->koDuration > 0) {
+            partner->koStatus = STATUS_DAZE;
+            partner->ptrDefuffIcon->ptrPropertyList[15] = partner->koDuration;
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        Actor* enemy = battleStatus->enemyActors[i];
+
+        if (enemy != NULL) {
+            enemy->koDuration = enemy->debuffDuration;
+            if (enemy->koDuration > 0) {
+                enemy->koStatus = STATUS_DAZE;
+                enemy->ptrDefuffIcon->ptrPropertyList[15] = enemy->koDuration;
+            }
+        }
+    }
+}
 
 void btl_appendGfx_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bottom) {
     gDPPipeSync(gMasterGfxPos++);
@@ -2153,14 +3118,37 @@ void btl_appendGfx_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 righ
     gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 }
 
-void btl_draw_prim_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
-    u16 new_var = arg4 + arg6;
-    u16 new_var2 = arg5 + arg7;
+void btl_draw_prim_quad(s32 r, s32 g, s32 b, s32 a, s32 left, s32 top, s32 arg6, s32 arg7) {
+    u16 right = left + arg6;
+    u16 bottom = top + arg7;
 
-    btl_appendGfx_prim_quad(arg0, arg1, arg2, arg3, arg4, arg5, new_var, new_var2);
+    btl_appendGfx_prim_quad(r, g, b, a, left, top, right, bottom);
 }
 
-INCLUDE_ASM(s32, "190B20", reset_all_actor_sounds);
+void reset_all_actor_sounds(Actor* actor) {
+    ActorPart* partIt = &actor->partsTable[0];
+
+    actor->actorTypeData1[0] = bActorSoundTable[actor->actorType].walk[0];
+    actor->actorTypeData1[1] = bActorSoundTable[actor->actorType].walk[1];
+    actor->actorTypeData1[2] = bActorSoundTable[actor->actorType].fly[0];
+    actor->actorTypeData1[3] = bActorSoundTable[actor->actorType].fly[1];
+    actor->actorTypeData1[4] = bActorSoundTable[actor->actorType].jump;
+    actor->actorTypeData1[5] = bActorSoundTable[actor->actorType].hurt;
+    actor->actorTypeData1b[0] = bActorSoundTable[actor->actorType].delay[0];
+    actor->actorTypeData1b[1] = bActorSoundTable[actor->actorType].delay[1];
+
+    while (partIt != NULL) {
+        partIt->partTypeData[0] = actor->actorTypeData1[0];
+        partIt->partTypeData[1] = actor->actorTypeData1[1];
+        partIt->partTypeData[2] = actor->actorTypeData1[2];
+        partIt->partTypeData[3] = actor->actorTypeData1[3];
+        partIt->partTypeData[4] = actor->actorTypeData1[4];
+        partIt->partTypeData[5] = actor->actorTypeData1[5];
+        partIt->actorTypeData2b[0] = actor->actorTypeData1b[0];
+        partIt->actorTypeData2b[1] = actor->actorTypeData1b[1];
+        partIt = partIt->nextPart;
+    }
+}
 
 void hide_foreground_models_unchecked(void) {
     FGModelData* data = gBattleStatus.foregroundModelData;
@@ -2230,5 +3218,38 @@ void show_foreground_models(void) {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-INCLUDE_ASM(s32, "190B20", start_rumble_type);
+void start_rumble_type(u32 arg0) {
+    if (D_802939C0 != 0) {
+        kill_script_by_ID(D_802939C0);
+    }
 
+    switch (arg0) {
+        case 0:
+            break;
+        case 1:
+            D_802939C0 = start_script(&D_802939C4, 0xA, 0x20)->id;
+            break;
+        case 2:
+            D_802939C0 = start_script(&D_80293A10, 0xA, 0x20)->id;
+            break;
+        case 3:
+            D_802939C0 = start_script(&D_80293A34, 0xA, 0x20)->id;
+            break;
+        case 4:
+            D_802939C0 = start_script(&D_80293A58, 0xA, 0x20)->id;
+            break;
+        case 5:
+            D_802939C0 = start_script(&D_80293A7C, 0xA, 0x20)->id;
+            break;
+        case 6:
+            D_802939C0 = start_script(&D_80293AA0, 0xA, 0x20)->id;
+            break;
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+            D_802939C0 = start_script(D_80293AC4, 0xA, 0x20)->id;
+            break;
+    }
+}

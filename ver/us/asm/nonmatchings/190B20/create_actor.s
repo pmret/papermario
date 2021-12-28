@@ -23,8 +23,8 @@ glabel create_actor
 /* 193CCC 802653EC 0082102A */  slt       $v0, $a0, $v0
 /* 193CD0 802653F0 14400014 */  bnez      $v0, .L80265444
 /* 193CD4 802653F4 0000802D */   daddu    $s0, $zero, $zero
-/* 193CD8 802653F8 3C038028 */  lui       $v1, %hi(D_80283524)
-/* 193CDC 802653FC 24633524 */  addiu     $v1, $v1, %lo(D_80283524)
+/* 193CD8 802653F8 3C038028 */  lui       $v1, %hi(btl_actorHomePositions)
+/* 193CDC 802653FC 24633524 */  addiu     $v1, $v1, %lo(btl_actorHomePositions)
 /* 193CE0 80265400 00041040 */  sll       $v0, $a0, 1
 /* 193CE4 80265404 00441021 */  addu      $v0, $v0, $a0
 /* 193CE8 80265408 00021040 */  sll       $v0, $v0, 1
