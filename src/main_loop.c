@@ -353,25 +353,26 @@ void gfx_init_state(void) {
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
 }
 
-s32 func_800271FC(const u16* framebuf1, const u16* framebuf2, s32 y, s32 x, u8* out) {
+s32 gfx_frame_filter_pass_0(const u16* frameBuffer1, const u16* frameBuffer2, s32 y, s32 x, u8* out) {
     s32 pixel = SCREEN_WIDTH * y + x;
 
-    out[3] = (framebuf2[pixel] >> 2) & 0xF;
-    out[0] = framebuf1[pixel] >> 11; // red
-    out[1] = (framebuf1[pixel] >> 6) & 0x1F; // green
-    out[2] = (framebuf1[pixel] >> 1) & 0x1F; // blue
+    out[3] = (frameBuffer2[pixel] >> 2) & 0xF;
+    out[0] = frameBuffer1[pixel] >> 11; // red
+    out[1] = (frameBuffer1[pixel] >> 6) & 0x1F; // green
+    out[2] = (frameBuffer1[pixel] >> 1) & 0x1F; // blue
 }
 
-void func_8002725C(u8*, u32, u16*);
-INCLUDE_ASM(void, "main_loop", func_8002725C, u8* arg0, u32 arg1, u16* arg2);
+void gfx_frame_filter_pass_1(u8* filterBuf1, u32 filterBuf2, u16* out);
+INCLUDE_ASM(void, "main_loop", gfx_frame_filter_pass_1, u8* filterBuf1, u32 filterBuf2, u16* out);
 
 INCLUDE_ASM(s32, "main_loop", func_80027600);
 
 INCLUDE_ASM(s32, "main_loop", func_80027774);
 
-void func_800279B4(u16* arg0, u16* arg1, u16* arg2) {
-    u8 filterBuf[0x18];
-    u8 sp30[4];
+// transfers the framebuffer into the depth buffer and applies filters
+void gfx_transfer_frame_to_depth(u16* frameBuffer1, u16* frameBuffer2, u16* zBuffer) {
+    u8 filterBuf1[24];
+    u8 filterBuf2[4];
     s32 y;
     s32 x;
 
@@ -379,18 +380,18 @@ void func_800279B4(u16* arg0, u16* arg1, u16* arg2) {
         for (x = 2; x < SCREEN_WIDTH - 2; x++) {
             s32 pixel = SCREEN_WIDTH * y + x;
 
-            if (((arg1[pixel] >> 2) & 0xF) < 8) {
-                func_800271FC(arg0, arg1, y - 1, x - 1, &filterBuf[0x00]);
-                func_800271FC(arg0, arg1, y - 1, x + 1, &filterBuf[0x04]);
-                func_800271FC(arg0, arg1, y,     x - 2, &filterBuf[0x08]);
-                func_800271FC(arg0, arg1, y,     x + 2, &filterBuf[0x0C]);
-                func_800271FC(arg0, arg1, y + 1, x - 1, &filterBuf[0x10]);
-                func_800271FC(arg0, arg1, y + 1, x + 1, &filterBuf[0x14]);
-                func_800271FC(arg0, arg1, y,     x,     &sp30);
-                func_8002725C(&filterBuf, (sp30[0] << 24) | (sp30[1] << 16) | (sp30[2] << 8) | sp30[3], &arg2[pixel]);
+            if (((frameBuffer2[pixel] >> 2) & 0xF) < 8) {
+                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y - 1, x - 1, &filterBuf1[0]);
+                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y - 1, x + 1, &filterBuf1[4]);
+                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y,     x - 2, &filterBuf1[8]);
+                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y,     x + 2, &filterBuf1[12]);
+                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y + 1, x - 1, &filterBuf1[16]);
+                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y + 1, x + 1, &filterBuf1[20]);
+                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y,     x,     &filterBuf2[0]);
+                gfx_frame_filter_pass_1(&filterBuf1, (filterBuf2[0] << 24) | (filterBuf2[1] << 16) | (filterBuf2[2] << 8) | filterBuf2[3], &zBuffer[pixel]);
             } else {
-                // Edge
-                arg2[pixel] = arg0[pixel] | 1;
+                // Don't apply any filters to the edges of the screen
+                zBuffer[pixel] = frameBuffer1[pixel] | 1;
             }
         }
     }
@@ -450,10 +451,11 @@ void gfx_draw_background(void) {
             gGameStatusPtr->enableBackground |= 0x20;
             break;
         case 0x20:
-            func_800279B4(nuGfxCfb[0], nuGfxCfb[1], nuGfxZBuffer);
+            gfx_transfer_frame_to_depth(nuGfxCfb[0], nuGfxCfb[1], nuGfxZBuffer); // applies filters to the framebuffer
             D_800741F8 = 0;
             gGameStatusPtr->enableBackground &= ~0xF0;
             gGameStatusPtr->enableBackground |= 0x30;
+            // fall through
         case 0x30:
             D_800741F8 += 0x10;
             if (D_800741F8 > 0x80) {
