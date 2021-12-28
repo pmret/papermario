@@ -2181,7 +2181,22 @@ ApiStatus WaitForState(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", CancelEnemyTurn);
+ApiStatus CancelEnemyTurn(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 temp_v0 = evt_get_variable(script, *args++);
+
+    switch (temp_v0) {
+        case 0:
+            battleStatus->unk_94 = 1;
+            break;
+        case 1:
+            battleStatus->unk_94 = -1;
+            break;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_8026E260(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -2249,7 +2264,17 @@ ApiStatus GetTargetListLength(Evt* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", GetOwnerTarget);
+ApiStatus GetOwnerTarget(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* temp_s2 = get_actor(script->owner1.enemyID);
+    s32 temp = *args++;
+    s32 temp2 = *args++;
+
+    evt_set_variable(script, temp, temp_s2->targetActorID);
+    evt_set_variable(script, temp2, temp_s2->targetPartIndex);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "197F40", func_8026E914);
 
