@@ -353,26 +353,26 @@ void gfx_init_state(void) {
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
 }
 
-s32 gfx_frame_filter_pass_0(const u16* frameBuffer1, const u16* frameBuffer2, s32 y, s32 x, u8* out) {
+s32 gfx_frame_filter_pass_0(const u16* frameBuffer0, const u16* frameBuffer1, s32 y, s32 x, u8* out) {
     s32 pixel = SCREEN_WIDTH * y + x;
 
-    out[3] = (frameBuffer2[pixel] >> 2) & 0xF;
-    out[0] = frameBuffer1[pixel] >> 11; // red
-    out[1] = (frameBuffer1[pixel] >> 6) & 0x1F; // green
-    out[2] = (frameBuffer1[pixel] >> 1) & 0x1F; // blue
+    out[3] = (frameBuffer1[pixel] >> 2) & 0xF;
+    out[0] = frameBuffer0[pixel] >> 11; // red
+    out[1] = (frameBuffer0[pixel] >> 6) & 0x1F; // green
+    out[2] = (frameBuffer0[pixel] >> 1) & 0x1F; // blue
 }
 
-void gfx_frame_filter_pass_1(u8* filterBuf1, u32 filterBuf2, u16* out);
-INCLUDE_ASM(void, "main_loop", gfx_frame_filter_pass_1, u8* filterBuf1, u32 filterBuf2, u16* out);
+void gfx_frame_filter_pass_1(u8* filterBuf0, u32 filterBuf1, u16* out);
+INCLUDE_ASM(void, "main_loop", gfx_frame_filter_pass_1, u8* filterBuf0, u32 filterBuf1, u16* out);
 
 INCLUDE_ASM(s32, "main_loop", func_80027600);
 
 INCLUDE_ASM(s32, "main_loop", func_80027774);
 
 // transfers the framebuffer into the depth buffer and applies filters
-void gfx_transfer_frame_to_depth(u16* frameBuffer1, u16* frameBuffer2, u16* zBuffer) {
-    u8 filterBuf1[24];
-    u8 filterBuf2[4];
+void gfx_transfer_frame_to_depth(u16* frameBuffer0, u16* frameBuffer1, u16* zBuffer) {
+    u8 filterBuf0[24];
+    u8 filterBuf1[4];
     s32 y;
     s32 x;
 
@@ -380,18 +380,18 @@ void gfx_transfer_frame_to_depth(u16* frameBuffer1, u16* frameBuffer2, u16* zBuf
         for (x = 2; x < SCREEN_WIDTH - 2; x++) {
             s32 pixel = SCREEN_WIDTH * y + x;
 
-            if (((frameBuffer2[pixel] >> 2) & 0xF) < 8) {
-                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y - 1, x - 1, &filterBuf1[0]);
-                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y - 1, x + 1, &filterBuf1[4]);
-                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y,     x - 2, &filterBuf1[8]);
-                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y,     x + 2, &filterBuf1[12]);
-                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y + 1, x - 1, &filterBuf1[16]);
-                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y + 1, x + 1, &filterBuf1[20]);
-                gfx_frame_filter_pass_0(frameBuffer1, frameBuffer2, y,     x,     &filterBuf2[0]);
-                gfx_frame_filter_pass_1(&filterBuf1, (filterBuf2[0] << 24) | (filterBuf2[1] << 16) | (filterBuf2[2] << 8) | filterBuf2[3], &zBuffer[pixel]);
+            if (((frameBuffer1[pixel] >> 2) & 0xF) < 8) {
+                gfx_frame_filter_pass_0(frameBuffer0, frameBuffer1, y - 1, x - 1, &filterBuf0[0]);
+                gfx_frame_filter_pass_0(frameBuffer0, frameBuffer1, y - 1, x + 1, &filterBuf0[4]);
+                gfx_frame_filter_pass_0(frameBuffer0, frameBuffer1, y,     x - 2, &filterBuf0[8]);
+                gfx_frame_filter_pass_0(frameBuffer0, frameBuffer1, y,     x + 2, &filterBuf0[12]);
+                gfx_frame_filter_pass_0(frameBuffer0, frameBuffer1, y + 1, x - 1, &filterBuf0[16]);
+                gfx_frame_filter_pass_0(frameBuffer0, frameBuffer1, y + 1, x + 1, &filterBuf0[20]);
+                gfx_frame_filter_pass_0(frameBuffer0, frameBuffer1, y,     x,     &filterBuf1[0]);
+                gfx_frame_filter_pass_1(&filterBuf0, (filterBuf1[0] << 24) | (filterBuf1[1] << 16) | (filterBuf1[2] << 8) | filterBuf1[3], &zBuffer[pixel]);
             } else {
                 // Don't apply any filters to the edges of the screen
-                zBuffer[pixel] = frameBuffer1[pixel] | 1;
+                zBuffer[pixel] = frameBuffer0[pixel] | 1;
             }
         }
     }
