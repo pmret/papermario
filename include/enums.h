@@ -1414,8 +1414,8 @@ enum ActionStates {
     ACTION_STATE_ULTRA_POUND                    = 0x00000010,
     ACTION_STATE_SLIDING                        = 0x00000011,
     ACTION_STATE_HAMMER                         = 0x00000012,
-    ACTION_STATE_13                             = 0x00000011,
-    ACTION_STATE_14                             = 0x00000012,
+    ACTION_STATE_13                             = 0x00000013,
+    ACTION_STATE_14                             = 0x00000014,
     ACTION_STATE_HIT_FIRE                       = 0x00000015,  ///< Causes Mario to fly up and take damage. Used for fire bars.
     ACTION_STATE_KNOCKBACK                      = 0x00000016,  // some kind of knockback, does no damage
     ACTION_STATE_HIT_LAVA                       = 0x00000017,
@@ -1636,6 +1636,9 @@ enum NpcFlags {
 enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_JUMPING                          = 0x00000002,
     PLAYER_STATUS_FLAGS_FALLING                          = 0x00000004,
+    PLAYER_STATUS_FLAGS_10                               = 0x00000010,
+    PLAYER_STATUS_FLAGS_20                               = 0x00000020,
+    PLAYER_STATUS_FLAGS_80                               = 0x00000080,
     PLAYER_STATUS_FLAGS_100                              = 0x00000100,
     PLAYER_STATUS_FLAGS_200                              = 0x00000200,
     PLAYER_STATUS_FLAGS_400                              = 0x00000400,

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "sprite.h"
+#include "battle/battle.h"
 
 s32 func_80254250(void) {
     s32 ret;
@@ -354,25 +355,300 @@ void func_802550BC(s32 arg0, Actor* actor) {
     }
 }
 
-INCLUDE_ASM(s32, "182B30", func_802552EC);
+void func_802552EC(s32 arg0, Actor* actor) {
+    DecorationTable* decorationTable;
+    ActorPart* partTable;
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    Matrix4f spD8;
+    Matrix4f sp118;
+    Matrix4f sp158;
+    Matrix4f sp198;
+    Matrix4f sp1D8;
+    Matrix4f sp218;
+    Matrix4f sp258;
+    Matrix4f sp298;
+    Matrix4f sp2D8;
+    s32 numParts;
+    s32 i, j, k, l;
+    f32 x, y, z;
+    f32 rotX, rotY, rotZ;
+    s32 scale;
+    s32 opacity;
+    s32 pivotX;
+    s32 pivotY;
+    s32 phi_fp;
+    s32 phi_s6;
+    s32 temp;
+    s32 flags;
 
-void func_8025593C(s32 arg0) {
-    func_802550BC(0, arg0);
+    guRotateF(sp18, actor->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(sp58, actor->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp98, actor->rotation.z, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp18, sp58, sp198);
+    guMtxCatF(sp198, sp98, spD8);
+    guScaleF(sp118, actor->scale.x * (5.0 / 7.0) * actor->scalingFactor,
+                    actor->scale.y * (5.0 / 7.0) * actor->scalingFactor, 
+                    actor->scale.z * (5.0 / 7.0));
+    guMtxCatF(sp118, spD8, sp298);
+
+    numParts = actor->numParts;
+    partTable = actor->partsTable;
+    for (i = 0; i < numParts; i++) {
+        if ((partTable->idleAnimations == NULL) || (partTable->flags & ACTOR_PART_FLAG_2)) {  
+            partTable = partTable->nextPart;
+            continue; 
+        }
+
+        decorationTable = partTable->decorationTable;
+        if (decorationTable->effectType != 0) {
+            decorationTable->effectType--;
+            if (decorationTable->effectType == 0) {
+                actor->flags &= ~ACTOR_FLAG_10000000;
+                partTable = partTable->nextPart;
+                continue;
+            }
+        }
+
+        if (partTable->flags & ACTOR_PART_FLAG_INVISIBLE) {
+            partTable = partTable->nextPart;
+            continue;
+        }
+
+        if (partTable->flags & ACTOR_PART_FLAG_100000) {
+            guScaleF(sp2D8, actor->scale.x * (5.0 / 7.0), actor->scale.y * (5.0 / 7.0), actor->scale.z * (5.0 / 7.0));
+        }
+
+        j = decorationTable->unk_7D9;
+        k = 0;
+        l = 0;
+
+        while (1) {
+            j--;
+            k++;
+
+            if (j < 0) {
+                j = 15;
+            }
+
+            if (j == decorationTable->unk_7D9) {
+                break;
+            }
+
+            if (k < 3) {
+                continue;
+            }
+
+            k = 0;
+            l++;
+
+            if (decorationTable->unk_7DA < l) {
+                break;
+            }
+
+            opacity = partTable->opacity;
+
+            x = decorationTable->posX[j];
+            y = decorationTable->posY[j];
+            z = decorationTable->posZ[j];
+
+            scale = decorationTable->scale[j];
+
+            pivotX = decorationTable->rotationPivotOffsetX[j];
+            pivotY = decorationTable->rotationPivotOffsetY[j];
+
+            rotX = decorationTable->rotX[j] * 2;
+            rotY = decorationTable->rotY[j] * 2;
+            rotZ = decorationTable->rotZ[j] * 2;
+
+            phi_fp = 120;
+            phi_s6 = 20;
+            if (opacity < 50) {
+                phi_fp = 50;
+                phi_s6 = 8;
+            } else if (opacity < 100) {
+                phi_fp = 70;
+                phi_s6 = 10;
+            } else if (opacity < 150) {
+                phi_fp = 100;
+                phi_s6 = 15;
+            }
+
+            if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                guTranslateF(sp218, -pivotX, -pivotY, 0.0f);
+                guTranslateF(sp258, pivotX, pivotY, 0.0f);
+            } else {
+                guTranslateF(sp218, -pivotX, pivotY, 0.0f);
+                guTranslateF(sp258, pivotX, -pivotY, 0.0f);
+            }
+
+            guTranslateF(sp158, x, y, z);
+            guRotateF(sp18, rotX, 1.0f, 0.0f, 0.0f);
+            guRotateF(sp58, rotY, 0.0f, 1.0f, 0.0f);
+            guRotateF(sp98, rotZ, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(sp58, sp18, sp198);
+            guMtxCatF(sp198, sp98, spD8);
+            guScaleF(sp118, partTable->scale.x, partTable->scale.y * partTable->verticalStretch, partTable->scale.z);
+            guMtxCatF(sp118, sp218, sp1D8);
+            guMtxCatF(sp1D8, spD8, sp198);
+            guMtxCatF(sp198, sp258, sp1D8);
+
+            if (!(partTable->flags & ACTOR_PART_FLAG_100000)) {
+                guMtxCatF(sp1D8, sp298, sp198);
+            } else {
+                guMtxCatF(sp1D8, sp2D8, sp198);
+            }
+            guMtxCatF(sp198, sp158, sp1D8);
+
+            flags = ACTOR_PART_FLAG_80000000;
+            temp = phi_fp - l * phi_s6;
+            if (arg0 == 0) {
+                spr_draw_npc_sprite(partTable->unk_84 | flags, scale, temp, 0, sp1D8);
+            } else {
+                spr_draw_npc_sprite(partTable->unk_84 | flags, clamp_angle(scale + 0xB4), temp, 0, sp1D8);
+            }
+        }
+    }
+}
+
+void func_8025593C(Actor* actor) {
+    func_802550BC(0, actor);
 }
 
 void func_8025595C(Actor* actor) {
     func_802552EC(0, actor);
 }
 
-void func_8025597C(s32 arg0) {
-    func_802550BC(1, arg0);
+void func_8025597C(Actor* actor) {
+    func_802550BC(1, actor);
 }
 
-void func_8025599C(s32 arg0) {
-    func_802552EC(1, arg0);
+void func_8025599C(Actor* actor) {
+    func_802552EC(1, actor);
 }
 
-INCLUDE_ASM(s32, "182B30", update_actor_shadow);
+void update_actor_shadow(s32 arg0, Actor* actor) {
+    Camera* camera = &gCameras[1];
+    ActorPart* actorPart;
+    Shadow* shadow;
+    s32 numParts;
+    f32 x1, y1, z1;
+    f32 x2, y2, z2;
+    f32 dist;
+    s32 spriteID;
+    f32 yaw;
+    s32 i;
+
+    if (actor != NULL) {
+        shadow = get_shadow_by_index((s32) actor->shadow);
+        shadow->flags |= SHADOW_FLAGS_1;
+        if (!(actor->flags & ACTOR_FLAG_DISABLED)) {
+            if (actor->flags & ACTOR_FLAG_10000000) {
+                if (arg0 == 0) {
+                    func_8025593C(actor);
+                } else {
+                    func_8025597C(actor);
+                }
+            }
+
+            actor->renderMode = RENDER_MODE_ALPHATEST;
+            x1 = actor->currentPos.x + actor->headOffset.x;
+            if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                y1 = actor->currentPos.y + actor->headOffset.y;
+            } else {
+                y1 = actor->currentPos.y - actor->headOffset.y;
+            }
+            z1 = actor->currentPos.z + actor->headOffset.z;
+            numParts = actor->numParts;
+            actorPart = actor->partsTable;
+
+            for (i = 0; i < numParts; i++) {
+                if (!(actorPart->flags & ACTOR_PART_FLAG_INVISIBLE) && actorPart->idleAnimations != NULL) {
+                    spriteID = actorPart->unk_84;
+                    if (spriteID >= 0) {
+                        spr_update_sprite(spriteID, actorPart->currentAnimation, actorPart->animationRate);
+                        actorPart->unk_8C = func_802DE5C8(actorPart->unk_84);
+                    }
+
+                    if (!(actorPart->flags & ACTOR_PART_FLAG_100000)) {
+                        x2 = x1 + actorPart->partOffset.x + actorPart->visualOffset.x;
+                        if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                            y2 = y1 + actorPart->partOffset.y + actorPart->visualOffset.y;
+                        } else {
+                            y2 = y1 - actorPart->partOffset.y - actorPart->visualOffset.y;
+                        }
+                        z2 = z1 + actorPart->partOffset.z + actorPart->visualOffset.z;
+                        yaw = actorPart->yaw = actor->yaw;
+                    } else {
+                        x2 = actorPart->absolutePosition.x + actorPart->visualOffset.x;
+                        y2 = actorPart->absolutePosition.y + actorPart->visualOffset.y;
+                        z2 = actorPart->absolutePosition.z + actorPart->visualOffset.z;
+                        yaw = actorPart->yaw;
+                    }
+                    actorPart->currentPos.x = x2;
+                    actorPart->currentPos.y = y2;
+                    actorPart->currentPos.z = z2;
+
+                    if (!(actorPart->flags & SHADOW_FLAGS_4)) {
+                        shadow = get_shadow_by_index(actorPart->shadowIndex);
+                        shadow->flags &= ~SHADOW_FLAGS_1;
+                        x1 = actorPart->currentPos.x;
+                        if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                            y1 = actorPart->currentPos.y + 12.0;
+                        } else {
+                            y1 = actorPart->currentPos.y - 12.0;
+                        }
+                        z1 = actorPart->currentPos.z;
+
+                        dist = 32767.0f;
+                        npc_raycast_down_sides(0, &x1, &y1, &z1, &dist);
+
+                        if (200.0f < dist) {
+                            shadow->flags |= SHADOW_FLAGS_1;
+                        }
+                        shadow->position.x = x1;
+                        shadow->position.y = y1;
+                        shadow->position.z = z1;
+                        shadow->rotation.y = clamp_angle(yaw - camera->currentYaw);
+                        set_standard_shadow_scale(shadow, dist);
+                        shadow->scale.x *= actorPart->shadowScale;
+                    }
+                    if (actorPart->opacity < 255 || actorPart->flags & ACTOR_PART_FLAG_100) {
+                        actor->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
+                    }
+                }
+                actorPart = actorPart->nextPart;
+            }
+
+            shadow = get_shadow_by_index((s32) actor->shadow);
+            if (!(actor->flags & ACTOR_FLAG_NO_SHADOW)) {
+                shadow->flags &= ~ACTOR_FLAG_DISABLED;
+            }
+
+            x1 = actor->currentPos.x + actor->headOffset.x;
+            if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                y1 = actor->currentPos.y + actor->headOffset.y + 12.0;
+            } else {
+                y1 = actor->currentPos.y - actor->headOffset.y + 12.0;
+            }
+            z1 = actor->currentPos.z + actor->headOffset.z;
+
+            dist = 32767.0f;
+            npc_raycast_down_sides(0, &x1, &y1, &z1, &dist);
+
+            if (200.0f < dist) {
+                shadow->flags |= SHADOW_FLAGS_1;
+            }
+            shadow->position.x = x1;
+            shadow->position.y = y1;
+            shadow->position.z = z1 + bActorOffsets[actor->actorType].shadow;
+            shadow->rotation.y = clamp_angle(actor->yaw - camera->currentYaw);
+            set_standard_shadow_scale(shadow, dist);
+            shadow->scale.x *= actor->shadowScale * actor->scalingFactor;
+        }
+    }
+}
 
 s32 update_enemy_shadows(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -382,6 +658,8 @@ s32 update_enemy_shadows(void) {
         update_actor_shadow(0, battleStatus->enemyActors[i]);
     }
 }
+
+void update_player_actor_shadow(void);
 
 void update_hero_shadows(void) {
     update_actor_shadow(1, gBattleStatus.partnerActor);
