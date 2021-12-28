@@ -2303,7 +2303,7 @@ segments:
     vram: 0xE001C000
     subsegments:
     - [0x330910, c, effect_14]
-    - [0x330EF0, data]
+    - [0x330EF0]
   - [0x330F00, bin] # effect 14 gfx
   - name: effect_15
     dir: effects

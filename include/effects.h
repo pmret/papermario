@@ -189,6 +189,20 @@ typedef struct Effect13 {
     /* 0x44 */ s32 unk_44;
 } Effect13; // size = 0x48
 
+typedef struct Effect14 {
+    /* 0x00 */ f32 xPos; //xPos
+    /* 0x04 */ f32 yPos; //yPos
+    /* 0x08 */ f32 zPos; //zPos
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ s32 unk_28;
+} Effect14; // size = 0x2C
+
 // TODO figure out what this actually is
 // playFX_4E invokes gEffectTable[78]'s entryPoint function
 // playFX_6F invokes gEffectTable[111]'s entryPoint function
