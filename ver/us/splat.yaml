@@ -2108,8 +2108,7 @@ segments:
     overlay: True
     subsegments:
     - [0x317020, c, goombario]
-    - [0x317B60, .data, goombario]
-    - [0x317DA0]
+    - [0x317B60]
   - type: code
     dir: world/partner
     name: world_partner_bombette
@@ -2127,8 +2126,7 @@ segments:
     overlay: True
     subsegments:
     - [0x319670, c, parakarry]
-    - [0x31B000, data]
-    - [0x31B080]
+    - [0x31B000]
   - type: code
     dir: world/partner
     name: world_partner_kooper
@@ -2137,8 +2135,7 @@ segments:
     overlay: True
     subsegments:
     - [0x31B120, c, kooper]
-    - [0x31CB60, data]
-    - [0x31CBE0]
+    - [0x31CB60]
   - type: code
     dir: world/partner
     name: world_partner_watt
@@ -2147,7 +2144,7 @@ segments:
     overlay: True
     subsegments:
     - [0x31CC70, c, watt]
-    - [0x31DDC0, data]
+    - [0x31DDC0]
   - type: code
     dir: world/partner
     name: world_partner_sushie
@@ -2156,8 +2153,7 @@ segments:
     overlay: True
     subsegments:
     - [0x31DE70, c, sushie]
-    - [0x320B20, data]
-    - [0x320BC0]
+    - [0x320B20]
   - type: code
     dir: world/partner
     name: world_partner_lakilester
@@ -2166,8 +2162,7 @@ segments:
     overlay: True
     subsegments:
     - [0x320C50, c, lakilester]
-    - [0x3239B0, .data, lakilester]
-    - [0x323A40]
+    - [0x3239B0]
   - type: code
     dir: world/partner
     name: world_partner_bow
@@ -2176,8 +2171,7 @@ segments:
     overlay: True
     subsegments:
     - [0x323A50, c, bow]
-    - [0x324930, data]
-    - [0x3249B0]
+    - [0x324930]
   - type: code
     dir: world/partner
     name: world_partner_goompa
@@ -2186,8 +2180,7 @@ segments:
     overlay: True
     subsegments:
     - [0x324A10, c, goompa]
-    - [0x324E80, .data, goompa]
-    - [0x324F00]
+    - [0x324E80]
   - type: code
     dir: world/partner
     name: world_partner_goombaria
@@ -2196,7 +2189,7 @@ segments:
     overlay: True
     subsegments:
     - [0x324F10, c, goombaria]
-    - [0x325000, .data, goombaria]
+    - [0x325000]
   - type: code
     dir: world/partner
     name: world_partner_twink
@@ -2205,7 +2198,7 @@ segments:
     overlay: True
     subsegments:
     - [0x325070, c, twink]
-    - [0x325160, .data, twink]
+    - [0x325160]
   - type: code
     start: 0x3251D0
     vram: 0x802BD100

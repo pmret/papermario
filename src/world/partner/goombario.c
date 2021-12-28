@@ -3,13 +3,27 @@
 #include "goombario.h"
 #include "../src/world/partners.h"
 
-ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall);
-ApiStatus func_802BD1D0_3170F0(Evt* script, s32 isInitialCall);
-ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall);
-ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall);
-extern s32 D_802BDF60;
+BSS s32 D_802BDF30;
+BSS s32 D_802BDF34;
+BSS s32 D_802BDF38;
+BSS s32 D_802BDF3C;
+BSS unkPartnerStruct D_802BDF40;
+BSS s32 D_802BDF5C;
+BSS s32 D_802BDF60;
+BSS s32 D_802BDF64;
 
-extern unkPartnerStruct* D_802BDD88_317CA8;
+s32 D_802BDC40_317B60[] = {
+    0x00000015, 0x001B0000, 0x00000018, 0x001B0000, 0x00000016, 0x001B0001, 0x00000019, 0x001B0001,
+    0x00000017, 0x001B0003, 0x0000001A, 0x001B0003, 0x0000000D, 0x001B0005, 0x0000000E, 0x001B0005,
+    0x0000000F, 0x001B0006, 0x00000010, 0x001B0006, 0x0000000B, 0x001B0007, 0x0000000C, 0x001B0008,
+    0x00000014, 0x001B0009, 0x0000002E, 0x001B000A, 0x0000002F, 0x001B000A, 0x00000007, 0x001B000B,
+    0x00000008, 0x001B000B, 0x00000009, 0x001B000C, 0x0000000A, 0x001B000E, 0x0000002B, 0x001B0010,
+    0x00000003, 0x001B0011, 0x00000004, 0x001B0011, 0x00000005, 0x001B0011, 0x00000006, 0x001B0011,
+    0x00000033, 0x001B0012, 0x00000034, 0x001B0013, 0x00000026, 0x001B0014, 0x00000032, 0x001B0015,
+    0x00000024, 0x001B0017, 0x00000025, 0x001B001A, 0x00000031, 0x001B001D, 0x00000035, 0x001B001F,
+    0x00000036, 0x001B0020, 0x00000038, 0x001B0021, 0x00000037, 0x001B0022, 0x0000003A, 0x001B0023,
+    0x00000039, 0x001B0024, 0xFFFFFFFF
+};
 
 s32 func_802BD100_317020(s32 arg0) {
     s32 i;
@@ -39,6 +53,14 @@ ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall) {
 
     return partner_get_out(goombario) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
+
+EvtSource world_goombario_take_out = {
+    EVT_CALL(func_802BD188_3170A8)
+    EVT_RETURN
+    EVT_END
+};
+
+unkPartnerStruct* D_802BDD88_317CA8 = &D_802BDF40;
 
 s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
@@ -123,6 +145,12 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
     return 0;
 }
 
+EvtSource world_goombario_update = {
+    EVT_CALL(func_802BD1D0_3170F0)
+    EVT_RETURN
+    EVT_END
+};
+
 void func_802BD564_317484(Npc* goombario) {
     if (D_8010C954) {
         D_8010C954 = 0;
@@ -150,16 +178,16 @@ s32 world_goombario_can_pause(Npc* goombario) {
 
 // get message for tattle routine
 // has big jumptable at rodata 802BDE88
+ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, Evt* script, s32 isInitialCall);
 
-#ifdef NON_EQUIVALENT //something with the symbol is broken
 ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
     set_time_freeze_mode(0);
 
-    if (D_802BDF64_3248B4 != 0) {
-        D_802BDF64_3248B4 = 0;
+    if (D_802BDF64 != 0) {
+        D_802BDF64 = 0;
         enable_player_input();
     }
 
@@ -167,62 +195,6 @@ ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
     goombarioActionStatus->actionState.b[3] = 0;
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BDB30_317A50, Evt* script, s32 isInitialCall);
-#endif
-
-ApiStatus func_802BDB84(Evt* script, s32 isInitialCall) {
-    Npc* goombario = script->owner2.npc;
-
-    if (isInitialCall) {
-        partner_init_put_away(goombario);
-    }
-
-    return partner_put_away(goombario) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
-}
-
-void world_goombario_pre_battle(Npc* goombario) {
-    PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
-
-    if (goombarioActionStatus->actionState.b[0] != 0) {
-        set_time_freeze_mode(TIME_FREEZE_NORMAL);
-        enable_player_input();
-        CancelMessageAndBlock();
-        partner_clear_player_tracking(goombario);
-        goombarioActionStatus->actionState.b[0] = 0;
-        goombarioActionStatus->actionState.b[3] = 0;
-        disable_npc_blur(goombario);
-    }
-
-    goombarioActionStatus->actionState.b[3] = 1;
-}
-
-s32 D_802BDC40_317B60[] = {
-    0x00000015, 0x001B0000, 0x00000018, 0x001B0000, 0x00000016, 0x001B0001, 0x00000019, 0x001B0001,
-    0x00000017, 0x001B0003, 0x0000001A, 0x001B0003, 0x0000000D, 0x001B0005, 0x0000000E, 0x001B0005,
-    0x0000000F, 0x001B0006, 0x00000010, 0x001B0006, 0x0000000B, 0x001B0007, 0x0000000C, 0x001B0008,
-    0x00000014, 0x001B0009, 0x0000002E, 0x001B000A, 0x0000002F, 0x001B000A, 0x00000007, 0x001B000B,
-    0x00000008, 0x001B000B, 0x00000009, 0x001B000C, 0x0000000A, 0x001B000E, 0x0000002B, 0x001B0010,
-    0x00000003, 0x001B0011, 0x00000004, 0x001B0011, 0x00000005, 0x001B0011, 0x00000006, 0x001B0011,
-    0x00000033, 0x001B0012, 0x00000034, 0x001B0013, 0x00000026, 0x001B0014, 0x00000032, 0x001B0015,
-    0x00000024, 0x001B0017, 0x00000025, 0x001B001A, 0x00000031, 0x001B001D, 0x00000035, 0x001B001F,
-    0x00000036, 0x001B0020, 0x00000038, 0x001B0021, 0x00000037, 0x001B0022, 0x0000003A, 0x001B0023,
-    0x00000039, 0x001B0024, 0xFFFFFFFF
-};
-
-EvtSource world_goombario_take_out = {
-    EVT_CALL(func_802BD188_3170A8)
-    EVT_RETURN
-    EVT_END
-};
-
-unkPartnerStruct* D_802BDD88_317CA8 = &D_802BDF40;
-
-EvtSource world_goombario_update = {
-    EVT_CALL(func_802BD1D0_3170F0)
-    EVT_RETURN
-    EVT_END
-};
 
 EvtSource world_goombario_use_ability = {
     EVT_CALL(func_802BD5D8_3174F8)
@@ -243,8 +215,34 @@ EvtSource world_goombario_use_ability = {
     EVT_END
 };
 
+ApiStatus func_802BDB84(Evt* script, s32 isInitialCall) {
+    Npc* goombario = script->owner2.npc;
+
+    if (isInitialCall) {
+        partner_init_put_away(goombario);
+    }
+
+    return partner_put_away(goombario) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
+}
+
 EvtSource world_goombario_put_away = {
     EVT_CALL(func_802BDB84)
     EVT_RETURN
     EVT_END
 };
+
+void world_goombario_pre_battle(Npc* goombario) {
+    PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
+
+    if (goombarioActionStatus->actionState.b[0] != 0) {
+        set_time_freeze_mode(TIME_FREEZE_NORMAL);
+        enable_player_input();
+        CancelMessageAndBlock();
+        partner_clear_player_tracking(goombario);
+        goombarioActionStatus->actionState.b[0] = 0;
+        goombarioActionStatus->actionState.b[3] = 0;
+        disable_npc_blur(goombario);
+    }
+
+    goombarioActionStatus->actionState.b[3] = 1;
+}

@@ -9,19 +9,25 @@
 #include "partner/kooper.h"
 #include "sprite/npc/world_kooper.h"
 
+#include "partner/bombette.h"
 #include "sprite/npc/world_bombette.h"
 
+#include "partner/parakarry.h"
 #include "sprite/npc/world_parakarry.h"
 
 #include "partner/goompa.h"
 #include "sprite/npc/goompa.h"
 
+#include "partner/watt.h"
 #include "sprite/npc/world_watt.h"
 
+#include "partner/sushie.h"
 #include "sprite/npc/world_sushie.h"
 
+#include "partner/lakilester.h"
 #include "sprite/npc/world_lakilester.h"
 
+#include "partner/bow.h"
 #include "sprite/npc/world_bow.h"
 
 #include "partner/goombaria.h"
@@ -108,17 +114,17 @@ WorldPartner wPartners[12] = {
         .dmaEnd = &world_partner_kooper_ROM_END,
         .dmaDest = &world_partner_kooper_VRAM,
         .isFlying = FALSE,
-        .init = 0x802BD200,
-        .takeOut = 0x802BEB44,
-        .update = 0x802BEB64,
-        .useAbility = 0x802BEB80,
-        .putAway = 0x802BEB9C,
+        .init = world_kooper_init,
+        .takeOut = world_kooper_take_out,
+        .update = world_kooper_update,
+        .useAbility = world_kooper_use_ability,
+        .putAway = world_kooper_put_away,
         .idle = NPC_ANIM_world_kooper_normal_idle,
-        .testFirstStrike = 0x802BE818,
+        .testFirstStrike = world_kooper_test_first_strike,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
-        .preBattle = 0x802BEA24,
-        .postBattle = 0x802BEB10,
+        .preBattle = world_kooper_pre_battle,
+        .postBattle = world_kooper_post_battle,
     },
     {
         // Bombette
@@ -126,16 +132,16 @@ WorldPartner wPartners[12] = {
         .dmaEnd = &world_partner_bombette_ROM_END,
         .dmaDest = &world_partner_bombette_VRAM,
         .isFlying = FALSE,
-        .init = 0x802BD2D8,
-        .takeOut = 0x802BE880,
-        .update = 0x802BE8A0,
-        .useAbility = 0x802BE8BC,
-        .putAway = 0x802BE8D8,
+        .init = world_bombette_init,
+        .takeOut = world_bombette_take_out,
+        .update = world_bombette_update,
+        .useAbility = world_bombette_use_ability,
+        .putAway = world_bombette_put_away,
         .idle = NPC_ANIM_world_bombette_normal_idle,
-        .testFirstStrike = 0x802BE520,
-        .canUseAbility = 0x802BD720,
-        .canPlayerPause = 0x802BD748,
-        .preBattle = 0x802BE6E8,
+        .testFirstStrike = world_bombette_test_first_strike,
+        .canUseAbility = world_bombette_can_use_ability,
+        .canPlayerPause = world_bombette_can_player_pause,
+        .preBattle = world_bombette_pre_battle,
     },
     {
         // Parakarry
@@ -143,15 +149,15 @@ WorldPartner wPartners[12] = {
         .dmaEnd = &world_partner_parakarry_ROM_END,
         .dmaDest = &world_partner_parakarry_VRAM,
         .isFlying = TRUE,
-        .init = 0x802BD100,
-        .takeOut = 0x802BEA90,
-        .update = 0x802BEAB0,
-        .useAbility = 0x802BEACC,
-        .putAway = 0x802BEAE8,
+        .init = world_parakarry_init,
+        .takeOut = world_parakarry_take_out,
+        .update = world_parakarry_update,
+        .useAbility = world_parakarry_use_ability,
+        .putAway = world_parakarry_put_away,
         .idle = NPC_ANIM_world_parakarry_Palette_00_Anim_1,
         .canPlayerPause = partner_is_idle,
-        .preBattle = 0x802BE90C,
-        .postBattle = 0x802BE9D0,
+        .preBattle = world_parakarry_pre_battle,
+        .postBattle = world_parakarry_post_battle,
     },
     {
         // Goompa
@@ -172,16 +178,16 @@ WorldPartner wPartners[12] = {
         .dmaEnd = &world_partner_watt_ROM_END,
         .dmaDest = &world_partner_watt_VRAM,
         .isFlying = TRUE,
-        .init = 0x802BD23C,
-        .takeOut = 0x802BE258,
-        .update = 0x802BE27C,
-        .useAbility = 0x802BE298,
-        .putAway = 0x802BE2B4,
+        .init = world_watt_init,
+        .takeOut = world_watt_take_out,
+        .update = world_watt_update,
+        .useAbility = world_watt_use_ability,
+        .putAway = world_watt_put_away,
         .idle = NPC_ANIM_world_watt_Palette_00_Anim_1,
         .canPlayerPause = world_partner_can_player_pause_default,
-        .preBattle = 0x802BDD9C,
-        .postBattle = 0x802BDE10,
-        .whileRiding = 0x802BE2D0,
+        .preBattle = world_watt_pre_battle,
+        .postBattle = world_watt_post_battle,
+        .whileRiding = world_watt_while_riding,
     },
     {
         // Sushie
@@ -189,16 +195,16 @@ WorldPartner wPartners[12] = {
         .dmaEnd = &world_partner_sushie_ROM_END,
         .dmaDest = &world_partner_sushie_VRAM,
         .isFlying = FALSE,
-        .init = 0x802BF520,
-        .takeOut = 0x802BFDDC,
-        .update = 0x802BFDFC,
-        .useAbility = 0x802BFDC0,
-        .putAway = 0x802BFE18,
+        .init = world_sushie_init,
+        .takeOut = world_sushie_take_out,
+        .update = world_sushie_update,
+        .useAbility = world_sushie_use_ability,
+        .putAway = world_sushie_put_away,
         .idle = NPC_ANIM_world_sushie_Palette_00_Anim_1,
         .canPlayerPause = world_partner_can_player_pause_default,
-        .preBattle = 0x802BF9B8,
-        .postBattle = 0x802BFA58,
-        .whileRiding = 0x802BFE34,
+        .preBattle = world_sushie_pre_battle,
+        .postBattle = world_sushie_post_battle,
+        .whileRiding = world_sushie_while_riding,
     },
     {
         // Lakilester
@@ -206,16 +212,16 @@ WorldPartner wPartners[12] = {
         .dmaEnd = &world_partner_lakilester_ROM_END,
         .dmaDest = &world_partner_lakilester_VRAM,
         .isFlying = TRUE,
-        .init = 0x802BD21C,
-        .takeOut = 0x802BFE60,
-        .update = 0x802BFE80,
-        .useAbility = 0x802BFE9C,
-        .putAway = 0x802BFEB8,
+        .init = world_lakilester_init,
+        .takeOut = world_lakilester_take_out,
+        .update = world_lakilester_update,
+        .useAbility = world_lakilester_use_ability,
+        .putAway = world_lakilester_put_away,
         .idle = NPC_ANIM_world_lakilester_Palette_00_Anim_1,
         .canPlayerPause = world_partner_can_player_pause_default,
-        .preBattle = 0x802BFA00,
-        .postBattle = 0x802BFAA8,
-        .whileRiding = 0x802BFED4,
+        .preBattle = world_lakilester_pre_battle,
+        .postBattle = world_lakilester_post_battle,
+        .whileRiding = world_lakilester_while_riding,
     },
     {
         // Bow
@@ -223,15 +229,15 @@ WorldPartner wPartners[12] = {
         .dmaEnd = &world_partner_bow_ROM_END,
         .dmaDest = &world_partner_bow_VRAM,
         .isFlying = TRUE,
-        .init = 0x802BD100,
-        .takeOut = 0x802BDFE0,
-        .update = 0x802BE000,
-        .useAbility = 0x802BE01C,
-        .putAway = 0x802BE038,
+        .init = world_bow_init,
+        .takeOut = world_bow_take_out,
+        .update = world_bow_update,
+        .useAbility = world_bow_use_ability,
+        .putAway = world_bow_put_away,
         .idle = NPC_ANIM_world_bow_Palette_00_Anim_1,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = world_partner_can_player_pause_default,
-        .preBattle = 0x802BDF64,
+        .preBattle = world_bow_pre_battle,
     },
     {
         // Goombaria
