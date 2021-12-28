@@ -1053,6 +1053,7 @@ if __name__ == "__main__":
                 .replace("starbeam", "star_beam")
                 .replace("peachbeam", "peach_beam")
                 .replace("peachfocus", "peach_focus")
+                .replace("peachdash", "peach_dash")
             )
         else:
             segment_name = f"battle_partner_{battle_area}"

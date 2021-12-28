@@ -4995,7 +4995,6 @@ segments:
     overlay: True
     subsegments:
     - [0x79D8A0, c]
-    - [0x79DE50, data]
   - [0x79EF40, bin] # todo identify
   - dir: world/script_api
     type: code
