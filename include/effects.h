@@ -168,6 +168,27 @@ typedef struct Effect12 {
     /* 0x94 */ f32 unk_94;
 } Effect12; // size = 0x98
 
+typedef struct Effect13 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ s32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ s32 unk_40;
+    /* 0x44 */ s32 unk_44;
+} Effect13; // size = 0x48
+
 // TODO figure out what this actually is
 // playFX_4E invokes gEffectTable[78]'s entryPoint function
 // playFX_6F invokes gEffectTable[111]'s entryPoint function

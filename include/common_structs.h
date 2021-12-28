@@ -1965,7 +1965,7 @@ typedef struct MenuPanel {
     /* 0x0C */ UNK_FUN_PTR(fpInit);
     /* 0x10 */ UNK_FUN_PTR(fpHandleInput);
     /* 0x14 */ UNK_FUN_PTR(fpUpdate);
-    /* 0x18 */ UNK_FUN_PTR(fpCleanup);
+    /* 0x18 */ void(*fpCleanup)(struct MenuPanel*);
 } MenuPanel; // size = 0x1C
 
 typedef struct WindowBackground {

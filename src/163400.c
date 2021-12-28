@@ -62,7 +62,7 @@ BSS s32 filemenu_heldButtons;
 BSS s32 filemenu_8024C090;
 BSS s32 filemenu_loadedFileIdx;
 BSS s32 filemenu_8024C098[2];
-BSS s32 filemenu_cursorHudElemID;
+BSS s32 filemenu_cursorHudElemID[1];
 BSS s32 filemenu_8024C0A4[3];
 BSS s32 filemenu_hudElemIDs[20];
 BSS s32 filemenu_8024C100[8];
@@ -132,7 +132,7 @@ void filemenu_update_cursor(void) {
     D_80249B94 += xDelta;
     D_80249B98 += yDelta;
 
-    if (filemenu_cursorGoalAlpha == 0) {    
+    if (filemenu_cursorGoalAlpha == 0) {
         D_80249B9C -= 128;
         if (D_80249B9C < 0) {
             D_80249B9C = 0;
@@ -143,7 +143,7 @@ void filemenu_update_cursor(void) {
             D_80249B9C = 255;
         }
     }
-    
+
     for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
         Window* window = &gWindows[i];
         s8 parent = window->parent;
@@ -168,7 +168,7 @@ void filemenu_update_cursor(void) {
                     D_80249B98 = D_80249BA4;
                 }
             }
-        } 
+        }
         if (D_80249BB8 == 0) {
             filemenu_cursorGoalAlpha = filemenu_cursorGoalAlpha2;
         }
@@ -539,9 +539,9 @@ void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
         if (temp_a1 > 255) {
             temp_a1 = 255;
         }
-        set_hud_element_alpha(filemenu_cursorHudElemID, temp_a1);
-        set_hud_element_render_pos(filemenu_cursorHudElemID, baseX + D_80249B94, baseY + D_80249B98);
-        draw_hud_element_3(filemenu_cursorHudElemID);
+        set_hud_element_alpha(filemenu_cursorHudElemID[0], temp_a1);
+        set_hud_element_render_pos(filemenu_cursorHudElemID[0], baseX + D_80249B94, baseY + D_80249B98);
+        draw_hud_element_3(filemenu_cursorHudElemID[0]);
     }
 }
 
@@ -549,6 +549,32 @@ INCLUDE_ASM(s32, "163400", filemenu_draw_contents_copy_arrow);
 
 INCLUDE_ASM(void, "163400", filemenu_init);
 
-INCLUDE_ASM(s32, "163400", filemenu_cleanup);
+// TODO bad match, look into
+void filemenu_cleanup(void) {
+    MenuPanel** panelIt;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(filemenu_cursorHudElemID); i++) {
+        free_hud_element(filemenu_cursorHudElemID[i]);
+    }
+
+    panelIt = filemenu_menus;
+    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
+        if ((*panelIt)->unk_00.c.initialized) {
+            if ((*panelIt)->fpCleanup != NULL) {
+                (*panelIt)->fpCleanup(*panelIt);
+            }
+        }
+        panelIt++;
+    }
+
+    for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
+        set_window_update(i, 2);
+    }
+
+    set_window_update(0x18, 2);
+    set_window_update(0x17, 2);
+    func_80244BC4();
+}
 
 INCLUDE_ASM(s32, "163400", func_80244BC4);

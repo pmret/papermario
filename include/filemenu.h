@@ -14,7 +14,7 @@ extern BSS s32 filemenu_heldButtons;
 extern BSS s32 filemenu_8024C090;
 extern BSS s32 filemenu_loadedFileIdx;
 extern BSS s32 filemenu_8024C098[2];
-extern BSS s32 filemenu_cursorHudElemID;
+extern BSS s32 filemenu_cursorHudElemID[1];
 extern BSS s32 filemenu_8024C0A4[3];
 extern BSS s32 filemenu_hudElemIDs[20];
 extern BSS s32 filemenu_8024C100[8];

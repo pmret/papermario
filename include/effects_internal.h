@@ -13,6 +13,7 @@ RenderTask* shim_queue_render_task(RenderTask* task);
 f32 shim_sin_deg(f32 x);
 f32 shim_cos_deg(f32 x);
 f32 shim_clamp_angle(f32 theta);
+void shim_get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
 void shim_guMtxF2L(float mf[4][4], Mtx *m);
 void shim_guMtxCatF(float m[4][4], float n[4][4], float r[4][4]);
 void shim_guScaleF(float mf[4][4], float x, float y, float z);
