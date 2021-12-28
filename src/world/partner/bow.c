@@ -2,11 +2,12 @@
 #include "../partners.h"
 #include "npc.h"
 
-extern s32 D_802BE0C0;
-extern s32 D_802BE0C4;
-extern s32 D_802BE0E4;
-extern s32 D_802BE0E8;
-extern s32 D_802BE0EC;
+BSS s32 D_802BE0C0;
+BSS s32 D_802BE0C4;
+BSS unkPartnerStruct D_802BE0C8;
+BSS s32 D_802BE0E4;
+BSS s32 D_802BE0E8;
+BSS s32 D_802BE0EC;
 
 void func_802BDDF0_324740(Npc* partner);
 s32 func_802BD540_323E90(void);
@@ -35,7 +36,7 @@ EvtSource world_bow_take_out = {
     EVT_END
 };
 
-struct unkPartnerStruct* D_802BDFFC_32494C = 0x802BE0C8;
+unkPartnerStruct* D_802BDFFC_32494C = &D_802BE0C8;
 
 ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

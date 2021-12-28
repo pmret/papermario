@@ -1,25 +1,28 @@
 #include "common.h"
 #include "../src/world/partners.h"
 
+extern s16 D_8010C97A;
+
 s32 entity_interacts_with_current_partner(s32);
 s32 test_item_entity_position(f32, f32, f32, f32);
 s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
 s32 npc_raycast_up(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
 void start_bounce_b(void);
-extern s32 D_802BEC68;
-extern s32 D_802BEC6C;
-extern s32 D_802BEC54;
-extern s32 D_802BEC64;
-extern s32 D_802BEC58;
-extern f32 D_802BEC70;
-extern f32 D_802BEC74;
-extern f32 D_802BEC78;
-extern s32 D_802BEC50;
-extern s32 D_802BEC60;
-extern s32 D_802BEC5C;
-extern s16 D_8010C97A;
 void playFX_18(s32, f32, f32, f32, f32, f32, f32, s32);
 void func_801341B0(Npc* npc);
+
+BSS s32 D_802BEC50;
+BSS s32 D_802BEC54;
+BSS s32 D_802BEC58;
+BSS s32 D_802BEC5C;
+BSS s32 D_802BEC60;
+BSS s32 D_802BEC64;
+BSS s32 D_802BEC68;
+BSS s32 D_802BEC6C;
+BSS f32 D_802BEC70;
+BSS f32 D_802BEC74;
+BSS f32 D_802BEC78;
+BSS s32 D_802BEC7C;
 
 s32 D_802BEB40_31CB60 = 0;
 
@@ -77,7 +80,9 @@ EvtSource world_kooper_take_out = {
     EVT_END
 };
 
-unkPartnerStruct* D_802BEB60_31CB80 = 0x802BEC80;
+BSS unkPartnerStruct D_802BEC80;
+
+unkPartnerStruct* D_802BEB60_31CB80 = &D_802BEC80;
 
 ApiStatus func_802BD260_31B280(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

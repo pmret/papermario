@@ -1,14 +1,13 @@
 #include "common.h"
 #include "../src/world/partners.h"
 
-extern s32 D_802BEBC0_31CBE0;
-
-extern s32 D_802BEBB0;
-extern s32 D_802BEBB4;
-extern s32 D_802BEBB8;
-extern s32 D_802BEBBC;
-extern s32 D_802BEBC4;
-
+BSS s32 D_802BEBB0;
+BSS s32 D_802BEBB4;
+BSS s32 D_802BEBB8;
+BSS s32 D_802BEBBC;
+BSS s32 D_802BEBC0_31CBE0;
+BSS s32 D_802BEBC4;
+BSS unkPartnerStruct D_802BEBC8;
 
 void world_parakarry_init(Npc* parakarry) {
     parakarry->collisionHeight = 37;
@@ -37,7 +36,7 @@ EvtSource world_parakarry_take_out = {
     EVT_END
 };
 
-struct unkPartnerStruct* D_802BEAAC_31B01C = 0x802BEBC8;
+unkPartnerStruct* D_802BEAAC_31B01C = &D_802BEBC8;
 
 ApiStatus func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

@@ -2,24 +2,22 @@
 #include "../partners.h"
 #include "effects.h"
 
-extern unkPartnerStruct* D_802BFE7C_3239CC;
-
-extern f64 D_802BFEF0;
-extern s32 D_802BFF00;
-extern s32 D_802BFF04;
-extern s32 D_802BFF08;
-extern s32 D_802BFF0C;
-extern s32 D_802BFF10;
-extern s32 D_802BFF14;
-extern s32 D_802BFF18;
-extern s32 D_802BFF1C;
-extern s32 D_802BFF20;
-extern s32 D_802BFF24;
-extern f32 D_802BFF28;
-
 extern s16 D_8010C97A;
 
-s32 func_802BD7DC(void);
+BSS s32 D_802BFF00;
+BSS s32 D_802BFF04;
+BSS s32 D_802BFF08;
+BSS s32 D_802BFF0C;
+BSS s32 D_802BFF10;
+BSS s32 D_802BFF14;
+BSS s32 D_802BFF18;
+BSS s32 D_802BFF1C;
+BSS s32 D_802BFF20;
+BSS s32 D_802BFF24;
+BSS f32 D_802BFF28;
+BSS s32 D_802BFF2C;
+BSS unkPartnerStruct D_802BFF30;
+
 f32 get_player_normal_pitch(void);
 void partner_kill_ability_script(void);
 f64 fabs(f64 val);
@@ -177,13 +175,10 @@ EvtSource world_lakilester_update = {
 };
 
 void func_802BD678_3211C8(Npc* npc) {
-    unkPartnerStruct* temp_v1;
-
     if (D_8010C954 != NULL) {
-        temp_v1 = D_802BFE7C_3239CC;
         D_8010C954 = NULL;
-        npc->flags = temp_v1->flags;
-        temp_v1->unk_04 = 0;
+        npc->flags = D_802BFE7C_3239CC->flags;
+        D_802BFE7C_3239CC->unk_04 = 0;
         partner_clear_player_tracking(npc);
     }
 }

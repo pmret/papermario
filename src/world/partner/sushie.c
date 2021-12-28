@@ -3,17 +3,24 @@
 #include "npc.h"
 #include "effects.h"
 
-extern s32 D_802BFEEC;
-extern f32 D_802BFEE0;
-void func_802BD368_31E0D8(s32, f32, f32, f32, f32, f32);
-void partner_kill_ability_script(void);
-extern s32 bss_802BFEE4;
-extern s32 bss_802BFEE8;
-extern s32 bss_802BFEF0;
-extern s32 bss_802BFEF4;
-extern f32 bss_802BFEFC;
-
 extern s16 D_8010C97A;
+
+void partner_kill_ability_script(void);
+
+BSS f32 D_802BFEE0;
+BSS s32 bss_802BFEE4;
+BSS s32 bss_802BFEE8;
+BSS s32 D_802BFEEC;
+BSS s32 bss_802BFEF0;
+BSS s32 bss_802BFEF4;
+BSS s32 D_802BFEF8;
+BSS f32 bss_802BFEFC;
+BSS s32 bss_802BFF00;
+BSS s32 bss_802BFF04;
+BSS s32 bss_802BFF08;
+BSS s32 bss_802BFF0C;
+BSS unkPartnerStruct D_802BFF10_320C80;
+
 
 f32 D_802BFDB0_320B20 = 0.0f;
 f32 D_802BFDB4_320B24 = 0.0f;
@@ -138,8 +145,7 @@ EvtSource world_sushie_take_out = {
     EVT_END
 };
 
-extern s32 D_802BFF10;
-unkPartnerStruct* D_802BFDF8_320B68 = &D_802BFF10;
+unkPartnerStruct* D_802BFDF8_320B68 = &D_802BFF10_320C80;
 
 ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
     Npc* sushie = script->owner2.npc;

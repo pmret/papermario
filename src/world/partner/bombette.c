@@ -1,17 +1,16 @@
 #include "common.h"
 #include "../src/world/partners.h"
 
-extern s32 D_802BE934;
-extern s32 D_802BE92C;
-extern s32 D_802BE928;
-extern s32 D_802BE924;
-extern s32 D_802BE920;
-extern unkPartnerStruct* D_802BE89C_3195EC;
+BSS s32 D_802BE920;
+BSS s32 D_802BE924;
+BSS s32 D_802BE928;
+BSS s32 D_802BE92C;
+BSS s32 D_802BE930;
+BSS s32 D_802BE934;
+BSS s32 D_802BE938;
+BSS s32 D_802BE93C;
+BSS unkPartnerStruct D_802BE940;
 
-ApiStatus func_802BD338_318088(Evt* evt, s32 arg1);
-ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall);
-ApiStatus func_802BE4E8_319238(Evt* script, s32 isInitialCall);
-ApiStatus func_802BD300_318050(Evt* script, s32 isInitialCall);
 void entity_interacts_with_current_partner(s32 arg0);
 
 void func_802BD100_317E50(Npc* npc) {
@@ -73,6 +72,14 @@ ApiStatus func_802BD300_318050(Evt* script, s32 isInitialCall) {
 
     return partner_get_out(bombette) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
+
+EvtSource world_bombette_take_out = {
+    EVT_CALL(func_802BD300_318050)
+    EVT_RETURN
+    EVT_END
+};
+
+unkPartnerStruct* D_802BE89C_3195EC = &D_802BE940;
 
 ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
@@ -158,6 +165,12 @@ ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+EvtSource world_bombette_update = {
+    EVT_CALL(func_802BD338_318088)
+    EVT_RETURN
+    EVT_END
+};
+
 void func_802BD6DC_31842C(Npc* npc) {
     if (D_8010C954 != NULL) {
         D_8010C954 = NULL;
@@ -179,7 +192,14 @@ s32 world_bombette_can_player_pause(void) {
     return gPartnerActionStatus.actionState.b[0] == 0;
 }
 
+ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall);
 INCLUDE_ASM(s32, "world/partner/bombette", func_802BD758_3184A8);
+
+EvtSource world_bombette_use_ability = {
+    EVT_CALL(func_802BD758_3184A8)
+    EVT_RETURN
+    EVT_END
+};
 
 ApiStatus func_802BE4E8_319238(Evt* script, s32 isInitialCall) {
     Npc* bombette = script->owner2.npc;
@@ -190,6 +210,12 @@ ApiStatus func_802BE4E8_319238(Evt* script, s32 isInitialCall) {
 
     return partner_put_away(bombette) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
+
+EvtSource world_bombette_put_away = {
+    EVT_CALL(func_802BE4E8_319238)
+    EVT_RETURN
+    EVT_END
+};
 
 s32 world_bombette_test_first_strike(Npc* bombette, Npc* enemy) {
     f32 adjustedDistanceX, adjustedDistanceY, adjustedDistanceZ;
@@ -286,29 +312,3 @@ void world_bombette_pre_battle(Npc* bombette) {
         }
     }
 }
-
-EvtSource world_bombette_take_out = {
-    EVT_CALL(func_802BD300_318050)
-    EVT_RETURN
-    EVT_END
-};
-
-unkPartnerStruct* D_802BE89C_3195EC = &D_802BE940;
-
-EvtSource world_bombette_update = {
-    EVT_CALL(func_802BD338_318088)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtSource world_bombette_use_ability = {
-    EVT_CALL(func_802BD758_3184A8)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtSource world_bombette_put_away = {
-    EVT_CALL(func_802BE4E8_319238)
-    EVT_RETURN
-    EVT_END
-};

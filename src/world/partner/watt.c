@@ -6,8 +6,6 @@
 void force_player_anim(s32 arg0);
 void func_802BE070_31DBE0(void);
 void partner_kill_ability_script(void);
-void func_802BD1AC_31CD1C(s32 arg0);
-extern s32 D_802BE250_31DDC0;
 
 typedef struct unk_802BE310_C {
     /* 0x00 */ s32 unk_00;
@@ -28,12 +26,13 @@ typedef struct unk_802BE310 {
     /* 0x0C */ unk_802BE310_C* unk_0C;
 } unk_802BE310; //size = 0x10
 
-extern s32 D_802BE300;
-extern s32 D_802BE304;
-extern s32 D_802BE308;
-extern s32 D_802BE30C;
-extern unk_802BE310* D_802BE310;
-extern unkPartnerStruct* D_802BE274_31DDE4;
+BSS s32 D_802BE300;
+BSS s32 D_802BE304;
+BSS s32 D_802BE308;
+BSS s32 D_802BE30C;
+BSS unk_802BE310* D_802BE310;
+BSS s32 D_802BE314;
+BSS unkPartnerStruct D_802BE318;
 
 s32 D_802BE250_31DDC0 = 0x18;
 
@@ -55,6 +54,7 @@ s32 func_802BD180_31CCF0(void) {
     }
 }
 
+void func_802BD1AC_31CD1C(s32 arg0);
 INCLUDE_ASM(s32, "world/partner/watt", func_802BD1AC_31CD1C);
 
 void world_watt_init(Npc* npc) {
@@ -87,7 +87,7 @@ EvtSource world_watt_take_out = {
     EVT_END
 };
 
-unkPartnerStruct* D_802BE274_31DDE4 = 0x802BE318;
+unkPartnerStruct* D_802BE274_31DDE4 = &D_802BE318;
 
 s32 D_802BE278_31DDE8 = 0;
 
