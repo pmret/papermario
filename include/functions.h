@@ -86,7 +86,7 @@ void func_80257B28(s32);
 void func_8025595C(Actor*);
 void func_80257B68(Actor*);
 void func_80257B48(s32);
-void func_8025599C(s32);
+void func_8025599C(Actor*);
 void func_80257B88(void);
 void func_80257DA4(void);
 void func_80254C50(Actor*);

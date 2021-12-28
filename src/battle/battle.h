@@ -348,4 +348,6 @@ typedef struct ActorOffsets {
 
 extern BattleList* D_800DC4FC;
 
+extern ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT];
+
 #endif
