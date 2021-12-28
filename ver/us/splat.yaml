@@ -4988,7 +4988,6 @@ segments:
     overlay: True
     subsegments:
     - [0x79BFA0, c]
-    - [0x79C4D0, data]
   - dir: battle/star/peach_dash
     type: code
     start: 0x79D8A0

@@ -1052,6 +1052,7 @@ if __name__ == "__main__":
                 .replace("upandaway", "up_and_away")
                 .replace("starbeam", "star_beam")
                 .replace("peachbeam", "peach_beam")
+                .replace("peachfocus", "peach_focus")
             )
         else:
             segment_name = f"battle_partner_{battle_area}"
