@@ -1645,6 +1645,7 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_800                              = 0x00000800,
     PLAYER_STATUS_FLAGS_1000                             = 0x00001000,
     PLAYER_STATUS_FLAGS_INPUT_DISABLED                   = 0x00002000,
+    PLAYER_STATUS_FLAGS_4000                             = 0x00004000,
     PLAYER_STATUS_FLAGS_8000                             = 0x00008000,
     PLAYER_STATUS_FLAGS_20000                            = 0x00020000,
     PLAYER_STATUS_FLAGS_40000                            = 0x00040000,
@@ -1652,6 +1653,7 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
     PLAYER_STATUS_FLAGS_8000000                          = 0x08000000,
     PLAYER_STATUS_FLAGS_10000000                         = 0x10000000,
+    PLAYER_STATUS_FLAGS_40000000                         = 0x40000000,
     PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED             = 0x80000000,
 };
 
