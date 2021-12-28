@@ -1930,7 +1930,7 @@ void load_player_actor(void) {
 
     part->eventFlags = 0;
     part->partFlags3 = 0;
-    part->opacity = 0xFF;
+    part->opacity = 255;
     part->size.y = player->size.y;
     part->size.x = player->size.x;
     part->yaw = 0.0f;
@@ -2032,11 +2032,11 @@ void load_partner_actor(void) {
         ASSERT(actorDesc != NULL);
 
         nuPiReadRom(partnerData->dmaStart, partnerData->dmaDest, partnerData->dmaEnd - partnerData->dmaStart);
-        if ((gBattleStatus.flags2 & 0x40) || (gGameStatusPtr->demoFlags & 2)) {
+        if ((gBattleStatus.flags2 & BS_FLAGS2_40) || (gGameStatusPtr->demoFlags & 2)) {
             x = -95.0f;
             y = partnerData->y;
             z = 0.0f;
-            gBattleStatus.flags1 |= 0x100000;
+            gBattleStatus.flags1 |= BS_FLAGS1_100000;
         } else {
             x = -130.0f;
             y = partnerData->y;
@@ -2143,7 +2143,7 @@ void load_partner_actor(void) {
             part->decorationTable = NULL;
             part->staticData = actorPartDesc;
 
-            part->flags = actorPartDesc->flags | 4;
+            part->flags = actorPartDesc->flags | ACTOR_PART_FLAG_4;
             part->targetFlags = 0;
 
             part->partOffsetFloat.x = part->partOffset.x = actorPartDesc->posOffset.x;
@@ -2538,7 +2538,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
 
 s32 get_defense(Actor* actor, DictionaryEntry* defenseTable, s32 elementFlags) {
     s32 defense;
-    s32 minDefense = 0xFF;
+    s32 minDefense = 255;
 
     if (defenseTable != NULL) {
         if (elementFlags & 2) {
@@ -2611,9 +2611,9 @@ s32 get_defense(Actor* actor, DictionaryEntry* defenseTable, s32 elementFlags) {
     }
 
     // If no element flags were set, fall back to normal defense.
-    if (minDefense == 0xFF) {
+    if (minDefense == 255) {
         defense = lookup_defense(defenseTable, ELEMENT_NORMAL);
-        if (defense < 0xFF) {
+        if (defense < 255) {
             minDefense = defense;
         }
     }
