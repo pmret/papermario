@@ -4981,7 +4981,6 @@ segments:
     overlay: True
     subsegments:
     - [0x7997B0, c]
-    - [0x79ACA0, data]
   - dir: battle/star/peach_focus
     type: code
     start: 0x79BFA0
