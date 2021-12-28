@@ -1540,7 +1540,7 @@ s32 evt_execute_next_command(Evt *script) {
             case EVT_OP_USE_FLAGS:
                 status = evt_handle_set_flag_array(script);
                 break;
-            case EVT_OP_NEW_ARRAY:
+            case EVT_OP_MALLOC_ARRAY:
                 status = evt_handle_allocate_array(script);
                 break;
             case EVT_OP_KILL_THREAD:

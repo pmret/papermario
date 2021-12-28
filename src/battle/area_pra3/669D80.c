@@ -10,7 +10,13 @@ INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218000_669D80);
 
 #include "common/UnkEffect6CFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218AF4_66A874);
+ApiStatus func_80218AF4_66A874(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    UnkStruct0* unkStruct0 = (UnkStruct0*)evt_get_variable(script, *args++);
+
+    unkStruct0->unk_0C->unk_08 = -1000.0f;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218B2C_66A8AC);
 
@@ -24,11 +30,37 @@ INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218C40_66A9C0);
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80218E88_66AC08);
 
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80219304_66B084);
+ApiStatus func_80219304_66B084(Evt* script, s32 isInitialCall) {
+    UnkDuplighost* unkDuplighost = (UnkDuplighost*)get_actor(script->owner1.actorID)->state.varTable[2];
 
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80219358_66B0D8);
+    unkDuplighost->flags = 0;
 
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_802193A4_66B124);
+    if (unkDuplighost->effect1 != NULL) {
+        unkDuplighost->effect1->flags |= 0x10;
+    }
+
+    if (unkDuplighost->effect2 != NULL) {
+        unkDuplighost->effect2->flags |= 0x10;
+    }
+    
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80219358_66B0D8(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    UnkDuplighost* unkDuplighost = (UnkDuplighost*)get_actor(script->owner1.enemyID)->state.varTable[2];
+
+    unkDuplighost->unk_04 = evt_get_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802193A4_66B124(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    UnkDuplighost* unkDuplighost = (UnkDuplighost*)get_actor(script->owner1.enemyID)->state.varTable[2];
+
+    unkDuplighost->unk_0C = evt_get_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_802193F0_66B170);
 
@@ -36,7 +68,13 @@ INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_802193F0_66B170);
 
 #include "common/SetBackgroundAlpha.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_802194B8_66B238);
+ApiStatus func_802194B8_66B238(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    
+    evt_set_variable(script, *args++, gPlayerData.currentPartner);
+    evt_set_variable(script, *args++, gPlayerData.partners[gPlayerData.currentPartner].level);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80219524_66B2A4);
 

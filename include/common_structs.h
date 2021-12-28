@@ -679,7 +679,7 @@ typedef struct BattleStatus {
     /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
     /* 0x07B */ u8 damageTaken;
     /* 0x07C */ u8 changePartnerAllowed;
-    /* 0x07D */ char unk_7D[4];
+    /* 0x07D */ s8 menuStatus[4]; ///< -1 = automatically pick the first move, 0 = disabled, 1 = enabled
     /* 0x081 */ s8 actionSuccess;
     /* 0x082 */ char unk_82;
     /* 0x083 */ s8 unk_83;
@@ -736,7 +736,7 @@ typedef struct BattleStatus {
     /* 0x171 */ s8 numEnemyActors;
     /* 0x172 */ s16 currentTurnEnemyID;
     /* 0x174 */ struct Actor* currentTurnEnemy;
-    /* 0x178 */ s8 moveCategory;
+    /* 0x178 */ s8 moveCategory; ///< 0 = jump, 1 = hammer, 5 = partner, ...
     /* 0x179 */ char unk_179;
     /* 0x17A */ s16 selectedItemID;
     /* 0x17C */ s16 selectedMoveID;
@@ -765,7 +765,7 @@ typedef struct BattleStatus {
     /* 0x1AA */ char unk_1AA[4];
     /* 0x1AE */ s16 submenuIcons[24]; /* icon IDs */
     /* 0x1DE */ u8 submenuMoves[24]; /* move IDs */
-    /* 0x1F6 */ s8 submenuEnabled[24];
+    /* 0x1F6 */ s8 submenuStatus[24]; ///< @see enum BattleSubmenuStatus
     /* 0x20E */ u8 submenuMoveCount;
     /* 0x20F */ char unk_20F;
     /* 0x210 */ s32 currentButtonsDown;
@@ -810,7 +810,7 @@ typedef struct StaticMove {
     /* 0x04 */ s32 flags;
     /* 0x08 */ s32 worldDescID;
     /* 0x0C */ s32 menuDescID;
-    /* 0x10 */ s8 battleSubmenu;
+    /* 0x10 */ s8 battleSubmenu; ///< @see enum BattleSubmenu
     /* 0x11 */ s8 costFP;
     /* 0x12 */ s8 costBP;
     /* 0x13 */ u8 actionCommandID;
@@ -1336,7 +1336,7 @@ typedef struct ActorPart {
     /* 0x6C */ Vec2s targetOffset;
     /* 0x70 */ s16 unk_70;
     /* 0x72 */ Vec2bu size;
-    /* 0x74 */ u8 verticalStretch;
+    /* 0x74 */ s8 verticalStretch;
     /* 0x75 */ s8 unk_75;
     /* 0x76 */ s8 unk_76;
     /* 0x77 */ char unk_77[1];
@@ -1428,14 +1428,14 @@ typedef struct CollisionStatus {
 
 typedef struct DecorationUnk {
     /* 0x00 */ s16 unk00;
+    /* 0x02 */ s16 unk02;
     /* 0x04 */ s16 unk04;
+    /* 0x06 */ s16 unk06;
     /* 0x08 */ s16 unk08;
+    /* 0x0A */ s16 unk0A;
     /* 0x0C */ s16 unk0C;
-    /* 0x10 */ s16 unk10;
-    /* 0x14 */ s16 unk14;
-    /* 0x18 */ s16 unk18;
-    /* 0x1C */ s16 unk1C;
-} DecorationUnk; // size = 0x20
+    /* 0x0E */ s16 unk0E;
+} DecorationUnk; // size = 0x10
 
 typedef struct DecorationTable {
     /* 0x000 */ char unk_00[0x6C0];
@@ -1475,12 +1475,12 @@ typedef struct DecorationTable {
     /* 0x7FC */ s16 posX[16];
     /* 0x81C */ s16 posY[16];
     /* 0x83C */ s16 posZ[16];
-    /* 0x85C */ u8 rotationPivotOffsetX[16];
-    /* 0x86C */ u8 rotationPivotOffsetY[16];
+    /* 0x85C */ s8 rotationPivotOffsetX[16];
+    /* 0x86C */ s8 rotationPivotOffsetY[16];
     /* 0x87C */ u8 rotX[16];
     /* 0x88C */ u8 rotY[16];
     /* 0x89C */ u8 rotZ[16];
-    /* 0x8AC */ u8 effectType; /* 0 =  blur, 14 = none? */
+    /* 0x8AC */ s8 effectType; /* 0 =  blur, 14 = none? */
     /* 0x8AD */ char unk_8AD[3];
     /* 0x8B0 */ struct Temp8025D160* unk_8B0[2];
     /* 0x8B8 */ s8 decorationType[2];
@@ -1644,7 +1644,7 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
 
 typedef struct Actor {
     /* 0x000 */ s32 flags;
-    /* 0x004 */ char unk_04[4];
+    /* 0x004 */ s32 flags2;
     /* 0x008 */ struct ActorDesc* staticActorData;
     /* 0x00C */ ActorState state;
     /* 0x0C8 */ ActorMovement fly;
@@ -1698,7 +1698,7 @@ typedef struct Actor {
     /* 0x1F0 */ s8 lastEventType;
     /* 0x1F1 */ s8 turnPriority;
     /* 0x1F2 */ u8 enemyIndex; /* actorID = this | 200 */
-    /* 0x1F3 */ u8 numParts;
+    /* 0x1F3 */ s8 numParts;
     /* 0x1F4 */ struct ActorPart* partsTable;
     /* 0x1F8 */ s16 lastDamageTaken;
     /* 0x1FA */ u16 hpChangeCounter;
@@ -2303,5 +2303,27 @@ typedef struct SpriteShadingProfile {
     /* 0xAC */ s8 ambientColor[3];
     /* 0xAF */ s8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
+
+typedef struct UnkDuplighost {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ struct EffectInstance* effect1;
+    /* 0x18 */ struct EffectInstance* effect2;
+    /* 0x1C */ s32 debuff;
+} UnkDuplighost;
+
+typedef struct UnkStruct1 {
+    /* 0x00 */ char unk_00[8];
+    /* 0x08 */ f32 unk_08;
+} UnkStruct1;
+
+typedef struct UnkStruct0 {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ char unk_04[8];
+    /* 0x0C */ UnkStruct1* unk_0C;
+} UnkStruct0;
 
 #endif

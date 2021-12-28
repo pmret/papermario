@@ -6,6 +6,8 @@
 
 #define NAMESPACE flo_23
 
+extern s32 D_802EA0C4;
+
 ApiStatus N(AddPlayerHandsOffset)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CEE260)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024026C_CEE4CC)(Evt* script, s32 isInitialCall);

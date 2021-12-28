@@ -13,18 +13,18 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_10_tattle },
 };
 
-EvtSource N(80240250) = SCRIPT({
-    match EVT_STORY_PROGRESS {
-        < STORY_CH3_TUBBA_WOKE_UP {
-            SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
-        }
-        < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
-            SetMusicTrack(0, SONG_TUBBA_ESCAPE, 0, 8);
-        } else {
-            SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
-        }
-    }
-});
+EvtSource N(80240250) = {
+    EVT_SWITCH(EVT_SAVE_VAR(0))
+        EVT_CASE_LT(-29)
+            EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
+        EVT_CASE_LT(-16)
+            EVT_CALL(SetMusicTrack, 0, SONG_TUBBA_ESCAPE, 0, 8)
+        EVT_CASE_DEFAULT
+            EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
 
 static s32 N(pad_2E8)[] = {
     0x00000000, 0x00000000,
@@ -32,246 +32,270 @@ static s32 N(pad_2E8)[] = {
 
 EvtSource N(exitWalk_802402F0) = EXIT_WALK_SCRIPT(40,  0, "dgb_09",  3);
 
-EvtSource N(8024034C) = SCRIPT({
-    bind N(exitWalk_802402F0) TRIGGER_FLOOR_ABOVE 8;
-});
+EvtSource N(8024034C) = {
+    EVT_BIND_TRIGGER(N(exitWalk_802402F0), TRIGGER_FLOOR_ABOVE, 8, 1, 0)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(enterWalk_80240378) = SCRIPT({
-    GetEntryID(EVT_VAR(0));
-    match EVT_VAR(0) {
-        == 0 {
-            EVT_VAR(0) = N(8024034C);
-            spawn EnterWalk;
-            sleep 1;
-        }
-        == 1 {
-            UseSettingsFrom(0, 375, 0, -188);
-            SetPanTarget(0, 375, 0, -188);
-            SetCamSpeed(0, 90.0);
-            PanToTarget(0, 0, 1);
-            DisablePlayerInput(TRUE);
-            DisablePlayerPhysics(TRUE);
-            SetPlayerActionState(3);
-            sleep 1;
-            SetPlayerJumpscale(0.7001953125);
-            PlayerJump(375, 0, -188, 20);
-            PanToTarget(0, 0, 0);
-            DisablePlayerPhysics(FALSE);
-            DisablePlayerInput(FALSE);
-            SetPlayerActionState(0);
-            spawn N(8024034C);
-        }
-    }
-});
+EvtSource N(enterWalk_80240378) = {
+    EVT_CALL(GetEntryID, EVT_VAR(0))
+    EVT_SWITCH(EVT_VAR(0))
+        EVT_CASE_EQ(0)
+            EVT_SET(EVT_VAR(0), EVT_PTR(N(8024034C)))
+            EVT_EXEC(EnterWalk)
+            EVT_WAIT_FRAMES(1)
+        EVT_CASE_EQ(1)
+            EVT_CALL(UseSettingsFrom, 0, 375, 0, -188)
+            EVT_CALL(SetPanTarget, 0, 375, 0, -188)
+            EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
+            EVT_CALL(PanToTarget, 0, 0, 1)
+            EVT_CALL(DisablePlayerInput, TRUE)
+            EVT_CALL(DisablePlayerPhysics, TRUE)
+            EVT_CALL(SetPlayerActionState, 3)
+            EVT_WAIT_FRAMES(1)
+            EVT_CALL(SetPlayerJumpscale, EVT_FIXED(0.7))
+            EVT_CALL(PlayerJump, 375, 0, -188, 20)
+            EVT_CALL(PanToTarget, 0, 0, 0)
+            EVT_CALL(DisablePlayerPhysics, FALSE)
+            EVT_CALL(DisablePlayerInput, FALSE)
+            EVT_CALL(SetPlayerActionState, 0)
+            EVT_EXEC(N(8024034C))
+    EVT_END_SWITCH
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(main) = SCRIPT({
-    EVT_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
-    SetSpriteShading(-1);
-    SetCamPerspective(0, 3, 25, 16, 4096);
-    SetCamBGColor(0, 0, 0, 0);
-    SetCamLeadPlayer(0, 0);
-    SetCamEnabled(0, 1);
-    await N(makeEntities);
-    spawn N(80240E68);
-    spawn N(80240250);
-    ModifyColliderFlags(0, 9, 0x7FFFFE00);
-    EnableModel(6, 0);
-    EnableModel(12, 0);
-    EnableModel(18, 0);
-    ModifyColliderFlags(0, 12, 0x7FFFFE00);
-    ModifyColliderFlags(0, 13, 0x7FFFFE00);
-    ModifyColliderFlags(0, 14, 0x7FFFFE00);
-    spawn N(enterWalk_80240378);
-});
+EvtSource N(main) = {
+    EVT_SET(EVT_SAVE_VAR(425), 15)
+    EVT_CALL(SetSpriteShading, -1)
+    EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
+    EVT_CALL(SetCamBGColor, 0, 0, 0, 0)
+    EVT_CALL(SetCamLeadPlayer, 0, 0)
+    EVT_CALL(SetCamEnabled, 0, 1)
+    EVT_EXEC_WAIT(N(makeEntities))
+    EVT_EXEC(N(80240E68))
+    EVT_EXEC(N(80240250))
+    EVT_CALL(ModifyColliderFlags, 0, 9, 0x7FFFFE00)
+    EVT_CALL(EnableModel, 6, 0)
+    EVT_CALL(EnableModel, 12, 0)
+    EVT_CALL(EnableModel, 18, 0)
+    EVT_CALL(ModifyColliderFlags, 0, 12, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, 0, 13, 0x7FFFFE00)
+    EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
+    EVT_EXEC(N(enterWalk_80240378))
+    EVT_RETURN
+    EVT_END
+};
 
 static s32 N(pad_66C) = {
     0x00000000,
 };
 
-EvtSource N(80240670) = SCRIPT({
-    buf_use EVT_VAR(0);
-    arr_new 6 EVT_VAR(10);
-    buf_read EVT_VAR(0);
-    EVT_ARRAY(0) = EVT_VAR(0);
-    buf_read EVT_VAR(0);
-    EVT_ARRAY(1) = EVT_VAR(0);
-    buf_read EVT_VAR(0);
-    EVT_ARRAY(2) = EVT_VAR(0);
-    buf_read EVT_VAR(0);
-    EVT_ARRAY(3) = EVT_VAR(0);
-    buf_read EVT_VAR(0);
-    EVT_ARRAY(4) = EVT_VAR(0);
-    buf_read EVT_VAR(0);
-    EVT_ARRAY(5) = EVT_VAR(0);
-    EVT_VAR(0) = EVT_VAR(10);
-    bind N(80240770) TRIGGER_FLOOR_TOUCH 0xF4ACD480; // TODO: what is this id? see also below TODO
-});
+EvtSource N(80240670) = {
+    EVT_USE_BUF(EVT_VAR(0))
+    EVT_MALLOC_ARRAY(6, EVT_VAR(10))
+    EVT_BUF_READ1(EVT_VAR(0))
+    EVT_SET(EVT_ARRAY(0), EVT_VAR(0))
+    EVT_BUF_READ1(EVT_VAR(0))
+    EVT_SET(EVT_ARRAY(1), EVT_VAR(0))
+    EVT_BUF_READ1(EVT_VAR(0))
+    EVT_SET(EVT_ARRAY(2), EVT_VAR(0))
+    EVT_BUF_READ1(EVT_VAR(0))
+    EVT_SET(EVT_ARRAY(3), EVT_VAR(0))
+    EVT_BUF_READ1(EVT_VAR(0))
+    EVT_SET(EVT_ARRAY(4), EVT_VAR(0))
+    EVT_BUF_READ1(EVT_VAR(0))
+    EVT_SET(EVT_ARRAY(5), EVT_VAR(0))
+    EVT_SET(EVT_VAR(0), EVT_VAR(10))
+    EVT_BIND_TRIGGER(N(80240770), TRIGGER_FLOOR_TOUCH, EVT_ARRAY(0), 1, 0)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(80240770) = SCRIPT({
-    arr_use EVT_VAR(0);
-    N(func_80240000_C4C390)();
-    if (EVT_VAR(0) == 0) {
-        return;
-    }
-    loop 5 {
-        ModifyColliderFlags(1, EVT_ARRAY(0), 0x7FFFFE00);
-        EnableModel(EVT_ARRAY(1), 1);
-        sleep 1;
-        ModifyColliderFlags(0, EVT_ARRAY(0), 0x7FFFFE00);
-        EnableModel(EVT_ARRAY(1), 0);
-        sleep 1;
-    }
-    if (EVT_ARRAY(5) != 0) {
-        await 0xF4ACD485; // TODO: what is this?
-    }
-});
+EvtSource N(80240770) = {
+    EVT_USE_ARRAY(EVT_VAR(0))
+    EVT_CALL(N(func_80240000_C4C390))
+    EVT_IF_EQ(EVT_VAR(0), 0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_LOOP(5)
+        EVT_CALL(ModifyColliderFlags, 1, EVT_ARRAY(0), 0x7FFFFE00)
+        EVT_CALL(EnableModel, EVT_ARRAY(1), 1)
+        EVT_WAIT_FRAMES(1)
+        EVT_CALL(ModifyColliderFlags, 0, EVT_ARRAY(0), 0x7FFFFE00)
+        EVT_CALL(EnableModel, EVT_ARRAY(1), 0)
+        EVT_WAIT_FRAMES(1)
+    EVT_END_LOOP
+    EVT_IF_NE(EVT_ARRAY(5), 0)
+        EVT_EXEC_WAIT(EVT_ARRAY(5))
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(80240860) = SCRIPT({
-    buf_use EVT_VAR(0);
-    arr_new 6 EVT_VAR(9);
-    buf_read EVT_VAR(1);
-    EVT_ARRAY(0) = EVT_VAR(1);
-    buf_read EVT_VAR(1);
-    EVT_ARRAY(1) = EVT_VAR(1);
-    buf_read EVT_VAR(1);
-    EVT_ARRAY(2) = EVT_VAR(1);
-    buf_read EVT_VAR(1);
-    EVT_ARRAY(3) = EVT_VAR(1);
-    buf_read EVT_VAR(1);
-    EVT_ARRAY(4) = EVT_VAR(1);
-    buf_read EVT_VAR(1);
-    EVT_ARRAY(5) = EVT_VAR(1);
-    ParentColliderToModel(EVT_ARRAY(1), EVT_ARRAY(0));
-0:
-1:
-    GetPlayerActionState(EVT_VAR(10));
-    if (EVT_VAR(10) == 13) {
-        goto 2;
-    }
-    if (EVT_VAR(10) == 15) {
-        goto 2;
-    }
-    sleep 1;
-    goto 0;
-2:
-    GetPlayerPos(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
-    sleep 1;
-    if (EVT_VAR(2) != EVT_ARRAY(3)) {
-        goto 2;
-    }
-    N(func_802400A0_C4C430)();
-    if (EVT_VAR(0) == 1) {
-        await N(80240AF4);
-    }
-    if (EVT_VAR(0) == 2) {
-        await N(80240CB8);
-    }
-3:
-    GetPlayerActionState(EVT_VAR(0));
-    sleep 1;
-    if (EVT_VAR(0) == 13) {
-        goto 3;
-    }
-    if (EVT_VAR(0) == 15) {
-        goto 3;
-    }
-    goto 0;
-});
+EvtSource N(80240860) = {
+    EVT_USE_BUF(EVT_VAR(0))
+    EVT_MALLOC_ARRAY(6, EVT_VAR(9))
+    EVT_BUF_READ1(EVT_VAR(1))
+    EVT_SET(EVT_ARRAY(0), EVT_VAR(1))
+    EVT_BUF_READ1(EVT_VAR(1))
+    EVT_SET(EVT_ARRAY(1), EVT_VAR(1))
+    EVT_BUF_READ1(EVT_VAR(1))
+    EVT_SET(EVT_ARRAY(2), EVT_VAR(1))
+    EVT_BUF_READ1(EVT_VAR(1))
+    EVT_SET(EVT_ARRAY(3), EVT_VAR(1))
+    EVT_BUF_READ1(EVT_VAR(1))
+    EVT_SET(EVT_ARRAY(4), EVT_VAR(1))
+    EVT_BUF_READ1(EVT_VAR(1))
+    EVT_SET(EVT_ARRAY(5), EVT_VAR(1))
+    EVT_CALL(ParentColliderToModel, EVT_ARRAY(1), EVT_ARRAY(0))
+    EVT_LABEL(0)
+    EVT_LABEL(1)
+    EVT_CALL(GetPlayerActionState, EVT_VAR(10))
+    EVT_IF_EQ(EVT_VAR(10), 13)
+        EVT_GOTO(2)
+    EVT_END_IF
+    EVT_IF_EQ(EVT_VAR(10), 15)
+        EVT_GOTO(2)
+    EVT_END_IF
+    EVT_WAIT_FRAMES(1)
+    EVT_GOTO(0)
+    EVT_LABEL(2)
+    EVT_CALL(GetPlayerPos, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
+    EVT_WAIT_FRAMES(1)
+    EVT_IF_NE(EVT_VAR(2), EVT_ARRAY(3))
+        EVT_GOTO(2)
+    EVT_END_IF
+    EVT_CALL(N(func_802400A0_C4C430))
+    EVT_IF_EQ(EVT_VAR(0), 1)
+        EVT_EXEC_WAIT(N(80240AF4))
+    EVT_END_IF
+    EVT_IF_EQ(EVT_VAR(0), 2)
+        EVT_EXEC_WAIT(N(80240CB8))
+    EVT_END_IF
+    EVT_LABEL(3)
+    EVT_CALL(GetPlayerActionState, EVT_VAR(0))
+    EVT_WAIT_FRAMES(1)
+    EVT_IF_EQ(EVT_VAR(0), 13)
+        EVT_GOTO(3)
+    EVT_END_IF
+    EVT_IF_EQ(EVT_VAR(0), 15)
+        EVT_GOTO(3)
+    EVT_END_IF
+    EVT_GOTO(0)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(80240AF4) = SCRIPT({
-    arr_use EVT_VAR(9);
-    GetPlayerPos(EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
-    MakeLerp(0, 5, 3, 1);
-2:
-    UpdateLerp();
-    TranslateModel(EVT_ARRAY(0), 0, EVT_VAR(0), 0);
-    EVT_VAR(5) = EVT_VAR(3);
-    EVT_VAR(5) += EVT_VAR(0);
-    SetPlayerPos(EVT_VAR(2), EVT_VAR(5), EVT_VAR(4));
-    UpdateColliderTransform(EVT_ARRAY(1));
-    sleep 1;
-    if (EVT_VAR(1) == 1) {
-        goto 2;
-    }
-    MakeLerp(5, 0, 3, 1);
-3:
-    UpdateLerp();
-    TranslateModel(EVT_ARRAY(0), 0, EVT_VAR(0), 0);
-    EVT_VAR(5) = EVT_VAR(3);
-    EVT_VAR(5) += EVT_VAR(0);
-    SetPlayerPos(EVT_VAR(2), EVT_VAR(5), EVT_VAR(4));
-    UpdateColliderTransform(EVT_ARRAY(1));
-    sleep 1;
-    if (EVT_VAR(1) == 1) {
-        goto 3;
-    }
-});
+EvtSource N(80240AF4) = {
+    EVT_USE_ARRAY(EVT_VAR(9))
+    EVT_CALL(GetPlayerPos, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
+    EVT_CALL(MakeLerp, 0, 5, 3, 1)
+    EVT_LABEL(2)
+    EVT_CALL(UpdateLerp)
+    EVT_CALL(TranslateModel, EVT_ARRAY(0), 0, EVT_VAR(0), 0)
+    EVT_SET(EVT_VAR(5), EVT_VAR(3))
+    EVT_ADD(EVT_VAR(5), EVT_VAR(0))
+    EVT_CALL(SetPlayerPos, EVT_VAR(2), EVT_VAR(5), EVT_VAR(4))
+    EVT_CALL(UpdateColliderTransform, EVT_ARRAY(1))
+    EVT_WAIT_FRAMES(1)
+    EVT_IF_EQ(EVT_VAR(1), 1)
+        EVT_GOTO(2)
+    EVT_END_IF
+    EVT_CALL(MakeLerp, 5, 0, 3, 1)
+    EVT_LABEL(3)
+    EVT_CALL(UpdateLerp)
+    EVT_CALL(TranslateModel, EVT_ARRAY(0), 0, EVT_VAR(0), 0)
+    EVT_SET(EVT_VAR(5), EVT_VAR(3))
+    EVT_ADD(EVT_VAR(5), EVT_VAR(0))
+    EVT_CALL(SetPlayerPos, EVT_VAR(2), EVT_VAR(5), EVT_VAR(4))
+    EVT_CALL(UpdateColliderTransform, EVT_ARRAY(1))
+    EVT_WAIT_FRAMES(1)
+    EVT_IF_EQ(EVT_VAR(1), 1)
+        EVT_GOTO(3)
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(80240CB8) = SCRIPT({
-    arr_use EVT_VAR(9);
-    MakeItemEntity(EVT_ARRAY(5), EVT_ARRAY(2), EVT_ARRAY(3), EVT_ARRAY(4), 3, 0);
-    EVT_VAR(2) = 0;
-    MakeLerp(0, 150, 19, 4);
-2:
-    UpdateLerp();
-    TranslateModel(EVT_ARRAY(0), 0, EVT_VAR(0), 0);
-    EVT_VAR(2) += 45;
-    RotateModel(EVT_ARRAY(0), EVT_VAR(2), 1, 0, 0);
-    sleep 1;
-    if (EVT_VAR(1) == 1) {
-        goto 2;
-    }
-    MakeLerp(150, 0, 19, 4);
-3:
-    UpdateLerp();
-    TranslateModel(EVT_ARRAY(0), 0, EVT_VAR(0), 0);
-    EVT_VAR(2) += 45;
-    RotateModel(EVT_ARRAY(0), EVT_VAR(2), 1, 0, 0);
-    sleep 1;
-    if (EVT_VAR(1) == 1) {
-        goto 3;
-    }
-});
+EvtSource N(80240CB8) = {
+    EVT_USE_ARRAY(EVT_VAR(9))
+    EVT_CALL(MakeItemEntity, EVT_ARRAY(5), EVT_ARRAY(2), EVT_ARRAY(3), EVT_ARRAY(4), 3, 0)
+    EVT_SET(EVT_VAR(2), 0)
+    EVT_CALL(MakeLerp, 0, 150, 19, 4)
+    EVT_LABEL(2)
+    EVT_CALL(UpdateLerp)
+    EVT_CALL(TranslateModel, EVT_ARRAY(0), 0, EVT_VAR(0), 0)
+    EVT_ADD(EVT_VAR(2), 45)
+    EVT_CALL(RotateModel, EVT_ARRAY(0), EVT_VAR(2), 1, 0, 0)
+    EVT_WAIT_FRAMES(1)
+    EVT_IF_EQ(EVT_VAR(1), 1)
+        EVT_GOTO(2)
+    EVT_END_IF
+    EVT_CALL(MakeLerp, 150, 0, 19, 4)
+    EVT_LABEL(3)
+    EVT_CALL(UpdateLerp)
+    EVT_CALL(TranslateModel, EVT_ARRAY(0), 0, EVT_VAR(0), 0)
+    EVT_ADD(EVT_VAR(2), 45)
+    EVT_CALL(RotateModel, EVT_ARRAY(0), EVT_VAR(2), 1, 0, 0)
+    EVT_WAIT_FRAMES(1)
+    EVT_IF_EQ(EVT_VAR(1), 1)
+        EVT_GOTO(3)
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(80240E68) = SCRIPT({
-    N(func_8024013C_C4C4CC)();
-    func_802CA988(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
-    N(func_802401C0_C4C550)();
-    func_802D2B6C();
-    GotoMap("dgb_11", EVT_VAR(0));
-    sleep 100;
-});
+EvtSource N(80240E68) = {
+    EVT_CALL(N(func_8024013C_C4C4CC))
+    EVT_CALL(func_802CA988, 0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
+    EVT_CALL(N(func_802401C0_C4C550))
+    EVT_CALL(func_802D2B6C)
+    EVT_CALL(GotoMap, EVT_PTR("dgb_11"), EVT_VAR(0))
+    EVT_WAIT_FRAMES(100)
+    EVT_RETURN
+    EVT_END
+};
 
 static s32 N(pad_EDC) = {
     0x00000000,
 };
 
-EvtSource N(80240EE0) = SCRIPT({
-    EVT_SAVE_FLAG(1052) = 1;
-});
+EvtSource N(80240EE0) = {
+    EVT_SET(EVT_SAVE_FLAG(1052), 1)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(80240F00) = SCRIPT({
-    EVT_SAVE_FLAG(1053) = 1;
-});
+EvtSource N(80240F00) = {
+    EVT_SET(EVT_SAVE_FLAG(1053), 1)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(80240F20) = SCRIPT({
-    EVT_SAVE_FLAG(1054) = 1;
-});
+EvtSource N(80240F20) = {
+    EVT_SET(EVT_SAVE_FLAG(1054), 1)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource N(makeEntities) = SCRIPT({
-    if (EVT_SAVE_FLAG(1052) == 0) {
-        MakeEntity(0x802BCE84, 500, 0, -100, 0, MAKE_ENTITY_END);
-        AssignScript(N(80240EE0));
-    }
-    if (EVT_SAVE_FLAG(1053) == 0) {
-        MakeEntity(0x802BCE84, 500, 0, -250, 0, MAKE_ENTITY_END);
-        AssignScript(N(80240F00));
-    }
-    if (EVT_SAVE_FLAG(1054) == 0) {
-        MakeEntity(0x802BCE84, 375, 0, -250, 0, MAKE_ENTITY_END);
-        AssignScript(N(80240F20));
-    }
-});
+EvtSource N(makeEntities) = {
+    EVT_IF_EQ(EVT_SAVE_FLAG(1052), 0)
+        EVT_CALL(MakeEntity, 0x802BCE84, 500, 0, -100, 0, MAKE_ENTITY_END)
+        EVT_CALL(AssignScript, EVT_PTR(N(80240EE0)))
+    EVT_END_IF
+    EVT_IF_EQ(EVT_SAVE_FLAG(1053), 0)
+        EVT_CALL(MakeEntity, 0x802BCE84, 500, 0, -250, 0, MAKE_ENTITY_END)
+        EVT_CALL(AssignScript, EVT_PTR(N(80240F00)))
+    EVT_END_IF
+    EVT_IF_EQ(EVT_SAVE_FLAG(1054), 0)
+        EVT_CALL(MakeEntity, 0x802BCE84, 375, 0, -250, 0, MAKE_ENTITY_END)
+        EVT_CALL(AssignScript, EVT_PTR(N(80240F20)))
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
 
 ApiStatus N(func_80240000_C4C390)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

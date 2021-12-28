@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
+import re
 
 from disasm_script import ScriptDisassembler, get_constants
 from glob import glob
+import os
 
 NAMESPACES = {
     "src/battle/area_kmr_part_1/stage/clouds.inc.c": "b_area_kmr_part_1_kmr_03",
@@ -19,8 +21,10 @@ for filename in glob("src/world/*/*/*.c"):
     map_name = filename.split("/")[3]
     NAMESPACES[filename] = map_name
 
+
 class UserException(Exception):
     pass
+
 
 class Range:
     def __init__(self, start: int, end: int, symbol_name: str, namespace: str):
@@ -29,10 +33,12 @@ class Range:
         self.symbol_name = symbol_name
         self.namespace = namespace
 
+
 class Symbol:
     def __init__(self, ram_addr, rom_addr):
         self.ram_addr = ram_addr
         self.rom_addr = rom_addr
+
 
 def parse_symbol_addrs():
     with open("ver/us/symbol_addrs.txt", "r") as f:
@@ -51,6 +57,7 @@ def parse_symbol_addrs():
 
     return symbol_addrs
 
+
 def find_old_script_ranges(lines, filename):
     """
     Finds all ranges that contain the old SCRIPT macro.
@@ -61,8 +68,15 @@ def find_old_script_ranges(lines, filename):
     namespace = NAMESPACES.get(filename, filename.split("/")[-1].split(".")[0])
 
     for line_no, line_content in enumerate(lines):
+        r = re.compile(r".*\.h")
+        namespace_temp = list(filter(r.match, os.listdir(os.path.dirname(os.path.abspath(filename)))))
+
         if "#define NAMESPACE " in line_content:
             namespace = line_content.split(" ")[2].strip()
+        #elif namespace == "events" or namespace == "header":
+        #    namespace = NAMESPACES.get(filename, filename.split("/")[-2].split(".")[0])
+        elif namespace_temp is not None:
+            namespace = namespace_temp[0][:-2]
 
         if "SCRIPT({" in line_content:
             start_line_no = line_no
@@ -71,11 +85,13 @@ def find_old_script_ranges(lines, filename):
             yield Range(start_line_no, line_no, symbol_name, namespace)
             start_line_no = None
 
+
 def eval_namespace(sym, namespace):
     if sym.startswith("N("):
         return namespace + "_" + sym[2:-1]
     else:
         return sym
+
 
 def replace_old_script_macros(filename, symbol_addrs):
     with open(filename, "r") as f:
@@ -142,6 +158,7 @@ def replace_old_script_macros(filename, symbol_addrs):
             f.writelines(lines)
 
     return num_scripts_replaced
+
 
 if __name__ == "__main__":
     import sys

@@ -26,7 +26,39 @@ void mtx_mirror_y(Matrix4f arg0) {
     (arg0)[3][3] = 1.0f;
 }
 
-INCLUDE_ASM(s32, "182B30", enable_actor_blur);
+void enable_actor_blur(Actor* actor) {
+    ActorPart* partsTable = actor->partsTable;
+    DecorationTable* decorationTable = partsTable->decorationTable;
+    s32 i, j;
+    s32 numParts;
+
+    decorationTable->effectType = 0;
+    decorationTable->unk_7DB++;
+    actor->flags |= ACTOR_FLAG_10000000;
+    partsTable = actor->partsTable;
+    numParts = actor->numParts;
+
+    for (i = 0; i < numParts; i++) {
+        if (partsTable->idleAnimations != NULL && !(partsTable->flags & ACTOR_PART_FLAG_2)) {
+            decorationTable = partsTable->decorationTable;
+            decorationTable->unk_7D8 = 0;
+            decorationTable->unk_7D9 = 0;
+            for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
+                decorationTable->posX[j] = partsTable->currentPos.x;
+                decorationTable->posY[j] = partsTable->currentPos.y;
+                decorationTable->posZ[j] = partsTable->currentPos.z;
+                decorationTable->scale[j] = actor->yaw;
+                decorationTable->rotationPivotOffsetX[j] = (s32)(actor->rotationPivotOffset.x * actor->scalingFactor);
+                decorationTable->rotationPivotOffsetY[j] = (s32)(actor->rotationPivotOffset.y * actor->scalingFactor);
+
+                decorationTable->rotX[j] = clamp_angle(actor->rotation.x) * 0.5f;
+                decorationTable->rotY[j] = clamp_angle(actor->rotation.y) * 0.5f;
+                decorationTable->rotZ[j] = clamp_angle(actor->rotation.z) * 0.5f;
+            }
+        }
+        partsTable = partsTable->nextPart;
+    }
+}
 
 void disable_actor_blur(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
@@ -152,11 +184,175 @@ void func_802549C0(void) {
     decorationTable->effectType = 1;
 }
 
-INCLUDE_ASM(s32, "182B30", func_802549F4);
+void func_802549F4(Actor* actor) {
+    ActorPart* partsTable = actor->partsTable;
+    DecorationTable* decorationTable = partsTable->decorationTable;
 
-INCLUDE_ASM(void, "182B30", func_80254C50);
+    if (!(partsTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partsTable->idleAnimations != NULL) {
+        s32 i = decorationTable->unk_7D9;
 
-INCLUDE_ASM(s32, "182B30", func_802550BC);
+        decorationTable->posX[i] = partsTable->currentPos.x;
+        decorationTable->posY[i] = partsTable->currentPos.y;
+        decorationTable->posZ[i] = partsTable->currentPos.z;
+        decorationTable->scale[i] = actor->yaw;
+
+        decorationTable->rotationPivotOffsetX[i] = (s32)(actor->rotationPivotOffset.x * actor->scalingFactor);
+        decorationTable->rotationPivotOffsetY[i] = (s32)(actor->rotationPivotOffset.y * actor->scalingFactor);
+
+        decorationTable->rotX[i] = clamp_angle(actor->rotation.x) * 0.5f;
+        decorationTable->rotY[i] = clamp_angle(actor->rotation.y) * 0.5f;
+        decorationTable->rotZ[i] = clamp_angle(actor->rotation.z) * 0.5f;
+
+        i++;
+        if (i >= ARRAY_COUNT(decorationTable->posX)) {
+            i = 0;
+        }
+        decorationTable->unk_7D9 = i;
+    }
+}
+
+void func_80254C50(Actor* actor) {
+    Matrix4f sp18;
+    Matrix4f sp58;
+    Matrix4f sp98;
+    Matrix4f spD8;
+    Matrix4f sp118;
+    Matrix4f sp158;
+    Matrix4f sp198;
+    Matrix4f sp1D8;
+    Matrix4f sp218;
+    Matrix4f sp258;
+    s32 sp298;
+    s32 sp29C;
+    s32 scale;
+    ActorPart* partTable;
+    DecorationTable* decorationTable;
+    f32 rotX, rotY, rotZ;
+    s32 temp_s0_2;
+    s32 temp_v1;
+    s32 temp_s0;
+    s32 temp_s1;
+    s32 i;
+    s32 phi_s6;
+    s32 phi_s4;
+    f32 x, y, z;
+
+    partTable = actor->partsTable;
+    decorationTable = partTable->decorationTable;
+    if (decorationTable->effectType != 0) {
+        decorationTable->effectType--;
+        if (decorationTable->effectType == 0) {
+            actor->flags &= ~ACTOR_FLAG_10000000;
+            return;
+        }
+    }
+
+    if (!(partTable->flags & ACTOR_PART_FLAG_INVISIBLE) && partTable->idleAnimations != NULL) {
+        sp298 = 0;
+        sp29C = 0;
+        i = decorationTable->unk_7D9;
+
+        while (1) {
+            i--;
+            sp298 += 1;
+            if (i < 0) {
+                i = 0xF;
+            }
+            if (i == decorationTable->unk_7D9) {
+                break;
+            }
+
+            if (sp298 >= 3) {
+                sp298 = 0;
+                sp29C++;
+
+                if (decorationTable->unk_7DA < sp29C) {
+                    break;
+                }
+                temp_v1 = partTable->opacity;
+                x = decorationTable->posX[i];
+                y = decorationTable->posY[i];
+                z = decorationTable->posZ[i];
+
+                scale = decorationTable->scale[i];
+
+                temp_s0 = decorationTable->rotationPivotOffsetX[i];
+                temp_s1 = decorationTable->rotationPivotOffsetY[i];
+
+                rotX = decorationTable->rotX[i] * 2;
+                rotY = decorationTable->rotY[i] * 2;
+                rotZ = decorationTable->rotZ[i] * 2;
+
+                phi_s6 = 120;
+                phi_s4 = 20;
+                if (temp_v1 < 50) {
+                    phi_s6 = 50;
+                    phi_s4 = 8;
+                } else if (temp_v1 < 100) {
+                    phi_s6 = 70;
+                    phi_s4 = 10;
+                } else if (temp_v1 < 150) {
+                    phi_s6 = 100;
+                    phi_s4 = 15;
+                }
+
+                guTranslateF(sp1D8, x, y, z);
+                guTranslateF(sp158, -temp_s0, -temp_s1, 0.0f);
+                guTranslateF(sp198, temp_s0, temp_s1, 0.0f);
+                guRotateF(sp18, rotX, 1.0f, 0.0f, 0.0f);
+                guRotateF(sp58, rotY, 0.0f, 1.0f, 0.0f);
+                guRotateF(sp98, rotZ, 0.0f, 0.0f, 1.0f);
+                guMtxCatF(sp18, sp58, sp218);
+                guMtxCatF(sp218, sp98, spD8);
+                guScaleF(sp118, actor->scale.x * (5.0 / 7.0) * actor->scalingFactor,
+                                actor->scale.y * (5.0 / 7.0) * actor->scalingFactor * partTable->verticalStretch,
+                                actor->scale.z * (5.0 / 7.0));
+                guMtxCatF(sp118, sp158, sp258);
+                guMtxCatF(sp258, spD8, sp218);
+                guMtxCatF(sp218, sp198, sp258);
+                guMtxCatF(sp258, sp1D8, sp218);
+                temp_s0_2 = partTable->opacity;
+                partTable->opacity = phi_s6 - (sp29C * phi_s4);
+                func_802591EC(0, partTable, clamp_angle(scale + 0xB4), &sp218, 1);
+                partTable->opacity = temp_s0_2;
+            } 
+        }
+    }
+}
+
+void func_802550BC(s32 arg0, Actor* actor) {
+    s32 numParts = actor->numParts;
+    ActorPart* partsTable = actor->partsTable;
+    DecorationTable* decorationTable;
+    s32 i, j;
+
+    for (i = 0; i < numParts; i++) {
+        if (partsTable->flags & ACTOR_PART_FLAG_INVISIBLE || partsTable->idleAnimations == NULL || partsTable->flags & ACTOR_PART_FLAG_2) {
+            partsTable = partsTable->nextPart;
+        } else {
+            decorationTable = partsTable->decorationTable;
+            j = decorationTable->unk_7D9;
+
+            decorationTable->posX[j] = partsTable->currentPos.x;
+            decorationTable->posY[j] = partsTable->currentPos.y;
+            decorationTable->posZ[j] = partsTable->currentPos.z;
+            decorationTable->scale[j] = actor->yaw;
+
+            decorationTable->rotationPivotOffsetX[j] = actor->rotationPivotOffset.x;
+            decorationTable->rotationPivotOffsetY[j] = actor->rotationPivotOffset.y;
+
+            decorationTable->rotX[j] = clamp_angle(actor->rotation.x) * 0.5f;
+            decorationTable->rotY[j] = clamp_angle(actor->rotation.y) * 0.5f;
+            decorationTable->rotZ[j] = clamp_angle(actor->rotation.z) * 0.5f;
+
+            j++;
+            if (j >= ARRAY_COUNT(decorationTable->posX)) {
+                j = 0;
+            }
+            decorationTable->unk_7D9 = j;
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "182B30", func_802552EC);
 

@@ -46,18 +46,26 @@ ApiStatus TwinkPutAway(Evt* script, s32 isInitialCall) {
     return partner_put_away(twink) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_twink_take_out = SCRIPT({
-    TwinkTakeOut();
-});
+EvtSource world_twink_take_out = {
+    EVT_CALL(TwinkTakeOut)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource world_twink_update = SCRIPT({
-    TwinkUpdate();
-});
+EvtSource world_twink_update = {
+    EVT_CALL(TwinkUpdate)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource world_twink_use_ability = SCRIPT({
-    TwinkUseAbility();
-});
+EvtSource world_twink_use_ability = {
+    EVT_CALL(TwinkUseAbility)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource world_twink_put_away = SCRIPT({
-    TwinkPutAway();
-});
+EvtSource world_twink_put_away = {
+    EVT_CALL(TwinkPutAway)
+    EVT_RETURN
+    EVT_END
+};

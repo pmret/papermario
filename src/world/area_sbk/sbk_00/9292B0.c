@@ -16,10 +16,12 @@ NpcAISettings N(npcAISettings_80240300) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80240330) = SCRIPT({
-    N(SetNpcB5_3)();
-    DoBasicAI(N(npcAISettings_80240300));
-});
+EvtSource N(npcAI_80240330) = {
+    EVT_CALL(N(SetNpcB5_3))
+    EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_80240300)))
+    EVT_RETURN
+    EVT_END
+};
 
 NpcSettings N(npcSettings_8024035C) = {
     .height = 72,
@@ -114,9 +116,11 @@ static s32 N(pad_78C) = {
     0x00000000,
 };
 
-EvtSource N(makeEntities) = SCRIPT({
-    MakeEntity(0x802EA564, -230, 0, 155, 0, ITEM_FRIGHT_JAR, MAKE_ENTITY_END);
-    AssignBlockFlag(EVT_SAVE_FLAG(797));
-    MakeEntity(0x802EA564, 160, 0, 205, 0, ITEM_COIN, MAKE_ENTITY_END);
-    AssignBlockFlag(EVT_SAVE_FLAG(798));
-});
+EvtSource N(makeEntities) = {
+    EVT_CALL(MakeEntity, 0x802EA564, -230, 0, 155, 0, 152, MAKE_ENTITY_END)
+    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(797))
+    EVT_CALL(MakeEntity, 0x802EA564, 160, 0, 205, 0, 343, MAKE_ENTITY_END)
+    EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(798))
+    EVT_RETURN
+    EVT_END
+};

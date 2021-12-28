@@ -36,7 +36,7 @@ segments:
     vram: 0xA4000040
     subsegments:
     - [0x0040, asm, boot]
-    - [0x0B70, bin, bootcode_font]
+    - [0x0B70, bin, rspboot_font]
   - type: code
     start: 0x1000
     vram: 0x80025C00
@@ -254,7 +254,8 @@ segments:
     - [0x4A2A0, c, os/osFlash]
     - [0x4AC90, pm_effect_loads, effect_loads]
     - [0x4DF30, c, battle/battle]
-    - [0x4E5A0, data, 1000_len_60]
+    - [0x4E5A0, bin, n_aspMain_text]
+    - [0x4F200, data]
     - [0x4F410, .data, main]
     - [0x4F420, .data, main_loop]
     - [0x4F660, .data, rumble]
@@ -320,7 +321,9 @@ segments:
     - [0x6FA50, .data, os/osSetThreadPri]
     - [0x6FA70, data] # has scripts?
     - [0x70E30, .data, battle/battle]
-    - [0x71430, data]
+    - [0x71430, bin, gspF3DEX2kawase_fifo_text]
+    - [0x72A60, bin, gspF3DEX2kawase_fifo_data]
+    - [0x72E80, bin, n_aspMain_data]
     - [0x73130, .rodata, is_debug]
     - [0x73148, .rodata, main_loop]
     - [0x73160, .rodata, 43F0]
@@ -776,7 +779,7 @@ segments:
     - [0x105F90, c, entity/HeartBlock]
     - [0x106EF0, c, entity/SuperBlock]
     - [0x107830, c, entity/SimpleSpring]
-    - [0x1086a0, c, entity/Chest]
+    - [0x1086A0, c, entity/Chest]
     - [0x109660, c, entity/WoodenCrate]
     - [0x10A230, c, entity/BlueWarpPipe]
     - [0x10A8D0, c, entity/Signpost]
@@ -1018,7 +1021,7 @@ segments:
     - [0x18F340, c, 18F340]
     - [0x190A10, c]
     - [0x190B20, c, 190B20]
-    - [0x1967B0, c]
+    - [0x1967B0, c, load_script]
     - [0x196AA0, c, 196AA0]
     - [0x197F40, c, 197F40]
     - [0x19FAF0, c, 19FAF0]
@@ -2072,12 +2075,12 @@ segments:
     start: 0x3169F0
     vram: 0x80200000
     subsegments:
-    - [0x3169f0, c, 3169f0]
+    - [0x3169F0, c, 3169f0]
   - type: code
-    start: 0x316a70
+    start: 0x316A70
     vram: 0x80200080
     subsegments:
-    - [0x316a70, c, 316a70]
+    - [0x316A70, c, 316a70]
   - type: code
     start: 0x316C00
     vram: 0x802AE000
@@ -2089,12 +2092,12 @@ segments:
     vram: 0x802AE000
     overlay: True
     subsegments:
-    - [0x316d90, c, 316d90]
+    - [0x316D90, c, 316d90]
   - type: code
-    start: 0x316f30
+    start: 0x316F30
     vram: 0x802B2000
     subsegments:
-    - [0x316f30, c, 316f30]
+    - [0x316F30, c, 316f30]
   - type: code
     dir: world/partner
     name: world_partner_goombario
@@ -2108,12 +2111,12 @@ segments:
   - type: code
     dir: world/partner
     name: world_partner_bombette
-    start: 0x317e50
+    start: 0x317E50
     vram: 0x802BD100
     overlay: True
     subsegments:
-    - [0x317e50, c, bombette]
-    - [0x3195d0]
+    - [0x317E50, c, bombette]
+    - [0x3195D0]
   - type: code
     dir: world/partner
     name: world_partner_parakarry
@@ -2122,46 +2125,47 @@ segments:
     overlay: True
     subsegments:
     - [0x319670, c, parakarry]
-    - [0x31b000, data]
+    - [0x31B000, data]
     - [0x31B080]
   - type: code
     dir: world/partner
     name: world_partner_kooper
-    start: 0x31b120
+    start: 0x31B120
     vram: 0x802BD100
     overlay: True
     subsegments:
-    - [0x31b120, c, kooper]
-    - [0x31cb60, .data, kooper]
+    - [0x31B120, c, kooper]
+    - [0x31CB60, .data, kooper]
     - [0x31CBE0]
   - type: code
     dir: world/partner
     name: world_partner_watt
-    start: 0x31cc70
+    start: 0x31CC70
     vram: 0x802BD100
     overlay: True
     subsegments:
-    - [0x31cc70, c, watt]
-    - [0x31ddc0, data]
+    - [0x31CC70, c, watt]
+    - [0x31DDC0, data]
   - type: code
     dir: world/partner
     name: world_partner_sushie
-    start: 0x31de70
+    start: 0x31DE70
     vram: 0x802BD100
     overlay: True
     subsegments:
-    - [0x31de70, c, sushie]
-    - [0x320b20, data]
+    - [0x31DE70, c, sushie]
+    - [0x320B20, data]
     - [0x320BC0]
   - type: code
     dir: world/partner
     name: world_partner_lakilester
-    start: 0x320c50
+    start: 0x320C50
     vram: 0x802BD100
     overlay: True
     subsegments:
-    - [0x320c50, c, lakilester]
-    - [0x3239b0, data]
+    - [0x320C50, c, lakilester]
+    - [0x3239B0, .data, lakilester]
+    - [0x323A40]
   - type: code
     dir: world/partner
     name: world_partner_bow
@@ -2175,21 +2179,21 @@ segments:
   - type: code
     dir: world/partner
     name: world_partner_goompa
-    start: 0x324a10
+    start: 0x324A10
     vram: 0x802BD100
     overlay: True
     subsegments:
-    - [0x324a10, c, goompa]
-    - [0x324e80, .data, goompa]
+    - [0x324A10, c, goompa]
+    - [0x324E80, .data, goompa]
     - [0x324F00]
   - type: code
     dir: world/partner
     name: world_partner_goombaria
-    start: 0x324f10
+    start: 0x324F10
     vram: 0x802BD100
     overlay: True
     subsegments:
-    - [0x324f10, c, goombaria]
+    - [0x324F10, c, goombaria]
     - [0x325000, .data, goombaria]
   - type: code
     dir: world/partner
@@ -2201,14 +2205,14 @@ segments:
     - [0x325070, c, twink]
     - [0x325160, .data, twink]
   - type: code
-    start: 0x3251d0
+    start: 0x3251D0
     vram: 0x802BD100
     overlay: True
     subsegments:
-    - [0x3251d0, c]
+    - [0x3251D0, c]
     - [0x3255E0, data]
   - type: code
-    start: 0x325ad0
+    start: 0x325AD0
     vram: 0xE0200000
     subsegments:
     - [0x325AD0, c]
@@ -4171,6 +4175,7 @@ segments:
     - [0x6BBB90, c]
     - [0x6BBC60, c]
     - [0x6BD250, data]
+    - [0x6CBF90]
   - dir: battle/area_kpa4
     type: code
     start: 0x6CC070
@@ -10960,7 +10965,7 @@ segments:
     start: 0xE20EB0
     vram: 0x802B7000
     subsegments:
-    - [0xe20eb0, c, e20eb0]
+    - [0xE20EB0, c, e20eb0]
     - [0xE215C0, data]
     - [0xE21860]
   - type: code
