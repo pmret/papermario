@@ -833,7 +833,7 @@ void btl_state_update_partner_move(void) {
                                     func_8024E40C(0x36);
                                     btl_show_battle_message(0x23, 0x3C);
                                     partner->status = 0;
-                                    partner->unk_21D[0] = 0;
+                                    partner->unk_21D = 0;
                                     gBattleState2 = BATTLE_STATES2_UNK_B;
                                     partner->flags |= ACTOR_FLAG_8000000;
                                 } else {

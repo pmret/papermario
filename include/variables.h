@@ -280,7 +280,7 @@ extern s32 D_800F7B44;
 extern f32 D_8010C938;
 extern f32 D_8010C990;
 extern s32 D_8010C978;
-extern Vec3s D_80283524[];
+extern Vec3s btl_actorHomePositions[];
 
 extern PartnerActionStatus gPartnerActionStatus; // something with partners
 extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
@@ -324,7 +324,7 @@ extern UNK_TYPE D_0A000800;
 extern UNK_TYPE D_0A000808;
 
 // Scripts
-extern EvtSource* SCRIPT_NpcDefeat;
+extern EvtSource SCRIPT_NpcDefeat;
 extern EvtSource ShakeCam1;
 extern EvtSource ShakeCamX;
 
