@@ -274,6 +274,8 @@ ApiStatus SetVirtualEntityPosition(Evt* script, s32 isInitialCall);
 ApiStatus SetVirtualEntityScale(Evt* script, s32 isInitialCall);
 ApiStatus SetVirtualEntityRotation(Evt* script, s32 isInitialCall);
 ApiStatus SetVirtualEntityJumpGravity(Evt* script, s32 isInitialCall);
+ApiStatus SetVirtualEntityFlags(Evt* script, s32 isInitialCall);
+ApiStatus GetVirtualEntityPosition(Evt* script, s32 isInitialCall);
 ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall);
 ApiStatus func_802D2884(Evt* script, s32 isInitialCall);
 ApiStatus func_802D2C14(Evt* script, s32 isInitialCall);

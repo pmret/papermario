@@ -4925,7 +4925,6 @@ segments:
     overlay: True
     subsegments:
     - [0x78B600, c]
-    - [0x78C070, data]
   - dir: battle/star/lullaby
     type: code
     start: 0x78D150
