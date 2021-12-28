@@ -305,9 +305,9 @@ void func_80254C50(Actor* actor) {
                 guRotateF(sp98, rotZ, 0.0f, 0.0f, 1.0f);
                 guMtxCatF(sp18, sp58, sp218);
                 guMtxCatF(sp218, sp98, spD8);
-                guScaleF(sp118, actor->scale.x * (5.0 / 7.0) * actor->scalingFactor,
-                                actor->scale.y * (5.0 / 7.0) * actor->scalingFactor * partTable->verticalStretch,
-                                actor->scale.z * (5.0 / 7.0));
+                guScaleF(sp118, actor->scale.x * SPRITE_PIXEL_SCALE * actor->scalingFactor,
+                                actor->scale.y * SPRITE_PIXEL_SCALE * actor->scalingFactor * partTable->verticalStretch,
+                                actor->scale.z * SPRITE_PIXEL_SCALE);
                 guMtxCatF(sp118, sp158, sp258);
                 guMtxCatF(sp258, spD8, sp218);
                 guMtxCatF(sp218, sp198, sp258);
@@ -388,9 +388,9 @@ void func_802552EC(s32 arg0, Actor* actor) {
     guRotateF(sp98, actor->rotation.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp18, sp58, sp198);
     guMtxCatF(sp198, sp98, spD8);
-    guScaleF(sp118, actor->scale.x * (5.0 / 7.0) * actor->scalingFactor,
-                    actor->scale.y * (5.0 / 7.0) * actor->scalingFactor, 
-                    actor->scale.z * (5.0 / 7.0));
+    guScaleF(sp118, actor->scale.x * SPRITE_PIXEL_SCALE * actor->scalingFactor,
+                    actor->scale.y * SPRITE_PIXEL_SCALE * actor->scalingFactor, 
+                    actor->scale.z * SPRITE_PIXEL_SCALE);
     guMtxCatF(sp118, spD8, sp298);
 
     numParts = actor->numParts;
@@ -417,7 +417,7 @@ void func_802552EC(s32 arg0, Actor* actor) {
         }
 
         if (partTable->flags & ACTOR_PART_FLAG_100000) {
-            guScaleF(sp2D8, actor->scale.x * (5.0 / 7.0), actor->scale.y * (5.0 / 7.0), actor->scale.z * (5.0 / 7.0));
+            guScaleF(sp2D8, actor->scale.x * SPRITE_PIXEL_SCALE, actor->scale.y * SPRITE_PIXEL_SCALE, actor->scale.z * SPRITE_PIXEL_SCALE);
         }
 
         j = decorationTable->unk_7D9;

@@ -792,7 +792,7 @@ void appendGfx_player(void) {
     s32 phi_a0;
 
     if (playerStatus->actionState == ACTION_STATE_SLIDING) {
-        guScaleF(spE0, (5.0f / 7.0f), (5.0f / 7.0f), (5.0f / 7.0f));
+        guScaleF(spE0, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
         guRotateF(sp20, temp_f0, 0.0f, 1.0f, 0.0f);
         guMtxCatF(spE0, sp20, sp20);
         guRotateF(spA0, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
@@ -812,7 +812,7 @@ void appendGfx_player(void) {
         guMtxCatF(sp20, spA0, sp20);
         guTranslateF(sp60, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
         guMtxCatF(sp20, sp60, sp20);
-        guScaleF(spE0, (5.0f / 7.0f), (5.0f / 7.0f), (5.0f / 7.0f));
+        guScaleF(spE0, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
         guMtxCatF(sp20, spE0, sp20);
         guTranslateF(sp60, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
         guMtxCatF(sp20, sp60, sp20);
