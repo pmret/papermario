@@ -4,7 +4,7 @@ import argparse
 import os
 import sys
 import subprocess
-from pathlib import Path
+import tempfile
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = os.path.abspath(os.path.join(script_dir, ".."))
@@ -30,6 +30,9 @@ def import_c_file(in_file) -> str:
     cpp_command = ["gcc", "-E", "-P", "-dM", *CPP_FLAGS, in_file]
     cpp_command2 = ["gcc", "-E", "-P", *CPP_FLAGS, in_file]
 
+    with tempfile.NamedTemporaryFile(suffix=".c") as tmp:
+        stock_macros = subprocess.check_output(["gcc", "-E", "-P", "-dM", tmp.name], cwd=root_dir, encoding="utf-8")
+
     out_text = ""
     try:
         out_text += subprocess.check_output(cpp_command, cwd=root_dir, encoding="utf-8")
@@ -45,6 +48,9 @@ def import_c_file(in_file) -> str:
     if not out_text:
         print("Output is empty - aborting")
         sys.exit(1)
+
+    for line in stock_macros.strip().splitlines():
+        out_text = out_text.replace(line + "\n", "")
     return out_text
 
 def main():

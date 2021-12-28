@@ -13,6 +13,11 @@ typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 
 typedef Bytecode EvtSource[0];
 
+typedef struct DictionaryEntry {
+    /* 0x00 */ s32 key;
+    /* 0x04 */ s32 value;
+} DictionaryEntry; // size = 0x08
+
 typedef struct {
     u8 r, g, b, a;
 } Color_RGBA8;
@@ -678,7 +683,7 @@ typedef struct BattleStatus {
     /* 0x079 */ u8 pendingStarPoints; /* how many to add */
     /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
     /* 0x07B */ u8 damageTaken;
-    /* 0x07C */ u8 changePartnerAllowed;
+    /* 0x07C */ s8 changePartnerAllowed;
     /* 0x07D */ s8 menuStatus[4]; ///< -1 = automatically pick the first move, 0 = disabled, 1 = enabled
     /* 0x081 */ s8 actionSuccess;
     /* 0x082 */ char unk_82;
@@ -697,7 +702,7 @@ typedef struct BattleStatus {
     /* 0x08F */ char unk_8F[1];
     /* 0x090 */ s16 unk_90;
     /* 0x092 */ s8 unk_92;
-    /* 0x093 */ char unk_93;
+    /* 0x093 */ s8 unk_93;
     /* 0x094 */ s8 unk_94;
     /* 0x095 */ s8 unk_95;
     /* 0x096 */ s8 hammerCharge;
@@ -748,7 +753,7 @@ typedef struct BattleStatus {
     /* 0x18C */ s32 currentAttackEventSuppression;
     /* 0x190 */ s32 currentAttackStatus;
     /* 0x194 */ u8 statusChance;
-    /* 0x195 */ u8 statusDuration;
+    /* 0x195 */ s8 statusDuration;
     /* 0x196 */ char unk_196;
     /* 0x197 */ u8 targetHomeIndex; /* some sort of home idnex used for target list construction */
     /* 0x198 */ u8 powerBounceCounter;
@@ -1652,7 +1657,8 @@ typedef struct Actor {
     /* 0x11C */ char unk_11C[4];
     /* 0x120 */ s16 flyTime;
     /* 0x122 */ s16 flyArcAmplitude;
-    /* 0x124 */ char unk_124[17];
+    /* 0x124 */ char unk_124[16];
+    /* 0x134 */ s8 unk_134;
     /* 0x135 */ u8 footStepCounter;
     /* 0x136 */ u8 actorType;
     /* 0x137 */ char unk_137;
@@ -1706,7 +1712,7 @@ typedef struct Actor {
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
     /* 0x204 */ s8 unk_204;
-    /* 0x205 */ char unk_205[0x1];
+    /* 0x205 */ s8 unk_205;
     /* 0x206 */ s8 unk_206;
     /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
@@ -1724,7 +1730,8 @@ typedef struct Actor {
     /* 0x219 */ s8 transDuration;
     /* 0x21A */ char unk_21A[2];
     /* 0x21C */ u8 status;
-    /* 0x21D */ char unk_21D[3];
+    /* 0x21D */ s8 unk_21D;
+    /* 0x21E */ s16 unk_21E;
     /* 0x220 */ s8 isGlowing;
     /* 0x221 */ s8 attackBoost;
     /* 0x222 */ s8 defenseBoost;
@@ -1744,7 +1751,7 @@ typedef struct Actor {
     /* 0x430 */ f32 shadowScale; /* = actor size / 24.0 */
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
     /* 0x436 */ s16 hudElementDataIndex;
-    /* 0x438 */ s32 x[2]; /* ??? see FUN_80253974 */
+    /* 0x438 */ s32 unk_438[2]; /* ??? see FUN_80253974 */
     /* 0x440 */ struct HudElement* ptrDefuffIcon;
 } Actor; // size = 0x444
 

@@ -17,8 +17,8 @@ glabel create_popup_menu
 /* 8E320 800F4E70 2484D699 */  addiu     $a0, $a0, %lo(D_8010D699)
 /* 8E324 800F4E74 3C068011 */  lui       $a2, %hi(D_8010D698)
 /* 8E328 800F4E78 24C6D698 */  addiu     $a2, $a2, %lo(D_8010D698)
-/* 8E32C 800F4E7C 3C018011 */  lui       $at, %hi(D_8010D69C)
-/* 8E330 800F4E80 AC30D69C */  sw        $s0, %lo(D_8010D69C)($at)
+/* 8E32C 800F4E7C 3C018011 */  lui       $at, %hi(gPopupMenu)
+/* 8E330 800F4E80 AC30D69C */  sw        $s0, %lo(gPopupMenu)($at)
 /* 8E334 800F4E84 A600032C */  sh        $zero, 0x32c($s0)
 /* 8E338 800F4E88 AE00031C */  sw        $zero, 0x31c($s0)
 /* 8E33C 800F4E8C AE000320 */  sw        $zero, 0x320($s0)
@@ -41,8 +41,8 @@ glabel create_popup_menu
 .L800F4ED0:
 /* 8E380 800F4ED0 A0C00000 */  sb        $zero, ($a2)
 .L800F4ED4:
-/* 8E384 800F4ED4 3C058011 */  lui       $a1, %hi(D_8010D69C)
-/* 8E388 800F4ED8 8CA5D69C */  lw        $a1, %lo(D_8010D69C)($a1)
+/* 8E384 800F4ED4 3C058011 */  lui       $a1, %hi(gPopupMenu)
+/* 8E388 800F4ED8 8CA5D69C */  lw        $a1, %lo(gPopupMenu)($a1)
 /* 8E38C 800F4EDC 24020001 */  addiu     $v0, $zero, 1
 /* 8E390 800F4EE0 3C018011 */  lui       $at, %hi(D_8010D68E)
 /* 8E394 800F4EE4 A022D68E */  sb        $v0, %lo(D_8010D68E)($at)

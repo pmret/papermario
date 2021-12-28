@@ -72,6 +72,7 @@ extern HudElementAnim D_80107474[];
 extern s32 D_800A0F40;
 extern PopupMessage D_800A0BC0[32];
 extern s16 D_80078160[];
+extern s16 D_80078164[];
 extern s32 D_80078168[];
 
 void update_merlee_message(PopupMessage* popup);
@@ -175,7 +176,6 @@ void show_merlee_message(s16 messageIndex, s16 duration) {
     }
 }
 
-#ifdef NON_MATCHING // .rodata alignment, will match once all other functions in this file are matched
 void update_merlee_message(PopupMessage* popup) {
     s32 closeMessage = FALSE;
 
@@ -210,12 +210,20 @@ void update_merlee_message(PopupMessage* popup) {
         dispose_merlee_message(popup);
     }
 }
-#else
-INCLUDE_ASM(s32, "20ec0_len_5040", update_merlee_message);
-#endif
 
-void draw_merlee_message_string(PopupMessage* popup);
-INCLUDE_ASM(s32, "20ec0_len_5040", draw_merlee_message_string);
+// TODO remove once all other functions in this file are matched
+const static f32 padding = 0.0f;
+
+void draw_merlee_message_string(PopupMessage* popup, s32 posX, s32 posY) {
+    s32 messageID = D_80078168[popup->messageIndex];
+
+    posY += 6;
+    posX += 15;
+
+    posY += D_80078164[get_msg_lines(messageID) - 1];
+
+    draw_msg(messageID, posX, posY, 255, 15, 0);
+}
 
 void draw_merlee_message(PopupMessage* popup) {
     s32 messageID;
@@ -359,7 +367,15 @@ void enable_status_3(s32 iconID) {
     statusIcon->flags |= STATUS_ICON_FLAG_TRANSPARENT;
 }
 
-INCLUDE_ASM(s32, "20ec0_len_5040", func_80047B38);
+void func_80047B38(s32 iconID) {
+    HudStatusIcon* statusIcon = &D_800A0F44[iconID];
+
+    statusIcon->flags &= ~STATUS_ICON_FLAG_STATUS_4;
+    if (!statusIcon->status4.active) {
+        statusIcon->status4.active = TRUE;
+        statusIcon->status4.unk_02 = TRUE;
+    }
+}
 
 void remove_status_4(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
