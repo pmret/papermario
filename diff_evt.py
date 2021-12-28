@@ -4,10 +4,12 @@ import argparse
 import queue
 import time
 import subprocess
+import sys
 
 from diff import Display, debounced_fs_watch
 from colorama import Fore, Back, Style
 
+sys.path.append("tools")
 from tools.update_evts import parse_symbol_addrs
 from tools.disasm_script import ScriptDisassembler, get_constants
 
