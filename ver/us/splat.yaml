@@ -4932,7 +4932,6 @@ segments:
     overlay: True
     subsegments:
     - [0x78D150, c]
-    - [0x78D770, data]
   - dir: battle/star/star_storm
     type: code
     start: 0x78E7D0
