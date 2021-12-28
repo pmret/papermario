@@ -1050,6 +1050,7 @@ if __name__ == "__main__":
                 .replace("chillout", "chill_out")
                 .replace("timeout", "time_out")
                 .replace("upandaway", "up_and_away")
+                .replace("starbeam", "star_beam")
             )
         else:
             segment_name = f"battle_partner_{battle_area}"

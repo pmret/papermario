@@ -4974,7 +4974,6 @@ segments:
     overlay: True
     subsegments:
     - [0x796FC0, c]
-    - [0x7984B0, data]
   - dir: battle/star/peach_beam
     type: code
     start: 0x7997B0

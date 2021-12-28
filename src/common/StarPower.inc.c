@@ -49,3 +49,5 @@ ApiStatus N(UnkStarFunc4)(Evt* script, s32 isInitialCall) {
 #include "common/UnkStarFunc.inc.c"
 
 #include "common/SetNpcCollision32.inc.c"
+
+// possibly 2 scripts here

@@ -290,7 +290,6 @@ ApiStatus func_8024E664(Evt* script, s32 isInitialCall);
 ApiStatus func_8027D32C(Evt* script, s32 isInitialCall);
 ApiStatus GetActionCommandResult(Evt* script, s32 isInitialCall);
 ApiStatus CreateNpc(Evt* script, s32 isInitialCall);
-ApiStatus DeleteNpc(Evt* script, s32 isInitialCall);
 ApiStatus func_802535B4(Evt* script, s32 isInitialCall);
 ApiStatus func_80276EFC(Evt* script, s32 isInitialCall);
 ApiStatus func_802D7520(Evt* script, s32 isInitialCall);
