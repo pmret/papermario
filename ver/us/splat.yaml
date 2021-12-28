@@ -4953,7 +4953,6 @@ segments:
     overlay: True
     subsegments:
     - [0x791D90, c]
-    - [0x7923C0, data]
   - dir: battle/star/time_out
     type: code
     start: 0x793D20
