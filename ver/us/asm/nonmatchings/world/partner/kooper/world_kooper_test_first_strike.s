@@ -11,7 +11,7 @@ dlabel D_802BEC40_31CC60
 
 .section .text
 
-glabel func_802BE818_31C838
+glabel world_kooper_test_first_strike
 /* 31C838 802BE818 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* 31C83C 802BE81C AFB10044 */  sw        $s1, 0x44($sp)
 /* 31C840 802BE820 3C11802C */  lui       $s1, %hi(D_802BEB40_31CB60)

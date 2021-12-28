@@ -1,7 +1,6 @@
 #include "common.h"
 #include "../src/world/partners.h"
 
-extern unkPartnerStruct* D_802BEB60_31CB80;
 s32 entity_interacts_with_current_partner(s32);
 s32 test_item_entity_position(f32, f32, f32, f32);
 s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
@@ -10,7 +9,6 @@ void start_bounce_b(void);
 extern s32 D_802BEC68;
 extern s32 D_802BEC6C;
 extern s32 D_802BEC54;
-extern s32 D_802BEB40_31CB60;
 extern s32 D_802BEC64;
 extern s32 D_802BEC58;
 extern f32 D_802BEC70;
@@ -22,6 +20,8 @@ extern s32 D_802BEC5C;
 extern s16 D_8010C97A;
 void playFX_18(s32, f32, f32, f32, f32, f32, f32, s32);
 void func_801341B0(Npc* npc);
+
+s32 D_802BEB40_31CB60 = 0;
 
 s32 func_802BD100_31B120(Npc* npc) {
     if (D_8010C978 < 0) {
@@ -70,6 +70,14 @@ ApiStatus func_802BD228_31B248(Evt* script, s32 isInitialCall) {
 
     return partner_get_out(kooper) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
+
+EvtSource world_kooper_take_out = {
+    EVT_CALL(func_802BD228_31B248)
+    EVT_RETURN
+    EVT_END
+};
+
+unkPartnerStruct* D_802BEB60_31CB80 = 0x802BEC80;
 
 ApiStatus func_802BD260_31B280(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
@@ -154,6 +162,12 @@ ApiStatus func_802BD260_31B280(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+EvtSource D_802BEB64_31CB84 = {
+    EVT_CALL(func_802BD260_31B280)
+    EVT_RETURN
+    EVT_END
+};
+
 void func_802BD5F4_31B614(Npc* kooper) {
     if (D_8010C954 != NULL) {
         D_8010C954 = NULL;
@@ -163,6 +177,7 @@ void func_802BD5F4_31B614(Npc* kooper) {
     }
 }
 
+ApiStatus func_802BD638_31B658(Evt*, s32);
 #ifdef NON_MATCHING
 ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
     Camera* cam;
@@ -594,6 +609,12 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/partner/kooper", func_802BD638_31B658);
 #endif
 
+EvtSource D_802BEB80_31CBA0 = {
+    EVT_CALL(func_802BD638_31B658)
+    EVT_RETURN
+    EVT_END
+};
+
 ApiStatus func_802BE7E0_31C800(Evt* script, s32 isInitialCall) {
     Npc* kooper = script->owner2.npc;
 
@@ -604,8 +625,14 @@ ApiStatus func_802BE7E0_31C800(Evt* script, s32 isInitialCall) {
     return partner_put_away(kooper) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
+EvtSource D_802BEB9C_31CBBC = {
+    EVT_CALL(func_802BE7E0_31C800)
+    EVT_RETURN
+    EVT_END
+};
+
 #ifdef NON_EQUIVALENT
-s32 func_802BE818_31C838(Npc* npcKooper, Npc* npc2) {
+s32 world_kooper_test_first_strike(Npc* npcKooper, Npc* npc2) {
     f32 npcKooperXTemp, npcKooperYTemp, npcKooperZTemp;
     f32 npcX, npcY, npcZ;
     f32 npcKooperX, npcKooperY, npcKooperZ;
@@ -658,10 +685,10 @@ s32 func_802BE818_31C838(Npc* npcKooper, Npc* npc2) {
     return 0;
 }
 #else
-INCLUDE_ASM(s32, "world/partner/kooper", func_802BE818_31C838);
+INCLUDE_ASM(s32, "world/partner/kooper", world_kooper_test_first_strike);
 #endif
 
-void func_802BEA24_31CA44(Npc* kooper) {
+void world_kooper_pre_battle(Npc* kooper) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* kooperActionStatus = &gPartnerActionStatus;
     D_802BEC54 = 0;
@@ -693,7 +720,7 @@ void func_802BEA24_31CA44(Npc* kooper) {
     }
 }
 
-void func_802BEB10_31CB30(Npc* npc) {
+void world_kooper_post_battle(Npc* npc) {
     if (D_802BEC54) {
         partner_clear_player_tracking(npc);
         partner_use_ability();
