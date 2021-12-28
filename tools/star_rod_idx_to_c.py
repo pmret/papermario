@@ -1044,7 +1044,7 @@ if __name__ == "__main__":
         if "partner" in base:
             segment_name = f"battle/partners/{battle_area}"
         elif "/starpower/src/" in args.idxfile:
-            segment_name = f"battle/star/{battle_area}"
+            segment_name = f"battle/star/{battle_area}".replace("starstorm", "star_storm")
         else:
             segment_name = f"battle_partner_{battle_area}"
 
@@ -1178,7 +1178,7 @@ if __name__ == "__main__":
         print(f"#include \"message_ids.h\"")
         if INCLUDES_NEEDED["sprites"]:
             for npc in sorted(INCLUDES_NEEDED["sprites"]):
-                print(f"#include \"sprite/npc/{npc}.h\"")
+                print(f"#include \"sprite/npc/{npc}\"")
         print()
 
         if INCLUDES_NEEDED["forward"]:
