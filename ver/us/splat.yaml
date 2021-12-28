@@ -4918,7 +4918,6 @@ segments:
     overlay: True
     subsegments:
     - [0x789E60, c]
-    - [0x78A490, data]
   - dir: battle/star/refresh
     type: code
     start: 0x78B600
