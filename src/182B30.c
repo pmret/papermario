@@ -1,5 +1,6 @@
 #include "common.h"
 #include "sprite.h"
+#include "battle/battle.h"
 
 s32 func_80254250(void) {
     s32 ret;
@@ -527,7 +528,127 @@ void func_8025599C(Actor* actor) {
     func_802552EC(1, actor);
 }
 
-INCLUDE_ASM(s32, "182B30", update_actor_shadow);
+void update_actor_shadow(s32 arg0, Actor* actor) {
+    Camera* camera = &gCameras[1];
+    ActorPart* actorPart;
+    Shadow* shadow;
+    s32 numParts;
+    f32 x1, y1, z1;
+    f32 x2, y2, z2;
+    f32 dist;
+    s32 spriteID;
+    f32 yaw;
+    s32 i;
+
+    if (actor != NULL) {
+        shadow = get_shadow_by_index((s32) actor->shadow);
+        shadow->flags |= SHADOW_FLAGS_1;
+        if (!(actor->flags & ACTOR_FLAG_DISABLED)) {
+            if (actor->flags & ACTOR_FLAG_10000000) {
+                if (arg0 == 0) {
+                    func_8025593C(actor);
+                } else {
+                    func_8025597C(actor);
+                }
+            }
+
+            actor->renderMode = RENDER_MODE_ALPHATEST;
+            x1 = actor->currentPos.x + actor->headOffset.x;
+            if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                y1 = actor->currentPos.y + actor->headOffset.y;
+            } else {
+                y1 = actor->currentPos.y - actor->headOffset.y;
+            }
+            z1 = actor->currentPos.z + actor->headOffset.z;
+            numParts = actor->numParts;
+            actorPart = actor->partsTable;
+
+            for (i = 0; i < numParts; i++) {
+                if (!(actorPart->flags & ACTOR_PART_FLAG_INVISIBLE) && actorPart->idleAnimations != NULL) {
+                    spriteID = actorPart->unk_84;
+                    if (spriteID >= 0) {
+                        spr_update_sprite(spriteID, actorPart->currentAnimation, actorPart->animationRate);
+                        actorPart->unk_8C = func_802DE5C8(actorPart->unk_84);
+                    }
+
+                    if (!(actorPart->flags & ACTOR_PART_FLAG_100000)) {
+                        x2 = x1 + actorPart->partOffset.x + actorPart->visualOffset.x;
+                        if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                            y2 = y1 + actorPart->partOffset.y + actorPart->visualOffset.y;
+                        } else {
+                            y2 = y1 - actorPart->partOffset.y - actorPart->visualOffset.y;
+                        }
+                        z2 = z1 + actorPart->partOffset.z + actorPart->visualOffset.z;
+                        yaw = actorPart->yaw = actor->yaw;
+                    } else {
+                        x2 = actorPart->absolutePosition.x + actorPart->visualOffset.x;
+                        y2 = actorPart->absolutePosition.y + actorPart->visualOffset.y;
+                        z2 = actorPart->absolutePosition.z + actorPart->visualOffset.z;
+                        yaw = actorPart->yaw;
+                    }
+                    actorPart->currentPos.x = x2;
+                    actorPart->currentPos.y = y2;
+                    actorPart->currentPos.z = z2;
+
+                    if (!(actorPart->flags & SHADOW_FLAGS_4)) {
+                        shadow = get_shadow_by_index(actorPart->shadowIndex);
+                        shadow->flags &= ~SHADOW_FLAGS_1;
+                        x1 = actorPart->currentPos.x;
+                        if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                            y1 = actorPart->currentPos.y + 12.0;
+                        } else {
+                            y1 = actorPart->currentPos.y - 12.0;
+                        }
+                        z1 = actorPart->currentPos.z;
+
+                        dist = 32767.0f;
+                        npc_raycast_down_sides(0, &x1, &y1, &z1, &dist);
+
+                        if (200.0f < dist) {
+                            shadow->flags |= SHADOW_FLAGS_1;
+                        }
+                        shadow->position.x = x1;
+                        shadow->position.y = y1;
+                        shadow->position.z = z1;
+                        shadow->rotation.y = clamp_angle(yaw - camera->currentYaw);
+                        set_standard_shadow_scale(shadow, dist);
+                        shadow->scale.x *= actorPart->shadowScale;
+                    }
+                    if (actorPart->opacity < 255 || actorPart->flags & ACTOR_PART_FLAG_100) {
+                        actor->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
+                    }
+                }
+                actorPart = actorPart->nextPart;
+            }
+
+            shadow = get_shadow_by_index((s32) actor->shadow);
+            if (!(actor->flags & ACTOR_FLAG_NO_SHADOW)) {
+                shadow->flags &= ~ACTOR_FLAG_DISABLED;
+            }
+
+            x1 = actor->currentPos.x + actor->headOffset.x;
+            if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
+                y1 = actor->currentPos.y + actor->headOffset.y + 12.0;
+            } else {
+                y1 = actor->currentPos.y - actor->headOffset.y + 12.0;
+            }
+            z1 = actor->currentPos.z + actor->headOffset.z;
+
+            dist = 32767.0f;
+            npc_raycast_down_sides(0, &x1, &y1, &z1, &dist);
+
+            if (200.0f < dist) {
+                shadow->flags |= SHADOW_FLAGS_1;
+            }
+            shadow->position.x = x1;
+            shadow->position.y = y1;
+            shadow->position.z = z1 + bActorOffsets[actor->actorType].shadow;
+            shadow->rotation.y = clamp_angle(actor->yaw - camera->currentYaw);
+            set_standard_shadow_scale(shadow, dist);
+            shadow->scale.x *= actor->shadowScale * actor->scalingFactor;
+        }
+    }
+}
 
 s32 update_enemy_shadows(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -537,6 +658,8 @@ s32 update_enemy_shadows(void) {
         update_actor_shadow(0, battleStatus->enemyActors[i]);
     }
 }
+
+void update_player_actor_shadow(void);
 
 void update_hero_shadows(void) {
     update_actor_shadow(1, gBattleStatus.partnerActor);
