@@ -1048,6 +1048,7 @@ if __name__ == "__main__":
                 f"battle/star/{battle_area}"
                 .replace("starstorm", "star_storm")
                 .replace("chillout", "chill_out")
+                .replace("timeout", "time_out")
             )
         else:
             segment_name = f"battle_partner_{battle_area}"

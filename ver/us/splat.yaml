@@ -4960,7 +4960,6 @@ segments:
     overlay: True
     subsegments:
     - [0x793D20, c]
-    - [0x794240, data]
   - dir: battle/star/up_and_away
     type: code
     start: 0x7952E0
