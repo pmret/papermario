@@ -1,24 +1,27 @@
 #include "common.h"
 #include "../src/world/partners.h"
 
-extern unkPartnerStruct* D_802BEB60_31CB80;
 s32 entity_interacts_with_current_partner(s32);
 s32 test_item_entity_position(f32, f32, f32, f32);
 s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
 s32 npc_raycast_up(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
 void start_bounce_b(void);
+
+extern s32 D_802BEB40_31CB60;
+extern unkPartnerStruct* D_802BEB60_31CB80;
+
+extern s32 D_802BEC50;
+extern s32 D_802BEC54;
+extern s32 D_802BEC58;
+extern s32 D_802BEC5C;
+extern s32 D_802BEC60;
+extern s32 D_802BEC64;
 extern s32 D_802BEC68;
 extern s32 D_802BEC6C;
-extern s32 D_802BEC54;
-extern s32 D_802BEB40_31CB60;
-extern s32 D_802BEC64;
-extern s32 D_802BEC58;
 extern f32 D_802BEC70;
 extern f32 D_802BEC74;
 extern f32 D_802BEC78;
-extern s32 D_802BEC50;
-extern s32 D_802BEC60;
-extern s32 D_802BEC5C;
+
 extern s16 D_8010C97A;
 void playFX_18(s32, f32, f32, f32, f32, f32, f32, s32);
 void func_801341B0(Npc* npc);
@@ -27,11 +30,11 @@ s32 func_802BD100_31B120(Npc* npc) {
     if (D_8010C978 < 0) {
         return 0;
     }
-    
+
     if (!(D_8010C978 & 0x4000)) {
         return 0;
     }
-    
+
     return entity_interacts_with_current_partner(D_8010C978 & ~0x4000);
 }
 
@@ -43,7 +46,7 @@ void func_802BD144_31B164(Npc* kooper) {
 
 s32 func_802BD17C_31B19C(Npc* kooper) {
     D_802BEC68 = test_item_entity_position(kooper->pos.x, kooper->pos.y, kooper->pos.z, kooper->collisionRadius);
-    
+
     if (D_802BEC68 < 0) {
         return 0;
     } else {
@@ -85,7 +88,7 @@ ApiStatus func_802BD260_31B280(Evt* script, s32 isInitialCall) {
 
     playerData->unk_2F4[2]++;
     entity = D_8010C954;
-    
+
     if (entity == NULL) {
         partner_walking_update_player_tracking(kooper);
         partner_walking_update_motion(kooper);
@@ -185,7 +188,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
     f32 clamp;
     f32 colheight;
     f32 temp2;
-    
+
     if (currentEncounter->unk_08 == 0) {
         if (isInitialCall) {
             func_802BD5F4_31B614(kooper);
@@ -200,7 +203,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                 } else {
                     return ApiStatus_DONE2;
                 }
-                
+
             }
 
             else if (partnerActionStatus->actionState.b[0] == 0) {
@@ -211,7 +214,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                 D_802BEC50 = 30;
             }
         }
-        
+
         switch (script->functionTemp[0]) {
             case 20:
                 if (playerStatus->statusMenuCounterinputEnabledCounter == 0) {
@@ -291,14 +294,14 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         kooper->moveToPos.z = playerStatus->position.y + temp2;
                         playerStatus->flags |= PLAYER_STATUS_FLAGS_JUMPING;
                         gCameras->moveFlags |= CAMERA_FLAGS_1;
-                        
+
                         suggest_player_anim_clearUnkFlag(0x10007);
                         D_802BEC60 = 0;
                         sfx_play_sound_at_npc(0x2081, 0, -4);
                         script->functionTemp[0] = 2;
                     }
                 }
-            
+
             case 2:
                 if ((u8)playerStatus->actionState == 0x15 ||
                     (u8)playerStatus->actionState == 0x16 ||
@@ -434,7 +437,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                                     kooper->moveSpeed = 0.0f;
                                     sfx_play_sound_at_npc(0, 0, -4);
                                 }
-                                
+
                                 else if (kooper->planarFlyDist > 105.0f) {
                                     kooper->moveSpeed -= 4.0;
                                     if (kooper->moveSpeed < 0.01) {
@@ -487,7 +490,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                 }
                 D_802BEC50--;
                 break;
-                
+
             case 5:
                 if (D_802BEC50 != 0) {
                     D_802BEC50--;
@@ -624,7 +627,7 @@ s32 func_802BE818_31C838(Npc* npcKooper, Npc* npc2) {
         npcKooperX = npcDistanceToKooperX;
         npcKooperY = npcKooper->pos.y;
         npcKooperZ = npcKooper->pos.z;
-        
+
         npcCollisionHeight = npc2->collisionHeight;
         npcCollisionRadius = npc2->collisionRadius * 0.8;
         kooperCollisionHeight = npcKooper->collisionHeight;

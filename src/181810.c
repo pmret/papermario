@@ -328,7 +328,7 @@ ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->x[idx] = soundID;
+    actor->unk_438[idx] = soundID;
     sfx_play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
 
     return ApiStatus_DONE2;
@@ -346,12 +346,12 @@ ApiStatus StopLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (actor->x[idx] == 0) {
+    if (actor->unk_438[idx] == 0) {
         return ApiStatus_DONE2;
     }
 
-    sfx_stop_sound(actor->x[idx]);
-    actor->x[idx] = 0;
+    sfx_stop_sound(actor->unk_438[idx]);
+    actor->unk_438[idx] = 0;
     return ApiStatus_DONE2;
 }
 

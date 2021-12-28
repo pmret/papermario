@@ -13,8 +13,6 @@ extern HudElementAnim D_801086AC[];
 extern HudElementAnim D_801083D8[];
 extern HudElementAnim D_80108068[];
 extern HudElementAnim D_80104BEC[];
-extern HudElementAnim D_80108558[];
-extern HudElementAnim D_80109270[];
 
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;

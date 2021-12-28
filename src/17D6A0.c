@@ -1,8 +1,11 @@
 #include "common.h"
 #include "effects.h"
 
-extern PopupMessage popupMessages[32];
+// from 190B20.c
+extern s32 bMessages[];
+
 extern PopupMessage* D_802838F8;
+extern PopupMessage popupMessages[32];
 extern s16 D_8029F64C;
 extern s16 D_8029F640;
 extern s16 D_8029F64A;
@@ -89,7 +92,6 @@ void free_popup(PopupMessage* popup) {
     popup->active = FALSE;
 }
 
-void func_8024EFE0(f32 x, f32 y, f32 z, s32, s32, s32);
 INCLUDE_ASM(s32, "17D6A0", func_8024EFE0);
 
 INCLUDE_ASM(s32, "17D6A0", func_8024F394);

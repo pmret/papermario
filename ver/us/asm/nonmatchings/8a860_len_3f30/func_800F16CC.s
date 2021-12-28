@@ -20,8 +20,8 @@ glabel func_800F16CC
 /* 8AB90 800F16E0 AFB10014 */  sw        $s1, 0x14($sp)
 /* 8AB94 800F16E4 1040002B */  beqz      $v0, .L800F1794
 /* 8AB98 800F16E8 AFB00010 */   sw       $s0, 0x10($sp)
-/* 8AB9C 800F16EC 3C028011 */  lui       $v0, %hi(D_8010D69C)
-/* 8ABA0 800F16F0 8C42D69C */  lw        $v0, %lo(D_8010D69C)($v0)
+/* 8AB9C 800F16EC 3C028011 */  lui       $v0, %hi(gPopupMenu)
+/* 8ABA0 800F16F0 8C42D69C */  lw        $v0, %lo(gPopupMenu)($v0)
 /* 8ABA4 800F16F4 8C430318 */  lw        $v1, 0x318($v0)
 /* 8ABA8 800F16F8 2C62000E */  sltiu     $v0, $v1, 0xe
 /* 8ABAC 800F16FC 10400020 */  beqz      $v0, .L800F1780
@@ -69,8 +69,8 @@ glabel func_800F16CC
 /* 8AC3C 800F178C 0803C5FC */  j         .L800F17F0
 /* 8AC40 800F1790 00000000 */   nop
 .L800F1794:
-/* 8AC44 800F1794 3C028011 */  lui       $v0, %hi(D_8010D69C)
-/* 8AC48 800F1798 8C42D69C */  lw        $v0, %lo(D_8010D69C)($v0)
+/* 8AC44 800F1794 3C028011 */  lui       $v0, %hi(gPopupMenu)
+/* 8AC48 800F1798 8C42D69C */  lw        $v0, %lo(gPopupMenu)($v0)
 /* 8AC4C 800F179C 8C430318 */  lw        $v1, 0x318($v0)
 /* 8AC50 800F17A0 2C62000E */  sltiu     $v0, $v1, 0xe
 /* 8AC54 800F17A4 10400014 */  beqz      $v0, .L800F17F8
@@ -100,8 +100,8 @@ glabel func_800F16CC
 /* 8ACA0 800F17F0 0C051F9F */  jal       set_window_update
 /* 8ACA4 800F17F4 00000000 */   nop
 .L800F17F8:
-/* 8ACA8 800F17F8 3C118011 */  lui       $s1, %hi(D_8010D69C)
-/* 8ACAC 800F17FC 2631D69C */  addiu     $s1, $s1, %lo(D_8010D69C)
+/* 8ACA8 800F17F8 3C118011 */  lui       $s1, %hi(gPopupMenu)
+/* 8ACAC 800F17FC 2631D69C */  addiu     $s1, $s1, %lo(gPopupMenu)
 /* 8ACB0 800F1800 8E220000 */  lw        $v0, ($s1)
 /* 8ACB4 800F1804 8C420318 */  lw        $v0, 0x318($v0)
 /* 8ACB8 800F1808 24120003 */  addiu     $s2, $zero, 3
@@ -212,8 +212,8 @@ glabel func_800F16CC
 /* 8AE44 800F1994 0C0513BF */  jal       set_hud_element_tint
 /* 8AE48 800F1998 00A0382D */   daddu    $a3, $a1, $zero
 .L800F199C:
-/* 8AE4C 800F199C 3C028011 */  lui       $v0, %hi(D_8010D69C)
-/* 8AE50 800F19A0 8C42D69C */  lw        $v0, %lo(D_8010D69C)($v0)
+/* 8AE4C 800F199C 3C028011 */  lui       $v0, %hi(gPopupMenu)
+/* 8AE50 800F19A0 8C42D69C */  lw        $v0, %lo(gPopupMenu)($v0)
 /* 8AE54 800F19A4 8C430318 */  lw        $v1, 0x318($v0)
 /* 8AE58 800F19A8 24020005 */  addiu     $v0, $zero, 5
 /* 8AE5C 800F19AC 14620006 */  bne       $v1, $v0, .L800F19C8
