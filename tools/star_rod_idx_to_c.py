@@ -117,7 +117,7 @@ def read_ptr(addr: int, symbol_map: dict, needs_ampersand: bool = False) -> str:
     else:
         return f"(void*) 0x{addr:08X}"
 
-def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
+def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace=None):
     global INCLUDES_NEEDED, INCLUDED
     out = ""
 
@@ -127,6 +127,11 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
     INDENT = f"    "
     afterHeader = False
     treePrint = False
+
+    def transform_symbol_name(symbol):
+        if namespace and symbol.startswith(namespace + "_"):
+            return "N(" + symbol[len(namespace)+1:] + ")"
+        return symbol
 
     while len(midx) > 0:
         struct = midx.pop(0)
@@ -154,7 +159,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             #    INCLUDES_NEEDED["forward"].append(f"EvtSource " + name + ";")
             #    afterHeader = False
 
-            script_text = disasm_script.ScriptDisassembler(bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED).disassemble()
+            script_text = disasm_script.ScriptDisassembler(
+                bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED,
+                transform_symbol_name=transform_symbol_name,
+            ).disassemble()
 
             if "shakeTree" in name or "searchBush" in name:
                 symbol_map[struct["vaddr"]][0][1] = name.split("_",1)[0] + ")"
@@ -1019,6 +1027,7 @@ def name_struct(s):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Converts split data to C using a Star Rod idx file")
     parser.add_argument("idxfile", help="Input .*idx file from Star Rod dump")
+    parser.add_argument("namespace", nargs='?', help="Value of NAMESPACE macro")
     parser.add_argument("--comments", action="store_true", help="Write offset/vaddr comments")
 
     args = parser.parse_args()
@@ -1159,7 +1168,7 @@ if __name__ == "__main__":
 
         romfile.seek(rom_offset, 0)
 
-        disasm = disassemble(romfile, midx, symbol_map, args.comments, rom_offset)
+        disasm = disassemble(romfile, midx, symbol_map, args.comments, rom_offset, namespace=args.namespace)
 
         print("========== Includes needed: ===========\n")
         if is_battle:

@@ -470,13 +470,14 @@ def replace_constants(self, func, args):
 
 
 class ScriptDisassembler:
-    def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {"forward": [], "sprites": set(), "npcs": []}, INCLUDED = {"functions": set(), "includes": set()}, prelude = True):
+    def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {"forward": [], "sprites": set(), "npcs": []}, INCLUDED = {"functions": set(), "includes": set()}, prelude = True, transform_symbol_name=None):
         self.bytes = bytes
         self.script_name = script_name
         self.prelude = prelude
 
         self.symbol_map = extend_symbol_map(symbol_map, script_lib(self.bytes.tell()))
         self.romstart = romstart
+        self.transform_symbol_name = transform_symbol_name
         self.INCLUDES_NEEDED = INCLUDES_NEEDED
         self.INCLUDED = INCLUDED
 
@@ -571,6 +572,8 @@ class ScriptDisassembler:
             return addr
         if addr > 0x80000000 and addr in self.symbol_map:
             name = find_symbol_in_overlay(self.symbol_map, self.romstart, addr)
+            if self.transform_symbol_name:
+                name = self.transform_symbol_name(name)
             toReplace = True
             suffix = ""
             if False and name.startswith("N(func_"):
