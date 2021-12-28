@@ -55,6 +55,7 @@ def script_lib(offset):
                     _script_lib[vaddr] = []
                 _script_lib[vaddr].append([int(raddr, 16), name])
 
+        """
         # Sort the symbols for each vram address by the difference
         # between their rom address and the offset passed in.
         # If offset - rom address goes below 0, it's part of the
@@ -66,8 +67,18 @@ def script_lib(offset):
                 entry[0] = 0xFFFFFFFF if diff < 0 else diff
                 _script_lib[k][i][0] = entry[0]
             _script_lib[k] = sorted(_script_lib[k], key=lambda x: x[0])
+        """
     return _script_lib
 
+
+def extend_symbol_map(a, b):
+    for k in b:
+        if k not in a:
+            a[k] = b[k]
+        else:
+            a[k] += b[k]
+
+    return a
 
 def round_fixed(f: float) -> float:
     g = f * 100.0
@@ -76,6 +87,25 @@ def round_fixed(f: float) -> float:
         f = whole / 100.0
     return f
 
+
+def find_symbol_in_overlay(symbol_map, overlay_rom_addr, symbol_ram_addr):
+    if not symbol_ram_addr in symbol_map:
+        return None
+
+    lowest_delta = None
+    lowest_symbol_name = None
+
+    for rom_addr, symbol_name in symbol_map[symbol_ram_addr]:
+        delta = rom_addr - overlay_rom_addr
+
+        if delta >= 0 and (lowest_delta is None or delta <= lowest_delta):
+            lowest_delta = delta
+            lowest_symbol_name = symbol_name
+
+    if lowest_symbol_name:
+        return lowest_symbol_name
+
+    return symbol_map[symbol_ram_addr][0][1]
 
 # Grab CONSTANTS from the include/ folder to save manual work
 CONSTANTS = {}
@@ -225,20 +255,23 @@ def fix_args(self, func, args, info):
                 #    new_args.append(f"0x{argNum:X}")
                 #    continue
 
-                if func == "SetAnimation" and int(new_args[1], 10) == 0:
-                    call = f"{CONSTANTS['PlayerAnims'][argNum]}"
-                elif "EVT_" not in args[0] and int(args[0]) >= 0 and CONSTANTS["MAP_NPCS"].get(int(args[0])) == "NPC_PLAYER":
-                    if sprite == 0:
-                        print(f"Func {func} arg {i} ({CONSTANTS['MAP_NPCS'][int(args[0])]}) -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
-                        call = f"0x{argNum:X}"
-                    else:
+                try:
+                    if func == "SetAnimation" and int(new_args[1], 10) == 0:
                         call = f"{CONSTANTS['PlayerAnims'][argNum]}"
-                else:
-                    if sprite == 0:
-                        print(f"Func {func} arg {i} -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
-                        call = f"0x{argNum:X}"
+                    elif "EVT_" not in args[0] and int(args[0]) >= 0 and CONSTANTS["MAP_NPCS"].get(int(args[0])) == "NPC_PLAYER":
+                        if sprite == 0:
+                            print(f"Func {func} arg {i} ({CONSTANTS['MAP_NPCS'][int(args[0])]}) -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
+                            call = f"0x{argNum:X}"
+                        else:
+                            call = f"{CONSTANTS['PlayerAnims'][argNum]}"
                     else:
-                        call = make_anim_macro(self, sprite, palette, anim)
+                        if sprite == 0:
+                            print(f"Func {func} arg {i} -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
+                            call = f"0x{argNum:X}"
+                        else:
+                            call = make_anim_macro(self, sprite, palette, anim)
+                except KeyError:
+                        call = f"0x{argNum:06X}"
                 new_args.append(call)
             elif info[i] == "CustomMsg":
                 type_ = (argNum & 0xFF0000) >> 16
@@ -442,7 +475,7 @@ class ScriptDisassembler:
         self.script_name = script_name
         self.prelude = prelude
 
-        self.symbol_map = { **script_lib(self.bytes.tell()), **symbol_map }
+        self.symbol_map = extend_symbol_map(symbol_map, script_lib(self.bytes.tell()))
         self.romstart = romstart
         self.INCLUDES_NEEDED = INCLUDES_NEEDED
         self.INCLUDED = INCLUDED
@@ -467,7 +500,7 @@ class ScriptDisassembler:
             #print(f"Op {opcode:X}, argc {argc}")
 
             if opcode > 0xFF or argc > 0xFF:
-                raise Exception(f"script '{self.script_name}' is malformed")
+                raise Exception(f"script '{self.script_name}' is malformed (opcode {opcode:X}, argc {argc:X})")
 
             argv = []
             for i in range(0, argc):
@@ -501,21 +534,21 @@ class ScriptDisassembler:
     def var(self, arg, prefer_hex = False, use_evt_ptr = True):
         if arg in self.symbol_map:
             s = self.symbol_map[arg][0][1]
-            return f"EVT_PTR({s})" if use_evt_ptr else s
+            return f"EVT_ADDR({s})" if use_evt_ptr else s
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
-            if v <= -220000000: return f"EVT_FIXED({round_fixed((v + 230000000) / 1024)})"
-            elif v <= -200000000: return f"EVT_ARRAY_FLAG({v + 210000000})"
-            elif v <= -180000000: return f"EVT_ARRAY({v + 190000000})"
-            elif v <= -160000000: return f"EVT_SAVE_VAR({v + 170000000})"
-            elif v <= -140000000: return f"EVT_AREA_VAR({v + 150000000})"
-            elif v <= -120000000: return f"EVT_SAVE_FLAG({v + 130000000})"
-            elif v <= -100000000: return f"EVT_AREA_FLAG({v + 110000000})"
-            elif v <= -80000000: return f"EVT_MAP_FLAG({v + 90000000})"
-            elif v <= -60000000: return f"EVT_FLAG({v + 70000000})"
-            elif v <= -40000000: return f"EVT_MAP_VAR({v + 50000000})"
-            elif v <= -20000000: return f"EVT_VAR({v + 30000000})"
+            if v <= -220000000: return f"EVT_FLOAT({round_fixed((v + 230000000) / 1024)})"
+            elif v <= -200000000: return f"UF({v + 210000000})"
+            elif v <= -180000000: return f"UW({v + 190000000})"
+            elif v <= -160000000: return f"GSW({v + 170000000})"
+            elif v <= -140000000: return f"LSW({v + 150000000})"
+            elif v <= -120000000: return f"GSWF({v + 130000000})"
+            elif v <= -100000000: return f"LSWF({v + 110000000})"
+            elif v <= -80000000: return f"GF({v + 90000000})"
+            elif v <= -60000000: return f"LF({v + 70000000})"
+            elif v <= -40000000: return f"GW({v + 50000000})"
+            elif v <= -20000000: return f"LW({v + 30000000})"
 
         if arg == 0xFFFFFFFF:
             return "-1"
@@ -537,7 +570,7 @@ class ScriptDisassembler:
         if type(addr) is str:
             return addr
         if addr > 0x80000000 and addr in self.symbol_map:
-            name = self.symbol_map[addr][0][1]
+            name = find_symbol_in_overlay(self.symbol_map, self.romstart, addr)
             toReplace = True
             suffix = ""
             if False and name.startswith("N(func_"):
