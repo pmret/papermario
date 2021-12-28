@@ -2125,7 +2125,6 @@ segments:
     overlay: True
     subsegments:
     - [0x319670, c, parakarry]
-    - [0x31B000, data]
     - [0x31B080]
   - type: code
     dir: world/partner
@@ -2135,7 +2134,6 @@ segments:
     overlay: True
     subsegments:
     - [0x31B120, c, kooper]
-    - [0x31CB60, .data, kooper]
     - [0x31CBE0]
   - type: code
     dir: world/partner
@@ -2154,7 +2152,6 @@ segments:
     overlay: True
     subsegments:
     - [0x31DE70, c, sushie]
-    - [0x320B20, data]
     - [0x320BC0]
   - type: code
     dir: world/partner

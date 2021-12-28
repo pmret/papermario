@@ -1,7 +1,6 @@
 #include "common.h"
 #include "../src/world/partners.h"
 
-extern struct unkPartnerStruct* D_802BEAAC_31B01C;
 extern s32 D_802BEBC0_31CBE0;
 
 extern s32 D_802BEBB0;
@@ -11,7 +10,7 @@ extern s32 D_802BEBBC;
 extern s32 D_802BEBC4;
 
 
-void func_802BD100_319670(Npc* parakarry) {
+void world_parakarry_init(Npc* parakarry) {
     parakarry->collisionHeight = 37;
     parakarry->collisionRadius = 40;
     D_802BEBB0 = 0;
@@ -31,6 +30,14 @@ ApiStatus func_802BD148_3196B8(Evt* script, s32 isInitialCall) {
 
     return partner_get_out(parakarry) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
+
+EvtSource world_parakarry_take_out = {
+    EVT_CALL(func_802BD148_3196B8)
+    EVT_RETURN
+    EVT_END
+};
+
+struct unkPartnerStruct* D_802BEAAC_31B01C = 0x802BEBC8;
 
 ApiStatus func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
@@ -115,6 +122,12 @@ ApiStatus func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+EvtSource world_parakarry_update = {
+    EVT_CALL(func_802BD180_3196F0)
+    EVT_RETURN
+    EVT_END
+};
+
 void func_802BD514_319A84(Npc* parakarry) {
     if (D_8010C954) {
         D_8010C954 = 0;
@@ -146,7 +159,14 @@ s32 func_802BD558_319AC8(void) {
     return raycastResult;
 }
 
+s32 func_802BD660_319BD0(void);
 INCLUDE_ASM(s32, "world/partner/parakarry", func_802BD660_319BD0);
+
+EvtSource world_parakarry_use_ability = {
+    EVT_CALL(func_802BD660_319BD0)
+    EVT_RETURN
+    EVT_END
+};
 
 ApiStatus func_802BE8D4_31AE44(Evt* script, s32 isInitialCall) {
     Npc* parakarry = script->owner2.npc;
@@ -158,7 +178,13 @@ ApiStatus func_802BE8D4_31AE44(Evt* script, s32 isInitialCall) {
     return partner_put_away(parakarry) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-void func_802BE90C_31AE7C(Npc* parakarry) {
+EvtSource world_parakarry_put_away = {
+    EVT_CALL(func_802BE8D4_31AE44)
+    EVT_RETURN
+    EVT_END
+};
+
+void world_parakarry_pre_battle(Npc* parakarry) {
     PartnerActionStatus* parakarryActionStatus = &gPartnerActionStatus;
 
     if (D_802BEBB0) {
@@ -179,7 +205,7 @@ void func_802BE90C_31AE7C(Npc* parakarry) {
     parakarryActionStatus->actionState.b[3] = 4;
 }
 
-void func_802BE9D0_31AF40(Npc* parakarry) {
+void world_parakarry_post_battle(Npc* parakarry) {
     PartnerActionStatus* parakarryActionStatus = &gPartnerActionStatus;
 
     if (parakarryActionStatus->actionState.b[1] != 0) {

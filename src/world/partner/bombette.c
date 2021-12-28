@@ -57,7 +57,7 @@ void func_802BD100_317E50(Npc* npc) {
     }
 }
 
-void func_802BD2D8_318028(Npc* bombette) {
+void world_bombette_init(Npc* bombette) {
     bombette->collisionHeight = 28;
     bombette->collisionRadius = 24;
     D_802BE928 = 0;
@@ -167,7 +167,7 @@ void func_802BD6DC_31842C(Npc* npc) {
     }
 }
 
-s32 func_802BD720_318470(void) {
+s32 world_bombette_can_use_ability(void) {
     if (gPartnerActionStatus.actionState.b[0] != 0) {
         D_802BE934 = 1;
         return FALSE;
@@ -175,7 +175,7 @@ s32 func_802BD720_318470(void) {
     return TRUE;
 }
 
-s32 func_802BD748(void) {
+s32 world_bombette_can_player_pause(void) {
     return gPartnerActionStatus.actionState.b[0] == 0;
 }
 
@@ -191,7 +191,7 @@ ApiStatus func_802BE4E8_319238(Evt* script, s32 isInitialCall) {
     return partner_put_away(bombette) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-s32 func_802BE520_319270(Npc* bombette, Npc* enemy) {
+s32 world_bombette_test_first_strike(Npc* bombette, Npc* enemy) {
     f32 adjustedDistanceX, adjustedDistanceY, adjustedDistanceZ;
     f32 temp_f6, temp_f20, npcZPos, bombetteZPos, npcXPos, bombetteXPos;
     s32 slippingResult;
@@ -240,7 +240,7 @@ s32 func_802BE520_319270(Npc* bombette, Npc* enemy) {
     return ret;
 }
 
-void func_802BE6E8_319438(Npc* bombette) {
+void world_bombette_pre_battle(Npc* bombette) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* bombetteActionStatus = &gPartnerActionStatus;
 
@@ -287,7 +287,7 @@ void func_802BE6E8_319438(Npc* bombette) {
     }
 }
 
-EvtSource bombetteGetOut = {
+EvtSource world_bombette_take_out = {
     EVT_CALL(func_802BD300_318050)
     EVT_RETURN
     EVT_END
@@ -295,19 +295,19 @@ EvtSource bombetteGetOut = {
 
 unkPartnerStruct* D_802BE89C_3195EC = &D_802BE940;
 
-EvtSource bombetteUpdate = {
+EvtSource world_bombette_update = {
     EVT_CALL(func_802BD338_318088)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource bombetteUseAbility = {
+EvtSource world_bombette_use_ability = {
     EVT_CALL(func_802BD758_3184A8)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource bombettePutAway = {
+EvtSource world_bombette_put_away = {
     EVT_CALL(func_802BE4E8_319238)
     EVT_RETURN
     EVT_END
