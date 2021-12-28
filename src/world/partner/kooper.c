@@ -162,7 +162,7 @@ ApiStatus func_802BD260_31B280(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource D_802BEB64_31CB84 = {
+EvtSource world_kooper_update = {
     EVT_CALL(func_802BD260_31B280)
     EVT_RETURN
     EVT_END
@@ -609,7 +609,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/partner/kooper", func_802BD638_31B658);
 #endif
 
-EvtSource D_802BEB80_31CBA0 = {
+EvtSource world_kooper_use_ability = {
     EVT_CALL(func_802BD638_31B658)
     EVT_RETURN
     EVT_END
@@ -625,7 +625,7 @@ ApiStatus func_802BE7E0_31C800(Evt* script, s32 isInitialCall) {
     return partner_put_away(kooper) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource D_802BEB9C_31CBBC = {
+EvtSource world_kooper_put_away = {
     EVT_CALL(func_802BE7E0_31C800)
     EVT_RETURN
     EVT_END
