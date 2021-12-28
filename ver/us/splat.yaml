@@ -4967,7 +4967,6 @@ segments:
     overlay: True
     subsegments:
     - [0x7952E0, c]
-    - [0x7959B0, data]
   - dir: battle/star/star_beam
     type: code
     start: 0x796FC0

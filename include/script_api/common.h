@@ -304,6 +304,8 @@ ApiStatus SetNpcPaletteSwapMode(Evt* script, s32 isInitialCall);
 ApiStatus SetNpcPaletteSwapping(Evt* script, s32 isInitialCall);
 ApiStatus MakeTransformGroup(Evt* script, s32 isInitialCall);
 
+ApiStatus Spawn802D9D50(Evt* script, s32 isInitialCall);
+
 extern EvtSource EnemyNpcHit;
 extern EvtSource EnemyNpcDefeat;
 

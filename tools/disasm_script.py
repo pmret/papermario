@@ -242,7 +242,11 @@ def fix_args(self, func, args, info):
             if "_" in arg:
                 new_args.append(f"{arg}")
                 continue
-            argNum = int(arg, 0)
+            try:
+                argNum = int(arg, 0)
+            except ValueError:
+                new_args.append(f"{arg}")
+                continue
 
             if info[i] == "Bool":
                 new_args.append(f"{'TRUE' if argNum == True else 'FALSE'}")
