@@ -1024,7 +1024,7 @@ ActorPartDesc bMarioParts[] = {
     },
 };
 
-Vec3s D_80283524[] = {
+Vec3s btl_actorHomePositions[] = {
     { 5, 0, -20 },
     { 45, 0, -5 },
     { 85, 0, 10 },
