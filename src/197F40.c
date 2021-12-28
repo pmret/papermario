@@ -2276,14 +2276,35 @@ ApiStatus GetOwnerTarget(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", func_8026E914);
+ApiStatus func_8026E914(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 temp_v0 = *args++;
+    s32 temp_s1 = *args++;
+
+    evt_set_variable(script, temp_v0, gBattleStatus.currentTargetID2);
+    evt_set_variable(script, temp_s1, gBattleStatus.currentTargetPart2);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetPlayerActorID(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, *script->ptrReadPos, gBattleStatus.attackerActorID);
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", func_8026E9A0);
+ApiStatus func_8026E9A0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 temp_s0;
+    s32 temp_s0_2;
+
+    temp_s0 = evt_get_variable(script, *args++);
+    temp_s0_2 = evt_get_variable(script, *args++);
+
+    gBattleStatus.currentTargetPart2 = temp_s0_2;
+    gBattleStatus.currentTargetID2 = temp_s0;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetDistanceToGoal(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -2432,7 +2453,25 @@ ApiStatus UseIdleAnimation(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", func_8026F1A0);
+s32 func_8026F1A0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    s32 temp_s0_3 = evt_get_variable(script, *args++);
+    Actor* actor;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+
+    if (temp_s0_3 == 0) {
+        actor->flags &= ~ACTOR_FLAG_8000000;
+        func_80266E40(actor);
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -2450,7 +2489,7 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
     s32 flags;
 
     if (actorID == ACTOR_SELF) {
-        actorID = script->owner1.enemyID;
+        actorID = script->owner1.actorID;
     }
     actor = get_actor(actorID);
     debuff = actor->debuff;
