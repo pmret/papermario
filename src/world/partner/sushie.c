@@ -3,19 +3,29 @@
 #include "npc.h"
 #include "effects.h"
 
-extern unkPartnerStruct* D_802BFDF8_320B68;
-extern s32 D_802BFEEC;
-extern f32 D_802BFEE0;
-void func_802BD368_31E0D8(s32, f32, f32, f32, f32, f32);
-void partner_kill_ability_script(void);
-extern s32 bss_802BFEE4;
-extern s32 bss_802BFEE8;
-extern s32 bss_802BFEF0;
-extern s32 bss_802BFEF4;
-extern f32 bss_802BFEFC;
-extern f32 D_802BFDB0_320B20;
-extern f32 D_802BFDB4_320B24;
 extern s16 D_8010C97A;
+
+void partner_kill_ability_script(void);
+
+BSS f32 D_802BFEE0;
+BSS s32 bss_802BFEE4;
+BSS s32 bss_802BFEE8;
+BSS s32 D_802BFEEC;
+BSS s32 bss_802BFEF0;
+BSS s32 bss_802BFEF4;
+BSS s32 D_802BFEF8;
+BSS f32 bss_802BFEFC;
+BSS s32 bss_802BFF00;
+BSS s32 bss_802BFF04;
+BSS s32 bss_802BFF08;
+BSS s32 bss_802BFF0C;
+BSS unkPartnerStruct D_802BFF10_320C80;
+
+
+f32 D_802BFDB0_320B20 = 0.0f;
+f32 D_802BFDB4_320B24 = 0.0f;
+f32 D_802BFDB8_320B28 = 0.0f;
+f32 D_802BFDBC_320B2C = 0.0f;
 
 
 void func_802BD100_31DE70(void) {
@@ -99,9 +109,16 @@ s32 func_802BE280_31EFF0(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32 arg4, f3
     return colliderRayResult;
 }
 
+void func_802BE3A4_31F114(Npc*);
 INCLUDE_ASM(s32, "world/partner/sushie", func_802BE3A4_31F114);
 
-void func_802BF520_320290(Npc* sushie) {
+EvtSource world_sushie_use_ability = {
+    EVT_CALL(func_802BE3A4_31F114)
+    EVT_RETURN
+    EVT_END
+};
+
+void world_sushie_init(Npc* sushie) {
     sushie->collisionHeight = 24;
     sushie->collisionRadius = 36;
     sushie->unk_80 = 0x10000;
@@ -121,6 +138,14 @@ s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
 
     return partner_get_out(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
+
+EvtSource world_sushie_take_out = {
+    EVT_CALL(func_802BF568_3202D8)
+    EVT_RETURN
+    EVT_END
+};
+
+unkPartnerStruct* D_802BFDF8_320B68 = &D_802BFF10_320C80;
 
 ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
     Npc* sushie = script->owner2.npc;
@@ -203,6 +228,12 @@ ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+EvtSource world_sushie_update = {
+    EVT_CALL(func_802BF5A0_320310)
+    EVT_RETURN
+    EVT_END
+};
+
 void func_802BF920_320690(Npc* sushie) {
     if (D_8010C954 != NULL) {
         D_8010C954 = NULL;
@@ -223,7 +254,13 @@ s32 func_802BF964_3206D4(Evt* script, s32 isInitialCall) {
     return partner_put_away(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-void func_802BF9B8_320728(Npc* sushie) {
+EvtSource world_sushie_put_away = {
+    EVT_CALL(func_802BF964_3206D4)
+    EVT_RETURN
+    EVT_END
+};
+
+void world_sushie_pre_battle(Npc* sushie) {
     PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
 
     if (D_802BFEEC) {
@@ -238,7 +275,7 @@ void func_802BF9B8_320728(Npc* sushie) {
     sushieActionStatus->actionState.b[3] = 7;
 }
 
-void func_802BFA58_3207C8(Npc* sushie) {
+void world_sushie_post_battle(Npc* sushie) {
     PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
     
     if (sushieActionStatus->actionState.b[1] != 0) {
@@ -324,3 +361,9 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
+
+EvtSource world_sushie_while_riding = {
+    EVT_CALL(func_802BFAB8_320828)
+    EVT_RETURN
+    EVT_END
+};
