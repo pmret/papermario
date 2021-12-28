@@ -2618,11 +2618,134 @@ ApiStatus ResetAllActorSounds(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", SetActorSounds);
+s32 SetActorSounds(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    Actor* actor;
+    s32 temp_s0_4;
+    s32 temp_s1;
+    s32 temp_s3;
 
-INCLUDE_ASM(s32, "197F40", ResetActorSounds);
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
 
-INCLUDE_ASM(s32, "197F40", SetPartSounds);
+    temp_s3 = evt_get_variable(script, *args++);
+    temp_s0_4 = evt_get_variable(script, *args++);
+    temp_s1 = evt_get_variable(script, *args++);
+    actor = get_actor(actorID);
+
+    switch (temp_s3) {
+        case 0:
+            actor->actorTypeData1[0] = temp_s0_4;
+            actor->actorTypeData1[1] = temp_s1;
+            break;
+        case 1:
+            actor->actorTypeData1[2] = temp_s0_4;
+            actor->actorTypeData1[3] = temp_s1;
+            break;
+        case 2:
+            actor->actorTypeData1[4] = temp_s0_4;
+            break;
+        case 3:
+            actor->actorTypeData1[5] = temp_s0_4;
+            break;
+        case 4:
+            actor->actorTypeData1b[0] = temp_s0_4;
+            break;
+        case 5:
+            actor->actorTypeData1b[1] = temp_s0_4;
+            break;
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus ResetActorSounds(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    Actor* actor;
+    s32 temp_s3;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    temp_s3 = evt_get_variable(script, *args++);
+    evt_get_variable(script, *args++);
+    evt_get_variable(script, *args++);
+    actor = get_actor(actorID);
+
+    switch (temp_s3) {
+        case 0:
+            actor->actorTypeData1[0] = bActorSoundTable[actor->actorType].walk[0];
+            actor->actorTypeData1[1] = bActorSoundTable[actor->actorType].walk[1];
+            break;
+        case 1:
+            actor->actorTypeData1[2] = bActorSoundTable[actor->actorType].fly[0];
+            actor->actorTypeData1[3] = bActorSoundTable[actor->actorType].fly[1];
+            break;
+        case 2:
+            actor->actorTypeData1[4] = bActorSoundTable[actor->actorType].jump;
+            break;
+        case 3:
+            actor->actorTypeData1[5] = bActorSoundTable[actor->actorType].hurt;
+            break;
+        case 4:
+            actor->actorTypeData1b[0] = bActorSoundTable[actor->actorType].delay[0];
+            break;
+        case 5:
+            actor->actorTypeData1b[1] = bActorSoundTable[actor->actorType].delay[1];
+            break;
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus SetPartSounds(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 actorID = evt_get_variable(script, *args++);
+    ActorPart* actorPart;
+    s32 partIndex;
+    s32 temp_s1_5;
+    s32 temp_s2;
+    s32 temp_s4;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    partIndex = evt_get_variable(script, *args++);
+    temp_s4 = evt_get_variable(script, *args++);
+    temp_s1_5 = evt_get_variable(script, *args++);
+    temp_s2 = evt_get_variable(script, *args++);
+    actorPart = get_actor_part(get_actor(actorID), partIndex);
+
+    switch (temp_s4) {
+        case 0:
+            actorPart->partTypeData[0] = temp_s1_5;
+            actorPart->partTypeData[1] = temp_s2;
+            break;
+        case 1:
+            actorPart->partTypeData[2] = temp_s1_5;
+            actorPart->partTypeData[3] = temp_s2;
+            break;
+        case 2:
+            actorPart->partTypeData[4] = temp_s1_5;
+            break;
+        case 3:
+            actorPart->partTypeData[5] = temp_s1_5;
+            break;
+        case 4:
+            actorPart->actorTypeData2b[0] = temp_s1_5;
+            break;
+        case 5:
+            actorPart->actorTypeData2b[1] = temp_s1_5;
+            break;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetActorType(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -2631,7 +2754,7 @@ ApiStatus SetActorType(Evt* script, s32 isInitialCall) {
     s32 actorType;
 
     if (actorID == ACTOR_SELF) {
-        actorID = script->owner1.enemyID;
+        actorID = script->owner1.actorID;
     }
 
     actorType = evt_get_variable(script, *args++);
