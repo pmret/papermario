@@ -9,7 +9,7 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 syms = {}
 
 for version in ["us", "jp"]:
-    file_path = os.path.join(script_dir, f"ver/{version}/symbol_addrs.txt")
+    file_path = os.path.join(script_dir, f"../ver/{version}/symbol_addrs.txt")
 
     with open(file_path) as f:
         symbol_lines = f.readlines()
