@@ -7,9 +7,6 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_strange_cake
 
-ApiStatus func_802D75D8(Evt *script, s32 isInitialCall);
-ApiStatus func_802D7520(Evt *script, s32 isInitialCall);
-
 ApiStatus N(func_802A1A8C_731D8C)(Evt *script, s32 isInitialCall);
 ApiStatus N(func_802A18D8_731BD8)(Evt *script, s32 isInitialCall);
 ApiStatus N(AddFP)(Evt *script, s32 isInitialCall);

@@ -117,7 +117,7 @@ def read_ptr(addr: int, symbol_map: dict, needs_ampersand: bool = False) -> str:
     else:
         return f"(void*) 0x{addr:08X}"
 
-def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
+def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace=None):
     global INCLUDES_NEEDED, INCLUDED
     out = ""
 
@@ -127,6 +127,11 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
     INDENT = f"    "
     afterHeader = False
     treePrint = False
+
+    def transform_symbol_name(symbol):
+        if namespace and symbol.startswith(namespace + "_"):
+            return "N(" + symbol[len(namespace)+1:] + ")"
+        return symbol
 
     while len(midx) > 0:
         struct = midx.pop(0)
@@ -143,7 +148,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             out += f"// rodata: {struct['name']}\n"
 
         # format struct
-        if struct["type"].startswith("EvtSource"):
+        if struct["type"].startswith("Script"):
             if struct["type"] == "Script_Main":
                 name = "N(main)"
                 INCLUDES_NEEDED["forward"].append(f"EvtSource " + name + ";")
@@ -154,16 +159,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             #    INCLUDES_NEEDED["forward"].append(f"EvtSource " + name + ";")
             #    afterHeader = False
 
-            pos = bytes.tell()
-            try_replace = False
-            try:
-                script_text = disasm_script.ScriptDSLDisassembler(bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED).disassemble()
-                try_replace = True
-            except disasm_script.UnsupportedScript as e:
-                script_text = f"// Unable to use DSL: {e}\n"
-
-                bytes.seek(pos)
-                script_text += disasm_script.ScriptDisassembler(bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED).disassemble()
+            script_text = disasm_script.ScriptDisassembler(
+                bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED,
+                transform_symbol_name=transform_symbol_name,
+            ).disassemble()
 
             if "shakeTree" in name or "searchBush" in name:
                 symbol_map[struct["vaddr"]][0][1] = name.split("_",1)[0] + ")"
@@ -174,7 +173,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     treePrint = True
                 continue
 
-            if try_replace and "exitWalk" in name:
+            if "exitWalk" in name:
                 script_text = script_text.splitlines()
                 walkDistance = exitIdx = map_ = entryIdx = ""
                 if "UseExitHeading" in script_text[2]:
@@ -955,7 +954,7 @@ def parse_midx(file, prefix="", vram=0x80240000):
 
     for line in file.readlines():
         s = line.split("#")
-        if len(s) == 5:
+        if len(s) == 5 or len(s) == 6:
             if s[0] == "$Start": continue
             if s[0] == "$End": continue
 
@@ -991,6 +990,8 @@ def parse_midx(file, prefix="", vram=0x80240000):
                 "length": end - start,
                 "end": end,
             })
+        else:
+            raise Exception(str(s))
 
     structs.sort(key=lambda s: s["start"])
     return structs
@@ -1026,6 +1027,7 @@ def name_struct(s):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Converts split data to C using a Star Rod idx file")
     parser.add_argument("idxfile", help="Input .*idx file from Star Rod dump")
+    parser.add_argument("namespace", nargs='?', help="Value of NAMESPACE macro")
     parser.add_argument("--comments", action="store_true", help="Write offset/vaddr comments")
 
     args = parser.parse_args()
@@ -1041,12 +1043,29 @@ if __name__ == "__main__":
 
         if "partner" in base:
             segment_name = f"battle/partners/{battle_area}"
+        elif "/starpower/src/" in args.idxfile:
+            segment_name = (
+                f"battle/star/{battle_area}"
+                .replace("starstorm", "star_storm")
+                .replace("chillout", "chill_out")
+                .replace("timeout", "time_out")
+                .replace("upandaway", "up_and_away")
+                .replace("starbeam", "star_beam")
+                .replace("peachbeam", "peach_beam")
+                .replace("peachfocus", "peach_focus")
+                .replace("peachdash", "peach_dash")
+            )
         else:
             segment_name = f"battle_partner_{battle_area}"
 
         is_battle = True
 
     symbol_map = {}
+    def add_to_symbol_map(addr, pair):
+        if addr in symbol_map:
+            symbol_map[addr].append(pair)
+        else:
+            symbol_map[addr] = [pair]
 
     disasm_script.get_constants()
 
@@ -1116,16 +1135,16 @@ if __name__ == "__main__":
                     string_data = string_data[:-1]
 
                 string_literal = json.dumps(string_data)
-                symbol_map[struct["vaddr"]] = [[struct["vaddr"], string_literal]]
+                add_to_symbol_map(struct["vaddr"], [struct["vaddr"], string_literal])
             elif struct["type"] == "SJIS":
                 string_data = sjis.decode(romfile.read(struct["length"]))
 
                 string_literal = '"' + string_data + '"'
-                symbol_map[struct["vaddr"]] = [[struct["vaddr"], string_literal]]
+                add_to_symbol_map(struct["vaddr"], [struct["vaddr"], string_literal])
             elif struct["type"] == "ConstDouble":
                 double = unpack_from(">d", romfile.read(struct["length"]), 0)[0]
                 double_literal = f"{double}"
-                symbol_map[struct["vaddr"]] = [[struct["vaddr"], double_literal]]
+                add_to_symbol_map(struct["vaddr"], [struct["vaddr"], double_literal])
             elif struct["type"] == "NpcGroup":
                 for z in range(struct["length"]//0x1F0):
                     npc = romfile.read(0x1F0)
@@ -1137,9 +1156,9 @@ if __name__ == "__main__":
                             sprite =  disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"].upper()
                             if npc_id not in total_npc_counts:
                                 total_npc_counts[npc_id] = sprite
-                symbol_map[struct["vaddr"]] = [[struct["vaddr"], struct["name"]]]
+                add_to_symbol_map(struct["vaddr"], [struct["vaddr"], struct["name"]])
             else:
-                symbol_map[struct["vaddr"]] = [[struct["vaddr"], struct["name"]]]
+                add_to_symbol_map(struct["vaddr"],  [struct["vaddr"], struct["name"]])
 
         # fix NPC names
         curr_counts = {}
@@ -1159,7 +1178,7 @@ if __name__ == "__main__":
 
         romfile.seek(rom_offset, 0)
 
-        disasm = disassemble(romfile, midx, symbol_map, args.comments, rom_offset)
+        disasm = disassemble(romfile, midx, symbol_map, args.comments, rom_offset, namespace=args.namespace)
 
         print("========== Includes needed: ===========\n")
         if is_battle:
@@ -1169,7 +1188,7 @@ if __name__ == "__main__":
         print(f"#include \"message_ids.h\"")
         if INCLUDES_NEEDED["sprites"]:
             for npc in sorted(INCLUDES_NEEDED["sprites"]):
-                print(f"#include \"sprite/npc/{npc}.h\"")
+                print(f"#include \"sprite/npc/{npc}\"")
         print()
 
         if INCLUDES_NEEDED["forward"]:

@@ -83,8 +83,7 @@
 /// Used for almost all savefile state.
 #define GSW(INDEX) (((((INDEX)) - 170000000))
 
-// TODO(docs): figure out what 'U' might stand for in UW and UF
-/// **Array** Word. A variable stored within the current thread's array.
+/// User Word. A variable stored within the current thread's array.
 /// You can load an array with EVT_USE_ARRAY or temporarily allocate one with EVT_MALLOC_ARRAY, then get/set values with
 /// the `UW(index)` macro.
 ///
@@ -92,7 +91,7 @@
 /// Star Rod equivalent: `*Array[v]`.
 #define UW(INDEX) ((((INDEX)) - 190000000))
 
-/// **Array** Flag. A boolean variable stored within the current thread's flag array.
+/// User Flag. A boolean variable stored within the current thread's flag array.
 /// The flag array is distinct from the word array (unlike EVT_USE_BUF and EVT_USE_FBUF).
 ///
 /// Range: `0 <= v`

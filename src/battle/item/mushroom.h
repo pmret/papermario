@@ -7,11 +7,6 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_mushroom
 
-ApiStatus SetVirtualEntityFlags(Evt* script, s32 isInitialCall);
-ApiStatus GetVirtualEntityPosition(Evt* script, s32 isInitialCall);
-ApiStatus func_802D7520(Evt* script, s32 isInitialCall);
-ApiStatus func_802D75D8(Evt* script, s32 isInitialCall);
-
 ApiStatus N(func_802A123C_715A8C)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802A12EC_715B3C)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802A15A0_715DF0)(Evt* script, s32 isInitialCall);
