@@ -1044,7 +1044,11 @@ if __name__ == "__main__":
         if "partner" in base:
             segment_name = f"battle/partners/{battle_area}"
         elif "/starpower/src/" in args.idxfile:
-            segment_name = f"battle/star/{battle_area}".replace("starstorm", "star_storm")
+            segment_name = (
+                f"battle/star/{battle_area}"
+                .replace("starstorm", "star_storm")
+                .replace("chillout", "chill_out")
+            )
         else:
             segment_name = f"battle_partner_{battle_area}"
 

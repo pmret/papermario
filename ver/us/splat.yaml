@@ -4946,7 +4946,6 @@ segments:
     overlay: True
     subsegments:
     - [0x7900D0, c]
-    - [0x7909C0, data]
   - dir: battle/star/smooch
     type: code
     start: 0x791D90
