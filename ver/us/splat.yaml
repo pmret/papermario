@@ -4913,6 +4913,7 @@ segments:
     overlay: True
     subsegments:
     - [0x789E60, c]
+    - [0x78A490]
   - dir: battle/star/refresh
     type: code
     start: 0x78B600
@@ -4920,6 +4921,7 @@ segments:
     overlay: True
     subsegments:
     - [0x78B600, c]
+    - [0x78C070]
   - dir: battle/star/lullaby
     type: code
     start: 0x78D150
@@ -4927,6 +4929,7 @@ segments:
     overlay: True
     subsegments:
     - [0x78D150, c]
+    - [0x78D770]
   - dir: battle/star/star_storm
     type: code
     start: 0x78E7D0
@@ -4934,6 +4937,7 @@ segments:
     overlay: True
     subsegments:
     - [0x78E7D0, c]
+    - [0x78EEC0]
   - dir: battle/star/chill_out
     type: code
     start: 0x7900D0
@@ -4941,6 +4945,7 @@ segments:
     overlay: True
     subsegments:
     - [0x7900D0, c]
+    - [0x7909C0]
   - dir: battle/star/smooch
     type: code
     start: 0x791D90
@@ -4948,6 +4953,7 @@ segments:
     overlay: True
     subsegments:
     - [0x791D90, c]
+    - [0x7923C0]
   - dir: battle/star/time_out
     type: code
     start: 0x793D20
@@ -4955,6 +4961,7 @@ segments:
     overlay: True
     subsegments:
     - [0x793D20, c]
+    - [0x794240]
   - dir: battle/star/up_and_away
     type: code
     start: 0x7952E0
@@ -4962,6 +4969,7 @@ segments:
     overlay: True
     subsegments:
     - [0x7952E0, c]
+     - [0x7959B0]
   - dir: battle/star/star_beam
     type: code
     start: 0x796FC0
@@ -4969,6 +4977,7 @@ segments:
     overlay: True
     subsegments:
     - [0x796FC0, c]
+    - [0x7984B0]
   - dir: battle/star/peach_beam
     type: code
     start: 0x7997B0
@@ -4976,6 +4985,7 @@ segments:
     overlay: True
     subsegments:
     - [0x7997B0, c]
+    - [0x79ACA0]
   - dir: battle/star/peach_focus
     type: code
     start: 0x79BFA0
@@ -4983,6 +4993,7 @@ segments:
     overlay: True
     subsegments:
     - [0x79BFA0, c]
+    - [0x79C4D0]
   - dir: battle/star/peach_dash
     type: code
     start: 0x79D8A0
@@ -4990,6 +5001,7 @@ segments:
     overlay: True
     subsegments:
     - [0x79D8A0, c]
+    - [0x79DE50]
   - [0x79EF40, bin] # todo identify
   - dir: world/script_api
     type: code
