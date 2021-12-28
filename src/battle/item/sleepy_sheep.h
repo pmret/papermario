@@ -7,7 +7,6 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_sleepy_sheep
 
-ApiStatus func_80273444(Evt* script, s32 isInitialCall);
 ApiStatus SetVirtualEntityMoveSpeed(Evt* script, s32 isInitialCall);
 ApiStatus VirtualEntityMoveTo(Evt* script, s32 isInitialCall);
 ApiStatus func_80252B3C(Evt* script, s32 isInitialCall);
