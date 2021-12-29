@@ -1,6 +1,6 @@
 #include "tik_10.h"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_80240310_8866D0);
+#include "world/common/UnkPosFunc2.inc.c"
 
 #include "world/common/SetOverrideFlags_40.inc.c"
 
