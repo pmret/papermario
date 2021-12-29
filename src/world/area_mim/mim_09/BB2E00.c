@@ -7,7 +7,7 @@ static char* N(exit_str_1) = "mim_07";
 
 INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_80240068_BB2E68);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_802400A0_BB2EA0);
+#include "world/common/UnkNpcAIFunc36.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_802402D0_BB30D0);
 

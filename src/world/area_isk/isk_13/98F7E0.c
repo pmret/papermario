@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "isk_12";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_isk/isk_13/98F7E0", func_80240000_98F7E0);
+#include "world/common/UnkNpcAIFunc36.inc.c"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_13/98F7E0", func_80240230_98FA10);
 

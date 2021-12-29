@@ -103,7 +103,7 @@ glabel btl_merlee_on_start_turn_BAAFA0
 .L80240FC4_BAB104:
 /* BAB104 80240FC4 0260202D */  daddu     $a0, $s3, $zero
 /* BAB108 80240FC8 0280282D */  daddu     $a1, $s4, $zero
-/* BAB10C 80240FCC 0C09009C */  jal       func_80240270_BAA3B0
+/* BAB10C 80240FCC 0C09009C */  jal       mim_07_UnkNpcAIFunc36
 /* BAB110 80240FD0 0200302D */   daddu    $a2, $s0, $zero
 .L80240FD4_BAB114:
 /* BAB114 80240FD4 0260202D */  daddu     $a0, $s3, $zero

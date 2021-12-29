@@ -1,6 +1,6 @@
 #include "mim_02.h"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_80240070_B97C70);
+#include "world/common/UnkNpcAIFunc36.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_802402A0_B97EA0);
 
