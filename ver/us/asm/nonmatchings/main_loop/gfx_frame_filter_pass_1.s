@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8002725C
+glabel gfx_frame_filter_pass_1
 /* 265C 8002725C 27BDFF88 */  addiu     $sp, $sp, -0x78
 /* 2660 80027260 0080582D */  daddu     $t3, $a0, $zero
 /* 2664 80027264 AFA5007C */  sw        $a1, 0x7c($sp)
