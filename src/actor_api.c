@@ -2333,12 +2333,10 @@ ApiStatus ChooseNextTarget(Evt* script, s32 isInitialCall) {
     s32 temp_v0_3;
     s32 phi_v1;
     s32 phi_a2;
-    s8 phi_v1_4;
 
     if (temp_v0 == -1) {
         actor->selectedTargetIndex = 0;
-        phi_v1_4 = actor->targetIndexList[0];
-        target = &actor->targetData[phi_v1_4];
+        target = &actor->targetData[actor->targetIndexList[0]];
         actor->targetActorID = target->actorID;
         actor->targetPartIndex = target->partID;
         return ApiStatus_DONE2;
@@ -2346,8 +2344,7 @@ ApiStatus ChooseNextTarget(Evt* script, s32 isInitialCall) {
 
     if (temp_v0 == 0xA) {
         actor->selectedTargetIndex = actor->targetListLength - 1;
-        phi_v1_4 = actor->targetIndexList[ actor->selectedTargetIndex];
-        target = &actor->targetData[phi_v1_4];
+        target = &actor->targetData[actor->targetIndexList[actor->selectedTargetIndex]];
         actor->targetActorID = target->actorID;
         actor->targetPartIndex = target->partID;
         return ApiStatus_DONE2;
@@ -2374,7 +2371,7 @@ ApiStatus ChooseNextTarget(Evt* script, s32 isInitialCall) {
     }
 
     actor->selectedTargetIndex = phi_v1;
-    target = &actor->targetData[actor->targetIndexList[(s8) phi_v1]];
+    target = &actor->targetData[actor->targetIndexList[actor->selectedTargetIndex]];
     actor->targetActorID = target->actorID;
     actor->targetPartIndex = target->partID;
     evt_set_variable(script, temp, phi_a2);
@@ -2490,12 +2487,12 @@ ApiStatus GetTargetListLength(Evt* script) {
 
 ApiStatus GetOwnerTarget(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Actor* temp_s2 = get_actor(script->owner1.enemyID);
-    s32 temp = *args++;
-    s32 temp2 = *args++;
+    Actor* actor = get_actor(script->owner1.enemyID);
+    s32 actorID = *args++;
+    s32 partIndex = *args++;
 
-    evt_set_variable(script, temp, temp_s2->targetActorID);
-    evt_set_variable(script, temp2, temp_s2->targetPartIndex);
+    evt_set_variable(script, actorID, actor->targetActorID);
+    evt_set_variable(script, partIndex, actor->targetPartIndex);
 
     return ApiStatus_DONE2;
 }
@@ -2626,7 +2623,6 @@ ApiStatus func_8026ED20(Evt* script, s32 isInitialCall) {
     } else {
         actorPart->flags &= ~ACTOR_FLAG_1000000;
     }
-
 
     return ApiStatus_DONE2;
 }
