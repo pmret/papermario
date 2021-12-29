@@ -7,7 +7,6 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_pow_block
 
-ApiStatus func_80273444(Evt* script, s32 isInitialCall);
 ApiStatus func_80269EAC(Evt* script, s32 isInitialCall);
 
 ApiStatus N(func_802A1318_718B68)(Evt* script, s32 isInitialCall);

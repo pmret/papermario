@@ -286,8 +286,15 @@ ApiStatus func_80269550(Evt* script, s32 isInitialCall);
 ApiStatus func_8026919C(Evt* script, s32 isInitialCall);
 ApiStatus func_80280818(Evt* script, s32 isInitialCall); ///< YieldTurn copy
 ApiStatus func_8024ECF8(Evt* script, s32 isInitialCall);
+ApiStatus func_8024E664(Evt* script, s32 isInitialCall);
 ApiStatus func_8027D32C(Evt* script, s32 isInitialCall);
 ApiStatus GetActionCommandResult(Evt* script, s32 isInitialCall);
+ApiStatus CreateNpc(Evt* script, s32 isInitialCall);
+ApiStatus func_802535B4(Evt* script, s32 isInitialCall);
+ApiStatus func_80276EFC(Evt* script, s32 isInitialCall);
+ApiStatus func_802D7520(Evt* script, s32 isInitialCall);
+ApiStatus func_802D75D8(Evt* script, s32 isInitialCall);
+ApiStatus func_80273444(Evt *script, s32 isInitialCall);
 
 extern EvtSource PlayerScriptDispatcher;
 extern EvtSource PeachScriptDispatcher;

@@ -6,10 +6,6 @@
 void force_player_anim(s32 arg0);
 void func_802BE070_31DBE0(void);
 void partner_kill_ability_script(void);
-void func_802BD1AC_31CD1C(s32 arg0);
-extern s32 D_802BE278_31DDE8;
-extern f64 D_802BE2F0_31DE60;
-extern s32 D_802BE250_31DDC0;
 
 typedef struct unk_802BE310_C {
     /* 0x00 */ s32 unk_00;
@@ -30,12 +26,17 @@ typedef struct unk_802BE310 {
     /* 0x0C */ unk_802BE310_C* unk_0C;
 } unk_802BE310; //size = 0x10
 
-extern s32 D_802BE300;
-extern s32 D_802BE304;
-extern s32 D_802BE308;
-extern s32 D_802BE30C;
-extern unk_802BE310* D_802BE310;
-extern unkPartnerStruct* D_802BE274_31DDE4;
+BSS s32 D_802BE300;
+BSS s32 D_802BE304;
+BSS s32 D_802BE308;
+BSS s32 D_802BE30C;
+BSS unk_802BE310* D_802BE310;
+BSS s32 D_802BE314;
+BSS unkPartnerStruct D_802BE318;
+
+s32 D_802BE250_31DDC0 = 0x18;
+
+s32 D_802BE254_31DDC4 = 6;
 
 void func_802BD100_31CC70(Npc* npc) {
     if (!(npc->flags & NPC_FLAG_2)) {
@@ -53,9 +54,10 @@ s32 func_802BD180_31CCF0(void) {
     }
 }
 
+void func_802BD1AC_31CD1C(s32 arg0);
 INCLUDE_ASM(s32, "world/partner/watt", func_802BD1AC_31CD1C);
 
-void func_802BD23C_31CDAC(Npc* npc) {
+void world_watt_init(Npc* npc) {
     npc->collisionHeight = 24;
     npc->collisionRadius = 24;
     D_802BE308 = 0;
@@ -78,6 +80,16 @@ ApiStatus func_802BD27C_31CDEC(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 }
+
+EvtSource world_watt_take_out = {
+    EVT_CALL(func_802BD27C_31CDEC)
+    EVT_RETURN
+    EVT_END
+};
+
+unkPartnerStruct* D_802BE274_31DDE4 = &D_802BE318;
+
+s32 D_802BE278_31DDE8 = 0;
 
 ApiStatus func_802BD2B4_31CE24(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
@@ -157,7 +169,7 @@ ApiStatus func_802BD2B4_31CE24(Evt* script, s32 isInitialCall) {
                 
                 watt->pos.y += new_var;
                 watt->renderYaw = clamp_angle(360.0f - D_802BE274_31DDE4->unk_10);
-                D_802BE274_31DDE4->unk_14 += D_802BE2F0_31DE60;
+                D_802BE274_31DDE4->unk_14 += 0.8;
 
                 if (D_802BE274_31DDE4->unk_14 > 40.0f) {
                     D_802BE274_31DDE4->unk_14 = 40.0f;
@@ -191,6 +203,12 @@ ApiStatus func_802BD2B4_31CE24(Evt* script, s32 isInitialCall) {
     return 0;
 }
 
+EvtSource world_watt_update = {
+    EVT_CALL(func_802BD2B4_31CE24)
+    EVT_RETURN
+    EVT_END
+};
+
 void func_802BD710_31D280(Npc* watt) {
     if (D_8010C954 != NULL) {
         D_8010C954 = NULL;
@@ -200,7 +218,14 @@ void func_802BD710_31D280(Npc* watt) {
     }
 }
 
+s32 func_802BD754_31D2C4(void);
 INCLUDE_ASM(s32, "world/partner/watt", func_802BD754_31D2C4);
+
+EvtSource world_watt_use_ability = {
+    EVT_CALL(func_802BD754_31D2C4)
+    EVT_RETURN
+    EVT_END
+};
 
 s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -224,7 +249,13 @@ s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
     }
 }
 
-void func_802BDD9C_31D90C(Npc* watt) {
+EvtSource world_watt_put_away = {
+    EVT_CALL(func_802BDD0C_31D87C)
+    EVT_RETURN
+    EVT_END
+};
+
+void world_watt_pre_battle(Npc* watt) {
     PartnerActionStatus* wattActionStatus = &gPartnerActionStatus;
 
     if (D_802BE30C != 0) {
@@ -236,7 +267,7 @@ void func_802BDD9C_31D90C(Npc* watt) {
     func_802BD180_31CCF0();
 }
 
-void func_802BDE10_31D980(Npc* watt) {
+void world_watt_post_battle(Npc* watt) {
     PartnerActionStatus* wattActionStatus = &gPartnerActionStatus;
 
     if (wattActionStatus->actionState.b[1]) {
@@ -353,3 +384,9 @@ void func_802BE070_31DBE0(void) {
         wPartnerNpc->pos.y = gPlayerStatusPtr->position.y + 5.0f;
     }
 }
+
+EvtSource world_watt_while_riding = {
+    EVT_CALL(func_802BDE88_31D9F8)
+    EVT_RETURN
+    EVT_END
+};

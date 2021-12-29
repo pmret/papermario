@@ -1025,7 +1025,7 @@ segments:
     - [0x190B20, c, 190B20]
     - [0x1967B0, c, load_script]
     - [0x196AA0, c, 196AA0]
-    - [0x197F40, c, 197F40]
+    - [0x197F40, c, actor_api]
     - [0x19FAF0, c, 19FAF0]
     - [0x1A5830, c, 1A5830]
     - [0x1AC760, c]
@@ -1044,7 +1044,7 @@ segments:
     - [0x1CBE70, .rodata, 18F340]
     - [0x1CBE80, .rodata, 190B20]
     - [0x1CBF80, .rodata, 196AA0]
-    - [0x1CC0A0, .rodata, 197F40]
+    - [0x1CC0A0, .rodata, actor_api]
     - [0x1CC160, .rodata, 19FAF0]
     - [0x1CC270, .rodata, 1A5830]
   - [0x1CC310, ci4,     icon/present, 32, 32]
@@ -2108,8 +2108,7 @@ segments:
     overlay: True
     subsegments:
     - [0x317020, c, goombario]
-    - [0x317B60, .data, goombario]
-    - [0x317DA0]
+    - [0x317B60]
   - type: code
     dir: world/partner
     name: world_partner_bombette
@@ -2127,8 +2126,7 @@ segments:
     overlay: True
     subsegments:
     - [0x319670, c, parakarry]
-    - [0x31B000, data]
-    - [0x31B080]
+    - [0x31B000]
   - type: code
     dir: world/partner
     name: world_partner_kooper
@@ -2137,8 +2135,7 @@ segments:
     overlay: True
     subsegments:
     - [0x31B120, c, kooper]
-    - [0x31CB60, data]
-    - [0x31CBE0]
+    - [0x31CB60]
   - type: code
     dir: world/partner
     name: world_partner_watt
@@ -2147,7 +2144,7 @@ segments:
     overlay: True
     subsegments:
     - [0x31CC70, c, watt]
-    - [0x31DDC0, data]
+    - [0x31DDC0]
   - type: code
     dir: world/partner
     name: world_partner_sushie
@@ -2156,8 +2153,7 @@ segments:
     overlay: True
     subsegments:
     - [0x31DE70, c, sushie]
-    - [0x320B20, data]
-    - [0x320BC0]
+    - [0x320B20]
   - type: code
     dir: world/partner
     name: world_partner_lakilester
@@ -2166,8 +2162,7 @@ segments:
     overlay: True
     subsegments:
     - [0x320C50, c, lakilester]
-    - [0x3239B0, .data, lakilester]
-    - [0x323A40]
+    - [0x3239B0]
   - type: code
     dir: world/partner
     name: world_partner_bow
@@ -2176,8 +2171,7 @@ segments:
     overlay: True
     subsegments:
     - [0x323A50, c, bow]
-    - [0x324930, data]
-    - [0x3249B0]
+    - [0x324930]
   - type: code
     dir: world/partner
     name: world_partner_goompa
@@ -2186,8 +2180,7 @@ segments:
     overlay: True
     subsegments:
     - [0x324A10, c, goompa]
-    - [0x324E80, .data, goompa]
-    - [0x324F00]
+    - [0x324E80]
   - type: code
     dir: world/partner
     name: world_partner_goombaria
@@ -2196,7 +2189,7 @@ segments:
     overlay: True
     subsegments:
     - [0x324F10, c, goombaria]
-    - [0x325000, .data, goombaria]
+    - [0x325000]
   - type: code
     dir: world/partner
     name: world_partner_twink
@@ -2205,7 +2198,7 @@ segments:
     overlay: True
     subsegments:
     - [0x325070, c, twink]
-    - [0x325160, .data, twink]
+    - [0x325160]
   - type: code
     start: 0x3251D0
     vram: 0x802BD100
@@ -4920,7 +4913,7 @@ segments:
     overlay: True
     subsegments:
     - [0x789E60, c]
-    - [0x78A490, data]
+    - [0x78A490]
   - dir: battle/star/refresh
     type: code
     start: 0x78B600
@@ -4928,7 +4921,7 @@ segments:
     overlay: True
     subsegments:
     - [0x78B600, c]
-    - [0x78C070, data]
+    - [0x78C070]
   - dir: battle/star/lullaby
     type: code
     start: 0x78D150
@@ -4936,7 +4929,7 @@ segments:
     overlay: True
     subsegments:
     - [0x78D150, c]
-    - [0x78D770, data]
+    - [0x78D770]
   - dir: battle/star/star_storm
     type: code
     start: 0x78E7D0
@@ -4944,7 +4937,7 @@ segments:
     overlay: True
     subsegments:
     - [0x78E7D0, c]
-    - [0x78EEC0, data]
+    - [0x78EEC0]
   - dir: battle/star/chill_out
     type: code
     start: 0x7900D0
@@ -4952,7 +4945,7 @@ segments:
     overlay: True
     subsegments:
     - [0x7900D0, c]
-    - [0x7909C0, data]
+    - [0x7909C0]
   - dir: battle/star/smooch
     type: code
     start: 0x791D90
@@ -4960,7 +4953,7 @@ segments:
     overlay: True
     subsegments:
     - [0x791D90, c]
-    - [0x7923C0, data]
+    - [0x7923C0]
   - dir: battle/star/time_out
     type: code
     start: 0x793D20
@@ -4968,7 +4961,7 @@ segments:
     overlay: True
     subsegments:
     - [0x793D20, c]
-    - [0x794240, data]
+    - [0x794240]
   - dir: battle/star/up_and_away
     type: code
     start: 0x7952E0
@@ -4976,7 +4969,7 @@ segments:
     overlay: True
     subsegments:
     - [0x7952E0, c]
-    - [0x7959B0, data]
+    - [0x7959B0]
   - dir: battle/star/star_beam
     type: code
     start: 0x796FC0
@@ -4984,7 +4977,7 @@ segments:
     overlay: True
     subsegments:
     - [0x796FC0, c]
-    - [0x7984B0, data]
+    - [0x7984B0]
   - dir: battle/star/peach_beam
     type: code
     start: 0x7997B0
@@ -4992,7 +4985,7 @@ segments:
     overlay: True
     subsegments:
     - [0x7997B0, c]
-    - [0x79ACA0, data]
+    - [0x79ACA0]
   - dir: battle/star/peach_focus
     type: code
     start: 0x79BFA0
@@ -5000,7 +4993,7 @@ segments:
     overlay: True
     subsegments:
     - [0x79BFA0, c]
-    - [0x79C4D0, data]
+    - [0x79C4D0]
   - dir: battle/star/peach_dash
     type: code
     start: 0x79D8A0
@@ -5008,7 +5001,7 @@ segments:
     overlay: True
     subsegments:
     - [0x79D8A0, c]
-    - [0x79DE50, data]
+    - [0x79DE50]
   - [0x79EF40, bin] # todo identify
   - dir: world/script_api
     type: code

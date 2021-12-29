@@ -5,6 +5,10 @@
 #define E21870_VRAM_DEF (s32*)0x802B7000
 #define E225B0_VRAM_DEF (s32*)0x802B7000
 
+void appendGfx_player(void* data);
+void appendGfx_player_spin(void* data);
+void func_800F0C9C(void);
+
 extern UNK_FUN_PTR(D_8010C93C);
 extern s32 D_8010C950;
 
@@ -783,16 +787,72 @@ void render_player(void) {
     }
 }
 
-INCLUDE_ASM(void, "77480", render_player_model);
+void render_player_model(void) {
+    RenderTask task;
+    RenderTask* rtPtr = &task;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 x, y, z;
+    s8 renderModeTemp;
+    void (*appendGfx)(void*);
 
-void appendGfx_player(void) {
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000000) {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_40000000;
+        get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y,
+                          playerStatus->position.z, &x, &y, &z);
+        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_20000)) {
+            if (playerStatus->alpha1 != playerStatus->alpha2) {
+                if (playerStatus->alpha1 < 254) {
+                    
+                    if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_1000000)) {
+                        renderModeTemp = RENDER_MODE_SURFACE_XLU_LAYER1;
+                    } else {
+                        renderModeTemp = RENDER_MODE_SURFACE_XLU_LAYER2;
+                    }
+
+                    playerStatus->renderMode = renderModeTemp;
+                    func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
+                
+                } else {
+                    playerStatus->renderMode = RENDER_MODE_ALPHATEST;
+                    func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
+                }
+            }
+
+            playerStatus->alpha2 = playerStatus->alpha1;
+
+        } else {
+            playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
+            playerStatus->alpha2 = 0;
+        }
+
+        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
+            rtPtr->appendGfxArg = playerStatus;
+            rtPtr->distance = -z;
+            rtPtr->renderMode = playerStatus->renderMode;
+            
+
+            if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_20000)) {
+                appendGfx = appendGfx_player;
+            } else {
+                appendGfx = appendGfx_player_spin;
+            }
+
+            rtPtr->appendGfx = appendGfx;
+            queue_render_task(rtPtr);
+        }
+
+        func_800F0C9C();
+    }
+}
+
+void appendGfx_player(void* data) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Matrix4f sp20, sp60, spA0, spE0;
     f32 temp_f0 = -gCameras[gCurrentCamID].currentYaw;
     s32 phi_a0;
 
     if (playerStatus->actionState == ACTION_STATE_SLIDING) {
-        guScaleF(spE0, (5.0f / 7.0f), (5.0f / 7.0f), (5.0f / 7.0f));
+        guScaleF(spE0, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
         guRotateF(sp20, temp_f0, 0.0f, 1.0f, 0.0f);
         guMtxCatF(spE0, sp20, sp20);
         guRotateF(spA0, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
@@ -812,7 +872,7 @@ void appendGfx_player(void) {
         guMtxCatF(sp20, spA0, sp20);
         guTranslateF(sp60, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
         guMtxCatF(sp20, sp60, sp20);
-        guScaleF(spE0, (5.0f / 7.0f), (5.0f / 7.0f), (5.0f / 7.0f));
+        guScaleF(spE0, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
         guMtxCatF(sp20, spE0, sp20);
         guTranslateF(sp60, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
         guMtxCatF(sp20, sp60, sp20);
@@ -848,7 +908,90 @@ void appendGfx_player(void) {
 }
 
 /// Only used when speedy spinning.
-INCLUDE_ASM(s32, "77480", appendGfx_player_spin);
+void appendGfx_player_spin(void* data) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Matrix4f mtx;
+    Matrix4f translation;
+    Matrix4f rotation;
+    Matrix4f scale;
+    f32 yaw;
+    f32 blurAngle;
+    s32 tint;
+    f32 px, py, pz;
+    s32 x, y, z;
+    s32 i;
+    s32 flags;
+
+    for (i = 0; i < 2; i++) {
+        yaw = -gCameras[gCurrentCamID].currentYaw;
+
+        if (i == 0) {
+            if (playerStatus->spriteFacingAngle > 90.0f && playerStatus->spriteFacingAngle <= 180.0f) {
+                yaw = 180.0f - playerStatus->spriteFacingAngle;
+            } else {
+                if (playerStatus->spriteFacingAngle > 180.0f && playerStatus->spriteFacingAngle <= 270.0f) {
+                    yaw = playerStatus->spriteFacingAngle - 180.0f;
+                } else if (playerStatus->spriteFacingAngle > 270.0f && playerStatus->spriteFacingAngle <= 360.0f) {
+                    yaw = 360.0f - playerStatus->spriteFacingAngle;
+                } else {
+                    yaw = playerStatus->spriteFacingAngle;
+                }
+            }
+
+            tint = yaw / 25.0f;
+            tint = 255 - (tint * 60);
+            if (tint < 100) {
+                tint = 100;
+            }
+
+            func_802DDFF8(0, 6, tint, tint, tint, 255, 0);
+
+            guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
+            guRotateF(mtx, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+            guMtxCatF(rotation, mtx, mtx);
+            px = playerStatus->position.x;
+            py = playerStatus->position.y;
+            pz = playerStatus->position.z;
+        } else {
+            blurAngle = phys_get_spin_history(i, &x, &y, &z);
+
+            if (y == 0x80000000) {
+                py = playerStatus->position.y;
+            } else {
+                py = y;
+            }
+
+            px = playerStatus->position.x;
+            pz = playerStatus->position.z;
+            func_802DDEE4(0, -1, 7, 0, 0, 0, 64, 0);
+            guRotateF(mtx, yaw, 0.0f, -1.0f, 0.0f);
+            guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
+            guRotateF(mtx, blurAngle, 0.0f, 1.0f, 0.0f);
+            guMtxCatF(rotation, mtx, mtx);
+        }
+
+        guTranslateF(translation, 0.0f, -playerStatus->colliderHeight * 0.5f, 0.0f);
+        guMtxCatF(translation, mtx, mtx);
+        guRotateF(rotation, yaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(mtx, rotation, mtx);
+        guRotateF(rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(mtx, rotation, mtx);
+        guTranslateF(translation, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
+        guMtxCatF(mtx, translation, mtx);
+        guScaleF(scale, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
+        guMtxCatF(mtx, scale, mtx);
+        guTranslateF(translation, px, py, pz);
+        guMtxCatF(mtx, translation, mtx);
+
+        if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
+            flags = 0x10000000;
+        } else {
+            flags = 0;
+        }
+
+        spr_draw_player_sprite(flags, 0, 0, 0, mtx);
+    }
+}
 
 void update_player_shadow(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
