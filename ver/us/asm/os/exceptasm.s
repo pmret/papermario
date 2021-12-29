@@ -446,7 +446,7 @@ glabel send_mesg
 /* 46408 8006B008 8D4B0000 */  lw        $t3, ($t2)
 /* 4640C 8006B00C 11600008 */  beqz      $t3, .L8006B030
 /* 46410 8006B010 00000000 */   nop
-/* 46414 8006B014 0C01AC6F */  jal       osPopThread
+/* 46414 8006B014 0C01AC6F */  jal       __osPopThread
 /* 46418 8006B018 01202021 */   addu     $a0, $t1, $zero
 /* 4641C 8006B01C 00405021 */  addu      $t2, $v0, $zero
 /* 46420 8006B020 01402821 */  addu      $a1, $t2, $zero
@@ -472,7 +472,7 @@ glabel handle_CPU
 /* 46464 8006B064 1000FFB3 */  b         .L8006AF34
 /* 46468 8006B068 AF5B0118 */   sw       $k1, 0x118($k0)
 
-glabel osEnqueueAndYield
+glabel __osEnqueueAndYield
 /* 4646C 8006B06C 3C058009 */  lui       $a1, %hi(__osRunningThread)
 /* 46470 8006B070 8CA54660 */  lw        $a1, %lo(__osRunningThread)($a1)
 /* 46474 8006B074 40086000 */  mfc0      $t0, $12
@@ -566,7 +566,7 @@ glabel osEnqueueThread
 /* 465B4 8006B1B4 03E00008 */  jr        $ra
 /* 465B8 8006B1B8 ACA40008 */   sw       $a0, 8($a1)
 
-glabel osPopThread
+glabel __osPopThread
 /* 465BC 8006B1BC 8C820000 */  lw        $v0, ($a0)
 /* 465C0 8006B1C0 8C590000 */  lw        $t9, ($v0)
 /* 465C4 8006B1C4 03E00008 */  jr        $ra
@@ -576,7 +576,7 @@ glabel osPopThread
 
 glabel osDispatchThread
 /* 465D4 8006B1D4 3C048009 */  lui       $a0, %hi(__osRunQueue)
-/* 465D8 8006B1D8 0C01AC6F */  jal       osPopThread
+/* 465D8 8006B1D8 0C01AC6F */  jal       __osPopThread
 /* 465DC 8006B1DC 24844658 */   addiu    $a0, $a0, %lo(__osRunQueue)
 /* 465E0 8006B1E0 3C018009 */  lui       $at, %hi(__osRunningThread)
 /* 465E4 8006B1E4 AC224660 */  sw        $v0, %lo(__osRunningThread)($at)

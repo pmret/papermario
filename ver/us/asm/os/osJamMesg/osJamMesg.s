@@ -31,7 +31,7 @@ glabel osJamMesg
 .L80065614:
 /* 40A14 80065614 3C028009 */  lui       $v0, %hi(__osRunningThread)
 /* 40A18 80065618 8C424660 */  lw        $v0, %lo(__osRunningThread)($v0)
-/* 40A1C 8006561C 0C01AC1B */  jal       osEnqueueAndYield
+/* 40A1C 8006561C 0C01AC1B */  jal       __osEnqueueAndYield
 /* 40A20 80065620 A4530010 */   sh       $s3, 0x10($v0)
 /* 40A24 80065624 8E020008 */  lw        $v0, 8($s0)
 /* 40A28 80065628 8E030010 */  lw        $v1, 0x10($s0)
@@ -68,7 +68,7 @@ glabel osJamMesg
 /* 40A98 80065698 8C620000 */  lw        $v0, ($v1)
 /* 40A9C 8006569C 10400005 */  beqz      $v0, .L800656B4
 /* 40AA0 800656A0 00000000 */   nop
-/* 40AA4 800656A4 0C01AC6F */  jal       osPopThread
+/* 40AA4 800656A4 0C01AC6F */  jal       __osPopThread
 /* 40AA8 800656A8 02002021 */   addu     $a0, $s0, $zero
 /* 40AAC 800656AC 0C019808 */  jal       osStartThread
 /* 40AB0 800656B0 00402021 */   addu     $a0, $v0, $zero

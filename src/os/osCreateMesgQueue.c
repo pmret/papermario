@@ -1,3 +1,11 @@
 #include "common.h"
+#include <PR/osint.h>
 
-INCLUDE_ASM(void, "os/osCreateMesgQueue", osCreateMesgQueue, OSMesgQueue* queue, OSMesg* mesg, s32 unk);
+void osCreateMesgQueue(OSMesgQueue *mq, OSMesg *msg, s32 msgCount) {
+    mq->mtqueue = (OSThread *)&__osThreadTail;
+    mq->fullqueue = (OSThread *)&__osThreadTail;
+    mq->validCount = 0;
+    mq->first = 0;
+    mq->msgCount = msgCount;
+    mq->msg = msg;
+}
