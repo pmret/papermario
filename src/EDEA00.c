@@ -11,7 +11,7 @@ extern f32 D_802441DC_EE2B9C[];
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-INCLUDE_ASM(s32, "EDEA00", func_80240374_EDED34);
+#include "world/common/UnkNpcAIFunc35.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 

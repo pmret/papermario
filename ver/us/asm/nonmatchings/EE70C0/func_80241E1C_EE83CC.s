@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel jtbl_80245398_EEB948
+.word L80241F54_EE8504, L80241F64_EE8514, L80241F7C_EE852C, L80241F8C_EE853C, L8024200C_EE85BC, L8024200C_EE85BC, L8024200C_EE85BC, L8024200C_EE85BC, L8024200C_EE85BC, L8024200C_EE85BC, L80241FA4_EE8554, L80241FB4_EE8564, L80241FCC_EE857C, L80241FE4_EE8594, L80241FFC_EE85AC, 0, 0, 0
+
+.section .text
+
 glabel func_80241E1C_EE83CC
 /* EE83CC 80241E1C 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* EE83D0 80241E20 AFB50044 */  sw        $s5, 0x44($sp)
@@ -90,7 +97,7 @@ dlabel L80241F54_EE8504
 dlabel L80241F64_EE8514
 /* EE8514 80241F64 02A0202D */  daddu     $a0, $s5, $zero
 /* EE8518 80241F68 0200282D */  daddu     $a1, $s0, $zero
-/* EE851C 80241F6C 0C090330 */  jal       func_80240CC0_EE7270
+/* EE851C 80241F6C 0C090330 */  jal       EE70C0_UnkNpcAIFunc35
 /* EE8520 80241F70 0260302D */   daddu    $a2, $s3, $zero
 /* EE8524 80241F74 08090804 */  j         .L80242010
 /* EE8528 80241F78 0000102D */   daddu    $v0, $zero, $zero

@@ -87,7 +87,7 @@ glabel func_802428F4_A18B14
 .L80242A14_A18C34:
 /* A18C34 80242A14 0280202D */  daddu     $a0, $s4, $zero
 /* A18C38 80242A18 0200282D */  daddu     $a1, $s0, $zero
-/* A18C3C 80242A1C 0C090468 */  jal       func_802411A0_A173C0
+/* A18C3C 80242A1C 0C090468 */  jal       hos_02_UnkNpcAIFunc35
 /* A18C40 80242A20 0260302D */   daddu    $a2, $s3, $zero
 /* A18C44 80242A24 08090AAE */  j         .L80242AB8
 /* A18C48 80242A28 0000102D */   daddu    $v0, $zero, $zero

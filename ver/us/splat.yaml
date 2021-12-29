@@ -11333,7 +11333,8 @@ segments:
     - [0xEE65B0, c]
     - [0xEE70C0, c]
     - [0xEE8940, c]
-    - [0xEE8970, data] # Has rodata followed by a script...but doesn't seem to be a new segment
+    - [0xEE8970, data]
+    - [0xEEB900]
   - type: code
     start: 0xEED100
     vram: 0x80240000

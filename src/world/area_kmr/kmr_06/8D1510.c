@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "kmr_07";
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_06/8D1510", func_802401B0_8D16C0);
+#include "world/common/UnkNpcAIFunc35.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 

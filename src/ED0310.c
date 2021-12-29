@@ -9,7 +9,7 @@ extern f32 D_8024365C_ED364C[];
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-INCLUDE_ASM(s32, "ED0310", func_802404D0_ED04C0);
+#include "world/common/UnkNpcAIFunc35.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 

@@ -23,6 +23,7 @@ CPP_FLAGS = [
     "-D__asm__(...)=",
     "-ffreestanding",
     "-DM2CTX",
+    "-DPERMUTER",
 ]
 
 def import_c_file(in_file) -> str:
