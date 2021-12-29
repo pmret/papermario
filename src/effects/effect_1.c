@@ -1,33 +1,27 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct Effect1 {
-    /* 0x00 */ s16 unk_00;
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ s16 unk_04;
-    /* 0x06 */ s16 unk_06;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ f32 x;
-    /* 0x10 */ f32 y;
-    /* 0x14 */ f32 z;
-    /* 0x18 */ f32 partX;
-    /* 0x1C */ f32 partY;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ char unk_28[0x4];
-} Effect1; // size = 0x2C
-
 static f32 D_E0002760[10] = { 10.0f, 40.0f, 80.0f, 170.0f, 140.0f, 100.0f, 25.0f, 155.0f, 60.0f, 120.0f };
 static f32 D_E0002788[10] = { 2.2f, 2.7f, 3.0f, 2.2f, 2.7f, 3.0f, 1.9f, 1.9f, 1.5f, 1.5f };
 static f32 sPartScales[10] = { 1.4f, 1.3f, 1.2f, 1.3f, 1.4f, 1.3f, 1.6f, 1.6f, 1.6f, 1.6f };
 static f32 sPartYaws[10] = { 0.0f, 234.0f, 468.0f, 702.0f, 936.0f, 1260.0f, 1404.0f, 1638.0f, 1902.0f, 1976.0f };
 
-static s32 sDlists[7] = { 0x09000FA0, 0x09001060, 0x09001120, 0x090011E0, 0x090012A0, 0x09001360, 0x09001420 };
+extern Gfx D_09000FA0[];
+extern Gfx D_09001060[];
+extern Gfx D_09001120[];
+extern Gfx D_090011E0[];
+extern Gfx D_090012A0[];
+extern Gfx D_09001360[];
+extern Gfx D_09001420[];
+
+static Gfx* sDlists[7] = {
+    D_09000FA0, D_09001060, D_09001120, D_090011E0, D_090012A0, D_09001360, D_09001420
+};
 
 void fx_1_init(EffectInstance* effect);
 void fx_1_update(EffectInstance* effect);
 void fx_1_render(EffectInstance* effect);
-void fx_1_appendGfx(EffectInstance* effect);
+void fx_1_appendGfx(void* effect);
 
 void fx_1_main(f32 x, f32 y, f32 z) {
     EffectBlueprint bp;
@@ -124,35 +118,36 @@ void fx_1_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_1_appendGfx(EffectInstance* effect) {
-    Effect1* effectData = effect->data;
+void fx_1_appendGfx(void* effect) {
+    EffectInstance* eff = (EffectInstance*)effect;
+    Effect1* effectData = ((EffectInstance*)effect)->data;
     Matrix4f mtx;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->effect->data));
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guPositionF(&mtx, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, effectData->x, effectData->y,
+    shim_guPositionF(mtx, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, effectData->x, effectData->y,
                      effectData->z);
-    shim_guMtxF2L(&mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+    shim_guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMasterGfxPos++,
               &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    for (i = 0; i < effect->numParts; i++, effectData++) {
+    for (i = 0; i < ((EffectInstance*)effect)->numParts; i++, effectData++) {
         if (effectData->unk_02 >= 0 && effectData->unk_08 < 0) {
             s32 primAlpha = effectData->unk_02;
             f32 temp_f12;
             s32 envAlpha;
-            s32 dlist;
+            Gfx* dlist;
 
             if (primAlpha > 16) {
                 primAlpha = 16;
             }
 
-            shim_guPositionF(&mtx, 0.0f, 0.0f, sPartYaws[i], sPartScales[i], effectData->partX,
+            shim_guPositionF(mtx, 0.0f, 0.0f, sPartYaws[i], sPartScales[i], effectData->partX,
                              effectData->partY, 0.0f);
-            shim_guMtxF2L(&mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+            shim_guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMasterGfxPos++,
                       &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);

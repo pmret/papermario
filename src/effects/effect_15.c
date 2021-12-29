@@ -1,10 +1,15 @@
 #include "common.h"
 #include "effects_internal.h"
 
+extern Gfx D_09001530[];
+extern Gfx D_09001650[];
+extern Gfx D_09001780[];
+extern Gfx D_090017D0[];
+
 void fx_15_init(EffectInstance* effect);
 void fx_15_update(EffectInstance* effect);
 void fx_15_render(EffectInstance* effect);
-void fx_15_appendGfx(EffectInstance* effect);
+void fx_15_appendGfx(void* effect);
 
 EffectInstance* fx_15_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7) {
     EffectBlueprint bp;

@@ -12,7 +12,7 @@ s32 D_E00BCD38[] = { 0x19191905, 0x19051919, 0x05191919, 0x04030201, 0x00000000,
 
 s32 D_E00BCE40[] = { D_E00BCC30, D_E00BCD38, 0x00000000, 0x00000000 };
 
-void fx_94_appendGfx(EffectInstance* effect);
+void fx_94_appendGfx(void* effect);
 
 INCLUDE_ASM(s32, "effects/effect_94", fx_94_main);
 

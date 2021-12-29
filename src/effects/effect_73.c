@@ -1,18 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct Effect73 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-} Effect73; // size = 0x24
-
 extern Gfx D_090002C0[];
 extern Gfx D_09000330[];
 extern Gfx D_09000370[];
@@ -33,7 +21,7 @@ static s32 sPartParams[4 * 5] = {
 void fx_73_init(EffectInstance* effect);
 void fx_73_update(EffectInstance* effect);
 void fx_73_render(EffectInstance* effect);
-void fx_73_appendGfx(EffectInstance* effect);
+void fx_73_appendGfx(void* effect);
 
 EffectInstance* fx_73_main(EffectInstanceDataThing* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     EffectBlueprint bp;
@@ -121,8 +109,8 @@ void fx_73_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_73_appendGfx(EffectInstance* effect) {
-    Effect73* part = effect->data;
+void fx_73_appendGfx(void* effect) {
+    Effect73* part = ((EffectInstance*)effect)->data;
     Matrix4f sp18;
     Matrix4f sp58;
     Matrix4f sp98;
@@ -133,7 +121,7 @@ void fx_73_appendGfx(EffectInstance* effect) {
     shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
     spD8 = &gDisplayContext->matrixStack[gMatrixListPos++];
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->effect->data));
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     shim_guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
@@ -142,7 +130,7 @@ void fx_73_appendGfx(EffectInstance* effect) {
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 15, 255);
 
     part++;
-    for (i = 1; i < effect->numParts; i++, part++) {
+    for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         if (part->unk_20 == 0) {
             f32 temp_f20 = part->unk_1C;
 
