@@ -54,14 +54,14 @@ glabel func_80027774
 /* 2C2C 8002782C 2650FFFF */  addiu     $s0, $s2, -1
 /* 2C30 80027830 8FA80040 */  lw        $t0, 0x40($sp)
 /* 2C34 80027834 0200382D */  daddu     $a3, $s0, $zero
-/* 2C38 80027838 0C009C7F */  jal       func_800271FC
+/* 2C38 80027838 0C009C7F */  jal       gfx_frame_filter_pass_0
 /* 2C3C 8002783C AFA80010 */   sw       $t0, 0x10($sp)
 /* 2C40 80027840 0280202D */  daddu     $a0, $s4, $zero
 /* 2C44 80027844 02A0282D */  daddu     $a1, $s5, $zero
 /* 2C48 80027848 03C0302D */  daddu     $a2, $fp, $zero
 /* 2C4C 8002784C 0240382D */  daddu     $a3, $s2, $zero
 /* 2C50 80027850 27A2001C */  addiu     $v0, $sp, 0x1c
-/* 2C54 80027854 0C009C7F */  jal       func_800271FC
+/* 2C54 80027854 0C009C7F */  jal       gfx_frame_filter_pass_0
 /* 2C58 80027858 AFA20010 */   sw       $v0, 0x10($sp)
 /* 2C5C 8002785C 0280202D */  daddu     $a0, $s4, $zero
 /* 2C60 80027860 02A0282D */  daddu     $a1, $s5, $zero
@@ -69,49 +69,49 @@ glabel func_80027774
 /* 2C68 80027868 26510001 */  addiu     $s1, $s2, 1
 /* 2C6C 8002786C 0220382D */  daddu     $a3, $s1, $zero
 /* 2C70 80027870 27A20020 */  addiu     $v0, $sp, 0x20
-/* 2C74 80027874 0C009C7F */  jal       func_800271FC
+/* 2C74 80027874 0C009C7F */  jal       gfx_frame_filter_pass_0
 /* 2C78 80027878 AFA20010 */   sw       $v0, 0x10($sp)
 /* 2C7C 8002787C 0280202D */  daddu     $a0, $s4, $zero
 /* 2C80 80027880 02A0282D */  daddu     $a1, $s5, $zero
 /* 2C84 80027884 0260302D */  daddu     $a2, $s3, $zero
 /* 2C88 80027888 0200382D */  daddu     $a3, $s0, $zero
 /* 2C8C 8002788C 27A20024 */  addiu     $v0, $sp, 0x24
-/* 2C90 80027890 0C009C7F */  jal       func_800271FC
+/* 2C90 80027890 0C009C7F */  jal       gfx_frame_filter_pass_0
 /* 2C94 80027894 AFA20010 */   sw       $v0, 0x10($sp)
 /* 2C98 80027898 0280202D */  daddu     $a0, $s4, $zero
 /* 2C9C 8002789C 02A0282D */  daddu     $a1, $s5, $zero
 /* 2CA0 800278A0 0260302D */  daddu     $a2, $s3, $zero
 /* 2CA4 800278A4 0240382D */  daddu     $a3, $s2, $zero
 /* 2CA8 800278A8 27A20028 */  addiu     $v0, $sp, 0x28
-/* 2CAC 800278AC 0C009C7F */  jal       func_800271FC
+/* 2CAC 800278AC 0C009C7F */  jal       gfx_frame_filter_pass_0
 /* 2CB0 800278B0 AFA20010 */   sw       $v0, 0x10($sp)
 /* 2CB4 800278B4 0280202D */  daddu     $a0, $s4, $zero
 /* 2CB8 800278B8 02A0282D */  daddu     $a1, $s5, $zero
 /* 2CBC 800278BC 0260302D */  daddu     $a2, $s3, $zero
 /* 2CC0 800278C0 0220382D */  daddu     $a3, $s1, $zero
 /* 2CC4 800278C4 27A2002C */  addiu     $v0, $sp, 0x2c
-/* 2CC8 800278C8 0C009C7F */  jal       func_800271FC
+/* 2CC8 800278C8 0C009C7F */  jal       gfx_frame_filter_pass_0
 /* 2CCC 800278CC AFA20010 */   sw       $v0, 0x10($sp)
 /* 2CD0 800278D0 0280202D */  daddu     $a0, $s4, $zero
 /* 2CD4 800278D4 02A0282D */  daddu     $a1, $s5, $zero
 /* 2CD8 800278D8 02E0302D */  daddu     $a2, $s7, $zero
 /* 2CDC 800278DC 0200382D */  daddu     $a3, $s0, $zero
 /* 2CE0 800278E0 27A20030 */  addiu     $v0, $sp, 0x30
-/* 2CE4 800278E4 0C009C7F */  jal       func_800271FC
+/* 2CE4 800278E4 0C009C7F */  jal       gfx_frame_filter_pass_0
 /* 2CE8 800278E8 AFA20010 */   sw       $v0, 0x10($sp)
 /* 2CEC 800278EC 0280202D */  daddu     $a0, $s4, $zero
 /* 2CF0 800278F0 02A0282D */  daddu     $a1, $s5, $zero
 /* 2CF4 800278F4 02E0302D */  daddu     $a2, $s7, $zero
 /* 2CF8 800278F8 0240382D */  daddu     $a3, $s2, $zero
 /* 2CFC 800278FC 27A20034 */  addiu     $v0, $sp, 0x34
-/* 2D00 80027900 0C009C7F */  jal       func_800271FC
+/* 2D00 80027900 0C009C7F */  jal       gfx_frame_filter_pass_0
 /* 2D04 80027904 AFA20010 */   sw       $v0, 0x10($sp)
 /* 2D08 80027908 0280202D */  daddu     $a0, $s4, $zero
 /* 2D0C 8002790C 02A0282D */  daddu     $a1, $s5, $zero
 /* 2D10 80027910 02E0302D */  daddu     $a2, $s7, $zero
 /* 2D14 80027914 0220382D */  daddu     $a3, $s1, $zero
 /* 2D18 80027918 27A20038 */  addiu     $v0, $sp, 0x38
-/* 2D1C 8002791C 0C009C7F */  jal       func_800271FC
+/* 2D1C 8002791C 0C009C7F */  jal       gfx_frame_filter_pass_0
 /* 2D20 80027920 AFA20010 */   sw       $v0, 0x10($sp)
 /* 2D24 80027924 00162840 */  sll       $a1, $s6, 1
 /* 2D28 80027928 8FA80078 */  lw        $t0, 0x78($sp)
