@@ -1,11 +1,7 @@
 #define MOVE_ADDU
 
 #include "common.h"
-
-struct __osThreadTail {
-    OSThread* next;
-    OSPri priority;
-};
+#include <PR/osint.h>
 
 struct __osThreadTail __osThreadTail = {0, -1};
 OSThread* __osRunQueue = (OSThread*) &__osThreadTail;
@@ -28,7 +24,7 @@ void osSetThreadPri(OSThread* thread, OSPri pri) {
         }
         if (__osRunningThread->priority < __osRunQueue->priority) {
             __osRunningThread->state = 2;
-            osEnqueueAndYield(&__osRunQueue);
+            __osEnqueueAndYield(&__osRunQueue);
         }
     }
 

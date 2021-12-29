@@ -1,3 +1,32 @@
 #include "common.h"
+#include <PR/osint.h>
 
-INCLUDE_ASM(s32, "os/osRecvMesg", osRecvMesg, OSMesgQueue* queue, OSMesg* mesg, s32 unk);
+#ifndef KMC_ASM
+s32 osRecvMesg(OSMesgQueue *mq, OSMesg *msg, s32 flags) {
+    register u32 saveMask;
+    saveMask = __osDisableInt();
+
+    while (MQ_IS_EMPTY(mq)) {
+        if (flags == OS_MESG_NOBLOCK) {
+            __osRestoreInt(saveMask);
+            return -1;
+        }
+        __osRunningThread->state = OS_STATE_WAITING;
+        __osEnqueueAndYield(&mq->mtqueue);
+    }
+
+    if (msg != NULL) {
+        *msg = mq->msg[mq->first];
+    }
+    mq->first = (mq->first + 1) % mq->msgCount;
+    mq->validCount--;
+    if (mq->fullqueue->next != NULL) {
+        osStartThread(__osPopThread(&mq->fullqueue));
+    }
+    __osRestoreInt(saveMask);
+    return 0;
+}
+#else
+INCLUDE_ASM_LIBULTRA(s32, "osRecvMesg", osRecvMesg, OSMesgQueue* queue, OSMesg* mesg, s32 unk);
+#endif
+

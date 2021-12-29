@@ -15,7 +15,7 @@ glabel osVirtualToPhysical
 /* 3D2B8 80061EB8 0062102B */  sltu      $v0, $v1, $v0
 /* 3D2BC 80061EBC 10400006 */  beqz      $v0, .L80061ED8
 /* 3D2C0 80061EC0 00831024 */   and      $v0, $a0, $v1
-/* 3D2C4 80061EC4 0C019A18 */  jal       osProbeTLB
+/* 3D2C4 80061EC4 0C019A18 */  jal       __osProbeTLB
 /* 3D2C8 80061EC8 00000000 */   nop
 /* 3D2CC 80061ECC 080187B6 */  j         .L80061ED8
 /* 3D2D0 80061ED0 00000000 */   nop

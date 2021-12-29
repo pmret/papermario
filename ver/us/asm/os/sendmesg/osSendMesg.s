@@ -31,7 +31,7 @@ glabel osSendMesg
 .L80065884:
 /* 40C84 80065884 3C028009 */  lui       $v0, %hi(__osRunningThread)
 /* 40C88 80065888 8C424660 */  lw        $v0, %lo(__osRunningThread)($v0)
-/* 40C8C 8006588C 0C01AC1B */  jal       osEnqueueAndYield
+/* 40C8C 8006588C 0C01AC1B */  jal       __osEnqueueAndYield
 /* 40C90 80065890 A4530010 */   sh       $s3, 0x10($v0)
 /* 40C94 80065894 8E020008 */  lw        $v0, 8($s0)
 /* 40C98 80065898 8E030010 */  lw        $v1, 0x10($s0)
@@ -67,7 +67,7 @@ glabel osSendMesg
 /* 40D04 80065904 8C620000 */  lw        $v0, ($v1)
 /* 40D08 80065908 10400005 */  beqz      $v0, .L80065920
 /* 40D0C 8006590C 00000000 */   nop
-/* 40D10 80065910 0C01AC6F */  jal       osPopThread
+/* 40D10 80065910 0C01AC6F */  jal       __osPopThread
 /* 40D14 80065914 02002021 */   addu     $a0, $s0, $zero
 /* 40D18 80065918 0C019808 */  jal       osStartThread
 /* 40D1C 8006591C 00402021 */   addu     $a0, $v0, $zero

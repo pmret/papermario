@@ -338,9 +338,6 @@ extern MusicSettings D_8014F6F0;
 // OS
 extern OSThread D_800A4270; // idle thread, id 1
 extern OSThread D_800A4420; // id 3
-extern OSThread* __osActiveQueue;
-extern OSThread* __osRunningThread;
-extern OSThread* __osRunQueue;
 extern OSDevMgr __osPiDevMgr;
 
 // gfx

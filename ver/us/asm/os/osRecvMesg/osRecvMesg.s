@@ -27,7 +27,7 @@ glabel osRecvMesg
 .L80065744:
 /* 40B44 80065744 3C028009 */  lui       $v0, %hi(__osRunningThread)
 /* 40B48 80065748 8C424660 */  lw        $v0, %lo(__osRunningThread)($v0)
-/* 40B4C 8006574C 0C01AC1B */  jal       osEnqueueAndYield
+/* 40B4C 8006574C 0C01AC1B */  jal       __osEnqueueAndYield
 /* 40B50 80065750 A4530010 */   sh       $s3, 0x10($v0)
 /* 40B54 80065754 8E020008 */  lw        $v0, 8($s0)
 /* 40B58 80065758 1040FFF4 */  beqz      $v0, .L8006572C
@@ -66,7 +66,7 @@ glabel osRecvMesg
 /* 40BCC 800657CC 8C620000 */  lw        $v0, ($v1)
 /* 40BD0 800657D0 10400005 */  beqz      $v0, .L800657E8
 /* 40BD4 800657D4 00000000 */   nop
-/* 40BD8 800657D8 0C01AC6F */  jal       osPopThread
+/* 40BD8 800657D8 0C01AC6F */  jal       __osPopThread
 /* 40BDC 800657DC 26040004 */   addiu    $a0, $s0, 4
 /* 40BE0 800657E0 0C019808 */  jal       osStartThread
 /* 40BE4 800657E4 00402021 */   addu     $a0, $v0, $zero

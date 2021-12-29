@@ -42,7 +42,7 @@ glabel osStartThread
 /* 414A8 800660A8 0C01AC5D */  jal       osEnqueueThread
 /* 414AC 800660AC A6020010 */   sh       $v0, 0x10($s0)
 /* 414B0 800660B0 8E040008 */  lw        $a0, 8($s0)
-/* 414B4 800660B4 0C01AC6F */  jal       osPopThread
+/* 414B4 800660B4 0C01AC6F */  jal       __osPopThread
 /* 414B8 800660B8 00000000 */   nop
 /* 414BC 800660BC 02202021 */  addu      $a0, $s1, $zero
 /* 414C0 800660C0 00402821 */  addu      $a1, $v0, $zero
@@ -68,7 +68,7 @@ glabel osStartThread
 /* 41504 80066104 24020002 */   addiu    $v0, $zero, 2
 /* 41508 80066108 A4820010 */  sh        $v0, 0x10($a0)
 /* 4150C 8006610C 3C048009 */  lui       $a0, %hi(__osRunQueue)
-/* 41510 80066110 0C01AC1B */  jal       osEnqueueAndYield
+/* 41510 80066110 0C01AC1B */  jal       __osEnqueueAndYield
 /* 41514 80066114 24844658 */   addiu    $a0, $a0, %lo(__osRunQueue)
 .L80066118:
 /* 41518 80066118 0C01ACF4 */  jal       __osRestoreInt
