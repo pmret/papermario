@@ -2321,7 +2321,7 @@ segments:
     vram: 0xE0020000
     subsegments:
     - [0x333EC0, c, effect_16]
-    - [0x334B50, data]
+    - [0x334B50]
   - [0x334C70, bin] # effect 16 gfx
   - name: effect_17
     dir: effects
