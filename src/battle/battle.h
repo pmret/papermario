@@ -336,6 +336,8 @@ typedef struct ActorSounds {
     /* 0x18 */ s16 delay[2]; ///< Number of frames to wait between walk/fly sounds. Negative values are in distance.
 } ActorSounds; // size = 0x1C
 
+extern ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT];
+
 typedef struct ActorOffsets {
     /* 0x00 */ Vec3b tattleCam;
     /* 0x03 */ s8 shadow;

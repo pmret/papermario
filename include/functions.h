@@ -541,6 +541,11 @@ void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 s32 func_8004A784(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
 void base_UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 void UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+void func_80266AF8(Actor*);
+void func_80266EA8(ActorPart*, s32);
+void func_80266E40(Actor*);
+void remove_player_buffs(s32);
+s32 is_actor_hp_bar_visible(Actor*);
 
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
