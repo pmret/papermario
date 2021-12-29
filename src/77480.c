@@ -5,8 +5,8 @@
 #define E21870_VRAM_DEF (s32*)0x802B7000
 #define E225B0_VRAM_DEF (s32*)0x802B7000
 
-void appendGfx_player(void);
-void appendGfx_player_spin(void);
+void appendGfx_player(void* data);
+void appendGfx_player_spin(void* data);
 void func_800F0C9C(void);
 
 extern UNK_FUN_PTR(D_8010C93C);
@@ -793,7 +793,7 @@ void render_player_model(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 x, y, z;
     s8 renderModeTemp;
-    void (*phi_a0)(void);
+    void (*appendGfx)(void*);
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_40000000) {
         playerStatus->flags &= ~PLAYER_STATUS_FLAGS_40000000;
@@ -801,17 +801,19 @@ void render_player_model(void) {
                           playerStatus->position.z, &x, &y, &z);
         if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_20000)) {
             if (playerStatus->alpha1 != playerStatus->alpha2) {
-                if (playerStatus->alpha1 < 254) {
-                    renderModeTemp = 22;
+                if (playerStatus->alpha1 <= 253) {
+                    
                     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_1000000)) {
-                        renderModeTemp = 17;
+                        renderModeTemp = RENDER_MODE_SURFACE_XLU_LAYER1;
+                    } else {
+                        renderModeTemp = RENDER_MODE_SURFACE_XLU_LAYER2;
                     }
 
                     playerStatus->renderMode = renderModeTemp;
                     func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
                 
                 } else {
-                    playerStatus->renderMode = 13;
+                    playerStatus->renderMode = RENDER_MODE_ALPHATEST;
                     func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
                 }
             }
@@ -819,7 +821,7 @@ void render_player_model(void) {
             playerStatus->alpha2 = playerStatus->alpha1;
 
         } else {
-            playerStatus->renderMode = 17;
+            playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
             playerStatus->alpha2 = 0;
         }
 
@@ -827,13 +829,15 @@ void render_player_model(void) {
             rtPtr->appendGfxArg = playerStatus;
             rtPtr->distance = -z;
             rtPtr->renderMode = playerStatus->renderMode;
-            phi_a0 = appendGfx_player_spin;
+            
 
             if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_20000)) {
-                phi_a0 = appendGfx_player;
+                appendGfx = appendGfx_player;
+            } else {
+                appendGfx = appendGfx_player_spin;
             }
 
-            rtPtr->appendGfx = (void*)phi_a0;
+            rtPtr->appendGfx = appendGfx;
             queue_render_task(rtPtr);
         }
 
@@ -841,7 +845,7 @@ void render_player_model(void) {
     }
 }
 
-void appendGfx_player(void) {
+void appendGfx_player(void* data) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Matrix4f sp20, sp60, spA0, spE0;
     f32 temp_f0 = -gCameras[gCurrentCamID].currentYaw;
@@ -904,7 +908,7 @@ void appendGfx_player(void) {
 }
 
 /// Only used when speedy spinning.
-void appendGfx_player_spin(void) {
+void appendGfx_player_spin(void* data) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Matrix4f mtx;
     Matrix4f translation;
@@ -922,12 +926,12 @@ void appendGfx_player_spin(void) {
         yaw = -gCameras[gCurrentCamID].currentYaw;
 
         if (i == 0) {
-            if ((playerStatus->spriteFacingAngle > 90.0f) && (playerStatus->spriteFacingAngle <= 180.0f)) {
+            if (playerStatus->spriteFacingAngle > 90.0f && playerStatus->spriteFacingAngle <= 180.0f) {
                 yaw = 180.0f - playerStatus->spriteFacingAngle;
             } else {
-                if ((playerStatus->spriteFacingAngle > 180.0f) && (playerStatus->spriteFacingAngle <= 270.0f)) {
+                if (playerStatus->spriteFacingAngle > 180.0f && playerStatus->spriteFacingAngle <= 270.0f) {
                     yaw = playerStatus->spriteFacingAngle - 180.0f;
-                } else if ((playerStatus->spriteFacingAngle > 270.0f) && (playerStatus->spriteFacingAngle <= 360.0f)) {
+                } else if (playerStatus->spriteFacingAngle > 270.0f && playerStatus->spriteFacingAngle <= 360.0f) {
                     yaw = 360.0f - playerStatus->spriteFacingAngle;
                 } else {
                     yaw = playerStatus->spriteFacingAngle;
@@ -974,7 +978,7 @@ void appendGfx_player_spin(void) {
         guMtxCatF(mtx, rotation, mtx);
         guTranslateF(translation, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
         guMtxCatF(mtx, translation, mtx);
-        guScaleF(scale, 0.71428573f, 0.71428573f, 0.71428573f);
+        guScaleF(scale, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE, SPRITE_PIXEL_SCALE);
         guMtxCatF(mtx, scale, mtx);
         guTranslateF(translation, px, py, pz);
         guMtxCatF(mtx, translation, mtx);
