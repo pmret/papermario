@@ -801,7 +801,7 @@ void render_player_model(void) {
                           playerStatus->position.z, &x, &y, &z);
         if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_20000)) {
             if (playerStatus->alpha1 != playerStatus->alpha2) {
-                if (playerStatus->alpha1 <= 253) {
+                if (playerStatus->alpha1 < 254) {
                     
                     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_1000000)) {
                         renderModeTemp = RENDER_MODE_SURFACE_XLU_LAYER1;
@@ -963,7 +963,7 @@ void appendGfx_player_spin(void* data) {
 
             px = playerStatus->position.x;
             pz = playerStatus->position.z;
-            func_802DDEE4(0, -1, 7, 0, 0, 0, 0x40, 0);
+            func_802DDEE4(0, -1, 7, 0, 0, 0, 64, 0);
             guRotateF(mtx, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(mtx, blurAngle, 0.0f, 1.0f, 0.0f);
