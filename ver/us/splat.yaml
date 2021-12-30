@@ -3722,16 +3722,21 @@ segments:
     type: code
     start: 0x439A90
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
+    - [0x439A90, c, area]
     - [0x439A90, c]
     - [0x43A5A0, c]
     - [0x43A7E0, c]
     - [0x43AA50, c]
     - [0x43ACC0, c]
     - [0x43AF30, c]
-    - [0x43B1E0, .data, 439A90]
+    - [0x43B1E0, .data, area]
+    - [0x43B340, .data, 439A90]
     - [0x43C030, data, 43B1E0]
+    - [0x4472F0, .rodata, area]
+    - [0x447354, rodata, 43B1E0]
   - dir: battle/area_kmr_part_3
     type: code
     start: 0x447440
