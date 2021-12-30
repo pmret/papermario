@@ -7,15 +7,14 @@ typedef struct {
     UNK_PTR unk_08;
 } HitAsset;
 
-
 typedef struct {
     s32 flags;
     s16 parentModelIndex;
-    s16 unk_06;
-} UnkHitStruct;
+    s16 _pad_06;
+} HitTableEntry;
 
-extern UnkHitStruct* D_800A4264;
-extern UnkHitStruct* D_800A4268;
+extern HitTableEntry* D_800A4264;
+extern HitTableEntry* D_800A4268;
 extern CollisionData D_800D91D0;
 
 
@@ -25,23 +24,23 @@ void allocate_hit_tables(void)
 {
     CollisionData *pColData;
     Collider *pCollider;
-    UnkHitStruct *ptr;
+    HitTableEntry *ptr;
     s32 i;
 
     pColData = &gCollisionData;
-    D_800A4264 = general_heap_malloc(pColData->numColliders * 8);
+    D_800A4264 = general_heap_malloc(pColData->numColliders * sizeof(HitTableEntry));
     for (i = 0, ptr = D_800A4264; i < pColData->numColliders; i++, ptr++)
     {
-        pCollider = (*pColData).colliderList + i;
+        pCollider = &pColData->colliderList[i];
         ptr->flags = pCollider->flags;
         ptr->parentModelIndex = pCollider->parentModelIndex;
     }
 
     pColData = &D_800D91D0;
-    D_800A4268 = general_heap_malloc(pColData->numColliders * 8);
+    D_800A4268 = general_heap_malloc(pColData->numColliders * sizeof(HitTableEntry));
     for (i = 0, ptr = D_800A4268; i < pColData->numColliders; i++, ptr++)
     {
-        pCollider = (*pColData).colliderList + i;
+        pCollider = &pColData->colliderList[i];
         ptr->flags = pCollider->flags;
         ptr->parentModelIndex = pCollider->parentModelIndex;
     }
@@ -79,7 +78,43 @@ void load_hit_asset(void) {
     heap_free(uncompressedData);
 }
 
-INCLUDE_ASM(s32, "362a0_len_2f70", load_collision);
+void load_collision(void)
+{
+    CollisionData *pColData;
+    Collider *pCollider;
+    HitTableEntry *ptr;
+    s32 i;
+
+    load_hit_asset();
+
+    pColData = &gCollisionData;
+    for (i = 0, ptr = D_800A4264; i < pColData->numColliders; i++, ptr++)
+    {
+        pCollider = &pColData->colliderList[i];
+        pCollider->flags = ptr->flags;
+        pCollider->parentModelIndex = ptr->parentModelIndex;
+
+        if (pCollider->flags != -1)
+        {
+            if ((pCollider->flags & 0x80000000) != 0)
+            {
+                parent_collider_to_model(i, pCollider->parentModelIndex);
+                update_collider_transform(i);
+            }
+        }
+    }
+
+    pColData = &D_800D91D0;
+    for (i = 0, ptr = D_800A4268; i < pColData->numColliders; i++, ptr++)
+    {
+        pCollider = &pColData->colliderList[i];
+        pCollider->flags = ptr->flags;
+        pCollider->parentModelIndex = ptr->parentModelIndex;
+    }
+
+    general_heap_free(D_800A4264);
+    general_heap_free(D_800A4268);
+}
 
 void load_stage_collision(const char* hitName) {
     if (hitName == NULL) {
