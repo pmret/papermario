@@ -137,7 +137,7 @@ void func_802B735C_E2290C(void) {
     switch (temp_v1) {
         case 0:
             if (partnerActionStatus->actionState.b[0] && partnerActionStatus->actionState.b[3] == 8) {
-                phi_v0 = gGameStatusPtr->unk_7D;
+                phi_v0 = gGameStatusPtr->keepUsingPartnerOnMapChange;
             } else {
                 phi_v0 = playerStatus->flags & 0x3000;
             }

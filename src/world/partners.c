@@ -533,9 +533,9 @@ void partner_reset_data(void) {
     D_8010CFE8 = 9;
     D_8010CFD8 = currentPartner;
 
-    if (gGameStatusPtr->unk_7D != 0) {
+    if (gGameStatusPtr->keepUsingPartnerOnMapChange != 0) {
         gPartnerActionStatus.actionState.b[0] = 1;
-        gGameStatusPtr->unk_7D = 0;
+        gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
     }
 
     wPartner = NULL;

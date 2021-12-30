@@ -5,15 +5,15 @@
 
 void state_init_startup(void) {
     gOverrideFlags |= 0x8;
-    gGameStatusPtr->loadMenuState = 3;
+    gGameStatusPtr->introState = 3;
 }
 
 void state_step_startup(void) {
     GameStatus* gameStatus = gGameStatusPtr;
     s32 i;
 
-    if (gameStatus->loadMenuState != 0) {
-        gameStatus->loadMenuState--;
+    if (gameStatus->introState != 0) {
+        gameStatus->introState--;
         return;
     }
 
@@ -25,7 +25,7 @@ void state_step_startup(void) {
     gameStatus->entryID = 0;
     gGameStatusPtr->unk_76 = 0;
     gGameStatusPtr->disableScripts = 0;
-    gGameStatusPtr->unk_7D = 0;
+    gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
     gGameStatusPtr->creditsViewportMode = -1;
     gGameStatusPtr->demoFlags = 0;
     gGameStatusPtr->unk_A9 = -1;
@@ -72,10 +72,10 @@ void state_step_startup(void) {
     fio_has_valid_backup();
 
     if (D_800D9620 == 0) {
-        gGameStatusPtr->unk_AB = 1;
+        gGameStatusPtr->usingStereoSound = 1;
         func_8005615C();
     } else {
-        gGameStatusPtr->unk_AB = 0;
+        gGameStatusPtr->usingStereoSound = 0;
         func_80056180();
     }
 

@@ -1182,7 +1182,7 @@ typedef struct GameStatus {
     /* 0x07A */ s8 musicEnabled;
     /* 0x07B */ char unk_7B;
     /* 0x07C */ s8 unk_7C;
-    /* 0x07D */ s8 unk_7D;
+    /* 0x07D */ s8 keepUsingPartnerOnMapChange;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
     /* 0x080 */ u8 peachAnimIdx; ///< @see world_action_idle_peachAnims
@@ -1204,9 +1204,9 @@ typedef struct GameStatus {
     /* 0x0A8 */ s8 creditsViewportMode;
     /* 0x0A9 */ s8 unk_A9;
     /* 0x0AA */ s8 demoFlags;
-    /* 0x0AB */ u8 unk_AB;
-    /* 0x0AC */ s8 loadMenuState;
-    /* 0x0AD */ s8 menuCounter;
+    /* 0x0AB */ u8 usingStereoSound;
+    /* 0x0AC */ s8 introState;
+    /* 0x0AD */ s8 introCounter;
     /* 0x0AE */ s8 bSkipIntro;
     /* 0x0AF */ char unk_AF[0x7];
     /* 0x0B6 */ s16 bootAlpha;
@@ -1214,8 +1214,8 @@ typedef struct GameStatus {
     /* 0x0BA */ s16 bootGreen;
     /* 0x0BC */ s16 bootRed;
     /* 0x0BE */ char unk_BE[94];
-    /* 0x11C */ Vec3f unk_11C;
-    /* 0x128 */ Vec3f playerTraceNormal;
+    /* 0x11C */ Vec3f playerGroundTraceAngles;
+    /* 0x128 */ Vec3f playerGroundTraceNormal;
     /* 0x134 */ u16 frameCounter;
     /* 0x136 */ char unk_136[2];
     /* 0x138 */ s32 nextRNG;
@@ -1223,11 +1223,11 @@ typedef struct GameStatus {
     /* 0x13E */ char unk_13E[2];
     /* 0x140 */ ShopItemEntity* shopItemEntities;
     /* 0x144 */ struct Shop* mapShop;
-    /* 0x148 */ s16 enableBackground; /* (bit 2 is also used for something) */
-    /* 0x14A */ s16 backgroundMinW;
-    /* 0x14C */ s16 backgroundMinH;
-    /* 0x14E */ s16 backgroundMaxW;
-    /* 0x150 */ s16 backgroundMaxH;
+    /* 0x148 */ s16 backgroundFlags; /* (bit 1 = enable, bit 2 is used for something else) */
+    /* 0x14A */ s16 backgroundMinX;
+    /* 0x14C */ s16 backgroundMinY;
+    /* 0x14E */ s16 backgroundMaxX;
+    /* 0x150 */ s16 backgroundMaxY;
     /* 0x152 */ s16 backgroundXOffset; /* (used for parallax scroll) */
     /* 0x154 */ UNK_PTR backgroundRaster;
     /* 0x158 */ UNK_PTR backgroundPalette;
