@@ -136,7 +136,7 @@ glabel func_80240BF0_9903D0
 .L80240DC4_9905A4:
 /* 9905A4 80240DC4 0260202D */  daddu     $a0, $s3, $zero
 /* 9905A8 80240DC8 0280282D */  daddu     $a1, $s4, $zero
-/* 9905AC 80240DCC 0C09022B */  jal       func_802408AC_99008C
+/* 9905AC 80240DCC 0C09022B */  jal       isk_13_UnkNpcAIFunc39
 /* 9905B0 80240DD0 0200302D */   daddu    $a2, $s0, $zero
 /* 9905B4 80240DD4 0809037C */  j         .L80240DF0
 /* 9905B8 80240DD8 0000102D */   daddu    $v0, $zero, $zero

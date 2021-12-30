@@ -136,7 +136,7 @@ glabel func_80242B04_BA7284
 .L80242CD8_BA7458:
 /* BA7458 80242CD8 0260202D */  daddu     $a0, $s3, $zero
 /* BA745C 80242CDC 0280282D */  daddu     $a1, $s4, $zero
-/* BA7460 80242CE0 0C0909F0 */  jal       func_802427C0_BA6F40
+/* BA7460 80242CE0 0C0909F0 */  jal       mim_06_UnkNpcAIFunc39
 /* BA7464 80242CE4 0200302D */   daddu    $a2, $s0, $zero
 /* BA7468 80242CE8 08090B41 */  j         .L80242D04
 /* BA746C 80242CEC 0000102D */   daddu    $v0, $zero, $zero

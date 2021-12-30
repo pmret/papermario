@@ -1,5 +1,4 @@
 #include "isk_05.h"
-#include "effects.h"
 
 static char* N(exit_str_0) = "isk_04";
 static char* N(exit_str_1) = "";
@@ -14,7 +13,7 @@ static char* N(exit_str_1) = "";
 
 #include "world/common/UnkNpcAIFunc15.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_802408AC_97E37C);
+#include "world/common/UnkNpcAIFunc39.inc.c"
 
 #include "world/common/UnkDurationCheck.inc.c"
 

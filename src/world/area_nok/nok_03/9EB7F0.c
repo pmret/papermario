@@ -13,7 +13,7 @@ static char* N(exit_str_1) = "nok_04";
 
 #include "world/common/UnkNpcAIFunc15.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_03/9EB7F0", func_802408AC_9EC09C);
+#include "world/common/UnkNpcAIFunc39.inc.c"
 
 #include "world/common/UnkDurationCheck.inc.c"
 

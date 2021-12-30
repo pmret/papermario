@@ -136,7 +136,7 @@ glabel func_80240F30_B28F60
 .L80241104_B29134:
 /* B29134 80241104 0260202D */  daddu     $a0, $s3, $zero
 /* B29138 80241108 0280282D */  daddu     $a1, $s4, $zero
-/* B2913C 8024110C 0C0902FB */  jal       func_80240BEC_B28C1C
+/* B2913C 8024110C 0C0902FB */  jal       jan_01_UnkNpcAIFunc39
 /* B29140 80241110 0200302D */   daddu    $a2, $s0, $zero
 /* B29144 80241114 0809044C */  j         .L80241130
 /* B29148 80241118 0000102D */   daddu    $v0, $zero, $zero

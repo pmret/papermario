@@ -1,0 +1,54 @@
+#include "common.h"
+#include "npc.h"
+#include "effects.h"
+
+void N(UnkNpcAIFunc39)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    f32 posX, posY, posZ, posW;
+    f32 sp34;
+
+    if (npc->moveSpeed > 0.0) {
+        posX = npc->pos.x;
+        posY = npc->pos.y;
+        posZ = npc->pos.z;
+        if (npc_test_move_simple_with_slipping(npc->unk_80, &posX, &posY, &posZ, npc->moveSpeed, npc->yaw, 
+                                               npc->collisionHeight, npc->collisionRadius) != 0) 
+        {
+            npc->moveSpeed = 0.0f;
+        } else {
+            npc_move_heading(npc, npc->moveSpeed, npc->yaw);
+        }
+    }
+
+    if (npc->jumpVelocity < 0.0) {
+        posX = npc->pos.x;
+        sp34 = 100.0f;
+        posZ = npc->pos.z;
+        posW = 1000.0f;
+        npc_raycast_down_sides(npc->unk_80, &posX, &sp34, &posZ, &posW);
+
+        posX = npc->pos.x;
+        posY = npc->pos.y + 13.0;
+        posZ = npc->pos.z;
+        posW = fabsf(npc->jumpVelocity) + 16.0;
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW) != 0 && posW <= fabsf(npc->jumpVelocity) + 13.0) {
+            npc->jumpVelocity = 0.0f;
+            npc->pos.y = posY;
+            npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+            fx_walk(2, npc->pos.x, npc->pos.y, npc->pos.z, 0.0f, 0.0f);
+            script->functionTemp[0] = 12;
+
+            if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) == 0) {
+                s32 emoteTemp;
+
+                fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &emoteTemp);
+                npc->duration = 25;
+                script->functionTemp[0] = 14;
+            }
+            return;
+        }
+    }
+    npc->pos.y += npc->jumpVelocity;
+    npc->jumpVelocity -= npc->jumpScale;
+}

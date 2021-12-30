@@ -17,7 +17,7 @@ INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_80240068_BB2E68);
 
 #include "world/common/UnkNpcAIFunc15.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_09/BB2E00", func_8024094C_BB374C);
+#include "world/common/UnkNpcAIFunc39.inc.c"
 
 #include "world/common/UnkDurationCheck.inc.c"
 

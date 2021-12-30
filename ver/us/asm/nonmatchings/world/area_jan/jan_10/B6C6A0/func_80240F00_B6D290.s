@@ -136,7 +136,7 @@ glabel func_80240F00_B6D290
 .L802410D4_B6D464:
 /* B6D464 802410D4 0260202D */  daddu     $a0, $s3, $zero
 /* B6D468 802410D8 0280282D */  daddu     $a1, $s4, $zero
-/* B6D46C 802410DC 0C0902EF */  jal       btl_delete_actor_B6CF4C
+/* B6D46C 802410DC 0C0902EF */  jal       jan_10_UnkNpcAIFunc39
 /* B6D470 802410E0 0200302D */   daddu    $a2, $s0, $zero
 /* B6D474 802410E4 08090440 */  j         .L80241100
 /* B6D478 802410E8 0000102D */   daddu    $v0, $zero, $zero
