@@ -108,7 +108,7 @@ glabel func_802410B0_B7B100
 .L80241224_B7B274:
 /* B7B274 80241224 0260202D */  daddu     $a0, $s3, $zero
 /* B7B278 80241228 0280282D */  daddu     $a1, $s4, $zero
-/* B7B27C 8024122C 0C0901BC */  jal       func_802406F0_B7A740
+/* B7B27C 8024122C 0C0901BC */  jal       jan_14_UnkNpcAIFunc37
 /* B7B280 80241230 0200302D */   daddu    $a2, $s0, $zero
 /* B7B284 80241234 080904AC */  j         .L802412B0
 /* B7B288 80241238 0000102D */   daddu    $v0, $zero, $zero

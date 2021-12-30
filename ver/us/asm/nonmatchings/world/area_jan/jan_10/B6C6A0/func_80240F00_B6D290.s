@@ -108,7 +108,7 @@ glabel func_80240F00_B6D290
 .L80241074_B6D404:
 /* B6D404 80241074 0260202D */  daddu     $a0, $s3, $zero
 /* B6D408 80241078 0280282D */  daddu     $a1, $s4, $zero
-/* B6D40C 8024107C 0C090150 */  jal       func_80240540_B6C8D0
+/* B6D40C 8024107C 0C090150 */  jal       jan_10_UnkNpcAIFunc37
 /* B6D410 80241080 0200302D */   daddu    $a2, $s0, $zero
 /* B6D414 80241084 08090440 */  j         .L80241100
 /* B6D418 80241088 0000102D */   daddu    $v0, $zero, $zero
