@@ -23,7 +23,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_01/B28030", func_8024030C_B2833C);
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_01/B28030", func_80240F30_B28F60);
+#include "world/common/UnkNpcAIMainFunc2.inc.c"
 
 #include "world/common/SetCamera0Flag1000.inc.c"
 

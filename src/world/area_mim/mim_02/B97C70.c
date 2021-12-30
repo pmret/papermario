@@ -14,7 +14,7 @@
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_02/B97C70", func_80240C60_B98860);
+#include "world/common/UnkNpcAIMainFunc2.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

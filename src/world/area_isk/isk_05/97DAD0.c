@@ -17,7 +17,9 @@ static char* N(exit_str_1) = "";
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80240BF0_97E6C0);
+#include "world/common/UnkNpcAIMainFunc2.inc.c"
+
+static const f32 padding = 0.0f; // remove when all functions here are decompiled
 
 INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80240E14_97E8E4);
 
@@ -44,3 +46,4 @@ INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80241D44_97F814);
 INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80241DF8_97F8C8);
 
 INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80241E24_97F8F4);
+ 
