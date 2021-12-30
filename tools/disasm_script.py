@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 _script_lib = None
-def script_lib(offset):
+def script_lib(offset=0):
     global _script_lib
 
     if not _script_lib:
@@ -476,12 +476,16 @@ def replace_constants(self, func, args):
 
 
 class ScriptDisassembler:
-    def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {"forward": [], "sprites": set(), "npcs": []}, INCLUDED = {"functions": set(), "includes": set()}, prelude = True, transform_symbol_name=None):
+    def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {"forward": [], "sprites": set(), "npcs": []}, INCLUDED = {"functions": set(), "includes": set()}, prelude = True, transform_symbol_name=None, use_script_lib=True):
         self.bytes = bytes
         self.script_name = script_name
         self.prelude = prelude
 
-        self.symbol_map = extend_symbol_map(symbol_map, script_lib(self.bytes.tell()))
+        if use_script_lib:
+            self.symbol_map = extend_symbol_map(symbol_map, script_lib(self.bytes.tell()))
+        else:
+            self.symbol_map = symbol_map
+
         self.romstart = romstart
         self.transform_symbol_name = transform_symbol_name
         self.INCLUDES_NEEDED = INCLUDES_NEEDED
