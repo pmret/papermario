@@ -7,9 +7,47 @@ typedef struct {
     UNK_PTR unk_08;
 } HitAsset;
 
+
+typedef struct {
+    s32 flags;
+    s16 parentModelIndex;
+    s16 unk_06;
+} UnkHitStruct;
+
+extern UnkHitStruct* D_800A4264;
+extern UnkHitStruct* D_800A4268;
+extern CollisionData D_800D91D0;
+
+
 void load_hit_data(s32 idx, HitAsset* hit);
 
-INCLUDE_ASM(s32, "362a0_len_2f70", allocate_hit_tables);
+void allocate_hit_tables(void)
+{
+    CollisionData *pColData;
+    Collider *pCollider;
+    UnkHitStruct *ptr;
+    s32 i;
+
+    pColData = &gCollisionData;
+    D_800A4264 = general_heap_malloc(pColData->numColliders * 8);
+    for (i = 0, ptr = D_800A4264; i < pColData->numColliders; i++, ptr++)
+    {
+        pCollider = (*pColData).colliderList + i;
+        ptr->flags = pCollider->flags;
+        ptr->parentModelIndex = pCollider->parentModelIndex;
+    }
+
+    pColData = &D_800D91D0;
+    D_800A4268 = general_heap_malloc(pColData->numColliders * 8);
+    for (i = 0, ptr = D_800A4268; i < pColData->numColliders; i++, ptr++)
+    {
+        pCollider = (*pColData).colliderList + i;
+        ptr->flags = pCollider->flags;
+        ptr->parentModelIndex = pCollider->parentModelIndex;
+    }
+
+    D_800D91DC = 0;
+}
 
 void func_8005AF84(void) {
 }
