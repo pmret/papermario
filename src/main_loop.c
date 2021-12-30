@@ -50,15 +50,15 @@ void gfx_draw_background(void);
 
 void step_game_loop(void) {
     PlayerData* playerData = &gPlayerData;
+    const int MAX_GAME_TIME = 1000*60*60*60 - 1; // 1000 hours minus one frame at 60 fps
 
     update_input();
 
     gGameStatusPtr->frameCounter++;
 
-    // max time is 1000 hours minus one frame at 60 fps (1000*60*60*60 - 1)
     playerData->frameCounter += 2;
-    if (playerData->frameCounter > 215999999) {
-        playerData->frameCounter = 215999999;
+    if (playerData->frameCounter > MAX_GAME_TIME) {
+        playerData->frameCounter = MAX_GAME_TIME;
     }
 
     update_max_rumble_duration();
