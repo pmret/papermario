@@ -2744,7 +2744,7 @@ s32 func_8026F1A0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
+ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 actorID = evt_get_variable(script, *args++);
