@@ -24,7 +24,7 @@ ApiStatus N(UnkPosFunc2)(Evt* script, s32 isInitialCall) {
 
     xDiff = partner->pos.x - model->center.x;
     zDiff = partner->pos.z - model->center.z;
-    yVal = ((partner->pos.y + (f32) partner->collisionHeight) - 1.5f) - model->center.y;
+    yVal = partner->pos.y + partner->collisionHeight - 1.5f - model->center.y;
     sqrtTemp = sqrtf(SQ(xDiff) + SQ(zDiff));
 
     if (yVal > 0.0f && yVal < partner->collisionHeight && sqrtTemp < partner->collisionRadius * 0.5f) {
@@ -37,7 +37,7 @@ ApiStatus N(UnkPosFunc2)(Evt* script, s32 isInitialCall) {
         if (npc != NULL) {
             xDiff = npc->pos.x - model->center.x;
             zDiff = npc->pos.z - model->center.z;
-            yVal = ((npc->pos.y + npc->collisionHeight) - 1.5f) - model->center.y;
+            yVal = npc->pos.y + npc->collisionHeight - 1.5f - model->center.y;
             sqrtTemp = sqrtf(SQ(xDiff) + SQ(zDiff));
 
             if (yVal > 0.0f && yVal < npc->collisionHeight && sqrtTemp < npc->collisionRadius * 0.5f) {
