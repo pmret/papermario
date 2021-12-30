@@ -6,7 +6,7 @@
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_10/B6C6A0", func_80240938_B6CCC8);
+#include "world/common/UnkNpcAIFunc38.inc.c"
 
 #include "world/common/UnkNpcAIFunc15.inc.c"
 

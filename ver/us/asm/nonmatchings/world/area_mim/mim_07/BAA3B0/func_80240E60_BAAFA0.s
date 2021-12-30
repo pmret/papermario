@@ -124,7 +124,7 @@ glabel btl_merlee_on_start_turn_BAAFA0
 .L8024100C_BAB14C:
 /* BAB14C 8024100C 0260202D */  daddu     $a0, $s3, $zero
 /* BAB150 80241010 0280282D */  daddu     $a1, $s4, $zero
-/* BAB154 80241014 0C090226 */  jal       func_80240898_BAA9D8
+/* BAB154 80241014 0C090226 */  jal       mim_07_UnkNpcAIFunc38
 /* BAB158 80241018 0200302D */   daddu    $a2, $s0, $zero
 /* BAB15C 8024101C 08090418 */  j         .L80241060
 /* BAB160 80241020 0000102D */   daddu    $v0, $zero, $zero

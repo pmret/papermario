@@ -124,7 +124,7 @@ glabel func_80241494_B4BF04
 .L80241640_B4C0B0:
 /* B4C0B0 80241640 0260202D */  daddu     $a0, $s3, $zero
 /* B4C0B4 80241644 0280282D */  daddu     $a1, $s4, $zero
-/* B4C0B8 80241648 0C0903B3 */  jal       func_80240ECC_B4B93C
+/* B4C0B8 80241648 0C0903B3 */  jal       jan_05_UnkNpcAIFunc38
 /* B4C0BC 8024164C 0200302D */   daddu    $a2, $s0, $zero
 /* B4C0C0 80241650 080905A5 */  j         .L80241694
 /* B4C0C4 80241654 0000102D */   daddu    $v0, $zero, $zero

@@ -10,7 +10,7 @@ static char* N(exit_str_1) = "";
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80240628_97E0F8);
+#include "world/common/UnkNpcAIFunc38.inc.c"
 
 #include "world/common/UnkNpcAIFunc15.inc.c"
 

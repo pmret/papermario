@@ -124,7 +124,7 @@ glabel func_80240C60_B98860
 .L80240E0C_B98A0C:
 /* B98A0C 80240E0C 0260202D */  daddu     $a0, $s3, $zero
 /* B98A10 80240E10 0280282D */  daddu     $a1, $s4, $zero
-/* B98A14 80240E14 0C0901A6 */  jal       func_80240698_B98298
+/* B98A14 80240E14 0C0901A6 */  jal       mim_02_UnkNpcAIFunc38
 /* B98A18 80240E18 0200302D */   daddu    $a2, $s0, $zero
 /* B98A1C 80240E1C 08090398 */  j         .L80240E60
 /* B98A20 80240E20 0000102D */   daddu    $v0, $zero, $zero
