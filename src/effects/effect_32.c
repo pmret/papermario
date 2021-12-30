@@ -8,7 +8,7 @@ typedef struct Effect32 {
     /* 0x0C */ f32 unk_0C;
 } Effect32; // size = 0x??
 
-void fx_32_appendGfx(EffectInstance* effect);
+void fx_32_appendGfx(void* effect);
 
 u32 D_E0040840[2] = { 0xFF6DFF5C, 0x66BFFF4B };
 

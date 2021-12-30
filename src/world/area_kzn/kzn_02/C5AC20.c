@@ -2,7 +2,7 @@
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80240690_C5ADD0);
+#include "world/common/UnkNpcAIFunc35.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 

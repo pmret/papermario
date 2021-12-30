@@ -1,13 +1,13 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx* D_09000240[];
+extern Gfx D_09000240[];
 
 void func_E0018000(Effect12* part);
 void fx_12_init(EffectInstance* effect);
 void fx_12_update(EffectInstance* effect);
 void fx_12_render(EffectInstance* effect);
-void fx_12_appendGfx(EffectInstance* effect);
+void fx_12_appendGfx(void* effect);
 
 void func_E0018000(Effect12* part) {
     Matrix4f sp18;
@@ -114,17 +114,17 @@ void func_E00183BC(EffectInstance* effect) {
     shim_remove_effect(effect);
 }
 
-void fx_12_appendGfx(EffectInstance* effect) {
+void fx_12_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    Effect12* part = effect->data;
+    Effect12* part = effectTemp->data;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->effect->data));
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
 
     for (i = 0; i < effectTemp->numParts; i++, part++) {
         if (part->alive) {
-            Gfx** dlist = D_09000240;
+            Gfx* dlist = D_09000240;
 
             gDisplayContext->matrixStack[gMatrixListPos] = part->mtx;
 

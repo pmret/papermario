@@ -97,7 +97,7 @@ glabel func_8024162C_ED161C
 .L80241774_ED1764:
 /* ED1764 80241774 02A0202D */  daddu     $a0, $s5, $zero
 /* ED1768 80241778 0200282D */  daddu     $a1, $s0, $zero
-/* ED176C 8024177C 0C090134 */  jal       func_802404D0_ED04C0
+/* ED176C 8024177C 0C090134 */  jal       ED0310_UnkNpcAIFunc35
 /* ED1770 80241780 0260302D */   daddu    $a2, $s3, $zero
 /* ED1774 80241784 08090608 */  j         .L80241820
 /* ED1778 80241788 0000102D */   daddu    $v0, $zero, $zero

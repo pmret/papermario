@@ -51,7 +51,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80241634_DBE8E4);
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80241B28_DBEDD8);
+#include "world/common/UnkNpcAIFunc35.inc.c"
 
 #define NAMESPACE dup_omo_07
 #include "world/common/UnkNpcAIFunc1.inc.c"

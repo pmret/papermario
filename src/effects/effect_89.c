@@ -3,7 +3,7 @@
 
 s32 D_E00B2BA0[] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFC88020, 0x00000000 };
 
-void fx_89_appendGfx(EffectInstance* effect);
+void fx_89_appendGfx(void* effect);
 
 INCLUDE_ASM(s32, "effects/effect_89", fx_89_main);
 

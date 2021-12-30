@@ -1,9 +1,5 @@
 #include "common.h"
 
-extern HeapNode heap_collisionHead;
-extern HeapNode heap_generalHead;
-extern HeapNode heap_battleHead;
-
 HeapNode* general_heap_create(void) {
     return _heap_create(&heap_generalHead, 0x54000);
 }

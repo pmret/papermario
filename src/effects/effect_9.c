@@ -7,7 +7,7 @@ extern Gfx D_09000E38[];
 void fx_9_init(EffectInstance* effect);
 void fx_9_update(EffectInstance* effect);
 void fx_9_render(EffectInstance* effect);
-void fx_9_appendGfx(EffectInstance* effect);
+void fx_9_appendGfx(void* effect);
 
 void func_E0012000(Effect8* effect) {
     Matrix4f sp18;
@@ -155,14 +155,14 @@ void func_E0012548(EffectInstance* effect) {
     shim_remove_effect(effect);
 }
 
-void fx_9_appendGfx(EffectInstance* effect) {
+void fx_9_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    Effect8* part = (Effect8*)effectTemp->data;
+    Effect8* part = effectTemp->data;
     Gfx* dlist;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->effect->data));
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
 
     for (i = 0; i < effectTemp->numParts; i++, part++) {
         if (part->unk_00 != 0) {

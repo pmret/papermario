@@ -2291,7 +2291,7 @@ segments:
     vram: 0xE001A000
     subsegments:
     - [0x32FE30, c, effect_13]
-    - [0x330440, data]
+    - [0x330440]
   - [0x330460, bin] # effect 13 gfx
   - name: effect_14
     dir: effects
@@ -2300,7 +2300,7 @@ segments:
     vram: 0xE001C000
     subsegments:
     - [0x330910, c, effect_14]
-    - [0x330EF0, data]
+    - [0x330EF0]
   - [0x330F00, bin] # effect 14 gfx
   - name: effect_15
     dir: effects
@@ -2309,7 +2309,7 @@ segments:
     vram: 0xE001E000
     subsegments:
     - [0x331940, c, effect_15]
-    - [0x332690, data]
+    - [0x332690]
   - [0x3326A0, bin] # effect 15 gfx
   - name: effect_16
     dir: effects
@@ -2318,7 +2318,7 @@ segments:
     vram: 0xE0020000
     subsegments:
     - [0x333EC0, c, effect_16]
-    - [0x334B50, data]
+    - [0x334B50]
   - [0x334C70, bin] # effect 16 gfx
   - name: effect_17
     dir: effects
@@ -11337,7 +11337,8 @@ segments:
     - [0xEE65B0, c]
     - [0xEE70C0, c]
     - [0xEE8940, c]
-    - [0xEE8970, data] # Has rodata followed by a script...but doesn't seem to be a new segment
+    - [0xEE8970, data]
+    - [0xEEB900]
   - type: code
     start: 0xEED100
     vram: 0x80240000

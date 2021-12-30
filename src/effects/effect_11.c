@@ -7,7 +7,7 @@ extern Gfx D_090001B8[];
 void fx_11_init(EffectInstance* effect);
 void fx_11_update(EffectInstance* effect);
 void fx_11_render(EffectInstance* effect);
-void fx_11_appendGfx(EffectInstance* effect);
+void fx_11_appendGfx(void* effect);
 
 void fx_11_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     EffectBlueprint bp;
@@ -113,15 +113,15 @@ void fx_11_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_11_appendGfx(EffectInstance* effect) {
+void fx_11_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    Effect11* part = effect->data;
+    Effect11* part = effectTemp->data;
     Matrix4f sp20;
     Matrix4f sp60;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->effect->data));
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
     gSPDisplayList(gMasterGfxPos++, D_090000E0);
 
     for (i = 0; i < effectTemp->numParts; i++, part++) {

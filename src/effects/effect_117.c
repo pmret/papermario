@@ -8,7 +8,7 @@ typedef struct Effect117 {
     /* 0x0C */ f32 unk_0C;
 } Effect117; // size = 0x??
 
-void fx_117_appendGfx(EffectInstance* effect);
+void fx_117_appendGfx(void* effect);
 
 s32 D_E00EAA50[2] = { 0x09001A00, 0x09001A20 };
 

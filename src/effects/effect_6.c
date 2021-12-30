@@ -1,29 +1,16 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct Effect6 {
-    /* 0x00 */ u16 type;
-    /* 0x02 */ char unk_02[0x2];
-    /* 0x04 */ f32 x;
-    /* 0x08 */ f32 y;
-    /* 0x0C */ f32 z;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ s32 unk_38;
-    /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ s32 unk_40;
-} Effect6; // size = 0x44
+extern Gfx D_09002780[];
+extern Gfx D_09002868[];
+extern Gfx D_09002950[];
+extern Gfx D_09002A38[];
+extern Gfx D_09002B20[];
+extern Gfx D_09002B40[];
+extern Gfx D_09002B60[];
 
-static s32 sDlists[] = { 0x09002B20, 0x09002B40, 0x09002B60, 0x09002B60, 0x09002B60 };
-static s32 sDlists2[] = { 0x09002780, 0x09002868, 0x09002950, 0x09002A38, 0x09002A38 };
+static Gfx* sDlists[] = { D_09002B20, D_09002B40, D_09002B60, D_09002B60, D_09002B60 };
+static Gfx* sDlists2[] = { D_09002780, D_09002868, D_09002950, D_09002A38, D_09002A38 };
 
 static s8 D_E000CC38[] = { 0x00, 0x01, 0x02, 0x1A, 0x03, 0x1B, 0x04, 0x1C, 0x05, 0x15, 0x35, 0x46, 0x46, 0x46, 0xFF,
                            0x00 };
@@ -47,12 +34,12 @@ static s8 D_E000CCE0[] = { 0x00, 0x10, 0x20, 0x30, 0x01, 0x11, 0x21, 0x31, 0x02,
                            0x1E, 0x26, 0x26, 0x2E, 0x36, 0x36, 0x3E, 0x47, 0x47, 0x4F, 0x57, 0x57, 0x5F, 0x67, 0x67,
                            0x6F, 0x77, 0x77, 0x7F, 0xFF, 0x00, 0x00, 0x00 };
 
-static s8* D_E000CD24[4] = { &D_E000CC38, &D_E000CC48, &D_E000CC5C, &D_E000CCE0 };
+static s8* D_E000CD24[4] = { D_E000CC38, D_E000CC48, D_E000CC5C, D_E000CCE0 };
 
 void fx_6_init(EffectInstance* effect);
 void fx_6_update(EffectInstance* effect);
 void fx_6_render(EffectInstance* effect);
-void fx_6_appendGfx(EffectInstance* effect);
+void fx_6_appendGfx(void* effect);
 
 void func_E000C000(Effect6* part) {
     part->unk_18 += part->unk_1C;
@@ -270,8 +257,8 @@ void fx_6_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_6_appendGfx(EffectInstance* effect) {
-    Effect6* part = effect->data;
+void fx_6_appendGfx(void* effect) {
+    Effect6* part = ((EffectInstance*)effect)->data;
     s32 type = part->type;
     s32 temp_t0 = part->unk_40;
     Matrix4f mtx1;
@@ -281,8 +268,8 @@ void fx_6_appendGfx(EffectInstance* effect) {
     s32 spDC;
     s32 temp_lo;
     s32 envAlpha;
-    s32 dlist1;
-    s32 dlist2;
+    Gfx* dlist1;
+    Gfx* dlist2;
     s32 phi_a0;
     s32 temp;
     s32 i;
@@ -293,7 +280,7 @@ void fx_6_appendGfx(EffectInstance* effect) {
     dlist2 = sDlists2[type];
 
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->effect->data));
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMasterGfxPos++, dlist2);
 
     spD8 = temp_t0 & 7;
@@ -344,7 +331,7 @@ void fx_6_appendGfx(EffectInstance* effect) {
 
     part++;
 
-    for (i = 1; i < effect->numParts; i++, part++) {
+    for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         shim_guTranslateF(mtx1, part->x, part->y, part->z);
         shim_guMtxF2L(mtx1, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],

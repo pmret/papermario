@@ -97,7 +97,7 @@ glabel func_8024215C_EEF25C
 .L802422A4_EEF3A4:
 /* EEF3A4 802422A4 02A0202D */  daddu     $a0, $s5, $zero
 /* EEF3A8 802422A8 0200282D */  daddu     $a1, $s0, $zero
-/* EEF3AC 802422AC 0C090400 */  jal       func_80241000_EEE100
+/* EEF3AC 802422AC 0C090400 */  jal       EEDF50_UnkNpcAIFunc35
 /* EEF3B0 802422B0 0260302D */   daddu    $a2, $s3, $zero
 /* EEF3B4 802422B4 080908D4 */  j         .L80242350
 /* EEF3B8 802422B8 0000102D */   daddu    $v0, $zero, $zero

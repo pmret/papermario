@@ -41,7 +41,7 @@ ApiStatus N(UnkYawFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc25)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc27)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc26)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241174_95C374)(Evt* script, s32 isInitialCall);
+ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkQuizFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc31)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc29)(Evt* script, s32 isInitialCall);

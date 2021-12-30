@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-void fx_63_appendGfx(EffectInstance* effect);
+void fx_63_appendGfx(void* effect);
 
 INCLUDE_ASM(s32, "effects/effect_63", fx_63_main);
 

@@ -86,7 +86,7 @@ glabel func_80242C84_DBFF34
 .L80242DA0_DC0050:
 /* DC0050 80242DA0 0280202D */  daddu     $a0, $s4, $zero
 /* DC0054 80242DA4 0200282D */  daddu     $a1, $s0, $zero
-/* DC0058 80242DA8 0C0906CA */  jal       func_80241B28_DBEDD8
+/* DC0058 80242DA8 0C0906CA */  jal       omo_07_UnkNpcAIFunc35
 /* DC005C 80242DAC 0260302D */   daddu    $a2, $s3, $zero
 /* DC0060 80242DB0 08090B93 */  j         .L80242E4C
 /* DC0064 80242DB4 0000102D */   daddu    $v0, $zero, $zero
