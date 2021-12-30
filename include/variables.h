@@ -79,7 +79,7 @@ extern s8 D_800A0900;
 extern f32 D_800F7B60[];
 extern s16 D_800F7B80;
 extern EncounterStatus gCurrentEncounter;
-extern s8* D_801512F0;
+extern u8* D_801512F0;
 extern s16 D_80151308;
 extern s32 D_80151310;
 
@@ -338,9 +338,6 @@ extern MusicSettings D_8014F6F0;
 // OS
 extern OSThread D_800A4270; // idle thread, id 1
 extern OSThread D_800A4420; // id 3
-extern OSThread* __osActiveQueue;
-extern OSThread* __osRunningThread;
-extern OSThread* __osRunQueue;
 extern OSDevMgr __osPiDevMgr;
 
 // gfx
@@ -381,6 +378,9 @@ extern s32 D_8029C890[12][5];
 // Heap?
 extern s32 D_8038F800;
 extern s32 D_803B5000;
+
+extern HeapNode heap_collisionHead;
+extern HeapNode heap_generalHead;
 extern HeapNode heap_battleHead;
 
 extern s32 bMarioIdleAnims[];

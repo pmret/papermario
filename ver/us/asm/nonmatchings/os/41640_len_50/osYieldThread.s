@@ -12,7 +12,7 @@ glabel osYieldThread
 /* 4165C 8006625C 24844658 */  addiu     $a0, $a0, %lo(__osRunQueue)
 /* 41660 80066260 24050002 */  addiu     $a1, $zero, 2
 /* 41664 80066264 00408021 */  addu      $s0, $v0, $zero
-/* 41668 80066268 0C01AC1B */  jal       osEnqueueAndYield
+/* 41668 80066268 0C01AC1B */  jal       __osEnqueueAndYield
 /* 4166C 8006626C A4650010 */   sh       $a1, 0x10($v1)
 /* 41670 80066270 0C01ACF4 */  jal       __osRestoreInt
 /* 41674 80066274 02002021 */   addu     $a0, $s0, $zero

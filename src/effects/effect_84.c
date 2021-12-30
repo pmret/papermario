@@ -9,7 +9,7 @@ s32 D_E00A8678[] = { 0x00000001, 0x00020002, 0x00030003, 0x00030002, 0x00020001,
 
 s32 D_E00A8690[] = { D_E00A8648, 0x18000000, D_E00A8678, 0x0C000000 };
 
-void fx_84_appendGfx(EffectInstance* effect);
+void fx_84_appendGfx(void* effect);
 
 INCLUDE_ASM(s32, "effects/effect_84", fx_84_main);
 

@@ -1,3 +1,3 @@
 #include "tik_14.h"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_14/88DBF0", func_802405F0_88DBF0);
+#include "world/common/UnkPosFunc2.inc.c"

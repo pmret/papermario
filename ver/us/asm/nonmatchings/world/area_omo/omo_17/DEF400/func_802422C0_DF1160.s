@@ -86,7 +86,7 @@ glabel func_802422C0_DF1160
 .L802423DC_DF127C:
 /* DF127C 802423DC 0280202D */  daddu     $a0, $s4, $zero
 /* DF1280 802423E0 0200282D */  daddu     $a1, $s0, $zero
-/* DF1284 802423E4 0C090459 */  jal       func_80241164_DF0004
+/* DF1284 802423E4 0C090459 */  jal       omo_17_UnkNpcAIFunc35
 /* DF1288 802423E8 0260302D */   daddu    $a2, $s3, $zero
 /* DF128C 802423EC 08090922 */  j         .L80242488
 /* DF1290 802423F0 0000102D */   daddu    $v0, $zero, $zero

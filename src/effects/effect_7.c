@@ -1,23 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct Effect7 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ u16 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ char unk_14[0x44];
-    /* 0x58 */ f32 unk_58;
-    /* 0x5C */ f32 unk_5C;
-    /* 0x60 */ f32 unk_60;
-    /* 0x64 */ f32 unk_64;
-    /* 0x68 */ f32 unk_68;
-    /* 0x6C */ s32 unk_6C;
-    /* 0x70 */ s32 unk_70;
-    /* 0x74 */ s32 unk_74;
-} Effect7; // size = 0x78
-
 s8 D_E000E660[16] = { 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 5, 6, 6, 6, -1, 0 };
 
 s8 D_E000E670[20] = { 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 6, 7, 7, 7, -1, 0, 0, 0 };
@@ -33,7 +16,7 @@ extern Gfx D_09002B40[];
 void fx_7_init(EffectInstance* effect);
 void fx_7_update(EffectInstance* effect);
 void fx_7_render(EffectInstance* effect);
-void fx_7_appendGfx(EffectInstance* effect);
+void fx_7_appendGfx(void* effect);
 
 void fx_7_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     EffectBlueprint bp;
@@ -109,10 +92,9 @@ void fx_7_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_7_appendGfx(EffectInstance* effect) {
-    // effect temp needed to match - maybe EffectInstance is being cast to a a specific of EffectInstance for effect_7
+void fx_7_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    Effect7* part = (Effect7*)effect->data;
+    Effect7* part = effectTemp->data;
     s32 temp_t3 = part->unk_04;
     s32 temp_t4 = part->unk_74;
     s32 cond = FALSE;
@@ -120,8 +102,8 @@ void fx_7_appendGfx(EffectInstance* effect) {
     Matrix4f sp58;
     s32 temp_a0;
     s32 temp_lo;
-    s32 dlist;
-    s32 dlist2;
+    Gfx* dlist;
+    Gfx* dlist2;
     s32 phi_t1;
     s32 i;
 
@@ -149,7 +131,7 @@ void fx_7_appendGfx(EffectInstance* effect) {
     }
 
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->effect->data));
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
     gSPDisplayList(gMasterGfxPos++, dlist);
     gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, 127);
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 230, 222, 222, 110);

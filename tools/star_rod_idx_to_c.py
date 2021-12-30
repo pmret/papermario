@@ -137,6 +137,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
         struct = midx.pop(0)
 
         name = struct["name"]
+        print(name, file=sys.stderr)
 
         #INCLUDED["functions"].add(name)
 
@@ -162,6 +163,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             script_text = disasm_script.ScriptDisassembler(
                 bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED,
                 transform_symbol_name=transform_symbol_name,
+                use_script_lib=False,
             ).disassemble()
 
             if "shakeTree" in name or "searchBush" in name:
@@ -821,11 +823,15 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 sprite_id =  (anim & 0x00FF0000) >> 16
                 palette_id = (anim & 0x0000FF00) >> 8
                 anim_id =    (anim & 0x000000FF) >> 0
-                sprite =  disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
-                palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
-                anim =    disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
-                anim = f"NPC_ANIM_{sprite}_{palette}_{anim}"
-                INCLUDES_NEEDED["sprites"].add(sprite)
+
+                try:
+                    sprite =  disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
+                    palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
+                    anim =    disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
+                    anim = f"NPC_ANIM_{sprite}_{palette}_{anim}"
+                    INCLUDES_NEEDED["sprites"].add(sprite)
+                except KeyError:
+                    anim = f"{anim:06X}"
 
                 out += f"    {element}, "
                 out += " " * (16 - len(element))
@@ -1056,11 +1062,11 @@ if __name__ == "__main__":
                 .replace("peachdash", "peach_dash")
             )
         else:
-            segment_name = f"battle_partner_{battle_area}"
+            segment_name = f"battle/{battle_area}"
 
         is_battle = True
 
-    symbol_map = {}
+    symbol_map = disasm_script.script_lib()
     def add_to_symbol_map(addr, pair):
         if addr in symbol_map:
             symbol_map[addr].append(pair)

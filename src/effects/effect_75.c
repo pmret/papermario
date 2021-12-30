@@ -1,18 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
 
-typedef struct Effect75 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-} Effect75; // size = 0x24
-
 extern Gfx D_09001280[];
 extern Gfx D_09001358[];
 extern Gfx D_09001430[];
@@ -23,7 +11,7 @@ Gfx* D_E00963E0[] = { D_09001280, D_09001358, D_09001430 };
 void fx_75_init(EffectInstance* effect);
 void fx_75_update(EffectInstance* effect);
 void fx_75_render(EffectInstance* effect);
-void fx_75_appendGfx(EffectInstance* effect);
+void fx_75_appendGfx(void* effect);
 
 EffectInstance* fx_75_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
@@ -95,14 +83,14 @@ void fx_75_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_75_appendGfx(EffectInstance* effect) {
+void fx_75_appendGfx(void* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
-    Effect75* part = effect->data;
+    Effect75* part = ((EffectInstance*)effect)->data;
     s32 idx = part->unk_00;
 
     gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->effect->data));
+    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
     shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);

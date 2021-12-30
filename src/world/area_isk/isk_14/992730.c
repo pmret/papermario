@@ -3,21 +3,23 @@
 static char* N(exit_str_0) = "isk_10";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80240000_992730);
+#include "world/common/UnkNpcAIFunc36.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80240230_992960);
+#include "world/common/UnkNpcAIFunc37.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80240628_992D58);
+#include "world/common/UnkNpcAIFunc38.inc.c"
 
 #include "world/common/UnkNpcAIFunc15.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_802408AC_992FDC);
+#include "world/common/UnkNpcAIFunc39.inc.c"
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80240BF0_993320);
+#include "world/common/UnkNpcAIMainFunc2.inc.c"
+
+static const f32 padding = 0.0f; // remove when all functions here are decompiled
 
 INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80240E14_993544);
 

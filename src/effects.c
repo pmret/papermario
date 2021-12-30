@@ -340,16 +340,16 @@ void update_effects(void) {
             EffectInstance* effectInstance = gEffectInstances[i];
 
             if (effectInstance != NULL && (effectInstance->flags & EFFECT_INSTANCE_FLAGS_1)) {
-                effectInstance->effect->flags &= ~FX_GRAPHICS_FLAGS_2;
+                effectInstance->graphics->flags &= ~FX_GRAPHICS_FLAGS_2;
 
                 if (gGameStatusPtr->isBattle) {
                     if (effectInstance->flags & EFFECT_INSTANCE_FLAGS_4) {
-                        effectInstance->effect->update(effectInstance);
+                        effectInstance->graphics->update(effectInstance);
                         effectInstance->flags |= EFFECT_INSTANCE_FLAGS_8;
                     }
                 } else {
                     if (!(effectInstance->flags & EFFECT_INSTANCE_FLAGS_4)) {
-                        effectInstance->effect->update(effectInstance);
+                        effectInstance->graphics->update(effectInstance);
                         effectInstance->flags |= EFFECT_INSTANCE_FLAGS_8;
                     }
                 }
@@ -382,11 +382,11 @@ void render_effects_world(void) {
         if (gEffectInstances[i] != NULL && gEffectInstances[i]->flags & 1 && gEffectInstances[i]->flags & 8) {
             if (gGameStatusPtr->isBattle) {
                 if (gEffectInstances[i]->flags & 4) {
-                    gEffectInstances[i]->effect->renderWorld(gEffectInstances[i]);
+                    gEffectInstances[i]->graphics->renderWorld(gEffectInstances[i]);
                 }
             } else {
                 if (!(gEffectInstances[i]->flags & 4)) {
-                    gEffectInstances[i]->effect->renderWorld(gEffectInstances[i]);
+                    gEffectInstances[i]->graphics->renderWorld(gEffectInstances[i]);
                 }
             }
         }
@@ -413,7 +413,7 @@ void render_effects_UI(void) {
                         continue;
                     }
 
-                    renderUI = effectInstance->effect->renderUI;
+                    renderUI = effectInstance->graphics->renderUI;
                     if (renderUI != stub_effect_delegate) {
                         if (cond) {
                             Camera* camera = &gCameras[gCurrentCameraID];
@@ -498,7 +498,7 @@ EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
     }
 
     curEffect->instanceCounter++;
-    newEffectInst->effect = curEffect;
+    newEffectInst->graphics = curEffect;
 
     if (effectBp->init != NULL) {
         effectBp->init(newEffectInst);

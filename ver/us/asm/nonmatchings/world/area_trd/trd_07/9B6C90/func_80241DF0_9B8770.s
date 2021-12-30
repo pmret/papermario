@@ -86,7 +86,7 @@ glabel func_80241DF0_9B8770
 .L80241F0C_9B888C:
 /* 9B888C 80241F0C 0280202D */  daddu     $a0, $s4, $zero
 /* 9B8890 80241F10 0200282D */  daddu     $a1, $s0, $zero
-/* 9B8894 80241F14 0C090325 */  jal       func_80240C94_9B7614
+/* 9B8894 80241F14 0C090325 */  jal       trd_07_UnkNpcAIFunc35
 /* 9B8898 80241F18 0260302D */   daddu    $a2, $s3, $zero
 /* 9B889C 80241F1C 080907EE */  j         .L80241FB8
 /* 9B88A0 80241F20 0000102D */   daddu    $v0, $zero, $zero

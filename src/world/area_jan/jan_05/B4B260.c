@@ -2,21 +2,21 @@
 
 INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_802407F0_B4B260);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_802408A4_B4B314);
+#include "world/common/UnkNpcAIFunc36.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_80240AD4_B4B544);
+#include "world/common/UnkNpcAIFunc37.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_80240ECC_B4B93C);
+#include "world/common/UnkNpcAIFunc38.inc.c"
 
 #include "world/common/UnkNpcAIFunc15.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_80241150_B4BBC0);
+#include "world/common/UnkNpcAIFunc39.inc.c"
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_80241494_B4BF04);
+#include "world/common/UnkNpcAIMainFunc2.inc.c"
 
 #include "world/common/UnkNpcAIFunc4.inc.c"
 

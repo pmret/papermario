@@ -100,7 +100,7 @@ glabel func_802414D0_EDFE90
 .L80241618_EDFFD8:
 /* EDFFD8 80241618 02A0202D */  daddu     $a0, $s5, $zero
 /* EDFFDC 8024161C 0200282D */  daddu     $a1, $s0, $zero
-/* EDFFE0 80241620 0C0900DD */  jal       func_80240374_EDED34
+/* EDFFE0 80241620 0C0900DD */  jal       EDEA00_UnkNpcAIFunc35
 /* EDFFE4 80241624 0260302D */   daddu    $a2, $s3, $zero
 /* EDFFE8 80241628 080905B1 */  j         .L802416C4
 /* EDFFEC 8024162C 0000102D */   daddu    $v0, $zero, $zero
