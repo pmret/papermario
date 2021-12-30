@@ -2,19 +2,19 @@
 
 #include "world/common/UnkNpcAIFunc36.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_06/B52F70", func_80240970_B531A0);
+#include "world/common/UnkNpcAIFunc37.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_06/B52F70", delete_player_actor_B53598);
+#include "world/common/UnkNpcAIFunc38.inc.c"
 
 #include "world/common/UnkNpcAIFunc15.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_06/B52F70", func_80240FEC_B5381C);
+#include "world/common/UnkNpcAIFunc39.inc.c"
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_06/B52F70", func_80241330_B53B60);
+#include "world/common/UnkNpcAIMainFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_06/B52F70", func_80241554_B53D84);
 
