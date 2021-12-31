@@ -109,51 +109,11 @@ def find_symbol_in_overlay(symbol_map, overlay_rom_addr, symbol_ram_addr):
 
     return symbol_map[symbol_ram_addr][0][1]
 
-# Grab CONSTANTS from the include/ folder to save manual work
-CONSTANTS = {}
-SAVE_VARS = set()
-def get_constants():
-    global CONSTANTS
-    global VALID_SAVE_VARS
-
-    valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims",
-        "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
-        "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags", "Statuses", "Elements",
-        "DamageTypes", "HitResults", "ActorFlags", "ActorPartFlags",
-        "ActorEventFlags", "ElementFlags", "EncounterTriggers", "Abilities",
-        "Easings", "DecorationIDs", "HitResults", "Phases", "ItemSpawnModes",
-        "ActionStates", "Triggers", "Buttons", "ActionCommand", "MoveIDs" }
-    for enum in valid_enums:
-        CONSTANTS[enum] = {}
-    CONSTANTS["NPC_SPRITE"] = {}
-    CONSTANTS["MAP_NPCS"] = {}
-
-    [SAVE_VARS.add(x) for x in ["EVT_WORLD_LOCATION", "EVT_STORY_PROGRESS"]]
-
-    include_path = Path(Path(__file__).resolve().parent.parent / "include")
-    enums = Path(include_path / "enums.h").read_text().splitlines()
-
-    '''
-    # defines
-    for line in enums:
-        this_enum = ""
-        for enum in valid_defines:
-            if f"#define {enum}_" in line:
-                this_enum = enum
-                break;
-
-        if this_enum:
-            name = line.split(" ",2)[1]
-            id_ = line.split("0x", 1)[1]
-            if " " in id_:
-                id_ = id_.split(" ",1)[0]
-            CONSTANTS[this_enum][int(id_, 16)] = name
-    '''
-
+def browse_header(valid_enums, enums):
     # enums
     for i,line in enumerate(enums):
-        if line.startswith("enum "):
-            enum_name = line.split(" ",1)[1].split(" {",1)[0]
+        if (line.startswith("enum ")) or (line.startswith("typedef enum ")):
+            enum_name = line.split("enum ",1)[1].split(" {",1)[0]
             if enum_name in valid_enums:
                 CONSTANTS[enum_name] = {}
                 last_num = -1
@@ -181,6 +141,53 @@ def get_constants():
                     CONSTANTS[enum_name][val] = name.strip()
                     i += 1
                     last_num = val
+    return
+
+# Grab CONSTANTS from the include/ folder to save manual work
+CONSTANTS = {}
+SAVE_VARS = set()
+def get_constants():
+    global CONSTANTS
+    global VALID_SAVE_VARS
+
+    valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims", "ActorType",
+        "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
+        "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags", "Statuses", "Elements",
+        "DamageTypes", "ElementImmunityFlags", "HitResults", "ActorFlags", "ActorPartFlags",
+        "ActorEventFlags", "ElementFlags", "EncounterTriggers", "Abilities",
+        "Easings", "DecorationIDs", "HitResults", "Phases", "ItemSpawnModes",
+        "ActionStates", "Triggers", "Buttons", "ActionCommand", "MoveIDs" }
+    for enum in valid_enums:
+        CONSTANTS[enum] = {}
+    CONSTANTS["NPC_SPRITE"] = {}
+    CONSTANTS["MAP_NPCS"] = {}
+
+    [SAVE_VARS.add(x) for x in ["EVT_WORLD_LOCATION", "EVT_STORY_PROGRESS"]]
+
+    include_path = Path(Path(__file__).resolve().parent.parent / "include")
+    enums = Path(include_path / "enums.h").read_text().splitlines()
+    browse_header(valid_enums, enums)
+    
+    include_path = Path(Path(__file__).resolve().parent.parent / "src" / "battle")
+    enums = Path(include_path / "battle.h").read_text().splitlines()
+    browse_header(valid_enums, enums)
+
+    '''
+    # defines
+    for line in enums:
+        this_enum = ""
+        for enum in valid_defines:
+            if f"#define {enum}_" in line:
+                this_enum = enum
+                break;
+
+        if this_enum:
+            name = line.split(" ",2)[1]
+            id_ = line.split("0x", 1)[1]
+            if " " in id_:
+                id_ = id_.split(" ",1)[0]
+            CONSTANTS[this_enum][int(id_, 16)] = name
+    '''
 
     #exit()
     # sprites
@@ -310,6 +317,18 @@ def fix_args(self, func, args, info):
                     if flag:
                         if flag in CONSTANTS["DamageTypes"]:
                             enabled.append(CONSTANTS["DamageTypes"][flag])
+                        else:
+                            enabled.append(f"0x{flag:08X}")
+                if not enabled:
+                    enabled.append(f"0")
+                new_args.append("((" + " | ".join(enabled) + "))")
+            elif info[i] == "ElementImmunityFlags":
+                enabled = []
+                for x in range(32):
+                    flag = argNum & (1 << x)
+                    if flag:
+                        if flag in CONSTANTS["ElementImmunityFlags"]:
+                            enabled.append(CONSTANTS["ElementImmunityFlags"][flag])
                         else:
                             enabled.append(f"0x{flag:08X}")
                 if not enabled:

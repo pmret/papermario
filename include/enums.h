@@ -2905,7 +2905,6 @@ enum NpcDropFlags {
 };
 
 enum ElementImmunityFlags {
-    ELEMENT_IMMUNITY_FLAGS_0                 = 0x00000000,
     ELEMENT_IMMUNITY_FLAGS_1                 = 0x00000001,
     ELEMENT_IMMUNITY_FLAGS_2                 = 0x00000002,
     ELEMENT_IMMUNITY_FLAGS_4                 = 0x00000004,

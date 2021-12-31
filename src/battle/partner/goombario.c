@@ -288,7 +288,7 @@ ActorPartDesc N(partsTable_802392A4)[] = {
         .idleAnimations = N(idleAnimations_802391B0),
         .defenseTable = N(defenseTable_802391EC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
-        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_0,
+        .elementImmunityFlags = 0,
     },
 };
 
@@ -296,13 +296,13 @@ extern EvtSource N(init_802392F0);
 
 ActorDesc N(goombario) = {
     .flags = 0,
-    .type = 111,
+    .type = ACTOR_TYPE_GOOMBARIO,
     .level = 0,
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(partsTable_802392A4)),
     .partsData = N(partsTable_802392A4),
     .script = N(init_802392F0),
-    .statusTable = N(statusTable_802391F8),
+    .statusTable = (DictionaryEntry*) N(statusTable_802391F8),
     .escapeChance = 0,
     .airLiftChance = 0,
     .spookChance = 0,
