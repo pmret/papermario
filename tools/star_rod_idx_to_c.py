@@ -723,13 +723,13 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
 
                 if position in symbol_map:
-                    out += f".position = &{symbol_map[position][0][1]}"
+                    out += f".pos = {{ .vec = &{symbol_map[position][0][1]} }}"
 
                     s = f"Vec3f {symbol_map[position][0][1]};"
                     if s not in INCLUDES_NEEDED["forward"]:
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
-                    out += f".position = {position}"
+                    out += f".pos = {{ .index = {position} }}"
 
                 out += f", .priority = {priority}"
 
