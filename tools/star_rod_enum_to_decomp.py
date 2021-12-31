@@ -106,8 +106,8 @@ def main(args):
     file.close()
 
 
-parser = argparse.ArgumentParser(description='Convert a StarRod enum into an enum that is in decomp format')
-parser.add_argument("query", help="StarRod enum file")
+parser = argparse.ArgumentParser(description='Convert a StarRod enum into an enum that is in a decomp compatible format')
+parser.add_argument("query", help="StarRod enum file or folder")
 parser.add_argument("-r", "--recursive", help="recursively convert all files to enums", type=bool, required=False)
 
 args = parser.parse_args()

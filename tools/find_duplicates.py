@@ -305,30 +305,31 @@ parser.add_argument("-n", "--num-out", help="number of functions to display", ty
 
 args = parser.parse_args()
 
-rom_bytes = read_rom()
-map_syms = parse_map(os.path.join(root_dir, "ver", "current", "build", "papermario.map"))
-map_offsets = get_map_offsets(map_syms)
-
-s_files = get_all_s_files()
-
-query_dir = find_dir(args.query)
-
-if query_dir is not None:
-    files = os.listdir(query_dir)
-    for f_name in files:
-        do_query(f_name[:-2])
-else:
-    if args.cross:
-        args.threshold = 0.985
-        do_cross_query()
-    elif args.all:
-        args.threshold = 0.985
-        all_matches(True)
-    elif args.short:
-        args.threshold = 0.985
-        all_matches(False)
+if __name__ == "__main__":
+    rom_bytes = read_rom()
+    map_syms = parse_map(os.path.join(root_dir, "ver", "current", "build", "papermario.map"))
+    map_offsets = get_map_offsets(map_syms)
+    
+    s_files = get_all_s_files()
+    
+    query_dir = find_dir(args.query)
+    
+    if query_dir is not None:
+        files = os.listdir(query_dir)
+        for f_name in files:
+            do_query(f_name[:-2])
     else:
-        if args.query is None:
-            parser.print_help()
+        if args.cross:
+            args.threshold = 0.985
+            do_cross_query()
+        elif args.all:
+            args.threshold = 0.985
+            all_matches(True)
+        elif args.short:
+            args.threshold = 0.985
+            all_matches(False)
         else:
-            do_query(args.query)
+            if args.query is None:
+                parser.print_help()
+            else:
+                do_query(args.query)
