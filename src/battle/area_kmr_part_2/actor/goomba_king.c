@@ -1,7 +1,8 @@
 #include "common.h"
+#include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "sprite/npc/goomba_bros.h"
+#include "sprite/npc/goomba_king.h"
 
 #define NAMESPACE b_area_kmr_part_2_goomba_king
 
@@ -110,6 +111,16 @@ ActorPartDesc N(partsTable_802209C8)[] = {
     },
 };
 
+extern EvtSource N(init_80220A38);
+extern EvtSource N(takeTurn_80221530);
+extern EvtSource N(idle_80220B50);
+extern EvtSource N(handleEvent_80220F34);
+extern EvtSource N(nextTurn_802229C4);
+extern EvtSource N(80222D9C);
+extern EvtSource N(80221CD4);
+extern EvtSource N(80221680);
+extern EvtSource N(doDeath_80222F50);
+
 ActorDesc NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_GOOMBA_KING,
@@ -132,6 +143,16 @@ ActorDesc NAMESPACE = {
     .statusIconOffset = { -6, 38 },
     .statusMessageOffset = { 12, 75 },
 };
+
+// Unused function
+ApiStatus func_80218A60_43A4F0(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+
+    fx_land(2, var1, var2, evt_get_variable(script, *args++), 0);
+    return ApiStatus_DONE2;
+}
 
 EvtSource N(init_80220A38) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80221530)))
@@ -250,7 +271,7 @@ EvtSource N(handleEvent_80220F34) = {
             EVT_KILL_THREAD(LW(0))
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_goomba_king_Palette_00_Anim_6)
-            EVT_EXEC_WAIT(N(80222F50))
+            EVT_EXEC_WAIT(N(doDeath_80222F50))
             EVT_RETURN
         EVT_CASE_OR_EQ(23)
         EVT_CASE_OR_EQ(25)
@@ -267,7 +288,7 @@ EvtSource N(handleEvent_80220F34) = {
             EVT_KILL_THREAD(LW(0))
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_goomba_king_Palette_00_Anim_6)
-            EVT_EXEC_WAIT(N(80222F50))
+            EVT_EXEC_WAIT(N(doDeath_80222F50))
             EVT_RETURN
         EVT_CASE_EQ(36)
             EVT_SET_CONST(LW(0), 0x00000001)
@@ -279,7 +300,7 @@ EvtSource N(handleEvent_80220F34) = {
             EVT_KILL_THREAD(LW(0))
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_goomba_king_Palette_00_Anim_E)
-            EVT_EXEC_WAIT(N(80222F50))
+            EVT_EXEC_WAIT(N(doDeath_80222F50))
             EVT_RETURN
         EVT_CASE_EQ(33)
             EVT_SET_CONST(LW(0), 0x00000001)
@@ -289,7 +310,7 @@ EvtSource N(handleEvent_80220F34) = {
             EVT_KILL_THREAD(LW(0))
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_goomba_king_Palette_00_Anim_6)
-            EVT_EXEC_WAIT(N(80222F50))
+            EVT_EXEC_WAIT(N(doDeath_80222F50))
             EVT_RETURN
         EVT_CASE_EQ(42)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_6)
@@ -700,7 +721,7 @@ EvtSource N(80222D9C) = {
     EVT_END
 };
 
-EvtSource N(80222F50) = {
+EvtSource N(doDeath_80222F50) = {
     EVT_CALL(func_8027D32C, -127)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_SET(LW(2), 0)

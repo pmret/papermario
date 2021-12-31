@@ -897,7 +897,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
             pass
         elif struct["type"] == "Stage":
-            out += f"Stage {struct['name']} = {{\n"
+            out += f"Stage NAMESPACE = {{\n"
 
             texture, shape, hit, preBattle, postBattle, bg, unk_18, unk_1C, unk_20, unk_24 = unpack(">IIIIIIIIII", bytes.read(struct["length"]))
 
