@@ -2905,7 +2905,6 @@ enum NpcDropFlags {
 };
 
 enum ElementImmunityFlags {
-    ELEMENT_IMMUNITY_FLAGS_0                 = 0x00000000,
     ELEMENT_IMMUNITY_FLAGS_1                 = 0x00000001,
     ELEMENT_IMMUNITY_FLAGS_2                 = 0x00000002,
     ELEMENT_IMMUNITY_FLAGS_4                 = 0x00000004,
@@ -3010,6 +3009,12 @@ enum BattleSubmenuStatus {
     BATTLE_SUBMENU_STATUS_NOT_ENOUGH_FP     = 0,
     BATTLE_SUBMENU_STATUS_NO_TARGETS        = -1,
     BATTLE_SUBMENU_STATUS_NO_TARGETS_2      = -2, // TODO: determine difference, probably uses a different error message
+};
+
+enum DictionaryIndex {
+    DICTIONARY_KEY   = 0,
+    DICTIONARY_VALUE = 1,
+    DICTIONARY_SIZE,
 };
 
 #endif

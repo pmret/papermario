@@ -13,11 +13,6 @@ typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 
 typedef Bytecode EvtSource[0];
 
-typedef struct DictionaryEntry {
-    /* 0x00 */ s32 key;
-    /* 0x04 */ s32 value;
-} DictionaryEntry; // size = 0x08
-
 typedef struct {
     u8 r, g, b, a;
 } Color_RGBA8;
@@ -1717,7 +1712,7 @@ typedef struct Actor {
     /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
-    /* 0x20C */ struct DictionaryEntry* statusTable;
+    /* 0x20C */ struct s32* statusTable;
     /* 0x210 */ s8 debuff;
     /* 0x211 */ s8 debuffDuration;
     /* 0x212 */ s8 staticStatus; /* 0B = yes */

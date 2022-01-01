@@ -1,6 +1,6 @@
 #include "kmr_03.h"
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
 FoliageModelList N(treeModelList_Bush1_Bush) = {
     .count = 1,

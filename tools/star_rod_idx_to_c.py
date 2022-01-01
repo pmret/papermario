@@ -91,6 +91,12 @@ def get_include_list(area_name, map_name):
                         includes.add(func_name)
     return includes
 
+def read_enum(num: int, constants_name: str) -> str:
+    if num in disasm_script.CONSTANTS[constants_name]:
+        return disasm_script.CONSTANTS[constants_name][num]
+    else:
+        return num
+
 def read_flags(flags: int, constants_name: str) -> str:
     enabled = []
     for x in range(32):
@@ -102,7 +108,10 @@ def read_flags(flags: int, constants_name: str) -> str:
                 print(f"0x{val:08X} missing from enum {constants_name}!")
                 enabled.append(f"0x{val:08X}")
     if not enabled:
-        enabled.append("0")
+        if 0 in disasm_script.CONSTANTS[constants_name]:
+            enabled.append(disasm_script.CONSTANTS[constants_name][0])
+        else:
+            enabled.append("0")
 
     return " | ".join(enabled)
 
@@ -714,13 +723,13 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
 
                 if position in symbol_map:
-                    out += f".position = &{symbol_map[position][0][1]}"
+                    out += f".pos = {{ .vec = &{symbol_map[position][0][1]} }}"
 
                     s = f"Vec3f {symbol_map[position][0][1]};"
                     if s not in INCLUDES_NEEDED["forward"]:
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
-                    out += f".position = {position}"
+                    out += f".pos = {{ .index = {position} }}"
 
                 out += f", .priority = {priority}"
 
@@ -842,7 +851,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             out += f"ActorPartDesc {struct['name']}[] = {{\n"
 
             for _ in range(0, struct["length"] // 36):
-                d = unpack(">IbbbbbbhIIIIxxxxxxxx", bytes.read(36))
+                d = unpack(">IbbbbbbhIIIIhxxxxxx", bytes.read(36))
 
                 out += INDENT + "{\n"
                 out += INDENT + INDENT + f".flags = {read_flags(d[0], 'ActorPartFlags')},\n"
@@ -853,17 +862,18 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += INDENT + INDENT  + f".idleAnimations = {read_ptr(d[8], symbol_map)},\n"
                 out += INDENT + INDENT  + f".defenseTable = {read_ptr(d[9], symbol_map)},\n"
                 out += INDENT + INDENT  + f".eventFlags = {read_flags(d[10], 'ActorEventFlags')},\n"
-                out += INDENT + INDENT  + f".elementImmunityFlags = {d[11]},\n" # TODO flags
+                out += INDENT + INDENT  + f".elementImmunityFlags = {read_flags(d[11], 'ElementImmunityFlags')},\n"
+                out += INDENT + INDENT  + f".unk_1C = {d[12]},\n"
                 out += INDENT + "},\n"
 
             out += f"}};\n"
         elif struct["type"] == "Actor":
-            out += f"ActorDesc {struct['name']} = {{\n"
+            out += f"ActorDesc NAMESPACE = {{\n"
 
             d = unpack(">IxBBBhxxIIIBBBBBBBBbbbbbbbb", bytes.read(struct["length"]))
 
             out += INDENT + f".flags = {read_flags(d[0], 'ActorFlags')},\n"
-            out += INDENT + f".type = {d[1]},\n" # TODO enum
+            out += INDENT + f".type = {read_enum(d[1], 'ActorType')},\n"
             out += INDENT + f".level = {d[2]},\n"
             out += INDENT + f".maxHP = {d[3]},\n"
             out += INDENT + f".partCount = ARRAY_COUNT({read_ptr(d[5], symbol_map)}),\n"
@@ -887,7 +897,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
             pass
         elif struct["type"] == "Stage":
-            out += f"Stage {struct['name']} = {{\n"
+            out += f"Stage NAMESPACE = {{\n"
 
             texture, shape, hit, preBattle, postBattle, bg, unk_18, unk_1C, unk_20, unk_24 = unpack(">IIIIIIIIII", bytes.read(struct["length"]))
 

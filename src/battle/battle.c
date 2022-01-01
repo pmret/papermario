@@ -10,6 +10,9 @@ extern Stage* D_800DC064;
 extern BattleList b_area_kmr_part_1_formationTable;
 extern StageList b_area_kmr_part_1_stageTable;
 
+extern BattleList b_area_kmr_part_2_formationTable;
+extern StageList b_area_kmr_part_2_stageTable;
+
 BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kmr_part_1),
@@ -20,8 +23,8 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kmr_part_2),
         .name = "エリア ＫＭＲ その２",
-        .battles = 0x80219840,
-        .stages = 0x8021987C,
+        .battles = b_area_kmr_part_2_formationTable,
+        .stages = b_area_kmr_part_2_stageTable,
     },
     {
         AREA(area_kmr_part_3),

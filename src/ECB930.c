@@ -3,4 +3,4 @@
 
 #define NAMESPACE ECB930
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"

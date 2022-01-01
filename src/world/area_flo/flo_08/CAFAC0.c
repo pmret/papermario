@@ -1263,7 +1263,7 @@ ApiStatus N(func_80241BCC_CB090C)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
 FoliageModelList N(tree1_Leaves) = {
     .count = 1,

@@ -254,7 +254,7 @@ typedef struct ActorDesc {
     /* 0x0A */ char unk_0A[2];
     /* 0x0C */ struct ActorPartDesc* partsData;
     /* 0x10 */ Bytecode* script;
-    /* 0x14 */ DictionaryEntry* statusTable;
+    /* 0x14 */ s32* statusTable;
     /* 0x18 */ u8 escapeChance;
     /* 0x19 */ u8 airLiftChance;
     /* 0x1A */ u8 spookChance;
@@ -271,7 +271,10 @@ typedef struct ActorDesc {
 
 typedef struct FormationRow {
     /* 0x00 */ ActorDesc* actor;
-    /* 0x04 */ s32 position; ///< Home position. May also be a `Vector3*`.
+    /* 0x04 */ union {
+                   s32    index;
+                   Vec3i* vec;
+               } home;
     /* 0x08 */ s32 priority; ///< Actors with higher priority values take their turn first.
     /* 0x0C */ s32 var0;
     /* 0x10 */ s32 var1;
@@ -323,10 +326,6 @@ extern BattleArea gBattleAreas[0x30];
 #define BATTLE(name, formation, stage) { name, ARRAY_COUNT(formation), (Formation*) formation, stage }
 
 // TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
-
-typedef DictionaryEntry DefenseTable[];
-
-typedef DictionaryEntry StatusTable[];
 
 typedef struct ActorSounds {
     /* 0x00 */ s32 walk[2];
