@@ -3741,18 +3741,7 @@ segments:
     - [0x43AA50, c, stage/kmr_04]
     - [0x43ACC0, c, stage/kmr_05]
     - [0x43AF30, c, stage/kmr_06]
-    - [0x43B1E0, .data, area]
-    - [0x43B340, .data, actor/blue_goomba]
-    - [0x43D150, .data, actor/red_goomba]
-    - [0x43EE90, .data, actor/blue_goomba2]
-    - [0x440890, .data, actor/red_goomba2]
-    - [0x4423A0, .data, actor/goomba_king]
-    - [0x444D60, .data, actor/goomnut_tree]
-    - [0x444D60, .data, stage/kmr_02]
-    - [0x4461F0, .data, stage/kmr_03]
-    - [0x446640, .data, stage/kmr_04]
-    - [0x446E18, .data, stage/kmr_05]
-    - [0x446E90, .data, stage/kmr_06]
+    - [0x43B1E0]
   - dir: battle/area_kmr_part_3
     type: code
     start: 0x447440
