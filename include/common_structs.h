@@ -13,10 +13,7 @@ typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 
 typedef Bytecode EvtSource[0];
 
-typedef struct DictionaryEntry {
-    /* 0x00 */ s32 key;
-    /* 0x04 */ s32 value;
-} DictionaryEntry; // size = 0x08
+typedef s32 DictionaryEntry[];
 
 typedef struct {
     u8 r, g, b, a;

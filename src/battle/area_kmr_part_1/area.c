@@ -19,66 +19,66 @@ extern Stage N(kmr_05);
 extern Stage N(kmr_06);
 
 Formation N(formation_00) = {
-    { &N(goomba), .pos = { .index = 1 }, .priority = 10 },
+    { &N(goomba), .home = { .index = 1 }, .priority = 10 },
 };
 
 Formation N(formation_01) = {
-    { &N(goomba), .pos = { .index = 1 }, .priority = 10 },
-    { &N(goomba), .pos = { .index = 2 }, .priority = 9 },
+    { &N(goomba), .home = { .index = 1 }, .priority = 10 },
+    { &N(goomba), .home = { .index = 2 }, .priority = 9 },
 };
 
 Formation N(formation_02) = {
-    { &N(goomba), .pos = { .index = 0 }, .priority = 10 },
-    { &N(goomba), .pos = { .index = 1 }, .priority = 9 },
-    { &N(goomba), .pos = { .index = 2 }, .priority = 8 },
+    { &N(goomba), .home = { .index = 0 }, .priority = 10 },
+    { &N(goomba), .home = { .index = 1 }, .priority = 9 },
+    { &N(goomba), .home = { .index = 2 }, .priority = 8 },
 };
 
 Formation N(formation_03) = {
-    { &N(goomba), .pos = { .index = 1 }, .priority = 10 },
-    { &N(paragoomba), .pos = { .index = 6 }, .priority = 9 },
+    { &N(goomba), .home = { .index = 1 }, .priority = 10 },
+    { &N(paragoomba), .home = { .index = 6 }, .priority = 9 },
 };
 
 Formation N(formation_04) = {
-    { &N(goomba), .pos = { .index = 0 }, .priority = 10 },
-    { &N(goomba), .pos = { .index = 1 }, .priority = 9 },
-    { &N(goomba), .pos = { .index = 2 }, .priority = 8 },
-    { &N(goomba), .pos = { .index = 3 }, .priority = 7 },
+    { &N(goomba), .home = { .index = 0 }, .priority = 10 },
+    { &N(goomba), .home = { .index = 1 }, .priority = 9 },
+    { &N(goomba), .home = { .index = 2 }, .priority = 8 },
+    { &N(goomba), .home = { .index = 3 }, .priority = 7 },
 };
 
 Formation N(formation_05) = {
-    { &N(goomba), .pos = { .index = 1 }, .priority = 10 },
-    { &N(spiked_goomba), .pos = { .index = 2 }, .priority = 9 },
+    { &N(goomba), .home = { .index = 1 }, .priority = 10 },
+    { &N(spiked_goomba), .home = { .index = 2 }, .priority = 9 },
 };
 
 Formation N(formation_06) = {
-    { &N(goomba), .pos = { .index = 0 }, .priority = 10 },
-    { &N(paragoomba), .pos = { .index = 5 }, .priority = 9 },
-    { &N(goomba), .pos = { .index = 2 }, .priority = 8 },
-    { &N(paragoomba), .pos = { .index = 7 }, .priority = 7 },
+    { &N(goomba), .home = { .index = 0 }, .priority = 10 },
+    { &N(paragoomba), .home = { .index = 5 }, .priority = 9 },
+    { &N(goomba), .home = { .index = 2 }, .priority = 8 },
+    { &N(paragoomba), .home = { .index = 7 }, .priority = 7 },
 };
 
 Formation N(formation_07) = {
-    { &N(paragoomba), .pos = { .index = 5 }, .priority = 10 },
+    { &N(paragoomba), .home = { .index = 5 }, .priority = 10 },
 };
 
 Formation N(formation_08) = {
-    { &N(paragoomba), .pos = { .index = 5 }, .priority = 10 },
-    { &N(paragoomba), .pos = { .index = 6 }, .priority = 9 },
+    { &N(paragoomba), .home = { .index = 5 }, .priority = 10 },
+    { &N(paragoomba), .home = { .index = 6 }, .priority = 9 },
 };
 
 Formation N(formation_09) = {
-    { &N(paragoomba), .pos = { .index = 4 }, .priority = 10 },
-    { &N(paragoomba), .pos = { .index = 5 }, .priority = 9 },
-    { &N(paragoomba), .pos = { .index = 6 }, .priority = 8 },
+    { &N(paragoomba), .home = { .index = 4 }, .priority = 10 },
+    { &N(paragoomba), .home = { .index = 5 }, .priority = 9 },
+    { &N(paragoomba), .home = { .index = 6 }, .priority = 8 },
 };
 
 Formation N(formation_0A) = {
-    { &N(spiked_goomba), .pos = { .index = 1 }, .priority = 10 },
+    { &N(spiked_goomba), .home = { .index = 1 }, .priority = 10 },
 };
 
 Formation N(formation_0B) = {
-    { &N(spiked_goomba), .pos = { .index = 1 }, .priority = 10 },
-    { &N(goomba), .pos = { .index = 2 }, .priority = 9 },
+    { &N(spiked_goomba), .home = { .index = 1 }, .priority = 10 },
+    { &N(goomba), .home = { .index = 2 }, .priority = 9 },
 };
 
 BattleList N(formationTable) = {

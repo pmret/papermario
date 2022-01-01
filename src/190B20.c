@@ -2344,57 +2344,57 @@ s32 func_80265D44(s32 animID) {
     return ret;
 }
 
-s32 lookup_defense(DictionaryEntry* defenseTable, s32 elementKey) {
+s32 lookup_defense(DictionaryEntry defenseTable, s32 elementKey) {
     s32 normalDefense = 0;
 
-    while (defenseTable->key != ELEMENT_END) {
-        if (defenseTable->key == ELEMENT_NORMAL) {
-            normalDefense = defenseTable->value;
+    while (defenseTable[DICTIONARY_KEY] != ELEMENT_END) {
+        if (defenseTable[DICTIONARY_KEY] == ELEMENT_NORMAL) {
+            normalDefense = defenseTable[DICTIONARY_VALUE];
         }
 
-        if (defenseTable->key == elementKey) {
-            normalDefense = defenseTable->value;
+        if (defenseTable[DICTIONARY_KEY] == elementKey) {
+            normalDefense = defenseTable[DICTIONARY_VALUE];
             break;
         }
-        defenseTable++;
+        defenseTable += 2;
     }
 
     // Fall back to normal defense if given element is not specified in table
     return normalDefense;
 }
 
-s32 lookup_status_chance(DictionaryEntry* statusTable, s32 statusKey) {
+s32 lookup_status_chance(DictionaryEntry statusTable, s32 statusKey) {
     s32 defaultChance = 0;
 
-    while (statusTable->key != STATUS_END) {
-        if (statusTable->key == STATUS_DEFAULT) {
-            defaultChance = statusTable->value;
+    while (statusTable[DICTIONARY_KEY] != STATUS_END) {
+        if (statusTable[DICTIONARY_KEY] == STATUS_DEFAULT) {
+            defaultChance = statusTable[DICTIONARY_VALUE];
         }
 
-        if (statusTable->key == statusKey) {
-            defaultChance = statusTable->value;
+        if (statusTable[DICTIONARY_KEY] == statusKey) {
+            defaultChance = statusTable[DICTIONARY_VALUE];
             break;
         }
-        statusTable++;
+        statusTable += 2;
     }
 
     // Fall back to normal chance if given element is not specified in table
     return defaultChance;
 }
 
-s32 lookup_status_duration_mod(DictionaryEntry* statusTable, s32 statusKey) {
+s32 lookup_status_duration_mod(DictionaryEntry statusTable, s32 statusKey) {
     s32 defaultTurnMod = 0;
 
-    while (statusTable->key != ELEMENT_END) {
-        if (statusTable->key == STATUS_DEFAULT_TURN_MOD) {
-            defaultTurnMod = statusTable->value;
+    while (statusTable[DICTIONARY_KEY] != ELEMENT_END) {
+        if (statusTable[DICTIONARY_KEY] == STATUS_DEFAULT_TURN_MOD) {
+            defaultTurnMod = statusTable[DICTIONARY_VALUE];
         }
 
-        if (statusTable->key == statusKey) {
-            defaultTurnMod = statusTable->value;
+        if (statusTable[DICTIONARY_KEY] == statusKey) {
+            defaultTurnMod = statusTable[DICTIONARY_VALUE];
             break;
         }
-        statusTable++;
+        statusTable += 2;
     }
 
     // Fall back to normal duration if given element is not specified in table
@@ -2536,7 +2536,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
     return TRUE;
 }
 
-s32 get_defense(Actor* actor, DictionaryEntry* defenseTable, s32 elementFlags) {
+s32 get_defense(Actor* actor, DictionaryEntry defenseTable, s32 elementFlags) {
     s32 defense;
     s32 minDefense = 255;
 

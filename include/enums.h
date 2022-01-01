@@ -3011,4 +3011,9 @@ enum BattleSubmenuStatus {
     BATTLE_SUBMENU_STATUS_NO_TARGETS_2      = -2, // TODO: determine difference, probably uses a different error message
 };
 
+enum DictionaryIndex{
+    DICTIONARY_KEY   = 0,
+    DICTIONARY_VALUE = 1,
+};
+
 #endif

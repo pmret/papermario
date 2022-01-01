@@ -292,7 +292,7 @@ static s32 N(pad_2874)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
 EvtSource N(802431E4) = {
     EVT_CALL(GetNpcPos, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))

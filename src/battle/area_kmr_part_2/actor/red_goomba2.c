@@ -5,12 +5,12 @@
 
 #define NAMESPACE b_area_kmr_part_2_red_goomba_2
 
-s32 N(defenseTable_8021EE00)[] = {
+DictionaryEntry N(defenseTable_8021EE00) = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021EE0C)[] = {
+DictionaryEntry N(statusTable_8021EE0C) = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 100,
@@ -64,7 +64,7 @@ ActorDesc NAMESPACE = {
     .partCount = ARRAY_COUNT(N(partsTable_8021EEB8)),
     .partsData = N(partsTable_8021EEB8),
     .script = N(init_802207B8),
-    .statusTable = (DictionaryEntry*) N(statusTable_8021EE0C),
+    .statusTable = &N(statusTable_8021EE0C),
     .escapeChance = 0,
     .airLiftChance = 0,
     .spookChance = 0,

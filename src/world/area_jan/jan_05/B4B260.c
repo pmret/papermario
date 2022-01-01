@@ -39,7 +39,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_802407F0_B4B260);
 #include "world/common/UnkNpcAIFunc28.inc.c"
 
 #define NAMESPACE dup_jan_05
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 #define NAMESPACE jan_05
 
 ApiStatus func_8024268C_B4D0FC(Evt* script) {

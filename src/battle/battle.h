@@ -272,9 +272,9 @@ typedef struct ActorDesc {
 typedef struct FormationRow {
     /* 0x00 */ ActorDesc* actor;
     /* 0x04 */ union {
-                   s32    index; ///< Home position. May also be a `Vector3*`.
+                   s32    index;
                    Vec3i* vec;
-               } pos;
+               } home;
     /* 0x08 */ s32 priority; ///< Actors with higher priority values take their turn first.
     /* 0x0C */ s32 var0;
     /* 0x10 */ s32 var1;

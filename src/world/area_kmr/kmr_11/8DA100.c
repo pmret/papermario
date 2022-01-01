@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "kmr_12";
 static char* N(exit_str_2) = "kmr_10";
 static char* N(exit_str_3) = "";
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
 #include "common/UnkFogFunc.inc.c"
 

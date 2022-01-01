@@ -8,17 +8,17 @@
 
 ApiStatus N(AngleCalculate)(Evt* script, s32 isInitialCall);
 
-s32 N(defenseTable_8021CB00)[] = {
+DictionaryEntry N(defenseTable_8021CB00) = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_8021CB0C)[] = {
+DictionaryEntry N(defenseTable_8021CB0C) = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021CB18)[] = {
+DictionaryEntry N(statusTable_8021CB18) = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 100,
@@ -43,7 +43,7 @@ s32 N(statusTable_8021CB18)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable_8021CBC4)[] = {
+DictionaryEntry N(statusTable_8021CBC4) = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 100,
@@ -133,7 +133,7 @@ ActorDesc NAMESPACE = {
     .partCount = ARRAY_COUNT(N(partsTable_8021CC70)),
     .partsData = N(partsTable_8021CC70),
     .script = N(init_8021CDD8),
-    .statusTable = (DictionaryEntry*) N(statusTable_8021CBC4),
+    .statusTable = &N(statusTable_8021CBC4),
     .escapeChance = 90,
     .airLiftChance = 100,
     .spookChance = 100,

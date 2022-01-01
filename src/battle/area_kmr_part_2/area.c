@@ -23,8 +23,8 @@ Vec3i N(pos00) = { 14, 0, -10 };
 Vec3i N(pos01) = { 54, 0,  32 };
 
 Formation N(formation_00) = {
-    { .actor = &N(blue_goomba), .pos = { .vec = &N(pos00) }, .priority = 10 },
-    { .actor = &N(red_goomba),  .pos = { .vec = &N(pos01) }, .priority = 10 },
+    { .actor = &N(blue_goomba), .home = { .vec = &N(pos00) }, .priority = 10 },
+    { .actor = &N(red_goomba),  .home = { .vec = &N(pos01) }, .priority = 10 },
 };
 
 Vec3i N(pos02) = {  10, 0,  10 };
@@ -33,10 +33,10 @@ Vec3i N(pos04) = { 125, 0,  20 };
 Vec3i N(pos05) = { -40, 0, -45 };
 
 Formation N(formation_01) = {
-    { .actor = &N(goomba_king),   .pos = { .vec = &N(pos02) }, .priority = 10 },
-    { .actor = &N(red_goomba_2),  .pos = { .vec = &N(pos03) }, .priority = 10 },
-    { .actor = &N(blue_goomba_2), .pos = { .vec = &N(pos04) }, .priority = 10 },
-    { .actor = &N(goomnut_tree),  .pos = { .vec = &N(pos05) }, .priority = 10 },
+    { .actor = &N(goomba_king),   .home = { .vec = &N(pos02) }, .priority = 10 },
+    { .actor = &N(red_goomba_2),  .home = { .vec = &N(pos03) }, .priority = 10 },
+    { .actor = &N(blue_goomba_2), .home = { .vec = &N(pos04) }, .priority = 10 },
+    { .actor = &N(goomnut_tree),  .home = { .vec = &N(pos05) }, .priority = 10 },
 };
 
 BattleList N(formationTable) = {
