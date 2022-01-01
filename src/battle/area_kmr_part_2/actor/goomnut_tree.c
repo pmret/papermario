@@ -5,18 +5,18 @@
 
 #define NAMESPACE b_area_kmr_part_2_goomnut_tree
 
-DictionaryEntry N(idleAnimations_802232D0) = {
+s32 N(idleAnimations_802232D0)[] = {
     STATUS_NORMAL,    NPC_ANIM_spiky_goomnut_Palette_00_Anim_0,
     STATUS_END,
 };
 
-DictionaryEntry N(defenseTable_802232DC) = {
+s32 N(defenseTable_802232DC)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_HAMMER, 0,
     ELEMENT_END,
 };
 
-DictionaryEntry N(statusTable_802232F0) = {
+s32 N(statusTable_802232F0)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -119,7 +119,7 @@ ActorDesc NAMESPACE = {
     .partCount = ARRAY_COUNT(N(partsTable_8022339C)),
     .partsData = N(partsTable_8022339C),
     .script = N(init_80223488),
-    .statusTable = &N(statusTable_802232F0),
+    .statusTable = N(statusTable_802232F0),
     .escapeChance = 0,
     .airLiftChance = 0,
     .spookChance = 0,

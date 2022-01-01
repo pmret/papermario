@@ -2344,7 +2344,7 @@ s32 func_80265D44(s32 animID) {
     return ret;
 }
 
-s32 lookup_defense(DictionaryEntry defenseTable, s32 elementKey) {
+s32 lookup_defense(s32* defenseTable, s32 elementKey) {
     s32 normalDefense = 0;
 
     while (defenseTable[DICTIONARY_KEY] != ELEMENT_END) {
@@ -2356,14 +2356,14 @@ s32 lookup_defense(DictionaryEntry defenseTable, s32 elementKey) {
             normalDefense = defenseTable[DICTIONARY_VALUE];
             break;
         }
-        defenseTable += 2;
+        defenseTable += DICTIONARY_SIZE;
     }
 
     // Fall back to normal defense if given element is not specified in table
     return normalDefense;
 }
 
-s32 lookup_status_chance(DictionaryEntry statusTable, s32 statusKey) {
+s32 lookup_status_chance(s32* statusTable, s32 statusKey) {
     s32 defaultChance = 0;
 
     while (statusTable[DICTIONARY_KEY] != STATUS_END) {
@@ -2375,14 +2375,14 @@ s32 lookup_status_chance(DictionaryEntry statusTable, s32 statusKey) {
             defaultChance = statusTable[DICTIONARY_VALUE];
             break;
         }
-        statusTable += 2;
+        statusTable += DICTIONARY_SIZE;
     }
 
     // Fall back to normal chance if given element is not specified in table
     return defaultChance;
 }
 
-s32 lookup_status_duration_mod(DictionaryEntry statusTable, s32 statusKey) {
+s32 lookup_status_duration_mod(s32* statusTable, s32 statusKey) {
     s32 defaultTurnMod = 0;
 
     while (statusTable[DICTIONARY_KEY] != ELEMENT_END) {
@@ -2394,7 +2394,7 @@ s32 lookup_status_duration_mod(DictionaryEntry statusTable, s32 statusKey) {
             defaultTurnMod = statusTable[DICTIONARY_VALUE];
             break;
         }
-        statusTable += 2;
+        statusTable += DICTIONARY_SIZE;
     }
 
     // Fall back to normal duration if given element is not specified in table
@@ -2536,7 +2536,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
     return TRUE;
 }
 
-s32 get_defense(Actor* actor, DictionaryEntry defenseTable, s32 elementFlags) {
+s32 get_defense(Actor* actor, s32 defenseTable, s32 elementFlags) {
     s32 defense;
     s32 minDefense = 255;
 

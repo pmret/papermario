@@ -54,12 +54,12 @@ s32 N(idleAnimations_802208CC)[] = {
     STATUS_END,
 };
 
-DictionaryEntry N(defenseTable_80220910) = {
+s32 N(defenseTable_80220910)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-DictionaryEntry N(statusTable_8022091C) = {
+s32 N(statusTable_8022091C)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 100,
@@ -129,7 +129,7 @@ ActorDesc NAMESPACE = {
     .partCount = ARRAY_COUNT(N(partsTable_802209C8)),
     .partsData = N(partsTable_802209C8),
     .script = N(init_80220A38),
-    .statusTable = &N(statusTable_8022091C),
+    .statusTable = N(statusTable_8022091C),
     .escapeChance = 0,
     .airLiftChance = 0,
     .spookChance = 0,

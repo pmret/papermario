@@ -248,12 +248,12 @@ s32 N(idleAnimations_802391B0)[] = {
     STATUS_END,
 };
 
-DictionaryEntry N(defenseTable_802391EC) = {
+s32 N(defenseTable_802391EC)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-DictionaryEntry N(statusTable_802391F8) = {
+s32 N(statusTable_802391F8)[] = {
     STATUS_NORMAL, 100,
     STATUS_DEFAULT, 100,
     STATUS_SLEEP, 100,
@@ -302,7 +302,7 @@ ActorDesc N(goombario) = {
     .partCount = ARRAY_COUNT(N(partsTable_802392A4)),
     .partsData = N(partsTable_802392A4),
     .script = N(init_802392F0),
-    .statusTable = &N(statusTable_802391F8),
+    .statusTable = N(statusTable_802391F8),
     .escapeChance = 0,
     .airLiftChance = 0,
     .spookChance = 0,
