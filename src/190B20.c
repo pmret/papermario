@@ -2536,7 +2536,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
     return TRUE;
 }
 
-s32 get_defense(Actor* actor, s32 defenseTable, s32 elementFlags) {
+s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
     s32 defense;
     s32 minDefense = 255;
 
