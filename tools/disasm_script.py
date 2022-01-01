@@ -322,18 +322,6 @@ def fix_args(self, func, args, info):
                 if not enabled:
                     enabled.append(f"0")
                 new_args.append("((" + " | ".join(enabled) + "))")
-            elif info[i] == "ElementImmunityFlags":
-                enabled = []
-                for x in range(32):
-                    flag = argNum & (1 << x)
-                    if flag:
-                        if flag in CONSTANTS["ElementImmunityFlags"]:
-                            enabled.append(CONSTANTS["ElementImmunityFlags"][flag])
-                        else:
-                            enabled.append(f"0x{flag:08X}")
-                if not enabled:
-                    enabled.append(f"0")
-                new_args.append("((" + " | ".join(enabled) + "))")
             elif info[i] == "SoundIDs":
                 if argNum in CONSTANTS["SoundIDs"]:
                     new_args.append(CONSTANTS["SoundIDs"][argNum])
