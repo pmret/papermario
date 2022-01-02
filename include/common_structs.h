@@ -1204,7 +1204,7 @@ typedef struct GameStatus {
     /* 0x0A8 */ s8 creditsViewportMode;
     /* 0x0A9 */ s8 unk_A9;
     /* 0x0AA */ s8 demoFlags;
-    /* 0x0AB */ u8 usingStereoSound;
+    /* 0x0AB */ u8 isUsingStereoSound;
     /* 0x0AC */ s8 introState;
     /* 0x0AD */ s8 introCounter;
     /* 0x0AE */ s8 bSkipIntro;

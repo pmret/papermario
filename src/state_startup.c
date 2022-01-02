@@ -72,10 +72,10 @@ void state_step_startup(void) {
     fio_has_valid_backup();
 
     if (D_800D9620 == 0) {
-        gGameStatusPtr->usingStereoSound = 1;
+        gGameStatusPtr->isUsingStereoSound = 1;
         func_8005615C();
     } else {
-        gGameStatusPtr->usingStereoSound = 0;
+        gGameStatusPtr->isUsingStereoSound = 0;
         func_80056180();
     }
 
