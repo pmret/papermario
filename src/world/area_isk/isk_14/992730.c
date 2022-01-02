@@ -21,11 +21,9 @@ static char* N(exit_str_1) = "";
 
 static const f32 padding = 0.0f; // remove when all functions here are decompiled
 
-INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80240E14_993544);
+#include "world/common/UnkNpcAIFunc40.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80240EA8_9935D8);
-
-INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80240F3C_99366C);
+#include "world/common/UnkNpcAIMainFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_14/992730", func_80241108_993838);
 
