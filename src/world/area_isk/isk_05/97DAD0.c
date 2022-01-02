@@ -19,13 +19,11 @@ static char* N(exit_str_1) = "";
 
 #include "world/common/UnkNpcAIMainFunc2.inc.c"
 
-static const f32 padding = 0.0f; // remove when all functions here are decompiled
-
 #include "world/common/UnkNpcAIFunc40.inc.c"
 
 #include "world/common/UnkNpcAIMainFunc3.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80241108_97EBD8);
+#include "world/common/UnkFunc53.inc.c"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_802411F8_97ECC8);
 
