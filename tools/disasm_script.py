@@ -167,7 +167,7 @@ def get_constants():
     include_path = Path(Path(__file__).resolve().parent.parent / "include")
     enums = Path(include_path / "enums.h").read_text().splitlines()
     browse_header(valid_enums, enums)
-    
+
     include_path = Path(Path(__file__).resolve().parent.parent / "src" / "battle")
     enums = Path(include_path / "battle.h").read_text().splitlines()
     browse_header(valid_enums, enums)
@@ -283,7 +283,7 @@ def fix_args(self, func, args, info):
                             call = f"0x{argNum:X}"
                         else:
                             call = make_anim_macro(self, sprite, palette, anim)
-                except KeyError:
+                except ValueError:
                         call = f"0x{argNum:06X}"
                 new_args.append(call)
             elif info[i] == "CustomMsg":
@@ -321,7 +321,7 @@ def fix_args(self, func, args, info):
                             enabled.append(f"0x{flag:08X}")
                 if not enabled:
                     enabled.append(f"0")
-                new_args.append("((" + " | ".join(enabled) + "))")
+                new_args.append(enabled[0] if len(enabled) == 1 else "((" + " | ".join(enabled) + "))")
             elif info[i] == "SoundIDs":
                 if argNum in CONSTANTS["SoundIDs"]:
                     new_args.append(CONSTANTS["SoundIDs"][argNum])

@@ -3746,10 +3746,13 @@ segments:
     type: code
     start: 0x447440
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x447440, c]
-    - [0x4479A0, c]
+    - [0x447440, c, area]
+    - [0x447440, c, actor/spiked_goomba]
+    - [0x4476C0, c, actor/paragoomba]
+    - [0x4479A0, c, actor/paragoomba2]
     - [0x447C80, c]
     - [0x447D50, c]
     - [0x448420, c]
@@ -3758,7 +3761,13 @@ segments:
     - [0x448B70, c]
     - [0x448E20, c]
     - [0x448E80, c]
-    - [0x4495F0, data]
+    - [0x4495F0, .data, area]
+    - [0x4497D0, .data, actor/spiked_goomba]
+    - [0x44B5F0, .data, actor/paragoomba]
+    - [0x44EB90, .data, actor/paragoomba2]
+    - [0x451E30, data, 4495F0]
+    - [0x464220, .rodata, area]
+    - [0x464220, rodata, 4495F0]
   - dir: battle/area_mac
     type: code
     start: 0x464490
