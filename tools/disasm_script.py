@@ -131,7 +131,7 @@ def browse_header(valid_enums, enums):
                     if "=" in name:
                         name, val = name.split(" = ")
                         val = int(val[:-1], 0)
-                        if val >= 0x80000000:
+                        if val > 0x80000000:
                             val -= 0x100000000
                     else:
                         name = name[:-1]
@@ -321,7 +321,19 @@ def fix_args(self, func, args, info):
                             enabled.append(f"0x{flag:08X}")
                 if not enabled:
                     enabled.append(f"0")
-                new_args.append(enabled[0] if len(enabled) == 1 else "((" + " | ".join(enabled) + "))")
+                new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
+            elif info[i] == "ActorFlags":
+                enabled = []
+                for x in range(32):
+                    flag = argNum & (1 << x)
+                    if flag:
+                        if flag in CONSTANTS["ActorFlags"]:
+                            enabled.append(CONSTANTS["ActorFlags"][flag])
+                        else:
+                            enabled.append(f"0x{flag:08X}")
+                if not enabled:
+                    enabled.append(f"0")
+                new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
             elif info[i] == "SoundIDs":
                 if argNum in CONSTANTS["SoundIDs"]:
                     new_args.append(CONSTANTS["SoundIDs"][argNum])
@@ -462,7 +474,7 @@ replace_funcs = {
     "FlyToGoal"                 :{0:"ActorIDs"},
     "SetActorPos"               :{0:"ActorIDs"},
     "HPBarToCurrent"            :{0:"ActorIDs"},
-    "SetActorFlagBits"          :{0:"ActorIDs"}, # TODO: 1:"ActorFlags"
+    "SetActorFlagBits"          :{0:"ActorIDs", 1:"ActorFlags"},
     "SetPartFlags"              :{0:"ActorIDs"},
     "SetPartPos"                :{0:"ActorIDs"},
     "SetPartDispOffset"         :{0:"ActorIDs"},

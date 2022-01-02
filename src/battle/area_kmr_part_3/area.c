@@ -3,12 +3,12 @@
 
 #define NAMESPACE b_area_kmr_part_3
 
-extern ActorDesc N(jrTroopa1);
-extern ActorDesc N(jrTroopa2);
-extern ActorDesc N(jrTroopa3);
-extern ActorDesc N(jrTroopa4);
-extern ActorDesc N(jrTroopa5);
-extern ActorDesc N(jrTroopa6);
+extern ActorDesc N(jr_troopa);
+extern ActorDesc N(egg_jr_troopa);
+extern ActorDesc N(para_jr_troopa);
+extern ActorDesc N(spiked_para_jr_troopa);
+extern ActorDesc N(mage_jr_troopa);
+extern ActorDesc N(final_jr_troopa);
 extern ActorDesc N(paragoomba1);
 extern ActorDesc N(paragoomba2);
 extern ActorDesc N(spiked_goomba);
@@ -18,11 +18,11 @@ extern Stage N(kmr_03);
 extern Stage N(kmr_04);
 extern Stage N(kmr_05);
 extern Stage N(kmr_06);
-extern Stage D_80233640_462A80;
-extern Stage D_802336AC_462AEC;
-extern Stage D_80234C80_4640C0;
-extern Stage D_80233AC4_462F04;
-extern Stage D_80234DAC_4641EC;
+extern Stage N(nok_01);
+extern Stage N(mim_01);
+extern Stage N(sam_01);
+extern Stage N(mac_01);
+extern Stage N(kpa_01);
 
 Formation N(formation_00) = {
     { &N(spiked_goomba), .home = { .index = 2 }, .priority = 0 },
@@ -34,38 +34,38 @@ Formation N(formation_01) = {
 };
 
 Formation N(formation_02) = {
-    { &N(jrTroopa1), .home = { .index = 2 }, .priority = 0 },
+    { &N(jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
 Formation N(formation_03) = {
-    { &N(jrTroopa2), .home = { .index = 2 }, .priority = 0 },
+    { &N(egg_jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
 Formation N(formation_04) = {
-    { &N(jrTroopa3), .home = { .index = 2 }, .priority = 0 },
+    { &N(para_jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
 Formation N(formation_05) = {
-    { &N(jrTroopa4), .home = { .index = 1 }, .priority = 0 },
+    { &N(spiked_para_jr_troopa), .home = { .index = 1 }, .priority = 0 },
 };
 
 Formation N(formation_06) = {
-    { &N(jrTroopa5), .home = { .index = 2 }, .priority = 0 },
+    { &N(mage_jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
 Formation N(formation_07) = {
-    { &N(jrTroopa6), .home = { .index = 2 }, .priority = 0 },
+    { &N(final_jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
 BattleList N(formationTable) = {
     BATTLE("トゲクリボー（レクチャー）", N(formation_00), &N(kmr_03)),
     BATTLE("パタクリボー（レクチャー）", N(formation_01), &N(kmr_03)),
     BATTLE("コワッパ１", N(formation_02), &N(kmr_05)),
-    BATTLE("コワッパ２", N(formation_03), &D_80233640_462A80),
-    BATTLE("コワッパ４", N(formation_04), &D_802336AC_462AEC),
-    BATTLE("コワッパ５", N(formation_05), &D_80234C80_4640C0),
-    BATTLE("コワッパ６", N(formation_06), &D_80233AC4_462F04),
-    BATTLE("コワッパ７", N(formation_07), &D_80234DAC_4641EC),
+    BATTLE("コワッパ２", N(formation_03), &N(nok_01)),
+    BATTLE("コワッパ４", N(formation_04), &N(mim_01)),
+    BATTLE("コワッパ５", N(formation_05), &N(mac_01)),
+    BATTLE("コワッパ６", N(formation_06), &N(sam_01)),
+    BATTLE("コワッパ７", N(formation_07), &N(kpa_01)),
     {},
 };
 
