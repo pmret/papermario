@@ -35,8 +35,8 @@ s32 N(statusTable_8021961C)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80219714)[];
-EvtSource N(init_802197AC);
+extern s32 N(idleAnimations_80219714)[];
+extern EvtSource N(init_802197AC);
 
 ActorPartDesc N(partsTable_802196C8)[] = {
     {
@@ -48,7 +48,7 @@ ActorPartDesc N(partsTable_802196C8)[] = {
         .idleAnimations = N(idleAnimations_80219714),
         .defenseTable = N(defenseTable_80219610),
         .eventFlags = ACTOR_EVENT_FLAG_0,
-        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_0,
+        .elementImmunityFlags = 0,
         .unk_1C = 246,
     },
 };
@@ -102,9 +102,9 @@ s32 N(idleAnimations_80219760)[] = {
     STATUS_END,
 };
 
-EvtSource N(takeTurn_8021A300);
-EvtSource N(idle_802197F8);
-EvtSource N(handleEvent_80219AD4);
+extern EvtSource N(takeTurn_8021A300);
+extern EvtSource N(idle_802197F8);
+extern EvtSource N(handleEvent_80219AD4);
 
 EvtSource N(init_802197AC) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021A300)))
@@ -281,7 +281,7 @@ EvtSource N(handleEvent_80219AD4) = {
     EVT_END
 };
 
-#include "anglestuff.inc.c"
+#include "common/anglestuff.inc.c"
 
 EvtSource N(takeTurn_8021A300) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

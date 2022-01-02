@@ -24,7 +24,7 @@
 #include "world/common/SomeXYZFunc2.inc.c"
 #define NAMESPACE dro_01
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
 FoliageModelList N(tree1_Leaves) = {
     .count = 1,

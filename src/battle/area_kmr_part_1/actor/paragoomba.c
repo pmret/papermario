@@ -68,11 +68,11 @@ s32 N(statusTable_8021CBC4)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021E4EC)[];
-s32 N(idleAnimations_8021CD28)[];
-s32 N(idleAnimations_8021CDC0)[];
-s32 N(idleAnimations_8021CDCC)[];
-EvtSource N(init_8021CDD8);
+extern s32 N(idleAnimations_8021E4EC)[];
+extern s32 N(idleAnimations_8021CD28)[];
+extern s32 N(idleAnimations_8021CDC0)[];
+extern s32 N(idleAnimations_8021CDCC)[];
+extern EvtSource N(init_8021CDD8);
 
 ActorPartDesc N(partsTable_8021CC70)[] = {
     {
@@ -84,7 +84,7 @@ ActorPartDesc N(partsTable_8021CC70)[] = {
         .idleAnimations = N(idleAnimations_8021E4EC),
         .defenseTable = N(defenseTable_8021CB00),
         .eventFlags = ACTOR_EVENT_FLAG_0,
-        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_0,
+        .elementImmunityFlags = 0,
         .unk_1C = 246,
     },
     {
@@ -96,7 +96,7 @@ ActorPartDesc N(partsTable_8021CC70)[] = {
         .idleAnimations = N(idleAnimations_8021CD28),
         .defenseTable = N(defenseTable_8021CB0C),
         .eventFlags = ACTOR_EVENT_FLAG_GROUNDABLE,
-        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_0,
+        .elementImmunityFlags = 0,
         .unk_1C = 246,
     },
     {
@@ -108,7 +108,7 @@ ActorPartDesc N(partsTable_8021CC70)[] = {
         .idleAnimations = N(idleAnimations_8021CDC0),
         .defenseTable = N(defenseTable_8021CB00),
         .eventFlags = ACTOR_EVENT_FLAG_0,
-        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_0,
+        .elementImmunityFlags = 0,
         .unk_1C = 246,
     },
     {
@@ -120,7 +120,7 @@ ActorPartDesc N(partsTable_8021CC70)[] = {
         .idleAnimations = N(idleAnimations_8021CDCC),
         .defenseTable = N(defenseTable_8021CB00),
         .eventFlags = ACTOR_EVENT_FLAG_0,
-        .elementImmunityFlags = ELEMENT_IMMUNITY_FLAGS_0,
+        .elementImmunityFlags = 0,
         .unk_1C = 246,
     },
 };
@@ -184,9 +184,9 @@ s32 N(idleAnimations_8021CDCC)[] = {
     STATUS_END,
 };
 
-EvtSource N(takeTurn_8021D74C);
-EvtSource N(idle_8021CE24);
-EvtSource N(handleEvent_8021D158);
+extern EvtSource N(takeTurn_8021D74C);
+extern EvtSource N(idle_8021CE24);
+extern EvtSource N(handleEvent_8021D158);
 
 EvtSource N(init_8021CDD8) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021D74C)))
@@ -254,7 +254,7 @@ EvtSource N(8021D0E0) = {
     EVT_END
 };
 
-EvtSource N(8021DF64);
+extern EvtSource N(8021DF64);
 
 EvtSource N(handleEvent_8021D158) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -480,7 +480,7 @@ EvtSource N(takeTurn_8021D74C) = {
     EVT_END
 };
 
-EvtSource N(8021E584);
+extern EvtSource N(8021E584);
 
 #include "common/StartRumbleWithParams.inc.c"
 
@@ -580,9 +580,9 @@ s32 N(idleAnimations_8021E538)[] = {
     STATUS_END,
 };
 
-EvtSource N(takeTurn_8021F0D8);
-EvtSource N(idle_8021E5D0);
-EvtSource N(handleEvent_8021E8AC);
+extern EvtSource N(takeTurn_8021F0D8);
+extern EvtSource N(idle_8021E5D0);
+extern EvtSource N(handleEvent_8021E8AC);
 
 EvtSource N(8021E584) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021F0D8)))
@@ -759,7 +759,7 @@ EvtSource N(handleEvent_8021E8AC) = {
     EVT_END
 };
 
-#include "anglestuff.inc.c"
+#include "common/anglestuff.inc.c"
 
 EvtSource N(takeTurn_8021F0D8) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

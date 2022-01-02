@@ -133,7 +133,7 @@ static s32 N(pad_D38)[] = {
     0x00000000, 0x00000000,
 };
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
 FoliageModelList N(tree1_Leaves) = {
     .count = 6,

@@ -11,5 +11,5 @@ INCLUDE_ASM(s32, "world/area_jan/jan_14/B7A050", func_80240170_B7A1C0);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_14/B7A050", func_802401CC_B7A21C);
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
