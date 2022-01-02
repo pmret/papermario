@@ -3,8 +3,8 @@
 extern s16 D_800D91DC;
 
 typedef struct {
-    UNK_PTR collision;
-    UNK_PTR unk_08;
+    u32 collisionOffset;
+    u32 unk_08;
 } HitAsset;
 
 typedef struct {
@@ -13,12 +13,35 @@ typedef struct {
     s16 _pad_06;
 } HitTableEntry;
 
+typedef struct {
+    s16 numColliders;
+    s16 unk_02;
+    s32 collidersOffset;
+    s16 numVertices;
+    s16 unk_0a;
+    s32 verticesOffset;
+    s16 numBoundingBoxes;
+    s16 unk_12;
+    s32 boundingBoxesOffset;
+} HitAssetCollisionData;
+
+typedef struct {
+    s16 boundingBoxOffset;
+    s16 nextSibling;
+    s16 firstChild;
+    s16 numTriangles;
+    s32 trianglesOffset;
+} HitAssetCollider;
+
 extern HitTableEntry* D_800A4264;
 extern HitTableEntry* D_800A4268;
 extern CollisionData D_800D91D0;
 
+s32 collision_heap_create(void);
+void* collision_heap_malloc(s32 size);
 
 void load_hit_data(s32 idx, HitAsset* hit);
+
 
 void allocate_hit_tables(void)
 {
@@ -69,7 +92,7 @@ void load_hit_asset(void) {
     decode_yay0(compressedData, uncompressedData);
     general_heap_free(compressedData);
 
-    map->collision = uncompressedData->collision;
+    map->collision = uncompressedData->collisionOffset;
     map->unk_08 = uncompressedData->unk_08;
 
     load_hit_data(0, uncompressedData);
@@ -128,7 +151,7 @@ void load_stage_collision(const char* hitName) {
         decode_yay0(compressedData, uncompressedData);
         general_heap_free(compressedData);
 
-        map->collision = uncompressedData->collision;
+        map->collision = uncompressedData->collisionOffset;
 
         load_hit_data(0, uncompressedData);
 
@@ -136,7 +159,147 @@ void load_stage_collision(const char* hitName) {
     }
 }
 
-INCLUDE_ASM(void, "362a0_len_2f70", load_hit_data, s32 idx, HitAsset* hit);
+void load_hit_data(s32 idx, HitAsset *hit) {
+    s32 collisionOffset;
+    MapConfig *map;
+    CollisionData *pColData;
+    HitAssetCollisionData *pAssetColData;
+    Vec3f *pVertices;
+    Vec3s *pAssetVertices;
+    u32 *pBoundingBox;
+    u32 *pAssetBoundingBox;
+    Collider* pCollider;
+    HitAssetCollider *pAssetCollider;
+    ColliderTriangle *pTriangle;
+    s32 *pTrianglePacked;
+    s16 numTrianles;
+    s32 i,j;
+    Vec3f *v1, *v2, *v3;
+    f32 e13_y, e21_z, e13_z, e21_y, e21_x, e13_x, normalX, normalY, normalZ, coeff;
+
+    pAssetColData = NULL;
+    pColData = NULL;
+
+    map = get_current_map_header();
+
+    switch (idx)
+    {
+        case 0:
+            collisionOffset = map->collision;
+            if (collisionOffset == 0)
+                return;
+
+            pAssetColData = (HitAssetCollisionData*)((void*)hit + collisionOffset);
+            pColData = &gCollisionData;
+            break;
+
+        case 1:
+            collisionOffset = map->unk_08;
+            if (collisionOffset == 0)
+                return;
+
+            pAssetColData = (HitAssetCollisionData*)((void*)hit + collisionOffset);
+            pColData = &D_800D91D0;
+            break;
+    }
+
+    pAssetBoundingBox = (u32*)((void*)hit + pAssetColData->boundingBoxesOffset);;
+    pColData->aabbs = collision_heap_malloc(pAssetColData->numBoundingBoxes * 4);
+    for (i = 0, pBoundingBox = pColData->aabbs; i < pAssetColData->numBoundingBoxes; pAssetBoundingBox++, pBoundingBox++, i++)
+    {
+        *pBoundingBox = *pAssetBoundingBox;
+    }
+
+    pAssetVertices = (Vec3s*)((void*)hit + pAssetColData->verticesOffset);
+    pColData->vertices = collision_heap_malloc(pAssetColData->numVertices * sizeof(Vec3f));
+    for (i = 0, pVertices = pColData->vertices; i < pAssetColData->numVertices; pVertices++, pAssetVertices++, i++)
+    {
+        pVertices->x = pAssetVertices->x;
+        pVertices->y = pAssetVertices->y;
+        pVertices->z = pAssetVertices->z;
+    }
+
+    pAssetCollider = (HitAssetCollider*)((void*)hit + pAssetColData->collidersOffset);
+    pCollider = pColData->colliderList = collision_heap_malloc(pAssetColData->numColliders * sizeof(Collider));
+    pColData->numColliders = pAssetColData->numColliders;
+    for (i = 0; i < pAssetColData->numColliders; pAssetCollider++, pCollider++, i++)
+    {
+
+        pCollider->flags = 0;
+        pCollider->nextSibling = pAssetCollider->nextSibling;
+        pCollider->firstChild = pAssetCollider->firstChild;
+        pCollider->numTriangles = pAssetCollider->numTriangles;
+
+        numTrianles = pCollider->numTriangles;
+
+        if (numTrianles)
+        {
+            pCollider->triangleTable = pTriangle = collision_heap_malloc(pAssetCollider->numTriangles * sizeof(ColliderTriangle));
+
+            if (pAssetCollider->boundingBoxOffset < 0)
+            {
+                pCollider->aabb = NULL;
+            }
+            else
+            {
+                pCollider->aabb = (ColliderBoundingBox*)((u32*)(pColData->aabbs) + pAssetCollider->boundingBoxOffset);
+
+                if (idx == 0)
+                {
+                    pCollider->aabb->min[0] -= 1;
+                    pCollider->aabb->min[1] -= 1;
+                    pCollider->aabb->min[2] -= 1;
+                    pCollider->aabb->max[0] += 1;
+                    pCollider->aabb->max[1] += 1;
+                    pCollider->aabb->max[2] += 1;
+                    pCollider->flags = pCollider->aabb->flagsForCollider;
+                }
+            }
+
+            pTrianglePacked = (s32*)((void*)hit + pAssetCollider->trianglesOffset);
+
+            for (j = 0; j < pAssetCollider->numTriangles; pTrianglePacked++, pTriangle++, j++)
+            {
+                v1 = pTriangle->v1 = &pColData->vertices[(*pTrianglePacked) & 0x3FF];
+                v2 = pTriangle->v2 = &pColData->vertices[(*pTrianglePacked >> 10) & 0x3FF];
+                v3 = pTriangle->v3 = &pColData->vertices[(*pTrianglePacked >> 20) & 0x3FF];
+                pTriangle->oneSided = (*pTrianglePacked >> 30) & 1;
+
+                pTriangle->e13.x = v3->x - v1->x;
+                pTriangle->e13.y = v3->y - v1->y;
+                pTriangle->e13.z = v3->z - v1->z;
+                pTriangle->e21.x = v1->x - v2->x;
+                pTriangle->e21.y = v1->y - v2->y;
+                pTriangle->e21.z = v1->z - v2->z;
+                pTriangle->e32.x = v2->x - v3->x;
+                pTriangle->e32.y = v2->y - v3->y;
+                pTriangle->e32.z = v2->z - v3->z;
+
+                e13_x = pTriangle->e13.x;
+                e13_y = pTriangle->e13.y;
+                e13_z = pTriangle->e13.z;
+                e21_x = pTriangle->e21.x;
+                e21_y = pTriangle->e21.y;
+                e21_z = pTriangle->e21.z;
+
+                // vector product
+                normalX = e13_y * e21_z - e13_z * e21_y;
+                normalY = e13_z * e21_x - e13_x * e21_z;
+                normalZ = e13_x * e21_y - e13_y * e21_x;
+                coeff  = SQ(normalX) + SQ(normalY) + SQ(normalZ);
+
+                if (coeff != 0)
+                    coeff = 1.0f / sqrtf(coeff);
+                else
+                    coeff = 0.0f;
+
+                pTriangle->normal.x = normalX * coeff;
+                pTriangle->normal.y = normalY * coeff;
+                pTriangle->normal.z = normalZ * coeff;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(void, "362a0_len_2f70", parent_collider_to_model, s32 colliderID, s16 modelIndex);
 
