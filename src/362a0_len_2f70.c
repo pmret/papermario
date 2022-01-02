@@ -1,4 +1,5 @@
 #include "common.h"
+#include "model.h"
 
 extern s16 D_800D91DC;
 
@@ -378,7 +379,104 @@ s32 _get_hit_vert_index_from_buffer(Vec3f** buffer, Vec3f* vert, s32* bufferSize
     return i;
 }
 
-INCLUDE_ASM(void, "362a0_len_2f70", update_collider_transform, s16 colliderID);
+void update_collider_transform(s16 colliderID)
+{
+    Collider *collider;
+    struct Model *model;
+    Matrix4f matrix;
+    s32 i;
+    Vec3f *vertexTable;
+    f32 min_x, min_y, min_z, max_x, max_y, max_z;
+    ColliderTriangle *pTriangle;
+    Vec3f *v1, *v2, *v3;
+    f32 e13_y, e21_z, e13_z, e21_y, e21_x, e13_x, normalX, normalY, normalZ, coeff;
+
+    collider = &gCollisionData.colliderList[colliderID];
+    model = get_model_from_list_index(collider->parentModelIndex);
+
+    if (!model->currentMatrix)
+    {
+        copy_matrix(model->transformMatrix, matrix);
+    }
+    else
+    {
+        guMtxL2F(matrix, (Mtx*)model->currentMatrix);
+        guMtxCatF(model->transformMatrix, matrix, matrix);
+    }
+
+    pTriangle = collider->triangleTable;
+    vertexTable = collider->vertexTable;
+
+    min_x = min_y = min_z = 999999.9f;
+    max_x = max_y = max_z = -999999.9f;
+
+    for (i = 0; i < collider->numVertices; vertexTable += 2, i++)
+    {
+        guMtxXFMF(matrix, vertexTable[1].x, vertexTable[1].y, vertexTable[1].z, &vertexTable[0].x, &vertexTable[0].y, &vertexTable[0].z);
+
+        if (vertexTable[0].x < min_x)
+            min_x = vertexTable[0].x;
+        if (vertexTable[0].x > max_x)
+            max_x = vertexTable[0].x;
+        if (vertexTable[0].y < min_y)
+            min_y = vertexTable[0].y;
+        if (vertexTable[0].y > max_y)
+            max_y = vertexTable[0].y;
+        if (vertexTable[0].z < min_z)
+            min_z = vertexTable[0].z;
+        if (vertexTable[0].z > max_z)
+            max_z = vertexTable[0].z;
+
+
+    }
+
+    collider->aabb->min[0] = min_x;
+    collider->aabb->min[1] = min_y;
+    collider->aabb->min[2] = min_z;
+    collider->aabb->max[0] = max_x;
+    collider->aabb->max[1] = max_y;
+    collider->aabb->max[2] = max_z;
+
+
+    for (i = 0; i < collider->numTriangles; pTriangle++, i++)
+    {
+        v1 = pTriangle->v1;
+        v2 = pTriangle->v2;
+        v3 = pTriangle->v3;
+
+        pTriangle->e13.x = v3->x - v1->x;
+        pTriangle->e13.y = v3->y - v1->y;
+        pTriangle->e13.z = v3->z - v1->z;
+        pTriangle->e21.x = v1->x - v2->x;
+        pTriangle->e21.y = v1->y - v2->y;
+        pTriangle->e21.z = v1->z - v2->z;
+        pTriangle->e32.x = v2->x - v3->x;
+        pTriangle->e32.y = v2->y - v3->y;
+        pTriangle->e32.z = v2->z - v3->z;
+
+        e13_x = pTriangle->e13.x;
+        e13_y = pTriangle->e13.y;
+        e13_z = pTriangle->e13.z;
+        e21_x = pTriangle->e21.x;
+        e21_y = pTriangle->e21.y;
+        e21_z = pTriangle->e21.z;
+
+        // vector product
+        normalX = e13_y * e21_z - e13_z * e21_y;
+        normalY = e13_z * e21_x - e13_x * e21_z;
+        normalZ = e13_x * e21_y - e13_y * e21_x;
+        coeff  = SQ(normalX) + SQ(normalY) + SQ(normalZ);
+
+        if (coeff != 0)
+            coeff = 1.0f / sqrtf(coeff);
+        else
+            coeff = 0.0f;
+
+        pTriangle->normal.x = normalX * coeff;
+        pTriangle->normal.y = normalY * coeff;
+        pTriangle->normal.z = normalZ * coeff;
+    }
+}
 
 s32 get_collider_type_by_id(s32 colliderID) {
     if (colliderID & 0x4000) {
