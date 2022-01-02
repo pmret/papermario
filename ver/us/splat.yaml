@@ -3726,15 +3726,22 @@ segments:
     type: code
     start: 0x439A90
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x439A90, c]
-    - [0x43A5A0, c]
-    - [0x43A7E0, c]
-    - [0x43AA50, c]
-    - [0x43ACC0, c]
-    - [0x43AF30, c]
-    - [0x43B1E0, data]
+    - [0x439A90, c, area]
+    - [0x439A90, c, actor/blue_goomba]
+    - [0x439D10, c, actor/red_goomba]
+    - [0x439F90, c, actor/blue_goomba2]
+    - [0x43A210, c, actor/red_goomba2]
+    - [0x43A4C0, c, actor/goomba_king]
+    - [0x43A5A0, c, actor/goomnut_tree]
+    - [0x43A7E0, c, stage/kmr_02]
+    - [0x43A7E0, c, stage/kmr_03]
+    - [0x43AA50, c, stage/kmr_04]
+    - [0x43ACC0, c, stage/kmr_05]
+    - [0x43AF30, c, stage/kmr_06]
+    - [0x43B1E0]
   - dir: battle/area_kmr_part_3
     type: code
     start: 0x447440

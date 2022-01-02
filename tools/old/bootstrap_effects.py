@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
-root_dir = script_dir + "/../"
+root_dir = script_dir + "/../../"
 asm_dir = root_dir + "ver/current/asm/"
 asm_effects_dir = asm_dir + "nonmatchings/effects/"
 

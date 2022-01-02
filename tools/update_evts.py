@@ -7,7 +7,7 @@ import os
 
 NAMESPACES = {
     "src/battle/area_kmr_part_1/stage/clouds.inc.c": "b_area_kmr_part_1_kmr_03",
-    "src/world/common/foliage.inc.c": "kmr_03",
+    "src/common/foliage.inc.c": "kmr_03",
 }
 
 for filename in glob("src/battle/item/*.c"):

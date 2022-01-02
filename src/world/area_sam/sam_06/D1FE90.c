@@ -7,5 +7,5 @@ static char* N(exit_str_1) = "";
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 

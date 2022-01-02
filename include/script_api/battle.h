@@ -272,6 +272,7 @@ ApiStatus func_8024C944(Evt* script, s32 isInitialCall);
 ApiStatus func_8024CB68(Evt* script, s32 isInitialCall);
 ApiStatus func_8024E9B0(Evt* script, s32 isInitialCall);
 ApiStatus func_8024E748(Evt* script, s32 isInitialCall);
+ApiStatus func_8026DF88(Evt* script, s32 isInitialCall);
 ApiStatus InitVirtualEntityList(Evt* script, s32 isInitialCall);
 ApiStatus InitAnimatedModels(Evt* script, s32 isInitialCall);
 ApiStatus func_8024CE9C(Evt* script, s32 isInitialCall);

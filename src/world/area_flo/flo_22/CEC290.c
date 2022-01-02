@@ -1,6 +1,6 @@
 #include "flo_22.h"
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
 FoliageModelList N(tree1_Trunk) = {
     .count = 3,

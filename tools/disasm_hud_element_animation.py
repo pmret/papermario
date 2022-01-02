@@ -1,6 +1,7 @@
 #! /usr/bin/python3
 
 import struct
+import argparse
 
 def fmt_size(val):
     if val == 0:
@@ -55,6 +56,7 @@ def fmt_size(val):
         return 'HUD_ELEMENT_SIZE_32x24'
     else:
         return val
+
 
 class HudElementScript():
     def __init__(self, symbol):
@@ -141,9 +143,8 @@ class HudElementScript():
 
         print("};\n")
 
-if __name__ == "__main__":
-    import argparse
 
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("file", type=str, help=".data.s file to dissassemble")
 

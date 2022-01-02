@@ -165,7 +165,7 @@ NpcSettings N(npcSettings_80240E5C) = {
     .level = 99,
 };
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
 s32** N(D_802417EC_CC261C) = NULL;
 

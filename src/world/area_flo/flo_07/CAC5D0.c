@@ -224,7 +224,7 @@ NpcSettings N(npcSettings_80241220) = {
     .level = 99,
 };
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
 s32** N(D_80241BB0_CADDA0) = NULL;
 
