@@ -19249,7 +19249,6 @@ D_0A003F70 = 0xA003F70; // type:data
 D_0A004350 = 0xA004350; // type:data
 D_7012ACA1 = 0x7012ACA1; // type:data
 D_7012BC11 = 0x7012BC11; // type:data
-D_80000000 = 0x80000000; // type:data
 osTvType = 0x80000300; //
 D_80000308 = 0x80000308; // type:data
 D_8000030C = 0x8000030C; // type:data
