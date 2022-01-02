@@ -497,8 +497,9 @@ typedef struct Collider {
     /* 0x0A */ s16 numTriangles;
     /* 0x0C */ struct ColliderTriangle* triangleTable;
     /* 0x10 */ struct ColliderBoundingBox* aabb;
-    /* 0x14 */ char unk_14[4];
-    /* 0x18 */ f32* vertexTable; // 3?
+    /* 0x14 */ s16 numVertices;
+    /* 0x16 */ char unk_16[2];
+    /* 0x18 */ Vec3f* vertexTable;
 } Collider; // size = 0x1C
 
 typedef struct CameraInitData {

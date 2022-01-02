@@ -20,7 +20,7 @@ typedef struct {
     s16 numVertices;
     s16 unk_0a;
     s32 verticesOffset;
-    s16 numBoundingBoxes;
+    s16 boundingBoxesDataSize;
     s16 unk_12;
     s32 boundingBoxesOffset;
 } HitAssetCollisionData;
@@ -39,9 +39,11 @@ extern CollisionData D_800D91D0;
 
 s32 collision_heap_create(void);
 void* collision_heap_malloc(s32 size);
+void collision_heap_free(void*);
 
 void load_hit_data(s32 idx, HitAsset* hit);
-
+void _add_hit_vert_to_buffer(Vec3f** buf, Vec3f* vert, s32* bufSize);
+s32 _get_hit_vert_index_from_buffer(Vec3f** buffer, Vec3f* vert, s32* bufferSize);
 
 void allocate_hit_tables(void)
 {
@@ -204,8 +206,8 @@ void load_hit_data(s32 idx, HitAsset *hit) {
     }
 
     pAssetBoundingBox = (u32*)((void*)hit + pAssetColData->boundingBoxesOffset);;
-    pColData->aabbs = collision_heap_malloc(pAssetColData->numBoundingBoxes * 4);
-    for (i = 0, pBoundingBox = pColData->aabbs; i < pAssetColData->numBoundingBoxes; pAssetBoundingBox++, pBoundingBox++, i++)
+    pColData->aabbs = collision_heap_malloc(pAssetColData->boundingBoxesDataSize * 4);
+    for (i = 0, pBoundingBox = (u32*)(pColData->aabbs); i < pAssetColData->boundingBoxesDataSize; pAssetBoundingBox++, pBoundingBox++, i++)
     {
         *pBoundingBox = *pAssetBoundingBox;
     }
@@ -301,9 +303,54 @@ void load_hit_data(s32 idx, HitAsset *hit) {
     }
 }
 
-INCLUDE_ASM(void, "362a0_len_2f70", parent_collider_to_model, s32 colliderID, s16 modelIndex);
+void parent_collider_to_model(s16 colliderID, s16 modelIndex)
+{
+    Collider *collider;
+    ColliderTriangle *pTriangle;
+    s32 i;
+    Vec3f **vertexBuffer;
+    Vec3f **pVertex;
+    s32 vertexBufferSize;
+    Vec3f *vertexTable;
+    Vec3f *vertex;
 
-void _add_hit_vert_to_buffer(f32** buf, f32* vert, s32* bufSize) {
+    collider = &gCollisionData.colliderList[colliderID];
+    collider->parentModelIndex = modelIndex;
+    collider->flags |= 0x80000000;
+
+    vertexBuffer = collision_heap_malloc(collider->numTriangles * 0xC);
+    vertexBufferSize = 0;
+    pVertex = vertexBuffer;
+
+    for (i = 0, pTriangle = collider->triangleTable; i < collider->numTriangles; i++, pTriangle++)
+    {
+        _add_hit_vert_to_buffer(vertexBuffer, pTriangle->v1, &vertexBufferSize);
+        _add_hit_vert_to_buffer(vertexBuffer, pTriangle->v2, &vertexBufferSize);
+        _add_hit_vert_to_buffer(vertexBuffer, pTriangle->v3, &vertexBufferSize);
+    }
+
+    collider->numVertices = vertexBufferSize;
+    collider->vertexTable = collision_heap_malloc(vertexBufferSize * 0x18);
+    for (i = 0, vertexTable = collider->vertexTable; i < vertexBufferSize; pVertex++, vertexTable += 2, i++)
+    {
+        vertex = *pVertex;
+        vertexTable->x = vertexTable[1].x = vertex->x;
+        vertexTable->y = vertexTable[1].y = vertex->y;
+        vertexTable->z = vertexTable[1].z = vertex->z;
+    }
+
+    vertexTable = collider->vertexTable;
+    for (i = 0, pTriangle = collider->triangleTable; i < collider->numTriangles; pTriangle++, i++)
+    {
+        pTriangle->v1 = &vertexTable[_get_hit_vert_index_from_buffer(vertexBuffer, pTriangle->v1, &vertexBufferSize) * 2];
+        pTriangle->v2 = &vertexTable[_get_hit_vert_index_from_buffer(vertexBuffer, pTriangle->v2, &vertexBufferSize) * 2];
+        pTriangle->v3 = &vertexTable[_get_hit_vert_index_from_buffer(vertexBuffer, pTriangle->v3, &vertexBufferSize) * 2];
+    }
+
+    collision_heap_free(vertexBuffer);
+}
+
+void _add_hit_vert_to_buffer(Vec3f** buf, Vec3f* vert, s32* bufSize) {
     s32 i;
 
     for (i = 0; i < *bufSize; i++) {
@@ -318,7 +365,7 @@ void _add_hit_vert_to_buffer(f32** buf, f32* vert, s32* bufSize) {
     }
 }
 
-s32 _get_hit_vert_index_from_buffer(f32** buffer, f32* vert, s32* bufferSize) {
+s32 _get_hit_vert_index_from_buffer(Vec3f** buffer, Vec3f* vert, s32* bufferSize) {
     s32 i;
 
     for (i = 0; i < *bufferSize; i++) {
