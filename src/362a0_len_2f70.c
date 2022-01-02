@@ -506,7 +506,7 @@ INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_triangle_general);
 
 INCLUDE_ASM(s32, "362a0_len_2f70", test_down_ray_triangle);
 
-s32 test_up_ray_triangle(ColliderTriangle* triangle, f32* vertices);
+s32 test_up_ray_triangle(ColliderTriangle* triangle, Vec3f* vertices);
 INCLUDE_ASM(s32, "362a0_len_2f70", test_up_ray_triangle, ColliderTriangle* triangle, f32* vertices);
 
 INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_colliders, s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 dirX,
@@ -515,8 +515,6 @@ INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_colliders, s32 ignoreFlags, f32 star
 INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_zones, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
             f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* nx, f32* ny, f32* nz);
 
-//s32 test_up_ray_collider(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw);
-// Close, but no cigar
 extern f32 D_800A4230;
 extern f32 D_800A4234;
 extern f32 D_800A4238;
@@ -525,7 +523,6 @@ extern s32 D_800A4240;
 extern f32 D_800A4244;
 extern f32 D_800A4254;
 
-#ifdef NON_EQUIVALENT
 f32 test_up_ray_collider(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw) {
     CollisionData* collisionData = &gCollisionData;
     f32 cosTheta;
@@ -547,23 +544,20 @@ f32 test_up_ray_collider(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f
     D_800A4244 = -cosTheta;
     ret = -1.0f;
 
-
     if (!(collider->flags & ignoreFlags)) {
         if (collider->numTriangles != 0) {
             triangleTable = collider->triangleTable;
 
             for (i = 0; i < collider->numTriangles; i++) {
-                if (test_up_ray_triangle(&triangleTable[i], collisionData->vertices)) {
+                if (test_up_ray_triangle(triangleTable++, collisionData->vertices)) {
                     ret = D_800A4254;
                 }
             }
         }
     }
+
     return ret;
 }
-#else
-INCLUDE_ASM(s32, "362a0_len_2f70", test_up_ray_collider, s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw);
-#endif
 
 INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_entities, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
             f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
