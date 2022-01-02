@@ -61,7 +61,6 @@ extern PopupMenu* gPopupMenu;
 extern MessagePrintState* D_8010D6A0;
 extern s32 D_8010D6A4;
 
-void func_800E9894(void);
 s8 func_800E98D4(void);
 
 enum PopupTypes {

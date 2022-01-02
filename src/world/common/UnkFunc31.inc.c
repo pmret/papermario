@@ -93,9 +93,9 @@ ApiStatus N(UnkFunc29)(Evt* script, s32 isInitialCall) {
         }
 
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
-            Entity* entity = get_item_entity(i);
+            ItemEntity* entity = get_item_entity(i);
             if (entity != NULL && entity->flags & 0x10) {
-                entity->flags &= ~ENTITY_FLAGS_8000000;
+                entity->flags &= ~0x8000000;
             }
         }
 

@@ -426,7 +426,7 @@ EvtSource N(npcAI_80242834) = {
     EVT_END
 };
 
-const char N(dgb_01_name_hack)[];
+extern const char N(dgb_01_name_hack)[];
 
 EvtSource N(defeat_802428E8) = {
     EVT_CALL(N(UnkFunc1))

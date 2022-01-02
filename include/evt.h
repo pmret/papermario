@@ -113,7 +113,7 @@ enum {
 #define EVT_SAVE_FLAG(v)     ((v - 130000000))
 #define EVT_AREA_VAR(v)      ((v - 150000000))
 #define EVT_SAVE_VAR(v)      ((v - 170000000))
-#define EVT_ARRAY(v)         ((v - 190000000))
+#define EVT_ARRAY(v)         (Bytecode) ((v - 190000000))
 #define EVT_ARRAY_FLAG(v)    ((v - 210000000))
 #define EVT_FIXED(v)         (((v * 1024.0f) + -230000000)) // See evt_float_to_fixed_var
 #define EVT_PTR(sym)         (Bytecode) &sym

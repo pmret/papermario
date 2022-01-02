@@ -9,11 +9,11 @@ ApiStatus N(UnkFunc27)(Evt* script, s32 isInitialCall) {
     s32 testS2 = evt_get_variable(script, *args++);
     s32 testS0 = evt_get_variable(script, *args++);
     s32 testS1 = evt_get_variable(script, *args++);
-    s32* temp_s0_3 = testS0;
+    s32* temp_s0_3 = (s32*) testS0;
     s32 temp_s1 = testS1;
     s32 temp_s2 = testS2;
 
-    if (temp_s0_3 == -1) {
+    if ((s32) temp_s0_3 == -1) {
         mdl_set_all_fog_mode(temp_s1);
         return ApiStatus_DONE2;
     }

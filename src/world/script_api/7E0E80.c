@@ -20,17 +20,64 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall);
 ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall);
 ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall);
 
-EvtSource ShopBeginSpeech = { 0x00000043, 0x00000006, SpeakToPlayer, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+EvtSource ShopBeginSpeech = {
+    EVT_CALL(SpeakToPlayer, LW(1), LW(2), LW(3), 0, LW(0))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource ShopContinueSpeech = { 0x00000043, 0x00000006, ContinueSpeech, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+EvtSource ShopContinueSpeech = {
+    EVT_CALL(ContinueSpeech, LW(1), LW(2), LW(3), 0, LW(0))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource ShopResetSpeech = { 0x00000043, 0x00000005, EndSpeech, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0x00000043, 0x00000006, SpeakToPlayer, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+EvtSource ShopResetSpeech = {
+    EVT_CALL(EndSpeech, LW(1), LW(2), LW(3), 0)
+    EVT_CALL(SpeakToPlayer, LW(1), LW(2), LW(3), 0, LW(0))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource ShopEndSpeech = { 0x00000043, 0x00000005, EndSpeech, 0xFE363C80, 0xFE363C81, 0xFE363C82, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+EvtSource ShopEndSpeech = {
+    EVT_CALL(EndSpeech, LW(0), LW(1), LW(2), 0)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource D_80283F58_7E4DD8 = { 0x00000043, 0x00000002, GetCurrentPartner, 0xFE363C81, 0x0000000A, 0x00000002, 0xFE363C81, 0x00000000, 0x00000004, 0x00000001, 0x0000000A, 0x00000013, 0x00000000, 0x0000000A, 0x00000002, 0xFE363C81, 0x00000002, 0x00000004, 0x00000001, 0x0000000A, 0x00000013, 0x00000000, 0x0000000A, 0x00000002, 0xFE363C81, 0x00000003, 0x00000004, 0x00000001, 0x0000000A, 0x00000013, 0x00000000, 0x00000002, 0x00000000, 0x00000003, 0x00000001, 0x0000000A, 0x00000043, 0x00000001, func_802803C8, 0x0000000A, 0x00000002, 0xFE363C82, 0x00000000, 0x00000002, 0x00000000, 0x00000013, 0x00000000, 0x00000043, 0x00000002, func_80280410, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+EvtSource D_80283F58_7E4DD8 = {
+    EVT_CALL(GetCurrentPartner, LW(1))
+    EVT_IF_EQ(LW(1), 0)
+        EVT_GOTO(10)
+    EVT_END_IF
+    EVT_IF_EQ(LW(1), 2)
+        EVT_GOTO(10)
+    EVT_END_IF
+    EVT_IF_EQ(LW(1), 3)
+        EVT_GOTO(10)
+    EVT_END_IF
+    EVT_RETURN
+    EVT_LABEL(10)
+    EVT_CALL(func_802803C8)
+    EVT_IF_EQ(LW(2), 0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(func_80280410, LW(0))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource BadgeShopInteract = { 0x00000043, 0x00000002, ShowShopPurchaseDialog, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, 0x00000043, 0x00000001, ShowShopOwnerDialog, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+EvtSource BadgeShopInteract = {
+    EVT_CALL(ShowShopPurchaseDialog, LW(0))
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource D_80284054_7E4ED4 = {
+    EVT_CALL(ShowShopOwnerDialog)
+    EVT_RETURN
+    EVT_END
+};
 
 s32 shop_owner_begin_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
@@ -221,7 +268,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
         func_800E9900();
         show_coin_counter();
     }
-    
+
     switch (script->functionTemp[0]) {
         case 0:
             if (!does_script_exist(script->functionTemp[1])) {
@@ -502,7 +549,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             if (shop_update_item_select_popup(&shop->selectedStoreItemSlot) == 1) {
                 script->functionTemp[0] = 21;
                 script->functionTemp[1] = 15;
-            }     
+            }
             break;
         case 21:
             if (script->functionTemp[1] <= 0) {
@@ -598,7 +645,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
                     script->functionTemp[1] = shop_owner_begin_speech(22);
                     script->functionTemp[0] = 9;
                 }
-            } else { 
+            } else {
                 script->functionTemp[1]--;
             }
             break;
@@ -802,13 +849,13 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
     f32 sizeY;
     f32 sizeZ;
     s32 items;
-    
+
     gGameStatusPtr->mapShop = shop;
     shop->staticItemPositions = staticItemPositions;
     shop->staticInventory = inventory;
     shop->staticPriceList = prices;
     shop->inventoryItemFlags = inventoryItemFlags;
-    
+
     numShopItems = 0;
     items = inventory->itemID;
     while (items != 0) {
@@ -817,7 +864,7 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
         items = inventory->itemID;
     }
     shop->numItems = numShopItems;
-    
+
     numShopItems = 0;
     if (prices != NULL) {
         items = prices->itemID;
@@ -828,11 +875,11 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
         }
     }
     shop->numSpecialPrices = numShopItems;
-    
+
     if (shop->numItems > 0) {
         gGameStatusPtr->shopItemEntities = heap_malloc(sizeof(ShopItemEntity) * shop->numItems);
     }
-    
+
     inventory = shop->staticInventory;
     staticItemPositions = shop->staticItemPositions;
     numShopItems = 0;

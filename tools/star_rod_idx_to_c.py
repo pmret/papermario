@@ -246,9 +246,9 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                         var_name = var_names[x]
                         if not var == 0:
                             if var == 0x80077F70:
-                                tmp_out += INDENT + f".{var_name} = EnemyNpcHit,\n"
+                                tmp_out += INDENT + f".{var_name} = &EnemyNpcHit,\n"
                             elif var == 0x8007809C:
-                                tmp_out += INDENT + f".{var_name} = EnemyNpcDefeat,\n"
+                                tmp_out += INDENT + f".{var_name} = &EnemyNpcDefeat,\n"
                             elif var_name != "flags" and var in symbol_map:
                                 tmp_out += INDENT + f".{var_name} = &{symbol_map[var][0][1]},\n"
                                 if symbol_map[var][0][1] not in INCLUDED["functions"]:

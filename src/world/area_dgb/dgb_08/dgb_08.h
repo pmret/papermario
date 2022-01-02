@@ -15,10 +15,10 @@ ApiStatus N(func_80243B98_C43948)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243C10_C439C0)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80243C50_C43A00)(Evt* script, s32 isInitialCall);
 
-NpcGroupList N(npcGroupList_80246958);
-NpcGroupList N(npcGroupList_802469AC);
-NpcGroupList N(npcGroupList_802469C4);
-EvtSource N(802469E0);
-EvtSource N(main);
-EvtSource N(npcAI_80244D7C);
-EvtSource N(unk_80244100);
+extern NpcGroupList N(npcGroupList_80246958);
+extern NpcGroupList N(npcGroupList_802469AC);
+extern NpcGroupList N(npcGroupList_802469C4);
+extern EvtSource N(802469E0);
+extern EvtSource N(main);
+extern EvtSource N(npcAI_80244D7C);
+extern EvtSource N(unk_80244100);

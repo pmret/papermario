@@ -17,7 +17,7 @@ MapConfig N(config) = {
     .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = N(func_80240000_CB9200),
+    .tattle = { .get = N(func_80240000_CB9200) },
 };
 
 EvtSource N(802414E0) = SCRIPT({
@@ -345,7 +345,7 @@ EvtSource N(802425BC) = SCRIPT({
     spawn N(802424DC);
 });
 
-const char N(flo_24_name_hack)[];
+extern const char N(flo_24_name_hack)[];
 
 EvtSource N(802425E4) = SCRIPT({
     sleep 20;
@@ -811,11 +811,11 @@ ApiStatus N(func_80240080_CB9280)(Evt* script, s32 isInitialCall) {
     if (N(D_80241CB0_CBAEB0) == NULL) {
         N(D_80241CB0_CBAEB0) = heap_malloc(16 * sizeof(s32));
         for (i = 0; i < 16; i++) {
-            N(D_80241CB0_CBAEB0)[i] = script->varTable[i];
+            N(D_80241CB0_CBAEB0)[i] = (s32*) script->varTable[i];
         }
     } else {
         for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80241CB0_CBAEB0)[i];
+            script->varTable[i] = (s32) N(D_80241CB0_CBAEB0)[i];
         }
         heap_free(N(D_80241CB0_CBAEB0));
         N(D_80241CB0_CBAEB0) = NULL;

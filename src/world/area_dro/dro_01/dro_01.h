@@ -89,6 +89,6 @@ extern EvtSource N(8024DD78);
 extern EvtSource N(main);
 extern EvtSource N(makeEntities);
 extern EvtSource N(shopItemPositions_8024BA68);
-extern EvtSource N(shopOwnerNPC_8024BA80);
+extern ShopOwner N(shopOwnerNPC_8024BA80);
 extern EvtSource N(unk_80248088);
 extern EvtSource N(unk_8024884C);
