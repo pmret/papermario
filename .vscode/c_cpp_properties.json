@@ -12,6 +12,7 @@
             },
             "includePath": [
                 "${workspaceFolder}/include",
+                "${workspaceFolder}/include/script_api",
                 "${workspaceFolder}/ver/us/build/include",
                 "${workspaceFolder}/src",
                 "${workspaceFolder}/assets/us"
