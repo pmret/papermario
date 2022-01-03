@@ -1,10 +1,5 @@
 #include "common.h"
 #include "battle/battle.h"
-#include "script_api/battle.h"
-#include "message_ids.h"
-#include "sprite/npc/goomba.h"
-#include "sprite/npc/paragoomba.h"
-#include "sprite/npc/spiked_goomba.h"
 
 #define NAMESPACE b_area_kmr_part_1
 

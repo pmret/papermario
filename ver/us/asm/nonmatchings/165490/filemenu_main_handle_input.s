@@ -225,12 +225,12 @@ glabel filemenu_main_handle_input
 /* 166598 80245D38 904200AB */  lbu       $v0, 0xab($v0)
 /* 16659C 80245D3C 10400005 */  beqz      $v0, .L80245D54
 /* 1665A0 80245D40 00000000 */   nop
-/* 1665A4 80245D44 0C015857 */  jal       func_8005615C
+/* 1665A4 80245D44 0C015857 */  jal       audio_set_stereo
 /* 1665A8 80245D48 00000000 */   nop
 /* 1665AC 80245D4C 08091757 */  j         .L80245D5C
 /* 1665B0 80245D50 00000000 */   nop
 .L80245D54:
-/* 1665B4 80245D54 0C015860 */  jal       func_80056180
+/* 1665B4 80245D54 0C015860 */  jal       audio_set_mono
 /* 1665B8 80245D58 00000000 */   nop
 .L80245D5C:
 /* 1665BC 80245D5C 3C038025 */  lui       $v1, %hi(filemenu_pressedButtons)

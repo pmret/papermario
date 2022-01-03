@@ -368,7 +368,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
     switch (actorMasked) {
         case ACTOR_PLAYER:
-            damage -= battleStatus->unk_AD;
+            damage -= battleStatus->merleeDefenseBoost;
             break;
         case ACTOR_PARTNER:
         case ACTOR_ENEMY0:
