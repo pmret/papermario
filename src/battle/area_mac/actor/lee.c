@@ -111,8 +111,18 @@ extern EvtSource N(handleEvent_8021D600);
 extern EvtSource N(nextTurn_8022A038);
 extern EvtSource N(copyPartner);
 
-s32 func_802180D0_464560(void);
-INCLUDE_ASM(s32, "battle/area_mac/464560", func_802180D0_464560);
+extern s32 D_80232C20[];
+extern s32 D_80232C50;
+
+ApiStatus func_802180D0_464560(Evt* script, s32 isInitialCall) {
+    s32 i;
+
+    for (i = 0; i < 12; i++) {
+        D_80232C20[i] = 0;
+    }
+    D_80232C50 = -1;
+    return ApiStatus_DONE2;
+}
 
 EvtSource N(init_8021D4C8) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80229F9C)))
@@ -741,10 +751,10 @@ EvtSource N(8021F5F8) = {
 };
 
 ApiStatus func_80218100_464590(Evt*, s32);
-INCLUDE_ASM(s32, "battle/area_mac/464560", func_80218100_464590);
+INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80218100_464590);
 
 ApiStatus func_80218300_464790(Evt*, s32);
-INCLUDE_ASM(s32, "battle/area_mac/464560", func_80218300_464790);
+INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80218300_464790);
 
 #include "common/ActorJumpToPos.inc.c"
 
@@ -2809,7 +2819,7 @@ EvtSource N(init_Watt) = {
 };
 
 ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/area_mac/464560", func_80219188_465618);
+INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80219188_465618);
 
 EvtSource N(idle_80225B68) = {
     EVT_SET_PRIORITY(99)
@@ -3972,7 +3982,7 @@ ApiStatus func_802197B8_465C48(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80219824_465CB4(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/area_mac/464560", func_80219824_465CB4);
+INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80219824_465CB4);
 
 EvtSource N(copyPartner) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
