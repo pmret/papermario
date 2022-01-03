@@ -68,9 +68,9 @@ void update_camera_mode_6(Camera* camera) {
     deltaY = camera->lookAt_obj.y - camera->lookAt_eye.y;
     camera->currentBlendedYawNegated = -atan2(0.0f, 0.0f, deltaX, deltaZ);
     camera->currentPitch = atan2(0.0f, 0.0f, deltaY, -sqrtf((deltaX * deltaX) + (deltaZ * deltaZ)));
-    gBattleStatus.unk_CC.x = camera->lookAt_obj.x;
-    gBattleStatus.unk_CC.y = camera->lookAt_obj.y;
-    gBattleStatus.unk_CC.z = camera->lookAt_obj.z;
+    gBattleStatus.camLookatObjPos.x = camera->lookAt_obj.x;
+    gBattleStatus.camLookatObjPos.y = camera->lookAt_obj.y;
+    gBattleStatus.camLookatObjPos.z = camera->lookAt_obj.z;
 }
 #else
 INCLUDE_ASM(void, "ad90_len_2880", update_camera_mode_6, Camera* camera);

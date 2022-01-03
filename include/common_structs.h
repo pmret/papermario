@@ -694,7 +694,7 @@ typedef struct BattleStatus {
     /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
     /* 0x088 */ s8 itemUsesLeft; /* set to 2 for double dip, 3 for triple dip */
     /* 0x089 */ u8 hpDrainCount;
-    /* 0x08A */ s8 unk_8A;
+    /* 0x08A */ s8 nextMerleeSpellType;
     /* 0x08B */ s8 hustleTurns; /* numTurns from hustle drink, normally 0 */
     /* 0x08C */ char unk_8C;
     /* 0x08D */ s8 unk_8D;
@@ -720,27 +720,27 @@ typedef struct BattleStatus {
     /* 0x0A5 */ s8 cloudNineDodgeChance; /* = 50% */
     /* 0x0A6 */ char unk_A6[2];
     /* 0x0A8 */ struct EffectInstance* cloudNineEffect;
-    /* 0x0AC */ char unk_AC;
-    /* 0x0AD */ s8 unk_AD;
+    /* 0x0AC */ s8 merleeAttackBoost;
+    /* 0x0AD */ s8 merleeDefenseBoost;
     /* 0x0AE */ s8 hammerLossTurns;
     /* 0x0AF */ s8 jumpLossTurns;
     /* 0x0B0 */ s8 itemLossTurns;
     /* 0x0B1 */ char unk_B1[3];
     /* 0x0B4 */ UNK_FUN_PTR(preUpdateCallback);
-    /* 0x0B8 */ UNK_FUN_PTR(unk_B8);
+    /* 0x0B8 */ UNK_FUN_PTR(initBattleCallback);
     /* 0x0BC */ struct Evt* controlScript; /* control handed over to this when changing partners */
     /* 0x0C0 */ s32 controlScriptID;
     /* 0x0C4 */ struct Evt* camMovementScript;
     /* 0x0C8 */ s32 camMovementScriptID;
-    /* 0x0CC */ Vec3f unk_CC;
+    /* 0x0CC */ Vec3f camLookatObjPos;
     /* 0x0D8 */ struct Actor* playerActor;
     /* 0x0DC */ struct Actor* partnerActor;
     /* 0x0E0 */ struct Actor* enemyActors[24];
     /* 0x140 */ s16 enemyIDs[24];
-    /* 0x170 */ s8 unk_170;
+    /* 0x170 */ s8 nextEnemyIndex; /* (during enemy turn) who should go next */
     /* 0x171 */ s8 numEnemyActors;
-    /* 0x172 */ s16 currentTurnEnemyID;
-    /* 0x174 */ struct Actor* currentTurnEnemy;
+    /* 0x172 */ s16 activeEnemyActorID; /* (during enemy turn) enemy currently using their move */
+    /* 0x174 */ struct Actor* currentTurnEnemy; 
     /* 0x178 */ s8 moveCategory; ///< 0 = jump, 1 = hammer, 5 = partner, ...
     /* 0x179 */ char unk_179;
     /* 0x17A */ s16 selectedItemID;

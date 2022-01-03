@@ -371,8 +371,8 @@ void func_8023ED5C(void) {
 
     if (gBattleState != 0) {
         func_8024EEA8();
-        if (battleStatus->unk_B8 != NULL) {
-            battleStatus->unk_B8();
+        if (battleStatus->initBattleCallback != NULL) {
+            battleStatus->initBattleCallback();
         }
         if (battleStatus->flags1 & 1) {
             func_80255FD8();

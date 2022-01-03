@@ -2039,7 +2039,7 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
             actor2 = (Actor*) script->functionTemp[1];
             if (does_script_exist(actor2->takeTurnID) == FALSE) {
                 enemyIDs = battleStatus->enemyIDs;
-                if (battleStatus->unk_170 == 0) {
+                if (battleStatus->nextEnemyIndex == 0) {
                     numEnemies = 0;
                     for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
                         if (battleStatus->enemyActors[i]) {
@@ -2081,12 +2081,12 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
                         }
                     }
                     if (script->functionTemp[2] == 0) {
-                        for (i = numEnemies; i >= battleStatus->unk_170; i--) {
+                        for (i = numEnemies; i >= battleStatus->nextEnemyIndex; i--) {
                             battleStatus->enemyIDs[i] = battleStatus->enemyIDs[i - 1];
                         }
-                        battleStatus->enemyIDs[battleStatus->unk_170 - 1] = actor2->actorID;
+                        battleStatus->enemyIDs[battleStatus->nextEnemyIndex - 1] = actor2->actorID;
                         battleStatus->numEnemyActors++;
-                        battleStatus->unk_170++;
+                        battleStatus->nextEnemyIndex++;
                     } else {
                         battleStatus->enemyIDs[battleStatus->numEnemyActors] = actor2->actorID;
                         battleStatus->numEnemyActors++;
