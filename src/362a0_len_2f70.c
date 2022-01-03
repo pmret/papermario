@@ -516,7 +516,7 @@ void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z) {
     *z = (aabb->min[2] + aabb->max[2]) * 0.5f;
 }
 
-s32 test_ray_triangle_general(ColliderTriangle *triangle)
+s32 test_ray_triangle_general(ColliderTriangle *triangle, Vec3f *vertices)
 {
     f32 temp_f20;
     f32 temp_f6_8;
@@ -597,7 +597,7 @@ s32 test_ray_triangle_general(ColliderTriangle *triangle)
     return TRUE;
 }
 
-s32 test_down_ray_triangle(ColliderTriangle *triangle)
+s32 test_down_ray_triangle(ColliderTriangle *triangle, Vec3f *vertices)
 {
     f32 temp_f20, temp_f6_8;
     Vec3f *v1, *v2, *v3;
@@ -743,8 +743,112 @@ s32 test_up_ray_triangle(ColliderTriangle* triangle, Vec3f *vertices)
     return TRUE;
 }
 
-INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_colliders, s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 dirX,
-            f32 dirY, f32 dirZ, f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
+s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
+                       f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz)
+{
+    Collider* collider;
+    CollisionData *pColData;
+    ColliderTriangle *triangle;
+    s32 i, j;
+    s32 colliderID;
+    f32 min_x, min_y, min_z, max_x, max_y, max_z;
+
+    if (dirX == 0 && dirY == 0 && dirZ == 0)
+        return 0;
+
+    pColData = &gCollisionData;
+    D_800A423C = dirX;
+    D_800A4240 = dirY;
+    D_800A4244 = dirZ;
+    D_800A4230 = startX;
+    D_800A4234 = startY;
+    D_800A4238 = startZ;
+    D_800A4254 = *hitDepth;
+    colliderID = -1;
+
+    if (dirX < 0)
+    {
+        min_x = startX + dirX * D_800A4254;
+        max_x = startX;
+    }
+    else
+    {
+        min_x = startX;
+        max_x = startX + dirX * D_800A4254;
+    }
+
+    if (dirY < 0)
+    {
+        min_y = startY + dirY * D_800A4254;
+        max_y = startY;
+    }
+    else
+    {
+        min_y = startY;
+        max_y = startY + dirY * D_800A4254;
+    }
+
+    if (dirZ < 0)
+    {
+        min_z = startZ + dirZ * D_800A4254;
+        max_z = startZ;
+    }
+    else
+    {
+        min_z = startZ;
+        max_z = startZ + dirZ * D_800A4254;
+    }
+
+    for (i = 0; i < pColData->numColliders; i++)
+    {
+        collider = &pColData->colliderList[i];
+
+        if ((collider->flags & ignoreFlags)  ||
+            collider->numTriangles == 0    ||
+            max_x < collider->aabb->min[0] ||
+            min_x > collider->aabb->max[0] ||
+            max_z < collider->aabb->min[2] ||
+            min_z > collider->aabb->max[2] ||
+            max_y < collider->aabb->min[1] ||
+            min_y > collider->aabb->max[1])
+                continue;
+
+        triangle = collider->triangleTable;
+        if (D_800A423C == 0 && D_800A4244 == 0 && D_800A4240 == -1.0)
+        {
+
+            for (j = 0; j < collider->numTriangles; j++)
+                if (test_down_ray_triangle(triangle++, pColData->vertices))
+                    colliderID = i;
+        }
+        else if (D_800A4240 == 0)
+        {
+            for (j = 0; j < collider->numTriangles; j++)
+                if (test_up_ray_triangle(triangle++, pColData->vertices))
+                    colliderID = i;
+        }
+        else
+        {
+            for (j = 0; j < collider->numTriangles; j++)
+                if (test_ray_triangle_general(triangle++, pColData->vertices))
+                    colliderID = i;
+        }
+    }
+
+    if (colliderID >= 0)
+    {
+        *hitX = D_800A4248;
+        *hitY = D_800A424C;
+        *hitZ = D_800A4250;
+        *hitDepth = D_800A4254;
+        *hitNx = D_800A4258;
+        *hitNy = D_800A425C;
+        *hitNz = D_800A4260;
+        return colliderID;
+    }
+    else
+        return colliderID;
+}
 
 INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_zones, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
             f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* nx, f32* ny, f32* nz);
