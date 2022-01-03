@@ -72,11 +72,11 @@ void state_step_startup(void) {
     fio_has_valid_backup();
 
     if (D_800D9620 == 0) {
-        gGameStatusPtr->isUsingStereoSound = SOUND_OUT_STEREO;
-        func_8005615C();
+        gGameStatusPtr->soundOutputMode = SOUND_OUT_STEREO;
+        audio_set_stereo();
     } else {
-        gGameStatusPtr->isUsingStereoSound = SOUND_OUT_MONO;
-        func_80056180();
+        gGameStatusPtr->soundOutputMode = SOUND_OUT_MONO;
+        audio_set_mono();
     }
 
     gOverrideFlags &= ~0x8;

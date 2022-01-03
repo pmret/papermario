@@ -56,7 +56,7 @@ void filemenu_draw_contents_stereo(
     s32 width, s32 height,
     s32 opacity, s32 darkening
 ) {
-    if (gGameStatusPtr->isUsingStereoSound == SOUND_OUT_STEREO) {
+    if (gGameStatusPtr->soundOutputMode == SOUND_OUT_STEREO) {
         set_hud_element_render_pos(filemenu_hudElemIDs[18], baseX + 34, baseY + 10);
         draw_hud_element_3(filemenu_hudElemIDs[18]);
     } else {
@@ -71,7 +71,7 @@ void filemenu_draw_contents_mono(
     s32 width, s32 height,
     s32 opacity, s32 darkening
 ) {
-    if (gGameStatusPtr->isUsingStereoSound == SOUND_OUT_MONO) {
+    if (gGameStatusPtr->soundOutputMode == SOUND_OUT_MONO) {
         set_hud_element_render_pos(filemenu_hudElemIDs[16], baseX + 34, baseY + 10);
         draw_hud_element_3(filemenu_hudElemIDs[16]);
     } else {
