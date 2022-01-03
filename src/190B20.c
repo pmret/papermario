@@ -3029,14 +3029,14 @@ void remove_player_buffs(s32 buffs) {
     if (buffs & 0x200 && (battleStatus->waterBlockTurnsLeft != 0)) {
         battleStatus->waterBlockTurnsLeft = 0;
         battleStatus->unk_43C->unk_0C->unk_10 = 0;
-        battleStatus->unk_A0[0] |= 0x10;
+        battleStatus->waterBlockEffect->flags |= 0x10;
 
         playFX_5A(1, player->currentPos.x, player->currentPos.y + 18.0f, player->currentPos.z + 5.0f, 1.5f, 0xA);
         playFX_5F(0, player->currentPos.x - 10.0f, player->currentPos.y + 5.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
         playFX_5F(0, player->currentPos.x - 15.0f, player->currentPos.y + 32.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
         playFX_5F(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
 
-        battleStatus->unk_A0 = NULL;
+        battleStatus->waterBlockEffect = NULL;
         sfx_play_sound(SOUND_299);
     }
     if (buffs & 0x100 && (battleStatus->turboChargeTurnsLeft != 0)) {

@@ -715,7 +715,7 @@ typedef struct BattleStatus {
     /* 0x09D */ s8 waterBlockTurnsLeft;
     /* 0x09E */ u8 waterBlockAmount; /* unused? */
     /* 0x09F */ char unk_9F;
-    /* 0x0A0 */ s32* unk_A0;
+    /* 0x0A0 */ struct EffectInstance* waterBlockEffect;
     /* 0x0A4 */ s8 cloudNineTurnsLeft;
     /* 0x0A5 */ s8 cloudNineDodgeChance; /* = 50% */
     /* 0x0A6 */ char unk_A6[2];
