@@ -3765,10 +3765,12 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x464490, c]
-    - [0x464560, c]
+    - [0x464490, c, actor/chan]
+    - [0x464560, c, actor/lee]
     - [0x465D90, c]
-    - [0x4661E0, data]
+    - [0x4661E0, .data, actor/chan]
+    - [0x4697F0, .data, actor/lee]
+    - [0x4766F0, data, 4661E0]
   - dir: battle/area_hos
     type: code
     start: 0x47F0B0

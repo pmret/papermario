@@ -284,6 +284,9 @@
 /// It also marks the end of any previous case.
 #define EVT_CASE_RANGE(MIN, MAX)                EVT_CMD(EVT_OP_CASE_RANGE, MIN, MAX),
 
+/// Marks the end of a switch case
+#define EVT_BREAK_SWITCH                        EVT_CMD(EVT_OP_BREAK_SWITCH),
+
 /// Marks the end of a switch statement and any case.
 #define EVT_END_SWITCH                          EVT_CMD(EVT_OP_END_SWITCH),
 

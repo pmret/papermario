@@ -314,3 +314,5 @@ glabel func_80219188_465618
 /* 465A88 802195F8 D7B40030 */  ldc1      $f20, 0x30($sp)
 /* 465A8C 802195FC 03E00008 */  jr        $ra
 /* 465A90 80219600 27BD0048 */   addiu    $sp, $sp, 0x48
+
+.section .data

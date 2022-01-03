@@ -713,23 +713,23 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += "    { "
 
                 if actor in symbol_map:
-                    out += f"&{symbol_map[actor][0][1]}, "
+                    out += f".actor = &{symbol_map[actor][0][1]}, "
 
                     s = f"ActorDesc {symbol_map[actor][0][1]};"
                     if s not in INCLUDES_NEEDED["forward"]:
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
-                    out += f"{actor}, "
+                    out += f".actor = {actor}, "
 
 
                 if position in symbol_map:
-                    out += f".pos = {{ .vec = &{symbol_map[position][0][1]} }}"
+                    out += f".home = {{ .vec = &{symbol_map[position][0][1]} }}"
 
                     s = f"Vec3f {symbol_map[position][0][1]};"
                     if s not in INCLUDES_NEEDED["forward"]:
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
-                    out += f".pos = {{ .index = {position} }}"
+                    out += f".home = {{ .index = {position} }}"
 
                 out += f", .priority = {priority}"
 
@@ -754,7 +754,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 else:
                     out += "    BATTLE("
                     out += f"{symbol_map[name][0][1]}, "
-                    out += f"&{symbol_map[ptr][0][1]}, "
+                    out += f"{symbol_map[ptr][0][1]}, "
                     out += f"&{symbol_map[stage_ptr][0][1]}"
                     out += "),\n"
 
@@ -829,17 +829,12 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
                 element = disasm_script.CONSTANTS["Statuses"][element]
 
-                sprite_id =  (anim & 0x00FF0000) >> 16
-                palette_id = (anim & 0x0000FF00) >> 8
-                anim_id =    (anim & 0x000000FF) >> 0
+                value = (anim & 0x00FFFFFF)
 
-                try:
-                    sprite =  disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
-                    palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
-                    anim =    disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
-                    anim = f"NPC_ANIM_{sprite}_{palette}_{anim}"
-                    INCLUDES_NEEDED["sprites"].add(sprite)
-                except KeyError:
+                if value in disasm_script.CONSTANTS["NPC_SPRITE"]:
+                   INCLUDES_NEEDED["sprites"].add(disasm_script.CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
+                   anim =  disasm_script.CONSTANTS['NPC_SPRITE'][value]
+                else:
                     anim = f"{anim:06X}"
 
                 out += f"    {element}, "
@@ -944,18 +939,14 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += f"s32 {name}[] = {{"
             else:
                 out += f"s32 {name} = {{"
-
             for i in range(0, struct["length"], 4):
                 if (i % 0x20) == 0:
                     out += f"\n   "
-
                 word = int.from_bytes(bytes.read(4), byteorder="big")
-
                 if word in symbol_map:
                     out += f" {symbol_map[word][0][1]},"
                 else:
                     out += f" 0x{word:08X},"
-
             out += f"\n}};\n"
 
         out += "\n"
@@ -1231,5 +1222,3 @@ if __name__ == "__main__":
 
         print("=======================================\n")
         print(disasm.rstrip())
-
-

@@ -18,19 +18,16 @@ def script_lib(offset=0):
         """
         LIB_LINE_RE = re.compile(r"\s+:\s+")
         NAME_RE = re.compile(r"({[^}]*})?\s*([a-zA-Z0-9_]+)")
-
         for filename in Path(path.dirname(__file__), "star-rod", "database").rglob("*.lib"):
             with open(filename, "r") as file:
                 for line in file.readlines():
                     parts = LIB_LINE_RE.split(line)
-
                     if len(parts) >= 3:
                         try:
                             kind = parts[0]
                             vaddr = int(parts[1].split(", ")[0], 16)
                             if name := NAME_RE.match(parts[2]):
                                 name = name.group(2)
-
                                 _script_lib[vaddr] = name
                         except:
                             pass
@@ -131,7 +128,7 @@ def browse_header(valid_enums, enums):
                     if "=" in name:
                         name, val = name.split(" = ")
                         val = int(val[:-1], 0)
-                        if val >= 0x80000000:
+                        if val > 0x80000000:
                             val -= 0x100000000
                     else:
                         name = name[:-1]
@@ -167,7 +164,7 @@ def get_constants():
     include_path = Path(Path(__file__).resolve().parent.parent / "include")
     enums = Path(include_path / "enums.h").read_text().splitlines()
     browse_header(valid_enums, enums)
-    
+
     include_path = Path(Path(__file__).resolve().parent.parent / "src" / "battle")
     enums = Path(include_path / "battle.h").read_text().splitlines()
     browse_header(valid_enums, enums)
@@ -180,7 +177,6 @@ def get_constants():
             if f"#define {enum}_" in line:
                 this_enum = enum
                 break;
-
         if this_enum:
             name = line.split(" ",2)[1]
             id_ = line.split("0x", 1)[1]
@@ -283,7 +279,7 @@ def fix_args(self, func, args, info):
                             call = f"0x{argNum:X}"
                         else:
                             call = make_anim_macro(self, sprite, palette, anim)
-                except KeyError:
+                except ValueError:
                         call = f"0x{argNum:06X}"
                 new_args.append(call)
             elif info[i] == "CustomMsg":
@@ -321,7 +317,19 @@ def fix_args(self, func, args, info):
                             enabled.append(f"0x{flag:08X}")
                 if not enabled:
                     enabled.append(f"0")
-                new_args.append("((" + " | ".join(enabled) + "))")
+                new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
+            elif info[i] == "ActorFlags":
+                enabled = []
+                for x in range(32):
+                    flag = argNum & (1 << x)
+                    if flag:
+                        if flag in CONSTANTS["ActorFlags"]:
+                            enabled.append(CONSTANTS["ActorFlags"][flag])
+                        else:
+                            enabled.append(f"0x{flag:08X}")
+                if not enabled:
+                    enabled.append(f"0")
+                new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
             elif info[i] == "SoundIDs":
                 if argNum in CONSTANTS["SoundIDs"]:
                     new_args.append(CONSTANTS["SoundIDs"][argNum])
@@ -462,7 +470,7 @@ replace_funcs = {
     "FlyToGoal"                 :{0:"ActorIDs"},
     "SetActorPos"               :{0:"ActorIDs"},
     "HPBarToCurrent"            :{0:"ActorIDs"},
-    "SetActorFlagBits"          :{0:"ActorIDs"}, # TODO: 1:"ActorFlags"
+    "SetActorFlagBits"          :{0:"ActorIDs", 1:"ActorFlags"},
     "SetPartFlags"              :{0:"ActorIDs"},
     "SetPartPos"                :{0:"ActorIDs"},
     "SetPartDispOffset"         :{0:"ActorIDs"},
@@ -657,7 +665,6 @@ class ScriptDisassembler:
             if self.prelude:
                 self.prefix_line(f"EvtSource {self.script_name} = {{")
                 self.write_line("};")
-
             self.done = True
         elif opcode == 0x02: self.write_line(f"EVT_RETURN")
         elif opcode == 0x03: self.write_line(f"EVT_LABEL({self.var(argv[0])})")
@@ -766,12 +773,10 @@ class ScriptDisassembler:
             sprite  = (argNum & 0xFF0000) >> 16
             palette = (argNum & 0xFF00)   >> 8
             anim    = (argNum & 0xFF)     >> 0
-
             if sprite > 0:
                 value = make_anim_macro(self, sprite, palette, anim)
             else:
                 value = f"0x{argNum:08X}"
-
             self.write_line(f"EVT_SET_CONST({self.var(argv[0])}, {value})")
         elif opcode == 0x26: self.write_line(f"EVT_SETF({self.var(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x27: self.write_line(f"EVT_ADD({self.var(argv[0])}, {self.var(argv[1])})")
@@ -807,10 +812,8 @@ class ScriptDisassembler:
         elif opcode == 0x43:
             func = self.addr_ref(argv[0])
             args = [self.var(a, use_evt_ptr=True) for a in argv[1:]]
-
             args_str = ', '.join(args)
             args_str = replace_constants(self, func, args_str)
-
             if func.startswith("evt_"):
                 # use func-specific macro
                 self.write_line(f"{func}({args_str})")
@@ -865,32 +868,24 @@ class ScriptDisassembler:
                 argv_str += ", "
                 argv_str += f"0x{arg:X}"
             self.write_line(f"0x{opcode:02X}{argv_str}),")
-
     def collider_id(self, arg):
         if arg >= 0x4000 and arg <= 0x5000:
             return f"EVT_ENTITY_INDEX({arg - 0x4000})"
         else:
             return self.var(arg)
-
-
 class UnsupportedScript(Exception):
     pass
-
-
 if __name__ == "__main__":
     import argparse
-
     parser = argparse.ArgumentParser()
     parser.add_argument("file", type=str, help="File to dissassemble from")
     parser.add_argument("offset", help="Offset to start dissassembling from")
     parser.add_argument("-end", "-e", "--e", type=lambda x: int(x, 16), default=0, dest="end", required=False, help="End offset to stop dissassembling from.\nOnly used as a way to find valid scripts.")
     parser.add_argument("-vram", "-v", "--v", type=lambda x: int(x, 16), default=0, dest="vram", required=False, help="VRAM start will be tracked and used for the script output name")
     parser.add_argument("-si", "--si", action="store_true", default=False, dest="si", required=False, help="Force si script output")
-
     args = parser.parse_args()
     vram_base = args.vram
     get_constants()
-
     INCLUDED = {}
     INCLUDED["functions"] = set()
     INCLUDED["includes"] = set()
@@ -899,7 +894,6 @@ if __name__ == "__main__":
     INCLUDES_NEEDED["forward"] = []
     INCLUDES_NEEDED["npcs"] = {}
     INCLUDES_NEEDED["sprites"] = set()
-
     try:
         offset = int(args.offset, 0)
     except ValueError:
@@ -908,20 +902,16 @@ if __name__ == "__main__":
             print(f"{args.offset} is not a valid symbol name")
             exit(1)
         offset = info[0]
-
     if args.end > offset:
         # Search the given memory range and report scripts
         with open(args.file, "rb") as f:
             gap = False
             first_print = False
-
             while offset < args.end:
                 f.seek(offset)
-
                 script = ScriptDisassembler(f, args.offset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
                 try:
                     script_text = script.disassemble()
-
                     if script.instructions > 1 and "_EVT_CMD" not in script_text:
                         if gap and first_print:
                             potential_struct_sizes = { "StaticNpc": 0x1F0, "NpcAISettings":0x30, "NpcSettings":0x2C, "NpcGroupList":0xC }
@@ -932,7 +922,6 @@ if __name__ == "__main__":
                                 if gap_size % v == 0:
                                     potential_struct = k
                                     potential_count = gap_size // v
-
                             print(f"========== 0x{gap_size:X} byte gap ({potential_count} {potential_struct}?) 0x{gap_start:X} - 0x{offset:X} ==========")
                             print()
                             gap = False
