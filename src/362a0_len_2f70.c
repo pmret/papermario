@@ -850,8 +850,55 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
         return colliderID;
 }
 
-INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_zones, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
-            f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* nx, f32* ny, f32* nz);
+s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
+                f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz)
+{
+    Collider* collider;
+    CollisionData *pColData;
+    ColliderTriangle *triangle;
+    s32 i, j;
+    s32 colliderID;
+
+    pColData = &D_800D91D0;
+    D_800A423C = dirX;
+    D_800A4240 = dirY;
+    D_800A4244 = dirZ;
+    D_800A4230 = startX;
+    D_800A4234 = startY;
+    D_800A4238 = startZ;
+    D_800A4254 = *hitDepth;
+    colliderID = -1;
+
+    for (i = 0; i < pColData->numColliders; i++)
+    {
+        collider = &pColData->colliderList[i];
+
+        if (collider->flags & 0x10000)
+            continue;
+
+        if (collider->numTriangles == 0 || collider->aabb == NULL)
+            continue;
+
+        triangle = collider->triangleTable;
+        for (j = 0; j < collider->numTriangles; j++)
+            if (test_down_ray_triangle(triangle++, pColData->vertices))
+                colliderID = i;
+    }
+
+    if (colliderID >= 0)
+    {
+        *hitX = D_800A4248;
+        *hitY = D_800A424C;
+        *hitZ = D_800A4250;
+        *hitDepth = D_800A4254;
+        *hitNx = D_800A4258;
+        *hitNy = D_800A425C;
+        *hitNz = D_800A4260;
+        return colliderID;
+    }
+    else
+        return colliderID;
+}
 
 f32 test_up_ray_collider(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw) {
     CollisionData* collisionData = &gCollisionData;
