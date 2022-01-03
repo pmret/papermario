@@ -8,7 +8,7 @@ import subprocess
 from pathlib import Path
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
-root_dir = os.path.abspath(os.path.join(script_dir, ".."))
+root_dir = os.path.abspath(os.path.join(script_dir, "../.."))
 
 import glob, os
 os.chdir(root_dir)

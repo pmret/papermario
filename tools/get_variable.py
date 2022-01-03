@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import sys
+
 def get_variable(arg):
     v = arg - 2**32 # convert to s32
     if v > -250000000:
@@ -25,5 +27,7 @@ def get_variable(arg):
         return f"{arg}"
 
 if __name__ == "__main__":
-    import sys
-    print(get_variable(int(sys.argv[1], 0)))
+    try:
+        print(get_variable(int(sys.argv[1], 0)))
+    except:
+        print("Invalid literal for numeric operation. Please input a hex/dec number.")
