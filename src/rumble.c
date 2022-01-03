@@ -3,8 +3,8 @@
 
 // TODO: replace nustuff with defines
 
-u16 D_80074260 = 0;
-s32 D_80074264 = 0;
+u16 rumbleMaxDuration = 0;
+s32 rumbleButtons = 0;
 
 void reset_max_rumble_duration(void);
 
@@ -13,34 +13,34 @@ void poll_rumble(void) {
     nuContRmbModeSet(0, 2);
 }
 
-void start_rumble(s32 freq, s32 frame) {
+void start_rumble(s32 freq, s32 nframes) {
     if (gGameStatusPtr->demoState == 0) {
-        if (D_80074260 != 0) {
-            s32 symx2 = D_80074260 * 2;
+        if (rumbleMaxDuration != 0) {
+            s32 maxFrames = rumbleMaxDuration * 2;
 
-            if (frame > symx2) {
-                frame = symx2;
+            if (nframes > maxFrames) {
+                nframes = maxFrames;
             }
 
             if (nuContRmbCheck(0) == 0) {
                 nuContRmbModeSet(0, 2);
-                nuContRmbStart(0, freq, frame);
+                nuContRmbStart(0, freq, nframes);
             }
         }
     }
 }
 
 void update_max_rumble_duration(void) {
-    if (D_80074264 != gGameStatusPtr->currentButtons) {
-        D_80074264 = gGameStatusPtr->currentButtons;
+    if (rumbleButtons != gGameStatusPtr->currentButtons) {
+        rumbleButtons = gGameStatusPtr->currentButtons;
         reset_max_rumble_duration();
     }
 
-    if (D_80074260 != 0) {
-        D_80074260--;
+    if (rumbleMaxDuration != 0) {
+        rumbleMaxDuration--;
     }
 }
 
 void reset_max_rumble_duration(void) {
-    D_80074260 = 300;
+    rumbleMaxDuration = 300;
 }

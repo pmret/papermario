@@ -239,7 +239,7 @@ s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
         wattActionStatus->actionState.b[3] = 0;
         wattActionStatus->actionState.b[0] = 0;
         playerStatus->animFlags &= ~(PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT);
-        gGameStatusPtr->unk_7D = 0;
+        gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
     }
 
     if (partner_put_away(watt)) {
@@ -304,7 +304,7 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
             watt->flags &= ~NPC_FLAG_GRAVITY;
             watt->flags |= NPC_FLAG_100;
             playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
-            gGameStatusPtr->unk_7D = 1;
+            gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
             wattActionStatus->actionState.b[0] = 1;
             wattActionStatus->actionState.b[3] = 6;
             D_802BE308 = 0;

@@ -96,8 +96,8 @@ s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ,
     hitObjectID = player_raycast_down(&x, &y, &z, &length);
     ret = -1;
     if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
-        *hitRx = -gGameStatusPtr->unk_11C.x;
-        *hitRz = -gGameStatusPtr->unk_11C.z;
+        *hitRx = -gGameStatusPtr->playerGroundTraceAngles.x;
+        *hitRz = -gGameStatusPtr->playerGroundTraceAngles.z;
         *outX = x;
         *outY = y;
         *outZ = z;
@@ -113,8 +113,8 @@ s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ,
     length = inputLength;
     hitObjectID = player_raycast_down(&x, &y, &z, &length);
     if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
-        *hitRx = -gGameStatusPtr->unk_11C.x;
-        *hitRz = -gGameStatusPtr->unk_11C.z;
+        *hitRx = -gGameStatusPtr->playerGroundTraceAngles.x;
+        *hitRz = -gGameStatusPtr->playerGroundTraceAngles.z;
         *outX = x;
         *outY = y;
         *outZ = z;
@@ -130,8 +130,8 @@ s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ,
     length = inputLength;
     hitObjectID = player_raycast_down(&x, &y, &z, &length);
     if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
-        *hitRx = -gGameStatusPtr->unk_11C.x;
-        *hitRz = -gGameStatusPtr->unk_11C.z;
+        *hitRx = -gGameStatusPtr->playerGroundTraceAngles.x;
+        *hitRz = -gGameStatusPtr->playerGroundTraceAngles.z;
         *outX = x;
         *outY = y;
         *outZ = z;
@@ -147,8 +147,8 @@ s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ,
     length = inputLength;
     hitObjectID = player_raycast_down(&x, &y, &z, &length);
     if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
-        *hitRx = -gGameStatusPtr->unk_11C.x;
-        *hitRz = -gGameStatusPtr->unk_11C.z;
+        *hitRx = -gGameStatusPtr->playerGroundTraceAngles.x;
+        *hitRz = -gGameStatusPtr->playerGroundTraceAngles.z;
         *outX = x;
         *outY = y;
         *outZ = z;
@@ -164,8 +164,8 @@ s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ,
     length = inputLength;
     hitObjectID = player_raycast_down(&x, &y, &z, &length);
     if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
-        *hitRx = -gGameStatusPtr->unk_11C.x;
-        *hitRz = -gGameStatusPtr->unk_11C.z;
+        *hitRx = -gGameStatusPtr->playerGroundTraceAngles.x;
+        *hitRz = -gGameStatusPtr->playerGroundTraceAngles.z;
         *outX = x;
         *outY = y;
         *outZ = z;
@@ -1030,9 +1030,9 @@ void update_player_shadow(void) {
         f32 tan = atan2(playerStatus->position.x, playerStatus->position.z, x, z);
         s32 angleTemp = clamp_angle((-90.0f - tan) + get_player_normal_yaw());
 
-        if (gGameStatusPtr->playerTraceNormal.y != 0.0f) {
-            y -= sqrtf(SQ(gGameStatusPtr->playerTraceNormal.x) + SQ(gGameStatusPtr->playerTraceNormal.z)) /
-                       gGameStatusPtr->playerTraceNormal.y * dist * sin_deg(angleTemp);
+        if (gGameStatusPtr->playerGroundTraceNormal.y != 0.0f) {
+            y -= sqrtf(SQ(gGameStatusPtr->playerGroundTraceNormal.x) + SQ(gGameStatusPtr->playerGroundTraceNormal.z)) /
+                       gGameStatusPtr->playerGroundTraceNormal.y * dist * sin_deg(angleTemp);
         }
     }
 

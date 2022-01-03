@@ -52,7 +52,7 @@ INCLUDE_ASM(void, "state_title_screen", state_init_title_screen, void);
 INCLUDE_ASM(void, "state_title_screen", state_step_title_screen, void);
 
 void state_drawUI_title_screen(void) {
-    switch (gGameStatusPtr->loadMenuState) {
+    switch (gGameStatusPtr->introState) {
         case 0:
             D_80077A28 = 0;
             D_80077A2C = 0;

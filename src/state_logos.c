@@ -16,8 +16,8 @@ void state_init_logos(void) {
     s32* temp_800A0910;
 
     general_heap_create();
-    gGameStatusPtr->loadMenuState = 0;
-    gGameStatusPtr->menuCounter = 0;
+    gGameStatusPtr->introState = 0;
+    gGameStatusPtr->introCounter = 0;
     gGameStatusPtr->bSkipIntro = FALSE;
     intro_logos_set_fade_alpha(255);
     intro_logos_set_fade_color(0);
@@ -75,7 +75,7 @@ void state_init_logos(void) {
     clear_effect_data();
     gOverrideFlags |= 0x2;
     intro_logos_update_fade();
-    gGameStatusPtr->enableBackground = FALSE;
+    gGameStatusPtr->backgroundFlags = FALSE;
 }
 
 void state_step_logos(void) {
@@ -86,73 +86,73 @@ void state_step_logos(void) {
             set_game_mode(2);
         }
     } else {
-        switch (gGameStatusPtr->loadMenuState) {
+        switch (gGameStatusPtr->introState) {
             case 1:
-                if (gGameStatusPtr->menuCounter == 0) {
+                if (gGameStatusPtr->introCounter == 0) {
                     intro_logos_set_fade_color(208);
-                    gGameStatusPtr->loadMenuState++;
+                    gGameStatusPtr->introState++;
                 }
-                gGameStatusPtr->menuCounter--;
+                gGameStatusPtr->introCounter--;
                 break;
             case 2:
                 if (intro_logos_fade_out(0xA) != 0) {
-                    gGameStatusPtr->loadMenuState++;
+                    gGameStatusPtr->introState++;
                 }
                 break;
             case 3:
                 if (intro_logos_fade_in(0xA) != 0) {
-                    gGameStatusPtr->loadMenuState++;
-                    gGameStatusPtr->menuCounter = 40;
+                    gGameStatusPtr->introState++;
+                    gGameStatusPtr->introCounter = 40;
                 }
                 break;
             case 4:
-                if (gGameStatusPtr->menuCounter == 0) {
-                    gGameStatusPtr->loadMenuState++;
+                if (gGameStatusPtr->introCounter == 0) {
+                    gGameStatusPtr->introState++;
                     intro_logos_set_fade_color(208);
                 }
-                gGameStatusPtr->menuCounter--;
+                gGameStatusPtr->introCounter--;
                 break;
             case 5:
                 if (intro_logos_fade_out(0xA) != 0) {
-                    gGameStatusPtr->loadMenuState++;
+                    gGameStatusPtr->introState++;
                 }
                 break;
             case 0:
             case 6:
                 if (intro_logos_fade_in(0xA) != 0) {
-                    gGameStatusPtr->loadMenuState++;
-                    gGameStatusPtr->menuCounter = 30;
+                    gGameStatusPtr->introState++;
+                    gGameStatusPtr->introCounter = 30;
                 }
                 break;
             case 7:
-                if (gGameStatusPtr->menuCounter == 0) {
-                    gGameStatusPtr->loadMenuState++;
+                if (gGameStatusPtr->introCounter == 0) {
+                    gGameStatusPtr->introState++;
                     intro_logos_set_fade_color(208);
-                    gGameStatusPtr->menuCounter = 30;
+                    gGameStatusPtr->introCounter = 30;
                 }
-                gGameStatusPtr->menuCounter--;
+                gGameStatusPtr->introCounter--;
                 break;
             case 8:
-                if (gGameStatusPtr->menuCounter == 0) {
-                    gGameStatusPtr->loadMenuState++;
+                if (gGameStatusPtr->introCounter == 0) {
+                    gGameStatusPtr->introState++;
                     set_curtain_scale_goal(1.0f);
                     set_curtain_draw_callback(NULL);
                     set_curtain_fade_goal(0.3f);
                 } else {
-                    gGameStatusPtr->menuCounter--;
+                    gGameStatusPtr->introCounter--;
                 }
                 break;
             case 9:
                 if (intro_logos_fade_out(0xA) != 0) {
-                    gGameStatusPtr->menuCounter = 15;
-                    gGameStatusPtr->loadMenuState++;
+                    gGameStatusPtr->introCounter = 15;
+                    gGameStatusPtr->introState++;
                 }
                 break;
             case 10:
-                if (gGameStatusPtr->menuCounter == 0) {
-                    gGameStatusPtr->loadMenuState++;
+                if (gGameStatusPtr->introCounter == 0) {
+                    gGameStatusPtr->introState++;
                 } else {
-                    gGameStatusPtr->menuCounter--;
+                    gGameStatusPtr->introCounter--;
                 }
                 break;
             case 11:
