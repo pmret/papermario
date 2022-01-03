@@ -88,7 +88,7 @@ void state_step_enter_world(void) {
 }
 
 void state_drawUI_enter_world(void) {
-    if (gGameStatusPtr->loadMenuState == 2) {
+    if (gGameStatusPtr->introState == 2) {
         draw_status_ui();
     }
 }

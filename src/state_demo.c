@@ -78,17 +78,17 @@ void state_step_demo(void) {
         case 3:
             intro_logos_set_fade_alpha(255);
             intro_logos_set_fade_color(224);
-            gGameStatusPtr->loadMenuState = 3;
+            gGameStatusPtr->introState = 3;
             gOverrideFlags |= 8;
             intro_logos_update_fade();
             gGameStatusPtr->demoState = 5;
             break;
         case 4:
-            if (gGameStatusPtr->loadMenuState != 0) {
-                gGameStatusPtr->loadMenuState--;
+            if (gGameStatusPtr->introState != 0) {
+                gGameStatusPtr->introState--;
             }
 
-            if (gGameStatusPtr->loadMenuState == 0) {
+            if (gGameStatusPtr->introState == 0) {
                 gGameStatusPtr->nextDemoScene = 0;
                 gGameStatusPtr->demoState = 0;
                 gGameStatusPtr->peachFlags = 0;
@@ -96,7 +96,7 @@ void state_step_demo(void) {
                 gGameStatusPtr->isBattle = FALSE;
                 gGameStatusPtr->unk_76 = 0;
                 gGameStatusPtr->disableScripts = 0;
-                gGameStatusPtr->unk_7D = 0;
+                gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
                 gOverrideFlags &= ~0x8;
                 general_heap_create();
                 clear_render_tasks();

@@ -7,7 +7,7 @@ extern s32 D_800A0950;
 void state_init_intro(void) {
     s8 unk_A8;
 
-    gGameStatusPtr->loadMenuState = 0;
+    gGameStatusPtr->introState = 0;
 
     set_curtain_scale_goal(1.0f);
     set_curtain_fade_goal(0.3f);
@@ -82,36 +82,36 @@ void state_step_intro(void) {
             D_800A0964 = 1;
         }
 
-        if (D_800A0964 == 1 && (gGameStatusPtr->loadMenuState == 0 || gGameStatusPtr->loadMenuState == 1 ||
-                                gGameStatusPtr->loadMenuState == 4)) {
+        if (D_800A0964 == 1 && (gGameStatusPtr->introState == 0 || gGameStatusPtr->introState == 1 ||
+                                gGameStatusPtr->introState == 4)) {
             gGameStatusPtr->creditsViewportMode = 100;
             state_init_intro();
             return;
         }
 
-        if (D_800A0964 == 2 && (gGameStatusPtr->loadMenuState == 0 || gGameStatusPtr->loadMenuState == 1 ||
-                                gGameStatusPtr->loadMenuState == 4)) {
+        if (D_800A0964 == 2 && (gGameStatusPtr->introState == 0 || gGameStatusPtr->introState == 1 ||
+                                gGameStatusPtr->introState == 4)) {
             gGameStatusPtr->creditsViewportMode++;
             state_init_intro();
             return;
         }
     }
 
-    switch (gGameStatusPtr->loadMenuState) {
+    switch (gGameStatusPtr->introState) {
         case 0:
             update_effects();
             update_cameras();
             if (gGameStatusPtr->creditsViewportMode == -1) {
                 set_curtain_fade_goal(0.0f);
                 if (intro_logos_fade_out(D_800A0956)) {
-                    gGameStatusPtr->loadMenuState = 1;
+                    gGameStatusPtr->introState = 1;
                     set_curtain_draw_callback(NULL);
                 }
             } else {
                 D_800A0954 += D_800A0956;
                 if (D_800A0954 >= 0xFF) {
                     D_800A0954 = 0xFF;
-                    gGameStatusPtr->loadMenuState = 1;
+                    gGameStatusPtr->introState = 1;
                     set_curtain_draw_callback(NULL);
                 }
             }
@@ -120,14 +120,14 @@ void state_step_intro(void) {
             D_800A0950 = 4;
             gOverrideFlags |= 8;
             if (D_800A0960 != 0xE) {
-                gGameStatusPtr->loadMenuState = 2;
+                gGameStatusPtr->introState = 2;
             }
             break;
         case 21:
             D_800A0950--;
             if (D_800A0950 <= 0) {
                 gOverrideFlags &= -9;
-                gGameStatusPtr->loadMenuState = 2;
+                gGameStatusPtr->introState = 2;
             }
             break;
         case 2:
@@ -135,7 +135,7 @@ void state_step_intro(void) {
             gGameStatusPtr->isBattle = 0;
             gGameStatusPtr->unk_76 = 0;
             gGameStatusPtr->disableScripts = 0;
-            gGameStatusPtr->unk_7D = 0;
+            gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
 
             if (gGameStatusPtr->creditsViewportMode == -1) {
                 general_heap_create();
@@ -185,7 +185,7 @@ void state_step_intro(void) {
 
             playerData->currentPartner = 0;
             load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, 0);
-            gGameStatusPtr->loadMenuState = 3;
+            gGameStatusPtr->introState = 3;
             disable_player_input();
             break;
         case 3:
@@ -203,7 +203,7 @@ void state_step_intro(void) {
             update_cameras();
             if (!does_script_exist(gGameStatusPtr->mainScriptID)) {
                 gGameStatusPtr->prevArea = gGameStatusPtr->areaID;
-                gGameStatusPtr->loadMenuState = 4;
+                gGameStatusPtr->introState = 4;
                 break;
             }
             return;

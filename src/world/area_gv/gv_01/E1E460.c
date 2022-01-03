@@ -39,7 +39,7 @@ ApiStatus func_80240688_E1EAE8(Evt* script, s32 isInitialCall) {
     gGameStatusPtr->isBattle = FALSE;
     gGameStatusPtr->unk_76 = 0;
     gGameStatusPtr->disableScripts = 0;
-    gGameStatusPtr->unk_7D = 0;
+    gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
     gOverrideFlags &= ~0x8;
     general_heap_create();
     clear_render_tasks();

@@ -29,7 +29,7 @@ def handle_file(f_path, try_rename_file=False):
         f.write(f_text)
 
 
-# Read Star Rod's output file
+# Read Star Rod's output file (one rename per line, old and new, delimited by a space)
 with open(os.path.join(script_dir, "to_rename.txt")) as f:
     renames_text = f.readlines()
 

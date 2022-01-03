@@ -3746,19 +3746,30 @@ segments:
     type: code
     start: 0x447440
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x447440, c]
-    - [0x4479A0, c]
-    - [0x447C80, c]
-    - [0x447D50, c]
-    - [0x448420, c]
-    - [0x448690, c]
-    - [0x448900, c]
-    - [0x448B70, c]
-    - [0x448E20, c]
-    - [0x448E80, c]
-    - [0x4495F0, data]
+    - [0x447440, c, area]
+    - [0x447440, c, actor/spiked_goomba]
+    - [0x4476C0, c, actor/paragoomba]
+    - [0x4479A0, c, actor/paragoomba2]
+    - [0x447C80, c, actor/jr_troopa]
+    - [0x447C80, c, actor/egg_jr_troopa]
+    - [0x447C80, c, actor/para_jr_troopa]
+    - [0x447D50, c, actor/spiked_para_jr_troopa]
+    - [0x447F10, c, actor/mage_jr_troopa]
+    - [0x447F10, c, actor/final_jr_troopa]
+    - [0x448420, c, stage/kmr_02]
+    - [0x448420, c, stage/kmr_03]
+    - [0x448690, c, stage/kmr_04]
+    - [0x448900, c, stage/kmr_05]
+    - [0x448B70, c, stage/kmr_06]
+    - [0x448E20, c, stage/nok_01]
+    - [0x448E20, c, stage/mim_01]
+    - [0x448E80, c, stage/sam_01]
+    - [0x4491A0, c, stage/mac_01]
+    - [0x4495F0, c, stage/kpa_01]
+    - [0x4495F0]
   - dir: battle/area_mac
     type: code
     start: 0x464490

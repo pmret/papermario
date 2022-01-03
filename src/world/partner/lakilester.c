@@ -649,7 +649,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
                     enable_player_input();
                 }
 
-                gGameStatusPtr->unk_7D = 0;
+                gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
                 D_802BFF0C = 0;
                 partner_clear_player_tracking(lakilester);
                 set_action_state(ACTION_STATE_HIT_FIRE);
@@ -674,7 +674,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
                 D_802BFF04 = FALSE;
                 enable_player_input();
             }
-            gGameStatusPtr->unk_7D = 0;
+            gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
             D_802BFF0C = 0;
             partner_clear_player_tracking(lakilester);
             D_802BFF00++;
@@ -716,7 +716,7 @@ void world_lakilester_post_battle(Npc* npc) {
     if (partnerActionStatus->actionState.b[1] != 0) {
         if (D_802BFF0C) {
             *npc = partnerActionStatus->npc;
-            gGameStatusPtr->unk_7D = 1;
+            gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
             set_action_state(ACTION_STATE_RIDE);
             partnerActionStatus->actionState.b[3] = 0;
             partnerActionStatus->actionState.b[0] = 0;
@@ -786,7 +786,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
             playerStatus->unk_BC = 0;
             playerStatus->flags |= PLAYER_STATUS_FLAGS_10000000;
             func_802BFB44_323694(2.0f);
-            gGameStatusPtr->unk_7D = 1;
+            gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
             npc->flags |= NPC_FLAG_100;
             npc->moveSpeed = *temp_s0_2;
             npc->jumpScale = 0.0f;
