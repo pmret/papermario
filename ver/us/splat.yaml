@@ -3782,8 +3782,9 @@ segments:
     - [0x465D90, c, actor/master2]
     - [0x465D90, c, actor/master3]
     - [0x465D90, c, stage/mac_01]
-    - [0x47EDC0, c, stage/mac_02]
-    - [0x47EDC0, c, area]
+    - [0x4661E0, c, stage/mac_02]
+    - [0x4661E0, c, area]
+    - [0x4661E0]
   - dir: battle/area_hos
     type: code
     start: 0x47F0B0
