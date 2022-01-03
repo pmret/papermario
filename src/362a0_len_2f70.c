@@ -38,6 +38,20 @@ extern HitTableEntry* D_800A4264;
 extern HitTableEntry* D_800A4268;
 extern CollisionData D_800D91D0;
 
+extern f32 D_800A4230;
+extern f32 D_800A4234;
+extern f32 D_800A4238;
+extern f32 D_800A423C;
+extern f32 D_800A4240;
+extern f32 D_800A4244;
+extern f32 D_800A4248;
+extern f32 D_800A424C;
+extern f32 D_800A4250;
+extern f32 D_800A4254;
+extern f32 D_800A4258;
+extern f32 D_800A425C;
+extern f32 D_800A4260;
+
 s32 collision_heap_create(void);
 void* collision_heap_malloc(s32 size);
 void collision_heap_free(void*);
@@ -502,7 +516,86 @@ void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z) {
     *z = (aabb->min[2] + aabb->max[2]) * 0.5f;
 }
 
-INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_triangle_general);
+s32 test_ray_triangle_general(ColliderTriangle *triangle)
+{
+    f32 temp_f20;
+    f32 temp_f6_8;
+    Vec3f *v1, *v2, *v3;
+
+    if (triangle->normal.x == 0 &&
+        triangle->normal.y == 0 &&
+        triangle->normal.z == 0)
+        return FALSE;
+
+    v1 = triangle->v1;
+    v2 = triangle->v2;
+    v3 = triangle->v3;
+
+    temp_f20 =  triangle->normal.x * (D_800A4230 - v1->x) +
+                triangle->normal.y * (D_800A4234 - v1->y) +
+                triangle->normal.z * (D_800A4238 - v1->z);
+
+    if (triangle->oneSided)
+    {
+
+        if (temp_f20 < 0)
+            return FALSE;
+
+        if (triangle->normal.x * D_800A423C + triangle->normal.y * D_800A4240 + triangle->normal.z * D_800A4244 >= 0)
+            return FALSE;
+
+        if ((D_800A4230 - v1->x) * (triangle->e13.z * D_800A4240 - triangle->e13.y * D_800A4244) +
+            (D_800A4234 - v1->y) * (triangle->e13.x * D_800A4244 - triangle->e13.z * D_800A423C) +
+            (D_800A4238 - v1->z) * (triangle->e13.y * D_800A423C - triangle->e13.x * D_800A4240) < 0)
+            return FALSE;
+
+        if ((D_800A4230 - v2->x) * (triangle->e21.z * D_800A4240 - triangle->e21.y * D_800A4244) +
+            (D_800A4234 - v2->y) * (triangle->e21.x * D_800A4244 - triangle->e21.z * D_800A423C) +
+            (D_800A4238 - v2->z) * (triangle->e21.y * D_800A423C - triangle->e21.x * D_800A4240) < 0)
+            return FALSE;
+
+        if ((D_800A4230 - v3->x) * (triangle->e32.z * D_800A4240 - triangle->e32.y * D_800A4244) +
+            (D_800A4234 - v3->y) * (triangle->e32.x * D_800A4244 - triangle->e32.z * D_800A423C) +
+            (D_800A4238 - v3->z) * (triangle->e32.y * D_800A423C - triangle->e32.x * D_800A4240) < 0)
+            return FALSE;
+    }
+    else
+    {
+        if ((triangle->normal.x * D_800A423C + triangle->normal.y * D_800A4240 + triangle->normal.z * D_800A4244) * temp_f20 >= 0)
+            return FALSE;
+
+        if (((D_800A4230 - v1->x) * (triangle->e13.z * D_800A4240 - triangle->e13.y * D_800A4244) +
+            (D_800A4234 - v1->y) * (triangle->e13.x * D_800A4244 - triangle->e13.z * D_800A423C) +
+            (D_800A4238 - v1->z) * (triangle->e13.y * D_800A423C - triangle->e13.x * D_800A4240)) * temp_f20 < 0)
+            return FALSE;
+
+        if (((D_800A4230 - v2->x) * (triangle->e21.z * D_800A4240 - triangle->e21.y * D_800A4244) +
+            (D_800A4234 - v2->y) * (triangle->e21.x * D_800A4244 - triangle->e21.z * D_800A423C) +
+            (D_800A4238 - v2->z) * (triangle->e21.y * D_800A423C - triangle->e21.x * D_800A4240)) * temp_f20 < 0)
+            return FALSE;
+
+        if (((D_800A4230 - v3->x) * (triangle->e32.z * D_800A4240 - triangle->e32.y * D_800A4244) +
+            (D_800A4234 - v3->y) * (triangle->e32.x * D_800A4244 - triangle->e32.z * D_800A423C) +
+            (D_800A4238 - v3->z) * (triangle->e32.y * D_800A423C - triangle->e32.x * D_800A4240)) * temp_f20 < 0)
+            return FALSE;
+    }
+
+    temp_f6_8 = triangle->normal.x * D_800A423C + triangle->normal.y * D_800A4240 + triangle->normal.z * D_800A4244;
+    if (D_800A4254 >= 0 && D_800A4254 <= -temp_f20 / temp_f6_8)
+        return FALSE;
+
+    D_800A4254 = -temp_f20  / temp_f6_8;
+
+    D_800A4248 = D_800A4230 + D_800A423C * D_800A4254;
+    D_800A424C = D_800A4234 + D_800A4240 * D_800A4254;
+    D_800A4250 = D_800A4238 + D_800A4244 * D_800A4254;
+
+    D_800A4258 = triangle->normal.x;
+    D_800A425C = triangle->normal.y;
+    D_800A4260 = triangle->normal.z;
+
+    return TRUE;
+}
 
 INCLUDE_ASM(s32, "362a0_len_2f70", test_down_ray_triangle);
 
@@ -514,14 +607,6 @@ INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_colliders, s32 ignoreFlags, f32 star
 
 INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_zones, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
             f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* nx, f32* ny, f32* nz);
-
-extern f32 D_800A4230;
-extern f32 D_800A4234;
-extern f32 D_800A4238;
-extern f32 D_800A423C;
-extern s32 D_800A4240;
-extern f32 D_800A4244;
-extern f32 D_800A4254;
 
 f32 test_up_ray_collider(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw) {
     CollisionData* collisionData = &gCollisionData;
