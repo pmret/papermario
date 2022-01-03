@@ -1,8 +1,9 @@
 #include "hos_00.h"
+#include "effects.h"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_00/A0BD40", func_80240050_A0BD40);
+#include "common/UnkEffect0FFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_00/A0BD40", func_80240170_A0BE60);
+#include "common/UnkEffect0FFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_00/A0BD40", func_8024036C_A0C05C);
 

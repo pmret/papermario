@@ -100,6 +100,7 @@ void func_80266684(void);
 void func_802667F0(s32, Actor*, f32, f32, f32);
 void func_802591EC(s32, ActorPart*, s32, Matrix4f*, s32);
 
+HeapNode* general_heap_create(void);
 void* general_heap_malloc(s32 size);
 s32 general_heap_free(void* data);
 

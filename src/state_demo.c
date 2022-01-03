@@ -93,12 +93,12 @@ void state_step_demo(void) {
                 gGameStatusPtr->demoState = 0;
                 gGameStatusPtr->peachFlags = 0;
                 func_80056204();
-                gGameStatusPtr->isBattle = 0;
+                gGameStatusPtr->isBattle = FALSE;
                 gGameStatusPtr->unk_76 = 0;
                 gGameStatusPtr->disableScripts = 0;
                 gGameStatusPtr->unk_7D = 0;
-                gOverrideFlags &= -9;
-                general_heap_create(&gOverrideFlags);
+                gOverrideFlags &= ~0x8;
+                general_heap_create();
                 clear_render_tasks();
                 clear_generic_entity_list();
                 clear_script_list();
