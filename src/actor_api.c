@@ -14,38 +14,38 @@ s32 count_targets(Actor* actor, s32 targetHomeIndex, s32 targetSelectionFlags) {
 }
 
 s32 get_nearest_home_index(f32 x, f32 y, f32 z) {
-    s32 xVal;
-    s32 yVal;
+    s32 row;
+    s32 col;
 
     if (y < 40.0f) {
-        xVal = 0;
+        row = 0;
     } else if (y < 85.0f) {
-        xVal = 1;
+        row = 1;
     } else if (y < 100.0f) {
-        xVal = 2;
+        row = 2;
     } else {
-        xVal = 3;
+        row = 3;
     }
 
     if (x < 25.0f) {
-        yVal = 0;
+        col = 0;
     } else if (x < 65.0f) {
-        yVal = 1;
+        col = 1;
     } else if (x < 105.0f) {
-        yVal = 2;
+        col = 2;
     } else {
-        yVal = 3;
+        col = 3;
     }
 
-    return yVal | (xVal << 2);
+    return col | (row << 2);
 }
 
 void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partIndex) {
-    s32 temp_s0 = actorID & 0x700;
+    s32 actorClass = actorID & 0x700;
     Actor* actor = get_actor(actorID);
     ActorPart* part;
 
-    switch (temp_s0) {
+    switch (actorClass) {
         case ACTOR_PLAYER:
             part = get_actor_part(actor, 0);
             state->goalPos.x = actor->currentPos.x + part->partOffset.x * actor->scalingFactor;
@@ -80,11 +80,11 @@ void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partIndex) {
 }
 
 void set_part_goal_to_actor_part(ActorPartMovement* movement, s32 actorID, s32 partIndex) {
-    s32 actorGroup = actorID & 0x700;
+    s32 actorClass = actorID & 0x700;
     Actor* actor = get_actor(actorID);
     ActorPart* part;
 
-    switch (actorGroup) {
+    switch (actorClass) {
         case ACTOR_PLAYER:
             part = get_actor_part(actor, 0);
             part->movement->goalPos.x = actor->currentPos.x + part->partOffset.x * actor->scalingFactor;
@@ -154,10 +154,10 @@ void set_actor_home_position(s32 actorID, f32 x, f32 y, f32 z) {
 Actor* get_actor(s32 actorID) {
     Actor* ret = NULL;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 idFlag = actorID & 0x700;
+    s32 actorClass = actorID & 0x700;
     u32 idIdx = (u8)actorID;
 
-    switch (idFlag) {
+    switch (actorClass) {
         case ACTOR_PLAYER:
             ret = battleStatus->playerActor;
             break;
@@ -2160,9 +2160,9 @@ ApiStatus func_8026DF88(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8026E020(Evt* script, s32 isInitialCall) {
-    s32 a0 = *script->ptrReadPos;
+    s32 flagsValue = *script->ptrReadPos;
 
-    gBattleStatus.unk_70 = a0;
+    gBattleStatus.menuDisableFlags = flagsValue;
     return ApiStatus_DONE2;
 }
 
@@ -2515,14 +2515,14 @@ ApiStatus GetPlayerActorID(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8026E9A0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 temp_s0;
-    s32 temp_s0_2;
+    s32 actorID;
+    s32 partIndex;
 
-    temp_s0 = evt_get_variable(script, *args++);
-    temp_s0_2 = evt_get_variable(script, *args++);
+    actorID = evt_get_variable(script, *args++);
+    partIndex = evt_get_variable(script, *args++);
 
-    gBattleStatus.currentTargetPart2 = temp_s0_2;
-    gBattleStatus.currentTargetID2 = temp_s0;
+    gBattleStatus.currentTargetPart2 = partIndex;
+    gBattleStatus.currentTargetID2 = actorID;
 
     return ApiStatus_DONE2;
 }
@@ -2750,7 +2750,7 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     s32 outVar = *args++;
     Actor* actor;
-    s32 actorMasked;
+    s32 actorClass;
     s8 debuff;
     s8 staticStatus;
     s8 stoneStatus;
@@ -2764,7 +2764,7 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
     }
     actor = get_actor(actorID);
     debuff = actor->debuff;
-    actorMasked = actor->actorID & 0x700;
+    actorClass = actor->actorID & 0x700;
     flags = 0;
 
     if (debuff != STATUS_END) {
@@ -2835,7 +2835,7 @@ ApiStatus  GetStatusFlags(Evt* script, s32 isInitialCall) {
             }
     }
 
-    switch (actorMasked) {
+    switch (actorClass) {
         case ACTOR_PLAYER:
         case ACTOR_PARTNER:
             if (battleStatus->outtaSightActive) {

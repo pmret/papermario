@@ -676,7 +676,7 @@ typedef struct BattleStatus {
     /* 0x062 */ s8 unk_62;
     /* 0x063 */ s8 unk_63;
     /* 0x064 */ char unk_64[12];
-    /* 0x070 */ s16 unk_70;
+    /* 0x070 */ s16 menuDisableFlags; /* 1 = jump, 2 = hammer, 4 = items */
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ u8 totalStarPoints;
