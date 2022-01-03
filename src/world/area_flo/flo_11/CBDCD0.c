@@ -449,8 +449,8 @@ static s32 N(pad_1AB8)[] = {
 NpcSettings N(npcSettings_80241AC0) = {
     .height = 32,
     .radius = 24,
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 20,
 };
 

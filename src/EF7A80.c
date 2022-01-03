@@ -28,7 +28,7 @@ typedef struct temp {
 } temp;
 
 ApiStatus func_80240340_EF7DC0(Evt* script, s32 isInitialCall) {
-    temp* ptr = script->varTable[15];
+    temp* ptr = (temp*) script->varTable[15];
 
     ptr->unk_0C->unk_30 = 69;
     ptr->unk_0C->unk_34 = 255;

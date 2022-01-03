@@ -59,8 +59,6 @@ typedef struct {
 
 void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1);
 
-EvtSource N(80248504);
-
 typedef struct {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
@@ -1564,7 +1562,7 @@ EvtSource N(80248504) = {
     EVT_END
 };
 
-s32 N(D_8024884C_963A4C)[] = {
+Unk_Struct_2 N(D_8024884C_963A4C) = {
     0x0000007D, 0x00000000, 0xFFFFFFD6, 0x0000004B, 0x0000004B, N(func_802430C8_95E2C8),
 };
 
@@ -2454,7 +2452,7 @@ s32 N(shopItemPositions_8024BA68)[] = {
     0x004C0021, 0x004B0022, 0x00490023, 0x004A0024, 0x00480025, 0x00470026,
 };
 
-s32 N(shopOwnerNPC_8024BA80)[] = {
+ShopOwner N(shopOwnerNPC_8024BA80) = {
     0x00000006, 0x00940101, 0x00940105, N(8024B894), 0x00000000, 0x00000000, N(intTable_8024B4A0),
 };
 
@@ -2919,7 +2917,7 @@ EvtSource N(8024CF7C) = {
     EVT_END
 };
 
-const char N(dro_01_name_hack)[];
+extern const char N(dro_01_name_hack)[];
 
 EvtSource N(8024D2B0) = {
     EVT_SET(EVT_SAVE_FLAG(761), 0)
@@ -2974,11 +2972,11 @@ ApiStatus N(func_80241470_95C670)(Evt* script, s32 isInitialCall) {
     if (N(D_802451B8_9603B8) == NULL) {
         N(D_802451B8_9603B8) = heap_malloc(16 * sizeof(s32));
         for (i = 0; i < 16; i++) {
-            N(D_802451B8_9603B8)[i] = script->varTable[i];
+            N(D_802451B8_9603B8)[i] = (s32*) script->varTable[i];
         }
     } else {
         for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_802451B8_9603B8)[i];
+            script->varTable[i] = (s32) N(D_802451B8_9603B8)[i];
         }
         heap_free(N(D_802451B8_9603B8));
         N(D_802451B8_9603B8) = NULL;
@@ -3173,7 +3171,7 @@ ApiStatus N(func_80242784_95D984)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_802427BC_95D9BC)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
+    s32* ptr = (s32*) evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {
@@ -3192,15 +3190,15 @@ ApiStatus N(func_802427BC_95D9BC)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_80242858_95DA58)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Unk_Struct_2* temp_s1 = evt_get_variable(script, *script->ptrReadPos);
+    Unk_Struct_2* temp_s1 = (Unk_Struct_2*) evt_get_variable(script, *script->ptrReadPos);
     Unk_Struct_1* ptr;
     s32 atan_res1, atan_res2;
     s32 clamp;
     s32 res;
 
     if (isInitialCall) {
-        script->functionTemp[1] = (Unk_Struct_1*)heap_malloc(0x3C);
-        ptr = script->functionTemp[1];
+        script->functionTemp[1] = (s32) heap_malloc(0x3C);
+        ptr = (Unk_Struct_1*) script->functionTemp[1];
         ptr->unk_00 = temp_s1->unk_00;
         ptr->unk_04 = temp_s1->unk_04;
         ptr->unk_08 = temp_s1->unk_08;
@@ -3218,7 +3216,7 @@ ApiStatus N(func_80242858_95DA58)(Evt* script, s32 isInitialCall) {
         ptr->unk_38 = 0;
     }
 
-    ptr = script->functionTemp[1];
+    ptr = (Unk_Struct_1*) script->functionTemp[1];
     switch (ptr->unk_20) {
         case 0:
             res = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
@@ -3345,7 +3343,7 @@ void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1) {
             if (ptr->unk_1C >= 6) {
                 if (fabsf(get_clamped_angle_diff(atan2(125.0f, -42.0f, 152.0f, -61.0f), atan2(125.0f, -42.0f, playerStatus->position.x,
                                                  playerStatus->position.z))) < 30.0f) {
-                    start_script(N(80248504), 1, 0);
+                    start_script(&N(80248504), 1, 0);
                     ptr->unk_20 = 4;
                 }
             }

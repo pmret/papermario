@@ -9,11 +9,11 @@ ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
         varTable = heap_malloc(sizeof(script->varTable));
 
         for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
-            varTable[i] = script->varTable[i];
+            varTable[i] = (s32*) script->varTable[i];
         }
     } else {
         for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
-            script->varTable[i] = varTable[i];
+            script->varTable[i] = (s32) varTable[i];
         }
 
         heap_free(varTable);

@@ -199,7 +199,7 @@ ApiStatus func_8024299C_EF4FAC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = evt_get_variable(script, *args);
+    NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args);
     s32 var;
     u32 x, y, z;
     f32 x2, y2, z2, w2;

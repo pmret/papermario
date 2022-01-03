@@ -8,7 +8,6 @@ extern EntityModelList gWorldEntityModelList;
 extern EntityModelList gBattleEntityModelList;
 extern EntityModelList* gCurrentEntityModelList;
 extern s32 gEntityModelCount;
-extern s32 D_8014C260[];
 extern s32 entity_fog_enabled;
 extern s32 entity_fog_red;
 extern s32 entity_fog_green;
@@ -374,7 +373,7 @@ void init_generic_entity_list(void) {
     }
 }
 
-s32 create_generic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)) {
+s32 create_generic_entity_world(void (*updateFunc)(Evt*, s32), void (*drawFunc)(Evt*, s32)) {
     s32 i;
     DynamicEntity* newDynEntity;
 

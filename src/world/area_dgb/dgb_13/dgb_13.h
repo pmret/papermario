@@ -6,6 +6,6 @@
 
 #define NAMESPACE dgb_13
 
-EvtSource N(80240270);
-EvtSource N(80240680);
-EvtSource N(main);
+extern EvtSource N(80240270);
+extern EvtSource N(80240680);
+extern EvtSource N(main);

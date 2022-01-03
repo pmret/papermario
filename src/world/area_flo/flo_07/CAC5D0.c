@@ -406,7 +406,7 @@ EvtSource N(802424F4) = {
     EVT_END
 };
 
-const char N(flo_25_name_hack)[];
+extern const char N(flo_25_name_hack)[];
 
 EvtSource N(tree1_Callback) = {
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -518,11 +518,11 @@ ApiStatus N(func_8024061C_CAC80C)(Evt* script, s32 isInitialCall) {
     if (N(D_80241BB0_CADDA0) == NULL) {
         N(D_80241BB0_CADDA0) = heap_malloc(16 * sizeof(s32));
         for (i = 0; i < 16; i++) {
-            N(D_80241BB0_CADDA0)[i] = script->varTable[i];
+            N(D_80241BB0_CADDA0)[i] = (s32*) script->varTable[i];
         }
     } else {
         for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80241BB0_CADDA0)[i];
+            script->varTable[i] = (s32) N(D_80241BB0_CADDA0)[i];
         }
         heap_free(N(D_80241BB0_CADDA0));
         N(D_80241BB0_CADDA0) = NULL;
