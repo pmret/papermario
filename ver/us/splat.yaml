@@ -3769,6 +3769,7 @@ segments:
     - [0x448E80, c, stage/sam_01]
     - [0x4491A0, c, stage/mac_01]
     - [0x4495F0, c, stage/kpa_01]
+    - [0x4495F0]
   - dir: battle/area_mac
     type: code
     start: 0x464490

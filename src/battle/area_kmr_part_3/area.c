@@ -25,36 +25,36 @@ extern Stage N(mac_01);
 extern Stage N(kpa_01);
 
 Formation N(formation_00) = {
-    { &N(spiked_goomba), .home = { .index = 2 }, .priority = 0 },
+    { .actor = &N(spiked_goomba), .home = { .index = 2 }, .priority = 0 },
 };
 
 Formation N(formation_01) = {
-    { &N(paragoomba2), .home = { .index = 5 }, .priority = 10 },
-    { &N(paragoomba1), .home = { .index = 6 }, .priority = 9 },
+    { .actor = &N(paragoomba2), .home = { .index = 5 }, .priority = 10 },
+    { .actor = &N(paragoomba1), .home = { .index = 6 }, .priority = 9 },
 };
 
 Formation N(formation_02) = {
-    { &N(jr_troopa), .home = { .index = 2 }, .priority = 0 },
+    { .actor = &N(jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
 Formation N(formation_03) = {
-    { &N(egg_jr_troopa), .home = { .index = 2 }, .priority = 0 },
+    { .actor = &N(egg_jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
 Formation N(formation_04) = {
-    { &N(para_jr_troopa), .home = { .index = 2 }, .priority = 0 },
+    { .actor = &N(para_jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
 Formation N(formation_05) = {
-    { &N(spiked_para_jr_troopa), .home = { .index = 1 }, .priority = 0 },
+    { .actor = &N(spiked_para_jr_troopa), .home = { .index = 1 }, .priority = 0 },
 };
 
 Formation N(formation_06) = {
-    { &N(mage_jr_troopa), .home = { .index = 2 }, .priority = 0 },
+    { .actor = &N(mage_jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
 Formation N(formation_07) = {
-    { &N(final_jr_troopa), .home = { .index = 2 }, .priority = 0 },
+    { .actor = &N(final_jr_troopa), .home = { .index = 2 }, .priority = 0 },
 };
 
 BattleList N(formationTable) = {

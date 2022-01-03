@@ -713,13 +713,13 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += "    { "
 
                 if actor in symbol_map:
-                    out += f"&{symbol_map[actor][0][1]}, "
+                    out += f".actor = &{symbol_map[actor][0][1]}, "
 
                     s = f"ActorDesc {symbol_map[actor][0][1]};"
                     if s not in INCLUDES_NEEDED["forward"]:
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
-                    out += f"{actor}, "
+                    out += f".actor = {actor}, "
 
 
                 if position in symbol_map:
