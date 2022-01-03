@@ -241,6 +241,11 @@ enum EncounterTriggers {
     ENCOUNTER_TRIGGER_PARTNER                         = 6,
 };
 
+enum SoundOutputMode {
+    SOUND_OUT_MONO                                    = 0,
+    SOUND_OUT_STEREO                                  = 1,
+};
+
 enum SongIDs {
     SONG_TOAD_TOWN                  = 0x00000000,
     //SONG_GOOMBA_VILLAGE_COPY      = 0x00000001,
