@@ -579,12 +579,12 @@ void func_80056144(UnkFuncAl arg0, s32 arg1) {
     D_8009A5C0->unk_A4[arg1] = arg0;
 }
 
-void func_8005615C(void) {
+void audio_set_stereo(void) {
     func_80056D5C(1);
     func_80054DA8(0);
 }
 
-void func_80056180(void) {
+void audio_set_mono(void) {
     func_80056D5C(0);
     func_80054DA8(1);
 }

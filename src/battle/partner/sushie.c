@@ -77,13 +77,13 @@ ApiStatus func_802381EC_707E8C(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802382A4_707F44(Evt* script, s32 isInitialCall) {
-    f32 var1 = script->varTable[0];
-    f32 var2 = script->varTable[1];
+    f32 posX = script->varTable[0];
+    f32 posY = script->varTable[1];
 
-    add_vec2D_polar(&var1, &var2, 300, atan2(var1, var2, script->varTable[3], script->varTable[4]));
+    add_vec2D_polar(&posX, &posY, 300, atan2(posX, posY, script->varTable[3], script->varTable[4]));
 
-    script->varTable[3] = var1;
-    script->varTable[4] = var2;
+    script->varTable[3] = posX;
+    script->varTable[4] = posY;
 
     return ApiStatus_DONE2;
 }
@@ -122,16 +122,16 @@ ApiStatus func_80238388_708028(Evt* script, s32 isInitialCall) {
 ApiStatus func_80238480_708120(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
-    f32 var1 = evt_get_float_variable(script, *args++);
-    f32 var2 = evt_get_float_variable(script, *args++);
-    f32 var3 = evt_get_float_variable(script, *args++);
-    s32 effect = battleStatus->unk_A0;
+    f32 posX = evt_get_float_variable(script, *args++);
+    f32 posY = evt_get_float_variable(script, *args++);
+    f32 posZ = evt_get_float_variable(script, *args++);
+    s32 effect = battleStatus->waterBlockEffect;
 
     if (effect != NULL) {
         remove_effect(effect);
     }
 
-    battleStatus->unk_A0 = playFX_5A(0, var1, var2, var3, 1.5f, 0);
+    battleStatus->waterBlockEffect = playFX_5A(0, posX, posY, posZ, 1.5f, 0);
 
     return ApiStatus_DONE2;
 }

@@ -671,7 +671,7 @@ typedef struct BattleStatus {
     /* 0x062 */ s8 unk_62;
     /* 0x063 */ s8 unk_63;
     /* 0x064 */ char unk_64[12];
-    /* 0x070 */ s16 unk_70;
+    /* 0x070 */ s16 menuDisableFlags; /* 1 = jump, 2 = hammer, 4 = items */
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ u8 totalStarPoints;
@@ -689,7 +689,7 @@ typedef struct BattleStatus {
     /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
     /* 0x088 */ s8 itemUsesLeft; /* set to 2 for double dip, 3 for triple dip */
     /* 0x089 */ u8 hpDrainCount;
-    /* 0x08A */ s8 unk_8A;
+    /* 0x08A */ s8 nextMerleeSpellType;
     /* 0x08B */ s8 hustleTurns; /* numTurns from hustle drink, normally 0 */
     /* 0x08C */ char unk_8C;
     /* 0x08D */ s8 unk_8D;
@@ -710,32 +710,32 @@ typedef struct BattleStatus {
     /* 0x09D */ s8 waterBlockTurnsLeft;
     /* 0x09E */ u8 waterBlockAmount; /* unused? */
     /* 0x09F */ char unk_9F;
-    /* 0x0A0 */ s32* unk_A0;
+    /* 0x0A0 */ struct EffectInstance* waterBlockEffect;
     /* 0x0A4 */ s8 cloudNineTurnsLeft;
     /* 0x0A5 */ s8 cloudNineDodgeChance; /* = 50% */
     /* 0x0A6 */ char unk_A6[2];
     /* 0x0A8 */ struct EffectInstance* cloudNineEffect;
-    /* 0x0AC */ char unk_AC;
-    /* 0x0AD */ s8 unk_AD;
+    /* 0x0AC */ s8 merleeAttackBoost;
+    /* 0x0AD */ s8 merleeDefenseBoost;
     /* 0x0AE */ s8 hammerLossTurns;
     /* 0x0AF */ s8 jumpLossTurns;
     /* 0x0B0 */ s8 itemLossTurns;
     /* 0x0B1 */ char unk_B1[3];
     /* 0x0B4 */ UNK_FUN_PTR(preUpdateCallback);
-    /* 0x0B8 */ UNK_FUN_PTR(unk_B8);
+    /* 0x0B8 */ UNK_FUN_PTR(initBattleCallback);
     /* 0x0BC */ struct Evt* controlScript; /* control handed over to this when changing partners */
     /* 0x0C0 */ s32 controlScriptID;
     /* 0x0C4 */ struct Evt* camMovementScript;
     /* 0x0C8 */ s32 camMovementScriptID;
-    /* 0x0CC */ Vec3f unk_CC;
+    /* 0x0CC */ Vec3f camLookatObjPos;
     /* 0x0D8 */ struct Actor* playerActor;
     /* 0x0DC */ struct Actor* partnerActor;
     /* 0x0E0 */ struct Actor* enemyActors[24];
     /* 0x140 */ s16 enemyIDs[24];
-    /* 0x170 */ s8 unk_170;
+    /* 0x170 */ s8 nextEnemyIndex; /* (during enemy turn) who should go next */
     /* 0x171 */ s8 numEnemyActors;
-    /* 0x172 */ s16 currentTurnEnemyID;
-    /* 0x174 */ struct Actor* currentTurnEnemy;
+    /* 0x172 */ s16 activeEnemyActorID; /* (during enemy turn) enemy currently using their move */
+    /* 0x174 */ struct Actor* currentTurnEnemy; 
     /* 0x178 */ s8 moveCategory; ///< 0 = jump, 1 = hammer, 5 = partner, ...
     /* 0x179 */ char unk_179;
     /* 0x17A */ s16 selectedItemID;
@@ -1177,7 +1177,7 @@ typedef struct GameStatus {
     /* 0x07A */ s8 musicEnabled;
     /* 0x07B */ char unk_7B;
     /* 0x07C */ s8 unk_7C;
-    /* 0x07D */ s8 unk_7D;
+    /* 0x07D */ s8 keepUsingPartnerOnMapChange;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
     /* 0x080 */ u8 peachAnimIdx; ///< @see world_action_idle_peachAnims
@@ -1199,9 +1199,9 @@ typedef struct GameStatus {
     /* 0x0A8 */ s8 creditsViewportMode;
     /* 0x0A9 */ s8 unk_A9;
     /* 0x0AA */ s8 demoFlags;
-    /* 0x0AB */ u8 unk_AB;
-    /* 0x0AC */ s8 loadMenuState;
-    /* 0x0AD */ s8 menuCounter;
+    /* 0x0AB */ u8 soundOutputMode;
+    /* 0x0AC */ s8 introState;
+    /* 0x0AD */ s8 introCounter;
     /* 0x0AE */ s8 bSkipIntro;
     /* 0x0AF */ char unk_AF[0x7];
     /* 0x0B6 */ s16 bootAlpha;
@@ -1209,8 +1209,8 @@ typedef struct GameStatus {
     /* 0x0BA */ s16 bootGreen;
     /* 0x0BC */ s16 bootRed;
     /* 0x0BE */ char unk_BE[94];
-    /* 0x11C */ Vec3f unk_11C;
-    /* 0x128 */ Vec3f playerTraceNormal;
+    /* 0x11C */ Vec3f playerGroundTraceAngles;
+    /* 0x128 */ Vec3f playerGroundTraceNormal;
     /* 0x134 */ u16 frameCounter;
     /* 0x136 */ char unk_136[2];
     /* 0x138 */ s32 nextRNG;
@@ -1218,11 +1218,11 @@ typedef struct GameStatus {
     /* 0x13E */ char unk_13E[2];
     /* 0x140 */ ShopItemEntity* shopItemEntities;
     /* 0x144 */ struct Shop* mapShop;
-    /* 0x148 */ s16 enableBackground; /* (bit 2 is also used for something) */
-    /* 0x14A */ s16 backgroundMinW;
-    /* 0x14C */ s16 backgroundMinH;
-    /* 0x14E */ s16 backgroundMaxW;
-    /* 0x150 */ s16 backgroundMaxH;
+    /* 0x148 */ s16 backgroundFlags; /* (bit 1 = enable, bit 2 is used for something else) */
+    /* 0x14A */ s16 backgroundMinX;
+    /* 0x14C */ s16 backgroundMinY;
+    /* 0x14E */ s16 backgroundMaxX;
+    /* 0x150 */ s16 backgroundMaxY;
     /* 0x152 */ s16 backgroundXOffset; /* (used for parallax scroll) */
     /* 0x154 */ UNK_PTR backgroundRaster;
     /* 0x158 */ UNK_PTR backgroundPalette;

@@ -370,9 +370,9 @@ void btl_state_update_victory(void) {
 
     if (gBattleState2 == BATTLE_STATES2_UNK_2) {
         func_8024E40C(2);
-        if (battleStatus->unk_8A == 3) {
+        if (battleStatus->nextMerleeSpellType == 3) {
             if ((s8) battleStatus->totalStarPoints == 0) {
-                battleStatus->unk_8A = 0;
+                battleStatus->nextMerleeSpellType = 0;
                 playerData->merleeTurnCount = 0;
                 playerData->merleeCastsLeft++;
             } else {
@@ -393,11 +393,11 @@ void btl_state_update_victory(void) {
             D_8029F248--;
         } else if (player->takeTurnScript == NULL || !does_script_exist(player->takeTurnID)) {
             player->takeTurnScript = NULL;
-            if (battleStatus->unk_8A != 3) {
+            if (battleStatus->nextMerleeSpellType != 3) {
                 gBattleState2 = BATTLE_STATES2_UNK_4;
             } else {
                 battleStatus->incrementStarPointDelay = 0x14;
-                battleStatus->unk_8A = 0;
+                battleStatus->nextMerleeSpellType = 0;
                 gBattleState2 = BATTLE_STATES2_UNK_4;
                 battleStatus->pendingStarPoints = battleStatus->totalStarPoints
                                         + battleStatus->pendingStarPoints + battleStatus->pendingStarPoints;

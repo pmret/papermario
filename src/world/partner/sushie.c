@@ -299,7 +299,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
 
     switch (funcTemp0) {
         case 0:
-            gGameStatusPtr->unk_7D = 1;
+            gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
             disable_player_static_collisions();
             disable_player_input();
             partnerNPC->pos.x = playerStatus->position.x;
