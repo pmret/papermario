@@ -3778,10 +3778,12 @@ segments:
     subsegments:
     - [0x464490, c, actor/chan]
     - [0x464560, c, actor/lee]
-    - [0x465D90, c]
-    - [0x4661E0, .data, actor/chan]
-    - [0x4697F0, .data, actor/lee]
-    - [0x4766F0, data, 4661E0]
+    - [0x465D90, c, actor/master1]
+    - [0x465D90, c, actor/master2]
+    - [0x465D90, c, actor/master3]
+    - [0x465D90, c, stage/mac_01]
+    - [0x47EDC0, c, stage/mac_02]
+    - [0x47EDC0, c, area]
   - dir: battle/area_hos
     type: code
     start: 0x47F0B0

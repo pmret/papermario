@@ -447,9 +447,7 @@ EvtSource N(8021E5DC) = {
     EVT_END
 };
 
-s32 N(vector3D_8021E940)[] = {
-    0x00000000, 0xFFFFFC18, 0x00000000,
-};
+Vec3i N(vector3D_8021E940) = { 0, -1000, 0 };
 
 s32 N(idleAnimations_8021E94C)[] = {
     STATUS_NORMAL,    NPC_ANIM_battle_goombario_default_idle,
@@ -534,10 +532,10 @@ ActorDesc N(goombario) = {
     .statusMessageOffset = { 10, 20 },
 };
 
-EvtSource N(takeTurn_802203F4);
-EvtSource N(idle_8021EB14);
-EvtSource N(handleEvent_8021EB24);
-EvtSource N(nextTurn_80220450);
+extern EvtSource N(takeTurn_802203F4);
+extern EvtSource N(idle_8021EB14);
+extern EvtSource N(handleEvent_8021EB24);
+extern EvtSource N(nextTurn_80220450);
 
 EvtSource N(init_Goombario) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802203F4)))
@@ -1008,7 +1006,7 @@ EvtSource N(nextTurn_80220450) = {
 };
 
 Formation N(formation_goombario) = {
-    { .actor = &N(goombario), .home = { .vec = N(vector3D_8021E940) }},
+    { .actor = &N(goombario), .home = { .vec = &N(vector3D_8021E940) }},
 };
 
 s32 N(idleAnimations_80220540)[] = {
@@ -1537,7 +1535,7 @@ EvtSource N(nextTurn_802221A0) = {
 };
 
 Formation N(formation_kooper) = {
-    { .actor = &N(kooper), .home = { .vec = N(vector3D_8021E940) }}
+    { .actor = &N(kooper), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
 s32 N(idleAnimations_80222290)[] = {
@@ -1891,7 +1889,7 @@ EvtSource N(nextTurn_80223298) = {
 };
 
 Formation N(formation_bombette) = {
-    { .actor = &N(bombette), .home = { .vec = N(vector3D_8021E940) }}
+    { .actor = &N(bombette), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
 s32 N(idleAnimations_80223388)[] = {
@@ -2253,7 +2251,7 @@ EvtSource N(nextTurn_80224320) = {
 };
 
 Formation N(formation_parakerry) = {
-    { .actor = &N(parakerry), .home = { .vec = N(vector3D_8021E940) }}
+    { .actor = &N(parakerry), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
 s32 N(idleAnimations_80224410)[] = {
@@ -2704,7 +2702,7 @@ EvtSource N(nextTurn_80225884) = {
 };
 
 Formation N(formation_bow) = {
-    { .actor = &N(bow), .home = { .vec = N(vector3D_8021E940) }}
+    { .actor = &N(bow), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
 s32 N(idleAnimations_80225974)[] = {
@@ -2821,141 +2819,6 @@ EvtSource N(init_Watt) = {
 ApiStatus func_80219188_465618(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80219188_465618);
 
-// s32 func_80219188_465618(Evt *script, s32 isInitialCall) {
-//     Actor *temp_s1;
-//     EffectInstance *temp_v1_2;
-//     EffectInstance *temp_v1_3;
-//     EffectInstance *temp_v1_4;
-//     EffectInstance *temp_v1_5;
-//     EffectInstance *temp_v1_6;
-//     EffectInstance *temp_v1_7;
-//     f32 temp_f12;
-//     f32 temp_f20;
-//     f32 temp_f22;
-//     f32 temp_f24;
-//     s32 temp_f6;
-//     UnkDuplighost* temp_s0;
-//     s32 temp_v0;
-//     s32 temp_v1;
-//     s8 temp_v0_2;
-//     UnkDuplighost *temp_s0_2;
-//     f64 phi_f0;
-//     EffectInstance *phi_v0;
-//     s32 phi_v0_2;
-
-//     temp_s1 = get_actor(script->owner1.actorID);
-//     if (isInitialCall != 0) {
-//         temp_s0 = heap_malloc(0x20);
-//         temp_s1->state.varTable[3] = temp_s0;
-//         temp_s0->unk_04 = 1;
-//         temp_s0->unk_08 = 0;
-//         temp_s0->unk_0C = 1;
-//         temp_s0->unk_10 = 0;
-//         if (temp_s1->debuff != 0xA) {
-
-//         }
-//         temp_s0->effect1 = playFX_73(0, temp_s1->currentPos.x, temp_s1->currentPos.y, temp_s1->currentPos.z, 0x10, 5, 0);
-//         if (temp_s1->debuff != 0xA) {
-
-//         }
-//         temp_s0->effect2 = playFX_73(1, temp_s1->currentPos.x, -1000.0f, temp_s1->currentPos.z, 0x10, 5, 0);
-//         temp_s0->flags = 1;
-//         temp_s0->debuff = (s32) temp_s1->debuff;
-//     }
-//     temp_s0_2 = temp_s1->state.varTable[3];
-//     phi_v0_2 = 2;
-//     if (temp_s0_2->flags != 0) {
-//         if ((temp_s0_2->unk_04 != 0) && (temp_s1->debuff != 8)) {
-//             temp_v0 = temp_s0_2->unk_08 + 0xF;
-//             temp_f12 = (f32) temp_v0;
-//             temp_s0_2->unk_08 = temp_v0;
-//             temp_s0_2->unk_08 = (s32) clamp_angle(temp_f12);
-//         }
-//         temp_f6 = (s32) (sin_rad(((f32) temp_s0_2->unk_08 * 6.28318f) / 360.0f) * 3.0f);
-//         temp_v0_2 = (s8) temp_f6;
-//         temp_s1->unk_19A = (s8) temp_f6;
-//         temp_f22 = temp_s1->currentPos.x + (f32) temp_s1->headOffset.x;
-//         phi_f0 = 4.8;
-//         if (temp_s1->debuff != 0xA) {
-//             phi_f0 = 0.0;
-//         }
-//         temp_f20 = (f32) ((f64) (temp_s1->currentPos.y + (f32) temp_s1->headOffset.y + (f32) temp_v0_2) + phi_f0);
-//         temp_f24 = temp_s1->currentPos.z + (f32) temp_s1->headOffset.z;
-//         if (temp_s0_2->unk_0C != 0) {
-//             temp_v1 = temp_s0_2->unk_10;
-//             switch (temp_v1) {                      /* irregular */
-//             case 0:
-//                 if (temp_s0_2->effect1 == 0) {
-//                     if (temp_s1->debuff != 0xA) {
-
-//                     }
-//                     temp_s0_2->effect1 = playFX_73(0, temp_f22, temp_f20, temp_f24, 0x10, 5, 0);
-//                 }
-//                 temp_v1_2 = temp_s0_2->effect2;
-//                 if (temp_v1_2 != 0) {
-//                     temp_v1_2->flags |= 0x10;
-//                     temp_s0_2->effect2 = NULL;
-//                 }
-//                 temp_s0_2->effect1->data->unk_04 = temp_f22;
-//                 temp_s0_2->effect1->data->unk_08 = temp_f20;
-//                 phi_v0 = temp_s0_2->effect1;
-// block_34:
-//                 phi_v0->data->unkC = temp_f24;
-//                 break;
-//             case 1:
-//                 temp_v1_3 = temp_s0_2->effect1;
-//                 if (temp_v1_3 != 0) {
-//                     temp_v1_3->flags |= 0x10;
-//                     temp_s0_2->effect1 = NULL;
-//                 }
-//                 if (temp_s0_2->effect2 == 0) {
-//                     if (temp_s1->debuff != 0xA) {
-
-//                     }
-//                     temp_s0_2->effect2 = playFX_73(1, temp_f22, temp_f20, temp_f24, MIPS2C_ERROR(Unable to find stack arg 0x10 in block), 5, 0);
-//                 }
-//                 temp_s0_2->effect2->data->unk4 = temp_f22;
-//                 temp_s0_2->effect2->data->unk_08 = temp_f20;
-//                 phi_v0 = temp_s0_2->effect2;
-//                 goto block_34;
-//             }
-//         } else {
-//             temp_v1_4 = temp_s0_2->effect1;
-//             if (temp_v1_4 != 0) {
-//                 temp_v1_4->flags |= 0x10;
-//                 temp_s0_2->effect1 = NULL;
-//             }
-//             temp_v1_5 = temp_s0_2->effect2;
-//             if (temp_v1_5 != 0) {
-//                 temp_v1_5->flags |= 0x10;
-//                 temp_s0_2->effect2 = NULL;
-//             }
-//         }
-//         if ((temp_s0_2->debuff != temp_s1->debuff) && (temp_s0_2->unk_0C != 0)) {
-//             temp_v1_6 = temp_s0_2->effect1;
-//             if (temp_v1_6 != 0) {
-//                 temp_v1_6->flags |= 0x10;
-//                 temp_s0_2->effect1 = NULL;
-//             }
-//             temp_v1_7 = temp_s0_2->effect2;
-//             if (temp_v1_7 != 0) {
-//                 temp_v1_7->flags |= 0x10;
-//                 temp_s0_2->effect2 = NULL;
-//             }
-//         }
-//         temp_s0_2->debuff = (s32) temp_s1->debuff;
-//         phi_v0_2 = 0;
-//     }
-//     return phi_v0_2;
-// }
-
-EvtSource N(idle_80225B68) = {
-    EVT_SET_PRIORITY(99)
-    EVT_CALL(func_80219188_465618)
-    EVT_RETURN
-    EVT_END
-};
-
 ApiStatus func_80219604_465A94(Evt* script, s32 isInitialCall) {
     UnkDuplighost* unkDuplighost = (UnkDuplighost*)get_actor(script->owner1.actorID)->state.varTable[3];
 
@@ -2971,6 +2834,13 @@ ApiStatus func_80219604_465A94(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
+
+EvtSource N(idle_80225B68) = {
+    EVT_SET_PRIORITY(99)
+    EVT_CALL(func_80219188_465618)
+    EVT_RETURN
+    EVT_END
+};
 
 ApiStatus func_80219658_465AE8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -3229,7 +3099,7 @@ EvtSource N(nextTurn_80226880) = {
 };
 
 Formation N(formation_watt) = {
-    { .actor = &N(watt), .home = { .vec = N(vector3D_8021E940) }}
+    { .actor = &N(watt), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
 s32 N(idleAnimations_8022697C)[] = {
@@ -3703,7 +3573,7 @@ EvtSource N(nextTurn_8022831C) = {
 };
 
 Formation N(formation_sushie) = {
-    { .actor = &N(sushie), .home = { .vec = N(vector3D_8021E940) }}
+    { .actor = &N(sushie), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
 s32 N(idleAnimations_8022840C)[] = {
@@ -3781,7 +3651,7 @@ ActorPartDesc N(partsTable_8022851C)[] = {
     },
 };
 
-EvtSource N(init_Lakilester);
+extern EvtSource N(init_Lakilester);
 
 ActorDesc N(lakilester) = {
     .flags = ACTOR_FLAG_FLYING,
@@ -3806,10 +3676,10 @@ ActorDesc N(lakilester) = {
     .statusMessageOffset = { 10, 20 },
 };
 
-EvtSource N(takeTurn_80228B78);
-EvtSource N(idle_80228604);
-EvtSource N(handleEvent_80228614);
-EvtSource N(nextTurn_80229658);
+extern EvtSource N(takeTurn_80228B78);
+extern EvtSource N(idle_80228604);
+extern EvtSource N(handleEvent_80228614);
+extern EvtSource N(nextTurn_80229658);
 
 EvtSource N(init_Lakilester) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80228B78)))
@@ -4098,7 +3968,7 @@ EvtSource N(nextTurn_80229658) = {
 };
 
 Formation N(formation_lakilester) = {
-    { .actor = &N(lakilester), .home = { .vec = N(vector3D_8021E940) }}
+    { .actor = &N(lakilester), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
 ApiStatus func_802197B8_465C48(Evt* script, s32 isInitialCall) {
