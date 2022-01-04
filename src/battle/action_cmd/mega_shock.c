@@ -12,7 +12,6 @@ extern s32 D_802943C0;
 extern HudElementAnim D_80108B80;
 extern HudElementAnim D_80292374;
 
-void btl_set_popup_duration(s32);
 void sfx_adjust_env_sound_params(s32, s32, s32, s32);
 
 typedef struct structD_802A9930_42E340 {

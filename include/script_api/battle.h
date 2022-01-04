@@ -304,6 +304,14 @@ ApiStatus func_80276EFC(Evt* script, s32 isInitialCall);
 ApiStatus func_802D7520(Evt* script, s32 isInitialCall);
 ApiStatus func_802D75D8(Evt* script, s32 isInitialCall);
 ApiStatus func_80273444(Evt *script, s32 isInitialCall);
+ApiStatus GetActionCommandMode(Evt*, s32);
+ApiStatus SetActionCommandMode(Evt*, s32);
+ApiStatus func_80269EAC(Evt*, s32);
+ApiStatus WaitForState(Evt*, s32);
+ApiStatus func_8026E020(Evt*, s32);
+ApiStatus GetActionResult(Evt*, s32);
+ApiStatus SetBattleState(Evt*, s32);
+ApiStatus func_8027D434(Evt*, s32);
 
 extern EvtSource PlayerScriptDispatcher;
 extern EvtSource PeachScriptDispatcher;

@@ -1,10 +1,11 @@
 #include "common.h"
 #include "npc.h"
 
+// TODO, can we remove this once all data disasm'ed?
 extern QuizRequirements N(quizRequirements)[];
 
 ApiStatus N(UnkQuizFunc)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemyID;
+    Enemy* enemy = script->owner1.enemy;
     u16 phi_s0 = evt_get_variable(script, EVT_SAVE_FLAG(1768));
     u16 phi_s7 = evt_get_variable(script, EVT_SAVE_FLAG(1769));
     u16 temp_s6 = evt_get_variable(script, EVT_SAVE_VAR(350));

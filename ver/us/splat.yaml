@@ -233,7 +233,7 @@ segments:
     - [0x46AE0, c, os/46ae0_len_170]
     - [0x46C50, c, os/46c50_len_20]
     - [0x46C70, c, os/46c70_len_e00]
-    - [0x47A60, hasm, os/osGetCause]
+    - [0x47A60, hasm, os/__osGetCause]
     - [0x47A70, c, os/47a70_len_10]
     - [0x47A80, c, os/47a80_len_10]
     - [0x47A90, c, os/47a90_len_50]
@@ -3791,22 +3791,34 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x47F0B0, c]
-    - [0x47F0D0, c]
-    - [0x47F570, c]
-    - [0x4800C0, data]
+    - [0x47F0B0, c, actor/goombario_tutor]
+    - [0x47F0D0, c, actor/ember]
+    - [0x47F200, c, actor/magikoopa]
+    - [0x47F570, c, stage/hos_01]
+    - [0x47F570, c, stage/hos_00]
+    - [0x4800C0, c, stage/hos_02]
+    - [0x4800C0, c, area]
+    - [0x4800C0]
   - dir: battle/area_nok
     type: code
     start: 0x48D1A0
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x48D1A0, c]
-    - [0x48D700, c]
-    - [0x48DA50, c]
-    - [0x48DBC0, c]
-    - [0x48DCF0, c]
-    - [0x48DFC0, data]
+    - [0x48D1A0, c, area]
+    - [0x48D1A0, c, actor/goomba]
+    - [0x48D420, c, actor/paragoomba]
+    - [0x48D700, c, actor/spiked_goomba]
+    - [0x48D980, c, actor/koopa_troopa]
+    - [0x48DA50, c, actor/fuzzy]
+    - [0x48DBC0, c, actor/paratroopa]
+    - [0x48DCF0, c, actor/kent_c_koopa]
+    - [0x48DFC0, c, stage/nok_01]
+    - [0x48DFC0, c, stage/nok_02]
+    - [0x48DFC0, c, stage/nok_03]
+    - [0x48DFC0, c, stage/nok_04]
+    - [0x48DFC0]
   - dir: battle/area_trd_part_1
     type: code
     start: 0x4A10A0
@@ -6502,7 +6514,14 @@ segments:
     subsegments:
     - [0x9691C0,       c, 9691C0]
     - [0x9694C0,       c, 9694C0]
-    - [0x96CC30,   .data, 9694C0]
+    - start: 0x96CC30
+      type: .data
+      name: 9694C0
+      subsegments:
+      - [0x96CC30,   .data, 9694C0]
+      - [0x971F98,     vtx, vtx/971F98]
+      - [0x9722B8,     vtx, vtx/9722B8]
+      - [0x973578]
     - [0x9780D0]
   - name: isk_01
     dir: world/area_isk/isk_01

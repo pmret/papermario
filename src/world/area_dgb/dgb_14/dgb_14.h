@@ -6,5 +6,5 @@
 
 #define NAMESPACE dgb_14
 
-EvtSource N(main);
-EvtSource N(makeEntities);
+extern EvtSource N(main);
+extern EvtSource N(makeEntities);

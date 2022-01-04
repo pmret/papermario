@@ -1,5 +1,3 @@
-#include "ultra64.h"
-
 #ifndef _DEAD_H_
 #define _DEAD_H_
 
@@ -92,8 +90,8 @@
 #define guTranslateF dead_guTranslateF
 #define get_model_from_list_index dead_get_model_from_list_index
 #define get_model_list_index_from_tree_index dead_get_model_list_index_from_tree_index
-#define guMtxCatF osSiRawReadIo
-#define guMtxIdentF osGetCause
+#define guMtxCatF dead_guMtxCatF
+#define guMtxIdentF dead_guMtxIdentF
 //#define sqrtf dead_sqrtf // <- This somehow breaks things
 
 #endif

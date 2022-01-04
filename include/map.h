@@ -28,7 +28,7 @@ typedef struct MapConfig {
     /* 0x38 */ BackgroundHeader* background;
     /* 0x3C */ union {
         s32 msgID;
-        UNK_FUN_PTR(get);
+        s32 (*get)(void);
     } tattle;
 } MapConfig; // size = 0x40
 

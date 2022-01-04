@@ -1,4 +1,6 @@
 #include "dgb_04.h"
+#include "sprite.h"
+#include "world/partners.h"
 #include "sprite/npc/sentinel.h"
 #include "message_ids.h"
 
@@ -737,7 +739,7 @@ ApiStatus N(func_80242154_C38684)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = evt_get_variable(script, *args);
+    NpcAISettings* aiSettings =(NpcAISettings*) evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;

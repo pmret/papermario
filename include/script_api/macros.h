@@ -364,11 +364,11 @@
 /// `VAR &= VALUE`
 #define EVT_BITWISE_AND(VAR, VALUE)             EVT_CMD(EVT_OP_BITWISE_AND, VAR, VALUE),
 
-/// `VAR |= VALUE`
-#define EVT_BITWISE_OR(VAR, VALUE)              EVT_CMD(EVT_OP_BITWISE_OR, VAR, VALUE),
-
 /// `VAR &= CONST`, but CONST is treated as-is rather than dereferenced with evt_get_variable.
 #define EVT_BITWISE_AND_CONST(VAR, CONST)       EVT_CMD(EVT_OP_BITWISE_AND_CONST, VAR, CONST),
+
+/// `VAR |= VALUE`
+#define EVT_BITWISE_OR(VAR, VALUE)              EVT_CMD(EVT_OP_BITWISE_OR, VAR, VALUE),
 
 /// `VAR |= CONST`, but CONST is treated as-is rather than dereferenced with evt_get_variable.
 #define EVT_BITWISE_OR_CONST(VAR, CONST)        EVT_CMD(EVT_OP_BITWISE_OR_CONST, VAR, CONST),

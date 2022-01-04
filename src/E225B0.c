@@ -34,7 +34,6 @@ extern void (*D_8010C93C)(void);
 extern struct802B7C78* D_802B7C78_E23228;
 extern struct8015A578 D_8015A578;
 
-void fold_update(s32, s32, s32, s32, s32, s32, s32);
 void fold_appendGfx_component(s32, UnknownCommand*, s32, Matrix4f*);
 void func_802B735C_E2290C(void);
 

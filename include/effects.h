@@ -2,6 +2,7 @@
 #define _EFFECTS_H_
 
 #include "types.h"
+#include "common_structs.h"
 
 typedef struct {
     char unk_00[0x38];

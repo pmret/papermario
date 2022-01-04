@@ -1,5 +1,6 @@
 #include "common.h"
 #include "sprite.h"
+#include "effects.h"
 #include "battle/battle.h"
 
 s32 func_80254250(void) {
@@ -316,7 +317,7 @@ void func_80254C50(Actor* actor) {
                 partTable->opacity = phi_s6 - (sp29C * phi_s4);
                 func_802591EC(0, partTable, clamp_angle(scale + 0xB4), &sp218, 1);
                 partTable->opacity = temp_s0_2;
-            } 
+            }
         }
     }
 }
@@ -389,16 +390,16 @@ void func_802552EC(s32 arg0, Actor* actor) {
     guMtxCatF(sp18, sp58, sp198);
     guMtxCatF(sp198, sp98, spD8);
     guScaleF(sp118, actor->scale.x * SPRITE_PIXEL_SCALE * actor->scalingFactor,
-                    actor->scale.y * SPRITE_PIXEL_SCALE * actor->scalingFactor, 
+                    actor->scale.y * SPRITE_PIXEL_SCALE * actor->scalingFactor,
                     actor->scale.z * SPRITE_PIXEL_SCALE);
     guMtxCatF(sp118, spD8, sp298);
 
     numParts = actor->numParts;
     partTable = actor->partsTable;
     for (i = 0; i < numParts; i++) {
-        if ((partTable->idleAnimations == NULL) || (partTable->flags & ACTOR_PART_FLAG_2)) {  
+        if ((partTable->idleAnimations == NULL) || (partTable->flags & ACTOR_PART_FLAG_2)) {
             partTable = partTable->nextPart;
-            continue; 
+            continue;
         }
 
         decorationTable = partTable->decorationTable;
@@ -703,7 +704,7 @@ void update_player_actor_shadow(void) {
         func_802549F4(player);
     }
 
-    shadow = get_shadow_by_index(player->shadow);
+    shadow = get_shadow_by_index((s32) player->shadow);
     shadow->flags &= ~SHADOW_FLAGS_1;
 
     if (!battleStatus->outtaSightActive) {
@@ -899,7 +900,7 @@ void func_8025D158(ActorPart* part, s32 decorationIndex) {
 INCLUDE_ASM(s32, "182B30", func_8025D160);
 
 void func_8025D290(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->unk_0C->unk_2C = 5;
+    part->decorationTable->unk_8B0[decorationIndex]->data->unk_2C = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D2B0);
@@ -916,25 +917,25 @@ void func_8025D4A0(ActorPart* part, s32 decorationIndex) {
 INCLUDE_ASM(s32, "182B30", func_8025D4C8);
 
 void func_8025D620(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->unk_0C->unk_2C = 5;
+    part->decorationTable->unk_8B0[decorationIndex]->data->unk_2C = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D640);
 
 void func_8025D6FC(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->unk_00 |= 0x10;
+    part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D71C);
 
 void func_8025D810(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->unk_00 |= 0x10;
+    part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D830);
 
 void func_8025D8EC(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->unk_00 |= 0x10;
+    part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D90C);
@@ -950,12 +951,11 @@ void func_8025DBC8(ActorPart* part, s32 decorationIndex) {
 INCLUDE_ASM(s32, "182B30", func_8025DBD0);
 
 void func_8025DD40(ActorPart* actorPart, s32 decorationIndex) {
-    actorPart->decorationTable->unk_8B0[decorationIndex]->unk_0C->unk_2C = 5;
+    actorPart->decorationTable->unk_8B0[decorationIndex]->data->unk_2C = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025DD60);
 
 void func_8025DE88(ActorPart* actorPart, s32 decorationIndex) {
-    actorPart->decorationTable->unk_8B0[decorationIndex]->unk_00 |= 0x10;
+    actorPart->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
 }
-

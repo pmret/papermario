@@ -279,7 +279,7 @@ def fix_args(self, func, args, info):
                             call = f"0x{argNum:X}"
                         else:
                             call = make_anim_macro(self, sprite, palette, anim)
-                except ValueError:
+                except KeyError:
                         call = f"0x{argNum:06X}"
                 new_args.append(call)
             elif info[i] == "CustomMsg":
@@ -806,8 +806,8 @@ class ScriptDisassembler:
         elif opcode == 0x3D: self.write_line(f"EVT_USE_FLAG_ARRAY({self.var(argv[0])})")
         elif opcode == 0x3E: self.write_line(f"EVT_MALLOC_ARRAY({self.var(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x3F: self.write_line(f"EVT_BITWISE_AND({self.var(argv[0])}, {self.var(argv[1])})")
-        elif opcode == 0x40: self.write_line(f"EVT_BITWISE_OR({self.var(argv[0])}, {self.var(argv[1])})")
-        elif opcode == 0x41: self.write_line(f"EVT_BITWISE_AND_CONST({self.var(argv[0])}, 0x{argv[1]:X})")
+        elif opcode == 0x40: self.write_line(f"EVT_BITWISE_AND_CONST({self.var(argv[0])}, {self.var(argv[1])})")
+        elif opcode == 0x41: self.write_line(f"EVT_BITWISE_OR({self.var(argv[0])}, 0x{argv[1]:X})")
         elif opcode == 0x42: self.write_line(f"EVT_BITWISE_OR_CONST({self.var(argv[0])}, 0x{argv[1]:X})")
         elif opcode == 0x43:
             func = self.addr_ref(argv[0])

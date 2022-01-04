@@ -519,9 +519,6 @@ void set_curtain_fade(f32 fade);
 void crash_screen_init(void);
 void crash_screen_set_draw_info(u16* frameBufPtr, s16 width, s16 height);
 
-// Dead functions:
-void dead_guTranslateF(float mf[4][4], float x, float y, float z); // Has to be externed for codegen to work!
-
 void func_800495A0(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
 void func_800496B8(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
 void func_80049C04(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
@@ -532,9 +529,20 @@ void func_8004A124(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThin
 void func_8004A3E8(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
 void func_8004A73C(Evt* script);
 
-s32 create_generic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void));
+// This legally allows all functions to be pointers without warnings.
+// Perhaps the void arg functions can be changed later to remove this need.
+typedef union {
+  void (*func1)(Evt*, s32);
+  void (*func2)(void);
+} WorldArgs __attribute__ ((__transparent_union__));
+
+s32 create_generic_entity_world(WorldArgs, WorldArgs);
+
 EntityModel* get_entity_model(s32 idx);
 f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z);
+void fold_update(u32, s32, s32, s32, s32, s32, s32);
+s32 func_8013A704(s32);
+void free_generic_entity(s32);
 
 void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4, s32 arg5);
 void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
@@ -644,6 +652,23 @@ void func_8024EFE0(f32 x, f32 y, f32 z, s32, s32, s32);
 void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a);
 s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion);
 s32 calc_partner_test_enemy(void);
+void reset_actor_blur(Actor*);
+s32 func_8025C8A0(s32, ActorPart*);
+void func_8025CD28(s32, ActorPart*);
+void func_8025D158(ActorPart*, s32);
+void func_8025D290(ActorPart*, s32);
+void func_8025D3C4(ActorPart*, s32);
+void func_8025D4A0(ActorPart*, s32);
+void func_8025D620(ActorPart*, s32);
+void func_8025D6FC(ActorPart*, s32);
+void func_8025D810(ActorPart*, s32);
+void func_8025D8EC(ActorPart*, s32);
+void func_8025DA60(ActorPart*, s32);
+void func_8025DBC8(ActorPart*, s32);
+void func_8025DD40(ActorPart*, s32);
+void func_8025DE88(ActorPart*, s32);
+void func_800E9894(void);
+void func_8013A854(u32);
 
 void init_encounters_ui(void);
 void initialize_collision(void);

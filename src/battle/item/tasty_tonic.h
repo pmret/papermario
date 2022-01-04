@@ -9,8 +9,8 @@
 
 ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall);
 
-EvtSource N(UseItemWithEffect);
-EvtSource N(PlayerGoHome);
-EvtSource N(DrinkItem);
+extern EvtSource N(UseItemWithEffect);
+extern EvtSource N(PlayerGoHome);
+extern EvtSource N(DrinkItem);
 
 #endif
