@@ -50,7 +50,7 @@ f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z) {
 void phys_reset_spin_history(void) {
     s32 i;
 
-    mem_clear(&D_8010F250, sizeof(Temp8010F250));
+    mem_clear(&gPlayerSpinState, sizeof(PlayerSpinState));
     gSpinHistoryBufferPos = 0;
 
     for (i = 0; i < ARRAY_COUNT(gSpinHistoryPosAngle); i++) {
@@ -71,7 +71,7 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", phys_peach_update);
 void set_action_state(s32 actionState) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
-    Temp8010F250* unknownStruct = &D_8010F250;
+    PlayerSpinState* spinState = &gPlayerSpinState;
 
     if (playerStatus->flags & 0x200) {
         playerStatus->flags &= ~0x200;
@@ -143,8 +143,8 @@ void set_action_state(s32 actionState) {
     playerStatus->flags &= ~0x20000;
     playerStatus->animFlags &= ~0x10000;
 
-    if (unknownStruct->unk_30 != 0) {
-        sfx_stop_sound(unknownStruct->unk_30);
+    if (spinState->spinSoundID != 0) {
+        sfx_stop_sound(spinState->spinSoundID);
     }
 
     if (playerStatus->unk_D8) {
@@ -214,8 +214,8 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", check_input_jump, void);
 
 void check_input_spin(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Temp8010F250* temp_8010F250 = &D_8010F250;
-    Temp8010F250* temp2 = temp_8010F250;
+    PlayerSpinState* spinState = &gPlayerSpinState;
+    PlayerSpinState* temp2 = spinState;
 
     if (!(playerStatus->flags & (PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO | PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) &&
         !(playerStatus->animFlags & 1) &&
@@ -226,15 +226,15 @@ void check_input_spin(void) {
         s32 btnPressed = playerStatus->pressedButtons & Z_TRIG;
 
         // TODO
-        if (actionState != 0x21) {
-            if (actionState < 0x22) {
-                if (actionState < 3) {
+        if (actionState != ACTION_STATE_RIDE) {
+            if (actionState < ACTION_STATE_STEP_UP) {
+                if (actionState < ACTION_STATE_JUMP) {
                     if (actionState >= 0 && !(playerStatus->animFlags & 0x10000)) {
-                        if (btnPressed || temp_8010F250->unk_01) {
+                        if (btnPressed || spinState->hasBufferedSpin) {
                             set_action_state(ACTION_STATE_SPIN);
-                            if (temp_8010F250->unk_01 != 0) {
-                                if (temp_8010F250->unk_08 != 0 || temp_8010F250->unk_0C != 0) {
-                                    playerStatus->prevActionState = temp2->unk_07;
+                            if (spinState->hasBufferedSpin != FALSE) {
+                                if (spinState->bufferedStickAxis[0] != 0 || spinState->bufferedStickAxis[1] != 0) {
+                                    playerStatus->prevActionState = temp2->prevActionState;
                                 } else {
                                     playerStatus->prevActionState = ACTION_STATE_IDLE;
                                 }

@@ -38,7 +38,7 @@
 
 extern s32 D_80108068[];
 extern s32 D_801083D8[];
-extern f32 D_8010CFC0;
+extern f32 wPartnerTetherDistance;
 extern s16 D_8010CFC8;
 extern s16 D_8010CFCA;
 extern s16 D_8010CFCE;
@@ -83,10 +83,10 @@ s32 D_800F7FFC = 7;
 s32 D_800F8000[] = { 8, 0, 0, 0 };
 s32 D_800F8010[] = { _3251D0_ROM_START, _3251D0_ROM_END, (s32) &D_802C05CC, 0x00000000 };
 s32 D_800F8020 = 0;
-s32 D_800F8024 = 0;
-s32 D_800F8028 = 0;
-s32 D_800F802C = 0;
-f32 D_800F8030 = 0.0f;
+s32 wPartnerMoveGoalX = 0;
+s32 wPartnerMoveGoalZ = 0;
+s32 wPartnerMoveTime = 0;
+f32 wPartnerMoveSpeed = 0.0f;
 s8 D_800F8034[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 s16 D_800F803A = 0;
 
@@ -857,16 +857,16 @@ void enable_partner_ai(void) {
 }
 
 void partner_set_tether_distance(f32 dist) {
-    D_8010CFC0 = dist;
+    wPartnerTetherDistance = dist;
 }
 
 void repartner_set_tether_distance(void) {
-    D_8010CFC0 = 40.0f;
+    wPartnerTetherDistance = 40.0f;
 }
 
-void partner_set_goal_pos(s32 arg0, s32 arg1) {
-    D_800F8024 = arg0;
-    D_800F8028 = arg1;
+void partner_set_goal_pos(s32 x, s32 z) {
+    wPartnerMoveGoalX = x;
+    wPartnerMoveGoalZ = z;
 }
 
 void func_800EF3D4(s16 arg0) {
@@ -876,7 +876,7 @@ void func_800EF3D4(s16 arg0) {
 void func_800EF3E4(void) {
     D_8010CFC8 = 15;
     D_8010CFCA = 0;
-    D_800F802C = 10;
+    wPartnerMoveTime = 10;
     D_8010CFCE = 0;
 }
 
@@ -935,20 +935,20 @@ void partner_disable_input(void) {
 
 void partner_do_player_collision(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 sp28;
-    f32 sp2C;
-    f32 sp30;
-    f32 sp34;
-    f32 sp38;
-    f32 sp3C;
-    f32 sp40;
+    f32 playerScreenX;
+    f32 playerScreenY;
+    f32 playerScreenZ;
+    f32 partnerScreenX;
+    f32 partnerScreenY;
+    f32 partnerScreenZ;
+    f32 W;
 
-    transform_point(gCameras->perspectiveMatrix, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 1.0f, &sp28, &sp2C, &sp30, &sp34);
-    transform_point(gCameras->perspectiveMatrix, partner->pos.x, partner->pos.y, partner->pos.z, 1.0f, &sp38, &sp3C, &sp40, &sp34);
-    sp28 = fabsf(sp28 - sp38);
-    sp2C = fabsf(sp2C - sp3C);
-    sp30 = fabsf(sp30 - sp40);
-    if (sp28 <= (partner->collisionRadius + playerStatus->colliderDiameter) * 0.9f && sp2C <= partner->collisionHeight + playerStatus->colliderHeight && sp30 <= 4.0) {
+    transform_point(gCameras->perspectiveMatrix, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 1.0f, &playerScreenX, &playerScreenY, &playerScreenZ, &W);
+    transform_point(gCameras->perspectiveMatrix, partner->pos.x, partner->pos.y, partner->pos.z, 1.0f, &partnerScreenX, &partnerScreenY, &partnerScreenZ, &W);
+    playerScreenX = fabsf(playerScreenX - partnerScreenX);
+    playerScreenY = fabsf(playerScreenY - partnerScreenY);
+    playerScreenZ = fabsf(playerScreenZ - partnerScreenZ);
+    if (playerScreenX <= (partner->collisionRadius + playerStatus->colliderDiameter) * 0.9f && playerScreenY <= partner->collisionHeight + playerStatus->colliderHeight && playerScreenZ <= 4.0) {
         npc_move_heading(partner, 1.0f, atan2(playerStatus->position.x, playerStatus->position.z, partner->pos.x, partner->pos.z));
         add_vec2D_polar(&partner->pos.x, &partner->pos.z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
     }

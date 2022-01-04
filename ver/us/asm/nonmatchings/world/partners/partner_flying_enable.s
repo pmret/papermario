@@ -98,10 +98,10 @@ glabel partner_flying_enable
 /* 86918 800ED468 00621821 */  addu      $v1, $v1, $v0
 /* 8691C 800ED46C 8C63835C */  lw        $v1, %lo(gPartnerAnimations+0x14)($v1)
 /* 86920 800ED470 24020010 */  addiu     $v0, $zero, 0x10
-/* 86924 800ED474 3C018010 */  lui       $at, %hi(D_800F802C)
-/* 86928 800ED478 AC22802C */  sw        $v0, %lo(D_800F802C)($at)
-/* 8692C 800ED47C 3C018011 */  lui       $at, %hi(D_8010CFC0)
-/* 86930 800ED480 E420CFC0 */  swc1      $f0, %lo(D_8010CFC0)($at)
+/* 86924 800ED474 3C018010 */  lui       $at, %hi(wPartnerMoveTime)
+/* 86928 800ED478 AC22802C */  sw        $v0, %lo(wPartnerMoveTime)($at)
+/* 8692C 800ED47C 3C018011 */  lui       $at, %hi(wPartnerTetherDistance)
+/* 86930 800ED480 E420CFC0 */  swc1      $f0, %lo(wPartnerTetherDistance)($at)
 /* 86934 800ED484 0C03A96E */  jal       func_800EA5B8
 /* 86938 800ED488 AE030028 */   sw       $v1, 0x28($s0)
 /* 8693C 800ED48C 8E020000 */  lw        $v0, ($s0)

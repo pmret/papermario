@@ -2120,16 +2120,23 @@ typedef struct {
     /* 0x11630 */ Mtx matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 
-typedef struct Temp8010F250 {
-    /* 0x00 */ s8 unk_00;
-    /* 0x01 */ s8 unk_01;
-    /* 0x02 */ char unk_02[5];
-    /* 0x07 */ s8 unk_07;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ char unk_10[0x20];
-    /* 0x30 */ s32 unk_30;
-} Temp8010F250; // size = 0x34
+typedef struct PlayerSpinState {
+    /* 0x00 */ s8 stopSoundTimer;
+    /* 0x01 */ s8 hasBufferedSpin;
+    /* 0x02 */ s8 hitWallTime; // incremented while blocked by a wall
+    /* 0x03 */ s8 spinCountdown;
+    /* 0x04 */ s32 prevActionState;
+    /* 0x08 */ s32 bufferedStickAxis[2];
+    /* 0x10 */ f32 spinDirectionMagnitude;
+    /* 0x14 */ f32 spinDirection[2];
+    /* 0x1C */ f32 inputMagnitude;
+    /* 0x20 */ f32 spinRate;
+    /* 0x24 */ f32 speedScale;
+    /* 0x28 */ f32 frictionScale;
+    /* 0x2C */ s16 initialSpinTime;
+    /* 0x2E */ s16 fullSpeedSpinTime;
+    /* 0x30 */ s32 spinSoundID;
+} PlayerSpinState; // size = 0x34
 
 typedef struct PartnerActionStatus {
     /* 0x000 */ union {

@@ -1409,6 +1409,7 @@ enum ActionStates {
     ACTION_STATE_IDLE                           = 0x00000000,
     ACTION_STATE_WALK                           = 0x00000001,
     ACTION_STATE_RUN                            = 0x00000002,
+    // all states above are considered locomotion states
     ACTION_STATE_JUMP                           = 0x00000003,
     ACTION_STATE_BOUNCE                         = 0x00000004,  ///< Used with Kooper
     ACTION_STATE_HOP                            = 0x00000005,  ///< Released A before apex of jump
