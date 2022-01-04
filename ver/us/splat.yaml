@@ -3795,7 +3795,7 @@ segments:
     - [0x47F0D0, c, actor/ember]
     - [0x47F200, c, actor/magikoopa]
     - [0x47F570, c, stage/hos_01]
-    - [0x47F570, c, stage/hos_00]
+    - [0x4800C0, c, stage/hos_00]
     - [0x4800C0, c, stage/hos_02]
     - [0x4800C0, c, area]
     - [0x4800C0]
