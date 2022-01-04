@@ -487,7 +487,7 @@ void btl_state_update_defeat(void) {
 
             if (player->debuff != 0) {
                 if (player->debuff == 7) {
-                    sfx_play_sound(SOUND_E7);
+                    sfx_play_sound(SOUND_FROZEN_SHATTER);
                     player->unk_228->flags |= EFFECT_INSTANCE_FLAGS_10;
                     player->unk_228 = NULL;
                 }

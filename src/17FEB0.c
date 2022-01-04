@@ -114,7 +114,7 @@ s32 calc_item_damage_enemy(void) {
         }
     }
     if (targetActor->stoneStatus == STATUS_STONE) {
-        sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
+        sfx_play_sound_at_position(SOUND_IMMUNE, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
         func_8024EFE0(actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z, 0, 1, 1);
         show_damage_popup(actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z, 0, 0);
         
@@ -147,7 +147,7 @@ s32 calc_item_damage_enemy(void) {
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
             phi_fp = 2;
             dispatchEvent = EVENT_UNKNOWN_TRIGGER;
-            sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
+            sfx_play_sound_at_position(SOUND_IMMUNE, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
         } else {
             battleStatus->lastAttackDamage = 0;
             dispatchEvent = EVENT_UNKNOWN_TRIGGER;
@@ -172,7 +172,7 @@ s32 calc_item_damage_enemy(void) {
     if (targetActorPart->flags & ACTOR_PART_FLAG_2000) {
         dispatch_event_actor(targetActor, dispatchEvent);
         func_8024EFE0(actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z, 0, 1, 3);
-        sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
+        sfx_play_sound_at_position(SOUND_IMMUNE, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
         return 2;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_2000) {
@@ -400,18 +400,18 @@ block_80:
         if (sp18 == 0) {
             func_80267018(targetActor, 1);
             if (isFireDamage) {
-                sfx_play_sound_at_position(SOUND_FIRE_DAMAGE, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_FIRE, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
             } else if (isElectricDamage) {
-                sfx_play_sound_at_position(SOUND_ELECTRIC_DAMAGE, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_SHOCK, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
             } else if (isIceDamage) {
-                sfx_play_sound_at_position(SOUND_FREEZE_DAMAGE, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_ICE, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
             } else {
-                sfx_play_sound_at_position(SOUND_E9, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
+                sfx_play_sound_at_position(SOUND_HIT_NORMAL, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
             }
         }
     }
     if (battleStatus->lastAttackDamage <= 0 && wasStatusInflicted && targetActorPart->flags & ACTOR_FLAG_2000) {
-        sfx_play_sound_at_position(SOUND_10C, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
+        sfx_play_sound_at_position(SOUND_IMMUNE, 0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z);
     }
     if (battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP && wasStatusInflicted) {
         attackScript = start_script(DoSleepHit, 10, 0);

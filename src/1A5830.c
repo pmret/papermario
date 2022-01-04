@@ -45,60 +45,60 @@ void play_hit_sound(Actor* actor, f32 x, f32 y, f32 z, u32 hitSound) {
 
     switch (hitSound) {
         case HIT_SOUND_MISS:
-            sfx_play_sound_at_position(SOUND_10C, 0, x, y, z);
+            sfx_play_sound_at_position(SOUND_IMMUNE, 0, x, y, z);
             break;
         case HIT_SOUND_BONES:
-            sfx_play_sound_at_position(SOUND_10D, 0, x, y, z);
+            sfx_play_sound_at_position(SOUND_HIT_BONES, 0, x, y, z);
             break;
         case HIT_SOUND_NORMAL:
             switch (actorClass) {
                 case ACTOR_CLASS_PLAYER:
-                    sfx_play_sound_at_position(SOUND_E1, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_PLAYER_NORMAL, 0, x, y, z);
                     break;
                 case ACTOR_CLASS_PARTNER:
-                    sfx_play_sound_at_position(SOUND_E9, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_NORMAL, 0, x, y, z);
                     break;
                 case ACTOR_CLASS_ENEMY:
-                    sfx_play_sound_at_position(SOUND_E9, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_NORMAL, 0, x, y, z);
                     break;
             }
             break;
         case HIT_SOUND_FIRE:
             switch (actorClass) {
                 case ACTOR_CLASS_PLAYER:
-                    sfx_play_sound_at_position(SOUND_E2, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_PLAYER_FIRE, 0, x, y, z);
                     break;
                 case ACTOR_CLASS_PARTNER:
-                    sfx_play_sound_at_position(SOUND_FIRE_DAMAGE, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_FIRE, 0, x, y, z);
                     break;
                 case ACTOR_CLASS_ENEMY:
-                    sfx_play_sound_at_position(SOUND_FIRE_DAMAGE, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_FIRE, 0, x, y, z);
                     break;
             }
             break;
         case HIT_SOUND_ICE:
             switch (actorClass) {
                 case ACTOR_CLASS_PLAYER:
-                    sfx_play_sound_at_position(SOUND_E3, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_PLAYER_ICE, 0, x, y, z);
                     break;
                 case ACTOR_CLASS_PARTNER:
-                    sfx_play_sound_at_position(SOUND_FREEZE_DAMAGE, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_ICE, 0, x, y, z);
                     break;
                 case ACTOR_CLASS_ENEMY:
-                    sfx_play_sound_at_position(SOUND_FREEZE_DAMAGE, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_ICE, 0, x, y, z);
                     break;
             }
             break;
         case HIT_SOUND_SHOCK:
             switch (actorClass) {
                 case ACTOR_CLASS_PLAYER:
-                    sfx_play_sound_at_position(SOUND_37A, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_PLAYER_SHOCK, 0, x, y, z);
                     break;
                 case ACTOR_CLASS_PARTNER:
-                    sfx_play_sound_at_position(SOUND_ELECTRIC_DAMAGE, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_SHOCK, 0, x, y, z);
                     break;
                 case ACTOR_CLASS_ENEMY:
-                    sfx_play_sound_at_position(SOUND_ELECTRIC_DAMAGE, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_HIT_SHOCK, 0, x, y, z);
                     break;
             }
             break;
@@ -718,7 +718,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     }
 
     if ((battleStatus->lastAttackDamage <= 0 && !statusInflicted2 && !isEnchanted) || targetPart->flags & ACTOR_PART_FLAG_2000) {
-        sfx_play_sound_at_position(SOUND_10C, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_IMMUNE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP) && statusInflicted) {
@@ -762,7 +762,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         script->varTable[3] = (s32) target;
-        sfx_play_sound_at_position(SOUND_FREEZE_DAMAGE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_HIT_ICE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK) && statusInflicted) {
         script = start_script(&DoShrinkHit, 10, 0);
@@ -788,7 +788,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         && !has_enchanted_part(attacker)
     ) {
         // enum mismatch? shock vs explode :raised_eyebrow:
-        sfx_play_sound_at_position(SOUND_ELECTRIC_DAMAGE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        sfx_play_sound_at_position(SOUND_HIT_SHOCK, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         func_80251474(attacker);
         dispatch_damage_event_actor_1(attacker, 1, EVENT_SHOCK_HIT);
         return HIT_RESULT_TRIGGERED_EXPLODE;
