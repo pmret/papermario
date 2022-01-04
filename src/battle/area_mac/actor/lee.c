@@ -780,14 +780,14 @@ EvtSource N(8021F6E0) = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LW(2), 0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 0, 5)
-    EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, ANIM_90006, ANIM_90006, ANIM_90006)
+    EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
     EVT_CALL(func_80218300_464790, LW(10), 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, 16)
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
             EVT_SET(LW(10), LW(0))
-            EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, ANIM_90006, ANIM_90006, ANIM_90006)
+            EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
             EVT_CALL(N(ActorJumpToPos))
             EVT_THREAD
                 EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
@@ -839,7 +839,7 @@ EvtSource N(8021F6E0) = {
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, ANIM_90006, ANIM_90006, ANIM_90006)
+            EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
             EVT_CALL(func_80218300_464790, LW(10), 3)
         EVT_CASE_EQ(1)
             EVT_THREAD
@@ -853,7 +853,7 @@ EvtSource N(8021F6E0) = {
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(EnableActorBlur, -127, 1)
-            EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, ANIM_90006, ANIM_90006, ANIM_90006)
+            EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
             EVT_CALL(func_80218300_464790, LW(10), 3)
             EVT_CALL(EnableActorBlur, -127, 0)
         EVT_CASE_EQ(2)
@@ -877,7 +877,7 @@ EvtSource N(8021F6E0) = {
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(EnableActorBlur, -127, 1)
-            EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, ANIM_90006, ANIM_90006, ANIM_90006)
+            EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
             EVT_CALL(func_80218300_464790, LW(10), 3)
             EVT_CALL(EnableActorBlur, -127, 0)
     EVT_END_SWITCH

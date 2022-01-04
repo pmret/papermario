@@ -265,20 +265,17 @@ def fix_args(self, func, args, info):
                 #    continue
 
                 try:
+                    value = (argNum & 0x00FFFFFF)
+
                     if func == "SetAnimation" and int(new_args[1], 10) == 0:
                         call = f"{CONSTANTS['PlayerAnims'][argNum]}"
-                    elif "EVT_" not in args[0] and int(args[0]) >= 0 and CONSTANTS["MAP_NPCS"].get(int(args[0])) == "NPC_PLAYER":
-                        if sprite == 0:
-                            print(f"Func {func} arg {i} ({CONSTANTS['MAP_NPCS'][int(args[0])]}) -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
-                            call = f"0x{argNum:X}"
-                        else:
-                            call = f"{CONSTANTS['PlayerAnims'][argNum]}"
+                    elif value in CONSTANTS["NPC_SPRITE"]:
+                        self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
+                        call =  CONSTANTS['NPC_SPRITE'][value]
                     else:
-                        if sprite == 0:
-                            print(f"Func {func} arg {i} -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
-                            call = f"0x{argNum:X}"
-                        else:
-                            call = make_anim_macro(self, sprite, palette, anim)
+                        call = f"{argNum:06X}"
+                except ValueError:
+                        call = f"0x{argNum:06X}"
                 except KeyError:
                         call = f"0x{argNum:06X}"
                 new_args.append(call)
@@ -297,7 +294,7 @@ def fix_args(self, func, args, info):
                             enabled.append(f"0x{flag:08X}")
                 if not enabled:
                     enabled.append(f"0")
-                new_args.append("((" + " | ".join(enabled) + "))")
+                new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
             elif info[i] == "NpcIDs":
                 if argNum >= 0:
                     if argNum in CONSTANTS["MAP_NPCS"]:
@@ -313,6 +310,18 @@ def fix_args(self, func, args, info):
                     if flag:
                         if flag in CONSTANTS["DamageTypes"]:
                             enabled.append(CONSTANTS["DamageTypes"][flag])
+                        else:
+                            enabled.append(f"0x{flag:08X}")
+                if not enabled:
+                    enabled.append(f"0")
+                new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
+            elif info[i] == "ActorPartFlags":
+                enabled = []
+                for x in range(32):
+                    flag = argNum & (1 << x)
+                    if flag:
+                        if flag in CONSTANTS["ActorPartFlags"]:
+                            enabled.append(CONSTANTS["ActorPartFlags"][flag])
                         else:
                             enabled.append(f"0x{flag:08X}")
                 if not enabled:
@@ -359,17 +368,23 @@ def fix_args(self, func, args, info):
 
 
 replace_funcs = {
+    "ActorSpeak"                :{0:"CustomMsg", 1:"ActorIDs", 3:"CustomAnim", 4:"CustomAnim"},
     "AddActorDecoration"        :{0:"ActorIDs"},
     "AddKeyItem"                :{0:"ItemIDs"},
     "AddGoalPos"                :{0:"ActorIDs"},
 
     "BattleCamTargetActor"      :{0:"ActorIDs"},
+    "BindHandleEvent"           :{0:"ActorIDs"},
+    "BindIdle"                  :{0:"ActorIDs"},
+    "BindNextTurn"              :{0:"ActorIDs"},
     "BindNpcAI"                 :{0:"NpcIDs"},
     "BindNpcDefeat"             :{0:"NpcIDs"},
     "BindNpcIdle"               :{0:"NpcIDs"},
     "BindNpcInteract"           :{0:"NpcIDs"},
+    "BindTakeTurn"              :{0:"ActorIDs"},
 
     "ContinueSpeech"            :{1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
+    "CountPlayerTargets"        :{0:"ActorIDs"},
 
     "DisablePlayerInput"        :{0:"Bool"},
     "DisablePlayerPhysics"      :{0:"Bool"},
@@ -383,21 +398,31 @@ replace_funcs = {
     "EnemyTestTarget"           :{0:"ActorIDs", 2:"DamageTypes"},
 
     "FindKeyItem"               :{0:"ItemIDs"},
+    "FlyToGoal"                 :{0:"ActorIDs"},
     "ForceHomePos"              :{0:"ActorIDs"},
 
     "func_802CFE2C"             :{0:"NpcIDs"},
     "func_802CFD30"             :{0:"NpcIDs"},
     "func_802D2520"             :{0:"PlayerAnims"},
 
+    "GetActorHP"                :{0:"ActorIDs"},
     "GetActorPos"               :{0:"ActorIDs"},
+    "GetActorVar"               :{0:"ActorIDs"},
+    "GetDistanceToGoal"         :{0:"ActorIDs"},
     "GetGoalPos"                :{0:"ActorIDs"},
+    "GetHomePos"                :{0:"ActorIDs"},
     "GetItemPower"              :{0:"ItemIDs"},
+    "GetLastDamage"             :{0:"ActorIDs"},
     "GetLastEvent"              :{0:"ActorIDs"},
     "GetNpcPos"                 :{0:"NpcIDs"},
+    "GetStatusFlags"            :{0:"ActorIDs"},
 
     "HidePlayerShadow"          :{0:"Bool"},
+    "HPBarToCurrent"            :{0:"ActorIDs"},
     "HPBarToHome"               :{0:"ActorIDs"},
 
+    "IdleFlyToGoal"             :{0:"ActorIDs"},
+    "IdleRunToGoal"             :{0:"ActorIDs"},
     "InterpNpcYaw"              :{0:"NpcIDs"},
 
     "JumpToGoal"                :{0:"ActorIDs"},
@@ -418,22 +443,34 @@ replace_funcs = {
     "PlaySoundAtActor"          :{0:"ActorIDs", 1:"SoundIDs"},
     "PlaySoundAtNpc"            :{0:"NpcIDs", 1:"SoundIDs"},
 
+    "RemoveActor"               :{0:"ActorIDs"},
     "RemoveActorDecoration"     :{0:"ActorIDs"},
     "RemoveNpc"                 :{0:"NpcIDs"},
+    "ResetActorSounds"          :{0:"ActorIDs"},
+    "ResetAllActorSounds"       :{0:"ActorIDs"},
     "RunToGoal"                 :{0:"ActorIDs", 2:"Bool"},
     "JumpToGoal"                :{0:"ActorIDs", 2:"Bool", 3:"Bool", 4:"Bool"},
 
     "SetActorDispOffset"        :{0:"ActorIDs"},
+    "SetActorFlagBits"          :{0:"ActorIDs", 1:"ActorFlags"},
+    "SetActorIdleSpeed"         :{0:"ActorIDs"},
     "SetActorJumpGravity"       :{0:"ActorIDs"},
+    "SetActorPos"               :{0:"ActorIDs"},
     "SetActorRotation"          :{0:"ActorIDs"},
-    "SetActorSpeed"             :{0:"ActorIDs"},
     "SetActorScale"             :{0:"ActorIDs"},
+    "SetActorSounds"            :{0:"ActorIDs"},
+    "SetActorSpeed"             :{0:"ActorIDs"},
+    "SetActorType"              :{0:"ActorIDs", 1:"ActorType"},
+    "SetActorVar"               :{0:"ActorIDs"},
     "SetActorYaw"               :{0:"ActorIDs"},
     "SetAnimation"              :{0:"ActorIDs", 2:"CustomAnim"},
     "SetAnimationRate"          :{0:"ActorIDs"},
     "SetGoalPos"                :{0:"ActorIDs"},
     "SetGoalToHome"             :{0:"ActorIDs"},
     "SetGoalToTarget"           :{0:"ActorIDs"},
+    "SetHomePos"                :{0:"ActorIDs"},
+    "SetIdleAnimations"         :{0:"ActorIDs"},
+    "SetIdleGoal"               :{0:"ActorIDs"},
     "SetJumpAnimations"         :{0:"ActorIDs", 2:"PlayerAnims", 3:"PlayerAnims", 4:"PlayerAnims"},
     "SetMusicTrack"             :{1:"SongIDs"},
     "SetNpcAnimation"           :{0:"NpcIDs", 1:"CustomAnim"},
@@ -446,9 +483,16 @@ replace_funcs = {
     "SetNpcSpeed"               :{0:"NpcIDs"},
     "SetNpcSprite"              :{1:"Hex"},
     "SetNpcYaw"                 :{0:"NpcIDs"},
+    "SetPartDispOffset"         :{0:"ActorIDs"},
+    "SetPartFlags"              :{0:"ActorIDs"},
+    "SetPartFlagBits"           :{0:"ActorIDs", 2:"ActorPartFlags"},
+    "SetPartPos"                :{0:"ActorIDs"},
+    "SetPartScale"              :{0:"ActorIDs"},
+    "SetPartSounds"             :{0:"ActorIDs"},
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
+    "SetStatusTable"            :{0:"ActorIDs"},
     "SetTargetActor"            :{0:"ActorIDs", 1:"ActorIDs"},
     "ShowChoice"                :{0:"CustomMsg"},
     "ShowEmote"                 :{1:"Emotes"},
@@ -458,22 +502,6 @@ replace_funcs = {
     "SwitchMessage"             :{0:"CustomMsg"},
 
     "UseIdleAnimation"          :{0:"ActorIDs", 1:"Bool"},
-    "BindTakeTurn"              :{0:"ActorIDs"},
-    "BindIdle"                  :{0:"ActorIDs"},
-    "BindHandleEvent"           :{0:"ActorIDs"},
-    "SetActorIdleSpeed"         :{0:"ActorIDs"},
-    "SetIdleAnimations"         :{0:"ActorIDs"},
-    "SetIdleGoal"               :{0:"ActorIDs"},
-    "IdleFlyToGoal"             :{0:"ActorIDs"},
-    "GetStatusFlags"            :{0:"ActorIDs"},
-    "ResetAllActorSounds"       :{0:"ActorIDs"},
-    "FlyToGoal"                 :{0:"ActorIDs"},
-    "SetActorPos"               :{0:"ActorIDs"},
-    "HPBarToCurrent"            :{0:"ActorIDs"},
-    "SetActorFlagBits"          :{0:"ActorIDs", 1:"ActorFlags"},
-    "SetPartFlags"              :{0:"ActorIDs"},
-    "SetPartPos"                :{0:"ActorIDs"},
-    "SetPartDispOffset"         :{0:"ActorIDs"},
 }
 
 
