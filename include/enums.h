@@ -1162,6 +1162,13 @@ enum Phases {
     PHASE_PLAYER_HAPPY              = 30,
 };
 
+enum ActorClasses {
+    ACTOR_CLASS_PLAYER      = 0x000,
+    ACTOR_CLASS_PARTNER     = 0x100,
+    ACTOR_CLASS_ENEMY       = 0x200,
+    ACTOR_CLASS_MASK        = 0x700,
+};
+
 enum ActorIDs {
     ACTOR_SELF           = 0xFFFFFF81,
     ACTOR_PLAYER         = 0x00000000,

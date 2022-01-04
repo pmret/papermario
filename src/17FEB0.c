@@ -78,7 +78,7 @@ s32 calc_item_damage_enemy(void) {
     }
 
     targetActorPart = get_actor_part(targetActor, currentTargetPartID);
-    currentTargetID &= 0x700;
+    currentTargetID &= ACTOR_CLASS_MASK;
     if (targetActorPart == NULL) {
         PANIC();
     } 

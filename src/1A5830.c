@@ -27,21 +27,21 @@ s32 has_enchanted_part(Actor* actor) {
 }
 
 void dispatch_event_general(Actor* actor, s32 event) {
-    switch (actor->actorID & 0x700) {
-        case ACTOR_PLAYER:
+    switch (actor->actorID & ACTOR_CLASS_MASK) {
+        case ACTOR_CLASS_PLAYER:
             dispatch_event_player(event);
             break;
-        case ACTOR_PARTNER:
+        case ACTOR_CLASS_PARTNER:
             dispatch_event_partner(event);
             break;
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_ENEMY:
             dispatch_event_actor(actor, event);
             break;
     }
 }
 
 void play_hit_sound(Actor* actor, f32 x, f32 y, f32 z, u32 hitSound) {
-    s32 actorKind = actor->actorID & 0x700;
+    s32 actorClass = actor->actorID & ACTOR_CLASS_MASK;
 
     switch (hitSound) {
         case HIT_SOUND_MISS:
@@ -51,53 +51,53 @@ void play_hit_sound(Actor* actor, f32 x, f32 y, f32 z, u32 hitSound) {
             sfx_play_sound_at_position(SOUND_10D, 0, x, y, z);
             break;
         case HIT_SOUND_NORMAL:
-            switch (actorKind) {
-                case ACTOR_PLAYER:
+            switch (actorClass) {
+                case ACTOR_CLASS_PLAYER:
                     sfx_play_sound_at_position(SOUND_E1, 0, x, y, z);
                     break;
-                case ACTOR_PARTNER:
+                case ACTOR_CLASS_PARTNER:
                     sfx_play_sound_at_position(SOUND_E9, 0, x, y, z);
                     break;
-                case ACTOR_ENEMY0:
+                case ACTOR_CLASS_ENEMY:
                     sfx_play_sound_at_position(SOUND_E9, 0, x, y, z);
                     break;
             }
             break;
         case HIT_SOUND_FIRE:
-            switch (actorKind) {
-                case ACTOR_PLAYER:
+            switch (actorClass) {
+                case ACTOR_CLASS_PLAYER:
                     sfx_play_sound_at_position(SOUND_E2, 0, x, y, z);
                     break;
-                case ACTOR_PARTNER:
+                case ACTOR_CLASS_PARTNER:
                     sfx_play_sound_at_position(SOUND_FIRE_DAMAGE, 0, x, y, z);
                     break;
-                case ACTOR_ENEMY0:
+                case ACTOR_CLASS_ENEMY:
                     sfx_play_sound_at_position(SOUND_FIRE_DAMAGE, 0, x, y, z);
                     break;
             }
             break;
         case HIT_SOUND_ICE:
-            switch (actorKind) {
-                case ACTOR_PLAYER:
+            switch (actorClass) {
+                case ACTOR_CLASS_PLAYER:
                     sfx_play_sound_at_position(SOUND_E3, 0, x, y, z);
                     break;
-                case ACTOR_PARTNER:
+                case ACTOR_CLASS_PARTNER:
                     sfx_play_sound_at_position(SOUND_FREEZE_DAMAGE, 0, x, y, z);
                     break;
-                case ACTOR_ENEMY0:
+                case ACTOR_CLASS_ENEMY:
                     sfx_play_sound_at_position(SOUND_FREEZE_DAMAGE, 0, x, y, z);
                     break;
             }
             break;
         case HIT_SOUND_SHOCK:
-            switch (actorKind) {
-                case ACTOR_PLAYER:
+            switch (actorClass) {
+                case ACTOR_CLASS_PLAYER:
                     sfx_play_sound_at_position(SOUND_37A, 0, x, y, z);
                     break;
-                case ACTOR_PARTNER:
+                case ACTOR_CLASS_PARTNER:
                     sfx_play_sound_at_position(SOUND_ELECTRIC_DAMAGE, 0, x, y, z);
                     break;
-                case ACTOR_ENEMY0:
+                case ACTOR_CLASS_ENEMY:
                     sfx_play_sound_at_position(SOUND_ELECTRIC_DAMAGE, 0, x, y, z);
                     break;
             }
@@ -138,7 +138,7 @@ s32 calc_enemy_test_target(Actor* actor) {
     Actor* target;
     Actor* target2;
     ActorPart* targetPart;
-    s32 actorMasked;
+    s32 actorClass;
     s32 hitResult;
 
     battleStatus->currentTargetID2 = battleStatus->currentTargetID;
@@ -152,15 +152,15 @@ s32 calc_enemy_test_target(Actor* actor) {
     targetPart = get_actor_part(target, targetPartIdx);
     ASSERT(targetPart != NULL);
 
-    actorMasked = targetID & 0x700;
-    switch (actorMasked) {
-        case ACTOR_PLAYER:
+    actorClass = targetID & ACTOR_CLASS_MASK;
+    switch (actorClass) {
+        case ACTOR_CLASS_PLAYER:
             target->currentHP = playerData->curHP;
             break;
-        case ACTOR_PARTNER:
+        case ACTOR_CLASS_PARTNER:
             target->currentHP = 127;
             break;
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_ENEMY:
             break;
     }
 
@@ -181,8 +181,8 @@ s32 calc_enemy_test_target(Actor* actor) {
         return HIT_RESULT_MISS;
     }
     hitResult = HIT_RESULT_HIT;
-    switch (actorMasked) {
-        case ACTOR_PLAYER:
+    switch (actorClass) {
+        case ACTOR_CLASS_PLAYER:
             if (battleStatus->cloudNineTurnsLeft) {
                 if (rand_int(100) < (s8) battleStatus->cloudNineDodgeChance) {
                     hitResult = 6;
@@ -209,9 +209,9 @@ s32 calc_enemy_test_target(Actor* actor) {
                 }
             }
             break;
-        case ACTOR_PARTNER:
+        case ACTOR_CLASS_PARTNER:
             break;
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_ENEMY:
             break;
     }
 
@@ -239,7 +239,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     ActorState* state = &attacker->state;
     s32 targetID = battleStatus->currentTargetID;
     s32 targetPartIdx = battleStatus->currentTargetPart;
-    s32 actorMasked;
+    s32 actorClass;
     Actor* target;
     ActorPart* targetPart;
     s32 hitResult;
@@ -249,7 +249,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     s32 isFire = FALSE;
     s32 isElectric = FALSE;
     s32 isEnchanted = FALSE;
-    s32 maskedIsPlayer;
+    s32 isPlayer;
     s32 defense;
     s32 event;
     s32 damage;
@@ -270,17 +270,17 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     targetPart = get_actor_part(target, targetPartIdx);
     ASSERT(targetPart != NULL);
 
-    actorMasked = targetID & 0x700;
+    actorClass = targetID & ACTOR_CLASS_MASK;
     target->lastDamageTaken = 0;
 
-    switch (actorMasked) {
-        case ACTOR_PLAYER:
+    switch (actorClass) {
+        case ACTOR_CLASS_PLAYER:
             target->currentHP = gPlayerData.curHP;
             break;
-        case ACTOR_PARTNER:
+        case ACTOR_CLASS_PARTNER:
             target->currentHP = 127;
             break;
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_ENEMY:
             break;
     }
 
@@ -346,7 +346,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_IGNORE_DEFENSE)) {
         defense += target->defenseBoost;
 
-        if (actorMasked == ACTOR_PLAYER) {
+        if (actorClass == ACTOR_CLASS_PLAYER) {
             if (battleStatus->waterBlockTurnsLeft > 0) {
                 if ((battleStatus->currentAttackElement & (DAMAGE_TYPE_BLAST | DAMAGE_TYPE_FIRE))) {
                     defense += 2;
@@ -363,12 +363,12 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
     damage = battleStatus->currentAttackDamage;
 
-    switch (actorMasked) {
-        case ACTOR_PLAYER:
+    switch (actorClass) {
+        case ACTOR_CLASS_PLAYER:
             damage -= battleStatus->merleeDefenseBoost;
             break;
-        case ACTOR_PARTNER:
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_PARTNER:
+        case ACTOR_CLASS_ENEMY:
             break;
     }
 
@@ -394,8 +394,8 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     target->hpChangeCounter = 0;
     damage -= defense;
 
-    maskedIsPlayer = actorMasked == ACTOR_PLAYER;
-    if (maskedIsPlayer) {
+    isPlayer = actorClass == ACTOR_CLASS_PLAYER;
+    if (isPlayer) {
         if (player_team_is_ability_active(target, ABILITY_FIRE_SHIELD)) {
             if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
                 damage--;
@@ -413,8 +413,8 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         }
     }
 
-    switch (actorMasked) {
-        case ACTOR_PLAYER:
+    switch (actorClass) {
+        case ACTOR_CLASS_PLAYER:
             // TODO figure out how to better write target->debuff >= STATUS_POISON
             if ((target->debuff == 0 || target->debuff >= STATUS_POISON) && (target->stoneStatus == STATUS_END) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                 s32 blocked;
@@ -436,7 +436,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                 func_80266970(target);
             }
             break;
-        case ACTOR_PARTNER:
+        case ACTOR_CLASS_PARTNER:
             if (target->stoneStatus == STATUS_END) {
                 if (target->koStatus == STATUS_END && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                     if (check_block_input(BUTTON_A)) {
@@ -491,7 +491,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         target->lastDamageTaken = battleStatus->lastAttackDamage;
         target->hpChangeCounter = 0;
 
-        if (actorMasked == ACTOR_PLAYER) {
+        if (actorClass == ACTOR_CLASS_PLAYER) {
             battleStatus->damageTaken += damage;
             gPlayerData.curHP = target->currentHP;
         }
@@ -576,7 +576,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
             if (event != EVENT_EXPLODE_TRIGGER) {
                 if (!(gBattleStatus.flags1 & BS_FLAGS1_ATK_BLOCKED)) {
                     if (!(gBattleStatus.flags2 & BS_FLAGS2_1000000)) {
-                        if (actorMasked != ACTOR_PLAYER || !is_ability_active(ABILITY_HEALTHY_HEALTHY) || !(rand_int(100) < 50)) {
+                        if (actorClass != ACTOR_PLAYER || !is_ability_active(ABILITY_HEALTHY_HEALTHY) || !(rand_int(100) < 50)) {
                             if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && try_inflict_status(target, STATUS_SHRINK, STATUS_SHRINK_TURN_MOD)) {
                                 statusInflicted = t;
                                 statusInflicted2 = t;
@@ -646,27 +646,27 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
     battleStatus->wasStatusInflicted = statusInflicted;
 
-    switch (actorMasked) {
-        case ACTOR_PLAYER:
+    switch (actorClass) {
+        case ACTOR_CLASS_PLAYER:
             dispatch_event_player(event);
             break;
-        case ACTOR_PARTNER:
+        case ACTOR_CLASS_PARTNER:
             dispatch_event_partner(event);
             break;
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_ENEMY:
             dispatch_event_actor(target, event);
             break;
     }
 
-    if (actorMasked == ACTOR_PARTNER) {
+    if (actorClass == ACTOR_CLASS_PARTNER) {
         if (battleStatus->lastAttackDamage > 0 && gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE && !(target->flags & ACTOR_FLAG_NO_DMG_APPLY)) {
             inflict_partner_ko(target, STATUS_DAZE, battleStatus->lastAttackDamage);
         }
     }
     if (!(target->flags & ACTOR_FLAG_NO_DMG_POPUP)) {
-        switch (actorMasked) {
-            case ACTOR_PLAYER:
-            case ACTOR_PARTNER:
+        switch (actorClass) {
+            case ACTOR_CLASS_PLAYER:
+            case ACTOR_CLASS_PARTNER:
                 if (battleStatus->lastAttackDamage == 0) {
                     if (!statusInflicted2 && !statusInflicted) {
                         // immune star fx?
@@ -681,7 +681,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                     break;
                 }
                 break;
-            case ACTOR_ENEMY0:
+            case ACTOR_CLASS_ENEMY:
                 if (battleStatus->lastAttackDamage == 0) {
                     if (!statusInflicted2 && !statusInflicted) {
                         func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
@@ -1147,11 +1147,11 @@ ApiStatus GetActorHP(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    switch (actorID & 0x700) {
-        case ACTOR_PLAYER:
+    switch (actorID & ACTOR_CLASS_MASK) {
+        case ACTOR_CLASS_PLAYER:
             outVal = playerData->curHP;
             break;
-        case ACTOR_PARTNER:
+        case ACTOR_CLASS_PARTNER:
             outVal = 99;
             break;
         default:

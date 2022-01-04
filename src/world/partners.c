@@ -856,8 +856,8 @@ void enable_partner_ai(void) {
     }
 }
 
-void partner_set_tether_distance(f32 arg0) {
-    D_8010CFC0 = arg0;
+void partner_set_tether_distance(f32 dist) {
+    D_8010CFC0 = dist;
 }
 
 void repartner_set_tether_distance(void) {
