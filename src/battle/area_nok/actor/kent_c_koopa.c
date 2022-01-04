@@ -1117,12 +1117,31 @@ EvtSource N(8022B2E8) = {
     EVT_END
 };
 
-ApiStatus func_80218C74_48DE14(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/area_nok/48DCF0", func_80218C74_48DE14);
+ApiStatus func_80218C74_48DE14(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 x = evt_get_variable(script, *args++);
+    s32 z = evt_get_variable(script, *args++);
+    f32 rand = rand_int(0x168);
+
+    f32 fx = x;
+    f32 fz = z;
+
+    s32 outX1 = fx + cos_deg(rand) * 46.0f;
+    s32 outZ1 = fz + sin_deg(rand) * 46.0f;
+    s32 outX2 = fx + cos_deg(rand) * 62.0f;
+    s32 outZ2 = fz + sin_deg(rand) * 62.0f;
+
+    evt_set_variable(script, *args++, outX1);
+    evt_set_variable(script, *args++, outZ1);
+    evt_set_variable(script, *args++, outX2);
+    evt_set_variable(script, *args++, outZ2);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_80218DF8_48DF98(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = args++;
+    Bytecode var1 = *args++;
 
     evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
