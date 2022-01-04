@@ -142,7 +142,7 @@ void N(func_80240E90_BDFC20)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     posY = npc->pos.y + (*(enemy->territory->patrol.points + script->functionTemp[2])).y;
     posZ = npc->pos.z;
     posW = 1000.0f;
-    npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+    npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
     posY += (*(enemy->territory->patrol.points + script->functionTemp[2])).y;
     posW = posY - npc->pos.y;
     if (posW > 2.0) {

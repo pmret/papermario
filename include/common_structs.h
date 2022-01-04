@@ -150,9 +150,9 @@ typedef struct Npc {
     /* 0x06C */ Vec3f colliderPos; /* used during collision with player */
     /* 0x078 */ s32 shadowIndex;
     /* 0x07C */ f32 shadowScale;
-    /* 0x080 */ s32 unk_80;
-    /* 0x084 */ s16 unk_84;
-    /* 0x086 */ s16 unk_86;
+    /* 0x080 */ s32 collisionChannel; /* flags used with collision tracing */
+    /* 0x084 */ s16 currentFloor; /* colliderID */
+    /* 0x086 */ s16 currentWall; /* colliderID */
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ s16 turnAroundYawAdjustment;
@@ -175,11 +175,13 @@ typedef struct Npc {
     /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
     /* 0x0AE */ char unk_AE[2];
     /* 0x0B0 */ s32** extraAnimList;
-    /* 0x0B4 */ s8 unk_B4; // some kind of rendering type, 0..4 inclusive
-    /* 0x0B5 */ s8 unk_B5;
-    /* 0x0B6 */ s8 unk_B6;
-    /* 0x0B7 */ s8 unk_B7;
-    /* 0x0B8 */ char unk_B8[8];
+    /* 0x0B4 */ s8 palSwapType; // 0..4 inclusive
+    /* 0x0B5 */ s8 palSwapPrevType;
+    /* 0x0B6 */ s8 dirtyPalettes;
+    /* 0x0B7 */ s8 palSwapState;
+    /* 0x0B8 */ char unk_B8[4];
+    /* 0x0BC */ s16 palSwapTimer;
+    /* 0x0BE */ s16 palSwapLerpAlpha;
     /* 0x0C0 */ s8 unk_C0;
     /* 0x0C1 */ s8 paletteCount;
     /* 0x0C2 */ char unk_C2[2];

@@ -14,7 +14,7 @@ static s32 B_80240FD0_tst_04;
 ApiStatus func_80240000_B1B570(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(0);
 
-    if (npc != NULL && npc->unk_84 == 5) {
+    if (npc != NULL && npc->currentFloor == 5) {
         f32 sinTheta;
         f32 cosTheta;
         f32 xTemp;

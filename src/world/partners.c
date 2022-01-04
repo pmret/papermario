@@ -753,7 +753,7 @@ INCLUDE_ASM(void, "world/partners", partner_flying_update_motion, Npc* partner);
 INCLUDE_ASM(s32, "world/partners", partner_flying_follow_player);
 
 s32 partner_init_put_away(Npc* arg0) {
-    arg0->unk_80 = 0x10000;
+    arg0->collisionChannel = 0x10000;
     D_8010CFC8 = 0;
     arg0->flags |= 0x100;
     return D_8010CFC8;
@@ -829,7 +829,7 @@ s32 partner_put_away(Npc* partner) {
 }
 
 s32 partner_init_get_out(Npc* arg0) {
-    arg0->unk_80 = 0x10000;
+    arg0->collisionChannel = 0x10000;
     D_8010CFC8 = 0;
     arg0->flags |= 0x100;
     return D_8010CFC8;

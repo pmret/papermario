@@ -1599,6 +1599,13 @@ enum Areas {
     AREA_TST,
 };
 
+enum NpcPalSwapState {
+    NPC_PALSWAP_HOLDING_A           = 0,
+    NPC_PALSWAP_FROM_A_TO_B         = 1,
+    NPC_PALSWAP_HOLDING_B           = 2,
+    NPC_PALSWAP_FROM_B_TO_A         = 3
+};
+
 enum NpcFlags {
     NPC_FLAG_0                       = 0x00000000,
     NPC_FLAG_PASSIVE                 = 0x00000001, ///< Collision does not trigger battle

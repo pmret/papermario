@@ -1053,7 +1053,7 @@ ApiStatus N(func_80240B94_C40944)(Evt* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }
@@ -1380,7 +1380,7 @@ void N(func_80242F94_C42D44)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         posY = gPlayerStatusPtr->position.y;
         posZ = gPlayerStatusPtr->position.z;
         posW = 1000.0f;
-        npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+        npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
         if (fabsf(npc->pos.y - posY) > 24.0) {
             npc->pos.y -= 1.8;
         } else {
@@ -1426,7 +1426,7 @@ void N(func_802432E8_C43098)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     posY = npc->pos.y;
     posZ = npc->pos.z;
     posW = 1000.0f;
-    npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+    npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
     if (!(npc->pos.y < (posY + temp_f20))) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc->pos.y = posY + temp_f20;
@@ -1489,7 +1489,7 @@ void N(func_802435D8_C43388)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     s32 var;
     s32 var2;
 
-    if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+    if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW)) {
         npc->pos.y = posY + temp_f26 + (temp_f20 * temp_f22);
     } else {
         npc->pos.y = temp_f24 + (temp_f20 * temp_f22);

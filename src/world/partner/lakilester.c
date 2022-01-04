@@ -51,7 +51,7 @@ void func_802BD100_320C50(void) {
 void world_lakilester_init(Npc* npc) {
     npc->collisionHeight = 38;
     npc->collisionRadius = 36;
-    npc->unk_80 = 0x10000;
+    npc->collisionChannel = 0x10000;
     D_802BFF18 = 0;
     D_802BFF04 = 0;
     D_802BFF08 = 0;
@@ -284,9 +284,9 @@ void func_802BDA90_3215E0(Npc* lakilester) {
     f32 y = lakilester->moveToPos.y;
     f32 z = lakilester->pos.z;
 
-    if (npc_test_move_complex_with_slipping(lakilester->unk_80, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+    if (npc_test_move_complex_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
         lakilester->flags |= (NPC_FLAG_4000 | NPC_FLAG_NO_PROJECT_SHADOW);
-        lakilester->unk_86 = D_8010C97A;
+        lakilester->currentWall = D_8010C97A;
         lakilester->pos.x = x;
         lakilester->pos.z = z;
     } else {
@@ -298,7 +298,7 @@ void func_802BDA90_3215E0(Npc* lakilester) {
     y = lakilester->moveToPos.y;
     z = lakilester->pos.z;
 
-    if (npc_test_move_taller_with_slipping(lakilester->unk_80, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+    if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
         lakilester->pos.x = x;
         lakilester->pos.z = z;
         lakilester->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
@@ -311,7 +311,7 @@ void func_802BDA90_3215E0(Npc* lakilester) {
     y = lakilester->moveToPos.y;
     z = lakilester->pos.z;
 
-    if (npc_test_move_taller_with_slipping(lakilester->unk_80, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+    if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
         lakilester->pos.x = x;
         lakilester->pos.z = z;
         lakilester->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
@@ -324,7 +324,7 @@ void func_802BDA90_3215E0(Npc* lakilester) {
     y = lakilester->moveToPos.y;
     z = lakilester->pos.z;
 
-    if (npc_test_move_simple_with_slipping(lakilester->unk_80, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+    if (npc_test_move_simple_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
         lakilester->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
         lakilester->pos.x = x;
         lakilester->pos.z = z;
@@ -337,7 +337,7 @@ void func_802BDA90_3215E0(Npc* lakilester) {
     y = lakilester->moveToPos.y;
     z = lakilester->pos.z;
 
-    if (npc_test_move_simple_with_slipping(lakilester->unk_80, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+    if (npc_test_move_simple_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
         lakilester->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
         lakilester->pos.x = x;
         lakilester->pos.z = z;

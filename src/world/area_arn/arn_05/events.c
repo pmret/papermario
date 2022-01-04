@@ -1058,7 +1058,7 @@ void N(func_80240E90_BE8A70)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     posY = npc->pos.y + script->functionTemp[2][enemy->territory->patrol.points].y;
     posZ = npc->pos.z;
     posW = 1000.0f;
-    npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+    npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
     posY += script->functionTemp[2][enemy->territory->patrol.points].y;
     posW = posY - npc->pos.y;
     if (posW > 2.0) {

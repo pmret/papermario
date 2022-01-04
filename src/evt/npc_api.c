@@ -624,32 +624,32 @@ ApiStatus SetNpcFlagBits(Evt* script, s32 isInitialCall) {
 ApiStatus GetNpcPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcID = evt_get_variable(script, *args++);
-    s32 a1 = *args++;
-    s32 a2 = *args++;
-    s32 a3 = *args++;
+    s32 outX = *args++;
+    s32 outY = *args++;
+    s32 outZ = *args++;
     Npc* npc = resolve_npc(script, npcID);
 
     if (npc == NULL) {
         return ApiStatus_DONE2;
     }
 
-    evt_set_variable(script, a1, npc->pos.x);
-    evt_set_variable(script, a2, npc->pos.y);
-    evt_set_variable(script, a3, npc->pos.z);
+    evt_set_variable(script, outX, npc->pos.x);
+    evt_set_variable(script, outY, npc->pos.y);
+    evt_set_variable(script, outZ, npc->pos.z);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CF1B4(Evt* script, s32 isInitialCall) {
+ApiStatus SetNpcCollisionChannel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcId = evt_get_variable(script, *args++);
-    Bytecode arg1 = *args;
+    Bytecode channel = *args;
     Npc* npc = resolve_npc(script, npcId);
 
     if (npc == NULL) {
         return ApiStatus_DONE2;
     }
 
-    npc->unk_80 = arg1;
+    npc->collisionChannel = channel;
     return ApiStatus_DONE2;
 }
 

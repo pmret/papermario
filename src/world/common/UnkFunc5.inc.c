@@ -21,7 +21,7 @@ void N(UnkFunc5)(Npc* npc, Enemy* enemy, Evt* script, NpcAISettings* aiSettings)
     posY = npc->pos.y;
     posZ = npc->pos.z;
     posW = 1000.0f;
-    npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+    npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
     enemy->varTable[2] = 0;
     enemy->varTable[9] = 0;
     enemy->varTable[3] = ((posW * 100.0) + 0.5);

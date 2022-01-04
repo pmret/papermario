@@ -28,7 +28,7 @@ void N(UnkFunc6)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* te
             posY = npc->pos.y;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            phi_v0 = npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+            phi_v0 = npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
         } else {
             phi_v0 = FALSE;
         }
@@ -72,7 +72,7 @@ void N(UnkFunc6)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* te
         posY = npc->pos.y + npc->collisionHeight;
         posZ = npc->pos.z;
         posW = (fabsf(npc->jumpVelocity) + npc->collisionHeight) + 10.0;
-        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW)) {
             if (posW <= (npc->collisionHeight + fabsf(npc->jumpVelocity))) {
                 npc->jumpVelocity = 0.0f;
                 npc->pos.y = posY;
