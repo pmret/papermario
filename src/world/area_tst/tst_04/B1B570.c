@@ -34,36 +34,38 @@ ApiStatus func_80240000_B1B570(Evt* script, s32 isInitialCall) {
 
 // float shenanigans
 #ifdef NON_EQUIVALENT
-ApiStatus func_802400FC_B1B66C(Evt* script,  s32 isInitialCall) {
+ApiStatus func_802400FC_B1B66C(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(NPC_PARTNER);
+    f32 angle;
+    f32 dist;
+    f32 product1;
+    f32 product2;
+    f32 cos1;
+    f32 sin1;
+    f32 sin2;
+    f32 cos2;
+    f32 var1;
 
-    if (npc != NULL) {
-        f32 dist = dist2D(npc->pos.x, npc->pos.z, -250.0f, -100.0f);
-        f32 sinTemp;
-        f32 cosTemp;
-        f32 theta1;
-        f32 sin1;
-        f32 cos1;
-        f32 theta2;
-        f32 sin2;
-        f32 cos2;
-
-        theta1 = (evt_get_variable(script, EVT_VAR(0)) - 1) * TAU / 360.0f;
-        sinTemp = sin_rad(theta1);
-        cosTemp = cos_rad(theta1);
-
-        sin1 = -sinTemp * dist;
-        cos1 = cosTemp * dist;
-
-        theta2 = (evt_get_variable(script, EVT_VAR(0)) * TAU) / 360.0f;
-        sin2 = sin_rad(theta2);
-        cos2 = cos_rad(theta2);
-
-        npc->pos.x += (dist * cos2) - cos1;
-        npc->pos.z += (dist * -sin2) - sin1;
-
+    if (npc == NULL) {
         return ApiStatus_DONE2;
     }
+
+    dist = dist2D(npc->pos.x, npc->pos.z, -250.0f, -100.0f);
+
+    var1 = evt_get_variable(script, 0 - 30000000) - 1;
+    angle = var1 * TAU / 360.0f;
+    sin1 = sin_rad(angle);
+    cos1 = cos_rad(angle);
+    product1 = dist * cos1;
+    product2 = dist * -sin1;
+
+    var1 = evt_get_variable(script, EVT_VAR(0));
+    angle = (var1 * TAU) / 360.0f;
+    sin2 = sin_rad(angle);
+    cos2 = cos_rad(angle);
+    npc->pos.x += (dist * cos2) - product1;
+    npc->pos.z += (dist * -sin2) - product2;
+
     return ApiStatus_DONE2;
 }
 #else

@@ -16,6 +16,6 @@ ApiStatus func_80240000_B1D760(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_tst/tst_13/B1D760", func_802400A0_B1D800);
+#include "world/common/UnkDistFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tst/tst_13/B1D760", func_8024013C_B1D89C);
