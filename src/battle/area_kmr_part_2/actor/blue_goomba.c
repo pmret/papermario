@@ -303,7 +303,7 @@ EvtSource N(takeTurn_8021A5A0) = {
     EVT_WAIT_FRAMES(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_bros_Palette_01_Anim_8)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), ((0)), 0, 1, 16)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, 16)
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
@@ -415,7 +415,7 @@ EvtSource N(takeTurn_8021A5A0) = {
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.30078125), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
             EVT_WAIT_FRAMES(1)
     EVT_END_SWITCH
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), ((0)), 0, 0, 1, 32)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), 0, 0, 0, 1, 32)
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)

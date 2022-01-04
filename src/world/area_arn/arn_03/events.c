@@ -1039,7 +1039,7 @@ ApiStatus N(func_80241648_BE03D8)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_80241680_BE0410)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
+    s32* ptr = (s32*) evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

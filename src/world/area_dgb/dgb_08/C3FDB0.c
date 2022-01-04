@@ -1,5 +1,7 @@
 #include "dgb_08.h"
 #include "message_ids.h"
+#include "sprite.h"
+#include "world/partners.h"
 #include "sprite/npc/sentinel.h"
 #include "sprite/npc/world_clubba.h"
 #include "sprite/npc/world_tubba.h"
@@ -284,7 +286,7 @@ NpcAISettings N(npcAISettings_802444B4) = {
     .unk_2C = 1,
 };
 
-const char N(dgb_00_name_hack)[];
+extern const char N(dgb_00_name_hack)[];
 
 EvtSource N(npcAI_802444E4) = {
     EVT_CALL(SetSelfVar, 0, 0)
@@ -463,7 +465,7 @@ EvtSource N(npcAI_80244D7C) = {
     EVT_END
 };
 
-const char N(dgb_01_name_hack)[];
+extern const char N(dgb_01_name_hack)[];
 
 EvtSource N(defeat_80244E58) = {
     EVT_CALL(N(UnkFunc1))
@@ -1224,7 +1226,7 @@ ApiStatus N(func_80242A6C_C4281C)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = evt_get_variable(script, *args);
+    NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -1523,7 +1525,7 @@ ApiStatus N(func_802438F0_C436A0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = evt_get_variable(script, *args);
+    NpcAISettings* npcAISettings = (NpcAISettings*) evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;

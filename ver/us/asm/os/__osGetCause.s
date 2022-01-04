@@ -7,7 +7,7 @@
 
 .section .text, "ax"
 
-glabel osGetCause
+glabel __osGetCause
 /* 47A60 8006C660 40026800 */  mfc0      $v0, $13
 /* 47A64 8006C664 03E00008 */  jr        $ra
 /* 47A68 8006C668 00000000 */   nop

@@ -253,8 +253,8 @@ static s32 N(pad_17BC) = {
 NpcSettings N(npcSettings_802417C0) = {
     .height = 24,
     .radius = 28,
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 16,
 };
 

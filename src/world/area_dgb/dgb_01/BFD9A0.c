@@ -536,7 +536,7 @@ ApiStatus N(func_8024142C_BFECAC)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = evt_get_variable(script, *args);
+    NpcAISettings* aiSettings =(NpcAISettings*) evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -834,7 +834,7 @@ ApiStatus N(func_802422B0_BFFB30)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = evt_get_variable(script, *args);
+    NpcAISettings* aiSettings =(NpcAISettings*) evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -904,7 +904,7 @@ ApiStatus N(func_802422B0_BFFB30)(Evt* script, s32 isInitialCall) {
     return (script->functionTemp[0] == 100) * ApiStatus_DONE2;
 }
 
-const char N(dgb_00_name_hack)[];
+extern const char N(dgb_00_name_hack)[];
 
 EvtSource N(npcAI_80244D54) = {
     EVT_CALL(SetSelfVar, 0, 0)
@@ -1228,7 +1228,7 @@ ApiStatus N(func_802430C0_C00940)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc1.inc.c"
 
-const char N(dgb_08_name_hack)[];
+extern const char N(dgb_08_name_hack)[];
 
 EvtSource N(defeat_802457D8) = {
     EVT_CALL(N(UnkFunc1))

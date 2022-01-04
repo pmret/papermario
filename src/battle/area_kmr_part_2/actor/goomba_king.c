@@ -405,7 +405,7 @@ EvtSource N(80221680) = {
         EVT_WAIT_FRAMES(1)
     EVT_END_LOOP
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(10), ((0)), 0, 2, 16)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(10), 0, 0, 2, 16)
     EVT_SWITCH(LW(10))
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
@@ -437,7 +437,7 @@ EvtSource N(80221680) = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT_FRAMES(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(10), ((0)), 0, 0, 1, 32)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(10), 0, 0, 0, 1, 32)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
@@ -484,7 +484,7 @@ EvtSource N(80221CD4) = {
         EVT_CALL(PlayEffect, 0x14, 0, -15, 135, 0, 85, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_CALL(PlayEffect, 0x14, 0, 100, 103, 0, 70, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(10), ((0)), 0, 2, 16)
+    EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(10), 0, 0, 2, 16)
     EVT_SWITCH(LW(10))
         EVT_CASE_OR_EQ(6)
         EVT_CASE_OR_EQ(5)
@@ -620,7 +620,7 @@ EvtSource N(80221CD4) = {
     EVT_WAIT_FRAMES(24)
     EVT_WAIT_FRAMES(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), ((0)), 65535, 0, 2, 32)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), 0, 65535, 0, 2, 32)
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(10)
             EVT_RETURN
