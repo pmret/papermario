@@ -1075,9 +1075,6 @@ enum PlayerAnims {
     ANIM_8001B                      = 0x0008001B,
     ANIM_8001D                      = 0x0008001D,
     ANIM_8001E                      = 0x0008001E,
-    ANIM_90004                      = 0x00090004,
-    ANIM_90005                      = 0x00090005,
-    ANIM_90006                      = 0x00090006,
 };
 
 enum AmbientSounds {

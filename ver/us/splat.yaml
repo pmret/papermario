@@ -3776,32 +3776,49 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x464490, c]
-    - [0x464560, c]
-    - [0x465D90, c]
-    - [0x4661E0, data]
+    - [0x464490, c, actor/chan]
+    - [0x464560, c, actor/lee]
+    - [0x465D90, c, actor/master1]
+    - [0x465D90, c, actor/master2]
+    - [0x465D90, c, actor/master3]
+    - [0x465D90, c, stage/mac_01]
+    - [0x4661E0, c, stage/mac_02]
+    - [0x4661E0, c, area]
+    - [0x4661E0]
   - dir: battle/area_hos
     type: code
     start: 0x47F0B0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x47F0B0, c]
-    - [0x47F0D0, c]
-    - [0x47F570, c]
-    - [0x4800C0, data]
+    - [0x47F0B0, c, actor/goombario_tutor]
+    - [0x47F0D0, c, actor/ember]
+    - [0x47F200, c, actor/magikoopa]
+    - [0x47F570, c, stage/hos_01]
+    - [0x4800C0, c, stage/hos_00]
+    - [0x4800C0, c, stage/hos_02]
+    - [0x4800C0, c, area]
+    - [0x4800C0]
   - dir: battle/area_nok
     type: code
     start: 0x48D1A0
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x48D1A0, c]
-    - [0x48D700, c]
-    - [0x48DA50, c]
-    - [0x48DBC0, c]
-    - [0x48DCF0, c]
-    - [0x48DFC0, data]
+    - [0x48D1A0, c, area]
+    - [0x48D1A0, c, actor/goomba]
+    - [0x48D420, c, actor/paragoomba]
+    - [0x48D700, c, actor/spiked_goomba]
+    - [0x48D980, c, actor/koopa_troopa]
+    - [0x48DA50, c, actor/fuzzy]
+    - [0x48DBC0, c, actor/paratroopa]
+    - [0x48DCF0, c, actor/kent_c_koopa]
+    - [0x48DFC0, c, stage/nok_01]
+    - [0x48DFC0, c, stage/nok_02]
+    - [0x48DFC0, c, stage/nok_03]
+    - [0x48DFC0, c, stage/nok_04]
+    - [0x48DFC0]
   - dir: battle/area_trd_part_1
     type: code
     start: 0x4A10A0
