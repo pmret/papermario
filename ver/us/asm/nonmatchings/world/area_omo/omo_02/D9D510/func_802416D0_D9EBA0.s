@@ -160,7 +160,7 @@ glabel func_802416D0_D9EBA0
 .L802418F0_D9EDC0:
 /* D9EDC0 802418F0 0280202D */  daddu     $a0, $s4, $zero
 /* D9EDC4 802418F4 0260282D */  daddu     $a1, $s3, $zero
-/* D9EDC8 802418F8 0C090507 */  jal       func_8024141C_D9E8EC
+/* D9EDC8 802418F8 0C090507 */  jal       omo_02_UnkNpcAIFunc42
 /* D9EDCC 802418FC 02A0302D */   daddu    $a2, $s5, $zero
 .L80241900_D9EDD0:
 /* D9EDD0 80241900 0280202D */  daddu     $a0, $s4, $zero

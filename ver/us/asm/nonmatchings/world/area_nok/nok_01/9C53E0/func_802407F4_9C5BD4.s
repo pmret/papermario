@@ -160,7 +160,7 @@ glabel func_802407F4_9C5BD4
 .L80240A14_9C5DF4:
 /* 9C5DF4 80240A14 0280202D */  daddu     $a0, $s4, $zero
 /* 9C5DF8 80240A18 0260282D */  daddu     $a1, $s3, $zero
-/* 9C5DFC 80240A1C 0C090150 */  jal       func_80240540_9C5920
+/* 9C5DFC 80240A1C 0C090150 */  jal       nok_01_UnkNpcAIFunc42
 /* 9C5E00 80240A20 02A0302D */   daddu    $a2, $s5, $zero
 .L80240A24_9C5E04:
 /* 9C5E04 80240A24 0280202D */  daddu     $a0, $s4, $zero

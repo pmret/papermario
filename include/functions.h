@@ -535,7 +535,7 @@ void func_8004A73C(Evt* script);
 typedef union {
   void (*func1)(Evt*, s32);
   void (*func2)(void);
-} WorldArgs __attribute__ ((__transparent_union__));
+} WorldArgs TRANSPARENT_UNION;
 
 s32 create_generic_entity_world(WorldArgs, WorldArgs);
 
