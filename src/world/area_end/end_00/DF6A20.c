@@ -77,7 +77,7 @@ ApiStatus N(SetNpcShadowScale)(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80242898_DF9298(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Npc** npc = &script->functionTemp[1];
+    Npc** npc = (Npc**)&script->functionTemp[1];
 
     if (isInitialCall) {
         *npc = get_npc_unsafe(evt_get_variable(script, *args++));

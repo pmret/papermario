@@ -1,11 +1,12 @@
 #include "tst_04.h"
 #include "sprite.h"
+#include "model.h"
 
 static char* N(exit_str_0) = "tst_03";
 static char* N(exit_str_1) = "";
 
 void func_8024029C_B1B80C(void);
-void func_80240360_B1B8D0(PlayerStatus* playerStatus);
+void func_80240360_B1B8D0(void* data);
 void func_80240574_B1BAE4(void);
 
 // BSS
@@ -101,7 +102,8 @@ void func_8024029C_B1B80C(void) {
     }
 }
 
-void func_80240360_B1B8D0(PlayerStatus* playerStatus) {
+void func_80240360_B1B8D0(void* data) {
+    PlayerStatus* playerStatus = data;
     f32 yaw = -gCameras[gCurrentCamID].currentYaw;
     Matrix4f main;
     Matrix4f translation;
@@ -156,11 +158,11 @@ void func_802405D4_B1BB44(void) {
     Matrix4f m1;
     Matrix4f m2;
     Matrix4f m3;
-    Matrix4f m4;
+    Mtx m4;
 
     guTranslateF(m1, -484.0f, 25.0f, -40.0f);
-    guMtxF2L(m1, m4);
-    render_animated_model(B_80240FD0_tst_04, m4);
+    guMtxF2L(m1, &m4);
+    render_animated_model(B_80240FD0_tst_04, &m4);
 }
 
 ApiStatus func_80240628_B1BB98(Evt* script, s32 isInitialCall) {

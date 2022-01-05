@@ -33,22 +33,22 @@ ApiStatus N(UnkNpcAIMainFunc3)(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            isk_05_UnkNpcAIFunc40(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc40)(script, aiSettings, territoryPtr);
         case 1:
-            isk_05_UnkNpcAIFunc37(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc37)(script, aiSettings, territoryPtr);
             break;
         case 2:
-            isk_05_UnkNpcAIFunc1(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
         case 3:
-            isk_05_UnkNpcAIFunc38(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc38)(script, aiSettings, territoryPtr);
             break;
         case 12:
-            isk_05_UnkNpcAIFunc41(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc41)(script, aiSettings, territoryPtr);
         case 13:
-            isk_05_UnkNpcAIFunc39(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc39)(script, aiSettings, territoryPtr);
             break;
         case 14:
-            isk_05_UnkDurationCheck(script, aiSettings, territoryPtr);
+            N(UnkDurationCheck)(script, aiSettings, territoryPtr);
             break;
     }
     return 0;
