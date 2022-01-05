@@ -939,18 +939,14 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += f"s32 {name}[] = {{"
             else:
                 out += f"s32 {name} = {{"
-
             for i in range(0, struct["length"], 4):
                 if (i % 0x20) == 0:
                     out += f"\n   "
-
                 word = int.from_bytes(bytes.read(4), byteorder="big")
-
                 if word in symbol_map:
                     out += f" {symbol_map[word][0][1]},"
                 else:
                     out += f" 0x{word:08X},"
-
             out += f"\n}};\n"
 
         out += "\n"
@@ -1226,5 +1222,3 @@ if __name__ == "__main__":
 
         print("=======================================\n")
         print(disasm.rstrip())
-
-

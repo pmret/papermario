@@ -18,19 +18,16 @@ def script_lib(offset=0):
         """
         LIB_LINE_RE = re.compile(r"\s+:\s+")
         NAME_RE = re.compile(r"({[^}]*})?\s*([a-zA-Z0-9_]+)")
-
         for filename in Path(path.dirname(__file__), "star-rod", "database").rglob("*.lib"):
             with open(filename, "r") as file:
                 for line in file.readlines():
                     parts = LIB_LINE_RE.split(line)
-
                     if len(parts) >= 3:
                         try:
                             kind = parts[0]
                             vaddr = int(parts[1].split(", ")[0], 16)
                             if name := NAME_RE.match(parts[2]):
                                 name = name.group(2)
-
                                 _script_lib[vaddr] = name
                         except:
                             pass
@@ -180,7 +177,6 @@ def get_constants():
             if f"#define {enum}_" in line:
                 this_enum = enum
                 break;
-
         if this_enum:
             name = line.split(" ",2)[1]
             id_ = line.split("0x", 1)[1]
@@ -269,21 +265,18 @@ def fix_args(self, func, args, info):
                 #    continue
 
                 try:
+                    value = (argNum & 0x00FFFFFF)
+
                     if func == "SetAnimation" and int(new_args[1], 10) == 0:
                         call = f"{CONSTANTS['PlayerAnims'][argNum]}"
-                    elif "EVT_" not in args[0] and int(args[0]) >= 0 and CONSTANTS["MAP_NPCS"].get(int(args[0])) == "NPC_PLAYER":
-                        if sprite == 0:
-                            print(f"Func {func} arg {i} ({CONSTANTS['MAP_NPCS'][int(args[0])]}) -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
-                            call = f"0x{argNum:X}"
-                        else:
-                            call = f"{CONSTANTS['PlayerAnims'][argNum]}"
+                    elif value in CONSTANTS["NPC_SPRITE"]:
+                        self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
+                        call =  CONSTANTS['NPC_SPRITE'][value]
                     else:
-                        if sprite == 0:
-                            print(f"Func {func} arg {i} -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
-                            call = f"0x{argNum:X}"
-                        else:
-                            call = make_anim_macro(self, sprite, palette, anim)
+                        call = f"{argNum:06X}"
                 except ValueError:
+                        call = f"0x{argNum:06X}"
+                except KeyError:
                         call = f"0x{argNum:06X}"
                 new_args.append(call)
             elif info[i] == "CustomMsg":
@@ -301,7 +294,7 @@ def fix_args(self, func, args, info):
                             enabled.append(f"0x{flag:08X}")
                 if not enabled:
                     enabled.append(f"0")
-                new_args.append("((" + " | ".join(enabled) + "))")
+                new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
             elif info[i] == "NpcIDs":
                 if argNum >= 0:
                     if argNum in CONSTANTS["MAP_NPCS"]:
@@ -317,6 +310,18 @@ def fix_args(self, func, args, info):
                     if flag:
                         if flag in CONSTANTS["DamageTypes"]:
                             enabled.append(CONSTANTS["DamageTypes"][flag])
+                        else:
+                            enabled.append(f"0x{flag:08X}")
+                if not enabled:
+                    enabled.append(f"0")
+                new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
+            elif info[i] == "ActorPartFlags":
+                enabled = []
+                for x in range(32):
+                    flag = argNum & (1 << x)
+                    if flag:
+                        if flag in CONSTANTS["ActorPartFlags"]:
+                            enabled.append(CONSTANTS["ActorPartFlags"][flag])
                         else:
                             enabled.append(f"0x{flag:08X}")
                 if not enabled:
@@ -363,17 +368,23 @@ def fix_args(self, func, args, info):
 
 
 replace_funcs = {
+    "ActorSpeak"                :{0:"CustomMsg", 1:"ActorIDs", 3:"CustomAnim", 4:"CustomAnim"},
     "AddActorDecoration"        :{0:"ActorIDs"},
     "AddKeyItem"                :{0:"ItemIDs"},
     "AddGoalPos"                :{0:"ActorIDs"},
 
     "BattleCamTargetActor"      :{0:"ActorIDs"},
+    "BindHandleEvent"           :{0:"ActorIDs"},
+    "BindIdle"                  :{0:"ActorIDs"},
+    "BindNextTurn"              :{0:"ActorIDs"},
     "BindNpcAI"                 :{0:"NpcIDs"},
     "BindNpcDefeat"             :{0:"NpcIDs"},
     "BindNpcIdle"               :{0:"NpcIDs"},
     "BindNpcInteract"           :{0:"NpcIDs"},
+    "BindTakeTurn"              :{0:"ActorIDs"},
 
     "ContinueSpeech"            :{1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
+    "CountPlayerTargets"        :{0:"ActorIDs"},
 
     "DisablePlayerInput"        :{0:"Bool"},
     "DisablePlayerPhysics"      :{0:"Bool"},
@@ -387,21 +398,31 @@ replace_funcs = {
     "EnemyTestTarget"           :{0:"ActorIDs", 2:"DamageTypes"},
 
     "FindKeyItem"               :{0:"ItemIDs"},
+    "FlyToGoal"                 :{0:"ActorIDs"},
     "ForceHomePos"              :{0:"ActorIDs"},
 
     "func_802CFE2C"             :{0:"NpcIDs"},
     "func_802CFD30"             :{0:"NpcIDs"},
     "func_802D2520"             :{0:"PlayerAnims"},
 
+    "GetActorHP"                :{0:"ActorIDs"},
     "GetActorPos"               :{0:"ActorIDs"},
+    "GetActorVar"               :{0:"ActorIDs"},
+    "GetDistanceToGoal"         :{0:"ActorIDs"},
     "GetGoalPos"                :{0:"ActorIDs"},
+    "GetHomePos"                :{0:"ActorIDs"},
     "GetItemPower"              :{0:"ItemIDs"},
+    "GetLastDamage"             :{0:"ActorIDs"},
     "GetLastEvent"              :{0:"ActorIDs"},
     "GetNpcPos"                 :{0:"NpcIDs"},
+    "GetStatusFlags"            :{0:"ActorIDs"},
 
     "HidePlayerShadow"          :{0:"Bool"},
+    "HPBarToCurrent"            :{0:"ActorIDs"},
     "HPBarToHome"               :{0:"ActorIDs"},
 
+    "IdleFlyToGoal"             :{0:"ActorIDs"},
+    "IdleRunToGoal"             :{0:"ActorIDs"},
     "InterpNpcYaw"              :{0:"NpcIDs"},
 
     "JumpToGoal"                :{0:"ActorIDs"},
@@ -422,22 +443,34 @@ replace_funcs = {
     "PlaySoundAtActor"          :{0:"ActorIDs", 1:"SoundIDs"},
     "PlaySoundAtNpc"            :{0:"NpcIDs", 1:"SoundIDs"},
 
+    "RemoveActor"               :{0:"ActorIDs"},
     "RemoveActorDecoration"     :{0:"ActorIDs"},
     "RemoveNpc"                 :{0:"NpcIDs"},
+    "ResetActorSounds"          :{0:"ActorIDs"},
+    "ResetAllActorSounds"       :{0:"ActorIDs"},
     "RunToGoal"                 :{0:"ActorIDs", 2:"Bool"},
     "JumpToGoal"                :{0:"ActorIDs", 2:"Bool", 3:"Bool", 4:"Bool"},
 
     "SetActorDispOffset"        :{0:"ActorIDs"},
+    "SetActorFlagBits"          :{0:"ActorIDs", 1:"ActorFlags"},
+    "SetActorIdleSpeed"         :{0:"ActorIDs"},
     "SetActorJumpGravity"       :{0:"ActorIDs"},
+    "SetActorPos"               :{0:"ActorIDs"},
     "SetActorRotation"          :{0:"ActorIDs"},
-    "SetActorSpeed"             :{0:"ActorIDs"},
     "SetActorScale"             :{0:"ActorIDs"},
+    "SetActorSounds"            :{0:"ActorIDs"},
+    "SetActorSpeed"             :{0:"ActorIDs"},
+    "SetActorType"              :{0:"ActorIDs", 1:"ActorType"},
+    "SetActorVar"               :{0:"ActorIDs"},
     "SetActorYaw"               :{0:"ActorIDs"},
     "SetAnimation"              :{0:"ActorIDs", 2:"CustomAnim"},
     "SetAnimationRate"          :{0:"ActorIDs"},
     "SetGoalPos"                :{0:"ActorIDs"},
     "SetGoalToHome"             :{0:"ActorIDs"},
     "SetGoalToTarget"           :{0:"ActorIDs"},
+    "SetHomePos"                :{0:"ActorIDs"},
+    "SetIdleAnimations"         :{0:"ActorIDs"},
+    "SetIdleGoal"               :{0:"ActorIDs"},
     "SetJumpAnimations"         :{0:"ActorIDs", 2:"PlayerAnims", 3:"PlayerAnims", 4:"PlayerAnims"},
     "SetMusicTrack"             :{1:"SongIDs"},
     "SetNpcAnimation"           :{0:"NpcIDs", 1:"CustomAnim"},
@@ -450,9 +483,16 @@ replace_funcs = {
     "SetNpcSpeed"               :{0:"NpcIDs"},
     "SetNpcSprite"              :{1:"Hex"},
     "SetNpcYaw"                 :{0:"NpcIDs"},
+    "SetPartDispOffset"         :{0:"ActorIDs"},
+    "SetPartFlags"              :{0:"ActorIDs"},
+    "SetPartFlagBits"           :{0:"ActorIDs", 2:"ActorPartFlags"},
+    "SetPartPos"                :{0:"ActorIDs"},
+    "SetPartScale"              :{0:"ActorIDs"},
+    "SetPartSounds"             :{0:"ActorIDs"},
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
+    "SetStatusTable"            :{0:"ActorIDs"},
     "SetTargetActor"            :{0:"ActorIDs", 1:"ActorIDs"},
     "ShowChoice"                :{0:"CustomMsg"},
     "ShowEmote"                 :{1:"Emotes"},
@@ -462,22 +502,6 @@ replace_funcs = {
     "SwitchMessage"             :{0:"CustomMsg"},
 
     "UseIdleAnimation"          :{0:"ActorIDs", 1:"Bool"},
-    "BindTakeTurn"              :{0:"ActorIDs"},
-    "BindIdle"                  :{0:"ActorIDs"},
-    "BindHandleEvent"           :{0:"ActorIDs"},
-    "SetActorIdleSpeed"         :{0:"ActorIDs"},
-    "SetIdleAnimations"         :{0:"ActorIDs"},
-    "SetIdleGoal"               :{0:"ActorIDs"},
-    "IdleFlyToGoal"             :{0:"ActorIDs"},
-    "GetStatusFlags"            :{0:"ActorIDs"},
-    "ResetAllActorSounds"       :{0:"ActorIDs"},
-    "FlyToGoal"                 :{0:"ActorIDs"},
-    "SetActorPos"               :{0:"ActorIDs"},
-    "HPBarToCurrent"            :{0:"ActorIDs"},
-    "SetActorFlagBits"          :{0:"ActorIDs", 1:"ActorFlags"},
-    "SetPartFlags"              :{0:"ActorIDs"},
-    "SetPartPos"                :{0:"ActorIDs"},
-    "SetPartDispOffset"         :{0:"ActorIDs"},
 }
 
 
@@ -669,7 +693,6 @@ class ScriptDisassembler:
             if self.prelude:
                 self.prefix_line(f"EvtSource {self.script_name} = {{")
                 self.write_line("};")
-
             self.done = True
         elif opcode == 0x02: self.write_line(f"EVT_RETURN")
         elif opcode == 0x03: self.write_line(f"EVT_LABEL({self.var(argv[0])})")
@@ -778,12 +801,10 @@ class ScriptDisassembler:
             sprite  = (argNum & 0xFF0000) >> 16
             palette = (argNum & 0xFF00)   >> 8
             anim    = (argNum & 0xFF)     >> 0
-
             if sprite > 0:
                 value = make_anim_macro(self, sprite, palette, anim)
             else:
                 value = f"0x{argNum:08X}"
-
             self.write_line(f"EVT_SET_CONST({self.var(argv[0])}, {value})")
         elif opcode == 0x26: self.write_line(f"EVT_SETF({self.var(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x27: self.write_line(f"EVT_ADD({self.var(argv[0])}, {self.var(argv[1])})")
@@ -813,16 +834,14 @@ class ScriptDisassembler:
         elif opcode == 0x3D: self.write_line(f"EVT_USE_FLAG_ARRAY({self.var(argv[0])})")
         elif opcode == 0x3E: self.write_line(f"EVT_MALLOC_ARRAY({self.var(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x3F: self.write_line(f"EVT_BITWISE_AND({self.var(argv[0])}, {self.var(argv[1])})")
-        elif opcode == 0x40: self.write_line(f"EVT_BITWISE_OR({self.var(argv[0])}, {self.var(argv[1])})")
-        elif opcode == 0x41: self.write_line(f"EVT_BITWISE_AND_CONST({self.var(argv[0])}, 0x{argv[1]:X})")
+        elif opcode == 0x40: self.write_line(f"EVT_BITWISE_AND_CONST({self.var(argv[0])}, {self.var(argv[1])})")
+        elif opcode == 0x41: self.write_line(f"EVT_BITWISE_OR({self.var(argv[0])}, 0x{argv[1]:X})")
         elif opcode == 0x42: self.write_line(f"EVT_BITWISE_OR_CONST({self.var(argv[0])}, 0x{argv[1]:X})")
         elif opcode == 0x43:
             func = self.addr_ref(argv[0])
             args = [self.var(a, use_evt_ptr=True) for a in argv[1:]]
-
             args_str = ', '.join(args)
             args_str = replace_constants(self, func, args_str)
-
             if func.startswith("evt_"):
                 # use func-specific macro
                 self.write_line(f"{func}({args_str})")
@@ -877,32 +896,24 @@ class ScriptDisassembler:
                 argv_str += ", "
                 argv_str += f"0x{arg:X}"
             self.write_line(f"0x{opcode:02X}{argv_str}),")
-
     def collider_id(self, arg):
         if arg >= 0x4000 and arg <= 0x5000:
             return f"EVT_ENTITY_INDEX({arg - 0x4000})"
         else:
             return self.var(arg)
-
-
 class UnsupportedScript(Exception):
     pass
-
-
 if __name__ == "__main__":
     import argparse
-
     parser = argparse.ArgumentParser()
     parser.add_argument("file", type=str, help="File to dissassemble from")
     parser.add_argument("offset", help="Offset to start dissassembling from")
     parser.add_argument("-end", "-e", "--e", type=lambda x: int(x, 16), default=0, dest="end", required=False, help="End offset to stop dissassembling from.\nOnly used as a way to find valid scripts.")
     parser.add_argument("-vram", "-v", "--v", type=lambda x: int(x, 16), default=0, dest="vram", required=False, help="VRAM start will be tracked and used for the script output name")
     parser.add_argument("-si", "--si", action="store_true", default=False, dest="si", required=False, help="Force si script output")
-
     args = parser.parse_args()
     vram_base = args.vram
     get_constants()
-
     INCLUDED = {}
     INCLUDED["functions"] = set()
     INCLUDED["includes"] = set()
@@ -911,7 +922,6 @@ if __name__ == "__main__":
     INCLUDES_NEEDED["forward"] = []
     INCLUDES_NEEDED["npcs"] = {}
     INCLUDES_NEEDED["sprites"] = set()
-
     try:
         offset = int(args.offset, 0)
     except ValueError:
@@ -920,20 +930,16 @@ if __name__ == "__main__":
             print(f"{args.offset} is not a valid symbol name")
             exit(1)
         offset = info[0]
-
     if args.end > offset:
         # Search the given memory range and report scripts
         with open(args.file, "rb") as f:
             gap = False
             first_print = False
-
             while offset < args.end:
                 f.seek(offset)
-
                 script = ScriptDisassembler(f, args.offset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
                 try:
                     script_text = script.disassemble()
-
                     if script.instructions > 1 and "_EVT_CMD" not in script_text:
                         if gap and first_print:
                             potential_struct_sizes = { "StaticNpc": 0x1F0, "NpcAISettings":0x30, "NpcSettings":0x2C, "NpcGroupList":0xC }
@@ -944,7 +950,6 @@ if __name__ == "__main__":
                                 if gap_size % v == 0:
                                     potential_struct = k
                                     potential_count = gap_size // v
-
                             print(f"========== 0x{gap_size:X} byte gap ({potential_count} {potential_struct}?) 0x{gap_start:X} - 0x{offset:X} ==========")
                             print()
                             gap = False

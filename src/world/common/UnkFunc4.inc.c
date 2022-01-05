@@ -26,7 +26,7 @@ void N(UnkFunc4)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* te
             posY = npc->pos.y;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            phi_v0 = npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+            phi_v0 = npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
         }
 
         if (phi_v0) {

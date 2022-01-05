@@ -60,7 +60,7 @@ s32 func_802BD17C_31B19C(Npc* kooper) {
 void world_kooper_init(Npc* kooper) {
     kooper->collisionHeight = 37;
     kooper->collisionRadius = 24;
-    kooper->unk_80 = 0x00010000;
+    kooper->collisionChannel = 0x00010000;
     D_802BEC54 = 0;
 }
 

@@ -74,7 +74,7 @@ void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     z = npc->pos.z;
     w = 1000.0f;
 
-    npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w);
+    npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
     npc->pos.y = y + temp_f24 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 0xC);
 
@@ -88,7 +88,7 @@ void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
                 y = npc->pos.y;
                 z = npc->pos.z;
                 w = 1000.0f;
-                npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w);
+                npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
                 npc->moveToPos.y = y + temp_f24;
                 script->functionTemp[0] = 12;
                 return;
@@ -111,7 +111,7 @@ void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
                 y = temp_f22;
                 z = npc->pos.z;
                 w = 1000.0f;
-                npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w);
+                npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
                 y += temp_f24;
                 w = y - temp_f22;
                 if (w > 2.0) {
@@ -157,7 +157,7 @@ void func_80241A40_EF4050(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     z = npc->pos.z;
     w = 1000.0f;
 
-    npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w);
+    npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
     npc->pos.y = y + temp_f22 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 0xC);
     if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) != 0) {

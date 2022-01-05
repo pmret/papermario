@@ -31,28 +31,11 @@ typedef struct Vec2bu {
     /* 0x01 */ u8 y;
 } Vec2bu; // size = 0x02
 
-typedef struct Vec2f {
-    /* 0x00 */ f32 x;
-    /* 0x04 */ f32 y;
-} Vec2f; // size = 0x08
-
 typedef struct Vec3b {
     /* 0x00 */ s8 x;
     /* 0x01 */ s8 y;
     /* 0x02 */ s8 z;
 } Vec3b; // size = 0x03
-
-typedef struct Vec3f {
-    /* 0x00 */ f32 x;
-    /* 0x04 */ f32 y;
-    /* 0x08 */ f32 z;
-} Vec3f; // size = 0x0C
-
-typedef struct Vec3i {
-    /* 0x00 */ s32 x;
-    /* 0x04 */ s32 y;
-    /* 0x08 */ s32 z;
-} Vec3i; // size = 0x0C
 
 typedef struct Vec2s {
     /* 0x00 */ s16 x;
@@ -69,6 +52,28 @@ typedef struct Vec3s {
     /* 0x02 */ s16 y;
     /* 0x04 */ s16 z;
 } Vec3s; // size = 0x06
+
+typedef struct Vec2i {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+} Vec2i; // size = 0x08
+
+typedef struct Vec3i {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+    /* 0x08 */ s32 z;
+} Vec3i; // size = 0x0C
+
+typedef struct Vec2f {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+} Vec2f; // size = 0x08
+
+typedef struct Vec3f {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+    /* 0x08 */ f32 z;
+} Vec3f; // size = 0x0C
 
 typedef struct Vec4f {
     /* 0x00 */ f32 x;
@@ -150,9 +155,9 @@ typedef struct Npc {
     /* 0x06C */ Vec3f colliderPos; /* used during collision with player */
     /* 0x078 */ s32 shadowIndex;
     /* 0x07C */ f32 shadowScale;
-    /* 0x080 */ s32 unk_80;
-    /* 0x084 */ s16 unk_84;
-    /* 0x086 */ s16 unk_86;
+    /* 0x080 */ s32 collisionChannel; /* flags used with collision tracing */
+    /* 0x084 */ s16 currentFloor; /* colliderID */
+    /* 0x086 */ s16 currentWall; /* colliderID */
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ s16 turnAroundYawAdjustment;
@@ -175,11 +180,13 @@ typedef struct Npc {
     /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
     /* 0x0AE */ char unk_AE[2];
     /* 0x0B0 */ s32** extraAnimList;
-    /* 0x0B4 */ s8 unk_B4; // some kind of rendering type, 0..4 inclusive
-    /* 0x0B5 */ s8 unk_B5;
-    /* 0x0B6 */ s8 unk_B6;
-    /* 0x0B7 */ s8 unk_B7;
-    /* 0x0B8 */ char unk_B8[8];
+    /* 0x0B4 */ s8 palSwapType; // 0..4 inclusive
+    /* 0x0B5 */ s8 palSwapPrevType;
+    /* 0x0B6 */ s8 dirtyPalettes;
+    /* 0x0B7 */ s8 palSwapState;
+    /* 0x0B8 */ char unk_B8[4];
+    /* 0x0BC */ s16 palSwapTimer;
+    /* 0x0BE */ s16 palSwapLerpAlpha;
     /* 0x0C0 */ s8 unk_C0;
     /* 0x0C1 */ s8 paletteCount;
     /* 0x0C2 */ char unk_C2[2];
@@ -2118,16 +2125,23 @@ typedef struct {
     /* 0x11630 */ Mtx matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 
-typedef struct Temp8010F250 {
-    /* 0x00 */ s8 unk_00;
-    /* 0x01 */ s8 unk_01;
-    /* 0x02 */ char unk_02[5];
-    /* 0x07 */ s8 unk_07;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ char unk_10[0x20];
-    /* 0x30 */ s32 unk_30;
-} Temp8010F250; // size = 0x34
+typedef struct PlayerSpinState {
+    /* 0x00 */ s8 stopSoundTimer;
+    /* 0x01 */ s8 hasBufferedSpin;
+    /* 0x02 */ s8 hitWallTime; // incremented while blocked by a wall
+    /* 0x03 */ s8 spinCountdown;
+    /* 0x04 */ s32 prevActionState;
+    /* 0x08 */ Vec2i bufferedStickAxis;
+    /* 0x10 */ f32 spinDirectionMagnitude;
+    /* 0x14 */ Vec2f spinDirection;
+    /* 0x1C */ f32 inputMagnitude;
+    /* 0x20 */ f32 spinRate;
+    /* 0x24 */ f32 speedScale;
+    /* 0x28 */ f32 frictionScale;
+    /* 0x2C */ s16 initialSpinTime;
+    /* 0x2E */ s16 fullSpeedSpinTime;
+    /* 0x30 */ s32 spinSoundID;
+} PlayerSpinState; // size = 0x34
 
 typedef struct PartnerActionStatus {
     /* 0x000 */ union {

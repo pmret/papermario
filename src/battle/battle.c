@@ -16,6 +16,15 @@ extern StageList b_area_kmr_part_2_stageTable;
 extern BattleList b_area_kmr_part_3_formationTable;
 extern StageList b_area_kmr_part_3_stageTable;
 
+extern BattleList b_area_mac_formationTable;
+extern StageList b_area_mac_stageTable;
+
+extern BattleList b_area_hos_formationTable;
+extern StageList b_area_hos_stageTable;
+
+extern BattleList b_area_nok_formationTable;
+extern StageList b_area_nok_stageTable;
+
 BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kmr_part_1),
@@ -26,32 +35,32 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kmr_part_2),
         .name = "エリア ＫＭＲ その２",
-        .battles = b_area_kmr_part_2_formationTable,
-        .stages = b_area_kmr_part_2_stageTable,
+        .battles = &b_area_kmr_part_2_formationTable,
+        .stages = &b_area_kmr_part_2_stageTable,
     },
     {
         AREA(area_kmr_part_3),
         .name = "エリア ＫＭＲ その３",
-        .battles = b_area_kmr_part_3_formationTable,
-        .stages = b_area_kmr_part_3_stageTable,
+        .battles = &b_area_kmr_part_3_formationTable,
+        .stages = &b_area_kmr_part_3_stageTable,
     },
     {
         AREA(area_mac),
         .name = "エリア ＭＡＣ",
-        .battles = 0x80232A5C,
-        .stages = 0x80232AD4,
+        .battles = &b_area_mac_formationTable,
+        .stages = &b_area_mac_stageTable,
     },
     {
         AREA(area_hos),
         .name = "エリア ＨＯＳ",
-        .battles = 0x80225F24,
-        .stages = 0x80225F88,
+        .battles = &b_area_hos_formationTable,
+        .stages = &b_area_hos_stageTable,
     },
     {
         AREA(area_nok),
         .name = "エリア ＮＯＫ",
-        .battles = 0x80219520,
-        .stages = 0x80219728,
+        .battles = &b_area_nok_formationTable,
+        .stages = &b_area_nok_stageTable,
     },
     {
         AREA(area_trd_part_1),

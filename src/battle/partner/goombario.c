@@ -2,9 +2,10 @@
 
 #include "common.h"
 #include "effects.h"
+#include "message_ids.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "message_ids.h"
+#include "battle/action_cmd/jump.h"
 #include "sprite/npc/battle_goombario.h"
 
 extern EffectInstance* D_8023CDA0;
@@ -686,7 +687,7 @@ EvtSource N(8023A66C) = {
 
 EvtSource N(8023A754) = {
     EVT_CALL(LoadActionCommand, 1)
-    EVT_CALL(func_802A9000_430020)
+    EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(battle_partner_goombario_8023A52C)
     EVT_EXEC_WAIT(battle_partner_goombario_8023A66C)
     EVT_CALL(SetAnimation, -127, 1, 589831)
@@ -754,7 +755,7 @@ EvtSource N(8023A754) = {
     EVT_CALL(func_80269524, EVT_VAR(15))
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, 1)
-    EVT_CALL(func_802A9000_430020)
+    EVT_CALL(action_command_jump_CreateHudElements)
     EVT_CALL(func_802694A4, 0)
     EVT_CALL(func_802A9120_421B10, 24, 3)
     EVT_SET(EVT_VAR(10), 24)
@@ -791,7 +792,7 @@ EvtSource N(8023A754) = {
 
 EvtSource N(8023ADC4) = {
     EVT_CALL(LoadActionCommand, 1)
-    EVT_CALL(func_802A9000_430020)
+    EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(battle_partner_goombario_8023A52C)
     EVT_EXEC_WAIT(battle_partner_goombario_8023A66C)
     EVT_CALL(SetAnimation, -127, 1, 589831)
@@ -859,7 +860,7 @@ EvtSource N(8023ADC4) = {
     EVT_CALL(func_80269524, EVT_VAR(15))
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, 1)
-    EVT_CALL(func_802A9000_430020)
+    EVT_CALL(action_command_jump_CreateHudElements)
     EVT_CALL(func_802694A4, 0)
     EVT_CALL(func_802A9120_421B10, 24, 3)
     EVT_SET(EVT_VAR(10), 24)
@@ -898,7 +899,7 @@ EvtSource N(8023ADC4) = {
 
 EvtSource N(8023B45C) = {
     EVT_CALL(LoadActionCommand, 1)
-    EVT_CALL(func_802A9000_430020)
+    EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(battle_partner_goombario_8023A52C)
     EVT_EXEC_WAIT(battle_partner_goombario_8023A66C)
     EVT_CALL(SetAnimation, -127, 1, 589831)
@@ -966,7 +967,7 @@ EvtSource N(8023B45C) = {
     EVT_CALL(func_80269524, EVT_VAR(15))
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, 1)
-    EVT_CALL(func_802A9000_430020)
+    EVT_CALL(action_command_jump_CreateHudElements)
     EVT_CALL(func_802694A4, 0)
     EVT_CALL(func_802A9120_421B10, 24, 3)
     EVT_SET(EVT_VAR(10), 24)
@@ -1020,7 +1021,7 @@ s32 D_8023BB98_6ECC78 = 0x000000C8;
 
 EvtSource N(8023BB9C) = {
     EVT_CALL(LoadActionCommand, 1)
-    EVT_CALL(func_802A9000_430020)
+    EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(battle_partner_goombario_8023A52C)
     EVT_EXEC_WAIT(battle_partner_goombario_8023A66C)
     EVT_CALL(SetAnimation, -127, 1, 589831)
@@ -1099,7 +1100,7 @@ EvtSource N(8023BB9C) = {
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(func_8026919C, EVT_PTR(battle_partner_goombario_D_8023BB78_6ECC58))
     EVT_CALL(LoadActionCommand, 1)
-    EVT_CALL(func_802A9000_430020)
+    EVT_CALL(action_command_jump_CreateHudElements)
     EVT_SET(EVT_VAR(10), 24)
     EVT_SWITCH(EVT_VAR(15))
         EVT_CASE_EQ(0)

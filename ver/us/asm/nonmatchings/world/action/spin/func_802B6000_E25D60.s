@@ -26,8 +26,8 @@ glabel func_802B6000_E25D60
 /* E25D8C 802B602C F7B60040 */  sdc1      $f22, 0x40($sp)
 /* E25D90 802B6030 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* E25D94 802B6034 8E220000 */  lw        $v0, ($s1)
-/* E25D98 802B6038 3C108011 */  lui       $s0, %hi(D_8010F250)
-/* E25D9C 802B603C 2610F250 */  addiu     $s0, $s0, %lo(D_8010F250)
+/* E25D98 802B6038 3C108011 */  lui       $s0, %hi(gPlayerSpinState)
+/* E25D9C 802B603C 2610F250 */  addiu     $s0, $s0, %lo(gPlayerSpinState)
 /* E25DA0 802B6040 0441009D */  bgez      $v0, .L802B62B8
 /* E25DA4 802B6044 0000A82D */   daddu    $s5, $zero, $zero
 /* E25DA8 802B6048 3C037FF7 */  lui       $v1, 0x7ff7

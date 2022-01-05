@@ -1346,7 +1346,7 @@ void N(func_80241704_CC4F14)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     z = npc->pos.z;
     w = 1000.0f;
 
-    npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w);
+    npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
     npc->pos.y = y + temp_f24 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 0xC);
 
@@ -1360,7 +1360,7 @@ void N(func_80241704_CC4F14)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
                 y = npc->pos.y;
                 z = npc->pos.z;
                 w = 1000.0f;
-                npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w);
+                npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
                 npc->moveToPos.y = y + temp_f24;
                 script->functionTemp[0] = 12;
                 return;
@@ -1383,7 +1383,7 @@ void N(func_80241704_CC4F14)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
                 y = temp_f22;
                 z = npc->pos.z;
                 w = 1000.0f;
-                npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w);
+                npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
                 y += temp_f24;
                 w = y - temp_f22;
                 if (w > 2.0) {
@@ -1429,7 +1429,7 @@ void N(func_80241B68_CC5378)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     z = npc->pos.z;
     w = 1000.0f;
 
-    npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w);
+    npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
     npc->pos.y = y + temp_f22 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 0xC);
     if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) != 0) {
@@ -1870,7 +1870,7 @@ ApiStatus N(func_80242A6C_CC627C)(Evt* script, s32 isInitialCall) {
                 x2 = npc->pos.x;
                 y2 = npc->pos.y;
                 z2 = npc->pos.z;
-                if (npc_test_move_simple_with_slipping(npc->unk_80, &x2, &y2, &z2, npc->moveSpeed, npc->yaw, npc->collisionHeight,
+                if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x2, &y2, &z2, npc->moveSpeed, npc->yaw, npc->collisionHeight,
                                   npc->collisionRadius) == 0) {
                     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
                 } else {
@@ -1884,7 +1884,7 @@ ApiStatus N(func_80242A6C_CC627C)(Evt* script, s32 isInitialCall) {
                 y2 = npc->pos.y + 13.0;
                 z2 = npc->pos.z;
                 w2 = fabsf(npc->jumpVelocity) + 16.0;
-                if ((npc_raycast_down_sides(npc->unk_80, &x2, &y2, &z2, &w2) != 0) && (w2 <= (fabsf(npc->jumpVelocity) + 13.0))) {
+                if ((npc_raycast_down_sides(npc->collisionChannel, &x2, &y2, &z2, &w2) != 0) && (w2 <= (fabsf(npc->jumpVelocity) + 13.0))) {
                     npc->pos.y = y2;
                     enemy->territory->wander.point.x = npc->pos.x;
                     enemy->territory->wander.point.y = npc->pos.y;

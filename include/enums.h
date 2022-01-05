@@ -505,15 +505,15 @@ enum SoundIDs {
     SOUND_MENU_CHANGE_TAB           = 0x000000C8,
     SOUND_MENU_NEXT                 = 0x000000C9,
     SOUND_MENU_BACK                 = 0x000000CA,
-    SOUND_E1                        = 0x000000E1,
-    SOUND_E2                        = 0x000000E2,
-    SOUND_E3                        = 0x000000E3,
-    SOUND_E7                        = 0x000000E7,
-    SOUND_E9                        = 0x000000E9,
-    SOUND_FIRE_DAMAGE               = 0x000000EA,
-    SOUND_FREEZE_DAMAGE             = 0x000000EB,
-    SOUND_10C                       = 0x0000010C,
-    SOUND_10D                       = 0x0000010D,
+    SOUND_HIT_PLAYER_NORMAL         = 0x000000E1,
+    SOUND_HIT_PLAYER_FIRE           = 0x000000E2,
+    SOUND_HIT_PLAYER_ICE            = 0x000000E3,
+    SOUND_FROZEN_SHATTER            = 0x000000E7,
+    SOUND_HIT_NORMAL                = 0x000000E9,
+    SOUND_HIT_FIRE                  = 0x000000EA,
+    SOUND_HIT_ICE                   = 0x000000EB,
+    SOUND_IMMUNE                    = 0x0000010C,
+    SOUND_HIT_BONES                 = 0x0000010D,
     SOUND_STEP1                     = 0x00000141,
     SOUND_STEP2                     = 0x00000142,
     SOUND_TORNADO_JUMP              = 0x00000147,
@@ -583,8 +583,8 @@ enum SoundIDs {
     SOUND_376                       = 0x00000376,
     SOUND_377                       = 0x00000377,
     SOUND_379                       = 0x00000379,
-    SOUND_37A                       = 0x0000037A,
-    SOUND_ELECTRIC_DAMAGE           = 0x0000037B,
+    SOUND_HIT_PLAYER_SHOCK          = 0x0000037A,
+    SOUND_HIT_SHOCK                 = 0x0000037B,
     SOUND_GENERAL_WHISTLE           = 0x00000395,
     SOUND_OPEN_SHELL                = 0x000003D4,
     SOUND_JUMP_3E2                  = 0x000003E2,
@@ -1075,9 +1075,6 @@ enum PlayerAnims {
     ANIM_8001B                      = 0x0008001B,
     ANIM_8001D                      = 0x0008001D,
     ANIM_8001E                      = 0x0008001E,
-    ANIM_90004                      = 0x00090004,
-    ANIM_90005                      = 0x00090005,
-    ANIM_90006                      = 0x00090006,
 };
 
 enum AmbientSounds {
@@ -1160,6 +1157,13 @@ enum Phases {
     PHASE_MERLEE_DEFENSE_BONUS      = 21,
     PHASE_MERLEE_EXP_BONUS          = 22,
     PHASE_PLAYER_HAPPY              = 30,
+};
+
+enum ActorClasses {
+    ACTOR_CLASS_PLAYER      = 0x000,
+    ACTOR_CLASS_PARTNER     = 0x100,
+    ACTOR_CLASS_ENEMY       = 0x200,
+    ACTOR_CLASS_MASK        = 0x700,
 };
 
 enum ActorIDs {
@@ -1402,6 +1406,7 @@ enum ActionStates {
     ACTION_STATE_IDLE                           = 0x00000000,
     ACTION_STATE_WALK                           = 0x00000001,
     ACTION_STATE_RUN                            = 0x00000002,
+    // all states above are considered locomotion states
     ACTION_STATE_JUMP                           = 0x00000003,
     ACTION_STATE_BOUNCE                         = 0x00000004,  ///< Used with Kooper
     ACTION_STATE_HOP                            = 0x00000005,  ///< Released A before apex of jump
@@ -1597,6 +1602,13 @@ enum Areas {
     AREA_MGM,
     AREA_GV,
     AREA_TST,
+};
+
+enum NpcPalSwapState {
+    NPC_PALSWAP_HOLDING_A           = 0,
+    NPC_PALSWAP_FROM_A_TO_B         = 1,
+    NPC_PALSWAP_HOLDING_B           = 2,
+    NPC_PALSWAP_FROM_B_TO_A         = 3
 };
 
 enum NpcFlags {
