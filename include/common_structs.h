@@ -31,33 +31,11 @@ typedef struct Vec2bu {
     /* 0x01 */ u8 y;
 } Vec2bu; // size = 0x02
 
-typedef struct Vec2f {
-    /* 0x00 */ f32 x;
-    /* 0x04 */ f32 y;
-} Vec2f; // size = 0x08
-
 typedef struct Vec3b {
     /* 0x00 */ s8 x;
     /* 0x01 */ s8 y;
     /* 0x02 */ s8 z;
 } Vec3b; // size = 0x03
-
-typedef struct Vec3f {
-    /* 0x00 */ f32 x;
-    /* 0x04 */ f32 y;
-    /* 0x08 */ f32 z;
-} Vec3f; // size = 0x0C
-
-typedef struct Vec2i {
-    /* 0x00 */ s32 x;
-    /* 0x04 */ s32 y;
-} Vec2i; // size = 0x08
-
-typedef struct Vec3i {
-    /* 0x00 */ s32 x;
-    /* 0x04 */ s32 y;
-    /* 0x08 */ s32 z;
-} Vec3i; // size = 0x0C
 
 typedef struct Vec2s {
     /* 0x00 */ s16 x;
@@ -74,6 +52,28 @@ typedef struct Vec3s {
     /* 0x02 */ s16 y;
     /* 0x04 */ s16 z;
 } Vec3s; // size = 0x06
+
+typedef struct Vec2i {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+} Vec2i; // size = 0x08
+
+typedef struct Vec3i {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+    /* 0x08 */ s32 z;
+} Vec3i; // size = 0x0C
+
+typedef struct Vec2f {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+} Vec2f; // size = 0x08
+
+typedef struct Vec3f {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+    /* 0x08 */ f32 z;
+} Vec3f; // size = 0x0C
 
 typedef struct Vec4f {
     /* 0x00 */ f32 x;
