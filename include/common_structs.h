@@ -48,6 +48,11 @@ typedef struct Vec3f {
     /* 0x08 */ f32 z;
 } Vec3f; // size = 0x0C
 
+typedef struct Vec2i {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+} Vec2i; // size = 0x08
+
 typedef struct Vec3i {
     /* 0x00 */ s32 x;
     /* 0x04 */ s32 y;
@@ -2126,9 +2131,9 @@ typedef struct PlayerSpinState {
     /* 0x02 */ s8 hitWallTime; // incremented while blocked by a wall
     /* 0x03 */ s8 spinCountdown;
     /* 0x04 */ s32 prevActionState;
-    /* 0x08 */ s32 bufferedStickAxis[2];
+    /* 0x08 */ Vec2i bufferedStickAxis;
     /* 0x10 */ f32 spinDirectionMagnitude;
-    /* 0x14 */ f32 spinDirection[2];
+    /* 0x14 */ Vec2f spinDirection;
     /* 0x1C */ f32 inputMagnitude;
     /* 0x20 */ f32 spinRate;
     /* 0x24 */ f32 speedScale;

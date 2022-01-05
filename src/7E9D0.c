@@ -233,7 +233,7 @@ void check_input_spin(void) {
                         if (btnPressed || spinState->hasBufferedSpin) {
                             set_action_state(ACTION_STATE_SPIN);
                             if (spinState->hasBufferedSpin != FALSE) {
-                                if (spinState->bufferedStickAxis[0] != 0 || spinState->bufferedStickAxis[1] != 0) {
+                                if (spinState->bufferedStickAxis.x != 0 || spinState->bufferedStickAxis.y != 0) {
                                     playerStatus->prevActionState = temp2->prevActionState;
                                 } else {
                                     playerStatus->prevActionState = ACTION_STATE_IDLE;

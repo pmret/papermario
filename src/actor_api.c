@@ -824,18 +824,18 @@ ApiStatus GetAnimation(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID;
     ActorPart* actorPart;
-    s32 outVat;
+    s32 outVar;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
     partID = evt_get_variable(script, *args++);
-    outVat = *args++;
+    outVar = *args++;
 
     actorPart = get_actor_part(get_actor(actorID), partID);
 
     if (actorPart != NULL) {
-        evt_set_variable(script, outVat, actorPart->currentAnimation);
+        evt_set_variable(script, outVar, actorPart->currentAnimation);
     }
     return ApiStatus_DONE2;
 }
