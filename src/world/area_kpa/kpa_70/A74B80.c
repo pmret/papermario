@@ -8,4 +8,4 @@
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_70/A74B80", func_802406A4_A74F14);
+#include "world/common/UnkNpcAIMainFunc5.inc.c"
