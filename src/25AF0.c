@@ -34,7 +34,7 @@ s32 func_8004A784(Npc* npc, f32 arg1, f32* outYaw, f32* outDist1, f32* outDist2,
     z1 = npc->pos.z;
     yaw = *outYaw;
 
-    ret = npc_test_move_simple_with_slipping(npc->unk_80, &x1, &y1, &z1, npc->moveSpeed * arg1,
+    ret = npc_test_move_simple_with_slipping(npc->collisionChannel, &x1, &y1, &z1, npc->moveSpeed * arg1,
                                              yaw, npc->collisionHeight, npc->collisionRadius);
     if (ret != 0) {
         dist1 = dist2D(npc->pos.x, npc->pos.z, x1, z1);
@@ -42,7 +42,7 @@ s32 func_8004A784(Npc* npc, f32 arg1, f32* outYaw, f32* outDist1, f32* outDist2,
         x2 = npc->pos.x;
         y2 = npc->pos.y;
         z2 = npc->pos.z;
-        if (npc_test_move_simple_with_slipping(npc->unk_80, &x2, &y2, &z2, npc->moveSpeed * arg1,
+        if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x2, &y2, &z2, npc->moveSpeed * arg1,
                                                clamp_angle(yaw + 35.0f), npc->collisionHeight,
                                                            npc->collisionRadius) != 0) {
             dist2 = dist2D(npc->pos.x, npc->pos.z, x2, z2);
@@ -51,7 +51,7 @@ s32 func_8004A784(Npc* npc, f32 arg1, f32* outYaw, f32* outDist1, f32* outDist2,
         x3 = npc->pos.x;
         y3 = npc->pos.y;
         z3 = npc->pos.z;
-        if (npc_test_move_simple_with_slipping(npc->unk_80, &x3, &y3, &z3, npc->moveSpeed * arg1,
+        if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x3, &y3, &z3, npc->moveSpeed * arg1,
                                                clamp_angle(yaw - 35.0f), npc->collisionHeight, npc->collisionRadius)
                                                != 0) {
             dist3 = dist2D(npc->pos.x, npc->pos.z, x3, z3);

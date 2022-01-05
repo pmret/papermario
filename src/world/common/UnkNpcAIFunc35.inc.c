@@ -27,7 +27,7 @@ void N(UnkNpcAIFunc35)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
             posY = npc->pos.y;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+            npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
             if (vt1 < (vt3 - posW)) {
                 enemy->varTable[0] |= 0x10;
             }
@@ -48,7 +48,7 @@ void N(UnkNpcAIFunc35)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
                 posY = vt4;
                 posZ = npc->pos.z;
                 posW = 1000.0f;
-                npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+                npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
 
                 yTemp = posY;
                 yTemp += vt3;
@@ -75,7 +75,7 @@ void N(UnkNpcAIFunc35)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
                 posY = npc->pos.y;
                 posZ = npc->pos.z;
                 posW = 1000.0f;
-                hit = npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+                hit = npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
             }
 
             if (hit) {

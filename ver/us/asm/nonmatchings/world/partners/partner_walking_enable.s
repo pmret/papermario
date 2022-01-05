@@ -87,10 +87,10 @@ glabel partner_walking_enable
 /* 84E88 800EB9D8 00621821 */  addu      $v1, $v1, $v0
 /* 84E8C 800EB9DC 8C63835C */  lw        $v1, %lo(gPartnerAnimations+0x14)($v1)
 /* 84E90 800EB9E0 24020010 */  addiu     $v0, $zero, 0x10
-/* 84E94 800EB9E4 3C018010 */  lui       $at, %hi(D_800F802C)
-/* 84E98 800EB9E8 AC22802C */  sw        $v0, %lo(D_800F802C)($at)
-/* 84E9C 800EB9EC 3C018011 */  lui       $at, %hi(D_8010CFC0)
-/* 84EA0 800EB9F0 E420CFC0 */  swc1      $f0, %lo(D_8010CFC0)($at)
+/* 84E94 800EB9E4 3C018010 */  lui       $at, %hi(wPartnerMoveTime)
+/* 84E98 800EB9E8 AC22802C */  sw        $v0, %lo(wPartnerMoveTime)($at)
+/* 84E9C 800EB9EC 3C018011 */  lui       $at, %hi(wPartnerTetherDistance)
+/* 84EA0 800EB9F0 E420CFC0 */  swc1      $f0, %lo(wPartnerTetherDistance)($at)
 /* 84EA4 800EB9F4 0C03A96E */  jal       func_800EA5B8
 /* 84EA8 800EB9F8 AE030028 */   sw       $v1, 0x28($s0)
 /* 84EAC 800EB9FC 3C030040 */  lui       $v1, 0x40

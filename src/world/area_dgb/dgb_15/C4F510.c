@@ -626,7 +626,7 @@ ApiStatus N(func_80241464_C50974)(Evt* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }

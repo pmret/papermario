@@ -41,12 +41,12 @@ s32 get_nearest_home_index(f32 x, f32 y, f32 z) {
 }
 
 void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partIndex) {
-    s32 actorClass = actorID & 0x700;
+    s32 actorClass = actorID & ACTOR_CLASS_MASK;
     Actor* actor = get_actor(actorID);
     ActorPart* part;
 
     switch (actorClass) {
-        case ACTOR_PLAYER:
+        case ACTOR_CLASS_PLAYER:
             part = get_actor_part(actor, 0);
             state->goalPos.x = actor->currentPos.x + part->partOffset.x * actor->scalingFactor;
             state->goalPos.y = actor->currentPos.y + part->partOffset.y * actor->scalingFactor;
@@ -55,8 +55,8 @@ void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partIndex) {
                 state->goalPos.y -= actor->scalingFactor * 5.0f;
             }
             break;
-        case ACTOR_PARTNER:
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_PARTNER:
+        case ACTOR_CLASS_ENEMY:
             part = get_actor_part(actor, partIndex);
             if (!(part->flags & ACTOR_PART_FLAG_100000)) {
                 state->goalPos.x = actor->currentPos.x + (part->partOffset.x + part->targetOffset.x) * actor->scalingFactor;
@@ -80,19 +80,19 @@ void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partIndex) {
 }
 
 void set_part_goal_to_actor_part(ActorPartMovement* movement, s32 actorID, s32 partIndex) {
-    s32 actorClass = actorID & 0x700;
+    s32 actorClass = actorID & ACTOR_CLASS_MASK;
     Actor* actor = get_actor(actorID);
     ActorPart* part;
 
     switch (actorClass) {
-        case ACTOR_PLAYER:
+        case ACTOR_CLASS_PLAYER:
             part = get_actor_part(actor, 0);
             part->movement->goalPos.x = actor->currentPos.x + part->partOffset.x * actor->scalingFactor;
             part->movement->goalPos.y = actor->currentPos.y + part->partOffset.y * actor->scalingFactor;
             part->movement->goalPos.z = actor->currentPos.z;
             break;
-        case ACTOR_PARTNER:
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_PARTNER:
+        case ACTOR_CLASS_ENEMY:
             part = get_actor_part(actor, partIndex);
             if (!(part->flags & ACTOR_PART_FLAG_100000)) {
                 part->movement->goalPos.x = actor->currentPos.x + (part->partOffset.x + part->targetOffset.x) * actor->scalingFactor;
@@ -127,14 +127,14 @@ void set_part_absolute_position(s32 actorID, s32 partIndex, f32 x, f32 y, f32 z)
     Actor* actor = get_actor(actorID);
     ActorPart* actorPart;
 
-    switch (actorID & 0x700) {
-        case ACTOR_PLAYER:
+    switch (actorID & ACTOR_CLASS_MASK) {
+        case ACTOR_CLASS_PLAYER:
             actor->currentPos.x = x;
             actor->currentPos.y = y;
             actor->currentPos.z = z;
             break;
-        case ACTOR_PARTNER:
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_PARTNER:
+        case ACTOR_CLASS_ENEMY:
             actorPart = get_actor_part(actor, partIndex);
             actorPart->absolutePosition.x = x;
             actorPart->absolutePosition.y = y;
@@ -154,17 +154,17 @@ void set_actor_home_position(s32 actorID, f32 x, f32 y, f32 z) {
 Actor* get_actor(s32 actorID) {
     Actor* ret = NULL;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 actorClass = actorID & 0x700;
+    s32 actorClass = actorID & ACTOR_CLASS_MASK;
     u32 idIdx = (u8)actorID;
 
     switch (actorClass) {
-        case ACTOR_PLAYER:
+        case ACTOR_CLASS_PLAYER:
             ret = battleStatus->playerActor;
             break;
-        case ACTOR_PARTNER:
+        case ACTOR_CLASS_PARTNER:
             ret = battleStatus->partnerActor;
             break;
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_ENEMY:
             ret = battleStatus->enemyActors[idIdx];
             break;
     }
@@ -748,14 +748,14 @@ ApiStatus SetPartPos(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    switch (actorID & 0x700) {
-        case ACTOR_PLAYER:
+    switch (actorID & ACTOR_CLASS_MASK) {
+        case ACTOR_CLASS_PLAYER:
             actor->currentPos.x = x;
             actor->currentPos.y = y;
             actor->currentPos.z = z;
             break;
-        case ACTOR_PARTNER:
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_PARTNER:
+        case ACTOR_CLASS_ENEMY:
             actorPart = get_actor_part(actor, partIndex);
 
             if (!(actorPart->flags & ACTOR_PART_FLAG_100000)) {
@@ -791,11 +791,11 @@ ApiStatus SetEnemyTargetOffset(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    switch (actorID & 0x700) {
-        case ACTOR_PLAYER:
+    switch (actorID & ACTOR_CLASS_MASK) {
+        case ACTOR_CLASS_PLAYER:
             break;
-        case ACTOR_PARTNER:
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_PARTNER:
+        case ACTOR_CLASS_ENEMY:
             actorPart = get_actor_part(actor, partIndex);
             actorPart->targetOffset.x = x;
             actorPart->targetOffset.y = y;
@@ -822,20 +822,20 @@ ApiStatus SetAnimation(Evt* script, s32 isInitialCall) {
 ApiStatus GetAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 var1;
+    s32 partID;
     ActorPart* actorPart;
-    s32 a1;
+    s32 outVar;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
-    var1 = evt_get_variable(script, *args++);
-    a1 = *args++;
+    partID = evt_get_variable(script, *args++);
+    outVar = *args++;
 
-    actorPart = get_actor_part(get_actor(actorID), var1);
+    actorPart = get_actor_part(get_actor(actorID), partID);
 
     if (actorPart != NULL) {
-        evt_set_variable(script, a1, actorPart->currentAnimation);
+        evt_set_variable(script, outVar, actorPart->currentAnimation);
     }
     return ApiStatus_DONE2;
 }
@@ -2764,7 +2764,7 @@ ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
     }
     actor = get_actor(actorID);
     debuff = actor->debuff;
-    actorClass = actor->actorID & 0x700;
+    actorClass = actor->actorID & ACTOR_CLASS_MASK;
     flags = 0;
 
     if (debuff != STATUS_END) {
@@ -2836,13 +2836,13 @@ ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
     }
 
     switch (actorClass) {
-        case ACTOR_PLAYER:
-        case ACTOR_PARTNER:
+        case ACTOR_CLASS_PLAYER:
+        case ACTOR_CLASS_PARTNER:
             if (battleStatus->outtaSightActive) {
                 flags |= STATUS_FLAG_TRANSPARENT;
             }
             break;
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_ENEMY:
             break;
     }
 

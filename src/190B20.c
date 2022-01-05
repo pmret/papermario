@@ -1594,15 +1594,15 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
         Actor* actor = get_actor(actorID);
         ActorPart* part;
 
-        switch (actorID & 0x700) {
-            case ACTOR_PLAYER:
+        switch (actorID & ACTOR_CLASS_MASK) {
+            case ACTOR_CLASS_PLAYER:
                 part = &actor->partsTable[0];
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
                     spr_update_player_sprite(0, animationIndex, part->animationRate);
                 }
                 break;
-            case ACTOR_PARTNER:
+            case ACTOR_CLASS_PARTNER:
                 if (partIdx != 0) {
                     part = get_actor_part(actor, partIdx);
 
@@ -1619,7 +1619,7 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
                     part->unk_8C = func_802DE5C8(part->unk_84);
                 }
                 break;
-            case ACTOR_ENEMY0:
+            case ACTOR_CLASS_ENEMY:
                 part = get_actor_part(actor, partIdx);
                 if (part->currentAnimation != animationIndex) {
                     part->currentAnimation = animationIndex;
@@ -1633,15 +1633,15 @@ void set_animation(s32 actorID, s32 partIdx, s32 animationIndex) {
 
 void func_80263E08(Actor* actor, ActorPart* part, s32 anim) {
     if (anim >= 0) {
-        switch (actor->actorID & 0x700) {
-            case ACTOR_PLAYER:
+        switch (actor->actorID & ACTOR_CLASS_MASK) {
+            case ACTOR_CLASS_PLAYER:
                 if (part->currentAnimation != anim) {
                     part->currentAnimation = anim;
                     spr_update_player_sprite(0, anim, part->animationRate);
                 }
                 break;
-            case ACTOR_PARTNER:
-            case ACTOR_ENEMY0:
+            case ACTOR_CLASS_PARTNER:
+            case ACTOR_CLASS_ENEMY:
                 if (part->currentAnimation != anim) {
                     part->currentAnimation = anim;
                     spr_update_sprite(part->unk_84, anim, part->animationRate);
@@ -1656,8 +1656,8 @@ void set_animation_rate(s32 actorID, s32 partIndex, f32 rate) {
     Actor* actor = get_actor(actorID);
     ActorPart* part;
 
-    switch (actorID & 0x700) {
-        case ACTOR_PARTNER:
+    switch (actorID & ACTOR_CLASS_MASK) {
+        case ACTOR_CLASS_PARTNER:
             if (partIndex != 0) {
                 part = get_actor_part(actor, partIndex);
                 if (part != NULL) {
@@ -1667,8 +1667,8 @@ void set_animation_rate(s32 actorID, s32 partIndex, f32 rate) {
             }
             actor->partsTable[0].animationRate = rate;
             break;
-        case ACTOR_PLAYER:
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_PLAYER:
+        case ACTOR_CLASS_ENEMY:
             part = get_actor_part(actor, partIndex);
             part->animationRate = rate;
             break;
@@ -1683,16 +1683,16 @@ void set_part_yaw(s32 actorID, s32 partIndex, s32 value) {
     get_actor_part(get_actor(actorID), partIndex)->yaw = value;
 }
 
-void func_80263FE8(s32 actorID, s32 partIndex, s32 flags) {
+void set_part_flag_bits(s32 actorID, s32 partIndex, s32 flags) {
     Actor* actor = get_actor(actorID);
     ActorPart* part;
 
-    switch (actorID & 0x700) {
-        case ACTOR_PLAYER:
+    switch (actorID & ACTOR_CLASS_MASK) {
+        case ACTOR_CLASS_PLAYER:
             actor->flags |= flags;
             break;
-        case ACTOR_PARTNER:
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_PARTNER:
+        case ACTOR_CLASS_ENEMY:
             if (partIndex == 0) {
                 actor->flags |= flags;
             } else {
@@ -1703,16 +1703,16 @@ void func_80263FE8(s32 actorID, s32 partIndex, s32 flags) {
     }
 }
 
-void func_80264084(s32 actorID, s32 partIndex, s32 flags) {
+void clear_part_flag_bits(s32 actorID, s32 partIndex, s32 flags) {
     Actor* actor = get_actor(actorID);
     ActorPart* part;
 
-    switch (actorID & 0x700) {
-        case ACTOR_PLAYER:
+    switch (actorID & ACTOR_CLASS_MASK) {
+        case ACTOR_CLASS_PLAYER:
             actor->flags &= ~flags;
             break;
-        case ACTOR_PARTNER:
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_PARTNER:
+        case ACTOR_CLASS_ENEMY:
             if (partIndex == 0) {
                 actor->flags &= ~flags;
             } else {
@@ -2953,19 +2953,19 @@ void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
 }
 
 s32 player_team_is_ability_active(Actor* actor, s32 ability) {
-    s32 actorGenus = actor->actorID & 0x700;
+    s32 actorClass = actor->actorID & ACTOR_CLASS_MASK;
     s32 hasAbility = FALSE;
 
-    switch (actorGenus) {
-        case ACTOR_PLAYER:
+    switch (actorClass) {
+        case ACTOR_CLASS_PLAYER:
             if (!(gBattleStatus.flags2 & BS_FLAGS2_40)) {
                 hasAbility = is_ability_active(ability);
             }
             break;
-        case ACTOR_PARTNER:
+        case ACTOR_CLASS_PARTNER:
             hasAbility = is_partner_ability_active(ability);
             break;
-        case ACTOR_ENEMY0:
+        case ACTOR_CLASS_ENEMY:
             break;
     }
 

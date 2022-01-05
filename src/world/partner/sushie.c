@@ -121,7 +121,7 @@ EvtSource world_sushie_use_ability = {
 void world_sushie_init(Npc* sushie) {
     sushie->collisionHeight = 24;
     sushie->collisionRadius = 36;
-    sushie->unk_80 = 0x10000;
+    sushie->collisionChannel = 0x10000;
     D_802BFEEC = 0;
     bss_802BFEE4 = 0;
     bss_802BFEE8 = 0;
@@ -305,7 +305,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             partnerNPC->pos.x = playerStatus->position.x;
             partnerNPC->pos.z = playerStatus->position.z;
             partnerNPC->pos.y = playerStatus->position.y;
-            func_802BD368_31E0D8(partnerNPC->unk_80, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z,
+            func_802BD368_31E0D8(partnerNPC->collisionChannel, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z,
                                 partnerNPC->yaw, partnerNPC->collisionRadius * 0.5f);
             partnerNPC->pos.y = D_802BFEE0 - (partnerNPC->collisionHeight * 0.5f);
             temp_f0 = atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);

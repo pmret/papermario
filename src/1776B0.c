@@ -432,7 +432,7 @@ ApiStatus func_8024C944(Evt* script, s32 isInitialCall) {
     f32 deltaY;
     f32 y;
     s32 actorID;
-    s32 actorType;
+    s32 actorClass;
 
     if (isInitialCall) {
         D_8029F270 = camera->unk_54;
@@ -444,23 +444,23 @@ ApiStatus func_8024C944(Evt* script, s32 isInitialCall) {
     }
 
     y = 0.0f;
-    actorType = D_8029F27C & 0x700;
+    actorClass = D_8029F27C & ACTOR_CLASS_MASK;
     actorID = D_8029F27C & 0xFF;
 
-    switch (actorType) {
-        case 0:
+    switch (actorClass) {
+        case ACTOR_CLASS_PLAYER:
             if (battleStatus->playerActor == NULL) {
                 return ApiStatus_BLOCK;
             }
             y = battleStatus->playerActor->currentPos.y + (playerStatus->colliderHeight / 2);
             break;
-        case 0x100:
+        case ACTOR_CLASS_PARTNER:
             if (battleStatus->partnerActor == NULL) {
                 return ApiStatus_BLOCK;
             }
             y = battleStatus->partnerActor->currentPos.y;
             break;
-        case 0x200:
+        case ACTOR_CLASS_ENEMY:
             if (battleStatus->enemyActors[actorID] == NULL) {
                 return ApiStatus_BLOCK;
             }
@@ -494,14 +494,14 @@ ApiStatus func_8024CB68(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[1];
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 actorType = D_8029F27C & 0x700;
+    s32 actorClass = D_8029F27C & ACTOR_CLASS_MASK;
     s32 actorID = D_8029F27C & 0xFF;
     f32 x, y, z;
     s32 screenX, screenY, screenZ;
     f32 temp;
 
-    switch (actorType) {
-        case 0:
+    switch (actorClass) {
+        case ACTOR_CLASS_PLAYER:
             if (battleStatus->playerActor == NULL) {
                 return ApiStatus_BLOCK;
             }
@@ -509,7 +509,7 @@ ApiStatus func_8024CB68(Evt* script, s32 isInitialCall) {
             y = battleStatus->playerActor->currentPos.y + (playerStatus->colliderHeight / 2);
             z = battleStatus->playerActor->currentPos.z;
             break;
-        case 0x100:
+        case ACTOR_CLASS_PARTNER:
             if (battleStatus->partnerActor == NULL) {
                 return ApiStatus_BLOCK;
             }
@@ -517,7 +517,7 @@ ApiStatus func_8024CB68(Evt* script, s32 isInitialCall) {
             y = battleStatus->partnerActor->currentPos.y;
             z = battleStatus->partnerActor->currentPos.z;
             break;
-        case 0x200:
+        case ACTOR_CLASS_ENEMY:
         default:
             if (battleStatus->enemyActors[actorID] == NULL) {
                 return ApiStatus_BLOCK;

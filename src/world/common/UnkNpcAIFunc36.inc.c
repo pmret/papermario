@@ -27,7 +27,7 @@ void N(UnkNpcAIFunc36)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         z = npc->pos.z;
 
         for (i = 0; i < 6; i++) {
-            if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 25.0f, 
+            if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 25.0f, 
                                                    npc->yaw, npc->collisionHeight, npc->collisionRadius)) 
             {
                 npc->yaw += 30.0;

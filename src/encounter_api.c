@@ -825,7 +825,7 @@ ApiStatus func_80045900(Evt* script, s32 isInitialCall) {
             f32 z = npc->pos.z;
             f32 a = 100.0f;
 
-            if (npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &a) != 0) {
+            if (npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &a) != 0) {
                 npc->pos.y = y;
             }
             npc->flags &= ~0x800;

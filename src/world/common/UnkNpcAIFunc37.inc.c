@@ -37,7 +37,7 @@ void N(UnkNpcAIFunc37)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         collHeight = npc->collisionHeight;
         collRadius = npc->collisionRadius;
 
-        if (npc_test_move_simple_with_slipping(npc->unk_80, &posX, &posY, &posZ, moveSpeed, npc->yaw, collHeight,
+        if (npc_test_move_simple_with_slipping(npc->collisionChannel, &posX, &posY, &posZ, moveSpeed, npc->yaw, collHeight,
                                                collRadius * 1.2) == 0) 
         {
             npc_move_heading(npc, npc->moveSpeed, npc->yaw);
@@ -52,7 +52,7 @@ void N(UnkNpcAIFunc37)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         posZ = npc->pos.z;
         posW = fabsf(npc->jumpVelocity) + 16.0;
 
-        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW) != 0 && 
+        if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW) != 0 && 
             posW <= fabsf(npc->jumpVelocity) + 13.0) 
         {
             npc->jumpVelocity = 0.0f;

@@ -25,13 +25,13 @@ glabel partner_move_to_goal
 /* 88D2C 800EF87C 14600116 */  bnez      $v1, .L800EFCD8
 /* 88D30 800EF880 24820001 */   addiu    $v0, $a0, 1
 /* 88D34 800EF884 C662002C */  lwc1      $f2, 0x2c($s3)
-/* 88D38 800EF888 3C018010 */  lui       $at, %hi(D_800F8024)
-/* 88D3C 800EF88C C4208024 */  lwc1      $f0, %lo(D_800F8024)($at)
+/* 88D38 800EF888 3C018010 */  lui       $at, %hi(wPartnerMoveGoalX)
+/* 88D3C 800EF88C C4208024 */  lwc1      $f0, %lo(wPartnerMoveGoalX)($at)
 /* 88D40 800EF890 46800020 */  cvt.s.w   $f0, $f0
 /* 88D44 800EF894 E6400060 */  swc1      $f0, 0x60($s2)
 /* 88D48 800EF898 44060000 */  mfc1      $a2, $f0
-/* 88D4C 800EF89C 3C018010 */  lui       $at, %hi(D_800F8028)
-/* 88D50 800EF8A0 C4208028 */  lwc1      $f0, %lo(D_800F8028)($at)
+/* 88D4C 800EF89C 3C018010 */  lui       $at, %hi(wPartnerMoveGoalZ)
+/* 88D50 800EF8A0 C4208028 */  lwc1      $f0, %lo(wPartnerMoveGoalZ)($at)
 /* 88D54 800EF8A4 46800020 */  cvt.s.w   $f0, $f0
 /* 88D58 800EF8A8 26500060 */  addiu     $s0, $s2, 0x60
 /* 88D5C 800EF8AC C64C0038 */  lwc1      $f12, 0x38($s2)
@@ -50,8 +50,8 @@ glabel partner_move_to_goal
 /* 88D90 800EF8E0 AC278034 */  sw        $a3, %lo(D_800F8034)($at)
 /* 88D94 800EF8E4 0C00A7E7 */  jal       add_vec2D_polar
 /* 88D98 800EF8E8 AE47000C */   sw       $a3, 0xc($s2)
-/* 88D9C 800EF8EC 3C108010 */  lui       $s0, %hi(D_800F802C)
-/* 88DA0 800EF8F0 2610802C */  addiu     $s0, $s0, %lo(D_800F802C)
+/* 88D9C 800EF8EC 3C108010 */  lui       $s0, %hi(wPartnerMoveTime)
+/* 88DA0 800EF8F0 2610802C */  addiu     $s0, $s0, %lo(wPartnerMoveTime)
 /* 88DA4 800EF8F4 C64C0038 */  lwc1      $f12, 0x38($s2)
 /* 88DA8 800EF8F8 C64E0040 */  lwc1      $f14, 0x40($s2)
 /* 88DAC 800EF8FC 8E460060 */  lw        $a2, 0x60($s2)
@@ -63,8 +63,8 @@ glabel partner_move_to_goal
 /* 88DC4 800EF914 C6020000 */  lwc1      $f2, ($s0)
 /* 88DC8 800EF918 468010A0 */  cvt.s.w   $f2, $f2
 /* 88DCC 800EF91C 46020003 */  div.s     $f0, $f0, $f2
-/* 88DD0 800EF920 3C018010 */  lui       $at, %hi(D_800F8030)
-/* 88DD4 800EF924 E4208030 */  swc1      $f0, %lo(D_800F8030)($at)
+/* 88DD0 800EF920 3C018010 */  lui       $at, %hi(wPartnerMoveSpeed)
+/* 88DD4 800EF924 E4208030 */  swc1      $f0, %lo(wPartnerMoveSpeed)($at)
 /* 88DD8 800EF928 E6400018 */  swc1      $f0, 0x18($s2)
 /* 88DDC 800EF92C 46000021 */  cvt.d.s   $f0, $f0
 /* 88DE0 800EF930 26440028 */  addiu     $a0, $s2, 0x28
@@ -90,8 +90,8 @@ glabel partner_move_to_goal
 /* 88E28 800EF978 8C420000 */  lw        $v0, ($v0)
 /* 88E2C 800EF97C AC820000 */  sw        $v0, ($a0)
 .L800EF980:
-/* 88E30 800EF980 3C038010 */  lui       $v1, %hi(D_800F802C)
-/* 88E34 800EF984 2463802C */  addiu     $v1, $v1, %lo(D_800F802C)
+/* 88E30 800EF980 3C038010 */  lui       $v1, %hi(wPartnerMoveTime)
+/* 88E34 800EF984 2463802C */  addiu     $v1, $v1, %lo(wPartnerMoveTime)
 /* 88E38 800EF988 8C620000 */  lw        $v0, ($v1)
 /* 88E3C 800EF98C 104000C0 */  beqz      $v0, .L800EFC90
 /* 88E40 800EF990 2442FFFF */   addiu    $v0, $v0, -1
@@ -210,8 +210,8 @@ glabel partner_move_to_goal
 /* 88FF4 800EFB44 00431024 */  and       $v0, $v0, $v1
 /* 88FF8 800EFB48 AE420000 */  sw        $v0, ($s2)
 .L800EFB4C:
-/* 88FFC 800EFB4C 3C018010 */  lui       $at, %hi(D_800F8030)
-/* 89000 800EFB50 C4208030 */  lwc1      $f0, %lo(D_800F8030)($at)
+/* 88FFC 800EFB4C 3C018010 */  lui       $at, %hi(wPartnerMoveSpeed)
+/* 89000 800EFB50 C4208030 */  lwc1      $f0, %lo(wPartnerMoveSpeed)($at)
 /* 89004 800EFB54 E6400018 */  swc1      $f0, 0x18($s2)
 /* 89008 800EFB58 3C018010 */  lui       $at, %hi(D_800F8034)
 /* 8900C 800EFB5C C4208034 */  lwc1      $f0, %lo(D_800F8034)($at)
@@ -271,8 +271,8 @@ glabel partner_move_to_goal
 /* 890D8 800EFC28 46002000 */  add.s     $f0, $f4, $f0
 /* 890DC 800EFC2C E640003C */  swc1      $f0, 0x3c($s2)
 .L800EFC30:
-/* 890E0 800EFC30 3C018010 */  lui       $at, %hi(D_800F8030)
-/* 890E4 800EFC34 C4208030 */  lwc1      $f0, %lo(D_800F8030)($at)
+/* 890E0 800EFC30 3C018010 */  lui       $at, %hi(wPartnerMoveSpeed)
+/* 890E4 800EFC34 C4208030 */  lwc1      $f0, %lo(wPartnerMoveSpeed)($at)
 /* 890E8 800EFC38 E6400018 */  swc1      $f0, 0x18($s2)
 /* 890EC 800EFC3C 3C018010 */  lui       $at, %hi(D_800F8034)
 /* 890F0 800EFC40 C4208034 */  lwc1      $f0, %lo(D_800F8034)($at)

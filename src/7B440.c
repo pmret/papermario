@@ -120,7 +120,7 @@ void reset_player_status(void) {
     gCameras->targetPos.z = playerStatus->position.z;
 
     phys_reset_spin_history(mapConfig);
-    mem_clear(&D_8010F250, sizeof(Temp8010F250));
+    mem_clear(&gPlayerSpinState, sizeof(PlayerSpinState));
 }
 #else
 INCLUDE_ASM(s32, "7B440", reset_player_status);

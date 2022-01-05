@@ -12,7 +12,7 @@ void N(UnkNpcAIFunc39)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         posX = npc->pos.x;
         posY = npc->pos.y;
         posZ = npc->pos.z;
-        if (npc_test_move_simple_with_slipping(npc->unk_80, &posX, &posY, &posZ, npc->moveSpeed, npc->yaw, 
+        if (npc_test_move_simple_with_slipping(npc->collisionChannel, &posX, &posY, &posZ, npc->moveSpeed, npc->yaw, 
                                                npc->collisionHeight, npc->collisionRadius)) 
         {
             npc->moveSpeed = 0.0f;
@@ -26,13 +26,13 @@ void N(UnkNpcAIFunc39)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         sp34 = 100.0f;
         posZ = npc->pos.z;
         posW = 1000.0f;
-        npc_raycast_down_sides(npc->unk_80, &posX, &sp34, &posZ, &posW);
+        npc_raycast_down_sides(npc->collisionChannel, &posX, &sp34, &posZ, &posW);
 
         posX = npc->pos.x;
         posY = npc->pos.y + 13.0;
         posZ = npc->pos.z;
         posW = fabsf(npc->jumpVelocity) + 16.0;
-        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW) && posW <= fabsf(npc->jumpVelocity) + 13.0) {
+        if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW) && posW <= fabsf(npc->jumpVelocity) + 13.0) {
             npc->jumpVelocity = 0.0f;
             npc->pos.y = posY;
             npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
