@@ -15,7 +15,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240000_93F5B0);
 
 #include "world/common/SpawnSunEffect.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240370_93F920);
+#include "world/common/UnkNpcAIFunc43.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_30/93F5B0", func_80240424_93F9D4);
 

@@ -16,7 +16,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240AB0_D9DF80);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240BA8_D9E078);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240EDC_D9E3AC);
+#include "world/common/UnkNpcAIFunc43.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240F90_D9E460);
 
