@@ -19,7 +19,7 @@ static char* N(exit_str_1) = "kmr_12";
 
 #include "world/common/UnkNpcAIFunc42.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_802405EC_8D43AC);
+#include "world/common/UnkNpcAIFunc45.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_802407F4_8D45B4);
 

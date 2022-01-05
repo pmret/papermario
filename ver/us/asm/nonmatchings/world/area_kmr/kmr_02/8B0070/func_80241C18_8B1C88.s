@@ -165,7 +165,7 @@ glabel func_80241C18_8B1C88
 .L80241E48_8B1EB8:
 /* 8B1EB8 80241E48 0280202D */  daddu     $a0, $s4, $zero
 /* 8B1EBC 80241E4C 0260282D */  daddu     $a1, $s3, $zero
-/* 8B1EC0 80241E50 0C090684 */  jal       func_80241A10_8B1A80
+/* 8B1EC0 80241E50 0C090684 */  jal       kmr_02_UnkNpcAIFunc45
 /* 8B1EC4 80241E54 02A0302D */   daddu    $a2, $s5, $zero
 /* 8B1EC8 80241E58 0809079A */  j         .L80241E68_8B1ED8
 /* 8B1ECC 80241E5C 00000000 */   nop

@@ -165,7 +165,7 @@ glabel func_802407F4_8D45B4
 .L80240A24_8D47E4:
 /* 8D47E4 80240A24 0280202D */  daddu     $a0, $s4, $zero
 /* 8D47E8 80240A28 0260282D */  daddu     $a1, $s3, $zero
-/* 8D47EC 80240A2C 0C09017B */  jal       func_802405EC_8D43AC
+/* 8D47EC 80240A2C 0C09017B */  jal       kmr_07_UnkNpcAIFunc45
 /* 8D47F0 80240A30 02A0302D */   daddu    $a2, $s5, $zero
 /* 8D47F4 80240A34 08090291 */  j         .L80240A44_8D4804
 /* 8D47F8 80240A38 00000000 */   nop
