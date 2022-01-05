@@ -122,7 +122,7 @@ glabel func_802416D0_D9EBA0
 .L80241870_D9ED40:
 /* D9ED40 80241870 0280202D */  daddu     $a0, $s4, $zero
 /* D9ED44 80241874 0260282D */  daddu     $a1, $s3, $zero
-/* D9ED48 80241878 0C0903E4 */  jal       func_80240F90_D9E460
+/* D9ED48 80241878 0C0903E4 */  jal       omo_02_UnkNpcAIFunc44
 /* D9ED4C 8024187C 02A0302D */   daddu    $a2, $s5, $zero
 /* D9ED50 80241880 08090648 */  j         .L80241920_D9EDF0
 /* D9ED54 80241884 00000000 */   nop

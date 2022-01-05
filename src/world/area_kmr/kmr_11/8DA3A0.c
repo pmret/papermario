@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA3A0", func_80240344_8DA444);
 
 #include "world/common/UnkNpcAIFunc43.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA3A0", func_80240424_8DA524);
+#include "world/common/UnkNpcAIFunc44.inc.c"
 
 #include "world/common/NpcJumpFunc3.inc.c"
 
