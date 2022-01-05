@@ -28,7 +28,7 @@ INCLUDE_ASM(s32, "world/area_trd/trd_01/99CD80", func_80240784_99D114);
 
 #include "world/common/UnkNpcAIFunc45.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_01/99CD80", func_802413B8_99DD48);
+#include "world/common/UnkNpcAIMainFunc4.inc.c"
 
 ApiStatus func_80241630_99DFC0(Evt* script, s32 isInitialCall) {
     Enemy* owner1 = script->owner1.enemy;

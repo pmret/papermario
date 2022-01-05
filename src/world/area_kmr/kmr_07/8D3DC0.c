@@ -21,7 +21,7 @@ static char* N(exit_str_1) = "kmr_12";
 
 #include "world/common/UnkNpcAIFunc45.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_802407F4_8D45B4);
+#include "world/common/UnkNpcAIMainFunc4.inc.c"
 
 // see func_802402BC_8D878C
 #ifdef NON_MATCHING

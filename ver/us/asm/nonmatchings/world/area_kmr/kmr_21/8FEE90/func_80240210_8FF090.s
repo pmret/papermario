@@ -33,8 +33,8 @@ glabel func_80240210_8FF090
 /* 8FF0E4 80240264 3C058024 */  lui       $a1, %hi(func_80240010_8FEE90)
 /* 8FF0E8 80240268 24A50010 */  addiu     $a1, $a1, %lo(func_80240010_8FEE90)
 /* 8FF0EC 8024026C 00431021 */  addu      $v0, $v0, $v1
-/* 8FF0F0 80240270 3C018024 */  lui       $at, %hi(func_802407F4_8D45B4)
-/* 8FF0F4 80240274 AC2207F4 */  sw        $v0, %lo(func_802407F4_8D45B4)($at)
+/* 8FF0F0 80240270 3C018024 */  lui       $at, %hi(kmr_07_UnkNpcAIMainFunc4)
+/* 8FF0F4 80240274 AC2207F4 */  sw        $v0, %lo(kmr_07_UnkNpcAIMainFunc4)($at)
 /* 8FF0F8 80240278 0C048C8F */  jal       create_generic_entity_frontUI
 /* 8FF0FC 8024027C 0000202D */   daddu    $a0, $zero, $zero
 /* 8FF100 80240280 8FBF0020 */  lw        $ra, 0x20($sp)
