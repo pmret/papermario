@@ -142,6 +142,8 @@ def browse_header(valid_enums, enums):
 
 # Grab CONSTANTS from the include/ folder to save manual work
 CONSTANTS = {}
+SWITCH_TYPES = []
+LOCAL_WORDS = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
 SAVE_VARS = set()
 def get_constants():
     global CONSTANTS
@@ -153,7 +155,8 @@ def get_constants():
         "DamageTypes", "ElementImmunityFlags", "HitResults", "ActorFlags", "ActorPartFlags",
         "ActorEventFlags", "ElementFlags", "EncounterTriggers", "Abilities",
         "Easings", "DecorationIDs", "HitResults", "Phases", "ItemSpawnModes",
-        "ActionStates", "Triggers", "Buttons", "ActionCommand", "MoveIDs" }
+        "ActionStates", "Triggers", "Buttons", "ActionCommand", "MoveIDs", "BattleStatusFlags1",
+        "BattleStatusFlags2", "BtlCameraPreset", "EffectID", "StatusFlags" }
     for enum in valid_enums:
         CONSTANTS[enum] = {}
     CONSTANTS["NPC_SPRITE"] = {}
@@ -164,6 +167,9 @@ def get_constants():
     include_path = Path(Path(__file__).resolve().parent.parent / "include")
     enums = Path(include_path / "enums.h").read_text().splitlines()
     browse_header(valid_enums, enums)
+    enums = Path(include_path / "effects.h").read_text().splitlines()
+    browse_header(valid_enums, enums)
+
 
     include_path = Path(Path(__file__).resolve().parent.parent / "src" / "battle")
     enums = Path(include_path / "battle.h").read_text().splitlines()
@@ -224,6 +230,19 @@ def remove_evt_ptr(s):
     else:
         return s
 
+def make_flags(argNum, flags, new_args):
+    enabled = []
+    for x in range(32):
+        flag = argNum & (1 << x)
+        if flag:
+            if flag in CONSTANTS[flags]:
+                enabled.append(CONSTANTS[flags][flag])
+            else:
+                enabled.append(f"0x{flag:08X}")
+    if not enabled:
+        enabled.append(f"0")
+    new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
+
 
 def fix_args(self, func, args, info):
     global CONSTANTS
@@ -231,15 +250,24 @@ def fix_args(self, func, args, info):
     new_args = []
     args = args.split(", ")
     for i,arg in enumerate(args):
-        if ((remove_evt_ptr(arg) == "D_80000000") or (remove_evt_ptr(arg).startswith("D_B")) or
+        if ((remove_evt_ptr(arg).startswith("D_B")) or
             (i == 0 and func == "MakeEntity" and arg.startswith("D_"))):
             if func == "MakeEntity":
                 arg = "MAKE_ENTITY_END"
             else:
                 arg = "0x" + remove_evt_ptr(arg)[2:]
+
         if "0x" in arg and int(remove_evt_ptr(arg), 16) >= 0xF0000000:
             arg = f"{int(remove_evt_ptr(arg), 16) - 0x100000000}"
+
         if i in info or (i+1 == len(args) and -1 in info):
+            if arg.startswith("LW"):
+                argNum = trim_lw(arg)
+                LOCAL_WORDS[int(argNum)] = info[i]
+                new_args.append(f"{arg}")
+                #print(LOCAL_WORDS)
+                continue
+
             if i+1 == len(args) and -1 in info:
                 i = -1
             if "_" in arg:
@@ -256,14 +284,6 @@ def fix_args(self, func, args, info):
             elif info[i] == "Hex" and argNum > 0:
                 new_args.append(f"0x{argNum:08X}")
             elif info[i] == "CustomAnim":
-                sprite  = (argNum & 0xFF0000) >> 16
-                palette = (argNum & 0xFF00)   >> 8
-                anim    = (argNum & 0xFF)     >> 0
-
-                #if argNum not in CONSTANTS["MAP_NPCS"]:
-                #    new_args.append(f"0x{argNum:X}")
-                #    continue
-
                 try:
                     value = (argNum & 0x00FFFFFF)
 
@@ -284,17 +304,19 @@ def fix_args(self, func, args, info):
                 num_ =  (argNum & 0xFFFF)   >> 0
                 new_args.append(f"MESSAGE_ID(0x{type_:02X}, 0x{num_:04X})")
             elif info[i] == "NpcFlags":
-                enabled = []
-                for x in range(32):
-                    flag = argNum & (1 << x)
-                    if flag:
-                        if flag in CONSTANTS["NpcFlags"]:
-                            enabled.append(CONSTANTS["NpcFlags"][flag])
-                        else:
-                            enabled.append(f"0x{flag:08X}")
-                if not enabled:
-                    enabled.append(f"0")
-                new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
+                make_flags(argNum, "NpcFlags", new_args)
+            elif info[i] == "DamageTypes":
+                make_flags(argNum, "DamageTypes", new_args)
+            elif info[i] == "ActorPartFlags":
+                make_flags(argNum, "ActorPartFlags", new_args)
+            elif info[i] == "ActorFlags":
+                make_flags(argNum, "ActorFlags", new_args)
+            elif info[i] == "BattleStatusFlags1":
+                make_flags(argNum, "BattleStatusFlags1", new_args)
+            elif info[i] == "BattleStatusFlags2":
+                make_flags(argNum, "BattleStatusFlags2", new_args)
+            elif info[i] == "StatusFlags":
+                make_flags(argNum, "StatusFlags", new_args)
             elif info[i] == "NpcIDs":
                 if argNum >= 0:
                     if argNum in CONSTANTS["MAP_NPCS"]:
@@ -303,42 +325,6 @@ def fix_args(self, func, args, info):
                         new_args.append(str(argNum))
                 else:
                     new_args.append(CONSTANTS["NpcIDs"][argNum])
-            elif info[i] == "DamageTypes":
-                enabled = []
-                for x in range(32):
-                    flag = argNum & (1 << x)
-                    if flag:
-                        if flag in CONSTANTS["DamageTypes"]:
-                            enabled.append(CONSTANTS["DamageTypes"][flag])
-                        else:
-                            enabled.append(f"0x{flag:08X}")
-                if not enabled:
-                    enabled.append(f"0")
-                new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
-            elif info[i] == "ActorPartFlags":
-                enabled = []
-                for x in range(32):
-                    flag = argNum & (1 << x)
-                    if flag:
-                        if flag in CONSTANTS["ActorPartFlags"]:
-                            enabled.append(CONSTANTS["ActorPartFlags"][flag])
-                        else:
-                            enabled.append(f"0x{flag:08X}")
-                if not enabled:
-                    enabled.append(f"0")
-                new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
-            elif info[i] == "ActorFlags":
-                enabled = []
-                for x in range(32):
-                    flag = argNum & (1 << x)
-                    if flag:
-                        if flag in CONSTANTS["ActorFlags"]:
-                            enabled.append(CONSTANTS["ActorFlags"][flag])
-                        else:
-                            enabled.append(f"0x{flag:08X}")
-                if not enabled:
-                    enabled.append(f"0")
-                new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
             elif info[i] == "SoundIDs":
                 if argNum in CONSTANTS["SoundIDs"]:
                     new_args.append(CONSTANTS["SoundIDs"][argNum])
@@ -350,17 +336,18 @@ def fix_args(self, func, args, info):
                     new_args.append(CONSTANTS["StoryProgress"][argNum])
                 else:
                     new_args.append(str(argNum))
-            elif argNum in CONSTANTS[info[i]]:
-                new_args.append(f"{CONSTANTS[info[i]][argNum]}")
             else:
-                if not (info[i] == "NpcIDs" and argNum > 0):
-                    print(f"0x{argNum:X} was not found within {info[i]} constants for function {func} arg {i}, add it.")
+                try:
+                    new_args.append(f"{CONSTANTS[info[i]][argNum]}")
+                except KeyError:
+                    if not (info[i] == "NpcIDs" and argNum > 0):
+                        print(f"0x{argNum:X} was not found within {info[i]} constants for function {func} arg {i}, add it.")
 
-                if (info[i] == "ItemIDs" and argNum < 0):
-                    new_args.append(f"{int(argNum)}")
-                else:
-                    #Print the unknowns in hex
-                    new_args.append(self.var(argNum))
+                    if (info[i] == "ItemIDs" and argNum < 0):
+                        new_args.append(f"{int(argNum)}")
+                    else:
+                        #Print the unknowns in hex
+                        new_args.append(self.var(argNum))
 
         else:
             new_args.append(f"{arg}")
@@ -368,8 +355,10 @@ def fix_args(self, func, args, info):
 
 
 replace_funcs = {
+    "ActorExists"               :{0:"ActorIDs", 1:"Bool"},
     "ActorSpeak"                :{0:"CustomMsg", 1:"ActorIDs", 3:"CustomAnim", 4:"CustomAnim"},
     "AddActorDecoration"        :{0:"ActorIDs"},
+    "AddActorVar"               :{0:"ActorIDs"},
     "AddKeyItem"                :{0:"ItemIDs"},
     "AddGoalPos"                :{0:"ActorIDs"},
 
@@ -384,38 +373,55 @@ replace_funcs = {
     "BindTakeTurn"              :{0:"ActorIDs"},
 
     "ContinueSpeech"            :{1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
+    "CopyBuffs"                 :{0:"ActorIDs", 1:"ActorIDs"},
+    "CopyStatusEffects"         :{0:"ActorIDs", 1:"ActorIDs"},
     "CountPlayerTargets"        :{0:"ActorIDs"},
 
     "DisablePlayerInput"        :{0:"Bool"},
     "DisablePlayerPhysics"      :{0:"Bool"},
     "DispatchDamagePlayerEvent" :{1:"Events"},
-    "DispatchEvent"             :{0:"ActorIDs"},
+    "DispatchEvent"             :{0:"ActorIDs", 1:"Events"},
 
+    "EnableActorBlur"           :{0:"ActorIDs"},
     "EnableIdleScript"          :{0:"ActorIDs"},
     "EnableNpcShadow"           :{0:"NpcIDs", 1:"Bool"},
+    "EndActorSpeech"            :{0:"ActorIDs", 2:"CustomAnim", 3:"CustomAnim"},
     "EndSpeech"                 :{1:"CustomAnim", 2:"CustomAnim"},
-    "EnemyDamageTarget"         :{0:"ActorIDs", 2:"DamageTypes"},
-    "EnemyTestTarget"           :{0:"ActorIDs", 2:"DamageTypes"},
+    "EnemyDamageTarget"         :{0:"ActorIDs", 1:"HitResults", 2:"DamageTypes", 4:"StatusFlags", 6:"BattleStatusFlags1"},
+    "EnemyTestTarget"           :{0:"ActorIDs", 1:"HitResults", 2:"DamageTypes", 3:"StatusFlags", 5:"BattleStatusFlags1"},
 
     "FindKeyItem"               :{0:"ItemIDs"},
     "FlyToGoal"                 :{0:"ActorIDs"},
     "ForceHomePos"              :{0:"ActorIDs"},
 
-    "func_802CFE2C"             :{0:"NpcIDs"},
+    "func_8026EA7C"             :{0:"ActorIDs"},
+    "func_8026EBF8"             :{0:"ActorIDs"},
+    "func_8026ED20"             :{0:"ActorIDs"},
+    "func_8027D32C"             :{0:"ActorIDs"},
+    "func_8027D434"             :{0:"ActorIDs"},
+    "func_8027D4C8"             :{0:"ActorIDs"},
     "func_802CFD30"             :{0:"NpcIDs"},
+    "func_802CFE2C"             :{0:"NpcIDs"},
     "func_802D2520"             :{0:"PlayerAnims"},
 
+    "GetActorFlags"             :{0:"ActorIDs", 1:"ActorFlags"},
     "GetActorHP"                :{0:"ActorIDs"},
     "GetActorPos"               :{0:"ActorIDs"},
+    "GetActorSize"              :{0:"ActorIDs"},
     "GetActorVar"               :{0:"ActorIDs"},
+    "GetBattleFlags"            :{0:"BattleStatusFlags1"},
     "GetDistanceToGoal"         :{0:"ActorIDs"},
     "GetGoalPos"                :{0:"ActorIDs"},
     "GetHomePos"                :{0:"ActorIDs"},
+    "GetIndexFromHome"          :{0:"ActorIDs"},
+    "GetIndexFromPos"           :{0:"ActorIDs"},
     "GetItemPower"              :{0:"ItemIDs"},
     "GetLastDamage"             :{0:"ActorIDs"},
-    "GetLastEvent"              :{0:"ActorIDs"},
+    "GetLastElement"            :{0:"DamageTypes"},
+    "GetLastEvent"              :{0:"ActorIDs", 1:"Events"},
     "GetNpcPos"                 :{0:"NpcIDs"},
-    "GetStatusFlags"            :{0:"ActorIDs"},
+    "GetOriginalActorType"      :{0:"ActorIDs", 1:"ActorType"},
+    "GetStatusFlags"            :{0:"ActorIDs", 1:"StatusFlags"},
 
     "HidePlayerShadow"          :{0:"Bool"},
     "HPBarToCurrent"            :{0:"ActorIDs"},
@@ -425,7 +431,10 @@ replace_funcs = {
     "IdleRunToGoal"             :{0:"ActorIDs"},
     "InterpNpcYaw"              :{0:"NpcIDs"},
 
-    "JumpToGoal"                :{0:"ActorIDs"},
+    "JumpPartTo"                :{0:"ActorIDs"},
+    "JumpToGoal"                :{0:"ActorIDs", 2:"Bool", 3:"Bool", 4:"Bool"},
+
+    "LandJump"                  :{0:"ActorIDs"},
 
     "MakeEntity"                :{0:"Hex"},
     "MakeItemEntity"            :{0:"ItemIDs"},
@@ -438,10 +447,13 @@ replace_funcs = {
     "NpcMoveTo"                 :{0:"NpcIDs"},
 
     "PlayAmbientSounds"         :{0:"AmbientSounds"},
+    "PlayEffect"                :{0:"EffectID"},
+    "PlayLoopingSoundAtActor"   :{0:"ActorIDs", 2:"SoundIDs"},
     "PlaySound"                 :{0:"SoundIDs"},
     "PlaySoundAt"               :{0:"SoundIDs"},
     "PlaySoundAtActor"          :{0:"ActorIDs", 1:"SoundIDs"},
     "PlaySoundAtNpc"            :{0:"NpcIDs", 1:"SoundIDs"},
+    "PlaySoundAtPart"           :{0:"ActorIDs", 2:"SoundIDs"},
 
     "RemoveActor"               :{0:"ActorIDs"},
     "RemoveActorDecoration"     :{0:"ActorIDs"},
@@ -449,7 +461,6 @@ replace_funcs = {
     "ResetActorSounds"          :{0:"ActorIDs"},
     "ResetAllActorSounds"       :{0:"ActorIDs"},
     "RunToGoal"                 :{0:"ActorIDs", 2:"Bool"},
-    "JumpToGoal"                :{0:"ActorIDs", 2:"Bool", 3:"Bool", 4:"Bool"},
 
     "SetActorDispOffset"        :{0:"ActorIDs"},
     "SetActorFlagBits"          :{0:"ActorIDs", 1:"ActorFlags"},
@@ -457,22 +468,31 @@ replace_funcs = {
     "SetActorJumpGravity"       :{0:"ActorIDs"},
     "SetActorPos"               :{0:"ActorIDs"},
     "SetActorRotation"          :{0:"ActorIDs"},
+    "SetActorRotationOffset"    :{0:"ActorIDs"},
     "SetActorScale"             :{0:"ActorIDs"},
     "SetActorSounds"            :{0:"ActorIDs"},
     "SetActorSpeed"             :{0:"ActorIDs"},
     "SetActorType"              :{0:"ActorIDs", 1:"ActorType"},
     "SetActorVar"               :{0:"ActorIDs"},
     "SetActorYaw"               :{0:"ActorIDs"},
+
     "SetAnimation"              :{0:"ActorIDs", 2:"CustomAnim"},
     "SetAnimationRate"          :{0:"ActorIDs"},
+    "SetBattleFlagBits"         :{0:"BattleStatusFlags1"},
+    "SetBattleFlagBits2"        :{0:"BattleStatusFlags2"},
+    "SetDefenseTable"           :{0:"ActorIDs"},
+    "SetEnemyHP"                :{0:"ActorIDs"},
+    "SetEnemyTargetOffset"      :{0:"ActorIDs"},
     "SetGoalPos"                :{0:"ActorIDs"},
     "SetGoalToHome"             :{0:"ActorIDs"},
+    "SetGoalToIndex"            :{0:"ActorIDs"},
     "SetGoalToTarget"           :{0:"ActorIDs"},
     "SetHomePos"                :{0:"ActorIDs"},
     "SetIdleAnimations"         :{0:"ActorIDs"},
     "SetIdleGoal"               :{0:"ActorIDs"},
     "SetJumpAnimations"         :{0:"ActorIDs", 2:"PlayerAnims", 3:"PlayerAnims", 4:"PlayerAnims"},
     "SetMusicTrack"             :{1:"SongIDs"},
+
     "SetNpcAnimation"           :{0:"NpcIDs", 1:"CustomAnim"},
     "SetNpcAux"                 :{0:"NpcIDs"},
     "SetNpcFlagBits"            :{0:"NpcIDs", 1:"NpcFlags", 2:"Bool"},
@@ -483,40 +503,73 @@ replace_funcs = {
     "SetNpcSpeed"               :{0:"NpcIDs"},
     "SetNpcSprite"              :{1:"Hex"},
     "SetNpcYaw"                 :{0:"NpcIDs"},
+
+    "SetPartAlpha"              :{0:"ActorIDs"},
     "SetPartDispOffset"         :{0:"ActorIDs"},
-    "SetPartFlags"              :{0:"ActorIDs"},
+    "SetPartEventBits"          :{0:"ActorIDs", 2:"ActorEventFlags"},
+    "SetPartFlags"              :{0:"ActorIDs", 2:"ActorPartFlags"},
     "SetPartFlagBits"           :{0:"ActorIDs", 2:"ActorPartFlags"},
+    "SetPartJumpGravity"        :{0:"ActorIDs"},
+    "SetPartMoveSpeed"          :{0:"ActorIDs"},
     "SetPartPos"                :{0:"ActorIDs"},
     "SetPartScale"              :{0:"ActorIDs"},
+    "SetPartSize"               :{0:"ActorIDs"},
     "SetPartSounds"             :{0:"ActorIDs"},
+    "SetPartYaw"                :{0:"ActorIDs"},
+
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
     "SetStatusTable"            :{0:"ActorIDs"},
     "SetTargetActor"            :{0:"ActorIDs", 1:"ActorIDs"},
+    "SetTargetOffset"           :{0:"ActorIDs"},
     "ShowChoice"                :{0:"CustomMsg"},
     "ShowEmote"                 :{1:"Emotes"},
     "ShowMessageAtScreenPos"    :{0:"CustomMsg"},
     "ShowMessageAtWorldPos"     :{0:"CustomMsg"},
     "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", -1:"CustomMsg"},
+    "StopLoopingSoundAtActor"   :{0:"ActorIDs"},
     "SwitchMessage"             :{0:"CustomMsg"},
 
+    "UseBattleCamPreset"        :{0:"BtlCameraPreset"},
     "UseIdleAnimation"          :{0:"ActorIDs", 1:"Bool"},
 }
+
+def trim_lw(arg):
+    arg = arg[3:-1]
+    return arg
 
 
 def replace_constants(self, func, args):
     global replace_funcs
+    global LOCAL_WORDS
+
+    new_args = []
+    new_args = args.split(", ")
+    for i, new_arg in enumerate(new_args):
+        if new_arg.startswith("LW"):
+            new_arg = trim_lw(new_arg)
+            LOCAL_WORDS[int(new_arg)] = 0
 
     if func in replace_funcs:
         return fix_args(self, func, args, replace_funcs[func])
-    elif func == "PlayEffect":
-        argsZ = args.split(", ")
-        if "0x" not in argsZ[0]:
-            argsZ[0] = f"0x{int(argsZ[0], 10):X}"
-        args = ", ".join(argsZ)
+
     return args
 
+def fix_1_arg(self, lw, arg, format):
+    if lw:
+        lw = int(trim_lw(lw))
+        if LOCAL_WORDS[lw]:
+            info = {0 : LOCAL_WORDS[lw]}
+            args = f"{arg}"
+            return fix_args(self, 0, args, info)
+
+    if format:
+        info = {0 : format}
+        args = f"{arg}"
+        return fix_args(self, 0, args, info)
+
+    return arg
 
 class ScriptDisassembler:
     def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {"forward": [], "sprites": set(), "npcs": []}, INCLUDED = {"functions": set(), "includes": set()}, prelude = True, transform_symbol_name=None, use_script_lib=True):
@@ -707,10 +760,18 @@ class ScriptDisassembler:
         elif opcode == 0x08: self.write_line(f"EVT_WAIT_FRAMES({self.var(argv[0])})")
         elif opcode == 0x09: self.write_line(f"EVT_WAIT_SECS({self.var(argv[0])})")
         elif opcode == 0x0A:
-            self.write_line(f"EVT_IF_EQ({self.var(argv[0])}, {self.var(argv[1])})")
+            if self.var(argv[0]).startswith("LW"):
+                args_str = fix_1_arg(self, self.var(argv[0]), self.var(argv[1]), 0)
+            else:
+                args_str = self.var(argv[1])
+            self.write_line(f"EVT_IF_EQ({self.var(argv[0])}, {args_str})")
             self.indent += 1
         elif opcode == 0x0B:
-            self.write_line(f"EVT_IF_NE({self.var(argv[0])}, {self.var(argv[1])})")
+            if self.var(argv[0]).startswith("LW"):
+                args_str = fix_1_arg(self, self.var(argv[0]), self.var(argv[1]), 0)
+            else:
+                args_str = self.var(argv[1])
+            self.write_line(f"EVT_IF_NE({self.var(argv[0])}, {args_str})")
             self.indent += 1
         elif opcode == 0x0C:
             self.write_line(f"EVT_IF_LT({self.var(argv[0])}, {self.var(argv[1])})")
@@ -725,10 +786,12 @@ class ScriptDisassembler:
             self.write_line(f"EVT_IF_GE({self.var(argv[0])}, {self.var(argv[1])})")
             self.indent += 1
         elif opcode == 0x10:
-            self.write_line(f"EVT_IF_FLAG({self.var(argv[0])}, {self.var(argv[1], prefer_hex=True)})")
+            args_str = fix_1_arg(self, self.var(argv[0]), self.var(argv[1]), "Hex")
+            self.write_line(f"EVT_IF_FLAG({self.var(argv[0])}, {args_str})")
             self.indent += 1
         elif opcode == 0x11:
-            self.write_line(f"EVT_IF_NOT_FLAG({self.var(argv[0])}, {self.var(argv[1], prefer_hex=True)})")
+            args_str = fix_1_arg(self, self.var(argv[0]), self.var(argv[1]), "Hex")
+            self.write_line(f"EVT_IF_NOT_FLAG({self.var(argv[0])}, {args_str})")
             self.indent += 1
         elif opcode == 0x12:
             self.indent -= 1
@@ -738,6 +801,8 @@ class ScriptDisassembler:
             self.indent -= 1
             self.write_line(f"EVT_END_IF")
         elif opcode == 0x14:
+            new_arg = trim_lw(self.var(argv[0]))
+            SWITCH_TYPES.append(LOCAL_WORDS[int(new_arg)])
             self.write_line(f"EVT_SWITCH({self.var(argv[0])})")
             self.indent += 2
         elif opcode == 0x15:
@@ -745,11 +810,13 @@ class ScriptDisassembler:
             self.indent += 2
         elif opcode == 0x16:
             self.indent -= 1
-            self.write_line(f"EVT_CASE_EQ({self.var(argv[0])})")
+            args_str = fix_1_arg(self, 0, self.var(argv[0]), SWITCH_TYPES[-1])
+            self.write_line(f"EVT_CASE_EQ({args_str})")
             self.indent += 1
         elif opcode == 0x17:
             self.indent -= 1
-            self.write_line(f"EVT_CASE_NE({self.var(argv[0])})")
+            args_str = fix_1_arg(self, 0, self.var(argv[0]), SWITCH_TYPES[-1])
+            self.write_line(f"EVT_CASE_NE({args_str})")
             self.indent += 1
         elif opcode == 0x18:
             self.indent -= 1
@@ -773,15 +840,18 @@ class ScriptDisassembler:
             self.indent += 1
         elif opcode == 0x1D:
             self.indent -= 1
-            self.write_line(f"EVT_CASE_OR_EQ({self.var(argv[0])})")
+            args_str = fix_1_arg(self, 0, self.var(argv[0]), SWITCH_TYPES[-1])
+            self.write_line(f"EVT_CASE_OR_EQ({args_str})")
             self.indent += 1
         elif opcode == 0x1E:
             self.indent -= 1
-            self.write_line(f"EVT_CASE_AND_EQ({self.var(argv[0])})")
+            args_str = fix_1_arg(self, 0, self.var(argv[0]), SWITCH_TYPES[-1])
+            self.write_line(f"EVT_CASE_AND_EQ({args_str})")
             self.indent += 1
         elif opcode == 0x1F:
             self.indent -= 1
-            self.write_line(f"EVT_CASE_FLAG({self.var(argv[0])})")
+            args_str = fix_1_arg(self, 0, self.var(argv[0]), SWITCH_TYPES[-1])
+            self.write_line(f"EVT_CASE_FLAG({args_str})")
             self.indent += 1
         elif opcode == 0x20:
             self.indent -= 1
@@ -794,8 +864,18 @@ class ScriptDisassembler:
         elif opcode == 0x22: self.write_line(f"EVT_BREAK_SWITCH")
         elif opcode == 0x23:
             self.indent -= 2
+            del SWITCH_TYPES[-1]
             self.write_line(f"EVT_END_SWITCH")
-        elif opcode == 0x24: self.write_line(f"EVT_SET({self.var(argv[0])}, {self.var(argv[1])})")
+        elif opcode == 0x24:
+            if self.var(argv[0]).startswith("LW"):
+                new_arg = trim_lw(self.var(argv[0]))
+                if self.var(argv[1]).startswith("LW"):
+                    from_arg = trim_lw(self.var(argv[1])) # Carry type info of LW if being set from an LW
+                else:
+                    from_arg = 0                          # If a constant, we no longer know the type
+                LOCAL_WORDS[int(new_arg)] = LOCAL_WORDS[int(from_arg)]
+
+            self.write_line(f"EVT_SET({self.var(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x25:
             argNum = argv[1]
             sprite  = (argNum & 0xFF0000) >> 16
@@ -803,8 +883,10 @@ class ScriptDisassembler:
             anim    = (argNum & 0xFF)     >> 0
             if sprite > 0:
                 value = make_anim_macro(self, sprite, palette, anim)
-            else:
+            elif argNum > 100:
                 value = f"0x{argNum:08X}"
+            else:
+                value = f"{argNum}"
             self.write_line(f"EVT_SET_CONST({self.var(argv[0])}, {value})")
         elif opcode == 0x26: self.write_line(f"EVT_SETF({self.var(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x27: self.write_line(f"EVT_ADD({self.var(argv[0])}, {self.var(argv[1])})")
