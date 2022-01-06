@@ -8,7 +8,7 @@ ApiStatus N(UnkNpcAIMainFunc2)(Evt* script, s32 isInitialCall) {
     NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr;
-    
+
     enemy->varTable[10] = evt_get_variable(script, *args++);
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;

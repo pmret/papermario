@@ -8,7 +8,7 @@
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_12/9FAD60", func_80240904_9FB0F4);
+#include "world/common/UnkNpcAIMainFunc5.inc.c"
 
 #include "world/common/UnkNpcAIFunc24.inc.c"
 

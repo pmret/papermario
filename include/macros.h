@@ -6,8 +6,10 @@
 
 #ifndef M2CTX
 #define BSS __attribute__ ((section (".bss")))
+#define TRANSPARENT_UNION __attribute__ ((__transparent_union__))
 #else
 #define BSS static
+#define TRANSPARENT_UNION
 #endif
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)

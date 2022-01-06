@@ -8,7 +8,7 @@
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_802404F4_A48AB4);
+#include "world/common/UnkNpcAIMainFunc5.inc.c"
 
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 

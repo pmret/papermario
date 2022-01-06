@@ -1,11 +1,9 @@
 #include "hos_01.h"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_01/A10880", func_80240000_A10880);
-
-INCLUDE_ASM(s32, "world/area_hos/hos_01/A10880", func_80240120_A109A0);
-
-INCLUDE_ASM(s32, "world/area_hos/hos_01/A10880", func_8024031C_A10B9C);
-
-INCLUDE_ASM(s32, "world/area_hos/hos_01/A10880", func_80240534_A10DB4);
+#include "common/UnkEffect0FFuncs.inc.c"
 
 #include "world/common/GetFloorCollider.inc.c"
+
+static char* N(exit_str_0) = "kmr_24";
+static char* N(exit_str_1) = "hos_00";
+static char* N(exit_str_2) = "hos_02";

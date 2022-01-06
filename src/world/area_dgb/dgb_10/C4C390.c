@@ -167,7 +167,7 @@ EvtSource N(80240860) = {
     EVT_IF_NE(EVT_VAR(2), EVT_ARRAY(3))
         EVT_GOTO(2)
     EVT_END_IF
-    EVT_CALL(N(func_802400A0_C4C430))
+    EVT_CALL(N(UnkDistFunc2))
     EVT_IF_EQ(EVT_VAR(0), 1)
         EVT_EXEC_WAIT(N(80240AF4))
     EVT_END_IF
@@ -313,22 +313,7 @@ ApiStatus N(func_80240000_C4C390)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802400A0_C4C430)(Evt* script, s32 isInitialCall) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 distance;
-    s32* array = script->array;
-
-    distance = dist2D(playerStatus->position.x, playerStatus->position.z, array[2], array[4]);
-    script->varTable[0] = 0;
-    if (distance < 112.5f) {
-        script->varTable[0] = 2;
-    }
-    if (distance < 37.5f) {
-        script->varTable[0] = 1;
-    }
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkDistFunc2.inc.c"
 
 ApiStatus N(func_8024013C_C4C4CC)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

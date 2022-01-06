@@ -1,11 +1,12 @@
 #include "tst_04.h"
 #include "sprite.h"
+#include "model.h"
 
 static char* N(exit_str_0) = "tst_03";
 static char* N(exit_str_1) = "";
 
 void func_8024029C_B1B80C(void);
-void func_80240360_B1B8D0(PlayerStatus* playerStatus);
+void func_80240360_B1B8D0(void* data);
 void func_80240574_B1BAE4(void);
 
 // BSS
@@ -34,36 +35,38 @@ ApiStatus func_80240000_B1B570(Evt* script, s32 isInitialCall) {
 
 // float shenanigans
 #ifdef NON_EQUIVALENT
-ApiStatus func_802400FC_B1B66C(Evt* script,  s32 isInitialCall) {
+ApiStatus func_802400FC_B1B66C(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(NPC_PARTNER);
+    f32 angle;
+    f32 dist;
+    f32 product1;
+    f32 product2;
+    f32 cos1;
+    f32 sin1;
+    f32 sin2;
+    f32 cos2;
+    f32 var1;
 
-    if (npc != NULL) {
-        f32 dist = dist2D(npc->pos.x, npc->pos.z, -250.0f, -100.0f);
-        f32 sinTemp;
-        f32 cosTemp;
-        f32 theta1;
-        f32 sin1;
-        f32 cos1;
-        f32 theta2;
-        f32 sin2;
-        f32 cos2;
-
-        theta1 = (evt_get_variable(script, EVT_VAR(0)) - 1) * TAU / 360.0f;
-        sinTemp = sin_rad(theta1);
-        cosTemp = cos_rad(theta1);
-
-        sin1 = -sinTemp * dist;
-        cos1 = cosTemp * dist;
-
-        theta2 = (evt_get_variable(script, EVT_VAR(0)) * TAU) / 360.0f;
-        sin2 = sin_rad(theta2);
-        cos2 = cos_rad(theta2);
-
-        npc->pos.x += (dist * cos2) - cos1;
-        npc->pos.z += (dist * -sin2) - sin1;
-
+    if (npc == NULL) {
         return ApiStatus_DONE2;
     }
+
+    dist = dist2D(npc->pos.x, npc->pos.z, -250.0f, -100.0f);
+
+    var1 = evt_get_variable(script, 0 - 30000000) - 1;
+    angle = var1 * TAU / 360.0f;
+    sin1 = sin_rad(angle);
+    cos1 = cos_rad(angle);
+    product1 = dist * cos1;
+    product2 = dist * -sin1;
+
+    var1 = evt_get_variable(script, EVT_VAR(0));
+    angle = (var1 * TAU) / 360.0f;
+    sin2 = sin_rad(angle);
+    cos2 = cos_rad(angle);
+    npc->pos.x += (dist * cos2) - product1;
+    npc->pos.z += (dist * -sin2) - product2;
+
     return ApiStatus_DONE2;
 }
 #else
@@ -99,7 +102,8 @@ void func_8024029C_B1B80C(void) {
     }
 }
 
-void func_80240360_B1B8D0(PlayerStatus* playerStatus) {
+void func_80240360_B1B8D0(void* data) {
+    PlayerStatus* playerStatus = data;
     f32 yaw = -gCameras[gCurrentCamID].currentYaw;
     Matrix4f main;
     Matrix4f translation;
@@ -154,11 +158,11 @@ void func_802405D4_B1BB44(void) {
     Matrix4f m1;
     Matrix4f m2;
     Matrix4f m3;
-    Matrix4f m4;
+    Mtx m4;
 
     guTranslateF(m1, -484.0f, 25.0f, -40.0f);
-    guMtxF2L(m1, m4);
-    render_animated_model(B_80240FD0_tst_04, m4);
+    guMtxF2L(m1, &m4);
+    render_animated_model(B_80240FD0_tst_04, &m4);
 }
 
 ApiStatus func_80240628_B1BB98(Evt* script, s32 isInitialCall) {

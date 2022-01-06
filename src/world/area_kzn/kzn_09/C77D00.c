@@ -38,7 +38,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242774_C79454);
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80242D58_C79A38);
+#include "world/common/UnkNpcAIMainFunc5.inc.c"
 
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 

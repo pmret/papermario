@@ -12,8 +12,8 @@ void N(UnkNpcAIFunc39)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         posX = npc->pos.x;
         posY = npc->pos.y;
         posZ = npc->pos.z;
-        if (npc_test_move_simple_with_slipping(npc->collisionChannel, &posX, &posY, &posZ, npc->moveSpeed, npc->yaw, 
-                                               npc->collisionHeight, npc->collisionRadius)) 
+        if (npc_test_move_simple_with_slipping(npc->collisionChannel, &posX, &posY, &posZ, npc->moveSpeed, npc->yaw,
+                                               npc->collisionHeight, npc->collisionRadius))
         {
             npc->moveSpeed = 0.0f;
         } else {

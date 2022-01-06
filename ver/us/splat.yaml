@@ -10920,8 +10920,7 @@ segments:
     - [0xDFE5B0, data]
     - [0xE019E0, data]
     - [0xE04180, data]
-    - [0xE052C0, data]
-    - [0xE05300]
+    - [0xE052C0]
   - name: end_01
     dir: world/area_end/end_01
     type: code

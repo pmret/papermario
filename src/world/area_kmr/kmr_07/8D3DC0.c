@@ -3,9 +3,9 @@
 static char* N(exit_str_0) = "kmr_06";
 static char* N(exit_str_1) = "kmr_12";
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_80240000_8D3DC0);
+#include "world/common/UnkNpcAIFunc43.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_802400B4_8D3E74);
+#include "world/common/UnkNpcAIFunc44.inc.c"
 
 #include "world/common/NpcJumpFunc3.inc.c"
 
@@ -17,11 +17,11 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_802400B4_8D3E74);
 
 #include "world/common/UnkNpcAIFunc10.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_80240540_8D4300);
+#include "world/common/UnkNpcAIFunc42.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_802405EC_8D43AC);
+#include "world/common/UnkNpcAIFunc45.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_802407F4_8D45B4);
+#include "world/common/UnkNpcAIMainFunc4.inc.c"
 
 // see func_802402BC_8D878C
 #ifdef NON_MATCHING
