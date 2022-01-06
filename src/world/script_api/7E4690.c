@@ -91,7 +91,7 @@ ApiStatus PlayerMoveToDoor(Evt* script, s32 isInitialCall) {
 ApiStatus GetEntryCoords(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     MapConfig* mapConfig = get_current_map_header();
-    Vec4f* entryList = ((Vec4f*)mapConfig->entryList);
+    Vec4f* entryList = (Vec4f*)mapConfig->entryList;
     s32 index = evt_get_variable(script, *args++);
 
     evt_set_variable(script, *args++, entryList[index].x);
