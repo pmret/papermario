@@ -88,7 +88,19 @@ ApiStatus PlayerMoveToDoor(Evt* script, s32 isInitialCall) {
     return script->functionTemp[0] < 0;
 }
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", GetEntryCoords);
+ApiStatus GetEntryCoords(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    MapConfig* mapConfig = get_current_map_header();
+    Vec4f* entryList = (Vec4f*)mapConfig->entryList;
+    s32 index = evt_get_variable(script, *args++);
+
+    evt_set_variable(script, *args++, entryList[index].x);
+    evt_set_variable(script, *args++, entryList[index].y);
+    evt_set_variable(script, *args++, entryList[index].z);
+    evt_set_variable(script, *args++, entryList[index].yaw);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/script_api/7E4690", SetupSingleDoor);
 
