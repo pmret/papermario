@@ -936,8 +936,168 @@ f32 test_up_ray_collider(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f
     return ret;
 }
 
-INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_entities, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
-            f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
+typedef struct
+{
+    s16 iX,iY,iZ;
+} VertexIndexStruct;
+
+
+extern VertexIndexStruct D_8008FF70[];
+extern Vec3f D_8008FFB8[];
+
+s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
+                      f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz)
+{
+    f32 hitDepthDown, hitDepthHorz;
+    s32 type;
+    s32 i, j;
+
+    Entity *entity;
+    Matrix4f sp20;
+    Matrix4f sp60;
+    Vec3f spA0[8];
+    ColliderTriangle triangle;
+    s32 entityIndex;
+    f32 h;
+    f32 aabbX, aabbZ;
+    s32 hasCollision;
+    Vec3f *v1, *v2, *v3;
+    f32 dist, dist2, dist3;
+    ColliderTriangle *pTriangle = &triangle;
+
+    entityIndex = -1;
+    type = 0;
+    hitDepthDown = hitDepthHorz = *hitDepth;
+
+    if (dirX == 0 && dirZ == 0 && dirY < 0)
+    {
+        hitDepthHorz = 0;
+        type = 1;
+    }
+    else if (dirY == 0)
+    {
+        hitDepthDown = 0;
+        type = 2;
+    }
+
+    D_800A4254 = -1;
+    pTriangle->oneSided = TRUE;
+    for (i = 0; i < MAX_ENTITIES; i++)
+    {
+        entity = get_entity_by_index(i);
+
+        if (entity == NULL || (entity->flags & 0x40000020))
+            continue;
+
+        dist = (hitDepthHorz + entity->effectiveSize);
+        if (startX > entity->position.x + dist ||
+            startX < entity->position.x - dist)
+            continue;
+
+        //dist = (hitDepthHorz + entity->effectiveSize);
+        if (startZ > entity->position.z + dist ||
+            startZ < entity->position.z - dist)
+            continue;
+
+        switch (type)
+        {
+        case 0:
+        case 1:
+            dist = entity->position.y;
+            dist2 = hitDepthDown + entity->effectiveSize * 2;
+            if (dist + dist2 < startY || startY < dist - dist2)
+                continue;
+            break;
+        case 2:
+            dist = entity->position.y;
+            dist2 = entity->effectiveSize * 2;
+            if (dist + dist2 < startY || startY < dist - dist2)
+                continue;
+            break;
+        }
+
+        aabbX = entity->aabb.x / 2;
+        //aabbY = entity->aabb.y;
+        aabbZ = entity->aabb.z / 2;
+
+
+        spA0[1].x = spA0[2].x = spA0[5].x = spA0[6].x = -aabbX;
+        spA0[0].x = spA0[3].x = spA0[4].x = spA0[7].x = aabbX;
+        spA0[0].y = spA0[1].y = spA0[2].y = spA0[3].y = 0;
+        spA0[4].y = spA0[5].y = spA0[6].y = spA0[7].y = entity->aabb.y;
+        spA0[0].z = spA0[1].z = spA0[4].z = spA0[5].z = aabbZ;
+        spA0[2].z = spA0[3].z = spA0[6].z = spA0[7].z = -aabbZ;
+
+        guMtxXFMF(entity->inverseTransformMatrix, dirX, dirY, dirZ, &D_800A423C, &D_800A4240, &D_800A4244);
+        guMtxXFMF(entity->inverseTransformMatrix, startX - entity->position.x, startY - entity->position.y,
+                  startZ - entity->position.z, &D_800A4230, &D_800A4234, &D_800A4238);
+
+        //s3 = &D_8008FF70;
+        //s4 = &D_8008FFB8;
+
+        for (j = 0; j < 12; j++)
+        {
+            v1 = pTriangle->v1 = &spA0[D_8008FF70[j].iX];
+            v2 = pTriangle->v2 = &spA0[D_8008FF70[j].iY];
+            v3 = pTriangle->v3 = &spA0[D_8008FF70[j].iZ];
+            pTriangle->e13.x = v3->x - v1->x;
+            pTriangle->e13.y = v3->y - v1->y;
+            pTriangle->e13.z = v3->z - v1->z;
+            pTriangle->e21.x = v1->x - v2->x;
+            pTriangle->e21.y = v1->y - v2->y;
+            pTriangle->e21.z = v1->z - v2->z;
+            pTriangle->e32.x = v2->x - v3->x;
+            pTriangle->e32.y = v2->y - v3->y;
+            pTriangle->e32.z = v2->z - v3->z;
+            pTriangle->normal.x = D_8008FFB8[j].x;
+            pTriangle->normal.y = D_8008FFB8[j].y;
+            pTriangle->normal.z = D_8008FFB8[j].z;
+
+            if (hasCollision = test_ray_triangle_general(&triangle, spA0))
+            {
+
+                break;
+            }
+        }
+        if (hasCollision)
+            if (D_800A4254 < *hitDepth)
+                {
+                    entityIndex = i;
+                    *hitDepth = D_800A4254;
+
+                    switch (type)
+                    {
+                    case 0:
+                        hitDepthDown = D_800A4254;
+                        hitDepthHorz = D_800A4254;
+                        break;
+                    case 1:
+                        hitDepthDown = D_800A4254;
+                        break;
+                    case 2:
+                        hitDepthHorz = D_800A4254;
+                        break;
+                    }
+
+                    guRotateF(sp20, entity->rotation.x, 1.0f, 0.0f, 0.0f);
+                    guRotateF(sp60, entity->rotation.z, 0.0f, 0.0f, 1.0f);
+                    guMtxCatF(sp20, sp60, sp20);
+                    guRotateF(sp60, entity->rotation.y, 0.0f, 1.0f, 0.0f);
+                    guMtxCatF(sp20, sp60, sp20);
+                    guTranslateF(sp60, entity->position.x, entity->position.y, entity->position.z);
+                    guMtxCatF(sp20, sp60, sp20);
+                    guMtxXFMF(sp20, D_800A4248, D_800A424C, D_800A4250, hitX, hitY, hitZ);
+
+                    h = 1.0f / sqrtf(SQ(D_800A4258) + SQ(D_800A425C) + SQ(D_800A4260));
+                    *hitNx = D_800A4258 * h;
+                    *hitNy = D_800A425C * h;
+                    *hitNz = D_800A4260 * h;
+                }
+
+    }
+
+    return entityIndex;
+}
 
 INCLUDE_ASM(s32, "362a0_len_2f70", func_8005DB00);
 
