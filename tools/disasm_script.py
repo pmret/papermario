@@ -241,7 +241,7 @@ def make_flags(argNum, flags, new_args):
                 enabled.append(f"0x{flag:08X}")
     if not enabled:
         enabled.append(f"0")
-    new_args.append(enabled[0] if len(enabled) == 1 else "(" + " | ".join(enabled) + ")")
+    new_args.append(" | ".join(enabled))
 
 
 def fix_args(self, func, args, info):
