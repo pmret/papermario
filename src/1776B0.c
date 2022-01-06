@@ -614,13 +614,13 @@ void btl_cam_use_preset(s32 id) {
         D_8029F2A7 = 0;
 
         switch (id) {
-            case 0x0:
+            case BTL_CAM_PRESET_A:
                 preset = &CamPreset_A;
                 break;
-            case 0x1:
+            case BTL_CAM_PRESET_B:
                 preset = &CamPreset_B;
                 break;
-            case 0x2:
+            case BTL_CAM_PRESET_C:
                 if (D_80280CE4 != id) {
                     D_8029F280 = 500;
                     D_8029F29E = 30;
@@ -628,7 +628,7 @@ void btl_cam_use_preset(s32 id) {
                     break;
                 }
                 return;
-            case 0x3:
+            case BTL_CAM_PRESET_D:
                 if (D_80280CE4 != id) {
                     D_8029F280 = 480;
                     preset = &CamPreset_D;
@@ -637,7 +637,7 @@ void btl_cam_use_preset(s32 id) {
                     break;
                 }
                 return;
-            case 0x4:
+            case BTL_CAM_PRESET_E:
                 if (D_80280CE4 != id) {
                     D_8029F280 = 500;
                     preset = &CamPreset_E;
@@ -646,33 +646,33 @@ void btl_cam_use_preset(s32 id) {
                     break;
                 }
                 return;
-            case 0x5:
+            case BTL_CAM_PRESET_F:
                 D_8029F280 = 300;
                 D_8029F29E = 20;
                 preset = &CamPreset_F;
                 D_8029F2A2 = 1;
                 D_8029F2A3 = 1;
                 break;
-            case 0x6:
+            case BTL_CAM_PRESET_G:
                 D_8029F280 = 300;
                 D_8029F29E = 20;
                 preset = &CamPreset_G;
                 D_8029F2A2 = 1;
                 D_8029F2A3 = 1;
                 break;
-            case 0x7:
+            case BTL_CAM_PRESET_H:
                 D_8029F280 = 300;
                 D_8029F29E = 20;
                 preset = &CamPreset_H;
                 break;
-            case 0x8:
+            case BTL_CAM_PRESET_I:
                 D_8029F280 = 300;
                 D_8029F29E = 20;
                 preset = &CamPreset_I;
                 D_8029F2A2 = 1;
                 D_8029F2A3 = 1;
                 break;
-            case 0x9:
+            case BTL_CAM_PRESET_9:
                 if (D_8029F2B4 != &CamPreset_C) {
                     D_8029F280 = 500;
                     D_8029F29E = 120;
@@ -680,7 +680,7 @@ void btl_cam_use_preset(s32 id) {
                     break;
                 }
                 return;
-            case 0xA:
+            case BTL_CAM_PRESET_10:
                 D_8029F280 = 200;
                 D_8029F284 = 8;
                 D_8029F29E = 20;
@@ -690,7 +690,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A2 = 1;
                 D_8029F2A3 = 1;
                 break;
-            case 0xB:
+            case BTL_CAM_PRESET_11:
                 D_8029F280 = 300;
                 D_8029F284 = 8;
                 preset = &CamPreset_F;
@@ -700,7 +700,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A2 = 1;
                 D_8029F2A3 = 1;
                 break;
-            case 0xC:
+            case BTL_CAM_PRESET_12:
                 D_8029F280 = 400;
                 D_8029F284 = 8;
                 D_8029F29E = 20;
@@ -710,7 +710,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A2 = 1;
                 D_8029F2A3 = 1;
                 break;
-            case 0xD:
+            case BTL_CAM_PRESET_13:
                 D_8029F280 = 200;
                 D_8029F284 = 8;
                 D_8029F29E = 20;
@@ -720,7 +720,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A2 = 1;
                 D_8029F2A3 = 1;
                 break;
-            case 0xE:
+            case BTL_CAM_PRESET_14:
                 D_8029F280 = 300;
                 D_8029F284 = 8;
                 preset = &CamPreset_I;
@@ -730,7 +730,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A2 = 1;
                 D_8029F2A3 = 1;
                 break;
-            case 0xF:
+            case BTL_CAM_PRESET_15:
                 D_8029F280 = 400;
                 D_8029F284 = 8;
                 D_8029F29E = 20;
@@ -740,7 +740,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A2 = 1;
                 D_8029F2A3 = 1;
                 break;
-            case 0x10:
+            case BTL_CAM_PRESET_16:
                 D_8029F280 = 267;
                 D_8029F284 = 8;
                 D_8029F29E = 20;
@@ -748,7 +748,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F286 = 23;
                 preset = &CamPreset_H;
                 break;
-            case 0x11:
+            case BTL_CAM_PRESET_17:
                 D_8029F280 = 300;
                 D_8029F282 = 0;
                 D_8029F284 = 8;
@@ -756,7 +756,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F286 = 8;
                 preset = &CamPreset_H;
                 break;
-            case 0x12:
+            case BTL_CAM_PRESET_18:
                 D_8029F280 = 400;
                 D_8029F284 = 8;
                 D_8029F282 = 0;
@@ -764,21 +764,21 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F29E = 20;
                 D_8029F286 = 0;
                 break;
-            case 0x13:
+            case BTL_CAM_PRESET_19:
                 D_8029F29E = 20;
                 preset = &CamPreset_J;
                 break;
-            case 0x14:
+            case BTL_CAM_PRESET_20:
                 preset = &CamPreset_K;
                 D_8029F29E = 20;
                 D_8029F286 = 0;
                 break;
-            case 0x15:
+            case BTL_CAM_PRESET_21:
                 preset = &CamPreset_L;
                 D_8029F29E = 20;
                 D_8029F286 = 0;
                 break;
-            case 0x19:
+            case BTL_CAM_PRESET_25:
                 D_8029F280 = 266;
                 D_8029F284 = 8;
                 D_8029F282 = 0;
@@ -788,7 +788,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F27C = 0;
                 preset = &CamPreset_J;
                 break;
-            case 0x18:
+            case BTL_CAM_PRESET_24:
                 D_8029F280 = 250;
                 D_8029F284 = 8;
                 D_8029F29E = 20;
@@ -801,7 +801,7 @@ void btl_cam_use_preset(s32 id) {
                 D_80280CE0 = 1;
                 preset = &CamPreset_I;
                 break;
-            case 0x17:
+            case BTL_CAM_PRESET_23:
                 D_8029F280 = 255;
                 D_8029F284 = 8;
                 D_8029F29E = 20;
@@ -813,7 +813,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F27C = 0;
                 preset = &CamPreset_J;
                 break;
-            case 0x16:
+            case BTL_CAM_PRESET_22:
                 D_8029F280 = 230;
                 D_8029F284 = 8;
                 D_8029F282 = 0;
@@ -822,7 +822,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F27C = 0;
                 preset = &CamPreset_J;
                 break;
-            case 0x1A:
+            case BTL_CAM_PRESET_26:
                 D_8029F280 = 310;
                 D_8029F284 = 8;
                 D_8029F29E = 30;
@@ -834,7 +834,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 preset = &CamPreset_M;
                 break;
-            case 0x1B:
+            case BTL_CAM_PRESET_27:
                 D_8029F280 = 320;
                 D_8029F284 = 8;
                 D_8029F29E = 5;
@@ -846,7 +846,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 0;
                 break;
-            case 0x1C:
+            case BTL_CAM_PRESET_28:
                 D_8029F280 = 340;
                 D_8029F284 = 8;
                 D_8029F29E = 5;
@@ -858,8 +858,8 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 preset = &CamPreset_M;
                 break;
-            case 0x1E:
-            case 0x1F:
+            case BTL_CAM_PRESET_30:
+            case BTL_CAM_PRESET_31:
                 D_8029F280 = 300;
                 D_8029F284 = 8;
                 D_8029F29E = 0xF;
@@ -871,7 +871,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F27C = 0;
                 preset = &CamPreset_I;
                 break;
-            case 0x20:
+            case BTL_CAM_PRESET_32:
                 D_8029F280 = 300;
                 D_8029F284 = 8;
                 D_8029F282 = 0;
@@ -884,7 +884,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F270 = -65.0f;
                 D_8029F274 = 30.0f;
                 break;
-            case 0x21:
+            case BTL_CAM_PRESET_33:
                 D_8029F280 = 220;
                 D_8029F284 = 8;
                 D_8029F29E = 30;
@@ -896,7 +896,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 0;
                 break;
-            case 0x22:
+            case BTL_CAM_PRESET_34:
                 D_8029F280 = 280;
                 D_8029F284 = 8;
                 D_8029F29E = 30;
@@ -908,7 +908,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 preset = &CamPreset_M;
                 break;
-            case 0x23:
+            case BTL_CAM_PRESET_35:
                 D_8029F280 = 380;
                 D_8029F284 = 8;
                 D_8029F29E = 60;
@@ -921,7 +921,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 0;
                 break;
-            case 0x25:
+            case BTL_CAM_PRESET_37:
                 D_8029F280 = 320;
                 D_8029F284 = 8;
                 D_8029F29E = 30;
@@ -933,7 +933,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 0;
                 break;
-            case 0x24:
+            case BTL_CAM_PRESET_36:
                 D_8029F280 = 300;
                 D_8029F284 = 8;
                 D_8029F29E = 60;
@@ -946,7 +946,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 0;
                 break;
-            case 0x26:
+            case BTL_CAM_PRESET_38:
                 D_8029F280 = 320;
                 D_8029F284 = 8;
                 D_8029F29E = 30;
@@ -958,7 +958,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 0;
                 break;
-            case 0x27:
+            case BTL_CAM_PRESET_39:
                 D_8029F280 = 320;
                 D_8029F284 = 8;
                 D_8029F29E = 30;
@@ -970,7 +970,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 0;
                 break;
-            case 0x28:
+            case BTL_CAM_PRESET_40:
                 D_8029F280 = 360;
                 D_8029F284 = 8;
                 D_8029F29E = 20;
@@ -982,8 +982,8 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 0;
                 break;
-            case 0x29:
-            case 0x2A:
+            case BTL_CAM_PRESET_41:
+            case BTL_CAM_PRESET_42:
                 D_8029F280 = 200;
                 D_8029F29E = 7;
                 D_8029F2A0 = 7;
@@ -991,7 +991,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 preset = D_8029F2B4;
                 break;
-            case 0x2B:
+            case BTL_CAM_PRESET_43:
                 D_8029F280 = 214;
                 D_8029F284 = 8;
                 D_8029F29E = 20;
@@ -1003,7 +1003,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 preset = &CamPreset_M;
                 break;
-            case 0x2C:
+            case BTL_CAM_PRESET_44:
                 D_8029F280 = 300;
                 D_8029F284 = 8;
                 D_8029F29E = 8;
@@ -1015,7 +1015,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 preset = &CamPreset_M;
                 break;
-            case 45:
+            case BTL_CAM_PRESET_45:
                 D_8029F280 = 430;
                 D_8029F284 = 8;
                 D_8029F29E = 0xA;
@@ -1029,7 +1029,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F270 = 60.0f;
                 D_8029F274 = 40.0f;
                 break;
-            case 0x2E:
+            case BTL_CAM_PRESET_46:
                 D_8029F280 = 460;
                 D_8029F284 = 8;
                 D_8029F29E = 0xA;
@@ -1042,7 +1042,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F270 = 60.0f;
                 D_8029F274 = 40.0f;
                 break;
-            case 0x46:
+            case BTL_CAM_PRESET_70:
                 D_8029F280 = 390;
                 D_8029F284 = 8;
                 D_8029F282 = 0;
@@ -1052,7 +1052,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 preset = &CamPreset_J;
                 break;
-            case 0x47:
+            case BTL_CAM_PRESET_71:
                 D_8029F280 = 500;
                 D_8029F284 = 8;
                 D_8029F282 = 0;
@@ -1062,8 +1062,8 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 preset = &CamPreset_J;
                 break;
-            case 0x45:
-            case 0x48:
+            case BTL_CAM_PRESET_69:
+            case BTL_CAM_PRESET_72:
                 D_8029F280 = 300;
                 D_8029F284 = 8;
                 D_8029F282 = 0;
@@ -1073,7 +1073,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 preset = &CamPreset_J;
                 break;
-            case 0x49:
+            case BTL_CAM_PRESET_73:
                 D_8029F280 = 166;
                 D_8029F284 = 8;
                 D_8029F29E = 1;
@@ -1086,7 +1086,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F270 = -75.0f;
                 D_8029F274 = 150.0f;
                 break;
-            case 0x2F:
+            case BTL_CAM_PRESET_47:
                 D_8029F280 = 310;
                 D_8029F284 = 8;
                 D_8029F29E = 30;
@@ -1098,7 +1098,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F27C = 256;
                 D_8029F2A6 = 0;
                 break;
-            case 0x30:
+            case BTL_CAM_PRESET_48:
                 D_8029F280 = 250;
                 D_8029F284 = 8;
                 D_8029F29E = 120;
@@ -1111,7 +1111,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 256;
                 break;
-            case 0x31:
+            case BTL_CAM_PRESET_49:
                 D_8029F280 = 300;
                 D_8029F284 = 8;
                 D_8029F29E = 120;
@@ -1124,7 +1124,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 256;
                 break;
-            case 0x32:
+            case BTL_CAM_PRESET_50:
                 D_8029F280 = 320;
                 D_8029F284 = 8;
                 D_8029F29E = 5;
@@ -1136,14 +1136,14 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F27C = 256;
                 D_8029F2A6 = 0;
                 break;
-            case 0x1D:
-            case 0x33:
+            case BTL_CAM_PRESET_29:
+            case BTL_CAM_PRESET_51:
                 D_8029F29E = 50;
                 D_8029F280 = 500;
                 D_8029F286 = 0;
                 preset = &CamPreset_D;
                 break;
-            case 0x34:
+            case BTL_CAM_PRESET_52:
                 D_8029F280 = 280;
                 D_8029F284 = 8;
                 D_8029F29E = 30;
@@ -1155,7 +1155,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 256;
                 break;
-            case 0x35:
+            case BTL_CAM_PRESET_53:
                 D_8029F280 = 380;
                 D_8029F284 = 8;
                 D_8029F29E = 60;
@@ -1168,7 +1168,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 256;
                 break;
-            case 0x36:
+            case BTL_CAM_PRESET_54:
                 D_8029F280 = 220;
                 D_8029F284 = 8;
                 D_8029F29E = 30;
@@ -1180,7 +1180,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A6 = 0;
                 D_8029F27C = 256;
                 break;
-            case 0x37:
+            case BTL_CAM_PRESET_55:
                 D_8029F280 = 210;
                 D_8029F284 = 8;
                 D_8029F29E = 20;
@@ -1193,7 +1193,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F270 = -95.0f;
                 D_8029F274 = 22.0f;
                 break;
-            case 0x38:
+            case BTL_CAM_PRESET_56:
                 D_8029F280 = 320;
                 D_8029F284 = 8;
                 D_8029F29E = 30;
@@ -1204,7 +1204,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F27C = 256;
                 preset = &CamPreset_M;
                 break;
-            case 0x39:
+            case BTL_CAM_PRESET_57:
                 D_8029F280 = 320;
                 D_8029F284 = 8;
                 D_8029F29E = 30;
@@ -1215,7 +1215,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F27C = 256;
                 preset = &CamPreset_M;
                 break;
-            case 0x3A:
+            case BTL_CAM_PRESET_58:
                 D_8029F280 = 400;
                 D_8029F284 = 8;
                 D_8029F29E = 30;
@@ -1228,7 +1228,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F270 = 25.0f;
                 D_8029F274 = 60.0f;
                 break;
-            case 0x3B:
+            case BTL_CAM_PRESET_59:
                 D_8029F280 = 200;
                 D_8029F284 = 8;
                 D_8029F29E = 60;
@@ -1241,7 +1241,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F27C = 256;
                 D_8029F2A6 = 0;
                 break;
-            case 0x3C:
+            case BTL_CAM_PRESET_60:
                 D_8029F280 = 300;
                 D_8029F284 = 8;
                 D_8029F29E = 8;
@@ -1252,8 +1252,8 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A3 = 0;
                 preset = &CamPreset_I;
                 break;
-            case 0x3D:
-            case 0x3E:
+            case BTL_CAM_PRESET_61:
+            case BTL_CAM_PRESET_62:
                 D_8029F280 = 300;
                 D_8029F284 = 8;
                 D_8029F29E = 15;
@@ -1265,7 +1265,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F27C = 256;
                 preset = &CamPreset_I;
                 break;
-            case 0x3F:
+            case BTL_CAM_PRESET_63:
                 D_8029F280 = 400;
                 D_8029F284 = 8;
                 D_8029F29E = 20;
@@ -1275,7 +1275,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A2 = 1;
                 D_8029F2A3 = 1;
                 break;
-            case 0x40:
+            case BTL_CAM_PRESET_64:
                 D_8029F280 = 358;
                 D_8029F284 = 8;
                 D_8029F29E = 10;
@@ -1285,12 +1285,12 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A3 = 0;
                 preset = &CamPreset_F;
                 break;
-            case 0x41:
+            case BTL_CAM_PRESET_65:
                 D_8029F29E = 50;
                 D_8029F280 = 500;
                 preset = &CamPreset_C;
                 break;
-            case 0x42:
+            case BTL_CAM_PRESET_66:
                 D_8029F280 = 267;
                 D_8029F284 = 8;
                 D_8029F29E = 20;
@@ -1300,7 +1300,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A3 = 0;
                 preset = &CamPreset_F;
                 break;
-            case 0x43:
+            case BTL_CAM_PRESET_67:
                 D_8029F280 = 214;
                 D_8029F284 = 8;
                 preset = &CamPreset_F;
@@ -1310,7 +1310,7 @@ void btl_cam_use_preset(s32 id) {
                 D_8029F2A2 = 1;
                 D_8029F2A3 = 1;
                 break;
-            case 0x44:
+            case BTL_CAM_PRESET_68:
                 D_8029F280 = 300;
                 D_8029F284 = 8;
                 preset = &CamPreset_F;
