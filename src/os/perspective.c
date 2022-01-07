@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asm_libultra.h"
 
 #ifndef KMC_ASM
 void guPerspectiveF(Matrix4f mf, u16 *perspNorm, f32 fovy, f32 aspect, f32 near, f32 far, f32 scale) {
@@ -35,8 +36,7 @@ void guPerspectiveF(Matrix4f mf, u16 *perspNorm, f32 fovy, f32 aspect, f32 near,
     }
 }
 #else
-INCLUDE_ASM_LIBULTRA(void, "perspective", guPerspectiveF, Matrix4f mf, u16* perspNorm, f32 fovy, f32 aspect,
-                     f32 near, f32 far, f32 scale);
+INCLUDE_ASM_LIBULTRA("perspective", guPerspectiveF);
 #endif
 
 #ifndef KMC_ASM
@@ -48,6 +48,5 @@ void guPerspective(Mtx *m, u16 *perspNorm, f32 fovy, f32 aspect, f32 near, f32 f
     guMtxF2L(mf, m);
 }
 #else
-INCLUDE_ASM_LIBULTRA(void, "perspective", guPerspective, Mtx* m, u16* perspNorm, f32 fovy, f32 aspect,
-                     f32 near, f32 far, f32 scale);
+INCLUDE_ASM_LIBULTRA("perspective", guPerspective);
 #endif

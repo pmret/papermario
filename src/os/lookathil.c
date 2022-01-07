@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asm_libultra.h"
 
 #ifndef KMC_ASM
 void guLookAtHiliteF(Matrix4f mf, LookAt *l, Hilite *h,
@@ -59,7 +60,7 @@ void guLookAtHiliteF(Matrix4f mf, LookAt *l, Hilite *h,
         xHilite *= len;
         yHilite *= len;
         zHilite *= len;
-        
+
         h->h.x1 = twidth * 4 + (xHilite * xRight + yHilite * yRight + zHilite * zRight) * twidth * 2;
 
         h->h.y1 = theight * 4 + (xHilite * xUp + yHilite * yUp + zHilite * zUp) * theight * 2;
@@ -136,10 +137,7 @@ void guLookAtHiliteF(Matrix4f mf, LookAt *l, Hilite *h,
     mf[3][3] = 1;
 }
 #else
-INCLUDE_ASM_LIBULTRA(void, "lookathil", guLookAtHiliteF, Matrix4f mf, LookAt* l, Hilite* h, f32 xEye,
-            f32 yEye,
-            f32 zEye, f32 xAt, f32 yAt, f32 zAt, f32 xUp, f32 yUp, f32 zUp, f32 xl1, f32 yl1,
-            f32 zl1, f32 xl2, f32 yl2, f32 zl2, s32 twidth, s32 theight);
+INCLUDE_ASM_LIBULTRA("lookathil", guLookAtHiliteF);
 #endif
 
 #ifndef KMC_ASM
@@ -159,7 +157,5 @@ void guLookAtHilite (Mtx *m, LookAt *l, Hilite *h,
     guMtxF2L(mf, m);
 }
 #else
-INCLUDE_ASM_LIBULTRA(void, "lookathil", guLookAtHilite, Mtx* m, LookAt* l, Hilite* h, f32 xEye, f32 yEye,
-            f32 zEye, f32 xAt, f32 yAt, f32 zAt, f32 xUp, f32 yUp, f32 zUp, f32 xl1, f32 yl1,
-            f32 zl1, f32 xl2, f32 yl2, f32 zl2, s32 twidth, s32 theight);
-            #endif
+INCLUDE_ASM_LIBULTRA("lookathil", guLookAtHilite);
+#endif

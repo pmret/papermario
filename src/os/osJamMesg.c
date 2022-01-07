@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asm_libultra.h"
 #include <PR/osint.h>
 
 #ifndef KMC_ASM
@@ -25,5 +26,5 @@ s32 osJamMesg(OSMesgQueue *mq, OSMesg msg, s32 flag) {
     return 0;
 }
 #else
-INCLUDE_ASM_LIBULTRA(s32, "osJamMesg", osJamMesg, OSMesgQueue *mq, OSMesg msg, s32 flag);
+INCLUDE_ASM_LIBULTRA("osJamMesg", osJamMesg);
 #endif

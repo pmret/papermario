@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asm_libultra.h"
 #include <PR/osint.h>
 
 u32 __osPreNMI = 0;
@@ -33,5 +34,5 @@ s32 osSendMesg(OSMesgQueue *mq, OSMesg msg, s32 flags)
     return 0;
 }
 #else
-INCLUDE_ASM_LIBULTRA(s32, "40c20_len_1f0", osSendMesg, OSMesgQueue* queue, OSMesg mesg, s32 unk);
+INCLUDE_ASM_LIBULTRA("sendmesg", osSendMesg);
 #endif
