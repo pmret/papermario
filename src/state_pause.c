@@ -58,7 +58,7 @@ void state_step_pause(void) {
                     sfx_stop_env_sounds();
                     func_8003B1A8();
                     gGameStatusPtr->isBattle = oldIsBattle;
-                    allocate_hit_tables();
+                    backup_map_collision_data();
                     battle_heap_create();
                     nuContRmbForceStop();
                     sfx_clear_env_sounds(0);
@@ -165,7 +165,7 @@ void state_step_unpause(void) {
                         decode_yay0(assetData, &D_80210000);
                         general_heap_free(assetData);
                         initialize_collision();
-                        load_collision();
+                        restore_map_collision_data();
 
                         if (map->dmaStart != NULL) {
                             dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);

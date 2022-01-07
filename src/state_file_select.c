@@ -117,7 +117,7 @@ void state_step_language_select(void) {
                     sfx_stop_env_sounds();
                     func_8003B1A8();
                     gGameStatusPtr->isBattle = 2;
-                    allocate_hit_tables();
+                    backup_map_collision_data();
                     battle_heap_create();
                     sfx_clear_env_sounds(0);
                     spr_init_sprites(0);
@@ -290,7 +290,7 @@ void state_step_exit_language_select(void) {
                     decode_yay0(mapShape, &D_80210000);
                     general_heap_free(mapShape);
                     initialize_collision();
-                    load_collision();
+                    restore_map_collision_data();
 
                     if (map->dmaStart != NULL) {
                         dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);

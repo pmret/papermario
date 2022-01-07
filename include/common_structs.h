@@ -499,7 +499,7 @@ typedef struct Collider {
     /* 0x10 */ struct ColliderBoundingBox* aabb;
     /* 0x14 */ s16 numVertices;
     /* 0x16 */ char unk_16[2];
-    /* 0x18 */ Vec3f* vertexTable;
+    /* 0x18 */ Vec3f* vertexTable; // contains local and global coordinates
 } Collider; // size = 0x1C
 
 typedef struct CameraInitData {
@@ -926,8 +926,8 @@ typedef struct OtherPrint {
 } OtherPrint; // size = 0x54
 
 typedef struct ColliderBoundingBox {
-    /* 0x00 */ f32 min[3];
-    /* 0x0C */ f32 max[3];
+    /* 0x00 */ Vec3f min;
+    /* 0x0C */ Vec3f max;
     /* 0x18 */ s32 flagsForCollider;
 } ColliderBoundingBox; // size = 0x1C
 
