@@ -32,6 +32,7 @@ void guRotateRPYF(Matrix4f mf, f32 r, f32 p, f32 h) {
     mf[2][2] = cosr * cosp;
 }
 #else
+static f32 dtor = 3.1415926 / 180.0;
 INCLUDE_ASM_LIBULTRA("rotateRPY", guRotateRPYF);
 #endif
 

@@ -38,6 +38,7 @@ void guPositionF(Matrix4f mf, f32 r, f32 p, f32 h, f32 s, f32 x, f32 y, f32 z) {
         mf[3][3] = 1.0;
 }
 #else
+static f32 dtor = 3.1415926 / 180.0;
 INCLUDE_ASM_LIBULTRA("position", guPositionF);
 #endif
 
