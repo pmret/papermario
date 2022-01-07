@@ -1388,42 +1388,42 @@ void btl_init_menu_hammer(void) {
 
     hasAnyBadgeMoves = FALSE;
     for (i = 0; i < battleStatus->submenuMoveCount; i++) {
-            move = &gMoveTable[battleStatus->submenuMoves[i]];
+        move = &gMoveTable[battleStatus->submenuMoves[i]];
 
-            // Calculate FP cost
-            fpCost = move->costFP;
-            if (fpCost != 0) {
-                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
-                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_FANATIC) * 2;
-                if (fpCost < 1) {
-                    fpCost = 1;
-                }
+        // Calculate FP cost
+        fpCost = move->costFP;
+        if (fpCost != 0) {
+            fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
+            fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_FANATIC) * 2;
+            if (fpCost < 1) {
+                fpCost = 1;
             }
+        }
 
-            // See if there are any targets for this move
-            battleStatus->moveCategory = 1;
-            battleStatus->selectedItemID = playerData->hammerLevel;
-            battleStatus->currentTargetListFlags = move->flags;
-            player_create_target_list(player);
+        // See if there are any targets for this move
+        battleStatus->moveCategory = 1;
+        battleStatus->selectedItemID = playerData->hammerLevel;
+        battleStatus->currentTargetListFlags = move->flags;
+        player_create_target_list(player);
 
-            // If there are targets, enable the move
-            if (player->targetListLength != 0) {
-                hasAnyBadgeMoves = TRUE;
-                battleStatus->submenuStatus[i] = 1;
-            }
+        // If there are targets, enable the move
+        if (player->targetListLength != 0) {
+            hasAnyBadgeMoves = TRUE;
+            battleStatus->submenuStatus[i] = 1;
+        }
 
-            // If you don't have enough FP, disable the move
-            if (playerData->curFP < fpCost) {
-                battleStatus->submenuStatus[i] = 0;
-            }
+        // If you don't have enough FP, disable the move
+        if (playerData->curFP < fpCost) {
+            battleStatus->submenuStatus[i] = 0;
+        }
 
-            // If there are no targets available, disable the move
-            if (player->targetListLength == 0) {
-                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS_2;
-            }
-            if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
-                battleStatus->submenuStatus[moveCount] = BATTLE_SUBMENU_STATUS_NO_TARGETS;
-            }
+        // If there are no targets available, disable the move
+        if (player->targetListLength == 0) {
+            battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS_2;
+        }
+        if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
+            battleStatus->submenuStatus[moveCount] = BATTLE_SUBMENU_STATUS_NO_TARGETS;
+        }
     }
 
     if (!hasAnyBadgeMoves) {
@@ -1478,38 +1478,37 @@ void btl_init_menu_partner(void) {
 
     hasAnyBadgeMoves = FALSE;
     for (i = 0; i < battleStatus->submenuMoveCount; i++){
-            StaticMove* move = &gMoveTable[battleStatus->submenuMoves[i]];
+        StaticMove* move = &gMoveTable[battleStatus->submenuMoves[i]];
 
-            fpCost = move->costFP;
-            if (fpCost != 0) {
-                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
-                fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_FANATIC) * 2;
-                if (fpCost < 1) {
-                    fpCost = 1;
-                }
+        fpCost = move->costFP;
+        if (fpCost != 0) {
+            fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_SAVER);
+            fpCost -= player_team_is_ability_active(player, ABILITY_FLOWER_FANATIC) * 2;
+            if (fpCost < 1) {
+                fpCost = 1;
             }
+        }
 
-            battleStatus->moveCategory = 5;
-            battleStatus->selectedItemID = partner->staticActorData->level;
-            battleStatus->currentTargetListFlags = move->flags;
-            player_create_target_list(partner);
+        battleStatus->moveCategory = 5;
+        battleStatus->selectedItemID = partner->staticActorData->level;
+        battleStatus->currentTargetListFlags = move->flags;
+        player_create_target_list(partner);
 
-            if (partner->targetListLength != 0){
-                hasAnyBadgeMoves = TRUE;
-                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_ENABLED;
-            }
+        if (partner->targetListLength != 0){
+            hasAnyBadgeMoves = TRUE;
+            battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_ENABLED;
+        }
 
-            if (partner->targetListLength == 0) {
-                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS_2;
-            }
+        if (partner->targetListLength == 0) {
+            battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS_2;
+        }
 
-            if (playerData->curFP < fpCost) {
-                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NOT_ENOUGH_FP;
-            }
-            if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
-                battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS;
-            }
-
+        if (playerData->curFP < fpCost) {
+            battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NOT_ENOUGH_FP;
+        }
+        if (gBattleStatus.flags2 & BS_FLAGS2_NO_TARGET_AVAILABLE) {
+            battleStatus->submenuStatus[i] = BATTLE_SUBMENU_STATUS_NO_TARGETS;
+        }
     }
 
     if (!hasAnyBadgeMoves) {

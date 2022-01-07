@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asm_libultra.h"
 
 #include "sintable.inc.c"
 
@@ -23,5 +24,5 @@ s16 sins(u16 x) {
     }
 }
 #else
-INCLUDE_ASM_LIBULTRA(s16, "os/sins", sins, u16 angle);
+INCLUDE_ASM_LIBULTRA("sins", sins);
 #endif

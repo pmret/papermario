@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asm_libultra.h"
 
 #ifndef KMC_ASM
 u32 osVirtualToPhysical(void *addr) {
@@ -11,5 +12,5 @@ u32 osVirtualToPhysical(void *addr) {
     }
 }
 #else
-INCLUDE_ASM_LIBULTRA(u32, "osVirtualToPhysical", osVirtualToPhysical, void* virt);
+INCLUDE_ASM_LIBULTRA("osVirtualToPhysical", osVirtualToPhysical);
 #endif
