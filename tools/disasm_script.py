@@ -86,7 +86,6 @@ def round_fixed(f: float) -> float:
     """
     return f
 
-
 def find_symbol_in_overlay(symbol_map, overlay_rom_addr, symbol_ram_addr):
     if not symbol_ram_addr in symbol_map:
         return None
@@ -993,6 +992,7 @@ if __name__ == "__main__":
     parser.add_argument("-end", "-e", "--e", type=lambda x: int(x, 16), default=0, dest="end", required=False, help="End offset to stop dissassembling from.\nOnly used as a way to find valid scripts.")
     parser.add_argument("-vram", "-v", "--v", type=lambda x: int(x, 16), default=0, dest="vram", required=False, help="VRAM start will be tracked and used for the script output name")
     parser.add_argument("-si", "--si", action="store_true", default=False, dest="si", required=False, help="Force si script output")
+    parser.add_argument("-blob", "--b", action="store_true", default=False, dest="blob", required=False, help="If there is a blob of scripts.")
     args = parser.parse_args()
     vram_base = args.vram
     get_constants()
@@ -1062,20 +1062,33 @@ if __name__ == "__main__":
         with open(args.file, "rb") as f:
 
             f.seek(offset)
-
-            script = ScriptDisassembler(f, args.offset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
-
-            if args.si:
-                print(ScriptDisassembler(f, args.offset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED).disassemble(), end="")
-            else:
+            loffset = args.offset
+            looping = 1
+            while looping:
                 try:
-                    script_text = script.disassemble()
+                    script = ScriptDisassembler(f, loffset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
 
-                    print(f"EvtSource read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
-                          f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
-                    print()
-                    print(script_text, end="")
+                    if args.si:
+                        print(ScriptDisassembler(f, loffset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED).disassemble(), end="")
+                    else:
+                        try:
+                            script_text = script.disassemble()
 
-                except UnsupportedScript:
-                    f.seek(offset)
-                    print(ScriptDisassembler(f).disassemble(), end="")
+                            # print(f"EvtSource read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                            #     f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
+                            print()
+                            print(script_text, end="")
+
+                        except UnsupportedScript:
+                            f.seek(offset)
+                            print(ScriptDisassembler(f).disassemble(), end="")
+                            break
+                except:
+                    break
+
+                loffset = script.end_pos
+                looping = args.blob
+                try:
+                    loffset = _script_lib[loffset - info[0] + info[2]][0][1]
+                except:
+                    pass

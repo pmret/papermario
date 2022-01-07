@@ -1039,6 +1039,10 @@ segments:
     - [0x1AF5C0, .data, 1776B0]
     - [0x1AF8A0, .data, 190B20]
     - [0x1B21E0, data, 1AF2D0] # begins with image?
+    - [0x1C2EC0, .data, 19FAF0]
+    - [0x1C2FC0, .data, 1A5830]
+    - [0x1C3000, .data, 1AF120]
+    - [0x1CB0B0, .data, 1AF230]
     - [0x1CB240, .rodata, 16c8e0]
     - [0x1CB368, .rodata, 16F740]
     - [0x1CB4E0, .rodata, 1776B0]
