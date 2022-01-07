@@ -211,14 +211,14 @@ void load_hit_data(s32 idx, HitAsset* hit) {
     pAssetBoundingBox = (u32*)((void*)hit + pAssetCollisionData->boundingBoxesOffset);;
     pCollisionData->aabbs = collision_heap_malloc(pAssetCollisionData->boundingBoxesDataSize * 4);
     for (i = 0, pBoundingBox = (u32*)(pCollisionData->aabbs); i < pAssetCollisionData->boundingBoxesDataSize;
-         pAssetBoundingBox++, pBoundingBox++, i++) {
+        pAssetBoundingBox++, pBoundingBox++, i++) {
         *pBoundingBox = *pAssetBoundingBox;
     }
 
     pAssetVertices = (Vec3s*)((void*)hit + pAssetCollisionData->verticesOffset);
     pCollisionData->vertices = collision_heap_malloc(pAssetCollisionData->numVertices * sizeof(Vec3f));
     for (i = 0, pVertices = pCollisionData->vertices; i < pAssetCollisionData->numVertices;
-         pVertices++, pAssetVertices++, i++) {
+        pVertices++, pAssetVertices++, i++) {
         pVertices->x = pAssetVertices->x;
         pVertices->y = pAssetVertices->y;
         pVertices->z = pAssetVertices->z;
