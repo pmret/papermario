@@ -1,4 +1,5 @@
 #include "common.h"
+#include "include_asm_libultra.h"
 
 #ifndef KMC_ASM
 void guLookAtReflectF(Matrix4f mf, LookAt *l,
@@ -82,8 +83,7 @@ void guLookAtReflectF(Matrix4f mf, LookAt *l,
     mf[3][3] = 1;
 }
 #else
-INCLUDE_ASM_LIBULTRA(void, "lookatref", guLookAtReflectF, f32 mf[4][4], LookAt* l, f32 xEye, f32 yEye,
-            f32 zEye, f32 xAt, f32 yAt, f32 zAt, f32 xUp, f32 yUp, f32 zUp);
+INCLUDE_ASM_LIBULTRA("lookatref", guLookAtReflectF);
 #endif
 
 #ifndef KMC_ASM
@@ -97,6 +97,5 @@ void guLookAtReflect(Mtx *m, LookAt *l, f32 xEye, f32 yEye, f32 zEye,
     guMtxF2L(mf, m);
 }
 #else
-INCLUDE_ASM_LIBULTRA(void, "lookatref", guLookAtReflect, Mtx* m, LookAt* l, f32 xEye, f32 yEye, f32 zEye,
-            f32 xAt, f32 yAt, f32 zAt, f32 xUp, f32 yUp, f32 zUp);
+INCLUDE_ASM_LIBULTRA("lookatref", guLookAtReflect);
 #endif

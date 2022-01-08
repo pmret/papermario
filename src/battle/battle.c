@@ -1,29 +1,12 @@
 #include "common.h"
 #include "ld_addrs.h"
 #include "battle.h"
+#include "battle_tables.h"
 #include "hud_element.h"
 #include "sprite.h"
 
 extern s32 D_800DC060;
 extern Stage* D_800DC064;
-
-extern BattleList b_area_kmr_part_1_formationTable;
-extern StageList b_area_kmr_part_1_stageTable;
-
-extern BattleList b_area_kmr_part_2_formationTable;
-extern StageList b_area_kmr_part_2_stageTable;
-
-extern BattleList b_area_kmr_part_3_formationTable;
-extern StageList b_area_kmr_part_3_stageTable;
-
-extern BattleList b_area_mac_formationTable;
-extern StageList b_area_mac_stageTable;
-
-extern BattleList b_area_hos_formationTable;
-extern StageList b_area_hos_stageTable;
-
-extern BattleList b_area_nok_formationTable;
-extern StageList b_area_nok_stageTable;
 
 BattleArea gBattleAreas[0x30] = {
     {
@@ -65,8 +48,8 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_trd_part_1),
         .name = "エリア ＴＲＤ その１",
-        .battles = 0x80218CB0,
-        .stages = 0x80218EE0,
+        .battles = &b_area_trd_part_1_formationTable,
+        .stages = &b_area_trd_part_1_stageTable,
     },
     {
         AREA(area_trd_part_2),

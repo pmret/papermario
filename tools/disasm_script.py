@@ -409,6 +409,7 @@ replace_funcs = {
     "GetActorSize"              :{0:"ActorIDs"},
     "GetActorVar"               :{0:"ActorIDs"},
     "GetBattleFlags"            :{0:"BattleStatusFlags1"},
+    "GetBattlePhase"            :{0:"Phases"},
     "GetDistanceToGoal"         :{0:"ActorIDs"},
     "GetGoalPos"                :{0:"ActorIDs"},
     "GetHomePos"                :{0:"ActorIDs"},

@@ -502,7 +502,7 @@
 ///     EVT_CALL(ApiFunction)
 ///
 /// The given arguments can be accessed from the API function using `thread->ptrReadPos`.
-#define EVT_CALL(FUNC, ...)                     EVT_CMD(EVT_OP_CALL, (Bytecode) FUNC, ##__VA_ARGS__),
+#define EVT_CALL(FUNC, ARGS...)                     EVT_CMD(EVT_OP_CALL, (Bytecode) FUNC, ##ARGS),
 
 
 /****** COMMON SCRIPTS ************************************************************************************************/
