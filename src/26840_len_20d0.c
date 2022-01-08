@@ -1,6 +1,30 @@
 #include "common.h"
 #include "audio.h"
 
+void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_05(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_06(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_07(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_08(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_09_StartLoop(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0A_EndLoop(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0B(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0C(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0F(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_10_Jump(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_13(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_14(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_15(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_16(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player);
+
 void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, UnkAl19E0* arg3, u8 arg4) {
     u32 i;
     s32 c = 0x6A25E;
@@ -184,30 +208,6 @@ INCLUDE_ASM(s32, "26840_len_20d0", func_8004C884);
 INCLUDE_ASM(s32, "26840_len_20d0", snd_set_voice_volume);
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004CDF8);
-
-void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_05(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_06(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_07(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_08(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_09_StartLoop(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_0A_EndLoop(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_0B(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_0C(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_0F(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_10_Jump(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_13(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_14(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_15(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_16(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player);
-void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player);
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_00_SetVolume, SoundManager* manager, SoundPlayer* player);
 

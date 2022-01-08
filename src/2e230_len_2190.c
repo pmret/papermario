@@ -458,6 +458,7 @@ void snd_get_sequence_player_and_track(u32 playerIndex, s32** outCurrentTrackDat
         default:
             *outCurrentTrackData = NULL;
             *outPlayer = NULL;
+            break;
     }
 }
 
@@ -474,6 +475,7 @@ void snd_get_sequence_player(u32 playerIndex, BGMPlayer** outPlayer) {
             break;
         default:
             *outPlayer = NULL;
+            break;
     }
 }
 
@@ -500,6 +502,7 @@ BGMPlayer* func_80054248(u8 arg0) {
             return D_8009A640;
         default:
             return NULL;
+            break;
     }
 }
 
@@ -625,7 +628,7 @@ void snd_copy_words(s32* src, s32* dst, s32 num) {
     num /= 4;
 
     if (num > 0) {
-        if ((((s32) src | (s32) dst) & 3) == 0) {
+        if (!(((s32) src | (s32) dst) & 3)) {
             s32* srcIt = src;
             s32* dstIt = dst;
 
