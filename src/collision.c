@@ -1,43 +1,45 @@
 #include "common.h"
 #include "model.h"
 
-extern s16 D_800D91DC;
+typedef struct HitFile {
+    /* 0x00 */ u32 collisionOffset;
+    /* 0x04 */ u32 zoneOffset;
+} HitFile; // size = 0x08
 
-typedef struct {
-    u32 collisionOffset;
-    u32 zoneOffset;
-} HitAsset;
+typedef struct ColliderBackupEntry {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s16 parentModelIndex;
+    /* 0x06 */ s16 unk_06;
+} ColliderBackupEntry; // size = 0x08
 
-typedef struct {
-    s32 flags;
-    s16 parentModelIndex;
-    s16 unk_06;
-} ColliderBackupEntry;
+typedef struct HitFileHeader {
+    /* 0x00 */ s16 numColliders;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ s32 collidersOffset;
+    /* 0x08 */ s16 numVertices;
+    /* 0x0A */ s16 unk_0a;
+    /* 0x0C */ s32 verticesOffset;
+    /* 0x10 */ s16 boundingBoxesDataSize;
+    /* 0x12 */ s16 unk_12;
+    /* 0x14 */ s32 boundingBoxesOffset;
+} HitFileHeader; // size = 0x18
 
-typedef struct {
-    s16 numColliders;
-    s16 unk_02;
-    s32 collidersOffset;
-    s16 numVertices;
-    s16 unk_0a;
-    s32 verticesOffset;
-    s16 boundingBoxesDataSize;
-    s16 unk_12;
-    s32 boundingBoxesOffset;
-} HitAssetCollisionData;
+typedef struct HitAssetCollider {
+    /* 0x00 */ s16 boundingBoxOffset;
+    /* 0x02 */ s16 nextSibling;
+    /* 0x04 */ s16 firstChild;
+    /* 0x06 */ s16 numTriangles;
+    /* 0x08 */ s32 trianglesOffset;
+} HitAssetCollider; // size = 0x0C
 
-typedef struct {
-    s16 boundingBoxOffset;
-    s16 nextSibling;
-    s16 firstChild;
-    s16 numTriangles;
-    s32 trianglesOffset;
-} HitAssetCollider;
+typedef struct VertexIndexStruct {
+    /* 0x00 */ s16 i1;
+    /* 0x02 */ s16 i2;
+    /* 0x04 */ s16 i3;
+} VertexIndexStruct; // size = 0x06
 
-extern ColliderBackupEntry* gCollisionDataBackup;
-extern ColliderBackupEntry* gCollisionDataZoneBackup;
-extern CollisionData gZoneCollisionData;
-
+extern VertexIndexStruct gEntityColliderFaces[];
+extern Vec3f gEntityColliderNormals[];
 extern f32 gCollisionRayStartX;
 extern f32 gCollisionRayStartY;
 extern f32 gCollisionRayStartZ;
@@ -51,12 +53,16 @@ extern f32 gCollisionRayLength;
 extern f32 gCollisionNormalX;
 extern f32 gCollisionNormalY;
 extern f32 gCollisionNormalZ;
+extern ColliderBackupEntry* gCollisionDataBackup;
+extern ColliderBackupEntry* gCollisionDataZoneBackup;
+extern CollisionData gZoneCollisionData;
+extern s16 D_800D91DC;
 
 s32 collision_heap_create(void);
 void* collision_heap_malloc(s32 size);
 void collision_heap_free(void*);
 
-void load_hit_data(s32 idx, HitAsset* hit);
+void load_hit_data(s32 idx, HitFile* hit);
 void _add_hit_vert_to_buffer(Vec3f** buf, Vec3f* vert, s32* bufSize);
 s32 _get_hit_vert_index_from_buffer(Vec3f** buffer, Vec3f* vert, s32* bufferSize);
 
@@ -101,7 +107,7 @@ void load_map_hit_asset(void) {
     u32 assetSize;
     MapConfig* map = get_current_map_header();
     void* compressedData = load_asset_by_name(&wMapHitName, &assetSize);
-    HitAsset* uncompressedData = heap_malloc(assetSize);
+    HitFile* uncompressedData = heap_malloc(assetSize);
 
     decode_yay0(compressedData, uncompressedData);
     general_heap_free(compressedData);
@@ -153,7 +159,7 @@ void load_battle_hit_asset(const char* hitName) {
         u32 assetSize;
         MapConfig* map = get_current_map_header();
         void* compressedData = load_asset_by_name(hitName, &assetSize);
-        HitAsset* uncompressedData = heap_malloc(assetSize);
+        HitFile* uncompressedData = heap_malloc(assetSize);
 
         decode_yay0(compressedData, uncompressedData);
         general_heap_free(compressedData);
@@ -166,11 +172,11 @@ void load_battle_hit_asset(const char* hitName) {
     }
 }
 
-void load_hit_data(s32 idx, HitAsset* hit) {
+void load_hit_data(s32 idx, HitFile* hit) {
     s32 collisionOffset;
     MapConfig* map;
     CollisionData* pCollisionData;
-    HitAssetCollisionData* pAssetCollisionData;
+    HitFileHeader* pAssetCollisionData;
     Vec3f* pVertices;
     Vec3s* pAssetVertices;
     u32* pBoundingBox;
@@ -194,7 +200,7 @@ void load_hit_data(s32 idx, HitAsset* hit) {
             if (collisionOffset == 0)
                 return;
 
-            pAssetCollisionData = (HitAssetCollisionData*)((void*)hit + collisionOffset);
+            pAssetCollisionData = (HitFileHeader*)((void*)hit + collisionOffset);
             pCollisionData = &gCollisionData;
             break;
 
@@ -203,7 +209,7 @@ void load_hit_data(s32 idx, HitAsset* hit) {
             if (collisionOffset == 0)
                 return;
 
-            pAssetCollisionData = (HitAssetCollisionData*)((void*)hit + collisionOffset);
+            pAssetCollisionData = (HitFileHeader*)((void*)hit + collisionOffset);
             pCollisionData = &gZoneCollisionData;
             break;
     }
@@ -866,15 +872,6 @@ f32 test_ray_collider_horizontal(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, 
     return ret;
 }
 
-typedef struct {
-    s16 i1;
-    s16 i2;
-    s16 i3;
-} VertexIndexStruct;
-
-extern VertexIndexStruct gBoxTriangulationTable[];
-extern Vec3f gBoxTriangulationNormalTable[];
-
 s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
                       f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz) {
     f32 hitDepthDown, hitDepthHoriz;
@@ -952,9 +949,9 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
                   startZ - entity->position.z, &gCollisionRayStartX, &gCollisionRayStartY, &gCollisionRayStartZ);
 
         for (j = 0; j < 12; j++) {
-            Vec3f* v1 = pTriangle->v1 = &boxVertices[gBoxTriangulationTable[j].i1];
-            Vec3f* v2 = pTriangle->v2 = &boxVertices[gBoxTriangulationTable[j].i2];
-            Vec3f* v3 = pTriangle->v3 = &boxVertices[gBoxTriangulationTable[j].i3];
+            Vec3f* v1 = pTriangle->v1 = &boxVertices[gEntityColliderFaces[j].i1];
+            Vec3f* v2 = pTriangle->v2 = &boxVertices[gEntityColliderFaces[j].i2];
+            Vec3f* v3 = pTriangle->v3 = &boxVertices[gEntityColliderFaces[j].i3];
             pTriangle->e13.x = v3->x - v1->x;
             pTriangle->e13.y = v3->y - v1->y;
             pTriangle->e13.z = v3->z - v1->z;
@@ -964,9 +961,9 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
             pTriangle->e32.x = v2->x - v3->x;
             pTriangle->e32.y = v2->y - v3->y;
             pTriangle->e32.z = v2->z - v3->z;
-            pTriangle->normal.x = gBoxTriangulationNormalTable[j].x;
-            pTriangle->normal.y = gBoxTriangulationNormalTable[j].y;
-            pTriangle->normal.z = gBoxTriangulationNormalTable[j].z;
+            pTriangle->normal.x = gEntityColliderNormals[j].x;
+            pTriangle->normal.y = gEntityColliderNormals[j].y;
+            pTriangle->normal.z = gEntityColliderNormals[j].z;
 
             if (hasCollision = test_ray_triangle_general(&triangle, boxVertices))
                 break;
