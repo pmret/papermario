@@ -92,7 +92,7 @@ segments:
     - [0x341D0, c, 341d0]
     - [0x35080, c, effects]
     - [0x35AC0, c, world/world]
-    - [0x362A0, c, 362a0_len_2f70]
+    - [0x362A0, c, collision]
     - [0x39210, c, 39210_len_aa0]
     - [0x39CB0, c, os/39cb0_len_100]
     - [0x39DB0, c, os/nusys/nuSched]
