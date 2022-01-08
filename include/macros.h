@@ -14,6 +14,7 @@
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 
+#define A(sym) NS(AREA, sym)
 #define N(sym) NS(NAMESPACE, sym)
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
