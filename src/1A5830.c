@@ -4,7 +4,7 @@
 #include "effects.h"
 #include "hud_element.h"
 
-extern s32 D_802946E0[];
+s32 D_802946E0[] = { 100, 100, 100, 110, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130 };
 
 s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event);
 s32 func_80263230(Actor*, Actor*);

@@ -33,6 +33,52 @@ INCLUDE_ASM(ApiStatus, "19FAF0", func_80271484, Evt* script, s32 isInitialCall);
 ApiStatus func_80271588(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(ApiStatus, "19FAF0", func_80271588, Evt* script, s32 isInitialCall);
 
+EvtSource DoSleepHit = {
+    EVT_CALL(func_80271210)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource DoDizzyHit = {
+    EVT_CALL(func_80271258)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource DoParalyzeHit = {
+    EVT_CALL(func_802712A0)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource DoPoisonHit = {
+    EVT_CALL(func_80271328)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource DoStopHit = {
+    EVT_CALL(func_802713B0)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource DoFreezeHit = {
+    EVT_CALL(func_8027143C)
+    EVT_WAIT_FRAMES(8)
+    EVT_CALL(func_8027143C)
+    EVT_WAIT_FRAMES(15)
+    EVT_CALL(func_80271484)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtSource DoShrinkHit = {
+    EVT_CALL(func_80271588)
+    EVT_RETURN
+    EVT_END
+};
+
 void dispatch_event_player(s32 eventType) {
     Actor* player = gBattleStatus.playerActor;
     Evt* oldOnHitScript;
@@ -44,7 +90,7 @@ void dispatch_event_player(s32 eventType) {
     oldOnHitScript = player->onHitScript;
     oldOnHitID = player->onHitID;
 
-    eventScript = start_script(HandleEvent_Player, 10, 0x20);
+    eventScript = start_script(&HandleEvent_Player, 10, 0x20);
     player->onHitScript = eventScript;
     player->onHitID = eventScript->id;
     eventScript->owner1.actor = NULL;
@@ -70,7 +116,7 @@ void dispatch_event_player_continue_turn(s32 eventType) {
     oldOnHitScript = player->onHitScript;
     oldOnHitID = player->onHitID;
 
-    eventScript = start_script(HandleEvent_Player, 10, 0x20);
+    eventScript = start_script(&HandleEvent_Player, 10, 0x20);
     player->onHitScript = eventScript;
     player->onHitID = eventScript->id;
     eventScript->owner1.actor = NULL;
@@ -84,6 +130,7 @@ INCLUDE_ASM(s32, "19FAF0", calc_player_test_enemy);
 
 INCLUDE_ASM(s32, "19FAF0", calc_player_damage_enemy);
 
+s32 dispatch_damage_event_player(s32, s32, s32);
 INCLUDE_ASM(s32, "19FAF0", dispatch_damage_event_player);
 
 s32 dispatch_damage_event_player_0(s32 damageAmount, s32 event) {

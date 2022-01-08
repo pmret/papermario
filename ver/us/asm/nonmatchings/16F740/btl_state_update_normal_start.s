@@ -89,7 +89,7 @@ glabel btl_state_update_normal_start
 /* 16FC14 80241334 0040282D */   daddu    $a1, $v0, $zero
 .L80241338:
 /* 16FC18 80241338 8EA40008 */  lw        $a0, 8($s5)
-/* 16FC1C 8024133C 0C016C68 */  jal       load_stage_collision
+/* 16FC1C 8024133C 0C016C68 */  jal       load_battle_hit_asset
 /* 16FC20 80241340 00000000 */   nop
 /* 16FC24 80241344 8EA40014 */  lw        $a0, 0x14($s5)
 /* 16FC28 80241348 10800007 */  beqz      $a0, .L80241368

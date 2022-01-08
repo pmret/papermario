@@ -92,7 +92,7 @@ segments:
     - [0x341D0, c, 341d0]
     - [0x35080, c, effects]
     - [0x35AC0, c, world/world]
-    - [0x362A0, c, 362a0_len_2f70]
+    - [0x362A0, c, collision]
     - [0x39210, c, 39210_len_aa0]
     - [0x39CB0, c, os/39cb0_len_100]
     - [0x39DB0, c, os/nusys/nuSched]
@@ -1039,6 +1039,10 @@ segments:
     - [0x1AF5C0, .data, 1776B0]
     - [0x1AF8A0, .data, 190B20]
     - [0x1B21E0, data, 1AF2D0] # begins with image?
+    - [0x1C2EC0, .data, 19FAF0]
+    - [0x1C2FC0, .data, 1A5830]
+    - [0x1C3000, .data, 1AF120]
+    - [0x1CB0B0, .data, 1AF230]
     - [0x1CB240, .rodata, 16c8e0]
     - [0x1CB368, .rodata, 16F740]
     - [0x1CB4E0, .rodata, 1776B0]
@@ -3825,10 +3829,27 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4A10A0, c]
-    - [0x4A1190, c]
-    - [0x4A12C0, c]
-    - [0x4A1530, data]
+    - [0x4A10A0, c, area]
+    - [0x4A10A0, c, actor/bullet_bill]
+    - [0x4A10A0, c, actor/bill_blaster]
+    - [0x4A10A0, c, actor/bob_omb]
+    - [0x4A10C0, c, actor/koopa_troopa]
+    - [0x4A1190, c, actor/paratroopa]
+    - [0x4A12C0, c, stage/trd_01]
+    - [0x4A12C0, c, stage/trd_02]
+    - [0x4A12C0, c, stage/trd_02b]
+    - [0x4A12C0, c, stage/trd_03]
+    - [0x4A1530, c, stage/trd_04]
+    - [0x4A1530, c, stage/trd_05]
+    - [0x4A1530, c, stage/trd_00]
+    - [0x4A1530, c, stage/trd_02c]
+    - [0x4A1530, c, stage/trd_02d]
+    - [0x4A1530, c, stage/trd_05b]
+    - [0x4A1530, c, stage/trd_05c]
+    - [0x4A1530, c, stage/trd_05d]
+    - [0x4A1530, c, stage/trd_05e]
+    - [0x4A1530, c, stage/trd_05f]
+    - [0x4A1530]
   - dir: battle/area_trd_part_2
     type: code
     start: 0x4B11F0

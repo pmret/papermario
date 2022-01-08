@@ -15,7 +15,7 @@ extern OSThread GfxTaskMgrThread;
 extern NUScTask nuGfxTask[NU_GFX_TASK_NUM];
 extern s32 D_800DA040;
 extern s32 D_800B91D0;
-extern s32 D_800D91D0;
+extern s32 gZoneCollisionData;
 extern u8 rspbootUcodeBuffer[];
 extern u32 nuGfxCfbCounter;
 extern OSMesgQueue D_800DA47C;
@@ -79,7 +79,7 @@ void nuGfxTaskMgrInit(void) {
         nuGfxTask[i].list.t.dram_stack = &D_800DA040;
         nuGfxTask[i].list.t.dram_stack_size = SP_DRAM_STACK_SIZE8;
         nuGfxTask[i].list.t.output_buff = &D_800B91D0;
-        nuGfxTask[i].list.t.output_buff_size = &D_800D91D0;
+        nuGfxTask[i].list.t.output_buff_size = &gZoneCollisionData;
         nuGfxTask[i].list.t.yield_data_ptr = &nuYieldBuf;
         nuGfxTask[i].list.t.yield_data_size = NU_GFX_YIELD_BUF_SIZE;
     }
