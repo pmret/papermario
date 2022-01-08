@@ -67,25 +67,25 @@ void _add_hit_vert_to_buffer(Vec3f** buf, Vec3f* vert, s32* bufSize);
 s32 _get_hit_vert_index_from_buffer(Vec3f** buffer, Vec3f* vert, s32* bufferSize);
 
 void backup_map_collision_data(void) {
-    CollisionData* pCollisionData;
-    Collider* pCollider;
-    ColliderBackupEntry* pBackupEntry;
+    CollisionData* collisionData;
+    Collider* collider;
+    ColliderBackupEntry* backupEntry;
     s32 i;
 
-    pCollisionData = &gCollisionData;
-    gCollisionDataBackup = general_heap_malloc(pCollisionData->numColliders * sizeof(ColliderBackupEntry));
-    for (i = 0, pBackupEntry = gCollisionDataBackup; i < pCollisionData->numColliders; i++, pBackupEntry++) {
-        pCollider = &pCollisionData->colliderList[i];
-        pBackupEntry->flags = pCollider->flags;
-        pBackupEntry->parentModelIndex = pCollider->parentModelIndex;
+    collisionData = &gCollisionData;
+    gCollisionDataBackup = general_heap_malloc(collisionData->numColliders * sizeof(ColliderBackupEntry));
+    for (i = 0, backupEntry = gCollisionDataBackup; i < collisionData->numColliders; i++, backupEntry++) {
+        collider = &collisionData->colliderList[i];
+        backupEntry->flags = collider->flags;
+        backupEntry->parentModelIndex = collider->parentModelIndex;
     }
 
-    pCollisionData = &gZoneCollisionData;
-    gCollisionDataZoneBackup = general_heap_malloc(pCollisionData->numColliders * sizeof(ColliderBackupEntry));
-    for (i = 0, pBackupEntry = gCollisionDataZoneBackup; i < pCollisionData->numColliders; i++, pBackupEntry++) {
-        pCollider = &pCollisionData->colliderList[i];
-        pBackupEntry->flags = pCollider->flags;
-        pBackupEntry->parentModelIndex = pCollider->parentModelIndex;
+    collisionData = &gZoneCollisionData;
+    gCollisionDataZoneBackup = general_heap_malloc(collisionData->numColliders * sizeof(ColliderBackupEntry));
+    for (i = 0, backupEntry = gCollisionDataZoneBackup; i < collisionData->numColliders; i++, backupEntry++) {
+        collider = &collisionData->colliderList[i];
+        backupEntry->flags = collider->flags;
+        backupEntry->parentModelIndex = collider->parentModelIndex;
     }
 
     D_800D91DC = 0;
@@ -122,30 +122,30 @@ void load_map_hit_asset(void) {
 }
 
 void restore_map_collision_data(void) {
-    CollisionData* pCollisionData;
-    Collider* pCollider;
-    ColliderBackupEntry* pColliderBackupEntry;
+    CollisionData* collisionData;
+    Collider* collider;
+    ColliderBackupEntry* backupEntry;
     s32 i;
 
     load_map_hit_asset();
 
-    pCollisionData = &gCollisionData;
-    for (i = 0, pColliderBackupEntry = gCollisionDataBackup; i < pCollisionData->numColliders; i++, pColliderBackupEntry++) {
-        pCollider = &pCollisionData->colliderList[i];
-        pCollider->flags = pColliderBackupEntry->flags;
-        pCollider->parentModelIndex = pColliderBackupEntry->parentModelIndex;
+    collisionData = &gCollisionData;
+    for (i = 0, backupEntry = gCollisionDataBackup; i < collisionData->numColliders; i++, backupEntry++) {
+        collider = &collisionData->colliderList[i];
+        collider->flags = backupEntry->flags;
+        collider->parentModelIndex = backupEntry->parentModelIndex;
 
-        if (pCollider->flags != -1 && pCollider->flags & 0x80000000) {
-            parent_collider_to_model(i, pCollider->parentModelIndex);
+        if (collider->flags != -1 && collider->flags & 0x80000000) {
+            parent_collider_to_model(i, collider->parentModelIndex);
             update_collider_transform(i);
         }
     }
 
-    pCollisionData = &gZoneCollisionData;
-    for (i = 0, pColliderBackupEntry = gCollisionDataZoneBackup; i < pCollisionData->numColliders; i++, pColliderBackupEntry++) {
-        pCollider = &pCollisionData->colliderList[i];
-        pCollider->flags = pColliderBackupEntry->flags;
-        pCollider->parentModelIndex = pColliderBackupEntry->parentModelIndex;
+    collisionData = &gZoneCollisionData;
+    for (i = 0, backupEntry = gCollisionDataZoneBackup; i < collisionData->numColliders; i++, backupEntry++) {
+        collider = &collisionData->colliderList[i];
+        collider->flags = backupEntry->flags;
+        collider->parentModelIndex = backupEntry->parentModelIndex;
     }
 
     general_heap_free(gCollisionDataBackup);
@@ -175,22 +175,22 @@ void load_battle_hit_asset(const char* hitName) {
 void load_hit_data(s32 idx, HitFile* hit) {
     s32 collisionOffset;
     MapConfig* map;
-    CollisionData* pCollisionData;
-    HitFileHeader* pAssetCollisionData;
-    Vec3f* pVertices;
-    Vec3s* pAssetVertices;
-    u32* pBoundingBox;
-    u32* pAssetBoundingBox;
-    Collider* pCollider;
-    HitAssetCollider* pAssetCollider;
-    ColliderTriangle* pTriangle;
-    s32* pTrianglePacked;
+    CollisionData* collisionData;
+    HitFileHeader* assetCollisionData;
+    Vec3f* vertices;
+    Vec3s* assetVertices;
+    u32* boundingBox;
+    u32* assetBoundingBox;
+    Collider* collider;
+    HitAssetCollider* assetCollider;
+    ColliderTriangle* triangle;
+    s32* trianglePacked;
     s16 numTriangles;
     s32 i,j;
     f32 e13_y, e21_z, e13_z, e21_y, e21_x, e13_x, normalX, normalY, normalZ, coeff;
 
-    pAssetCollisionData = NULL;
-    pCollisionData = NULL;
+    assetCollisionData = NULL;
+    collisionData = NULL;
 
     map = get_current_map_header();
 
@@ -200,8 +200,8 @@ void load_hit_data(s32 idx, HitFile* hit) {
             if (collisionOffset == 0)
                 return;
 
-            pAssetCollisionData = (HitFileHeader*)((void*)hit + collisionOffset);
-            pCollisionData = &gCollisionData;
+            assetCollisionData = (HitFileHeader*)((void*)hit + collisionOffset);
+            collisionData = &gCollisionData;
             break;
 
         case 1:
@@ -209,81 +209,81 @@ void load_hit_data(s32 idx, HitFile* hit) {
             if (collisionOffset == 0)
                 return;
 
-            pAssetCollisionData = (HitFileHeader*)((void*)hit + collisionOffset);
-            pCollisionData = &gZoneCollisionData;
+            assetCollisionData = (HitFileHeader*)((void*)hit + collisionOffset);
+            collisionData = &gZoneCollisionData;
             break;
     }
 
-    pAssetBoundingBox = (u32*)((void*)hit + pAssetCollisionData->boundingBoxesOffset);;
-    pCollisionData->aabbs = collision_heap_malloc(pAssetCollisionData->boundingBoxesDataSize * 4);
-    for (i = 0, pBoundingBox = (u32*)(pCollisionData->aabbs); i < pAssetCollisionData->boundingBoxesDataSize;
-        pAssetBoundingBox++, pBoundingBox++, i++) {
-        *pBoundingBox = *pAssetBoundingBox;
+    assetBoundingBox = (u32*)((void*)hit + assetCollisionData->boundingBoxesOffset);;
+    collisionData->aabbs = collision_heap_malloc(assetCollisionData->boundingBoxesDataSize * 4);
+    for (i = 0, boundingBox = (u32*)(collisionData->aabbs); i < assetCollisionData->boundingBoxesDataSize;
+        assetBoundingBox++, boundingBox++, i++) {
+        *boundingBox = *assetBoundingBox;
     }
 
-    pAssetVertices = (Vec3s*)((void*)hit + pAssetCollisionData->verticesOffset);
-    pCollisionData->vertices = collision_heap_malloc(pAssetCollisionData->numVertices * sizeof(Vec3f));
-    for (i = 0, pVertices = pCollisionData->vertices; i < pAssetCollisionData->numVertices;
-        pVertices++, pAssetVertices++, i++) {
-        pVertices->x = pAssetVertices->x;
-        pVertices->y = pAssetVertices->y;
-        pVertices->z = pAssetVertices->z;
+    assetVertices = (Vec3s*)((void*)hit + assetCollisionData->verticesOffset);
+    collisionData->vertices = collision_heap_malloc(assetCollisionData->numVertices * sizeof(Vec3f));
+    for (i = 0, vertices = collisionData->vertices; i < assetCollisionData->numVertices;
+        vertices++, assetVertices++, i++) {
+        vertices->x = assetVertices->x;
+        vertices->y = assetVertices->y;
+        vertices->z = assetVertices->z;
     }
 
-    pAssetCollider = (HitAssetCollider*)((void*)hit + pAssetCollisionData->collidersOffset);
-    pCollider = pCollisionData->colliderList = collision_heap_malloc(pAssetCollisionData->numColliders * sizeof(Collider));
-    pCollisionData->numColliders = pAssetCollisionData->numColliders;
-    for (i = 0; i < pAssetCollisionData->numColliders; pAssetCollider++, pCollider++, i++) {
-        pCollider->flags = 0;
-        pCollider->nextSibling = pAssetCollider->nextSibling;
-        pCollider->firstChild = pAssetCollider->firstChild;
-        pCollider->numTriangles = pAssetCollider->numTriangles;
+    assetCollider = (HitAssetCollider*)((void*)hit + assetCollisionData->collidersOffset);
+    collider = collisionData->colliderList = collision_heap_malloc(assetCollisionData->numColliders * sizeof(Collider));
+    collisionData->numColliders = assetCollisionData->numColliders;
+    for (i = 0; i < assetCollisionData->numColliders; assetCollider++, collider++, i++) {
+        collider->flags = 0;
+        collider->nextSibling = assetCollider->nextSibling;
+        collider->firstChild = assetCollider->firstChild;
+        collider->numTriangles = assetCollider->numTriangles;
 
-        numTriangles = pCollider->numTriangles;
+        numTriangles = collider->numTriangles;
 
         if (numTriangles) {
-            pCollider->triangleTable = pTriangle = collision_heap_malloc(pAssetCollider->numTriangles * sizeof(ColliderTriangle));
+            collider->triangleTable = triangle = collision_heap_malloc(assetCollider->numTriangles * sizeof(ColliderTriangle));
 
-            if (pAssetCollider->boundingBoxOffset < 0) {
-                pCollider->aabb = NULL;
+            if (assetCollider->boundingBoxOffset < 0) {
+                collider->aabb = NULL;
             } else {
-                pCollider->aabb = (ColliderBoundingBox*)((u32*)(pCollisionData->aabbs) + pAssetCollider->boundingBoxOffset);
+                collider->aabb = (ColliderBoundingBox*)((u32*)(collisionData->aabbs) + assetCollider->boundingBoxOffset);
 
                 if (idx == 0) {
-                    pCollider->aabb->min.x -= 1;
-                    pCollider->aabb->min.y -= 1;
-                    pCollider->aabb->min.z -= 1;
-                    pCollider->aabb->max.x += 1;
-                    pCollider->aabb->max.y += 1;
-                    pCollider->aabb->max.z += 1;
-                    pCollider->flags = pCollider->aabb->flagsForCollider;
+                    collider->aabb->min.x -= 1;
+                    collider->aabb->min.y -= 1;
+                    collider->aabb->min.z -= 1;
+                    collider->aabb->max.x += 1;
+                    collider->aabb->max.y += 1;
+                    collider->aabb->max.z += 1;
+                    collider->flags = collider->aabb->flagsForCollider;
                 }
             }
 
-            pTrianglePacked = (s32*)((void*)hit + pAssetCollider->trianglesOffset);
+            trianglePacked = (s32*)((void*)hit + assetCollider->trianglesOffset);
 
-            for (j = 0; j < pAssetCollider->numTriangles; pTrianglePacked++, pTriangle++, j++) {
-                Vec3f* v1 = pTriangle->v1 = &pCollisionData->vertices[(*pTrianglePacked) & 0x3FF];
-                Vec3f* v2 = pTriangle->v2 = &pCollisionData->vertices[(*pTrianglePacked >> 10) & 0x3FF];
-                Vec3f* v3 = pTriangle->v3 = &pCollisionData->vertices[(*pTrianglePacked >> 20) & 0x3FF];
-                pTriangle->oneSided = (*pTrianglePacked >> 30) & 1;
+            for (j = 0; j < assetCollider->numTriangles; trianglePacked++, triangle++, j++) {
+                Vec3f* v1 = triangle->v1 = &collisionData->vertices[(*trianglePacked) & 0x3FF];
+                Vec3f* v2 = triangle->v2 = &collisionData->vertices[(*trianglePacked >> 10) & 0x3FF];
+                Vec3f* v3 = triangle->v3 = &collisionData->vertices[(*trianglePacked >> 20) & 0x3FF];
+                triangle->oneSided = (*trianglePacked >> 30) & 1;
 
-                pTriangle->e13.x = v3->x - v1->x;
-                pTriangle->e13.y = v3->y - v1->y;
-                pTriangle->e13.z = v3->z - v1->z;
-                pTriangle->e21.x = v1->x - v2->x;
-                pTriangle->e21.y = v1->y - v2->y;
-                pTriangle->e21.z = v1->z - v2->z;
-                pTriangle->e32.x = v2->x - v3->x;
-                pTriangle->e32.y = v2->y - v3->y;
-                pTriangle->e32.z = v2->z - v3->z;
+                triangle->e13.x = v3->x - v1->x;
+                triangle->e13.y = v3->y - v1->y;
+                triangle->e13.z = v3->z - v1->z;
+                triangle->e21.x = v1->x - v2->x;
+                triangle->e21.y = v1->y - v2->y;
+                triangle->e21.z = v1->z - v2->z;
+                triangle->e32.x = v2->x - v3->x;
+                triangle->e32.y = v2->y - v3->y;
+                triangle->e32.z = v2->z - v3->z;
 
-                e13_x = pTriangle->e13.x;
-                e13_y = pTriangle->e13.y;
-                e13_z = pTriangle->e13.z;
-                e21_x = pTriangle->e21.x;
-                e21_y = pTriangle->e21.y;
-                e21_z = pTriangle->e21.z;
+                e13_x = triangle->e13.x;
+                e13_y = triangle->e13.y;
+                e13_z = triangle->e13.z;
+                e21_x = triangle->e21.x;
+                e21_y = triangle->e21.y;
+                e21_z = triangle->e21.z;
 
                 // vector product
                 normalX = e13_y * e21_z - e13_z * e21_y;
@@ -296,9 +296,9 @@ void load_hit_data(s32 idx, HitFile* hit) {
                 else
                     coeff = 0.0f;
 
-                pTriangle->normal.x = normalX * coeff;
-                pTriangle->normal.y = normalY * coeff;
-                pTriangle->normal.z = normalZ * coeff;
+                triangle->normal.x = normalX * coeff;
+                triangle->normal.y = normalY * coeff;
+                triangle->normal.z = normalZ * coeff;
             }
         }
     }
@@ -306,10 +306,10 @@ void load_hit_data(s32 idx, HitFile* hit) {
 
 void parent_collider_to_model(s16 colliderID, s16 modelIndex) {
     Collider* collider;
-    ColliderTriangle* pTriangle;
+    ColliderTriangle* triangle;
     s32 i;
     Vec3f** vertexBuffer;
-    Vec3f** pVertex;
+    Vec3f** vertexPtr;
     s32 vertexBufferSize;
     Vec3f* vertexTable;
     Vec3f* vertex;
@@ -320,28 +320,28 @@ void parent_collider_to_model(s16 colliderID, s16 modelIndex) {
 
     vertexBuffer = collision_heap_malloc(collider->numTriangles * 0xC);
     vertexBufferSize = 0;
-    pVertex = vertexBuffer;
+    vertexPtr = vertexBuffer;
 
-    for (i = 0, pTriangle = collider->triangleTable; i < collider->numTriangles; i++, pTriangle++) {
-        _add_hit_vert_to_buffer(vertexBuffer, pTriangle->v1, &vertexBufferSize);
-        _add_hit_vert_to_buffer(vertexBuffer, pTriangle->v2, &vertexBufferSize);
-        _add_hit_vert_to_buffer(vertexBuffer, pTriangle->v3, &vertexBufferSize);
+    for (i = 0, triangle = collider->triangleTable; i < collider->numTriangles; i++, triangle++) {
+        _add_hit_vert_to_buffer(vertexBuffer, triangle->v1, &vertexBufferSize);
+        _add_hit_vert_to_buffer(vertexBuffer, triangle->v2, &vertexBufferSize);
+        _add_hit_vert_to_buffer(vertexBuffer, triangle->v3, &vertexBufferSize);
     }
 
     collider->numVertices = vertexBufferSize;
     collider->vertexTable = collision_heap_malloc(vertexBufferSize * 0x18);
-    for (i = 0, vertexTable = collider->vertexTable; i < vertexBufferSize; pVertex++, vertexTable += 2, i++) {
-        vertex = *pVertex;
+    for (i = 0, vertexTable = collider->vertexTable; i < vertexBufferSize; vertexPtr++, vertexTable += 2, i++) {
+        vertex = *vertexPtr;
         vertexTable->x = vertexTable[1].x = vertex->x;
         vertexTable->y = vertexTable[1].y = vertex->y;
         vertexTable->z = vertexTable[1].z = vertex->z;
     }
 
     vertexTable = collider->vertexTable;
-    for (i = 0, pTriangle = collider->triangleTable; i < collider->numTriangles; pTriangle++, i++) {
-        pTriangle->v1 = &vertexTable[_get_hit_vert_index_from_buffer(vertexBuffer, pTriangle->v1, &vertexBufferSize) * 2];
-        pTriangle->v2 = &vertexTable[_get_hit_vert_index_from_buffer(vertexBuffer, pTriangle->v2, &vertexBufferSize) * 2];
-        pTriangle->v3 = &vertexTable[_get_hit_vert_index_from_buffer(vertexBuffer, pTriangle->v3, &vertexBufferSize) * 2];
+    for (i = 0, triangle = collider->triangleTable; i < collider->numTriangles; triangle++, i++) {
+        triangle->v1 = &vertexTable[_get_hit_vert_index_from_buffer(vertexBuffer, triangle->v1, &vertexBufferSize) * 2];
+        triangle->v2 = &vertexTable[_get_hit_vert_index_from_buffer(vertexBuffer, triangle->v2, &vertexBufferSize) * 2];
+        triangle->v3 = &vertexTable[_get_hit_vert_index_from_buffer(vertexBuffer, triangle->v3, &vertexBufferSize) * 2];
     }
 
     collision_heap_free(vertexBuffer);
@@ -380,7 +380,7 @@ void update_collider_transform(s16 colliderID) {
     s32 i;
     Vec3f* vertexTable;
     f32 min_x, min_y, min_z, max_x, max_y, max_z;
-    ColliderTriangle* pTriangle;
+    ColliderTriangle* triangle;
     f32 e13_y, e21_z, e13_z, e21_y, e21_x, e13_x, normalX, normalY, normalZ, coeff;
 
     collider = &gCollisionData.colliderList[colliderID];
@@ -393,7 +393,7 @@ void update_collider_transform(s16 colliderID) {
         guMtxCatF(model->transformMatrix, matrix, matrix);
     }
 
-    pTriangle = collider->triangleTable;
+    triangle = collider->triangleTable;
     vertexTable = collider->vertexTable;
 
     min_x = min_y = min_z = 999999.9f;
@@ -423,27 +423,27 @@ void update_collider_transform(s16 colliderID) {
     collider->aabb->max.y = max_y;
     collider->aabb->max.z = max_z;
 
-    for (i = 0; i < collider->numTriangles; pTriangle++, i++) {
-        Vec3f* v1 = pTriangle->v1;
-        Vec3f* v2 = pTriangle->v2;
-        Vec3f* v3 = pTriangle->v3;
+    for (i = 0; i < collider->numTriangles; triangle++, i++) {
+        Vec3f* v1 = triangle->v1;
+        Vec3f* v2 = triangle->v2;
+        Vec3f* v3 = triangle->v3;
 
-        pTriangle->e13.x = v3->x - v1->x;
-        pTriangle->e13.y = v3->y - v1->y;
-        pTriangle->e13.z = v3->z - v1->z;
-        pTriangle->e21.x = v1->x - v2->x;
-        pTriangle->e21.y = v1->y - v2->y;
-        pTriangle->e21.z = v1->z - v2->z;
-        pTriangle->e32.x = v2->x - v3->x;
-        pTriangle->e32.y = v2->y - v3->y;
-        pTriangle->e32.z = v2->z - v3->z;
+        triangle->e13.x = v3->x - v1->x;
+        triangle->e13.y = v3->y - v1->y;
+        triangle->e13.z = v3->z - v1->z;
+        triangle->e21.x = v1->x - v2->x;
+        triangle->e21.y = v1->y - v2->y;
+        triangle->e21.z = v1->z - v2->z;
+        triangle->e32.x = v2->x - v3->x;
+        triangle->e32.y = v2->y - v3->y;
+        triangle->e32.z = v2->z - v3->z;
 
-        e13_x = pTriangle->e13.x;
-        e13_y = pTriangle->e13.y;
-        e13_z = pTriangle->e13.z;
-        e21_x = pTriangle->e21.x;
-        e21_y = pTriangle->e21.y;
-        e21_z = pTriangle->e21.z;
+        e13_x = triangle->e13.x;
+        e13_y = triangle->e13.y;
+        e13_z = triangle->e13.z;
+        e21_x = triangle->e21.x;
+        e21_y = triangle->e21.y;
+        e21_z = triangle->e21.z;
 
         // vector product
         normalX = e13_y * e21_z - e13_z * e21_y;
@@ -456,9 +456,9 @@ void update_collider_transform(s16 colliderID) {
         else
             coeff = 0.0f;
 
-        pTriangle->normal.x = normalX * coeff;
-        pTriangle->normal.y = normalY * coeff;
-        pTriangle->normal.z = normalZ * coeff;
+        triangle->normal.x = normalX * coeff;
+        triangle->normal.y = normalY * coeff;
+        triangle->normal.z = normalZ * coeff;
     }
 }
 
@@ -709,7 +709,7 @@ s32 test_ray_triangle_horizontal(ColliderTriangle* triangle, Vec3f *vertices) {
 s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
                        f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz) {
     Collider* collider;
-    CollisionData* pCollisionData;
+    CollisionData* collisionData;
     ColliderTriangle* triangle;
     s32 i, j;
     s32 colliderID;
@@ -718,7 +718,7 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
     if (dirX == 0 && dirY == 0 && dirZ == 0)
         return 0;
 
-    pCollisionData = &gCollisionData;
+    collisionData = &gCollisionData;
     gCollisionRayDirX = dirX;
     gCollisionRayDirY = dirY;
     gCollisionRayDirZ = dirZ;
@@ -752,8 +752,8 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
         max_z = startZ + dirZ * gCollisionRayLength;
     }
 
-    for (i = 0; i < pCollisionData->numColliders; i++) {
-        collider = &pCollisionData->colliderList[i];
+    for (i = 0; i < collisionData->numColliders; i++) {
+        collider = &collisionData->colliderList[i];
 
         if ((collider->flags & ignoreFlags) ||
             collider->numTriangles == 0     ||
@@ -768,15 +768,15 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
         triangle = collider->triangleTable;
         if (gCollisionRayDirX == 0 && gCollisionRayDirZ == 0 && gCollisionRayDirY == -1.0) {
             for (j = 0; j < collider->numTriangles; j++)
-                if (test_ray_triangle_down(triangle++, pCollisionData->vertices))
+                if (test_ray_triangle_down(triangle++, collisionData->vertices))
                     colliderID = i;
         } else if (gCollisionRayDirY == 0) {
             for (j = 0; j < collider->numTriangles; j++)
-                if (test_ray_triangle_horizontal(triangle++, pCollisionData->vertices))
+                if (test_ray_triangle_horizontal(triangle++, collisionData->vertices))
                     colliderID = i;
         } else {
             for (j = 0; j < collider->numTriangles; j++)
-                if (test_ray_triangle_general(triangle++, pCollisionData->vertices))
+                if (test_ray_triangle_general(triangle++, collisionData->vertices))
                     colliderID = i;
         }
     }
@@ -797,12 +797,12 @@ s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 
 s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
                 f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz) {
     Collider* collider;
-    CollisionData* pCollisionData;
+    CollisionData* collisionData;
     ColliderTriangle* triangle;
     s32 i, j;
     s32 colliderID;
 
-    pCollisionData = &gZoneCollisionData;
+    collisionData = &gZoneCollisionData;
     gCollisionRayDirX = dirX;
     gCollisionRayDirY = dirY;
     gCollisionRayDirZ = dirZ;
@@ -812,8 +812,8 @@ s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 d
     gCollisionRayLength = *hitDepth;
     colliderID = -1;
 
-    for (i = 0; i < pCollisionData->numColliders; i++) {
-        collider = &pCollisionData->colliderList[i];
+    for (i = 0; i < collisionData->numColliders; i++) {
+        collider = &collisionData->colliderList[i];
 
         if (collider->flags & 0x10000)
             continue;
@@ -823,7 +823,7 @@ s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 d
 
         triangle = collider->triangleTable;
         for (j = 0; j < collider->numTriangles; j++)
-            if (test_ray_triangle_down(triangle++, pCollisionData->vertices))
+            if (test_ray_triangle_down(triangle++, collisionData->vertices))
                 colliderID = i;
     }
 
@@ -881,13 +881,13 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
     Matrix4f tempMatrix1;
     Matrix4f tempMatrix2;
     Vec3f boxVertices[8];
-    ColliderTriangle triangle;
+    ColliderTriangle entityTriangle;
     s32 entityIndex;
     f32 h;
     f32 aabbX, aabbZ;
     s32 hasCollision;
     f32 dist, dist2;
-    ColliderTriangle *pTriangle = &triangle;
+    ColliderTriangle *triangle = &entityTriangle;
 
     entityIndex = -1;
     type = 0;
@@ -902,7 +902,7 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
     }
 
     gCollisionRayLength = -1;
-    pTriangle->oneSided = TRUE;
+    triangle->oneSided = TRUE;
     for (i = 0; i < MAX_ENTITIES; i++) {
         entity = get_entity_by_index(i);
 
@@ -949,23 +949,23 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
                   startZ - entity->position.z, &gCollisionRayStartX, &gCollisionRayStartY, &gCollisionRayStartZ);
 
         for (j = 0; j < 12; j++) {
-            Vec3f* v1 = pTriangle->v1 = &boxVertices[gEntityColliderFaces[j].i1];
-            Vec3f* v2 = pTriangle->v2 = &boxVertices[gEntityColliderFaces[j].i2];
-            Vec3f* v3 = pTriangle->v3 = &boxVertices[gEntityColliderFaces[j].i3];
-            pTriangle->e13.x = v3->x - v1->x;
-            pTriangle->e13.y = v3->y - v1->y;
-            pTriangle->e13.z = v3->z - v1->z;
-            pTriangle->e21.x = v1->x - v2->x;
-            pTriangle->e21.y = v1->y - v2->y;
-            pTriangle->e21.z = v1->z - v2->z;
-            pTriangle->e32.x = v2->x - v3->x;
-            pTriangle->e32.y = v2->y - v3->y;
-            pTriangle->e32.z = v2->z - v3->z;
-            pTriangle->normal.x = gEntityColliderNormals[j].x;
-            pTriangle->normal.y = gEntityColliderNormals[j].y;
-            pTriangle->normal.z = gEntityColliderNormals[j].z;
+            Vec3f* v1 = triangle->v1 = &boxVertices[gEntityColliderFaces[j].i1];
+            Vec3f* v2 = triangle->v2 = &boxVertices[gEntityColliderFaces[j].i2];
+            Vec3f* v3 = triangle->v3 = &boxVertices[gEntityColliderFaces[j].i3];
+            triangle->e13.x = v3->x - v1->x;
+            triangle->e13.y = v3->y - v1->y;
+            triangle->e13.z = v3->z - v1->z;
+            triangle->e21.x = v1->x - v2->x;
+            triangle->e21.y = v1->y - v2->y;
+            triangle->e21.z = v1->z - v2->z;
+            triangle->e32.x = v2->x - v3->x;
+            triangle->e32.y = v2->y - v3->y;
+            triangle->e32.z = v2->z - v3->z;
+            triangle->normal.x = gEntityColliderNormals[j].x;
+            triangle->normal.y = gEntityColliderNormals[j].y;
+            triangle->normal.z = gEntityColliderNormals[j].z;
 
-            if (hasCollision = test_ray_triangle_general(&triangle, boxVertices))
+            if (hasCollision = test_ray_triangle_general(&entityTriangle, boxVertices))
                 break;
         }
 
