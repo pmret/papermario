@@ -706,7 +706,7 @@ EvtSource N(takeTurn_Chan) = {
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_chan_Palette_00_Anim_2)
             EVT_SET_CONST(LW(2), NPC_ANIM_chan_Palette_00_Anim_1)
-            EVT_EXEC_WAIT(0x8029BBB4)
+            EVT_EXEC_WAIT(D_8029BBB4)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetActorVar, -127, 8, 1)
             EVT_CALL(SetTargetOffset, -127, 1, 0, 16)

@@ -2724,7 +2724,7 @@ ApiStatus UseIdleAnimation(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-s32 func_8026F1A0(Evt* script, s32 isInitialCall) {
+ApiStatus func_8026F1A0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 temp_s0_3 = evt_get_variable(script, *args++);
