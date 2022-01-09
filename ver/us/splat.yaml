@@ -3882,8 +3882,10 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4CF1B0, c]
-    - [0x4CF3D0, data]
+    - [0x4CF1B0, c, area]
+    - [0x4CF1B0, c, actor/eldstar]
+    - [0x4CF3D0, c, stage/nok_01]
+    - [0x4CF3D0]
   - dir: battle/area_iwa
     type: code
     start: 0x4D01F0

@@ -1058,6 +1058,7 @@ enum PlayerAnims {
     ANIM_RUN_THINKING               = 0x00010027,
     ANIM_QUESTION                   = 0x00010028,
     ANIM_NOD_YES                    = 0x00010029,
+    ANIM_1002A                      = 0x0001002A,
     ANIM_1002B                      = 0x0001002B,
     ANIM_PRAY                       = 0x0001002C,
     ANIM_CHARRED                    = 0x0001002F,

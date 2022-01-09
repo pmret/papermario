@@ -148,6 +148,7 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall);
 ApiStatus GetOwnerID(Evt* script, s32 isInitialCall);
 ApiStatus SetOwnerID(Evt* script, s32 isInitialCall);
 ApiStatus ActorExists(Evt* script, s32 isInitialCall);
+ApiStatus func_8026E038(Evt* script, s32 isInitialCall);
 ApiStatus SetBattleInputMask(Evt* script, s32 isInitialCall);
 ApiStatus SetBattleInputButtons(Evt* script, s32 isInitialCall);
 ApiStatus CheckButtonPress(Evt* script, s32 isInitialCall);
