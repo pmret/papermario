@@ -114,8 +114,8 @@ void update_merlee_message(PopupMessage* popup);
 void draw_merlee_message(PopupMessage* popup);
 void func_80045BC8(void);
 void init_all_status_icons(void);
-void update_all_status_icons(void);
-void draw_all_status_icons(void);
+void update_all_status_icons(PopupMessage* popup);
+void draw_all_status_icons(PopupMessage* popup);
 
 void func_80045AC0(void) {
     s32 i;
@@ -288,7 +288,8 @@ void init_all_status_icons(void) {
         popup->unk_00 = 0;
         popup->unk_08 = NULL;
         popup->drawFunc = &draw_all_status_icons;
-        icons = D_800A0F44 = popup->message = general_heap_malloc(64 * sizeof(HudStatusIcon));
+        popup->message = general_heap_malloc(64 * sizeof(HudStatusIcon));
+        icons = D_800A0F44 = (HudStatusIcon*)(popup->message);
         ASSERT(icons != NULL)
 
         for (i = 0; i < MAX_ICONS; i++, icons++)
@@ -296,7 +297,7 @@ void init_all_status_icons(void) {
     }
 }
 
-void update_all_status_icons(void) {
+void update_all_status_icons(PopupMessage* popup) {
     HudStatusIcon* icon;
     int i;
     s32 elementID;
@@ -521,7 +522,7 @@ void update_all_status_icons(void) {
     }
 }
 
-void draw_all_status_icons(void) {
+void draw_all_status_icons(PopupMessage* popup) {
     HudStatusIcon* icon;
     s32 elementId;
     f32 x, y, z;
