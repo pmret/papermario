@@ -48,6 +48,7 @@ extern s32 D_8010CFBC;
 extern s32 D_8010CFCC;
 
 extern struct Vec3f* D_8010CD38;
+extern EvtSource D_802C05CC_32579C;
 
 typedef struct struct8010CD38{
     /* 0x00 */ s8 unk_00;
@@ -81,7 +82,7 @@ s32 D_800F7FF4 = 4;
 s32 D_800F7FF8 = 5;
 s32 D_800F7FFC = 7;
 s32 D_800F8000[] = { 8, 0, 0, 0 };
-s32 D_800F8010[] = { _3251D0_ROM_START, _3251D0_ROM_END, (s32) &D_802C05CC, 0x00000000 };
+s32 D_800F8010[] = { _3251D0_ROM_START, _3251D0_ROM_END, (s32) D_802C05CC_32579C, 0x00000000 };
 s32 D_800F8020 = 0;
 s32 wPartnerMoveGoalX = 0;
 s32 wPartnerMoveGoalZ = 0;
@@ -297,7 +298,7 @@ s32 use_consumable(s32 arg0) {
 
     D_8010CD20 = arg0;
     arg0 = gPlayerData.invItems[arg0];
-    dma_copy(D_800F8010[0], D_800F8010[1], &D_802C0000);
+    dma_copy(D_800F8010[0], D_800F8010[1], _3251D0_VRAM);
     script = start_script(D_800F8010[2], 1, 0);
     script->varTable[10] = arg0;
     return script->id;

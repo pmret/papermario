@@ -411,6 +411,7 @@ replace_funcs = {
     "GetBattleFlags"            :{0:"BattleStatusFlags1"},
     "GetBattlePhase"            :{0:"Phases"},
     "GetDistanceToGoal"         :{0:"ActorIDs"},
+    "GetEnemyMaxHP"             :{0:"ActorIDs"},
     "GetGoalPos"                :{0:"ActorIDs"},
     "GetHomePos"                :{0:"ActorIDs"},
     "GetIndexFromHome"          :{0:"ActorIDs"},
@@ -419,6 +420,8 @@ replace_funcs = {
     "GetLastDamage"             :{0:"ActorIDs"},
     "GetLastElement"            :{0:"DamageTypes"},
     "GetLastEvent"              :{0:"ActorIDs", 1:"Events"},
+    "GetPartPos"                :{0:"ActorIDs"},
+    "GetPartRotation"           :{0:"ActorIDs"},
     "GetNpcPos"                 :{0:"NpcIDs"},
     "GetOriginalActorType"      :{0:"ActorIDs", 1:"ActorType"},
     "GetStatusFlags"            :{0:"ActorIDs", 1:"StatusFlags"},
@@ -470,6 +473,7 @@ replace_funcs = {
     "SetActorRotation"          :{0:"ActorIDs"},
     "SetActorRotationOffset"    :{0:"ActorIDs"},
     "SetActorScale"             :{0:"ActorIDs"},
+    "SetActorSize"              :{0:"ActorIDs"},
     "SetActorSounds"            :{0:"ActorIDs"},
     "SetActorSpeed"             :{0:"ActorIDs"},
     "SetActorType"              :{0:"ActorIDs", 1:"ActorType"},
@@ -504,6 +508,8 @@ replace_funcs = {
     "SetNpcSprite"              :{1:"Hex"},
     "SetNpcYaw"                 :{0:"NpcIDs"},
 
+    "SetOwnerID"                :{0:"ActorIDs"},
+
     "SetPartAlpha"              :{0:"ActorIDs"},
     "SetPartDispOffset"         :{0:"ActorIDs"},
     "SetPartEventBits"          :{0:"ActorIDs", 2:"ActorEventFlags"},
@@ -512,9 +518,12 @@ replace_funcs = {
     "SetPartJumpGravity"        :{0:"ActorIDs"},
     "SetPartMoveSpeed"          :{0:"ActorIDs"},
     "SetPartPos"                :{0:"ActorIDs"},
+    "SetPartRotation"           :{0:"ActorIDs"},
+    "SetPartRotationOffset"     :{0:"ActorIDs"},
     "SetPartScale"              :{0:"ActorIDs"},
     "SetPartSize"               :{0:"ActorIDs"},
     "SetPartSounds"             :{0:"ActorIDs"},
+    "SetPartTargetFlagBits"     :{0:"ActorIDs"},
     "SetPartYaw"                :{0:"ActorIDs"},
 
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
@@ -1088,6 +1097,7 @@ if __name__ == "__main__":
                     break
 
                 loffset = script.end_pos
+                LOCAL_WORDS = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
                 looping = args.blob
                 try:
                     loffset = _script_lib[loffset - info[0] + info[2]][0][1]

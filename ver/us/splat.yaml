@@ -2209,7 +2209,7 @@ segments:
     - [0x325160]
   - type: code
     start: 0x3251D0
-    vram: 0x802BD100
+    vram: 0x802C0000
     overlay: True
     subsegments:
     - [0x3251D0, c]
@@ -3854,15 +3854,28 @@ segments:
     type: code
     start: 0x4B11F0
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x4B11F0, c]
-    - [0x4B15D0, c]
-    - [0x4B1D90, c]
-    - [0x4B2550, c]
-    - [0x4B2D10, c]
-    - [0x4B34D0, c]
-    - [0x4B3740, data]
+    - [0x4B11F0, c, area]
+    - [0x4B11F0, c, actor/fake_bowser]
+    - [0x4B15D0, c, actor/green_ninja_koopa]
+    - [0x4B1D90, c, actor/red_ninja_koopa]
+    - [0x4B2550, c, actor/blue_ninja_koopa]
+    - [0x4B2D10, c, actor/yellow_ninja_koopa]
+    - [0x4B34D0, c, stage/trd_00]
+    - [0x4B34D0, c, stage/trd_01]
+    - [0x4B34D0, c, stage/trd_02]
+    - [0x4B34D0, c, stage/trd_02b]
+    - [0x4B34D0, c, stage/trd_03]
+    - [0x4B3740, c, stage/trd_04]
+    - [0x4B3740, c, stage/trd_05]
+    - [0x4B3740, c, stage/trd_05b]
+    - [0x4B3740, c, stage/trd_05c]
+    - [0x4B3740, c, stage/trd_05d]
+    - [0x4B3740, c, stage/trd_05e]
+    - [0x4B3740, c, stage/trd_05f]
+    - [0x4B3740]
   - dir: battle/area_trd_part_3
     type: code
     start: 0x4CF1B0
