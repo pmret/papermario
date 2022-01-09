@@ -2,36 +2,44 @@
 #include "npc.h"
 #include "hud_element.h"
 
+#define MAX_ICONS (64)
+
 enum StatusIconFlag {
-    STATUS_ICON_FLAG_USED          = 0x001,
-    STATUS_ICON_FLAG_2             = 0x002,
-    STATUS_ICON_FLAG_DEBUFF        = 0x004,
-    STATUS_ICON_FLAG_STATIC        = 0x008,
-    STATUS_ICON_FLAG_TRANSPARENT   = 0x010,
-    STATUS_ICON_FLAG_STATUS_4      = 0x020,
-    STATUS_ICON_FLAG_BOOST_JUMP    = 0x040,
-    STATUS_ICON_FLAG_BOOST_HAMMER  = 0x080,
-    STATUS_ICON_FLAG_BOOST_PARTNER = 0x100,
-    STATUS_ICON_FLAG_SURPRISE      = 0x200,
-    STATUS_ICON_FLAG_PERIL         = 0x400,
-    STATUS_ICON_FLAG_DANGER        = 0x800,
+    STATUS_ICON_FLAG_USED             = 0x001,
+    STATUS_ICON_FLAG_BATTLE           = 0x002,
+    STATUS_ICON_FLAG_DEBUFF           = 0x004,
+    STATUS_ICON_FLAG_STATIC           = 0x008,
+    STATUS_ICON_FLAG_TRANSPARENT      = 0x010,
+    STATUS_ICON_FLAG_STATUS_CHILL_OUT = 0x020,
+    STATUS_ICON_FLAG_BOOST_JUMP       = 0x040,
+    STATUS_ICON_FLAG_BOOST_HAMMER     = 0x080,
+    STATUS_ICON_FLAG_BOOST_PARTNER    = 0x100,
+    STATUS_ICON_FLAG_SURPRISE         = 0x200,
+    STATUS_ICON_FLAG_PERIL            = 0x400,
+    STATUS_ICON_FLAG_DANGER           = 0x800,
+};
+
+enum StatusIconTask {
+    STATUS_ICON_TASK_NONE = 0,
+    STATUS_ICON_TASK_LOAD = 1,
+    STATUS_ICON_TASK_DRAW = 2,
 };
 
 typedef struct HudComplexStatusIcon {
 	/* 0x0 */ s8 active;
 	/* 0x1 */ s8 removing;
-	/* 0x2 */ s8 unk_02;
-	/* 0x3 */ s8 unk_03;
+	/* 0x2 */ s8 activeTask;
+	/* 0x3 */ s8 removingTask;
 	/* 0x4 */ s8 unk_04;
-	/* 0x5 */ s8 unk_05;
-	/* 0x8 */ s32 hudElemIndex;
-	/* 0xC */ s32 unk_0C;
+	/* 0x5 */ s8 frameCounter;
+	/* 0x8 */ s32 activeElementID;
+	/* 0xC */ s32 removingElementID;
 } HudComplexStatusIcon; // size = 0x10
 
 typedef struct HudSimpleStatusIcon {
 	/* 0x0 */ s8 active;
 	/* 0x1 */ s8 removing;
-	/* 0x4 */ s32 hudElemIndex;
+	/* 0x4 */ s32 activeElementID;
 } HudSimpleStatusIcon; // size = 0x8
 
 typedef struct HudStatusIcon {
@@ -61,50 +69,52 @@ typedef struct HudStatusIcon {
 	/* 0xA8 */ HudSimpleStatusIcon danger;
 } HudStatusIcon; // size = 0xB0
 
-extern HudStatusIcon *D_800A0F44;
-extern HudElementAnim D_80108A14[];
-extern HudElementAnim D_801089C4[];
-extern HudElementAnim D_8010760C[];
-extern HudElementAnim D_801075E0[];
-extern HudElementAnim D_80107314[];
-extern HudElementAnim D_8010701C[];
-extern HudElementAnim D_8010717C[];
-extern HudElementAnim D_80107474[];
-
-extern HudElementAnim D_80104CC4;
-extern HudElementAnim D_8010551C;
-extern HudElementAnim D_80105900;
-extern HudElementAnim D_801062A0;
-extern HudElementAnim D_80106610;
-extern HudElementAnim D_80105C54;
-extern HudElementAnim D_80106964;
-extern HudElementAnim D_80105FA8;
-extern HudElementAnim D_800804F0;
-extern HudElementAnim D_80104E64;
-extern HudElementAnim D_8010574C;
-extern HudElementAnim D_80105AA0;
-extern HudElementAnim D_801067B0;
-extern HudElementAnim D_80105DF4;
-extern HudElementAnim D_80106B04;
-extern HudElementAnim D_80106148;
-extern HudElementAnim D_801050A8;
-extern HudElementAnim D_801052D8;
-extern HudElementAnim D_80106CD8;
-extern HudElementAnim D_80106E98;
-extern HudElementAnim D_801062DC;
-extern HudElementAnim D_8010645C;
-
-extern s32 D_800A0F40;
-extern PopupMessage D_800A0BC0[32];
 extern s16 D_80078160[];
 extern s16 D_80078164[];
 extern s32 D_80078168[];
 
+extern HudElementAnim D_800804F0;
+
+extern PopupMessage D_800A0BC0[32];
+extern s32 D_800A0F40;
+extern HudStatusIcon* D_800A0F44;
+
+extern HudElementAnim D_80104CC4;
+extern HudElementAnim D_80104E64;
+extern HudElementAnim D_801050A8;
+extern HudElementAnim D_801052D8;
+extern HudElementAnim D_8010551C;
+extern HudElementAnim D_8010574C;
+extern HudElementAnim D_80105AA0;
+extern HudElementAnim D_80105C54;
+extern HudElementAnim D_80105DF4;
+extern HudElementAnim D_80105900;
+extern HudElementAnim D_80105FA8;
+extern HudElementAnim D_80106148;
+extern HudElementAnim D_801062A0;
+extern HudElementAnim D_801062DC;
+extern HudElementAnim D_8010645C;
+extern HudElementAnim D_80106610;
+extern HudElementAnim D_801067B0;
+extern HudElementAnim D_80106964;
+extern HudElementAnim D_80106B04;
+extern HudElementAnim D_80106CD8;
+extern HudElementAnim D_80106E98;
+extern HudElementAnim D_8010701C;
+extern HudElementAnim D_8010717C;
+extern HudElementAnim D_80107314;
+extern HudElementAnim D_80107474;
+extern HudElementAnim D_801075E0;
+extern HudElementAnim D_8010760C;
+extern HudElementAnim D_801089C4;
+extern HudElementAnim D_80108A14;
+
+
 void update_merlee_message(PopupMessage* popup);
 void draw_merlee_message(PopupMessage* popup);
 void func_80045BC8(void);
-void func_80045FB4(void);
-void func_80046030(void);
+void init_all_status_icons(void);
+void update_all_status_icons(void);
 void draw_all_status_icons(void);
 
 void func_80045AC0(void) {
@@ -117,7 +127,7 @@ void func_80045AC0(void) {
     }
 
     create_generic_entity_world(NULL, func_80045BC8);
-    func_80045FB4();
+    init_all_status_icons();
 }
 
 void func_80045B10(void) {
@@ -238,9 +248,6 @@ void update_merlee_message(PopupMessage* popup) {
     }
 }
 
-// TODO remove once all other functions in this file are matched
-const static f32 padding = 0.0f;
-
 void draw_merlee_message_string(PopupMessage* popup, s32 posX, s32 posY) {
     s32 messageID = D_80078168[popup->messageIndex];
 
@@ -271,223 +278,223 @@ s32 is_merlee_message_done(void) {
     return D_800A0F40;
 }
 
-void func_80045FB4(void) {
+void init_all_status_icons(void) {
     int i;
     HudStatusIcon* icons;
     PopupMessage* popup = get_current_merlee_message();
 
     if (popup != NULL) {
-        popup->updateFunc = &func_80046030;
+        popup->updateFunc = &update_all_status_icons;
         popup->unk_00 = 0;
         popup->unk_08 = NULL;
         popup->drawFunc = &draw_all_status_icons;
         icons = D_800A0F44 = popup->message = general_heap_malloc(64 * sizeof(HudStatusIcon));
         ASSERT(icons != NULL)
 
-        for (i = 0; i < 64; i++, icons++)
+        for (i = 0; i < MAX_ICONS; i++, icons++)
             icons->flags = 0;
     }
 }
 
-void func_80046030(void) {
+void update_all_status_icons(void) {
     HudStatusIcon* icon;
     int i;
     s32 elementID;
 
-    for (i = 0, icon = D_800A0F44; i < 64; i++, icon++) {
+    for (i = 0, icon = D_800A0F44; i < MAX_ICONS; i++, icon++) {
         if (icon->flags == 0)
             continue;
 
-        if (icon->status1.unk_02 == 1) {
+        if (icon->status1.activeTask == STATUS_ICON_TASK_LOAD) {
             switch (icon->status1.active) {
-                case 6:
-                    elementID = icon->status1.hudElemIndex = create_hud_element(&D_80104CC4);
+                case STATUS_SLEEP:
+                    elementID = icon->status1.activeElementID = create_hud_element(&D_80104CC4);
                     break;
-                case 5:
-                    elementID = icon->status1.hudElemIndex = create_hud_element(&D_8010551C);
+                case STATUS_PARALYZE:
+                    elementID = icon->status1.activeElementID = create_hud_element(&D_8010551C);
                     break;
-                case 4:
-                    elementID = icon->status1.hudElemIndex = create_hud_element(&D_80105900);
+                case STATUS_DIZZY:
+                    elementID = icon->status1.activeElementID = create_hud_element(&D_80105900);
                     break;
-                case 3:
-                    elementID = icon->status1.hudElemIndex = create_hud_element(&D_801062A0);
+                case STATUS_FEAR:
+                    elementID = icon->status1.activeElementID = create_hud_element(&D_801062A0);
                     break;
-                case 8:
-                    elementID = icon->status1.hudElemIndex = create_hud_element(&D_80106610);
+                case STATUS_STOP:
+                    elementID = icon->status1.activeElementID = create_hud_element(&D_80106610);
                     break;
-                case 9:
-                    elementID = icon->status1.hudElemIndex = create_hud_element(&D_80105C54);
+                case STATUS_POISON:
+                    elementID = icon->status1.activeElementID = create_hud_element(&D_80105C54);
                     break;
-                case 10:
-                    elementID = icon->status1.hudElemIndex = create_hud_element(&D_80106964);
+                case STATUS_SHRINK:
+                    elementID = icon->status1.activeElementID = create_hud_element(&D_80106964);
                     break;
-                case 7:
-                    elementID = icon->status1.hudElemIndex = create_hud_element(&D_80105FA8);
+                case STATUS_FROZEN:
+                    elementID = icon->status1.activeElementID = create_hud_element(&D_80105FA8);
                     break;
                 default:
-                    elementID = icon->status1.hudElemIndex = create_hud_element(&D_800804F0);
+                    elementID = icon->status1.activeElementID = create_hud_element(&D_800804F0);
                     break;
             }
             set_hud_element_flags(elementID, 2);
             set_hud_element_flags(elementID, 0x80);
-            icon->status1.unk_02 = 2;
+            icon->status1.activeTask = STATUS_ICON_TASK_DRAW;
         }
 
-        switch (icon->status1.unk_03) {
-            case 0:
+        switch (icon->status1.removingTask) {
+            case STATUS_ICON_TASK_NONE:
                 break;
-            case 1:
+            case STATUS_ICON_TASK_LOAD:
                 switch (icon->status1.removing) {
-                    case 6:
-                        set_hud_element_anim(icon->status1.unk_0C, &D_80104E64);
+                    case STATUS_SLEEP:
+                        set_hud_element_anim(icon->status1.removingElementID, &D_80104E64);
                         break;
-                    case 5:
-                        set_hud_element_anim(icon->status1.unk_0C, &D_8010574C);
+                    case STATUS_PARALYZE:
+                        set_hud_element_anim(icon->status1.removingElementID, &D_8010574C);
                         break;
-                    case 4:
-                        set_hud_element_anim(icon->status1.unk_0C, &D_80105AA0);
+                    case STATUS_DIZZY:
+                        set_hud_element_anim(icon->status1.removingElementID, &D_80105AA0);
                         break;
-                    case 3:
-                        set_hud_element_anim(icon->status1.unk_0C, &D_801062A0);
+                    case STATUS_FEAR:
+                        set_hud_element_anim(icon->status1.removingElementID, &D_801062A0);
                         break;
-                    case 8:
-                        set_hud_element_anim(icon->status1.unk_0C, &D_801067B0);
+                    case STATUS_STOP:
+                        set_hud_element_anim(icon->status1.removingElementID, &D_801067B0);
                         break;
-                    case 9:
-                        set_hud_element_anim(icon->status1.unk_0C, &D_80105DF4);
+                    case STATUS_POISON:
+                        set_hud_element_anim(icon->status1.removingElementID, &D_80105DF4);
                         break;
-                    case 10:
-                        set_hud_element_anim(icon->status1.unk_0C, &D_80106B04);
+                    case STATUS_SHRINK:
+                        set_hud_element_anim(icon->status1.removingElementID, &D_80106B04);
                         break;
-                    case 7:
-                        set_hud_element_anim(icon->status1.unk_0C, &D_80106148);
+                    case STATUS_FROZEN:
+                        set_hud_element_anim(icon->status1.removingElementID, &D_80106148);
                         break;
                     default:
-                        set_hud_element_anim(icon->status1.unk_0C, &D_800804F0);
+                        set_hud_element_anim(icon->status1.removingElementID, &D_800804F0);
                         break;
                 }
 
-                icon->status1.unk_05 = 10;
-                icon->status1.unk_03 = 2;
+                icon->status1.frameCounter = 10;
+                icon->status1.removingTask = STATUS_ICON_TASK_DRAW;
                 break;
 
-            case 2:
-                if (icon->status1.unk_05 != 0)
-                    icon->status1.unk_05--;
+            case STATUS_ICON_TASK_DRAW:
+                if (icon->status1.frameCounter != 0)
+                    icon->status1.frameCounter--;
                 else {
                     icon->status1.removing = 0;
-                    free_hud_element(icon->status1.unk_0C);
-                    icon->status1.unk_03 = 0;
+                    free_hud_element(icon->status1.removingElementID);
+                    icon->status1.removingTask = STATUS_ICON_TASK_NONE;
                 }
                 break;
         }
 
-        if (icon->status2.unk_02 == 1) {
+        if (icon->status2.activeTask == STATUS_ICON_TASK_LOAD) {
             switch (icon->status2.active) {
-                case 11:
-                    elementID = icon->status2.hudElemIndex = create_hud_element(&D_801050A8);
+                case STATUS_STATIC:
+                    elementID = icon->status2.activeElementID = create_hud_element(&D_801050A8);
                     break;
                 default:
-                    elementID = icon->status2.hudElemIndex = create_hud_element(&D_800804F0);
+                    elementID = icon->status2.activeElementID = create_hud_element(&D_800804F0);
                     break;
             }
 
             set_hud_element_flags(elementID, 2);
             set_hud_element_flags(elementID, 0x80);
-            icon->status2.unk_02 = 2;
+            icon->status2.activeTask = STATUS_ICON_TASK_DRAW;
         }
 
-        switch (icon->status2.unk_03) {
-            case 0:
+        switch (icon->status2.removingTask) {
+            case STATUS_ICON_TASK_NONE:
                 break;
-            case 1:
+            case STATUS_ICON_TASK_LOAD:
                 switch (icon->status2.removing) {
-                case 11:
-                    set_hud_element_anim(icon->status2.unk_0C, &D_801052D8);
-                    break;
-                default:
-                    set_hud_element_anim(icon->status2.unk_0C, &D_800804F0);
-                    break;
-                }
-
-                icon->status2.unk_05 = 20;
-                icon->status2.unk_03 = 2;
-                break;
-            case 2:
-                if (icon->status2.unk_05 != 0)
-                    icon->status2.unk_05--;
-                else {
-                    icon->status2.removing = 0;
-                    free_hud_element(icon->status2.unk_0C);
-                    icon->status2.unk_03 = 0;
-                }
-                break;
-        }
-
-        if (icon->status3.unk_02 == 1) {
-            switch (icon->status3.active) {
-                case 14:
-                    elementID = icon->status3.hudElemIndex = create_hud_element(&D_80106CD8);
-                    break;
-                default:
-                    elementID = icon->status3.hudElemIndex = create_hud_element(&D_800804F0);
-                    break;
-            }
-
-            set_hud_element_flags(elementID, 2);
-            set_hud_element_flags(elementID, 0x80);
-            icon->status3.unk_02 = 2;
-        }
-
-        switch (icon->status3.unk_03) {
-            case 0:
-                break;
-            case 1:
-                switch (icon->status3.removing) {
-                    case 14:
-                        set_hud_element_anim(icon->status3.unk_0C, &D_80106E98);
+                    case STATUS_STATIC:
+                        set_hud_element_anim(icon->status2.removingElementID, &D_801052D8);
                         break;
                     default:
-                        set_hud_element_anim(icon->status3.unk_0C, &D_800804F0);
+                        set_hud_element_anim(icon->status2.removingElementID, &D_800804F0);
                         break;
                 }
 
-                icon->status3.unk_05 = 20;
-                icon->status3.unk_03 = 2;
+                icon->status2.frameCounter = 20;
+                icon->status2.removingTask = STATUS_ICON_TASK_DRAW;
                 break;
-            case 2:
-                if (icon->status3.unk_05 != 0)
-                    icon->status3.unk_05--;
+            case STATUS_ICON_TASK_DRAW:
+                if (icon->status2.frameCounter != 0)
+                    icon->status2.frameCounter--;
                 else {
-                    icon->status3.removing = 0;
-                    free_hud_element(icon->status3.unk_0C);
-                    icon->status3.unk_03 = 0;
+                    icon->status2.removing = 0;
+                    free_hud_element(icon->status2.removingElementID);
+                    icon->status2.removingTask = STATUS_ICON_TASK_NONE;
                 }
                 break;
         }
 
-        if (icon->status4.unk_02 == 1) {
-            elementID = icon->status4.hudElemIndex = create_hud_element(&D_801062DC);
+        if (icon->status3.activeTask == STATUS_ICON_TASK_LOAD) {
+            switch (icon->status3.active) {
+                case STATUS_E:
+                    elementID = icon->status3.activeElementID = create_hud_element(&D_80106CD8);
+                    break;
+                default:
+                    elementID = icon->status3.activeElementID = create_hud_element(&D_800804F0);
+                    break;
+            }
+
             set_hud_element_flags(elementID, 2);
             set_hud_element_flags(elementID, 0x80);
-            icon->status4.unk_02 = 2;
+            icon->status3.activeTask = STATUS_ICON_TASK_DRAW;
         }
 
-        switch (icon->status4.unk_03) {
-            case 0:
+        switch (icon->status3.removingTask) {
+            case STATUS_ICON_TASK_NONE:
                 break;
-            case 1:
-                set_hud_element_anim(icon->status4.unk_0C, &D_8010645C);
-                icon->status4.unk_05 = 20;
-                icon->status4.unk_03 = 2;
+            case STATUS_ICON_TASK_LOAD:
+                switch (icon->status3.removing) {
+                    case STATUS_E:
+                        set_hud_element_anim(icon->status3.removingElementID, &D_80106E98);
+                        break;
+                    default:
+                        set_hud_element_anim(icon->status3.removingElementID, &D_800804F0);
+                        break;
+                }
+
+                icon->status3.frameCounter = 20;
+                icon->status3.removingTask = STATUS_ICON_TASK_DRAW;
                 break;
-            case 2:
-                if (icon->status4.unk_05 != 0)
-                    icon->status4.unk_05--;
+            case STATUS_ICON_TASK_DRAW:
+                if (icon->status3.frameCounter != 0)
+                    icon->status3.frameCounter--;
+                else {
+                    icon->status3.removing = 0;
+                    free_hud_element(icon->status3.removingElementID);
+                    icon->status3.removingTask = STATUS_ICON_TASK_NONE;
+                }
+                break;
+        }
+
+        if (icon->status4.activeTask == STATUS_ICON_TASK_LOAD) {
+            elementID = icon->status4.activeElementID = create_hud_element(&D_801062DC);
+            set_hud_element_flags(elementID, 2);
+            set_hud_element_flags(elementID, 0x80);
+            icon->status4.activeTask = STATUS_ICON_TASK_DRAW;
+        }
+
+        switch (icon->status4.removingTask) {
+            case STATUS_ICON_TASK_NONE:
+                break;
+            case STATUS_ICON_TASK_LOAD:
+                set_hud_element_anim(icon->status4.removingElementID, &D_8010645C);
+                icon->status4.frameCounter = 20;
+                icon->status4.removingTask = STATUS_ICON_TASK_DRAW;
+                break;
+            case STATUS_ICON_TASK_DRAW:
+                if (icon->status4.frameCounter != 0)
+                    icon->status4.frameCounter--;
                 else {
                     icon->status4.removing = 0;
-                    free_hud_element(icon->status4.unk_0C);
-                    icon->status4.unk_03 = 0;
+                    free_hud_element(icon->status4.removingElementID);
+                    icon->status4.removingTask = STATUS_ICON_TASK_NONE;
                 }
                 break;
         }
@@ -514,253 +521,254 @@ void func_80046030(void) {
     }
 }
 
-//INCLUDE_ASM(s32, "20ec0_len_5040", draw_all_status_icons);
 void draw_all_status_icons(void) {
     HudStatusIcon* icon;
     s32 elementId;
     f32 x, y, z;
     s32 screenX, screenY, screenZ;
-    s32 phi_s3, phi_s2;
+    s32 isActiveDrawn, iconCounter;
     s32 offsetY;
-    Camera* sp34 = &gCameras[gCurrentCameraID];
+    Camera* camera = &gCameras[gCurrentCameraID];
     int i;
-
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 12, 20, SCREEN_WIDTH - 12, SCREEN_HEIGHT - 20);
     gDPPipeSync(gMasterGfxPos++);
     gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
     gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
-    gDPSetTextureLOD(gMasterGfxPos++, 0);
-    gDPSetTextureDetail(gMasterGfxPos++, 0);
-    gDPSetTextureConvert(gMasterGfxPos++, 0xc00);
-    gDPSetCombineKey(gMasterGfxPos++, 0);
-    gDPSetAlphaCompare(gMasterGfxPos++, 0);
+    gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
+    gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
+    gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
+    gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
+    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
     gDPNoOp(gMasterGfxPos++);
-    gDPSetColorDither(gMasterGfxPos++, 0xC0);
-    gDPSetAlphaDither(gMasterGfxPos++, 0x30);
-    gSPTexture(gMasterGfxPos++, -1, -1, 0, 0, 1);
+    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+    gDPSetAlphaDither(gMasterGfxPos++, G_AD_DISABLE);
+    gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
 
-    for (i = 0, icon = D_800A0F44; i < 64; i++, icon++) {
+    for (i = 0, icon = D_800A0F44; i < MAX_ICONS; i++, icon++) {
         if (icon->flags == 0)
             continue;
 
-        phi_s2 = 0;
-        phi_s3 = 0;
-        if (icon->status1.unk_02 == 2) {
+        iconCounter = 0;
+        isActiveDrawn = 0;
+        if (icon->status1.activeTask == STATUS_ICON_TASK_DRAW) {
             if (icon->flags & STATUS_ICON_FLAG_DEBUFF)
-                set_hud_element_flags(icon->status1.hudElemIndex, 2);
-            else if (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1) {
-                clear_hud_element_flags(icon->status1.hudElemIndex, 2);
-
-                offsetY = 0;
+                set_hud_element_flags(icon->status1.activeElementID, 2);
+            else if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+                clear_hud_element_flags(icon->status1.activeElementID, 2);
 
                 x = icon->worldPos.x;
                 y = icon->worldPos.y + icon->status1OffsetY;
                 z = icon->worldPos.z;
 
-                add_vec2D_polar(&x, &z, icon->status1Radius, clamp_angle(sp34->currentYaw + 90));
+                add_vec2D_polar(&x, &z, icon->status1Radius, clamp_angle(camera->currentYaw + 90));
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
-                elementId = icon->status1.hudElemIndex;
+                elementId = icon->status1.activeElementID;
                 set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
                 draw_hud_element_2(elementId);
-                phi_s2 = 1;
-                phi_s3 = 1;
+                iconCounter = 1;
+                isActiveDrawn = 1;
             }
         }
 
-        if (icon->status1.unk_03 == 2 && (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1)) {
-            clear_hud_element_flags(icon->status1.unk_0C, 2);
+        if (icon->status1.removingTask == STATUS_ICON_TASK_DRAW && (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1)) {
+            clear_hud_element_flags(icon->status1.removingElementID, 2);
 
-            if (phi_s3 == 0)
-                phi_s2++;
+            if (isActiveDrawn == 0)
+                iconCounter++;
 
             x = icon->worldPos.x;
             y = icon->worldPos.y + icon->status1OffsetY;
             z = icon->worldPos.z;
 
-            add_vec2D_polar(&x, &z, icon->status1Radius, clamp_angle(sp34->currentYaw + 90));
+            add_vec2D_polar(&x, &z, icon->status1Radius, clamp_angle(camera->currentYaw + 90));
             get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
-            elementId = icon->status1.unk_0C;
+            elementId = icon->status1.removingElementID;
             set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
             draw_hud_element_2(elementId);
         }
 
-        phi_s3 = 0;
-        if (icon->status2.unk_02 == 2) {
+        isActiveDrawn = 0;
+        if (icon->status2.activeTask == STATUS_ICON_TASK_DRAW) {
             if (icon->flags & STATUS_ICON_FLAG_STATIC)
-                set_hud_element_flags(icon->status2.hudElemIndex, 2);
-            else if (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1) {
-                clear_hud_element_flags(icon->status2.hudElemIndex, 2);
+                set_hud_element_flags(icon->status2.activeElementID, 2);
+            else if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+                clear_hud_element_flags(icon->status2.activeElementID, 2);
 
                 offsetY = 0;
-                if (phi_s2 == 0)
+                if (iconCounter == 0)
                     offsetY = -17;
 
                 x = icon->worldPos.x;
                 y = icon->worldPos.y + icon->status2OffsetY + offsetY;
                 z = icon->worldPos.z;
 
-                add_vec2D_polar(&x, &z, icon->status2Radius, clamp_angle(sp34->currentYaw + 90));
+                add_vec2D_polar(&x, &z, icon->status2Radius, clamp_angle(camera->currentYaw + 90));
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
-                elementId = icon->status2.hudElemIndex;
+                elementId = icon->status2.activeElementID;
                 set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
                 draw_hud_element_2(elementId);
-                phi_s2++;
-                phi_s3 = 1;
+
+                iconCounter++;
+                isActiveDrawn = 1;
             }
         }
 
-        if (icon->status2.unk_03 == 2 && (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1)) {
-            clear_hud_element_flags(icon->status2.unk_0C, 2);
+        if (icon->status2.removingTask == STATUS_ICON_TASK_DRAW && (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1)) {
+            clear_hud_element_flags(icon->status2.removingElementID, 2);
 
             offsetY = 0;
-            if (phi_s2 == 0)
+            if (iconCounter == 0)
                 offsetY = -17;
-            if (phi_s3 == 0)
-                phi_s2++;
+            if (isActiveDrawn == 0)
+                iconCounter++;
 
             x = icon->worldPos.x;
             y = icon->worldPos.y + icon->status2OffsetY + offsetY;
             z = icon->worldPos.z;
 
-            add_vec2D_polar(&x, &z, icon->status2Radius, clamp_angle(sp34->currentYaw + 90));
+            add_vec2D_polar(&x, &z, icon->status2Radius, clamp_angle(camera->currentYaw + 90));
             get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
-            elementId = icon->status2.unk_0C;
+            elementId = icon->status2.removingElementID;
             set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
             draw_hud_element_2(elementId);
         }
 
-        phi_s3 = 0;
-        if (icon->status3.unk_02 == 2) {
+        isActiveDrawn = 0;
+        if (icon->status3.activeTask == STATUS_ICON_TASK_DRAW) {
             if (icon->flags & STATUS_ICON_FLAG_TRANSPARENT)
-                set_hud_element_flags(icon->status3.hudElemIndex, 2);
-            else if (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1) {
-                clear_hud_element_flags(icon->status3.hudElemIndex, 2);
+                set_hud_element_flags(icon->status3.activeElementID, 2);
+            else if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+                clear_hud_element_flags(icon->status3.activeElementID, 2);
 
                 offsetY = 0;
-                if (phi_s2 == 1)
+                if (iconCounter == 1)
                     offsetY = -17;
-                if (phi_s2 == 0)
+                if (iconCounter == 0)
                     offsetY = -34;
 
                 x = icon->worldPos.x;
                 y = icon->worldPos.y + icon->status3OffsetY + offsetY;
                 z = icon->worldPos.z;
 
-                add_vec2D_polar(&x, &z, icon->status3Radius, clamp_angle(sp34->currentYaw + 90));
+                add_vec2D_polar(&x, &z, icon->status3Radius, clamp_angle(camera->currentYaw + 90));
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
-                elementId = icon->status3.hudElemIndex;
+                elementId = icon->status3.activeElementID;
                 set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
                 draw_hud_element_2(elementId);
-                phi_s2++;
-                phi_s3 = 1;
+                iconCounter++;
+                isActiveDrawn = 1;
             }
         }
 
-        if (icon->status3.unk_03 == 2 && (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1)) {
-            clear_hud_element_flags(icon->status3.unk_0C, 2);
+        if (icon->status3.removingTask == STATUS_ICON_TASK_DRAW && (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1)) {
+            clear_hud_element_flags(icon->status3.removingElementID, 2);
 
             offsetY = 0;
-            if (phi_s2 == 1)
+            if (iconCounter == 1)
                 offsetY = -17;
-            if (phi_s2 == 0)
+            if (iconCounter == 0)
                 offsetY = -34;
-            if (phi_s3 == 0)
-                phi_s2++;
+            if (isActiveDrawn == 0)
+                iconCounter++;
 
             x = icon->worldPos.x;
             y = icon->worldPos.y + icon->status3OffsetY + offsetY;
             z = icon->worldPos.z;
 
-            add_vec2D_polar(&x, &z, icon->status3Radius, clamp_angle(sp34->currentYaw + 90));
+            add_vec2D_polar(&x, &z, icon->status3Radius, clamp_angle(camera->currentYaw + 90));
             get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
-            elementId = icon->status3.unk_0C;
+            elementId = icon->status3.removingElementID;
             set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
             draw_hud_element_2(elementId);
         }
 
-        phi_s3 = 0;
-        if (icon->status4.unk_02 == 2) {
-            if (icon->flags & STATUS_ICON_FLAG_STATUS_4) {
-                set_hud_element_flags(icon->status4.hudElemIndex, 2);
+        isActiveDrawn = 0;
+        if (icon->status4.activeTask == STATUS_ICON_TASK_DRAW) {
+            if (icon->flags & STATUS_ICON_FLAG_STATUS_CHILL_OUT) {
+                set_hud_element_flags(icon->status4.activeElementID, 2);
 
                 // really weird stuff
                 if (0) {
-                    LABEL1: set_hud_element_flags(icon->boostJump.hudElemIndex, 2); goto LABEL11;
-                    LABEL2: set_hud_element_flags(icon->boostHammer.hudElemIndex, 2); goto LABEL22;
-                    LABEL3: set_hud_element_flags(icon->boostPartner.hudElemIndex, 2); goto LABEL33;
-                    LABEL4: set_hud_element_flags(icon->surprise.hudElemIndex, 2); goto LABEL44;
-                    LABEL5: set_hud_element_flags(icon->peril.hudElemIndex, 2); goto LABEL55;
-                    LABEL6: set_hud_element_flags(icon->danger.hudElemIndex, 2); goto LABEL66;
+                    BOOSTJUMP:    set_hud_element_flags(icon->boostJump.activeElementID, 2);    goto BOOSTJUMPBACK;
+                    BOOSTHAMMER:  set_hud_element_flags(icon->boostHammer.activeElementID, 2);  goto BOOSTHAMMERBACK;
+                    BOOSTPARTNER: set_hud_element_flags(icon->boostPartner.activeElementID, 2); goto BOOSTPARTNERBACK;
+                    SURPRISE:     set_hud_element_flags(icon->surprise.activeElementID, 2);     goto SURPRISEBACK;
+                    PERIL:        set_hud_element_flags(icon->peril.activeElementID, 2);        goto PERILBACK;
+                    DANGER:       set_hud_element_flags(icon->danger.activeElementID, 2);       goto DANGERBACK;
                 }
-            } else if (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1) {
-                clear_hud_element_flags(icon->status4.hudElemIndex, 2);
+            } else if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+                clear_hud_element_flags(icon->status4.activeElementID, 2);
 
                 offsetY = 0;
-                if (phi_s2 == 2)
+                if (iconCounter == 2)
                     offsetY = -17;
-                if (phi_s2 == 1)
+                if (iconCounter == 1)
                     offsetY = -34;
-                if (phi_s2 == 0)
+                if (iconCounter == 0)
                     offsetY = -51;
 
                 x = icon->worldPos.x;
                 y = icon->worldPos.y + icon->status4OffsetY + offsetY;
                 z = icon->worldPos.z;
 
-                add_vec2D_polar(&x, &z, icon->status4Radius, clamp_angle(sp34->currentYaw + 90));
+                add_vec2D_polar(&x, &z, icon->status4Radius, clamp_angle(camera->currentYaw + 90));
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
-                elementId = icon->status4.hudElemIndex;
+                elementId = icon->status4.activeElementID;
                 set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
                 draw_hud_element_2(elementId);
-                phi_s2++;
-                phi_s3 = 1;
+                iconCounter++;
+                isActiveDrawn = 1;
             }
         }
 
-        if (icon->status4.unk_03 == 2 && (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1)) {
-            clear_hud_element_flags(icon->status4.unk_0C, 2);
+        if (icon->status4.removingTask == STATUS_ICON_TASK_DRAW && (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1)) {
+            clear_hud_element_flags(icon->status4.removingElementID, 2);
 
             offsetY = 0;
-            if (phi_s2 == 2)
+            if (iconCounter == 2)
                 offsetY = -17;
-            if (phi_s2 == 1)
+            if (iconCounter == 1)
                 offsetY = -34;
-            if (phi_s2 == 0)
+            if (iconCounter == 0)
                 offsetY = -51;
-            if (phi_s3 == 0)
-                phi_s2++;
+            if (isActiveDrawn == 0)
+                iconCounter++;
 
             x = icon->worldPos.x;
             y = icon->worldPos.y + icon->status4OffsetY + offsetY;
             z = icon->worldPos.z;
 
-            add_vec2D_polar(&x, &z, icon->status4Radius, clamp_angle(sp34->currentYaw + 90));
+            add_vec2D_polar(&x, &z, icon->status4Radius, clamp_angle(camera->currentYaw + 90));
             get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
-            elementId = icon->status4.unk_0C;
+            elementId = icon->status4.removingElementID;
             set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
             draw_hud_element_2(elementId);
         }
 
         if (icon->boostJump.active) {
             if (!(icon->flags & STATUS_ICON_FLAG_BOOST_JUMP)) {
-                if (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1) {
-                    clear_hud_element_flags(icon->boostJump.hudElemIndex, 2);
+                if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+                    clear_hud_element_flags(icon->boostJump.activeElementID, 2);
+
                     x = icon->worldPos.x;
                     z = icon->worldPos.z;
+
                     get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
-                    elementId = icon->boostJump.hudElemIndex;
+                    elementId = icon->boostJump.activeElementID;
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
                     draw_hud_element_2(elementId);
                 }
             } else
-                goto LABEL1;
+                goto BOOSTJUMP;
         }
-LABEL11:
+BOOSTJUMPBACK:
         if (icon->boostJump.removing) {
             clear_hud_element_flags(icon->prevIndexBoostJump, 2);
+
             x = icon->worldPos.x;
             z = icon->worldPos.z;
+
             get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
             elementId = icon->prevIndexBoostJump;
             set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
@@ -769,23 +777,27 @@ LABEL11:
 
         if (icon->boostHammer.active) {
             if (!(icon->flags & STATUS_ICON_FLAG_BOOST_HAMMER)) {
-                if (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1) {
-                    clear_hud_element_flags(icon->boostHammer.hudElemIndex, 2);
+                if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+                    clear_hud_element_flags(icon->boostHammer.activeElementID, 2);
+
                     x = icon->worldPos.x;
                     z = icon->worldPos.z;
+
                     get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
-                    elementId = icon->boostHammer.hudElemIndex;
+                    elementId = icon->boostHammer.activeElementID;
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
                     draw_hud_element_2(elementId);
                 }
             } else
-                goto LABEL2;
+                goto BOOSTHAMMER;
         }
-LABEL22:
+BOOSTHAMMERBACK:
         if (icon->boostHammer.removing) {
             clear_hud_element_flags(icon->prevIndexBoostHammer, 2);
+
             x = icon->worldPos.x;
             z = icon->worldPos.z;
+
             get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
             elementId = icon->prevIndexBoostHammer;
             set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
@@ -795,64 +807,72 @@ LABEL22:
         if (icon->boostPartner.active) {
             if (!(icon->flags & STATUS_ICON_FLAG_BOOST_PARTNER)) {
 
-                if (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1) {
-                    clear_hud_element_flags(icon->boostPartner.hudElemIndex, 2);
+                if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+                    clear_hud_element_flags(icon->boostPartner.activeElementID, 2);
+
                     x = icon->worldPos.x;
                     z = icon->worldPos.z;
+
                     get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
-                    elementId = icon->boostPartner.hudElemIndex;
+                    elementId = icon->boostPartner.activeElementID;
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
                     draw_hud_element_2(elementId);
                 }
             } else
-                goto LABEL3;
+                goto BOOSTPARTNER;
         }
-LABEL33:
+BOOSTPARTNERBACK:
         if (icon->surprise.active) {
             if (!(icon->flags & STATUS_ICON_FLAG_SURPRISE)) {
-                if (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1) {
-                    clear_hud_element_flags(icon->surprise.hudElemIndex, 2);
+                if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+                    clear_hud_element_flags(icon->surprise.activeElementID, 2);
+
                     x = icon->worldPos.x;
                     z = icon->worldPos.z;
+
                     get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
-                    elementId = icon->surprise.hudElemIndex;
+                    elementId = icon->surprise.activeElementID;
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 15);
                     draw_hud_element_2(elementId);
                 }
             } else
-                goto LABEL4;
+                goto SURPRISE;
         }
-LABEL44:
+SURPRISEBACK:
         if (icon->peril.active) {
             if (!(icon->flags & STATUS_ICON_FLAG_PERIL)) {
-                if (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1) {
-                    clear_hud_element_flags(icon->peril.hudElemIndex, 2);
+                if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+                    clear_hud_element_flags(icon->peril.activeElementID, 2);
+
                     x = icon->worldPos.x;
                     z = icon->worldPos.z;
+
                     get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
-                    elementId = icon->peril.hudElemIndex;
+                    elementId = icon->peril.activeElementID;
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 16);
                     draw_hud_element_2(elementId);
                 }
             } else
-                goto LABEL5;
+                goto PERIL;
         }
-LABEL55:
+PERILBACK:
         if (icon->danger.active) {
             if (!(icon->flags & STATUS_ICON_FLAG_DANGER)) {
-                if (icon->flags & STATUS_ICON_FLAG_2 || gGameStatusPtr->isBattle != 1) {
-                    clear_hud_element_flags(icon->danger.hudElemIndex, 2);
+                if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+                    clear_hud_element_flags(icon->danger.activeElementID, 2);
+
                     x = icon->worldPos.x;
                     z = icon->worldPos.z;
+
                     get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
-                    elementId = icon->danger.hudElemIndex;
+                    elementId = icon->danger.activeElementID;
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 16);
                     draw_hud_element_2(elementId);
                 }
             } else
-                goto LABEL6;
+                goto DANGER;
         }
-LABEL66: ;
+DANGERBACK: ;
     }
 }
 
@@ -860,15 +880,15 @@ s32 create_status_icon_set(void) {
     s32 i;
     HudStatusIcon* icon;
 
-    for (icon = D_800A0F44, i = 0; i < 64; icon++, i++)
+    for (icon = D_800A0F44, i = 0; i < MAX_ICONS; icon++, i++)
         if (icon->flags == 0)
             break;
 
-    ASSERT(i < 64)
+    ASSERT(i < MAX_ICONS)
 
     icon->flags = STATUS_ICON_FLAG_USED;
     if (gGameStatusPtr->isBattle)
-        icon->flags = STATUS_ICON_FLAG_2 | STATUS_ICON_FLAG_USED;
+        icon->flags = STATUS_ICON_FLAG_BATTLE | STATUS_ICON_FLAG_USED;
 
     icon->worldPos.x = 0;
     icon->worldPos.y = 0;
@@ -884,20 +904,20 @@ s32 create_status_icon_set(void) {
 	icon->status4OffsetY = 0;
     icon->status1.active = 0;
     icon->status1.removing = 0;
-    icon->status1.unk_02 = 0;
-    icon->status1.unk_03 = 0;
+    icon->status1.activeTask = 0;
+    icon->status1.removingTask = 0;
     icon->status2.active = 0;
     icon->status2.removing = 0;
-    icon->status2.unk_02 = 0;
-    icon->status2.unk_03 = 0;
+    icon->status2.activeTask = 0;
+    icon->status2.removingTask = 0;
     icon->status3.active = 0;
     icon->status3.removing = 0;
-    icon->status3.unk_02 = 0;
-    icon->status3.unk_03 = 0;
+    icon->status3.activeTask = 0;
+    icon->status3.removingTask = 0;
     icon->status4.active = 0;
     icon->status4.removing = 0;
-    icon->status4.unk_02 = 0;
-    icon->status4.unk_03 = 0;
+    icon->status4.activeTask = 0;
+    icon->status4.removingTask = 0;
 	icon->boostJump.active = 0;
     icon->boostJump.removing = 0;
     icon->boostHammer.active = 0;
@@ -916,7 +936,7 @@ void remove_all_status_icons(s32 iconID) {
     remove_status_debuff(iconID);
     remove_status_static(iconID);
     remove_status_transparent(iconID);
-    remove_status_4(iconID);
+    remove_status_chill_out(iconID);
     remove_status_icon_boost_jump(iconID);
     remove_status_icon_boost_hammer(iconID);
     remove_status_icon_boost_partner(iconID);
@@ -926,12 +946,9 @@ void remove_all_status_icons(s32 iconID) {
     statusIcon->flags = 0;
 }
 
-//INCLUDE_ASM(s32, "20ec0_len_5040", set_status_icons_properties);
 void set_status_icons_properties(s32 iconID, f32 x, f32 y, f32 z, s32 arg, s32 arg2, s32 radius, s32 offsetY) {
-    s32 temp_a0;
-    HudStatusIcon *icon;
+    HudStatusIcon* icon = &D_800A0F44[iconID];
 
-    icon = &D_800A0F44[iconID];
     icon->worldPos.x = x;
     icon->worldPos.y = y;
     icon->worldPos.z = z;
@@ -945,21 +962,21 @@ void set_status_icons_properties(s32 iconID, f32 x, f32 y, f32 z, s32 arg, s32 a
     icon->status4OffsetY = offsetY + 51;
 }
 
-void func_800477F4(s32 iconID, s32 offsetY, f32 arg2) {
+void set_status_icons_offset(s32 iconID, s32 offsetY, f32 arg2) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     statusIcon->offsetY = offsetY;
     statusIcon->unk_34 = arg2;
 }
 
-void func_80047820(s32 iconID, s32 arg1) {
+void create_status_debuff(s32 iconID, s32 statusID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     statusIcon->flags &= ~STATUS_ICON_FLAG_DEBUFF;
-    if (statusIcon->status1.active != arg1) {
+    if (statusIcon->status1.active != statusID) {
         remove_status_debuff(iconID);
-        statusIcon->status1.active = arg1;
-        statusIcon->status1.unk_02 = 1;
+        statusIcon->status1.active = statusID;
+        statusIcon->status1.activeTask = STATUS_ICON_TASK_LOAD;
     }
 }
 
@@ -968,28 +985,28 @@ void remove_status_debuff(s32 iconID) {
 
     if (statusIcon->status1.active && !statusIcon->status1.removing) {
         statusIcon->status1.removing = statusIcon->status1.active;
-        statusIcon->status1.unk_03 = TRUE;
-        statusIcon->status1.active = FALSE;
-        statusIcon->status1.unk_02 = FALSE;
-        statusIcon->status1.unk_05 = 10;
-        statusIcon->status1.unk_0C = statusIcon->status1.hudElemIndex;
+        statusIcon->status1.removingTask = STATUS_ICON_TASK_LOAD;
+        statusIcon->status1.active = STATUS_END;
+        statusIcon->status1.activeTask = STATUS_ICON_TASK_NONE;
+        statusIcon->status1.frameCounter = 10;
+        statusIcon->status1.removingElementID = statusIcon->status1.activeElementID;
     }
 }
 
-void enable_status_1(s32 iconID) {
+void enable_status_debuff(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     statusIcon->flags |= STATUS_ICON_FLAG_DEBUFF;
 }
 
-void func_80047928(s32 iconID, s32 arg1) {
+void create_status_static(s32 iconID, s32 statusID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     statusIcon->flags &= ~STATUS_ICON_FLAG_STATIC;
-    if (statusIcon->status2.active != arg1) {
+    if (statusIcon->status2.active != statusID) {
         remove_status_static(iconID);
-        statusIcon->status2.active = arg1;
-        statusIcon->status2.unk_02 = 1;
+        statusIcon->status2.active = statusID;
+        statusIcon->status2.activeTask = 1;
     }
 }
 
@@ -998,11 +1015,11 @@ void remove_status_static(s32 iconID) {
 
     if (statusIcon->status2.active && !statusIcon->status2.removing) {
         statusIcon->status2.removing = statusIcon->status2.active;
-        statusIcon->status2.unk_03 = TRUE;
+        statusIcon->status2.removingTask = TRUE;
         statusIcon->status2.active = FALSE;
-        statusIcon->status2.unk_02 = FALSE;
-        statusIcon->status2.unk_05 = 10;
-        statusIcon->status2.unk_0C = statusIcon->status2.hudElemIndex;
+        statusIcon->status2.activeTask = FALSE;
+        statusIcon->status2.frameCounter = 10;
+        statusIcon->status2.removingElementID = statusIcon->status2.activeElementID;
     }
 }
 
@@ -1012,14 +1029,14 @@ void enable_status_2(s32 iconID) {
     statusIcon->flags |= STATUS_ICON_FLAG_STATIC;
 }
 
-void func_80047A30(s32 iconID, s32 arg1) {
+void create_status_transparent(s32 iconID, s32 statusID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     statusIcon->flags &= ~STATUS_ICON_FLAG_TRANSPARENT;
-    if (statusIcon->status3.active != arg1) {
+    if (statusIcon->status3.active != statusID) {
         remove_status_transparent(iconID);
-        statusIcon->status3.active = arg1;
-        statusIcon->status3.unk_02 = 1;
+        statusIcon->status3.active = statusID;
+        statusIcon->status3.activeTask = 1;
     }
 }
 
@@ -1028,47 +1045,47 @@ void remove_status_transparent(s32 iconID) {
 
     if (statusIcon->status3.active && !statusIcon->status3.removing) {
         statusIcon->status3.removing = statusIcon->status3.active;
-        statusIcon->status3.unk_03 = TRUE;
+        statusIcon->status3.removingTask = TRUE;
         statusIcon->status3.active = FALSE;
-        statusIcon->status3.unk_02 = FALSE;
-        statusIcon->status3.unk_05 = 10;
-        statusIcon->status3.unk_0C = statusIcon->status3.hudElemIndex;
+        statusIcon->status3.activeTask = FALSE;
+        statusIcon->status3.frameCounter = 10;
+        statusIcon->status3.removingElementID = statusIcon->status3.activeElementID;
     }
 }
 
-void enable_status_3(s32 iconID) {
+void enable_status_transparent(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     statusIcon->flags |= STATUS_ICON_FLAG_TRANSPARENT;
 }
 
-void func_80047B38(s32 iconID) {
+void create_status_chill_out(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    statusIcon->flags &= ~STATUS_ICON_FLAG_STATUS_4;
+    statusIcon->flags &= ~STATUS_ICON_FLAG_STATUS_CHILL_OUT;
     if (!statusIcon->status4.active) {
         statusIcon->status4.active = TRUE;
-        statusIcon->status4.unk_02 = TRUE;
+        statusIcon->status4.activeTask = TRUE;
     }
 }
 
-void remove_status_4(s32 iconID) {
+void remove_status_chill_out(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     if (statusIcon->status4.active && !statusIcon->status4.removing) {
         statusIcon->status4.removing = statusIcon->status4.active;
-        statusIcon->status4.unk_03 = TRUE;
+        statusIcon->status4.removingTask = TRUE;
         statusIcon->status4.active = FALSE;
-        statusIcon->status4.unk_02 = FALSE;
-        statusIcon->status4.unk_05 = 10;
-        statusIcon->status4.unk_0C = statusIcon->status4.hudElemIndex;
+        statusIcon->status4.activeTask = FALSE;
+        statusIcon->status4.frameCounter = 10;
+        statusIcon->status4.removingElementID = statusIcon->status4.activeElementID;
     }
 }
 
-void enable_status_4(s32 iconID) {
+void enable_status_chill_out(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
-    statusIcon->flags |= STATUS_ICON_FLAG_STATUS_4;
+    statusIcon->flags |= STATUS_ICON_FLAG_STATUS_CHILL_OUT;
 }
 
 void create_status_icon_boost_jump(s32 iconID) {
@@ -1078,10 +1095,10 @@ void create_status_icon_boost_jump(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_BOOST_JUMP;
     if (!statusIcon->boostJump.active) {
         statusIcon->boostJump.active = TRUE;
-        hudElement = create_hud_element(D_8010701C);
+        hudElement = create_hud_element(&D_8010701C);
         set_hud_element_flags(hudElement, 2);
         set_hud_element_flags(hudElement, 0x80);
-        statusIcon->boostJump.hudElemIndex = hudElement;
+        statusIcon->boostJump.activeElementID = hudElement;
     }
 }
 
@@ -1089,11 +1106,11 @@ void remove_status_icon_boost_jump(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     if (statusIcon->boostJump.active) {
-        s32 hudElemIndex = statusIcon->boostJump.hudElemIndex;
+        s32 hudElemIndex = statusIcon->boostJump.activeElementID;
         statusIcon->boostJump.active = FALSE;
         statusIcon->boostJump.removing = TRUE;
         statusIcon->prevIndexBoostJump = hudElemIndex;
-        set_hud_element_anim(hudElemIndex, &D_8010717C[0]);
+        set_hud_element_anim(hudElemIndex, &D_8010717C);
     }
 }
 
@@ -1110,10 +1127,10 @@ void create_status_icon_boost_hammer(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_BOOST_HAMMER;
     if (!statusIcon->boostHammer.active) {
         statusIcon->boostHammer.active = TRUE;
-        hudElement = create_hud_element(D_80107314);
+        hudElement = create_hud_element(&D_80107314);
         set_hud_element_flags(hudElement, 2);
         set_hud_element_flags(hudElement, 0x80);
-        statusIcon->boostHammer.hudElemIndex = hudElement;
+        statusIcon->boostHammer.activeElementID = hudElement;
     }
 }
 
@@ -1121,11 +1138,11 @@ void remove_status_icon_boost_hammer(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
 
     if (statusIcon->boostHammer.active) {
-        s32 hudElemIndex = statusIcon->boostHammer.hudElemIndex;
+        s32 hudElemIndex = statusIcon->boostHammer.activeElementID;
         statusIcon->boostHammer.active = FALSE;
         statusIcon->boostHammer.removing = FALSE;
         statusIcon->prevIndexBoostHammer = hudElemIndex;
-        set_hud_element_anim(hudElemIndex, &D_80107474[0]);
+        set_hud_element_anim(hudElemIndex, &D_80107474);
     }
 }
 
@@ -1142,10 +1159,10 @@ void create_status_icon_boost_partner(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_BOOST_PARTNER;
     if (!statusIcon->boostPartner.active) {
         statusIcon->boostPartner.active = TRUE;
-        hudElement = create_hud_element(D_801075E0);
+        hudElement = create_hud_element(&D_801075E0);
         set_hud_element_flags(hudElement, 2);
         set_hud_element_flags(hudElement, 0x80);
-        statusIcon->boostPartner.hudElemIndex = hudElement;
+        statusIcon->boostPartner.activeElementID = hudElement;
     }
 }
 
@@ -1154,7 +1171,7 @@ void remove_status_icon_boost_partner(s32 iconID) {
 
     if (statusIcon->boostPartner.active) {
         statusIcon->boostPartner.active = FALSE;
-        free_hud_element(statusIcon->boostPartner.hudElemIndex);
+        free_hud_element(statusIcon->boostPartner.activeElementID);
     }
 }
 
@@ -1171,10 +1188,10 @@ void create_status_icon_surprise(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_SURPRISE;
     if (!statusIcon->surprise.active) {
         statusIcon->surprise.active = TRUE;
-        hudElement = create_hud_element(D_8010760C);
+        hudElement = create_hud_element(&D_8010760C);
         set_hud_element_flags(hudElement, 2);
         set_hud_element_flags(hudElement, 0x80);
-        statusIcon->surprise.hudElemIndex = hudElement;
+        statusIcon->surprise.activeElementID = hudElement;
     }
 }
 
@@ -1183,7 +1200,7 @@ void remove_status_icon_surprise(s32 iconID) {
 
     if (statusIcon->surprise.active) {
         statusIcon->surprise.active = FALSE;
-        free_hud_element(statusIcon->surprise.hudElemIndex);
+        free_hud_element(statusIcon->surprise.activeElementID);
     }
 }
 
@@ -1200,10 +1217,10 @@ void create_status_icon_peril(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_PERIL;
     if (!statusIcon->peril.active) {
         statusIcon->peril.active = TRUE;
-        hudElement = create_hud_element(D_801089C4);
+        hudElement = create_hud_element(&D_801089C4);
         set_hud_element_flags(hudElement, 2);
         set_hud_element_flags(hudElement, 0x80);
-        statusIcon->peril.hudElemIndex = hudElement;
+        statusIcon->peril.activeElementID = hudElement;
     }
 }
 
@@ -1212,7 +1229,7 @@ void remove_status_icon_peril(s32 iconID) {
 
     if (statusIcon->peril.active) {
         statusIcon->peril.active = FALSE;
-        free_hud_element(statusIcon->peril.hudElemIndex);
+        free_hud_element(statusIcon->peril.activeElementID);
     }
 }
 
@@ -1229,10 +1246,10 @@ void create_status_icon_danger(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_DANGER;
     if (!statusIcon->danger.active) {
         statusIcon->danger.active = TRUE;
-        hudElement = create_hud_element(D_80108A14);
+        hudElement = create_hud_element(&D_80108A14);
         set_hud_element_flags(hudElement, 2);
         set_hud_element_flags(hudElement, 0x80);
-        statusIcon->danger.hudElemIndex = hudElement;
+        statusIcon->danger.activeElementID = hudElement;
     }
 }
 
@@ -1241,7 +1258,7 @@ void remove_status_icon_danger(s32 iconID) {
 
     if (statusIcon->danger.active) {
         statusIcon->danger.active = FALSE;
-        free_hud_element(statusIcon->danger.hudElemIndex);
+        free_hud_element(statusIcon->danger.activeElementID);
     }
 }
 
@@ -1251,4 +1268,4 @@ void enable_status_icon_danger(s32 iconID) {
     statusIcon->flags |= STATUS_ICON_FLAG_DANGER;
 }
 
-const f32 hud_icons_rodata_alignment = 0.0f;
+const f32 status_icons_rodata_alignment = 0.0f;
