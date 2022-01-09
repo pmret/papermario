@@ -106,8 +106,8 @@ typedef struct HudElement {
     /* 0x49 */ u8 sizeY; /* screen size? */
     /* 0x4A */ u8 opacity;
     /* 0x4B */ Color_RGB8 tint;
-    /* 0x4E */ Vec2b customImageSize;
-    /* 0x40 */ Vec2b customDrawSize;
+    /* 0x4E */ Vec2bu customImageSize;
+    /* 0x40 */ Vec2bu customDrawSize;
 } HudElement; // size = 0x54
 
 typedef HudElement* HudElementList[320];

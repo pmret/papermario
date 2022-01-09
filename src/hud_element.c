@@ -1,7 +1,7 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern HudElementList* hudElements;
+extern HudElementList* gHudElements;
 
 s32 D_8014EFC0[] = { 0x00000000, };
 s32 D_8014EFC4[] = { 0x00011000, };
@@ -10,15 +10,41 @@ HudElementAnim hud_element_defaultAnim = {
     he_End,
 };
 
-s32 D_8014EFCC[] = { 0x00080008, 0x00200010, 0x00100080, 0x00180018, 0x01200020, 0x00200200, 0x00300030, 0x04800040,
-                     0x00400800, 0x00080010, 0x00400010, 0x00080040, 0x00100018, 0x00C00010, 0x00200100, 0x00400020,
-                     0x04000020, 0x00100100, 0x000C000C, 0x00480030, 0x00180240, 0x00200008, 0x00800018, 0x00080060,
-                     0x00400010, 0x02000010, 0x00400200, 0x00C00020, 0x0C000028, 0x00280320, 0x00180010, 0x00C00020,
-                     0x00280280, 0x00280010, 0x01400028, 0x001801E0, 0x00200018, 0x01800014, 0x00200000, 0x00220020,
-                     0x00000028, 0x002803C8, 0x00000000, 0xED000000, 0x005003C0, 0xE7000000, 0x00000000, 0xE3000A11,
-                     0x00002CF0, 0xE2001E01, 0x00000000, 0xDF000000, 0x00000000, 0xED000000, 0x005003C0, 0xE7000000,
-                     0x00000000, 0xE3000A11, 0x00002CF0, 0xE2001E01, 0x00000000, 0xDF000000, 0x00000000,
-                   };
+Vec3s gHudElementSizes[26] = { 
+    { 8, 8, 32 },
+    { 16, 16, 128 },
+    { 24, 24, 288 },
+    { 32, 32, 512 },
+    { 48, 48, 1152 },
+    { 64, 64, 2048 },
+    { 8, 16, 64 },
+    { 16, 8, 64 },
+    { 16, 24, 192 },
+    { 16, 32, 256 },
+    { 64, 32, 1024 },
+    { 32, 16, 256 },
+    { 12, 12, 72 },
+    { 48, 24, 576 },
+    { 32, 8, 128 },
+    { 24, 8, 96 },
+    { 64, 16, 512 },
+    { 16, 64, 512 },
+    { 192, 32, 3072 },
+    { 40, 40, 800 },
+    { 24, 16, 192 },
+    { 32, 40, 640 },
+    { 40, 16, 320 },
+    { 40, 24, 480 },
+    { 32, 24, 384 }, 
+    { 20, 32, 0 }
+};
+
+s32 D_8014F062[] = {
+    0x00220020, 0x00000028, 0x002803C8, 0x00000000, 0xED000000, 0x005003C0, 0xE7000000,
+    0x00000000, 0xE3000A11, 0x00002CF0, 0xE2001E01, 0x00000000, 0xDF000000, 0x00000000, 0xED000000, 0x005003C0,
+    0xE7000000, 0x00000000, 0xE3000A11, 0x00002CF0, 0xE2001E01, 0x00000000, 0xDF000000, 0x00000000,
+};
+
 s32 D_8014F0C8[] = { 0xFFF40000, 0x00000000, 0x08000800, 0x000000FF, 0x00330000, 0x00000000, 0x00000800, 0x000000FF,
                      0x0033003F, 0x00000000, 0x00000000, 0x000000FF, 0xFFF4003F, 0x00000000, 0x08000000, 0x000000FF,
                      0xFFFFFF00, 0xFFFFFF00,
@@ -65,13 +91,13 @@ void init_hud_element_list(void) {
             D_80158570 = NULL;
         }
 
-        hudElements = &D_80156F60;
+        gHudElements = &D_80156F60;
         D_8015133C = &D_80157968;
         D_801512C8 = &D_80157970;
         D_801512D0 = &D_80157F70;
         D_80151314 = D_80157964;
     } else {
-        hudElements = &D_80157460;
+        gHudElements = &D_80157460;
         D_8015133C = &D_80158574;
         D_801512C8 = &D_80158580;
         D_801512D0 = &D_80158B80;
@@ -106,15 +132,15 @@ s32 create_hud_element(const HudElementAnim* anim) {
     HudElement* hudElement;
     s32 id;
 
-    for (id = 0; id < ARRAY_COUNT(*hudElements); id++) {
-        if ((*hudElements)[id] == NULL) {
+    for (id = 0; id < ARRAY_COUNT(*gHudElements); id++) {
+        if ((*gHudElements)[id] == NULL) {
             break;
         }
     }
 
-    ASSERT(id < ARRAY_COUNT(*hudElements));
+    ASSERT(id < ARRAY_COUNT(*gHudElements));
 
-    (*hudElements)[id] = hudElement = heap_malloc(sizeof(HudElement));
+    (*gHudElements)[id] = hudElement = heap_malloc(sizeof(HudElement));
     D_801512B4 += 1;
 
     ASSERT(hudElement != NULL);
@@ -159,8 +185,8 @@ s32 create_hud_element(const HudElementAnim* anim) {
 void update_hud_elements(void) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(*hudElements);) {
-        HudElement* elem = (*hudElements)[i];
+    for (i = 0; i < ARRAY_COUNT(*gHudElements);) {
+        HudElement* elem = (*gHudElements)[i];
 
         if (elem != NULL && (elem->flags.as_word != 0) && !(elem->flags.as_word & 2)) {
             if (elem->flags.as_word & 0x40000) {
@@ -228,7 +254,7 @@ void draw_hud_element_3(s32 id) {
 }
 
 void set_hud_element_anim(s32 id, const HudElementAnim* anim) {
-    HudElement* hudElement = (*hudElements)[id & ~0x800];
+    HudElement* hudElement = (*gHudElements)[id & ~0x800];
 
     if (anim == NULL) {
         anim = &hud_element_defaultAnim;
@@ -253,58 +279,91 @@ void set_hud_element_anim(s32 id, const HudElementAnim* anim) {
 }
 
 HudElementAnim* get_hud_element_anim(s32 id) {
-    return (*hudElements)[id & ~0x800]->anim;
+    return (*gHudElements)[id & ~0x800]->anim;
 }
 
 HudElement* get_hud_element(s32 id) {
-    return (*hudElements)[id & ~0x800];
+    return (*gHudElements)[id & ~0x800];
 }
 
 void free_hud_element(s32 id) {
-    if ((*hudElements)[id & ~0x800]->flags.as_word & 0x10000) {
+    if ((*gHudElements)[id & ~0x800]->flags.as_word & 0x10000) {
         free_hud_element_transform(id & ~0x800);
     }
 
-    heap_free((*hudElements)[id & ~0x800]);
-    (*hudElements)[id & ~0x800] = NULL;
+    heap_free((*gHudElements)[id & ~0x800]);
+    (*gHudElements)[id & ~0x800] = NULL;
     D_801512B4--;
 }
 
 void set_hud_element_render_pos(s32 id, s32 x, s32 y) {
-    HudElement* hudElement = (*hudElements)[id & ~0x800];
+    HudElement* hudElement = (*gHudElements)[id & ~0x800];
 
     hudElement->renderPosX = x;
     hudElement->renderPosY = y;
 }
 
 void get_hud_element_render_pos(s32 id, s32* x, s32* y) {
-    HudElement* hudElement = (*hudElements)[id & ~0x800];
+    HudElement* hudElement = (*gHudElements)[id & ~0x800];
 
     *x = hudElement->renderPosX;
     *y = hudElement->renderPosY;
 }
 
 void set_hud_element_render_depth(s32 id, s32 z) {
-    (*hudElements)[id & ~0x800]->worldPosOffset.z = z;
+    (*gHudElements)[id & ~0x800]->worldPosOffset.z = z;
 }
 
 void set_hud_element_flags(s32 id, s32 flags) {
-    (*hudElements)[id & ~0x800]->flags.as_word |= flags;
+    (*gHudElements)[id & ~0x800]->flags.as_word |= flags;
 }
 
 void clear_hud_element_flags(s32 id, s32 flags) {
-    (*hudElements)[id & ~0x800]->flags.as_word &= ~flags;
+    (*gHudElements)[id & ~0x800]->flags.as_word &= ~flags;
 }
 
 INCLUDE_ASM(void, "hud_element", ALT_clear_hud_element_cache, void);
 
-INCLUDE_ASM(void, "hud_element", set_hud_element_scale, s32 index, f32 scale);
+void set_hud_element_scale(s32 index, f32 scale) {
+    HudElement* elem = (*gHudElements)[index & ~0x800];
+    s32 drawSizeX;
+    s32 drawSizeY;
+    s32 imgSizeX;
+    s32 imgSizeY;
+    f32 xScaled, yScaled;
+
+    elem->uniformScale = scale;
+    if (!(elem->flags.as_word & 0x100000)) {
+        imgSizeX = gHudElementSizes[elem->tileSizePreset].x;
+        imgSizeY = gHudElementSizes[elem->tileSizePreset].y;
+        drawSizeX = gHudElementSizes[elem->drawSizePreset].x;
+        drawSizeY = gHudElementSizes[elem->drawSizePreset].y;
+    } else {
+        imgSizeX = elem->customImageSize.x;
+        imgSizeY = elem->customImageSize.y;
+        drawSizeX = elem->customDrawSize.x;
+        drawSizeY = elem->customDrawSize.y;
+    }
+    elem->sizeX = drawSizeX * scale;
+    elem->sizeY = drawSizeY * scale;
+    elem->flags.as_word &= ~0x100;
+    elem->flags.as_word |= 0x800 | 0x10;
+
+    xScaled = ((f32) drawSizeX / (f32) imgSizeX) * scale;
+    yScaled = ((f32) drawSizeY / (f32) imgSizeY) * scale;
+    
+    xScaled = 1.0f / xScaled;
+    yScaled = 1.0f / yScaled;
+    
+    elem->widthScale = X10(xScaled);
+    elem->heightScale = X10(yScaled);
+}
 
 void set_hud_element_size(s32 id, s8 size) {
-    HudElement* hudElement = (*hudElements)[id & ~0x800];
+    HudElement* hudElement = (*gHudElements)[id & ~0x800];
 
-    hudElement->widthScale = 0x400;
-    hudElement->heightScale = 0x400;
+    hudElement->widthScale = 1024;
+    hudElement->heightScale = 1024;
     hudElement->tileSizePreset = size;
     hudElement->drawSizePreset = size;
     hudElement->uniformScale = 1.0f;
@@ -313,18 +372,18 @@ void set_hud_element_size(s32 id, s8 size) {
 }
 
 s32 func_80144E4C(s32 id) {
-    return (*hudElements)[id & ~0x800]->flags.as_bitfields.f4;
+    return (*gHudElements)[id & ~0x800]->flags.as_bitfields.f4;
 }
 
 void func_80144E74(s32 id, s32 arg1) {
-    HudElement* hudElement = (*hudElements)[id & ~0x800];
+    HudElement* hudElement = (*gHudElements)[id & ~0x800];
 
     hudElement->flags.as_word &= ~0xF000000;
     hudElement->flags.as_word |= arg1 << 24;
 }
 
 void set_hud_element_alpha(s32 id, s32 opacity) {
-    HudElement* hudElement = (*hudElements)[id & ~0x800];
+    HudElement* hudElement = (*gHudElements)[id & ~0x800];
 
     hudElement->flags.as_word |= 0x20;
     hudElement->opacity = opacity;
@@ -335,7 +394,7 @@ void set_hud_element_alpha(s32 id, s32 opacity) {
 }
 
 void set_hud_element_tint(s32 id, s32 r, s32 g, s32 b) {
-    HudElement* hudElement = (*hudElements)[id & ~0x800];
+    HudElement* hudElement = (*gHudElements)[id & ~0x800];
 
     hudElement->tint.r = r;
     hudElement->tint.g = g;
@@ -343,7 +402,7 @@ void set_hud_element_tint(s32 id, s32 r, s32 g, s32 b) {
 }
 
 void create_hud_element_transform_A(s32 id) {
-    HudElement* element = (*hudElements)[id & ~0x800];
+    HudElement* element = (*gHudElements)[id & ~0x800];
     HudTransform* transform = general_heap_malloc(sizeof(*transform));
 
     element->hudTransform = transform;
@@ -365,7 +424,7 @@ void create_hud_element_transform_A(s32 id) {
 }
 
 void create_hud_element_transform_B(s32 id) {
-    HudElement* element = (*hudElements)[id & ~0x800];
+    HudElement* element = (*gHudElements)[id & ~0x800];
     HudTransform* transform = general_heap_malloc(sizeof(*transform));
 
     element->hudTransform = transform;
@@ -385,7 +444,7 @@ void create_hud_element_transform_B(s32 id) {
 }
 
 void create_hud_element_transform_C(s32 id) {
-    HudElement* element = (*hudElements)[id & ~0x800];
+    HudElement* element = (*gHudElements)[id & ~0x800];
     HudTransform* transform = general_heap_malloc(sizeof(*transform));
 
     element->hudTransform = transform;
@@ -405,7 +464,7 @@ void create_hud_element_transform_C(s32 id) {
 }
 
 void free_hud_element_transform(s32 id) {
-    HudElement* hudElement = (*hudElements)[id & ~0x800];
+    HudElement* hudElement = (*gHudElements)[id & ~0x800];
     HudTransform* hudTransform = hudElement->hudTransform;
 
     if (!(hudElement->flags.as_word & 0x20000)) {
@@ -418,7 +477,7 @@ void free_hud_element_transform(s32 id) {
 }
 
 void set_hud_element_transform_pos(s32 id, f32 x, f32 y, f32 z) {
-    HudElement* element = (*hudElements)[id & ~0x800];
+    HudElement* element = (*gHudElements)[id & ~0x800];
     HudTransform* transform = element->hudTransform;
 
     if (element->flags.as_word & 0x10000) {
@@ -429,7 +488,7 @@ void set_hud_element_transform_pos(s32 id, f32 x, f32 y, f32 z) {
 }
 
 void set_hud_element_transform_scale(s32 id, f32 x, f32 y, f32 z) {
-    HudElement* element = (*hudElements)[id & ~0x800];
+    HudElement* element = (*gHudElements)[id & ~0x800];
     HudTransform* transform = element->hudTransform;
 
     if (element->flags.as_word & 0x10000) {
@@ -440,7 +499,7 @@ void set_hud_element_transform_scale(s32 id, f32 x, f32 y, f32 z) {
 }
 
 void set_hud_element_transform_rotation(s32 id, f32 x, f32 y, f32 z) {
-    HudElement* element = (*hudElements)[id & ~0x800];
+    HudElement* element = (*gHudElements)[id & ~0x800];
     HudTransform* transform = element->hudTransform;
 
     if (element->flags.as_word & 0x10000) {
@@ -451,7 +510,7 @@ void set_hud_element_transform_rotation(s32 id, f32 x, f32 y, f32 z) {
 }
 
 void set_hud_element_transform_rotation_pivot(s32 id, s32 dx, s32 dy) {
-    HudElement* element = (*hudElements)[id & ~0x800];
+    HudElement* element = (*gHudElements)[id & ~0x800];
     HudTransform* transform = element->hudTransform;
 
     if (element->flags.as_word & 0x10000) {
