@@ -8,7 +8,7 @@ dlabel jtbl_80244318_D91568
 
 .section .text
 
-glabel func_80242698_D8F8E8
+glabel pra_35_UnkNpcAIFunc27
 /* D8F8E8 80242698 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* D8F8EC 8024269C AFB20038 */  sw        $s2, 0x38($sp)
 /* D8F8F0 802426A0 0080902D */  daddu     $s2, $a0, $zero

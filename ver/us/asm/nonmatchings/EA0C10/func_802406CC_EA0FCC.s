@@ -119,7 +119,7 @@ glabel func_802406CC_EA0FCC
 /* EA1184 80240884 8C660028 */  lw        $a2, 0x28($v1)
 /* EA1188 80240888 8C670030 */  lw        $a3, 0x30($v1)
 /* EA118C 8024088C C64C0038 */  lwc1      $f12, 0x38($s2)
-/* EA1190 80240890 0C00ABDC */  jal       fio_validate_header_checksums
+/* EA1190 80240890 0C00ABDC */  jal       dead_atan2
 /* EA1194 80240894 C64E0040 */   lwc1     $f14, 0x40($s2)
 /* EA1198 80240898 3C03E0EF */  lui       $v1, 0xe0ef
 /* EA119C 8024089C E640000C */  swc1      $f0, 0xc($s2)

@@ -36,7 +36,6 @@ ApiStatus func_802413FC_EA9EDC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
 INCLUDE_ASM(s32, "EA8AE0", func_8024140C_EA9EEC);
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241468_EA9F48);
