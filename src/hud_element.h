@@ -101,14 +101,16 @@ typedef struct HudElement {
     /* 0x42 */ Vec3b worldPosOffset;
     /* 0x45 */ s8 drawSizePreset;
     /* 0x46 */ s8 tileSizePreset;
-    /* 0x47 */ u8 updateTimer;
+    /* 0x47 */ s8 updateTimer;
     /* 0x48 */ u8 sizeX; /* screen size? */
     /* 0x49 */ u8 sizeY; /* screen size? */
     /* 0x4A */ u8 opacity;
-    /* 0x4B */ struct { s8 r; s8 g; s8 b; } tint;
-    /* 0x4E */ Vec2b customImageSize;
-    /* 0x40 */ Vec2b customDrawSize;
+    /* 0x4B */ Color_RGB8 tint;
+    /* 0x4E */ Vec2bu customImageSize;
+    /* 0x40 */ Vec2bu customDrawSize;
 } HudElement; // size = 0x54
+
+typedef HudElement* HudElementList[320];
 
 extern HudElementAnim D_80104A28[];
 extern HudElementAnim D_80108558[];
@@ -157,10 +159,10 @@ void draw_rect_hud_element(
     HudElement* hudElement,
     s32 texSizeX,
     s32 texSizeY,
-    s32 drawSizeX,
-    s32 drawSizeY,
-    s32 offsetX,
-    s32 offsetY,
+    s16 drawSizeX,
+    s16 drawSizeY,
+    s16 offsetX,
+    s16 offsetY,
     s32 clamp,
     s32 dropShadow
 );

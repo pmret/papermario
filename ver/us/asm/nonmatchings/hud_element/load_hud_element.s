@@ -22,8 +22,8 @@ glabel load_hud_element
 /* D5A78 8013F378 120000D8 */  beqz      $s0, .L8013F6DC_D5DDC
 /* D5A7C 8013F37C AFB10014 */   sw       $s1, 0x14($sp)
 /* D5A80 8013F380 0000982D */  daddu     $s3, $zero, $zero
-/* D5A84 8013F384 3C168015 */  lui       $s6, %hi(D_8014EFCC)
-/* D5A88 8013F388 26D6EFCC */  addiu     $s6, $s6, %lo(D_8014EFCC)
+/* D5A84 8013F384 3C168015 */  lui       $s6, %hi(gHudElementSizes)
+/* D5A88 8013F388 26D6EFCC */  addiu     $s6, $s6, %lo(gHudElementSizes)
 .L8013F38C_D5A8C:
 /* D5A8C 8013F38C 8E030000 */  lw        $v1, ($s0)
 /* D5A90 8013F390 2C62001C */  sltiu     $v0, $v1, 0x1c

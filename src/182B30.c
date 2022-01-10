@@ -315,7 +315,7 @@ void func_80254C50(Actor* actor) {
                 guMtxCatF(sp258, sp1D8, sp218);
                 temp_s0_2 = partTable->opacity;
                 partTable->opacity = phi_s6 - (sp29C * phi_s4);
-                func_802591EC(0, partTable, clamp_angle(scale + 0xB4), &sp218, 1);
+                func_802591EC(0, partTable, clamp_angle(scale + 180), &sp218, 1);
                 partTable->opacity = temp_s0_2;
             }
         }
@@ -752,19 +752,19 @@ INCLUDE_ASM(s32, "182B30", func_802597B0);
 
 INCLUDE_ASM(s32, "182B30", func_8025995C);
 
-void func_80259A48(s32 arg0, ActorPart* arg1, s32 arg2, s32 arg3) {
-    DecorationTable* decorationTable = arg1->decorationTable;
+void func_80259A48(s32 arg0, ActorPart* part, s32 arg2, s32 arg3) {
+    DecorationTable* decorationTable = part->decorationTable;
 
     if (decorationTable->unk_6C1 != 0) {
-        arg1->verticalStretch = 1;
-        arg1->unkOffset[0] = 0;
-        arg1->unkOffset[1] = 0;
+        part->verticalStretch = 1;
+        part->unkOffset[0] = 0;
+        part->unkOffset[1] = 0;
         decorationTable->unk_6C1 = 0;
     }
     if (arg0 == 0) {
-        func_802597B0(arg1, arg2, arg3);
+        func_802597B0(part, arg2, arg3);
     } else {
-        func_8025950C(arg1, arg2, arg3);
+        func_8025950C(part, arg2, arg3);
     }
 }
 
