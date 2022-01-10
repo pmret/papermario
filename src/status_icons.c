@@ -686,19 +686,9 @@ void draw_all_status_icons(PopupMessage* popup) {
 
         isActiveDrawn = 0;
         if (icon->status4.activeTask == STATUS_ICON_TASK_DRAW) {
-            if (icon->flags & STATUS_ICON_FLAG_STATUS_CHILL_OUT) {
+            if (icon->flags & STATUS_ICON_FLAG_STATUS_CHILL_OUT)
                 set_hud_element_flags(icon->status4.activeElementID, 2);
-
-                // really weird stuff
-                if (0) {
-                    BOOSTJUMP:    set_hud_element_flags(icon->boostJump.activeElementID, 2);    goto BOOSTJUMPBACK;
-                    BOOSTHAMMER:  set_hud_element_flags(icon->boostHammer.activeElementID, 2);  goto BOOSTHAMMERBACK;
-                    BOOSTPARTNER: set_hud_element_flags(icon->boostPartner.activeElementID, 2); goto BOOSTPARTNERBACK;
-                    SURPRISE:     set_hud_element_flags(icon->surprise.activeElementID, 2);     goto SURPRISEBACK;
-                    PERIL:        set_hud_element_flags(icon->peril.activeElementID, 2);        goto PERILBACK;
-                    DANGER:       set_hud_element_flags(icon->danger.activeElementID, 2);       goto DANGERBACK;
-                }
-            } else if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+            else if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
                 clear_hud_element_flags(icon->status4.activeElementID, 2);
 
                 offsetY = 0;
@@ -747,9 +737,11 @@ void draw_all_status_icons(PopupMessage* popup) {
             draw_hud_element_2(elementId);
         }
 
-        if (icon->boostJump.active) {
-            if (!(icon->flags & STATUS_ICON_FLAG_BOOST_JUMP)) {
-                if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+        do {
+            if (icon->boostJump.active) {
+                if (icon->flags & STATUS_ICON_FLAG_BOOST_JUMP)
+                    set_hud_element_flags(icon->boostJump.activeElementID, 2);
+                else if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
                     clear_hud_element_flags(icon->boostJump.activeElementID, 2);
 
                     x = icon->worldPos.x;
@@ -760,10 +752,9 @@ void draw_all_status_icons(PopupMessage* popup) {
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
                     draw_hud_element_2(elementId);
                 }
-            } else
-                goto BOOSTJUMP;
-        }
-BOOSTJUMPBACK:
+            }
+        } while (0);
+
         if (icon->boostJump.removing) {
             clear_hud_element_flags(icon->prevIndexBoostJump, 2);
 
@@ -776,9 +767,11 @@ BOOSTJUMPBACK:
             draw_hud_element_2(elementId);
         }
 
-        if (icon->boostHammer.active) {
-            if (!(icon->flags & STATUS_ICON_FLAG_BOOST_HAMMER)) {
-                if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+        do {
+            if (icon->boostHammer.active) {
+                if (icon->flags & STATUS_ICON_FLAG_BOOST_HAMMER)
+                    set_hud_element_flags(icon->boostHammer.activeElementID, 2);
+                else if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
                     clear_hud_element_flags(icon->boostHammer.activeElementID, 2);
 
                     x = icon->worldPos.x;
@@ -789,10 +782,9 @@ BOOSTJUMPBACK:
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
                     draw_hud_element_2(elementId);
                 }
-            } else
-                goto BOOSTHAMMER;
-        }
-BOOSTHAMMERBACK:
+            }
+        } while (0);
+
         if (icon->boostHammer.removing) {
             clear_hud_element_flags(icon->prevIndexBoostHammer, 2);
 
@@ -805,10 +797,11 @@ BOOSTHAMMERBACK:
             draw_hud_element_2(elementId);
         }
 
-        if (icon->boostPartner.active) {
-            if (!(icon->flags & STATUS_ICON_FLAG_BOOST_PARTNER)) {
-
-                if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+        do {
+            if (icon->boostPartner.active) {
+                if (icon->flags & STATUS_ICON_FLAG_BOOST_PARTNER)
+                    set_hud_element_flags(icon->boostPartner.activeElementID, 2);
+                else if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
                     clear_hud_element_flags(icon->boostPartner.activeElementID, 2);
 
                     x = icon->worldPos.x;
@@ -819,13 +812,14 @@ BOOSTHAMMERBACK:
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
                     draw_hud_element_2(elementId);
                 }
-            } else
-                goto BOOSTPARTNER;
-        }
-BOOSTPARTNERBACK:
-        if (icon->surprise.active) {
-            if (!(icon->flags & STATUS_ICON_FLAG_SURPRISE)) {
-                if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+            }
+        } while (0);
+
+        do {
+            if (icon->surprise.active) {
+                if (icon->flags & STATUS_ICON_FLAG_SURPRISE)
+                    set_hud_element_flags(icon->surprise.activeElementID, 2);
+                else if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
                     clear_hud_element_flags(icon->surprise.activeElementID, 2);
 
                     x = icon->worldPos.x;
@@ -836,13 +830,14 @@ BOOSTPARTNERBACK:
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 15);
                     draw_hud_element_2(elementId);
                 }
-            } else
-                goto SURPRISE;
-        }
-SURPRISEBACK:
-        if (icon->peril.active) {
-            if (!(icon->flags & STATUS_ICON_FLAG_PERIL)) {
-                if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+            }
+        } while (0);
+
+        do {
+            if (icon->peril.active) {
+                if (icon->flags & STATUS_ICON_FLAG_PERIL)
+                    set_hud_element_flags(icon->peril.activeElementID, 2);
+                else if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
                     clear_hud_element_flags(icon->peril.activeElementID, 2);
 
                     x = icon->worldPos.x;
@@ -853,13 +848,14 @@ SURPRISEBACK:
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 16);
                     draw_hud_element_2(elementId);
                 }
-            } else
-                goto PERIL;
-        }
-PERILBACK:
-        if (icon->danger.active) {
-            if (!(icon->flags & STATUS_ICON_FLAG_DANGER)) {
-                if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
+            }
+        } while (0);
+
+        do {
+            if (icon->danger.active) {
+                if (icon->flags & STATUS_ICON_FLAG_DANGER)
+                    set_hud_element_flags(icon->danger.activeElementID, 2);
+                else if (icon->flags & STATUS_ICON_FLAG_BATTLE || gGameStatusPtr->isBattle != 1) {
                     clear_hud_element_flags(icon->danger.activeElementID, 2);
 
                     x = icon->worldPos.x;
@@ -870,10 +866,8 @@ PERILBACK:
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 16);
                     draw_hud_element_2(elementId);
                 }
-            } else
-                goto DANGER;
-        }
-DANGERBACK: ;
+            }
+        } while (0);
     }
 }
 
