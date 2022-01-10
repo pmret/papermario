@@ -2,7 +2,67 @@
 
 PlayerStatus* gPlayerStatusPtr = &gPlayerStatus; // maybe wPlayerStatus
 
-INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_down);
+s32 npc_raycast_down(s32 flags, f32 *startX, f32 *startY, f32 *startZ, f32 *hitDepth) {
+    f32 hitX;
+    f32 hitY;
+    f32 hitZ;
+    f32 cHitDepth;
+    f32 hitNx;
+    f32 hitNy;
+    f32 hitNz;
+    f32 eHitX;
+    f32 eHitY;
+    f32 eHitZ;
+    f32 eHitDepth;
+    f32 eHitNx;
+    f32 eHitNy;
+    f32 eHitNz;
+    s32 entityID;
+    s32 colliderID;
+    f32 sx, sy, sz;
+
+    eHitDepth = cHitDepth = fabsf(*hitDepth);
+    sx = *startX;
+    sy = *startY;
+    sz = *startZ;
+    colliderID = test_ray_colliders(flags, sx, sy, sz, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &cHitDepth, &hitNx, &hitNy, &hitNz);
+    if ((flags & 0x40000) == 0)  {
+        entityID = test_ray_entities(*startX, *startY, *startZ, 0.0f, -1.0f, 0.0f, &eHitX, &eHitY, &eHitZ, &eHitDepth, &eHitNx, &eHitNy, &eHitNz);
+        if (entityID >= 0) {
+            colliderID = entityID | 0x4000;
+            if (eHitDepth < cHitDepth) {
+                cHitDepth = eHitDepth;
+                hitX = eHitX;
+                hitY = eHitY;
+                hitZ = eHitZ;
+                hitNx = eHitNx;
+                hitNy = eHitNy;
+                hitNz = eHitNz;
+            }
+        }
+        if (colliderID < 0) {
+            return colliderID;
+        }
+    }
+
+    *hitDepth = cHitDepth;
+    *startX = hitX;
+    *startY = hitY;
+    *startZ = hitZ;
+
+    if (colliderID < 0 ) {
+        return colliderID;
+    }
+
+    gGameStatusPtr->playerGroundTraceNormal.x = hitNx;
+    gGameStatusPtr->playerGroundTraceNormal.y = hitNy;
+    gGameStatusPtr->playerGroundTraceNormal.z = hitNz;
+    gGameStatusPtr->playerGroundTraceAngles.x = -atan2(0.0f, 0.0f, hitNz * 100.0f, hitNy * 100.0f);
+    gGameStatusPtr->playerGroundTraceAngles.y = 0.0f;
+    gGameStatusPtr->playerGroundTraceAngles.z = -atan2(0.0f, 0.0f, hitNx * 100.0f, hitNy * 100.0f);
+
+    return colliderID;
+}
 
 INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_down_ahead, s32, f32*, f32*, f32*, f32*, f32, f32);
 
@@ -21,8 +81,8 @@ s32 npc_raycast_general(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32
 #ifdef NON_EQUIVALENT
 s32 npc_raycast_general(s32 flags, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
                         f32* hitY, f32* hitZ, f32* outDepth, f32* hitNx, f32* hitNy, f32* hitNz) {
-    s32 entityID;
     s32 ret;
+    s32 entityID;
 
     ret = -1;
     if (flags & 0x100000) {
@@ -57,7 +117,7 @@ void npc_get_slip_vector(f32* outX, f32* outZ, f32 aX, f32 aZ, f32 bX, f32 bZ) {
     *outX = (aX - (dotProduct * bX)) * 0.5f;
     *outZ = (aZ - (dotProduct * bZ)) * 0.5f;
 }
-             
+
 s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 radius) {
     f32 outX, outY;
     f32 bX, bZ;
@@ -140,7 +200,7 @@ s32 npc_test_move_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 
         D_8010C978 = hitID;
         ret = hitID;
     }
-    
+
     *x += temp1;
     *z += temp2;
     return ret;
