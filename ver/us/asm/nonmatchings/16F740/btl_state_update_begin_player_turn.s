@@ -572,7 +572,7 @@ glabel btl_state_update_begin_player_turn
 /* 171138 80242858 54400007 */  bnel      $v0, $zero, .L80242878
 /* 17113C 8024285C 26520001 */   addiu    $s2, $s2, 1
 /* 171140 80242860 84640436 */  lh        $a0, 0x436($v1)
-/* 171144 80242864 0C011EE1 */  jal       remove_status_4
+/* 171144 80242864 0C011EE1 */  jal       remove_status_chill_out
 /* 171148 80242868 A0600223 */   sb       $zero, 0x223($v1)
 /* 17114C 8024286C 3C01802A */  lui       $at, %hi(D_8029F258)
 /* 171150 80242870 AC34F258 */  sw        $s4, %lo(D_8029F258)($at)
