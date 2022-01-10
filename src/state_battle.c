@@ -67,7 +67,7 @@ void state_step_battle(void) {
             sfx_stop_env_sounds();
             func_8003B1A8();
             gGameStatusPtr->isBattle = TRUE;
-            allocate_hit_tables();
+            backup_map_collision_data();
             func_8002D160();
             func_802B20B4();
             sfx_clear_env_sounds(0);
@@ -186,7 +186,7 @@ void state_step_end_battle(void) {
                 decode_yay0(mapShape, &D_80210000);
                 general_heap_free(mapShape);
                 initialize_collision();
-                load_collision();
+                restore_map_collision_data();
 
                 if (map->dmaStart != NULL) {
                     dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);

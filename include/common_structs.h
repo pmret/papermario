@@ -499,8 +499,9 @@ typedef struct Collider {
     /* 0x0A */ s16 numTriangles;
     /* 0x0C */ struct ColliderTriangle* triangleTable;
     /* 0x10 */ struct ColliderBoundingBox* aabb;
-    /* 0x14 */ char unk_14[4];
-    /* 0x18 */ f32* vertexTable; // 3?
+    /* 0x14 */ s16 numVertices;
+    /* 0x16 */ char unk_16[2];
+    /* 0x18 */ Vec3f* vertexTable; // contains local and global coordinates
 } Collider; // size = 0x1C
 
 typedef struct CameraInitData {
@@ -824,9 +825,9 @@ typedef struct StaticMove {
 } StaticMove; // size = 0x14
 
 typedef struct CollisionData {
-    /* 0x00 */ f32* vertices;
+    /* 0x00 */ Vec3f* vertices;
     /* 0x04 */ Collider* colliderList;
-    /* 0x08 */ struct ColliderBoundingBox** aabbs;
+    /* 0x08 */ struct ColliderBoundingBox* aabbs;
     /* 0x0C */ s16 numColliders;
     /* 0x0E */ char unk_0E[2];
 } CollisionData; // size = 0x10
@@ -927,8 +928,8 @@ typedef struct OtherPrint {
 } OtherPrint; // size = 0x54
 
 typedef struct ColliderBoundingBox {
-    /* 0x00 */ f32 min[3];
-    /* 0x0C */ f32 max[3];
+    /* 0x00 */ Vec3f min;
+    /* 0x0C */ Vec3f max;
     /* 0x18 */ s32 flagsForCollider;
 } ColliderBoundingBox; // size = 0x1C
 

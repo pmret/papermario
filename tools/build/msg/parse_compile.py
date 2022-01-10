@@ -338,10 +338,12 @@ def strip_c_comments(text):
 
 if __name__ == "__main__":
     if len(argv) < 3:
-        print("usage: parse_compile.py [in.msg] [out.msgpack]")
+        print("usage: parse_compile.py [in.msg] [out.msgpack] [--c]")
         exit(1)
 
-    _, filename, outfile = argv
+    filename = argv[1]
+    outfile = argv[2]
+    is_output_format_c = "--c" in argv
 
     messages = []
 
@@ -392,22 +394,32 @@ if __name__ == "__main__":
 
                 directive = directive.split(":")
 
-                if directive[0] != "#message" or len(directive) != 3:
-                    print(f"{filename}:{lineno}: expected #message:SECTION:INDEX directive")
+                if directive[0] != "#message":
+                    print(f"{filename}:{lineno}: expected #message directive")
                     exit(1)
+                if is_output_format_c:
+                    if len(directive) != 2:
+                        print(f"{filename}:{lineno}: expected #message:NAME directive")
+                        exit(1)
 
-                section = int(directive[1], 16)
-
-                if directive[2].startswith("(") and directive[2].endswith(")"):
-                    name = directive[2][1:-1]
-                    index = None
+                    message = Message(directive[1], None, None)
                 else:
-                    name = None
-                    index = int(directive[2], 16)
+                    if len(directive) != 3:
+                        print(f"{filename}:{lineno}: expected #message:SECTION:INDEX directive")
+                        exit(1)
 
-                directive = ""
+                    section = int(directive[1], 16)
 
-                message = Message(name, section, index)
+                    if directive[2].startswith("(") and directive[2].endswith(")"):
+                        name = directive[2][1:-1]
+                        index = None
+                    else:
+                        name = None
+                        index = int(directive[2], 16)
+
+                    directive = ""
+
+                    message = Message(name, section, index)
                 messages.append(message)
 
                 while source[0] != "{":
@@ -1100,10 +1112,21 @@ if __name__ == "__main__":
             print(f"{filename}: missing [end]")
             exit(1)
 
-    with open(outfile, "wb") as f:
-        msgpack.pack([{
-            "section": message.section,
-            "index": message.index,
-            "name": message.name,
-            "bytes": bytes(message.bytes),
-        } for message in messages], f)
+    if is_output_format_c:
+        with open(outfile, "w") as f:
+            f.write(f"#include <ultra64.h>\n")
+
+            for message in messages:
+                f.write(f"static s8 {message.name}[] = {{\n")
+                for b in message.bytes:
+                    f.write(f"0x{b:02X},")
+                f.write(f"\n}};\n")
+
+    else:
+        with open(outfile, "wb") as f:
+            msgpack.pack([{
+                "section": message.section,
+                "index": message.index,
+                "name": message.name,
+                "bytes": bytes(message.bytes),
+            } for message in messages], f)

@@ -146,7 +146,7 @@ MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* a1);
 
 void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
-void parent_collider_to_model(s32 colliderID, s16 modelIndex);
+void parent_collider_to_model(s16 colliderID, s16 modelIndex);
 void clone_model(u16 srcModelID, u16 newModelID);
 struct Model* get_model_from_list_index(s32 listIndex);
 s32 get_model_list_index_from_tree_index(s32 treeIndex);
