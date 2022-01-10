@@ -83,7 +83,7 @@ def round_fixed(f: float) -> float:
     whole = round(g)
     if abs(g - whole) <= 100.0/1024.0:
         f = whole / 100.0
-    """
+        """
     return f
 
 def find_symbol_in_overlay(symbol_map, overlay_rom_addr, symbol_ram_addr):
@@ -149,7 +149,7 @@ def get_constants():
     global VALID_SAVE_VARS
 
     valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims", "ActorType",
-        "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
+        "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",  "ActionCommandDmaTable",
         "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags", "Statuses", "Elements",
         "DamageTypes", "ElementImmunityFlags", "HitResults", "ActorFlags", "ActorPartFlags",
         "ActorEventFlags", "ElementFlags", "EncounterTriggers", "Abilities",
@@ -438,6 +438,7 @@ replace_funcs = {
     "JumpToGoal"                :{0:"ActorIDs", 2:"Bool", 3:"Bool", 4:"Bool"},
 
     "LandJump"                  :{0:"ActorIDs"},
+    "LoadActionCommand"         :{0:"ActionCommandDmaTable"},
 
     "MakeEntity"                :{0:"Hex"},
     "MakeItemEntity"            :{0:"ItemIDs"},
@@ -455,6 +456,7 @@ replace_funcs = {
     "PlaySound"                 :{0:"SoundIDs"},
     "PlaySoundAt"               :{0:"SoundIDs"},
     "PlaySoundAtActor"          :{0:"ActorIDs", 1:"SoundIDs"},
+    "PlaySoundAtModel"          :{1:"SoundIDs"},
     "PlaySoundAtNpc"            :{0:"NpcIDs", 1:"SoundIDs"},
     "PlaySoundAtPart"           :{0:"ActorIDs", 2:"SoundIDs"},
 
@@ -488,6 +490,7 @@ replace_funcs = {
     "SetEnemyHP"                :{0:"ActorIDs"},
     "SetEnemyTargetOffset"      :{0:"ActorIDs"},
     "SetGoalPos"                :{0:"ActorIDs"},
+    "SetGoalToFirstTarget"      :{0:"ActorIDs"},
     "SetGoalToHome"             :{0:"ActorIDs"},
     "SetGoalToIndex"            :{0:"ActorIDs"},
     "SetGoalToTarget"           :{0:"ActorIDs"},

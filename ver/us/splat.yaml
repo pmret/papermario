@@ -3711,21 +3711,7 @@ segments:
     - [0x4313F0, c, stage/kmr_04]
     - [0x431660, c, stage/kmr_05]
     - [0x4318D0, c, stage/kmr_06]
-    - [0x431B80, .data, area]
-    - [0x431FB0, .data, actor/goomba]
-    - [0x433970, .data, actor/spiked_goomba]
-    - [0x4354A0, .data, actor/paragoomba]
-    - [0x438740, .data, stage/kmr_02]
-    - [0x4387A0, .data, stage/kmr_03]
-    - [0x438BF0, .data, stage/kmr_04]
-    - [0x439040, .data, stage/kmr_05]
-    - [0x439440, .data, stage/kmr_06]
-    - [0x4398A0, .rodata, area]
-    - [0x4399AC, .rodata, stage/kmr_02] # FIXME: fucky rodata alignment
-    - [0x4399CC, .rodata, stage/kmr_03]
-    - [0x4399FC, .rodata, stage/kmr_04]
-    - [0x439A2C, .rodata, stage/kmr_05]
-    - [0x439A5C, .rodata, stage/kmr_06]
+    - [0x431B80]
   - dir: battle/area_kmr_part_2
     type: code
     start: 0x439A90
@@ -4867,8 +4853,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x765C20, c]
-    - [0x765D10, data]
+    - [0x765C20, c, auto_jump]
+    - [0x765D10]
   - dir: battle/move/power_quake
     type: code
     start: 0x767C90
@@ -4883,8 +4869,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x76A830, c]
-    - [0x76A920, data]
+    - [0x76A830, c, auto_multibounce]
+    - [0x76A920]
   - dir: battle/move/power_jump
     type: code
     start: 0x76D760
