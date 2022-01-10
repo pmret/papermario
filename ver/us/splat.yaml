@@ -665,6 +665,7 @@ segments:
     start: 0xA5DD0
     vram: 0x8010F6D0
     subsegments:
+    - [0xA5DD0, c, bss3]
     - [0xA5DD0, c, a5dd0_len_114e0]
     - [0xB4580, c, B4580]
     - [0xB72B0, c, entity]
@@ -687,7 +688,6 @@ segments:
     - [0xE2960, .data, entity]
     - [0xE2980, .data, msg]
     - [0xE2CA0, data]
-    #- [0xE2DF0, .data, cd180_len_38f0]
     - start: 0xE2DF0
       type: .data
       name: cd180_len_38f0

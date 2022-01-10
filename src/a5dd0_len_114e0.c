@@ -944,23 +944,21 @@ s32 D_8014C188[] = { 0xFFFE7960, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000,
 s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
 
 // BSS
-static s32 B_801512B0[2];
-static ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
-static s32 D_801512BC;
-static s32 D_801512C0;
-static s32 gEntityHeapBase;
-static s32 D_801512C8;
-BSS ModelList* gCurrentModels;
-static s32 D_801512D0[4];
+extern s32 B_801512B0[2];
+extern ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
+extern s32 D_801512BC;
+extern s32 D_801512C0;
+extern s32 gEntityHeapBase;
+extern s32 D_801512C8;
+extern ModelList* gCurrentModels;
+extern s32 D_801512D0[4];
 extern ModelNode** gCurrentModelTreeRoot;
-static ModelTransformGroupList* gCurrentTransformGroups;
-static s8 gMsgGlobalWaveCounter[0x4];
-static ModelCustomGfxList* gCurrentCustomModelGfxPtr;
-static s32 gLastCreatedEntityIndex;
-static s8 B_801512F0[0x410];
-static GameMode gMainGameState[2]; // TODO rename
-
-
+extern ModelTransformGroupList* gCurrentTransformGroups;
+extern s8 gMsgGlobalWaveCounter[0x4];
+extern ModelCustomGfxList* gCurrentCustomModelGfxPtr;
+extern s32 gLastCreatedEntityIndex;
+extern s8 B_801512F0[0x410];
+extern GameMode gMainGameState[2]; // TODO rename
 
 extern s32 D_80151300;
 extern s32 D_80151324;

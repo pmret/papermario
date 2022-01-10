@@ -64,7 +64,7 @@ ApiStatus func_80242680_DF9080(Evt* script, s32 isInitialCall) {
     bp.onUpdate = NULL;
     bp.onRender = NULL;
 
-    spr_allocateBtlComponentsOnWorldHeap = 1;
+    spr_allocateBtlComponentsOnWorldHeap = TRUE;
 
     npc = get_npc_by_index(_create_npc_standard(&bp, end18->animList));
     npc->npcID = npcID;

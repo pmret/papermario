@@ -502,7 +502,6 @@ BGMPlayer* func_80054248(u8 arg0) {
             return D_8009A640;
         default:
             return NULL;
-            break;
     }
 }
 
