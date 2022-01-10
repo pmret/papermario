@@ -159,10 +159,10 @@ void draw_rect_hud_element(
     HudElement* hudElement,
     s32 texSizeX,
     s32 texSizeY,
-    s32 drawSizeX,
-    s32 drawSizeY,
-    s32 offsetX,
-    s32 offsetY,
+    s16 drawSizeX,
+    s16 drawSizeY,
+    s16 offsetX,
+    s16 offsetY,
     s32 clamp,
     s32 dropShadow
 );

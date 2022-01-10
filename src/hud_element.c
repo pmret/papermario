@@ -1,5 +1,6 @@
 #include "common.h"
 #include "hud_element.h"
+#include "nu/nusys.h"
 
 extern HudElementList* gHudElements;
 
@@ -10,7 +11,7 @@ HudElementAnim hud_element_defaultAnim = {
     he_End,
 };
 
-Vec3s gHudElementSizes[26] = { 
+Vec3s gHudElementSizes[26] = {
     { 8, 8, 32 },
     { 16, 16, 128 },
     { 24, 24, 288 },
@@ -35,7 +36,7 @@ Vec3s gHudElementSizes[26] = {
     { 32, 40, 640 },
     { 40, 16, 320 },
     { 40, 24, 480 },
-    { 32, 24, 384 }, 
+    { 32, 24, 384 },
     { 20, 32, 0 }
 };
 
@@ -45,11 +46,28 @@ s32 D_8014F062[] = {
     0xE7000000, 0x00000000, 0xE3000A11, 0x00002CF0, 0xE2001E01, 0x00000000, 0xDF000000, 0x00000000,
 };
 
-s32 D_8014F0C8[] = { 0xFFF40000, 0x00000000, 0x08000800, 0x000000FF, 0x00330000, 0x00000000, 0x00000800, 0x000000FF,
-                     0x0033003F, 0x00000000, 0x00000000, 0x000000FF, 0xFFF4003F, 0x00000000, 0x08000000, 0x000000FF,
-                     0xFFFFFF00, 0xFFFFFF00,
-                   };
-s32 D_8014F110[] = { 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
+s32 D_8014F0C8[] = {
+    0xFFF40000, 0x00000000, 0x08000800, 0x000000FF, 0x00330000, 0x00000000, 0x00000800, 0x000000FF,
+    0x0033003F, 0x00000000, 0x00000000, 0x000000FF, 0xFFF4003F, 0x00000000, 0x08000000, 0x000000FF,
+};
+
+Lights1 D_8014F108 = {
+    .a = {
+        .l = {
+            .col = { 255, 255, 255 },
+            .colc = { 255, 255, 255 },
+        }
+    },
+    .l = {
+        {
+            .l = {
+                .col = { 0, 0, 0 },
+                .colc = { 0, 0, 0 },
+                .dir = { 0, 0, 0},
+            }
+        }
+    }
+};
 
 extern s32 D_801512B4; // no of hud elements?
 extern s32 D_80159180;
@@ -221,25 +239,196 @@ INCLUDE_ASM(void, "hud_element", render_hud_element, HudElement* hudElement);
 
 INCLUDE_ASM(void, "hud_element", render_hud_elements_world, void);
 
-INCLUDE_ASM(void, "hud_element", func_80143C48, s32 arg0, s32 arg1, s32 arg2);
+void func_80143C48(s32 elemID, s32 arg1, s32 camID) {
+    Camera* camera = &gCameras[camID];
+
+    if (arg1 > 0) {
+        if (camera->flags == 0 || (camera->flags & 2)) {
+            return;
+        }
+
+        gCurrentCamID = camID;
+
+        gSPViewport(gMasterGfxPos++, &camera->vp);
+        gSPClearGeometryMode(gMasterGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
+                                                G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+        gSPTexture(gMasterGfxPos++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+        gDPPipelineMode(gMasterGfxPos++, G_PM_NPRIMITIVE);
+        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+        gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_SHADE, G_CC_SHADE);
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+        gSPClipRatio(gMasterGfxPos++, FRUSTRATIO_2);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxZBuffer));
+        gDPSetFillColor(gMasterGfxPos++, 0xFFFCFFFC);
+        gDPFillRectangle(gMasterGfxPos++, camera->viewportStartX, camera->viewportStartY,
+                         camera->viewportStartX + camera->viewportW - 1,
+                         camera->viewportStartY + camera->viewportH - 1);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
+        gDPPipeSync(gMasterGfxPos++);
+
+        guOrthoF(camera->perspectiveMatrix, 0.0f, 320.0f, -240.0f, 0.0f, -1000.0f, 1000.0f, 1.0f);
+        guMtxF2L(camera->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
+
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH | G_MTX_LOAD |
+                                                                                    G_MTX_PROJECTION);
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 12, 20, 308, 220);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+        gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING |
+                                                G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+        gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
+        gSPSetLights1(gMasterGfxPos++, D_8014F108);
+        gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+        gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
+        gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
+        gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+        gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
+        gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
+        gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
+        gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+    }
+
+    if (elemID >= 0) {
+        HudElement* elem;
+
+        elemID &= ~0x800;
+        elem = (*gHudElements)[elemID];
+
+        if (elem != NULL) {
+            if (elem->flags.as_word != 0 && !(elem->flags.as_word & 2)) {
+                if (!(elem->flags.as_word & 0x10200000)) {
+                    if (elem->flags.as_word & 0x10000) {
+                        if (!(elem->flags.as_word & 0x40) && (elem->drawSizePreset >= 0) && (elem->flags.as_word & 0x80)) {
+                            render_hud_element(elem);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 void func_80144218(s32 arg0) {
-    func_80143C48(arg0, 1, 3);
+    func_80143C48(arg0, 1, CAM_CAM3);
 }
 
 void func_80144238(s32 arg0) {
-    func_80143C48(arg0, 0, 3);
+    func_80143C48(arg0, 0, CAM_CAM3);
 }
 
 void func_80144258(s32 arg0) {
-    func_80143C48(arg0, 1, 1);
+    func_80143C48(arg0, 1, CAM_BATTLE);
 }
 
 void func_80144278(s32 arg0) {
-    func_80143C48(arg0, 0, 1);
+    func_80143C48(arg0, 0, CAM_BATTLE);
 }
 
-INCLUDE_ASM(void, "hud_element", draw_hud_element, s32 id, s32 clipMode);
+void draw_hud_element(s32 id, s32 clipMode) {
+    HudElement* elem = (*gHudElements)[id & ~0x800];
+    s32 texSizeX, texSizeY;
+    s32 drawSizeX, drawSizeY;
+    s32 offsetX, offsetY;
+    s32 preset;
+
+    if ((elem->flags.as_word != 0) && !(elem->flags.as_word & 2)) {
+        if (!(elem->flags.as_word & 0x10200000) && (elem->drawSizePreset >= 0)) {
+            if (clipMode != 1) {
+                if (clipMode == 0) {
+                    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 12, 20, 308, 220);
+                }
+                gDPPipeSync(gMasterGfxPos++);
+                gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+                gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+                gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
+                gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
+                gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
+                gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
+                gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+                gDPNoOp(gMasterGfxPos++);
+                gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+                gDPSetAlphaDither(gMasterGfxPos++, G_AD_DISABLE);
+                gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+            }
+
+            if (!(elem->flags.as_word & 0x100)) {
+                if (!(elem->flags.as_word & 0x100000)) {
+                    preset = elem->tileSizePreset;
+                    texSizeX = gHudElementSizes[preset].x;
+                    texSizeY = gHudElementSizes[preset].y;
+                } else {
+                    texSizeX = elem->customImageSize.x;
+                    texSizeY = elem->customImageSize.y;
+                }
+
+                if (!(elem->flags.as_word & 0x10)) {
+                    if (!(elem->flags.as_word & 0x100000)) {
+                        drawSizeX = gHudElementSizes[elem->drawSizePreset].x;
+                        drawSizeY = gHudElementSizes[elem->drawSizePreset].y;
+                    } else {
+                        drawSizeX = elem->customDrawSize.x;
+                        drawSizeY = elem->customDrawSize.y;
+                    }
+                } else {
+                    drawSizeX = elem->sizeX;
+                    drawSizeY = elem->sizeY;
+                }
+
+                do {
+                    offsetX = -drawSizeX / 2;
+                    offsetY = -drawSizeY / 2;
+                } while (0); // TODO required to match
+
+                if (!(elem->flags.as_word & 0x800)) {
+                    if (elem->flags.as_word & 0x20000000) {
+                        draw_rect_hud_element(elem, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, TRUE, TRUE);
+                    }
+                    draw_rect_hud_element(elem, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, TRUE, FALSE);
+                } else {
+                    if (elem->flags.as_word & 0x20000000) {
+                        draw_rect_hud_element(elem, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, TRUE);
+                    }
+                    draw_rect_hud_element(elem, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, FALSE);
+                }
+            } else {
+                f32 xScaled, yScaled;
+
+                if (!(elem->flags.as_word & 0x100000)) {
+                    preset = elem->tileSizePreset;
+                    texSizeX = gHudElementSizes[preset].x;
+                    texSizeY = gHudElementSizes[preset].y;
+                } else {
+                    texSizeX = elem->customImageSize.x;
+                    texSizeY = elem->customImageSize.y;
+                }
+
+                drawSizeX = elem->unkImgScale[0];
+                drawSizeY = elem->unkImgScale[1];
+
+                offsetX = -elem->unkImgScale[0] / 2;
+                offsetY = -elem->unkImgScale[1] / 2;
+
+                xScaled = (f32) drawSizeX / (f32) texSizeX;
+                yScaled = (f32) drawSizeY / (f32) texSizeY;
+
+                xScaled = 1.0f / xScaled;
+                yScaled = 1.0f / yScaled;
+
+                elem->widthScale = X10(xScaled);
+                elem->heightScale = X10(yScaled);
+
+                if (elem->flags.as_word & 0x20000000) {
+                    draw_rect_hud_element(elem, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, TRUE);
+                }
+                draw_rect_hud_element(elem, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, FALSE);
+            }
+        }
+    }
+}
 
 void draw_hud_element_clipped(s32 id) {
     draw_hud_element(id, 0);
@@ -351,10 +540,10 @@ void set_hud_element_scale(s32 index, f32 scale) {
 
     xScaled = ((f32) drawSizeX / (f32) imgSizeX) * scale;
     yScaled = ((f32) drawSizeY / (f32) imgSizeY) * scale;
-    
+
     xScaled = 1.0f / xScaled;
     yScaled = 1.0f / yScaled;
-    
+
     elem->widthScale = X10(xScaled);
     elem->heightScale = X10(yScaled);
 }
