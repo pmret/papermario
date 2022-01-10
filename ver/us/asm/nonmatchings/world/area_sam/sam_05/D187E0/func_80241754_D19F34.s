@@ -110,7 +110,7 @@ glabel func_80241754_D19F34
 /* D1A0C0 802418E0 00000000 */   nop
 .L802418E4:
 /* D1A0C4 802418E4 0260282D */  daddu     $a1, $s3, $zero
-/* D1A0C8 802418E8 0C09028E */  jal       func_80240A38_D19218
+/* D1A0C8 802418E8 0C09028E */  jal       sam_05_UnkNpcAIFunc46
 /* D1A0CC 802418EC 0280302D */   daddu    $a2, $s4, $zero
 /* D1A0D0 802418F0 8E420070 */  lw        $v0, 0x70($s2)
 /* D1A0D4 802418F4 14500021 */  bne       $v0, $s0, .L8024197C

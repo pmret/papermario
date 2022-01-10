@@ -237,6 +237,7 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkNpcAIFunc32.inc.c"
 
+// sqrtf issue - Would be UnkNpcAiFunc46
 INCLUDE_ASM(s32, "EA0C10", func_80240DC4_EA16C4);
 
 #include "world/common/UnkNpcDurationFlagFunc3.inc.c"

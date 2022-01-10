@@ -38,6 +38,9 @@ INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80241AB4_D8ED04);
 
 #include "world/common/UnkFunc7.inc.c"
 
+// Requires data migration
+INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_802423CC_D8F61C);
+/*
 ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -80,13 +83,13 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 0:
             pra_35_UnkNpcAIFunc24(script, npcAISettings, territoryPtr);
-            /* fallthrough */
+
         case 1:
             pra_35_UnkFunc13(script, npcAISettings, territoryPtr);
             break;
         case 2:
             pra_35_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
-            /* fallthrough */
+   
         case 3:
             pra_35_UnkFunc14(script, npcAISettings, territoryPtr);
             break;
@@ -95,13 +98,13 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
             break;
         case 5:
             pra_35_NpcJumpFunc2(script, npcAISettings, territoryPtr);
-            /* fallthrough */
+       
         case 11:
             pra_35_NpcJumpFunc(script, npcAISettings, territoryPtr);
             break;
         case 12:
             pra_35_UnkNpcAIFunc13(script, npcAISettings, territoryPtr);
-            /* fallthrough */
+  
         case 13:
             pra_35_UnkFunc15(script, npcAISettings, territoryPtr);
             break;
@@ -110,7 +113,7 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
             break;
         case 30:
             pra_35_UnkNpcAIFunc6(script);
-            /* fallthrough */
+        
         case 31:
             pra_35_UnkNpcAIFunc7(script);
             if (script->functionTemp[0] == 32) {
@@ -128,5 +131,6 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
+*/
 
 #include "world/common/UnkNpcAIFunc27.inc.c"
