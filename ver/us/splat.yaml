@@ -76,7 +76,7 @@ segments:
     - [0x13870, c, npc]
     - [0x1A1F0, c, 1a1f0_len_5390]
     - [0x1F580, c, encounter_api]
-    - [0x20EC0, c, 20ec0_len_5040]
+    - [0x20EC0, c, status_icons]
     - [0x23680, c]
     - [0x25AF0, c]
     - [0x25F00, c, 25f00_len_940]
