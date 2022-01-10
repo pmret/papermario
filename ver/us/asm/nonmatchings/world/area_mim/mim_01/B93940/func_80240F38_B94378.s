@@ -23,7 +23,7 @@ dlabel D_802447B0_B97BF0
 
 .section .text
 
-glabel func_80240F38_B94378
+glabel UnkNpcAIFunc46
 /* B94378 80240F38 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* B9437C 80240F3C AFBF0064 */  sw        $ra, 0x64($sp)
 /* B94380 80240F40 AFBE0060 */  sw        $fp, 0x60($sp)

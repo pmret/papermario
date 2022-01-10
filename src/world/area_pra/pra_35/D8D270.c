@@ -38,7 +38,6 @@ INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_80241AB4_D8ED04);
 
 #include "world/common/UnkFunc7.inc.c"
 
-//INCLUDE_ASM(s32, "world/area_pra/pra_35/D8D270", func_802423CC_D8F61C);
 ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -129,6 +128,5 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
     }
     return ApiStatus_BLOCK;
 }
-
 
 #include "world/common/UnkNpcAIFunc27.inc.c"
