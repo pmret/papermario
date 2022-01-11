@@ -2168,11 +2168,11 @@ segments:
     - [0x325160]
   - type: code
     start: 0x3251D0
-    vram: 0x802BD100
+    vram: 0x802C0000
     overlay: True
     subsegments:
-    - [0x3251D0, c]
-    - [0x3255E0, data]
+    - [0x3251D0, c, 3251D0]
+    - [0x3255E0]
   - type: code
     start: 0x325AD0
     vram: 0xE0200000
@@ -3670,21 +3670,7 @@ segments:
     - [0x4313F0, c, stage/kmr_04]
     - [0x431660, c, stage/kmr_05]
     - [0x4318D0, c, stage/kmr_06]
-    - [0x431B80, .data, area]
-    - [0x431FB0, .data, actor/goomba]
-    - [0x433970, .data, actor/spiked_goomba]
-    - [0x4354A0, .data, actor/paragoomba]
-    - [0x438740, .data, stage/kmr_02]
-    - [0x4387A0, .data, stage/kmr_03]
-    - [0x438BF0, .data, stage/kmr_04]
-    - [0x439040, .data, stage/kmr_05]
-    - [0x439440, .data, stage/kmr_06]
-    - [0x4398A0, .rodata, area]
-    - [0x4399AC, .rodata, stage/kmr_02] # FIXME: fucky rodata alignment
-    - [0x4399CC, .rodata, stage/kmr_03]
-    - [0x4399FC, .rodata, stage/kmr_04]
-    - [0x439A2C, .rodata, stage/kmr_05]
-    - [0x439A5C, .rodata, stage/kmr_06]
+    - [0x431B80]
   - dir: battle/area_kmr_part_2
     type: code
     start: 0x439A90
@@ -3813,23 +3799,38 @@ segments:
     type: code
     start: 0x4B11F0
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x4B11F0, c]
-    - [0x4B15D0, c]
-    - [0x4B1D90, c]
-    - [0x4B2550, c]
-    - [0x4B2D10, c]
-    - [0x4B34D0, c]
-    - [0x4B3740, data]
+    - [0x4B11F0, c, area]
+    - [0x4B11F0, c, actor/fake_bowser]
+    - [0x4B15D0, c, actor/green_ninja_koopa]
+    - [0x4B1D90, c, actor/red_ninja_koopa]
+    - [0x4B2550, c, actor/blue_ninja_koopa]
+    - [0x4B2D10, c, actor/yellow_ninja_koopa]
+    - [0x4B34D0, c, stage/trd_00]
+    - [0x4B34D0, c, stage/trd_01]
+    - [0x4B34D0, c, stage/trd_02]
+    - [0x4B34D0, c, stage/trd_02b]
+    - [0x4B34D0, c, stage/trd_03]
+    - [0x4B3740, c, stage/trd_04]
+    - [0x4B3740, c, stage/trd_05]
+    - [0x4B3740, c, stage/trd_05b]
+    - [0x4B3740, c, stage/trd_05c]
+    - [0x4B3740, c, stage/trd_05d]
+    - [0x4B3740, c, stage/trd_05e]
+    - [0x4B3740, c, stage/trd_05f]
+    - [0x4B3740]
   - dir: battle/area_trd_part_3
     type: code
     start: 0x4CF1B0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4CF1B0, c]
-    - [0x4CF3D0, data]
+    - [0x4CF1B0, c, area]
+    - [0x4CF1B0, c, actor/eldstar]
+    - [0x4CF3D0, c, stage/nok_01]
+    - [0x4CF3D0]
   - dir: battle/area_iwa
     type: code
     start: 0x4D01F0
@@ -4811,8 +4812,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x765C20, c]
-    - [0x765D10, data]
+    - [0x765C20, c, auto_jump]
+    - [0x765D10]
   - dir: battle/move/power_quake
     type: code
     start: 0x767C90
@@ -4827,8 +4828,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x76A830, c]
-    - [0x76A920, data]
+    - [0x76A830, c, auto_multibounce]
+    - [0x76A920]
   - dir: battle/move/power_jump
     type: code
     start: 0x76D760
