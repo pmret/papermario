@@ -341,10 +341,48 @@ s32 npc_raycast_up(s32 flags, f32 *startX, f32 *startY, f32 *startZ, f32 *hitDep
     }
 }
 
+s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length) {
+    f32 hitX;
+    f32 hitY;
+    f32 hitZ;
+    f32 hitDepth;
+    f32 hitNx;
+    f32 hitNy;
+    f32 hitNz;
+    s32 colliderID;
+    s32 entityID;
+    f32 sx, sy, sz;
+    f32 sx2, sy2, sz2;
+    s32 ret = -1;
 
+    sx2 = sx = *x;
+    sy2 = sy = *y;
+    sz2 = sz = *z;
+    hitDepth = *length;
+    colliderID = test_ray_colliders(ignoreFlags, sx, sy, sz, 0.0f, 1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    if (colliderID >= 0 && *length > hitDepth) {
+        *length = hitDepth;
+        ret = colliderID;
+        *x = sx = sx2;
+        *y = sy = sy2;
+        *z = sz = sz2;
+    }
 
-s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
-INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_up_corner, s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
+    hitDepth = 10.0f;
+    entityID = test_ray_entities(*x, *y, *z, 0.0f, 1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    sx = sx2;
+    sy = sy2;
+    sz = sz2;
+    if (entityID >= 0 && *length > hitDepth) {
+        ret = entityID | 0x4000;
+        *length = hitDepth;
+        *x = sx;
+        *y = sy;
+        *z = sz;
+    }
+
+    return ret;
+}
 
 INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_up_corners);
 
