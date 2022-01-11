@@ -3835,14 +3835,18 @@ segments:
     type: code
     start: 0x4D01F0
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x4D01F0, c]
-    - [0x4D02B0, c]
-    - [0x4D0310, c]
-    - [0x4D0360, c]
-    - [0x4D03B0, c]
-    - [0x4D0400, data]
+    - [0x4D01F0, c, area]
+    - [0x4D01F0, c, actor/cleft]
+    - [0x4D02B0, c, actor/monty_mole]
+    - [0x4D02B0, c, actor/buzzar]
+    - [0x4D0310, c, actor/whacka]
+    - [0x4D0360, c, stage/iwa_01]
+    - [0x4D03B0, c, stage/iwa_01b]
+    - [0x4D03B0, c, stage/iwa_02]
+    - [0x4D0400]
   - dir: battle/area_sbk
     type: code
     start: 0x4DA5E0

@@ -321,6 +321,7 @@ ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall);
 ApiStatus StopLoopingSoundAtActor(Evt* script, s32 isInitialCall);
 ApiStatus func_8026ED20(Evt* script, s32 isInitialCall);
 ApiStatus func_8026EBF8(Evt* script, s32 isInitialCall);
+ApiStatus SetupMashMeter(Evt* script, s32 isInitialCall);
 
 extern EvtSource PlayerScriptDispatcher;
 extern EvtSource PeachScriptDispatcher;

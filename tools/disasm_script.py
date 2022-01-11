@@ -390,9 +390,11 @@ replace_funcs = {
     "EnemyTestTarget"           :{0:"ActorIDs", 1:"HitResults", 2:"DamageTypes", 3:"StatusFlags", 5:"BattleStatusFlags1"},
 
     "FindKeyItem"               :{0:"ItemIDs"},
+    "FlyPartTo"                 :{0:"ActorIDs"},
     "FlyToGoal"                 :{0:"ActorIDs"},
     "ForceHomePos"              :{0:"ActorIDs"},
 
+    "func_8026DF88"             :{0:"ActorIDs"},
     "func_8026EA7C"             :{0:"ActorIDs"},
     "func_8026EBF8"             :{0:"ActorIDs"},
     "func_8026ED20"             :{0:"ActorIDs"},
@@ -403,6 +405,7 @@ replace_funcs = {
     "func_802CFE2C"             :{0:"NpcIDs"},
     "func_802D2520"             :{0:"PlayerAnims"},
 
+    "GetAnimation"              :{0:"ActorIDs", 2:"CustomAnim"},
     "GetActorFlags"             :{0:"ActorIDs", 1:"ActorFlags"},
     "GetActorHP"                :{0:"ActorIDs"},
     "GetActorPos"               :{0:"ActorIDs"},
@@ -420,6 +423,7 @@ replace_funcs = {
     "GetLastDamage"             :{0:"ActorIDs"},
     "GetLastElement"            :{0:"DamageTypes"},
     "GetLastEvent"              :{0:"ActorIDs", 1:"Events"},
+    "GetPartOffset"             :{0:"ActorIDs"},
     "GetPartPos"                :{0:"ActorIDs"},
     "GetPartRotation"           :{0:"ActorIDs"},
     "GetNpcPos"                 :{0:"NpcIDs"},
@@ -438,7 +442,7 @@ replace_funcs = {
     "JumpToGoal"                :{0:"ActorIDs", 2:"Bool", 3:"Bool", 4:"Bool"},
 
     "LandJump"                  :{0:"ActorIDs"},
-    "LoadActionCommand"         :{0:"ActionCommandDmaTable"},
+    "LoadActionCommand"         :{0:"ActionCommand"},
 
     "MakeEntity"                :{0:"Hex"},
     "MakeItemEntity"            :{0:"ItemIDs"},

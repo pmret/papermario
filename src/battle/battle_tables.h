@@ -31,4 +31,7 @@ extern StageList b_area_trd_part_2_stageTable;
 extern BattleList b_area_trd_part_3_formationTable;
 extern StageList b_area_trd_part_3_stageTable;
 
+extern BattleList b_area_iwa_formationTable;
+extern StageList b_area_iwa_stageTable;
+
 #endif

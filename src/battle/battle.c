@@ -66,8 +66,8 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_iwa),
         .name = "エリア ＩＷＡ",
-        .battles = 0x802185B8,
-        .stages = 0x802186E4,
+        .battles = &b_area_iwa_formationTable,
+        .stages = &b_area_iwa_stageTable,
     },
     {
         AREA(area_sbk),
