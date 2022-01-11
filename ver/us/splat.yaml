@@ -4698,8 +4698,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x73D860, c]
-    - [0x73D9A0, data]
+    - [0x73D860, c, jump]
+    - [0x73D9A0]
   - dir: battle/move/multibounce
     type: code
     start: 0x740CC0
