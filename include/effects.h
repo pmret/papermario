@@ -454,6 +454,24 @@ typedef struct Effect75 {
     /* 0x20 */ s32 unk_20;
 } Effect75; // size = 0x24
 
+
+typedef struct Effect134 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ f32 unk_34;
+} Effect134; // size = 0x38
+
 // TODO figure out what this actually is
 // playFX_4E invokes gEffectTable[78]'s entryPoint function
 // playFX_6F invokes gEffectTable[111]'s entryPoint function
@@ -505,13 +523,13 @@ typedef struct EffectInstance {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 numParts;
-    /* 0x0C */ Effect16* data; // often but not always EffectInstanceData
+    /* 0x0C */ void* data; // often but not always EffectInstanceData
     /* 0x10 */ struct EffectGraphics* graphics;
 } EffectInstance; // size = 0x14
 
 typedef struct EffectBlueprint {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 effectIndex;
+    /* 0x04 */ s32 effectID;
     /* 0x08 */ void (*init)(EffectInstance* effectInst);
     /* 0x0C */ void (*update)(EffectInstance* effectInst);
     /* 0x10 */ void (*renderWorld)(EffectInstance* effectInst);

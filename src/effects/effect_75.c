@@ -25,7 +25,7 @@ EffectInstance* fx_75_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32
     bp.renderWorld = fx_75_render;
     bp.unk_00 = 0;
     bp.unk_14 = NULL;
-    bp.effectIndex = 75;
+    bp.effectID = EFFECT_ID_4B;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
