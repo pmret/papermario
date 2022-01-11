@@ -286,7 +286,7 @@ EvtSource D_802A1FEC_766C0C = {
 };
 
 EvtSource D_802A2184_766DA4 = {
-    EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(D_802A11AC_765DCC)
     EVT_EXEC_WAIT(D_802A1320_765F40)
@@ -300,7 +300,7 @@ EvtSource D_802A2184_766DA4 = {
 };
 
 EvtSource D_802A2230 = {
-    EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(D_802A11AC_765DCC)
     EVT_CALL(InitTargetIterator)
@@ -326,7 +326,7 @@ EvtSource D_802A2230 = {
 };
 
 EvtSource D_802A2384 = {
-    EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(D_802A11AC_765DCC)
     EVT_EXEC_WAIT(D_802A14F0_766110)
@@ -349,14 +349,14 @@ EvtSource D_802A2384 = {
         EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
         EVT_WAIT_FRAMES(2)
         EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-        EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+        EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
         EVT_CALL(action_command_jump_CreateHudElements)
         EVT_CALL(func_802A9120_421B10, 13, 3)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_39)
         EVT_CALL(func_80275F00, 15, 2)
         EVT_GOTO(10)
     EVT_ELSE
-        EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+        EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
         EVT_CALL(action_command_jump_CreateHudElements)
         EVT_CALL(func_802A9120_421B10, 2, 3)
         EVT_CALL(func_80275F00, 4, 1)
@@ -430,7 +430,7 @@ EvtSource D_802A26BC_7672DC = {
     EVT_END_CHILD_THREAD
     EVT_CALL(func_80269524, LW(15))
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_CALL(func_802694A4, 0)
     EVT_CALL(func_802A9120_421B10, 24, 3)
@@ -481,7 +481,7 @@ EvtSource D_802A2A30_767650 = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_35)
     EVT_END_CHILD_THREAD
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_CALL(func_802694A4, 0)
     EVT_CALL(func_802A9120_421B10, 37, 3)
@@ -536,7 +536,7 @@ EvtSource D_802A2D5C_76797C = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_35)
     EVT_END_CHILD_THREAD
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_CALL(func_802694A4, 0)
     EVT_CALL(func_802A9120_421B10, 25, 3)

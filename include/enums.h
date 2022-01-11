@@ -3126,30 +3126,4 @@ enum DictionaryIndex {
     DICTIONARY_SIZE,
 };
 
-enum ActionCommandDmaTable {
-    ACTION_CMD_JUMP        = 1,
-    ACTION_CMD_HAMMER      = 2,
-    ACTION_CMD_FLEE        = 3,
-    ACTION_CMD_BREAK_FREE  = 4,
-    ACTION_CMD_WHIRLWIND   = 5,
-    ACTION_CMD_STOP_LEECH  = 6,
-    ACTION_CMD_07          = 7,
-    ACTION_CMD_DIZZY_SHELL = 8,
-    ACTION_CMD_FIRE_SHELL  = 9,
-    ACTION_CMD_0A          = 10,
-    ACTION_CMD_BOMB        = 11,
-    ACTION_CMD_BODY_SLAM   = 12,
-    ACTION_CMD_AIR_LIFT    = 13,
-    ACTION_CMD_AIR_RAID    = 14,
-    ACTION_CMD_SQUIRT      = 15,
-    ACTION_CMD_POWER       = 16,
-    ACTION_CMD_MEGA_SHOCK  = 17,
-    ACTION_CMD_SMACK       = 18,
-    ACTION_CMD_SPINY_SURGE = 19,
-    ACTION_CMD_HURRICANE   = 20,
-    ACTION_CMD_SPOOK       = 21,
-    ACTION_CMD_WATER_BLOCK = 22,
-    ACTION_CMD_TIDAL_WAVE  = 23,
-};
-
 #endif

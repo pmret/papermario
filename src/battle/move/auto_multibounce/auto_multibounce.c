@@ -286,7 +286,7 @@ EvtSource N(D_802A1FEC) = {
 };
 
 EvtSource N(D_802A2184) = {
-    EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(N(D_802A11AC))
     EVT_EXEC_WAIT(N(D_802A1320))
@@ -300,7 +300,7 @@ EvtSource N(D_802A2184) = {
 };
 
 EvtSource N(D_802A2230) = {
-    EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(N(D_802A11AC))
     EVT_CALL(InitTargetIterator)
@@ -326,7 +326,7 @@ EvtSource N(D_802A2230) = {
 };
 
 EvtSource N(D_802A2384) = {
-    EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(N(D_802A11AC))
     EVT_EXEC_WAIT(N(D_802A14F0))
@@ -349,14 +349,14 @@ EvtSource N(D_802A2384) = {
         EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
         EVT_WAIT_FRAMES(2)
         EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-        EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+        EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
         EVT_CALL(action_command_jump_CreateHudElements)
         EVT_CALL(func_802A9120_421B10, 13, 3)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_39)
         EVT_CALL(func_80275F00, 15, 2)
         EVT_GOTO(10)
     EVT_ELSE
-        EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+        EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
         EVT_CALL(action_command_jump_CreateHudElements)
         EVT_CALL(func_802A9120_421B10, 2, 3)
         EVT_CALL(func_80275F00, 4, 1)
@@ -440,7 +440,7 @@ EvtSource N(D_802A26A8) = {
         EVT_SET(LF(0), 1)
     EVT_END_IF
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_IF_EQ(LF(0), 1)
         EVT_CALL(func_802694A4, 0)
@@ -582,7 +582,7 @@ EvtSource N(D_802A2EC0) = {
         EVT_SET(LF(0), 1)
     EVT_END_IF
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_IF_EQ(LF(0), 1)
         EVT_CALL(func_802694A4, 0)
@@ -729,7 +729,7 @@ EvtSource N(D_802A372C) = {
         EVT_SET(LF(0), 1)
     EVT_END_IF
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(LoadActionCommand, ACTION_CMD_JUMP)
+    EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_IF_EQ(LF(0), 1)
         EVT_CALL(func_802694A4, 0)

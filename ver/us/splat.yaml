@@ -2212,8 +2212,8 @@ segments:
     vram: 0x802C0000
     overlay: True
     subsegments:
-    - [0x3251D0, c]
-    - [0x3255E0, .data, 3251D0]
+    - [0x3251D0, c, 3251D0]
+    - [0x3255E0]
   - type: code
     start: 0x325AD0
     vram: 0xE0200000

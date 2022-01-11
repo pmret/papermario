@@ -149,7 +149,7 @@ def get_constants():
     global VALID_SAVE_VARS
 
     valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims", "ActorType",
-        "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",  "ActionCommandDmaTable",
+        "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
         "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags", "Statuses", "Elements",
         "DamageTypes", "ElementImmunityFlags", "HitResults", "ActorFlags", "ActorPartFlags",
         "ActorEventFlags", "ElementFlags", "EncounterTriggers", "Abilities",
