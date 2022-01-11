@@ -83,7 +83,7 @@ def round_fixed(f: float) -> float:
     whole = round(g)
     if abs(g - whole) <= 100.0/1024.0:
         f = whole / 100.0
-    """
+        """
     return f
 
 def find_symbol_in_overlay(symbol_map, overlay_rom_addr, symbol_ram_addr):
@@ -411,6 +411,7 @@ replace_funcs = {
     "GetBattleFlags"            :{0:"BattleStatusFlags1"},
     "GetBattlePhase"            :{0:"Phases"},
     "GetDistanceToGoal"         :{0:"ActorIDs"},
+    "GetEnemyMaxHP"             :{0:"ActorIDs"},
     "GetGoalPos"                :{0:"ActorIDs"},
     "GetHomePos"                :{0:"ActorIDs"},
     "GetIndexFromHome"          :{0:"ActorIDs"},
@@ -419,6 +420,8 @@ replace_funcs = {
     "GetLastDamage"             :{0:"ActorIDs"},
     "GetLastElement"            :{0:"DamageTypes"},
     "GetLastEvent"              :{0:"ActorIDs", 1:"Events"},
+    "GetPartPos"                :{0:"ActorIDs"},
+    "GetPartRotation"           :{0:"ActorIDs"},
     "GetNpcPos"                 :{0:"NpcIDs"},
     "GetOriginalActorType"      :{0:"ActorIDs", 1:"ActorType"},
     "GetStatusFlags"            :{0:"ActorIDs", 1:"StatusFlags"},
@@ -435,6 +438,7 @@ replace_funcs = {
     "JumpToGoal"                :{0:"ActorIDs", 2:"Bool", 3:"Bool", 4:"Bool"},
 
     "LandJump"                  :{0:"ActorIDs"},
+    "LoadActionCommand"         :{0:"ActionCommandDmaTable"},
 
     "MakeEntity"                :{0:"Hex"},
     "MakeItemEntity"            :{0:"ItemIDs"},
@@ -452,6 +456,7 @@ replace_funcs = {
     "PlaySound"                 :{0:"SoundIDs"},
     "PlaySoundAt"               :{0:"SoundIDs"},
     "PlaySoundAtActor"          :{0:"ActorIDs", 1:"SoundIDs"},
+    "PlaySoundAtModel"          :{1:"SoundIDs"},
     "PlaySoundAtNpc"            :{0:"NpcIDs", 1:"SoundIDs"},
     "PlaySoundAtPart"           :{0:"ActorIDs", 2:"SoundIDs"},
 
@@ -470,6 +475,7 @@ replace_funcs = {
     "SetActorRotation"          :{0:"ActorIDs"},
     "SetActorRotationOffset"    :{0:"ActorIDs"},
     "SetActorScale"             :{0:"ActorIDs"},
+    "SetActorSize"              :{0:"ActorIDs"},
     "SetActorSounds"            :{0:"ActorIDs"},
     "SetActorSpeed"             :{0:"ActorIDs"},
     "SetActorType"              :{0:"ActorIDs", 1:"ActorType"},
@@ -484,6 +490,7 @@ replace_funcs = {
     "SetEnemyHP"                :{0:"ActorIDs"},
     "SetEnemyTargetOffset"      :{0:"ActorIDs"},
     "SetGoalPos"                :{0:"ActorIDs"},
+    "SetGoalToFirstTarget"      :{0:"ActorIDs"},
     "SetGoalToHome"             :{0:"ActorIDs"},
     "SetGoalToIndex"            :{0:"ActorIDs"},
     "SetGoalToTarget"           :{0:"ActorIDs"},
@@ -504,6 +511,8 @@ replace_funcs = {
     "SetNpcSprite"              :{1:"Hex"},
     "SetNpcYaw"                 :{0:"NpcIDs"},
 
+    "SetOwnerID"                :{0:"ActorIDs"},
+
     "SetPartAlpha"              :{0:"ActorIDs"},
     "SetPartDispOffset"         :{0:"ActorIDs"},
     "SetPartEventBits"          :{0:"ActorIDs", 2:"ActorEventFlags"},
@@ -512,9 +521,12 @@ replace_funcs = {
     "SetPartJumpGravity"        :{0:"ActorIDs"},
     "SetPartMoveSpeed"          :{0:"ActorIDs"},
     "SetPartPos"                :{0:"ActorIDs"},
+    "SetPartRotation"           :{0:"ActorIDs"},
+    "SetPartRotationOffset"     :{0:"ActorIDs"},
     "SetPartScale"              :{0:"ActorIDs"},
     "SetPartSize"               :{0:"ActorIDs"},
     "SetPartSounds"             :{0:"ActorIDs"},
+    "SetPartTargetFlagBits"     :{0:"ActorIDs"},
     "SetPartYaw"                :{0:"ActorIDs"},
 
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
@@ -1088,6 +1100,7 @@ if __name__ == "__main__":
                     break
 
                 loffset = script.end_pos
+                LOCAL_WORDS = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
                 looping = args.blob
                 try:
                     loffset = _script_lib[loffset - info[0] + info[2]][0][1]

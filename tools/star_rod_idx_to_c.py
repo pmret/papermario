@@ -168,7 +168,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             #if afterHeader:
             #    INCLUDES_NEEDED["forward"].append(f"EvtSource " + name + ";")
             #    afterHeader = False
-
+            disasm_script.LOCAL_WORDS = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
             script_text = disasm_script.ScriptDisassembler(
                 bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED,
                 transform_symbol_name=transform_symbol_name,
