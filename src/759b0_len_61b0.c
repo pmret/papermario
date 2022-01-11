@@ -329,6 +329,7 @@ s32 npc_raycast_up(s32 flags, f32 *startX, f32 *startY, f32 *startZ, f32 *hitDep
     }
 
     if (ret < 0) {
+        // TODO find better match
         colliderID = 0;
         return colliderID;
     } else {
@@ -384,7 +385,75 @@ s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length) 
     return ret;
 }
 
-INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_up_corners);
+s32 npc_raycast_up_corners(s32 arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg4, f32 arg5, f32 arg6) {
+    f32 sp18;
+    f32 sp1C;
+    f32 sp20;
+    f32 sp24;
+    f32 temp_f20;
+    f32 temp_f26;
+    f32 temp_f28;
+    f32 x,y,z;
+    s32 phi_s4;
+    s32 phi_v0;
+    f32 q;
+
+    temp_f20 = (arg5 * 6.28318f) / 360.0f;
+    temp_f28 = arg6 * sin_rad(temp_f20);
+    q = -arg6; // TODO find better match
+    temp_f26 = q * cos_rad(temp_f20);
+
+    x = *arg1;
+    y = *arg2;
+    z = *arg3;
+
+    sp24 = *arg4;
+    sp18 = x + temp_f28;
+    sp1C = y;
+    sp20 = z + temp_f26;
+
+    phi_s4 = -1;
+    phi_v0 = npc_raycast_up_corner(arg0, &sp18, &sp1C, &sp20, &sp24);
+
+    if (phi_v0 < 0) {
+        sp18 = x - temp_f28;
+        sp1C = y;
+        sp20 = z - temp_f26;
+        phi_v0 = npc_raycast_up_corner(arg0, &sp18, &sp1C, &sp20, &sp24);
+    }
+
+    if (phi_v0 < 0) {
+        sp18 = x + temp_f26;
+        sp1C = y;
+        sp20 = z + temp_f28;
+        phi_v0 = npc_raycast_up_corner(arg0, &sp18, &sp1C, &sp20, &sp24);
+    }
+
+    if (phi_v0 < 0) {
+        sp18 = x - temp_f26;
+        sp1C = y;
+        sp20 = z - temp_f28;
+        phi_v0 = npc_raycast_up_corner(arg0, &sp18, &sp1C, &sp20, &sp24);
+    }
+
+    if (phi_v0 >= 0) {
+        *arg1 = sp18;
+        *arg2 = sp1C;
+        *arg3 = sp20;
+        *arg4 = sp24;
+        phi_s4 = phi_v0;
+    }
+
+    if (phi_s4 < 0) {
+        *arg1 = sp18;
+        *arg2 = sp1C;
+        *arg3 = sp20;
+        *arg4 = 0;
+    }
+
+    return phi_s4;
+}
+
 
 s32 npc_raycast_general(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
                         f32* hitY, f32* hitZ, f32* outDepth, f32* hitNx, f32* hitNy, f32* hitNz);
