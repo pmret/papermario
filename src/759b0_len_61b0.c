@@ -1,5 +1,11 @@
 #include "common.h"
 
+extern s32 D_8010C970;
+extern s32 D_8010C94C;
+extern s32 D_8010C974;
+extern s32 D_8010C98C;
+extern s32 D_8010C968;
+
 PlayerStatus* gPlayerStatusPtr = &gPlayerStatus; // maybe wPlayerStatus
 
 s32 npc_raycast_down(s32 flags, f32 *startX, f32 *startY, f32 *startZ, f32 *hitDepth) {
@@ -64,7 +70,125 @@ s32 npc_raycast_down(s32 flags, f32 *startX, f32 *startY, f32 *startZ, f32 *hitD
     return colliderID;
 }
 
-INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_down_ahead, s32, f32*, f32*, f32*, f32*, f32, f32);
+s32 npc_raycast_down_ahead(s32 flags, f32 *posX, f32 *posY, f32 *posZ, f32 *hitDepth, f32 yaw, f32 radius) {
+    f32 startX;
+    f32 startY;
+    f32 startZ;
+    f32 depth; //sp24
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 sp34;
+    f32 sp38;
+    s32 hasCollision;
+
+    f32 cosTheta;
+    s32 colliderID;
+    f32 deltaX,deltaZ;
+
+    f32 theta, sinTheta, smallerRadius, minDepth, f28, f30;
+
+    hasCollision = FALSE;
+
+    x = *posX;
+    y = *posY;
+    z = *posZ;
+
+    smallerRadius = radius;
+
+    D_8010C970 = y;
+    D_8010C94C = *posY;
+    D_8010C974 = *posY;
+
+    smallerRadius /= 2.5;
+    sp38 = f30 = f28 = -32767.0f;
+
+    minDepth = fabsf(*hitDepth);
+    theta = (clamp_angle(yaw + 0.0f) * TAU) / 360.0f;
+    sinTheta = sin_rad(theta);
+    cosTheta = cos_rad(theta);
+
+    deltaX = smallerRadius * sinTheta;
+    deltaZ = -smallerRadius * cosTheta;
+
+    startX = x + deltaX;
+    startY = y;
+    startZ = z + deltaZ;
+    sp34 = depth = minDepth;
+
+    colliderID = npc_raycast_down(flags, &startX, &startY, &startZ, &depth);
+    if (colliderID >= 0) {
+        if (depth <= minDepth) {
+            f28 = startY;
+            D_8010C978 = colliderID;
+            D_8010C98C = colliderID;
+            D_8010C970 = f28;
+            minDepth = depth;
+
+            hasCollision = TRUE;
+        }
+    }
+
+
+    theta = clamp_angle(yaw + 120.0f) * TAU / 360.0f;
+    sinTheta = sin_rad(theta);
+    cosTheta = cos_rad(theta);
+    deltaX = smallerRadius * sinTheta;
+    deltaZ = -smallerRadius * cosTheta;
+
+    startX = x + deltaX;
+    startY = y;
+    startZ = z + deltaZ;
+    depth = sp34;
+
+    colliderID = npc_raycast_down(flags, &startX, &startY, &startZ, &depth);
+    if (colliderID >= 0) {
+        if (depth <= minDepth) {
+            f30 = startY;
+            D_8010C978 = colliderID;
+            D_8010C968 = colliderID;
+            D_8010C94C = f30;
+            minDepth = depth;
+            hasCollision = TRUE;
+        }
+    }
+
+    theta = clamp_angle(yaw - 120.0f) * TAU / 360.0f;
+    sinTheta = sin_rad(theta);
+    cosTheta = cos_rad(theta);
+    deltaX = smallerRadius * sinTheta;
+    deltaZ = -smallerRadius * cosTheta;
+
+    startX = x + deltaX;
+    startY = y;
+    startZ = z + deltaZ;
+    depth = sp34;
+
+    colliderID = npc_raycast_down(flags, &startX, &startY, &startZ, &depth);
+    if (colliderID >= 0) {
+        if (depth <= minDepth) {
+            sp38 = startY;
+            D_8010C978 = colliderID;
+            D_8010C968 = colliderID;
+            D_8010C974 = sp38;
+            minDepth = depth;
+
+            hasCollision = TRUE;
+        }
+    }
+
+    if (hasCollision) {
+        *posY = MAX(f30, f28);
+        if (*posY < sp38) {
+            *posY = sp38;
+        }
+        *hitDepth = minDepth;
+        return TRUE;
+    }
+
+    *posY = startY;
+    return FALSE;
+}
 
 INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_down_sides, s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32* arg4);
 
