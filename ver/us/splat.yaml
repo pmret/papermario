@@ -4674,8 +4674,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x7345A0, c]
-    - [0x734650, data]
+    - [0x7345A0, c, hammer]
+    - [0x734650]
   - dir: battle/move/spin_smash
     type: code
     start: 0x737890

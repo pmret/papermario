@@ -371,6 +371,7 @@ replace_funcs = {
     "BindNpcInteract"           :{0:"NpcIDs"},
     "BindTakeTurn"              :{0:"ActorIDs"},
 
+    "CheckButtonDown"           :{0:"Hex", 1:"Bool"},
     "ContinueSpeech"            :{1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
     "CopyBuffs"                 :{0:"ActorIDs", 1:"ActorIDs"},
     "CopyStatusEffects"         :{0:"ActorIDs", 1:"ActorIDs"},
