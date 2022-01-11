@@ -72,8 +72,8 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_sbk),
         .name = "エリア ＳＢＫ",
-        .battles = 0x8021FE80,
-        .stages = 0x8021FFE8,
+        .battles = &b_area_sbk_formationTable,
+        .stages = &b_area_sbk_stageTable,
     },
     {
         AREA(area_isk_part_1),

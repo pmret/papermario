@@ -1515,6 +1515,8 @@ enum PlayerBuffs {
 
 enum StatusFlags {
     STATUS_FLAG_1               = 0x00000001,
+    STATUS_FLAG_100             = 0x00000100,
+    STATUS_FLAG_200             = 0x00000200,
     STATUS_FLAG_SLEEP           = 0x00001000,
     STATUS_FLAG_STATIC          = 0x00002000,
     STATUS_FLAG_FROZEN          = 0x00004000,
@@ -1532,6 +1534,7 @@ enum StatusFlags {
     STATUS_FLAG_DEFENSE_BOOST   = 0x10000000,
     STATUS_FLAG_CHILL_OUT       = 0x20000000,
     STATUS_FLAG_RIGHT_ON        = 0x40000000,
+    STATUS_FLAG_80000000        = 0x80000000,
 };
 
 enum DamageTypes {

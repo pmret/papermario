@@ -3851,11 +3851,14 @@ segments:
     type: code
     start: 0x4DA5E0
     vram: 0x80218000
+    subalign: 16 # BSS aligns to 0x8 without this?
     overlay: True
     subsegments:
-    - [0x4DA5E0, c]
-    - [0x4DA6B0, c]
-    - [0x4DA860, data]
+    - [0x4DA5E0, c, actor/pokey]
+    - [0x4DA6B0, c, actor/bandit]
+    - [0x4DA6B0, c, stage/sbk_02]
+    - [0x4DA860, c, area]
+    - [0x4DA860]
   - dir: battle/area_isk_part_1
     type: code
     start: 0x4E2740
