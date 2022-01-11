@@ -760,8 +760,12 @@ class ScriptDisassembler:
             self.indent -= 1
 
             if self.prelude:
-                self.prefix_line(f"EvtSource {self.script_name} = {{")
-                self.write_line("};")
+                try:
+                    self.prefix_line(f"EvtSource D_{self.script_name - info[0] + info[2]:08X}_{self.script_name:08X} = {{")
+                    self.write_line("};")
+                except:
+                    self.prefix_line(f"EvtSource {self.script_name} = {{")
+                    self.write_line("};")
             self.done = True
         elif opcode == 0x02: self.write_line(f"EVT_RETURN")
         elif opcode == 0x03: self.write_line(f"EVT_LABEL({self.var(argv[0])})")

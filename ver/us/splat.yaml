@@ -3444,8 +3444,7 @@ segments:
     vram: 0x802A1000
     subsegments:
     - [0x415D90, c, 415D90]
-    - [0x4200D0, .data, 415D90]
-    - [0x420500]
+    - [0x4200D0]
   - type: code
     start: 0x4219F0
     vram: 0x802A9000
@@ -4691,8 +4690,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x73AED0, c]
-    - [0x73AF80, data]
+    - [0x73AED0, c, quake_hammer]
+    - [0x73AF80]
   - dir: battle/move/jump
     type: code
     start: 0x73D860
