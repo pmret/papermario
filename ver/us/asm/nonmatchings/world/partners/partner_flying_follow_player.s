@@ -903,7 +903,7 @@ glabel partner_flying_follow_player
 /* 87BE8 800EE738 44830000 */  mtc1      $v1, $f0
 /* 87BEC 800EE73C 00000000 */  nop
 /* 87BF0 800EE740 46800020 */  cvt.s.w   $f0, $f0
-/* 87BF4 800EE744 0C0371DE */  jal       npc_raycast_down_ahead
+/* 87BF4 800EE744 0C0371DE */  jal       npc_raycast_down_around
 /* 87BF8 800EE748 E7A00018 */   swc1     $f0, 0x18($sp)
 /* 87BFC 800EE74C 14400017 */  bnez      $v0, .L800EE7AC
 /* 87C00 800EE750 00000000 */   nop

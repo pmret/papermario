@@ -272,7 +272,7 @@ s32 pause_get_total_equipped_bp_cost(void);
 s32 pause_get_menu_msg(s32 index);
 void pause_sort_item_list(s16* arr, s32 len, s32 (*compare)(s16*, s16 *));
 
-s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
+s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
 s32 player_raycast_below_cam_relative(PlayerStatus*, f32*, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
 s32 npc_test_move_taller_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);

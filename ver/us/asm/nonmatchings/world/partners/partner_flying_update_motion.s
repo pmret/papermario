@@ -143,7 +143,7 @@ glabel partner_flying_update_motion
 /* 86C90 800ED7E0 44820000 */  mtc1      $v0, $f0
 /* 86C94 800ED7E4 00000000 */  nop
 /* 86C98 800ED7E8 46800020 */  cvt.s.w   $f0, $f0
-/* 86C9C 800ED7EC 0C0371DE */  jal       npc_raycast_down_ahead
+/* 86C9C 800ED7EC 0C0371DE */  jal       npc_raycast_down_around
 /* 86CA0 800ED7F0 E7A00018 */   swc1     $f0, 0x18($sp)
 /* 86CA4 800ED7F4 14400003 */  bnez      $v0, .L800ED804
 /* 86CA8 800ED7F8 00000000 */   nop

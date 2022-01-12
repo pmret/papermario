@@ -873,7 +873,7 @@ glabel update_item_entity_collectable
 /* CB60C 80134F0C 27A2002C */  addiu     $v0, $sp, 0x2c
 /* CB610 80134F10 AFA20010 */  sw        $v0, 0x10($sp)
 /* CB614 80134F14 E7A00014 */  swc1      $f0, 0x14($sp)
-/* CB618 80134F18 0C0371DE */  jal       npc_raycast_down_ahead
+/* CB618 80134F18 0C0371DE */  jal       npc_raycast_down_around
 /* CB61C 80134F1C E7A20018 */   swc1     $f2, 0x18($sp)
 /* CB620 80134F20 0804D3E1 */  j         .L80134F84
 /* CB624 80134F24 00000000 */   nop
