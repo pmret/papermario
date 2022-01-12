@@ -76,7 +76,7 @@ segments:
     - [0x13870, c, npc]
     - [0x1A1F0, c, 1a1f0_len_5390]
     - [0x1F580, c, encounter_api]
-    - [0x20EC0, c, 20ec0_len_5040]
+    - [0x20EC0, c, status_icons]
     - [0x23680, c]
     - [0x25AF0, c]
     - [0x25F00, c, 25f00_len_940]
@@ -328,53 +328,12 @@ segments:
     - [0x71430, bin, gspF3DEX2kawase_fifo_text]
     - [0x72A60, bin, gspF3DEX2kawase_fifo_data]
     - [0x72E80, bin, n_aspMain_data]
-    - [0x73130, .rodata, is_debug]
-    - [0x73148, .rodata, main_loop]
-    - [0x73160, .rodata, 43F0]
-    - [0x73200, .rodata, curtains]
-    - [0x73230, .rodata, crash_screen]
-    - [0x735E0, .rodata, 8800]
-    - [0x73610, .rodata, B0E0]
-    - [0x73680, .rodata, camera]
-    - [0x73690, .rodata, state_logos]
-    - [0x736E8, .rodata, state_file_select]
-    - [0x73720, .rodata, 111f0_len_860]
-    - [0x73738, .rodata, state_intro]
-    - [0x73790, .rodata, state_title_screen]
-    - [0x73860, .rodata, state_demo]
-    - [0x73880, .rodata, npc]
-    - [0x739F0, .rodata, 1a1f0_len_5390]
-    - [0x73AB0, .rodata, 20ec0_len_5040]
-    - [0x73B10, .rodata, 23680]
-    - [0x73CC0, .rodata, 28910_len_5090]
-    - [0x73CF0, .rodata, 2e230_len_2190]
-    - [0x73D08, .rodata, 30450]
-    - [0x73D30, .rodata, 33450]
-    - [0x73D40, .rodata, 341d0]
-    - [0x73DA0, .rodata, world/world]
-    - [0x74EA0, .rodata, os/osSetIntMask]
-    - [0x74F20, .rodata, os/3c490_len_3c0]
-    - [0x74F40, .rodata, os/3c940_len_140]
-    - [0x74F50, .rodata, os/guLookAt]
-    - [0x74F70, .rodata, os/lookathil]
-    - [0x74FA0, .rodata, os/lookatref]
-    - [0x74FB0, .rodata, os/perspective]
-    - [0x74FF0, .rodata, os/3FEA0]
-    - [0x75170, .rodata, os/42470_len_310]
-    - [0x75180, .rodata, os/exceptasm]
-    - [0x751D0, .rodata, os/46c70_len_e00]
-    - [0x75240, .rodata, os/48c00_len_5c0]
-    - [0x75340, .rodata, os/491c0_len_f80]
-    - [0x75540, .rodata, os/49C70]
-    - [0x75640, .rodata, battle/battle]
-    # bss starts at 0x8009A5B0
-    # 0x800 of bss until...
-    # - [0x75240, .bss, main_loop]
-    # - [0x75240, .bss, os/39cb0_len_100, 0x0] # size unknown
+    - [0x73130]
   - type: code
     start: 0x759B0
     vram: 0x800DC500
     subsegments:
+    - [0x759B0, c, bss2]
     - [0x759B0, c, 759b0_len_61b0]
     - [0x77480, c, 77480]
     - [0x7B440, c, 7B440]
@@ -701,11 +660,12 @@ segments:
     - [0x9DE60, data]
     - [0xA2D40, .data, 8a860_len_3f30]
     - [0xA2D90, data]
-    - [0xA5100] # bss at 8010C920
+    - [0xA5100]
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
     subsegments:
+    - [0xA5DD0, c, bss3]
     - [0xA5DD0, c, a5dd0_len_114e0]
     - [0xB4580, c, B4580]
     - [0xB72B0, c, entity]
@@ -728,7 +688,6 @@ segments:
     - [0xE2960, .data, entity]
     - [0xE2980, .data, msg]
     - [0xE2CA0, data]
-    #- [0xE2DF0, .data, cd180_len_38f0]
     - start: 0xE2DF0
       type: .data
       name: cd180_len_38f0
@@ -2209,11 +2168,11 @@ segments:
     - [0x325160]
   - type: code
     start: 0x3251D0
-    vram: 0x802BD100
+    vram: 0x802C0000
     overlay: True
     subsegments:
-    - [0x3251D0, c]
-    - [0x3255E0, data]
+    - [0x3251D0, c, 3251D0]
+    - [0x3255E0]
   - type: code
     start: 0x325AD0
     vram: 0xE0200000
@@ -3711,21 +3670,7 @@ segments:
     - [0x4313F0, c, stage/kmr_04]
     - [0x431660, c, stage/kmr_05]
     - [0x4318D0, c, stage/kmr_06]
-    - [0x431B80, .data, area]
-    - [0x431FB0, .data, actor/goomba]
-    - [0x433970, .data, actor/spiked_goomba]
-    - [0x4354A0, .data, actor/paragoomba]
-    - [0x438740, .data, stage/kmr_02]
-    - [0x4387A0, .data, stage/kmr_03]
-    - [0x438BF0, .data, stage/kmr_04]
-    - [0x439040, .data, stage/kmr_05]
-    - [0x439440, .data, stage/kmr_06]
-    - [0x4398A0, .rodata, area]
-    - [0x4399AC, .rodata, stage/kmr_02] # FIXME: fucky rodata alignment
-    - [0x4399CC, .rodata, stage/kmr_03]
-    - [0x4399FC, .rodata, stage/kmr_04]
-    - [0x439A2C, .rodata, stage/kmr_05]
-    - [0x439A5C, .rodata, stage/kmr_06]
+    - [0x431B80]
   - dir: battle/area_kmr_part_2
     type: code
     start: 0x439A90
@@ -3854,23 +3799,38 @@ segments:
     type: code
     start: 0x4B11F0
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x4B11F0, c]
-    - [0x4B15D0, c]
-    - [0x4B1D90, c]
-    - [0x4B2550, c]
-    - [0x4B2D10, c]
-    - [0x4B34D0, c]
-    - [0x4B3740, data]
+    - [0x4B11F0, c, area]
+    - [0x4B11F0, c, actor/fake_bowser]
+    - [0x4B15D0, c, actor/green_ninja_koopa]
+    - [0x4B1D90, c, actor/red_ninja_koopa]
+    - [0x4B2550, c, actor/blue_ninja_koopa]
+    - [0x4B2D10, c, actor/yellow_ninja_koopa]
+    - [0x4B34D0, c, stage/trd_00]
+    - [0x4B34D0, c, stage/trd_01]
+    - [0x4B34D0, c, stage/trd_02]
+    - [0x4B34D0, c, stage/trd_02b]
+    - [0x4B34D0, c, stage/trd_03]
+    - [0x4B3740, c, stage/trd_04]
+    - [0x4B3740, c, stage/trd_05]
+    - [0x4B3740, c, stage/trd_05b]
+    - [0x4B3740, c, stage/trd_05c]
+    - [0x4B3740, c, stage/trd_05d]
+    - [0x4B3740, c, stage/trd_05e]
+    - [0x4B3740, c, stage/trd_05f]
+    - [0x4B3740]
   - dir: battle/area_trd_part_3
     type: code
     start: 0x4CF1B0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4CF1B0, c]
-    - [0x4CF3D0, data]
+    - [0x4CF1B0, c, area]
+    - [0x4CF1B0, c, actor/eldstar]
+    - [0x4CF3D0, c, stage/nok_01]
+    - [0x4CF3D0]
   - dir: battle/area_iwa
     type: code
     start: 0x4D01F0
@@ -4852,8 +4812,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x765C20, c]
-    - [0x765D10, data]
+    - [0x765C20, c, auto_jump]
+    - [0x765D10]
   - dir: battle/move/power_quake
     type: code
     start: 0x767C90
@@ -4868,8 +4828,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x76A830, c]
-    - [0x76A920, data]
+    - [0x76A830, c, auto_multibounce]
+    - [0x76A920]
   - dir: battle/move/power_jump
     type: code
     start: 0x76D760

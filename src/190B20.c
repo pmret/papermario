@@ -187,7 +187,7 @@ s32 bActorNames[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_RED_NINJAKOOPA] = MSG_actor_red_ninjakoopa,
     [ACTOR_TYPE_BLUE_NINJAKOOPA] = MSG_actor_blue_ninjakoopa,
     [ACTOR_TYPE_YELLOW_NINJAKOOPA] = MSG_actor_yellow_ninjakoopa,
-    [ACTOR_TYPE_GOOMBARIO_TUTOR2] = MSG_party_goombario,
+    [ACTOR_TYPE_ELDSTAR] = MSG_party_goombario,
     [ACTOR_TYPE_BUZZAR] = MSG_actor_buzzar,
     [ACTOR_TYPE_TUTANKOOPA] = MSG_actor_tutankoopa,
     [ACTOR_TYPE_CHOMP] = MSG_actor_chomp,
@@ -404,7 +404,7 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_RED_NINJAKOOPA] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x0000, .delay = { 30, 30 } },
     [ACTOR_TYPE_BLUE_NINJAKOOPA] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x0000, .delay = { 30, 30 } },
     [ACTOR_TYPE_YELLOW_NINJAKOOPA] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x03E2, .hurt = 0x0000, .delay = { 30, 30 } },
-    [ACTOR_TYPE_GOOMBARIO_TUTOR2] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
+    [ACTOR_TYPE_ELDSTAR] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { 30, 30 } },
     [ACTOR_TYPE_BUZZAR] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x20EF, 0x20EF }, .jump = 0x0000, .hurt = 0x0000, .delay = { -14, -14 } },
     [ACTOR_TYPE_TUTANKOOPA] = { .walk = { 0x20BA, 0x03B4 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x0000, .delay = { -3, -3 } },
     [ACTOR_TYPE_CHOMP] = { .walk = { 0x0000, 0x0000 }, .fly = { 0x0000, 0x0000 }, .jump = 0x0000, .hurt = 0x010F, .delay = { 30, 30 } },
@@ -619,7 +619,7 @@ s32 bActorTattles[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_RED_NINJAKOOPA] = MSG_actor_red_ninjakoopa_tattle,
     [ACTOR_TYPE_BLUE_NINJAKOOPA] = MSG_actor_blue_ninjakoopa_tattle,
     [ACTOR_TYPE_YELLOW_NINJAKOOPA] = MSG_actor_yellow_ninjakoopa_tattle,
-    [ACTOR_TYPE_GOOMBARIO_TUTOR2] = NULL,
+    [ACTOR_TYPE_ELDSTAR] = NULL,
     [ACTOR_TYPE_BUZZAR] = MSG_actor_buzzar_tattle,
     [ACTOR_TYPE_TUTANKOOPA] = MSG_actor_tutankoopa_tattle,
     [ACTOR_TYPE_CHOMP] = MSG_actor_chomp_tattle,
@@ -834,7 +834,7 @@ ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_RED_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
     [ACTOR_TYPE_BLUE_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
     [ACTOR_TYPE_YELLOW_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_GOOMBARIO_TUTOR2] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_ELDSTAR] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_BUZZAR] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_TUTANKOOPA] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_CHOMP] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
@@ -2436,30 +2436,30 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                                 }
                                 target->unk_228 = playFX_81(0, target->currentPos.x, target->currentPos.y,
                                                             target->currentPos.z, 1.0f, 0);
-                                func_80047820(target->hudElementDataIndex, STATUS_FROZEN);
+                                create_status_debuff(target->hudElementDataIndex, STATUS_FROZEN);
                             }
                             return TRUE;
                         case STATUS_SLEEP:
                             func_80266DAC(target, 3);
-                            func_80047820(target->hudElementDataIndex, STATUS_SLEEP);
+                            create_status_debuff(target->hudElementDataIndex, STATUS_SLEEP);
                             return TRUE;
                         case STATUS_PARALYZE:
                             func_80266DAC(target, 7);
-                            func_80047820(target->hudElementDataIndex, STATUS_PARALYZE);
+                            create_status_debuff(target->hudElementDataIndex, STATUS_PARALYZE);
                             return TRUE;
                         case STATUS_DIZZY:
-                            func_80047820(target->hudElementDataIndex, STATUS_DIZZY);
+                            create_status_debuff(target->hudElementDataIndex, STATUS_DIZZY);
                             return TRUE;
                         case STATUS_FEAR:
                             func_80266DAC(target, 5);
-                            func_80047820(target->hudElementDataIndex, STATUS_FEAR);
+                            create_status_debuff(target->hudElementDataIndex, STATUS_FEAR);
                             return TRUE;
                         case STATUS_POISON:
                             func_80266DAC(target, 6);
-                            func_80047820(target->hudElementDataIndex, STATUS_POISON);
+                            create_status_debuff(target->hudElementDataIndex, STATUS_POISON);
                             return TRUE;
                         case STATUS_SHRINK:
-                            func_80047820(target->hudElementDataIndex, STATUS_SHRINK);
+                            create_status_debuff(target->hudElementDataIndex, STATUS_SHRINK);
                             return TRUE;
                     }
                 }
@@ -2477,7 +2477,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 }
                 target->status = STATUS_STATIC;
                 func_80266DAC(target, 4);
-                func_80047928(target->hudElementDataIndex, STATUS_STATIC);
+                create_status_static(target->hudElementDataIndex, STATUS_STATIC);
             }
             return TRUE;
         case STATUS_STONE:
@@ -2508,7 +2508,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     target->transDuration = 9;
                 }
                 target->status = STATUS_E;
-                func_80047A30(target->hudElementDataIndex, STATUS_E);
+                create_status_transparent(target->hudElementDataIndex, STATUS_E);
             }
             return TRUE;
         case STATUS_END:

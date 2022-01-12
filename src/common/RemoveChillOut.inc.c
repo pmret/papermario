@@ -7,7 +7,7 @@ ApiStatus N(RemoveChillOut)(Evt* script, s32 isInitialCall) {
 
     actor->chillOutTurns = 0;
     actor->chillOutAmount = 0;
-    remove_status_4(hudElementDataIndex);
+    remove_status_chill_out(hudElementDataIndex);
 
     return ApiStatus_DONE2;
 }

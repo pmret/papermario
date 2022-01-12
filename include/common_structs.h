@@ -743,7 +743,7 @@ typedef struct BattleStatus {
     /* 0x170 */ s8 nextEnemyIndex; /* (during enemy turn) who should go next */
     /* 0x171 */ s8 numEnemyActors;
     /* 0x172 */ s16 activeEnemyActorID; /* (during enemy turn) enemy currently using their move */
-    /* 0x174 */ struct Actor* currentTurnEnemy; 
+    /* 0x174 */ struct Actor* currentTurnEnemy;
     /* 0x178 */ s8 moveCategory; ///< 0 = jump, 1 = hammer, 5 = partner, ...
     /* 0x179 */ char unk_179;
     /* 0x17A */ s16 selectedItemID;
@@ -2120,7 +2120,7 @@ typedef struct struct802E4B10 {
 typedef struct {
     /* 0x00000 */ LookAt lookAt;
     /* 0x00020 */ char unk_20[0x10];
-    /* 0x00030 */ Matrix4s camPerspMatrix[8]; // could only be length 4, unsure
+    /* 0x00030 */ Mtx camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ Gfx mainGfx[0x2080];
     /* 0x10630 */ Gfx backgroundGfx[0x200]; // used by gfx_task_background
     /* 0x11630 */ Mtx matrixStack[0x200];

@@ -3,7 +3,6 @@
 
 #define NAMESPACE action_command_bomb
 
-void btl_set_popup_duration(s32);
 void sfx_adjust_env_sound_params(s32, s32, s32, s32);
 
 extern HudElementAnim D_80108AFC;

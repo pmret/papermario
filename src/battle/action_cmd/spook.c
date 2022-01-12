@@ -57,7 +57,6 @@ ApiStatus func_802A9000_430020(void) {
 
 #include "common/MashActionCommandInit.inc.c"
 
-// wip: decomp.me/scratch/tAhNa
 INCLUDE_ASM(s32, "battle/action_cmd/spook", func_802A9298_4302B8);
 
 #include "common/UnkActionCommandFunc1.inc.c"

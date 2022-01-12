@@ -54,14 +54,14 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_trd_part_2),
         .name = "エリア ＴＲＤ その２",
-        .battles = 0x8021A5DC,
-        .stages = 0x8021A604,
+        .battles = &b_area_trd_part_2_formationTable,
+        .stages = &b_area_trd_part_2_stageTable,
     },
     {
         AREA(area_trd_part_3),
         .name = "エリア ＴＲＤ その３",
-        .battles = 0x8021823C,
-        .stages = 0x80218264,
+        .battles = &b_area_trd_part_3_formationTable,
+        .stages = &b_area_trd_part_3_stageTable,
     },
     {
         AREA(area_iwa),
