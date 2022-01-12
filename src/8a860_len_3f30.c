@@ -6,13 +6,13 @@ extern HudElementAnim HudScript_StatusStarPiece[0];
 extern HudElementAnim HudScript_GreenArrowDown[0];
 extern HudElementAnim HudScript_GreenArrowUp[0];
 extern HudElementAnim HudScript_EmptyBar[0];
-extern HudElementAnim D_80109298;
-extern HudElementAnim D_801092C0;
-extern HudElementAnim D_801092E8;
-extern HudElementAnim D_80109310;
+extern HudElementAnim HudScript_PartnerRank1A;
+extern HudElementAnim HudScript_PartnerRank1B;
+extern HudElementAnim HudScript_PartnerRank2A;
+extern HudElementAnim HudScript_PartnerRank2B;
 
-HudElementAnim* D_80109890[] = { &D_80109298, &D_801092E8 };
-HudElementAnim* D_80109898[] = { &D_801092C0, &D_80109310 };
+HudElementAnim* D_80109890[] = { &HudScript_PartnerRank1A, &HudScript_PartnerRank2A };
+HudElementAnim* D_80109898[] = { &HudScript_PartnerRank1B, &HudScript_PartnerRank2B };
 s16 D_801098A0[] = {
     0x008C, 0x008C, 0x008D, 0x007C, 0x0086, 0x0077, 0x008D, 0x008D, 0x006C, 0x008D, 0x0084, 0x0084, 0x008D, 0x008C,
 };
@@ -200,13 +200,13 @@ s32 popup_menu_update(void) {
                 set_hud_element_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == 5) {
-                D_8010D660 = create_hud_element(D_80108558);
+                D_8010D660 = create_hud_element(HudScript_StatusCoin);
                 elementID = D_8010D660;
                 set_hud_element_flags(elementID, 0x80);
                 set_hud_element_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == 3 || gPopupMenu->popupType == 4) {
-                D_8010D664 = create_hud_element(D_80109270);
+                D_8010D664 = create_hud_element(HudScript_MenuTimes);
                 elementID = D_8010D664;
                 set_hud_element_flags(elementID, 0x80);
                 set_hud_element_tint(elementID, 255, 255, 255);

@@ -275,8 +275,8 @@ dlabel L802A97E4_42ACD4
 /* 42AD50 802A9860 0C0511FF */  jal       set_hud_element_anim
 /* 42AD54 802A9864 00000000 */   nop
 /* 42AD58 802A9868 8E240004 */  lw        $a0, 4($s1)
-/* 42AD5C 802A986C 3C058011 */  lui       $a1, %hi(D_80108B54)
-/* 42AD60 802A9870 24A58B54 */  addiu     $a1, $a1, %lo(D_80108B54)
+/* 42AD5C 802A986C 3C058011 */  lui       $a1, %hi(HudScript_AButtonDown)
+/* 42AD60 802A9870 24A58B54 */  addiu     $a1, $a1, %lo(HudScript_AButtonDown)
 /* 42AD64 802A9874 0C0511FF */  jal       set_hud_element_anim
 /* 42AD68 802A9878 00000000 */   nop
 /* 42AD6C 802A987C 0C05272D */  jal       sfx_play_sound
@@ -426,8 +426,8 @@ dlabel L802A98A8_42AD98
 /* 42AF68 802A9A78 0C05128B */  jal       clear_hud_element_flags
 /* 42AF6C 802A9A7C 24050002 */   addiu    $a1, $zero, 2
 /* 42AF70 802A9A80 8E240004 */  lw        $a0, 4($s1)
-/* 42AF74 802A9A84 3C058011 */  lui       $a1, %hi(D_80108B28)
-/* 42AF78 802A9A88 24A58B28 */  addiu     $a1, $a1, %lo(D_80108B28)
+/* 42AF74 802A9A84 3C058011 */  lui       $a1, %hi(HudScript_AButton)
+/* 42AF78 802A9A88 24A58B28 */  addiu     $a1, $a1, %lo(HudScript_AButton)
 /* 42AF7C 802A9A8C 0C0511FF */  jal       set_hud_element_anim
 /* 42AF80 802A9A90 00000000 */   nop
 .L802A9A94:
@@ -444,8 +444,8 @@ dlabel L802A98A8_42AD98
 /* 42AFAC 802A9ABC 0C0511FF */  jal       set_hud_element_anim
 /* 42AFB0 802A9AC0 00000000 */   nop
 /* 42AFB4 802A9AC4 8E240004 */  lw        $a0, 4($s1)
-/* 42AFB8 802A9AC8 3C058011 */  lui       $a1, %hi(D_80108B54)
-/* 42AFBC 802A9ACC 24A58B54 */  addiu     $a1, $a1, %lo(D_80108B54)
+/* 42AFB8 802A9AC8 3C058011 */  lui       $a1, %hi(HudScript_AButtonDown)
+/* 42AFBC 802A9ACC 24A58B54 */  addiu     $a1, $a1, %lo(HudScript_AButtonDown)
 /* 42AFC0 802A9AD0 0C0511FF */  jal       set_hud_element_anim
 /* 42AFC4 802A9AD4 00000000 */   nop
 /* 42AFC8 802A9AD8 0C05272D */  jal       sfx_play_sound
@@ -599,8 +599,8 @@ dlabel L802A9B04_42AFF4
 /* 42B1D0 802A9CE0 0C05128B */  jal       clear_hud_element_flags
 /* 42B1D4 802A9CE4 24050002 */   addiu    $a1, $zero, 2
 /* 42B1D8 802A9CE8 8E240004 */  lw        $a0, 4($s1)
-/* 42B1DC 802A9CEC 3C058011 */  lui       $a1, %hi(D_80108B28)
-/* 42B1E0 802A9CF0 24A58B28 */  addiu     $a1, $a1, %lo(D_80108B28)
+/* 42B1DC 802A9CEC 3C058011 */  lui       $a1, %hi(HudScript_AButton)
+/* 42B1E0 802A9CF0 24A58B28 */  addiu     $a1, $a1, %lo(HudScript_AButton)
 /* 42B1E4 802A9CF4 0C0511FF */  jal       set_hud_element_anim
 /* 42B1E8 802A9CF8 00000000 */   nop
 .L802A9CFC:
@@ -617,8 +617,8 @@ dlabel L802A9B04_42AFF4
 /* 42B214 802A9D24 0C0511FF */  jal       set_hud_element_anim
 /* 42B218 802A9D28 00000000 */   nop
 /* 42B21C 802A9D2C 8E240004 */  lw        $a0, 4($s1)
-/* 42B220 802A9D30 3C058011 */  lui       $a1, %hi(D_80108B54)
-/* 42B224 802A9D34 24A58B54 */  addiu     $a1, $a1, %lo(D_80108B54)
+/* 42B220 802A9D30 3C058011 */  lui       $a1, %hi(HudScript_AButtonDown)
+/* 42B224 802A9D34 24A58B54 */  addiu     $a1, $a1, %lo(HudScript_AButtonDown)
 /* 42B228 802A9D38 0C0511FF */  jal       set_hud_element_anim
 /* 42B22C 802A9D3C 00000000 */   nop
 /* 42B230 802A9D40 0C05272D */  jal       sfx_play_sound
@@ -778,8 +778,8 @@ dlabel L802A9D7C_42B26C
 /* 42B44C 802A9F5C 0C05128B */  jal       clear_hud_element_flags
 /* 42B450 802A9F60 24050002 */   addiu    $a1, $zero, 2
 /* 42B454 802A9F64 8E240004 */  lw        $a0, 4($s1)
-/* 42B458 802A9F68 3C058011 */  lui       $a1, %hi(D_80108B28)
-/* 42B45C 802A9F6C 24A58B28 */  addiu     $a1, $a1, %lo(D_80108B28)
+/* 42B458 802A9F68 3C058011 */  lui       $a1, %hi(HudScript_AButton)
+/* 42B45C 802A9F6C 24A58B28 */  addiu     $a1, $a1, %lo(HudScript_AButton)
 /* 42B460 802A9F70 0C0511FF */  jal       set_hud_element_anim
 /* 42B464 802A9F74 00000000 */   nop
 /* 42B468 802A9F78 24020010 */  addiu     $v0, $zero, 0x10

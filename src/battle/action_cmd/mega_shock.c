@@ -3,13 +3,13 @@
 
 #define NAMESPACE action_command_mega_shock
 
-extern HudElementAnim D_80108AFC;
-extern HudElementAnim D_80108B28;
+extern HudElementAnim HudScript_BlueMeter;
+extern HudElementAnim HudScript_AButton;
 extern HudElementAnim D_8029231C;
 extern HudElementAnim D_80292974;
 extern s32 D_802943C0;
 
-extern HudElementAnim D_80108B80;
+extern HudElementAnim HudScript_MashAButton;
 extern HudElementAnim D_80292374;
 
 void sfx_adjust_env_sound_params(s32, s32, s32, s32);
@@ -51,7 +51,7 @@ ApiStatus func_802A9000_42DA10(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -0x30;
     actionCommandStatus->hudElementY = 0x50;
 
-    elementID = create_hud_element(&D_80108B28);
+    elementID = create_hud_element(&HudScript_AButton);
     actionCommandStatus->hudElements[0] = elementID;
     set_hud_element_flags(elementID, 0x82);
     set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
@@ -63,7 +63,7 @@ ApiStatus func_802A9000_42DA10(Evt* script, s32 isInitialCall) {
     set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(elementID, 0);
 
-    elementID = create_hud_element(&D_80108AFC);
+    elementID = create_hud_element(&HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = elementID;
     set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
     set_hud_element_render_depth(elementID, 0);
@@ -177,7 +177,7 @@ void func_802A92A0_42DCB0(void) {
                 actionCommandStatus->unk_4E--;
                 break;
             }
-            set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108B80);
+            set_hud_element_anim(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
             set_hud_element_anim(actionCommandStatus->hudElements[2], &D_80292374);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_5C = 0;

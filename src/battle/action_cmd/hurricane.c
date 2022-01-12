@@ -4,8 +4,8 @@
 #define NAMESPACE action_command_hurricane
 
 extern s32 D_80294420;
-extern HudElementAnim D_80108AFC;
-extern HudElementAnim D_80108B28;
+extern HudElementAnim HudScript_BlueMeter;
+extern HudElementAnim HudScript_AButton;
 extern HudElementAnim D_8029231C;
 extern HudElementAnim D_80292974;
 
@@ -33,7 +33,7 @@ ApiStatus func_802A9000_42F6E0(void) {
     actionCommandStatus->unk_68 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(&D_80108B28);
+    hudElement = create_hud_element(&HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
@@ -45,7 +45,7 @@ ApiStatus func_802A9000_42F6E0(void) {
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
 
-    hudElement = create_hud_element(&D_80108AFC);
+    hudElement = create_hud_element(&HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);

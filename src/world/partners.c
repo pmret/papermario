@@ -36,8 +36,8 @@
 #include "partner/twink.h"
 #include "sprite/npc/twink.h"
 
-extern s32 D_80108068[];
-extern s32 D_801083D8[];
+extern s32 HudScript_StatusTimes[];
+extern s32 HudScript_StatusStar1[];
 extern f32 wPartnerTetherDistance;
 extern s16 D_8010CFC8;
 extern s16 D_8010CFCA;
@@ -70,10 +70,10 @@ s32 D_800F7F40[] = {
 s32 D_800F7F80[] = {
     0x801080B8, 0x801080E0, 0x80108108, 0x80108130, 0x80108158, 0x80108180, 0x801081A8, 0x801081D0, 0x801081F8, 0x80108220,
 };
-s32* D_800F7FA8 = &D_80108068;
+s32* D_800F7FA8 = &HudScript_StatusTimes;
 s32 D_800F7FAC = 0x80108090;
 s32 D_800F7FB0[] = { 0x80108298, 0x801082E8, 0x801082C0, 0x80108310, 0x80108338, 0x80108360, 0x80108388 };
-s32 D_800F7FCC[] = { (s32) &D_801083D8, 0x80108428, 0x80108400, 0x80108450, 0x80108478, 0x801084A0, 0x801084C8 };
+s32 D_800F7FCC[] = { (s32) &HudScript_StatusStar1, 0x80108428, 0x80108400, 0x80108450, 0x80108478, 0x801084A0, 0x801084C8 };
 
 s32 D_800F7FE8 = -1;
 s32 D_800F7FEC = 1;

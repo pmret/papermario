@@ -67,8 +67,8 @@ glabel func_8023803C_70BD4C
 /* 70BE38 80238128 3C138024 */  lui       $s3, %hi(D_8023AB80_70E890)
 /* 70BE3C 8023812C 0C0513CA */  jal       create_hud_element_transform_A
 /* 70BE40 80238130 2673AB80 */   addiu    $s3, $s3, %lo(D_8023AB80_70E890)
-/* 70BE44 80238134 3C048011 */  lui       $a0, %hi(D_80108E1C)
-/* 70BE48 80238138 24848E1C */  addiu     $a0, $a0, %lo(D_80108E1C)
+/* 70BE44 80238134 3C048011 */  lui       $a0, %hi(HudScript_StickNeutral)
+/* 70BE48 80238138 24848E1C */  addiu     $a0, $a0, %lo(HudScript_StickNeutral)
 /* 70BE4C 8023813C 3C118024 */  lui       $s1, %hi(D_8023D2C0)
 /* 70BE50 80238140 2631D2C0 */  addiu     $s1, $s1, %lo(D_8023D2C0)
 /* 70BE54 80238144 2402FFD0 */  addiu     $v0, $zero, -0x30
@@ -231,8 +231,8 @@ glabel func_8023803C_70BD4C
 /* 70C0B8 802383A8 0808E21D */  j         .L80238874
 /* 70C0BC 802383AC AC620000 */   sw       $v0, ($v1)
 .L802383B0:
-/* 70C0C0 802383B0 3C058011 */  lui       $a1, %hi(D_801091E4)
-/* 70C0C4 802383B4 24A591E4 */  addiu     $a1, $a1, %lo(D_801091E4)
+/* 70C0C0 802383B0 3C058011 */  lui       $a1, %hi(HudScript_StickTapRight)
+/* 70C0C4 802383B4 24A591E4 */  addiu     $a1, $a1, %lo(HudScript_StickTapRight)
 /* 70C0C8 802383B8 3C048024 */  lui       $a0, %hi(D_8023D2BC)
 /* 70C0CC 802383BC 8C84D2BC */  lw        $a0, %lo(D_8023D2BC)($a0)
 /* 70C0D0 802383C0 24020050 */  addiu     $v0, $zero, 0x50

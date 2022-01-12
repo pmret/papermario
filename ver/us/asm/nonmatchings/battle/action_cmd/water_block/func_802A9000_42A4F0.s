@@ -36,8 +36,8 @@ glabel func_802A9000_42A4F0
 /* 42A568 802A9078 8E050000 */  lw        $a1, ($s0)
 /* 42A56C 802A907C 0C0B1EAF */  jal       evt_get_variable
 /* 42A570 802A9080 0220202D */   daddu    $a0, $s1, $zero
-/* 42A574 802A9084 3C048011 */  lui       $a0, %hi(D_80108B28)
-/* 42A578 802A9088 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)
+/* 42A574 802A9084 3C048011 */  lui       $a0, %hi(HudScript_AButton)
+/* 42A578 802A9088 24848B28 */  addiu     $a0, $a0, %lo(HudScript_AButton)
 /* 42A57C 802A908C A6420064 */  sh        $v0, 0x64($s2)
 /* 42A580 802A9090 24020001 */  addiu     $v0, $zero, 1
 /* 42A584 802A9094 A2620084 */  sb        $v0, 0x84($s3)

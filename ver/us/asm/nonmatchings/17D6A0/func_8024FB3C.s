@@ -110,13 +110,13 @@ glabel func_8024FB3C
 /* 17E540 8024FC60 00400008 */  jr        $v0
 /* 17E544 8024FC64 00000000 */   nop
 .L8024FC68_17E548:
-/* 17E548 8024FC68 3C048011 */  lui       $a0, %hi(D_80108E1C)
-/* 17E54C 8024FC6C 24848E1C */  addiu     $a0, $a0, %lo(D_80108E1C)
+/* 17E548 8024FC68 3C048011 */  lui       $a0, %hi(HudScript_StickNeutral)
+/* 17E54C 8024FC6C 24848E1C */  addiu     $a0, $a0, %lo(HudScript_StickNeutral)
 /* 17E550 8024FC70 08094060 */  j         .L80250180
 /* 17E554 8024FC74 00000000 */   nop
 .L8024FC78_17E558:
-/* 17E558 8024FC78 3C048011 */  lui       $a0, %hi(D_80108E1C)
-/* 17E55C 8024FC7C 24848E1C */  addiu     $a0, $a0, %lo(D_80108E1C)
+/* 17E558 8024FC78 3C048011 */  lui       $a0, %hi(HudScript_StickNeutral)
+/* 17E55C 8024FC7C 24848E1C */  addiu     $a0, $a0, %lo(HudScript_StickNeutral)
 /* 17E560 8024FC80 0C050529 */  jal       create_hud_element
 /* 17E564 8024FC84 00000000 */   nop
 /* 17E568 8024FC88 00022400 */  sll       $a0, $v0, 0x10
@@ -141,8 +141,8 @@ glabel func_8024FB3C
 /* 17E5B4 8024FCD4 080941E3 */  j         .L8025078C
 /* 17E5B8 8024FCD8 24050080 */   addiu    $a1, $zero, 0x80
 .L8024FCDC_17E5BC:
-/* 17E5BC 8024FCDC 3C048011 */  lui       $a0, %hi(D_80108E1C)
-/* 17E5C0 8024FCE0 24848E1C */  addiu     $a0, $a0, %lo(D_80108E1C)
+/* 17E5BC 8024FCDC 3C048011 */  lui       $a0, %hi(HudScript_StickNeutral)
+/* 17E5C0 8024FCE0 24848E1C */  addiu     $a0, $a0, %lo(HudScript_StickNeutral)
 /* 17E5C4 8024FCE4 0C050529 */  jal       create_hud_element
 /* 17E5C8 8024FCE8 00000000 */   nop
 /* 17E5CC 8024FCEC 00022400 */  sll       $a0, $v0, 0x10
@@ -223,13 +223,13 @@ glabel func_8024FB3C
 /* 17E6F4 8024FE14 080941E3 */  j         .L8025078C
 /* 17E6F8 8024FE18 24050080 */   addiu    $a1, $zero, 0x80
 .L8024FE1C_17E6FC:
-/* 17E6FC 8024FE1C 3C048011 */  lui       $a0, %hi(D_80108E1C)
-/* 17E700 8024FE20 24848E1C */  addiu     $a0, $a0, %lo(D_80108E1C)
+/* 17E6FC 8024FE1C 3C048011 */  lui       $a0, %hi(HudScript_StickNeutral)
+/* 17E700 8024FE20 24848E1C */  addiu     $a0, $a0, %lo(HudScript_StickNeutral)
 /* 17E704 8024FE24 08094060 */  j         .L80250180
 /* 17E708 8024FE28 00000000 */   nop
 .L8024FE2C_17E70C:
-/* 17E70C 8024FE2C 3C048011 */  lui       $a0, %hi(D_80108B28)
-/* 17E710 8024FE30 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)
+/* 17E70C 8024FE2C 3C048011 */  lui       $a0, %hi(HudScript_AButton)
+/* 17E710 8024FE30 24848B28 */  addiu     $a0, $a0, %lo(HudScript_AButton)
 /* 17E714 8024FE34 0C050529 */  jal       create_hud_element
 /* 17E718 8024FE38 00000000 */   nop
 /* 17E71C 8024FE3C 00022400 */  sll       $a0, $v0, 0x10
@@ -269,8 +269,8 @@ glabel func_8024FB3C
 /* 17E7A4 8024FEC4 080941E3 */  j         .L8025078C
 /* 17E7A8 8024FEC8 34058080 */   ori      $a1, $zero, 0x8080
 .L8024FECC_17E7AC:
-/* 17E7AC 8024FECC 3C048011 */  lui       $a0, %hi(D_80108E1C)
-/* 17E7B0 8024FED0 24848E1C */  addiu     $a0, $a0, %lo(D_80108E1C)
+/* 17E7AC 8024FECC 3C048011 */  lui       $a0, %hi(HudScript_StickNeutral)
+/* 17E7B0 8024FED0 24848E1C */  addiu     $a0, $a0, %lo(HudScript_StickNeutral)
 /* 17E7B4 8024FED4 08094060 */  j         .L80250180
 /* 17E7B8 8024FED8 00000000 */   nop
 .L8024FEDC_17E7BC:
@@ -289,8 +289,8 @@ glabel func_8024FB3C
 /* 17E7EC 8024FF0C 86040000 */  lh        $a0, ($s0)
 /* 17E7F0 8024FF10 0C051261 */  jal       set_hud_element_render_pos
 /* 17E7F4 8024FF14 00A0302D */   daddu    $a2, $a1, $zero
-/* 17E7F8 8024FF18 3C048011 */  lui       $a0, %hi(D_80108B28)
-/* 17E7FC 8024FF1C 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)
+/* 17E7F8 8024FF18 3C048011 */  lui       $a0, %hi(HudScript_AButton)
+/* 17E7FC 8024FF1C 24848B28 */  addiu     $a0, $a0, %lo(HudScript_AButton)
 /* 17E800 8024FF20 0C050529 */  jal       create_hud_element
 /* 17E804 8024FF24 00000000 */   nop
 /* 17E808 8024FF28 00022400 */  sll       $a0, $v0, 0x10
@@ -300,8 +300,8 @@ glabel func_8024FB3C
 /* 17E818 8024FF38 080941E3 */  j         .L8025078C
 /* 17E81C 8024FF3C 34058080 */   ori      $a1, $zero, 0x8080
 .L8024FF40_17E820:
-/* 17E820 8024FF40 3C048011 */  lui       $a0, %hi(D_80108B28)
-/* 17E824 8024FF44 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)
+/* 17E820 8024FF40 3C048011 */  lui       $a0, %hi(HudScript_AButton)
+/* 17E824 8024FF44 24848B28 */  addiu     $a0, $a0, %lo(HudScript_AButton)
 /* 17E828 8024FF48 0C050529 */  jal       create_hud_element
 /* 17E82C 8024FF4C 00000000 */   nop
 /* 17E830 8024FF50 00022400 */  sll       $a0, $v0, 0x10
@@ -325,8 +325,8 @@ glabel func_8024FB3C
 /* 17E878 8024FF98 080941E4 */  j         .L80250790
 /* 17E87C 8024FF9C 34058080 */   ori      $a1, $zero, 0x8080
 .L8024FFA0_17E880:
-/* 17E880 8024FFA0 3C048011 */  lui       $a0, %hi(D_80108B28)
-/* 17E884 8024FFA4 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)
+/* 17E880 8024FFA0 3C048011 */  lui       $a0, %hi(HudScript_AButton)
+/* 17E884 8024FFA4 24848B28 */  addiu     $a0, $a0, %lo(HudScript_AButton)
 /* 17E888 8024FFA8 0C050529 */  jal       create_hud_element
 /* 17E88C 8024FFAC 00000000 */   nop
 /* 17E890 8024FFB0 00022400 */  sll       $a0, $v0, 0x10
@@ -366,8 +366,8 @@ glabel func_8024FB3C
 /* 17E914 80250034 86040000 */  lh        $a0, ($s0)
 /* 17E918 80250038 0C051261 */  jal       set_hud_element_render_pos
 /* 17E91C 8025003C 00A0302D */   daddu    $a2, $a1, $zero
-/* 17E920 80250040 3C048011 */  lui       $a0, %hi(D_80108B54)
-/* 17E924 80250044 24848B54 */  addiu     $a0, $a0, %lo(D_80108B54)
+/* 17E920 80250040 3C048011 */  lui       $a0, %hi(HudScript_AButtonDown)
+/* 17E924 80250044 24848B54 */  addiu     $a0, $a0, %lo(HudScript_AButtonDown)
 /* 17E928 80250048 0C050529 */  jal       create_hud_element
 /* 17E92C 8025004C 00000000 */   nop
 /* 17E930 80250050 00022400 */  sll       $a0, $v0, 0x10
@@ -377,8 +377,8 @@ glabel func_8024FB3C
 /* 17E940 80250060 080941E3 */  j         .L8025078C
 /* 17E944 80250064 34058080 */   ori      $a1, $zero, 0x8080
 .L80250068_17E948:
-/* 17E948 80250068 3C048011 */  lui       $a0, %hi(D_80108E1C)
-/* 17E94C 8025006C 24848E1C */  addiu     $a0, $a0, %lo(D_80108E1C)
+/* 17E948 80250068 3C048011 */  lui       $a0, %hi(HudScript_StickNeutral)
+/* 17E94C 8025006C 24848E1C */  addiu     $a0, $a0, %lo(HudScript_StickNeutral)
 /* 17E950 80250070 0C050529 */  jal       create_hud_element
 /* 17E954 80250074 00000000 */   nop
 /* 17E958 80250078 00022400 */  sll       $a0, $v0, 0x10
@@ -432,8 +432,8 @@ glabel func_8024FB3C
 /* 17EA14 80250134 080941EB */  j         .L802507AC
 /* 17EA18 80250138 24020001 */   addiu    $v0, $zero, 1
 .L8025013C_17EA1C:
-/* 17EA1C 8025013C 3C048011 */  lui       $a0, %hi(D_80108B28)
-/* 17EA20 80250140 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)
+/* 17EA1C 8025013C 3C048011 */  lui       $a0, %hi(HudScript_AButton)
+/* 17EA20 80250140 24848B28 */  addiu     $a0, $a0, %lo(HudScript_AButton)
 /* 17EA24 80250144 0C050529 */  jal       create_hud_element
 /* 17EA28 80250148 00000000 */   nop
 /* 17EA2C 8025014C 00022400 */  sll       $a0, $v0, 0x10
@@ -448,8 +448,8 @@ glabel func_8024FB3C
 /* 17EA50 80250170 0C051261 */  jal       set_hud_element_render_pos
 /* 17EA54 80250174 00A0302D */   daddu    $a2, $a1, $zero
 .L80250178_17EA58:
-/* 17EA58 80250178 3C048011 */  lui       $a0, %hi(D_80108B28)
-/* 17EA5C 8025017C 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)
+/* 17EA58 80250178 3C048011 */  lui       $a0, %hi(HudScript_AButton)
+/* 17EA5C 8025017C 24848B28 */  addiu     $a0, $a0, %lo(HudScript_AButton)
 .L80250180:
 /* 17EA60 80250180 0C050529 */  jal       create_hud_element
 /* 17EA64 80250184 00000000 */   nop
@@ -497,22 +497,22 @@ glabel func_8024FB3C
 .L80250224_17EB04:
 /* 17EB04 80250224 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17EB08 80250228 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17EB0C 8025022C 3C058011 */  lui       $a1, %hi(D_80108B80)
-/* 17EB10 80250230 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
+/* 17EB0C 8025022C 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
+/* 17EB10 80250230 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
 /* 17EB14 80250234 0809412D */  j         .L802504B4
 /* 17EB18 80250238 00000000 */   nop
 .L8025023C_17EB1C:
 /* 17EB1C 8025023C 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17EB20 80250240 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17EB24 80250244 3C058011 */  lui       $a1, %hi(D_80108F30)
-/* 17EB28 80250248 24A58F30 */  addiu     $a1, $a1, %lo(D_80108F30)
+/* 17EB24 80250244 3C058011 */  lui       $a1, %hi(HudScript_StickMashLeft)
+/* 17EB28 80250248 24A58F30 */  addiu     $a1, $a1, %lo(HudScript_StickMashLeft)
 /* 17EB2C 8025024C 0809412D */  j         .L802504B4
 /* 17EB30 80250250 00000000 */   nop
 .L80250254_17EB34:
 /* 17EB34 80250254 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17EB38 80250258 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17EB3C 8025025C 3C058011 */  lui       $a1, %hi(D_80108F90)
-/* 17EB40 80250260 24A58F90 */  addiu     $a1, $a1, %lo(D_80108F90)
+/* 17EB3C 8025025C 3C058011 */  lui       $a1, %hi(HudScript_StickTapLeft)
+/* 17EB40 80250260 24A58F90 */  addiu     $a1, $a1, %lo(HudScript_StickTapLeft)
 /* 17EB44 80250264 0C0511FF */  jal       set_hud_element_anim
 /* 17EB48 80250268 00000000 */   nop
 /* 17EB4C 8025026C 3C04802A */  lui       $a0, %hi(D_8029F644)
@@ -524,8 +524,8 @@ glabel func_8024FB3C
 .L80250284_17EB64:
 /* 17EB64 80250284 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17EB68 80250288 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17EB6C 8025028C 3C058011 */  lui       $a1, %hi(D_80108F90)
-/* 17EB70 80250290 24A58F90 */  addiu     $a1, $a1, %lo(D_80108F90)
+/* 17EB6C 8025028C 3C058011 */  lui       $a1, %hi(HudScript_StickTapLeft)
+/* 17EB70 80250290 24A58F90 */  addiu     $a1, $a1, %lo(HudScript_StickTapLeft)
 /* 17EB74 80250294 0C0511FF */  jal       set_hud_element_anim
 /* 17EB78 80250298 00000000 */   nop
 /* 17EB7C 8025029C 3C04802A */  lui       $a0, %hi(D_8029F644)
@@ -562,15 +562,15 @@ glabel func_8024FB3C
 .L80250314_17EBF4:
 /* 17EBF4 80250314 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17EBF8 80250318 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17EBFC 8025031C 3C058011 */  lui       $a1, %hi(D_80108E80)
-/* 17EC00 80250320 24A58E80 */  addiu     $a1, $a1, %lo(D_80108E80)
+/* 17EBFC 8025031C 3C058011 */  lui       $a1, %hi(HudScript_StickBackAndForth)
+/* 17EC00 80250320 24A58E80 */  addiu     $a1, $a1, %lo(HudScript_StickBackAndForth)
 /* 17EC04 80250324 0809412D */  j         .L802504B4
 /* 17EC08 80250328 00000000 */   nop
 .L8025032C_17EC0C:
 /* 17EC0C 8025032C 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17EC10 80250330 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17EC14 80250334 3C058011 */  lui       $a1, %hi(D_80108BBC)
-/* 17EC18 80250338 24A58BBC */  addiu     $a1, $a1, %lo(D_80108BBC)
+/* 17EC14 80250334 3C058011 */  lui       $a1, %hi(HudScript_PressAButton)
+/* 17EC18 80250338 24A58BBC */  addiu     $a1, $a1, %lo(HudScript_PressAButton)
 /* 17EC1C 8025033C 0C0511FF */  jal       set_hud_element_anim
 /* 17EC20 80250340 00000000 */   nop
 /* 17EC24 80250344 3C04802A */  lui       $a0, %hi(D_8029F644)
@@ -588,8 +588,8 @@ glabel func_8024FB3C
 .L80250374_17EC54:
 /* 17EC54 80250374 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17EC58 80250378 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17EC5C 8025037C 3C058011 */  lui       $a1, %hi(D_80108D6C)
-/* 17EC60 80250380 24A58D6C */  addiu     $a1, $a1, %lo(D_80108D6C)
+/* 17EC5C 8025037C 3C058011 */  lui       $a1, %hi(HudScript_RotateStickCW)
+/* 17EC60 80250380 24A58D6C */  addiu     $a1, $a1, %lo(HudScript_RotateStickCW)
 /* 17EC64 80250384 0809412D */  j         .L802504B4
 /* 17EC68 80250388 00000000 */   nop
 .L8025038C_17EC6C:
@@ -601,15 +601,15 @@ glabel func_8024FB3C
 /* 17EC80 802503A0 00000000 */   nop
 /* 17EC84 802503A4 3C04802A */  lui       $a0, %hi(D_8029F644)
 /* 17EC88 802503A8 8484F644 */  lh        $a0, %lo(D_8029F644)($a0)
-/* 17EC8C 802503AC 3C058011 */  lui       $a1, %hi(D_80108B80)
-/* 17EC90 802503B0 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
+/* 17EC8C 802503AC 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
+/* 17EC90 802503B0 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
 /* 17EC94 802503B4 0809412D */  j         .L802504B4
 /* 17EC98 802503B8 00000000 */   nop
 .L802503BC_17EC9C:
 /* 17EC9C 802503BC 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17ECA0 802503C0 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17ECA4 802503C4 3C058011 */  lui       $a1, %hi(D_80108B80)
-/* 17ECA8 802503C8 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
+/* 17ECA4 802503C4 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
+/* 17ECA8 802503C8 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
 /* 17ECAC 802503CC 0C0511FF */  jal       set_hud_element_anim
 /* 17ECB0 802503D0 00000000 */   nop
 /* 17ECB4 802503D4 3C04802A */  lui       $a0, %hi(D_8029F644)
@@ -621,8 +621,8 @@ glabel func_8024FB3C
 .L802503EC_17ECCC:
 /* 17ECCC 802503EC 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17ECD0 802503F0 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17ECD4 802503F4 3C058011 */  lui       $a1, %hi(D_80108B80)
-/* 17ECD8 802503F8 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
+/* 17ECD4 802503F4 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
+/* 17ECD8 802503F8 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
 /* 17ECDC 802503FC 0C0511FF */  jal       set_hud_element_anim
 /* 17ECE0 80250400 00000000 */   nop
 /* 17ECE4 80250404 3C04802A */  lui       $a0, %hi(D_8029F644)
@@ -634,8 +634,8 @@ glabel func_8024FB3C
 .L8025041C_17ECFC:
 /* 17ECFC 8025041C 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17ED00 80250420 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17ED04 80250424 3C058011 */  lui       $a1, %hi(D_80108B80)
-/* 17ED08 80250428 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
+/* 17ED04 80250424 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
+/* 17ED08 80250428 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
 /* 17ED0C 8025042C 0809412D */  j         .L802504B4
 /* 17ED10 80250430 00000000 */   nop
 .L80250434_17ED14:
@@ -652,30 +652,30 @@ glabel func_8024FB3C
 .L8025045C_17ED3C:
 /* 17ED3C 8025045C 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17ED40 80250460 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17ED44 80250464 3C058011 */  lui       $a1, %hi(D_801091E4)
-/* 17ED48 80250468 24A591E4 */  addiu     $a1, $a1, %lo(D_801091E4)
+/* 17ED44 80250464 3C058011 */  lui       $a1, %hi(HudScript_StickTapRight)
+/* 17ED48 80250468 24A591E4 */  addiu     $a1, $a1, %lo(HudScript_StickTapRight)
 /* 17ED4C 8025046C 0809412D */  j         .L802504B4
 /* 17ED50 80250470 00000000 */   nop
 .L80250474_17ED54:
 /* 17ED54 80250474 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17ED58 80250478 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17ED5C 8025047C 3C058011 */  lui       $a1, %hi(D_80108B80)
-/* 17ED60 80250480 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
+/* 17ED5C 8025047C 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
+/* 17ED60 80250480 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
 /* 17ED64 80250484 0809412D */  j         .L802504B4
 /* 17ED68 80250488 00000000 */   nop
 .L8025048C_17ED6C:
 /* 17ED6C 8025048C 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17ED70 80250490 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17ED74 80250494 3C058011 */  lui       $a1, %hi(D_80108BBC)
-/* 17ED78 80250498 24A58BBC */  addiu     $a1, $a1, %lo(D_80108BBC)
+/* 17ED74 80250494 3C058011 */  lui       $a1, %hi(HudScript_PressAButton)
+/* 17ED78 80250498 24A58BBC */  addiu     $a1, $a1, %lo(HudScript_PressAButton)
 /* 17ED7C 8025049C 0C0511FF */  jal       set_hud_element_anim
 /* 17ED80 802504A0 00000000 */   nop
 .L802504A4_17ED84:
 /* 17ED84 802504A4 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17ED88 802504A8 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
 .L802504AC:
-/* 17ED8C 802504AC 3C058011 */  lui       $a1, %hi(D_80108BBC)
-/* 17ED90 802504B0 24A58BBC */  addiu     $a1, $a1, %lo(D_80108BBC)
+/* 17ED8C 802504AC 3C058011 */  lui       $a1, %hi(HudScript_PressAButton)
+/* 17ED90 802504B0 24A58BBC */  addiu     $a1, $a1, %lo(HudScript_PressAButton)
 .L802504B4:
 /* 17ED94 802504B4 0C0511FF */  jal       set_hud_element_anim
 /* 17ED98 802504B8 00000000 */   nop

@@ -5,9 +5,9 @@
 
 extern s32 D_80294280;
 extern s32 D_802A9620;
-extern HudElementAnim D_80108AFC;
-extern HudElementAnim D_80108B28;
-extern HudElementAnim D_80109244;
+extern HudElementAnim HudScript_BlueMeter;
+extern HudElementAnim HudScript_AButton;
+extern HudElementAnim HudScript_RunAwayOK;
 
 s32 func_8024FAFC(s32);
 
@@ -31,7 +31,7 @@ ApiStatus func_802A9000_425B50(Evt* script, s32 isInitialCall) {
     D_802A9620 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(&D_80108B28);
+    hudElement = create_hud_element(&HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX,
@@ -39,7 +39,7 @@ ApiStatus func_802A9000_425B50(Evt* script, s32 isInitialCall) {
     set_hud_element_render_depth(hudElement, 0);
 
     // Weird use of an extra temp settles regalloc here.
-    hudElementTemp = create_hud_element(&D_80108AFC);
+    hudElementTemp = create_hud_element(&HudScript_BlueMeter);
     hudElement = hudElementTemp;
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX,
@@ -47,7 +47,7 @@ ApiStatus func_802A9000_425B50(Evt* script, s32 isInitialCall) {
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(&D_80109244);
+    hudElement = create_hud_element(&HudScript_RunAwayOK);
     actionCommandStatus->hudElements[2] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX,
         actionCommandStatus->hudElementY + 28);

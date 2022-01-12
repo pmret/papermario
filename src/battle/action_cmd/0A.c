@@ -4,10 +4,10 @@
 #define NAMESPACE action_command_0A
 
 extern s32 D_802942E0;
-extern s32 D_80108B80;
+extern s32 HudScript_MashAButton;
 extern HudElementAnim D_80292974;
-extern HudElementAnim D_80108AFC;
-extern HudElementAnim D_80108B28;
+extern HudElementAnim HudScript_BlueMeter;
+extern HudElementAnim HudScript_AButton;
 
 ApiStatus func_802A9000_4273B0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -36,13 +36,13 @@ ApiStatus func_802A9000_4273B0(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(&D_80108B28);
+    hudElement = create_hud_element(&HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(&D_80108AFC);
+    hudElement = create_hud_element(&HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);

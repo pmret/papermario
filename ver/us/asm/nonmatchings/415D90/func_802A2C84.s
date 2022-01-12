@@ -238,8 +238,8 @@ glabel func_802A2C84
 /* 417D70 802A2FE0 8C42D4A0 */  lw        $v0, %lo(battle_menu_hasSpiritsMenu)($v0)
 /* 417D74 802A2FE4 1440000A */  bnez      $v0, .L802A3010
 /* 417D78 802A2FE8 00000000 */   nop
-/* 417D7C 802A2FEC 3C048011 */  lui       $a0, %hi(D_80108538)
-/* 417D80 802A2FF0 24848538 */  addiu     $a0, $a0, %lo(D_80108538)
+/* 417D7C 802A2FEC 3C048011 */  lui       $a0, %hi(HudScript_StatusFlower)
+/* 417D80 802A2FF0 24848538 */  addiu     $a0, $a0, %lo(HudScript_StatusFlower)
 /* 417D84 802A2FF4 0C050529 */  jal       create_hud_element
 /* 417D88 802A2FF8 00000000 */   nop
 /* 417D8C 802A2FFC 0040902D */  daddu     $s2, $v0, $zero
@@ -248,8 +248,8 @@ glabel func_802A2C84
 /* 417D98 802A3008 080A8C0F */  j         .L802A303C
 /* 417D9C 802A300C 0240202D */   daddu    $a0, $s2, $zero
 .L802A3010:
-/* 417DA0 802A3010 3C048011 */  lui       $a0, %hi(D_80108974)
-/* 417DA4 802A3014 24848974 */  addiu     $a0, $a0, %lo(D_80108974)
+/* 417DA0 802A3010 3C048011 */  lui       $a0, %hi(HudScript_MenuStarPower)
+/* 417DA4 802A3014 24848974 */  addiu     $a0, $a0, %lo(HudScript_MenuStarPower)
 /* 417DA8 802A3018 0C050529 */  jal       create_hud_element
 /* 417DAC 802A301C 00000000 */   nop
 /* 417DB0 802A3020 0040902D */  daddu     $s2, $v0, $zero

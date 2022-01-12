@@ -4,8 +4,8 @@
 #define NAMESPACE action_command_fire_shell
 
 extern s32 D_802942C0;
-extern HudElementAnim D_80108E1C;
-extern HudElementAnim D_80108AFC;
+extern HudElementAnim HudScript_StickNeutral;
+extern HudElementAnim HudScript_BlueMeter;
 extern HudElementAnim D_80292974;
 
 ApiStatus func_802A9000_4269D0(void) {
@@ -35,13 +35,13 @@ ApiStatus func_802A9000_4269D0(void) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(&D_80108E1C);
+    hudElement = create_hud_element(&HudScript_StickNeutral);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(&D_80108AFC);
+    hudElement = create_hud_element(&HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);

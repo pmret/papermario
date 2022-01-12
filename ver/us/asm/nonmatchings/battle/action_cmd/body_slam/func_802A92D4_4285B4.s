@@ -112,8 +112,8 @@ dlabel L802A9444_428724
 /* 428740 802A9460 A622004E */   sh       $v0, 0x4e($s1)
 .L802A9464:
 /* 428744 802A9464 8E240004 */  lw        $a0, 4($s1)
-/* 428748 802A9468 3C058011 */  lui       $a1, %hi(D_80108B54)
-/* 42874C 802A946C 24A58B54 */  addiu     $a1, $a1, %lo(D_80108B54)
+/* 428748 802A9468 3C058011 */  lui       $a1, %hi(HudScript_AButtonDown)
+/* 42874C 802A946C 24A58B54 */  addiu     $a1, $a1, %lo(HudScript_AButtonDown)
 /* 428750 802A9470 0C0511FF */  jal       set_hud_element_anim
 /* 428754 802A9474 00000000 */   nop
 /* 428758 802A9478 3C048000 */  lui       $a0, 0x8000
@@ -153,8 +153,8 @@ dlabel L802A94A8_428788
 /* 4287D8 802A94F8 0C0511FF */  jal       set_hud_element_anim
 /* 4287DC 802A94FC A6220044 */   sh       $v0, 0x44($s1)
 /* 4287E0 802A9500 8E240004 */  lw        $a0, 4($s1)
-/* 4287E4 802A9504 3C058011 */  lui       $a1, %hi(D_80108B28)
-/* 4287E8 802A9508 24A58B28 */  addiu     $a1, $a1, %lo(D_80108B28)
+/* 4287E4 802A9504 3C058011 */  lui       $a1, %hi(HudScript_AButton)
+/* 4287E8 802A9508 24A58B28 */  addiu     $a1, $a1, %lo(HudScript_AButton)
 /* 4287EC 802A950C 0C0511FF */  jal       set_hud_element_anim
 /* 4287F0 802A9510 00000000 */   nop
 /* 4287F4 802A9514 86220068 */  lh        $v0, 0x68($s1)

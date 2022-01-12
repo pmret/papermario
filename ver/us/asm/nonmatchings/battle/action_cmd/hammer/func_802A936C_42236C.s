@@ -302,8 +302,8 @@ dlabel L802A9644_422644
 /* 4227BC 802A97BC 0C0511FF */  jal       set_hud_element_anim
 /* 4227C0 802A97C0 A2420084 */   sb       $v0, 0x84($s2)
 /* 4227C4 802A97C4 8E240018 */  lw        $a0, 0x18($s1)
-/* 4227C8 802A97C8 3C058011 */  lui       $a1, %hi(D_80108FF0)
-/* 4227CC 802A97CC 24A58FF0 */  addiu     $a1, $a1, %lo(D_80108FF0)
+/* 4227C8 802A97C8 3C058011 */  lui       $a1, %hi(HudScript_StickTapNeutral)
+/* 4227CC 802A97CC 24A58FF0 */  addiu     $a1, $a1, %lo(HudScript_StickTapNeutral)
 /* 4227D0 802A97D0 0C0511FF */  jal       set_hud_element_anim
 /* 4227D4 802A97D4 00000000 */   nop
 /* 4227D8 802A97D8 82220062 */  lb        $v0, 0x62($s1)

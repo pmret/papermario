@@ -234,8 +234,8 @@ glabel func_80238000_6FFD80
 /* 700108 80238388 2405FF9C */  addiu     $a1, $zero, -0x64
 /* 70010C 8023838C 0C051261 */  jal       set_hud_element_render_pos
 /* 700110 80238390 00A0302D */   daddu    $a2, $a1, $zero
-/* 700114 80238394 3C048011 */  lui       $a0, %hi(D_80108E48)
-/* 700118 80238398 24848E48 */  addiu     $a0, $a0, %lo(D_80108E48)
+/* 700114 80238394 3C048011 */  lui       $a0, %hi(HudScript_StickHoldLeft)
+/* 700118 80238398 24848E48 */  addiu     $a0, $a0, %lo(HudScript_StickHoldLeft)
 /* 70011C 8023839C 3C118024 */  lui       $s1, %hi(D_8023BDC4)
 /* 700120 802383A0 2631BDC4 */  addiu     $s1, $s1, %lo(D_8023BDC4)
 /* 700124 802383A4 2402FFD0 */  addiu     $v0, $zero, -0x30
@@ -678,13 +678,13 @@ glabel func_80238000_6FFD80
 /* 700790 80238A10 00000000 */  nop
 /* 700794 80238A14 45000005 */  bc1f      .L80238A2C
 /* 700798 80238A18 0260202D */   daddu    $a0, $s3, $zero
-/* 70079C 80238A1C 3C058011 */  lui       $a1, %hi(D_80108E1C)
-/* 7007A0 80238A20 24A58E1C */  addiu     $a1, $a1, %lo(D_80108E1C)
+/* 70079C 80238A1C 3C058011 */  lui       $a1, %hi(HudScript_StickNeutral)
+/* 7007A0 80238A20 24A58E1C */  addiu     $a1, $a1, %lo(HudScript_StickNeutral)
 /* 7007A4 80238A24 0808E28D */  j         .L80238A34
 /* 7007A8 80238A28 00000000 */   nop
 .L80238A2C:
-/* 7007AC 80238A2C 3C058011 */  lui       $a1, %hi(D_80108E48)
-/* 7007B0 80238A30 24A58E48 */  addiu     $a1, $a1, %lo(D_80108E48)
+/* 7007AC 80238A2C 3C058011 */  lui       $a1, %hi(HudScript_StickHoldLeft)
+/* 7007B0 80238A30 24A58E48 */  addiu     $a1, $a1, %lo(HudScript_StickHoldLeft)
 .L80238A34:
 /* 7007B4 80238A34 0C0511FF */  jal       set_hud_element_anim
 /* 7007B8 80238A38 00000000 */   nop

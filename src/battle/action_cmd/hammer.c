@@ -9,7 +9,7 @@ extern HudElementAnim D_8029275C[];
 extern HudElementAnim D_802927F0[];
 extern HudElementAnim D_80292848[];
 extern HudElementAnim D_802928A0[];
-extern HudElementAnim D_80108E48[];
+extern HudElementAnim HudScript_StickHoldLeft[];
 extern HudElementAnim D_80292A2C[];
 
 extern s32 D_802941E0;
@@ -66,7 +66,7 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
 
-    hudElement = create_hud_element(D_80108E48);
+    hudElement = create_hud_element(HudScript_StickHoldLeft);
     actionCommandStatus->hudElements[5] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);

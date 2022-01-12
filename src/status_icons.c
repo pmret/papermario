@@ -106,8 +106,8 @@ extern HudElementAnim HudScript_BoostHammerBegin;
 extern HudElementAnim HudScript_BoostHammerEnd;
 extern HudElementAnim HudScript_BoostPartner;
 extern HudElementAnim HudScript_Surprise;
-extern HudElementAnim D_801089C4;
-extern HudElementAnim D_80108A14;
+extern HudElementAnim HudScript_Peril;
+extern HudElementAnim HudScript_Danger;
 
 
 void update_merlee_message(PopupMessage* popup);
@@ -1234,7 +1234,7 @@ void create_status_icon_peril(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_PERIL;
     if (!statusIcon->peril.active) {
         statusIcon->peril.active = TRUE;
-        hudElement = create_hud_element(&D_801089C4);
+        hudElement = create_hud_element(&HudScript_Peril);
         set_hud_element_flags(hudElement, 2);
         set_hud_element_flags(hudElement, 0x80);
         statusIcon->peril.activeElementID = hudElement;
@@ -1263,7 +1263,7 @@ void create_status_icon_danger(s32 iconID) {
     statusIcon->flags &= ~STATUS_ICON_FLAG_DANGER;
     if (!statusIcon->danger.active) {
         statusIcon->danger.active = TRUE;
-        hudElement = create_hud_element(&D_80108A14);
+        hudElement = create_hud_element(&HudScript_Danger);
         set_hud_element_flags(hudElement, 2);
         set_hud_element_flags(hudElement, 0x80);
         statusIcon->danger.activeElementID = hudElement;
