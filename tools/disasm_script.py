@@ -390,6 +390,7 @@ replace_funcs = {
     "EnemyDamageTarget"         :{0:"ActorIDs", 1:"HitResults", 2:"DamageTypes", 4:"StatusFlags", 6:"BattleStatusFlags1"},
     "EnemyTestTarget"           :{0:"ActorIDs", 1:"HitResults", 2:"DamageTypes", 3:"StatusFlags", 5:"BattleStatusFlags1"},
 
+    "FallToGoal"                :{0:"ActorIDs"},
     "FindKeyItem"               :{0:"ItemIDs"},
     "FlyPartTo"                 :{0:"ActorIDs"},
     "FlyToGoal"                 :{0:"ActorIDs"},
@@ -418,6 +419,7 @@ replace_funcs = {
     "GetEnemyMaxHP"             :{0:"ActorIDs"},
     "GetGoalPos"                :{0:"ActorIDs"},
     "GetHomePos"                :{0:"ActorIDs"},
+    "GetIdleGoal"               :{0:"ActorIDs"},
     "GetIndexFromHome"          :{0:"ActorIDs"},
     "GetIndexFromPos"           :{0:"ActorIDs"},
     "GetItemPower"              :{0:"ItemIDs"},
@@ -436,6 +438,7 @@ replace_funcs = {
     "HPBarToHome"               :{0:"ActorIDs"},
 
     "IdleFlyToGoal"             :{0:"ActorIDs"},
+    "IdleJumpToGoal"            :{0:"ActorIDs"},
     "IdleRunToGoal"             :{0:"ActorIDs"},
     "InterpNpcYaw"              :{0:"NpcIDs"},
 
@@ -475,6 +478,7 @@ replace_funcs = {
     "SetActorDispOffset"        :{0:"ActorIDs"},
     "SetActorFlagBits"          :{0:"ActorIDs", 1:"ActorFlags"},
     "SetActorIdleSpeed"         :{0:"ActorIDs"},
+    "SetActorIdleJumpGravity"   :{0:"ActorIDs"},
     "SetActorJumpGravity"       :{0:"ActorIDs"},
     "SetActorPos"               :{0:"ActorIDs"},
     "SetActorRotation"          :{0:"ActorIDs"},
@@ -502,6 +506,7 @@ replace_funcs = {
     "SetHomePos"                :{0:"ActorIDs"},
     "SetIdleAnimations"         :{0:"ActorIDs"},
     "SetIdleGoal"               :{0:"ActorIDs"},
+    "SetIdleGoalToHome"         :{0:"ActorIDs"},
     "SetJumpAnimations"         :{0:"ActorIDs", 2:"PlayerAnims", 3:"PlayerAnims", 4:"PlayerAnims"},
     "SetMusicTrack"             :{1:"SongIDs"},
 

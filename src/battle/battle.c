@@ -78,8 +78,8 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_isk_part_1),
         .name = "エリア ＩＳＫ その１",
-        .battles = 0x80224700,
-        .stages = 0x802248A4,
+        .battles = &b_area_isk_part_1_formationTable,
+        .stages = &b_area_isk_part_1_stageTable,
     },
     {
         AREA(area_isk_part_2),
