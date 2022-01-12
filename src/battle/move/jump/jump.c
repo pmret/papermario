@@ -24,29 +24,11 @@ s32 D_802A1140_73D9A0[] = {
 
 #include "world/common/UnkMoveFunc1.inc.c"
 
-ApiStatus func_802A10E4_73D944(Evt* script, s32 isInitialCall) {
-    script->varTable[15] = 1;
-
-    switch (gPlayerData.bootsLevel) {
-        case 0:
-            script->varTable[15] = 1;
-            break;
-        case 1:
-            script->varTable[15] = 2;
-            break;
-        case 2:
-            script->varTable[15] = 3;
-            break;
-    }
-
-    return ApiStatus_DONE2;
-}
-
-EvtSource D_802A1180_73D9E0 = {
+EvtSource N(CheckForAPress) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_BEFORE_JUMP)
     EVT_LOOP(5)
-        EVT_CALL(CheckButtonPress, 32768, LW(0))
-        EVT_IF_EQ(LW(0), 1)
+        EVT_CALL(CheckButtonPress, A_BUTTON, LW(0))
+        EVT_IF_EQ(LW(0), TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT_FRAMES(1)
@@ -55,7 +37,7 @@ EvtSource D_802A1180_73D9E0 = {
     EVT_END
 };
 
-EvtSource D_802A11FC_73DA5C = {
+EvtSource N(MoveToJump) = {
     EVT_CALL(SetGoalToFirstTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_SUB(LW(0), 40)
@@ -73,7 +55,7 @@ EvtSource D_802A11FC_73DA5C = {
     EVT_CALL(CancelablePlayerRunToGoal, 0, LW(0))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_EXEC_WAIT(D_802A1180_73D9E0)
+    EVT_EXEC_WAIT(N(CheckForAPress))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_BEFORE_JUMP)
     EVT_RETURN
     EVT_END
@@ -315,7 +297,7 @@ EvtSource D_802A203C_73E89C = {
 EvtSource D_802A21D4_73EA34 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_EXEC_WAIT(D_802A11FC_73DA5C)
+    EVT_EXEC_WAIT(N(MoveToJump))
     EVT_EXEC_WAIT(D_802A1370_73DBD0)
     EVT_CALL(func_802A9120_421B10, LW(10), 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_34)
@@ -329,7 +311,7 @@ EvtSource D_802A21D4_73EA34 = {
 EvtSource D_802A2280 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_EXEC_WAIT(D_802A11FC_73DA5C)
+    EVT_EXEC_WAIT(N(MoveToJump))
     EVT_CALL(InitTargetIterator)
     EVT_EXEC_WAIT(D_802A1458_73DCB8)
     EVT_SET(LW(11), LW(10))
@@ -355,7 +337,7 @@ EvtSource D_802A2280 = {
 EvtSource D_802A23D4_73EC34 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_EXEC_WAIT(D_802A11FC_73DA5C)
+    EVT_EXEC_WAIT(N(MoveToJump))
     EVT_EXEC_WAIT(D_802A1540_73DDA0)
     EVT_CALL(func_8026919C, EVT_ADDR(D_802A1140_73D9A0))
     EVT_SET(LW(11), LW(10))
@@ -602,6 +584,24 @@ EvtSource D_802A30F4_73F954 = {
     EVT_END
 };
 
+ApiStatus N(GetJumpDamage)(Evt* script, s32 isInitialCall) {
+    script->varTable[15] = 1;
+
+    switch (gPlayerData.bootsLevel) {
+        case 0:
+            script->varTable[15] = 1;
+            break;
+        case 1:
+            script->varTable[15] = 2;
+            break;
+        case 2:
+            script->varTable[15] = 3;
+            break;
+    }
+
+    return ApiStatus_DONE2;
+}
+
 EvtSource D_802A3188_73F9E8 = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(GetGoalPos, ACTOR_PLAYER, LW(3), LW(4), LW(5))
@@ -623,7 +623,7 @@ EvtSource D_802A3188_73F9E8 = {
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_30000)
     EVT_CALL(func_80274A18, LW(10), 0)
-    EVT_CALL(func_802A10E4_73D944)
+    EVT_CALL(N(GetJumpDamage))
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, 3, 346, 0)
     EVT_CALL(PlayerDamageEnemy, LW(0), 128, 0, 0, LW(15), 48)
     EVT_EXEC_WAIT(D_802A1628_73DE88)
@@ -854,7 +854,7 @@ EvtSource D_802A3CF0_740550 = {
 EvtSource D_802A4018_740878 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
-    EVT_EXEC_WAIT(D_802A11FC_73DA5C)
+    EVT_EXEC_WAIT(N(MoveToJump))
     EVT_EXEC_WAIT(D_802A1370_73DBD0)
     EVT_CALL(func_802A9120_421B10, LW(10), 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_34)

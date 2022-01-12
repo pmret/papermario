@@ -15,7 +15,7 @@ s32 N(D_802A10F0)[] = {
 
 #include "world/common/UnkMoveFunc1.inc.c"
 
-EvtSource D_802A1130_765D50 = {
+EvtSource N(CheckForAPress) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_BEFORE_JUMP)
     EVT_LOOP(5)
         EVT_CALL(CheckButtonPress, A_BUTTON, LW(0))
@@ -46,7 +46,7 @@ EvtSource D_802A11AC_765DCC = {
     EVT_CALL(CancelablePlayerRunToGoal, 0, LW(0))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_EXEC_WAIT(D_802A1130_765D50)
+    EVT_EXEC_WAIT(N(CheckForAPress))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_BEFORE_JUMP)
     EVT_RETURN
     EVT_END
