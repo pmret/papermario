@@ -1,11 +1,11 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern HudElementAnim D_80104A00[0];
-extern HudElementAnim D_80104C10[0];
-extern HudElementAnim D_80107798[0];
-extern HudElementAnim D_801077E4[0];
-extern HudElementAnim D_8010790C[0];
+extern HudElementAnim HudScript_HandPointer[0];
+extern HudElementAnim HudScript_StatusStarPiece[0];
+extern HudElementAnim HudScript_GreenArrowDown[0];
+extern HudElementAnim HudScript_GreenArrowUp[0];
+extern HudElementAnim HudScript_EmptyBar[0];
 extern HudElementAnim D_80109298;
 extern HudElementAnim D_801092C0;
 extern HudElementAnim D_801092E8;
@@ -161,7 +161,7 @@ s32 popup_menu_update(void) {
                 D_8010D67E = 62;
             }
             D_8010D68C = 0;
-            elementID = create_hud_element(D_8010790C);
+            elementID = create_hud_element(HudScript_EmptyBar);
             D_8010D65C = elementID;
             set_hud_element_flags(elementID, 0x80);
             set_hud_element_tint(elementID, 255, 255, 255);
@@ -175,26 +175,26 @@ s32 popup_menu_update(void) {
             set_hud_element_scale(elementID, 0.45f);
             set_hud_element_flags(elementID, 0x8080);
 
-            elementID = create_hud_element(D_80104A28);
+            elementID = create_hud_element(HudScript_AnimatedHandPointer);
             D_8010D66C = elementID;
             set_hud_element_flags(elementID, 0x20000080);
 
-            elementID = create_hud_element(D_801077E4);
+            elementID = create_hud_element(HudScript_GreenArrowUp);
             D_8010D670 = elementID;
             set_hud_element_flags(elementID, 0x20000080);
 
-            elementID = create_hud_element(D_80107798);
+            elementID = create_hud_element(HudScript_GreenArrowDown);
             D_8010D674 = elementID;
             set_hud_element_flags(elementID, 0x20000080);
 
             if (gPopupMenu->popupType == 3) {
-                D_8010D660 = create_hud_element(D_80104C10);
+                D_8010D660 = create_hud_element(HudScript_StatusStarPiece);
                 elementID = D_8010D660;
                 set_hud_element_flags(elementID, 0x80);
                 set_hud_element_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == 4) {
-                D_8010D660 = create_hud_element(D_80104C10);
+                D_8010D660 = create_hud_element(HudScript_StatusStarPiece);
                 elementID = D_8010D660;
                 set_hud_element_flags(elementID, 0x8080);
                 set_hud_element_tint(elementID, 255, 255, 255);
@@ -603,7 +603,7 @@ s32 popup_menu_update(void) {
             set_hud_element_tint(D_8010D66C, 160, 160, 160);
             set_hud_element_tint(D_8010D670, 160, 160, 160);
             set_hud_element_tint(D_8010D674, 160, 160, 160);
-            set_hud_element_anim(D_8010D66C, D_80104A00);
+            set_hud_element_anim(D_8010D66C, HudScript_HandPointer);
             if (gPopupMenu->popupType == 3) {
                 set_hud_element_tint(D_8010D660, 160, 160, 160);
                 set_hud_element_tint(D_8010D664, 160, 160, 160);
@@ -722,7 +722,7 @@ s32 popup_menu_update(void) {
             set_hud_element_tint(D_8010D66C, 160, 160, 160);
             set_hud_element_tint(D_8010D670, 160, 160, 160);
             set_hud_element_tint(D_8010D674, 160, 160, 160);
-            set_hud_element_anim(D_8010D66C, D_80104A00);
+            set_hud_element_anim(D_8010D66C, HudScript_HandPointer);
 
             if (gPopupMenu->popupType == 3) {
                 set_hud_element_tint(D_8010D660, 160, 160, 160);
@@ -813,7 +813,7 @@ s32 popup_menu_update(void) {
             if (gPopupMenu->popupType == 5) {
                 set_hud_element_tint(D_8010D660, 160, 160, 160);
             }
-            set_hud_element_anim(D_8010D66C, D_80104A00);
+            set_hud_element_anim(D_8010D66C, HudScript_HandPointer);
 
             switch (gPopupMenu->popupType) {
                 case 0:

@@ -112,7 +112,7 @@ typedef struct HudElement {
 
 typedef HudElement* HudElementList[320];
 
-extern HudElementAnim D_80104A28[];
+extern HudElementAnim HudScript_AnimatedHandPointer[];
 extern HudElementAnim D_80108558[];
 extern HudElementAnim D_80108A64[];
 extern HudElementAnim D_80109270[];

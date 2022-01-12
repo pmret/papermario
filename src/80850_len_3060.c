@@ -12,7 +12,7 @@ extern HudElementAnim D_80080FC4[];
 extern HudElementAnim D_801086AC[];
 extern HudElementAnim D_801083D8[];
 extern HudElementAnim D_80108068[];
-extern HudElementAnim D_80104BEC[];
+extern HudElementAnim HudScript_StatusSPShine[];
 
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;
@@ -365,7 +365,7 @@ void initialize_status_menu(void) {
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_80104BEC);
+    iconIndex = create_hud_element(HudScript_StatusSPShine);
     uiStatus->starpointsIconIndex2 = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);

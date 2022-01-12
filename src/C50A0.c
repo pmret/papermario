@@ -174,7 +174,7 @@ s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode,
     return make_item_entity(itemID, x, y, z, itemSpawnMode, pickupDelay, -1, pickupVar);
 }
 
-INCLUDE_ASM(s32, "C50A0", init_got_item);
+INCLUDE_ASM(s32, "C50A0", make_item_entity_at_player);
 
 INCLUDE_ASM(s32, "C50A0", item_entity_update);
 

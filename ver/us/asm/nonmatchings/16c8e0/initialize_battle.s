@@ -128,8 +128,8 @@ glabel initialize_battle
 /* 16CBE0 8023E300 3C12802A */  lui       $s2, %hi(D_8029EFE8)
 /* 16CBE4 8023E304 2652EFE8 */  addiu     $s2, $s2, %lo(D_8029EFE8)
 .L8023E308:
-/* 16CBE8 8023E308 3C048010 */  lui       $a0, %hi(D_80104BEC)
-/* 16CBEC 8023E30C 24844BEC */  addiu     $a0, $a0, %lo(D_80104BEC)
+/* 16CBE8 8023E308 3C048010 */  lui       $a0, %hi(HudScript_StatusSPShine)
+/* 16CBEC 8023E30C 24844BEC */  addiu     $a0, $a0, %lo(HudScript_StatusSPShine)
 /* 16CBF0 8023E310 0C050529 */  jal       create_hud_element
 /* 16CBF4 8023E314 26310001 */   addiu    $s1, $s1, 1
 /* 16CBF8 8023E318 AE420000 */  sw        $v0, ($s2)
