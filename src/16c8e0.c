@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 
@@ -9,8 +10,19 @@ s16 D_802809F6 = -1;
 s16 D_802809F8 = 0;
 u16 D_802809FA = 0;
 
-void* D_802809FC[] = {
-    D_80291FA8, D_80291FD0, D_80291FF8, D_80292020, D_80292048, D_80292070, D_80292098, D_802920C0, D_802920E8, D_80292110, NULL, NULL, NULL,
+extern HudElementAnim HudScript_HPDigit0;
+extern HudElementAnim HudScript_HPDigit1;
+extern HudElementAnim HudScript_HPDigit2;
+extern HudElementAnim HudScript_HPDigit3;
+extern HudElementAnim HudScript_HPDigit4;
+extern HudElementAnim HudScript_HPDigit5;
+extern HudElementAnim HudScript_HPDigit6;
+extern HudElementAnim HudScript_HPDigit7;
+extern HudElementAnim HudScript_HPDigit8;
+extern HudElementAnim HudScript_HPDigit9;
+
+void* bHPDigitHudScripts[] = {
+    HudScript_HPDigit0, HudScript_HPDigit1, HudScript_HPDigit2, HudScript_HPDigit3, HudScript_HPDigit4, HudScript_HPDigit5, HudScript_HPDigit6, HudScript_HPDigit7, HudScript_HPDigit8, HudScript_HPDigit9, NULL, NULL, NULL,
 };
 
 s32 D_80280A30 = 0xFF;

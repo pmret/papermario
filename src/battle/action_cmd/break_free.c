@@ -6,7 +6,7 @@
 extern s32 D_80294220;
 extern HudElementAnim HudScript_AButton;
 extern HudElementAnim HudScript_BlueMeter;
-extern HudElementAnim D_802928F8;
+extern HudElementAnim HudScript_RunningAway;
 extern HudElementAnim HudScript_RunAwayOK;
 
 ApiStatus func_802A9000_4233F0(Evt* script, s32 isInitialCall) {
@@ -47,7 +47,7 @@ ApiStatus func_802A9000_4233F0(Evt* script, s32 isInitialCall) {
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(&D_802928F8);
+    hudElement = create_hud_element(&HudScript_RunningAway);
     actionCommandStatus->hudElements[2] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);

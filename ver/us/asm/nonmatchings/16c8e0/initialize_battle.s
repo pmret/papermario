@@ -97,8 +97,8 @@ glabel initialize_battle
 /* 16CB68 8023E288 00000000 */   nop
 /* 16CB6C 8023E28C 0C051FB1 */  jal       set_windows_visible
 /* 16CB70 8023E290 24040001 */   addiu    $a0, $zero, 1
-/* 16CB74 8023E294 3C048029 */  lui       $a0, %hi(D_80291F80)
-/* 16CB78 8023E298 24841F80 */  addiu     $a0, $a0, %lo(D_80291F80)
+/* 16CB74 8023E294 3C048029 */  lui       $a0, %hi(HudScript_HPBar)
+/* 16CB78 8023E298 24841F80 */  addiu     $a0, $a0, %lo(HudScript_HPBar)
 /* 16CB7C 8023E29C 0C050529 */  jal       create_hud_element
 /* 16CB80 8023E2A0 00000000 */   nop
 /* 16CB84 8023E2A4 3C01802A */  lui       $at, %hi(D_8029EFBC)

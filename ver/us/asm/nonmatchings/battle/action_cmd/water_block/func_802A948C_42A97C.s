@@ -246,8 +246,8 @@ dlabel L802A97E4_42ACD4
 /* 42ACE4 802A97F4 1462000A */  bne       $v1, $v0, .L802A9820
 /* 42ACE8 802A97F8 24020016 */   addiu    $v0, $zero, 0x16
 /* 42ACEC 802A97FC 8E240030 */  lw        $a0, 0x30($s1)
-/* 42ACF0 802A9800 3C058029 */  lui       $a1, %hi(D_802928CC)
-/* 42ACF4 802A9804 24A528CC */  addiu     $a1, $a1, %lo(D_802928CC)
+/* 42ACF0 802A9800 3C058029 */  lui       $a1, %hi(HudScript_TimingCharge3)
+/* 42ACF4 802A9804 24A528CC */  addiu     $a1, $a1, %lo(HudScript_TimingCharge3)
 /* 42ACF8 802A9808 0C0511FF */  jal       set_hud_element_anim
 /* 42ACFC 802A980C 00000000 */   nop
 /* 42AD00 802A9810 0C05272D */  jal       sfx_play_sound
@@ -258,8 +258,8 @@ dlabel L802A97E4_42ACD4
 /* 42AD10 802A9820 14620008 */  bne       $v1, $v0, .L802A9844
 /* 42AD14 802A9824 00000000 */   nop
 /* 42AD18 802A9828 8E240034 */  lw        $a0, 0x34($s1)
-/* 42AD1C 802A982C 3C058029 */  lui       $a1, %hi(D_80292874)
-/* 42AD20 802A9830 24A52874 */  addiu     $a1, $a1, %lo(D_80292874)
+/* 42AD1C 802A982C 3C058029 */  lui       $a1, %hi(HudScript_TimingCharge2)
+/* 42AD20 802A9830 24A52874 */  addiu     $a1, $a1, %lo(HudScript_TimingCharge2)
 /* 42AD24 802A9834 0C0511FF */  jal       set_hud_element_anim
 /* 42AD28 802A9838 00000000 */   nop
 /* 42AD2C 802A983C 0C05272D */  jal       sfx_play_sound
@@ -270,8 +270,8 @@ dlabel L802A97E4_42ACD4
 /* 42AD3C 802A984C 1462000D */  bne       $v1, $v0, .L802A9884
 /* 42AD40 802A9850 00000000 */   nop
 /* 42AD44 802A9854 8E24000C */  lw        $a0, 0xc($s1)
-/* 42AD48 802A9858 3C058029 */  lui       $a1, %hi(D_80292788)
-/* 42AD4C 802A985C 24A52788 */  addiu     $a1, $a1, %lo(D_80292788)
+/* 42AD48 802A9858 3C058029 */  lui       $a1, %hi(HudScript_TimingReady)
+/* 42AD4C 802A985C 24A52788 */  addiu     $a1, $a1, %lo(HudScript_TimingReady)
 /* 42AD50 802A9860 0C0511FF */  jal       set_hud_element_anim
 /* 42AD54 802A9864 00000000 */   nop
 /* 42AD58 802A9868 8E240004 */  lw        $a0, 4($s1)
@@ -378,13 +378,13 @@ dlabel L802A98A8_42AD98
 /* 42AEBC 802A99CC 8E30001C */  lw        $s0, 0x1c($s1)
 /* 42AEC0 802A99D0 10400005 */  beqz      $v0, .L802A99E8
 /* 42AEC4 802A99D4 0200202D */   daddu    $a0, $s0, $zero
-/* 42AEC8 802A99D8 3C058029 */  lui       $a1, %hi(D_80292B54)
-/* 42AECC 802A99DC 24A52B54 */  addiu     $a1, $a1, %lo(D_80292B54)
+/* 42AEC8 802A99D8 3C058029 */  lui       $a1, %hi(HudScript_TimingOK)
+/* 42AECC 802A99DC 24A52B54 */  addiu     $a1, $a1, %lo(HudScript_TimingOK)
 /* 42AED0 802A99E0 080AA67C */  j         .L802A99F0
 /* 42AED4 802A99E4 00000000 */   nop
 .L802A99E8:
-/* 42AED8 802A99E8 3C058029 */  lui       $a1, %hi(D_80292B80)
-/* 42AEDC 802A99EC 24A52B80 */  addiu     $a1, $a1, %lo(D_80292B80)
+/* 42AED8 802A99E8 3C058029 */  lui       $a1, %hi(HudScript_TimingMiss)
+/* 42AEDC 802A99EC 24A52B80 */  addiu     $a1, $a1, %lo(HudScript_TimingMiss)
 .L802A99F0:
 /* 42AEE0 802A99F0 0C0511FF */  jal       set_hud_element_anim
 /* 42AEE4 802A99F4 00000000 */   nop
@@ -406,13 +406,13 @@ dlabel L802A98A8_42AD98
 /* 42AF20 802A9A30 8E30001C */  lw        $s0, 0x1c($s1)
 /* 42AF24 802A9A34 10400005 */  beqz      $v0, .L802A9A4C
 /* 42AF28 802A9A38 0200202D */   daddu    $a0, $s0, $zero
-/* 42AF2C 802A9A3C 3C058029 */  lui       $a1, %hi(D_80292B54)
-/* 42AF30 802A9A40 24A52B54 */  addiu     $a1, $a1, %lo(D_80292B54)
+/* 42AF2C 802A9A3C 3C058029 */  lui       $a1, %hi(HudScript_TimingOK)
+/* 42AF30 802A9A40 24A52B54 */  addiu     $a1, $a1, %lo(HudScript_TimingOK)
 /* 42AF34 802A9A44 080AA695 */  j         .L802A9A54
 /* 42AF38 802A9A48 00000000 */   nop
 .L802A9A4C:
-/* 42AF3C 802A9A4C 3C058029 */  lui       $a1, %hi(D_80292B80)
-/* 42AF40 802A9A50 24A52B80 */  addiu     $a1, $a1, %lo(D_80292B80)
+/* 42AF3C 802A9A4C 3C058029 */  lui       $a1, %hi(HudScript_TimingMiss)
+/* 42AF40 802A9A50 24A52B80 */  addiu     $a1, $a1, %lo(HudScript_TimingMiss)
 .L802A9A54:
 /* 42AF44 802A9A54 0C0511FF */  jal       set_hud_element_anim
 /* 42AF48 802A9A58 00000000 */   nop
@@ -439,8 +439,8 @@ dlabel L802A98A8_42AD98
 /* 42AF98 802A9AA8 1462000D */  bne       $v1, $v0, .L802A9AE0
 /* 42AF9C 802A9AAC 00000000 */   nop
 /* 42AFA0 802A9AB0 8E240010 */  lw        $a0, 0x10($s1)
-/* 42AFA4 802A9AB4 3C058029 */  lui       $a1, %hi(D_80292788)
-/* 42AFA8 802A9AB8 24A52788 */  addiu     $a1, $a1, %lo(D_80292788)
+/* 42AFA4 802A9AB4 3C058029 */  lui       $a1, %hi(HudScript_TimingReady)
+/* 42AFA8 802A9AB8 24A52788 */  addiu     $a1, $a1, %lo(HudScript_TimingReady)
 /* 42AFAC 802A9ABC 0C0511FF */  jal       set_hud_element_anim
 /* 42AFB0 802A9AC0 00000000 */   nop
 /* 42AFB4 802A9AC4 8E240004 */  lw        $a0, 4($s1)
@@ -551,13 +551,13 @@ dlabel L802A9B04_42AFF4
 /* 42B124 802A9C34 8E300020 */  lw        $s0, 0x20($s1)
 /* 42B128 802A9C38 10400005 */  beqz      $v0, .L802A9C50
 /* 42B12C 802A9C3C 0200202D */   daddu    $a0, $s0, $zero
-/* 42B130 802A9C40 3C058029 */  lui       $a1, %hi(D_80292B54)
-/* 42B134 802A9C44 24A52B54 */  addiu     $a1, $a1, %lo(D_80292B54)
+/* 42B130 802A9C40 3C058029 */  lui       $a1, %hi(HudScript_TimingOK)
+/* 42B134 802A9C44 24A52B54 */  addiu     $a1, $a1, %lo(HudScript_TimingOK)
 /* 42B138 802A9C48 080AA716 */  j         .L802A9C58
 /* 42B13C 802A9C4C 00000000 */   nop
 .L802A9C50:
-/* 42B140 802A9C50 3C058029 */  lui       $a1, %hi(D_80292B80)
-/* 42B144 802A9C54 24A52B80 */  addiu     $a1, $a1, %lo(D_80292B80)
+/* 42B140 802A9C50 3C058029 */  lui       $a1, %hi(HudScript_TimingMiss)
+/* 42B144 802A9C54 24A52B80 */  addiu     $a1, $a1, %lo(HudScript_TimingMiss)
 .L802A9C58:
 /* 42B148 802A9C58 0C0511FF */  jal       set_hud_element_anim
 /* 42B14C 802A9C5C 00000000 */   nop
@@ -579,13 +579,13 @@ dlabel L802A9B04_42AFF4
 /* 42B188 802A9C98 8E300020 */  lw        $s0, 0x20($s1)
 /* 42B18C 802A9C9C 10400005 */  beqz      $v0, .L802A9CB4
 /* 42B190 802A9CA0 0200202D */   daddu    $a0, $s0, $zero
-/* 42B194 802A9CA4 3C058029 */  lui       $a1, %hi(D_80292B54)
-/* 42B198 802A9CA8 24A52B54 */  addiu     $a1, $a1, %lo(D_80292B54)
+/* 42B194 802A9CA4 3C058029 */  lui       $a1, %hi(HudScript_TimingOK)
+/* 42B198 802A9CA8 24A52B54 */  addiu     $a1, $a1, %lo(HudScript_TimingOK)
 /* 42B19C 802A9CAC 080AA72F */  j         .L802A9CBC
 /* 42B1A0 802A9CB0 00000000 */   nop
 .L802A9CB4:
-/* 42B1A4 802A9CB4 3C058029 */  lui       $a1, %hi(D_80292B80)
-/* 42B1A8 802A9CB8 24A52B80 */  addiu     $a1, $a1, %lo(D_80292B80)
+/* 42B1A4 802A9CB4 3C058029 */  lui       $a1, %hi(HudScript_TimingMiss)
+/* 42B1A8 802A9CB8 24A52B80 */  addiu     $a1, $a1, %lo(HudScript_TimingMiss)
 .L802A9CBC:
 /* 42B1AC 802A9CBC 0C0511FF */  jal       set_hud_element_anim
 /* 42B1B0 802A9CC0 00000000 */   nop
@@ -612,8 +612,8 @@ dlabel L802A9B04_42AFF4
 /* 42B200 802A9D10 1462000D */  bne       $v1, $v0, .L802A9D48
 /* 42B204 802A9D14 00000000 */   nop
 /* 42B208 802A9D18 8E240014 */  lw        $a0, 0x14($s1)
-/* 42B20C 802A9D1C 3C058029 */  lui       $a1, %hi(D_80292788)
-/* 42B210 802A9D20 24A52788 */  addiu     $a1, $a1, %lo(D_80292788)
+/* 42B20C 802A9D1C 3C058029 */  lui       $a1, %hi(HudScript_TimingReady)
+/* 42B210 802A9D20 24A52788 */  addiu     $a1, $a1, %lo(HudScript_TimingReady)
 /* 42B214 802A9D24 0C0511FF */  jal       set_hud_element_anim
 /* 42B218 802A9D28 00000000 */   nop
 /* 42B21C 802A9D2C 8E240004 */  lw        $a0, 4($s1)
@@ -729,13 +729,13 @@ dlabel L802A9D7C_42B26C
 /* 42B39C 802A9EAC 8E300024 */  lw        $s0, 0x24($s1)
 /* 42B3A0 802A9EB0 10400005 */  beqz      $v0, .L802A9EC8
 /* 42B3A4 802A9EB4 0200202D */   daddu    $a0, $s0, $zero
-/* 42B3A8 802A9EB8 3C058029 */  lui       $a1, %hi(D_80292B54)
-/* 42B3AC 802A9EBC 24A52B54 */  addiu     $a1, $a1, %lo(D_80292B54)
+/* 42B3A8 802A9EB8 3C058029 */  lui       $a1, %hi(HudScript_TimingOK)
+/* 42B3AC 802A9EBC 24A52B54 */  addiu     $a1, $a1, %lo(HudScript_TimingOK)
 /* 42B3B0 802A9EC0 080AA7B4 */  j         .L802A9ED0
 /* 42B3B4 802A9EC4 00000000 */   nop
 .L802A9EC8:
-/* 42B3B8 802A9EC8 3C058029 */  lui       $a1, %hi(D_80292B80)
-/* 42B3BC 802A9ECC 24A52B80 */  addiu     $a1, $a1, %lo(D_80292B80)
+/* 42B3B8 802A9EC8 3C058029 */  lui       $a1, %hi(HudScript_TimingMiss)
+/* 42B3BC 802A9ECC 24A52B80 */  addiu     $a1, $a1, %lo(HudScript_TimingMiss)
 .L802A9ED0:
 /* 42B3C0 802A9ED0 0C0511FF */  jal       set_hud_element_anim
 /* 42B3C4 802A9ED4 00000000 */   nop
@@ -758,13 +758,13 @@ dlabel L802A9D7C_42B26C
 /* 42B404 802A9F14 8E300024 */  lw        $s0, 0x24($s1)
 /* 42B408 802A9F18 10400005 */  beqz      $v0, .L802A9F30
 /* 42B40C 802A9F1C 0200202D */   daddu    $a0, $s0, $zero
-/* 42B410 802A9F20 3C058029 */  lui       $a1, %hi(D_80292B54)
-/* 42B414 802A9F24 24A52B54 */  addiu     $a1, $a1, %lo(D_80292B54)
+/* 42B410 802A9F20 3C058029 */  lui       $a1, %hi(HudScript_TimingOK)
+/* 42B414 802A9F24 24A52B54 */  addiu     $a1, $a1, %lo(HudScript_TimingOK)
 /* 42B418 802A9F28 080AA7CE */  j         .L802A9F38
 /* 42B41C 802A9F2C 00000000 */   nop
 .L802A9F30:
-/* 42B420 802A9F30 3C058029 */  lui       $a1, %hi(D_80292B80)
-/* 42B424 802A9F34 24A52B80 */  addiu     $a1, $a1, %lo(D_80292B80)
+/* 42B420 802A9F30 3C058029 */  lui       $a1, %hi(HudScript_TimingMiss)
+/* 42B424 802A9F34 24A52B80 */  addiu     $a1, $a1, %lo(HudScript_TimingMiss)
 .L802A9F38:
 /* 42B428 802A9F38 0C0511FF */  jal       set_hud_element_anim
 /* 42B42C 802A9F3C 00000000 */   nop

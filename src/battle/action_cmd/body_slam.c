@@ -5,8 +5,8 @@
 
 extern HudElementAnim HudScript_BlueMeter[];
 extern HudElementAnim HudScript_AButton[];
-extern HudElementAnim D_8029275C[];
-extern HudElementAnim D_80292BAC[];
+extern HudElementAnim HudScript_TimingWait[];
+extern HudElementAnim HudScript_FillGaugeResult[];
 extern s32 D_80294320;
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
@@ -46,13 +46,13 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(D_80292BAC);
+    hudElement = create_hud_element(HudScript_FillGaugeResult);
     actionCommandStatus->hudElements[3] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(D_8029275C);
+    hudElement = create_hud_element(HudScript_TimingWait);
     actionCommandStatus->hudElements[2] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 41, actionCommandStatus->hudElementY + 22);
     set_hud_element_render_depth(hudElement, 0);

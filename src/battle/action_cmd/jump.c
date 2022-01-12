@@ -7,7 +7,7 @@ extern s32 D_802941C0;
 
 // icon id's for hud elements
 extern HudElementAnim HudScript_AButton[];
-extern HudElementAnim D_80292A2C[];
+extern HudElementAnim HudScript_RightOn[];
 extern HudElementAnim HudScript_AButtonDown[];
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
@@ -37,7 +37,7 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_alpha(hudElement, 0xFF);
 
-    hudElement = create_hud_element(D_80292A2C);
+    hudElement = create_hud_element(HudScript_RightOn);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);

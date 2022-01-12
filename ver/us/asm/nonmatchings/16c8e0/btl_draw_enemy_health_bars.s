@@ -129,8 +129,8 @@ glabel btl_draw_enemy_health_bars
 /* 16EA54 80240174 24420010 */  addiu     $v0, $v0, 0x10
 /* 16EA58 80240178 0C051277 */  jal       set_hud_element_render_depth
 /* 16EA5C 8024017C AFA20024 */   sw       $v0, 0x24($sp)
-/* 16EA60 80240180 3C058029 */  lui       $a1, %hi(D_80291F80)
-/* 16EA64 80240184 24A51F80 */  addiu     $a1, $a1, %lo(D_80291F80)
+/* 16EA60 80240180 3C058029 */  lui       $a1, %hi(HudScript_HPBar)
+/* 16EA64 80240184 24A51F80 */  addiu     $a1, $a1, %lo(HudScript_HPBar)
 /* 16EA68 80240188 0C0511FF */  jal       set_hud_element_anim
 /* 16EA6C 8024018C 0200202D */   daddu    $a0, $s0, $zero
 /* 16EA70 80240190 8FA50020 */  lw        $a1, 0x20($sp)
@@ -156,8 +156,8 @@ glabel btl_draw_enemy_health_bars
 /* 16EAC0 802401E0 2405000A */  addiu     $a1, $zero, 0xa
 /* 16EAC4 802401E4 0C051277 */  jal       set_hud_element_render_depth
 /* 16EAC8 802401E8 0200202D */   daddu    $a0, $s0, $zero
-/* 16EACC 802401EC 3C088028 */  lui       $t0, %hi(D_802809FC)
-/* 16EAD0 802401F0 250809FC */  addiu     $t0, $t0, %lo(D_802809FC)
+/* 16EACC 802401EC 3C088028 */  lui       $t0, %hi(bHPDigitHudScripts)
+/* 16EAD0 802401F0 250809FC */  addiu     $t0, $t0, %lo(bHPDigitHudScripts)
 /* 16EAD4 802401F4 02481021 */  addu      $v0, $s2, $t0
 /* 16EAD8 802401F8 8C450000 */  lw        $a1, ($v0)
 /* 16EADC 802401FC 0C0511FF */  jal       set_hud_element_anim
@@ -190,8 +190,8 @@ glabel btl_draw_enemy_health_bars
 /* 16EB44 80240264 0C051277 */  jal       set_hud_element_render_depth
 /* 16EB48 80240268 0200202D */   daddu    $a0, $s0, $zero
 /* 16EB4C 8024026C 00141080 */  sll       $v0, $s4, 2
-/* 16EB50 80240270 3C088028 */  lui       $t0, %hi(D_802809FC)
-/* 16EB54 80240274 250809FC */  addiu     $t0, $t0, %lo(D_802809FC)
+/* 16EB50 80240270 3C088028 */  lui       $t0, %hi(bHPDigitHudScripts)
+/* 16EB54 80240274 250809FC */  addiu     $t0, $t0, %lo(bHPDigitHudScripts)
 /* 16EB58 80240278 00481021 */  addu      $v0, $v0, $t0
 /* 16EB5C 8024027C 8C450000 */  lw        $a1, ($v0)
 /* 16EB60 80240280 0C0511FF */  jal       set_hud_element_anim

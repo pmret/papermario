@@ -7,7 +7,7 @@ extern const HudElementAnim HudScript_BlueMeter[];
 extern const HudElementAnim HudScript_AButton[];
 extern const HudElementAnim HudScript_MashAButton[];
 extern const HudElementAnim HudScript_RunAwayOK[];
-extern const HudElementAnim D_80292974[];
+extern const HudElementAnim HudScript_100pct[];
 extern s32 D_802943A0[];
 extern s16 D_802A9AA2_42D9B2[];
 extern s32 D_802A9B00;
@@ -54,7 +54,7 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(D_80292974);
+    hudElement = create_hud_element(HudScript_100pct);
     actionCommandStatus->hudElements[3] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);

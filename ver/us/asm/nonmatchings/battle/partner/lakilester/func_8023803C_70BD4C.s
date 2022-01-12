@@ -42,8 +42,8 @@ glabel func_8023803C_70BD4C
 /* 70BDD8 802380C8 0808E21D */  j         .L80238874
 /* 70BDDC 802380CC 00000000 */   nop
 .L802380D0:
-/* 70BDE0 802380D0 3C048029 */  lui       $a0, %hi(D_8029369C)
-/* 70BDE4 802380D4 2484369C */  addiu     $a0, $a0, %lo(D_8029369C)
+/* 70BDE0 802380D0 3C048029 */  lui       $a0, %hi(HudScript_AimReticle)
+/* 70BDE4 802380D4 2484369C */  addiu     $a0, $a0, %lo(HudScript_AimReticle)
 /* 70BDE8 802380D8 0C050529 */  jal       create_hud_element
 /* 70BDEC 802380DC 0000902D */   daddu    $s2, $zero, $zero
 /* 70BDF0 802380E0 0040202D */  daddu     $a0, $v0, $zero
@@ -51,8 +51,8 @@ glabel func_8023803C_70BD4C
 /* 70BDF8 802380E8 AC24D288 */  sw        $a0, %lo(D_8023D288)($at)
 /* 70BDFC 802380EC 0C051277 */  jal       set_hud_element_render_depth
 /* 70BE00 802380F0 2405000A */   addiu    $a1, $zero, 0xa
-/* 70BE04 802380F4 3C048029 */  lui       $a0, %hi(D_802936D4)
-/* 70BE08 802380F8 248436D4 */  addiu     $a0, $a0, %lo(D_802936D4)
+/* 70BE04 802380F4 3C048029 */  lui       $a0, %hi(HudScript_AimTarget)
+/* 70BE08 802380F8 248436D4 */  addiu     $a0, $a0, %lo(HudScript_AimTarget)
 /* 70BE0C 802380FC 0C050529 */  jal       create_hud_element
 /* 70BE10 80238100 00000000 */   nop
 /* 70BE14 80238104 0040202D */  daddu     $a0, $v0, $zero

@@ -146,8 +146,8 @@ dlabel L802A94A8_428788
 /* 4287BC 802A94DC 28422710 */  slti      $v0, $v0, 0x2710
 /* 4287C0 802A94E0 14400014 */  bnez      $v0, .L802A9534
 /* 4287C4 802A94E4 3C0451EB */   lui      $a0, 0x51eb
-/* 4287C8 802A94E8 3C058029 */  lui       $a1, %hi(D_80292788)
-/* 4287CC 802A94EC 24A52788 */  addiu     $a1, $a1, %lo(D_80292788)
+/* 4287C8 802A94E8 3C058029 */  lui       $a1, %hi(HudScript_TimingReady)
+/* 4287CC 802A94EC 24A52788 */  addiu     $a1, $a1, %lo(HudScript_TimingReady)
 /* 4287D0 802A94F0 8E24000C */  lw        $a0, 0xc($s1)
 /* 4287D4 802A94F4 24022710 */  addiu     $v0, $zero, 0x2710
 /* 4287D8 802A94F8 0C0511FF */  jal       set_hud_element_anim
