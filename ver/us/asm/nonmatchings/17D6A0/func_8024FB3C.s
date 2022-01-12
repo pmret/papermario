@@ -845,38 +845,38 @@ glabel func_8024FB3C
 /* 17EFE0 80250700 00400008 */  jr        $v0
 /* 17EFE4 80250704 00000000 */   nop
 .L80250708_17EFE8:
-/* 17EFE8 80250708 3C048008 */  lui       $a0, %hi(D_800806A0)
-/* 17EFEC 8025070C 248406A0 */  addiu     $a0, $a0, %lo(D_800806A0)
+/* 17EFE8 80250708 3C048008 */  lui       $a0, %hi(HudScript_Item_Hammer1)
+/* 17EFEC 8025070C 248406A0 */  addiu     $a0, $a0, %lo(HudScript_Item_Hammer1)
 /* 17EFF0 80250710 080941DC */  j         .L80250770
 /* 17EFF4 80250714 00000000 */   nop
 .L80250718_17EFF8:
-/* 17EFF8 80250718 3C048008 */  lui       $a0, %hi(D_800806D0)
-/* 17EFFC 8025071C 248406D0 */  addiu     $a0, $a0, %lo(D_800806D0)
+/* 17EFF8 80250718 3C048008 */  lui       $a0, %hi(HudScript_Item_Hammer2)
+/* 17EFFC 8025071C 248406D0 */  addiu     $a0, $a0, %lo(HudScript_Item_Hammer2)
 /* 17F000 80250720 080941DC */  j         .L80250770
 /* 17F004 80250724 00000000 */   nop
 .L80250728_17F008:
-/* 17F008 80250728 3C048008 */  lui       $a0, %hi(D_80080700)
-/* 17F00C 8025072C 24840700 */  addiu     $a0, $a0, %lo(D_80080700)
+/* 17F008 80250728 3C048008 */  lui       $a0, %hi(HudScript_Item_Hammer3)
+/* 17F00C 8025072C 24840700 */  addiu     $a0, $a0, %lo(HudScript_Item_Hammer3)
 /* 17F010 80250730 080941DC */  j         .L80250770
 /* 17F014 80250734 00000000 */   nop
 .L80250738_17F018:
-/* 17F018 80250738 3C048008 */  lui       $a0, %hi(D_80080730)
-/* 17F01C 8025073C 24840730 */  addiu     $a0, $a0, %lo(D_80080730)
+/* 17F018 80250738 3C048008 */  lui       $a0, %hi(HudScript_Item_Boots1)
+/* 17F01C 8025073C 24840730 */  addiu     $a0, $a0, %lo(HudScript_Item_Boots1)
 /* 17F020 80250740 080941DC */  j         .L80250770
 /* 17F024 80250744 00000000 */   nop
 .L80250748_17F028:
-/* 17F028 80250748 3C048008 */  lui       $a0, %hi(D_80080760)
-/* 17F02C 8025074C 24840760 */  addiu     $a0, $a0, %lo(D_80080760)
+/* 17F028 80250748 3C048008 */  lui       $a0, %hi(HudScript_Item_Boots2)
+/* 17F02C 8025074C 24840760 */  addiu     $a0, $a0, %lo(HudScript_Item_Boots2)
 /* 17F030 80250750 080941DC */  j         .L80250770
 /* 17F034 80250754 00000000 */   nop
 .L80250758_17F038:
-/* 17F038 80250758 3C048008 */  lui       $a0, %hi(D_80080790)
-/* 17F03C 8025075C 24840790 */  addiu     $a0, $a0, %lo(D_80080790)
+/* 17F038 80250758 3C048008 */  lui       $a0, %hi(HudScript_Item_Boots3)
+/* 17F03C 8025075C 24840790 */  addiu     $a0, $a0, %lo(HudScript_Item_Boots3)
 /* 17F040 80250760 080941DC */  j         .L80250770
 /* 17F044 80250764 00000000 */   nop
 .L80250768_17F048:
-/* 17F048 80250768 3C048008 */  lui       $a0, %hi(D_800807C0)
-/* 17F04C 8025076C 248407C0 */  addiu     $a0, $a0, %lo(D_800807C0)
+/* 17F048 80250768 3C048008 */  lui       $a0, %hi(HudScript_Item_Items)
+/* 17F04C 8025076C 248407C0 */  addiu     $a0, $a0, %lo(HudScript_Item_Items)
 .L80250770:
 /* 17F050 80250770 0C050529 */  jal       create_hud_element
 /* 17F054 80250774 00000000 */   nop

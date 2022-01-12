@@ -225,8 +225,8 @@ glabel btl_update_starpoints_display
 /* 16EFD4 802406F4 00042603 */  sra       $a0, $a0, 0x18
 /* 16EFD8 802406F8 1AC00039 */  blez      $s6, .L802407E0
 /* 16EFDC 802406FC AFA40050 */   sw       $a0, 0x50($sp)
-/* 16EFE0 80240700 3C1E8008 */  lui       $fp, %hi(D_80080FF0)
-/* 16EFE4 80240704 27DE0FF0 */  addiu     $fp, $fp, %lo(D_80080FF0)
+/* 16EFE0 80240700 3C1E8008 */  lui       $fp, %hi(HudScript_Item_StarPoint)
+/* 16EFE4 80240704 27DE0FF0 */  addiu     $fp, $fp, %lo(HudScript_Item_StarPoint)
 /* 16EFE8 80240708 3C178010 */  lui       $s7, %hi(HudScript_StatusSPShine)
 /* 16EFEC 8024070C 26F74BEC */  addiu     $s7, $s7, %lo(HudScript_StatusSPShine)
 /* 16EFF0 80240710 3C14802A */  lui       $s4, %hi(D_8029EFE8)
@@ -359,8 +359,8 @@ glabel btl_update_starpoints_display
 .L802408F0:
 /* 16F1D0 802408F0 19800024 */  blez      $t4, .L80240984
 /* 16F1D4 802408F4 0000882D */   daddu    $s1, $zero, $zero
-/* 16F1D8 802408F8 3C148008 */  lui       $s4, %hi(D_800810C8)
-/* 16F1DC 802408FC 269410C8 */  addiu     $s4, $s4, %lo(D_800810C8)
+/* 16F1D8 802408F8 3C148008 */  lui       $s4, %hi(HudScript_Item_SmallStarPoint)
+/* 16F1DC 802408FC 269410C8 */  addiu     $s4, $s4, %lo(HudScript_Item_SmallStarPoint)
 /* 16F1E0 80240900 3C014120 */  lui       $at, 0x4120
 /* 16F1E4 80240904 4481A000 */  mtc1      $at, $f20
 /* 16F1E8 80240908 3C13802A */  lui       $s3, %hi(D_8029F010)

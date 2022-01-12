@@ -8,7 +8,7 @@ extern HudElementAnim HudScript_StatusHP[];
 extern HudElementAnim HudScript_StatusHeart[];
 extern HudElementAnim HudScript_StatusFP[];
 extern HudElementAnim HudScript_StatusFlower[];
-extern HudElementAnim D_80080FC4[];
+extern HudElementAnim HudScript_Item_CoinSparkleRandom[];
 extern HudElementAnim HudScript_StatusStarPoint[];
 extern HudElementAnim HudScript_StatusStar1[];
 extern HudElementAnim HudScript_StatusTimes[];
@@ -355,7 +355,7 @@ void initialize_status_menu(void) {
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_80080FC4);
+    iconIndex = create_hud_element(HudScript_Item_CoinSparkleRandom);
     uiStatus->coinIconIndex2 = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);

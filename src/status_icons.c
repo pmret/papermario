@@ -73,7 +73,7 @@ extern s16 D_80078160[];
 extern s16 D_80078164[];
 extern s32 D_80078168[];
 
-extern HudElementAnim HudItem_Present;
+extern HudElementAnim HudScript_Item_Present;
 
 extern PopupMessage D_800A0BC0[32];
 extern s32 D_800A0F40;
@@ -334,7 +334,7 @@ void update_all_status_icons(PopupMessage* popup) {
                     elementID = icon->status1.activeElementID = create_hud_element(&HudScript_FrozenBegin);
                     break;
                 default:
-                    elementID = icon->status1.activeElementID = create_hud_element(&HudItem_Present);
+                    elementID = icon->status1.activeElementID = create_hud_element(&HudScript_Item_Present);
                     break;
             }
             set_hud_element_flags(elementID, 2);
@@ -372,7 +372,7 @@ void update_all_status_icons(PopupMessage* popup) {
                         set_hud_element_anim(icon->status1.removingElementID, &HudScript_FrozenEnd);
                         break;
                     default:
-                        set_hud_element_anim(icon->status1.removingElementID, &HudItem_Present);
+                        set_hud_element_anim(icon->status1.removingElementID, &HudScript_Item_Present);
                         break;
                 }
 
@@ -397,7 +397,7 @@ void update_all_status_icons(PopupMessage* popup) {
                     elementID = icon->status2.activeElementID = create_hud_element(&HudScript_ElectrifiedBegin);
                     break;
                 default:
-                    elementID = icon->status2.activeElementID = create_hud_element(&HudItem_Present);
+                    elementID = icon->status2.activeElementID = create_hud_element(&HudScript_Item_Present);
                     break;
             }
 
@@ -415,7 +415,7 @@ void update_all_status_icons(PopupMessage* popup) {
                         set_hud_element_anim(icon->status2.removingElementID, &HudScript_ElectrifiedEnd);
                         break;
                     default:
-                        set_hud_element_anim(icon->status2.removingElementID, &HudItem_Present);
+                        set_hud_element_anim(icon->status2.removingElementID, &HudScript_Item_Present);
                         break;
                 }
 
@@ -439,7 +439,7 @@ void update_all_status_icons(PopupMessage* popup) {
                     elementID = icon->status3.activeElementID = create_hud_element(&HudScript_TransparentBegin);
                     break;
                 default:
-                    elementID = icon->status3.activeElementID = create_hud_element(&HudItem_Present);
+                    elementID = icon->status3.activeElementID = create_hud_element(&HudScript_Item_Present);
                     break;
             }
 
@@ -457,7 +457,7 @@ void update_all_status_icons(PopupMessage* popup) {
                         set_hud_element_anim(icon->status3.removingElementID, &HudScript_TransparentEnd);
                         break;
                     default:
-                        set_hud_element_anim(icon->status3.removingElementID, &HudItem_Present);
+                        set_hud_element_anim(icon->status3.removingElementID, &HudScript_Item_Present);
                         break;
                 }
 
