@@ -1748,869 +1748,1016 @@ dlabel gItemTable
 dlabel gItemHudScripts
 .word 0x00000000, 0x00000000, HudScript_Item_SpicySoup, HudScript_Item_SpicySoup_disabled, HudScript_Item_ApplePie, HudScript_Item_ApplePie_disabled, HudScript_Item_HoneyUltra, HudScript_Item_HoneyUltra_disabled, HudScript_Item_MapleUltra, HudScript_Item_MapleUltra_disabled, HudScript_Item_JellyUltra, HudScript_Item_JellyUltra_disabled, HudScript_Item_Koopasta, HudScript_Item_Koopasta_disabled, HudScript_Item_FriedShroom, HudScript_Item_FriedShroom_disabled, HudScript_Item_ShroomCake, HudScript_Item_ShroomCake_disabled, HudScript_Item_ShroomSteak, HudScript_Item_ShroomSteak_disabled, HudScript_Item_HotShroom, HudScript_Item_HotShroom_disabled, HudScript_Item_SweetShroom, HudScript_Item_SweetShroom_disabled, HudScript_Item_HealthyJuice, HudScript_Item_HealthyJuice_disabled, HudScript_Item_BlandMeal, HudScript_Item_BlandMeal_disabled, HudScript_Item_YummyMeal, HudScript_Item_YummyMeal_disabled, HudScript_Item_DeluxeFeast, HudScript_Item_DeluxeFeast_disabled, HudScript_Item_SpecialShake, HudScript_Item_SpecialShake_disabled, HudScript_Item_BigCookie, HudScript_Item_BigCookie_disabled, HudScript_Item_Cake, HudScript_Item_Cake_disabled, HudScript_Item_Mistake, HudScript_Item_Mistake_disabled, HudScript_Item_KoopaTea, HudScript_Item_KoopaTea_disabled, HudScript_Item_HoneySuper, HudScript_Item_HoneySuper_disabled, HudScript_Item_MapleSuper, HudScript_Item_MapleSuper_disabled, HudScript_Item_JellySuper, HudScript_Item_JellySuper_disabled, HudScript_Item_Spaghetti, HudScript_Item_Spaghetti_disabled, HudScript_Item_EggMissile, HudScript_Item_EggMissile_disabled, HudScript_Item_FriedEgg, HudScript_Item_FriedEgg_disabled, HudScript_Item_HoneyShroom, HudScript_Item_HoneyShroom_disabled, HudScript_Item_HoneyCandy, HudScript_Item_HoneyCandy_disabled, HudScript_Item_ElectroPop, HudScript_Item_ElectroPop_disabled, HudScript_Item_FirePop, HudScript_Item_FirePop_disabled, HudScript_Item_LimeCandy, HudScript_Item_LimeCandy_disabled, HudScript_Item_CocoPop, HudScript_Item_CocoPop_disabled, HudScript_Item_LemonCandy, HudScript_Item_LemonCandy_disabled, HudScript_Item_JellyPop, HudScript_Item_JellyPop_disabled, HudScript_Item_StrangeCake, HudScript_Item_StrangeCake_disabled, HudScript_Item_KookyCookie, HudScript_Item_KookyCookie_disabled, HudScript_Item_FrozenFries, HudScript_Item_FrozenFries_disabled, HudScript_Item_PotatoSalad, HudScript_Item_PotatoSalad_disabled, HudScript_Item_NuttyCake, HudScript_Item_NuttyCake_disabled, HudScript_Item_MapleShroom, HudScript_Item_MapleShroom_disabled, HudScript_Item_BoiledEgg, HudScript_Item_BoiledEgg_disabled, HudScript_Item_YoshiCookie, HudScript_Item_YoshiCookie_disabled, HudScript_Item_JellyShroom, HudScript_Item_JellyShroom_disabled, HudScript_Item_ITEM_02C, HudScript_Item_ITEM_02C_disabled, HudScript_Item_ITEM_02D, HudScript_Item_ITEM_02D_disabled, HudScript_Item_ITEM_02E, HudScript_Item_ITEM_02E_disabled, HudScript_Item_ITEM_02F, HudScript_Item_ITEM_02F_disabled, HudScript_Item_ITEM_030, HudScript_Item_ITEM_030_disabled, HudScript_Item_Heart, HudScript_Item_Heart, HudScript_Item_Coin, HudScript_Item_Coin, HudScript_Item_HeartPiece, HudScript_Item_HeartPiece, HudScript_Item_StarPoint, HudScript_Item_StarPoint, HudScript_Item_HeartPoint, HudScript_Item_HeartPoint, HudScript_Item_FlowerPoint, HudScript_Item_FlowerPoint, HudScript_Item_StarPiece, HudScript_Item_StarPiece, HudScript_Item_GearBoots1, HudScript_Item_GearBoots1, HudScript_Item_GearBoots2, HudScript_Item_GearBoots2, HudScript_Item_GearBoots3, HudScript_Item_GearBoots3, HudScript_Item_GearHammer1, HudScript_Item_GearHammer1, HudScript_Item_GearHammer2, HudScript_Item_GearHammer2, HudScript_Item_GearHammer3, HudScript_Item_GearHammer3, HudScript_Item_LuckyStar, HudScript_Item_LuckyStar, HudScript_Item_Map, HudScript_Item_Map, HudScript_Item_KoopaFortressKey, HudScript_Item_KoopaFortressKey, HudScript_Item_RuinsKey, HudScript_Item_RuinsKey, HudScript_Item_TubbaCastleKey, HudScript_Item_TubbaCastleKey, HudScript_Item_IcePalaceKey, HudScript_Item_IcePalaceKey, HudScript_Item_BowserCastleKey, HudScript_Item_BowserCastleKey, HudScript_Item_Dolly, HudScript_Item_Dolly, HudScript_Item_KooperShell, HudScript_Item_KooperShell, HudScript_Item_PulseStone, HudScript_Item_PulseStone, HudScript_Item_Artifact, HudScript_Item_Artifact, HudScript_Item_AncientVase, HudScript_Item_AncientVase, HudScript_Item_RuinsStonePyramid, HudScript_Item_RuinsStonePyramid, HudScript_Item_RuinsStoneStar, HudScript_Item_RuinsStoneStar, HudScript_Item_RuinsStoneMoon, HudScript_Item_RuinsStoneMoon, HudScript_Item_ForestPass, HudScript_Item_ForestPass, HudScript_Item_BooRecordOutline, HudScript_Item_BooRecordOutline, HudScript_Item_BooRecord, HudScript_Item_BooRecord, HudScript_Item_BooWeight, HudScript_Item_BooWeight, HudScript_Item_BooPortrait, HudScript_Item_BooPortrait, HudScript_Item_MysticKey, HudScript_Item_MysticKey, HudScript_Item_StoreroomKey, HudScript_Item_StoreroomKey, HudScript_Item_ToyboxTrain, HudScript_Item_ToyboxTrain, HudScript_Item_FryingPan, HudScript_Item_FryingPan, HudScript_Item_Dictionary, HudScript_Item_Dictionary, HudScript_Item_MysteryNote, HudScript_Item_MysteryNote, HudScript_Item_SuspiciousNote, HudScript_Item_SuspiciousNote, HudScript_Item_Seed1, HudScript_Item_Seed1, HudScript_Item_Seed2, HudScript_Item_Seed2, HudScript_Item_Seed3, HudScript_Item_Seed3, HudScript_Item_Seed4, HudScript_Item_Seed4, HudScript_Item_CrystalBerry, HudScript_Item_CrystalBerry, HudScript_Item_WaterStone, HudScript_Item_WaterStone, HudScript_Item_MagicBean, HudScript_Item_MagicBean, HudScript_Item_FertileSoil, HudScript_Item_FertileSoil, HudScript_Item_MiracleWater, HudScript_Item_MiracleWater, HudScript_Item_UltraStone, HudScript_Item_UltraStone, HudScript_Item_ToadDoll, HudScript_Item_ToadDoll, HudScript_Item_Calculator, HudScript_Item_Calculator, HudScript_Item_Screwdriver, HudScript_Item_Screwdriver, HudScript_Item_CookBook, HudScript_Item_CookBook, HudScript_Item_JadeRaven, HudScript_Item_JadeRaven, HudScript_Item_SnowmanBucket, HudScript_Item_SnowmanBucket, HudScript_Item_SnowmanScarf, HudScript_Item_SnowmanScarf, HudScript_Item_RedKey, HudScript_Item_RedKey, HudScript_Item_BlueKey, HudScript_Item_BlueKey, HudScript_Item_KootPackage, HudScript_Item_KootPackage, HudScript_Item_KootRedJar, HudScript_Item_KootRedJar, HudScript_Item_Melody, HudScript_Item_Melody, HudScript_Item_Lyrics, HudScript_Item_Lyrics, HudScript_Item_Mailbag, HudScript_Item_Mailbag, HudScript_Item_StarStone, HudScript_Item_StarStone, HudScript_Item_SneakyParasol, HudScript_Item_SneakyParasol, HudScript_Item_PeachKey, HudScript_Item_PeachKey, HudScript_Item_UNK_1DC210, HudScript_Item_UNK_1DC210, HudScript_Item_UNK_1DC430, HudScript_Item_UNK_1DC430, HudScript_Item_UNK_1DC650, HudScript_Item_UNK_1DC650, HudScript_Item_UNK_1DC870, HudScript_Item_UNK_1DC870, HudScript_Item_DojoCard1, HudScript_Item_DojoCard1, HudScript_Item_DojoCard2, HudScript_Item_DojoCard2, HudScript_Item_DojoCard3, HudScript_Item_DojoCard3, HudScript_Item_DojoCard4, HudScript_Item_DojoCard4, HudScript_Item_DojoCard5, HudScript_Item_DojoCard5, HudScript_Item_CrystalBall, HudScript_Item_CrystalBall, HudScript_Item_GoldCard, HudScript_Item_GoldCard, HudScript_Item_SilverCard, HudScript_Item_SilverCard, HudScript_Item_KootBook, HudScript_Item_KootBook, HudScript_Item_KootTheTape, HudScript_Item_KootTheTape, HudScript_Item_KootMerluvleeAutograph, HudScript_Item_KootMerluvleeAutograph, HudScript_Item_KootEmptyWallet, HudScript_Item_KootEmptyWallet, HudScript_Item_KootLuigiAutograph, HudScript_Item_KootLuigiAutograph, HudScript_Item_KootShell, HudScript_Item_KootShell, HudScript_Item_KootPhoto, HudScript_Item_KootPhoto, HudScript_Item_KootGlasses, HudScript_Item_KootGlasses, HudScript_Item_Letter, HudScript_Item_Letter_disabled, HudScript_Item_ITEM_089, HudScript_Item_ITEM_089_disabled, HudScript_Item_ITEM_08A, HudScript_Item_ITEM_08A_disabled, HudScript_Item_ITEM_08B, HudScript_Item_ITEM_08B_disabled, HudScript_Item_ITEM_08C, HudScript_Item_ITEM_08C_disabled, HudScript_Item_ITEM_08D, HudScript_Item_ITEM_08D_disabled, HudScript_Item_ITEM_08E, HudScript_Item_ITEM_08E_disabled, HudScript_Item_ITEM_08F, HudScript_Item_ITEM_08F_disabled, HudScript_Item_SpinSmash, HudScript_Item_SpinSmash_disabled, HudScript_Item_Multibounce, HudScript_Item_Multibounce_disabled, HudScript_Item_PowerPlus, HudScript_Item_PowerPlus_disabled, HudScript_Item_DodgeMaster, HudScript_Item_DodgeMaster_disabled, HudScript_Item_PowerBounce, HudScript_Item_PowerBounce_disabled, HudScript_Item_SpikeShield, HudScript_Item_SpikeShield_disabled, HudScript_Item_FirstAttack, HudScript_Item_FirstAttack_disabled, HudScript_Item_HPPlus, HudScript_Item_HPPlus_disabled, HudScript_Item_QuakeHammer, HudScript_Item_QuakeHammer_disabled, HudScript_Item_DoubleDip, HudScript_Item_DoubleDip_disabled, HudScript_Item_PowerQuake, HudScript_Item_PowerQuake_disabled, HudScript_Item_MegaQuake, HudScript_Item_MegaQuake_disabled, HudScript_Item_SleepStomp, HudScript_Item_SleepStomp_disabled, HudScript_Item_SmashCharge, HudScript_Item_SmashCharge_disabled, HudScript_Item_SSmashChg, HudScript_Item_SSmashChg_disabled, HudScript_Item_AutoSmash, HudScript_Item_AutoSmash_disabled, HudScript_Item_FireShield, HudScript_Item_FireShield_disabled, HudScript_Item_JumpCharge, HudScript_Item_JumpCharge_disabled, HudScript_Item_SJumpChg, HudScript_Item_SJumpChg_disabled, HudScript_Item_AutoJump, HudScript_Item_AutoJump_disabled, HudScript_Item_DDownPound, HudScript_Item_DDownPound_disabled, HudScript_Item_AutoMultibounce, HudScript_Item_AutoMultibounce_disabled, HudScript_Item_DizzyStomp, HudScript_Item_DizzyStomp_disabled, HudScript_Item_HammerThrow, HudScript_Item_HammerThrow_disabled, HudScript_Item_SmashCharge0, HudScript_Item_SmashCharge0_disabled, HudScript_Item_PrettyLucky, HudScript_Item_PrettyLucky_disabled, HudScript_Item_FeelingFine, HudScript_Item_FeelingFine_disabled, HudScript_Item_AttackFXA, HudScript_Item_AttackFXA_disabled, HudScript_Item_AllorNothing, HudScript_Item_AllorNothing_disabled, HudScript_Item_HPDrain, HudScript_Item_HPDrain_disabled, HudScript_Item_JumpCharge0, HudScript_Item_JumpCharge0_disabled, HudScript_Item_SlowGo, HudScript_Item_SlowGo_disabled, HudScript_Item_FPPlus, HudScript_Item_FPPlus_disabled, HudScript_Item_MegaRush, HudScript_Item_MegaRush_disabled, HudScript_Item_IcePower, HudScript_Item_IcePower_disabled, HudScript_Item_DefendPlus, HudScript_Item_DefendPlus_disabled, HudScript_Item_PayOff, HudScript_Item_PayOff_disabled, HudScript_Item_MoneyMoney, HudScript_Item_MoneyMoney_disabled, HudScript_Item_ChillOut, HudScript_Item_ChillOut_disabled, HudScript_Item_HappyHeart, HudScript_Item_HappyHeart_disabled, HudScript_Item_ZapTap, HudScript_Item_ZapTap_disabled, HudScript_Item_Berserker, HudScript_Item_Berserker_disabled, HudScript_Item_RightOn, HudScript_Item_RightOn_disabled, HudScript_Item_RunawayPay, HudScript_Item_RunawayPay_disabled, HudScript_Item_Refund, HudScript_Item_Refund_disabled, HudScript_Item_FlowerSaver, HudScript_Item_FlowerSaver_disabled, HudScript_Item_TripleDip, HudScript_Item_TripleDip_disabled, HudScript_Item_FlowerFanatic, HudScript_Item_FlowerFanatic_disabled, HudScript_Item_PowerJump, HudScript_Item_PowerJump_disabled, HudScript_Item_SuperJump, HudScript_Item_SuperJump_disabled, HudScript_Item_MegaJump, HudScript_Item_MegaJump_disabled, HudScript_Item_PowerSmash1, HudScript_Item_PowerSmash1_disabled, HudScript_Item_SuperSmash, HudScript_Item_SuperSmash_disabled, HudScript_Item_MegaSmash, HudScript_Item_MegaSmash_disabled, HudScript_Item_LuckyDay, HudScript_Item_LuckyDay_disabled, HudScript_Item_MegaHPDrain, HudScript_Item_MegaHPDrain_disabled, HudScript_Item_BumpAttack, HudScript_Item_BumpAttack_disabled, HudScript_Item_PUpDDown, HudScript_Item_PUpDDown_disabled, HudScript_Item_PDownDUp, HudScript_Item_PDownDUp_disabled, HudScript_Item_HeartFinder, HudScript_Item_HeartFinder_disabled, HudScript_Item_FlowerFinder, HudScript_Item_FlowerFinder_disabled, HudScript_Item_DizzyAttack, HudScript_Item_DizzyAttack_disabled, HudScript_Item_SpeedySpin, HudScript_Item_SpeedySpin_disabled, HudScript_Item_SpinAttack, HudScript_Item_SpinAttack_disabled, HudScript_Item_ISpy, HudScript_Item_ISpy_disabled, HudScript_Item_PowerRush, HudScript_Item_PowerRush_disabled, HudScript_Item_LastStand, HudScript_Item_LastStand_disabled, HudScript_Item_CloseCall, HudScript_Item_CloseCall_disabled, HudScript_Item_CrazyHeart, HudScript_Item_CrazyHeart_disabled, HudScript_Item_ITEM_0D5, HudScript_Item_ITEM_0D5_disabled, HudScript_Item_ITEM_0D6, HudScript_Item_ITEM_0D6_disabled, HudScript_Item_ITEM_0D7, HudScript_Item_ITEM_0D7_disabled, HudScript_Item_ShrinkSmash, HudScript_Item_ShrinkSmash_disabled, HudScript_Item_ShrinkStomp, HudScript_Item_ShrinkStomp_disabled, HudScript_Item_DDownJump, HudScript_Item_DDownJump_disabled, HudScript_Item_DamageDodge, HudScript_Item_DamageDodge_disabled, HudScript_Item_EarthquakeJump, HudScript_Item_EarthquakeJump_disabled, HudScript_Item_HappyFlower, HudScript_Item_HappyFlower_disabled, HudScript_Item_ITEM_0DE, HudScript_Item_ITEM_0DE_disabled, HudScript_Item_ITEM_0DF, HudScript_Item_ITEM_0DF_disabled, HudScript_Item_DeepFocus3, HudScript_Item_DeepFocus3_disabled, HudScript_Item_SuperFocus, HudScript_Item_SuperFocus_disabled, HudScript_Item_Kaiden, HudScript_Item_Kaiden_disabled, HudScript_Item_QuickChange, HudScript_Item_QuickChange_disabled, HudScript_Item_ITEM_0E4, HudScript_Item_ITEM_0E4_disabled, HudScript_Item_ITEM_0E5, HudScript_Item_ITEM_0E5_disabled, HudScript_Item_ITEM_0E6, HudScript_Item_ITEM_0E6_disabled, HudScript_Item_ITEM_0E7, HudScript_Item_ITEM_0E7_disabled, HudScript_Item_Peekaboo, HudScript_Item_Peekaboo_disabled, HudScript_Item_GroupFocus, HudScript_Item_GroupFocus_disabled, HudScript_Item_AttackFXD, HudScript_Item_AttackFXD_disabled, HudScript_Item_AttackFXB, HudScript_Item_AttackFXB_disabled, HudScript_Item_AttackFXE, HudScript_Item_AttackFXE_disabled, HudScript_Item_AttackFXC, HudScript_Item_AttackFXC_disabled, HudScript_Item_AttackFXF, HudScript_Item_AttackFXF_disabled, HudScript_Item_ITEM_0EF, HudScript_Item_ITEM_0EF_disabled, HudScript_Item_HealthyHealthy, HudScript_Item_HealthyHealthy_disabled, HudScript_Item_ITEM_0F1, HudScript_Item_ITEM_0F1_disabled, HudScript_Item_ITEM_0F2, HudScript_Item_ITEM_0F2_disabled, HudScript_Item_ITEM_0F3, HudScript_Item_ITEM_0F3_disabled, HudScript_Item_ITEM_0F4, HudScript_Item_ITEM_0F4_disabled, HudScript_Item_ITEM_0F5, HudScript_Item_ITEM_0F5_disabled, HudScript_Item_ITEM_0F6, HudScript_Item_ITEM_0F6_disabled, HudScript_Item_ITEM_0F7, HudScript_Item_ITEM_0F7_disabled, HudScript_Item_Mushroom, HudScript_Item_Mushroom_disabled, HudScript_Item_SuperShroom, HudScript_Item_SuperShroom_disabled, HudScript_Item_UltraShroom, HudScript_Item_UltraShroom_disabled, HudScript_Item_LifeShroom, HudScript_Item_LifeShroom_disabled, HudScript_Item_DriedShroom, HudScript_Item_DriedShroom_disabled, HudScript_Item_TastyTonic, HudScript_Item_TastyTonic_disabled, HudScript_Item_SuperSoda, HudScript_Item_SuperSoda_disabled, HudScript_Item_BlueBerry, HudScript_Item_BlueBerry_disabled, HudScript_Item_RedBerry, HudScript_Item_RedBerry_disabled, HudScript_Item_YellowBerry, HudScript_Item_YellowBerry_disabled, HudScript_Item_BubbleBerry, HudScript_Item_BubbleBerry_disabled, HudScript_Item_Goomnut, HudScript_Item_Goomnut_disabled, HudScript_Item_KoopaLeaf, HudScript_Item_KoopaLeaf_disabled, HudScript_Item_DriedPasta, HudScript_Item_DriedPasta_disabled, HudScript_Item_Lime, HudScript_Item_Lime_disabled, HudScript_Item_Lemon, HudScript_Item_Lemon_disabled, HudScript_Item_DriedFruit, HudScript_Item_DriedFruit_disabled, HudScript_Item_StrangeLeaf, HudScript_Item_StrangeLeaf_disabled, HudScript_Item_CakeMix, HudScript_Item_CakeMix_disabled, HudScript_Item_Egg, HudScript_Item_Egg_disabled, HudScript_Item_Coconut, HudScript_Item_Coconut_disabled, HudScript_Item_Melon, HudScript_Item_Melon_disabled, HudScript_Item_StinkyHerb, HudScript_Item_StinkyHerb_disabled, HudScript_Item_IcedPotato, HudScript_Item_IcedPotato_disabled, HudScript_Item_HoneySyrup, HudScript_Item_HoneySyrup_disabled, HudScript_Item_MapleSyrup, HudScript_Item_MapleSyrup_disabled, HudScript_Item_JamminJelly, HudScript_Item_JamminJelly_disabled, HudScript_Item_WhackasBump, HudScript_Item_WhackasBump_disabled, HudScript_Item_Apple, HudScript_Item_Apple_disabled, HudScript_Item_BakingSalt, HudScript_Item_BakingSalt_disabled, HudScript_Item_BakingSugar, HudScript_Item_BakingSugar_disabled, HudScript_Item_BakingEgg, HudScript_Item_BakingEgg_disabled, HudScript_Item_BakingCream, HudScript_Item_BakingCream_disabled, HudScript_Item_BakingStrawberry, HudScript_Item_BakingStrawberry_disabled, HudScript_Item_BakingButter, HudScript_Item_BakingButter_disabled, HudScript_Item_BakingCleanser, HudScript_Item_BakingCleanser_disabled, HudScript_Item_BakingWater, HudScript_Item_BakingWater_disabled, HudScript_Item_BakingFlour, HudScript_Item_BakingFlour_disabled, HudScript_Item_BakingMilk, HudScript_Item_BakingMilk_disabled, HudScript_Item_ITEM_11F, HudScript_Item_ITEM_11F_disabled, HudScript_Item_FireFlower, HudScript_Item_FireFlower_disabled, HudScript_Item_SnowmanDoll, HudScript_Item_SnowmanDoll_disabled, HudScript_Item_ThunderRage, HudScript_Item_ThunderRage_disabled, HudScript_Item_ThunderBolt, HudScript_Item_ThunderBolt_disabled, HudScript_Item_ShootingStar, HudScript_Item_ShootingStar_disabled, HudScript_Item_DustyHammer, HudScript_Item_DustyHammer_disabled, HudScript_Item_Pebble, HudScript_Item_Pebble_disabled, HudScript_Item_ITEM_127, HudScript_Item_ITEM_127_disabled, HudScript_Item_StoneCap, HudScript_Item_StoneCap_disabled, HudScript_Item_VoltShroom, HudScript_Item_VoltShroom_disabled, HudScript_Item_PowerStar, HudScript_Item_PowerStar_disabled, HudScript_Item_Parasol, HudScript_Item_Parasol_disabled, HudScript_Item_MagicMirror, HudScript_Item_MagicMirror_disabled, HudScript_Item_ITEM_12D, HudScript_Item_ITEM_12D_disabled, HudScript_Item_ITEM_12E, HudScript_Item_ITEM_12E_disabled, HudScript_Item_ITEM_12F, HudScript_Item_ITEM_12F_disabled, HudScript_Item_SleepySheep, HudScript_Item_SleepySheep_disabled, HudScript_Item_XBandage, HudScript_Item_XBandage_disabled, HudScript_Item_POWBlock, HudScript_Item_POWBlock_disabled, HudScript_Item_HustleDrink, HudScript_Item_HustleDrink_disabled, HudScript_Item_StopWatch, HudScript_Item_StopWatch_disabled, HudScript_Item_DizzyDial, HudScript_Item_DizzyDial_disabled, HudScript_Item_ITEM_136, HudScript_Item_ITEM_136_disabled, HudScript_Item_ITEM_137, HudScript_Item_ITEM_137_disabled, HudScript_Item_PleaseComeBack, HudScript_Item_PleaseComeBack_disabled, HudScript_Item_ITEM_139, HudScript_Item_ITEM_139_disabled, HudScript_Item_FrightJar, HudScript_Item_FrightJar_disabled, HudScript_Item_Mystery, HudScript_Item_Mystery_disabled, HudScript_Item_RepelGel, HudScript_Item_RepelGel_disabled, HudScript_Item_InsecticideHerb, HudScript_Item_InsecticideHerb_disabled, HudScript_Item_ITEM_13E, HudScript_Item_ITEM_13E_disabled, HudScript_Item_ITEM_13F, HudScript_Item_ITEM_13F_disabled, HudScript_Item_Present, HudScript_Item_Present, HudScript_Item_CakeDone, HudScript_Item_CakeDone, HudScript_Item_CakeBaked, HudScript_Item_CakeBaked, HudScript_Item_CakePan, HudScript_Item_CakePan, HudScript_Item_CakeBatter, HudScript_Item_CakeBatter, HudScript_Item_CakeBowl, HudScript_Item_CakeBowl, HudScript_Item_CakeMixed, HudScript_Item_CakeMixed, HudScript_Item_CakeIcing, HudScript_Item_CakeIcing, HudScript_Item_CakeBerries, HudScript_Item_CakeBerries, 0x80109338, 0x801093D8, HudScript_Item_Hammer1, HudScript_Item_Hammer1, HudScript_Item_Hammer2, HudScript_Item_Hammer2, HudScript_Item_Hammer3, HudScript_Item_Hammer3, HudScript_Item_Boots1, HudScript_Item_Boots1, HudScript_Item_Boots2, HudScript_Item_Boots2, HudScript_Item_Boots3, HudScript_Item_Boots3, HudScript_Item_Items, HudScript_Item_Items
 
-dlabel D_8008B108
+dlabel ItemScript_Jump
 .word 0x00000001, 0x000000FF, 0x00000000, 0x00000200, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B124
+dlabel ItemScript_CompleteCake
 .word 0x00000001, 0x000000FF, 0x00000000, 0x00000200, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B140
+dlabel ItemScript_CakeDone
 .word 0x00000001, 0x000000FF, 0x00000220, 0x00000420, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B15C
+dlabel ItemScript_CakeBaked
 .word 0x00000001, 0x000000FF, 0x00000440, 0x00000640, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B178
+dlabel ItemScript_CakePan
 .word 0x00000001, 0x000000FF, 0x00000660, 0x00000860, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B194
+dlabel ItemScript_CakeBatter
 .word 0x00000001, 0x000000FF, 0x00000880, 0x00000A80, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B1B0
+dlabel ItemScript_CakeBowl
 .word 0x00000001, 0x000000FF, 0x00000AA0, 0x00000CA0, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B1CC
+dlabel ItemScript_CakeMixed
 .word 0x00000001, 0x000000FF, 0x00000CC0, 0x00000EC0, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B1E8
+dlabel ItemScript_CakeIcing
 .word 0x00000001, 0x000000FF, 0x00000EE0, 0x000010E0, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B204
+dlabel ItemScript_CakeBerries
 .word 0x00000001, 0x000000FF, 0x00001100, 0x00001300, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B220
+dlabel ItemScript_Hammer1
 .word 0x00000001, 0x000000FF, 0x0002D940, 0x0002DB40, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B23C
+dlabel ItemScript_Hammer2
 .word 0x00000001, 0x000000FF, 0x0002DB80, 0x0002DD80, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B258
+dlabel ItemScript_Hammer3
 .word 0x00000001, 0x000000FF, 0x0002DDC0, 0x0002DFC0, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B274
+dlabel ItemScript_Boots1
 .word 0x00000001, 0x000000FF, 0x0002E000, 0x0002E200, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B290
+dlabel ItemScript_Boots2
 .word 0x00000001, 0x000000FF, 0x0002E240, 0x0002E440, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B2AC
+dlabel ItemScript_Boots3
 .word 0x00000001, 0x000000FF, 0x0002E480, 0x0002E680, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B2C8
+dlabel ItemScript_Items
 .word 0x00000001, 0x000000FF, 0x0002E6C0, 0x0002E8C0, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_8008B2E4
-.word 0x00000001, 0x0000003C, 0x00013BC0, 0x00013DC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00013E00, 0x00014000, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_PleaseComeBack
+.word 0x00000001, 0x0000003C, 0x00013BC0, 0x00013DC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B324
+dlabel ItemScript_ITEM_139
+.word 0x00000001, 0x0000003C, 0x00013E00, 0x00014000, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_FrightJar
 .word 0x00000001, 0x0000003C, 0x00014040, 0x00014240, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B344
+dlabel ItemScript_Mystery
 .word 0x00000001, 0x0000003C, 0x00014280, 0x00014480, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B364
+dlabel ItemScript_RepelGel
 .word 0x00000001, 0x0000003C, 0x000144C0, 0x000146C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B384
-.word 0x00000001, 0x0000003C, 0x00014700, 0x00014900, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00014940, 0x00014B40, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00014B80, 0x00014D80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_InsecticideHerb
+.word 0x00000001, 0x0000003C, 0x00014700, 0x00014900, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B3E4
+dlabel ItemScript_ITEM_13E
+.word 0x00000001, 0x0000003C, 0x00014940, 0x00014B40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_13F
+.word 0x00000001, 0x0000003C, 0x00014B80, 0x00014D80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_GearBoots1
 .word 0x00000001, 0x0000003C, 0x00001320, 0x00001520, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B404
+dlabel ItemScript_GearBoots2
 .word 0x00000001, 0x0000003C, 0x00001540, 0x00001740, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B424
+dlabel ItemScript_GearBoots3
 .word 0x00000001, 0x0000003C, 0x00001760, 0x00001960, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B444
+dlabel ItemScript_GearHammer1
 .word 0x00000001, 0x0000003C, 0x00001980, 0x00001B80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B464
+dlabel ItemScript_GearHammer2
 .word 0x00000001, 0x0000003C, 0x00001BA0, 0x00001DA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B484
+dlabel ItemScript_GearHammer3
 .word 0x00000001, 0x0000003C, 0x00001DC0, 0x00001FC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B4A4
-.word 0x00000001, 0x0000003C, 0x00001FE0, 0x000021E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00002200, 0x00002400, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_LuckyStar
+.word 0x00000001, 0x0000003C, 0x00001FE0, 0x000021E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B4E4
+dlabel ItemScript_Map
+.word 0x00000001, 0x0000003C, 0x00002200, 0x00002400, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_KoopaFortressKey
 .word 0x00000001, 0x0000003C, 0x00009020, 0x00009220, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B504
+dlabel ItemScript_RuinsKey
 .word 0x00000001, 0x0000003C, 0x00009240, 0x00009440, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B524
+dlabel ItemScript_TubbaCastleKey
 .word 0x00000001, 0x0000003C, 0x00009460, 0x00009660, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B544
+dlabel ItemScript_IcePalaceKey
 .word 0x00000001, 0x0000003C, 0x00009680, 0x00009880, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B564
+dlabel ItemScript_BowserCastleKey
 .word 0x00000001, 0x0000003C, 0x000098A0, 0x00009AA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B584
+dlabel ItemScript_Dolly
 .word 0x00000001, 0x0000003C, 0x00009AC0, 0x00009CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B5A4
+dlabel ItemScript_KooperShell
 .word 0x00000001, 0x0000003C, 0x00009CE0, 0x00009EE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B5C4
+dlabel ItemScript_PulseStone
 .word 0x00000001, 0x0000003C, 0x00009F00, 0x0000A100, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B5E4
+dlabel ItemScript_Artifact
 .word 0x00000001, 0x0000003C, 0x0000A120, 0x0000A320, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B604
+dlabel ItemScript_AncientVase
 .word 0x00000001, 0x0000003C, 0x0000A340, 0x0000A540, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B624
+dlabel ItemScript_RuinsStonePyramid
 .word 0x00000001, 0x0000003C, 0x0000A560, 0x0000A760, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B644
+dlabel ItemScript_RuinsStoneStar
 .word 0x00000001, 0x0000003C, 0x0000A780, 0x0000A980, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B664
+dlabel ItemScript_RuinsStoneMoon
 .word 0x00000001, 0x0000003C, 0x0000A9A0, 0x0000ABA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B684
-.word 0x00000001, 0x0000003C, 0x0000ABC0, 0x0000ADC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0000ADE0, 0x0000AFE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_ForestPass
+.word 0x00000001, 0x0000003C, 0x0000ABC0, 0x0000ADC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B6C4
+dlabel ItemScript_BooRecordOutline
+.word 0x00000001, 0x0000003C, 0x0000ADE0, 0x0000AFE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_BooRecord
 .word 0x00000001, 0x0000003C, 0x0000B000, 0x0000B200, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B6E4
+dlabel ItemScript_BooWeight
 .word 0x00000001, 0x0000003C, 0x0000B220, 0x0000B420, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B704
+dlabel ItemScript_BoosPortrait
 .word 0x00000001, 0x0000003C, 0x0000B440, 0x0000B640, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B724
+dlabel ItemScript_MysticKey
 .word 0x00000001, 0x0000003C, 0x0000B660, 0x0000B860, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B744
+dlabel ItemScript_StoreroomKey
 .word 0x00000001, 0x0000003C, 0x0000B880, 0x0000BA80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B764
+dlabel ItemScript_ToyTrain
 .word 0x00000001, 0x0000003C, 0x0000BAA0, 0x0000BCA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B784
+dlabel ItemScript_FryingPan
 .word 0x00000001, 0x0000003C, 0x0000BCC0, 0x0000BEC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B7A4
+dlabel ItemScript_Dictionary
 .word 0x00000001, 0x0000003C, 0x0000BEE0, 0x0000C0E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B7C4
+dlabel ItemScript_MysteryNote
 .word 0x00000001, 0x0000003C, 0x0000C100, 0x0000C300, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B7E4
+dlabel ItemScript_SuspiciousNote
 .word 0x00000001, 0x0000003C, 0x0000C320, 0x0000C520, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B804
+dlabel ItemScript_MagicalSeed1
 .word 0x00000001, 0x0000003C, 0x0000C540, 0x0000C740, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B824
+dlabel ItemScript_MagicalSeed2
 .word 0x00000001, 0x0000003C, 0x0000C760, 0x0000C960, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B844
+dlabel ItemScript_MagicalSeed3
 .word 0x00000001, 0x0000003C, 0x0000C980, 0x0000CB80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B864
+dlabel ItemScript_MagicalSeed4
 .word 0x00000001, 0x0000003C, 0x0000CBA0, 0x0000CDA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B884
+dlabel ItemScript_CrystalBerry
 .word 0x00000001, 0x0000003C, 0x0000CDC0, 0x0000CFC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B8A4
+dlabel ItemScript_WaterStone
 .word 0x00000001, 0x0000003C, 0x0000CFE0, 0x0000D1E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B8C4
+dlabel ItemScript_MagicalBean
 .word 0x00000001, 0x0000003C, 0x0000D200, 0x0000D400, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B8E4
+dlabel ItemScript_FertileSoil
 .word 0x00000001, 0x0000003C, 0x0000D420, 0x0000D620, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B904
+dlabel ItemScript_MiracleWater
 .word 0x00000001, 0x0000003C, 0x0000D640, 0x0000D840, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B924
+dlabel ItemScript_UltraStone
 .word 0x00000001, 0x0000003C, 0x0000D860, 0x0000DA60, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B944
+dlabel ItemScript_ToadDoll
 .word 0x00000001, 0x0000003C, 0x0000DAA0, 0x0000DCA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B964
+dlabel ItemScript_Calculator
 .word 0x00000001, 0x0000003C, 0x0000DCC0, 0x0000DEC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B984
+dlabel ItemScript_Screwdriver
 .word 0x00000001, 0x0000003C, 0x0000DEE0, 0x0000E0E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B9A4
+dlabel ItemScript_Cookbook
 .word 0x00000001, 0x0000003C, 0x0000E100, 0x0000E300, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B9C4
+dlabel ItemScript_JadeRaven
 .word 0x00000001, 0x0000003C, 0x0000E320, 0x0000E520, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008B9E4
+dlabel ItemScript_SnowmanBucket
 .word 0x00000001, 0x0000003C, 0x0000E540, 0x0000E740, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BA04
+dlabel ItemScript_SnowmanScarf
 .word 0x00000001, 0x0000003C, 0x0000E760, 0x0000E960, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BA24
+dlabel ItemScript_RedKey
 .word 0x00000001, 0x0000003C, 0x0000E980, 0x0000EB80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BA44
+dlabel ItemScript_BlueKey
 .word 0x00000001, 0x0000003C, 0x0000EBC0, 0x0000EDC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BA64
+dlabel ItemScript_KootPackage
 .word 0x00000001, 0x0000003C, 0x0000EDE0, 0x0000EFE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BA84
+dlabel ItemScript_KootRedJar
 .word 0x00000001, 0x0000003C, 0x0000F000, 0x0000F200, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BAA4
+dlabel ItemScript_Melody
 .word 0x00000001, 0x0000003C, 0x0000F220, 0x0000F420, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BAC4
+dlabel ItemScript_Lyrics
 .word 0x00000001, 0x0000003C, 0x0000F440, 0x0000F640, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BAE4
+dlabel ItemScript_Mailbag
 .word 0x00000001, 0x0000003C, 0x0000F660, 0x0000F860, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BB04
+dlabel ItemScript_StarStone
 .word 0x00000001, 0x0000003C, 0x0000F880, 0x0000FA80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BB24
+dlabel ItemScript_SneakyParasol
 .word 0x00000001, 0x0000003C, 0x0000FAA0, 0x0000FCA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BB44
-.word 0x00000001, 0x0000003C, 0x0000FCE0, 0x0000FEE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0000FF00, 0x00010100, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00010120, 0x00010320, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00010340, 0x00010540, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00010560, 0x00010760, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_PeachKey
+.word 0x00000001, 0x0000003C, 0x0000FCE0, 0x0000FEE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BBE4
+dlabel ItemScript_1DC210
+.word 0x00000001, 0x0000003C, 0x0000FF00, 0x00010100, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_1DC430
+.word 0x00000001, 0x0000003C, 0x00010120, 0x00010320, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_1DC650
+.word 0x00000001, 0x0000003C, 0x00010340, 0x00010540, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_1DC870
+.word 0x00000001, 0x0000003C, 0x00010560, 0x00010760, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_DojoCard1
 .word 0x00000001, 0x0000003C, 0x00010780, 0x00010980, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BC04
+dlabel ItemScript_DojoCard2
 .word 0x00000001, 0x0000003C, 0x000109A0, 0x00010BA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BC24
+dlabel ItemScript_DojoCard3
 .word 0x00000001, 0x0000003C, 0x00010BC0, 0x00010DC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BC44
+dlabel ItemScript_DojoCard4
 .word 0x00000001, 0x0000003C, 0x00010E00, 0x00011000, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BC64
+dlabel ItemScript_DojoCard5
 .word 0x00000001, 0x0000003C, 0x00011020, 0x00011220, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BC84
+dlabel ItemScript_CrystalBall
 .word 0x00000001, 0x0000003C, 0x00011240, 0x00011440, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BCA4
+dlabel ItemScript_GoldCard
 .word 0x00000001, 0x0000003C, 0x00011460, 0x00011660, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BCC4
+dlabel ItemScript_SilverCard
 .word 0x00000001, 0x0000003C, 0x00011680, 0x00011880, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BCE4
+dlabel ItemScript_KootBook
 .word 0x00000001, 0x0000003C, 0x000118A0, 0x00011AA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BD04
+dlabel ItemScript_KootTheTape
 .word 0x00000001, 0x0000003C, 0x00011AC0, 0x00011CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BD24
+dlabel ItemScript_KootAutographMerluvlee
 .word 0x00000001, 0x0000003C, 0x00011CE0, 0x00011EE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BD44
+dlabel ItemScript_KootEmptyWallet
 .word 0x00000001, 0x0000003C, 0x00011F20, 0x00012120, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BD64
+dlabel ItemScript_KootAutographLuigi
 .word 0x00000001, 0x0000003C, 0x00012140, 0x00012340, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BD84
+dlabel ItemScript_KootKoopaShell
 .word 0x00000001, 0x0000003C, 0x00012360, 0x00012560, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BDA4
+dlabel ItemScript_KootOldPhoto
 .word 0x00000001, 0x0000003C, 0x00012580, 0x00012780, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BDC4
+dlabel ItemScript_KootGlasses
 .word 0x00000001, 0x0000003C, 0x000127A0, 0x000129A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BDE4
-.word 0x00000001, 0x0000003C, 0x000129C0, 0x00012BC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00012C00, 0x00012E00, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00012E40, 0x00013040, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00013080, 0x00013280, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x000132C0, 0x000134C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00013500, 0x00013700, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00013740, 0x00013940, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00013980, 0x00013B80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_Letter
+.word 0x00000001, 0x0000003C, 0x000129C0, 0x00012BC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BEE4
+dlabel ItemScript_ITEM_089
+.word 0x00000001, 0x0000003C, 0x00012C00, 0x00012E00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_08A
+.word 0x00000001, 0x0000003C, 0x00012E40, 0x00013040, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_08B
+.word 0x00000001, 0x0000003C, 0x00013080, 0x00013280, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_08C
+.word 0x00000001, 0x0000003C, 0x000132C0, 0x000134C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_08D
+.word 0x00000001, 0x0000003C, 0x00013500, 0x00013700, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_08E
+.word 0x00000001, 0x0000003C, 0x00013740, 0x00013940, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_08F
+.word 0x00000001, 0x0000003C, 0x00013980, 0x00013B80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_SpinSmash
 .word 0x00000001, 0x0000003C, 0x00014DC0, 0x00014FC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BF04
+dlabel ItemScript_Multibounce
 .word 0x00000001, 0x0000003C, 0x00015000, 0x00015200, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BF24
+dlabel ItemScript_PowerPlus
 .word 0x00000001, 0x0000003C, 0x00015240, 0x00015440, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BF44
+dlabel ItemScript_DodgeMaster
 .word 0x00000001, 0x0000003C, 0x00015480, 0x00015680, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BF64
+dlabel ItemScript_PowerBounce
 .word 0x00000001, 0x0000003C, 0x000156C0, 0x000158C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BF84
+dlabel ItemScript_SpikeShield
 .word 0x00000001, 0x0000003C, 0x00015900, 0x00015B00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BFA4
+dlabel ItemScript_FirstAttack
 .word 0x00000001, 0x0000003C, 0x00015B40, 0x00015D40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BFC4
+dlabel ItemScript_HPPlus
 .word 0x00000001, 0x0000003C, 0x00015D80, 0x00015F80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008BFE4
+dlabel ItemScript_QuakeHammer
 .word 0x00000001, 0x0000003C, 0x00015FC0, 0x000161C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C004
+dlabel ItemScript_DoubleDip
 .word 0x00000001, 0x0000003C, 0x00016200, 0x00016400, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C024
+dlabel ItemScript_PowerQuake
 .word 0x00000001, 0x0000003C, 0x00016440, 0x00016640, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C044
+dlabel ItemScript_MegaQuake
 .word 0x00000001, 0x0000003C, 0x00016680, 0x00016880, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C064
+dlabel ItemScript_SleepStomp
 .word 0x00000001, 0x0000003C, 0x000168C0, 0x00016AC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C084
+dlabel ItemScript_SmashCharge
 .word 0x00000001, 0x0000003C, 0x00016B00, 0x00016D00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C0A4
+dlabel ItemScript_SSmashChg
 .word 0x00000001, 0x0000003C, 0x00016D40, 0x00016F40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C0C4
+dlabel ItemScript_AutoSmash
 .word 0x00000001, 0x0000003C, 0x00016F80, 0x00017180, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C0E4
+dlabel ItemScript_FireShield
 .word 0x00000001, 0x0000003C, 0x000171C0, 0x000173C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C104
+dlabel ItemScript_JumpCharge
 .word 0x00000001, 0x0000003C, 0x00017400, 0x00017600, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C124
+dlabel ItemScript_SJumpChg
 .word 0x00000001, 0x0000003C, 0x00017640, 0x00017840, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C144
+dlabel ItemScript_AutoJump
 .word 0x00000001, 0x0000003C, 0x00017880, 0x00017A80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C164
+dlabel ItemScript_DDownPound
 .word 0x00000001, 0x0000003C, 0x00017AC0, 0x00017CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C184
+dlabel ItemScript_AutoMultibounce
 .word 0x00000001, 0x0000003C, 0x00017D00, 0x00017F00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C1A4
+dlabel ItemScript_DizzyStomp
 .word 0x00000001, 0x0000003C, 0x00017F40, 0x00018140, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C1C4
+dlabel ItemScript_HammerThrow
 .word 0x00000001, 0x0000003C, 0x00018180, 0x00018380, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C1E4
+dlabel ItemScript_SmashCharge0
 .word 0x00000001, 0x0000003C, 0x000183C0, 0x000185C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C204
+dlabel ItemScript_PrettyLucky
 .word 0x00000001, 0x0000003C, 0x00018600, 0x00018800, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C224
+dlabel ItemScript_FeelingFine
 .word 0x00000001, 0x0000003C, 0x00018840, 0x00018A40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C244
+dlabel ItemScript_AttackFXA
 .word 0x00000001, 0x0000003C, 0x00018A80, 0x00018C80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C264
+dlabel ItemScript_AllorNothing
 .word 0x00000001, 0x0000003C, 0x00018CC0, 0x00018EC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C284
+dlabel ItemScript_HPDrain
 .word 0x00000001, 0x0000003C, 0x00018F00, 0x00019100, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C2A4
+dlabel ItemScript_JumpCharge0
 .word 0x00000001, 0x0000003C, 0x00019140, 0x00019340, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C2C4
+dlabel ItemScript_SlowGo
 .word 0x00000001, 0x0000003C, 0x00019380, 0x00019580, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C2E4
+dlabel ItemScript_FPPlus
 .word 0x00000001, 0x0000003C, 0x000195C0, 0x000197C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C304
+dlabel ItemScript_MegaRush
 .word 0x00000001, 0x0000003C, 0x00019800, 0x00019A00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C324
+dlabel ItemScript_IcePower
 .word 0x00000001, 0x0000003C, 0x00019A40, 0x00019C40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C344
+dlabel ItemScript_DefendPlus
 .word 0x00000001, 0x0000003C, 0x00019C80, 0x00019E80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C364
+dlabel ItemScript_PayOff
 .word 0x00000001, 0x0000003C, 0x00019EC0, 0x0001A0C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C384
+dlabel ItemScript_MoneyMoney
 .word 0x00000001, 0x0000003C, 0x0001A100, 0x0001A300, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C3A4
+dlabel ItemScript_ChillOut
 .word 0x00000001, 0x0000003C, 0x0001A340, 0x0001A540, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C3C4
+dlabel ItemScript_HappyHeart
 .word 0x00000001, 0x0000003C, 0x0001A580, 0x0001A780, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C3E4
+dlabel ItemScript_ZapTap
 .word 0x00000001, 0x0000003C, 0x0001A7C0, 0x0001A9C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C404
+dlabel ItemScript_Berserker
 .word 0x00000001, 0x0000003C, 0x0001AA00, 0x0001AC00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C424
+dlabel ItemScript_RightOn
 .word 0x00000001, 0x0000003C, 0x0001AC40, 0x0001AE40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C444
+dlabel ItemScript_RunawayPay
 .word 0x00000001, 0x0000003C, 0x0001AE80, 0x0001B080, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C464
+dlabel ItemScript_Refund
 .word 0x00000001, 0x0000003C, 0x0001B0C0, 0x0001B2C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C484
+dlabel ItemScript_FlowerSaver
 .word 0x00000001, 0x0000003C, 0x0001B300, 0x0001B500, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C4A4
+dlabel ItemScript_TripleDip
 .word 0x00000001, 0x0000003C, 0x0001B540, 0x0001B740, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C4C4
+dlabel ItemScript_FlowerFanatic
 .word 0x00000001, 0x0000003C, 0x0001B780, 0x0001B980, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C4E4
+dlabel ItemScript_PowerJump
 .word 0x00000001, 0x0000003C, 0x0001B9C0, 0x0001BBC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C504
+dlabel ItemScript_SuperJump
 .word 0x00000001, 0x0000003C, 0x0001BC00, 0x0001BE00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C524
+dlabel ItemScript_MegaJump
 .word 0x00000001, 0x0000003C, 0x0001BE40, 0x0001C040, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C544
+dlabel ItemScript_PowerSmash
 .word 0x00000001, 0x0000003C, 0x0001C080, 0x0001C280, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C564
+dlabel ItemScript_SuperSmash
 .word 0x00000001, 0x0000003C, 0x0001C2C0, 0x0001C4C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C584
+dlabel ItemScript_MegaSmash
 .word 0x00000001, 0x0000003C, 0x0001C500, 0x0001C700, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C5A4
+dlabel ItemScript_LuckyDay
 .word 0x00000001, 0x0000003C, 0x0001C740, 0x0001C940, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C5C4
+dlabel ItemScript_MegaHPDrain
 .word 0x00000001, 0x0000003C, 0x0001C980, 0x0001CB80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C5E4
+dlabel ItemScript_BumpAttack
 .word 0x00000001, 0x0000003C, 0x0001CBC0, 0x0001CDC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C604
+dlabel ItemScript_PUpDDown
 .word 0x00000001, 0x0000003C, 0x0001CE00, 0x0001D000, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C624
+dlabel ItemScript_PDownDUp
 .word 0x00000001, 0x0000003C, 0x0001D040, 0x0001D240, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C644
+dlabel ItemScript_HeartFinder
 .word 0x00000001, 0x0000003C, 0x0001D280, 0x0001D480, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C664
+dlabel ItemScript_FlowerFinder
 .word 0x00000001, 0x0000003C, 0x0001D4C0, 0x0001D6C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C684
+dlabel ItemScript_DizzyAttack
 .word 0x00000001, 0x0000003C, 0x0001D700, 0x0001D900, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C6A4
+dlabel ItemScript_SpeedySpin
 .word 0x00000001, 0x0000003C, 0x0001D940, 0x0001DB40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C6C4
+dlabel ItemScript_SpinAttack
 .word 0x00000001, 0x0000003C, 0x0001DB80, 0x0001DD80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C6E4
+dlabel ItemScript_ISpy
 .word 0x00000001, 0x0000003C, 0x0001DDC0, 0x0001DFC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C704
+dlabel ItemScript_PowerRush
 .word 0x00000001, 0x0000003C, 0x0001E000, 0x0001E200, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C724
+dlabel ItemScript_LastStand
 .word 0x00000001, 0x0000003C, 0x0001E240, 0x0001E440, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C744
+dlabel ItemScript_CloseCall
 .word 0x00000001, 0x0000003C, 0x0001E480, 0x0001E680, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C764
-.word 0x00000001, 0x0000003C, 0x0001E6C0, 0x0001E8C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0001E900, 0x0001EB00, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0001EB40, 0x0001ED40, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0001ED80, 0x0001EF80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_CrazyHeart
+.word 0x00000001, 0x0000003C, 0x0001E6C0, 0x0001E8C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C7E4
+dlabel ItemScript_ITEM_0D5
+.word 0x00000001, 0x0000003C, 0x0001E900, 0x0001EB00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0D6
+.word 0x00000001, 0x0000003C, 0x0001EB40, 0x0001ED40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0D7
+.word 0x00000001, 0x0000003C, 0x0001ED80, 0x0001EF80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ShrinkSmash
 .word 0x00000001, 0x0000003C, 0x0001EFC0, 0x0001F1C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C804
+dlabel ItemScript_ShrinkStomp
 .word 0x00000001, 0x0000003C, 0x0001F200, 0x0001F400, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C824
+dlabel ItemScript_DDownJump
 .word 0x00000001, 0x0000003C, 0x0001F440, 0x0001F640, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C844
+dlabel ItemScript_DamageDodge
 .word 0x00000001, 0x0000003C, 0x0001F680, 0x0001F880, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C864
+dlabel ItemScript_EarthquakeJump
 .word 0x00000001, 0x0000003C, 0x0001F8C0, 0x0001FAC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C884
-.word 0x00000001, 0x0000003C, 0x0001FB00, 0x0001FD00, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0001FD40, 0x0001FF40, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0001FF80, 0x00020180, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_HappyFlower
+.word 0x00000001, 0x0000003C, 0x0001FB00, 0x0001FD00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C8E4
+dlabel ItemScript_HappyCoin
+.word 0x00000001, 0x0000003C, 0x0001FD40, 0x0001FF40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0DF
+.word 0x00000001, 0x0000003C, 0x0001FF80, 0x00020180, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_DeepFocus
 .word 0x00000001, 0x0000003C, 0x000201C0, 0x000203C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C904
+dlabel ItemScript_SuperFocus
 .word 0x00000001, 0x0000003C, 0x00020400, 0x00020600, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C924
+dlabel ItemScript_Kaiden
 .word 0x00000001, 0x0000003C, 0x00020640, 0x00020840, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C944
-.word 0x00000001, 0x0000003C, 0x00020880, 0x00020A80, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00020AC0, 0x00020CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00020D00, 0x00020F00, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00020F40, 0x00021140, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00021180, 0x00021380, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_QuickChange
+.word 0x00000001, 0x0000003C, 0x00020880, 0x00020A80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008C9E4
+dlabel ItemScript_ITEM_0E4
+.word 0x00000001, 0x0000003C, 0x00020AC0, 0x00020CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0E5
+.word 0x00000001, 0x0000003C, 0x00020D00, 0x00020F00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0E6
+.word 0x00000001, 0x0000003C, 0x00020F40, 0x00021140, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0E7
+.word 0x00000001, 0x0000003C, 0x00021180, 0x00021380, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_Peekaboo
 .word 0x00000001, 0x0000003C, 0x000213C0, 0x000215C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CA04
+dlabel ItemScript_GroupFocus
 .word 0x00000001, 0x0000003C, 0x00021600, 0x00021800, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CA24
+dlabel ItemScript_AttackFXD
 .word 0x00000001, 0x0000003C, 0x00021840, 0x00021A40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CA44
+dlabel ItemScript_AttackFXB
 .word 0x00000001, 0x0000003C, 0x00021A80, 0x00021C80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CA64
+dlabel ItemScript_AttackFXE
 .word 0x00000001, 0x0000003C, 0x00021CC0, 0x00021EC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CA84
+dlabel ItemScript_AttackFXC
 .word 0x00000001, 0x0000003C, 0x00021F00, 0x00022100, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CAA4
-.word 0x00000001, 0x0000003C, 0x00022140, 0x00022340, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00022380, 0x00022580, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_AttackFXF
+.word 0x00000001, 0x0000003C, 0x00022140, 0x00022340, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CAE4
-.word 0x00000001, 0x0000003C, 0x000225C0, 0x000227C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00022800, 0x00022A00, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00022A40, 0x00022C40, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00022C80, 0x00022E80, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00022EC0, 0x000230C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00023100, 0x00023300, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00023340, 0x00023540, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00023580, 0x00023780, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_ITEM_0EF
+.word 0x00000001, 0x0000003C, 0x00022380, 0x00022580, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CBE4
+dlabel ItemScript_HealthyHealthy
+.word 0x00000001, 0x0000003C, 0x000225C0, 0x000227C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0F1
+.word 0x00000001, 0x0000003C, 0x00022800, 0x00022A00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0F2
+.word 0x00000001, 0x0000003C, 0x00022A40, 0x00022C40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0F3
+.word 0x00000001, 0x0000003C, 0x00022C80, 0x00022E80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0F4
+.word 0x00000001, 0x0000003C, 0x00022EC0, 0x000230C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0F5
+.word 0x00000001, 0x0000003C, 0x00023100, 0x00023300, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0F6
+.word 0x00000001, 0x0000003C, 0x00023340, 0x00023540, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_0F7
+.word 0x00000001, 0x0000003C, 0x00023580, 0x00023780, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_Heart
 .word 0x00000001, 0x0000000A, 0x00030A60, 0x00030B80, 0x00000000, 0x00000000, 0x00000001, 0x00000006, 0x00030BA0, 0x00030CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CC1C
+dlabel ItemScript_Coin
 .word 0x00000003, 0x00000001, 0x00000003, 0x0002F5C0, 0x0002F6E0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002F700, 0x0002F820, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FAC0, 0x0002FBE0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FC00, 0x0002FD20, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FD40, 0x0002FE60, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FE80, 0x0002FFA0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FFC0, 0x000300E0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x00030100, 0x00030220, 0x00000000, 0x00000000, 0x00000004, 0x00000064, 0x00000032, 0x00000001, 0x00000003, 0x0002F5C0, 0x0002F6E0, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x0002F700, 0x0002F820, 0x00000000, 0x00000000, 0x00000001, 0x00000001, 0x0002F840, 0x0002F960, 0x00000000, 0x00000000, 0x00000001, 0x00000001, 0x0002F980, 0x0002FAA0, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x0002FAC0, 0x0002FBE0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FC00, 0x0002FD20, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FD40, 0x0002FE60, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FE80, 0x0002FFA0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x0002FFC0, 0x000300E0, 0x00000000, 0x00000000, 0x00000001, 0x00000003, 0x00030100, 0x00030220, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CDE4
+dlabel ItemScript_HeartPiece
 .word 0x00000001, 0x0000003C, 0x00030CE0, 0x00030E00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CE04
+dlabel ItemScript_StarPoint
 .word 0x00000001, 0x00000002, 0x00030E20, 0x00030F40, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x00030F60, 0x00031080, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x000310A0, 0x000311C0, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x000311E0, 0x00031300, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x00031320, 0x00031440, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x00031460, 0x00031580, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x000315A0, 0x000316C0, 0x00000000, 0x00000000, 0x00000001, 0x00000002, 0x000316E0, 0x00031800, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CECC
+dlabel ItemScript_HeartPoint
 .word 0x00000001, 0x00000008, 0x0002E900, 0x0002EB00, 0x00000000, 0x00000000, 0x00000001, 0x00000005, 0x0002EB20, 0x0002ED20, 0x00000000, 0x00000000, 0x00000001, 0x00000008, 0x0002ED40, 0x0002EF40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CF1C
+dlabel ItemScript_FlowerPoint
 .word 0x00000001, 0x00000008, 0x0002EF60, 0x0002F160, 0x00000000, 0x00000000, 0x00000001, 0x00000005, 0x0002F180, 0x0002F380, 0x00000000, 0x00000000, 0x00000001, 0x00000008, 0x0002F3A0, 0x0002F5A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CF6C
+dlabel ItemScript_StarPiece
 .word 0x00000001, 0x0000000C, 0x00030400, 0x00030600, 0x00000000, 0x00000000, 0x00000001, 0x00000004, 0x00030620, 0x00030820, 0x00000000, 0x00000000, 0x00000001, 0x0000000C, 0x00030840, 0x00030A40, 0x00000000, 0x00000000, 0x00000001, 0x00000004, 0x00030620, 0x00030820, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CFD4
+dlabel ItemScript_SpicySoup
 .word 0x00000001, 0x0000003C, 0x00002420, 0x00002620, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008CFF4
+dlabel ItemScript_ApplePie
 .word 0x00000001, 0x0000003C, 0x00002660, 0x00002860, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D014
+dlabel ItemScript_HoneyUltra
 .word 0x00000001, 0x0000003C, 0x000028A0, 0x00002AA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D034
+dlabel ItemScript_MapleUltra
 .word 0x00000001, 0x0000003C, 0x00002AE0, 0x00002CE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D054
+dlabel ItemScript_JellyUltra
 .word 0x00000001, 0x0000003C, 0x00002D20, 0x00002F20, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D074
+dlabel ItemScript_Koopasta
 .word 0x00000001, 0x0000003C, 0x00002F60, 0x00003160, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D094
+dlabel ItemScript_FriedShroom
 .word 0x00000001, 0x0000003C, 0x000031A0, 0x000033A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D0B4
+dlabel ItemScript_ShroomCake
 .word 0x00000001, 0x0000003C, 0x000033E0, 0x000035E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D0D4
+dlabel ItemScript_ShroomSteak
 .word 0x00000001, 0x0000003C, 0x00003620, 0x00003820, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D0F4
+dlabel ItemScript_HotShroom
 .word 0x00000001, 0x0000003C, 0x00003860, 0x00003A60, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D114
+dlabel ItemScript_SweetShroom
 .word 0x00000001, 0x0000003C, 0x00003AA0, 0x00003CA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D134
+dlabel ItemScript_HealthyJuice
 .word 0x00000001, 0x0000003C, 0x00003CE0, 0x00003EE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D154
+dlabel ItemScript_BlandMeal
 .word 0x00000001, 0x0000003C, 0x00003F20, 0x00004120, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D174
+dlabel ItemScript_YummyMeal
 .word 0x00000001, 0x0000003C, 0x00004160, 0x00004360, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D194
+dlabel ItemScript_DeluxeFeast
 .word 0x00000001, 0x0000003C, 0x000043A0, 0x000045A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D1B4
+dlabel ItemScript_SpecialShake
 .word 0x00000001, 0x0000003C, 0x000045E0, 0x000047E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D1D4
+dlabel ItemScript_BigCookie
 .word 0x00000001, 0x0000003C, 0x00004820, 0x00004A20, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D1F4
+dlabel ItemScript_Cake
 .word 0x00000001, 0x0000003C, 0x00004A60, 0x00004C60, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D214
+dlabel ItemScript_Mistake
 .word 0x00000001, 0x0000003C, 0x00004CA0, 0x00004EA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D234
+dlabel ItemScript_KoopaTea
 .word 0x00000001, 0x0000003C, 0x00004EE0, 0x000050E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D254
+dlabel ItemScript_HoneySuper
 .word 0x00000001, 0x0000003C, 0x00005120, 0x00005320, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D274
+dlabel ItemScript_MapleSuper
 .word 0x00000001, 0x0000003C, 0x00005360, 0x00005560, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D294
+dlabel ItemScript_JellySuper
 .word 0x00000001, 0x0000003C, 0x000055A0, 0x000057A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D2B4
+dlabel ItemScript_Spaghetti
 .word 0x00000001, 0x0000003C, 0x000057E0, 0x000059E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D2D4
+dlabel ItemScript_EggMissile
 .word 0x00000001, 0x0000003C, 0x00005A20, 0x00005C20, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D2F4
+dlabel ItemScript_FriedEgg
 .word 0x00000001, 0x0000003C, 0x00005C60, 0x00005E60, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D314
+dlabel ItemScript_HoneyShroom
 .word 0x00000001, 0x0000003C, 0x00005EA0, 0x000060A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D334
+dlabel ItemScript_HoneyCandy
 .word 0x00000001, 0x0000003C, 0x000060E0, 0x000062E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D354
+dlabel ItemScript_ElectroPop
 .word 0x00000001, 0x0000003C, 0x00006320, 0x00006520, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D374
+dlabel ItemScript_FirePop
 .word 0x00000001, 0x0000003C, 0x00006560, 0x00006760, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D394
+dlabel ItemScript_LimeCandy
 .word 0x00000001, 0x0000003C, 0x000067A0, 0x000069A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D3B4
+dlabel ItemScript_CocoPop
 .word 0x00000001, 0x0000003C, 0x000069E0, 0x00006BE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D3D4
+dlabel ItemScript_LemonCandy
 .word 0x00000001, 0x0000003C, 0x00006C20, 0x00006E20, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D3F4
+dlabel ItemScript_JellyPop
 .word 0x00000001, 0x0000003C, 0x00006E60, 0x00007060, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D414
+dlabel ItemScript_StrangeCake
 .word 0x00000001, 0x0000003C, 0x000070A0, 0x000072A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D434
+dlabel ItemScript_KookyCookie
 .word 0x00000001, 0x0000003C, 0x000072E0, 0x000074E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D454
+dlabel ItemScript_FrozenFries
 .word 0x00000001, 0x0000003C, 0x00007520, 0x00007720, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D474
+dlabel ItemScript_PotatoSalad
 .word 0x00000001, 0x0000003C, 0x00007760, 0x00007960, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D494
+dlabel ItemScript_NuttyCake
 .word 0x00000001, 0x0000003C, 0x000079A0, 0x00007BA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D4B4
+dlabel ItemScript_MapleShroom
 .word 0x00000001, 0x0000003C, 0x00007BE0, 0x00007DE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D4D4
+dlabel ItemScript_BoiledEgg
 .word 0x00000001, 0x0000003C, 0x00007E20, 0x00008020, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D4F4
+dlabel ItemScript_YoshiCookie
 .word 0x00000001, 0x0000003C, 0x00008060, 0x00008260, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D514
-.word 0x00000001, 0x0000003C, 0x000082A0, 0x000084A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x000084E0, 0x000086E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00008720, 0x00008920, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00008960, 0x00008B60, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00008BA0, 0x00008DA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00008DE0, 0x00008FE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_JellyShroom
+.word 0x00000001, 0x0000003C, 0x000082A0, 0x000084A0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D5D4
+dlabel ItemScript_ITEM_02C
+.word 0x00000001, 0x0000003C, 0x000084E0, 0x000086E0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_02D
+.word 0x00000001, 0x0000003C, 0x00008720, 0x00008920, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_02E
+.word 0x00000001, 0x0000003C, 0x00008960, 0x00008B60, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_02F
+.word 0x00000001, 0x0000003C, 0x00008BA0, 0x00008DA0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_030
+.word 0x00000001, 0x0000003C, 0x00008DE0, 0x00008FE0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_FireFlower
 .word 0x00000001, 0x0000003C, 0x0002A3C0, 0x0002A5C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D5F4
+dlabel ItemScript_SnowmanDoll
 .word 0x00000001, 0x0000003C, 0x0002A600, 0x0002A800, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D614
+dlabel ItemScript_ThunderRage
 .word 0x00000001, 0x0000003C, 0x0002A840, 0x0002AA40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D634
+dlabel ItemScript_ThunderBolt
 .word 0x00000001, 0x0000003C, 0x0002AA80, 0x0002AC80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D654
+dlabel ItemScript_ShootingStar
 .word 0x00000001, 0x0000003C, 0x0002ACC0, 0x0002AEC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D674
+dlabel ItemScript_DustyHammer
 .word 0x00000001, 0x0000003C, 0x0002AF00, 0x0002B100, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D694
-.word 0x00000001, 0x0000003C, 0x0002B140, 0x0002B340, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0002B380, 0x0002B580, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_Pebble
+.word 0x00000001, 0x0000003C, 0x0002B140, 0x0002B340, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D6D4
+dlabel ItemScript_ITEM_127
+.word 0x00000001, 0x0000003C, 0x0002B380, 0x0002B580, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_StoneCap
 .word 0x00000001, 0x0000003C, 0x0002B5C0, 0x0002B7C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D6F4
-.word 0x00000001, 0x0000003C, 0x0002B800, 0x0002BA00, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0002BA40, 0x0002BC40, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0002BC80, 0x0002BE80, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0002BEC0, 0x0002C0C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0002C100, 0x0002C300, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0002C340, 0x0002C540, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0002C580, 0x0002C780, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_VoltShroom
+.word 0x00000001, 0x0000003C, 0x0002B800, 0x0002BA00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D7D4
+dlabel ItemScript_PowerStar
+.word 0x00000001, 0x0000003C, 0x0002BA40, 0x0002BC40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_Parasol
+.word 0x00000001, 0x0000003C, 0x0002BC80, 0x0002BE80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_MagicMirror
+.word 0x00000001, 0x0000003C, 0x0002BEC0, 0x0002C0C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_12D
+.word 0x00000001, 0x0000003C, 0x0002C100, 0x0002C300, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_12E
+.word 0x00000001, 0x0000003C, 0x0002C340, 0x0002C540, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_12F
+.word 0x00000001, 0x0000003C, 0x0002C580, 0x0002C780, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_Mushroom
 .word 0x00000001, 0x0000003C, 0x000237C0, 0x000239C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D7F4
+dlabel ItemScript_SuperShroom
 .word 0x00000001, 0x0000003C, 0x00023A00, 0x00023C00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D814
+dlabel ItemScript_UltraShroom
 .word 0x00000001, 0x0000003C, 0x00023C40, 0x00023E40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D834
+dlabel ItemScript_LifeShroom
 .word 0x00000001, 0x0000003C, 0x00023E80, 0x00024080, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D854
+dlabel ItemScript_DriedShroom
 .word 0x00000001, 0x0000003C, 0x000240C0, 0x000242C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D874
+dlabel ItemScript_TastyTonic
 .word 0x00000001, 0x0000003C, 0x00024300, 0x00024500, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D894
+dlabel ItemScript_SuperSoda
 .word 0x00000001, 0x0000003C, 0x00024540, 0x00024740, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D8B4
+dlabel ItemScript_BlueBerry
 .word 0x00000001, 0x0000003C, 0x00024780, 0x00024980, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D8D4
+dlabel ItemScript_RedBerry
 .word 0x00000001, 0x0000003C, 0x000249C0, 0x00024BC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D8F4
+dlabel ItemScript_YellowBerry
 .word 0x00000001, 0x0000003C, 0x00024C00, 0x00024E00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D914
+dlabel ItemScript_BubbleBerry
 .word 0x00000001, 0x0000003C, 0x00024E40, 0x00025040, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D934
+dlabel ItemScript_Goomnut
 .word 0x00000001, 0x0000003C, 0x00025080, 0x00025280, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D954
+dlabel ItemScript_KoopaLeaf
 .word 0x00000001, 0x0000003C, 0x000252C0, 0x000254C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D974
+dlabel ItemScript_DriedPasta
 .word 0x00000001, 0x0000003C, 0x00025500, 0x00025700, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D994
+dlabel ItemScript_Lime
 .word 0x00000001, 0x0000003C, 0x00025740, 0x00025940, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D9B4
+dlabel ItemScript_Lemon
 .word 0x00000001, 0x0000003C, 0x00025980, 0x00025B80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D9D4
+dlabel ItemScript_DriedFruit
 .word 0x00000001, 0x0000003C, 0x00025BC0, 0x00025DC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008D9F4
+dlabel ItemScript_StrangeLeaf
 .word 0x00000001, 0x0000003C, 0x00025E00, 0x00026000, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DA14
+dlabel ItemScript_CakeMix
 .word 0x00000001, 0x0000003C, 0x00026040, 0x00026240, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DA34
+dlabel ItemScript_Egg
 .word 0x00000001, 0x0000003C, 0x00026280, 0x00026480, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DA54
+dlabel ItemScript_Coconut
 .word 0x00000001, 0x0000003C, 0x000264C0, 0x000266C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DA74
+dlabel ItemScript_Melon
 .word 0x00000001, 0x0000003C, 0x00026700, 0x00026900, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DA94
+dlabel ItemScript_StinkyHerb
 .word 0x00000001, 0x0000003C, 0x00026940, 0x00026B40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DAB4
+dlabel ItemScript_IcedPotato
 .word 0x00000001, 0x0000003C, 0x00026B80, 0x00026D80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DAD4
+dlabel ItemScript_HoneySyrup
 .word 0x00000001, 0x0000003C, 0x00026DC0, 0x00026FC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DAF4
+dlabel ItemScript_MapleSyrup
 .word 0x00000001, 0x0000003C, 0x00027000, 0x00027200, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DB14
+dlabel ItemScript_JamminJelly
 .word 0x00000001, 0x0000003C, 0x00027240, 0x00027440, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DB34
+dlabel ItemScript_WhackasBump
 .word 0x00000001, 0x0000003C, 0x00027480, 0x00027680, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DB54
+dlabel ItemScript_Apple
 .word 0x00000001, 0x0000003C, 0x000276C0, 0x000278C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DB74
+dlabel ItemScript_BakingSalt
 .word 0x00000001, 0x0000003C, 0x00027900, 0x00027B00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DB94
+dlabel ItemScript_BakingSugar
 .word 0x00000001, 0x0000003C, 0x00027B40, 0x00027D40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DBB4
+dlabel ItemScript_BakingEgg
 .word 0x00000001, 0x0000003C, 0x00027D80, 0x00027F80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DBD4
+dlabel ItemScript_BakingCream
 .word 0x00000001, 0x0000003C, 0x00027FC0, 0x000281C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DBF4
+dlabel ItemScript_BakingStrawberry
 .word 0x00000001, 0x0000003C, 0x00028200, 0x00028400, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DC14
+dlabel ItemScript_BakingButter
 .word 0x00000001, 0x0000003C, 0x00028440, 0x00028640, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DC34
+dlabel ItemScript_BakingCleanser
 .word 0x00000001, 0x0000003C, 0x00028680, 0x00028880, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DC54
+dlabel ItemScript_BakingWater
 .word 0x00000001, 0x0000003C, 0x000288C0, 0x00028AC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DC74
+dlabel ItemScript_BakingFlour
 .word 0x00000001, 0x0000003C, 0x00028B00, 0x00028D00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DC94
-.word 0x00000001, 0x0000003C, 0x00028D40, 0x00028F40, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00028F80, 0x00029180, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_BakingMilk
+.word 0x00000001, 0x0000003C, 0x00028D40, 0x00028F40, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DCD4
-.word 0x00000001, 0x0000003C, 0x000291C0, 0x000293C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00029400, 0x00029600, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_ITEM_118
+.word 0x00000001, 0x0000003C, 0x00028F80, 0x00029180, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DD14
+dlabel ItemScript_SleepySheep
+.word 0x00000001, 0x0000003C, 0x000291C0, 0x000293C0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_XBandage
+.word 0x00000001, 0x0000003C, 0x00029400, 0x00029600, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_POWBlock
 .word 0x00000001, 0x0000003C, 0x00029640, 0x00029840, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DD34
+dlabel ItemScript_HustleDrink
 .word 0x00000001, 0x0000003C, 0x00029880, 0x00029A80, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DD54
+dlabel ItemScript_StopWatch
 .word 0x00000001, 0x0000003C, 0x00029AC0, 0x00029CC0, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
-dlabel D_8008DD74
-.word 0x00000001, 0x0000003C, 0x00029D00, 0x00029F00, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x00029F40, 0x0002A140, 0x00000000, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x0000003C, 0x0002A180, 0x0002A380, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+dlabel ItemScript_DizzyDial
+.word 0x00000001, 0x0000003C, 0x00029D00, 0x00029F00, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_136
+.word 0x00000001, 0x0000003C, 0x00029F40, 0x0002A140, 0x00000000, 0x00000000, 0x00000002, 0x00000000
+
+dlabel ItemScript_ITEM_137
+.word 0x00000001, 0x0000003C, 0x0002A180, 0x0002A380, 0x00000000, 0x00000000, 0x00000002, 0x00000000
 
 dlabel gItemEntityScripts
-.word D_8008B108, D_8008B3E4, D_8008B404, D_8008B424, D_8008B444, D_8008B464, D_8008B484, D_8008B4A4, D_8008B108, D_8008B108, D_8008BBE4, D_8008BC04, D_8008BC24, D_8008BC44, D_8008BC64, D_8008B924, D_8008B4E4, D_8008B504, D_8008B5C4, D_8008B524, D_8008B544, D_8008B664, D_8008B624, D_8008B644, D_8008B604, D_8008B5A4, D_8008B564, D_8008B684, D_8008B6E4, D_8008B704, D_8008B884, D_8008B724, D_8008B744, D_8008B764, D_8008B6C4, D_8008B784, D_8008B7A4, D_8008B7C4, D_8008B7E4, D_8008BC84, D_8008B984, D_8008B9A4, D_8008B9C4, D_8008B804, D_8008B824, D_8008B844, D_8008B864, D_8008B944, D_8008B964, D_8008B9E4, D_8008BA04, D_8008BA24, D_8008BA44, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008BDE4, D_8008B5E4, D_8008BDE4, D_8008BDE4, D_8008B584, D_8008B8A4, D_8008B8C4, D_8008B8E4, D_8008B904, D_8008B604, D_8008BD04, D_8008DB94, D_8008DB74, D_8008DBB4, D_8008DBD4, D_8008DBF4, D_8008DC14, D_8008DC34, D_8008DC54, D_8008DC74, D_8008DC94, D_8008BAC4, D_8008BAA4, D_8008BAE4, D_8008BB44, D_8008B744, D_8008BB04, D_8008BB24, D_8008BCE4, D_8008BD24, D_8008BD44, D_8008BD64, D_8008BD84, D_8008BDA4, D_8008BDC4, D_8008BDA4, D_8008BA64, D_8008BA84, D_8008BB44, D_8008B744, D_8008B744, D_8008BCC4, D_8008BCA4, D_8008B108, D_8008B108, D_8008B108, D_8008D5D4, D_8008D5F4, D_8008D614, D_8008D654, D_8008D634, D_8008D694, D_8008D674, D_8008B384, D_8008D6D4, D_8008D874, D_8008D7D4, D_8008D6F4, D_8008D7F4, D_8008D854, D_8008D814, D_8008DCD4, D_8008DD14, D_8008DD34, D_8008DD54, D_8008DB34, D_8008DB54, D_8008D834, D_8008B344, D_8008B364, D_8008B324, D_8008B2E4, D_8008DD74, D_8008D894, D_8008D9B4, D_8008D994, D_8008D8B4, D_8008D8D4, D_8008D8F4, D_8008D914, D_8008DB14, D_8008DAF4, D_8008DAD4, D_8008D934, D_8008D954, D_8008D974, D_8008D9D4, D_8008D9F4, D_8008DA14, D_8008DA34, D_8008DA54, D_8008DA74, D_8008DA94, D_8008DAB4, D_8008CFD4, D_8008CFF4, D_8008D014, D_8008D034, D_8008D054, D_8008D074, D_8008D094, D_8008D0B4, D_8008D0D4, D_8008D0F4, D_8008D114, D_8008D174, D_8008D134, D_8008D154, D_8008D194, D_8008D1B4, D_8008D1D4, D_8008D1F4, D_8008D214, D_8008D234, D_8008D254, D_8008D274, D_8008D294, D_8008D2B4, D_8008D2D4, D_8008D2F4, D_8008D314, D_8008D334, D_8008D354, D_8008D374, D_8008D394, D_8008D3B4, D_8008D3D4, D_8008D3F4, D_8008D414, D_8008D434, D_8008D454, D_8008D474, D_8008D494, D_8008D4B4, D_8008D4D4, D_8008D4F4, D_8008D514, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008BEE4, D_8008BF04, D_8008BF24, D_8008BF44, D_8008BF64, D_8008BF84, D_8008BFA4, D_8008BFC4, D_8008BFE4, D_8008C004, D_8008B108, D_8008C064, D_8008C0E4, D_8008C944, D_8008C164, D_8008C1A4, D_8008C1E4, D_8008C204, D_8008C224, D_8008C244, D_8008C264, D_8008C284, D_8008C2A4, D_8008C2C4, D_8008C2E4, D_8008C304, D_8008C324, D_8008C344, D_8008C364, D_8008C384, D_8008C3A4, D_8008C3C4, D_8008C3E4, D_8008C404, D_8008C424, D_8008C444, D_8008C464, D_8008C484, D_8008C4A4, D_8008C1C4, D_8008C044, D_8008C084, D_8008C104, D_8008C0A4, D_8008C124, D_8008C704, D_8008C144, D_8008C0C4, D_8008C764, D_8008C724, D_8008C744, D_8008C604, D_8008C5A4, D_8008C5C4, D_8008C624, D_8008C024, D_8008C184, D_8008C4C4, D_8008C644, D_8008C664, D_8008C6C4, D_8008C684, D_8008C6E4, D_8008C6A4, D_8008C5E4, D_8008C4E4, D_8008C504, D_8008C524, D_8008C544, D_8008C564, D_8008C584, D_8008B108, D_8008B108, D_8008C8E4, D_8008C904, D_8008C7E4, D_8008B108, D_8008C924, D_8008C824, D_8008C804, D_8008C844, D_8008C864, D_8008C8E4, D_8008C904, D_8008BFC4, D_8008C2E4, D_8008C3C4, D_8008C3C4, D_8008C484, D_8008C484, D_8008C844, D_8008C844, D_8008BF24, D_8008BF24, D_8008C344, D_8008C344, D_8008C884, D_8008C884, D_8008C884, D_8008CA04, D_8008C9E4, D_8008CA24, D_8008CA44, D_8008CA64, D_8008CA84, D_8008CAA4, D_8008BFC4, D_8008BFC4, D_8008BFC4, D_8008C2E4, D_8008C2E4, D_8008C2E4, D_8008CAE4, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008CBE4, D_8008CC1C, D_8008CDE4, D_8008CE04, D_8008CECC, D_8008CF1C, D_8008CF6C, D_8008B124, D_8008B140, D_8008B15C, D_8008B178, D_8008B194, D_8008B1B0, D_8008B1CC, D_8008B1E8, D_8008B204, D_8008B220, D_8008B23C, D_8008B258, D_8008B274, D_8008B290, D_8008B2AC, D_8008B2C8, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108, D_8008B108
+.word ItemScript_Jump, ItemScript_GearBoots1, ItemScript_GearBoots2, ItemScript_GearBoots3, ItemScript_GearHammer1, ItemScript_GearHammer2, ItemScript_GearHammer3, ItemScript_LuckyStar, ItemScript_Jump, ItemScript_Jump, ItemScript_DojoCard1, ItemScript_DojoCard2, ItemScript_DojoCard3, ItemScript_DojoCard4, ItemScript_DojoCard5, ItemScript_UltraStone, ItemScript_KoopaFortressKey, ItemScript_RuinsKey, ItemScript_PulseStone, ItemScript_TubbaCastleKey, ItemScript_IcePalaceKey, ItemScript_RuinsStoneMoon, ItemScript_RuinsStonePyramid, ItemScript_RuinsStoneStar, ItemScript_AncientVase, ItemScript_KooperShell, ItemScript_BowserCastleKey, ItemScript_ForestPass, ItemScript_BooWeight, ItemScript_BoosPortrait, ItemScript_CrystalBerry, ItemScript_MysticKey, ItemScript_StoreroomKey, ItemScript_ToyTrain, ItemScript_BooRecord, ItemScript_FryingPan, ItemScript_Dictionary, ItemScript_MysteryNote, ItemScript_SuspiciousNote, ItemScript_CrystalBall, ItemScript_Screwdriver, ItemScript_Cookbook, ItemScript_JadeRaven, ItemScript_MagicalSeed1, ItemScript_MagicalSeed2, ItemScript_MagicalSeed3, ItemScript_MagicalSeed4, ItemScript_ToadDoll, ItemScript_Calculator, ItemScript_SnowmanBucket, ItemScript_SnowmanScarf, ItemScript_RedKey, ItemScript_BlueKey, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Letter, ItemScript_Artifact, ItemScript_Letter, ItemScript_Letter, ItemScript_Dolly, ItemScript_WaterStone, ItemScript_MagicalBean, ItemScript_FertileSoil, ItemScript_MiracleWater, ItemScript_AncientVase, ItemScript_KootTheTape, ItemScript_BakingSugar, ItemScript_BakingSalt, ItemScript_BakingEgg, ItemScript_BakingCream, ItemScript_BakingStrawberry, ItemScript_BakingButter, ItemScript_BakingCleanser, ItemScript_BakingWater, ItemScript_BakingFlour, ItemScript_BakingMilk, ItemScript_Lyrics, ItemScript_Melody, ItemScript_Mailbag, ItemScript_PeachKey, ItemScript_StoreroomKey, ItemScript_StarStone, ItemScript_SneakyParasol, ItemScript_KootBook, ItemScript_KootAutographMerluvlee, ItemScript_KootEmptyWallet, ItemScript_KootAutographLuigi, ItemScript_KootKoopaShell, ItemScript_KootOldPhoto, ItemScript_KootGlasses, ItemScript_KootOldPhoto, ItemScript_KootPackage, ItemScript_KootRedJar, ItemScript_PeachKey, ItemScript_StoreroomKey, ItemScript_StoreroomKey, ItemScript_SilverCard, ItemScript_GoldCard, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_FireFlower, ItemScript_SnowmanDoll, ItemScript_ThunderRage, ItemScript_ShootingStar, ItemScript_ThunderBolt, ItemScript_Pebble, ItemScript_DustyHammer, ItemScript_InsecticideHerb, ItemScript_StoneCap, ItemScript_TastyTonic, ItemScript_Mushroom, ItemScript_VoltShroom, ItemScript_SuperShroom, ItemScript_DriedShroom, ItemScript_UltraShroom, ItemScript_SleepySheep, ItemScript_POWBlock, ItemScript_HustleDrink, ItemScript_StopWatch, ItemScript_WhackasBump, ItemScript_Apple, ItemScript_LifeShroom, ItemScript_Mystery, ItemScript_RepelGel, ItemScript_FrightJar, ItemScript_PleaseComeBack, ItemScript_DizzyDial, ItemScript_SuperSoda, ItemScript_Lemon, ItemScript_Lime, ItemScript_BlueBerry, ItemScript_RedBerry, ItemScript_YellowBerry, ItemScript_BubbleBerry, ItemScript_JamminJelly, ItemScript_MapleSyrup, ItemScript_HoneySyrup, ItemScript_Goomnut, ItemScript_KoopaLeaf, ItemScript_DriedPasta, ItemScript_DriedFruit, ItemScript_StrangeLeaf, ItemScript_CakeMix, ItemScript_Egg, ItemScript_Coconut, ItemScript_Melon, ItemScript_StinkyHerb, ItemScript_IcedPotato, ItemScript_SpicySoup, ItemScript_ApplePie, ItemScript_HoneyUltra, ItemScript_MapleUltra, ItemScript_JellyUltra, ItemScript_Koopasta, ItemScript_FriedShroom, ItemScript_ShroomCake, ItemScript_ShroomSteak, ItemScript_HotShroom, ItemScript_SweetShroom, ItemScript_YummyMeal, ItemScript_HealthyJuice, ItemScript_BlandMeal, ItemScript_DeluxeFeast, ItemScript_SpecialShake, ItemScript_BigCookie, ItemScript_Cake, ItemScript_Mistake, ItemScript_KoopaTea, ItemScript_HoneySuper, ItemScript_MapleSuper, ItemScript_JellySuper, ItemScript_Spaghetti, ItemScript_EggMissile, ItemScript_FriedEgg, ItemScript_HoneyShroom, ItemScript_HoneyCandy, ItemScript_ElectroPop, ItemScript_FirePop, ItemScript_LimeCandy, ItemScript_CocoPop, ItemScript_LemonCandy, ItemScript_JellyPop, ItemScript_StrangeCake, ItemScript_KookyCookie, ItemScript_FrozenFries, ItemScript_PotatoSalad, ItemScript_NuttyCake, ItemScript_MapleShroom, ItemScript_BoiledEgg, ItemScript_YoshiCookie, ItemScript_JellyShroom, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_SpinSmash, ItemScript_Multibounce, ItemScript_PowerPlus, ItemScript_DodgeMaster, ItemScript_PowerBounce, ItemScript_SpikeShield, ItemScript_FirstAttack, ItemScript_HPPlus, ItemScript_QuakeHammer, ItemScript_DoubleDip, ItemScript_Jump, ItemScript_SleepStomp, ItemScript_FireShield, ItemScript_QuickChange, ItemScript_DDownPound, ItemScript_DizzyStomp, ItemScript_SmashCharge0, ItemScript_PrettyLucky, ItemScript_FeelingFine, ItemScript_AttackFXA, ItemScript_AllorNothing, ItemScript_HPDrain, ItemScript_JumpCharge0, ItemScript_SlowGo, ItemScript_FPPlus, ItemScript_MegaRush, ItemScript_IcePower, ItemScript_DefendPlus, ItemScript_PayOff, ItemScript_MoneyMoney, ItemScript_ChillOut, ItemScript_HappyHeart, ItemScript_ZapTap, ItemScript_Berserker, ItemScript_RightOn, ItemScript_RunawayPay, ItemScript_Refund, ItemScript_FlowerSaver, ItemScript_TripleDip, ItemScript_HammerThrow, ItemScript_MegaQuake, ItemScript_SmashCharge, ItemScript_JumpCharge, ItemScript_SSmashChg, ItemScript_SJumpChg, ItemScript_PowerRush, ItemScript_AutoJump, ItemScript_AutoSmash, ItemScript_CrazyHeart, ItemScript_LastStand, ItemScript_CloseCall, ItemScript_PUpDDown, ItemScript_LuckyDay, ItemScript_MegaHPDrain, ItemScript_PDownDUp, ItemScript_PowerQuake, ItemScript_AutoMultibounce, ItemScript_FlowerFanatic, ItemScript_HeartFinder, ItemScript_FlowerFinder, ItemScript_SpinAttack, ItemScript_DizzyAttack, ItemScript_ISpy, ItemScript_SpeedySpin, ItemScript_BumpAttack, ItemScript_PowerJump, ItemScript_SuperJump, ItemScript_MegaJump, ItemScript_PowerSmash, ItemScript_SuperSmash, ItemScript_MegaSmash, ItemScript_Jump, ItemScript_Jump, ItemScript_DeepFocus, ItemScript_SuperFocus, ItemScript_ShrinkSmash, ItemScript_Jump, ItemScript_Kaiden, ItemScript_DDownJump, ItemScript_ShrinkStomp, ItemScript_DamageDodge, ItemScript_EarthquakeJump, ItemScript_DeepFocus, ItemScript_SuperFocus, ItemScript_HPPlus, ItemScript_FPPlus, ItemScript_HappyHeart, ItemScript_HappyHeart, ItemScript_FlowerSaver, ItemScript_FlowerSaver, ItemScript_DamageDodge, ItemScript_DamageDodge, ItemScript_PowerPlus, ItemScript_PowerPlus, ItemScript_DefendPlus, ItemScript_DefendPlus, ItemScript_HappyFlower, ItemScript_HappyFlower, ItemScript_HappyFlower, ItemScript_GroupFocus, ItemScript_Peekaboo, ItemScript_AttackFXD, ItemScript_AttackFXB, ItemScript_AttackFXE, ItemScript_AttackFXC, ItemScript_AttackFXF, ItemScript_HPPlus, ItemScript_HPPlus, ItemScript_HPPlus, ItemScript_FPPlus, ItemScript_FPPlus, ItemScript_FPPlus, ItemScript_HealthyHealthy, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Heart, ItemScript_Coin, ItemScript_HeartPiece, ItemScript_StarPoint, ItemScript_HeartPoint, ItemScript_FlowerPoint, ItemScript_StarPiece, ItemScript_CompleteCake, ItemScript_CakeDone, ItemScript_CakeBaked, ItemScript_CakePan, ItemScript_CakeBatter, ItemScript_CakeBowl, ItemScript_CakeMixed, ItemScript_CakeIcing, ItemScript_CakeBerries, ItemScript_Hammer1, ItemScript_Hammer2, ItemScript_Hammer3, ItemScript_Boots1, ItemScript_Boots2, ItemScript_Boots3, ItemScript_Items, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump, ItemScript_Jump
 
 dlabel gItemIconRasterOffsets
 .word 0x00000000, 0x00001320, 0x00001540, 0x00001760, 0x00001980, 0x00001BA0, 0x00001DC0, 0x00001FE0, 0x00000000, 0x00000000, 0x00010780, 0x000109A0, 0x00010BC0, 0x00010E00, 0x00011020, 0x0000D860, 0x00009020, 0x00009240, 0x00009F00, 0x00009460, 0x00009680, 0x0000A9A0, 0x0000A560, 0x0000A780, 0x0000A340, 0x00009CE0, 0x000098A0, 0x0000ABC0, 0x0000B220, 0x0000B440, 0x0000CDC0, 0x0000B660, 0x0000B880, 0x0000BAA0, 0x0000B000, 0x0000BCC0, 0x0000BEE0, 0x0000C100, 0x0000C320, 0x00011240, 0x0000DEE0, 0x0000E100, 0x0000E320, 0x0000C540, 0x0000C760, 0x0000C980, 0x0000CBA0, 0x0000DAA0, 0x0000DCC0, 0x0000E540, 0x0000E760, 0x0000E980, 0x0000EBC0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x000129C0, 0x0000A120, 0x000129C0, 0x000129C0, 0x00009AC0, 0x0000CFE0, 0x0000D200, 0x0000D420, 0x0000D640, 0x0000A340, 0x00011AC0, 0x00027B40, 0x00027900, 0x00027D80, 0x00027FC0, 0x00028200, 0x00028440, 0x00028680, 0x000288C0, 0x00028B00, 0x00028D40, 0x0000F440, 0x0000F220, 0x0000F660, 0x0000FCE0, 0x0000B880, 0x0000F880, 0x0000FAA0, 0x000118A0, 0x00011CE0, 0x00011F20, 0x00012140, 0x00012360, 0x00012580, 0x000127A0, 0x00012580, 0x0000EDE0, 0x0000F000, 0x0000FCE0, 0x0000B880, 0x0000B880, 0x00011680, 0x00011460, 0x00000000, 0x00000000, 0x00000000, 0x0002A3C0, 0x0002A600, 0x0002A840, 0x0002ACC0, 0x0002AA80, 0x0002B140, 0x0002AF00, 0x00014700, 0x0002B5C0, 0x00024300, 0x000237C0, 0x0002B800, 0x00023A00, 0x000240C0, 0x00023C40, 0x000291C0, 0x00029640, 0x00029880, 0x00029AC0, 0x00027480, 0x000276C0, 0x00023E80, 0x00014280, 0x000144C0, 0x00014040, 0x00013BC0, 0x00029D00, 0x00024540, 0x00025980, 0x00025740, 0x00024780, 0x000249C0, 0x00024C00, 0x00024E40, 0x00027240, 0x00027000, 0x00026DC0, 0x00025080, 0x000252C0, 0x00025500, 0x00025BC0, 0x00025E00, 0x00026040, 0x00026280, 0x000264C0, 0x00026700, 0x00026940, 0x00026B80, 0x00002420, 0x00002660, 0x000028A0, 0x00002AE0, 0x00002D20, 0x00002F60, 0x000031A0, 0x000033E0, 0x00003620, 0x00003860, 0x00003AA0, 0x00004160, 0x00003CE0, 0x00003F20, 0x000043A0, 0x000045E0, 0x00004820, 0x00004A60, 0x00004CA0, 0x00004EE0, 0x00005120, 0x00005360, 0x000055A0, 0x000057E0, 0x00005A20, 0x00005C60, 0x00005EA0, 0x000060E0, 0x00006320, 0x00006560, 0x000067A0, 0x000069E0, 0x00006C20, 0x00006E60, 0x000070A0, 0x000072E0, 0x00007520, 0x00007760, 0x000079A0, 0x00007BE0, 0x00007E20, 0x00008060, 0x000082A0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00014DC0, 0x00015000, 0x00015240, 0x00015480, 0x000156C0, 0x00015900, 0x00015B40, 0x00015D80, 0x00015FC0, 0x00016200, 0x00000000, 0x000168C0, 0x000171C0, 0x00020880, 0x00017AC0, 0x00017F40, 0x000183C0, 0x00018600, 0x00018840, 0x00018A80, 0x00018CC0, 0x00018F00, 0x00019140, 0x00019380, 0x000195C0, 0x00019800, 0x00019A40, 0x00019C80, 0x00019EC0, 0x0001A100, 0x0001A340, 0x0001A580, 0x0001A7C0, 0x0001AA00, 0x0001AC40, 0x0001AE80, 0x0001B0C0, 0x0001B300, 0x0001B540, 0x00018180, 0x00016680, 0x00016B00, 0x00017400, 0x00016D40, 0x00017640, 0x0001E000, 0x00017880, 0x00016F80, 0x0001E6C0, 0x0001E240, 0x0001E480, 0x0001CE00, 0x0001C740, 0x0001C980, 0x0001D040, 0x00016440, 0x00017D00, 0x0001B780, 0x0001D280, 0x0001D4C0, 0x0001DB80, 0x0001D700, 0x0001DDC0, 0x0001D940, 0x0001CBC0, 0x0001B9C0, 0x0001BC00, 0x0001BE40, 0x0001C080, 0x0001C2C0, 0x0001C500, 0x00000000, 0x00000000, 0x000201C0, 0x00020400, 0x0001EFC0, 0x00000000, 0x00020640, 0x0001F440, 0x0001F200, 0x0001F680, 0x0001F8C0, 0x000201C0, 0x00020400, 0x00015D80, 0x000195C0, 0x0001A580, 0x0001A580, 0x0001B300, 0x0001B300, 0x0001F680, 0x0001F680, 0x00015240, 0x00015240, 0x00019C80, 0x00019C80, 0x0001FB00, 0x0001FB00, 0x0001FB00, 0x00021600, 0x000213C0, 0x00021840, 0x00021A80, 0x00021CC0, 0x00021F00, 0x00022140, 0x00015D80, 0x00015D80, 0x00015D80, 0x000195C0, 0x000195C0, 0x000195C0, 0x000225C0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00030A60, 0x0002F5C0, 0x00030CE0, 0x00030E20, 0x0002E900, 0x0002EF60, 0x00030400
@@ -2625,7 +2772,10 @@ dlabel D_8008EEF0
 .word 0x00000000, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000000, 0x00000006, 0x00000007, 0x00000008, 0x00000005, 0x00000000, 0x00000000
 
 dlabel gPartnerPopupProperties
-.word D_800989A0, 0x00000000, 0x00000000, 0x00000000, 0x001D0007, 0x00000002, 0x00280000, 0x00280001, 0x001D0008, 0x00000003, 0x0028000D, 0x0028000E, 0x001D0009, 0x00000004, 0x0028001A, 0x0028001B, 0x001D000A, 0x00000005, 0x00280027, 0x00280028, 0x001D000B, 0x00000001, 0x00000000, 0x00000000, 0x001D000C, 0x00000007, 0x00280041, 0x00280042, 0x001D000D, 0x00000008, 0x0028004E, 0x0028004F, 0x001D000E, 0x00000009, 0x0028005B, 0x0028005C, 0x001D000F, 0x00000006, 0x00280034, 0x00280035, 0x001D0010, 0x00000001, 0x00000000, 0x00000000, 0x001D0011, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, HudScript_Partner0, HudScript_Partner0Disabled, HudScript_Goombario, HudScript_GoombarioDisabled, HudScript_Kooper, HudScript_KooperDisabled, HudScript_Bombette, HudScript_BombetteDisabled, HudScript_Parakarry, HudScript_ParakarryDisabled, HudScript_Bow, HudScript_BowDisabled, HudScript_Watt, HudScript_WattDisabled, HudScript_Sushie, HudScript_SushieDisabled, HudScript_Lakilester, HudScript_LakilesterDisabled, 0x80107F78, 0x80107FA0, HudScript_PartnerA, HudScript_PartnerADisabled, 0x80108018, 0x80108040, 0x80108018, 0x80108040
+.word D_800989A0, 0x00000000, 0x00000000, 0x00000000, 0x001D0007, 0x00000002, 0x00280000, 0x00280001, 0x001D0008, 0x00000003, 0x0028000D, 0x0028000E, 0x001D0009, 0x00000004, 0x0028001A, 0x0028001B, 0x001D000A, 0x00000005, 0x00280027, 0x00280028, 0x001D000B, 0x00000001, 0x00000000, 0x00000000, 0x001D000C, 0x00000007, 0x00280041, 0x00280042, 0x001D000D, 0x00000008, 0x0028004E, 0x0028004F, 0x001D000E, 0x00000009, 0x0028005B, 0x0028005C, 0x001D000F, 0x00000006, 0x00280034, 0x00280035, 0x001D0010, 0x00000001, 0x00000000, 0x00000000, 0x001D0011, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+
+dlabel gPartnerIconHudScripts
+.word HudScript_Partner0, HudScript_Partner0Disabled, HudScript_Goombario, HudScript_GoombarioDisabled, HudScript_Kooper, HudScript_KooperDisabled, HudScript_Bombette, HudScript_BombetteDisabled, HudScript_Parakarry, HudScript_ParakarryDisabled, HudScript_Bow, HudScript_BowDisabled, HudScript_Watt, HudScript_WattDisabled, HudScript_Sushie, HudScript_SushieDisabled, HudScript_Lakilester, HudScript_LakilesterDisabled, 0x80107F78, 0x80107FA0, HudScript_PartnerA, HudScript_PartnerADisabled, 0x80108018, 0x80108040, 0x80108018, 0x80108040
 
 dlabel gMoveTable
 .word 0x00000000
