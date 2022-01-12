@@ -2629,9 +2629,57 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
     return minDefense;
 }
 
-INCLUDE_ASM(s32, "190B20", func_802664DC);
+void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a) {
+    s32 i;
 
-INCLUDE_ASM(void, "190B20", show_damage_popup, f32 x, f32 y, f32 z, s32 damageAmount, s32 arg4);
+    for (i = 0; i < 1; i++) {
+        if (gDamageCountEffects[i] == NULL) {
+            break;
+        }
+    }
+
+    if (i > 0) {
+        i = 0;
+        // TODO use actual effect instance struct when we know what it is
+        ((s32*)gDamageCountEffects[i]->data)[12] = 5;
+        gDamageCountEffects[i] = NULL;
+    }
+
+    if (a == 0) {
+        a = -55;
+    } else {
+        a = 55;
+    }
+
+    playFX_1E(0, x, y, z, 10.0f, a, attack, &gDamageCountEffects[i]);
+    gDamageCountTimers[i] = 40;
+}
+
+void show_damage_popup(f32 x, f32 y, f32 z, s32 attack, s32 a) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gDamageCountEffects); i++) {
+        if (gDamageCountEffects[i] == NULL) {
+            break;
+        }
+    }
+
+    if (i > ARRAY_COUNT(gDamageCountEffects) - 1) {
+        i = 0;
+        // TODO use actual effect instance struct when we know what it is
+        ((s32*)gDamageCountEffects[i]->data)[12] = 5;
+        gDamageCountEffects[i] = NULL;
+    }
+
+    if (a == 0) {
+        a = -55;
+    } else {
+        a = 55;
+    }
+
+    playFX_1E(0, x, y, z, 10.0f, a, attack, &gDamageCountEffects[i]);
+    gDamageCountTimers[i] = 40;
+}
 
 void func_80266684(void) {
     s32 i;
@@ -2656,7 +2704,67 @@ void func_80266970(Actor* target) {
     target->unk_204 = 0;
 }
 
-INCLUDE_ASM(s32, "190B20", func_80266978);
+void func_80266978(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* actor;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        actor = gBattleStatus.enemyActors[i];
+        if (actor != NULL) {
+            if (actor->unk_205 == 0x3C) {
+                if (actor->unk_200 != 0) {
+                    actor->unk_200[3][9] = 0;
+                }
+            }
+            if (actor->unk_205 == 5) {
+                if (actor->unk_200 != 0) {
+                    actor->unk_200[3][6] = 0;
+                    actor->unk_200 = NULL;
+                }
+            }
+            if (actor->unk_205 > 0) {
+                actor->unk_205--;
+            }
+        }
+    }
+
+    actor = battleStatus->playerActor;
+    if (actor != NULL) {
+        if (actor->unk_205 == 60) {
+            if (actor->unk_200 != NULL) {
+                actor->unk_200[3][9] = 0;
+            }
+        }
+        if (actor->unk_205 == 5) {
+            if (actor->unk_200 != NULL) {
+                actor->unk_200[3][6] = 0;
+                actor->unk_200 = NULL;
+            }
+        }
+        if (actor->unk_205 > 0) {
+            actor->unk_205--;
+        }
+    }
+
+    actor = battleStatus->partnerActor;
+    if (actor != NULL) {
+        if (actor->unk_205 == 60) {
+            if (actor->unk_200 != NULL) {
+                actor->unk_200[3][9] = 0;
+            }
+        }
+        if (actor->unk_205 == 5) {
+            if (actor->unk_200 != NULL) {
+                actor->unk_200[3][6] = 0;
+                actor->unk_200 = NULL;
+            }
+        }
+        if (actor->unk_205 > 0) {
+            actor->unk_205--;
+        }
+    }
+}
 
 void func_80266ADC(Actor* target) {
     target->unk_206 = -1;

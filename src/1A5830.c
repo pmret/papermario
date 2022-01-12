@@ -1066,7 +1066,52 @@ INCLUDE_ASM(s32, "1A5830", JumpPartTo);
 
 INCLUDE_ASM(s32, "1A5830", FallPartTo);
 
-INCLUDE_ASM(s32, "1A5830", LandJumpPart);
+s32 LandJumpPart(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor;
+    ActorPart* part;
+    ActorPartMovement* movement;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        s32 actorID = evt_get_variable(script, *args++);
+        s32 partIndex = evt_get_variable(script, *args++);
+
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+
+        actor = get_actor(actorID);
+        part = get_actor_part(actor, partIndex);
+        script->functionTemp[1] = (s32) actor;
+        script->functionTemp[2] = (s32) part;
+        movement = part->movement;
+        movement->unk_00.x = part->absolutePosition.x;
+        movement->unk_00.y = part->absolutePosition.y;
+        movement->unk_00.z = part->absolutePosition.z;
+        script->functionTemp[0] = 1;
+    }
+
+    part = script->functionTemp[2];
+    movement = part->movement;
+    movement->unk_00.y += movement->unk_2C;
+    movement->unk_2C -= movement->jumpScale;
+    add_xz_vec3f_copy1(movement, movement->moveSpeed, movement->unk_30);
+    part->absolutePosition.x = movement->unk_00.x;
+    part->absolutePosition.y = movement->unk_00.y;
+    part->absolutePosition.z = movement->unk_00.z;
+
+    if (part->absolutePosition.y < 0.0f) {
+        part->absolutePosition.y = 0.0f;
+        play_movement_dust_effects(2, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z, part->yaw);
+        return ApiStatus_DONE1;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "1A5830", RunPartTo);
 
