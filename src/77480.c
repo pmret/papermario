@@ -63,6 +63,7 @@ void func_800EF3D4(s16);
 void spr_draw_player_sprite(s32, s32, s32, s32, Matrix4f);
 void func_802DDEE4(s32, s32, s32, s32, s32, s32, s32, s32);
 void func_802DDFF8(u32, s32, s32, s32, s32, s32, s32);
+f32 get_player_normal_pitch(void);
 
 s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ, f32* outLength, f32* hitRx, f32* hitRz,
                          f32* hitDirX, f32* hitDirZ) {
@@ -196,8 +197,56 @@ s32 player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32
                                 outX, outY, outZ, outLength, hitRx, hitRz, hitDirX, hitDirZ);
 }
 
+s32 player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
+    f32 hitX;
+    f32 hitY;
+    f32 hitZ;
+    f32 hitDepth;
+    f32 hitNx;
+    f32 hitNy;
+    f32 hitNz;
+    s32 entityID, colliderID;
+    Entity* entity;
+    s32 ret;
 
-INCLUDE_ASM(void, "77480", player_raycast_down, f32*, f32*, f32*, f32*);
+    hitDepth = *length;
+    ret = -1;
+    entityID = test_ray_entities(*x, *y, *z, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    if (entityID >= 0) {
+        entity = get_entity_by_index(entityID);
+        if (entity->alpha < 255) {
+            entity->unk_07 = 4;
+            entity->flags |= ENTITY_FLAGS_CONTINUOUS_COLLISION;
+        } else {
+            ret = entityID | 0x4000;
+        }
+    }
+
+    colliderID = test_ray_colliders(0x10000, *x, *y, *z, 0, -1.0f, 0, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    if (colliderID >= 0) {
+        ret = colliderID;
+    }
+
+    if (ret >= 0) {
+        *length = hitDepth;
+        *x = hitX;
+        *y = hitY;
+        *z = hitZ;
+        gGameStatusPtr->playerGroundTraceNormal.x = hitNx;
+        gGameStatusPtr->playerGroundTraceNormal.y = hitNy;
+        gGameStatusPtr->playerGroundTraceNormal.z = hitNz;
+        D_8010C938 = get_player_normal_yaw();
+        D_8010C990 = get_player_normal_pitch();
+        gGameStatusPtr->playerGroundTraceAngles.x = atan2(0.0f, 0.0f, hitNz * 100.0, hitNy * 100.0);
+        gGameStatusPtr->playerGroundTraceAngles.y = 0.0f;
+        gGameStatusPtr->playerGroundTraceAngles.z = atan2(0.0f, 0.0f, hitNx * 100.0, hitNy * 100.0);
+    } else {
+        gGameStatusPtr->playerGroundTraceAngles.x = 0.0f;
+        gGameStatusPtr->playerGroundTraceAngles.y = 0.0f;
+        gGameStatusPtr->playerGroundTraceAngles.z = 0.0f;
+    }
+    return ret;
+}
 
 INCLUDE_ASM(s32, "77480", player_raycast_up_corners);
 
@@ -802,7 +851,7 @@ void render_player_model(void) {
         if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_20000)) {
             if (playerStatus->alpha1 != playerStatus->alpha2) {
                 if (playerStatus->alpha1 < 254) {
-                    
+
                     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_1000000)) {
                         renderModeTemp = RENDER_MODE_SURFACE_XLU_LAYER1;
                     } else {
@@ -811,7 +860,7 @@ void render_player_model(void) {
 
                     playerStatus->renderMode = renderModeTemp;
                     func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
-                
+
                 } else {
                     playerStatus->renderMode = RENDER_MODE_ALPHATEST;
                     func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
@@ -829,7 +878,7 @@ void render_player_model(void) {
             rtPtr->appendGfxArg = playerStatus;
             rtPtr->distance = -z;
             rtPtr->renderMode = playerStatus->renderMode;
-            
+
 
             if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_20000)) {
                 appendGfx = appendGfx_player;
@@ -896,12 +945,12 @@ void appendGfx_player(void* data) {
         if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
             phi_a0 = PLAYER_STATUS_ANIM_FLAGS_10000000;
         }
-        
+
         spr_draw_player_sprite(phi_a0, 0, 0, 0, sp20);
     }
 
     D_800F7B4C++;
-    
+
     if (D_800F7B4C >= 3) {
         D_800F7B4C = 0;
     }

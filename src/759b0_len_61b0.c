@@ -8,7 +8,7 @@ extern s32 D_8010C968;
 
 PlayerStatus* gPlayerStatusPtr = &gPlayerStatus; // maybe wPlayerStatus
 
-s32 npc_raycast_down(s32 ignoreFlags, f32 *startX, f32 *startY, f32 *startZ, f32 *hitDepth) {
+s32 npc_raycast_down(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f32* hitDepth) {
     f32 cHitX;
     f32 cHitY;
     f32 cHitZ;
@@ -70,7 +70,7 @@ s32 npc_raycast_down(s32 ignoreFlags, f32 *startX, f32 *startY, f32 *startZ, f32
     return colliderID;
 }
 
-s32 npc_raycast_down_around(s32 ignoreFlags, f32 *posX, f32 *posY, f32 *posZ, f32 *hitDepth, f32 yaw, f32 radius) {
+s32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius) {
     f32 startX;
     f32 startY;
     f32 startZ;
@@ -187,7 +187,7 @@ s32 npc_raycast_down_around(s32 ignoreFlags, f32 *posX, f32 *posY, f32 *posZ, f3
     return FALSE;
 }
 
-s32 npc_raycast_down_sides(s32 ignoreFlags, f32 *posX, f32 *posY, f32 *posZ, f32 *hitDepth) {
+s32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth) {
     f32 startX;
     f32 startY;
     f32 startZ;
@@ -280,7 +280,7 @@ s32 npc_raycast_down_sides(s32 ignoreFlags, f32 *posX, f32 *posY, f32 *posZ, f32
     return FALSE;
 }
 
-s32 npc_raycast_up(s32 ignoreFlags, f32 *startX, f32 *startY, f32 *startZ, f32 *hitDepth) {
+s32 npc_raycast_up(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f32* hitDepth) {
     f32 cHitX;
     f32 cHitY;
     f32 cHitZ;
@@ -380,7 +380,7 @@ s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length) 
     return ret;
 }
 
-s32 npc_raycast_up_corners(s32 ignoreFlags, f32 *posX, f32 *posY, f32 *posZ, f32 *hitDepth, f32 yaw, f32 radius) {
+s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius) {
     f32 startX;
     f32 startY;
     f32 startZ;
