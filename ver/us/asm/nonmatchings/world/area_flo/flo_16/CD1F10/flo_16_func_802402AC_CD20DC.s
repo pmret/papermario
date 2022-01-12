@@ -42,8 +42,8 @@ glabel func_802402AC_CD20DC
 /* CD216C 8024033C 5040002E */  beql      $v0, $zero, .L802403F8
 /* CD2170 80240340 26520001 */   addiu    $s2, $s2, 1
 /* CD2174 80240344 00101100 */  sll       $v0, $s0, 4
-/* CD2178 80240348 3C068009 */  lui       $a2, %hi(D_8008EF20)
-/* CD217C 8024034C 24C6EF20 */  addiu     $a2, $a2, %lo(D_8008EF20)
+/* CD2178 80240348 3C068009 */  lui       $a2, %hi(gPartnerPopupProperties)
+/* CD217C 8024034C 24C6EF20 */  addiu     $a2, $a2, %lo(gPartnerPopupProperties)
 /* CD2180 80240350 00461021 */  addu      $v0, $v0, $a2
 /* CD2184 80240354 0200202D */  daddu     $a0, $s0, $zero
 /* CD2188 80240358 AE300108 */  sw        $s0, 0x108($s1)
@@ -130,9 +130,9 @@ glabel func_802402AC_CD20DC
 /* CD22B0 80240480 02621021 */  addu      $v0, $s3, $v0
 /* CD22B4 80240484 8C420108 */  lw        $v0, 0x108($v0)
 /* CD22B8 80240488 00021100 */  sll       $v0, $v0, 4
-/* CD22BC 8024048C 3C038009 */  lui       $v1, %hi(D_8008EF20)
+/* CD22BC 8024048C 3C038009 */  lui       $v1, %hi(gPartnerPopupProperties)
 /* CD22C0 80240490 00621821 */  addu      $v1, $v1, $v0
-/* CD22C4 80240494 8C63EF20 */  lw        $v1, %lo(D_8008EF20)($v1)
+/* CD22C4 80240494 8C63EF20 */  lw        $v1, %lo(gPartnerPopupProperties)($v1)
 /* CD22C8 80240498 8EA20074 */  lw        $v0, 0x74($s5)
 /* CD22CC 8024049C 2442FFFF */  addiu     $v0, $v0, -1
 /* CD22D0 802404A0 00021080 */  sll       $v0, $v0, 2

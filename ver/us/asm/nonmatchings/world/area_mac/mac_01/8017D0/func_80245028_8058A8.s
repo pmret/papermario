@@ -37,8 +37,8 @@ glabel func_80245028_8058A8
 /* 805924 802450A4 26B50001 */   addiu    $s5, $s5, 1
 /* 805928 802450A8 0200202D */  daddu     $a0, $s0, $zero
 /* 80592C 802450AC 00101100 */  sll       $v0, $s0, 4
-/* 805930 802450B0 3C068009 */  lui       $a2, %hi(D_8008EF20)
-/* 805934 802450B4 24C6EF20 */  addiu     $a2, $a2, %lo(D_8008EF20)
+/* 805930 802450B0 3C068009 */  lui       $a2, %hi(gPartnerPopupProperties)
+/* 805934 802450B4 24C6EF20 */  addiu     $a2, $a2, %lo(gPartnerPopupProperties)
 /* 805938 802450B8 00469021 */  addu      $s2, $v0, $a2
 /* 80593C 802450BC 0C0913D7 */  jal       func_80244F5C_8057DC
 /* 805940 802450C0 AFA50010 */   sw       $a1, 0x10($sp)

@@ -40,7 +40,7 @@ EvtSource BtlPutPartnerAway = {
         EVT_SETF(EVT_VAR(0), EVT_FIXED(1.0))
         EVT_LOOP(10)
             EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
-            EVT_SUBF(EVT_VAR(0), EVT_FIXED(0.1005859375))
+            EVT_SUBF(EVT_VAR(0), EVT_FIXED(0.1))
             EVT_WAIT_FRAMES(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
@@ -58,7 +58,7 @@ EvtSource BtlPutPartnerAway = {
 
 EvtSource BtlBringPartnerOut = {
     EVT_CHILD_THREAD
-        EVT_SETF(EVT_VAR(0), EVT_FIXED(0.1005859375))
+        EVT_SETF(EVT_VAR(0), EVT_FIXED(0.1))
         EVT_LOOP(20)
             EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
             EVT_ADDF(EVT_VAR(0), EVT_FIXED(0.05078125))

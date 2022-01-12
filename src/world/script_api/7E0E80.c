@@ -361,7 +361,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
 
 //dumb stuff
 #ifdef NON_EQUIVALENT
-extern s32 D_8008A680[337][2];
+extern s32 gItemHudScripts[337][2];
 
 void shop_open_item_select_popup(s32 mode) {
     Shop* shop = gGameStatusPtr->mapShop;
@@ -399,7 +399,7 @@ void shop_open_item_select_popup(s32 mode) {
         }
 
         if (itemID != 0) {
-            menu->ptrIcon[i] = D_8008A680[gItemTable[itemID].iconID][0];
+            menu->ptrIcon[i] = gItemHudScripts[gItemTable[itemID].iconID][0];
             menu->userIndex[i] = i;
             menu->enabled[i] = TRUE;
             menu->nameMsg[i] = gItemTable[itemID].nameMsg;

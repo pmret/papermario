@@ -863,7 +863,7 @@ ApiStatus N(func_8024259C_C38ACC)(Evt* script, s32 isInitialCall) {
 
             if (playerData->partners[idx].enabled) {
                 ptr->unk_108[i] = idx;
-                ptr->unk_84[i] = *D_8008EF20[idx];
+                ptr->unk_84[i] = *gPartnerPopupProperties[idx];
                 partnerLevel = N(UnkFunc37)(idx, var);
                 if (partnerLevel >= 0) {
                     ptr->unk_00[i] = D_800F7F00[idx];
@@ -904,7 +904,7 @@ ApiStatus N(func_8024259C_C38ACC)(Evt* script, s32 isInitialCall) {
 
     destroy_popup_menu();
     if (script->functionTemp[1] != 0xFF) {
-        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1] - 1]][0];
+        script->varTable[0] = gPartnerPopupProperties[ptr->unk_108[script->functionTemp[1] - 1]][0];
         script->varTable[1] = ptr->unk_108[script->functionTemp[1] - 1];
     } else {
         script->varTable[0] = -1;

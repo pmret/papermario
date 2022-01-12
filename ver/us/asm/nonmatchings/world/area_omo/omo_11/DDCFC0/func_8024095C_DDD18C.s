@@ -42,8 +42,8 @@ glabel func_8024095C_DDD18C
 /* DDD21C 802409EC 5040002E */  beql      $v0, $zero, .L80240AA8
 /* DDD220 802409F0 26520001 */   addiu    $s2, $s2, 1
 /* DDD224 802409F4 00101100 */  sll       $v0, $s0, 4
-/* DDD228 802409F8 3C068009 */  lui       $a2, %hi(D_8008EF20)
-/* DDD22C 802409FC 24C6EF20 */  addiu     $a2, $a2, %lo(D_8008EF20)
+/* DDD228 802409F8 3C068009 */  lui       $a2, %hi(gPartnerPopupProperties)
+/* DDD22C 802409FC 24C6EF20 */  addiu     $a2, $a2, %lo(gPartnerPopupProperties)
 /* DDD230 80240A00 00461021 */  addu      $v0, $v0, $a2
 /* DDD234 80240A04 0200202D */  daddu     $a0, $s0, $zero
 /* DDD238 80240A08 AE300108 */  sw        $s0, 0x108($s1)
@@ -130,9 +130,9 @@ glabel func_8024095C_DDD18C
 /* DDD360 80240B30 02621021 */  addu      $v0, $s3, $v0
 /* DDD364 80240B34 8C420108 */  lw        $v0, 0x108($v0)
 /* DDD368 80240B38 00021100 */  sll       $v0, $v0, 4
-/* DDD36C 80240B3C 3C038009 */  lui       $v1, %hi(D_8008EF20)
+/* DDD36C 80240B3C 3C038009 */  lui       $v1, %hi(gPartnerPopupProperties)
 /* DDD370 80240B40 00621821 */  addu      $v1, $v1, $v0
-/* DDD374 80240B44 8C63EF20 */  lw        $v1, %lo(D_8008EF20)($v1)
+/* DDD374 80240B44 8C63EF20 */  lw        $v1, %lo(gPartnerPopupProperties)($v1)
 /* DDD378 80240B48 8EA20074 */  lw        $v0, 0x74($s5)
 /* DDD37C 80240B4C 2442FFFF */  addiu     $v0, $v0, -1
 /* DDD380 80240B50 00021080 */  sll       $v0, $v0, 2

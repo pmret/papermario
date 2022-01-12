@@ -42,8 +42,8 @@ glabel func_802404DC_C6860C
 /* C6869C 8024056C 5040002E */  beql      $v0, $zero, .L80240628
 /* C686A0 80240570 26520001 */   addiu    $s2, $s2, 1
 /* C686A4 80240574 00101100 */  sll       $v0, $s0, 4
-/* C686A8 80240578 3C068009 */  lui       $a2, %hi(D_8008EF20)
-/* C686AC 8024057C 24C6EF20 */  addiu     $a2, $a2, %lo(D_8008EF20)
+/* C686A8 80240578 3C068009 */  lui       $a2, %hi(gPartnerPopupProperties)
+/* C686AC 8024057C 24C6EF20 */  addiu     $a2, $a2, %lo(gPartnerPopupProperties)
 /* C686B0 80240580 00461021 */  addu      $v0, $v0, $a2
 /* C686B4 80240584 0200202D */  daddu     $a0, $s0, $zero
 /* C686B8 80240588 AE300108 */  sw        $s0, 0x108($s1)
@@ -130,9 +130,9 @@ glabel func_802404DC_C6860C
 /* C687E0 802406B0 02621021 */  addu      $v0, $s3, $v0
 /* C687E4 802406B4 8C420108 */  lw        $v0, 0x108($v0)
 /* C687E8 802406B8 00021100 */  sll       $v0, $v0, 4
-/* C687EC 802406BC 3C038009 */  lui       $v1, %hi(D_8008EF20)
+/* C687EC 802406BC 3C038009 */  lui       $v1, %hi(gPartnerPopupProperties)
 /* C687F0 802406C0 00621821 */  addu      $v1, $v1, $v0
-/* C687F4 802406C4 8C63EF20 */  lw        $v1, %lo(D_8008EF20)($v1)
+/* C687F4 802406C4 8C63EF20 */  lw        $v1, %lo(gPartnerPopupProperties)($v1)
 /* C687F8 802406C8 8EA20074 */  lw        $v0, 0x74($s5)
 /* C687FC 802406CC 2442FFFF */  addiu     $v0, $v0, -1
 /* C68800 802406D0 00021080 */  sll       $v0, $v0, 2

@@ -7,8 +7,8 @@ glabel setup_partner_popup
 /* 80030 800E6B80 0000502D */  daddu     $t2, $zero, $zero
 /* 80034 800E6B84 24090001 */  addiu     $t1, $zero, 1
 /* 80038 800E6B88 24180005 */  addiu     $t8, $zero, 5
-/* 8003C 800E6B8C 3C0F8009 */  lui       $t7, %hi(D_8008EF20)
-/* 80040 800E6B90 25EFEF20 */  addiu     $t7, $t7, %lo(D_8008EF20)
+/* 8003C 800E6B8C 3C0F8009 */  lui       $t7, %hi(gPartnerPopupProperties)
+/* 80040 800E6B90 25EFEF20 */  addiu     $t7, $t7, %lo(gPartnerPopupProperties)
 /* 80044 800E6B94 3C0E800F */  lui       $t6, %hi(D_800F7F00)
 /* 80048 800E6B98 25CE7F00 */  addiu     $t6, $t6, %lo(D_800F7F00)
 /* 8004C 800E6B9C 0120682D */  daddu     $t5, $t1, $zero

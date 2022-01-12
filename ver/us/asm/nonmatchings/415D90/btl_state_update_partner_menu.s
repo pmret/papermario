@@ -823,8 +823,8 @@ glabel btl_state_update_partner_menu
 /* 41DB20 802A8D90 0200882D */  daddu     $s1, $s0, $zero
 /* 41DB24 802A8D94 3C098008 */  lui       $t1, %hi(gItemTable)
 /* 41DB28 802A8D98 252978E0 */  addiu     $t1, $t1, %lo(gItemTable)
-/* 41DB2C 802A8D9C 3C088009 */  lui       $t0, %hi(D_8008A680)
-/* 41DB30 802A8DA0 2508A680 */  addiu     $t0, $t0, %lo(D_8008A680)
+/* 41DB2C 802A8D9C 3C088009 */  lui       $t0, %hi(gItemHudScripts)
+/* 41DB30 802A8DA0 2508A680 */  addiu     $t0, $t0, %lo(gItemHudScripts)
 /* 41DB34 802A8DA4 24070001 */  addiu     $a3, $zero, 1
 /* 41DB38 802A8DA8 02E0302D */  daddu     $a2, $s7, $zero
 /* 41DB3C 802A8DAC 0240282D */  daddu     $a1, $s2, $zero
@@ -958,8 +958,8 @@ glabel btl_state_update_partner_menu
 .L802A8F84_41DD14:
 /* 41DD14 802A8F84 0000802D */  daddu     $s0, $zero, $zero
 /* 41DD18 802A8F88 24110001 */  addiu     $s1, $zero, 1
-/* 41DD1C 802A8F8C 3C0C8009 */  lui       $t4, %hi(D_8008EF20)
-/* 41DD20 802A8F90 258CEF20 */  addiu     $t4, $t4, %lo(D_8008EF20)
+/* 41DD1C 802A8F8C 3C0C8009 */  lui       $t4, %hi(gPartnerPopupProperties)
+/* 41DD20 802A8F90 258CEF20 */  addiu     $t4, $t4, %lo(gPartnerPopupProperties)
 /* 41DD24 802A8F94 3C0B802B */  lui       $t3, %hi(D_802AB3F8)
 /* 41DD28 802A8F98 256BB3F8 */  addiu     $t3, $t3, %lo(D_802AB3F8)
 /* 41DD2C 802A8F9C 0220502D */  daddu     $t2, $s1, $zero
@@ -1529,8 +1529,8 @@ glabel btl_state_update_partner_menu
 .L802A97D0_41E560:
 /* 41E560 802A97D0 0000802D */  daddu     $s0, $zero, $zero
 /* 41E564 802A97D4 24110001 */  addiu     $s1, $zero, 1
-/* 41E568 802A97D8 3C0C8009 */  lui       $t4, %hi(D_8008EF20)
-/* 41E56C 802A97DC 258CEF20 */  addiu     $t4, $t4, %lo(D_8008EF20)
+/* 41E568 802A97D8 3C0C8009 */  lui       $t4, %hi(gPartnerPopupProperties)
+/* 41E56C 802A97DC 258CEF20 */  addiu     $t4, $t4, %lo(gPartnerPopupProperties)
 /* 41E570 802A97E0 3C0B802B */  lui       $t3, %hi(D_802AB3F8)
 /* 41E574 802A97E4 256BB3F8 */  addiu     $t3, $t3, %lo(D_802AB3F8)
 /* 41E578 802A97E8 0220502D */  daddu     $t2, $s1, $zero
