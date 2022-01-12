@@ -418,10 +418,6 @@ s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
     }
 
     if (hitID < 0) {
-/*      probable bug, should be
-        startX = x - deltaZ;
-        startY = y;
-        startZ = z + deltaX; */
         startX = x + deltaZ;
         startY = y;
         startZ = z + deltaX;
@@ -429,10 +425,6 @@ s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
     }
 
     if (hitID < 0) {
-/*      same here, should be
-        startX = x + deltaZ;
-        startY = y;
-        startZ = z - deltaX; */
         startX = x - deltaZ;
         startY = y;
         startZ = z - deltaX;

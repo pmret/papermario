@@ -248,7 +248,75 @@ s32 player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "77480", player_raycast_up_corners);
+s32 player_raycast_up_corners(PlayerStatus *player, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw) {
+    f32 startX;
+    f32 startY;
+    f32 startZ;
+    f32 depth;
+    f32 theta;
+    f32 deltaZ;
+    f32 deltaX;
+    f32 x,y,z;
+    s32 ret;
+    s32 hitID;
+    f32 radius;
+
+    radius = player->colliderDiameter * 0.3f;
+    theta = (yaw * 6.28318f) / 360.0f;
+    deltaX = radius * sin_rad(theta);
+    deltaZ = -radius * cos_rad(theta);
+
+    x = *posX;
+    y = *posY;
+    z = *posZ;
+
+    depth = *hitDepth;
+    startX = x + deltaX;
+    startY = y;
+    startZ = z + deltaZ;
+
+    ret = -1;
+    hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
+
+    if (hitID < 0) {
+        startX = x - deltaX;
+        startY = y;
+        startZ = z - deltaZ;
+        hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
+    }
+
+    if (hitID < 0) {
+        startX = x + deltaZ;
+        startY = y;
+        startZ = z + deltaX;
+        hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
+    }
+
+    if (hitID < 0) {
+        startX = x - deltaZ;
+        startY = y;
+        startZ = z - deltaX;
+        hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
+    }
+
+    if (hitID >= 0) {
+        *posX = startX;
+        *posY = startY;
+        *posZ = startZ;
+        *hitDepth = depth;
+        ret = hitID;
+    }
+
+    if (ret < 0) {
+        *posX = startX;
+        *posY = startY;
+        *posZ = startZ;
+        *hitDepth = 0;
+    }
+
+    return ret;
+}
+
 
 INCLUDE_ASM(s32, "77480", player_raycast_up_corner);
 
