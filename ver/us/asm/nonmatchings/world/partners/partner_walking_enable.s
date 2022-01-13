@@ -10,12 +10,12 @@ glabel partner_walking_enable
 /* 84D6C 800EB8BC 3C048011 */  lui       $a0, %hi(PlayerMoveHistory)
 /* 84D70 800EB8C0 2484CD38 */  addiu     $a0, $a0, %lo(PlayerMoveHistory)
 /* 84D74 800EB8C4 0000302D */  daddu     $a2, $zero, $zero
-/* 84D78 800EB8C8 3C018010 */  lui       $at, %hi(D_800F833C)
-/* 84D7C 800EB8CC C420833C */  lwc1      $f0, %lo(D_800F833C)($at)
-/* 84D80 800EB8D0 3C018010 */  lui       $at, %hi(D_800F8340)
-/* 84D84 800EB8D4 C4228340 */  lwc1      $f2, %lo(D_800F8340)($at)
-/* 84D88 800EB8D8 3C018010 */  lui       $at, %hi(D_800F8344)
-/* 84D8C 800EB8DC C4248344 */  lwc1      $f4, %lo(D_800F8344)($at)
+/* 84D78 800EB8C8 3C018010 */  lui       $at, %hi(SavedPartnerPosX)
+/* 84D7C 800EB8CC C420833C */  lwc1      $f0, %lo(SavedPartnerPosX)($at)
+/* 84D80 800EB8D0 3C018010 */  lui       $at, %hi(SavedPartnerPosY)
+/* 84D84 800EB8D4 C4228340 */  lwc1      $f2, %lo(SavedPartnerPosY)($at)
+/* 84D88 800EB8D8 3C018010 */  lui       $at, %hi(SavedPartnerPosZ)
+/* 84D8C 800EB8DC C4248344 */  lwc1      $f4, %lo(SavedPartnerPosZ)($at)
 /* 84D90 800EB8E0 2483000C */  addiu     $v1, $a0, 0xc
 /* 84D94 800EB8E4 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 84D98 800EB8E8 E6000038 */  swc1      $f0, 0x38($s0)

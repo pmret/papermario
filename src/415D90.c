@@ -1,27 +1,29 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern s32 HudScript_Kooper;
-extern s32 HudScript_Bombette;
-extern s32 HudScript_Partner0;
-extern s32 HudScript_Partner0Disabled;
-extern s32 HudScript_Goombario;
-extern s32 HudScript_GoombarioDisabled;
-extern s32 HudScript_KooperDisabled;
-extern s32 HudScript_BombetteDisabled;
-extern s32 HudScript_Parakarry;
-extern s32 HudScript_ParakarryDisabled;
-extern s32 HudScript_Bow;
-extern s32 HudScript_BowDisabled;
-extern s32 HudScript_Watt;
-extern s32 HudScript_WattDisabled;
-extern s32 HudScript_Sushie;
-extern s32 HudScript_SushieDisabled;
-extern s32 HudScript_Lakilester;
-extern s32 HudScript_LakilesterDisabled;
-extern s32 HudScript_PartnerA;
-extern s32 HudScript_PartnerADisabled;
-extern s32 HudScript_MenuStarPower;
+extern HudElementAnim HudScript_Kooper[];
+extern HudElementAnim HudScript_Bombette[];
+extern HudElementAnim HudScript_Partner0[];
+extern HudElementAnim HudScript_Partner0Disabled[];
+extern HudElementAnim HudScript_Goombario[];
+extern HudElementAnim HudScript_GoombarioDisabled[];
+extern HudElementAnim HudScript_KooperDisabled[];
+extern HudElementAnim HudScript_BombetteDisabled[];
+extern HudElementAnim HudScript_Parakarry[];
+extern HudElementAnim HudScript_ParakarryDisabled[];
+extern HudElementAnim HudScript_Bow[];
+extern HudElementAnim HudScript_BowDisabled[];
+extern HudElementAnim HudScript_Watt[];
+extern HudElementAnim HudScript_WattDisabled[];
+extern HudElementAnim HudScript_Sushie[];
+extern HudElementAnim HudScript_SushieDisabled[];
+extern HudElementAnim HudScript_Lakilester[];
+extern HudElementAnim HudScript_LakilesterDisabled[];
+extern HudElementAnim HudScript_PartnerA[];
+extern HudElementAnim HudScript_PartnerADisabled[];
+
+extern HudElementAnim HudScript_MenuStarPower[];
+extern HudElementAnim HudScript_MenuStarPowerDisabled[];
 
 extern u8 D_802AD000;
 extern u8 D_802AD001;
@@ -99,9 +101,9 @@ s32 D_802AB368[] = { 0x8010885C, 0x8010885C, 0x80108834, 0x8010885C, 0x80108884,
 
 s32 D_802AB388[] = { 0x80108924, 0x8010894C };
 
-s32 D_802AB390[] = { &HudScript_MenuStarPower, 0x8010899C };
+s32 D_802AB390[] = { &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled };
 
-s32 D_802AB398[] = { &HudScript_MenuStarPower, 0x8010899C, 0x80107990, 0x801079BC, 0x801079E8, 0x80107A14, 0x80107A40, 0x80107A6C, 0x80107A98, 0x80107AC4, 0x80107AF0, 0x80107B1C, 0x80107B48, 0x80107B74, 0x80107BA0, 0x80107BCC, 0x80107BF8, 0x80107C24, 0x80107C50, 0x80107C7C, &HudScript_MenuStarPower, 0x8010899C, &HudScript_MenuStarPower, 0x8010899C };
+s32 D_802AB398[] = { &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled, 0x80107990, 0x801079BC, 0x801079E8, 0x80107A14, 0x80107A40, 0x80107A6C, 0x80107A98, 0x80107AC4, 0x80107AF0, 0x80107B1C, 0x80107B48, 0x80107B74, 0x80107BA0, 0x80107BCC, 0x80107BF8, 0x80107C24, 0x80107C50, 0x80107C7C, &HudScript_MenuStarPower, 0x8010899C, &HudScript_MenuStarPower, 0x8010899C };
 
 s32* D_802AB3F8[] = { &HudScript_Partner0, &HudScript_Goombario, &HudScript_Kooper, &HudScript_Bombette, &HudScript_Parakarry, &HudScript_Partner0, &HudScript_Watt, &HudScript_Sushie, &HudScript_Lakilester, &HudScript_Bow, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA };
 

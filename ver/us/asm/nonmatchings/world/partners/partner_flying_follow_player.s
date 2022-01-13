@@ -56,12 +56,12 @@ glabel partner_flying_follow_player
 /* 86F54 800EDAA4 E7A20020 */  swc1      $f2, 0x20($sp)
 /* 86F58 800EDAA8 E7A40024 */  swc1      $f4, 0x24($sp)
 /* 86F5C 800EDAAC E7A00028 */  swc1      $f0, 0x28($sp)
-/* 86F60 800EDAB0 3C018010 */  lui       $at, %hi(D_800F833C)
-/* 86F64 800EDAB4 E422833C */  swc1      $f2, %lo(D_800F833C)($at)
-/* 86F68 800EDAB8 3C018010 */  lui       $at, %hi(D_800F8340)
-/* 86F6C 800EDABC E4248340 */  swc1      $f4, %lo(D_800F8340)($at)
-/* 86F70 800EDAC0 3C018010 */  lui       $at, %hi(D_800F8344)
-/* 86F74 800EDAC4 E4208344 */  swc1      $f0, %lo(D_800F8344)($at)
+/* 86F60 800EDAB0 3C018010 */  lui       $at, %hi(SavedPartnerPosX)
+/* 86F64 800EDAB4 E422833C */  swc1      $f2, %lo(SavedPartnerPosX)($at)
+/* 86F68 800EDAB8 3C018010 */  lui       $at, %hi(SavedPartnerPosY)
+/* 86F6C 800EDABC E4248340 */  swc1      $f4, %lo(SavedPartnerPosY)($at)
+/* 86F70 800EDAC0 3C018010 */  lui       $at, %hi(SavedPartnerPosZ)
+/* 86F74 800EDAC4 E4208344 */  swc1      $f0, %lo(SavedPartnerPosZ)($at)
 /* 86F78 800EDAC8 45020008 */  bc1fl     .L800EDAEC
 /* 86F7C 800EDACC 46083000 */   add.s    $f0, $f6, $f8
 /* 86F80 800EDAD0 460A4081 */  sub.s     $f2, $f8, $f10

@@ -8,14 +8,14 @@ glabel partner_flying_enable
 /* 867CC 800ED31C 3C048011 */  lui       $a0, %hi(PlayerMoveHistory)
 /* 867D0 800ED320 2484CD38 */  addiu     $a0, $a0, %lo(PlayerMoveHistory)
 /* 867D4 800ED324 0000302D */  daddu     $a2, $zero, $zero
-/* 867D8 800ED328 3C028010 */  lui       $v0, %hi(D_800F833C)
-/* 867DC 800ED32C 2442833C */  addiu     $v0, $v0, %lo(D_800F833C)
+/* 867D8 800ED328 3C028010 */  lui       $v0, %hi(SavedPartnerPosX)
+/* 867DC 800ED32C 2442833C */  addiu     $v0, $v0, %lo(SavedPartnerPosX)
 /* 867E0 800ED330 0040482D */  daddu     $t1, $v0, $zero
-/* 867E4 800ED334 3C028010 */  lui       $v0, %hi(D_800F8340)
-/* 867E8 800ED338 24428340 */  addiu     $v0, $v0, %lo(D_800F8340)
+/* 867E4 800ED334 3C028010 */  lui       $v0, %hi(SavedPartnerPosY)
+/* 867E8 800ED338 24428340 */  addiu     $v0, $v0, %lo(SavedPartnerPosY)
 /* 867EC 800ED33C 0040402D */  daddu     $t0, $v0, $zero
-/* 867F0 800ED340 3C028010 */  lui       $v0, %hi(D_800F8344)
-/* 867F4 800ED344 24428344 */  addiu     $v0, $v0, %lo(D_800F8344)
+/* 867F0 800ED340 3C028010 */  lui       $v0, %hi(SavedPartnerPosZ)
+/* 867F4 800ED344 24428344 */  addiu     $v0, $v0, %lo(SavedPartnerPosZ)
 /* 867F8 800ED348 0040382D */  daddu     $a3, $v0, $zero
 /* 867FC 800ED34C AFBF0014 */  sw        $ra, 0x14($sp)
 /* 86800 800ED350 C5200000 */  lwc1      $f0, ($t1)
