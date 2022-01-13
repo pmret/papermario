@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel partner_clear_player_tracking
-/* 8890C 800EF45C 3C058011 */  lui       $a1, %hi(D_8010CD38)
-/* 88910 800EF460 24A5CD38 */  addiu     $a1, $a1, %lo(D_8010CD38)
+/* 8890C 800EF45C 3C058011 */  lui       $a1, %hi(PlayerMoveHistory)
+/* 88910 800EF460 24A5CD38 */  addiu     $a1, $a1, %lo(PlayerMoveHistory)
 /* 88914 800EF464 0000302D */  daddu     $a2, $zero, $zero
 /* 88918 800EF468 3C028010 */  lui       $v0, %hi(D_800F833C)
 /* 8891C 800EF46C 2442833C */  addiu     $v0, $v0, %lo(D_800F833C)

@@ -5,8 +5,8 @@ glabel partner_flying_enable
 /* 867C0 800ED310 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 867C4 800ED314 AFB00010 */  sw        $s0, 0x10($sp)
 /* 867C8 800ED318 0080802D */  daddu     $s0, $a0, $zero
-/* 867CC 800ED31C 3C048011 */  lui       $a0, %hi(D_8010CD38)
-/* 867D0 800ED320 2484CD38 */  addiu     $a0, $a0, %lo(D_8010CD38)
+/* 867CC 800ED31C 3C048011 */  lui       $a0, %hi(PlayerMoveHistory)
+/* 867D0 800ED320 2484CD38 */  addiu     $a0, $a0, %lo(PlayerMoveHistory)
 /* 867D4 800ED324 0000302D */  daddu     $a2, $zero, $zero
 /* 867D8 800ED328 3C028010 */  lui       $v0, %hi(D_800F833C)
 /* 867DC 800ED32C 2442833C */  addiu     $v0, $v0, %lo(D_800F833C)
@@ -38,8 +38,8 @@ glabel partner_flying_enable
 /* 86840 800ED390 A0800000 */  sb        $zero, ($a0)
 /* 86844 800ED394 1440FFF5 */  bnez      $v0, .L800ED36C
 /* 86848 800ED398 24840010 */   addiu    $a0, $a0, 0x10
-/* 8684C 800ED39C 3C018011 */  lui       $at, %hi(D_8010CFB8)
-/* 86850 800ED3A0 AC20CFB8 */  sw        $zero, %lo(D_8010CFB8)($at)
+/* 8684C 800ED39C 3C018011 */  lui       $at, %hi(PlayerMoveHistoryIndex)
+/* 86850 800ED3A0 AC20CFB8 */  sw        $zero, %lo(PlayerMoveHistoryIndex)($at)
 /* 86854 800ED3A4 3C018011 */  lui       $at, %hi(D_8010CFBC)
 /* 86858 800ED3A8 AC20CFBC */  sw        $zero, %lo(D_8010CFBC)($at)
 /* 8685C 800ED3AC 14A00005 */  bnez      $a1, .L800ED3C4

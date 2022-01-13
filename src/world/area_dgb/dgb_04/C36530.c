@@ -4,8 +4,8 @@
 #include "sprite/npc/sentinel.h"
 #include "message_ids.h"
 
-extern s32 D_800F7F00[];
-extern s32 D_800F7F40[];
+extern s32 wPartnerHudScripts[];
+extern s32 wDisabledPartnerHudScripts[];
 
 enum {
     NPC_SENTINEL,
@@ -866,11 +866,11 @@ ApiStatus N(func_8024259C_C38ACC)(Evt* script, s32 isInitialCall) {
                 ptr->unk_84[i] = *gPartnerPopupProperties[idx];
                 partnerLevel = N(UnkFunc37)(idx, var);
                 if (partnerLevel >= 0) {
-                    ptr->unk_00[i] = D_800F7F00[idx];
+                    ptr->unk_00[i] = wPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 1;
                     ptr->unk_294[i] = N(D_80243D48_C3A278)[i][partnerLevel];
                 } else {
-                    ptr->unk_00[i] = D_800F7F40[idx];
+                    ptr->unk_00[i] = wDisabledPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 0;
                     ptr->unk_294[i] = N(D_80243D30_C3A260)[var];
                 }

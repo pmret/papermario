@@ -54,8 +54,8 @@ glabel func_802402AC_CD20DC
 /* CD219C 8024036C 0040202D */  daddu     $a0, $v0, $zero
 /* CD21A0 80240370 04800011 */  bltz      $a0, .L802403B8
 /* CD21A4 80240374 00101080 */   sll      $v0, $s0, 2
-/* CD21A8 80240378 3C06800F */  lui       $a2, %hi(D_800F7F00)
-/* CD21AC 8024037C 24C67F00 */  addiu     $a2, $a2, %lo(D_800F7F00)
+/* CD21A8 80240378 3C06800F */  lui       $a2, %hi(wPartnerHudScripts)
+/* CD21AC 8024037C 24C67F00 */  addiu     $a2, $a2, %lo(wPartnerHudScripts)
 /* CD21B0 80240380 00461021 */  addu      $v0, $v0, $a2
 /* CD21B4 80240384 8C430000 */  lw        $v1, ($v0)
 /* CD21B8 80240388 24020001 */  addiu     $v0, $zero, 1
@@ -71,8 +71,8 @@ glabel func_802402AC_CD20DC
 /* CD21E0 802403B0 080900F7 */  j         .L802403DC
 /* CD21E4 802403B4 AE220294 */   sw       $v0, 0x294($s1)
 .L802403B8:
-/* CD21E8 802403B8 3C06800F */  lui       $a2, %hi(D_800F7F40)
-/* CD21EC 802403BC 24C67F40 */  addiu     $a2, $a2, %lo(D_800F7F40)
+/* CD21E8 802403B8 3C06800F */  lui       $a2, %hi(wDisabledPartnerHudScripts)
+/* CD21EC 802403BC 24C67F40 */  addiu     $a2, $a2, %lo(wDisabledPartnerHudScripts)
 /* CD21F0 802403C0 00461021 */  addu      $v0, $v0, $a2
 /* CD21F4 802403C4 8C420000 */  lw        $v0, ($v0)
 /* CD21F8 802403C8 AE20018C */  sw        $zero, 0x18c($s1)

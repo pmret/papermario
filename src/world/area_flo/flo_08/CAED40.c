@@ -1,7 +1,7 @@
 #include "flo_08.h"
 
-extern s32 D_800F7F00[];
-extern s32 D_800F7F40[];
+extern s32 wPartnerHudScripts[];
+extern s32 wDisabledPartnerHudScripts[];
 extern s32 gPartnerPopupProperties[11][4];
 
 #include "world/common/SetOverrideFlags_40.inc.c"
@@ -59,11 +59,11 @@ ApiStatus N(func_802401CC_CAEF0C)(Evt* script, s32 isInitialCall) {
                 ptr->unk_84[i] = *gPartnerPopupProperties[idx];
                 partnerLevel = N(UnkFunc37)(idx, var);
                 if (partnerLevel >= 0) {
-                    ptr->unk_00[i] = D_800F7F00[idx];
+                    ptr->unk_00[i] = wPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 1;
                     ptr->unk_294[i] = N(D_80241FC8_CB0D08)[i][partnerLevel];
                 } else {
-                    ptr->unk_00[i] = D_800F7F40[idx];
+                    ptr->unk_00[i] = wDisabledPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 0;
                     ptr->unk_294[i] = N(D_80241FB0_CB0CF0)[var];
                 }

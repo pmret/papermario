@@ -3,7 +3,7 @@
 .section .data
 
 dlabel gPauseMenuIconScripts
-.word D_80241ECC, 0x802427D4, nok_02_UnkMovePartner, 0x80241E00, HudScript_StickTapRight, HudScript_PressAButton, 0x80108D04, 0x80108D40
+.word D_80241ECC, 0x802427D4, 0x80242820, 0x80241E00, HudScript_StickTapRight, HudScript_PressAButton, HudScript_PressStartButton, HudScript_StartButtonText
 
 dlabel gPauseMenuPanels
 .word D_8024F314, D_8024F4AC, D_8024F54C, D_8024F5E4, D_8024F88C, D_8024FA10
@@ -162,7 +162,7 @@ dlabel D_8024F434
 .word 0x80108298, 0x801082E8, 0x801082C0, 0x80108310, 0x80108338, 0x80108360, 0x80108388
 
 dlabel D_8024F450
-.word HudScript_StatusStar1, 0x80108428, 0x80108400, 0x80108450, 0x80108478, 0x801084A0, 0x801084C8
+.word HudScript_StatusStar1, HudScript_StatusStar3, HudScript_StatusStar2, HudScript_StatusStar4, HudScript_StatusStar5, HudScript_StatusStar6, HudScript_StatusStar7
 
 dlabel D_8024F46C
 .word 0xFFFFFFFF

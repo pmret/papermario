@@ -54,8 +54,8 @@ glabel func_8024084C_886C0C
 /* 886CCC 8024090C 0040202D */  daddu     $a0, $v0, $zero
 /* 886CD0 80240910 04800011 */  bltz      $a0, .L80240958
 /* 886CD4 80240914 00101080 */   sll      $v0, $s0, 2
-/* 886CD8 80240918 3C06800F */  lui       $a2, %hi(D_800F7F00)
-/* 886CDC 8024091C 24C67F00 */  addiu     $a2, $a2, %lo(D_800F7F00)
+/* 886CD8 80240918 3C06800F */  lui       $a2, %hi(wPartnerHudScripts)
+/* 886CDC 8024091C 24C67F00 */  addiu     $a2, $a2, %lo(wPartnerHudScripts)
 /* 886CE0 80240920 00461021 */  addu      $v0, $v0, $a2
 /* 886CE4 80240924 8C430000 */  lw        $v1, ($v0)
 /* 886CE8 80240928 24020001 */  addiu     $v0, $zero, 1
@@ -71,8 +71,8 @@ glabel func_8024084C_886C0C
 /* 886D10 80240950 0809025F */  j         .L8024097C
 /* 886D14 80240954 AE220294 */   sw       $v0, 0x294($s1)
 .L80240958:
-/* 886D18 80240958 3C06800F */  lui       $a2, %hi(D_800F7F40)
-/* 886D1C 8024095C 24C67F40 */  addiu     $a2, $a2, %lo(D_800F7F40)
+/* 886D18 80240958 3C06800F */  lui       $a2, %hi(wDisabledPartnerHudScripts)
+/* 886D1C 8024095C 24C67F40 */  addiu     $a2, $a2, %lo(wDisabledPartnerHudScripts)
 /* 886D20 80240960 00461021 */  addu      $v0, $v0, $a2
 /* 886D24 80240964 8C420000 */  lw        $v0, ($v0)
 /* 886D28 80240968 AE20018C */  sw        $zero, 0x18c($s1)
