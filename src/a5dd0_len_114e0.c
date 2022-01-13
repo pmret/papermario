@@ -1381,8 +1381,8 @@ void render_shadows(void) {
         if (shadow != NULL) {
             if (shadow->flags & SHADOW_FLAGS_HIDDEN) {
                 if (shadow->flags & SHADOW_FLAGS_FADING_AWAY) {
-                    shadow->renderAlpha -= 20;
-                    if (shadow->renderAlpha <= 20) {
+                    shadow->alpha -= 20;
+                    if (shadow->alpha <= 20) {
                         shadow->flags |= SHADOW_FLAGS_READY_TO_DELETE;
                     }
                 }
@@ -1397,13 +1397,13 @@ void render_shadows(void) {
                 }
             } else {
                 if (shadow->flags & SHADOW_FLAGS_FADING_AWAY) {
-                    shadow->renderAlpha -= 20;
-                    if (shadow->renderAlpha <= 20) {
+                    shadow->alpha -= 20;
+                    if (shadow->alpha <= 20) {
                         shadow->flags |=  SHADOW_FLAGS_READY_TO_DELETE;
                     }
                 }
 
-                bind_entity_model_setupGfx(shadow->entityModelID, shadow->renderAlpha, entity_model_set_shadow_color);
+                bind_entity_model_setupGfx(shadow->entityModelID, shadow->alpha, entity_model_set_shadow_color);
 
                 if (shadow->vertexArray == NULL) {
                     draw_entity_model_A(shadow->entityModelID, &shadow->transformMatrix);
@@ -1792,7 +1792,7 @@ s32 create_shadow_from_data(StaticShadowData* data, f32 x, f32 y, f32 z) {
     mem_clear(shadow, sizeof(*shadow));
     shadow->listIndex = i;
     shadow->flags = data->flags | SHADOW_FLAGS_80000000;
-    shadow->renderAlpha = 0x80;
+    shadow->alpha = 0x80;
     shadow->unk_06 = 0x80;
     shadow->position.x = x;
     shadow->position.y = y;
@@ -2050,7 +2050,7 @@ void update_entity_shadow_position(Entity* entity) {
         f32 origHitLength;
 
         if (entity->alpha < 255) {
-            shadow->renderAlpha = entity->alpha / 2;
+            shadow->alpha = entity->alpha / 2;
         } else {
             u8 alphaTemp;
 
@@ -2059,7 +2059,7 @@ void update_entity_shadow_position(Entity* entity) {
             } else {
                 alphaTemp = 128;
             }
-            shadow->renderAlpha = alphaTemp;
+            shadow->alpha = alphaTemp;
         }
 
         if (!(entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW)) {

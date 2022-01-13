@@ -719,9 +719,9 @@ void update_player_actor_shadow(void) {
     shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
 
     if (!battleStatus->outtaSightActive) {
-        shadow->renderAlpha = 128;
+        shadow->alpha = 128;
     } else {
-        shadow->renderAlpha = 40;
+        shadow->alpha = 40;
     }
 
     distance = 32767.0f;

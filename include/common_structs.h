@@ -1251,7 +1251,7 @@ typedef struct PartnerAnimations {
 typedef struct Shadow {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 listIndex;
-    /* 0x05 */ u8 renderAlpha;
+    /* 0x05 */ u8 alpha;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ char unk_07;
     /* 0x08 */ s16 entityModelID;
