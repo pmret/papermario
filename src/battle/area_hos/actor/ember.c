@@ -7,8 +7,8 @@
 
 s32 N(defenseTable_8021ACB0)[] = {
     ELEMENT_NORMAL, 0,
-    ELEMENT_WATER, 4294967294,
-    ELEMENT_ICE, 4294967294,
+    ELEMENT_WATER, -2,
+    ELEMENT_ICE, -2,
     ELEMENT_FIRE, 99,
     ELEMENT_END,
 };
@@ -278,7 +278,7 @@ EvtSource N(8021B398) = {
     EVT_END
 };
 
-Vec3i N(vector3D_8021B594) = { 0, 0xFFFFFC18, 0, };
+Vec3i N(vector3D_8021B594) = { 0, -1000, 0, };
 
 Formation N(specialFormation_8021B5A0) = {
     { .actor = &NAMESPACE, .home = { .vec = &N(vector3D_8021B594) }},

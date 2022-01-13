@@ -736,7 +736,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 if var0 == 0 and var1 == 0 and var2 == 0 and var3 == 0:
                     pass
                 else:
-                    out += f", {var1}, {var2} {var3}, {var4}"
+                    out += f", {var0}, {var1} {var2}, {var3}"
 
                 out += " },\n"
 
