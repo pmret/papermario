@@ -95,9 +95,9 @@ extern MessagePrintState* gCurrentPrintContext;
 extern s32 D_802DB264;
 extern MessagePrintState* D_802DB268;
 
-extern StaticShadowData D_802E98BC;
-extern StaticShadowData D_802E98E0;
-extern StaticShadowData D_802E9904;
+extern StaticShadowData CircularShadowA;
+extern StaticShadowData CircularShadowB;
+extern StaticShadowData SquareShadow;
 extern s32 D_802EB390;
 extern s32 D_802EB394;
 extern MessagePrintState* D_802EB398;
@@ -312,9 +312,9 @@ extern UNK_TYPE D_00000094_2; // two symbols resolve to the same addr. Required 
 extern UNK_TYPE D_802EA0A0;
 extern StaticEntityData D_802EA07C;
 extern UNK_TYPE D_802EA310;
-extern UNK_TYPE D_802EA618;
-extern UNK_TYPE D_802EA63C;
-extern UNK_TYPE D_802EA660;
+extern StaticEntityData Entity_HitGroundedYellowBlock;
+extern StaticEntityData Entity_HitFloatingYellowBlock;
+extern StaticEntityData Entity_HitRedBlock;
 extern s16 D_8015C7D2;
 
 extern UNK_TYPE D_0A000328;

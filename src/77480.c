@@ -1037,7 +1037,7 @@ void update_player_shadow(void) {
     }
 
     shadow->position.y = y;
-    shadow->unk_05 = (f64)playerStatus->alpha1 / 2;
+    shadow->renderAlpha = (f64)playerStatus->alpha1 / 2;
 
     if (!(gGameStatusPtr->peachFlags & 1)) {
         set_standard_shadow_scale(shadow, shadowScale);

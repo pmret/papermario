@@ -331,22 +331,22 @@ void initialize_status_menu(void) {
     close_status_menu();
 
     iconIndex = create_hud_element(HudScript_StatusHP);
-    uiStatus->hpIconIndexes[0] = iconIndex;
+    uiStatus->hpIconIndices[0] = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
     iconIndex = create_hud_element(HudScript_StatusHeart);
-    uiStatus->hpIconIndexes[1] = iconIndex;
+    uiStatus->hpIconIndices[1] = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
     iconIndex = create_hud_element(HudScript_StatusFP);
-    uiStatus->fpIconIndexes[0] = iconIndex;
+    uiStatus->fpIconIndices[0] = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
     iconIndex = create_hud_element(HudScript_StatusFlower);
-    uiStatus->fpIconIndexes[1] = iconIndex;
+    uiStatus->fpIconIndices[1] = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
@@ -356,7 +356,7 @@ void initialize_status_menu(void) {
     clear_hud_element_flags(iconIndex, 0x8000);
 
     iconIndex = create_hud_element(HudScript_Item_CoinSparkleRandom);
-    uiStatus->coinIconIndex2 = iconIndex;
+    uiStatus->coinSparkleIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
@@ -366,7 +366,7 @@ void initialize_status_menu(void) {
     clear_hud_element_flags(iconIndex, 0x8000);
 
     iconIndex = create_hud_element(HudScript_StatusSPShine);
-    uiStatus->starpointsIconIndex2 = iconIndex;
+    uiStatus->starpointsShineIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
@@ -392,7 +392,7 @@ void initialize_status_menu(void) {
     clear_hud_element_flags(iconIndex, 0x8000);
 
     iconIndex = create_hud_element(HudScript_StatusStar1);
-    uiStatus->iconIndexC = iconIndex;
+    uiStatus->starIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
@@ -862,22 +862,22 @@ void reset_status_menu(void) {
     uiStatus->unk_3B[1] = 0;
 
     for (i = 0; i < 2; i++) {
-        copy_world_hud_element_ref_to_battle(uiStatus->hpIconIndexes[i], uiStatus->hpIconIndexes[i]);
+        copy_world_hud_element_ref_to_battle(uiStatus->hpIconIndices[i], uiStatus->hpIconIndices[i]);
     }
 
     for (i = 0; i < 2; i++) {
-        copy_world_hud_element_ref_to_battle(uiStatus->fpIconIndexes[i], uiStatus->fpIconIndexes[i]);
+        copy_world_hud_element_ref_to_battle(uiStatus->fpIconIndices[i], uiStatus->fpIconIndices[i]);
     }
 
     copy_world_hud_element_ref_to_battle(uiStatus->coinIconIndex, uiStatus->coinIconIndex);
-    copy_world_hud_element_ref_to_battle(uiStatus->coinIconIndex2, uiStatus->coinIconIndex2);
+    copy_world_hud_element_ref_to_battle(uiStatus->coinSparkleIconIndex, uiStatus->coinSparkleIconIndex);
     copy_world_hud_element_ref_to_battle(uiStatus->starpointsIconIndex, uiStatus->starpointsIconIndex);
-    copy_world_hud_element_ref_to_battle(uiStatus->starpointsIconIndex2, uiStatus->starpointsIconIndex2);
+    copy_world_hud_element_ref_to_battle(uiStatus->starpointsShineIconIndex, uiStatus->starpointsShineIconIndex);
     copy_world_hud_element_ref_to_battle(uiStatus->iconIndex8, uiStatus->iconIndex8);
     copy_world_hud_element_ref_to_battle(uiStatus->iconIndex9, uiStatus->iconIndex9);
     copy_world_hud_element_ref_to_battle(uiStatus->iconIndexA, uiStatus->iconIndexA);
     copy_world_hud_element_ref_to_battle(uiStatus->iconIndexB, uiStatus->iconIndexB);
-    copy_world_hud_element_ref_to_battle(uiStatus->iconIndexC, uiStatus->iconIndexC);
+    copy_world_hud_element_ref_to_battle(uiStatus->starIconIndex, uiStatus->starIconIndex);
 }
 
 // Weird order of loading stuff

@@ -660,7 +660,7 @@ void enable_npc_shadow(Npc* npc) {
 
     if (!(npc->flags & NPC_FLAG_HAS_SHADOW)) {
         shadow = get_shadow_by_index(npc->shadowIndex);
-        shadow->flags &= ~SHADOW_FLAGS_1;
+        shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
         npc->flags = npc->flags | (NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW);
     }
 }
@@ -670,7 +670,7 @@ void disable_npc_shadow(Npc* npc) {
 
     if (npc->flags & NPC_FLAG_HAS_SHADOW) {
         shadow = get_shadow_by_index(npc->shadowIndex);
-        shadow->flags |= SHADOW_FLAGS_1;
+        shadow->flags |= SHADOW_FLAGS_HIDDEN;
         npc->flags &= ~NPC_FLAG_HAS_SHADOW;
         npc->flags &= ~NPC_FLAG_DIRTY_SHADOW;
     }

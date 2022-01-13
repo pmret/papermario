@@ -101,13 +101,13 @@ dlabel D_802EA52C
 dlabel D_802EA548
 .word 0x00000004, 0x00000016, 0x00000001, 0x0000003C, 0x0A000A90, 0x00000002, 0x00000000, 0x42000020, D_802EA4F4, 0x00000000, entity_ItemBlock_init, D_802EA328, entity_block_handle_collision, 0x00E3B870, 0x00E3C320, 0x0F191919, 0x42000020, D_802EA510, 0x00000000, entity_HiddenItemBlock_init, D_802EA38C, entity_block_handle_collision, 0x00E3B870, 0x00E3C320, 0x11191919, 0x42000020, D_802EA52C, 0x00000000, entity_ItemBlock_init, D_802EA328, entity_block_handle_collision, 0x00E3C320, 0x00E3CDD0, 0x14191919, 0x42000020, D_802EA548, 0x00000000, entity_HiddenItemBlock_init, D_802EA38C, entity_block_handle_collision, 0x00E3C320, 0x00E3CDD0, 0x12191919, 0xC2080020, 0x0000023C, 0x00000084, entity_ItemlessBlock_init, D_802EA440, entity_block_handle_collision, D_802EA4C4, 0x00000000, 0x10191919
 
-dlabel D_802EA618
+dlabel Entity_HitGroundedYellowBlock
 .word 0x42080020, 0x0000023C, 0x00000084, entity_ItemlessBlock_init, D_802EA3F0, 0x00000000, D_802EA4C4, 0x00000000, 0x0F191919
 
-dlabel D_802EA63C
+dlabel Entity_HitFloatingYellowBlock
 .word 0x42080020, 0x0000022C, 0x00000084, entity_ItemlessBlock_init, D_802EA3F0, 0x00000000, D_802EA4D4, 0x00000000, 0x0F191919
 
-dlabel D_802EA660
+dlabel Entity_HitRedBlock
 .word 0x42080020, 0x00000094, 0x00000084, entity_ItemlessBlock_init, D_802EA3F0, 0x00000000, D_802EA4E4, 0x00000000, 0x14191919, 0x00000000, 0x00000000, 0x00000000
 
 dlabel D_802EA690

@@ -105,7 +105,7 @@ void item_entity_disable_shadow(ItemEntity* itemEntity) {
     itemEntity->flags |= ENTITY_FLAGS_CONTINUOUS_COLLISION;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
-        shadow->flags |= SHADOW_FLAGS_1;
+        shadow->flags |= SHADOW_FLAGS_HIDDEN;
     }
 }
 
@@ -115,7 +115,7 @@ void item_entity_enable_shadow(ItemEntity* itemEntity) {
     itemEntity->flags &= ~ENTITY_FLAGS_CONTINUOUS_COLLISION;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
-        shadow->flags &= ~SHADOW_FLAGS_1;
+        shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
     }
 }
 

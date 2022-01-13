@@ -90,28 +90,31 @@ s32 D_802E9898[9] = {
     0x00000000,
 };
 
-StaticShadowData D_802E98BC = {
+StaticShadowData CircularShadowA = {
     .flags = SHADOW_FLAGS_20,
-    .unk_04 = D_802E9850,
+    .renderCommandList = D_802E9850,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
-    .unk_20 = 0x01190A19,
+    .entityType = ENTITY_TYPE_SHADOW,
+    .aabbSize = { 25, 10, 25 }
 };
 
-StaticShadowData D_802E98E0 = {
+StaticShadowData CircularShadowB = {
     .flags = SHADOW_FLAGS_20,
-    .unk_04 = D_802E9874,
+    .renderCommandList = D_802E9874,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
-    .unk_20 = 0x01190A19,
+    .entityType = ENTITY_TYPE_SHADOW,
+    .aabbSize = { 25, 10, 25 }
 };
 
-StaticShadowData D_802E9904 = {
+StaticShadowData SquareShadow = {
     .flags = SHADOW_FLAGS_20,
-    .unk_04 = D_802E9898,
+    .renderCommandList = D_802E9898,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
-    .unk_20 = 0x01190A19,
+    .entityType = ENTITY_TYPE_SHADOW,
+    .aabbSize = { 25, 10, 25 }
 };
 
 s32 D_802E9928[2] = {
