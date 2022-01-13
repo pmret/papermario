@@ -367,8 +367,6 @@ s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length) {
 
 void player_get_slip_vector(f32* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
 s32 player_raycast_general(s32, f32, f32, f32, f32, f32, f32, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
-//INCLUDE_ASM(s32, "77480", player_test_lateral_overlap, s32 arg0, PlayerStatus* arg1, f32* arg2, f32* arg3, f32* arg4,
-            //f32 arg5, f32 arg6);
 s32 player_test_lateral_overlap(s32 arg0, PlayerStatus* playerStatus, f32* arg2, f32* arg3, f32* arg4, f32 arg5, f32 yaw) {
     f32 sinTheta;
     f32 cosTheta;
@@ -432,7 +430,6 @@ s32 player_test_lateral_overlap(s32 arg0, PlayerStatus* playerStatus, f32* arg2,
     return phi_s3;
 }
 
-//INCLUDE_ASM(s32, "77480", player_raycast_general);
 s32 player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX, f32* hitY,
                             f32* hitZ, f32* hitDepth, f32*hitNx, f32* hitNy, f32* hitNz) {
     f32 temp_f20;
@@ -483,14 +480,68 @@ s32 player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dir
     return ret;
 }
 
-INCLUDE_ASM(s32, "77480", player_test_move_without_slipping, PlayerStatus* arg0, f32* arg1, f32* arg2, f32* arg3, s32 arg4, f32 arg5,
-            s32* arg6);
+s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw, s32* arg6) {
+    f32 sinTheta;
+    f32 cosTheta;
+    f32 hitX;
+    f32 hitY;
+    f32 hitZ;
+    f32 hitDepth;
+    f32 hitNx;
+    f32 hitNy;
+    f32 hitNz;
+    f32 sp5C;
+    f32 sp60;
+    f32 depth;
+    f32 temp_f22;
+    f32 temp_f22_2;
+    f32 height;
+    s32 ret;
+    s32 raycastID;
+    f32 phi_f26;
+    f32 phi_f24;
+    f32 newvar, newvar2;
 
-void player_get_slip_vector(f32* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
-    f32 temp = (arg2 * arg4) + (arg3 * arg5);
+    temp_f22 = playerStatus->colliderDiameter * 0.5f;
+    height = playerStatus->colliderHeight * 0.286f;
+    sin_cos_rad((yaw * 6.28318f) / 360.0f, &sinTheta, &cosTheta);
+    depth = length + temp_f22;
+    cosTheta = -cosTheta;
+    hitDepth = depth;
+    newvar = temp_f22 * sinTheta;
+    ret = -1;
+    raycastID = player_raycast_general(0, *x, *y + 0.1, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    if (raycastID >= 0 && hitDepth <= depth) {
+        *arg6 = 1;
+    }
 
-    *arg0 = (arg2 - (temp * arg4)) * 0.5f;
-    *arg1 = (arg3 - (temp * arg5)) * 0.5f;
+    depth = length + temp_f22;
+    hitDepth = depth;
+    newvar2 = temp_f22 * cosTheta;
+
+    raycastID = player_raycast_general(0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    phi_f26 = 0.0f;
+    phi_f24 = 0.0f;
+
+    if ((raycastID >= 0) && (hitDepth <= depth)) {
+        temp_f22_2 = hitDepth - depth;
+        newvar = temp_f22_2 * sinTheta;
+        newvar2 = temp_f22_2 * cosTheta;
+        player_get_slip_vector(&sp5C, &sp60, 0.0f, 0.0f, hitNx, hitNz);
+        *x += newvar + sp5C;
+        *z += newvar2 + sp60;
+        ret = raycastID;
+    }
+    *x += phi_f26;
+    *z += phi_f24;
+    return ret;
+}
+
+void player_get_slip_vector(f32* outX, f32* outY, f32 x, f32 y, f32 nX, f32 nY) {
+    f32 temp = (x * nX) + (y * nY);
+
+    *outX = (x - (temp * nX)) * 0.5f;
+    *outY = (y - (temp * nY)) * 0.5f;
 }
 
 INCLUDE_ASM(s32, "77480", player_test_move_with_slipping);
@@ -916,6 +967,8 @@ void func_800E06C0(s32 arg0) {
 
 INCLUDE_ASM(s32, "77480", func_800E06D8);
 
+static const f32 pad[1] = { 0.0f};
+
 void check_for_interactables(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = gPlayerStatus.unk_C8;
@@ -1024,7 +1077,8 @@ void check_for_interactables(void) {
 
 
 // TODO: Remove after func_800E24F8 is matching.
-static const s32 pad[3] = { 0.0f, 0.0f, 0.0f };
+
+
 void func_802B71E8_E202F8(void);
 
 void func_800E0AD0(void) {

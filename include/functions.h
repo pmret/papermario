@@ -200,7 +200,7 @@ s32 phys_can_player_interact(void);
 
 void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2);
 
-s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
+s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, f32, f32, s32*);
 s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* posX, f32* posY, f32* posZ, f32 speed, f32 heading);
 
 s32 evt_get_variable(Evt* script, Bytecode var);
