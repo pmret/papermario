@@ -240,10 +240,10 @@ glabel btl_state_update_player_menu
 /* 41AA84 802A5CF4 24020001 */  addiu     $v0, $zero, 1
 /* 41AA88 802A5CF8 3C01802B */  lui       $at, %hi(battle_menu_isEnabled)
 /* 41AA8C 802A5CFC AC22D0D0 */  sw        $v0, %lo(battle_menu_isEnabled)($at)
-/* 41AA90 802A5D00 3C02802B */  lui       $v0, %hi(D_802AB4DC)
-/* 41AA94 802A5D04 8C42B4DC */  lw        $v0, %lo(D_802AB4DC)($v0)
-/* 41AA98 802A5D08 3C01802B */  lui       $at, %hi(main_battle_menu_jumpHudScripts)
-/* 41AA9C 802A5D0C AC23D078 */  sw        $v1, %lo(main_battle_menu_jumpHudScripts)($at)
+/* 41AA90 802A5D00 3C02802B */  lui       $v0, %hi(battle_menu_centeredMessagesC)
+/* 41AA94 802A5D04 8C42B4DC */  lw        $v0, %lo(battle_menu_centeredMessagesC)($v0)
+/* 41AA98 802A5D08 3C01802B */  lui       $at, %hi(main_battle_menu_JumpHudScripts)
+/* 41AA9C 802A5D0C AC23D078 */  sw        $v1, %lo(main_battle_menu_JumpHudScripts)($at)
 /* 41AAA0 802A5D10 82C30083 */  lb        $v1, 0x83($s6)
 /* 41AAA4 802A5D14 3C04802B */  lui       $a0, %hi(battle_menu_messageIDs)
 /* 41AAA8 802A5D18 2484D090 */  addiu     $a0, $a0, %lo(battle_menu_messageIDs)
@@ -273,9 +273,9 @@ glabel btl_state_update_player_menu
 /* 41AB00 802A5D70 3C01802B */  lui       $at, %hi(battle_menu_isEnabled)
 /* 41AB04 802A5D74 00230821 */  addu      $at, $at, $v1
 /* 41AB08 802A5D78 AC20D0D0 */  sw        $zero, %lo(battle_menu_isEnabled)($at)
-/* 41AB0C 802A5D7C 3C01802B */  lui       $at, %hi(main_battle_menu_jumpHudScripts)
+/* 41AB0C 802A5D7C 3C01802B */  lui       $at, %hi(main_battle_menu_JumpHudScripts)
 /* 41AB10 802A5D80 00230821 */  addu      $at, $at, $v1
-/* 41AB14 802A5D84 AC22D078 */  sw        $v0, %lo(main_battle_menu_jumpHudScripts)($at)
+/* 41AB14 802A5D84 AC22D078 */  sw        $v0, %lo(main_battle_menu_JumpHudScripts)($at)
 /* 41AB18 802A5D88 24020048 */  addiu     $v0, $zero, 0x48
 /* 41AB1C 802A5D8C AC820000 */  sw        $v0, ($a0)
 .L802A5D90:
@@ -287,8 +287,8 @@ glabel btl_state_update_player_menu
 /* 41AB30 802A5DA0 82C2007D */  lb        $v0, 0x7d($s6)
 /* 41AB34 802A5DA4 04400034 */  bltz      $v0, .L802A5E78
 /* 41AB38 802A5DA8 26940001 */   addiu    $s4, $s4, 1
-/* 41AB3C 802A5DAC 3C03802B */  lui       $v1, %hi(main_battle_menu_jumpHudScripts)
-/* 41AB40 802A5DB0 2463D078 */  addiu     $v1, $v1, %lo(main_battle_menu_jumpHudScripts)
+/* 41AB3C 802A5DAC 3C03802B */  lui       $v1, %hi(main_battle_menu_JumpHudScripts)
+/* 41AB40 802A5DB0 2463D078 */  addiu     $v1, $v1, %lo(main_battle_menu_JumpHudScripts)
 /* 41AB44 802A5DB4 00142080 */  sll       $a0, $s4, 2
 /* 41AB48 802A5DB8 3C07802B */  lui       $a3, %hi(battle_menu_ItemHudScripts)
 /* 41AB4C 802A5DBC 24E7B388 */  addiu     $a3, $a3, %lo(battle_menu_ItemHudScripts)
@@ -304,8 +304,8 @@ glabel btl_state_update_player_menu
 /* 41AB74 802A5DE4 00240821 */  addu      $at, $at, $a0
 /* 41AB78 802A5DE8 AC29D0B8 */  sw        $t1, %lo(battle_menu_submenuIDs)($at)
 /* 41AB7C 802A5DEC ACA20000 */  sw        $v0, ($a1)
-/* 41AB80 802A5DF0 3C02802B */  lui       $v0, %hi(D_802AB4C8)
-/* 41AB84 802A5DF4 8C42B4C8 */  lw        $v0, %lo(D_802AB4C8)($v0)
+/* 41AB80 802A5DF0 3C02802B */  lui       $v0, %hi(battle_menu_centeredMessagesB)
+/* 41AB84 802A5DF4 8C42B4C8 */  lw        $v0, %lo(battle_menu_centeredMessagesB)($v0)
 /* 41AB88 802A5DF8 3C01802B */  lui       $at, %hi(battle_menu_messageIDs)
 /* 41AB8C 802A5DFC 00240821 */  addu      $at, $at, $a0
 /* 41AB90 802A5E00 AC22D090 */  sw        $v0, %lo(battle_menu_messageIDs)($at)
@@ -343,24 +343,24 @@ glabel btl_state_update_player_menu
 .L802A5E74:
 /* 41AC04 802A5E74 26940001 */  addiu     $s4, $s4, 1
 .L802A5E78:
-/* 41AC08 802A5E78 3C0C802B */  lui       $t4, %hi(main_battle_menu_jumpHudScripts)
-/* 41AC0C 802A5E7C 258CD078 */  addiu     $t4, $t4, %lo(main_battle_menu_jumpHudScripts)
+/* 41AC08 802A5E78 3C0C802B */  lui       $t4, %hi(main_battle_menu_JumpHudScripts)
+/* 41AC0C 802A5E7C 258CD078 */  addiu     $t4, $t4, %lo(main_battle_menu_JumpHudScripts)
 /* 41AC10 802A5E80 00141880 */  sll       $v1, $s4, 2
 /* 41AC14 802A5E84 006C3021 */  addu      $a2, $v1, $t4
 /* 41AC18 802A5E88 3C0B802B */  lui       $t3, %hi(battle_menu_isEnabled)
 /* 41AC1C 802A5E8C 256BD0D0 */  addiu     $t3, $t3, %lo(battle_menu_isEnabled)
 /* 41AC20 802A5E90 006B2821 */  addu      $a1, $v1, $t3
 /* 41AC24 802A5E94 24090001 */  addiu     $t1, $zero, 1
-/* 41AC28 802A5E98 3C0A802B */  lui       $t2, %hi(battle_menu_centeredMessages)
-/* 41AC2C 802A5E9C 254AB4C0 */  addiu     $t2, $t2, %lo(battle_menu_centeredMessages)
+/* 41AC28 802A5E98 3C0A802B */  lui       $t2, %hi(battle_menu_centeredMessagesA)
+/* 41AC2C 802A5E9C 254AB4C0 */  addiu     $t2, $t2, %lo(battle_menu_centeredMessagesA)
 /* 41AC30 802A5EA0 82A20000 */  lb        $v0, ($s5)
 /* 41AC34 802A5EA4 24420001 */  addiu     $v0, $v0, 1
 /* 41AC38 802A5EA8 000210C0 */  sll       $v0, $v0, 3
-/* 41AC3C 802A5EAC 3C01802B */  lui       $at, %hi(battle_menu_jumpHudScripts)
+/* 41AC3C 802A5EAC 3C01802B */  lui       $at, %hi(battle_menu_JumpHudScripts)
 /* 41AC40 802A5EB0 00220821 */  addu      $at, $at, $v0
-/* 41AC44 802A5EB4 8C22B348 */  lw        $v0, %lo(battle_menu_jumpHudScripts)($at)
-/* 41AC48 802A5EB8 3C04802B */  lui       $a0, %hi(battle_menu_jumpHudScripts)
-/* 41AC4C 802A5EBC 2484B348 */  addiu     $a0, $a0, %lo(battle_menu_jumpHudScripts)
+/* 41AC44 802A5EB4 8C22B348 */  lw        $v0, %lo(battle_menu_JumpHudScripts)($at)
+/* 41AC48 802A5EB8 3C04802B */  lui       $a0, %hi(battle_menu_JumpHudScripts)
+/* 41AC4C 802A5EBC 2484B348 */  addiu     $a0, $a0, %lo(battle_menu_JumpHudScripts)
 /* 41AC50 802A5EC0 ACC20000 */  sw        $v0, ($a2)
 /* 41AC54 802A5EC4 3C01802B */  lui       $at, %hi(battle_menu_submenuIDs)
 /* 41AC58 802A5EC8 00230821 */  addu      $at, $at, $v1
@@ -474,8 +474,8 @@ glabel btl_state_update_player_menu
 /* 41ADE4 802A6054 82A2028E */  lb        $v0, 0x28e($s5)
 /* 41ADE8 802A6058 10400027 */  beqz      $v0, .L802A60F8
 /* 41ADEC 802A605C 00141880 */   sll      $v1, $s4, 2
-/* 41ADF0 802A6060 3C04802B */  lui       $a0, %hi(main_battle_menu_jumpHudScripts)
-/* 41ADF4 802A6064 2484D078 */  addiu     $a0, $a0, %lo(main_battle_menu_jumpHudScripts)
+/* 41ADF0 802A6060 3C04802B */  lui       $a0, %hi(main_battle_menu_JumpHudScripts)
+/* 41ADF4 802A6064 2484D078 */  addiu     $a0, $a0, %lo(main_battle_menu_JumpHudScripts)
 /* 41ADF8 802A6068 3C06802B */  lui       $a2, %hi(battle_menu_StarPowerHudScripts)
 /* 41ADFC 802A606C 24C6B390 */  addiu     $a2, $a2, %lo(battle_menu_StarPowerHudScripts)
 /* 41AE00 802A6070 00642821 */  addu      $a1, $v1, $a0
@@ -490,8 +490,8 @@ glabel btl_state_update_player_menu
 /* 41AE24 802A6094 00230821 */  addu      $at, $at, $v1
 /* 41AE28 802A6098 AC27D0B8 */  sw        $a3, %lo(battle_menu_submenuIDs)($at)
 /* 41AE2C 802A609C AC820000 */  sw        $v0, ($a0)
-/* 41AE30 802A60A0 3C02802B */  lui       $v0, %hi(D_802AB4E0)
-/* 41AE34 802A60A4 8C42B4E0 */  lw        $v0, %lo(D_802AB4E0)($v0)
+/* 41AE30 802A60A0 3C02802B */  lui       $v0, %hi(battle_menu_centeredMessagesD)
+/* 41AE34 802A60A4 8C42B4E0 */  lw        $v0, %lo(battle_menu_centeredMessagesD)($v0)
 /* 41AE38 802A60A8 3C01802B */  lui       $at, %hi(battle_menu_messageIDs)
 /* 41AE3C 802A60AC 00230821 */  addu      $at, $at, $v1
 /* 41AE40 802A60B0 AC22D090 */  sw        $v0, %lo(battle_menu_messageIDs)($at)
@@ -2295,8 +2295,8 @@ glabel btl_state_update_player_menu
 /* 41C7C4 802A7A34 3C05001D */   lui      $a1, 0x1d
 /* 41C7C8 802A7A38 34A500A1 */  ori       $a1, $a1, 0xa1
 /* 41C7CC 802A7A3C 24020005 */  addiu     $v0, $zero, 5
-/* 41C7D0 802A7A40 3C04802B */  lui       $a0, %hi(D_802AB4A4)
-/* 41C7D4 802A7A44 8C84B4A4 */  lw        $a0, %lo(D_802AB4A4)($a0)
+/* 41C7D0 802A7A40 3C04802B */  lui       $a0, %hi(battle_menu_leftJustfiedMessagesB)
+/* 41C7D4 802A7A44 8C84B4A4 */  lw        $a0, %lo(battle_menu_leftJustfiedMessagesB)($a0)
 /* 41C7D8 802A7A48 82A30012 */  lb        $v1, 0x12($s5)
 /* 41C7DC 802A7A4C 3C06802B */  lui       $a2, %hi(D_802AD690)
 /* 41C7E0 802A7A50 24C6D690 */  addiu     $a2, $a2, %lo(D_802AD690)
@@ -2347,8 +2347,8 @@ glabel btl_state_update_player_menu
 /* 41C88C 802A7AFC 3C01802B */  lui       $at, %hi(D_802AD640)
 /* 41C890 802A7B00 00230821 */  addu      $at, $at, $v1
 /* 41C894 802A7B04 AC24D640 */  sw        $a0, %lo(D_802AD640)($at)
-/* 41C898 802A7B08 3C04802B */  lui       $a0, %hi(battle_menu_leftJustfiedMessages)
-/* 41C89C 802A7B0C 2484B490 */  addiu     $a0, $a0, %lo(battle_menu_leftJustfiedMessages)
+/* 41C898 802A7B08 3C04802B */  lui       $a0, %hi(battle_menu_leftJustfiedMessagesA)
+/* 41C89C 802A7B0C 2484B490 */  addiu     $a0, $a0, %lo(battle_menu_leftJustfiedMessagesA)
 /* 41C8A0 802A7B10 8C820024 */  lw        $v0, 0x24($a0)
 /* 41C8A4 802A7B14 3C09802B */  lui       $t1, %hi(battle_menu_FleeHudScripts)
 /* 41C8A8 802A7B18 2529B488 */  addiu     $t1, $t1, %lo(battle_menu_FleeHudScripts)

@@ -74,14 +74,14 @@ extern HudElementAnim HudScript_StarBeamDisabled[];
 extern HudElementAnim HudScript_PeachBeam[];
 extern HudElementAnim HudScript_PeachBeamDisabled[];
 
-extern HudElementAnim D_80109338[];
-extern HudElementAnim D_80109360[];
-extern HudElementAnim D_80109388[];
-extern HudElementAnim D_801093B0[];
-extern HudElementAnim D_801093D8[];
-extern HudElementAnim D_80109400[];
-extern HudElementAnim D_80109428[];
-extern HudElementAnim D_80109450[];
+extern HudElementAnim HudScript_MoveDiamond[];
+extern HudElementAnim HudScript_MoveBlueOrb[];
+extern HudElementAnim HudScript_MoveGreenOrb[];
+extern HudElementAnim HudScript_MoveRedOrb[];
+extern HudElementAnim HudScript_MoveDiamondDisabled[];
+extern HudElementAnim HudScript_MoveBlueOrbDisabled[];
+extern HudElementAnim HudScript_MoveGreenOrbDisabled[];
+extern HudElementAnim HudScript_MoveRedOrbDisabled[];
 
 extern u8 D_802AD000;
 extern u8 D_802AD001;
@@ -153,7 +153,7 @@ s16 D_802AB340[] = { 0x001C, 0x0028 };
 
 s16 D_802AB344[] = { 0, -2 };
 
-HudElementAnim* battle_menu_jumpHudScripts[] = {
+HudElementAnim* battle_menu_JumpHudScripts[] = {
     HudScript_MenuBoots1Disabled, HudScript_MenuBoots1Disabled,
     HudScript_MenuBoots1,HudScript_MenuBoots1Disabled,
     HudScript_MenuBoots2, HudScript_MenuBoots2Disabled,
@@ -194,21 +194,28 @@ HudElementAnim* battle_menu_DoNothingHudScripts[] = { HudScript_MenuDoNothing, H
 
 HudElementAnim* battle_menu_FleeHudScripts[] = { HudScript_MenuFlee, HudScript_MenuFleeDisabled };
 
-s32 battle_menu_leftJustfiedMessages[] = { 0x001D0039, 0x001D0038, 0x001D003F, 0x001D003B, 0x001D0044 };
+// Jump, Hammer, Items, RunAway, Defense
+s32 battle_menu_leftJustfiedMessagesA[] = { 0x001D0039, 0x001D0038, 0x001D003F, 0x001D003B, 0x001D0044 };
 
-s32 D_802AB4A4[] = { 0x001D003E, 0x001D0045, 0x001D0043, 0x001D003A };
+// Change Member, Abilities, Strategies, Star Spirits
+s32 battle_menu_leftJustfiedMessagesB[] = { 0x001D003E, 0x001D0045, 0x001D0043, 0x001D003A };
 
-s32 D_802AB4B4[] = { 0x001D003C, 0x001D0046, 0x001D0048 };
+// Do Nothing, Act Later, Focus
+s32 battle_menu_leftJustfiedMessagesC[] = { 0x001D003C, 0x001D0046, 0x001D0048 };
 
-s32 battle_menu_centeredMessages[] = { 0x001D004B, 0x001D004A };
+// Jump, Hammer
+s32 battle_menu_centeredMessagesA[] = { 0x001D004B, 0x001D004A };
 
-s32 D_802AB4C8[] = { 0x001D0050, 0x001D004D, 0x001D0052, 0x001D004F, 0x001D0053 };
+// Items, RunAway, Defense, Change Member, Abilities
+s32 battle_menu_centeredMessagesB[] = { 0x001D0050, 0x001D004D, 0x001D0052, 0x001D004F, 0x001D0053 };
 
-s32 D_802AB4DC[] = { 0x001D0051 };
+// Strategies
+s32 battle_menu_centeredMessagesC[] = { 0x001D0051 };
 
-s32 D_802AB4E0[] = { 0x001D004C, 0x001D004E, 0x001D0056, 0x001D0055 };
+// Star Spirits, Do Nothing, Act Later, Focus
+s32 battle_menu_centeredMessagesD[] = { 0x001D004C, 0x001D004E, 0x001D0056, 0x001D0055 };
 
-s8 D_802AB4F0[] = { 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x1A, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x34, 0x00, 0x00, 0x00, 0x39, 0x00, 0x00, 0x00, 0x31, 0x00, 0x00, 0x00, 0x37, };
+s32 D_802AB4F0[] = { 0x2, 0x1, 0x4, 0x6, 0x3, 0x5, 0x1A, 0x3, 0x34, 0x39, 0x31, 0x37 };
 
 // s8 D_802AB513
 
@@ -216,14 +223,26 @@ s32 D_802AB520[] = { 0x00000000, 0x00090012, 0x000A001A, 0x000B001C, 0x000C0017,
 
 s32 D_802AB558[] = { 0x00000000, 0x00090002, 0x000A0005, 0x000B0006, 0x000C0002, 0x009D0002, 0x000E0002, 0x000F0002, 0x00100002, 0x000D0002, 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
 
-HudElementAnim* D_802AB590[] = { 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, HudScript_Goombario, HudScript_GoombarioDisabled, D_80109338, D_801093D8, D_80109360, D_80109400, D_80109388, D_80109428, D_801093B0, D_80109450, HudScript_Kooper, HudScript_KooperDisabled, D_80109338, D_801093D8, D_80109360, D_80109400, D_80109388, D_80109428, D_801093B0, D_80109450, HudScript_Bombette, HudScript_BombetteDisabled, D_80109338, D_801093D8, D_80109360, D_80109400, D_80109388, D_80109428, D_801093B0, D_80109450, HudScript_Parakarry, HudScript_ParakarryDisabled, D_80109338, D_801093D8, D_80109360, D_80109400, D_80109388, D_80109428, D_801093B0, D_80109450, HudScript_Partner0, HudScript_Partner0Disabled, D_80109338, D_801093D8, D_80109360, D_80109400, D_80109388, D_80109428, D_801093B0, D_80109450, HudScript_Watt, &HudScript_WattDisabled, D_80109338, D_801093D8, D_80109360, D_80109400, D_80109388, D_80109428, D_801093B0, D_80109450, HudScript_Sushie, HudScript_SushieDisabled, D_80109338, D_801093D8, D_80109360, D_80109400, D_80109388, D_80109428, D_801093B0, D_80109450, HudScript_Lakilester, HudScript_LakilesterDisabled, D_80109338, D_801093D8, D_80109360, D_80109400, D_80109388, D_80109428, D_801093B0, D_80109450, &HudScript_Bow, HudScript_BowDisabled, D_80109338, D_801093D8, D_80109360, D_80109400, D_80109388, D_80109428, D_801093B0, D_80109450 };
+HudElementAnim* battle_menu_PartnerMoveHudScripts[] = {
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    HudScript_Goombario, HudScript_GoombarioDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Kooper, HudScript_KooperDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Bombette, HudScript_BombetteDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Parakarry, HudScript_ParakarryDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Partner0, HudScript_Partner0Disabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Watt, HudScript_WattDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Sushie, HudScript_SushieDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Lakilester, HudScript_LakilesterDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Bow, HudScript_BowDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled };
 
-HudElementAnim* D_802AB720[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
+HudElementAnim* battle_menu_PeachStarPowerHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
 
+// Focus
 s32 D_802AB728[] = { 0x001D0055 };
 
-HudElementAnim* D_802AB72C[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
+HudElementAnim* battle_menu_TwinkStarPowerHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
 
+// Dash
 s32 D_802AB734[] = { 0x001D0057 };
 
 s32 D_802AB738[] = { 0x00000000, 0x001D0007, 0x001D0008, 0x001D0009, 0x001D000A, 0x001D000B, 0x001D000C, 0x001D000D, 0x001D000E, 0x001D000F, 0x001D0010, 0x001D0011, 0x001D0012, 0x00000000 };

@@ -94,8 +94,8 @@ glabel func_802A11B0
 /* 416094 802A1304 2694D028 */  addiu     $s4, $s4, %lo(D_802AD028)
 /* 416098 802A1308 3C12802B */  lui       $s2, %hi(D_802AD010)
 /* 41609C 802A130C 2652D010 */  addiu     $s2, $s2, %lo(D_802AD010)
-/* 4160A0 802A1310 3C10802B */  lui       $s0, %hi(main_battle_menu_jumpHudScripts)
-/* 4160A4 802A1314 2610D078 */  addiu     $s0, $s0, %lo(main_battle_menu_jumpHudScripts)
+/* 4160A0 802A1310 3C10802B */  lui       $s0, %hi(main_battle_menu_JumpHudScripts)
+/* 4160A4 802A1314 2610D078 */  addiu     $s0, $s0, %lo(main_battle_menu_JumpHudScripts)
 .L802A1318:
 /* 4160A8 802A1318 8E040000 */  lw        $a0, ($s0)
 /* 4160AC 802A131C 26100004 */  addiu     $s0, $s0, 4
