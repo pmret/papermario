@@ -119,18 +119,24 @@ s32 D_802AB368[] = { 0x8010885C, 0x8010885C, 0x80108834, 0x8010885C, 0x80108884,
 
 s32 D_802AB388[] = { 0x80108924, 0x8010894C };
 
-HudElementAnim* D_802AB390[] = { &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled };
+HudElementAnim* D_802AB390[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
 
-HudElementAnim* StarPowerHudScripts[] = { &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled, &HudScript_Eldstar, &HudScript_EldstarDisabled, 
-    &HudScript_Mamar, &HudScript_MamarDisabled, &HudScript_Skolar, &HudScript_SkolarDisabled,
-    &HudScript_Muskular, &HudScript_MuskularDisabled, &HudScript_Misstar, &HudScript_MisstarDisabled,
-    &HudScript_Klevar, &HudScript_KlevarDisabled, &HudScript_Kalmar, &HudScript_KalmarDisabled,
-    &HudScript_StarBeam, &HudScript_StarBeamDisabled, &HudScript_PeachBeam, &HudScript_PeachBeamDisabled,
-    &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled, &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled };
+HudElementAnim* StarPowerHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled, HudScript_Eldstar, HudScript_EldstarDisabled, 
+    HudScript_Mamar, HudScript_MamarDisabled, HudScript_Skolar, HudScript_SkolarDisabled,
+    HudScript_Muskular, HudScript_MuskularDisabled, HudScript_Misstar, HudScript_MisstarDisabled,
+    HudScript_Klevar, HudScript_KlevarDisabled, HudScript_Kalmar, HudScript_KalmarDisabled,
+    HudScript_StarBeam, HudScript_StarBeamDisabled, HudScript_PeachBeam, HudScript_PeachBeamDisabled,
+    HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled, HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
 
-HudElementAnim* D_802AB3F8[] = { &HudScript_Partner0, &HudScript_Goombario, &HudScript_Kooper, &HudScript_Bombette, &HudScript_Parakarry, &HudScript_Partner0, &HudScript_Watt, &HudScript_Sushie, &HudScript_Lakilester, &HudScript_Bow, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA };
+HudElementAnim* D_802AB3F8[] = { HudScript_Partner0, HudScript_Goombario, HudScript_Kooper, HudScript_Bombette,
+    HudScript_Parakarry, HudScript_Partner0, HudScript_Watt, HudScript_Sushie,
+    HudScript_Lakilester, HudScript_Bow, HudScript_PartnerA, HudScript_PartnerA,
+    HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA };
 
-HudElementAnim* D_802AB438[] = { &HudScript_Partner0Disabled, &HudScript_GoombarioDisabled, &HudScript_KooperDisabled, &HudScript_BombetteDisabled, &HudScript_ParakarryDisabled, &HudScript_Partner0Disabled, &HudScript_WattDisabled, &HudScript_SushieDisabled, &HudScript_LakilesterDisabled, &HudScript_BowDisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled };
+HudElementAnim* D_802AB438[] = { HudScript_Partner0Disabled, HudScript_GoombarioDisabled, HudScript_KooperDisabled, HudScript_BombetteDisabled,
+    HudScript_ParakarryDisabled, HudScript_Partner0Disabled, HudScript_WattDisabled, HudScript_SushieDisabled,
+    HudScript_LakilesterDisabled, HudScript_BowDisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled,
+    HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled };
 
 s32 D_802AB478[] = { 0x80292200 };
 

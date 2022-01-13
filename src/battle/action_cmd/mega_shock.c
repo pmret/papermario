@@ -51,25 +51,25 @@ ApiStatus func_802A9000_42DA10(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -0x30;
     actionCommandStatus->hudElementY = 0x50;
 
-    elementID = create_hud_element(&HudScript_AButton);
+    elementID = create_hud_element(HudScript_AButton);
     actionCommandStatus->hudElements[0] = elementID;
     set_hud_element_flags(elementID, 0x82);
     set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(elementID, 0);
 
-    elementID = create_hud_element(&HudScript_BButton);
+    elementID = create_hud_element(HudScript_BButton);
     actionCommandStatus->hudElements[2] = elementID;
     set_hud_element_flags(elementID, 0x82);
     set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(elementID, 0);
 
-    elementID = create_hud_element(&HudScript_BlueMeter);
+    elementID = create_hud_element(HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = elementID;
     set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
     set_hud_element_render_depth(elementID, 0);
     set_hud_element_flags(elementID, 0x82);
 
-    elementID = create_hud_element(&HudScript_100pct);
+    elementID = create_hud_element(HudScript_100pct);
     actionCommandStatus->hudElements[4] = elementID;
     set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
     set_hud_element_render_depth(elementID, 0);
