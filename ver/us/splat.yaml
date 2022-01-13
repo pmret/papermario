@@ -3912,10 +3912,12 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4F7BE0, c]
-    - [0x4F7D50, c]
-    - [0x4F7F40, c]
-    - [0x4F7FA0, data]
+    - [0x4F7BE0, c, actor/forest_fuzzy]
+    - [0x4F7D50, c, actor/bzzap]
+    - [0x4F7F40, c, actor/piranha_plant]
+    - [0x4F7F40, c, stage/mim_01]
+    - [0x4F7FA0, c, area]
+    - [0x4F7FA0]
   - dir: battle/area_arn
     type: code
     start: 0x4FEA50

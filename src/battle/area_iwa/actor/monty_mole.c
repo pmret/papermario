@@ -149,7 +149,7 @@ ActorPartDesc N(partsTable_8021A60C)[] = {
 EvtSource N(init_8021A630) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))
     EVT_IF_EQ(LW(0), 1)
-        EVT_CALL(SetPartScale, ACTOR_SELF, 1, EVT_FLOAT(0.400390625), EVT_FLOAT(0.400390625), EVT_FLOAT(0.400390625))
+        EVT_CALL(SetPartScale, ACTOR_SELF, 1, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -368,7 +368,7 @@ EvtSource N(takeTurn_8021AFAC) = {
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
     EVT_IF_FLAG(LW(0), STATUS_FLAG_SHRINK)
-        EVT_CALL(SetPartScale, ACTOR_SELF, 3, EVT_FLOAT(0.400390625), EVT_FLOAT(0.400390625), EVT_FLOAT(0.400390625))
+        EVT_CALL(SetPartScale, ACTOR_SELF, 3, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_ELSE
         EVT_CALL(SetPartScale, ACTOR_SELF, 3, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_IF
@@ -385,7 +385,7 @@ EvtSource N(takeTurn_8021AFAC) = {
             EVT_SUB(LW(0), 100)
             EVT_SET(LW(1), -5)
             EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, 3, EVT_FLOAT(12.0))
-            EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(0.1005859375))
+            EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(0.1))
             EVT_CALL(SetAnimation, ACTOR_SELF, 3, NPC_ANIM_monty_mole_Palette_00_Anim_F)
             EVT_CALL(FlyPartTo, ACTOR_SELF, 3, LW(0), LW(1), LW(2), 0, 30, 0)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_INVISIBLE, 1)
@@ -402,7 +402,7 @@ EvtSource N(takeTurn_8021AFAC) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, 3, EVT_FLOAT(12.0))
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(0.1005859375))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(0.1))
     EVT_CALL(SetAnimation, ACTOR_SELF, 3, NPC_ANIM_monty_mole_Palette_00_Anim_F)
     EVT_CALL(FlyPartTo, ACTOR_SELF, 3, LW(0), LW(1), LW(2), 0, 20, 0)
     EVT_WAIT_FRAMES(2)
@@ -414,7 +414,7 @@ EvtSource N(takeTurn_8021AFAC) = {
             EVT_SUB(LW(0), 55)
             EVT_SET(LW(1), 0)
             EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, 3, EVT_FLOAT(6.0))
-            EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(0.1005859375))
+            EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(0.1))
             EVT_CALL(FlyPartTo, ACTOR_SELF, 3, LW(0), LW(1), LW(2), 0, 25, 0)
             EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, 3, EVT_FLOAT(4.0))
             EVT_SUB(LW(0), 20)

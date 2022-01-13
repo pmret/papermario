@@ -261,7 +261,7 @@ EvtSource N(8021D890) = {
     EVT_CALL(func_8027D32C, -127)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
     EVT_IF_FLAG(LW(0), 0x80000)
-        EVT_CALL(SetPartScale, -127, 3, EVT_FLOAT(0.400390625), EVT_FLOAT(0.400390625), EVT_FLOAT(0.400390625))
+        EVT_CALL(SetPartScale, -127, 3, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_END_IF
     EVT_CALL(SetPartFlagBits, -127, 1, 8388608, 1)
     EVT_CALL(SetPartFlagBits, -127, 1, 131073, 0)
@@ -275,12 +275,12 @@ EvtSource N(8021D890) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x301)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_SET(LW(1), 0)
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.80078125))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_CALL(N(StartRumbleWithParams), 150, 10)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.7001953125))
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.7))
     EVT_END_THREAD
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(3))
     EVT_IF_EQ(LW(3), 15)
@@ -765,7 +765,7 @@ EvtSource N(healOne) = {
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -779,7 +779,7 @@ EvtSource N(healOne) = {
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
@@ -845,7 +845,7 @@ EvtSource N(healAll) = {
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -859,7 +859,7 @@ EvtSource N(healAll) = {
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
@@ -1515,7 +1515,7 @@ EvtSource N(boostAttack) = {
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -1529,7 +1529,7 @@ EvtSource N(boostAttack) = {
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
@@ -1627,7 +1627,7 @@ EvtSource N(boostDefense) = {
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -1641,7 +1641,7 @@ EvtSource N(boostDefense) = {
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
@@ -1739,7 +1739,7 @@ EvtSource N(electrify) = {
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x57, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x57, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -1753,7 +1753,7 @@ EvtSource N(electrify) = {
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x57, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x57, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
@@ -1856,7 +1856,7 @@ EvtSource N(vanish) = {
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 6, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 6, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -1870,7 +1870,7 @@ EvtSource N(vanish) = {
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 6, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 6, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)

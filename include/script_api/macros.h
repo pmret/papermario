@@ -16,7 +16,9 @@
 
 /// Decimal constant.
 /// Despite the name, "floats" are actually stored as fixed-point values.
-#define EVT_FLOAT(DOUBLE) (((Bytecode)(DOUBLE * 1024.0f) + -230000000))
+
+#define ROUND(x) ((x)>=0?(long)((x) + 0.9):(long)(x))
+#define EVT_FLOAT(DOUBLE) (((Bytecode)ROUND((DOUBLE * 1024.0f)) + -230000000))
 
 /// Address/pointer constant.
 #define EVT_ADDR(sym) (((Bytecode) &((sym))))

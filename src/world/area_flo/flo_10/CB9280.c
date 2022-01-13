@@ -271,8 +271,8 @@ EvtSource N(80242188) = SCRIPT({
     MakeLerp(-50, 90, 60, 1);
     loop {
         UpdateLerp();
-        EVT_VAR(2) /= 1.2001953125;
-        EVT_VAR(3) /= 1.2001953125;
+        EVT_VAR(2) /= 1.2;
+        EVT_VAR(3) /= 1.2;
         SetPlayerPos(EVT_VAR(2), EVT_VAR(0), EVT_VAR(3));
         sleep 1;
         if (EVT_VAR(1) == 0) {
@@ -296,7 +296,7 @@ EvtSource N(8024230C) = SCRIPT({
     GetPlayerPos(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
     UseSettingsFrom(0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
     SetPanTarget(0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
-    SetCamSpeed(0, 0.7001953125);
+    SetCamSpeed(0, 0.7);
     SetCamPitch(0, 25.0, -22.0);
     SetCamDistance(0, 450);
     PanToTarget(0, 0, 1);
@@ -367,7 +367,7 @@ EvtSource N(802425E4) = SCRIPT({
     sleep 360;
     InterpPlayerYaw(90, 0);
     SetPlayerAnimation(ANIM_80017);
-    SetPlayerJumpscale(0.2001953125);
+    SetPlayerJumpscale(0.2);
     PlayerJump1(-100, -10, -172, 75);
     ShakeCam(0, 0, 5, 1.0);
     await N(802425BC);

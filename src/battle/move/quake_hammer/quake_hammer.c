@@ -649,14 +649,14 @@ EvtSource D_802A3168_0073D038 = {
         EVT_CASE_GT(0)
             EVT_CALL(StartRumble, 9)
             EVT_CHILD_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.2001953125))
+                EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.2))
                 EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
                 EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(2.0))
                 EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
-                EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(0.7001953125))
-                EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(0.400390625))
-                EVT_CALL(ShakeCam, 1, 0, 6, EVT_FLOAT(0.1005859375))
-                EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(0.05078125))
+                EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(0.7))
+                EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(0.4))
+                EVT_CALL(ShakeCam, 1, 0, 6, EVT_FLOAT(0.1))
+                EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(0.05))
             EVT_END_CHILD_THREAD
             EVT_CHILD_THREAD
                 EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
@@ -668,13 +668,13 @@ EvtSource D_802A3168_0073D038 = {
         EVT_CASE_DEFAULT
             EVT_CALL(StartRumble, 9)
             EVT_CHILD_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.1005859375))
+                EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.1))
                 EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.5))
                 EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.0))
                 EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.5))
-                EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(0.3505859375))
-                EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(0.2001953125))
-                EVT_CALL(ShakeCam, 1, 0, 6, EVT_FLOAT(0.05078125))
+                EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(0.35))
+                EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(0.2))
+                EVT_CALL(ShakeCam, 1, 0, 6, EVT_FLOAT(0.05))
                 EVT_CALL(ShakeCam, 1, 0, 4, EVT_FLOAT(0.025390625))
             EVT_END_CHILD_THREAD
     EVT_END_SWITCH

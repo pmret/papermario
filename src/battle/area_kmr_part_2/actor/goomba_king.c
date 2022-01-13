@@ -216,7 +216,7 @@ EvtSource N(80220DB0) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_SET(LW(1), 0)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.400390625))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
     EVT_CALL(AddGoalPos, ACTOR_SELF, 30, 0, 0)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20B4)
@@ -465,7 +465,7 @@ EvtSource N(80221CD4) = {
     EVT_WAIT_FRAMES(15)
     EVT_CALL(func_8024ECF8, 0, 1, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_king_Palette_00_Anim_9)
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.80078125))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
@@ -707,12 +707,12 @@ EvtSource N(80222D9C) = {
         EVT_IF_EQ(LW(0), 0)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
             EVT_IF_NOT_FLAG(LW(0), 0x80000)
-                EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.2001953125))
+                EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.2))
             EVT_END_IF
         EVT_ELSE
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
             EVT_IF_NOT_FLAG(LW(0), 0x80000)
-                EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.7001953125))
+                EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(0.7))
             EVT_END_IF
         EVT_END_IF
     EVT_END_IF

@@ -146,7 +146,7 @@ EvtSource N(80218944) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.30078125))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.3))
     EVT_SUB(LW(1), 6)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
@@ -271,7 +271,7 @@ EvtSource N(handleEvent_80218C3C) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_cleft_default_run)
             EVT_EXEC_WAIT(DoReturnHome)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6005859375))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LW(0), 1)
@@ -401,7 +401,7 @@ EvtSource N(802197AC) = {
         EVT_END_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
         EVT_SUB(LW(1), 6)
-        EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.30078125))
+        EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.3))
         EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
         EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
         EVT_CALL(N(StartRumbleWithParams), 200, 10)
@@ -517,7 +517,7 @@ EvtSource N(80219BA0) = {
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(0), 15)
             EVT_SET(LW(1), 0)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.400390625))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.4))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_cleft_default_idle)

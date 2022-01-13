@@ -78,12 +78,10 @@ def extend_symbol_map(a, b):
     return a
 
 def round_fixed(f: float) -> float:
-    """
     g = f * 100.0
     whole = round(g)
     if abs(g - whole) <= 100.0/1024.0:
         f = whole / 100.0
-        """
     return f
 
 def find_symbol_in_overlay(symbol_map, overlay_rom_addr, symbol_ram_addr):
