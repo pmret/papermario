@@ -911,7 +911,7 @@ segments:
     - [0x134F40, palette, ui/blue_orb]
     - [0x134F60, ci4, ui/label_bubble, 56, 16]
     - [0x135120, palette, ui/label_bubble]
-    - [0x135140, bin, pause_icon_table] # TODO data
+    - [0x135140, data, pause_icon_table] # TODO data
   - type: code
     dir: pause
     start: 0x135EE0

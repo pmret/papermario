@@ -5,7 +5,7 @@
 
 extern s32 D_802941C0;
 
-// icon id's for hud elements
+// icon IDs for hud elements
 extern HudElementAnim HudScript_AButton[];
 extern HudElementAnim HudScript_RightOn[];
 extern HudElementAnim HudScript_AButtonDown[];
