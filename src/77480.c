@@ -671,13 +671,13 @@ void check_for_interactables(void) {
                 phi_s2 = 1;
                 phi_s0 = floor;
                 switch (get_entity_type(floor)) {
-                    case 0x3:
-                    case 0x4:
-                    case 0x5:
-                    case 0x6:
-                    case 0xC:
-                    case 0x32:
-                    case 0x33:
+                    case ENTITY_TYPE_PADLOCK:
+                    case ENTITY_TYPE_PADLOCK_RED_FRAME:
+                    case ENTITY_TYPE_PADLOCK_RED_FACE:
+                    case ENTITY_TYPE_PADLOCK_BLUE_FACE:
+                    case ENTITY_TYPE_PUSH_BLOCK:
+                    case ENTITY_TYPE_CHEST:
+                    case ENTITY_TYPE_SIGNPOST:
                         phi_s0 = -1;
                         break;
                 }

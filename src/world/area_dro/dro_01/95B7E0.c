@@ -2928,7 +2928,7 @@ EvtSource N(8024D2B0) = {
 };
 
 EvtSource N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(D_802E9A18), -211, 60, -50, 30, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), -211, 60, -50, 30, MAKE_ENTITY_END)
     EVT_IF_EQ(EVT_SAVE_FLAG(1939), 0)
         EVT_IF_EQ(EVT_SAVE_FLAG(1933), 1)
             EVT_CALL(GetEntryID, EVT_VAR(0))
