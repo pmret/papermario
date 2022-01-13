@@ -1072,6 +1072,24 @@ enum PlayerAnims {
     ANIM_30004                      = 0x00030004,
     ANIM_30008                      = 0x00030008,
     ANIM_30009                      = 0x00030009,
+    ANIM_3000D                      = 0x0003000D,
+    ANIM_3000E                      = 0x0003000E,
+    ANIM_3000F                      = 0x0003000F,
+    ANIM_30010                      = 0x00030010,
+    ANIM_30011                      = 0x00030011,
+    ANIM_30012                      = 0x00030012,
+    ANIM_30014                      = 0x00030014,
+    ANIM_30015                      = 0x00030015,
+    ANIM_30016                      = 0x00030016,
+    ANIM_30017                      = 0x00030017,
+    ANIM_30018                      = 0x00030018,
+    ANIM_30019                      = 0x00030019,
+    ANIM_3001B                      = 0x0003001B,
+    ANIM_3001C                      = 0x0003001C,
+    ANIM_3001D                      = 0x0003001D,
+    ANIM_3001E                      = 0x0003001E,
+    ANIM_3001F                      = 0x0003001F,
+    ANIM_30020                      = 0x00030020,
     ANIM_80003                      = 0x00080003,
     ANIM_80007                      = 0x00080007,
     ANIM_8000B                      = 0x0008000B,
@@ -1515,6 +1533,8 @@ enum PlayerBuffs {
 
 enum StatusFlags {
     STATUS_FLAG_1               = 0x00000001,
+    STATUS_FLAG_100             = 0x00000100,
+    STATUS_FLAG_200             = 0x00000200,
     STATUS_FLAG_SLEEP           = 0x00001000,
     STATUS_FLAG_STATIC          = 0x00002000,
     STATUS_FLAG_FROZEN          = 0x00004000,
@@ -1532,6 +1552,7 @@ enum StatusFlags {
     STATUS_FLAG_DEFENSE_BOOST   = 0x10000000,
     STATUS_FLAG_CHILL_OUT       = 0x20000000,
     STATUS_FLAG_RIGHT_ON        = 0x40000000,
+    STATUS_FLAG_80000000        = 0x80000000,
 };
 
 enum DamageTypes {

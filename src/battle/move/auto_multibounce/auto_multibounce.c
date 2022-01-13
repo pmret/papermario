@@ -18,8 +18,8 @@ s32 N(D_802A10F0)[] = {
 EvtSource N(CheckForAPress) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_BEFORE_JUMP)
     EVT_LOOP(5)
-        EVT_CALL(CheckButtonPress, 32768, LW(0))
-        EVT_IF_EQ(LW(0), 1)
+        EVT_CALL(CheckButtonPress, A_BUTTON, LW(0))
+        EVT_IF_EQ(LW(0), TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT_FRAMES(1)

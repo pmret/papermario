@@ -50,8 +50,7 @@ Gfx D_80074580[] = {
     gsSPEndDisplayList(),
 };
 
-void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
-void dma_write_block(s32 romStart, s32 vramDest, s32 length);
+void dma_write_block(s32 dramAddr, s32 devAddr, s32 size);
 
 #define ROM_CHUNK_SIZE 0x2000
 
