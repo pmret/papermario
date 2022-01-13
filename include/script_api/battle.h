@@ -324,6 +324,7 @@ ApiStatus func_8026ED20(Evt* script, s32 isInitialCall);
 ApiStatus func_8026EBF8(Evt* script, s32 isInitialCall);
 ApiStatus SetupMashMeter(Evt* script, s32 isInitialCall);
 ApiStatus SetActionResult(Evt* script, s32 isInitialCall);
+ApiStatus func_8024EB84(Evt* script, s32 isInitialCall);
 
 extern EvtSource PlayerScriptDispatcher;
 extern EvtSource PeachScriptDispatcher;
@@ -376,6 +377,7 @@ extern EvtSource D_8029A76C;
 extern EvtSource D_80294720;
 extern EvtSource DoImmune;
 extern EvtSource DoDeath;
+extern EvtSource D_8029AF08;
 extern EvtSource Collapse;
 extern EvtSource DoScareAway;
 extern EvtSource DoSpinSmashHit;

@@ -3890,11 +3890,22 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4EF4A0, c]
-    - [0x4EFCF0, c]
-    - [0x4EFDC0, c]
-    - [0x4EFE90, c]
-    - [0x4EFFE0, data]
+    - [0x4EF4A0, c, actor/chain_chomp]
+    - [0x4EFB30, c, actor/tutankoopa]
+    - [0x4EFCF0, c, stage/isk_00]
+    - [0x4EFCF0, c, stage/isk_01]
+    - [0x4EFCF0, c, stage/isk_02]
+    - [0x4EFCF0, c, stage/isk_02b]
+    - [0x4EFCF0, c, stage/isk_02c]
+    - [0x4EFCF0, c, stage/isk_03]
+    - [0x4EFCF0, c, stage/isk_03b]
+    - [0x4EFCF0, c, stage/isk_04]
+    - [0x4EFDC0, c, stage/isk_05]
+    - [0x4EFE90, c, stage/isk_06]
+    - [0x4EFF00, c, stage/isk_06b]
+    - [0x4EFF70, c, stage/isk_07]
+    - [0x4EFFE0, c, area]
+    - [0x4EFFE0]
   - dir: battle/area_mim
     type: code
     start: 0x4F7BE0

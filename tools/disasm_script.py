@@ -283,20 +283,23 @@ def fix_args(self, func, args, info):
             elif info[i] == "Hex" and argNum > 0:
                 new_args.append(f"0x{argNum:08X}")
             elif info[i] == "CustomAnim":
-                try:
-                    value = (argNum & 0x00FFFFFF)
+                if argNum != -1:
+                    try:
+                        value = (argNum & 0x00FFFFFF)
 
-                    if func == "SetAnimation" and int(new_args[1], 10) == 0:
-                        call = f"{CONSTANTS['PlayerAnims'][argNum]}"
-                    elif value in CONSTANTS["NPC_SPRITE"]:
-                        self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
-                        call =  CONSTANTS['NPC_SPRITE'][value]
-                    else:
-                        call = f"{argNum:06X}"
-                except ValueError:
-                        call = f"0x{argNum:06X}"
-                except KeyError:
-                        call = f"0x{argNum:06X}"
+                        if func == "SetAnimation" and int(new_args[1], 10) == 0:
+                            call = f"{CONSTANTS['PlayerAnims'][argNum]}"
+                        elif value in CONSTANTS["NPC_SPRITE"]:
+                            self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
+                            call =  CONSTANTS['NPC_SPRITE'][value]
+                        else:
+                            call = f"{argNum:06X}"
+                    except ValueError:
+                            call = f"0x{argNum:06X}"
+                    except KeyError:
+                            call = f"0x{argNum:06X}"
+                else:
+                    call = "-1"
                 new_args.append(call)
             elif info[i] == "CustomMsg":
                 type_ = (argNum & 0xFF0000) >> 16
@@ -542,6 +545,7 @@ replace_funcs = {
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
+    "SetSpriteShading"          :{0:"CustomAnim"},
     "SetStatusTable"            :{0:"ActorIDs"},
     "SetTargetActor"            :{0:"ActorIDs", 1:"ActorIDs"},
     "SetTargetOffset"           :{0:"ActorIDs"},

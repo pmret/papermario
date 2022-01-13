@@ -111,8 +111,9 @@ extern EvtSource N(handleEvent_8021D600);
 extern EvtSource N(nextTurn_8022A038);
 extern EvtSource N(copyPartner);
 
-extern s32 D_80232C20[];
-extern s32 D_80232C50;
+BSS char N(pad)[8]; // BSS Alignment Hack
+BSS s32 D_80232C20[12];
+BSS s32 D_80232C50;
 
 ApiStatus func_802180D0_464560(Evt* script, s32 isInitialCall) {
     s32 i;

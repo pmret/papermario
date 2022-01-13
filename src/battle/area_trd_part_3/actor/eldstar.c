@@ -12,7 +12,7 @@ extern EvtSource N(idle_802183E8);
 extern EvtSource N(handleEvent_80218404);
 extern EvtSource N(80218424);
 
-extern s32 D_80219040;
+BSS s32 D_80219040;
 
 s32 N(idleAnimations_80218280)[] = {
     STATUS_NORMAL,    NPC_ANIM_world_eldstar_Palette_00_Anim_1,

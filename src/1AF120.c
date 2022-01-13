@@ -4,8 +4,6 @@
 #include "script_api/battle.h"
 
 extern EvtSource D_80299828;
-extern EvtSource D_8029AF08;
-extern EvtSource D_8029A76C;
 extern EvtSource D_8029B818;
 
 ApiStatus GetDamageIntensity(Evt* script, s32 isInitialCall) {

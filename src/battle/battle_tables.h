@@ -40,4 +40,7 @@ extern StageList b_area_sbk_stageTable;
 extern BattleList b_area_isk_part_1_formationTable;
 extern StageList b_area_isk_part_1_stageTable;
 
+extern BattleList b_area_isk_part_2_formationTable;
+extern StageList b_area_isk_part_2_stageTable;
+
 #endif
