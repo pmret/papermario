@@ -3453,6 +3453,7 @@ segments:
     overlay: True
     subsegments:
     - [0x4219F0, c, jump]
+    - [0x421FC0]
   - type: code
     start: 0x422000
     vram: 0x802A9000
@@ -4577,10 +4578,11 @@ segments:
     overlay: True
     subsegments:
     - [0x72A750, c, insecticide_herb]
-    - start: 0x72B130
+    - start: 0x72AB70
       type: .data
       name: insecticide_herb
       subsegments:
+      - [0x72AB70]
       - [0x72B130, ci4, insecticide_herb, 32, 32]
       - [0x72B330, palette, insecticide_herb]
       - [0x72B350]
