@@ -2,6 +2,8 @@
 #include "hud_element.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
+#include "sprite.h"
+#include "effects.h"
 
 f32 D_802809F0 = 0.0f;
 s8 D_802809F4 = 0;
@@ -394,7 +396,7 @@ void func_8023ED5C(void) {
                     actor = battleStatus->enemyActors[i];
 
                     if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
-                        renderTaskPtr->appendGfxArg = i;
+                        renderTaskPtr->appendGfxArg = (void*)i;
                         renderTaskPtr->appendGfx = func_80257B28;
                         renderTaskPtr->distance = actor->currentPos.z;
                         renderTaskPtr->renderMode = actor->renderMode;
@@ -573,7 +575,7 @@ void btl_delete_actor(Actor* actor) {
 
     delete_shadow(actor->shadow);
     remove_all_status_icons(actor->hudElementDataIndex);
-    remove_effect(actor->ptrDefuffIcon);
+    remove_effect(actor->ptrDefuffIcon); // ???
 
     if (actor->unk_200 != NULL) {
         actor->unk_200[3][9] = 0;

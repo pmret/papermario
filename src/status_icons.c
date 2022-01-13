@@ -310,31 +310,31 @@ void update_all_status_icons(PopupMessage* popup) {
         if (icon->status1.activeTask == STATUS_ICON_TASK_LOAD) {
             switch (icon->status1.active) {
                 case STATUS_SLEEP:
-                    elementID = icon->status1.activeElementID = create_hud_element(HudScript_AsleepBegin);
+                    elementID = icon->status1.activeElementID = create_hud_element(&HudScript_AsleepBegin);
                     break;
                 case STATUS_PARALYZE:
-                    elementID = icon->status1.activeElementID = create_hud_element(HudScript_ParalyzedBegin);
+                    elementID = icon->status1.activeElementID = create_hud_element(&HudScript_ParalyzedBegin);
                     break;
                 case STATUS_DIZZY:
-                    elementID = icon->status1.activeElementID = create_hud_element(HudScript_DizzyBegin);
+                    elementID = icon->status1.activeElementID = create_hud_element(&HudScript_DizzyBegin);
                     break;
                 case STATUS_FEAR:
-                    elementID = icon->status1.activeElementID = create_hud_element(HudScript_WeakenedLoop);
+                    elementID = icon->status1.activeElementID = create_hud_element(&HudScript_WeakenedLoop);
                     break;
                 case STATUS_STOP:
-                    elementID = icon->status1.activeElementID = create_hud_element(HudScript_StoppedBegin);
+                    elementID = icon->status1.activeElementID = create_hud_element(&HudScript_StoppedBegin);
                     break;
                 case STATUS_POISON:
-                    elementID = icon->status1.activeElementID = create_hud_element(HudScript_PoisonedBegin);
+                    elementID = icon->status1.activeElementID = create_hud_element(&HudScript_PoisonedBegin);
                     break;
                 case STATUS_SHRINK:
-                    elementID = icon->status1.activeElementID = create_hud_element(HudScript_ShrunkBegin);
+                    elementID = icon->status1.activeElementID = create_hud_element(&HudScript_ShrunkBegin);
                     break;
                 case STATUS_FROZEN:
-                    elementID = icon->status1.activeElementID = create_hud_element(HudScript_FrozenBegin);
+                    elementID = icon->status1.activeElementID = create_hud_element(&HudScript_FrozenBegin);
                     break;
                 default:
-                    elementID = icon->status1.activeElementID = create_hud_element(HudScript_Item_Present);
+                    elementID = icon->status1.activeElementID = create_hud_element(&HudScript_Item_Present);
                     break;
             }
             set_hud_element_flags(elementID, 2);
@@ -348,31 +348,31 @@ void update_all_status_icons(PopupMessage* popup) {
             case STATUS_ICON_TASK_LOAD:
                 switch (icon->status1.removing) {
                     case STATUS_SLEEP:
-                        set_hud_element_anim(icon->status1.removingElementID, HudScript_AsleepEnd);
+                        set_hud_element_anim(icon->status1.removingElementID, &HudScript_AsleepEnd);
                         break;
                     case STATUS_PARALYZE:
-                        set_hud_element_anim(icon->status1.removingElementID, HudScript_ParalyzedEnd);
+                        set_hud_element_anim(icon->status1.removingElementID, &HudScript_ParalyzedEnd);
                         break;
                     case STATUS_DIZZY:
-                        set_hud_element_anim(icon->status1.removingElementID, HudScript_DizzyEnd);
+                        set_hud_element_anim(icon->status1.removingElementID, &HudScript_DizzyEnd);
                         break;
                     case STATUS_FEAR:
-                        set_hud_element_anim(icon->status1.removingElementID, HudScript_WeakenedLoop);
+                        set_hud_element_anim(icon->status1.removingElementID, &HudScript_WeakenedLoop);
                         break;
                     case STATUS_STOP:
-                        set_hud_element_anim(icon->status1.removingElementID, HudScript_StoppedEnd);
+                        set_hud_element_anim(icon->status1.removingElementID, &HudScript_StoppedEnd);
                         break;
                     case STATUS_POISON:
-                        set_hud_element_anim(icon->status1.removingElementID, HudScript_PoisonedEnd);
+                        set_hud_element_anim(icon->status1.removingElementID, &HudScript_PoisonedEnd);
                         break;
                     case STATUS_SHRINK:
-                        set_hud_element_anim(icon->status1.removingElementID, HudScript_ShrunkEnd);
+                        set_hud_element_anim(icon->status1.removingElementID, &HudScript_ShrunkEnd);
                         break;
                     case STATUS_FROZEN:
-                        set_hud_element_anim(icon->status1.removingElementID, HudScript_FrozenEnd);
+                        set_hud_element_anim(icon->status1.removingElementID, &HudScript_FrozenEnd);
                         break;
                     default:
-                        set_hud_element_anim(icon->status1.removingElementID, HudScript_Item_Present);
+                        set_hud_element_anim(icon->status1.removingElementID, &HudScript_Item_Present);
                         break;
                 }
 

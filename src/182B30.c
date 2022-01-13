@@ -3,6 +3,14 @@
 #include "effects.h"
 #include "battle/battle.h"
 
+void func_80255FE0(s32, void*);
+void func_802571F0(s32, Actor*);
+void update_player_actor_shadow(void);
+void func_8025950C(ActorPart*, s32, s32);
+void func_802597B0(ActorPart*, s32, s32);
+void func_8025C918(void);
+void func_8025CD40(void);
+
 s32 func_80254250(void) {
     s32 ret;
 
@@ -19,13 +27,12 @@ s32 func_80254250(void) {
     return ret;
 }
 
-void mtx_mirror_y(Matrix4f arg0) {
-
-    guMtxIdentF(arg0);
-    (arg0)[0][0] = 1.0f;
-    (arg0)[1][1] = -1.0f;
-    (arg0)[2][2] = 1.0f;
-    (arg0)[3][3] = 1.0f;
+void mtx_mirror_y(Matrix4f mtx) {
+    guMtxIdentF(mtx);
+    mtx[0][0] = 1.0f;
+    mtx[1][1] = -1.0f;
+    mtx[2][2] = 1.0f;
+    mtx[3][3] = 1.0f;
 }
 
 void enable_actor_blur(Actor* actor) {
@@ -517,7 +524,9 @@ void func_8025593C(Actor* actor) {
     func_802550BC(0, actor);
 }
 
-void func_8025595C(Actor* actor) {
+void func_8025595C(void* data) {
+    Actor* actor = data;
+
     func_802552EC(0, actor);
 }
 
@@ -525,7 +534,9 @@ void func_8025597C(Actor* actor) {
     func_802550BC(1, actor);
 }
 
-void func_8025599C(Actor* actor) {
+void func_8025599C(void* data) {
+    Actor* actor = data;
+
     func_802552EC(1, actor);
 }
 
@@ -651,7 +662,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
     }
 }
 
-s32 update_enemy_shadows(void) {
+void update_enemy_shadows(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 i;
 
@@ -659,8 +670,6 @@ s32 update_enemy_shadows(void) {
         update_actor_shadow(0, battleStatus->enemyActors[i]);
     }
 }
-
-void update_player_actor_shadow(void);
 
 void update_hero_shadows(void) {
     update_actor_shadow(1, gBattleStatus.partnerActor);
@@ -674,19 +683,21 @@ INCLUDE_ASM(s32, "182B30", func_80255FE0);
 
 INCLUDE_ASM(s32, "182B30", func_802571F0);
 
-void func_80257B28(s32 arg0) {
-    func_80255FE0(0, arg0);
+void func_80257B28(void* data) {
+    func_80255FE0(0, data);
 }
 
-void func_80257B48(s32 arg0) {
-    func_80255FE0(1, arg0);
+void func_80257B48(void* data) {
+    func_80255FE0(1, data);
 }
 
-void func_80257B68(Actor* actor) {
+void func_80257B68(void* data) {
+    Actor* actor = data;
+
     func_802571F0(0, actor);
 }
 
-void func_80257B88(void) {
+void func_80257B88(void* data) {
     func_802571F0(1, gBattleStatus.partnerActor);
 }
 

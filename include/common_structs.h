@@ -1245,7 +1245,7 @@ typedef struct GameStatus {
 
 // PartnerAnims
 typedef struct PartnerAnimations {
-    /* 0x00 */ UNK_PTR anims[9];
+    /* 0x00 */ s32 anims[9];
 } PartnerAnimations; // size = 0x24
 
 typedef struct Shadow {
