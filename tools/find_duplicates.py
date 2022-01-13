@@ -124,6 +124,11 @@ def diff_syms(qb, tb):
     if len(tb[1]) < 8:
         return 0
 
+    # The minimum edit distance for two strings of different lengths is `abs(l1 - l2)`
+    # Quickly check if it's impossible to beat the threshold. If it is, then return 0
+    l1, l2 = len(qb[0]), len(tb[0])
+    if abs(l1 - l2) / (l1 + l2) > 1.0 - args.threshold:
+        return 0
     r = ratio(qb[0], tb[0])
 
     if r == 1.0 and qb[1] != tb[1]:
@@ -261,36 +266,38 @@ def do_cross_query():
     ccount = Counter()
     clusters = []
 
+    sym_bytes = {}
     for sym_name in map_syms:
         if not sym_name.startswith("D_") and \
            not sym_name.startswith("_binary") and \
            not sym_name.startswith("jtbl_") and \
            not re.match(r"L[0-9A-F]{8}_[0-9A-F]{5,6}", sym_name):
             if get_symbol_length(sym_name) > 16:
-                query_bytes = get_symbol_bytes(map_offsets, sym_name)
+                sym_bytes[sym_name] = get_symbol_bytes(map_offsets, sym_name)
 
-                cluster_match = False
-                for cluster in clusters:
-                    cluster_first = cluster[0]
-                    cluster_score = get_pair_score(query_bytes, cluster_first)
-                    if cluster_score >= args.threshold:
-                        cluster_match = True
-                        if sym_name.startswith("func") and not cluster_first.startswith("func"):
-                            ccount[sym_name] = ccount[cluster_first]
-                            del ccount[cluster_first]
-                            cluster_first = sym_name
-                            cluster.insert(0, cluster_first)
-                        else:
-                            cluster.append(sym_name)
+    for sym_name, query_bytes in sym_bytes.items():
+        cluster_match = False
+        for cluster in clusters:
+            cluster_first = cluster[0]
+            cluster_score = diff_syms(query_bytes, sym_bytes[cluster_first])
+            if cluster_score >= args.threshold:
+                cluster_match = True
+                if sym_name.startswith("func") and not cluster_first.startswith("func"):
+                    ccount[sym_name] = ccount[cluster_first]
+                    del ccount[cluster_first]
+                    cluster_first = sym_name
+                    cluster.insert(0, cluster_first)
+                else:
+                    cluster.append(sym_name)
 
-                        if cluster_first.startswith("func"):
-                            ccount[cluster_first] += 1
+                if cluster_first.startswith("func"):
+                    ccount[cluster_first] += 1
 
-                        #if len(cluster) % 10 == 0 and len(cluster) >= 10:
-                        print(f"Cluster {cluster_first} grew to size {len(cluster)} - {sym_name}: {str(cluster_score)}")
-                        break
-                if not cluster_match:
-                    clusters.append([sym_name])
+                #if len(cluster) % 10 == 0 and len(cluster) >= 10:
+                print(f"Cluster {cluster_first} grew to size {len(cluster)} - {sym_name}: {str(cluster_score)}")
+                break
+        if not cluster_match:
+            clusters.append([sym_name])
     print(ccount.most_common(100))
 
 
