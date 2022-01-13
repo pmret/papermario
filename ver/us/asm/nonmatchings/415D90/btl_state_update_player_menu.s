@@ -290,8 +290,8 @@ glabel btl_state_update_player_menu
 /* 41AB3C 802A5DAC 3C03802B */  lui       $v1, %hi(main_battle_menu_iconScripts)
 /* 41AB40 802A5DB0 2463D078 */  addiu     $v1, $v1, %lo(main_battle_menu_iconScripts)
 /* 41AB44 802A5DB4 00142080 */  sll       $a0, $s4, 2
-/* 41AB48 802A5DB8 3C07802B */  lui       $a3, %hi(D_802AB388)
-/* 41AB4C 802A5DBC 24E7B388 */  addiu     $a3, $a3, %lo(D_802AB388)
+/* 41AB48 802A5DB8 3C07802B */  lui       $a3, %hi(battle_menu_ItemHudScripts)
+/* 41AB4C 802A5DBC 24E7B388 */  addiu     $a3, $a3, %lo(battle_menu_ItemHudScripts)
 /* 41AB50 802A5DC0 00833021 */  addu      $a2, $a0, $v1
 /* 41AB54 802A5DC4 8CE20000 */  lw        $v0, ($a3)
 /* 41AB58 802A5DC8 24090002 */  addiu     $t1, $zero, 2
@@ -419,9 +419,9 @@ glabel btl_state_update_player_menu
 /* 41AD1C 802A5F8C 24420001 */  addiu     $v0, $v0, 1
 /* 41AD20 802A5F90 000210C0 */  sll       $v0, $v0, 3
 /* 41AD24 802A5F94 008C3021 */  addu      $a2, $a0, $t4
-/* 41AD28 802A5F98 3C01802B */  lui       $at, %hi(D_802AB368)
+/* 41AD28 802A5F98 3C01802B */  lui       $at, %hi(battle_menu_HammerHudScripts)
 /* 41AD2C 802A5F9C 00220821 */  addu      $at, $at, $v0
-/* 41AD30 802A5FA0 8C22B368 */  lw        $v0, %lo(D_802AB368)($at)
+/* 41AD30 802A5FA0 8C22B368 */  lw        $v0, %lo(battle_menu_HammerHudScripts)($at)
 /* 41AD34 802A5FA4 008B2821 */  addu      $a1, $a0, $t3
 /* 41AD38 802A5FA8 ACC20000 */  sw        $v0, ($a2)
 /* 41AD3C 802A5FAC 00871021 */  addu      $v0, $a0, $a3
@@ -431,9 +431,9 @@ glabel btl_state_update_player_menu
 /* 41AD4C 802A5FBC 00881021 */  addu      $v0, $a0, $t0
 /* 41AD50 802A5FC0 AC430000 */  sw        $v1, ($v0)
 /* 41AD54 802A5FC4 82C2007F */  lb        $v0, 0x7f($s6)
-/* 41AD58 802A5FC8 3C03802B */  lui       $v1, %hi(D_802AB368)
+/* 41AD58 802A5FC8 3C03802B */  lui       $v1, %hi(battle_menu_HammerHudScripts)
 /* 41AD5C 802A5FCC 1C400008 */  bgtz      $v0, .L802A5FF0
-/* 41AD60 802A5FD0 2463B368 */   addiu    $v1, $v1, %lo(D_802AB368)
+/* 41AD60 802A5FD0 2463B368 */   addiu    $v1, $v1, %lo(battle_menu_HammerHudScripts)
 /* 41AD64 802A5FD4 8C620000 */  lw        $v0, ($v1)
 /* 41AD68 802A5FD8 ACC20000 */  sw        $v0, ($a2)
 /* 41AD6C 802A5FDC 24020044 */  addiu     $v0, $zero, 0x44
@@ -476,8 +476,8 @@ glabel btl_state_update_player_menu
 /* 41ADEC 802A605C 00141880 */   sll      $v1, $s4, 2
 /* 41ADF0 802A6060 3C04802B */  lui       $a0, %hi(main_battle_menu_iconScripts)
 /* 41ADF4 802A6064 2484D078 */  addiu     $a0, $a0, %lo(main_battle_menu_iconScripts)
-/* 41ADF8 802A6068 3C06802B */  lui       $a2, %hi(D_802AB390)
-/* 41ADFC 802A606C 24C6B390 */  addiu     $a2, $a2, %lo(D_802AB390)
+/* 41ADF8 802A6068 3C06802B */  lui       $a2, %hi(battle_menu_StarPowerHudScripts)
+/* 41ADFC 802A606C 24C6B390 */  addiu     $a2, $a2, %lo(battle_menu_StarPowerHudScripts)
 /* 41AE00 802A6070 00642821 */  addu      $a1, $v1, $a0
 /* 41AE04 802A6074 8CC20000 */  lw        $v0, ($a2)
 /* 41AE08 802A6078 24070008 */  addiu     $a3, $zero, 8

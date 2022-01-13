@@ -22,8 +22,26 @@ extern HudElementAnim HudScript_LakilesterDisabled[];
 extern HudElementAnim HudScript_PartnerA[];
 extern HudElementAnim HudScript_PartnerADisabled[];
 
+extern HudElementAnim HudScript_MenuBoots1[];
+extern HudElementAnim HudScript_MenuBoots1Disabled[];
+extern HudElementAnim HudScript_MenuBoots2[];
+extern HudElementAnim HudScript_MenuBoots2Disabled[];
+extern HudElementAnim HudScript_MenuBoots3[];
+extern HudElementAnim HudScript_MenuBoots3Disabled[];
+
+extern HudElementAnim HudScript_MenuHammer1[];
+extern HudElementAnim HudScript_MenuHammer1Disabled[];
+extern HudElementAnim HudScript_MenuHammer2[];
+extern HudElementAnim HudScript_MenuHammer2Disabled[];
+extern HudElementAnim HudScript_MenuHammer3[];
+extern HudElementAnim HudScript_MenuHammer3Disabled[];
+
+extern HudElementAnim HudScript_MenuItem[];
+extern HudElementAnim HudScript_MenuItemDisabled[];
+
 extern HudElementAnim HudScript_MenuStarPower[];
 extern HudElementAnim HudScript_MenuStarPowerDisabled[];
+
 extern HudElementAnim HudScript_Eldstar[];
 extern HudElementAnim HudScript_EldstarDisabled[];
 extern HudElementAnim HudScript_Mamar[];
@@ -122,13 +140,21 @@ s16 D_802AB340[] = { 0x001C, 0x0028 };
 
 s16 D_802AB344[] = { 0, -2 };
 
-s32 battle_menu_iconScripts[] = { 0x8010876C, 0x8010876C, 0x80108744, 0x8010876C, 0x80108794, 0x801087BC, 0x801087E4, 0x8010880C };
+HudElementAnim* battle_menu_iconScripts[] = {
+    HudScript_MenuBoots1Disabled, HudScript_MenuBoots1Disabled,
+    HudScript_MenuBoots1,HudScript_MenuBoots1Disabled,
+    HudScript_MenuBoots2, HudScript_MenuBoots2Disabled,
+    HudScript_MenuBoots3, HudScript_MenuBoots3Disabled };
 
-s32 D_802AB368[] = { 0x8010885C, 0x8010885C, 0x80108834, 0x8010885C, 0x80108884, 0x801088AC, 0x801088D4, 0x801088FC };
+HudElementAnim* battle_menu_HammerHudScripts[] = {
+    HudScript_MenuHammer1Disabled, HudScript_MenuHammer1Disabled,
+    HudScript_MenuHammer1, HudScript_MenuHammer1Disabled,
+    HudScript_MenuHammer2, HudScript_MenuHammer2Disabled,
+    HudScript_MenuHammer3, HudScript_MenuHammer3Disabled };
 
-s32 D_802AB388[] = { 0x80108924, 0x8010894C };
+HudElementAnim* battle_menu_ItemHudScripts[] = { HudScript_MenuItem, HudScript_MenuItemDisabled };
 
-HudElementAnim* D_802AB390[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
+HudElementAnim* battle_menu_StarPowerHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
 
 HudElementAnim* StarPowerHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled, HudScript_Eldstar, HudScript_EldstarDisabled,
     HudScript_Mamar, HudScript_MamarDisabled, HudScript_Skolar, HudScript_SkolarDisabled,

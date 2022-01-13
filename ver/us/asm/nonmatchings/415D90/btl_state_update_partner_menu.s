@@ -325,8 +325,8 @@ glabel btl_state_update_partner_menu
 /* 41D404 802A8674 24040035 */   addiu    $a0, $zero, 0x35
 /* 41D408 802A8678 10400018 */  beqz      $v0, .L802A86DC
 /* 41D40C 802A867C 2407000B */   addiu    $a3, $zero, 0xb
-/* 41D410 802A8680 3C06802B */  lui       $a2, %hi(D_802AB390)
-/* 41D414 802A8684 24C6B390 */  addiu     $a2, $a2, %lo(D_802AB390)
+/* 41D410 802A8680 3C06802B */  lui       $a2, %hi(battle_menu_StarPowerHudScripts)
+/* 41D414 802A8684 24C6B390 */  addiu     $a2, $a2, %lo(battle_menu_StarPowerHudScripts)
 /* 41D418 802A8688 8CC40000 */  lw        $a0, ($a2)
 /* 41D41C 802A868C 8EC5002C */  lw        $a1, 0x2c($s6)
 /* 41D420 802A8690 96830070 */  lhu       $v1, 0x70($s4)
