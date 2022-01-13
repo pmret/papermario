@@ -76,8 +76,8 @@ glabel status_menu_draw_stat
 /* 813F8 800E7F48 24110001 */  addiu     $s1, $zero, 1
 .L800E7F4C:
 /* 813FC 800E7F4C 00021080 */  sll       $v0, $v0, 2
-/* 81400 800E7F50 3C08800F */  lui       $t0, %hi(gDigitHudScripts)
-/* 81404 800E7F54 25087F80 */  addiu     $t0, $t0, %lo(gDigitHudScripts)
+/* 81400 800E7F50 3C08800F */  lui       $t0, %hi(DigitHudScripts)
+/* 81404 800E7F54 25087F80 */  addiu     $t0, $t0, %lo(DigitHudScripts)
 /* 81408 800E7F58 00481021 */  addu      $v0, $v0, $t0
 /* 8140C 800E7F5C 8C450000 */  lw        $a1, ($v0)
 /* 81410 800E7F60 0C0511FF */  jal       set_hud_element_anim
@@ -128,8 +128,8 @@ glabel status_menu_draw_stat
 /* 814B4 800E8004 2510001A */   addiu    $s0, $t0, 0x1a
 /* 814B8 800E8008 27B70010 */  addiu     $s7, $sp, 0x10
 /* 814BC 800E800C 26D5FFFF */  addiu     $s5, $s6, -1
-/* 814C0 800E8010 3C1E800F */  lui       $fp, %hi(gDigitHudScripts)
-/* 814C4 800E8014 27DE7F80 */  addiu     $fp, $fp, %lo(gDigitHudScripts)
+/* 814C0 800E8010 3C1E800F */  lui       $fp, %hi(DigitHudScripts)
+/* 814C4 800E8014 27DE7F80 */  addiu     $fp, $fp, %lo(DigitHudScripts)
 .L800E8018:
 /* 814C8 800E8018 02F21021 */  addu      $v0, $s7, $s2
 /* 814CC 800E801C 80420000 */  lb        $v0, ($v0)

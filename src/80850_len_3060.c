@@ -2,7 +2,7 @@
 #include "hud_element.h"
 
 extern s32 TimesHudScript;
-extern s32 gDigitHudScripts[10];
+extern s32 DigitHudScripts[10];
 
 extern HudElementAnim HudScript_StatusHP[];
 extern HudElementAnim HudScript_StatusHeart[];
@@ -434,7 +434,7 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
         // Once we have encountered our first non-zero digit, we need to keep drawing the remaining digits
         if (digit != 0 || keepDrawing || (i == numDigits - 1)) {
             keepDrawing = TRUE;
-            set_hud_element_anim(iconID, gDigitHudScripts[digit]);
+            set_hud_element_anim(iconID, DigitHudScripts[digit]);
             set_hud_element_render_pos(iconID, x, y2);
             clear_hud_element_flags(iconID, 2);
             draw_hud_element_2(iconID);

@@ -111,20 +111,20 @@ void _use_partner_ability(void);
 
 // Partner icons
 HudElementAnim* wPartnerHudScripts[] = {
-    HudScript_Partner0, HudScript_Goombario, HudScript_Kooper, HudScript_Bombette,
-    HudScript_Parakarry, HudScript_Partner0, HudScript_Watt, HudScript_Sushie,
-    HudScript_Lakilester, HudScript_Bow, HudScript_PartnerA, HudScript_PartnerA,
-    HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA,
+    &HudScript_Partner0, &HudScript_Goombario, &HudScript_Kooper, &HudScript_Bombette,
+    &HudScript_Parakarry, &HudScript_Partner0, &HudScript_Watt, &HudScript_Sushie,
+    &HudScript_Lakilester, &HudScript_Bow, &HudScript_PartnerA, &HudScript_PartnerA,
+    &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA,
 };
 HudElementAnim* wDisabledPartnerHudScripts[] = {
-    HudScript_Partner0Disabled, HudScript_GoombarioDisabled, HudScript_KooperDisabled, HudScript_BombetteDisabled,
-    HudScript_ParakarryDisabled, HudScript_Partner0Disabled, HudScript_WattDisabled, HudScript_SushieDisabled,
-    HudScript_LakilesterDisabled, HudScript_BowDisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled,
-    HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled,
+    &HudScript_Partner0Disabled, &HudScript_GoombarioDisabled, &HudScript_KooperDisabled, &HudScript_BombetteDisabled,
+    &HudScript_ParakarryDisabled, &HudScript_Partner0Disabled, &HudScript_WattDisabled, &HudScript_SushieDisabled,
+    &HudScript_LakilesterDisabled, &HudScript_BowDisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled,
+    &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled,
 };
-HudElementAnim* gDigitHudScripts[] = {
-    HudScript_StatusDigit0, HudScript_StatusDigit1, HudScript_StatusDigit2, HudScript_StatusDigit3, HudScript_StatusDigit4,
-    HudScript_StatusDigit5, HudScript_StatusDigit6, HudScript_StatusDigit7, HudScript_StatusDigit8, HudScript_StatusDigit9,
+HudElementAnim* DigitHudScripts[] = {
+    &HudScript_StatusDigit0, &HudScript_StatusDigit1, &HudScript_StatusDigit2, &HudScript_StatusDigit3, &HudScript_StatusDigit4,
+    &HudScript_StatusDigit5, &HudScript_StatusDigit6, &HudScript_StatusDigit7, &HudScript_StatusDigit8, &HudScript_StatusDigit9,
 };
 HudElementAnim* TimesHudScript = &HudScript_StatusTimes;
 HudElementAnim* SlashHudScript = &HudScript_StatusSlash;

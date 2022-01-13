@@ -1789,8 +1789,8 @@ glabel btl_state_update_player_menu
 /* 41C094 802A7304 24070048 */  addiu     $a3, $zero, 0x48
 /* 41C098 802A7308 240AFFFE */  addiu     $t2, $zero, -2
 /* 41C09C 802A730C 24090001 */  addiu     $t1, $zero, 1
-/* 41C0A0 802A7310 3C08802B */  lui       $t0, %hi(D_802AB398)
-/* 41C0A4 802A7314 2508B398 */  addiu     $t0, $t0, %lo(D_802AB398)
+/* 41C0A0 802A7310 3C08802B */  lui       $t0, %hi(StarPowerHudScripts)
+/* 41C0A4 802A7314 2508B398 */  addiu     $t0, $t0, %lo(StarPowerHudScripts)
 /* 41C0A8 802A7318 3C06802B */  lui       $a2, %hi(battle_menu_moveOptionIconScripts)
 /* 41C0AC 802A731C 24C6D260 */  addiu     $a2, $a2, %lo(battle_menu_moveOptionIconScripts)
 .L802A7320:

@@ -24,6 +24,24 @@ extern HudElementAnim HudScript_PartnerADisabled[];
 
 extern HudElementAnim HudScript_MenuStarPower[];
 extern HudElementAnim HudScript_MenuStarPowerDisabled[];
+extern HudElementAnim HudScript_Eldstar[];
+extern HudElementAnim HudScript_EldstarDisabled[];
+extern HudElementAnim HudScript_Mamar[];
+extern HudElementAnim HudScript_MamarDisabled[];
+extern HudElementAnim HudScript_Skolar[];
+extern HudElementAnim HudScript_SkolarDisabled[];
+extern HudElementAnim HudScript_Muskular[];
+extern HudElementAnim HudScript_MuskularDisabled[];
+extern HudElementAnim HudScript_Misstar[];
+extern HudElementAnim HudScript_MisstarDisabled[];
+extern HudElementAnim HudScript_Klevar[];
+extern HudElementAnim HudScript_KlevarDisabled[];
+extern HudElementAnim HudScript_Kalmar[];
+extern HudElementAnim HudScript_KalmarDisabled[];
+extern HudElementAnim HudScript_StarBeam[];
+extern HudElementAnim HudScript_StarBeamDisabled[];
+extern HudElementAnim HudScript_PeachBeam[];
+extern HudElementAnim HudScript_PeachBeamDisabled[];
 
 extern u8 D_802AD000;
 extern u8 D_802AD001;
@@ -101,13 +119,18 @@ s32 D_802AB368[] = { 0x8010885C, 0x8010885C, 0x80108834, 0x8010885C, 0x80108884,
 
 s32 D_802AB388[] = { 0x80108924, 0x8010894C };
 
-s32 D_802AB390[] = { &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled };
+HudElementAnim* D_802AB390[] = { &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled };
 
-s32 D_802AB398[] = { &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled, 0x80107990, 0x801079BC, 0x801079E8, 0x80107A14, 0x80107A40, 0x80107A6C, 0x80107A98, 0x80107AC4, 0x80107AF0, 0x80107B1C, 0x80107B48, 0x80107B74, 0x80107BA0, 0x80107BCC, 0x80107BF8, 0x80107C24, 0x80107C50, 0x80107C7C, &HudScript_MenuStarPower, 0x8010899C, &HudScript_MenuStarPower, 0x8010899C };
+HudElementAnim* StarPowerHudScripts[] = { &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled, &HudScript_Eldstar, &HudScript_EldstarDisabled, 
+    &HudScript_Mamar, &HudScript_MamarDisabled, &HudScript_Skolar, &HudScript_SkolarDisabled,
+    &HudScript_Muskular, &HudScript_MuskularDisabled, &HudScript_Misstar, &HudScript_MisstarDisabled,
+    &HudScript_Klevar, &HudScript_KlevarDisabled, &HudScript_Kalmar, &HudScript_KalmarDisabled,
+    &HudScript_StarBeam, &HudScript_StarBeamDisabled, &HudScript_PeachBeam, &HudScript_PeachBeamDisabled,
+    &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled, &HudScript_MenuStarPower, &HudScript_MenuStarPowerDisabled };
 
-s32* D_802AB3F8[] = { &HudScript_Partner0, &HudScript_Goombario, &HudScript_Kooper, &HudScript_Bombette, &HudScript_Parakarry, &HudScript_Partner0, &HudScript_Watt, &HudScript_Sushie, &HudScript_Lakilester, &HudScript_Bow, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA };
+HudElementAnim* D_802AB3F8[] = { &HudScript_Partner0, &HudScript_Goombario, &HudScript_Kooper, &HudScript_Bombette, &HudScript_Parakarry, &HudScript_Partner0, &HudScript_Watt, &HudScript_Sushie, &HudScript_Lakilester, &HudScript_Bow, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA, &HudScript_PartnerA };
 
-s32* D_802AB438[] = { &HudScript_Partner0Disabled, &HudScript_GoombarioDisabled, &HudScript_KooperDisabled, &HudScript_BombetteDisabled, &HudScript_ParakarryDisabled, &HudScript_Partner0Disabled, &HudScript_WattDisabled, &HudScript_SushieDisabled, &HudScript_LakilesterDisabled, &HudScript_BowDisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled };
+HudElementAnim* D_802AB438[] = { &HudScript_Partner0Disabled, &HudScript_GoombarioDisabled, &HudScript_KooperDisabled, &HudScript_BombetteDisabled, &HudScript_ParakarryDisabled, &HudScript_Partner0Disabled, &HudScript_WattDisabled, &HudScript_SushieDisabled, &HudScript_LakilesterDisabled, &HudScript_BowDisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled, &HudScript_PartnerADisabled };
 
 s32 D_802AB478[] = { 0x80292200 };
 
@@ -679,43 +702,43 @@ s32 can_btl_state_update_switch_to_player(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
-    if (battleStatus->flags2 & 2) {
+    if (battleStatus->flags2 & BS_FLAGS2_2) {
         return FALSE;
     } else {
         s8 debuff = player->debuff;
-        s32 ret = player->koStatus == 0xD;
+        s32 playerCantMove = player->koStatus == STATUS_DAZE;
 
-        if (debuff == 9) {
-            ret = FALSE;
+        if (debuff == STATUS_POISON) {
+            playerCantMove = FALSE;
         }
-        if (debuff == 10) {
-            ret = FALSE;
+        if (debuff == STATUS_SHRINK) {
+            playerCantMove = FALSE;
         }
-        if (debuff == 6) {
-            ret = TRUE;
+        if (debuff == STATUS_SLEEP) {
+            playerCantMove = TRUE;
         }
-        if (debuff == 3) {
-            ret = TRUE;
+        if (debuff == STATUS_FEAR) {
+            playerCantMove = TRUE;
         }
-        if (debuff == 4) {
-            ret = TRUE;
+        if (debuff == STATUS_DIZZY) {
+            playerCantMove = TRUE;
         }
-        if (debuff == 5) {
-            ret = TRUE;
+        if (debuff == STATUS_PARALYZE) {
+            playerCantMove = TRUE;
         }
-        if (debuff == 7) {
-            ret = TRUE;
+        if (debuff == STATUS_FROZEN) {
+            playerCantMove = TRUE;
         }
-        if (debuff == 8) {
-            ret = TRUE;
+        if (debuff == STATUS_STOP) {
+            playerCantMove = TRUE;
         }
-        if (player->stoneStatus == 0xC) {
-            ret = TRUE;
+        if (player->stoneStatus == STATUS_STONE) {
+            playerCantMove = TRUE;
         }
         if (battleStatus->outtaSightActive) {
-            ret = TRUE;
+            playerCantMove = TRUE;
         }
-        return !ret;
+        return !playerCantMove;
     }
 }
 
@@ -723,40 +746,40 @@ s32 func_802A58D0(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     s8 partnerDebuff;
-    s32 ret;
+    s32 partnerCantMove;
 
-    if (battleStatus->flags2 & 4 || partner == PARTNER_NONE || partner->flags & 0x200000) {
+    if (battleStatus->flags2 & BS_FLAGS2_4 || partner == PARTNER_NONE || partner->flags & 0x200000) {
         return FALSE;
     }
 
     partnerDebuff = partner->debuff;
-    ret = partner->koStatus == 0xD;
+    partnerCantMove = partner->koStatus == STATUS_DAZE;
 
-    if (partnerDebuff == 9) {
-        ret = FALSE;
+    if (partnerDebuff == STATUS_POISON) {
+        partnerCantMove = FALSE;
     }
-    if (partnerDebuff == 10) {
-        ret = FALSE;
+    if (partnerDebuff == STATUS_SHRINK) {
+        partnerCantMove = FALSE;
     }
-    if (partnerDebuff == 6) {
-        ret = TRUE;
+    if (partnerDebuff == STATUS_SLEEP) {
+        partnerCantMove = TRUE;
     }
-    if (partnerDebuff == 3) {
-        ret = TRUE;
+    if (partnerDebuff == STATUS_FEAR) {
+        partnerCantMove = TRUE;
     }
-    if (partnerDebuff == 5) {
-        ret = TRUE;
+    if (partnerDebuff == STATUS_PARALYZE) {
+        partnerCantMove = TRUE;
     }
-    if (partnerDebuff == 7) {
-        ret = TRUE;
+    if (partnerDebuff == STATUS_FROZEN) {
+        partnerCantMove = TRUE;
     }
-    if (partnerDebuff == 8) {
-        ret = TRUE;
+    if (partnerDebuff == STATUS_STOP) {
+        partnerCantMove = TRUE;
     }
-    if (partner->stoneStatus == 0xC) {
-        ret = TRUE;
+    if (partner->stoneStatus == STATUS_STONE) {
+        partnerCantMove = TRUE;
     }
-    return !ret;
+    return !partnerCantMove;
 }
 
 INCLUDE_ASM(s32, "415D90", btl_state_update_player_menu);
@@ -883,7 +906,7 @@ void btl_state_draw_partner_menu(void) {
 }
 
 s32 func_802A9B30(void) {
-    return (gBattleStatus.flags2 & 4) <= 0;
+    return (gBattleStatus.flags2 & BS_FLAGS2_4) <= 0;
 }
 
 INCLUDE_ASM(s32, "415D90", btl_state_update_peach_menu);

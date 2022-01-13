@@ -63,8 +63,8 @@ glabel status_menu_draw_number
 /* 81234 800E7D84 0260902D */   daddu    $s2, $s3, $zero
 /* 81238 800E7D88 27B60010 */  addiu     $s6, $sp, 0x10
 /* 8123C 800E7D8C 26B0FFFF */  addiu     $s0, $s5, -1
-/* 81240 800E7D90 3C17800F */  lui       $s7, %hi(gDigitHudScripts)
-/* 81244 800E7D94 26F77F80 */  addiu     $s7, $s7, %lo(gDigitHudScripts)
+/* 81240 800E7D90 3C17800F */  lui       $s7, %hi(DigitHudScripts)
+/* 81244 800E7D94 26F77F80 */  addiu     $s7, $s7, %lo(DigitHudScripts)
 .L800E7D98:
 /* 81248 800E7D98 02D21021 */  addu      $v0, $s6, $s2
 /* 8124C 800E7D9C 80420000 */  lb        $v0, ($v0)
