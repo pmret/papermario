@@ -20,7 +20,6 @@ BSS unkPartnerStruct D_802BFF30;
 
 f32 get_player_normal_pitch(void);
 void partner_kill_ability_script(void);
-f64 fabs(f64 val);
 
 void func_802BD100_320C50(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;

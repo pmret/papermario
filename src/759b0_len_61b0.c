@@ -1,10 +1,10 @@
 #include "common.h"
 
-extern s32 D_8010C970;
 extern s32 D_8010C94C;
+extern s32 D_8010C968;
+extern s32 D_8010C970;
 extern s32 D_8010C974;
 extern s32 D_8010C98C;
-extern s32 D_8010C968;
 
 PlayerStatus* gPlayerStatusPtr = &gPlayerStatus; // maybe wPlayerStatus
 
@@ -84,30 +84,24 @@ s32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f3
     f32 cosTheta;
     s32 colliderID;
     f32 deltaX,deltaZ;
-    f32 theta, sinTheta, smallerRadius, minDepth, hitYAhead, hitYBehindRight;
+    f32 theta, sinTheta, minDepth, hitYAhead, hitYBehindRight;
 
     hasCollision = FALSE;
-
     x = *posX;
     y = *posY;
     z = *posZ;
-
-    smallerRadius = radius;
-
     D_8010C970 = y;
     D_8010C94C = *posY;
     D_8010C974 = *posY;
-
-    smallerRadius /= 2.5;
+    radius /= 2.5;
     hitYBehindLeft = hitYBehindRight = hitYAhead = -32767.0f;
-
     minDepth = fabsf(*hitDepth);
-    theta = (clamp_angle(yaw + 0.0f) * TAU) / 360.0f;
+
+    theta = clamp_angle(yaw + 0.0f) * TAU / 360.0f;
     sinTheta = sin_rad(theta);
     cosTheta = cos_rad(theta);
-
-    deltaX = smallerRadius * sinTheta;
-    deltaZ = -smallerRadius * cosTheta;
+    deltaX = radius * sinTheta;
+    deltaZ = -radius * cosTheta;
 
     startX = x + deltaX;
     startY = y;
@@ -126,12 +120,11 @@ s32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f3
         }
     }
 
-
     theta = clamp_angle(yaw + 120.0f) * TAU / 360.0f;
     sinTheta = sin_rad(theta);
     cosTheta = cos_rad(theta);
-    deltaX = smallerRadius * sinTheta;
-    deltaZ = -smallerRadius * cosTheta;
+    deltaX = radius * sinTheta;
+    deltaZ = -radius * cosTheta;
 
     startX = x + deltaX;
     startY = y;
@@ -153,8 +146,8 @@ s32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f3
     theta = clamp_angle(yaw - 120.0f) * TAU / 360.0f;
     sinTheta = sin_rad(theta);
     cosTheta = cos_rad(theta);
-    deltaX = smallerRadius * sinTheta;
-    deltaZ = -smallerRadius * cosTheta;
+    deltaX = radius * sinTheta;
+    deltaZ = -radius * cosTheta;
 
     startX = x + deltaX;
     startY = y;
@@ -169,7 +162,6 @@ s32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f3
             D_8010C968 = colliderID;
             D_8010C974 = hitYBehindLeft;
             minDepth = depth;
-
             hasCollision = TRUE;
         }
     }
@@ -218,7 +210,7 @@ s32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
     yaw = 0.0f;
 
     minDepth = fabsf(*hitDepth);
-    theta = (clamp_angle(yaw) * TAU) / 360.0f;
+    theta = clamp_angle(yaw) * TAU / 360.0f;
     sinTheta = sin_rad(theta);
     cosTheta = cos_rad(theta);
 
@@ -247,7 +239,6 @@ s32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
     theta = clamp_angle(yaw + 180.0f) * TAU / 360.0f;
     sinTheta = sin_rad(theta);
     cosTheta = cos_rad(theta);
-
     deltaX = radius * sinTheta;
     deltaZ = -radius * cosTheta;
 
@@ -393,7 +384,7 @@ s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
     s32 hitID;
     f32 temp;
 
-    theta = (yaw * 6.28318f) / 360.0f;
+    theta = (yaw * TAU) / 360.0f;
     deltaX = radius * sin_rad(theta);
     temp = -radius; // needed to match
     deltaZ = temp * cos_rad(theta);
@@ -639,7 +630,7 @@ s32 npc_test_move_complex_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z,
 
     radius *= 0.5f;
     startX = *x;
-    startY = *y + height -1.0f;
+    startY = *y + height - 1.0f;
     startZ = *z;
     if (npc_test_move_with_slipping(ignoreFlags, &startX, &startY, &startZ, fabsf(length), yaw, radius) >= 0) {
         *x = startX;

@@ -494,26 +494,28 @@ s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y
     f32 hitNx;
     f32 hitNy;
     f32 hitNz;
-    f32 sp5C;
-    f32 sp60;
+    f32 slipDx;
+    f32 slipDz;
     f32 depth;
     f32 radius;
     f32 depthDiff;
     f32 height;
     s32 ret;
     s32 raycastID;
-    f32 phi_f26;
-    f32 phi_f24;
-    f32 newvar, newvar2;
+    f32 targetDx;
+    f32 targetDz;
+    f32 dx, dz;
 
     radius = playerStatus->colliderDiameter * 0.5f;
     height = playerStatus->colliderHeight * 0.286f;
-    sin_cos_rad((yaw * 6.28318f) / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+
     depth = length + radius;
     cosTheta = -cosTheta;
     hitDepth = depth;
-    newvar = radius * sinTheta;
+    dx = radius * sinTheta;
     ret = -1;
+
     raycastID = player_raycast_general(0, *x, *y + 0.1, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
     if (raycastID >= 0 && hitDepth <= depth) {
         *arg6 = 1;
@@ -521,31 +523,32 @@ s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y
 
     depth = length + radius;
     hitDepth = depth;
-    newvar2 = radius * cosTheta;
+    dz = radius * cosTheta;
 
     raycastID = player_raycast_general(0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
-    phi_f26 = 0.0f;
-    phi_f24 = 0.0f;
+
+    targetDx = 0.0f;
+    targetDz = 0.0f;
 
     if ((raycastID >= 0) && (hitDepth <= depth)) {
         depthDiff = hitDepth - depth;
-        newvar = depthDiff * sinTheta;
-        newvar2 = depthDiff * cosTheta;
-        player_get_slip_vector(&sp5C, &sp60, 0.0f, 0.0f, hitNx, hitNz);
-        *x += newvar + sp5C;
-        *z += newvar2 + sp60;
+        dx = depthDiff * sinTheta;
+        dz = depthDiff * cosTheta;
+        player_get_slip_vector(&slipDx, &slipDz, 0.0f, 0.0f, hitNx, hitNz);
+        *x += dx + slipDx;
+        *z += dz + slipDz;
         ret = raycastID;
     }
-    *x += phi_f26;
-    *z += phi_f24;
+    *x += targetDx;
+    *z += targetDz;
     return ret;
 }
 
 void player_get_slip_vector(f32* outX, f32* outY, f32 x, f32 y, f32 nX, f32 nY) {
     f32 projectionLength = (x * nX) + (y * nY);
 
-    *outX = (x - (projectionLength * nX)) * 0.5f;
-    *outY = (y - (projectionLength * nY)) * 0.5f;
+    *outX = (x - projectionLength * nX) * 0.5f;
+    *outY = (y - projectionLength * nY) * 0.5f;
 }
 
 s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw) {
@@ -562,7 +565,6 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
     f32 slipDz;
     f32 radius;
     f32 height;
-    f32 depth, depth2;
     s32 hitID;
     f32 targetDx, targetDz;
     f32 dx, dz;
@@ -575,7 +577,7 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
     }
     radius = playerStatus->colliderDiameter * 0.5f;
 
-    sin_cos_rad((yaw * TAU) / 360.0f, &sinTheta, &cosTheta);
+    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
     cosTheta = -cosTheta;
     hitDepth = length + radius;
 
@@ -609,7 +611,6 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
     *z += targetDz;
     return ret;
 }
-
 
 void update_player(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -939,6 +940,7 @@ void check_for_ispy(void) {
         D_8010C93C();
     }
 }
+
 void func_800E0330(void) {
     if ((gPlayerStatusPtr->animFlags & PLAYER_STATUS_ANIM_FLAGS_100) && (D_8010C93C != NULL)) {
         func_802B7000_E225B0();
@@ -1139,10 +1141,6 @@ void check_for_interactables(void) {
         D_8010C958();
     }
 }
-
-
-// TODO: Remove after func_800E24F8 is matching.
-
 
 void func_802B71E8_E202F8(void);
 
