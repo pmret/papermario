@@ -200,7 +200,45 @@ INCLUDE_ASM(s32, "23680", func_800496B8);
 #define NAMESPACE base
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
-INCLUDE_ASM(s32, "23680", func_80049C04);
+void func_80049C04(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    f32 x, y, z;
+    f32 yaw;
+    s32 sp34;
+
+    if (aiSettings->unk_14 >= 0 && func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
+        x = npc->pos.x;
+        y = npc->pos.y;
+        z = npc->pos.z;
+        yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        if (!npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, aiSettings->chaseSpeed, yaw, npc->collisionHeight, npc->collisionRadius)) {
+            npc->yaw = yaw;
+            ai_enemy_play_sound(npc, 0x2F4, 0x200000);
+            fx_emote(0, npc, 0, (f32) npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &sp34);
+            if ((enemy->npcSettings->unk_2A & 1) != 0) {
+                script->functionTemp[0] = 0xA;
+                return;
+            }
+            script->functionTemp[0] = 0xC;
+            return;
+        }
+    }
+    if (npc->turnAroundYawAdjustment == 0) {
+        npc->duration--;
+        if (npc->duration <= 0) {
+            script->functionTemp[1]--;
+            if (script->functionTemp[1]) {
+                if (!(enemy->npcSettings->unk_2A & 0x10)) {
+                    npc->yaw = clamp_angle(npc->yaw + 180.0f);
+                }
+                npc->duration = (aiSettings->waitTime / 2) + rand_int(aiSettings->waitTime / 2 + 1);
+                return;
+            }
+            script->functionTemp[0] = 0;
+        }
+    }
+}
 
 void func_80049E3C(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -273,15 +311,10 @@ void func_80049F7C(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThin
 }
 
 void func_8004A124(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 sp28;
-    f32 x;
-    f32 y;
-    f32 z;
-    Npc* npc;
-    Enemy* enemy;
-
-    enemy = script->owner1.enemy;
-    npc = get_npc_unsafe(enemy->npcID);
+    f32 x, y, z;
 
     if (!func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
         fx_emote(2, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
