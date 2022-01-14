@@ -66,7 +66,7 @@ void func_802DDFF8(u32, s32, s32, s32, s32, s32, s32);
 f32 get_player_normal_pitch(void);
 
 s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length);
-void player_get_slip_vector(f32* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
+void player_get_slip_vector(f32* outX, f32* outY, f32 x, f32 y, f32 nX, f32 nY);
 s32 player_raycast_general(s32, f32, f32, f32, f32, f32, f32, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
 
 s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ, f32* outLength, f32* hitRx, f32* hitRz,
