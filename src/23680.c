@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "effects.h"
 
 INCLUDE_ASM(s32, "23680", spawn_drops);
 
