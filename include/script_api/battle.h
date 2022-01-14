@@ -175,6 +175,7 @@ ApiStatus RemovePlayerBuffs(Evt* script, s32 isInitialCall);
 ApiStatus SetPartAlpha(Evt* script, s32 isInitialCall);
 ApiStatus CreatePartShadow(Evt* script, s32 isInitialCall);
 ApiStatus RemovePartShadow(Evt* script, s32 isInitialCall);
+ApiStatus func_8026F60C(Evt* script, s32 isInitialCall);
 ApiStatus SetBattleVar(Evt* script, s32 isInitialCall);
 ApiStatus GetBattleVar(Evt* script, s32 isInitialCall);
 ApiStatus ResetAllActorSounds(Evt* script, s32 isInitialCall);

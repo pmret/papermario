@@ -3924,11 +3924,19 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4FEA50, c]
-    - [0x4FED30, c]
-    - [0x4FF010, c]
-    - [0x4FF0D0, c]
-    - [0x4FF1C0, data]
+    - [0x4FEA50, c, actor/hypergoomba]
+    - [0x4FED30, c, actor/hyper_paragoomba]
+    - [0x4FF010, c, actor/hyper_cleft]
+    - [0x4FF0D0, c, actor/tubbas_heart]
+    - [0x4FF1C0, c, actor/tubba_blubba]
+    - [0x4FF1C0, c, stage/arn_01]
+    - [0x4FF1C0, c, stage/arn_02]
+    - [0x4FF1C0, c, stage/arn_03]
+    - [0x4FF1C0, c, stage/arn_04]
+    - [0x4FF1C0, c, stage/arn_05]
+    - [0x4FF1C0, c, stage/arn_06]
+    - [0x4FF1C0, c, area]
+    - [0x4FF1C0]
   - dir: battle/area_dgb
     type: code
     start: 0x50F020

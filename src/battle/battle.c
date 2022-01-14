@@ -96,8 +96,8 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_arn),
         .name = "エリア ＡＲＮ",
-        .battles = 0x80228110,
-        .stages = 0x80228278,
+        .battles = &b_area_arn_formationTable,
+        .stages = &b_area_arn_stageTable,
     },
     {
         AREA(area_dgb),

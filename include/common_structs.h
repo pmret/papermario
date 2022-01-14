@@ -2161,6 +2161,7 @@ typedef struct PartnerActionStatus {
     /* 0x35C */ char unk_35C[0x4];
 } PartnerActionStatus; // size = 0x360
 
+// Effect 6B
 typedef struct Temp8025D160 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ char unk_04[8];
