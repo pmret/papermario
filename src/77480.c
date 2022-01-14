@@ -548,8 +548,6 @@ void player_get_slip_vector(f32* outX, f32* outY, f32 x, f32 y, f32 nX, f32 nY) 
     *outY = (y - (projectionLength * nY)) * 0.5f;
 }
 
-INCLUDE_ASM(s32, "77480", player_test_move_with_slipping);
-/*
 s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw) {
     f32 sinTheta;
     f32 cosTheta;
@@ -571,7 +569,6 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
     f32 depthDiff;
     s32 ret = -1;
 
-
     height = 0.0f;
     if ((playerStatus->flags & (PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FALLING)) == 0) {
         height = 10.01f;
@@ -579,17 +576,15 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
     radius = playerStatus->colliderDiameter * 0.5f;
 
     sin_cos_rad((yaw * TAU) / 360.0f, &sinTheta, &cosTheta);
-    depth = length + radius;
     cosTheta = -cosTheta;
-    hitDepth = depth;
+    hitDepth = length + radius;
 
     targetDx = length * sinTheta;
     targetDz = length * cosTheta;
 
     hitID = player_raycast_general(0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
-
-    if (hitID >= 0 && hitDepth <= depth) {
-        depthDiff = hitDepth - depth;
+    if (hitID >= 0 && (depthDiff = hitDepth, depthDiff <= length + radius)) {
+        depthDiff -= (length + radius);
         dx = depthDiff * sinTheta;
         dz = depthDiff * cosTheta;
         player_get_slip_vector(&slipDx, &slipDz, targetDx, targetDz, hitNx, hitNz);
@@ -598,10 +593,9 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
         ret = hitID;
     } else {
         height = playerStatus->colliderHeight * 0.75;
-
         hitID = player_raycast_general(0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
-        if (hitID >= 0 && hitDepth <= length + radius) {
-            depthDiff = hitDepth - (length + radius);
+        if (hitID >= 0 && (depthDiff = hitDepth, depthDiff <= length + radius)) {
+            depthDiff -= (length + radius);
             dx = depthDiff * sinTheta;
             dz = depthDiff * cosTheta;
             player_get_slip_vector(&slipDx, &slipDz, targetDx, targetDz, hitNx, hitNz);
@@ -615,7 +609,7 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
     *z += targetDz;
     return ret;
 }
-*/
+
 
 void update_player(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
