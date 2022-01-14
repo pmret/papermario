@@ -384,6 +384,7 @@ replace_funcs = {
     "DispatchEvent"             :{0:"ActorIDs", 1:"Events"},
 
     "EnableActorBlur"           :{0:"ActorIDs"},
+    "EnableActorGlow"           :{0:"ActorIDs", 1:"Bool"},
     "EnableIdleScript"          :{0:"ActorIDs"},
     "EnableNpcShadow"           :{0:"NpcIDs", 1:"Bool"},
     "EndActorSpeech"            :{0:"ActorIDs", 2:"CustomAnim", 3:"CustomAnim"},
