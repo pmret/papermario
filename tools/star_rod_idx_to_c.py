@@ -161,12 +161,12 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
         if struct["type"].startswith("Script"):
             if struct["type"] == "Script_Main":
                 name = "N(main)"
-                INCLUDES_NEEDED["forward"].append(f"EvtSource " + name + ";")
+                INCLUDES_NEEDED["forward"].append(f"EvtScript " + name + ";")
                 main_script_name = name
 
             # For PlayMusic script if using a separate header file
             #if afterHeader:
-            #    INCLUDES_NEEDED["forward"].append(f"EvtSource " + name + ";")
+            #    INCLUDES_NEEDED["forward"].append(f"EvtScript " + name + ";")
             #    afterHeader = False
             disasm_script.LOCAL_WORDS = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
             script_text = disasm_script.ScriptDisassembler(
@@ -192,7 +192,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 if "GotoMap" in script_text[4]:
                     map_, entryIdx = script_text[4].split("(",1)[1].split(")",1)[0].split(",")
                 if walkDistance and exitIdx and map_ and entryIdx:
-                    out += f"EvtSource {name} = EXIT_WALK_SCRIPT({walkDistance}, {exitIdx}, {map_}, {entryIdx});\n"
+                    out += f"EvtScript {name} = EXIT_WALK_SCRIPT({walkDistance}, {exitIdx}, {map_}, {entryIdx});\n"
                 else:
                     print(f"Unable to macro replace exit script {name}")
                     out += "\n".join(script_text) + "\n"

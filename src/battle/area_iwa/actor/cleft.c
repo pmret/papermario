@@ -7,10 +7,10 @@
 #define NAMESPACE b_area_iwa_cleft
 
 extern s32 N(idleAnimations_80218838)[];
-extern EvtSource N(init_802188D0);
-extern EvtSource N(idle_80218934);
-extern EvtSource N(takeTurn_8021A3EC);
-extern EvtSource N(handleEvent_80218C3C);
+extern EvtScript N(init_802188D0);
+extern EvtScript N(idle_80218934);
+extern EvtScript N(takeTurn_8021A3EC);
+extern EvtScript N(handleEvent_80218C3C);
 
 s32 N(defenseTable_80218710)[] = {
     ELEMENT_NORMAL, 2,
@@ -118,7 +118,7 @@ s32 N(idleAnimations_80218884)[] = {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-EvtSource N(init_802188D0) = {
+EvtScript N(init_802188D0) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80218934)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021A3EC)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80218C3C)))
@@ -127,12 +127,12 @@ EvtSource N(init_802188D0) = {
     EVT_END
 };
 
-EvtSource N(idle_80218934) = {
+EvtScript N(idle_80218934) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80218944) = {
+EvtScript N(80218944) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_cleft_default_run)
@@ -170,7 +170,7 @@ EvtSource N(80218944) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_80218C3C) = {
+EvtScript N(handleEvent_80218C3C) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -374,7 +374,7 @@ EvtSource N(handleEvent_80218C3C) = {
     EVT_END
 };
 
-EvtSource N(802197AC) = {
+EvtScript N(802197AC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
@@ -428,7 +428,7 @@ EvtSource N(802197AC) = {
     EVT_END
 };
 
-EvtSource N(80219BA0) = {
+EvtScript N(80219BA0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -536,7 +536,7 @@ EvtSource N(80219BA0) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_8021A3EC) = {
+EvtScript N(takeTurn_8021A3EC) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))
     EVT_IF_EQ(LW(0), 1)
         EVT_EXEC_WAIT(N(802197AC))

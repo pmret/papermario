@@ -273,7 +273,7 @@ s32 N(D_802A229C_72D84C)[8] = {
     0x0000008A, 0x0000008C, 0x00000085, 0x0000008A
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x00000096)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD

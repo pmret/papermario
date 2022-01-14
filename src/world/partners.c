@@ -97,7 +97,7 @@ extern s32 D_8010CFBC;
 extern s32 D_8010CFCC;
 
 extern struct player_path_element PlayerMoveHistory[40];
-extern EvtSource D_802C05CC_32579C;
+extern EvtScript D_802C05CC_32579C;
 
 typedef struct player_path_element{
     /* 0x00 */ s8 isJumping;

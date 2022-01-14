@@ -15,7 +15,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_24_tattle },
 };
 
-EvtSource N(80240600) = {
+EvtScript N(80240600) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), 53)
         EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
     EVT_ELSE
@@ -28,7 +28,7 @@ EvtSource N(80240600) = {
     EVT_END
 };
 
-EvtSource N(80240690) = {
+EvtScript N(80240690) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -69,18 +69,18 @@ EvtSource N(80240690) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_8024093C) = EXIT_WALK_SCRIPT(60,  0, "flo_08",  1);
+EvtScript N(exitWalk_8024093C) = EXIT_WALK_SCRIPT(60,  0, "flo_08",  1);
 
-EvtSource N(exitWalk_80240998) = EXIT_WALK_SCRIPT(60,  1, "flo_10",  0);
+EvtScript N(exitWalk_80240998) = EXIT_WALK_SCRIPT(60,  1, "flo_10",  0);
 
-EvtSource N(802409F4) = {
+EvtScript N(802409F4) = {
     EVT_BIND_TRIGGER(N(exitWalk_8024093C), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_80240998), TRIGGER_FLOOR_ABOVE, 4, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
@@ -171,7 +171,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(triggerCoord_80241718) = { 1.0f, 0.0f, -192.0f, 0.0f };
 
-EvtSource N(80241728) = {
+EvtScript N(80241728) = {
     EVT_SET(EVT_AREA_FLAG(31), 0)
     EVT_SET(EVT_AREA_FLAG(32), 0)
     EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))
@@ -181,7 +181,7 @@ EvtSource N(80241728) = {
     EVT_END
 };
 
-EvtSource N(updateTexturePan_802417A0) = {
+EvtScript N(updateTexturePan_802417A0) = {
     EVT_SET_GROUP(0)
     EVT_IF_EQ(EVT_VAR(5), 1)
         EVT_IF_EQ(EVT_VAR(6), 1)
@@ -202,7 +202,7 @@ extern const char N(flo_10_name_hack)[];
 
 // BUG: missing END_SPAWN_THREADs
 #ifdef NON_EQUIVALENT
-EvtSource N(8024183C) = {
+EvtScript N(8024183C) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(TranslateGroup, 100, 0, 45, 0)
     EVT_CALL(UseSettingsFrom, 0, 170, 0, 160)
@@ -242,7 +242,7 @@ EvtSource N(8024183C) = {
             EVT_END
 };
 #else
-EvtSource N(8024183C) = {
+EvtScript N(8024183C) = {
     EVT_CMD(EVT_OP_CALL, EVT_PTR(DisablePlayerInput), 1),
     EVT_CMD(EVT_OP_CALL, EVT_PTR(TranslateGroup), 100, 0, 45, 0),
     EVT_CMD(EVT_OP_CALL, EVT_PTR(UseSettingsFrom), 0, 170, 0, 160),
@@ -283,7 +283,7 @@ EvtSource N(8024183C) = {
         };
 #endif
 
-EvtSource N(80241ABC) = {
+EvtScript N(80241ABC) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), 49)
         EVT_CALL(EnableGroup, 94, 0)
         EVT_CALL(ModifyColliderFlags, 0, 30, 0x7FFFFE00)
@@ -407,7 +407,7 @@ static s32 N(pad_21A4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EA564, -325, 60, -140, 0, 154, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1393))
     EVT_CALL(MakeEntity, 0x802EA588, 325, 60, -140, 0, 163, MAKE_ENTITY_END)

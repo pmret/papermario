@@ -3,10 +3,10 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 
-extern EvtSource D_80299828;
-extern EvtSource D_8029AF08;
-extern EvtSource D_8029A76C;
-extern EvtSource D_8029B818;
+extern EvtScript D_80299828;
+extern EvtScript D_8029AF08;
+extern EvtScript D_8029A76C;
+extern EvtScript D_8029B818;
 
 ApiStatus GetDamageIntensity(Evt* script, s32 isInitialCall) {
     if (gBattleStatus.lastAttackDamage < 4) {
@@ -32,7 +32,7 @@ ApiStatus AddEffectOffset(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource D_80294720 = {
+EvtScript D_80294720 = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_LOOP(2)
         EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
@@ -87,7 +87,7 @@ EvtSource D_80294720 = {
     EVT_END
 };
 
-EvtSource D_80294AFC = {
+EvtScript D_80294AFC = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
@@ -107,7 +107,7 @@ EvtSource D_80294AFC = {
     EVT_END
 };
 
-EvtSource D_80294C68 = {
+EvtScript D_80294C68 = {
     EVT_SET(LW(10), LW(1))
     EVT_SET(LW(11), LW(2))
     EVT_SET(LW(12), LW(3))
@@ -154,7 +154,7 @@ EvtSource D_80294C68 = {
     EVT_END
 };
 
-EvtSource D_80294FE4 = {
+EvtScript D_80294FE4 = {
     EVT_SET(LW(10), LW(1))
     EVT_SET(LW(11), LW(2))
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
@@ -200,7 +200,7 @@ EvtSource D_80294FE4 = {
     EVT_END
 };
 
-EvtSource D_80295350 = {
+EvtScript D_80295350 = {
     EVT_SET(LW(10), LW(1))
     EVT_SET(LW(11), LW(2))
     EVT_SET(LW(12), LW(3))
@@ -253,7 +253,7 @@ EvtSource D_80295350 = {
     EVT_END
 };
 
-EvtSource D_80295744 = {
+EvtScript D_80295744 = {
     EVT_SET(LW(10), LW(1))
     EVT_SET(LW(11), LW(2))
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
@@ -300,7 +300,7 @@ EvtSource D_80295744 = {
     EVT_END
 };
 
-EvtSource D_80295AC0 = {
+EvtScript D_80295AC0 = {
     EVT_SET(LW(10), LW(1))
     EVT_SET(LW(11), LW(2))
     EVT_SET(LW(12), LW(3))
@@ -354,7 +354,7 @@ EvtSource D_80295AC0 = {
     EVT_END
 };
 
-EvtSource D_80295EC4 = {
+EvtScript D_80295EC4 = {
     EVT_SET(LW(6), LW(3))
     EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.80078125))
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LW(7), LW(8), LW(9))
@@ -374,7 +374,7 @@ EvtSource D_80295EC4 = {
     EVT_END
 };
 
-EvtSource D_80296014 = {
+EvtScript D_80296014 = {
     EVT_SET(LW(10), LW(1))
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
     EVT_IF_EQ(LW(1), 0)
@@ -400,7 +400,7 @@ EvtSource D_80296014 = {
     EVT_END
 };
 
-EvtSource D_8029621C = {
+EvtScript D_8029621C = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, LW(1))
     EVT_CHILD_THREAD
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LW(5), LW(6), LW(7))
@@ -548,7 +548,7 @@ EvtSource D_8029621C = {
     EVT_END
 };
 
-EvtSource D_80296C8C = {
+EvtScript D_80296C8C = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, LW(1))
     EVT_CALL(GetDamageIntensity)
     EVT_SWITCH(LW(0))
@@ -683,7 +683,7 @@ EvtSource D_80296C8C = {
     EVT_END
 };
 
-EvtSource D_802975C8 = {
+EvtScript D_802975C8 = {
     EVT_CALL(StartRumble, 6)
     EVT_SETF(LW(0), EVT_FLOAT(1.0))
     EVT_SETF(LW(1), EVT_FLOAT(1.0))
@@ -705,7 +705,7 @@ EvtSource D_802975C8 = {
     EVT_END
 };
 
-EvtSource D_802976E8 = {
+EvtScript D_802976E8 = {
     EVT_CALL(func_80269E80, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(0)
@@ -726,7 +726,7 @@ EvtSource D_802976E8 = {
     EVT_END
 };
 
-EvtSource D_802977BC = {
+EvtScript D_802977BC = {
     EVT_EXEC_WAIT(D_80296C8C)
     EVT_IF_NE(LW(2), 000000)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, LW(2))
@@ -736,7 +736,7 @@ EvtSource D_802977BC = {
     EVT_END
 };
 
-EvtSource D_80297814 = {
+EvtScript D_80297814 = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
     EVT_CALL(AddActorPos, -127, -2, 0, 0)
@@ -767,7 +767,7 @@ EvtSource D_80297814 = {
     EVT_END
 };
 
-EvtSource D_80297A38 = {
+EvtScript D_80297A38 = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LW(1))
     EVT_CALL(GetDamageIntensity)
     EVT_SWITCH(LW(0))
@@ -902,7 +902,7 @@ EvtSource D_80297A38 = {
     EVT_END
 };
 
-EvtSource D_80298374 = {
+EvtScript D_80298374 = {
     EVT_CALL(StartRumble, 6)
     EVT_SETF(LW(0), EVT_FLOAT(1.0))
     EVT_SETF(LW(1), EVT_FLOAT(1.0))
@@ -924,7 +924,7 @@ EvtSource D_80298374 = {
     EVT_END
 };
 
-EvtSource D_80298494 = {
+EvtScript D_80298494 = {
     EVT_CHILD_THREAD
         EVT_SET(LW(0), 0)
         EVT_LOOP(10)
@@ -939,7 +939,7 @@ EvtSource D_80298494 = {
     EVT_END
 };
 
-EvtSource D_80298520 = {
+EvtScript D_80298520 = {
     EVT_CHILD_THREAD
         EVT_SET(LW(0), 0)
         EVT_LOOP(10)
@@ -954,7 +954,7 @@ EvtSource D_80298520 = {
     EVT_END
 };
 
-EvtSource D_802985AC = {
+EvtScript D_802985AC = {
     EVT_CHILD_THREAD
         EVT_CALL(MakeLerp, 0, 2160, 60, 10)
         EVT_LABEL(1)
@@ -972,7 +972,7 @@ EvtSource D_802985AC = {
     EVT_END
 };
 
-EvtSource D_80298668 = {
+EvtScript D_80298668 = {
     EVT_CHILD_THREAD
         EVT_CALL(MakeLerp, 2160, 0, 60, 10)
         EVT_LABEL(1)
@@ -990,7 +990,7 @@ EvtSource D_80298668 = {
     EVT_END
 };
 
-EvtSource D_80298724 = {
+EvtScript D_80298724 = {
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(func_80269E80, LW(0))
     EVT_SWITCH(LW(0))
@@ -1029,7 +1029,7 @@ EvtSource D_80298724 = {
     EVT_END
 };
 
-EvtSource D_802988F0 = {
+EvtScript D_802988F0 = {
     EVT_EXEC_WAIT(D_80297A38)
     EVT_IF_NE(LW(2), 000000)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LW(2))
@@ -1039,7 +1039,7 @@ EvtSource D_802988F0 = {
     EVT_END
 };
 
-EvtSource D_80298948 = {
+EvtScript D_80298948 = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LW(0))
@@ -1079,7 +1079,7 @@ EvtSource D_80298948 = {
     EVT_END
 };
 
-EvtSource ForceNextTarget = {
+EvtScript ForceNextTarget = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
@@ -1122,7 +1122,7 @@ EvtSource ForceNextTarget = {
     EVT_END
 };
 
-EvtSource D_80298E20 = {
+EvtScript D_80298E20 = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2022)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(GetActorSize, ACTOR_SELF, LW(3), LW(4))
@@ -1159,7 +1159,7 @@ EvtSource D_80298E20 = {
     EVT_END
 };
 
-EvtSource DoNormalHit = {
+EvtScript DoNormalHit = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
     EVT_CALL(func_80269E80, LW(2))
     EVT_SWITCH(LW(2))
@@ -1301,7 +1301,7 @@ EvtSource DoNormalHit = {
     EVT_END
 };
 
-EvtSource D_80299828 = {
+EvtScript D_80299828 = {
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
@@ -1426,7 +1426,7 @@ EvtSource D_80299828 = {
     EVT_END
 };
 
-EvtSource DoBurnHit = {
+EvtScript DoBurnHit = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(3))
     EVT_IF_EQ(LW(3), EVENT_BURN_DEATH)
         EVT_CALL(EnableActorGlow, -127, 0)
@@ -1521,7 +1521,7 @@ EvtSource DoBurnHit = {
     EVT_END
 };
 
-EvtSource DoShockHit = {
+EvtScript DoShockHit = {
     EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
@@ -1530,7 +1530,7 @@ EvtSource DoShockHit = {
     EVT_END
 };
 
-EvtSource D_8029A76C = {
+EvtScript D_8029A76C = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(GetActorSize, ACTOR_SELF, LW(3), LW(4))
@@ -1594,7 +1594,7 @@ EvtSource D_8029A76C = {
     EVT_END
 };
 
-EvtSource DoImmune = {
+EvtScript DoImmune = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(2))
     EVT_IF_NOT_FLAG(LW(2), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
@@ -1628,7 +1628,7 @@ EvtSource DoImmune = {
     EVT_END
 };
 
-EvtSource DoDeath = {
+EvtScript DoDeath = {
     EVT_EXEC_WAIT(D_8029AF08)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_EXEC_WAIT(ForceNextTarget)
@@ -1637,7 +1637,7 @@ EvtSource DoDeath = {
     EVT_END
 };
 
-EvtSource D_8029AF08 = {
+EvtScript D_8029AF08 = {
     EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableActorGlow, -127, 0)
@@ -1694,7 +1694,7 @@ EvtSource D_8029AF08 = {
     EVT_END
 };
 
-EvtSource DoScareAway = {
+EvtScript DoScareAway = {
     EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(2))
@@ -1731,7 +1731,7 @@ EvtSource DoScareAway = {
     EVT_END
 };
 
-EvtSource D_8029B494 = {
+EvtScript D_8029B494 = {
     EVT_CALL(PlayerCreateTargetList, 65540)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -1790,7 +1790,7 @@ EvtSource D_8029B494 = {
     EVT_END
 };
 
-EvtSource D_8029B818 = {
+EvtScript D_8029B818 = {
     EVT_SET(LW(0), 0)
     EVT_LABEL(0)
     EVT_SUB(LW(0), 30)
@@ -1804,7 +1804,7 @@ EvtSource D_8029B818 = {
     EVT_END
 };
 
-EvtSource D_8029B8A8 = {
+EvtScript D_8029B8A8 = {
     EVT_CALL(GetActorSize, ACTOR_SELF, LW(0), LW(1))
     EVT_MUL(LW(0), LW(1))
     EVT_SWITCH(LW(0))
@@ -1825,7 +1825,7 @@ EvtSource D_8029B8A8 = {
     EVT_END
 };
 
-EvtSource DoSpinSmashHit = {
+EvtScript DoSpinSmashHit = {
     EVT_EXEC_GET_TID(D_8029B818, LW(14))
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
     EVT_CALL(GetPartEventFlags, -127, LW(0), LW(10))
@@ -1857,7 +1857,7 @@ EvtSource DoSpinSmashHit = {
     EVT_END
 };
 
-EvtSource D_8029BBB4 = {
+EvtScript D_8029BBB4 = {
     EVT_SET(LW(10), LW(0))
     EVT_SET(LW(11), LW(1))
     EVT_SET(LW(12), LW(2))
@@ -1886,7 +1886,7 @@ EvtSource D_8029BBB4 = {
     EVT_END
 };
 
-EvtSource DoJumpBack = {
+EvtScript DoJumpBack = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -1903,7 +1903,7 @@ EvtSource DoJumpBack = {
     EVT_END
 };
 
-EvtSource DoReturnHome = {
+EvtScript DoReturnHome = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(10), LW(11), LW(12))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(13), LW(14), LW(15))
@@ -1918,7 +1918,7 @@ EvtSource DoReturnHome = {
     EVT_END
 };
 
-EvtSource DoRecover = {
+EvtScript DoRecover = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(7), LW(8), LW(9))
@@ -1934,7 +1934,7 @@ EvtSource DoRecover = {
     EVT_END
 };
 
-EvtSource D_8029C0A4 = {
+EvtScript D_8029C0A4 = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -1945,7 +1945,7 @@ EvtSource D_8029C0A4 = {
     EVT_END
 };
 
-EvtSource D_8029C12C = {
+EvtScript D_8029C12C = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(3), LW(4), LW(5))
     EVT_LABEL(0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(3), LW(4), LW(5))
@@ -1982,7 +1982,7 @@ EvtSource D_8029C12C = {
     EVT_END
 };
 
-EvtSource DoAirLift = {
+EvtScript DoAirLift = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(2))
     EVT_IF_NOT_FLAG(LW(2), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
         EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
@@ -2000,7 +2000,7 @@ EvtSource DoAirLift = {
     EVT_END
 };
 
-EvtSource DoBlowAway = {
+EvtScript DoBlowAway = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(5))
     EVT_IF_NOT_FLAG(LW(5), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
         EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))

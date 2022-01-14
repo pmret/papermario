@@ -20,32 +20,32 @@ ApiStatus func_80280410(Evt* script, s32 isInitialCall);
 ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall);
 ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall);
 
-EvtSource ShopBeginSpeech = {
+EvtScript ShopBeginSpeech = {
     EVT_CALL(SpeakToPlayer, LW(1), LW(2), LW(3), 0, LW(0))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource ShopContinueSpeech = {
+EvtScript ShopContinueSpeech = {
     EVT_CALL(ContinueSpeech, LW(1), LW(2), LW(3), 0, LW(0))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource ShopResetSpeech = {
+EvtScript ShopResetSpeech = {
     EVT_CALL(EndSpeech, LW(1), LW(2), LW(3), 0)
     EVT_CALL(SpeakToPlayer, LW(1), LW(2), LW(3), 0, LW(0))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource ShopEndSpeech = {
+EvtScript ShopEndSpeech = {
     EVT_CALL(EndSpeech, LW(0), LW(1), LW(2), 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource D_80283F58_7E4DD8 = {
+EvtScript D_80283F58_7E4DD8 = {
     EVT_CALL(GetCurrentPartner, LW(1))
     EVT_IF_EQ(LW(1), 0)
         EVT_GOTO(10)
@@ -67,13 +67,13 @@ EvtSource D_80283F58_7E4DD8 = {
     EVT_END
 };
 
-EvtSource BadgeShopInteract = {
+EvtScript BadgeShopInteract = {
     EVT_CALL(ShowShopPurchaseDialog, LW(0))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource D_80284054_7E4ED4 = {
+EvtScript D_80284054_7E4ED4 = {
     EVT_CALL(ShowShopOwnerDialog)
     EVT_RETURN
     EVT_END
@@ -249,7 +249,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
     ItemData* shopItem = &gItemTable[shopInventory->itemID];
     ShopOwner* shopOwner;
     Evt* shopOwnerScript;
-    EvtSource* shopOwnerScriptSource;
+    EvtScript* shopOwnerScriptSource;
     s32 bpCost;
     s32 args;
 
@@ -336,7 +336,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
             shopOwner = shop->owner;
             D_8028652C = NULL;
             if (shopOwner != NULL) {
-                shopOwnerScriptSource = shopOwner->unk_0C;
+                shopOwnerScriptSource = shopOwner->onBuyEvt;
                 if (shopOwnerScriptSource != NULL) {
                     shopOwnerScript = start_script(shopOwnerScriptSource, 1, 0);
                     D_8028652C = shopOwnerScript;
@@ -730,8 +730,8 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             break;
         case 10:
             if (shop->owner != NULL) {
-                if (shop->owner->unk_14 != 0) {
-                    start_script(shop->owner->unk_14, 1, 0);
+                if (shop->owner->onTalkEvt != 0) {
+                    start_script(shop->owner->onTalkEvt, 1, 0);
                 }
             }
             open_status_menu_short();

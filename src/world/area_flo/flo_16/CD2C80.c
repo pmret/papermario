@@ -26,7 +26,7 @@ NpcAISettings N(npcAISettings_80244028) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80244058) = {
+EvtScript N(npcAI_80244058) = {
     EVT_CALL(SetSelfVar, 0, 1)
     EVT_CALL(SetSelfVar, 5, 0)
     EVT_CALL(SetSelfVar, 6, 0)
@@ -127,7 +127,7 @@ static s32 N(pad_44F8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(80244500) = {
+EvtScript N(80244500) = {
     EVT_CALL(N(func_80242940_CD4770))
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_RETURN
@@ -190,7 +190,7 @@ EvtSource N(80244500) = {
     EVT_END
 };
 
-EvtSource N(802448FC) = {
+EvtScript N(802448FC) = {
     EVT_CALL(N(func_80242940_CD4770))
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_RETURN
@@ -261,7 +261,7 @@ EvtSource N(802448FC) = {
     EVT_END
 };
 
-EvtSource N(80244DC8) = {
+EvtScript N(80244DC8) = {
     EVT_CALL(N(func_80242940_CD4770))
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_RETURN
@@ -324,7 +324,7 @@ EvtSource N(80244DC8) = {
     EVT_END
 };
 
-EvtSource N(802451C4) = {
+EvtScript N(802451C4) = {
     EVT_SET(EVT_AREA_FLAG(41), 0)
     EVT_SET(EVT_AREA_FLAG(42), 0)
     EVT_SET(EVT_AREA_FLAG(43), 0)

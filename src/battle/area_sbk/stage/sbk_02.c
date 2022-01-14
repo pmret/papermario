@@ -9,7 +9,7 @@
 
 #include "common/GetModelPos.inc.c"
 
-EvtSource N(8021F720) = {
+EvtScript N(8021F720) = {
     EVT_SET(LW(10), LW(0))
     EVT_SET(LW(7), LW(1))
     EVT_MUL(LW(7), 10)
@@ -27,7 +27,7 @@ EvtSource N(8021F720) = {
     EVT_END
 };
 
-EvtSource N(beforeBattle_8021F800) = {
+EvtScript N(beforeBattle_8021F800) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_SET(LW(0), 1)
     EVT_SET(LW(1), 0)
@@ -43,7 +43,7 @@ EvtSource N(beforeBattle_8021F800) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_8021F8E8) = {
+EvtScript N(afterBattle_8021F8E8) = {
     EVT_RETURN
     EVT_END
 };

@@ -36,12 +36,12 @@ s32 N(statusTable_802198BC)[] = {
 };
 
 extern s32 N(idleAnimations_802199B4)[];
-extern EvtSource N(init_8021B268);
-extern EvtSource N(doDeath_8021B388);
-extern EvtSource N(takeTurn_8021A5A0);
-extern EvtSource N(idle_80219A98);
-extern EvtSource N(handleEvent_80219D74);
-extern EvtSource N(takeTurn_8021B2C8);
+extern EvtScript N(init_8021B268);
+extern EvtScript N(doDeath_8021B388);
+extern EvtScript N(takeTurn_8021A5A0);
+extern EvtScript N(idle_80219A98);
+extern EvtScript N(handleEvent_80219D74);
+extern EvtScript N(takeTurn_8021B2C8);
 
 ActorPartBlueprint N(partsTable_80219968)[] = {
     {
@@ -107,7 +107,7 @@ s32 N(idleAnimations_80219A00)[] = {
     STATUS_END,
 };
 
-EvtSource N(init_80219A4C) = {
+EvtScript N(init_80219A4C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021A5A0)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80219A98)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80219D74)))
@@ -115,7 +115,7 @@ EvtSource N(init_80219A4C) = {
     EVT_END
 };
 
-EvtSource N(idle_80219A98) = {
+EvtScript N(idle_80219A98) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LW(0))
     EVT_ADD(LW(0), 80)
@@ -165,7 +165,7 @@ EvtSource N(idle_80219A98) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_80219D74) = {
+EvtScript N(handleEvent_80219D74) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -284,7 +284,7 @@ EvtSource N(handleEvent_80219D74) = {
 
 #include "common/anglestuff.inc.c"
 
-EvtSource N(takeTurn_8021A5A0) = {
+EvtScript N(takeTurn_8021A5A0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -456,7 +456,7 @@ EvtSource N(takeTurn_8021A5A0) = {
     EVT_END
 };
 
-EvtSource N(init_8021B268) = {
+EvtScript N(init_8021B268) = {
     EVT_EXEC_WAIT(N(init_80219A4C))
     EVT_CALL(SetActorVar, -127, 0, 0)
     EVT_CALL(SetActorVar, -127, 1, 0)
@@ -465,7 +465,7 @@ EvtSource N(init_8021B268) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_8021B2C8) = {
+EvtScript N(takeTurn_8021B2C8) = {
     EVT_CALL(GetActorVar, -127, 0, LW(0))
     EVT_IF_EQ(LW(0), 0)
         EVT_CALL(UseBattleCamPreset, 14)
@@ -480,7 +480,7 @@ EvtSource N(takeTurn_8021B2C8) = {
     EVT_END
 };
 
-EvtSource N(doDeath_8021B388) = {
+EvtScript N(doDeath_8021B388) = {
     EVT_CALL(func_8027D32C, -127)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_SET(LW(2), 0)

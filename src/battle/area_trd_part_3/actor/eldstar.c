@@ -6,11 +6,11 @@
 
 #define NAMESPACE b_area_trd_part_3_eldstar
 
-extern EvtSource N(init_80218390);
-extern EvtSource N(takeTurn_80218414);
-extern EvtSource N(idle_802183E8);
-extern EvtSource N(handleEvent_80218404);
-extern EvtSource N(80218424);
+extern EvtScript N(init_80218390);
+extern EvtScript N(takeTurn_80218414);
+extern EvtScript N(idle_802183E8);
+extern EvtScript N(handleEvent_80218404);
+extern EvtScript N(80218424);
 
 extern s32 D_80219040;
 
@@ -87,7 +87,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-EvtSource N(init_80218390) = {
+EvtScript N(init_80218390) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80218414)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_802183E8)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80218404)))
@@ -185,23 +185,23 @@ ApiStatus func_802181F8_4CF3A8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource N(idle_802183E8) = {
+EvtScript N(idle_802183E8) = {
     EVT_CALL(func_80218000_4CF1B0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(handleEvent_80218404) = {
+EvtScript N(handleEvent_80218404) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(takeTurn_80218414) = {
+EvtScript N(takeTurn_80218414) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80218424) = {
+EvtScript N(80218424) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_2000000, 1)
     EVT_CALL(func_80218158_4CF308)
     EVT_CALL(WaitForState, 13)

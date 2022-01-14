@@ -18,7 +18,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_06_tattle },
 };
 
-EvtSource N(80240320) = {
+EvtScript N(80240320) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -35,7 +35,7 @@ static s32 N(pad_3B8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitSingleDoor_802403C0) = {
+EvtScript N(exitSingleDoor_802403C0) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
@@ -51,7 +51,7 @@ EvtSource N(exitSingleDoor_802403C0) = {
     EVT_END
 };
 
-EvtSource N(enterSingleDoor_80240474) = {
+EvtScript N(enterSingleDoor_80240474) = {
     EVT_CALL(UseDoorSounds, 0)
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
@@ -64,7 +64,7 @@ EvtSource N(enterSingleDoor_80240474) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, 589824)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -87,7 +87,7 @@ EvtSource N(main) = {
 
 #include "world/common/StashVars.inc.c"
 
-EvtSource N(80240624) = {
+EvtScript N(80240624) = {
     EVT_SET_GROUP(0)
     EVT_CALL(SetTimeFreezeMode, 2)
     EVT_WAIT_FRAMES(40)
@@ -98,7 +98,7 @@ EvtSource N(80240624) = {
     EVT_END
 };
 
-EvtSource N(8024068C) = {
+EvtScript N(8024068C) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(0), EVT_VAR(10))
     EVT_IF_NE(EVT_VAR(10), 0)
@@ -118,7 +118,7 @@ EvtSource N(8024068C) = {
     EVT_END
 };
 
-EvtSource N(8024076C) = {
+EvtScript N(8024076C) = {
     EVT_SET(EVT_VAR(10), 19)
     EVT_SET(EVT_VAR(11), 1)
     EVT_SET(EVT_SAVE_FLAG(1048), 1)
@@ -127,7 +127,7 @@ EvtSource N(8024076C) = {
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EAE30, -300, 50, -200, 0, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignFlag, EVT_SAVE_FLAG(1048))
     EVT_CALL(AssignScript, EVT_PTR(N(8024076C)))
@@ -146,7 +146,7 @@ NpcSettings N(npcSettings_80240840) = {
     .level = 99,
 };
 
-EvtSource N(interact_8024086C) = {
+EvtScript N(interact_8024086C) = {
     EVT_IF_EQ(EVT_AREA_FLAG(4), 0)
         EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00F0))
         EVT_SET(EVT_AREA_FLAG(4), 1)
@@ -158,7 +158,7 @@ EvtSource N(interact_8024086C) = {
     EVT_END
 };
 
-EvtSource N(init_802408FC) = {
+EvtScript N(init_802408FC) = {
     EVT_IF_GE(EVT_SAVE_VAR(0), -26)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
     EVT_END_IF

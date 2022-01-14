@@ -31,7 +31,7 @@ ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x89)
     EVT_EXEC_WAIT(battle_item_tasty_tonic_UseItemWithEffect)
     EVT_CALL(InitTargetIterator)

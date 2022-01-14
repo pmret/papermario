@@ -902,7 +902,7 @@ ApiStatus evt_handle_exec1(Evt* script) {
     Evt* newScript;
     s32 i;
 
-    newScript = start_script_in_group((EvtSource*)evt_get_variable(script, *script->ptrReadPos), script->priority, 0,
+    newScript = start_script_in_group((EvtScript*)evt_get_variable(script, *script->ptrReadPos), script->priority, 0,
                                       script->groupFlags);
 
     newScript->owner1 = script->owner1;
@@ -926,12 +926,12 @@ ApiStatus evt_handle_exec1(Evt* script) {
 
 ApiStatus evt_handle_exec1_get_id(Evt* script) {
     Bytecode* args = script->ptrReadPos;
-    EvtSource* evtSource = (EvtSource*)evt_get_variable(script, *args++);
+    EvtScript* newSource = (EvtScript*)evt_get_variable(script, *args++);
     Bytecode arg2 = *args++;
     Evt* newScript;
     s32 i;
 
-    newScript = start_script_in_group(evtSource, script->priority, 0, script->groupFlags);
+    newScript = start_script_in_group(newSource, script->priority, 0, script->groupFlags);
 
     newScript->owner1 = script->owner1;
     newScript->owner2 = script->owner2;
@@ -965,7 +965,7 @@ ApiStatus evt_handle_jump(Evt* script) {
 }
 
 s32 evt_bound_script_trigger_handler(Trigger* trigger) {
-    EvtSource* scriptStart;
+    EvtScript* scriptStart;
     Evt* script;
 
     if (trigger->runningScript == NULL) {
@@ -974,7 +974,7 @@ s32 evt_bound_script_trigger_handler(Trigger* trigger) {
             return 0;
         }
 
-        script = start_script((EvtSource*)scriptStart, trigger->priority, 0x20);
+        script = start_script((EvtScript*)scriptStart, trigger->priority, 0x20);
         trigger->runningScript = script;
         trigger->runningScriptID = script->id;
         script->varTable[0] = trigger->scriptVars[0];
@@ -999,7 +999,7 @@ ApiStatus evt_handle_bind(Evt* script) {
     Bytecode colliderIDVar = *args++;
     Bytecode a3 = *args++;
     Bytecode triggerOut = *args++;
-    TriggerDefinition def;
+    TriggerBlueprint def;
 
     def.flags = eventType | TRIGGER_DEFINITION_FLAGS_1000000;
     def.flagIndex = evt_get_variable(script, colliderIDVar);
@@ -1009,7 +1009,7 @@ ApiStatus evt_handle_bind(Evt* script) {
     def.function = evt_bound_script_trigger_handler;
 
     trigger = create_trigger(&def);
-    trigger->scriptSource = (EvtSource*)triggerScript;
+    trigger->scriptSource = (EvtScript*)triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
     trigger->scriptVars[0] = evt_get_variable(script, script->varTable[0]);
@@ -1118,7 +1118,7 @@ ApiStatus evt_handle_bind_lock(Evt* script) {
     s32* itemList = (s32*)evt_get_variable(script, *args++);
     Bytecode triggerOut = *args++;
     s32 a5 = *args++;
-    TriggerDefinition def;
+    TriggerBlueprint def;
 
     def.flags = eventType | TRIGGER_DEFINITION_FLAGS_1000000;
     def.flagIndex = evt_get_variable(script, colliderIDVar);
@@ -1129,7 +1129,7 @@ ApiStatus evt_handle_bind_lock(Evt* script) {
     def.inputArg3 = a5;
 
     trigger = create_trigger(&def);
-    trigger->scriptSource = (EvtSource*)triggerScript;
+    trigger->scriptSource = (EvtScript*)triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
     trigger->scriptVars[0] = evt_get_variable(script, script->varTable[0]);
@@ -1155,7 +1155,7 @@ ApiStatus evt_handle_thread(Evt* script) {
     } while (opcode != EVT_OP_END_THREAD);
 
     script->ptrNextLine = endLine;
-    newScript = start_script_in_group((EvtSource*)startLine, script->priority, 0x60, script->groupFlags);
+    newScript = start_script_in_group((EvtScript*)startLine, script->priority, 0x60, script->groupFlags);
     newScript->owner1.enemyID = script->owner1.enemyID;
     newScript->owner2.npcID = script->owner2.npcID;
     newScript->array = script->array;

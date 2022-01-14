@@ -7,21 +7,21 @@
 
 extern ActorBlueprint N(whacka);
 extern Formation N(specialFormation_802208E4);
-extern EvtSource N(init_80220A50);
-extern EvtSource N(takeTurn_802212E4);
-extern EvtSource N(idle_80220B0C);
-extern EvtSource N(handleEvent_80220B40);
-extern EvtSource N(80221414);
-extern EvtSource N(80221334);
+extern EvtScript N(init_80220A50);
+extern EvtScript N(takeTurn_802212E4);
+extern EvtScript N(idle_80220B0C);
+extern EvtScript N(handleEvent_80220B40);
+extern EvtScript N(80221414);
+extern EvtScript N(80221334);
 
-EvtSource N(beforeBattle_80220860) = {
+EvtScript N(beforeBattle_80220860) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetGroupEnabled, 21, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(afterBattle_80220894) = {
+EvtScript N(afterBattle_80220894) = {
     EVT_RETURN
     EVT_END
 };
@@ -132,7 +132,7 @@ ActorBlueprint N(whacka) = {
 
 #include "common/IsSaveVar123.inc.c"
 
-EvtSource N(init_80220A50) = {
+EvtScript N(init_80220A50) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802212E4)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80220B0C)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80220B40)))
@@ -146,7 +146,7 @@ EvtSource N(init_80220A50) = {
     EVT_END
 };
 
-EvtSource N(idle_80220B0C) = {
+EvtScript N(idle_80220B0C) = {
     EVT_LABEL(0)
     EVT_WAIT_FRAMES(1)
     EVT_GOTO(0)
@@ -154,7 +154,7 @@ EvtSource N(idle_80220B0C) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_80220B40) = {
+EvtScript N(handleEvent_80220B40) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -304,7 +304,7 @@ EvtSource N(handleEvent_80220B40) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_802212E4) = {
+EvtScript N(takeTurn_802212E4) = {
     EVT_CALL(RandInt, 100, LW(0))
     EVT_IF_LE(LW(0), 100)
         EVT_EXEC_WAIT(N(80221414))
@@ -314,7 +314,7 @@ EvtSource N(takeTurn_802212E4) = {
     EVT_END
 };
 
-EvtSource N(80221334) = {
+EvtScript N(80221334) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2073)
     EVT_THREAD
@@ -330,7 +330,7 @@ EvtSource N(80221334) = {
     EVT_END
 };
 
-EvtSource N(80221414) = {
+EvtScript N(80221414) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MOLE_DIG)

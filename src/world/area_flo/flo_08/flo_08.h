@@ -36,9 +36,9 @@ ApiStatus N(func_80241BCC_CB090C)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc43)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80244EC4);
-extern EvtSource N(80245914);
-extern EvtSource N(80245F5C);
-extern EvtSource N(main);
+extern EvtScript N(80245914);
+extern EvtScript N(80245F5C);
+extern EvtScript N(main);
 extern s32 N(D_80241FB0_CB0CF0)[];
 extern s16 N(D_80241FB8_CB0CF8)[];
 extern s32 N(D_80241FC8_CB0D08)[8][2];

@@ -19,7 +19,7 @@ ApiStatus GoompaTakeOut(Evt* script, s32 isInitialCall) {
     return partner_get_out(goompa) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_goompa_take_out = {
+EvtScript world_goompa_take_out = {
     EVT_CALL(GoompaTakeOut)
     EVT_RETURN
     EVT_END
@@ -111,7 +111,7 @@ ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource world_goompa_update = {
+EvtScript world_goompa_update = {
     EVT_CALL(func_802BD14C_324A5C)
     EVT_RETURN
     EVT_END
@@ -130,7 +130,7 @@ ApiStatus GoompaUseAbility(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource world_goompa_use_ability = {
+EvtScript world_goompa_use_ability = {
     EVT_CALL(GoompaUseAbility)
     EVT_RETURN
     EVT_END
@@ -146,7 +146,7 @@ ApiStatus GoompaPutAway(Evt* script, s32 isInitialCall) {
     return partner_put_away(goompa) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_goompa_put_away = {
+EvtScript world_goompa_put_away = {
     EVT_CALL(GoompaPutAway)
     EVT_RETURN
     EVT_END

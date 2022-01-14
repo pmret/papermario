@@ -5,12 +5,12 @@
 
 #define NAMESPACE b_area_isk_part_1_stone_chomp
 
-extern EvtSource N(init_80221ABC);
-extern EvtSource N(takeTurn_80222ED0);
-extern EvtSource N(idle_80221D00);
-extern EvtSource N(handleEvent_80222364);
-extern EvtSource N(8022181C);
-extern EvtSource N(80222324);
+extern EvtScript N(init_80221ABC);
+extern EvtScript N(takeTurn_80222ED0);
+extern EvtScript N(idle_80221D00);
+extern EvtScript N(handleEvent_80222364);
+extern EvtScript N(8022181C);
+extern EvtScript N(80222324);
 
 s32 N(idleAnimations_80221450)[] = {
     STATUS_NORMAL,    NPC_ANIM_stone_chomp_Palette_00_Anim_1,
@@ -246,7 +246,7 @@ ActorBlueprint NAMESPACE = {
 ApiStatus b_area_isk_part_1_ChompChainUpdate(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "battle/area_isk_part_1/4E29B0", b_area_isk_part_1_ChompChainUpdate);
 
-EvtSource N(80221794) = {
+EvtScript N(80221794) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -257,7 +257,7 @@ EvtSource N(80221794) = {
     EVT_END
 };
 
-EvtSource N(8022181C) = {
+EvtScript N(8022181C) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(3), LW(4), LW(5))
     EVT_LABEL(0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(3), LW(4), LW(5))
@@ -298,7 +298,7 @@ EvtSource N(8022181C) = {
     EVT_END
 };
 
-EvtSource N(init_80221ABC) = {
+EvtScript N(init_80221ABC) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80222ED0)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80221D00)))
@@ -316,7 +316,7 @@ EvtSource N(init_80221ABC) = {
     EVT_END
 };
 
-EvtSource N(80221BC4) = {
+EvtScript N(80221BC4) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
     EVT_IF_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -334,7 +334,7 @@ EvtSource N(80221BC4) = {
     EVT_END
 };
 
-EvtSource N(idle_80221D00) = {
+EvtScript N(idle_80221D00) = {
     EVT_LABEL(0)
     EVT_LOOP(0)
         EVT_EXEC_WAIT(N(80221BC4))
@@ -433,7 +433,7 @@ EvtSource N(idle_80221D00) = {
     EVT_END
 };
 
-EvtSource N(80222324) = {
+EvtScript N(80222324) = {
     EVT_LABEL(0)
     EVT_WAIT_FRAMES(1)
     EVT_CALL(b_area_isk_part_1_ChompChainUpdate)
@@ -442,7 +442,7 @@ EvtSource N(80222324) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_80222364) = {
+EvtScript N(handleEvent_80222364) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -618,7 +618,7 @@ EvtSource N(handleEvent_80222364) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_80222ED0) = {
+EvtScript N(takeTurn_80222ED0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)

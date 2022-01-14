@@ -659,7 +659,7 @@ offset, out = output_type2(fd, args.count, args.offset, STRUCTS[args.type])
 for i,entry in enumerate(out):
     out[i] = "\n".join(entry)
 
-print(f"EvtSource range 0x{args.offset:08X} - 0x{offset:08X}")
+print(f"EvtScript range 0x{args.offset:08X} - 0x{offset:08X}")
 print()
 
 if args.type.lower() == "staticnpc":

@@ -152,7 +152,7 @@ void suspend_frozen_scripts(Evt* script) {
     suspend_all_group(arg);
 }
 
-Evt* start_script(EvtSource* source, s32 priority, s32 initialState) {
+Evt* start_script(EvtScript* source, s32 priority, s32 initialState) {
     Evt* newScript;
     s32 curScriptIndex;
     s32 scriptListCount;
@@ -219,7 +219,7 @@ Evt* start_script(EvtSource* source, s32 priority, s32 initialState) {
     return newScript;
 }
 
-Evt* start_script_in_group(EvtSource* source, u8 priority, u8 initialState, u8 groupFlags) {
+Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 groupFlags) {
     Evt* newScript;
     s32 scriptListCount;
     s32 i;
@@ -291,7 +291,7 @@ Evt* start_script_in_group(EvtSource* source, u8 priority, u8 initialState, u8 g
     return newScript;
 }
 
-Evt* start_child_script(Evt* parentScript, EvtSource* source, s32 initialState) {
+Evt* start_child_script(Evt* parentScript, EvtScript* source, s32 initialState) {
     s32 curScriptIndex;
     s32 scriptListCount;
     Evt* child;
@@ -656,10 +656,10 @@ void set_script_group(Evt* script, s32 groupFlags) {
     script->groupFlags = groupFlags;
 }
 
-Trigger* bind_trigger(EvtSource* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1,
+Trigger* bind_trigger(EvtScript* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1,
                       s32 priority, s32 arg6) {
     Trigger* trigger;
-    TriggerDefinition def;
+    TriggerBlueprint def;
 
     def.flags = flags | TRIGGER_DEFINITION_FLAGS_1000000;
     def.flagIndex = triggerFlagIndex;
@@ -676,7 +676,7 @@ Trigger* bind_trigger(EvtSource* script, s32 flags, s32 triggerFlagIndex, s32 tr
     return trigger;
 }
 
-Trigger* bind_trigger_1(EvtSource* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1,
+Trigger* bind_trigger_1(EvtScript* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1,
                         s32 priority) {
     return bind_trigger(script, flags, triggerFlagIndex, triggerVar0, triggerVar1, priority, 1);
 }

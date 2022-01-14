@@ -11,7 +11,7 @@ ApiStatus N(FadeBackgroundToBlack)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802A123C_716E9C)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802A1378_716FD8)(Evt* script, s32 isInitialCall);
 
-extern EvtSource N(UseItemWithEffect);
-extern EvtSource N(PlayerGoHome);
+extern EvtScript N(UseItemWithEffect);
+extern EvtScript N(PlayerGoHome);
 
 #endif

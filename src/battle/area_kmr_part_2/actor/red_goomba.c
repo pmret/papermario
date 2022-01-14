@@ -36,11 +36,11 @@ s32 N(statusTable_8021B6CC)[] = {
 };
 
 extern s32 N(idleAnimations_8021B7C4)[];
-extern EvtSource N(idle_8021B8A8);
-extern EvtSource N(handleEvent_8021BB84);
-extern EvtSource N(takeTurn_8021C3B0);
-extern EvtSource N(init_8021D078);
-extern EvtSource N(doDeath_8021D0C4);
+extern EvtScript N(idle_8021B8A8);
+extern EvtScript N(handleEvent_8021BB84);
+extern EvtScript N(takeTurn_8021C3B0);
+extern EvtScript N(init_8021D078);
+extern EvtScript N(doDeath_8021D0C4);
 
 
 ActorPartBlueprint N(partsTable_8021B778)[] = {
@@ -107,7 +107,7 @@ s32 N(idleAnimations_8021B810)[] = {
     STATUS_END,
 };
 
-EvtSource N(init_8021B85C) = {
+EvtScript N(init_8021B85C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021C3B0)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021B8A8)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021BB84)))
@@ -115,7 +115,7 @@ EvtSource N(init_8021B85C) = {
     EVT_END
 };
 
-EvtSource N(idle_8021B8A8) = {
+EvtScript N(idle_8021B8A8) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LW(0))
     EVT_ADD(LW(0), 80)
@@ -165,7 +165,7 @@ EvtSource N(idle_8021B8A8) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8021BB84) = {
+EvtScript N(handleEvent_8021BB84) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -284,7 +284,7 @@ EvtSource N(handleEvent_8021BB84) = {
 
 #include "common/anglestuff.inc.c"
 
-EvtSource N(takeTurn_8021C3B0) = {
+EvtScript N(takeTurn_8021C3B0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -456,7 +456,7 @@ EvtSource N(takeTurn_8021C3B0) = {
     EVT_END
 };
 
-EvtSource N(init_8021D078) = {
+EvtScript N(init_8021D078) = {
     EVT_EXEC_WAIT(N(init_8021B85C))
     EVT_CALL(SetActorVar, -127, 0, 0)
     EVT_CALL(SetActorVar, -127, 1, 0)
@@ -464,7 +464,7 @@ EvtSource N(init_8021D078) = {
     EVT_END
 };
 
-EvtSource N(doDeath_8021D0C4) = {
+EvtScript N(doDeath_8021D0C4) = {
     EVT_CALL(func_8027D32C, -127)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_SET(LW(2), 0)

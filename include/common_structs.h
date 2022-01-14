@@ -11,7 +11,7 @@ struct Evt;
 
 typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 
-typedef Bytecode EvtSource[0];
+typedef Bytecode EvtScript[0];
 
 typedef struct {
     u8 r, g, b, a;
@@ -293,7 +293,7 @@ typedef struct Trigger {
     /* 0x04 */ s32 params1;
     /* 0x08 */ s32 params2;
     /* 0x0C */ s32 (*functionHandler)(struct Trigger*);
-    /* 0x10 */ EvtSource* scriptSource;
+    /* 0x10 */ EvtScript* scriptSource;
     /* 0x14 */ struct Evt* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
@@ -1389,17 +1389,17 @@ typedef struct PartnerBlueprint {
     /* 0x08 */ s32 dmaDest;
     /* 0x0C */ s32 isFlying;
     /* 0x10 */ UNK_FUN_PTR(fpInit);
-    /* 0x14 */ Bytecode* spScriptA;
-    /* 0x18 */ Bytecode* spScriptB;
-    /* 0x1C */ Bytecode* spScriptC;
-    /* 0x20 */ Bytecode* spScriptD;
+    /* 0x14 */ EvtScript* spScriptA;
+    /* 0x18 */ EvtScript* spScriptB;
+    /* 0x1C */ EvtScript* spScriptC;
+    /* 0x20 */ EvtScript* spScriptD;
     /* 0x24 */ s32 idleAnim;
     /* 0x28 */ UNK_FUN_PTR(fpFuncA);
     /* 0x2C */ UNK_FUN_PTR(fpFuncB);
     /* 0x30 */ UNK_FUN_PTR(fpFuncC);
     /* 0x34 */ UNK_FUN_PTR(fpFuncD);
     /* 0x38 */ UNK_FUN_PTR(fpFuncE);
-    /* 0x3C */ Bytecode* spScriptX;
+    /* 0x3C */ EvtScript* spScriptX;
 } PartnerBlueprint; // size = 0x40
 
 typedef struct FontRasterSet {
@@ -1410,7 +1410,7 @@ typedef struct FontRasterSet {
 
 typedef s32 (*TriggerHandlerFunc)(Trigger*);
 
-typedef struct TriggerDefinition {
+typedef struct TriggerBlueprint {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 colliderIndex;
     /* 0x06 */ char unk_06[2];
@@ -1420,7 +1420,7 @@ typedef struct TriggerDefinition {
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ s32 inputArg3;
     /* 0x1C */ s32 unk_1C;
-} TriggerDefinition; // size = 0x20
+} TriggerBlueprint; // size = 0x20
 
 typedef struct CollisionStatus {
     /* 0x00 */ s16 pushingAgainstWall; /* FFFF = none for all below VVV */
@@ -1508,9 +1508,9 @@ typedef struct ShopOwner {
     /* 0x00 */ s32 npcID;
     /* 0x04 */ s32 idleAnim;
     /* 0x08 */ s32 talkAnim;
-    /* 0x0C */ Evt* unk_0C;
-    /* 0x10 */ Bytecode* unkScript;
-    /* 0x14 */ EvtSource* unk_14;
+    /* 0x0C */ EvtScript* onBuyEvt;
+    /* 0x10 */ EvtScript* unk_10Evt;
+    /* 0x14 */ EvtScript* onTalkEvt;
     /* 0x18 */ s32* shopMsgIDs;
 } ShopOwner;
 
@@ -1532,7 +1532,7 @@ typedef struct ShopSellPriceData {
 } ShopSellPriceData; // size = 0xC
 
 typedef struct PopupMenu {
-    /* 0x000 */ s32* ptrIcon[32];
+    /* 0x000 */ struct HudElementAnim* ptrIcon[32];
     /* 0x080 */ char unk_80[0x4];
     /* 0x084 */ s32 nameMsg[32];
     /* 0x104 */ char unk_104[0x4];
@@ -1698,10 +1698,10 @@ typedef struct Actor {
     /* 0x1BA */ char unk_1BA[2];
     /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
-    /* 0x1C0 */ EvtSource* idleScriptSource;
-    /* 0x1C4 */ EvtSource* takeTurnScriptSource;
-    /* 0x1C8 */ EvtSource* onHitScriptSource;
-    /* 0x1CC */ EvtSource* onTurnChanceScriptSource;
+    /* 0x1C0 */ EvtScript* idleScriptSource;
+    /* 0x1C4 */ EvtScript* takeTurnScriptSource;
+    /* 0x1C8 */ EvtScript* onHitScriptSource;
+    /* 0x1CC */ EvtScript* onTurnChanceScriptSource;
     /* 0x1D0 */ struct Evt* idleScript;
     /* 0x1D4 */ struct Evt* takeTurnScript;
     /* 0x1D8 */ struct Evt* onHitScript;

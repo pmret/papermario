@@ -4,9 +4,9 @@
 
 #define NAMESPACE battle_move_auto_jump
 
-extern EvtSource D_802A26BC_7672DC;
-extern EvtSource D_802A2A30_767650;
-extern EvtSource D_802A2D5C_76797C;
+extern EvtScript D_802A26BC_7672DC;
+extern EvtScript D_802A2A30_767650;
+extern EvtScript D_802A2D5C_76797C;
 
 s32 N(D_802A10F0)[] = {
     9, 3, 9, 3, 9, 3, 8, 3,
@@ -15,7 +15,7 @@ s32 N(D_802A10F0)[] = {
 
 #include "world/common/UnkMoveFunc1.inc.c"
 
-EvtSource N(CheckForAPress) = {
+EvtScript N(CheckForAPress) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_BEFORE_JUMP)
     EVT_LOOP(5)
         EVT_CALL(CheckButtonPress, A_BUTTON, LW(0))
@@ -28,7 +28,7 @@ EvtSource N(CheckForAPress) = {
     EVT_END
 };
 
-EvtSource D_802A11AC_765DCC = {
+EvtScript D_802A11AC_765DCC = {
     EVT_CALL(SetGoalToFirstTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_SUB(LW(0), 40)
@@ -52,7 +52,7 @@ EvtSource D_802A11AC_765DCC = {
     EVT_END
 };
 
-EvtSource D_802A1320_765F40 = {
+EvtScript D_802A1320_765F40 = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(GetGoalPos, ACTOR_PLAYER, LW(6), LW(7), LW(8))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(7), LW(8), LW(9))
@@ -70,7 +70,7 @@ EvtSource D_802A1320_765F40 = {
     EVT_END
 };
 
-EvtSource D_802A1408_766028 = {
+EvtScript D_802A1408_766028 = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(GetGoalPos, ACTOR_PLAYER, LW(6), LW(7), LW(8))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(7), LW(8), LW(9))
@@ -88,7 +88,7 @@ EvtSource D_802A1408_766028 = {
     EVT_END
 };
 
-EvtSource D_802A14F0_766110 = {
+EvtScript D_802A14F0_766110 = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(GetGoalPos, ACTOR_PLAYER, LW(6), LW(7), LW(8))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(7), LW(8), LW(9))
@@ -106,7 +106,7 @@ EvtSource D_802A14F0_766110 = {
     EVT_END
 };
 
-EvtSource D_802A15D8_7661F8 = {
+EvtScript D_802A15D8_7661F8 = {
     EVT_CALL(func_80276EFC)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
@@ -135,7 +135,7 @@ EvtSource D_802A15D8_7661F8 = {
     EVT_END
 };
 
-EvtSource D_802A17C4 = {
+EvtScript D_802A17C4 = {
     EVT_CALL(func_80276EFC)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
@@ -164,7 +164,7 @@ EvtSource D_802A17C4 = {
     EVT_END
 };
 
-EvtSource D_802A19B0 = {
+EvtScript D_802A19B0 = {
     EVT_CALL(func_80276EFC)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_29)
@@ -193,7 +193,7 @@ EvtSource D_802A19B0 = {
     EVT_END
 };
 
-EvtSource D_802A1B9C = {
+EvtScript D_802A1B9C = {
     EVT_CALL(func_80276EFC)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
@@ -222,7 +222,7 @@ EvtSource D_802A1B9C = {
     EVT_END
 };
 
-EvtSource D_802A1D88 = {
+EvtScript D_802A1D88 = {
     EVT_CALL(func_80276EFC)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, 0)
     EVT_CALL(EnablePlayerBlur, -1)
@@ -258,7 +258,7 @@ EvtSource D_802A1D88 = {
     EVT_END
 };
 
-EvtSource D_802A1FEC_766C0C = {
+EvtScript D_802A1FEC_766C0C = {
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, 0, 0, 65548)
     EVT_CALL(PlayerLandJump)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x01000C)
@@ -285,7 +285,7 @@ EvtSource D_802A1FEC_766C0C = {
     EVT_END
 };
 
-EvtSource D_802A2184_766DA4 = {
+EvtScript D_802A2184_766DA4 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(D_802A11AC_765DCC)
@@ -299,7 +299,7 @@ EvtSource D_802A2184_766DA4 = {
     EVT_END
 };
 
-EvtSource D_802A2230 = {
+EvtScript D_802A2230 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(D_802A11AC_765DCC)
@@ -325,7 +325,7 @@ EvtSource D_802A2230 = {
     EVT_END
 };
 
-EvtSource D_802A2384 = {
+EvtScript D_802A2384 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(D_802A11AC_765DCC)
@@ -367,7 +367,7 @@ EvtSource D_802A2384 = {
     EVT_END
 };
 
-EvtSource D_802A2600 = {
+EvtScript D_802A2600 = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_1000, 1)
     EVT_CALL(func_802694A4, 0)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, 1)
@@ -384,7 +384,7 @@ EvtSource D_802A2600 = {
     EVT_END
 };
 
-EvtSource D_802A26BC_7672DC = {
+EvtScript D_802A26BC_7672DC = {
     EVT_EXEC_WAIT(D_802A2184_766DA4)
     EVT_CALL(GetActionCommandMode, LW(0))
     EVT_IF_EQ(LW(0), 2)
@@ -446,7 +446,7 @@ EvtSource D_802A26BC_7672DC = {
     EVT_END
 };
 
-EvtSource D_802A2A30_767650 = {
+EvtScript D_802A2A30_767650 = {
     EVT_EXEC_WAIT(D_802A2184_766DA4)
     EVT_CALL(PlayerTestEnemy, LW(0), 128, 0, 0, 1, 0)
     EVT_IF_EQ(LW(0), 6)
@@ -501,7 +501,7 @@ EvtSource D_802A2A30_767650 = {
     EVT_END
 };
 
-EvtSource D_802A2D5C_76797C = {
+EvtScript D_802A2D5C_76797C = {
     EVT_EXEC_WAIT(D_802A2184_766DA4)
     EVT_CALL(PlayerTestEnemy, LW(0), 128, 0, 0, 1, 0)
     EVT_IF_EQ(LW(0), 6)

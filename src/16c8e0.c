@@ -36,7 +36,7 @@ extern f32 D_8029EFB0;
 extern f32 D_8029EFB4;
 extern f32 D_8029EFB8;
 
-EvtSource BtlPutPartnerAway = {
+EvtScript BtlPutPartnerAway = {
     EVT_CALL(DispatchEvent, 256, 62)
     EVT_CHILD_THREAD
         EVT_SETF(EVT_VAR(0), EVT_FIXED(1.0))
@@ -58,7 +58,7 @@ EvtSource BtlPutPartnerAway = {
     EVT_END
 };
 
-EvtSource BtlBringPartnerOut = {
+EvtScript BtlBringPartnerOut = {
     EVT_CHILD_THREAD
         EVT_SETF(EVT_VAR(0), EVT_FIXED(0.1))
         EVT_LOOP(20)

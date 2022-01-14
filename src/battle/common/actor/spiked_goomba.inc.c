@@ -35,7 +35,7 @@ s32 N(statusTable_8021E3BC)[] = {
 };
 
 extern s32 N(idleAnimations_8021E4B4)[];
-extern EvtSource N(init_8021E54C);
+extern EvtScript N(init_8021E54C);
 
 ActorPartBlueprint N(partsTable_8021E468)[] = {
     {
@@ -101,11 +101,11 @@ s32 N(idleAnimations_8021E500)[] = {
     STATUS_END,
 };
 
-extern EvtSource N(takeTurn_8021F1BC);
-extern EvtSource N(idle_8021E598);
-extern EvtSource N(handleEvent_8021E874);
+extern EvtScript N(takeTurn_8021F1BC);
+extern EvtScript N(idle_8021E598);
+extern EvtScript N(handleEvent_8021E874);
 
-EvtSource N(init_8021E54C) = {
+EvtScript N(init_8021E54C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021F1BC)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021E598)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021E874)))
@@ -113,7 +113,7 @@ EvtSource N(init_8021E54C) = {
     EVT_END
 };
 
-EvtSource N(idle_8021E598) = {
+EvtScript N(idle_8021E598) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LW(0))
     EVT_ADD(LW(0), 80)
@@ -163,7 +163,7 @@ EvtSource N(idle_8021E598) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8021E874) = {
+EvtScript N(handleEvent_8021E874) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -297,7 +297,7 @@ EvtSource N(handleEvent_8021E874) = {
 
 #include "common/anglestuff.inc.c"
 
-EvtSource N(takeTurn_8021F1BC) = {
+EvtScript N(takeTurn_8021F1BC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)

@@ -2,15 +2,15 @@
 #include "message_ids.h"
 #include "sprite/npc/goomba.h"
 
-EvtSource N(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
-EvtSource N(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
+EvtScript N(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
+EvtScript N(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
 
-EvtSource N(BindExits) = SCRIPT({
+EvtScript N(BindExits) = SCRIPT({
     bind N(ExitWest) TRIGGER_FLOOR_ABOVE 0; // deili1
     bind N(ExitEast) TRIGGER_FLOOR_ABOVE 3; // deili2
 });
 
-EvtSource N(main) = SCRIPT({
+EvtScript N(main) = SCRIPT({
     EVT_WORLD_LOCATION = LOCATION_GOOMBA_ROAD;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -40,7 +40,7 @@ NpcAISettings N(goombaAISettings) = {
     .unk_2C = TRUE,
 };
 
-EvtSource N(GoombaAI) = SCRIPT({
+EvtScript N(GoombaAI) = SCRIPT({
     DoBasicAI(N(goombaAISettings));
 });
 
@@ -54,7 +54,7 @@ NpcSettings N(goombaNpcSettings) = {
 };
 
 /// @bug Never returns
-EvtSource N(ReadWestSign) = SCRIPT({
+EvtScript N(ReadWestSign) = SCRIPT({
     group 0;
 
     // "Eat a Mushroom to regain your energy!"
@@ -83,7 +83,7 @@ EvtSource N(ReadWestSign) = SCRIPT({
     return;
 });
 
-EvtSource N(GoombaIdle) = SCRIPT({
+EvtScript N(GoombaIdle) = SCRIPT({
     sleep 1;
 
     SetSelfVar(0, FALSE);
@@ -139,7 +139,7 @@ EvtSource N(GoombaIdle) = SCRIPT({
     BindNpcAI(NPC_SELF, N(GoombaAI));
 });
 
-EvtSource N(GoombaInit) = SCRIPT({
+EvtScript N(GoombaInit) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(GoombaIdle));
 });
 
@@ -194,7 +194,7 @@ NpcGroupList N(npcGroupList) = {
     {},
 };
 
-EvtSource N(ReadEastSign) = SCRIPT({
+EvtScript N(ReadEastSign) = SCRIPT({
     IsStartingConversation($a);
     if ($a == 1) {
         return;
@@ -209,7 +209,7 @@ EvtSource N(ReadEastSign) = SCRIPT({
     SetTimeFreezeMode(0);
 });
 
-EvtSource N(MakeEntities) = SCRIPT({
+EvtScript N(MakeEntities) = SCRIPT({
     MakeEntity(0x802EAFDC, 436, 0, -42, 0, MAKE_ENTITY_END);
     AssignScript(N(ReadEastSign));
 });

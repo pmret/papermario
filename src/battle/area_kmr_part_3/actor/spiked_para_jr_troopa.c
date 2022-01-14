@@ -86,7 +86,7 @@ ActorPartBlueprint N(partsTable_80228014)[] = {
     },
 };
 
-extern EvtSource N(init_80228618);
+extern EvtScript N(init_80228618);
 
 ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
@@ -111,7 +111,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 25 },
 };
 
-EvtSource N(80228084) = {
+EvtScript N(80228084) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(2))
     EVT_IF_FLAG(LW(2), 0x35D000)
         EVT_RETURN
@@ -132,7 +132,7 @@ EvtSource N(80228084) = {
     EVT_END
 };
 
-EvtSource N(802281B4) = {
+EvtScript N(802281B4) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20B9)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(3))
@@ -164,7 +164,7 @@ EvtSource N(802281B4) = {
     EVT_END
 };
 
-EvtSource N(802284DC) = {
+EvtScript N(802284DC) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(UseBattleCamPreset, 7)
@@ -176,7 +176,7 @@ EvtSource N(802284DC) = {
     EVT_END
 };
 
-EvtSource N(80228574) = {
+EvtScript N(80228574) = {
     EVT_CALL(func_802535B4, 1)
     EVT_CALL(UseBattleCamPreset, 2)
     EVT_CALL(MoveBattleCamOver, 12)
@@ -184,7 +184,7 @@ EvtSource N(80228574) = {
     EVT_END
 };
 
-EvtSource N(802285B4) = {
+EvtScript N(802285B4) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, 55)
@@ -194,12 +194,12 @@ EvtSource N(802285B4) = {
     EVT_END
 };
 
-extern EvtSource N(takeTurn_8022936C);
-extern EvtSource N(idle_802286C0);
-extern EvtSource N(handleEvent_802287D0);
-extern EvtSource N(nextTurn_80229B38);
+extern EvtScript N(takeTurn_8022936C);
+extern EvtScript N(idle_802286C0);
+extern EvtScript N(handleEvent_802287D0);
+extern EvtScript N(nextTurn_80229B38);
 
-EvtSource N(init_80228618) = {
+EvtScript N(init_80228618) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8022936C)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_802286C0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_802287D0)))
@@ -213,7 +213,7 @@ EvtSource N(init_80228618) = {
 
 #include "common/UnkBattleFunc1.inc.c"
 
-EvtSource N(idle_802286C0) = {
+EvtScript N(idle_802286C0) = {
     EVT_LABEL(0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(10))
     EVT_IF_FLAG(LW(10), 0x41000)
@@ -231,13 +231,13 @@ EvtSource N(idle_802286C0) = {
     EVT_END
 };
 
-extern EvtSource N(80228FE8);
-extern EvtSource N(8022906C);
-extern EvtSource N(8022A018);
-extern EvtSource N(8022A39C);
-extern EvtSource N(8022A480);
+extern EvtScript N(80228FE8);
+extern EvtScript N(8022906C);
+extern EvtScript N(8022A018);
+extern EvtScript N(8022A39C);
+extern EvtScript N(8022A480);
 
-EvtSource N(handleEvent_802287D0) = {
+EvtScript N(handleEvent_802287D0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -380,7 +380,7 @@ EvtSource N(handleEvent_802287D0) = {
     EVT_END
 };
 
-EvtSource N(80228FE8) = {
+EvtScript N(80228FE8) = {
     EVT_CALL(GetActorVar, -127, 1, LW(0))
     EVT_IF_EQ(LW(0), 0)
         EVT_CALL(GetLastDamage, -127, LW(1))
@@ -392,7 +392,7 @@ EvtSource N(80228FE8) = {
     EVT_END
 };
 
-EvtSource N(8022906C) = {
+EvtScript N(8022906C) = {
     EVT_CALL(GetActorVar, -127, 1, LW(0))
     EVT_IF_EQ(LW(0), 1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
@@ -410,7 +410,7 @@ EvtSource N(8022906C) = {
     EVT_END
 };
 
-EvtSource N(80229160) = {
+EvtScript N(80229160) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), 40)
     EVT_SET(LW(1), 0)
@@ -437,7 +437,7 @@ EvtSource N(80229160) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_8022936C) = {
+EvtScript N(takeTurn_8022936C) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -557,7 +557,7 @@ ApiStatus func_802189DC_447E1C(Evt* script, s32 isInitialCall) {
 
 #include "common/FreeIcon.inc.c"
 
-EvtSource N(nextTurn_80229B38) = {
+EvtScript N(nextTurn_80229B38) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetBattlePhase, LW(0))
@@ -630,7 +630,7 @@ EvtSource N(nextTurn_80229B38) = {
     EVT_END
 };
 
-EvtSource N(8022A018) = {
+EvtScript N(8022A018) = {
     EVT_CALL(UseBattleCamPreset, 2)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_IF_EQ(LW(1), 0)
@@ -680,7 +680,7 @@ EvtSource N(8022A018) = {
     EVT_END
 };
 
-EvtSource N(8022A39C) = {
+EvtScript N(8022A39C) = {
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_spiked_para_jr_troopa_default_run)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
@@ -695,7 +695,7 @@ EvtSource N(8022A39C) = {
     EVT_END
 };
 
-EvtSource N(8022A480) = {
+EvtScript N(8022A480) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
     EVT_IF_NOT_FLAG(LW(0), 0x35D000)
         EVT_CALL(GetActorVar, -127, 2, LW(0))

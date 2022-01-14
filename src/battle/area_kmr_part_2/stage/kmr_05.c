@@ -5,14 +5,14 @@
 
 #include "world/common/clouds.inc.c"
 
-EvtSource N(beforeBattle_80225388) = {
+EvtScript N(beforeBattle_80225388) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(EnableModel, 27, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(afterBattle_802253BC) = {
+EvtScript N(afterBattle_802253BC) = {
     EVT_RETURN
     EVT_END
 };

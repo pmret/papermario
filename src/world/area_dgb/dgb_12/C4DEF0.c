@@ -13,7 +13,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_12_tattle },
 };
 
-EvtSource N(80240310) = {
+EvtScript N(80240310) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -30,7 +30,7 @@ static s32 N(pad_3A8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitSingleDoor_802403B0) = {
+EvtScript N(exitSingleDoor_802403B0) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
@@ -46,7 +46,7 @@ EvtSource N(exitSingleDoor_802403B0) = {
     EVT_END
 };
 
-EvtSource N(enterSingleDoor_80240464) = {
+EvtScript N(enterSingleDoor_80240464) = {
     EVT_CALL(UseDoorSounds, 0)
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
@@ -59,7 +59,7 @@ EvtSource N(enterSingleDoor_80240464) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -79,7 +79,7 @@ s32 N(lavaResetList_802405C0)[] = {
     0x00000005, 0xC3FB8000, 0x00000000, 0xC27C0000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(802405E0) = {
+EvtScript N(802405E0) = {
     EVT_SET_GROUP(239)
     EVT_CALL(ModifyColliderFlags, 3, 12, 0x00000002)
     EVT_CALL(ModifyColliderFlags, 3, 0, 0x00000002)
@@ -132,7 +132,7 @@ static s32 N(pad_868)[] = {
 
 #include "world/common/StashVars.inc.c"
 
-EvtSource N(80240874) = {
+EvtScript N(80240874) = {
     EVT_SET_GROUP(0)
     EVT_CALL(SetTimeFreezeMode, 2)
     EVT_WAIT_FRAMES(40)
@@ -143,7 +143,7 @@ EvtSource N(80240874) = {
     EVT_END
 };
 
-EvtSource N(802408DC) = {
+EvtScript N(802408DC) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(0), EVT_VAR(10))
     EVT_IF_NE(EVT_VAR(10), 0)
@@ -163,7 +163,7 @@ EvtSource N(802408DC) = {
     EVT_END
 };
 
-EvtSource N(802409BC) = {
+EvtScript N(802409BC) = {
     EVT_SET(EVT_VAR(10), 19)
     EVT_SET(EVT_VAR(11), 1)
     EVT_SET(EVT_SAVE_FLAG(1057), 1)
@@ -172,7 +172,7 @@ EvtSource N(802409BC) = {
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EAE30, -225, 0, -245, 0, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignFlag, EVT_SAVE_FLAG(1057))
     EVT_CALL(AssignScript, EVT_PTR(N(802409BC)))

@@ -28,90 +28,90 @@ extern s8 D_8029F2A7;
 extern f32 D_8029F2A8;
 extern f32 D_8029F2AC;
 extern f32 D_8029F2B0;
-extern EvtSource* D_8029F2B4;
+extern EvtScript* D_8029F2B4;
 
 s8 D_80280CE0 = 0;
 s32 D_80280CE4 = -1;
 
-EvtSource CamPreset_B = {
+EvtScript CamPreset_B = {
     EVT_CALL(func_80248DD0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_F = {
+EvtScript CamPreset_F = {
     EVT_CALL(func_80248DE4)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_M = {
+EvtScript CamPreset_M = {
     EVT_CALL(func_80249804)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_G = {
+EvtScript CamPreset_G = {
     EVT_CALL(func_8024A214)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_I = {
+EvtScript CamPreset_I = {
     EVT_CALL(func_8024A990)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_H = {
+EvtScript CamPreset_H = {
     EVT_CALL(func_8024AFE4)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_N = {
+EvtScript CamPreset_N = {
     EVT_CALL(func_8024B5FC)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_C = {
+EvtScript CamPreset_C = {
     EVT_CALL(func_8024B9A0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_D = {
+EvtScript CamPreset_D = {
     EVT_CALL(func_8024BDA4)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_E = {
+EvtScript CamPreset_E = {
     EVT_CALL(func_8024C180)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_J = {
+EvtScript CamPreset_J = {
     EVT_CALL(func_8024C570)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_K = {
+EvtScript CamPreset_K = {
     EVT_CALL(func_8024C944)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_L = {
+EvtScript CamPreset_L = {
     EVT_CALL(func_8024CB68)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource CamPreset_A = {
+EvtScript CamPreset_A = {
     EVT_CALL(func_8024E9B0, 0, 15, 0)
     EVT_CALL(func_8024E748, 2, 550)
     EVT_CALL(func_8024E748, 3, 100)
@@ -120,7 +120,7 @@ EvtSource CamPreset_A = {
     EVT_END
 };
 
-EvtSource D_80280EB8 = {
+EvtScript D_80280EB8 = {
     EVT_CALL(SetCamPerspective, 1, 6, 25, 16, 1024)
     EVT_CALL(SetCamViewport, 1, 12, 20, 296, 200)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
@@ -603,7 +603,7 @@ ApiStatus func_8024CE9C(Evt* script, s32 isInitialCall) {
 
 void btl_cam_use_preset(s32 id) {
     BattleStatus* battleStatus = &gBattleStatus;
-    EvtSource* preset = NULL;
+    EvtScript* preset = NULL;
     Evt* newScript;
 
     if (D_80280CE0 == 0) {

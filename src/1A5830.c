@@ -884,13 +884,13 @@ s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event) {
 ApiStatus BindTakeTurn(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    EvtSource* takeTurnScript;
+    EvtScript* takeTurnScript;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    takeTurnScript = (EvtSource*) evt_get_variable(script, *args++);
+    takeTurnScript = (EvtScript*) evt_get_variable(script, *args++);
     get_actor(actorID)->takeTurnScriptSource = takeTurnScript;
     return ApiStatus_DONE2;
 }
@@ -924,7 +924,7 @@ ApiStatus ResumeTakeTurn(Evt* script, s32 isInitialCall) {
 ApiStatus BindIdle(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    EvtSource* idleCode;
+    EvtScript* idleCode;
     Actor* actor;
     Evt* newScriptContext;
 
@@ -932,7 +932,7 @@ ApiStatus BindIdle(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    idleCode = (EvtSource*) evt_get_variable(script, *args++);
+    idleCode = (EvtScript*) evt_get_variable(script, *args++);
     actor = get_actor(actorID);
 
     if (actor->idleScript != 0) {
@@ -982,13 +982,13 @@ ApiStatus EnableIdleScript(Evt* script, s32 isInitialCall) {
 ApiStatus BindHandleEvent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    EvtSource* var1;
+    EvtScript* var1;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = (EvtSource*) evt_get_variable(script, *args++);
+    var1 = (EvtScript*) evt_get_variable(script, *args++);
     get_actor(actorID)->onHitScriptSource = var1;
     return ApiStatus_DONE2;
 }
@@ -996,13 +996,13 @@ ApiStatus BindHandleEvent(Evt* script, s32 isInitialCall) {
 ApiStatus BindNextTurn(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    EvtSource* var1;
+    EvtScript* var1;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = (EvtSource*) evt_get_variable(script, *args++);
+    var1 = (EvtScript*) evt_get_variable(script, *args++);
     get_actor(actorID)->onTurnChanceScriptSource = var1;
     return ApiStatus_DONE2;
 }

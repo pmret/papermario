@@ -20,14 +20,14 @@ ApiStatus GetGridIndexFromPos(Evt* script, s32 isInitialCall);
 ApiStatus SetPushBlockFallEffect(Evt* script, s32 isInitialCall);
 ApiStatus TeleportPartnerToPlayer(Evt* script, s32 isInitialCall);
 
-extern EvtSource EnterWalk;
-extern EvtSource EnterWalkShort;
-extern EvtSource EnterSavePoint;
-extern EvtSource ExitWalk;
-extern EvtSource ExitSingleDoor;
-extern EvtSource EnterSingleDoor;
-extern EvtSource ExitDoubleDoor;
-extern EvtSource EnterDoubleDoor;
+extern EvtScript EnterWalk;
+extern EvtScript EnterWalkShort;
+extern EvtScript EnterSavePoint;
+extern EvtScript ExitWalk;
+extern EvtScript ExitSingleDoor;
+extern EvtScript EnterSingleDoor;
+extern EvtScript ExitDoubleDoor;
+extern EvtScript EnterDoubleDoor;
 
 
 #endif

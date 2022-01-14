@@ -37,7 +37,7 @@ s32 N(statusTable_80218F6C)[] = {
 };
 
 extern s32 N(idleAnimations_80219064)[];
-extern EvtSource N(init_80219088);
+extern EvtScript N(init_80219088);
 
 ActorPartBlueprint N(partsTable_80219018)[] = {
     {
@@ -85,11 +85,11 @@ s32 N(idleAnimations_80219064)[] = {
     STATUS_END,
 };
 
-extern EvtSource N(takeTurn_802197C0);
-extern EvtSource N(idle_80219380);
-extern EvtSource N(handleEvent_802193E8);
+extern EvtScript N(takeTurn_802197C0);
+extern EvtScript N(idle_80219380);
+extern EvtScript N(handleEvent_802193E8);
 
-EvtSource N(init_80219088) = {
+EvtScript N(init_80219088) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802197C0)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80219380)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_802193E8)))
@@ -131,14 +131,14 @@ EvtSource N(init_80219088) = {
     EVT_END
 };
 
-EvtSource N(idle_80219380) = {
+EvtScript N(idle_80219380) = {
     EVT_RETURN
     EVT_END
 };
 
-extern EvtSource N(80219BE0);
+extern EvtScript N(80219BE0);
 
-EvtSource N(80219390) = {
+EvtScript N(80219390) = {
     EVT_EXEC_WAIT(N(80219BE0))
     EVT_SET_CONST(LW(0), 1)
     EVT_SET_CONST(LW(1), NPC_ANIM_bullet_bill_Palette_00_Anim_7)
@@ -148,7 +148,7 @@ EvtSource N(80219390) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_802193E8) = {
+EvtScript N(handleEvent_802193E8) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -228,7 +228,7 @@ EvtSource N(handleEvent_802193E8) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_802197C0) = {
+EvtScript N(takeTurn_802197C0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -288,7 +288,7 @@ EvtSource N(takeTurn_802197C0) = {
     EVT_END
 };
 
-EvtSource N(80219BE0) = {
+EvtScript N(80219BE0) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(2), 2)
     EVT_CALL(PlayEffect, EFFECT_ID_17, 0, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)

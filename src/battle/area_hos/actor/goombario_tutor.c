@@ -64,7 +64,7 @@ ActorPartBlueprint N(partsTable_80219114)[] = {
     },
 };
 
-extern EvtSource N(init_80219160);
+extern EvtScript N(init_80219160);
 
 ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_40000,
@@ -89,12 +89,12 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-extern EvtSource N(takeTurn_80219444);
-extern EvtSource N(idle_802191D0);
-extern EvtSource N(handleEvent_802191E0);
-extern EvtSource N(80219C74);
+extern EvtScript N(takeTurn_80219444);
+extern EvtScript N(idle_802191D0);
+extern EvtScript N(handleEvent_802191E0);
+extern EvtScript N(80219C74);
 
-EvtSource N(init_80219160) = {
+EvtScript N(init_80219160) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80219444)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_802191D0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_802191E0)))
@@ -104,12 +104,12 @@ EvtSource N(init_80219160) = {
     EVT_END
 };
 
-EvtSource N(idle_802191D0) = {
+EvtScript N(idle_802191D0) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(handleEvent_802191E0) = {
+EvtScript N(handleEvent_802191E0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_THREAD
         EVT_CALL(func_8026BF48, 1)
@@ -156,7 +156,7 @@ EvtSource N(handleEvent_802191E0) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_80219444) = {
+EvtScript N(takeTurn_80219444) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -281,7 +281,7 @@ ApiStatus func_80218000_47F0B0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource N(80219C74) = {
+EvtScript N(80219C74) = {
     EVT_CALL(SetBattleFlagBits, 33554432, 1)
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(WaitForState, 13)

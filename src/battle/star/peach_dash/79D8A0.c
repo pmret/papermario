@@ -25,7 +25,7 @@ ApiStatus func_802A1518_79DDB8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource N(802A15B0) = {
+EvtScript N(802A15B0) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(UseBattleCamPreset, 69)
@@ -80,7 +80,7 @@ EvtSource N(802A15B0) = {
     EVT_END
 };
 
-EvtSource N(802A1948) = {
+EvtScript N(802A1948) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(UseBattleCamPreset, 69)
@@ -135,7 +135,7 @@ EvtSource N(802A1948) = {
     EVT_END
 };
 
-EvtSource N(802A1CE0) = {
+EvtScript N(802A1CE0) = {
     EVT_WAIT_FRAMES(8)
     EVT_CALL(SetForegroundModelsVisible, 0)
     EVT_CALL(func_8024E664, 73)
@@ -169,7 +169,7 @@ EvtSource N(802A1CE0) = {
     EVT_END
 };
 
-EvtSource N(802A1EEC) = {
+EvtScript N(802A1EEC) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(UseBattleCamPreset, 2)
@@ -240,7 +240,7 @@ EvtSource N(802A1EEC) = {
     EVT_END
 };
 
-EvtSource N(802A233C) = {
+EvtScript N(802A233C) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(N(UnkBackgroundFunc))
@@ -263,7 +263,7 @@ EvtSource N(802A233C) = {
     EVT_END
 };
 
-EvtSource N(usePower) = {
+EvtScript N(usePower) = {
     EVT_CALL(UseBattleCamPreset, 69)
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, 0x0C0010)

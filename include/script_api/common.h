@@ -306,7 +306,7 @@ ApiStatus MakeTransformGroup(Evt* script, s32 isInitialCall);
 
 ApiStatus Spawn802D9D50(Evt* script, s32 isInitialCall);
 
-extern EvtSource EnemyNpcHit;
-extern EvtSource EnemyNpcDefeat;
+extern EvtScript EnemyNpcHit;
+extern EvtScript EnemyNpcDefeat;
 
 #endif

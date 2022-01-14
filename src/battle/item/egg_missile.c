@@ -139,7 +139,7 @@ s32 N(modelCommandList)[] = {
     0x00000002, 0x00000000,
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0xC8)
     EVT_EXEC_WAIT(battle_item_egg_missile_UseItemWithEffect)
     EVT_CALL(UseBattleCamPreset, 3)

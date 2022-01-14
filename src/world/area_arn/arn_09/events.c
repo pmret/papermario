@@ -3,7 +3,7 @@
 
 extern s32 D_000001E4;
 
-EvtSource N(80240140) = {
+EvtScript N(80240140) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(0), 0)
@@ -19,13 +19,13 @@ EvtSource N(80240140) = {
     EVT_END
 };
 
-EvtSource N(802401F4) = {
+EvtScript N(802401F4) = {
     EVT_BIND_TRIGGER(N(80240140), TRIGGER_WALL_PRESS_A, 5, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80240220) = {
+EvtScript N(80240220) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -41,7 +41,7 @@ EvtSource N(80240220) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 35)
     EVT_CALL(SetSpriteShading, 524288)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -61,7 +61,7 @@ static s32 N(pad_398)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(802403A0) = {
+EvtScript N(802403A0) = {
     EVT_IF_EQ(EVT_AREA_FLAG(1), 1)
         EVT_RETURN
     EVT_END_IF
@@ -80,7 +80,7 @@ EvtSource N(802403A0) = {
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EAA30, 0, 0, 0, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_PTR(N(802403A0)))
     EVT_RETURN
@@ -91,7 +91,7 @@ static s32 N(pad_4CC)[] = {
     0x00000000,
 };
 
-EvtSource N(802404D0) = {
+EvtScript N(802404D0) = {
     EVT_IF_EQ(EVT_AREA_FLAG(1), 0)
         EVT_RETURN
     EVT_END_IF
@@ -113,12 +113,12 @@ static s32 N(pad_5A8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(802405B0) = {
+EvtScript N(802405B0) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(802405C0) = {
+EvtScript N(802405C0) = {
     EVT_RETURN
     EVT_END
 };
@@ -131,7 +131,7 @@ NpcSettings N(npcSettings_802405D0) = {
     .level = 13,
 };
 
-EvtSource N(idle_802405FC) = {
+EvtScript N(idle_802405FC) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FIXED(2.5))
@@ -149,7 +149,7 @@ EvtSource N(idle_802405FC) = {
     EVT_END
 };
 
-EvtSource N(init_80240730) = {
+EvtScript N(init_80240730) = {
     EVT_IF_NE(EVT_SAVE_VAR(0), -19)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_ELSE

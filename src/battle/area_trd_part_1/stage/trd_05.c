@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_trd_part_1_trd_05
 
-EvtSource N(80224360) = {
+EvtScript N(80224360) = {
     EVT_SET(LW(10), LW(0))
     EVT_LABEL(0)
     EVT_CALL(RotateGroup, LW(10), 2, 0, 0, 1)
@@ -22,7 +22,7 @@ EvtSource N(80224360) = {
     EVT_END
 };
 
-EvtSource N(80224478) = {
+EvtScript N(80224478) = {
     EVT_SET(LW(10), LW(0))
     EVT_LOOP(0)
         EVT_CALL(TranslateModel, LW(10), 1, 0, 0)
@@ -100,7 +100,7 @@ EvtSource N(80224478) = {
     EVT_END
 };
 
-EvtSource N(beforeBattle_80224A24) = {
+EvtScript N(beforeBattle_80224A24) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_THREAD
@@ -124,7 +124,7 @@ EvtSource N(beforeBattle_80224A24) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_80224B30) = {
+EvtScript N(afterBattle_80224B30) = {
     EVT_RETURN
     EVT_END
 };

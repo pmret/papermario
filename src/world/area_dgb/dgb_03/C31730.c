@@ -29,7 +29,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_03_tattle },
 };
 
-EvtSource N(80242870) = {
+EvtScript N(80242870) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -46,7 +46,7 @@ static s32 N(pad_2908)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitDoubleDoor_80242910) = {
+EvtScript N(exitDoubleDoor_80242910) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
@@ -62,7 +62,7 @@ EvtSource N(exitDoubleDoor_80242910) = {
     EVT_END
 };
 
-EvtSource N(exitDoubleDoor_802429C4) = {
+EvtScript N(exitDoubleDoor_802429C4) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
@@ -78,7 +78,7 @@ EvtSource N(exitDoubleDoor_802429C4) = {
     EVT_END
 };
 
-EvtSource N(exitDoubleDoor_80242A78) = {
+EvtScript N(exitDoubleDoor_80242A78) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
@@ -94,9 +94,9 @@ EvtSource N(exitDoubleDoor_80242A78) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_80242B2C) = EXIT_WALK_SCRIPT(26,  2, "dgb_13",  0);
+EvtScript N(exitWalk_80242B2C) = EXIT_WALK_SCRIPT(26,  2, "dgb_13",  0);
 
-EvtSource N(exitSingleDoor_80242B88) = {
+EvtScript N(exitSingleDoor_80242B88) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
@@ -112,7 +112,7 @@ EvtSource N(exitSingleDoor_80242B88) = {
     EVT_END
 };
 
-EvtSource N(exitDoubleDoor_80242C3C) = {
+EvtScript N(exitDoubleDoor_80242C3C) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
@@ -128,13 +128,13 @@ EvtSource N(exitDoubleDoor_80242C3C) = {
     EVT_END
 };
 
-EvtSource N(80242CF0) = {
+EvtScript N(80242CF0) = {
     EVT_BIND_TRIGGER(N(exitWalk_80242B2C), TRIGGER_FLOOR_ABOVE, 35, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(enterDoubleDoor_80242D1C) = {
+EvtScript N(enterDoubleDoor_80242D1C) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -181,7 +181,7 @@ s32 N(itemList_80242F28)[] = {
     ITEM_NONE,
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -211,7 +211,7 @@ static s32 N(pad_30D8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(802430E0) = {
+EvtScript N(802430E0) = {
     EVT_SET_GROUP(0)
     EVT_LOOP(20)
         EVT_CALL(GetCurrentPartner, EVT_VAR(10))
@@ -280,7 +280,7 @@ EvtSource N(802430E0) = {
     EVT_END
 };
 
-EvtSource N(80243470) = {
+EvtScript N(80243470) = {
     EVT_IF_NE(EVT_SAVE_FLAG(1044), 0)
         EVT_GOTO(90)
     EVT_END_IF
@@ -299,7 +299,7 @@ EvtSource N(80243470) = {
     EVT_END
 };
 
-EvtSource N(8024353C) = {
+EvtScript N(8024353C) = {
     EVT_IF_NE(EVT_SAVE_FLAG(1044), 0)
         EVT_GOTO(90)
     EVT_END_IF
@@ -318,7 +318,7 @@ EvtSource N(8024353C) = {
     EVT_END
 };
 
-EvtSource N(80243608) = {
+EvtScript N(80243608) = {
     EVT_CALL(ParentColliderToModel, 27, 51)
     EVT_CALL(ParentColliderToModel, 28, 51)
     EVT_CALL(ParentColliderToModel, 29, 51)
@@ -344,7 +344,7 @@ static s32 N(pad_3738)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(80243740) = {
+EvtScript N(80243740) = {
     EVT_SET_GROUP(0)
     EVT_SUSPEND_GROUP(1)
     EVT_CALL(ShowKeyChoicePopup)
@@ -373,13 +373,13 @@ EvtSource N(80243740) = {
     EVT_END
 };
 
-EvtSource N(802438A8) = {
+EvtScript N(802438A8) = {
     EVT_BIND_TRIGGER(N(exitDoubleDoor_80242C3C), TRIGGER_WALL_PRESS_A, 17, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1043), 0)
         EVT_CALL(MakeEntity, 0x802BCD68, -355, 218, 75, 80, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(802438A8)))
@@ -394,7 +394,7 @@ static s32 N(pad_3964)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80243970) = {
+EvtScript N(80243970) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -435,7 +435,7 @@ NpcAISettings N(npcAISettings_80243A5C) = {
     .unk_2C = 3,
 };
 
-EvtSource N(npcAI_80243A8C) = {
+EvtScript N(npcAI_80243A8C) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 1, 5)
     EVT_CALL(SetSelfVar, 2, 8)
@@ -469,7 +469,7 @@ NpcAISettings N(npcAISettings_80243B28) = {
     .unk_2C = 3,
 };
 
-EvtSource N(npcAI_80243B58) = {
+EvtScript N(npcAI_80243B58) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 1, 5)
     EVT_CALL(SetSelfVar, 2, 8)
@@ -503,7 +503,7 @@ NpcAISettings N(npcAISettings_80243BF4) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80243C24) = {
+EvtScript N(npcAI_80243C24) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 1, 10)
     EVT_CALL(SetSelfVar, 2, 14)
@@ -522,7 +522,7 @@ NpcSettings N(npcSettings_80243C94) = {
     .level = 13,
 };
 
-EvtSource N(npcAI_80243CC0) = {
+EvtScript N(npcAI_80243CC0) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetSelfVar, 0, 4)
     EVT_CALL(SetSelfVar, 1, 32)
@@ -544,7 +544,7 @@ NpcSettings N(npcSettings_80243D68) = {
     .unk_2A = 8,
 };
 
-EvtSource N(init_80243D94) = {
+EvtScript N(init_80243D94) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_IF_EQ(EVT_VAR(0), 3)
         EVT_CALL(SetNpcPos, NPC_SELF, -330, 210, -20)

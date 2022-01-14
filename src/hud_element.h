@@ -117,7 +117,7 @@ extern HudElementAnim HudScript_StatusCoin[];
 extern HudElementAnim HudScript_Refund[];
 extern HudElementAnim HudScript_MenuTimes[];
 extern HudElementAnim* D_8024FA30[1];
-extern HudElementAnim *gBadgeMenuElements[22];
+extern HudElementAnim* gBadgeMenuElements[22];
 extern HudElement* gItemIcons[20];
 
 #define he_End HUD_ELEMENT_OP_End

@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_kmr_part_3_kpa_01
 
-EvtSource N(80234CB0) = {
+EvtScript N(80234CB0) = {
     EVT_SET(LW(10), LW(0))
     EVT_CALL(SetTexPanner, LW(10), 1)
     EVT_SET(LW(0), 0)
@@ -18,14 +18,14 @@ EvtSource N(80234CB0) = {
     EVT_END
 };
 
-EvtSource N(beforeBattle_80234D60) = {
+EvtScript N(beforeBattle_80234D60) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(afterBattle_80234D9C) = {
+EvtScript N(afterBattle_80234D9C) = {
     EVT_RETURN
     EVT_END
 };

@@ -4,7 +4,7 @@
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x0000009A)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)

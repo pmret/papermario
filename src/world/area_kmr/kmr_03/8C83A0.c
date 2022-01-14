@@ -37,7 +37,7 @@ FoliageVectorList N(treeEffectVectors_Tree1) = {
     },
 };
 
-EvtSource N(tree1_Callback) = {
+EvtScript N(tree1_Callback) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(53), 1)
         EVT_RETURN
     EVT_END_IF
@@ -65,7 +65,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(tree1Point) = { -42.0f, 0.0f, -13.0f, 0.0f };
 
-EvtSource N(802422B8) = {
+EvtScript N(802422B8) = {
     EVT_SET(EVT_VAR(0), EVT_PTR(N(bush1)))
     EVT_BIND_TRIGGER(N(searchBush), TRIGGER_WALL_PRESS_A, 53, 1, 0)
     EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))

@@ -7,11 +7,11 @@
 #define NAMESPACE b_area_trd_part_2_blue_ninja_koopa
 
 extern s32 N(idleAnimations_8022B5B0)[];
-extern EvtSource N(init_8022DC2C);
-extern EvtSource N(idle_8022DD20);
-extern EvtSource N(handleEvent_8022DD88);
-extern EvtSource N(nextTurn_8022E424);
-extern EvtSource N(takeTurn_8022E414);
+extern EvtScript N(init_8022DC2C);
+extern EvtScript N(idle_8022DD20);
+extern EvtScript N(handleEvent_8022DD88);
+extern EvtScript N(nextTurn_8022E424);
+extern EvtScript N(takeTurn_8022E414);
 
 s32 N(defenseTable_8022B4A0)[] = {
     ELEMENT_NORMAL, 1,
@@ -159,7 +159,7 @@ INCLUDE_ASM(s32, "battle/area_trd_part_2/4B2550", func_80219530_4B2720);
 
 #include "common/GetLastActorEventType.inc.c"
 
-EvtSource N(8022B6E8) = {
+EvtScript N(8022B6E8) = {
     EVT_CALL(SetOwnerID, ACTOR_ENEMY2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
     EVT_IF_NE(LW(0), 0)
@@ -673,7 +673,7 @@ EvtSource N(8022B6E8) = {
     EVT_END
 };
 
-EvtSource N(init_8022DC2C) = {
+EvtScript N(init_8022DC2C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8022E414)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8022DD20)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022DD88)))
@@ -688,7 +688,7 @@ EvtSource N(init_8022DC2C) = {
     EVT_END
 };
 
-EvtSource N(idle_8022DD20) = {
+EvtScript N(idle_8022DD20) = {
     EVT_RETURN
     EVT_END
 };
@@ -699,7 +699,7 @@ s32 N(intTable_8022DD30)[] = {
     0x00000007, 0x00000006, 0x00000004, 0x00000000, 0x00000002, 0x00000000,
 };
 
-EvtSource N(handleEvent_8022DD88) = {
+EvtScript N(handleEvent_8022DD88) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -810,12 +810,12 @@ EvtSource N(handleEvent_8022DD88) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_8022E414) = {
+EvtScript N(takeTurn_8022E414) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(nextTurn_8022E424) = {
+EvtScript N(nextTurn_8022E424) = {
     EVT_RETURN
     EVT_END
 };

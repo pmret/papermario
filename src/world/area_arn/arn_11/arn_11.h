@@ -7,6 +7,6 @@
 
 #define NAMESPACE arn_11
 
-extern EvtSource N(main);
-extern EvtSource N(80240050);
+extern EvtScript N(main);
+extern EvtScript N(80240050);
 extern NpcGroupList N(npcGroupList_802410DC);

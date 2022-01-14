@@ -21,7 +21,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_07_tattle },
 };
 
-EvtSource N(80241490) = {
+EvtScript N(80241490) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -38,7 +38,7 @@ static s32 N(pad_1528)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitSingleDoor_80241530) = {
+EvtScript N(exitSingleDoor_80241530) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
@@ -54,7 +54,7 @@ EvtSource N(exitSingleDoor_80241530) = {
     EVT_END
 };
 
-EvtSource N(enterSingleDoor_802415E4) = {
+EvtScript N(enterSingleDoor_802415E4) = {
     EVT_CALL(UseDoorSounds, 0)
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
@@ -67,7 +67,7 @@ EvtSource N(enterSingleDoor_802415E4) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -85,7 +85,7 @@ EvtSource N(main) = {
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, -220, 75, -210, 17, EVT_SAVE_FLAG(1050))
     EVT_CALL(MakeEntity, 0x802EAED4, -370, 0, -200, 0, -1, MAKE_ENTITY_END)
     EVT_CALL(MakeEntity, 0x802EAED4, -410, 0, -200, 0, -1, MAKE_ENTITY_END)
@@ -97,7 +97,7 @@ static s32 N(pad_17E4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(802417F0) = {
+EvtScript N(802417F0) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -146,7 +146,7 @@ NpcAISettings N(npcAISettings_802418DC) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_8024190C) = {
+EvtScript N(npcAI_8024190C) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 1, 10)
     EVT_CALL(SetSelfVar, 2, 14)
@@ -165,7 +165,7 @@ NpcSettings N(npcSettings_8024197C) = {
     .level = 13,
 };
 
-EvtSource N(npcAI_802419A8) = {
+EvtScript N(npcAI_802419A8) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetSelfVar, 0, 4)
     EVT_CALL(SetSelfVar, 1, 32)

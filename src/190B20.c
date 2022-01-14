@@ -1097,20 +1097,20 @@ s32 D_802838F8 = 0;
 
 extern PartnerDMAData D_80283F10[];
 
-extern EvtSource D_80293820;
+extern EvtScript D_80293820;
 extern f32 D_802938A4;
 extern s16 D_802938A8;
 extern EffectInstance* gDamageCountEffects[24];
 extern s32 gDamageCountTimers[24];
 extern Gfx D_80293970[];
 extern s32 D_802939C0;
-extern EvtSource D_802939C4;
-extern EvtSource D_80293A10;
-extern EvtSource D_80293A34;
-extern EvtSource D_80293A58;
-extern EvtSource D_80293A7C;
-extern EvtSource D_80293AA0;
-extern EvtSource D_80293AC4;
+extern EvtScript D_802939C4;
+extern EvtScript D_80293A10;
+extern EvtScript D_80293A34;
+extern EvtScript D_80293A58;
+extern EvtScript D_80293A7C;
+extern EvtScript D_80293AA0;
+extern EvtScript D_80293AC4;
 
 s32 func_80265CE8(u32*, s32);
 

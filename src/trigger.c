@@ -46,7 +46,7 @@ void init_trigger_list(void) {
     gTriggerCount = 0;
 }
 
-Trigger* create_trigger(TriggerDefinition* def) {
+Trigger* create_trigger(TriggerBlueprint* def) {
     Trigger* ret;
     s32 i;
 
@@ -245,7 +245,7 @@ void delete_trigger(Trigger* toDelete) {
     }
 }
 
-s32 is_trigger_bound(Trigger* trigger, EvtSource* script) {
+s32 is_trigger_bound(Trigger* trigger, EvtScript* script) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
