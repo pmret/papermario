@@ -17,8 +17,8 @@ glabel func_802415EC_E13D4C
 /* E13D7C 8024161C 0040802D */  daddu     $s0, $v0, $zero
 /* E13D80 80241620 0C048C56 */  jal       create_generic_entity_world
 /* E13D84 80241624 AE300080 */   sw       $s0, 0x80($s1)
-/* E13D88 80241628 3C048011 */  lui       $a0, %hi(D_80108558)
-/* E13D8C 8024162C 24848558 */  addiu     $a0, $a0, %lo(D_80108558)
+/* E13D88 80241628 3C048011 */  lui       $a0, %hi(HudScript_StatusCoin)
+/* E13D8C 8024162C 24848558 */  addiu     $a0, $a0, %lo(HudScript_StatusCoin)
 /* E13D90 80241630 0C050529 */  jal       create_hud_element
 /* E13D94 80241634 AE020000 */   sw       $v0, ($s0)
 /* E13D98 80241638 0040202D */  daddu     $a0, $v0, $zero

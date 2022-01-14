@@ -90,28 +90,31 @@ s32 D_802E9898[9] = {
     0x00000000,
 };
 
-StaticShadowData D_802E98BC = {
+StaticShadowData CircularShadowA = {
     .flags = SHADOW_FLAGS_20,
-    .unk_04 = D_802E9850,
+    .renderCommandList = D_802E9850,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
-    .unk_20 = 0x01190A19,
+    .entityType = ENTITY_TYPE_SHADOW,
+    .aabbSize = { 25, 10, 25 }
 };
 
-StaticShadowData D_802E98E0 = {
+StaticShadowData CircularShadowB = {
     .flags = SHADOW_FLAGS_20,
-    .unk_04 = D_802E9874,
+    .renderCommandList = D_802E9874,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
-    .unk_20 = 0x01190A19,
+    .entityType = ENTITY_TYPE_SHADOW,
+    .aabbSize = { 25, 10, 25 }
 };
 
-StaticShadowData D_802E9904 = {
+StaticShadowData SquareShadow = {
     .flags = SHADOW_FLAGS_20,
-    .unk_04 = D_802E9898,
+    .renderCommandList = D_802E9898,
     .animModelNode =  NULL,
     .onCreateCallback = entity_Shadow_init,
-    .unk_20 = 0x01190A19,
+    .entityType = ENTITY_TYPE_SHADOW,
+    .aabbSize = { 25, 10, 25 }
 };
 
 s32 D_802E9928[2] = {
@@ -139,7 +142,7 @@ s32 D_802E99FC[7] = {
     &D_0A003508, 0x00000002, 0x00000000,
 };
 
-StaticEntityData D_802E9A18 = { 0x4200, 0x0020, &D_802E99FC, {0, 0, 0, 0}, entity_SaveBlock_init, &D_802E9930, entity_block_handle_collision, E4B2E0_ROM_START, E4B2E0_ROM_END, 32, {0x19, 0x19, 0x19}};
+StaticEntityData Entity_SavePoint = { 0x4200, 0x0020, &D_802E99FC, {0, 0, 0, 0}, entity_SaveBlock_init, &D_802E9930, entity_block_handle_collision, E4B2E0_ROM_START, E4B2E0_ROM_END, 32, {0x19, 0x19, 0x19}};
 
 // potential file split(?)
 s32 D_802E9A3C[1] = {
@@ -195,10 +198,10 @@ s32 D_802E9B94[7] = {
     (s32) &D_0A000740, 0x00000002, 0x00000000,
 };
 
-StaticEntityData D_802E9BB0 = { 0xA000, 0x002C, &D_802E9B78, {0, 0, 0, 0}, entity_base_switch_init,    &D_802E9A40, NULL, E62AC0_ROM_START, E62AC0_ROM_END, 8, {0x16, 0x17, 0x16} };
-StaticEntityData D_802E9BD4 = { 0xAA04, 0x002C, &D_802E9B40, {0, 0, 0, 0}, entity_BlueSwitch_init,     &D_802E9AC4, NULL, E639C0_ROM_START, E639C0_ROM_END, 7, {0x16, 0x17, 0x16} };
-StaticEntityData D_802E9BF8 = { 0xAA04, 0x002C, &D_802E9B5C, {0, 0, 0, 0}, entity_HugeBlueSwitch_init, &D_802E9A88, NULL, E639C0_ROM_START, E639C0_ROM_END, 9, {0x42, 0x4B, 0x42} };
-StaticEntityData D_802E9C1C = { 0xC000, 0x002C, &D_802E9B94, {0, 0, 0, 0}, entity_base_switch_init,    &D_802E9B00, NULL, E62370_ROM_START, E62370_ROM_END, 10, {0x32, 0x0F, 0x32} };
+StaticEntityData Entity_RedSwitch = { 0xA000, 0x002C, &D_802E9B78, {0, 0, 0, 0}, entity_base_switch_init,    &D_802E9A40, NULL, E62AC0_ROM_START, E62AC0_ROM_END, ENTITY_TYPE_RED_SWITCH, {0x16, 0x17, 0x16} };
+StaticEntityData Entity_BlueSwitch = { 0xAA04, 0x002C, &D_802E9B40, {0, 0, 0, 0}, entity_BlueSwitch_init,     &D_802E9AC4, NULL, E639C0_ROM_START, E639C0_ROM_END, ENTITY_TYPE_BLUE_SWITCH, {0x16, 0x17, 0x16} };
+StaticEntityData Entity_HugeBlueSwitch = { 0xAA04, 0x002C, &D_802E9B5C, {0, 0, 0, 0}, entity_HugeBlueSwitch_init, &D_802E9A88, NULL, E639C0_ROM_START, E639C0_ROM_END, ENTITY_TYPE_HUGE_BLUE_SWITCH, {0x42, 0x4B, 0x42} };
+StaticEntityData Entity_GreenStompSwitch = { 0xC000, 0x002C, &D_802E9B94, {0, 0, 0, 0}, entity_base_switch_init,    &D_802E9B00, NULL, E62370_ROM_START, E62370_ROM_END, ENTITY_TYPE_GREEN_STOMP_SWITCH, {0x32, 0x0F, 0x32} };
 
 s32 D_802E9C40[12] = {
     0x00000007, 0x00000020, 0x00000003, 0x00000000,
@@ -211,13 +214,13 @@ s32 D_802E9C70[7] = {
     (s32) &D_802E9828, 0x00000002, 0x00000000
 };
 
-StaticEntityData D_802E9C8C = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E32420_ROM_START, E32420_ROM_END, 21, {0x10, 0x10, 0x10}};
-StaticEntityData D_802E9CB0 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E35670_ROM_START, E35670_ROM_END, 22, {0x10, 0x10, 0x10}};
-StaticEntityData D_802E9CD4 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E38890_ROM_START, E38890_ROM_END, 23, {0x10, 0x10, 0x10}};
-StaticEntityData D_802E9CF8 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E32420_ROM_START, E32420_ROM_END, 24, {0x08, 0x08, 0x08}};
-StaticEntityData D_802E9D1C = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E35670_ROM_START, E35670_ROM_END, 25, {0x08, 0x08, 0x08}};
-StaticEntityData D_802E9D40 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E38890_ROM_START, E38890_ROM_END, 26, {0x08, 0x08, 0x08}};
-StaticEntityData D_802E9D64 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E3E260_ROM_START, E3E260_ROM_END, 13, {0x08, 0x08, 0x08}};
+StaticEntityData Entity_ShatteringHammer1Block = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E32420_ROM_START, E32420_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK, {0x10, 0x10, 0x10}};
+StaticEntityData Entity_ShatteringHammer2Block = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E35670_ROM_START, E35670_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK, {0x10, 0x10, 0x10}};
+StaticEntityData Entity_ShatteringHammer3Block = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E38890_ROM_START, E38890_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK, {0x10, 0x10, 0x10}};
+StaticEntityData Entity_ShatteringHammer1BlockTiny = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E32420_ROM_START, E32420_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK_TINY, {0x08, 0x08, 0x08}};
+StaticEntityData Entity_ShatteringHammer2BlockTiny = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E35670_ROM_START, E35670_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK_TINY, {0x08, 0x08, 0x08}};
+StaticEntityData Entity_ShatteringHammer3BlockTiny = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E38890_ROM_START, E38890_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK_TINY, {0x08, 0x08, 0x08}};
+StaticEntityData Entity_ShatteringBrickBlock = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E3E260_ROM_START, E3E260_ROM_END, ENTITY_TYPE_BRICK_BLOCK, {0x08, 0x08, 0x08}};
 
 void entity_shattering_block_init(Entity* entity) {
     u32 type;
@@ -234,32 +237,32 @@ void entity_shattering_block_init(Entity* entity) {
     }
 
     switch (type) {
-        case 21:
-        case 24:
+        case ENTITY_TYPE_HAMMER1_BLOCK:
+        case ENTITY_TYPE_HAMMER1_BLOCK_TINY:
             a1 = &D_0A0031E0;
             a2 = &D_0A001508;
             break;
-        case 22:
-        case 25:
+        case ENTITY_TYPE_HAMMER2_BLOCK:
+        case ENTITY_TYPE_HAMMER2_BLOCK_TINY:
             a1 = &D_0A0031B0;
             a2 = &D_0A0014D8;
             break;
-        case 23:
-        case 26:
+        case ENTITY_TYPE_HAMMER3_BLOCK:
+        case ENTITY_TYPE_HAMMER3_BLOCK_TINY:
             a1 = &D_0A002F78;
             a2 = &D_0A001218;
             break;
-        case 13:
+        case ENTITY_TYPE_BRICK_BLOCK:
             sfx_play_sound_at_position(0x158, 0, entity->position.x, entity->position.y, entity->position.z);
             a1 = &D_0A003F70;
             a2 = &D_0A002318;
             break;
-        case 14:
-        case 15:
-        case 16:
-        case 17:
-        case 18:
-        case 19:
+        case ENTITY_TYPE_MULTI_COIN_BRICK:
+        case ENTITY_TYPE_YELLOW_BLOCK:
+        case ENTITY_TYPE_SINGLE_TRIGGER_BLOCK:
+        case ENTITY_TYPE_HIDDEN_YELLOW_BLOCK:
+        case ENTITY_TYPE_HIDDEN_RED_BLOCK:
+        case ENTITY_TYPE_INACTIVE_BLOCK:
             break;
     }
 
@@ -277,33 +280,33 @@ void entity_breakable_block_create_shattering_entity(Entity* entity) {
     type = get_entity_type(entity->listIndex);
 
     switch (type) {
-        case 21:
-            addr = &D_802E9C8C;
+        case ENTITY_TYPE_HAMMER1_BLOCK:
+            addr = &Entity_ShatteringHammer1Block;
             break;
-        case 24:
-            addr = &D_802E9CF8;
+        case ENTITY_TYPE_HAMMER1_BLOCK_TINY:
+            addr = &Entity_ShatteringHammer1BlockTiny;
             break;
-        case 22:
-            addr = &D_802E9CB0;
+        case ENTITY_TYPE_HAMMER2_BLOCK:
+            addr = &Entity_ShatteringHammer2Block;
             break;
-        case 25:
-            addr = &D_802E9D1C;
+        case ENTITY_TYPE_HAMMER2_BLOCK_TINY:
+            addr = &Entity_ShatteringHammer2BlockTiny;
             break;
-        case 23:
-            addr = &D_802E9CD4;
+        case ENTITY_TYPE_HAMMER3_BLOCK:
+            addr = &Entity_ShatteringHammer3Block;
             break;
-        case 26:
-            addr = &D_802E9D40;
+        case ENTITY_TYPE_HAMMER3_BLOCK_TINY:
+            addr = &Entity_ShatteringHammer3BlockTiny;
             break;
-        case 13:
-            addr = &D_802E9D64;
+        case ENTITY_TYPE_BRICK_BLOCK:
+            addr = &Entity_ShatteringBrickBlock;
             break;
-        case 14:
-        case 15:
-        case 16:
-        case 17:
-        case 18:
-        case 19:
+        case ENTITY_TYPE_MULTI_COIN_BRICK:
+        case ENTITY_TYPE_YELLOW_BLOCK:
+        case ENTITY_TYPE_SINGLE_TRIGGER_BLOCK:
+        case ENTITY_TYPE_HIDDEN_YELLOW_BLOCK:
+        case ENTITY_TYPE_HIDDEN_RED_BLOCK:
+        case ENTITY_TYPE_INACTIVE_BLOCK:
             break;
     }
 

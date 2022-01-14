@@ -1,9 +1,9 @@
 #include "flo_16.h"
 #include "message_ids.h"
 
-extern s32 D_800F7F00[];
-extern s32 D_800F7F40[];
-extern s32 D_8008EF20[11][4];
+extern s32 wPartnerHudScripts[];
+extern s32 wDisabledPartnerHudScripts[];
+extern s32 gPartnerPopupProperties[11][4];
 
 EntryList N(entryList) = {
     { -720.0f,   0.0f, 0.0f,  90.0f },
@@ -485,14 +485,14 @@ ApiStatus N(func_802402AC_CD20DC)(Evt* script, s32 isInitialCall) {
 
             if (playerData->partners[idx].enabled) {
                 ptr->unk_108[i] = idx;
-                ptr->unk_84[i] = *D_8008EF20[idx];
+                ptr->unk_84[i] = *gPartnerPopupProperties[idx];
                 partnerLevel = N(UnkFunc37)(idx, var);
                 if (partnerLevel >= 0) {
-                    ptr->unk_00[i] = D_800F7F00[idx];
+                    ptr->unk_00[i] = wPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 1;
                     ptr->unk_294[i] = N(D_80243718_CD5548)[i][partnerLevel];
                 } else {
-                    ptr->unk_00[i] = D_800F7F40[idx];
+                    ptr->unk_00[i] = wDisabledPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 0;
                     ptr->unk_294[i] = N(D_80243700_CD5530)[var];
                 }
@@ -526,7 +526,7 @@ ApiStatus N(func_802402AC_CD20DC)(Evt* script, s32 isInitialCall) {
 
     destroy_popup_menu();
     if (script->functionTemp[1] != 0xFF) {
-        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1] - 1]][0];
+        script->varTable[0] = gPartnerPopupProperties[ptr->unk_108[script->functionTemp[1] - 1]][0];
         script->varTable[1] = ptr->unk_108[script->functionTemp[1] - 1];
     } else {
         script->varTable[0] = -1;

@@ -1,6 +1,9 @@
 #include "common.h"
+#include "hud_element.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
+#include "sprite.h"
+#include "effects.h"
 
 f32 D_802809F0 = 0.0f;
 s8 D_802809F4 = 0;
@@ -9,8 +12,19 @@ s16 D_802809F6 = -1;
 s16 D_802809F8 = 0;
 u16 D_802809FA = 0;
 
-void* D_802809FC[] = {
-    D_80291FA8, D_80291FD0, D_80291FF8, D_80292020, D_80292048, D_80292070, D_80292098, D_802920C0, D_802920E8, D_80292110, NULL, NULL, NULL,
+extern HudElementAnim HudScript_HPDigit0;
+extern HudElementAnim HudScript_HPDigit1;
+extern HudElementAnim HudScript_HPDigit2;
+extern HudElementAnim HudScript_HPDigit3;
+extern HudElementAnim HudScript_HPDigit4;
+extern HudElementAnim HudScript_HPDigit5;
+extern HudElementAnim HudScript_HPDigit6;
+extern HudElementAnim HudScript_HPDigit7;
+extern HudElementAnim HudScript_HPDigit8;
+extern HudElementAnim HudScript_HPDigit9;
+
+void* bHPDigitHudScripts[] = {
+    HudScript_HPDigit0, HudScript_HPDigit1, HudScript_HPDigit2, HudScript_HPDigit3, HudScript_HPDigit4, HudScript_HPDigit5, HudScript_HPDigit6, HudScript_HPDigit7, HudScript_HPDigit8, HudScript_HPDigit9, NULL, NULL, NULL,
 };
 
 s32 D_80280A30 = 0xFF;
@@ -28,7 +42,7 @@ EvtSource BtlPutPartnerAway = {
         EVT_SETF(EVT_VAR(0), EVT_FIXED(1.0))
         EVT_LOOP(10)
             EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
-            EVT_SUBF(EVT_VAR(0), EVT_FIXED(0.1005859375))
+            EVT_SUBF(EVT_VAR(0), EVT_FIXED(0.1))
             EVT_WAIT_FRAMES(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
@@ -46,7 +60,7 @@ EvtSource BtlPutPartnerAway = {
 
 EvtSource BtlBringPartnerOut = {
     EVT_CHILD_THREAD
-        EVT_SETF(EVT_VAR(0), EVT_FIXED(0.1005859375))
+        EVT_SETF(EVT_VAR(0), EVT_FIXED(0.1))
         EVT_LOOP(20)
             EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
             EVT_ADDF(EVT_VAR(0), EVT_FIXED(0.05078125))
@@ -382,7 +396,7 @@ void func_8023ED5C(void) {
                     actor = battleStatus->enemyActors[i];
 
                     if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
-                        renderTaskPtr->appendGfxArg = i;
+                        renderTaskPtr->appendGfxArg = (void*)i;
                         renderTaskPtr->appendGfx = func_80257B28;
                         renderTaskPtr->distance = actor->currentPos.z;
                         renderTaskPtr->renderMode = actor->renderMode;
@@ -561,7 +575,7 @@ void btl_delete_actor(Actor* actor) {
 
     delete_shadow(actor->shadow);
     remove_all_status_icons(actor->hudElementDataIndex);
-    remove_effect(actor->ptrDefuffIcon);
+    remove_effect(actor->ptrDefuffIcon); // ???
 
     if (actor->unk_200 != NULL) {
         actor->unk_200[3][9] = 0;

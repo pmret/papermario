@@ -1084,7 +1084,7 @@ void update_entities(void) {
                     entity->collisionFlags = entity_get_collision_flags(entity);
 
                     if (entity->collisionFlags) {
-                        EntityCallback entityCallback = entity->staticData->unk_data_ptr2;
+                        EntityCallback entityCallback = entity->staticData->fpHandleCollision;
 
                         if (entityCallback != NULL && entityCallback(entity) != 0) {
                             entity->unk_07 = 0xA;
@@ -1170,19 +1170,19 @@ void update_shadows(void) {
             D_80151324++;
 
             if (!(shadow->flags & SHADOW_FLAGS_40000000)) {
-                if (shadow->flags & SHADOW_FLAGS_2000) {
+                if (shadow->flags & SHADOW_FLAGS_ALIGNED_TO_CAMERA) {
                     shadow->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
                 }
 
                 update_shadow_transform_matrix(shadow);
 
-                if (shadow->flags & SHADOW_FLAGS_8) {
+                if (shadow->flags & SHADOW_FLAGS_COMPLEX_MODEL) {
                     update_model_animator(shadow->entityModelID);
                 } else {
                     exec_entity_model_commandlist(shadow->entityModelID);
                 }
 
-                if (shadow->flags & SHADOW_FLAGS_20000000) {
+                if (shadow->flags & SHADOW_FLAGS_READY_TO_DELETE) {
                     _delete_shadow(shadow->listIndex);
                 }
             }
@@ -1379,14 +1379,14 @@ void render_shadows(void) {
         Shadow* shadow = get_shadow_by_index(i);
 
         if (shadow != NULL) {
-            if (shadow->flags & SHADOW_FLAGS_1) {
-                if (shadow->flags & SHADOW_FLAGS_10000000) {
-                    shadow->unk_05 -= 20;
-                    if (shadow->unk_05 <= 20) {
-                        shadow->flags |= SHADOW_FLAGS_20000000;
+            if (shadow->flags & SHADOW_FLAGS_HIDDEN) {
+                if (shadow->flags & SHADOW_FLAGS_FADING_AWAY) {
+                    shadow->alpha -= 20;
+                    if (shadow->alpha <= 20) {
+                        shadow->flags |= SHADOW_FLAGS_READY_TO_DELETE;
                     }
                 }
-            } else if (shadow->flags & SHADOW_FLAGS_8) {
+            } else if (shadow->flags & SHADOW_FLAGS_COMPLEX_MODEL) {
                 if (shadow->vertexArray == NULL) {
                     render_animated_model(shadow->entityModelID, &shadow->transformMatrix);
                 } else {
@@ -1396,14 +1396,14 @@ void render_shadows(void) {
                                   shadow->vertexArray);
                 }
             } else {
-                if (shadow->flags & SHADOW_FLAGS_10000000) {
-                    shadow->unk_05 -= 20;
-                    if (shadow->unk_05 <= 20) {
-                        shadow->flags |=  SHADOW_FLAGS_20000000;
+                if (shadow->flags & SHADOW_FLAGS_FADING_AWAY) {
+                    shadow->alpha -= 20;
+                    if (shadow->alpha <= 20) {
+                        shadow->flags |=  SHADOW_FLAGS_READY_TO_DELETE;
                     }
                 }
 
-                bind_entity_model_setupGfx(shadow->entityModelID, shadow->unk_05, entity_model_set_shadow_color);
+                bind_entity_model_setupGfx(shadow->entityModelID, shadow->alpha, entity_model_set_shadow_color);
 
                 if (shadow->vertexArray == NULL) {
                     draw_entity_model_A(shadow->entityModelID, &shadow->transformMatrix);
@@ -1542,7 +1542,7 @@ void delete_entity(s32 entityIndex) {
     if (entity->shadowIndex >= 0) {
         Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
 
-        shadow->flags |= SHADOW_FLAGS_10000000;
+        shadow->flags |= SHADOW_FLAGS_FADING_AWAY;
     }
 
     heap_free((*gCurrentEntityListPtr)[entityIndex]);
@@ -1567,7 +1567,7 @@ void delete_entity_and_unload_data(s32 entityIndex) {
     if (entity->shadowIndex >= 0) {
         Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
 
-        shadow->flags |= SHADOW_FLAGS_10000000;
+        shadow->flags |= SHADOW_FLAGS_FADING_AWAY;
     }
 
     heap_free((*gCurrentEntityListPtr)[entityIndex]);
@@ -1792,7 +1792,7 @@ s32 create_shadow_from_data(StaticShadowData* data, f32 x, f32 y, f32 z) {
     mem_clear(shadow, sizeof(*shadow));
     shadow->listIndex = i;
     shadow->flags = data->flags | SHADOW_FLAGS_80000000;
-    shadow->unk_05 = 0x80;
+    shadow->alpha = 0x80;
     shadow->unk_06 = 0x80;
     shadow->position.x = x;
     shadow->position.y = y;
@@ -1802,11 +1802,11 @@ s32 create_shadow_from_data(StaticShadowData* data, f32 x, f32 y, f32 z) {
     shadow->scale.z = 1.0f;
 
     if (data->animModelNode != NULL) {
-        shadow->flags |= SHADOW_FLAGS_8;
-        shadow->entityModelID = create_model_animator(data->unk_04);
+        shadow->flags |= SHADOW_FLAGS_COMPLEX_MODEL;
+        shadow->entityModelID = create_model_animator(data->renderCommandList);
         load_model_animator_tree(shadow->entityModelID, data->animModelNode);
     } else {
-        shadow->entityModelID = load_entity_model(data->unk_04);
+        shadow->entityModelID = load_entity_model(data->renderCommandList);
     }
 
     if (data->onCreateCallback != NULL) {
@@ -1883,7 +1883,7 @@ ApiStatus UseDynamicShadow(Evt* script, s32 isInitialCall) {
 
         entity->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
         shadow = get_shadow_by_index(entity->shadowIndex);
-        shadow->flags |= SHADOW_FLAGS_400000;
+        shadow->flags |= SHADOW_FLAGS_POSITION_DIRTY;
     } else {
         entity->flags &= ~ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
     }
@@ -2003,24 +2003,24 @@ s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
 
 s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z) {
     s32 setFlag200 = FALSE;
-    StaticShadowData* data = &D_802E98BC;
+    StaticShadowData* data = &CircularShadowA;
     s32 shadowIndex;
 
     switch (type) {
         case 2:
             setFlag200 = TRUE;
         case 0:
-            data = &D_802E98BC;
+            data = &CircularShadowA;
             break;
         case 3:
             setFlag200 = TRUE;
         case 1:
-            data = &D_802E9904;
+            data = &SquareShadow;
             break;
         case 5:
             setFlag200 = TRUE;
         case 4:
-            data = &D_802E98E0;
+            data = &CircularShadowB;
             break;
     }
 
@@ -2050,7 +2050,7 @@ void update_entity_shadow_position(Entity* entity) {
         f32 origHitLength;
 
         if (entity->alpha < 255) {
-            shadow->unk_05 = entity->alpha / 2;
+            shadow->alpha = entity->alpha / 2;
         } else {
             u8 alphaTemp;
 
@@ -2059,12 +2059,12 @@ void update_entity_shadow_position(Entity* entity) {
             } else {
                 alphaTemp = 128;
             }
-            shadow->unk_05 = alphaTemp;
+            shadow->alpha = alphaTemp;
         }
 
         if (!(entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW)) {
-            if (shadow->flags & SHADOW_FLAGS_400000) {
-                shadow->flags &= ~SHADOW_FLAGS_400000;
+            if (shadow->flags & SHADOW_FLAGS_POSITION_DIRTY) {
+                shadow->flags &= ~SHADOW_FLAGS_POSITION_DIRTY;
             } else {
                 return;
             }
@@ -2105,9 +2105,9 @@ void update_entity_shadow_position(Entity* entity) {
             shadow->flags &= ~SHADOW_FLAGS_40000000;
         }
 
-        shadow->flags = (shadow->flags & ~SHADOW_FLAGS_1) | ((u16)entity->flags & ENTITY_FLAGS_HIDDEN);
+        shadow->flags = (shadow->flags & ~SHADOW_FLAGS_HIDDEN) | ((u16)entity->flags & ENTITY_FLAGS_HIDDEN);
         if (!(entity->flags & ENTITY_FLAGS_400) && origHitLength == 0.0f) {
-            shadow->flags |= SHADOW_FLAGS_1;
+            shadow->flags |= SHADOW_FLAGS_HIDDEN;
         }
     } else {
         entity->shadowPosY = 0.0f;

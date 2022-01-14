@@ -112,10 +112,10 @@ typedef struct HudElement {
 
 typedef HudElement* HudElementList[320];
 
-extern HudElementAnim D_80104A28[];
-extern HudElementAnim D_80108558[];
-extern HudElementAnim D_80108A64[];
-extern HudElementAnim D_80109270[];
+extern HudElementAnim HudScript_AnimatedHandPointer[];
+extern HudElementAnim HudScript_StatusCoin[];
+extern HudElementAnim HudScript_Refund[];
+extern HudElementAnim HudScript_MenuTimes[];
 extern HudElementAnim* D_8024FA30[1];
 extern HudElementAnim *gBadgeMenuElements[22];
 extern HudElement* gItemIcons[20];

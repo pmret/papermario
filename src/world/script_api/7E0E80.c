@@ -12,7 +12,7 @@ extern s32 D_80286524;
 extern s32 D_80286530;
 extern s32 D_80286534;
 extern Evt* D_8028652C;
-extern HudElementAnim* D_80080868;
+extern HudElementAnim* HudScript_Item_Coin;
 extern s32 D_8014F150[64];
 
 ApiStatus func_802803C8(Evt* script, s32 isInitialCall);
@@ -361,7 +361,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
 
 //dumb stuff
 #ifdef NON_EQUIVALENT
-extern s32 D_8008A680[337][2];
+extern s32 gItemHudScripts[337][2];
 
 void shop_open_item_select_popup(s32 mode) {
     Shop* shop = gGameStatusPtr->mapShop;
@@ -399,7 +399,7 @@ void shop_open_item_select_popup(s32 mode) {
         }
 
         if (itemID != 0) {
-            menu->ptrIcon[i] = D_8008A680[gItemTable[itemID].iconID][0];
+            menu->ptrIcon[i] = gItemHudScripts[gItemTable[itemID].iconID][0];
             menu->userIndex[i] = i;
             menu->enabled[i] = TRUE;
             menu->nameMsg[i] = gItemTable[itemID].nameMsg;
@@ -900,7 +900,7 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
         numShopItems++;
     }
 
-    shop->costIconID = create_hud_element(&D_80080868);
+    shop->costIconID = create_hud_element(&HudScript_Item_Coin);
     set_hud_element_flags(shop->costIconID, 0x80);
     clear_hud_element_flags(shop->costIconID, 0x8000);
     get_generic_entity(create_generic_entity_frontUI(NULL, draw_shop_items));

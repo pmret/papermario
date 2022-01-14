@@ -54,7 +54,7 @@ extern s32 D_802A25F4;
 extern s32 D_802A25F8;
 extern s16** D_802A25FC;
 extern HudElement** D_802A25C8;
-extern struct N(tempStc) D_8008A680[100];
+extern struct N(tempStc) gItemHudScripts[100];
 
 ApiStatus N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -88,7 +88,7 @@ ApiStatus N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
             }
 
             i = 0;
-            ic = &D_8008A680;
+            ic = &gItemHudScripts;
             itemTable = gItemTable;
             iconPtr = &D_802A25C8;
             for (; i < 7; i++, iconPtr++) {

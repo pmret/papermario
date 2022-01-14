@@ -37,8 +37,8 @@ glabel ShowKeyChoicePopup
 /* FAE48 802D6498 0120402D */  daddu     $t0, $t1, $zero
 /* FAE4C 802D649C 3C0C8008 */  lui       $t4, %hi(gItemTable)
 /* FAE50 802D64A0 258C78E0 */  addiu     $t4, $t4, %lo(gItemTable)
-/* FAE54 802D64A4 3C0B8009 */  lui       $t3, %hi(D_8008A680)
-/* FAE58 802D64A8 256BA680 */  addiu     $t3, $t3, %lo(D_8008A680)
+/* FAE54 802D64A4 3C0B8009 */  lui       $t3, %hi(gItemHudScripts)
+/* FAE58 802D64A8 256BA680 */  addiu     $t3, $t3, %lo(gItemHudScripts)
 /* FAE5C 802D64AC 240A0001 */  addiu     $t2, $zero, 1
 /* FAE60 802D64B0 0260382D */  daddu     $a3, $s3, $zero
 /* FAE64 802D64B4 3C03800A */  lui       $v1, %hi(gOverrideFlags)

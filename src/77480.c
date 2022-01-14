@@ -1066,13 +1066,13 @@ void check_for_interactables(void) {
                 phi_s2 = 1;
                 phi_s0 = floor;
                 switch (get_entity_type(floor)) {
-                    case 0x3:
-                    case 0x4:
-                    case 0x5:
-                    case 0x6:
-                    case 0xC:
-                    case 0x32:
-                    case 0x33:
+                    case ENTITY_TYPE_PADLOCK:
+                    case ENTITY_TYPE_PADLOCK_RED_FRAME:
+                    case ENTITY_TYPE_PADLOCK_RED_FACE:
+                    case ENTITY_TYPE_PADLOCK_BLUE_FACE:
+                    case ENTITY_TYPE_PUSH_BLOCK:
+                    case ENTITY_TYPE_CHEST:
+                    case ENTITY_TYPE_SIGNPOST:
                         phi_s0 = -1;
                         break;
                 }
@@ -1429,7 +1429,7 @@ void update_player_shadow(void) {
     }
 
     shadow->position.y = y;
-    shadow->unk_05 = (f64)playerStatus->alpha1 / 2;
+    shadow->alpha = (f64)playerStatus->alpha1 / 2;
 
     if (!(gGameStatusPtr->peachFlags & 1)) {
         set_standard_shadow_scale(shadow, shadowScale);

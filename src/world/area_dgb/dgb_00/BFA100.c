@@ -829,7 +829,7 @@ static s32 N(pad_3758)[] = {
 };
 
 EvtSource N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(D_802E9A18), -65, 60, -240, 0, MAKE_ENTITY_END)
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), -65, 60, -240, 0, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };

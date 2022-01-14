@@ -164,8 +164,8 @@ glabel MakeShop
 /* 7E2944 80281AC4 1440FFB3 */  bnez      $v0, .L80281994
 /* 7E2948 80281AC8 26520001 */   addiu    $s2, $s2, 1
 .L80281ACC:
-/* 7E294C 80281ACC 3C048008 */  lui       $a0, %hi(D_80080868)
-/* 7E2950 80281AD0 24840868 */  addiu     $a0, $a0, %lo(D_80080868)
+/* 7E294C 80281ACC 3C048008 */  lui       $a0, %hi(HudScript_Item_Coin)
+/* 7E2950 80281AD0 24840868 */  addiu     $a0, $a0, %lo(HudScript_Item_Coin)
 /* 7E2954 80281AD4 0C050529 */  jal       create_hud_element
 /* 7E2958 80281AD8 2410FFFF */   addiu    $s0, $zero, -1
 /* 7E295C 80281ADC 0040202D */  daddu     $a0, $v0, $zero

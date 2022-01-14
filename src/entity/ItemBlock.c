@@ -61,7 +61,7 @@ void entity_HitItemBlock_show_inactive(Entity* entity) {
     someEntity = get_entity_by_index(temp->unk_12);
     someEntity->flags &= ~ENTITY_FLAGS_HIDDEN;
     someShadow = get_shadow_by_index(someEntity->shadowIndex);
-    someShadow->flags &= ~SHADOW_FLAGS_1;
+    someShadow->flags &= ~SHADOW_FLAGS_HIDDEN;
 }
 
 void entity_ItemBlock_check_if_inactive(Entity* entity) {
@@ -85,11 +85,11 @@ void entity_ItemBlock_check_if_inactive(Entity* entity) {
 void entity_ItemBlock_replace_with_inactive(Entity* entity) {
     s32 entityType = get_entity_type(entity->listIndex);
     UNK_PTR entityData = &D_802EA07C;
-    s32 entityIndex;
-    s32 temp_s0;
-    s32 entityType2;
+    s32 childEntityIndex;
+    s32 isBlockOnGround;
+    s32 parentEntityType;
     struct802E3F0C* temp;
-    Entity* entityTemp;
+    Entity* childEntity;
     Shadow* shadow;
 
     if (entityType < 0x15) {
@@ -99,54 +99,53 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
         }
     }
 
-    entityIndex = create_entity(entityData, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y,
-                                0x80000000);
-    entityTemp = get_entity_by_index(entityIndex);
-    entityTemp->flags |= 1;
+    childEntityIndex = create_entity(entityData, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
+    childEntity = get_entity_by_index(childEntityIndex);
+    childEntity->flags |= 1;
 
     if (entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2) {
-        entityTemp->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
+        childEntity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
     }
 
     if (entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW) {
-        entityTemp->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
+        childEntity->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
     }
 
-    shadow = get_shadow_by_index(entityTemp->shadowIndex);
-    shadow->flags |= (SHADOW_FLAGS_400000 |SHADOW_FLAGS_1);
-    temp_s0 = is_block_on_ground(entity);
+    shadow = get_shadow_by_index(childEntity->shadowIndex);
+    shadow->flags |= (SHADOW_FLAGS_POSITION_DIRTY | SHADOW_FLAGS_HIDDEN);
+    isBlockOnGround = is_block_on_ground(entity);
 
-    entityType2 = get_entity_type(entity->listIndex);
-    if (entityType2 == 0x12 || entityType2 == 0x14) {
-        entityData = &D_802EA660;
-    } else if (temp_s0 != 0) {
-        entityData = &D_802EA618;
+    parentEntityType = get_entity_type(entity->listIndex);
+    if (parentEntityType == ENTITY_TYPE_HIDDEN_RED_BLOCK || parentEntityType == ENTITY_TYPE_RED_BLOCK) {
+        entityData = &Entity_HitRedBlock;
+    } else if (isBlockOnGround != 0) {
+        entityData = &Entity_HitGroundedYellowBlock;
     } else {
-        entityData = &D_802EA63C;
+        entityData = &Entity_HitFloatingYellowBlock;
     }
-    entityTemp = get_entity_by_index(create_entity(entityData, entity->position.x, entity->position.y, entity->position.z,
+    childEntity = get_entity_by_index(create_entity(entityData, entity->position.x, entity->position.y, entity->position.z,
                                      entity->rotation.y, 0x80000000));
-    entityTemp->alpha = entity->alpha;
+    childEntity->alpha = entity->alpha;
     if ((entity->flags & ENTITY_FLAGS_HIDDEN) || (entity->alpha < 0xFF)) {
-        entityTemp->alpha = 0x20;
+        childEntity->alpha = 0x20;
     }
 
     if (entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2) {
-        entityTemp->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
+        childEntity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
     }
 
-    temp = entityTemp->dataBuf;
-    temp->unk_12 = entityIndex;
+    temp = childEntity->dataBuf;
+    temp->unk_12 = childEntityIndex;
 
     if (entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW) {
-        entityTemp->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
+        childEntity->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
     }
 
     entity->flags &= ~ENTITY_FLAGS_100;
     shadow = get_shadow_by_index(entity->shadowIndex);
-    shadow->flags |= (SHADOW_FLAGS_10000000 | SHADOW_FLAGS_1);
-    shadow = get_shadow_by_index(entityTemp->shadowIndex);
-    shadow->flags |= SHADOW_FLAGS_400000;
+    shadow->flags |= (SHADOW_FLAGS_FADING_AWAY | SHADOW_FLAGS_HIDDEN);
+    shadow = get_shadow_by_index(childEntity->shadowIndex);
+    shadow->flags |= SHADOW_FLAGS_POSITION_DIRTY;
 }
 
 void entity_HitItemBlock_hide(Entity* entity) {
