@@ -295,7 +295,7 @@ void func_8004A124(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
             x = npc->pos.x;
             y = npc->pos.y;
             z = npc->pos.z;
-            if (npc_test_move_simple_with_slipping(npc->unk_80, &x, &y, &z, 1.0f, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
+            if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 1.0f, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
                 fx_emote(2, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &sp28);
                 npc->currentAnim.w = enemy->animList[0];
                 npc->duration = 15;
