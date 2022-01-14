@@ -162,11 +162,11 @@ ApiStatus func_8024150C_ECB20C(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~0x800;
+        npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
         if (!enemy->territory->wander.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~0x8;
+            npc->flags |= NPC_FLAG_GRAVITY & ~NPC_FLAG_ENABLE_HIT_SCRIPT;
         } else {
-            npc->flags = (npc->flags & ~0x200) | 0x8;
+            npc->flags &= ~NPC_FLAG_GRAVITY | NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
         if (enemy->unk_B0 & 4) {
             script->functionTemp[0] = 99;

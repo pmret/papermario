@@ -72,10 +72,10 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
     enemy->unk_114 = 0.0001f;
     enemy->unk_118 = 0.0001f;
 
-    if (isInitialCall || (enemy->unk_B0 & 4)) {
+    if (isInitialCall || enemy->unk_B0 & 4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->flags |= 0x102;
+        npc->flags |= NPC_FLAG_2 | NPC_FLAG_100;
         enemy->flags |= ENEMY_FLAGS_100000 | ENEMY_FLAGS_200000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP | ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000;
         npc->pos.x = 0.0f;
         npc->pos.y = -1000.0f;
@@ -165,15 +165,15 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
     enemy->unk_114 = 0.0001f;
     enemy->unk_118 = 0.0001f;
 
-    if (isInitialCall || (enemy->unk_B0 & 4)) {
+    if (isInitialCall || enemy->unk_B0 & 4) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~0x800;
+        npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
         if (!enemy->territory->wander.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~0x8;
+            npc->flags |= NPC_FLAG_GRAVITY & ~NPC_FLAG_ENABLE_HIT_SCRIPT;
         } else {
-            npc->flags = (npc->flags & ~0x200) | 0x8;
+            npc->flags &= ~NPC_FLAG_GRAVITY | NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
         if (enemy->unk_B0 & 4) {
             script->functionTemp[0] = 99;
@@ -183,7 +183,7 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
+    if (script->functionTemp[0] < 30 && enemy->varTable[0] == 0 && N(UnkNpcAIFunc26)(script)) {
         script->functionTemp[0] = 30;
     }
 
