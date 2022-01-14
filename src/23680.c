@@ -373,7 +373,6 @@ ApiStatus DoBasicAI(Evt* script, s32 isInitialCall) {
     EnemyTerritoryThing* pTerritory = &territory;
     NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args++);
 
-    
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
