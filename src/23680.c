@@ -218,11 +218,10 @@ void func_80049C04(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
             fx_emote(0, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &sp34);
             if (enemy->npcSettings->unk_2A & 1) {
                 script->functionTemp[0] = 10;
-                return;
             } else {
                 script->functionTemp[0] = 12;
-                return;
             }
+            return;
         }
     }
     if (npc->turnAroundYawAdjustment == 0) {
