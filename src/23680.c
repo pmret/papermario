@@ -215,13 +215,14 @@ void func_80049C04(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
         if (!npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, aiSettings->chaseSpeed, yaw, npc->collisionHeight, npc->collisionRadius)) {
             npc->yaw = yaw;
             ai_enemy_play_sound(npc, 0x2F4, 0x200000);
-            fx_emote(0, npc, 0, (f32) npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &sp34);
-            if ((enemy->npcSettings->unk_2A & 1) != 0) {
-                script->functionTemp[0] = 0xA;
+            fx_emote(0, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &sp34);
+            if (enemy->npcSettings->unk_2A & 1) {
+                script->functionTemp[0] = 10;
+                return;
+            } else {
+                script->functionTemp[0] = 12;
                 return;
             }
-            script->functionTemp[0] = 0xC;
-            return;
         }
     }
     if (npc->turnAroundYawAdjustment == 0) {
@@ -320,7 +321,7 @@ void func_8004A124(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
         fx_emote(2, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = 20;
-        script->functionTemp[0] = 0xE;
+        script->functionTemp[0] = 14;
         return;
     }
 
@@ -333,7 +334,7 @@ void func_8004A124(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* 
                 fx_emote(2, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &sp28);
                 npc->currentAnim.w = enemy->animList[0];
                 npc->duration = 15;
-                script->functionTemp[0] = 0xE;
+                script->functionTemp[0] = 14;
                 return;
             }
         }
@@ -436,6 +437,7 @@ ApiStatus DoBasicAI(Evt* script, s32 isInitialCall) {
             if (script->functionTemp[0] != 0xE) {
                 break;
             }
+            /* fallthrough */
         case 0xE:
             func_8004A3E8(script, aiSettings, pTerritory);
             break;
