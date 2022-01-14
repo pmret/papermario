@@ -5,7 +5,7 @@
 #include "dead_structs.h"
 
 ApiStatus N(DeadUnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
-    DeadEnemy* enemy = script->owner1.enemy;
+    DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;

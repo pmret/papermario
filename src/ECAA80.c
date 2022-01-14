@@ -10,6 +10,8 @@ extern s32 D_802462F0[];
 extern s32 D_80246460_EC9D00[91];
 extern s32 D_802465CC;
 
+void func_80241364_ECB064(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory);
+
 void func_80240D80_ECAA80(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -136,7 +138,7 @@ void func_802414C8_ECB1C8(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
 }
 
 ApiStatus func_8024150C_ECB20C(Evt* script, s32 isInitialCall) {
-    DeadEnemy* enemy = script->owner1.enemy;
+    DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
@@ -164,9 +166,9 @@ ApiStatus func_8024150C_ECB20C(Evt* script, s32 isInitialCall) {
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
         if (!enemy->territory->wander.isFlying) {
-            npc->flags |= NPC_FLAG_GRAVITY & ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & ~NPC_FLAG_ENABLE_HIT_SCRIPT;
         } else {
-            npc->flags &= ~NPC_FLAG_GRAVITY | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags = (npc->flags & ~NPC_FLAG_GRAVITY) | NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
         if (enemy->unk_B0 & 4) {
             script->functionTemp[0] = 99;
@@ -216,7 +218,7 @@ INCLUDE_ASM(s32, "ECAA80", func_802419F0_ECB6F0);
 
 ApiStatus func_80241A28_ECB728(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
+    s32* ptr = (s32*) evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

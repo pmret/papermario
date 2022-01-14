@@ -10,6 +10,9 @@ const char ascii_EA6D70[] = "kzn_11";
 const char ascii_EA6D78[] = "kzn_18";
 extern s32 D_802466D0[];
 
+void func_8004D8E0(DeadEnemy*);
+void func_80240DC4_EA16C4(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+
 #include "world/common/UnkNpcAIFunc6.inc.c"
 
 #include "world/common/UnkNpcAIFunc7.inc.c"
@@ -59,7 +62,7 @@ s32 N(UnkNpcAIFunc26)(Evt* script) {
 
 // Similar to UnkFunc7
 ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
-    DeadEnemy* enemy = script->owner1.enemy;
+    DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Enemy* enemy2;
     Npc* npc2;
@@ -143,7 +146,7 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
 
 // Similar to UnkNpcAIFunc27
 ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
-    DeadEnemy* enemy = script->owner1.enemy;
+    DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
@@ -171,9 +174,9 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
         if (!enemy->territory->wander.isFlying) {
-            npc->flags |= NPC_FLAG_GRAVITY & ~NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags = (npc->flags | NPC_FLAG_GRAVITY) & ~NPC_FLAG_ENABLE_HIT_SCRIPT;
         } else {
-            npc->flags &= ~NPC_FLAG_GRAVITY | NPC_FLAG_ENABLE_HIT_SCRIPT;
+            npc->flags = (npc->flags & ~NPC_FLAG_GRAVITY) | NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
         if (enemy->unk_B0 & 4) {
             script->functionTemp[0] = 99;
@@ -249,9 +252,9 @@ INCLUDE_ASM(s32, "EA0C10", func_80240DC4_EA16C4);
 #include "world/common/UnkNpcAIFunc30.inc.c"
 
 ApiStatus func_80241AE0_EA23E0(Evt* script, s32 isInitialCall) {
-    DeadEnemy* enemy = script->owner1.enemy;
+    DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    NpcAISettings* settings = evt_get_variable(script, *script->ptrReadPos);
+    NpcAISettings* settings = (NpcAISettings*) evt_get_variable(script, *script->ptrReadPos);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
 
