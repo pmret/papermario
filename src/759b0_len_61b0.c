@@ -56,7 +56,7 @@ s32 npc_raycast_down(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f32
     *startY = cHitY;
     *startZ = cHitZ;
 
-    if (colliderID < 0 ) {
+    if (colliderID < 0) {
         return colliderID;
     }
 
