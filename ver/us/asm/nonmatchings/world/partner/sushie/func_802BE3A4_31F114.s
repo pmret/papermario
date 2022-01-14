@@ -241,7 +241,7 @@ glabel func_802BE3A4_31F114
 /* 31F480 802BE710 46800020 */  cvt.s.w   $f0, $f0
 /* 31F484 802BE714 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 31F488 802BE718 8E240080 */  lw        $a0, 0x80($s1)
-/* 31F48C 802BE71C 0C0371DE */  jal       npc_raycast_down_ahead
+/* 31F48C 802BE71C 0C0371DE */  jal       npc_raycast_down_around
 /* 31F490 802BE720 0280382D */   daddu    $a3, $s4, $zero
 /* 31F494 802BE724 3C050007 */  lui       $a1, 7
 /* 31F498 802BE728 34A50003 */  ori       $a1, $a1, 3
@@ -828,7 +828,7 @@ glabel func_802BE3A4_31F114
 /* 31FD50 802BEFE0 AFA00018 */  sw        $zero, 0x18($sp)
 /* 31FD54 802BEFE4 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 31FD58 802BEFE8 8E240080 */  lw        $a0, 0x80($s1)
-/* 31FD5C 802BEFEC 0C0371DE */  jal       npc_raycast_down_ahead
+/* 31FD5C 802BEFEC 0C0371DE */  jal       npc_raycast_down_around
 /* 31FD60 802BEFF0 0280382D */   daddu    $a3, $s4, $zero
 /* 31FD64 802BEFF4 1040013E */  beqz      $v0, .L802BF4F0_320260
 /* 31FD68 802BEFF8 AFA20040 */   sw       $v0, 0x40($sp)
@@ -893,7 +893,7 @@ glabel func_802BE3A4_31F114
 /* 31FE54 802BF0E4 AFA00018 */  sw        $zero, 0x18($sp)
 /* 31FE58 802BF0E8 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 31FE5C 802BF0EC 8E240080 */  lw        $a0, 0x80($s1)
-/* 31FE60 802BF0F0 0C0371DE */  jal       npc_raycast_down_ahead
+/* 31FE60 802BF0F0 0C0371DE */  jal       npc_raycast_down_around
 /* 31FE64 802BF0F4 0280382D */   daddu    $a3, $s4, $zero
 /* 31FE68 802BF0F8 C7A00024 */  lwc1      $f0, 0x24($sp)
 /* 31FE6C 802BF0FC C7A20020 */  lwc1      $f2, 0x20($sp)

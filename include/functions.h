@@ -8,6 +8,7 @@
 #include "stdlib/stdarg.h"
 
 f32 fabsf(f32 f);
+f64 fabs(f64 f);
 f32 cosine(s16 arg0);
 
 s32 strcmp(const char* str1, const char* str2);
@@ -200,7 +201,7 @@ s32 phys_can_player_interact(void);
 
 void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2);
 
-s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
+s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, f32, f32, s32*);
 s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* posX, f32* posY, f32* posZ, f32 speed, f32 heading);
 
 s32 evt_get_variable(Evt* script, Bytecode var);
@@ -272,7 +273,7 @@ s32 pause_get_total_equipped_bp_cost(void);
 s32 pause_get_menu_msg(s32 index);
 void pause_sort_item_list(s16* arr, s32 len, s32 (*compare)(s16*, s16 *));
 
-s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
+s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
 s32 player_raycast_below_cam_relative(PlayerStatus*, f32*, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
 s32 npc_test_move_taller_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);

@@ -146,7 +146,7 @@ glabel partner_get_out
 /* 883B8 800EEF08 44820000 */  mtc1      $v0, $f0
 /* 883BC 800EEF0C 00000000 */  nop
 /* 883C0 800EEF10 46800020 */  cvt.s.w   $f0, $f0
-/* 883C4 800EEF14 0C0371DE */  jal       npc_raycast_down_ahead
+/* 883C4 800EEF14 0C0371DE */  jal       npc_raycast_down_around
 /* 883C8 800EEF18 E7A00018 */   swc1     $f0, 0x18($sp)
 /* 883CC 800EEF1C 10400011 */  beqz      $v0, .L800EEF64
 /* 883D0 800EEF20 0240202D */   daddu    $a0, $s2, $zero

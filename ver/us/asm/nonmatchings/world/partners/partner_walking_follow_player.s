@@ -630,7 +630,7 @@ glabel partner_walking_follow_player
 /* 85A50 800EC5A0 46800020 */  cvt.s.w   $f0, $f0
 /* 85A54 800EC5A4 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 85A58 800EC5A8 8E240080 */  lw        $a0, 0x80($s1)
-/* 85A5C 800EC5AC 0C0371DE */  jal       npc_raycast_down_ahead
+/* 85A5C 800EC5AC 0C0371DE */  jal       npc_raycast_down_around
 /* 85A60 800EC5B0 26340040 */   addiu    $s4, $s1, 0x40
 /* 85A64 800EC5B4 1040004B */  beqz      $v0, .L800EC6E4
 /* 85A68 800EC5B8 00000000 */   nop
@@ -932,7 +932,7 @@ glabel partner_walking_follow_player
 /* 85EDC 800ECA2C 46800020 */  cvt.s.w   $f0, $f0
 /* 85EE0 800ECA30 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 85EE4 800ECA34 8E240080 */  lw        $a0, 0x80($s1)
-/* 85EE8 800ECA38 0C0371DE */  jal       npc_raycast_down_ahead
+/* 85EE8 800ECA38 0C0371DE */  jal       npc_raycast_down_around
 /* 85EEC 800ECA3C 27A70030 */   addiu    $a3, $sp, 0x30
 /* 85EF0 800ECA40 10400228 */  beqz      $v0, .L800ED2E4_86794
 /* 85EF4 800ECA44 00000000 */   nop
@@ -1255,7 +1255,7 @@ glabel partner_walking_follow_player
 /* 863A0 800ECEF0 46800020 */  cvt.s.w   $f0, $f0
 /* 863A4 800ECEF4 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 863A8 800ECEF8 8E240080 */  lw        $a0, 0x80($s1)
-/* 863AC 800ECEFC 0C0371DE */  jal       npc_raycast_down_ahead
+/* 863AC 800ECEFC 0C0371DE */  jal       npc_raycast_down_around
 /* 863B0 800ECF00 27A70030 */   addiu    $a3, $sp, 0x30
 /* 863B4 800ECF04 10400028 */  beqz      $v0, .L800ECFA8
 /* 863B8 800ECF08 00000000 */   nop
@@ -1487,7 +1487,7 @@ glabel partner_walking_follow_player
 /* 86708 800ED258 46800020 */  cvt.s.w   $f0, $f0
 /* 8670C 800ED25C E7A00018 */  swc1      $f0, 0x18($sp)
 /* 86710 800ED260 8E240080 */  lw        $a0, 0x80($s1)
-/* 86714 800ED264 0C0371DE */  jal       npc_raycast_down_ahead
+/* 86714 800ED264 0C0371DE */  jal       npc_raycast_down_around
 /* 86718 800ED268 27A70030 */   addiu    $a3, $sp, 0x30
 /* 8671C 800ED26C 1040001D */  beqz      $v0, .L800ED2E4_86794
 /* 86720 800ED270 00000000 */   nop
