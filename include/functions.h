@@ -50,7 +50,7 @@ s32 intro_logos_fade_out(s16 addAlpha);
 
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
-s32 create_entity(StaticEntityData*, s32, s32, s32, s32, ...);
+s32 create_entity(EntityBlueprint*, s32, s32, s32, s32, ...);
 void entity_shattering_idle(Entity* entity);
 void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage);
 

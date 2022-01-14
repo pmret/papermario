@@ -55,7 +55,7 @@ s32 N(statusTable_8021FCA8)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021FD54)[] = {
+ActorPartBlueprint N(partsTable_8021FD54)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -70,7 +70,7 @@ ActorPartDesc N(partsTable_8021FD54)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_40000,
     .type = ACTOR_TYPE_WHACKA,
     .level = 0,

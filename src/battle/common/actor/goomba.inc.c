@@ -36,7 +36,7 @@ s32 N(statusTable_8021975C)[] = {
 extern s32 N(idleAnimations_80219854)[];
 extern EvtSource N(init_802198EC);
 
-ActorPartDesc N(partsTable_80219808)[] = {
+ActorPartBlueprint N(partsTable_80219808)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -51,7 +51,7 @@ ActorPartDesc N(partsTable_80219808)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_GOOMBA,
     .level = 5,

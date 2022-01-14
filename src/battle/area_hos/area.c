@@ -3,9 +3,9 @@
 
 #define NAMESPACE b_area_hos
 
-extern ActorDesc N(goombario_tutor);
-extern ActorDesc N(ember);
-extern ActorDesc N(magikoopa_flying);
+extern ActorBlueprint N(goombario_tutor);
+extern ActorBlueprint N(ember);
+extern ActorBlueprint N(magikoopa_flying);
 
 extern Stage N(hos_00);
 extern Stage N(hos_01);

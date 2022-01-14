@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-extern StaticEntityData D_802EA934;
+extern EntityBlueprint D_802EA934;
 
 void entity_SuperBlock_HitEffect_setupGfx();
 

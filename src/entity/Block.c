@@ -128,7 +128,7 @@ void entity_MulticoinBlock_init(Entity* entity) {
 }
 
 extern s32 D_802E9E54;
-extern StaticEntityData D_802EA07C;
+extern EntityBlueprint D_802EA07C;
 
 void entity_MulticoinBlock_spawn_coin(Entity* entity) {
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;

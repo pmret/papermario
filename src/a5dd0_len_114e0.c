@@ -965,11 +965,11 @@ extern s32 D_80151324;
 extern s32 D_8015132C;
 extern s32 D_80151330;
 
-extern s32 wStaticEntityDataSize;
-extern s32 bStaticEntityDataSize;
+extern s32 wEntityBlueprintSize;
+extern s32 bEntityBlueprintSize;
 
-extern StaticEntityData* wStaticEntityData[30];
-extern StaticEntityData* bStaticEntityData[4];
+extern EntityBlueprint* wEntityBlueprint[30];
+extern EntityBlueprint* bEntityBlueprint[4];
 
 extern s32* D_801516F4;
 
@@ -1031,7 +1031,7 @@ void delete_entity(s32 entityIndex);
 void delete_entity_and_unload_data(s32 entityIndex);
 void _delete_shadow(s32 shadowIndex);
 s32 entity_get_collision_flags(Entity* entity);
-void entity_free_static_data(StaticEntityData* data);
+void entity_free_static_data(EntityBlueprint* data);
 void update_entity_shadow_position(Entity* entity);
 s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32* hitLength);
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
@@ -1084,7 +1084,7 @@ void update_entities(void) {
                     entity->collisionFlags = entity_get_collision_flags(entity);
 
                     if (entity->collisionFlags) {
-                        EntityCallback entityCallback = entity->staticData->fpHandleCollision;
+                        EntityCallback entityCallback = entity->blueprint->fpHandleCollision;
 
                         if (entityCallback != NULL && entityCallback(entity) != 0) {
                             entity->unk_07 = 0xA;
@@ -1522,7 +1522,7 @@ u32 get_entity_type(s32 index) {
     if (entity == NULL) {
         return -1;
     } else {
-        return entity->staticData->entityType;
+        return entity->blueprint->entityType;
     }
 }
 
@@ -1562,7 +1562,7 @@ void delete_entity_and_unload_data(s32 entityIndex) {
         delete_model_animator(get_animator_by_index(entity->virtualModelIndex));
     }
 
-    entity_free_static_data(entity->staticData);
+    entity_free_static_data(entity->blueprint);
 
     if (entity->shadowIndex >= 0) {
         Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
@@ -1696,7 +1696,7 @@ void func_80110E58(void) {
         s32 i;
 
         for (i = 0; i < 4; i++) {
-            bStaticEntityData[i] = 0;
+            bEntityBlueprint[i] = 0;
         }
         D_80151300 = &D_801A7000;
         gEntityHeapBase = D_80151300 + 0x3000;
@@ -1709,13 +1709,13 @@ void func_80110E58(void) {
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80110F10);
 
-void entity_anim_make_vertex_pointers(StaticEntityData* entityData, void* baseAddr, Vtx* baseVtx);
+void entity_anim_make_vertex_pointers(EntityBlueprint* entityData, void* baseAddr, Vtx* baseVtx);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_anim_make_vertex_pointers);
 
-s32 is_entity_data_loaded(Entity* entity, StaticEntityData* entityData, s32* loadedStart, s32* loadedEnd);
+s32 is_entity_data_loaded(Entity* entity, EntityBlueprint* entityData, s32* loadedStart, s32* loadedEnd);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_entity_data_loaded);
 
-void load_simple_entity_data(Entity* entity, StaticEntityData* entityData) {
+void load_simple_entity_data(Entity* entity, EntityBlueprint* entityData) {
     s32 loadedStart;
     s32 loadedEnd;
     s32 entitySize;
@@ -1724,9 +1724,9 @@ void load_simple_entity_data(Entity* entity, StaticEntityData* entityData) {
 
     entity->vertexSegment = 10;
     if (!gGameStatusPtr->isBattle) {
-        sizeTemp = wStaticEntityDataSize;
+        sizeTemp = wEntityBlueprintSize;
     } else {
-        sizeTemp = bStaticEntityDataSize;
+        sizeTemp = bEntityBlueprintSize;
     }
 
     if (is_entity_data_loaded(entity, entityData, &loadedStart, &loadedEnd)) {
@@ -1747,9 +1747,9 @@ void load_simple_entity_data(Entity* entity, StaticEntityData* entityData) {
     }
 
     if (!gGameStatusPtr->isBattle) {
-        wStaticEntityDataSize = sizeTemp;
+        wEntityBlueprintSize = sizeTemp;
     } else {
-        bStaticEntityDataSize = sizeTemp;
+        bEntityBlueprintSize = sizeTemp;
     }
 }
 
@@ -1761,8 +1761,8 @@ s32 func_80111790(void) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentEntityListPtr); i++) {
         Entity* entity = (*gCurrentEntityListPtr)[i];
 
-        if (entity != NULL && entity->staticData->dmaStart != NULL) {
-            if (entity->staticData->dmaStart == entity->staticData) {
+        if (entity != NULL && entity->blueprint->dmaStart != NULL) {
+            if (entity->blueprint->dmaStart == entity->blueprint) {
                 return TRUE;
             }
         }
@@ -1770,12 +1770,12 @@ s32 func_80111790(void) {
     return FALSE;
 }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, StaticEntityData* data);
+INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, EntityBlueprint* data);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, StaticEntityData* data, s32 x, s32 y, s32 z, s32 arg4,
+INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, EntityBlueprint* data, s32 x, s32 y, s32 z, s32 arg4,
             ...);
 
-s32 create_shadow_from_data(StaticShadowData* data, f32 x, f32 y, f32 z) {
+s32 create_shadow_from_data(ShadowBlueprint* data, f32 x, f32 y, f32 z) {
     Shadow* shadow;
     s32 i;
 
@@ -1818,7 +1818,7 @@ s32 create_shadow_from_data(StaticShadowData* data, f32 x, f32 y, f32 z) {
 
 s32 MakeEntity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    StaticEntityData* entityData;
+    EntityBlueprint* entityData;
     s32 x, y, z;
     s32 flags;
     s32 temp_v0;
@@ -1830,7 +1830,7 @@ s32 MakeEntity(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    entityData = (StaticEntityData*)evt_get_variable(script, *args++);
+    entityData = (EntityBlueprint*)evt_get_variable(script, *args++);
     temp = &D_8015C7D0[2];
     t80000000 = 0x80000000;
     x = evt_get_variable(script, *args++);
@@ -1979,7 +1979,7 @@ ApiStatus AssignCrateFlag(Evt* script, s32 isInitialCall) {
 }
 
 s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
-    u16 staticFlags = entity->staticData->flags;
+    u16 staticFlags = entity->blueprint->flags;
     s32 type;
     s16 shadowIndex;
 
@@ -2003,7 +2003,7 @@ s32 create_entity_shadow(Entity* entity, f32 x, f32 y, f32 z) {
 
 s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z) {
     s32 setFlag200 = FALSE;
-    StaticShadowData* data = &CircularShadowA;
+    ShadowBlueprint* data = &CircularShadowA;
     s32 shadowIndex;
 
     switch (type) {

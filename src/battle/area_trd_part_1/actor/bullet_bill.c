@@ -39,7 +39,7 @@ s32 N(statusTable_80218F6C)[] = {
 extern s32 N(idleAnimations_80219064)[];
 extern EvtSource N(init_80219088);
 
-ActorPartDesc N(partsTable_80219018)[] = {
+ActorPartBlueprint N(partsTable_80219018)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -54,7 +54,7 @@ ActorPartDesc N(partsTable_80219018)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_BULLET_BILL,
     .level = 5,

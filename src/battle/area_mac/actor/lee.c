@@ -65,7 +65,7 @@ s32 N(statusTable_8021D3D0)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021D47C)[] = {
+ActorPartBlueprint N(partsTable_8021D47C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -82,7 +82,7 @@ ActorPartDesc N(partsTable_8021D47C)[] = {
 
 extern EvtSource N(init_8021D4C8);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_LEE,
     .level = 0,
@@ -492,7 +492,7 @@ s32 N(statusTable_8021E9A4)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021EA50)[] = {
+ActorPartBlueprint N(partsTable_8021EA50)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -509,7 +509,7 @@ ActorPartDesc N(partsTable_8021EA50)[] = {
 
 extern EvtSource N(init_Goombario);
 
-ActorDesc N(goombario) = {
+ActorBlueprint N(goombario) = {
     .flags = 0,
     .type = ACTOR_TYPE_LEE_GOOMBARIO,
     .level = 0,
@@ -1070,7 +1070,7 @@ s32 N(statusTable_802205F0)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8022069C)[] = {
+ActorPartBlueprint N(partsTable_8022069C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -1087,7 +1087,7 @@ ActorPartDesc N(partsTable_8022069C)[] = {
 
 extern EvtSource N(init_Kooper);
 
-ActorDesc N(kooper) = {
+ActorBlueprint N(kooper) = {
     .flags = 0,
     .type = ACTOR_TYPE_LEE_KOOPER,
     .level = 0,
@@ -1581,7 +1581,7 @@ s32 N(statusTable_802222E8)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80222394)[] = {
+ActorPartBlueprint N(partsTable_80222394)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -1598,7 +1598,7 @@ ActorPartDesc N(partsTable_80222394)[] = {
 
 extern EvtSource N(init_LeeBombette);
 
-ActorDesc N(bombette) = {
+ActorBlueprint N(bombette) = {
     .flags = 0,
     .type = ACTOR_TYPE_LEE_BOMBETTE,
     .level = 0,
@@ -1935,7 +1935,7 @@ s32 N(statusTable_802233E0)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8022348C)[] = {
+ActorPartBlueprint N(partsTable_8022348C)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -1964,7 +1964,7 @@ ActorPartDesc N(partsTable_8022348C)[] = {
 
 extern EvtSource N(init_Parakarry);
 
-ActorDesc N(parakerry) = {
+ActorBlueprint N(parakerry) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_LEE_PARAKARRY,
     .level = 0,
@@ -2297,7 +2297,7 @@ s32 N(statusTable_80224468)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80224514)[] = {
+ActorPartBlueprint N(partsTable_80224514)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -2326,7 +2326,7 @@ ActorPartDesc N(partsTable_80224514)[] = {
 
 extern EvtSource N(init_Bow);
 
-ActorDesc N(bow) = {
+ActorBlueprint N(bow) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_LEE_BOW,
     .level = 0,
@@ -2749,7 +2749,7 @@ s32 N(statusTable_802259D4)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80225A80)[] = {
+ActorPartBlueprint N(partsTable_80225A80)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -2778,7 +2778,7 @@ ActorPartDesc N(partsTable_80225A80)[] = {
 
 extern EvtSource N(init_Watt);
 
-ActorDesc N(watt) = {
+ActorBlueprint N(watt) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_LEE_WATT,
     .level = 0,
@@ -3145,7 +3145,7 @@ s32 N(statusTable_802269D4)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80226A80)[] = {
+ActorPartBlueprint N(partsTable_80226A80)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -3162,7 +3162,7 @@ ActorPartDesc N(partsTable_80226A80)[] = {
 
 extern EvtSource N(init_Sushie);
 
-ActorDesc N(sushie) = {
+ActorBlueprint N(sushie) = {
     .flags = 0,
     .type = ACTOR_TYPE_LEE_SUSHIE,
     .level = 0,
@@ -3624,7 +3624,7 @@ s32 N(statusTable_80228470)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8022851C)[] = {
+ActorPartBlueprint N(partsTable_8022851C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -3653,7 +3653,7 @@ ActorPartDesc N(partsTable_8022851C)[] = {
 
 extern EvtSource N(init_Lakilester);
 
-ActorDesc N(lakilester) = {
+ActorBlueprint N(lakilester) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_LEE_LAKILESTER,
     .level = 0,

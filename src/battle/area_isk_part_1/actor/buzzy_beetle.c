@@ -51,7 +51,7 @@ s32 N(statusTable_8021E4E8)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021E594)[] = {
+ActorPartBlueprint N(partsTable_8021E594)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -66,7 +66,7 @@ ActorPartDesc N(partsTable_8021E594)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_HP_OFFSET_BELOW,
     .type = ACTOR_TYPE_BUZZY_BEETLE,
     .level = 10,

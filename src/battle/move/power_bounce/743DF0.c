@@ -13,7 +13,7 @@ ApiStatus func_802A10E4_743ED4(Evt* script, s32 isInitialCall) {
     s32 powerBounceChance;
 
     script->varTable[0] = 99;
-    powerBounceChance = targetActor->staticActorData->powerBounceChance;
+    powerBounceChance = targetActor->actorBlueprint->powerBounceChance;
     if (is_ability_active(ABILITY_DODGE_MASTER)) {
         powerBounceChance += 7;
     }

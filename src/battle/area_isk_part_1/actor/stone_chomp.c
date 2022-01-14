@@ -91,7 +91,7 @@ s32 N(statusTable_80221558)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80221604)[] = {
+ActorPartBlueprint N(partsTable_80221604)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -214,7 +214,7 @@ ActorPartDesc N(partsTable_80221604)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_STONE_CHOMP,
     .level = 14,

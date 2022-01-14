@@ -43,7 +43,7 @@ extern EvtSource N(idle_80219A98);
 extern EvtSource N(handleEvent_80219D74);
 extern EvtSource N(takeTurn_8021B2C8);
 
-ActorPartDesc N(partsTable_80219968)[] = {
+ActorPartBlueprint N(partsTable_80219968)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -58,7 +58,7 @@ ActorPartDesc N(partsTable_80219968)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_BLUE_GOOMBA_BOSS,
     .level = 20,

@@ -232,7 +232,7 @@ ApiStatus N(func_802A18D8_731BD8)(Evt* script, s32 isInitialCall) {
 #include "common/AddFP.inc.c"
 
 ApiStatus N(func_802A1A40_731D40)(Evt* script, s32 isInitialCall) {
-    StaticItem* item = &gItemTable[ITEM_KOOKY_COOKIE];
+    ItemData* item = &gItemTable[ITEM_KOOKY_COOKIE];
     PlayerData* playerData = &gPlayerData;
 
     playerData->curHP += item->potencyA;
@@ -246,7 +246,7 @@ ApiStatus N(func_802A1A40_731D40)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_802A1A8C_731D8C)(Evt* script, s32 isInitialCall) {
-    StaticItem* item = &gItemTable[ITEM_KOOKY_COOKIE];
+    ItemData* item = &gItemTable[ITEM_KOOKY_COOKIE];
     PlayerData* playerData = &gPlayerData;
 
     playerData->curFP += item->potencyB;

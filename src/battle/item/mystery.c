@@ -72,7 +72,7 @@ ApiStatus N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
             HudElement* icon;
             HudElement** iconPtr;
             struct N(tempStc)* ic;
-            StaticItem* itemTable;
+            ItemData* itemTable;
 
             D_802A25F8 = create_generic_entity_frontUI(NULL, func_802A123C_72C7EC);
             D_802A25EC = rand_int(18200);

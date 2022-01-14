@@ -68,7 +68,7 @@ s32 N(statusTable_8021D544)[] = {
 
 extern s32 N(idleAnimations_8021D6D0)[];
 
-ActorPartDesc N(partsTable_8021D5F0)[] = {
+ActorPartBlueprint N(partsTable_8021D5F0)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -86,7 +86,7 @@ ActorPartDesc N(partsTable_8021D5F0)[] = {
 extern s32 N(idleAnimations_8021D71C)[];
 extern s32 N(idleAnimations_8021D768)[];
 
-ActorPartDesc N(partsTable_8021D614)[] = {
+ActorPartBlueprint N(partsTable_8021D614)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -127,7 +127,7 @@ ActorPartDesc N(partsTable_8021D614)[] = {
 
 extern EvtSource N(init_8021E100);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_MAGIKOOPA_BOSS,
     .level = 32,
@@ -152,7 +152,7 @@ ActorDesc NAMESPACE = {
 
 extern EvtSource N(init_8021E2C0);
 
-ActorDesc N(flying) = {
+ActorBlueprint N(flying) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_FLYING_MAGIKOOPA_BOSS,
     .level = 32,
@@ -1264,7 +1264,7 @@ s32 N(statusTable_80221578)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80221624)[] = {
+ActorPartBlueprint N(partsTable_80221624)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -1279,7 +1279,7 @@ ActorPartDesc N(partsTable_80221624)[] = {
     },
 };
 
-ActorPartDesc N(partsTable_80221648)[] = {
+ActorPartBlueprint N(partsTable_80221648)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -1294,7 +1294,7 @@ ActorPartDesc N(partsTable_80221648)[] = {
     },
 };
 
-ActorDesc N(clone) = {
+ActorBlueprint N(clone) = {
     .flags = ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_MAGICLONE,
     .level = 26,
@@ -1317,7 +1317,7 @@ ActorDesc N(clone) = {
     .statusMessageOffset = { 10, 32 },
 };
 
-ActorDesc N(flying_clone) = {
+ActorBlueprint N(flying_clone) = {
     .flags = ACTOR_FLAG_FLYING | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_FLYING_MAGICLONE,
     .level = 26,

@@ -76,7 +76,7 @@ s32 N(statusTable_8021D5C0)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021D66C)[] = {
+ActorPartBlueprint N(partsTable_8021D66C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -103,7 +103,7 @@ ActorPartDesc N(partsTable_8021D66C)[] = {
     },
 };
 
-ActorPartDesc N(partsTable_8021D6B4)[] = {
+ActorPartBlueprint N(partsTable_8021D6B4)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 2,
@@ -118,7 +118,7 @@ ActorPartDesc N(partsTable_8021D6B4)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_BANDIT,
     .level = 9,
@@ -141,7 +141,7 @@ ActorDesc NAMESPACE = {
     .statusMessageOffset = { 10, 25 },
 };
 
-ActorDesc N(2) = {
+ActorBlueprint N(2) = {
     .flags = ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY,
     .type = ACTOR_TYPE_BANDIT,
     .level = 9,

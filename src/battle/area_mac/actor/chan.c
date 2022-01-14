@@ -45,7 +45,7 @@ s32 N(statusTable_80219D78)[] = {
 extern s32 N(idleAnimations_80219EBC)[];
 extern EvtSource N(init_8021CCDC);
 
-ActorPartDesc N(partsTable_80219E24)[] = {
+ActorPartBlueprint N(partsTable_80219E24)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -60,7 +60,7 @@ ActorPartDesc N(partsTable_80219E24)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_HP_OFFSET_BELOW,
     .type = ACTOR_TYPE_CHAN,
     .level = 0,

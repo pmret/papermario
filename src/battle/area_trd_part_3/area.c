@@ -4,7 +4,7 @@
 
 #define NAMESPACE b_area_trd_part_3
 
-extern ActorDesc N(eldstar);
+extern ActorBlueprint N(eldstar);
 
 extern Stage N(nok_01);
 

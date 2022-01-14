@@ -154,7 +154,7 @@ s32 get_item_empty_count(void) {
 /// @returns the index of the given item in the player's inventory, or -1 if not found
 s32 find_item(s32 itemID) {
     PlayerData* playerData = &gPlayerData;
-    StaticItem* item = &gItemTable[itemID];
+    ItemData* item = &gItemTable[itemID];
     s32 i;
 
     if ((item->typeFlags & 8) != 0) {
@@ -205,7 +205,7 @@ void sort_items(void) {
 
 s32 add_badge(s32 itemID) {
     PlayerData* playerData = &gPlayerData;
-    StaticItem* item = &gItemTable[itemID];
+    ItemData* item = &gItemTable[itemID];
     s32 i;
 
     if ((item->typeFlags & 0x40) == 0) {

@@ -715,7 +715,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 if actor in symbol_map:
                     out += f".actor = &{symbol_map[actor][0][1]}, "
 
-                    s = f"ActorDesc {symbol_map[actor][0][1]};"
+                    s = f"ActorBlueprint {symbol_map[actor][0][1]};"
                     if s not in INCLUDES_NEEDED["forward"]:
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
@@ -843,7 +843,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
             out += f"}};\n"
         elif struct["type"] == "PartsTable":
-            out += f"ActorPartDesc {struct['name']}[] = {{\n"
+            out += f"ActorPartBlueprint {struct['name']}[] = {{\n"
 
             for _ in range(0, struct["length"] // 36):
                 d = unpack(">IbbbbbbhIIIIhxxxxxx", bytes.read(36))
@@ -863,7 +863,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
             out += f"}};\n"
         elif struct["type"] == "Actor":
-            out += f"ActorDesc NAMESPACE = {{\n"
+            out += f"ActorBlueprint NAMESPACE = {{\n"
 
             d = unpack(">IxBBBhxxIIIBBBBBBBBbbbbbbbb", bytes.read(struct["length"]))
 

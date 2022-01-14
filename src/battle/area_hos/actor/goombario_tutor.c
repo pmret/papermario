@@ -49,7 +49,7 @@ s32 N(statusTable_80219068)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80219114)[] = {
+ActorPartBlueprint N(partsTable_80219114)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -66,7 +66,7 @@ ActorPartDesc N(partsTable_80219114)[] = {
 
 extern EvtSource N(init_80219160);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_40000,
     .type = ACTOR_TYPE_GOOMBARIO_TUTOR1,
     .level = 99,

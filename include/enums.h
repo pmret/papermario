@@ -2663,7 +2663,7 @@ enum BtlCameraPreset {
     BTL_CAM_PRESET_73,
 };
 
-enum StaticMoveFlags {
+enum MoveDataFlags {
     STATIC_MOVE_FLAGS_1                 = 0x00000001,
     STATIC_MOVE_FLAGS_2                 = 0x00000002,
     STATIC_MOVE_FLAGS_4                 = 0x00000004,

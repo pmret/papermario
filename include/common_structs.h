@@ -366,6 +366,20 @@ struct Entity;
 
 typedef s32 (*EntityCallback)(struct Entity*);
 
+typedef struct EntityBlueprint {
+    /* 0x00 */ s16 flags;
+    /* 0x02 */ s16 typeDataSize;
+    /* 0x04 */ UNK_PTR renderCommandList;
+    /* 0x08 */ UNK_PTR modelAnimationNodes;
+    /* 0x0C */ EntityCallback(fpInit);
+    /* 0x10 */ UNK_PTR updateEntityScript;
+    /* 0x14 */ EntityCallback fpHandleCollision;
+    /* 0x18 */ s32 dmaStart;
+    /* 0x1C */ s32 dmaEnd;
+    /* 0x20 */ u8 entityType;
+    /* 0x21 */ char aabbSize[3];
+} EntityBlueprint; // size = 0x24
+
 typedef struct Entity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 listIndex;
@@ -387,7 +401,7 @@ typedef struct Entity {
     /* 0x28 */ Bytecode* boundScriptBytecode;
     /* 0x2C */ s32* savedReadPos;
     /* 0x30 */ char unk_30[0x8];
-    /* 0x38 */ struct StaticEntityData* staticData;
+    /* 0x38 */ EntityBlueprint* blueprint;
     /* 0x3C */ UNK_PTR renderSetupFunc; // pointer to draw func(?)
     /* 0x40 */ s32* dataBuf;
     /* 0x44 */ Mtx* vertexData;
@@ -403,6 +417,40 @@ typedef struct Entity {
 
 typedef Entity* EntityList[MAX_ENTITIES];
 
+struct Shadow;
+
+typedef s32 (*ShadowCallback)(struct Shadow*);
+
+// same as EntityBlueprint
+typedef struct ShadowBlueprint {
+    /* 0x00 */ u16 flags;
+    /* 0x02 */ s16 typeDataSize;
+    /* 0x04 */ UNK_PTR renderCommandList;
+    /* 0x08 */ struct StaticAnimatorNode** animModelNode;
+    /* 0x0C */ ShadowCallback(onCreateCallback);
+    /* 0x10 */ char unk_10[0x10];
+    /* 0x20 */ u8 entityType;
+    /* 0x21 */ char aabbSize[3];
+} ShadowBlueprint; // size = 0x24
+
+typedef struct Shadow {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ u8 listIndex;
+    /* 0x05 */ u8 alpha;
+    /* 0x06 */ u8 unk_06;
+    /* 0x07 */ char unk_07;
+    /* 0x08 */ s16 entityModelID;
+    /* 0x0A */ s16 vertexSegment;
+    /* 0x0C */ Vtx_tn** vertexArray;
+    /* 0x10 */ Vec3f position;
+    /* 0x1C */ Vec3f scale;
+    /* 0x28 */ Vec3f rotation;
+    /* 0x34 */ char unk_34[0x4];
+    /* 0x38 */ Mtx transformMatrix;
+} Shadow; // size = 0x78
+
+typedef Shadow* ShadowList[MAX_SHADOWS];
+
 typedef struct DynamicEntity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ void (*update)(void);
@@ -410,20 +458,6 @@ typedef struct DynamicEntity {
 } DynamicEntity;
 
 typedef DynamicEntity* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
-
-typedef struct StaticEntityData {
-    /* 0x00 */ s16 flags;
-    /* 0x02 */ s16 typeDataSize;
-    /* 0x04 */ UNK_PTR renderCommandList;
-    /* 0x08 */ UNK_PTR modelAnimationNodes;
-    /* 0x0C */ EntityCallback(fpInit);
-    /* 0x10 */ UNK_PTR updateEntityScript;
-    /* 0x14 */ EntityCallback fpHandleCollision;
-    /* 0x18 */ s32 dmaStart;
-    /* 0x1C */ s32 dmaEnd;
-    /* 0x20 */ u8 entityType;
-    /* 0x21 */ char aabbSize[3];
-} StaticEntityData; // size = 0x24
 
 typedef struct MusicSettings {
     /* 0x00 */ u16 flags;
@@ -813,7 +847,7 @@ typedef struct TextureHeader {
     /* 0x2F */ u8 filtering;
 } TextureHeader; // size = 0x30
 
-typedef struct StaticMove {
+typedef struct MoveData {
     /* 0x00 */ s32 moveNameID;
     /* 0x04 */ s32 flags;
     /* 0x08 */ s32 worldDescID;
@@ -822,7 +856,7 @@ typedef struct StaticMove {
     /* 0x11 */ s8 costFP;
     /* 0x12 */ s8 costBP;
     /* 0x13 */ u8 actionCommandID;
-} StaticMove; // size = 0x14
+} MoveData; // size = 0x14
 
 typedef struct CollisionData {
     /* 0x00 */ Vec3f* vertices;
@@ -933,7 +967,7 @@ typedef struct ColliderBoundingBox {
     /* 0x18 */ s32 flagsForCollider;
 } ColliderBoundingBox; // size = 0x1C
 
-typedef struct StaticItem {
+typedef struct ItemData {
     /* 0x00 */ s32 nameMsg;
     /* 0x04 */ s16 iconID;
     /* 0x06 */ s16 badgeSortPriority;
@@ -947,7 +981,7 @@ typedef struct StaticItem {
     /* 0x1B */ s8 potencyA;
     /* 0x1C */ s8 potencyB;
     /* 0x1D */ char unk_1D[3];
-} StaticItem; // size = 0x20
+} ItemData; // size = 0x20
 
 typedef struct ItemEntity {
     /* 0x00 */ s32 flags;
@@ -1248,36 +1282,6 @@ typedef struct PartnerAnimations {
     /* 0x00 */ s32 anims[9];
 } PartnerAnimations; // size = 0x24
 
-typedef struct Shadow {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ u8 listIndex;
-    /* 0x05 */ u8 alpha;
-    /* 0x06 */ u8 unk_06;
-    /* 0x07 */ char unk_07;
-    /* 0x08 */ s16 entityModelID;
-    /* 0x0A */ s16 vertexSegment;
-    /* 0x0C */ Vtx_tn** vertexArray;
-    /* 0x10 */ Vec3f position;
-    /* 0x1C */ Vec3f scale;
-    /* 0x28 */ Vec3f rotation;
-    /* 0x34 */ char unk_34[0x4];
-    /* 0x38 */ Mtx transformMatrix;
-} Shadow; // size = 0x78
-
-typedef Shadow* ShadowList[MAX_SHADOWS];
-
-// same as StaticEntityData
-typedef struct StaticShadowData {
-    /* 0x00 */ u16 flags;
-    /* 0x02 */ s16 typeDataSize;
-    /* 0x04 */ UNK_PTR renderCommandList;
-    /* 0x08 */ StaticAnimatorNode** animModelNode;
-    /* 0x0C */ void (*onCreateCallback)(Shadow* shadow);
-    /* 0x10 */ char unk_10[0x10];
-    /* 0x20 */ u8 entityType;
-    /* 0x21 */ char aabbSize[3];
-} StaticShadowData; // size = 0x24
-
 typedef struct PushBlockGrid {
     /* 0x00 */ s8* cells;
     /* 0x04 */ u8 numCellsX;
@@ -1329,7 +1333,7 @@ typedef struct ActorPartMovement {
 typedef struct ActorPart {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 targetFlags; /* initialized to 0 */
-    /* 0x08 */ struct ActorPartDesc* staticData;
+    /* 0x08 */ struct ActorPartBlueprint* staticData;
     /* 0x0C */ struct ActorPart* nextPart;
     /* 0x10 */ struct ActorPartMovement* movement;
     /* 0x14 */ Vec3s partOffset;
@@ -1379,7 +1383,7 @@ typedef struct ColliderTriangle {
     /* 0x3E */ char unk_3E[2];
 } ColliderTriangle; // size = 0x40
 
-typedef struct StaticPartner {
+typedef struct PartnerBlueprint {
     /* 0x00 */ s32 dmaStart;
     /* 0x04 */ s32 dmaEnd;
     /* 0x08 */ s32 dmaDest;
@@ -1396,7 +1400,7 @@ typedef struct StaticPartner {
     /* 0x34 */ UNK_FUN_PTR(fpFuncD);
     /* 0x38 */ UNK_FUN_PTR(fpFuncE);
     /* 0x3C */ Bytecode* spScriptX;
-} StaticPartner; // size = 0x40
+} PartnerBlueprint; // size = 0x40
 
 typedef struct FontRasterSet {
     /* 0x00 */ u8 sizeX;
@@ -1515,17 +1519,17 @@ typedef struct ShopItemLocation {
     /* 0x2 */ u16 triggerColliderID;
 } ShopItemLocation; // size = 0x4
 
-typedef struct StaticInventoryItem {
+typedef struct ShopItemData {
     /* 0x0 */ u32 itemID;
     /* 0x4 */ s32 price;
     /* 0x8 */ s32 unk_08;
-} StaticInventoryItem; // size = 0xC
+} ShopItemData; // size = 0xC
 
-typedef struct StaticPriceItem {
+typedef struct ShopSellPriceData {
     /* 0x0 */ s32 itemID;
     /* 0x4 */ s32 sellPrice;
     /* 0x8 */ char unk_08[0x4];
-} StaticPriceItem; // size = 0xC
+} ShopSellPriceData; // size = 0xC
 
 typedef struct PopupMenu {
     /* 0x000 */ s32* ptrIcon[32];
@@ -1557,9 +1561,9 @@ typedef struct Shop {
     /* 0x008 */ s32 currentItemSlot;
     /* 0x00C */ s32 selectedStoreItemSlot;
     /* 0x010 */ ShopOwner* owner;
-    /* 0x014 */ ShopItemLocation* staticItemPositions;
-    /* 0x018 */ StaticInventoryItem* staticInventory;
-    /* 0x01C */ StaticPriceItem* staticPriceList;
+    /* 0x014 */ ShopItemLocation* ItemDataPositions;
+    /* 0x018 */ ShopItemData* staticInventory;
+    /* 0x01C */ ShopSellPriceData* staticPriceList;
     /* 0x020 */ s32 costIconID;
     /* 0x024 */ s32 inventoryItemFlags;
     /* 0x028 */ PopupMenu itemSelectMenu;
@@ -1655,7 +1659,7 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
 typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ s32 flags2;
-    /* 0x008 */ struct ActorDesc* staticActorData;
+    /* 0x008 */ struct ActorBlueprint* actorBlueprint;
     /* 0x00C */ ActorState state;
     /* 0x0C8 */ ActorMovement fly;
     /* 0x118 */ f32 flyElapsed;

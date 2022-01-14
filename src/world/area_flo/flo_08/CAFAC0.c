@@ -1239,7 +1239,7 @@ ApiStatus N(func_80241A98_CB07D8)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_80241B5C_CB089C)(Evt* script, s32 isInitialCall) {
     s32 itemId = evt_get_variable(script, *script->ptrReadPos);
-    StaticItem* item = &gItemTable[itemId];
+    ItemData* item = &gItemTable[itemId];
 
     if (itemId == ITEM_YUMMY_MEAL) {
         script->varTable[9] = 2;

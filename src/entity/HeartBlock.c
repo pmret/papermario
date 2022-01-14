@@ -3,7 +3,7 @@
 
 extern u32* D_802EA728;
 extern u32* D_802EA760;
-extern StaticEntityData D_802EA7BC;
+extern EntityBlueprint D_802EA7BC;
 extern UNK_TYPE D_802EB3C0;
 extern s32 D_802EA744; //
 
@@ -280,7 +280,7 @@ void entity_HeartBlock_wait_for_close_tutorial(Entity* entity) {
     }
 }
 
-s8 entity_HeartBlock_create_child_entity(Entity* entity, StaticEntityData* data) {
+s8 entity_HeartBlock_create_child_entity(Entity* entity, EntityBlueprint* data) {
     s32 temp_s2 = D_8015C7D0[0];
     Entity* someEntity;
     struct802E4B10* temp_v1;

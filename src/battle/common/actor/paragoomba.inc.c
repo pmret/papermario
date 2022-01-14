@@ -71,7 +71,7 @@ extern s32 N(idleAnimations_8021B3D0)[];
 extern s32 N(idleAnimations_8021B3DC)[];
 extern EvtSource N(init_8021B3E8);
 
-ActorPartDesc N(partsTable_8021B280)[] = {
+ActorPartBlueprint N(partsTable_8021B280)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -122,7 +122,7 @@ ActorPartDesc N(partsTable_8021B280)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_PARAGOOMBA,
     .level = 6,

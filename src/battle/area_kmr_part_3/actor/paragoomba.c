@@ -75,7 +75,7 @@ extern EvtSource N(takeTurn_8021CDFC);
 extern EvtSource N(idle_8021C4D4);
 extern EvtSource N(handleEvent_8021C808);
 
-ActorPartDesc N(partsTable)[] = {
+ActorPartBlueprint N(partsTable)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -126,7 +126,7 @@ ActorPartDesc N(partsTable)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_PARAGOOMBA,
     .level = 6,

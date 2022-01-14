@@ -41,7 +41,7 @@ s32 N(statusTable_80219D2C)[] = {
 extern s32 N(idleAnimations_80219E48)[];
 extern EvtSource N(init_80219E6C);
 
-ActorPartDesc N(partsTable_80219DD8)[] = {
+ActorPartBlueprint N(partsTable_80219DD8)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -68,7 +68,7 @@ ActorPartDesc N(partsTable_80219DD8)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_BILL_BLASTER,
     .level = 10,
@@ -241,7 +241,7 @@ EvtSource N(8021A470) = {
     EVT_END
 };
 
-extern ActorDesc A(bullet_bill);
+extern ActorBlueprint A(bullet_bill);
 
 Vec3i N(vector3D_8021A4DC) = { 0, -1000, 0, };
 

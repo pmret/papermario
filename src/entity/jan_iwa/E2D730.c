@@ -1,7 +1,7 @@
 #include "common.h"
 #include "sprite.h"
 
-extern StaticEntityData D_802BC7D0_E2F100;
+extern EntityBlueprint D_802BC7D0_E2F100;
 extern f32 D_802BCE20;
 // size unknown
 typedef struct structE2D730 {

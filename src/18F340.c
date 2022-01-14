@@ -188,7 +188,7 @@ ApiStatus func_80261164(Evt* script, s32 isInitialCall) {
 
 ApiStatus ConsumeLifeShroom(Evt *script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    StaticItem* item = &gItemTable[0x95];
+    ItemData* item = &gItemTable[0x95];
 
     playerData->curHP += item->potencyA;
     if (playerData->curMaxHP < playerData->curHP) {

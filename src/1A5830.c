@@ -1200,7 +1200,7 @@ ApiStatus RemoveActor(Evt* script, s32 isInitialCall) {
     }
 
     currentEncounter->coinsEarned += actor->extraCoinBonus;
-    currentEncounter->coinsEarned += actor->staticActorData->coinReward;
+    currentEncounter->coinsEarned += actor->actorBlueprint->coinReward;
     btl_delete_actor(actor);
     battleStatus->enemyActors[(u8)actorID] = NULL;
 
@@ -1227,8 +1227,8 @@ ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
     }
     dropper = get_actor(actorID);
 
-    enemyLevel = dropper->staticActorData->level;
-    if (dropper->staticActorData->level == 0.0f) {
+    enemyLevel = dropper->actorBlueprint->level;
+    if (dropper->actorBlueprint->level == 0.0f) {
         enemyLevel = 1.0f;
     }
 
@@ -1809,7 +1809,7 @@ ApiStatus GetOriginalActorType(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    evt_set_variable(script, outVar, get_actor(actorID)->staticActorData->type);
+    evt_set_variable(script, outVar, get_actor(actorID)->actorBlueprint->type);
     return ApiStatus_DONE2;
 }
 

@@ -4,11 +4,11 @@
 
 #define NAMESPACE b_area_trd_part_2
 
-extern ActorDesc N(green_ninja_koopa);
-extern ActorDesc N(yellow_ninja_koopa);
-extern ActorDesc N(blue_ninja_koopa);
-extern ActorDesc N(red_ninja_koopa);
-extern ActorDesc N(fake_bowser);
+extern ActorBlueprint N(green_ninja_koopa);
+extern ActorBlueprint N(yellow_ninja_koopa);
+extern ActorBlueprint N(blue_ninja_koopa);
+extern ActorBlueprint N(red_ninja_koopa);
+extern ActorBlueprint N(fake_bowser);
 
 extern Stage N(trd_00);
 extern Stage N(trd_01);

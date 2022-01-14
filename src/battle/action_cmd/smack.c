@@ -196,7 +196,7 @@ void func_802A9298_42E638(void) {
             battleStatus->unk_84 = actionCommandStatus->barFillLevel / 100;
             sfx_adjust_env_sound_params(0x80000041, 0, 0, battleStatus->unk_84 * 12);
 
-            switch (partnerActor->staticActorData->level) {
+            switch (partnerActor->actorBlueprint->level) {
                 case 0:
                     if (battleStatus->unk_84 >= D_802A99E4_42ED84[battleStatus->unk_85]) {
                         battleStatus->unk_85++;

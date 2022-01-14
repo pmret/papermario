@@ -72,7 +72,7 @@ ApiStatus N(func_802A1438_733508)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_802A15A0_733670)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemIdx = evt_get_variable(script, *args++);
-    StaticItem* item = &gItemTable[itemIdx];
+    ItemData* item = &gItemTable[itemIdx];
     s32 temp;
 
     script->varTable[11] = item->potencyA;

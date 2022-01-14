@@ -48,7 +48,7 @@ s32 N(statusTable_8022A2B8)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8022A364)[] = {
+ActorPartBlueprint N(partsTable_8022A364)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -65,7 +65,7 @@ ActorPartDesc N(partsTable_8022A364)[] = {
 
 extern EvtSource N(init_8022A3B0);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_THE_MASTER_1,
     .level = 0,

@@ -76,7 +76,7 @@ s32 N(idleAnimations_8021A73C)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021A748)[] = {
+ActorPartBlueprint N(partsTable_8021A748)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -211,7 +211,7 @@ ActorPartDesc N(partsTable_8021A748)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_NO_SHADOW,
     .type = ACTOR_TYPE_FAKE_BOWSER,
     .level = 0,

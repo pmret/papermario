@@ -71,7 +71,7 @@ s32 N(statusTable_8021B65C)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021B708)[] = {
+ActorPartBlueprint N(partsTable_8021B708)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -134,7 +134,7 @@ ActorPartDesc N(partsTable_8021B708)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_BUZZAR,
     .level = 35,

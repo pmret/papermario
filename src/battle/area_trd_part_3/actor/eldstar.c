@@ -49,7 +49,7 @@ s32 N(statusTable_80218298)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80218344)[] = {
+ActorPartBlueprint N(partsTable_80218344)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -64,7 +64,7 @@ ActorPartDesc N(partsTable_80218344)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_40000 | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_ELDSTAR,
     .level = 99,

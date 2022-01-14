@@ -90,7 +90,7 @@ s32 D_802E9898[9] = {
     0x00000000,
 };
 
-StaticShadowData CircularShadowA = {
+ShadowBlueprint CircularShadowA = {
     .flags = SHADOW_FLAGS_20,
     .renderCommandList = D_802E9850,
     .animModelNode =  NULL,
@@ -99,7 +99,7 @@ StaticShadowData CircularShadowA = {
     .aabbSize = { 25, 10, 25 }
 };
 
-StaticShadowData CircularShadowB = {
+ShadowBlueprint CircularShadowB = {
     .flags = SHADOW_FLAGS_20,
     .renderCommandList = D_802E9874,
     .animModelNode =  NULL,
@@ -108,7 +108,7 @@ StaticShadowData CircularShadowB = {
     .aabbSize = { 25, 10, 25 }
 };
 
-StaticShadowData SquareShadow = {
+ShadowBlueprint SquareShadow = {
     .flags = SHADOW_FLAGS_20,
     .renderCommandList = D_802E9898,
     .animModelNode =  NULL,
@@ -142,7 +142,7 @@ s32 D_802E99FC[7] = {
     &D_0A003508, 0x00000002, 0x00000000,
 };
 
-StaticEntityData Entity_SavePoint = { 0x4200, 0x0020, &D_802E99FC, {0, 0, 0, 0}, entity_SaveBlock_init, &D_802E9930, entity_block_handle_collision, E4B2E0_ROM_START, E4B2E0_ROM_END, 32, {0x19, 0x19, 0x19}};
+EntityBlueprint Entity_SavePoint = { 0x4200, 0x0020, &D_802E99FC, {0, 0, 0, 0}, entity_SaveBlock_init, &D_802E9930, entity_block_handle_collision, E4B2E0_ROM_START, E4B2E0_ROM_END, 32, {0x19, 0x19, 0x19}};
 
 // potential file split(?)
 s32 D_802E9A3C[1] = {
@@ -198,10 +198,10 @@ s32 D_802E9B94[7] = {
     (s32) &D_0A000740, 0x00000002, 0x00000000,
 };
 
-StaticEntityData Entity_RedSwitch = { 0xA000, 0x002C, &D_802E9B78, {0, 0, 0, 0}, entity_base_switch_init,    &D_802E9A40, NULL, E62AC0_ROM_START, E62AC0_ROM_END, ENTITY_TYPE_RED_SWITCH, {0x16, 0x17, 0x16} };
-StaticEntityData Entity_BlueSwitch = { 0xAA04, 0x002C, &D_802E9B40, {0, 0, 0, 0}, entity_BlueSwitch_init,     &D_802E9AC4, NULL, E639C0_ROM_START, E639C0_ROM_END, ENTITY_TYPE_BLUE_SWITCH, {0x16, 0x17, 0x16} };
-StaticEntityData Entity_HugeBlueSwitch = { 0xAA04, 0x002C, &D_802E9B5C, {0, 0, 0, 0}, entity_HugeBlueSwitch_init, &D_802E9A88, NULL, E639C0_ROM_START, E639C0_ROM_END, ENTITY_TYPE_HUGE_BLUE_SWITCH, {0x42, 0x4B, 0x42} };
-StaticEntityData Entity_GreenStompSwitch = { 0xC000, 0x002C, &D_802E9B94, {0, 0, 0, 0}, entity_base_switch_init,    &D_802E9B00, NULL, E62370_ROM_START, E62370_ROM_END, ENTITY_TYPE_GREEN_STOMP_SWITCH, {0x32, 0x0F, 0x32} };
+EntityBlueprint Entity_RedSwitch = { 0xA000, 0x002C, &D_802E9B78, {0, 0, 0, 0}, entity_base_switch_init,    &D_802E9A40, NULL, E62AC0_ROM_START, E62AC0_ROM_END, ENTITY_TYPE_RED_SWITCH, {0x16, 0x17, 0x16} };
+EntityBlueprint Entity_BlueSwitch = { 0xAA04, 0x002C, &D_802E9B40, {0, 0, 0, 0}, entity_BlueSwitch_init,     &D_802E9AC4, NULL, E639C0_ROM_START, E639C0_ROM_END, ENTITY_TYPE_BLUE_SWITCH, {0x16, 0x17, 0x16} };
+EntityBlueprint Entity_HugeBlueSwitch = { 0xAA04, 0x002C, &D_802E9B5C, {0, 0, 0, 0}, entity_HugeBlueSwitch_init, &D_802E9A88, NULL, E639C0_ROM_START, E639C0_ROM_END, ENTITY_TYPE_HUGE_BLUE_SWITCH, {0x42, 0x4B, 0x42} };
+EntityBlueprint Entity_GreenStompSwitch = { 0xC000, 0x002C, &D_802E9B94, {0, 0, 0, 0}, entity_base_switch_init,    &D_802E9B00, NULL, E62370_ROM_START, E62370_ROM_END, ENTITY_TYPE_GREEN_STOMP_SWITCH, {0x32, 0x0F, 0x32} };
 
 s32 D_802E9C40[12] = {
     0x00000007, 0x00000020, 0x00000003, 0x00000000,
@@ -214,13 +214,13 @@ s32 D_802E9C70[7] = {
     (s32) &D_802E9828, 0x00000002, 0x00000000
 };
 
-StaticEntityData Entity_ShatteringHammer1Block = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E32420_ROM_START, E32420_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK, {0x10, 0x10, 0x10}};
-StaticEntityData Entity_ShatteringHammer2Block = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E35670_ROM_START, E35670_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK, {0x10, 0x10, 0x10}};
-StaticEntityData Entity_ShatteringHammer3Block = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E38890_ROM_START, E38890_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK, {0x10, 0x10, 0x10}};
-StaticEntityData Entity_ShatteringHammer1BlockTiny = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E32420_ROM_START, E32420_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK_TINY, {0x08, 0x08, 0x08}};
-StaticEntityData Entity_ShatteringHammer2BlockTiny = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E35670_ROM_START, E35670_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK_TINY, {0x08, 0x08, 0x08}};
-StaticEntityData Entity_ShatteringHammer3BlockTiny = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E38890_ROM_START, E38890_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK_TINY, {0x08, 0x08, 0x08}};
-StaticEntityData Entity_ShatteringBrickBlock = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E3E260_ROM_START, E3E260_ROM_END, ENTITY_TYPE_BRICK_BLOCK, {0x08, 0x08, 0x08}};
+EntityBlueprint Entity_ShatteringHammer1Block = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E32420_ROM_START, E32420_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK, {0x10, 0x10, 0x10}};
+EntityBlueprint Entity_ShatteringHammer2Block = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E35670_ROM_START, E35670_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK, {0x10, 0x10, 0x10}};
+EntityBlueprint Entity_ShatteringHammer3Block = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E38890_ROM_START, E38890_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK, {0x10, 0x10, 0x10}};
+EntityBlueprint Entity_ShatteringHammer1BlockTiny = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E32420_ROM_START, E32420_ROM_END, ENTITY_TYPE_HAMMER1_BLOCK_TINY, {0x08, 0x08, 0x08}};
+EntityBlueprint Entity_ShatteringHammer2BlockTiny = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E35670_ROM_START, E35670_ROM_END, ENTITY_TYPE_HAMMER2_BLOCK_TINY, {0x08, 0x08, 0x08}};
+EntityBlueprint Entity_ShatteringHammer3BlockTiny = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E38890_ROM_START, E38890_ROM_END, ENTITY_TYPE_HAMMER3_BLOCK_TINY, {0x08, 0x08, 0x08}};
+EntityBlueprint Entity_ShatteringBrickBlock = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, E3E260_ROM_START, E3E260_ROM_END, ENTITY_TYPE_BRICK_BLOCK, {0x08, 0x08, 0x08}};
 
 void entity_shattering_block_init(Entity* entity) {
     u32 type;
@@ -275,7 +275,7 @@ void entity_shattering_block_init(Entity* entity) {
 
 void entity_breakable_block_create_shattering_entity(Entity* entity) {
     u32 type;
-    StaticEntityData* addr = NULL;
+    EntityBlueprint* addr = NULL;
 
     type = get_entity_type(entity->listIndex);
 

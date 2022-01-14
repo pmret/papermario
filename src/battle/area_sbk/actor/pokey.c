@@ -51,7 +51,7 @@ s32 N(statusTable_8021828C)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80218338)[] = {
+ActorPartBlueprint N(partsTable_80218338)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -126,7 +126,7 @@ ActorPartDesc N(partsTable_80218338)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_POKEY,
     .level = 9,

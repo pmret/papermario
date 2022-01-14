@@ -46,7 +46,7 @@ s32 N(statusTable_8021C998)[] = {
 extern s32 N(idleAnimations_8021CA90)[];
 extern EvtSource N(init_8021CB74);
 
-ActorPartDesc N(partsTable_8021CA44)[] = {
+ActorPartBlueprint N(partsTable_8021CA44)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -61,7 +61,7 @@ ActorPartDesc N(partsTable_8021CA44)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_KOOPA_TROOPA,
     .level = 6,

@@ -48,7 +48,7 @@ s32 N(statusTable_8022B4B8)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8022B564)[] = {
+ActorPartBlueprint N(partsTable_8022B564)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -63,7 +63,7 @@ ActorPartDesc N(partsTable_8022B564)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_40000 | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_BLUE_NINJAKOOPA,
     .level = 17,

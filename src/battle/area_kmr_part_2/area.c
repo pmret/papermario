@@ -4,12 +4,12 @@
 
 #define NAMESPACE b_area_kmr_part_2
 
-extern ActorDesc N(blue_goomba);
-extern ActorDesc N(red_goomba);
-extern ActorDesc N(goomba_king);
-extern ActorDesc N(red_goomba_2);
-extern ActorDesc N(blue_goomba_2);
-extern ActorDesc N(goomnut_tree);
+extern ActorBlueprint N(blue_goomba);
+extern ActorBlueprint N(red_goomba);
+extern ActorBlueprint N(goomba_king);
+extern ActorBlueprint N(red_goomba_2);
+extern ActorBlueprint N(blue_goomba_2);
+extern ActorBlueprint N(goomnut_tree);
 
 extern Stage N(kmr_02);
 extern Stage N(kmr_03);

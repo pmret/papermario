@@ -54,7 +54,7 @@ ApiStatus N(func_802A1378_72E8A8)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_802A1438_72E968)(Evt* script, s32 isInitialCall) {
-    StaticItem* item = &gItemTable[ITEM_LIFE_SHROOM];
+    ItemData* item = &gItemTable[ITEM_LIFE_SHROOM];
     PlayerData* playerData = &gPlayerData;
 
     playerData->curHP += item->potencyA;
@@ -70,8 +70,8 @@ ApiStatus N(func_802A1438_72E968)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_802A1484_72E9B4)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemIdx = evt_get_variable(script, *args++);
-    StaticItem* itemTable = gItemTable;
-    StaticItem* item = &itemTable[itemIdx];
+    ItemData* itemTable = gItemTable;
+    ItemData* item = &itemTable[itemIdx];
 
     script->varTable[11] = item->potencyA;
     script->varTable[12] = item->potencyB;

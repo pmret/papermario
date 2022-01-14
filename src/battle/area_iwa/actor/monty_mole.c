@@ -42,7 +42,7 @@ s32 N(statusTable_8021A45C)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021A508)[] = {
+ActorPartBlueprint N(partsTable_8021A508)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -81,7 +81,7 @@ ActorPartDesc N(partsTable_8021A508)[] = {
     },
 };
 
-ActorDesc N(1) = {
+ActorBlueprint N(1) = {
     .flags = 0,
     .type = ACTOR_TYPE_MONTY_MOLE,
     .level = 8,
@@ -131,7 +131,7 @@ s32 N(unk_missing_8021A600)[] = {
     0x00000001, 0x002F0006, 0x00000000,
 };
 
-ActorPartDesc N(partsTable_8021A60C)[] = {
+ActorPartBlueprint N(partsTable_8021A60C)[] = {
     {
         .flags = ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -155,7 +155,7 @@ EvtSource N(init_8021A630) = {
     EVT_END
 };
 
-ActorDesc N(2) = {
+ActorBlueprint N(2) = {
     .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_40000 | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY,
     .type = ACTOR_TYPE_MONTY_HOLE,
     .level = 9,

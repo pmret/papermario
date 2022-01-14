@@ -78,7 +78,7 @@ s32 N(statusTable_80227A08)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80227AB4)[] = {
+ActorPartBlueprint N(partsTable_80227AB4)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -191,7 +191,7 @@ ActorPartDesc N(partsTable_80227AB4)[] = {
 
 extern EvtSource N(init_80227C20);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_KENT_C_KOOPA,
     .level = 55,

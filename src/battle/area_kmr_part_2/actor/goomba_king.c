@@ -84,7 +84,7 @@ s32 N(statusTable_8022091C)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_802209C8)[] = {
+ActorPartBlueprint N(partsTable_802209C8)[] = {
     {
         .flags = ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -121,7 +121,7 @@ extern EvtSource N(80221CD4);
 extern EvtSource N(80221680);
 extern EvtSource N(doDeath_80222F50);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_GOOMBA_KING,
     .level = 49,

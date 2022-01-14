@@ -66,7 +66,7 @@ ApiStatus func_802380E4_6F11C4(Evt* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
 
     script->varTable[0] = 99;
-    D_8023BB98_6ECC78 *= targetActor->staticActorData->powerBounceChance;
+    D_8023BB98_6ECC78 *= targetActor->actorBlueprint->powerBounceChance;
     D_8023BB98_6ECC78 /= 100;
     if (D_8023BB98_6ECC78 < rand_int(100)) {
         script->varTable[0] = 0;
@@ -279,7 +279,7 @@ s32 N(statusTable_802391F8)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_802392A4)[] = {
+ActorPartBlueprint N(partsTable_802392A4)[] = {
     {
         .flags = 0,
         .index = 1,
@@ -295,7 +295,7 @@ ActorPartDesc N(partsTable_802392A4)[] = {
 
 extern EvtSource N(init_802392F0);
 
-ActorDesc N(goombario) = {
+ActorBlueprint N(goombario) = {
     .flags = 0,
     .type = ACTOR_TYPE_GOOMBARIO,
     .level = 0,

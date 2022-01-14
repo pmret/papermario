@@ -41,7 +41,7 @@ s32 N(statusTable_8021C4BC)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021C568)[] = {
+ActorPartBlueprint N(partsTable_8021C568)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -56,7 +56,7 @@ ActorPartDesc N(partsTable_8021C568)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_HP_OFFSET_BELOW,
     .type = ACTOR_TYPE_SWOOPER,
     .level = 10,

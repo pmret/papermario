@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_iwa_iwa_02
 
-extern ActorDesc N(whacka);
+extern ActorBlueprint N(whacka);
 extern EvtSource N(init_8022176C);
 extern EvtSource N(takeTurn_80222000);
 extern EvtSource N(idle_80221828);
@@ -87,7 +87,7 @@ s32 N(statusTable_80221674)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80221720)[] = {
+ActorPartBlueprint N(partsTable_80221720)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -102,7 +102,7 @@ ActorPartDesc N(partsTable_80221720)[] = {
     },
 };
 
-ActorDesc N(whacka) = {
+ActorBlueprint N(whacka) = {
     .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_40000,
     .type = ACTOR_TYPE_WHACKA,
     .level = 0,

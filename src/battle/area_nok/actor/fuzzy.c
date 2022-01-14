@@ -37,7 +37,7 @@ s32 N(statusTable_8022205C)[] = {
 
 extern s32 N(idleAnimations_80222154)[];
 
-ActorPartDesc N(partsTable_80222108)[] = {
+ActorPartBlueprint N(partsTable_80222108)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -54,7 +54,7 @@ ActorPartDesc N(partsTable_80222108)[] = {
 
 extern EvtSource N(init_802221A0);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_FUZZY,
     .level = 6,

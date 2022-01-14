@@ -48,7 +48,7 @@ extern EvtSource N(handleEvent_80223688);
 extern EvtSource N(shake_goomnut_tree);
 extern EvtSource N(80223DBC);
 
-ActorPartDesc N(partsTable_8022339C)[] = {
+ActorPartBlueprint N(partsTable_8022339C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -111,7 +111,7 @@ ActorPartDesc N(partsTable_8022339C)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_DMG_POPUP,
     .type = ACTOR_TYPE_GOOMNUT_TREE,
     .level = 1,
