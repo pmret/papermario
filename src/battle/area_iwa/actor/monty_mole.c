@@ -53,7 +53,7 @@ ActorPartDesc N(partsTable_8021A508)[] = {
         .defenseTable = N(defenseTable_8021A450),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 249,
+        .unk_1D = 249,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
@@ -65,7 +65,7 @@ ActorPartDesc N(partsTable_8021A508)[] = {
         .defenseTable = N(defenseTable_8021A450),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 249,
+        .unk_1D = 249,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -77,7 +77,7 @@ ActorPartDesc N(partsTable_8021A508)[] = {
         .defenseTable = N(defenseTable_8021A450),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
 };
 
@@ -142,7 +142,7 @@ ActorPartDesc N(partsTable_8021A60C)[] = {
         .defenseTable = NULL,
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
 };
 

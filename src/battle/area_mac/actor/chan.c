@@ -56,7 +56,8 @@ ActorPartDesc N(partsTable_80219E24)[] = {
         .defenseTable = N(defenseTable_80219D50),
         .eventFlags = ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
-        .unk_1C = 263,
+        .unk_1C = 1,
+        .unk_1D = 263,
     },
 };
 

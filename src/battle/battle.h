@@ -240,7 +240,8 @@ typedef struct ActorPartDesc {
     /* 0x10 */ s32* defenseTable;
     /* 0x14 */ s32 eventFlags;
     /* 0x18 */ s32 elementImmunityFlags;
-    /* 0x1C */ s16 unk_1C;
+    /* 0x1C */ s8 unk_1C;
+    /* 0x1D */ s8 unk_1D;
     /* 0x1E */ char unk_1E[6];
 } ActorPartDesc; // size = 0x24
 

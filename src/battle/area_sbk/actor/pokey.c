@@ -62,7 +62,7 @@ ActorPartDesc N(partsTable_80218338)[] = {
         .defenseTable = N(defenseTable_80218280),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
@@ -74,7 +74,7 @@ ActorPartDesc N(partsTable_80218338)[] = {
         .defenseTable = N(defenseTable_80218280),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
-        .unk_1C = 248,
+        .unk_1D = 248,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
@@ -86,7 +86,7 @@ ActorPartDesc N(partsTable_80218338)[] = {
         .defenseTable = N(defenseTable_80218280),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
-        .unk_1C = 248,
+        .unk_1D = 248,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
@@ -98,7 +98,7 @@ ActorPartDesc N(partsTable_80218338)[] = {
         .defenseTable = N(defenseTable_80218280),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
-        .unk_1C = 248,
+        .unk_1D = 248,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
@@ -110,7 +110,7 @@ ActorPartDesc N(partsTable_80218338)[] = {
         .defenseTable = N(defenseTable_80218280),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
-        .unk_1C = 248,
+        .unk_1D = 248,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -122,7 +122,7 @@ ActorPartDesc N(partsTable_80218338)[] = {
         .defenseTable = N(defenseTable_80218280),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
 };
 

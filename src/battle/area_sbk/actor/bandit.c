@@ -87,7 +87,7 @@ ActorPartDesc N(partsTable_8021D66C)[] = {
         .defenseTable = N(defenseTable_8021D5B4),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 244,
+        .unk_1D = 244,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
@@ -99,7 +99,7 @@ ActorPartDesc N(partsTable_8021D66C)[] = {
         .defenseTable = N(defenseTable_8021D5B4),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
 };
 
@@ -114,7 +114,7 @@ ActorPartDesc N(partsTable_8021D6B4)[] = {
         .defenseTable = N(defenseTable_8021D5B4),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
 };
 

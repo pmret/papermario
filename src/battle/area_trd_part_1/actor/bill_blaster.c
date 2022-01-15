@@ -52,7 +52,7 @@ ActorPartDesc N(partsTable_80219DD8)[] = {
         .defenseTable = N(defenseTable_80219D20),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 247,
+        .unk_1D = 247,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
@@ -64,7 +64,7 @@ ActorPartDesc N(partsTable_80219DD8)[] = {
         .defenseTable = N(defenseTable_80219D20),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 247,
+        .unk_1D = 247,
     },
 };
 
