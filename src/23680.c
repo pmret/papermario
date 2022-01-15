@@ -131,32 +131,32 @@ s32 func_800490B4(EnemyTerritoryThing* territory, Enemy* enemy, f32 chaseSpeed, 
     f32 phi_a3;
 
     if (enemy->unk_B0 & 2) {
-        return 0;
+        return FALSE;
     }
 
     partnerActionStatus = &gPartnerActionStatus;
     if (partnerActionStatus->actionState.b[3] == 9 && partnerActionStatus->actionState.b[0] && !(territory->unk_1C & 1)) {
-        return 0;
+        return FALSE;
     }
 
     if (partnerActionStatus->actionState.b[3] == 7 && partnerActionStatus->actionState.b[0] && !(territory->unk_1C & 1)) {
-        return 0;
+        return FALSE;
     }
 
     if (territory->unk_00 < 0) {
-        return 0;
+        return FALSE;
     }
 
     if (territory->unk_18 <= fabsf(npc->pos.y - playerStatus->position.y) && !(territory->unk_1C & 2)) {
-        return 0;
+        return FALSE;
     }
 
     if (territory->sizeX | territory->sizeZ && is_point_within_region(territory->shape, territory->pointX, territory->pointZ, playerStatus->position.x, playerStatus->position.z, territory->sizeX, territory->sizeZ)) {
-        return 0;
+        return FALSE;
     }
 
     if ((playerStatus->actionState == 0x1D)) {
-        return 0;
+        return FALSE;
     }
 
     if (enemy->unk_AC & 1) {
@@ -165,7 +165,7 @@ s32 func_800490B4(EnemyTerritoryThing* territory, Enemy* enemy, f32 chaseSpeed, 
         z = npc->pos.z;
         dist = dist2D(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
         if (npc_test_move_simple_with_slipping(0x50000, &x, &y, &z, dist, atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z), 0.1f, 0.1f)) {
-            return 0;
+            return FALSE;
         }
     }
 
@@ -193,11 +193,11 @@ s32 func_800490B4(EnemyTerritoryThing* territory, Enemy* enemy, f32 chaseSpeed, 
             add_vec2D_polar(&x, &z, arg3, phi_a3);
         }
         if (dist2D(x, z, playerStatus->position.x, playerStatus->position.z) <= chaseSpeed) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3) {
