@@ -175,7 +175,7 @@ void entity_MulticoinBlock_update_timer(Entity* entity) {
 void entity_MulticoinBlock_idle(Entity* entity) {
     BlockData* data = entity->dataBuf.block;
 
-    if ((entity->collisionFlags & 0x80) != 0) {
+    if ((entity->collisionFlags & ENTITY_COLLISION_FLAGS_80) != 0) {
         exec_entity_commandlist(entity);
         return;
     }

@@ -522,6 +522,7 @@ enum SoundIDs {
     SOUND_HIT_BLOCK                 = 0x0000014E,
     SOUND_SEARCH_BUSH               = 0x00000153,
     SOUND_162                       = 0x00000162,
+    SOUND_ENTER_PIPE                = 0x00000163,
     SOUND_SMASH_GOOMNUT_TREE        = 0x00000165,
     SOUND_167                       = 0x00000167,
     SOUND_172                       = 0x00000172,
@@ -1585,7 +1586,11 @@ enum EntityCollisionFlags {
     ENTITY_COLLISION_FLAGS_1                                = 0x00000001,
     ENTITY_COLLISION_FLAGS_2                                = 0x00000002,
     ENTITY_COLLISION_FLAGS_4                                = 0x00000004,
-    ENTITY_COLLISION_FLAGS_8                                = 0x00000008
+    ENTITY_COLLISION_FLAGS_8                                = 0x00000008,
+    ENTITY_COLLISION_FLAGS_10                               = 0x00000010,
+    ENTITY_COLLISION_FLAGS_20                               = 0x00000020,
+    ENTITY_COLLISION_FLAGS_40                               = 0x00000040,
+    ENTITY_COLLISION_FLAGS_80                               = 0x00000080
 };
 
 enum TriggerFlags {

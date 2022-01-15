@@ -9,7 +9,7 @@ void entity_BlueWarpPipe_check_if_active(Entity* entity) {
 
     pipeData = entity->dataBuf.bluePipe;
     if (get_global_flag(pipeData->flagIndex)) {
-        pipeData->timer = 0x10;
+        pipeData->timer = 16;
         exec_entity_commandlist(entity);
     }
 }
@@ -53,21 +53,21 @@ void entity_BlueWarpPipe_wait_for_player_to_get_off(Entity* entity) {
 void entity_BlueWarpPipe_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if ((entity->collisionFlags & 1) != 0) {
-        gOverrideFlags |= 0x40;
+    if ((entity->collisionFlags & ENTITY_COLLISION_FLAGS_1) != 0) {
+        gOverrideFlags |= GLOBAL_OVERRIDES_40;
 
-        if (!(playerStatus->flags & 0x3000)) {
-            s32 stickAxis0 = abs(playerStatus->stickAxis[0]);
-            s32 stickAxis1 = playerStatus->stickAxis[1];
+        if (!(playerStatus->flags & (PLAYER_STATUS_FLAGS_1000 | PLAYER_STATUS_FLAGS_INPUT_DISABLED))) {
+            s32 stickAxisX = abs(playerStatus->stickAxis[0]);
+            s32 stickAxisZ = playerStatus->stickAxis[1];
 
-            if ((stickAxis0 != 0) || (stickAxis1 != 0)) {
-                if (atan2(0.0f, 0.0f, stickAxis0, stickAxis1) < 60.0f) {
+            if ((stickAxisX != 0) || (stickAxisZ != 0)) {
+                if (atan2(0.0f, 0.0f, stickAxisX, stickAxisZ) < 60.0f) {
                     exec_entity_commandlist(entity);
                 }
             }
         }
     } else {
-        gOverrideFlags &= ~0x40;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
     }
 }
 
@@ -75,7 +75,7 @@ void entity_BlueWarpPipe_set_player_move_to_center(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     BlueWarpPipeData* pipeData = entity->dataBuf.bluePipe;
     MapConfig* mapConfig = get_current_map_header();
-    f32 temp_f20;
+    f32 angle;
     f32 entryX;
     f32 entryZ;
 
@@ -88,10 +88,10 @@ void entity_BlueWarpPipe_set_player_move_to_center(Entity* entity) {
 
     entryX = (*mapConfig->entryList)[pipeData->entryID].x;
     entryZ = (*mapConfig->entryList)[pipeData->entryID].z;
-    temp_f20 = atan2(playerStatus->position.x, playerStatus->position.z, entryX, entryZ);
+    angle = atan2(playerStatus->position.x, playerStatus->position.z, entryX, entryZ);
     disable_player_input();
     disable_player_static_collisions();
-    move_player(pipeData->timer, temp_f20, playerStatus->runSpeed);
+    move_player(pipeData->timer, angle, playerStatus->runSpeed);
 }
 
 void entity_BlueWarpPipe_wait_player_move_to_center(Entity* entity) {
@@ -108,10 +108,10 @@ void entity_BlueWarpPipe_enter_pipe_init(Entity* bluePipe) {
 
     playerStatus->targetYaw = gCameras[gCurrentCameraID].currentYaw + 180.0f;
     pipeData->timer = 25;
-    playerStatus->renderMode = 0xD;
+    playerStatus->renderMode = RENDER_MODE_ALPHATEST;
 
     func_802DDFF8(0x10002, 5, 2, 1, 1, 0, 0);
-    sfx_play_sound(0x163);
+    sfx_play_sound(SOUND_ENTER_PIPE);
     disable_player_shadow();
 }
 
@@ -123,7 +123,7 @@ void entity_BlueWarpPipe_enter_pipe_update(Entity* entity) {
     pipeData->timer--;
 
     if (pipeData->timer == -1) {
-        playerStatus->renderMode = 0xD;
+        playerStatus->renderMode = RENDER_MODE_ALPHATEST;
         playerStatus->position.y -= 50.0f;
         func_802DDFF8(0x10002, 0, 0, 0, 0, 0, 0);
         exec_entity_commandlist(entity);
@@ -133,7 +133,7 @@ void entity_BlueWarpPipe_enter_pipe_update(Entity* entity) {
 void entity_BlueWarpPipe_start_bound_script(Entity* entity) {
     Bytecode* triggerScriptStart = entity->dataBuf.bluePipe->onEnterPipeEvt;
 
-    gOverrideFlags &= ~0x40;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
     entity->boundScriptBytecode = triggerScriptStart;
     entity_start_script(entity);
 }
