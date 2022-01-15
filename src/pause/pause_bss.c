@@ -1,0 +1,54 @@
+#include "types.h"
+
+// This file exists to enforce the order of BSS symbols, since they were reordered in the original rom.
+
+#ifndef M2CTX
+#define BSS __attribute__ ((section (".bss")))
+#else
+#define BSS static
+#endif
+
+BSS s32 gPauseMenuHeldButtons;
+BSS s32 gPauseMenuPressedButtons;
+BSS s32 gPauseMenuCurrentDescMsg;
+BSS s32* gPauseMenuCurrentDescIconScript;
+BSS s32 D_802700D0;
+BSS s8 gPauseMenuCurrentTab;
+BSS char D_802700D[8];
+BSS s32 D_802700E0;
+BSS s32 D_802700E4;
+BSS s32 D_802700E8;
+BSS s32 D_802700EC;
+BSS s32 D_802700F0[4];
+BSS s32 D_80270100[64];
+BSS s32 D_80270200[64];
+BSS s32 D_80270300[64];
+BSS s32 D_80270400[64];
+BSS s32 D_80270500[64];
+BSS s32 D_80270600[64];
+BSS s32 D_80270700[64];
+BSS s32 D_80270800[64];
+BSS s32 D_80270900[64];
+BSS s32 D_80270A00[64];
+BSS s32 D_80270B00[64];
+BSS s32 D_80270C00[64];
+BSS s32 D_80270D00[64];
+BSS s32 D_80270E00[64];
+BSS s32 D_80270F00[64];
+BSS s32 D_80271000[1024];
+BSS s32 D_80272000[1024];
+BSS s32 D_80273000[1024];
+BSS s32 D_80274000[1024];
+BSS s32 D_80275000[1024];
+BSS s32 D_80276000[1024];
+BSS s32 D_80277000[1024];
+BSS s32 D_80278000[64];
+BSS s32 D_80278100[64];
+BSS s32 D_80278200[64];
+BSS s32 D_80278300[64];
+BSS s32 D_80278400[64];
+BSS s32 D_80278500[64];
+BSS s32 D_80278600[4];
+BSS s32 D_80278610[4];
+BSS s32 D_80278620[4];
+BSS s32 D_80278630[4];

@@ -1,19 +1,6 @@
 #include "common.h"
 #include "hud_element.h"
 
-BSS s32 gPauseMenuHeldButtons;
-BSS s32 gPauseMenuPressedButtons;
-BSS s32 gPauseMenuCurrentDescMsg;
-BSS s32* gPauseMenuCurrentDescIconScript;
-BSS s32 D_802700D0;
-BSS s8 gPauseMenuCurrentTab;
-BSS char D_802700D[8];
-BSS s32 D_802700E0;
-#define BSS_END 0x802700E4
-
-// TODO this is the bss for the whole segment - break it up
-static char bss[0x80278640 - BSS_END];
-
 //data
 extern EvtSource HudScript_AnimatedCursorHand;
 extern EvtSource HudScript_DescMsgPrev;
@@ -27,6 +14,7 @@ extern EvtSource HudScript_StartButtonText;
 u32 gPauseMenuIconScripts[] = {HudScript_AnimatedCursorHand, HudScript_DescMsgPrev, HudScript_DescMsgNext,
                                HudScript_UnusedBadge, HudScript_StickTapRight, HudScript_PressAButton,
                                HudScript_PressStartButton, HudScript_StartButtonText};
+// TODO make pointers,
 MenuPanel* gPauseMenuPanels[] = { 0x8024F314, 0x8024F4AC, 0x8024F54C, 0x8024F5E4, 0x8024F88C, 0x8024FA10 };
 u32 D_8024EF98 = 0x8025068C;
 s32 gPauseMenuCursorPosX = 160;
@@ -155,7 +143,7 @@ void func_80242F90(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     Window* window = &gWindows[windowID];
 
     *argA = 0xA0;
-    window->flags &= 0xF3;
+    window->flags &= ~(WINDOW_FLAGS_4 | WINDOW_FLAGS_8);
 }
 
 void func_80242FBC(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
@@ -164,7 +152,7 @@ void func_80242FBC(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
 
     *argA = 0xA0;
     *argB = 0x50;
-    window->flags &= 0xF3;
+    window->flags &= ~(WINDOW_FLAGS_4 | WINDOW_FLAGS_8);
 }
 
 void func_80242FF4(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
@@ -173,7 +161,7 @@ void func_80242FF4(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= 0xFB;
+        window->flags &= ~WINDOW_FLAGS_4;
     }
 
     if (updateCounter == 5) {
@@ -184,7 +172,7 @@ void func_80242FF4(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
         *argA = (updateCounter + 1) * 0x10;
     } else {
         *argA = 0xA0;
-        window->flags &= 0xF7;
+        window->flags &= ~WINDOW_FLAGS_8;
     }
 }
 
@@ -195,7 +183,7 @@ void func_80243090(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     if (window->updateCounter == 0) {
         update_window_hierarchy(windowID, window->unk_02);
         *argA = 0;
-        window->flags &= 0xF7;
+        window->flags &= ~WINDOW_FLAGS_8;
     }
 }
 
@@ -205,14 +193,14 @@ void func_802430E4(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= 0xFB;
+        window->flags &= ~WINDOW_FLAGS_4;
     }
 
     if (updateCounter < 16) {
         *argB = updateCounter * 0x10;
     } else {
         *argB = 255;
-        window->flags &= 0xF7;
+        window->flags &= ~WINDOW_FLAGS_8;
     }
 }
 
@@ -225,7 +213,7 @@ void func_8024313C(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
         *argB = 255 - (updateCounter * 16);
     } else {
         *argB = 0;
-        window->flags = (window->flags & 0xF7) | 4;
+        window->flags = (window->flags & ~WINDOW_FLAGS_8) | WINDOW_FLAGS_4;
     }
 }
 
@@ -235,7 +223,7 @@ void func_80243188(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= 0xFB;
+        window->flags &= ~WINDOW_FLAGS_4;
     }
     if (updateCounter < 7) {
         *arg1 = D_8024EFC4[updateCounter];
@@ -243,7 +231,7 @@ void func_80243188(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     } else {
         *arg1 = D_8024EFC4[5];
         *arg7 += D_8024EFCC[6]; // BUG!  length of array is only 6
-        window->flags &= 0xF7;
+        window->flags &= ~WINDOW_FLAGS_8;
     }
 }
 
@@ -253,7 +241,7 @@ void func_80243238(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= 0xFB;
+        window->flags &= ~WINDOW_FLAGS_4;
     }
     if (updateCounter < 7) {
         *arg1 = D_8024EFC4[updateCounter];
@@ -261,7 +249,7 @@ void func_80243238(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     } else {
         *arg1 = D_8024EFC4[5];
         *arg7 += D_8024EFD8[6]; // BUG!  length of array is only 6
-        window->flags &= 0xF7;
+        window->flags &= ~WINDOW_FLAGS_8;
     }
 }
 
@@ -276,7 +264,7 @@ void func_802432E8(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     } else {
         *arg1 = D_8024EFE4[4];
         *arg7 += D_8024F000[4];
-        window->flags = (window->flags & 0xF7) | 4;
+        window->flags = (window->flags & ~WINDOW_FLAGS_8) | WINDOW_FLAGS_4;
     }
 }
 
@@ -291,7 +279,7 @@ void func_80243388(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     } else {
         *arg1 = D_8024EFE4[4];
         *arg7 = D_8024F00C[4];
-        window->flags = (window->flags & 0xF7) | 4;
+        window->flags = (window->flags & ~WINDOW_FLAGS_8) | WINDOW_FLAGS_4;
     }
 }
 
@@ -345,6 +333,49 @@ void func_80243568(void) {
 }
 
 INCLUDE_ASM(s32, "pause/135EE0", pause_textbox_draw_contents);
+/*
+void pause_textbox_draw_contents(s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 temp_s2;
+    void *temp_t0;
+    void *temp_t0_2;
+    void *temp_v1;
+    void *temp_v1_2;
+
+    temp_s2 = D_80270108;
+    if (temp_s2 != 0) {
+        if (D_80270110 != 0) {
+            set_hud_element_render_pos(gPauseMenuCommonIconIDs.unk4, (arg1 + arg3) - 4, arg2 + 4);
+            draw_hud_element_3(gPauseMenuCommonIconIDs.unk4);
+        }
+        if (D_80270110 < D_8027010C) {
+            set_hud_element_render_pos(gPauseMenuCommonIconIDs.unk8, (arg1 + arg3) - 4, (arg2 + arg4) - 4);
+            draw_hud_element_3(gPauseMenuCommonIconIDs.unk8);
+        }
+        temp_t0 = gMasterGfxPos;
+        temp_v1 = temp_t0;
+        temp_t0_2 = temp_t0 + 8;
+        gMasterGfxPos = temp_t0_2;
+        temp_v1->unk0 = 0xE7000000;
+        temp_v1->unk4 = 0;
+        gMasterGfxPos = temp_t0_2 + 8;
+        temp_t0_2->unk0 = (s32) ((((s32) ((f32) (arg1 + 1) * 4.0f) & 0xFFF) << 0xC) | (((s32) ((f32) (arg2 + 1) * 4.0f) & 0xFFF) | 0xED000000));
+        temp_t0_2->unk4 = (s32) ((((s32) ((f32) ((arg1 + arg3) - 1) * 4.0f) & 0xFFF) << 0xC) | ((s32) ((f32) ((arg2 + arg4) - 1) * 4.0f) & 0xFFF));
+        draw_msg(temp_s2, arg1 + 0xA, arg2 - D_80270114, 0xFF, 0xA, 0);
+        if (D_80270118 != 0) {
+            temp_v1_2 = gMasterGfxPos;
+            temp_v1_2->unk0 = 0xED000000;
+            temp_v1_2->unk4 = 0x5003C0;
+            gMasterGfxPos = temp_v1_2 + 8;
+            set_hud_element_render_pos(gPauseMenuCommonIconIDs.unkC, arg1 - 4, arg2 + 0x10);
+            set_hud_element_anim(gPauseMenuCommonIconIDs.unkC, D_80270118);
+            set_hud_element_flags(gPauseMenuCommonIconIDs.unkC, 0x20000000);
+            clear_hud_element_flags(gPauseMenuCommonIconIDs.unkC, 0x8000);
+            set_hud_element_scale(gPauseMenuCommonIconIDs.unkC, 0x3F800000);
+            draw_hud_element_3(gPauseMenuCommonIconIDs.unkC);
+        }
+    }
+}
+*/
 
 INCLUDE_ASM(s32, "pause/135EE0", pause_tutorial_draw_contents);
 
