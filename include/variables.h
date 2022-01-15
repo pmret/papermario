@@ -306,16 +306,15 @@ extern u8 D_800779B0;
 extern u32 D_80078174;
 extern u8 D_800A0963;
 
-extern UNK_TYPE D_802EB3B0;
+extern struct EffectInstance* TriggerBlockVanishEffect;
 extern UNK_TYPE D_00000094;
 extern UNK_TYPE D_00000094_2; // two symbols resolve to the same addr. Required for matching
-extern UNK_TYPE D_802EA0A0;
-extern EntityBlueprint D_802EA07C;
+extern UNK_TYPE Entity_InertRedBlock;
+extern EntityBlueprint Entity_InertYellowBlock;
 extern UNK_TYPE D_802EA310;
 extern EntityBlueprint Entity_HitGroundedYellowBlock;
 extern EntityBlueprint Entity_HitFloatingYellowBlock;
 extern EntityBlueprint Entity_HitRedBlock;
-extern s16 D_8015C7D2;
 
 extern UNK_TYPE D_0A000328;
 extern UNK_TYPE D_0A000380;

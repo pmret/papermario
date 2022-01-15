@@ -1545,6 +1545,49 @@ enum EntityTypes {
     ENTITY_TYPE_MUNCHLESIA_RESET2       =   0x4A
 };
 
+// Entity
+enum EntityFlags {
+    ENTITY_FLAGS_HIDDEN                                       = 0x00000001,
+    ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1                     = 0x00000002,
+    ENTITY_FLAGS_HAS_DYNAMIC_SHADOW                           = 0x00000004,
+    ENTITY_FLAGS_HAS_ANIMATED_MODEL                           = 0x00000008,
+    ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX                 = 0x00000010,
+    ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX          = 0x00000020,
+    ENTITY_FLAGS_CONTINUOUS_COLLISION                         = 0x00000040,
+    ENTITY_FLAGS_80                                           = 0x00000080,
+    ENTITY_FLAGS_100                                          = 0x00000100,
+    ENTITY_FLAGS_SET_SHADOW_FLAG200                           = 0x00000200,
+    ENTITY_FLAGS_400                                          = 0x00000400,
+    ENTITY_FLAGS_SQUARE_SHADOW                                = 0x00000800,
+    ENTITY_FLAGS_SHOWS_INSPECT_PROMPT                         = 0x00001000,
+    ENTITY_FLAGS_ALWAYS_FACE_CAMERA                           = 0x00002000,
+    ENTITY_FLAGS_4000                                         = 0x00004000,
+    ENTITY_FLAGS_8000                                         = 0x00008000,
+    ENTITY_FLAGS_DETECTED_COLLISION                           = 0x00010000,
+    ENTITY_FLAGS_BLOCK_BEING_HIT                              = 0x00020000,
+    ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2                     = 0x00040000,
+    ENTITY_FLAGS_IGNORE_DISTANCE_CULLING                      = 0x00080000,
+    ENTITY_FLAGS_100000                                       = 0x00100000,
+    ENTITY_FLAGS_200000                                       = 0x00200000,
+    ENTITY_FLAGS_400000                                       = 0x00400000,
+    ENTITY_FLAGS_800000                                       = 0x00800000,
+    ENTITY_FLAGS_BOUND_SCRIPT_DIRTY                           = 0x01000000,
+    ENTITY_FLAGS_2000000                                      = 0x02000000,
+    ENTITY_FLAGS_PENDING_FULL_DELETE                          = 0x04000000,
+    ENTITY_FLAGS_8000000                                      = 0x08000000,
+    ENTITY_FLAGS_10000000                                     = 0x10000000,
+    ENTITY_FLAGS_PENDING_INSTANCE_DELETE                      = 0x20000000,
+    ENTITY_FLAGS_SKIP_UPDATE                                  = 0x40000000,
+    ENTITY_FLAGS_CREATED                                      = 0x80000000,
+};
+
+enum EntityCollisionFlags {
+    ENTITY_COLLISION_FLAGS_1                                = 0x00000001,
+    ENTITY_COLLISION_FLAGS_2                                = 0x00000002,
+    ENTITY_COLLISION_FLAGS_4                                = 0x00000004,
+    ENTITY_COLLISION_FLAGS_8                                = 0x00000008
+};
+
 enum TriggerFlags {
     TRIGGER_ACTIVE              = 0x00000001,
     TRIGGER_ACTIVATED           = 0x00000002,
@@ -1768,6 +1811,7 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_8000                             = 0x00008000,
     PLAYER_STATUS_FLAGS_20000                            = 0x00020000,
     PLAYER_STATUS_FLAGS_40000                            = 0x00040000,
+    PLAYER_STATUS_FLAGS_800000                           = 0x00800000,
     PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
     PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
     PLAYER_STATUS_FLAGS_8000000                          = 0x08000000,
@@ -2380,42 +2424,6 @@ enum ModelFlags {
     MODEL_FLAGS_FLAG_2000               = 0x2000,
     MODEL_FLAGS_FLAG_4000               = 0x4000,
     MODEL_FLAGS_FLAG_8000               = 0x8000,
-};
-
-// DynamicEntity, Entity, ItemEntity
-enum EntityFlags {
-    ENTITY_FLAGS_HIDDEN                                       = 0x00000001,
-    ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1                     = 0x00000002,
-    ENTITY_FLAGS_HAS_DYNAMIC_SHADOW                           = 0x00000004,
-    ENTITY_FLAGS_HAS_ANIMATED_MODEL                           = 0x00000008,
-    ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX                 = 0x00000010,
-    ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX          = 0x00000020,
-    ENTITY_FLAGS_CONTINUOUS_COLLISION                         = 0x00000040,
-    ENTITY_FLAGS_80                                           = 0x00000080,
-    ENTITY_FLAGS_100                                          = 0x00000100,
-    ENTITY_FLAGS_SET_SHADOW_FLAG200                           = 0x00000200,
-    ENTITY_FLAGS_400                                          = 0x00000400,
-    ENTITY_FLAGS_SQUARE_SHADOW                                = 0x00000800,
-    ENTITY_FLAGS_SHOWS_INSPECT_PROMPT                         = 0x00001000,
-    ENTITY_FLAGS_ALWAYS_FACE_CAMERA                           = 0x00002000,
-    ENTITY_FLAGS_4000                                         = 0x00004000,
-    ENTITY_FLAGS_8000                                         = 0x00008000,
-    ENTITY_FLAGS_DETECTED_COLLISION                           = 0x00010000,
-    ENTITY_FLAGS_BLOCK_BEING_HIT                              = 0x00020000,
-    ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2                     = 0x00040000,
-    ENTITY_FLAGS_IGNORE_DISTANCE_CULLING                      = 0x00080000,
-    ENTITY_FLAGS_100000                                       = 0x00100000,
-    ENTITY_FLAGS_200000                                       = 0x00200000,
-    ENTITY_FLAGS_400000                                       = 0x00400000,
-    ENTITY_FLAGS_800000                                       = 0x00800000,
-    ENTITY_FLAGS_BOUND_SCRIPT_DIRTY                           = 0x01000000,
-    ENTITY_FLAGS_2000000                                      = 0x02000000,
-    ENTITY_FLAGS_PENDING_FULL_DELETE                          = 0x04000000,
-    ENTITY_FLAGS_8000000                                      = 0x08000000,
-    ENTITY_FLAGS_10000000                                     = 0x10000000,
-    ENTITY_FLAGS_PENDING_INSTANCE_DELETE                      = 0x20000000,
-    ENTITY_FLAGS_SKIP_UPDATE                                  = 0x40000000,
-    ENTITY_FLAGS_CREATED                                      = 0x80000000,
 };
 
 enum EnemyFlags {

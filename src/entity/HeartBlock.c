@@ -22,8 +22,8 @@ void entity_HeartBlockContent_setupGfx(s32 entityIndex) {
 }
 
 void entity_HeartBlockContent_set_initial_pos(Entity* entity) {
-    SuperBlockContentData* temp = (SuperBlockContentData*)entity->dataBuf;
-    Entity* entityTemp = get_entity_by_index(temp->unk_00);
+    SuperBlockContentData* temp = entity->dataBuf.superBlockContent;
+    Entity* entityTemp = get_entity_by_index(temp->parentEntityIndex);
 
     entity->position.x = entityTemp->position.x;
     entity->position.y = entityTemp->position.y + 14.0f;
@@ -31,26 +31,26 @@ void entity_HeartBlockContent_set_initial_pos(Entity* entity) {
 }
 
 void entity_HeartBlockContent__reset(Entity* entity) {
-    SuperBlockContentData* temp_s0;
+    SuperBlockContentData* data;
     Entity* someEntity;
 
     entity->renderSetupFunc = entity_HeartBlockContent_setupGfx;
     entity->alpha = 255;
-    temp_s0 = (SuperBlockContentData*)entity->dataBuf;
+    data = entity->dataBuf.superBlockContent;
     entity->flags |= ENTITY_FLAGS_ALWAYS_FACE_CAMERA;
-    someEntity = get_entity_by_index(temp_s0->unk_00);
+    someEntity = get_entity_by_index(data->parentEntityIndex);
 
-    if (temp_s0->unk_09 == 0) {
-        temp_s0->unk_09 = 1;
-        temp_s0->unk_01 = 2;
+    if (data->unk_09 == 0) {
+        data->unk_09 = 1;
+        data->unk_01 = 2;
         entity->scale.x = 1.0f;
     } else {
-        temp_s0->unk_01 = 0;
+        data->unk_01 = 0;
         entity->scale.x = 0.0f;
     }
 
-    temp_s0->unk_0C = 0;
-    temp_s0->unk_10 = 0;
+    data->unk_0C = 0;
+    data->unk_10 = 0;
     entity->rotation.x = 0.0f;
     entity->rotation.y = 0.0f;
     entity->rotation.z = 0.0f;
@@ -61,7 +61,7 @@ void entity_HeartBlockContent__reset(Entity* entity) {
 }
 
 void entity_HeartBlockContent_anim_idle(Entity* entity, s32 arg1) {
-    SuperBlockContentData* data = (SuperBlockContentData*)entity->dataBuf;
+    SuperBlockContentData* data = entity->dataBuf.superBlockContent;
     switch (data->unk_01) {
         case 0:
             entity->scale.x = 0.0f;
@@ -98,7 +98,7 @@ void entity_HeartBlockContent_anim_idle(Entity* entity, s32 arg1) {
             break;
     }
 
-    if (entity_can_collide_with_jumping_player(get_entity_by_index(data->unk_00))) {
+    if (entity_can_collide_with_jumping_player(get_entity_by_index(data->parentEntityIndex))) {
         exec_entity_commandlist(entity);
         disable_player_input();
         gPlayerStatus.currentSpeed = 0;
@@ -109,7 +109,7 @@ void entity_HeartBlockContent_anim_idle(Entity* entity, s32 arg1) {
 }
 
 void func_802E4DE0(Entity* entity) {
-    SuperBlockContentData* temp = (SuperBlockContentData*)entity->dataBuf;
+    SuperBlockContentData* temp = entity->dataBuf.superBlockContent;
 
     temp->unk_01 = 0;
     entity->scale.x = 1.0f;
@@ -120,7 +120,7 @@ void func_802E4DE0(Entity* entity) {
 
 void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    SuperBlockContentData* data = (SuperBlockContentData*)entity->dataBuf;
+    SuperBlockContentData* data = entity->dataBuf.superBlockContent;
     f32 offsetX, offsetY, offsetZ;
 
     switch (data->unk_01) {
@@ -288,8 +288,8 @@ s8 entity_HeartBlock_create_child_entity(Entity* entity, EntityBlueprint* data) 
     entity_base_block_init(entity);
     someEntity = get_entity_by_index(create_entity(data, entity->position.x, entity->position.y, entity->position.z, 0.0f,
                                      0x80000000));
-    temp_v1 = (SuperBlockContentData*)someEntity->dataBuf;
-    temp_v1->unk_00 = entity->listIndex;
+    temp_v1 = someEntity->dataBuf.superBlockContent;
+    temp_v1->parentEntityIndex = entity->listIndex;
 
     if (temp_s2 == 0) {
         temp_v1->unk_0A = 3;

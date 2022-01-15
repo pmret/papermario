@@ -2,22 +2,12 @@
 #include "npc.h"
 #include "sprite.h"
 
-typedef struct BlueWarpPipeData {
-    /* 0x00 */ s32 unk_00; // proably flags
-    /* 0x04 */ s32 timer;
-    /* 0x08 */ s32 isRaised;
-    /* 0x0C */ s32 entryID;
-    /* 0x10 */ EvtScript* onEnterPipeEvt;
-    /* 0x14 */ s32 flagIndex;
-    /* 0x18 */ f32 finalPosY;
-} BlueWarpPipeData;
-
 void entity_BlueWarpPipe_setupGfx();
 
 void entity_BlueWarpPipe_check_if_active(Entity* entity) {
     BlueWarpPipeData* pipeData;
 
-    pipeData = entity->dataBuf;
+    pipeData = entity->dataBuf.bluePipe;
     if (get_global_flag(pipeData->flagIndex)) {
         pipeData->timer = 0x10;
         exec_entity_commandlist(entity);
@@ -25,7 +15,7 @@ void entity_BlueWarpPipe_check_if_active(Entity* entity) {
 }
 
 void entity_BlueWarpPipe_rise_up(Entity* entity) {
-    BlueWarpPipeData* pipeData = entity->dataBuf;
+    BlueWarpPipeData* pipeData = entity->dataBuf.bluePipe;
 
     pipeData->timer--;
     if ((pipeData->timer != -1) && (pipeData->isRaised == 0)) {
@@ -37,7 +27,7 @@ void entity_BlueWarpPipe_rise_up(Entity* entity) {
 }
 
 void entity_BlueWarpPipe_wait_for_player_to_get_off(Entity* entity) {
-    BlueWarpPipeData* pipeData = entity->dataBuf;
+    BlueWarpPipeData* pipeData = entity->dataBuf.bluePipe;
 
     if (pipeData->entryID == gGameStatusPtr->entryID) {
         switch (pipeData->timer) {
@@ -83,7 +73,7 @@ void entity_BlueWarpPipe_idle(Entity* entity) {
 
 void entity_BlueWarpPipe_set_player_move_to_center(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    BlueWarpPipeData* pipeData = entity->dataBuf;
+    BlueWarpPipeData* pipeData = entity->dataBuf.bluePipe;
     MapConfig* mapConfig = get_current_map_header();
     f32 temp_f20;
     f32 entryX;
@@ -105,7 +95,7 @@ void entity_BlueWarpPipe_set_player_move_to_center(Entity* entity) {
 }
 
 void entity_BlueWarpPipe_wait_player_move_to_center(Entity* entity) {
-    BlueWarpPipeData* pipeData = (BlueWarpPipeData*)entity->dataBuf;
+    BlueWarpPipeData* pipeData = entity->dataBuf.bluePipe;
 
     if (--pipeData->timer == -1) {
         exec_entity_commandlist(entity);
@@ -114,7 +104,7 @@ void entity_BlueWarpPipe_wait_player_move_to_center(Entity* entity) {
 
 void entity_BlueWarpPipe_enter_pipe_init(Entity* bluePipe) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    BlueWarpPipeData* pipeData = (BlueWarpPipeData*)bluePipe->dataBuf;
+    BlueWarpPipeData* pipeData = bluePipe->dataBuf.bluePipe;
 
     playerStatus->targetYaw = gCameras[gCurrentCameraID].currentYaw + 180.0f;
     pipeData->timer = 25;
@@ -127,7 +117,7 @@ void entity_BlueWarpPipe_enter_pipe_init(Entity* bluePipe) {
 
 void entity_BlueWarpPipe_enter_pipe_update(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    BlueWarpPipeData* pipeData = (BlueWarpPipeData*)entity->dataBuf;
+    BlueWarpPipeData* pipeData = entity->dataBuf.bluePipe;
 
     playerStatus->position.y--;
     pipeData->timer--;
@@ -141,7 +131,7 @@ void entity_BlueWarpPipe_enter_pipe_update(Entity* entity) {
 }
 
 void entity_BlueWarpPipe_start_bound_script(Entity* entity) {
-    Bytecode* triggerScriptStart = ((BlueWarpPipeData*)entity->dataBuf)->onEnterPipeEvt;
+    Bytecode* triggerScriptStart = entity->dataBuf.bluePipe->onEnterPipeEvt;
 
     gOverrideFlags &= ~0x40;
     entity->boundScriptBytecode = triggerScriptStart;
@@ -162,7 +152,7 @@ f32 entity_init_BlueWarpPipe(Entity* entity) {
     enterPipeEvt = args[1];
     flagIndex = args[2];
     entity->renderSetupFunc = &entity_BlueWarpPipe_setupGfx;
-    data = entity->dataBuf;
+    data = entity->dataBuf.bluePipe;
     outPosY = &entity->position.y; // required... wtf
     data->entryID = entryID;
     data->onEnterPipeEvt = enterPipeEvt;

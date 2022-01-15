@@ -30,7 +30,7 @@ typedef struct struct802E7F40 {
 } struct802E7F40;
 
 void entity_WoodenCrate_init(Entity* entity) {
-    struct802E7F40* temp = entity->dataBuf;
+    struct802E7F40* temp = entity->dataBuf.unk;
 
     entity->scale.y = 0.85714287f;
     temp->unk_00 = CreateEntityVarArgBuffer[0];
@@ -38,7 +38,7 @@ void entity_WoodenCrate_init(Entity* entity) {
 }
 
 void entity_WoodenCrate_reset_fragments(Entity* entity) {
-    struct802E7F40* temp = entity->dataBuf;
+    struct802E7F40* temp = entity->dataBuf.unk;
 
     temp->unk_0C = entity->position.y;
     entity_WoodenCrate_init_fragments(entity, &D_0A004350, &D_0A0026F0);
@@ -72,7 +72,7 @@ s32 entity_WoodenCrate_idle(Entity* entity) {
 f32 player_get_camera_facing_angle(void);
 
 void entity_WoodenCrate_shatter(Entity* entity, f32 arg1) {
-    struct802E7F40* temp = entity->dataBuf;
+    struct802E7F40* temp = entity->dataBuf.unk;
 
     if (temp->unk_00 != -1) {
         s32 flag = FALSE;

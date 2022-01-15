@@ -53,10 +53,10 @@ dlabel D_802EA044
 dlabel D_802EA060
 .word 0x00000004, 0x00000001, 0x00000001, 0x0000003C, 0x0A000CC8, 0x00000002, 0x00000000
 
-dlabel D_802EA07C
+dlabel Entity_InertYellowBlock
 .word 0x42000020, D_802E9F80, 0x00000000, entity_init_Hammer1Block_normal, D_802E9E0C, entity_block_handle_collision, 0x00E42240, 0x00E42740, 0x0B191919
 
-dlabel D_802EA0A0
+dlabel Entity_InertRedBlock
 .word 0x42000020, D_802E9F9C, 0x00000000, entity_init_Hammer1Block_normal, D_802E9E0C, entity_block_handle_collision, 0x00E42740, 0x00E431F0, 0x13191919
 
 dlabel D_802EA0C4

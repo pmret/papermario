@@ -16,11 +16,11 @@ f32 entity_SuperBlockContent_get_previous_yaw(SuperBlockContentData* data, s32 a
 
 void entity_upgrade_block_hide_content(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
-    BlockEntityData* data = entity->dataBuf;
+    BlockData* data = entity->dataBuf.block;
 
     if (data->childEntityIndex >= 0) {
         Entity* childEntity = get_entity_by_index(data->childEntityIndex);
-        SuperBlockContentData* childEntityData = childEntity->dataBuf;
+        SuperBlockContentData* childEntityData = childEntity->dataBuf.superBlockContent;
         childEntityData->unk_0A = 1;
     }
 }
@@ -30,22 +30,22 @@ s32 entity_upgrade_block_idle(Entity* entity) {
 }
 
 void entity_upgrade_block_check_if_inactive(Entity* entity) {
-    BlockEntityData* parentData = entity->dataBuf;
+    BlockData* parentData = entity->dataBuf.block;
 
     if (parentData->gameFlagIndex != 0xFFFF && !get_global_flag(parentData->gameFlagIndex)) {
         Entity* childEntity;
-        BlockEntityData* childData;
+        SuperBlockContentData* childData;
 
         parentData->childEntityIndex = create_entity(&Entity_SuperBlockContent, entity->position.x, entity->position.y, entity->position.z, 0.0f,
                                         0x80000000);
         childEntity = get_entity_by_index(parentData->childEntityIndex);
-        childData = childEntity->dataBuf;
+        childData = childEntity->dataBuf.superBlockContent;
         childData->parentEntityIndex = entity->listIndex;
     }
 }
 
 void entity_upgrade_block_init(Entity* entity) {
-    BlockEntityData* data = entity->dataBuf;
+    BlockData* data = entity->dataBuf.block;
 
     entity_base_block_init(entity);
     entity->rotation.y += 180.0f;
@@ -62,19 +62,19 @@ void entity_UltraBlock_init(Entity* entity) {
 }
 
 void entity_SuperBlockContent_attach_to_parent(Entity* entity) {
-    BlockEntityData* data = entity->dataBuf;
-    Entity* childEntity = get_entity_by_index(data->parentEntityIndex);
+    SuperBlockContentData* data = entity->dataBuf.superBlockContent;
+    Entity* parentEntity = get_entity_by_index(data->parentEntityIndex);
 
-    entity->position.x = childEntity->position.x;
-    entity->position.y = childEntity->position.y + 14.0f;
-    entity->position.z = childEntity->position.z;
+    entity->position.x = parentEntity->position.x;
+    entity->position.y = parentEntity->position.y + 14.0f;
+    entity->position.z = parentEntity->position.z;
 }
 
 // display list func
 INCLUDE_ASM(s32, "entity/SuperBlock", entity_SuperBlockContent_setupGfx);
 
 void entity_SuperBlockContent_idle(Entity* entity) {
-    SuperBlockContentData* data = entity->dataBuf;
+    SuperBlockContentData* data = entity->dataBuf.superBlockContent;
 
     entity_SuperBlockContent_attach_to_parent(entity);
     if (data->unk_0A != 0) {
@@ -98,7 +98,7 @@ void entity_SuperBlockContent_idle(Entity* entity) {
 }
 
 void entity_init_SuperBlockContent1(Entity* entity) {
-    BlockEntityData* data = entity->dataBuf;
+    SuperBlockContentData* data = entity->dataBuf.superBlockContent;
 
     data->unk_128 = &D_0A000328;
     data->unk_12C = &D_0A000380;
@@ -106,7 +106,7 @@ void entity_init_SuperBlockContent1(Entity* entity) {
 }
 
 void entity_init_SuperBlockContent2(Entity* entity) {
-    BlockEntityData* data = entity->dataBuf;
+    SuperBlockContentData* data = entity->dataBuf.superBlockContent;
 
     data->unk_128 = &D_0A000800;
     data->unk_12C = &D_0A000750;

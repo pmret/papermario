@@ -1,14 +1,6 @@
 #include "common.h"
 #include "effects.h"
 
-typedef struct struct802E3F0C {
-    /* 0x00 */ char unk_00[10];
-    /* 0x0A */ u16 unk_A;
-    /* 0x0C */ char unk_C[4];
-    /* 0x10 */ s16 unk_10;
-    /* 0x12 */ s16 unk_12;
-} struct802E3F0C;
-
 void entity_ItemBlock_idle(Entity* entity) {
     entity_base_block_idle(entity);
 }
@@ -40,13 +32,13 @@ void entity_TriggerBlock_start_bound_script_2(Entity* entity) {
 }
 
 void entity_TriggerBlock_play_vanish_effect(Entity* entity) {
-    D_802EB3B0 = playFX_6F(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
+    TriggerBlockVanishEffect = playFX_6F(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
 }
 
 void entity_HitItemBlock_play_anim(Entity* entity) {
     s32 entityType = get_entity_type(entity->listIndex);
 
-    if (entityType == 0x12 || entityType == 0x14) {
+    if (entityType == ENTITY_TYPE_HIDDEN_RED_BLOCK || entityType == ENTITY_TYPE_RED_BLOCK) {
         play_model_animation(entity->virtualModelIndex, &D_00000094);
     } else {
         play_model_animation(entity->virtualModelIndex, &D_00000094_2);
@@ -54,26 +46,26 @@ void entity_HitItemBlock_play_anim(Entity* entity) {
 }
 
 void entity_HitItemBlock_show_inactive(Entity* entity) {
-    Entity* someEntity; // TODO: better var name
-    Shadow* someShadow; // TODO: better var name
-    struct802E3F0C* temp = entity->dataBuf;
+    Entity* inertEntity;
+    Shadow* inertShadow;
+    ItemBlockData* data = entity->dataBuf.itemBlock;
 
-    someEntity = get_entity_by_index(temp->unk_12);
-    someEntity->flags &= ~ENTITY_FLAGS_HIDDEN;
-    someShadow = get_shadow_by_index(someEntity->shadowIndex);
-    someShadow->flags &= ~SHADOW_FLAGS_HIDDEN;
+    inertEntity = get_entity_by_index(data->childEntityIndex);
+    inertEntity->flags &= ~ENTITY_FLAGS_HIDDEN;
+    inertShadow = get_shadow_by_index(inertEntity->shadowIndex);
+    inertShadow->flags &= ~SHADOW_FLAGS_HIDDEN;
 }
 
 void entity_ItemBlock_check_if_inactive(Entity* entity) {
-    struct802E3F0C* temp = entity->dataBuf;
+    ItemBlockData* data = entity->dataBuf.itemBlock;
 
-    if ((temp->unk_A != 0xFFFF) && get_global_flag(temp->unk_A)) {
+    if ((data->gameFlagIndex != 0xFFFF) && get_global_flag(data->gameFlagIndex)) {
         UNK_PTR phi_a0;
 
-        if (get_entity_type(entity->listIndex) != 0x14) {
-            phi_a0 = &D_802EA07C;
+        if (get_entity_type(entity->listIndex) != ENTITY_TYPE_RED_BLOCK) {
+            phi_a0 = &Entity_InertYellowBlock;
         } else {
-            phi_a0 = &D_802EA0A0;
+            phi_a0 = &Entity_InertRedBlock;
         }
         create_entity(phi_a0, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
         set_entity_commandlist(entity, &D_802EA310);
@@ -82,26 +74,29 @@ void entity_ItemBlock_check_if_inactive(Entity* entity) {
     }
 }
 
+// when an item block is hit, it spawns two subsidiary entities: a dummy item block which performs a 'hit' animation
+// followed by an inert version of the block.
 void entity_ItemBlock_replace_with_inactive(Entity* entity) {
     s32 entityType = get_entity_type(entity->listIndex);
-    UNK_PTR entityData = &D_802EA07C;
+    EntityBlueprint* entityBlueprint = &Entity_InertYellowBlock;
     s32 childEntityIndex;
     s32 isBlockOnGround;
     s32 parentEntityType;
-    struct802E3F0C* temp;
+    ItemBlockData* temp;
     Entity* childEntity;
     Shadow* shadow;
 
-    if (entityType < 0x15) {
-        entityData = &D_802EA07C;
-        if (entityType >= 0x12) {
-            entityData = &D_802EA0A0;
+    if (entityType < ENTITY_TYPE_HAMMER1_BLOCK) {
+        entityBlueprint = &Entity_InertYellowBlock;
+        if (entityType >= ENTITY_TYPE_HIDDEN_RED_BLOCK) {
+            entityBlueprint = &Entity_InertRedBlock;
         }
     }
 
-    childEntityIndex = create_entity(entityData, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
+    // this child entity is the inert block
+    childEntityIndex = create_entity(entityBlueprint, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
     childEntity = get_entity_by_index(childEntityIndex);
-    childEntity->flags |= 1;
+    childEntity->flags |= ENTITY_FLAGS_HIDDEN;
 
     if (entity->flags & ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2) {
         childEntity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
@@ -117,14 +112,15 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
 
     parentEntityType = get_entity_type(entity->listIndex);
     if (parentEntityType == ENTITY_TYPE_HIDDEN_RED_BLOCK || parentEntityType == ENTITY_TYPE_RED_BLOCK) {
-        entityData = &Entity_HitRedBlock;
+        entityBlueprint = &Entity_HitRedBlock;
     } else if (isBlockOnGround != 0) {
-        entityData = &Entity_HitGroundedYellowBlock;
+        entityBlueprint = &Entity_HitGroundedYellowBlock;
     } else {
-        entityData = &Entity_HitFloatingYellowBlock;
+        entityBlueprint = &Entity_HitFloatingYellowBlock;
     }
-    childEntity = get_entity_by_index(create_entity(entityData, entity->position.x, entity->position.y, entity->position.z,
-                                     entity->rotation.y, 0x80000000));
+
+    // child entity is now the animated block which appears before it turns inert
+    childEntity = get_entity_by_index(create_entity(entityBlueprint, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000));
     childEntity->alpha = entity->alpha;
     if ((entity->flags & ENTITY_FLAGS_HIDDEN) || (entity->alpha < 0xFF)) {
         childEntity->alpha = 0x20;
@@ -134,8 +130,8 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
         childEntity->flags |= ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2;
     }
 
-    temp = childEntity->dataBuf;
-    temp->unk_12 = childEntityIndex;
+    temp = childEntity->dataBuf.unk;
+    temp->childEntityIndex = childEntityIndex;
 
     if (entity->flags & ENTITY_FLAGS_HAS_DYNAMIC_SHADOW) {
         childEntity->flags |= ENTITY_FLAGS_HAS_DYNAMIC_SHADOW;
@@ -151,7 +147,7 @@ void entity_ItemBlock_replace_with_inactive(Entity* entity) {
 void entity_HitItemBlock_hide(Entity* entity) {
     entity->flags |= ENTITY_FLAGS_HIDDEN;
     entity->flags &= ~ENTITY_FLAGS_100;
-    get_shadow_by_index(entity->shadowIndex)->flags |= 0x10000001;
+    get_shadow_by_index(entity->shadowIndex)->flags |= (SHADOW_FLAGS_HIDDEN | SHADOW_FLAGS_FADING_AWAY);
 }
 
 s32 entity_TriggerBlock_start_bound_script(Entity* entity) {
@@ -162,11 +158,10 @@ s32 entity_TriggerBlock_start_bound_script(Entity* entity) {
     return FALSE;
 }
 
-// TODO: new file here?
 void entity_TriggerBlock_disable_player_input(void) {
     disable_player_input();
     gPlayerStatus.currentSpeed = 0.0f;
-    gPlayerStatus.flags |= 0x800000;
+    gPlayerStatus.flags |= PLAYER_STATUS_FLAGS_800000;
     set_action_state(8);
     gravity_use_fall_parms();
 }
@@ -194,12 +189,12 @@ void entity_ItemBlock_setupGfx(s32 entityIndex) {
 }
 
 void entity_ItemBlock_init(Entity* entity) {
-    BlockEntityData* temp;
+    ItemBlockData* data;
 
     entity_base_block_init(entity);
-    temp = entity->dataBuf;
-    temp->unk_10 = D_8015C7D2;
-    temp->gameFlagIndex = 0xFFFF;
+    data = entity->dataBuf.itemBlock;
+    data->itemID = *CreateEntityVarArgBuffer;
+    data->gameFlagIndex = 0xFFFF;
     entity->renderSetupFunc = entity_ItemBlock_setupGfx;
 }
 
@@ -209,11 +204,11 @@ void entity_HiddenItemBlock_init(Entity* entity) {
 }
 
 void entity_ItemlessBlock_init(Entity* entity) {
-    ModelAnimator* animMesh;
+    ModelAnimator* animator;
 
     entity_base_block_init(entity);
     entity->renderSetupFunc = entity_ItemBlock_setupGfx;
-    animMesh = get_animator_by_index(entity->virtualModelIndex);
-    animMesh->renderMode = 0x11;
-    animMesh->flags |= 0x10000;
+    animator = get_animator_by_index(entity->virtualModelIndex);
+    animator->renderMode = 0x11;
+    animator->flags |= 0x10000;
 }

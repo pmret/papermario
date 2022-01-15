@@ -379,6 +379,140 @@ typedef Evt* ScriptList[MAX_SCRIPTS];
 
 struct Entity;
 
+// BEGIN ENTITY-SPECIFIC STRUCTS
+
+typedef struct struct802E2BA4 {
+    /* 0x00 */ char unk_00[2];
+    /* 0x02 */ u16 unk_02[24][2];
+} struct802E2BA4;
+
+// from 102c80, size unknown.
+typedef struct struct802E1400 {
+    /* 0x000 */ Vec3f unk_00;
+    /* 0x00C */ char unk_0C[4];
+    /* 0x010 */ s8 unk_10;
+    /* 0x011 */ s8 unk_11;
+    /* 0x014 */ Vec3f unk_14;
+    /* 0x020 */ u16 unk_20;
+    /* 0x022 */ s16 unk_22;
+    /* 0x024 */ s16 unk_24;
+    /* 0x028 */ struct Entity* attachedEntity;
+    /* 0x02C */ char unk_2C[8];
+    /* 0x034 */ struct802E2BA4* unk_34;
+    /* 0x038 */ f32 unk_38;
+    /* 0x03C */ union {
+        /*       */     s16 s;
+        /*       */     s8 b[2];
+    } unk_3C;
+    /* 0x03E */ char unk_3E[0x4D];
+    /* 0x08B */ u8 unk_8B[24];
+    /* 0x0A3 */ char unk_A3; // padding?
+    /* 0x0A4 */ u8 unk_A4[24];
+    /* 0x0BC */ char unk_BC[4];
+    /* 0x0C0 */ f32 unk_C0[24];
+    /* 0x120 */ char unk_120[4];
+    /* 0x124 */ f32 unk_124[24];
+    /* 0x184 */ char unk_184[4];
+    /* 0x188 */ f32 unk_188[24];
+} struct802E1400;
+
+// from 104940_len_dc0, size unknown
+// appears to belong to the hammer blocks(?)
+typedef struct BlockData {
+    /* 0x000 */ u8 parentEntityIndex; // for block entities spawned by other block entities
+    /* 0x001 */ char unk_01[2];
+    /* 0x003 */ s8 unk_03;
+    /* 0x004 */ s16 coinsLeft;
+    /* 0x006 */ s16 timeLeft;
+    /* 0x008 */ char unk_08[2];
+    /* 0x00A */ u16 gameFlagIndex;
+    /* 0x00C */ char unk_0C[2];
+    /* 0x00E */ s16 unk_0E;
+    /* 0x010 */ s16 itemEntityIndex; // for spawned item entities
+    /* 0x012 */ s16 childEntityIndex; // for block entities that spawn other block entities
+    /* 0x014 */ f32 unk_14;
+    /* 0x018 */ f32 unk_18;
+    /* 0x01C */ char unk_1C[0x10C];
+    /* 0x128 */ UNK_PTR unk_128;
+    /* 0x12C */ UNK_PTR unk_12C;
+} BlockData;
+
+typedef struct ItemBlockData {
+    /* 0x00 */ u16 unk_00;
+    /* 0x02 */ char unk_02[8];
+    /* 0x0A */ u16 gameFlagIndex;
+    /* 0x0C */ char unk_C[4];
+    /* 0x10 */ s16 itemID;
+    /* 0x12 */ s16 childEntityIndex; // for block entities that spawn other block entities
+} ItemBlockData;
+
+typedef struct SaveBlockData {
+    /* 0x000 */ char unk_0[4];
+    /* 0x004 */ s16 angle;
+} SaveBlockData;
+
+// size unknown
+typedef struct SuperBlockContentData {
+    /* 0x000 */ u8 parentEntityIndex; // for block entities spawned by other block entities
+    /* 0x001 */ u8 unk_01;
+    /* 0x002 */ s8 unk_02;
+    /* 0x003 */ s8 unk_03;
+    /* 0x004 */ f32 unk_04;
+    /* 0x008 */ char unk_08;
+    /* 0x009 */ u8 unk_09;
+    /* 0x00A */ u8 unk_0A;
+    /* 0x00B */ char unk_0B; // padding?
+    /* 0x00C */ s32 unk_0C;
+    /* 0x010 */ s32 unk_10;
+    /* 0x014 */ f32 unk_14;
+    /* 0x018 */ f32 unk_18;
+    /* 0x01C */ f32 unk_1C;
+    /* 0x020 */ f32 unk_20;
+    /* 0x024 */ u16 unk_24;
+    /* 0x024 */ s16 unk_26;
+    /* 0x028 */ f32 unk_28[0xB];
+    /* 0x054 */ f32 unk_54;
+    /* 0x058 */ char unk_58[0x78];
+    /* 0x0D0 */ u16 yawBufferPos;
+    /* 0x0D4 */ f32 yawBuffer[20];
+    /* 0x124 */ s32 unk_124;
+    /* 0x128 */ s32* unk_128;
+    /* 0x12C */ s32* unk_12C;
+} SuperBlockContentData;
+
+// size unknown
+typedef struct ChestData {
+    /* 0x00 */ u16 gameFlagIndex;
+    /* 0x02 */ s16 giveItemTimer;
+    /* 0x04 */ u8 state;
+    /* 0x04 */ s8 unk_05;
+    /* 0x06 */ s8 postLidAnimDelay;
+    /* 0x07 */ u8 unk_07;
+    /* 0x08 */ f32 lidAngle;
+    /* 0x0C */ f32 lidAnimInterpPhase;
+    /* 0x10 */ s32 itemID;
+    /* 0x14 */ s32 itemEntityIndex;
+    /* 0x18 */ Vec3f itemEntityPos;
+    /* 0x24 */ f32 giveItemRadiusInterpPhase;
+    /* 0x28 */ f32 giveItemHeightInterpPhase;
+    /* 0x2C */ f32 itemVelY;
+    /* 0x30 */ s8 unk_30;
+    /* 0x31 */ char unk_31[3];
+    /* 0x34 */ struct EffectInstance* gotItemEffect;
+} ChestData;
+
+typedef struct BlueWarpPipeData {
+    /* 0x00 */ s32 unk_00; // proably flags
+    /* 0x04 */ s32 timer;
+    /* 0x08 */ s32 isRaised;
+    /* 0x0C */ s32 entryID;
+    /* 0x10 */ EvtScript* onEnterPipeEvt;
+    /* 0x14 */ s32 flagIndex;
+    /* 0x18 */ f32 finalPosY;
+} BlueWarpPipeData;
+
+// END ENTITY-SPECIFIC STRUCTS
+
 typedef s32 (*EntityCallback)(struct Entity*);
 
 typedef struct EntityBlueprint {
@@ -418,7 +552,16 @@ typedef struct Entity {
     /* 0x30 */ char unk_30[0x8];
     /* 0x38 */ EntityBlueprint* blueprint;
     /* 0x3C */ UNK_PTR renderSetupFunc; // pointer to draw func(?)
-    /* 0x40 */ s32* dataBuf;
+    /* 0x40 */ union {
+        s32* any;
+        BlockData* block;
+        ItemBlockData* itemBlock;
+        SaveBlockData* saveBlock;
+        ChestData* chest;
+        BlueWarpPipeData* bluePipe;
+        SuperBlockContentData* superBlockContent;
+        s32* unk;
+    } dataBuf;
     /* 0x44 */ Mtx* vertexData;
     /* 0x48 */ Vec3f position;
     /* 0x54 */ Vec3f scale;
@@ -2020,92 +2163,6 @@ typedef struct {
     /* 0x1C */ u8 updateCounter;
     /* 0x1D */ char unk_1D[3];
 } Window; // size = 0x20
-
-// BEGIN ENTITY-SPECIFIC STRUCTS
-
-typedef struct struct802E2BA4 {
-    /* 0x00 */ char unk_00[2];
-    /* 0x02 */ u16 unk_02[24][2];
-} struct802E2BA4;
-
-// from 102c80, size unknown.
-typedef struct struct802E1400 {
-    /* 0x000 */ Vec3f unk_00;
-    /* 0x00C */ char unk_0C[4];
-    /* 0x010 */ s8 unk_10;
-    /* 0x011 */ s8 unk_11;
-    /* 0x014 */ Vec3f unk_14;
-    /* 0x020 */ u16 unk_20;
-    /* 0x022 */ s16 unk_22;
-    /* 0x024 */ s16 unk_24;
-    /* 0x028 */ Entity* attachedEntity;
-    /* 0x02C */ char unk_2C[8];
-    /* 0x034 */ struct802E2BA4* unk_34;
-    /* 0x038 */ f32 unk_38;
-    /* 0x03C */ union {
-        /*       */     s16 s;
-        /*       */     s8 b[2];
-    } unk_3C;
-    /* 0x03E */ char unk_3E[0x4D];
-    /* 0x08B */ u8 unk_8B[24];
-    /* 0x0A3 */ char unk_A3; // padding?
-    /* 0x0A4 */ u8 unk_A4[24];
-    /* 0x0BC */ char unk_BC[4];
-    /* 0x0C0 */ f32 unk_C0[24];
-    /* 0x120 */ char unk_120[4];
-    /* 0x124 */ f32 unk_124[24];
-    /* 0x184 */ char unk_184[4];
-    /* 0x188 */ f32 unk_188[24];
-} struct802E1400;
-
-// from 104940_len_dc0, size unknown
-// appears to belong to the hammer blocks(?)
-typedef struct BlockEntityData {
-    /* 0x000 */ u8 parentEntityIndex; // for block entities spawned by other block entities
-    /* 0x001 */ char unk_01[2];
-    /* 0x003 */ s8 unk_03;
-    /* 0x004 */ s16 coinsLeft;
-    /* 0x006 */ s16 timeLeft;
-    /* 0x008 */ char unk_08[2];
-    /* 0x00A */ u16 gameFlagIndex;
-    /* 0x00C */ char unk_0C[2];
-    /* 0x00E */ s16 unk_0E;
-    /* 0x010 */ s16 unk_10;
-    /* 0x012 */ s16 childEntityIndex; // for block entities that spawn other block entities
-    /* 0x014 */ f32 unk_14;
-    /* 0x018 */ f32 unk_18;
-    /* 0x01C */ char unk_1C[0x10C];
-    /* 0x128 */ UNK_PTR unk_128;
-    /* 0x12C */ UNK_PTR unk_12C;
-} BlockEntityData;
-
-// size unknown
-typedef struct SuperBlockContentData {
-    /* 0x00 */ u8 unk_00;
-    /* 0x01 */ u8 unk_01;
-    /* 0x02 */ s8 unk_02;
-    /* 0x03 */ s8 unk_03;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ char unk_08;
-    /* 0x09 */ u8 unk_09;
-    /* 0x0A */ u8 unk_0A;
-    /* 0x0B */ char unk_0B; // padding?
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ u16 unk_24;
-    /* 0x24 */ s16 unk_26;
-    /* 0x28 */ f32 unk_28[0xB];
-    /* 0x54 */ f32 unk_54;
-    /* 0x58 */ char unk_58[0x78];
-    /* 0xD0 */ u16 yawBufferPos;
-    /* 0xD4 */ f32 yawBuffer[20];
-} SuperBlockContentData;
-
-// END ENTITY-SPECIFIC STRUCTS
 
 typedef struct {
     /* 0x00000 */ LookAt lookAt;

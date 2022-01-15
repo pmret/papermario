@@ -1529,8 +1529,8 @@ u32 get_entity_type(s32 index) {
 void delete_entity(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
 
-    if (entity->dataBuf != NULL) {
-        heap_free(entity->dataBuf);
+    if (entity->dataBuf.any != NULL) {
+        heap_free(entity->dataBuf.any);
     }
 
     if (!(entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
@@ -1552,8 +1552,8 @@ void delete_entity(s32 entityIndex) {
 void delete_entity_and_unload_data(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
 
-    if (entity->dataBuf != NULL) {
-        heap_free(entity->dataBuf);
+    if (entity->dataBuf.any != NULL) {
+        heap_free(entity->dataBuf.any);
     }
 
     if (!(entity->flags & ENTITY_FLAGS_HAS_ANIMATED_MODEL)) {
@@ -1912,7 +1912,7 @@ ApiStatus AssignAreaFlag(Evt* script, s32 isInitialCall) {
         Entity* entity = get_entity_by_index(gLastCreatedEntityIndex);
 
         // TODO find proper struct for the dataBuf
-        ((s16*)(entity->dataBuf))[16] = temp_s0;
+        ((s16*)(entity->dataBuf.unk))[16] = temp_s0;
         if (get_area_flag(temp_s0) != 0) {
             entity->flags |= ENTITY_FLAGS_PENDING_INSTANCE_DELETE;
         }
@@ -1926,11 +1926,11 @@ ApiStatus AssignBlockFlag(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall == TRUE) {
-        s32 temp_s0 = evt_get_variable_index(script, *args++);
-        Entity* entity = get_entity_by_index(gLastCreatedEntityIndex);
+        s32 index = evt_get_variable_index(script, *args++);
 
-        // TODO find proper struct for the dataBuf
-        ((s16*)(entity->dataBuf))[5] = temp_s0;
+        BlockData* data = get_entity_by_index(gLastCreatedEntityIndex)->dataBuf.block;
+        data->gameFlagIndex = index;
+
         return ApiStatus_DONE2;
     }
 
@@ -1941,12 +1941,8 @@ ApiStatus AssignChestFlag(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall == TRUE) {
-        Trigger* trigger = (Trigger*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
-        trigger->flags.bytes.genericFlagIndex = evt_get_variable_index(script, *args);
-
-    //TODO WRONG! shoudl be something like:
-    //    Entity* entity = (Entity*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
-    //    ((ChestData*)entity->dataBuf)->gameFlagIndex = evt_get_variable_index(script, *args);
+        ChestData* data = get_entity_by_index(gLastCreatedEntityIndex)->dataBuf.chest;
+        data->gameFlagIndex = evt_get_variable_index(script, *args);
 
         return ApiStatus_DONE2;
     }
@@ -1959,7 +1955,7 @@ ApiStatus AssignPanelFlag(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall == TRUE) {
         // TODO find proper struct for the dataBuf
-        s16* dataBuf = (s16*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
+        s16* dataBuf = (s16*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf.unk;
 
         dataBuf[3] = evt_get_variable_index(script, *args++);
         return ApiStatus_DONE2;
@@ -1973,7 +1969,7 @@ ApiStatus AssignCrateFlag(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall == TRUE) {
         // TODO find proper struct for the dataBuf
-        s16* dataBuf = (s16*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
+        s16* dataBuf = (s16*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf.unk;
 
         dataBuf[2] = evt_get_variable_index(script, *args++);
         return ApiStatus_DONE2;

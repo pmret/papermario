@@ -55,15 +55,15 @@ void entity_block_hit_animate_scale(Entity* entity) {
 INCLUDE_ASM(s32, "entity/Block", entity_base_block_update_slow_sinking);
 
 s32 entity_base_block_idle(Entity* entity) {
-    BlockEntityData* temp = (BlockEntityData*)entity->dataBuf;
+    BlockData* temp = entity->dataBuf.block;
     s32 ret = 0;
 
     if (is_block_on_ground(entity) != 0) {
         if (entity->flags & ENTITY_FLAGS_200000) {
             ret = 1;
             entity_base_block_update_slow_sinking(entity);
-            if (temp->unk_10 != -1) {
-                ItemEntity* itemEntity = get_item_entity(temp->unk_10);
+            if (temp->itemEntityIndex != -1) {
+                ItemEntity* itemEntity = get_item_entity(temp->itemEntityIndex);
                 itemEntity->position.y = entity->position.y + 4.0f;
             }
         }
@@ -73,24 +73,24 @@ s32 entity_base_block_idle(Entity* entity) {
 }
 
 void entity_base_block_init(Entity* entity) {
-    BlockEntityData* temp = (BlockEntityData*)entity->dataBuf;
+    BlockData* temp = entity->dataBuf.block;
     f32 posY;
 
-    temp->unk_10 = -1;
+    temp->itemEntityIndex = -1;
     temp->unk_14 = entity->position.y;
     temp->unk_0E = -1;
     entity->flags &= ~ENTITY_FLAGS_200000;
 }
 
 void entity_inactive_block_hit_init(Entity* entity) {
-    BlockEntityData* temp = (BlockEntityData*)entity->dataBuf;
+    BlockData* temp = entity->dataBuf.block;
 
     temp->unk_18 = 90.0f;
 }
 
 void entity_inactive_block_hit_anim(Entity* entity) {
     f64 temp_f20;
-    BlockEntityData* temp = (BlockEntityData*)entity->dataBuf;
+    BlockData* temp = entity->dataBuf.block;
 
     entity_MulticoinBlock_update_timer(entity);
     temp_f20 = entity->position.y;
@@ -104,7 +104,7 @@ void entity_inactive_block_hit_anim(Entity* entity) {
 
 void entity_inactive_block_recoil_anim(Entity* entity) {
     f64 temp_f20;
-    BlockEntityData* temp = (BlockEntityData*)entity->dataBuf;
+    BlockData* temp = entity->dataBuf.block;
 
     entity_MulticoinBlock_update_timer(entity);
     temp_f20 = entity->position.y;
@@ -118,20 +118,20 @@ void entity_inactive_block_recoil_anim(Entity* entity) {
 }
 
 void entity_MulticoinBlock_init(Entity* entity) {
-    BlockEntityData* temp;
+    BlockData* temp;
 
     entity_base_block_init(entity);
-    temp = (BlockEntityData*)entity->dataBuf;
+    temp = entity->dataBuf.block;
     temp->coinsLeft = 0xA;
     temp->timeLeft = 0x7B;
     temp->gameFlagIndex = 0xFFFF;
 }
 
 extern s32 D_802E9E54;
-extern EntityBlueprint D_802EA07C;
+extern EntityBlueprint Entity_InertYellowBlock;
 
 void entity_MulticoinBlock_spawn_coin(Entity* entity) {
-    BlockEntityData* temp = (BlockEntityData*)entity->dataBuf;
+    BlockData* temp = entity->dataBuf.block;
     s32 phi_v1;
     s32 phi_v0;
 
@@ -149,7 +149,7 @@ void entity_MulticoinBlock_spawn_coin(Entity* entity) {
 
     if ((temp->coinsLeft == 0) || (temp->timeLeft == 0)) {
         temp->unk_03 = 1;
-        set_entity_commandlist(get_entity_by_index(create_entity(&D_802EA07C, entity->position.x, entity->position.y,
+        set_entity_commandlist(get_entity_by_index(create_entity(&Entity_InertYellowBlock, entity->position.x, entity->position.y,
                                entity->position.z,
                                entity->rotation.y, 0x80000000)), &D_802E9E54);
         entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
@@ -158,7 +158,7 @@ void entity_MulticoinBlock_spawn_coin(Entity* entity) {
 
 void entity_MulticoinBlock_update_timer(Entity* entity) {
     u16 temp_v0;
-    BlockEntityData* temp = (BlockEntityData*)entity->dataBuf;
+    BlockData* temp = entity->dataBuf.block;
     s16 phi_return;
 
     if (entity->type == 0xE) {
@@ -174,7 +174,7 @@ void entity_MulticoinBlock_update_timer(Entity* entity) {
 
 void entity_MulticoinBlock_idle(Entity* entity) {
     s32 temp_v0;
-    BlockEntityData* temp = (BlockEntityData*)entity->dataBuf;
+    BlockData* temp = entity->dataBuf.block;
 
     if ((entity->collisionFlags & 0x80) != 0) {
         exec_entity_commandlist(entity);
@@ -183,7 +183,7 @@ void entity_MulticoinBlock_idle(Entity* entity) {
     entity_MulticoinBlock_update_timer(entity);
     entity_base_block_idle(entity);
     if (temp->unk_03 != 0) {
-        create_entity(&D_802EA07C, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
+        create_entity(&Entity_InertYellowBlock, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
         entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
     }
 }
@@ -191,11 +191,11 @@ void entity_MulticoinBlock_idle(Entity* entity) {
 void entity_MulticoinBlock_check_if_inactive(Entity* entity) {
     s32 temp_v0;
     u16 temp_v1;
-    BlockEntityData* temp = entity->dataBuf;
+    BlockData* data = entity->dataBuf.block;
 
-    if (temp->gameFlagIndex != 0xFFFF) {
-        if (get_global_flag(temp->gameFlagIndex) != 0) {
-            create_entity(&D_802EA07C, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
+    if (data->gameFlagIndex != 0xFFFF) {
+        if (get_global_flag(data->gameFlagIndex) != 0) {
+            create_entity(&Entity_InertYellowBlock, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
             entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
         }
     }
@@ -328,11 +328,11 @@ void entity_init_Hammer1Block_normal(Entity* entity) {
 
 s32 entity_init_HammerBlock_small(Entity* entity) {
     s32 temp_v0;
-    BlockEntityData* temp = entity->dataBuf;
+    BlockData* data = entity->dataBuf.block;
 
-    temp->unk_10 = -1;
-    temp->unk_14 = entity->position.y;
-    temp->unk_0E = -1;
+    data->itemEntityIndex = -1;
+    data->unk_14 = entity->position.y;
+    data->unk_0E = -1;
     entity->flags &= ~ENTITY_FLAGS_200000;
     entity->scale.x = 0.5f;
     entity->scale.y = 0.5f;

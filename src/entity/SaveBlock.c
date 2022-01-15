@@ -1,11 +1,6 @@
 #include "common.h"
 #include "fio.h"
 
-typedef struct SaveBlockData {
-    char unk_0[4];
-    s16 angle;
-} SaveBlockData;
-
 void entity_SaveBlock_setupGfx();
 
 void entity_Shadow_init(Shadow* shadow) {
@@ -26,7 +21,7 @@ INCLUDE_ASM(s32, "entity/SaveBlock", entity_SaveBlock_setupGfx);
 void entity_SaveBlock_idle(Entity* entity) {
     SaveBlockData* data;
 
-    data = (SaveBlockData*)entity->dataBuf;
+    data = entity->dataBuf.saveBlock;
     data->angle = clamp_angle(data->angle + 6);
     entity_base_block_idle(entity);
 }
@@ -97,9 +92,9 @@ void entity_SaveBlock_wait_for_close_choice(Entity* entity) {
 }
 
 void entity_SaveBlock_init(Entity* entity) {
-    BlockEntityData* data = entity->dataBuf;
+    SaveBlockData* data = entity->dataBuf.saveBlock;
 
     entity_base_block_init(entity);
     entity->renderSetupFunc = entity_SaveBlock_setupGfx;
-    data->coinsLeft = 8;
+    data->angle = 8;
 }

@@ -26,7 +26,7 @@ s32 func_802BB3B8_E2FD08(void);
 INCLUDE_ASM(s32, "entity/sbk_omo/E2F750", func_802BB3B8_E2FD08);
 
 void func_802BB704_E30054(Entity* entity) {
-    structE2F750* data = (structE2F750*)entity->dataBuf;
+    structE2F750* data = (structE2F750*)entity->dataBuf.unk;
     s32 i;
 
     data->unk_02--;
@@ -48,7 +48,7 @@ s32 func_802BB7E0_E30130(Entity* entity);
 INCLUDE_ASM(s32, "entity/sbk_omo/E2F750", func_802BB7E0_E30130);
 
 void func_802BB8E4_E30234(Entity* entity) {
-    structE2F750* data = (structE2F750*)entity->dataBuf;
+    structE2F750* data = (structE2F750*)entity->dataBuf.unk;
     f32 temp_f20_2;
 
     f32 temp_f4 = (atan2(entity->position.x, entity->position.z, data->unk_A4, data->unk_A8) - data->unk_B8) * 0.03125f;
@@ -81,7 +81,7 @@ void func_802BBDB8_E30708(Entity* entity) {
 }
 
 void func_802BBE14_E30764(Entity* entity) {
-    structE2F750* data = (structE2F750*)entity->dataBuf;
+    structE2F750* data = (structE2F750*)entity->dataBuf.unk;
 
     data->unk_A0 = *CreateEntityVarArgBuffer;
     func_802BB7E0_E30130(entity);
