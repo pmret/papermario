@@ -279,7 +279,7 @@ typedef struct Enemy {
     /* 0xDC */ char unk_DC[20];
 } Enemy; // size = 0xF0
 
-s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s32 arg4);
+s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
 
 /// The default Npc::onUpdate and Npc::onRender callback.
 void STUB_npc_callback(Npc*);
