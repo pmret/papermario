@@ -2,54 +2,6 @@
 
 .section .data
 
-dlabel gPauseMenuIconScripts
-.word D_80241ECC, 0x802427D4, 0x80242820, 0x80241E00, HudScript_StickTapRight, HudScript_PressAButton, HudScript_PressStartButton, HudScript_StartButtonText
-
-dlabel gPauseMenuPanels
-.word D_8024F314, D_8024F4AC, D_8024F54C, D_8024F5E4, D_8024F88C, D_8024FA10
-
-dlabel D_8024EF98
-.word D_8025068C
-
-dlabel gPauseMenuCursorPosX
-.word 0x000000A0
-
-dlabel gPauseMenuCursorPosY
-.word 0xFFFFFF88
-
-dlabel gPauseMenuCursorOpacity
-.word 0x00000000
-
-dlabel gPauseMenuTargetPosX
-.word 0x000000A0
-
-dlabel gPauseMenuTargetPosY
-.word 0xFFFFFF88
-
-dlabel gPauseMenuCursorTargetOpacity
-.word 0x00000000
-
-dlabel D_8024EFB4
-.word 0x00000001, 0xFFF6FFE7, 0xFFD6FFC4, 0xFFB00000
-
-dlabel D_8024EFC4
-.byte 0x01, 0x01, 0x01, 0x01, 0x01
-
-dlabel D_8024EFC9
-.byte 0x00, 0x00, 0x00
-
-dlabel D_8024EFCC
-.short 0xFFB0, 0xFFBF, 0xFFDA, 0xFFE2, 0xFFF6, 0x0000
-
-dlabel D_8024EFD8
-.short 0x0050, 0x0041, 0x0026, 0x001E, 0x000A, 0x0000
-
-dlabel D_8024EFE4
-.short 0x0101, 0x0101
-
-dlabel D_8024EFE8
-.byte 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x11, 0x00, 0x25, 0x00, 0x3C, 0x00, 0x55, 0x00, 0x6E
-
 dlabel D_8024F000
 .short 0xFFF6, 0xFFE7, 0xFFD6, 0xFFC4
 

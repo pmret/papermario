@@ -14,25 +14,52 @@ BSS s32 D_802700E0;
 // TODO this is the bss for the whole segment - break it up
 static char bss[0x80278640 - BSS_END];
 
-// Need data segment and vars declared above
-#ifdef NON_MATCHING
+//data
+extern EvtSource HudScript_AnimatedCursorHand;
+extern EvtSource HudScript_DescMsgPrev;
+extern EvtSource HudScript_DescMsgNext;
+extern EvtSource HudScript_UnusedBadge;
+extern EvtSource HudScript_StickTapRight;
+extern EvtSource HudScript_PressAButton;
+extern EvtSource HudScript_PressStartButton;
+extern EvtSource HudScript_StartButtonText;
+
+u32 gPauseMenuIconScripts[] = {HudScript_AnimatedCursorHand, HudScript_DescMsgPrev, HudScript_DescMsgNext,
+                               HudScript_UnusedBadge, HudScript_StickTapRight, HudScript_PressAButton,
+                               HudScript_PressStartButton, HudScript_StartButtonText};
+MenuPanel* gPauseMenuPanels[] = { 0x8024F314, 0x8024F4AC, 0x8024F54C, 0x8024F5E4, 0x8024F88C, 0x8024FA10 };
+u32 D_8024EF98 = 0x8025068C;
+s32 gPauseMenuCursorPosX = 160;
+s32 gPauseMenuCursorPosY = -120;
+s32 gPauseMenuCursorOpacity = 0;
+s32 gPauseMenuTargetPosX = 160;
+s32 gPauseMenuTargetPosY = -120;
+s32 gPauseMenuCursorTargetOpacity = 0;
+u32 D_8024EFB4 = 1;
+u32 D_8024EFB8[] = {0xFFF6FFE7, 0xFFD6FFC4, 0xFFB00000 }; //unused???
+u8 D_8024EFC4 = 1; // its 5 bytes array
+u8 D_temp8024EFC5 = 1;
+u8 D_temp8024EFC6 = 1;
+u8 D_temp8024EFC7 = 1;
+u8 D_temp8024EFC8 = 1;
+u8 D_8024EFC9 = 0; //it's 3 bytes array
+u8 D_temp8024EFCA = 0;
+u8 D_temp8024EFCB = 0;
+u16 D_8024EFCC[] = { 0xFFB0, 0xFFBF, 0xFFDA, 0xFFE2, 0xFFF6, 0x0000 };
+u16 D_8024EFD8[] = { 0x0050, 0x0041, 0x0026, 0x001E, 0x000A, 0x0000 };
+u16 D_8024EFE4[] = { 0x0101, 0x0101 };
+u8 D_8024EFE8[] = { 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x11, 0x00, 0x25, 0x00, 0x3C, 0x00, 0x55, 0x00, 0x6E };
+
 void pause_set_cursor_opacity(s32 val) {
     gPauseMenuCursorTargetOpacity = val;
 }
-#else
-INCLUDE_ASM(s32, "pause/135EE0", pause_set_cursor_opacity);
-#endif
-
-// Delay slot issue with D_8024EFB4 (needs .data)
-#ifdef NON_MATCHING
-extern s32 D_8024EFB4;
 
 void func_80242BAC(s32 windowID, s32 posX, s32 posY) {
     Window* window = &gWindows[windowID];
 
     if (D_8024EFB4 != 0
-            || get_game_mode() == GAME_MODE_EXIT_FILE_SELECT
-            || get_game_mode() == GAME_MODE_EXIT_LANGUAGE_SELECT) {
+            || get_game_mode() == GAME_MODE_END_FILE_SELECT
+            || get_game_mode() == GAME_MODE_END_LANGUAGE_SELECT) {
         if (D_8024EFB4 != 0) {
             s32 i;
 
@@ -53,27 +80,20 @@ void func_80242BAC(s32 windowID, s32 posX, s32 posY) {
         gPauseMenuTargetPosY = posY;
         gPauseMenuCursorPosY = posY;
 
-    } else if ((window->flags & WINDOW_FLAGS_88 == 0 && (window->parent == -1 || !(gWindows[window->parent].flags & 8))) {
+    } else if ((window->flags & WINDOW_FLAGS_8) == 0 && (window->parent == -1 || !(gWindows[window->parent].flags & WINDOW_FLAGS_8))) {
         gPauseMenuTargetPosX = posX;
         gPauseMenuCursorPosX = posX;
         gPauseMenuTargetPosY = posY;
         gPauseMenuCursorPosY = posY;
     }
 }
-#else
-INCLUDE_ASM(s32, "pause/135EE0", func_80242BAC);
-#endif
-
-// Delay slot issue with gPauseMenuCursorPosY (needs .data)
-#ifdef NON_MATCHING
-extern s32 D_8024EFB4;
 
 void func_80242D04(s32 windowID, s32 posX, s32 posY) {
     Window* window = &gWindows[windowID];
 
     if (D_8024EFB4 != 0
-            || get_game_mode() == GAME_MODE_EXIT_FILE_SELECT
-            || get_game_mode() == GAME_MODE_EXIT_LANGUAGE_SELECT) {
+            || get_game_mode() == GAME_MODE_END_FILE_SELECT
+            || get_game_mode() == GAME_MODE_END_LANGUAGE_SELECT) {
         if (D_8024EFB4 != 0) {
             s32 i;
 
@@ -98,9 +118,6 @@ void func_80242D04(s32 windowID, s32 posX, s32 posY) {
         gPauseMenuTargetPosY = posY;
     }
 }
-#else
-INCLUDE_ASM(s32, "pause/135EE0", func_80242D04);
-#endif
 
 // Delay slot issue with gPauseMenuCursorTargetOpacity (needs .data)
 #ifdef NON_MATCHING
