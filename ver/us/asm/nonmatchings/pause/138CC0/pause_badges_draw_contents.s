@@ -520,8 +520,8 @@ glabel pause_badges_draw_contents
 /* 13AFD8 80247C98 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
 /* 13AFDC 80247C9C 004B1021 */  addu      $v0, $v0, $t3
 /* 13AFE0 80247CA0 84420004 */  lh        $v0, 4($v0)
-/* 13AFE4 80247CA4 3C0A8009 */  lui       $t2, %hi(D_8008A680)
-/* 13AFE8 80247CA8 254AA680 */  addiu     $t2, $t2, %lo(D_8008A680)
+/* 13AFE4 80247CA4 3C0A8009 */  lui       $t2, %hi(gItemHudScripts)
+/* 13AFE8 80247CA8 254AA680 */  addiu     $t2, $t2, %lo(gItemHudScripts)
 /* 13AFEC 80247CAC 000210C0 */  sll       $v0, $v0, 3
 /* 13AFF0 80247CB0 004A1021 */  addu      $v0, $v0, $t2
 /* 13AFF4 80247CB4 8C420000 */  lw        $v0, ($v0)
@@ -538,8 +538,8 @@ glabel pause_badges_draw_contents
 /* 13B01C 80247CDC 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
 /* 13B020 80247CE0 004B1021 */  addu      $v0, $v0, $t3
 /* 13B024 80247CE4 84420004 */  lh        $v0, 4($v0)
-/* 13B028 80247CE8 3C0A8009 */  lui       $t2, %hi(D_8008A680)
-/* 13B02C 80247CEC 254AA680 */  addiu     $t2, $t2, %lo(D_8008A680)
+/* 13B028 80247CE8 3C0A8009 */  lui       $t2, %hi(gItemHudScripts)
+/* 13B02C 80247CEC 254AA680 */  addiu     $t2, $t2, %lo(gItemHudScripts)
 /* 13B030 80247CF0 000210C0 */  sll       $v0, $v0, 3
 /* 13B034 80247CF4 004A1021 */  addu      $v0, $v0, $t2
 /* 13B038 80247CF8 08091F4B */  j         .L80247D2C
@@ -552,8 +552,8 @@ glabel pause_badges_draw_contents
 /* 13B04C 80247D0C 256B78E0 */  addiu     $t3, $t3, %lo(gItemTable)
 /* 13B050 80247D10 004B1021 */  addu      $v0, $v0, $t3
 /* 13B054 80247D14 84420004 */  lh        $v0, 4($v0)
-/* 13B058 80247D18 3C0A8009 */  lui       $t2, %hi(D_8008A680)
-/* 13B05C 80247D1C 254AA680 */  addiu     $t2, $t2, %lo(D_8008A680)
+/* 13B058 80247D18 3C0A8009 */  lui       $t2, %hi(gItemHudScripts)
+/* 13B05C 80247D1C 254AA680 */  addiu     $t2, $t2, %lo(gItemHudScripts)
 /* 13B060 80247D20 000210C0 */  sll       $v0, $v0, 3
 /* 13B064 80247D24 004A1021 */  addu      $v0, $v0, $t2
 /* 13B068 80247D28 8C450000 */  lw        $a1, ($v0)

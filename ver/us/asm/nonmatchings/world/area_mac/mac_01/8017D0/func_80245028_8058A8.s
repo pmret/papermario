@@ -37,8 +37,8 @@ glabel func_80245028_8058A8
 /* 805924 802450A4 26B50001 */   addiu    $s5, $s5, 1
 /* 805928 802450A8 0200202D */  daddu     $a0, $s0, $zero
 /* 80592C 802450AC 00101100 */  sll       $v0, $s0, 4
-/* 805930 802450B0 3C068009 */  lui       $a2, %hi(D_8008EF20)
-/* 805934 802450B4 24C6EF20 */  addiu     $a2, $a2, %lo(D_8008EF20)
+/* 805930 802450B0 3C068009 */  lui       $a2, %hi(gPartnerPopupProperties)
+/* 805934 802450B4 24C6EF20 */  addiu     $a2, $a2, %lo(gPartnerPopupProperties)
 /* 805938 802450B8 00469021 */  addu      $s2, $v0, $a2
 /* 80593C 802450BC 0C0913D7 */  jal       func_80244F5C_8057DC
 /* 805940 802450C0 AFA50010 */   sw       $a1, 0x10($sp)
@@ -47,8 +47,8 @@ glabel func_80245028_8058A8
 /* 80594C 802450CC 50600019 */  beql      $v1, $zero, .L80245134
 /* 805950 802450D0 26B50001 */   addiu    $s5, $s5, 1
 /* 805954 802450D4 00102080 */  sll       $a0, $s0, 2
-/* 805958 802450D8 3C06800F */  lui       $a2, %hi(D_800F7F00)
-/* 80595C 802450DC 24C67F00 */  addiu     $a2, $a2, %lo(D_800F7F00)
+/* 805958 802450D8 3C06800F */  lui       $a2, %hi(wPartnerHudScripts)
+/* 80595C 802450DC 24C67F00 */  addiu     $a2, $a2, %lo(wPartnerHudScripts)
 /* 805960 802450E0 00861021 */  addu      $v0, $a0, $a2
 /* 805964 802450E4 8C420000 */  lw        $v0, ($v0)
 /* 805968 802450E8 AE300108 */  sw        $s0, 0x108($s1)
@@ -61,8 +61,8 @@ glabel func_80245028_8058A8
 /* 805984 80245104 82620015 */  lb        $v0, 0x15($s3)
 /* 805988 80245108 14650007 */  bne       $v1, $a1, .L80245128
 /* 80598C 8024510C AE220210 */   sw       $v0, 0x210($s1)
-/* 805990 80245110 3C06800F */  lui       $a2, %hi(D_800F7F40)
-/* 805994 80245114 24C67F40 */  addiu     $a2, $a2, %lo(D_800F7F40)
+/* 805990 80245110 3C06800F */  lui       $a2, %hi(wDisabledPartnerHudScripts)
+/* 805994 80245114 24C67F40 */  addiu     $a2, $a2, %lo(wDisabledPartnerHudScripts)
 /* 805998 80245118 00861021 */  addu      $v0, $a0, $a2
 /* 80599C 8024511C AE20018C */  sw        $zero, 0x18c($s1)
 /* 8059A0 80245120 8C420000 */  lw        $v0, ($v0)

@@ -95,9 +95,9 @@ extern MessagePrintState* gCurrentPrintContext;
 extern s32 D_802DB264;
 extern MessagePrintState* D_802DB268;
 
-extern StaticShadowData D_802E98BC;
-extern StaticShadowData D_802E98E0;
-extern StaticShadowData D_802E9904;
+extern StaticShadowData CircularShadowA;
+extern StaticShadowData CircularShadowB;
+extern StaticShadowData SquareShadow;
 extern s32 D_802EB390;
 extern s32 D_802EB394;
 extern MessagePrintState* D_802EB398;
@@ -312,9 +312,9 @@ extern UNK_TYPE D_00000094_2; // two symbols resolve to the same addr. Required 
 extern UNK_TYPE D_802EA0A0;
 extern StaticEntityData D_802EA07C;
 extern UNK_TYPE D_802EA310;
-extern UNK_TYPE D_802EA618;
-extern UNK_TYPE D_802EA63C;
-extern UNK_TYPE D_802EA660;
+extern StaticEntityData Entity_HitGroundedYellowBlock;
+extern StaticEntityData Entity_HitFloatingYellowBlock;
+extern StaticEntityData Entity_HitRedBlock;
 extern s16 D_8015C7D2;
 
 extern UNK_TYPE D_0A000328;
@@ -388,18 +388,18 @@ extern s32 bMarioDefendAnims[];
 extern s32 bPeachIdleAnims[];
 
 // TODO: name these entity symbols
-extern StaticEntityData D_802E9A18; // entitySaveBlock
-extern StaticEntityData D_802E9BB0;
-extern StaticEntityData D_802E9BD4; // entityBlueSwitch
-extern StaticEntityData D_802E9BF8; // entityHugeBlueSwitch
-extern StaticEntityData D_802E9C1C;
-extern StaticEntityData D_802E9C8C;
-extern StaticEntityData D_802E9CB0;
-extern StaticEntityData D_802E9CD4;
-extern StaticEntityData D_802E9CF8;
-extern StaticEntityData D_802E9D1C;
-extern StaticEntityData D_802E9D40;
-extern StaticEntityData D_802E9D64;
+extern StaticEntityData Entity_SavePoint; // entitySaveBlock
+extern StaticEntityData Entity_RedSwitch;
+extern StaticEntityData Entity_BlueSwitch; // entityBlueSwitch
+extern StaticEntityData Entity_HugeBlueSwitch; // entityHugeBlueSwitch
+extern StaticEntityData Entity_GreenStompSwitch;
+extern StaticEntityData Entity_ShatteringHammer1Block;
+extern StaticEntityData Entity_ShatteringHammer2Block;
+extern StaticEntityData Entity_ShatteringHammer3Block;
+extern StaticEntityData Entity_ShatteringHammer1BlockTiny;
+extern StaticEntityData Entity_ShatteringHammer2BlockTiny;
+extern StaticEntityData Entity_ShatteringHammer3BlockTiny;
+extern StaticEntityData Entity_ShatteringBrickBlock;
 
 // Temporary dead stuff
 extern PartnerActionStatus dead_gPartnerActionStatus2;

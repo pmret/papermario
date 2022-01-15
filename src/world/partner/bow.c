@@ -294,7 +294,7 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
                     bow->flags |= 0x40;
                 }
 
-                get_shadow_by_index(bow->shadowIndex)->unk_05 = playerStatus->alpha1 >> 1;
+                get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 >> 1;
                 func_8003D624(bow, 7, playerStatus->alpha1, 0, 0, 0, 0);
                 bow->pos.x = playerStatus->position.x - D_802BE0E4;
                 bow->pos.y = playerStatus->position.y - D_802BE0E8;
@@ -357,7 +357,7 @@ void func_802BDDF0_324740(Npc* bow) {
     playerStatus->alpha1 = 255;
     func_8003D624(bow, 0, 0, 0, 0, 0, 0);
     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-    get_shadow_by_index(bow->shadowIndex)->unk_05 = playerStatus->alpha1 >> 1;
+    get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 >> 1;
 
     if (D_802BE0C4) {
         enable_player_input();

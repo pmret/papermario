@@ -23,9 +23,9 @@ glabel pause_partners_draw_title
 /* 13EF34 8024BBF4 00220821 */  addu      $at, $at, $v0
 /* 13EF38 8024BBF8 8C22F6B0 */  lw        $v0, %lo(D_8024F6B0)($at)
 /* 13EF3C 8024BBFC 00021100 */  sll       $v0, $v0, 4
-/* 13EF40 8024BC00 3C118009 */  lui       $s1, %hi(D_8008EF20)
+/* 13EF40 8024BC00 3C118009 */  lui       $s1, %hi(gPartnerPopupProperties)
 /* 13EF44 8024BC04 02228821 */  addu      $s1, $s1, $v0
-/* 13EF48 8024BC08 8E31EF20 */  lw        $s1, %lo(D_8008EF20)($s1)
+/* 13EF48 8024BC08 8E31EF20 */  lw        $s1, %lo(gPartnerPopupProperties)($s1)
 /* 13EF4C 8024BC0C 0C039D59 */  jal       get_player_data
 /* 13EF50 8024BC10 00E0A02D */   daddu    $s4, $a3, $zero
 /* 13EF54 8024BC14 8E030000 */  lw        $v1, ($s0)

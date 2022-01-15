@@ -8,6 +8,7 @@
 #include "stdlib/stdarg.h"
 
 f32 fabsf(f32 f);
+f64 fabs(f64 f);
 f32 cosine(s16 arg0);
 
 s32 strcmp(const char* str1, const char* str2);
@@ -81,16 +82,19 @@ void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);
 s8* filemenu_get_menu_message(s32 idx);
 void filemenu_draw_message(s8*, s32 posX, s32 posY, s32 alpha, s32 color, s32 flags);
 
+void update_enemy_shadows(void);
+void update_hero_shadows(void);
+
 // append gfx funcs
-void func_80257B28(s32);
-void func_8025595C(Actor*);
-void func_80257B68(Actor*);
-void func_80257B48(s32);
-void func_8025599C(Actor*);
-void func_80257B88(void);
-void func_80257DA4(void);
+void func_80257B28(void*);
+void func_8025595C(void*);
+void func_80257B68(void*);
+void func_80257B48(void*);
+void func_8025599C(void*);
+void func_80257B88(void*);
+void func_80257DA4(void*);
 void func_80254C50(Actor*);
-void func_80258E14(void);
+void func_80258E14(void*);
 
 f32 func_800E34D8(void);
 void func_800E4AD8(s32 arg0);
@@ -200,7 +204,7 @@ s32 phys_can_player_interact(void);
 
 void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2);
 
-s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
+s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, f32, f32, s32*);
 s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* posX, f32* posY, f32* posZ, f32 speed, f32 heading);
 
 s32 evt_get_variable(Evt* script, Bytecode var);
@@ -248,7 +252,87 @@ void reset_model_animators(void);
 void init_virtual_entity_list(void);
 void init_model_animators(void);
 s32 heap_free(void* ptr);
+
+void btl_state_update_normal_start(void);
+void btl_state_draw_normal_start(void);
+void btl_state_update_begin_turn(void);
+void btl_state_draw_begin_turn(void);
+void btl_state_update_begin_player_turn(void);
+void btl_state_draw_begin_player_turn(void);
+void btl_state_update_switch_to_player(void);
+void btl_state_draw_switch_to_player(void);
+void btl_state_update_begin_partner_turn(void);
+void btl_state_draw_begin_partner_turn(void);
 void btl_state_update_switch_to_partner(void);
+void btl_state_draw_switch_to_partner(void);
+void func_80242FE0(void);
+void func_80243910(void);
+void btl_state_update_prepare_menu(void);
+void btl_state_draw_prepare_menu(void);
+void btl_state_update_end_turn(void);
+void btl_state_draw_end_turn(void);
+void btl_state_update_1C(void);
+void btl_state_draw_1C(void);
+void btl_state_update_victory(void);
+void btl_state_draw_victory(void);
+void btl_state_update_end_training_battle(void);
+void btl_state_draw_end_training_battle(void);
+void btl_state_update_end_battle(void);
+void btl_state_draw_end_battle(void);
+void btl_state_update_defend(void);
+void btl_state_draw_defend(void);
+void btl_state_update_run_away(void);
+void btl_state_draw_run_away(void);
+void btl_state_update_defeat(void);
+void btl_state_draw_defeat(void);
+void btl_state_update_change_partner(void);
+void btl_state_draw_change_partner(void);
+void btl_state_update_player_move(void);
+void btl_state_draw_player_move(void);
+void btl_state_update_end_player_turn(void);
+void btl_state_update_partner_move(void);
+void btl_state_draw_partner_move(void);
+void btl_state_update_end_partner_turn(void);
+void btl_state_draw_end_partner_turn(void);
+void btl_state_update_next_enemy(void);
+void btl_state_draw_next_enemy(void);
+void btl_state_update_enemy_move(void);
+void btl_state_draw_enemy_move(void);
+void btl_state_update_first_strike(void);
+void btl_state_draw_first_stike(void);
+void btl_state_update_partner_striking_first(void);
+void btl_state_draw_partner_striking_first(void);
+void btl_state_update_enemy_striking_first(void);
+void btl_state_draw_enemy_striking_first(void);
+void btl_state_update_end_demo_battle(void);
+void btl_state_draw_end_demo_battle(void);
+
+void btl_state_update_player_menu(void);
+void btl_state_draw_player_menu(void);
+void btl_state_update_partner_menu(void);
+void btl_state_draw_partner_menu(void);
+void btl_state_update_peach_menu(void);
+void btl_state_draw_peach_menu(void);
+void btl_state_update_twink_menu(void);
+void btl_state_draw_twink_menu(void);
+void btl_state_update_select_target(void);
+void btl_state_draw_select_target(void);
+void btl_state_update_22(void);
+void btl_state_draw_22(void);
+
+void btl_state_update_celebration(void);
+void btl_draw_upgrade_windows(void);
+void btl_state_draw_celebration(void);
+
+void func_8024F7C8(void);
+void func_80266978(void);
+void func_80266B14(void);
+void func_8024EE48(void);
+void func_8024EEA8(void);
+void func_80255FD8(void);
+
+void func_80266EE8(Actor* actor, s32 arg1);
+
 void btl_set_popup_duration(s32 duration);
 void switch_to_partner(s32 arg0);
 
@@ -272,7 +356,7 @@ s32 pause_get_total_equipped_bp_cost(void);
 s32 pause_get_menu_msg(s32 index);
 void pause_sort_item_list(s16* arr, s32 len, s32 (*compare)(s16*, s16 *));
 
-s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
+s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
 s32 player_raycast_below_cam_relative(PlayerStatus*, f32*, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
 s32 npc_test_move_taller_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);

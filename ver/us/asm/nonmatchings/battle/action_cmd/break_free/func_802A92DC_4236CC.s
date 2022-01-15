@@ -112,8 +112,8 @@ dlabel L802A944C_42383C
 /* 423858 802A9468 A622004E */   sh       $v0, 0x4e($s1)
 .L802A946C:
 /* 42385C 802A946C 8E240004 */  lw        $a0, 4($s1)
-/* 423860 802A9470 3C058011 */  lui       $a1, %hi(D_80108B80)
-/* 423864 802A9474 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
+/* 423860 802A9470 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
+/* 423864 802A9474 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
 /* 423868 802A9478 0C0511FF */  jal       set_hud_element_anim
 /* 42386C 802A947C 00000000 */   nop
 /* 423870 802A9480 96230052 */  lhu       $v1, 0x52($s1)

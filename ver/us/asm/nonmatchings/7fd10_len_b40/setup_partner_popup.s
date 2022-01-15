@@ -7,13 +7,13 @@ glabel setup_partner_popup
 /* 80030 800E6B80 0000502D */  daddu     $t2, $zero, $zero
 /* 80034 800E6B84 24090001 */  addiu     $t1, $zero, 1
 /* 80038 800E6B88 24180005 */  addiu     $t8, $zero, 5
-/* 8003C 800E6B8C 3C0F8009 */  lui       $t7, %hi(D_8008EF20)
-/* 80040 800E6B90 25EFEF20 */  addiu     $t7, $t7, %lo(D_8008EF20)
-/* 80044 800E6B94 3C0E800F */  lui       $t6, %hi(D_800F7F00)
-/* 80048 800E6B98 25CE7F00 */  addiu     $t6, $t6, %lo(D_800F7F00)
+/* 8003C 800E6B8C 3C0F8009 */  lui       $t7, %hi(gPartnerPopupProperties)
+/* 80040 800E6B90 25EFEF20 */  addiu     $t7, $t7, %lo(gPartnerPopupProperties)
+/* 80044 800E6B94 3C0E800F */  lui       $t6, %hi(wPartnerHudScripts)
+/* 80048 800E6B98 25CE7F00 */  addiu     $t6, $t6, %lo(wPartnerHudScripts)
 /* 8004C 800E6B9C 0120682D */  daddu     $t5, $t1, $zero
-/* 80050 800E6BA0 3C0C800F */  lui       $t4, %hi(D_800F7F40)
-/* 80054 800E6BA4 258C7F40 */  addiu     $t4, $t4, %lo(D_800F7F40)
+/* 80050 800E6BA0 3C0C800F */  lui       $t4, %hi(wDisabledPartnerHudScripts)
+/* 80054 800E6BA4 258C7F40 */  addiu     $t4, $t4, %lo(wDisabledPartnerHudScripts)
 /* 80058 800E6BA8 3C088009 */  lui       $t0, %hi(D_8008EEC4)
 /* 8005C 800E6BAC 2508EEC4 */  addiu     $t0, $t0, %lo(D_8008EEC4)
 .L800E6BB0:

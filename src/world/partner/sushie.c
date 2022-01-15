@@ -54,7 +54,7 @@ void func_802BD20C_31DF7C(f32* arg0, f32* arg1) {
     f32 phi_f20;
     f32 temp_f2 = gPartnerActionStatus.stickY;
     f32 temp_f0 = gPartnerActionStatus.stickX;
-    
+
     D_802BFDB0_320B20 = temp_f0;
     D_802BFDB4_320B24 = temp_f2;
     temp_f22 = clamp_angle(atan2(0.0f, 0.0f, temp_f0, -temp_f2) + gCameras->currentYaw);
@@ -82,8 +82,8 @@ void func_802BD368_31E0D8(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
 
     arg2 += 100.0f;
     sp20 = 200.0f;
-    
-    if (npc_raycast_down_ahead(arg0, &arg1, &arg2, &arg3, &sp20, arg4, arg5) == 0) {
+
+    if (npc_raycast_down_around(arg0, &arg1, &arg2, &arg3, &sp20, arg4, arg5) == 0) {
         collisionStatus->currentFloor = -1;
     } else {
         collisionStatus->currentFloor = D_8010C97A;
@@ -131,7 +131,7 @@ void world_sushie_init(Npc* sushie) {
 
 s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
     Npc* sushie = script->owner2.npc;
- 
+
     if (isInitialCall) {
         partner_init_get_out(sushie);
     }
@@ -159,7 +159,7 @@ ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
     }
 
     entity = D_8010C954;
-    
+
     if (entity == NULL) {
         partner_walking_update_player_tracking(sushie);
         partner_walking_update_motion(sushie);
@@ -277,7 +277,7 @@ void world_sushie_pre_battle(Npc* sushie) {
 
 void world_sushie_post_battle(Npc* sushie) {
     PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
-    
+
     if (sushieActionStatus->actionState.b[1] != 0) {
         *sushie = sushieActionStatus->npc;
         partner_use_ability();
@@ -294,7 +294,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 0;
         D_802BFEE0 = playerStatus->position.y;
     }
-    
+
     funcTemp0 = script->functionTemp[0];
 
     switch (funcTemp0) {

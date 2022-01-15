@@ -911,7 +911,7 @@ segments:
     - [0x134F40, palette, ui/blue_orb]
     - [0x134F60, ci4, ui/label_bubble, 56, 16]
     - [0x135120, palette, ui/label_bubble]
-    - [0x135140, bin, pause_icon_table] # TODO data
+    - [0x135140, data, pause_icon_table]
   - type: code
     dir: pause
     start: 0x135EE0
@@ -3444,8 +3444,7 @@ segments:
     vram: 0x802A1000
     subsegments:
     - [0x415D90, c, 415D90]
-    - [0x4200D0, .data, 415D90]
-    - [0x420500]
+    - [0x4200D0]
   - type: code
     start: 0x4219F0
     vram: 0x802A9000
@@ -3454,6 +3453,7 @@ segments:
     overlay: True
     subsegments:
     - [0x4219F0, c, jump]
+    - [0x421FC0]
   - type: code
     start: 0x422000
     vram: 0x802A9000
@@ -3835,36 +3835,56 @@ segments:
     type: code
     start: 0x4D01F0
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x4D01F0, c]
-    - [0x4D02B0, c]
-    - [0x4D0310, c]
-    - [0x4D0360, c]
-    - [0x4D03B0, c]
-    - [0x4D0400, data]
+    - [0x4D01F0, c, area]
+    - [0x4D01F0, c, actor/cleft]
+    - [0x4D02B0, c, actor/monty_mole]
+    - [0x4D02B0, c, actor/buzzar]
+    - [0x4D0310, c, actor/whacka]
+    - [0x4D0360, c, stage/iwa_01]
+    - [0x4D03B0, c, stage/iwa_01b]
+    - [0x4D03B0, c, stage/iwa_02]
+    - [0x4D0400]
   - dir: battle/area_sbk
     type: code
     start: 0x4DA5E0
     vram: 0x80218000
+    subalign: 16 # BSS alignment hack
     overlay: True
     subsegments:
-    - [0x4DA5E0, c]
-    - [0x4DA6B0, c]
-    - [0x4DA860, data]
+    - [0x4DA5E0, c, actor/pokey]
+    - [0x4DA6B0, c, actor/bandit]
+    - [0x4DA6B0, c, stage/sbk_02]
+    - [0x4DA860, c, area]
+    - [0x4DA860]
   - dir: battle/area_isk_part_1
     type: code
     start: 0x4E2740
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4E2740, c]
-    - [0x4E2810, c]
-    - [0x4E28E0, c]
-    - [0x4E29B0, c]
-    - [0x4E30C0, c]
-    - [0x4E3190, c]
-    - [0x4E3350, data]
+    - [0x4E2740, c, actor/pokey_mummy]
+    - [0x4E2810, c, actor/swooper]
+    - [0x4E28E0, c, actor/buzzy_beetle]
+    - [0x4E29B0, c, actor/stone_chomp]
+    - [0x4E2FF0, c, stage/isk_00]
+    - [0x4E2FF0, c, stage/isk_01]
+    - [0x4E2FF0, c, stage/isk_02]
+    - [0x4E2FF0, c, stage/isk_03]
+    - [0x4E2FF0, c, stage/isk_04]
+    - [0x4E30C0, c, stage/isk_05]
+    - [0x4E3190, c, stage/isk_06]
+    - [0x4E3200, c, stage/isk_07]
+    - [0x4E3200, c, stage/isk_07]
+    - [0x4E3270, c, stage/isk_03b]
+    - [0x4E3270, c, stage/isk_02b]
+    - [0x4E3270, c, stage/isk_02c]
+    - [0x4E3270, c, stage/isk_06b]
+    - [0x4E32E0, c, stage/isk_08]
+    - [0x4E3350, c, area]
+    - [0x4E3350]
   - dir: battle/area_isk_part_2
     type: code
     start: 0x4EF4A0
@@ -4558,10 +4578,11 @@ segments:
     overlay: True
     subsegments:
     - [0x72A750, c, insecticide_herb]
-    - start: 0x72B130
+    - start: 0x72AB70
       type: .data
       name: insecticide_herb
       subsegments:
+      - [0x72AB70]
       - [0x72B130, ci4, insecticide_herb, 32, 32]
       - [0x72B330, palette, insecticide_herb]
       - [0x72B350]
@@ -4668,8 +4689,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x7345A0, c]
-    - [0x734650, data]
+    - [0x7345A0, c, hammer]
+    - [0x734650]
   - dir: battle/move/spin_smash
     type: code
     start: 0x737890
@@ -4684,16 +4705,16 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x73AED0, c]
-    - [0x73AF80, data]
+    - [0x73AED0, c, quake_hammer]
+    - [0x73AF80]
   - dir: battle/move/jump
     type: code
     start: 0x73D860
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x73D860, c]
-    - [0x73D9A0, data]
+    - [0x73D860, c, jump]
+    - [0x73D9A0]
   - dir: battle/move/multibounce
     type: code
     start: 0x740CC0

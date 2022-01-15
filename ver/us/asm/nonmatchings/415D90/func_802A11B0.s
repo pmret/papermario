@@ -94,8 +94,8 @@ glabel func_802A11B0
 /* 416094 802A1304 2694D028 */  addiu     $s4, $s4, %lo(D_802AD028)
 /* 416098 802A1308 3C12802B */  lui       $s2, %hi(D_802AD010)
 /* 41609C 802A130C 2652D010 */  addiu     $s2, $s2, %lo(D_802AD010)
-/* 4160A0 802A1310 3C10802B */  lui       $s0, %hi(main_battle_menu_iconScripts)
-/* 4160A4 802A1314 2610D078 */  addiu     $s0, $s0, %lo(main_battle_menu_iconScripts)
+/* 4160A0 802A1310 3C10802B */  lui       $s0, %hi(main_battle_menu_JumpHudScripts)
+/* 4160A4 802A1314 2610D078 */  addiu     $s0, $s0, %lo(main_battle_menu_JumpHudScripts)
 .L802A1318:
 /* 4160A8 802A1318 8E040000 */  lw        $a0, ($s0)
 /* 4160AC 802A131C 26100004 */  addiu     $s0, $s0, 4
@@ -119,8 +119,8 @@ glabel func_802A11B0
 /* 4160F4 802A1364 3C053F40 */  lui       $a1, 0x3f40
 /* 4160F8 802A1368 0C051308 */  jal       set_hud_element_scale
 /* 4160FC 802A136C 26520004 */   addiu    $s2, $s2, 4
-/* 416100 802A1370 3C048029 */  lui       $a0, %hi(D_80292C00)
-/* 416104 802A1374 24842C00 */  addiu     $a0, $a0, %lo(D_80292C00)
+/* 416100 802A1370 3C048029 */  lui       $a0, %hi(HudScript_ProjectorSpot)
+/* 416104 802A1374 24842C00 */  addiu     $a0, $a0, %lo(HudScript_ProjectorSpot)
 /* 416108 802A1378 0C050529 */  jal       create_hud_element
 /* 41610C 802A137C 00000000 */   nop
 /* 416110 802A1380 0040882D */  daddu     $s1, $v0, $zero
@@ -145,8 +145,8 @@ glabel func_802A11B0
 /* 41615C 802A13CC 1440FFD2 */  bnez      $v0, .L802A1318
 /* 416160 802A13D0 26940004 */   addiu    $s4, $s4, 4
 .L802A13D4:
-/* 416164 802A13D4 3C048029 */  lui       $a0, %hi(D_80292C00)
-/* 416168 802A13D8 24842C00 */  addiu     $a0, $a0, %lo(D_80292C00)
+/* 416164 802A13D4 3C048029 */  lui       $a0, %hi(HudScript_ProjectorSpot)
+/* 416168 802A13D8 24842C00 */  addiu     $a0, $a0, %lo(HudScript_ProjectorSpot)
 /* 41616C 802A13DC 0C050529 */  jal       create_hud_element
 /* 416170 802A13E0 00000000 */   nop
 /* 416174 802A13E4 0040882D */  daddu     $s1, $v0, $zero
@@ -166,8 +166,8 @@ glabel func_802A11B0
 /* 4161AC 802A141C 0220202D */  daddu     $a0, $s1, $zero
 /* 4161B0 802A1420 0C051280 */  jal       set_hud_element_flags
 /* 4161B4 802A1424 24050002 */   addiu    $a1, $zero, 2
-/* 4161B8 802A1428 3C108029 */  lui       $s0, %hi(D_80292BD8)
-/* 4161BC 802A142C 26102BD8 */  addiu     $s0, $s0, %lo(D_80292BD8)
+/* 4161B8 802A1428 3C108029 */  lui       $s0, %hi(HudScript_ProjectorReel)
+/* 4161BC 802A142C 26102BD8 */  addiu     $s0, $s0, %lo(HudScript_ProjectorReel)
 /* 4161C0 802A1430 0C050529 */  jal       create_hud_element
 /* 4161C4 802A1434 0200202D */   daddu    $a0, $s0, $zero
 /* 4161C8 802A1438 0040882D */  daddu     $s1, $v0, $zero
@@ -232,8 +232,8 @@ glabel func_802A11B0
 /* 4162B4 802A1524 0220202D */  daddu     $a0, $s1, $zero
 /* 4162B8 802A1528 0C0513AC */  jal       set_hud_element_alpha
 /* 4162BC 802A152C 240500F0 */   addiu    $a1, $zero, 0xf0
-/* 4162C0 802A1530 3C048029 */  lui       $a0, %hi(D_80292C28)
-/* 4162C4 802A1534 24842C28 */  addiu     $a0, $a0, %lo(D_80292C28)
+/* 4162C0 802A1530 3C048029 */  lui       $a0, %hi(HudScript_ProjectorBeam)
+/* 4162C4 802A1534 24842C28 */  addiu     $a0, $a0, %lo(HudScript_ProjectorBeam)
 /* 4162C8 802A1538 0C050529 */  jal       create_hud_element
 /* 4162CC 802A153C 00000000 */   nop
 /* 4162D0 802A1540 0040882D */  daddu     $s1, $v0, $zero
@@ -303,8 +303,8 @@ glabel func_802A11B0
 /* 4163D0 802A1640 0220202D */  daddu     $a0, $s1, $zero
 /* 4163D4 802A1644 0C0513AC */  jal       set_hud_element_alpha
 /* 4163D8 802A1648 240500E6 */   addiu    $a1, $zero, 0xe6
-/* 4163DC 802A164C 3C048029 */  lui       $a0, %hi(D_80292C50)
-/* 4163E0 802A1650 24842C50 */  addiu     $a0, $a0, %lo(D_80292C50)
+/* 4163DC 802A164C 3C048029 */  lui       $a0, %hi(HudScript_SwapZ)
+/* 4163E0 802A1650 24842C50 */  addiu     $a0, $a0, %lo(HudScript_SwapZ)
 /* 4163E4 802A1654 0C050529 */  jal       create_hud_element
 /* 4163E8 802A1658 00000000 */   nop
 /* 4163EC 802A165C 0040882D */  daddu     $s1, $v0, $zero
@@ -323,8 +323,8 @@ glabel func_802A11B0
 /* 416420 802A1690 2405005E */  addiu     $a1, $zero, 0x5e
 /* 416424 802A1694 0C051261 */  jal       set_hud_element_render_pos
 /* 416428 802A1698 240600D1 */   addiu    $a2, $zero, 0xd1
-/* 41642C 802A169C 3C048029 */  lui       $a0, %hi(D_80292C7C)
-/* 416430 802A16A0 24842C7C */  addiu     $a0, $a0, %lo(D_80292C7C)
+/* 41642C 802A169C 3C048029 */  lui       $a0, %hi(HudScript_SwapArrowLeft)
+/* 416430 802A16A0 24842C7C */  addiu     $a0, $a0, %lo(HudScript_SwapArrowLeft)
 /* 416434 802A16A4 0C050529 */  jal       create_hud_element
 /* 416438 802A16A8 00000000 */   nop
 /* 41643C 802A16AC 0040882D */  daddu     $s1, $v0, $zero
@@ -343,8 +343,8 @@ glabel func_802A11B0
 /* 416470 802A16E0 24050051 */  addiu     $a1, $zero, 0x51
 /* 416474 802A16E4 0C051261 */  jal       set_hud_element_render_pos
 /* 416478 802A16E8 240600D2 */   addiu    $a2, $zero, 0xd2
-/* 41647C 802A16EC 3C048029 */  lui       $a0, %hi(D_80292CB8)
-/* 416480 802A16F0 24842CB8 */  addiu     $a0, $a0, %lo(D_80292CB8)
+/* 41647C 802A16EC 3C048029 */  lui       $a0, %hi(HudScript_SwapArrowRight)
+/* 416480 802A16F0 24842CB8 */  addiu     $a0, $a0, %lo(HudScript_SwapArrowRight)
 /* 416484 802A16F4 0C050529 */  jal       create_hud_element
 /* 416488 802A16F8 00000000 */   nop
 /* 41648C 802A16FC 0040882D */  daddu     $s1, $v0, $zero

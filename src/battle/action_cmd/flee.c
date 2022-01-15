@@ -3,14 +3,14 @@
 
 #define NAMESPACE action_command_flee
 
-extern HudElementAnim D_80108AFC[];
-extern HudElementAnim D_80108B28[];
-extern HudElementAnim D_80109244[];
-extern HudElementAnim D_802928F8[];
-extern HudElementAnim D_80292974[];
+extern HudElementAnim HudScript_BlueMeter[];
+extern HudElementAnim HudScript_AButton[];
+extern HudElementAnim HudScript_RunAwayOK[];
+extern HudElementAnim HudScript_RunningAway[];
+extern HudElementAnim HudScript_100pct[];
 extern s32 D_80294200;
 extern s32 D_802A9920;
-extern HudElementAnim D_80108B80[];
+extern HudElementAnim HudScript_MashAButton[];
 
 ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -38,25 +38,25 @@ ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     D_802A9920 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(D_80108B28);
+    hudElement = create_hud_element(HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(D_80108AFC);
+    hudElement = create_hud_element(HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(D_802928F8);
+    hudElement = create_hud_element(HudScript_RunningAway);
     actionCommandStatus->hudElements[2] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(D_80109244);
+    hudElement = create_hud_element(HudScript_RunAwayOK);
     actionCommandStatus->hudElements[3] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
@@ -66,7 +66,7 @@ ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     set_hud_element_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudElementX - xOffset, actionCommandStatus->hudElementY + 17);
     set_hud_element_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudElementX - xOffset, actionCommandStatus->hudElementY - 1);
 
-    hudElement = create_hud_element(D_80292974);
+    hudElement = create_hud_element(HudScript_100pct);
     actionCommandStatus->hudElements[4] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
@@ -142,7 +142,7 @@ void func_802A9378_422E48(void) {
                 break;
             }
 
-            set_hud_element_anim(actionCommandStatus->hudElements[0], D_80108B80);
+            set_hud_element_anim(actionCommandStatus->hudElements[0], HudScript_MashAButton);
             D_802A9920 = 1;
             actionCommandStatus->state = 11;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;

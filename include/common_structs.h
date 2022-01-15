@@ -413,16 +413,16 @@ typedef DynamicEntity* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
 
 typedef struct StaticEntityData {
     /* 0x00 */ s16 flags;
-    /* 0x02 */ s16 argSize;
-    /* 0x04 */ UNK_PTR unk_04;
-    /* 0x08 */ char unk_08[4];
-    /* 0x0C */ UNK_FUN_PTR(unk_data_func);
-    /* 0x10 */ UNK_PTR unk_data_ptr1;
-    /* 0x14 */ EntityCallback unk_data_ptr2;
+    /* 0x02 */ s16 typeDataSize;
+    /* 0x04 */ UNK_PTR renderCommandList;
+    /* 0x08 */ UNK_PTR modelAnimationNodes;
+    /* 0x0C */ EntityCallback(fpInit);
+    /* 0x10 */ UNK_PTR updateEntityScript;
+    /* 0x14 */ EntityCallback fpHandleCollision;
     /* 0x18 */ s32 dmaStart;
     /* 0x1C */ s32 dmaEnd;
     /* 0x20 */ u8 entityType;
-    /* 0x21 */ char unk_21[3];
+    /* 0x21 */ char aabbSize[3];
 } StaticEntityData; // size = 0x24
 
 typedef struct MusicSettings {
@@ -443,17 +443,17 @@ typedef struct MusicSettings {
 } MusicSettings; // size = 0x30
 
 typedef struct UiStatus {
-    /* 0x00 */ s32 hpIconIndexes[2];
-    /* 0x08 */ s32 fpIconIndexes[2];
+    /* 0x00 */ s32 hpIconIndices[2];
+    /* 0x08 */ s32 fpIconIndices[2];
     /* 0x10 */ s32 coinIconIndex;
-    /* 0x14 */ s32 coinIconIndex2; /* purpose? */
+    /* 0x14 */ s32 coinSparkleIconIndex;
     /* 0x18 */ s32 starpointsIconIndex;
-    /* 0x1C */ s32 starpointsIconIndex2; /* purpose? */
+    /* 0x1C */ s32 starpointsShineIconIndex;
     /* 0x20 */ s32 iconIndex8;
     /* 0x24 */ s32 iconIndex9;
     /* 0x28 */ s32 iconIndexA;
     /* 0x2C */ s32 iconIndexB;
-    /* 0x30 */ s32 iconIndexC;
+    /* 0x30 */ s32 starIconIndex;
     /* 0x34 */ s16 drawPosX; /* overall x-offset for whole UI */
     /* 0x36 */ s16 drawPosY; /* modulated as it appears, goes away */
     /* 0x38 */ s16 showTimer;
@@ -1245,13 +1245,13 @@ typedef struct GameStatus {
 
 // PartnerAnims
 typedef struct PartnerAnimations {
-    /* 0x00 */ UNK_PTR anims[9];
+    /* 0x00 */ s32 anims[9];
 } PartnerAnimations; // size = 0x24
 
 typedef struct Shadow {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 listIndex;
-    /* 0x05 */ u8 unk_05;
+    /* 0x05 */ u8 alpha;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ char unk_07;
     /* 0x08 */ s16 entityModelID;
@@ -1266,14 +1266,16 @@ typedef struct Shadow {
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
 
+// same as StaticEntityData
 typedef struct StaticShadowData {
     /* 0x00 */ u16 flags;
-    /* 0x02 */ char unk_02[0x2];
-    /* 0x04 */ s32* unk_04;
+    /* 0x02 */ s16 typeDataSize;
+    /* 0x04 */ UNK_PTR renderCommandList;
     /* 0x08 */ StaticAnimatorNode** animModelNode;
     /* 0x0C */ void (*onCreateCallback)(Shadow* shadow);
     /* 0x10 */ char unk_10[0x10];
-    /* 0x20 */ s32 unk_20;
+    /* 0x20 */ u8 entityType;
+    /* 0x21 */ char aabbSize[3];
 } StaticShadowData; // size = 0x24
 
 typedef struct PushBlockGrid {

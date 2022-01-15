@@ -74,8 +74,8 @@ glabel btl_state_draw_select_target
 /* 41FB74 802AADE4 24130002 */  addiu     $s3, $zero, 2
 /* 41FB78 802AADE8 0C05122C */  jal       get_hud_element_anim
 /* 41FB7C 802AADEC 0200202D */   daddu    $a0, $s0, $zero
-/* 41FB80 802AADF0 3C058008 */  lui       $a1, %hi(D_80080208)
-/* 41FB84 802AADF4 24A50208 */  addiu     $a1, $a1, %lo(D_80080208)
+/* 41FB80 802AADF0 3C058008 */  lui       $a1, %hi(HudScript_HandPointLeftLoop)
+/* 41FB84 802AADF4 24A50208 */  addiu     $a1, $a1, %lo(HudScript_HandPointLeftLoop)
 /* 41FB88 802AADF8 080AAB86 */  j         .L802AAE18
 /* 41FB8C 802AADFC 00000000 */   nop
 .L802AAE00:
@@ -83,8 +83,8 @@ glabel btl_state_draw_select_target
 /* 41FB94 802AAE04 2413FFF5 */  addiu     $s3, $zero, -0xb
 /* 41FB98 802AAE08 0C05122C */  jal       get_hud_element_anim
 /* 41FB9C 802AAE0C 0200202D */   daddu    $a0, $s0, $zero
-/* 41FBA0 802AAE10 3C058008 */  lui       $a1, %hi(D_8007FF20)
-/* 41FBA4 802AAE14 24A5FF20 */  addiu     $a1, $a1, %lo(D_8007FF20)
+/* 41FBA0 802AAE10 3C058008 */  lui       $a1, %hi(HudScript_HandPointDownLoop)
+/* 41FBA4 802AAE14 24A5FF20 */  addiu     $a1, $a1, %lo(HudScript_HandPointDownLoop)
 .L802AAE18:
 /* 41FBA8 802AAE18 50450004 */  beql      $v0, $a1, .L802AAE2C
 /* 41FBAC 802AAE1C 24040001 */   addiu    $a0, $zero, 1
@@ -117,8 +117,8 @@ glabel btl_state_draw_select_target
 .L802AAE84:
 /* 41FC14 802AAE84 1920004B */  blez      $t1, .L802AAFB4
 /* 41FC18 802AAE88 0000902D */   daddu    $s2, $zero, $zero
-/* 41FC1C 802AAE8C 3C1E8008 */  lui       $fp, %hi(D_8007FF20)
-/* 41FC20 802AAE90 27DEFF20 */  addiu     $fp, $fp, %lo(D_8007FF20)
+/* 41FC1C 802AAE8C 3C1E8008 */  lui       $fp, %hi(HudScript_HandPointDownLoop)
+/* 41FC20 802AAE90 27DEFF20 */  addiu     $fp, $fp, %lo(HudScript_HandPointDownLoop)
 /* 41FC24 802AAE94 3C15802B */  lui       $s5, %hi(D_802ACC70)
 /* 41FC28 802AAE98 26B5CC70 */  addiu     $s5, $s5, %lo(D_802ACC70)
 .L802AAE9C:
@@ -151,8 +151,8 @@ glabel btl_state_draw_select_target
 /* 41FC94 802AAF04 24130002 */  addiu     $s3, $zero, 2
 /* 41FC98 802AAF08 0C05122C */  jal       get_hud_element_anim
 /* 41FC9C 802AAF0C 0200202D */   daddu    $a0, $s0, $zero
-/* 41FCA0 802AAF10 3C098008 */  lui       $t1, %hi(D_80080208)
-/* 41FCA4 802AAF14 25290208 */  addiu     $t1, $t1, %lo(D_80080208)
+/* 41FCA0 802AAF10 3C098008 */  lui       $t1, %hi(HudScript_HandPointLeftLoop)
+/* 41FCA4 802AAF14 25290208 */  addiu     $t1, $t1, %lo(HudScript_HandPointLeftLoop)
 /* 41FCA8 802AAF18 1049000C */  beq       $v0, $t1, .L802AAF4C
 /* 41FCAC 802AAF1C 0120282D */   daddu    $a1, $t1, $zero
 /* 41FCB0 802AAF20 080AABD1 */  j         .L802AAF44

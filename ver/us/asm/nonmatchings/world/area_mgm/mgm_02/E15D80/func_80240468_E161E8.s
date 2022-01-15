@@ -17,8 +17,8 @@ glabel func_80240468_E161E8
 /* E16218 80240498 24A50430 */  addiu     $a1, $a1, %lo(func_80240430_E161B0)
 /* E1621C 8024049C 0C048C56 */  jal       create_generic_entity_world
 /* E16220 802404A0 0000202D */   daddu    $a0, $zero, $zero
-/* E16224 802404A4 3C118011 */  lui       $s1, %hi(D_80108B28)
-/* E16228 802404A8 26318B28 */  addiu     $s1, $s1, %lo(D_80108B28)
+/* E16224 802404A4 3C118011 */  lui       $s1, %hi(HudScript_AButton)
+/* E16228 802404A8 26318B28 */  addiu     $s1, $s1, %lo(HudScript_AButton)
 /* E1622C 802404AC 0220202D */  daddu     $a0, $s1, $zero
 /* E16230 802404B0 0C050529 */  jal       create_hud_element
 /* E16234 802404B4 AE420000 */   sw       $v0, ($s2)
@@ -38,8 +38,8 @@ glabel func_80240468_E161E8
 /* E1626C 802404EC 0200202D */  daddu     $a0, $s0, $zero
 /* E16270 802404F0 0C0511FF */  jal       set_hud_element_anim
 /* E16274 802404F4 0220282D */   daddu    $a1, $s1, $zero
-/* E16278 802404F8 3C048011 */  lui       $a0, %hi(D_80108AFC)
-/* E1627C 802404FC 24848AFC */  addiu     $a0, $a0, %lo(D_80108AFC)
+/* E16278 802404F8 3C048011 */  lui       $a0, %hi(HudScript_BlueMeter)
+/* E1627C 802404FC 24848AFC */  addiu     $a0, $a0, %lo(HudScript_BlueMeter)
 /* E16280 80240500 0C050529 */  jal       create_hud_element
 /* E16284 80240504 00000000 */   nop
 /* E16288 80240508 0040802D */  daddu     $s0, $v0, $zero
