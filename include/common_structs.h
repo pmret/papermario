@@ -2020,7 +2020,7 @@ typedef struct MenuWindowBP {
 typedef struct {
     /* 0x00 */ u8 flags;
     /* 0x01 */ s8 panelID; // ?
-    /* 0x02 */ s8 unk_02; // related to heirarchy somehow - sibling? group?
+    /* 0x02 */ u8 unk_02; // related to heirarchy somehow - sibling? group?
     /* 0x03 */ s8 parent; // ?
     /* 0x04 */ UNK_FUN_PTR(fpUpdate);
     /* 0x08 */ UNK_FUN_PTR(fpPending);

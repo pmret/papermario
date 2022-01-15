@@ -36,19 +36,17 @@ s32 gPauseMenuTargetPosX = 160;
 s32 gPauseMenuTargetPosY = -120;
 s32 gPauseMenuCursorTargetOpacity = 0;
 u32 D_8024EFB4 = 1;
-u32 D_8024EFB8[] = {0xFFF6FFE7, 0xFFD6FFC4, 0xFFB00000 }; //unused???
-u8 D_8024EFC4 = 1; // its 5 bytes array
-u8 D_temp8024EFC5 = 1;
-u8 D_temp8024EFC6 = 1;
-u8 D_temp8024EFC7 = 1;
-u8 D_temp8024EFC8 = 1;
-u8 D_8024EFC9 = 0; //it's 3 bytes array
-u8 D_temp8024EFCA = 0;
-u8 D_temp8024EFCB = 0;
-u16 D_8024EFCC[] = { 0xFFB0, 0xFFBF, 0xFFDA, 0xFFE2, 0xFFF6, 0x0000 };
-u16 D_8024EFD8[] = { 0x0050, 0x0041, 0x0026, 0x001E, 0x000A, 0x0000 };
-u16 D_8024EFE4[] = { 0x0101, 0x0101 };
-u8 D_8024EFE8[] = { 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x11, 0x00, 0x25, 0x00, 0x3C, 0x00, 0x55, 0x00, 0x6E };
+u32 D_8024EFB8[] = {0xFFF6FFE7, 0xFFD6FFC4, 0xFFB00000 }; //unused??
+u8 D_8024EFC4[] = { 1, 1, 1, 1, 1, 0, 0};
+s16 D_8024EFCC[] = { -80, -65, -38, -30, -10, 0 };
+s16 D_8024EFD8[] = {  80,  65,  38,  30,  10, 0 };
+u8 D_8024EFE4[] = { 1, 1, 1, 1, 1, 1, 0, 0 };
+u8 D_8024EFEC[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x11, 0x00, 0x25, 0x00, 0x3C,
+                    0x00, 0x55, 0x00, 0x6E }; //unused??
+s16 D_8024F000[] = { -10, -25, -42, -60, -80};
+s16 D_8024F00C[] = {  10,  25,  42,  60,  80 };
+s32 D_8024F018 = -1;
+s32 D_8024F01C = 3;
 
 void pause_set_cursor_opacity(s32 val) {
     gPauseMenuCursorTargetOpacity = val;
@@ -119,80 +117,197 @@ void func_80242D04(s32 windowID, s32 posX, s32 posY) {
     }
 }
 
-// Delay slot issue with gPauseMenuCursorTargetOpacity (needs .data)
-#ifdef NON_MATCHING
 void pause_interp_cursor(void) {
-    s32* posX = &gPauseMenuCursorPosX;
-    s32* posY = &gPauseMenuCursorPosY;
-    s32* targetPosX = &gPauseMenuTargetPosX;
-    s32* targetPosY = &gPauseMenuTargetPosY;
     s32 xDelta;
     s32 yDelta;
     s32* opacity;
 
-    xDelta = (*targetPosX - *posX) * 0.5;
-    yDelta = (*targetPosY - *posY) * 0.5;
+    xDelta = (gPauseMenuTargetPosX - gPauseMenuCursorPosX) * 0.5;
+    yDelta = (gPauseMenuTargetPosY - gPauseMenuCursorPosY) * 0.5;
 
-    if ((*targetPosX != *posX) || (*targetPosY != *posY)) {
+    if ((gPauseMenuTargetPosX != gPauseMenuCursorPosX) || (gPauseMenuTargetPosY != gPauseMenuCursorPosY)) {
         if ((xDelta == 0) && (yDelta == 0)) {
-            *posX = *targetPosX;
-            *posY = *targetPosY;
+            gPauseMenuCursorPosX = gPauseMenuTargetPosX;
+            gPauseMenuCursorPosY = gPauseMenuTargetPosY;
         }
     }
 
-    // Macros? something strange
-    {
-        s32* posX = &gPauseMenuCursorPosX;
-        *posX += xDelta;
-    }
-
-    {
-        s32* posY = &gPauseMenuCursorPosY;
-        *posY += yDelta;
-    }
+    gPauseMenuCursorPosX += xDelta;
+    gPauseMenuCursorPosY += yDelta;
 
     if (gPauseMenuCursorTargetOpacity == 0) {
-        opacity = &gPauseMenuCursorOpacity;
-
-        *opacity -= 128;
-        if (*opacity < 0) {
-            *opacity = 0;
+        gPauseMenuCursorOpacity -= 128;
+        if (gPauseMenuCursorOpacity < 0) {
+            gPauseMenuCursorOpacity = 0;
         }
     } else {
-        opacity = &gPauseMenuCursorOpacity;
-
-        *opacity += 32;
-        if (*opacity > 255) {
-            *opacity = 255;
+        gPauseMenuCursorOpacity += 32;
+        if (gPauseMenuCursorOpacity> 255) {
+            gPauseMenuCursorOpacity = 255;
         }
     }
     gPauseMenuCursorTargetOpacity = 255;
 }
-#else
-INCLUDE_ASM(s32, "pause/135EE0", pause_interp_cursor);
-#endif
 
-INCLUDE_ASM(s32, "pause/135EE0", func_80242F90);
+// TODO figure out what do arguments mean
+void func_80242F90(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
+                    s32* argA, s32* argB) {
+    Window* window = &gWindows[windowID];
 
-INCLUDE_ASM(s32, "pause/135EE0", func_80242FBC);
+    *argA = 0xA0;
+    window->flags &= 0xF3;
+}
 
-INCLUDE_ASM(s32, "pause/135EE0", func_80242FF4);
+void func_80242FBC(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
+                    s32* argA, s32* argB) {
+    Window* window = &gWindows[windowID];
 
-INCLUDE_ASM(s32, "pause/135EE0", func_80243090);
+    *argA = 0xA0;
+    *argB = 0x50;
+    window->flags &= 0xF3;
+}
 
-INCLUDE_ASM(s32, "pause/135EE0", func_802430E4);
+void func_80242FF4(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
+                    s32* argA, s32* argB) {
+    Window* window = &gWindows[windowID];
+    s32 updateCounter = window->updateCounter;
 
-INCLUDE_ASM(s32, "pause/135EE0", func_8024313C);
+    if (updateCounter == 0) {
+        window->flags &= 0xFB;
+    }
 
-INCLUDE_ASM(s32, "pause/135EE0", func_80243188);
+    if (updateCounter == 5) {
+        update_window_hierarchy(windowID, window->unk_02);
+    }
 
-INCLUDE_ASM(s32, "pause/135EE0", func_80243238);
+    if (updateCounter < 10) {
+        *argA = (updateCounter + 1) * 0x10;
+    } else {
+        *argA = 0xA0;
+        window->flags &= 0xF7;
+    }
+}
 
-INCLUDE_ASM(s32, "pause/135EE0", func_802432E8);
+void func_80243090(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
+                    s32* argA, s32* argB) {
+    Window* window = &gWindows[windowID];
 
-INCLUDE_ASM(s32, "pause/135EE0", func_80243388);
+    if (window->updateCounter == 0) {
+        update_window_hierarchy(windowID, window->unk_02);
+        *argA = 0;
+        window->flags &= 0xF7;
+    }
+}
 
-INCLUDE_ASM(s32, "pause/135EE0", pause_interp_text_scroll);
+void func_802430E4(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
+                    s32* argA, s32* argB) {
+    Window* window = &gWindows[windowID];
+    s32 updateCounter = window->updateCounter;
+
+    if (updateCounter == 0) {
+        window->flags &= 0xFB;
+    }
+
+    if (updateCounter < 16) {
+        *argB = updateCounter * 0x10;
+    } else {
+        *argB = 255;
+        window->flags &= 0xF7;
+    }
+}
+
+void func_8024313C(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
+                    s32* argA, s32* argB) {
+    Window* window = &gWindows[windowID];
+    s32 updateCounter = window->updateCounter;
+
+    if (updateCounter < 16) {
+        *argB = 255 - (updateCounter * 16);
+    } else {
+        *argB = 0;
+        window->flags = (window->flags & 0xF7) | 4;
+    }
+}
+
+void func_80243188(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
+                    s32* argA, s32* argB) {
+    Window* window = &gWindows[windowID];
+    s32 updateCounter = window->updateCounter;
+
+    if (updateCounter == 0) {
+        window->flags &= 0xFB;
+    }
+    if (updateCounter < 7) {
+        *arg1 = D_8024EFC4[updateCounter];
+        *arg7 += D_8024EFCC[updateCounter]; // BUG!  length of array is only 6
+    } else {
+        *arg1 = D_8024EFC4[5];
+        *arg7 += D_8024EFCC[6]; // BUG!  length of array is only 6
+        window->flags &= 0xF7;
+    }
+}
+
+void func_80243238(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
+                    s32* argA, s32* argB) {
+    Window* window = &gWindows[windowID];
+    s32 updateCounter = window->updateCounter;
+
+    if (updateCounter == 0) {
+        window->flags &= 0xFB;
+    }
+    if (updateCounter < 7) {
+        *arg1 = D_8024EFC4[updateCounter];
+        *arg7 += D_8024EFD8[updateCounter];
+    } else {
+        *arg1 = D_8024EFC4[5];
+        *arg7 += D_8024EFD8[6]; // BUG!  length of array is only 6
+        window->flags &= 0xF7;
+    }
+}
+
+void func_802432E8(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
+                    s32* argA, s32* argB) {
+    Window* window = &gWindows[windowID];
+    s32 updateCounter = window->updateCounter;
+
+    if (updateCounter < 5) {
+        *arg1 = D_8024EFE4[updateCounter];
+        *arg7 += D_8024F000[updateCounter];
+    } else {
+        *arg1 = D_8024EFE4[4];
+        *arg7 += D_8024F000[4];
+        window->flags = (window->flags & 0xF7) | 4;
+    }
+}
+
+void func_80243388(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
+                    s32* argA, s32* argB) {
+    Window* window = &gWindows[windowID];
+    s32 updateCounter = window->updateCounter;
+
+    if (updateCounter < 5) {
+        *arg1 = D_8024EFE4[updateCounter];
+        *arg7 = D_8024F00C[updateCounter];
+    } else {
+        *arg1 = D_8024EFE4[4];
+        *arg7 = D_8024F00C[4];
+        window->flags = (window->flags & 0xF7) | 4;
+    }
+}
+
+s32 pause_interp_text_scroll(s32 deltaBefore) {
+    s32 val;
+    s32 db = abs(deltaBefore);
+    s32 s = sign(deltaBefore);
+
+    if (db >= 16) {
+        val = 8;
+    } else {
+        val = gPauseMenuTextScrollInterpEasingLUT[db];
+    }
+
+    return val * s;
+}
 
 s32 pause_interp_vertical_scroll(s32 deltaBefore) {
     s32 val;
