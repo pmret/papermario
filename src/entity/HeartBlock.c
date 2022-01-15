@@ -281,7 +281,7 @@ void entity_HeartBlock_wait_for_close_tutorial(Entity* entity) {
 }
 
 s8 entity_HeartBlock_create_child_entity(Entity* entity, EntityBlueprint* data) {
-    s32 temp_s2 = D_8015C7D0[0];
+    s32 temp_s2 = CreateEntityVarArgBuffer[0];
     Entity* someEntity;
     struct802E4B10* temp_v1;
 

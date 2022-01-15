@@ -1,7 +1,7 @@
 #include "common.h"
 
-void default_trigger_delegate(Trigger* self) {
-    self->flags.flags |= 2;
+void default_trigger_on_activate(Trigger* self) {
+    self->flags.flags |= TRIGGER_ACTIVATED;
 }
 
 void clear_trigger_data(void) {
@@ -46,8 +46,8 @@ void init_trigger_list(void) {
     gTriggerCount = 0;
 }
 
-Trigger* create_trigger(TriggerBlueprint* def) {
-    Trigger* ret;
+Trigger* create_trigger(TriggerBlueprint* bp) {
+    Trigger* trigger;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
@@ -60,24 +60,24 @@ Trigger* create_trigger(TriggerBlueprint* def) {
 
     ASSERT(i < ARRAY_COUNT(*gCurrentTriggerListPtr));
 
-    (*gCurrentTriggerListPtr)[i] = ret = heap_malloc(sizeof(*ret));
+    (*gCurrentTriggerListPtr)[i] = trigger = heap_malloc(sizeof(*trigger));
     gTriggerCount++;
 
-    ASSERT(ret != NULL);
+    ASSERT(trigger != NULL);
 
-    ret->flags.flags = def->flags | TRIGGER_DEFINITION_FLAGS_1;
-    ret->params1 = def->colliderIndex;
-    ret->params2 = def->flagIndex;
-    ret->unk_28 = def->unk_1C;
-    ret->unk_2C = def->unk_14;
-    ret->unk_30 = def->inputArg3;
+    trigger->flags.flags = bp->flags | TRIGGER_ACTIVE;
+    trigger->params1 = bp->colliderIndex;
+    trigger->params2 = bp->flagIndex;
+    trigger->itemList = bp->itemList;
+    trigger->unk_tr_2C = bp->unk_tr_2C;
+    trigger->hasPlayerInteractPrompt = bp->hasPlayerInteractPrompt;
 
-    ret->functionHandler = def->function;
-    if (ret->functionHandler == NULL) {
-        ret->functionHandler = default_trigger_delegate;
+    trigger->onActivateFunc = bp->onActivateFunc;
+    if (trigger->onActivateFunc == NULL) {
+        trigger->onActivateFunc = default_trigger_on_activate;
     }
 
-    return ret;
+    return trigger;
 }
 
 void update_triggers(void) {
@@ -94,16 +94,16 @@ void update_triggers(void) {
             continue;
         }
 
-        if (!(listTrigger->flags.flags & 1)) {
+        if (!(listTrigger->flags.flags & TRIGGER_ACTIVE)) {
             continue;
         }
 
-        if (listTrigger->flags.flags & 0x10) {
-            listTrigger->flags.flags |= 2;
+        if (listTrigger->flags.flags & TRIGGER_FORCE_ACTIVATE) {
+            listTrigger->flags.flags |= TRIGGER_ACTIVATED;
             continue;
         }
 
-        if (listTrigger->flags.flags & 0x40) {
+        if (listTrigger->flags.flags & TRIGGER_WALL_PUSH) {
             if (listTrigger->params2 == collisionStatus->currentWall) {
                 func_800E06C0(1);
             }
@@ -114,19 +114,19 @@ void update_triggers(void) {
             }
         }
 
-        if (listTrigger->flags.flags & 0x80) {
+        if (listTrigger->flags.flags & TRIGGER_FLOOR_TOUCH) {
             if (listTrigger->params2 != collisionStatus->currentFloor) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & 0x80000) {
+        if (listTrigger->flags.flags & TRIGGER_FLOOR_ABOVE) {
             if (listTrigger->params2 != collisionStatus->floorBelow) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & 0x100) {
+        if (listTrigger->flags.flags & TRIGGER_WALL_PRESS_A) {
             if (listTrigger->params2 == collisionStatus->currentWall) {
                 collisionStatus->touchingWallTrigger = 1;
             }
@@ -135,82 +135,82 @@ void update_triggers(void) {
             }
         }
 
-        if (listTrigger->flags.flags & 0x400) {
+        if (listTrigger->flags.flags & TRIGGER_WALL_TOUCH) {
             if (listTrigger->params2 != collisionStatus->currentWall) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & 0x200) {
+        if (listTrigger->flags.flags & TRIGGER_FLOOR_JUMP) {
             if (listTrigger->params2 != collisionStatus->lastTouchedFloor) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & 0x800) {
+        if (listTrigger->flags.flags & TRIGGER_FLOOR_PRESS_A) {
             if ((listTrigger->params2 != collisionStatus->currentFloor) ||
-                !(gGameStatusPtr->pressedButtons & 0x8000) || (gPlayerStatus.flags & 0x2000)) {
+                !(gGameStatusPtr->pressedButtons & BUTTON_A) || (gPlayerStatus.flags & PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & 0x1000) {
+        if (listTrigger->flags.flags & TRIGGER_WALL_HAMMER) {
             if (listTrigger->params2 != collisionStatus->lastWallHammered) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & 0x40000) {
+        if (listTrigger->flags.flags & TRIGGER_CEILING_TOUCH) {
             if (listTrigger->params2 != collisionStatus->currentCeiling) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & 0x2000) {
+        if (listTrigger->flags.flags & TRIGGER_FLAGS_2000) {
             if (listTrigger->params2 != collisionStatus->unk_0C) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & 0x4000) {
+        if (listTrigger->flags.flags & TRIGGER_FLAGS_4000) {
             if (listTrigger->params2 != collisionStatus->unk_0E) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & 0x8000) {
+        if (listTrigger->flags.flags & TRIGGER_FLAGS_8000) {
             if (listTrigger->params2 != collisionStatus->unk_10) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & 0x100000) {
-            f32* floats;
+        if (listTrigger->flags.flags & TRIGGER_POINT_BOMB) {
+            f32* triggerPos;
             f32 dist;
 
             if (collisionStatus->bombetteExploded < 0) {
                 continue;
             }
 
-            floats = (f32*)listTrigger->params2;
-            dist = dist3D(floats[0], floats[1], floats[2],
+            triggerPos = (f32*)listTrigger->params2;
+            dist = dist3D(triggerPos[0], triggerPos[1], triggerPos[2],
                                 collisionStatus->bombetteExplosionPos.x, collisionStatus->bombetteExplosionPos.y,
                                 collisionStatus->bombetteExplosionPos.z);
 
-            if ((floats[3] * 0.5f) + 50.0f < dist) {
+            if ((triggerPos[3] * 0.5f) + 50.0f < dist) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & 0x10000 && get_global_flag(listTrigger->params1) == 0) {
+        if (listTrigger->flags.flags & TRIGGER_GAME_FLAG_SET && get_global_flag(listTrigger->params1) == 0) {
             continue;
         }
 
-        if (listTrigger->flags.flags & 0x20000 && get_area_flag(listTrigger->params1) == 0) {
+        if (listTrigger->flags.flags & TRIGGER_AREA_FLAG_SET && get_area_flag(listTrigger->params1) == 0) {
             continue;
         }
 
-        listTrigger->flags.flags |= 2;
+        listTrigger->flags.flags |= TRIGGER_ACTIVATED;
     }
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
@@ -220,10 +220,10 @@ void update_triggers(void) {
             continue;
         }
 
-        if (listTrigger->flags.flags & 1) {
-            if (listTrigger->flags.flags & 2) {
-                if (listTrigger->functionHandler(listTrigger) == 0) {
-                    listTrigger->flags.flags &= ~2;
+        if (listTrigger->flags.flags & TRIGGER_ACTIVE) {
+            if (listTrigger->flags.flags & TRIGGER_ACTIVATED) {
+                if (listTrigger->onActivateFunc(listTrigger) == 0) {
+                    listTrigger->flags.flags &= ~TRIGGER_ACTIVATED;
                 }
             }
         }
@@ -245,7 +245,7 @@ void delete_trigger(Trigger* toDelete) {
     }
 }
 
-s32 is_trigger_bound(Trigger* trigger, EvtScript* script) {
+s32 is_another_trigger_bound(Trigger* trigger, EvtScript* script) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
@@ -255,9 +255,9 @@ s32 is_trigger_bound(Trigger* trigger, EvtScript* script) {
             continue;
         }
 
-        if (listTrigger->flags.flags & 1) {
-            if (listTrigger->flags.flags & 2) {
-                if (listTrigger->scriptSource == script) {
+        if (listTrigger->flags.flags & TRIGGER_ACTIVE) {
+            if (listTrigger->flags.flags & TRIGGER_ACTIVATED) {
+                if (listTrigger->onTriggerEvt == script) {
                     return TRUE;
                 }
             }
@@ -283,9 +283,9 @@ s32 should_collider_allow_interact(s32 colliderID) {
         Trigger* trigger = (*gCurrentTriggerListPtr)[i];
 
         if (trigger != NULL &&
-            trigger->unk_30 != 0 &&
+            trigger->hasPlayerInteractPrompt != 0 &&
             trigger->params2 == colliderID &&
-            trigger->flags.flags & 0x100) {
+            trigger->flags.flags & TRIGGER_WALL_PRESS_A) {
             return TRUE;
         }
     }

@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "hud_element.h"
 
-extern HudElementAnim HudScript_Happy[];
-extern HudElementAnim HudScript_HPDrain[];
+extern HudScript HudScript_Happy[];
+extern HudScript HudScript_HPDrain[];
 
 extern s32 D_8029FB90;
 extern f32 D_8029FB94;

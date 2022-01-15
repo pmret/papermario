@@ -3,9 +3,9 @@
 
 #define NAMESPACE action_command_air_raid
 
-extern HudElementAnim HudScript_BlueMeter;
-extern HudElementAnim HudScript_StickNeutral;
-extern HudElementAnim HudScript_100pct;
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_StickNeutral;
+extern HudScript HudScript_100pct;
 
 extern s32 D_80294360;
 

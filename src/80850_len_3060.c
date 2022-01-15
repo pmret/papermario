@@ -4,15 +4,15 @@
 extern s32 TimesHudScript;
 extern s32 DigitHudScripts[10];
 
-extern HudElementAnim HudScript_StatusHP[];
-extern HudElementAnim HudScript_StatusHeart[];
-extern HudElementAnim HudScript_StatusFP[];
-extern HudElementAnim HudScript_StatusFlower[];
-extern HudElementAnim HudScript_Item_CoinSparkleRandom[];
-extern HudElementAnim HudScript_StatusStarPoint[];
-extern HudElementAnim HudScript_StatusStar1[];
-extern HudElementAnim HudScript_StatusTimes[];
-extern HudElementAnim HudScript_StatusSPShine[];
+extern HudScript HudScript_StatusHP[];
+extern HudScript HudScript_StatusHeart[];
+extern HudScript HudScript_StatusFP[];
+extern HudScript HudScript_StatusFlower[];
+extern HudScript HudScript_Item_CoinSparkleRandom[];
+extern HudScript HudScript_StatusStarPoint[];
+extern HudScript HudScript_StatusStar1[];
+extern HudScript HudScript_StatusTimes[];
+extern HudScript HudScript_StatusSPShine[];
 
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;

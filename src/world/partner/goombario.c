@@ -32,7 +32,7 @@ s32 func_802BD100_317020(s32 arg0) {
         Trigger* trigger = get_trigger_by_id(i);
 
         if (trigger != NULL && trigger->flags.flags & TRIGGER_WALL_PRESS_A && trigger->params2 == arg0) {
-            return trigger->unk_2C;
+            return trigger->unk_tr_2C;
         }
     }
     return 0;

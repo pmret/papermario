@@ -1831,7 +1831,7 @@ s32 MakeEntity(Evt* script, s32 isInitialCall) {
     }
 
     entityData = (EntityBlueprint*)evt_get_variable(script, *args++);
-    temp = &D_8015C7D0[2];
+    temp = &CreateEntityVarArgBuffer[2];
     t80000000 = 0x80000000;
     x = evt_get_variable(script, *args++);
     y = evt_get_variable(script, *args++);
@@ -1850,7 +1850,7 @@ s32 MakeEntity(Evt* script, s32 isInitialCall) {
         }
     } while (temp_v0 != t80000000);
 
-    entityIndex = create_entity(entityData, x, y, z, flags, D_8015C7D0[0], D_8015C7D0[1], D_8015C7D0[2], t80000000);
+    entityIndex = create_entity(entityData, x, y, z, flags, CreateEntityVarArgBuffer[0], CreateEntityVarArgBuffer[1], CreateEntityVarArgBuffer[2], t80000000);
     gLastCreatedEntityIndex = entityIndex;
     script->varTable[0] = entityIndex;
     return ApiStatus_DONE2;

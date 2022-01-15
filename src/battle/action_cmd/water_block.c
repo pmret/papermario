@@ -35,7 +35,7 @@ ApiStatus func_802A9398_42A888(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/action_cmd/water_block", func_802A948C_42A97C);
 
-extern HudElementAnim* D_802AB180_42C670[];
+extern HudScript* D_802AB180_42C670[];
 
 void func_802AA014_42B504(void) {
     s32 hudElement;

@@ -83,7 +83,7 @@ void func_802BBDB8_E30708(Entity* entity) {
 void func_802BBE14_E30764(Entity* entity) {
     structE2F750* data = (structE2F750*)entity->dataBuf;
 
-    data->unk_A0 = *D_8015C7D0;
+    data->unk_A0 = *CreateEntityVarArgBuffer;
     func_802BB7E0_E30130(entity);
     data->unk_03 = 0;
     entity->renderSetupFunc = &func_802BB3B8_E2FD08;

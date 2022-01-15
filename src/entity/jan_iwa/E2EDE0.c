@@ -17,7 +17,7 @@ void func_802BC628_E2EF58(void) {
 }
 
 void func_802BC630_E2EF60(Entity* entity) {
-    f32 temp_f0 = *D_8015C7D0;
+    f32 temp_f0 = *CreateEntityVarArgBuffer;
     structE2EDE0* data = (structE2EDE0*)entity->dataBuf;
 
     data->unk_04 = temp_f0;

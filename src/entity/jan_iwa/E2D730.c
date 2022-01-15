@@ -65,9 +65,9 @@ void func_802BB298_E2DBC8(Entity* entity) {
     s32 x, y, z;
 
     data = (structE2D730*)entity->dataBuf;
-    x = D_8015C7D0[0];
-    y = D_8015C7D0[1];
-    z = D_8015C7D0[2];
+    x = CreateEntityVarArgBuffer[0];
+    y = CreateEntityVarArgBuffer[1];
+    z = CreateEntityVarArgBuffer[2];
     if (!(x | y | z)) {
         x = entity->position.x;
         y = entity->position.y + 100.0f;

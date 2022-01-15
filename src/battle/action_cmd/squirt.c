@@ -3,8 +3,8 @@
 
 #define NAMESPACE action_command_squirt
 
-extern HudElementAnim HudScript_BlueMeter[];
-extern HudElementAnim HudScript_AButton[];
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
 extern s32 D_80294380;
 
 ApiStatus func_802A9000_429D20(void) {

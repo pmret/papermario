@@ -4,13 +4,13 @@
 #define NAMESPACE action_command_hammer
 
 // icon indexes for hud elements
-extern HudElementAnim HudScript_TimingBar1Chance[];
-extern HudElementAnim HudScript_TimingWait[];
-extern HudElementAnim HudScript_TimingCharge4a[];
-extern HudElementAnim HudScript_TimingCharge4b[];
-extern HudElementAnim HudScript_TimingCharge4c[];
-extern HudElementAnim HudScript_StickHoldLeft[];
-extern HudElementAnim HudScript_RightOn[];
+extern HudScript HudScript_TimingBar1Chance[];
+extern HudScript HudScript_TimingWait[];
+extern HudScript HudScript_TimingCharge4a[];
+extern HudScript HudScript_TimingCharge4b[];
+extern HudScript HudScript_TimingCharge4c[];
+extern HudScript HudScript_StickHoldLeft[];
+extern HudScript HudScript_RightOn[];
 
 extern s32 D_802941E0;
 

@@ -3,9 +3,9 @@
 
 #define NAMESPACE action_command_spook
 
-extern HudElementAnim HudScript_BlueMeter[];
-extern HudElementAnim HudScript_StickNeutral[];
-extern HudElementAnim HudScript_100pct[];
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_StickNeutral[];
+extern HudScript HudScript_100pct[];
 extern s32 D_80294440;
 
 ApiStatus func_802A9000_430020(void) {

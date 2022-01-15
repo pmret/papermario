@@ -145,7 +145,7 @@ ApiStatus evt_handle_exec_wait(Evt* script);
 
 ApiStatus evt_handle_jump(Evt* script);
 
-s32 evt_bound_script_trigger_handler(Trigger* trigger);
+s32 evt_trigger_on_activate_exec_script(Trigger* trigger);
 
 ApiStatus evt_handle_bind(Evt* script);
 
@@ -175,7 +175,7 @@ ApiStatus evt_handle_resume(Evt* script);
 
 ApiStatus evt_handle_does_script_exist(Evt* script);
 
-void evt_standard_trigger_executor(Trigger* trigger);
+void evt_trigger_on_activate_lock(Trigger* trigger);
 
 ApiStatus evt_handle_bind_lock(Evt* script);
 

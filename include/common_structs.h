@@ -290,21 +290,33 @@ typedef union {
 
 typedef struct Trigger {
     /* 0x00 */ TriggerFlags flags;
-    /* 0x04 */ s32 params1;
-    /* 0x08 */ s32 params2;
-    /* 0x0C */ s32 (*functionHandler)(struct Trigger*);
-    /* 0x10 */ EvtScript* scriptSource;
+    /* 0x04 */ s32 params1; /* flag index, collider index */
+    /* 0x08 */ s32 params2; /* collider ID, Vec3f pointer for bombette */
+    /* 0x0C */ s32 (*onActivateFunc)(struct Trigger*);
+    /* 0x10 */ EvtScript* onTriggerEvt;
     /* 0x14 */ struct Evt* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ u8 unk_30;
+    /* 0x28 */ s32 itemList;
+    /* 0x2C */ s32 unk_tr_2C;
+    /* 0x30 */ u8 hasPlayerInteractPrompt;
     /* 0x31 */ char unk_31[3];
     /* 0x34 */ s32 runningScriptID;
 } Trigger; // size = 0x38
 
 typedef Trigger* TriggerList[MAX_TRIGGERS];
+
+typedef struct TriggerBlueprint {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s16 colliderIndex;
+    /* 0x06 */ char unk_06[2];
+    /* 0x08 */ s32 flagIndex;
+    /* 0x0C */ s32 (*onActivateFunc)(struct Trigger*);
+    /* 0x10 */ char unk_10[4];
+    /* 0x14 */ s32 unk_tr_2C;
+    /* 0x18 */ s32 hasPlayerInteractPrompt;
+    /* 0x1C */ s32 itemList;
+} TriggerBlueprint; // size = 0x20
 
 typedef union X32 {
     s32 s;
@@ -944,23 +956,6 @@ typedef struct ModelAnimator {
 
 typedef ModelAnimator* AnimatedMeshList[MAX_ANIMATED_MESHES];
 
-typedef struct PrintHandle {
-    /* 0x000 */ char unk_00[16];
-    /* 0x010 */ s8* printbuf;
-    /* 0x014 */ char unk_14[1344];
-} PrintHandle; // size = 0x554
-
-typedef struct OtherPrint {
-    /* 0x00 */ char unk_00[16];
-    /* 0x10 */ f32 msgScaleH;
-    /* 0x14 */ f32 msgScaleW;
-    /* 0x18 */ f32 characterScaleH;
-    /* 0x1C */ f32 characterScaleW;
-    /* 0x20 */ char unk_20[32];
-    /* 0x40 */ s32 currentPosX;
-    /* 0x44 */ char unk_44[16];
-} OtherPrint; // size = 0x54
-
 typedef struct ColliderBoundingBox {
     /* 0x00 */ Vec3f min;
     /* 0x0C */ Vec3f max;
@@ -1177,6 +1172,33 @@ typedef struct ShopItemEntity {
     /* 0x00 */ s32 index;
     /* 0x04 */ Vec3f pos;
 } ShopItemEntity; // size = 0x10
+
+typedef struct ShopOwner {
+    /* 0x00 */ s32 npcID;
+    /* 0x04 */ s32 idleAnim;
+    /* 0x08 */ s32 talkAnim;
+    /* 0x0C */ EvtScript* onBuyEvt;
+    /* 0x10 */ EvtScript* unk_10Evt;
+    /* 0x14 */ EvtScript* onTalkEvt;
+    /* 0x18 */ s32* shopMsgIDs;
+} ShopOwner;
+
+typedef struct ShopItemLocation {
+    /* 0x0 */ u16 posModelID;
+    /* 0x2 */ u16 triggerColliderID;
+} ShopItemLocation; // size = 0x4
+
+typedef struct ShopItemData {
+    /* 0x0 */ u32 itemID;
+    /* 0x4 */ s32 price;
+    /* 0x8 */ s32 unk_08;
+} ShopItemData; // size = 0xC
+
+typedef struct ShopSellPriceData {
+    /* 0x0 */ s32 itemID;
+    /* 0x4 */ s32 sellPrice;
+    /* 0x8 */ char unk_08[0x4];
+} ShopSellPriceData; // size = 0xC
 
 typedef struct GameStatus {
     /* 0x000 */ u32 currentButtons;
@@ -1408,30 +1430,16 @@ typedef struct FontRasterSet {
     /* 0x02 */ char unk_02[10];
 } FontRasterSet; // size = 0x0C
 
-typedef s32 (*TriggerHandlerFunc)(Trigger*);
-
-typedef struct TriggerBlueprint {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s16 colliderIndex;
-    /* 0x06 */ char unk_06[2];
-    /* 0x08 */ s32 flagIndex;
-    /* 0x0C */ TriggerHandlerFunc function;
-    /* 0x10 */ char unk_10[4];
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 inputArg3;
-    /* 0x1C */ s32 unk_1C;
-} TriggerBlueprint; // size = 0x20
-
 typedef struct CollisionStatus {
     /* 0x00 */ s16 pushingAgainstWall; /* FFFF = none for all below VVV */
     /* 0x02 */ s16 currentFloor; /* valid on touch */
     /* 0x04 */ s16 lastTouchedFloor; /* valid after jump */
     /* 0x06 */ s16 floorBelow;
     /* 0x08 */ s16 currentCeiling; /* valid on touching with head */
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x0E */ s16 unk_0E;
-    /* 0x10 */ s16 unk_10;
+    /* 0x0A */ s16 unk_0A; /* associated with TRIGGER_WALL_PRESS_A */
+    /* 0x0C */ s16 unk_0C; /* associated with TRIGGER_FLAGS_2000 */
+    /* 0x0E */ s16 unk_0E; /* associated with TRIGGER_FLAGS_4000 */
+    /* 0x10 */ s16 unk_10; /* associated with TRIGGER_FLAGS_8000 */
     /* 0x12 */ s16 currentWall;
     /* 0x14 */ s16 lastWallHammered; /* valid when smashing */
     /* 0x16 */ s16 touchingWallTrigger; /* 0/1 */
@@ -1504,35 +1512,8 @@ typedef struct DecorationTable {
     /* 0x8C6 */ DecorationUnk unk_8C6[2];
 } DecorationTable; // size = 0x8E8
 
-typedef struct ShopOwner {
-    /* 0x00 */ s32 npcID;
-    /* 0x04 */ s32 idleAnim;
-    /* 0x08 */ s32 talkAnim;
-    /* 0x0C */ EvtScript* onBuyEvt;
-    /* 0x10 */ EvtScript* unk_10Evt;
-    /* 0x14 */ EvtScript* onTalkEvt;
-    /* 0x18 */ s32* shopMsgIDs;
-} ShopOwner;
-
-typedef struct ShopItemLocation {
-    /* 0x0 */ u16 posModelID;
-    /* 0x2 */ u16 triggerColliderID;
-} ShopItemLocation; // size = 0x4
-
-typedef struct ShopItemData {
-    /* 0x0 */ u32 itemID;
-    /* 0x4 */ s32 price;
-    /* 0x8 */ s32 unk_08;
-} ShopItemData; // size = 0xC
-
-typedef struct ShopSellPriceData {
-    /* 0x0 */ s32 itemID;
-    /* 0x4 */ s32 sellPrice;
-    /* 0x8 */ char unk_08[0x4];
-} ShopSellPriceData; // size = 0xC
-
 typedef struct PopupMenu {
-    /* 0x000 */ struct HudElementAnim* ptrIcon[32];
+    /* 0x000 */ struct HudScript* ptrIcon[32];
     /* 0x080 */ char unk_80[0x4];
     /* 0x084 */ s32 nameMsg[32];
     /* 0x104 */ char unk_104[0x4];
@@ -1778,7 +1759,7 @@ typedef struct FontData {
 } FontData; // size = 0x18
 
 typedef struct PlayerStatus {
-    /* 0x000 */ s32 flags;
+    /* 0x000 */ s32 flags; // PlayerStatusFlags
     /* 0x004 */ u32 animFlags;
     /* 0x008 */ s16 framesOnGround; /* Number of frames since last jump landed */
     /* 0x00A */ s8 unk_0A;

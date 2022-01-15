@@ -471,12 +471,12 @@ void entity_BlueSwitch_init(Entity* entity) {
     struct802E1400* temp = (struct802E1400*) entity->dataBuf;
 
     entity_base_switch_init(entity);
-    if (D_8015C7D0[0] == 2) {
+    if (CreateEntityVarArgBuffer[0] == 2) {
         D_802EB3A0 = entity;
         return;
     }
 
-    if (D_8015C7D0[0] == 1) {
+    if (CreateEntityVarArgBuffer[0] == 1) {
         if (D_802EB3A0 != NULL) {
             temp->attachedEntity = D_802EB3A0;
             entity->flags |= ENTITY_FLAGS_HIDDEN;

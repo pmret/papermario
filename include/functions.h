@@ -191,9 +191,9 @@ s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, 
 void update_collider_transform(s16 colliderID);
 void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
 
-s32 is_trigger_bound(Trigger*, EvtScript* script);
+s32 is_another_trigger_bound(Trigger*, EvtScript* script);
 Trigger* create_trigger(TriggerBlueprint* def);
-s32 evt_bound_script_trigger_handler(Trigger* trigger);
+s32 evt_trigger_on_activate_exec_script(Trigger* trigger);
 Trigger* get_trigger_by_id(s32 triggerID);
 
 Actor* get_actor(s32 actorID);

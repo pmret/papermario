@@ -3,10 +3,10 @@
 
 #define NAMESPACE action_command_body_slam
 
-extern HudElementAnim HudScript_BlueMeter[];
-extern HudElementAnim HudScript_AButton[];
-extern HudElementAnim HudScript_TimingWait[];
-extern HudElementAnim HudScript_FillGaugeResult[];
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
+extern HudScript HudScript_TimingWait[];
+extern HudScript HudScript_FillGaugeResult[];
 extern s32 D_80294320;
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {

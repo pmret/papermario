@@ -32,7 +32,7 @@ typedef enum {
     HUD_ELEMENT_OP_ClearFlags,
     HUD_ELEMENT_OP_PlaySound,
     HUD_ELEMENT_OP_op_1B,
-} HudElementAnim[0];
+} HudScript[0];
 
 enum {
     HUD_ELEMENT_SIZE_8x8,
@@ -82,8 +82,8 @@ typedef struct HudTransform {
 
 typedef struct HudElement {
     /* 0x00 */ HudFlags flags;
-    /* 0x04 */ const HudElementAnim* readPos;
-    /* 0x08 */ const HudElementAnim* anim;
+    /* 0x04 */ const HudScript* readPos;
+    /* 0x08 */ const HudScript* anim;
     /* 0x0C */ s32* ptrPropertyList;
     /* 0x10 */ s32* imageAddr;
     /* 0x14 */ s32* paletteAddr;
@@ -112,12 +112,12 @@ typedef struct HudElement {
 
 typedef HudElement* HudElementList[320];
 
-extern HudElementAnim HudScript_AnimatedHandPointer[];
-extern HudElementAnim HudScript_StatusCoin[];
-extern HudElementAnim HudScript_Refund[];
-extern HudElementAnim HudScript_MenuTimes[];
-extern HudElementAnim* D_8024FA30[1];
-extern HudElementAnim* gBadgeMenuElements[22];
+extern HudScript HudScript_AnimatedHandPointer[];
+extern HudScript HudScript_StatusCoin[];
+extern HudScript HudScript_Refund[];
+extern HudScript HudScript_MenuTimes[];
+extern HudScript* D_8024FA30[1];
+extern HudScript* gBadgeMenuElements[22];
 extern HudElement* gItemIcons[20];
 
 #define he_End HUD_ELEMENT_OP_End
@@ -151,7 +151,7 @@ extern HudElement* gItemIcons[20];
 #define he_PlaySound(arg0) HUD_ELEMENT_OP_PlaySound, arg0
 #define he_op_1B(arg0, arg1) HUD_ELEMENT_OP_op_1B, arg0, arg1
 
-void load_hud_element(HudElement* hudElement, const HudElementAnim* anim);
+void load_hud_element(HudElement* hudElement, const HudScript* anim);
 
 /// @param clamp        0 = repeat; 1 = clamp
 /// @param dropShadow   Whether to render a drop shadow or not
@@ -172,7 +172,7 @@ void clear_hud_element_cache(void);
 void init_hud_element_list(void);
 
 /// Creates a new HUD element and returns its ID.
-s32 create_hud_element(const HudElementAnim* anim);
+s32 create_hud_element(const HudScript* anim);
 
 void update_hud_elements(void);
 
@@ -197,9 +197,9 @@ void draw_hud_element_clipped(s32 id);
 void draw_hud_element_2(s32 id);
 void draw_hud_element_3(s32 id);
 
-void set_hud_element_anim(s32 id, const HudElementAnim* anim);
+void set_hud_element_anim(s32 id, const HudScript* anim);
 
-HudElementAnim* get_hud_element_anim(s32 id);
+HudScript* get_hud_element_anim(s32 id);
 
 HudElement* get_hud_element(s32 id);
 

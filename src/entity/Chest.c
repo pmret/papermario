@@ -318,7 +318,7 @@ void entity_Chest_clear_item_id(Entity* entity) {
 
 void entity_Chest_readargs(Entity* entity) {
     Chest* data = (Chest*)entity->dataBuf;
-    data->unk_10 = *D_8015C7D0;
+    data->unk_10 = *CreateEntityVarArgBuffer;
     data->unk_00 = 0xFFFF;
 }
 

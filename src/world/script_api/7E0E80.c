@@ -12,7 +12,7 @@ extern s32 D_80286524;
 extern s32 D_80286530;
 extern s32 D_80286534;
 extern Evt* D_8028652C;
-extern HudElementAnim* HudScript_Item_Coin;
+extern HudScript* HudScript_Item_Coin;
 extern s32 D_8014F150[64];
 
 ApiStatus func_802803C8(Evt* script, s32 isInitialCall);

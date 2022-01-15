@@ -51,7 +51,7 @@ void entity_ScriptSpring_init(void) {
 }
 
 void entity_SimpleSpring_init(Entity* ent) {
-    ent->dataBuf[0] = *D_8015C7D0;
+    ent->dataBuf[0] = *CreateEntityVarArgBuffer;
 }
 
 INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_setupGfx);
@@ -108,8 +108,8 @@ void entity_HiddenPanel_init(Entity* ent) {
     ent->unk3C = &entity_HiddenPanel_setupGfx;
     data->unk6 = 0xFFFF;
     data->unk24 = (?32) ent->unk4C;
-    data->unk74 = (u16) D_8015C7D0.unk2;
-    temp_v1 = D_8015C7D0[1];
+    data->unk74 = (u16) CreateEntityVarArgBuffer.unk2;
+    temp_v1 = CreateEntityVarArgBuffer[1];
     data->unk3 = 1;
     data->unk14 = -1;
     data->unk10 = temp_v1;

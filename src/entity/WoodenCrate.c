@@ -33,7 +33,7 @@ void entity_WoodenCrate_init(Entity* entity) {
     struct802E7F40* temp = entity->dataBuf;
 
     entity->scale.y = 0.85714287f;
-    temp->unk_00 = D_8015C7D0[0];
+    temp->unk_00 = CreateEntityVarArgBuffer[0];
     temp->unk_04 = 0xFFFF;
 }
 

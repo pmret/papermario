@@ -3,12 +3,12 @@
 
 #define NAMESPACE action_command_tidal_wave
 
-extern HudElementAnim HudScript_BlueMeter[];
-extern HudElementAnim HudScript_AButton[];
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
 extern s32 D_802944A0;
 
-extern HudElementAnim* D_802A97C0_42CEB0[];
-extern HudElementAnim* D_802A97CC_42CEBC[];
+extern HudScript* D_802A97C0_42CEB0[];
+extern HudScript* D_802A97CC_42CEBC[];
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
