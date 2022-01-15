@@ -290,15 +290,18 @@ typedef union {
 
 typedef struct Trigger {
     /* 0x00 */ TriggerFlags flags;
-    /* 0x04 */ s32 params1; /* flag index, collider index */
-    /* 0x08 */ s32 params2; /* collider ID, Vec3f pointer for bombette */
+    /* 0x04 */ s32 varIndex;
+    /* 0x08 */ union {
+        s32 colliderID;
+        Vec4f* position;
+    } location;  
     /* 0x0C */ s32 (*onActivateFunc)(struct Trigger*);
     /* 0x10 */ EvtScript* onTriggerEvt;
     /* 0x14 */ struct Evt* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
     /* 0x28 */ s32 itemList;
-    /* 0x2C */ s32 unk_tr_2C;
+    /* 0x2C */ s32 unk_tr_2C; // related to Goombario somehow, custom tattle perhaps?
     /* 0x30 */ u8 hasPlayerInteractPrompt;
     /* 0x31 */ char unk_31[3];
     /* 0x34 */ s32 runningScriptID;
@@ -308,9 +311,9 @@ typedef Trigger* TriggerList[MAX_TRIGGERS];
 
 typedef struct TriggerBlueprint {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ s16 colliderIndex;
+    /* 0x04 */ s16 varIndex;
     /* 0x06 */ char unk_06[2];
-    /* 0x08 */ s32 flagIndex;
+    /* 0x08 */ s32 colliderID;
     /* 0x0C */ s32 (*onActivateFunc)(struct Trigger*);
     /* 0x10 */ char unk_10[4];
     /* 0x14 */ s32 unk_tr_2C;
@@ -2057,27 +2060,27 @@ typedef struct struct802E1400 {
 
 // from 104940_len_dc0, size unknown
 // appears to belong to the hammer blocks(?)
-typedef struct struct802E3650 {
-    /* 0x000 */ u8 unk_00;
+typedef struct BlockEntityData {
+    /* 0x000 */ u8 parentEntityIndex; // for block entities spawned by other block entities
     /* 0x001 */ char unk_01[2];
     /* 0x003 */ s8 unk_03;
-    /* 0x004 */ s16 unk_04;
-    /* 0x006 */ s16 unk_06;
+    /* 0x004 */ s16 coinsLeft;
+    /* 0x006 */ s16 timeLeft;
     /* 0x008 */ char unk_08[2];
-    /* 0x00A */ u16 unk_0A;
+    /* 0x00A */ u16 gameFlagIndex;
     /* 0x00C */ char unk_0C[2];
     /* 0x00E */ s16 unk_0E;
     /* 0x010 */ s16 unk_10;
-    /* 0x012 */ s16 unk_12;
+    /* 0x012 */ s16 childEntityIndex; // for block entities that spawn other block entities
     /* 0x014 */ f32 unk_14;
     /* 0x018 */ f32 unk_18;
     /* 0x01C */ char unk_1C[0x10C];
     /* 0x128 */ UNK_PTR unk_128;
     /* 0x12C */ UNK_PTR unk_12C;
-} struct802E3650;
+} BlockEntityData;
 
 // size unknown
-typedef struct struct802E4B10 {
+typedef struct SuperBlockContentData {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ s8 unk_02;
@@ -2098,9 +2101,9 @@ typedef struct struct802E4B10 {
     /* 0x28 */ f32 unk_28[0xB];
     /* 0x54 */ f32 unk_54;
     /* 0x58 */ char unk_58[0x78];
-    /* 0xD0 */ u16 unk_D0;
-    /* 0xD4 */ f32 unk_D4[0];
-} struct802E4B10;
+    /* 0xD0 */ u16 yawBufferPos;
+    /* 0xD4 */ f32 yawBuffer[20];
+} SuperBlockContentData;
 
 // END ENTITY-SPECIFIC STRUCTS
 

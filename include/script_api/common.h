@@ -47,7 +47,7 @@ ApiStatus ShowCoinCounter(Evt* script, s32 isInitialCall);
 ApiStatus MakeEntity(Evt* script, s32 isInitialCall);
 ApiStatus AssignScript(Evt* script, s32 isInitialCall);
 ApiStatus AssignAreaFlag(Evt* script, s32 isInitialCall);
-ApiStatus AssignFlag(Evt* script, s32 isInitialCall);
+ApiStatus AssignChestFlag(Evt* script, s32 isInitialCall);
 ApiStatus AssignBlockFlag(Evt* script, s32 isInitialCall);
 ApiStatus AssignPanelFlag(Evt* script, s32 isInitialCall);
 ApiStatus AssignCrateFlag(Evt* script, s32 isInitialCall);

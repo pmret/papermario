@@ -3,7 +3,7 @@
 #include "sprite.h"
 
 typedef struct BlueWarpPipeData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 unk_00; // proably flags
     /* 0x04 */ s32 timer;
     /* 0x08 */ s32 isRaised;
     /* 0x0C */ s32 entryID;
@@ -156,18 +156,18 @@ f32 entity_init_BlueWarpPipe(Entity* entity) {
     s32 entryID;
     s32 enterPipeEvt;
     s32 flagIndex;
-    f32* temp5;
+    f32* outPosY;
 
     entryID = args[0];
     enterPipeEvt = args[1];
     flagIndex = args[2];
     entity->renderSetupFunc = &entity_BlueWarpPipe_setupGfx;
     data = entity->dataBuf;
-    temp5 = &entity->position.y; // required... wtf
+    outPosY = &entity->position.y; // required... wtf
     data->entryID = entryID;
     data->onEnterPipeEvt = enterPipeEvt;
     data->flagIndex = flagIndex;
     data->finalPosY = entity->position.y;
     data->isRaised = get_global_flag(data->flagIndex);
-    *temp5 = entity->position.y - (data->isRaised ? 15.0 : 52.0);
+    *outPosY = entity->position.y - (data->isRaised ? 15.0 : 52.0);
 }

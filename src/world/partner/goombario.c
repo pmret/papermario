@@ -31,7 +31,7 @@ s32 func_802BD100_317020(s32 arg0) {
     for (i = 0; i < 0x40; i++) {
         Trigger* trigger = get_trigger_by_id(i);
 
-        if (trigger != NULL && trigger->flags.flags & TRIGGER_WALL_PRESS_A && trigger->params2 == arg0) {
+        if (trigger != NULL && trigger->flags.flags & TRIGGER_WALL_PRESS_A && trigger->location.colliderID == arg0) {
             return trigger->unk_tr_2C;
         }
     }

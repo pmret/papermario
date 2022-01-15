@@ -194,12 +194,12 @@ void entity_ItemBlock_setupGfx(s32 entityIndex) {
 }
 
 void entity_ItemBlock_init(Entity* entity) {
-    struct802E3650* temp;
+    BlockEntityData* temp;
 
     entity_base_block_init(entity);
     temp = entity->dataBuf;
     temp->unk_10 = D_8015C7D2;
-    temp->unk_0A = 0xFFFF;
+    temp->gameFlagIndex = 0xFFFF;
     entity->renderSetupFunc = entity_ItemBlock_setupGfx;
 }
 

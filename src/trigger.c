@@ -66,8 +66,8 @@ Trigger* create_trigger(TriggerBlueprint* bp) {
     ASSERT(trigger != NULL);
 
     trigger->flags.flags = bp->flags | TRIGGER_ACTIVE;
-    trigger->params1 = bp->colliderIndex;
-    trigger->params2 = bp->flagIndex;
+    trigger->varIndex = bp->varIndex;
+    trigger->location.colliderID = bp->colliderID;
     trigger->itemList = bp->itemList;
     trigger->unk_tr_2C = bp->unk_tr_2C;
     trigger->hasPlayerInteractPrompt = bp->hasPlayerInteractPrompt;
@@ -104,10 +104,10 @@ void update_triggers(void) {
         }
 
         if (listTrigger->flags.flags & TRIGGER_WALL_PUSH) {
-            if (listTrigger->params2 == collisionStatus->currentWall) {
+            if (listTrigger->location.colliderID == collisionStatus->currentWall) {
                 func_800E06C0(1);
             }
-            if (listTrigger->params2 == collisionStatus->pushingAgainstWall) {
+            if (listTrigger->location.colliderID == collisionStatus->pushingAgainstWall) {
                 func_800E06C0(0);
             } else {
                 continue;
@@ -115,98 +115,98 @@ void update_triggers(void) {
         }
 
         if (listTrigger->flags.flags & TRIGGER_FLOOR_TOUCH) {
-            if (listTrigger->params2 != collisionStatus->currentFloor) {
+            if (listTrigger->location.colliderID != collisionStatus->currentFloor) {
                 continue;
             }
         }
 
         if (listTrigger->flags.flags & TRIGGER_FLOOR_ABOVE) {
-            if (listTrigger->params2 != collisionStatus->floorBelow) {
+            if (listTrigger->location.colliderID != collisionStatus->floorBelow) {
                 continue;
             }
         }
 
         if (listTrigger->flags.flags & TRIGGER_WALL_PRESS_A) {
-            if (listTrigger->params2 == collisionStatus->currentWall) {
+            if (listTrigger->location.colliderID == collisionStatus->currentWall) {
                 collisionStatus->touchingWallTrigger = 1;
             }
-            if ((listTrigger->params2 != collisionStatus->unk_0A) || !phys_can_player_interact()) {
+            if ((listTrigger->location.colliderID != collisionStatus->unk_0A) || !phys_can_player_interact()) {
                 continue;
             }
         }
 
         if (listTrigger->flags.flags & TRIGGER_WALL_TOUCH) {
-            if (listTrigger->params2 != collisionStatus->currentWall) {
+            if (listTrigger->location.colliderID != collisionStatus->currentWall) {
                 continue;
             }
         }
 
         if (listTrigger->flags.flags & TRIGGER_FLOOR_JUMP) {
-            if (listTrigger->params2 != collisionStatus->lastTouchedFloor) {
+            if (listTrigger->location.colliderID != collisionStatus->lastTouchedFloor) {
                 continue;
             }
         }
 
         if (listTrigger->flags.flags & TRIGGER_FLOOR_PRESS_A) {
-            if ((listTrigger->params2 != collisionStatus->currentFloor) ||
+            if ((listTrigger->location.colliderID != collisionStatus->currentFloor) ||
                 !(gGameStatusPtr->pressedButtons & BUTTON_A) || (gPlayerStatus.flags & PLAYER_STATUS_FLAGS_INPUT_DISABLED)) {
                 continue;
             }
         }
 
         if (listTrigger->flags.flags & TRIGGER_WALL_HAMMER) {
-            if (listTrigger->params2 != collisionStatus->lastWallHammered) {
+            if (listTrigger->location.colliderID != collisionStatus->lastWallHammered) {
                 continue;
             }
         }
 
         if (listTrigger->flags.flags & TRIGGER_CEILING_TOUCH) {
-            if (listTrigger->params2 != collisionStatus->currentCeiling) {
+            if (listTrigger->location.colliderID != collisionStatus->currentCeiling) {
                 continue;
             }
         }
 
         if (listTrigger->flags.flags & TRIGGER_FLAGS_2000) {
-            if (listTrigger->params2 != collisionStatus->unk_0C) {
+            if (listTrigger->location.colliderID != collisionStatus->unk_0C) {
                 continue;
             }
         }
 
         if (listTrigger->flags.flags & TRIGGER_FLAGS_4000) {
-            if (listTrigger->params2 != collisionStatus->unk_0E) {
+            if (listTrigger->location.colliderID != collisionStatus->unk_0E) {
                 continue;
             }
         }
 
         if (listTrigger->flags.flags & TRIGGER_FLAGS_8000) {
-            if (listTrigger->params2 != collisionStatus->unk_10) {
+            if (listTrigger->location.colliderID != collisionStatus->unk_10) {
                 continue;
             }
         }
 
         if (listTrigger->flags.flags & TRIGGER_POINT_BOMB) {
-            f32* triggerPos;
+            Vec4f* triggerPos;
             f32 dist;
 
             if (collisionStatus->bombetteExploded < 0) {
                 continue;
             }
 
-            triggerPos = (f32*)listTrigger->params2;
-            dist = dist3D(triggerPos[0], triggerPos[1], triggerPos[2],
+            triggerPos = listTrigger->location.position;
+            dist = dist3D(triggerPos->x, triggerPos->y, triggerPos->z,
                                 collisionStatus->bombetteExplosionPos.x, collisionStatus->bombetteExplosionPos.y,
                                 collisionStatus->bombetteExplosionPos.z);
 
-            if ((triggerPos[3] * 0.5f) + 50.0f < dist) {
+            if ((triggerPos->yaw * 0.5f) + 50.0f < dist) {
                 continue;
             }
         }
 
-        if (listTrigger->flags.flags & TRIGGER_GAME_FLAG_SET && get_global_flag(listTrigger->params1) == 0) {
+        if (listTrigger->flags.flags & TRIGGER_GAME_FLAG_SET && get_global_flag(listTrigger->varIndex) == 0) {
             continue;
         }
 
-        if (listTrigger->flags.flags & TRIGGER_AREA_FLAG_SET && get_area_flag(listTrigger->params1) == 0) {
+        if (listTrigger->flags.flags & TRIGGER_AREA_FLAG_SET && get_area_flag(listTrigger->varIndex) == 0) {
             continue;
         }
 
@@ -284,7 +284,7 @@ s32 should_collider_allow_interact(s32 colliderID) {
 
         if (trigger != NULL &&
             trigger->hasPlayerInteractPrompt != 0 &&
-            trigger->params2 == colliderID &&
+            trigger->location.colliderID == colliderID &&
             trigger->flags.flags & TRIGGER_WALL_PRESS_A) {
             return TRUE;
         }

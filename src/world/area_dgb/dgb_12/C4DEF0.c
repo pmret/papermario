@@ -174,7 +174,7 @@ EvtScript N(802409BC) = {
 
 EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EAE30, -225, 0, -245, 0, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignFlag, EVT_SAVE_FLAG(1057))
+    EVT_CALL(AssignChestFlag, EVT_SAVE_FLAG(1057))
     EVT_CALL(AssignScript, EVT_PTR(N(802409BC)))
     EVT_RETURN
     EVT_END

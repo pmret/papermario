@@ -1937,12 +1937,16 @@ ApiStatus AssignBlockFlag(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus AssignFlag(Evt* script, s32 isInitialCall) {
+ApiStatus AssignChestFlag(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall == TRUE) {
         Trigger* trigger = (Trigger*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
         trigger->flags.bytes.genericFlagIndex = evt_get_variable_index(script, *args);
+
+    //TODO WRONG! shoudl be something like:
+    //    Entity* entity = (Entity*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
+    //    ((ChestData*)entity->dataBuf)->gameFlagIndex = evt_get_variable_index(script, *args);
 
         return ApiStatus_DONE2;
     }

@@ -1,10 +1,10 @@
 #include "common.h"
 #include "fio.h"
 
-typedef struct struct802E10F4 {
+typedef struct SaveBlockData {
     char unk_0[4];
     s16 angle;
-} struct802E10F4;
+} SaveBlockData;
 
 void entity_SaveBlock_setupGfx();
 
@@ -24,10 +24,10 @@ s32 entity_can_collide_with_jumping_player(Entity* entity) {
 INCLUDE_ASM(s32, "entity/SaveBlock", entity_SaveBlock_setupGfx);
 
 void entity_SaveBlock_idle(Entity* entity) {
-    struct802E10F4* temp;
+    SaveBlockData* data;
 
-    temp = (struct802E10F4*)entity->dataBuf;
-    temp->angle = clamp_angle(temp->angle + 6);
+    data = (SaveBlockData*)entity->dataBuf;
+    data->angle = clamp_angle(data->angle + 6);
     entity_base_block_idle(entity);
 }
 
@@ -51,8 +51,8 @@ void entity_SaveBlock_save_data(void) {
 
 void entity_SaveBlock_show_tutorial_message(Entity* entity) {
     if (!get_global_flag(EVT_SAVE_FLAG(95))) {
-        D_802EB390 = FALSE;
-        msg_get_printer_for_msg(0x1D0000, &D_802EB390);
+        SaveBlockTutorialMessagePrinterClosed = FALSE;
+        msg_get_printer_for_msg(0x1D0000, &SaveBlockTutorialMessagePrinterClosed);
         set_global_flag(EVT_SAVE_FLAG(95));
         return;
     }
@@ -62,44 +62,44 @@ void entity_SaveBlock_show_tutorial_message(Entity* entity) {
 }
 
 void entity_SaveBlock_wait_for_close_tutorial(Entity* entity) {
-    if (D_802EB390) {
+    if (SaveBlockTutorialMessagePrinterClosed) {
         exec_entity_commandlist(entity);
     }
 }
 
 void entity_SaveBlock_show_choice_message(void) {
-    D_802EB390 = FALSE;
-    D_802EB394 = FALSE;
-    D_802EB39C = msg_get_printer_for_msg(0x1D0004, &D_802EB394);
-    D_802EB398 = msg_get_printer_for_msg(0x1E000A, &D_802EB390);
+    SaveBlockTutorialMessagePrinterClosed = FALSE;
+    SaveBlockResultMessagePrinterClosed = FALSE;
+    SaveBlockResultMessagePrinter = msg_get_printer_for_msg(0x1D0004, &SaveBlockResultMessagePrinterClosed);
+    SaveBlockTutorialMessagePrinter = msg_get_printer_for_msg(0x1E000A, &SaveBlockTutorialMessagePrinterClosed);
 }
 
 void entity_SaveBlock_show_result_message(void) {
-    msg_printer_load_msg(0x1D0005, D_802EB39C);
+    msg_printer_load_msg(0x1D0005, SaveBlockResultMessagePrinter);
     sfx_play_sound(0x10);
 }
 
 void entity_SaveBlock_wait_for_close_result(Entity* entity) {
-    if (D_802EB394) {
+    if (SaveBlockResultMessagePrinterClosed) {
         exec_entity_commandlist(entity);
     }
 }
 
 void entity_SaveBlock_wait_for_close_choice(Entity* entity) {
-    if (D_802EB390) {
-        if (D_802EB398->currentOption == 1) {
+    if (SaveBlockTutorialMessagePrinterClosed) {
+        if (SaveBlockTutorialMessagePrinter->currentOption == 1) {
             set_entity_commandlist(entity, &D_802E99DC);
         } else {
             exec_entity_commandlist(entity);
         }
-        close_message(D_802EB39C);
+        close_message(SaveBlockResultMessagePrinter);
     }
 }
 
 void entity_SaveBlock_init(Entity* entity) {
-    struct802E3650* temp = entity->dataBuf;
+    BlockEntityData* data = entity->dataBuf;
 
     entity_base_block_init(entity);
     entity->renderSetupFunc = entity_SaveBlock_setupGfx;
-    temp->unk_04 = 8;
+    data->coinsLeft = 8;
 }

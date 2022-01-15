@@ -1002,8 +1002,8 @@ ApiStatus evt_handle_bind(Evt* script) {
     TriggerBlueprint bp;
 
     bp.flags = triggerType | TRIGGER_SCRIPT_BOUND;
-    bp.flagIndex = evt_get_variable(script, colliderIDVar);
-    bp.colliderIndex = evt_get_variable_index(script, colliderIDVar);
+    bp.colliderID = evt_get_variable(script, colliderIDVar);
+    bp.varIndex = evt_get_variable_index(script, colliderIDVar);
     bp.hasPlayerInteractPrompt = hasInteractPrompt;
     bp.unk_tr_2C = 0;
     bp.onActivateFunc = evt_trigger_on_activate_exec_script;
@@ -1121,8 +1121,8 @@ ApiStatus evt_handle_bind_lock(Evt* script) {
     TriggerBlueprint bp;
 
     bp.flags = triggerType | TRIGGER_SCRIPT_BOUND;
-    bp.flagIndex = evt_get_variable(script, colliderIDVar);
-    bp.colliderIndex = evt_get_variable_index(script, colliderIDVar);
+    bp.colliderID = evt_get_variable(script, colliderIDVar);
+    bp.varIndex = evt_get_variable_index(script, colliderIDVar);
     bp.itemList = itemList;
     bp.onActivateFunc = evt_trigger_on_activate_lock;
     bp.unk_tr_2C = triggerOut;
