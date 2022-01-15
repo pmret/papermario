@@ -262,7 +262,7 @@ typedef struct Enemy {
     /* 0x64 */ UNK_PTR unk_64;
     /* 0x68 */ char unk_68[4];
     /* 0x6C */ s32 varTable[16];
-    /* 0xAC */ char unk_AC[4];
+    /* 0xAC */ u8 unk_AC;
     /* 0xB0 */ s32 unk_B0;
     /* 0xB4 */ s8 unk_B4;
     /* 0xB5 */ s8 unk_B5;
