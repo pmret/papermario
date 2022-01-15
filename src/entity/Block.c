@@ -1,6 +1,8 @@
 #include "common.h"
 #include "effects.h"
 
+#define MULTICOIN_BLOCK_MAX_COINS 10
+
 void entity_base_block_setupGfx(s32 entityIndex) {
     Gfx* gfx = gMasterGfxPos;
     Entity* entity = get_entity_by_index(entityIndex);
@@ -77,7 +79,7 @@ void entity_base_block_init(Entity* entity) {
     f32 posY;
 
     temp->itemEntityIndex = -1;
-    temp->unk_14 = entity->position.y;
+    temp->initialY = entity->position.y;
     temp->unk_0E = -1;
     entity->flags &= ~ENTITY_FLAGS_200000;
 }
@@ -85,7 +87,7 @@ void entity_base_block_init(Entity* entity) {
 void entity_inactive_block_hit_init(Entity* entity) {
     BlockData* temp = entity->dataBuf.block;
 
-    temp->unk_18 = 90.0f;
+    temp->recoilInterpPhase = 90.0f;
 }
 
 void entity_inactive_block_hit_anim(Entity* entity) {
@@ -94,25 +96,25 @@ void entity_inactive_block_hit_anim(Entity* entity) {
 
     entity_MulticoinBlock_update_timer(entity);
     temp_f20 = entity->position.y;
-    entity->position.y = temp_f20 + ((f64)sin_rad((temp->unk_18 * 6.28318f) / 360.0f) * 2);
-    temp->unk_18 += 60.0f;
-    if (temp->unk_18 > 450.0f) {
-        temp->unk_18 = clamp_angle(temp->unk_18);
+    entity->position.y = temp_f20 + ((f64)sin_rad((temp->recoilInterpPhase * 6.28318f) / 360.0f) * 2);
+    temp->recoilInterpPhase += 60.0f;
+    if (temp->recoilInterpPhase > 450.0f) {
+        temp->recoilInterpPhase = clamp_angle(temp->recoilInterpPhase);
         exec_entity_commandlist(entity);
     }
 }
 
 void entity_inactive_block_recoil_anim(Entity* entity) {
-    f64 temp_f20;
+    f64 currentY;
     BlockData* temp = entity->dataBuf.block;
 
     entity_MulticoinBlock_update_timer(entity);
-    temp_f20 = entity->position.y;
-    entity->position.y = temp_f20 + ((f64)sin_rad((temp->unk_18 * 6.28318f) / 360.0f));
-    temp->unk_18 += 60.0f;
-    if (temp->unk_18 >= 360.0f) {
-        temp->unk_18 = 0.0f;
-        entity->position.y = temp->unk_14;
+    currentY = entity->position.y;
+    entity->position.y = currentY + ((f64)sin_rad((temp->recoilInterpPhase * 6.28318f) / 360.0f));
+    temp->recoilInterpPhase += 60.0f;
+    if (temp->recoilInterpPhase >= 360.0f) {
+        temp->recoilInterpPhase = 0.0f;
+        entity->position.y = temp->initialY;
         exec_entity_commandlist(entity);
     }
 }
@@ -122,8 +124,8 @@ void entity_MulticoinBlock_init(Entity* entity) {
 
     entity_base_block_init(entity);
     temp = entity->dataBuf.block;
-    temp->coinsLeft = 0xA;
-    temp->timeLeft = 0x7B;
+    temp->coinsLeft = MULTICOIN_BLOCK_MAX_COINS;
+    temp->timeLeft = 123;
     temp->gameFlagIndex = 0xFFFF;
 }
 
@@ -131,24 +133,24 @@ extern s32 D_802E9E54;
 extern EntityBlueprint Entity_InertYellowBlock;
 
 void entity_MulticoinBlock_spawn_coin(Entity* entity) {
-    BlockData* temp = entity->dataBuf.block;
-    s32 phi_v1;
-    s32 phi_v0;
+    BlockData* data = entity->dataBuf.block;
+    s32 itemSpawnMode;
+    s32 flagIndex;
 
-    if (temp->coinsLeft > 0) {
-        if (temp->coinsLeft == 10) {
-            phi_v1 = 21;
-            phi_v0 = temp->gameFlagIndex;
+    if (data->coinsLeft > 0) {
+        if (data->coinsLeft == MULTICOIN_BLOCK_MAX_COINS) {
+            itemSpawnMode = ITEM_SPAWN_MODE_ITEM_BLOCK_COIN;
+            flagIndex = data->gameFlagIndex;
         } else {
-            phi_v1 = 20;
-            phi_v0 = 0;
+            itemSpawnMode = ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS;
+            flagIndex = 0;
         }
-        make_item_entity_nodelay(0x157, entity->position.x, entity->position.y + 28.0, entity->position.z, phi_v1, phi_v0);
-        temp->coinsLeft -= 1;
+        make_item_entity_nodelay(ITEM_COIN, entity->position.x, entity->position.y + 28.0, entity->position.z, itemSpawnMode, flagIndex);
+        data->coinsLeft -= 1;
     }
 
-    if ((temp->coinsLeft == 0) || (temp->timeLeft == 0)) {
-        temp->unk_03 = 1;
+    if ((data->coinsLeft == 0) || (data->timeLeft == 0)) {
+        data->empty = TRUE;
         set_entity_commandlist(get_entity_by_index(create_entity(&Entity_InertYellowBlock, entity->position.x, entity->position.y,
                                entity->position.z,
                                entity->rotation.y, 0x80000000)), &D_802E9E54);
@@ -157,24 +159,21 @@ void entity_MulticoinBlock_spawn_coin(Entity* entity) {
 }
 
 void entity_MulticoinBlock_update_timer(Entity* entity) {
-    u16 temp_v0;
-    BlockData* temp = entity->dataBuf.block;
-    s16 phi_return;
+    BlockData* data = entity->dataBuf.block;
 
-    if (entity->type == 0xE) {
-        if (temp->coinsLeft != 0xA) {
-            temp->timeLeft -= 1;
-            if (temp->timeLeft < 0) {
-                temp->timeLeft = 0;
-                temp->coinsLeft = 1;
+    if (entity->type == ENTITY_TYPE_MULTI_COIN_BRICK) {
+        if (data->coinsLeft != MULTICOIN_BLOCK_MAX_COINS) {
+            data->timeLeft -= 1;
+            if (data->timeLeft < 0) {
+                data->timeLeft = 0;
+                data->coinsLeft = 1;
             }
         }
     }
 }
 
 void entity_MulticoinBlock_idle(Entity* entity) {
-    s32 temp_v0;
-    BlockData* temp = entity->dataBuf.block;
+    BlockData* data = entity->dataBuf.block;
 
     if ((entity->collisionFlags & 0x80) != 0) {
         exec_entity_commandlist(entity);
@@ -182,15 +181,13 @@ void entity_MulticoinBlock_idle(Entity* entity) {
     }
     entity_MulticoinBlock_update_timer(entity);
     entity_base_block_idle(entity);
-    if (temp->unk_03 != 0) {
+    if (data->empty) {
         create_entity(&Entity_InertYellowBlock, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
         entity->flags |= (ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX | ENTITY_FLAGS_PENDING_INSTANCE_DELETE);
     }
 }
 
 void entity_MulticoinBlock_check_if_inactive(Entity* entity) {
-    s32 temp_v0;
-    u16 temp_v1;
     BlockData* data = entity->dataBuf.block;
 
     if (data->gameFlagIndex != 0xFFFF) {
@@ -331,7 +328,7 @@ s32 entity_init_HammerBlock_small(Entity* entity) {
     BlockData* data = entity->dataBuf.block;
 
     data->itemEntityIndex = -1;
-    data->unk_14 = entity->position.y;
+    data->initialY = entity->position.y;
     data->unk_0E = -1;
     entity->flags &= ~ENTITY_FLAGS_200000;
     entity->scale.x = 0.5f;

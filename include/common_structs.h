@@ -421,7 +421,7 @@ typedef struct struct802E1400 {
 typedef struct BlockData {
     /* 0x000 */ u8 parentEntityIndex; // for block entities spawned by other block entities
     /* 0x001 */ char unk_01[2];
-    /* 0x003 */ s8 unk_03;
+    /* 0x003 */ s8 empty;
     /* 0x004 */ s16 coinsLeft;
     /* 0x006 */ s16 timeLeft;
     /* 0x008 */ char unk_08[2];
@@ -430,8 +430,8 @@ typedef struct BlockData {
     /* 0x00E */ s16 unk_0E;
     /* 0x010 */ s16 itemEntityIndex; // for spawned item entities
     /* 0x012 */ s16 childEntityIndex; // for block entities that spawn other block entities
-    /* 0x014 */ f32 unk_14;
-    /* 0x018 */ f32 unk_18;
+    /* 0x014 */ f32 initialY;
+    /* 0x018 */ f32 recoilInterpPhase;
     /* 0x01C */ char unk_1C[0x10C];
     /* 0x128 */ UNK_PTR unk_128;
     /* 0x12C */ UNK_PTR unk_12C;

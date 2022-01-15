@@ -309,7 +309,7 @@ extern u8 D_800A0963;
 extern struct EffectInstance* TriggerBlockVanishEffect;
 extern UNK_TYPE D_00000094;
 extern UNK_TYPE D_00000094_2; // two symbols resolve to the same addr. Required for matching
-extern UNK_TYPE Entity_InertRedBlock;
+extern EntityBlueprint Entity_InertRedBlock;
 extern EntityBlueprint Entity_InertYellowBlock;
 extern UNK_TYPE D_802EA310;
 extern EntityBlueprint Entity_HitGroundedYellowBlock;
