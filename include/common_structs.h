@@ -1967,7 +1967,7 @@ typedef struct MenuPanel {
     /* 0x06 */ s8 numRows;
     /* 0x07 */ s8 numPages; // unsure
     /* 0x08 */ u8* gridData; // user value at each 3D grid point (page, row, col)
-    /* 0x0C */ UNK_FUN_PTR(fpInit);
+    /* 0x0C */ void (*fpInit)(struct MenuPanel*);
     /* 0x10 */ UNK_FUN_PTR(fpHandleInput);
     /* 0x14 */ UNK_FUN_PTR(fpUpdate);
     /* 0x18 */ void(*fpCleanup)(struct MenuPanel*);
@@ -2013,7 +2013,7 @@ typedef struct MenuWindowBP {
     /* 0x10 */ MenuPanel* tab;
     /* 0x14 */ s32 parentID;
     /* 0x18 */ UNK_FUN_PTR(fpUpdate);
-    /* 0x1C */ f32 unk_1C;
+    /* 0x1C */ s32 unk_1C;
     /* 0x20 */ WindowStyleCustom* style;
 } MenuWindowBP; // size = 0x24;
 
