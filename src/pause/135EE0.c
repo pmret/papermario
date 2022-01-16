@@ -1,7 +1,6 @@
 #include "common.h"
 #include "hud_element.h"
 
-//data
 extern EvtSource HudScript_AnimatedCursorHand;
 extern EvtSource HudScript_DescMsgPrev;
 extern EvtSource HudScript_DescMsgNext;
@@ -10,6 +9,18 @@ extern EvtSource HudScript_StickTapRight;
 extern EvtSource HudScript_PressAButton;
 extern EvtSource HudScript_PressStartButton;
 extern EvtSource HudScript_StartButtonText;
+
+extern s32 D_80270108;
+extern s32 D_8027010C;
+extern s32 D_80270110;
+extern s32 D_80270114;
+extern HudElementAnim* D_80270118;
+extern s32 D_8027011C[3];
+
+void pause_tutorial_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void func_80243568(void);
+void pause_textbox_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY);
 
 u32 gPauseMenuIconScripts[] = {HudScript_AnimatedCursorHand, HudScript_DescMsgPrev, HudScript_DescMsgNext,
                                HudScript_UnusedBadge, HudScript_StickTapRight, HudScript_PressAButton,
@@ -35,6 +46,27 @@ s16 D_8024F000[] = { -10, -25, -42, -60, -80};
 s16 D_8024F00C[] = {  10,  25,  42,  60,  80 };
 s32 D_8024F018 = -1;
 s32 D_8024F01C = 3;
+s32 D_8024F020[] = { 0x00008000, 0x00080000, 0x00008000, 0x00008000, 0x00008000, 0x00008000, 0x00001000 };
+s32 D_8024F03C[] = { 9, 10, 11, 12, 13, 14, 15 };
+s32 D_8024F058[] = { 0x00000010, 0x00000011, 0x00000012, 0x00000013, 0x00000014, 0x00000015, 0x00000016,
+                     0x00000002, 0x00000003, 0x00000004, 0x00000005, 0x00000006, 0x00000007, 0x00000008};
+s32 D_8024F090[] = { 5, 4, 5, 5, 5, 5, 6 };
+u8 gPauseMenuTextScrollInterpEasingLUT[] = { 0x00, 0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07, 0x07, 0x08};
+u8 gPauseMenuPageScrollInterpEasingLUT[] = { 0x00, 0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07, 0x07, 0x08};
+s32 D_8024F0CC[] = { 0x009E0000, 0x009E0001, 0x009E000B, 0xFFFFFFFF, 0x00010000, 0x00010001, 0x00010008, 0xFFFFFFFF, 0x009D0000, 0x009D0001, 0x009D0008, 0xFFFFFFFF, 0x00000000 };
+Vp D_8024F100 = {
+    .vp = {
+        .vscale = { 640, 480, 511, 0 },
+        .vtrans = { 640, 480, 511, 0 },
+    }
+};
+s32 D_8024F110 = 0;
+s32 D_8024F114[] = { 0x1600000C, 0x00140128, 0x00C80000, &func_80243568, 0x00000000, 0xFF000000, 0x00000001, 0x40000000,
+                     0x8026F900, 0x18000000, 0x008A0128, 0x003F0000, &pause_tutorial_draw_contents, 0x00000000,
+                     0x16000000, 0x00000002, 0x00000000, 0x8026F970, 0x17000014, 0x00A40100, 0x00200000,
+                     &pause_textbox_draw_contents, 0x00000000, 0x16000000, &basic_window_update, 0x00000000, 0x8026F938,
+                     0x2C000000, 0x00000140, 0x00F00000, &pause_update_cursor, 0x00000000, 0xFF000000, 0x00000001,
+                     0x00000000, 0x8026F900, 0x00000000, 0x00000000, 0x00000000 };
 
 void pause_set_cursor_opacity(s32 val) {
     gPauseMenuCursorTargetOpacity = val;
@@ -332,52 +364,122 @@ void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY) {
 void func_80243568(void) {
 }
 
-INCLUDE_ASM(s32, "pause/135EE0", pause_textbox_draw_contents);
-/*
-void pause_textbox_draw_contents(s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    s32 temp_s2;
-    void *temp_t0;
-    void *temp_t0_2;
-    void *temp_v1;
-    void *temp_v1_2;
+void pause_textbox_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 msgID = D_80270108;
 
-    temp_s2 = D_80270108;
-    if (temp_s2 != 0) {
-        if (D_80270110 != 0) {
-            set_hud_element_render_pos(gPauseMenuCommonIconIDs.unk4, (arg1 + arg3) - 4, arg2 + 4);
-            draw_hud_element_3(gPauseMenuCommonIconIDs.unk4);
-        }
-        if (D_80270110 < D_8027010C) {
-            set_hud_element_render_pos(gPauseMenuCommonIconIDs.unk8, (arg1 + arg3) - 4, (arg2 + arg4) - 4);
-            draw_hud_element_3(gPauseMenuCommonIconIDs.unk8);
-        }
-        temp_t0 = gMasterGfxPos;
-        temp_v1 = temp_t0;
-        temp_t0_2 = temp_t0 + 8;
-        gMasterGfxPos = temp_t0_2;
-        temp_v1->unk0 = 0xE7000000;
-        temp_v1->unk4 = 0;
-        gMasterGfxPos = temp_t0_2 + 8;
-        temp_t0_2->unk0 = (s32) ((((s32) ((f32) (arg1 + 1) * 4.0f) & 0xFFF) << 0xC) | (((s32) ((f32) (arg2 + 1) * 4.0f) & 0xFFF) | 0xED000000));
-        temp_t0_2->unk4 = (s32) ((((s32) ((f32) ((arg1 + arg3) - 1) * 4.0f) & 0xFFF) << 0xC) | ((s32) ((f32) ((arg2 + arg4) - 1) * 4.0f) & 0xFFF));
-        draw_msg(temp_s2, arg1 + 0xA, arg2 - D_80270114, 0xFF, 0xA, 0);
-        if (D_80270118 != 0) {
-            temp_v1_2 = gMasterGfxPos;
-            temp_v1_2->unk0 = 0xED000000;
-            temp_v1_2->unk4 = 0x5003C0;
-            gMasterGfxPos = temp_v1_2 + 8;
-            set_hud_element_render_pos(gPauseMenuCommonIconIDs.unkC, arg1 - 4, arg2 + 0x10);
-            set_hud_element_anim(gPauseMenuCommonIconIDs.unkC, D_80270118);
-            set_hud_element_flags(gPauseMenuCommonIconIDs.unkC, 0x20000000);
-            clear_hud_element_flags(gPauseMenuCommonIconIDs.unkC, 0x8000);
-            set_hud_element_scale(gPauseMenuCommonIconIDs.unkC, 0x3F800000);
-            draw_hud_element_3(gPauseMenuCommonIconIDs.unkC);
-        }
+    if (msgID == 0)
+        return;
+
+    if (D_80270110 != 0) {
+        set_hud_element_render_pos(gPauseMenuCommonIconIDs[1], arg1 + arg3 - 4, arg2 + 4);
+        draw_hud_element_3(gPauseMenuCommonIconIDs[1]);
+    }
+
+    if (D_80270110 < D_8027010C) {
+        set_hud_element_render_pos(gPauseMenuCommonIconIDs[2], arg1 + arg3 - 4, arg2 + arg4 - 4);
+        draw_hud_element_3(gPauseMenuCommonIconIDs[2]);
+    }
+
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, arg1 + 1, arg2 + 1, arg1 + arg3 - 1, arg2 + arg4 - 1);
+    draw_msg(msgID, arg1 + 10, arg2 - D_80270114, 255, 10, 0);
+    if (D_80270118 != 0) {
+        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        set_hud_element_render_pos(gPauseMenuCommonIconIDs[3], arg1 - 4, arg2 + 16);
+        set_hud_element_anim(gPauseMenuCommonIconIDs[3], D_80270118);
+        set_hud_element_flags(gPauseMenuCommonIconIDs[3], 0x20000000);
+        clear_hud_element_flags(gPauseMenuCommonIconIDs[3], 0x8000);
+        set_hud_element_scale(gPauseMenuCommonIconIDs[3], 1.0f);
+        draw_hud_element_3(gPauseMenuCommonIconIDs[3]);
     }
 }
-*/
 
-INCLUDE_ASM(s32, "pause/135EE0", pause_tutorial_draw_contents);
+void pause_tutorial_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    Matrix4f sp28;
+    Matrix4f sp68;
+    f32** psp68;
+    s32 height;
+    s32 width;
+    s32 maxLineChars;
+    s32 numLines;
+    s32 maxLinesPerPage;
+    s32 height2;
+    u32 width2;
+    s32 maxLineChars2;
+    s32 numLines2;
+    s32 maxLinesPerPage2;
+    s32 i;
+    s32 temp, tempp;
+    s32 temp_s2;
+    s32 q;
+
+    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) == 0)
+        return;
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+    gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+    gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x37, 0x37, 0x37, 0xFF);
+    pause_draw_rect(arg1 * 4, arg2 * 4, (arg1 + arg3) * 4, (arg2 + 12) * 4, 0, 0, 0, 0, 0);
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xB9, 0xB9, 0xB9, 0xFF);
+    pause_draw_rect(arg1 * 4, (arg2 + 12) * 4, (arg1 + arg3) * 4, (arg2 + arg4) * 4, 0, 0, 0, 0, 0);
+    gDPPipeSync(gMasterGfxPos++);
+    gSPViewport(gMasterGfxPos++, &D_8024F100);
+    guOrthoF(&sp28, 0.0f, 320.0f, 240.0f, 0.0f, -100.0f, 100.0f, 1.0f);
+    guMtxF2L(&sp28, &gDisplayContext->matrixStack[gMatrixListPos]);
+    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+
+    for (i = 0; i < 3; i++) {
+        psp68 = sp68;
+        switch (i) {
+            case 0:
+                guTranslateF(sp28, 40.0f, 223.0f, 0);
+                guScaleF(psp68, -0.8f, 0.8f, 1.0f);
+                break;
+            case 1:
+                guTranslateF(sp28, 60.0f, 223.0f, 0);
+                guScaleF(psp68, -0.8f, 0.8f, 1.0f);
+                break;
+            default:
+                guTranslateF(sp28, 280.0f, 223.0f, 0);
+                guScaleF(psp68, 0.8f, 0.8f, 1.0f);
+                break;
+        }
+
+        guMtxCatF(psp68, sp28, sp28);
+        guRotateF(psp68, 180.0f, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(psp68, sp28, sp28);
+        guRotateF(psp68, 180.0f, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(psp68, sp28, sp28);
+        guMtxF2L(sp28, &gDisplayContext->matrixStack[gMatrixListPos]);
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        func_802DE894(D_8027011C[i], 6, 255, 255, 255, 255, 64);
+        spr_draw_npc_sprite(D_8027011C[i], 0, 0, 0, &sp28);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    }
+
+    get_msg_properties(pause_get_menu_msg(1), &height, &width, &maxLineChars, &numLines, &maxLinesPerPage, NULL, 1);
+    temp = (s32)(arg3 - width) >> 1;
+    draw_msg(pause_get_menu_msg(1), arg1 + temp, arg2, 0xFF, 0, 1);
+    D_8024F110 += pause_interp_text_scroll(D_8024F018 * 140 - D_8024F110);
+    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, arg1 + 1, arg2 + 1, arg1 + arg3 - 1, arg2 + arg4 - 1);
+    temp_s2 = D_8024F018;
+    get_msg_properties(pause_get_menu_msg(D_8024F03C[temp_s2]), &height2, &width2, &maxLineChars2, &numLines2, &maxLinesPerPage2, NULL, 1);
+    tempp = (s32)(arg3 - width2) >> 1;
+    q = 13;
+    draw_msg(pause_get_menu_msg(D_8024F03C[temp_s2]), arg1 + tempp, arg2 + (temp_s2 * 140 + q) - D_8024F110, 0xFF, 10, 1);
+    set_hud_element_render_pos(gPauseMenuCommonIconIDs[D_8024F090[D_8024F018]], arg1 + arg3 / 2 - 2, arg2 + 52);
+    set_hud_element_flags(gPauseMenuCommonIconIDs[D_8024F090[D_8024F018]], 0x8000);
+    set_hud_element_scale(gPauseMenuCommonIconIDs[D_8024F090[D_8024F018]], 0.5f);
+    draw_hud_element_3(gPauseMenuCommonIconIDs[D_8024F090[D_8024F018]]);
+
+    if (D_8024F090[D_8024F018] == 6) {
+        set_hud_element_render_pos(gPauseMenuCommonIconIDs[7], arg1 + arg3 / 2 + 1, arg2 + 50);
+        draw_hud_element_3(gPauseMenuCommonIconIDs[7]);
+    }
+
+    draw_msg(pause_get_menu_msg(D_8024F058[D_8024F018]), arg1 + arg3 / 2 + 10, arg2 + 44, 0xFF, 10, 0);
+}
 
 INCLUDE_ASM(s32, "pause/135EE0", pause_init);
 
