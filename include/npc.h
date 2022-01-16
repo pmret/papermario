@@ -262,7 +262,8 @@ typedef struct Enemy {
     /* 0x64 */ UNK_PTR unk_64;
     /* 0x68 */ char unk_68[4];
     /* 0x6C */ s32 varTable[16];
-    /* 0xAC */ char unk_AC[4];
+    /* 0xAC */ u8 unk_AC;
+    /* 0xAD */ char unk_AD[3];
     /* 0xB0 */ s32 unk_B0;
     /* 0xB4 */ s8 unk_B4;
     /* 0xB5 */ s8 unk_B5;
@@ -279,7 +280,7 @@ typedef struct Enemy {
     /* 0xDC */ char unk_DC[20];
 } Enemy; // size = 0xF0
 
-s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s32 arg4);
+s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s8 arg4);
 
 /// The default Npc::onUpdate and Npc::onRender callback.
 void STUB_npc_callback(Npc*);
