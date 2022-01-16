@@ -1968,8 +1968,8 @@ typedef struct MenuPanel {
     /* 0x07 */ s8 numPages; // unsure
     /* 0x08 */ u8* gridData; // user value at each 3D grid point (page, row, col)
     /* 0x0C */ void (*fpInit)(struct MenuPanel*);
-    /* 0x10 */ UNK_FUN_PTR(fpHandleInput);
-    /* 0x14 */ UNK_FUN_PTR(fpUpdate);
+    /* 0x10 */ void (*fpHandleInput)(struct MenuPanel*);
+    /* 0x14 */ void (*fpUpdate)(struct MenuPanel*);
     /* 0x18 */ void(*fpCleanup)(struct MenuPanel*);
 } MenuPanel; // size = 0x1C
 

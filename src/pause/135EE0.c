@@ -1,6 +1,14 @@
 #include "common.h"
 #include "hud_element.h"
 #include "ld_addrs.h"
+#include "sprite.h"
+
+typedef struct UnkSpriteStruct {
+    /* 0x00 */ s32 spriteID;
+    /* 0x04 */ s32 extraAnims;
+    /* 0x08 */ s32 unk_08;
+    /* 0x0C */ s32 unk_0C;
+} UnkSpriteStruct; // size = 0x10
 
 extern HudElementAnim HudScript_AnimatedCursorHand;
 extern HudElementAnim HudScript_DescMsgPrev;
@@ -48,14 +56,27 @@ s16 D_8024F000[] = { -10, -25, -42, -60, -80};
 s16 D_8024F00C[] = {  10,  25,  42,  60,  80 };
 s32 D_8024F018 = -1;
 s32 D_8024F01C = 3;
-s32 D_8024F020[] = { 0x00008000, 0x00080000, 0x00008000, 0x00008000, 0x00008000, 0x00008000, 0x00001000 };
+s32 D_8024F020[] = { BUTTON_A, BUTTON_STICK_RIGHT, BUTTON_A, BUTTON_A, BUTTON_A, BUTTON_A, BUTTON_START };
 s32 D_8024F03C[] = { 9, 10, 11, 12, 13, 14, 15 };
 s32 D_8024F058[] = { 0x00000010, 0x00000011, 0x00000012, 0x00000013, 0x00000014, 0x00000015, 0x00000016,
                      0x00000002, 0x00000003, 0x00000004, 0x00000005, 0x00000006, 0x00000007, 0x00000008};
 s32 D_8024F090[] = { 5, 4, 5, 5, 5, 5, 6 };
 u8 gPauseMenuTextScrollInterpEasingLUT[] = { 0x00, 0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07, 0x07, 0x08};
 u8 gPauseMenuPageScrollInterpEasingLUT[] = { 0x00, 0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07, 0x07, 0x08};
-s32 D_8024F0CC[] = { 0x009E0000, 0x009E0001, 0x009E000B, 0xFFFFFFFF, 0x00010000, 0x00010001, 0x00010008, 0xFFFFFFFF, 0x009D0000, 0x009D0001, 0x009D0008, 0xFFFFFFFF, 0x00000000 };
+UnkSpriteStruct D_8024F0CC[] = { { .spriteID = 0x009E0000,
+                                   .extraAnims = 0x009E0001,
+                                   .unk_08 =  0x009E000B,
+                                   .unk_0C = 0xFFFFFFFF },
+
+                                { .spriteID = 0x00010000,
+                                   .extraAnims = 0x00010001,
+                                   .unk_08 =  0x00010008,
+                                   .unk_0C = 0xFFFFFFFF },
+
+                                { .spriteID = 0x009D0000,
+                                   .extraAnims = 0x009D0001,
+                                   .unk_08 =  0x009D0008,
+                                   .unk_0C = 0xFFFFFFFF } };
 Vp D_8024F100 = {
     .vp = {
         .vscale = { 640, 480, 511, 0 },
@@ -476,8 +497,8 @@ void pause_tutorial_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
     pause_draw_rect(arg1 * 4, (arg2 + 12) * 4, (arg1 + arg3) * 4, (arg2 + arg4) * 4, 0, 0, 0, 0, 0);
     gDPPipeSync(gMasterGfxPos++);
     gSPViewport(gMasterGfxPos++, &D_8024F100);
-    guOrthoF(&sp28, 0.0f, 320.0f, 240.0f, 0.0f, -100.0f, 100.0f, 1.0f);
-    guMtxF2L(&sp28, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guOrthoF(sp28, 0.0f, 320.0f, 240.0f, 0.0f, -100.0f, 100.0f, 1.0f);
+    guMtxF2L(sp28, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
     for (i = 0; i < 3; i++) {
@@ -583,7 +604,7 @@ void pause_init(void) {
 
     if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
         for (i = 0; i < 3; i++) {
-            D_8027011C[i] = spr_load_npc_sprite(D_8024F0CC[4*i], &D_8024F0CC[4*i]);
+            D_8027011C[i] = spr_load_npc_sprite(D_8024F0CC[i].spriteID, &D_8024F0CC[i]);
         }
 
         set_window_update(24, 1);
@@ -593,11 +614,167 @@ void pause_init(void) {
     update_window_hierarchy(44, 0x40);
 }
 
-INCLUDE_ASM(s32, "pause/135EE0", pause_tutorial_input);
+void pause_tutorial_input(s32 *pressed, s32 *held) {
+    s32 pressedOld = *pressed;
+    s32 pressedNew = *pressed;
+    s32 heldNew = *held;
 
-INCLUDE_ASM(s32, "pause/135EE0", pause_handle_input);
+    switch (D_8024F01C) {
+    case 0:
+        heldNew = pressedNew = pressedNew & D_8024F020[D_8024F018];
+        if (pressedNew) {
+            D_8024F01C = 1;
+        }
+        if (pressedOld && pressedNew == 0) {
+            sfx_play_sound(541);
+        }
+        if (D_8024F018 == 0) {
+            pressedNew = 0;
+            heldNew = 0;
+        }
+        break;
+    case 1:
+        D_802700E0 = 0;
+        D_8024F01C = 2;
+        pressedNew = 0;
+        heldNew = 0;
+        break;
+    case 2:
+        if (--D_802700E0 <= 0) {
+            D_8024F01C = 3;
+        }
+        pressedNew = 0;
+        heldNew = 0;
+        break;
+    case 3:
+        D_802700E0 = 16;
+        D_8024F01C = 4;
+        D_8024F018 += 1;
+        pressedNew = 0;
+        heldNew = 0;
+        break;
+    case 4:
+        if (--D_802700E0 <= 0) {
+            D_8024F01C = 0;
+        }
+        pressedNew = 0;
+        heldNew = 0;
+        break;
+    }
 
-INCLUDE_ASM(s32, "pause/135EE0", pause_cleanup);
+    *pressed = pressedNew;
+    *held = heldNew;
+}
+
+// TODO remove
+const f32 rodata_padding[] = {0.0f, 0.0f, 0.0f};
+
+void pause_handle_input(s32 pressed, s32 held) {
+    s32 height;
+    s32 width;
+    s32 maxLineChars;
+    s32 numLines;
+    s32 i,j;
+    MenuPanel** menuPanels;
+    s32 currentDescMsg = gPauseMenuCurrentDescMsg;
+    MenuPanel* currentPanel = gPauseMenuPanels[gPauseMenuCurrentTab];
+
+    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
+        for (i = 0; i < 3; i++) {
+            spr_update_sprite(D_8027011C[i], D_8024F0CC[i].extraAnims, 1.0f);
+        }
+    }
+
+    gPauseMenuPressedButtons = pressed;
+    gPauseMenuHeldButtons = held;
+    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
+        pause_tutorial_input(&gPauseMenuPressedButtons, &gPauseMenuHeldButtons);
+    }
+
+    if ((gPauseMenuPressedButtons & BUTTON_START) || (gPauseMenuCurrentTab == 0) && (gPauseMenuPressedButtons & BUTTON_B)) {
+        enforce_hpfp_limits();
+        sfx_play_sound(198);
+        set_game_mode(11);
+        return;
+    }
+
+    if (gPauseMenuCurrentDescIconScript != D_80270118) {
+        D_80270118 = gPauseMenuCurrentDescIconScript;
+    }
+
+    if (currentDescMsg != D_80270108) {
+        D_80270108 = currentDescMsg;
+        D_80270110 = 0;
+        D_80270114 = 0;
+        if (currentDescMsg != 0) {
+            get_msg_properties(currentDescMsg, &height, &width, &maxLineChars, &numLines, NULL, NULL, 0);
+            if (numLines % 2) {
+                numLines++;
+            }
+            D_8027010C = numLines - 2;
+            if (D_8027010C < 0) {
+                D_8027010C = 0;
+            }
+        } else {
+            D_8027010C = 0;
+        }
+    }
+    if (gPauseMenuHeldButtons & BUTTON_C_UP) {
+        D_80270110 -= 2;
+        if (D_80270110 < 0) {
+            D_80270110 = 0;
+        }
+    }
+    if (gPauseMenuHeldButtons & BUTTON_C_DOWN) {
+        D_80270110 += 2;
+        if (D_80270110 > D_8027010C) {
+            D_80270110 = D_8027010C;
+        }
+    }
+    D_80270114 += pause_interp_text_scroll(D_80270110 * 16 - D_80270114);
+    if (currentPanel->unk_00.c.initialized) {
+        if (currentPanel->fpHandleInput) {
+            currentPanel->fpHandleInput(currentPanel);
+        }
+    }
+    menuPanels = gPauseMenuPanels;
+    for (i = 0; i < 7; menuPanels++, i++) {
+        if ((*menuPanels)->unk_00.c.initialized) {
+            if ((*menuPanels)->fpUpdate) {
+                (*menuPanels)->fpUpdate(*menuPanels);
+            }
+        }
+    }
+}
+
+void pause_cleanup(void) {
+    s32 i;
+    MenuPanel** menuPanels;
+
+    for (i = 0; i < 8; i++) {
+        free_hud_element(gPauseMenuCommonIconIDs[i]);
+    }
+
+    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
+        for (i = 0; i < 3; i++) {
+            spr_free_sprite(D_8027011C[i]);
+        }
+    }
+
+    menuPanels = gPauseMenuPanels;
+    for (i = 0; i < 7; menuPanels++, i++) {
+        if ((*menuPanels)->unk_00.c.initialized) {
+            if ((*menuPanels)->fpCleanup) {
+                (*menuPanels)->fpCleanup(*menuPanels);
+            }
+        }
+    }
+
+    for (i = 22; i < 44; i++)
+        set_window_update(i, 2);
+
+    set_window_update(44, 2);
+}
 
 s32 pause_get_total_equipped_bp_cost(void) {
     s32 totalCost = 0;
