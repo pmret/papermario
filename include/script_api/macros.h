@@ -84,7 +84,7 @@
 /// Global Saved **Byte**. A variable saved in the save file.
 ///
 /// Used for almost all savefile state.
-#define GSW(INDEX) (((((INDEX)) - 170000000))
+#define GSW(INDEX) ((((INDEX)) - 170000000))
 
 /// User Word. A variable stored within the current thread's array.
 /// You can load an array with EVT_USE_ARRAY or temporarily allocate one with EVT_MALLOC_ARRAY, then get/set values with

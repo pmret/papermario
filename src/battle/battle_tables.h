@@ -49,4 +49,7 @@ extern StageList b_area_mim_stageTable;
 extern BattleList b_area_arn_formationTable;
 extern StageList b_area_arn_stageTable;
 
+extern BattleList b_area_dgb_formationTable;
+extern StageList b_area_dgb_stageTable;
+
 #endif

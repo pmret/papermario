@@ -3944,7 +3944,15 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x50F020, data]
+    - [0x50F020, c, actor/clubba]
+    - [0x50F020, c, actor/tubba_blubba]
+    - [0x50F020, c, stage/dgb_01]
+    - [0x50F020, c, stage/dgb_02]
+    - [0x50F020, c, stage/dgb_03]
+    - [0x50F020, c, stage/dgb_04]
+    - [0x50F020, c, stage/dgb_05]
+    - [0x50F020, c, area]
+    - [0x50F020]
   - dir: battle/area_omo
     type: code
     start: 0x5125D0
