@@ -30,7 +30,7 @@ ApiStatus func_802BD130_323A80(Evt* script, s32 isInitialCall) {
     return partner_get_out(bow) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_bow_take_out = {
+EvtScript world_bow_take_out = {
     EVT_CALL(func_802BD130_323A80)
     EVT_RETURN
     EVT_END
@@ -117,7 +117,7 @@ ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
     return 0;
 }
 
-EvtSource world_bow_update = {
+EvtScript world_bow_update = {
     EVT_CALL(func_802BD168_323AB8)
     EVT_RETURN
     EVT_END
@@ -294,7 +294,7 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
                     bow->flags |= 0x40;
                 }
 
-                get_shadow_by_index(bow->shadowIndex)->unk_05 = playerStatus->alpha1 >> 1;
+                get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 >> 1;
                 func_8003D624(bow, 7, playerStatus->alpha1, 0, 0, 0, 0);
                 bow->pos.x = playerStatus->position.x - D_802BE0E4;
                 bow->pos.y = playerStatus->position.y - D_802BE0E8;
@@ -343,7 +343,7 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource world_bow_use_ability = {
+EvtScript world_bow_use_ability = {
     EVT_CALL(func_802BD694_323FE4)
     EVT_RETURN
     EVT_END
@@ -357,7 +357,7 @@ void func_802BDDF0_324740(Npc* bow) {
     playerStatus->alpha1 = 255;
     func_8003D624(bow, 0, 0, 0, 0, 0, 0);
     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-    get_shadow_by_index(bow->shadowIndex)->unk_05 = playerStatus->alpha1 >> 1;
+    get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 >> 1;
 
     if (D_802BE0C4) {
         enable_player_input();
@@ -394,7 +394,7 @@ ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
     return partner_put_away(bow) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_bow_put_away = {
+EvtScript world_bow_put_away = {
     EVT_CALL(func_802BDF08_324858)
     EVT_RETURN
     EVT_END

@@ -3,9 +3,9 @@
 
 #define NAMESPACE b_area_kmr_part_1
 
-extern ActorDesc N(goomba);
-extern ActorDesc N(paragoomba);
-extern ActorDesc N(spiked_goomba);
+extern ActorBlueprint N(goomba);
+extern ActorBlueprint N(paragoomba);
+extern ActorBlueprint N(spiked_goomba);
 
 extern Stage N(kmr_02);
 extern Stage N(kmr_03);

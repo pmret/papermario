@@ -42,8 +42,8 @@ glabel func_802402BC_AF1F1C
 /* AF1FA8 80240348 AEA20318 */  sw        $v0, 0x318($s5)
 /* AF1FAC 8024034C 0000B02D */  daddu     $s6, $zero, $zero
 /* AF1FB0 80240350 02C0902D */  daddu     $s2, $s6, $zero
-/* AF1FB4 80240354 3C1E8009 */  lui       $fp, %hi(D_8008A680)
-/* AF1FB8 80240358 27DEA680 */  addiu     $fp, $fp, %lo(D_8008A680)
+/* AF1FB4 80240354 3C1E8009 */  lui       $fp, %hi(gItemHudScripts)
+/* AF1FB8 80240358 27DEA680 */  addiu     $fp, $fp, %lo(gItemHudScripts)
 /* AF1FBC 8024035C 24170001 */  addiu     $s7, $zero, 1
 /* AF1FC0 80240360 3C148024 */  lui       $s4, %hi(D_8024092C_AF258C)
 /* AF1FC4 80240364 2694092C */  addiu     $s4, $s4, %lo(D_8024092C_AF258C)

@@ -14,7 +14,7 @@ MapConfig N(config) = {
     .tattle = { MSG_kmr_12_tattle },
 };
 
-EvtSource N(PlayMusic) = {
+EvtScript N(PlayMusic) = {
     EVT_CALL(SetMusicTrack, 0, SONG_PLEASANT_PATH, 0, 8)
     EVT_RETURN
     EVT_END

@@ -230,7 +230,7 @@ typedef enum ActorType {
     .dmaEnd = battle_##id##_ROM_END, \
     .dmaDest = battle_##id##_VRAM
 
-typedef struct ActorPartDesc {
+typedef struct ActorPartBlueprint {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s8 index;
     /* 0x05 */ Vec3b posOffset;
@@ -242,9 +242,9 @@ typedef struct ActorPartDesc {
     /* 0x18 */ s32 elementImmunityFlags;
     /* 0x1C */ s16 unk_1C;
     /* 0x1E */ char unk_1E[6];
-} ActorPartDesc; // size = 0x24
+} ActorPartBlueprint; // size = 0x24
 
-typedef struct ActorDesc {
+typedef struct ActorBlueprint {
     /* 0x00 */ s32 flags;
     /* 0x04 */ char unk_04;
     /* 0x05 */ u8 type;
@@ -252,7 +252,7 @@ typedef struct ActorDesc {
     /* 0x07 */ u8 maxHP;
     /* 0x08 */ s16 partCount;
     /* 0x0A */ char unk_0A[2];
-    /* 0x0C */ struct ActorPartDesc* partsData;
+    /* 0x0C */ struct ActorPartBlueprint* partsData;
     /* 0x10 */ Bytecode* script;
     /* 0x14 */ s32* statusTable;
     /* 0x18 */ u8 escapeChance;
@@ -267,10 +267,10 @@ typedef struct ActorDesc {
     /* 0x22 */ Vec2b hpBarOffset;
     /* 0x24 */ Vec2b statusIconOffset;
     /* 0x26 */ Vec2b statusMessageOffset;
-} ActorDesc; // size = 0x28
+} ActorBlueprint; // size = 0x28
 
 typedef struct FormationRow {
-    /* 0x00 */ ActorDesc* actor;
+    /* 0x00 */ ActorBlueprint* actor;
     /* 0x04 */ union {
                    s32    index;
                    Vec3i* vec;

@@ -3,10 +3,10 @@
 
 #define NAMESPACE b_area_iwa
 
-extern ActorDesc N(cleft);
-extern ActorDesc N(monty_mole_1);
-extern ActorDesc N(whacka);
-extern ActorDesc N(buzzar);
+extern ActorBlueprint N(cleft);
+extern ActorBlueprint N(monty_mole_1);
+extern ActorBlueprint N(whacka);
+extern ActorBlueprint N(buzzar);
 
 extern Stage N(iwa_01);
 extern Stage N(iwa_01b);

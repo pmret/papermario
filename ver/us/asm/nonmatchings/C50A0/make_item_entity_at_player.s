@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel init_got_item
+glabel make_item_entity_at_player
 /* C8200 80131B00 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* C8204 80131B04 AFB00028 */  sw        $s0, 0x28($sp)
 /* C8208 80131B08 0080802D */  daddu     $s0, $a0, $zero
@@ -176,8 +176,8 @@ glabel init_got_item
 /* C8488 80131D88 24020157 */  addiu     $v0, $zero, 0x157
 /* C848C 80131D8C 14620008 */  bne       $v1, $v0, .L80131DB0
 /* C8490 80131D90 02A0102D */   daddu    $v0, $s5, $zero
-/* C8494 80131D94 3C058010 */  lui       $a1, %hi(D_80104AC0)
-/* C8498 80131D98 24A54AC0 */  addiu     $a1, $a1, %lo(D_80104AC0)
+/* C8494 80131D94 3C058010 */  lui       $a1, %hi(SparkleScript_Coin)
+/* C8498 80131D98 24A54AC0 */  addiu     $a1, $a1, %lo(SparkleScript_Coin)
 /* C849C 80131D9C 0C04C27C */  jal       sparkle_script_init
 /* C84A0 80131DA0 0220202D */   daddu    $a0, $s1, $zero
 /* C84A4 80131DA4 0C04C2B3 */  jal       sparkle_script_update

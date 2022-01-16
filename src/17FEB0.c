@@ -343,7 +343,7 @@ block_80:
             }
         }
     }
-    baseStatusChance = (battleStatus->statusChance * targetActor->staticActorData->baseStatusChance) / 100;   // TODO a70
+    baseStatusChance = (battleStatus->statusChance * targetActor->actorBlueprint->baseStatusChance) / 100;   // TODO a70
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE && battleStatus->currentAttackElement & DAMAGE_TYPE_FEAR) {
         //dispatchEvent = EVENT_IMMUNE;
         if (rand_int(99) < baseStatusChance) {

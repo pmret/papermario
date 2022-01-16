@@ -232,7 +232,7 @@ ApiStatus N(func_802A18D8_731BD8)(Evt* script, s32 isInitialCall) {
 #include "common/AddFP.inc.c"
 
 ApiStatus N(func_802A1A40_731D40)(Evt* script, s32 isInitialCall) {
-    StaticItem* item = &gItemTable[ITEM_KOOKY_COOKIE];
+    ItemData* item = &gItemTable[ITEM_KOOKY_COOKIE];
     PlayerData* playerData = &gPlayerData;
 
     playerData->curHP += item->potencyA;
@@ -246,7 +246,7 @@ ApiStatus N(func_802A1A40_731D40)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_802A1A8C_731D8C)(Evt* script, s32 isInitialCall) {
-    StaticItem* item = &gItemTable[ITEM_KOOKY_COOKIE];
+    ItemData* item = &gItemTable[ITEM_KOOKY_COOKIE];
     PlayerData* playerData = &gPlayerData;
 
     playerData->curFP += item->potencyB;
@@ -321,7 +321,7 @@ s32 N(D_802A2858_732B58)[] = {
     0x00000000, 0x00000001, 0x00000002, 0x00000000, 0x00000001, 0x000000000
 };
 
-EvtSource N(script6) = {
+EvtScript N(script6) = {
     EVT_CALL(GetMenuSelection, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_IF_EQ(EVT_VAR(1), 211)
         EVT_SET_CONST(EVT_VAR(10), 0xD3)
@@ -373,7 +373,7 @@ EvtSource N(script6) = {
     EVT_END
 };
 
-EvtSource N(script7) = {
+EvtScript N(script7) = {
     EVT_CALL(SetAnimation, 0, 0, 65538)
     EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 20)
@@ -386,7 +386,7 @@ EvtSource N(script7) = {
     EVT_END
 };
 
-EvtSource N(script8) = {
+EvtScript N(script8) = {
     EVT_CALL(SetAnimation, 0, 0, 65538)
     EVT_CALL(GetActorPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 20)
@@ -399,7 +399,7 @@ EvtSource N(script8) = {
     EVT_END
 };
 
-EvtSource N(script9) = {
+EvtScript N(script9) = {
     EVT_CALL(SetAnimation, 0, 0, 196612)
     EVT_CALL(SetGoalToTarget, 0)
     EVT_CALL(GetGoalPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))

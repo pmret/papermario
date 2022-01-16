@@ -20,7 +20,7 @@ ApiStatus N(DeleteTorchFX)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource N(beforeBattle_80223AC0) = {
+EvtScript N(beforeBattle_80223AC0) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_CALL(N(CreateTorchFX))
@@ -28,7 +28,7 @@ EvtSource N(beforeBattle_80223AC0) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_80223B08) = {
+EvtScript N(afterBattle_80223B08) = {
     EVT_CALL(N(DeleteTorchFX))
     EVT_RETURN
     EVT_END

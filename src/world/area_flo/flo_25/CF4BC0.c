@@ -38,7 +38,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(triggerCoord_802446AC) = { -388.0f, 0.0f, -92.0f, 0.0f };
 
-EvtSource N(802446BC) = {
+EvtScript N(802446BC) = {
     EVT_SET(EVT_AREA_FLAG(33), 0)
     EVT_SET(EVT_AREA_FLAG(34), 0)
     EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))
@@ -52,7 +52,7 @@ static s32 N(pad_4734)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80244740) = {
+EvtScript N(80244740) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -93,7 +93,7 @@ EvtSource N(80244740) = {
     EVT_END
 };
 
-EvtSource N(802449EC) = {
+EvtScript N(802449EC) = {
     EVT_SET(EVT_VAR(9), EVT_VAR(6))
     EVT_SET(EVT_VAR(8), EVT_VAR(5))
     EVT_SET(EVT_VAR(7), EVT_VAR(4))
@@ -145,7 +145,7 @@ EvtSource N(802449EC) = {
     EVT_END
 };
 
-EvtSource N(80244D0C) = {
+EvtScript N(80244D0C) = {
     EVT_CALL(GetModelCenter, 57)
     EVT_SET(EVT_VAR(3), 57)
     EVT_SET(EVT_VAR(4), 58)

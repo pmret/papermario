@@ -90,8 +90,8 @@ dlabel L802A93B0_4296D0
 /* 4296EC 802A93CC A622004E */   sh       $v0, 0x4e($s1)
 .L802A93D0:
 /* 4296F0 802A93D0 8E240004 */  lw        $a0, 4($s1)
-/* 4296F4 802A93D4 3C058011 */  lui       $a1, %hi(D_80108F30)
-/* 4296F8 802A93D8 24A58F30 */  addiu     $a1, $a1, %lo(D_80108F30)
+/* 4296F4 802A93D4 3C058011 */  lui       $a1, %hi(HudScript_StickMashLeft)
+/* 4296F8 802A93D8 24A58F30 */  addiu     $a1, $a1, %lo(HudScript_StickMashLeft)
 /* 4296FC 802A93DC 0C0511FF */  jal       set_hud_element_anim
 /* 429700 802A93E0 00000000 */   nop
 /* 429704 802A93E4 3C048000 */  lui       $a0, 0x8000

@@ -21,7 +21,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_00_tattle },
 };
 
-EvtSource N(80240110) = {
+EvtScript N(80240110) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_GUSTY_GULCH, 0, 8)
@@ -39,9 +39,9 @@ static s32 N(pad_1B8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitWalk_802401C0) = EXIT_WALK_SCRIPT(60,  0, "arn_04",  1);
+EvtScript N(exitWalk_802401C0) = EXIT_WALK_SCRIPT(60,  0, "arn_04",  1);
 
-EvtSource N(exitDoubleDoor_8024021C) = {
+EvtScript N(exitDoubleDoor_8024021C) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
@@ -57,7 +57,7 @@ EvtSource N(exitDoubleDoor_8024021C) = {
     EVT_END
 };
 
-EvtSource N(802402D0) = {
+EvtScript N(802402D0) = {
     EVT_BIND_TRIGGER(N(exitWalk_802401C0), TRIGGER_FLOOR_ABOVE, 15, 1, 0)
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-28)
@@ -73,7 +73,7 @@ EvtSource N(802402D0) = {
     EVT_END
 };
 
-EvtSource N(enterDoubleDoor_8024038C) = {
+EvtScript N(enterDoubleDoor_8024038C) = {
     EVT_CALL(GetLoadType, EVT_VAR(1))
     EVT_IF_EQ(EVT_VAR(1), 1)
         EVT_EXEC(EnterSavePoint)
@@ -110,7 +110,7 @@ EvtSource N(enterDoubleDoor_8024038C) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_SET(EVT_SAVE_FLAG(1978), 1)
     EVT_CALL(SetSpriteShading, -1)

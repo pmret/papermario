@@ -725,7 +725,7 @@ class ScriptDisassembler:
             elif name.startswith("N(npcGroupList_"):
                 prefix = "NpcGroupList "
             elif name.startswith("N("):
-                prefix = "EvtSource "
+                prefix = "EvtScript "
             else:
                 toReplace = False
 
@@ -770,10 +770,10 @@ class ScriptDisassembler:
 
             if self.prelude:
                 try:
-                    self.prefix_line(f"EvtSource D_{self.script_name - info[0] + info[2]:08X}_{self.script_name:08X} = {{")
+                    self.prefix_line(f"EvtScript D_{self.script_name - info[0] + info[2]:08X}_{self.script_name:08X} = {{")
                     self.write_line("};")
                 except:
-                    self.prefix_line(f"EvtSource {self.script_name} = {{")
+                    self.prefix_line(f"EvtScript {self.script_name} = {{")
                     self.write_line("};")
             self.done = True
         elif opcode == 0x02: self.write_line(f"EVT_RETURN")
@@ -1065,11 +1065,11 @@ if __name__ == "__main__":
                             print(f"========== 0x{gap_size:X} byte gap ({potential_count} {potential_struct}?) 0x{gap_start:X} - 0x{offset:X} ==========")
                             print()
                             gap = False
-                        #print(f"EvtSource read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                        #print(f"EvtScript read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                         #      f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
                         #print()
                         vram = f"{args.vram:X}_" if vram_base > 0 else f""
-                        script_text = script_text.replace("EvtSource script = SCRIPT({", f"EvtSource N(D_{vram}{offset:X}) = " + "SCRIPT({")
+                        script_text = script_text.replace("EvtScript script = SCRIPT({", f"EvtScript N(D_{vram}{offset:X}) = " + "SCRIPT({")
                         print(script_text, end="")
                         print()
                         #print(f"Valid script found at 0x{offset:X}")
@@ -1104,7 +1104,7 @@ if __name__ == "__main__":
                         try:
                             script_text = script.disassemble()
 
-                            # print(f"EvtSource read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                            # print(f"EvtScript read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                             #     f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
                             print()
                             print(script_text, end="")

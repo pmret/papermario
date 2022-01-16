@@ -2,6 +2,7 @@
 #include "ld_addrs.h"
 #include "partners.h"
 #include "npc.h"
+#include "hud_element.h"
 
 #include "partner/goombario.h"
 #include "sprite/npc/world_goombario.h"
@@ -36,44 +37,101 @@
 #include "partner/twink.h"
 #include "sprite/npc/twink.h"
 
-extern s32 D_80108068[];
-extern s32 D_801083D8[];
+extern HudScript HudScript_Partner0[];
+extern HudScript HudScript_Goombario[];
+extern HudScript HudScript_Kooper[];
+extern HudScript HudScript_Bombette[];
+extern HudScript HudScript_Parakarry[];
+extern HudScript HudScript_Watt[];
+extern HudScript HudScript_Sushie[];
+extern HudScript HudScript_Lakilester[];
+extern HudScript HudScript_Bow[];
+extern HudScript HudScript_PartnerA[];
+extern HudScript HudScript_Partner0Disabled[];
+extern HudScript HudScript_GoombarioDisabled[];
+extern HudScript HudScript_KooperDisabled[];
+extern HudScript HudScript_BombetteDisabled[];
+extern HudScript HudScript_ParakarryDisabled[];
+extern HudScript HudScript_WattDisabled[];
+extern HudScript HudScript_SushieDisabled[];
+extern HudScript HudScript_LakilesterDisabled[];
+extern HudScript HudScript_BowDisabled[];
+extern HudScript HudScript_PartnerADisabled[];
+
+extern HudScript HudScript_StatusDigit0[];
+extern HudScript HudScript_StatusDigit1[];
+extern HudScript HudScript_StatusDigit2[];
+extern HudScript HudScript_StatusDigit3[];
+extern HudScript HudScript_StatusDigit4[];
+extern HudScript HudScript_StatusDigit5[];
+extern HudScript HudScript_StatusDigit6[];
+extern HudScript HudScript_StatusDigit7[];
+extern HudScript HudScript_StatusDigit8[];
+extern HudScript HudScript_StatusDigit9[];
+extern HudScript HudScript_StatusTimes[];
+extern HudScript HudScript_StatusSlash[];
+
+extern HudScript HudScript_StatusStar1[];
+extern HudScript HudScript_StatusStar2[];
+extern HudScript HudScript_StatusStar3[];
+extern HudScript HudScript_StatusStar4[];
+extern HudScript HudScript_StatusStar5[];
+extern HudScript HudScript_StatusStar6[];
+extern HudScript HudScript_StatusStar7[];
+
+extern HudScript HudScript_StatusSPIncrement1[];
+extern HudScript HudScript_StatusSPIncrement2[];
+extern HudScript HudScript_StatusSPIncrement3[];
+extern HudScript HudScript_StatusSPIncrement4[];
+extern HudScript HudScript_StatusSPIncrement5[];
+extern HudScript HudScript_StatusSPIncrement6[];
+extern HudScript HudScript_StatusSPIncrement7[];
+
 extern f32 wPartnerTetherDistance;
 extern s16 D_8010CFC8;
 extern s16 D_8010CFCA;
 extern s16 D_8010CFCE;
 extern s32 D_802C0000;
-extern s32 D_8010CFB8;
+extern s32 PlayerMoveHistoryIndex;
 extern s32 D_8010CFBC;
 extern s32 D_8010CFCC;
 
-extern struct Vec3f* D_8010CD38;
-extern EvtSource D_802C05CC_32579C;
+extern struct player_path_element PlayerMoveHistory[40];
+extern EvtScript D_802C05CC_32579C;
 
-typedef struct struct8010CD38{
-    /* 0x00 */ s8 unk_00;
+typedef struct player_path_element{
+    /* 0x00 */ s8 isJumping;
     /* 0x03 */ char unk_01[3];
     /* 0x04 */ Vec3f position;
-}struct8010CD38; // size unknown
+}player_path_element; // size unknown
 
 s32 partner_is_idle(Npc* partner);
 s32 world_partner_can_player_pause_default(Npc* partner);
 void _use_partner_ability(void);
 
 // Partner icons
-s32 D_800F7F00[] = {
-    0x80107CA8, 0x80107CF8, 0x80107D48, 0x80107D98, 0x80107DE8, 0x80107CA8, 0x80107E88, 0x80107ED8, 0x80107F28, 0x80107E38, 0x80107FC8, 0x80107FC8, 0x80107FC8, 0x80107FC8, 0x80107FC8, 0x80107FC8,
+HudScript* wPartnerHudScripts[] = {
+    HudScript_Partner0, HudScript_Goombario, HudScript_Kooper, HudScript_Bombette,
+    HudScript_Parakarry, HudScript_Partner0, HudScript_Watt, HudScript_Sushie,
+    HudScript_Lakilester, HudScript_Bow, HudScript_PartnerA, HudScript_PartnerA,
+    HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA,
 };
-s32 D_800F7F40[] = {
-    0x80107CD0, 0x80107D20, 0x80107D70, 0x80107DC0, 0x80107E10, 0x80107CD0, 0x80107EB0, 0x80107F00, 0x80107F50, 0x80107E60, 0x80107FF0, 0x80107FF0, 0x80107FF0, 0x80107FF0, 0x80107FF0, 0x80107FF0,
+HudScript* wDisabledPartnerHudScripts[] = {
+    HudScript_Partner0Disabled, HudScript_GoombarioDisabled, HudScript_KooperDisabled, HudScript_BombetteDisabled,
+    HudScript_ParakarryDisabled, HudScript_Partner0Disabled, HudScript_WattDisabled, HudScript_SushieDisabled,
+    HudScript_LakilesterDisabled, HudScript_BowDisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled,
+    HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled,
 };
-s32 D_800F7F80[] = {
-    0x801080B8, 0x801080E0, 0x80108108, 0x80108130, 0x80108158, 0x80108180, 0x801081A8, 0x801081D0, 0x801081F8, 0x80108220,
+HudScript* DigitHudScripts[] = {
+    HudScript_StatusDigit0, HudScript_StatusDigit1, HudScript_StatusDigit2, HudScript_StatusDigit3, HudScript_StatusDigit4,
+    HudScript_StatusDigit5, HudScript_StatusDigit6, HudScript_StatusDigit7, HudScript_StatusDigit8, HudScript_StatusDigit9,
 };
-s32* D_800F7FA8 = &D_80108068;
-s32 D_800F7FAC = 0x80108090;
-s32 D_800F7FB0[] = { 0x80108298, 0x801082E8, 0x801082C0, 0x80108310, 0x80108338, 0x80108360, 0x80108388 };
-s32 D_800F7FCC[] = { (s32) &D_801083D8, 0x80108428, 0x80108400, 0x80108450, 0x80108478, 0x801084A0, 0x801084C8 };
+HudScript* TimesHudScript = HudScript_StatusTimes;
+HudScript* SlashHudScript = HudScript_StatusSlash;
+HudScript* SPIncrementHudScripts[] = { HudScript_StatusSPIncrement1, HudScript_StatusSPIncrement3, HudScript_StatusSPIncrement2,
+    HudScript_StatusSPIncrement4, HudScript_StatusSPIncrement5, HudScript_StatusSPIncrement6, HudScript_StatusSPIncrement7 };
+HudScript* SPStarHudScripts[] = { HudScript_StatusStar1, HudScript_StatusStar3, HudScript_StatusStar2, HudScript_StatusStar4,
+    HudScript_StatusStar5, HudScript_StatusStar6, HudScript_StatusStar7 };
 
 s32 D_800F7FE8 = -1;
 s32 D_800F7FEC = 1;
@@ -82,7 +140,7 @@ s32 D_800F7FF4 = 4;
 s32 D_800F7FF8 = 5;
 s32 D_800F7FFC = 7;
 s32 D_800F8000[] = { 8, 0, 0, 0 };
-s32 D_800F8010[] = { _3251D0_ROM_START, _3251D0_ROM_END, (s32) D_802C05CC_32579C, 0x00000000 };
+s32 UseItemDmaArgs[] = { _3251D0_ROM_START, _3251D0_ROM_END, (s32) D_802C05CC_32579C, 0x00000000 };
 s32 D_800F8020 = 0;
 s32 wPartnerMoveGoalX = 0;
 s32 wPartnerMoveGoalZ = 0;
@@ -272,9 +330,9 @@ WorldPartner wPartners[12] = {
     },
 };
 
-f32 D_800F833C = 0;
-f32 D_800F8340 = 0;
-f32 D_800F8344 = 0;
+f32 SavedPartnerPosX = 0;
+f32 SavedPartnerPosY = 0;
+f32 SavedPartnerPosZ = 0;
 
 PartnerAnimations gPartnerAnimations[] = {
     {0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
@@ -291,16 +349,16 @@ PartnerAnimations gPartnerAnimations[] = {
     {0x00200000, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200009, 0x00200020},
 };
 
-s32 D_800F84F8 = { 0x00000000, 0x00000000, };
+s32 D_800F84F8 = 0;
 
-s32 use_consumable(s32 arg0) {
+s32 use_consumable(s32 invSlot) {
     Evt* script;
 
-    D_8010CD20 = arg0;
-    arg0 = gPlayerData.invItems[arg0];
-    dma_copy(D_800F8010[0], D_800F8010[1], _3251D0_VRAM);
-    script = start_script(D_800F8010[2], 1, 0);
-    script->varTable[10] = arg0;
+    D_8010CD20 = invSlot;
+    invSlot = gPlayerData.invItems[invSlot];
+    dma_copy(UseItemDmaArgs[0], UseItemDmaArgs[1], _3251D0_VRAM);
+    script = start_script(UseItemDmaArgs[2], 1, 0);
+    script->varTable[10] = invSlot;
     return script->id;
 }
 
@@ -309,31 +367,31 @@ void remove_consumable(void) {
     sort_items();
 }
 
-s32 func_800EA4B0(s32 arg0) {
-    s32 ret = 1;
+s32 func_800EA4B0(s32 collisionID) {
+    s32 ret = TRUE;
 
-    if (arg0 >= 0) {
-        if (arg0 & 0x4000) {
-            switch (get_entity_type(arg0)) {
-                case 0x7:
-                case 0x8:
-                case 0x9:
-                case 0xA:
-                case 0x2E:
-                case 0x2F:
-                case 0x32:
-                case 0x35:
-                case 0x36:
-                case 0x37:
-                case 0x38:
-                case 0x39:
-                case 0x3A:
-                case 0x3B:
-                case 0x3C:
-                    ret = 0;
+    if (collisionID >= 0) {
+        if (collisionID & 0x4000) {
+            switch (get_entity_type(collisionID)) {
+                case ENTITY_TYPE_BLUE_SWITCH:
+                case ENTITY_TYPE_RED_SWITCH:
+                case ENTITY_TYPE_HUGE_BLUE_SWITCH:
+                case ENTITY_TYPE_GREEN_STOMP_SWITCH:
+                case ENTITY_TYPE_SIMPLE_SPRING:
+                case ENTITY_TYPE_SCRIPT_SPRING:
+                case ENTITY_TYPE_CHEST:
+                case ENTITY_TYPE_BELLBELL_PLANT:
+                case ENTITY_TYPE_TRUMPET_PLANT:
+                case ENTITY_TYPE_MUNCHLESIA:
+                case ENTITY_TYPE_CYMBAL_PLANT:
+                case ENTITY_TYPE_PINK_FLOWER:
+                case ENTITY_TYPE_SPINNING_FLOWER:
+                case ENTITY_TYPE_3B:
+                case ENTITY_TYPE_TWEESTER:
+                    ret = FALSE;
                     break;
                 default:
-                    ret = 1;
+                    ret = TRUE;
                     break;
             }
         }
@@ -446,9 +504,9 @@ void switch_to_partner(s32 arg0) {
             D_8010CFE8 = 4;
         } else {
             D_8010CFE8 = 6;
-            D_800F833C = playerStatus->position.x;
-            D_800F8340 = playerStatus->position.y;
-            D_800F8344 = playerStatus->position.z;
+            SavedPartnerPosX = playerStatus->position.x;
+            SavedPartnerPosY = playerStatus->position.y;
+            SavedPartnerPosZ = playerStatus->position.z;
         }
     }
 }
@@ -469,9 +527,9 @@ void partner_init_after_battle(s32 arg0) {
             D_8010CFE8 = 4;
         } else {
             D_8010CFE8 = 6;
-            D_800F833C = playerStatus->position.x;
-            D_800F8340 = playerStatus->position.y;
-            D_800F8344 = playerStatus->position.z;
+            SavedPartnerPosX = playerStatus->position.x;
+            SavedPartnerPosY = playerStatus->position.y;
+            SavedPartnerPosZ = playerStatus->position.z;
         }
     }
 }
@@ -497,8 +555,8 @@ s32 partner_use_ability(void) {
     if (!is_starting_conversation() &&
         wPartner != NULL &&
         (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc))) {
-        if ((gGameStatusPtr->unk_81 != 0) && (actionStatus->currentButtons & 0x4000)) {
-            sfx_play_sound(0x21D);
+        if ((gGameStatusPtr->unk_81 != 0) && (actionStatus->currentButtons & BUTTON_B)) {
+            sfx_play_sound(SOUND_MENU_BADGE_ERROR);
         } else if (D_8010CFD8 != 0) {
             D_8010CFE0 = 1;
             D_8010CFE8 = 8;
@@ -540,9 +598,9 @@ void partner_reset_data(void) {
     }
 
     wPartner = NULL;
-    D_800F833C = playerStatus->position.x;
-    D_800F8340 = playerStatus->position.y;
-    D_800F8344 = playerStatus->position.z;
+    SavedPartnerPosX = playerStatus->position.x;
+    SavedPartnerPosY = playerStatus->position.y;
+    SavedPartnerPosZ = playerStatus->position.z;
 
     if (D_8010CFD8 == 0) {
         D_8010CFE8 = 1;
@@ -569,9 +627,9 @@ void partner_initialize_data(void) {
     actionStatus->unk_358 = 0;
     actionStatus->actionState.b[2] = 0;
     wPartner = NULL;
-    D_800F833C = 0;
-    D_800F8340 = 0;
-    D_800F8344 = 0;
+    SavedPartnerPosX = 0;
+    SavedPartnerPosY = 0;
+    SavedPartnerPosZ = 0;
 }
 
 s32 partner_test_enemy_collision(s32 arg0) {
@@ -592,7 +650,7 @@ Bytecode* partner_get_ride_script(void) {
 
 void partner_handle_before_battle(void) {
     if (D_8010CFD8 != 0) {
-        s32* scriptID = &D_8010CFDC;
+        s32* scriptID = &wPartnerCurrentScriptID;
 
         if (does_script_exist(*scriptID)) {
             kill_script_by_ID(*scriptID);
@@ -609,14 +667,14 @@ void partner_handle_after_battle(void) {
     PlayerData* playerData = &gPlayerData;
 
     if (D_8010CFD8 != 0) {
-        if (does_script_exist(D_8010CFDC) != 0) {
-            kill_script_by_ID(D_8010CFDC);
+        if (does_script_exist(wPartnerCurrentScriptID) != 0) {
+            kill_script_by_ID(wPartnerCurrentScriptID);
         }
 
-        D_8010CFD4 = start_script(wPartner->update, 20, 0x20);
-        D_8010CFD4->owner2.npc = wPartnerNpc;
-        D_8010CFDC = D_8010CFD4->id;
-        D_8010CFD4->groupFlags = 0xA;
+        wPartnerCurrentScript = start_script(wPartner->update, 20, 0x20);
+        wPartnerCurrentScript->owner2.npc = wPartnerNpc;
+        wPartnerCurrentScriptID = wPartnerCurrentScript->id;
+        wPartnerCurrentScript->groupFlags = 0xA;
 
         D_8010CFE8 = 1;
 
@@ -633,7 +691,7 @@ void partner_handle_after_battle(void) {
 }
 
 void partner_kill_ability_script(void) {
-    s32* scriptID = &D_8010CFDC;
+    s32* scriptID = &wPartnerCurrentScriptID;
     D_8010CFE8 = 10;
 
     if (does_script_exist(*scriptID)) {
@@ -643,7 +701,7 @@ void partner_kill_ability_script(void) {
 
 void partner_suspend_ability_script(void) {
     if (D_8010CFD8 != NULL) {
-        s32* scriptID = &D_8010CFDC;
+        s32* scriptID = &wPartnerCurrentScriptID;
 
         if (does_script_exist(*scriptID)) {
             suspend_all_script(*scriptID);
@@ -653,7 +711,7 @@ void partner_suspend_ability_script(void) {
 
 void partner_resume_ability_script(void) {
     if (D_8010CFD8 != NULL) {
-        s32* scriptID = &D_8010CFDC;
+        s32* scriptID = &wPartnerCurrentScriptID;
 
         if (does_script_exist(*scriptID)) {
             resume_all_script(*scriptID);
@@ -665,27 +723,27 @@ INCLUDE_ASM(void, "world/partners", partner_walking_enable, Npc* partner, s32 va
 
 void partner_walking_update_player_tracking(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 tempCondition;
-    struct8010CD38* tempStruct;
+    s32 isPlayerJumping;
+    player_path_element* currentSnapshot;
 
     if ((playerStatus->flags & 6) != 0) {
-        tempCondition = (playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_STEP_DOWN) ^ 1;
+        isPlayerJumping = (playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_STEP_DOWN) ^ 1;
     } else {
-        tempCondition = 0;
+        isPlayerJumping = FALSE;
     }
-    tempStruct = (D_8010CFB8 << 2) + &D_8010CD38;
-    if (((tempStruct->unk_00 == 0) || (tempCondition == 0)) &&
-        ((tempStruct->position.x != playerStatus->position.x) || (tempStruct->position.y != playerStatus->position.y)
-        || (tempStruct->position.z != playerStatus->position.z))) {
-        if (D_8010CFBC != D_8010CFB8 + 1) {
-            if (++D_8010CFB8 >= 0x28) {
-                D_8010CFB8 = 0;
+    currentSnapshot = &PlayerMoveHistory[PlayerMoveHistoryIndex];
+    if (((currentSnapshot->isJumping == 0) || (isPlayerJumping == 0)) &&
+        ((currentSnapshot->position.x != playerStatus->position.x) || (currentSnapshot->position.y != playerStatus->position.y)
+        || (currentSnapshot->position.z != playerStatus->position.z))) {
+        if (D_8010CFBC != PlayerMoveHistoryIndex + 1) {
+            if (++PlayerMoveHistoryIndex >= ARRAY_COUNT(PlayerMoveHistory)) {
+                PlayerMoveHistoryIndex = 0;
             }
-            tempStruct = (D_8010CFB8 << 2) + &D_8010CD38;
-            tempStruct->position.x = playerStatus->position.x;
-            tempStruct->position.y = playerStatus->position.y;
-            tempStruct->position.z = playerStatus->position.z;
-            tempStruct->unk_00 = tempCondition;
+            currentSnapshot = &PlayerMoveHistory[PlayerMoveHistoryIndex];
+            currentSnapshot->position.x = playerStatus->position.x;
+            currentSnapshot->position.y = playerStatus->position.y;
+            currentSnapshot->position.z = playerStatus->position.z;
+            currentSnapshot->isJumping = isPlayerJumping;
         }
     }
 }
@@ -694,12 +752,12 @@ void partner_walking_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
-    if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & 0x3000 || actionStatus->inputDisabled != 0
-        || actionStatus->actionState.b[2] != 0) {
-        if (!(playerStatus->animFlags & 0x800)) {
+    if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & (PLAYER_STATUS_FLAGS_INPUT_DISABLED | PLAYER_STATUS_FLAGS_1000)
+        || actionStatus->inputDisabled != 0 || actionStatus->actionState.b[2] != 0) {
+        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_800)) {
             partner_walking_follow_player(partner);
         }
-        if (actionStatus->pressedButtons & 0x6006) {
+        if (actionStatus->pressedButtons & (BUTTON_Z | BUTTON_B | BUTTON_C_LEFT | BUTTON_C_DOWN)) {
             actionStatus->actionState.b[2] = 0;
         }
     }
@@ -710,13 +768,13 @@ void partner_walking_update_motion(Npc* partner) {
         partner->pos.z = playerStatus->position.z;
         partner->jumpVelocity = 0.0f;
         partner->jumpScale = 0.0f;
-        partner->flags = partner->flags & ~0x800;
+        partner->flags = partner->flags & ~PLAYER_STATUS_ANIM_FLAGS_800;
     }
 
     partner_do_player_collision(partner);
-    D_800F833C = partner->pos.x;
-    D_800F8340 = partner->pos.y;
-    D_800F8344 = partner->pos.z;
+    SavedPartnerPosX = partner->pos.x;
+    SavedPartnerPosY = partner->pos.y;
+    SavedPartnerPosZ = partner->pos.z;
 }
 
 INCLUDE_ASM(void, "world/partners", partner_walking_follow_player, Npc* partner);
@@ -725,26 +783,26 @@ INCLUDE_ASM(void, "world/partners", partner_flying_enable, Npc* partner, s32 val
 
 void partner_flying_update_player_tracking(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    struct8010CD38* tempStruct;
-    f32 tempY;
+    player_path_element* currentSnapShot;
+    f32 effectiveY;
     s32 zero = 0; // TODO fix this as || zero == 0 is always going to be true as is
 
-    tempY = playerStatus->position.y;
-    if ((playerStatus->actionState == 23) || (playerStatus->actionState == 21)) {
-        tempY = playerStatus->lastGoodPosition.y + partner->collisionHeight + 5;
+    effectiveY = playerStatus->position.y;
+    if ((playerStatus->actionState == ACTION_STATE_HIT_LAVA) || (playerStatus->actionState == ACTION_STATE_HIT_FIRE)) {
+        effectiveY = playerStatus->lastGoodPosition.y + partner->collisionHeight + 5;
     }
-    tempStruct = (D_8010CFB8 << 2) + &D_8010CD38;
-    if ((!tempStruct->unk_00 || zero == 0) && (tempStruct->position.x != playerStatus->position.x || tempStruct->position.y != tempY
-                                            || tempStruct->position.z != playerStatus->position.z)) {
-        if (D_8010CFBC != D_8010CFB8 + 1) {
-            if (++D_8010CFB8 >= 0x28) {
-                D_8010CFB8 = 0;
+    currentSnapShot = &PlayerMoveHistory[PlayerMoveHistoryIndex];
+    if ((!currentSnapShot->isJumping || zero == 0) && (currentSnapShot->position.x != playerStatus->position.x || currentSnapShot->position.y != effectiveY
+        || currentSnapShot->position.z != playerStatus->position.z)) {
+        if (D_8010CFBC != PlayerMoveHistoryIndex + 1) {
+            if (++PlayerMoveHistoryIndex >= ARRAY_COUNT(PlayerMoveHistory)) {
+                PlayerMoveHistoryIndex = 0;
             }
-            tempStruct = (D_8010CFB8 << 2) + &D_8010CD38;
-            tempStruct->position.x = playerStatus->position.x;
-            tempStruct->position.y = tempY;
-            tempStruct->position.z = playerStatus->position.z;
-            tempStruct->unk_00 = zero;
+            currentSnapShot = &PlayerMoveHistory[PlayerMoveHistoryIndex];
+            currentSnapShot->position.x = playerStatus->position.x;
+            currentSnapShot->position.y = effectiveY;
+            currentSnapShot->position.z = playerStatus->position.z;
+            currentSnapShot->isJumping = zero;
         }
     }
 }
@@ -753,10 +811,10 @@ INCLUDE_ASM(void, "world/partners", partner_flying_update_motion, Npc* partner);
 
 INCLUDE_ASM(s32, "world/partners", partner_flying_follow_player);
 
-s32 partner_init_put_away(Npc* arg0) {
-    arg0->collisionChannel = 0x10000;
+s32 partner_init_put_away(Npc* partner) {
+    partner->collisionChannel = 0x10000;
     D_8010CFC8 = 0;
-    arg0->flags |= 0x100;
+    partner->flags |= 0x100;
     return D_8010CFC8;
 }
 
@@ -783,9 +841,9 @@ s32 partner_put_away(Npc* partner) {
             tempPosY = playerStatus->position.y + (playerStatus->colliderHeight / 2);
             partner->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight / 2);
             tempPosZ = playerStatus->position.z;
-            D_800F833C = tempMoveToX;
-            D_800F8340 = tempMoveToY;
-            D_800F8344 = tempMoveToZ;
+            SavedPartnerPosX = tempMoveToX;
+            SavedPartnerPosY = tempMoveToY;
+            SavedPartnerPosZ = tempMoveToZ;
             partner->moveSpeed = 4.0f;
             partner->jumpScale = 1.6f;
             partner->moveToPos.z = tempPosZ;

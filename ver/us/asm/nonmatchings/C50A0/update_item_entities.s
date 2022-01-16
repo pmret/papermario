@@ -42,8 +42,8 @@ glabel update_item_entities
 /* C8654 80131F54 2842005B */  slti      $v0, $v0, 0x5b
 /* C8658 80131F58 14400012 */  bnez      $v0, .L80131FA4
 /* C865C 80131F5C 00000000 */   nop
-/* C8660 80131F60 3C058010 */  lui       $a1, %hi(D_80104AC0)
-/* C8664 80131F64 24A54AC0 */  addiu     $a1, $a1, %lo(D_80104AC0)
+/* C8660 80131F60 3C058010 */  lui       $a1, %hi(SparkleScript_Coin)
+/* C8664 80131F64 24A54AC0 */  addiu     $a1, $a1, %lo(SparkleScript_Coin)
 /* C8668 80131F68 0C04C27C */  jal       sparkle_script_init
 /* C866C 80131F6C 0220202D */   daddu    $a0, $s1, $zero
 /* C8670 80131F70 0C00A67F */  jal       rand_int

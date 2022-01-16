@@ -63,7 +63,7 @@ s32 N(statusTable_80224418)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_802244C4)[] = {
+ActorPartBlueprint N(partsTable_802244C4)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -78,9 +78,9 @@ ActorPartDesc N(partsTable_802244C4)[] = {
     },
 };
 
-extern EvtSource N(init_80224A94);
+extern EvtScript N(init_80224A94);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_JR_TROOPA2,
     .level = 44,
@@ -103,7 +103,7 @@ ActorDesc NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-EvtSource N(80224510) = {
+EvtScript N(80224510) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(UseBattleCamPreset, 7)
@@ -115,7 +115,7 @@ EvtSource N(80224510) = {
     EVT_END
 };
 
-EvtSource N(802245A8) = {
+EvtScript N(802245A8) = {
     EVT_CALL(func_802535B4, 1)
     EVT_CALL(UseBattleCamPreset, 2)
     EVT_CALL(MoveBattleCamOver, 12)
@@ -123,7 +123,7 @@ EvtSource N(802245A8) = {
     EVT_END
 };
 
-EvtSource N(802245E8) = {
+EvtScript N(802245E8) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, 55)
@@ -138,7 +138,7 @@ s32 N(idleAnimations_8022464C)[] = {
     STATUS_END,
 };
 
-EvtSource N(80224658) = {
+EvtScript N(80224658) = {
     EVT_SET(LW(10), LW(0))
     EVT_CALL(func_8027D32C, -127)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -189,7 +189,7 @@ EvtSource N(80224658) = {
     EVT_END
 };
 
-EvtSource N(80224964) = {
+EvtScript N(80224964) = {
     EVT_WAIT_FRAMES(10)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_CLOSE_SHELL)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -204,12 +204,12 @@ EvtSource N(80224964) = {
     EVT_END
 };
 
-extern EvtSource N(takeTurn_80225314);
-extern EvtSource N(idle_80224B24);
-extern EvtSource N(handleEvent_80224B58);
-extern EvtSource N(nextTurn_80225B4C);
+extern EvtScript N(takeTurn_80225314);
+extern EvtScript N(idle_80224B24);
+extern EvtScript N(handleEvent_80224B58);
+extern EvtScript N(nextTurn_80225B4C);
 
-EvtSource N(init_80224A94) = {
+EvtScript N(init_80224A94) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80225314)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80224B24)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80224B58)))
@@ -220,7 +220,7 @@ EvtSource N(init_80224A94) = {
     EVT_END
 };
 
-EvtSource N(idle_80224B24) = {
+EvtScript N(idle_80224B24) = {
     EVT_LABEL(0)
     EVT_WAIT_FRAMES(1)
     EVT_GOTO(0)
@@ -228,10 +228,10 @@ EvtSource N(idle_80224B24) = {
     EVT_END
 };
 
-extern EvtSource N(802250E4);
-extern EvtSource N(802251CC);
+extern EvtScript N(802250E4);
+extern EvtScript N(802251CC);
 
-EvtSource N(handleEvent_80224B58) = {
+EvtScript N(handleEvent_80224B58) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -334,7 +334,7 @@ EvtSource N(handleEvent_80224B58) = {
     EVT_END
 };
 
-EvtSource N(802250E4) = {
+EvtScript N(802250E4) = {
     EVT_CALL(GetActorVar, -127, 1, LW(0))
     EVT_IF_EQ(LW(0), 0)
         EVT_CALL(GetLastDamage, -127, LW(1))
@@ -353,7 +353,7 @@ EvtSource N(802250E4) = {
     EVT_END
 };
 
-EvtSource N(802251CC) = {
+EvtScript N(802251CC) = {
     EVT_CALL(GetActorVar, -127, 1, LW(0))
     EVT_IF_EQ(LW(0), 1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
@@ -376,7 +376,7 @@ EvtSource N(802251CC) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_80225314) = {
+EvtScript N(takeTurn_80225314) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_OPEN_SHELL)
@@ -487,7 +487,7 @@ EvtSource N(takeTurn_80225314) = {
     EVT_END
 };
 
-EvtSource N(nextTurn_80225B4C) = {
+EvtScript N(nextTurn_80225B4C) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetBattlePhase, LW(0))

@@ -71,7 +71,7 @@ class HudElementScript():
         indent = "    "
         op = 99
 
-        print(f"HudElementAnim {self.symbol} = {{")
+        print(f"HudScript {self.symbol} = {{")
 
         while op:
             op = next(buf, -1)

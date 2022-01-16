@@ -53,10 +53,10 @@ dlabel D_802EA044
 dlabel D_802EA060
 .word 0x00000004, 0x00000001, 0x00000001, 0x0000003C, 0x0A000CC8, 0x00000002, 0x00000000
 
-dlabel D_802EA07C
+dlabel Entity_InertYellowBlock
 .word 0x42000020, D_802E9F80, 0x00000000, entity_init_Hammer1Block_normal, D_802E9E0C, entity_block_handle_collision, 0x00E42240, 0x00E42740, 0x0B191919
 
-dlabel D_802EA0A0
+dlabel Entity_InertRedBlock
 .word 0x42000020, D_802E9F9C, 0x00000000, entity_init_Hammer1Block_normal, D_802E9E0C, entity_block_handle_collision, 0x00E42740, 0x00E431F0, 0x13191919
 
 dlabel D_802EA0C4
@@ -101,13 +101,13 @@ dlabel D_802EA52C
 dlabel D_802EA548
 .word 0x00000004, 0x00000016, 0x00000001, 0x0000003C, 0x0A000A90, 0x00000002, 0x00000000, 0x42000020, D_802EA4F4, 0x00000000, entity_ItemBlock_init, D_802EA328, entity_block_handle_collision, 0x00E3B870, 0x00E3C320, 0x0F191919, 0x42000020, D_802EA510, 0x00000000, entity_HiddenItemBlock_init, D_802EA38C, entity_block_handle_collision, 0x00E3B870, 0x00E3C320, 0x11191919, 0x42000020, D_802EA52C, 0x00000000, entity_ItemBlock_init, D_802EA328, entity_block_handle_collision, 0x00E3C320, 0x00E3CDD0, 0x14191919, 0x42000020, D_802EA548, 0x00000000, entity_HiddenItemBlock_init, D_802EA38C, entity_block_handle_collision, 0x00E3C320, 0x00E3CDD0, 0x12191919, 0xC2080020, 0x0000023C, 0x00000084, entity_ItemlessBlock_init, D_802EA440, entity_block_handle_collision, D_802EA4C4, 0x00000000, 0x10191919
 
-dlabel D_802EA618
+dlabel Entity_HitGroundedYellowBlock
 .word 0x42080020, 0x0000023C, 0x00000084, entity_ItemlessBlock_init, D_802EA3F0, 0x00000000, D_802EA4C4, 0x00000000, 0x0F191919
 
-dlabel D_802EA63C
+dlabel Entity_HitFloatingYellowBlock
 .word 0x42080020, 0x0000022C, 0x00000084, entity_ItemlessBlock_init, D_802EA3F0, 0x00000000, D_802EA4D4, 0x00000000, 0x0F191919
 
-dlabel D_802EA660
+dlabel Entity_HitRedBlock
 .word 0x42080020, 0x00000094, 0x00000084, entity_ItemlessBlock_init, D_802EA3F0, 0x00000000, D_802EA4E4, 0x00000000, 0x14191919, 0x00000000, 0x00000000, 0x00000000
 
 dlabel D_802EA690
@@ -128,7 +128,7 @@ dlabel D_802EA760
 dlabel D_802EA77C
 .word 0x00000004, 0x00000022, 0x00000001, 0x0000003C, 0x0A000918, 0x00000002, 0x00000000, 0x42000020, D_802EA77C, 0x00000000, entity_base_block_init, D_802E9E0C, entity_block_handle_collision, 0x00E431F0, 0x00E43B20, 0x1F191919
 
-dlabel D_802EA7BC
+dlabel Entity_HeartBlockContent
 .word 0x002000D8, D_802EA728, 0x00000000, entity_HeartBlockContent_init, D_802EA690, 0x00000000, 0x00E49E40, 0x00E4A6A0, 0x3F120612, 0x42000020, D_802EA77C, 0x00000000, entity_HeartBlock_init, D_802EA6EC, entity_block_handle_collision, 0x00E431F0, 0x00E43B20, 0x1B191919, 0x00000000, 0x00000000, 0x00000000
 
 dlabel D_802EA810
@@ -144,10 +144,10 @@ dlabel D_802EA871
 .byte 0x00, 0x02, 0x01, 0x02, 0x02, 0x14, 0x03, 0x02, 0x02, 0x01, 0x02, 0xFF, 0xFF, 0x00, 0x00
 
 dlabel D_802EA880
-.word 0x00000003, 0x00000000, entity_SuperBlock_HitEffect_idle, 0x00000000
+.word 0x00000003, 0x00000000, entity_SuperBlockContent_idle, 0x00000000
 
 dlabel D_802EA890
-.word 0x00000003, 0x00000000, entity_SuperBlock_HitEffect_idle, 0x00000000
+.word 0x00000003, 0x00000000, entity_SuperBlockContent_idle, 0x00000000
 
 dlabel D_802EA8A0
 .word 0x00000004, 0x0000000D, 0x00000001, 0x0000003C, 0x0A0008F8, 0x00000002, 0x00000000
@@ -161,8 +161,8 @@ dlabel D_802EA8D8
 dlabel D_802EA8F4
 .word 0x00000004, 0x00000016, 0x00000001, 0x0000003C, D_802E9828, 0x00000002, 0x00000000, 0x42000020, D_802EA8A0, 0x00000000, entity_SuperBlock_init, D_802EA810, entity_block_handle_collision, 0x00E44800, 0x00E45110, 0x22191919
 
-dlabel D_802EA934
-.word 0x00200130, D_802EA8BC, 0x00000000, entity_init_SuperBlock_HitEffect1, D_802EA880, 0x00000000, 0x00E4A6A0, 0x00E4AA80, 0x41120612, 0x42000020, D_802EA8D8, 0x00000000, entity_UltraBlock_init, D_802EA810, entity_block_handle_collision, 0x00E45110, 0x00E459F0, 0x23191919, 0x00200130, D_802EA8F4, 0x00000000, entity_init_SuperBlock_HitEffect2, D_802EA890, 0x00000000, 0x00E4AA80, 0x00E4B2E0, 0x42120612
+dlabel Entity_SuperBlockContent
+.word 0x00200130, D_802EA8BC, 0x00000000, entity_init_SuperBlockContent1, D_802EA880, 0x00000000, 0x00E4A6A0, 0x00E4AA80, 0x41120612, 0x42000020, D_802EA8D8, 0x00000000, entity_UltraBlock_init, D_802EA810, entity_block_handle_collision, 0x00E45110, 0x00E459F0, 0x23191919, 0x00200130, D_802EA8F4, 0x00000000, entity_init_SuperBlockContent2, D_802EA890, 0x00000000, 0x00E4AA80, 0x00E4B2E0, 0x42120612
 
 dlabel D_802EA9A0
 .word 0x00000003, 0x00000000, entity_ScriptSpring_idle, 0x00000003, 0x0000000A, 0x00000000, 0x00000004, 0x00000000, 0x00000000

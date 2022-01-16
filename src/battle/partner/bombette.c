@@ -89,7 +89,7 @@ ApiStatus func_80238358_6FB068(Evt* script, s32 isInitialCall) {
     s32 var0 = evt_get_variable(script, *args++);
     s32 var1 = 0;
 
-    switch (partnerActor->staticActorData->level) {
+    switch (partnerActor->actorBlueprint->level) {
         case 0:
             if (var0 < 36) {
                 var1 = 1;
@@ -150,7 +150,7 @@ ApiStatus func_8023849C_6FB1AC(Evt* script, s32 isInitialCall) {
     s32 var0 = evt_get_variable(script, *args++);
     s32 var1 = 0;
 
-    switch (partnerActor->staticActorData->level) {
+    switch (partnerActor->actorBlueprint->level) {
         case 1:
             if (var0 < 36) {
                 var1 = 1;
@@ -197,7 +197,7 @@ ApiStatus func_80238590_6FB2A0(Evt* script, s32 isInitialCall) {
     s32 var0 = evt_get_variable(script, *args++);
     s32 var1 = 0;
 
-    switch (partnerActor->staticActorData->level) {
+    switch (partnerActor->actorBlueprint->level) {
         case 2:
             if (var0 < 36) {
                 var1 = 1;

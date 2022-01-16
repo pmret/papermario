@@ -1,18 +1,18 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern s32 D_800F7FA8;
-extern s32 D_800F7F80[10];
+extern s32 TimesHudScript;
+extern s32 DigitHudScripts[10];
 
-extern HudElementAnim D_80108248[];
-extern HudElementAnim D_80108518[];
-extern HudElementAnim D_80108270[];
-extern HudElementAnim D_80108538[];
-extern HudElementAnim D_80080FC4[];
-extern HudElementAnim D_801086AC[];
-extern HudElementAnim D_801083D8[];
-extern HudElementAnim D_80108068[];
-extern HudElementAnim D_80104BEC[];
+extern HudScript HudScript_StatusHP[];
+extern HudScript HudScript_StatusHeart[];
+extern HudScript HudScript_StatusFP[];
+extern HudScript HudScript_StatusFlower[];
+extern HudScript HudScript_Item_CoinSparkleRandom[];
+extern HudScript HudScript_StatusStarPoint[];
+extern HudScript HudScript_StatusStar1[];
+extern HudScript HudScript_StatusTimes[];
+extern HudScript HudScript_StatusSPShine[];
 
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;
@@ -154,7 +154,7 @@ s32 get_item_empty_count(void) {
 /// @returns the index of the given item in the player's inventory, or -1 if not found
 s32 find_item(s32 itemID) {
     PlayerData* playerData = &gPlayerData;
-    StaticItem* item = &gItemTable[itemID];
+    ItemData* item = &gItemTable[itemID];
     s32 i;
 
     if ((item->typeFlags & 8) != 0) {
@@ -205,7 +205,7 @@ void sort_items(void) {
 
 s32 add_badge(s32 itemID) {
     PlayerData* playerData = &gPlayerData;
-    StaticItem* item = &gItemTable[itemID];
+    ItemData* item = &gItemTable[itemID];
     s32 i;
 
     if ((item->typeFlags & 0x40) == 0) {
@@ -330,69 +330,69 @@ void initialize_status_menu(void) {
 
     close_status_menu();
 
-    iconIndex = create_hud_element(D_80108248);
-    uiStatus->hpIconIndexes[0] = iconIndex;
+    iconIndex = create_hud_element(HudScript_StatusHP);
+    uiStatus->hpIconIndices[0] = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_80108518);
-    uiStatus->hpIconIndexes[1] = iconIndex;
+    iconIndex = create_hud_element(HudScript_StatusHeart);
+    uiStatus->hpIconIndices[1] = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_80108270);
-    uiStatus->fpIconIndexes[0] = iconIndex;
+    iconIndex = create_hud_element(HudScript_StatusFP);
+    uiStatus->fpIconIndices[0] = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_80108538);
-    uiStatus->fpIconIndexes[1] = iconIndex;
+    iconIndex = create_hud_element(HudScript_StatusFlower);
+    uiStatus->fpIconIndices[1] = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_80108558);
+    iconIndex = create_hud_element(HudScript_StatusCoin);
     uiStatus->coinIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_80080FC4);
-    uiStatus->coinIconIndex2 = iconIndex;
+    iconIndex = create_hud_element(HudScript_Item_CoinSparkleRandom);
+    uiStatus->coinSparkleIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_801086AC);
+    iconIndex = create_hud_element(HudScript_StatusStarPoint);
     uiStatus->starpointsIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_80104BEC);
-    uiStatus->starpointsIconIndex2 = iconIndex;
+    iconIndex = create_hud_element(HudScript_StatusSPShine);
+    uiStatus->starpointsShineIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    newVar = create_hud_element(D_80108068);
+    newVar = create_hud_element(HudScript_StatusTimes);
     iconIndex = newVar;
     uiStatus->iconIndex8 = iconIndex;
     set_hud_element_flags(iconIndex, 0x82);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_80108068);
+    iconIndex = create_hud_element(HudScript_StatusTimes);
     uiStatus->iconIndex9 = iconIndex;
     set_hud_element_flags(iconIndex, 0x82);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_80108068);
+    iconIndex = create_hud_element(HudScript_StatusTimes);
     uiStatus->iconIndexA = iconIndex;
     set_hud_element_flags(iconIndex, 0x82);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_80108068);
+    iconIndex = create_hud_element(HudScript_StatusTimes);
     uiStatus->iconIndexB = iconIndex;
     set_hud_element_flags(iconIndex, 0x82);
     clear_hud_element_flags(iconIndex, 0x8000);
 
-    iconIndex = create_hud_element(D_801083D8);
-    uiStatus->iconIndexC = iconIndex;
+    iconIndex = create_hud_element(HudScript_StatusStar1);
+    uiStatus->starIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, 0x80);
     clear_hud_element_flags(iconIndex, 0x8000);
 
@@ -409,7 +409,7 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
     s32 digit;
     s32 place;
 
-    set_hud_element_anim(iconID, D_800F7FA8);
+    set_hud_element_anim(iconID, TimesHudScript);
     x += 8;
     y2 = y + 8;
     set_hud_element_render_pos(iconID, x, y + 7);
@@ -434,7 +434,7 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
         // Once we have encountered our first non-zero digit, we need to keep drawing the remaining digits
         if (digit != 0 || keepDrawing || (i == numDigits - 1)) {
             keepDrawing = TRUE;
-            set_hud_element_anim(iconID, D_800F7F80[digit]);
+            set_hud_element_anim(iconID, DigitHudScripts[digit]);
             set_hud_element_render_pos(iconID, x, y2);
             clear_hud_element_flags(iconID, 2);
             draw_hud_element_2(iconID);
@@ -528,11 +528,11 @@ void show_coin_counter(void) {
     if (uiStatus->unk_6C[0] == 0) {
         set_window_properties(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, coin_counter_draw_content, 0, -1);
         set_window_update(0x14, basic_window_update);
-        index = create_hud_element(D_80109270);
+        index = create_hud_element(HudScript_MenuTimes);
         uiStatus->iconIndex10 = index;
         set_hud_element_flags(index, 0x80);
         set_hud_element_tint(index, 0xff, 0xff, 0xff);
-        index = create_hud_element(D_80108558);
+        index = create_hud_element(HudScript_StatusCoin);
         uiStatus->iconIndex11 = index;
         set_hud_element_flags(index, 0x80);
         set_hud_element_tint(index, 0xff, 0xff, 0xff);
@@ -862,22 +862,22 @@ void reset_status_menu(void) {
     uiStatus->unk_3B[1] = 0;
 
     for (i = 0; i < 2; i++) {
-        copy_world_hud_element_ref_to_battle(uiStatus->hpIconIndexes[i], uiStatus->hpIconIndexes[i]);
+        copy_world_hud_element_ref_to_battle(uiStatus->hpIconIndices[i], uiStatus->hpIconIndices[i]);
     }
 
     for (i = 0; i < 2; i++) {
-        copy_world_hud_element_ref_to_battle(uiStatus->fpIconIndexes[i], uiStatus->fpIconIndexes[i]);
+        copy_world_hud_element_ref_to_battle(uiStatus->fpIconIndices[i], uiStatus->fpIconIndices[i]);
     }
 
     copy_world_hud_element_ref_to_battle(uiStatus->coinIconIndex, uiStatus->coinIconIndex);
-    copy_world_hud_element_ref_to_battle(uiStatus->coinIconIndex2, uiStatus->coinIconIndex2);
+    copy_world_hud_element_ref_to_battle(uiStatus->coinSparkleIconIndex, uiStatus->coinSparkleIconIndex);
     copy_world_hud_element_ref_to_battle(uiStatus->starpointsIconIndex, uiStatus->starpointsIconIndex);
-    copy_world_hud_element_ref_to_battle(uiStatus->starpointsIconIndex2, uiStatus->starpointsIconIndex2);
+    copy_world_hud_element_ref_to_battle(uiStatus->starpointsShineIconIndex, uiStatus->starpointsShineIconIndex);
     copy_world_hud_element_ref_to_battle(uiStatus->iconIndex8, uiStatus->iconIndex8);
     copy_world_hud_element_ref_to_battle(uiStatus->iconIndex9, uiStatus->iconIndex9);
     copy_world_hud_element_ref_to_battle(uiStatus->iconIndexA, uiStatus->iconIndexA);
     copy_world_hud_element_ref_to_battle(uiStatus->iconIndexB, uiStatus->iconIndexB);
-    copy_world_hud_element_ref_to_battle(uiStatus->iconIndexC, uiStatus->iconIndexC);
+    copy_world_hud_element_ref_to_battle(uiStatus->starIconIndex, uiStatus->starIconIndex);
 }
 
 // Weird order of loading stuff

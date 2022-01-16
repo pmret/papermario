@@ -46,8 +46,8 @@ glabel func_802A9000_423C70
 /* 423D0C 802A909C 24020003 */  addiu     $v0, $zero, 3
 /* 423D10 802A90A0 A2820084 */  sb        $v0, 0x84($s4)
 .L802A90A4:
-/* 423D14 802A90A4 3C048011 */  lui       $a0, %hi(D_80108B28)
-/* 423D18 802A90A8 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)
+/* 423D14 802A90A4 3C048011 */  lui       $a0, %hi(HudScript_AButton)
+/* 423D18 802A90A8 24848B28 */  addiu     $a0, $a0, %lo(HudScript_AButton)
 /* 423D1C 802A90AC 2402FFD0 */  addiu     $v0, $zero, -0x30
 /* 423D20 802A90B0 A6220056 */  sh        $v0, 0x56($s1)
 /* 423D24 802A90B4 24020050 */  addiu     $v0, $zero, 0x50
@@ -65,8 +65,8 @@ glabel func_802A9000_423C70
 /* 423D54 802A90E4 0200202D */  daddu     $a0, $s0, $zero
 /* 423D58 802A90E8 0C051277 */  jal       set_hud_element_render_depth
 /* 423D5C 802A90EC 0000282D */   daddu    $a1, $zero, $zero
-/* 423D60 802A90F0 3C048011 */  lui       $a0, %hi(D_80108AFC)
-/* 423D64 802A90F4 24848AFC */  addiu     $a0, $a0, %lo(D_80108AFC)
+/* 423D60 802A90F0 3C048011 */  lui       $a0, %hi(HudScript_BlueMeter)
+/* 423D64 802A90F4 24848AFC */  addiu     $a0, $a0, %lo(HudScript_BlueMeter)
 /* 423D68 802A90F8 0C050529 */  jal       create_hud_element
 /* 423D6C 802A90FC 00000000 */   nop
 /* 423D70 802A9100 0040802D */  daddu     $s0, $v0, $zero

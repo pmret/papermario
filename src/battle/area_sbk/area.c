@@ -3,8 +3,8 @@
 
 #define NAMESPACE b_area_sbk
 
-extern ActorDesc N(pokey);
-extern ActorDesc N(bandit);
+extern ActorBlueprint N(pokey);
+extern ActorBlueprint N(bandit);
 
 extern Stage N(sbk_02);
 

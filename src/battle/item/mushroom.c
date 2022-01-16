@@ -71,8 +71,8 @@ ApiStatus N(func_802A1438_715C88)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_802A15A0_715DF0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    StaticItem* itemTable = gItemTable;
-    StaticItem* item = &itemTable[evt_get_variable(script, *args++)];
+    ItemData* itemTable = gItemTable;
+    ItemData* item = &itemTable[evt_get_variable(script, *args++)];
 
     script->varTable[11] = item->potencyA;
     script->varTable[12] = item->potencyB;
@@ -83,7 +83,7 @@ ApiStatus N(func_802A15A0_715DF0)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(script6) = {
+EvtScript N(script6) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
     EVT_WAIT_FRAMES(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
@@ -161,7 +161,7 @@ EvtSource N(script6) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_VAR(14), EVT_VAR(1))
     EVT_CALL(GetMenuSelection, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_SET(EVT_VAR(10), EVT_VAR(1))

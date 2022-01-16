@@ -8,5 +8,5 @@
 
 ApiStatus N(func_80240000_C4D3E0)(Evt* script, s32 isInitialCall);
 
-extern EvtSource N(main);
-extern EvtSource N(makeEntities);
+extern EvtScript N(main);
+extern EvtScript N(makeEntities);

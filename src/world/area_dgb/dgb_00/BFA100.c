@@ -29,7 +29,7 @@ NpcSettings N(npcSettings_8024066C) = {
     .level = 99,
 };
 
-EvtSource N(80240698) = {
+EvtScript N(80240698) = {
     EVT_SET(EVT_VAR(3), 0)
     EVT_SUB(EVT_VAR(3), EVT_VAR(2))
     EVT_CALL(ModifyColliderFlags, 0, 18, 0x7FFFFE00)
@@ -47,7 +47,7 @@ EvtSource N(80240698) = {
     EVT_END
 };
 
-EvtSource N(8024079C) = {
+EvtScript N(8024079C) = {
     EVT_SET(EVT_VAR(3), 0)
     EVT_SUB(EVT_VAR(3), EVT_VAR(2))
     EVT_CALL(MakeLerp, 80, 0, 12, 0)
@@ -65,7 +65,7 @@ EvtSource N(8024079C) = {
     EVT_END
 };
 
-EvtSource N(802408A0) = {
+EvtScript N(802408A0) = {
     EVT_CALL(GetNpcPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(0), 200)
     EVT_CALL(NpcMoveTo, 0, EVT_VAR(0), EVT_VAR(2), 46)
@@ -73,7 +73,7 @@ EvtSource N(802408A0) = {
     EVT_END
 };
 
-EvtSource N(802408F8) = {
+EvtScript N(802408F8) = {
     EVT_CALL(GetNpcPos, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(0), 200)
     EVT_CALL(NpcMoveTo, 1, EVT_VAR(0), EVT_VAR(2), 50)
@@ -81,7 +81,7 @@ EvtSource N(802408F8) = {
     EVT_END
 };
 
-EvtSource N(80240950) = {
+EvtScript N(80240950) = {
     EVT_CALL(GetNpcPos, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(0), 200)
     EVT_CALL(NpcMoveTo, 2, EVT_VAR(0), EVT_VAR(2), 53)
@@ -89,7 +89,7 @@ EvtSource N(80240950) = {
     EVT_END
 };
 
-EvtSource N(802409A8) = {
+EvtScript N(802409A8) = {
     EVT_CALL(GetNpcPos, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(0), 200)
     EVT_CALL(NpcMoveTo, 3, EVT_VAR(0), EVT_VAR(2), 46)
@@ -97,7 +97,7 @@ EvtSource N(802409A8) = {
     EVT_END
 };
 
-EvtSource N(80240A00) = {
+EvtScript N(80240A00) = {
     EVT_CALL(GetNpcPos, 4, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(0), 200)
     EVT_CALL(NpcMoveTo, 4, EVT_VAR(0), EVT_VAR(2), 50)
@@ -105,7 +105,7 @@ EvtSource N(80240A00) = {
     EVT_END
 };
 
-EvtSource N(80240A58) = {
+EvtScript N(80240A58) = {
     EVT_CALL(GetNpcPos, 5, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(0), 200)
     EVT_CALL(NpcMoveTo, 5, EVT_VAR(0), EVT_VAR(2), 53)
@@ -113,7 +113,7 @@ EvtSource N(80240A58) = {
     EVT_END
 };
 
-EvtSource N(80240AB0) = {
+EvtScript N(80240AB0) = {
     EVT_EXEC(N(802408A0))
     EVT_EXEC(N(802408F8))
     EVT_EXEC(N(80240950))
@@ -124,7 +124,7 @@ EvtSource N(80240AB0) = {
     EVT_END
 };
 
-EvtSource N(80240B08) = {
+EvtScript N(80240B08) = {
     EVT_CALL(SetNpcJumpscale, 0, EVT_FIXED(-0.2))
     EVT_CALL(NpcJump0, 0, 257, 30, -90, 5)
     EVT_CALL(EnableNpcShadow, 0, FALSE)
@@ -133,7 +133,7 @@ EvtSource N(80240B08) = {
     EVT_END
 };
 
-EvtSource N(80240B74) = {
+EvtScript N(80240B74) = {
     EVT_CALL(SetNpcJumpscale, 1, EVT_FIXED(-0.3))
     EVT_CALL(NpcJump0, 1, 272, 112, -81, 12)
     EVT_CALL(EnableNpcShadow, 1, FALSE)
@@ -142,7 +142,7 @@ EvtSource N(80240B74) = {
     EVT_END
 };
 
-EvtSource N(80240BE0) = {
+EvtScript N(80240BE0) = {
     EVT_CALL(SetNpcJumpscale, 2, EVT_FIXED(-0.4))
     EVT_CALL(NpcJump0, 2, 237, 120, -118, 10)
     EVT_CALL(EnableNpcShadow, 2, FALSE)
@@ -151,7 +151,7 @@ EvtSource N(80240BE0) = {
     EVT_END
 };
 
-EvtSource N(80240C4C) = {
+EvtScript N(80240C4C) = {
     EVT_CALL(SetNpcJumpscale, 3, EVT_FIXED(-0.3))
     EVT_CALL(NpcJump0, 3, 280, 60, -79, 8)
     EVT_CALL(EnableNpcShadow, 3, FALSE)
@@ -160,7 +160,7 @@ EvtSource N(80240C4C) = {
     EVT_END
 };
 
-EvtSource N(80240CB8) = {
+EvtScript N(80240CB8) = {
     EVT_CALL(SetNpcJumpscale, 4, EVT_FIXED(-0.4))
     EVT_CALL(NpcJump0, 4, 250, 81, -97, 9)
     EVT_CALL(EnableNpcShadow, 4, FALSE)
@@ -169,7 +169,7 @@ EvtSource N(80240CB8) = {
     EVT_END
 };
 
-EvtSource N(80240D24) = {
+EvtScript N(80240D24) = {
     EVT_CALL(SetNpcJumpscale, 5, EVT_FIXED(-0.5))
     EVT_CALL(NpcJump0, 5, 227, 43, -123, 15)
     EVT_CALL(EnableNpcShadow, 5, FALSE)
@@ -178,7 +178,7 @@ EvtSource N(80240D24) = {
     EVT_END
 };
 
-EvtSource N(80240D90) = {
+EvtScript N(80240D90) = {
     EVT_EXEC(N(80240B74))
     EVT_EXEC(N(80240BE0))
     EVT_EXEC(N(80240C4C))
@@ -188,7 +188,7 @@ EvtSource N(80240D90) = {
     EVT_END
 };
 
-EvtSource N(80240DDC) = {
+EvtScript N(80240DDC) = {
     EVT_CALL(GetNpcPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_LOOP(0)
         EVT_CALL(RandInt, 5, EVT_VAR(10))
@@ -215,7 +215,7 @@ EvtSource N(80240DDC) = {
     EVT_END
 };
 
-EvtSource N(80240F50) = {
+EvtScript N(80240F50) = {
     EVT_SET_GROUP(239)
     EVT_LOOP(0)
         EVT_CALL(RandInt, 50, EVT_VAR(0))
@@ -233,7 +233,7 @@ EvtSource N(80240F50) = {
     EVT_END
 };
 
-EvtSource N(8024103C) = {
+EvtScript N(8024103C) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetPlayerPos, 350, 10, -150)
@@ -279,7 +279,7 @@ EvtSource N(8024103C) = {
     EVT_END
 };
 
-EvtSource N(802413F4) = {
+EvtScript N(802413F4) = {
     EVT_CALL(SetPlayerSpeed, EVT_FIXED(8.0))
     EVT_CALL(PlayerMoveTo, 184, -44, 0)
     EVT_CALL(PlaySoundAtNpc, 0, SOUND_262, 0)
@@ -358,7 +358,7 @@ EvtSource N(802413F4) = {
     EVT_END
 };
 
-EvtSource N(80241AA0) = {
+EvtScript N(80241AA0) = {
     EVT_CALL(SetNpcPos, 0, 246, 30, -110)
     EVT_CALL(SetNpcPos, 1, 276, 120, -80)
     EVT_CALL(SetNpcPos, 2, 216, 120, -140)
@@ -387,7 +387,7 @@ EvtSource N(80241AA0) = {
     EVT_END
 };
 
-EvtSource N(interact_80241CD8) = {
+EvtScript N(interact_80241CD8) = {
     EVT_SET(EVT_MAP_VAR(0), 1)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_boo_Palette_01_Anim_6, NPC_ANIM_boo_Palette_01_Anim_6, 5, MESSAGE_ID(0x0E, 0x00E9))
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_boo_Palette_01_Anim_6)
@@ -421,33 +421,33 @@ EvtSource N(interact_80241CD8) = {
     EVT_END
 };
 
-EvtSource N(init_80241F70) = {
+EvtScript N(init_80241F70) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241CD8)))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(init_80241F94) = {
+EvtScript N(init_80241F94) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(init_80241FA4) = {
+EvtScript N(init_80241FA4) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(init_80241FB4) = {
+EvtScript N(init_80241FB4) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(init_80241FC4) = {
+EvtScript N(init_80241FC4) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(init_80241FD4) = {
+EvtScript N(init_80241FD4) = {
     EVT_RETURN
     EVT_END
 };
@@ -633,7 +633,7 @@ StaticNpc N(npcGroup_80242994) = {
     },
 };
 
-EvtSource N(80242B84) = {
+EvtScript N(80242B84) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
@@ -774,7 +774,7 @@ EvtSource N(80242B84) = {
     EVT_END
 };
 
-EvtSource N(init_802434EC) = {
+EvtScript N(init_802434EC) = {
     EVT_RETURN
     EVT_END
 };
@@ -828,8 +828,8 @@ static s32 N(pad_3758)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(makeEntities) = {
-    EVT_CALL(MakeEntity, EVT_PTR(D_802E9A18), -65, 60, -240, 0, MAKE_ENTITY_END)
+EvtScript N(makeEntities) = {
+    EVT_CALL(MakeEntity, EVT_PTR(Entity_SavePoint), -65, 60, -240, 0, MAKE_ENTITY_END)
     EVT_RETURN
     EVT_END
 };

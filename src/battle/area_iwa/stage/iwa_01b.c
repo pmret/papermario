@@ -4,14 +4,14 @@
 
 #define NAMESPACE b_area_iwa_iwa_01b
 
-EvtSource N(beforeBattle_80221510) = {
+EvtScript N(beforeBattle_80221510) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetGroupEnabled, 13, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(afterBattle_80221544) = {
+EvtScript N(afterBattle_80221544) = {
     EVT_RETURN
     EVT_END
 };

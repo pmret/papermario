@@ -51,7 +51,7 @@ ApiStatus N(func_802A1420_722F60)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x84)
     EVT_EXEC_WAIT(battle_item_thunder_bolt_UseItemWithEffect)
     EVT_THREAD

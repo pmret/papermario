@@ -23,10 +23,10 @@ ApiStatus N(func_80242288_CCD598)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802422C0_CCD5D0)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80244F00);
-extern EvtSource N(80243E78);
-extern EvtSource N(8024352C);
-extern EvtSource N(80243870);
-extern EvtSource N(80244F30);
-extern EvtSource N(80245224);
-extern EvtSource N(d_80242360);
-extern EvtSource N(main);
+extern EvtScript N(80243E78);
+extern EvtScript N(8024352C);
+extern EvtScript N(80243870);
+extern EvtScript N(80244F30);
+extern EvtScript N(80245224);
+extern EvtScript N(d_80242360);
+extern EvtScript N(main);

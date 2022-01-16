@@ -10,7 +10,7 @@ s32 N(itemList_80242040)[] = {
     ITEM_NONE,
 };
 
-EvtSource N(80242048) = {
+EvtScript N(80242048) = {
     EVT_CALL(FadeOutMusic, 0, 1000)
     EVT_SET(EVT_VAR(0), 0)
     EVT_IF_EQ(EVT_VAR(0), 0)
@@ -79,7 +79,7 @@ EvtSource N(80242048) = {
     EVT_END
 };
 
-EvtSource N(80242498) = {
+EvtScript N(80242498) = {
     EVT_SET(EVT_VAR(0), 1)
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_CALL(DisablePlayerInput, TRUE)
@@ -147,7 +147,7 @@ EvtSource N(80242498) = {
     EVT_END
 };
 
-EvtSource N(exitSingleDoor_802428D4) = {
+EvtScript N(exitSingleDoor_802428D4) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(0), 0)
@@ -162,13 +162,13 @@ EvtSource N(exitSingleDoor_802428D4) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_80242978) = EXIT_WALK_SCRIPT(60,  1, "arn_03",  0);
+EvtScript N(exitWalk_80242978) = EXIT_WALK_SCRIPT(60,  1, "arn_03",  0);
 
-EvtSource N(exitWalk_802429D4) = EXIT_WALK_SCRIPT(60,  2, "mim_12",  1);
+EvtScript N(exitWalk_802429D4) = EXIT_WALK_SCRIPT(60,  2, "mim_12",  1);
 
 static const f64 rodata_alignment = 0.0;
 
-EvtSource N(80242A30) = {
+EvtScript N(80242A30) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetPlayerPos, -28, 0, -333)
@@ -305,7 +305,7 @@ EvtSource N(80242A30) = {
     EVT_END
 };
 
-EvtSource N(802433C8) = {
+EvtScript N(802433C8) = {
     EVT_BIND_TRIGGER(N(exitWalk_80242978), TRIGGER_FLOOR_ABOVE, 5, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_802429D4), TRIGGER_FLOOR_ABOVE, 1, 1, 0)
     EVT_IF_LT(EVT_SAVE_VAR(0), -24)
@@ -317,7 +317,7 @@ EvtSource N(802433C8) = {
     EVT_END
 };
 
-EvtSource N(enterWalk_8024346C) = {
+EvtScript N(enterWalk_8024346C) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -346,7 +346,7 @@ EvtSource N(enterWalk_8024346C) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 34)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)

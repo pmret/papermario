@@ -3,18 +3,18 @@
 #include "sprite/npc/goomba.h"
 #include "effects.h"
 
-EvtSource N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
+EvtScript N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
 
-EvtSource N(exitWalk_8024114C) = EXIT_WALK_SCRIPT(60,  1, "arn_04",  0);
+EvtScript N(exitWalk_8024114C) = EXIT_WALK_SCRIPT(60,  1, "arn_04",  0);
 
-EvtSource N(802411A8) = {
+EvtScript N(802411A8) = {
     EVT_BIND_TRIGGER(N(exitWalk_802410F0), TRIGGER_FLOOR_ABOVE, 1, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_8024114C), TRIGGER_FLOOR_ABOVE, 6, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 34)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -34,7 +34,7 @@ static s32 N(pad_12C4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_DIZZY_DIAL, -248, 193, 45, 17, EVT_SAVE_FLAG(1005))
     EVT_CALL(MakeItemEntity, ITEM_LETTER07, 536, 260, 227, 17, EVT_SAVE_FLAG(1006))
     EVT_CALL(MakeEntity, 0x802EA564, -350, 172, 170, 0, 343, MAKE_ENTITY_END)
@@ -60,7 +60,7 @@ NpcAISettings N(npcAISettings_802413D0) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80241400) = {
+EvtScript N(npcAI_80241400) = {
     EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_802413D0)))
     EVT_RETURN
     EVT_END
@@ -89,7 +89,7 @@ NpcAISettings N(npcAISettings_8024144C) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_8024147C) = {
+EvtScript N(npcAI_8024147C) = {
     EVT_CALL(N(func_80240C90_BDDE40), EVT_PTR(N(npcAISettings_8024144C)), 8)
     EVT_RETURN
     EVT_END

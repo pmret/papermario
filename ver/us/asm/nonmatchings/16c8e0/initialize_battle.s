@@ -97,8 +97,8 @@ glabel initialize_battle
 /* 16CB68 8023E288 00000000 */   nop
 /* 16CB6C 8023E28C 0C051FB1 */  jal       set_windows_visible
 /* 16CB70 8023E290 24040001 */   addiu    $a0, $zero, 1
-/* 16CB74 8023E294 3C048029 */  lui       $a0, %hi(D_80291F80)
-/* 16CB78 8023E298 24841F80 */  addiu     $a0, $a0, %lo(D_80291F80)
+/* 16CB74 8023E294 3C048029 */  lui       $a0, %hi(HudScript_HPBar)
+/* 16CB78 8023E298 24841F80 */  addiu     $a0, $a0, %lo(HudScript_HPBar)
 /* 16CB7C 8023E29C 0C050529 */  jal       create_hud_element
 /* 16CB80 8023E2A0 00000000 */   nop
 /* 16CB84 8023E2A4 3C01802A */  lui       $at, %hi(D_8029EFBC)
@@ -109,8 +109,8 @@ glabel initialize_battle
 /* 16CB98 8023E2B8 3C12802A */  lui       $s2, %hi(D_8029EFC0)
 /* 16CB9C 8023E2BC 2652EFC0 */  addiu     $s2, $s2, %lo(D_8029EFC0)
 .L8023E2C0:
-/* 16CBA0 8023E2C0 3C048008 */  lui       $a0, %hi(D_80080FF0)
-/* 16CBA4 8023E2C4 24840FF0 */  addiu     $a0, $a0, %lo(D_80080FF0)
+/* 16CBA0 8023E2C0 3C048008 */  lui       $a0, %hi(HudScript_Item_StarPoint)
+/* 16CBA4 8023E2C4 24840FF0 */  addiu     $a0, $a0, %lo(HudScript_Item_StarPoint)
 /* 16CBA8 8023E2C8 0C050529 */  jal       create_hud_element
 /* 16CBAC 8023E2CC 26310001 */   addiu    $s1, $s1, 1
 /* 16CBB0 8023E2D0 AE420000 */  sw        $v0, ($s2)
@@ -128,8 +128,8 @@ glabel initialize_battle
 /* 16CBE0 8023E300 3C12802A */  lui       $s2, %hi(D_8029EFE8)
 /* 16CBE4 8023E304 2652EFE8 */  addiu     $s2, $s2, %lo(D_8029EFE8)
 .L8023E308:
-/* 16CBE8 8023E308 3C048010 */  lui       $a0, %hi(D_80104BEC)
-/* 16CBEC 8023E30C 24844BEC */  addiu     $a0, $a0, %lo(D_80104BEC)
+/* 16CBE8 8023E308 3C048010 */  lui       $a0, %hi(HudScript_StatusSPShine)
+/* 16CBEC 8023E30C 24844BEC */  addiu     $a0, $a0, %lo(HudScript_StatusSPShine)
 /* 16CBF0 8023E310 0C050529 */  jal       create_hud_element
 /* 16CBF4 8023E314 26310001 */   addiu    $s1, $s1, 1
 /* 16CBF8 8023E318 AE420000 */  sw        $v0, ($s2)
@@ -147,8 +147,8 @@ glabel initialize_battle
 /* 16CC28 8023E348 3C12802A */  lui       $s2, %hi(D_8029F010)
 /* 16CC2C 8023E34C 2652F010 */  addiu     $s2, $s2, %lo(D_8029F010)
 .L8023E350:
-/* 16CC30 8023E350 3C048008 */  lui       $a0, %hi(D_800810C8)
-/* 16CC34 8023E354 248410C8 */  addiu     $a0, $a0, %lo(D_800810C8)
+/* 16CC30 8023E350 3C048008 */  lui       $a0, %hi(HudScript_Item_SmallStarPoint)
+/* 16CC34 8023E354 248410C8 */  addiu     $a0, $a0, %lo(HudScript_Item_SmallStarPoint)
 /* 16CC38 8023E358 0C050529 */  jal       create_hud_element
 /* 16CC3C 8023E35C 26310001 */   addiu    $s1, $s1, 1
 /* 16CC40 8023E360 AE420000 */  sw        $v0, ($s2)

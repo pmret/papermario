@@ -4,13 +4,13 @@
 
 #define NAMESPACE b_area_nok
 
-extern ActorDesc N(goomba);
-extern ActorDesc N(spiked_goomba);
-extern ActorDesc N(paragoomba);
-extern ActorDesc N(koopa_troopa);
-extern ActorDesc N(paratroopa);
-extern ActorDesc N(fuzzy);
-extern ActorDesc N(kent_c_koopa);
+extern ActorBlueprint N(goomba);
+extern ActorBlueprint N(spiked_goomba);
+extern ActorBlueprint N(paragoomba);
+extern ActorBlueprint N(koopa_troopa);
+extern ActorBlueprint N(paratroopa);
+extern ActorBlueprint N(fuzzy);
+extern ActorBlueprint N(kent_c_koopa);
 
 extern Stage N(nok_01);
 extern Stage N(nok_02);

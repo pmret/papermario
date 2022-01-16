@@ -69,9 +69,9 @@ extern s32 N(idleAnimations_8021CAFC)[];
 extern s32 N(idleAnimations_8021B338)[];
 extern s32 N(idleAnimations_8021B3D0)[];
 extern s32 N(idleAnimations_8021B3DC)[];
-extern EvtSource N(init_8021B3E8);
+extern EvtScript N(init_8021B3E8);
 
-ActorPartDesc N(partsTable_8021B280)[] = {
+ActorPartBlueprint N(partsTable_8021B280)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -122,7 +122,7 @@ ActorPartDesc N(partsTable_8021B280)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_PARAGOOMBA,
     .level = 6,
@@ -181,11 +181,11 @@ s32 N(idleAnimations_8021B3DC)[] = {
     STATUS_END,
 };
 
-extern EvtSource N(takeTurn_8021BD5C);
-extern EvtSource N(idle_8021B434);
-extern EvtSource N(handleEvent_8021B768);
+extern EvtScript N(takeTurn_8021BD5C);
+extern EvtScript N(idle_8021B434);
+extern EvtScript N(handleEvent_8021B768);
 
-EvtSource N(init_8021B3E8) = {
+EvtScript N(init_8021B3E8) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021BD5C)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021B434)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021B768)))
@@ -193,7 +193,7 @@ EvtSource N(init_8021B3E8) = {
     EVT_END
 };
 
-EvtSource N(idle_8021B434) = {
+EvtScript N(idle_8021B434) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LW(0))
     EVT_ADD(LW(0), 80)
@@ -241,7 +241,7 @@ EvtSource N(idle_8021B434) = {
     EVT_END
 };
 
-EvtSource N(8021B6F0) = {
+EvtScript N(8021B6F0) = {
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
@@ -251,9 +251,9 @@ EvtSource N(8021B6F0) = {
     EVT_END
 };
 
-extern EvtSource N(8021C574);
+extern EvtScript N(8021C574);
 
-EvtSource N(handleEvent_8021B768) = {
+EvtScript N(handleEvent_8021B768) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -365,7 +365,7 @@ EvtSource N(handleEvent_8021B768) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_8021BD5C) = {
+EvtScript N(takeTurn_8021BD5C) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -477,11 +477,11 @@ EvtSource N(takeTurn_8021BD5C) = {
     EVT_END
 };
 
-extern EvtSource N(8021CB94);
+extern EvtScript N(8021CB94);
 
 #include "common/StartRumbleWithParams.inc.c"
 
-EvtSource N(8021C574) = {
+EvtScript N(8021C574) = {
     EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(SetPartFlags, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_NO_TARGET)
     EVT_CALL(SetPartFlags, ACTOR_SELF, 3, ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000)
@@ -577,11 +577,11 @@ s32 N(idleAnimations_8021CB48)[] = {
     STATUS_END,
 };
 
-extern EvtSource N(takeTurn_8021D6E8);
-extern EvtSource N(idle_8021CBE0);
-extern EvtSource N(handleEvent_8021CEBC);
+extern EvtScript N(takeTurn_8021D6E8);
+extern EvtScript N(idle_8021CBE0);
+extern EvtScript N(handleEvent_8021CEBC);
 
-EvtSource N(8021CB94) = {
+EvtScript N(8021CB94) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021D6E8)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021CBE0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021CEBC)))
@@ -589,7 +589,7 @@ EvtSource N(8021CB94) = {
     EVT_END
 };
 
-EvtSource N(idle_8021CBE0) = {
+EvtScript N(idle_8021CBE0) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LW(0))
     EVT_ADD(LW(0), 80)
@@ -639,7 +639,7 @@ EvtSource N(idle_8021CBE0) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8021CEBC) = {
+EvtScript N(handleEvent_8021CEBC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -758,7 +758,7 @@ EvtSource N(handleEvent_8021CEBC) = {
 
 #include "common/anglestuff.inc.c"
 
-EvtSource N(takeTurn_8021D6E8) = {
+EvtScript N(takeTurn_8021D6E8) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)

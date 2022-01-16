@@ -684,8 +684,8 @@ glabel msg_draw_frame
 /* C4C24 8012E524 0000102D */  daddu     $v0, $zero, $zero
 .L8012E528:
 /* C4C28 8012E528 0000702D */  daddu     $t6, $zero, $zero
-/* C4C2C 8012E52C 3C058009 */  lui       $a1, %hi(D_8008FEE0)
-/* C4C30 8012E530 24A5FEE0 */  addiu     $a1, $a1, %lo(D_8008FEE0)
+/* C4C2C 8012E52C 3C058009 */  lui       $a1, %hi(gMessageBoxFrameParts)
+/* C4C30 8012E530 24A5FEE0 */  addiu     $a1, $a1, %lo(gMessageBoxFrameParts)
 /* C4C34 8012E534 03A0202D */  daddu     $a0, $sp, $zero
 /* C4C38 8012E538 00021980 */  sll       $v1, $v0, 6
 .L8012E53C:

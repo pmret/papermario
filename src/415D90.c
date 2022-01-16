@@ -1,27 +1,87 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern s32 D_80107D48;
-extern s32 D_80107D98;
-extern s32 D_80107CA8;
-extern s32 D_80107CD0;
-extern s32 D_80107CF8;
-extern s32 D_80107D20;
-extern s32 D_80107D70;
-extern s32 D_80107DC0;
-extern s32 D_80107DE8;
-extern s32 D_80107E10;
-extern s32 D_80107E38;
-extern s32 D_80107E60;
-extern s32 D_80107E88;
-extern s32 D_80107EB0;
-extern s32 D_80107ED8;
-extern s32 D_80107F00;
-extern s32 D_80107F28;
-extern s32 D_80107F50;
-extern s32 D_80107FC8;
-extern s32 D_80107FF0;
-extern s32 D_80108974;
+extern HudScript HudScript_YellowArrow[];
+
+extern HudScript HudScript_MenuFlee[];
+extern HudScript HudScript_MenuFleeDisabled[];
+extern HudScript HudScript_MenuDefend[];
+extern HudScript HudScript_MenuDefendDisabled[];
+extern HudScript HudScript_MenuStrategies[];
+extern HudScript HudScript_MenuStrategiesDisabled[];
+extern HudScript HudScript_MenuPouch[];
+extern HudScript HudScript_MenuPouchDisabled[];
+extern HudScript HudScript_MenuDoNothing[];
+extern HudScript HudScript_MenuDoNothingDisabled[];
+
+extern HudScript HudScript_Kooper[];
+extern HudScript HudScript_Bombette[];
+extern HudScript HudScript_Partner0[];
+extern HudScript HudScript_Partner0Disabled[];
+extern HudScript HudScript_Goombario[];
+extern HudScript HudScript_GoombarioDisabled[];
+extern HudScript HudScript_KooperDisabled[];
+extern HudScript HudScript_BombetteDisabled[];
+extern HudScript HudScript_Parakarry[];
+extern HudScript HudScript_ParakarryDisabled[];
+extern HudScript HudScript_Bow[];
+extern HudScript HudScript_BowDisabled[];
+extern HudScript HudScript_Watt[];
+extern HudScript HudScript_WattDisabled[];
+extern HudScript HudScript_Sushie[];
+extern HudScript HudScript_SushieDisabled[];
+extern HudScript HudScript_Lakilester[];
+extern HudScript HudScript_LakilesterDisabled[];
+extern HudScript HudScript_PartnerA[];
+extern HudScript HudScript_PartnerADisabled[];
+
+extern HudScript HudScript_MenuBoots1[];
+extern HudScript HudScript_MenuBoots1Disabled[];
+extern HudScript HudScript_MenuBoots2[];
+extern HudScript HudScript_MenuBoots2Disabled[];
+extern HudScript HudScript_MenuBoots3[];
+extern HudScript HudScript_MenuBoots3Disabled[];
+
+extern HudScript HudScript_MenuHammer1[];
+extern HudScript HudScript_MenuHammer1Disabled[];
+extern HudScript HudScript_MenuHammer2[];
+extern HudScript HudScript_MenuHammer2Disabled[];
+extern HudScript HudScript_MenuHammer3[];
+extern HudScript HudScript_MenuHammer3Disabled[];
+
+extern HudScript HudScript_MenuItem[];
+extern HudScript HudScript_MenuItemDisabled[];
+
+extern HudScript HudScript_MenuStarPower[];
+extern HudScript HudScript_MenuStarPowerDisabled[];
+
+extern HudScript HudScript_Eldstar[];
+extern HudScript HudScript_EldstarDisabled[];
+extern HudScript HudScript_Mamar[];
+extern HudScript HudScript_MamarDisabled[];
+extern HudScript HudScript_Skolar[];
+extern HudScript HudScript_SkolarDisabled[];
+extern HudScript HudScript_Muskular[];
+extern HudScript HudScript_MuskularDisabled[];
+extern HudScript HudScript_Misstar[];
+extern HudScript HudScript_MisstarDisabled[];
+extern HudScript HudScript_Klevar[];
+extern HudScript HudScript_KlevarDisabled[];
+extern HudScript HudScript_Kalmar[];
+extern HudScript HudScript_KalmarDisabled[];
+extern HudScript HudScript_StarBeam[];
+extern HudScript HudScript_StarBeamDisabled[];
+extern HudScript HudScript_PeachBeam[];
+extern HudScript HudScript_PeachBeamDisabled[];
+
+extern HudScript HudScript_MoveDiamond[];
+extern HudScript HudScript_MoveBlueOrb[];
+extern HudScript HudScript_MoveGreenOrb[];
+extern HudScript HudScript_MoveRedOrb[];
+extern HudScript HudScript_MoveDiamondDisabled[];
+extern HudScript HudScript_MoveBlueOrbDisabled[];
+extern HudScript HudScript_MoveGreenOrbDisabled[];
+extern HudScript HudScript_MoveRedOrbDisabled[];
 
 extern u8 D_802AD000;
 extern u8 D_802AD001;
@@ -93,43 +153,69 @@ s16 D_802AB340[] = { 0x001C, 0x0028 };
 
 s16 D_802AB344[] = { 0, -2 };
 
-s32 battle_menu_iconScripts[] = { 0x8010876C, 0x8010876C, 0x80108744, 0x8010876C, 0x80108794, 0x801087BC, 0x801087E4, 0x8010880C };
+HudScript* battle_menu_JumpHudScripts[] = {
+    HudScript_MenuBoots1Disabled, HudScript_MenuBoots1Disabled,
+    HudScript_MenuBoots1,HudScript_MenuBoots1Disabled,
+    HudScript_MenuBoots2, HudScript_MenuBoots2Disabled,
+    HudScript_MenuBoots3, HudScript_MenuBoots3Disabled };
 
-s32 D_802AB368[] = { 0x8010885C, 0x8010885C, 0x80108834, 0x8010885C, 0x80108884, 0x801088AC, 0x801088D4, 0x801088FC };
+HudScript* battle_menu_HammerHudScripts[] = {
+    HudScript_MenuHammer1Disabled, HudScript_MenuHammer1Disabled,
+    HudScript_MenuHammer1, HudScript_MenuHammer1Disabled,
+    HudScript_MenuHammer2, HudScript_MenuHammer2Disabled,
+    HudScript_MenuHammer3, HudScript_MenuHammer3Disabled };
 
-s32 D_802AB388[] = { 0x80108924, 0x8010894C };
+HudScript* battle_menu_ItemHudScripts[] = { HudScript_MenuItem, HudScript_MenuItemDisabled };
 
-s32 D_802AB390[] = { &D_80108974, 0x8010899C };
+HudScript* battle_menu_StarPowerHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
 
-s32 D_802AB398[] = { &D_80108974, 0x8010899C, 0x80107990, 0x801079BC, 0x801079E8, 0x80107A14, 0x80107A40, 0x80107A6C, 0x80107A98, 0x80107AC4, 0x80107AF0, 0x80107B1C, 0x80107B48, 0x80107B74, 0x80107BA0, 0x80107BCC, 0x80107BF8, 0x80107C24, 0x80107C50, 0x80107C7C, &D_80108974, 0x8010899C, &D_80108974, 0x8010899C };
+HudScript* battle_menu_StarPowerMovesHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled, HudScript_Eldstar, HudScript_EldstarDisabled,
+    HudScript_Mamar, HudScript_MamarDisabled, HudScript_Skolar, HudScript_SkolarDisabled,
+    HudScript_Muskular, HudScript_MuskularDisabled, HudScript_Misstar, HudScript_MisstarDisabled,
+    HudScript_Klevar, HudScript_KlevarDisabled, HudScript_Kalmar, HudScript_KalmarDisabled,
+    HudScript_StarBeam, HudScript_StarBeamDisabled, HudScript_PeachBeam, HudScript_PeachBeamDisabled,
+    HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled, HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
 
-s32* D_802AB3F8[] = { &D_80107CA8, &D_80107CF8, &D_80107D48, &D_80107D98, &D_80107DE8, &D_80107CA8, &D_80107E88, &D_80107ED8, &D_80107F28, &D_80107E38, &D_80107FC8, &D_80107FC8, &D_80107FC8, &D_80107FC8, &D_80107FC8, &D_80107FC8 };
+HudScript* battle_menu_PartnerHudScripts[] = { HudScript_Partner0, HudScript_Goombario, HudScript_Kooper, HudScript_Bombette,
+    HudScript_Parakarry, HudScript_Partner0, HudScript_Watt, HudScript_Sushie,
+    HudScript_Lakilester, HudScript_Bow, HudScript_PartnerA, HudScript_PartnerA,
+    HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA, HudScript_PartnerA };
 
-s32* D_802AB438[] = { &D_80107CD0, &D_80107D20, &D_80107D70, &D_80107DC0, &D_80107E10, &D_80107CD0, &D_80107EB0, &D_80107F00, &D_80107F50, &D_80107E60, &D_80107FF0, &D_80107FF0, &D_80107FF0, &D_80107FF0, &D_80107FF0, &D_80107FF0 };
+HudScript* battle_menu_DisabledPartnerHudScripts[] = { HudScript_Partner0Disabled, HudScript_GoombarioDisabled, HudScript_KooperDisabled, HudScript_BombetteDisabled,
+    HudScript_ParakarryDisabled, HudScript_Partner0Disabled, HudScript_WattDisabled, HudScript_SushieDisabled,
+    HudScript_LakilesterDisabled, HudScript_BowDisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled,
+    HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled, HudScript_PartnerADisabled };
 
-s32 D_802AB478[] = { 0x80292200 };
+HudScript* battle_menu_StrategiesHudScript[] = { HudScript_MenuStrategies };
 
-s32 D_802AB47C[] = { 0x80292228 };
+HudScript* battle_menu_DisabledStrategiesHudScript[] = { HudScript_MenuStrategiesDisabled };
 
-s32 D_802AB480[] = { 0x802922A0, 0x802922C8 };
+HudScript* battle_menu_DoNothingHudScripts[] = { HudScript_MenuDoNothing, HudScript_MenuDoNothingDisabled };
 
-s32 D_802AB488[] = { 0x80292160, 0x80292188 };
+HudScript* battle_menu_FleeHudScripts[] = { HudScript_MenuFlee, HudScript_MenuFleeDisabled };
 
-s32 battle_menu_leftJustfiedMessages[] = { 0x001D0039, 0x001D0038, 0x001D003F, 0x001D003B, 0x001D0044 };
+// Jump, Hammer, Items, RunAway, Defense
+s32 battle_menu_leftJustfiedMessagesA[] = { 0x001D0039, 0x001D0038, 0x001D003F, 0x001D003B, 0x001D0044 };
 
-s32 D_802AB4A4[] = { 0x001D003E, 0x001D0045, 0x001D0043, 0x001D003A };
+// Change Member, Abilities, Strategies, Star Spirits
+s32 battle_menu_leftJustfiedMessagesB[] = { 0x001D003E, 0x001D0045, 0x001D0043, 0x001D003A };
 
-s32 D_802AB4B4[] = { 0x001D003C, 0x001D0046, 0x001D0048 };
+// Do Nothing, Act Later, Focus
+s32 battle_menu_leftJustfiedMessagesC[] = { 0x001D003C, 0x001D0046, 0x001D0048 };
 
-s32 battle_menu_centeredMessages[] = { 0x001D004B, 0x001D004A };
+// Jump, Hammer
+s32 battle_menu_centeredMessagesA[] = { 0x001D004B, 0x001D004A };
 
-s32 D_802AB4C8[] = { 0x001D0050, 0x001D004D, 0x001D0052, 0x001D004F, 0x001D0053 };
+// Items, RunAway, Defense, Change Member, Abilities
+s32 battle_menu_centeredMessagesB[] = { 0x001D0050, 0x001D004D, 0x001D0052, 0x001D004F, 0x001D0053 };
 
-s32 D_802AB4DC[] = { 0x001D0051 };
+// Strategies
+s32 battle_menu_centeredMessagesC[] = { 0x001D0051 };
 
-s32 D_802AB4E0[] = { 0x001D004C, 0x001D004E, 0x001D0056, 0x001D0055 };
+// Star Spirits, Do Nothing, Act Later, Focus
+s32 battle_menu_centeredMessagesD[] = { 0x001D004C, 0x001D004E, 0x001D0056, 0x001D0055 };
 
-s8 D_802AB4F0[] = { 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x1A, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x34, 0x00, 0x00, 0x00, 0x39, 0x00, 0x00, 0x00, 0x31, 0x00, 0x00, 0x00, 0x37, };
+s32 D_802AB4F0[] = { 0x2, 0x1, 0x4, 0x6, 0x3, 0x5, 0x1A, 0x3, 0x34, 0x39, 0x31, 0x37 };
 
 // s8 D_802AB513
 
@@ -137,14 +223,26 @@ s32 D_802AB520[] = { 0x00000000, 0x00090012, 0x000A001A, 0x000B001C, 0x000C0017,
 
 s32 D_802AB558[] = { 0x00000000, 0x00090002, 0x000A0005, 0x000B0006, 0x000C0002, 0x009D0002, 0x000E0002, 0x000F0002, 0x00100002, 0x000D0002, 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
 
-s32 D_802AB590[] = { 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, &D_80107CF8, &D_80107D20, 0x80109338, 0x801093D8, 0x80109360, 0x80109400, 0x80109388, 0x80109428, 0x801093B0, 0x80109450, &D_80107D48, &D_80107D70, 0x80109338, 0x801093D8, 0x80109360, 0x80109400, 0x80109388, 0x80109428, 0x801093B0, 0x80109450, &D_80107D98, &D_80107DC0, 0x80109338, 0x801093D8, 0x80109360, 0x80109400, 0x80109388, 0x80109428, 0x801093B0, 0x80109450, &D_80107DE8, &D_80107E10, 0x80109338, 0x801093D8, 0x80109360, 0x80109400, 0x80109388, 0x80109428, 0x801093B0, 0x80109450, &D_80107CA8, &D_80107CD0, 0x80109338, 0x801093D8, 0x80109360, 0x80109400, 0x80109388, 0x80109428, 0x801093B0, 0x80109450, &D_80107E88, &D_80107EB0, 0x80109338, 0x801093D8, 0x80109360, 0x80109400, 0x80109388, 0x80109428, 0x801093B0, 0x80109450, &D_80107ED8, &D_80107F00, 0x80109338, 0x801093D8, 0x80109360, 0x80109400, 0x80109388, 0x80109428, 0x801093B0, 0x80109450, &D_80107F28, &D_80107F50, 0x80109338, 0x801093D8, 0x80109360, 0x80109400, 0x80109388, 0x80109428, 0x801093B0, 0x80109450, &D_80107E38, &D_80107E60, 0x80109338, 0x801093D8, 0x80109360, 0x80109400, 0x80109388, 0x80109428, 0x801093B0, 0x80109450 };
+HudScript* battle_menu_PartnerMoveHudScripts[] = {
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    HudScript_Goombario, HudScript_GoombarioDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Kooper, HudScript_KooperDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Bombette, HudScript_BombetteDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Parakarry, HudScript_ParakarryDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Partner0, HudScript_Partner0Disabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Watt, HudScript_WattDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Sushie, HudScript_SushieDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Lakilester, HudScript_LakilesterDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled,
+    HudScript_Bow, HudScript_BowDisabled, HudScript_MoveDiamond, HudScript_MoveDiamondDisabled, HudScript_MoveBlueOrb, HudScript_MoveBlueOrbDisabled, HudScript_MoveGreenOrb, HudScript_MoveGreenOrbDisabled, HudScript_MoveRedOrb, HudScript_MoveRedOrbDisabled };
 
-s32 D_802AB720[] = { &D_80108974, 0x8010899C };
+HudScript* battle_menu_PeachStarPowerHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
 
+// Focus
 s32 D_802AB728[] = { 0x001D0055 };
 
-s32 D_802AB72C[] = { &D_80108974, 0x8010899C };
+HudScript* battle_menu_TwinkStarPowerHudScripts[] = { HudScript_MenuStarPower, HudScript_MenuStarPowerDisabled };
 
+// Dash
 s32 D_802AB734[] = { 0x001D0057 };
 
 s32 D_802AB738[] = { 0x00000000, 0x001D0007, 0x001D0008, 0x001D0009, 0x001D000A, 0x001D000B, 0x001D000C, 0x001D000D, 0x001D000E, 0x001D000F, 0x001D0010, 0x001D0011, 0x001D0012, 0x00000000 };
@@ -299,7 +397,7 @@ void func_802A2910(void) {
         set_hud_element_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    set_hud_element_anim(battle_menu_moveCursorIcon, D_80104A28);
+    set_hud_element_anim(battle_menu_moveCursorIcon, HudScript_AnimatedHandPointer);
     set_window_update(1, 5);
 
     if (!battle_menu_hasSpiritsMenu) {
@@ -350,7 +448,7 @@ void func_802A2AB8(void) {
         set_hud_element_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    set_hud_element_anim(battle_menu_moveCursorIcon, D_80104A28);
+    set_hud_element_anim(battle_menu_moveCursorIcon, HudScript_AnimatedHandPointer);
     battle_menu_moveTextColor = 10;
     D_802AD10F = 1;
     battle_menu_moveState = 20;
@@ -501,7 +599,7 @@ void func_802A47E0(void) {
     set_hud_element_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
     set_hud_element_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
     set_hud_element_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
-    set_hud_element_anim(D_802AD618, D_80104A28);
+    set_hud_element_anim(D_802AD618, HudScript_AnimatedHandPointer);
     set_window_update(6, 5);
     set_window_update(7, 5);
     set_window_update(8, 1);
@@ -525,7 +623,7 @@ void func_802A48FC(void) {
     set_hud_element_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
     set_hud_element_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
     set_hud_element_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
-    set_hud_element_anim(D_802AD618, D_80104A28);
+    set_hud_element_anim(D_802AD618, HudScript_AnimatedHandPointer);
     D_802AD614 = 10;
     D_802AD60B = 1;
     D_802AD604 = 20;
@@ -677,43 +775,43 @@ s32 can_btl_state_update_switch_to_player(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
-    if (battleStatus->flags2 & 2) {
+    if (battleStatus->flags2 & BS_FLAGS2_2) {
         return FALSE;
     } else {
         s8 debuff = player->debuff;
-        s32 ret = player->koStatus == 0xD;
+        s32 playerCantMove = player->koStatus == STATUS_DAZE;
 
-        if (debuff == 9) {
-            ret = FALSE;
+        if (debuff == STATUS_POISON) {
+            playerCantMove = FALSE;
         }
-        if (debuff == 10) {
-            ret = FALSE;
+        if (debuff == STATUS_SHRINK) {
+            playerCantMove = FALSE;
         }
-        if (debuff == 6) {
-            ret = TRUE;
+        if (debuff == STATUS_SLEEP) {
+            playerCantMove = TRUE;
         }
-        if (debuff == 3) {
-            ret = TRUE;
+        if (debuff == STATUS_FEAR) {
+            playerCantMove = TRUE;
         }
-        if (debuff == 4) {
-            ret = TRUE;
+        if (debuff == STATUS_DIZZY) {
+            playerCantMove = TRUE;
         }
-        if (debuff == 5) {
-            ret = TRUE;
+        if (debuff == STATUS_PARALYZE) {
+            playerCantMove = TRUE;
         }
-        if (debuff == 7) {
-            ret = TRUE;
+        if (debuff == STATUS_FROZEN) {
+            playerCantMove = TRUE;
         }
-        if (debuff == 8) {
-            ret = TRUE;
+        if (debuff == STATUS_STOP) {
+            playerCantMove = TRUE;
         }
-        if (player->stoneStatus == 0xC) {
-            ret = TRUE;
+        if (player->stoneStatus == STATUS_STONE) {
+            playerCantMove = TRUE;
         }
         if (battleStatus->outtaSightActive) {
-            ret = TRUE;
+            playerCantMove = TRUE;
         }
-        return !ret;
+        return !playerCantMove;
     }
 }
 
@@ -721,40 +819,40 @@ s32 func_802A58D0(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     s8 partnerDebuff;
-    s32 ret;
+    s32 partnerCantMove;
 
-    if (battleStatus->flags2 & 4 || partner == PARTNER_NONE || partner->flags & 0x200000) {
+    if (battleStatus->flags2 & BS_FLAGS2_4 || partner == PARTNER_NONE || partner->flags & 0x200000) {
         return FALSE;
     }
 
     partnerDebuff = partner->debuff;
-    ret = partner->koStatus == 0xD;
+    partnerCantMove = partner->koStatus == STATUS_DAZE;
 
-    if (partnerDebuff == 9) {
-        ret = FALSE;
+    if (partnerDebuff == STATUS_POISON) {
+        partnerCantMove = FALSE;
     }
-    if (partnerDebuff == 10) {
-        ret = FALSE;
+    if (partnerDebuff == STATUS_SHRINK) {
+        partnerCantMove = FALSE;
     }
-    if (partnerDebuff == 6) {
-        ret = TRUE;
+    if (partnerDebuff == STATUS_SLEEP) {
+        partnerCantMove = TRUE;
     }
-    if (partnerDebuff == 3) {
-        ret = TRUE;
+    if (partnerDebuff == STATUS_FEAR) {
+        partnerCantMove = TRUE;
     }
-    if (partnerDebuff == 5) {
-        ret = TRUE;
+    if (partnerDebuff == STATUS_PARALYZE) {
+        partnerCantMove = TRUE;
     }
-    if (partnerDebuff == 7) {
-        ret = TRUE;
+    if (partnerDebuff == STATUS_FROZEN) {
+        partnerCantMove = TRUE;
     }
-    if (partnerDebuff == 8) {
-        ret = TRUE;
+    if (partnerDebuff == STATUS_STOP) {
+        partnerCantMove = TRUE;
     }
-    if (partner->stoneStatus == 0xC) {
-        ret = TRUE;
+    if (partner->stoneStatus == STATUS_STONE) {
+        partnerCantMove = TRUE;
     }
-    return !ret;
+    return !partnerCantMove;
 }
 
 INCLUDE_ASM(s32, "415D90", btl_state_update_player_menu);
@@ -881,7 +979,7 @@ void btl_state_draw_partner_menu(void) {
 }
 
 s32 func_802A9B30(void) {
-    return (gBattleStatus.flags2 & 4) <= 0;
+    return (gBattleStatus.flags2 & BS_FLAGS2_4) <= 0;
 }
 
 INCLUDE_ASM(s32, "415D90", btl_state_update_peach_menu);

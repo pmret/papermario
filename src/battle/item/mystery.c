@@ -54,7 +54,7 @@ extern s32 D_802A25F4;
 extern s32 D_802A25F8;
 extern s16** D_802A25FC;
 extern HudElement** D_802A25C8;
-extern struct N(tempStc) D_8008A680[100];
+extern struct N(tempStc) gItemHudScripts[100];
 
 ApiStatus N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -72,7 +72,7 @@ ApiStatus N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
             HudElement* icon;
             HudElement** iconPtr;
             struct N(tempStc)* ic;
-            StaticItem* itemTable;
+            ItemData* itemTable;
 
             D_802A25F8 = create_generic_entity_frontUI(NULL, func_802A123C_72C7EC);
             D_802A25EC = rand_int(18200);
@@ -88,7 +88,7 @@ ApiStatus N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
             }
 
             i = 0;
-            ic = &D_8008A680;
+            ic = &gItemHudScripts;
             itemTable = gItemTable;
             iconPtr = &D_802A25C8;
             for (; i < 7; i++, iconPtr++) {
@@ -273,7 +273,7 @@ s32 N(D_802A229C_72D84C)[8] = {
     0x0000008A, 0x0000008C, 0x00000085, 0x0000008A
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x00000096)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD

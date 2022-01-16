@@ -37,7 +37,7 @@ s32 N(statusTable_8022205C)[] = {
 
 extern s32 N(idleAnimations_80222154)[];
 
-ActorPartDesc N(partsTable_80222108)[] = {
+ActorPartBlueprint N(partsTable_80222108)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -52,9 +52,9 @@ ActorPartDesc N(partsTable_80222108)[] = {
     },
 };
 
-extern EvtSource N(init_802221A0);
+extern EvtScript N(init_802221A0);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_FUZZY,
     .level = 6,
@@ -90,11 +90,11 @@ s32 N(idleAnimations_80222154)[] = {
     STATUS_END,
 };
 
-extern EvtSource N(takeTurn_80222860);
-extern EvtSource N(idle_802221EC);
-extern EvtSource N(handleEvent_802221FC);
+extern EvtScript N(takeTurn_80222860);
+extern EvtScript N(idle_802221EC);
+extern EvtScript N(handleEvent_802221FC);
 
-EvtSource N(init_802221A0) = {
+EvtScript N(init_802221A0) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80222860)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_802221EC)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_802221FC)))
@@ -102,12 +102,12 @@ EvtSource N(init_802221A0) = {
     EVT_END
 };
 
-EvtSource N(idle_802221EC) = {
+EvtScript N(idle_802221EC) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(handleEvent_802221FC) = {
+EvtScript N(handleEvent_802221FC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -228,7 +228,7 @@ EvtSource N(handleEvent_802221FC) = {
 
 #include "common/UnkBattleFunc2.inc.c"
 
-EvtSource N(takeTurn_80222860) = {
+EvtScript N(takeTurn_80222860) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)

@@ -20,7 +20,7 @@ MapConfig N(config) = {
     .tattle = { .get = N(func_80240000_CB9200) },
 };
 
-EvtSource N(802414E0) = SCRIPT({
+EvtScript N(802414E0) = SCRIPT({
     GetEntryID(EVT_VAR(0));
     if (EVT_VAR(0) == 1) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
@@ -38,11 +38,11 @@ EvtSource N(802414E0) = SCRIPT({
     }
 });
 
-EvtSource N(802415C4) = SCRIPT({
+EvtScript N(802415C4) = SCRIPT({
     PushSong(137, 2);
 });
 
-EvtSource N(802415E8) = SCRIPT({
+EvtScript N(802415E8) = SCRIPT({
     FadeOutMusic(0, 250);
     sleep 10;
     PopSong();
@@ -52,7 +52,7 @@ static s32 N(pad_1624)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80241630) = SCRIPT({
+EvtScript N(80241630) = SCRIPT({
     if (EVT_STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
         MakeItemEntity(ITEM_WATER_STONE, 0, -60, 6, 1, 0);
     }
@@ -62,7 +62,7 @@ static s32 N(pad_167C) = {
     0x00000000,
 };
 
-EvtSource N(80241680) = SCRIPT({
+EvtScript N(80241680) = SCRIPT({
     group 11;
     EVT_VAR(10) = EVT_VAR(0);
     EVT_VAR(11) = EVT_VAR(1);
@@ -101,13 +101,13 @@ EvtSource N(80241680) = SCRIPT({
     goto 0;
 });
 
-EvtSource N(exitWalk_8024192C) = EXIT_WALK_SCRIPT(60,  0, "flo_24",  1);
+EvtScript N(exitWalk_8024192C) = EXIT_WALK_SCRIPT(60,  0, "flo_24",  1);
 
-EvtSource N(80241988) = SCRIPT({
+EvtScript N(80241988) = SCRIPT({
     bind N(exitWalk_8024192C) TRIGGER_FLOOR_ABOVE 0;
 });
 
-EvtSource N(main) = SCRIPT({
+EvtScript N(main) = SCRIPT({
     EVT_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -166,17 +166,17 @@ static s32 N(pad_1CA8)[] = {
 
 s32** N(D_80241CB0_CBAEB0) = NULL;
 
-EvtSource N(80241CB4) = SCRIPT({
+EvtScript N(80241CB4) = SCRIPT({
     ShowGotItem(EVT_VAR(0), 1, 0);
     return;
 });
 
-EvtSource N(80241CE4) = SCRIPT({
+EvtScript N(80241CE4) = SCRIPT({
     ShowGotItem(EVT_VAR(0), 1, 16);
     return;
 });
 
-EvtSource N(updateTexturePan_80241D14) = SCRIPT({
+EvtScript N(updateTexturePan_80241D14) = SCRIPT({
     group 0;
     if (EVT_VAR(5) == 1) {
         if (EVT_VAR(6) == 1) {
@@ -191,7 +191,7 @@ EvtSource N(updateTexturePan_80241D14) = SCRIPT({
     N(UnkTexturePanFunc2)();
 });
 
-EvtSource N(80241DB0) = SCRIPT({
+EvtScript N(80241DB0) = SCRIPT({
     MakeLerp(-50, 170, 385, 0);
 1:
     UpdateLerp();
@@ -202,7 +202,7 @@ EvtSource N(80241DB0) = SCRIPT({
     }
 });
 
-EvtSource N(80241E40) = SCRIPT({
+EvtScript N(80241E40) = SCRIPT({
     MakeLerp(0, 100, 90, 1);
 1:
     UpdateLerp();
@@ -218,7 +218,7 @@ EvtSource N(80241E40) = SCRIPT({
     }
 });
 
-EvtSource N(80241F20) = SCRIPT({
+EvtScript N(80241F20) = SCRIPT({
     EnableTexPanning(53, 1);
     spawn {
         EVT_VAR(0) = 10;
@@ -238,13 +238,13 @@ EvtSource N(80241F20) = SCRIPT({
     }
 });
 
-EvtSource N(80242030) = SCRIPT({
+EvtScript N(80242030) = SCRIPT({
     sleep 60;
     EnableModel(53, 1);
     spawn N(80241F20);
 });
 
-EvtSource N(8024206C) = SCRIPT({
+EvtScript N(8024206C) = SCRIPT({
     sleep 80;
     EnableNpcShadow(NPC_LILY, FALSE);
     GetNpcPos(NPC_LILY, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
@@ -263,7 +263,7 @@ EvtSource N(8024206C) = SCRIPT({
     }
 });
 
-EvtSource N(80242188) = SCRIPT({
+EvtScript N(80242188) = SCRIPT({
     DisablePlayerPhysics(TRUE);
     sleep 40;
     SetPlayerAnimation(0x80024);
@@ -291,7 +291,7 @@ EvtSource N(80242188) = SCRIPT({
     DisablePlayerPhysics(FALSE);
 });
 
-EvtSource N(8024230C) = SCRIPT({
+EvtScript N(8024230C) = SCRIPT({
     sleep 80;
     GetPlayerPos(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
     UseSettingsFrom(0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
@@ -303,7 +303,7 @@ EvtSource N(8024230C) = SCRIPT({
     WaitForCam(0, 1.0);
 });
 
-EvtSource N(802423E4) = SCRIPT({
+EvtScript N(802423E4) = SCRIPT({
     DisablePartnerAI(0);
     spawn N(80241DB0);
     spawn N(80241E40);
@@ -313,7 +313,7 @@ EvtSource N(802423E4) = SCRIPT({
     spawn N(8024230C);
 });
 
-EvtSource N(8024244C) = SCRIPT({
+EvtScript N(8024244C) = SCRIPT({
     MakeLerp(170, 75, 150, 0);
 1:
     UpdateLerp();
@@ -324,7 +324,7 @@ EvtSource N(8024244C) = SCRIPT({
     }
 });
 
-EvtSource N(802424DC) = SCRIPT({
+EvtScript N(802424DC) = SCRIPT({
     MakeLerp(100, 15, 150, 1);
 1:
     UpdateLerp();
@@ -340,14 +340,14 @@ EvtSource N(802424DC) = SCRIPT({
     }
 });
 
-EvtSource N(802425BC) = SCRIPT({
+EvtScript N(802425BC) = SCRIPT({
     spawn N(8024244C);
     spawn N(802424DC);
 });
 
 extern const char N(flo_24_name_hack)[];
 
-EvtSource N(802425E4) = SCRIPT({
+EvtScript N(802425E4) = SCRIPT({
     sleep 20;
     SetPlayerAnimation(ANIM_STAND_STILL);
     GetPlayerPos(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
@@ -376,7 +376,7 @@ EvtSource N(802425E4) = SCRIPT({
     sleep 100;
 });
 
-EvtSource N(802427EC) = SCRIPT({
+EvtScript N(802427EC) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     SetPlayerPos(-100, -10, -172);
@@ -418,7 +418,7 @@ EvtSource N(802427EC) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-EvtSource N(80242AE8) = SCRIPT({
+EvtScript N(80242AE8) = SCRIPT({
     if (EVT_STORY_PROGRESS < STORY_CH6_FILLED_SPRING_WITH_WATER) {
         EnableGroup(52, 0);
         EnableGroup(61, 0);
@@ -551,7 +551,7 @@ NpcSettings N(npcSettings_80243220) = {
 
 const char N(flo_24_name_hack)[] = "flo_24";
 
-EvtSource N(8024324C) = SCRIPT({
+EvtScript N(8024324C) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     SetNpcPos(NPC_LILY, 60, 0, 55);
@@ -574,7 +574,7 @@ s32 N(itemList_80243394)[] = {
     ITEM_NONE,
 };
 
-EvtSource N(8024339C) = SCRIPT({
+EvtScript N(8024339C) = SCRIPT({
     if (EVT_SAVE_FLAG(1376) == 1) {
         GetCurrentPartner(EVT_VAR(10));
         if (EVT_VAR(10) != 0) {
@@ -614,11 +614,11 @@ EvtSource N(8024339C) = SCRIPT({
     }
 });
 
-EvtSource N(802435F8) = SCRIPT({
+EvtScript N(802435F8) = SCRIPT({
     bind_padlock N(8024339C) TRIGGER_FLOOR_TOUCH 15 N(itemList_80243394);
 });
 
-EvtSource N(80243628) = SCRIPT({
+EvtScript N(80243628) = SCRIPT({
     sleep 10;
     GetNpcPos(NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     GetPlayerPos(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
@@ -648,7 +648,7 @@ EvtSource N(80243628) = SCRIPT({
     }
 });
 
-EvtSource N(interact_802437C8) = SCRIPT({
+EvtScript N(interact_802437C8) = SCRIPT({
     await N(802415C4);
     match EVT_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
@@ -734,7 +734,7 @@ EvtSource N(interact_802437C8) = SCRIPT({
     await N(802415E8);
 });
 
-EvtSource N(init_80243D78) = SCRIPT({
+EvtScript N(init_80243D78) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_802437C8));
     match EVT_STORY_PROGRESS {
         < STORY_CH6_GOT_WATER_STONE {
@@ -797,7 +797,7 @@ s32 N(D_80244070_CBD270) = {
     0x00000000,
 };
 
-EvtSource N(80244074) = SCRIPT({
+EvtScript N(80244074) = SCRIPT({
 
 });
 

@@ -4,7 +4,7 @@
 
 #define NAMESPACE b_area_mac_mac_02
 
-EvtSource N(beforeBattle_80232930) = {
+EvtScript N(beforeBattle_80232930) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_CALL(func_802536A8, 1)
@@ -12,7 +12,7 @@ EvtSource N(beforeBattle_80232930) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_8023297C) = {
+EvtScript N(afterBattle_8023297C) = {
     EVT_CALL(func_802536A8, 0)
     EVT_RETURN
     EVT_END

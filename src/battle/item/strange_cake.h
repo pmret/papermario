@@ -15,12 +15,12 @@ ApiStatus N(func_802A1AD8_731DD8)(Evt *script, s32 isInitialCall);
 ApiStatus N(func_802A1B14_731E14)(Evt *script, s32 isInitialCall);
 ApiStatus N(func_802A1B68_731E68)(Evt *script, s32 isInitialCall);
 
-extern EvtSource N(UseItemWithEffect);
-extern EvtSource N(PlayerGoHome);
-extern EvtSource N(EatItem);
-extern EvtSource N(script7);
-extern EvtSource N(script8);
-extern EvtSource N(script9);
+extern EvtScript N(UseItemWithEffect);
+extern EvtScript N(PlayerGoHome);
+extern EvtScript N(EatItem);
+extern EvtScript N(script7);
+extern EvtScript N(script8);
+extern EvtScript N(script9);
 
 #endif
 

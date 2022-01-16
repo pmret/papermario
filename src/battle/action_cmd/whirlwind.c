@@ -35,13 +35,13 @@ ApiStatus func_802A9000_423C70(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(&D_80108B28);
+    hudElement = create_hud_element(HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
 
-    hudElement = create_hud_element(&D_80108AFC);
+    hudElement = create_hud_element(HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
@@ -70,8 +70,8 @@ INCLUDE_ASM(s32, "battle/action_cmd/whirlwind", func_802A91E0_423E50);
 INCLUDE_ASM(s32, "battle/action_cmd/whirlwind", func_802A92F0_423F60);
 
 // hud element scripts
-extern HudElementAnim* D_802AA888_4254F8[];
-extern HudElementAnim* D_802AA8A0_425510[];
+extern HudScript* D_802AA888_4254F8[];
+extern HudScript* D_802AA8A0_425510[];
 
 void func_802A9744_4243B4(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

@@ -1912,12 +1912,12 @@ ApiStatus HPBarToHome(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->healthBarPosition.x = actor->homePos.x + actor->staticActorData->hpBarOffset.x;
-    actor->healthBarPosition.y = actor->homePos.y + actor->staticActorData->hpBarOffset.y;
+    actor->healthBarPosition.x = actor->homePos.x + actor->actorBlueprint->hpBarOffset.x;
+    actor->healthBarPosition.y = actor->homePos.y + actor->actorBlueprint->hpBarOffset.y;
     actor->healthBarPosition.z = actor->homePos.z;
 
     if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
-        actor->healthBarPosition.y = actor->homePos.y - actor->size.y - actor->staticActorData->hpBarOffset.y;
+        actor->healthBarPosition.y = actor->homePos.y - actor->size.y - actor->actorBlueprint->hpBarOffset.y;
     }
 
     actor->hpFraction = (actor->currentHP * 25) / actor->maxHP;
@@ -1935,12 +1935,12 @@ ApiStatus HPBarToCurrent(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->healthBarPosition.x = actor->currentPos.x + actor->staticActorData->hpBarOffset.x;
-    actor->healthBarPosition.y = actor->currentPos.y + actor->staticActorData->hpBarOffset.y;
+    actor->healthBarPosition.x = actor->currentPos.x + actor->actorBlueprint->hpBarOffset.x;
+    actor->healthBarPosition.y = actor->currentPos.y + actor->actorBlueprint->hpBarOffset.y;
     actor->healthBarPosition.z = actor->currentPos.z;
 
     if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
-        actor->healthBarPosition.y = actor->currentPos.y - actor->size.y - actor->staticActorData->hpBarOffset.y;
+        actor->healthBarPosition.y = actor->currentPos.y - actor->size.y - actor->actorBlueprint->hpBarOffset.y;
     }
 
     actor->hpFraction = (actor->currentHP * 25) / actor->maxHP;
@@ -1978,8 +1978,8 @@ ApiStatus func_8026D940(Evt* script, s32 isInitialCall) {
 
     actor->unk_198.x = x;
     actor->unk_198.y = y;
-    actor->healthBarPosition.x = actor->homePos.x + actor->staticActorData->hpBarOffset.x + actor->unk_198.x;
-    actor->healthBarPosition.y = actor->homePos.y + actor->staticActorData->hpBarOffset.y + actor->unk_198.y;
+    actor->healthBarPosition.x = actor->homePos.x + actor->actorBlueprint->hpBarOffset.x + actor->unk_198.x;
+    actor->healthBarPosition.y = actor->homePos.y + actor->actorBlueprint->hpBarOffset.y + actor->unk_198.y;
     actor->healthBarPosition.z = actor->homePos.z;
 
     if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {

@@ -5,13 +5,13 @@
 
 #define NAMESPACE battle_move_quake_hammer
 
-extern EvtSource D_802A3168_0073D038;
+extern EvtScript D_802A3168_0073D038;
 
 #include "world/common/IsBerserkerEquipped.inc.c"
 
 #include "world/common/IsRightOnEquipped.inc.c"
 
-EvtSource D_802A10B0_73AF80 = {
+EvtScript D_802A10B0_73AF80 = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
@@ -26,7 +26,7 @@ EvtSource D_802A10B0_73AF80 = {
     EVT_END
 };
 
-EvtSource D_802A118C_0073B05C = {
+EvtScript D_802A118C_0073B05C = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, -33, 0, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
@@ -36,7 +36,7 @@ EvtSource D_802A118C_0073B05C = {
     EVT_END
 };
 
-EvtSource D_802A1204_0073B0D4 = {
+EvtScript D_802A1204_0073B0D4 = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_SET(LW(1), 0)
@@ -67,7 +67,7 @@ EvtSource D_802A1204_0073B0D4 = {
     EVT_END
 };
 
-EvtSource D_802A1388_0073B258 = {
+EvtScript D_802A1388_0073B258 = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_SET(LW(1), 0)
@@ -98,7 +98,7 @@ EvtSource D_802A1388_0073B258 = {
     EVT_END
 };
 
-EvtSource D_802A150C_0073B3DC = {
+EvtScript D_802A150C_0073B3DC = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_SET(LW(1), 0)
@@ -129,7 +129,7 @@ EvtSource D_802A150C_0073B3DC = {
     EVT_END
 };
 
-EvtSource D_802A1690_0073B560 = {
+EvtScript D_802A1690_0073B560 = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
@@ -168,7 +168,7 @@ EvtSource D_802A1690_0073B560 = {
     EVT_END
 };
 
-EvtSource D_802A18AC_0073B77C = {
+EvtScript D_802A18AC_0073B77C = {
     EVT_CALL(func_80276EFC)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
     EVT_CALL(MoveBattleCamOver, 5)
@@ -186,7 +186,7 @@ EvtSource D_802A18AC_0073B77C = {
     EVT_END
 };
 
-EvtSource D_802A1998_0073B868 = {
+EvtScript D_802A1998_0073B868 = {
     EVT_CALL(func_80276EFC)
     EVT_CALL(func_802693F0)
     EVT_WAIT_FRAMES(20)
@@ -202,7 +202,7 @@ EvtSource D_802A1998_0073B868 = {
     EVT_END
 };
 
-EvtSource D_802A1A64_0073B934 = {
+EvtScript D_802A1A64_0073B934 = {
     EVT_CALL(func_80276EFC)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_29)
     EVT_CALL(func_802693F0)
@@ -219,7 +219,7 @@ EvtSource D_802A1A64_0073B934 = {
     EVT_END
 };
 
-EvtSource D_802A1B40 = {
+EvtScript D_802A1B40 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
     EVT_EXEC_WAIT(D_802A10B0_73AF80)
@@ -305,7 +305,7 @@ EvtSource D_802A1B40 = {
     EVT_END
 };
 
-EvtSource D_802A2000_0073BED0 = {
+EvtScript D_802A2000_0073BED0 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
     EVT_EXEC_WAIT(D_802A10B0_73AF80)
@@ -374,7 +374,7 @@ EvtSource D_802A2000_0073BED0 = {
     EVT_END
 };
 
-EvtSource D_802A23E8 = {
+EvtScript D_802A23E8 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
     EVT_EXEC_WAIT(D_802A10B0_73AF80)
@@ -443,7 +443,7 @@ EvtSource D_802A23E8 = {
     EVT_END
 };
 
-EvtSource D_802A27D0 = {
+EvtScript D_802A27D0 = {
     EVT_CALL(ChooseNextTarget, 10, LW(0))
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
@@ -501,7 +501,7 @@ EvtSource D_802A27D0 = {
     EVT_END
 };
 
-EvtSource D_802A2AFC_0073C9CC = {
+EvtScript D_802A2AFC_0073C9CC = {
     EVT_CALL(ChooseNextTarget, 10, LW(0))
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
@@ -550,7 +550,7 @@ EvtSource D_802A2AFC_0073C9CC = {
     EVT_END
 };
 
-EvtSource D_802A2DA0_0073CC70 = {
+EvtScript D_802A2DA0_0073CC70 = {
     EVT_CALL(ChooseNextTarget, 10, LW(0))
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
@@ -599,7 +599,7 @@ EvtSource D_802A2DA0_0073CC70 = {
     EVT_END
 };
 
-EvtSource D_802A3044_0073CF14 = {
+EvtScript D_802A3044_0073CF14 = {
     EVT_CALL(func_802694A4, 1)
     EVT_CALL(GetMenuSelection, LW(0), LW(1), LW(2))
     EVT_SWITCH(LW(1))
@@ -623,7 +623,7 @@ EvtSource D_802A3044_0073CF14 = {
     EVT_END
 };
 
-EvtSource D_802A3168_0073D038 = {
+EvtScript D_802A3168_0073D038 = {
     EVT_CALL(GetMenuSelection, LW(0), LW(1), LW(2))
     EVT_SWITCH(LW(1))
         EVT_CASE_EQ(0)

@@ -22,7 +22,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_12_tattle },
 };
 
-EvtSource N(80240750) = {
+EvtScript N(80240750) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_IF_EQ(EVT_VAR(0), 1)
         EVT_CALL(SetMusicTrack, 0, SONG_SUNSHINE_RETURNS, 0, 8)
@@ -38,13 +38,13 @@ EvtSource N(80240750) = {
     EVT_END
 };
 
-EvtSource N(8024080C) = {
+EvtScript N(8024080C) = {
     EVT_CALL(PushSong, 137, 3)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80240830) = {
+EvtScript N(80240830) = {
     EVT_CALL(FadeOutMusic, 0, 250)
     EVT_WAIT_FRAMES(10)
     EVT_CALL(PopSong)
@@ -56,7 +56,7 @@ static s32 N(pad_86C) = {
     0x00000000,
 };
 
-EvtSource N(80240870) = {
+EvtScript N(80240870) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -97,15 +97,15 @@ EvtSource N(80240870) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_80240B1C) = EXIT_WALK_SCRIPT(60,  0, "flo_11",  1);
+EvtScript N(exitWalk_80240B1C) = EXIT_WALK_SCRIPT(60,  0, "flo_11",  1);
 
-EvtSource N(80240B78) = {
+EvtScript N(80240B78) = {
     EVT_BIND_TRIGGER(N(exitWalk_80240B1C), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
@@ -169,14 +169,14 @@ NpcSettings N(npcSettings_80240E5C) = {
 
 s32** N(D_802417EC_CC261C) = NULL;
 
-EvtSource N(802417F0) = {
+EvtScript N(802417F0) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
     EVT_RETURN
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80241820) = {
+EvtScript N(80241820) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 16)
     EVT_RETURN
     EVT_RETURN
@@ -191,7 +191,7 @@ s32 N(D_80241854_CC2684) = {
     0x00000000,
 };
 
-EvtSource N(80241858) = {
+EvtScript N(80241858) = {
     EVT_SET(EVT_VAR(9), EVT_VAR(1))
     EVT_CALL(ShowKeyChoicePopup)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
@@ -216,7 +216,7 @@ EvtSource N(80241858) = {
     EVT_END
 };
 
-EvtSource N(8024199C) = {
+EvtScript N(8024199C) = {
     EVT_CALL(N(func_8024064C_CC147C), EVT_VAR(0))
     EVT_BIND_PADLOCK(N(80241858), 0x10, 0, EVT_PTR(N(D_802429E0)), 0, 1)
     EVT_CALL(N(func_802405C0_CC13F0), EVT_VAR(0))
@@ -228,7 +228,7 @@ s32 N(D_802419EC_CC281C)[] = {
     0x0000001E, 0x00000000,
 };
 
-EvtSource N(802419F4) = {
+EvtScript N(802419F4) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(GetNpcPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -250,7 +250,7 @@ EvtSource N(802419F4) = {
     EVT_END
 };
 
-EvtSource N(80241B6C) = {
+EvtScript N(80241B6C) = {
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_100)), TRUE)
     EVT_CALL(PlayerMoveTo, -5, 20, 20)
@@ -260,7 +260,7 @@ EvtSource N(80241B6C) = {
     EVT_END
 };
 
-EvtSource N(80241BE4) = {
+EvtScript N(80241BE4) = {
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetNpcFlagBits, 0, ((NPC_FLAG_100)), TRUE)
     EVT_CALL(SetNpcFlagBits, 1, ((NPC_FLAG_100)), TRUE)
@@ -272,7 +272,7 @@ EvtSource N(80241BE4) = {
     EVT_END
 };
 
-EvtSource N(interact_80241C8C) = {
+EvtScript N(interact_80241C8C) = {
     EVT_EXEC_WAIT(N(8024080C))
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(47)
@@ -378,7 +378,7 @@ EvtSource N(interact_80241C8C) = {
     EVT_END
 };
 
-EvtSource N(init_802423D0) = {
+EvtScript N(init_802423D0) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80241C8C)))
     EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(0), 35)

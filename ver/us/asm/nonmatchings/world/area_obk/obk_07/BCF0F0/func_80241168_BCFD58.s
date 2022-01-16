@@ -42,8 +42,8 @@ glabel func_80241168_BCFD58
 /* BCFDE8 802411F8 2484FFFF */  addiu     $a0, $a0, -1
 /* BCFDEC 802411FC 0481FFFD */  bgez      $a0, .L802411F4
 /* BCFDF0 80241200 2463FFFC */   addiu    $v1, $v1, -4
-/* BCFDF4 80241204 3C048011 */  lui       $a0, %hi(D_80108B28)
-/* BCFDF8 80241208 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)
+/* BCFDF4 80241204 3C048011 */  lui       $a0, %hi(HudScript_AButton)
+/* BCFDF8 80241208 24848B28 */  addiu     $a0, $a0, %lo(HudScript_AButton)
 /* BCFDFC 8024120C 3C013F80 */  lui       $at, 0x3f80
 /* BCFE00 80241210 44810000 */  mtc1      $at, $f0
 /* BCFE04 80241214 2402FFD0 */  addiu     $v0, $zero, -0x30
@@ -68,8 +68,8 @@ glabel func_80241168_BCFD58
 /* BCFE50 80241260 0200202D */  daddu     $a0, $s0, $zero
 /* BCFE54 80241264 0C051280 */  jal       set_hud_element_flags
 /* BCFE58 80241268 24050082 */   addiu    $a1, $zero, 0x82
-/* BCFE5C 8024126C 3C048011 */  lui       $a0, %hi(D_80108AFC)
-/* BCFE60 80241270 24848AFC */  addiu     $a0, $a0, %lo(D_80108AFC)
+/* BCFE5C 8024126C 3C048011 */  lui       $a0, %hi(HudScript_BlueMeter)
+/* BCFE60 80241270 24848AFC */  addiu     $a0, $a0, %lo(HudScript_BlueMeter)
 /* BCFE64 80241274 0C050529 */  jal       create_hud_element
 /* BCFE68 80241278 00000000 */   nop
 /* BCFE6C 8024127C 0040802D */  daddu     $s0, $v0, $zero
@@ -85,8 +85,8 @@ glabel func_80241168_BCFD58
 /* BCFE94 802412A4 0200202D */  daddu     $a0, $s0, $zero
 /* BCFE98 802412A8 0C051280 */  jal       set_hud_element_flags
 /* BCFE9C 802412AC 24050082 */   addiu    $a1, $zero, 0x82
-/* BCFEA0 802412B0 3C048011 */  lui       $a0, %hi(D_80109244)
-/* BCFEA4 802412B4 24849244 */  addiu     $a0, $a0, %lo(D_80109244)
+/* BCFEA0 802412B0 3C048011 */  lui       $a0, %hi(HudScript_RunAwayOK)
+/* BCFEA4 802412B4 24849244 */  addiu     $a0, $a0, %lo(HudScript_RunAwayOK)
 /* BCFEA8 802412B8 0C050529 */  jal       create_hud_element
 /* BCFEAC 802412BC 00000000 */   nop
 /* BCFEB0 802412C0 0040802D */  daddu     $s0, $v0, $zero

@@ -48,7 +48,7 @@ s32 N(statusTable_8022A2B8)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8022A364)[] = {
+ActorPartBlueprint N(partsTable_8022A364)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -63,9 +63,9 @@ ActorPartDesc N(partsTable_8022A364)[] = {
     },
 };
 
-extern EvtSource N(init_8022A3B0);
+extern EvtScript N(init_8022A3B0);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_THE_MASTER_1,
     .level = 0,
@@ -88,12 +88,12 @@ ActorDesc NAMESPACE = {
     .statusMessageOffset = { 10, 30 },
 };
 
-extern EvtSource N(takeTurn_8022AA54);
-extern EvtSource N(idle_8022A494);
-extern EvtSource N(handleEvent_8022B2CC);
-extern EvtSource N(nextTurn_8022B06C);
+extern EvtScript N(takeTurn_8022AA54);
+extern EvtScript N(idle_8022A494);
+extern EvtScript N(handleEvent_8022B2CC);
+extern EvtScript N(nextTurn_8022B06C);
 
-EvtSource N(init_8022A3B0) = {
+EvtScript N(init_8022A3B0) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8022AA54)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8022A494)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022B2CC)))
@@ -108,12 +108,12 @@ EvtSource N(init_8022A3B0) = {
     EVT_END
 };
 
-EvtSource N(idle_8022A494) = {
+EvtScript N(idle_8022A494) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(8022A4A4) = {
+EvtScript N(8022A4A4) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -215,7 +215,7 @@ EvtSource N(8022A4A4) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_8022AA54) = {
+EvtScript N(takeTurn_8022AA54) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -303,7 +303,7 @@ EvtSource N(takeTurn_8022AA54) = {
     EVT_END
 };
 
-EvtSource N(nextTurn_8022B06C) = {
+EvtScript N(nextTurn_8022B06C) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetBattlePhase, LW(0))
@@ -344,7 +344,7 @@ EvtSource N(nextTurn_8022B06C) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8022B2CC) = {
+EvtScript N(handleEvent_8022B2CC) = {
     EVT_EXEC_WAIT(N(8022A4A4))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
     EVT_IF_FLAG(LW(0), 0x351000)
