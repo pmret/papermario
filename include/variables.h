@@ -17,9 +17,9 @@ extern CollisionStatus gCollisionStatus;
 extern GameStatus gGameStatus;
 extern GameStatus* gGameStatusPtr;
 extern s32 gRandSeed;
-extern StaticItem gItemTable[364];
+extern ItemData gItemTable[364];
 extern UNK_FUN_PTR(gCurrentUpdateFunction);
-extern StaticMove gMoveTable[185];
+extern MoveData gMoveTable[185];
 
 extern s32 gBattleState;
 extern BattleStatus gBattleStatus;
@@ -95,17 +95,17 @@ extern MessagePrintState* gCurrentPrintContext;
 extern s32 D_802DB264;
 extern MessagePrintState* D_802DB268;
 
-extern StaticShadowData CircularShadowA;
-extern StaticShadowData CircularShadowB;
-extern StaticShadowData SquareShadow;
-extern s32 D_802EB390;
-extern s32 D_802EB394;
-extern MessagePrintState* D_802EB398;
-extern MessagePrintState* D_802EB39C;
+extern ShadowBlueprint CircularShadowA;
+extern ShadowBlueprint CircularShadowB;
+extern ShadowBlueprint SquareShadow;
+extern s32 SaveBlockTutorialMessagePrinterClosed;
+extern s32 SaveBlockResultMessagePrinterClosed;
+extern MessagePrintState* SaveBlockTutorialMessagePrinter;
+extern MessagePrintState* SaveBlockResultMessagePrinter;
 extern s32 D_802E99DC;
 
 extern Entity* D_802EB3A0;
-extern s32 D_8015C7D0[3]; // not size 3
+extern s32 CreateEntityVarArgBuffer[3]; // not size 3
 
 extern f32 D_800F7B70[4];
 
@@ -306,16 +306,15 @@ extern u8 D_800779B0;
 extern u32 D_80078174;
 extern u8 D_800A0963;
 
-extern UNK_TYPE D_802EB3B0;
+extern struct EffectInstance* TriggerBlockVanishEffect;
 extern UNK_TYPE D_00000094;
 extern UNK_TYPE D_00000094_2; // two symbols resolve to the same addr. Required for matching
-extern UNK_TYPE D_802EA0A0;
-extern StaticEntityData D_802EA07C;
+extern EntityBlueprint Entity_InertRedBlock;
+extern EntityBlueprint Entity_InertYellowBlock;
 extern UNK_TYPE D_802EA310;
-extern StaticEntityData Entity_HitGroundedYellowBlock;
-extern StaticEntityData Entity_HitFloatingYellowBlock;
-extern StaticEntityData Entity_HitRedBlock;
-extern s16 D_8015C7D2;
+extern EntityBlueprint Entity_HitGroundedYellowBlock;
+extern EntityBlueprint Entity_HitFloatingYellowBlock;
+extern EntityBlueprint Entity_HitRedBlock;
 
 extern UNK_TYPE D_0A000328;
 extern UNK_TYPE D_0A000380;
@@ -324,9 +323,9 @@ extern UNK_TYPE D_0A000800;
 extern UNK_TYPE D_0A000808;
 
 // Scripts
-extern EvtSource SCRIPT_NpcDefeat;
-extern EvtSource ShakeCam1;
-extern EvtSource ShakeCamX;
+extern EvtScript SCRIPT_NpcDefeat;
+extern EvtScript ShakeCam1;
+extern EvtScript ShakeCamX;
 
 extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;
@@ -388,18 +387,18 @@ extern s32 bMarioDefendAnims[];
 extern s32 bPeachIdleAnims[];
 
 // TODO: name these entity symbols
-extern StaticEntityData Entity_SavePoint; // entitySaveBlock
-extern StaticEntityData Entity_RedSwitch;
-extern StaticEntityData Entity_BlueSwitch; // entityBlueSwitch
-extern StaticEntityData Entity_HugeBlueSwitch; // entityHugeBlueSwitch
-extern StaticEntityData Entity_GreenStompSwitch;
-extern StaticEntityData Entity_ShatteringHammer1Block;
-extern StaticEntityData Entity_ShatteringHammer2Block;
-extern StaticEntityData Entity_ShatteringHammer3Block;
-extern StaticEntityData Entity_ShatteringHammer1BlockTiny;
-extern StaticEntityData Entity_ShatteringHammer2BlockTiny;
-extern StaticEntityData Entity_ShatteringHammer3BlockTiny;
-extern StaticEntityData Entity_ShatteringBrickBlock;
+extern EntityBlueprint Entity_SavePoint; // entitySaveBlock
+extern EntityBlueprint Entity_RedSwitch;
+extern EntityBlueprint Entity_BlueSwitch; // entityBlueSwitch
+extern EntityBlueprint Entity_HugeBlueSwitch; // entityHugeBlueSwitch
+extern EntityBlueprint Entity_GreenStompSwitch;
+extern EntityBlueprint Entity_ShatteringHammer1Block;
+extern EntityBlueprint Entity_ShatteringHammer2Block;
+extern EntityBlueprint Entity_ShatteringHammer3Block;
+extern EntityBlueprint Entity_ShatteringHammer1BlockTiny;
+extern EntityBlueprint Entity_ShatteringHammer2BlockTiny;
+extern EntityBlueprint Entity_ShatteringHammer3BlockTiny;
+extern EntityBlueprint Entity_ShatteringBrickBlock;
 
 // Temporary dead stuff
 extern PartnerActionStatus dead_gPartnerActionStatus2;

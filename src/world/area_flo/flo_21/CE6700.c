@@ -37,7 +37,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_21_tattle },
 };
 
-EvtSource N(80240D40) = {
+EvtScript N(80240D40) = {
     EVT_IF_EQ(EVT_SAVE_VAR(0), 56)
         EVT_CALL(FadeOutMusic, 0, 500)
     EVT_ELSE
@@ -49,7 +49,7 @@ EvtSource N(80240D40) = {
 
 #include "world/common/StarSpiritEffectFunc.inc.c"
 
-EvtSource N(80240DA0) = {
+EvtScript N(80240DA0) = {
     EVT_SET_GROUP(0)
     EVT_IF_EQ(EVT_VAR(5), 1)
         EVT_IF_EQ(EVT_VAR(6), 1)
@@ -66,7 +66,7 @@ EvtSource N(80240DA0) = {
     EVT_END
 };
 
-EvtSource N(80240E3C) = {
+EvtScript N(80240E3C) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_EQ(55)
             EVT_SET(EVT_VAR(0), 0)
@@ -145,15 +145,15 @@ EvtSource N(80240E3C) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_802412F4) = EXIT_WALK_SCRIPT(60,  0, "flo_19",  1);
+EvtScript N(exitWalk_802412F4) = EXIT_WALK_SCRIPT(60,  0, "flo_19",  1);
 
-EvtSource N(80241350) = {
+EvtScript N(80241350) = {
     EVT_BIND_TRIGGER(N(exitWalk_802412F4), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 39)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
@@ -191,37 +191,37 @@ s32 N(D_802414FC_CE7BFC)[] = {
     EVT_FIXED(0.900390625), EVT_FIXED(0.900390625), EVT_FIXED(0.900390625),
 };
 
-EvtSource N(80241560) = {
+EvtScript N(80241560) = {
     EVT_ADDF(EVT_MAP_VAR(0), EVT_FIXED(-1.5))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80241580) = {
+EvtScript N(80241580) = {
     EVT_ADDF(EVT_MAP_VAR(1), EVT_FIXED(-1.5))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(802415A0) = {
+EvtScript N(802415A0) = {
     EVT_ADDF(EVT_MAP_VAR(2), EVT_FIXED(-1.5))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(802415C0) = {
+EvtScript N(802415C0) = {
     EVT_ADDF(EVT_MAP_VAR(3), EVT_FIXED(-1.5))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(802415E0) = {
+EvtScript N(802415E0) = {
     EVT_ADDF(EVT_MAP_VAR(4), EVT_FIXED(-1.5))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80241600) = {
+EvtScript N(80241600) = {
     EVT_THREAD
         EVT_SET(EVT_VAR(15), 0)
         EVT_LABEL(0)
@@ -287,7 +287,7 @@ Vec3f N(vectorList_8024189C)[] = {
     { 550.0, 104.0, 0.0 },
 };
 
-EvtSource N(802418C0) = {
+EvtScript N(802418C0) = {
     EVT_LABEL(0)
     EVT_CALL(PlaySound, 0x20B6)
     EVT_CALL(ShakeCam, 0, 0, 15, EVT_FIXED(1.0))
@@ -297,7 +297,7 @@ EvtSource N(802418C0) = {
     EVT_END
 };
 
-EvtSource N(80241920) = {
+EvtScript N(80241920) = {
     EVT_CALL(PlaySoundAtNpc, 0, 0x3C0, 0)
     EVT_CALL(PlayEffect, 0x25, 3, 650, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT_FRAMES(15)
@@ -334,7 +334,7 @@ EvtSource N(80241920) = {
     EVT_END
 };
 
-EvtSource N(80241B98) = {
+EvtScript N(80241B98) = {
     EVT_IF_GE(EVT_SAVE_VAR(0), 56)
         EVT_RETURN
     EVT_END_IF
@@ -437,7 +437,7 @@ EvtSource N(80241B98) = {
     EVT_END
 };
 
-EvtSource N(80242290) = {
+EvtScript N(80242290) = {
     EVT_SETF(EVT_VAR(0), EVT_FIXED(0.95))
     EVT_SETF(EVT_VAR(1), EVT_FIXED(1.1))
     EVT_LABEL(0)
@@ -505,7 +505,7 @@ s32 N(intTable_8024262C)[] = {
     0x0000000A, 0x00000006, 0x00000006, 0x0000000A,
 };
 
-EvtSource N(8024263C) = {
+EvtScript N(8024263C) = {
     EVT_SETF(EVT_VAR(0), 10)
     EVT_SETF(EVT_VAR(1), 1)
     EVT_CHILD_THREAD
@@ -552,7 +552,7 @@ EvtSource N(8024263C) = {
     EVT_END
 };
 
-EvtSource N(80242918) = {
+EvtScript N(80242918) = {
     EVT_SETF(EVT_MAP_VAR(11), EVT_FIXED(1.0))
     EVT_SETF(EVT_MAP_VAR(12), EVT_FIXED(1.0))
     EVT_CHILD_THREAD
@@ -633,7 +633,7 @@ EvtSource N(80242918) = {
     EVT_END
 };
 
-EvtSource N(80242D34) = {
+EvtScript N(80242D34) = {
     EVT_CHILD_THREAD
         EVT_SET(EVT_VAR(1), 0)
         EVT_LOOP(0)
@@ -678,7 +678,7 @@ EvtSource N(80242D34) = {
     EVT_END
 };
 
-EvtSource N(80243010) = {
+EvtScript N(80243010) = {
     EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_huff_n_puff_Palette_00_Anim_4)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_huff_n_puff_Palette_00_Anim_5)
     EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_huff_n_puff_Palette_00_Anim_6)
@@ -729,7 +729,7 @@ EvtSource N(80243010) = {
     EVT_END
 };
 
-EvtSource N(idle_80243428) = {
+EvtScript N(idle_80243428) = {
     EVT_LABEL(0)
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_LOOP(0)
@@ -746,7 +746,7 @@ EvtSource N(idle_80243428) = {
     EVT_END
 };
 
-EvtSource N(defeat_802434D8) = {
+EvtScript N(defeat_802434D8) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -765,12 +765,12 @@ EvtSource N(defeat_802434D8) = {
     EVT_END
 };
 
-EvtSource N(defeat_802435D4) = {
+EvtScript N(defeat_802435D4) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(init_802435E4) = {
+EvtScript N(init_802435E4) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), 56)
         EVT_CALL(SetEnemyFlagBits, -1, 4194304, 1)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80243428)))
@@ -783,7 +783,7 @@ EvtSource N(init_802435E4) = {
     EVT_END
 };
 
-EvtSource N(init_80243684) = {
+EvtScript N(init_80243684) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), 56)
         EVT_CALL(SetEnemyFlagBits, -1, 4194304, 1)
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802435D4)))
@@ -796,7 +796,7 @@ EvtSource N(init_80243684) = {
     EVT_END
 };
 
-EvtSource N(init_8024371C) = {
+EvtScript N(init_8024371C) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), 56)
         EVT_CALL(SetEnemyFlagBits, -1, 4194304, 1)
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802435D4)))
@@ -808,7 +808,7 @@ EvtSource N(init_8024371C) = {
     EVT_END
 };
 
-EvtSource N(init_802437A8) = {
+EvtScript N(init_802437A8) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tuff_puff_Palette_00_Anim_B)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, 0)
     EVT_RETURN

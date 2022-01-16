@@ -6,10 +6,10 @@
 #define NAMESPACE b_area_isk_part_1_swooper
 
 extern s32 N(idleAnimations_8021C5B4)[];
-extern EvtSource N(init_8021C64C);
-extern EvtSource N(takeTurn_8021DED4);
-extern EvtSource N(idle_8021C6B0);
-extern EvtSource N(handleEvent_8021D064);
+extern EvtScript N(init_8021C64C);
+extern EvtScript N(takeTurn_8021DED4);
+extern EvtScript N(idle_8021C6B0);
+extern EvtScript N(handleEvent_8021D064);
 
 s32 N(defenseTable_8021C4B0)[] = {
     ELEMENT_NORMAL, 0,
@@ -41,7 +41,7 @@ s32 N(statusTable_8021C4BC)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021C568)[] = {
+ActorPartBlueprint N(partsTable_8021C568)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -56,7 +56,7 @@ ActorPartDesc N(partsTable_8021C568)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_HP_OFFSET_BELOW,
     .type = ACTOR_TYPE_SWOOPER,
     .level = 10,
@@ -107,7 +107,7 @@ s32 N(idleAnimations_8021C600)[] = {
 
 #include "common/UnkBattleFunc1.inc.c"
 
-EvtSource N(init_8021C64C) = {
+EvtScript N(init_8021C64C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021DED4)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021C6B0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021D064)))
@@ -116,12 +116,12 @@ EvtSource N(init_8021C64C) = {
     EVT_END
 };
 
-EvtSource N(idle_8021C6B0) = {
+EvtScript N(idle_8021C6B0) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(8021C6C0) = {
+EvtScript N(8021C6C0) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(0)
@@ -147,7 +147,7 @@ EvtSource N(8021C6C0) = {
     EVT_END
 };
 
-EvtSource N(8021C880) = {
+EvtScript N(8021C880) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -235,7 +235,7 @@ EvtSource N(8021C880) = {
     EVT_END
 };
 
-EvtSource N(8021CD04) = {
+EvtScript N(8021CD04) = {
     EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(GetLastDamage, ACTOR_SELF, LW(0))
     EVT_IF_LE(LW(0), 0)
@@ -279,7 +279,7 @@ EvtSource N(8021CD04) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8021D064) = {
+EvtScript N(handleEvent_8021D064) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LW(0))
     EVT_IF_EQ(LW(0), 1)
         EVT_EXEC_WAIT(N(8021C880))
@@ -418,7 +418,7 @@ EvtSource N(handleEvent_8021D064) = {
     EVT_END
 };
 
-EvtSource N(8021D7E4) = {
+EvtScript N(8021D7E4) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -512,7 +512,7 @@ EvtSource N(8021D7E4) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_8021DED4) = {
+EvtScript N(takeTurn_8021DED4) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LW(0))
     EVT_IF_EQ(LW(0), 1)
         EVT_EXEC_WAIT(N(8021D7E4))

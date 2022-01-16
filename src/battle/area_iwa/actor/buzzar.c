@@ -8,20 +8,20 @@
 
 #define NAMESPACE b_area_iwa_buzzar
 
-extern EvtSource N(init_8021B7E4);
-extern EvtSource N(takeTurn_8021BCD8);
-extern EvtSource N(idle_8021B930);
-extern EvtSource N(handleEvent_8021B940);
-extern EvtSource N(nextTurn_8021B918);
-extern EvtSource N(8021BEBC);
-extern EvtSource N(8021CCE8);
-extern EvtSource N(8021DF2C);
-extern EvtSource N(8021F030);
-extern EvtSource N(8021F7EC);
-extern EvtSource N(8021F808);
-extern EvtSource N(8021F824);
-extern EvtSource N(8021FA2C);
-extern EvtSource N(8021FC34);
+extern EvtScript N(init_8021B7E4);
+extern EvtScript N(takeTurn_8021BCD8);
+extern EvtScript N(idle_8021B930);
+extern EvtScript N(handleEvent_8021B940);
+extern EvtScript N(nextTurn_8021B918);
+extern EvtScript N(8021BEBC);
+extern EvtScript N(8021CCE8);
+extern EvtScript N(8021DF2C);
+extern EvtScript N(8021F030);
+extern EvtScript N(8021F7EC);
+extern EvtScript N(8021F808);
+extern EvtScript N(8021F824);
+extern EvtScript N(8021FA2C);
+extern EvtScript N(8021FC34);
 
 
 s32 N(idleAnimations_8021B600)[] = {
@@ -71,7 +71,7 @@ s32 N(statusTable_8021B65C)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021B708)[] = {
+ActorPartBlueprint N(partsTable_8021B708)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -134,7 +134,7 @@ ActorPartDesc N(partsTable_8021B708)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_BUZZAR,
     .level = 35,
@@ -157,7 +157,7 @@ ActorDesc NAMESPACE = {
     .statusMessageOffset = { 1, 58 },
 };
 
-EvtSource N(init_8021B7E4) = {
+EvtScript N(init_8021B7E4) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
@@ -175,18 +175,18 @@ EvtSource N(init_8021B7E4) = {
     EVT_END
 };
 
-EvtSource N(nextTurn_8021B918) = {
+EvtScript N(nextTurn_8021B918) = {
     EVT_RETURN
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(idle_8021B930) = {
+EvtScript N(idle_8021B930) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(handleEvent_8021B940) = {
+EvtScript N(handleEvent_8021B940) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
     EVT_SWITCH(LW(0))
@@ -256,7 +256,7 @@ EvtSource N(handleEvent_8021B940) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_8021BCD8) = {
+EvtScript N(takeTurn_8021BCD8) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
@@ -292,7 +292,7 @@ EvtSource N(takeTurn_8021BCD8) = {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-EvtSource N(8021BEBC) = {
+EvtScript N(8021BEBC) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
@@ -510,7 +510,7 @@ EvtSource N(8021BEBC) = {
     EVT_END
 };
 
-EvtSource N(8021CCE8) = {
+EvtScript N(8021CCE8) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -718,7 +718,7 @@ EvtSource N(8021CCE8) = {
     EVT_END
 };
 
-EvtSource N(8021DCB8) = {
+EvtScript N(8021DCB8) = {
     EVT_CALL(GetAnimation, ACTOR_SELF, 1, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(NPC_ANIM_buzzar_Palette_00_Anim_1)
@@ -761,7 +761,7 @@ EvtSource N(8021DCB8) = {
     EVT_END
 };
 
-EvtSource N(8021DF2C) = {
+EvtScript N(8021DF2C) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -1010,7 +1010,7 @@ EvtSource N(8021DF2C) = {
     EVT_END
 };
 
-EvtSource N(8021F030) = {
+EvtScript N(8021F030) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -1126,19 +1126,19 @@ EvtSource N(8021F030) = {
     EVT_END
 };
 
-EvtSource N(8021F7EC) = {
+EvtScript N(8021F7EC) = {
     EVT_EXEC_WAIT(N(8021F824))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(8021F808) = {
+EvtScript N(8021F808) = {
     EVT_EXEC_WAIT(N(8021FA2C))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(8021F824) = {
+EvtScript N(8021F824) = {
     EVT_CALL(GetAnimation, ACTOR_SELF, 1, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(NPC_ANIM_buzzar_Palette_00_Anim_1)
@@ -1172,7 +1172,7 @@ EvtSource N(8021F824) = {
     EVT_END
 };
 
-EvtSource N(8021FA2C) = {
+EvtScript N(8021FA2C) = {
     EVT_CALL(GetAnimation, ACTOR_SELF, 1, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(NPC_ANIM_buzzar_Palette_00_Anim_1)
@@ -1206,7 +1206,7 @@ EvtSource N(8021FA2C) = {
     EVT_END
 };
 
-EvtSource N(8021FC34) = {
+EvtScript N(8021FC34) = {
     EVT_RETURN
     EVT_RETURN
     EVT_END

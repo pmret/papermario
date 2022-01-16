@@ -36,12 +36,12 @@ s32 N(statusTable_8021A39C)[] = {
 };
 
 extern s32 N(idleAnimations_8021A494)[];
-extern EvtSource N(init_8021BEBC);
-extern EvtSource N(takeTurn_8021B19C);
-extern EvtSource N(idle_8021A578);
-extern EvtSource N(handleEvent_8021A854);
+extern EvtScript N(init_8021BEBC);
+extern EvtScript N(takeTurn_8021B19C);
+extern EvtScript N(idle_8021A578);
+extern EvtScript N(handleEvent_8021A854);
 
-ActorPartDesc N(partsTable_8021A448)[] = {
+ActorPartBlueprint N(partsTable_8021A448)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -56,7 +56,7 @@ ActorPartDesc N(partsTable_8021A448)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_SPIKED_GOOMBA,
     .level = 6,
@@ -105,7 +105,7 @@ s32 N(idleAnimations_8021A4E0)[] = {
     STATUS_END,
 };
 
-EvtSource N(8021A52C) = {
+EvtScript N(8021A52C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021B19C)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021A578)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021A854)))
@@ -113,7 +113,7 @@ EvtSource N(8021A52C) = {
     EVT_END
 };
 
-EvtSource N(idle_8021A578) = {
+EvtScript N(idle_8021A578) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LW(0))
     EVT_ADD(LW(0), 80)
@@ -163,7 +163,7 @@ EvtSource N(idle_8021A578) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8021A854) = {
+EvtScript N(handleEvent_8021A854) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -297,7 +297,7 @@ EvtSource N(handleEvent_8021A854) = {
 
 #include "common/anglestuff.inc.c"
 
-EvtSource N(takeTurn_8021B19C) = {
+EvtScript N(takeTurn_8021B19C) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -475,9 +475,9 @@ EvtSource N(takeTurn_8021B19C) = {
     EVT_END
 };
 
-extern EvtSource N(nextTurn_8021C0FC);
+extern EvtScript N(nextTurn_8021C0FC);
 
-EvtSource N(init_8021BEBC) = {
+EvtScript N(init_8021BEBC) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021B19C)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021A578)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021A854)))
@@ -486,7 +486,7 @@ EvtSource N(init_8021BEBC) = {
     EVT_END
 };
 
-EvtSource N(8021BF1C) = {
+EvtScript N(8021BF1C) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
     EVT_WAIT_FRAMES(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
@@ -519,7 +519,7 @@ EvtSource N(8021BF1C) = {
     EVT_END
 };
 
-EvtSource N(nextTurn_8021C0FC) = {
+EvtScript N(nextTurn_8021C0FC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 0)
     EVT_CALL(GetBattlePhase, LW(0))

@@ -3,14 +3,14 @@
 
 #define NAMESPACE action_command_flee
 
-extern HudElementAnim HudScript_BlueMeter[];
-extern HudElementAnim HudScript_AButton[];
-extern HudElementAnim HudScript_RunAwayOK[];
-extern HudElementAnim HudScript_RunningAway[];
-extern HudElementAnim HudScript_100pct[];
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
+extern HudScript HudScript_RunAwayOK[];
+extern HudScript HudScript_RunningAway[];
+extern HudScript HudScript_100pct[];
 extern s32 D_80294200;
 extern s32 D_802A9920;
-extern HudElementAnim HudScript_MashAButton[];
+extern HudScript HudScript_MashAButton[];
 
 ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

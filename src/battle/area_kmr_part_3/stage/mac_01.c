@@ -6,7 +6,7 @@
 ApiStatus func_80219D60_4491A0(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "battle/area_kmr_part_3/448E80", func_80219D60_4491A0);
 
-EvtSource N(80233AF0) = {
+EvtScript N(80233AF0) = {
     EVT_SET(LW(10), LW(0))
     EVT_LABEL(0)
     EVT_CALL(func_80219D60_4491A0, 0)
@@ -100,7 +100,7 @@ EvtSource N(80233AF0) = {
     EVT_END
 };
 
-EvtSource N(80234180) = {
+EvtScript N(80234180) = {
     EVT_SET(LW(10), LW(0))
     EVT_LOOP(0)
         EVT_CALL(TranslateModel, LW(10), 1, 0, 0)
@@ -157,7 +157,7 @@ s32 N(intTable_80234524)[] = {
     0xFFFFFFF8, 0xFFFFFFF9, 0xFFFFFFFA, 0xFFFFFFFC, 0xFFFFFFFE, 0xFFFFFFFF, 0x00000000, 0x000000FF,
 };
 
-EvtSource N(80234564) = {
+EvtScript N(80234564) = {
     EVT_SET(LW(10), LW(0))
     EVT_SET(LW(11), LW(1))
     EVT_SET(LW(5), 5)
@@ -203,7 +203,7 @@ EvtSource N(80234564) = {
     EVT_END
 };
 
-EvtSource N(802347D0) = {
+EvtScript N(802347D0) = {
     EVT_SET(LW(10), LW(0))
     EVT_LOOP(0)
         EVT_CALL(TranslateModel, LW(10), 0, 0, 0)
@@ -255,7 +255,7 @@ EvtSource N(802347D0) = {
     EVT_END
 };
 
-EvtSource N(beforeBattle_80234B74) = {
+EvtScript N(beforeBattle_80234B74) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_THREAD
@@ -277,7 +277,7 @@ EvtSource N(beforeBattle_80234B74) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_80234C70) = {
+EvtScript N(afterBattle_80234C70) = {
     EVT_RETURN
     EVT_END
 };

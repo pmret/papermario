@@ -1,6 +1,6 @@
 #include "kmr_03.h"
 
-EvtSource N(80242340) = {
+EvtScript N(80242340) = {
     EVT_CALL(UseSettingsFrom, 0, -270, 20, -80)
     EVT_CALL(SetPanTarget, 0, -270, 20, -80)
     EVT_CALL(SetCamDistance, 0, EVT_FIXED(700.0))

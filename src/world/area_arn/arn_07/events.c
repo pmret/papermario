@@ -7,13 +7,13 @@
 #include "sprite/npc/boo.h"
 #include "sprite/npc/bootler.h"
 
-EvtSource N(80243790) = {
+EvtScript N(80243790) = {
     EVT_EXEC(N(802437AC))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(802437AC) = {
+EvtScript N(802437AC) = {
     EVT_SETF(EVT_VAR(0), EVT_FIXED(0.0))
     EVT_SET(EVT_VAR(1), 30)
     EVT_CALL(PlaySoundAtModel, 23, 0x8000004A, 0)
@@ -50,7 +50,7 @@ EvtSource N(802437AC) = {
     EVT_END
 };
 
-EvtSource N(802439B0) = {
+EvtScript N(802439B0) = {
     EVT_SET_GROUP(0)
     EVT_CALL(SetTimeFreezeMode, 1)
     EVT_CALL(ShowKeyChoicePopup)
@@ -79,13 +79,13 @@ EvtSource N(802439B0) = {
     EVT_END
 };
 
-EvtSource N(80243B28) = {
+EvtScript N(80243B28) = {
     EVT_BIND_TRIGGER(N(exitSingleDoor_802428D4), TRIGGER_WALL_PRESS_A, 10, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), -24)
         EVT_CALL(MakeEntity, 0x802BCD68, 10, 30, -155, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80243B28)))
@@ -113,7 +113,7 @@ NpcAISettings N(npcAISettings_80243BD8) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80243C08) = {
+EvtScript N(npcAI_80243C08) = {
     EVT_CALL(SetSelfVar, 0, 1)
     EVT_CALL(SetSelfVar, 5, -850)
     EVT_CALL(SetSelfVar, 6, 60)
@@ -133,12 +133,12 @@ NpcSettings N(npcSettings_80243C78) = {
     .unk_2A = 1,
 };
 
-EvtSource N(80243CA4) = {
+EvtScript N(80243CA4) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80243CB4) = {
+EvtScript N(80243CB4) = {
     EVT_RETURN
     EVT_END
 };
@@ -183,7 +183,7 @@ NpcSettings N(npcSettings_80243DA0) = {
     .level = 99,
 };
 
-EvtSource N(80243DCC) = {
+EvtScript N(80243DCC) = {
     EVT_LOOP(0)
         EVT_CALL(PlaySoundAtNpc, 1, SOUND_20F6, 0)
         EVT_CALL(ShakeCam, 0, 0, 3, EVT_FIXED(0.8))
@@ -192,7 +192,7 @@ EvtSource N(80243DCC) = {
     EVT_END
 };
 
-EvtSource N(80243E24) = {
+EvtScript N(80243E24) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseSettingsFrom, 0, 236, 0, -46)
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
@@ -217,7 +217,7 @@ EvtSource N(80243E24) = {
     EVT_END
 };
 
-EvtSource N(80243FE8) = {
+EvtScript N(80243FE8) = {
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_22)
     EVT_WAIT_FRAMES(15)
@@ -407,7 +407,7 @@ EvtSource N(80243FE8) = {
     EVT_END
 };
 
-EvtSource N(idle_80244C54) = {
+EvtScript N(idle_80244C54) = {
     EVT_LOOP(0)
         EVT_CALL(GetSelfVar, 0, EVT_VAR(0))
         EVT_IF_EQ(EVT_VAR(0), 1)
@@ -420,7 +420,7 @@ EvtSource N(idle_80244C54) = {
     EVT_END
 };
 
-EvtSource N(idle_80244CC8) = {
+EvtScript N(idle_80244CC8) = {
     EVT_LABEL(10)
     EVT_LOOP(0)
         EVT_CALL(GetSelfVar, 0, EVT_VAR(0))
@@ -472,7 +472,7 @@ EvtSource N(idle_80244CC8) = {
     EVT_END
 };
 
-EvtSource N(defeat_80244FB8) = {
+EvtScript N(defeat_80244FB8) = {
     EVT_CALL(SetEncounterStatusFlags, 2, 1)
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
@@ -487,7 +487,7 @@ EvtSource N(defeat_80244FB8) = {
     EVT_END
 };
 
-EvtSource N(init_80245058) = {
+EvtScript N(init_80245058) = {
     EVT_IF_NE(EVT_SAVE_VAR(0), -17)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -495,7 +495,7 @@ EvtSource N(init_80245058) = {
     EVT_END
 };
 
-EvtSource N(init_80245090) = {
+EvtScript N(init_80245090) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244C54)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244FB8)))
@@ -506,7 +506,7 @@ EvtSource N(init_80245090) = {
     EVT_END
 };
 
-EvtSource N(init_80245104) = {
+EvtScript N(init_80245104) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244CC8)))
     EVT_IF_NE(EVT_SAVE_VAR(0), -17)
@@ -516,7 +516,7 @@ EvtSource N(init_80245104) = {
     EVT_END
 };
 
-EvtSource N(init_80245164) = {
+EvtScript N(init_80245164) = {
     EVT_IF_NE(EVT_SAVE_VAR(0), -17)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -524,7 +524,7 @@ EvtSource N(init_80245164) = {
     EVT_END
 };
 
-EvtSource N(init_8024519C) = {
+EvtScript N(init_8024519C) = {
     EVT_IF_NE(EVT_SAVE_VAR(0), -17)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -559,7 +559,7 @@ s32 N(extraAnimationList_80245208)[] = {
     ANIM_END,
 };
 
-EvtSource N(idle_80245210) = {
+EvtScript N(idle_80245210) = {
     EVT_LOOP(0)
         EVT_LOOP(10)
             EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -578,7 +578,7 @@ EvtSource N(idle_80245210) = {
     EVT_END
 };
 
-EvtSource N(80245304) = {
+EvtScript N(80245304) = {
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(func_802CF56C, 2)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -714,7 +714,7 @@ EvtSource N(80245304) = {
     EVT_END
 };
 
-EvtSource N(init_80245C9C) = {
+EvtScript N(init_80245C9C) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_IF_EQ(EVT_VAR(0), 3)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80245210)))
@@ -1032,7 +1032,7 @@ StaticNpc N(npcGroup_80246E7C) = {
     .extraAnimations = N(extraAnimationList_80245208),
 };
 
-EvtSource N(init_8024706C) = {
+EvtScript N(init_8024706C) = {
     EVT_IF_GE(EVT_SAVE_VAR(0), -26)
         EVT_IF_LT(EVT_SAVE_VAR(0), -15)
             EVT_CALL(RemoveNpc, NPC_SELF)

@@ -3,13 +3,13 @@
 
 #define NAMESPACE b_area_kmr_part_2_kmr_02
 
-EvtSource N(beforeBattle_80224700) = {
+EvtScript N(beforeBattle_80224700) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(afterBattle_80224720) = {
+EvtScript N(afterBattle_80224720) = {
     EVT_RETURN
     EVT_END
 };

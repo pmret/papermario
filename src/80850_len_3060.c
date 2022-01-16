@@ -4,15 +4,15 @@
 extern s32 TimesHudScript;
 extern s32 DigitHudScripts[10];
 
-extern HudElementAnim HudScript_StatusHP[];
-extern HudElementAnim HudScript_StatusHeart[];
-extern HudElementAnim HudScript_StatusFP[];
-extern HudElementAnim HudScript_StatusFlower[];
-extern HudElementAnim HudScript_Item_CoinSparkleRandom[];
-extern HudElementAnim HudScript_StatusStarPoint[];
-extern HudElementAnim HudScript_StatusStar1[];
-extern HudElementAnim HudScript_StatusTimes[];
-extern HudElementAnim HudScript_StatusSPShine[];
+extern HudScript HudScript_StatusHP[];
+extern HudScript HudScript_StatusHeart[];
+extern HudScript HudScript_StatusFP[];
+extern HudScript HudScript_StatusFlower[];
+extern HudScript HudScript_Item_CoinSparkleRandom[];
+extern HudScript HudScript_StatusStarPoint[];
+extern HudScript HudScript_StatusStar1[];
+extern HudScript HudScript_StatusTimes[];
+extern HudScript HudScript_StatusSPShine[];
 
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;
@@ -154,7 +154,7 @@ s32 get_item_empty_count(void) {
 /// @returns the index of the given item in the player's inventory, or -1 if not found
 s32 find_item(s32 itemID) {
     PlayerData* playerData = &gPlayerData;
-    StaticItem* item = &gItemTable[itemID];
+    ItemData* item = &gItemTable[itemID];
     s32 i;
 
     if ((item->typeFlags & 8) != 0) {
@@ -205,7 +205,7 @@ void sort_items(void) {
 
 s32 add_badge(s32 itemID) {
     PlayerData* playerData = &gPlayerData;
-    StaticItem* item = &gItemTable[itemID];
+    ItemData* item = &gItemTable[itemID];
     s32 i;
 
     if ((item->typeFlags & 0x40) == 0) {

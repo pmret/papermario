@@ -4,11 +4,11 @@
 
 #define NAMESPACE b_area_trd_part_1
 
-extern ActorDesc N(koopa_troopa);
-extern ActorDesc N(paratroopa);
-extern ActorDesc N(bob_omb);
-extern ActorDesc N(bill_blaster);
-extern ActorDesc N(bullet_bill);
+extern ActorBlueprint N(koopa_troopa);
+extern ActorBlueprint N(paratroopa);
+extern ActorBlueprint N(bob_omb);
+extern ActorBlueprint N(bill_blaster);
+extern ActorBlueprint N(bullet_bill);
 
 extern Stage N(trd_00);
 extern Stage N(trd_01);

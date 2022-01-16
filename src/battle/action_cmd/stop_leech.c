@@ -3,9 +3,9 @@
 
 #define NAMESPACE action_command_stop_leech
 
-extern HudElementAnim HudScript_MashAButton[];
-extern HudElementAnim HudScript_BlueMeter[];
-extern HudElementAnim HudScript_AButton[];
+extern HudScript HudScript_MashAButton[];
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
 extern s32 D_80294260;
 
 ApiStatus func_802A9000_425590(void) {

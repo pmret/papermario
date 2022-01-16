@@ -15,7 +15,7 @@ ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
     s16 itemID = battleStatus->selectedItemID;
-    StaticItem* item = &gItemTable[itemID];
+    ItemData* item = &gItemTable[itemID];
     s32 i = 0;
     s32* itemPtr;
 
@@ -66,7 +66,7 @@ ApiStatus LoadItemScript(Evt* script, s32 isInitialCall) {
 ApiStatus LoadFreeItemScript(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* actor = battleStatus->playerActor;
-    StaticItem* item = &gItemTable[battleStatus->selectedItemID];
+    ItemData* item = &gItemTable[battleStatus->selectedItemID];
     SelectableTarget* target;
     s32* itemPtr;
     s32 i;

@@ -25,12 +25,12 @@ ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802422B0_BFFB30)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802430C0_C00940)(Evt* script, s32 isInitialCall);
 
-extern EvtSource N(802449C4);
-extern EvtSource N(80244AD0);
-extern EvtSource N(main);
-extern EvtSource N(makeEntities);
+extern EvtScript N(802449C4);
+extern EvtScript N(80244AD0);
+extern EvtScript N(main);
+extern EvtScript N(makeEntities);
 extern StaticAnimatorNode* N(D_80252F4C_C107CC)[];
-extern EvtSource N(D_802539A0_C11220);
+extern EvtScript N(D_802539A0_C11220);
 extern NpcGroupList N(npcGroupList_80246E50);
 extern NpcGroupList N(npcGroupList_80246ED4);
 extern NpcGroupList N(npcGroupList_80246E8C);

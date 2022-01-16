@@ -42,8 +42,8 @@ glabel clear_entity_data
 /* A7444 80110D44 80420070 */  lb        $v0, 0x70($v0)
 /* A7448 80110D48 1440000C */  bnez      $v0, .L80110D7C
 /* A744C 80110D4C 24040003 */   addiu    $a0, $zero, 3
-/* A7450 80110D50 3C018015 */  lui       $at, %hi(wStaticEntityDataSize)
-/* A7454 80110D54 AC20165C */  sw        $zero, %lo(wStaticEntityDataSize)($at)
+/* A7450 80110D50 3C018015 */  lui       $at, %hi(wEntityBlueprintSize)
+/* A7454 80110D54 AC20165C */  sw        $zero, %lo(wEntityBlueprintSize)($at)
 /* A7458 80110D58 2404001D */  addiu     $a0, $zero, 0x1d
 /* A745C 80110D5C 3C028015 */  lui       $v0, %hi(D_801516DC)
 /* A7460 80110D60 244216DC */  addiu     $v0, $v0, %lo(D_801516DC)
@@ -55,10 +55,10 @@ glabel clear_entity_data
 /* A7474 80110D74 08044367 */  j         .L80110D9C
 /* A7478 80110D78 00000000 */   nop
 .L80110D7C:
-/* A747C 80110D7C 3C018015 */  lui       $at, %hi(bStaticEntityDataSize)
-/* A7480 80110D80 AC201660 */  sw        $zero, %lo(bStaticEntityDataSize)($at)
-/* A7484 80110D84 3C028015 */  lui       $v0, %hi(bStaticEntityData + 0xC)
-/* A7488 80110D88 244216F4 */  addiu     $v0, $v0, %lo(bStaticEntityData + 0xC)
+/* A747C 80110D7C 3C018015 */  lui       $at, %hi(bEntityBlueprintSize)
+/* A7480 80110D80 AC201660 */  sw        $zero, %lo(bEntityBlueprintSize)($at)
+/* A7484 80110D84 3C028015 */  lui       $v0, %hi(bEntityBlueprint + 0xC)
+/* A7488 80110D88 244216F4 */  addiu     $v0, $v0, %lo(bEntityBlueprint + 0xC)
 .L80110D8C:
 /* A748C 80110D8C AC400000 */  sw        $zero, ($v0)
 /* A7490 80110D90 2484FFFF */  addiu     $a0, $a0, -1

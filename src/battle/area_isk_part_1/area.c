@@ -3,10 +3,10 @@
 
 #define NAMESPACE b_area_isk_part_1
 
-extern ActorDesc N(pokey_mummy);
-extern ActorDesc N(swooper);
-extern ActorDesc N(stone_chomp);
-extern ActorDesc N(buzzy_beetle);
+extern ActorBlueprint N(pokey_mummy);
+extern ActorBlueprint N(swooper);
+extern ActorBlueprint N(stone_chomp);
+extern ActorBlueprint N(buzzy_beetle);
 
 extern Stage N(isk_00);
 extern Stage N(isk_01);

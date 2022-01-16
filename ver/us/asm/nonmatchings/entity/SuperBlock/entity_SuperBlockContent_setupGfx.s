@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel entity_SuperBlock_HitEffect_setupGfx
+glabel entity_SuperBlockContent_setupGfx
 /* 1070EC 802E586C 27BDFF68 */  addiu     $sp, $sp, -0x98
 /* 1070F0 802E5870 AFB60088 */  sw        $s6, 0x88($sp)
 /* 1070F4 802E5874 3C16800A */  lui       $s6, %hi(gMasterGfxPos)

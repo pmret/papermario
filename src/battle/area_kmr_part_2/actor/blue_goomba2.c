@@ -36,12 +36,12 @@ s32 N(statusTable_8021D40C)[] = {
 };
 
 extern s32 N(idleAnimations_8021D504)[];
-extern EvtSource N(init_8021EDB8);
-extern EvtSource N(takeTurn_8021E0F0);
-extern EvtSource N(idle_8021D5E8);
-extern EvtSource N(handleEvent_8021D8C4);
+extern EvtScript N(init_8021EDB8);
+extern EvtScript N(takeTurn_8021E0F0);
+extern EvtScript N(idle_8021D5E8);
+extern EvtScript N(handleEvent_8021D8C4);
 
-ActorPartDesc N(partsTable_8021D4B8)[] = {
+ActorPartBlueprint N(partsTable_8021D4B8)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -56,7 +56,7 @@ ActorPartDesc N(partsTable_8021D4B8)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_BLUE_GOOMBA_BOSS,
     .level = 20,
@@ -105,7 +105,7 @@ s32 N(idleAnimations_8021D550)[] = {
     STATUS_END,
 };
 
-EvtSource N(init_8021D59C) = {
+EvtScript N(init_8021D59C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021E0F0)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021D5E8)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021D8C4)))
@@ -113,7 +113,7 @@ EvtSource N(init_8021D59C) = {
     EVT_END
 };
 
-EvtSource N(idle_8021D5E8) = {
+EvtScript N(idle_8021D5E8) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LW(0))
     EVT_ADD(LW(0), 80)
@@ -163,7 +163,7 @@ EvtSource N(idle_8021D5E8) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8021D8C4) = {
+EvtScript N(handleEvent_8021D8C4) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -282,7 +282,7 @@ EvtSource N(handleEvent_8021D8C4) = {
 
 #include "common/anglestuff.inc.c"
 
-EvtSource N(takeTurn_8021E0F0) = {
+EvtScript N(takeTurn_8021E0F0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -456,7 +456,7 @@ EvtSource N(takeTurn_8021E0F0) = {
 
 #include "common/DivActorLevel4.inc.c"
 
-EvtSource N(init_8021EDB8) = {
+EvtScript N(init_8021EDB8) = {
     EVT_EXEC_WAIT(N(init_8021D59C))
     EVT_CALL(SetEnemyHP, -127, 2)
     EVT_CALL(N(DivActorLevel4))

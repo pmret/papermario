@@ -30,7 +30,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_16_tattle },
 };
 
-EvtSource N(80241480) = {
+EvtScript N(80241480) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -47,7 +47,7 @@ static s32 N(pad_1518)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitSingleDoor_80241520) = {
+EvtScript N(exitSingleDoor_80241520) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
@@ -65,7 +65,7 @@ EvtSource N(exitSingleDoor_80241520) = {
 
 const char N(pad_XXX)[] = { 0, 0 };
 
-EvtSource N(enterSingleDoor_802415D4) = {
+EvtScript N(enterSingleDoor_802415D4) = {
     EVT_CALL(UseDoorSounds, 0)
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
@@ -82,7 +82,7 @@ EvtSource N(enterSingleDoor_802415D4) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -103,7 +103,7 @@ static s32 N(pad_1774)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80241780) = {
+EvtScript N(80241780) = {
     EVT_CALL(MakeItemEntity, ITEM_TUBBA_CASTLE_KEY, -235, 25, -165, 17, EVT_SAVE_FLAG(1069))
     EVT_RETURN
     EVT_END
@@ -113,7 +113,7 @@ static s32 N(pad_17B4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(802417C0) = {
+EvtScript N(802417C0) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -162,7 +162,7 @@ NpcAISettings N(npcAISettings_802418AC) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_802418DC) = {
+EvtScript N(npcAI_802418DC) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 1, 10)
     EVT_CALL(SetSelfVar, 2, 14)
@@ -181,7 +181,7 @@ NpcSettings N(npcSettings_8024194C) = {
     .level = 13,
 };
 
-EvtSource N(npcAI_80241978) = {
+EvtScript N(npcAI_80241978) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetSelfVar, 0, 4)
     EVT_CALL(SetSelfVar, 1, 32)

@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 
 ApiStatus N(DivActorLevel4)(Evt* script, s32 isInitialCall) {
-    ActorDesc* actorData = get_actor(script->owner1.actorID)->staticActorData;
+    ActorBlueprint* actorData = get_actor(script->owner1.actorID)->actorBlueprint;
 
     actorData->level /= 4;
     return ApiStatus_DONE2;

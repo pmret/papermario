@@ -164,7 +164,7 @@ ApiStatus N(AverageTargetParalyzeChance)(Evt* script, s32 isInitialCall) {
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor;
     ActorPart* targetActorPart;
-    s32 targetActorDescBaseStatusChance;
+    s32 targetActorBlueprintBaseStatusChance;
     s32 chanceTotal = 0;
     s32 nTargets = 0;
     s32 i;
@@ -172,18 +172,18 @@ ApiStatus N(AverageTargetParalyzeChance)(Evt* script, s32 isInitialCall) {
     for (i = 0; i < partnerActor->targetListLength; i++) {
         targetActor = get_actor(partnerActor->targetData[i].actorID);
         targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
-        targetActorDescBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_PARALYZE);
+        targetActorBlueprintBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_PARALYZE);
 
         if (targetActor->transStatus == 14) {
-            targetActorDescBaseStatusChance = 0;
+            targetActorBlueprintBaseStatusChance = 0;
         }
 
         if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
-            targetActorDescBaseStatusChance = 0;
+            targetActorBlueprintBaseStatusChance = 0;
         }
 
-        if (targetActorDescBaseStatusChance > 0) {
-            chanceTotal += targetActorDescBaseStatusChance;
+        if (targetActorBlueprintBaseStatusChance > 0) {
+            chanceTotal += targetActorBlueprintBaseStatusChance;
             nTargets++;
         }
     }

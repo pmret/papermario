@@ -1,6 +1,6 @@
 #include "common/UnkAngleFunc2.inc.c"
 
-EvtSource N(clouds1) = {
+EvtScript N(clouds1) = {
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(7), EVT_VAR(2))
     EVT_MUL(EVT_VAR(7), 10)
@@ -18,7 +18,7 @@ EvtSource N(clouds1) = {
     EVT_END
 };
 
-EvtSource N(clouds2) = {
+EvtScript N(clouds2) = {
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(3))
     EVT_SET(EVT_VAR(12), EVT_VAR(4))
@@ -40,7 +40,7 @@ EvtSource N(clouds2) = {
     EVT_END
 };
 
-EvtSource N(clouds3) = {
+EvtScript N(clouds3) = {
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(3))
     EVT_SET(EVT_VAR(12), EVT_VAR(4))

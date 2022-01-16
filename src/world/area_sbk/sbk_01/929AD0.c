@@ -16,7 +16,7 @@ NpcAISettings N(npcAISettings_80240370) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_802403A0) = {
+EvtScript N(npcAI_802403A0) = {
     EVT_CALL(N(SetNpcB5_3))
     EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_80240370)))
     EVT_RETURN

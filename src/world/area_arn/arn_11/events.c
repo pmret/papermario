@@ -5,7 +5,7 @@ enum {
     NPC_TUBBAS_HEART,
 };
 
-EvtSource N(802400F0) = {
+EvtScript N(802400F0) = {
     EVT_CALL(SetCamType, 0, 6, 1)
     EVT_CALL(SetCamSpeed, 0, EVT_FIXED(3.0))
     EVT_CALL(UseSettingsFrom, 0, 60, 30, 0)
@@ -18,7 +18,7 @@ EvtSource N(802400F0) = {
     EVT_END
 };
 
-EvtSource N(802401BC) = {
+EvtScript N(802401BC) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT_FRAMES(30)
     EVT_CALL(SetPlayerSpeed, EVT_FIXED(3.0))
@@ -55,7 +55,7 @@ EvtSource N(802401BC) = {
     EVT_END
 };
 
-EvtSource N(exitSingleDoor_80240428) = {
+EvtScript N(exitSingleDoor_80240428) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(0), 0)
@@ -70,13 +70,13 @@ EvtSource N(exitSingleDoor_80240428) = {
     EVT_END
 };
 
-EvtSource N(802404CC) = {
+EvtScript N(802404CC) = {
     EVT_BIND_TRIGGER(N(exitSingleDoor_80240428), TRIGGER_WALL_PRESS_A, 2, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(enterSingleDoor_802404F8) = {
+EvtScript N(enterSingleDoor_802404F8) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(2), 0)
     EVT_SET(EVT_VAR(3), -1)
@@ -93,7 +93,7 @@ EvtSource N(enterSingleDoor_802404F8) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 35)
     EVT_CALL(SetSpriteShading, 524290)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -112,12 +112,12 @@ static s32 N(pad_674)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80240680) = {
+EvtScript N(80240680) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80240690) = {
+EvtScript N(80240690) = {
     EVT_RETURN
     EVT_END
 };
@@ -130,7 +130,7 @@ NpcSettings N(npcSettings_802406A0) = {
     .level = 13,
 };
 
-EvtSource N(idle_802406CC) = {
+EvtScript N(idle_802406CC) = {
     EVT_LOOP(0)
         EVT_CALL(GetSelfVar, 0, EVT_VAR(0))
         EVT_IF_NE(EVT_VAR(0), 0)
@@ -154,7 +154,7 @@ EvtSource N(idle_802406CC) = {
     EVT_END
 };
 
-EvtSource N(8024081C) = {
+EvtScript N(8024081C) = {
     EVT_WAIT_FRAMES(15)
     EVT_CALL(PlaySoundAtCollider, 2, 449, 0)
     EVT_CALL(MakeLerp, 0, 80, 10, 0)
@@ -170,7 +170,7 @@ EvtSource N(8024081C) = {
     EVT_END
 };
 
-EvtSource N(802408D8) = {
+EvtScript N(802408D8) = {
     EVT_CALL(MakeLerp, 80, 0, 10, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -191,7 +191,7 @@ s32 N(intTable_80240988)[] = {
     0x00000000, 0x00000000, 0xFFFFD8F0, 0x00000000, 0x00000000,
 };
 
-EvtSource N(defeat_802409DC) = {
+EvtScript N(defeat_802409DC) = {
     EVT_THREAD
         EVT_CALL(SetCamType, 0, 6, 1)
         EVT_CALL(SetCamSpeed, 0, EVT_FIXED(90.0))
@@ -259,7 +259,7 @@ EvtSource N(defeat_802409DC) = {
     EVT_END
 };
 
-EvtSource N(init_80240E70) = {
+EvtScript N(init_80240E70) = {
     EVT_IF_GE(EVT_SAVE_VAR(0), -22)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_ELSE

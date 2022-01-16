@@ -5,11 +5,11 @@
 
 #define NAMESPACE b_area_mac
 
-extern ActorDesc N(chan);
-extern ActorDesc N(lee);
-extern ActorDesc N(master1);
-extern ActorDesc N(master2);
-extern ActorDesc N(master3);
+extern ActorBlueprint N(chan);
+extern ActorBlueprint N(lee);
+extern ActorBlueprint N(master1);
+extern ActorBlueprint N(master2);
+extern ActorBlueprint N(master3);
 
 extern Stage N(mac_01);
 extern Stage N(mac_02);

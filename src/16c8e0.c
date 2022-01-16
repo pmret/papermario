@@ -12,16 +12,16 @@ s16 D_802809F6 = -1;
 s16 D_802809F8 = 0;
 u16 D_802809FA = 0;
 
-extern HudElementAnim HudScript_HPDigit0;
-extern HudElementAnim HudScript_HPDigit1;
-extern HudElementAnim HudScript_HPDigit2;
-extern HudElementAnim HudScript_HPDigit3;
-extern HudElementAnim HudScript_HPDigit4;
-extern HudElementAnim HudScript_HPDigit5;
-extern HudElementAnim HudScript_HPDigit6;
-extern HudElementAnim HudScript_HPDigit7;
-extern HudElementAnim HudScript_HPDigit8;
-extern HudElementAnim HudScript_HPDigit9;
+extern HudScript HudScript_HPDigit0;
+extern HudScript HudScript_HPDigit1;
+extern HudScript HudScript_HPDigit2;
+extern HudScript HudScript_HPDigit3;
+extern HudScript HudScript_HPDigit4;
+extern HudScript HudScript_HPDigit5;
+extern HudScript HudScript_HPDigit6;
+extern HudScript HudScript_HPDigit7;
+extern HudScript HudScript_HPDigit8;
+extern HudScript HudScript_HPDigit9;
 
 void* bHPDigitHudScripts[] = {
     HudScript_HPDigit0, HudScript_HPDigit1, HudScript_HPDigit2, HudScript_HPDigit3, HudScript_HPDigit4, HudScript_HPDigit5, HudScript_HPDigit6, HudScript_HPDigit7, HudScript_HPDigit8, HudScript_HPDigit9, NULL, NULL, NULL,
@@ -36,7 +36,7 @@ extern f32 D_8029EFB0;
 extern f32 D_8029EFB4;
 extern f32 D_8029EFB8;
 
-EvtSource BtlPutPartnerAway = {
+EvtScript BtlPutPartnerAway = {
     EVT_CALL(DispatchEvent, 256, 62)
     EVT_CHILD_THREAD
         EVT_SETF(EVT_VAR(0), EVT_FIXED(1.0))
@@ -58,7 +58,7 @@ EvtSource BtlPutPartnerAway = {
     EVT_END
 };
 
-EvtSource BtlBringPartnerOut = {
+EvtScript BtlBringPartnerOut = {
     EVT_CHILD_THREAD
         EVT_SETF(EVT_VAR(0), EVT_FIXED(0.1))
         EVT_LOOP(20)

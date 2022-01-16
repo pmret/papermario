@@ -5,12 +5,12 @@
 
 void sfx_adjust_env_sound_params(s32, s32, s32, s32);
 
-extern HudElementAnim HudScript_BlueMeter;
-extern HudElementAnim HudScript_AButton;
-extern HudElementAnim HudScript_100pct;
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
+extern HudScript HudScript_100pct;
 extern s32 D_80294300;
 
-extern HudElementAnim HudScript_MashAButton;
+extern HudScript HudScript_MashAButton;
 
 typedef struct UnkVec2s {
     /* 0x00 */ s16 unk_0;

@@ -6,9 +6,9 @@
 extern s32 D_802941C0;
 
 // icon IDs for hud elements
-extern HudElementAnim HudScript_AButton[];
-extern HudElementAnim HudScript_RightOn[];
-extern HudElementAnim HudScript_AButtonDown[];
+extern HudScript HudScript_AButton[];
+extern HudScript HudScript_RightOn[];
+extern HudScript HudScript_AButtonDown[];
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     s32 hudElement;

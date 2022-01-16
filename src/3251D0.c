@@ -106,7 +106,7 @@ ApiStatus func_802C03E8(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource D_802C0410 = {
+EvtScript D_802C0410 = {
     EVT_SET_GROUP(0)
     EVT_CALL(SetPlayerAnimation, ANIM_GOT_ITEM)
     EVT_CALL(GetPlayerPos, LW(0), LW(1), LW(2))
@@ -122,7 +122,7 @@ EvtSource D_802C0410 = {
     EVT_END
 };
 
-EvtSource D_802C04F4 = {
+EvtScript D_802C04F4 = {
     EVT_THREAD
         EVT_LOOP(4)
             EVT_CALL(PlaySound, SOUND_2095)
@@ -135,7 +135,7 @@ EvtSource D_802C04F4 = {
     EVT_END
 };
 
-EvtSource D_802C0560 = {
+EvtScript D_802C0560 = {
     EVT_THREAD
         EVT_LOOP(4)
             EVT_CALL(PlaySound, SOUND_2095)
@@ -148,7 +148,7 @@ EvtSource D_802C0560 = {
     EVT_END
 };
 
-EvtSource D_802C05CC_32579C = {
+EvtScript D_802C05CC_32579C = {
     EVT_SET_GROUP(0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(GetCurrentPartner, LW(0))

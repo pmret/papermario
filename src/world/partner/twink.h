@@ -6,9 +6,9 @@
 
 void world_twink_init(Npc* partner);
 
-extern EvtSource world_twink_take_out;
-extern EvtSource world_twink_update;
-extern EvtSource world_twink_use_ability;
-extern EvtSource world_twink_put_away;
+extern EvtScript world_twink_take_out;
+extern EvtScript world_twink_update;
+extern EvtScript world_twink_use_ability;
+extern EvtScript world_twink_put_away;
 
 #endif

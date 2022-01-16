@@ -41,14 +41,14 @@ s32 N(statusTable_802232F0)[] = {
     STATUS_END,
 };
 
-extern EvtSource N(init_80223488);
-extern EvtSource N(takeTurn_80223804);
-extern EvtSource N(idle_80223678);
-extern EvtSource N(handleEvent_80223688);
-extern EvtSource N(shake_goomnut_tree);
-extern EvtSource N(80223DBC);
+extern EvtScript N(init_80223488);
+extern EvtScript N(takeTurn_80223804);
+extern EvtScript N(idle_80223678);
+extern EvtScript N(handleEvent_80223688);
+extern EvtScript N(shake_goomnut_tree);
+extern EvtScript N(80223DBC);
 
-ActorPartDesc N(partsTable_8022339C)[] = {
+ActorPartBlueprint N(partsTable_8022339C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -111,7 +111,7 @@ ActorPartDesc N(partsTable_8022339C)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_DMG_POPUP,
     .type = ACTOR_TYPE_GOOMNUT_TREE,
     .level = 1,
@@ -140,7 +140,7 @@ s32 N(unk_missing_80223478)[] = {
     1, 0,
 };
 
-EvtSource N(init_80223488) = {
+EvtScript N(init_80223488) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80223804)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80223678)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80223688)))
@@ -163,12 +163,12 @@ EvtSource N(init_80223488) = {
     EVT_END
 };
 
-EvtSource N(idle_80223678) = {
+EvtScript N(idle_80223678) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(handleEvent_80223688) = {
+EvtScript N(handleEvent_80223688) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastElement, LW(14))
@@ -201,7 +201,7 @@ EvtSource N(handleEvent_80223688) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_80223804) = {
+EvtScript N(takeTurn_80223804) = {
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(6)
             EVT_RETURN
@@ -218,7 +218,7 @@ EvtSource N(takeTurn_80223804) = {
 
 #include "common/FoliageTransform.inc.c"
 
-EvtSource N(shakeTree) = {
+EvtScript N(shakeTree) = {
     EVT_SET_TIMESCALE(EVT_FLOAT(2.0))
     EVT_USE_BUF(LW(0))
     EVT_BUF_READ4(LW(1), LW(2), LW(3), LW(4))
@@ -330,14 +330,14 @@ ShakeTreeConfig N(tree) = {
     .vectors = &N(D_80223D60_41D7F0),
 };
 
-EvtSource N(shake_goomnut_tree) = {
+EvtScript N(shake_goomnut_tree) = {
     EVT_SET(LW(0), EVT_ADDR(N(tree)))
     EVT_EXEC_WAIT(N(shakeTree))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80223DBC) = {
+EvtScript N(80223DBC) = {
     EVT_CALL(PlayEffect, 0x14, 0, -25, 120, 0, 90, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(GetActorVar, -127, 5, LW(0))
     EVT_IF_NE(LW(0), 0)

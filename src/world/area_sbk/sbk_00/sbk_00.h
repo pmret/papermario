@@ -6,6 +6,6 @@
 
 #define NAMESPACE sbk_00
 
-extern EvtSource N(main);
+extern EvtScript N(main);
 extern NpcGroupList N(npcGroupList_80240768);
-extern EvtSource N(makeEntities);
+extern EvtScript N(makeEntities);

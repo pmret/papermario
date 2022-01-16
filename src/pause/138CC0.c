@@ -8,7 +8,7 @@ typedef struct {
     s32 baseMsgID;
 } StatsEntryData; // size = 0xC
 
-extern HudElementAnim* gStatsMenuElements[12];
+extern HudScript* gStatsMenuElements[12];
 extern MenuWindowBP gStatsMenuWindowBPs[1];
 extern StatsEntryData gStatsMenuEntries[11];
 

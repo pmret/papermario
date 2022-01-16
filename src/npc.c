@@ -1733,7 +1733,7 @@ void kill_enemy(Enemy* enemy) {
 INCLUDE_ASM(void, "npc", kill_enemy);
 #endif
 
-s32 bind_enemy_ai(Enemy* enemy, EvtSource* aiScriptBytecode) {
+s32 bind_enemy_ai(Enemy* enemy, EvtScript* aiScriptBytecode) {
     Evt* aiScript;
     s32 id;
 
@@ -1747,7 +1747,7 @@ s32 bind_enemy_ai(Enemy* enemy, EvtSource* aiScriptBytecode) {
     return id;
 }
 
-s32 bind_enemy_aux(Enemy* enemy, EvtSource* auxScriptBytecode) {
+s32 bind_enemy_aux(Enemy* enemy, EvtScript* auxScriptBytecode) {
     Evt* auxScript;
     s32 id;
 
@@ -1761,7 +1761,7 @@ s32 bind_enemy_aux(Enemy* enemy, EvtSource* auxScriptBytecode) {
     return id;
 }
 
-s32 bind_enemy_interact(Enemy* enemy, EvtSource* interactScriptBytecode) {
+s32 bind_enemy_interact(Enemy* enemy, EvtScript* interactScriptBytecode) {
     Evt* interactScript;
     s32 id;
 
@@ -1775,7 +1775,7 @@ s32 bind_enemy_interact(Enemy* enemy, EvtSource* interactScriptBytecode) {
     return id;
 }
 
-void bind_npc_ai(s32 npcID, EvtSource* npcAiBytecode) {
+void bind_npc_ai(s32 npcID, EvtScript* npcAiBytecode) {
     EncounterStatus* currentEncounterStatus = &gCurrentEncounter;
     s32 i;
     s32 j;
@@ -1794,7 +1794,7 @@ void bind_npc_ai(s32 npcID, EvtSource* npcAiBytecode) {
     }
 }
 
-void bind_npc_aux(s32 npcID, EvtSource* npcAuxBytecode) {
+void bind_npc_aux(s32 npcID, EvtScript* npcAuxBytecode) {
     EncounterStatus* currentEncounterStatus = &gCurrentEncounter;
     s32 i;
     s32 j;
@@ -1813,7 +1813,7 @@ void bind_npc_aux(s32 npcID, EvtSource* npcAuxBytecode) {
     }
 }
 
-void bind_npc_interact(s32 npcID, EvtSource* npcInteractBytecode) {
+void bind_npc_interact(s32 npcID, EvtScript* npcInteractBytecode) {
     EncounterStatus* currentEncounterStatus = &gCurrentEncounter;
     s32 i;
     s32 j;

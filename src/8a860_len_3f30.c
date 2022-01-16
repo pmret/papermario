@@ -1,18 +1,18 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern HudElementAnim HudScript_HandPointer[0];
-extern HudElementAnim HudScript_StatusStarPiece[0];
-extern HudElementAnim HudScript_GreenArrowDown[0];
-extern HudElementAnim HudScript_GreenArrowUp[0];
-extern HudElementAnim HudScript_EmptyBar[0];
-extern HudElementAnim HudScript_PartnerRank1A;
-extern HudElementAnim HudScript_PartnerRank1B;
-extern HudElementAnim HudScript_PartnerRank2A;
-extern HudElementAnim HudScript_PartnerRank2B;
+extern HudScript HudScript_HandPointer[0];
+extern HudScript HudScript_StatusStarPiece[0];
+extern HudScript HudScript_GreenArrowDown[0];
+extern HudScript HudScript_GreenArrowUp[0];
+extern HudScript HudScript_EmptyBar[0];
+extern HudScript HudScript_PartnerRank1A;
+extern HudScript HudScript_PartnerRank1B;
+extern HudScript HudScript_PartnerRank2A;
+extern HudScript HudScript_PartnerRank2B;
 
-HudElementAnim* D_80109890[] = { &HudScript_PartnerRank1A, &HudScript_PartnerRank2A };
-HudElementAnim* D_80109898[] = { &HudScript_PartnerRank1B, &HudScript_PartnerRank2B };
+HudScript* D_80109890[] = { &HudScript_PartnerRank1A, &HudScript_PartnerRank2A };
+HudScript* D_80109898[] = { &HudScript_PartnerRank1B, &HudScript_PartnerRank2B };
 s16 D_801098A0[] = {
     0x008C, 0x008C, 0x008D, 0x007C, 0x0086, 0x0077, 0x008D, 0x008D, 0x006C, 0x008D, 0x0084, 0x0084, 0x008D, 0x008C,
 };

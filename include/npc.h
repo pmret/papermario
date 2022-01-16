@@ -90,11 +90,11 @@ typedef struct NpcSettings {
     /* 0x04 */ s16 height;
     /* 0x06 */ s16 radius;
     /* 0x08 */ UNK_PTR otherAI;
-    /* 0x0C */ EvtSource* onInteract;
-    /* 0x10 */ EvtSource* ai;
-    /* 0x14 */ EvtSource* onHit;
-    /* 0x18 */ EvtSource* aux;
-    /* 0x1C */ EvtSource* onDefeat;
+    /* 0x0C */ EvtScript* onInteract;
+    /* 0x10 */ EvtScript* ai;
+    /* 0x14 */ EvtScript* onHit;
+    /* 0x18 */ EvtScript* aux;
+    /* 0x1C */ EvtScript* onDefeat;
     /* 0x20 */ s32 flags;
     /* 0x24 */ char unk_24[4];
     /* 0x28 */ s16 level;
@@ -133,7 +133,7 @@ typedef struct StaticNpc {
     /* 0x004 */ NpcSettings* settings;
     /* 0x008 */ Vec3f pos;
     /* 0x014 */ s32 flags;
-    /* 0x018 */ EvtSource* init;
+    /* 0x018 */ EvtScript* init;
     /* 0x01C */ char unk_1C[8];
     /* 0x024 */ s32 yaw;
     /* 0x028 */ u8 dropFlags; // TODO: use EnemyDrops (requires tons of map edits)
@@ -241,12 +241,12 @@ typedef struct Enemy {
     /* 0x10 */ Vec3s unk_10;
     /* 0x16 */ char unk_16[2];
     /* 0x18 */ struct NpcSettings* npcSettings;
-    /* 0x1C */ EvtSource* initBytecode;
-    /* 0x20 */ EvtSource* interactBytecode;
-    /* 0x24 */ EvtSource* aiBytecode;
-    /* 0x28 */ EvtSource* hitBytecode;
-    /* 0x2C */ EvtSource* auxBytecode;
-    /* 0x30 */ EvtSource* defeatBytecode;
+    /* 0x1C */ EvtScript* initBytecode;
+    /* 0x20 */ EvtScript* interactBytecode;
+    /* 0x24 */ EvtScript* aiBytecode;
+    /* 0x28 */ EvtScript* hitBytecode;
+    /* 0x2C */ EvtScript* auxBytecode;
+    /* 0x30 */ EvtScript* defeatBytecode;
     /* 0x34 */ struct Evt* initScript;
     /* 0x38 */ struct Evt* interactScript;
     /* 0x3C */ struct Evt* aiScript;
@@ -267,7 +267,7 @@ typedef struct Enemy {
     /* 0xB4 */ s8 unk_B4;
     /* 0xB5 */ s8 unk_B5;
     /* 0xB6 */ char unk_B6[2];
-    /* 0xB8 */ EvtSource* unk_B8; // some bytecode
+    /* 0xB8 */ EvtScript* unk_B8; // some bytecode
     /* 0xBC */ struct Evt* unk_BC; // some script
     /* 0xC0 */ s32 unk_C0; // some script ID
     /* 0xC4 */ s32 unk_C4;
@@ -494,37 +494,37 @@ void kill_enemy(Enemy* enemy);
 ///
 /// @param enemy               pointer to the enemy to bind the script to
 /// @param aiScriptBytecode    pointer to the script to be bound.
-s32 bind_enemy_ai(Enemy* enemy, EvtSource* aiScriptBytecode);
+s32 bind_enemy_ai(Enemy* enemy, EvtScript* aiScriptBytecode);
 
 /// Binds the specified auxillary script to the specified enemy
 ///
 /// @param enemy               pointer to the enemy to bind the script to
 /// @param auxScriptBytecode   pointer to the script to be bound.
-s32 bind_enemy_aux(Enemy* enemy, EvtSource* auxScriptBytecode);
+s32 bind_enemy_aux(Enemy* enemy, EvtScript* auxScriptBytecode);
 
 /// Binds the specified interact script to the specified enemy
 ///
 /// @param enemy                    pointer to the enemy to bind the script to
 /// @param interactScriptBytecode   pointer to the script to be bound.
-s32 bind_enemy_interact(Enemy* enemy, EvtSource* interactScriptBytecode);
+s32 bind_enemy_interact(Enemy* enemy, EvtScript* interactScriptBytecode);
 
 /// Binds the specified ai script to the npc matching the specified npcId
 ///
 /// @param npcID           ID of the desired npc
 /// @param npcAiBytecode   pointer to the script to be bound.
-void bind_npc_ai(s32 npcID, EvtSource* npcAiBytecode);
+void bind_npc_ai(s32 npcID, EvtScript* npcAiBytecode);
 
 /// Binds the specified auxillary script to the npc matching the specified npcId
 ///
 /// @param npcID           ID of the desired npc
 /// @param npcAuxBytecode  pointer to the script to be bound.
-void bind_npc_aux(s32 npcID, EvtSource* npcAuxBytecode);
+void bind_npc_aux(s32 npcID, EvtScript* npcAuxBytecode);
 
 /// Binds the specified interact script to the npc matching the specified npcId
 ///
 /// @param npcID                ID of the desired npc
 /// @param npcInteractBytecode  pointer to the script to be bound.
-void bind_npc_interact(s32 npcID, EvtSource* npcInteractBytecode);
+void bind_npc_interact(s32 npcID, EvtScript* npcInteractBytecode);
 
 /// Looks for an enemy matching the specified npcID.
 ///

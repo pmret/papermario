@@ -18,7 +18,7 @@ MapConfig N(config) = {
 
 // Extraneous END_CASE_MULTI
 #ifdef NON_EQUIVALENT
-EvtSource N(802409C0) = {
+EvtScript N(802409C0) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_OR_EQ(0)
@@ -40,7 +40,7 @@ EvtSource N(802409C0) = {
     EVT_END
 };
 #else
-EvtSource N(802409C0) = {
+EvtScript N(802409C0) = {
     EVT_CMD(EVT_OP_CALL, EVT_PTR(GetEntryID), EVT_VAR(0)),
     EVT_CMD(EVT_OP_SWITCH, EVT_VAR(0)),
         EVT_CMD(EVT_OP_CASE_OR_EQ, 0),
@@ -67,7 +67,7 @@ static s32 N(pad_ABC) = {
     0x00000000,
 };
 
-EvtSource N(80240AC0) = {
+EvtScript N(80240AC0) = {
     EVT_CALL(MakeItemEntity, ITEM_S_JUMP_CHG, -200, 160, -213, 17, EVT_SAVE_FLAG(1391))
     EVT_RETURN
     EVT_END
@@ -77,7 +77,7 @@ static s32 N(pad_AF4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(updateTexturePan_80240B00) = {
+EvtScript N(updateTexturePan_80240B00) = {
     EVT_SET_GROUP(0)
     EVT_IF_EQ(EVT_VAR(5), 1)
         EVT_IF_EQ(EVT_VAR(6), 1)
@@ -94,15 +94,15 @@ EvtSource N(updateTexturePan_80240B00) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_80240B9C) = EXIT_WALK_SCRIPT(60,  1, "flo_21",  0);
+EvtScript N(exitWalk_80240B9C) = EXIT_WALK_SCRIPT(60,  1, "flo_21",  0);
 
-EvtSource N(80240BF8) = {
+EvtScript N(80240BF8) = {
     EVT_BIND_TRIGGER(N(exitWalk_80240B9C), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 39)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
@@ -180,7 +180,7 @@ static s32 N(pad_1044)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80241050) = {
+EvtScript N(80241050) = {
     EVT_SET_GROUP(239)
     EVT_SET(EVT_VAR(15), 0)
     EVT_LABEL(0)
@@ -268,7 +268,7 @@ EvtSource N(80241050) = {
     EVT_END
 };
 
-EvtSource N(80241650) = {
+EvtScript N(80241650) = {
     EVT_THREAD
         EVT_ADDF(EVT_MAP_VAR(12), EVT_FIXED(-1.5))
         EVT_WAIT_FRAMES(1)
@@ -278,7 +278,7 @@ EvtSource N(80241650) = {
     EVT_END
 };
 
-EvtSource N(8024169C) = {
+EvtScript N(8024169C) = {
     EVT_THREAD
         EVT_ADDF(EVT_MAP_VAR(13), EVT_FIXED(-1.5))
         EVT_WAIT_FRAMES(1)
@@ -288,7 +288,7 @@ EvtSource N(8024169C) = {
     EVT_END
 };
 
-EvtSource N(802416E8) = {
+EvtScript N(802416E8) = {
     EVT_THREAD
         EVT_ADDF(EVT_MAP_VAR(14), EVT_FIXED(-1.5))
         EVT_WAIT_FRAMES(1)
@@ -298,7 +298,7 @@ EvtSource N(802416E8) = {
     EVT_END
 };
 
-EvtSource N(80241734) = {
+EvtScript N(80241734) = {
     EVT_THREAD
         EVT_ADDF(EVT_MAP_VAR(15), EVT_FIXED(-1.5))
         EVT_WAIT_FRAMES(1)
@@ -308,7 +308,7 @@ EvtSource N(80241734) = {
     EVT_END
 };
 
-EvtSource N(80241780) = {
+EvtScript N(80241780) = {
     EVT_CALL(ParentColliderToModel, 8, 28)
     EVT_CALL(ParentColliderToModel, 9, 32)
     EVT_CALL(ParentColliderToModel, 7, 36)
@@ -350,7 +350,7 @@ static s32 N(pad_1A68)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(80241A70) = {
+EvtScript N(80241A70) = {
     EVT_SET(EVT_VAR(0), 0)
     EVT_LABEL(10)
     EVT_CALL(N(func_80240784_CE3E74))
@@ -366,7 +366,7 @@ EvtSource N(80241A70) = {
     EVT_END
 };
 
-EvtSource N(80241B10) = {
+EvtScript N(80241B10) = {
     EVT_SET(EVT_VAR(0), 255)
     EVT_LABEL(10)
     EVT_CALL(N(func_80240784_CE3E74))
@@ -382,7 +382,7 @@ EvtSource N(80241B10) = {
     EVT_END
 };
 
-EvtSource N(80241BB0) = {
+EvtScript N(80241BB0) = {
     EVT_CALL(TranslateGroup, 79, 0, EVT_VAR(0), 0)
     EVT_CALL(TranslateGroup, 92, 0, EVT_VAR(0), 0)
     EVT_SETF(EVT_VAR(1), EVT_VAR(0))
@@ -393,7 +393,7 @@ EvtSource N(80241BB0) = {
     EVT_END
 };
 
-EvtSource N(80241C58) = {
+EvtScript N(80241C58) = {
     EVT_CALL(TranslateGroup, 84, 0, EVT_VAR(0), 0)
     EVT_SETF(EVT_VAR(1), EVT_VAR(0))
     EVT_MULF(EVT_VAR(1), EVT_FIXED(-12.0))
@@ -402,7 +402,7 @@ EvtSource N(80241C58) = {
     EVT_END
 };
 
-EvtSource N(80241CC4) = {
+EvtScript N(80241CC4) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetPlayerActionState, 10)
     EVT_CALL(DisablePartnerAI, 0)
@@ -509,7 +509,7 @@ EvtSource N(80241CC4) = {
     EVT_END
 };
 
-EvtSource N(802423F8) = {
+EvtScript N(802423F8) = {
     EVT_IF_EQ(EVT_AREA_FLAG(44), 0)
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_CALL(func_802D2B6C)
@@ -607,7 +607,7 @@ EvtSource N(802423F8) = {
     EVT_END
 };
 
-EvtSource N(80242A2C) = {
+EvtScript N(80242A2C) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerActionState, 10)
@@ -685,7 +685,7 @@ EvtSource N(80242A2C) = {
     EVT_END
 };
 
-EvtSource N(80242FD0) = {
+EvtScript N(80242FD0) = {
     EVT_BIND_TRIGGER(N(802423F8), TRIGGER_FLOOR_TOUCH, 12, 1, 0)
     EVT_RETURN
     EVT_END

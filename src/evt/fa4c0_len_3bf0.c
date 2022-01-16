@@ -8,7 +8,7 @@ s32 func_802D5B10();
 
 s32 D_802D9D30 = 0;
 
-EvtSource D_802D9D34 = {
+EvtScript D_802D9D34 = {
     EVT_CALL(func_802D5B10)
     EVT_RETURN
     EVT_END

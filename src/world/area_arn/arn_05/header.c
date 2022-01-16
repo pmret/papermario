@@ -14,7 +14,7 @@ MapConfig N(config) = {
     .tattle = { MSG_arn_05_tattle },
 };
 
-EvtSource N(80241360) = {
+EvtScript N(80241360) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-33)
             EVT_CALL(SetMusicTrack, 0, SONG_GUSTY_GULCH, 0, 8)

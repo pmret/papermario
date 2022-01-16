@@ -3,14 +3,14 @@
 
 #define NAMESPACE b_area_isk_part_1_isk_03b
 
-EvtSource N(beforeBattle_80223D10) = {
+EvtScript N(beforeBattle_80223D10) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(afterBattle_80223D4C) = {
+EvtScript N(afterBattle_80223D4C) = {
     EVT_RETURN
     EVT_END
 };
