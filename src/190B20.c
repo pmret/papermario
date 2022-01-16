@@ -2259,8 +2259,6 @@ void load_partner_actor(void) {
     }
 }
 
-//so clorsh
-#ifdef NON_MATCHING
 Actor* create_actor(Formation formation) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* actor;
@@ -2269,12 +2267,9 @@ Actor* create_actor(Formation formation) {
     ActorPartDesc* partDesc;
     Evt* takeTurnScript;
     s32 partCount;
-    f32 x;
-    f32 y;
-    f32 z;
+    f32 x, y, z;
     DecorationTable* decorationTable;
-    s32 i;
-    s32 j;
+    s32 i, j, k;
 
     if (formation->home.index >= -270000000) {
         x = btl_actorHomePositions[formation->home.index].x;
@@ -2295,7 +2290,8 @@ Actor* create_actor(Formation formation) {
         }
     }
 
-    battleStatus->enemyActors[i] = actor = heap_malloc(sizeof(*actor));
+    battleStatus->enemyActors[i] = heap_malloc(sizeof(*actor));
+    actor = battleStatus->enemyActors[i];
     ASSERT(actor != NULL);
 
     actor->unk_134 = battleStatus->unk_93++;
@@ -2349,11 +2345,11 @@ Actor* create_actor(Formation formation) {
     actor->unk_204 = 0;
     actor->unk_205 = 0;
 
-    actor->healthBarPosition.x = x + formationActor->hpBarOffset.x;
-    actor->healthBarPosition.y = y + formationActor->hpBarOffset.y;
-    actor->healthBarPosition.z = z;
+    actor->healthBarPosition.x = actor->currentPos.x + formationActor->hpBarOffset.x;
+    actor->healthBarPosition.y = actor->currentPos.y + formationActor->hpBarOffset.y;
+    actor->healthBarPosition.z = actor->currentPos.z;
     if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
-        actor->healthBarPosition.y = actor->size.y - y - formationActor->hpBarOffset.y;
+        actor->healthBarPosition.y = actor->currentPos.y - actor->size.y - formationActor->hpBarOffset.y;
     }
 
     actor->statusTable = formationActor->statusTable;
@@ -2398,8 +2394,8 @@ Actor* create_actor(Formation formation) {
     actor->partsTable = part;
     ASSERT(part != NULL);
 
-    for (i = 0; i < partCount; i++) {
-        ActorPartDesc* actorPartDesc = &formationActor->partsData[i];
+    for (j = 0; j < partCount; j++) {
+        ActorPartDesc* actorPartDesc = &formationActor->partsData[j];
 
         part->decorationTable = NULL;
         part->staticData = actorPartDesc;
@@ -2469,19 +2465,19 @@ Actor* create_actor(Formation formation) {
             decorationTable->unk_7D8 = 0;
             decorationTable->unk_7D9 = 0;
 
-            for (j = 0; j < ARRAY_COUNT(decorationTable->posX); j++) {
-                decorationTable->posX[j] = actor->currentPos.x;
-                decorationTable->posY[j] = actor->currentPos.y;
-                decorationTable->posZ[j] = actor->currentPos.z;
+            for (k = 0; k < ARRAY_COUNT(decorationTable->posX); k++) {
+                decorationTable->posX[k] = actor->currentPos.x;
+                decorationTable->posY[k] = actor->currentPos.y;
+                decorationTable->posZ[k] = actor->currentPos.z;
             }
 
             decorationTable->unk_7DA = 3;
             decorationTable->unk_7DB = 0;
             decorationTable->effectType = 0;
 
-            for (j = 0; j < ARRAY_COUNT(decorationTable->unk_8B0); j++) {
-                decorationTable->unk_8B0[j] = NULL;
-                decorationTable->decorationType[j] = 0;
+            for (k = 0; k < ARRAY_COUNT(decorationTable->unk_8B0); k++) {
+                decorationTable->unk_8B0[k] = NULL;
+                decorationTable->decorationType[k] = 0;
             }
 
         }
@@ -2504,7 +2500,7 @@ Actor* create_actor(Formation formation) {
             part->unk_84 = spr_load_npc_sprite(part->currentAnimation, NULL);
         }
 
-        if (i + 1 >= partCount) {
+        if (j + 1 >= partCount) {
             part->nextPart = NULL;
             continue;
         }
@@ -2530,9 +2526,6 @@ Actor* create_actor(Formation formation) {
     actor->hudElementDataIndex = create_status_icon_set();
     return actor;
 }
-#else
-INCLUDE_ASM(s32, "190B20", create_actor);
-#endif
 
 s32 func_80265CE8(u32* anim, s32 arg1) {
     s32 ret;
