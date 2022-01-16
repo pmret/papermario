@@ -1310,7 +1310,10 @@ typedef struct SelectableTarget {
     /* 0x00 */ s16 actorID;
     /* 0x02 */ s16 partID; /* sometimes loaded as byte from 0x3 */
     /* 0x04 */ Vec3s pos;
-    /* 0x0A */ char unk_0A[7];
+    /* 0x0A */ s16 unk_0A;
+    /* 0x0C */ s16 unk_0C;
+    /* 0x0E */ s16 unk_0E;
+    /* 0x10 */ s8 unk_10;
     /* 0x11 */ u8 homeCol; /* from xpos --> 0-3 */
     /* 0x12 */ u8 homeRow; /* from ypos --> 0-3 */
     /* 0x13 */ u8 layer; /* from zpos? --> 0-1 */
@@ -1328,10 +1331,25 @@ typedef struct ActorPartMovement {
     /* 0x4C */ s32 varTable[16];
 } ActorPartMovement; // size = 0x8C
 
+typedef struct ActorPartDesc {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s8 index;
+    /* 0x05 */ Vec3b posOffset;
+    /* 0x08 */ Vec2b targetOffset;
+    /* 0x0A */ s16 opacity;
+    /* 0x0C */ s32* idleAnimations;
+    /* 0x10 */ s32* defenseTable;
+    /* 0x14 */ s32 eventFlags;
+    /* 0x18 */ s32 elementImmunityFlags;
+    /* 0x1C */ s8 unk_1C;
+    /* 0x1D */ s8 unk_1D;
+    /* 0x1E */ char unk_1E[6];
+} ActorPartDesc; // size = 0x24
+
 typedef struct ActorPart {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 targetFlags; /* initialized to 0 */
-    /* 0x08 */ struct ActorPartDesc* staticData;
+    /* 0x08 */ ActorPartDesc* staticData;
     /* 0x0C */ struct ActorPart* nextPart;
     /* 0x10 */ struct ActorPartMovement* movement;
     /* 0x14 */ Vec3s partOffset;

@@ -1116,6 +1116,7 @@ s32 func_80265CE8(u32*, s32);
 
 void create_target_list(Actor* actor, s32 arg1);
 INCLUDE_ASM(s32, "190B20", create_target_list);
+
 void func_80266DAC(Actor* actor, s32 arg1);
 
 void player_create_target_list(Actor* actor) {
@@ -1126,14 +1127,81 @@ void enemy_create_target_list(Actor* actor) {
     create_target_list(actor, 1);
 }
 
-void func_80263064(s32, s32, s32);
-INCLUDE_ASM(s32, "190B20", func_80263064);
+s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
+    s32 ret = 0;
+    SelectableTarget* target = actor0->targetData;
+    s32 numParts;
+    ActorPart* part;
+    s32 i;
 
-void func_80263230(s32 arg0, s32 arg1) {
+    if (actor1 == NULL) {
+        return ret;
+    }
+
+    numParts = actor1->numParts;
+    part = actor1->partsTable;
+
+    for (i = 0; i < numParts; i++) {
+        if (!(part->flags & 0x20000)) {
+            if (!(part->flags & 0x800000)) {
+                continue;
+            } else {
+                ActorPartDesc* desc = part->staticData;
+                f32 x, y, z;
+
+                if (!(part->flags & 0x100000)) {
+                    x = actor1->currentPos.x;
+                    y = actor1->currentPos.y;
+                    z = actor1->currentPos.z;
+
+                    x += part->partOffset.x;
+                    if (!(actor1->flags & 0x800)) {
+                        y += part->partOffset.y;
+                    } else {
+                        y -= part->partOffset.y;
+                    }
+                    z += part->partOffset.z;
+
+                    x += part->targetOffset.x;
+                    if (!(actor1->flags & 0x800)) {
+                        y += part->targetOffset.y;
+                    } else {
+                        y -= part->targetOffset.y;
+                    }
+                } else {
+                    x = part->absolutePosition.x;
+                    y = part->absolutePosition.y;
+                    z = part->absolutePosition.z;
+
+                    x += part->targetOffset.x;
+                    if (!(actor1->flags & 0x800)) {
+                        y += part->targetOffset.y;
+                    } else {
+                        y -= part->targetOffset.y;
+                    }
+                }
+
+                actor0->targetActorID = target->actorID = actor1->actorID;
+                actor0->targetPartIndex = target->partID = desc->index;
+                target->pos.x = x;
+                target->pos.y = y;
+                target->pos.z = z;
+                target->unk_10 = 0;
+                target++;
+                ret++;
+            }
+        }
+        part = part->nextPart;
+    }
+    actor0->targetListLength = ret;
+    return ret;
+}
+
+void func_80263230(Actor* arg0, Actor* arg1) {
     func_80263064(arg0, arg1, 0);
 }
 
-void func_8026324C(s32 arg0, s32 arg1) {
+void func_8026324C(Actor* arg0, Actor* arg1) {
     func_80263064(arg0, arg1, 1);
 }
 
