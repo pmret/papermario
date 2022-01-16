@@ -7,10 +7,10 @@
 #define NAMESPACE b_area_mim_forest_fuzzy
 
 extern s32 N(idleAnimations_802184C4)[];
-extern EvtSource N(init_80218510);
-extern EvtSource N(takeTurn_8021A61C);
-extern EvtSource N(idle_80218574);
-extern EvtSource N(handleEvent_80218584);
+extern EvtScript N(init_80218510);
+extern EvtScript N(takeTurn_8021A61C);
+extern EvtScript N(idle_80218574);
+extern EvtScript N(handleEvent_80218584);
 extern Formation N(specialFormation_8021A800);
 
 s32 N(defenseTable_802183C0)[] = {
@@ -43,7 +43,7 @@ s32 N(statusTable_802183CC)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80218478)[] = {
+ActorPartBlueprint N(partsTable_80218478)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -58,7 +58,7 @@ ActorPartDesc N(partsTable_80218478)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_FOREST_FUZZY,
     .level = 11,
@@ -94,7 +94,7 @@ s32 N(idleAnimations_802184C4)[] = {
     STATUS_END,
 };
 
-EvtSource N(init_80218510) = {
+EvtScript N(init_80218510) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021A61C)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80218574)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80218584)))
@@ -103,12 +103,12 @@ EvtSource N(init_80218510) = {
     EVT_END
 };
 
-EvtSource N(idle_80218574) = {
+EvtScript N(idle_80218574) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(handleEvent_80218584) = {
+EvtScript N(handleEvent_80218584) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -233,7 +233,7 @@ EvtSource N(handleEvent_80218584) = {
     EVT_END
 };
 
-EvtSource N(80218C48) = {
+EvtScript N(80218C48) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -294,7 +294,7 @@ EvtSource N(80218C48) = {
 
 #include "common/UnkBattleFunc2.inc.c"
 
-EvtSource N(80219054) = {
+EvtScript N(80219054) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
@@ -507,7 +507,7 @@ EvtSource N(80219054) = {
     EVT_END
 };
 
-EvtSource N(8021A0D4) = {
+EvtScript N(8021A0D4) = {
     EVT_SET(LF(1), 0)
     EVT_SET(LF(2), 0)
     EVT_SET(LF(3), 0)
@@ -577,7 +577,7 @@ EvtSource N(8021A0D4) = {
     EVT_END
 };
 
-EvtSource N(8021A45C) = {
+EvtScript N(8021A45C) = {
     EVT_SET(LW(9), 0)
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
@@ -612,7 +612,7 @@ EvtSource N(8021A45C) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_8021A61C) = {
+EvtScript N(takeTurn_8021A61C) = {
     EVT_CALL(GetBattlePhase, LW(0))
     EVT_IF_EQ(LW(0), PHASE_FIRST_STRIKE)
         EVT_EXEC_WAIT(N(80219054))

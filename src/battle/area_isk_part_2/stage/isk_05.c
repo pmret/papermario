@@ -19,7 +19,7 @@ ApiStatus func_802189B0_4EFE50(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource N(beforeBattle_802201D0) = {
+EvtScript N(beforeBattle_802201D0) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_CALL(func_80218920_4EFDC0)
@@ -27,7 +27,7 @@ EvtSource N(beforeBattle_802201D0) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_80220218) = {
+EvtScript N(afterBattle_80220218) = {
     EVT_CALL(func_802189B0_4EFE50)
     EVT_RETURN
     EVT_END

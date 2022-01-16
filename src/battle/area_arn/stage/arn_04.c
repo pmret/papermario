@@ -3,14 +3,14 @@
 
 #define NAMESPACE b_area_arn_arn_04
 
-EvtSource N(beforeBattle_80227B00) = {
+EvtScript N(beforeBattle_80227B00) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(afterBattle_80227B3C) = {
+EvtScript N(afterBattle_80227B3C) = {
     EVT_RETURN
     EVT_END
 };

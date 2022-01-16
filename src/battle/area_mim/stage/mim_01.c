@@ -5,14 +5,14 @@
 
 #include "common/UnkFogFunc2.inc.c"
 
-EvtSource N(beforeBattle_8021E450) = {
+EvtScript N(beforeBattle_8021E450) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(N(UnkFogFunc2))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(afterBattle_8021E47C) = {
+EvtScript N(afterBattle_8021E47C) = {
     EVT_RETURN
     EVT_END
 };

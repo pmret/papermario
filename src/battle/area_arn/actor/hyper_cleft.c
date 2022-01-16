@@ -7,14 +7,14 @@
 #define NAMESPACE b_area_arn_hyper_cleft
 
 extern s32 N(idleAnimations_80221CD4)[];
-extern EvtSource N(init_80220CAC);
-extern EvtSource N(idle_80221DD0);
-extern EvtSource N(handleEvent_80222140);
-extern EvtSource N(takeTurn_80221A58);
-extern EvtSource N(takeTurn_80223B5C);
-extern EvtSource N(nextTurn_80220D3C);
-extern EvtSource N(80222F1C);
-extern EvtSource N(80223310);
+extern EvtScript N(init_80220CAC);
+extern EvtScript N(idle_80221DD0);
+extern EvtScript N(handleEvent_80222140);
+extern EvtScript N(takeTurn_80221A58);
+extern EvtScript N(takeTurn_80223B5C);
+extern EvtScript N(nextTurn_80220D3C);
+extern EvtScript N(80222F1C);
+extern EvtScript N(80223310);
 
 s32 N(defenseTable_80220B40)[] = {
     ELEMENT_NORMAL, 3,
@@ -53,7 +53,7 @@ s32 N(statusTable_80220B68)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80220C14)[] = {
+ActorPartBlueprint N(partsTable_80220C14)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -68,7 +68,7 @@ ActorPartDesc N(partsTable_80220C14)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_HYPER_CLEFT,
     .level = 15,
@@ -104,7 +104,7 @@ s32 N(idleAnimations_80220C60)[] = {
     STATUS_END,
 };
 
-EvtSource N(init_80220CAC) = {
+EvtScript N(init_80220CAC) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80221DD0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80222140)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80221A58)))
@@ -115,7 +115,7 @@ EvtSource N(init_80220CAC) = {
     EVT_END
 };
 
-EvtSource N(nextTurn_80220D3C) = {
+EvtScript N(nextTurn_80220D3C) = {
     EVT_CALL(GetBattlePhase, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
@@ -130,7 +130,7 @@ EvtSource N(nextTurn_80220D3C) = {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-EvtSource N(80220DC0) = {
+EvtScript N(80220DC0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -298,7 +298,7 @@ EvtSource N(80220DC0) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_80221A58) = {
+EvtScript N(takeTurn_80221A58) = {
     EVT_CALL(GetBattlePhase, LW(0))
     EVT_IF_EQ(LW(0), PHASE_FIRST_STRIKE)
         EVT_CALL(SetBattleVar, 1, 1)
@@ -375,7 +375,7 @@ s32 N(idleAnimations_80221D20)[] = {
     STATUS_END,
 };
 
-EvtSource N(80221D6C) = {
+EvtScript N(80221D6C) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80221DD0)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80223B5C)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80222140)))
@@ -384,14 +384,14 @@ EvtSource N(80221D6C) = {
     EVT_END
 };
 
-EvtSource N(idle_80221DD0) = {
+EvtScript N(idle_80221DD0) = {
     EVT_RETURN
     EVT_END
 };
 
 #include "common/SetSpinSmashable.inc.c"
 
-EvtSource N(80221DE0) = {
+EvtScript N(80221DE0) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_cleft_hyper_run)
@@ -433,7 +433,7 @@ EvtSource N(80221DE0) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_80222140) = {
+EvtScript N(handleEvent_80222140) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -666,7 +666,7 @@ EvtSource N(handleEvent_80222140) = {
     EVT_END
 };
 
-EvtSource N(80222F1C) = {
+EvtScript N(80222F1C) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, 2)
@@ -720,7 +720,7 @@ EvtSource N(80222F1C) = {
     EVT_END
 };
 
-EvtSource N(80223310) = {
+EvtScript N(80223310) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -828,7 +828,7 @@ EvtSource N(80223310) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_80223B5C) = {
+EvtScript N(takeTurn_80223B5C) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))
     EVT_IF_EQ(LW(0), 1)
         EVT_EXEC_WAIT(N(80222F1C))

@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_arn_arn_02
 
-EvtSource N(80227960) = {
+EvtScript N(80227960) = {
     EVT_SET(LW(10), LW(0))
     EVT_SET(LW(0), 0)
     EVT_LABEL(0)
@@ -18,7 +18,7 @@ EvtSource N(80227960) = {
     EVT_END
 };
 
-EvtSource N(beforeBattle_80227A0C) = {
+EvtScript N(beforeBattle_80227A0C) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_SET(LW(0), 8)
     EVT_EXEC_WAIT(N(80227960))
@@ -26,7 +26,7 @@ EvtSource N(beforeBattle_80227A0C) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_80227A48) = {
+EvtScript N(afterBattle_80227A48) = {
     EVT_RETURN
     EVT_END
 };

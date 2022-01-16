@@ -3,11 +3,11 @@
 
 #define NAMESPACE b_area_arn
 
-extern ActorDesc N(hyper_cleft);
-extern ActorDesc N(hypergoomba);
-extern ActorDesc N(hyper_paragoomba);
-extern ActorDesc N(tubba_blubba);
-extern ActorDesc N(tubbas_heart);
+extern ActorBlueprint N(hyper_cleft);
+extern ActorBlueprint N(hypergoomba);
+extern ActorBlueprint N(hyper_paragoomba);
+extern ActorBlueprint N(tubba_blubba);
+extern ActorBlueprint N(tubbas_heart);
 
 extern Stage N(arn_01);
 extern Stage N(arn_02);

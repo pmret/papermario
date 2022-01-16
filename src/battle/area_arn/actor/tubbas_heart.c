@@ -7,15 +7,15 @@
 
 #define NAMESPACE b_area_arn_tubbas_heart
 
-extern EvtSource N(init_80223DA0);
-extern EvtSource N(takeTurn_802245C8);
-extern EvtSource N(idle_80223E98);
-extern EvtSource N(handleEvent_80224038);
-extern EvtSource N(80224414);
-extern EvtSource N(802244DC);
-extern EvtSource N(80224B3C);
-extern EvtSource N(80225258);
-extern EvtSource N(802255D8);
+extern EvtScript N(init_80223DA0);
+extern EvtScript N(takeTurn_802245C8);
+extern EvtScript N(idle_80223E98);
+extern EvtScript N(handleEvent_80224038);
+extern EvtScript N(80224414);
+extern EvtScript N(802244DC);
+extern EvtScript N(80224B3C);
+extern EvtScript N(80225258);
+extern EvtScript N(802255D8);
 
 s32 N(idleAnimations_80223BC0)[] = {
     STATUS_NORMAL,    NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
@@ -77,7 +77,7 @@ s32 N(statusTable_80223C84)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80223D30)[] = {
+ActorPartBlueprint N(partsTable_80223D30)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -104,7 +104,7 @@ ActorPartDesc N(partsTable_80223D30)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_TUBBA_HEART,
     .level = 0,
@@ -127,7 +127,7 @@ ActorDesc NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-EvtSource N(init_80223DA0) = {
+EvtScript N(init_80223DA0) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
@@ -159,7 +159,7 @@ ApiStatus func_80218680_4FF0D0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource N(idle_80223E98) = {
+EvtScript N(idle_80223E98) = {
     EVT_LABEL(0)
     EVT_CALL(ActorExists, ACTOR_SELF, LW(0))
     EVT_IF_NE(LW(0), FALSE)
@@ -183,7 +183,7 @@ EvtSource N(idle_80223E98) = {
     EVT_END
 };
 
-EvtSource N(80223FD8) = {
+EvtScript N(80223FD8) = {
     EVT_SET(LW(1), 7077902)
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LW(0))
     EVT_IF_NE(LW(0), 0)
@@ -193,7 +193,7 @@ EvtSource N(80223FD8) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_80224038) = {
+EvtScript N(handleEvent_80224038) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -270,7 +270,7 @@ EvtSource N(handleEvent_80224038) = {
     EVT_END
 };
 
-EvtSource N(80224414) = {
+EvtScript N(80224414) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 40)
@@ -285,7 +285,7 @@ EvtSource N(80224414) = {
     EVT_END
 };
 
-EvtSource N(802244DC) = {
+EvtScript N(802244DC) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -301,7 +301,7 @@ EvtSource N(802244DC) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_802245C8) = {
+EvtScript N(takeTurn_802245C8) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, BS_FLAGS1_10)
@@ -385,7 +385,7 @@ EvtSource N(takeTurn_802245C8) = {
     EVT_END
 };
 
-EvtSource N(80224B3C) = {
+EvtScript N(80224B3C) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -483,7 +483,7 @@ EvtSource N(80224B3C) = {
     EVT_END
 };
 
-EvtSource N(80225258) = {
+EvtScript N(80225258) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, 85, 50, 0)
     EVT_CALL(SetBattleCamZoom, 280)
@@ -528,7 +528,7 @@ EvtSource N(80225258) = {
     EVT_END
 };
 
-EvtSource N(802255D8) = {
+EvtScript N(802255D8) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, 85, 50, 0)

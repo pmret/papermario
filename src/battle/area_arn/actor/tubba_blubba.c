@@ -6,14 +6,14 @@
 
 #define NAMESPACE b_area_arn_tubba_blubba
 
-extern EvtSource N(init_80225D98);
-extern EvtSource N(takeTurn_802264AC);
-extern EvtSource N(idle_80225F58);
-extern EvtSource N(handleEvent_802260D0);
-extern EvtSource N(80225E08);
-extern EvtSource N(80226558);
-extern EvtSource N(80226B88);
-extern EvtSource N(80227878);
+extern EvtScript N(init_80225D98);
+extern EvtScript N(takeTurn_802264AC);
+extern EvtScript N(idle_80225F58);
+extern EvtScript N(handleEvent_802260D0);
+extern EvtScript N(80225E08);
+extern EvtScript N(80226558);
+extern EvtScript N(80226B88);
+extern EvtScript N(80227878);
 
 s32 N(idleAnimations_80225C40)[] = {
     STATUS_NORMAL,    NPC_ANIM_battle_tubba_Palette_00_Anim_1,
@@ -59,7 +59,7 @@ s32 N(statusTable_80225CA0)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80225D4C)[] = {
+ActorPartBlueprint N(partsTable_80225D4C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -74,7 +74,7 @@ ActorPartDesc N(partsTable_80225D4C)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_TUBBA_BLUBBA_INVINCIBLE,
     .level = 70,
@@ -97,7 +97,7 @@ ActorDesc NAMESPACE = {
     .statusMessageOffset = { 10, 75 },
 };
 
-EvtSource N(init_80225D98) = {
+EvtScript N(init_80225D98) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802264AC)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80225F58)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_802260D0)))
@@ -107,7 +107,7 @@ EvtSource N(init_80225D98) = {
     EVT_END
 };
 
-EvtSource N(80225E08) = {
+EvtScript N(80225E08) = {
     EVT_LABEL(0)
     EVT_WAIT_FRAMES(1)
     EVT_CALL(ActorExists, ACTOR_SELF, LW(0))
@@ -135,7 +135,7 @@ EvtSource N(80225E08) = {
     EVT_END
 };
 
-EvtSource N(idle_80225F58) = {
+EvtScript N(idle_80225F58) = {
     EVT_LABEL(0)
     EVT_WAIT_FRAMES(1)
     EVT_GOTO(0)
@@ -143,7 +143,7 @@ EvtSource N(idle_80225F58) = {
     EVT_END
 };
 
-EvtSource N(80225F8C) = {
+EvtScript N(80225F8C) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LW(0))
     EVT_IF_EQ(LW(0), 0)
         EVT_RETURN
@@ -152,7 +152,7 @@ EvtSource N(80225F8C) = {
     EVT_END
 };
 
-EvtSource N(80225FD4) = {
+EvtScript N(80225FD4) = {
     EVT_SET(LW(1), 7012353)
     EVT_EXEC_WAIT(N(80225F8C))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, LW(1))
@@ -170,7 +170,7 @@ EvtSource N(80225FD4) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_802260D0) = {
+EvtScript N(handleEvent_802260D0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(10))
@@ -246,7 +246,7 @@ EvtSource N(handleEvent_802260D0) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_802264AC) = {
+EvtScript N(takeTurn_802264AC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(RandInt, 100, LW(0))
@@ -261,7 +261,7 @@ EvtSource N(takeTurn_802264AC) = {
     EVT_END
 };
 
-EvtSource N(80226558) = {
+EvtScript N(80226558) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(SetBattleCamZoom, 150)
@@ -351,7 +351,7 @@ EvtSource N(80226558) = {
     EVT_END
 };
 
-EvtSource N(80226B88) = {
+EvtScript N(80226B88) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(SetBattleCamZoom, 150)
@@ -521,7 +521,7 @@ EvtSource N(80226B88) = {
     EVT_END
 };
 
-EvtSource N(80227878) = {
+EvtScript N(80227878) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_14)
     EVT_CALL(ActorSpeak, MESSAGE_ID(0x0E, 0x00C9), ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_14, NPC_ANIM_battle_tubba_Palette_00_Anim_14)
     EVT_SET(LW(0), 1)

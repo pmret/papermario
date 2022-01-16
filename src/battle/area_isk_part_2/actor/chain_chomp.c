@@ -6,14 +6,14 @@
 
 #define NAMESPACE b_area_isk_part_2_chain_chomp
 
-extern EvtSource N(init_80218EC4);
-extern EvtSource N(takeTurn_8021A7C4);
-extern EvtSource N(idle_80219108);
-extern EvtSource N(handleEvent_802197C4);
-extern EvtSource N(8021972C);
-extern EvtSource N(8021A200);
-extern EvtSource N(8021B41C);
-extern EvtSource N(8021B50C);
+extern EvtScript N(init_80218EC4);
+extern EvtScript N(takeTurn_8021A7C4);
+extern EvtScript N(idle_80219108);
+extern EvtScript N(handleEvent_802197C4);
+extern EvtScript N(8021972C);
+extern EvtScript N(8021A200);
+extern EvtScript N(8021B41C);
+extern EvtScript N(8021B50C);
 
 s32 N(idleAnimations_80218B40)[] = {
     STATUS_NORMAL,    NPC_ANIM_chain_chomp_Palette_00_Anim_1,
@@ -102,7 +102,7 @@ s32 N(statusTable_80218C88)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80218D34)[] = {
+ActorPartBlueprint N(partsTable_80218D34)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -225,7 +225,7 @@ ActorPartDesc N(partsTable_80218D34)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_CHOMP,
     .level = 14,
@@ -265,7 +265,7 @@ ApiStatus func_8021866C_4EFB0C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource N(init_80218EC4) = {
+EvtScript N(init_80218EC4) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021A7C4)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80219108)))
@@ -283,7 +283,7 @@ EvtSource N(init_80218EC4) = {
     EVT_END
 };
 
-EvtSource N(80218FCC) = {
+EvtScript N(80218FCC) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
     EVT_IF_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -301,7 +301,7 @@ EvtSource N(80218FCC) = {
     EVT_END
 };
 
-EvtSource N(idle_80219108) = {
+EvtScript N(idle_80219108) = {
     EVT_LABEL(0)
     EVT_LOOP(0)
         EVT_EXEC_WAIT(N(80218FCC))
@@ -400,7 +400,7 @@ EvtSource N(idle_80219108) = {
     EVT_END
 };
 
-EvtSource N(8021972C) = {
+EvtScript N(8021972C) = {
     EVT_LABEL(0)
     EVT_WAIT_FRAMES(1)
     EVT_CALL(ActorExists, ACTOR_ENEMY1, LW(0))
@@ -414,7 +414,7 @@ EvtSource N(8021972C) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_802197C4) = {
+EvtScript N(handleEvent_802197C4) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -576,7 +576,7 @@ EvtSource N(handleEvent_802197C4) = {
     EVT_END
 };
 
-EvtSource N(8021A200) = {
+EvtScript N(8021A200) = {
     EVT_CALL(ActorExists, ACTOR_ENEMY0, LW(0))
     EVT_IF_EQ(LW(0), FALSE)
         EVT_GOTO(1)
@@ -659,7 +659,7 @@ EvtSource N(8021A200) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_8021A7C4) = {
+EvtScript N(takeTurn_8021A7C4) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
@@ -833,7 +833,7 @@ EvtSource N(takeTurn_8021A7C4) = {
     EVT_END
 };
 
-EvtSource N(8021B41C) = {
+EvtScript N(8021B41C) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_chain_chomp_Palette_00_Anim_4)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
@@ -848,7 +848,7 @@ EvtSource N(8021B41C) = {
     EVT_END
 };
 
-EvtSource N(8021B50C) = {
+EvtScript N(8021B50C) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(3), LW(4), LW(5))
     EVT_IF_LT(LW(3), LW(0))
         EVT_CALL(SetActorYaw, ACTOR_SELF, 180)

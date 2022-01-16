@@ -4,9 +4,9 @@
 
 #define NAMESPACE b_area_mim
 
-extern ActorDesc N(forest_fuzzy);
-extern ActorDesc N(piranha_plant);
-extern ActorDesc N(bzzap);
+extern ActorBlueprint N(forest_fuzzy);
+extern ActorBlueprint N(piranha_plant);
+extern ActorBlueprint N(bzzap);
 
 extern Stage N(mim_01);
 

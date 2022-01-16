@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_isk_part_2
 
-extern ActorDesc N(tutankoopa);
+extern ActorBlueprint N(tutankoopa);
 
 extern Stage N(isk_00);
 extern Stage N(isk_01);
