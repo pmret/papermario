@@ -750,7 +750,7 @@ EvtScript N(shellToss_KentC) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), 30)
     EVT_SET(LW(1), 0)
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
     EVT_THREAD
@@ -907,7 +907,7 @@ EvtScript N(tackle_KentC) = {
         EVT_WAIT_FRAMES(2)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_kent_c_koopa_Palette_00_Anim_8)
     EVT_END_THREAD
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.30078125))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.3))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 14, FALSE, TRUE, FALSE)
     EVT_WAIT_FRAMES(2)

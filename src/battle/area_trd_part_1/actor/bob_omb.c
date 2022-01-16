@@ -527,7 +527,7 @@ EvtScript N(tackleAttack) = {
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_SUB(LW(0), 5)
             EVT_SET(LW(1), 0)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1005859375))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_bob_omb_Palette_00_Anim_1C)
@@ -562,7 +562,7 @@ EvtScript N(tackleAttack) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(HIT_RESULT_HIT_STATIC)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1005859375))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_bob_omb_Palette_00_Anim_14)
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -575,7 +575,7 @@ EvtScript N(tackleAttack) = {
             EVT_RETURN
     EVT_END_SWITCH
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1005859375))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
     EVT_WAIT_FRAMES(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), 0, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -587,7 +587,7 @@ EvtScript N(tackleAttack) = {
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(0), 40)
             EVT_SET(LW(1), 0)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_ADD(LW(0), 30)

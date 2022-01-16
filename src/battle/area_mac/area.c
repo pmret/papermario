@@ -1,7 +1,6 @@
 #include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
-#include "message_ids.h"
 
 #define NAMESPACE b_area_mac
 

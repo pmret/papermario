@@ -642,17 +642,17 @@ EvtScript D_802A3168_00736708 = {
                 EVT_CASE_EQ(0)
                     EVT_CALL(StartRumble, 7)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.30078125))
+                        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.3))
                     EVT_END_THREAD
                 EVT_CASE_EQ(1)
                     EVT_CALL(StartRumble, 8)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.6005859375))
+                        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.6))
                     EVT_END_THREAD
                 EVT_CASE_EQ(2)
                     EVT_CALL(StartRumble, 9)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.900390625))
+                        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.9))
                     EVT_END_THREAD
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
@@ -661,17 +661,17 @@ EvtScript D_802A3168_00736708 = {
                 EVT_CASE_EQ(0)
                     EVT_CALL(StartRumble, 7)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.30078125))
+                        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.3))
                     EVT_END_THREAD
                 EVT_CASE_EQ(1)
                     EVT_CALL(StartRumble, 8)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.6005859375))
+                        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.6))
                     EVT_END_THREAD
                 EVT_CASE_EQ(2)
                     EVT_CALL(StartRumble, 9)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.900390625))
+                        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.9))
                     EVT_END_THREAD
             EVT_END_SWITCH
     EVT_END_SWITCH
@@ -759,19 +759,19 @@ EvtScript D_802A369C_00736C3C = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2115)
             EVT_CALL(StartRumble, 7)
             EVT_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.30078125))
+                EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.3))
             EVT_END_THREAD
         EVT_CASE_EQ(1)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2116)
             EVT_CALL(StartRumble, 8)
             EVT_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.6005859375))
+                EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.6))
             EVT_END_THREAD
         EVT_CASE_EQ(2)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, 0x2117)
             EVT_CALL(StartRumble, 9)
             EVT_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.900390625))
+                EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.9))
             EVT_END_THREAD
     EVT_END_SWITCH
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
@@ -837,17 +837,17 @@ EvtScript D_802A3C4C_007371EC = {
             EVT_CASE_EQ(0)
                 EVT_CALL(StartRumble, 8)
                 EVT_THREAD
-                    EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.30078125))
+                    EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.3))
                 EVT_END_THREAD
             EVT_CASE_EQ(1)
                 EVT_CALL(StartRumble, 9)
                 EVT_THREAD
-                    EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.6005859375))
+                    EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.6))
                 EVT_END_THREAD
             EVT_CASE_EQ(2)
                 EVT_CALL(StartRumble, 10)
                 EVT_THREAD
-                    EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.900390625))
+                    EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.9))
                 EVT_END_THREAD
         EVT_END_SWITCH
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
@@ -862,17 +862,17 @@ EvtScript D_802A3C4C_007371EC = {
                 EVT_CASE_EQ(0)
                     EVT_CALL(StartRumble, 8)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.30078125))
+                        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.3))
                     EVT_END_THREAD
                 EVT_CASE_EQ(1)
                     EVT_CALL(StartRumble, 9)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.6005859375))
+                        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.6))
                     EVT_END_THREAD
                 EVT_CASE_EQ(2)
                     EVT_CALL(StartRumble, 10)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.900390625))
+                        EVT_CALL(ShakeCam, 1, 0, 10, EVT_FLOAT(1.9))
                     EVT_END_THREAD
             EVT_END_SWITCH
         EVT_CASE_DEFAULT
@@ -881,17 +881,17 @@ EvtScript D_802A3C4C_007371EC = {
                 EVT_CASE_EQ(0)
                     EVT_CALL(StartRumble, 8)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.30078125))
+                        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.3))
                     EVT_END_THREAD
                 EVT_CASE_EQ(1)
                     EVT_CALL(StartRumble, 9)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.6005859375))
+                        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.6))
                     EVT_END_THREAD
                 EVT_CASE_EQ(2)
                     EVT_CALL(StartRumble, 10)
                     EVT_THREAD
-                        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.900390625))
+                        EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.9))
                     EVT_END_THREAD
             EVT_END_SWITCH
     EVT_END_SWITCH

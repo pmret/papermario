@@ -84,20 +84,20 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_isk_part_2),
         .name = "エリア ＩＳＫ その２",
-        .battles = 0x80220448,
-        .stages = 0x80220470,
+        .battles = &b_area_isk_part_2_formationTable,
+        .stages = &b_area_isk_part_2_stageTable,
     },
     {
         AREA(area_mim),
         .name = "エリア ＭＩＭ",
-        .battles = 0x8021EA70,
-        .stages = 0x8021EBEC,
+        .battles = &b_area_mim_formationTable,
+        .stages = &b_area_mim_stageTable,
     },
     {
         AREA(area_arn),
         .name = "エリア ＡＲＮ",
-        .battles = 0x80228110,
-        .stages = 0x80228278,
+        .battles = &b_area_arn_formationTable,
+        .stages = &b_area_arn_stageTable,
     },
     {
         AREA(area_dgb),

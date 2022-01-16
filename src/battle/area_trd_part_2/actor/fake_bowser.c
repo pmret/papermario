@@ -453,7 +453,7 @@ EvtScript N(8021B0E4) = {
     EVT_CALL(PlaySoundAtModel, 31, 482, 0)
     EVT_THREAD
         EVT_SET_GROUP(0)
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.7001953125))
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.7))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 70, 20)
     EVT_WAIT_FRAMES(20)
@@ -468,12 +468,12 @@ EvtScript N(8021B0E4) = {
     EVT_CALL(N(StartRumbleWithParams), 60, 20)
     EVT_THREAD
         EVT_SET_GROUP(0)
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.6005859375))
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.6))
     EVT_END_THREAD
     EVT_WAIT_FRAMES(20)
     EVT_THREAD
         EVT_SET_GROUP(0)
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.30078125))
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.3))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 30, 20)
     EVT_RETURN
@@ -679,7 +679,7 @@ EvtScript N(8021BD6C) = {
     EVT_SUB(LW(0), 150)
     EVT_SET(LW(1), -200)
     EVT_SUB(LW(2), 200)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(0.30078125))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(0.3))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 3, LW(0), LW(1), LW(2), 80, 1)
     EVT_RETURN
     EVT_END
@@ -863,7 +863,7 @@ EvtScript N(8021C67C) = {
     EVT_SUB(LW(0), 50)
     EVT_SET(LW(1), -200)
     EVT_SUB(LW(2), 200)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 10, EVT_FLOAT(0.30078125))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 10, EVT_FLOAT(0.3))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 10, LW(0), LW(1), LW(2), 80, 1)
     EVT_RETURN
     EVT_END
@@ -969,7 +969,7 @@ EvtScript N(8021CB98) = {
     EVT_SUB(LW(0), 0)
     EVT_SET(LW(1), -200)
     EVT_ADD(LW(2), 100)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 6, EVT_FLOAT(0.6005859375))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 6, EVT_FLOAT(0.6))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 6, LW(0), LW(1), LW(2), 80, 1)
     EVT_RETURN
     EVT_END
@@ -985,7 +985,7 @@ EvtScript N(8021CD50) = {
     EVT_SUB(LW(0), 0)
     EVT_SET(LW(1), -200)
     EVT_SUB(LW(2), 200)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 11, EVT_FLOAT(0.400390625))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 11, EVT_FLOAT(0.4))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 11, LW(0), LW(1), LW(2), 80, 1)
     EVT_RETURN
     EVT_END
@@ -1052,7 +1052,7 @@ EvtScript N(8021D054) = {
     EVT_SUB(LW(0), 150)
     EVT_SET(LW(1), -200)
     EVT_ADD(LW(2), 100)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 8, EVT_FLOAT(0.30078125))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 8, EVT_FLOAT(0.3))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 8, LW(0), LW(1), LW(2), 80, 1)
     EVT_RETURN
     EVT_END
@@ -1076,7 +1076,7 @@ EvtScript N(8021D1CC) = {
     EVT_SUB(LW(0), 50)
     EVT_SET(LW(1), -200)
     EVT_SUB(LW(2), 100)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 9, EVT_FLOAT(0.30078125))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 9, EVT_FLOAT(0.3))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 9, LW(0), LW(1), LW(2), 80, 1)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
@@ -1104,7 +1104,7 @@ EvtScript N(8021D350) = {
     EVT_SUB(LW(0), 0)
     EVT_SET(LW(1), -200)
     EVT_ADD(LW(2), 200)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 7, EVT_FLOAT(0.30078125))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 7, EVT_FLOAT(0.3))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 7, LW(0), LW(1), LW(2), 80, 1)
     EVT_RETURN
     EVT_END
@@ -1581,7 +1581,7 @@ EvtScript N(8021F630) = {
     EVT_CALL(SetActorPos, ACTOR_ENEMY0, 100, 0, 10)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_koopa_bros_Palette_03_Anim_1C)
     EVT_THREAD
-        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY0, EVT_FLOAT(0.400390625))
+        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY0, EVT_FLOAT(0.4))
         EVT_CALL(SetActorSounds, ACTOR_ENEMY0, 2, 0, 0)
         EVT_CALL(SetGoalPos, ACTOR_ENEMY0, -300, 250, 0)
         EVT_CALL(JumpToGoal, ACTOR_ENEMY0, 50, FALSE, TRUE, FALSE)
@@ -1591,7 +1591,7 @@ EvtScript N(8021F630) = {
     EVT_CALL(SetActorPos, ACTOR_ENEMY1, 100, 0, 10)
     EVT_CALL(SetAnimation, ACTOR_ENEMY1, 1, NPC_ANIM_koopa_bros_Palette_02_Anim_1C)
     EVT_THREAD
-        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY1, EVT_FLOAT(0.400390625))
+        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY1, EVT_FLOAT(0.4))
         EVT_CALL(SetActorSounds, ACTOR_ENEMY1, 2, 0, 0)
         EVT_CALL(SetGoalPos, ACTOR_ENEMY1, -200, 250, 0)
         EVT_CALL(JumpToGoal, ACTOR_ENEMY1, 50, FALSE, TRUE, FALSE)
@@ -1601,7 +1601,7 @@ EvtScript N(8021F630) = {
     EVT_CALL(SetActorPos, ACTOR_ENEMY2, 100, 0, 10)
     EVT_CALL(SetAnimation, ACTOR_ENEMY2, 1, NPC_ANIM_koopa_bros_Palette_00_Anim_1C)
     EVT_THREAD
-        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY2, EVT_FLOAT(0.400390625))
+        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY2, EVT_FLOAT(0.4))
         EVT_CALL(SetActorSounds, ACTOR_ENEMY2, 2, 0, 0)
         EVT_CALL(SetGoalPos, ACTOR_ENEMY2, 0, 250, 0)
         EVT_CALL(JumpToGoal, ACTOR_ENEMY2, 50, FALSE, TRUE, FALSE)
@@ -1611,7 +1611,7 @@ EvtScript N(8021F630) = {
     EVT_CALL(SetActorPos, ACTOR_ENEMY3, 100, 0, 10)
     EVT_CALL(SetAnimation, ACTOR_ENEMY3, 1, NPC_ANIM_koopa_bros_Palette_01_Anim_1C)
     EVT_THREAD
-        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY3, EVT_FLOAT(0.400390625))
+        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY3, EVT_FLOAT(0.4))
         EVT_CALL(SetActorSounds, ACTOR_ENEMY3, 2, 0, 0)
         EVT_CALL(SetGoalPos, ACTOR_ENEMY3, 150, 250, 0)
         EVT_CALL(JumpToGoal, ACTOR_ENEMY3, 50, FALSE, TRUE, FALSE)
@@ -1880,7 +1880,7 @@ EvtScript N(80220588) = {
                 EVT_CASE_EQ(ACTOR_ENEMY3)
                     EVT_CALL(SetAnimation, LW(10), 1, NPC_ANIM_koopa_bros_Palette_01_Anim_11)
             EVT_END_SWITCH
-            EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6005859375))
+            EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, LW(10), 20, FALSE, FALSE, FALSE)
             EVT_CALL(func_8021837C_4B156C, LW(10))
             EVT_CALL(PlaySoundAtActor, LW(10), 0x3E9)
@@ -2030,7 +2030,7 @@ EvtScript N(80220588) = {
                     EVT_CASE_EQ(ACTOR_ENEMY3)
                         EVT_CALL(SetAnimation, LW(10), 1, NPC_ANIM_koopa_bros_Palette_01_Anim_11)
                 EVT_END_SWITCH
-                EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6005859375))
+                EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6))
                 EVT_CALL(JumpToGoal, LW(10), 20, FALSE, FALSE, FALSE)
                 EVT_CALL(func_8021837C_4B156C, LW(10))
                 EVT_CALL(PlaySoundAtActor, LW(10), 0x3E9)
@@ -2096,7 +2096,7 @@ EvtScript N(80220588) = {
                     EVT_CASE_EQ(ACTOR_ENEMY3)
                         EVT_CALL(SetAnimation, LW(10), 1, NPC_ANIM_koopa_bros_Palette_01_Anim_11)
                 EVT_END_SWITCH
-                EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6005859375))
+                EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6))
                 EVT_CALL(JumpToGoal, LW(10), 20, FALSE, FALSE, FALSE)
                 EVT_CALL(func_8021837C_4B156C, LW(10))
                 EVT_CALL(PlaySoundAtActor, LW(10), 0x3E9)
@@ -2223,7 +2223,7 @@ EvtScript N(80221DB4) = {
                 EVT_CASE_EQ(ACTOR_ENEMY3)
                     EVT_CALL(SetAnimation, LW(10), 1, NPC_ANIM_koopa_bros_Palette_01_Anim_11)
             EVT_END_SWITCH
-            EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6005859375))
+            EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, LW(10), 20, FALSE, FALSE, FALSE)
             EVT_CALL(func_8021837C_4B156C, LW(10))
             EVT_CALL(PlaySoundAtActor, LW(10), 0x3E9)
@@ -2305,7 +2305,7 @@ EvtScript N(80221DB4) = {
                 EVT_CASE_EQ(ACTOR_ENEMY3)
                     EVT_CALL(SetAnimation, LW(10), 1, NPC_ANIM_koopa_bros_Palette_01_Anim_11)
             EVT_END_SWITCH
-            EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6005859375))
+            EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, LW(10), 20, FALSE, FALSE, FALSE)
             EVT_CALL(func_8021837C_4B156C, LW(10))
             EVT_CALL(PlaySoundAtActor, LW(10), 0x3E9)

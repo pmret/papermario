@@ -3891,32 +3891,53 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4EF4A0, c]
-    - [0x4EFCF0, c]
-    - [0x4EFDC0, c]
-    - [0x4EFE90, c]
-    - [0x4EFFE0, data]
+    - [0x4EF4A0, c, actor/chain_chomp]
+    - [0x4EFB30, c, actor/tutankoopa]
+    - [0x4EFCF0, c, stage/isk_00]
+    - [0x4EFCF0, c, stage/isk_01]
+    - [0x4EFCF0, c, stage/isk_02]
+    - [0x4EFCF0, c, stage/isk_02b]
+    - [0x4EFCF0, c, stage/isk_02c]
+    - [0x4EFCF0, c, stage/isk_03]
+    - [0x4EFCF0, c, stage/isk_03b]
+    - [0x4EFCF0, c, stage/isk_04]
+    - [0x4EFDC0, c, stage/isk_05]
+    - [0x4EFE90, c, stage/isk_06]
+    - [0x4EFF00, c, stage/isk_06b]
+    - [0x4EFF70, c, stage/isk_07]
+    - [0x4EFFE0, c, area]
+    - [0x4EFFE0]
   - dir: battle/area_mim
     type: code
     start: 0x4F7BE0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4F7BE0, c]
-    - [0x4F7D50, c]
-    - [0x4F7F40, c]
-    - [0x4F7FA0, data]
+    - [0x4F7BE0, c, actor/forest_fuzzy]
+    - [0x4F7D50, c, actor/bzzap]
+    - [0x4F7F40, c, actor/piranha_plant]
+    - [0x4F7F40, c, stage/mim_01]
+    - [0x4F7FA0, c, area]
+    - [0x4F7FA0]
   - dir: battle/area_arn
     type: code
     start: 0x4FEA50
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4FEA50, c]
-    - [0x4FED30, c]
-    - [0x4FF010, c]
-    - [0x4FF0D0, c]
-    - [0x4FF1C0, data]
+    - [0x4FEA50, c, actor/hypergoomba]
+    - [0x4FED30, c, actor/hyper_paragoomba]
+    - [0x4FF010, c, actor/hyper_cleft]
+    - [0x4FF0D0, c, actor/tubbas_heart]
+    - [0x4FF1C0, c, actor/tubba_blubba]
+    - [0x4FF1C0, c, stage/arn_01]
+    - [0x4FF1C0, c, stage/arn_02]
+    - [0x4FF1C0, c, stage/arn_03]
+    - [0x4FF1C0, c, stage/arn_04]
+    - [0x4FF1C0, c, stage/arn_05]
+    - [0x4FF1C0, c, stage/arn_06]
+    - [0x4FF1C0, c, area]
+    - [0x4FF1C0]
   - dir: battle/area_dgb
     type: code
     start: 0x50F020

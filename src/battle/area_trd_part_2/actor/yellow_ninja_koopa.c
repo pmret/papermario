@@ -265,7 +265,7 @@ EvtScript N(8022E688) = {
                     EVT_IF_EQ(LW(0), 3)
                         EVT_SET(LF(0), 1)
                     EVT_END_IF
-                    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6005859375))
+                    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
                     EVT_CALL(func_80219CF0_4B2EE0, LW(0), LW(1), LW(2))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_bros_Palette_02_Anim_A)
@@ -274,7 +274,7 @@ EvtScript N(8022E688) = {
                     EVT_IF_EQ(LF(0), 1)
                         EVT_CALL(N(StartRumbleWithParams), 256, 5)
                         EVT_THREAD
-                            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.80078125))
+                            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.8))
                         EVT_END_THREAD
                     EVT_END_IF
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_bros_Palette_02_Anim_C)
@@ -304,7 +304,7 @@ EvtScript N(8022E688) = {
                     EVT_IF_EQ(LW(0), 3)
                         EVT_SET(LF(0), 1)
                     EVT_END_IF
-                    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6005859375))
+                    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
                     EVT_CALL(func_80219CF0_4B2EE0, LW(0), LW(1), LW(2))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_bros_Palette_02_Anim_E)
@@ -313,7 +313,7 @@ EvtScript N(8022E688) = {
                     EVT_IF_EQ(LF(0), 1)
                         EVT_CALL(N(StartRumbleWithParams), 256, 5)
                         EVT_THREAD
-                            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.80078125))
+                            EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.8))
                         EVT_END_THREAD
                     EVT_END_IF
                     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))

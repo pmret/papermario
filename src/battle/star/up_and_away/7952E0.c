@@ -341,10 +341,10 @@ EvtScript N(usePower) = {
                 EVT_SET(LW(14), LW(1))
                 EVT_SET(LW(15), LW(2))
                 EVT_CALL(SetVirtualEntityPosition, LW(10), LW(0), LW(1), LW(2))
-                EVT_SETF(LW(0), EVT_FLOAT(0.2001953125))
+                EVT_SETF(LW(0), EVT_FLOAT(0.2))
                 EVT_CALL(SetVirtualEntityScale, LW(10), LW(0), LW(0), LW(0))
                 EVT_LOOP(4)
-                    EVT_ADDF(LW(0), EVT_FLOAT(0.2001953125))
+                    EVT_ADDF(LW(0), EVT_FLOAT(0.2))
                     EVT_CALL(SetVirtualEntityScale, LW(10), LW(0), LW(0), LW(0))
                     EVT_WAIT_FRAMES(1)
                 EVT_END_LOOP
@@ -373,7 +373,7 @@ EvtScript N(usePower) = {
                 EVT_CALL(SetActorFlagBits, LW(10), 4, 1)
                 EVT_SETF(LW(0), EVT_FLOAT(1.0))
                 EVT_LOOP(18)
-                    EVT_SUBF(LW(0), EVT_FLOAT(0.05078125))
+                    EVT_SUBF(LW(0), EVT_FLOAT(0.05))
                     EVT_CALL(SetActorScale, LW(10), LW(0), LW(0), LW(0))
                     EVT_WAIT_FRAMES(1)
                 EVT_END_LOOP

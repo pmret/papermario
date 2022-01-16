@@ -124,7 +124,7 @@ EvtScript N(GoombaIdle) = SCRIPT({
     sleep 5;
     PlaySoundAtNpc(NPC_SELF, 812, 0);
     EnableNpcShadow(NPC_SELF, TRUE);
-    SetNpcJumpscale(NPC_SELF, 0.6005859375);
+    SetNpcJumpscale(NPC_SELF, 0.6);
     NpcJump0(NPC_SELF, -35, 0, 30, 23);
     func_802CFD30(NPC_SELF, 0, 0, 0, 0, 0);
     InterpNpcYaw(NPC_SELF, 90, 0);

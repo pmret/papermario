@@ -174,7 +174,7 @@ EvtScript N(main) = {
         EVT_CALL(StartRumble, 5)
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.75))
         EVT_CALL(ShakeCam, 1, 0, 5, EVT_FIXED(1.5))
-        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FIXED(1.2001953125))
+        EVT_CALL(ShakeCam, 1, 0, 4, EVT_FIXED(1.2))
         EVT_CALL(ShakeCam, 1, 0, 2, EVT_FIXED(0.4501953125))
     EVT_END_THREAD
     EVT_CALL(GetItemPower, 200, EVT_VAR(0), EVT_VAR(1))

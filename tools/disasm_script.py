@@ -78,12 +78,10 @@ def extend_symbol_map(a, b):
     return a
 
 def round_fixed(f: float) -> float:
-    """
     g = f * 100.0
     whole = round(g)
     if abs(g - whole) <= 100.0/1024.0:
         f = whole / 100.0
-        """
     return f
 
 def find_symbol_in_overlay(symbol_map, overlay_rom_addr, symbol_ram_addr):
@@ -283,20 +281,23 @@ def fix_args(self, func, args, info):
             elif info[i] == "Hex" and argNum > 0:
                 new_args.append(f"0x{argNum:08X}")
             elif info[i] == "CustomAnim":
-                try:
-                    value = (argNum & 0x00FFFFFF)
+                if argNum != -1:
+                    try:
+                        value = (argNum & 0x00FFFFFF)
 
-                    if func == "SetAnimation" and int(new_args[1], 10) == 0:
-                        call = f"{CONSTANTS['PlayerAnims'][argNum]}"
-                    elif value in CONSTANTS["NPC_SPRITE"]:
-                        self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
-                        call =  CONSTANTS['NPC_SPRITE'][value]
-                    else:
-                        call = f"{argNum:06X}"
-                except ValueError:
-                        call = f"0x{argNum:06X}"
-                except KeyError:
-                        call = f"0x{argNum:06X}"
+                        if func == "SetAnimation" and int(new_args[1], 10) == 0:
+                            call = f"{CONSTANTS['PlayerAnims'][argNum]}"
+                        elif value in CONSTANTS["NPC_SPRITE"]:
+                            self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
+                            call =  CONSTANTS['NPC_SPRITE'][value]
+                        else:
+                            call = f"{argNum:06X}"
+                    except ValueError:
+                            call = f"0x{argNum:06X}"
+                    except KeyError:
+                            call = f"0x{argNum:06X}"
+                else:
+                    call = "-1"
                 new_args.append(call)
             elif info[i] == "CustomMsg":
                 type_ = (argNum & 0xFF0000) >> 16
@@ -383,6 +384,7 @@ replace_funcs = {
     "DispatchEvent"             :{0:"ActorIDs", 1:"Events"},
 
     "EnableActorBlur"           :{0:"ActorIDs"},
+    "EnableActorGlow"           :{0:"ActorIDs", 1:"Bool"},
     "EnableIdleScript"          :{0:"ActorIDs"},
     "EnableNpcShadow"           :{0:"NpcIDs", 1:"Bool"},
     "EndActorSpeech"            :{0:"ActorIDs", 2:"CustomAnim", 3:"CustomAnim"},
@@ -542,6 +544,7 @@ replace_funcs = {
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
+    "SetSpriteShading"          :{0:"CustomAnim"},
     "SetStatusTable"            :{0:"ActorIDs"},
     "SetTargetActor"            :{0:"ActorIDs", 1:"ActorIDs"},
     "SetTargetOffset"           :{0:"ActorIDs"},

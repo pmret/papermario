@@ -235,7 +235,7 @@ EvtScript N(shakeTree) = {
                 EVT_BUF_READ1(LW(2))
                 EVT_LOOP(LW(2))
                     EVT_BUF_READ1(LW(3))
-                    EVT_CALL(N(TransformFoliage), LW(3), EVT_FLOAT(0.1005859375), EVT_FLOAT(0.2001953125), LW(15), 0)
+                    EVT_CALL(N(TransformFoliage), LW(3), EVT_FLOAT(0.1), EVT_FLOAT(0.2), LW(15), 0)
                     EVT_IF_EQ(LF(0), 0)
                         EVT_SET(LF(0), 1)
                         EVT_CALL(PlaySoundAtModel, LW(3), 358, 0)
@@ -246,7 +246,7 @@ EvtScript N(shakeTree) = {
                 EVT_BUF_READ1(LW(2))
                 EVT_LOOP(LW(2))
                     EVT_BUF_READ1(LW(3))
-                    EVT_CALL(N(TransformFoliage), LW(3), EVT_FLOAT(0.1005859375), EVT_FLOAT(-0.19921875), LW(15), 0)
+                    EVT_CALL(N(TransformFoliage), LW(3), EVT_FLOAT(0.1), EVT_FLOAT(-0.2), LW(15), 0)
                 EVT_END_LOOP
                 EVT_WAIT_FRAMES(1)
             EVT_END_LOOP
@@ -267,7 +267,7 @@ EvtScript N(shakeTree) = {
                 EVT_BUF_READ1(LW(3))
                 EVT_LOOP(LW(3))
                     EVT_BUF_READ1(LW(4))
-                    EVT_CALL(N(TransformFoliage), LW(4), EVT_FLOAT(0.1005859375), EVT_FLOAT(0.2001953125), LW(15), 0)
+                    EVT_CALL(N(TransformFoliage), LW(4), EVT_FLOAT(0.1), EVT_FLOAT(0.2), LW(15), 0)
                     EVT_IF_EQ(LF(0), 0)
                         EVT_SET(LF(0), 1)
                         EVT_CALL(PlaySoundAtModel, LW(4), 357, 0)
@@ -278,7 +278,7 @@ EvtScript N(shakeTree) = {
                 EVT_BUF_READ1(LW(3))
                 EVT_LOOP(LW(3))
                     EVT_BUF_READ1(LW(4))
-                    EVT_CALL(N(TransformFoliage), LW(4), EVT_FLOAT(0.1005859375), EVT_FLOAT(-0.19921875), LW(15), 0)
+                    EVT_CALL(N(TransformFoliage), LW(4), EVT_FLOAT(0.1), EVT_FLOAT(-0.2), LW(15), 0)
                 EVT_END_LOOP
                 EVT_WAIT_FRAMES(1)
             EVT_END_LOOP
@@ -352,7 +352,7 @@ EvtScript N(80223DBC) = {
         EVT_CALL(SetGoalPos, ACTOR_SELF, 10, 0, 10)
         EVT_CALL(SetPartFlagBits, -127, 2, 1, 0)
         EVT_CALL(PlaySoundAtPart, -127, 2, 769)
-        EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.80078125))
+        EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.8))
         EVT_CALL(SetPartMoveSpeed, -127, 2, EVT_FLOAT(4.0))
         EVT_CALL(FallPartTo, -127, 2, 10, 20, 10, 20)
         EVT_CALL(JumpPartTo, -127, 2, 30, 20, 10, 10, 1)
@@ -366,7 +366,7 @@ EvtScript N(80223DBC) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(PlaySoundAtPart, -127, 2, 769)
-    EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.80078125))
+    EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.8))
     EVT_CALL(SetPartMoveSpeed, -127, 2, EVT_FLOAT(4.0))
     EVT_CALL(GetStatusFlags, ACTOR_ENEMY0, LW(0))
     EVT_IF_NOT_FLAG(LW(0), 0x80000)
@@ -384,7 +384,7 @@ EvtScript N(80223DBC) = {
         EVT_CALL(GetPartOffset, -127, 2, LW(0), LW(1), LW(2))
         EVT_ADD(LW(0), 65)
         EVT_SET(LW(1), 20)
-        EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.7001953125))
+        EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.7))
         EVT_CALL(JumpPartTo, -127, 2, LW(0), LW(1), LW(2), 20, 1)
         EVT_ADD(LW(0), 12)
         EVT_CALL(JumpPartTo, -127, 2, LW(0), LW(1), LW(2), 8, 1)
@@ -403,7 +403,7 @@ EvtScript N(80223DBC) = {
     EVT_ELSE
         EVT_ADD(LW(1), 20)
     EVT_END_IF
-    EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.7001953125))
+    EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.7))
     EVT_CALL(JumpPartTo, -127, 2, LW(0), LW(1), LW(2), 20, 1)
     EVT_CALL(SetOwnerTarget, 513, 1)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -413,7 +413,7 @@ EvtScript N(80223DBC) = {
         EVT_CALL(GetPartOffset, -127, 2, LW(0), LW(1), LW(2))
         EVT_ADD(LW(0), 35)
         EVT_SET(LW(1), 20)
-        EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.7001953125))
+        EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.7))
         EVT_CALL(JumpPartTo, -127, 2, LW(0), LW(1), LW(2), 20, 1)
         EVT_ADD(LW(0), 12)
         EVT_CALL(JumpPartTo, -127, 2, LW(0), LW(1), LW(2), 8, 1)
@@ -432,7 +432,7 @@ EvtScript N(80223DBC) = {
     EVT_ELSE
         EVT_ADD(LW(1), 20)
     EVT_END_IF
-    EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.7001953125))
+    EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.7))
     EVT_CALL(JumpPartTo, -127, 2, LW(0), LW(1), LW(2), 20, 1)
     EVT_CALL(SetOwnerTarget, 514, 1)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -440,7 +440,7 @@ EvtScript N(80223DBC) = {
     EVT_CALL(GetPartOffset, -127, 2, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), 20)
     EVT_SET(LW(1), 20)
-    EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.7001953125))
+    EVT_CALL(SetPartJumpGravity, -127, 2, EVT_FLOAT(0.7))
     EVT_CALL(JumpPartTo, -127, 2, LW(0), LW(1), LW(2), 20, 1)
     EVT_ADD(LW(0), 12)
     EVT_CALL(JumpPartTo, -127, 2, LW(0), LW(1), LW(2), 8, 1)

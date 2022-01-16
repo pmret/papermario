@@ -305,7 +305,7 @@ EvtScript N(handleEvent_8022ADD8) = {
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_mage_jr_troopa_default_run)
             EVT_EXEC_WAIT(DoReturnHome)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6005859375))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_EQ(38)
             EVT_SET_CONST(LW(0), 0x00000001)
@@ -383,7 +383,7 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_ELSE
         EVT_SET(LW(3), 0)
         EVT_SET(LW(4), 14)
-        EVT_SETF(LW(5), EVT_FLOAT(0.400390625))
+        EVT_SETF(LW(5), EVT_FLOAT(0.4))
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), LW(3))
@@ -408,7 +408,7 @@ EvtScript N(takeTurn_8022B4F0) = {
             EVT_ELSE
                 EVT_SET(LW(6), -3)
                 EVT_SET(LW(7), 8)
-                EVT_SETF(LW(8), EVT_FLOAT(0.400390625))
+                EVT_SETF(LW(8), EVT_FLOAT(0.4))
             EVT_END_IF
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(0), LW(6))
@@ -434,7 +434,7 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_ELSE
         EVT_SET(LW(6), -3)
         EVT_SET(LW(7), 8)
-        EVT_SETF(LW(8), EVT_FLOAT(0.400390625))
+        EVT_SETF(LW(8), EVT_FLOAT(0.4))
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), LW(6))
