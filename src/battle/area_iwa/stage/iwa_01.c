@@ -39,7 +39,7 @@ Stage NAMESPACE = {
     .postBattle = N(afterBattle_80220894),
     .foregroundModelList = N(foregroundModelList_802208A4),
     .unk_1C = 1,
-    .unk_20 = N(specialFormation_802208E4),
+    .unk_20 = &N(specialFormation_802208E4),
     .unk_24 = 0x200,
 };
 
