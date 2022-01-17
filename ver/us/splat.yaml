@@ -4064,12 +4064,22 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x573920, c]
-    - [0x5739F0, c]
-    - [0x573AC0, c]
-    - [0x573C30, c]
-    - [0x573E10, c]
-    - [0x573EE0, data]
+    - [0x573920, c, actor/spear_guy]
+    - [0x5739F0, c, actor/hurt_plant]
+    - [0x573AC0, c, actor/jungle_fuzzy]
+    - [0x573C30, c, actor/m_bush]
+    - [0x573C30, c, actor/medi_guy]
+    - [0x573E10, c, actor/spike_top]
+    - [0x573EE0, c, stage/jan_00]
+    - [0x573EE0, c, stage/jan_01]
+    - [0x573EE0, c, stage/jan_01b]
+    - [0x573EE0, c, stage/jan_02]
+    - [0x573EE0, c, stage/jan_03]
+    - [0x573EE0, c, stage/jan_03b]
+    - [0x573EE0, c, stage/jan_04]
+    - [0x573EE0, c, stage/jan_04b]
+    - [0x573EE0, c, area]
+    - [0x573EE0]
   - dir: battle/area_jan2
     type: code
     start: 0x584940

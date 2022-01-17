@@ -58,6 +58,9 @@ extern StageList b_area_omo_stageTable;
 extern BattleList b_area_kgr_formationTable;
 extern StageList b_area_kgr_stageTable;
 
+extern BattleList b_area_jan_formationTable;
+extern StageList b_area_jan_stageTable;
+
 extern BattleList b_area_jan2_formationTable;
 extern StageList b_area_jan2_stageTable;
 

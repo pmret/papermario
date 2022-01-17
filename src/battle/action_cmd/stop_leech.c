@@ -8,7 +8,7 @@ extern HudScript HudScript_BlueMeter[];
 extern HudScript HudScript_AButton[];
 extern s32 D_80294260;
 
-ApiStatus func_802A9000_425590(void) {
+ApiStatus func_802A9000_425590(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hudElement;
@@ -43,7 +43,7 @@ ApiStatus func_802A9000_425590(void) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A9110_4256A0(Evt* script) {
+ApiStatus func_802A9110_4256A0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
