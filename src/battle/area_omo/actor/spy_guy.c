@@ -408,28 +408,11 @@ EvtScript N(slingshotAttack) = {
     EVT_END
 };
 
-s32 N(intTable_80228748)[] = {
-    0x00000166, 0x00000167, 0x00000168,
-};
-
-s32 N(intTable_80228754)[] = {
-    0x00000049, 0x0000004A, 0x0000004B,
-};
-
-s32 N(intTable_80228760)[] = {
-    0x00000169, 0x0000016A, 0x0000016B,
-};
-
-s32 N(intTable_8022876C)[] = {
-    0x0000004C, 0x0000004D, 0x0000004E,
-};
-
 #include "common/ItemEntityJumpToPos.inc.c"
 
 #include "common/GetItemEntityPosition.inc.c"
 
-ApiStatus func_80218B38_513108(Evt *script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/area_omo/512E50", func_80218B38_513108);
+#include "common/DisableRandomAbility.inc.c"
 
 #include "common/SpyGuyActionFunc.inc.c"
 
@@ -444,7 +427,7 @@ EvtScript N(80228778) = {
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(1), LW(2), LW(3))
             EVT_SET(LW(2), 0)
             EVT_SUB(LW(3), 1)
-            EVT_CALL(func_80218B38_513108, LW(4), LW(5))
+            EVT_CALL(N(DisableRandomAbility), LW(4), LW(5))
             EVT_CALL(MakeItemEntity, LW(4), LW(1), LW(2), LW(3), 1, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 1, LW(0))
             EVT_ADD(LW(1), 30)

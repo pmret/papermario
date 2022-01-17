@@ -52,4 +52,10 @@ extern StageList b_area_arn_stageTable;
 extern BattleList b_area_dgb_formationTable;
 extern StageList b_area_dgb_stageTable;
 
+extern BattleList b_area_omo_formationTable;
+extern StageList b_area_omo_stageTable;
+
+extern BattleList b_area_kgr_formationTable;
+extern StageList b_area_kgr_stageTable;
+
 #endif

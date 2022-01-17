@@ -34,6 +34,7 @@ ApiStatus ShowBattleChoice(Evt* script, s32 isInitialCall);
 ApiStatus OverrideBattleDmaDest(Evt* script, s32 isInitialCall);
 ApiStatus LoadBattleDmaData(Evt* script, s32 isInitialCall);
 ApiStatus func_802536A8(Evt* script, s32 isInitialCall);
+ApiStatus func_80253734(Evt* script, s32 isInitialCall);
 ApiStatus PlaySoundAtActor(Evt* script, s32 isInitialCall);
 ApiStatus PlaySoundAtPart(Evt* script, s32 isInitialCall);
 ApiStatus SetForegroundModelsVisibleUnchecked(Evt* script, s32 isInitialCall);

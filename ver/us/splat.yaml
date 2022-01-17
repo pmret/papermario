@@ -4054,9 +4054,10 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x56E2A0, c]
-    - [0x56E800, c]
-    - [0x56EC50, data]
+    - [0x56E2A0, c, actor/fuzzipede]
+    - [0x56E800, c, stage/kgr_01]
+    - [0x56EC50, c, area]
+    - [0x56EC50]
   - dir: battle/area_jan
     type: code
     start: 0x573920

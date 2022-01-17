@@ -108,8 +108,8 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_omo),
         .name = "エリア ＯＭＯ",
-        .battles = 0x80230730,
-        .stages = 0x80230AC8,
+        .battles = &b_area_omo_formationTable,
+        .stages = &b_area_omo_stageTable,
     },
     {
         AREA(area_omo2),
@@ -126,8 +126,8 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kgr),
         .name = "エリア ＫＧＲ",
-        .battles = 0x8021D5FC,
-        .stages = 0x8021D624,
+        .battles = &b_area_kgr_formationTable,
+        .stages = &b_area_kgr_stageTable,
     },
     {
         AREA(area_jan),
