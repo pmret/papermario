@@ -1,12 +1,11 @@
-#define NAMESPACE battle_partner_goombario
-
 #include "common.h"
 #include "effects.h"
-#include "message_ids.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
 #include "sprite/npc/battle_goombario.h"
+
+#define NAMESPACE battle_partner_goombario
 
 extern EffectInstance* D_8023CDA0;
 extern s32 D_8023CDA4;
