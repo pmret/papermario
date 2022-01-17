@@ -4076,9 +4076,18 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x584940, c]
-    - [0x584B90, c]
-    - [0x585000, data]
+    - [0x584940, c, actor/putrid_piranha]
+    - [0x584B90, c, actor/white_magikoopa]
+    - [0x585000, c, stage/jan_00]
+    - [0x585000, c, stage/jan_01]
+    - [0x585000, c, stage/jan_01b]
+    - [0x585000, c, stage/jan_02]
+    - [0x585000, c, stage/jan_03]
+    - [0x585000, c, stage/jan_03b]
+    - [0x585000, c, stage/jan_04]
+    - [0x585000, c, stage/jan_04b]
+    - [0x585000, c, area]
+    - [0x585000]
   - dir: battle/area_kzn
     type: code
     start: 0x58C2F0

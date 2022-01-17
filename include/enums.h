@@ -1654,8 +1654,10 @@ enum PlayerBuffs {
 
 enum StatusFlags {
     STATUS_FLAG_1               = 0x00000001,
+    STATUS_FLAG_4               = 0x00000004,
     STATUS_FLAG_8               = 0x00000008,
     STATUS_FLAG_20              = 0x00000020,
+    STATUS_FLAG_40              = 0x00000040,
     STATUS_FLAG_100             = 0x00000100,
     STATUS_FLAG_200             = 0x00000200,
     STATUS_FLAG_SLEEP           = 0x00001000,
