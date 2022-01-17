@@ -4291,7 +4291,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x6F0B30, data]
+    - [0x6F0B30, c, goompa]
   - name: battle_partner_goombario
     dir: battle/partner
     type: code
