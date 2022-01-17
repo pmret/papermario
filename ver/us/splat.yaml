@@ -4753,8 +4753,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x737890, c]
-    - [0x737A20, data]
+    - [0x737890, c, spin_smash]
+    - [0x737A20]
   - dir: battle/move/quake_hammer
     type: code
     start: 0x73AED0

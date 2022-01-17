@@ -774,7 +774,7 @@ class ScriptDisassembler:
 
             if self.prelude:
                 try:
-                    self.prefix_line(f"EvtScript D_{self.script_name - info[0] + info[2]:08X}_{self.script_name:08X} = {{")
+                    self.prefix_line(f"EvtScript D_{self.script_name - info[0] + info[2]:08X}_{self.script_name:06X} = {{")
                     self.write_line("};")
                 except:
                     self.prefix_line(f"EvtScript {self.script_name} = {{")
