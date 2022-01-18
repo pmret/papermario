@@ -807,6 +807,7 @@ void draw_encounters_pre_battle(void);
 void draw_encounters_neutral(void);
 void show_first_strike_message(void);
 void entity_upgrade_block_hide_content(s32);
+s32 lookup_defense(s32*, s32);
 
 void clear_player_status(void);
 void clear_entity_models(void);

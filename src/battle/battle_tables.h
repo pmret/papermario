@@ -64,4 +64,7 @@ extern StageList b_area_jan_stageTable;
 extern BattleList b_area_jan2_formationTable;
 extern StageList b_area_jan2_stageTable;
 
+extern BattleList b_area_kzn_formationTable;
+extern StageList b_area_kzn_stageTable;
+
 #endif

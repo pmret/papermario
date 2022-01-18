@@ -144,8 +144,8 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kzn),
         .name = "エリア ＫＺＮ",
-        .battles = 0x80229E74,
-        .stages = 0x8022A02C,
+        .battles = &b_area_kzn_formationTable,
+        .stages = &b_area_kzn_stageTable,
     },
     {
         AREA(area_kzn2),
