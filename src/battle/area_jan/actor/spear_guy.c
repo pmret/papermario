@@ -5,7 +5,7 @@
 #include "sprite/npc/shy_guy.h"
 #include "sprite/npc/jungle_guy.h"
 
-#define NAMESPACE b_area_jan_jungle_guy
+#define NAMESPACE b_area_jan_spear_guy
 
 extern s32 N(idleAnimations_8021BF40)[];
 extern EvtScript N(init_80218980);
@@ -171,7 +171,7 @@ ActorPartBlueprint N(partsTable_802187F0)[] = {
 
 ActorBlueprint NAMESPACE = {
     .flags = 0,
-    .type = ACTOR_TYPE_jungle_guy,
+    .type = ACTOR_TYPE_SPEAR_GUY,
     .level = 16,
     .maxHP = 7,
     .partCount = ARRAY_COUNT(N(partsTable_802187F0)),
@@ -982,7 +982,7 @@ EvtScript N(8021B96C) = {
                     EVT_ADD(LW(9), 1)
                 EVT_END_IF
             EVT_END_IF
-        EVT_CASE_EQ(ACTOR_TYPE_jungle_guy)
+        EVT_CASE_EQ(ACTOR_TYPE_SPEAR_GUY)
             EVT_CALL(GetStatusFlags, LW(0), LW(3))
             EVT_IF_NOT_FLAG(LW(3), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
                 EVT_CALL(GetActorVar, LW(0), 1, LW(3))
