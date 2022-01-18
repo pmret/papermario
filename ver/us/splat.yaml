@@ -4328,7 +4328,7 @@ segments:
     overlay: True
     subsegments:
     - [0x6F5E80, c, kooper]
-    - [0x6F62B0, data]
+    - [0x6F62B0]
   - name: battle_partner_bombette
     dir: battle/partner
     type: code
@@ -4337,7 +4337,7 @@ segments:
     overlay: True
     subsegments:
     - [0x6FAD10, c, bombette]
-    - [0x6FB350, data]
+    - [0x6FB350]
   - name: battle_partner_parakarry
     dir: battle/partner
     type: code

@@ -366,6 +366,7 @@ extern EvtScript ForceNextTarget;
 extern EvtScript DoNormalHit;
 extern EvtScript D_80294AFC;
 extern EvtScript D_80294FE4;
+extern EvtScript D_80295350;
 extern EvtScript D_80294C68;
 extern EvtScript D_80295EC4;
 extern EvtScript D_80295744;

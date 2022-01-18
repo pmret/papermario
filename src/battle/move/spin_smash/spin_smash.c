@@ -5,6 +5,10 @@
 
 #define NAMESPACE battle_move_spin_smash
 
+extern EvtScript D_802A3258_739AE8;
+extern EvtScript D_802A3920_73A1B0;
+extern EvtScript D_802A3FC4_73A854;
+
 ApiStatus func_802A1000_737890(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
@@ -244,10 +248,10 @@ EvtScript D_802A1B44_7383D4 = {
 EvtScript D_802A1C20_7384B0 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
-    EVT_EXEC_WAIT(0x802A1190)
+    EVT_EXEC_WAIT(D_802A1190_737A20)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_EXEC_WAIT(0x802A12E4)
+    EVT_EXEC_WAIT(D_802A12E4_737B74)
     EVT_CALL(PlayerTestEnemy, LW(0), 64, 0, 0, 0, 16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
@@ -330,10 +334,10 @@ EvtScript D_802A1C20_7384B0 = {
 EvtScript D_802A20E0_738970 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
-    EVT_EXEC_WAIT(0x802A1190)
+    EVT_EXEC_WAIT(D_802A1190_737A20)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_EXEC_WAIT(0x802A1468)
+    EVT_EXEC_WAIT(D_802A1468_737CF8)
     EVT_CALL(PlayerTestEnemy, LW(0), 64, 0, 0, 0, 16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
@@ -399,10 +403,10 @@ EvtScript D_802A20E0_738970 = {
 EvtScript D_802A24C8_738D58 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
-    EVT_EXEC_WAIT(0x802A1190)
+    EVT_EXEC_WAIT(D_802A1190_737A20)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_EXEC_WAIT(0x802A15EC)
+    EVT_EXEC_WAIT(D_802A15EC_737E7C)
     EVT_CALL(PlayerTestEnemy, LW(0), 64, 0, 0, 0, 16)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(SetBattleCamOffsetZ, 8)
@@ -469,10 +473,10 @@ EvtScript D_802A28B0_739140 = {
     EVT_CALL(ChooseNextTarget, 10, LW(0))
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
-    EVT_EXEC_WAIT(0x802A126C)
+    EVT_EXEC_WAIT(D_802A126C_737AFC)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_EXEC_WAIT(0x802A12E4)
+    EVT_EXEC_WAIT(D_802A12E4_737B74)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
@@ -527,10 +531,10 @@ EvtScript D_802A2BDC_73946C = {
     EVT_CALL(ChooseNextTarget, 10, LW(0))
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
-    EVT_EXEC_WAIT(0x802A126C)
+    EVT_EXEC_WAIT(D_802A126C_737AFC)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_EXEC_WAIT(0x802A1468)
+    EVT_EXEC_WAIT(D_802A1468_737CF8)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
@@ -576,10 +580,10 @@ EvtScript D_802A2E80_739710 = {
     EVT_CALL(ChooseNextTarget, 10, LW(0))
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
-    EVT_EXEC_WAIT(0x802A126C)
+    EVT_EXEC_WAIT(D_802A126C_737AFC)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_EXEC_WAIT(0x802A15EC)
+    EVT_EXEC_WAIT(D_802A15EC_737E7C)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
@@ -630,17 +634,17 @@ EvtScript D_802A3124_7399B4 = {
             EVT_SET(LW(13), 60)
             EVT_SET(LW(14), 1)
             EVT_SET(LW(15), 2)
-            EVT_EXEC_WAIT(0x802A3258)
+            EVT_EXEC_WAIT(D_802A3258_739AE8)
         EVT_CASE_EQ(1)
             EVT_SET(LW(13), 60)
             EVT_SET(LW(14), 2)
             EVT_SET(LW(15), 4)
-            EVT_EXEC_WAIT(0x802A3920)
+            EVT_EXEC_WAIT(D_802A3920_73A1B0)
         EVT_CASE_EQ(2)
             EVT_SET(LW(13), 60)
             EVT_SET(LW(14), 3)
             EVT_SET(LW(15), 6)
-            EVT_EXEC_WAIT(0x802A3FC4)
+            EVT_EXEC_WAIT(D_802A3FC4_73A854)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -650,7 +654,7 @@ EvtScript D_802A3258_739AE8 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
     EVT_CALL(InitTargetIterator)
-    EVT_EXEC_WAIT(0x802A1190)
+    EVT_EXEC_WAIT(D_802A1190_737A20)
     EVT_SET(LW(1), 0)
     EVT_LOOP(10)
         EVT_CALL(CheckButtonDown, 0x00040000, LW(0))
@@ -729,7 +733,7 @@ EvtScript D_802A3258_739AE8 = {
         EVT_WAIT_FRAMES(10)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
         EVT_WAIT_FRAMES(25)
-        EVT_EXEC_WAIT(0x802A1B44)
+        EVT_EXEC_WAIT(D_802A1B44_7383D4)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DidActionSucceed, LW(0))
@@ -746,7 +750,7 @@ EvtScript D_802A3258_739AE8 = {
         EVT_CASE_OR_EQ(2)
             EVT_WAIT_FRAMES(10)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-            EVT_EXEC_WAIT(0x802A1A78)
+            EVT_EXEC_WAIT(D_802A1A78_738308)
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(1)
@@ -764,7 +768,7 @@ EvtScript D_802A3258_739AE8 = {
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
-    EVT_EXEC_WAIT(0x802A1A78)
+    EVT_EXEC_WAIT(D_802A1A78_738308)
     EVT_RETURN
     EVT_END
 };
@@ -773,7 +777,7 @@ EvtScript D_802A3920_73A1B0 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
     EVT_CALL(InitTargetIterator)
-    EVT_EXEC_WAIT(0x802A1190)
+    EVT_EXEC_WAIT(D_802A1190_737A20)
     EVT_SET(LW(1), 0)
     EVT_LOOP(10)
         EVT_CALL(CheckButtonDown, 0x00040000, LW(0))
@@ -851,7 +855,7 @@ EvtScript D_802A3920_73A1B0 = {
         EVT_WAIT_FRAMES(10)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
         EVT_WAIT_FRAMES(25)
-        EVT_EXEC_WAIT(0x802A1B44)
+        EVT_EXEC_WAIT(D_802A1B44_7383D4)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DidActionSucceed, LW(0))
@@ -868,7 +872,7 @@ EvtScript D_802A3920_73A1B0 = {
         EVT_CASE_OR_EQ(2)
             EVT_WAIT_FRAMES(10)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-            EVT_EXEC_WAIT(0x802A1A78)
+            EVT_EXEC_WAIT(D_802A1A78_738308)
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(1)
@@ -886,7 +890,7 @@ EvtScript D_802A3920_73A1B0 = {
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-    EVT_EXEC_WAIT(0x802A1A78)
+    EVT_EXEC_WAIT(D_802A1A78_738308)
     EVT_RETURN
     EVT_END
 };
@@ -895,7 +899,7 @@ EvtScript D_802A3FC4_73A854 = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_SMASH)
     EVT_CALL(action_command_hammer_CreateHudElements)
     EVT_CALL(InitTargetIterator)
-    EVT_EXEC_WAIT(0x802A1190)
+    EVT_EXEC_WAIT(D_802A1190_737A20)
     EVT_SET(LW(1), 0)
     EVT_LOOP(10)
         EVT_CALL(CheckButtonDown, 0x00040000, LW(0))
@@ -971,7 +975,7 @@ EvtScript D_802A3FC4_73A854 = {
         EVT_WAIT_FRAMES(10)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
         EVT_WAIT_FRAMES(25)
-        EVT_EXEC_WAIT(0x802A1B44)
+        EVT_EXEC_WAIT(D_802A1B44_7383D4)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DidActionSucceed, LW(0))
@@ -988,7 +992,7 @@ EvtScript D_802A3FC4_73A854 = {
         EVT_CASE_OR_EQ(2)
             EVT_WAIT_FRAMES(10)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-            EVT_EXEC_WAIT(0x802A1A78)
+            EVT_EXEC_WAIT(D_802A1A78_738308)
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(1)
@@ -1006,7 +1010,7 @@ EvtScript D_802A3FC4_73A854 = {
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 0)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_10002)
-    EVT_EXEC_WAIT(0x802A1A78)
+    EVT_EXEC_WAIT(D_802A1A78_738308)
     EVT_RETURN
     EVT_END
 };
