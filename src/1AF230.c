@@ -29,18 +29,18 @@ typedef struct StarPowerDesc {
 
 extern StarPowerDesc D_8008F071[];
 
-extern EvtSource battle_star_focus_usePower;
-extern EvtSource battle_star_refresh_usePower;
-extern EvtSource battle_star_lullaby_usePower;
-extern EvtSource battle_star_star_storm_usePower;
-extern EvtSource battle_star_chill_out_usePower;
-extern EvtSource battle_star_smooch_usePower;
-extern EvtSource battle_star_time_out_usePower;
-extern EvtSource battle_star_up_and_away_usePower;
-extern EvtSource battle_star_star_beam_usePower;
-extern EvtSource battle_star_peach_beam_usePower;
-extern EvtSource battle_star_peach_focus_usePower;
-extern EvtSource battle_star_peach_dash_usePower;
+extern EvtScript battle_star_focus_usePower;
+extern EvtScript battle_star_refresh_usePower;
+extern EvtScript battle_star_lullaby_usePower;
+extern EvtScript battle_star_star_storm_usePower;
+extern EvtScript battle_star_chill_out_usePower;
+extern EvtScript battle_star_smooch_usePower;
+extern EvtScript battle_star_time_out_usePower;
+extern EvtScript battle_star_up_and_away_usePower;
+extern EvtScript battle_star_star_beam_usePower;
+extern EvtScript battle_star_peach_beam_usePower;
+extern EvtScript battle_star_peach_focus_usePower;
+extern EvtScript battle_star_peach_dash_usePower;
 
 StarPowerEntry D_8029C7D0[] = {
     { battle_star_focus_ROM_START,       battle_star_focus_ROM_END,       battle_star_focus_VRAM,       battle_star_focus_usePower, },
@@ -58,7 +58,7 @@ StarPowerEntry D_8029C7D0[] = {
 };
 
 s32 D_8029C890[10][5] = {
-    { 0x1001F,                                      0x1002C,                                      0x1002A,                                      0x10005,                                      0, }, // Junk? These ID's should be in world_goombario, but don't exist.
+    { 0x1001F,                                      0x1002C,                                      0x1002A,                                      0x10005,                                      0, }, // Junk? These IDs should be in world_goombario, but don't exist.
     { NPC_ANIM_battle_goombario_default_run,        NPC_ANIM_battle_goombario_default_sleep,      NPC_ANIM_battle_goombario_default_sleep,      NPC_ANIM_battle_goombario_default_run,        NPC_ANIM_battle_goombario_default_idle, },
     { NPC_ANIM_battle_kooper_Palette_00_Anim_6,     NPC_ANIM_battle_kooper_Palette_00_Anim_1B,    NPC_ANIM_battle_kooper_Palette_00_Anim_1B,    NPC_ANIM_battle_kooper_Palette_00_Anim_6,     NPC_ANIM_battle_kooper_Palette_00_Anim_4, },
     { NPC_ANIM_battle_bombette_Palette_00_Anim_8,   NPC_ANIM_battle_bombette_Palette_00_Anim_1D,  NPC_ANIM_battle_bombette_Palette_00_Anim_1D,  NPC_ANIM_battle_bombette_Palette_00_Anim_8,   NPC_ANIM_battle_bombette_Palette_00_Anim_4, },

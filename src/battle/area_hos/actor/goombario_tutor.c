@@ -49,7 +49,7 @@ s32 N(statusTable_80219068)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80219114)[] = {
+ActorPartBlueprint N(partsTable_80219114)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -64,9 +64,9 @@ ActorPartDesc N(partsTable_80219114)[] = {
     },
 };
 
-extern EvtSource N(init_80219160);
+extern EvtScript N(init_80219160);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_40000,
     .type = ACTOR_TYPE_GOOMBARIO_TUTOR1,
     .level = 99,
@@ -89,12 +89,12 @@ ActorDesc NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-extern EvtSource N(takeTurn_80219444);
-extern EvtSource N(idle_802191D0);
-extern EvtSource N(handleEvent_802191E0);
-extern EvtSource N(80219C74);
+extern EvtScript N(takeTurn_80219444);
+extern EvtScript N(idle_802191D0);
+extern EvtScript N(handleEvent_802191E0);
+extern EvtScript N(80219C74);
 
-EvtSource N(init_80219160) = {
+EvtScript N(init_80219160) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80219444)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_802191D0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_802191E0)))
@@ -104,12 +104,12 @@ EvtSource N(init_80219160) = {
     EVT_END
 };
 
-EvtSource N(idle_802191D0) = {
+EvtScript N(idle_802191D0) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(handleEvent_802191E0) = {
+EvtScript N(handleEvent_802191E0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_THREAD
         EVT_CALL(func_8026BF48, 1)
@@ -156,7 +156,7 @@ EvtSource N(handleEvent_802191E0) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_80219444) = {
+EvtScript N(takeTurn_80219444) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -187,7 +187,7 @@ EvtSource N(takeTurn_80219444) = {
     EVT_IF_FLAG(LW(0), 0x200)
         EVT_CALL(AddGoalPos, ACTOR_SELF, 5, 10, 0)
     EVT_END_IF
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1005859375))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1))
     EVT_THREAD
         EVT_WAIT_FRAMES(4)
         EVT_SET(LW(0), 0)
@@ -208,9 +208,9 @@ EvtSource N(takeTurn_80219444) = {
     EVT_CALL(PlaySound, SOUND_JUMP_3E2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 22, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk)
-    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1005859375), EVT_FLOAT(0.80078125), EVT_FLOAT(1.0))
+    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
     EVT_WAIT_FRAMES(1)
-    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.30078125), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
+    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
     EVT_WAIT_FRAMES(1)
     EVT_CALL(GetActionCommandMode, LW(0))
     EVT_IF_EQ(LW(0), 2)
@@ -235,7 +235,7 @@ EvtSource N(takeTurn_80219444) = {
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(10)
-            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1005859375), EVT_FLOAT(0.80078125), EVT_FLOAT(1.0))
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
             EVT_WAIT_FRAMES(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
             EVT_WAIT_FRAMES(1)
@@ -245,7 +245,7 @@ EvtSource N(takeTurn_80219444) = {
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(0), 40)
             EVT_SET(LW(1), 0)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_ADD(LW(0), 30)
@@ -281,7 +281,7 @@ ApiStatus func_80218000_47F0B0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource N(80219C74) = {
+EvtScript N(80219C74) = {
     EVT_CALL(SetBattleFlagBits, 33554432, 1)
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(WaitForState, 13)

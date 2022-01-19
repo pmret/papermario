@@ -13,7 +13,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_14_tattle },
 };
 
-EvtSource N(80240060) = {
+EvtScript N(80240060) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -30,7 +30,7 @@ static s32 N(pad_F8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitDoubleDoor_80240100) = {
+EvtScript N(exitDoubleDoor_80240100) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
@@ -46,7 +46,7 @@ EvtSource N(exitDoubleDoor_80240100) = {
     EVT_END
 };
 
-EvtSource N(exitDoubleDoor_802401B4) = {
+EvtScript N(exitDoubleDoor_802401B4) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
@@ -62,7 +62,7 @@ EvtSource N(exitDoubleDoor_802401B4) = {
     EVT_END
 };
 
-EvtSource N(enterDoubleDoor_80240268) = {
+EvtScript N(enterDoubleDoor_80240268) = {
     EVT_CALL(UseDoorSounds, 3)
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
@@ -87,7 +87,7 @@ EvtSource N(enterDoubleDoor_80240268) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -107,7 +107,7 @@ static s32 N(pad_47C) = {
     0x00000000,
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EA564, 500, 60, 75, 0, 163, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1065))
     EVT_RETURN

@@ -27,7 +27,7 @@ typedef struct SearchBushConfig {
     FoliageModelList* bush;
     FoliageDropList* drops;
     FoliageVectorList* vectors;
-    EvtSource* callback;
+    EvtScript* callback;
 } SearchBushConfig;
 
 typedef struct ShakeTreeConfig {
@@ -35,7 +35,7 @@ typedef struct ShakeTreeConfig {
     FoliageModelList* trunk;
     FoliageDropList* drops;
     FoliageVectorList* vectors;
-    EvtSource* callback;
+    EvtScript* callback;
 } ShakeTreeConfig;
 
 void N(foliage_setup_shear_mtx)(Matrix4f mtx, f32 scale, f32 xAmount, f32 zAmount) {

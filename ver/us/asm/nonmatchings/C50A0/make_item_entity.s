@@ -467,8 +467,8 @@ glabel make_item_entity
 /* C812C 80131A2C 24020157 */  addiu     $v0, $zero, 0x157
 /* C8130 80131A30 14620009 */  bne       $v1, $v0, .L80131A58
 /* C8134 80131A34 2402015C */   addiu    $v0, $zero, 0x15c
-/* C8138 80131A38 3C058010 */  lui       $a1, %hi(D_80104AC0)
-/* C813C 80131A3C 24A54AC0 */  addiu     $a1, $a1, %lo(D_80104AC0)
+/* C8138 80131A38 3C058010 */  lui       $a1, %hi(SparkleScript_Coin)
+/* C813C 80131A3C 24A54AC0 */  addiu     $a1, $a1, %lo(SparkleScript_Coin)
 /* C8140 80131A40 0C04C27C */  jal       sparkle_script_init
 /* C8144 80131A44 0200202D */   daddu    $a0, $s0, $zero
 /* C8148 80131A48 0C04C2B3 */  jal       sparkle_script_update

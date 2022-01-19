@@ -36,7 +36,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_08_tattle },
 };
 
-EvtSource N(80241F40) = {
+EvtScript N(80241F40) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
@@ -67,7 +67,7 @@ f32 N(D_80242008_CB0D48)[3] = {
     140.0f, 180.0f, 220.0f
 };
 
-EvtSource N(80242014) = {
+EvtScript N(80242014) = {
     EVT_WAIT_FRAMES(10)
     EVT_CALL(PlaySound, 0x212D)
     EVT_CALL(N(UnkFunc21), EVT_MAP_VAR(0))
@@ -99,7 +99,7 @@ EvtSource N(80242014) = {
     EVT_END
 };
 
-EvtSource N(80242178) = {
+EvtScript N(80242178) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1402), 1)
         EVT_RETURN
     EVT_END_IF
@@ -183,7 +183,7 @@ EvtSource N(80242178) = {
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EA910, -780, 120, -110, 0, MAKE_ENTITY_END)
     EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1402))
@@ -193,7 +193,7 @@ EvtSource N(makeEntities) = {
     EVT_END
 };
 
-EvtSource N(80242680) = {
+EvtScript N(80242680) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -234,11 +234,11 @@ EvtSource N(80242680) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_8024292C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  6);
+EvtScript N(exitWalk_8024292C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  6);
 
-EvtSource N(exitWalk_80242988) = EXIT_WALK_SCRIPT(60,  1, "flo_24",  0);
+EvtScript N(exitWalk_80242988) = EXIT_WALK_SCRIPT(60,  1, "flo_24",  0);
 
-EvtSource N(802429E4) = {
+EvtScript N(802429E4) = {
     EVT_BIND_TRIGGER(N(exitWalk_8024292C), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_80242988), TRIGGER_FLOOR_ABOVE, 4, 1, 0)
     EVT_RETURN
@@ -250,7 +250,7 @@ s32 N(lavaResetList_80242A2C)[] = {
     0x0000000F, 0x42700000, 0x00000000, 0x42480000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
@@ -338,13 +338,13 @@ NpcAISettings N(npcAISettings_80242EB0) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80242EE0) = {
+EvtScript N(npcAI_80242EE0) = {
     EVT_CALL(N(func_8024150C_CB024C), EVT_PTR(N(npcAISettings_80242EB0)))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80242F00) = {
+EvtScript N(80242F00) = {
     EVT_LABEL(0)
     EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 30)
@@ -387,7 +387,7 @@ NpcAISettings N(npcAISettings_8024300C) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_8024303C) = {
+EvtScript N(npcAI_8024303C) = {
     EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_8024300C)))
     EVT_RETURN
     EVT_END
@@ -408,7 +408,7 @@ s32 N(D_8024308C_CB1DCC) = {
     0x00000000,
 };
 
-EvtSource N(80243090) = {
+EvtScript N(80243090) = {
     EVT_SET(EVT_VAR(9), EVT_VAR(1))
     EVT_CALL(ShowConsumableChoicePopup)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
@@ -432,7 +432,7 @@ EvtSource N(80243090) = {
     EVT_END
 };
 
-EvtSource N(802431C4) = {
+EvtScript N(802431C4) = {
     EVT_CALL(N(func_802419FC_CB073C), EVT_VAR(0))
     EVT_BIND_PADLOCK(N(80243090), 0x10, 0, EVT_PTR(D_802462C0_B4AA30), 0, 1)
     EVT_CALL(N(func_80241970_CB06B0), EVT_VAR(0))
@@ -440,7 +440,7 @@ EvtSource N(802431C4) = {
     EVT_END
 };
 
-EvtSource N(interact_80243214) = {
+EvtScript N(interact_80243214) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_IF_EQ(EVT_SAVE_FLAG(1364), 0)
         EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -574,7 +574,7 @@ EvtSource N(interact_80243214) = {
     EVT_END
 };
 
-EvtSource N(init_80243B20) = {
+EvtScript N(init_80243B20) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80243214)))
     EVT_IF_EQ(EVT_SAVE_FLAG(1364), 1)
         EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_5)
@@ -880,7 +880,7 @@ StaticNpc N(npcGroup_802449D8) = {
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
 
-EvtSource N(init_80244BC8) = {
+EvtScript N(init_80244BC8) = {
     EVT_THREAD
         EVT_WAIT_FRAMES(2)
         EVT_CALL(GetNpcPointer, 2, EVT_VAR(0))
@@ -1239,7 +1239,7 @@ ApiStatus N(func_80241A98_CB07D8)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_80241B5C_CB089C)(Evt* script, s32 isInitialCall) {
     s32 itemId = evt_get_variable(script, *script->ptrReadPos);
-    StaticItem* item = &gItemTable[itemId];
+    ItemData* item = &gItemTable[itemId];
 
     if (itemId == ITEM_YUMMY_MEAL) {
         script->varTable[9] = 2;
@@ -1301,7 +1301,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(triggerCoord_80245904) = { 391.0f, 0.0f, -102.0f, 0.0f };
 
-EvtSource N(80245914) = {
+EvtScript N(80245914) = {
     EVT_SET(EVT_AREA_FLAG(29), 0)
     EVT_SET(EVT_AREA_FLAG(30), 0)
     EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))
@@ -1315,7 +1315,7 @@ static s32 N(pad_598C) = {
     0x00000000,
 };
 
-EvtSource N(80245990) = {
+EvtScript N(80245990) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -1356,7 +1356,7 @@ EvtSource N(80245990) = {
     EVT_END
 };
 
-EvtSource N(80245C3C) = {
+EvtScript N(80245C3C) = {
     EVT_SET(EVT_VAR(9), EVT_VAR(6))
     EVT_SET(EVT_VAR(8), EVT_VAR(5))
     EVT_SET(EVT_VAR(7), EVT_VAR(4))
@@ -1408,7 +1408,7 @@ EvtSource N(80245C3C) = {
     EVT_END
 };
 
-EvtSource N(80245F5C) = {
+EvtScript N(80245F5C) = {
     EVT_CALL(GetModelCenter, 60)
     EVT_SET(EVT_VAR(3), 60)
     EVT_SET(EVT_VAR(4), 61)

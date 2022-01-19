@@ -1,14 +1,14 @@
 #include "common.h"
 #include "camera.h"
 
-EvtSource ShakeCam1 = {
+EvtScript ShakeCam1 = {
     EVT_SET_GROUP(0)
     EVT_CALL(ShakeCam, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.0))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource ShakeCamX = {
+EvtScript ShakeCamX = {
     EVT_SET_GROUP(0)
     EVT_CALL(ShakeCam, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
     EVT_RETURN

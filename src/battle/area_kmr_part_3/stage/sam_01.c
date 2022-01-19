@@ -13,7 +13,7 @@ s32 N(D_802336E0_43AB20)[] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(802336F0) = {
+EvtScript N(802336F0) = {
     EVT_CALL(N(Set80071270_0_16))
     EVT_LOOP(0)
         EVT_WAIT_FRAMES(1)
@@ -22,7 +22,7 @@ EvtSource N(802336F0) = {
     EVT_END
 };
 
-EvtSource N(8023372C) = {
+EvtScript N(8023372C) = {
     EVT_SET(LW(10), LW(0))
     EVT_LABEL(0)
     EVT_CALL(RandInt, 30, LW(0))
@@ -39,7 +39,7 @@ EvtSource N(8023372C) = {
     EVT_END
 };
 
-EvtSource N(802337F4) = {
+EvtScript N(802337F4) = {
     EVT_SET(LW(10), LW(0))
     EVT_SET(LW(11), LW(1))
     EVT_EXEC(N(8023372C))
@@ -57,7 +57,7 @@ EvtSource N(802337F4) = {
     EVT_END
 };
 
-EvtSource N(802338D4) = {
+EvtScript N(802338D4) = {
     EVT_SET(LW(10), LW(0))
     EVT_SET(LW(7), 0)
     EVT_LABEL(0)
@@ -73,7 +73,7 @@ EvtSource N(802338D4) = {
     EVT_END
 };
 
-EvtSource N(beforeBattle_80233998) = {
+EvtScript N(beforeBattle_80233998) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_EXEC(N(802336F0))
     EVT_THREAD
@@ -97,7 +97,7 @@ EvtSource N(beforeBattle_80233998) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_80233AA8) = {
+EvtScript N(afterBattle_80233AA8) = {
     EVT_RETURN
     EVT_END
 };

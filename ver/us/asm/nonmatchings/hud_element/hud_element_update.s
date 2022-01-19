@@ -105,8 +105,8 @@ glabel hud_element_update
 /* D7F54 80141854 00621024 */  and       $v0, $v1, $v0
 /* D7F58 80141858 14400012 */  bnez      $v0, .L801418A4
 /* D7F5C 8014185C 00000000 */   nop
-/* D7F60 80141860 3C028015 */  lui       $v0, %hi(D_8014EFCC)
-/* D7F64 80141864 2442EFCC */  addiu     $v0, $v0, %lo(D_8014EFCC)
+/* D7F60 80141860 3C028015 */  lui       $v0, %hi(gHudElementSizes)
+/* D7F64 80141864 2442EFCC */  addiu     $v0, $v0, %lo(gHudElementSizes)
 /* D7F68 80141868 82650046 */  lb        $a1, 0x46($s3)
 /* D7F6C 8014186C 82660045 */  lb        $a2, 0x45($s3)
 /* D7F70 80141870 00051840 */  sll       $v1, $a1, 1
@@ -186,8 +186,8 @@ glabel hud_element_update
 /* D8088 80141988 00621024 */  and       $v0, $v1, $v0
 /* D808C 8014198C 14400012 */  bnez      $v0, .L801419D8
 /* D8090 80141990 00000000 */   nop
-/* D8094 80141994 3C028015 */  lui       $v0, %hi(D_8014EFCC)
-/* D8098 80141998 2442EFCC */  addiu     $v0, $v0, %lo(D_8014EFCC)
+/* D8094 80141994 3C028015 */  lui       $v0, %hi(gHudElementSizes)
+/* D8098 80141998 2442EFCC */  addiu     $v0, $v0, %lo(gHudElementSizes)
 /* D809C 8014199C 82650046 */  lb        $a1, 0x46($s3)
 /* D80A0 801419A0 82660045 */  lb        $a2, 0x45($s3)
 /* D80A4 801419A4 00051840 */  sll       $v1, $a1, 1
@@ -301,8 +301,8 @@ glabel hud_element_update
 /* D8228 80141B28 00621024 */  and       $v0, $v1, $v0
 /* D822C 80141B2C 14400012 */  bnez      $v0, .L80141B78
 /* D8230 80141B30 00000000 */   nop
-/* D8234 80141B34 3C028015 */  lui       $v0, %hi(D_8014EFCC)
-/* D8238 80141B38 2442EFCC */  addiu     $v0, $v0, %lo(D_8014EFCC)
+/* D8234 80141B34 3C028015 */  lui       $v0, %hi(gHudElementSizes)
+/* D8238 80141B38 2442EFCC */  addiu     $v0, $v0, %lo(gHudElementSizes)
 /* D823C 80141B3C 82650046 */  lb        $a1, 0x46($s3)
 /* D8240 80141B40 82660045 */  lb        $a2, 0x45($s3)
 /* D8244 80141B44 00051840 */  sll       $v1, $a1, 1
@@ -432,8 +432,8 @@ glabel hud_element_update
 /* D840C 80141D0C 24020001 */  addiu     $v0, $zero, 1
 /* D8410 80141D10 3C013F80 */  lui       $at, 0x3f80
 /* D8414 80141D14 44813000 */  mtc1      $at, $f6
-/* D8418 80141D18 3C048015 */  lui       $a0, %hi(D_8014EFCC)
-/* D841C 80141D1C 2484EFCC */  addiu     $a0, $a0, %lo(D_8014EFCC)
+/* D8418 80141D18 3C048015 */  lui       $a0, %hi(gHudElementSizes)
+/* D841C 80141D1C 2484EFCC */  addiu     $a0, $a0, %lo(gHudElementSizes)
 /* D8420 80141D20 AE700004 */  sw        $s0, 4($s3)
 /* D8424 80141D24 00451804 */  sllv      $v1, $a1, $v0
 /* D8428 80141D28 00651821 */  addu      $v1, $v1, $a1
@@ -553,8 +553,8 @@ glabel hud_element_update
 /* D85D0 80141ED0 14400012 */  bnez      $v0, .L80141F1C
 /* D85D4 80141ED4 E6640030 */   swc1     $f4, 0x30($s3)
 /* D85D8 80141ED8 82630046 */  lb        $v1, 0x46($s3)
-/* D85DC 80141EDC 3C048015 */  lui       $a0, %hi(D_8014EFCC)
-/* D85E0 80141EE0 2484EFCC */  addiu     $a0, $a0, %lo(D_8014EFCC)
+/* D85DC 80141EDC 3C048015 */  lui       $a0, %hi(gHudElementSizes)
+/* D85E0 80141EE0 2484EFCC */  addiu     $a0, $a0, %lo(gHudElementSizes)
 /* D85E4 80141EE4 00031040 */  sll       $v0, $v1, 1
 /* D85E8 80141EE8 00431021 */  addu      $v0, $v0, $v1
 /* D85EC 80141EEC 00021040 */  sll       $v0, $v0, 1

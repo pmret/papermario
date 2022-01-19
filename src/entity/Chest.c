@@ -3,28 +3,7 @@
 
 void entity_Chest_open(Entity* entity);
 
-// size unknown
-typedef struct Chest {
-    /* 0x00 */ u16 unk_00;
-    /* 0x02 */ s16 unk_02;
-    /* 0x04 */ u8 unk_04;
-    /* 0x04 */ s8 unk_05;
-    /* 0x06 */ s8 unk_06;
-    /* 0x07 */ u8 unk_07;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ s8 unk_30;
-    /* 0x31 */ char unk_31[3];
-    /* 0x34 */ s32 unk_34;
-} Chest;
+#define CHEST_POST_ANIM_DELAY_TIME  10
 
 extern s32 D_802EAD7C;
 // requires data migration
@@ -61,11 +40,11 @@ s32 entity_Chest_setupGfx(void);
 INCLUDE_ASM(s32, "entity/Chest", entity_Chest_setupGfx);
 
 void entity_Chest_check_opened(Entity* entity) {
-    Chest* data = (Chest*)entity->dataBuf;
-    if ((data->unk_00 != 0xFFFF) && (get_global_flag(data->unk_00) != 0)) {
+    ChestData* data = entity->dataBuf.chest;
+    if ((data->gameFlagIndex != 0xFFFF) && (get_global_flag(data->gameFlagIndex) != 0)) {
         entity->flags |= ENTITY_FLAGS_4000;
-        data->unk_10 = -1;
-        data->unk_08 = -28.7f;
+        data->itemID = -1;
+        data->lidAngle = -28.7f;
         set_entity_commandlist(entity, &D_802EAD7C);
     }
 }
@@ -73,21 +52,21 @@ void entity_Chest_check_opened(Entity* entity) {
 void entity_Chest_idle(Entity* entity) {
     f32 rotation;
     f32 angle; // angle from the Chest to the Player
-    Chest* data;
+    ChestData* data;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     rotation = clamp_angle(180.0f - entity->rotation.y);
     angle = fabsf(rotation - clamp_angle(atan2(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z)));
-    if ((!(playerStatus->animFlags & 1)) &&
-        (!(entity->collisionFlags & 1)) &&
+    if ((!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT)) &&
+        (!(entity->collisionFlags & ENTITY_COLLISION_FLAGS_1)) &&
         ((angle <= 40.0f) || (angle >= 320.0f))) {
         entity->flags |= ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
-        if ((playerStatus->animFlags & 0x10) && (entity->collisionFlags & 8)) {
+        if ((playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_INTERACT_PROMPT_AVAILABLE) && (entity->collisionFlags & ENTITY_COLLISION_FLAGS_8)) {
             exec_entity_commandlist(entity);
-            data = (Chest*)entity->dataBuf;
-            data->unk_04 = 0;
+            data = entity->dataBuf.chest;
+            data->state = 0;
             entity->flags &= ~ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
-            if (data->unk_10 != 0) {
+            if (data->itemID != 0) {
                 disable_player_input();
             }
             func_800EF3E4();
@@ -98,48 +77,48 @@ void entity_Chest_idle(Entity* entity) {
 }
 
 void entity_Chest_begin_opening(Entity* entity) {
-    Chest* data = (Chest*)entity->dataBuf;
-    data->unk_06 = 10;
-    data->unk_08 = 0;
+    ChestData* data = entity->dataBuf.chest;
+    data->postLidAnimDelay = CHEST_POST_ANIM_DELAY_TIME;
+    data->lidAngle = 0.0f;
     data->unk_05 = 0;
-    data->unk_02 = 40;
+    data->giveItemTimer = 40;
     sfx_play_sound(467);
 }
 
 INCLUDE_ASM(s32, "entity/Chest", entity_Chest_open);
 
 void entity_Chest_close(Entity* entity) {
-    Chest* data = (Chest*)entity->dataBuf;
+    ChestData* data = entity->dataBuf.chest;
     f32 delta;
 
-    switch (data->unk_04) {
+    switch (data->state) {
         case 0:
-            data->unk_0C = 0.0f;
-            data->unk_04++;
+            data->lidAnimInterpPhase = 0.0f;
+            data->state++;
             // fallthrough
         case 1:
-            data->unk_0C += 5.0f;
-            if (data->unk_0C >= 180.0f) {
-                data->unk_0C = 180.0f;
-                data->unk_04++;
+            data->lidAnimInterpPhase += 5.0f;
+            if (data->lidAnimInterpPhase >= 180.0f) {
+                data->lidAnimInterpPhase = 180.0f;
+                data->state++;
             }
-            delta = 2.6f * sin_rad(data->unk_0C * TAU / 360.0f);
-            data->unk_08 += delta;
+            delta = 2.6f * sin_rad(data->lidAnimInterpPhase * TAU / 360.0f);
+            data->lidAngle += delta;
             break;
         case 2:
-            data->unk_0C += 1.0f;
-            if (data->unk_0C >= 185.0f) {
-                data->unk_0C = 185.0f;
-                data->unk_06 = 10;
-                data->unk_04++;
+            data->lidAnimInterpPhase += 1.0f;
+            if (data->lidAnimInterpPhase >= 185.0f) {
+                data->lidAnimInterpPhase = 185.0f;
+                data->postLidAnimDelay = CHEST_POST_ANIM_DELAY_TIME;
+                data->state++;
             }
-            delta = 2.0f * sin_rad(data->unk_0C * TAU / 360.0f);
-            data->unk_08 += delta;
+            delta = 2.0f * sin_rad(data->lidAnimInterpPhase * TAU / 360.0f);
+            data->lidAngle += delta;
             break;
         case 3:
-            data->unk_06--;
-            if (data->unk_06 == 0) {
-                data->unk_04++;
+            data->postLidAnimDelay--;
+            if (data->postLidAnimDelay == 0) {
+                data->state++;
                 entity->flags |= ENTITY_FLAGS_4000;
             }
             break;
@@ -152,104 +131,105 @@ INCLUDE_ASM(s32, "entity/Chest", entity_GiantChest_hide_effect);
 
 void entity_GiantChest_open(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Chest* chest = (Chest*)entity->dataBuf;
-    f32 sp24;
-    f32 sp20;
-    f32 sp1C;
-    f32 sp18;
+    ChestData* chest = entity->dataBuf.chest;
+    f32 cosFwd;
+    f32 sinFwd;
+    f32 cosRight;
+    f32 sinRight;
     f32 theta;
-    f32 delta;
-    f32 zero;
-    f32 temp_f4;
-    f32 four;
+    f32 giveItemLerpAlpha;
+    f32 horizontalOffset;
+    f32 dy;
+    f32 depthOffset;
     f32 intermediateTheta;
-    f32 phi_f22;
+    f32 radius;
 
-    if (chest->unk_10 != 0) {
-        set_item_entity_position(chest->unk_14, chest->unk_18, chest->unk_1C, chest->unk_20);
+    if (chest->itemID != 0) {
+        set_item_entity_position(chest->itemEntityIndex, chest->itemEntityPos.x, chest->itemEntityPos.y, chest->itemEntityPos.z);
     }
     entity_Chest_open(entity);
 
-    switch (chest->unk_04) {
+    switch (chest->state) {
         case 0:
-            chest->unk_02--;
-            if (chest->unk_02 == 0) {
-                chest->unk_24 = 0.0f;
-                chest->unk_04++;
-                chest->unk_28 = 20.0f;
-                chest->unk_2C = 8.0f;
+            chest->giveItemTimer--;
+            if (chest->giveItemTimer == 0) {
+                chest->giveItemRadiusInterpPhase = 0.0f;
+                chest->state++;
+                chest->giveItemHeightInterpPhase = 20.0f;
+                chest->itemVelY = 8.0f;
             }
             break;
         case 1:
-            chest->unk_1C += chest->unk_2C;
-            chest->unk_2C -= 0.7;
-            if (chest->unk_2C <= 2.0f) {
-                chest->unk_2C = 6.0f;
-                chest->unk_04++;
+            chest->itemEntityPos.y += chest->itemVelY;
+            chest->itemVelY -= 0.7;
+            if (chest->itemVelY <= 2.0f) {
+                chest->itemVelY = 6.0f;
+                chest->state++;
             }
             break;
         case 2:
-            if (chest->unk_28 < 140.0f) {
-                chest->unk_1C += cos_rad(chest->unk_28 * TAU / 360.0f) * 3.0f;
+            if (chest->giveItemHeightInterpPhase < 140.0f) {
+                chest->itemEntityPos.y += cos_rad(chest->giveItemHeightInterpPhase * TAU / 360.0f) * 3.0f;
             } else {
-                temp_f4 = (chest->unk_1C - playerStatus->position.y - 30.0f) * 0.25f;
-                if (temp_f4 <= 0.4) {
-                    temp_f4 = 0.4f;
+                dy = (chest->itemEntityPos.y - playerStatus->position.y - 30.0f) * 0.25f;
+                if (dy <= 0.4) {
+                    dy = 0.4f;
                 }
-                chest->unk_1C -= temp_f4;
+                chest->itemEntityPos.y -= dy;
             }
-            delta = sin_rad(chest->unk_24 * TAU / 360.0f);
-            theta = intermediateTheta = clamp_angle(atan2(entity->position.x, entity->position.z,
-                                                          playerStatus->position.x, playerStatus->position.z));
+            giveItemLerpAlpha = sin_rad(chest->giveItemRadiusInterpPhase * TAU / 360.0f);
+            theta = intermediateTheta = clamp_angle(atan2(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z));
 
-            if (gGameStatusPtr->areaID == 0x12) {
-                phi_f22 = 3.0f;
+            if (gGameStatusPtr->areaID == AREA_KZN) {
+                radius = 3.0f;
             } else {
-                phi_f22 = 4.0f;
+                radius = 4.0f;
             }
 
             theta *= TAU;
             theta = theta / 360.0f;
-            chest->unk_18 += (phi_f22 * sin_rad(theta) * delta);
-            chest->unk_20 -= (phi_f22 * cos_rad(theta) * delta);
-            chest->unk_24 += 8.0f;
-            if (chest->unk_24 >= 180.0f) {
-                chest->unk_24 = 180.0f;
+            chest->itemEntityPos.x += (radius * sin_rad(theta) * giveItemLerpAlpha);
+            chest->itemEntityPos.z -= (radius * cos_rad(theta) * giveItemLerpAlpha);
+            chest->giveItemRadiusInterpPhase += 8.0f;
+            if (chest->giveItemRadiusInterpPhase >= 180.0f) {
+                chest->giveItemRadiusInterpPhase = 180.0f;
             }
-            chest->unk_28 += 13.0f;
-            if (chest->unk_28 >= 180.0f){
-                chest->unk_02 = 7;
-                chest->unk_28 = 180.0f;
-                chest->unk_04++;
-                if (chest->unk_10 != 0) {
+            chest->giveItemHeightInterpPhase += 13.0f;
+            if (chest->giveItemHeightInterpPhase >= 180.0f){
+                chest->giveItemTimer = 7;
+                chest->giveItemHeightInterpPhase = 180.0f;
+                chest->state++;
+                if (chest->itemID != 0) {
                     suggest_player_anim_setUnkFlag(0x6000C);
-                    sin_cos_rad((90.0f - gCameras->currentYaw) * TAU / 360.0f, &sp18, &sp1C);
-                    sin_cos_rad((180.0f - gCameras->currentYaw) * TAU / 360.0f, &sp20, &sp24);
-                    zero = 0.0f;
-                    four = 4.0f;
-                    playFX_33(0, chest->unk_18 + zero * sp18 - sp20 * four,
-                              chest->unk_1C + 12.0f, chest->unk_20 - sp1C * zero + sp24 * four, 1.0f, 0x64);
-                    playFX_1B(0, chest->unk_18 + zero * sp18 - sp20 * four,
-                              chest->unk_1C + 12.0f, chest->unk_20 - sp1C * zero + sp24 * four, 1.0f, &chest->unk_34);
+                    sin_cos_rad((90.0f - gCameras->currentYaw) * TAU / 360.0f, &sinRight, &cosRight);
+                    sin_cos_rad((180.0f - gCameras->currentYaw) * TAU / 360.0f, &sinFwd, &cosFwd);
+                    horizontalOffset = 0.0f;
+                    depthOffset = 4.0f;
+                    //RadialFlowOut
+                    playFX_33(0, chest->itemEntityPos.x + horizontalOffset * sinRight - depthOffset * sinFwd,
+                              chest->itemEntityPos.y + 12.0f, chest->itemEntityPos.z - cosRight * horizontalOffset + cosFwd * depthOffset, 1.0f, 0x64);
+                    //GotItemOutline
+                    playFX_1B(0, chest->itemEntityPos.x + horizontalOffset * sinRight - sinFwd * depthOffset,
+                              chest->itemEntityPos.y + 12.0f, chest->itemEntityPos.z - cosRight * horizontalOffset + cosFwd * depthOffset, 1.0f, &chest->gotItemEffect);
                 }
             }
             break;
         case 3:
-            chest->unk_02--;
-            if (chest->unk_02 == 0) {
+            chest->giveItemTimer--;
+            if (chest->giveItemTimer == 0) {
                 exec_entity_commandlist(entity);
-                chest->unk_04 = 0;
+                chest->state = 0;
             }
             break;
     }
 }
 
 void entity_GiantChest_give_equipment(Entity* entity) {
-    Chest* data = (Chest*)entity->dataBuf;
+    ChestData* data = entity->dataBuf.chest;
     f32 angle;
     s32 flag;
 
-    switch (data->unk_10) {
+    switch (data->itemID) {
     	case 1:
     	    gPlayerData.bootsLevel = 0;
     	    break;
@@ -270,15 +250,15 @@ void entity_GiantChest_give_equipment(Entity* entity) {
     	    break;
     }
 
-    if (data->unk_10 != 0) {
+    if (data->itemID != 0) {
         angle = (entity->rotation.y * TAU) / 360.0f;
-        data->unk_18 = entity->position.x + (sin_rad(angle) * 10.0f);
-        data->unk_1C = entity->position.y;
-        data->unk_20 = entity->position.z + (cos_rad(angle) * 10.0f);
-        data->unk_14 = make_item_entity_nodelay(data->unk_10, data->unk_18, data->unk_1C, data->unk_20, 1, -1);
+        data->itemEntityPos.x = entity->position.x + (sin_rad(angle) * 10.0f);
+        data->itemEntityPos.y = entity->position.y;
+        data->itemEntityPos.z = entity->position.z + (cos_rad(angle) * 10.0f);
+        data->itemEntityIndex = make_item_entity_nodelay(data->itemID, data->itemEntityPos.x, data->itemEntityPos.y, data->itemEntityPos.z, 1, -1);
     }
 
-    flag = data->unk_00;
+    flag = data->gameFlagIndex;
     if (flag <= EVT_SAVE_FLAG(10000000)) {
         flag += 130000000;
     }
@@ -290,21 +270,21 @@ void entity_Chest_start_bound_script(Entity* entity) {
 }
 
 void entity_Chest_enable_player_input(Entity* entity) {
-    Chest* data = (Chest*)entity->dataBuf;
-    if (data->unk_10 != 0) {
+    ChestData* data = entity->dataBuf.chest;
+    if (data->itemID != 0) {
         enable_player_input();
     }
 }
 
 void entity_GiantChest_await_got_item(Entity* entity) {
-    Chest* data = (Chest*)entity->dataBuf;
-    if (data->unk_10 != 0) {
+    ChestData* data = entity->dataBuf.chest;
+    if (data->itemID != 0) {
         if (data->unk_30 != 0) {
             exec_entity_commandlist(entity);
-            remove_item_entity_by_index(data->unk_14);
+            remove_item_entity_by_index(data->itemEntityIndex);
             suggest_player_anim_clearUnkFlag(0x10002);
             enable_player_input();
-            data->unk_10 = -1;
+            data->itemID = -1;
         }
         return;
     }
@@ -312,14 +292,14 @@ void entity_GiantChest_await_got_item(Entity* entity) {
 }
 
 void entity_Chest_clear_item_id(Entity* entity) {
-    Chest* data = (Chest*)entity->dataBuf;
-    data->unk_10 = -1;
+    ChestData* data = entity->dataBuf.chest;
+    data->itemID = -1;
 }
 
 void entity_Chest_readargs(Entity* entity) {
-    Chest* data = (Chest*)entity->dataBuf;
-    data->unk_10 = *D_8015C7D0;
-    data->unk_00 = 0xFFFF;
+    ChestData* data = entity->dataBuf.chest;
+    data->itemID = *CreateEntityVarArgBuffer;
+    data->gameFlagIndex = 0xFFFF;
 }
 
 void entity_GiantChest_init(Entity* entity) {
@@ -328,7 +308,7 @@ void entity_GiantChest_init(Entity* entity) {
 }
 
 void entity_Chest_init(Entity* entity) {
-    Chest* data = (Chest*)entity->dataBuf;
+    ChestData* data = entity->dataBuf.chest;
     data->unk_07 = 1;
     entity_Chest_readargs(entity);
     entity->renderSetupFunc = &entity_Chest_setupGfx;

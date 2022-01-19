@@ -10,5 +10,5 @@ ApiStatus N(func_80240E20_C53360)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc7)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_8024318C);
-extern EvtSource N(80241780);
-extern EvtSource N(main);
+extern EvtScript N(80241780);
+extern EvtScript N(main);

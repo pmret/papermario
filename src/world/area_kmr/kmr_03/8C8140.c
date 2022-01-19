@@ -14,18 +14,18 @@ ApiStatus N(func_802401B0_8C8140)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkPositionFunc.inc.c"
 
-EvtSource N(exitWalk_802406F0) = EXIT_WALK_SCRIPT(60,  0, "kmr_04",  0);
+EvtScript N(exitWalk_802406F0) = EXIT_WALK_SCRIPT(60,  0, "kmr_04",  0);
 
-EvtSource N(exitWalk_8024074C) = EXIT_WALK_SCRIPT(60,  1, "kmr_05",  0);
+EvtScript N(exitWalk_8024074C) = EXIT_WALK_SCRIPT(60,  1, "kmr_05",  0);
 
-EvtSource N(802407A8) = {
+EvtScript N(802407A8) = {
     EVT_BIND_TRIGGER(N(exitWalk_802406F0), TRIGGER_FLOOR_ABOVE, 3, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_8024074C), TRIGGER_FLOOR_ABOVE, 5, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 30)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -62,7 +62,7 @@ NpcSettings N(npcSettings_80240950) = {
     .unk_2A = 16,
 };
 
-EvtSource N(8024097C) = {
+EvtScript N(8024097C) = {
     EVT_LABEL(1)
     EVT_IF_EQ(EVT_AREA_FLAG(8), 1)
         EVT_LABEL(100)
@@ -93,7 +93,7 @@ EvtSource N(8024097C) = {
     EVT_END
 };
 
-EvtSource N(npcAI_80240B50) = {
+EvtScript N(npcAI_80240B50) = {
     EVT_LABEL(1)
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_EQ(-122)
@@ -151,7 +151,7 @@ EvtSource N(npcAI_80240B50) = {
     EVT_END
 };
 
-EvtSource N(hit_80240F64) = {
+EvtScript N(hit_80240F64) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_goompa_Palette_00_Anim_7)
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_goompa_Palette_00_Anim_1)
@@ -191,7 +191,7 @@ EvtSource N(hit_80240F64) = {
     EVT_END
 };
 
-EvtSource N(init_802411A8) = {
+EvtScript N(init_802411A8) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(npcAI_80240B50)))
     EVT_CALL(BindNpcAux, -1, EVT_PTR(N(8024097C)))
     EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80240F64)))
@@ -245,20 +245,20 @@ static s32 N(pad_1468)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(80241470) = {
+EvtScript N(80241470) = {
     EVT_CALL(ModifyColliderFlags, 0, 9, 0x7FFFFE00)
     EVT_SET(EVT_SAVE_VAR(0), -117)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(802414A8) = {
+EvtScript N(802414A8) = {
     EVT_SET(EVT_SAVE_FLAG(54), 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(802414C8) = {
+EvtScript N(802414C8) = {
     EVT_LABEL(0)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(SetCamTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -268,7 +268,7 @@ EvtSource N(802414C8) = {
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), -117)
         EVT_CALL(MakeEntity, 0x802EA10C, 45, 0, 70, 15, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80241470)))

@@ -36,14 +36,14 @@ s32 N(statusTable_8021B6CC)[] = {
 };
 
 extern s32 N(idleAnimations_8021B7C4)[];
-extern EvtSource N(idle_8021B8A8);
-extern EvtSource N(handleEvent_8021BB84);
-extern EvtSource N(takeTurn_8021C3B0);
-extern EvtSource N(init_8021D078);
-extern EvtSource N(doDeath_8021D0C4);
+extern EvtScript N(idle_8021B8A8);
+extern EvtScript N(handleEvent_8021BB84);
+extern EvtScript N(takeTurn_8021C3B0);
+extern EvtScript N(init_8021D078);
+extern EvtScript N(doDeath_8021D0C4);
 
 
-ActorPartDesc N(partsTable_8021B778)[] = {
+ActorPartBlueprint N(partsTable_8021B778)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -58,7 +58,7 @@ ActorPartDesc N(partsTable_8021B778)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_RED_GOOMBA_BOSS,
     .level = 20,
@@ -107,7 +107,7 @@ s32 N(idleAnimations_8021B810)[] = {
     STATUS_END,
 };
 
-EvtSource N(init_8021B85C) = {
+EvtScript N(init_8021B85C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021C3B0)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021B8A8)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021BB84)))
@@ -115,7 +115,7 @@ EvtSource N(init_8021B85C) = {
     EVT_END
 };
 
-EvtSource N(idle_8021B8A8) = {
+EvtScript N(idle_8021B8A8) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LW(0))
     EVT_ADD(LW(0), 80)
@@ -165,7 +165,7 @@ EvtSource N(idle_8021B8A8) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8021BB84) = {
+EvtScript N(handleEvent_8021BB84) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -219,7 +219,7 @@ EvtSource N(handleEvent_8021BB84) = {
             EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
             EVT_WAIT_FRAMES(5)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_bros_Palette_00_Anim_2)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6005859375))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_EQ(38)
             EVT_SET_CONST(LW(0), 0x00000001)
@@ -284,7 +284,7 @@ EvtSource N(handleEvent_8021BB84) = {
 
 #include "common/anglestuff.inc.c"
 
-EvtSource N(takeTurn_8021C3B0) = {
+EvtScript N(takeTurn_8021C3B0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -314,7 +314,7 @@ EvtSource N(takeTurn_8021C3B0) = {
             EVT_SET(LW(1), 10)
             EVT_ADD(LW(2), 3)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2001953125))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
             EVT_THREAD
                 EVT_CALL(GetActorPos, ACTOR_SELF, LW(1), LW(2), LW(0))
                 EVT_SET(LW(0), 0)
@@ -334,10 +334,10 @@ EvtSource N(takeTurn_8021C3B0) = {
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_bros_Palette_00_Anim_D)
-            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1005859375), EVT_FLOAT(0.80078125), EVT_FLOAT(1.0))
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 5, 0)
             EVT_WAIT_FRAMES(1)
-            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.30078125), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
             EVT_WAIT_FRAMES(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -381,7 +381,7 @@ EvtSource N(takeTurn_8021C3B0) = {
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_WAIT_FRAMES(5)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_bros_Palette_00_Anim_2)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6005859375))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -390,7 +390,7 @@ EvtSource N(takeTurn_8021C3B0) = {
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2001953125))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
             EVT_THREAD
                 EVT_CALL(GetActorPos, ACTOR_SELF, LW(1), LW(2), LW(0))
                 EVT_SET(LW(0), 0)
@@ -410,9 +410,9 @@ EvtSource N(takeTurn_8021C3B0) = {
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_goomba_bros_Palette_00_Anim_8)
-            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1005859375), EVT_FLOAT(0.80078125), EVT_FLOAT(1.0))
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
             EVT_WAIT_FRAMES(1)
-            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.30078125), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
             EVT_WAIT_FRAMES(1)
     EVT_END_SWITCH
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), 0, 0, 0, 1, 32)
@@ -420,7 +420,7 @@ EvtSource N(takeTurn_8021C3B0) = {
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)
             EVT_CALL(UseBattleCamPreset, 2)
-            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1005859375), EVT_FLOAT(0.80078125), EVT_FLOAT(1.0))
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
             EVT_WAIT_FRAMES(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
             EVT_WAIT_FRAMES(1)
@@ -430,7 +430,7 @@ EvtSource N(takeTurn_8021C3B0) = {
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(0), 40)
             EVT_SET(LW(1), 0)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_ADD(LW(0), 30)
@@ -456,7 +456,7 @@ EvtSource N(takeTurn_8021C3B0) = {
     EVT_END
 };
 
-EvtSource N(init_8021D078) = {
+EvtScript N(init_8021D078) = {
     EVT_EXEC_WAIT(N(init_8021B85C))
     EVT_CALL(SetActorVar, -127, 0, 0)
     EVT_CALL(SetActorVar, -127, 1, 0)
@@ -464,7 +464,7 @@ EvtSource N(init_8021D078) = {
     EVT_END
 };
 
-EvtSource N(doDeath_8021D0C4) = {
+EvtScript N(doDeath_8021D0C4) = {
     EVT_CALL(func_8027D32C, -127)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_SET(LW(2), 0)

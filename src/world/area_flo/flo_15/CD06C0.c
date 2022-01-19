@@ -20,7 +20,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_15_tattle },
 };
 
-EvtSource N(80240060) = {
+EvtScript N(80240060) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_IF_EQ(EVT_VAR(0), 1)
         EVT_CALL(SetMusicTrack, 0, SONG_SUNSHINE_RETURNS, 0, 8)
@@ -40,15 +40,15 @@ static s32 N(pad_11C) = {
     0x00000000,
 };
 
-EvtSource N(exitWalk_80240120) = EXIT_WALK_SCRIPT(60,  0, "flo_13",  1);
+EvtScript N(exitWalk_80240120) = EXIT_WALK_SCRIPT(60,  0, "flo_13",  1);
 
-EvtSource N(8024017C) = {
+EvtScript N(8024017C) = {
     EVT_BIND_TRIGGER(N(exitWalk_80240120), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
@@ -82,7 +82,7 @@ NpcSettings N(npcSettings_80240300) = {
     .level = 99,
 };
 
-EvtSource N(8024032C) = {
+EvtScript N(8024032C) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), 53)
         EVT_SET(EVT_VAR(3), 7)
         EVT_SET(EVT_VAR(4), 5)
@@ -112,7 +112,7 @@ EvtSource N(8024032C) = {
     EVT_END
 };
 
-EvtSource N(802404D8) = {
+EvtScript N(802404D8) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetNpcPos, 10, 0, 270, 0)
@@ -150,7 +150,7 @@ EvtSource N(802404D8) = {
     EVT_END
 };
 
-EvtSource N(aux_8024079C) = {
+EvtScript N(aux_8024079C) = {
     EVT_CALL(func_802CDE68, 11, 48)
     EVT_LOOP(0)
         EVT_CALL(MakeLerp, -30, 30, 20, 11)
@@ -180,7 +180,7 @@ EvtSource N(aux_8024079C) = {
     EVT_END
 };
 
-EvtSource N(8024094C) = {
+EvtScript N(8024094C) = {
     EVT_LOOP(0)
         EVT_WAIT_FRAMES(1)
         EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -215,7 +215,7 @@ EvtSource N(8024094C) = {
     EVT_END
 };
 
-EvtSource N(interact_80240B28) = {
+EvtScript N(interact_80240B28) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(50)
             EVT_CALL(SpeakToPlayer, 10, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11, 0x009A))
@@ -243,7 +243,7 @@ EvtSource N(interact_80240B28) = {
     EVT_END
 };
 
-EvtSource N(init_80240CD0) = {
+EvtScript N(init_80240CD0) = {
     EVT_CALL(SetNpcCollisionSize, 10, 64, 40)
     EVT_CALL(EnableNpcShadow, 10, FALSE)
     EVT_IF_LT(EVT_SAVE_VAR(0), 53)
@@ -260,7 +260,7 @@ EvtSource N(init_80240CD0) = {
     EVT_END
 };
 
-EvtSource N(init_80240DB4) = {
+EvtScript N(init_80240DB4) = {
     EVT_CALL(EnableNpcShadow, 11, FALSE)
     EVT_CALL(SetNpcAnimation, 11, NPC_ANIM_sun_Palette_00_Anim_2)
     EVT_CALL(SetNpcPaletteSwapMode, 10, 3)
@@ -349,13 +349,13 @@ static s32 N(pad_12D8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(802412E0) = {
+EvtScript N(802412E0) = {
     EVT_SET(EVT_SAVE_FLAG(1401), 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1401), 0)
         EVT_CALL(MakeEntity, 0x802BCF00, -180, 0, -18, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(802412E0)))
@@ -374,7 +374,7 @@ s32 N(intTable_80241360)[] = {
     0x00000018, 0xF24A7CE7, 0x0000000A, 0xF24A814D,
 };
 
-EvtSource N(802413B0) = {
+EvtScript N(802413B0) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1401), 0)
         EVT_LABEL(0)
         EVT_IF_EQ(EVT_SAVE_FLAG(1401), 0)

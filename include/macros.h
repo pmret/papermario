@@ -67,6 +67,8 @@
 
 #define SPRITE_WORLD_SCALE 0.71428573f
 
+#define BATTLE_ENTITY_ID_MASK 0x800
+
 #define PACK_FILL_COLOR(r, g, b, a) (GPACK_RGBA5551(r, g, b, a) << 0x10) | GPACK_RGBA5551(r, g, b, a)
 
 #define SQ(x) (x*x)

@@ -134,8 +134,8 @@ glabel _use_partner_ability
 /* 83D44 800EA894 00000000 */   nop
 /* 83D48 800EA898 0C05272D */  jal       sfx_play_sound
 /* 83D4C 800EA89C 2404000D */   addiu    $a0, $zero, 0xd
-/* 83D50 800EA8A0 3C108011 */  lui       $s0, %hi(D_8010CFDC)
-/* 83D54 800EA8A4 2610CFDC */  addiu     $s0, $s0, %lo(D_8010CFDC)
+/* 83D50 800EA8A0 3C108011 */  lui       $s0, %hi(wPartnerCurrentScriptID)
+/* 83D54 800EA8A4 2610CFDC */  addiu     $s0, $s0, %lo(wPartnerCurrentScriptID)
 /* 83D58 800EA8A8 0C0B102B */  jal       kill_script_by_ID
 /* 83D5C 800EA8AC 8E040000 */   lw       $a0, ($s0)
 /* 83D60 800EA8B0 3C028011 */  lui       $v0, %hi(wPartner)
@@ -145,8 +145,8 @@ glabel _use_partner_ability
 /* 83D70 800EA8C0 0C0B0CF8 */  jal       start_script
 /* 83D74 800EA8C4 24060020 */   addiu    $a2, $zero, 0x20
 /* 83D78 800EA8C8 8C430144 */  lw        $v1, 0x144($v0)
-/* 83D7C 800EA8CC 3C018011 */  lui       $at, %hi(D_8010CFD4)
-/* 83D80 800EA8D0 AC22CFD4 */  sw        $v0, %lo(D_8010CFD4)($at)
+/* 83D7C 800EA8CC 3C018011 */  lui       $at, %hi(wPartnerCurrentScript)
+/* 83D80 800EA8D0 AC22CFD4 */  sw        $v0, %lo(wPartnerCurrentScript)($at)
 /* 83D84 800EA8D4 AE030000 */  sw        $v1, ($s0)
 /* 83D88 800EA8D8 3C058011 */  lui       $a1, %hi(wPartnerNpc)
 /* 83D8C 800EA8DC 8CA5C930 */  lw        $a1, %lo(wPartnerNpc)($a1)
@@ -161,8 +161,8 @@ glabel _use_partner_ability
 /* 83DB0 800EA900 0803AC53 */  j         .L800EB14C_845FC
 /* 83DB4 800EA904 00000000 */   nop
 .L800EA908:
-/* 83DB8 800EA908 3C048011 */  lui       $a0, %hi(D_8010CFDC)
-/* 83DBC 800EA90C 8C84CFDC */  lw        $a0, %lo(D_8010CFDC)($a0)
+/* 83DB8 800EA908 3C048011 */  lui       $a0, %hi(wPartnerCurrentScriptID)
+/* 83DBC 800EA90C 8C84CFDC */  lw        $a0, %lo(wPartnerCurrentScriptID)($a0)
 /* 83DC0 800EA910 0C0B1059 */  jal       does_script_exist
 /* 83DC4 800EA914 00000000 */   nop
 /* 83DC8 800EA918 1440020C */  bnez      $v0, .L800EB14C_845FC
@@ -201,10 +201,10 @@ glabel _use_partner_ability
 /* 83E48 800EA998 8CC6C930 */  lw        $a2, %lo(wPartnerNpc)($a2)
 /* 83E4C 800EA99C 3C058011 */  lui       $a1, %hi(D_8010CD34)
 /* 83E50 800EA9A0 24A5CD34 */  addiu     $a1, $a1, %lo(D_8010CD34)
-/* 83E54 800EA9A4 3C018011 */  lui       $at, %hi(D_8010CFD4)
-/* 83E58 800EA9A8 AC22CFD4 */  sw        $v0, %lo(D_8010CFD4)($at)
-/* 83E5C 800EA9AC 3C018011 */  lui       $at, %hi(D_8010CFDC)
-/* 83E60 800EA9B0 AC23CFDC */  sw        $v1, %lo(D_8010CFDC)($at)
+/* 83E54 800EA9A4 3C018011 */  lui       $at, %hi(wPartnerCurrentScript)
+/* 83E58 800EA9A8 AC22CFD4 */  sw        $v0, %lo(wPartnerCurrentScript)($at)
+/* 83E5C 800EA9AC 3C018011 */  lui       $at, %hi(wPartnerCurrentScriptID)
+/* 83E60 800EA9B0 AC23CFDC */  sw        $v1, %lo(wPartnerCurrentScriptID)($at)
 /* 83E64 800EA9B4 2403000A */  addiu     $v1, $zero, 0xa
 /* 83E68 800EA9B8 A0430004 */  sb        $v1, 4($v0)
 /* 83E6C 800EA9BC 8CA30000 */  lw        $v1, ($a1)
@@ -216,8 +216,8 @@ glabel _use_partner_ability
 /* 83E84 800EA9D4 0803AC53 */  j         .L800EB14C_845FC
 /* 83E88 800EA9D8 00000000 */   nop
 .L800EA9DC:
-/* 83E8C 800EA9DC 3C108011 */  lui       $s0, %hi(D_8010CFDC)
-/* 83E90 800EA9E0 2610CFDC */  addiu     $s0, $s0, %lo(D_8010CFDC)
+/* 83E8C 800EA9DC 3C108011 */  lui       $s0, %hi(wPartnerCurrentScriptID)
+/* 83E90 800EA9E0 2610CFDC */  addiu     $s0, $s0, %lo(wPartnerCurrentScriptID)
 /* 83E94 800EA9E4 0C0B1059 */  jal       does_script_exist
 /* 83E98 800EA9E8 8E040000 */   lw       $a0, ($s0)
 /* 83E9C 800EA9EC 144001D7 */  bnez      $v0, .L800EB14C_845FC
@@ -230,8 +230,8 @@ glabel _use_partner_ability
 /* 83EB8 800EAA08 3C038011 */  lui       $v1, %hi(wPartnerNpc)
 /* 83EBC 800EAA0C 8C63C930 */  lw        $v1, %lo(wPartnerNpc)($v1)
 /* 83EC0 800EAA10 8C440144 */  lw        $a0, 0x144($v0)
-/* 83EC4 800EAA14 3C018011 */  lui       $at, %hi(D_8010CFD4)
-/* 83EC8 800EAA18 AC22CFD4 */  sw        $v0, %lo(D_8010CFD4)($at)
+/* 83EC4 800EAA14 3C018011 */  lui       $at, %hi(wPartnerCurrentScript)
+/* 83EC8 800EAA18 AC22CFD4 */  sw        $v0, %lo(wPartnerCurrentScript)($at)
 /* 83ECC 800EAA1C AC43014C */  sw        $v1, 0x14c($v0)
 /* 83ED0 800EAA20 2403000A */  addiu     $v1, $zero, 0xa
 /* 83ED4 800EAA24 AE040000 */  sw        $a0, ($s0)
@@ -267,8 +267,8 @@ glabel _use_partner_ability
 /* 83F44 800EAA94 0803AC53 */  j         .L800EB14C_845FC
 /* 83F48 800EAA98 00000000 */   nop
 .L800EAA9C:
-/* 83F4C 800EAA9C 3C048011 */  lui       $a0, %hi(D_8010CFDC)
-/* 83F50 800EAAA0 8C84CFDC */  lw        $a0, %lo(D_8010CFDC)($a0)
+/* 83F4C 800EAA9C 3C048011 */  lui       $a0, %hi(wPartnerCurrentScriptID)
+/* 83F50 800EAAA0 8C84CFDC */  lw        $a0, %lo(wPartnerCurrentScriptID)($a0)
 /* 83F54 800EAAA4 0C0B102B */  jal       kill_script_by_ID
 /* 83F58 800EAAA8 00000000 */   nop
 /* 83F5C 800EAAAC 8E020000 */  lw        $v0, ($s0)
@@ -285,12 +285,12 @@ glabel _use_partner_ability
 /* 83F84 800EAAD4 A2620012 */   sb       $v0, 0x12($s3)
 /* 83F88 800EAAD8 3C048011 */  lui       $a0, %hi(wPartnerNpc)
 /* 83F8C 800EAADC 8C84C930 */  lw        $a0, %lo(wPartnerNpc)($a0)
-/* 83F90 800EAAE0 3C018010 */  lui       $at, %hi(D_800F833C)
-/* 83F94 800EAAE4 C422833C */  lwc1      $f2, %lo(D_800F833C)($at)
-/* 83F98 800EAAE8 3C018010 */  lui       $at, %hi(D_800F8340)
-/* 83F9C 800EAAEC C4248340 */  lwc1      $f4, %lo(D_800F8340)($at)
-/* 83FA0 800EAAF0 3C018010 */  lui       $at, %hi(D_800F8344)
-/* 83FA4 800EAAF4 C4268344 */  lwc1      $f6, %lo(D_800F8344)($at)
+/* 83F90 800EAAE0 3C018010 */  lui       $at, %hi(SavedPartnerPosX)
+/* 83F94 800EAAE4 C422833C */  lwc1      $f2, %lo(SavedPartnerPosX)($at)
+/* 83F98 800EAAE8 3C018010 */  lui       $at, %hi(SavedPartnerPosY)
+/* 83F9C 800EAAEC C4248340 */  lwc1      $f4, %lo(SavedPartnerPosY)($at)
+/* 83FA0 800EAAF0 3C018010 */  lui       $at, %hi(SavedPartnerPosZ)
+/* 83FA4 800EAAF4 C4268344 */  lwc1      $f6, %lo(SavedPartnerPosZ)($at)
 /* 83FA8 800EAAF8 3C013F80 */  lui       $at, 0x3f80
 /* 83FAC 800EAAFC 44810000 */  mtc1      $at, $f0
 /* 83FB0 800EAB00 3C028011 */  lui       $v0, %hi(wPartner)
@@ -320,12 +320,12 @@ glabel _use_partner_ability
 /* 8400C 800EAB5C 3C038011 */  lui       $v1, %hi(wPartnerNpc)
 /* 84010 800EAB60 8C63C930 */  lw        $v1, %lo(wPartnerNpc)($v1)
 /* 84014 800EAB64 8C440144 */  lw        $a0, 0x144($v0)
-/* 84018 800EAB68 3C018011 */  lui       $at, %hi(D_8010CFD4)
-/* 8401C 800EAB6C AC22CFD4 */  sw        $v0, %lo(D_8010CFD4)($at)
+/* 84018 800EAB68 3C018011 */  lui       $at, %hi(wPartnerCurrentScript)
+/* 8401C 800EAB6C AC22CFD4 */  sw        $v0, %lo(wPartnerCurrentScript)($at)
 /* 84020 800EAB70 AC43014C */  sw        $v1, 0x14c($v0)
 /* 84024 800EAB74 2403000A */  addiu     $v1, $zero, 0xa
-/* 84028 800EAB78 3C018011 */  lui       $at, %hi(D_8010CFDC)
-/* 8402C 800EAB7C AC24CFDC */  sw        $a0, %lo(D_8010CFDC)($at)
+/* 84028 800EAB78 3C018011 */  lui       $at, %hi(wPartnerCurrentScriptID)
+/* 8402C 800EAB7C AC24CFDC */  sw        $a0, %lo(wPartnerCurrentScriptID)($at)
 /* 84030 800EAB80 A0430004 */  sb        $v1, 4($v0)
 /* 84034 800EAB84 3C018011 */  lui       $at, %hi(D_8010CD30)
 /* 84038 800EAB88 0803AC53 */  j         .L800EB14C_845FC
@@ -345,8 +345,8 @@ glabel _use_partner_ability
 /* 84068 800EABB8 00000000 */   nop
 /* 8406C 800EABBC 0C05272D */  jal       sfx_play_sound
 /* 84070 800EABC0 2404000D */   addiu    $a0, $zero, 0xd
-/* 84074 800EABC4 3C108011 */  lui       $s0, %hi(D_8010CFDC)
-/* 84078 800EABC8 2610CFDC */  addiu     $s0, $s0, %lo(D_8010CFDC)
+/* 84074 800EABC4 3C108011 */  lui       $s0, %hi(wPartnerCurrentScriptID)
+/* 84078 800EABC8 2610CFDC */  addiu     $s0, $s0, %lo(wPartnerCurrentScriptID)
 /* 8407C 800EABCC 0C0B102B */  jal       kill_script_by_ID
 /* 84080 800EABD0 8E040000 */   lw       $a0, ($s0)
 /* 84084 800EABD4 3C028011 */  lui       $v0, %hi(wPartner)
@@ -355,8 +355,8 @@ glabel _use_partner_ability
 /* 84090 800EABE0 0803ABCE */  j         .L800EAF38
 /* 84094 800EABE4 24050014 */   addiu    $a1, $zero, 0x14
 .L800EABE8:
-/* 84098 800EABE8 3C048011 */  lui       $a0, %hi(D_8010CFDC)
-/* 8409C 800EABEC 8C84CFDC */  lw        $a0, %lo(D_8010CFDC)($a0)
+/* 84098 800EABE8 3C048011 */  lui       $a0, %hi(wPartnerCurrentScriptID)
+/* 8409C 800EABEC 8C84CFDC */  lw        $a0, %lo(wPartnerCurrentScriptID)($a0)
 /* 840A0 800EABF0 0C0B1059 */  jal       does_script_exist
 /* 840A4 800EABF4 00000000 */   nop
 /* 840A8 800EABF8 14400154 */  bnez      $v0, .L800EB14C_845FC
@@ -378,8 +378,8 @@ glabel _use_partner_ability
 /* 840E4 800EAC34 8C42CD34 */  lw        $v0, %lo(D_8010CD34)($v0)
 /* 840E8 800EAC38 14400144 */  bnez      $v0, .L800EB14C_845FC
 /* 840EC 800EAC3C 00000000 */   nop
-/* 840F0 800EAC40 3C048011 */  lui       $a0, %hi(D_8010CFDC)
-/* 840F4 800EAC44 8C84CFDC */  lw        $a0, %lo(D_8010CFDC)($a0)
+/* 840F0 800EAC40 3C048011 */  lui       $a0, %hi(wPartnerCurrentScriptID)
+/* 840F4 800EAC44 8C84CFDC */  lw        $a0, %lo(wPartnerCurrentScriptID)($a0)
 /* 840F8 800EAC48 0C0B102B */  jal       kill_script_by_ID
 /* 840FC 800EAC4C 00000000 */   nop
 /* 84100 800EAC50 0C03A9AA */  jal       partner_free_npc
@@ -442,10 +442,10 @@ glabel _use_partner_ability
 /* 841D4 800EAD24 8CA5C930 */  lw        $a1, %lo(wPartnerNpc)($a1)
 /* 841D8 800EAD28 3C048011 */  lui       $a0, %hi(D_8010CD34)
 /* 841DC 800EAD2C 2484CD34 */  addiu     $a0, $a0, %lo(D_8010CD34)
-/* 841E0 800EAD30 3C018011 */  lui       $at, %hi(D_8010CFD4)
-/* 841E4 800EAD34 AC22CFD4 */  sw        $v0, %lo(D_8010CFD4)($at)
-/* 841E8 800EAD38 3C018011 */  lui       $at, %hi(D_8010CFDC)
-/* 841EC 800EAD3C AC23CFDC */  sw        $v1, %lo(D_8010CFDC)($at)
+/* 841E0 800EAD30 3C018011 */  lui       $at, %hi(wPartnerCurrentScript)
+/* 841E4 800EAD34 AC22CFD4 */  sw        $v0, %lo(wPartnerCurrentScript)($at)
+/* 841E8 800EAD38 3C018011 */  lui       $at, %hi(wPartnerCurrentScriptID)
+/* 841EC 800EAD3C AC23CFDC */  sw        $v1, %lo(wPartnerCurrentScriptID)($at)
 /* 841F0 800EAD40 2403000A */  addiu     $v1, $zero, 0xa
 /* 841F4 800EAD44 A0430004 */  sb        $v1, 4($v0)
 /* 841F8 800EAD48 8C830000 */  lw        $v1, ($a0)
@@ -454,8 +454,8 @@ glabel _use_partner_ability
 /* 84204 800EAD54 0803AC53 */  j         .L800EB14C_845FC
 /* 84208 800EAD58 AC830000 */   sw       $v1, ($a0)
 .L800EAD5C:
-/* 8420C 800EAD5C 3C108011 */  lui       $s0, %hi(D_8010CFDC)
-/* 84210 800EAD60 2610CFDC */  addiu     $s0, $s0, %lo(D_8010CFDC)
+/* 8420C 800EAD5C 3C108011 */  lui       $s0, %hi(wPartnerCurrentScriptID)
+/* 84210 800EAD60 2610CFDC */  addiu     $s0, $s0, %lo(wPartnerCurrentScriptID)
 /* 84214 800EAD64 0C0B1059 */  jal       does_script_exist
 /* 84218 800EAD68 8E040000 */   lw       $a0, ($s0)
 /* 8421C 800EAD6C 144000F7 */  bnez      $v0, .L800EB14C_845FC
@@ -468,8 +468,8 @@ glabel _use_partner_ability
 /* 84238 800EAD88 3C038011 */  lui       $v1, %hi(wPartnerNpc)
 /* 8423C 800EAD8C 8C63C930 */  lw        $v1, %lo(wPartnerNpc)($v1)
 /* 84240 800EAD90 8C440144 */  lw        $a0, 0x144($v0)
-/* 84244 800EAD94 3C018011 */  lui       $at, %hi(D_8010CFD4)
-/* 84248 800EAD98 AC22CFD4 */  sw        $v0, %lo(D_8010CFD4)($at)
+/* 84244 800EAD94 3C018011 */  lui       $at, %hi(wPartnerCurrentScript)
+/* 84248 800EAD98 AC22CFD4 */  sw        $v0, %lo(wPartnerCurrentScript)($at)
 /* 8424C 800EAD9C AC43014C */  sw        $v1, 0x14c($v0)
 /* 84250 800EADA0 2403000A */  addiu     $v1, $zero, 0xa
 /* 84254 800EADA4 AE040000 */  sw        $a0, ($s0)
@@ -503,12 +503,12 @@ glabel _use_partner_ability
 /* 842BC 800EAE0C A2620012 */   sb       $v0, 0x12($s3)
 /* 842C0 800EAE10 3C048011 */  lui       $a0, %hi(wPartnerNpc)
 /* 842C4 800EAE14 8C84C930 */  lw        $a0, %lo(wPartnerNpc)($a0)
-/* 842C8 800EAE18 3C018010 */  lui       $at, %hi(D_800F833C)
-/* 842CC 800EAE1C C422833C */  lwc1      $f2, %lo(D_800F833C)($at)
-/* 842D0 800EAE20 3C018010 */  lui       $at, %hi(D_800F8340)
-/* 842D4 800EAE24 C4248340 */  lwc1      $f4, %lo(D_800F8340)($at)
-/* 842D8 800EAE28 3C018010 */  lui       $at, %hi(D_800F8344)
-/* 842DC 800EAE2C C4268344 */  lwc1      $f6, %lo(D_800F8344)($at)
+/* 842C8 800EAE18 3C018010 */  lui       $at, %hi(SavedPartnerPosX)
+/* 842CC 800EAE1C C422833C */  lwc1      $f2, %lo(SavedPartnerPosX)($at)
+/* 842D0 800EAE20 3C018010 */  lui       $at, %hi(SavedPartnerPosY)
+/* 842D4 800EAE24 C4248340 */  lwc1      $f4, %lo(SavedPartnerPosY)($at)
+/* 842D8 800EAE28 3C018010 */  lui       $at, %hi(SavedPartnerPosZ)
+/* 842DC 800EAE2C C4268344 */  lwc1      $f6, %lo(SavedPartnerPosZ)($at)
 /* 842E0 800EAE30 3C013F80 */  lui       $at, 0x3f80
 /* 842E4 800EAE34 44810000 */  mtc1      $at, $f0
 /* 842E8 800EAE38 3C028011 */  lui       $v0, %hi(wPartner)
@@ -536,10 +536,10 @@ glabel _use_partner_ability
 /* 8433C 800EAE8C 8C430144 */  lw        $v1, 0x144($v0)
 /* 84340 800EAE90 3C058011 */  lui       $a1, %hi(wPartnerNpc)
 /* 84344 800EAE94 24A5C930 */  addiu     $a1, $a1, %lo(wPartnerNpc)
-/* 84348 800EAE98 3C018011 */  lui       $at, %hi(D_8010CFD4)
-/* 8434C 800EAE9C AC22CFD4 */  sw        $v0, %lo(D_8010CFD4)($at)
-/* 84350 800EAEA0 3C018011 */  lui       $at, %hi(D_8010CFDC)
-/* 84354 800EAEA4 AC23CFDC */  sw        $v1, %lo(D_8010CFDC)($at)
+/* 84348 800EAE98 3C018011 */  lui       $at, %hi(wPartnerCurrentScript)
+/* 8434C 800EAE9C AC22CFD4 */  sw        $v0, %lo(wPartnerCurrentScript)($at)
+/* 84350 800EAEA0 3C018011 */  lui       $at, %hi(wPartnerCurrentScriptID)
+/* 84354 800EAEA4 AC23CFDC */  sw        $v1, %lo(wPartnerCurrentScriptID)($at)
 /* 84358 800EAEA8 8CA40000 */  lw        $a0, ($a1)
 /* 8435C 800EAEAC 2403000A */  addiu     $v1, $zero, 0xa
 /* 84360 800EAEB0 A0430004 */  sb        $v1, 4($v0)
@@ -570,8 +570,8 @@ glabel _use_partner_ability
 /* 843C0 800EAF10 0803AC53 */  j         .L800EB14C_845FC
 /* 843C4 800EAF14 00000000 */   nop
 .L800EAF18:
-/* 843C8 800EAF18 3C108011 */  lui       $s0, %hi(D_8010CFDC)
-/* 843CC 800EAF1C 2610CFDC */  addiu     $s0, $s0, %lo(D_8010CFDC)
+/* 843C8 800EAF18 3C108011 */  lui       $s0, %hi(wPartnerCurrentScriptID)
+/* 843CC 800EAF1C 2610CFDC */  addiu     $s0, $s0, %lo(wPartnerCurrentScriptID)
 /* 843D0 800EAF20 0C0B102B */  jal       kill_script_by_ID
 /* 843D4 800EAF24 8E040000 */   lw       $a0, ($s0)
 /* 843D8 800EAF28 3C028011 */  lui       $v0, %hi(wPartner)
@@ -582,8 +582,8 @@ glabel _use_partner_ability
 /* 843E8 800EAF38 0C0B0CF8 */  jal       start_script
 /* 843EC 800EAF3C 24060020 */   addiu    $a2, $zero, 0x20
 /* 843F0 800EAF40 8C430144 */  lw        $v1, 0x144($v0)
-/* 843F4 800EAF44 3C018011 */  lui       $at, %hi(D_8010CFD4)
-/* 843F8 800EAF48 AC22CFD4 */  sw        $v0, %lo(D_8010CFD4)($at)
+/* 843F4 800EAF44 3C018011 */  lui       $at, %hi(wPartnerCurrentScript)
+/* 843F8 800EAF48 AC22CFD4 */  sw        $v0, %lo(wPartnerCurrentScript)($at)
 /* 843FC 800EAF4C AE030000 */  sw        $v1, ($s0)
 /* 84400 800EAF50 3C048011 */  lui       $a0, %hi(wPartnerNpc)
 /* 84404 800EAF54 8C84C930 */  lw        $a0, %lo(wPartnerNpc)($a0)
@@ -595,8 +595,8 @@ glabel _use_partner_ability
 /* 8441C 800EAF6C 0803AC53 */  j         .L800EB14C_845FC
 /* 84420 800EAF70 AE230000 */   sw       $v1, ($s1)
 .L800EAF74:
-/* 84424 800EAF74 3C118011 */  lui       $s1, %hi(D_8010CFDC)
-/* 84428 800EAF78 2631CFDC */  addiu     $s1, $s1, %lo(D_8010CFDC)
+/* 84424 800EAF74 3C118011 */  lui       $s1, %hi(wPartnerCurrentScriptID)
+/* 84428 800EAF78 2631CFDC */  addiu     $s1, $s1, %lo(wPartnerCurrentScriptID)
 /* 8442C 800EAF7C 0C0B1059 */  jal       does_script_exist
 /* 84430 800EAF80 8E240000 */   lw       $a0, ($s1)
 /* 84434 800EAF84 14400071 */  bnez      $v0, .L800EB14C_845FC
@@ -609,8 +609,8 @@ glabel _use_partner_ability
 /* 84450 800EAFA0 3C038011 */  lui       $v1, %hi(wPartnerNpc)
 /* 84454 800EAFA4 8C63C930 */  lw        $v1, %lo(wPartnerNpc)($v1)
 /* 84458 800EAFA8 8C440144 */  lw        $a0, 0x144($v0)
-/* 8445C 800EAFAC 3C018011 */  lui       $at, %hi(D_8010CFD4)
-/* 84460 800EAFB0 AC22CFD4 */  sw        $v0, %lo(D_8010CFD4)($at)
+/* 8445C 800EAFAC 3C018011 */  lui       $at, %hi(wPartnerCurrentScript)
+/* 84460 800EAFB0 AC22CFD4 */  sw        $v0, %lo(wPartnerCurrentScript)($at)
 /* 84464 800EAFB4 AC43014C */  sw        $v1, 0x14c($v0)
 /* 84468 800EAFB8 2403000A */  addiu     $v1, $zero, 0xa
 /* 8446C 800EAFBC AE240000 */  sw        $a0, ($s1)
@@ -669,23 +669,23 @@ glabel _use_partner_ability
 /* 84528 800EB078 C4C2002C */  lwc1      $f2, 0x2c($a2)
 /* 8452C 800EB07C C4C40030 */  lwc1      $f4, 0x30($a2)
 /* 84530 800EB080 8C440018 */  lw        $a0, 0x18($v0)
-/* 84534 800EB084 3C018010 */  lui       $at, %hi(D_800F833C)
-/* 84538 800EB088 E420833C */  swc1      $f0, %lo(D_800F833C)($at)
-/* 8453C 800EB08C 3C018010 */  lui       $at, %hi(D_800F8340)
-/* 84540 800EB090 E4228340 */  swc1      $f2, %lo(D_800F8340)($at)
-/* 84544 800EB094 3C018010 */  lui       $at, %hi(D_800F8344)
-/* 84548 800EB098 E4248344 */  swc1      $f4, %lo(D_800F8344)($at)
+/* 84534 800EB084 3C018010 */  lui       $at, %hi(SavedPartnerPosX)
+/* 84538 800EB088 E420833C */  swc1      $f0, %lo(SavedPartnerPosX)($at)
+/* 8453C 800EB08C 3C018010 */  lui       $at, %hi(SavedPartnerPosY)
+/* 84540 800EB090 E4228340 */  swc1      $f2, %lo(SavedPartnerPosY)($at)
+/* 84544 800EB094 3C018010 */  lui       $at, %hi(SavedPartnerPosZ)
+/* 84548 800EB098 E4248344 */  swc1      $f4, %lo(SavedPartnerPosZ)($at)
 /* 8454C 800EB09C 0C0B0CF8 */  jal       start_script
 /* 84550 800EB0A0 24060020 */   addiu    $a2, $zero, 0x20
 /* 84554 800EB0A4 3C038011 */  lui       $v1, %hi(wPartnerNpc)
 /* 84558 800EB0A8 8C63C930 */  lw        $v1, %lo(wPartnerNpc)($v1)
 /* 8455C 800EB0AC 8C440144 */  lw        $a0, 0x144($v0)
-/* 84560 800EB0B0 3C018011 */  lui       $at, %hi(D_8010CFD4)
-/* 84564 800EB0B4 AC22CFD4 */  sw        $v0, %lo(D_8010CFD4)($at)
+/* 84560 800EB0B0 3C018011 */  lui       $at, %hi(wPartnerCurrentScript)
+/* 84564 800EB0B4 AC22CFD4 */  sw        $v0, %lo(wPartnerCurrentScript)($at)
 /* 84568 800EB0B8 AC43014C */  sw        $v1, 0x14c($v0)
 /* 8456C 800EB0BC 2403000A */  addiu     $v1, $zero, 0xa
-/* 84570 800EB0C0 3C018011 */  lui       $at, %hi(D_8010CFDC)
-/* 84574 800EB0C4 AC24CFDC */  sw        $a0, %lo(D_8010CFDC)($at)
+/* 84570 800EB0C0 3C018011 */  lui       $at, %hi(wPartnerCurrentScriptID)
+/* 84574 800EB0C4 AC24CFDC */  sw        $a0, %lo(wPartnerCurrentScriptID)($at)
 /* 84578 800EB0C8 A0430004 */  sb        $v1, 4($v0)
 .L800EB0CC:
 /* 8457C 800EB0CC 0C038069 */  jal       enable_player_input
@@ -699,8 +699,8 @@ glabel _use_partner_ability
 /* 84598 800EB0E8 8E020000 */  lw        $v0, ($s0)
 /* 8459C 800EB0EC 14400017 */  bnez      $v0, .L800EB14C_845FC
 /* 845A0 800EB0F0 00000000 */   nop
-/* 845A4 800EB0F4 3C118011 */  lui       $s1, %hi(D_8010CFDC)
-/* 845A8 800EB0F8 2631CFDC */  addiu     $s1, $s1, %lo(D_8010CFDC)
+/* 845A4 800EB0F4 3C118011 */  lui       $s1, %hi(wPartnerCurrentScriptID)
+/* 845A8 800EB0F8 2631CFDC */  addiu     $s1, $s1, %lo(wPartnerCurrentScriptID)
 /* 845AC 800EB0FC 0C0B1059 */  jal       does_script_exist
 /* 845B0 800EB100 8E240000 */   lw       $a0, ($s1)
 /* 845B4 800EB104 10400003 */  beqz      $v0, .L800EB114

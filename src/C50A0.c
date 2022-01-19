@@ -105,7 +105,7 @@ void item_entity_disable_shadow(ItemEntity* itemEntity) {
     itemEntity->flags |= ENTITY_FLAGS_CONTINUOUS_COLLISION;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
-        shadow->flags |= SHADOW_FLAGS_1;
+        shadow->flags |= SHADOW_FLAGS_HIDDEN;
     }
 }
 
@@ -115,7 +115,7 @@ void item_entity_enable_shadow(ItemEntity* itemEntity) {
     itemEntity->flags &= ~ENTITY_FLAGS_CONTINUOUS_COLLISION;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
-        shadow->flags &= ~SHADOW_FLAGS_1;
+        shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
     }
 }
 
@@ -174,7 +174,7 @@ s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode,
     return make_item_entity(itemID, x, y, z, itemSpawnMode, pickupDelay, -1, pickupVar);
 }
 
-INCLUDE_ASM(s32, "C50A0", init_got_item);
+INCLUDE_ASM(s32, "C50A0", make_item_entity_at_player);
 
 INCLUDE_ASM(s32, "C50A0", item_entity_update);
 

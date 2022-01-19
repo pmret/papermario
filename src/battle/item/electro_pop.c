@@ -39,7 +39,7 @@ ApiStatus N(func_802A133C_7308DC)(Evt* script, s32 isInitialCall) {
 #include "common/AddHP.inc.c"
 
 ApiStatus N(func_802A1450_7309F0)(Evt* script, s32 isInitialCall) {
-    StaticItem* item = &gItemTable[ITEM_ELECTRO_POP];
+    ItemData* item = &gItemTable[ITEM_ELECTRO_POP];
     PlayerData* playerData = &gPlayerData;
 
     playerData->curHP += item->potencyA;
@@ -69,7 +69,7 @@ ApiStatus N(AddFP)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_802A14F0_730A90)(Evt* script, s32 isInitialCall) {
-    StaticItem* item = &gItemTable[ITEM_ELECTRO_POP];
+    ItemData* item = &gItemTable[ITEM_ELECTRO_POP];
     PlayerData* playerData = &gPlayerData;
 
     playerData->curFP += item->potencyA;
@@ -84,7 +84,7 @@ ApiStatus N(func_802A14F0_730A90)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x000000CC)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(EatItem))

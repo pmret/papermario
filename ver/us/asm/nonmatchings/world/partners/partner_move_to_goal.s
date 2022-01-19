@@ -164,7 +164,7 @@ glabel partner_move_to_goal
 /* 88F44 800EFA94 46800020 */  cvt.s.w   $f0, $f0
 /* 88F48 800EFA98 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 88F4C 800EFA9C 8E440080 */  lw        $a0, 0x80($s2)
-/* 88F50 800EFAA0 0C0371DE */  jal       npc_raycast_down_ahead
+/* 88F50 800EFAA0 0C0371DE */  jal       npc_raycast_down_around
 /* 88F54 800EFAA4 27A70028 */   addiu    $a3, $sp, 0x28
 /* 88F58 800EFAA8 10400028 */  beqz      $v0, .L800EFB4C
 /* 88F5C 800EFAAC 00000000 */   nop

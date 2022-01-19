@@ -59,8 +59,8 @@ void N(func_8024240C_96B5CC)(Evt *script, s32 isInitialCall);
 void N(func_80242EAC_96C06C)(Evt *script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_8024EEF4);
-extern EvtSource N(80244C78);
-extern EvtSource N(8024D434);
-extern EvtSource N(8024D494);
-extern EvtSource N(8024D700);
-extern EvtSource N(main);
+extern EvtScript N(80244C78);
+extern EvtScript N(8024D434);
+extern EvtScript N(8024D494);
+extern EvtScript N(8024D700);
+extern EvtScript N(main);

@@ -44,8 +44,8 @@ glabel func_8024522C_805AAC
 /* 805B44 802452C4 26730001 */   addiu    $s3, $s3, 1
 /* 805B48 802452C8 3C028009 */  lui       $v0, %hi(gItemTable+0xA84)
 /* 805B4C 802452CC 84428364 */  lh        $v0, %lo(gItemTable+0xA84)($v0)
-/* 805B50 802452D0 3C078009 */  lui       $a3, %hi(D_8008A680)
-/* 805B54 802452D4 24E7A680 */  addiu     $a3, $a3, %lo(D_8008A680)
+/* 805B50 802452D0 3C078009 */  lui       $a3, %hi(gItemHudScripts)
+/* 805B54 802452D4 24E7A680 */  addiu     $a3, $a3, %lo(gItemHudScripts)
 /* 805B58 802452D8 AE330108 */  sw        $s3, 0x108($s1)
 /* 805B5C 802452DC 8E430008 */  lw        $v1, 8($s2)
 /* 805B60 802452E0 000210C0 */  sll       $v0, $v0, 3

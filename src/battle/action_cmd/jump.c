@@ -5,10 +5,10 @@
 
 extern s32 D_802941C0;
 
-// icon id's for hud elements
-extern HudElementAnim D_80108B28[];
-extern HudElementAnim D_80292A2C[];
-extern HudElementAnim D_80108B54[];
+// icon IDs for hud elements
+extern HudScript HudScript_AButton[];
+extern HudScript HudScript_RightOn[];
+extern HudScript HudScript_AButtonDown[];
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     s32 hudElement;
@@ -30,14 +30,14 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->unk_60 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(D_80108B28);
+    hudElement = create_hud_element(HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_alpha(hudElement, 0xFF);
 
-    hudElement = create_hud_element(D_80292A2C);
+    hudElement = create_hud_element(HudScript_RightOn);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
@@ -126,7 +126,7 @@ void N(update)(void) {
 
             temp_s0_3 = battleStatus->unk_434[actionCommandStatus->unk_50];
             if (((actionCommandStatus->unk_4E - temp_s0_3) - 2) <= 0) {
-                set_hud_element_anim(actionCommandStatus->hudElements[0], D_80108B54);
+                set_hud_element_anim(actionCommandStatus->hudElements[0], HudScript_AButtonDown);
             }
             if (((battleStatus->currentButtonsPressed & 0x8000) != 0) && (actionCommandStatus->autoSucceed == 0)) {
                 actionCommandStatus->unk_60 = 1;

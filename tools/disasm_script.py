@@ -78,12 +78,10 @@ def extend_symbol_map(a, b):
     return a
 
 def round_fixed(f: float) -> float:
-    """
     g = f * 100.0
     whole = round(g)
     if abs(g - whole) <= 100.0/1024.0:
         f = whole / 100.0
-    """
     return f
 
 def find_symbol_in_overlay(symbol_map, overlay_rom_addr, symbol_ram_addr):
@@ -283,20 +281,23 @@ def fix_args(self, func, args, info):
             elif info[i] == "Hex" and argNum > 0:
                 new_args.append(f"0x{argNum:08X}")
             elif info[i] == "CustomAnim":
-                try:
-                    value = (argNum & 0x00FFFFFF)
+                if argNum != -1:
+                    try:
+                        value = (argNum & 0x00FFFFFF)
 
-                    if func == "SetAnimation" and int(new_args[1], 10) == 0:
-                        call = f"{CONSTANTS['PlayerAnims'][argNum]}"
-                    elif value in CONSTANTS["NPC_SPRITE"]:
-                        self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
-                        call =  CONSTANTS['NPC_SPRITE'][value]
-                    else:
-                        call = f"{argNum:06X}"
-                except ValueError:
-                        call = f"0x{argNum:06X}"
-                except KeyError:
-                        call = f"0x{argNum:06X}"
+                        if func == "SetAnimation" and int(new_args[1], 10) == 0:
+                            call = f"{CONSTANTS['PlayerAnims'][argNum]}"
+                        elif value in CONSTANTS["NPC_SPRITE"]:
+                            self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
+                            call =  CONSTANTS['NPC_SPRITE'][value]
+                        else:
+                            call = f"{argNum:06X}"
+                    except ValueError:
+                            call = f"0x{argNum:06X}"
+                    except KeyError:
+                            call = f"0x{argNum:06X}"
+                else:
+                    call = "-1"
                 new_args.append(call)
             elif info[i] == "CustomMsg":
                 type_ = (argNum & 0xFF0000) >> 16
@@ -371,6 +372,7 @@ replace_funcs = {
     "BindNpcInteract"           :{0:"NpcIDs"},
     "BindTakeTurn"              :{0:"ActorIDs"},
 
+    "CheckButtonDown"           :{0:"Hex", 1:"Bool"},
     "ContinueSpeech"            :{1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
     "CopyBuffs"                 :{0:"ActorIDs", 1:"ActorIDs"},
     "CopyStatusEffects"         :{0:"ActorIDs", 1:"ActorIDs"},
@@ -382,6 +384,7 @@ replace_funcs = {
     "DispatchEvent"             :{0:"ActorIDs", 1:"Events"},
 
     "EnableActorBlur"           :{0:"ActorIDs"},
+    "EnableActorGlow"           :{0:"ActorIDs", 1:"Bool"},
     "EnableIdleScript"          :{0:"ActorIDs"},
     "EnableNpcShadow"           :{0:"NpcIDs", 1:"Bool"},
     "EndActorSpeech"            :{0:"ActorIDs", 2:"CustomAnim", 3:"CustomAnim"},
@@ -389,20 +392,25 @@ replace_funcs = {
     "EnemyDamageTarget"         :{0:"ActorIDs", 1:"HitResults", 2:"DamageTypes", 4:"StatusFlags", 6:"BattleStatusFlags1"},
     "EnemyTestTarget"           :{0:"ActorIDs", 1:"HitResults", 2:"DamageTypes", 3:"StatusFlags", 5:"BattleStatusFlags1"},
 
+    "FallToGoal"                :{0:"ActorIDs"},
     "FindKeyItem"               :{0:"ItemIDs"},
+    "FlyPartTo"                 :{0:"ActorIDs"},
     "FlyToGoal"                 :{0:"ActorIDs"},
     "ForceHomePos"              :{0:"ActorIDs"},
 
+    "func_8026DF88"             :{0:"ActorIDs"},
     "func_8026EA7C"             :{0:"ActorIDs"},
     "func_8026EBF8"             :{0:"ActorIDs"},
     "func_8026ED20"             :{0:"ActorIDs"},
     "func_8027D32C"             :{0:"ActorIDs"},
     "func_8027D434"             :{0:"ActorIDs"},
     "func_8027D4C8"             :{0:"ActorIDs"},
+    "func_8027D75C"             :{0:"ActorIDs"},
     "func_802CFD30"             :{0:"NpcIDs"},
     "func_802CFE2C"             :{0:"NpcIDs"},
     "func_802D2520"             :{0:"PlayerAnims"},
 
+    "GetAnimation"              :{0:"ActorIDs", 2:"CustomAnim"},
     "GetActorFlags"             :{0:"ActorIDs", 1:"ActorFlags"},
     "GetActorHP"                :{0:"ActorIDs"},
     "GetActorPos"               :{0:"ActorIDs"},
@@ -411,14 +419,19 @@ replace_funcs = {
     "GetBattleFlags"            :{0:"BattleStatusFlags1"},
     "GetBattlePhase"            :{0:"Phases"},
     "GetDistanceToGoal"         :{0:"ActorIDs"},
+    "GetEnemyMaxHP"             :{0:"ActorIDs"},
     "GetGoalPos"                :{0:"ActorIDs"},
     "GetHomePos"                :{0:"ActorIDs"},
+    "GetIdleGoal"               :{0:"ActorIDs"},
     "GetIndexFromHome"          :{0:"ActorIDs"},
     "GetIndexFromPos"           :{0:"ActorIDs"},
     "GetItemPower"              :{0:"ItemIDs"},
     "GetLastDamage"             :{0:"ActorIDs"},
     "GetLastElement"            :{0:"DamageTypes"},
     "GetLastEvent"              :{0:"ActorIDs", 1:"Events"},
+    "GetPartOffset"             :{0:"ActorIDs"},
+    "GetPartPos"                :{0:"ActorIDs"},
+    "GetPartRotation"           :{0:"ActorIDs"},
     "GetNpcPos"                 :{0:"NpcIDs"},
     "GetOriginalActorType"      :{0:"ActorIDs", 1:"ActorType"},
     "GetStatusFlags"            :{0:"ActorIDs", 1:"StatusFlags"},
@@ -428,13 +441,16 @@ replace_funcs = {
     "HPBarToHome"               :{0:"ActorIDs"},
 
     "IdleFlyToGoal"             :{0:"ActorIDs"},
+    "IdleJumpToGoal"            :{0:"ActorIDs"},
     "IdleRunToGoal"             :{0:"ActorIDs"},
     "InterpNpcYaw"              :{0:"NpcIDs"},
 
     "JumpPartTo"                :{0:"ActorIDs"},
     "JumpToGoal"                :{0:"ActorIDs", 2:"Bool", 3:"Bool", 4:"Bool"},
+    "JumpWithBounce"            :{0:"ActorIDs"},
 
     "LandJump"                  :{0:"ActorIDs"},
+    "LoadActionCommand"         :{0:"ActionCommand"},
 
     "MakeEntity"                :{0:"Hex"},
     "MakeItemEntity"            :{0:"ItemIDs"},
@@ -452,6 +468,7 @@ replace_funcs = {
     "PlaySound"                 :{0:"SoundIDs"},
     "PlaySoundAt"               :{0:"SoundIDs"},
     "PlaySoundAtActor"          :{0:"ActorIDs", 1:"SoundIDs"},
+    "PlaySoundAtModel"          :{1:"SoundIDs"},
     "PlaySoundAtNpc"            :{0:"NpcIDs", 1:"SoundIDs"},
     "PlaySoundAtPart"           :{0:"ActorIDs", 2:"SoundIDs"},
 
@@ -465,11 +482,13 @@ replace_funcs = {
     "SetActorDispOffset"        :{0:"ActorIDs"},
     "SetActorFlagBits"          :{0:"ActorIDs", 1:"ActorFlags"},
     "SetActorIdleSpeed"         :{0:"ActorIDs"},
+    "SetActorIdleJumpGravity"   :{0:"ActorIDs"},
     "SetActorJumpGravity"       :{0:"ActorIDs"},
     "SetActorPos"               :{0:"ActorIDs"},
     "SetActorRotation"          :{0:"ActorIDs"},
     "SetActorRotationOffset"    :{0:"ActorIDs"},
     "SetActorScale"             :{0:"ActorIDs"},
+    "SetActorSize"              :{0:"ActorIDs"},
     "SetActorSounds"            :{0:"ActorIDs"},
     "SetActorSpeed"             :{0:"ActorIDs"},
     "SetActorType"              :{0:"ActorIDs", 1:"ActorType"},
@@ -484,12 +503,14 @@ replace_funcs = {
     "SetEnemyHP"                :{0:"ActorIDs"},
     "SetEnemyTargetOffset"      :{0:"ActorIDs"},
     "SetGoalPos"                :{0:"ActorIDs"},
+    "SetGoalToFirstTarget"      :{0:"ActorIDs"},
     "SetGoalToHome"             :{0:"ActorIDs"},
     "SetGoalToIndex"            :{0:"ActorIDs"},
     "SetGoalToTarget"           :{0:"ActorIDs"},
     "SetHomePos"                :{0:"ActorIDs"},
     "SetIdleAnimations"         :{0:"ActorIDs"},
     "SetIdleGoal"               :{0:"ActorIDs"},
+    "SetIdleGoalToHome"         :{0:"ActorIDs"},
     "SetJumpAnimations"         :{0:"ActorIDs", 2:"PlayerAnims", 3:"PlayerAnims", 4:"PlayerAnims"},
     "SetMusicTrack"             :{1:"SongIDs"},
 
@@ -504,6 +525,8 @@ replace_funcs = {
     "SetNpcSprite"              :{1:"Hex"},
     "SetNpcYaw"                 :{0:"NpcIDs"},
 
+    "SetOwnerID"                :{0:"ActorIDs"},
+
     "SetPartAlpha"              :{0:"ActorIDs"},
     "SetPartDispOffset"         :{0:"ActorIDs"},
     "SetPartEventBits"          :{0:"ActorIDs", 2:"ActorEventFlags"},
@@ -512,14 +535,18 @@ replace_funcs = {
     "SetPartJumpGravity"        :{0:"ActorIDs"},
     "SetPartMoveSpeed"          :{0:"ActorIDs"},
     "SetPartPos"                :{0:"ActorIDs"},
+    "SetPartRotation"           :{0:"ActorIDs"},
+    "SetPartRotationOffset"     :{0:"ActorIDs"},
     "SetPartScale"              :{0:"ActorIDs"},
     "SetPartSize"               :{0:"ActorIDs"},
     "SetPartSounds"             :{0:"ActorIDs"},
+    "SetPartTargetFlagBits"     :{0:"ActorIDs"},
     "SetPartYaw"                :{0:"ActorIDs"},
 
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
+    "SetSpriteShading"          :{0:"CustomAnim"},
     "SetStatusTable"            :{0:"ActorIDs"},
     "SetTargetActor"            :{0:"ActorIDs", 1:"ActorIDs"},
     "SetTargetOffset"           :{0:"ActorIDs"},
@@ -533,6 +560,8 @@ replace_funcs = {
 
     "UseBattleCamPreset"        :{0:"BtlCameraPreset"},
     "UseIdleAnimation"          :{0:"ActorIDs", 1:"Bool"},
+
+    "WasStatusInflicted"        :{0:"ActorIDs", 1:"Bool"},
 }
 
 def trim_lw(arg):
@@ -700,7 +729,7 @@ class ScriptDisassembler:
             elif name.startswith("N(npcGroupList_"):
                 prefix = "NpcGroupList "
             elif name.startswith("N("):
-                prefix = "EvtSource "
+                prefix = "EvtScript "
             else:
                 toReplace = False
 
@@ -744,8 +773,12 @@ class ScriptDisassembler:
             self.indent -= 1
 
             if self.prelude:
-                self.prefix_line(f"EvtSource {self.script_name} = {{")
-                self.write_line("};")
+                try:
+                    self.prefix_line(f"EvtScript D_{self.script_name - info[0] + info[2]:08X}_{self.script_name:06X} = {{")
+                    self.write_line("};")
+                except:
+                    self.prefix_line(f"EvtScript {self.script_name} = {{")
+                    self.write_line("};")
             self.done = True
         elif opcode == 0x02: self.write_line(f"EVT_RETURN")
         elif opcode == 0x03: self.write_line(f"EVT_LABEL({self.var(argv[0])})")
@@ -1036,11 +1069,11 @@ if __name__ == "__main__":
                             print(f"========== 0x{gap_size:X} byte gap ({potential_count} {potential_struct}?) 0x{gap_start:X} - 0x{offset:X} ==========")
                             print()
                             gap = False
-                        #print(f"EvtSource read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                        #print(f"EvtScript read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                         #      f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
                         #print()
                         vram = f"{args.vram:X}_" if vram_base > 0 else f""
-                        script_text = script_text.replace("EvtSource script = SCRIPT({", f"EvtSource N(D_{vram}{offset:X}) = " + "SCRIPT({")
+                        script_text = script_text.replace("EvtScript script = SCRIPT({", f"EvtScript N(D_{vram}{offset:X}) = " + "SCRIPT({")
                         print(script_text, end="")
                         print()
                         #print(f"Valid script found at 0x{offset:X}")
@@ -1075,7 +1108,7 @@ if __name__ == "__main__":
                         try:
                             script_text = script.disassemble()
 
-                            # print(f"EvtSource read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                            # print(f"EvtScript read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                             #     f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
                             print()
                             print(script_text, end="")
@@ -1088,6 +1121,7 @@ if __name__ == "__main__":
                     break
 
                 loffset = script.end_pos
+                LOCAL_WORDS = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
                 looping = args.blob
                 try:
                     loffset = _script_lib[loffset - info[0] + info[2]][0][1]

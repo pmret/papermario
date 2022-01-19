@@ -545,6 +545,27 @@ typedef struct EffectWhirlwind {
     /* 0x30 */ f32 unk_30;
 } EffectWhirlwind;
 
+typedef struct Effect6BData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ char unk_10[12];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ char unk_24[8];
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ f32 scale;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ char unk_40[0x4];
+} Effect6BData; // size = 0x44
+
+typedef struct Effect6BInstance {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ char unk_04[8];
+    /* 0x0C */ Effect6BData* data;
+} Effect6BInstance;
+
 typedef struct Effect6FData {
     /* 0x00 */ EffectInstanceDataThing* unk_00;
     /* 0x04 */ Vec3f pos;
@@ -601,7 +622,7 @@ EffectInstance* playFX_1C(s32, f32, f32, f32, s32);
 void playFX_1D(s32, f32, f32, f32, f32, s32, f32, s32);
 EffectInstance* playFX_1E(s32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* playFX_1F(s32, f32, f32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_20(s32, f32, f32, f32, f32, EffectInstance*);
+EffectInstance* playFX_20(s32, f32, f32, f32, f32, EffectInstance**);
 EffectInstance* playFX_21(s32, f32, f32, f32, f32, f32, s32);
 void playFX_22(s32, f32, f32, f32, f32, f32, s32, s32);
 EffectInstance* playFX_23(u32, f32, f32, f32, f32);

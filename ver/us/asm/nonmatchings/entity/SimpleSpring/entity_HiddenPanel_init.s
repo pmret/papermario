@@ -24,8 +24,8 @@ glabel entity_HiddenPanel_init
 /* 1084F0 802E6C70 3402FFFF */  ori       $v0, $zero, 0xffff
 /* 1084F4 802E6C74 A6420006 */  sh        $v0, 6($s2)
 /* 1084F8 802E6C78 C660004C */  lwc1      $f0, 0x4c($s3)
-/* 1084FC 802E6C7C 3C038016 */  lui       $v1, %hi(D_8015C7D0)
-/* 108500 802E6C80 2463C7D0 */  addiu     $v1, $v1, %lo(D_8015C7D0)
+/* 1084FC 802E6C7C 3C038016 */  lui       $v1, %hi(CreateEntityVarArgBuffer)
+/* 108500 802E6C80 2463C7D0 */  addiu     $v1, $v1, %lo(CreateEntityVarArgBuffer)
 /* 108504 802E6C84 E6400024 */  swc1      $f0, 0x24($s2)
 /* 108508 802E6C88 94620002 */  lhu       $v0, 2($v1)
 /* 10850C 802E6C8C A6420074 */  sh        $v0, 0x74($s2)

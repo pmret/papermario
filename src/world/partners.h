@@ -27,9 +27,9 @@ typedef struct WorldPartner {
 } WorldPartner; // size = 0x40
 
 extern s32 D_8010CFC4;
-extern Evt* D_8010CFD4;
+extern Evt* wPartnerCurrentScript;
 extern s32 D_8010CFD8;
-extern s32 D_8010CFDC;
+extern s32 wPartnerCurrentScriptID;
 extern s32 D_8010CFE0;
 extern s32 D_8010CFE4;
 extern s32 D_8010CFE8;

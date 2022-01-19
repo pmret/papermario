@@ -37,8 +37,8 @@ glabel ShowConsumableChoicePopup
 /* FB064 802D66B4 0120402D */  daddu     $t0, $t1, $zero
 /* FB068 802D66B8 3C0C8008 */  lui       $t4, %hi(gItemTable)
 /* FB06C 802D66BC 258C78E0 */  addiu     $t4, $t4, %lo(gItemTable)
-/* FB070 802D66C0 3C0B8009 */  lui       $t3, %hi(D_8008A680)
-/* FB074 802D66C4 256BA680 */  addiu     $t3, $t3, %lo(D_8008A680)
+/* FB070 802D66C0 3C0B8009 */  lui       $t3, %hi(gItemHudScripts)
+/* FB074 802D66C4 256BA680 */  addiu     $t3, $t3, %lo(gItemHudScripts)
 /* FB078 802D66C8 240A0001 */  addiu     $t2, $zero, 1
 /* FB07C 802D66CC 0260382D */  daddu     $a3, $s3, $zero
 /* FB080 802D66D0 3C03800A */  lui       $v1, %hi(gOverrideFlags)

@@ -7,7 +7,7 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_dusty_hammer
 
-extern EvtSource N(UseItemWithEffect);
-extern EvtSource N(PlayerGoHome);
+extern EvtScript N(UseItemWithEffect);
+extern EvtScript N(PlayerGoHome);
 
 #endif

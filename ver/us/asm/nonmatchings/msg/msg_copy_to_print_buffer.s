@@ -672,16 +672,16 @@ glabel msg_copy_to_print_buffer
 /* BB5BC 80124EBC 00B08025 */  or        $s0, $a1, $s0
 /* BB5C0 80124EC0 00108400 */  sll       $s0, $s0, 0x10
 /* BB5C4 80124EC4 00108383 */  sra       $s0, $s0, 0xe
-/* BB5C8 80124EC8 3C028009 */  lui       $v0, %hi(D_8008E3D8)
+/* BB5C8 80124EC8 3C028009 */  lui       $v0, %hi(gItemIconRasterOffsets)
 /* BB5CC 80124ECC 00501021 */  addu      $v0, $v0, $s0
-/* BB5D0 80124ED0 8C42E3D8 */  lw        $v0, %lo(D_8008E3D8)($v0)
+/* BB5D0 80124ED0 8C42E3D8 */  lw        $v0, %lo(gItemIconRasterOffsets)($v0)
 /* BB5D4 80124ED4 26250200 */  addiu     $a1, $s1, 0x200
 /* BB5D8 80124ED8 00512021 */  addu      $a0, $v0, $s1
 /* BB5DC 80124EDC 0C00A5CF */  jal       dma_copy
 /* BB5E0 80124EE0 00452821 */   addu     $a1, $v0, $a1
-/* BB5E4 80124EE4 3C058009 */  lui       $a1, %hi(D_8008E94C)
+/* BB5E4 80124EE4 3C058009 */  lui       $a1, %hi(gItemIconPaletteOffsets)
 /* BB5E8 80124EE8 00B02821 */  addu      $a1, $a1, $s0
-/* BB5EC 80124EEC 8CA5E94C */  lw        $a1, %lo(D_8008E94C)($a1)
+/* BB5EC 80124EEC 8CA5E94C */  lw        $a1, %lo(gItemIconPaletteOffsets)($a1)
 /* BB5F0 80124EF0 3C068016 */  lui       $a2, %hi(D_8015C7E0)
 /* BB5F4 80124EF4 24C6C7E0 */  addiu     $a2, $a2, %lo(D_8015C7E0)
 /* BB5F8 80124EF8 00B12021 */  addu      $a0, $a1, $s1

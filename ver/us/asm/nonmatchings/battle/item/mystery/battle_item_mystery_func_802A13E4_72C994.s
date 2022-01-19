@@ -71,8 +71,8 @@ glabel battle_item_mystery_func_802A13E4_72C994
 .L802A14C8:
 /* 72CA78 802A14C8 0000802D */  daddu     $s0, $zero, $zero
 .L802A14CC:
-/* 72CA7C 802A14CC 3C138009 */  lui       $s3, %hi(D_8008A680)
-/* 72CA80 802A14D0 2673A680 */  addiu     $s3, $s3, %lo(D_8008A680)
+/* 72CA7C 802A14CC 3C138009 */  lui       $s3, %hi(gItemHudScripts)
+/* 72CA80 802A14D0 2673A680 */  addiu     $s3, $s3, %lo(gItemHudScripts)
 /* 72CA84 802A14D4 3C128008 */  lui       $s2, %hi(gItemTable)
 /* 72CA88 802A14D8 265278E0 */  addiu     $s2, $s2, %lo(gItemTable)
 /* 72CA8C 802A14DC 3C11802A */  lui       $s1, %hi(D_802A25C8)

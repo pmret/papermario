@@ -87,8 +87,8 @@ glabel func_802A928C_42763C
 /* 427754 802A93A4 A622004E */   sh       $v0, 0x4e($s1)
 .L802A93A8:
 /* 427758 802A93A8 8E240004 */  lw        $a0, 4($s1)
-/* 42775C 802A93AC 3C058011 */  lui       $a1, %hi(D_80108B80)
-/* 427760 802A93B0 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
+/* 42775C 802A93AC 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
+/* 427760 802A93B0 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
 /* 427764 802A93B4 0C0511FF */  jal       set_hud_element_anim
 /* 427768 802A93B8 00000000 */   nop
 /* 42776C 802A93BC 96230052 */  lhu       $v1, 0x52($s1)

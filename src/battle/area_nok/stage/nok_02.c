@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_nok_nok_02
 
-EvtSource N(8022B810) = {
+EvtScript N(8022B810) = {
     EVT_SET(LW(10), LW(0))
     EVT_LABEL(0)
     EVT_CALL(TranslateModel, LW(10), 0, 2, 0)
@@ -22,7 +22,7 @@ EvtSource N(8022B810) = {
     EVT_END
 };
 
-EvtSource N(beforeBattle_8022B918) = {
+EvtScript N(beforeBattle_8022B918) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_THREAD
         EVT_SET(LW(0), 19)
@@ -59,7 +59,7 @@ EvtSource N(beforeBattle_8022B918) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_8022BACC) = {
+EvtScript N(afterBattle_8022BACC) = {
     EVT_RETURN
     EVT_END
 };

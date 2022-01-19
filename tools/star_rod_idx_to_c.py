@@ -161,14 +161,14 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
         if struct["type"].startswith("Script"):
             if struct["type"] == "Script_Main":
                 name = "N(main)"
-                INCLUDES_NEEDED["forward"].append(f"EvtSource " + name + ";")
+                INCLUDES_NEEDED["forward"].append(f"EvtScript " + name + ";")
                 main_script_name = name
 
             # For PlayMusic script if using a separate header file
             #if afterHeader:
-            #    INCLUDES_NEEDED["forward"].append(f"EvtSource " + name + ";")
+            #    INCLUDES_NEEDED["forward"].append(f"EvtScript " + name + ";")
             #    afterHeader = False
-
+            disasm_script.LOCAL_WORDS = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
             script_text = disasm_script.ScriptDisassembler(
                 bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED,
                 transform_symbol_name=transform_symbol_name,
@@ -192,7 +192,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 if "GotoMap" in script_text[4]:
                     map_, entryIdx = script_text[4].split("(",1)[1].split(")",1)[0].split(",")
                 if walkDistance and exitIdx and map_ and entryIdx:
-                    out += f"EvtSource {name} = EXIT_WALK_SCRIPT({walkDistance}, {exitIdx}, {map_}, {entryIdx});\n"
+                    out += f"EvtScript {name} = EXIT_WALK_SCRIPT({walkDistance}, {exitIdx}, {map_}, {entryIdx});\n"
                 else:
                     print(f"Unable to macro replace exit script {name}")
                     out += "\n".join(script_text) + "\n"
@@ -715,7 +715,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 if actor in symbol_map:
                     out += f".actor = &{symbol_map[actor][0][1]}, "
 
-                    s = f"ActorDesc {symbol_map[actor][0][1]};"
+                    s = f"ActorBlueprint {symbol_map[actor][0][1]};"
                     if s not in INCLUDES_NEEDED["forward"]:
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
@@ -736,7 +736,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 if var0 == 0 and var1 == 0 and var2 == 0 and var3 == 0:
                     pass
                 else:
-                    out += f", {var1}, {var2} {var3}, {var4}"
+                    out += f", {var0}, {var1} {var2}, {var3}"
 
                 out += " },\n"
 
@@ -843,7 +843,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
             out += f"}};\n"
         elif struct["type"] == "PartsTable":
-            out += f"ActorPartDesc {struct['name']}[] = {{\n"
+            out += f"ActorPartBlueprint {struct['name']}[] = {{\n"
 
             for _ in range(0, struct["length"] // 36):
                 d = unpack(">IbbbbbbhIIIIhxxxxxx", bytes.read(36))
@@ -863,7 +863,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
             out += f"}};\n"
         elif struct["type"] == "Actor":
-            out += f"ActorDesc NAMESPACE = {{\n"
+            out += f"ActorBlueprint NAMESPACE = {{\n"
 
             d = unpack(">IxBBBhxxIIIBBBBBBBBbbbbbbbb", bytes.read(struct["length"]))
 

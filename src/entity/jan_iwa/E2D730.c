@@ -1,7 +1,7 @@
 #include "common.h"
 #include "sprite.h"
 
-extern StaticEntityData D_802BC7D0_E2F100;
+extern EntityBlueprint D_802BC7D0_E2F100;
 extern f32 D_802BCE20;
 // size unknown
 typedef struct structE2D730 {
@@ -29,7 +29,7 @@ extern u16 D_802BCE32;
 extern u16 D_802BCE34;
 
 void func_802BB000_E2D930(Entity* entity) {
-    structE2D730* data = (structE2D730*)entity->dataBuf;
+    structE2D730* data = (structE2D730*)entity->dataBuf.unk;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if ((entity->collisionFlags & 1) && !is_picking_up_item()) {
@@ -47,7 +47,7 @@ void func_802BB000_E2D930(Entity* entity) {
 INCLUDE_ASM(s32, "entity/jan_iwa/E2D730", func_802BB0A0_E2D9D0);
 
 void func_802BB228_E2DB58(Entity* entity) {
-    structE2D730* data = (structE2D730*)entity->dataBuf;
+    structE2D730* data = (structE2D730*)entity->dataBuf.unk;
 
     func_802BB000_E2D930(entity);
     data->unk_14 += 2.0;
@@ -64,10 +64,10 @@ void func_802BB298_E2DBC8(Entity* entity) {
     structE2D730* data;
     s32 x, y, z;
 
-    data = (structE2D730*)entity->dataBuf;
-    x = D_8015C7D0[0];
-    y = D_8015C7D0[1];
-    z = D_8015C7D0[2];
+    data = (structE2D730*)entity->dataBuf.unk;
+    x = CreateEntityVarArgBuffer[0];
+    y = CreateEntityVarArgBuffer[1];
+    z = CreateEntityVarArgBuffer[2];
     if (!(x | y | z)) {
         x = entity->position.x;
         y = entity->position.y + 100.0f;
@@ -97,12 +97,12 @@ INCLUDE_ASM(s32, "entity/jan_iwa/E2D730", func_802BB374_E2DCA4);
 #ifdef NON_EQUIVALENT
 void func_802BB648_E2DF78(Entity* entity) {
     structE2D730* temp_a1_2;
-    structE2D730* data = (structE2D730*)entity->dataBuf;
+    structE2D730* data = (structE2D730*)entity->dataBuf.unk;
 
     if ((gPlayerStatus.animFlags & 0x10) && (entity->collisionFlags & 0x48)) {
         if (entity->flags & ENTITY_FLAGS_SHOWS_INSPECT_PROMPT) {
             entity->flags &= ~ENTITY_FLAGS_SHOWS_INSPECT_PROMPT;
-            temp_a1_2 = (structE2D730*)get_entity_by_index(data->unk_04)->dataBuf;
+            temp_a1_2 = (structE2D730*)get_entity_by_index(data->unk_04)->dataBuf.unk;
             if (temp_a1_2->unk_00 == 0) {
                 temp_a1_2->unk_00 = 1;
                 exec_entity_commandlist(entity);
@@ -116,7 +116,7 @@ INCLUDE_ASM(s32, "entity/jan_iwa/E2D730", func_802BB648_E2DF78);
 #endif
 
 void func_802BB6E0_E2E010(Entity* entity) {
-    structE2D730* data = (structE2D730*)entity->dataBuf;
+    structE2D730* data = (structE2D730*)entity->dataBuf.unk;
     Entity* newEntity;
     s32 entityIndex;
 
@@ -124,7 +124,7 @@ void func_802BB6E0_E2E010(Entity* entity) {
     entityIndex = create_entity(&D_802BC7D0_E2F100, entity->position.x, entity->position.y, entity->position.z, 0, 0x80000000);
     data->unk_04.index = entityIndex;
     newEntity = get_entity_by_index(entityIndex);
-    data = (structE2D730*)newEntity->dataBuf;
+    data = (structE2D730*)newEntity->dataBuf.unk;
     data->unk_04.index = entity->listIndex;
     data->unk_08 = newEntity->rotation.y;
 }
@@ -137,13 +137,13 @@ void func_802BB778_E2E0A8(Entity* entity) {
 INCLUDE_ASM(s32, "entity/jan_iwa/E2D730", func_802BB78C_E2E0BC);
 
 void func_802BB8D4_E2E204(Entity* entity) {
-    structE2D730* data = (structE2D730*)entity->dataBuf;
+    structE2D730* data = (structE2D730*)entity->dataBuf.unk;
     data->unk_08 = fabs(dist2D(entity->position.x - 2.0f, entity->position.z - 2.0f, gPlayerStatus.position.x, gPlayerStatus.position.z) * 0.25);
     data->unk_04.f = atan2(gPlayerStatus.position.x, gPlayerStatus.position.z, entity->position.x - 2.0f, entity->position.z - 2.0f);
 }
 
 void func_802BB98C_E2E2BC(Entity* entity) {
-    structE2D730* data = (structE2D730*)entity->dataBuf;
+    structE2D730* data = (structE2D730*)entity->dataBuf.unk;
     gCameras->targetPos.x = gPlayerStatus.position.x;
     gCameras->targetPos.y = gPlayerStatus.position.y;
     gCameras->targetPos.z = gPlayerStatus.position.z;
@@ -152,7 +152,7 @@ void func_802BB98C_E2E2BC(Entity* entity) {
 
 #ifdef NON_EQUIVALENT // play_model_animation weirdness, branch likely in case 0
 void func_802BB9E0_E2E310(Entity* entity) {
-    structE2D730* data = (structE2D730*)entity->dataBuf;
+    structE2D730* data = (structE2D730*)entity->dataBuf.unk;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 temp_f2;

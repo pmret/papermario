@@ -63,6 +63,11 @@ void func_800EF3D4(s16);
 void spr_draw_player_sprite(s32, s32, s32, s32, Matrix4f);
 void func_802DDEE4(s32, s32, s32, s32, s32, s32, s32, s32);
 void func_802DDFF8(u32, s32, s32, s32, s32, s32, s32);
+f32 get_player_normal_pitch(void);
+
+s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length);
+void player_get_slip_vector(f32* outX, f32* outY, f32 x, f32 y, f32 nX, f32 nY);
+s32 player_raycast_general(s32, f32, f32, f32, f32, f32, f32, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
 
 s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ, f32* outLength, f32* hitRx, f32* hitRz,
                          f32* hitDirX, f32* hitDirZ) {
@@ -196,29 +201,416 @@ s32 player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32
                                 outX, outY, outZ, outLength, hitRx, hitRz, hitDirX, hitDirZ);
 }
 
+s32 player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
+    f32 hitX;
+    f32 hitY;
+    f32 hitZ;
+    f32 hitDepth;
+    f32 hitNx;
+    f32 hitNy;
+    f32 hitNz;
+    s32 entityID, colliderID;
+    Entity* entity;
+    s32 ret = -1;
 
-INCLUDE_ASM(void, "77480", player_raycast_down, f32*, f32*, f32*, f32*);
+    hitDepth = *length;
+    entityID = test_ray_entities(*x, *y, *z, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    if (entityID >= 0) {
+        entity = get_entity_by_index(entityID);
+        if (entity->alpha < 255) {
+            entity->unk_07 = 4;
+            entity->flags |= ENTITY_FLAGS_CONTINUOUS_COLLISION;
+        } else {
+            ret = entityID | 0x4000;
+        }
+    }
 
-INCLUDE_ASM(s32, "77480", player_raycast_up_corners);
+    colliderID = test_ray_colliders(0x10000, *x, *y, *z, 0, -1.0f, 0, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    if (colliderID >= 0) {
+        ret = colliderID;
+    }
 
-INCLUDE_ASM(s32, "77480", player_raycast_up_corner);
-
-INCLUDE_ASM(s32, "77480", player_test_lateral_overlap, s32 arg0, PlayerStatus* arg1, f32* arg2, f32* arg3, f32* arg4,
-            f32 arg5, f32 arg6);
-
-INCLUDE_ASM(s32, "77480", player_raycast_general);
-
-INCLUDE_ASM(s32, "77480", player_test_move_without_slipping, PlayerStatus* arg0, f32* arg1, f32* arg2, f32* arg3, s32 arg4, f32 arg5,
-            s32* arg6);
-
-void player_get_slip_vector(f32* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
-    f32 temp = (arg2 * arg4) + (arg3 * arg5);
-
-    *arg0 = (arg2 - (temp * arg4)) * 0.5f;
-    *arg1 = (arg3 - (temp * arg5)) * 0.5f;
+    if (ret >= 0) {
+        *length = hitDepth;
+        *x = hitX;
+        *y = hitY;
+        *z = hitZ;
+        gGameStatusPtr->playerGroundTraceNormal.x = hitNx;
+        gGameStatusPtr->playerGroundTraceNormal.y = hitNy;
+        gGameStatusPtr->playerGroundTraceNormal.z = hitNz;
+        D_8010C938 = get_player_normal_yaw();
+        D_8010C990 = get_player_normal_pitch();
+        gGameStatusPtr->playerGroundTraceAngles.x = atan2(0.0f, 0.0f, hitNz * 100.0, hitNy * 100.0);
+        gGameStatusPtr->playerGroundTraceAngles.y = 0.0f;
+        gGameStatusPtr->playerGroundTraceAngles.z = atan2(0.0f, 0.0f, hitNx * 100.0, hitNy * 100.0);
+    } else {
+        gGameStatusPtr->playerGroundTraceAngles.x = 0.0f;
+        gGameStatusPtr->playerGroundTraceAngles.y = 0.0f;
+        gGameStatusPtr->playerGroundTraceAngles.z = 0.0f;
+    }
+    return ret;
 }
 
-INCLUDE_ASM(s32, "77480", player_test_move_with_slipping);
+s32 player_raycast_up_corners(PlayerStatus* player, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw) {
+    f32 startX;
+    f32 startY;
+    f32 startZ;
+    f32 depth;
+    f32 theta;
+    f32 deltaZ;
+    f32 deltaX;
+    f32 x,y,z;
+    s32 ret;
+    s32 hitID;
+    f32 radius;
+
+    radius = player->colliderDiameter * 0.3f;
+    theta = yaw * TAU / 360.0f;
+    deltaX = radius * sin_rad(theta);
+    deltaZ = -radius * cos_rad(theta);
+
+    x = *posX;
+    y = *posY;
+    z = *posZ;
+
+    depth = *hitDepth;
+    startX = x + deltaX;
+    startY = y;
+    startZ = z + deltaZ;
+
+    ret = -1;
+    hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
+
+    if (hitID < 0) {
+        startX = x - deltaX;
+        startY = y;
+        startZ = z - deltaZ;
+        hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
+    }
+
+    if (hitID < 0) {
+        startX = x + deltaZ;
+        startY = y;
+        startZ = z + deltaX;
+        hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
+    }
+
+    if (hitID < 0) {
+        startX = x - deltaZ;
+        startY = y;
+        startZ = z - deltaX;
+        hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
+    }
+
+    if (hitID >= 0) {
+        *posX = startX;
+        *posY = startY;
+        *posZ = startZ;
+        *hitDepth = depth;
+        ret = hitID;
+    }
+
+    if (ret < 0) {
+        *posX = startX;
+        *posY = startY;
+        *posZ = startZ;
+        *hitDepth = 0;
+    }
+
+    return ret;
+}
+
+s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length) {
+    f32 hitX;
+    f32 hitY;
+    f32 hitZ;
+    f32 hitDepth;
+    f32 hitNx;
+    f32 hitNy;
+    f32 hitNz;
+    s32 hitID;
+    Entity* entity;
+    s32 ret;
+    f32 sx, sy, sz;
+    f32 sx2, sy2, sz2;
+    f32 startX, startY, startZ;
+
+    ret = -1;
+
+     // needed to match
+    sx2 = sx = *x;
+    sy2 = sy = *y;
+    sz2 = sz = *z;
+    hitDepth = *length;
+    hitID = test_ray_colliders(0x10000, sx, sy, sz, 0.0f, 1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    if (hitID >= 0 && *length > hitDepth) {
+        *length = hitDepth;
+        ret = hitID;
+        *x = sx = sx2;
+        *y = sy = sy2;
+        *z = sz = sz2;
+    }
+
+    hitDepth = 10.0f;
+    hitID = test_ray_entities(*x, *y, *z, 0.0f, 1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    sx = sx2;
+    sy = sy2;
+    sz = sz2;
+    if (hitID >= 0 && *length > hitDepth) {
+        get_entity_by_index(hitID);
+        ret = hitID | 0x4000;
+        *length = hitDepth;
+        *x = sx;
+        *y = sy;
+        *z = sz;
+    }
+
+    return ret;
+}
+
+s32 player_test_lateral_overlap(s32 mode, PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw) {
+    f32 sinTheta;
+    f32 cosTheta;
+    f32 hitX;
+    f32 hitY;
+    f32 hitZ;
+    f32 hitDepth;
+    f32 hitNx;
+    f32 hitNy;
+    f32 hitNz;
+    f32 slipDx;
+    f32 slipDz;
+    f32 depthDiff;
+    f32 radius;
+    f32 originalDepth;
+    s32 hitID;
+    f32 height;
+    f32 targetDx;
+    f32 targetDz;
+    f32 dx;
+    f32 dz;
+    s32 ret;
+
+    radius = playerStatus->colliderDiameter * 0.5f;
+    ret = -1;
+
+    if ((playerStatus->flags & (PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING)) == 0) {
+        height = playerStatus->colliderHeight * 0.286f;
+    } else {
+        height = 1.0f;
+    }
+
+    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+    cosTheta = -cosTheta;
+    hitDepth = length + radius;
+    hitID = player_raycast_general(mode, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+
+    if (mode == 3) {
+        targetDx = 0.0f;
+        targetDz = 0.0f;
+    } else {
+        targetDx = length * sinTheta;
+        targetDz = length * cosTheta;
+    }
+
+    if (hitID >= 0) {
+        originalDepth = length + radius;
+        if (hitDepth <= originalDepth) {
+            depthDiff = hitDepth - originalDepth;
+            dx = depthDiff * sinTheta;
+            dz = depthDiff * cosTheta;
+
+            player_get_slip_vector(&slipDx, &slipDz, targetDx, targetDz, hitNx, hitNz);
+            *x += dx + slipDx;
+            *z += dz + slipDz;
+            ret = hitID;
+        }
+    }
+
+    *x += targetDx;
+    *z += targetDz;
+    return ret;
+}
+
+s32 player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
+                            f32* hitY, f32* hitZ, f32* hitDepth, f32*hitNx, f32* hitNy, f32* hitNz) {
+    f32 nAngleX;
+    f32 nAngleZ;
+    s32 entityID;
+    s32 colliderID;
+    Entity* entity;
+    s32 ignoreFlags;
+    s32 ret;
+
+    entityID = test_ray_entities(startX, startY, startZ, dirX, dirY, dirZ, hitX, hitY, hitZ, hitDepth, hitNx, hitNy,
+                                hitNz);
+    ret = -1;
+    if (entityID >= 0) {
+        entity = get_entity_by_index(entityID);
+        if (entity->alpha < 255) {
+            entity->unk_07 = 0;
+            entity->flags |= ENTITY_FLAGS_CONTINUOUS_COLLISION;
+        } else {
+            ret = entityID | 0x4000;
+        }
+    } else if (mode == 3) {
+        ret = test_ray_colliders(0x8000, startX, startY, startZ, dirX, dirY, dirZ, hitX, hitY, hitZ, hitDepth,
+                                 hitNx, hitNy, hitNz);
+    }
+
+    if (mode == 1 || mode == 3)
+        return ret;
+
+    ignoreFlags = 0x10000;
+    if (mode == 4) {
+            ignoreFlags = 0x80000;
+    }
+    colliderID = test_ray_colliders(ignoreFlags, startX, startY, startZ, dirX, dirY, dirZ, hitX, hitY, hitZ, hitDepth,
+                                    hitNx, hitNy, hitNz);
+
+    if (ret < 0) {
+        ret = colliderID;
+    }
+
+    if (ret >= 0) {
+        nAngleZ = 180.0f - atan2(0, 0, *hitNz * 100.0, *hitNy * 100.0);
+        nAngleX = 180.0f - atan2(0, 0, *hitNx * 100.0, *hitNy * 100.0);
+
+        if (!(nAngleZ == 90.0f && nAngleX == 90.0f || fabs(nAngleZ) >= 30.0 || fabs(nAngleX) >= 30.0)) {
+            ret = -1;
+        }
+    }
+
+    return ret;
+}
+
+s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw, s32* arg6) {
+    f32 sinTheta;
+    f32 cosTheta;
+    f32 hitX;
+    f32 hitY;
+    f32 hitZ;
+    f32 hitDepth;
+    f32 hitNx;
+    f32 hitNy;
+    f32 hitNz;
+    f32 slipDx;
+    f32 slipDz;
+    f32 depth;
+    f32 radius;
+    f32 depthDiff;
+    f32 height;
+    s32 ret;
+    s32 raycastID;
+    f32 targetDx;
+    f32 targetDz;
+    f32 dx, dz;
+
+    radius = playerStatus->colliderDiameter * 0.5f;
+    height = playerStatus->colliderHeight * 0.286f;
+    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+
+    depth = length + radius;
+    cosTheta = -cosTheta;
+    hitDepth = depth;
+    dx = radius * sinTheta;
+    ret = -1;
+
+    raycastID = player_raycast_general(0, *x, *y + 0.1, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    if (raycastID >= 0 && hitDepth <= depth) {
+        *arg6 = 1;
+    }
+
+    depth = length + radius;
+    hitDepth = depth;
+    dz = radius * cosTheta;
+
+    raycastID = player_raycast_general(0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+
+    targetDx = 0.0f;
+    targetDz = 0.0f;
+
+    if ((raycastID >= 0) && (hitDepth <= depth)) {
+        depthDiff = hitDepth - depth;
+        dx = depthDiff * sinTheta;
+        dz = depthDiff * cosTheta;
+        player_get_slip_vector(&slipDx, &slipDz, 0.0f, 0.0f, hitNx, hitNz);
+        *x += dx + slipDx;
+        *z += dz + slipDz;
+        ret = raycastID;
+    }
+    *x += targetDx;
+    *z += targetDz;
+    return ret;
+}
+
+void player_get_slip_vector(f32* outX, f32* outY, f32 x, f32 y, f32 nX, f32 nY) {
+    f32 projectionLength = (x * nX) + (y * nY);
+
+    *outX = (x - projectionLength * nX) * 0.5f;
+    *outY = (y - projectionLength * nY) * 0.5f;
+}
+
+s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f32* z, f32 length, f32 yaw) {
+    f32 sinTheta;
+    f32 cosTheta;
+    f32 hitX;
+    f32 hitY;
+    f32 hitZ;
+    f32 hitDepth;
+    f32 hitNx;
+    f32 hitNy;
+    f32 hitNz;
+    f32 slipDx;
+    f32 slipDz;
+    f32 radius;
+    f32 height;
+    s32 hitID;
+    f32 targetDx, targetDz;
+    f32 dx, dz;
+    f32 depthDiff;
+    s32 ret = -1;
+
+    height = 0.0f;
+    if ((playerStatus->flags & (PLAYER_STATUS_FLAGS_JUMPING | PLAYER_STATUS_FLAGS_FALLING)) == 0) {
+        height = 10.01f;
+    }
+    radius = playerStatus->colliderDiameter * 0.5f;
+
+    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+    cosTheta = -cosTheta;
+    hitDepth = length + radius;
+
+    targetDx = length * sinTheta;
+    targetDz = length * cosTheta;
+
+    hitID = player_raycast_general(0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+    if (hitID >= 0 && (depthDiff = hitDepth, depthDiff <= length + radius)) {
+        depthDiff -= (length + radius);
+        dx = depthDiff * sinTheta;
+        dz = depthDiff * cosTheta;
+        player_get_slip_vector(&slipDx, &slipDz, targetDx, targetDz, hitNx, hitNz);
+        *x += dx + slipDx;
+        *z += dz + slipDz;
+        ret = hitID;
+    } else {
+        height = playerStatus->colliderHeight * 0.75;
+        hitID = player_raycast_general(0, *x, *y + height, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
+        if (hitID >= 0 && (depthDiff = hitDepth, depthDiff <= length + radius)) {
+            depthDiff -= (length + radius);
+            dx = depthDiff * sinTheta;
+            dz = depthDiff * cosTheta;
+            player_get_slip_vector(&slipDx, &slipDz, targetDx, targetDz, hitNx, hitNz);
+            *x += dx + slipDx;
+            *z += dz + slipDz;
+            ret = hitID;
+        }
+    }
+
+    *x += targetDx;
+    *z += targetDz;
+    return ret;
+}
 
 void update_player(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -548,6 +940,7 @@ void check_for_ispy(void) {
         D_8010C93C();
     }
 }
+
 void func_800E0330(void) {
     if ((gPlayerStatusPtr->animFlags & PLAYER_STATUS_ANIM_FLAGS_100) && (D_8010C93C != NULL)) {
         func_802B7000_E225B0();
@@ -641,6 +1034,8 @@ void func_800E06C0(s32 arg0) {
 
 INCLUDE_ASM(s32, "77480", func_800E06D8);
 
+static const f32 pad[1] = { 0.0f};
+
 void check_for_interactables(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = gPlayerStatus.unk_C8;
@@ -671,13 +1066,13 @@ void check_for_interactables(void) {
                 phi_s2 = 1;
                 phi_s0 = floor;
                 switch (get_entity_type(floor)) {
-                    case 0x3:
-                    case 0x4:
-                    case 0x5:
-                    case 0x6:
-                    case 0xC:
-                    case 0x32:
-                    case 0x33:
+                    case ENTITY_TYPE_PADLOCK:
+                    case ENTITY_TYPE_PADLOCK_RED_FRAME:
+                    case ENTITY_TYPE_PADLOCK_RED_FACE:
+                    case ENTITY_TYPE_PADLOCK_BLUE_FACE:
+                    case ENTITY_TYPE_PUSH_BLOCK:
+                    case ENTITY_TYPE_CHEST:
+                    case ENTITY_TYPE_SIGNPOST:
                         phi_s0 = -1;
                         break;
                 }
@@ -747,9 +1142,6 @@ void check_for_interactables(void) {
     }
 }
 
-
-// TODO: Remove after func_800E24F8 is matching.
-static const s32 pad[3] = { 0.0f, 0.0f, 0.0f };
 void func_802B71E8_E202F8(void);
 
 void func_800E0AD0(void) {
@@ -802,7 +1194,7 @@ void render_player_model(void) {
         if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_20000)) {
             if (playerStatus->alpha1 != playerStatus->alpha2) {
                 if (playerStatus->alpha1 < 254) {
-                    
+
                     if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_1000000)) {
                         renderModeTemp = RENDER_MODE_SURFACE_XLU_LAYER1;
                     } else {
@@ -811,7 +1203,7 @@ void render_player_model(void) {
 
                     playerStatus->renderMode = renderModeTemp;
                     func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
-                
+
                 } else {
                     playerStatus->renderMode = RENDER_MODE_ALPHATEST;
                     func_802DDEE4(0, -1, 0, 0, 0, 0, 0, 0);
@@ -829,7 +1221,7 @@ void render_player_model(void) {
             rtPtr->appendGfxArg = playerStatus;
             rtPtr->distance = -z;
             rtPtr->renderMode = playerStatus->renderMode;
-            
+
 
             if (!(playerStatus->flags & PLAYER_STATUS_ANIM_FLAGS_20000)) {
                 appendGfx = appendGfx_player;
@@ -896,12 +1288,12 @@ void appendGfx_player(void* data) {
         if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
             phi_a0 = PLAYER_STATUS_ANIM_FLAGS_10000000;
         }
-        
+
         spr_draw_player_sprite(phi_a0, 0, 0, 0, sp20);
     }
 
     D_800F7B4C++;
-    
+
     if (D_800F7B4C >= 3) {
         D_800F7B4C = 0;
     }
@@ -1037,7 +1429,7 @@ void update_player_shadow(void) {
     }
 
     shadow->position.y = y;
-    shadow->unk_05 = (f64)playerStatus->alpha1 / 2;
+    shadow->alpha = (f64)playerStatus->alpha1 / 2;
 
     if (!(gGameStatusPtr->peachFlags & 1)) {
         set_standard_shadow_scale(shadow, shadowScale);

@@ -37,9 +37,9 @@ s32 N(statusTable_80218F6C)[] = {
 };
 
 extern s32 N(idleAnimations_80219064)[];
-extern EvtSource N(init_80219088);
+extern EvtScript N(init_80219088);
 
-ActorPartDesc N(partsTable_80219018)[] = {
+ActorPartBlueprint N(partsTable_80219018)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -54,7 +54,7 @@ ActorPartDesc N(partsTable_80219018)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_BULLET_BILL,
     .level = 5,
@@ -85,11 +85,11 @@ s32 N(idleAnimations_80219064)[] = {
     STATUS_END,
 };
 
-extern EvtSource N(takeTurn_802197C0);
-extern EvtSource N(idle_80219380);
-extern EvtSource N(handleEvent_802193E8);
+extern EvtScript N(takeTurn_802197C0);
+extern EvtScript N(idle_80219380);
+extern EvtScript N(handleEvent_802193E8);
 
-EvtSource N(init_80219088) = {
+EvtScript N(init_80219088) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_802197C0)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80219380)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_802193E8)))
@@ -119,7 +119,7 @@ EvtSource N(init_80219088) = {
         EVT_CALL(SetActorSounds, ACTOR_SELF, 2, 0, 0)
         EVT_CALL(GetActorPos, LW(0), LW(1), LW(11), LW(12))
         EVT_SUB(LW(1), 90)
-        EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.0107421875))
+        EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.01))
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_bullet_bill_Palette_00_Anim_3)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LW(1), LW(2), LW(3))
         EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
@@ -131,14 +131,14 @@ EvtSource N(init_80219088) = {
     EVT_END
 };
 
-EvtSource N(idle_80219380) = {
+EvtScript N(idle_80219380) = {
     EVT_RETURN
     EVT_END
 };
 
-extern EvtSource N(80219BE0);
+extern EvtScript N(80219BE0);
 
-EvtSource N(80219390) = {
+EvtScript N(80219390) = {
     EVT_EXEC_WAIT(N(80219BE0))
     EVT_SET_CONST(LW(0), 1)
     EVT_SET_CONST(LW(1), NPC_ANIM_bullet_bill_Palette_00_Anim_7)
@@ -148,7 +148,7 @@ EvtSource N(80219390) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_802193E8) = {
+EvtScript N(handleEvent_802193E8) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -228,7 +228,7 @@ EvtSource N(handleEvent_802193E8) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_802197C0) = {
+EvtScript N(takeTurn_802197C0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -252,7 +252,7 @@ EvtSource N(takeTurn_802197C0) = {
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
             EVT_SET(LW(1), LW(3))
             EVT_SUB(LW(0), 90)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.0107421875))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.01))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
@@ -271,7 +271,7 @@ EvtSource N(takeTurn_802197C0) = {
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
     EVT_SET(LW(1), LW(3))
     EVT_ADD(LW(0), 10)
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.0107421875))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.01))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 12, FALSE, TRUE, FALSE)
     EVT_EXEC_WAIT(N(80219BE0))
@@ -288,7 +288,7 @@ EvtSource N(takeTurn_802197C0) = {
     EVT_END
 };
 
-EvtSource N(80219BE0) = {
+EvtScript N(80219BE0) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(2), 2)
     EVT_CALL(PlayEffect, EFFECT_ID_17, 0, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)

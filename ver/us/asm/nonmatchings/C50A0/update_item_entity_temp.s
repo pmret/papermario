@@ -140,9 +140,9 @@ glabel update_item_entity_temp
 /* CBFB4 801358B4 00220821 */  addu      $at, $at, $v0
 /* CBFB8 801358B8 842278E4 */  lh        $v0, %lo(gItemTable+0x4)($at)
 /* CBFBC 801358BC 000210C0 */  sll       $v0, $v0, 3
-/* CBFC0 801358C0 3C048009 */  lui       $a0, %hi(D_8008A680)
+/* CBFC0 801358C0 3C048009 */  lui       $a0, %hi(gItemHudScripts)
 /* CBFC4 801358C4 00822021 */  addu      $a0, $a0, $v0
-/* CBFC8 801358C8 8C84A680 */  lw        $a0, %lo(D_8008A680)($a0)
+/* CBFC8 801358C8 8C84A680 */  lw        $a0, %lo(gItemHudScripts)($a0)
 /* CBFCC 801358CC 0C050529 */  jal       create_hud_element
 /* CBFD0 801358D0 00000000 */   nop
 /* CBFD4 801358D4 0040202D */  daddu     $a0, $v0, $zero
@@ -656,12 +656,12 @@ glabel update_item_entity_temp
 /* CC714 80136014 00021140 */  sll       $v0, $v0, 5
 /* CC718 80136018 00482821 */  addu      $a1, $v0, $t0
 /* CC71C 8013601C 84A20004 */  lh        $v0, 4($a1)
-/* CC720 80136020 3C0A8009 */  lui       $t2, %hi(D_8008A680)
-/* CC724 80136024 254AA680 */  addiu     $t2, $t2, %lo(D_8008A680)
+/* CC720 80136020 3C0A8009 */  lui       $t2, %hi(gItemHudScripts)
+/* CC724 80136024 254AA680 */  addiu     $t2, $t2, %lo(gItemHudScripts)
 /* CC728 80136028 000210C0 */  sll       $v0, $v0, 3
-/* CC72C 8013602C 3C018009 */  lui       $at, %hi(D_8008A680)
+/* CC72C 8013602C 3C018009 */  lui       $at, %hi(gItemHudScripts)
 /* CC730 80136030 00220821 */  addu      $at, $at, $v0
-/* CC734 80136034 8C22A680 */  lw        $v0, %lo(D_8008A680)($at)
+/* CC734 80136034 8C22A680 */  lw        $v0, %lo(gItemHudScripts)($at)
 /* CC738 80136038 00E0482D */  daddu     $t1, $a3, $zero
 /* CC73C 8013603C AE020000 */  sw        $v0, ($s0)
 /* CC740 80136040 86230018 */  lh        $v1, 0x18($s1)

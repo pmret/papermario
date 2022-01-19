@@ -39,9 +39,9 @@ s32 N(statusTable_80219D2C)[] = {
 };
 
 extern s32 N(idleAnimations_80219E48)[];
-extern EvtSource N(init_80219E6C);
+extern EvtScript N(init_80219E6C);
 
-ActorPartDesc N(partsTable_80219DD8)[] = {
+ActorPartBlueprint N(partsTable_80219DD8)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -68,7 +68,7 @@ ActorPartDesc N(partsTable_80219DD8)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_BILL_BLASTER,
     .level = 10,
@@ -99,11 +99,11 @@ s32 N(idleAnimations_80219E48)[] = {
     STATUS_END,
 };
 
-extern EvtSource N(takeTurn_8021A200);
-extern EvtSource N(idle_80219ED0);
-extern EvtSource N(handleEvent_80219EE0);
+extern EvtScript N(takeTurn_8021A200);
+extern EvtScript N(idle_80219ED0);
+extern EvtScript N(handleEvent_80219EE0);
 
-EvtSource N(init_80219E6C) = {
+EvtScript N(init_80219E6C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021A200)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80219ED0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_80219EE0)))
@@ -112,12 +112,12 @@ EvtSource N(init_80219E6C) = {
     EVT_END
 };
 
-EvtSource N(idle_80219ED0) = {
+EvtScript N(idle_80219ED0) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(handleEvent_80219EE0) = {
+EvtScript N(handleEvent_80219EE0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -179,10 +179,10 @@ EvtSource N(handleEvent_80219EE0) = {
     EVT_END
 };
 
-extern EvtSource N(8021A2BC);
-extern EvtSource N(8021A470);
+extern EvtScript N(8021A2BC);
+extern EvtScript N(8021A470);
 
-EvtSource N(takeTurn_8021A200) = {
+EvtScript N(takeTurn_8021A200) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LW(0))
@@ -208,7 +208,7 @@ ApiStatus func_80218000_4A10A0(Evt* script, s32 isInitialCall) {
 }
 
 
-EvtSource N(8021A2BC) = {
+EvtScript N(8021A2BC) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_bill_blaster_Palette_00_Anim_2)
     EVT_WAIT_FRAMES(13)
     EVT_THREAD
@@ -231,7 +231,7 @@ EvtSource N(8021A2BC) = {
     EVT_END
 };
 
-EvtSource N(8021A470) = {
+EvtScript N(8021A470) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))
     EVT_CALL(ActorExists, LW(0), LW(1))
     EVT_IF_EQ(LW(1), FALSE)
@@ -241,7 +241,7 @@ EvtSource N(8021A470) = {
     EVT_END
 };
 
-extern ActorDesc A(bullet_bill);
+extern ActorBlueprint A(bullet_bill);
 
 Vec3i N(vector3D_8021A4DC) = { 0, -1000, 0, };
 

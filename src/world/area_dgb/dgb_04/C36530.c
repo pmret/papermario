@@ -4,8 +4,8 @@
 #include "sprite/npc/sentinel.h"
 #include "message_ids.h"
 
-extern s32 D_800F7F00[];
-extern s32 D_800F7F40[];
+extern s32 wPartnerHudScripts[];
+extern s32 wDisabledPartnerHudScripts[];
 
 enum {
     NPC_SENTINEL,
@@ -23,7 +23,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_04_tattle },
 };
 
-EvtSource N(80243170) = {
+EvtScript N(80243170) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -40,7 +40,7 @@ static s32 N(pad_3208)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitSingleDoor_80243210) = {
+EvtScript N(exitSingleDoor_80243210) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
@@ -56,7 +56,7 @@ EvtSource N(exitSingleDoor_80243210) = {
     EVT_END
 };
 
-EvtSource N(exitDoubleDoor_802432C4) = {
+EvtScript N(exitDoubleDoor_802432C4) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
@@ -72,7 +72,7 @@ EvtSource N(exitDoubleDoor_802432C4) = {
     EVT_END
 };
 
-EvtSource N(enterSingleDoor_80243378) = {
+EvtScript N(enterSingleDoor_80243378) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -90,7 +90,7 @@ EvtSource N(enterSingleDoor_80243378) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -118,7 +118,7 @@ f32 N(D_80243560_C39A90)[] = {
     1.5f, 20.0f,
 };
 
-EvtSource N(80243578) = {
+EvtScript N(80243578) = {
     EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000)), TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT)), TRUE)
     EVT_RETURN
@@ -140,7 +140,7 @@ NpcAISettings N(npcAISettings_802435B4) = {
 
 extern const char N(dgb_00_name_hack)[];
 
-EvtSource N(npcAI_802435E4) = {
+EvtScript N(npcAI_802435E4) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 5, -650)
     EVT_CALL(SetSelfVar, 6, 30)
@@ -201,7 +201,7 @@ EvtSource N(npcAI_802435E4) = {
     EVT_END
 };
 
-EvtSource N(80243A0C) = {
+EvtScript N(80243A0C) = {
     EVT_CALL(GetOwnerEncounterTrigger, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(1)
@@ -216,7 +216,7 @@ EvtSource N(80243A0C) = {
     EVT_END
 };
 
-EvtSource N(80243A98) = {
+EvtScript N(80243A98) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -292,7 +292,7 @@ f32 N(D_80243D88_C3A2B8)[] = {
     140.0f, 180.0f, 220.0f
 };
 
-EvtSource N(80243D94) = {
+EvtScript N(80243D94) = {
     EVT_WAIT_FRAMES(10)
     EVT_CALL(PlaySound, 0x212D)
     EVT_CALL(N(UnkFunc21), EVT_MAP_VAR(0))
@@ -324,7 +324,7 @@ EvtSource N(80243D94) = {
     EVT_END
 };
 
-EvtSource N(80243EF8) = {
+EvtScript N(80243EF8) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1046), 1)
         EVT_RETURN
     EVT_END_IF
@@ -408,7 +408,7 @@ EvtSource N(80243EF8) = {
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EA910, 500, -360, 110, 0, MAKE_ENTITY_END)
     EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1046))
@@ -863,14 +863,14 @@ ApiStatus N(func_8024259C_C38ACC)(Evt* script, s32 isInitialCall) {
 
             if (playerData->partners[idx].enabled) {
                 ptr->unk_108[i] = idx;
-                ptr->unk_84[i] = *D_8008EF20[idx];
+                ptr->unk_84[i] = *gPartnerPopupProperties[idx];
                 partnerLevel = N(UnkFunc37)(idx, var);
                 if (partnerLevel >= 0) {
-                    ptr->unk_00[i] = D_800F7F00[idx];
+                    ptr->unk_00[i] = wPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 1;
                     ptr->unk_294[i] = N(D_80243D48_C3A278)[i][partnerLevel];
                 } else {
-                    ptr->unk_00[i] = D_800F7F40[idx];
+                    ptr->unk_00[i] = wDisabledPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 0;
                     ptr->unk_294[i] = N(D_80243D30_C3A260)[var];
                 }
@@ -904,7 +904,7 @@ ApiStatus N(func_8024259C_C38ACC)(Evt* script, s32 isInitialCall) {
 
     destroy_popup_menu();
     if (script->functionTemp[1] != 0xFF) {
-        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1] - 1]][0];
+        script->varTable[0] = gPartnerPopupProperties[ptr->unk_108[script->functionTemp[1] - 1]][0];
         script->varTable[1] = ptr->unk_108[script->functionTemp[1] - 1];
     } else {
         script->varTable[0] = -1;

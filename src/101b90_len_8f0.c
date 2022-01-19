@@ -1,8 +1,6 @@
 #include "common.h"
 #include "sprite.h"
 
-extern s32 spr_allocateBtlComponentsOnWorldHeap;
-
 typedef struct UnkSpr10 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ char unk_04[0xC];

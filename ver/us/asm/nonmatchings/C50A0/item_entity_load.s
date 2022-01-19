@@ -26,9 +26,9 @@ glabel item_entity_load
 /* C7860 80131160 87C20018 */  lh        $v0, 0x18($fp)
 /* C7864 80131164 36B50FFF */  ori       $s5, $s5, 0xfff
 /* C7868 80131168 00021080 */  sll       $v0, $v0, 2
-/* C786C 8013116C 3C108009 */  lui       $s0, %hi(D_8008DDD4)
+/* C786C 8013116C 3C108009 */  lui       $s0, %hi(gItemEntityScripts)
 /* C7870 80131170 02028021 */  addu      $s0, $s0, $v0
-/* C7874 80131174 8E10DDD4 */  lw        $s0, %lo(D_8008DDD4)($s0)
+/* C7874 80131174 8E10DDD4 */  lw        $s0, %lo(gItemEntityScripts)($s0)
 /* C7878 80131178 3C16001D */  lui       $s6, 0x1d
 /* C787C 8013117C 26D6C310 */  addiu     $s6, $s6, -0x3cf0
 /* C7880 80131180 AFD00024 */  sw        $s0, 0x24($fp)

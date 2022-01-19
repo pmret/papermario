@@ -56,8 +56,8 @@ glabel render_hud_element
 /* D93BC 80142CBC 14400011 */  bnez      $v0, .L80142D04
 /* D93C0 80142CC0 00000000 */   nop
 /* D93C4 80142CC4 82E30046 */  lb        $v1, 0x46($s7)
-/* D93C8 80142CC8 3C048015 */  lui       $a0, %hi(D_8014EFCC)
-/* D93CC 80142CCC 2484EFCC */  addiu     $a0, $a0, %lo(D_8014EFCC)
+/* D93C8 80142CC8 3C048015 */  lui       $a0, %hi(gHudElementSizes)
+/* D93CC 80142CCC 2484EFCC */  addiu     $a0, $a0, %lo(gHudElementSizes)
 /* D93D0 80142CD0 00031040 */  sll       $v0, $v1, 1
 /* D93D4 80142CD4 00431021 */  addu      $v0, $v0, $v1
 /* D93D8 80142CD8 00021040 */  sll       $v0, $v0, 1
@@ -96,8 +96,8 @@ glabel render_hud_element
 /* D9450 80142D50 1440000C */  bnez      $v0, .L80142D84
 /* D9454 80142D54 00000000 */   nop
 /* D9458 80142D58 82E20046 */  lb        $v0, 0x46($s7)
-/* D945C 80142D5C 3C048015 */  lui       $a0, %hi(D_8014EFCC)
-/* D9460 80142D60 2484EFCC */  addiu     $a0, $a0, %lo(D_8014EFCC)
+/* D945C 80142D5C 3C048015 */  lui       $a0, %hi(gHudElementSizes)
+/* D9460 80142D60 2484EFCC */  addiu     $a0, $a0, %lo(gHudElementSizes)
 /* D9464 80142D64 00021840 */  sll       $v1, $v0, 1
 /* D9468 80142D68 00621821 */  addu      $v1, $v1, $v0
 /* D946C 80142D6C 00031840 */  sll       $v1, $v1, 1

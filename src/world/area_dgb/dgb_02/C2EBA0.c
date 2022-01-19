@@ -25,7 +25,7 @@ MapConfig N(config) = {
     .tattle = 0x1900C2,
 };
 
-EvtSource N(802414B0) = {
+EvtScript N(802414B0) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -42,7 +42,7 @@ static s32 N(pad_1548)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitDoubleDoor_80241550) = {
+EvtScript N(exitDoubleDoor_80241550) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
@@ -58,7 +58,7 @@ EvtSource N(exitDoubleDoor_80241550) = {
     EVT_END
 };
 
-EvtSource N(exitDoubleDoor_80241604) = {
+EvtScript N(exitDoubleDoor_80241604) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
@@ -74,7 +74,7 @@ EvtSource N(exitDoubleDoor_80241604) = {
     EVT_END
 };
 
-EvtSource N(exitSingleDoor_802416B8) = {
+EvtScript N(exitSingleDoor_802416B8) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
@@ -90,7 +90,7 @@ EvtSource N(exitSingleDoor_802416B8) = {
     EVT_END
 };
 
-EvtSource N(exitSingleDoor_8024176C) = {
+EvtScript N(exitSingleDoor_8024176C) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
@@ -106,7 +106,7 @@ EvtSource N(exitSingleDoor_8024176C) = {
     EVT_END
 };
 
-EvtSource N(enterSingleDoor_80241820) = {
+EvtScript N(enterSingleDoor_80241820) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -134,7 +134,7 @@ EvtSource N(enterSingleDoor_80241820) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -157,7 +157,7 @@ static s32 N(pad_1AA8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(80241AB0) = {
+EvtScript N(80241AB0) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -206,7 +206,7 @@ NpcAISettings N(npcAISettings_80241B9C) = {
     .unk_2C = 3,
 };
 
-EvtSource N(npcAI_80241BCC) = {
+EvtScript N(npcAI_80241BCC) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 1, 5)
     EVT_CALL(SetSelfVar, 2, 8)
@@ -240,7 +240,7 @@ NpcAISettings N(npcAISettings_80241C68) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80241C98) = {
+EvtScript N(npcAI_80241C98) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 1, 10)
     EVT_CALL(SetSelfVar, 2, 14)
@@ -259,7 +259,7 @@ NpcSettings N(npcSettings_80241D08) = {
     .level = 13,
 };
 
-EvtSource N(npcAI_80241D34) = {
+EvtScript N(npcAI_80241D34) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetSelfVar, 0, 4)
     EVT_CALL(SetSelfVar, 1, 32)

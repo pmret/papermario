@@ -19,5 +19,5 @@ ApiStatus N(func_80240C2C_CEEE8C)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240C9C_CEEEFC)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80242568);
-extern EvtSource N(main);
-extern EvtSource N(makeEntities);
+extern EvtScript N(main);
+extern EvtScript N(makeEntities);

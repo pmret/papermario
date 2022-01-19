@@ -3,12 +3,12 @@
 
 #define NAMESPACE action_command_tidal_wave
 
-extern HudElementAnim D_80108AFC[];
-extern HudElementAnim D_80108B28[];
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
 extern s32 D_802944A0;
 
-extern HudElementAnim* D_802A97C0_42CEB0[];
-extern HudElementAnim* D_802A97CC_42CEBC[];
+extern HudScript* D_802A97C0_42CEB0[];
+extern HudScript* D_802A97CC_42CEBC[];
 
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -33,14 +33,14 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
         actionCommandStatus->hudElementX = -48;
         actionCommandStatus->hudElementY = 80;
 
-        hudElement = create_hud_element(D_80108AFC);
+        hudElement = create_hud_element(HudScript_BlueMeter);
         actionCommandStatus->hudElements[0] = hudElement;
         set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
         set_hud_element_render_depth(hudElement, 0);
         set_hud_element_flags(hudElement, 0x82);
 
         for (i = 1; i < ARRAY_COUNT(actionCommandStatus->hudElements); i++) {
-            hudElement = create_hud_element(D_80108B28);
+            hudElement = create_hud_element(HudScript_AButton);
             actionCommandStatus->hudElements[i] = hudElement;
             set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
             set_hud_element_render_depth(hudElement, 0);
