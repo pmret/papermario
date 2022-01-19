@@ -16,12 +16,12 @@ typedef struct DeadEnemy {
     /* 0x010 */ Vec3s unk_10;
     /* 0x016 */ char unk_16[2];
     /* 0x018 */ struct NpcSettings* npcSettings;
-    /* 0x01C */ EvtSource* initBytecode;
-    /* 0x020 */ EvtSource* interactBytecode;
-    /* 0x024 */ EvtSource* aiBytecode;
-    /* 0x028 */ EvtSource* hitBytecode;
-    /* 0x02C */ EvtSource* auxBytecode;
-    /* 0x030 */ EvtSource* defeatBytecode;
+    /* 0x01C */ EvtScript* initBytecode;
+    /* 0x020 */ EvtScript* interactBytecode;
+    /* 0x024 */ EvtScript* aiBytecode;
+    /* 0x028 */ EvtScript* hitBytecode;
+    /* 0x02C */ EvtScript* auxBytecode;
+    /* 0x030 */ EvtScript* defeatBytecode;
     /* 0x034 */ struct Evt* initScript;
     /* 0x038 */ struct Evt* interactScript;
     /* 0x03C */ struct Evt* aiScript;
@@ -42,7 +42,7 @@ typedef struct DeadEnemy {
     /* 0x0B4 */ s8 unk_B4;
     /* 0x0B5 */ s8 unk_B5;
     /* 0x0B6 */ char unk_B6[2];
-    /* 0x0B8 */ EvtSource* unk_B8; // some bytecode
+    /* 0x0B8 */ EvtScript* unk_B8; // some bytecode
     /* 0x0BC */ struct Evt* unk_BC; // some script
     /* 0x0C0 */ s32 unk_C0; // some script ID
     /* 0x0C4 */ s32 unk_C4;
