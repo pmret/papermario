@@ -21,10 +21,11 @@ void N(UnkNpcAIFunc46)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
     f32 sp2C;
     f32 sp30;
     f32 sp34;
-    
+
     npc->duration--;
     if (enemy->varTable[9] >= npc->duration) {
-        enemy->flags |= 0x1F100000;
+        enemy->flags |= (ENEMY_FLAGS_100000 | ENEMY_FLAGS_IGNORE_TOUCH | ENEMY_FLAGS_IGNORE_JUMP |
+                         ENEMY_FLAGS_IGNORE_HAMMER | ENEMY_FLAGS_8000000 | ENEMY_FLAGS_10000000);
     }
 
     if (npc->duration == 0) {
@@ -73,10 +74,10 @@ void N(UnkNpcAIFunc46)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
             if (npc->pos.z < -380.0) {
                 npc->pos.z = -380.0f;
             }
-            
+
             sp38 = sqrtf(SQ(npc->pos.x) + SQ(npc->pos.z));
             yaw2 = atan2(0.0f, 0.0f, npc->pos.x, npc->pos.z);
-            
+
             if (sp38 < 305.0) {
                 npc->pos.x = 0.0f;
                 npc->pos.z = 0.0f;
@@ -176,7 +177,7 @@ void N(UnkNpcAIFunc46)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
                 npc->pos.y = sp24;
             }
         }
-        
+
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         ai_enemy_play_sound(npc, SOUND_MOLE_SURFACE, 0);
         npc->currentAnim.w = enemy->animList[9];

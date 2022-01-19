@@ -125,14 +125,14 @@ ApiStatus N(DeadUnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
             enemy->unk_B5 = 0;
         }
         if (enemy->varTable[8] != 0) {
-            switch (npc->currentAnim.w - 0x550004) {
-                case 0:
-                case 8:
-                case 10:
-                case 12:
-                case 14:
-                case 18:
-                case 20:
+            switch (npc->currentAnim.w) {
+                case 0x550004:
+                case 0x55000C:
+                case 0x55000E:
+                case 0x550010:
+                case 0x550012:
+                case 0x550016:
+                case 0x550018:
                     npc->currentAnim.w++;
                     break;
             }

@@ -67,7 +67,6 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
     Enemy* enemy2;
     Npc* npc2;
     f32 posX, posZ;
-    s32 func;
 
     enemy->unk_108.x = npc->pos.x;
     enemy->unk_108.y = npc->pos.y;
@@ -88,8 +87,7 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
         }
     }
 
-    func = script->functionTemp[0];
-    switch (func) {
+    switch (script->functionTemp[0]) {
         case 0:
             enemy2 = get_enemy(enemy->npcID - 1);
             npc2 = get_npc_unsafe(enemy2->npcID);
@@ -117,7 +115,6 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
                 script->functionTemp[0] = 1;
             }
             break;
-
         case 1:
             enemy2 = get_enemy(enemy->npcID - 1);
             get_npc_unsafe(enemy2->npcID);
@@ -130,7 +127,7 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
                 npc->pos.x = 0.0f;
                 npc->pos.y = -1000.0f;
                 npc->pos.z = 0.0f;
-                enemy->unk_07 = func;
+                enemy->unk_07 = 1;
                 script->functionTemp[0] = 0;
             }
             break;
@@ -147,7 +144,7 @@ ApiStatus func_802406CC_EA0FCC(Evt* script, s32 isInitialCall) {
 // Similar to UnkNpcAIFunc27
 ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
-    Npc *npc = get_npc_unsafe(enemy->npcID);
+    Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
@@ -193,21 +190,25 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 0:
             func_800495A0(script, npcAISettings, territoryPtr);
+            // fallthrough
         case 1:
             func_800496B8(script, npcAISettings, territoryPtr);
             break;
         case 2:
             base_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
+            // fallthrough
         case 3:
             func_80049C04(script, npcAISettings, territoryPtr);
             break;
         case 10:
             func_80049E3C(script, npcAISettings, territoryPtr);
+            // fallthrough
         case 11:
             func_80049ECC(script, npcAISettings, territoryPtr);
             break;
         case 12:
             func_80049F7C(script, npcAISettings, territoryPtr);
+            // fallthrough
         case 13:
             func_8004A124(script, npcAISettings, territoryPtr);
             break;
@@ -216,6 +217,7 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
             break;
         case 30:
             N(UnkNpcAIFunc6)(script);
+            // fallthrough
         case 31:
             N(UnkNpcAIFunc7)(script);
             if (script->functionTemp[0] != 32) {
@@ -231,6 +233,7 @@ ApiStatus func_8024097C_EA127C(Evt* script, s32 isInitialCall) {
             break;
         case 99:
             func_8004A73C(script);
+            break;
     }
 
     return ApiStatus_BLOCK;
@@ -269,7 +272,7 @@ ApiStatus func_80241AE0_EA23E0(Evt* script, s32 isInitialCall) {
 
     // Dead Func that doesn't seem to have an alive counterpart, probably because of the
     // difference in the Enemy and DeadEnemy struct.
-    func_8004D8E0(enemy); 
+    func_8004D8E0(enemy);
     if (enemy->flags & ENEMY_FLAGS_100000) {
         enemy->unk_114 = 10.0f;
         enemy->unk_118 = 0.7f;
@@ -409,7 +412,7 @@ ApiStatus func_80242A4C_EA334C(Evt* script, s32 isInitialCall) {
 #ifdef NON_MATCHING
 ApiStatus func_80242D64_EA3664(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->varTable[2]);
-    
+
     D_80246894 = npc->currentAnim.w;
     npc->currentAnim.w = script->varTable[4];
 

@@ -61,11 +61,13 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~0x800;
+        npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
         if (!enemy->territory->patrol.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~0x8;
+            npc->flags |= NPC_FLAG_GRAVITY;
+            npc->flags &= ~NPC_FLAG_ENABLE_HIT_SCRIPT;
         } else {
-            npc->flags = (npc->flags & ~0x200) | 0x8;
+            npc->flags &= ~NPC_FLAG_GRAVITY;
+            npc->flags |= NPC_FLAG_ENABLE_HIT_SCRIPT;
         }
         if (enemy->unk_B0 & 4) {
             script->functionTemp[0] = 99;
@@ -82,13 +84,13 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 0:
             pra_35_UnkNpcAIFunc24(script, npcAISettings, territoryPtr);
-
+            // fallthrough
         case 1:
             pra_35_UnkFunc13(script, npcAISettings, territoryPtr);
             break;
         case 2:
             pra_35_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
-   
+            // fallthrough
         case 3:
             pra_35_UnkFunc14(script, npcAISettings, territoryPtr);
             break;
@@ -97,13 +99,13 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
             break;
         case 5:
             pra_35_NpcJumpFunc2(script, npcAISettings, territoryPtr);
-       
+            // fallthrough
         case 11:
             pra_35_NpcJumpFunc(script, npcAISettings, territoryPtr);
             break;
         case 12:
             pra_35_UnkNpcAIFunc13(script, npcAISettings, territoryPtr);
-  
+            // fallthrough
         case 13:
             pra_35_UnkFunc15(script, npcAISettings, territoryPtr);
             break;
@@ -112,17 +114,21 @@ ApiStatus func_802423CC_D8F61C(Evt *script, s32 isInitialCall) {
             break;
         case 30:
             pra_35_UnkNpcAIFunc6(script);
-        
+            // fallthrough
         case 31:
             pra_35_UnkNpcAIFunc7(script);
-            if (script->functionTemp[0] == 32) {
-        case 32:
-                pra_35_UnkNpcAIFunc8(script);
-                if (script->functionTemp[0] == 33) {
-        case 33:
-                    pra_35_UnkNpcAIFunc5(script);
-                }
+            if (script->functionTemp[0] != 32) {
+                break;
             }
+            // fallthrough
+        case 32:
+            pra_35_UnkNpcAIFunc8(script);
+            if (script->functionTemp[0] != 33) {
+                break;
+            }
+            // fallthrough
+        case 33:
+            pra_35_UnkNpcAIFunc5(script);
             break;
         case 99:
             func_8004A73C(script);
