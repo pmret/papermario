@@ -474,7 +474,17 @@ void func_8023ED5C(void) {
     }
 }
 
-INCLUDE_ASM(s32, "16c8e0", func_8023F060);
+u16 func_8023F060(u16 arg0, s32 arg1, s32 arg2) {
+    s32 temp_lo;
+    s32 phi_v0;
+
+    temp_lo = (arg1 - (arg0)) * arg2;
+    phi_v0 = temp_lo;
+    if (temp_lo < 0) {
+        phi_v0 = temp_lo + 0xFF;
+    }
+    return (arg0 + (phi_v0 >> 8));
+}
 
 INCLUDE_ASM(s32, "16c8e0", func_8023F088);
 
