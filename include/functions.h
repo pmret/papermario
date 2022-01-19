@@ -711,6 +711,8 @@ s32 try_inflict_status(Actor*, s32, s32);
 void mdl_set_all_fog_mode(s32);
 void load_model_animator_tree(s32, StaticAnimatorNode**);
 
+void func_8024EDC0(void);
+
 void update_effects(void);
 void update_cameras(void);
 void clear_render_tasks(void);

@@ -553,7 +553,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
     s32 i;
 
     if (actor != NULL) {
-        shadow = get_shadow_by_index((s32) actor->shadow);
+        shadow = get_shadow_by_index(actor->shadow.id);
         shadow->flags |= SHADOW_FLAGS_HIDDEN;
         if (!(actor->flags & ACTOR_FLAG_DISABLED)) {
             if (actor->flags & ACTOR_FLAG_10000000) {
@@ -633,7 +633,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                 actorPart = actorPart->nextPart;
             }
 
-            shadow = get_shadow_by_index((s32) actor->shadow);
+            shadow = get_shadow_by_index(actor->shadow.id);
             if (!(actor->flags & ACTOR_FLAG_NO_SHADOW)) {
                 shadow->flags &= ~ACTOR_FLAG_DISABLED;
             }
@@ -715,7 +715,7 @@ void update_player_actor_shadow(void) {
         func_802549F4(player);
     }
 
-    shadow = get_shadow_by_index((s32) player->shadow);
+    shadow = get_shadow_by_index(player->shadow.id);
     shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
 
     if (!battleStatus->outtaSightActive) {

@@ -2061,7 +2061,7 @@ void load_player_actor(void) {
 
     ASSERT(partMovement != NULL);
 
-    player->shadow = create_shadow_type(0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+    player->shadow.id = create_shadow_type(0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
     player->shadowScale = player->size.x / 24.0;
     player->hudElementDataIndex = create_status_icon_set();
     player->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
@@ -2315,7 +2315,7 @@ void load_partner_actor(void) {
             part->nextPart = NULL;
         }
 
-        partnerActor->shadow = create_shadow_type(0, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z);
+        partnerActor->shadow.id = create_shadow_type(0, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z);
         partnerActor->shadowScale = partnerActor->size.x / 24.0;
         partnerActor->hudElementDataIndex = create_status_icon_set();
         partnerActor->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
@@ -2587,7 +2587,7 @@ Actor* create_actor(Formation formation) {
     takeTurnScript = start_script(actor->takeTurnScriptSource, 0xA, 0);
     actor->takeTurnID = takeTurnScript->id;
     takeTurnScript->owner1.enemyID = actor->enemyIndex | 0x200;
-    actor->shadow = create_shadow_type(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+    actor->shadow.id = create_shadow_type(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
     actor->shadowScale = actor->size.x / 24.0;
     actor->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
     actor->unk_228 = NULL;

@@ -256,7 +256,7 @@ typedef struct PlayerData {
     /* 0x29C */ s16 playerFirstStrikes;
     /* 0x29E */ s16 enemyFirstStrikes;
     /* 0x2A0 */ u16 powerBounces;
-    /* 0x2A2 */ s16 battlesCount;
+    /* 0x2A2 */ u16 battlesCount;
     /* 0x2A4 */ s16 unk_2A4[4];
     /* 0x2AC */ s32 unk_2AC;
     /* 0x2B0 */ s32 unk_2B0;
@@ -664,21 +664,9 @@ typedef struct BattleStatus {
     /* 0x008 */ s32 varTable[16];
     /* 0x048 */ u8 currentSubmenu;
     /* 0x049 */ char unk_49[3];
-    /* 0x04C */ s8 unk_4C;
-    /* 0x04D */ s8 unk_4D;
-    /* 0x04E */ s8 unk_4E;
-    /* 0x04F */ s8 unk_4F;
-    /* 0x050 */ s8 unk_50;
-    /* 0x051 */ s8 unk_51;
-    /* 0x052 */ s8 unk_52;
-    /* 0x053 */ s8 stratsLastCursorPos;
-    /* 0x054 */ char unk_54[8];
-    /* 0x05C */ s8 unk_5C;
-    /* 0x05D */ s8 unk_5D;
-    /* 0x05E */ char unk_5E[4];
-    /* 0x062 */ s8 unk_62;
-    /* 0x063 */ s8 unk_63;
-    /* 0x064 */ char unk_64[12];
+    /* 0x04C */ s8 unk_4C[16];
+    /* 0x05C */ s8 unk_5C[16];
+    /* 0x06C */ char unk_6C[0x4];
     /* 0x070 */ s16 menuDisableFlags; /* 1 = jump, 2 = hammer, 4 = items */
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
@@ -793,8 +781,8 @@ typedef struct BattleStatus {
     /* 0x434 */ s32* unk_434;
     /* 0x438 */ FGModelData* foregroundModelData;
     /* 0x43C */ BattleStatusUnk* unk_43C;
-    /* 0x440 */ u8 tattleFlags[27];
-    /* 0x45B */ char unk_45B[5];
+    /* 0x440 */ u8 tattleFlags[28];
+    /* 0x45C */ char unk_45C[4];
 } BattleStatus; // size = 0x460
 
 typedef struct TextureHeader {
@@ -1322,12 +1310,16 @@ typedef struct SelectableTarget {
 typedef struct ActorPartMovement {
     /* 0x00 */ Vec3f unk_00;
     /* 0x0C */ Vec3f goalPos;
-    /* 0x18 */ char unk_18[12];
+    /* 0x18 */ Vec3f unk_18;
     /* 0x24 */ f32 jumpScale;
     /* 0x28 */ f32 moveSpeed;
     /* 0x2C */ f32 unk_2C;
     /* 0x30 */ f32 unk_30;
-    /* 0x34 */ char unk_34[0x18];
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ s16 unk_38;
+    /* 0x3A */ s16 unk_3A;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ char unk_40[0xC];
     /* 0x4C */ s32 varTable[16];
 } ActorPartMovement; // size = 0x8C
 
@@ -1772,7 +1764,10 @@ typedef struct Actor {
     /* 0x427 */ char unk_427;
     /* 0x428 */ s16 targetActorID;
     /* 0x42A */ char unk_42A[2];
-    /* 0x42C */ struct Shadow* shadow; /* might be shadow ID */
+    /* 0x42C */ union {
+    /*       */     struct Shadow* ptr;
+    /*       */     s32 id;
+    /* 0x42C */ } shadow;
     /* 0x430 */ f32 shadowScale; /* = actor size / 24.0 */
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
     /* 0x436 */ s16 hudElementDataIndex;
