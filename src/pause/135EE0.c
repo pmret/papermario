@@ -3,23 +3,23 @@
 #include "ld_addrs.h"
 #include "sprite.h"
 
-typedef struct UnkSpriteStruct {
-    /* 0x00 */ s32 spriteID;
-    /* 0x04 */ s32 extraAnims;
-    /* 0x08 */ s32 unk_08;
+typedef struct SpriteEntryData {
+    /* 0x00 */ s32 animID;
+    /* 0x04 */ s32 extraAnim1;
+    /* 0x08 */ s32 extraAnim2;
     /* 0x0C */ s32 unk_0C;
-} UnkSpriteStruct; // size = 0x10
+} SpriteEntryData; // size = 0x10
 
-extern HudElementAnim HudScript_AnimatedCursorHand;
-extern HudElementAnim HudScript_DescMsgPrev;
-extern HudElementAnim HudScript_DescMsgNext;
-extern HudElementAnim HudScript_UnusedBadge;
-extern HudElementAnim HudScript_StickTapRight;
 extern HudElementAnim HudScript_PressAButton;
 extern HudElementAnim HudScript_PressStartButton;
 extern HudElementAnim HudScript_StartButtonText;
+extern HudElementAnim HudScript_StickTapRight;
+extern HudElementAnim HudScript_UnusedBadge;
+extern HudElementAnim HudScript_AnimatedCursorHand;
+extern HudElementAnim HudScript_DescMsgPrev;
+extern HudElementAnim HudScript_DescMsgNext;
 
-extern HudElementAnim D_80241ECC;
+extern MenuPanel gPausePanelTabs;
 
 extern s32 D_80270108;
 extern s32 D_8027010C;
@@ -36,8 +36,8 @@ void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY);
 HudElementAnim* gPauseMenuIconScripts[] = {HudScript_AnimatedCursorHand, HudScript_DescMsgPrev, HudScript_DescMsgNext,
                                HudScript_UnusedBadge, HudScript_StickTapRight, HudScript_PressAButton,
                                HudScript_PressStartButton, HudScript_StartButtonText};
-// TODO make pointers,
-MenuPanel* gPauseMenuPanels[] = { 0x8024F314, 0x8024F4AC, 0x8024F54C, 0x8024F5E4, 0x8024F88C, 0x8024FA10, 0x8025068C };
+// TODO make pointers
+MenuPanel* gPauseMenuPanels[] = { &gPausePanelTabs, 0x8024F4AC, 0x8024F54C, 0x8024F5E4, 0x8024F88C, 0x8024FA10, 0x8025068C };
 s32 gPauseMenuCursorPosX = 160;
 s32 gPauseMenuCursorPosY = -120;
 s32 gPauseMenuCursorOpacity = 0;
@@ -63,19 +63,19 @@ s32 D_8024F058[] = { 0x00000010, 0x00000011, 0x00000012, 0x00000013, 0x00000014,
 s32 D_8024F090[] = { 5, 4, 5, 5, 5, 5, 6 };
 u8 gPauseMenuTextScrollInterpEasingLUT[] = { 0x00, 0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07, 0x07, 0x08};
 u8 gPauseMenuPageScrollInterpEasingLUT[] = { 0x00, 0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07, 0x07, 0x08};
-UnkSpriteStruct D_8024F0CC[] = { { .spriteID = 0x009E0000,
-                                   .extraAnims = 0x009E0001,
-                                   .unk_08 =  0x009E000B,
+SpriteEntryData D_8024F0CC[] = { { .animID = 0x009E0000,
+                                   .extraAnim1 = 0x009E0001,
+                                   .extraAnim2 =  0x009E000B,
                                    .unk_0C = 0xFFFFFFFF },
 
-                                { .spriteID = 0x00010000,
-                                   .extraAnims = 0x00010001,
-                                   .unk_08 =  0x00010008,
+                                { .animID = 0x00010000,
+                                   .extraAnim1 = 0x00010001,
+                                   .extraAnim2 =  0x00010008,
                                    .unk_0C = 0xFFFFFFFF },
 
-                                { .spriteID = 0x009D0000,
-                                   .extraAnims = 0x009D0001,
-                                   .unk_08 =  0x009D0008,
+                                { .animID = 0x009D0000,
+                                   .extraAnim1 = 0x009D0001,
+                                   .extraAnim2 =  0x009D0008,
                                    .unk_0C = 0xFFFFFFFF } };
 Vp D_8024F100 = {
     .vp = {
@@ -153,15 +153,15 @@ void func_80242BAC(s32 windowID, s32 posX, s32 posY) {
         if (D_8024EFB4 != 0) {
             s32 i;
 
-            for (i = 0x16; i < 0x2C; i++) {
+            for (i = 22; i < 44; i++) {
                 Window* window = &gWindows[i];
                 s8 parent = window->parent;
 
-                if ((parent == -1 || parent == 0x16) && (window->flags & WINDOW_FLAGS_8)) {
+                if ((parent == -1 || parent == 22) && (window->flags & WINDOW_FLAGS_8)) {
                     break;
                 }
             }
-            if (i >= 0x2C) {
+            if (i >= 44) {
                 D_8024EFB4 = 0;
             }
         }
@@ -187,11 +187,11 @@ void func_80242D04(s32 windowID, s32 posX, s32 posY) {
         if (D_8024EFB4 != 0) {
             s32 i;
 
-            for (i = 0x16; i < 0x2C; i++) {
+            for (i = 22; i < 44; i++) {
                 Window* window = &gWindows[i];
                 s8 parent = window->parent;
 
-                if ((parent == -1 || parent == 0x16) && (window->flags & WINDOW_FLAGS_8)) {
+                if ((parent == -1 || parent == 22) && (window->flags & WINDOW_FLAGS_8)) {
                     break;
                 }
             }
@@ -564,7 +564,7 @@ void pause_init(void) {
 
     for (i = 0; i < 8; i++) {
         gPauseMenuCommonIconIDs[i] = create_hud_element(gPauseMenuIconScripts[i]);
-        if (gPauseMenuIconScripts[i] == D_80241ECC) {
+        if (gPauseMenuIconScripts[i] == HudScript_AnimatedCursorHand) {
             set_hud_element_flags(gPauseMenuCommonIconIDs[i], 0x20000080);
         } else {
             set_hud_element_flags(gPauseMenuCommonIconIDs[i], 0x80);
@@ -604,7 +604,7 @@ void pause_init(void) {
 
     if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
         for (i = 0; i < 3; i++) {
-            D_8027011C[i] = spr_load_npc_sprite(D_8024F0CC[i].spriteID, &D_8024F0CC[i]);
+            D_8027011C[i] = spr_load_npc_sprite(D_8024F0CC[i].animID, &D_8024F0CC[i]);
         }
 
         set_window_update(24, 1);
@@ -666,7 +666,6 @@ void pause_tutorial_input(s32 *pressed, s32 *held) {
     *held = heldNew;
 }
 
-// TODO remove
 const f32 rodata_padding[] = {0.0f, 0.0f, 0.0f};
 
 void pause_handle_input(s32 pressed, s32 held) {
@@ -681,7 +680,7 @@ void pause_handle_input(s32 pressed, s32 held) {
 
     if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
         for (i = 0; i < 3; i++) {
-            spr_update_sprite(D_8027011C[i], D_8024F0CC[i].extraAnims, 1.0f);
+            spr_update_sprite(D_8027011C[i], D_8024F0CC[i].extraAnim1, 1.0f);
         }
     }
 

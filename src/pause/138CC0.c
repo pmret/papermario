@@ -8,16 +8,519 @@ typedef struct {
     s32 baseMsgID;
 } StatsEntryData; // size = 0xC
 
-extern HudElementAnim* gStatsMenuElements[12];
-extern MenuWindowBP gStatsMenuWindowBPs[1];
-extern StatsEntryData gStatsMenuEntries[11];
+extern HudElementAnim HudScript_MarioHeadSmall[];
+extern HudElementAnim HudScript_StatBoots0[];
+extern HudElementAnim HudScript_StatBoots1[];
+extern HudElementAnim HudScript_StatBoots2[];
+extern HudElementAnim HudScript_StatBoots3[];
+extern HudElementAnim HudScript_StatHammer0[];
+extern HudElementAnim HudScript_StatHammer1[];
+extern HudElementAnim HudScript_StatHammer2[];
+extern HudElementAnim HudScript_StatHammer3[];
+extern HudElementAnim HudScript_StatusCoin[];
+extern HudElementAnim HudScript_StatusStarPoint[];
+extern HudElementAnim HudScript_StatStarPiece_1[];
+extern HudElementAnim HudScript_Clock[];
+extern HudElementAnim HudScript_StatusHeart[];
+extern HudElementAnim HudScript_StatFp_1[];
+extern HudElementAnim HudScript_StatBp[];
+extern HudElementAnim HudScript_StatusStar1[];
+extern HudElementAnim HudScript_StatusStar2[];
+extern HudElementAnim HudScript_StatusStar3[];
+extern HudElementAnim HudScript_StatusStar4[];
+extern HudElementAnim HudScript_StatusStar5[];
+extern HudElementAnim HudScript_StatusStar6[];
+extern HudElementAnim HudScript_StatusStar7[];
+extern HudElementAnim HudScript_StatTimes[];
 
+extern s32 D_8026FB30;
+
+void pause_stats_draw_contents(void* arg0, s32 arg1, s32 arg2);
+void pause_stats_init(MenuPanel* panel);
+void pause_stats_handle_input(MenuPanel* panel);
+void pause_stats_cleanup(void);
+
+HudElementAnim* gStatsMenuElements[] = { HudScript_MarioHeadSmall, HudScript_StatBoots0, HudScript_StatHammer0,
+                                       HudScript_StatusCoin, HudScript_StatusStarPoint, HudScript_StatStarPiece_1,
+                                       HudScript_Clock, HudScript_StatusHeart, HudScript_StatFp_1, HudScript_StatBp,
+                                       HudScript_StatusStar1, HudScript_StatTimes};
+HudElementAnim* D_8024F360[] = { HudScript_StatBoots0, HudScript_StatBoots1, HudScript_StatBoots2, HudScript_StatBoots3 };
+HudElementAnim* D_8024F370[] = { HudScript_StatHammer0, HudScript_StatHammer1, HudScript_StatHammer2, HudScript_StatHammer3 };
+s32 D_8024F380[] = { 59, 60, 61, 62 };
+s32 D_8024F390[] = { 63, 64, 65, 66 };
+s32 D_8024F3A0[] = { 0x00040105, 0x01060207, 0x02080309, 0x030A0000 };
+StatsEntryData gStatsMenuEntries[] = { {.cursorX =   9, .cursorY =  20, .baseMsgID = 33},
+                                       {.cursorX =  17, .cursorY =  55, .baseMsgID = 34},
+                                       {.cursorX =  17, .cursorY =  90, .baseMsgID = 35},
+                                       {.cursorX =  17, .cursorY = 124, .baseMsgID = 36},
+                                       {.cursorX = 138, .cursorY =  28, .baseMsgID = 37},
+                                       {.cursorX = 138, .cursorY =  53, .baseMsgID = 40},
+                                       {.cursorX = 132, .cursorY =  76, .baseMsgID = 44},
+                                       {.cursorX = 125, .cursorY =  91, .baseMsgID = 45},
+                                       {.cursorX = 125, .cursorY = 106, .baseMsgID = 46},
+                                       {.cursorX = 125, .cursorY = 121, .baseMsgID = 47},
+                                       {.cursorX = 125, .cursorY = 138, .baseMsgID = 49} };
+s32 D_8024F434[] = { 0x80108298, 0x801082E8, 0x801082C0, 0x80108310, 0x80108338, 0x80108360, 0x80108388 };
+HudElementAnim* D_8024F450[] = { HudScript_StatusStar1, HudScript_StatusStar3, HudScript_StatusStar2,
+                                 HudScript_StatusStar4, HudScript_StatusStar5, HudScript_StatusStar6,
+                                 HudScript_StatusStar7 };
+
+s32 D_8024F46C = -1;
+s32 D_8024F470 = 1;
+s32 D_8024F474 = 2;
+s32 D_8024F478 = 4;
+s32 D_8024F47C = 5;
+s32 D_8024F480 = 7;
+s32 D_8024F484 = 8;
+MenuWindowBP gStatsMenuWindowBPs[] = { { .windowID = 31,
+                                         .unk_01 = 0,
+                                         .pos = { .x = 3,
+                                                  .y = 16 },
+                                         .height = 289,
+                                         .width = 154,
+                                         .unk_0A = { 0, 0},
+                                         .fpDrawContents = &pause_stats_draw_contents,
+                                         .tab = NULL,
+                                         .parentID = 0x16000000,
+                                         .fpUpdate = 2,
+                                         .unk_1C = 0,
+                                         .style = 0x8026FBA0 } };
+MenuPanel D_8024F4AC = { .unk_00 = {
+                            .s = 0 },
+                         .page = 0,
+                         .numCols = 2,
+                         .numRows = 7,
+                         .numPages = 0,
+                         .gridData = D_8024F3A0,
+                         .fpInit = &pause_stats_init,
+                         .fpHandleInput = &pause_stats_handle_input,
+                         .fpUpdate = NULL,
+                         .fpCleanup = &pause_stats_cleanup };
 // Fake "badge" for the None entry that appears on the equipped badges page when nothing is equipped
 #define BADGE_NONE_STANDIN 0x7FFE
 // Invalid badge ID filled in unused slots of gBadgeMenuItemIDs
 #define BADGE_INVALID 0x7FFF
 
 INCLUDE_ASM(s32, "pause/138CC0", pause_stats_draw_contents);
+/*
+void pause_stats_draw_contents(void* arg0, s32 arg1, s32 arg2) {
+    s32 frameCounter;
+    s16 bootsAnimIndex, hammerAnimIndex;
+    s16 bootsLevel, hammerLevel, playerLevel;
+    s32 s2, s3, s4, s5, s6;
+    s32 sp, splow, sphigh;
+
+    set_hud_element_render_pos(gStatsMenuIconIDs[3], arg1 + 143, arg2 + 109);
+    draw_hud_element_3(gStatsMenuIconIDs[3]);
+    draw_msg(pause_get_menu_msg(50), arg1 + 155, arg2 + 101, 255, 10, 1);
+    draw_number(gPlayerData.coins,  arg1 + 281, arg2 + 101, 1, 10, 255, 3);
+    set_hud_element_render_pos(gStatsMenuIconIDs[11], arg1 + 248, arg2 + 108);
+    draw_hud_element_3(gStatsMenuIconIDs[11]);
+    set_hud_element_render_pos(gStatsMenuIconIDs[4], arg1 + 143, arg2 + 94);
+    draw_hud_element_3(gStatsMenuIconIDs[4]);
+    draw_msg(pause_get_menu_msg(51), arg1 + 155, arg2 + 86, 255, 10, 1);
+    draw_number(gPlayerData.starPoints, arg1 + 281, arg2 + 86, 1, 10, 255, 3);
+    set_hud_element_render_pos(gStatsMenuIconIDs[11], arg1 + 248, arg2 + 93);
+    draw_hud_element_3(gStatsMenuIconIDs[11]);
+    set_hud_element_render_pos(gStatsMenuIconIDs[5], arg1 + 143, arg2 + 123);
+    draw_hud_element_3(gStatsMenuIconIDs[5]);
+    draw_msg(pause_get_menu_msg(52), arg1 + 0x9B, arg2 + 0x74, 0xFF, 0xA, 1);
+    draw_number(gPlayerData.starPieces, arg1 + 0x119, arg2 + 0x74, 1, 0xA, 0xFF, 3);
+    set_hud_element_render_pos(gStatsMenuIconIDs[11], arg1 + 0xF8, arg2 + 0x7B);
+    draw_hud_element_3(gStatsMenuIconIDs[11]);
+    pause_draw_menu_label(0, arg1 + 21, arg2 + 35);
+    set_hud_element_render_pos(gStatsMenuIconIDs[7], arg1 + 52, arg2 + 0x39);
+    draw_hud_element_3(gStatsMenuIconIDs[7]);
+    draw_msg(pause_get_menu_msg(54), arg1 + 25, arg2 + 51, 0xFF, 0, 1);
+    draw_number(gPlayerData.curHP, arg1 + 78, arg2 + 51, 1, 0, 0xFF, 3);
+    draw_msg(pause_get_menu_msg(57), arg1 + 78, arg2 + 51, 0xFF, 0, 1);
+    draw_number(gPlayerData.curMaxHP, arg1 + 105, arg2 + 51, 1, 0, 0xFF, 3);
+    pause_draw_menu_label(1, arg1 + 21, arg2 + 69);
+    set_hud_element_render_pos(gStatsMenuIconIDs[8], arg1 + 52, arg2 + 92);
+    draw_hud_element_3(gStatsMenuIconIDs[8]);
+    draw_msg(pause_get_menu_msg(55), arg1 + 25, arg2 + 85, 0xFF, 0, 1);
+    draw_number(gPlayerData.curFP, arg1 + 78, arg2 + 85, 1, 0, 0xFF, 3);
+    draw_msg(pause_get_menu_msg(57), arg1 + 78, arg2 + 85, 0xFF, 0, 1);
+    draw_number(gPlayerData.curMaxFP, arg1 + 105, arg2 + 85, 1, 0, 0xFF, 3);
+    pause_draw_menu_label(2, arg1 + 21, arg2 + 103);
+    set_hud_element_render_pos(gStatsMenuIconIDs[9], arg1 + 52, arg2 + 126);
+    draw_hud_element_3(gStatsMenuIconIDs[9]);
+    draw_msg(pause_get_menu_msg(56), arg1 + 25, arg2 + 119, 0xFF, 0, 1);
+    draw_number(gPlayerData.maxBP, arg1 + 78, arg2 + 119, 1, 0, 0xFF, 3);
+    set_hud_element_render_pos(gStatsMenuIconIDs[6], arg1 + 143, arg2 + 140);
+    draw_hud_element_3(gStatsMenuIconIDs[6]);
+    draw_msg(pause_get_menu_msg(53), arg1 + 155, arg2 + 133, 0xFF, 0xA, 1);
+    frameCounter = gPlayerData.frameCounter;
+    //bootsAnimIndex = 3;
+    if (frameCounter > 21599999) {
+        frameCounter = 21599999;
+    }
+    draw_number((frameCounter / 2160000) % 10, arg1 + 237, arg2 + 133, 1, 0xA, 0xFF, 2);
+    draw_number(frameCounter / 216000 - (frameCounter / 2160000) * 10, arg1 + 246, arg2 + 133, 1, 0xA, 0xFF, 2);
+    draw_msg(pause_get_menu_msg(58), arg1 + 257, arg2 + 132, 0xFF, 0xA, 1);
+    draw_msg(pause_get_menu_msg(58), arg1 + 257, arg2 + 127, 0xFF, 0xA, 1);
+    draw_number(frameCounter / 36000 - frameCounter / 216000 * 6, arg1 + 264, arg2 + 133, 1, 0xA, 0xFF, 2);
+    draw_number(frameCounter / 3600 - frameCounter / 36000 * 10, arg1 + 273, arg2 + 133, 1, 0xA, 0xFF, 2);
+    bootsLevel = gPlayerData.bootsLevel;
+    hammerLevel = gPlayerData.hammerLevel;
+    playerLevel = gPlayerData.level;
+    draw_box(4, &D_8026FB30, arg1 + 7, arg2 + 12, 0, playerLevel >= 10 ? 121 : 113, 17, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 320, 240, 0);
+    set_hud_element_render_pos(gStatsMenuIconIDs[0], arg1 + 61, arg2 + 21);
+    draw_hud_element_3(gStatsMenuIconIDs[0]);
+    draw_msg(pause_get_menu_msg(0x43), arg1 + 16, arg2 + 14, 0xFF, 0, 1);
+    draw_msg(pause_get_menu_msg(0x44), arg1 + 67, arg2 + 14, 0xFF, 0, 1);
+    draw_number(playerLevel, arg1 + 106, arg2 + 14, 1, 0, 0xFF, 2);
+
+    bootsAnimIndex = bootsLevel + 1;
+    if (bootsAnimIndex < 0) {
+        bootsAnimIndex = 0;
+    }
+    if (bootsAnimIndex >= 4) {
+        bootsAnimIndex = 3;
+    }
+
+    hammerAnimIndex = hammerLevel + 1;
+    if (hammerAnimIndex < 0) {
+        hammerAnimIndex = 0;
+    }
+    if (hammerAnimIndex >= 4) {
+        hammerAnimIndex = 3;
+    }
+
+    pause_draw_menu_label(3, arg1 + 137, arg2 + 10);
+    pause_draw_menu_label(4, arg1 + 137, arg2 + 35);
+    set_hud_element_anim(gStatsMenuIconIDs[1], D_8024F360[bootsAnimIndex]);
+    set_hud_element_render_pos(gStatsMenuIconIDs[1], arg1 + 163, arg2 + 29);
+    draw_hud_element_3(gStatsMenuIconIDs[1]);
+    draw_msg(pause_get_menu_msg(D_8024F380[bootsAnimIndex]), arg1 + 176, arg2 + 23, 0xFF, 0, 1);
+    set_hud_element_anim(gStatsMenuIconIDs[2], D_8024F370[bootsAnimIndex]);
+    set_hud_element_render_pos(gStatsMenuIconIDs[2], arg1 + 163, arg2 + 0x36);
+    draw_hud_element_3(gStatsMenuIconIDs[2]);
+    draw_msg(pause_get_menu_msg(D_8024F390[hammerAnimIndex]), arg1 + 176, arg2 + 48, 0xFF, 0, 1);
+    pause_draw_menu_label(6, arg1 + 130, arg2 + 69);
+    pause_draw_menu_label(5, arg1 + 138, arg2 + 60);
+
+    sphigh = gPlayerData.specialBarsFilled;
+    if (sphigh < 0) {
+        sphigh += 255;
+    }
+    sphigh /= 256;
+    splow = gPlayerData.specialBarsFilled - sphigh * 256;
+    if (splow < 0) {
+        splow += 31;
+    }
+    s4 = 1;
+    s2 = s3 = s5 = 0;
+    s6 = splow / 32 + sphigh * 8;
+
+    if (s6 > 0) {
+        while (1) {
+            s3++;
+            set_hud_element_anim(gStatsMenuIconIDs[10], D_8024F434[s5]);
+            set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + ((s5 * 20) + 140) + D_8024F46C, arg2 + 75);
+            if (s4 != 0) {
+                draw_hud_element_3(gStatsMenuIconIDs[10]);
+                s4 = 0;
+            } else {
+                draw_hud_element_2(gStatsMenuIconIDs[10]);
+            }
+
+            s2 = 0 + 1;
+            if (s3 >= s6) {
+                break;
+            }
+            s3++;
+            set_hud_element_anim(gStatsMenuIconIDs[10], D_8024F434[s5]);
+            set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + ((s5 * 20) + 140) + D_8024F470, arg2 + 75);
+            if (s4 != 0) {
+                draw_hud_element_3(gStatsMenuIconIDs[10]);
+                s4 = 0;
+            } else {
+                draw_hud_element_2(gStatsMenuIconIDs[10]);
+            }
+
+            s2++;
+            if (s3 >= s6) {
+                break;
+            }
+            s3++;
+            set_hud_element_anim(gStatsMenuIconIDs[10], D_8024F434[s5]);
+            set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + ((s5 * 20) + 140) + D_8024F474, arg2 + 75);
+            if (s4 != 0) {
+                draw_hud_element_3(gStatsMenuIconIDs[10]);
+                s4 = 0;
+            } else {
+                draw_hud_element_2(gStatsMenuIconIDs[10]);
+            }
+
+            s2++;
+            if (s3 >= s6) {
+                break;
+            }
+            s3++;
+            set_hud_element_anim(gStatsMenuIconIDs[10], D_8024F434[s5]);
+            set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + ((s5 * 20) + 140) + D_8024F478, arg2 + 75);
+            if (s4 != 0) {
+                draw_hud_element_3(gStatsMenuIconIDs[10]);
+                s4 = 0;
+            } else {
+                draw_hud_element_2(gStatsMenuIconIDs[10]);
+            }
+
+            s2++;
+            if (s3 >= s6) {
+                break;
+            }
+            s3++;
+            set_hud_element_anim(gStatsMenuIconIDs[10], D_8024F434[s5]);
+            set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + ((s5 * 20) + 140) + D_8024F47C, arg2 + 75);
+            if (s4 != 0) {
+                draw_hud_element_3(gStatsMenuIconIDs[10]);
+                s4 = 0;
+            } else {
+                draw_hud_element_2(gStatsMenuIconIDs[10]);
+            }
+
+            s2++;
+            if (s3 >= s6) {
+                break;
+            }
+            s3++;
+            set_hud_element_anim(gStatsMenuIconIDs[10], D_8024F434[s5]);
+            set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + ((s5 * 20) + 140) + D_8024F480, arg2 + 75);
+            if (s4 != 0) {
+                draw_hud_element_3(gStatsMenuIconIDs[10]);
+                s4 = 0;
+            } else {
+                draw_hud_element_2(gStatsMenuIconIDs[10]);
+            }
+
+            s2++;
+            if (s3 >= s6) {
+                break;
+            }
+            s3++;
+            set_hud_element_anim(gStatsMenuIconIDs[10], D_8024F434[s5]);
+            set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + ((s5 * 20) + 140) + D_8024F484, arg2 + 75);
+            if (s4 != 0) {
+                draw_hud_element_3(gStatsMenuIconIDs[10]);
+                s4 = 0;
+            } else {
+                draw_hud_element_2(gStatsMenuIconIDs[10]);
+            }
+
+            s2++;
+            if (s3 >= s6) {
+                break;
+            }
+            s3++;
+            set_hud_element_anim(gStatsMenuIconIDs[10], D_8024F450[s5]);
+            set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + ((s5 * 20) + 140), arg2 + 77);
+            if (s4 != 0) {
+                draw_hud_element_3(gStatsMenuIconIDs[10]);
+                s4 = 0;
+            } else {
+                draw_hud_element_2(gStatsMenuIconIDs[10]);
+            }
+
+            s5++;
+            if (s3 >= s6) {
+                break;
+            }
+        }
+
+    }
+/*
+    temp_v0_5 = phi_s5_3 * 0x14;
+    temp_s6_3 = gPlayerData.unk28E * 8;
+    phi_s0 = temp_v0_5 + 0x8C;
+    phi_s5_2 = temp_v0_5 + 0x98;
+loop_51:
+    phi_s2_4 = phi_s2_3;
+    phi_s4_11 = phi_s4_10;
+    phi_s3_5 = phi_s3_4;
+    phi_s4_11 = phi_s4_10;
+    if (phi_s3_4 < temp_s6_3) {
+        if (phi_s2_3 == 0) {
+            temp_s3_12 = phi_s3_4 + 1;
+            set_hud_element_anim(gStatsMenuIconIDs[10], &HudScript_StatusSPEmptyIncrement);
+            set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + phi_s0 + D_8024F46C.unk0, arg2 + 0x4B);
+            phi_s3_5 = temp_s3_12;
+            if (phi_s4_10 != 0) {
+                draw_hud_element_3(gStatsMenuIconIDs[10]);
+                phi_s4_11 = 0;
+            } else {
+                draw_hud_element_2(gStatsMenuIconIDs[10]);
+            }
+            phi_s2_4 = phi_s2_3 + 1;
+            if (temp_s3_12 < temp_s6_3) {
+                goto block_58;
+            }
+        } else {
+block_58:
+            phi_s2_5 = phi_s2_4;
+            phi_s4_12 = phi_s4_11;
+            phi_s3_6 = phi_s3_5;
+            phi_s4_12 = phi_s4_11;
+            if (phi_s2_4 == 1) {
+                temp_s3_13 = phi_s3_5 + 1;
+                set_hud_element_anim(gStatsMenuIconIDs[10], &HudScript_StatusSPEmptyIncrement);
+                set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + phi_s0 + D_8024F46C.unk4, arg2 + 0x4B);
+                phi_s3_6 = temp_s3_13;
+                if (phi_s4_11 != 0) {
+                    draw_hud_element_3(gStatsMenuIconIDs[10]);
+                    phi_s4_12 = 0;
+                } else {
+                    draw_hud_element_2(gStatsMenuIconIDs[10]);
+                }
+                phi_s2_5 = phi_s2_4 + 1;
+                if (temp_s3_13 < temp_s6_3) {
+                    goto block_63;
+                }
+            } else {
+block_63:
+                phi_s2_6 = phi_s2_5;
+                phi_s4_13 = phi_s4_12;
+                phi_s3_7 = phi_s3_6;
+                phi_s4_13 = phi_s4_12;
+                if (phi_s2_5 == 2) {
+                    temp_s3_14 = phi_s3_6 + 1;
+                    set_hud_element_anim(gStatsMenuIconIDs[10], &HudScript_StatusSPEmptyIncrement);
+                    set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + phi_s0 + D_8024F46C.unk8, arg2 + 0x4B);
+                    phi_s3_7 = temp_s3_14;
+                    if (phi_s4_12 != 0) {
+                        draw_hud_element_3(gStatsMenuIconIDs[10]);
+                        phi_s4_13 = 0;
+                    } else {
+                        draw_hud_element_2(gStatsMenuIconIDs[10]);
+                    }
+                    phi_s2_6 = phi_s2_5 + 1;
+                    if (temp_s3_14 < temp_s6_3) {
+                        goto block_69;
+                    }
+                } else {
+block_69:
+                    phi_s2_7 = phi_s2_6;
+                    phi_s4_14 = phi_s4_13;
+                    phi_s3_8 = phi_s3_7;
+                    phi_s4_14 = phi_s4_13;
+                    if (phi_s2_6 == 3) {
+                        temp_s3_15 = phi_s3_7 + 1;
+                        set_hud_element_anim(gStatsMenuIconIDs[10], &HudScript_StatusSPEmptyIncrement);
+                        set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + phi_s0 + D_8024F46C.unkC, arg2 + 0x4B);
+                        phi_s3_8 = temp_s3_15;
+                        if (phi_s4_13 != 0) {
+                            draw_hud_element_3(gStatsMenuIconIDs[10]);
+                            phi_s4_14 = 0;
+                        } else {
+                            draw_hud_element_2(gStatsMenuIconIDs[10]);
+                        }
+                        phi_s2_7 = phi_s2_6 + 1;
+                        if (temp_s3_15 < temp_s6_3) {
+                            goto block_75;
+                        }
+                    } else {
+block_75:
+                        phi_s2_8 = phi_s2_7;
+                        phi_s4_15 = phi_s4_14;
+                        phi_s3_9 = phi_s3_8;
+                        phi_s4_15 = phi_s4_14;
+                        if (phi_s2_7 == 4) {
+                            temp_s3_16 = phi_s3_8 + 1;
+                            set_hud_element_anim(gStatsMenuIconIDs[10], &HudScript_StatusSPEmptyIncrement);
+                            set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + phi_s0 + D_8024F46C.unk10, arg2 + 0x4B);
+                            phi_s3_9 = temp_s3_16;
+                            if (phi_s4_14 != 0) {
+                                draw_hud_element_3(gStatsMenuIconIDs[10]);
+                                phi_s4_15 = 0;
+                            } else {
+                                draw_hud_element_2(gStatsMenuIconIDs[10]);
+                            }
+                            phi_s2_8 = phi_s2_7 + 1;
+                            if (temp_s3_16 < temp_s6_3) {
+                                goto block_81;
+                            }
+                        } else {
+block_81:
+                            phi_s2_9 = phi_s2_8;
+                            phi_s4_16 = phi_s4_15;
+                            phi_s3_10 = phi_s3_9;
+                            phi_s4_16 = phi_s4_15;
+                            if (phi_s2_8 == 5) {
+                                temp_s3_17 = phi_s3_9 + 1;
+                                set_hud_element_anim(gStatsMenuIconIDs[10], &HudScript_StatusSPEmptyIncrement);
+                                set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + phi_s0 + D_8024F46C.unk14, arg2 + 0x4B);
+                                phi_s3_10 = temp_s3_17;
+                                if (phi_s4_15 != 0) {
+                                    draw_hud_element_3(gStatsMenuIconIDs[10]);
+                                    phi_s4_16 = 0;
+                                } else {
+                                    draw_hud_element_2(gStatsMenuIconIDs[10]);
+                                }
+                                phi_s2_9 = phi_s2_8 + 1;
+                                if (temp_s3_17 < temp_s6_3) {
+                                    goto block_87;
+                                }
+                            } else {
+block_87:
+                                phi_s2_10 = phi_s2_9;
+                                phi_s4_17 = phi_s4_16;
+                                phi_s3_11 = phi_s3_10;
+                                phi_s4_17 = phi_s4_16;
+                                if (phi_s2_9 == 6) {
+                                    temp_s3_18 = phi_s3_10 + 1;
+                                    set_hud_element_anim(gStatsMenuIconIDs[10], &HudScript_StatusSPEmptyIncrement);
+                                    set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + phi_s0 + D_8024F46C.unk18, arg2 + 0x4B);
+                                    phi_s3_11 = temp_s3_18;
+                                    if (phi_s4_16 != 0) {
+                                        draw_hud_element_3(gStatsMenuIconIDs[10]);
+                                        phi_s4_17 = 0;
+                                    } else {
+                                        draw_hud_element_2(gStatsMenuIconIDs[10]);
+                                    }
+                                    phi_s2_10 = phi_s2_9 + 1;
+                                    if (temp_s3_18 < temp_s6_3) {
+                                        goto block_93;
+                                    }
+                                } else {
+block_93:
+                                    phi_s3_4 = phi_s3_11;
+                                    phi_s4_10 = phi_s4_17;
+                                    phi_s4_10 = phi_s4_17;
+                                    if (phi_s2_10 == 7) {
+                                        temp_s3_19 = phi_s3_11 + 1;
+                                        set_hud_element_anim(gStatsMenuIconIDs[10], &HudScript_StatusStarEmpty);
+                                        set_hud_element_render_pos(gStatsMenuIconIDs[10], arg1 + phi_s5_2, arg2 + 0x4D);
+                                        phi_s3_4 = temp_s3_19;
+                                        if (phi_s4_17 != 0) {
+                                            draw_hud_element_3(gStatsMenuIconIDs[10]);
+                                            phi_s4_10 = 0;
+                                        } else {
+                                            draw_hud_element_2(gStatsMenuIconIDs[10]);
+                                        }
+                                        if (temp_s3_19 < temp_s6_3) {
+                                            goto block_98;
+                                        }
+                                    } else {
+block_98:
+                                        phi_s0 += 0x14;
+                                        phi_s5_2 += 0x14;
+                                        goto loop_51;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (gPauseMenuCurrentTab == 1) {
+        temp_v0_6 = (arg0->unk3 * 0xC) + &gStatsMenuEntries;
+        func_80242D04(0x1F, arg1 + temp_v0_6->unk0, arg2 + temp_v0_6->unk4);
+    }
+}*/
+
 
 void pause_stats_init(MenuPanel* panel) {
     s32 i;
