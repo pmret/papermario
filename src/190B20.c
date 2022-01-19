@@ -11,7 +11,7 @@ typedef struct PartnerDMAData {
     /* 0x00 */ s32 dmaStart;
     /* 0x04 */ s32 dmaEnd;
     /* 0x08 */ s32 dmaDest;
-    /* 0x0C */ ActorDesc* actorDesc;
+    /* 0x0C */ ActorBlueprint* ActorBlueprint;
     /* 0x10 */ s32 y;
 } PartnerDMAData; // size = 0x14
 
@@ -994,7 +994,7 @@ s32 bPlayerStatusTable[] = {
     STATUS_END,
 };
 
-ActorDesc bPlayerActorDesc = {
+ActorBlueprint bPlayerActorBlueprint = {
     .type = ACTOR_TYPE_PLAYER,
     .maxHP = 99,
     .statusTable = bPlayerStatusTable,
@@ -1013,7 +1013,7 @@ ActorDesc bPlayerActorDesc = {
     .statusMessageOffset = { 10, 30 },
 };
 
-ActorPartDesc bMarioParts[] = {
+ActorPartBlueprint bMarioParts[] = {
     {
         .index = 1,
         .posOffset = { 0, 0, 0 },
@@ -1097,20 +1097,20 @@ s32 D_802838F8 = 0;
 
 extern PartnerDMAData D_80283F10[];
 
-extern EvtSource D_80293820;
+extern EvtScript D_80293820;
 extern f32 D_802938A4;
 extern s16 D_802938A8;
 extern EffectInstance* gDamageCountEffects[24];
 extern s32 gDamageCountTimers[24];
 extern Gfx D_80293970[];
 extern s32 D_802939C0;
-extern EvtSource D_802939C4;
-extern EvtSource D_80293A10;
-extern EvtSource D_80293A34;
-extern EvtSource D_80293A58;
-extern EvtSource D_80293A7C;
-extern EvtSource D_80293AA0;
-extern EvtSource D_80293AC4;
+extern EvtScript D_802939C4;
+extern EvtScript D_80293A10;
+extern EvtScript D_80293A34;
+extern EvtScript D_80293A58;
+extern EvtScript D_80293A7C;
+extern EvtScript D_80293AA0;
+extern EvtScript D_80293AC4;
 
 s32 func_80265CE8(u32*, s32);
 
@@ -1254,12 +1254,12 @@ void func_80263300(void) {
         s16 itemID = playerData->invItems[i];
 
         if (itemID != 0) {
-            StaticItem* staticItem = &gItemTable[itemID];
+            ItemData* ItemData = &gItemTable[itemID];
 
-            if (staticItem->typeFlags & 2) {
+            if (ItemData->typeFlags & 2) {
                 battleStatus->moveCategory = 2;
                 battleStatus->selectedItemID = playerData->invItems[i];
-                battleStatus->currentTargetListFlags = staticItem->targetFlags;
+                battleStatus->currentTargetListFlags = ItemData->targetFlags;
                 player_create_target_list(player);
 
                 if (player->targetListLength != 0) {
@@ -1317,7 +1317,7 @@ void btl_init_menu_boots(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Actor* player = battleStatus->playerActor;
-    StaticMove* move;
+    MoveData* move;
     s32 i;
     s32 moveCount;
     s32 hasAnyBadgeMoves;
@@ -1344,7 +1344,7 @@ void btl_init_menu_boots(void) {
             s16 badge = playerData->equippedBadges[i];
 
             if (badge != ITEM_NONE) {
-                StaticMove* moveTable = gMoveTable;
+                MoveData* moveTable = gMoveTable;
                 u8 moveID = gItemTable[badge].moveID;
 
                 move = &moveTable[moveID];
@@ -1414,7 +1414,7 @@ void btl_init_menu_hammer(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Actor* player = battleStatus->playerActor;
-    StaticMove* move;
+    MoveData* move;
     s32 i;
     s32 moveCount;
     s32 hasAnyBadgeMoves;
@@ -1440,7 +1440,7 @@ void btl_init_menu_hammer(void) {
         for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
             s16 badge = playerData->equippedBadges[i];
             if (badge != MOVE_NONE) {
-                StaticMove* moveTable = gMoveTable;
+                MoveData* moveTable = gMoveTable;
                 u8 moveID = gItemTable[badge].moveID;
                 move = &moveTable[moveID];
                 if (move->battleSubmenu == BATTLE_SUBMENU_HAMMER) {
@@ -1528,13 +1528,13 @@ void btl_init_menu_partner(void) {
     //  4              | Unlocked after super | Charge
     //  5              | Unlocked after ultra | Multibonk
 
-    battleStatus->submenuMoveCount = partner->staticActorData->level + 2;
+    battleStatus->submenuMoveCount = partner->actorBlueprint->level + 2;
 
     // Offsets 0,1,2
     battleStatus->submenuMoves[0] =
         playerData->currentPartner * 6
         + (MOVE_HEADBONK1 - 6)
-        + partner->staticActorData->level;
+        + partner->actorBlueprint->level;
 
     // Offsets 3,4,5
     for (i = 1; i < battleStatus->submenuMoveCount; i++) {
@@ -1546,7 +1546,7 @@ void btl_init_menu_partner(void) {
 
     hasAnyBadgeMoves = FALSE;
     for (i = 0; i < battleStatus->submenuMoveCount; i++){
-        StaticMove* move = &gMoveTable[battleStatus->submenuMoves[i]];
+        MoveData* move = &gMoveTable[battleStatus->submenuMoves[i]];
 
         fpCost = move->costFP;
         if (fpCost != 0) {
@@ -1558,7 +1558,7 @@ void btl_init_menu_partner(void) {
         }
 
         battleStatus->moveCategory = 5;
-        battleStatus->selectedItemID = partner->staticActorData->level;
+        battleStatus->selectedItemID = partner->actorBlueprint->level;
         battleStatus->currentTargetListFlags = move->flags;
         player_create_target_list(partner);
 
@@ -1873,8 +1873,8 @@ void load_player_actor(void) {
     player->unk_134 = battleStatus->unk_93++;
     player->footStepCounter = 0;
     player->flags = 0;
-    player->staticActorData = &bPlayerActorDesc;
-    player->actorType = bPlayerActorDesc.type;
+    player->actorBlueprint = &bPlayerActorBlueprint;
+    player->actorType = bPlayerActorBlueprint.type;
 
     if ((gBattleStatus.flags2 & BS_FLAGS2_40) || (gGameStatusPtr->demoFlags & 2)) {
         player->homePos.x = player->currentPos.x = -130.0f;
@@ -1904,8 +1904,8 @@ void load_player_actor(void) {
     player->scaleModifier.x = 1.0f;
     player->scaleModifier.y = 1.0f;
     player->scaleModifier.z = 1.0f;
-    player->size.x = player->staticActorData->size.x;
-    player->size.y = player->staticActorData->size.y;
+    player->size.x = player->actorBlueprint->size.x;
+    player->size.y = player->actorBlueprint->size.y;
     player->actorID = 0;
     player->healthBarPosition.x = player->currentPos.x;
     player->healthBarPosition.y = player->currentPos.y;
@@ -2077,7 +2077,7 @@ void load_partner_actor(void) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor;
-    ActorDesc* actorDesc;
+    ActorBlueprint* ActorBlueprint;
     Evt* takeTurnScript;
     s32 partCount;
     s32 currentPartner;
@@ -2094,9 +2094,9 @@ void load_partner_actor(void) {
 
     if (currentPartner != PARTNER_NONE) {
         partnerData = &D_80283F10[currentPartner];
-        actorDesc = partnerData->actorDesc;
+        ActorBlueprint = partnerData->ActorBlueprint;
 
-        ASSERT(actorDesc != NULL);
+        ASSERT(ActorBlueprint != NULL);
 
         nuPiReadRom(partnerData->dmaStart, partnerData->dmaDest, partnerData->dmaEnd - partnerData->dmaStart);
         if ((gBattleStatus.flags2 & BS_FLAGS2_40) || (gGameStatusPtr->demoFlags & 2)) {
@@ -2109,28 +2109,28 @@ void load_partner_actor(void) {
             y = partnerData->y;
             z = -10.0f;
         }
-        partCount = actorDesc->partCount;
+        partCount = ActorBlueprint->partCount;
         battleStatus->partnerActor = heap_malloc(sizeof(*partnerActor));
         partnerActor = battleStatus->partnerActor;
 
         ASSERT(partnerActor != NULL);
 
-        actorDesc->level = playerData->partners[playerData->currentPartner].level;
+        ActorBlueprint->level = playerData->partners[playerData->currentPartner].level;
         partnerActor->unk_134 = battleStatus->unk_93++;
         partnerActor->footStepCounter = 0;
-        partnerActor->staticActorData = actorDesc;
-        partnerActor->actorType = actorDesc->type;
-        partnerActor->flags = actorDesc->flags;
+        partnerActor->actorBlueprint = ActorBlueprint;
+        partnerActor->actorType = ActorBlueprint->type;
+        partnerActor->flags = ActorBlueprint->flags;
         partnerActor->homePos.x = partnerActor->currentPos.x = x;
         partnerActor->homePos.y = partnerActor->currentPos.y = y;
         partnerActor->homePos.z = partnerActor->currentPos.z = z;
         partnerActor->headOffset.x = 0;
         partnerActor->headOffset.y = 0;
         partnerActor->headOffset.z = 0;
-        partnerActor->currentHP = actorDesc->maxHP;
+        partnerActor->currentHP = ActorBlueprint->maxHP;
         partnerActor->numParts = partCount;
         partnerActor->idleScriptSource = NULL;
-        partnerActor->takeTurnScriptSource = actorDesc->script;
+        partnerActor->takeTurnScriptSource = ActorBlueprint->script;
         partnerActor->onHitScriptSource = NULL;
         partnerActor->onTurnChanceScriptSource = NULL;
         partnerActor->idleScript = NULL;
@@ -2153,8 +2153,8 @@ void load_partner_actor(void) {
         partnerActor->scaleModifier.y = 1.0f;
         partnerActor->scaleModifier.z = 1.0f;
         partnerActor->unk_19A = 0;
-        partnerActor->size.x = actorDesc->size.x;
-        partnerActor->size.y = actorDesc->size.y;
+        partnerActor->size.x = ActorBlueprint->size.x;
+        partnerActor->size.y = ActorBlueprint->size.y;
         partnerActor->healthBarPosition.x = partnerActor->homePos.x;
         partnerActor->healthBarPosition.y = partnerActor->homePos.y;
         partnerActor->healthBarPosition.z = partnerActor->homePos.z;
@@ -2168,7 +2168,7 @@ void load_partner_actor(void) {
         partnerActor->unk_197 = 0;
         partnerActor->renderMode = RENDER_MODE_ALPHATEST;
         partnerActor->actorID = ACTOR_PARTNER;
-        partnerActor->statusTable = actorDesc->statusTable;
+        partnerActor->statusTable = ActorBlueprint->statusTable;
         partnerActor->debuff = 0;
         partnerActor->debuffDuration = 0;
         partnerActor->staticStatus = 0;
@@ -2206,16 +2206,16 @@ void load_partner_actor(void) {
         ASSERT(part != NULL);
 
         for (i = 0; i < partCount; i++) {
-            ActorPartDesc* actorPartDesc = &actorDesc->partsData[i];
+            ActorPartBlueprint* ActorPartBlueprint = &ActorBlueprint->partsData[i];
             part->decorationTable = NULL;
-            part->staticData = actorPartDesc;
+            part->staticData = ActorPartBlueprint;
 
-            part->flags = actorPartDesc->flags | ACTOR_PART_FLAG_4;
+            part->flags = ActorPartBlueprint->flags | ACTOR_PART_FLAG_4;
             part->targetFlags = 0;
 
-            part->partOffsetFloat.x = part->partOffset.x = actorPartDesc->posOffset.x;
-            part->partOffsetFloat.y = part->partOffset.y = actorPartDesc->posOffset.y;
-            part->partOffsetFloat.z = part->partOffset.z = actorPartDesc->posOffset.z;
+            part->partOffsetFloat.x = part->partOffset.x = ActorPartBlueprint->posOffset.x;
+            part->partOffsetFloat.y = part->partOffset.y = ActorPartBlueprint->posOffset.y;
+            part->partOffsetFloat.z = part->partOffset.z = ActorPartBlueprint->posOffset.z;
 
             part->visualOffset.x = 0;
             part->visualOffset.y = 0;
@@ -2223,16 +2223,16 @@ void load_partner_actor(void) {
             part->absolutePosition.x = 0.0f;
             part->absolutePosition.y = 0.0f;
             part->absolutePosition.z = 0.0f;
-            part->defenseTable = actorPartDesc->defenseTable;
-            part->idleAnimations = actorPartDesc->idleAnimations;
-            part->eventFlags = actorPartDesc->eventFlags;
-            part->partFlags3 = actorPartDesc->elementImmunityFlags;
-            part->opacity = actorPartDesc->opacity;
+            part->defenseTable = ActorPartBlueprint->defenseTable;
+            part->idleAnimations = ActorPartBlueprint->idleAnimations;
+            part->eventFlags = ActorPartBlueprint->eventFlags;
+            part->partFlags3 = ActorPartBlueprint->elementImmunityFlags;
+            part->opacity = ActorPartBlueprint->opacity;
             part->size.y = partnerActor->size.y;
             part->size.x = partnerActor->size.x;
             part->yaw = 0.0f;
-            part->targetOffset.x = actorPartDesc->targetOffset.x;
-            part->targetOffset.y = actorPartDesc->targetOffset.y;
+            part->targetOffset.x = ActorPartBlueprint->targetOffset.x;
+            part->targetOffset.y = ActorPartBlueprint->targetOffset.y;
             part->unk_70 = 0;
             part->rotationPivotOffset.x = 0;
             part->rotationPivotOffset.y = 0;
@@ -2330,7 +2330,7 @@ void load_partner_actor(void) {
 Actor* create_actor(Formation formation) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* actor;
-    ActorDesc* formationActor;
+    ActorBlueprint* formationActor;
     ActorPart* part;
     ActorPartDesc* partDesc;
     Evt* takeTurnScript;
@@ -2364,7 +2364,7 @@ Actor* create_actor(Formation formation) {
 
     actor->unk_134 = battleStatus->unk_93++;
     actor->footStepCounter = 0;
-    actor->staticActorData = formationActor;
+    actor->actorBlueprint = formationActor;
     actor->actorType = formationActor->type;
     actor->flags = formationActor->flags;
     actor->homePos.x = actor->currentPos.x = x;

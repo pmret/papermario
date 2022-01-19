@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_hos_hos_02
 
-EvtSource N(beforeBattle_802258E0) = {
+EvtScript N(beforeBattle_802258E0) = {
     EVT_THREAD
         EVT_CALL(SetTexPanner, 21, 1)
         EVT_CALL(SetTexPanner, 22, 1)
@@ -87,7 +87,7 @@ EvtSource N(beforeBattle_802258E0) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_80225E20) = {
+EvtScript N(afterBattle_80225E20) = {
     EVT_RETURN
     EVT_END
 };

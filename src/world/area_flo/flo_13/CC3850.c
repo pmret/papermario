@@ -32,7 +32,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_13_tattle },
 };
 
-EvtSource N(802436D0) = {
+EvtScript N(802436D0) = {
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_IF_LT(EVT_VAR(0), -500)
         EVT_GOTO(10)
@@ -70,19 +70,19 @@ EvtSource N(802436D0) = {
     EVT_END
 };
 
-EvtSource N(802438B0) = {
+EvtScript N(802438B0) = {
     EVT_EXEC(N(802436D0))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(802438CC) = {
+EvtScript N(802438CC) = {
     EVT_CALL(SetMusicTrack, 0, SONG_NEW_PARTNER, 0, 8)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(802438F8) = {
+EvtScript N(802438F8) = {
     EVT_CALL(FadeOutMusic, 0, 500)
     EVT_WAIT_FRAMES(15)
     EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
@@ -94,13 +94,13 @@ static s32 N(pad_3944)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80243950) = {
+EvtScript N(80243950) = {
     EVT_CALL(ModifyColliderFlags, 0, 14, 0x7FFFFE00)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeItemEntity, ITEM_MEGA_SMASH, -61, 60, -85, 17, EVT_SAVE_FLAG(1385))
     EVT_CALL(MakeItemEntity, ITEM_SHOOTING_STAR, 128, 0, 157, 17, EVT_SAVE_FLAG(1386))
     EVT_IF_EQ(EVT_SAVE_FLAG(1385), 0)
@@ -117,7 +117,7 @@ static s32 N(pad_3A3C) = {
     0x00000000,
 };
 
-EvtSource N(80243A40) = {
+EvtScript N(80243A40) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -158,18 +158,18 @@ EvtSource N(80243A40) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_80243CEC) = EXIT_WALK_SCRIPT(60,  0, "flo_14",  1);
+EvtScript N(exitWalk_80243CEC) = EXIT_WALK_SCRIPT(60,  0, "flo_14",  1);
 
-EvtSource N(exitWalk_80243D48) = EXIT_WALK_SCRIPT(60,  1, "flo_15",  0);
+EvtScript N(exitWalk_80243D48) = EXIT_WALK_SCRIPT(60,  1, "flo_15",  0);
 
-EvtSource N(80243DA4) = {
+EvtScript N(80243DA4) = {
     EVT_BIND_TRIGGER(N(exitWalk_80243D48), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_80243CEC), TRIGGER_FLOOR_ABOVE, 4, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
@@ -249,7 +249,7 @@ NpcAISettings N(npcAISettings_80244144) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80244174) = {
+EvtScript N(npcAI_80244174) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 5, -650)
     EVT_CALL(SetSelfVar, 6, 30)
@@ -281,7 +281,7 @@ NpcAISettings N(npcAISettings_80244210) = {
     .unk_2C = 3,
 };
 
-EvtSource N(npcAI_80244240) = {
+EvtScript N(npcAI_80244240) = {
     EVT_CALL(SetSelfVar, 2, 3)
     EVT_CALL(SetSelfVar, 3, 18)
     EVT_CALL(SetSelfVar, 5, 3)
@@ -291,7 +291,7 @@ EvtSource N(npcAI_80244240) = {
     EVT_END
 };
 
-EvtSource N(802442B0) = {
+EvtScript N(802442B0) = {
     EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
@@ -335,7 +335,7 @@ Vec3f N(vectorList_80244420)[] = {
     { -390.0, 300.0, 45.0 },
 };
 
-EvtSource N(8024445C) = {
+EvtScript N(8024445C) = {
     EVT_CALL(GetNpcPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_LABEL(0)
     EVT_CALL(GetNpcPos, 0, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
@@ -353,7 +353,7 @@ EvtSource N(8024445C) = {
     EVT_END
 };
 
-EvtSource N(80244560) = {
+EvtScript N(80244560) = {
     EVT_CALL(GetNpcPos, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_LABEL(0)
     EVT_CALL(GetNpcPos, 1, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
@@ -375,7 +375,7 @@ EvtSource N(80244560) = {
     EVT_END
 };
 
-EvtSource N(802446AC) = {
+EvtScript N(802446AC) = {
     EVT_SET(EVT_MAP_VAR(10), 0)
     EVT_LOOP(0)
         EVT_LOOP(2)
@@ -407,7 +407,7 @@ EvtSource N(802446AC) = {
     EVT_END
 };
 
-EvtSource N(80244888) = {
+EvtScript N(80244888) = {
     EVT_EXEC(N(802446AC))
     EVT_CALL(SetNpcAnimation, 1, NPC_ANIM_lakilulu_Palette_00_Anim_C)
     EVT_CALL(GetNpcPos, 1, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3))
@@ -465,7 +465,7 @@ EvtSource N(80244888) = {
     EVT_END
 };
 
-EvtSource N(idle_80244BF8) = {
+EvtScript N(idle_80244BF8) = {
     EVT_IF_NE(EVT_SAVE_VAR(0), 50)
         EVT_RETURN
     EVT_END_IF
@@ -529,7 +529,7 @@ EvtSource N(idle_80244BF8) = {
     EVT_END
 };
 
-EvtSource N(80245014) = {
+EvtScript N(80245014) = {
     EVT_CALL(GetNpcPos, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(AwaitPlayerLeave, EVT_VAR(0), EVT_VAR(2), 120)
     EVT_CALL(DisablePlayerInput, TRUE)
@@ -588,7 +588,7 @@ EvtSource N(80245014) = {
     EVT_END
 };
 
-EvtSource N(80245444) = {
+EvtScript N(80245444) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT_FRAMES(30)
     EVT_CALL(SpeakToPlayer, 0, NPC_ANIM_world_lakilester_Palette_00_Anim_A, NPC_ANIM_world_lakilester_Palette_00_Anim_4, 0, MESSAGE_ID(0x11, 0x00A2))
@@ -748,7 +748,7 @@ EvtSource N(80245444) = {
     EVT_END
 };
 
-EvtSource N(defeat_80246038) = {
+EvtScript N(defeat_80246038) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -773,7 +773,7 @@ EvtSource N(defeat_80246038) = {
     EVT_END
 };
 
-EvtSource N(interact_802461C0) = {
+EvtScript N(interact_802461C0) = {
     EVT_IF_LE(EVT_SAVE_VAR(0), 53)
         EVT_CALL(SpeakToPlayer, 1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0032))
     EVT_ELSE
@@ -788,7 +788,7 @@ EvtSource N(interact_802461C0) = {
     EVT_END
 };
 
-EvtSource N(init_80246280) = {
+EvtScript N(init_80246280) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), 51)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244BF8)))
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80246038)))
@@ -797,7 +797,7 @@ EvtSource N(init_80246280) = {
     EVT_END
 };
 
-EvtSource N(init_802462D0) = {
+EvtScript N(init_802462D0) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), 58)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802461C0)))
         EVT_CALL(SetNpcCollisionSize, -1, 36, 28)
@@ -811,14 +811,14 @@ EvtSource N(init_802462D0) = {
     EVT_END
 };
 
-EvtSource N(init_80246370) = {
+EvtScript N(init_80246370) = {
     EVT_CALL(SetNpcPos, 2, 0, -1000, 0)
     EVT_CALL(SetNpcAnimation, 2, NPC_ANIM_lakilulu_Palette_00_Anim_B)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(init_802463B0) = {
+EvtScript N(init_802463B0) = {
     EVT_IF_EQ(EVT_SAVE_VAR(0), 50)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF
@@ -826,7 +826,7 @@ EvtSource N(init_802463B0) = {
     EVT_END
 };
 
-EvtSource N(init_802463E8) = {
+EvtScript N(init_802463E8) = {
     EVT_IF_EQ(EVT_SAVE_VAR(0), 50)
         EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_IF

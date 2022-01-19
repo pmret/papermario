@@ -16,7 +16,7 @@ ApiStatus N(SetEntityFlags100000)(Evt* script, s32 isInitialCall);
 ApiStatus N(GetEntityPosition)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80244988);
-extern EvtSource N(80243608);
-extern EvtSource N(80243740);
-extern EvtSource N(main);
-extern EvtSource N(makeEntities);
+extern EvtScript N(80243608);
+extern EvtScript N(80243740);
+extern EvtScript N(main);
+extern EvtScript N(makeEntities);

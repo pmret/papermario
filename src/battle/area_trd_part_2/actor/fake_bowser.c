@@ -6,24 +6,24 @@
 
 #define NAMESPACE b_area_trd_part_2_fake_bowser
 
-extern EvtSource b_area_trd_part_2_green_ninja_koopa_802257A8;
-extern EvtSource b_area_trd_part_2_red_ninja_koopa_80228748;
-extern EvtSource b_area_trd_part_2_blue_ninja_koopa_8022B6E8;
-extern EvtSource b_area_trd_part_2_yellow_ninja_koopa_8022E688;
+extern EvtScript b_area_trd_part_2_green_ninja_koopa_802257A8;
+extern EvtScript b_area_trd_part_2_red_ninja_koopa_80228748;
+extern EvtScript b_area_trd_part_2_blue_ninja_koopa_8022B6E8;
+extern EvtScript b_area_trd_part_2_yellow_ninja_koopa_8022E688;
 
-extern EvtSource N(init_8021A968);
-extern EvtSource N(handleEvent_8021E6F0);
-extern EvtSource N(handleEvent_802242FC);
-extern EvtSource N(idle_8021D508);
-extern EvtSource N(idle_802239BC);
-extern EvtSource N(nextTurn_8021F410);
-extern EvtSource N(nextTurn_80225438);
-extern EvtSource N(takeTurn_8021EC98);
-extern EvtSource N(takeTurn_80224D84);
-extern EvtSource N(8021E3A0);
-extern EvtSource N(8021F630);
-extern EvtSource N(80222C44);
-extern EvtSource N(80223870);
+extern EvtScript N(init_8021A968);
+extern EvtScript N(handleEvent_8021E6F0);
+extern EvtScript N(handleEvent_802242FC);
+extern EvtScript N(idle_8021D508);
+extern EvtScript N(idle_802239BC);
+extern EvtScript N(nextTurn_8021F410);
+extern EvtScript N(nextTurn_80225438);
+extern EvtScript N(takeTurn_8021EC98);
+extern EvtScript N(takeTurn_80224D84);
+extern EvtScript N(8021E3A0);
+extern EvtScript N(8021F630);
+extern EvtScript N(80222C44);
+extern EvtScript N(80223870);
 
 // TODO: This pad is here due to rodata having subalign 4, while bss is 0x10 aligned as normal.
 BSS static char pad;
@@ -76,7 +76,7 @@ s32 N(idleAnimations_8021A73C)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021A748)[] = {
+ActorPartBlueprint N(partsTable_8021A748)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -211,7 +211,7 @@ ActorPartDesc N(partsTable_8021A748)[] = {
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = ACTOR_FLAG_NO_SHADOW,
     .type = ACTOR_TYPE_FAKE_BOWSER,
     .level = 0,
@@ -241,7 +241,7 @@ s32 N(D_8021A8FC_48BAEC)[] = {
     0x0000002B, 0x0000002D, 0x0000FFFF,
 };
 
-EvtSource N(init_8021A968) = {
+EvtScript N(init_8021A968) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021EC98)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021D508)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021E6F0)))
@@ -289,7 +289,7 @@ s32 N(D_8021AAC4_48BCB4)[] = {
 };
 
 
-EvtSource N(8021ABE4) = {
+EvtScript N(8021ABE4) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_USE_FBUF(EVT_ADDR(N(D_8021AAC4_48BCB4)))
     EVT_LABEL(0)
@@ -325,7 +325,7 @@ s32 N(D_8021ACCC_48BEBC)[] = {
     255,        255,        255
 };
 
-EvtSource N(8021AD68) = {
+EvtScript N(8021AD68) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_USE_FBUF(EVT_ADDR(N(D_8021ACCC_48BEBC)))
     EVT_LABEL(0)
@@ -372,7 +372,7 @@ s32 N(D_8021AE50_48C040)[] = {
     255,        255,        255
 };
 
-EvtSource N(8021AF70) = {
+EvtScript N(8021AF70) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_USE_FBUF(EVT_ADDR(N(D_8021AE50_48C040)))
     EVT_LABEL(0)
@@ -401,7 +401,7 @@ EvtSource N(8021AF70) = {
     EVT_END
 };
 
-EvtSource N(8021B0E4) = {
+EvtScript N(8021B0E4) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(N(StartRumbleWithParams), 256, 30)
     EVT_THREAD
@@ -453,7 +453,7 @@ EvtSource N(8021B0E4) = {
     EVT_CALL(PlaySoundAtModel, 31, 482, 0)
     EVT_THREAD
         EVT_SET_GROUP(0)
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.7001953125))
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.7))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 70, 20)
     EVT_WAIT_FRAMES(20)
@@ -468,12 +468,12 @@ EvtSource N(8021B0E4) = {
     EVT_CALL(N(StartRumbleWithParams), 60, 20)
     EVT_THREAD
         EVT_SET_GROUP(0)
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.6005859375))
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.6))
     EVT_END_THREAD
     EVT_WAIT_FRAMES(20)
     EVT_THREAD
         EVT_SET_GROUP(0)
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.30078125))
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.3))
     EVT_END_THREAD
     EVT_CALL(N(StartRumbleWithParams), 30, 20)
     EVT_RETURN
@@ -507,7 +507,7 @@ s32 N(intTable_8021B5D0)[] = {
     255, 255, 255,
 };
 
-EvtSource N(8021B6F0) = {
+EvtScript N(8021B6F0) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_USE_BUF(EVT_ADDR(N(intTable_8021B5D0)))
     EVT_LABEL(0)
@@ -542,7 +542,7 @@ s32 N(intTable_8021B7D4)[] = {
     255, 255, 255,
 };
 
-EvtSource N(8021B864) = {
+EvtScript N(8021B864) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_USE_BUF(EVT_ADDR(N(intTable_8021B7D4)))
     EVT_LABEL(0)
@@ -589,7 +589,7 @@ s32 N(intTable_8021B948)[] = {
     255, 255, 255,
 };
 
-EvtSource N(8021BA68) = {
+EvtScript N(8021BA68) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_USE_BUF(EVT_ADDR(N(intTable_8021B948)))
     EVT_LABEL(0)
@@ -639,7 +639,7 @@ s32 N(intTable_8021BB68)[] = {
     255, 255, 255,
 };
 
-EvtSource N(8021BC88) = {
+EvtScript N(8021BC88) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_USE_BUF(EVT_ADDR(N(intTable_8021BB68)))
     EVT_LABEL(0)
@@ -659,7 +659,7 @@ EvtSource N(8021BC88) = {
     EVT_END
 };
 
-EvtSource N(8021BD6C) = {
+EvtScript N(8021BD6C) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_100000, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 3, LW(0), LW(1), LW(2))
@@ -679,13 +679,13 @@ EvtSource N(8021BD6C) = {
     EVT_SUB(LW(0), 150)
     EVT_SET(LW(1), -200)
     EVT_SUB(LW(2), 200)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(0.30078125))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 3, EVT_FLOAT(0.3))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 3, LW(0), LW(1), LW(2), 80, 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(8021BF14) = {
+EvtScript N(8021BF14) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_100000, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 4, LW(0), LW(1), LW(2))
@@ -739,7 +739,7 @@ s32 N(intTable_8021C0CC)[] = {
     255, 255, 255,
 };
 
-EvtSource N(8021C1EC) = {
+EvtScript N(8021C1EC) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_USE_BUF(EVT_ADDR(N(intTable_8021C0CC)))
     EVT_LABEL(0)
@@ -786,7 +786,7 @@ s32 N(intTable_8021C2D4)[] = {
     255, 255, 255,
 };
 
-EvtSource N(8021C3F4) = {
+EvtScript N(8021C3F4) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_USE_BUF(EVT_ADDR(N(intTable_8021C2D4)))
     EVT_LABEL(0)
@@ -825,7 +825,7 @@ s32 N(intTable_8021C4F8)[] = {
     255, 255, 255,
 };
 
-EvtSource N(8021C594) = {
+EvtScript N(8021C594) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_USE_BUF(EVT_ADDR(N(intTable_8021C4F8)))
     EVT_LABEL(0)
@@ -845,7 +845,7 @@ EvtSource N(8021C594) = {
     EVT_END
 };
 
-EvtSource N(8021C67C) = {
+EvtScript N(8021C67C) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 10, ACTOR_PART_FLAG_100000, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 10, LW(0), LW(1), LW(2))
@@ -863,7 +863,7 @@ EvtSource N(8021C67C) = {
     EVT_SUB(LW(0), 50)
     EVT_SET(LW(1), -200)
     EVT_SUB(LW(2), 200)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 10, EVT_FLOAT(0.30078125))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 10, EVT_FLOAT(0.3))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 10, LW(0), LW(1), LW(2), 80, 1)
     EVT_RETURN
     EVT_END
@@ -908,7 +908,7 @@ s32 N(D_8021C7F4_48D9E4)[] = {
     255,        255,        255,
 };
 
-EvtSource N(8021C9A4) = {
+EvtScript N(8021C9A4) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_USE_FBUF(EVT_ADDR(N(D_8021C7F4_48D9E4)))
     EVT_SET(LW(15), 0)
@@ -934,7 +934,7 @@ EvtSource N(8021C9A4) = {
     EVT_END
 };
 
-EvtSource N(8021CAE4) = {
+EvtScript N(8021CAE4) = {
     EVT_CALL(GetPartRotation, ACTOR_SELF, 6, LW(2), LW(3), LW(4))
     EVT_CALL(MakeLerp, LW(4), 0, 20, 0)
     EVT_LABEL(0)
@@ -948,7 +948,7 @@ EvtSource N(8021CAE4) = {
     EVT_END
 };
 
-EvtSource N(8021CB98) = {
+EvtScript N(8021CB98) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 6, ACTOR_PART_FLAG_100000, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 6, LW(0), LW(1), LW(2))
@@ -969,13 +969,13 @@ EvtSource N(8021CB98) = {
     EVT_SUB(LW(0), 0)
     EVT_SET(LW(1), -200)
     EVT_ADD(LW(2), 100)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 6, EVT_FLOAT(0.6005859375))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 6, EVT_FLOAT(0.6))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 6, LW(0), LW(1), LW(2), 80, 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(8021CD50) = {
+EvtScript N(8021CD50) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 11, ACTOR_PART_FLAG_100000, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 11, LW(0), LW(1), LW(2))
@@ -985,7 +985,7 @@ EvtSource N(8021CD50) = {
     EVT_SUB(LW(0), 0)
     EVT_SET(LW(1), -200)
     EVT_SUB(LW(2), 200)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 11, EVT_FLOAT(0.400390625))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 11, EVT_FLOAT(0.4))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 11, LW(0), LW(1), LW(2), 80, 1)
     EVT_RETURN
     EVT_END
@@ -1013,7 +1013,7 @@ s32 N(D_8021CE68_48E058)[] = {
     255,        255,        255
 };
 
-EvtSource N(8021CF4C) = {
+EvtScript N(8021CF4C) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_USE_FBUF(EVT_ADDR(N(D_8021CE68_48E058)))
     EVT_LABEL(0)
@@ -1034,7 +1034,7 @@ EvtSource N(8021CF4C) = {
     EVT_END
 };
 
-EvtSource N(8021D054) = {
+EvtScript N(8021D054) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 8, ACTOR_PART_FLAG_100000, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 8, LW(0), LW(1), LW(2))
@@ -1052,13 +1052,13 @@ EvtSource N(8021D054) = {
     EVT_SUB(LW(0), 150)
     EVT_SET(LW(1), -200)
     EVT_ADD(LW(2), 100)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 8, EVT_FLOAT(0.30078125))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 8, EVT_FLOAT(0.3))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 8, LW(0), LW(1), LW(2), 80, 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(8021D1CC) = {
+EvtScript N(8021D1CC) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 9, ACTOR_PART_FLAG_100000, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 9, LW(0), LW(1), LW(2))
@@ -1076,14 +1076,14 @@ EvtSource N(8021D1CC) = {
     EVT_SUB(LW(0), 50)
     EVT_SET(LW(1), -200)
     EVT_SUB(LW(2), 100)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 9, EVT_FLOAT(0.30078125))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 9, EVT_FLOAT(0.3))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 9, LW(0), LW(1), LW(2), 80, 1)
     EVT_WAIT_FRAMES(100)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(8021D350) = {
+EvtScript N(8021D350) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 7, ACTOR_PART_FLAG_100000, 1)
     EVT_CALL(GetPartPos, ACTOR_SELF, 7, LW(0), LW(1), LW(2))
@@ -1104,13 +1104,13 @@ EvtSource N(8021D350) = {
     EVT_SUB(LW(0), 0)
     EVT_SET(LW(1), -200)
     EVT_ADD(LW(2), 200)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 7, EVT_FLOAT(0.30078125))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 7, EVT_FLOAT(0.3))
     EVT_CALL(JumpPartTo, ACTOR_SELF, 7, LW(0), LW(1), LW(2), 80, 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(idle_8021D508) = {
+EvtScript N(idle_8021D508) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_SET(LW(10), 0)
     EVT_LABEL(0)
@@ -1295,7 +1295,7 @@ EvtSource N(idle_8021D508) = {
     EVT_END
 };
 
-EvtSource N(8021E3A0) = {
+EvtScript N(8021E3A0) = {
     EVT_DIV(LW(10), 4)
     EVT_ADD(LW(10), 1)
     EVT_CALL(RandInt, LW(10), LW(3))
@@ -1332,7 +1332,7 @@ EvtSource N(8021E3A0) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8021E6F0) = {
+EvtScript N(handleEvent_8021E6F0) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -1412,7 +1412,7 @@ EvtSource N(handleEvent_8021E6F0) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_8021EC98) = {
+EvtScript N(takeTurn_8021EC98) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -1532,7 +1532,7 @@ EvtSource N(takeTurn_8021EC98) = {
     EVT_END
 };
 
-EvtSource N(nextTurn_8021F410) = {
+EvtScript N(nextTurn_8021F410) = {
     EVT_USE_ARRAY(D_80235FC0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetBattlePhase, LW(0))
@@ -1575,13 +1575,13 @@ ApiStatus func_80218350_4B1540(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource N(8021F630) = {
+EvtScript N(8021F630) = {
     EVT_CALL(UseIdleAnimation, ACTOR_ENEMY0, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_ENEMY0, 0)
     EVT_CALL(SetActorPos, ACTOR_ENEMY0, 100, 0, 10)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, NPC_ANIM_koopa_bros_Palette_03_Anim_1C)
     EVT_THREAD
-        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY0, EVT_FLOAT(0.400390625))
+        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY0, EVT_FLOAT(0.4))
         EVT_CALL(SetActorSounds, ACTOR_ENEMY0, 2, 0, 0)
         EVT_CALL(SetGoalPos, ACTOR_ENEMY0, -300, 250, 0)
         EVT_CALL(JumpToGoal, ACTOR_ENEMY0, 50, FALSE, TRUE, FALSE)
@@ -1591,7 +1591,7 @@ EvtSource N(8021F630) = {
     EVT_CALL(SetActorPos, ACTOR_ENEMY1, 100, 0, 10)
     EVT_CALL(SetAnimation, ACTOR_ENEMY1, 1, NPC_ANIM_koopa_bros_Palette_02_Anim_1C)
     EVT_THREAD
-        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY1, EVT_FLOAT(0.400390625))
+        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY1, EVT_FLOAT(0.4))
         EVT_CALL(SetActorSounds, ACTOR_ENEMY1, 2, 0, 0)
         EVT_CALL(SetGoalPos, ACTOR_ENEMY1, -200, 250, 0)
         EVT_CALL(JumpToGoal, ACTOR_ENEMY1, 50, FALSE, TRUE, FALSE)
@@ -1601,7 +1601,7 @@ EvtSource N(8021F630) = {
     EVT_CALL(SetActorPos, ACTOR_ENEMY2, 100, 0, 10)
     EVT_CALL(SetAnimation, ACTOR_ENEMY2, 1, NPC_ANIM_koopa_bros_Palette_00_Anim_1C)
     EVT_THREAD
-        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY2, EVT_FLOAT(0.400390625))
+        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY2, EVT_FLOAT(0.4))
         EVT_CALL(SetActorSounds, ACTOR_ENEMY2, 2, 0, 0)
         EVT_CALL(SetGoalPos, ACTOR_ENEMY2, 0, 250, 0)
         EVT_CALL(JumpToGoal, ACTOR_ENEMY2, 50, FALSE, TRUE, FALSE)
@@ -1611,7 +1611,7 @@ EvtSource N(8021F630) = {
     EVT_CALL(SetActorPos, ACTOR_ENEMY3, 100, 0, 10)
     EVT_CALL(SetAnimation, ACTOR_ENEMY3, 1, NPC_ANIM_koopa_bros_Palette_01_Anim_1C)
     EVT_THREAD
-        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY3, EVT_FLOAT(0.400390625))
+        EVT_CALL(SetActorJumpGravity, ACTOR_ENEMY3, EVT_FLOAT(0.4))
         EVT_CALL(SetActorSounds, ACTOR_ENEMY3, 2, 0, 0)
         EVT_CALL(SetGoalPos, ACTOR_ENEMY3, 150, 250, 0)
         EVT_CALL(JumpToGoal, ACTOR_ENEMY3, 50, FALSE, TRUE, FALSE)
@@ -1771,7 +1771,7 @@ ApiStatus func_8021837C_4B156C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource N(80220588) = {
+EvtScript N(80220588) = {
     EVT_IF_EQ(LW(2), 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, 5, LW(0))
     EVT_END_IF
@@ -1880,7 +1880,7 @@ EvtSource N(80220588) = {
                 EVT_CASE_EQ(ACTOR_ENEMY3)
                     EVT_CALL(SetAnimation, LW(10), 1, NPC_ANIM_koopa_bros_Palette_01_Anim_11)
             EVT_END_SWITCH
-            EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6005859375))
+            EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, LW(10), 20, FALSE, FALSE, FALSE)
             EVT_CALL(func_8021837C_4B156C, LW(10))
             EVT_CALL(PlaySoundAtActor, LW(10), 0x3E9)
@@ -2030,7 +2030,7 @@ EvtSource N(80220588) = {
                     EVT_CASE_EQ(ACTOR_ENEMY3)
                         EVT_CALL(SetAnimation, LW(10), 1, NPC_ANIM_koopa_bros_Palette_01_Anim_11)
                 EVT_END_SWITCH
-                EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6005859375))
+                EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6))
                 EVT_CALL(JumpToGoal, LW(10), 20, FALSE, FALSE, FALSE)
                 EVT_CALL(func_8021837C_4B156C, LW(10))
                 EVT_CALL(PlaySoundAtActor, LW(10), 0x3E9)
@@ -2096,7 +2096,7 @@ EvtSource N(80220588) = {
                     EVT_CASE_EQ(ACTOR_ENEMY3)
                         EVT_CALL(SetAnimation, LW(10), 1, NPC_ANIM_koopa_bros_Palette_01_Anim_11)
                 EVT_END_SWITCH
-                EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6005859375))
+                EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6))
                 EVT_CALL(JumpToGoal, LW(10), 20, FALSE, FALSE, FALSE)
                 EVT_CALL(func_8021837C_4B156C, LW(10))
                 EVT_CALL(PlaySoundAtActor, LW(10), 0x3E9)
@@ -2124,7 +2124,7 @@ EvtSource N(80220588) = {
     EVT_END
 };
 
-EvtSource N(80221DB4) = {
+EvtScript N(80221DB4) = {
     EVT_IF_EQ(LW(2), 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, 5, LW(0))
     EVT_END_IF
@@ -2223,7 +2223,7 @@ EvtSource N(80221DB4) = {
                 EVT_CASE_EQ(ACTOR_ENEMY3)
                     EVT_CALL(SetAnimation, LW(10), 1, NPC_ANIM_koopa_bros_Palette_01_Anim_11)
             EVT_END_SWITCH
-            EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6005859375))
+            EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, LW(10), 20, FALSE, FALSE, FALSE)
             EVT_CALL(func_8021837C_4B156C, LW(10))
             EVT_CALL(PlaySoundAtActor, LW(10), 0x3E9)
@@ -2305,7 +2305,7 @@ EvtSource N(80221DB4) = {
                 EVT_CASE_EQ(ACTOR_ENEMY3)
                     EVT_CALL(SetAnimation, LW(10), 1, NPC_ANIM_koopa_bros_Palette_01_Anim_11)
             EVT_END_SWITCH
-            EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6005859375))
+            EVT_CALL(SetActorJumpGravity, LW(10), EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, LW(10), 20, FALSE, FALSE, FALSE)
             EVT_CALL(func_8021837C_4B156C, LW(10))
             EVT_CALL(PlaySoundAtActor, LW(10), 0x3E9)
@@ -2342,7 +2342,7 @@ EvtSource N(80221DB4) = {
     EVT_END
 };
 
-EvtSource N(80222C44) = {
+EvtScript N(80222C44) = {
     EVT_SET(LW(10), 0)
     EVT_CALL(PlayerCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
@@ -2419,7 +2419,7 @@ EvtSource N(80222C44) = {
     EVT_END
 };
 
-EvtSource N(802230E8) = {
+EvtScript N(802230E8) = {
     EVT_SET(LW(10), 0)
     EVT_CALL(PlayerCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
@@ -2501,7 +2501,7 @@ EvtSource N(802230E8) = {
     EVT_END
 };
 
-EvtSource N(802235E0) = {
+EvtScript N(802235E0) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LW(0))
     EVT_IF_EQ(LW(0), 2)
         EVT_RETURN
@@ -2522,7 +2522,7 @@ EvtSource N(802235E0) = {
     EVT_END
 };
 
-EvtSource N(80223718) = {
+EvtScript N(80223718) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 3)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
     EVT_IF_NE(LW(0), EVENT_BURN_HIT)
@@ -2544,7 +2544,7 @@ EvtSource N(80223718) = {
     EVT_END
 };
 
-EvtSource N(80223870) = {
+EvtScript N(80223870) = {
     EVT_CALL(ActorExists, ACTOR_ENEMY0, LW(0))
     EVT_IF_EQ(LW(0), TRUE)
         EVT_EXEC_GET_TID(b_area_trd_part_2_green_ninja_koopa_802257A8, LW(1))
@@ -2571,7 +2571,7 @@ EvtSource N(80223870) = {
     EVT_END
 };
 
-EvtSource N(idle_802239BC) = {
+EvtScript N(idle_802239BC) = {
     EVT_LABEL(0)
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LW(0))
     EVT_IF_NE(LW(0), 2)
@@ -2726,7 +2726,7 @@ EvtSource N(idle_802239BC) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_802242FC) = {
+EvtScript N(handleEvent_802242FC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
     EVT_SWITCH(LW(0))
@@ -2893,7 +2893,7 @@ EvtSource N(handleEvent_802242FC) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_80224D84) = {
+EvtScript N(takeTurn_80224D84) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LW(0))
     EVT_SWITCH(LW(0))
@@ -3005,7 +3005,7 @@ EvtSource N(takeTurn_80224D84) = {
     EVT_END
 };
 
-EvtSource N(nextTurn_80225438) = {
+EvtScript N(nextTurn_80225438) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LW(0))
     EVT_CALL(SetEnemyHP, ACTOR_SELF, LW(0))

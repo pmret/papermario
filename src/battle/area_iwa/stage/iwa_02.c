@@ -5,21 +5,21 @@
 
 #define NAMESPACE b_area_iwa_iwa_02
 
-extern ActorDesc N(whacka);
-extern EvtSource N(init_8022176C);
-extern EvtSource N(takeTurn_80222000);
-extern EvtSource N(idle_80221828);
-extern EvtSource N(handleEvent_8022185C);
-extern EvtSource N(80222050);
-extern EvtSource N(80222130);
+extern ActorBlueprint N(whacka);
+extern EvtScript N(init_8022176C);
+extern EvtScript N(takeTurn_80222000);
+extern EvtScript N(idle_80221828);
+extern EvtScript N(handleEvent_8022185C);
+extern EvtScript N(80222050);
+extern EvtScript N(80222130);
 
-EvtSource N(beforeBattle_80221590) = {
+EvtScript N(beforeBattle_80221590) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(afterBattle_802215B0) = {
+EvtScript N(afterBattle_802215B0) = {
     EVT_RETURN
     EVT_END
 };
@@ -87,7 +87,7 @@ s32 N(statusTable_80221674)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80221720)[] = {
+ActorPartBlueprint N(partsTable_80221720)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -102,7 +102,7 @@ ActorPartDesc N(partsTable_80221720)[] = {
     },
 };
 
-ActorDesc N(whacka) = {
+ActorBlueprint N(whacka) = {
     .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_40000,
     .type = ACTOR_TYPE_WHACKA,
     .level = 0,
@@ -127,7 +127,7 @@ ActorDesc N(whacka) = {
 
 #include "common/IsSaveVar123.inc.c"
 
-EvtSource N(init_8022176C) = {
+EvtScript N(init_8022176C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80222000)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_80221828)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022185C)))
@@ -141,7 +141,7 @@ EvtSource N(init_8022176C) = {
     EVT_END
 };
 
-EvtSource N(idle_80221828) = {
+EvtScript N(idle_80221828) = {
     EVT_LABEL(0)
     EVT_WAIT_FRAMES(1)
     EVT_GOTO(0)
@@ -149,7 +149,7 @@ EvtSource N(idle_80221828) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8022185C) = {
+EvtScript N(handleEvent_8022185C) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -299,7 +299,7 @@ EvtSource N(handleEvent_8022185C) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_80222000) = {
+EvtScript N(takeTurn_80222000) = {
     EVT_CALL(RandInt, 100, LW(0))
     EVT_IF_LE(LW(0), 100)
         EVT_EXEC_WAIT(N(80222130))
@@ -309,7 +309,7 @@ EvtSource N(takeTurn_80222000) = {
     EVT_END
 };
 
-EvtSource N(80222050) = {
+EvtScript N(80222050) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2073)
     EVT_THREAD
@@ -325,7 +325,7 @@ EvtSource N(80222050) = {
     EVT_END
 };
 
-EvtSource N(80222130) = {
+EvtScript N(80222130) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_MOLE_DIG)

@@ -7,7 +7,7 @@ extern HudElementList* gHudElements;
 s32 D_8014EFC0[] = { 0x00000000, };
 s32 D_8014EFC4[] = { 0x00011000, };
 
-HudElementAnim hud_element_defaultAnim = {
+HudScript hud_element_defaultAnim = {
     he_End,
 };
 
@@ -86,7 +86,7 @@ extern s32* D_80157964;
 extern s32* D_80158570;
 extern s32* D_80151314;
 
-INCLUDE_ASM(void, "hud_element", load_hud_element, HudElement* hudElement, const HudElementAnim* anim);
+INCLUDE_ASM(void, "hud_element", load_hud_element, HudElement* hudElement, const HudScript* anim);
 
 INCLUDE_ASM(void, "hud_element", draw_rect_hud_element,
     HudElement* hudElement,
@@ -146,7 +146,7 @@ void func_801413F8(void) {
     gCameras[3].flags &= ~0x6;
 }
 
-s32 create_hud_element(const HudElementAnim* anim) {
+s32 create_hud_element(const HudScript* anim) {
     HudElement* hudElement;
     s32 id;
 
@@ -442,7 +442,7 @@ void draw_hud_element_3(s32 id) {
     draw_hud_element(id, 2);
 }
 
-void set_hud_element_anim(s32 id, const HudElementAnim* anim) {
+void set_hud_element_anim(s32 id, const HudScript* anim) {
     HudElement* hudElement = (*gHudElements)[id & ~0x800];
 
     if (anim == NULL) {
@@ -467,7 +467,7 @@ void set_hud_element_anim(s32 id, const HudElementAnim* anim) {
     while (hud_element_update(hudElement) != 0) {}
 }
 
-HudElementAnim* get_hud_element_anim(s32 id) {
+HudScript* get_hud_element_anim(s32 id) {
     return (*gHudElements)[id & ~0x800]->anim;
 }
 

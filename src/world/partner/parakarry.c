@@ -30,7 +30,7 @@ ApiStatus func_802BD148_3196B8(Evt* script, s32 isInitialCall) {
     return partner_get_out(parakarry) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_parakarry_take_out = {
+EvtScript world_parakarry_take_out = {
     EVT_CALL(func_802BD148_3196B8)
     EVT_RETURN
     EVT_END
@@ -121,7 +121,7 @@ ApiStatus func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource world_parakarry_update = {
+EvtScript world_parakarry_update = {
     EVT_CALL(func_802BD180_3196F0)
     EVT_RETURN
     EVT_END
@@ -161,7 +161,7 @@ s32 func_802BD558_319AC8(void) {
 s32 func_802BD660_319BD0(void);
 INCLUDE_ASM(s32, "world/partner/parakarry", func_802BD660_319BD0);
 
-EvtSource world_parakarry_use_ability = {
+EvtScript world_parakarry_use_ability = {
     EVT_CALL(func_802BD660_319BD0)
     EVT_RETURN
     EVT_END
@@ -177,7 +177,7 @@ ApiStatus func_802BE8D4_31AE44(Evt* script, s32 isInitialCall) {
     return partner_put_away(parakarry) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_parakarry_put_away = {
+EvtScript world_parakarry_put_away = {
     EVT_CALL(func_802BE8D4_31AE44)
     EVT_RETURN
     EVT_END

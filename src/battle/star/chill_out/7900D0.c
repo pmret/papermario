@@ -54,7 +54,7 @@ ApiStatus func_802A163C_79070C(Evt* script, s32 isInitialCall) {
 ApiStatus func_802A16F4_7907C4(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "battle/star/chill_out/7900D0", func_802A16F4_7907C4);
 
-EvtSource N(802A18F0) = {
+EvtScript N(802A18F0) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(UseBattleCamPreset, 69)
@@ -109,7 +109,7 @@ EvtSource N(802A18F0) = {
     EVT_END
 };
 
-EvtSource N(802A1C88) = {
+EvtScript N(802A1C88) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(UseBattleCamPreset, 69)
@@ -164,7 +164,7 @@ EvtSource N(802A1C88) = {
     EVT_END
 };
 
-EvtSource N(802A2020) = {
+EvtScript N(802A2020) = {
     EVT_WAIT_FRAMES(8)
     EVT_CALL(SetForegroundModelsVisible, 0)
     EVT_CALL(func_8024E664, 73)
@@ -198,7 +198,7 @@ EvtSource N(802A2020) = {
     EVT_END
 };
 
-EvtSource N(802A222C) = {
+EvtScript N(802A222C) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(UseBattleCamPreset, 2)
@@ -269,7 +269,7 @@ EvtSource N(802A222C) = {
     EVT_END
 };
 
-EvtSource N(802A267C) = {
+EvtScript N(802A267C) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(N(UnkBackgroundFunc))
@@ -292,7 +292,7 @@ EvtSource N(802A267C) = {
     EVT_END
 };
 
-EvtSource N(usePower) = {
+EvtScript N(usePower) = {
     EVT_CALL(func_802A1518_7905E8)
     EVT_EXEC_WAIT(N(802A18F0))
     EVT_SET_CONST(LW(0), NPC_ANIM_battle_muskular_Palette_00_Anim_1)
@@ -314,23 +314,23 @@ EvtSource N(usePower) = {
             EVT_LOOP(5)
                 EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.1005859375), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.1), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.2001953125), EVT_FLOAT(0.9501953125), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.2), EVT_FLOAT(0.95), EVT_FLOAT(1.0))
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.30078125), EVT_FLOAT(0.900390625), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.3), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.3505859375), EVT_FLOAT(0.8505859375), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.35), EVT_FLOAT(0.85), EVT_FLOAT(1.0))
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.380859375), EVT_FLOAT(0.80078125), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.38), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.400390625), EVT_FLOAT(0.80078125), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.4), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.30078125), EVT_FLOAT(0.8505859375), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.3), EVT_FLOAT(0.85), EVT_FLOAT(1.0))
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.2001953125), EVT_FLOAT(0.900390625), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.2), EVT_FLOAT(0.9), EVT_FLOAT(1.0))
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.1005859375), EVT_FLOAT(0.9501953125), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.1), EVT_FLOAT(0.95), EVT_FLOAT(1.0))
                 EVT_WAIT_FRAMES(1)
             EVT_END_LOOP
             EVT_CALL(SetActorScaleModifier, LW(10), EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))

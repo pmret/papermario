@@ -180,7 +180,7 @@ ApiStatus func_80241AC4_ECB7C4(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_80241B88_ECB888(Evt* script, s32 isInitialCall) {
     s32 itemId = evt_get_variable(script, *script->ptrReadPos);
-    StaticItem* item = &gItemTable[itemId];
+    ItemData* item = &gItemTable[itemId];
 
     if (itemId == ITEM_YUMMY_MEAL) {
         script->varTable[9] = 2;

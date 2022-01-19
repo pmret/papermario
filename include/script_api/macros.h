@@ -16,7 +16,10 @@
 
 /// Decimal constant.
 /// Despite the name, "floats" are actually stored as fixed-point values.
-#define EVT_FLOAT(DOUBLE) (((Bytecode)(DOUBLE * 1024.0f) + -230000000))
+
+ // This fixes an issue with fixed point numbers not being correct. POtentially a truncation vs round difference.
+#define EVT_FLOAT_ROUND(x) ((x)>=0?(f64)((x) + 0.9):(f64)(x))
+#define EVT_FLOAT(DOUBLE) (((Bytecode)EVT_FLOAT_ROUND((DOUBLE * 1024.0f)) + -230000000))
 
 /// Address/pointer constant.
 #define EVT_ADDR(sym) (((Bytecode) &((sym))))
@@ -81,7 +84,7 @@
 /// Global Saved **Byte**. A variable saved in the save file.
 ///
 /// Used for almost all savefile state.
-#define GSW(INDEX) (((((INDEX)) - 170000000))
+#define GSW(INDEX) ((((INDEX)) - 170000000))
 
 /// User Word. A variable stored within the current thread's array.
 /// You can load an array with EVT_USE_ARRAY or temporarily allocate one with EVT_MALLOC_ARRAY, then get/set values with

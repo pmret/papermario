@@ -87,7 +87,7 @@ ApiStatus N(func_802A1418_7250F8)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(script6) = {
+EvtScript N(script6) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
     EVT_WAIT_FRAMES(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
@@ -165,7 +165,7 @@ EvtSource N(script6) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x0000009B)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(InitTargetIterator)

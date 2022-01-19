@@ -522,6 +522,7 @@ enum SoundIDs {
     SOUND_HIT_BLOCK                 = 0x0000014E,
     SOUND_SEARCH_BUSH               = 0x00000153,
     SOUND_162                       = 0x00000162,
+    SOUND_ENTER_PIPE                = 0x00000163,
     SOUND_SMASH_GOOMNUT_TREE        = 0x00000165,
     SOUND_167                       = 0x00000167,
     SOUND_172                       = 0x00000172,
@@ -1171,6 +1172,7 @@ enum Phases {
     PHASE_FIRST_STRIKE              = 1,
     PHASE_RUN_AWAY_START            = 3,
     PHASE_RUN_AWAY_RESET            = 4,
+    PHASE_5                         = 5,
     PHASE_USE_DEFEND                = 6,
     PHASE_RUN_AWAY_FAIL             = 7,
     PHASE_USE_LIFE_SHROOM           = 8,
@@ -1276,6 +1278,7 @@ enum Events {
     EVENT_30                          = 0x00000030,
     EVENT_RECOVER_STATUS              = 0x00000031,
     EVENT_32                          = 0x00000032,
+    EVENT_33                          = 0x00000033,
     EVENT_34                          = 0x00000034,
     EVENT_END_FIRST_STRIKE            = 0x00000035,
     EVENT_LUCKY                       = 0x00000037,
@@ -1545,7 +1548,57 @@ enum EntityTypes {
     ENTITY_TYPE_MUNCHLESIA_RESET2       =   0x4A
 };
 
-enum Triggers {
+// Entity
+enum EntityFlags {
+    ENTITY_FLAGS_HIDDEN                                       = 0x00000001,
+    ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1                     = 0x00000002,
+    ENTITY_FLAGS_HAS_DYNAMIC_SHADOW                           = 0x00000004,
+    ENTITY_FLAGS_HAS_ANIMATED_MODEL                           = 0x00000008,
+    ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX                 = 0x00000010,
+    ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX          = 0x00000020,
+    ENTITY_FLAGS_CONTINUOUS_COLLISION                         = 0x00000040,
+    ENTITY_FLAGS_80                                           = 0x00000080,
+    ENTITY_FLAGS_100                                          = 0x00000100,
+    ENTITY_FLAGS_SET_SHADOW_FLAG200                           = 0x00000200,
+    ENTITY_FLAGS_400                                          = 0x00000400,
+    ENTITY_FLAGS_SQUARE_SHADOW                                = 0x00000800,
+    ENTITY_FLAGS_SHOWS_INSPECT_PROMPT                         = 0x00001000,
+    ENTITY_FLAGS_ALWAYS_FACE_CAMERA                           = 0x00002000,
+    ENTITY_FLAGS_4000                                         = 0x00004000,
+    ENTITY_FLAGS_8000                                         = 0x00008000,
+    ENTITY_FLAGS_DETECTED_COLLISION                           = 0x00010000,
+    ENTITY_FLAGS_BLOCK_BEING_HIT                              = 0x00020000,
+    ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2                     = 0x00040000,
+    ENTITY_FLAGS_IGNORE_DISTANCE_CULLING                      = 0x00080000,
+    ENTITY_FLAGS_100000                                       = 0x00100000,
+    ENTITY_FLAGS_200000                                       = 0x00200000,
+    ENTITY_FLAGS_400000                                       = 0x00400000,
+    ENTITY_FLAGS_800000                                       = 0x00800000,
+    ENTITY_FLAGS_BOUND_SCRIPT_DIRTY                           = 0x01000000,
+    ENTITY_FLAGS_2000000                                      = 0x02000000,
+    ENTITY_FLAGS_PENDING_FULL_DELETE                          = 0x04000000,
+    ENTITY_FLAGS_8000000                                      = 0x08000000,
+    ENTITY_FLAGS_10000000                                     = 0x10000000,
+    ENTITY_FLAGS_PENDING_INSTANCE_DELETE                      = 0x20000000,
+    ENTITY_FLAGS_SKIP_UPDATE                                  = 0x40000000,
+    ENTITY_FLAGS_CREATED                                      = 0x80000000,
+};
+
+enum EntityCollisionFlags {
+    ENTITY_COLLISION_FLAGS_1                                = 0x00000001,
+    ENTITY_COLLISION_FLAGS_2                                = 0x00000002,
+    ENTITY_COLLISION_FLAGS_4                                = 0x00000004,
+    ENTITY_COLLISION_FLAGS_8                                = 0x00000008,
+    ENTITY_COLLISION_FLAGS_10                               = 0x00000010,
+    ENTITY_COLLISION_FLAGS_20                               = 0x00000020,
+    ENTITY_COLLISION_FLAGS_40                               = 0x00000040,
+    ENTITY_COLLISION_FLAGS_80                               = 0x00000080
+};
+
+enum TriggerFlags {
+    TRIGGER_ACTIVE              = 0x00000001,
+    TRIGGER_ACTIVATED           = 0x00000002,
+    TRIGGER_FORCE_ACTIVATE      = 0x00000010,
     TRIGGER_WALL_PUSH           = 0x00000040,
     TRIGGER_FLOOR_TOUCH         = 0x00000080,
     TRIGGER_WALL_PRESS_A        = 0x00000100,
@@ -1553,11 +1606,15 @@ enum Triggers {
     TRIGGER_WALL_TOUCH          = 0x00000400,
     TRIGGER_FLOOR_PRESS_A       = 0x00000800,
     TRIGGER_WALL_HAMMER         = 0x00001000,
+    TRIGGER_FLAGS_2000          = 0x00002000,
+    TRIGGER_FLAGS_4000          = 0x00004000,
+    TRIGGER_FLAGS_8000          = 0x00008000,
     TRIGGER_GAME_FLAG_SET       = 0x00010000,
     TRIGGER_AREA_FLAG_SET       = 0x00020000,
     TRIGGER_CEILING_TOUCH       = 0x00040000,
     TRIGGER_FLOOR_ABOVE         = 0x00080000,
     TRIGGER_POINT_BOMB          = 0x00100000,
+    TRIGGER_SCRIPT_BOUND        = 0x01000000
 };
 
 enum Buttons {
@@ -1597,6 +1654,10 @@ enum PlayerBuffs {
 
 enum StatusFlags {
     STATUS_FLAG_1               = 0x00000001,
+    STATUS_FLAG_4               = 0x00000004,
+    STATUS_FLAG_8               = 0x00000008,
+    STATUS_FLAG_20              = 0x00000020,
+    STATUS_FLAG_40              = 0x00000040,
     STATUS_FLAG_100             = 0x00000100,
     STATUS_FLAG_200             = 0x00000200,
     STATUS_FLAG_SLEEP           = 0x00001000,
@@ -1761,6 +1822,7 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_8000                             = 0x00008000,
     PLAYER_STATUS_FLAGS_20000                            = 0x00020000,
     PLAYER_STATUS_FLAGS_40000                            = 0x00040000,
+    PLAYER_STATUS_FLAGS_800000                           = 0x00800000,
     PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
     PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
     PLAYER_STATUS_FLAGS_8000000                          = 0x08000000,
@@ -2375,42 +2437,6 @@ enum ModelFlags {
     MODEL_FLAGS_FLAG_8000               = 0x8000,
 };
 
-// DynamicEntity, Entity, ItemEntity
-enum EntityFlags {
-    ENTITY_FLAGS_HIDDEN                                       = 0x00000001,
-    ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE1                     = 0x00000002,
-    ENTITY_FLAGS_HAS_DYNAMIC_SHADOW                           = 0x00000004,
-    ENTITY_FLAGS_HAS_ANIMATED_MODEL                           = 0x00000008,
-    ENTITY_FLAGS_SKIP_UPDATE_TRANSFORM_MATRIX                 = 0x00000010,
-    ENTITY_FLAGS_SKIP_UPDATE_INVERSE_ROTATION_MATRIX          = 0x00000020,
-    ENTITY_FLAGS_CONTINUOUS_COLLISION                         = 0x00000040,
-    ENTITY_FLAGS_80                                           = 0x00000080,
-    ENTITY_FLAGS_100                                          = 0x00000100,
-    ENTITY_FLAGS_SET_SHADOW_FLAG200                           = 0x00000200,
-    ENTITY_FLAGS_400                                          = 0x00000400,
-    ENTITY_FLAGS_SQUARE_SHADOW                                = 0x00000800,
-    ENTITY_FLAGS_SHOWS_INSPECT_PROMPT                         = 0x00001000,
-    ENTITY_FLAGS_ALWAYS_FACE_CAMERA                           = 0x00002000,
-    ENTITY_FLAGS_4000                                         = 0x00004000,
-    ENTITY_FLAGS_8000                                         = 0x00008000,
-    ENTITY_FLAGS_DETECTED_COLLISION                           = 0x00010000,
-    ENTITY_FLAGS_BLOCK_BEING_HIT                              = 0x00020000,
-    ENTITY_FLAGS_DRAW_IF_CLOSE_HIDE_MODE2                     = 0x00040000,
-    ENTITY_FLAGS_IGNORE_DISTANCE_CULLING                      = 0x00080000,
-    ENTITY_FLAGS_100000                                       = 0x00100000,
-    ENTITY_FLAGS_200000                                       = 0x00200000,
-    ENTITY_FLAGS_400000                                       = 0x00400000,
-    ENTITY_FLAGS_800000                                       = 0x00800000,
-    ENTITY_FLAGS_BOUND_SCRIPT_DIRTY                           = 0x01000000,
-    ENTITY_FLAGS_2000000                                      = 0x02000000,
-    ENTITY_FLAGS_PENDING_FULL_DELETE                          = 0x04000000,
-    ENTITY_FLAGS_8000000                                      = 0x08000000,
-    ENTITY_FLAGS_10000000                                     = 0x10000000,
-    ENTITY_FLAGS_PENDING_INSTANCE_DELETE                      = 0x20000000,
-    ENTITY_FLAGS_SKIP_UPDATE                                  = 0x40000000,
-    ENTITY_FLAGS_CREATED                                      = 0x80000000,
-};
-
 enum EnemyFlags {
     ENEMY_FLAGS_1                 = 0x00000001,
     ENEMY_FLAGS_2                 = 0x00000002,
@@ -2663,7 +2689,7 @@ enum BtlCameraPreset {
     BTL_CAM_PRESET_73,
 };
 
-enum StaticMoveFlags {
+enum MoveDataFlags {
     STATIC_MOVE_FLAGS_1                 = 0x00000001,
     STATIC_MOVE_FLAGS_2                 = 0x00000002,
     STATIC_MOVE_FLAGS_4                 = 0x00000004,
@@ -2803,41 +2829,6 @@ enum ShadowFlags {
     SHADOW_FLAGS_READY_TO_DELETE   = 0x20000000,
     SHADOW_FLAGS_40000000          = 0x40000000,
     SHADOW_FLAGS_80000000          = 0x80000000,
-};
-
-enum TriggerDefinitionFlags {
-    TRIGGER_DEFINITION_FLAGS_1                 = 0x00000001,
-    TRIGGER_DEFINITION_FLAGS_2                 = 0x00000002,
-    TRIGGER_DEFINITION_FLAGS_4                 = 0x00000004,
-    TRIGGER_DEFINITION_FLAGS_8                 = 0x00000008,
-    TRIGGER_DEFINITION_FLAGS_10                = 0x00000010,
-    TRIGGER_DEFINITION_FLAGS_20                = 0x00000020,
-    TRIGGER_DEFINITION_FLAGS_40                = 0x00000040,
-    TRIGGER_DEFINITION_FLAGS_80                = 0x00000080,
-    TRIGGER_DEFINITION_FLAGS_100               = 0x00000100,
-    TRIGGER_DEFINITION_FLAGS_200               = 0x00000200,
-    TRIGGER_DEFINITION_FLAGS_400               = 0x00000400,
-    TRIGGER_DEFINITION_FLAGS_800               = 0x00000800,
-    TRIGGER_DEFINITION_FLAGS_1000              = 0x00001000,
-    TRIGGER_DEFINITION_FLAGS_2000              = 0x00002000,
-    TRIGGER_DEFINITION_FLAGS_4000              = 0x00004000,
-    TRIGGER_DEFINITION_FLAGS_8000              = 0x00008000,
-    TRIGGER_DEFINITION_FLAGS_10000             = 0x00010000,
-    TRIGGER_DEFINITION_FLAGS_20000             = 0x00020000,
-    TRIGGER_DEFINITION_FLAGS_40000             = 0x00040000,
-    TRIGGER_DEFINITION_FLAGS_80000             = 0x00080000,
-    TRIGGER_DEFINITION_FLAGS_100000            = 0x00100000,
-    TRIGGER_DEFINITION_FLAGS_200000            = 0x00200000,
-    TRIGGER_DEFINITION_FLAGS_400000            = 0x00400000,
-    TRIGGER_DEFINITION_FLAGS_800000            = 0x00800000,
-    TRIGGER_DEFINITION_FLAGS_1000000           = 0x01000000,
-    TRIGGER_DEFINITION_FLAGS_2000000           = 0x02000000,
-    TRIGGER_DEFINITION_FLAGS_4000000           = 0x04000000,
-    TRIGGER_DEFINITION_FLAGS_8000000           = 0x08000000,
-    TRIGGER_DEFINITION_FLAGS_10000000          = 0x10000000,
-    TRIGGER_DEFINITION_FLAGS_20000000          = 0x20000000,
-    TRIGGER_DEFINITION_FLAGS_40000000          = 0x40000000,
-    TRIGGER_DEFINITION_FLAGS_80000000          = 0x80000000,
 };
 
 enum ShopFlags {

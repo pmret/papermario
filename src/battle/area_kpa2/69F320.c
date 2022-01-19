@@ -64,6 +64,7 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219818_6A0A18);
 #include "common/GetItemEntityPosition.inc.c"
 #define NAMESPACE b_area_kpa2
 
+//#include "common/DisableRandomAbility.inc.c"
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219FFC_6A11FC);
 
 #define NAMESPACE dup_b_area_kpa2
@@ -108,6 +109,7 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021ABD8_6A1DD8);
 
 #include "common/GetItemEntityPosition.inc.c"
 
+//#include "common/DisableRandomAbility.inc.c"
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B3B4_6A25B4);
 
 #define NAMESPACE dup6_b_area_kpa2

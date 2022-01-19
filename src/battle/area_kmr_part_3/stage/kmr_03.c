@@ -5,7 +5,7 @@
 
 #include "world/common/clouds.inc.c"
 
-EvtSource N(beforeBattle_802326B8) = {
+EvtScript N(beforeBattle_802326B8) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_SET(LW(0), 1)
     EVT_SET(LW(2), 0)
@@ -17,7 +17,7 @@ EvtSource N(beforeBattle_802326B8) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_80232730) = {
+EvtScript N(afterBattle_80232730) = {
     EVT_RETURN
     EVT_END
 };

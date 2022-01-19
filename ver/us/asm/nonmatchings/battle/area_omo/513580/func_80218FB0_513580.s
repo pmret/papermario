@@ -20,8 +20,8 @@ glabel func_80218FB0_513580
 /* 5135BC 80218FEC 0040902D */  daddu     $s2, $v0, $zero
 /* 5135C0 80218FF0 0000A02D */  daddu     $s4, $zero, $zero
 /* 5135C4 80218FF4 2650000C */  addiu     $s0, $s2, 0xc
-/* 5135C8 80218FF8 3C138023 */  lui       $s3, %hi(D_8022DA34_528004)
-/* 5135CC 80218FFC 2673DA34 */  addiu     $s3, $s3, %lo(D_8022DA34_528004)
+/* 5135C8 80218FF8 3C138023 */  lui       $s3, %hi(b_area_omo_omo_01_8022DA34)
+/* 5135CC 80218FFC 2673DA34 */  addiu     $s3, $s3, %lo(b_area_omo_omo_01_8022DA34)
 /* 5135D0 80219000 3C014060 */  lui       $at, 0x4060
 /* 5135D4 80219004 4481A000 */  mtc1      $at, $f20
 /* 5135D8 80219008 3C118023 */  lui       $s1, %hi(D_8022DA30_528000)

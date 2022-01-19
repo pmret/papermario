@@ -3,15 +3,15 @@
 
 #define NAMESPACE b_area_kmr_part_3
 
-extern ActorDesc N(jr_troopa);
-extern ActorDesc N(egg_jr_troopa);
-extern ActorDesc N(para_jr_troopa);
-extern ActorDesc N(spiked_para_jr_troopa);
-extern ActorDesc N(mage_jr_troopa);
-extern ActorDesc N(final_jr_troopa);
-extern ActorDesc N(paragoomba1);
-extern ActorDesc N(paragoomba2);
-extern ActorDesc N(spiked_goomba);
+extern ActorBlueprint N(jr_troopa);
+extern ActorBlueprint N(egg_jr_troopa);
+extern ActorBlueprint N(para_jr_troopa);
+extern ActorBlueprint N(spiked_para_jr_troopa);
+extern ActorBlueprint N(mage_jr_troopa);
+extern ActorBlueprint N(final_jr_troopa);
+extern ActorBlueprint N(paragoomba1);
+extern ActorBlueprint N(paragoomba2);
+extern ActorBlueprint N(spiked_goomba);
 
 extern Stage N(kmr_02);
 extern Stage N(kmr_03);

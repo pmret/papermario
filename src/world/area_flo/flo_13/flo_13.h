@@ -16,4 +16,4 @@ ApiStatus N(func_802434D4_CC6CE4)(Evt* script, s32 isInitialCall);
 ApiStatus N(LoadPartyImage)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80247984);
-extern EvtSource N(main);
+extern EvtScript N(main);

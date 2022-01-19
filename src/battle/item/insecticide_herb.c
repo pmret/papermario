@@ -93,7 +93,7 @@ s32 N(modelCommandList)[] = {
     0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), &N(displayList), 0x00000002, 0x00000000,
 };
 
-EvtSource script = {
+EvtScript script = {
     EVT_SET_CONST(EVT_VAR(10), 0x00000087)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, 3)

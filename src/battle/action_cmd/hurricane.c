@@ -4,10 +4,10 @@
 #define NAMESPACE action_command_hurricane
 
 extern s32 D_80294420;
-extern HudElementAnim HudScript_BlueMeter;
-extern HudElementAnim HudScript_AButton;
-extern HudElementAnim HudScript_BButton;
-extern HudElementAnim HudScript_100pct;
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
+extern HudScript HudScript_BButton;
+extern HudScript HudScript_100pct;
 
 ApiStatus func_802A9000_42F6E0(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

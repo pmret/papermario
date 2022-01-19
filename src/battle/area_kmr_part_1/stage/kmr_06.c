@@ -6,7 +6,7 @@
 #include "world/common/clouds.inc.c"
 #include "common/UnkFogFunc.inc.c"
 
-EvtSource N(beforeBattle_80220E28) = {
+EvtScript N(beforeBattle_80220E28) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(N(UnkFogFunc))
     EVT_SET(EVT_VAR(0), 1)
@@ -19,7 +19,7 @@ EvtSource N(beforeBattle_80220E28) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_80220EAC) = {
+EvtScript N(afterBattle_80220EAC) = {
     EVT_RETURN
     EVT_END
 };

@@ -12,16 +12,16 @@ s16 D_802809F6 = -1;
 s16 D_802809F8 = 0;
 u16 D_802809FA = 0;
 
-extern HudElementAnim HudScript_HPDigit0;
-extern HudElementAnim HudScript_HPDigit1;
-extern HudElementAnim HudScript_HPDigit2;
-extern HudElementAnim HudScript_HPDigit3;
-extern HudElementAnim HudScript_HPDigit4;
-extern HudElementAnim HudScript_HPDigit5;
-extern HudElementAnim HudScript_HPDigit6;
-extern HudElementAnim HudScript_HPDigit7;
-extern HudElementAnim HudScript_HPDigit8;
-extern HudElementAnim HudScript_HPDigit9;
+extern HudScript HudScript_HPDigit0;
+extern HudScript HudScript_HPDigit1;
+extern HudScript HudScript_HPDigit2;
+extern HudScript HudScript_HPDigit3;
+extern HudScript HudScript_HPDigit4;
+extern HudScript HudScript_HPDigit5;
+extern HudScript HudScript_HPDigit6;
+extern HudScript HudScript_HPDigit7;
+extern HudScript HudScript_HPDigit8;
+extern HudScript HudScript_HPDigit9;
 
 void* bHPDigitHudScripts[] = {
     HudScript_HPDigit0, HudScript_HPDigit1, HudScript_HPDigit2, HudScript_HPDigit3, HudScript_HPDigit4, HudScript_HPDigit5, HudScript_HPDigit6, HudScript_HPDigit7, HudScript_HPDigit8, HudScript_HPDigit9, NULL, NULL, NULL,
@@ -40,12 +40,12 @@ extern s32 D_8029EFBC;
 extern s32 D_8029EFC0[10];
 extern s32 D_8029EFE8[10];
 extern s32 D_8029F010[10];
-extern HudElementAnim HudScript_HPBar[];
-extern HudElementAnim HudScript_Item_SmallStarPoint[];
-extern HudElementAnim HudScript_Item_StarPoint[];
-extern HudElementAnim HudScript_StatusSPShine[];
+extern HudScript HudScript_HPBar;
+extern HudScript HudScript_Item_SmallStarPoint;
+extern HudScript HudScript_Item_StarPoint;
+extern HudScript HudScript_StatusSPShine;
 
-EvtSource BtlPutPartnerAway = {
+EvtScript BtlPutPartnerAway = {
     EVT_CALL(DispatchEvent, 256, 62)
     EVT_CHILD_THREAD
         EVT_SETF(EVT_VAR(0), EVT_FIXED(1.0))
@@ -67,12 +67,12 @@ EvtSource BtlPutPartnerAway = {
     EVT_END
 };
 
-EvtSource BtlBringPartnerOut = {
+EvtScript BtlBringPartnerOut = {
     EVT_CHILD_THREAD
         EVT_SETF(EVT_VAR(0), EVT_FIXED(0.1))
         EVT_LOOP(20)
             EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
-            EVT_ADDF(EVT_VAR(0), EVT_FIXED(0.05078125))
+            EVT_ADDF(EVT_VAR(0), EVT_FIXED(0.05))
             EVT_WAIT_FRAMES(1)
         EVT_END_LOOP
         EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
@@ -565,7 +565,17 @@ void func_8023ED5C(void) {
     }
 }
 
-INCLUDE_ASM(s32, "16c8e0", func_8023F060);
+u16 func_8023F060(u16 arg0, s32 arg1, s32 arg2) {
+    s32 temp_lo;
+    s32 phi_v0;
+
+    temp_lo = (arg1 - (arg0)) * arg2;
+    phi_v0 = temp_lo;
+    if (temp_lo < 0) {
+        phi_v0 = temp_lo + 0xFF;
+    }
+    return (arg0 + (phi_v0 >> 8));
+}
 
 INCLUDE_ASM(s32, "16c8e0", func_8023F088);
 

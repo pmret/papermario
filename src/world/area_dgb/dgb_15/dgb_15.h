@@ -14,8 +14,8 @@ ApiStatus N(func_80241464_C50974)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc7)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80242AB0);
-extern EvtSource N(80242AD0);
-extern EvtSource N(main);
-extern EvtSource N(makeEntities);
-extern EvtSource N(npcAI_8024274C);
-extern EvtSource N(unk_80241F8C);
+extern EvtScript N(80242AD0);
+extern EvtScript N(main);
+extern EvtScript N(makeEntities);
+extern EvtScript N(npcAI_8024274C);
+extern EvtScript N(unk_80241F8C);

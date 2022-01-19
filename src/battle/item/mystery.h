@@ -17,6 +17,6 @@ typedef struct N(tempStc) {
 
 extern s32 N(D_802A227C_72D82C)[8];
 extern s32 N(D_802A229C_72D84C)[8];
-extern EvtSource N(UseItemWithEffect);
+extern EvtScript N(UseItemWithEffect);
 
 #endif

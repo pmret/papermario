@@ -27,7 +27,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_03_tattle },
 };
 
-EvtSource N(802406A0) = {
+EvtScript N(802406A0) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_IF_EQ(EVT_VAR(0), 2)
         EVT_CALL(SetMusicTrack, 0, SONG_SUNSHINE_RETURNS, 0, 8)
@@ -49,7 +49,7 @@ EvtSource N(802406A0) = {
     EVT_END
 };
 
-EvtSource N(802407C0) = {
+EvtScript N(802407C0) = {
     EVT_IF_GE(EVT_SAVE_VAR(0), 44)
         EVT_IF_EQ(EVT_SAVE_FLAG(1411), 1)
             EVT_CALL(PushSong, 137, 0)
@@ -59,7 +59,7 @@ EvtSource N(802407C0) = {
     EVT_END
 };
 
-EvtSource N(80240814) = {
+EvtScript N(80240814) = {
     EVT_IF_GE(EVT_SAVE_VAR(0), 44)
         EVT_IF_EQ(EVT_SAVE_FLAG(1411), 1)
             EVT_CALL(FadeOutMusic, 0, 250)
@@ -71,7 +71,7 @@ EvtSource N(80240814) = {
     EVT_END
 };
 
-EvtSource N(80240880) = {
+EvtScript N(80240880) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -112,18 +112,18 @@ EvtSource N(80240880) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_80240B2C) = EXIT_WALK_SCRIPT(60,  0, "flo_09",  1);
+EvtScript N(exitWalk_80240B2C) = EXIT_WALK_SCRIPT(60,  0, "flo_09",  1);
 
-EvtSource N(exitWalk_80240B88) = EXIT_WALK_SCRIPT(60,  1, "flo_22",  0);
+EvtScript N(exitWalk_80240B88) = EXIT_WALK_SCRIPT(60,  1, "flo_22",  0);
 
-EvtSource N(80240BE4) = {
+EvtScript N(80240BE4) = {
     EVT_BIND_TRIGGER(N(exitWalk_80240B2C), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_80240B88), TRIGGER_FLOOR_ABOVE, 4, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
@@ -185,14 +185,14 @@ NpcSettings N(npcSettings_80240EDC) = {
 
 s32** N(D_80240F08_CA81A8) = NULL;
 
-EvtSource N(80240F0C) = {
+EvtScript N(80240F0C) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 0)
     EVT_RETURN
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80240F3C) = {
+EvtScript N(80240F3C) = {
     EVT_CALL(ShowGotItem, EVT_VAR(0), 1, 16)
     EVT_RETURN
     EVT_RETURN
@@ -219,7 +219,7 @@ s32 N(intTable_80240FD8)[] = {
     0x0000008C,
 };
 
-EvtSource N(80240FFC) = {
+EvtScript N(80240FFC) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetNpcYaw, 0, 90)
@@ -243,13 +243,13 @@ EvtSource N(80240FFC) = {
     EVT_END
 };
 
-EvtSource N(npcAI_8024119C) = {
+EvtScript N(npcAI_8024119C) = {
     EVT_CALL(N(func_80240158_CA73F8))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(defeat_802411B8) = {
+EvtScript N(defeat_802411B8) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -262,7 +262,7 @@ EvtSource N(defeat_802411B8) = {
     EVT_END
 };
 
-EvtSource N(8024122C) = {
+EvtScript N(8024122C) = {
     EVT_CALL(GetPlayerPos, EVT_VAR(3), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(0), EVT_VAR(3))
@@ -272,7 +272,7 @@ EvtSource N(8024122C) = {
     EVT_END
 };
 
-EvtSource N(interact_802412BC) = {
+EvtScript N(interact_802412BC) = {
     EVT_EXEC_WAIT(N(802407C0))
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(44)
@@ -408,7 +408,7 @@ EvtSource N(interact_802412BC) = {
     EVT_END
 };
 
-EvtSource N(init_80241DA4) = {
+EvtScript N(init_80241DA4) = {
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802412BC)))
     EVT_IF_EQ(EVT_SAVE_FLAG(1411), 0)
         EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_petunia_Palette_00_Anim_6)
@@ -419,7 +419,7 @@ EvtSource N(init_80241DA4) = {
     EVT_END
 };
 
-EvtSource N(init_80241E10) = {
+EvtScript N(init_80241E10) = {
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802411B8)))
     EVT_CALL(EnableNpcShadow, 1, FALSE)
     EVT_SWITCH(EVT_SAVE_VAR(0))
@@ -437,7 +437,7 @@ EvtSource N(init_80241E10) = {
     EVT_END
 };
 
-EvtSource N(80241EF4) = {
+EvtScript N(80241EF4) = {
     EVT_SET(EVT_MAP_VAR(14), 0)
     EVT_SET(EVT_MAP_VAR(10), 0)
     EVT_SET(EVT_MAP_VAR(11), 0)
@@ -448,7 +448,7 @@ EvtSource N(80241EF4) = {
     EVT_END
 };
 
-EvtSource N(defeat_80241F64) = {
+EvtScript N(defeat_80241F64) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -485,7 +485,7 @@ EvtSource N(defeat_80241F64) = {
     EVT_END
 };
 
-EvtSource N(hit_80242138) = {
+EvtScript N(hit_80242138) = {
     EVT_IF_EQ(EVT_SAVE_VAR(0), 44)
         EVT_CALL(GetOwnerEncounterTrigger, EVT_VAR(0))
         EVT_IF_NE(EVT_VAR(0), 1)
@@ -496,7 +496,7 @@ EvtSource N(hit_80242138) = {
     EVT_END
 };
 
-EvtSource N(idle_8024219C) = {
+EvtScript N(idle_8024219C) = {
     EVT_LOOP(0)
         EVT_IF_EQ(EVT_MAP_VAR(10), 0)
             EVT_IF_EQ(EVT_AREA_FLAG(23), 1)
@@ -574,7 +574,7 @@ EvtSource N(idle_8024219C) = {
     EVT_END
 };
 
-EvtSource N(idle_80242618) = {
+EvtScript N(idle_80242618) = {
     EVT_LOOP(0)
         EVT_IF_EQ(EVT_MAP_VAR(11), 0)
             EVT_IF_EQ(EVT_AREA_FLAG(24), 1)
@@ -652,7 +652,7 @@ EvtSource N(idle_80242618) = {
     EVT_END
 };
 
-EvtSource N(idle_80242A94) = {
+EvtScript N(idle_80242A94) = {
     EVT_LOOP(0)
         EVT_IF_EQ(EVT_MAP_VAR(12), 0)
             EVT_IF_EQ(EVT_AREA_FLAG(25), 1)
@@ -730,7 +730,7 @@ EvtSource N(idle_80242A94) = {
     EVT_END
 };
 
-EvtSource N(idle_80242F10) = {
+EvtScript N(idle_80242F10) = {
     EVT_LOOP(0)
         EVT_IF_EQ(EVT_MAP_VAR(13), 0)
             EVT_IF_EQ(EVT_AREA_FLAG(26), 1)
@@ -808,7 +808,7 @@ EvtSource N(idle_80242F10) = {
     EVT_END
 };
 
-EvtSource N(init_8024338C) = {
+EvtScript N(init_8024338C) = {
     EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
     EVT_CALL(EnableNpcShadow, 2, FALSE)
@@ -831,7 +831,7 @@ EvtSource N(init_8024338C) = {
     EVT_END
 };
 
-EvtSource N(init_802434CC) = {
+EvtScript N(init_802434CC) = {
     EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
     EVT_CALL(EnableNpcShadow, 3, FALSE)
@@ -854,7 +854,7 @@ EvtSource N(init_802434CC) = {
     EVT_END
 };
 
-EvtSource N(init_8024360C) = {
+EvtScript N(init_8024360C) = {
     EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
     EVT_CALL(EnableNpcShadow, 4, FALSE)
@@ -877,7 +877,7 @@ EvtSource N(init_8024360C) = {
     EVT_END
 };
 
-EvtSource N(init_8024374C) = {
+EvtScript N(init_8024374C) = {
     EVT_CALL(BindNpcHit, -1, EVT_PTR(N(hit_80242138)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80241F64)))
     EVT_CALL(EnableNpcShadow, 5, FALSE)
@@ -1202,7 +1202,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(triggerCoord_80244E44) = { -208.0f, 0.0f, -182.0f, 0.0f };
 
-EvtSource N(80244E54) = {
+EvtScript N(80244E54) = {
     EVT_SET(EVT_AREA_FLAG(27), 0)
     EVT_SET(EVT_AREA_FLAG(28), 0)
     EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))
@@ -1216,12 +1216,12 @@ static s32 N(pad_4ECC) = {
     0x00000000,
 };
 
-EvtSource N(80244ED0) = {
+EvtScript N(80244ED0) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EAB04, -175, 0, 150, 0, 8, MAKE_ENTITY_END)
     EVT_CALL(AssignPanelFlag, EVT_SAVE_FLAG(1404))
     EVT_RETURN

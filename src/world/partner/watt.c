@@ -81,7 +81,7 @@ ApiStatus func_802BD27C_31CDEC(Evt* script, s32 isInitialCall) {
     }
 }
 
-EvtSource world_watt_take_out = {
+EvtScript world_watt_take_out = {
     EVT_CALL(func_802BD27C_31CDEC)
     EVT_RETURN
     EVT_END
@@ -203,7 +203,7 @@ ApiStatus func_802BD2B4_31CE24(Evt* script, s32 isInitialCall) {
     return 0;
 }
 
-EvtSource world_watt_update = {
+EvtScript world_watt_update = {
     EVT_CALL(func_802BD2B4_31CE24)
     EVT_RETURN
     EVT_END
@@ -221,7 +221,7 @@ void func_802BD710_31D280(Npc* watt) {
 s32 func_802BD754_31D2C4(void);
 INCLUDE_ASM(s32, "world/partner/watt", func_802BD754_31D2C4);
 
-EvtSource world_watt_use_ability = {
+EvtScript world_watt_use_ability = {
     EVT_CALL(func_802BD754_31D2C4)
     EVT_RETURN
     EVT_END
@@ -249,7 +249,7 @@ s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
     }
 }
 
-EvtSource world_watt_put_away = {
+EvtScript world_watt_put_away = {
     EVT_CALL(func_802BDD0C_31D87C)
     EVT_RETURN
     EVT_END
@@ -385,7 +385,7 @@ void func_802BE070_31DBE0(void) {
     }
 }
 
-EvtSource world_watt_while_riding = {
+EvtScript world_watt_while_riding = {
     EVT_CALL(func_802BDE88_31D9F8)
     EVT_RETURN
     EVT_END

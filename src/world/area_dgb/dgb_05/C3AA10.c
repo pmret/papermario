@@ -22,7 +22,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_05_tattle },
 };
 
-EvtSource N(802414E0) = {
+EvtScript N(802414E0) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -39,7 +39,7 @@ static s32 N(pad_1578)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitSingleDoor_80241580) = {
+EvtScript N(exitSingleDoor_80241580) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
@@ -55,7 +55,7 @@ EvtSource N(exitSingleDoor_80241580) = {
     EVT_END
 };
 
-EvtSource N(enterSingleDoor_80241634) = {
+EvtScript N(enterSingleDoor_80241634) = {
     EVT_CALL(UseDoorSounds, 0)
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
@@ -68,7 +68,7 @@ EvtSource N(enterSingleDoor_80241634) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -93,7 +93,7 @@ static s32 N(pad_17E8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(802417F0) = {
+EvtScript N(802417F0) = {
     EVT_CALL(N(func_80240000_C3AA10))
     EVT_CALL(func_802CA988, 0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
     EVT_CALL(N(func_80240030_C3AA40))
@@ -108,7 +108,7 @@ static s32 N(pad_1868)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1047), 0)
         EVT_CALL(MakeEntity, 0x802BCE84, 510, -210, 100, 0, MAKE_ENTITY_END)
     EVT_END_IF
@@ -120,7 +120,7 @@ static s32 N(pad_18BC) = {
     0x00000000,
 };
 
-EvtSource N(802418C0) = {
+EvtScript N(802418C0) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -161,7 +161,7 @@ NpcAISettings N(npcAISettings_802419AC) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_802419DC) = {
+EvtScript N(npcAI_802419DC) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 1, 10)
     EVT_CALL(SetSelfVar, 2, 14)
@@ -180,7 +180,7 @@ NpcSettings N(npcSettings_80241A4C) = {
     .level = 13,
 };
 
-EvtSource N(npcAI_80241A78) = {
+EvtScript N(npcAI_80241A78) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
     EVT_CALL(SetSelfVar, 0, 4)
     EVT_CALL(SetSelfVar, 1, 32)

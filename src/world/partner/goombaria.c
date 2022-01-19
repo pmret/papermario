@@ -46,25 +46,25 @@ ApiStatus GoombariaPutAway(Evt* script, s32 isInitialCall) {
     return partner_put_away(goombaria) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_goombaria_take_out = {
+EvtScript world_goombaria_take_out = {
     EVT_CALL(GoombariaTakeOut)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource world_goombaria_update = {
+EvtScript world_goombaria_update = {
     EVT_CALL(GoombariaUpdate)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource world_goombaria_use_ability = {
+EvtScript world_goombaria_use_ability = {
     EVT_CALL(GoombariaUseAbility)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource world_goombaria_put_away = {
+EvtScript world_goombaria_put_away = {
     EVT_CALL(GoombariaPutAway)
     EVT_RETURN
     EVT_END

@@ -29,18 +29,18 @@ typedef struct StarPowerDesc {
 
 extern StarPowerDesc D_8008F071[];
 
-extern EvtSource battle_star_focus_usePower;
-extern EvtSource battle_star_refresh_usePower;
-extern EvtSource battle_star_lullaby_usePower;
-extern EvtSource battle_star_star_storm_usePower;
-extern EvtSource battle_star_chill_out_usePower;
-extern EvtSource battle_star_smooch_usePower;
-extern EvtSource battle_star_time_out_usePower;
-extern EvtSource battle_star_up_and_away_usePower;
-extern EvtSource battle_star_star_beam_usePower;
-extern EvtSource battle_star_peach_beam_usePower;
-extern EvtSource battle_star_peach_focus_usePower;
-extern EvtSource battle_star_peach_dash_usePower;
+extern EvtScript battle_star_focus_usePower;
+extern EvtScript battle_star_refresh_usePower;
+extern EvtScript battle_star_lullaby_usePower;
+extern EvtScript battle_star_star_storm_usePower;
+extern EvtScript battle_star_chill_out_usePower;
+extern EvtScript battle_star_smooch_usePower;
+extern EvtScript battle_star_time_out_usePower;
+extern EvtScript battle_star_up_and_away_usePower;
+extern EvtScript battle_star_star_beam_usePower;
+extern EvtScript battle_star_peach_beam_usePower;
+extern EvtScript battle_star_peach_focus_usePower;
+extern EvtScript battle_star_peach_dash_usePower;
 
 StarPowerEntry D_8029C7D0[] = {
     { battle_star_focus_ROM_START,       battle_star_focus_ROM_END,       battle_star_focus_VRAM,       battle_star_focus_usePower, },

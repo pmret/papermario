@@ -70,8 +70,8 @@ INCLUDE_ASM(s32, "battle/action_cmd/whirlwind", func_802A91E0_423E50);
 INCLUDE_ASM(s32, "battle/action_cmd/whirlwind", func_802A92F0_423F60);
 
 // hud element scripts
-extern HudElementAnim* D_802AA888_4254F8[];
-extern HudElementAnim* D_802AA8A0_425510[];
+extern HudScript* D_802AA888_4254F8[];
+extern HudScript* D_802AA8A0_425510[];
 
 void func_802A9744_4243B4(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

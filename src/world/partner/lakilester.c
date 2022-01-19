@@ -75,7 +75,7 @@ ApiStatus func_802BD29C_320DEC(Evt* script, s32 isInitialCall) {
     return partner_get_out(lakilester) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_lakilester_take_out = {
+EvtScript world_lakilester_take_out = {
     EVT_CALL(func_802BD29C_320DEC)
     EVT_RETURN
     EVT_END
@@ -167,7 +167,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource world_lakilester_update = {
+EvtScript world_lakilester_update = {
     EVT_CALL(func_802BD2D4_320E24)
     EVT_RETURN
     EVT_END
@@ -549,7 +549,7 @@ s32 func_802BE6A0_3221F0(f32* arg0) {
 ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(s32, "world/partner/lakilester", func_802BE724_322274);
 
-EvtSource world_lakilester_use_ability = {
+EvtScript world_lakilester_use_ability = {
     EVT_CALL(func_802BE724_322274)
     EVT_RETURN
     EVT_END
@@ -687,7 +687,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource world_lakilester_put_away = {
+EvtScript world_lakilester_put_away = {
     EVT_CALL(func_802BF4F0_323040)
     EVT_RETURN
     EVT_END
@@ -820,7 +820,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource world_lakilester_while_riding = {
+EvtScript world_lakilester_while_riding = {
     EVT_CALL(func_802BFBA0_3236F0)
     EVT_RETURN
     EVT_END
