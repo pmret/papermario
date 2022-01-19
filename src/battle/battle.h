@@ -241,7 +241,8 @@ typedef struct ActorPartBlueprint {
     /* 0x14 */ s32 eventFlags;
     /* 0x18 */ s32 elementImmunityFlags;
     /* 0x1C */ s16 unk_1C;
-    /* 0x1E */ char unk_1E[6];
+    /* 0x1E */ char unk_1E[2];
+    /* 0x20 */ s32 unk_20;
 } ActorPartBlueprint; // size = 0x24
 
 typedef struct ActorBlueprint {
@@ -291,7 +292,7 @@ typedef struct Stage {
     /* 0x14 */ const char* bg;
     /* 0x18 */ s32* foregroundModelList;
     /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
+    /* 0x20 */ Formation* unk_20;
     /* 0x24 */ s32 unk_24;
 } Stage; // size = 0x28
 

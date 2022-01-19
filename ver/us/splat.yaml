@@ -3944,27 +3944,43 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x50F020, data]
+    - [0x50F020, c, actor/clubba]
+    - [0x50F020, c, actor/tubba_blubba]
+    - [0x50F020, c, stage/dgb_01]
+    - [0x50F020, c, stage/dgb_02]
+    - [0x50F020, c, stage/dgb_03]
+    - [0x50F020, c, stage/dgb_04]
+    - [0x50F020, c, stage/dgb_05]
+    - [0x50F020, c, area]
+    - [0x50F020]
   - dir: battle/area_omo
     type: code
     start: 0x5125D0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x5125D0, c]
-    - [0x5126A0, c]
-    - [0x512770, c]
-    - [0x512840, c]
-    - [0x512910, c]
-    - [0x5129E0, c]
-    - [0x512AB0, c]
-    - [0x512C90, c]
-    - [0x512E50, c]
-    - [0x513380, c]
-    - [0x5134B0, c]
-    - [0x513580, c]
-    - [0x513790, c]
-    - [0x5137E0, data]
+    - [0x5125D0, c, actor/red_shy_guy]
+    - [0x5126A0, c, actor/blue_shy_guy]
+    - [0x512770, c, actor/yellow_shy_guy]
+    - [0x512840, c, actor/pink_shy_guy]
+    - [0x512910, c, actor/green_shy_guy]
+    - [0x5129E0, c, actor/anti_guy]
+    - [0x512AB0, c, actor/medi_guy]
+    - [0x512C90, c, actor/groove_guy]
+    - [0x512E50, c, actor/spy_guy]
+    - [0x513380, c, actor/sky_guy]
+    - [0x5134B0, c, actor/pyro_guy]
+    - [0x513580, c, stage/omo_01]
+    - [0x513790, c, stage/omo_02]
+    - [0x513790, c, stage/omo_03]
+    - [0x513790, c, stage/omo_03b]
+    - [0x513790, c, stage/omo_04]
+    - [0x5137E0, c, stage/omo_05]
+    - [0x5137E0, c, stage/omo_05b]
+    - [0x5137E0, c, stage/omo_06]
+    - [0x5137E0, c, stage/omo_07]
+    - [0x5137E0, c, area]
+    - [0x5137E0]
   - dir: battle/area_omo2
     type: code
     start: 0x52B6A0
@@ -4038,42 +4054,71 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x56E2A0, c]
-    - [0x56E800, c]
-    - [0x56EC50, data]
+    - [0x56E2A0, c, actor/fuzzipede]
+    - [0x56E800, c, stage/kgr_01]
+    - [0x56EC50, c, area]
+    - [0x56EC50]
   - dir: battle/area_jan
     type: code
     start: 0x573920
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x573920, c]
-    - [0x5739F0, c]
-    - [0x573AC0, c]
-    - [0x573C30, c]
-    - [0x573E10, c]
-    - [0x573EE0, data]
+    - [0x573920, c, actor/spear_guy]
+    - [0x5739F0, c, actor/hurt_plant]
+    - [0x573AC0, c, actor/jungle_fuzzy]
+    - [0x573C30, c, actor/m_bush]
+    - [0x573C30, c, actor/medi_guy]
+    - [0x573E10, c, actor/spike_top]
+    - [0x573EE0, c, stage/jan_00]
+    - [0x573EE0, c, stage/jan_01]
+    - [0x573EE0, c, stage/jan_01b]
+    - [0x573EE0, c, stage/jan_02]
+    - [0x573EE0, c, stage/jan_03]
+    - [0x573EE0, c, stage/jan_03b]
+    - [0x573EE0, c, stage/jan_04]
+    - [0x573EE0, c, stage/jan_04b]
+    - [0x573EE0, c, area]
+    - [0x573EE0]
   - dir: battle/area_jan2
     type: code
     start: 0x584940
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x584940, c]
-    - [0x584B90, c]
-    - [0x585000, data]
+    - [0x584940, c, actor/putrid_piranha]
+    - [0x584B90, c, actor/white_magikoopa]
+    - [0x585000, c, stage/jan_00]
+    - [0x585000, c, stage/jan_01]
+    - [0x585000, c, stage/jan_01b]
+    - [0x585000, c, stage/jan_02]
+    - [0x585000, c, stage/jan_03]
+    - [0x585000, c, stage/jan_03b]
+    - [0x585000, c, stage/jan_04]
+    - [0x585000, c, stage/jan_04b]
+    - [0x585000, c, area]
+    - [0x585000]
   - dir: battle/area_kzn
     type: code
     start: 0x58C2F0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x58C2F0, c]
-    - [0x58C670, c]
-    - [0x58C740, c]
-    - [0x58C920, c]
-    - [0x58CC90, c]
-    - [0x58D100, data]
+    - [0x58C2F0, c, actor/lava_bubble]
+    - [0x58C420, c, actor/putrid_piranha]
+    - [0x58C670, c, actor/spike_top]
+    - [0x58C740, c, actor/medi_guy]
+    - [0x58C920, c, actor/red_magikoopa]
+    - [0x58CC90, c, actor/white_magikoopa]
+    - [0x58D100, c, stage/kzn_01]
+    - [0x58D100, c, stage/kzn_01b]
+    - [0x58D100, c, stage/kzn_02]
+    - [0x58D100, c, stage/kzn_04]
+    - [0x58D100, c, stage/kzn_04b]
+    - [0x58D100, c, stage/kzn_04c]
+    - [0x58D100, c, stage/kzn_05]
+    - [0x58D100, c, area]
+    - [0x58D100]
   - dir: battle/area_kzn2
     type: code
     start: 0x59E6E0
@@ -4274,7 +4319,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x6F0B30, data]
+    - [0x6F0B30, c, goompa]
   - name: battle_partner_goombario
     dir: battle/partner
     type: code
@@ -4283,8 +4328,7 @@ segments:
     overlay: True
     subsegments:
     - [0x6F10E0, c, goombario]
-    - [0x6F2290, .data, goombario]
-    - [0x6F5E30, data, 6F2290] # rodata
+    - [0x6F2290]
   - name: battle_partner_kooper
     dir: battle/partner
     type: code
@@ -4293,7 +4337,7 @@ segments:
     overlay: True
     subsegments:
     - [0x6F5E80, c, kooper]
-    - [0x6F62B0, data]
+    - [0x6F62B0]
   - name: battle_partner_bombette
     dir: battle/partner
     type: code
@@ -4302,7 +4346,7 @@ segments:
     overlay: True
     subsegments:
     - [0x6FAD10, c, bombette]
-    - [0x6FB350, data]
+    - [0x6FB350]
   - name: battle_partner_parakarry
     dir: battle/partner
     type: code
@@ -4718,8 +4762,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x737890, c]
-    - [0x737A20, data]
+    - [0x737890, c, spin_smash]
+    - [0x737A20]
   - dir: battle/move/quake_hammer
     type: code
     start: 0x73AED0

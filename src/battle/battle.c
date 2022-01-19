@@ -102,14 +102,14 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_dgb),
         .name = "エリア ＤＧＢ",
-        .battles = 0x8021B38C,
-        .stages = 0x8021B418,
+        .battles = &b_area_dgb_formationTable,
+        .stages = &b_area_dgb_stageTable,
     },
     {
         AREA(area_omo),
         .name = "エリア ＯＭＯ",
-        .battles = 0x80230730,
-        .stages = 0x80230AC8,
+        .battles = &b_area_omo_formationTable,
+        .stages = &b_area_omo_stageTable,
     },
     {
         AREA(area_omo2),
@@ -126,26 +126,26 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kgr),
         .name = "エリア ＫＧＲ",
-        .battles = 0x8021D5FC,
-        .stages = 0x8021D624,
+        .battles = &b_area_kgr_formationTable,
+        .stages = &b_area_kgr_stageTable,
     },
     {
         AREA(area_jan),
         .name = "エリア ＪＡＮ",
-        .battles = 0x80228AF8,
-        .stages = 0x80228C60,
+        .battles = &b_area_jan_formationTable,
+        .stages = &b_area_jan_stageTable,
     },
     {
         AREA(area_jan2),
         .name = "エリア ＪＡＮ２",
-        .battles = 0x8021F6C8,
-        .stages = 0x8021F72C,
+        .battles = &b_area_jan2_formationTable,
+        .stages = &b_area_jan2_stageTable,
     },
     {
         AREA(area_kzn),
         .name = "エリア ＫＺＮ",
-        .battles = 0x80229E74,
-        .stages = 0x8022A02C,
+        .battles = &b_area_kzn_formationTable,
+        .stages = &b_area_kzn_stageTable,
     },
     {
         AREA(area_kzn2),
