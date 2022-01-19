@@ -1146,7 +1146,7 @@ s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
             if (!(part->flags & 0x800000)) {
                 continue;
             } else {
-                ActorPartDesc* desc = part->staticData;
+                ActorPartBlueprint* bp = part->staticData;
                 f32 x, y, z;
 
                 if (!(part->flags & 0x100000)) {
@@ -1182,7 +1182,7 @@ s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
                 }
 
                 actor0->targetActorID = target->actorID = actor1->actorID;
-                actor0->targetPartIndex = target->partID = desc->index;
+                actor0->targetPartIndex = target->partID = bp->index;
                 target->pos.x = x;
                 target->pos.y = y;
                 target->pos.z = z;
@@ -2332,7 +2332,7 @@ Actor* create_actor(Formation formation) {
     Actor* actor;
     ActorBlueprint* formationActor;
     ActorPart* part;
-    ActorPartDesc* partDesc;
+    ActorPartBlueprint* partBP;
     Evt* takeTurnScript;
     s32 partCount;
     f32 x, y, z;
@@ -2463,16 +2463,16 @@ Actor* create_actor(Formation formation) {
     ASSERT(part != NULL);
 
     for (j = 0; j < partCount; j++) {
-        ActorPartDesc* actorPartDesc = &formationActor->partsData[j];
+        ActorPartBlueprint* actorPartBP = &formationActor->partsData[j];
 
         part->decorationTable = NULL;
-        part->staticData = actorPartDesc;
-        part->flags = actorPartDesc->flags | ACTOR_PART_FLAG_4;
+        part->staticData = actorPartBP;
+        part->flags = actorPartBP->flags | ACTOR_PART_FLAG_4;
         part->targetFlags = 0;
 
-        part->partOffsetFloat.x = part->partOffset.x = actorPartDesc->posOffset.x;
-        part->partOffsetFloat.y = part->partOffset.y = actorPartDesc->posOffset.y;
-        part->partOffsetFloat.z = part->partOffset.z = actorPartDesc->posOffset.z;
+        part->partOffsetFloat.x = part->partOffset.x = actorPartBP->posOffset.x;
+        part->partOffsetFloat.y = part->partOffset.y = actorPartBP->posOffset.y;
+        part->partOffsetFloat.z = part->partOffset.z = actorPartBP->posOffset.z;
 
         part->visualOffset.x = 0;
         part->visualOffset.y = 0;
@@ -2484,22 +2484,22 @@ Actor* create_actor(Formation formation) {
         part->currentPos.x = actor->currentPos.x;
         part->currentPos.y = actor->currentPos.y;
         part->currentPos.z = actor->currentPos.z;
-        part->defenseTable = actorPartDesc->defenseTable;
-        part->idleAnimations = actorPartDesc->idleAnimations;
-        part->eventFlags = actorPartDesc->eventFlags;
-        part->partFlags3 = actorPartDesc->elementImmunityFlags;
-        part->opacity = actorPartDesc->opacity;
+        part->defenseTable = actorPartBP->defenseTable;
+        part->idleAnimations = actorPartBP->idleAnimations;
+        part->eventFlags = actorPartBP->eventFlags;
+        part->partFlags3 = actorPartBP->elementImmunityFlags;
+        part->opacity = actorPartBP->opacity;
         if (part->opacity < 255) {
             actor->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
         }
         part->size.y = actor->size.y;
         part->size.x = actor->size.x;
         part->yaw = 0.0f;
-        part->targetOffset.x = actorPartDesc->targetOffset.x;
-        part->targetOffset.y = actorPartDesc->targetOffset.y;
+        part->targetOffset.x = actorPartBP->targetOffset.x;
+        part->targetOffset.y = actorPartBP->targetOffset.y;
         part->unk_70 = 0;
-        part->unk_75 = actorPartDesc->unk_1C;
-        part->unk_76 = actorPartDesc->unk_1D;
+        part->unk_75 = actorPartBP->unk_1C;
+        part->unk_76 = actorPartBP->unk_1D;
         part->rotation.x = 0.0f;
         part->rotation.y = 0.0f;
         part->rotation.z = 0.0f;
@@ -2564,7 +2564,7 @@ Actor* create_actor(Formation formation) {
         part->unk_84 = -1;
 
         if (part->idleAnimations != NULL) {
-            part->currentAnimation = func_80265CE8(part->idleAnimations, 1) & 0x7FFFFFFF;
+            part->currentAnimation = func_80265CE8(part->idleAnimations, 1) & ~0x80000000;
             part->unk_84 = spr_load_npc_sprite(part->currentAnimation, NULL);
         }
 
