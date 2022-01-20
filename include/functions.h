@@ -502,6 +502,7 @@ void func_802D74C0(f32 x, f32 y, f32 z, s32 arg3);
 
 void show_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount, s32);
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
+void add_xz_vec3f_copy1(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
 void func_80138D88(s32, s32, s32, s32, f32);
@@ -709,6 +710,8 @@ s32 inflict_status(Actor*, s32, s32);
 s32 try_inflict_status(Actor*, s32, s32);
 void mdl_set_all_fog_mode(s32);
 void load_model_animator_tree(s32, StaticAnimatorNode**);
+
+void func_8024EDC0(void);
 
 void update_effects(void);
 void update_cameras(void);

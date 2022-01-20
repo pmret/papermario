@@ -146,7 +146,7 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .defenseTable = N(defenseTable_80229610),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 246,
+        .unk_1D = 246,
     },
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
@@ -158,7 +158,8 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .defenseTable = N(defenseTable_802295FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -10,
+        .unk_1C = 0xFF,
+        .unk_1D = 0xF6,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_100000,
@@ -170,7 +171,8 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .defenseTable = N(defenseTable_802295FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -10,
+        .unk_1C = 0xFF,
+        .unk_1D = 0xF6,
         .unk_20 = 0x29007E,
     },
     {
@@ -183,7 +185,8 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .defenseTable = N(defenseTable_802295FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -10,
+        .unk_1C = 0xFF,
+        .unk_1D = 0xF6,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -195,7 +198,8 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .defenseTable = N(defenseTable_802295FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -10,
+        .unk_1C = 0xFF,
+        .unk_1D = 0xF6,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -207,7 +211,8 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .defenseTable = N(defenseTable_802295FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -10,
+        .unk_1C = 0xFF,
+        .unk_1D = 0xF6,
     },
 };
 

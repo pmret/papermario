@@ -60,7 +60,7 @@ ActorPartBlueprint N(partsTable_80218344)[] = {
         .defenseTable = N(defenseTable_8021828C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
 };
 
@@ -137,8 +137,8 @@ ApiStatus func_80218130_4CF2E0(Evt* script, s32 isInitialCall) {
 ApiStatus func_80218158_4CF308(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->unk_4C = 0;
-    battleStatus->unk_5C = 0;
+    battleStatus->unk_4C[0] = 0;
+    battleStatus->unk_5C[0] = 0;
 
     return ApiStatus_DONE2;
 }

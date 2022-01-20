@@ -230,21 +230,6 @@ typedef enum ActorType {
     .dmaEnd = battle_##id##_ROM_END, \
     .dmaDest = battle_##id##_VRAM
 
-typedef struct ActorPartBlueprint {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s8 index;
-    /* 0x05 */ Vec3b posOffset;
-    /* 0x08 */ Vec2b targetOffset;
-    /* 0x0A */ s16 opacity;
-    /* 0x0C */ s32* idleAnimations;
-    /* 0x10 */ s32* defenseTable;
-    /* 0x14 */ s32 eventFlags;
-    /* 0x18 */ s32 elementImmunityFlags;
-    /* 0x1C */ s16 unk_1C;
-    /* 0x1E */ char unk_1E[2];
-    /* 0x20 */ s32 unk_20;
-} ActorPartBlueprint; // size = 0x24
-
 typedef struct ActorBlueprint {
     /* 0x00 */ s32 flags;
     /* 0x04 */ char unk_04;

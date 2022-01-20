@@ -3437,7 +3437,7 @@ segments:
     vram: 0xE0128000
     subsegments:
     - [0x414BA0, c, effect_134]
-    - [0x415020, data]
+    - [0x415020]
   - [0x415060, bin] # effect 134 gfx
   - type: code
     start: 0x415D90

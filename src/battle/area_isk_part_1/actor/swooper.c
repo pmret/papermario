@@ -52,7 +52,8 @@ ActorPartBlueprint N(partsTable_8021C568)[] = {
         .defenseTable = N(defenseTable_8021C4B0),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 271,
+        .unk_1C = 1,
+        .unk_1D = 0xF,
     },
 };
 
