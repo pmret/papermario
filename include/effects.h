@@ -454,7 +454,6 @@ typedef struct Effect75 {
     /* 0x20 */ s32 unk_20;
 } Effect75; // size = 0x24
 
-
 typedef struct Effect134 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ f32 unk_04;
