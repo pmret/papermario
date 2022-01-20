@@ -854,7 +854,7 @@ void update_player_blink(void) {
     u8* alpha;
 
     if (gPartnerActionStatus.actionState.b[3] == 9) {
-        phi_a2 = !!gPartnerActionStatus.actionState.b[0];
+        phi_a2 = gPartnerActionStatus.actionState.b[0] != 0;
     }
 
     if (playerStatus->unk_10 > 0) {
