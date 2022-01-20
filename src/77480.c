@@ -845,7 +845,43 @@ void suggest_player_anim_setUnkFlag(s32 arg0) {
     }
 }
 
-INCLUDE_ASM(s32, "77480", update_player_blink);
+void update_player_blink(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 phi_a2 = 0;
+    u8 phi_v1;
+    u8* alpha;
+
+    if (gPartnerActionStatus.actionState.b[3] == 9) {
+        phi_a2 = !!gPartnerActionStatus.actionState.b[0];
+    }
+
+    if (playerStatus->unk_10 > 0) {
+        playerStatus->unk_10--;
+        alpha = &playerStatus->alpha1;
+        if (!(gGameStatusPtr->frameCounter & 1)) {
+            if (phi_a2) {
+                phi_v1 = 0xC0;
+            } else {
+                phi_v1 = 0xFF;
+            }
+        } else {
+            phi_v1 = 0x60;
+        }
+        *alpha = phi_v1;
+
+        if (!playerStatus->unk_10) {
+            if (phi_a2) {
+                playerStatus->alpha1 = 0x80;
+                playerStatus->flags |= PLAYER_STATUS_FLAGS_8000;
+            } else {
+                playerStatus->alpha1 = 0xFF;
+                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_8000;
+            }
+        } else {
+            playerStatus->flags |= PLAYER_STATUS_FLAGS_8000;
+        }
+    }
+}
 
 // dist_to_player2D
 f32 get_xz_dist_to_player(f32 x, f32 z) {
