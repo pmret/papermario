@@ -1,5 +1,6 @@
 #include "common.h"
 #include "ld_addrs.h"
+#include "world/actions.h"
 
 #define E20110_VRAM_DEF (void*)0x802B7000
 #define E20EB0_VRAM_DEF (void*)0x802B7000
