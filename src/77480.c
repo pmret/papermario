@@ -840,7 +840,7 @@ s32 get_overriding_player_anim(s32 anim) {
 
     if (anim == ANIM_6000C || anim == ANIM_C0010 || anim == ANIM_10002) {
         if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
-            if (!func_800DFCF4(actionStatus, playerStatus)) {
+            if (!func_800DFCF4()) {
                 return -1;
             }
         } else if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
