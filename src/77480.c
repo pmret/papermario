@@ -55,7 +55,6 @@ void func_802BE070_31DBE0(void);
 void reset_player_status(void);
 void func_800E6B68(void);
 void func_800E5520(void);
-s32 get_overriding_player_anim(s32);
 void func_802B7000_E225B0(void);
 void func_802B71D4(void);
 void func_802B71C8(void);
@@ -813,7 +812,55 @@ s32 func_800DFCF4(void) {
     return 1;
 }
 
-INCLUDE_ASM(s32, "77480", get_overriding_player_anim);
+s32 get_overriding_player_anim(s32 anim) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+
+    if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER && anim != ANIM_1002B && anim != ANIM_MIDAIR_STILL) {
+        return -1;
+    }
+
+    if (actionStatus->actionState.b[0] != 0) {
+        if (actionStatus->actionState.b[3] == 8 && anim == ANIM_10002) {
+            anim = ANIM_8000E;
+        }
+
+        if (actionStatus->actionState.b[0] != 0) {
+            if (actionStatus->actionState.b[3] == 9) {
+                if (anim != ANIM_CROUCH && anim != ANIM_10002) {
+                        return -1;
+                }
+            }
+        }
+    }
+
+    if (anim == ANIM_THUMBS_UP && actionStatus->actionState.b[0] == 1) {
+        return -1;
+    }
+
+    if (anim == ANIM_6000C || anim == ANIM_C0010 || anim == ANIM_10002) {
+        if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
+            if (!func_800DFCF4(actionStatus, playerStatus)) {
+                return -1;
+            }
+        } else if (!(playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE)) {
+            anim = ANIM_C0010;
+        } else {
+            peach_set_disguise_anim(world_actions_peachDisguises[playerStatus->peachDisguise].unk_14);
+            return -1;
+        }
+    } else if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
+        if (playerStatus->unk_C4 && (anim == ANIM_C0000 || anim == ANIM_C0001 || anim == ANIM_C0002)) {
+            anim = ANIM_D0000;
+        }
+    }
+
+    if (anim == ANIM_80003) {
+        exec_ShakeCam1(0, 0, 2);
+    }
+
+    return anim;
+}
 
 void suggest_player_anim_clearUnkFlag(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
