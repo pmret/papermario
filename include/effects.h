@@ -607,12 +607,8 @@ EffectInstance* create_effect_instance(EffectBlueprint* effectBp);
 void remove_effect(EffectInstance*);
 s32 load_effect(s32 effectIndex);
 
-void playFX_00(s32, f32, f32, f32, s32);
+void fx_big_dust_puff(s32, f32, f32, f32, s32);
 void fx_cloud_puff(f32, f32, f32);
-void playFX_02(s32, f32, f32, f32, s32);
-EffectInstance* playFX_03(s32, f32, f32, f32, s32);
-EffectInstance* playFX_04(s32, f32, f32, f32, s32);
-EffectInstance* playFX_05(s32, f32, f32, f32, s32);
 void fx_land(s32, f32, f32, f32, f32);
 void fx_walk(s32, f32, f32, f32, f32, f32);
 void playFX_08(f32, f32, f32, f32);
