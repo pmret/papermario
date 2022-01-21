@@ -145,7 +145,8 @@ ActorPartBlueprint N(partsTable_8022C640)[] = {
         .defenseTable = N(defenseTable_8022C418),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -262,
+        .unk_1C = 0xFE,
+        .unk_1D = 0xFA,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
@@ -157,7 +158,7 @@ ActorPartBlueprint N(partsTable_8022C640)[] = {
         .defenseTable = N(defenseTable_8022C424),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP,
         .elementImmunityFlags = 0,
-        .unk_1C = 245,
+        .unk_1D = 245,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
@@ -169,7 +170,8 @@ ActorPartBlueprint N(partsTable_8022C640)[] = {
         .defenseTable = N(defenseTable_8022C430),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -263,
+        .unk_1C = 0xFE,
+        .unk_1D = 0xF9,
     },
 };
 

@@ -1,16 +1,16 @@
 #include "common.h"
 #include "ld_addrs.h"
 
-#define E20110_VRAM_DEF (s32*)0x802B7000
-#define E21870_VRAM_DEF (s32*)0x802B7000
-#define E225B0_VRAM_DEF (s32*)0x802B7000
+#define E20110_VRAM_DEF (void*)0x802B7000
+#define E20EB0_VRAM_DEF (void*)0x802B7000
+#define E21870_VRAM_DEF (void*)0x802B7000
+#define E225B0_VRAM_DEF (void*)0x802B7000
 
 void appendGfx_player(void* data);
 void appendGfx_player_spin(void* data);
 void func_800F0C9C(void);
 
 extern UNK_FUN_PTR(D_8010C93C);
-extern s32 D_8010C950;
 
 extern s32 D_802BDF60;
 extern s8 D_8015A57A;
@@ -892,7 +892,43 @@ void suggest_player_anim_setUnkFlag(s32 arg0) {
     }
 }
 
-INCLUDE_ASM(s32, "77480", update_player_blink);
+void update_player_blink(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 phi_a2 = 0;
+    u8 phi_v1;
+    u8* alpha;
+
+    if (gPartnerActionStatus.actionState.b[3] == 9) {
+        phi_a2 = gPartnerActionStatus.actionState.b[0] != 0;
+    }
+
+    if (playerStatus->unk_10 > 0) {
+        playerStatus->unk_10--;
+        alpha = &playerStatus->alpha1;
+        if (!(gGameStatusPtr->frameCounter & 1)) {
+            if (phi_a2) {
+                phi_v1 = 0xC0;
+            } else {
+                phi_v1 = 0xFF;
+            }
+        } else {
+            phi_v1 = 0x60;
+        }
+        *alpha = phi_v1;
+
+        if (!playerStatus->unk_10) {
+            if (phi_a2) {
+                playerStatus->alpha1 = 0x80;
+                playerStatus->flags |= PLAYER_STATUS_FLAGS_8000;
+            } else {
+                playerStatus->alpha1 = 0xFF;
+                playerStatus->flags &= ~PLAYER_STATUS_FLAGS_8000;
+            }
+        } else {
+            playerStatus->flags |= PLAYER_STATUS_FLAGS_8000;
+        }
+    }
+}
 
 // dist_to_player2D
 f32 get_xz_dist_to_player(f32 x, f32 z) {
@@ -1062,7 +1098,30 @@ s32 has_valid_conversation_npc(void) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "77480", check_for_conversation_prompt);
+void check_for_conversation_prompt(void) {
+    if (gPlayerStatus.animFlags & PLAYER_STATUS_ANIM_FLAGS_100 || D_8010C958 || D_8010C920) {
+        return;
+    }
+
+    if (D_8010C940 == NULL) {
+        if (gPlayerStatus.statusMenuCounterinputEnabledCounter || gPlayerStatus.flags & PLAYER_STATUS_FLAGS_20) {
+            return;
+        }
+
+        if (has_valid_conversation_npc()) {
+            D_8010C940 = NULL;
+            dma_copy(E20EB0_ROM_START, E20EB0_ROM_END, E20EB0_VRAM_DEF);
+            D_8010C940 = func_802B70B4_E201C4;
+        } else {
+            D_8010C940 = NULL;
+            return;
+        }
+    }
+
+    if (D_8010C940 != NULL) {
+        D_8010C940();
+    }
+}
 
 void func_800E0658(void) {
     if ((gPlayerStatusPtr->animFlags & PLAYER_STATUS_ANIM_FLAGS_SPEECH_PROMPT_AVAILABLE) && (D_8010C940 != 0)) {
@@ -1179,7 +1238,7 @@ void check_for_interactables(void) {
     }
 
     if (D_8010C958 == NULL) {
-        dma_copy(E20110_ROM_START, E20110_ROM_END, (void *) E20110_VRAM_DEF);
+        dma_copy(E20110_ROM_START, E20110_ROM_END, E20110_VRAM_DEF);
         D_8010C958 = &func_802B70B4_E201C4;
 
     }

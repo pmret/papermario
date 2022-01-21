@@ -1172,6 +1172,7 @@ enum Phases {
     PHASE_FIRST_STRIKE              = 1,
     PHASE_RUN_AWAY_START            = 3,
     PHASE_RUN_AWAY_RESET            = 4,
+    PHASE_5                         = 5,
     PHASE_USE_DEFEND                = 6,
     PHASE_RUN_AWAY_FAIL             = 7,
     PHASE_USE_LIFE_SHROOM           = 8,
@@ -1277,6 +1278,7 @@ enum Events {
     EVENT_30                          = 0x00000030,
     EVENT_RECOVER_STATUS              = 0x00000031,
     EVENT_32                          = 0x00000032,
+    EVENT_33                          = 0x00000033,
     EVENT_34                          = 0x00000034,
     EVENT_END_FIRST_STRIKE            = 0x00000035,
     EVENT_LUCKY                       = 0x00000037,
@@ -1652,8 +1654,10 @@ enum PlayerBuffs {
 
 enum StatusFlags {
     STATUS_FLAG_1               = 0x00000001,
+    STATUS_FLAG_4               = 0x00000004,
     STATUS_FLAG_8               = 0x00000008,
     STATUS_FLAG_20              = 0x00000020,
+    STATUS_FLAG_40              = 0x00000040,
     STATUS_FLAG_100             = 0x00000100,
     STATUS_FLAG_200             = 0x00000200,
     STATUS_FLAG_SLEEP           = 0x00001000,

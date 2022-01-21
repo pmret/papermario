@@ -56,7 +56,7 @@ void fx_8_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.renderWorld = fx_8_render;
     bp.unk_00 = 0;
     bp.unk_14 = NULL;
-    bp.effectIndex = 8;
+    bp.effectID = EFFECT_ID_08;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;

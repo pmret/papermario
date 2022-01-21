@@ -99,7 +99,7 @@ void fx_6_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
     bpPtr->renderWorld = fx_6_render;
     bpPtr->unk_00 = 0;
     bpPtr->unk_14 = NULL;
-    bpPtr->effectIndex = 6;
+    bpPtr->effectID = EFFECT_ID_06;
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;

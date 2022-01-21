@@ -36,7 +36,7 @@ EffectInstance* fx_15_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32
     bp.update = fx_15_update;
     bp.renderWorld = fx_15_render;
     bp.unk_14 = 0;
-    bp.effectIndex = 15;
+    bp.effectID = EFFECT_ID_0F;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;
@@ -56,7 +56,7 @@ EffectInstance* fx_15_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32
         part->unk_240 = 0.2f;
         part->unk_244 = shim_rand_int(255);
         part->unk_248 = shim_rand_int(255 - part->unk_244);
-        temp_s0 = (255 - part->unk_248);
+        temp_s0 = 255 - part->unk_248;
         part->unk_24C = temp_s0 - part->unk_244;
     } else {
         part->unk_244 = 210;

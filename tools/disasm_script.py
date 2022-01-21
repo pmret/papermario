@@ -405,6 +405,7 @@ replace_funcs = {
     "func_8027D32C"             :{0:"ActorIDs"},
     "func_8027D434"             :{0:"ActorIDs"},
     "func_8027D4C8"             :{0:"ActorIDs"},
+    "func_8027D75C"             :{0:"ActorIDs"},
     "func_802CFD30"             :{0:"NpcIDs"},
     "func_802CFE2C"             :{0:"NpcIDs"},
     "func_802D2520"             :{0:"PlayerAnims"},
@@ -446,6 +447,7 @@ replace_funcs = {
 
     "JumpPartTo"                :{0:"ActorIDs"},
     "JumpToGoal"                :{0:"ActorIDs", 2:"Bool", 3:"Bool", 4:"Bool"},
+    "JumpWithBounce"            :{0:"ActorIDs"},
 
     "LandJump"                  :{0:"ActorIDs"},
     "LoadActionCommand"         :{0:"ActionCommand"},
@@ -558,6 +560,8 @@ replace_funcs = {
 
     "UseBattleCamPreset"        :{0:"BtlCameraPreset"},
     "UseIdleAnimation"          :{0:"ActorIDs", 1:"Bool"},
+
+    "WasStatusInflicted"        :{0:"ActorIDs", 1:"Bool"},
 }
 
 def trim_lw(arg):
@@ -770,7 +774,7 @@ class ScriptDisassembler:
 
             if self.prelude:
                 try:
-                    self.prefix_line(f"EvtScript D_{self.script_name - info[0] + info[2]:08X}_{self.script_name:08X} = {{")
+                    self.prefix_line(f"EvtScript D_{self.script_name - info[0] + info[2]:08X}_{self.script_name:06X} = {{")
                     self.write_line("};")
                 except:
                     self.prefix_line(f"EvtScript {self.script_name} = {{")

@@ -39,7 +39,7 @@ void fx_1_main(f32 x, f32 y, f32 z) {
     bp.update = fx_1_update;
     bp.renderWorld = fx_1_render;
     bp.unk_14 = NULL;
-    bp.effectIndex = 1;
+    bp.effectID = EFFECT_ID_01;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;

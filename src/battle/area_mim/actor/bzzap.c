@@ -64,7 +64,8 @@ ActorPartBlueprint N(partsTable_8021A924)[] = {
         .defenseTable = N(defenseTable_8021A86C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 758,
+        .unk_1C = 2,
+        .unk_1D = 0xF6,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -76,7 +77,8 @@ ActorPartBlueprint N(partsTable_8021A924)[] = {
         .defenseTable = N(defenseTable_8021A86C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -5,
+        .unk_1C = 255,
+        .unk_1D = -5,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -88,7 +90,8 @@ ActorPartBlueprint N(partsTable_8021A924)[] = {
         .defenseTable = N(defenseTable_8021A86C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -5,
+        .unk_1C = 255,
+        .unk_1D = -5,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -100,7 +103,8 @@ ActorPartBlueprint N(partsTable_8021A924)[] = {
         .defenseTable = N(defenseTable_8021A86C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -5,
+        .unk_1C = 255,
+        .unk_1D = -5,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -112,7 +116,8 @@ ActorPartBlueprint N(partsTable_8021A924)[] = {
         .defenseTable = N(defenseTable_8021A86C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -5,
+        .unk_1C = 255,
+        .unk_1D = -5,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -124,7 +129,8 @@ ActorPartBlueprint N(partsTable_8021A924)[] = {
         .defenseTable = N(defenseTable_8021A86C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -5,
+        .unk_1C = 255,
+        .unk_1D = -5,
     },
 };
 

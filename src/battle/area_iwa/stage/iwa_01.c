@@ -39,7 +39,7 @@ Stage NAMESPACE = {
     .postBattle = N(afterBattle_80220894),
     .foregroundModelList = N(foregroundModelList_802208A4),
     .unk_1C = 1,
-    .unk_20 = N(specialFormation_802208E4),
+    .unk_20 = &N(specialFormation_802208E4),
     .unk_24 = 0x200,
 };
 
@@ -103,7 +103,7 @@ ActorPartBlueprint N(partsTable_80220A04)[] = {
         .defenseTable = N(defenseTable_8022094C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 251,
+        .unk_1D = 251,
     },
 };
 
