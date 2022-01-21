@@ -3,6 +3,7 @@
 #include "npc.h"
 #include "effects.h"
 #include "dead_structs.h"
+#include "sprite/npc/bony_beetle.h"
 
 ApiStatus N(DeadUnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
     DeadEnemy* enemy = (DeadEnemy*) script->owner1.enemy;
@@ -67,8 +68,10 @@ ApiStatus N(DeadUnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
     if (enemy->varTable[9] > 0) {
         enemy->varTable[9]--;
         if (enemy->varTable[9] == 0) {
-            if (npc->currentAnim.w == 0x55002E || npc->currentAnim.w == 0x55002F) {
-                npc->currentAnim.w = 0x55000C;
+            if (npc->currentAnim.w == NPC_ANIM_bony_beetle_Palette_00_Anim_2E ||
+                npc->currentAnim.w == NPC_ANIM_bony_beetle_Palette_00_Anim_2F)
+            {
+                npc->currentAnim.w = NPC_ANIM_bony_beetle_Palette_00_Anim_C;
             }
         } else {
             return ApiStatus_BLOCK;
@@ -89,11 +92,11 @@ ApiStatus N(DeadUnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
                     if (enemy->varTable[8] != 0) {
                         enemy->varTable[8] = 0;
                         enemy->unk_B5 = 0;
-                        npc->currentAnim.w = 0x55002F;
+                        npc->currentAnim.w = NPC_ANIM_bony_beetle_Palette_00_Anim_2F;
                     } else {
                         enemy->varTable[8] = 1;
                         enemy->unk_B5 = 1;
-                        npc->currentAnim.w = 0x55002E;
+                        npc->currentAnim.w = NPC_ANIM_bony_beetle_Palette_00_Anim_2E;
                     }
                     enemy->varTable[9] = 7;
                     return ApiStatus_BLOCK;
@@ -126,13 +129,13 @@ ApiStatus N(DeadUnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
         }
         if (enemy->varTable[8] != 0) {
             switch (npc->currentAnim.w) {
-                case 0x550004:
-                case 0x55000C:
-                case 0x55000E:
-                case 0x550010:
-                case 0x550012:
-                case 0x550016:
-                case 0x550018:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_4:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_C:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_E:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_10:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_12:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_16:
+                case NPC_ANIM_bony_beetle_Palette_00_Anim_18:
                     npc->currentAnim.w++;
                     break;
             }
