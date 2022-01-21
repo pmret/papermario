@@ -2189,13 +2189,13 @@ segments:
     subsegments:
     - [0x3278F0, c, big_smoke_puff]
     - [0x328050]
-  - name: effect_6
+  - name: land
     dir: effects
     type: code
     start: 0x328110
     vram: 0xE000C000
     subsegments:
-    - [0x328110, c, effect_6]
+    - [0x328110, c, land]
     - [0x328D20]
   - [0x328EA0, bin] # effect 6,7,23,29,39 gfx
   - name: effect_7

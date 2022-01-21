@@ -20,7 +20,7 @@ extern s32 D_801A6000;
                                    name##_VRAM, gfx_name##_ROM_START, gfx_name##_ROM_END }
 
 FX_MAIN(big_smoke_puff_main);
-FX_MAIN(fx_6_main);
+FX_MAIN(land_main);
 FX_MAIN(fx_7_main);
 FX_MAIN(fx_8_main);
 FX_MAIN(fx_9_main);
@@ -154,7 +154,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x03 */ {},
     /* 0x04 */ {},
     /* 0x05 */ {},
-    /* 0x06 */ FX_ENTRY(6, _328EA0),
+    /* 0x06 */ FX_ENTRY_NAMED(land, _328EA0),
     /* 0x07 */ FX_ENTRY(7, _328EA0),
     /* 0x08 */ FX_ENTRY(8, _32CEC0),
     /* 0x09 */ FX_ENTRY(9, _32CEC0),

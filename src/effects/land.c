@@ -36,10 +36,10 @@ static s8 D_E000CCE0[] = { 0x00, 0x10, 0x20, 0x30, 0x01, 0x11, 0x21, 0x31, 0x02,
 
 static s8* D_E000CD24[4] = { D_E000CC38, D_E000CC48, D_E000CC5C, D_E000CCE0 };
 
-void fx_6_init(EffectInstance* effect);
-void fx_6_update(EffectInstance* effect);
-void fx_6_render(EffectInstance* effect);
-void fx_6_appendGfx(void* effect);
+void land_init(EffectInstance* effect);
+void land_update(EffectInstance* effect);
+void land_render(EffectInstance* effect);
+void land_appendGfx(void* effect);
 
 void func_E000C000(Effect6* part) {
     part->unk_18 += part->unk_1C;
@@ -69,7 +69,7 @@ void func_E000C0C8(Effect6* part) {
     part->unk_20 *= part->unk_2C;
 }
 
-void fx_6_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
+void land_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
@@ -94,9 +94,9 @@ void fx_6_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
             break;
     }
 
-    bpPtr->init = fx_6_init;
-    bpPtr->update = fx_6_update;
-    bpPtr->renderWorld = fx_6_render;
+    bpPtr->init = land_init;
+    bpPtr->update = land_update;
+    bpPtr->renderWorld = land_render;
     bpPtr->unk_00 = 0;
     bpPtr->unk_14 = NULL;
     bpPtr->effectID = EFFECT_ID_06;
@@ -209,10 +209,10 @@ void fx_6_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
     }
 }
 
-void fx_6_init(EffectInstance* effect) {
+void land_init(EffectInstance* effect) {
 }
 
-void fx_6_update(EffectInstance* effect) {
+void land_update(EffectInstance* effect) {
     Effect6* effectPart = effect->data;
 
     effectPart->unk_40 = D_E000CD24[effectPart->unk_38][effectPart->unk_3C++];
@@ -244,11 +244,11 @@ void fx_6_update(EffectInstance* effect) {
     }
 }
 
-void fx_6_render(EffectInstance* effect) {
+void land_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_6_appendGfx;
+    renderTask.appendGfx = land_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
@@ -257,7 +257,7 @@ void fx_6_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_6_appendGfx(void* effect) {
+void land_appendGfx(void* effect) {
     Effect6* part = ((EffectInstance*)effect)->data;
     s32 type = part->type;
     s32 temp_t0 = part->unk_40;

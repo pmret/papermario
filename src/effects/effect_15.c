@@ -145,8 +145,8 @@ void fx_15_update(EffectInstance* effect) {
             data->unk_10 = data->unk_10 * 0.7;
             data->unk_34 = data->unk_34 * 0.7;
             data->unk_2C = data->unk_2C * 0.7;
-            shim_load_effect(6);
-            fx_6_main(0, data->unk_04, data->unk_08 - 5.0f, data->unk_0C, 0.0f);
+            shim_load_effect(EFFECT_ID_06);
+            land_main(0, data->unk_04, data->unk_08 - 5.0f, data->unk_0C, 0.0f);
 
             if (!gGameStatusPtr->isBattle) {
                 shim_sfx_play_sound_at_position(0xB0000016, 0, data->unk_04, data->unk_08, data->unk_0C);

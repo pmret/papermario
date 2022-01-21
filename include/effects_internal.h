@@ -31,6 +31,6 @@ s32 shim_load_effect(s32 effectIndex);
 s32 shim_npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
 void shim_sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 
-void fx_6_main(s32 type, f32 x, f32 y, f32 z, f32 arg4);
+void land_main(s32 type, f32 x, f32 y, f32 z, f32 arg4);
 
 #endif
