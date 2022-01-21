@@ -269,7 +269,7 @@ extern UNK_TYPE D_800E92D8;
 extern UNK_TYPE D_80147574;
 
 extern UNK_FUN_PTR(D_8010C920);
-extern s32 D_8010C940;
+extern UNK_FUN_PTR(D_8010C940);
 extern Entity* D_8010C954;
 extern UNK_FUN_PTR(D_8010C958);
 extern s32 D_8010C95C;
