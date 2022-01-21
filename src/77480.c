@@ -1139,7 +1139,47 @@ void func_800E06C0(s32 arg0) {
     D_8010C950 = (arg0 == 1);
 }
 
-INCLUDE_ASM(s32, "77480", func_800E06D8);
+s32 func_800E06D8(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Npc* npc = playerStatus->unk_C8;
+    s32 temp = playerStatus->unk_C6;
+    s32 wall;
+
+    if (playerStatus->decorationList || playerStatus->statusMenuCounterinputEnabledCounter) {
+            return FALSE;
+    }
+    if (gCollisionStatus.currentWall == -1) {
+        return FALSE;
+    }
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC && !(playerStatus->flags & PLAYER_STATUS_FLAGS_INPUT_DISABLED)
+        && npc != NULL && npc->flags & NPC_FLAG_10000000) {
+        playerStatus->unk_C6 = -1;
+        return TRUE;
+    }
+
+    wall = gCollisionStatus.currentWall;
+    if (!(wall & 0x4000)) {
+        if (!should_collider_allow_interact(wall)) {
+            return FALSE;
+        }
+    } else if (!phys_can_player_interact()) {
+        playerStatus->unk_C6 = -1;
+        return FALSE;
+    } else if (get_entity_type(wall) == 0xC) {
+        return FALSE;
+    }
+
+    if (temp == wall) {
+        if (playerStatus->flags & PLAYER_STATUS_FLAGS_8000000) {
+            return FALSE;
+        }
+    } else {
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_8000000;
+    }
+    playerStatus->unk_C6 = -1;
+
+    return TRUE;
+}
 
 static const f32 pad[1] = { 0.0f};
 
