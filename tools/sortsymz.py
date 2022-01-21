@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import re
 
@@ -6,18 +8,19 @@ groups = {}
 
 with open("tools/symz.txt") as f:
     for line in f.readlines():
-        name, addr = line.strip().strip(";").split(" = ")
-        syms.append({"name": name, "address": int(addr, 0), "found_in": set(), "dead": False})
+        if line and not line.startswith("//"):
+            name, addr = line.strip().strip(";").split(" = ")
+            syms.append({"name": name, "address": int(addr, 0), "found_in": set(), "dead": False})
 
 # Search src for syms
 for root, dirs, files in os.walk("src"):
     for file in files:
-        if file.endswith(".c"):
+        if file.endswith(".c") and "bss" not in file:
             with open(os.path.join(root, file)) as f:
                 text = f.read()
                 for sym in syms:
                     if sym["name"] in text:
-                        sym["found_in"].add(os.path.join(root, file).replace("src/", "")[:-2])
+                        sym["found_in"].add(os.path.join(root, file).replace("src/", ""))
 
 # Search asm for syms
 for root, dirs, files in os.walk("ver/us/asm"):
@@ -28,7 +31,7 @@ for root, dirs, files in os.walk("ver/us/asm"):
                 for sym in syms:
                     if sym["name"] in text:
                         sym["found_in"].add(os.path.join(root, file).replace("ver/us/asm/nonmatchings/", ""))
-                        if re.match(r"E[0-9A-F]{5}", root.split("/")[-1]):
+                        if re.match(r"E[A-F][0-9A-F]{4}", root.split("/")[-1]):
                             sym["dead"] = True
                         else:
                             sym["dead"] = False
@@ -49,13 +52,13 @@ for sym in syms:
 
 for group in groups:
     if group == "":
-        print("The following symbols can be simply removed from undefined_syms:")
+        print("// The following symbols can be simply removed from undefined_syms:")
     elif group == "multig":
-        print("The following symbols are found in multiple locations:")
+        print("// The following symbols are found in multiple locations:")
     elif group == "dead":
-        print("The following symbols are dead:")
+        print("// The following symbols are dead:")
     else:
-        print(group + ":")
+        print("// " + group + ":")
 
     sorted_syms = sorted(groups[group], key=lambda tup: tup["address"])
 

@@ -16,8 +16,10 @@ extern s32 D_801A6000;
 #define FX_MAIN(name) void name(s32); // the actual signature is going to be wrong but doesn't matter
 #define FX_ENTRY(name, gfx_name) { fx_##name##_main, effect_##name##_ROM_START, effect_##name##_ROM_END, \
                                    effect_##name##_VRAM, gfx_name##_ROM_START, gfx_name##_ROM_END }
+#define FX_ENTRY_NAMED(name, gfx_name) { name##_main, name##_ROM_START, name##_ROM_END, \
+                                   name##_VRAM, gfx_name##_ROM_START, gfx_name##_ROM_END }
 
-FX_MAIN(fx_1_main);
+FX_MAIN(big_smoke_puff_main);
 FX_MAIN(fx_6_main);
 FX_MAIN(fx_7_main);
 FX_MAIN(fx_8_main);
@@ -147,7 +149,7 @@ FX_MAIN(fx_134_main);
 
 EffectTableEntry gEffectTable[] = {
     /* 0x00 */ {},
-    /* 0x01 */ FX_ENTRY(1, _326410),
+    /* 0x01 */ FX_ENTRY_NAMED(big_smoke_puff, _326410),
     /* 0x02 */ {},
     /* 0x03 */ {},
     /* 0x04 */ {},

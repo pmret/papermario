@@ -240,7 +240,7 @@ ApiStatus OnDefeatEnemy(Evt* script, s32 isInitialCall) {
 
     temp1 = script->functionTemp[1];
     if (script->functionTemp[1] == 10) {
-        playFX_01(npc->pos.x, npc->pos.y + 10.0f, npc->pos.z + 10.0f);
+        fx_cloud_puff(npc->pos.x, npc->pos.y + 10.0f, npc->pos.z + 10.0f);
         if (script->functionTemp[1] == temp1) { // what? (never can be false, seemingly)
             spawn_drops(enemy);
         }

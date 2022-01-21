@@ -13,6 +13,6 @@ void func_802BCC80_E2D3B0(Entity* entity) {
     if (entity->collisionFlags & 0x80) {
         entity_start_script(entity);
         exec_entity_commandlist(entity);
-        playFX_01(entity->position.x, entity->position.y + 25.0f, entity->position.z);
+        fx_cloud_puff(entity->position.x, entity->position.y + 25.0f, entity->position.z);
     }
 }

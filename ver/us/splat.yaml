@@ -2181,13 +2181,13 @@ segments:
     - [0x325EE0, pm_effect_shims, effect_shims]
     - [0x326160, .data, 325AD0]
   - [0x326410, bin] # effect 1 gfx
-  - name: effect_1
+  - name: big_smoke_puff
     dir: effects
     type: code
     start: 0x3278F0
     vram: 0xE0002000
     subsegments:
-    - [0x3278F0, c, effect_1]
+    - [0x3278F0, c, big_smoke_puff]
     - [0x328050]
   - name: effect_6
     dir: effects

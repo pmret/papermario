@@ -194,7 +194,7 @@ typedef struct StarSpiritEffect {
     /* 0x54 */ struct StarSpiritEffectUnkStruct* unk_54;
 } StarSpiritEffect; // size = 0x58
 
-typedef struct Effect1 {
+typedef struct BigSmokePuffData {
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ s16 unk_02;
     /* 0x04 */ s16 unk_04;
@@ -208,7 +208,7 @@ typedef struct Effect1 {
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ char unk_28[0x4];
-} Effect1; // size = 0x2C
+} BigSmokePuffData; // size = 0x2C
 
 typedef struct Effect6 {
     /* 0x00 */ u16 type;
@@ -608,7 +608,7 @@ void remove_effect(EffectInstance*);
 s32 load_effect(s32 effectIndex);
 
 void playFX_00(s32, f32, f32, f32, s32);
-void playFX_01(f32, f32, f32);
+void fx_cloud_puff(f32, f32, f32);
 void playFX_02(s32, f32, f32, f32, s32);
 EffectInstance* playFX_03(s32, f32, f32, f32, s32);
 EffectInstance* playFX_04(s32, f32, f32, f32, s32);
