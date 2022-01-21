@@ -18,6 +18,7 @@
 
 #include "world/common/UnkNpcAIFunc32.inc.c"
 
+// Data migration (UnkNpcAIFunc46)
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C77D00", func_80241A58_C78738);
 
 #include "world/common/UnkNpcDurationFlagFunc3.inc.c"

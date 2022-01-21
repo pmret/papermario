@@ -18,7 +18,7 @@
 
 #include "world/common/UnkNpcAIFunc32.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_05/BA07A0", func_80240AA8_BA11D8);
+#include "world/common/UnkNpcAIFunc46.inc.c"
 
 #include "world/common/UnkNpcDurationFlagFunc3.inc.c"
 

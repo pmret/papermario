@@ -188,7 +188,7 @@ INCLUDE_ASM(s32, "EF2680", func_80241C90_EF42A0);
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "EF2680", func_80242530_EF4B40);
+#include "world/common/DeadUnkNpcAIMainFunc5.inc.c"
 
 // This should be roughly like this and is a copy from CD7350 (UnkNpcAIMainFunc6), but with the little extra block
 // at the beginning. I have to assume that is has to roughly look like below, but I can't get it to match.

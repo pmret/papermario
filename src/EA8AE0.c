@@ -36,7 +36,6 @@ ApiStatus func_802413FC_EA9EDC(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
 INCLUDE_ASM(s32, "EA8AE0", func_8024140C_EA9EEC);
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241468_EA9F48);
@@ -53,7 +52,7 @@ INCLUDE_ASM(s32, "EA8AE0", func_80241800_EAA2E0);
 
 ApiStatus func_80241838_EAA318(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = evt_get_variable(script, *args);
+    s32* ptr = (s32*) evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {
