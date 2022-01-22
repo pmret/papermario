@@ -987,7 +987,7 @@ void npc_update_decoration_bowser_aura(Npc* npc, s32 idx) {
 
     switch (npc->decorationInitialised[idx]) {
         case 0:
-            playFX_3B(2, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &npc->decorations[idx]);
+            fx_aura(2, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &npc->decorations[idx]);
             npc->decorationInitialised[idx] = 1;
             break;
         case 1:

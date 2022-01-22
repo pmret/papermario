@@ -320,7 +320,7 @@ glabel calc_player_damage_enemy
 /* 1A06A8 80271DC8 8E460010 */  lw        $a2, 0x10($s2)
 /* 1A06AC 80271DCC 44071000 */  mfc1      $a3, $f2
 /* 1A06B0 80271DD0 24080001 */  addiu     $t0, $zero, 1
-/* 1A06B4 80271DD4 0C01C2A4 */  jal       playFX_30
+/* 1A06B4 80271DD4 0C01C2A4 */  jal       fx_big_snowflakes
 /* 1A06B8 80271DD8 AFA80030 */   sw       $t0, 0x30($sp)
 .L80271DDC:
 /* 1A06BC 80271DDC 8FA40018 */  lw        $a0, 0x18($sp)
@@ -600,7 +600,7 @@ glabel calc_player_damage_enemy
 /* 1A0A94 802721B4 8E45000C */  lw        $a1, 0xc($s2)
 /* 1A0A98 802721B8 8E460010 */  lw        $a2, 0x10($s2)
 /* 1A0A9C 802721BC 8E470014 */  lw        $a3, 0x14($s2)
-/* 1A0AA0 802721C0 0C01C2EC */  jal       playFX_33
+/* 1A0AA0 802721C0 0C01C2EC */  jal       fx_radial_shimmer
 /* 1A0AA4 802721C4 24040009 */   addiu    $a0, $zero, 9
 .L802721C8:
 /* 1A0AA8 802721C8 3C11800E */  lui       $s1, %hi(gBattleStatus)

@@ -145,7 +145,7 @@ void star_update(EffectInstance* effect) {
             data->unk_10 = data->unk_10 * 0.7;
             data->unk_34 = data->unk_34 * 0.7;
             data->unk_2C = data->unk_2C * 0.7;
-            shim_load_effect(EFFECT_ID_06);
+            shim_load_effect(EFFECT_LANDING_DUST);
             landing_dust_main(0, data->unk_04, data->unk_08 - 5.0f, data->unk_0C, 0.0f);
 
             if (!gGameStatusPtr->isBattle) {

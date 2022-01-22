@@ -6,13 +6,17 @@
 
 enum EffectID {
     EFFECT_ID_00 = 0x00,
-    EFFECT_ID_01,
-    EFFECT_ID_06 = 0x06,
-    EFFECT_ID_07,
-    EFFECT_ID_08,
-    EFFECT_ID_09,
-    EFFECT_ID_0A,
-    EFFECT_ID_0B,
+    EFFECT_BIG_SMOKE_PUFF,
+    EFFECT_02, // unused
+    EFFECT_03, // unused
+    EFFECT_04, // unused
+    EFFECT_05, // unused
+    EFFECT_LANDING_DUST,
+    EFFECT_WALKING_DUST,
+    EFFECT_FLOWER_SPLASH,
+    EFFECT_FLOWER_TRAIL,
+    EFFECT_CLOUD_PUFF,
+    EFFECT_CLOUD_TRAIL,
     EFFECT_FOOTPRINT,
     EFFECT_FLOATING_FLOWER,
     EFFECT_SNOWFLAKE,
@@ -43,27 +47,28 @@ enum EffectID {
     EFFECT_SMOKE_BURST,
     EFFECT_SWEAT,
     EFFECT_SLEEP_BUBBLE,
-    EFFECT_WINDY_LEAVES = 0x2B,
+    EFFECT_2A, // unused
+    EFFECT_WINDY_LEAVES,
     EFFECT_FALLING_LEAVES,
     EFFECT_STARS_SPREAD,
     EFFECT_STEAM_BURST,
     EFFECT_STARS_ORBITING,
-    EFFECT_ID_30,
-    EFFECT_ID_31,
-    EFFECT_ID_32,
-    EFFECT_ID_33,
-    EFFECT_ID_34,
-    EFFECT_ID_35,
-    EFFECT_ID_36,
-    EFFECT_ID_37,
-    EFFECT_ID_38,
-    EFFECT_ID_39,
-    EFFECT_ID_3A,
-    EFFECT_ID_3B,
+    EFFECT_BIG_SNOWFLAKES,
+    EFFECT_DEBUFF,
+    EFFECT_GREEN_IMPACT,
+    EFFECT_RADIAL_SHIMMER,
+    EFFECT_ENDING_DECALS,
+    EFFECT_LIGHT_RAYS,
+    EFFECT_LIGHTNING,
+    EFFECT_FIRE_BREATH,
+    EFFECT_SHIMMER_BURST,
+    EFFECT_ENERGY_SHOCKWAVE,
+    EFFECT_SHIMMER_WAVE,
+    EFFECT_AURA,
     EFFECT_ID_3C,
     EFFECT_ID_3D,
-    EFFECT_ID_3E,
-    EFFECT_ID_3F,
+    EFFECT_BLAST,
+    EFFECT_FIRE_FLOWER_ATTACKING,
     EFFECT_ID_40,
     EFFECT_ID_41,
     EFFECT_ID_42,
@@ -80,10 +85,12 @@ enum EffectID {
     EFFECT_ID_4D,
     EFFECT_ID_4E,
     EFFECT_ID_4F,
-    EFFECT_ID_51 = 0x51,
+    EFFECT_50, // unused
+    EFFECT_ID_51,
     EFFECT_ID_52,
     EFFECT_ID_53,
-    EFFECT_ID_55 = 0x55,
+    EFFECT_54, // unused
+    EFFECT_ID_55,
     EFFECT_ID_56,
     EFFECT_ID_57,
     EFFECT_ID_58,
@@ -104,7 +111,8 @@ enum EffectID {
     EFFECT_ID_67,
     EFFECT_ID_68,
     EFFECT_ID_69,
-    EFFECT_ID_6B = 0x6B,
+    EFFECT_6A, // unused
+    EFFECT_ID_6B,
     EFFECT_ID_6C,
     EFFECT_ID_6D,
     EFFECT_ID_6E,
@@ -115,7 +123,8 @@ enum EffectID {
     EFFECT_ID_73,
     EFFECT_ID_74,
     EFFECT_ID_75,
-    EFFECT_ID_77 = 0x77,
+    EFFECT_76, // unused
+    EFFECT_ID_77,
     EFFECT_ID_78,
     EFFECT_ID_79,
     EFFECT_ID_7A,
@@ -651,22 +660,22 @@ EffectInstance* fx_falling_leaves(s32, f32, f32, f32);
 void fx_stars_spread(s32, f32, f32, f32, s32, s32);
 void fx_steam_burst(s32, f32, f32, f32, f32, s32);
 void fx_stars_orbiting(s32, f32, f32, f32, f32, s32, s32*);
-void playFX_30(s32, f32, f32, f32);
-void playFX_31(s32, f32, f32, f32);
-void playFX_32(s32, f32, f32, f32, f32);
-EffectInstance* playFX_33(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_34(s32, f32, f32, f32, f32, s32*);
-EffectInstance* playFX_35(s32, f32, f32, f32, f32, s32*);
-EffectInstance* playFX_36(s32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_37(s32, f32, f32, f32, f32, f32, f32, s32, s32, s32);
-EffectInstance* playFX_38(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_39(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_3A(s32, f32, f32, f32, f32, f32, s32, s32);
-void playFX_3B(s32, f32, f32, f32, f32, s32*);
+void fx_big_snowflakes(s32, f32, f32, f32);
+void fx_debuff(s32, f32, f32, f32);
+void fx_green_impact(s32, f32, f32, f32, f32);
+EffectInstance* fx_radial_shimmer(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_ending_decals(s32, f32, f32, f32, f32, s32*);
+EffectInstance* fx_light_rays(s32, f32, f32, f32, f32, s32*);
+EffectInstance* fx_lightning(s32, f32, f32, f32, f32, f32);
+EffectInstance* fx_fire_breath(s32, f32, f32, f32, f32, f32, f32, s32, s32, s32);
+EffectInstance* fx_shimmer_burst(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_energy_shockwave(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_shimmer_wave(s32, f32, f32, f32, f32, f32, s32, s32);
+void fx_aura(s32, f32, f32, f32, f32, s32*);
 EffectInstance* playFX_3C(s32, f32, f32, f32, f32, s32*);
 void playFX_3D(s32, f32, f32, f32, f32, f32, f32, s32, s32*);
-EffectInstance* playFX_3E(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_3F(s32, f32, f32, f32, s32);
+EffectInstance* fx_blast(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_fire_flower_attacking(s32, f32, f32, f32, s32);
 EffectInstance* playFX_40(s32, f32, f32, f32, s32);
 EffectInstance* playFX_41(s32, f32, f32, f32, s32);
 EffectInstance* playFX_42(s32, s32, s32, f32, s32, s32);

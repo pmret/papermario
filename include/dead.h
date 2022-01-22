@@ -55,7 +55,7 @@
 #define subtract_hp dead_subtract_hp
 #define get_entity_by_index dead_get_entity_by_index
 #define playFX_52 dead_playFX_52
-#define playFX_33 dead_playFX_33
+#define fx_radial_shimmer dead_playFX_33
 #define set_screen_overlay_color dead_set_screen_overlay_color
 #define set_screen_overlay_params_front dead_set_screen_overlay_params_front
 #define playFX_82 dead_playFX_82

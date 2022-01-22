@@ -206,7 +206,7 @@ void entity_GiantChest_open(Entity* entity) {
                     horizontalOffset = 0.0f;
                     depthOffset = 4.0f;
                     //RadialFlowOut
-                    playFX_33(0, chest->itemEntityPos.x + horizontalOffset * sinRight - depthOffset * sinFwd,
+                    fx_radial_shimmer(0, chest->itemEntityPos.x + horizontalOffset * sinRight - depthOffset * sinFwd,
                               chest->itemEntityPos.y + 12.0f, chest->itemEntityPos.z - cosRight * horizontalOffset + cosFwd * depthOffset, 1.0f, 0x64);
                     //GotItemOutline
                     fx_got_item_outline(0, chest->itemEntityPos.x + horizontalOffset * sinRight - sinFwd * depthOffset,

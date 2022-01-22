@@ -39,7 +39,7 @@ void big_smoke_puff_main(f32 x, f32 y, f32 z) {
     bp.update = big_smoke_puff_update;
     bp.renderWorld = big_smoke_puff_render;
     bp.unk_14 = NULL;
-    bp.effectID = EFFECT_ID_01;
+    bp.effectID = EFFECT_BIG_SMOKE_PUFF;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;

@@ -102,7 +102,7 @@ s32 calc_item_damage_enemy(void) {
         playFX_5F(0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z + 5.0f, 1.0f, 0x18);
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_ICE) {
-        playFX_30(0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z + 5.0f);
+        fx_big_snowflakes(0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z + 5.0f);
         isIceDamage = TRUE;
     }
     if ((battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS) == 0) {

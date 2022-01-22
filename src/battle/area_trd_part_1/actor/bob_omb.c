@@ -182,7 +182,7 @@ EvtScript N(8021A9C8) = {
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_ADDR(N(statusTable_8021A5B4)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(2), 2)
-    EVT_CALL(PlayEffect, EFFECT_ID_06, 3, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 3, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(StopLoopingSoundAtActor, ACTOR_SELF, 0)
     EVT_CALL(func_8026ED20, ACTOR_SELF, 1, 0)
     EVT_RETURN

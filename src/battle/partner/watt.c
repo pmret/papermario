@@ -61,7 +61,7 @@ ApiStatus func_802384B0_703FA0(Evt* script, s32 isInitialCall) {
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
 
-    D_80239A0C_7054FC = playFX_33(8, var1, var2, var3, 1.3f, 55);
+    D_80239A0C_7054FC = fx_radial_shimmer(8, var1, var2, var3, 1.3f, 55);
 
     return ApiStatus_DONE2;
 }

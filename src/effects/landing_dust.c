@@ -99,7 +99,7 @@ void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
     bpPtr->renderWorld = landing_dust_render;
     bpPtr->unk_00 = 0;
     bpPtr->unk_14 = NULL;
-    bpPtr->effectID = EFFECT_ID_06;
+    bpPtr->effectID = EFFECT_LANDING_DUST;
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;

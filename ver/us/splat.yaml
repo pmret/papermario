@@ -2547,110 +2547,110 @@ segments:
     - [0x3625C0, c, stars_orbiting]
     - [0x362C30, data]
   - [0x362C50, bin] # effect 47 gfx
-  - name: effect_48
+  - name: big_snowflakes
     dir: effects
     type: code
     start: 0x363160
     vram: 0xE0060000
     subsegments:
-    - [0x363160, c, effect_48]
+    - [0x363160, c, big_snowflakes]
     - [0x363890, data]
   - [0x3638C0, bin] # effect 48 gfx
-  - name: effect_49
+  - name: debuff
     dir: effects
     type: code
     start: 0x364300
     vram: 0xE0062000
     subsegments:
-    - [0x364300, c, effect_49]
+    - [0x364300, c, debuff]
     - [0x364BC0, data]
   - [0x364C00, bin] # effect 49 gfx
-  - name: effect_50
+  - name: green_impact
     dir: effects
     type: code
     start: 0x364F10
     vram: 0xE0064000
     subsegments:
-    - [0x364F10, c, effect_50]
+    - [0x364F10, c, green_impact]
     - [0x365970, data]
   - [0x3659B0, bin] # effect 50 gfx
-  - name: effect_51
+  - name: radial_shimmer
     dir: effects
     type: code
     start: 0x366030
     vram: 0xE0066000
     subsegments:
-    - [0x366030, c, effect_51]
+    - [0x366030, c, radial_shimmer]
     - [0x366C80, data]
   - [0x366D60, bin] # effect 51 gfx
-  - name: effect_52
+  - name: ending_decals
     dir: effects
     type: code
     start: 0x36A8D0
     vram: 0xE0068000
     subsegments:
-    - [0x36A8D0, c, effect_52]
+    - [0x36A8D0, c, ending_decals]
     - [0x36AE80, data]
   - [0x36AEE0, bin] # effect 52 gfx
-  - name: effect_53
+  - name: light_rays
     dir: effects
     type: code
     start: 0x36D020
     vram: 0xE006A000
     subsegments:
-    - [0x36D020, c, effect_53]
+    - [0x36D020, c, light_rays]
     - [0x36DE10, data]
   - [0x36DF90, bin] # effect 53 gfx
-  - name: effect_54
+  - name: lightning
     dir: effects
     type: code
     start: 0x36E1D0
     vram: 0xE006C000
     subsegments:
-    - [0x36E1D0, c, effect_54]
+    - [0x36E1D0, c, lightning]
     - [0x36ED30, data]
   - [0x36ED60, bin] # effect 54 gfx
-  - name: effect_55
+  - name: fire_breath
     dir: effects
     type: code
     start: 0x372790
     vram: 0xE006E000
     subsegments:
-    - [0x372790, c, effect_55]
+    - [0x372790, c, fire_breath]
     - [0x373390, data]
   - [0x3733E0, bin] # effect 55 gfx
-  - name: effect_56
+  - name: shimmer_burst
     dir: effects
     type: code
     start: 0x3740B0
     vram: 0xE0070000
     subsegments:
-    - [0x3740B0, c, effect_56]
+    - [0x3740B0, c, shimmer_burst]
     - [0x374D80, data]
-  - name: effect_57
+  - name: energy_shockwave
     dir: effects
     type: code
     start: 0x374E50
     vram: 0xE0072000
     subsegments:
-    - [0x374E50, c, effect_57]
+    - [0x374E50, c, energy_shockwave]
     - [0x375500, data]
   - [0x375510, bin] # effect 57 gfx
-  - name: effect_58
+  - name: shimmer_wave
     dir: effects
     type: code
     start: 0x376460
     vram: 0xE0074000
     subsegments:
-    - [0x376460, c, effect_58]
+    - [0x376460, c, shimmer_wave]
     - [0x376FC0, data]
-  - name: effect_59
+  - name: aura
     dir: effects
     type: code
     start: 0x377070
     vram: 0xE0076000
     subsegments:
-    - [0x377070, c, effect_59]
+    - [0x377070, c, aura]
     - [0x377F00, data]
   - [0x377F80, bin] # effect 59 gfx
   - name: effect_60
@@ -2671,22 +2671,22 @@ segments:
     - [0x37C540, c, effect_61]
     - [0x37D140, data]
   - [0x37D180, bin] # effect 61 gfx
-  - name: effect_62
+  - name: blast
     dir: effects
     type: code
     start: 0x37D490
     vram: 0xE007C000
     subsegments:
-    - [0x37D490, c, effect_62]
+    - [0x37D490, c, blast]
     - [0x37D9A0, data]
   - [0x37D9D0, bin] # effect 62, effect 66 gfx
-  - name: effect_63
+  - name: fire_flower_attacking # should be called fire_flower but we already have a segment with that name TODO rename
     dir: effects
     type: code
     start: 0x37F720
     vram: 0xE007E000
     subsegments:
-    - [0x37F720, c, effect_63]
+    - [0x37F720, c, fire_flower_attacking]
     - [0x380350, data]
   - [0x3803A0, bin] # effect 63 gfx
   - name: effect_64

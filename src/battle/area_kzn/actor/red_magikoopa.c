@@ -850,12 +850,12 @@ EvtScript N(takeTurn_802233E0) = {
             EVT_SUB(LW(0), 6)
             EVT_ADD(LW(1), 12)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, EFFECT_ID_33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, EFFECT_ID_33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -864,12 +864,12 @@ EvtScript N(takeTurn_802233E0) = {
             EVT_SUB(LW(0), 12)
             EVT_ADD(LW(1), 14)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, EFFECT_ID_33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, EFFECT_ID_33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)

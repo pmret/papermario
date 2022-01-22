@@ -41,7 +41,7 @@ ApiStatus N(func_802A1354_71B4F4)(Evt* script, s32 isInitialCall) {
             posY -= actor->size.y / 2;
         }
 
-        playFX_36(rand_int(2) + 3, posX, posY, posZ, scaleX, scaleY);
+        fx_lightning(rand_int(2) + 3, posX, posY, posZ, scaleX, scaleY);
 
         return ApiStatus_DONE2;
     }

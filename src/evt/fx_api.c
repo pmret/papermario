@@ -193,27 +193,27 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
 
     switch (effectID) {
         case EFFECT_ID_00:
-            playFX_3E(0, fVar1, fVar2, fVar3, 3.0f, iVar5);
+            fx_blast(0, fVar1, fVar2, fVar3, 3.0f, iVar5);
             break;
-        case EFFECT_ID_01:
+        case EFFECT_BIG_SMOKE_PUFF:
             fx_big_smoke_puff(fVar1, fVar2, fVar3);
             break;
-        case EFFECT_ID_06:
+        case EFFECT_LANDING_DUST:
             fx_landing_dust(iVar1, fVar2, fVar3, fVar4, fVar5);
             break;
-        case EFFECT_ID_07:
+        case EFFECT_WALKING_DUST:
             fx_walking_dust(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
             break;
-        case EFFECT_ID_08:
+        case EFFECT_FLOWER_SPLASH:
             fx_flower_splash(fVar1, fVar2, fVar3, fVar4);
             break;
-        case EFFECT_ID_09:
+        case EFFECT_FLOWER_TRAIL:
             fx_flower_trail(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
             break;
-        case EFFECT_ID_0A:
+        case EFFECT_CLOUD_PUFF:
             fx_cloud_puff(fVar1, fVar2, fVar3, fVar4);
             break;
-        case EFFECT_ID_0B:
+        case EFFECT_CLOUD_TRAIL:
             fx_cloud_trail(iVar1, fVar2, fVar3, fVar4);
             break;
         case EFFECT_FOOTPRINT:
@@ -327,43 +327,43 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_stars_orbiting(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6, &sp38);
             evt_set_variable(script, a7, sp38);
             break;
-        case EFFECT_ID_30:
-            playFX_30(iVar1, fVar2, fVar3, fVar4);
+        case EFFECT_BIG_SNOWFLAKES:
+            fx_big_snowflakes(iVar1, fVar2, fVar3, fVar4);
             break;
-        case EFFECT_ID_31:
-            playFX_31(iVar1, fVar2, fVar3, fVar4);
+        case EFFECT_DEBUFF:
+            fx_debuff(iVar1, fVar2, fVar3, fVar4);
             break;
-        case EFFECT_ID_32:
-            playFX_32(iVar1, fVar2, fVar3, fVar4, fVar5);
+        case EFFECT_GREEN_IMPACT:
+            fx_green_impact(iVar1, fVar2, fVar3, fVar4, fVar5);
             break;
-        case EFFECT_ID_33:
-            playFX_33(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
+        case EFFECT_RADIAL_SHIMMER:
+            fx_radial_shimmer(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
-        case EFFECT_ID_34:
-            playFX_34(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+        case EFFECT_ENDING_DECALS:
+            fx_ending_decals(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
             evt_set_variable(script, a6, sp34);
             break;
-        case EFFECT_ID_35:
-            playFX_35(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+        case EFFECT_LIGHT_RAYS:
+            fx_light_rays(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
             evt_set_variable(script, a6, sp34);
             break;
-        case EFFECT_ID_36:
-            effectRet = playFX_36(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
+        case EFFECT_LIGHTNING:
+            effectRet = fx_lightning(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
             break;
-        case EFFECT_ID_37:
-            effectRet = playFX_37(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, iVar9, iVar10);
+        case EFFECT_FIRE_BREATH:
+            effectRet = fx_fire_breath(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, iVar9, iVar10);
             break;
-        case EFFECT_ID_38:
-            playFX_38(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
+        case EFFECT_SHIMMER_BURST:
+            fx_shimmer_burst(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
-        case EFFECT_ID_39:
-            playFX_39(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
+        case EFFECT_ENERGY_SHOCKWAVE:
+            fx_energy_shockwave(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
-        case EFFECT_ID_3A:
-            playFX_3A(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7, iVar8);
+        case EFFECT_SHIMMER_WAVE:
+            fx_shimmer_wave(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7, iVar8);
             break;
-        case EFFECT_ID_3B:
-            playFX_3B(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+        case EFFECT_AURA:
+            fx_aura(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
             evt_set_variable(script, a6, sp34);
             break;
         case EFFECT_ID_3C:
@@ -374,11 +374,11 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             playFX_3D(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, &sp3C);
             evt_set_variable(script, a9, sp3C);
             break;
-        case EFFECT_ID_3E:
-            playFX_3E(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
+        case EFFECT_BLAST:
+            fx_blast(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
-        case EFFECT_ID_3F:
-            effectRet = playFX_3F(iVar1, fVar2, fVar3, fVar4, iVar5);
+        case EFFECT_FIRE_FLOWER_ATTACKING:
+            effectRet = fx_fire_flower_attacking(iVar1, fVar2, fVar3, fVar4, iVar5);
             break;
         case EFFECT_ID_40:
             effectRet = playFX_40(iVar1, fVar2, fVar3, fVar4, iVar5);

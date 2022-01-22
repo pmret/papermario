@@ -3209,7 +3209,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 1:
             if (script->functionTemp[3] == 0) {
-                playFX_33(2, x1, y1, z1, 1.0f, 30);
+                fx_radial_shimmer(2, x1, y1, z1, 1.0f, 30);
                 func_8024E3D8(0x13);
                 script->functionTemp[3] = 30;
                 script->functionTemp[0] = 2;
@@ -3333,7 +3333,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 1:
             if (script->functionTemp[3] == 0) {
-                playFX_33(2, x1, y1, z1, 1.0f, 30);
+                fx_radial_shimmer(2, x1, y1, z1, 1.0f, 30);
                 func_8024E3D8(0x13);
                 script->functionTemp[3] = 30;
                 script->functionTemp[0] = 2;
@@ -3444,7 +3444,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 1:
             if (script->functionTemp[3] == 0) {
-                playFX_33(3, x, y, z, 1.0f, 30);
+                fx_radial_shimmer(3, x, y, z, 1.0f, 30);
                 func_8024E3D8(0x13);
                 script->functionTemp[3] = 0x1E;
                 script->functionTemp[0] = 2;

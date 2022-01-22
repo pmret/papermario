@@ -1185,7 +1185,7 @@ EvtScript N(8021FA54) = {
                 EVT_CALL(SetActorYaw, ACTOR_ENEMY1, 0)
                 EVT_CALL(GetActorPos, ACTOR_ENEMY1, LW(0), LW(1), LW(2))
                 EVT_ADD(LW(1), 10)
-                EVT_CALL(PlayEffect, EFFECT_ID_01, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_BIG_SMOKE_PUFF, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY1, SOUND_DEATH)
                 EVT_SET(LW(3), 0)
                 EVT_LOOP(12)

@@ -21,7 +21,7 @@ void cloud_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.update = cloud_trail_update;
     bp.renderWorld = cloud_trail_render;
     bp.unk_14 = 0;
-    bp.effectID = EFFECT_ID_0B;
+    bp.effectID = EFFECT_CLOUD_TRAIL;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;

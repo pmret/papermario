@@ -376,7 +376,7 @@ EvtScript N(80229F08) = {
         EVT_CALL(SetPartFlags, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_NO_TARGET)
         EVT_CALL(SetPartFlags, ACTOR_SELF, 1, ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_MULTI_TARGET)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_shy_guy_Palette_00_Anim_12)
-        EVT_CALL(PlayEffect, EFFECT_ID_06, 3, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 3, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_WAIT_FRAMES(40)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, 0)
         EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8022CA9C)))

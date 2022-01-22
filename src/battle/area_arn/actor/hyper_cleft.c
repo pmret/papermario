@@ -157,7 +157,7 @@ EvtScript N(80220DC0) = {
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.5))
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2D9)
-        EVT_CALL(PlayEffect, EFFECT_ID_06, 4, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 4, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_THREAD
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
@@ -207,7 +207,7 @@ EvtScript N(80220DC0) = {
             EVT_THREAD
                 EVT_LOOP(30)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-                    EVT_CALL(PlayEffect, EFFECT_ID_07, 2, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                    EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 2, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
                     EVT_WAIT_FRAMES(1)
                 EVT_END_LOOP
             EVT_END_THREAD
@@ -239,7 +239,7 @@ EvtScript N(80220DC0) = {
     EVT_THREAD
         EVT_LOOP(25)
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-            EVT_CALL(PlayEffect, EFFECT_ID_07, 2, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 2, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(1)
         EVT_END_LOOP
     EVT_END_THREAD

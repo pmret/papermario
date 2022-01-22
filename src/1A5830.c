@@ -324,7 +324,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         playFX_5F(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 0x18);
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_ICE) {
-        playFX_30(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f);
+        fx_big_snowflakes(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f);
     }
 
     if (!(attacker->staticStatus == STATUS_STATIC)) {

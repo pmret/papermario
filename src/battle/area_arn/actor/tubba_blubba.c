@@ -291,7 +291,7 @@ EvtScript N(80226558) = {
     EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SHRINK)
         EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
         EVT_SET(LW(1), 0)
-        EVT_CALL(PlayEffect, EFFECT_ID_06, 4, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 4, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_THREAD
             EVT_CALL(StartRumble, 1)
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(15.0))

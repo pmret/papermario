@@ -398,7 +398,7 @@ glabel calc_partner_damage_enemy
 /* 1AD1C8 8027E8E8 8E460010 */  lw        $a2, 0x10($s2)
 /* 1AD1CC 8027E8EC 44071000 */  mfc1      $a3, $f2
 /* 1AD1D0 8027E8F0 24080001 */  addiu     $t0, $zero, 1
-/* 1AD1D4 8027E8F4 0C01C2A4 */  jal       playFX_30
+/* 1AD1D4 8027E8F4 0C01C2A4 */  jal       fx_big_snowflakes
 /* 1AD1D8 8027E8F8 AFA8002C */   sw       $t0, 0x2c($sp)
 .L8027E8FC:
 /* 1AD1DC 8027E8FC 8FA80018 */  lw        $t0, 0x18($sp)

@@ -58,7 +58,7 @@ void flower_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     bp.renderWorld = flower_trail_render;
     bp.unk_00 = 0;
     bp.unk_14 = NULL;
-    bp.effectID = EFFECT_ID_09;
+    bp.effectID = EFFECT_FLOWER_TRAIL;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;

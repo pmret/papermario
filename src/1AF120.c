@@ -393,7 +393,7 @@ EvtScript D_80296014 = {
     EVT_WAIT_FRAMES(8)
     EVT_LABEL(10)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
-    EVT_CALL(PlayEffect, EFFECT_ID_06, 0, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 0, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };
@@ -1678,7 +1678,7 @@ EvtScript D_8029AF08 = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 10)
     EVT_ADD(LW(2), 10)
-    EVT_CALL(PlayEffect, EFFECT_ID_01, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_BIG_SMOKE_PUFF, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
     EVT_CALL(DropStarPoints, -127)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
