@@ -1202,9 +1202,9 @@ EvtScript N(8023B228) = {
                 EVT_CALL(GetActorPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
                 EVT_WAIT_FRAMES(8)
                 EVT_IF_GT(LW(10), 0)
-                    EVT_CALL(PlayEffect, EFFECT_ID_68, 0, LW(0), 0, LW(2), 1, 0, 0, 0, 0, 0, 0, 0, 0)
+                    EVT_CALL(PlayEffect, EFFECT_RED_IMPACT, 0, LW(0), 0, LW(2), 1, 0, 0, 0, 0, 0, 0, 0, 0)
                 EVT_ELSE
-                    EVT_CALL(PlayEffect, EFFECT_ID_68, 1, LW(0), 0, LW(2), 1, 0, 0, 0, 0, 0, 0, 0, 0)
+                    EVT_CALL(PlayEffect, EFFECT_RED_IMPACT, 1, LW(0), 0, LW(2), 1, 0, 0, 0, 0, 0, 0, 0, 0)
                 EVT_END_IF
             EVT_CASE_EQ(148)
                 EVT_SET(LW(10), 0)

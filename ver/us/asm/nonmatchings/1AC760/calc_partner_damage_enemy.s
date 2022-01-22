@@ -382,7 +382,7 @@ glabel calc_partner_damage_enemy
 /* 1AD18C 8027E8AC 8E45000C */  lw        $a1, 0xc($s2)
 /* 1AD190 8027E8B0 8E460010 */  lw        $a2, 0x10($s2)
 /* 1AD194 8027E8B4 44072000 */  mfc1      $a3, $f4
-/* 1AD198 8027E8B8 0C01C70C */  jal       playFX_5F
+/* 1AD198 8027E8B8 0C01C70C */  jal       fx_water_splash
 /* 1AD19C 8027E8BC 0000202D */   daddu    $a0, $zero, $zero
 .L8027E8C0:
 /* 1AD1A0 8027E8C0 8E820188 */  lw        $v0, 0x188($s4)

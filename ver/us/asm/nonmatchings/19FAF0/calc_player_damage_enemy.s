@@ -304,7 +304,7 @@ glabel calc_player_damage_enemy
 /* 1A066C 80271D8C 8E45000C */  lw        $a1, 0xc($s2)
 /* 1A0670 80271D90 8E460010 */  lw        $a2, 0x10($s2)
 /* 1A0674 80271D94 44072000 */  mfc1      $a3, $f4
-/* 1A0678 80271D98 0C01C70C */  jal       playFX_5F
+/* 1A0678 80271D98 0C01C70C */  jal       fx_water_splash
 /* 1A067C 80271D9C 0000202D */   daddu    $a0, $zero, $zero
 .L80271DA0:
 /* 1A0680 80271DA0 8E820188 */  lw        $v0, 0x188($s4)
@@ -340,7 +340,7 @@ glabel calc_player_damage_enemy
 /* 1A06F4 80271E14 8E45000C */  lw        $a1, 0xc($s2)
 /* 1A06F8 80271E18 8E460010 */  lw        $a2, 0x10($s2)
 /* 1A06FC 80271E1C 44072000 */  mfc1      $a3, $f4
-/* 1A0700 80271E20 0C01C9F4 */  jal       playFX_7E
+/* 1A0700 80271E20 0C01C9F4 */  jal       fx_breaking_junk
 /* 1A0704 80271E24 0000202D */   daddu    $a0, $zero, $zero
 /* 1A0708 80271E28 2603FFFF */  addiu     $v1, $s0, -1
 /* 1A070C 80271E2C 2C620006 */  sltiu     $v0, $v1, 6

@@ -227,7 +227,7 @@ ApiStatus func_8021875C_4EFBFC(Evt* script, s32 isInitialCall) {
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
-    EffectInstance* effect = playFX_4C(2, var1, 150.0f, var3, var2, -0.5f, -0.9f, 0.5f, 60);
+    EffectInstance* effect = fx_floating_rock(2, var1, 150.0f, var3, var2, -0.5f, -0.9f, 0.5f, 60);
 
     ((EffectInstanceData*)effect->data)->unk_30 = 0;
     ((EffectInstanceData*)effect->data)->unk_38 = 0;
@@ -672,12 +672,12 @@ EvtScript N(8021D81C) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_3)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 20)
-    EVT_CALL(PlayEffect, EFFECT_ID_71, 0, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_HIEROGLYPHS, 0, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT_FRAMES(30)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 70)
     EVT_CALL(PlaySound, 0x20E7)
-    EVT_CALL(PlayEffect, EFFECT_ID_4D, 0, 0, 60, 0, EVT_FLOAT(0.2), 0, EVT_FLOAT(1.4), 255, EVT_FLOAT(0.1), 150, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_CHOMP_DROP, 0, 0, 60, 0, EVT_FLOAT(0.2), 0, EVT_FLOAT(1.4), 255, EVT_FLOAT(0.1), 150, 0, 0, 0)
     EVT_WAIT_FRAMES(15)
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LW(0))
     EVT_IF_NOT_FLAG(LW(0), STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP | STATUS_FLAG_TRANSPARENT)
@@ -1102,7 +1102,7 @@ EvtScript N(8021F5E8) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_8)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 20)
-    EVT_CALL(PlayEffect, EFFECT_ID_71, 0, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_HIEROGLYPHS, 0, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT_FRAMES(45)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 60)

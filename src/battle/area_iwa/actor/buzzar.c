@@ -558,7 +558,7 @@ EvtScript N(8021CCE8) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), 24)
     EVT_ADD(LW(1), 24)
-    EVT_CALL(PlayEffect, EFFECT_ID_6D, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.6), 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_SHINY_FLARE, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.6), 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20F3)
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetPartSounds, ACTOR_SELF, 3, 1, 0, 0)

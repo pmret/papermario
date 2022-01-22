@@ -41,7 +41,7 @@ ApiStatus N(func_802A12E0_72AA30)(Evt* script, s32 isInitialCall) {
     a += rand_int(20) - 10;
     b += rand_int(10) - 5;
 
-    effect = (struct N(temp)*)playFX_6F(0, a, b, c, 1.0f, 30);
+    effect = (struct N(temp)*)fx_cold_breath(0, a, b, c, 1.0f, 30);
 
     effect->unk_0C->unk_18 = 0xF4;
     effect->unk_0C->unk_1C = 0xF4;

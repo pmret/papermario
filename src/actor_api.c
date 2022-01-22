@@ -3228,7 +3228,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
                 if (actor->attackBoost > 20) {
                     actor->attackBoost = 20;
                 }
-                playFX_56(attackBoost - 1, x2, y2, z2, 1.0f, 60);
+                fx_stat_change(attackBoost - 1, x2, y2, z2, 1.0f, 60);
                 script->functionTemp[3] = 15;
                 script->functionTemp[0] = 3;
             } else {
@@ -3352,7 +3352,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
                 if (actor->defenseBoost > 20) {
                     actor->defenseBoost = 20;
                 }
-                playFX_56(defenseBoost + 5, x2, y2, z2, 1.0f, 60);
+                fx_stat_change(defenseBoost + 5, x2, y2, z2, 1.0f, 60);
                 script->functionTemp[3] = 15;
                 script->functionTemp[0] = 3;
             } else {
@@ -3550,7 +3550,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 1:
             if (script->functionTemp[3] == 0) {
-                playFX_57(8, x, y, z, 1.0f, 30);
+                fx_snaking_static(8, x, y, z, 1.0f, 30);
                 func_8024E3D8(0x13);
                 script->functionTemp[3] = 0x1E;
                 script->functionTemp[0] = 2;
@@ -3668,7 +3668,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
         case 1:
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
-                playFX_40(0, x2, y2, z2, hpBoost);
+                fx_recover(0, x2, y2, z2, hpBoost);
                 func_802D7460(x1, y1, z1, hpBoost);
                 script->functionTemp[3] = 30;
                 script->functionTemp[0] = 2;

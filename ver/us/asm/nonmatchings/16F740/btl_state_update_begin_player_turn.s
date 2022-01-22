@@ -149,7 +149,7 @@ glabel btl_state_update_begin_player_turn
 /* 170B30 80242250 8E250144 */  lw        $a1, 0x144($s1)
 /* 170B34 80242254 44062000 */  mfc1      $a2, $f4
 /* 170B38 80242258 44073000 */  mfc1      $a3, $f6
-/* 170B3C 8024225C 0C01C694 */  jal       playFX_5A
+/* 170B3C 8024225C 0C01C694 */  jal       fx_water_block
 /* 170B40 80242260 24040001 */   addiu    $a0, $zero, 1
 /* 170B44 80242264 C6220144 */  lwc1      $f2, 0x144($s1)
 /* 170B48 80242268 3C014120 */  lui       $at, 0x4120
@@ -168,7 +168,7 @@ glabel btl_state_update_begin_player_turn
 /* 170B7C 8024229C 44070000 */  mfc1      $a3, $f0
 /* 170B80 802422A0 24100018 */  addiu     $s0, $zero, 0x18
 /* 170B84 802422A4 E7B40010 */  swc1      $f20, 0x10($sp)
-/* 170B88 802422A8 0C01C70C */  jal       playFX_5F
+/* 170B88 802422A8 0C01C70C */  jal       fx_water_splash
 /* 170B8C 802422AC AFB00014 */   sw       $s0, 0x14($sp)
 /* 170B90 802422B0 C6200144 */  lwc1      $f0, 0x144($s1)
 /* 170B94 802422B4 3C014170 */  lui       $at, 0x4170
@@ -187,7 +187,7 @@ glabel btl_state_update_begin_player_turn
 /* 170BC8 802422E8 44070000 */  mfc1      $a3, $f0
 /* 170BCC 802422EC 0000202D */  daddu     $a0, $zero, $zero
 /* 170BD0 802422F0 E7B40010 */  swc1      $f20, 0x10($sp)
-/* 170BD4 802422F4 0C01C70C */  jal       playFX_5F
+/* 170BD4 802422F4 0C01C70C */  jal       fx_water_splash
 /* 170BD8 802422F8 AFB00014 */   sw       $s0, 0x14($sp)
 /* 170BDC 802422FC C6200144 */  lwc1      $f0, 0x144($s1)
 /* 170BE0 80242300 46180000 */  add.s     $f0, $f0, $f24
@@ -203,7 +203,7 @@ glabel btl_state_update_begin_player_turn
 /* 170C08 80242328 44070000 */  mfc1      $a3, $f0
 /* 170C0C 8024232C 24040001 */  addiu     $a0, $zero, 1
 /* 170C10 80242330 E7B40010 */  swc1      $f20, 0x10($sp)
-/* 170C14 80242334 0C01C70C */  jal       playFX_5F
+/* 170C14 80242334 0C01C70C */  jal       fx_water_splash
 /* 170C18 80242338 AFB00014 */   sw       $s0, 0x14($sp)
 /* 170C1C 8024233C 24040299 */  addiu     $a0, $zero, 0x299
 /* 170C20 80242340 0C05272D */  jal       sfx_play_sound

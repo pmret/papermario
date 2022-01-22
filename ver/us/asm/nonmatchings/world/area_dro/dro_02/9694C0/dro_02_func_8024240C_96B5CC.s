@@ -520,7 +520,7 @@ glabel dro_02_func_8024240C_96B5CC
 /* 96BD34 80242B74 44071000 */  mfc1      $a3, $f2
 /* 96BD38 80242B78 2402FFFF */  addiu     $v0, $zero, -1
 /* 96BD3C 80242B7C AFA20014 */  sw        $v0, 0x14($sp)
-/* 96BD40 80242B80 0C01C82C */  jal       playFX_6B
+/* 96BD40 80242B80 0C01C82C */  jal       fx_energy_in_out
 /* 96BD44 80242B84 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 96BD48 80242B88 AE020000 */  sw        $v0, ($s0)
 /* 96BD4C 80242B8C 8C43000C */  lw        $v1, 0xc($v0)

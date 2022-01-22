@@ -29,7 +29,7 @@ ApiStatus func_80238A6C_70C77C(Evt* script, s32 isInitialCall) {
     f32 var = rand_int(140) + 10;
     f32 var2 = rand_int(80) + 10;
 
-    playFX_64(0, xPos, yPos, zPos, var, var2, 20, 1.5f, 30);
+    fx_throw_spiny(0, xPos, yPos, zPos, var, var2, 20, 1.5f, 30);
 
     return ApiStatus_DONE2;
 }

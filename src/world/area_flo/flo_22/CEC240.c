@@ -381,9 +381,9 @@ static s32 N(pad_1594)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-void playFX_82();
+void fx_sun();
 
 ApiStatus N(func_80240000_CEC240)(Evt* script, s32 isInitialCall) {
-    playFX_82(1, 0, 0, 0, 0, 0);
+    fx_sun(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

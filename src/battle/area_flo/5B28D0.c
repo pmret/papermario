@@ -25,7 +25,7 @@ ApiStatus func_80219420_5B28D0(Evt* script, s32 isInitialCall) {
         }
     }
 
-    playFX_82(var1, 0, 0, 0, 0, 0);
+    fx_sun(var1, 0, 0, 0, 0, 0);
 
     return ApiStatus_DONE2;
 }
@@ -41,7 +41,7 @@ ApiStatus func_802194E0_5B2990(Evt* script, s32 isInitialCall) {
         }
     }
 
-    playFX_82(var1, 0, 0, 0, 0, 0);
+    fx_sun(var1, 0, 0, 0, 0, 0);
 
     return ApiStatus_DONE2;
 }
@@ -57,7 +57,7 @@ ApiStatus func_802195A0_5B2A50(Evt* script, s32 isInitialCall) {
         }
     }
 
-    playFX_82(var1, 0, 0, 0, 0, 0);
+    fx_sun(var1, 0, 0, 0, 0, 0);
 
     return ApiStatus_DONE2;
 }
@@ -73,7 +73,7 @@ ApiStatus func_80219660_5B2B10(Evt* script, s32 isInitialCall) {
         }
     }
 
-    playFX_82(var1, 0, 0, 0, 0, 0);
+    fx_sun(var1, 0, 0, 0, 0, 0);
 
     return ApiStatus_DONE2;
 }
@@ -89,7 +89,7 @@ ApiStatus func_80219720_5B2BD0(Evt* script, s32 isInitialCall) {
         }
     }
 
-    playFX_82(var1, 0, 0, 0, 0, 0);
+    fx_sun(var1, 0, 0, 0, 0, 0);
 
     return ApiStatus_DONE2;
 }
@@ -105,7 +105,7 @@ ApiStatus func_802197E0_5B2C90(Evt* script, s32 isInitialCall) {
         }
     }
 
-    playFX_82(var1, 0, 0, 0, 0, 0);
+    fx_sun(var1, 0, 0, 0, 0, 0);
 
     return ApiStatus_DONE2;
 }
@@ -121,7 +121,7 @@ ApiStatus func_802198A0_5B2D50(Evt* script, s32 isInitialCall) {
         }
     }
 
-    playFX_82(var1, 0, 0, 0, 0, 0);
+    fx_sun(var1, 0, 0, 0, 0, 0);
 
     return ApiStatus_DONE2;
 }
@@ -145,7 +145,7 @@ ApiStatus func_80219C80_5B3130(Evt* script, s32 isInitialCall) {
         }
     }
 
-    playFX_82(var1, 0, 0, 0, 0, 0);
+    fx_sun(var1, 0, 0, 0, 0, 0);
 
     return ApiStatus_DONE2;
 }
@@ -161,7 +161,7 @@ ApiStatus func_80219D40_5B31F0(Evt* script, s32 isInitialCall) {
         }
     }
 
-    playFX_82(var1, 0, 0, 0, 0, 0);
+    fx_sun(var1, 0, 0, 0, 0, 0);
 
     return ApiStatus_DONE2;
 }
@@ -177,7 +177,7 @@ ApiStatus func_80219E00_5B32B0(Evt* script, s32 isInitialCall) {
         }
     }
 
-    playFX_82(var1, 0, 0, 0, 0, 0);
+    fx_sun(var1, 0, 0, 0, 0, 0);
 
     return ApiStatus_DONE2;
 }

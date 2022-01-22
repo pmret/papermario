@@ -551,7 +551,7 @@ EvtScript N(wMagikoopa_ShapeSpell) = {
         EVT_SUB(LW(0), 30)
         EVT_ADD(LW(1), 36)
     EVT_END_IF
-    EVT_CALL(PlayEffect, EFFECT_ID_47, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.5), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_GATHER_MAGIC, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.5), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_2)
     EVT_WAIT_FRAMES(30)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, BS_FLAGS1_10)

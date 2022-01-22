@@ -500,8 +500,8 @@ EvtScript N(80225258) = {
         EVT_ADD(LW(1), 6)
         EVT_SETF(LW(3), EVT_FLOAT(0.4))
     EVT_END_IF
-    EVT_CALL(PlayEffect, EFFECT_ID_47, 1, LW(0), LW(1), LW(2), LW(3), 60, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, EFFECT_ID_6B, 6, LW(0), LW(1), LW(2), LW(3), 60, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_GATHER_MAGIC, 1, LW(0), LW(1), LW(2), LW(3), 60, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 6, LW(0), LW(1), LW(2), LW(3), 60, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20F7)
     EVT_WAIT_FRAMES(60)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -520,7 +520,7 @@ EvtScript N(80225258) = {
         EVT_ADD(LW(1), 6)
         EVT_SETF(LW(3), EVT_FLOAT(0.4))
     EVT_END_IF
-    EVT_CALL(PlayEffect, EFFECT_ID_6B, 3, LW(0), LW(1), LW(2), LW(3), 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 3, LW(0), LW(1), LW(2), LW(3), 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 4, LW(15))
     EVT_CALL(EnableActorGlow, ACTOR_SELF, TRUE)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_80223C1C)))
@@ -574,7 +574,7 @@ EvtScript N(802255D8) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
             EVT_ADD(LW(1), 5)
-            EVT_CALL(PlayEffect, EFFECT_ID_66, 1, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_TUBBA_HEART_ATTACK, 1, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(145)
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -585,7 +585,7 @@ EvtScript N(802255D8) = {
     EVT_END_SWITCH
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 5)
-    EVT_CALL(PlayEffect, EFFECT_ID_66, 0, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_TUBBA_HEART_ATTACK, 0, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 200, 0, 0, 0, 0, 0, 0, 0)
     EVT_THREAD
         EVT_WAIT_FRAMES(160)
         EVT_CALL(PlaySound, 0x20FC)

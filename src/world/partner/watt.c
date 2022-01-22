@@ -41,7 +41,7 @@ s32 D_802BE254_31DDC4 = 6;
 void func_802BD100_31CC70(Npc* npc) {
     if (!(npc->flags & NPC_FLAG_2)) {
         if (D_802BE310 == NULL) {
-            D_802BE310 = (unk_802BE310*)playFX_73(0, npc->pos.x, npc->pos.y + 13.0f, npc->pos.z, 0.9f, 5, 0);
+            D_802BE310 = (unk_802BE310*)fx_static_status(0, npc->pos.x, npc->pos.y + 13.0f, npc->pos.z, 0.9f, 5, 0);
         }
     }
 }

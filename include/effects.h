@@ -69,76 +69,76 @@ enum EffectID {
     EFFECT_ID_3D,
     EFFECT_BLAST,
     EFFECT_FIRE_FLOWER_ATTACKING,
-    EFFECT_ID_40,
-    EFFECT_ID_41,
-    EFFECT_ID_42,
-    EFFECT_ID_43,
-    EFFECT_ID_44,
-    EFFECT_ID_45,
+    EFFECT_RECOVER,
+    EFFECT_DISABLE_X,
+    EFFECT_BOMBETTE_BREAKING,
+    EFFECT_FIREWORK,
+    EFFECT_CONFETTI,
+    EFFECT_SNOWFALL,
     EFFECT_ID_46,
-    EFFECT_ID_47,
-    EFFECT_ID_48,
-    EFFECT_ID_49,
-    EFFECT_ID_4A,
-    EFFECT_ID_4B,
-    EFFECT_ID_4C,
-    EFFECT_ID_4D,
-    EFFECT_ID_4E,
-    EFFECT_ID_4F,
+    EFFECT_GATHER_MAGIC,
+    EFFECT_ATTACK_RESULT_TEXT,
+    EFFECT_SMALL_GOLD_SPARKLE,
+    EFFECT_FLASHING_BOX_SHOCKWAVE,
+    EFFECT_BALLOON,
+    EFFECT_FLOATING_ROCK,
+    EFFECT_CHOMP_DROP,
+    EFFECT_QUIZMO_STAGE,
+    EFFECT_RADIATING_ENERGY_ORB,
     EFFECT_50, // unused
-    EFFECT_ID_51,
-    EFFECT_ID_52,
-    EFFECT_ID_53,
+    EFFECT_MOTION_BLUR_FLAME,
+    EFFECT_ENERGY_ORB_WAVE,
+    EFFECT_MERLIN_HOUSE_STARS,
     EFFECT_54, // unused
-    EFFECT_ID_55,
-    EFFECT_ID_56,
-    EFFECT_ID_57,
-    EFFECT_ID_58,
-    EFFECT_ID_59,
-    EFFECT_ID_5A,
-    EFFECT_ID_5B,
-    EFFECT_ID_5C,
-    EFFECT_ID_5D,
-    EFFECT_ID_5E,
-    EFFECT_ID_5F,
-    EFFECT_ID_60,
-    EFFECT_ID_61,
-    EFFECT_ID_62,
+    EFFECT_BUTTERFLIES,
+    EFFECT_STAT_CHANGE,
+    EFFECT_SNAKING_STATIC,
+    EFFECT_THUNDERBOLT_RING,
+    EFFECT_SQUIRT,
+    EFFECT_WATER_BLOCK,
+    EFFECT_WATERFALL,
+    EFFECT_WATER_FOUNTAIN,
+    EFFECT_UNDERWATER,
+    EFFECT_LIGHTNING_BOLT,
+    EFFECT_WATER_SPLASH,
+    EFFECT_SNOWMAN_DOLL_EFF,
+    EFFECT_FRIGHT_JAR_EFF,
+    EFFECT_STOP_WATCH_EFF,
     EFFECT_ID_63,
-    EFFECT_ID_64,
+    EFFECT_THROW_SPINY,
     EFFECT_ID_65,
-    EFFECT_ID_66,
-    EFFECT_ID_67,
-    EFFECT_ID_68,
-    EFFECT_ID_69,
+    EFFECT_TUBBA_HEART_ATTACK,
+    EFFECT_WHIRLWIND,
+    EFFECT_RED_IMPACT,
+    EFFECT_FLOATING_CLOUD_PUFF,
     EFFECT_6A, // unused
-    EFFECT_ID_6B,
-    EFFECT_ID_6C,
-    EFFECT_ID_6D,
-    EFFECT_ID_6E,
-    EFFECT_ID_6F,
-    EFFECT_ID_70,
-    EFFECT_ID_71,
-    EFFECT_ID_72,
-    EFFECT_ID_73,
-    EFFECT_ID_74,
+    EFFECT_ENERGY_IN_OUT,
+    EFFECT_TATTLE_WINDOW,
+    EFFECT_SHINY_FLARE,
+    EFFECT_HUFF_PUFF_BREATH,
+    EFFECT_COLD_BREATH,
+    EFFECT_EMBERS,
+    EFFECT_HIEROGLYPHS,
+    EFFECT_MISC_PARTICLES,
+    EFFECT_STATIC_STATUS,
+    EFFECT_MOVING_CLOUD,
     EFFECT_ID_75,
     EFFECT_76, // unused
-    EFFECT_ID_77,
-    EFFECT_ID_78,
-    EFFECT_ID_79,
-    EFFECT_ID_7A,
-    EFFECT_ID_7B,
-    EFFECT_ID_7C,
-    EFFECT_ID_7D,
-    EFFECT_ID_7E,
-    EFFECT_ID_7F,
-    EFFECT_ID_80,
-    EFFECT_ID_81,
-    EFFECT_ID_82,
-    EFFECT_ID_83,
-    EFFECT_ID_84,
-    EFFECT_ID_85,
+    EFFECT_FIREWORK_ROCKET,
+    EFFECT_PEACH_STAR_BEAM,
+    EFFECT_CHAPTER_CHANGE,
+    EFFECT_ICE_SHARD,
+    EFFECT_SPIRIT_CARD,
+    EFFECT_LIL_OINK,
+    EFFECT_SOMETHING_ROTATING,
+    EFFECT_BREAKING_JUNK,
+    EFFECT_PARTNER_BUFF,
+    EFFECT_QUIZMO_ASSISTANT,
+    EFFECT_ICE_PILLAR,
+    EFFECT_SUN,
+    EFFECT_STAR_SPIRITS_ENERGY,
+    EFFECT_PINK_SPARKLES,
+    EFFECT_STAR_OUTLINE,
     EFFECT_ID_86,
 };
 
@@ -439,7 +439,7 @@ typedef struct EmoteFXData {
     /* 0x3C */ s32 unk_3C;
 } EmoteFXData; // size = 0x40
 
-typedef struct Effect73 {
+typedef struct SmallGoldSparkleFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -449,9 +449,9 @@ typedef struct Effect73 {
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ s32 unk_20;
-} Effect73; // size = 0x24
+} SmallGoldSparkleFXData; // size = 0x24
 
-typedef struct Effect75 {
+typedef struct BalloonFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -461,7 +461,7 @@ typedef struct Effect75 {
     /* 0x18 */ f32 unk_18;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
-} Effect75; // size = 0x24
+} BalloonFXData; // size = 0x24
 
 typedef struct Effect134 {
     /* 0x00 */ s32 unk_00;
@@ -481,9 +481,9 @@ typedef struct Effect134 {
 } Effect134; // size = 0x38
 
 // TODO figure out what this actually is
-// playFX_4E invokes gEffectTable[78]'s entryPoint function
-// playFX_6F invokes gEffectTable[111]'s entryPoint function
-// playFX_83 invokes gEffectTable[131]'s entryPoint function
+// fx_quizmo_stage invokes gEffectTable[78]'s entryPoint function
+// fx_cold_breath invokes gEffectTable[111]'s entryPoint function
+// fx_star_spirits_energy invokes gEffectTable[131]'s entryPoint function
 // These functions are currently typed to return void
 // Assume they return an Effect*, and this struct is accessed at unk_0C,
 // but this struct differs from EffectInstanceData
@@ -676,76 +676,76 @@ EffectInstance* playFX_3C(s32, f32, f32, f32, f32, s32*);
 void playFX_3D(s32, f32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* fx_blast(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_fire_flower_attacking(s32, f32, f32, f32, s32);
-EffectInstance* playFX_40(s32, f32, f32, f32, s32);
-EffectInstance* playFX_41(s32, f32, f32, f32, s32);
-EffectInstance* playFX_42(s32, s32, s32, f32, s32, s32);
-EffectInstance* playFX_43(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_44(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_45(s32, s32);
+EffectInstance* fx_recover(s32, f32, f32, f32, s32);
+EffectInstance* fx_disable_x(s32, f32, f32, f32, s32);
+EffectInstance* fx_bombette_breaking(s32, s32, s32, f32, s32, s32);
+EffectInstance* fx_firework(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_confetti(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_snowfall(s32, s32);
 EffectInstance* playFX_46_whirlwind(s32, EffectWhirlwind*, f32, s32);
-EffectInstance* playFX_47(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_48(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_49(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_4A(s32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_4B(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_4C(s32, f32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_4D(s32, f32, f32, f32, f32, s32, f32, s32, f32, s32);
-EffectInstance* playFX_4E(s32, f32, f32, f32);
-EffectInstance* playFX_4F(s32, f32, f32, f32, f32, s32);
-void playFX_50(s32, f32, f32, f32);
-EffectInstance* playFX_51(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_52(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_53(s32, f32, f32, f32);
-EffectInstance* playFX_54(s32, f32, f32, f32);
-EffectInstance* playFX_55(s32, f32, f32, f32);
-EffectInstance* playFX_56(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_57(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_58(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_59(s32, f32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_5A(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
-EffectInstance* playFX_5B(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_5C(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_5D(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_5E(s32, f32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_5F(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
-EffectInstance* playFX_60(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_61(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_62(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_gather_magic(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_attack_result_text(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_small_gold_sparkle(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_flashing_box_shockwave(s32, f32, f32, f32, f32, f32);
+EffectInstance* fx_balloon(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_floating_rock(s32, f32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_chomp_drop(s32, f32, f32, f32, f32, s32, f32, s32, f32, s32);
+EffectInstance* fx_quizmo_stage(s32, f32, f32, f32);
+EffectInstance* fx_radiating_energy_orb(s32, f32, f32, f32, f32, s32);
+void fx_quizmo_answer(s32, f32, f32, f32);
+EffectInstance* fx_motion_blur_flame(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_energy_orb_wave(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_merlin_house_stars(s32, f32, f32, f32);
+EffectInstance* fx_quizmo_audience(s32, f32, f32, f32);
+EffectInstance* fx_butterflies(s32, f32, f32, f32);
+EffectInstance* fx_stat_change(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_snaking_static(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_thunderbolt_ring(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_squirt(s32, f32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_water_block(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
+EffectInstance* fx_waterfall(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_water_fountain(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_underwater(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_lightning_bolt(s32, f32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_water_splash(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
+EffectInstance* fx_snowman_doll_eff(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_fright_jar_eff(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_stop_watch_eff(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_63(s32, f32, f32, f32, f32, f32, f32, f32, s32, s32);
-EffectInstance* playFX_64(s32, f32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_throw_spiny(s32, f32, f32, f32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_65(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_66(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_67(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_68(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_69(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_tubba_heart_attack(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_whirlwind(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_red_impact(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_floating_cloud_puff(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_6A(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6B(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6C(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6D(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6E(s32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6F(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_70(s32, f32, f32, f32, f32, f32, f32, s32, s32, f32, f32);
-EffectInstance* playFX_71(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_72(s32, f32, f32, f32, f32, f32, f32, s32, s32);
-EffectInstance* playFX_73(s32, f32, f32, f32, f32, s32, s32); //returns ptr to struct unk_802BE310* in watt.c
-EffectInstance* playFX_74(s32, f32, f32, f32, f32, f32, f32, f32, f32);
+EffectInstance* fx_energy_in_out(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_tattle_window(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_shiny_flare(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_huff_puff_breath(s32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_cold_breath(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_embers(s32, f32, f32, f32, f32, f32, f32, s32, s32, f32, f32);
+EffectInstance* fx_hieroglyphs(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_misc_particles(s32, f32, f32, f32, f32, f32, f32, s32, s32);
+EffectInstance* fx_static_status(s32, f32, f32, f32, f32, s32, s32); //returns ptr to struct unk_802BE310* in watt.c
+EffectInstance* fx_moving_cloud(s32, f32, f32, f32, f32, f32, f32, f32, f32);
 EffectInstance* playFX_75(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_76(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_77(s32, f32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_78(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_79(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_7A(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_7B(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_7C(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_7D(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_7E(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_7F(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_80(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_81(s32, f32 x, f32 y, f32 z, f32, s32);
-EffectInstance* playFX_82(s32, f32, f32, f32, f32, s32 time);
-EffectInstance* playFX_83(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_84(s32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_85(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_firework_rocket(s32, f32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_peach_star_beam(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_chapter_change(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_ice_shard(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_spirit_card(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_lil_oink(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_something_rotating(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_breaking_junk(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_partner_buff(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_quizmo_assistant(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_ice_pillar(s32, f32 x, f32 y, f32 z, f32, s32);
+EffectInstance* fx_sun(s32, f32, f32, f32, f32, s32 time);
+EffectInstance* fx_star_spirits_energy(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_pink_sparkles(s32, f32, f32, f32, f32, f32);
+EffectInstance* fx_star_outline(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_86(s32, f32, f32, f32, f32, s32);
 
 #endif

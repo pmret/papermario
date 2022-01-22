@@ -21,7 +21,7 @@ ApiStatus func_802403B8_8AC348(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802404A0_8AC430(Evt* script, s32 isInitialCall) {
-    playFX_52(4, 0.0f, 0.0f, 0.0f, 0.3f, 30);
+    fx_energy_orb_wave(4, 0.0f, 0.0f, 0.0f, 0.3f, 30);
     return ApiStatus_DONE2;
 }
 

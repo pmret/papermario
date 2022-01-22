@@ -576,10 +576,10 @@ EvtScript N(80243E78) = {
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-void playFX_82();
+void fx_sun();
 
 ApiStatus N(func_8024030C_CCB61C)(Evt* script, s32 isInitialCall) {
-    playFX_82(0, 0, 0, 0, 0, 0);
+    fx_sun(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

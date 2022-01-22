@@ -26,7 +26,7 @@ glabel func_80242318_854488
 /* 8544D8 80242368 00000000 */  nop
 .L8024236C:
 /* 8544DC 8024236C 00A0302D */  daddu     $a2, $a1, $zero
-/* 8544E0 80242370 0C01C5A4 */  jal       playFX_50
+/* 8544E0 80242370 0C01C5A4 */  jal       fx_quizmo_answer
 /* 8544E4 80242374 00A0382D */   daddu    $a3, $a1, $zero
 .L80242378:
 /* 8544E8 80242378 8FBF0010 */  lw        $ra, 0x10($sp)

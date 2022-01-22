@@ -19,7 +19,7 @@ ApiStatus func_802A10C8_75E698(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     s32* var4;
 
-    playFX_56(2, var1, var2, var3, 1.0f, 60);
+    fx_stat_change(2, var1, var2, var3, 1.0f, 60);
     var4 = &D_802A4350;
     *var4 = 0;
     if (battleStatus->hammerCharge > 0) {

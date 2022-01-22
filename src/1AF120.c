@@ -1138,7 +1138,7 @@ EvtScript D_80298E20 = {
         EVT_SUB(LW(1), LW(7))
     EVT_END_IF
     EVT_SUB(LW(1), 3)
-    EVT_CALL(PlayEffect, EFFECT_ID_67, 0, LW(0), LW(1), LW(2), LW(3), 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_WHIRLWIND, 0, LW(0), LW(1), LW(2), LW(3), 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(func_80269E80, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(14)
@@ -1535,7 +1535,7 @@ EvtScript D_8029A76C = {
     EVT_SETF(LW(5), LW(3))
     EVT_DIVF(LW(5), EVT_FLOAT(20.0))
     EVT_ADDF(LW(1), LW(5))
-    EVT_CALL(PlayEffect, EFFECT_ID_4A, 0, LW(0), LW(1), LW(2), LW(4), LW(3), 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LW(0), LW(1), LW(2), LW(4), LW(3), 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_SHOCK)
     EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(HPBarToCurrent, ACTOR_SELF)

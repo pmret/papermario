@@ -143,7 +143,7 @@ EvtScript N(80220DC0) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_POWER_UP)
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
         EVT_ADD(LW(1), 10)
-        EVT_CALL(PlayEffect, EFFECT_ID_6B, 6, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 6, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_cleft_hyper_Anim_4)
         EVT_WAIT_FRAMES(30)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)

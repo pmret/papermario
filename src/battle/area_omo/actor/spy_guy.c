@@ -571,7 +571,7 @@ EvtScript N(hammerAttack) = {
                 EVT_WAIT_FRAMES(5)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 2)
                 EVT_SUB(LW(1), 7)
-                EVT_CALL(PlayEffect, EFFECT_ID_43, 0, LW(1), LW(2), LW(3), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_FIREWORK, 0, LW(1), LW(2), LW(3), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
                 EVT_WAIT_FRAMES(40)
             EVT_ELSE
                 EVT_WAIT_FRAMES(8)

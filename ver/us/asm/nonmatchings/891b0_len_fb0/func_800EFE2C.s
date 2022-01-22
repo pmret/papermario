@@ -271,7 +271,7 @@ glabel func_800EFE2C
 /* 896D8 800F0228 E7A40018 */  swc1      $f4, 0x18($sp)
 /* 896DC 800F022C E7A20014 */  swc1      $f2, 0x14($sp)
 .L800F0230:
-/* 896E0 800F0230 0C01C8D4 */  jal       playFX_72
+/* 896E0 800F0230 0C01C8D4 */  jal       fx_misc_particles
 /* 896E4 800F0234 00000000 */   nop
 .L800F0238:
 /* 896E8 800F0238 8FBF0034 */  lw        $ra, 0x34($sp)

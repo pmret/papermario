@@ -369,7 +369,7 @@ EvtScript N(healOneAlly) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_medi_guy_Palette_00_Anim_5)
     EVT_ADD(LW(2), 50)
     EVT_CALL(PlayEffect, EFFECT_SPARKLES, 1, LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0, 0)
-    EVT_CALL(PlayEffect, EFFECT_ID_40, 2, LW(1), LW(2), LW(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_RECOVER, 2, LW(1), LW(2), LW(3), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT_FRAMES(30)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_medi_guy_Palette_00_Anim_1)
     EVT_WAIT_FRAMES(10)

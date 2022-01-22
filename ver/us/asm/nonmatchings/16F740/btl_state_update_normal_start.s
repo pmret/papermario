@@ -224,7 +224,7 @@ glabel btl_state_update_normal_start
 /* 16FE18 80241538 AFA00014 */  sw        $zero, 0x14($sp)
 /* 16FE1C 8024153C 00A0302D */  daddu     $a2, $a1, $zero
 /* 16FE20 80241540 00A0382D */  daddu     $a3, $a1, $zero
-/* 16FE24 80241544 0C01CA0C */  jal       playFX_7F
+/* 16FE24 80241544 0C01CA0C */  jal       fx_partner_buff
 /* 16FE28 80241548 AFA50010 */   sw       $a1, 0x10($sp)
 /* 16FE2C 8024154C 0C03A604 */  jal       func_800E9810
 /* 16FE30 80241550 AE82043C */   sw       $v0, 0x43c($s4)

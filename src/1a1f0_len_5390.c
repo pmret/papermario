@@ -125,8 +125,8 @@ ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[1] = 0;
         D_800A0BA4 = merlee->pos.y;
-        D_800A0BA8 = playFX_52(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
-        D_800A0BAC = playFX_52(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
+        D_800A0BA8 = fx_energy_orb_wave(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
+        D_800A0BAC = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_800A0BB8 = 0;
         D_800A0BA0 = 12;
         sfx_play_sound(0x2074);
@@ -203,7 +203,7 @@ ApiStatus PlayMerleeGatherFX(Evt* script, s32 isInitialCall) {
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
 
-    playFX_6B(6, var0, var1, var2, 1.2f, 30);
+    fx_energy_in_out(6, var0, var1, var2, 1.2f, 30);
     return ApiStatus_DONE2;
 }
 
@@ -213,7 +213,7 @@ ApiStatus PlayMerleeOrbFX(Evt* script, s32 isInitialCall) {
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
 
-    playFX_52(9, var0, var1, var2, 5.0f, 15);
+    fx_energy_orb_wave(9, var0, var1, var2, 5.0f, 15);
     return ApiStatus_DONE2;
 }
 

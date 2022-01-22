@@ -567,7 +567,7 @@ EvtScript N(tackleAttack) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_bob_omb_Palette_00_Anim_14)
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(GetActorSize, ACTOR_SELF, LW(3), LW(4))
-            EVT_CALL(PlayEffect, EFFECT_ID_4A, 0, LW(0), LW(1), LW(2), LW(4), LW(3), 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LW(0), LW(1), LW(2), LW(4), LW(3), 0, 0, 0, 0, 0, 0, 0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_SHOCK)
             EVT_WAIT_FRAMES(20)
             EVT_EXEC_WAIT(N(8021AB54))

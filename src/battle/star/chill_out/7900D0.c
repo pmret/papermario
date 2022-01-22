@@ -23,7 +23,7 @@ ApiStatus func_802A153C_79060C(Evt* script, s32 isInitialCall) {
     f32 b = rand_int(120) + 7;
     f32 c = rand_int(50) - 25;
 
-    playFX_6F(2, a, b, c, 2.0f, 20);
+    fx_cold_breath(2, a, b, c, 2.0f, 20);
 
     a = rand_int(200) - 25;
     b = rand_int(120) + 7;

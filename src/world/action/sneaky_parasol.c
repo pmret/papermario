@@ -347,7 +347,7 @@ void func_802B6120_E2A7D0(void) {
     } else if (parasolStruct->unk_08 == 0) {
         parasolStruct->unk_08 = -1;
         if (parasolStruct->npc != NULL) {
-            playFX_84(playerStatus->unk_0D - 1, parasolStruct->npc->pos.x, parasolStruct->npc->pos.y, parasolStruct->npc->pos.z, 1, parasolStruct->npc->yawCamOffset);
+            fx_pink_sparkles(playerStatus->unk_0D - 1, parasolStruct->npc->pos.x, parasolStruct->npc->pos.y, parasolStruct->npc->pos.z, 1, parasolStruct->npc->yawCamOffset);
         }
     }
     if (parasolStruct->unk_0C != 0) {

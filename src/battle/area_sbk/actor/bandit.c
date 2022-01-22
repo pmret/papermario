@@ -286,7 +286,7 @@ EvtScript N(8021D820) = {
             EVT_CALL(SetGoalToTarget, LW(10))
             EVT_CALL(JumpToGoal, LW(10), 15, FALSE, FALSE, FALSE)
             EVT_CALL(GetGoalPos, LW(10), LW(0), LW(1), LW(2))
-            EVT_CALL(PlayEffect, EFFECT_ID_49, 0, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SMALL_GOLD_SPARKLE, 0, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_CALL(PlaySoundAtActor, LW(10), 0x211)
             EVT_CALL(GetActorVar, LW(10), 1, LW(0))
             EVT_CALL(AddCoin, LW(0))

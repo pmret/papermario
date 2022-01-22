@@ -36,7 +36,7 @@ ApiStatus N(UnkStarFunc4)(Evt* script, s32 isInitialCall) {
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
 
-    playFX_72(4, var1, var2, evt_get_variable(script, *args++), 20.0f, 20.0f, 1.0f, 0xA, 0xF);
+    fx_misc_particles(4, var1, var2, evt_get_variable(script, *args++), 20.0f, 20.0f, 1.0f, 0xA, 0xF);
     return ApiStatus_DONE2;
 }
 

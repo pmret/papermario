@@ -97,7 +97,7 @@ glabel lightning_main
 /* 36E330 E006C160 4481A000 */  mtc1      $at, $f20
 /* 36E334 E006C164 2402FFFF */  addiu     $v0, $zero, -1
 /* 36E338 E006C168 AFA20014 */  sw        $v0, 0x14($sp)
-/* 36E33C E006C16C 0C023800 */  jal       fx_71_main
+/* 36E33C E006C16C 0C023800 */  jal       gather_magic_main
 /* 36E340 E006C170 E7B40010 */   swc1     $f20, 0x10($sp)
 /* 36E344 E006C174 2404003C */  addiu     $a0, $zero, 0x3c
 /* 36E348 E006C178 0C080150 */  jal       shim_load_effect
@@ -121,7 +121,7 @@ glabel lightning_main
 /* 36E38C E006C1BC 44810000 */  mtc1      $at, $f0
 /* 36E390 E006C1C0 0000202D */  daddu     $a0, $zero, $zero
 /* 36E394 E006C1C4 AFA00014 */  sw        $zero, 0x14($sp)
-/* 36E398 E006C1C8 0C02B800 */  jal       fx_87_main
+/* 36E398 E006C1C8 0C02B800 */  jal       snaking_static_main
 /* 36E39C E006C1CC E7A00010 */   swc1     $f0, 0x10($sp)
 /* 36E3A0 E006C1D0 AE020048 */  sw        $v0, 0x48($s0)
 /* 36E3A4 E006C1D4 8C42000C */  lw        $v0, 0xc($v0)
@@ -161,7 +161,7 @@ glabel lightning_main
 /* 36E420 E006C250 4407D000 */  mfc1      $a3, $f26
 /* 36E424 E006C254 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 36E428 E006C258 C7A0007C */  lwc1      $f0, 0x7c($sp)
-/* 36E42C E006C25C 0C025000 */  jal       fx_74_main
+/* 36E42C E006C25C 0C025000 */  jal       flashing_box_shockwave_main
 /* 36E430 E006C260 E7A00014 */   swc1     $f0, 0x14($sp)
 /* 36E434 E006C264 0260102D */  daddu     $v0, $s3, $zero
 .LE006C268:
