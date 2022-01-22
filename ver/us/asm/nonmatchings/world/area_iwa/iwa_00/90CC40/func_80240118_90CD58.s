@@ -88,7 +88,7 @@ glabel func_80240118_90CD58
 /* 90CE94 80240254 C62E003C */  lwc1      $f14, 0x3c($s1)
 /* 90CE98 80240258 C62C0038 */  lwc1      $f12, 0x38($s1)
 /* 90CE9C 8024025C 44060000 */  mfc1      $a2, $f0
-/* 90CEA0 80240260 0C01BE3C */  jal       fx_cloud_puff
+/* 90CEA0 80240260 0C01BE3C */  jal       fx_big_smoke_puff
 /* 90CEA4 80240264 46027380 */   add.s    $f14, $f14, $f2
 /* 90CEA8 80240268 8E420074 */  lw        $v0, 0x74($s2)
 /* 90CEAC 8024026C 14500003 */  bne       $v0, $s0, .L8024027C

@@ -608,7 +608,7 @@ void remove_effect(EffectInstance*);
 s32 load_effect(s32 effectIndex);
 
 void fx_big_dust_puff(s32, f32, f32, f32, s32);
-void fx_cloud_puff(f32, f32, f32);
+void fx_big_smoke_puff(f32, f32, f32);
 void fx_landing_dust(s32, f32, f32, f32, f32);
 void fx_walking_dust(s32, f32, f32, f32, f32, f32);
 void fx_flower_ring(f32, f32, f32, f32);

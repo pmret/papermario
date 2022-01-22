@@ -196,7 +196,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             playFX_3E(0, fVar1, fVar2, fVar3, 3.0f, iVar5);
             break;
         case EFFECT_ID_01:
-            fx_cloud_puff(fVar1, fVar2, fVar3);
+            fx_big_smoke_puff(fVar1, fVar2, fVar3);
             break;
         case EFFECT_ID_06:
             fx_landing_dust(iVar1, fVar2, fVar3, fVar4, fVar5);
