@@ -1825,7 +1825,7 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
     f32 temp_f20_2;
 
     if (var0 == 2) {
-        fx_land(0, xPos, yPos + 0.0f, zPos, D_802938A4);
+        fx_landing_dust(0, xPos, yPos + 0.0f, zPos, D_802938A4);
     } else if (var0 == 1) {
         D_802938A8 = 4;
     } else if (D_802938A8++ >= 4) {
@@ -1833,7 +1833,7 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
         temp_f20 = (clamp_angle(-angleDeg) * TAU) / 360.0f;
         temp_f20_2 = sin_rad(temp_f20);
         temp_f0 = cos_rad(temp_f20);
-        fx_walk(0, xPos + (temp_f20_2 * 24.0f * 0.2f), yPos + 1.5f, zPos + (temp_f0 * 24.0f * 0.2f), temp_f20_2, temp_f0);
+        fx_walking_dust(0, xPos + (temp_f20_2 * 24.0f * 0.2f), yPos + 1.5f, zPos + (temp_f0 * 24.0f * 0.2f), temp_f20_2, temp_f0);
     }
 }
 #else

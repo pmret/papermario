@@ -194,7 +194,7 @@ typedef struct StarSpiritEffect {
     /* 0x54 */ struct StarSpiritEffectUnkStruct* unk_54;
 } StarSpiritEffect; // size = 0x58
 
-typedef struct BigSmokePuffData {
+typedef struct BigSmokePuffFXData {
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ s16 unk_02;
     /* 0x04 */ s16 unk_04;
@@ -208,9 +208,9 @@ typedef struct BigSmokePuffData {
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ char unk_28[0x4];
-} BigSmokePuffData; // size = 0x2C
+} BigSmokePuffFXData; // size = 0x2C
 
-typedef struct Effect6 {
+typedef struct LandingDustFXData {
     /* 0x00 */ u16 type;
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ f32 x;
@@ -229,9 +229,9 @@ typedef struct Effect6 {
     /* 0x38 */ s32 unk_38;
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ s32 unk_40;
-} Effect6; // size = 0x44
+} LandingDustFXData; // size = 0x44
 
-typedef struct Effect7 {
+typedef struct WalkingDustFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ u16 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -246,7 +246,7 @@ typedef struct Effect7 {
     /* 0x6C */ s32 unk_6C;
     /* 0x70 */ s32 unk_70;
     /* 0x74 */ s32 unk_74;
-} Effect7; // size = 0x78
+} WalkingDustFXData; // size = 0x78
 
 // Used by effects 8 and 9 (TODO: better name)
 typedef struct Effect8 {
@@ -609,8 +609,8 @@ s32 load_effect(s32 effectIndex);
 
 void fx_big_dust_puff(s32, f32, f32, f32, s32);
 void fx_cloud_puff(f32, f32, f32);
-void fx_land(s32, f32, f32, f32, f32);
-void fx_walk(s32, f32, f32, f32, f32, f32);
+void fx_landing_dust(s32, f32, f32, f32, f32);
+void fx_walking_dust(s32, f32, f32, f32, f32, f32);
 void playFX_08(f32, f32, f32, f32);
 void playFX_09(s32, f32, f32, f32, f32, f32);
 EffectInstance* playFX_0A(f32, f32, f32, f32);

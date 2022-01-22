@@ -199,10 +199,10 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_cloud_puff(fVar1, fVar2, fVar3);
             break;
         case EFFECT_ID_06:
-            fx_land(iVar1, fVar2, fVar3, fVar4, fVar5);
+            fx_landing_dust(iVar1, fVar2, fVar3, fVar4, fVar5);
             break;
         case EFFECT_ID_07:
-            fx_walk(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
+            fx_walking_dust(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
             break;
         case EFFECT_ID_08:
             playFX_08(fVar1, fVar2, fVar3, fVar4);

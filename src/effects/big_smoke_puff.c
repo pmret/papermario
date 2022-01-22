@@ -26,7 +26,7 @@ void big_smoke_puff_appendGfx(void* effect);
 void big_smoke_puff_main(f32 x, f32 y, f32 z) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    BigSmokePuffData* data;
+    BigSmokePuffFXData* data;
     f32 theta;
     f32 temp_f20;
     f32 cosTheta;
@@ -44,7 +44,7 @@ void big_smoke_puff_main(f32 x, f32 y, f32 z) {
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    data = shim_general_heap_malloc(effect->numParts * sizeof(BigSmokePuffData));
+    data = shim_general_heap_malloc(effect->numParts * sizeof(BigSmokePuffFXData));
     effect->data = data;
 
     ASSERT(data != NULL);
@@ -74,7 +74,7 @@ void big_smoke_puff_init(EffectInstance* effect) {
 }
 
 void big_smoke_puff_update(EffectInstance* effect) {
-    BigSmokePuffData* data = effect->data;
+    BigSmokePuffFXData* data = effect->data;
     s32 cond = FALSE;
     s32 i;
 
@@ -120,7 +120,7 @@ void big_smoke_puff_render(EffectInstance* effect) {
 
 void big_smoke_puff_appendGfx(void* effect) {
     EffectInstance* eff = (EffectInstance*)effect;
-    BigSmokePuffData* data = ((EffectInstance*)effect)->data;
+    BigSmokePuffFXData* data = ((EffectInstance*)effect)->data;
     Matrix4f mtx;
     s32 i;
 

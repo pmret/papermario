@@ -315,7 +315,7 @@ glabel func_8024055C_A60F2C
 /* A613D0 80240A00 8E450038 */  lw        $a1, 0x38($s2)
 /* A613D4 80240A04 8E46003C */  lw        $a2, 0x3c($s2)
 /* A613D8 80240A08 8E470040 */  lw        $a3, 0x40($s2)
-/* A613DC 80240A0C 0C01BECC */  jal       fx_walk
+/* A613DC 80240A0C 0C01BECC */  jal       fx_walking_dust
 /* A613E0 80240A10 24040002 */   addiu    $a0, $zero, 2
 /* A613E4 80240A14 3C01C47A */  lui       $at, 0xc47a
 /* A613E8 80240A18 44810000 */  mtc1      $at, $f0

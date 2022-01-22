@@ -13,22 +13,22 @@ extern Gfx D_09002950[];
 extern Gfx D_09002B20[];
 extern Gfx D_09002B40[];
 
-void fx_7_init(EffectInstance* effect);
-void fx_7_update(EffectInstance* effect);
-void fx_7_render(EffectInstance* effect);
-void fx_7_appendGfx(void* effect);
+void walking_dust_init(EffectInstance* effect);
+void walking_dust_update(EffectInstance* effect);
+void walking_dust_render(EffectInstance* effect);
+void walking_dust_appendGfx(void* effect);
 
-void fx_7_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
+void walking_dust_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    Effect7* effectPart;
+    WalkingDustFXData* effectPart;
     s32 numParts = 1;
     s32 i;
 
     bp.unk_00 = 0;
-    bp.init = fx_7_init;
-    bp.update = fx_7_update;
-    bp.renderWorld = fx_7_render;
+    bp.init = walking_dust_init;
+    bp.update = walking_dust_update;
+    bp.renderWorld = walking_dust_render;
     bp.unk_14 = NULL;
     bp.effectID = EFFECT_ID_07;
 
@@ -57,11 +57,11 @@ void fx_7_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     }
 }
 
-void fx_7_init(EffectInstance* effect) {
+void walking_dust_init(EffectInstance* effect) {
 }
 
-void fx_7_update(EffectInstance* effect) {
-    Effect7* part = (Effect7*)effect->data;
+void walking_dust_update(EffectInstance* effect) {
+    WalkingDustFXData* part = (WalkingDustFXData*)effect->data;
 
     part->unk_74 = D_E000E684[part->unk_6C][part->unk_70++];
 
@@ -79,11 +79,11 @@ void fx_7_update(EffectInstance* effect) {
     }
 }
 
-void fx_7_render(EffectInstance* effect) {
+void walking_dust_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_7_appendGfx;
+    renderTask.appendGfx = walking_dust_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
@@ -92,9 +92,9 @@ void fx_7_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_7_appendGfx(void* effect) {
+void walking_dust_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    Effect7* part = effectTemp->data;
+    WalkingDustFXData* part = effectTemp->data;
     s32 temp_t3 = part->unk_04;
     s32 temp_t4 = part->unk_74;
     s32 cond = FALSE;

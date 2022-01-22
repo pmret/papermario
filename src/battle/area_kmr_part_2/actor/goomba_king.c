@@ -150,7 +150,7 @@ ApiStatus func_80218A60_43A4F0(Evt* script, s32 isInitialCall) {
     s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = evt_get_variable(script, *args++);
 
-    fx_land(2, var1, var2, evt_get_variable(script, *args++), 0);
+    fx_landing_dust(2, var1, var2, evt_get_variable(script, *args++), 0);
     return ApiStatus_DONE2;
 }
 

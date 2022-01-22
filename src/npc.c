@@ -1393,7 +1393,7 @@ void func_8003D788(Npc* npc, s32 arg1) {
         f32 z = npc->pos.z;
 
         if (phi_a2 == 0) {
-            fx_land(0, x, y, z, D_80077C10);
+            fx_landing_dust(0, x, y, z, D_80077C10);
             D_80077C10 = clamp_angle(D_80077C10 + 35.0f);
         } else {
             playFX_72(3, x, y, z,  13.0f, 10.0f, 1.0f, 5, 30);
@@ -1403,7 +1403,7 @@ void func_8003D788(Npc* npc, s32 arg1) {
             D_80077C14 = 0;
             if (phi_a2 == 0) {
                 sin_cos_rad((clamp_angle(-npc->yaw) * TAU) / 360.0f, &subroutine_argA, &subroutine_argB);
-                fx_walk(0, npc->pos.x + (npc->collisionRadius * subroutine_argA * 0.2f), npc->pos.y + 1.5f,
+                fx_walking_dust(0, npc->pos.x + (npc->collisionRadius * subroutine_argA * 0.2f), npc->pos.y + 1.5f,
                                npc->pos.z + (npc->collisionRadius * subroutine_argB * 0.2f), subroutine_argA, subroutine_argB);
             } else {
                 sin_cos_rad((clamp_angle(npc->yaw) * TAU) / 360.0f, &subroutine_argA, &subroutine_argB);

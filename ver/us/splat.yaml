@@ -2180,7 +2180,7 @@ segments:
     - [0x325AD0, c]
     - [0x325EE0, pm_effect_shims, effect_shims]
     - [0x326160, .data, 325AD0]
-  - [0x326410, bin] # effect 1 gfx
+  - [0x326410, bin] # big_smoke_puff gfx
   - name: big_smoke_puff
     dir: effects
     type: code
@@ -2189,22 +2189,22 @@ segments:
     subsegments:
     - [0x3278F0, c, big_smoke_puff]
     - [0x328050]
-  - name: land
+  - name: landing_dust
     dir: effects
     type: code
     start: 0x328110
     vram: 0xE000C000
     subsegments:
-    - [0x328110, c, land]
+    - [0x328110, c, landing_dust]
     - [0x328D20]
-  - [0x328EA0, bin] # effect 6,7,23,29,39 gfx
-  - name: effect_7
+  - [0x328EA0, bin] # effect landing_dust, walking_dust, 23, 29, 39 gfx
+  - name: walking_dust
     dir: effects
     type: code
     start: 0x32C110
     vram: 0xE000E000
     subsegments:
-    - [0x32C110, c, effect_7]
+    - [0x32C110, c, walking_dust]
     - [0x32C770]
   - name: effect_8
     dir: effects

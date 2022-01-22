@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects.h"
+#include "effects_internal.h"
 #include "ld_addrs.h"
 
 typedef s32 TlbEntry[0x1000 / 4];
@@ -13,139 +14,11 @@ extern EffectGraphics gEffectGraphicsData[15];
 extern EffectInstance* gEffectInstances[96];
 extern s32 D_801A6000;
 
-#define FX_MAIN(name) void name(s32); // the actual signature is going to be wrong but doesn't matter
+// TODO rename FX_ENTRY_NAMED to FX_ENTRY once everyone is named
 #define FX_ENTRY(name, gfx_name) { fx_##name##_main, effect_##name##_ROM_START, effect_##name##_ROM_END, \
                                    effect_##name##_VRAM, gfx_name##_ROM_START, gfx_name##_ROM_END }
 #define FX_ENTRY_NAMED(name, gfx_name) { name##_main, name##_ROM_START, name##_ROM_END, \
                                    name##_VRAM, gfx_name##_ROM_START, gfx_name##_ROM_END }
-
-FX_MAIN(big_smoke_puff_main);
-FX_MAIN(land_main);
-FX_MAIN(fx_7_main);
-FX_MAIN(fx_8_main);
-FX_MAIN(fx_9_main);
-FX_MAIN(fx_10_main);
-FX_MAIN(fx_11_main);
-FX_MAIN(fx_12_main);
-FX_MAIN(fx_13_main);
-FX_MAIN(fx_14_main);
-FX_MAIN(fx_15_main);
-FX_MAIN(fx_16_main);
-FX_MAIN(fx_17_main);
-FX_MAIN(fx_18_main);
-FX_MAIN(fx_19_main);
-FX_MAIN(fx_20_main);
-FX_MAIN(fx_21_main);
-FX_MAIN(fx_22_main);
-FX_MAIN(fx_23_main);
-FX_MAIN(fx_24_main);
-FX_MAIN(fx_25_main);
-FX_MAIN(fx_26_main);
-FX_MAIN(fx_27_main);
-FX_MAIN(fx_28_main);
-FX_MAIN(fx_29_main);
-FX_MAIN(fx_30_main);
-FX_MAIN(fx_31_main);
-FX_MAIN(fx_32_main);
-FX_MAIN(fx_33_main);
-FX_MAIN(fx_34_main);
-FX_MAIN(fx_35_main);
-FX_MAIN(fx_36_main);
-FX_MAIN(fx_37_main);
-FX_MAIN(fx_38_main);
-FX_MAIN(fx_39_main);
-FX_MAIN(fx_40_main);
-FX_MAIN(fx_41_main);
-FX_MAIN(fx_43_main);
-FX_MAIN(fx_44_main);
-FX_MAIN(fx_45_main);
-FX_MAIN(fx_46_main);
-FX_MAIN(fx_47_main);
-FX_MAIN(fx_48_main);
-FX_MAIN(fx_49_main);
-FX_MAIN(fx_50_main);
-FX_MAIN(fx_51_main);
-FX_MAIN(fx_52_main);
-FX_MAIN(fx_53_main);
-FX_MAIN(fx_54_main);
-FX_MAIN(fx_55_main);
-FX_MAIN(fx_56_main);
-FX_MAIN(fx_57_main);
-FX_MAIN(fx_58_main);
-FX_MAIN(fx_59_main);
-FX_MAIN(fx_60_main);
-FX_MAIN(fx_61_main);
-FX_MAIN(fx_62_main);
-FX_MAIN(fx_63_main);
-FX_MAIN(fx_64_main);
-FX_MAIN(fx_65_main);
-FX_MAIN(fx_66_main);
-FX_MAIN(fx_67_main);
-FX_MAIN(fx_68_main);
-FX_MAIN(fx_69_main);
-FX_MAIN(fx_70_main);
-FX_MAIN(fx_71_main);
-FX_MAIN(fx_72_main);
-FX_MAIN(fx_73_main);
-FX_MAIN(fx_74_main);
-FX_MAIN(fx_75_main);
-FX_MAIN(fx_76_main);
-FX_MAIN(fx_77_main);
-FX_MAIN(fx_78_main);
-FX_MAIN(fx_79_main);
-FX_MAIN(fx_80_main);
-FX_MAIN(fx_81_main);
-FX_MAIN(fx_82_main);
-FX_MAIN(fx_83_main);
-FX_MAIN(fx_84_main);
-FX_MAIN(fx_85_main);
-FX_MAIN(fx_86_main);
-FX_MAIN(fx_87_main);
-FX_MAIN(fx_88_main);
-FX_MAIN(fx_89_main);
-FX_MAIN(fx_90_main);
-FX_MAIN(fx_91_main);
-FX_MAIN(fx_92_main);
-FX_MAIN(fx_93_main);
-FX_MAIN(fx_94_main);
-FX_MAIN(fx_95_main);
-FX_MAIN(fx_96_main);
-FX_MAIN(fx_97_main);
-FX_MAIN(fx_98_main);
-FX_MAIN(fx_99_main);
-FX_MAIN(fx_100_main);
-FX_MAIN(fx_101_main);
-FX_MAIN(fx_102_main);
-FX_MAIN(fx_103_main);
-FX_MAIN(fx_104_main);
-FX_MAIN(fx_105_main);
-FX_MAIN(fx_107_main);
-FX_MAIN(fx_108_main);
-FX_MAIN(fx_109_main);
-FX_MAIN(fx_110_main);
-FX_MAIN(fx_111_main);
-FX_MAIN(fx_112_main);
-FX_MAIN(fx_113_main);
-FX_MAIN(fx_114_main);
-FX_MAIN(fx_115_main);
-FX_MAIN(fx_116_main);
-FX_MAIN(fx_117_main);
-FX_MAIN(fx_119_main);
-FX_MAIN(fx_120_main);
-FX_MAIN(fx_121_main);
-FX_MAIN(fx_122_main);
-FX_MAIN(fx_123_main);
-FX_MAIN(fx_124_main);
-FX_MAIN(fx_125_main);
-FX_MAIN(fx_126_main);
-FX_MAIN(fx_127_main);
-FX_MAIN(fx_128_main);
-FX_MAIN(fx_129_main);
-FX_MAIN(fx_130_main);
-FX_MAIN(fx_131_main);
-FX_MAIN(fx_132_main);
-FX_MAIN(fx_133_main);
-FX_MAIN(fx_134_main);
 
 EffectTableEntry gEffectTable[] = {
     /* 0x00 */ {},
@@ -154,8 +27,8 @@ EffectTableEntry gEffectTable[] = {
     /* 0x03 */ {},
     /* 0x04 */ {},
     /* 0x05 */ {},
-    /* 0x06 */ FX_ENTRY_NAMED(land, _328EA0),
-    /* 0x07 */ FX_ENTRY(7, _328EA0),
+    /* 0x06 */ FX_ENTRY_NAMED(landing_dust, _328EA0),
+    /* 0x07 */ FX_ENTRY_NAMED(walking_dust, _328EA0),
     /* 0x08 */ FX_ENTRY(8, _32CEC0),
     /* 0x09 */ FX_ENTRY(9, _32CEC0),
     /* 0x0A */ FX_ENTRY(10, _32EC50),

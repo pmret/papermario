@@ -129,7 +129,7 @@ ApiStatus func_802A123C_71E88C(Evt* script, s32 isInitialCall) {
                         if (x > 40.0f) {
                             x2 = -(x - 40.0f);
                         }
-                        fx_land(3, x2, y2, z, 0);
+                        fx_landing_dust(3, x2, y2, z, 0);
                         flag = 1;
                     }
                 }
@@ -139,7 +139,7 @@ ApiStatus func_802A123C_71E88C(Evt* script, s32 isInitialCall) {
             }
             if (gGameStatusPtr->frameCounter & 1) {
                 s32 randIdx = rand_int(9);
-                fx_land(2, N(D_802A3E88_7214D8)[randIdx * 3 + 0] + D_802A3F88_ptr->x,
+                fx_landing_dust(2, N(D_802A3E88_7214D8)[randIdx * 3 + 0] + D_802A3F88_ptr->x,
                               N(D_802A3E88_7214D8)[randIdx * 3 + 1],
                               N(D_802A3E88_7214D8)[randIdx * 3 + 2] + D_802A3F88_ptr->z, 0);
             }
