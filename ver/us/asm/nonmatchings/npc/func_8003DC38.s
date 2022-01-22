@@ -126,7 +126,7 @@ glabel func_8003DC38
 /* 19218 8003DE18 2652005A */  addiu     $s2, $s2, 0x5a
 /* 1921C 8003DE1C 26730001 */  addiu     $s3, $s3, 1
 /* 19220 8003DE20 44070000 */  mfc1      $a3, $f0
-/* 19224 8003DE24 0C01BF2C */  jal       playFX_0B
+/* 19224 8003DE24 0C01BF2C */  jal       fx_cloud_trail
 /* 19228 8003DE28 24040001 */   addiu    $a0, $zero, 1
 /* 1922C 8003DE2C 2A620004 */  slti      $v0, $s3, 4
 /* 19230 8003DE30 1040004E */  beqz      $v0, .L8003DF6C
@@ -207,7 +207,7 @@ glabel func_8003DC38
 /* 19358 8003DF58 46040000 */  add.s     $f0, $f0, $f4
 /* 1935C 8003DF5C 46160000 */  add.s     $f0, $f0, $f22
 /* 19360 8003DF60 44070000 */  mfc1      $a3, $f0
-/* 19364 8003DF64 0C01BF2C */  jal       playFX_0B
+/* 19364 8003DF64 0C01BF2C */  jal       fx_cloud_trail
 /* 19368 8003DF68 24040001 */   addiu    $a0, $zero, 1
 .L8003DF6C:
 /* 1936C 8003DF6C 8FBF0020 */  lw        $ra, 0x20($sp)

@@ -4,8 +4,9 @@ import os
 import re
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
-root_dir = script_dir + "/../"
-src_dir = root_dir + "src/"
+root_dir = os.path.join(script_dir, "..")
+src_dir = os.path.join(root_dir, "src")
+include_dir = os.path.join(root_dir, "include")
 asm_dir = root_dir + "ver/current/asm/"
 
 renames = {}
@@ -47,11 +48,6 @@ for root, dirs, files in os.walk(asm_dir):
 
             handle_file(f_path, True)
 
-# Delete old versions of newly saved asm files
-print("Deleting old asm files")
-for d in deletes:
-    os.remove(d)
-
 # Walk through src files and rename stuff
 print("Walking through src files")
 for root, dirs, files in os.walk(src_dir):
@@ -59,16 +55,26 @@ for root, dirs, files in os.walk(src_dir):
         if f_name.endswith(".c") or f_name.endswith(".h"):
             f_path = os.path.join(root, f_name)
 
-            handle_file(f_path)
+            handle_file(f_path, True)
 
 # Walk through include files and rename stuff
 print("Walking through include files")
-for root, dirs, files in os.walk(os.path.join(root_dir, "include")):
+for root, dirs, files in os.walk(include_dir):
     for f_name in files:
         f_path = os.path.join(root, f_name)
 
         handle_file(f_path)
 
+# Delete old versions of newly saved files
+print("Deleting old files")
+for d in deletes:
+    os.remove(d)
+
 # Rename stuff in symbol_addrs.txt
 handle_file(os.path.join(root_dir, "ver", "current", "symbol_addrs.txt"))
 
+# splat.yaml
+handle_file(os.path.join(root_dir, "ver", "current", "splat.yaml"))
+
+# effects.yaml
+handle_file(os.path.join(root_dir, "ver", "current", "effects.yaml"))

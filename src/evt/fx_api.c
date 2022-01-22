@@ -214,7 +214,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_cloud_puff(fVar1, fVar2, fVar3, fVar4);
             break;
         case EFFECT_ID_0B:
-            playFX_0B(iVar1, fVar2, fVar3, fVar4);
+            fx_cloud_trail(iVar1, fVar2, fVar3, fVar4);
             break;
         case EFFECT_ID_0C:
             playFX_0C(fVar1, fVar2, fVar3, fVar4, fVar5);

@@ -302,7 +302,7 @@ typedef struct CloudPuffFXData {
     /* 0x48 */ f32 unk_48;
 } CloudPuffFXData; // size = 0x4C
 
-typedef struct Effect11 {
+typedef struct CloudTrailFXData {
     /* 0x00 */ s32 alive;
     /* 0x04 */ u16 unk_04;
     /* 0x06 */ s16 lifetime;
@@ -324,7 +324,7 @@ typedef struct Effect11 {
     /* 0x40 */ f32 unk_40;
     /* 0x44 */ s32 unk_44;
     /* 0x48 */ char unk_48[0x8];
-} Effect11; // size = 0x50
+} CloudTrailFXData; // size = 0x50
 
 typedef struct Effect12 {
     /* 0x00 */ s32 alive;
@@ -614,7 +614,7 @@ void fx_walking_dust(s32, f32, f32, f32, f32, f32);
 void fx_flower_splash(f32, f32, f32, f32);
 void fx_flower_trail(s32, f32, f32, f32, f32, f32);
 EffectInstance* fx_cloud_puff(f32, f32, f32, f32);
-EffectInstance* playFX_0B(s32, f32, f32, f32);
+EffectInstance* fx_cloud_trail(s32, f32, f32, f32);
 EffectInstance* playFX_0C(f32, f32, f32, f32, f32);
 EffectInstance* playFX_0D(s32, f32, f32, f32, s32);
 EffectInstance* playFX_0E(f32, f32, f32, s32);

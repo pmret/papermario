@@ -2230,14 +2230,14 @@ segments:
     subsegments:
     - [0x32E490, c, cloud_puff]
     - [0x32EC10]
-  - [0x32EC50, bin] # cloud_puff, 11 gfx
-  - name: effect_11
+  - [0x32EC50, bin] # cloud_puff, cloud_trail gfx
+  - name: cloud_trail
     dir: effects
     type: code
     start: 0x32EE30
     vram: 0xE0016000
     subsegments:
-    - [0x32EE30, c, effect_11]
+    - [0x32EE30, c, cloud_trail]
     - [0x32F550]
   - name: effect_12
     dir: effects

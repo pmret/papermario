@@ -145,7 +145,7 @@ glabel func_800F0490
 /* 89B60 800F06B0 2652005A */  addiu     $s2, $s2, 0x5a
 /* 89B64 800F06B4 26730001 */  addiu     $s3, $s3, 1
 /* 89B68 800F06B8 44070000 */  mfc1      $a3, $f0
-/* 89B6C 800F06BC 0C01BF2C */  jal       playFX_0B
+/* 89B6C 800F06BC 0C01BF2C */  jal       fx_cloud_trail
 /* 89B70 800F06C0 0000202D */   daddu    $a0, $zero, $zero
 /* 89B74 800F06C4 2A620004 */  slti      $v0, $s3, 4
 /* 89B78 800F06C8 1040005B */  beqz      $v0, .L800F0838
@@ -240,7 +240,7 @@ glabel func_800F0490
 /* 89CD4 800F0824 46040000 */  add.s     $f0, $f0, $f4
 /* 89CD8 800F0828 46160000 */  add.s     $f0, $f0, $f22
 /* 89CDC 800F082C 44070000 */  mfc1      $a3, $f0
-/* 89CE0 800F0830 0C01BF2C */  jal       playFX_0B
+/* 89CE0 800F0830 0C01BF2C */  jal       fx_cloud_trail
 /* 89CE4 800F0834 24040001 */   addiu    $a0, $zero, 1
 .L800F0838:
 /* 89CE8 800F0838 8FBF0028 */  lw        $ra, 0x28($sp)

@@ -4,22 +4,22 @@
 extern Gfx D_090000E0[];
 extern Gfx D_090001B8[];
 
-void fx_11_init(EffectInstance* effect);
-void fx_11_update(EffectInstance* effect);
-void fx_11_render(EffectInstance* effect);
-void fx_11_appendGfx(void* effect);
+void cloud_trail_init(EffectInstance* effect);
+void cloud_trail_update(EffectInstance* effect);
+void cloud_trail_render(EffectInstance* effect);
+void cloud_trail_appendGfx(void* effect);
 
-void fx_11_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
+void cloud_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    Effect11* part;
+    CloudTrailFXData* part;
     s32 numParts = 1;
     s32 i;
 
     bp.unk_00 = 0;
-    bp.init = fx_11_init;
-    bp.update = fx_11_update;
-    bp.renderWorld = fx_11_render;
+    bp.init = cloud_trail_init;
+    bp.update = cloud_trail_update;
+    bp.renderWorld = cloud_trail_render;
     bp.unk_14 = 0;
     bp.effectID = EFFECT_ID_0B;
 
@@ -56,11 +56,11 @@ void fx_11_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     }
 }
 
-void fx_11_init(EffectInstance* effect) {
+void cloud_trail_init(EffectInstance* effect) {
 }
 
-void fx_11_update(EffectInstance* effect) {
-    Effect11* part = (Effect11*)effect->data;
+void cloud_trail_update(EffectInstance* effect) {
+    CloudTrailFXData* part = (CloudTrailFXData*)effect->data;
     s32 cond = FALSE;
     s32 i;
 
@@ -100,11 +100,11 @@ void fx_11_update(EffectInstance* effect) {
     }
 }
 
-void fx_11_render(EffectInstance* effect) {
+void cloud_trail_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_11_appendGfx;
+    renderTask.appendGfx = cloud_trail_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
@@ -113,9 +113,9 @@ void fx_11_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_11_appendGfx(void* effect) {
+void cloud_trail_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    Effect11* part = effectTemp->data;
+    CloudTrailFXData* part = effectTemp->data;
     Matrix4f sp20;
     Matrix4f sp60;
     s32 i;

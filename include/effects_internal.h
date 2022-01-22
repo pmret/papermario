@@ -37,7 +37,7 @@ void walking_dust_main(s32, f32, f32, f32, f32, f32);
 void flower_splash_main(f32, f32, f32, f32);
 void flower_trail_main(s32, f32, f32, f32, f32, f32);
 void cloud_puff_main(f32, f32, f32, f32);
-void fx_11_main(s32, f32, f32, f32);
+void cloud_trail_main(s32, f32, f32, f32);
 void fx_12_main(f32, f32, f32, f32, f32, f32, f32, f32);
 void fx_13_main(s32, f32, f32, f32, s32);
 void fx_14_main(f32, f32, f32, s32, s32);
