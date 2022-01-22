@@ -545,7 +545,7 @@ EvtScript N(802255D8) = {
     EVT_ELSE
         EVT_ADD(LW(1), 6)
     EVT_END_IF
-    EVT_CALL(PlayEffect, EFFECT_ID_13, 0, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_GATHER_ENERGY_PINK, 0, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
     EVT_WAIT_FRAMES(60)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 20)

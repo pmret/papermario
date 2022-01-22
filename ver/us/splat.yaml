@@ -2197,7 +2197,7 @@ segments:
     subsegments:
     - [0x328110, c, landing_dust]
     - [0x328D20]
-  - [0x328EA0, bin] # landing_dust, walking_dust, 23, 29, 39 gfx
+  - [0x328EA0, bin] # landing_dust, walking_dust, effect 23, effect 29, effect 39 gfx
   - name: walking_dust
     dir: effects
     type: code
@@ -2256,58 +2256,58 @@ segments:
     - [0x32FE30, c, floating_flower]
     - [0x330440]
   - [0x330460, bin] # effect 13 gfx
-  - name: effect_14
+  - name: snowflake
     dir: effects
     type: code
     start: 0x330910
     vram: 0xE001C000
     subsegments:
-    - [0x330910, c, effect_14]
+    - [0x330910, c, snowflake]
     - [0x330EF0]
   - [0x330F00, bin] # effect 14 gfx
-  - name: effect_15
+  - name: star
     dir: effects
     type: code
     start: 0x331940
     vram: 0xE001E000
     subsegments:
-    - [0x331940, c, effect_15]
+    - [0x331940, c, star]
     - [0x332690]
   - [0x3326A0, bin] # effect 15 gfx
-  - name: effect_16
+  - name: emote
     dir: effects
     type: code
     start: 0x333EC0
     vram: 0xE0020000
     subsegments:
-    - [0x333EC0, c, effect_16]
+    - [0x333EC0, c, emote]
     - [0x334B50]
   - [0x334C70, bin] # effect 16 gfx
-  - name: effect_17
+  - name: sparkles
     dir: effects
     type: code
     start: 0x337240
     vram: 0xE0022000
     subsegments:
-    - [0x337240, c, effect_17]
+    - [0x337240, c, sparkles]
     - [0x337F10, data]
-  - [0x337FC0, bin] # effect 17,34,56,58,132 gfx
-  - name: effect_18
+  - [0x337FC0, bin] # effect 17, effect 34, effect 56, effect 58, effect 132 gfx
+  - name: shape_spell
     dir: effects
     type: code
     start: 0x339250
     vram: 0xE0024000
     subsegments:
-    - [0x339250, c, effect_18]
+    - [0x339250, c, shape_spell]
     - [0x339F10, data]
   - [0x339F60, bin] # effect 18 gfx
-  - name: effect_19
+  - name: gather_energy_pink
     dir: effects
     type: code
     start: 0x33B180
     vram: 0xE0026000
     subsegments:
-    - [0x33B180, c, effect_19]
+    - [0x33B180, c, gather_energy_pink]
     - [0x33BB70, data]
   - [0x33BBD0, bin] # effect 19 gfx
   - name: effect_20
@@ -2318,7 +2318,7 @@ segments:
     subsegments:
     - [0x33CDF0, c, effect_20]
     - [0x33D5D0, data]
-  - [0x33D610, bin] # effect 20,43 gfx
+  - [0x33D610, bin] # effect 20, effect 43 gfx
   - name: effect_21
     dir: effects
     type: code
@@ -2353,7 +2353,7 @@ segments:
     subsegments:
     - [0x342140, c, effect_24]
     - [0x342FD0, data]
-  - [0x343040, bin] # effect 24,33 gfx
+  - [0x343040, bin] # effect 24, effect 33 gfx
   - name: effect_25
     dir: effects
     type: code
@@ -2467,7 +2467,7 @@ segments:
     subsegments:
     - [0x3584C0, c, effect_37]
     - [0x359320, data]
-  - [0x3593B0, bin] # effect 37,104 gfx
+  - [0x3593B0, bin] # effect 37, effect 104 gfx
   - name: effect_38
     dir: effects
     type: code
@@ -2679,7 +2679,7 @@ segments:
     subsegments:
     - [0x37D490, c, effect_62]
     - [0x37D9A0, data]
-  - [0x37D9D0, bin] # effect 62,66 gfx
+  - [0x37D9D0, bin] # effect 62, effect 66 gfx
   - name: effect_63
     dir: effects
     type: code

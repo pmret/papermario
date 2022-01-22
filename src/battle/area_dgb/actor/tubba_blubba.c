@@ -323,7 +323,7 @@ EvtScript N(takeTurn_80219750) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_2)
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
         EVT_SET(LW(1), 80)
-        EVT_CALL(PlayEffect, EFFECT_ID_10, 2, 0, LW(0), LW(1), LW(2), 30, 315, 30, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_EMOTE, 2, 0, LW(0), LW(1), LW(2), 30, 315, 30, 0, 0, 0, 0, 0)
         EVT_WAIT_FRAMES(40)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_1)
         EVT_SET(LW(0), 0)

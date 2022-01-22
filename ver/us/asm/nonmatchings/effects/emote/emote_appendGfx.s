@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel fx_16_appendGfx
+glabel emote_appendGfx
 /* 334490 E00205D0 27BDFF20 */  addiu     $sp, $sp, -0xe0
 /* 334494 E00205D4 3C06DB06 */  lui       $a2, 0xdb06
 /* 334498 E00205D8 AFB600C0 */  sw        $s6, 0xc0($sp)

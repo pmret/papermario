@@ -15,12 +15,12 @@ enum EffectID {
     EFFECT_ID_0B,
     EFFECT_FOOTPRINT,
     EFFECT_FLOATING_FLOWER,
-    EFFECT_ID_0E,
-    EFFECT_ID_0F,
-    EFFECT_ID_10,
-    EFFECT_ID_11,
-    EFFECT_ID_12,
-    EFFECT_ID_13,
+    EFFECT_SNOWFLAKE,
+    EFFECT_STAR,
+    EFFECT_EMOTE,
+    EFFECT_SPARKLES,
+    EFFECT_SHAPE_SPELL,
+    EFFECT_GATHER_ENERGY_PINK,
     EFFECT_ID_14,
     EFFECT_ID_15,
     EFFECT_ID_16,
@@ -373,7 +373,7 @@ typedef struct FloatingFlowerFXData {
     /* 0x44 */ s32 unk_44;
 } FloatingFlowerFXData; // size = 0x48
 
-typedef struct Effect14 {
+typedef struct SnowflakeFXData {
     /* 0x00 */ f32 xPos;
     /* 0x04 */ f32 yPos;
     /* 0x08 */ f32 zPos;
@@ -385,9 +385,9 @@ typedef struct Effect14 {
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ s32 unk_28;
-} Effect14; // size = 0x2C
+} SnowflakeFXData; // size = 0x2C
 
-typedef struct Effect15 {
+typedef struct StarFXData {
     /* 0x000 */ s32 unk_00;
     /* 0x004 */ f32 unk_04;
     /* 0x008 */ f32 unk_08;
@@ -409,9 +409,9 @@ typedef struct Effect15 {
     /* 0x244 */ s32 unk_244;
     /* 0x248 */ s32 unk_248;
     /* 0x24C */ s32 unk_24C;
-} Effect15; // size = 0x250
+} StarFXData; // size = 0x250
 
-typedef struct Effect16 {
+typedef struct EmoteFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -428,7 +428,7 @@ typedef struct Effect16 {
     /* 0x34 */ s32 unk_34;
     /* 0x38 */ s32 unk_38;
     /* 0x3C */ s32 unk_3C;
-} Effect16; // size = 0x40
+} EmoteFXData; // size = 0x40
 
 typedef struct Effect73 {
     /* 0x00 */ s32 unk_00;
@@ -617,12 +617,12 @@ EffectInstance* fx_cloud_puff(f32, f32, f32, f32);
 EffectInstance* fx_cloud_trail(s32, f32, f32, f32);
 EffectInstance* fx_footprint(f32, f32, f32, f32, f32);
 EffectInstance* fx_floating_flower(s32, f32, f32, f32, s32);
-EffectInstance* playFX_0E(f32, f32, f32, s32);
-void playFX_0F(s32, f32, f32, f32, f32, f32, f32, f32);
+EffectInstance* fx_snowflake(f32, f32, f32, s32);
+void fx_star(s32, f32, f32, f32, f32, f32, f32, f32);
 void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
-void playFX_11(s32, f32, f32, f32, f32);
-EffectInstance* playFX_12(s32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_13(s32, f32, f32, f32, f32, s32);
+void fx_sparkles(s32, f32, f32, f32, f32);
+EffectInstance* fx_shape_spell(s32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_gather_energy_pink(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_14(s32, f32, f32, f32, s32);
 EffectInstance* playFX_15(s32, f32, f32, f32, s32);
 EffectInstance* playFX_16(s32, f32, f32, f32, f32);

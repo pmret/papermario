@@ -223,7 +223,7 @@ glabel func_80240CB4_A6F094
 /* A6F3C0 80240FE0 E7A00018 */  swc1      $f0, 0x18($sp)
 /* A6F3C4 80240FE4 8E250038 */  lw        $a1, 0x38($s1)
 /* A6F3C8 80240FE8 8E270040 */  lw        $a3, 0x40($s1)
-/* A6F3CC 80240FEC 0C01BFD4 */  jal       playFX_12
+/* A6F3CC 80240FEC 0C01BFD4 */  jal       fx_shape_spell
 /* A6F3D0 80240FF0 0000202D */   daddu    $a0, $zero, $zero
 /* A6F3D4 80240FF4 AE420078 */  sw        $v0, 0x78($s2)
 /* A6F3D8 80240FF8 A630008E */  sh        $s0, 0x8e($s1)

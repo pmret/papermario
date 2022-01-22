@@ -697,7 +697,7 @@ EvtScript N(8021D81C) = {
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_QUESTION)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
         EVT_ADD(LW(1), 20)
-        EVT_CALL(PlayEffect, EFFECT_ID_10, 2, 0, LW(0), LW(1), LW(2), 20, 315, 30, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_EMOTE, 2, 0, LW(0), LW(1), LW(2), 20, 315, 30, 0, 0, 0, 0, 0)
         EVT_CALL(PlaySound, 0x20E8)
     EVT_ELSE
         EVT_WAIT_FRAMES(50)

@@ -631,7 +631,7 @@ EvtScript N(summonBackup) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 15)
-    EVT_CALL(PlayEffect, EFFECT_ID_11, 0, LW(0), LW(1), LW(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_SPARKLES, 0, LW(0), LW(1), LW(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x206D)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_jungle_guy_Palette_00_Anim_E)
     EVT_WAIT_FRAMES(20)
@@ -700,7 +700,7 @@ EvtScript N(summonBackup) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x206D)
     EVT_CALL(GetActorPos, LW(11), LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 15)
-    EVT_CALL(PlayEffect, EFFECT_ID_11, 0, LW(0), LW(1), LW(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_SPARKLES, 0, LW(0), LW(1), LW(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetAnimation, LW(11), 2, NPC_ANIM_jungle_guy_Palette_00_Anim_E)
     EVT_WAIT_FRAMES(20)
     EVT_IF_EQ(LF(0), 0)
@@ -764,7 +764,7 @@ EvtScript N(becomeShyGuy) = {
     EVT_THREAD
         EVT_LOOP(10)
             EVT_CALL(GetPartOffset, ACTOR_SELF, 4, LW(0), LW(1), LW(2))
-            EVT_CALL(PlayEffect, EFFECT_ID_11, 3, LW(0), LW(1), LW(2), 5, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SPARKLES, 3, LW(0), LW(1), LW(2), 5, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(3)
         EVT_END_LOOP
     EVT_END_THREAD

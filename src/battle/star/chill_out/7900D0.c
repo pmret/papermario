@@ -29,7 +29,7 @@ ApiStatus func_802A153C_79060C(Evt* script, s32 isInitialCall) {
     b = rand_int(120) + 7;
     c = rand_int(50) - 25;
 
-    playFX_11(4, a, b, c, 40.0f);
+    fx_sparkles(4, a, b, c, 40.0f);
     return ApiStatus_DONE2;
 }
 

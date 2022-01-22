@@ -355,7 +355,7 @@ EvtScript N(80229F08) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
         EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_sky_guy_Palette_00_Anim_0)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x263)
-        EVT_CALL(PlayEffect, EFFECT_ID_10, 2, 0, LW(0), LW(1), LW(2), 24, 0, 25, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_EMOTE, 2, 0, LW(0), LW(1), LW(2), 24, 0, 25, 0, 0, 0, 0, 0)
         EVT_WAIT_FRAMES(25)
         EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_sky_guy_Palette_00_Anim_6)
         EVT_WAIT_FRAMES(30)

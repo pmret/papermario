@@ -1213,7 +1213,7 @@ glabel update_item_entity_collectable
 /* CBAD0 801353D0 44810000 */  mtc1      $at, $f0
 /* CBAD4 801353D4 44061000 */  mfc1      $a2, $f2
 /* CBAD8 801353D8 24040004 */  addiu     $a0, $zero, 4
-/* CBADC 801353DC 0C01BFBC */  jal       playFX_11
+/* CBADC 801353DC 0C01BFBC */  jal       fx_sparkles
 /* CBAE0 801353E0 E7A00010 */   swc1     $f0, 0x10($sp)
 /* CBAE4 801353E4 0804D533 */  j         .L801354CC
 /* CBAE8 801353E8 0240202D */   daddu    $a0, $s2, $zero

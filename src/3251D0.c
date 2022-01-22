@@ -8,7 +8,7 @@ ApiStatus func_802C0000(Evt* script, s32 isInitialCall) {
     s32 b = evt_get_variable(script, *args++);
     s32 c = evt_get_variable(script, *args++);
 
-    playFX_11(0, a, b, c, 60.0f);
+    fx_sparkles(0, a, b, c, 60.0f);
     return ApiStatus_DONE2;
 }
 

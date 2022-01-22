@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel fx_18_main
+glabel shape_spell_main
 /* 339250 E0024000 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 339254 E0024004 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* 339258 E0024008 4485A000 */  mtc1      $a1, $f20
@@ -14,14 +14,14 @@ glabel fx_18_main
 /* 339274 E0024024 27A40010 */  addiu     $a0, $sp, 0x10
 /* 339278 E0024028 AFB20030 */  sw        $s2, 0x30($sp)
 /* 33927C E002402C 8FB2006C */  lw        $s2, 0x6c($sp)
-/* 339280 E0024030 3C02E002 */  lui       $v0, %hi(fx_18_init)
-/* 339284 E0024034 24424180 */  addiu     $v0, $v0, %lo(fx_18_init)
+/* 339280 E0024030 3C02E002 */  lui       $v0, %hi(shape_spell_init)
+/* 339284 E0024034 24424180 */  addiu     $v0, $v0, %lo(shape_spell_init)
 /* 339288 E0024038 AFA20018 */  sw        $v0, 0x18($sp)
-/* 33928C E002403C 3C02E002 */  lui       $v0, %hi(fx_18_update)
-/* 339290 E0024040 24424188 */  addiu     $v0, $v0, %lo(fx_18_update)
+/* 33928C E002403C 3C02E002 */  lui       $v0, %hi(shape_spell_update)
+/* 339290 E0024040 24424188 */  addiu     $v0, $v0, %lo(shape_spell_update)
 /* 339294 E0024044 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 339298 E0024048 3C02E002 */  lui       $v0, %hi(fx_18_render)
-/* 33929C E002404C 244242E0 */  addiu     $v0, $v0, %lo(fx_18_render)
+/* 339298 E0024048 3C02E002 */  lui       $v0, %hi(shape_spell_render)
+/* 33929C E002404C 244242E0 */  addiu     $v0, $v0, %lo(shape_spell_render)
 /* 3392A0 E0024050 AFA20020 */  sw        $v0, 0x20($sp)
 /* 3392A4 E0024054 24020012 */  addiu     $v0, $zero, 0x12
 /* 3392A8 E0024058 AFBF0034 */  sw        $ra, 0x34($sp)

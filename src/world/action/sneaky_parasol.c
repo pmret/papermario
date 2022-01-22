@@ -333,7 +333,7 @@ void func_802B6120_E2A7D0(void) {
             parasolStruct->position.y = playerStatus->position.y - 20;
         }
         if (parasolStruct->unk_08 < 0xB && parasolStruct->unk_08 & 1) {
-            playFX_11(3, parasolStruct->position.x - 8, parasolStruct->position.y + 50, parasolStruct->position.z, 2);
+            fx_sparkles(3, parasolStruct->position.x - 8, parasolStruct->position.y + 50, parasolStruct->position.z, 2);
             temp_f22 = parasolStruct->position.x;
             tempX = (((cam->currentYaw + playerStatus->spriteFacingAngle) - 90) * TAU) / 360;
 

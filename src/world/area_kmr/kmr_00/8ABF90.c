@@ -16,7 +16,7 @@ ApiStatus func_802403B8_8AC348(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     s32 var4 = evt_get_variable(script, *args++);
 
-    playFX_11(var0, var1, var2, var3, var4);
+    fx_sparkles(var0, var1, var2, var3, var4);
     return ApiStatus_DONE2;
 }
 
@@ -30,7 +30,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_00/8ABF90", func_802404E8_8AC478);
 ApiStatus func_80240530_8AC4C0(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(evt_get_variable(script, *script->ptrReadPos));
 
-    playFX_11(3, npc->pos.x, npc->pos.y + 10.0f, npc->pos.z, 10.0f);
+    fx_sparkles(3, npc->pos.x, npc->pos.y + 10.0f, npc->pos.z, 10.0f);
     return ApiStatus_DONE2;
 }
 
@@ -59,7 +59,7 @@ ApiStatus func_80240BD8_8ACB68(Evt* script, s32 isInitialCall) {
         script->functionTemp[1] = evt_get_variable(script, *args);
         npc = get_npc_unsafe(script->functionTemp[1]);
         sfx_play_sound_at_position(0xB000001E, 0, npc->pos.x, npc->pos.y, npc->pos.z);
-        playFX_11(0, npc->pos.x, npc->pos.y + 20.0f, npc->pos.z, 10.0f);
+        fx_sparkles(0, npc->pos.x, npc->pos.y + 20.0f, npc->pos.z, 10.0f);
         script->functionTemp[0] = 3;
     }
 

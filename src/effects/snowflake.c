@@ -6,24 +6,24 @@ s32 D_E001C5E0 = 0;
 extern Gfx D_09000900[];
 extern Gfx D_090009E8[];
 
-void fx_14_init(EffectInstance* effect);
-void fx_14_update(EffectInstance* effect);
-void fx_14_render(EffectInstance* effect);
-void fx_14_appendGfx(void* effect);
+void snowflake_init(EffectInstance* effect);
+void snowflake_update(EffectInstance* effect);
+void snowflake_render(EffectInstance* effect);
+void snowflake_appendGfx(void* effect);
 
-void fx_14_main(f32 arg0, f32 arg1, f32 arg2, s32 arg3, s32 arg4) {
+void snowflake_main(f32 arg0, f32 arg1, f32 arg2, s32 arg3, s32 arg4) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    Effect14* part;
+    SnowflakeFXData* part;
     s32 numParts = 1;
     f32 phi_f4;
 
     bp.unk_00 = 0;
-    bp.init = fx_14_init;
-    bp.update = fx_14_update;
-    bp.renderWorld = fx_14_render;
+    bp.init = snowflake_init;
+    bp.update = snowflake_update;
+    bp.renderWorld = snowflake_render;
     bp.unk_14 = 0;
-    bp.effectID = EFFECT_ID_0E;
+    bp.effectID = EFFECT_SNOWFLAKE;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;
@@ -54,11 +54,11 @@ void fx_14_main(f32 arg0, f32 arg1, f32 arg2, s32 arg3, s32 arg4) {
     }
 }
 
-void fx_14_init(EffectInstance* effect) {
+void snowflake_init(EffectInstance* effect) {
 }
 
-void fx_14_update(EffectInstance* effect) {
-    Effect14* data = effect->data;
+void snowflake_update(EffectInstance* effect) {
+    SnowflakeFXData* data = effect->data;
 
     data->unk_28--;
     if (data->unk_28 < 0) {
@@ -81,9 +81,9 @@ void fx_14_update(EffectInstance* effect) {
     data->unk_1C += data->unk_24;
 }
 
-void fx_14_render(EffectInstance* effect) {
+void snowflake_render(EffectInstance* effect) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Effect14* effect14 = effect->data;
+    SnowflakeFXData* effect14 = effect->data;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
@@ -108,7 +108,7 @@ void fx_14_render(EffectInstance* effect) {
         }
     }
 
-    renderTaskPtr->appendGfx = &fx_14_appendGfx;
+    renderTaskPtr->appendGfx = &snowflake_appendGfx;
     renderTaskPtr->appendGfxArg = effect;
     renderTaskPtr->distance = 0;
     renderTaskPtr->renderMode = RENDER_MODE_2D;
@@ -117,10 +117,10 @@ void fx_14_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_14_appendGfx(void* effect) {
+void snowflake_appendGfx(void* effect) {
     Matrix4f sp18, sp58, sp98, spD8, sp118;
     EffectInstance* effectTemp = effect;
-    Effect14* part = effectTemp->data;
+    SnowflakeFXData* part = effectTemp->data;
 
     gDPPipeSync(gMasterGfxPos++);
     gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));

@@ -44,18 +44,18 @@ s8 D_E0020D94[] = {
     64, 0, 0, 32, 0, 32, 0, 0, 64, 0, 32, 32, 0, 64, 0, 32, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 };
 
-void func_E0020000(Effect16* part, s32 arg1);
-void fx_16_init(EffectInstance* effect);
-void fx_16_update(EffectInstance* effect);
-void fx_16_render(EffectInstance* effect);
-void fx_16_appendGfx(void* effect);
+void func_E0020000(EmoteFXData* part, s32 arg1);
+void emote_init(EffectInstance* effect);
+void emote_update(EffectInstance* effect);
+void emote_render(EffectInstance* effect);
+void emote_appendGfx(void* effect);
 
-INCLUDE_ASM(s32, "effects/effect_16", func_E0020000);
+INCLUDE_ASM(s32, "effects/emote", func_E0020000);
 
-void fx_16_main(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7, EffectInstance** arg8) {
+void emote_main(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7, EffectInstance** arg8) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
-    Effect16* part;
+    EmoteFXData* part;
     EffectInstance* effect;
     s32 numParts;
 
@@ -66,11 +66,11 @@ void fx_16_main(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
     }
 
     bp.unk_00 = 0;
-    bp.init = fx_16_init;
-    bp.update = fx_16_update;
-    bp.renderWorld = fx_16_render;
+    bp.init = emote_init;
+    bp.update = emote_update;
+    bp.renderWorld = emote_render;
     bp.unk_14 = 0;
-    bp.effectID = EFFECT_ID_10;
+    bp.effectID = EFFECT_EMOTE;
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
@@ -111,11 +111,11 @@ void fx_16_main(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
     *arg8 = effect;
 }
 
-void fx_16_init(EffectInstance* effect) {
+void emote_init(EffectInstance* effect) {
 }
 
-void fx_16_update(EffectInstance* effect) {
-    Effect16* part = effect->data;
+void emote_update(EffectInstance* effect) {
+    EmoteFXData* part = effect->data;
     s32 temp_a0 = D_E0020D80[part->unk_30][part->unk_34];
     s32 type = part->unk_00;
 
@@ -155,11 +155,11 @@ void fx_16_update(EffectInstance* effect) {
     }
 }
 
-void fx_16_render(EffectInstance* effect) {
+void emote_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_16_appendGfx;
+    renderTask.appendGfx = emote_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
@@ -170,11 +170,11 @@ void fx_16_render(EffectInstance* effect) {
 
 // lots of issues
 #ifdef NON_EQUIVALENT
-void fx_16_appendGfx(void* effect) {
+void emote_appendGfx(void* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
     EffectInstance* effectTemp = effect;
-    Effect16* part = effectTemp->data;
+    EmoteFXData* part = effectTemp->data;
     s32 idx;
     s32 type;
     Gfx* temp_a3;
@@ -281,5 +281,5 @@ void fx_16_appendGfx(void* effect) {
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 }
 #else
-INCLUDE_ASM(s32, "effects/effect_16", fx_16_appendGfx);
+INCLUDE_ASM(s32, "effects/emote", emote_appendGfx);
 #endif

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel fx_18_update
+glabel shape_spell_update
 /* 3393D8 E0024188 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 3393DC E002418C AFBF0028 */  sw        $ra, 0x28($sp)
 /* 3393E0 E0024190 AFB10024 */  sw        $s1, 0x24($sp)
@@ -49,7 +49,7 @@ glabel fx_18_update
 /* 339480 E0024230 AFA00010 */  sw        $zero, 0x10($sp)
 /* 339484 E0024234 AFA00014 */  sw        $zero, 0x14($sp)
 /* 339488 E0024238 AFA00018 */  sw        $zero, 0x18($sp)
-/* 33948C E002423C 0C009000 */  jal       fx_18_main
+/* 33948C E002423C 0C009000 */  jal       shape_spell_main
 /* 339490 E0024240 AFA2001C */   sw       $v0, 0x1c($sp)
 /* 339494 E0024244 8C42000C */  lw        $v0, 0xc($v0)
 /* 339498 E0024248 C6000028 */  lwc1      $f0, 0x28($s0)

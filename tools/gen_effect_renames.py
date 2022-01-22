@@ -3,6 +3,9 @@
 import argparse
 import os
 
+def auto_int(x):
+    return int(x, 0)
+
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 parser = argparse.ArgumentParser(
@@ -12,7 +15,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument(
     "id",
     help="Effect num to rename",
-    type=int,
+    type=auto_int,
 )
 
 parser.add_argument(

@@ -14,10 +14,10 @@ ApiStatus func_802A1518_78ECE8(Evt* script, s32 isInitialCall) {
 
     if (script->varTable[0] % 4) {
         var4 = var1 + (rand_int(50) + var2);
-        playFX_0F(2, var1, var2, var3, var4, 0, var3, rand_int(10) + 7);
+        fx_star(2, var1, var2, var3, var4, 0, var3, rand_int(10) + 7);
     } else {
         var4 = var1 + (rand_int(50) + var2);
-        playFX_0F(3, var1, var2, var3, var4, 0, var3, rand_int(10) + 7);
+        fx_star(3, var1, var2, var3, var4, 0, var3, rand_int(10) + 7);
     }
 
     return ApiStatus_DONE2;

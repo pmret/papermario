@@ -585,7 +585,7 @@ EvtScript N(hammerAttack) = {
                 EVT_WAIT_FRAMES(10)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                 EVT_ADD(LW(1), 10)
-                EVT_CALL(PlayEffect, EFFECT_ID_10, 2, 0, LW(0), LW(1), LW(2), 25, -45, 20, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_EMOTE, 2, 0, LW(0), LW(1), LW(2), 25, -45, 20, 0, 0, 0, 0, 0)
                 EVT_WAIT_FRAMES(20)
             EVT_END_IF
             EVT_LABEL(100)

@@ -125,7 +125,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
 
     switch (data->unk_01) {
         case 0:
-            playFX_11(0, entity->position.x, entity->position.y, entity->position.z, 2.0f);
+            fx_sparkles(0, entity->position.x, entity->position.y, entity->position.z, 2.0f);
             data->unk_20 = 0.0f;
             data->unk_01++;
             data->unk_14 = 6.0f;
@@ -181,7 +181,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             data->unk_04 -= 0.7;
 
             if ((data->unk_03++ & 1) != 0) {
-                playFX_11(3, playerStatus->position.x + offsetX,
+                fx_sparkles(3, playerStatus->position.x + offsetX,
                         playerStatus->position.y + offsetY,
                         playerStatus->position.z - offsetZ,
                         8.0f

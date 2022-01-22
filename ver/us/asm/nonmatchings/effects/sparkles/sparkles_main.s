@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel fx_17_main
+glabel sparkles_main
 /* 337240 E0022000 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* 337244 E0022004 F7B40050 */  sdc1      $f20, 0x50($sp)
 /* 337248 E0022008 4485A000 */  mtc1      $a1, $f20
@@ -58,14 +58,14 @@ glabel fx_17_main
 /* 3372FC E00220BC 4481F000 */  mtc1      $at, $f30
 .LE00220C0:
 /* 337300 E00220C0 26520001 */  addiu     $s2, $s2, 1
-/* 337304 E00220C4 3C02E002 */  lui       $v0, %hi(fx_17_init)
-/* 337308 E00220C8 24422544 */  addiu     $v0, $v0, %lo(fx_17_init)
+/* 337304 E00220C4 3C02E002 */  lui       $v0, %hi(sparkles_init)
+/* 337308 E00220C8 24422544 */  addiu     $v0, $v0, %lo(sparkles_init)
 /* 33730C E00220CC AC820008 */  sw        $v0, 8($a0)
-/* 337310 E00220D0 3C02E002 */  lui       $v0, %hi(fx_17_update)
-/* 337314 E00220D4 2442254C */  addiu     $v0, $v0, %lo(fx_17_update)
+/* 337310 E00220D0 3C02E002 */  lui       $v0, %hi(sparkles_update)
+/* 337314 E00220D4 2442254C */  addiu     $v0, $v0, %lo(sparkles_update)
 /* 337318 E00220D8 AC82000C */  sw        $v0, 0xc($a0)
-/* 33731C E00220DC 3C02E002 */  lui       $v0, %hi(fx_17_render)
-/* 337320 E00220E0 24422960 */  addiu     $v0, $v0, %lo(fx_17_render)
+/* 33731C E00220DC 3C02E002 */  lui       $v0, %hi(sparkles_render)
+/* 337320 E00220E0 24422960 */  addiu     $v0, $v0, %lo(sparkles_render)
 /* 337324 E00220E4 AC820010 */  sw        $v0, 0x10($a0)
 /* 337328 E00220E8 24020011 */  addiu     $v0, $zero, 0x11
 /* 33732C E00220EC AC800000 */  sw        $zero, ($a0)

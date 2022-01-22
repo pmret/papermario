@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel fx_19_main
+glabel gather_energy_pink_main
 /* 33B180 E0026000 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 33B184 E0026004 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* 33B188 E0026008 4485A000 */  mtc1      $a1, $f20
@@ -14,14 +14,14 @@ glabel fx_19_main
 /* 33B1A4 E0026024 27A40010 */  addiu     $a0, $sp, 0x10
 /* 33B1A8 E0026028 F7BA0050 */  sdc1      $f26, 0x50($sp)
 /* 33B1AC E002602C C7BA0068 */  lwc1      $f26, 0x68($sp)
-/* 33B1B0 E0026030 3C02E002 */  lui       $v0, %hi(fx_19_init)
-/* 33B1B4 E0026034 24426184 */  addiu     $v0, $v0, %lo(fx_19_init)
+/* 33B1B0 E0026030 3C02E002 */  lui       $v0, %hi(gather_energy_pink_init)
+/* 33B1B4 E0026034 24426184 */  addiu     $v0, $v0, %lo(gather_energy_pink_init)
 /* 33B1B8 E0026038 AFA20018 */  sw        $v0, 0x18($sp)
-/* 33B1BC E002603C 3C02E002 */  lui       $v0, %hi(fx_19_update)
-/* 33B1C0 E0026040 2442618C */  addiu     $v0, $v0, %lo(fx_19_update)
+/* 33B1BC E002603C 3C02E002 */  lui       $v0, %hi(gather_energy_pink_update)
+/* 33B1C0 E0026040 2442618C */  addiu     $v0, $v0, %lo(gather_energy_pink_update)
 /* 33B1C4 E0026044 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 33B1C8 E0026048 3C02E002 */  lui       $v0, %hi(fx_19_render)
-/* 33B1CC E002604C 244264B0 */  addiu     $v0, $v0, %lo(fx_19_render)
+/* 33B1C8 E0026048 3C02E002 */  lui       $v0, %hi(gather_energy_pink_render)
+/* 33B1CC E002604C 244264B0 */  addiu     $v0, $v0, %lo(gather_energy_pink_render)
 /* 33B1D0 E0026050 AFA20020 */  sw        $v0, 0x20($sp)
 /* 33B1D4 E0026054 24020013 */  addiu     $v0, $zero, 0x13
 /* 33B1D8 E0026058 AFBF0030 */  sw        $ra, 0x30($sp)

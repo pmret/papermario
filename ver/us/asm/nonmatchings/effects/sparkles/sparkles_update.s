@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel fx_17_update
+glabel sparkles_update
 /* 33778C E002254C 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* 337790 E0022550 AFB50024 */  sw        $s5, 0x24($sp)
 /* 337794 E0022554 0080A82D */  daddu     $s5, $a0, $zero

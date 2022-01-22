@@ -2,6 +2,7 @@
 
 import os
 import re
+from tqdm import tqdm
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = os.path.join(script_dir, "..")
@@ -44,12 +45,15 @@ for line in renames_text:
 
 # Walk through asm files and rename stuff
 print("Walking through asm files")
+asm_files = []
 for root, dirs, files in os.walk(asm_dir):
     for f_name in files:
-        if f_name.endswith(".s"):
-            f_path = os.path.join(root, f_name)
+        asm_files.append(f_name)
+for f_name in tqdm(asm_files):
+    if f_name.endswith(".s"):
+        f_path = os.path.join(root, f_name)
 
-            handle_file(f_path, True)
+        handle_file(f_path, True)
 
 # Walk through src files and rename stuff
 print("Walking through src files")
@@ -72,6 +76,14 @@ for root, dirs, files in os.walk(include_dir):
 print("Deleting old files")
 for d in deletes:
     os.remove(d)
+
+# Walk through asm dirs and rename stuff
+print("Walking through asm dirs")
+for root, dirs, files in os.walk(asm_dir):
+    for dir_name in dirs:
+        for rename in renames:
+            if rename == dir_name:
+                os.rename(os.path.join(root, dir_name), os.path.join(root, renames[rename]))
 
 # Rename stuff in symbol_addrs.txt
 handle_file(os.path.join(root_dir, "ver", "current", "symbol_addrs.txt"))

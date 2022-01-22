@@ -6,14 +6,14 @@ extern Gfx D_09001650[];
 extern Gfx D_09001780[];
 extern Gfx D_090017D0[];
 
-void fx_15_init(EffectInstance* effect);
-void fx_15_update(EffectInstance* effect);
-void fx_15_render(EffectInstance* effect);
-void fx_15_appendGfx(void* effect);
+void star_init(EffectInstance* effect);
+void star_update(EffectInstance* effect);
+void star_render(EffectInstance* effect);
+void star_appendGfx(void* effect);
 
-EffectInstance* fx_15_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7) {
+EffectInstance* star_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7) {
     EffectBlueprint bp;
-    Effect15* part;
+    StarFXData* part;
     EffectInstance* effect;
     s32 numParts = 1;
     s32 i;
@@ -32,11 +32,11 @@ EffectInstance* fx_15_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32
     f32 phi_f26;
 
     bp.unk_00 = 0;
-    bp.init = fx_15_init;
-    bp.update = fx_15_update;
-    bp.renderWorld = fx_15_render;
+    bp.init = star_init;
+    bp.update = star_update;
+    bp.renderWorld = star_render;
     bp.unk_14 = 0;
-    bp.effectID = EFFECT_ID_0F;
+    bp.effectID = EFFECT_STAR;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;
@@ -112,12 +112,12 @@ EffectInstance* fx_15_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32
     return effect;
 }
 
-void fx_15_init(EffectInstance* effect) {
+void star_init(EffectInstance* effect) {
 }
 
-void fx_15_update(EffectInstance* effect) {
+void star_update(EffectInstance* effect) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Effect15* data = effect->data;
+    StarFXData* data = effect->data;
     f32 x, y, z, length;
     f32 xTemp, yTemp, zTemp;
 
@@ -178,15 +178,15 @@ void fx_15_update(EffectInstance* effect) {
     }
 }
 
-void fx_15_render(EffectInstance* effect) {
-    Effect15* effect15 = effect->data;
+void star_render(EffectInstance* effect) {
+    StarFXData* effect15 = effect->data;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
     s32 renderModeTemp;
 
     renderTask.appendGfxArg = effect;
-    renderTask.appendGfx = fx_15_appendGfx;
+    renderTask.appendGfx = star_appendGfx;
     renderTask.distance = 0;
     if (effect15->unk_38 != 0) {
         renderModeTemp = RENDER_MODE_2D;
@@ -198,4 +198,4 @@ void fx_15_render(EffectInstance* effect) {
     retTask = shim_queue_render_task(&renderTask);
 }
 
-INCLUDE_ASM(s32, "effects/effect_15", fx_15_appendGfx);
+INCLUDE_ASM(s32, "effects/star", star_appendGfx);

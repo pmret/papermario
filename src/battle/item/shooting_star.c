@@ -36,7 +36,7 @@ ApiStatus N(func_802A123C_71D9AC)(Evt* script, s32 isInitialCall) {
     }
 
     do {
-        playFX_0F(phi_a0, temp_s1, c8, temp_s0, temp_f22, 0, temp_f20, phi_v0 + 7);
+        fx_star(phi_a0, temp_s1, c8, temp_s0, temp_f22, 0, temp_f20, phi_v0 + 7);
         if (temp_f20) {
             temp_f20 -= rand;
         }

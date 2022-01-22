@@ -222,24 +222,24 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
         case EFFECT_FLOATING_FLOWER:
             fx_floating_flower(0, fVar1, fVar2, fVar3, iVar4);
             break;
-        case EFFECT_ID_0E:
-            playFX_0E(fVar1, fVar2, fVar3, iVar4);
+        case EFFECT_SNOWFLAKE:
+            fx_snowflake(fVar1, fVar2, fVar3, iVar4);
             break;
-        case EFFECT_ID_0F:
-            playFX_0F(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, fVar8);
+        case EFFECT_STAR:
+            fx_star(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, fVar8);
             break;
-        case EFFECT_ID_10:
+        case EFFECT_EMOTE:
             fx_emote(iVar1, (Npc* ) a2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, &sp30);
             evt_set_variable(script, a8, sp30);
             break;
-        case EFFECT_ID_11:
-            playFX_11(iVar1, fVar2, fVar3, fVar4, fVar5);
+        case EFFECT_SPARKLES:
+            fx_sparkles(iVar1, fVar2, fVar3, fVar4, fVar5);
             break;
-        case EFFECT_ID_12:
-            playFX_12(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8);
+        case EFFECT_SHAPE_SPELL:
+            fx_shape_spell(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8);
             break;
-        case EFFECT_ID_13:
-            playFX_13(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
+        case EFFECT_GATHER_ENERGY_PINK:
+            fx_gather_energy_pink(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
         case EFFECT_ID_14:
             playFX_14(iVar1, fVar2, fVar3, fVar4, iVar5);
