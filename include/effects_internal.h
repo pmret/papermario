@@ -34,7 +34,7 @@ void shim_sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY
 void big_smoke_puff_main(f32 x, f32 y, f32 z);
 void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32);
 void walking_dust_main(s32, f32, f32, f32, f32, f32);
-void flower_ring_main(f32, f32, f32, f32);
+void flower_splash_main(f32, f32, f32, f32);
 void flower_trail_main(s32, f32, f32, f32, f32, f32);
 void cloud_puff_main(f32, f32, f32, f32);
 void fx_11_main(s32, f32, f32, f32);

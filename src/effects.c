@@ -34,7 +34,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x05 */ {},
     /* 0x06 */ FX_ENTRY(landing_dust, _328EA0),
     /* 0x07 */ FX_ENTRY(walking_dust, _328EA0),
-    /* 0x08 */ FX_ENTRY(flower_ring, _32CEC0),
+    /* 0x08 */ FX_ENTRY(flower_splash, _32CEC0),
     /* 0x09 */ FX_ENTRY(flower_trail, _32CEC0),
     /* 0x0A */ FX_ENTRY(cloud_puff, _32EC50),
     /* 0x0B */ FX_ENTRY_NUMBERED(11, _32EC50),

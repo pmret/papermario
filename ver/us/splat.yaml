@@ -2206,15 +2206,15 @@ segments:
     subsegments:
     - [0x32C110, c, walking_dust]
     - [0x32C770]
-  - name: flower_ring
+  - name: flower_splash
     dir: effects
     type: code
     start: 0x32C7A0
     vram: 0xE0010000
     subsegments:
-    - [0x32C7A0, c, flower_ring]
+    - [0x32C7A0, c, flower_splash]
     - [0x32CEB0]
-  - [0x32CEC0, bin] # flower_ring, flower_trail gfx
+  - [0x32CEC0, bin] # flower_splash, flower_trail gfx
   - name: flower_trail
     dir: effects
     type: code

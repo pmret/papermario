@@ -205,10 +205,10 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_walking_dust(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
             break;
         case EFFECT_ID_08:
-            fx_flower_ring(fVar1, fVar2, fVar3, fVar4);
+            fx_flower_splash(fVar1, fVar2, fVar3, fVar4);
             break;
         case EFFECT_ID_09:
-            fx_flower(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
+            fx_flower_trail(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
             break;
         case EFFECT_ID_0A:
             fx_cloud_puff(fVar1, fVar2, fVar3, fVar4);

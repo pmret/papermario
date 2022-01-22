@@ -3,10 +3,10 @@
 
 extern Gfx D_09000E08[];
 
-void flower_ring_init(EffectInstance* effect);
-void flower_ring_update(EffectInstance* effect);
-void flower_ring_render(EffectInstance* effect);
-void flower_ring_appendGfx(void* effect);
+void flower_splash_init(EffectInstance* effect);
+void flower_splash_update(EffectInstance* effect);
+void flower_splash_render(EffectInstance* effect);
+void flower_splash_appendGfx(void* effect);
 
 void func_E0010000(FlowerFXData* effect) {
     Matrix4f sp18;
@@ -43,7 +43,7 @@ void func_E0010104(FlowerFXData* effect) {
     }
 }
 
-void flower_ring_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
+void flower_splash_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     EffectBlueprint bp;
     EffectInstance* effect;
     FlowerFXData* data;
@@ -51,9 +51,9 @@ void flower_ring_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     f32 angle;
     s32 i;
 
-    bp.init = flower_ring_init;
-    bp.update = flower_ring_update;
-    bp.renderWorld = flower_ring_render;
+    bp.init = flower_splash_init;
+    bp.update = flower_splash_update;
+    bp.renderWorld = flower_splash_render;
     bp.unk_00 = 0;
     bp.unk_14 = NULL;
     bp.effectID = EFFECT_ID_08;
@@ -94,10 +94,10 @@ void flower_ring_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     }
 }
 
-void flower_ring_init(EffectInstance* effect) {
+void flower_splash_init(EffectInstance* effect) {
 }
 
-void flower_ring_update(EffectInstance* effect) {
+void flower_splash_update(EffectInstance* effect) {
     FlowerFXData* data = (FlowerFXData*)effect->data;
     s32 cond = FALSE;
     s32 i;
@@ -120,11 +120,11 @@ void flower_ring_update(EffectInstance* effect) {
     }
 }
 
-void flower_ring_render(EffectInstance* effect) {
+void flower_splash_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = flower_ring_appendGfx;
+    renderTask.appendGfx = flower_splash_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
@@ -137,7 +137,7 @@ void func_E00104F4(EffectInstance* effect) {
     shim_remove_effect(effect);
 }
 
-void flower_ring_appendGfx(void* effect) {
+void flower_splash_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
     FlowerFXData* data = effectTemp->data;
     s32 i;
