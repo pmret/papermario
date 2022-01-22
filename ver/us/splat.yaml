@@ -2197,7 +2197,7 @@ segments:
     subsegments:
     - [0x328110, c, landing_dust]
     - [0x328D20]
-  - [0x328EA0, bin] # effect landing_dust, walking_dust, 23, 29, 39 gfx
+  - [0x328EA0, bin] # landing_dust, walking_dust, 23, 29, 39 gfx
   - name: walking_dust
     dir: effects
     type: code
@@ -2206,22 +2206,22 @@ segments:
     subsegments:
     - [0x32C110, c, walking_dust]
     - [0x32C770]
-  - name: effect_8
+  - name: flower_ring
     dir: effects
     type: code
     start: 0x32C7A0
     vram: 0xE0010000
     subsegments:
-    - [0x32C7A0, c, effect_8]
+    - [0x32C7A0, c, flower_ring]
     - [0x32CEB0]
-  - [0x32CEC0, bin] # effect 8,9 gfx
-  - name: effect_9
+  - [0x32CEC0, bin] # flower_ring, flower gfx
+  - name: flower
     dir: effects
     type: code
     start: 0x32DD10
     vram: 0xE0012000
     subsegments:
-    - [0x32DD10, c, effect_9]
+    - [0x32DD10, c, flower]
   - name: effect_10
     dir: effects
     type: code

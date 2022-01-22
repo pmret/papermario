@@ -21,7 +21,7 @@ void walking_dust_appendGfx(void* effect);
 void walking_dust_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    WalkingDustFXData* effectPart;
+    WalkingDustFXData* data;
     s32 numParts = 1;
     s32 i;
 
@@ -35,25 +35,25 @@ void walking_dust_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    effectPart = shim_general_heap_malloc(numParts * sizeof(*effectPart));
-    effect->data = effectPart;
+    data = shim_general_heap_malloc(numParts * sizeof(*data));
+    effect->data = data;
     ASSERT(effect->data != NULL);
 
-    shim_mem_clear(effectPart, numParts * sizeof(*effectPart));
-    effectPart->unk_6C = arg0 == 2;
-    effectPart->unk_70 = 0;
-    effectPart->unk_04 = arg0;
+    shim_mem_clear(data, numParts * sizeof(*data));
+    data->unk_6C = arg0 == 2;
+    data->unk_70 = 0;
+    data->unk_04 = arg0;
 
-    for (i = 0; i < numParts; i++, effectPart++) {
-        effectPart->unk_00 = 1;
-        effectPart->unk_64 = arg4;
-        effectPart->unk_68 = arg5;
-        effectPart->unk_08 = arg1;
-        effectPart->unk_0C = arg2;
-        effectPart->unk_10 = arg3;
-        effectPart->unk_58 = 0.33333334f;
-        effectPart->unk_5C = 1.75f;
-        effectPart->unk_60 = -0.16f;
+    for (i = 0; i < numParts; i++, data++) {
+        data->unk_00 = 1;
+        data->unk_64 = arg4;
+        data->unk_68 = arg5;
+        data->unk_08 = arg1;
+        data->unk_0C = arg2;
+        data->unk_10 = arg3;
+        data->unk_58 = 0.33333334f;
+        data->unk_5C = 1.75f;
+        data->unk_60 = -0.16f;
     }
 }
 
@@ -61,20 +61,20 @@ void walking_dust_init(EffectInstance* effect) {
 }
 
 void walking_dust_update(EffectInstance* effect) {
-    WalkingDustFXData* part = (WalkingDustFXData*)effect->data;
+    WalkingDustFXData* data = (WalkingDustFXData*)effect->data;
 
-    part->unk_74 = D_E000E684[part->unk_6C][part->unk_70++];
+    data->unk_74 = D_E000E684[data->unk_6C][data->unk_70++];
 
-    if (part->unk_74 < 0) {
+    if (data->unk_74 < 0) {
         shim_remove_effect(effect);
     } else {
         s32 i;
 
-        for (i = 0; i < effect->numParts; i++, part++) {
-            part->unk_08 += part->unk_58 * part->unk_64;
-            part->unk_10 += part->unk_58 * part->unk_68;
-            part->unk_5C = part->unk_5C + part->unk_60;
-            part->unk_0C += part->unk_5C;
+        for (i = 0; i < effect->numParts; i++, data++) {
+            data->unk_08 += data->unk_58 * data->unk_64;
+            data->unk_10 += data->unk_58 * data->unk_68;
+            data->unk_5C = data->unk_5C + data->unk_60;
+            data->unk_0C += data->unk_5C;
         }
     }
 }
@@ -94,9 +94,9 @@ void walking_dust_render(EffectInstance* effect) {
 
 void walking_dust_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    WalkingDustFXData* part = effectTemp->data;
-    s32 temp_t3 = part->unk_04;
-    s32 temp_t4 = part->unk_74;
+    WalkingDustFXData* data = effectTemp->data;
+    s32 temp_t3 = data->unk_04;
+    s32 temp_t4 = data->unk_74;
     s32 cond = FALSE;
     Matrix4f sp18;
     Matrix4f sp58;
@@ -126,7 +126,7 @@ void walking_dust_appendGfx(void* effect) {
     }
 
 
-    if ((part->unk_6C == 0 && temp_t4 == 6) || (part->unk_6C == 1 && temp_t4 == 7)) {
+    if ((data->unk_6C == 0 && temp_t4 == 6) || (data->unk_6C == 1 && temp_t4 == 7)) {
         cond = TRUE;
     }
 
@@ -153,8 +153,8 @@ void walking_dust_appendGfx(void* effect) {
         gDPSetTileSize(gMasterGfxPos++, 1, temp_a0 * 4, 0, ((temp_lo + (phi_t1 * 2)) - 1) * 4, (phi_t1 - 1) * 4);
     }
 
-    for (i = 0; i < effectTemp->numParts; i++, part++) {
-        shim_guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
+    for (i = 0; i < effectTemp->numParts; i++, data++) {
+        shim_guTranslateF(sp18, data->unk_08, data->unk_0C, data->unk_10);
         shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
         shim_guMtxCatF(sp58, sp18, sp18);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);

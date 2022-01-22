@@ -205,10 +205,10 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_walking_dust(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
             break;
         case EFFECT_ID_08:
-            playFX_08(fVar1, fVar2, fVar3, fVar4);
+            fx_flower_ring(fVar1, fVar2, fVar3, fVar4);
             break;
         case EFFECT_ID_09:
-            playFX_09(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
+            fx_flower(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
             break;
         case EFFECT_ID_0A:
             playFX_0A(fVar1, fVar2, fVar3, fVar4);

@@ -248,8 +248,8 @@ typedef struct WalkingDustFXData {
     /* 0x74 */ s32 unk_74;
 } WalkingDustFXData; // size = 0x78
 
-// Used by effects 8 and 9 (TODO: better name)
-typedef struct Effect8 {
+// Used by both flower_ring and flower
+typedef struct FlowerFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ u16 unk_04;
     /* 0x06 */ s16 unk_06;
@@ -276,7 +276,7 @@ typedef struct Effect8 {
     /* 0x8C */ f32 unk_8C;
     /* 0x90 */ f32 unk_90;
     /* 0x94 */ f32 unk_94;
-} Effect8; // size = 0x98
+} FlowerFXData; // size = 0x98
 
 typedef struct Effect10 {
     /* 0x00 */ s32 alive;
@@ -611,8 +611,8 @@ void fx_big_dust_puff(s32, f32, f32, f32, s32);
 void fx_cloud_puff(f32, f32, f32);
 void fx_landing_dust(s32, f32, f32, f32, f32);
 void fx_walking_dust(s32, f32, f32, f32, f32, f32);
-void playFX_08(f32, f32, f32, f32);
-void playFX_09(s32, f32, f32, f32, f32, f32);
+void fx_flower_ring(f32, f32, f32, f32);
+void fx_flower(s32, f32, f32, f32, f32, f32);
 EffectInstance* playFX_0A(f32, f32, f32, f32);
 EffectInstance* playFX_0B(s32, f32, f32, f32);
 EffectInstance* playFX_0C(f32, f32, f32, f32, f32);
