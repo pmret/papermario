@@ -15,12 +15,15 @@ extern EffectInstance* gEffectInstances[96];
 extern s32 D_801A6000;
 
 
-#define FX_ENTRY(name, gfx_name) { name##_main, name##_ROM_START, name##_ROM_END, \
-                                   name##_VRAM, gfx_name##_ROM_START, gfx_name##_ROM_END }
+#define FX_ENTRY(name, gfx_name) { \
+    name##_main, name##_ROM_START, name##_ROM_END, name##_VRAM, gfx_name##_ROM_START, gfx_name##_ROM_END \
+}
 
 // TODO remove once everyone is named
-#define FX_ENTRY_NUMBERED(name, gfx_name) { fx_##name##_main, effect_##name##_ROM_START, effect_##name##_ROM_END, \
-                                   effect_##name##_VRAM, gfx_name##_ROM_START, gfx_name##_ROM_END }
+#define FX_ENTRY_NUMBERED(name, gfx_name) { \
+    fx_##name##_main, effect_##name##_ROM_START, effect_##name##_ROM_END, effect_##name##_VRAM, gfx_name##_ROM_START, \
+    gfx_name##_ROM_END \
+} \
 
 EffectTableEntry gEffectTable[] = {
     /* 0x00 */ {},
@@ -32,8 +35,8 @@ EffectTableEntry gEffectTable[] = {
     /* 0x06 */ FX_ENTRY(landing_dust, _328EA0),
     /* 0x07 */ FX_ENTRY(walking_dust, _328EA0),
     /* 0x08 */ FX_ENTRY(flower_ring, _32CEC0),
-    /* 0x09 */ FX_ENTRY(flower, _32CEC0),
-    /* 0x0A */ FX_ENTRY_NUMBERED(10, _32EC50),
+    /* 0x09 */ FX_ENTRY(flower_trail, _32CEC0),
+    /* 0x0A */ FX_ENTRY(cloud_puff, _32EC50),
     /* 0x0B */ FX_ENTRY_NUMBERED(11, _32EC50),
     /* 0x0C */ FX_ENTRY_NUMBERED(12, _32FB50),
     /* 0x0D */ FX_ENTRY_NUMBERED(13, _330460),

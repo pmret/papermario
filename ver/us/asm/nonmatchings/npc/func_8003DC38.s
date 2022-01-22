@@ -37,7 +37,7 @@ glabel func_8003DC38
 /* 190B8 8003DCB8 44810000 */  mtc1      $at, $f0
 /* 190BC 8003DCBC 8E260040 */  lw        $a2, 0x40($s1)
 /* 190C0 8003DCC0 8E070000 */  lw        $a3, ($s0)
-/* 190C4 8003DCC4 0C01BF14 */  jal       playFX_0A
+/* 190C4 8003DCC4 0C01BF14 */  jal       fx_cloud_puff
 /* 190C8 8003DCC8 46007381 */   sub.s    $f14, $f14, $f0
 /* 190CC 8003DCCC C6000000 */  lwc1      $f0, ($s0)
 /* 190D0 8003DCD0 3C01420C */  lui       $at, 0x420c

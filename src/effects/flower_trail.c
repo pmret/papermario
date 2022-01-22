@@ -4,10 +4,10 @@
 extern Gfx D_09000E20[];
 extern Gfx D_09000E38[];
 
-void flower_init(EffectInstance* effect);
-void flower_update(EffectInstance* effect);
-void flower_render(EffectInstance* effect);
-void flower_appendGfx(void* effect);
+void flower_trail_init(EffectInstance* effect);
+void flower_trail_update(EffectInstance* effect);
+void flower_trail_render(EffectInstance* effect);
+void flower_trail_appendGfx(void* effect);
 
 void func_E0012000(FlowerFXData* effect) {
     Matrix4f sp18;
@@ -44,7 +44,7 @@ void func_E0012104(FlowerFXData* effect) {
     }
 }
 
-void flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
+void flower_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
     FlowerFXData* part;
@@ -53,9 +53,9 @@ void flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     f32 temp;
     s32 i;
 
-    bp.init = flower_init;
-    bp.update = flower_update;
-    bp.renderWorld = flower_render;
+    bp.init = flower_trail_init;
+    bp.update = flower_trail_update;
+    bp.renderWorld = flower_trail_render;
     bp.unk_00 = 0;
     bp.unk_14 = NULL;
     bp.effectID = EFFECT_ID_09;
@@ -112,10 +112,10 @@ void flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     }
 }
 
-void flower_init(EffectInstance* effect) {
+void flower_trail_init(EffectInstance* effect) {
 }
 
-void flower_update(EffectInstance* effect) {
+void flower_trail_update(EffectInstance* effect) {
     FlowerFXData* part = (FlowerFXData*)effect->data;
     s32 cond = FALSE;
     s32 i;
@@ -138,11 +138,11 @@ void flower_update(EffectInstance* effect) {
     }
 }
 
-void flower_render(EffectInstance* effect) {
+void flower_trail_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = flower_appendGfx;
+    renderTask.appendGfx = flower_trail_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
@@ -155,7 +155,7 @@ void func_E0012548(EffectInstance* effect) {
     shim_remove_effect(effect);
 }
 
-void flower_appendGfx(void* effect) {
+void flower_trail_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
     FlowerFXData* part = effectTemp->data;
     Gfx* dlist;

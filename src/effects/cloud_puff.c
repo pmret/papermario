@@ -4,23 +4,23 @@
 extern Gfx D_090000E0[];
 extern Gfx D_090001B8[];
 
-void fx_10_init(EffectInstance* effect);
-void fx_10_update(EffectInstance* effect);
-void fx_10_render(EffectInstance* effect);
-void fx_10_appendGfx(void* effect);
+void cloud_puff_init(EffectInstance* effect);
+void cloud_puff_update(EffectInstance* effect);
+void cloud_puff_render(EffectInstance* effect);
+void cloud_puff_appendGfx(void* effect);
 
-void fx_10_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
+void cloud_puff_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     EffectBlueprint bp;
     EffectInstance* effect;
     f32 temp_f20;
-    Effect10* part;
+    CloudPuffFXData* part;
     s32 numParts = 8;
     s32 i;
 
     bp.unk_00 = 0;
-    bp.init = fx_10_init;
-    bp.update = fx_10_update;
-    bp.renderWorld = fx_10_render;
+    bp.init = cloud_puff_init;
+    bp.update = cloud_puff_update;
+    bp.renderWorld = cloud_puff_render;
     bp.unk_14 = NULL;
     bp.effectID = EFFECT_ID_0A;
 
@@ -56,11 +56,11 @@ void fx_10_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     }
 }
 
-void fx_10_init(EffectInstance* effect) {
+void cloud_puff_init(EffectInstance* effect) {
 }
 
-void fx_10_update(EffectInstance* effect) {
-    Effect10* part = (Effect10*)effect->data;
+void cloud_puff_update(EffectInstance* effect) {
+    CloudPuffFXData* part = (CloudPuffFXData*)effect->data;
     s32 cond = FALSE;
     s32 i;
 
@@ -99,11 +99,11 @@ void fx_10_update(EffectInstance* effect) {
     }
 }
 
-void fx_10_render(EffectInstance* effect) {
+void cloud_puff_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_10_appendGfx;
+    renderTask.appendGfx = cloud_puff_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
@@ -112,9 +112,9 @@ void fx_10_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_10_appendGfx(void* effect) {
+void cloud_puff_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    Effect10* part = effectTemp->data;
+    CloudPuffFXData* part = effectTemp->data;
     Matrix4f sp20;
     Matrix4f sp60;
     s32 i;

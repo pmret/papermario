@@ -211,7 +211,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_flower(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
             break;
         case EFFECT_ID_0A:
-            playFX_0A(fVar1, fVar2, fVar3, fVar4);
+            fx_cloud_puff(fVar1, fVar2, fVar3, fVar4);
             break;
         case EFFECT_ID_0B:
             playFX_0B(iVar1, fVar2, fVar3, fVar4);

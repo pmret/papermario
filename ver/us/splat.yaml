@@ -2214,23 +2214,23 @@ segments:
     subsegments:
     - [0x32C7A0, c, flower_ring]
     - [0x32CEB0]
-  - [0x32CEC0, bin] # flower_ring, flower gfx
-  - name: flower
+  - [0x32CEC0, bin] # flower_ring, flower_trail gfx
+  - name: flower_trail
     dir: effects
     type: code
     start: 0x32DD10
     vram: 0xE0012000
     subsegments:
-    - [0x32DD10, c, flower]
-  - name: effect_10
+    - [0x32DD10, c, flower_trail]
+  - name: cloud_puff
     dir: effects
     type: code
     start: 0x32E490
     vram: 0xE0014000
     subsegments:
-    - [0x32E490, c, effect_10]
+    - [0x32E490, c, cloud_puff]
     - [0x32EC10]
-  - [0x32EC50, bin] # effect 10,11 gfx
+  - [0x32EC50, bin] # cloud_puff, 11 gfx
   - name: effect_11
     dir: effects
     type: code
