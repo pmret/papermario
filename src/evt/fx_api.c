@@ -241,43 +241,43 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
         case EFFECT_GATHER_ENERGY_PINK:
             fx_gather_energy_pink(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
-        case EFFECT_ID_14:
-            playFX_14(iVar1, fVar2, fVar3, fVar4, iVar5);
+        case EFFECT_DROP_LEAVES:
+            fx_drop_leaves(iVar1, fVar2, fVar3, fVar4, iVar5);
             break;
-        case EFFECT_ID_15:
-            playFX_15(iVar1, fVar2, fVar3, fVar4, iVar5);
+        case EFFECT_DUST:
+            fx_dust(iVar1, fVar2, fVar3, fVar4, iVar5);
             break;
-        case EFFECT_ID_16:
-            playFX_16(iVar1, fVar2, fVar3, fVar4, fVar5);
+        case EFFECT_SHATTERING_STONES:
+            fx_shattering_stones(iVar1, fVar2, fVar3, fVar4, fVar5);
             break;
-        case EFFECT_ID_17:
-            playFX_17(iVar1, fVar2, fVar3, fVar4);
+        case EFFECT_SMOKE_RING:
+            fx_smoke_ring(iVar1, fVar2, fVar3, fVar4);
             break;
-        case EFFECT_ID_18:
-            playFX_18(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8);
+        case EFFECT_DAMAGE_STARS:
+            fx_damage_stars(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8);
             break;
-        case EFFECT_ID_19:
-            playFX_19(iVar1, fVar2, fVar3, fVar4);
+        case EFFECT_EXPLOSION:
+            fx_explosion(iVar1, fVar2, fVar3, fVar4);
             break;
-        case EFFECT_ID_1A:
-            playFX_1A(iVar1, fVar2, fVar3, fVar4, iVar5);
+        case EFFECT_LENS_FLARE:
+            fx_lens_flare(iVar1, fVar2, fVar3, fVar4, iVar5);
             break;
-        case EFFECT_ID_1B:
-            playFX_1B(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+        case EFFECT_GOT_ITEM_OUTLINE:
+            fx_got_item_outline(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
             evt_set_variable(script, a6, sp34);
             break;
-        case EFFECT_ID_1C:
-            playFX_1C(iVar1, fVar2, fVar3, fVar4, iVar5);
+        case EFFECT_SPIKY_WHITE_AURA:
+            fx_spiky_white_aura(iVar1, fVar2, fVar3, fVar4, iVar5);
             break;
-        case EFFECT_ID_1D:
-            playFX_1D(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6, fVar7, iVar8);
+        case EFFECT_SMOKE_IMPACT:
+            fx_smoke_impact(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6, fVar7, iVar8);
             break;
-        case EFFECT_ID_1E:
-            playFX_1E(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7, &sp30);
+        case EFFECT_DAMAGE_INDICATOR:
+            fx_damage_indicator(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7, &sp30);
             evt_set_variable(script, a8, sp30);
             break;
-        case EFFECT_ID_1F:
-            playFX_1F(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, fVar8);
+        case EFFECT_PURPLE_RING:
+            fx_purple_ring(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, fVar8);
             break;
         case EFFECT_ID_21:
             playFX_21(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7);

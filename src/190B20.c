@@ -2985,7 +2985,7 @@ void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a) {
         a = 55;
     }
 
-    playFX_1E(0, x, y, z, 10.0f, a, attack, &gDamageCountEffects[i]);
+    fx_damage_indicator(0, x, y, z, 10.0f, a, attack, &gDamageCountEffects[i]);
     gDamageCountTimers[i] = 40;
 }
 
@@ -3011,7 +3011,7 @@ void show_damage_popup(f32 x, f32 y, f32 z, s32 attack, s32 a) {
         a = 55;
     }
 
-    playFX_1E(0, x, y, z, 10.0f, a, attack, &gDamageCountEffects[i]);
+    fx_damage_indicator(0, x, y, z, 10.0f, a, attack, &gDamageCountEffects[i]);
     gDamageCountTimers[i] = 40;
 }
 

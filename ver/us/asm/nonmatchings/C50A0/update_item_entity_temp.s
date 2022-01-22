@@ -376,7 +376,7 @@ glabel update_item_entity_temp
 /* CC310 80135C10 8E250008 */  lw        $a1, 8($s1)
 /* CC314 80135C14 8E270010 */  lw        $a3, 0x10($s1)
 /* CC318 80135C18 44062000 */  mfc1      $a2, $f4
-/* CC31C 80135C1C 0C01C0AC */  jal       playFX_1B
+/* CC31C 80135C1C 0C01C0AC */  jal       fx_got_item_outline
 /* CC320 80135C20 24040001 */   addiu    $a0, $zero, 1
 .L80135C24:
 /* CC324 80135C24 3C028015 */  lui       $v0, %hi(D_801568E4)

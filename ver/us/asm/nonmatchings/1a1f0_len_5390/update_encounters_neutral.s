@@ -178,7 +178,7 @@ glabel update_encounters_neutral
 /* 1AE2C 8003FA2C AFA00010 */  sw        $zero, 0x10($sp)
 /* 1AE30 8003FA30 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 1AE34 8003FA34 AFA00018 */  sw        $zero, 0x18($sp)
-/* 1AE38 8003FA38 0C01C064 */  jal       playFX_18
+/* 1AE38 8003FA38 0C01C064 */  jal       fx_damage_stars
 /* 1AE3C 8003FA3C AFB0001C */   sw       $s0, 0x1c($sp)
 /* 1AE40 8003FA40 A2700005 */  sb        $s0, 5($s3)
 /* 1AE44 8003FA44 8E820004 */  lw        $v0, 4($s4)
@@ -1132,7 +1132,7 @@ glabel update_encounters_neutral
 /* 1BC48 80040848 AFA00010 */  sw        $zero, 0x10($sp)
 /* 1BC4C 8004084C E7A00014 */  swc1      $f0, 0x14($sp)
 /* 1BC50 80040850 AFA00018 */  sw        $zero, 0x18($sp)
-/* 1BC54 80040854 0C01C064 */  jal       playFX_18
+/* 1BC54 80040854 0C01C064 */  jal       fx_damage_stars
 /* 1BC58 80040858 AFA2001C */   sw       $v0, 0x1c($sp)
 /* 1BC5C 8004085C 82220007 */  lb        $v0, 7($s1)
 /* 1BC60 80040860 10400005 */  beqz      $v0, .L80040878
@@ -1517,7 +1517,7 @@ glabel update_encounters_neutral
 /* 1C1CC 80040DCC AFA00010 */  sw        $zero, 0x10($sp)
 /* 1C1D0 80040DD0 E7B60014 */  swc1      $f22, 0x14($sp)
 /* 1C1D4 80040DD4 AFA00018 */  sw        $zero, 0x18($sp)
-/* 1C1D8 80040DD8 0C01C064 */  jal       playFX_18
+/* 1C1D8 80040DD8 0C01C064 */  jal       fx_damage_stars
 /* 1C1DC 80040DDC AFBE001C */   sw       $fp, 0x1c($sp)
 .L80040DE0:
 /* 1C1E0 80040DE0 8EC20000 */  lw        $v0, ($s6)
@@ -1704,7 +1704,7 @@ glabel update_encounters_neutral
 /* 1C490 80041090 8E470040 */  lw        $a3, 0x40($s2)
 /* 1C494 80041094 24040003 */  addiu     $a0, $zero, 3
 .L80041098:
-/* 1C498 80041098 0C01C064 */  jal       playFX_18
+/* 1C498 80041098 0C01C064 */  jal       fx_damage_stars
 /* 1C49C 8004109C 00000000 */   nop
 .L800410A0:
 /* 1C4A0 800410A0 8EC20000 */  lw        $v0, ($s6)
@@ -1846,7 +1846,7 @@ glabel update_encounters_neutral
 /* 1C694 80041294 AFA00010 */  sw        $zero, 0x10($sp)
 /* 1C698 80041298 E7B40014 */  swc1      $f20, 0x14($sp)
 /* 1C69C 8004129C AFA00018 */  sw        $zero, 0x18($sp)
-/* 1C6A0 800412A0 0C01C064 */  jal       playFX_18
+/* 1C6A0 800412A0 0C01C064 */  jal       fx_damage_stars
 /* 1C6A4 800412A4 AFBE001C */   sw       $fp, 0x1c($sp)
 .L800412A8:
 /* 1C6A8 800412A8 8EC20000 */  lw        $v0, ($s6)

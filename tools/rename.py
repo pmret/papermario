@@ -48,11 +48,9 @@ print("Walking through asm files")
 asm_files = []
 for root, dirs, files in os.walk(asm_dir):
     for f_name in files:
-        asm_files.append(f_name)
-for f_name in tqdm(asm_files):
-    if f_name.endswith(".s"):
-        f_path = os.path.join(root, f_name)
-
+        asm_files.append(os.path.join(root, f_name))
+for f_path in tqdm(asm_files):
+    if f_path.endswith(".s"):
         handle_file(f_path, True)
 
 # Walk through src files and rename stuff

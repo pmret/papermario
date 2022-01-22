@@ -21,18 +21,18 @@ enum EffectID {
     EFFECT_SPARKLES,
     EFFECT_SHAPE_SPELL,
     EFFECT_GATHER_ENERGY_PINK,
-    EFFECT_ID_14,
-    EFFECT_ID_15,
-    EFFECT_ID_16,
-    EFFECT_ID_17,
-    EFFECT_ID_18,
-    EFFECT_ID_19,
-    EFFECT_ID_1A,
-    EFFECT_ID_1B,
-    EFFECT_ID_1C,
-    EFFECT_ID_1D,
-    EFFECT_ID_1E,
-    EFFECT_ID_1F,
+    EFFECT_DROP_LEAVES,
+    EFFECT_DUST,
+    EFFECT_SHATTERING_STONES,
+    EFFECT_SMOKE_RING,
+    EFFECT_DAMAGE_STARS,
+    EFFECT_EXPLOSION,
+    EFFECT_LENS_FLARE,
+    EFFECT_GOT_ITEM_OUTLINE,
+    EFFECT_SPIKY_WHITE_AURA,
+    EFFECT_SMOKE_IMPACT,
+    EFFECT_DAMAGE_INDICATOR,
+    EFFECT_PURPLE_RING,
     EFFECT_ID_20,
     EFFECT_ID_21,
     EFFECT_ID_22,
@@ -623,18 +623,18 @@ void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
 void fx_sparkles(s32, f32, f32, f32, f32);
 EffectInstance* fx_shape_spell(s32, f32, f32, f32, f32, f32, f32, s32);
 EffectInstance* fx_gather_energy_pink(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_14(s32, f32, f32, f32, s32);
-EffectInstance* playFX_15(s32, f32, f32, f32, s32);
-EffectInstance* playFX_16(s32, f32, f32, f32, f32);
-void playFX_17(s32, f32, f32, f32);
-void playFX_18(s32, f32, f32, f32, f32, f32, f32, s32);
-void playFX_19(s32, f32, f32, f32);
-EffectInstance* playFX_1A(s32, f32, f32, f32, s32);
-EffectInstance* playFX_1B(s32, f32, f32, f32, f32, s32*);
-EffectInstance* playFX_1C(s32, f32, f32, f32, s32);
-void playFX_1D(s32, f32, f32, f32, f32, s32, f32, s32);
-EffectInstance* playFX_1E(s32, f32, f32, f32, f32, f32, s32, s32*);
-EffectInstance* playFX_1F(s32, f32, f32, f32, f32, f32, f32, f32);
+EffectInstance* fx_drop_leaves(s32, f32, f32, f32, s32);
+EffectInstance* fx_dust(s32, f32, f32, f32, s32);
+EffectInstance* fx_shattering_stones(s32, f32, f32, f32, f32);
+void fx_smoke_ring(s32, f32, f32, f32);
+void fx_damage_stars(s32, f32, f32, f32, f32, f32, f32, s32);
+void fx_explosion(s32, f32, f32, f32);
+EffectInstance* fx_lens_flare(s32, f32, f32, f32, s32);
+EffectInstance* fx_got_item_outline(s32, f32, f32, f32, f32, s32*);
+EffectInstance* fx_spiky_white_aura(s32, f32, f32, f32, s32);
+void fx_smoke_impact(s32, f32, f32, f32, f32, s32, f32, s32);
+EffectInstance* fx_damage_indicator(s32, f32, f32, f32, f32, f32, s32, s32*);
+EffectInstance* fx_purple_ring(s32, f32, f32, f32, f32, f32, f32, f32);
 EffectInstance* playFX_20(s32, f32, f32, f32, f32, EffectInstance**);
 EffectInstance* playFX_21(s32, f32, f32, f32, f32, f32, s32);
 void playFX_22(s32, f32, f32, f32, f32, f32, s32, s32);

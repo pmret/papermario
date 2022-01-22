@@ -2310,110 +2310,110 @@ segments:
     - [0x33B180, c, gather_energy_pink]
     - [0x33BB70, data]
   - [0x33BBD0, bin] # effect 19 gfx
-  - name: effect_20
+  - name: drop_leaves
     dir: effects
     type: code
     start: 0x33CDF0
     vram: 0xE0028000
     subsegments:
-    - [0x33CDF0, c, effect_20]
+    - [0x33CDF0, c, drop_leaves]
     - [0x33D5D0, data]
   - [0x33D610, bin] # effect 20, effect 43 gfx
-  - name: effect_21
+  - name: dust
     dir: effects
     type: code
     start: 0x33E8C0
     vram: 0xE002A000
     subsegments:
-    - [0x33E8C0, c, effect_21]
+    - [0x33E8C0, c, dust]
     - [0x33EFE0, data]
   - [0x33F000, bin] # effect 21 gfx
-  - name: effect_22
+  - name: shattering_stones
     dir: effects
     type: code
     start: 0x33FE80
     vram: 0xE002C000
     subsegments:
-    - [0x33FE80, c, effect_22]
+    - [0x33FE80, c, shattering_stones]
     - [0x3407C0, data]
   - [0x340880, bin] # effect 22 gfx
-  - name: effect_23
+  - name: smoke_ring
     dir: effects
     type: code
     start: 0x3419E0
     vram: 0xE002E000
     subsegments:
-    - [0x3419E0, c, effect_23]
+    - [0x3419E0, c, smoke_ring]
     - [0x342120, data]
-  - name: effect_24
+  - name: damage_stars
     dir: effects
     type: code
     start: 0x342140
     vram: 0xE0030000
     subsegments:
-    - [0x342140, c, effect_24]
+    - [0x342140, c, damage_stars]
     - [0x342FD0, data]
   - [0x343040, bin] # effect 24, effect 33 gfx
-  - name: effect_25
+  - name: explosion
     dir: effects
     type: code
     start: 0x343680
     vram: 0xE0032000
     subsegments:
-    - [0x343680, c, effect_25]
+    - [0x343680, c, explosion]
     - [0x343F30, data]
   - [0x343F70, bin] # effect 25 gfx
-  - name: effect_26
+  - name: lens_flare
     dir: effects
     type: code
     start: 0x344A10
     vram: 0xE0034000
     subsegments:
-    - [0x344A10, c, effect_26]
+    - [0x344A10, c, lens_flare]
     - [0x345190, data]
   - [0x3451E0, bin] # effect 26 gfx
-  - name: effect_27
+  - name: got_item_outline
     dir: effects
     type: code
     start: 0x3454E0
     vram: 0xE0036000
     subsegments:
-    - [0x3454E0, c, effect_27]
+    - [0x3454E0, c, got_item_outline]
     - [0x345B10, data]
   - [0x345B40, bin] # effect 27 gfx
-  - name: effect_28
+  - name: spiky_white_aura
     dir: effects
     type: code
     start: 0x34DD20
     vram: 0xE0038000
     subsegments:
-    - [0x34DD20, c, effect_28]
+    - [0x34DD20, c, spiky_white_aura]
     - [0x34E710, data]
   - [0x34E770, bin] # effect 28 gfx
-  - name: effect_29
+  - name: smoke_impact
     dir: effects
     type: code
     start: 0x34EC80
     vram: 0xE003A000
     subsegments:
-    - [0x34EC80, c, effect_29]
+    - [0x34EC80, c, smoke_impact]
     - [0x34F480, data]
-  - name: effect_30
+  - name: damage_indicator
     dir: effects
     type: code
     start: 0x34F4C0
     vram: 0xE003C000
     subsegments:
-    - [0x34F4C0, c, effect_30]
+    - [0x34F4C0, c, damage_indicator]
     - [0x350160, data]
   - [0x350220, bin] # effect 30 gfx
-  - name: effect_31
+  - name: purple_ring
     dir: effects
     type: code
     start: 0x352440
     vram: 0xE003E000
     subsegments:
-    - [0x352440, c, effect_31]
+    - [0x352440, c, purple_ring]
     - [0x352CB0, data]
   - [0x352CE0, bin] # effect 31 gfx
   - name: effect_32

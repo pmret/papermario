@@ -210,10 +210,10 @@ EvtScript N(8021AB54) = {
     EVT_END_THREAD
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(2), 2)
-    EVT_CALL(PlayEffect, EFFECT_ID_17, 0, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_SMOKE_RING, 0, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_ADD(LW(1), 20)
     EVT_ADD(LW(2), 2)
-    EVT_CALL(PlayEffect, EFFECT_ID_19, 0, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_EXPLOSION, 0, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BOMB_BLAST)
     EVT_RETURN
     EVT_END

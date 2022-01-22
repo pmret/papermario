@@ -505,7 +505,7 @@ glabel func_802BD758_3184A8
 /* 318BE8 802BDE98 00501021 */  addu      $v0, $v0, $s0
 /* 318BEC 802BDE9C 80440015 */  lb        $a0, 0x15($v0)
 /* 318BF0 802BDEA0 44061000 */  mfc1      $a2, $f2
-/* 318BF4 802BDEA4 0C01C07C */  jal       playFX_19
+/* 318BF4 802BDEA4 0C01C07C */  jal       fx_explosion
 /* 318BF8 802BDEA8 00000000 */   nop
 /* 318BFC 802BDEAC 82020012 */  lb        $v0, 0x12($s0)
 /* 318C00 802BDEB0 000210C0 */  sll       $v0, $v0, 3

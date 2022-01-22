@@ -507,7 +507,7 @@ EvtScript N(8021A36C) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_12)
             EVT_THREAD
                 EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-                EVT_CALL(PlayEffect, EFFECT_ID_1D, 0, LW(0), LW(1), LW(2), 60, 8, 10, 20, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LW(0), LW(1), LW(2), 60, 8, 10, 20, 0, 0, 0, 0, 0)
             EVT_END_THREAD
             EVT_THREAD
                 EVT_CALL(StartRumble, 1)
@@ -524,7 +524,7 @@ EvtScript N(8021A36C) = {
             EVT_CALL(StartRumble, 1)
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-            EVT_CALL(PlayEffect, EFFECT_ID_1D, 0, LW(0), LW(1), LW(2), 60, 8, 10, 20, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LW(0), LW(1), LW(2), 60, 8, 10, 20, 0, 0, 0, 0, 0)
             EVT_IF_EQ(LW(10), HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
@@ -585,7 +585,7 @@ EvtScript N(8021A36C) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_D)
             EVT_THREAD
                 EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-                EVT_CALL(PlayEffect, EFFECT_ID_1D, 0, LW(0), LW(1), LW(2), 60, 8, 10, 20, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LW(0), LW(1), LW(2), 60, 8, 10, 20, 0, 0, 0, 0, 0)
             EVT_END_THREAD
             EVT_THREAD
                 EVT_CALL(StartRumble, 1)
@@ -602,7 +602,7 @@ EvtScript N(8021A36C) = {
             EVT_CALL(StartRumble, 1)
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-            EVT_CALL(PlayEffect, EFFECT_ID_1D, 0, LW(0), LW(1), LW(2), 60, 8, 10, 20, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LW(0), LW(1), LW(2), 60, 8, 10, 20, 0, 0, 0, 0, 0)
             EVT_GOTO(2)
             EVT_LABEL(1)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(5))
@@ -627,7 +627,7 @@ EvtScript N(8021A36C) = {
                 EVT_CALL(StartRumble, 1)
                 EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
                 EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-                EVT_CALL(PlayEffect, EFFECT_ID_1D, 0, LW(0), LW(1), LW(2), 60, 8, 10, 20, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LW(0), LW(1), LW(2), 60, 8, 10, 20, 0, 0, 0, 0, 0)
                 EVT_WAIT_FRAMES(8)
             EVT_END_IF
             EVT_LABEL(2)

@@ -764,7 +764,7 @@ EvtScript N(80226DEC) = {
     EVT_CALL(SetAnimation, LW(11), 1, NPC_ANIM_groove_guy_Palette_00_Anim_A)
     EVT_CALL(GetActorPos, LW(11), LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 20)
-    EVT_CALL(PlayEffect, EFFECT_ID_1A, 0, LW(0), LW(1), LW(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_LENS_FLARE, 0, LW(0), LW(1), LW(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(GetActorPos, LW(11), LW(0), LW(1), LW(2))
     EVT_CALL(ForceHomePos, LW(11), LW(0), LW(1), LW(2))
     EVT_WAIT_FRAMES(25)

@@ -55,7 +55,7 @@ ApiStatus N(func_802A1388_71DAF8)(Evt* script, s32 isInitialCall) {
     s32 b = evt_get_variable(script, *args++);
     s32 c = evt_get_variable(script, *args++);
 
-    playFX_18(2, a, b, c, 0, -1.0f, 0, 5);
+    fx_damage_stars(2, a, b, c, 0, -1.0f, 0, 5);
 
     return ApiStatus_DONE2;
 }

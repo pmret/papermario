@@ -209,7 +209,7 @@ void entity_GiantChest_open(Entity* entity) {
                     playFX_33(0, chest->itemEntityPos.x + horizontalOffset * sinRight - depthOffset * sinFwd,
                               chest->itemEntityPos.y + 12.0f, chest->itemEntityPos.z - cosRight * horizontalOffset + cosFwd * depthOffset, 1.0f, 0x64);
                     //GotItemOutline
-                    playFX_1B(0, chest->itemEntityPos.x + horizontalOffset * sinRight - sinFwd * depthOffset,
+                    fx_got_item_outline(0, chest->itemEntityPos.x + horizontalOffset * sinRight - sinFwd * depthOffset,
                               chest->itemEntityPos.y + 12.0f, chest->itemEntityPos.z - cosRight * horizontalOffset + cosFwd * depthOffset, 1.0f, &chest->gotItemEffect);
                 }
             }

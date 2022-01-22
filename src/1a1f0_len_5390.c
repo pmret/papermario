@@ -235,7 +235,7 @@ ApiStatus OnDefeatEnemy(Evt* script, s32 isInitialCall) {
 
     if (script->functionTemp[1] == 15) {
         sfx_play_sound(SOUND_DEATH);
-        playFX_18(1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0, -1.0f, 0, 10);
+        fx_damage_stars(1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0, -1.0f, 0, 10);
     }
 
     temp1 = script->functionTemp[1];
