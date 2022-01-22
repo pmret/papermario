@@ -75,7 +75,7 @@ glabel fx_123_main
 /* 3F9F58 E0112108 8E050004 */  lw        $a1, 4($s0)
 /* 3F9F5C E011210C 8E060008 */  lw        $a2, 8($s0)
 /* 3F9F60 E0112110 8E07000C */  lw        $a3, 0xc($s0)
-/* 3F9F64 E0112114 0C012000 */  jal       fx_36_main
+/* 3F9F64 E0112114 0C012000 */  jal       ring_blast_main
 /* 3F9F68 E0112118 24040001 */   addiu    $a0, $zero, 1
 .LE011211C:
 /* 3F9F6C E011211C 2A420002 */  slti      $v0, $s2, 2

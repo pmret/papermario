@@ -8,7 +8,7 @@ BSS char N(pad)[8]; // BSS has bad alignment. Should be 0x10 aligned.
 BSS EffectInstance* N(D_80224DA0);
 
 ApiStatus func_80218B30_4E3270(Evt* script, s32 isInitialCall) {
-    playFX_20(1, -110.0f, 80.0f, -146.0, 0.3f, &N(D_80224DA0));
+    fx_flame(1, -110.0f, 80.0f, -146.0, 0.3f, &N(D_80224DA0));
     return ApiStatus_DONE2;
 }
 

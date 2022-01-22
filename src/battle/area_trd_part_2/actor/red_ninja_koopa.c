@@ -322,7 +322,7 @@ EvtScript N(80228748) = {
                     EVT_ADDF(LW(1), LW(3))
                     EVT_ADDF(LW(2), EVT_FLOAT(5.0))
                     EVT_DIVF(LW(3), EVT_FLOAT(10.0))
-                    EVT_CALL(PlayEffect, EFFECT_ID_27, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
+                    EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_bros_Palette_01_Anim_C)
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022873C)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)

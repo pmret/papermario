@@ -1368,9 +1368,9 @@ EvtScript N(handleEvent_8021E6F0) = {
                 EVT_ADDF(LW(1), LW(3))
                 EVT_ADDF(LW(2), EVT_FLOAT(5.0))
                 EVT_DIVF(LW(3), EVT_FLOAT(10.0))
-                EVT_CALL(PlayEffect, EFFECT_ID_27, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
                 EVT_WAIT_FRAMES(5)
-                EVT_CALL(PlayEffect, EFFECT_ID_27, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(ActorSpeak, MESSAGE_ID(0x0C, 0x0106), ACTOR_SELF, 1, -00001, -00001)
             EVT_WAIT_FRAMES(30)
@@ -1401,9 +1401,9 @@ EvtScript N(handleEvent_8021E6F0) = {
             EVT_ADDF(LW(1), LW(3))
             EVT_ADDF(LW(2), EVT_FLOAT(5.0))
             EVT_DIVF(LW(3), EVT_FLOAT(10.0))
-            EVT_CALL(PlayEffect, EFFECT_ID_27, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(5)
-            EVT_CALL(PlayEffect, EFFECT_ID_27, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
     EVT_END_SWITCH

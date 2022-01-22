@@ -345,7 +345,7 @@ EvtScript N(8021BEBC) = {
                             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                             EVT_ADD(LW(0), 10)
-                            EVT_CALL(PlayEffect, EFFECT_ID_2B, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                            EVT_CALL(PlayEffect, EFFECT_WINDY_LEAVES, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
                             EVT_WAIT_FRAMES(3)
                         EVT_END_LOOP
                     EVT_END_THREAD
@@ -383,7 +383,7 @@ EvtScript N(8021BEBC) = {
                             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                             EVT_ADD(LW(0), 10)
-                            EVT_CALL(PlayEffect, EFFECT_ID_2B, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                            EVT_CALL(PlayEffect, EFFECT_WINDY_LEAVES, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
                             EVT_WAIT_FRAMES(3)
                         EVT_END_LOOP
                     EVT_END_THREAD
@@ -448,7 +448,7 @@ EvtScript N(8021BEBC) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(0), 10)
-            EVT_CALL(PlayEffect, EFFECT_ID_2B, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_WINDY_LEAVES, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(3)
         EVT_END_LOOP
     EVT_END_THREAD

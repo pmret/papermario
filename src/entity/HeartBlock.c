@@ -92,7 +92,7 @@ void entity_HeartBlockContent_anim_idle(Entity* entity, s32 arg1) {
                 data->unk_02--;
                 if (data->unk_02 <= 0) {
                     data->unk_02 = 50;
-                    playFX_22(data->unk_0A, entity->position.x, entity->position.y, entity->position.z, 22.0f, 8.0f, 4, 20);
+                    fx_stars_shimmer(data->unk_0A, entity->position.x, entity->position.y, entity->position.z, 22.0f, 8.0f, 4, 20);
                 }
             }
             break;

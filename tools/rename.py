@@ -55,12 +55,13 @@ for f_path in tqdm(asm_files):
 
 # Walk through src files and rename stuff
 print("Walking through src files")
+c_files = []
 for root, dirs, files in os.walk(src_dir):
     for f_name in files:
-        if f_name.endswith(".c") or f_name.endswith(".h"):
-            f_path = os.path.join(root, f_name)
-
-            handle_file(f_path, True)
+        c_files.append(os.path.join(root, f_name))
+for f_path in tqdm(c_files):
+    if f_name.endswith(".c") or f_name.endswith(".h"):
+        handle_file(f_path, True)
 
 # Walk through include files and rename stuff
 print("Walking through include files")

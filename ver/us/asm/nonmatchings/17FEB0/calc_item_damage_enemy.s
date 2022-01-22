@@ -78,7 +78,7 @@ glabel calc_item_damage_enemy
 /* 1800D8 802517F8 8E260010 */  lw        $a2, 0x10($s1)
 /* 1800DC 802517FC 44072000 */  mfc1      $a3, $f4
 /* 1800E0 80251800 24080001 */  addiu     $t0, $zero, 1
-/* 1800E4 80251804 0C01C184 */  jal       playFX_24
+/* 1800E4 80251804 0C01C184 */  jal       fx_ring_blast
 /* 1800E8 80251808 AFA80024 */   sw       $t0, 0x24($sp)
 .L8025180C:
 /* 1800EC 8025180C 8E820188 */  lw        $v0, 0x188($s4)

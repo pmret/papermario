@@ -2416,135 +2416,135 @@ segments:
     - [0x352440, c, purple_ring]
     - [0x352CB0, data]
   - [0x352CE0, bin] # effect 31 gfx
-  - name: effect_32
+  - name: flame
     dir: effects
     type: code
     start: 0x353300
     vram: 0xE0040000
     subsegments:
-    - [0x353300, c, effect_32]
+    - [0x353300, c, flame]
     - [0x353B40]
   - [0x353BB0, bin] # effect 32 gfx
-  - name: effect_33
+  - name: stars_burst
     dir: effects
     type: code
     start: 0x3547A0
     vram: 0xE0042000
     subsegments:
-    - [0x3547A0, c, effect_33]
+    - [0x3547A0, c, stars_burst]
     - [0x354F20, data]
-  - name: effect_34
+  - name: stars_shimmer
     dir: effects
     type: code
     start: 0x354F60
     vram: 0xE0044000
     subsegments:
-    - [0x354F60, c, effect_34]
+    - [0x354F60, c, stars_shimmer]
     - [0x355D10, data]
-  - name: effect_35
+  - name: rising_bubble
     dir: effects
     type: code
     start: 0x355EE0
     vram: 0xE0046000
     subsegments:
-    - [0x355EE0, c, effect_35]
+    - [0x355EE0, c, rising_bubble]
     - [0x3564E0, data]
   - [0x356530, bin] # effect 35 gfx
-  - name: effect_36
+  - name: ring_blast
     dir: effects
     type: code
     start: 0x356980
     vram: 0xE0048000
     subsegments:
-    - [0x356980, c, effect_36]
+    - [0x356980, c, ring_blast]
     - [0x357380, data]
   - [0x3573A0, bin] # effect 36 gfx
-  - name: effect_37
+  - name: shockwave
     dir: effects
     type: code
     start: 0x3584C0
     vram: 0xE004A000
     subsegments:
-    - [0x3584C0, c, effect_37]
+    - [0x3584C0, c, shockwave]
     - [0x359320, data]
   - [0x3593B0, bin] # effect 37, effect 104 gfx
-  - name: effect_38
+  - name: music_note
     dir: effects
     type: code
     start: 0x359F20
     vram: 0xE004C000
     subsegments:
-    - [0x359F20, c, effect_38]
+    - [0x359F20, c, music_note]
     - [0x35A580, data]
   - [0x35A5E0, bin] # effect 38 gfx
-  - name: effect_39
+  - name: smoke_burst
     dir: effects
     type: code
     start: 0x35B9D0
     vram: 0xE004E000
     subsegments:
-    - [0x35B9D0, c, effect_39]
+    - [0x35B9D0, c, smoke_burst]
     - [0x35BFB0, data]
-  - name: effect_40
+  - name: sweat
     dir: effects
     type: code
     start: 0x35BFD0
     vram: 0xE0050000
     subsegments:
-    - [0x35BFD0, c, effect_40]
+    - [0x35BFD0, c, sweat]
     - [0x35C530, data]
   - [0x35C550, bin] # effect 40 gfx
-  - name: effect_41
+  - name: sleep_bubble
     dir: effects
     type: code
     start: 0x35CA80
     vram: 0xE0052000
     subsegments:
-    - [0x35CA80, c, effect_41]
+    - [0x35CA80, c, sleep_bubble]
     - [0x35D460, data]
   - [0x35D510, bin] # effect 41 gfx
-  - name: effect_43
+  - name: windy_leaves
     dir: effects
     type: code
     start: 0x35DA00
     vram: 0xE0056000
     subsegments:
-    - [0x35DA00, c, effect_43]
+    - [0x35DA00, c, windy_leaves]
     - [0x35E8A0, data]
-  - name: effect_44
+  - name: falling_leaves
     dir: effects
     type: code
     start: 0x35E920
     vram: 0xE0058000
     subsegments:
-    - [0x35E920, c, effect_44]
+    - [0x35E920, c, falling_leaves]
     - [0x35F0A0, data]
   - [0x35F0E0, bin] # effect 44 gfx
-  - name: effect_45
+  - name: stars_spread
     dir: effects
     type: code
     start: 0x3602C0
     vram: 0xE005A000
     subsegments:
-    - [0x3602C0, c, effect_45]
+    - [0x3602C0, c, stars_spread]
     - [0x360A10, data]
   - [0x360A30, bin] # effect 45 gfx
-  - name: effect_46
+  - name: steam_burst
     dir: effects
     type: code
     start: 0x360F40
     vram: 0xE005C000
     subsegments:
-    - [0x360F40, c, effect_46]
+    - [0x360F40, c, steam_burst]
     - [0x361640, data]
   - [0x361670, bin] # effect 46 gfx
-  - name: effect_47
+  - name: stars_orbiting
     dir: effects
     type: code
     start: 0x3625C0
     vram: 0xE005E000
     subsegments:
-    - [0x3625C0, c, effect_47]
+    - [0x3625C0, c, stars_orbiting]
     - [0x362C30, data]
   - [0x362C50, bin] # effect 47 gfx
   - name: effect_48

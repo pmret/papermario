@@ -16,7 +16,7 @@ ApiStatus func_802A1000_737890(Evt* script, s32 isInitialCall) {
     f32 yPos = playerActor->currentPos.y + 15.0f;
     f32 zPos = playerActor->currentPos.z + 5.0f;
 
-    playFX_2D(0, xPos, yPos, zPos, 6, 20);
+    fx_stars_spread(0, xPos, yPos, zPos, 6, 20);
 
     return ApiStatus_DONE2;
 }
@@ -28,7 +28,7 @@ ApiStatus func_802A1074_737904(Evt* script, s32 isInitialCall) {
     f32 yPos = playerActor->currentPos.y + 15.0f;
     f32 zPos = playerActor->currentPos.z + 5.0f;
 
-    playFX_2E(0, xPos, yPos, zPos, 1.0f, 20);
+    fx_steam_burst(0, xPos, yPos, zPos, 1.0f, 20);
 
     return ApiStatus_DONE2;
 }

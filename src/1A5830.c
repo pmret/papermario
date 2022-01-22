@@ -313,7 +313,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         return HIT_RESULT_QUAKE_IMMUNE;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
-        playFX_24(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 0x18);
+        fx_ring_blast(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 0x18);
         isFire = TRUE;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_ELECTRIC) {

@@ -356,7 +356,7 @@ void func_802B6120_E2A7D0(void) {
                 sfx_play_sound_at_player(0xFE, 0);
             }
             if ((parasolStruct->unk_0C & 3) == 0) {
-                playFX_22(4, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 50, 50, 0x28, 0x1E);
+                fx_stars_shimmer(4, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 50, 50, 0x28, 0x1E);
             }
         }
         parasolStruct->unk_0C--;

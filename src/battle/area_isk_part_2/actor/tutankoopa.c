@@ -472,7 +472,7 @@ EvtScript N(8021C974) = {
     EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 40)
-    EVT_CALL(PlayEffect, EFFECT_ID_2F, 0, LW(0), LW(1), LW(2), 20, 4, LW(15), 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_STARS_ORBITING, 0, LW(0), LW(1), LW(2), 20, 4, LW(15), 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_tutankoopa_Palette_00_Anim_A)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20E5)
     EVT_WAIT_FRAMES(30)

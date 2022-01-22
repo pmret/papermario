@@ -412,7 +412,7 @@ EvtScript N(80219D88) = {
         EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
         EVT_SET(LW(1), 0)
         EVT_CALL(PlayEffect, EFFECT_ID_06, 4, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
-        EVT_CALL(PlayEffect, EFFECT_ID_25, 1, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SHOCKWAVE, 1, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_THREAD
             EVT_CALL(StartRumble, 1)
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(15.0))
@@ -439,7 +439,7 @@ EvtScript N(80219D88) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(5))
     EVT_IF_NOT_FLAG(LW(5), STATUS_FLAG_SHRINK)
         EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-        EVT_CALL(PlayEffect, EFFECT_ID_25, 1, LW(0), 0, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SHOCKWAVE, 1, LW(0), 0, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_IF
     EVT_WAIT_FRAMES(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -581,7 +581,7 @@ EvtScript N(8021A36C) = {
             EVT_END_IF
             EVT_LABEL(0)
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-            EVT_CALL(PlayEffect, EFFECT_ID_25, 0, LW(0), 0, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SHOCKWAVE, 0, LW(0), 0, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_tubba_Palette_00_Anim_D)
             EVT_THREAD
                 EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -609,7 +609,7 @@ EvtScript N(8021A36C) = {
             EVT_IF_NOT_FLAG(LW(5), STATUS_FLAG_SHRINK)
                 EVT_WAIT_FRAMES(3)
                 EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-                EVT_CALL(PlayEffect, EFFECT_ID_25, 1, LW(0), 0, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_SHOCKWAVE, 1, LW(0), 0, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 EVT_CALL(StartRumble, 1)
                 EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(3.0))
             EVT_END_IF

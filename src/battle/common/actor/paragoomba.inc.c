@@ -515,7 +515,7 @@ EvtScript N(8021C574) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(3), LW(4), LW(5))
         EVT_ADD(LW(4), 10)
         EVT_ADD(LW(5), 5)
-        EVT_CALL(PlayEffect, EFFECT_ID_27, 0, LW(3), LW(4), LW(5), EVT_FLOAT(1.0), 10, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LW(3), LW(4), LW(5), EVT_FLOAT(1.0), 10, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_IF
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)

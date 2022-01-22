@@ -33,21 +33,21 @@ enum EffectID {
     EFFECT_SMOKE_IMPACT,
     EFFECT_DAMAGE_INDICATOR,
     EFFECT_PURPLE_RING,
-    EFFECT_ID_20,
-    EFFECT_ID_21,
-    EFFECT_ID_22,
-    EFFECT_ID_23,
-    EFFECT_ID_24,
-    EFFECT_ID_25,
-    EFFECT_ID_26,
-    EFFECT_ID_27,
-    EFFECT_ID_28,
-    EFFECT_ID_29,
-    EFFECT_ID_2B = 0x2B,
-    EFFECT_ID_2C,
-    EFFECT_ID_2D,
-    EFFECT_ID_2E,
-    EFFECT_ID_2F,
+    EFFECT_FLAME,
+    EFFECT_STARS_BURST,
+    EFFECT_STARS_SHIMMER,
+    EFFECT_RISING_BUBBLE,
+    EFFECT_RING_BLAST,
+    EFFECT_SHOCKWAVE,
+    EFFECT_MUSIC_NOTE,
+    EFFECT_SMOKE_BURST,
+    EFFECT_SWEAT,
+    EFFECT_SLEEP_BUBBLE,
+    EFFECT_WINDY_LEAVES = 0x2B,
+    EFFECT_FALLING_LEAVES,
+    EFFECT_STARS_SPREAD,
+    EFFECT_STEAM_BURST,
+    EFFECT_STARS_ORBITING,
     EFFECT_ID_30,
     EFFECT_ID_31,
     EFFECT_ID_32,
@@ -635,22 +635,22 @@ EffectInstance* fx_spiky_white_aura(s32, f32, f32, f32, s32);
 void fx_smoke_impact(s32, f32, f32, f32, f32, s32, f32, s32);
 EffectInstance* fx_damage_indicator(s32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* fx_purple_ring(s32, f32, f32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_20(s32, f32, f32, f32, f32, EffectInstance**);
-EffectInstance* playFX_21(s32, f32, f32, f32, f32, f32, s32);
-void playFX_22(s32, f32, f32, f32, f32, f32, s32, s32);
-EffectInstance* playFX_23(u32, f32, f32, f32, f32);
-EffectInstance* playFX_24(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_25(s32, f32, f32, f32);
-void playFX_26(s32, f32, f32, f32);
-EffectInstance* playFX_27(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_flame(s32, f32, f32, f32, f32, EffectInstance**);
+EffectInstance* fx_stars_burst(s32, f32, f32, f32, f32, f32, s32);
+void fx_stars_shimmer(s32, f32, f32, f32, f32, f32, s32, s32);
+EffectInstance* fx_rising_bubble(u32, f32, f32, f32, f32);
+EffectInstance* fx_ring_blast(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_shockwave(s32, f32, f32, f32);
+void fx_music_note(s32, f32, f32, f32);
+EffectInstance* fx_smoke_burst(s32, f32, f32, f32, f32, s32);
 void fx_sweat(s32, f32 x, f32 y, f32 z, f32, f32, s32);
 void fx_sleep_bubble(s32, f32, f32, f32, f32, f32, s32*);
 EffectInstance* playFX_2A(s32, f32, f32, f32);
-EffectInstance* playFX_2B(s32, f32, f32, f32);
-EffectInstance* playFX_2C(s32, f32, f32, f32);
-void playFX_2D(s32, f32, f32, f32, s32, s32);
-void playFX_2E(s32, f32, f32, f32, f32, s32);
-void playFX_2F(s32, f32, f32, f32, f32, s32, s32*);
+EffectInstance* fx_windy_leaves(s32, f32, f32, f32);
+EffectInstance* fx_falling_leaves(s32, f32, f32, f32);
+void fx_stars_spread(s32, f32, f32, f32, s32, s32);
+void fx_steam_burst(s32, f32, f32, f32, f32, s32);
+void fx_stars_orbiting(s32, f32, f32, f32, f32, s32, s32*);
 void playFX_30(s32, f32, f32, f32);
 void playFX_31(s32, f32, f32, f32);
 void playFX_32(s32, f32, f32, f32, f32);

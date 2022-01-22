@@ -17,7 +17,7 @@ ApiStatus N(UnkStarFunc2)(Evt* script, s32 isInitialCall) {
     s32 b = evt_get_variable(script, *args++);
     s32 c = evt_get_variable(script, *args++);
 
-    playFX_22(5, a, b, c, 50.0f, 50.0f, 40, 30);
+    fx_stars_shimmer(5, a, b, c, 50.0f, 50.0f, 40, 30);
     return ApiStatus_DONE2;
 }
 

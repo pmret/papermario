@@ -964,7 +964,7 @@ EvtScript N(8021BDE4) = {
             EVT_ADD(LW(1), LW(3))
             EVT_ADD(LW(2), 5)
             EVT_DIVF(LW(3), EVT_FLOAT(10.0))
-            EVT_CALL(PlayEffect, EFFECT_ID_27, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_CALL(GetActorVar, ACTOR_SELF, 7, LW(1))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, LW(1))

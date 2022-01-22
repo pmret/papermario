@@ -339,7 +339,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             func_802BD100_31DE70();
 
             if (!(script->functionTemp[1] & 3)) {
-                playFX_23(0, partnerNPC->pos.x, partnerNPC->moveToPos.y +
+                fx_rising_bubble(0, partnerNPC->pos.x, partnerNPC->moveToPos.y +
                         (partnerNPC->collisionHeight * 0.5f), partnerNPC->pos.z, 0);
             }
 
