@@ -5,24 +5,24 @@ s32 D_E001A610 = 0;
 
 extern Gfx D_090002F0[];
 
-void fx_13_init(EffectInstance* effect);
-void fx_13_update(EffectInstance* effect);
-void fx_13_render(EffectInstance* effect);
-void fx_13_appendGfx(void* effect);
+void floating_flower_init(EffectInstance* effect);
+void floating_flower_update(EffectInstance* effect);
+void floating_flower_render(EffectInstance* effect);
+void floating_flower_appendGfx(void* effect);
 
-void fx_13_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
+void floating_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    Effect13* part;
+    FloatingFlowerFXData* part;
     s32 numParts = 1;
     f32 phi_f6;
 
     bp.unk_00 = 0;
-    bp.init = fx_13_init;
-    bp.update = fx_13_update;
-    bp.renderWorld = fx_13_render;
+    bp.init = floating_flower_init;
+    bp.update = floating_flower_update;
+    bp.renderWorld = floating_flower_render;
     bp.unk_14 = 0;
-    bp.effectID = EFFECT_ID_0D;
+    bp.effectID = EFFECT_FLOATING_FLOWER;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;
@@ -72,11 +72,11 @@ void fx_13_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
     }
 }
 
-void fx_13_init(EffectInstance* effect) {
+void floating_flower_init(EffectInstance* effect) {
 }
 
-void fx_13_update(EffectInstance* effect) {
-    Effect13* data = effect->data;
+void floating_flower_update(EffectInstance* effect) {
+    FloatingFlowerFXData* data = effect->data;
     s32 unk_00 = data->unk_00;
 
     if (data->unk_34 < 150) {
@@ -127,11 +127,11 @@ void fx_13_update(EffectInstance* effect) {
     }
 }
 
-void fx_13_render(EffectInstance* effect) {
+void floating_flower_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_13_appendGfx;
+    renderTask.appendGfx = floating_flower_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
@@ -140,10 +140,10 @@ void fx_13_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_13_appendGfx(void* effect) {
+void floating_flower_appendGfx(void* effect) {
     Matrix4f sp20, other;
     EffectInstance* effectTemp = effect;
-    Effect13* part = effectTemp->data;
+    FloatingFlowerFXData* part = effectTemp->data;
     u32 alpha;
     u8 rgb, a;
 

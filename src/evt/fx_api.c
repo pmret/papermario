@@ -216,11 +216,11 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
         case EFFECT_ID_0B:
             fx_cloud_trail(iVar1, fVar2, fVar3, fVar4);
             break;
-        case EFFECT_ID_0C:
-            playFX_0C(fVar1, fVar2, fVar3, fVar4, fVar5);
+        case EFFECT_FOOTPRINT:
+            fx_footprint(fVar1, fVar2, fVar3, fVar4, fVar5);
             break;
-        case EFFECT_ID_0D:
-            playFX_0D(0, fVar1, fVar2, fVar3, iVar4);
+        case EFFECT_FLOATING_FLOWER:
+            fx_floating_flower(0, fVar1, fVar2, fVar3, iVar4);
             break;
         case EFFECT_ID_0E:
             playFX_0E(fVar1, fVar2, fVar3, iVar4);

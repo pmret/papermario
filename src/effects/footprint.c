@@ -3,13 +3,13 @@
 
 extern Gfx D_09000240[];
 
-void func_E0018000(Effect12* part);
-void fx_12_init(EffectInstance* effect);
-void fx_12_update(EffectInstance* effect);
-void fx_12_render(EffectInstance* effect);
-void fx_12_appendGfx(void* effect);
+void func_E0018000(FootprintFXData* part);
+void footprint_init(EffectInstance* effect);
+void footprint_update(EffectInstance* effect);
+void footprint_render(EffectInstance* effect);
+void footprint_appendGfx(void* effect);
 
-void func_E0018000(Effect12* part) {
+void func_E0018000(FootprintFXData* part) {
     Matrix4f sp18;
     Matrix4f sp58;
 
@@ -19,21 +19,21 @@ void func_E0018000(Effect12* part) {
     shim_guMtxF2L(sp18, &part->mtx);
 }
 
-void fx_12_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7) {
+void footprint_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    Effect12* part;
+    FootprintFXData* part;
     s32 numParts = 1;
     s32 i;
     f32 temp_f20;
     f32 temp_f20_2;
 
     bp.unk_00 = 0;
-    bp.init = fx_12_init;
-    bp.update = fx_12_update;
-    bp.renderWorld = fx_12_render;
+    bp.init = footprint_init;
+    bp.update = footprint_update;
+    bp.renderWorld = footprint_render;
     bp.unk_14 = 0;
-    bp.effectID = EFFECT_ID_0C;
+    bp.effectID = EFFECT_FOOTPRINT;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;
@@ -71,11 +71,11 @@ void fx_12_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
     }
 }
 
-void fx_12_init(EffectInstance* effect) {
+void footprint_init(EffectInstance* effect) {
 }
 
-void fx_12_update(EffectInstance* effect) {
-    Effect12* part = (Effect12*)effect->data;
+void footprint_update(EffectInstance* effect) {
+    FootprintFXData* part = (FootprintFXData*)effect->data;
     s32 cond = FALSE;
     s32 i;
 
@@ -97,11 +97,11 @@ void fx_12_update(EffectInstance* effect) {
     }
 }
 
-void fx_12_render(EffectInstance* effect) {
+void footprint_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_12_appendGfx;
+    renderTask.appendGfx = footprint_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
@@ -114,9 +114,9 @@ void func_E00183BC(EffectInstance* effect) {
     shim_remove_effect(effect);
 }
 
-void fx_12_appendGfx(void* effect) {
+void footprint_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
-    Effect12* part = effectTemp->data;
+    FootprintFXData* part = effectTemp->data;
     s32 i;
 
     gDPPipeSync(gMasterGfxPos++);

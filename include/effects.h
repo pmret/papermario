@@ -13,8 +13,8 @@ enum EffectID {
     EFFECT_ID_09,
     EFFECT_ID_0A,
     EFFECT_ID_0B,
-    EFFECT_ID_0C,
-    EFFECT_ID_0D,
+    EFFECT_FOOTPRINT,
+    EFFECT_FLOATING_FLOWER,
     EFFECT_ID_0E,
     EFFECT_ID_0F,
     EFFECT_ID_10,
@@ -326,7 +326,7 @@ typedef struct CloudTrailFXData {
     /* 0x48 */ char unk_48[0x8];
 } CloudTrailFXData; // size = 0x50
 
-typedef struct Effect12 {
+typedef struct FootprintFXData {
     /* 0x00 */ s32 alive;
     /* 0x04 */ char unk_04[0x2];
     /* 0x06 */ s16 lifetime;
@@ -350,9 +350,9 @@ typedef struct Effect12 {
     /* 0x88 */ char unk_88[0x8];
     /* 0x90 */ f32 unk_90;
     /* 0x94 */ f32 unk_94;
-} Effect12; // size = 0x98
+} FootprintFXData; // size = 0x98
 
-typedef struct Effect13 {
+typedef struct FloatingFlowerFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -371,7 +371,7 @@ typedef struct Effect13 {
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ s32 unk_40;
     /* 0x44 */ s32 unk_44;
-} Effect13; // size = 0x48
+} FloatingFlowerFXData; // size = 0x48
 
 typedef struct Effect14 {
     /* 0x00 */ f32 xPos;
@@ -615,8 +615,8 @@ void fx_flower_splash(f32, f32, f32, f32);
 void fx_flower_trail(s32, f32, f32, f32, f32, f32);
 EffectInstance* fx_cloud_puff(f32, f32, f32, f32);
 EffectInstance* fx_cloud_trail(s32, f32, f32, f32);
-EffectInstance* playFX_0C(f32, f32, f32, f32, f32);
-EffectInstance* playFX_0D(s32, f32, f32, f32, s32);
+EffectInstance* fx_footprint(f32, f32, f32, f32, f32);
+EffectInstance* fx_floating_flower(s32, f32, f32, f32, s32);
 EffectInstance* playFX_0E(f32, f32, f32, s32);
 void playFX_0F(s32, f32, f32, f32, f32, f32, f32, f32);
 void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);

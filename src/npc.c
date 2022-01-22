@@ -1428,7 +1428,7 @@ void func_8003DFA0(Npc* npc) {
         temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
         x = sin_rad(temp_f20);
         z = cos_rad(temp_f20);
-        playFX_0C(npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 1.5f,
+        fx_footprint(npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 1.5f,
                   npc->pos.z + (npc->collisionRadius * z * 0.2f), -npc->yaw, D_80077C34);
         D_80077C34 = !D_80077C34;
     }

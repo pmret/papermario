@@ -2239,21 +2239,21 @@ segments:
     subsegments:
     - [0x32EE30, c, cloud_trail]
     - [0x32F550]
-  - name: effect_12
+  - name: footprint
     dir: effects
     type: code
     start: 0x32F580
     vram: 0xE0018000
     subsegments:
-    - [0x32F580, c, effect_12]
+    - [0x32F580, c, footprint]
   - [0x32FB50, bin] # effect 12 gfx
-  - name: effect_13
+  - name: floating_flower
     dir: effects
     type: code
     start: 0x32FE30
     vram: 0xE001A000
     subsegments:
-    - [0x32FE30, c, effect_13]
+    - [0x32FE30, c, floating_flower]
     - [0x330440]
   - [0x330460, bin] # effect 13 gfx
   - name: effect_14
