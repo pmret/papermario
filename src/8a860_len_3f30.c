@@ -1,18 +1,18 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern HudElementAnim HudScript_HandPointer[0];
-extern HudElementAnim HudScript_StatusStarPiece[0];
-extern HudElementAnim HudScript_GreenArrowDown[0];
-extern HudElementAnim HudScript_GreenArrowUp[0];
-extern HudElementAnim HudScript_EmptyBar[0];
-extern HudElementAnim HudScript_PartnerRank1A;
-extern HudElementAnim HudScript_PartnerRank1B;
-extern HudElementAnim HudScript_PartnerRank2A;
-extern HudElementAnim HudScript_PartnerRank2B;
+extern HudScript HudScript_HandPointer[0];
+extern HudScript HudScript_StatusStarPiece[0];
+extern HudScript HudScript_GreenArrowDown[0];
+extern HudScript HudScript_GreenArrowUp[0];
+extern HudScript HudScript_EmptyBar[0];
+extern HudScript HudScript_PartnerRank1A;
+extern HudScript HudScript_PartnerRank1B;
+extern HudScript HudScript_PartnerRank2A;
+extern HudScript HudScript_PartnerRank2B;
 
-HudElementAnim* D_80109890[] = { &HudScript_PartnerRank1A, &HudScript_PartnerRank2A };
-HudElementAnim* D_80109898[] = { &HudScript_PartnerRank1B, &HudScript_PartnerRank2B };
+HudScript* D_80109890[] = { &HudScript_PartnerRank1A, &HudScript_PartnerRank2A };
+HudScript* D_80109898[] = { &HudScript_PartnerRank1B, &HudScript_PartnerRank2B };
 s16 D_801098A0[] = {
     0x008C, 0x008C, 0x008D, 0x007C, 0x0086, 0x0077, 0x008D, 0x008D, 0x006C, 0x008D, 0x0084, 0x0084, 0x008D, 0x008C,
 };
@@ -924,10 +924,11 @@ void func_800F4D28(PopupMessage* popup, s32 x, s32 y) {
     }
 }
 
-#ifdef NON_EQUIVALENT
 void create_popup_menu(PopupMenu* popup) {
     PopupMenu* otherPopup;
     s8 entryCount;
+    s32 initialPos;
+    s32 numEntries;
 
     D_8010D69A = func_800E98D4();
     func_800E9894();
@@ -947,34 +948,36 @@ void create_popup_menu(PopupMenu* popup) {
         }
         D_8010D698 = 0;
     }
-    otherPopup = gPopupMenu;
+
     D_8010D68E = 1;
-    D_8010D640 = 0;
-    D_8010D648 = otherPopup->initialPos;
-    if (otherPopup->initialPos >= otherPopup->numEntries) {
-        D_8010D648 = otherPopup->numEntries - 1;
-    }
     D_8010D68F = 6;
+    D_8010D640 = 0;
+
+    initialPos = gPopupMenu->initialPos;
+    numEntries = gPopupMenu->numEntries;
+    D_8010D648 = initialPos;
+    if (initialPos >= numEntries) {
+        D_8010D648 = numEntries - 1;
+    }
     D_8010D654 = 0;
     D_8010D64C = D_8010D648;
-    entryCount = otherPopup->numEntries;
 
+    entryCount = gPopupMenu->numEntries;
     D_8010D656 = entryCount;
-    if (entryCount > 6) {
+    if (D_8010D68F < entryCount) {
         D_8010D656 = 6;
     }
+
     D_8010D655 = 6;
-    if (gPopupMenu->numEntries < 6) {
+    if (gPopupMenu->numEntries < D_8010D68F) {
         D_8010D655 = gPopupMenu->numEntries;
     }
+
     D_8010D650 = 255;
     D_8010D691 = 4;
     D_8010D692 = 6;
     D_8010D694 = create_generic_entity_frontUI(popup_menu_update, NULL);
 }
-#else
-INCLUDE_ASM(void, "8a860_len_3f30", create_popup_menu, PopupMenu* popup);
-#endif
 
 INCLUDE_ASM(s32, "8a860_len_3f30", func_800F4FC4);
 

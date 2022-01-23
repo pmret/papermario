@@ -41,6 +41,7 @@ INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021C520_6A3720);
 #include "common/GetItemEntityPosition.inc.c"
 #define NAMESPACE b_area_kpa2
 
+//#include "common/DisableRandomAbility.inc.c"
 INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021CCFC_6A3EFC);
 
 #include "common/CanPlayerLoseAction.inc.c"

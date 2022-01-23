@@ -11,7 +11,7 @@ enum {
     NPC_YAKKEY,
 };
 
-EvtSource N(802403B0) = {
+EvtScript N(802403B0) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ClearDefeatedEnemies)
@@ -28,13 +28,13 @@ EvtSource N(802403B0) = {
     EVT_END
 };
 
-EvtSource N(80240470) = {
+EvtScript N(80240470) = {
     EVT_BIND_TRIGGER(N(802403B0), TRIGGER_WALL_PRESS_A, 6, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(8024049C) = {
+EvtScript N(8024049C) = {
     EVT_CALL(GetLoadType, EVT_VAR(1))
     EVT_IF_EQ(EVT_VAR(1), 1)
         EVT_EXEC(EnterSavePoint)
@@ -100,7 +100,7 @@ EvtSource N(8024049C) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 35)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -132,7 +132,7 @@ static s32 N(pad_A6C) = {
     0x00000000,
 };
 
-EvtSource N(80240A70) = {
+EvtScript N(80240A70) = {
     EVT_LOOP(0)
         EVT_IF_NE(EVT_SAVE_VAR(0), -18)
             EVT_BREAK_LOOP
@@ -153,7 +153,7 @@ EvtSource N(80240A70) = {
     EVT_END
 };
 
-EvtSource N(80240B50) = {
+EvtScript N(80240B50) = {
     EVT_CALL(SetCamProperties, 0, EVT_FIXED(90.0), 0, 0, 0, EVT_FIXED(470.0), EVT_FIXED(17.0), EVT_FIXED(-7.0))
     EVT_EXEC(N(80240A70))
     EVT_RETURN
@@ -164,7 +164,7 @@ static s32 N(pad_B98)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(80240BA0) = {
+EvtScript N(80240BA0) = {
     EVT_CALL(PlaySound, 0x8000004B)
     EVT_THREAD
         EVT_SET(EVT_VAR(0), 0)
@@ -186,7 +186,7 @@ static s32 N(pad_CB4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80240CC0) = {
+EvtScript N(80240CC0) = {
     EVT_CALL(N(func_802400C0_BF4860))
     EVT_CALL(DemoJoystickXY, 2, 0)
     EVT_WAIT_FRAMES(1)
@@ -255,7 +255,7 @@ EvtSource N(80240CC0) = {
     EVT_END
 };
 
-EvtSource N(802410AC) = {
+EvtScript N(802410AC) = {
     EVT_WAIT_FRAMES(10)
     EVT_LOOP(0)
         EVT_CALL(GetDemoState, EVT_VAR(0))
@@ -274,7 +274,7 @@ EvtSource N(802410AC) = {
     EVT_END
 };
 
-EvtSource N(8024116C) = {
+EvtScript N(8024116C) = {
     EVT_CALL(N(func_802400F4_BF4894))
     EVT_RETURN
     EVT_END
@@ -284,7 +284,7 @@ s32 N(D_80241188_BF5928) = {
     0x00000000,
 };
 
-EvtSource N(8024118C) = {
+EvtScript N(8024118C) = {
     EVT_CALL(SetCamProperties, 0, EVT_FIXED(90.0), 0, 0, 0, EVT_FIXED(470.0), EVT_FIXED(17.0), EVT_FIXED(-7.0))
     EVT_CALL(N(func_8024019C_BF493C))
     EVT_SET(EVT_SAVE_FLAG(9), 0)
@@ -298,12 +298,12 @@ static s32 N(pad_11FC) = {
     0x00000000,
 };
 
-EvtSource N(80241200) = {
+EvtScript N(80241200) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80241210) = {
+EvtScript N(80241210) = {
     EVT_RETURN
     EVT_END
 };
@@ -322,12 +322,12 @@ NpcSettings N(npcSettings_8024124C) = {
     .level = 13,
 };
 
-EvtSource N(idle_80241278) = {
+EvtScript N(idle_80241278) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(init_80241288) = {
+EvtScript N(init_80241288) = {
     EVT_IF_NE(EVT_SAVE_VAR(0), -18)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
     EVT_ELSE
@@ -337,7 +337,7 @@ EvtSource N(init_80241288) = {
     EVT_END
 };
 
-EvtSource N(interact_802412E8) = {
+EvtScript N(interact_802412E8) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(8)
             EVT_CALL(SpeakToPlayer, NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BA))
@@ -354,7 +354,7 @@ EvtSource N(interact_802412E8) = {
     EVT_END
 };
 
-EvtSource N(init_802413E8) = {
+EvtScript N(init_802413E8) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), -12)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
     EVT_ELSE
@@ -435,7 +435,7 @@ static s32 N(pad_184C) = {
     0x00000000,
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), -23)
         EVT_CALL(MakeEntity, 0x802BCE84, 0, 30, 0, 0, MAKE_ENTITY_END)
     EVT_END_IF

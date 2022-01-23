@@ -7,13 +7,13 @@
 
 #define NAMESPACE b_area_sbk_bandit
 
-extern EvtSource N(init_8021D750);
-extern EvtSource N(init_8021D7C4);
-extern EvtSource N(takeTurn_8021E900);
-extern EvtSource N(idle_8021D810);
-extern EvtSource N(handleEvent_8021DF88);
+extern EvtScript N(init_8021D750);
+extern EvtScript N(init_8021D7C4);
+extern EvtScript N(takeTurn_8021E900);
+extern EvtScript N(idle_8021D810);
+extern EvtScript N(handleEvent_8021DF88);
 
-BSS s32 D_80220160[];
+BSS s32 D_80220160;
 
 s32 N(idleAnimations_8021D510)[] = {
     STATUS_NORMAL,    NPC_ANIM_battle_bandit_Palette_00_Anim_1,
@@ -76,7 +76,7 @@ s32 N(statusTable_8021D5C0)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_8021D66C)[] = {
+ActorPartBlueprint N(partsTable_8021D66C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -87,7 +87,7 @@ ActorPartDesc N(partsTable_8021D66C)[] = {
         .defenseTable = N(defenseTable_8021D5B4),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 244,
+        .unk_1D = 244,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
@@ -99,11 +99,11 @@ ActorPartDesc N(partsTable_8021D66C)[] = {
         .defenseTable = N(defenseTable_8021D5B4),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
 };
 
-ActorPartDesc N(partsTable_8021D6B4)[] = {
+ActorPartBlueprint N(partsTable_8021D6B4)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 2,
@@ -114,11 +114,11 @@ ActorPartDesc N(partsTable_8021D6B4)[] = {
         .defenseTable = N(defenseTable_8021D5B4),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
 };
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_BANDIT,
     .level = 9,
@@ -141,7 +141,7 @@ ActorDesc NAMESPACE = {
     .statusMessageOffset = { 10, 25 },
 };
 
-ActorDesc N(2) = {
+ActorBlueprint N(2) = {
     .flags = ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY,
     .type = ACTOR_TYPE_BANDIT,
     .level = 9,
@@ -170,7 +170,7 @@ Formation N(specialFormation_8021D734) = {
     { .actor = &N(2), .home = { .vec = &N(vector3D_8021D728) }},
 };
 
-EvtSource N(init_8021D750) = {
+EvtScript N(init_8021D750) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_8021E900)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021D810)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021DF88)))
@@ -179,12 +179,12 @@ EvtSource N(init_8021D750) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8021D7B4) = {
+EvtScript N(handleEvent_8021D7B4) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(init_8021D7C4) = {
+EvtScript N(init_8021D7C4) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021D7B4)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021D7B4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021D7B4)))
@@ -192,12 +192,12 @@ EvtSource N(init_8021D7C4) = {
     EVT_END
 };
 
-EvtSource N(idle_8021D810) = {
+EvtScript N(idle_8021D810) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(8021D820) = {
+EvtScript N(8021D820) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_EQ(0)
@@ -296,8 +296,9 @@ EvtSource N(8021D820) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8021DF88) = {
-    EVT_USE_ARRAY(D_80220160)
+
+EvtScript N(handleEvent_8021DF88) = {
+    EVT_USE_ARRAY(&D_80220160)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(0))
@@ -396,7 +397,7 @@ EvtSource N(handleEvent_8021DF88) = {
             EVT_SET_CONST(LW(0), 1)
             EVT_SET_CONST(LW(1), NPC_ANIM_battle_bandit_Palette_00_Anim_7)
             EVT_EXEC_WAIT(DoReturnHome)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6005859375))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LW(0), 1)
@@ -483,7 +484,7 @@ EvtSource N(handleEvent_8021DF88) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_8021E900) = {
+EvtScript N(takeTurn_8021E900) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -613,7 +614,7 @@ EvtSource N(takeTurn_8021E900) = {
                     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                     EVT_ADD(LW(0), 30)
                     EVT_SET(LW(1), 0)
-                    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
+                    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_bandit_Palette_00_Anim_1)
@@ -623,7 +624,7 @@ EvtSource N(takeTurn_8021E900) = {
                     EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                     EVT_ADD(LW(0), 30)
                     EVT_SET(LW(1), 0)
-                    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
+                    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_battle_bandit_Palette_00_Anim_E)
@@ -657,7 +658,7 @@ EvtSource N(takeTurn_8021E900) = {
                             EVT_WAIT_FRAMES(1)
                         EVT_END_LOOP
                     EVT_END_THREAD
-                    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
+                    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(10), LW(11), LW(12))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8021D55C)))

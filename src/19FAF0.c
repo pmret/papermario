@@ -33,37 +33,37 @@ INCLUDE_ASM(ApiStatus, "19FAF0", func_80271484, Evt* script, s32 isInitialCall);
 ApiStatus func_80271588(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(ApiStatus, "19FAF0", func_80271588, Evt* script, s32 isInitialCall);
 
-EvtSource DoSleepHit = {
+EvtScript DoSleepHit = {
     EVT_CALL(func_80271210)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource DoDizzyHit = {
+EvtScript DoDizzyHit = {
     EVT_CALL(func_80271258)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource DoParalyzeHit = {
+EvtScript DoParalyzeHit = {
     EVT_CALL(func_802712A0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource DoPoisonHit = {
+EvtScript DoPoisonHit = {
     EVT_CALL(func_80271328)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource DoStopHit = {
+EvtScript DoStopHit = {
     EVT_CALL(func_802713B0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource DoFreezeHit = {
+EvtScript DoFreezeHit = {
     EVT_CALL(func_8027143C)
     EVT_WAIT_FRAMES(8)
     EVT_CALL(func_8027143C)
@@ -73,7 +73,7 @@ EvtSource DoFreezeHit = {
     EVT_END
 };
 
-EvtSource DoShrinkHit = {
+EvtScript DoShrinkHit = {
     EVT_CALL(func_80271588)
     EVT_RETURN
     EVT_END

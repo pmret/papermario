@@ -3,13 +3,13 @@
 
 #define NAMESPACE b_area_nok_nok_03
 
-EvtSource N(beforeBattle_8022BB20) = {
+EvtScript N(beforeBattle_8022BB20) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(afterBattle_8022BB40) = {
+EvtScript N(afterBattle_8022BB40) = {
     EVT_RETURN
     EVT_END
 };

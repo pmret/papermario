@@ -553,7 +553,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
     s32 i;
 
     if (actor != NULL) {
-        shadow = get_shadow_by_index((s32) actor->shadow);
+        shadow = get_shadow_by_index(actor->shadow.id);
         shadow->flags |= SHADOW_FLAGS_HIDDEN;
         if (!(actor->flags & ACTOR_FLAG_DISABLED)) {
             if (actor->flags & ACTOR_FLAG_10000000) {
@@ -633,7 +633,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                 actorPart = actorPart->nextPart;
             }
 
-            shadow = get_shadow_by_index((s32) actor->shadow);
+            shadow = get_shadow_by_index(actor->shadow.id);
             if (!(actor->flags & ACTOR_FLAG_NO_SHADOW)) {
                 shadow->flags &= ~ACTOR_FLAG_DISABLED;
             }
@@ -715,7 +715,7 @@ void update_player_actor_shadow(void) {
         func_802549F4(player);
     }
 
-    shadow = get_shadow_by_index((s32) player->shadow);
+    shadow = get_shadow_by_index(player->shadow.id);
     shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
 
     if (!battleStatus->outtaSightActive) {
@@ -911,7 +911,8 @@ void func_8025D158(ActorPart* part, s32 decorationIndex) {
 INCLUDE_ASM(s32, "182B30", func_8025D160);
 
 void func_8025D290(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->data->unk_2C = 5;
+    // TODO cast to appropriate struct data type once we know what it is
+    ((s32*) part->decorationTable->unk_8B0[decorationIndex]->data)[11] = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D2B0);
@@ -928,7 +929,8 @@ void func_8025D4A0(ActorPart* part, s32 decorationIndex) {
 INCLUDE_ASM(s32, "182B30", func_8025D4C8);
 
 void func_8025D620(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->data->unk_2C = 5;
+    // TODO cast to appropriate struct data type once we know what it is
+    ((s32*) part->decorationTable->unk_8B0[decorationIndex]->data)[11] = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D640);
@@ -961,12 +963,13 @@ void func_8025DBC8(ActorPart* part, s32 decorationIndex) {
 
 INCLUDE_ASM(s32, "182B30", func_8025DBD0);
 
-void func_8025DD40(ActorPart* actorPart, s32 decorationIndex) {
-    actorPart->decorationTable->unk_8B0[decorationIndex]->data->unk_2C = 5;
+void func_8025DD40(ActorPart* part, s32 decorationIndex) {
+    // TODO cast to appropriate struct data type once we know what it is
+    ((s32*) part->decorationTable->unk_8B0[decorationIndex]->data)[11] = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025DD60);
 
-void func_8025DE88(ActorPart* actorPart, s32 decorationIndex) {
-    actorPart->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
+void func_8025DE88(ActorPart* part, s32 decorationIndex) {
+    part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
 }

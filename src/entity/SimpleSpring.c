@@ -12,7 +12,7 @@ void entity_SimpleSpring_idle(Entity* ent) {
     s32 isRiding;
     s32 isColliding;
 
-    new_var2 = ent->dataBuf;
+    new_var2 = ent->dataBuf.unk;
     new_var = gPlayerStatus.actionState != ACTION_STATE_RIDE && (ent->collisionFlags & 1) != 0;
     if (new_var) {
         if ((*new_var2) >= 0x46) {
@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "entity/SimpleSpring", entity_SimpleSpring_idle);
 #endif
 
 void entity_SimpleSpring_set_jump_params(Entity* ent) {
-    s32* data = ent->dataBuf;
+    s32* data = ent->dataBuf.unk;
 
     set_action_state(ACTION_STATE_LAUNCH);
     gPlayerStatus.gravityIntegrator[1] = 0;
@@ -51,7 +51,7 @@ void entity_ScriptSpring_init(void) {
 }
 
 void entity_SimpleSpring_init(Entity* ent) {
-    ent->dataBuf[0] = *D_8015C7D0;
+    ent->dataBuf.unk[0] = *CreateEntityVarArgBuffer;
 }
 
 INCLUDE_ASM(s32, "entity/SimpleSpring", entity_HiddenPanel_setupGfx);
@@ -74,7 +74,7 @@ s32 entity_HiddenPanel_is_item_on_top(Entity* entity) {
     s32 *args;
     s32 phi_v0;
 
-    args = entity->dataBuf;
+    args = entity->dataBuf.unk;
     entityIndex = args[5];
     phi_v0 = 0;
     if ((entityIndex >= 0) &&
@@ -103,13 +103,13 @@ void entity_HiddenPanel_init(Entity* ent) {
     s32* data;
     s32 phi_v0;
 
-    data = ent->dataBuf;
+    data = ent->dataBuf.unk;
     mem_clear(&D_8015A578, 0x10);
     ent->unk3C = &entity_HiddenPanel_setupGfx;
     data->unk6 = 0xFFFF;
     data->unk24 = (?32) ent->unk4C;
-    data->unk74 = (u16) D_8015C7D0.unk2;
-    temp_v1 = D_8015C7D0[1];
+    data->unk74 = (u16) CreateEntityVarArgBuffer.unk2;
+    temp_v1 = CreateEntityVarArgBuffer[1];
     data->unk3 = 1;
     data->unk14 = -1;
     data->unk10 = temp_v1;

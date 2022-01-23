@@ -31,8 +31,8 @@ s32 func_802BD100_317020(s32 arg0) {
     for (i = 0; i < 0x40; i++) {
         Trigger* trigger = get_trigger_by_id(i);
 
-        if (trigger != NULL && trigger->flags.flags & TRIGGER_WALL_PRESS_A && trigger->params2 == arg0) {
-            return trigger->unk_2C;
+        if (trigger != NULL && trigger->flags.flags & TRIGGER_WALL_PRESS_A && trigger->location.colliderID == arg0) {
+            return trigger->unk_tr_2C;
         }
     }
     return 0;
@@ -54,7 +54,7 @@ ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall) {
     return partner_get_out(goombario) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_goombario_take_out = {
+EvtScript world_goombario_take_out = {
     EVT_CALL(func_802BD188_3170A8)
     EVT_RETURN
     EVT_END
@@ -145,7 +145,7 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
     return 0;
 }
 
-EvtSource world_goombario_update = {
+EvtScript world_goombario_update = {
     EVT_CALL(func_802BD1D0_3170F0)
     EVT_RETURN
     EVT_END
@@ -196,7 +196,7 @@ ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtSource world_goombario_use_ability = {
+EvtScript world_goombario_use_ability = {
     EVT_CALL(func_802BD5D8_3174F8)
     EVT_IF_EQ(EVT_VAR(0), -1)
         EVT_RETURN
@@ -225,7 +225,7 @@ ApiStatus func_802BDB84(Evt* script, s32 isInitialCall) {
     return partner_put_away(goombario) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_goombario_put_away = {
+EvtScript world_goombario_put_away = {
     EVT_CALL(func_802BDB84)
     EVT_RETURN
     EVT_END

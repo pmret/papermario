@@ -4,9 +4,9 @@
 #define NAMESPACE action_command_spiny_surge
 
 extern s32 D_80294400;
-extern HudElementAnim HudScript_BlueMeter;
-extern HudElementAnim HudScript_StickNeutral;
-extern HudElementAnim HudScript_100pct;
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_StickNeutral;
+extern HudScript HudScript_100pct;
 
 ApiStatus func_802A9000_42EE20(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

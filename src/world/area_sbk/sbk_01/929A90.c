@@ -3,7 +3,7 @@
 
 #include "world/common/SpawnSunEffect.inc.c"
 
-extern EvtSource N(main);
+extern EvtScript N(main);
 extern NpcGroupList N(npcGroupList_802407D8);
 
 EntryList N(entryList) = {
@@ -21,13 +21,13 @@ MapConfig N(config) = {
     .tattle = { MSG_sbk_01_tattle },
 };
 
-EvtSource N(exitWalk_802400E0) = EXIT_WALK_SCRIPT(60,  0, "sbk_00",  1);
+EvtScript N(exitWalk_802400E0) = EXIT_WALK_SCRIPT(60,  0, "sbk_00",  1);
 
-EvtSource N(exitWalk_8024013C) = EXIT_WALK_SCRIPT(60,  1, "sbk_02",  0);
+EvtScript N(exitWalk_8024013C) = EXIT_WALK_SCRIPT(60,  1, "sbk_02",  0);
 
-EvtSource N(exitWalk_80240198) = EXIT_WALK_SCRIPT(60,  3, "sbk_11",  2);
+EvtScript N(exitWalk_80240198) = EXIT_WALK_SCRIPT(60,  3, "sbk_11",  2);
 
-EvtSource N(802401F4) = {
+EvtScript N(802401F4) = {
     EVT_BIND_TRIGGER(N(exitWalk_802400E0), TRIGGER_FLOOR_ABOVE, 7, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_8024013C), TRIGGER_FLOOR_ABOVE, 3, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_80240198), TRIGGER_FLOOR_ABOVE, 5, 1, 0)
@@ -35,7 +35,7 @@ EvtSource N(802401F4) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 10)
     EVT_CALL(SetSpriteShading, -1)
     EVT_IF_EQ(EVT_SAVE_VAR(0), -63)

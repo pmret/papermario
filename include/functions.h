@@ -50,7 +50,7 @@ s32 intro_logos_fade_out(s16 addAlpha);
 
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
-s32 create_entity(StaticEntityData*, s32, s32, s32, s32, ...);
+s32 create_entity(EntityBlueprint*, s32, s32, s32, s32, ...);
 void entity_shattering_idle(Entity* entity);
 void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage);
 
@@ -191,9 +191,9 @@ s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, 
 void update_collider_transform(s16 colliderID);
 void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
 
-s32 is_trigger_bound(Trigger*, EvtSource* script);
-Trigger* create_trigger(TriggerDefinition* def);
-s32 evt_bound_script_trigger_handler(Trigger* trigger);
+s32 is_another_trigger_bound(Trigger*, EvtScript* script);
+Trigger* create_trigger(TriggerBlueprint* def);
+s32 evt_trigger_on_activate_exec_script(Trigger* trigger);
 Trigger* get_trigger_by_id(s32 triggerID);
 
 Actor* get_actor(s32 actorID);
@@ -245,7 +245,7 @@ f32 get_xz_dist_to_player(f32, f32);
 void func_800E06C0(s32);
 void close_status_menu(void);
 Evt* func_802C39F8(Evt* parentScript, Bytecode* nextLine, s32 newState);
-Evt* start_child_script(Evt* parentScript, EvtSource* source, s32 initialState);
+Evt* start_child_script(Evt* parentScript, EvtScript* source, s32 initialState);
 Evt* restart_script(Evt* script);
 void clear_virtual_entity_list(void);
 void reset_model_animators(void);
@@ -379,8 +379,8 @@ void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
 void partner_set_tether_distance(f32);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(Evt* script);
-Evt* start_script(EvtSource* source, s32 priority, s32 initialState);
-Evt* start_script_in_group(EvtSource* source, u8 priority, u8 initialState, u8 groupFlags);
+Evt* start_script(EvtScript* source, s32 priority, s32 initialState);
+Evt* start_script_in_group(EvtScript* source, u8 priority, u8 initialState, u8 groupFlags);
 f32 get_player_normal_yaw(void);
 void set_standard_shadow_scale(Shadow* shadow, f32 scale);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
@@ -425,7 +425,7 @@ void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
 s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
 DynamicEntity* get_generic_entity(s32 idx);
-Trigger* bind_trigger_1(EvtSource* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1, s32 priority);
+Trigger* bind_trigger_1(EvtScript* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1, s32 priority);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 
@@ -502,6 +502,7 @@ void func_802D74C0(f32 x, f32 y, f32 z, s32 arg3);
 
 void show_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount, s32);
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
+void add_xz_vec3f_copy1(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
 void func_80138D88(s32, s32, s32, s32, f32);
@@ -710,6 +711,8 @@ s32 try_inflict_status(Actor*, s32, s32);
 void mdl_set_all_fog_mode(s32);
 void load_model_animator_tree(s32, StaticAnimatorNode**);
 
+void func_8024EDC0(void);
+
 void update_effects(void);
 void update_cameras(void);
 void clear_render_tasks(void);
@@ -769,6 +772,12 @@ void render_generic_entities_world(void);
 void render_effects_world(void);
 s32 get_asset_offset(char*, s32*);
 void initialize_status_menu(void);
+void status_menu_start_blinking_fp(void);
+void status_menu_start_blinking_hp(void);
+void status_menu_start_blinking_sp(void);
+void status_menu_stop_blinking_fp(void);
+void status_menu_stop_blinking_hp(void);
+void status_menu_stop_blinking_sp(void);
 void set_background_size(s16, s16, s16, s16);
 void read_background_size(BackgroundHeader*);
 void set_max_SP(s8);
@@ -801,6 +810,7 @@ void draw_encounters_pre_battle(void);
 void draw_encounters_neutral(void);
 void show_first_strike_message(void);
 void entity_upgrade_block_hide_content(s32);
+s32 lookup_defense(s32*, s32);
 
 void clear_player_status(void);
 void clear_entity_models(void);

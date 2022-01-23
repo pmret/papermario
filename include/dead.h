@@ -39,9 +39,6 @@
 #define npc_test_move_simple_with_slipping dead_npc_test_move_simple_with_slipping
 #define get_screen_coords dead_get_screen_coords
 #define func_800495A0 func_800495A0
-#define func_8004DAD8 func_800496B8
-#define func_8004D9C0 func_800496B8
-#define func_8004E024 func_80049C04
 #define func_8004A73C func_8004EB8C
 #define gCurrentCameraID dead_gCurrentCameraID
 #define add_vec2D_polar dead_add_vec2D_polar
@@ -92,6 +89,15 @@
 #define get_model_list_index_from_tree_index dead_get_model_list_index_from_tree_index
 #define guMtxCatF dead_guMtxCatF
 #define guMtxIdentF dead_guMtxIdentF
-//#define sqrtf dead_sqrtf // <- This somehow breaks things
+#define func_800495A0 func_8004D9C0
+#define func_800496B8 func_8004DAD8
+#define base_UnkNpcAIFunc1 func_8004DF64
+#define func_80049C04 func_8004E024
+#define func_80049E3C func_8004E25C
+#define func_80049ECC func_8004E2EC
+#define func_80049F7C func_8004E39C
+#define func_8004A124 func_8004E544
+#define func_8004A3E8 func_8004E808
+#define gCurrentEncounter dead_gCurrentEncounter
 
 #endif

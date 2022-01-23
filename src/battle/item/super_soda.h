@@ -13,8 +13,8 @@ ApiStatus N(func_802A1418_7250F8)(Evt* script, s32 isInitialCall);
 ApiStatus N(AddFP)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802A1378_725058)(Evt* script, s32 isInitialCall);
 
-extern EvtSource N(UseItemWithEffect);
-extern EvtSource N(PlayerGoHome);
-extern EvtSource N(UseItem);
+extern EvtScript N(UseItemWithEffect);
+extern EvtScript N(PlayerGoHome);
+extern EvtScript N(UseItem);
 
 #endif

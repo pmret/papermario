@@ -89,6 +89,7 @@
 #define SPRITE_PIXEL_SCALE (5.0 / 7.0)
 
 #ifdef PERMUTER
+#undef SCRIPT
 #define SCRIPT(...) {}
 #endif
 

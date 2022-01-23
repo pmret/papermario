@@ -25,7 +25,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_17_tattle },
 };
 
-EvtSource N(80243280) = {
+EvtScript N(80243280) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
@@ -36,7 +36,7 @@ EvtSource N(80243280) = {
     EVT_END
 };
 
-EvtSource N(802432F0) = {
+EvtScript N(802432F0) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -77,11 +77,11 @@ EvtSource N(802432F0) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_8024359C) = EXIT_WALK_SCRIPT(60,  0, "flo_16",  1);
+EvtScript N(exitWalk_8024359C) = EXIT_WALK_SCRIPT(60,  0, "flo_16",  1);
 
-EvtSource N(exitWalk_802435F8) = EXIT_WALK_SCRIPT(60,  1, "flo_18",  0);
+EvtScript N(exitWalk_802435F8) = EXIT_WALK_SCRIPT(60,  1, "flo_18",  0);
 
-EvtSource N(80243654) = {
+EvtScript N(80243654) = {
     EVT_BIND_TRIGGER(N(exitWalk_8024359C), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_802435F8), TRIGGER_FLOOR_ABOVE, 4, 1, 0)
     EVT_RETURN
@@ -101,7 +101,7 @@ s32 N(lavaResetList_8024369C)[] = {
     0x00000020, 0x44034000, 0x00000000, 0x42480000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -225,7 +225,7 @@ static s32 N(pad_3FCC) = {
     0x00000000,
 };
 
-EvtSource N(80243FD0) = {
+EvtScript N(80243FD0) = {
     EVT_LOOP(0)
         EVT_CALL(N(func_80240040_CD7320), EVT_VAR(0))
         EVT_IF_EQ(EVT_VAR(0), EVT_VAR(4))
@@ -275,7 +275,7 @@ EvtSource N(80243FD0) = {
     EVT_END
 };
 
-EvtSource N(80244284) = {
+EvtScript N(80244284) = {
     EVT_SET(EVT_VAR(4), 35)
     EVT_SET(EVT_VAR(5), 14)
     EVT_SET(EVT_VAR(6), 15)
@@ -329,7 +329,7 @@ NpcAISettings N(npcAISettings_80244424) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80244454) = {
+EvtScript N(npcAI_80244454) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 5, -650)
     EVT_CALL(SetSelfVar, 6, 30)
@@ -361,7 +361,7 @@ NpcAISettings N(npcAISettings_802444F0) = {
     .unk_2C = 3,
 };
 
-EvtSource N(npcAI_80244520) = {
+EvtScript N(npcAI_80244520) = {
     EVT_CALL(SetSelfVar, 2, 3)
     EVT_CALL(SetSelfVar, 3, 18)
     EVT_CALL(SetSelfVar, 5, 3)
@@ -371,7 +371,7 @@ EvtSource N(npcAI_80244520) = {
     EVT_END
 };
 
-EvtSource N(80244590) = {
+EvtScript N(80244590) = {
     EVT_CALL(SetNpcRotation, NPC_SELF, 0, 0, 0)
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
@@ -617,7 +617,7 @@ static s32 N(pad_527C) = {
     0x00000000,
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EA588, 660, 60, -115, 0, 130, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1390))
     EVT_CALL(MakeItemEntity, ITEM_LETTER09, -245, 0, 105, 17, EVT_SAVE_FLAG(1389))

@@ -19,7 +19,7 @@ s32 D_80224BB0_48BC60[] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(beforeBattle_80224BD0) = {
+EvtScript N(beforeBattle_80224BD0) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(MakeLocalVertexCopy, 0, 5, 1)
     EVT_CALL(SetCustomGfxBuilders, 1, EVT_ADDR(func_802184C0_47F570), 0)
@@ -152,7 +152,7 @@ EvtSource N(beforeBattle_80224BD0) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_80225598) = {
+EvtScript N(afterBattle_80225598) = {
     EVT_RETURN
     EVT_END
 };

@@ -18,18 +18,18 @@ MapConfig N(config) = {
     .tattle = { MSG_sbk_00_tattle },
 };
 
-EvtSource N(exitWalk_802400E0) = EXIT_WALK_SCRIPT(60,  1, "sbk_01",  0);
+EvtScript N(exitWalk_802400E0) = EXIT_WALK_SCRIPT(60,  1, "sbk_01",  0);
 
-EvtSource N(exitWalk_8024013C) = EXIT_WALK_SCRIPT(60,  3, "sbk_10",  2);
+EvtScript N(exitWalk_8024013C) = EXIT_WALK_SCRIPT(60,  3, "sbk_10",  2);
 
-EvtSource N(80240198) = {
+EvtScript N(80240198) = {
     EVT_BIND_TRIGGER(N(exitWalk_802400E0), TRIGGER_FLOOR_ABOVE, 3, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_8024013C), TRIGGER_FLOOR_ABOVE, 6, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 10)
     EVT_CALL(SetSpriteShading, -1)
     EVT_IF_EQ(EVT_SAVE_VAR(0), -63)

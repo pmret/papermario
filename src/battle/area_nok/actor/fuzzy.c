@@ -37,7 +37,7 @@ s32 N(statusTable_8022205C)[] = {
 
 extern s32 N(idleAnimations_80222154)[];
 
-ActorPartDesc N(partsTable_80222108)[] = {
+ActorPartBlueprint N(partsTable_80222108)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -48,13 +48,13 @@ ActorPartDesc N(partsTable_80222108)[] = {
         .defenseTable = N(defenseTable_80222050),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 246,
+        .unk_1D = 246,
     },
 };
 
-extern EvtSource N(init_802221A0);
+extern EvtScript N(init_802221A0);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_FUZZY,
     .level = 6,
@@ -90,11 +90,11 @@ s32 N(idleAnimations_80222154)[] = {
     STATUS_END,
 };
 
-extern EvtSource N(takeTurn_80222860);
-extern EvtSource N(idle_802221EC);
-extern EvtSource N(handleEvent_802221FC);
+extern EvtScript N(takeTurn_80222860);
+extern EvtScript N(idle_802221EC);
+extern EvtScript N(handleEvent_802221FC);
 
-EvtSource N(init_802221A0) = {
+EvtScript N(init_802221A0) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80222860)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_802221EC)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_802221FC)))
@@ -102,12 +102,12 @@ EvtSource N(init_802221A0) = {
     EVT_END
 };
 
-EvtSource N(idle_802221EC) = {
+EvtScript N(idle_802221EC) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(handleEvent_802221FC) = {
+EvtScript N(handleEvent_802221FC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -162,7 +162,7 @@ EvtSource N(handleEvent_802221FC) = {
             EVT_SET_CONST(LW(0), 0x00000001)
             EVT_SET_CONST(LW(1), NPC_ANIM_fuzzy_Palette_00_Anim_3)
             EVT_EXEC_WAIT(D_8029C0A4)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6005859375))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_EQ(38)
             EVT_SET_CONST(LW(0), 0x00000001)
@@ -228,7 +228,7 @@ EvtSource N(handleEvent_802221FC) = {
 
 #include "common/UnkBattleFunc2.inc.c"
 
-EvtSource N(takeTurn_80222860) = {
+EvtScript N(takeTurn_80222860) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -250,7 +250,7 @@ EvtSource N(takeTurn_80222860) = {
     EVT_ADD(LW(0), 50)
     EVT_SET(LW(1), 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_EXEC_WAIT(D_8029C12C)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_00_Anim_1)
     EVT_LABEL(100)
@@ -301,7 +301,7 @@ EvtSource N(takeTurn_80222860) = {
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_EXEC_WAIT(D_8029C12C)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -338,15 +338,15 @@ EvtSource N(takeTurn_80222860) = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, -3, -2, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_WAIT_FRAMES(1)
-    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.900390625), EVT_FLOAT(1.2001953125), EVT_FLOAT(1.0))
+    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
     EVT_WAIT_FRAMES(1)
-    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.80078125), EVT_FLOAT(1.30078125), EVT_FLOAT(1.0))
+    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
     EVT_WAIT_FRAMES(1)
-    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7001953125), EVT_FLOAT(1.400390625), EVT_FLOAT(1.0))
+    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
     EVT_WAIT_FRAMES(1)
-    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7001953125), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
+    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
     EVT_WAIT_FRAMES(2)
-    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.6005859375), EVT_FLOAT(1.6005859375), EVT_FLOAT(1.0))
+    EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.6), EVT_FLOAT(1.6), EVT_FLOAT(1.0))
     EVT_WAIT_FRAMES(10)
     EVT_WAIT_FRAMES(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LW(0), DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 1, 32)
@@ -376,39 +376,39 @@ EvtSource N(takeTurn_80222860) = {
                 EVT_CALL(SetEnemyHP, -127, LW(0))
             EVT_END_IF
             EVT_THREAD
-                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.6005859375), EVT_FLOAT(0.6005859375), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.6), EVT_FLOAT(0.6), EVT_FLOAT(1.0))
                 EVT_CALL(SetActorRotationOffset, -127, 0, 10, 0)
                 EVT_WAIT_FRAMES(1)
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 330)
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7001953125), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 300)
                 EVT_WAIT_FRAMES(1)
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 270)
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(0.7001953125), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(0.7), EVT_FLOAT(1.0))
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 240)
                 EVT_WAIT_FRAMES(1)
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 210)
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7001953125), EVT_FLOAT(1.400390625), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 180)
                 EVT_WAIT_FRAMES(2)
-                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(0.7001953125), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(0.7), EVT_FLOAT(1.0))
                 EVT_WAIT_FRAMES(2)
-                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.2001953125), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.2), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
             EVT_END_THREAD
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(0), 40)
             EVT_SET(LW(1), 0)
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.400390625), EVT_FLOAT(0.2001953125), EVT_FLOAT(1.0))
+            EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.4), EVT_FLOAT(0.2), EVT_FLOAT(1.0))
             EVT_WAIT_FRAMES(1)
             EVT_THREAD
                 EVT_WAIT_FRAMES(1)
-                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.2001953125), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
+                EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.2), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 150)
                 EVT_WAIT_FRAMES(1)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -434,7 +434,7 @@ EvtSource N(takeTurn_80222860) = {
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
+            EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_EXEC_WAIT(D_8029C12C)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzy_Palette_00_Anim_1)
         EVT_END_CASE_GROUP

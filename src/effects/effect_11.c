@@ -21,7 +21,7 @@ void fx_11_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.update = fx_11_update;
     bp.renderWorld = fx_11_render;
     bp.unk_14 = 0;
-    bp.effectIndex = 11;
+    bp.effectID = EFFECT_ID_0B;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = 1;

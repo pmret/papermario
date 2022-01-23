@@ -1,7 +1,7 @@
 #include "common.h"
 
 /// Provide arg `TRUE` on `EVT_VAR(1)` to disable refunding.
-EvtSource N(UseItemWithEffect) = {
+EvtScript N(UseItemWithEffect) = {
     EVT_IF_EQ(EVT_VAR(1), 0)
         EVT_CALL(UseBattleCamPreset, 69)
         EVT_WAIT_FRAMES(10)
@@ -43,7 +43,7 @@ EvtSource N(UseItemWithEffect) = {
     EVT_END
 };
 
-EvtSource N(UseItem) = {
+EvtScript N(UseItem) = {
     EVT_CALL(UseBattleCamPreset, 19)
     EVT_CALL(SetBattleCamTarget, -85, 1, 0)
     EVT_CALL(SetBattleCamOffsetZ, 41)
@@ -64,7 +64,7 @@ EvtSource N(UseItem) = {
     EVT_END
 };
 
-EvtSource N(PlayerGoHome) = {
+EvtScript N(PlayerGoHome) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FIXED(8.0))
@@ -76,7 +76,7 @@ EvtSource N(PlayerGoHome) = {
     EVT_END
 };
 
-EvtSource N(EatItem) = {
+EvtScript N(EatItem) = {
     EVT_THREAD
         EVT_LOOP(4)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)
@@ -89,7 +89,7 @@ EvtSource N(EatItem) = {
     EVT_END
 };
 
-EvtSource N(DrinkItem) = {
+EvtScript N(DrinkItem) = {
     EVT_THREAD
         EVT_LOOP(4)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2095)

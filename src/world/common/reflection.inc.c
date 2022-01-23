@@ -406,7 +406,7 @@ void N(SetPartnerFlags20000)(void) {
 // Requires most of area_pra to have its data decomped.
 
 /*
-#new:EvtSource $Script_802415D0
+#new:EvtScript $Script_802415D0
 {
     0:  NewArray  00000010 *VarA
    10:  If  *Var1  ==  00000000

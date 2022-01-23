@@ -4,18 +4,18 @@
 #include "sprite/npc/cleft.h"
 #include "effects.h"
 
-EvtSource N(exitWalk_80243480) = EXIT_WALK_SCRIPT(60,  0, "arn_02",  1);
+EvtScript N(exitWalk_80243480) = EXIT_WALK_SCRIPT(60,  0, "arn_02",  1);
 
-EvtSource N(exitWalk_802434DC) = EXIT_WALK_SCRIPT(60,  1, "dgb_00",  0);
+EvtScript N(exitWalk_802434DC) = EXIT_WALK_SCRIPT(60,  1, "dgb_00",  0);
 
-EvtSource N(80243538) = {
+EvtScript N(80243538) = {
     EVT_BIND_TRIGGER(N(exitWalk_80243480), TRIGGER_FLOOR_ABOVE, 1, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_802434DC), TRIGGER_FLOOR_ABOVE, 6, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 34)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -48,7 +48,7 @@ NpcAISettings N(npcAISettings_80243660) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80243690) = {
+EvtScript N(npcAI_80243690) = {
     EVT_CALL(N(UnkNpcAIMainFunc), EVT_PTR(N(npcAISettings_80243660)))
     EVT_RETURN
     EVT_END
@@ -81,7 +81,7 @@ NpcAISettings N(npcAISettings_802436F4) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80243724) = {
+EvtScript N(npcAI_80243724) = {
     EVT_CALL(SetSelfVar, 0, 1)
     EVT_CALL(SetSelfVar, 5, -850)
     EVT_CALL(SetSelfVar, 6, 60)
@@ -115,7 +115,7 @@ NpcAISettings N(npcAISettings_802437C0) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_802437F0) = {
+EvtScript N(npcAI_802437F0) = {
     EVT_CALL(N(func_80243018_BE67C8), EVT_PTR(N(npcAISettings_802437C0)), 8)
     EVT_RETURN
     EVT_END
@@ -276,7 +276,7 @@ static s32 N(pad_403C)[] = {
     0x00000000,
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EA564, 450, 285, 120, 0, 140, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1008))
     EVT_CALL(MakeEntity, 0x802EA564, 720, 333, 75, 0, 343, MAKE_ENTITY_END)

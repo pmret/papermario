@@ -78,12 +78,10 @@ def extend_symbol_map(a, b):
     return a
 
 def round_fixed(f: float) -> float:
-    """
     g = f * 100.0
     whole = round(g)
     if abs(g - whole) <= 100.0/1024.0:
         f = whole / 100.0
-        """
     return f
 
 def find_symbol_in_overlay(symbol_map, overlay_rom_addr, symbol_ram_addr):
@@ -283,20 +281,23 @@ def fix_args(self, func, args, info):
             elif info[i] == "Hex" and argNum > 0:
                 new_args.append(f"0x{argNum:08X}")
             elif info[i] == "CustomAnim":
-                try:
-                    value = (argNum & 0x00FFFFFF)
+                if argNum != -1:
+                    try:
+                        value = (argNum & 0x00FFFFFF)
 
-                    if func == "SetAnimation" and int(new_args[1], 10) == 0:
-                        call = f"{CONSTANTS['PlayerAnims'][argNum]}"
-                    elif value in CONSTANTS["NPC_SPRITE"]:
-                        self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
-                        call =  CONSTANTS['NPC_SPRITE'][value]
-                    else:
-                        call = f"{argNum:06X}"
-                except ValueError:
-                        call = f"0x{argNum:06X}"
-                except KeyError:
-                        call = f"0x{argNum:06X}"
+                        if func == "SetAnimation" and int(new_args[1], 10) == 0:
+                            call = f"{CONSTANTS['PlayerAnims'][argNum]}"
+                        elif value in CONSTANTS["NPC_SPRITE"]:
+                            self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
+                            call =  CONSTANTS['NPC_SPRITE'][value]
+                        else:
+                            call = f"{argNum:06X}"
+                    except ValueError:
+                            call = f"0x{argNum:06X}"
+                    except KeyError:
+                            call = f"0x{argNum:06X}"
+                else:
+                    call = "-1"
                 new_args.append(call)
             elif info[i] == "CustomMsg":
                 type_ = (argNum & 0xFF0000) >> 16
@@ -383,6 +384,7 @@ replace_funcs = {
     "DispatchEvent"             :{0:"ActorIDs", 1:"Events"},
 
     "EnableActorBlur"           :{0:"ActorIDs"},
+    "EnableActorGlow"           :{0:"ActorIDs", 1:"Bool"},
     "EnableIdleScript"          :{0:"ActorIDs"},
     "EnableNpcShadow"           :{0:"NpcIDs", 1:"Bool"},
     "EndActorSpeech"            :{0:"ActorIDs", 2:"CustomAnim", 3:"CustomAnim"},
@@ -403,6 +405,7 @@ replace_funcs = {
     "func_8027D32C"             :{0:"ActorIDs"},
     "func_8027D434"             :{0:"ActorIDs"},
     "func_8027D4C8"             :{0:"ActorIDs"},
+    "func_8027D75C"             :{0:"ActorIDs"},
     "func_802CFD30"             :{0:"NpcIDs"},
     "func_802CFE2C"             :{0:"NpcIDs"},
     "func_802D2520"             :{0:"PlayerAnims"},
@@ -444,6 +447,7 @@ replace_funcs = {
 
     "JumpPartTo"                :{0:"ActorIDs"},
     "JumpToGoal"                :{0:"ActorIDs", 2:"Bool", 3:"Bool", 4:"Bool"},
+    "JumpWithBounce"            :{0:"ActorIDs"},
 
     "LandJump"                  :{0:"ActorIDs"},
     "LoadActionCommand"         :{0:"ActionCommand"},
@@ -542,6 +546,7 @@ replace_funcs = {
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
+    "SetSpriteShading"          :{0:"CustomAnim"},
     "SetStatusTable"            :{0:"ActorIDs"},
     "SetTargetActor"            :{0:"ActorIDs", 1:"ActorIDs"},
     "SetTargetOffset"           :{0:"ActorIDs"},
@@ -555,6 +560,8 @@ replace_funcs = {
 
     "UseBattleCamPreset"        :{0:"BtlCameraPreset"},
     "UseIdleAnimation"          :{0:"ActorIDs", 1:"Bool"},
+
+    "WasStatusInflicted"        :{0:"ActorIDs", 1:"Bool"},
 }
 
 def trim_lw(arg):
@@ -722,7 +729,7 @@ class ScriptDisassembler:
             elif name.startswith("N(npcGroupList_"):
                 prefix = "NpcGroupList "
             elif name.startswith("N("):
-                prefix = "EvtSource "
+                prefix = "EvtScript "
             else:
                 toReplace = False
 
@@ -767,10 +774,10 @@ class ScriptDisassembler:
 
             if self.prelude:
                 try:
-                    self.prefix_line(f"EvtSource D_{self.script_name - info[0] + info[2]:08X}_{self.script_name:08X} = {{")
+                    self.prefix_line(f"EvtScript D_{self.script_name - info[0] + info[2]:08X}_{self.script_name:06X} = {{")
                     self.write_line("};")
                 except:
-                    self.prefix_line(f"EvtSource {self.script_name} = {{")
+                    self.prefix_line(f"EvtScript {self.script_name} = {{")
                     self.write_line("};")
             self.done = True
         elif opcode == 0x02: self.write_line(f"EVT_RETURN")
@@ -1062,11 +1069,11 @@ if __name__ == "__main__":
                             print(f"========== 0x{gap_size:X} byte gap ({potential_count} {potential_struct}?) 0x{gap_start:X} - 0x{offset:X} ==========")
                             print()
                             gap = False
-                        #print(f"EvtSource read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                        #print(f"EvtScript read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                         #      f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
                         #print()
                         vram = f"{args.vram:X}_" if vram_base > 0 else f""
-                        script_text = script_text.replace("EvtSource script = SCRIPT({", f"EvtSource N(D_{vram}{offset:X}) = " + "SCRIPT({")
+                        script_text = script_text.replace("EvtScript script = SCRIPT({", f"EvtScript N(D_{vram}{offset:X}) = " + "SCRIPT({")
                         print(script_text, end="")
                         print()
                         #print(f"Valid script found at 0x{offset:X}")
@@ -1101,7 +1108,7 @@ if __name__ == "__main__":
                         try:
                             script_text = script.disassemble()
 
-                            # print(f"EvtSource read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                            # print(f"EvtScript read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                             #     f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
                             print()
                             print(script_text, end="")

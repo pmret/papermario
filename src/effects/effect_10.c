@@ -22,7 +22,7 @@ void fx_10_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.update = fx_10_update;
     bp.renderWorld = fx_10_render;
     bp.unk_14 = NULL;
-    bp.effectIndex = 10;
+    bp.effectID = EFFECT_ID_0A;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;

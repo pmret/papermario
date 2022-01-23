@@ -7,6 +7,6 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_please_come_back
 
-extern EvtSource N(UseItemWithEffect);
+extern EvtScript N(UseItemWithEffect);
 
 #endif

@@ -12,7 +12,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_13_tattle },
 };
 
-EvtSource N(80240050) = {
+EvtScript N(80240050) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -29,15 +29,15 @@ static s32 N(pad_E8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitWalk_802400F0) = EXIT_WALK_SCRIPT(26,  0, "dgb_03",  5);
+EvtScript N(exitWalk_802400F0) = EXIT_WALK_SCRIPT(26,  0, "dgb_03",  5);
 
-EvtSource N(8024014C) = {
+EvtScript N(8024014C) = {
     EVT_BIND_TRIGGER(N(exitWalk_802400F0), TRIGGER_FLOOR_ABOVE, 5, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -55,7 +55,7 @@ EvtSource N(main) = {
     EVT_END
 };
 
-EvtSource N(80240270) = {
+EvtScript N(80240270) = {
     EVT_CALL(MakeItemEntity, ITEM_MEGA_RUSH, -910, 50, -206, 17, EVT_SAVE_FLAG(1058))
     EVT_CALL(MakeItemEntity, ITEM_COIN, -530, 55, -190, 17, EVT_SAVE_FLAG(1059))
     EVT_CALL(MakeItemEntity, ITEM_COIN, -510, 55, -175, 17, EVT_SAVE_FLAG(1060))
@@ -71,7 +71,7 @@ static s32 N(pad_37C) = {
     0x00000000,
 };
 
-EvtSource N(80240380) = {
+EvtScript N(80240380) = {
     EVT_CALL(MakeLerp, 0, 30, 15, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -86,7 +86,7 @@ EvtSource N(80240380) = {
     EVT_END
 };
 
-EvtSource N(80240424) = {
+EvtScript N(80240424) = {
     EVT_CALL(MakeLerp, 30, 0, 15, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -101,7 +101,7 @@ EvtSource N(80240424) = {
     EVT_END
 };
 
-EvtSource N(802404C8) = {
+EvtScript N(802404C8) = {
     EVT_CALL(MakeLerp, 0, 30, 15, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -116,7 +116,7 @@ EvtSource N(802404C8) = {
     EVT_END
 };
 
-EvtSource N(8024056C) = {
+EvtScript N(8024056C) = {
     EVT_CALL(MakeLerp, 30, 0, 15, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -131,7 +131,7 @@ EvtSource N(8024056C) = {
     EVT_END
 };
 
-EvtSource N(80240610) = {
+EvtScript N(80240610) = {
     EVT_IF_EQ(EVT_MAP_VAR(0), 0)
         EVT_EXEC_WAIT(N(80240380))
         EVT_SET(EVT_MAP_VAR(0), 1)
@@ -144,7 +144,7 @@ EvtSource N(80240610) = {
     EVT_END
 };
 
-EvtSource N(80240680) = {
+EvtScript N(80240680) = {
     EVT_CALL(ParentColliderToModel, 13, 44)
     EVT_BIND_TRIGGER(N(80240610), TRIGGER_WALL_PRESS_A, 13, 1, 0)
     EVT_RETURN

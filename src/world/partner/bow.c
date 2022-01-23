@@ -30,7 +30,7 @@ ApiStatus func_802BD130_323A80(Evt* script, s32 isInitialCall) {
     return partner_get_out(bow) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_bow_take_out = {
+EvtScript world_bow_take_out = {
     EVT_CALL(func_802BD130_323A80)
     EVT_RETURN
     EVT_END
@@ -117,7 +117,7 @@ ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
     return 0;
 }
 
-EvtSource world_bow_update = {
+EvtScript world_bow_update = {
     EVT_CALL(func_802BD168_323AB8)
     EVT_RETURN
     EVT_END
@@ -343,7 +343,7 @@ ApiStatus func_802BD694_323FE4(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource world_bow_use_ability = {
+EvtScript world_bow_use_ability = {
     EVT_CALL(func_802BD694_323FE4)
     EVT_RETURN
     EVT_END
@@ -394,7 +394,7 @@ ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
     return partner_put_away(bow) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_bow_put_away = {
+EvtScript world_bow_put_away = {
     EVT_CALL(func_802BDF08_324858)
     EVT_RETURN
     EVT_END

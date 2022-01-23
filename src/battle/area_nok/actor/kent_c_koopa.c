@@ -78,7 +78,7 @@ s32 N(statusTable_80227A08)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80227AB4)[] = {
+ActorPartBlueprint N(partsTable_80227AB4)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -89,7 +89,7 @@ ActorPartDesc N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279DC),
         .eventFlags = ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
@@ -101,7 +101,7 @@ ActorPartDesc N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279F0),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
@@ -113,7 +113,7 @@ ActorPartDesc N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -125,7 +125,7 @@ ActorPartDesc N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -137,7 +137,7 @@ ActorPartDesc N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -149,7 +149,7 @@ ActorPartDesc N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -161,7 +161,7 @@ ActorPartDesc N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -173,7 +173,7 @@ ActorPartDesc N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_100000,
@@ -185,13 +185,13 @@ ActorPartDesc N(partsTable_80227AB4)[] = {
         .defenseTable = N(defenseTable_802279FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
 };
 
-extern EvtSource N(init_80227C20);
+extern EvtScript N(init_80227C20);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_KENT_C_KOOPA,
     .level = 55,
@@ -214,12 +214,12 @@ ActorDesc NAMESPACE = {
     .statusMessageOffset = { 2, 63 },
 };
 
-extern EvtSource N(takeTurn_80228A7C);
-extern EvtSource N(idle_80227DD4);
-extern EvtSource N(handleEvent_80227E08);
-extern EvtSource N(nextTurn_80227D2C);
+extern EvtScript N(takeTurn_80228A7C);
+extern EvtScript N(idle_80227DD4);
+extern EvtScript N(handleEvent_80227E08);
+extern EvtScript N(nextTurn_80227D2C);
 
-EvtSource N(init_80227C20) = {
+EvtScript N(init_80227C20) = {
     EVT_CALL(func_8027D434, -127, 3, 70)
     EVT_CALL(SetPartSize, -127, 3, 30, 30)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80228A7C)))
@@ -235,7 +235,7 @@ EvtSource N(init_80227C20) = {
     EVT_END
 };
 
-EvtSource N(nextTurn_80227D2C) = {
+EvtScript N(nextTurn_80227D2C) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetBattlePhase, LW(0))
@@ -249,7 +249,7 @@ EvtSource N(nextTurn_80227D2C) = {
     EVT_END
 };
 
-EvtSource N(idle_80227DD4) = {
+EvtScript N(idle_80227DD4) = {
     EVT_LABEL(0)
     EVT_WAIT_FRAMES(1)
     EVT_GOTO(0)
@@ -257,14 +257,14 @@ EvtSource N(idle_80227DD4) = {
     EVT_END
 };
 
-extern EvtSource N(8022AD84);
-extern EvtSource N(8022B158);
-extern EvtSource N(8022B204);
-extern EvtSource N(flipOver_KentC);
-extern EvtSource N(shellToss_KentC);
-extern EvtSource N(tackle_KentC);
+extern EvtScript N(8022AD84);
+extern EvtScript N(8022B158);
+extern EvtScript N(8022B204);
+extern EvtScript N(flipOver_KentC);
+extern EvtScript N(shellToss_KentC);
+extern EvtScript N(tackle_KentC);
 
-EvtSource N(handleEvent_80227E08) = {
+EvtScript N(handleEvent_80227E08) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetLastElement, LW(14))
@@ -483,7 +483,7 @@ EvtSource N(handleEvent_80227E08) = {
 
 #include "common/UnkBattleFunc1.inc.c"
 
-EvtSource N(takeTurn_80228A7C) = {
+EvtScript N(takeTurn_80228A7C) = {
     EVT_CALL(SetActorVar, -127, 4, 2)
     EVT_CALL(GetActorVar, -127, 0, LW(0))
     EVT_IF_EQ(LW(0), 1)
@@ -584,7 +584,7 @@ EvtSource N(takeTurn_80228A7C) = {
     EVT_END
 };
 
-EvtSource N(shellToss_KentC) = {
+EvtScript N(shellToss_KentC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -750,7 +750,7 @@ EvtSource N(shellToss_KentC) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), 30)
     EVT_SET(LW(1), 0)
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.80078125))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
     EVT_THREAD
@@ -797,7 +797,7 @@ EvtSource N(shellToss_KentC) = {
     EVT_END
 };
 
-EvtSource N(tackle_KentC) = {
+EvtScript N(tackle_KentC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
@@ -907,7 +907,7 @@ EvtSource N(tackle_KentC) = {
         EVT_WAIT_FRAMES(2)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_kent_c_koopa_Palette_00_Anim_8)
     EVT_END_THREAD
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.30078125))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.3))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 14, FALSE, TRUE, FALSE)
     EVT_WAIT_FRAMES(2)
@@ -988,7 +988,7 @@ EvtSource N(tackle_KentC) = {
     EVT_END
 };
 
-EvtSource N(8022AD84) = {
+EvtScript N(8022AD84) = {
     EVT_SET_CONST(LW(0), 0x00000001)
     EVT_SET_CONST(LW(1), NPC_ANIM_kent_c_koopa_Palette_00_Anim_4)
     EVT_EXEC_WAIT(DoReturnHome)
@@ -996,7 +996,7 @@ EvtSource N(8022AD84) = {
     EVT_END
 };
 
-EvtSource N(flipOver_KentC) = {
+EvtScript N(flipOver_KentC) = {
     EVT_CALL(SetEnemyTargetOffset, -127, 1, 0, 40)
     EVT_CALL(SetDefenseTable, -127, 1, EVT_ADDR(N(defenseTable_802279F0)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_802279B4)))
@@ -1050,9 +1050,9 @@ EvtSource N(flipOver_KentC) = {
     EVT_END
 };
 
-extern EvtSource N(8022B2E8);
+extern EvtScript N(8022B2E8);
 
-EvtSource N(8022B158) = {
+EvtScript N(8022B158) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
     EVT_SET(LW(10), 5)
     EVT_EXEC_WAIT(N(8022B2E8))
@@ -1067,7 +1067,7 @@ EvtSource N(8022B158) = {
     EVT_END
 };
 
-EvtSource N(8022B204) = {
+EvtScript N(8022B204) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LW(0), LW(1))
     EVT_SET(LW(10), 0)
     EVT_EXEC_WAIT(N(8022B2E8))
@@ -1086,9 +1086,9 @@ EvtSource N(8022B204) = {
     EVT_END
 };
 
-extern EvtSource N(8022B444);
+extern EvtScript N(8022B444);
 
-EvtSource N(8022B2E8) = {
+EvtScript N(8022B2E8) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(3))
     EVT_IF_FLAG(LW(3), 0x80000)
         EVT_RETURN
@@ -1148,7 +1148,7 @@ ApiStatus func_80218DF8_48DF98(Evt* script, s32 isInitialCall) {
 }
 
 
-EvtSource N(8022B444) = {
+EvtScript N(8022B444) = {
     EVT_CALL(PlaySoundAtPart, -127, LW(5), 530)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(6), LW(7), LW(8))
     EVT_CALL(SetPartPos, ACTOR_SELF, LW(5), LW(6), 35, LW(8))

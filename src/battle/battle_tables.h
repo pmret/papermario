@@ -40,4 +40,31 @@ extern StageList b_area_sbk_stageTable;
 extern BattleList b_area_isk_part_1_formationTable;
 extern StageList b_area_isk_part_1_stageTable;
 
+extern BattleList b_area_isk_part_2_formationTable;
+extern StageList b_area_isk_part_2_stageTable;
+
+extern BattleList b_area_mim_formationTable;
+extern StageList b_area_mim_stageTable;
+
+extern BattleList b_area_arn_formationTable;
+extern StageList b_area_arn_stageTable;
+
+extern BattleList b_area_dgb_formationTable;
+extern StageList b_area_dgb_stageTable;
+
+extern BattleList b_area_omo_formationTable;
+extern StageList b_area_omo_stageTable;
+
+extern BattleList b_area_kgr_formationTable;
+extern StageList b_area_kgr_stageTable;
+
+extern BattleList b_area_jan_formationTable;
+extern StageList b_area_jan_stageTable;
+
+extern BattleList b_area_jan2_formationTable;
+extern StageList b_area_jan2_stageTable;
+
+extern BattleList b_area_kzn_formationTable;
+extern StageList b_area_kzn_stageTable;
+
 #endif

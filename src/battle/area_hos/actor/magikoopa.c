@@ -68,7 +68,7 @@ s32 N(statusTable_8021D544)[] = {
 
 extern s32 N(idleAnimations_8021D6D0)[];
 
-ActorPartDesc N(partsTable_8021D5F0)[] = {
+ActorPartBlueprint N(partsTable_8021D5F0)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -79,14 +79,15 @@ ActorPartDesc N(partsTable_8021D5F0)[] = {
         .defenseTable = N(defenseTable_8021D480),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -1036,
+        .unk_1C = 0xFB,
+        .unk_1D = 0xF4,
     },
 };
 
 extern s32 N(idleAnimations_8021D71C)[];
 extern s32 N(idleAnimations_8021D768)[];
 
-ActorPartDesc N(partsTable_8021D614)[] = {
+ActorPartBlueprint N(partsTable_8021D614)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
@@ -97,7 +98,8 @@ ActorPartDesc N(partsTable_8021D614)[] = {
         .defenseTable = N(defenseTable_8021D48C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = -1036,
+        .unk_1C = 0xFB,
+        .unk_1D = 0xF4,
     },
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
@@ -109,7 +111,7 @@ ActorPartDesc N(partsTable_8021D614)[] = {
         .defenseTable = N(defenseTable_8021D48C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 248,
+        .unk_1D = 248,
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
@@ -121,13 +123,13 @@ ActorPartDesc N(partsTable_8021D614)[] = {
         .defenseTable = N(defenseTable_8021D48C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
-        .unk_1C = 0,
+        .unk_1D = 0,
     },
 };
 
-extern EvtSource N(init_8021E100);
+extern EvtScript N(init_8021E100);
 
-ActorDesc NAMESPACE = {
+ActorBlueprint NAMESPACE = {
     .flags = 0,
     .type = ACTOR_TYPE_MAGIKOOPA_BOSS,
     .level = 32,
@@ -150,9 +152,9 @@ ActorDesc NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-extern EvtSource N(init_8021E2C0);
+extern EvtScript N(init_8021E2C0);
 
-ActorDesc N(flying) = {
+ActorBlueprint N(flying) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_FLYING_MAGIKOOPA_BOSS,
     .level = 32,
@@ -206,7 +208,7 @@ s32 N(idleAnimations_8021D768)[] = {
     STATUS_END,
 };
 
-EvtSource N(idle_8021D774) = {
+EvtScript N(idle_8021D774) = {
     EVT_RETURN
     EVT_END
 };
@@ -215,7 +217,7 @@ EvtSource N(idle_8021D774) = {
 
 #include "common/GetSelectedMoveID.inc.c"
 
-EvtSource N(8021D784) = {
+EvtScript N(8021D784) = {
     EVT_CALL(GetBattleFlags, LW(0))
     EVT_IF_NOT_FLAG(LW(0), 0x80000)
         EVT_IF_FLAG(LW(0), 0x240)
@@ -243,9 +245,9 @@ EvtSource N(8021D784) = {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-extern EvtSource N(handleEvent_8021E6D8);
+extern EvtScript N(handleEvent_8021E6D8);
 
-EvtSource N(8021D890) = {
+EvtScript N(8021D890) = {
     EVT_CALL(GetActorVar, -127, 2, LW(0))
     EVT_IF_EQ(LW(0), 1)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_magikoopa_Palette_00_Anim_4)
@@ -261,7 +263,7 @@ EvtSource N(8021D890) = {
     EVT_CALL(func_8027D32C, -127)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LW(0))
     EVT_IF_FLAG(LW(0), 0x80000)
-        EVT_CALL(SetPartScale, -127, 3, EVT_FLOAT(0.400390625), EVT_FLOAT(0.400390625), EVT_FLOAT(0.400390625))
+        EVT_CALL(SetPartScale, -127, 3, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_END_IF
     EVT_CALL(SetPartFlagBits, -127, 1, 8388608, 1)
     EVT_CALL(SetPartFlagBits, -127, 1, 131073, 0)
@@ -275,12 +277,12 @@ EvtSource N(8021D890) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x301)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_SET(LW(1), 0)
-    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.80078125))
+    EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_CALL(N(StartRumbleWithParams), 150, 10)
     EVT_THREAD
-        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.7001953125))
+        EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(0.7))
     EVT_END_THREAD
     EVT_CALL(GetLastEvent, ACTOR_SELF, LW(3))
     EVT_IF_EQ(LW(3), 15)
@@ -321,7 +323,7 @@ EvtSource N(8021D890) = {
     EVT_END
 };
 
-EvtSource N(runAway) = {
+EvtScript N(runAway) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(func_8027D32C, -127)
@@ -355,7 +357,7 @@ EvtSource N(runAway) = {
     EVT_END
 };
 
-EvtSource N(nextTurn_8021E0B0) = {
+EvtScript N(nextTurn_8021E0B0) = {
     EVT_CALL(GetActorVar, -127, 0, LW(0))
     EVT_BITWISE_AND_CONST(LW(0), -2) // TODO
     EVT_CALL(SetActorVar, -127, 0, LW(0))
@@ -363,9 +365,9 @@ EvtSource N(nextTurn_8021E0B0) = {
     EVT_END
 };
 
-extern EvtSource N(takeTurn_80223B24);
+extern EvtScript N(takeTurn_80223B24);
 
-EvtSource N(init_8021E100) = {
+EvtScript N(init_8021E100) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021D774)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80223B24)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021E6D8)))
@@ -390,9 +392,9 @@ EvtSource N(init_8021E100) = {
     EVT_END
 };
 
-extern EvtSource N(handleEvent_8021EDF0);
+extern EvtScript N(handleEvent_8021EDF0);
 
-EvtSource N(init_8021E2C0) = {
+EvtScript N(init_8021E2C0) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_ADDR(N(idle_8021D774)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_ADDR(N(takeTurn_80223B24)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8021EDF0)))
@@ -416,7 +418,7 @@ EvtSource N(init_8021E2C0) = {
     EVT_END
 };
 
-EvtSource N(8021E46C) = {
+EvtScript N(8021E46C) = {
     EVT_CALL(GetActorVar, -127, 1, LW(0))
     EVT_IF_EQ(LW(0), 1)
         EVT_RETURN
@@ -457,7 +459,7 @@ EvtSource N(8021E46C) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8021E6D8) = {
+EvtScript N(handleEvent_8021E6D8) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetPartAlpha, -127, 1, 255)
@@ -584,7 +586,7 @@ EvtSource N(handleEvent_8021E6D8) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8021EDF0) = {
+EvtScript N(handleEvent_8021EDF0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetPartAlpha, -127, 2, 255)
@@ -733,7 +735,7 @@ EvtSource N(handleEvent_8021EDF0) = {
     EVT_END
 };
 
-EvtSource N(healOne) = {
+EvtScript N(healOne) = {
     EVT_CALL(SetActorVar, -127, 10, 0)
     EVT_CALL(SetActorVar, -127, 11, 0)
     EVT_CALL(AddActorVar, -127, 4, 1)
@@ -765,7 +767,7 @@ EvtSource N(healOne) = {
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -779,7 +781,7 @@ EvtSource N(healOne) = {
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
@@ -813,7 +815,7 @@ EvtSource N(healOne) = {
     EVT_END
 };
 
-EvtSource N(healAll) = {
+EvtScript N(healAll) = {
     EVT_CALL(SetActorVar, -127, 10, 0)
     EVT_CALL(SetActorVar, -127, 11, 1)
     EVT_CALL(AddActorVar, -127, 3, 1)
@@ -845,7 +847,7 @@ EvtSource N(healAll) = {
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -859,7 +861,7 @@ EvtSource N(healAll) = {
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
@@ -912,7 +914,7 @@ EvtSource N(healAll) = {
     EVT_END
 };
 
-EvtSource N(shapeSpell) = {
+EvtScript N(shapeSpell) = {
     EVT_CALL(SetActorVar, -127, 11, 2)
     EVT_SET(LF(0), 0)
     EVT_SET(LF(1), 0)
@@ -1127,7 +1129,7 @@ EvtSource N(shapeSpell) = {
     EVT_END
 };
 
-EvtSource N(80221144) = {
+EvtScript N(80221144) = {
     EVT_CALL(EnemyCreateTargetList, 32770)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -1185,19 +1187,19 @@ EvtSource N(80221144) = {
     EVT_END
 };
 
-EvtSource N(handleEvent_8022142C) = {
+EvtScript N(handleEvent_8022142C) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(init_8022143C) = {
+EvtScript N(init_8022143C) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022142C)))
     EVT_CALL(SetActorVar, -127, 1, 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(init_80221478) = {
+EvtScript N(init_80221478) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_ADDR(N(handleEvent_8022142C)))
     EVT_CALL(SetActorVar, -127, 1, 1)
     EVT_RETURN
@@ -1264,7 +1266,7 @@ s32 N(statusTable_80221578)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_80221624)[] = {
+ActorPartBlueprint N(partsTable_80221624)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -1275,11 +1277,12 @@ ActorPartDesc N(partsTable_80221624)[] = {
         .defenseTable = N(defenseTable_802214B4),
         .eventFlags = ACTOR_EVENT_FLAG_ILLUSORY,
         .elementImmunityFlags = 0,
-        .unk_1C = -1036,
+        .unk_1C = 0xFB,
+        .unk_1D = 0xF4,
     },
 };
 
-ActorPartDesc N(partsTable_80221648)[] = {
+ActorPartBlueprint N(partsTable_80221648)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -1290,11 +1293,11 @@ ActorPartDesc N(partsTable_80221648)[] = {
         .defenseTable = N(defenseTable_802214C0),
         .eventFlags = ACTOR_EVENT_FLAG_ILLUSORY,
         .elementImmunityFlags = 0,
-        .unk_1C = 248,
+        .unk_1D = 248,
     },
 };
 
-ActorDesc N(clone) = {
+ActorBlueprint N(clone) = {
     .flags = ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_MAGICLONE,
     .level = 26,
@@ -1317,7 +1320,7 @@ ActorDesc N(clone) = {
     .statusMessageOffset = { 10, 32 },
 };
 
-ActorDesc N(flying_clone) = {
+ActorBlueprint N(flying_clone) = {
     .flags = ACTOR_FLAG_FLYING | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_FLYING_MAGICLONE,
     .level = 26,
@@ -1350,7 +1353,7 @@ Formation N(specialFormation_802216E4) = {
     { .actor = &N(flying_clone), .home = { .vec = &N(vector3D_802216BC) }},
 };
 
-EvtSource N(makeCopy) = {
+EvtScript N(makeCopy) = {
     EVT_CALL(CountPlayerTargets, -127, 32770, LW(0))
     EVT_IF_EQ(LW(0), 1)
         EVT_EXEC_WAIT(N(runAway))
@@ -1447,7 +1450,7 @@ EvtSource N(makeCopy) = {
 
 #include "world/common/UnkFunc52.inc.c"
 
-EvtSource N(boostAttack) = {
+EvtScript N(boostAttack) = {
     EVT_SET(LF(0), 0)
     EVT_LABEL(10)
     EVT_CALL(EnemyCreateTargetList, 32770)
@@ -1515,7 +1518,7 @@ EvtSource N(boostAttack) = {
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -1529,7 +1532,7 @@ EvtSource N(boostAttack) = {
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
@@ -1559,7 +1562,7 @@ EvtSource N(boostAttack) = {
     EVT_END
 };
 
-EvtSource N(boostDefense) = {
+EvtScript N(boostDefense) = {
     EVT_SET(LF(0), 0)
     EVT_LABEL(10)
     EVT_CALL(EnemyCreateTargetList, 32770)
@@ -1627,7 +1630,7 @@ EvtSource N(boostDefense) = {
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -1641,7 +1644,7 @@ EvtSource N(boostDefense) = {
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 5, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
@@ -1671,7 +1674,7 @@ EvtSource N(boostDefense) = {
     EVT_END
 };
 
-EvtSource N(electrify) = {
+EvtScript N(electrify) = {
     EVT_SET(LF(0), 0)
     EVT_LABEL(10)
     EVT_CALL(EnemyCreateTargetList, 32770)
@@ -1739,7 +1742,7 @@ EvtSource N(electrify) = {
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x57, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x57, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -1753,7 +1756,7 @@ EvtSource N(electrify) = {
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x57, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x57, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
@@ -1788,7 +1791,7 @@ EvtSource N(electrify) = {
     EVT_END
 };
 
-EvtSource N(vanish) = {
+EvtScript N(vanish) = {
     EVT_SET(LF(0), 0)
     EVT_LABEL(10)
     EVT_CALL(EnemyCreateTargetList, 32770)
@@ -1856,7 +1859,7 @@ EvtSource N(vanish) = {
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 6, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 6, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -1870,7 +1873,7 @@ EvtSource N(vanish) = {
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, 0x33, 6, LW(0), LW(1), LW(2), EVT_FLOAT(0.30078125), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, 0x33, 6, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
@@ -1900,7 +1903,7 @@ EvtSource N(vanish) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_80223B24) = {
+EvtScript N(takeTurn_80223B24) = {
     EVT_CALL(GetBattlePhase, LW(0))
     EVT_IF_EQ(LW(0), 1)
         EVT_EXEC_WAIT(N(shapeSpell))

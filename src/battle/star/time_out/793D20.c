@@ -6,7 +6,7 @@
 
 #include "common/StarPower.inc.c"
 
-EvtSource N(802A1520) = {
+EvtScript N(802A1520) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(UseBattleCamPreset, 69)
@@ -61,7 +61,7 @@ EvtSource N(802A1520) = {
     EVT_END
 };
 
-EvtSource N(802A18B8) = {
+EvtScript N(802A18B8) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(UseBattleCamPreset, 69)
@@ -116,7 +116,7 @@ EvtSource N(802A18B8) = {
     EVT_END
 };
 
-EvtSource N(802A1C50) = {
+EvtScript N(802A1C50) = {
     EVT_WAIT_FRAMES(8)
     EVT_CALL(SetForegroundModelsVisible, 0)
     EVT_CALL(func_8024E664, 73)
@@ -150,7 +150,7 @@ EvtSource N(802A1C50) = {
     EVT_END
 };
 
-EvtSource N(802A1E5C) = {
+EvtScript N(802A1E5C) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(UseBattleCamPreset, 2)
@@ -221,7 +221,7 @@ EvtSource N(802A1E5C) = {
     EVT_END
 };
 
-EvtSource N(802A22AC) = {
+EvtScript N(802A22AC) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(N(UnkBackgroundFunc))
@@ -244,7 +244,7 @@ EvtSource N(802A22AC) = {
     EVT_END
 };
 
-EvtSource N(usePower) = {
+EvtScript N(usePower) = {
     EVT_EXEC_WAIT(N(802A1520))
     EVT_SET_CONST(LW(0), NPC_ANIM_battle_klevar_Palette_00_Anim_1)
     EVT_EXEC_WAIT(N(802A1C50))

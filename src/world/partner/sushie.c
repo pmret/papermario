@@ -112,7 +112,7 @@ s32 func_802BE280_31EFF0(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32 arg4, f3
 void func_802BE3A4_31F114(Npc*);
 INCLUDE_ASM(s32, "world/partner/sushie", func_802BE3A4_31F114);
 
-EvtSource world_sushie_use_ability = {
+EvtScript world_sushie_use_ability = {
     EVT_CALL(func_802BE3A4_31F114)
     EVT_RETURN
     EVT_END
@@ -139,7 +139,7 @@ s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
     return partner_get_out(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_sushie_take_out = {
+EvtScript world_sushie_take_out = {
     EVT_CALL(func_802BF568_3202D8)
     EVT_RETURN
     EVT_END
@@ -228,7 +228,7 @@ ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource world_sushie_update = {
+EvtScript world_sushie_update = {
     EVT_CALL(func_802BF5A0_320310)
     EVT_RETURN
     EVT_END
@@ -254,7 +254,7 @@ s32 func_802BF964_3206D4(Evt* script, s32 isInitialCall) {
     return partner_put_away(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_sushie_put_away = {
+EvtScript world_sushie_put_away = {
     EVT_CALL(func_802BF964_3206D4)
     EVT_RETURN
     EVT_END
@@ -362,7 +362,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource world_sushie_while_riding = {
+EvtScript world_sushie_while_riding = {
     EVT_CALL(func_802BFAB8_320828)
     EVT_RETURN
     EVT_END

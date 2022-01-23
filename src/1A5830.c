@@ -884,13 +884,13 @@ s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event) {
 ApiStatus BindTakeTurn(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    EvtSource* takeTurnScript;
+    EvtScript* takeTurnScript;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    takeTurnScript = (EvtSource*) evt_get_variable(script, *args++);
+    takeTurnScript = (EvtScript*) evt_get_variable(script, *args++);
     get_actor(actorID)->takeTurnScriptSource = takeTurnScript;
     return ApiStatus_DONE2;
 }
@@ -924,7 +924,7 @@ ApiStatus ResumeTakeTurn(Evt* script, s32 isInitialCall) {
 ApiStatus BindIdle(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    EvtSource* idleCode;
+    EvtScript* idleCode;
     Actor* actor;
     Evt* newScriptContext;
 
@@ -932,7 +932,7 @@ ApiStatus BindIdle(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    idleCode = (EvtSource*) evt_get_variable(script, *args++);
+    idleCode = (EvtScript*) evt_get_variable(script, *args++);
     actor = get_actor(actorID);
 
     if (actor->idleScript != 0) {
@@ -982,13 +982,13 @@ ApiStatus EnableIdleScript(Evt* script, s32 isInitialCall) {
 ApiStatus BindHandleEvent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    EvtSource* var1;
+    EvtScript* var1;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = (EvtSource*) evt_get_variable(script, *args++);
+    var1 = (EvtScript*) evt_get_variable(script, *args++);
     get_actor(actorID)->onHitScriptSource = var1;
     return ApiStatus_DONE2;
 }
@@ -996,13 +996,13 @@ ApiStatus BindHandleEvent(Evt* script, s32 isInitialCall) {
 ApiStatus BindNextTurn(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    EvtSource* var1;
+    EvtScript* var1;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = (EvtSource*) evt_get_variable(script, *args++);
+    var1 = (EvtScript*) evt_get_variable(script, *args++);
     get_actor(actorID)->onTurnChanceScriptSource = var1;
     return ApiStatus_DONE2;
 }
@@ -1066,7 +1066,52 @@ INCLUDE_ASM(s32, "1A5830", JumpPartTo);
 
 INCLUDE_ASM(s32, "1A5830", FallPartTo);
 
-INCLUDE_ASM(s32, "1A5830", LandJumpPart);
+s32 LandJumpPart(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor;
+    ActorPart* part;
+    ActorPartMovement* movement;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        s32 actorID = evt_get_variable(script, *args++);
+        s32 partIndex = evt_get_variable(script, *args++);
+
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+
+        actor = get_actor(actorID);
+        part = get_actor_part(actor, partIndex);
+        script->functionTemp[1] = (s32) actor;
+        script->functionTemp[2] = (s32) part;
+        movement = part->movement;
+        movement->unk_00.x = part->absolutePosition.x;
+        movement->unk_00.y = part->absolutePosition.y;
+        movement->unk_00.z = part->absolutePosition.z;
+        script->functionTemp[0] = 1;
+    }
+
+    part = script->functionTemp[2];
+    movement = part->movement;
+    movement->unk_00.y += movement->unk_2C;
+    movement->unk_2C -= movement->jumpScale;
+    add_xz_vec3f_copy1(movement, movement->moveSpeed, movement->unk_30);
+    part->absolutePosition.x = movement->unk_00.x;
+    part->absolutePosition.y = movement->unk_00.y;
+    part->absolutePosition.z = movement->unk_00.z;
+
+    if (part->absolutePosition.y < 0.0f) {
+        part->absolutePosition.y = 0.0f;
+        play_movement_dust_effects(2, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z, part->yaw);
+        return ApiStatus_DONE1;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "1A5830", RunPartTo);
 
@@ -1200,7 +1245,7 @@ ApiStatus RemoveActor(Evt* script, s32 isInitialCall) {
     }
 
     currentEncounter->coinsEarned += actor->extraCoinBonus;
-    currentEncounter->coinsEarned += actor->staticActorData->coinReward;
+    currentEncounter->coinsEarned += actor->actorBlueprint->coinReward;
     btl_delete_actor(actor);
     battleStatus->enemyActors[(u8)actorID] = NULL;
 
@@ -1227,8 +1272,8 @@ ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
     }
     dropper = get_actor(actorID);
 
-    enemyLevel = dropper->staticActorData->level;
-    if (dropper->staticActorData->level == 0.0f) {
+    enemyLevel = dropper->actorBlueprint->level;
+    if (dropper->actorBlueprint->level == 0.0f) {
         enemyLevel = 1.0f;
     }
 
@@ -1809,7 +1854,7 @@ ApiStatus GetOriginalActorType(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    evt_set_variable(script, outVar, get_actor(actorID)->staticActorData->type);
+    evt_set_variable(script, outVar, get_actor(actorID)->actorBlueprint->type);
     return ApiStatus_DONE2;
 }
 

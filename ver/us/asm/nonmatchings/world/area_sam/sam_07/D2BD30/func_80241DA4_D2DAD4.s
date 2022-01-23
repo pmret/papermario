@@ -110,7 +110,7 @@ glabel func_80241DA4_D2DAD4
 /* D2DC60 80241F30 00000000 */   nop
 .L80241F34:
 /* D2DC64 80241F34 0260282D */  daddu     $a1, $s3, $zero
-/* D2DC68 80241F38 0C090422 */  jal       func_80241088_D2CDB8
+/* D2DC68 80241F38 0C090422 */  jal       sam_07_UnkNpcAIFunc46
 /* D2DC6C 80241F3C 0280302D */   daddu    $a2, $s4, $zero
 /* D2DC70 80241F40 8E420070 */  lw        $v0, 0x70($s2)
 /* D2DC74 80241F44 14500021 */  bne       $v0, $s0, .L80241FCC

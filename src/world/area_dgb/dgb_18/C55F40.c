@@ -24,7 +24,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_18_tattle },
 };
 
-EvtSource N(802412C0) = {
+EvtScript N(802412C0) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -41,7 +41,7 @@ static s32 N(pad_1358)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitDoubleDoor_80241360) = {
+EvtScript N(exitDoubleDoor_80241360) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
@@ -57,7 +57,7 @@ EvtSource N(exitDoubleDoor_80241360) = {
     EVT_END
 };
 
-EvtSource N(enterDoubleDoor_80241414) = {
+EvtScript N(enterDoubleDoor_80241414) = {
     EVT_CALL(UseDoorSounds, 3)
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
@@ -70,7 +70,7 @@ EvtSource N(enterDoubleDoor_80241414) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -103,7 +103,7 @@ NpcAISettings N(npcAISettings_80241580) = {
     .unk_2C = 1,
 };
 
-EvtSource N(802415B0) = {
+EvtScript N(802415B0) = {
     EVT_CALL(N(func_80240B94_C56AD4), EVT_PTR(N(npcAISettings_80241580)))
     EVT_RETURN
     EVT_END
@@ -132,7 +132,7 @@ NpcSettings N(npcSettings_80241628) = {
     .level = 13,
 };
 
-EvtSource N(idle_80241654) = {
+EvtScript N(idle_80241654) = {
     EVT_LABEL(10)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_WAIT_FRAMES(1)
@@ -351,7 +351,7 @@ EvtSource N(idle_80241654) = {
     EVT_END
 };
 
-EvtSource N(idle_80242494) = {
+EvtScript N(idle_80242494) = {
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FIXED(1.25), EVT_FIXED(1.25), EVT_FIXED(1.25))
     EVT_CALL(SetNpcPos, NPC_SELF, 600, 50, 115)
     EVT_CALL(func_802CDE68, -1, 0)
@@ -385,7 +385,7 @@ EvtSource N(idle_80242494) = {
     EVT_END
 };
 
-EvtSource N(npcAI_802426B0) = {
+EvtScript N(npcAI_802426B0) = {
     EVT_SET_GROUP(11)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2039, 0)
     EVT_CALL(ShowSleepBubble, 0, 0, 50, 2, 552, 111, 128, 30, EVT_VAR(0))
@@ -410,7 +410,7 @@ EvtSource N(npcAI_802426B0) = {
     EVT_END
 };
 
-EvtSource N(npcAI_80242834) = {
+EvtScript N(npcAI_80242834) = {
     EVT_SET_GROUP(11)
     EVT_CALL(SetNpcAnimation, 0, NPC_ANIM_world_tubba_Palette_00_Anim_D)
     EVT_THREAD
@@ -428,7 +428,7 @@ EvtSource N(npcAI_80242834) = {
 
 extern const char N(dgb_01_name_hack)[];
 
-EvtSource N(defeat_802428E8) = {
+EvtScript N(defeat_802428E8) = {
     EVT_CALL(N(UnkFunc1))
     EVT_CALL(GotoMap, EVT_PTR(N(dgb_01_name_hack)), 6)
     EVT_WAIT_FRAMES(100)
@@ -438,7 +438,7 @@ EvtSource N(defeat_802428E8) = {
 
 const char N(pad_XXX)[] = { 0, 0 };
 
-EvtSource N(init_80242924) = {
+EvtScript N(init_80242924) = {
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FIXED(1.25), EVT_FIXED(1.25), EVT_FIXED(1.25))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802428E8)))
     EVT_SWITCH(EVT_SAVE_VAR(0))
@@ -457,7 +457,7 @@ EvtSource N(init_80242924) = {
     EVT_END
 };
 
-EvtSource N(idle_80242A24) = {
+EvtScript N(idle_80242A24) = {
     EVT_LOOP(0)
         EVT_CALL(GetSelfVar, 0, EVT_VAR(0))
         EVT_IF_EQ(EVT_VAR(0), 1)
@@ -573,7 +573,7 @@ EvtSource N(idle_80242A24) = {
     EVT_END
 };
 
-EvtSource N(init_8024329C) = {
+EvtScript N(init_8024329C) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80242A24)))
     EVT_RETURN
@@ -653,7 +653,7 @@ static s32 N(pad_36D8)[] = {
 
 s32** N(D_802436E0_C59620) = NULL; // StashVars.inc.c data
 
-EvtSource N(802436E4) = {
+EvtScript N(802436E4) = {
     EVT_SET_GROUP(0)
     EVT_CALL(SetTimeFreezeMode, 2)
     EVT_WAIT_FRAMES(40)
@@ -664,7 +664,7 @@ EvtSource N(802436E4) = {
     EVT_END
 };
 
-EvtSource N(8024374C) = {
+EvtScript N(8024374C) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(0), EVT_VAR(10))
     EVT_IF_NE(EVT_VAR(10), 0)
@@ -684,7 +684,7 @@ EvtSource N(8024374C) = {
     EVT_END
 };
 
-EvtSource N(8024382C) = {
+EvtScript N(8024382C) = {
     EVT_SET(EVT_SAVE_FLAG(1071), 1)
     EVT_CALL(AddKeyItem, ITEM_MYSTICAL_KEY)
     EVT_CALL(SetNpcVar, 1, 0, 1)
@@ -692,9 +692,9 @@ EvtSource N(8024382C) = {
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EAE30, 845, 0, 145, -35, 0, MAKE_ENTITY_END)
-    EVT_CALL(AssignFlag, EVT_SAVE_FLAG(1071))
+    EVT_CALL(AssignChestFlag, EVT_SAVE_FLAG(1071))
     EVT_CALL(AssignScript, EVT_PTR(N(8024382C)))
     EVT_RETURN
     EVT_END

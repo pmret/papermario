@@ -3,14 +3,14 @@
 
 #define NAMESPACE action_command_mega_shock
 
-extern HudElementAnim HudScript_BlueMeter;
-extern HudElementAnim HudScript_AButton;
-extern HudElementAnim HudScript_BButton;
-extern HudElementAnim HudScript_100pct;
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
+extern HudScript HudScript_BButton;
+extern HudScript HudScript_100pct;
 extern s32 D_802943C0;
 
-extern HudElementAnim HudScript_MashAButton;
-extern HudElementAnim HudScript_MashBButton1;
+extern HudScript HudScript_MashAButton;
+extern HudScript HudScript_MashBButton1;
 
 void sfx_adjust_env_sound_params(s32, s32, s32, s32);
 

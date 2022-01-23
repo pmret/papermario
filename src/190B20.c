@@ -11,7 +11,7 @@ typedef struct PartnerDMAData {
     /* 0x00 */ s32 dmaStart;
     /* 0x04 */ s32 dmaEnd;
     /* 0x08 */ s32 dmaDest;
-    /* 0x0C */ ActorDesc* actorDesc;
+    /* 0x0C */ ActorBlueprint* ActorBlueprint;
     /* 0x10 */ s32 y;
 } PartnerDMAData; // size = 0x14
 
@@ -994,7 +994,7 @@ s32 bPlayerStatusTable[] = {
     STATUS_END,
 };
 
-ActorDesc bPlayerActorDesc = {
+ActorBlueprint bPlayerActorBlueprint = {
     .type = ACTOR_TYPE_PLAYER,
     .maxHP = 99,
     .statusTable = bPlayerStatusTable,
@@ -1013,7 +1013,7 @@ ActorDesc bPlayerActorDesc = {
     .statusMessageOffset = { 10, 30 },
 };
 
-ActorPartDesc bMarioParts[] = {
+ActorPartBlueprint bMarioParts[] = {
     {
         .index = 1,
         .posOffset = { 0, 0, 0 },
@@ -1097,25 +1097,26 @@ s32 D_802838F8 = 0;
 
 extern PartnerDMAData D_80283F10[];
 
-extern EvtSource D_80293820;
+extern EvtScript D_80293820;
 extern f32 D_802938A4;
 extern s16 D_802938A8;
 extern EffectInstance* gDamageCountEffects[24];
 extern s32 gDamageCountTimers[24];
 extern Gfx D_80293970[];
 extern s32 D_802939C0;
-extern EvtSource D_802939C4;
-extern EvtSource D_80293A10;
-extern EvtSource D_80293A34;
-extern EvtSource D_80293A58;
-extern EvtSource D_80293A7C;
-extern EvtSource D_80293AA0;
-extern EvtSource D_80293AC4;
+extern EvtScript D_802939C4;
+extern EvtScript D_80293A10;
+extern EvtScript D_80293A34;
+extern EvtScript D_80293A58;
+extern EvtScript D_80293A7C;
+extern EvtScript D_80293AA0;
+extern EvtScript D_80293AC4;
 
 s32 func_80265CE8(u32*, s32);
 
 void create_target_list(Actor* actor, s32 arg1);
 INCLUDE_ASM(s32, "190B20", create_target_list);
+
 void func_80266DAC(Actor* actor, s32 arg1);
 
 void player_create_target_list(Actor* actor) {
@@ -1126,14 +1127,81 @@ void enemy_create_target_list(Actor* actor) {
     create_target_list(actor, 1);
 }
 
-void func_80263064(s32, s32, s32);
-INCLUDE_ASM(s32, "190B20", func_80263064);
+s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
+    s32 ret = 0;
+    SelectableTarget* target = actor0->targetData;
+    s32 numParts;
+    ActorPart* part;
+    s32 i;
 
-void func_80263230(s32 arg0, s32 arg1) {
+    if (actor1 == NULL) {
+        return ret;
+    }
+
+    numParts = actor1->numParts;
+    part = actor1->partsTable;
+
+    for (i = 0; i < numParts; i++) {
+        if (!(part->flags & 0x20000)) {
+            if (!(part->flags & 0x800000)) {
+                continue;
+            } else {
+                ActorPartBlueprint* bp = part->staticData;
+                f32 x, y, z;
+
+                if (!(part->flags & 0x100000)) {
+                    x = actor1->currentPos.x;
+                    y = actor1->currentPos.y;
+                    z = actor1->currentPos.z;
+
+                    x += part->partOffset.x;
+                    if (!(actor1->flags & 0x800)) {
+                        y += part->partOffset.y;
+                    } else {
+                        y -= part->partOffset.y;
+                    }
+                    z += part->partOffset.z;
+
+                    x += part->targetOffset.x;
+                    if (!(actor1->flags & 0x800)) {
+                        y += part->targetOffset.y;
+                    } else {
+                        y -= part->targetOffset.y;
+                    }
+                } else {
+                    x = part->absolutePosition.x;
+                    y = part->absolutePosition.y;
+                    z = part->absolutePosition.z;
+
+                    x += part->targetOffset.x;
+                    if (!(actor1->flags & 0x800)) {
+                        y += part->targetOffset.y;
+                    } else {
+                        y -= part->targetOffset.y;
+                    }
+                }
+
+                actor0->targetActorID = target->actorID = actor1->actorID;
+                actor0->targetPartIndex = target->partID = bp->index;
+                target->pos.x = x;
+                target->pos.y = y;
+                target->pos.z = z;
+                target->unk_10 = 0;
+                target++;
+                ret++;
+            }
+        }
+        part = part->nextPart;
+    }
+    actor0->targetListLength = ret;
+    return ret;
+}
+
+void func_80263230(Actor* arg0, Actor* arg1) {
     func_80263064(arg0, arg1, 0);
 }
 
-void func_8026324C(s32 arg0, s32 arg1) {
+void func_8026324C(Actor* arg0, Actor* arg1) {
     func_80263064(arg0, arg1, 1);
 }
 
@@ -1186,12 +1254,12 @@ void func_80263300(void) {
         s16 itemID = playerData->invItems[i];
 
         if (itemID != 0) {
-            StaticItem* staticItem = &gItemTable[itemID];
+            ItemData* ItemData = &gItemTable[itemID];
 
-            if (staticItem->typeFlags & 2) {
+            if (ItemData->typeFlags & 2) {
                 battleStatus->moveCategory = 2;
                 battleStatus->selectedItemID = playerData->invItems[i];
-                battleStatus->currentTargetListFlags = staticItem->targetFlags;
+                battleStatus->currentTargetListFlags = ItemData->targetFlags;
                 player_create_target_list(player);
 
                 if (player->targetListLength != 0) {
@@ -1249,7 +1317,7 @@ void btl_init_menu_boots(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Actor* player = battleStatus->playerActor;
-    StaticMove* move;
+    MoveData* move;
     s32 i;
     s32 moveCount;
     s32 hasAnyBadgeMoves;
@@ -1276,7 +1344,7 @@ void btl_init_menu_boots(void) {
             s16 badge = playerData->equippedBadges[i];
 
             if (badge != ITEM_NONE) {
-                StaticMove* moveTable = gMoveTable;
+                MoveData* moveTable = gMoveTable;
                 u8 moveID = gItemTable[badge].moveID;
 
                 move = &moveTable[moveID];
@@ -1346,7 +1414,7 @@ void btl_init_menu_hammer(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Actor* player = battleStatus->playerActor;
-    StaticMove* move;
+    MoveData* move;
     s32 i;
     s32 moveCount;
     s32 hasAnyBadgeMoves;
@@ -1372,7 +1440,7 @@ void btl_init_menu_hammer(void) {
         for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
             s16 badge = playerData->equippedBadges[i];
             if (badge != MOVE_NONE) {
-                StaticMove* moveTable = gMoveTable;
+                MoveData* moveTable = gMoveTable;
                 u8 moveID = gItemTable[badge].moveID;
                 move = &moveTable[moveID];
                 if (move->battleSubmenu == BATTLE_SUBMENU_HAMMER) {
@@ -1460,13 +1528,13 @@ void btl_init_menu_partner(void) {
     //  4              | Unlocked after super | Charge
     //  5              | Unlocked after ultra | Multibonk
 
-    battleStatus->submenuMoveCount = partner->staticActorData->level + 2;
+    battleStatus->submenuMoveCount = partner->actorBlueprint->level + 2;
 
     // Offsets 0,1,2
     battleStatus->submenuMoves[0] =
         playerData->currentPartner * 6
         + (MOVE_HEADBONK1 - 6)
-        + partner->staticActorData->level;
+        + partner->actorBlueprint->level;
 
     // Offsets 3,4,5
     for (i = 1; i < battleStatus->submenuMoveCount; i++) {
@@ -1478,7 +1546,7 @@ void btl_init_menu_partner(void) {
 
     hasAnyBadgeMoves = FALSE;
     for (i = 0; i < battleStatus->submenuMoveCount; i++){
-        StaticMove* move = &gMoveTable[battleStatus->submenuMoves[i]];
+        MoveData* move = &gMoveTable[battleStatus->submenuMoves[i]];
 
         fpCost = move->costFP;
         if (fpCost != 0) {
@@ -1490,7 +1558,7 @@ void btl_init_menu_partner(void) {
         }
 
         battleStatus->moveCategory = 5;
-        battleStatus->selectedItemID = partner->staticActorData->level;
+        battleStatus->selectedItemID = partner->actorBlueprint->level;
         battleStatus->currentTargetListFlags = move->flags;
         player_create_target_list(partner);
 
@@ -1805,8 +1873,8 @@ void load_player_actor(void) {
     player->unk_134 = battleStatus->unk_93++;
     player->footStepCounter = 0;
     player->flags = 0;
-    player->staticActorData = &bPlayerActorDesc;
-    player->actorType = bPlayerActorDesc.type;
+    player->actorBlueprint = &bPlayerActorBlueprint;
+    player->actorType = bPlayerActorBlueprint.type;
 
     if ((gBattleStatus.flags2 & BS_FLAGS2_40) || (gGameStatusPtr->demoFlags & 2)) {
         player->homePos.x = player->currentPos.x = -130.0f;
@@ -1836,8 +1904,8 @@ void load_player_actor(void) {
     player->scaleModifier.x = 1.0f;
     player->scaleModifier.y = 1.0f;
     player->scaleModifier.z = 1.0f;
-    player->size.x = player->staticActorData->size.x;
-    player->size.y = player->staticActorData->size.y;
+    player->size.x = player->actorBlueprint->size.x;
+    player->size.y = player->actorBlueprint->size.y;
     player->actorID = 0;
     player->healthBarPosition.x = player->currentPos.x;
     player->healthBarPosition.y = player->currentPos.y;
@@ -1993,7 +2061,7 @@ void load_player_actor(void) {
 
     ASSERT(partMovement != NULL);
 
-    player->shadow = create_shadow_type(0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+    player->shadow.id = create_shadow_type(0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
     player->shadowScale = player->size.x / 24.0;
     player->hudElementDataIndex = create_status_icon_set();
     player->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
@@ -2009,7 +2077,7 @@ void load_partner_actor(void) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor;
-    ActorDesc* actorDesc;
+    ActorBlueprint* ActorBlueprint;
     Evt* takeTurnScript;
     s32 partCount;
     s32 currentPartner;
@@ -2026,9 +2094,9 @@ void load_partner_actor(void) {
 
     if (currentPartner != PARTNER_NONE) {
         partnerData = &D_80283F10[currentPartner];
-        actorDesc = partnerData->actorDesc;
+        ActorBlueprint = partnerData->ActorBlueprint;
 
-        ASSERT(actorDesc != NULL);
+        ASSERT(ActorBlueprint != NULL);
 
         nuPiReadRom(partnerData->dmaStart, partnerData->dmaDest, partnerData->dmaEnd - partnerData->dmaStart);
         if ((gBattleStatus.flags2 & BS_FLAGS2_40) || (gGameStatusPtr->demoFlags & 2)) {
@@ -2041,28 +2109,28 @@ void load_partner_actor(void) {
             y = partnerData->y;
             z = -10.0f;
         }
-        partCount = actorDesc->partCount;
+        partCount = ActorBlueprint->partCount;
         battleStatus->partnerActor = heap_malloc(sizeof(*partnerActor));
         partnerActor = battleStatus->partnerActor;
 
         ASSERT(partnerActor != NULL);
 
-        actorDesc->level = playerData->partners[playerData->currentPartner].level;
+        ActorBlueprint->level = playerData->partners[playerData->currentPartner].level;
         partnerActor->unk_134 = battleStatus->unk_93++;
         partnerActor->footStepCounter = 0;
-        partnerActor->staticActorData = actorDesc;
-        partnerActor->actorType = actorDesc->type;
-        partnerActor->flags = actorDesc->flags;
+        partnerActor->actorBlueprint = ActorBlueprint;
+        partnerActor->actorType = ActorBlueprint->type;
+        partnerActor->flags = ActorBlueprint->flags;
         partnerActor->homePos.x = partnerActor->currentPos.x = x;
         partnerActor->homePos.y = partnerActor->currentPos.y = y;
         partnerActor->homePos.z = partnerActor->currentPos.z = z;
         partnerActor->headOffset.x = 0;
         partnerActor->headOffset.y = 0;
         partnerActor->headOffset.z = 0;
-        partnerActor->currentHP = actorDesc->maxHP;
+        partnerActor->currentHP = ActorBlueprint->maxHP;
         partnerActor->numParts = partCount;
         partnerActor->idleScriptSource = NULL;
-        partnerActor->takeTurnScriptSource = actorDesc->script;
+        partnerActor->takeTurnScriptSource = ActorBlueprint->script;
         partnerActor->onHitScriptSource = NULL;
         partnerActor->onTurnChanceScriptSource = NULL;
         partnerActor->idleScript = NULL;
@@ -2085,8 +2153,8 @@ void load_partner_actor(void) {
         partnerActor->scaleModifier.y = 1.0f;
         partnerActor->scaleModifier.z = 1.0f;
         partnerActor->unk_19A = 0;
-        partnerActor->size.x = actorDesc->size.x;
-        partnerActor->size.y = actorDesc->size.y;
+        partnerActor->size.x = ActorBlueprint->size.x;
+        partnerActor->size.y = ActorBlueprint->size.y;
         partnerActor->healthBarPosition.x = partnerActor->homePos.x;
         partnerActor->healthBarPosition.y = partnerActor->homePos.y;
         partnerActor->healthBarPosition.z = partnerActor->homePos.z;
@@ -2100,7 +2168,7 @@ void load_partner_actor(void) {
         partnerActor->unk_197 = 0;
         partnerActor->renderMode = RENDER_MODE_ALPHATEST;
         partnerActor->actorID = ACTOR_PARTNER;
-        partnerActor->statusTable = actorDesc->statusTable;
+        partnerActor->statusTable = ActorBlueprint->statusTable;
         partnerActor->debuff = 0;
         partnerActor->debuffDuration = 0;
         partnerActor->staticStatus = 0;
@@ -2138,16 +2206,16 @@ void load_partner_actor(void) {
         ASSERT(part != NULL);
 
         for (i = 0; i < partCount; i++) {
-            ActorPartDesc* actorPartDesc = &actorDesc->partsData[i];
+            ActorPartBlueprint* ActorPartBlueprint = &ActorBlueprint->partsData[i];
             part->decorationTable = NULL;
-            part->staticData = actorPartDesc;
+            part->staticData = ActorPartBlueprint;
 
-            part->flags = actorPartDesc->flags | ACTOR_PART_FLAG_4;
+            part->flags = ActorPartBlueprint->flags | ACTOR_PART_FLAG_4;
             part->targetFlags = 0;
 
-            part->partOffsetFloat.x = part->partOffset.x = actorPartDesc->posOffset.x;
-            part->partOffsetFloat.y = part->partOffset.y = actorPartDesc->posOffset.y;
-            part->partOffsetFloat.z = part->partOffset.z = actorPartDesc->posOffset.z;
+            part->partOffsetFloat.x = part->partOffset.x = ActorPartBlueprint->posOffset.x;
+            part->partOffsetFloat.y = part->partOffset.y = ActorPartBlueprint->posOffset.y;
+            part->partOffsetFloat.z = part->partOffset.z = ActorPartBlueprint->posOffset.z;
 
             part->visualOffset.x = 0;
             part->visualOffset.y = 0;
@@ -2155,16 +2223,16 @@ void load_partner_actor(void) {
             part->absolutePosition.x = 0.0f;
             part->absolutePosition.y = 0.0f;
             part->absolutePosition.z = 0.0f;
-            part->defenseTable = actorPartDesc->defenseTable;
-            part->idleAnimations = actorPartDesc->idleAnimations;
-            part->eventFlags = actorPartDesc->eventFlags;
-            part->partFlags3 = actorPartDesc->elementImmunityFlags;
-            part->opacity = actorPartDesc->opacity;
+            part->defenseTable = ActorPartBlueprint->defenseTable;
+            part->idleAnimations = ActorPartBlueprint->idleAnimations;
+            part->eventFlags = ActorPartBlueprint->eventFlags;
+            part->partFlags3 = ActorPartBlueprint->elementImmunityFlags;
+            part->opacity = ActorPartBlueprint->opacity;
             part->size.y = partnerActor->size.y;
             part->size.x = partnerActor->size.x;
             part->yaw = 0.0f;
-            part->targetOffset.x = actorPartDesc->targetOffset.x;
-            part->targetOffset.y = actorPartDesc->targetOffset.y;
+            part->targetOffset.x = ActorPartBlueprint->targetOffset.x;
+            part->targetOffset.y = ActorPartBlueprint->targetOffset.y;
             part->unk_70 = 0;
             part->rotationPivotOffset.x = 0;
             part->rotationPivotOffset.y = 0;
@@ -2247,7 +2315,7 @@ void load_partner_actor(void) {
             part->nextPart = NULL;
         }
 
-        partnerActor->shadow = create_shadow_type(0, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z);
+        partnerActor->shadow.id = create_shadow_type(0, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z);
         partnerActor->shadowScale = partnerActor->size.x / 24.0;
         partnerActor->hudElementDataIndex = create_status_icon_set();
         partnerActor->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
@@ -2259,7 +2327,273 @@ void load_partner_actor(void) {
     }
 }
 
-INCLUDE_ASM(s32, "190B20", create_actor);
+Actor* create_actor(Formation formation) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* actor;
+    ActorBlueprint* formationActor;
+    ActorPart* part;
+    ActorPartBlueprint* partBP;
+    Evt* takeTurnScript;
+    s32 partCount;
+    f32 x, y, z;
+    DecorationTable* decorationTable;
+    s32 i, j, k;
+
+    if (formation->home.index >= -270000000) {
+        x = btl_actorHomePositions[formation->home.index].x;
+        y = btl_actorHomePositions[formation->home.index].y;
+        z = btl_actorHomePositions[formation->home.index].z;
+    } else {
+        x = formation->home.vec->x;
+        y = formation->home.vec->y;
+        z = formation->home.vec->z;
+    }
+
+    formationActor = formation->actor;
+    partCount = formationActor->partCount;
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        if (battleStatus->enemyActors[i] == NULL) {
+            break;
+        }
+    }
+
+    battleStatus->enemyActors[i] = heap_malloc(sizeof(*actor));
+    actor = battleStatus->enemyActors[i];
+    ASSERT(actor != NULL);
+
+    actor->unk_134 = battleStatus->unk_93++;
+    actor->footStepCounter = 0;
+    actor->actorBlueprint = formationActor;
+    actor->actorType = formationActor->type;
+    actor->flags = formationActor->flags;
+    actor->homePos.x = actor->currentPos.x = x;
+    actor->homePos.y = actor->currentPos.y = y;
+    actor->homePos.z = actor->currentPos.z = z;
+    actor->headOffset.x = 0;
+    actor->headOffset.y = 0;
+    actor->headOffset.z = 0;
+    actor->maxHP = actor->currentHP = formationActor->maxHP;
+    actor->numParts = partCount;
+    actor->idleScriptSource = NULL;
+    actor->takeTurnScriptSource = formationActor->script;
+    actor->onHitScriptSource = NULL;
+    actor->onTurnChanceScriptSource = NULL;
+    actor->idleScript = NULL;
+    actor->takeTurnScript = NULL;
+    actor->onHitScript = NULL;
+    actor->turnPriority = formation->priority;
+    actor->enemyIndex = i;
+    actor->yaw = 0.0f;
+    actor->rotation.x = 0.0f;
+    actor->rotation.y = 0.0f;
+    actor->rotation.z = 0.0f;
+    actor->rotationPivotOffset.x = 0;
+    actor->rotationPivotOffset.y = 0;
+    actor->rotationPivotOffset.z = 0;
+    actor->scale.x = 1.0f;
+    actor->scale.y = 1.0f;
+    actor->scale.z = 1.0f;
+    actor->scaleModifier.x = 1.0f;
+    actor->scaleModifier.y = 1.0f;
+    actor->scaleModifier.z = 1.0f;
+    actor->unk_19A = 0;
+    actor->extraCoinBonus = 0;
+    actor->size.x = formationActor->size.x;
+    actor->size.y = formationActor->size.y;
+    actor->scalingFactor = 1.0f;
+    actor->unk_194 = 0;
+    actor->unk_195 = 0;
+    actor->unk_196 = 0;
+    actor->unk_197 = 0;
+    actor->unk_198.x = 0;
+    actor->unk_198.y = 0;
+    actor->unk_206 = 0;
+    actor->unk_200 = NULL;
+    actor->unk_204 = 0;
+    actor->unk_205 = 0;
+
+    actor->healthBarPosition.x = actor->currentPos.x + formationActor->hpBarOffset.x;
+    actor->healthBarPosition.y = actor->currentPos.y + formationActor->hpBarOffset.y;
+    actor->healthBarPosition.z = actor->currentPos.z;
+    if (actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+        actor->healthBarPosition.y = actor->currentPos.y - actor->size.y - formationActor->hpBarOffset.y;
+    }
+
+    actor->statusTable = formationActor->statusTable;
+    actor->debuff = 0;
+    actor->debuffDuration = 0;
+    actor->staticStatus = 0;
+    actor->staticDuration = 0;
+    actor->stoneStatus = 0;
+    actor->stoneDuration = 0;
+    actor->koStatus = 0;
+    actor->koDuration = 0;
+    actor->transStatus = 0;
+    actor->transDuration = 0;
+    actor->isGlowing = 0;
+    actor->unk_21E = 0;
+    actor->unk_21D = 0;
+    actor->attackBoost = 0;
+    actor->defenseBoost = 0;
+    actor->chillOutAmount = 0;
+    actor->chillOutTurns = 0;
+    actor->status = 0;
+    actor->actorTypeData1[0] = bActorSoundTable[actor->actorType].walk[0];
+    actor->actorTypeData1[1] = bActorSoundTable[actor->actorType].walk[1];
+    actor->actorTypeData1[2] = bActorSoundTable[actor->actorType].fly[0];
+    actor->actorTypeData1[3] = bActorSoundTable[actor->actorType].fly[1];
+    actor->actorTypeData1[4] = bActorSoundTable[actor->actorType].jump;
+    actor->actorTypeData1[5] = bActorSoundTable[actor->actorType].hurt;
+    actor->actorTypeData1b[0] = bActorSoundTable[actor->actorType].delay[0];
+    actor->actorTypeData1b[1] = bActorSoundTable[actor->actorType].delay[1];
+
+    for (i = 0; i < ARRAY_COUNT(actor->unk_438); i++) {
+        actor->unk_438[i] = 0;
+    }
+
+    actor->state.varTable[0] = formation->var0;
+    actor->state.varTable[1] = formation->var1;
+    actor->state.varTable[2] = formation->var2;
+    actor->state.varTable[3] = formation->var3;
+    actor->renderMode = RENDER_MODE_ALPHATEST;
+    actor->unk_208 = 0;
+    part = heap_malloc(sizeof(*part));
+    actor->partsTable = part;
+    ASSERT(part != NULL);
+
+    for (j = 0; j < partCount; j++) {
+        ActorPartBlueprint* actorPartBP = &formationActor->partsData[j];
+
+        part->decorationTable = NULL;
+        part->staticData = actorPartBP;
+        part->flags = actorPartBP->flags | ACTOR_PART_FLAG_4;
+        part->targetFlags = 0;
+
+        part->partOffsetFloat.x = part->partOffset.x = actorPartBP->posOffset.x;
+        part->partOffsetFloat.y = part->partOffset.y = actorPartBP->posOffset.y;
+        part->partOffsetFloat.z = part->partOffset.z = actorPartBP->posOffset.z;
+
+        part->visualOffset.x = 0;
+        part->visualOffset.y = 0;
+        part->visualOffset.z = 0;
+
+        part->absolutePosition.x = actor->currentPos.x;
+        part->absolutePosition.y = actor->currentPos.y;
+        part->absolutePosition.z = actor->currentPos.z;
+        part->currentPos.x = actor->currentPos.x;
+        part->currentPos.y = actor->currentPos.y;
+        part->currentPos.z = actor->currentPos.z;
+        part->defenseTable = actorPartBP->defenseTable;
+        part->idleAnimations = actorPartBP->idleAnimations;
+        part->eventFlags = actorPartBP->eventFlags;
+        part->partFlags3 = actorPartBP->elementImmunityFlags;
+        part->opacity = actorPartBP->opacity;
+        if (part->opacity < 255) {
+            actor->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
+        }
+        part->size.y = actor->size.y;
+        part->size.x = actor->size.x;
+        part->yaw = 0.0f;
+        part->targetOffset.x = actorPartBP->targetOffset.x;
+        part->targetOffset.y = actorPartBP->targetOffset.y;
+        part->unk_70 = 0;
+        part->unk_75 = actorPartBP->unk_1C;
+        part->unk_76 = actorPartBP->unk_1D;
+        part->rotation.x = 0.0f;
+        part->rotation.y = 0.0f;
+        part->rotation.z = 0.0f;
+        part->rotationPivotOffset.x = 0;
+        part->rotationPivotOffset.y = 0;
+        part->rotationPivotOffset.z = 0;
+        part->scale.x = 1.0f;
+        part->scale.y = 1.0f;
+        part->scale.z = 1.0f;
+        part->verticalStretch = 1;
+        part->unkOffset[0] = 0;
+        part->unkOffset[1] = 0;
+        part->partTypeData[0] = bActorSoundTable[actor->actorType].walk[0];
+        part->partTypeData[1] = bActorSoundTable[actor->actorType].walk[1];
+        part->partTypeData[2] = bActorSoundTable[actor->actorType].fly[0];
+        part->partTypeData[3] = bActorSoundTable[actor->actorType].fly[1];
+        part->partTypeData[4] = bActorSoundTable[actor->actorType].jump;
+        part->partTypeData[5] = bActorSoundTable[actor->actorType].hurt;
+        part->actorTypeData2b[0] = bActorSoundTable[actor->actorType].delay[0];
+        part->actorTypeData2b[1] = bActorSoundTable[actor->actorType].delay[1];
+
+        if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
+            part->decorationTable = heap_malloc(sizeof(*decorationTable));
+            decorationTable = part->decorationTable;
+            ASSERT(decorationTable != NULL);
+
+            decorationTable->unk_6C0 = 0;
+            decorationTable->unk_750 = 0;
+            decorationTable->unk_764 = 0;
+            decorationTable->unk_768 = 0;
+            decorationTable->unk_7D8 = 0;
+            decorationTable->unk_7D9 = 0;
+
+            for (k = 0; k < ARRAY_COUNT(decorationTable->posX); k++) {
+                decorationTable->posX[k] = actor->currentPos.x;
+                decorationTable->posY[k] = actor->currentPos.y;
+                decorationTable->posZ[k] = actor->currentPos.z;
+            }
+
+            decorationTable->unk_7DA = 3;
+            decorationTable->unk_7DB = 0;
+            decorationTable->effectType = 0;
+
+            for (k = 0; k < ARRAY_COUNT(decorationTable->unk_8B0); k++) {
+                decorationTable->unk_8B0[k] = NULL;
+                decorationTable->decorationType[k] = 0;
+            }
+
+        }
+
+        if (part->flags >= 0) {
+            part->movement = heap_malloc(sizeof(*part->movement));
+            ASSERT(part->movement != NULL);
+        }
+
+        if (actor->flags & 0x4000) {
+            part->flags |= 0x4000;
+        }
+
+        part->animationRate = 1.0f;
+        part->currentAnimation = 0;
+        part->unk_84 = -1;
+
+        if (part->idleAnimations != NULL) {
+            part->currentAnimation = func_80265CE8(part->idleAnimations, 1) & ~0x80000000;
+            part->unk_84 = spr_load_npc_sprite(part->currentAnimation, NULL);
+        }
+
+        if (j + 1 >= partCount) {
+            part->nextPart = NULL;
+            continue;
+        }
+
+        part->nextPart = heap_malloc(sizeof(*part->nextPart));
+        part = part->nextPart;
+        if (part == NULL) {
+            PANIC();
+        }
+
+        part->nextPart = NULL;
+    }
+
+    actor->hpFraction = 25;
+    actor->actorID = actor->enemyIndex | 0x200;
+    takeTurnScript = start_script(actor->takeTurnScriptSource, 0xA, 0);
+    actor->takeTurnID = takeTurnScript->id;
+    takeTurnScript->owner1.enemyID = actor->enemyIndex | 0x200;
+    actor->shadow.id = create_shadow_type(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+    actor->shadowScale = actor->size.x / 24.0;
+    actor->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
+    actor->unk_228 = NULL;
+    actor->hudElementDataIndex = create_status_icon_set();
+    return actor;
+}
 
 s32 func_80265CE8(u32* anim, s32 arg1) {
     s32 ret;
@@ -2629,9 +2963,57 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
     return minDefense;
 }
 
-INCLUDE_ASM(s32, "190B20", func_802664DC);
+void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a) {
+    s32 i;
 
-INCLUDE_ASM(void, "190B20", show_damage_popup, f32 x, f32 y, f32 z, s32 damageAmount, s32 arg4);
+    for (i = 0; i < 1; i++) {
+        if (gDamageCountEffects[i] == NULL) {
+            break;
+        }
+    }
+
+    if (i > 0) {
+        i = 0;
+        // TODO use actual effect instance struct when we know what it is
+        ((s32*)gDamageCountEffects[i]->data)[12] = 5;
+        gDamageCountEffects[i] = NULL;
+    }
+
+    if (a == 0) {
+        a = -55;
+    } else {
+        a = 55;
+    }
+
+    playFX_1E(0, x, y, z, 10.0f, a, attack, &gDamageCountEffects[i]);
+    gDamageCountTimers[i] = 40;
+}
+
+void show_damage_popup(f32 x, f32 y, f32 z, s32 attack, s32 a) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gDamageCountEffects); i++) {
+        if (gDamageCountEffects[i] == NULL) {
+            break;
+        }
+    }
+
+    if (i > ARRAY_COUNT(gDamageCountEffects) - 1) {
+        i = 0;
+        // TODO use actual effect instance struct when we know what it is
+        ((s32*)gDamageCountEffects[i]->data)[12] = 5;
+        gDamageCountEffects[i] = NULL;
+    }
+
+    if (a == 0) {
+        a = -55;
+    } else {
+        a = 55;
+    }
+
+    playFX_1E(0, x, y, z, 10.0f, a, attack, &gDamageCountEffects[i]);
+    gDamageCountTimers[i] = 40;
+}
 
 void func_80266684(void) {
     s32 i;
@@ -2656,7 +3038,67 @@ void func_80266970(Actor* target) {
     target->unk_204 = 0;
 }
 
-INCLUDE_ASM(s32, "190B20", func_80266978);
+void func_80266978(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* actor;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        actor = gBattleStatus.enemyActors[i];
+        if (actor != NULL) {
+            if (actor->unk_205 == 0x3C) {
+                if (actor->unk_200 != 0) {
+                    actor->unk_200[3][9] = 0;
+                }
+            }
+            if (actor->unk_205 == 5) {
+                if (actor->unk_200 != 0) {
+                    actor->unk_200[3][6] = 0;
+                    actor->unk_200 = NULL;
+                }
+            }
+            if (actor->unk_205 > 0) {
+                actor->unk_205--;
+            }
+        }
+    }
+
+    actor = battleStatus->playerActor;
+    if (actor != NULL) {
+        if (actor->unk_205 == 60) {
+            if (actor->unk_200 != NULL) {
+                actor->unk_200[3][9] = 0;
+            }
+        }
+        if (actor->unk_205 == 5) {
+            if (actor->unk_200 != NULL) {
+                actor->unk_200[3][6] = 0;
+                actor->unk_200 = NULL;
+            }
+        }
+        if (actor->unk_205 > 0) {
+            actor->unk_205--;
+        }
+    }
+
+    actor = battleStatus->partnerActor;
+    if (actor != NULL) {
+        if (actor->unk_205 == 60) {
+            if (actor->unk_200 != NULL) {
+                actor->unk_200[3][9] = 0;
+            }
+        }
+        if (actor->unk_205 == 5) {
+            if (actor->unk_200 != NULL) {
+                actor->unk_200[3][6] = 0;
+                actor->unk_200 = NULL;
+            }
+        }
+        if (actor->unk_205 > 0) {
+            actor->unk_205--;
+        }
+    }
+}
 
 void func_80266ADC(Actor* target) {
     target->unk_206 = -1;

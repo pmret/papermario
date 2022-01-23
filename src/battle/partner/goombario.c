@@ -1,34 +1,33 @@
-#define NAMESPACE battle_partner_goombario
-
 #include "common.h"
 #include "effects.h"
-#include "message_ids.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
 #include "sprite/npc/battle_goombario.h"
+
+#define NAMESPACE battle_partner_goombario
 
 extern EffectInstance* D_8023CDA0;
 extern s32 D_8023CDA4;
 extern s32 D_8023BB98_6ECC78;
 extern s32 bActorTattles[ACTOR_TYPE_COUNT];
 
-extern EvtSource N(init);
-extern EvtSource N(80239784);
-extern EvtSource N(802397E0);
-extern EvtSource N(8023993C);
-extern EvtSource N(8023994C);
-extern EvtSource N(80239988);
-extern EvtSource N(8023A754);
-extern EvtSource N(8023ADC4);
-extern EvtSource N(8023B45C);
-extern EvtSource N(8023BB9C);
-extern EvtSource N(8023C5B8);
-extern EvtSource N(8023C90C);
-extern EvtSource N(handleEvent_80239360);
-extern EvtSource N(idle_80239350);
-extern EvtSource N(nextTurn_80239A3C);
-extern EvtSource N(takeTurn_802396D8);
+extern EvtScript N(init);
+extern EvtScript N(80239784);
+extern EvtScript N(802397E0);
+extern EvtScript N(8023993C);
+extern EvtScript N(8023994C);
+extern EvtScript N(80239988);
+extern EvtScript N(8023A754);
+extern EvtScript N(8023ADC4);
+extern EvtScript N(8023B45C);
+extern EvtScript N(8023BB9C);
+extern EvtScript N(8023C5B8);
+extern EvtScript N(8023C90C);
+extern EvtScript N(handleEvent_80239360);
+extern EvtScript N(idle_80239350);
+extern EvtScript N(nextTurn_80239A3C);
+extern EvtScript N(takeTurn_802396D8);
 
 ApiStatus func_802380E4_6F11C4(Evt* script, s32 isInitialCall);
 ApiStatus func_8023817C_6F125C(Evt* script, s32 isInitialCall);
@@ -66,7 +65,7 @@ ApiStatus func_802380E4_6F11C4(Evt* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
 
     script->varTable[0] = 99;
-    D_8023BB98_6ECC78 *= targetActor->staticActorData->powerBounceChance;
+    D_8023BB98_6ECC78 *= targetActor->actorBlueprint->powerBounceChance;
     D_8023BB98_6ECC78 /= 100;
     if (D_8023BB98_6ECC78 < rand_int(100)) {
         script->varTable[0] = 0;
@@ -279,7 +278,7 @@ s32 N(statusTable_802391F8)[] = {
     STATUS_END,
 };
 
-ActorPartDesc N(partsTable_802392A4)[] = {
+ActorPartBlueprint N(partsTable_802392A4)[] = {
     {
         .flags = 0,
         .index = 1,
@@ -293,9 +292,9 @@ ActorPartDesc N(partsTable_802392A4)[] = {
     },
 };
 
-extern EvtSource N(init_802392F0);
+extern EvtScript N(init_802392F0);
 
-ActorDesc N(goombario) = {
+ActorBlueprint N(goombario) = {
     .flags = 0,
     .type = ACTOR_TYPE_GOOMBARIO,
     .level = 0,
@@ -318,7 +317,7 @@ ActorDesc N(goombario) = {
     .statusMessageOffset = { 10, 20 },
 };
 
-EvtSource N(init_802392F0) = {
+EvtScript N(init_802392F0) = {
     EVT_CALL(BindTakeTurn, 256, EVT_PTR(battle_partner_goombario_takeTurn_802396D8))
     EVT_CALL(BindIdle, 256, EVT_PTR(battle_partner_goombario_idle_80239350))
     EVT_CALL(BindHandleEvent, 256, EVT_PTR(battle_partner_goombario_handleEvent_80239360))
@@ -327,12 +326,12 @@ EvtSource N(init_802392F0) = {
     EVT_END
 };
 
-EvtSource N(idle_80239350) = {
+EvtScript N(idle_80239350) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(handleEvent_80239360) = {
+EvtScript N(handleEvent_80239360) = {
     EVT_CALL(UseIdleAnimation, 256, 0)
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(GetLastEvent, 256, EVT_VAR(0))
@@ -400,7 +399,7 @@ EvtSource N(handleEvent_80239360) = {
     EVT_END
 };
 
-EvtSource N(takeTurn_802396D8) = {
+EvtScript N(takeTurn_802396D8) = {
     EVT_CALL(GetBattlePhase, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(1)
@@ -418,7 +417,7 @@ EvtSource N(takeTurn_802396D8) = {
     EVT_END
 };
 
-EvtSource N(80239784) = {
+EvtScript N(80239784) = {
     EVT_SET_CONST(EVT_VAR(0), 0x1)
     EVT_SET_CONST(EVT_VAR(1), 0x90010)
     EVT_SET_CONST(EVT_VAR(2), 0x90011)
@@ -428,7 +427,7 @@ EvtSource N(80239784) = {
     EVT_END
 };
 
-EvtSource N(802397E0) = {
+EvtScript N(802397E0) = {
     EVT_CALL(GetMenuSelection, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(func_802694A4, 1)
     EVT_CALL(SetBattleFlagBits, 16384, 0)
@@ -460,12 +459,12 @@ EvtSource N(802397E0) = {
     EVT_END
 };
 
-EvtSource N(8023993C) = {
+EvtScript N(8023993C) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(8023994C) = {
+EvtScript N(8023994C) = {
     EVT_SET_CONST(EVT_VAR(0), 0x1)
     EVT_SET_CONST(EVT_VAR(1), 0x90003)
     EVT_EXEC_WAIT(D_80294AFC)
@@ -473,7 +472,7 @@ EvtSource N(8023994C) = {
     EVT_END
 };
 
-EvtSource N(80239988) = {
+EvtScript N(80239988) = {
     EVT_CALL(UseIdleAnimation, 256, 0)
     EVT_CALL(SetGoalToHome, 256)
     EVT_CALL(SetActorSpeed, 256, EVT_FIXED(6.0))
@@ -486,7 +485,7 @@ EvtSource N(80239988) = {
     EVT_END
 };
 
-EvtSource N(nextTurn_80239A3C) = {
+EvtScript N(nextTurn_80239A3C) = {
     EVT_CALL(GetBattlePhase, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(10)
@@ -529,7 +528,7 @@ EvtSource N(nextTurn_80239A3C) = {
     EVT_END
 };
 
-EvtSource N(80239CA8) = {
+EvtScript N(80239CA8) = {
     EVT_CALL(func_80280818)
     EVT_CALL(UseBattleCamPreset, 51)
     EVT_CALL(SetAnimation, 256, -1, 589825)
@@ -549,7 +548,7 @@ EvtSource N(80239CA8) = {
     EVT_SUB(EVT_VAR(0), 30)
     EVT_SET(EVT_VAR(1), 0)
     EVT_CALL(SetGoalPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.2001953125))
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.2))
     EVT_CALL(battle_partner_goombario_func_80238000_6F10E0)
     EVT_CALL(JumpToGoal, 256, EVT_VAR(0), 0, 1, 0)
     EVT_CALL(SetAnimation, -127, 1, 589831)
@@ -580,7 +579,7 @@ EvtSource N(80239CA8) = {
     EVT_END
 };
 
-EvtSource N(8023A06C) = {
+EvtScript N(8023A06C) = {
     EVT_CALL(func_80280818)
     EVT_CALL(UseBattleCamPreset, 3)
     EVT_CALL(SetAnimation, 256, -1, 589825)
@@ -588,7 +587,7 @@ EvtSource N(8023A06C) = {
     EVT_CALL(GetGoalPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(0), 60)
     EVT_CALL(SetGoalPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
-    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.400390625))
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.4))
     EVT_CALL(battle_partner_goombario_func_80238000_6F10E0)
     EVT_THREAD
         EVT_WAIT_FRAMES(4)
@@ -646,7 +645,7 @@ EvtSource N(8023A06C) = {
     EVT_END
 };
 
-EvtSource N(8023A52C) = {
+EvtScript N(8023A52C) = {
     EVT_CALL(SetGoalToFirstTarget, -127)
     EVT_CALL(GetGoalPos, -127, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_SUB(EVT_VAR(0), 40)
@@ -667,7 +666,7 @@ EvtSource N(8023A52C) = {
     EVT_END
 };
 
-EvtSource N(8023A66C) = {
+EvtScript N(8023A66C) = {
     EVT_CALL(SetGoalToTarget, 256)
     EVT_CALL(GetGoalPos, 256, EVT_VAR(11), EVT_VAR(7), EVT_VAR(13))
     EVT_CALL(GetActorPos, 256, EVT_VAR(7), EVT_VAR(13), EVT_VAR(14))
@@ -685,7 +684,7 @@ EvtSource N(8023A66C) = {
     EVT_END
 };
 
-EvtSource N(8023A754) = {
+EvtScript N(8023A754) = {
     EVT_CALL(LoadActionCommand, 1)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(battle_partner_goombario_8023A52C)
@@ -717,9 +716,9 @@ EvtSource N(8023A754) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1005859375), EVT_FIXED(0.80078125), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.30078125), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
         EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
     EVT_END_CHILD_THREAD
@@ -773,9 +772,9 @@ EvtSource N(8023A754) = {
     EVT_CALL(PlaySoundAtActor, 256, 641)
     EVT_CALL(func_8023817C_6F125C, EVT_VAR(10), 3)
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1005859375), EVT_FIXED(0.80078125), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.30078125), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
         EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
     EVT_END_CHILD_THREAD
@@ -790,7 +789,7 @@ EvtSource N(8023A754) = {
     EVT_END
 };
 
-EvtSource N(8023ADC4) = {
+EvtScript N(8023ADC4) = {
     EVT_CALL(LoadActionCommand, 1)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(battle_partner_goombario_8023A52C)
@@ -822,9 +821,9 @@ EvtSource N(8023ADC4) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1005859375), EVT_FIXED(0.80078125), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.30078125), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
         EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
     EVT_END_CHILD_THREAD
@@ -880,9 +879,9 @@ EvtSource N(8023ADC4) = {
     EVT_CALL(func_8023817C_6F125C, EVT_VAR(10), 3)
     EVT_CALL(EnableActorBlur, 256, -1)
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1005859375), EVT_FIXED(0.80078125), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.30078125), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
         EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
     EVT_END_CHILD_THREAD
@@ -897,7 +896,7 @@ EvtSource N(8023ADC4) = {
     EVT_END
 };
 
-EvtSource N(8023B45C) = {
+EvtScript N(8023B45C) = {
     EVT_CALL(LoadActionCommand, 1)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(battle_partner_goombario_8023A52C)
@@ -929,9 +928,9 @@ EvtSource N(8023B45C) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1005859375), EVT_FIXED(0.80078125), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.30078125), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
         EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
     EVT_END_CHILD_THREAD
@@ -996,9 +995,9 @@ EvtSource N(8023B45C) = {
     EVT_CALL(func_8023817C_6F125C, EVT_VAR(10), 3)
     EVT_CALL(EnableActorBlur, 256, -1)
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1005859375), EVT_FIXED(0.80078125), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.30078125), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
         EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
     EVT_END_CHILD_THREAD
@@ -1019,7 +1018,7 @@ s32 N(D_8023BB78_6ECC58)[] = {
 
 s32 D_8023BB98_6ECC78 = 0x000000C8;
 
-EvtSource N(8023BB9C) = {
+EvtScript N(8023BB9C) = {
     EVT_CALL(LoadActionCommand, 1)
     EVT_CALL(action_command_jump_CreateHudElements)
     EVT_EXEC_WAIT(battle_partner_goombario_8023A52C)
@@ -1051,9 +1050,9 @@ EvtSource N(8023BB9C) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1005859375), EVT_FIXED(0.80078125), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.30078125), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
         EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
     EVT_END_CHILD_THREAD
@@ -1144,9 +1143,9 @@ EvtSource N(8023BB9C) = {
         EVT_SET(EVT_FLAG(0), 1)
     EVT_END_IF
     EVT_CHILD_THREAD
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1005859375), EVT_FIXED(0.80078125), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.1), EVT_FIXED(0.8), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
-        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.30078125), EVT_FIXED(0.5), EVT_FIXED(1.0))
+        EVT_CALL(SetActorScale, 256, EVT_FIXED(1.3), EVT_FIXED(0.5), EVT_FIXED(1.0))
         EVT_WAIT_FRAMES(1)
         EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
     EVT_END_CHILD_THREAD
@@ -1191,7 +1190,7 @@ EvtSource N(8023BB9C) = {
     EVT_END
 };
 
-EvtSource N(8023C5B8) = {
+EvtScript N(8023C5B8) = {
     EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(0), 30)
     EVT_CALL(SetActorSpeed, 256, EVT_FIXED(6.0))
@@ -1230,7 +1229,7 @@ EvtSource N(8023C5B8) = {
     EVT_CALL(func_80280818)
     EVT_CALL(SetGoalToHome, 256)
     EVT_CALL(SetActorSpeed, 256, EVT_FIXED(4.0))
-    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.80078125))
+    EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.8))
     EVT_CALL(SetAnimation, 256, -1, 589827)
     EVT_CALL(RunToGoal, 256, 0)
     EVT_CALL(SetAnimation, 256, -1, 589825)
@@ -1238,7 +1237,7 @@ EvtSource N(8023C5B8) = {
     EVT_END
 };
 
-EvtSource N(8023C90C) = {
+EvtScript N(8023C90C) = {
     EVT_CALL(UseBattleCamPreset, 55)
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetAnimation, 256, -1, 589831)
@@ -1246,9 +1245,9 @@ EvtSource N(8023C90C) = {
     EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_ADD(EVT_VAR(1), 15)
     EVT_CALL(PlaySoundAtActor, 256, 8335)
-    EVT_CALL(func_802390C8_6F21A8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.2001953125))
+    EVT_CALL(func_802390C8_6F21A8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(1.2))
     EVT_WAIT_FRAMES(3)
-    EVT_CALL(func_802390C8_6F21A8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(0.80078125))
+    EVT_CALL(func_802390C8_6F21A8, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_FIXED(0.8))
     EVT_THREAD
         EVT_WAIT_FRAMES(15)
         EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -1271,7 +1270,7 @@ EvtSource N(8023C90C) = {
         EVT_CALL(PlaySoundAtActor, 256, 8334)
         EVT_CALL(func_80238EDC_6F1FBC, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_WAIT_FRAMES(4)
-        EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.400390625))
+        EVT_CALL(SetActorJumpGravity, 256, EVT_FIXED(1.4))
         EVT_CALL(GetActorPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
         EVT_CALL(SetJumpAnimations, 256, 589828, 1, 589828, 589828)
         EVT_CALL(SetGoalPos, 256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))

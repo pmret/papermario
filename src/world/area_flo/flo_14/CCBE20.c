@@ -29,7 +29,7 @@ NpcAISettings N(npcAISettings_802444D8) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80244508) = {
+EvtScript N(npcAI_80244508) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
@@ -68,7 +68,7 @@ s32 N(D_80244600_CCF910) = {
     0x00000000,
 };
 
-EvtSource N(80244604) = {
+EvtScript N(80244604) = {
     EVT_SET(EVT_VAR(9), EVT_VAR(1))
     EVT_CALL(ShowConsumableChoicePopup)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
@@ -92,7 +92,7 @@ EvtSource N(80244604) = {
     EVT_END
 };
 
-EvtSource N(80244738) = {
+EvtScript N(80244738) = {
     EVT_CALL(N(func_802422C0_CCD5D0), EVT_VAR(0))
     EVT_BIND_PADLOCK(N(80244604), 0x10, 0, EVT_PTR(N(D_802453B0_EF79C0)), 0, 1)
     EVT_CALL(N(func_80242234_CCD544), EVT_VAR(0))
@@ -105,7 +105,7 @@ s32 N(D_80244788_CCFA98)[] = {
     0x000000A1, 0x00000000,
 };
 
-EvtSource N(interact_80244790) = {
+EvtScript N(interact_80244790) = {
     EVT_IF_EQ(EVT_AREA_FLAG(37), 1)
         EVT_SET(EVT_AREA_FLAG(35), 1)
         EVT_CALL(SpeakToPlayer, NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0063))
@@ -157,7 +157,7 @@ EvtSource N(interact_80244790) = {
     EVT_END
 };
 
-EvtSource N(init_80244ADC) = {
+EvtScript N(init_80244ADC) = {
     EVT_SET(EVT_AREA_FLAG(36), 0)
     EVT_SET(EVT_AREA_FLAG(37), 0)
     EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_80244790)))
@@ -244,7 +244,7 @@ static s32 N(pad_4F24)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80244F30) = {
+EvtScript N(80244F30) = {
     EVT_CALL(MakeItemEntity, ITEM_STAR_PIECE, 675, 60, -100, 17, EVT_SAVE_FLAG(1387))
     EVT_RETURN
     EVT_END
@@ -254,7 +254,7 @@ static s32 N(pad_4F64)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80244F70) = {
+EvtScript N(80244F70) = {
     EVT_LOOP(0)
         EVT_CALL(N(func_80242360_CCD670), EVT_VAR(0))
         EVT_IF_EQ(EVT_VAR(0), EVT_VAR(4))
@@ -304,7 +304,7 @@ EvtSource N(80244F70) = {
     EVT_END
 };
 
-EvtSource N(80245224) = {
+EvtScript N(80245224) = {
     EVT_SET(EVT_VAR(4), 21)
     EVT_SET(EVT_VAR(5), 21)
     EVT_SET(EVT_VAR(6), 20)

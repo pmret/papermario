@@ -10,7 +10,7 @@ ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CEC240)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80240DE4);
-extern EvtSource N(80240E24);
-extern EvtSource N(80241528);
-extern EvtSource N(80241F6C);
-extern EvtSource N(main);
+extern EvtScript N(80240E24);
+extern EvtScript N(80241528);
+extern EvtScript N(80241F6C);
+extern EvtScript N(main);

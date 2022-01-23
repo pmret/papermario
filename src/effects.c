@@ -466,12 +466,12 @@ EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
     ASSERT(newEffectInst != NULL);
 
     curEffect = &gEffectGraphicsData[0];
-    newEffectInst->effectIndex = effectBp->effectIndex;
+    newEffectInst->effectIndex = effectBp->effectID;
     newEffectInst->flags = 1;
 
     // Look for a loaded effect of the proper index
     for (i = 0; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-        if ((curEffect->flags & EFFECT_LOADED) && (curEffect->effectIndex == effectBp->effectIndex)) {
+        if ((curEffect->flags & EFFECT_LOADED) && (curEffect->effectIndex == effectBp->effectID)) {
             break;
         }
         curEffect++;

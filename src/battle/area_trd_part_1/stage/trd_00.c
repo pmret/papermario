@@ -3,14 +3,14 @@
 
 #define NAMESPACE b_area_trd_part_1_trd_00
 
-EvtSource N(beforeBattle_80224B70) = {
+EvtScript N(beforeBattle_80224B70) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamBGColor, 1, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(afterBattle_80224BAC) = {
+EvtScript N(afterBattle_80224BAC) = {
     EVT_RETURN
     EVT_END
 };
