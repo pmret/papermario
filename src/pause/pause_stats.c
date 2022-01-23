@@ -8,30 +8,30 @@ typedef struct {
     s32 baseMsgID;
 } StatsEntryData; // size = 0xC
 
-extern HudElementAnim HudScript_MarioHeadSmall[];
-extern HudElementAnim HudScript_StatBoots0[];
-extern HudElementAnim HudScript_StatBoots1[];
-extern HudElementAnim HudScript_StatBoots2[];
-extern HudElementAnim HudScript_StatBoots3[];
-extern HudElementAnim HudScript_StatHammer0[];
-extern HudElementAnim HudScript_StatHammer1[];
-extern HudElementAnim HudScript_StatHammer2[];
-extern HudElementAnim HudScript_StatHammer3[];
-extern HudElementAnim HudScript_StatusCoin[];
-extern HudElementAnim HudScript_StatusStarPoint[];
-extern HudElementAnim HudScript_StatStarPiece_1[];
-extern HudElementAnim HudScript_Clock[];
-extern HudElementAnim HudScript_StatusHeart[];
-extern HudElementAnim HudScript_StatFp_1[];
-extern HudElementAnim HudScript_StatBp[];
-extern HudElementAnim HudScript_StatusStar1[];
-extern HudElementAnim HudScript_StatusStar2[];
-extern HudElementAnim HudScript_StatusStar3[];
-extern HudElementAnim HudScript_StatusStar4[];
-extern HudElementAnim HudScript_StatusStar5[];
-extern HudElementAnim HudScript_StatusStar6[];
-extern HudElementAnim HudScript_StatusStar7[];
-extern HudElementAnim HudScript_StatTimes[];
+extern HudScript HudScript_MarioHeadSmall[];
+extern HudScript HudScript_StatBoots0[];
+extern HudScript HudScript_StatBoots1[];
+extern HudScript HudScript_StatBoots2[];
+extern HudScript HudScript_StatBoots3[];
+extern HudScript HudScript_StatHammer0[];
+extern HudScript HudScript_StatHammer1[];
+extern HudScript HudScript_StatHammer2[];
+extern HudScript HudScript_StatHammer3[];
+extern HudScript HudScript_StatusCoin[];
+extern HudScript HudScript_StatusStarPoint[];
+extern HudScript HudScript_StatStarPiece_1[];
+extern HudScript HudScript_Clock[];
+extern HudScript HudScript_StatusHeart[];
+extern HudScript HudScript_StatFp_1[];
+extern HudScript HudScript_StatBp[];
+extern HudScript HudScript_StatusStar1[];
+extern HudScript HudScript_StatusStar2[];
+extern HudScript HudScript_StatusStar3[];
+extern HudScript HudScript_StatusStar4[];
+extern HudScript HudScript_StatusStar5[];
+extern HudScript HudScript_StatusStar6[];
+extern HudScript HudScript_StatusStar7[];
+extern HudScript HudScript_StatTimes[];
 
 extern s32 D_8026FB30;
 
@@ -40,12 +40,12 @@ void pause_stats_init(MenuPanel* panel);
 void pause_stats_handle_input(MenuPanel* panel);
 void pause_stats_cleanup(void);
 
-HudElementAnim* gStatsMenuElements[] = { HudScript_MarioHeadSmall, HudScript_StatBoots0, HudScript_StatHammer0,
+HudScript* gStatsMenuElements[] = { HudScript_MarioHeadSmall, HudScript_StatBoots0, HudScript_StatHammer0,
                                        HudScript_StatusCoin, HudScript_StatusStarPoint, HudScript_StatStarPiece_1,
                                        HudScript_Clock, HudScript_StatusHeart, HudScript_StatFp_1, HudScript_StatBp,
                                        HudScript_StatusStar1, HudScript_StatTimes};
-HudElementAnim* gStatsBootsElements[] = { HudScript_StatBoots0, HudScript_StatBoots1, HudScript_StatBoots2, HudScript_StatBoots3 };
-HudElementAnim* gStatsHammerElements[] = { HudScript_StatHammer0, HudScript_StatHammer1, HudScript_StatHammer2, HudScript_StatHammer3 };
+HudScript* gStatsBootsElements[] = { HudScript_StatBoots0, HudScript_StatBoots1, HudScript_StatBoots2, HudScript_StatBoots3 };
+HudScript* gStatsHammerElements[] = { HudScript_StatHammer0, HudScript_StatHammer1, HudScript_StatHammer2, HudScript_StatHammer3 };
 s32 D_8024F380[] = { 59, 60, 61, 62 };
 s32 D_8024F390[] = { 63, 64, 65, 66 };
 s32 D_8024F3A0[] = { 0x00040105, 0x01060207, 0x02080309, 0x030A0000 };
@@ -61,7 +61,7 @@ StatsEntryData gStatsMenuEntries[] = { {.cursorX =   9, .cursorY =  20, .baseMsg
                                        {.cursorX = 125, .cursorY = 121, .baseMsgID = 47},
                                        {.cursorX = 125, .cursorY = 138, .baseMsgID = 49} };
 s32 D_8024F434[] = { 0x80108298, 0x801082E8, 0x801082C0, 0x80108310, 0x80108338, 0x80108360, 0x80108388 };
-HudElementAnim* D_8024F450[] = { HudScript_StatusStar1, HudScript_StatusStar3, HudScript_StatusStar2,
+HudScript* D_8024F450[] = { HudScript_StatusStar1, HudScript_StatusStar3, HudScript_StatusStar2,
                                  HudScript_StatusStar4, HudScript_StatusStar5, HudScript_StatusStar6,
                                  HudScript_StatusStar7 };
 //s32 D_8024F46C[] = {-1, 1, 2, 4, 5, 7, 8};

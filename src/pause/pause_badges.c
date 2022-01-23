@@ -6,16 +6,16 @@
 #define BADGE_INVALID 0x7FFF
 
 typedef struct {
-    HudElementAnim* q1;
-    HudElementAnim* q2;
+    HudScript* q1;
+    HudScript* q2;
 } HudElStruct;
 
-extern HudElementAnim HudScript_StatBp[];
-extern HudElementAnim HudScript_ListPrevPage[];
-extern HudElementAnim HudScript_ListNextPage[];
-extern HudElementAnim HudScript_Dash[];
-extern HudElementAnim HudScript_LabelBpNeeded[];
-extern HudElementAnim HudScript_StatusStar1[];
+extern HudScript HudScript_StatBp[];
+extern HudScript HudScript_ListPrevPage[];
+extern HudScript HudScript_ListNextPage[];
+extern HudScript HudScript_Dash[];
+extern HudScript HudScript_LabelBpNeeded[];
+extern HudScript HudScript_StatusStar1[];
 extern HudElStruct gItemHudScripts[];
 extern s32 D_8026FC48;
 extern s32 D_8026FC10;
@@ -31,7 +31,7 @@ void pause_badges_update(MenuPanel* panel);
 void pause_badges_cleanup(MenuPanel* panel);
 void pause_draw_menu_label(s32 index, s32 x, s32 y);
 
-HudElementAnim* gBadgeMenuElements[] = { HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
+HudScript* gBadgeMenuElements[] = { HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
                                          HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
                                          HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
                                          HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
@@ -297,7 +297,7 @@ void pause_badges_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4
 
     s32 possX;
     s32 badgeID2;
-    HudElementAnim* anim;
+    HudScript* anim;
     s32 c;
 
     s32* iconIDs;

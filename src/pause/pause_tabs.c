@@ -1,12 +1,12 @@
 #include "common.h"
 #include "hud_element.h"
 
-extern HudElementAnim HudScript_HeaderStats;
-extern HudElementAnim HudScript_HeaderBadges;
-extern HudElementAnim HudScript_HeaderItems;
-extern HudElementAnim HudScript_HeaderParty;
-extern HudElementAnim HudScript_HeaderSpirits;
-extern HudElementAnim HudScript_HeaderMap;
+extern HudScript HudScript_HeaderStats;
+extern HudScript HudScript_HeaderBadges;
+extern HudScript HudScript_HeaderItems;
+extern HudScript HudScript_HeaderParty;
+extern HudScript HudScript_HeaderSpirits;
+extern HudScript HudScript_HeaderMap;
 extern MenuPanel* gPauseMenuPanels[];
 extern s32 D_80270148;
 extern s32 D_8027014C;
@@ -38,7 +38,7 @@ void func_80243388(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
                     s32* argA, s32* argB);
 
 
-HudElementAnim* D_8024F1B0[] = { HudScript_HeaderStats, HudScript_HeaderBadges, HudScript_HeaderItems,
+HudScript* D_8024F1B0[] = { HudScript_HeaderStats, HudScript_HeaderBadges, HudScript_HeaderItems,
                                  HudScript_HeaderParty, HudScript_HeaderSpirits, HudScript_HeaderMap };
 s8 D_8024F1C8[] = { 0, 1, 2, 3, 4, 5 };
 u8 D_8024F1D0[] = { 1, 2, 3, 4, 5, 6 };

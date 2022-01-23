@@ -10,14 +10,14 @@ typedef struct SpriteEntryData {
     /* 0x0C */ s32 unk_0C;
 } SpriteEntryData; // size = 0x10
 
-extern HudElementAnim HudScript_PressAButton;
-extern HudElementAnim HudScript_PressStartButton;
-extern HudElementAnim HudScript_StartButtonText;
-extern HudElementAnim HudScript_StickTapRight;
-extern HudElementAnim HudScript_UnusedBadge;
-extern HudElementAnim HudScript_AnimatedCursorHand;
-extern HudElementAnim HudScript_DescMsgPrev;
-extern HudElementAnim HudScript_DescMsgNext;
+extern HudScript HudScript_PressAButton;
+extern HudScript HudScript_PressStartButton;
+extern HudScript HudScript_StartButtonText;
+extern HudScript HudScript_StickTapRight;
+extern HudScript HudScript_UnusedBadge;
+extern HudScript HudScript_AnimatedCursorHand;
+extern HudScript HudScript_DescMsgPrev;
+extern HudScript HudScript_DescMsgNext;
 
 extern MenuPanel gPausePanelTabs;
 extern MenuPanel gPausePanelStats;
@@ -26,7 +26,7 @@ extern s32 D_80270108;
 extern s32 D_8027010C;
 extern s32 D_80270110;
 extern s32 D_80270114;
-extern HudElementAnim* D_80270118;
+extern HudScript* D_80270118;
 extern s32 D_8027011C[3];
 
 void pause_tutorial_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
@@ -34,7 +34,7 @@ void func_80243568(void);
 void pause_textbox_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY);
 
-HudElementAnim* gPauseMenuIconScripts[] = {HudScript_AnimatedCursorHand, HudScript_DescMsgPrev, HudScript_DescMsgNext,
+HudScript* gPauseMenuIconScripts[] = {HudScript_AnimatedCursorHand, HudScript_DescMsgPrev, HudScript_DescMsgNext,
                                HudScript_UnusedBadge, HudScript_StickTapRight, HudScript_PressAButton,
                                HudScript_PressStartButton, HudScript_StartButtonText};
 // TODO make pointers
