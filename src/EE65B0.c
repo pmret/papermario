@@ -10,7 +10,7 @@
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
 ApiStatus func_8024030C_EE68BC(Evt *script, s32 isInitialCall) {
-    dead_playFX_82(0, 0, 0, 0, 0, 0);
+    dead_fx_sun(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

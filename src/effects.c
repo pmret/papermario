@@ -16,13 +16,14 @@ extern s32 D_801A6000;
 
 
 #define FX_ENTRY(name, gfx_name) { \
-    name##_main, name##_ROM_START, name##_ROM_END, name##_VRAM, gfx_name##_ROM_START, gfx_name##_ROM_END \
+    name##_main, effect_##name##_ROM_START, effect_##name##_ROM_END, effect_##name##_VRAM, gfx_name##_ROM_START, \
+    gfx_name##_ROM_END \
 }
 
 // TODO remove once everyone is named
 #define FX_ENTRY_NUMBERED(name, gfx_name) { \
-    fx_##name##_main, effect_##name##_ROM_START, effect_##name##_ROM_END, effect_##name##_VRAM, gfx_name##_ROM_START, \
-    gfx_name##_ROM_END \
+    fx_##name##_main, effect_effect_##name##_ROM_START, effect_effect_##name##_ROM_END, effect_effect_##name##_VRAM, \
+    gfx_name##_ROM_START, gfx_name##_ROM_END \
 } \
 
 EffectTableEntry gEffectTable[] = {
@@ -86,17 +87,17 @@ EffectTableEntry gEffectTable[] = {
     /* 0x39 */ FX_ENTRY(energy_shockwave, _375510),
     /* 0x3A */ FX_ENTRY(shimmer_wave, _337FC0),
     /* 0x3B */ FX_ENTRY(aura, _377F80),
-    /* 0x3C */ FX_ENTRY_NUMBERED(60, _37ADD0),
-    /* 0x3D */ FX_ENTRY_NUMBERED(61, _37D180),
+    /* 0x3C */ FX_ENTRY_NUMBERED(3C, _37ADD0),
+    /* 0x3D */ FX_ENTRY_NUMBERED(3D, _37D180),
     /* 0x3E */ FX_ENTRY(blast, _37D9D0),
-    /* 0x3F */ FX_ENTRY(fire_flower_attacking, _3803A0),
+    /* 0x3F */ FX_ENTRY(fire_flower, _3803A0),
     /* 0x40 */ FX_ENTRY(recover, _381E00),
     /* 0x41 */ FX_ENTRY(disable_x, _3863B0),
     /* 0x42 */ FX_ENTRY(bombette_breaking, _37D9D0),
     /* 0x43 */ FX_ENTRY(firework, _38A350),
     /* 0x44 */ FX_ENTRY(confetti, _38BBA0),
     /* 0x45 */ FX_ENTRY(snowfall, _38D070),
-    /* 0x46 */ FX_ENTRY_NUMBERED(70, _38E990),
+    /* 0x46 */ FX_ENTRY_NUMBERED(46, _38E990),
     /* 0x47 */ FX_ENTRY(gather_magic, _38F710),
     /* 0x48 */ FX_ENTRY(attack_result_text, _3903D0),
     /* 0x49 */ FX_ENTRY(small_gold_sparkle, _392440),
@@ -122,12 +123,12 @@ EffectTableEntry gEffectTable[] = {
     /* 0x5D */ FX_ENTRY(underwater, _3B9A70),
     /* 0x5E */ FX_ENTRY(lightning_bolt, _3BAEA0),
     /* 0x5F */ FX_ENTRY(water_splash, _3BCA90),
-    /* 0x60 */ FX_ENTRY(snowman_doll_eff, _3BD9A0),
-    /* 0x61 */ FX_ENTRY(fright_jar_eff, _3C1BA0),
-    /* 0x62 */ FX_ENTRY(stop_watch_eff, _3CB890),
-    /* 0x63 */ FX_ENTRY_NUMBERED(99, _3CD6E0),
+    /* 0x60 */ FX_ENTRY(snowman_doll, _3BD9A0),
+    /* 0x61 */ FX_ENTRY(fright_jar, _3C1BA0),
+    /* 0x62 */ FX_ENTRY(stop_watch, _3CB890),
+    /* 0x63 */ FX_ENTRY_NUMBERED(63, _3CD6E0),
     /* 0x64 */ FX_ENTRY(throw_spiny, _3CFAF0),
-    /* 0x65 */ FX_ENTRY_NUMBERED(101, _3D11E0),
+    /* 0x65 */ FX_ENTRY_NUMBERED(65, _3D11E0),
     /* 0x66 */ FX_ENTRY(tubba_heart_attack, _3D2580),
     /* 0x67 */ FX_ENTRY(whirlwind, _3D3930),
     /* 0x68 */ FX_ENTRY(red_impact, _3593B0),
@@ -143,7 +144,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x72 */ FX_ENTRY(misc_particles, _3DEE60),
     /* 0x73 */ FX_ENTRY(static_status, _3E12D0),
     /* 0x74 */ FX_ENTRY(moving_cloud, _3E1CD0),
-    /* 0x75 */ FX_ENTRY_NUMBERED(117, _3E2960),
+    /* 0x75 */ FX_ENTRY_NUMBERED(75, _3E2960),
     /* 0x76 */ {},
     /* 0x77 */ FX_ENTRY(firework_rocket, _3E5350),
     /* 0x78 */ FX_ENTRY(peach_star_beam, _3E5F30),
@@ -160,7 +161,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x83 */ FX_ENTRY(star_spirits_energy, _40D290),
     /* 0x84 */ FX_ENTRY(pink_sparkles, _337FC0),
     /* 0x85 */ FX_ENTRY(star_outline, _413FA0),
-    /* 0x86 */ FX_ENTRY_NUMBERED(134, _415060),
+    /* 0x86 */ FX_ENTRY_NUMBERED(86, _415060),
 };
 
 s32 D_8007FEB8[] = {

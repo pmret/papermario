@@ -612,7 +612,7 @@ s32 func_8021878C_512D5C(Evt* script, s32 isInitialCall) {
     D_802310D0.unk_28 = x;
     D_802310D0.unk_2C = y;
     D_802310D0.unk_30 = z;
-    playFX_46_whirlwind(6, &D_802310D0, temp_f20, temp_v0);
+    fx_46(6, &D_802310D0, temp_f20, temp_v0);
 
     return ApiStatus_DONE2;
 }

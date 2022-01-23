@@ -29,7 +29,7 @@ void shim_transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32*
 s32 shim_npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
 void shim_sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 
-#define FX_MAIN(name) void name(s32); // the actual signature is going to be wrong but doesn't matter
+#define FX_MAIN(name) void name(s32); // the actual signature is going to be wrong, but it doesn't matter
 
 void big_smoke_puff_main(f32 x, f32 y, f32 z);
 void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32);
@@ -85,17 +85,17 @@ FX_MAIN(shimmer_burst_main);
 FX_MAIN(energy_shockwave_main);
 FX_MAIN(shimmer_wave_main);
 FX_MAIN(aura_main);
-FX_MAIN(fx_60_main);
-FX_MAIN(fx_61_main);
+FX_MAIN(fx_3C_main);
+FX_MAIN(fx_3D_main);
 FX_MAIN(blast_main);
-FX_MAIN(fire_flower_attacking_main);
+FX_MAIN(fire_flower_main);
 FX_MAIN(recover_main);
 FX_MAIN(disable_x_main);
 FX_MAIN(bombette_breaking_main);
 FX_MAIN(firework_main);
 FX_MAIN(confetti_main);
 FX_MAIN(snowfall_main);
-FX_MAIN(fx_70_main);
+FX_MAIN(fx_46_main);
 FX_MAIN(gather_magic_main);
 FX_MAIN(attack_result_text_main);
 EffectInstance* small_gold_sparkle_main(EffectInstanceDataThing*, f32, f32, f32, f32);
@@ -121,12 +121,12 @@ FX_MAIN(water_fountain_main);
 FX_MAIN(underwater_main);
 FX_MAIN(lightning_bolt_main);
 FX_MAIN(water_splash_main);
-FX_MAIN(snowman_doll_eff_main);
-FX_MAIN(fright_jar_eff_main);
-FX_MAIN(stop_watch_eff_main);
-FX_MAIN(fx_99_main);
+FX_MAIN(snowman_doll_main);
+FX_MAIN(fright_jar_main);
+FX_MAIN(stop_watch_main);
+FX_MAIN(fx_63_main);
 FX_MAIN(throw_spiny_main);
-FX_MAIN(fx_101_main);
+FX_MAIN(fx_65_main);
 FX_MAIN(tubba_heart_attack_main);
 FX_MAIN(whirlwind_main);
 FX_MAIN(red_impact_main);
@@ -141,7 +141,7 @@ FX_MAIN(hieroglyphs_main);
 FX_MAIN(misc_particles_main);
 FX_MAIN(static_status_main);
 FX_MAIN(moving_cloud_main);
-FX_MAIN(fx_117_main);
+FX_MAIN(fx_75_main);
 FX_MAIN(firework_rocket_main);
 FX_MAIN(peach_star_beam_main);
 FX_MAIN(chapter_change_main);
@@ -157,6 +157,6 @@ FX_MAIN(sun_main);
 FX_MAIN(star_spirits_energy_main);
 FX_MAIN(pink_sparkles_main);
 FX_MAIN(star_outline_main);
-EffectInstance* fx_134_main(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_86_main(s32, f32, f32, f32, f32, s32);
 
 #endif

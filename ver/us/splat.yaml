@@ -2181,7 +2181,7 @@ segments:
     - [0x325EE0, pm_effect_shims, effect_shims]
     - [0x326160, .data, 325AD0]
   - [0x326410, bin] # big_smoke_puff gfx
-  - name: big_smoke_puff
+  - name: effect_big_smoke_puff
     dir: effects
     type: code
     start: 0x3278F0
@@ -2189,7 +2189,7 @@ segments:
     subsegments:
     - [0x3278F0, c, big_smoke_puff]
     - [0x328050]
-  - name: landing_dust
+  - name: effect_landing_dust
     dir: effects
     type: code
     start: 0x328110
@@ -2197,8 +2197,8 @@ segments:
     subsegments:
     - [0x328110, c, landing_dust]
     - [0x328D20]
-  - [0x328EA0, bin] # landing_dust, walking_dust, effect 23, effect 29, effect 39 gfx
-  - name: walking_dust
+  - [0x328EA0, bin] # landing_dust, walking_dust, smoke_ring, smoke_impact, smoke_burst gfx
+  - name: effect_walking_dust
     dir: effects
     type: code
     start: 0x32C110
@@ -2206,7 +2206,7 @@ segments:
     subsegments:
     - [0x32C110, c, walking_dust]
     - [0x32C770]
-  - name: flower_splash
+  - name: effect_flower_splash
     dir: effects
     type: code
     start: 0x32C7A0
@@ -2215,14 +2215,14 @@ segments:
     - [0x32C7A0, c, flower_splash]
     - [0x32CEB0]
   - [0x32CEC0, bin] # flower_splash, flower_trail gfx
-  - name: flower_trail
+  - name: effect_flower_trail
     dir: effects
     type: code
     start: 0x32DD10
     vram: 0xE0012000
     subsegments:
     - [0x32DD10, c, flower_trail]
-  - name: cloud_puff
+  - name: effect_cloud_puff
     dir: effects
     type: code
     start: 0x32E490
@@ -2231,7 +2231,7 @@ segments:
     - [0x32E490, c, cloud_puff]
     - [0x32EC10]
   - [0x32EC50, bin] # cloud_puff, cloud_trail gfx
-  - name: cloud_trail
+  - name: effect_cloud_trail
     dir: effects
     type: code
     start: 0x32EE30
@@ -2239,15 +2239,15 @@ segments:
     subsegments:
     - [0x32EE30, c, cloud_trail]
     - [0x32F550]
-  - name: footprint
+  - name: effect_footprint
     dir: effects
     type: code
     start: 0x32F580
     vram: 0xE0018000
     subsegments:
     - [0x32F580, c, footprint]
-  - [0x32FB50, bin] # effect 12 gfx
-  - name: floating_flower
+  - [0x32FB50, bin] # footprint gfx
+  - name: effect_floating_flower
     dir: effects
     type: code
     start: 0x32FE30
@@ -2255,8 +2255,8 @@ segments:
     subsegments:
     - [0x32FE30, c, floating_flower]
     - [0x330440]
-  - [0x330460, bin] # effect 13 gfx
-  - name: snowflake
+  - [0x330460, bin] # floating_flower gfx
+  - name: effect_snowflake
     dir: effects
     type: code
     start: 0x330910
@@ -2264,8 +2264,8 @@ segments:
     subsegments:
     - [0x330910, c, snowflake]
     - [0x330EF0]
-  - [0x330F00, bin] # effect 14 gfx
-  - name: star
+  - [0x330F00, bin] # snowflake gfx
+  - name: effect_star
     dir: effects
     type: code
     start: 0x331940
@@ -2273,8 +2273,8 @@ segments:
     subsegments:
     - [0x331940, c, star]
     - [0x332690]
-  - [0x3326A0, bin] # effect 15 gfx
-  - name: emote
+  - [0x3326A0, bin] # star gfx
+  - name: effect_emote
     dir: effects
     type: code
     start: 0x333EC0
@@ -2282,8 +2282,8 @@ segments:
     subsegments:
     - [0x333EC0, c, emote]
     - [0x334B50]
-  - [0x334C70, bin] # effect 16 gfx
-  - name: sparkles
+  - [0x334C70, bin] # emote gfx
+  - name: effect_sparkles
     dir: effects
     type: code
     start: 0x337240
@@ -2291,8 +2291,8 @@ segments:
     subsegments:
     - [0x337240, c, sparkles]
     - [0x337F10, data]
-  - [0x337FC0, bin] # effect 17, effect 34, effect 56, effect 58, effect 132 gfx
-  - name: shape_spell
+  - [0x337FC0, bin] # sparkles, stars_shimmer, shimmer_burst, shimmer_wave, pink_sparkles gfx
+  - name: effect_shape_spell
     dir: effects
     type: code
     start: 0x339250
@@ -2300,8 +2300,8 @@ segments:
     subsegments:
     - [0x339250, c, shape_spell]
     - [0x339F10, data]
-  - [0x339F60, bin] # effect 18 gfx
-  - name: gather_energy_pink
+  - [0x339F60, bin] # shape_spell gfx
+  - name: effect_gather_energy_pink
     dir: effects
     type: code
     start: 0x33B180
@@ -2309,8 +2309,8 @@ segments:
     subsegments:
     - [0x33B180, c, gather_energy_pink]
     - [0x33BB70, data]
-  - [0x33BBD0, bin] # effect 19 gfx
-  - name: drop_leaves
+  - [0x33BBD0, bin] # gather_energy_pink gfx
+  - name: effect_drop_leaves
     dir: effects
     type: code
     start: 0x33CDF0
@@ -2318,8 +2318,8 @@ segments:
     subsegments:
     - [0x33CDF0, c, drop_leaves]
     - [0x33D5D0, data]
-  - [0x33D610, bin] # effect 20, effect 43 gfx
-  - name: dust
+  - [0x33D610, bin] # drop_leaves, windy_leaves gfx
+  - name: effect_dust
     dir: effects
     type: code
     start: 0x33E8C0
@@ -2327,8 +2327,8 @@ segments:
     subsegments:
     - [0x33E8C0, c, dust]
     - [0x33EFE0, data]
-  - [0x33F000, bin] # effect 21 gfx
-  - name: shattering_stones
+  - [0x33F000, bin] # dust gfx
+  - name: effect_shattering_stones
     dir: effects
     type: code
     start: 0x33FE80
@@ -2336,8 +2336,8 @@ segments:
     subsegments:
     - [0x33FE80, c, shattering_stones]
     - [0x3407C0, data]
-  - [0x340880, bin] # effect 22 gfx
-  - name: smoke_ring
+  - [0x340880, bin] # shattering_stones gfx
+  - name: effect_smoke_ring
     dir: effects
     type: code
     start: 0x3419E0
@@ -2345,7 +2345,7 @@ segments:
     subsegments:
     - [0x3419E0, c, smoke_ring]
     - [0x342120, data]
-  - name: damage_stars
+  - name: effect_damage_stars
     dir: effects
     type: code
     start: 0x342140
@@ -2353,8 +2353,8 @@ segments:
     subsegments:
     - [0x342140, c, damage_stars]
     - [0x342FD0, data]
-  - [0x343040, bin] # effect 24, effect 33 gfx
-  - name: explosion
+  - [0x343040, bin] # damage_stars, stars_burst gfx
+  - name: effect_explosion
     dir: effects
     type: code
     start: 0x343680
@@ -2362,8 +2362,8 @@ segments:
     subsegments:
     - [0x343680, c, explosion]
     - [0x343F30, data]
-  - [0x343F70, bin] # effect 25 gfx
-  - name: lens_flare
+  - [0x343F70, bin] # explosion gfx
+  - name: effect_lens_flare
     dir: effects
     type: code
     start: 0x344A10
@@ -2371,8 +2371,8 @@ segments:
     subsegments:
     - [0x344A10, c, lens_flare]
     - [0x345190, data]
-  - [0x3451E0, bin] # effect 26 gfx
-  - name: got_item_outline
+  - [0x3451E0, bin] # lens_flare gfx
+  - name: effect_got_item_outline
     dir: effects
     type: code
     start: 0x3454E0
@@ -2380,8 +2380,8 @@ segments:
     subsegments:
     - [0x3454E0, c, got_item_outline]
     - [0x345B10, data]
-  - [0x345B40, bin] # effect 27 gfx
-  - name: spiky_white_aura
+  - [0x345B40, bin] # got_item_outline gfx
+  - name: effect_spiky_white_aura
     dir: effects
     type: code
     start: 0x34DD20
@@ -2389,8 +2389,8 @@ segments:
     subsegments:
     - [0x34DD20, c, spiky_white_aura]
     - [0x34E710, data]
-  - [0x34E770, bin] # effect 28 gfx
-  - name: smoke_impact
+  - [0x34E770, bin] # spiky_white_aura gfx
+  - name: effect_smoke_impact
     dir: effects
     type: code
     start: 0x34EC80
@@ -2398,7 +2398,7 @@ segments:
     subsegments:
     - [0x34EC80, c, smoke_impact]
     - [0x34F480, data]
-  - name: damage_indicator
+  - name: effect_damage_indicator
     dir: effects
     type: code
     start: 0x34F4C0
@@ -2406,8 +2406,8 @@ segments:
     subsegments:
     - [0x34F4C0, c, damage_indicator]
     - [0x350160, data]
-  - [0x350220, bin] # effect 30 gfx
-  - name: purple_ring
+  - [0x350220, bin] # damage_indicator gfx
+  - name: effect_purple_ring
     dir: effects
     type: code
     start: 0x352440
@@ -2415,8 +2415,8 @@ segments:
     subsegments:
     - [0x352440, c, purple_ring]
     - [0x352CB0, data]
-  - [0x352CE0, bin] # effect 31 gfx
-  - name: flame
+  - [0x352CE0, bin] # purple_ring gfx
+  - name: effect_flame
     dir: effects
     type: code
     start: 0x353300
@@ -2424,8 +2424,8 @@ segments:
     subsegments:
     - [0x353300, c, flame]
     - [0x353B40]
-  - [0x353BB0, bin] # effect 32 gfx
-  - name: stars_burst
+  - [0x353BB0, bin] # flame gfx
+  - name: effect_stars_burst
     dir: effects
     type: code
     start: 0x3547A0
@@ -2433,7 +2433,7 @@ segments:
     subsegments:
     - [0x3547A0, c, stars_burst]
     - [0x354F20, data]
-  - name: stars_shimmer
+  - name: effect_stars_shimmer
     dir: effects
     type: code
     start: 0x354F60
@@ -2441,7 +2441,7 @@ segments:
     subsegments:
     - [0x354F60, c, stars_shimmer]
     - [0x355D10, data]
-  - name: rising_bubble
+  - name: effect_rising_bubble
     dir: effects
     type: code
     start: 0x355EE0
@@ -2449,8 +2449,8 @@ segments:
     subsegments:
     - [0x355EE0, c, rising_bubble]
     - [0x3564E0, data]
-  - [0x356530, bin] # effect 35 gfx
-  - name: ring_blast
+  - [0x356530, bin] # rising_bubble gfx
+  - name: effect_ring_blast
     dir: effects
     type: code
     start: 0x356980
@@ -2458,8 +2458,8 @@ segments:
     subsegments:
     - [0x356980, c, ring_blast]
     - [0x357380, data]
-  - [0x3573A0, bin] # effect 36 gfx
-  - name: shockwave
+  - [0x3573A0, bin] # ring_blast gfx
+  - name: effect_shockwave
     dir: effects
     type: code
     start: 0x3584C0
@@ -2467,8 +2467,8 @@ segments:
     subsegments:
     - [0x3584C0, c, shockwave]
     - [0x359320, data]
-  - [0x3593B0, bin] # effect 37, effect 104 gfx
-  - name: music_note
+  - [0x3593B0, bin] # shockwave, red_impact gfx
+  - name: effect_music_note
     dir: effects
     type: code
     start: 0x359F20
@@ -2476,8 +2476,8 @@ segments:
     subsegments:
     - [0x359F20, c, music_note]
     - [0x35A580, data]
-  - [0x35A5E0, bin] # effect 38 gfx
-  - name: smoke_burst
+  - [0x35A5E0, bin] # music_note gfx
+  - name: effect_smoke_burst
     dir: effects
     type: code
     start: 0x35B9D0
@@ -2485,7 +2485,7 @@ segments:
     subsegments:
     - [0x35B9D0, c, smoke_burst]
     - [0x35BFB0, data]
-  - name: sweat
+  - name: effect_sweat
     dir: effects
     type: code
     start: 0x35BFD0
@@ -2493,8 +2493,8 @@ segments:
     subsegments:
     - [0x35BFD0, c, sweat]
     - [0x35C530, data]
-  - [0x35C550, bin] # effect 40 gfx
-  - name: sleep_bubble
+  - [0x35C550, bin] # sweat gfx
+  - name: effect_sleep_bubble
     dir: effects
     type: code
     start: 0x35CA80
@@ -2502,8 +2502,8 @@ segments:
     subsegments:
     - [0x35CA80, c, sleep_bubble]
     - [0x35D460, data]
-  - [0x35D510, bin] # effect 41 gfx
-  - name: windy_leaves
+  - [0x35D510, bin] # sleep_bubble gfx
+  - name: effect_windy_leaves
     dir: effects
     type: code
     start: 0x35DA00
@@ -2511,7 +2511,7 @@ segments:
     subsegments:
     - [0x35DA00, c, windy_leaves]
     - [0x35E8A0, data]
-  - name: falling_leaves
+  - name: effect_falling_leaves
     dir: effects
     type: code
     start: 0x35E920
@@ -2519,8 +2519,8 @@ segments:
     subsegments:
     - [0x35E920, c, falling_leaves]
     - [0x35F0A0, data]
-  - [0x35F0E0, bin] # effect 44 gfx
-  - name: stars_spread
+  - [0x35F0E0, bin] # falling_leaves gfx
+  - name: effect_stars_spread
     dir: effects
     type: code
     start: 0x3602C0
@@ -2528,8 +2528,8 @@ segments:
     subsegments:
     - [0x3602C0, c, stars_spread]
     - [0x360A10, data]
-  - [0x360A30, bin] # effect 45 gfx
-  - name: steam_burst
+  - [0x360A30, bin] # stars_spread gfx
+  - name: effect_steam_burst
     dir: effects
     type: code
     start: 0x360F40
@@ -2537,8 +2537,8 @@ segments:
     subsegments:
     - [0x360F40, c, steam_burst]
     - [0x361640, data]
-  - [0x361670, bin] # effect 46 gfx
-  - name: stars_orbiting
+  - [0x361670, bin] # steam_burst gfx
+  - name: effect_stars_orbiting
     dir: effects
     type: code
     start: 0x3625C0
@@ -2546,8 +2546,8 @@ segments:
     subsegments:
     - [0x3625C0, c, stars_orbiting]
     - [0x362C30, data]
-  - [0x362C50, bin] # effect 47 gfx
-  - name: big_snowflakes
+  - [0x362C50, bin] # stars_orbiting gfx
+  - name: effect_big_snowflakes
     dir: effects
     type: code
     start: 0x363160
@@ -2555,8 +2555,8 @@ segments:
     subsegments:
     - [0x363160, c, big_snowflakes]
     - [0x363890, data]
-  - [0x3638C0, bin] # effect 48 gfx
-  - name: debuff
+  - [0x3638C0, bin] # big_snowflakes gfx
+  - name: effect_debuff
     dir: effects
     type: code
     start: 0x364300
@@ -2564,8 +2564,8 @@ segments:
     subsegments:
     - [0x364300, c, debuff]
     - [0x364BC0, data]
-  - [0x364C00, bin] # effect 49 gfx
-  - name: green_impact
+  - [0x364C00, bin] # debuff gfx
+  - name: effect_green_impact
     dir: effects
     type: code
     start: 0x364F10
@@ -2573,8 +2573,8 @@ segments:
     subsegments:
     - [0x364F10, c, green_impact]
     - [0x365970, data]
-  - [0x3659B0, bin] # effect 50 gfx
-  - name: radial_shimmer
+  - [0x3659B0, bin] # green_impact gfx
+  - name: effect_radial_shimmer
     dir: effects
     type: code
     start: 0x366030
@@ -2582,8 +2582,8 @@ segments:
     subsegments:
     - [0x366030, c, radial_shimmer]
     - [0x366C80, data]
-  - [0x366D60, bin] # effect 51 gfx
-  - name: ending_decals
+  - [0x366D60, bin] # radial_shimmer gfx
+  - name: effect_ending_decals
     dir: effects
     type: code
     start: 0x36A8D0
@@ -2591,8 +2591,8 @@ segments:
     subsegments:
     - [0x36A8D0, c, ending_decals]
     - [0x36AE80, data]
-  - [0x36AEE0, bin] # effect 52 gfx
-  - name: light_rays
+  - [0x36AEE0, bin] # ending_decals gfx
+  - name: effect_light_rays
     dir: effects
     type: code
     start: 0x36D020
@@ -2600,8 +2600,8 @@ segments:
     subsegments:
     - [0x36D020, c, light_rays]
     - [0x36DE10, data]
-  - [0x36DF90, bin] # effect 53 gfx
-  - name: lightning
+  - [0x36DF90, bin] # light_rays gfx
+  - name: effect_lightning
     dir: effects
     type: code
     start: 0x36E1D0
@@ -2609,8 +2609,8 @@ segments:
     subsegments:
     - [0x36E1D0, c, lightning]
     - [0x36ED30, data]
-  - [0x36ED60, bin] # effect 54 gfx
-  - name: fire_breath
+  - [0x36ED60, bin] # lightning gfx
+  - name: effect_fire_breath
     dir: effects
     type: code
     start: 0x372790
@@ -2618,8 +2618,8 @@ segments:
     subsegments:
     - [0x372790, c, fire_breath]
     - [0x373390, data]
-  - [0x3733E0, bin] # effect 55 gfx
-  - name: shimmer_burst
+  - [0x3733E0, bin] # fire_breath gfx
+  - name: effect_shimmer_burst
     dir: effects
     type: code
     start: 0x3740B0
@@ -2627,7 +2627,7 @@ segments:
     subsegments:
     - [0x3740B0, c, shimmer_burst]
     - [0x374D80, data]
-  - name: energy_shockwave
+  - name: effect_energy_shockwave
     dir: effects
     type: code
     start: 0x374E50
@@ -2635,8 +2635,8 @@ segments:
     subsegments:
     - [0x374E50, c, energy_shockwave]
     - [0x375500, data]
-  - [0x375510, bin] # effect 57 gfx
-  - name: shimmer_wave
+  - [0x375510, bin] # energy_shockwave gfx
+  - name: effect_shimmer_wave
     dir: effects
     type: code
     start: 0x376460
@@ -2644,7 +2644,7 @@ segments:
     subsegments:
     - [0x376460, c, shimmer_wave]
     - [0x376FC0, data]
-  - name: aura
+  - name: effect_aura
     dir: effects
     type: code
     start: 0x377070
@@ -2652,26 +2652,26 @@ segments:
     subsegments:
     - [0x377070, c, aura]
     - [0x377F00, data]
-  - [0x377F80, bin] # effect 59 gfx
-  - name: effect_60
+  - [0x377F80, bin] # aura gfx
+  - name: effect_effect_3C
     dir: effects
     type: code
     start: 0x37A3F0
     vram: 0xE0078000
     subsegments:
-    - [0x37A3F0, c, effect_60]
+    - [0x37A3F0, c, effect_3C]
     - [0x37ACF0, data]
-  - [0x37ADD0, bin] # effect 60 gfx
-  - name: effect_61
+  - [0x37ADD0, bin] # effect_3C gfx
+  - name: effect_effect_3D
     dir: effects
     type: code
     start: 0x37C540
     vram: 0xE007A000
     subsegments:
-    - [0x37C540, c, effect_61]
+    - [0x37C540, c, effect_3D]
     - [0x37D140, data]
-  - [0x37D180, bin] # effect 61 gfx
-  - name: blast
+  - [0x37D180, bin] # effect_3D gfx
+  - name: effect_blast
     dir: effects
     type: code
     start: 0x37D490
@@ -2679,17 +2679,17 @@ segments:
     subsegments:
     - [0x37D490, c, blast]
     - [0x37D9A0, data]
-  - [0x37D9D0, bin] # effect 62, effect 66 gfx
-  - name: fire_flower_attacking # should be called fire_flower but we already have a segment with that name TODO rename
+  - [0x37D9D0, bin] # blast, bombette_breaking gfx
+  - name: effect_fire_flower # should be called fire_flower but we already have a segment with that name TODO rename
     dir: effects
     type: code
     start: 0x37F720
     vram: 0xE007E000
     subsegments:
-    - [0x37F720, c, fire_flower_attacking]
+    - [0x37F720, c, fire_flower]
     - [0x380350, data]
-  - [0x3803A0, bin] # effect 63 gfx
-  - name: recover
+  - [0x3803A0, bin] # fire_flower gfx
+  - name: effect_recover
     dir: effects
     type: code
     start: 0x3812C0
@@ -2697,8 +2697,8 @@ segments:
     subsegments:
     - [0x3812C0, c, recover]
     - [0x381D80, data]
-  - [0x381E00, bin] # effect 64 gfx
-  - name: disable_x
+  - [0x381E00, bin] # recover gfx
+  - name: effect_disable_x
     dir: effects
     type: code
     start: 0x385640
@@ -2706,8 +2706,8 @@ segments:
     subsegments:
     - [0x385640, c, disable_x]
     - [0x386340, data]
-  - [0x3863B0, bin] # effect 65 gfx
-  - name: bombette_breaking
+  - [0x3863B0, bin] # disable_x gfx
+  - name: effect_bombette_breaking
     dir: effects
     type: code
     start: 0x3889D0
@@ -2715,7 +2715,7 @@ segments:
     subsegments:
     - [0x3889D0, c, bombette_breaking]
     - [0x3897E0, data]
-  - name: firework
+  - name: effect_firework
     dir: effects
     type: code
     start: 0x389850
@@ -2723,8 +2723,8 @@ segments:
     subsegments:
     - [0x389850, c, firework]
     - [0x38A2F0, data]
-  - [0x38A350, bin] # effect 67 gfx
-  - name: confetti
+  - [0x38A350, bin] # firework gfx
+  - name: effect_confetti
     dir: effects
     type: code
     start: 0x38ADF0
@@ -2732,8 +2732,8 @@ segments:
     subsegments:
     - [0x38ADF0, c, confetti]
     - [0x38BAB0, data]
-  - [0x38BBA0, bin] # effect 68 gfx
-  - name: snowfall
+  - [0x38BBA0, bin] # confetti gfx
+  - name: effect_snowfall
     dir: effects
     type: code
     start: 0x38C5F0
@@ -2741,17 +2741,17 @@ segments:
     subsegments:
     - [0x38C5F0, c, snowfall]
     - [0x38D040, data]
-  - [0x38D070, bin] # effect 69 gfx
-  - name: effect_70
+  - [0x38D070, bin] # snowfall gfx
+  - name: effect_effect_46
     dir: effects
     type: code
     start: 0x38DE00
     vram: 0xE008C000
     subsegments:
-    - [0x38DE00, c, effect_70]
+    - [0x38DE00, c, effect_46]
     - [0x38E8F0, data]
-  - [0x38E990, bin] # effect 70 gfx
-  - name: gather_magic
+  - [0x38E990, bin] # effect_46 gfx
+  - name: effect_gather_magic
     dir: effects
     type: code
     start: 0x38EE60
@@ -2759,8 +2759,8 @@ segments:
     subsegments:
     - [0x38EE60, c, gather_magic]
     - [0x38F6F0, data]
-  - [0x38F710, bin] # effect 71 gfx
-  - name: attack_result_text
+  - [0x38F710, bin] # gather_magic gfx
+  - name: effect_attack_result_text
     dir: effects
     type: code
     start: 0x38F900
@@ -2768,7 +2768,7 @@ segments:
     subsegments:
     - [0x38F900, c, attack_result_text]
     - [0x390340, data]
-  - type: group # effect 72 gfx
+  - type: group # attack_result_text gfx
     start: 0x3903D0
     subsegments:
     - [0x3903D0, ia4, battle/lucky, 64, 32]
@@ -2777,7 +2777,7 @@ segments:
     - [0x390FD0, ia4, battle/nice,  64, 32]
     - [0x3913D0, ia4, battle/super, 64, 32]
     - [0x3917D0, bin]
-  - name: small_gold_sparkle
+  - name: effect_small_gold_sparkle
     dir: effects
     type: code
     start: 0x391D30
@@ -2785,8 +2785,8 @@ segments:
     subsegments:
     - [0x391D30, c, small_gold_sparkle]
     - [0x3923C0]
-  - [0x392440, bin] # effect 73 gfx
-  - name: flashing_box_shockwave
+  - [0x392440, bin] # small_gold_sparkle gfx
+  - name: effect_flashing_box_shockwave
     dir: effects
     type: code
     start: 0x3928D0
@@ -2794,8 +2794,8 @@ segments:
     subsegments:
     - [0x3928D0, c, flashing_box_shockwave]
     - [0x393080, data]
-  - [0x3930A0, bin] # effect 74 gfx
-  - name: balloon
+  - [0x3930A0, bin] # flashing_box_shockwave gfx
+  - name: effect_balloon
     dir: effects
     type: code
     start: 0x394280
@@ -2803,8 +2803,8 @@ segments:
     subsegments:
     - [0x394280, c, balloon]
     - [0x394660]
-  - [0x394670, bin] # effect 75 gfx
-  - name: floating_rock
+  - [0x394670, bin] # balloon gfx
+  - name: effect_floating_rock
     dir: effects
     type: code
     start: 0x395BB0
@@ -2812,8 +2812,8 @@ segments:
     subsegments:
     - [0x395BB0, c, floating_rock]
     - [0x3960C0, data]
-  - [0x3960F0, bin] # effect 76 gfx
-  - name: chomp_drop
+  - [0x3960F0, bin] # floating_rock gfx
+  - name: effect_chomp_drop
     dir: effects
     type: code
     start: 0x3965B0
@@ -2821,16 +2821,16 @@ segments:
     subsegments:
     - [0x3965B0, c, chomp_drop]
     - [0x397010, data]
-  - [0x397040, bin] # effect 77 gfx
-  - name: quizmo_stage
+  - [0x397040, bin] # chomp_drop gfx
+  - name: effect_quizmo_stage
     dir: effects
     type: code
     start: 0x3981F0
     vram: 0xE009C000
     subsegments:
     - [0x3981F0, c, quizmo_stage]
-  - [0x398BC0, bin] # effect 78 gfx
-  - name: radiating_energy_orb
+  - [0x398BC0, bin] # quizmo_stage gfx
+  - name: effect_radiating_energy_orb
     dir: effects
     type: code
     start: 0x39FF20
@@ -2838,16 +2838,16 @@ segments:
     subsegments:
     - [0x39FF20, c, radiating_energy_orb]
     - [0x3A0D10]
-  - [0x3A0D60, bin] # effect 79 gfx
-  - name: quizmo_answer
+  - [0x3A0D60, bin] # radiating_energy_orb gfx
+  - name: effect_quizmo_answer
     dir: effects
     type: code
     start: 0x3A2290
     vram: 0xE00A0000
     subsegments:
     - [0x3A2290, c, quizmo_answer]
-  - [0x3A2440, bin] # effect 80 gfx
-  - name: motion_blur_flame
+  - [0x3A2440, bin] # quizmo_answer gfx
+  - name: effect_motion_blur_flame
     dir: effects
     type: code
     start: 0x3A2990
@@ -2855,8 +2855,8 @@ segments:
     subsegments:
     - [0x3A2990, c, motion_blur_flame]
     - [0x3A3360]
-  - [0x3A33D0, bin] # effect 81 gfx
-  - name: energy_orb_wave
+  - [0x3A33D0, bin] # motion_blur_flame gfx
+  - name: effect_energy_orb_wave
     dir: effects
     type: code
     start: 0x3A37E0
@@ -2864,16 +2864,16 @@ segments:
     subsegments:
     - [0x3A37E0, c, energy_orb_wave]
     - [0x3A42B0]
-  - [0x3A4320, bin] # effect 82 gfx
-  - name: merlin_house_stars
+  - [0x3A4320, bin] # energy_orb_wave gfx
+  - name: effect_merlin_house_stars
     dir: effects
     type: code
     start: 0x3A5550
     vram: 0xE00A6000
     subsegments:
     - [0x3A5550, c, merlin_house_stars]
-  - [0x3A5BE0, bin] # effect 83 gfx
-  - name: quizmo_audience
+  - [0x3A5BE0, bin] # merlin_house_stars gfx
+  - name: effect_quizmo_audience
     dir: effects
     type: code
     start: 0x3A70F0
@@ -2881,8 +2881,8 @@ segments:
     subsegments:
     - [0x3A70F0, c, quizmo_audience]
     - [0x3A7710]
-  - [0x3A77A0, bin] # effect 84 gfx
-  - name: butterflies
+  - [0x3A77A0, bin] # quizmo_audience gfx
+  - name: effect_butterflies
     dir: effects
     type: code
     start: 0x3AA920
@@ -2890,8 +2890,8 @@ segments:
     subsegments:
     - [0x3AA920, c, butterflies]
     - [0x3AAFE0]
-  - [0x3AB030, bin] # effect 85 gfx
-  - name: stat_change
+  - [0x3AB030, bin] # butterflies gfx
+  - name: effect_stat_change
     dir: effects
     type: code
     start: 0x3AEE20
@@ -2899,16 +2899,16 @@ segments:
     subsegments:
     - [0x3AEE20, c, stat_change]
     - [0x3AF5D0]
-  - [0x3AF700, bin] # effect 86 gfx
-  - name: snaking_static
+  - [0x3AF700, bin] # stat_change gfx
+  - name: effect_snaking_static
     dir: effects
     type: code
     start: 0x3B2350
     vram: 0xE00AE000
     subsegments:
     - [0x3B2350, c, snaking_static]
-  - [0x3B2D90, bin] # effect 87 gfx
-  - name: thunderbolt_ring
+  - [0x3B2D90, bin] # snaking_static gfx
+  - name: effect_thunderbolt_ring
     dir: effects
     type: code
     start: 0x3B3EB0
@@ -2916,8 +2916,8 @@ segments:
     subsegments:
     - [0x3B3EB0, c, thunderbolt_ring]
     - [0x3B4690]
-  - [0x3B46A0, bin] # effect 88 gfx
-  - name: squirt
+  - [0x3B46A0, bin] # thunderbolt_ring gfx
+  - name: effect_squirt
     dir: effects
     type: code
     start: 0x3B4790
@@ -2925,8 +2925,8 @@ segments:
     subsegments:
     - [0x3B4790, c, squirt]
     - [0x3B5330]
-  - [0x3B5340, bin] # effect 89 gfx
-  - name: water_block
+  - [0x3B5340, bin] # squirt gfx
+  - name: effect_water_block
     dir: effects
     type: code
     start: 0x3B5CF0
@@ -2934,8 +2934,8 @@ segments:
     subsegments:
     - [0x3B5CF0, c, water_block]
     - [0x3B69E0]
-  - [0x3B6BF0, bin] # effect 90 gfx
-  - name: waterfall
+  - [0x3B6BF0, bin] # water_block gfx
+  - name: effect_waterfall
     dir: effects
     type: code
     start: 0x3B7160
@@ -2943,8 +2943,8 @@ segments:
     subsegments:
     - [0x3B7160, c, waterfall]
     - [0x3B78B0]
-  - [0x3B78D0, bin] # effect 91 gfx
-  - name: water_fountain
+  - [0x3B78D0, bin] # waterfall gfx
+  - name: effect_water_fountain
     dir: effects
     type: code
     start: 0x3B7B80
@@ -2952,8 +2952,8 @@ segments:
     subsegments:
     - [0x3B7B80, c, water_fountain]
     - [0x3B8470]
-  - [0x3B8860, bin] # effect 92 gfx
-  - name: underwater
+  - [0x3B8860, bin] # water_fountain gfx
+  - name: effect_underwater
     dir: effects
     type: code
     start: 0x3B8BD0
@@ -2961,8 +2961,8 @@ segments:
     subsegments:
     - [0x3B8BD0, c, underwater]
     - [0x3B9A50]
-  - [0x3B9A70, bin] # effect 93 gfx
-  - name: lightning_bolt
+  - [0x3B9A70, bin] # underwater gfx
+  - name: effect_lightning_bolt
     dir: effects
     type: code
     start: 0x3BA030
@@ -2970,8 +2970,8 @@ segments:
     subsegments:
     - [0x3BA030, c, lightning_bolt]
     - [0x3BAC60]
-  - [0x3BAEA0, bin] # effect 94 gfx
-  - name: water_splash
+  - [0x3BAEA0, bin] # lightning_bolt gfx
+  - name: effect_water_splash
     dir: effects
     type: code
     start: 0x3BBF60
@@ -2979,44 +2979,44 @@ segments:
     subsegments:
     - [0x3BBF60, c, water_splash]
     - [0x3BCA50, data]
-  - [0x3BCA90, bin] # effect 95 gfx
-  - name: snowman_doll_eff
+  - [0x3BCA90, bin] # water_splash gfx
+  - name: effect_snowman_doll
     dir: effects
     type: code
     start: 0x3BCD60
     vram: 0xE00C0000
     subsegments:
-    - [0x3BCD60, c, snowman_doll_eff]
+    - [0x3BCD60, c, snowman_doll]
     - [0x3BD770, data]
-  - [0x3BD9A0, bin] # effect 96 gfx
-  - name: fright_jar_eff
+  - [0x3BD9A0, bin] # snowman_doll gfx
+  - name: effect_fright_jar
     dir: effects
     type: code
     start: 0x3C11D0
     vram: 0xE00C2000
     subsegments:
-    - [0x3C11D0, c, fright_jar_eff]
+    - [0x3C11D0, c, fright_jar]
     - [0x3C1B60, data]
-  - [0x3C1BA0, bin] # effect 97 gfx
-  - name: stop_watch_eff
+  - [0x3C1BA0, bin] # fright_jar gfx
+  - name: effect_stop_watch
     dir: effects
     type: code
     start: 0x3CADF0
     vram: 0xE00C4000
     subsegments:
-    - [0x3CADF0, c, stop_watch_eff]
+    - [0x3CADF0, c, stop_watch]
     - [0x3CB7C0, data]
-  - [0x3CB890, bin] # effect 98 gfx
-  - name: effect_99
+  - [0x3CB890, bin] # stop_watch gfx
+  - name: effect_effect_63
     dir: effects
     type: code
     start: 0x3CC9E0
     vram: 0xE00C6000
     subsegments:
-    - [0x3CC9E0, c, effect_99]
+    - [0x3CC9E0, c, effect_63]
     - [0x3CD670, data]
-  - [0x3CD6E0, bin] # effect 99 gfx
-  - name: throw_spiny
+  - [0x3CD6E0, bin] # effect_63 gfx
+  - name: effect_throw_spiny
     dir: effects
     type: code
     start: 0x3CF3A0
@@ -3024,17 +3024,17 @@ segments:
     subsegments:
     - [0x3CF3A0, c, throw_spiny]
     - [0x3CFAB0, data]
-  - [0x3CFAF0, bin] # effect 100 gfx
-  - name: effect_101
+  - [0x3CFAF0, bin] # throw_spiny gfx
+  - name: effect_effect_65
     dir: effects
     type: code
     start: 0x3D0500
     vram: 0xE00CA000
     subsegments:
-    - [0x3D0500, c, effect_101]
+    - [0x3D0500, c, effect_65]
     - [0x3D11B0, data]
-  - [0x3D11E0, bin] # effect 101 gfx
-  - name: tubba_heart_attack
+  - [0x3D11E0, bin] # effect_65 gfx
+  - name: effect_tubba_heart_attack
     dir: effects
     type: code
     start: 0x3D1690
@@ -3042,8 +3042,8 @@ segments:
     subsegments:
     - [0x3D1690, c, tubba_heart_attack]
     - [0x3D2460, data]
-  - [0x3D2580, bin] # effect 102 gfx
-  - name: whirlwind
+  - [0x3D2580, bin] # tubba_heart_attack gfx
+  - name: effect_whirlwind
     dir: effects
     type: code
     start: 0x3D2AC0
@@ -3051,8 +3051,8 @@ segments:
     subsegments:
     - [0x3D2AC0, c, whirlwind]
     - [0x3D3910, data]
-  - [0x3D3930, bin] # effect 103 gfx
-  - name: red_impact
+  - [0x3D3930, bin] # whirlwind gfx
+  - name: effect_red_impact
     dir: effects
     type: code
     start: 0x3D3E20
@@ -3060,7 +3060,7 @@ segments:
     subsegments:
     - [0x3D3E20, c, red_impact]
     - [0x3D4930, data]
-  - name: floating_cloud_puff
+  - name: effect_floating_cloud_puff
     dir: effects
     type: code
     start: 0x3D4970
@@ -3068,8 +3068,8 @@ segments:
     subsegments:
     - [0x3D4970, c, floating_cloud_puff]
     - [0x3D4E70, data]
-  - [0x3D4E90, bin] # effect 105 gfx
-  - name: energy_in_out
+  - [0x3D4E90, bin] # floating_cloud_puff gfx
+  - name: effect_energy_in_out
     dir: effects
     type: code
     start: 0x3D5020
@@ -3077,8 +3077,8 @@ segments:
     subsegments:
     - [0x3D5020, c, energy_in_out]
     - [0x3D5E60, data]
-  - [0x3D5F30, bin] # effect 107 gfx
-  - name: tattle_window
+  - [0x3D5F30, bin] # energy_in_out gfx
+  - name: effect_tattle_window
     dir: effects
     type: code
     start: 0x3D67C0
@@ -3086,8 +3086,8 @@ segments:
     subsegments:
     - [0x3D67C0, c, tattle_window]
     - [0x3D6FA0, data]
-  - [0x3D7040, bin] # effect 108 gfx
-  - name: shiny_flare
+  - [0x3D7040, bin] # tattle_window gfx
+  - name: effect_shiny_flare
     dir: effects
     type: code
     start: 0x3D7240
@@ -3095,8 +3095,8 @@ segments:
     subsegments:
     - [0x3D7240, c, shiny_flare]
     - [0x3D7740, data]
-  - [0x3D7770, bin] # effect 109 gfx
-  - name: huff_puff_breath
+  - [0x3D7770, bin] # shiny_flare gfx
+  - name: effect_huff_puff_breath
     dir: effects
     type: code
     start: 0x3D7A70
@@ -3104,8 +3104,8 @@ segments:
     subsegments:
     - [0x3D7A70, c, huff_puff_breath]
     - [0x3D80B0, data]
-  - [0x3D80C0, bin] # effect 110 gfx
-  - name: cold_breath
+  - [0x3D80C0, bin] # huff_puff_breath gfx
+  - name: effect_cold_breath
     dir: effects
     type: code
     start: 0x3D8720
@@ -3113,8 +3113,8 @@ segments:
     subsegments:
     - [0x3D8720, c, cold_breath]
     - [0x3D8F30, data]
-  - [0x3D9100, bin] # effect 111 gfx
-  - name: embers
+  - [0x3D9100, bin] # ecold_breath gfx
+  - name: effect_embers
     dir: effects
     type: code
     start: 0x3DB460
@@ -3122,8 +3122,8 @@ segments:
     subsegments:
     - [0x3DB460, c, embers]
     - [0x3DBEA0, data]
-  - [0x3DBF40, bin] # effect 112 gfx
-  - name: hieroglyphs
+  - [0x3DBF40, bin] # embers gfx
+  - name: effect_hieroglyphs
     dir: effects
     type: code
     start: 0x3DC310
@@ -3131,8 +3131,8 @@ segments:
     subsegments:
     - [0x3DC310, c, hieroglyphs]
     - [0x3DCD00, data]
-  - [0x3DCD50, bin] # effect 113 gfx
-  - name: misc_particles
+  - [0x3DCD50, bin] # hieroglyphs gfx
+  - name: effect_misc_particles
     dir: effects
     type: code
     start: 0x3DE000
@@ -3140,8 +3140,8 @@ segments:
     subsegments:
     - [0x3DE000, c, misc_particles]
     - [0x3DED90, data]
-  - [0x3DEE60, bin] # effect 114 gfx
-  - name: static_status
+  - [0x3DEE60, bin] # misc_particles gfx
+  - name: effect_static_status
     dir: effects
     type: code
     start: 0x3E0930
@@ -3149,8 +3149,8 @@ segments:
     subsegments:
     - [0x3E0930, c, static_status]
     - [0x3E11B0, data]
-  - [0x3E12D0, bin] # effect 115 gfx
-  - name: moving_cloud
+  - [0x3E12D0, bin] # static_status gfx
+  - name: effect_moving_cloud
     dir: effects
     type: code
     start: 0x3E1690
@@ -3158,17 +3158,17 @@ segments:
     subsegments:
     - [0x3E1690, c, moving_cloud]
     - [0x3E1CC0, data]
-  - [0x3E1CD0, bin] # effect 116 gfx
-  - name: effect_117
+  - [0x3E1CD0, bin] # moving_cloud gfx
+  - name: effect_effect_75
     dir: effects
     type: code
     start: 0x3E1EE0
     vram: 0xE00EA000
     subsegments:
-    - [0x3E1EE0, c, effect_117]
+    - [0x3E1EE0, c, effect_75]
     - [0x3E2930]
-  - [0x3E2960, bin] # effect 117 gfx
-  - name: firework_rocket
+  - [0x3E2960, bin] # effect_75 gfx
+  - name: effect_firework_rocket
     dir: effects
     type: code
     start: 0x3E43A0
@@ -3176,8 +3176,8 @@ segments:
     subsegments:
     - [0x3E43A0, c, firework_rocket]
     - [0x3E5060, data]
-  - [0x3E5350, bin] # effect 119 gfx
-  - name: peach_star_beam
+  - [0x3E5350, bin] # firework_rocket gfx
+  - name: effect_peach_star_beam
     dir: effects
     type: code
     start: 0x3E54C0
@@ -3185,8 +3185,8 @@ segments:
     subsegments:
     - [0x3E54C0, c, peach_star_beam]
     - [0x3E5ED0, data]
-  - [0x3E5F30, bin] # effect 120 gfx
-  - name: chapter_change
+  - [0x3E5F30, bin] # peach_star_beam gfx
+  - name: effect_chapter_change
     dir: effects
     type: code
     start: 0x3EB4E0
@@ -3194,7 +3194,7 @@ segments:
     subsegments:
     - [0x3EB4E0, c, chapter_change]
     - [0x3EBC30, data]
-  - type: group # effect 121 gfx
+  - type: group # chapter_change gfx
     start: 0x3EBE60
     subsegments:
     - [0x3EBE60, ia8,    world/ch0,               144, 40]
@@ -3211,7 +3211,7 @@ segments:
     - [0x3F6BA0, ia8,    world/ch8,               64,  64]
     - [0x3F7BA0, rgba16, world/chapter_rainbow,   8,  16]
     - [0x3F7CA0, bin]
-  - name: ice_shard
+  - name: effect_ice_shard
     dir: effects
     type: code
     start: 0x3F83F0
@@ -3219,8 +3219,8 @@ segments:
     subsegments:
     - [0x3F83F0, c, ice_shard]
     - [0x3F8CA0, data]
-  - [0x3F8CC0, bin] # effect 122 gfx
-  - name: spirit_card
+  - [0x3F8CC0, bin] # ice_shard gfx
+  - name: effect_spirit_card
     dir: effects
     type: code
     start: 0x3F9E50
@@ -3228,7 +3228,7 @@ segments:
     subsegments:
     - [0x3F9E50, c, spirit_card]
     - [0x3FA480, data]
-  - type: group # effect 123,125 gfx
+  - type: group # effect spirit_card, something_rotating gfx
     start: 0x3FA4B0
     subsegments:
     - start: 0x3FA4B0
@@ -3311,7 +3311,7 @@ segments:
       height: 48
     - [0x3FE0B0, palette, star_cards/klevar]
     - [0x3FE0D0, bin]
-  - name: lil_oink
+  - name: effect_lil_oink
     dir: effects
     type: code
     start: 0x3FEAE0
@@ -3319,8 +3319,8 @@ segments:
     subsegments:
     - [0x3FEAE0, c, lil_oink]
     - [0x3FF180, data]
-  - [0x3FF250, bin] # effect 124 gfx
-  - name: something_rotating
+  - [0x3FF250, bin] # lil_oink gfx
+  - name: effect_something_rotating
     dir: effects
     type: code
     start: 0x402640
@@ -3328,7 +3328,7 @@ segments:
     subsegments:
     - [0x402640, c, something_rotating]
     - [0x4032A0, data]
-  - name: breaking_junk
+  - name: effect_breaking_junk
     dir: effects
     type: code
     start: 0x403400
@@ -3336,8 +3336,8 @@ segments:
     subsegments:
     - [0x403400, c, breaking_junk]
     - [0x403BB0, data]
-  - [0x403BF0, bin] # effect 126 gfx
-  - name: partner_buff
+  - [0x403BF0, bin] # breaking_junk gfx
+  - name: effect_partner_buff
     dir: effects
     type: code
     start: 0x404220
@@ -3345,7 +3345,7 @@ segments:
     subsegments:
     - [0x404220, c, partner_buff]
     - [0x404E40, data]
-  - type: group # effect 127 gfx
+  - type: group # partner_buff gfx
     start: 0x404F40
     subsegments:
     - start: 0x404F40
@@ -3377,7 +3377,7 @@ segments:
       height: 160
     - [0x406540, palette, world/numbers]
     - [0x406740, bin]
-  - name: quizmo_assistant
+  - name: effect_quizmo_assistant
     dir: effects
     type: code
     start: 0x406B40
@@ -3385,8 +3385,8 @@ segments:
     subsegments:
     - [0x406B40, c, quizmo_assistant]
     - [0x407040, data]
-  - [0x407080, bin] # effect 128 gfx
-  - name: ice_pillar
+  - [0x407080, bin] # quizmo_assistant gfx
+  - name: effect_ice_pillar
     dir: effects
     type: code
     start: 0x409990
@@ -3394,8 +3394,8 @@ segments:
     subsegments:
     - [0x409990, c, ice_pillar]
     - [0x40A180, data]
-  - [0x40A1C0, bin] # effect 129 gfx
-  - name: sun
+  - [0x40A1C0, bin] # ice_pillar gfx
+  - name: effect_sun
     dir: effects
     type: code
     start: 0x40B3F0
@@ -3403,8 +3403,8 @@ segments:
     subsegments:
     - [0x40B3F0, c, sun]
     - [0x40BB70, data]
-  - [0x40BBA0, bin] # effect 130 gfx
-  - name: star_spirits_energy
+  - [0x40BBA0, bin] # sun gfx
+  - name: effect_star_spirits_energy
     dir: effects
     type: code
     start: 0x40C5A0
@@ -3412,8 +3412,8 @@ segments:
     subsegments:
     - [0x40C5A0, c, star_spirits_energy]
     - [0x40D130, data]
-  - [0x40D290, bin] # effect 131 gfx
-  - name: pink_sparkles
+  - [0x40D290, bin] # star_spirits_energy gfx
+  - name: effect_pink_sparkles
     dir: effects
     type: code
     start: 0x412730
@@ -3421,7 +3421,7 @@ segments:
     subsegments:
     - [0x412730, c, pink_sparkles]
     - [0x412FD0, data]
-  - name: star_outline
+  - name: effect_star_outline
     dir: effects
     type: code
     start: 0x413360
@@ -3429,16 +3429,16 @@ segments:
     subsegments:
     - [0x413360, c, star_outline]
     - [0x413F20, data]
-  - [0x413FA0, bin] # effect 133 gfx
-  - name: effect_134
+  - [0x413FA0, bin] # star_outline gfx
+  - name: effect_effect_86
     dir: effects
     type: code
     start: 0x414BA0
     vram: 0xE0128000
     subsegments:
-    - [0x414BA0, c, effect_134]
+    - [0x414BA0, c, effect_86]
     - [0x415020]
-  - [0x415060, bin] # effect 134 gfx
+  - [0x415060, bin] # effect_86 gfx
   - type: code
     start: 0x415D90
     vram: 0x802A1000

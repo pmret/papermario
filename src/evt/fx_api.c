@@ -192,7 +192,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     iVar1 = new_var;
 
     switch (effectID) {
-        case EFFECT_ID_00:
+        case EFFECT_00:
             fx_blast(0, fVar1, fVar2, fVar3, 3.0f, iVar5);
             break;
         case EFFECT_BIG_SMOKE_PUFF:
@@ -351,7 +351,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             effectRet = fx_lightning(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
             break;
         case EFFECT_FIRE_BREATH:
-            effectRet = fx_fire_breath(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, iVar9, iVar10);
+        effectRet = fx_fire_breath(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, iVar9, iVar10);
             break;
         case EFFECT_SHIMMER_BURST:
             fx_shimmer_burst(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
@@ -366,19 +366,19 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_aura(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
             evt_set_variable(script, a6, sp34);
             break;
-        case EFFECT_ID_3C:
-            playFX_3C(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+        case EFFECT_3C:
+            fx_3C(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
             evt_set_variable(script, a6, sp34);
             break;
-        case EFFECT_ID_3D:
-            playFX_3D(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, &sp3C);
+        case EFFECT_3D:
+            fx_3D(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, &sp3C);
             evt_set_variable(script, a9, sp3C);
             break;
         case EFFECT_BLAST:
             fx_blast(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
-        case EFFECT_FIRE_FLOWER_ATTACKING:
-            effectRet = fx_fire_flower_attacking(iVar1, fVar2, fVar3, fVar4, iVar5);
+        case EFFECT_FIRE_FLOWER:
+            effectRet = fx_fire_flower(iVar1, fVar2, fVar3, fVar4, iVar5);
             break;
         case EFFECT_RECOVER:
             effectRet = fx_recover(iVar1, fVar2, fVar3, fVar4, iVar5);
@@ -398,8 +398,8 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
         case EFFECT_SNOWFALL:
             effectRet = fx_snowfall(iVar1, iVar2);
             break;
-        case EFFECT_ID_46:
-            effectRet = playFX_46_whirlwind(iVar1, a2, fVar3, iVar4);
+        case EFFECT_46:
+            effectRet = fx_46(iVar1, a2, fVar3, iVar4);
             break;
         case EFFECT_GATHER_MAGIC:
             effectRet = fx_gather_magic(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
@@ -467,23 +467,23 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
         case EFFECT_WATER_SPLASH:
             effectRet = fx_water_splash(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
-        case EFFECT_SNOWMAN_DOLL_EFF:
-            effectRet = fx_snowman_doll_eff(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
+        case EFFECT_SNOWMAN_DOLL:
+            effectRet = fx_snowman_doll(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
-        case EFFECT_FRIGHT_JAR_EFF:
-            effectRet = fx_fright_jar_eff(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
+        case EFFECT_FRIGHT_JAR:
+            effectRet = fx_fright_jar(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
-        case EFFECT_STOP_WATCH_EFF:
-            effectRet = fx_stop_watch_eff(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
+        case EFFECT_STOP_WATCH:
+            effectRet = fx_stop_watch(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
-        case EFFECT_ID_63:
-            effectRet = playFX_63(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, fVar8, iVar9, iVar10);
+        case EFFECT_63:
+            effectRet = fx_63(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, fVar8, iVar9, iVar10);
             break;
         case EFFECT_THROW_SPINY:
             effectRet = fx_throw_spiny(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, fVar8, iVar9);
             break;
-        case EFFECT_ID_65:
-            effectRet = playFX_65(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
+        case EFFECT_65:
+            effectRet = fx_65(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
         case EFFECT_TUBBA_HEART_ATTACK:
             effectRet = fx_tubba_heart_attack(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
@@ -527,8 +527,8 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
         case EFFECT_MOVING_CLOUD:
             effectRet = fx_moving_cloud(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, fVar8, fVar9);
             break;
-        case EFFECT_ID_75:
-            effectRet = playFX_75(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
+        case EFFECT_75:
+            effectRet = fx_75(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
         case EFFECT_FIREWORK_ROCKET:
             effectRet = fx_firework_rocket(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, fVar8, iVar9);
@@ -578,8 +578,8 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
         case EFFECT_STAR_OUTLINE:
             effectRet = fx_star_outline(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
-        case EFFECT_ID_86:
-            effectRet = playFX_86(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
+        case EFFECT_86:
+            effectRet = fx_86(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
             break;
         default:
             PANIC();

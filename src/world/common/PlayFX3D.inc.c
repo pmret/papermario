@@ -13,7 +13,7 @@ ApiStatus N(PlayFX3D)(Evt* script, s32 isInitialStatus) {
     s32 var8 = evt_get_variable(script, *args++);
     s32 outVal;
 
-    playFX_3D(var1, var2, var3, var4, var5, var6, var7, var8, &outVal);
+    fx_3D(var1, var2, var3, var4, var5, var6, var7, var8, &outVal);
     script->varTable[0] = outVal;
     return ApiStatus_DONE2;
 }
