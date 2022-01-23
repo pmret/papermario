@@ -20,6 +20,7 @@ extern HudElementAnim HudScript_DescMsgPrev;
 extern HudElementAnim HudScript_DescMsgNext;
 
 extern MenuPanel gPausePanelTabs;
+extern MenuPanel gPausePanelStats;
 
 extern s32 D_80270108;
 extern s32 D_8027010C;
@@ -37,7 +38,7 @@ HudElementAnim* gPauseMenuIconScripts[] = {HudScript_AnimatedCursorHand, HudScri
                                HudScript_UnusedBadge, HudScript_StickTapRight, HudScript_PressAButton,
                                HudScript_PressStartButton, HudScript_StartButtonText};
 // TODO make pointers
-MenuPanel* gPauseMenuPanels[] = { &gPausePanelTabs, 0x8024F4AC, 0x8024F54C, 0x8024F5E4, 0x8024F88C, 0x8024FA10, 0x8025068C };
+MenuPanel* gPauseMenuPanels[] = { &gPausePanelTabs, &gPausePanelStats, 0x8024F54C, 0x8024F5E4, 0x8024F88C, 0x8024FA10, 0x8025068C };
 s32 gPauseMenuCursorPosX = 160;
 s32 gPauseMenuCursorPosY = -120;
 s32 gPauseMenuCursorOpacity = 0;
@@ -61,7 +62,7 @@ s32 D_8024F03C[] = { 9, 10, 11, 12, 13, 14, 15 };
 s32 D_8024F058[] = { 0x00000010, 0x00000011, 0x00000012, 0x00000013, 0x00000014, 0x00000015, 0x00000016,
                      0x00000002, 0x00000003, 0x00000004, 0x00000005, 0x00000006, 0x00000007, 0x00000008};
 s32 D_8024F090[] = { 5, 4, 5, 5, 5, 5, 6 };
-u8 gPauseMenuTextScrollInterpEasingLUT[] = { 0x00, 0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07, 0x07, 0x08};
+u8 gPauseMenuTextScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8};
 u8 gPauseMenuPageScrollInterpEasingLUT[] = { 0x00, 0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07, 0x07, 0x08};
 SpriteEntryData D_8024F0CC[] = { { .animID = 0x009E0000,
                                    .extraAnim1 = 0x009E0001,
@@ -84,7 +85,7 @@ Vp D_8024F100 = {
     }
 };
 s32 D_8024F110 = 0;
-MenuWindowBP D_8024F114[] = { { .windowID = 22,
+MenuWindowBP gPauseCommonWindowsBPs[] = { { .windowID = 22,
                                 .unk_01 = 0,
                                 .pos = { .x = 12,
                                          .y = 20 },
@@ -241,27 +242,26 @@ void pause_interp_cursor(void) {
     gPauseMenuCursorTargetOpacity = 255;
 }
 
-// TODO figure out what do arguments mean
-void func_80242F90(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
-                    s32* argA, s32* argB) {
-    Window* window = &gWindows[windowID];
+void func_80242F90(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   s32* rotX, s32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+    Window* window = &gWindows[windowIndex];
 
-    *argA = 0xA0;
+    *darkening = 160;
     window->flags &= ~(WINDOW_FLAGS_4 | WINDOW_FLAGS_8);
 }
 
-void func_80242FBC(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
-                    s32* argA, s32* argB) {
-    Window* window = &gWindows[windowID];
+void func_80242FBC(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   s32* rotX, s32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+    Window* window = &gWindows[windowIndex];
 
-    *argA = 0xA0;
-    *argB = 0x50;
+    *darkening = 160;
+    *opacity = 80;
     window->flags &= ~(WINDOW_FLAGS_4 | WINDOW_FLAGS_8);
 }
 
-void func_80242FF4(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
-                    s32* argA, s32* argB) {
-    Window* window = &gWindows[windowID];
+void func_80242FF4(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   s32* rotX, s32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+    Window* window = &gWindows[windowIndex];
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
@@ -269,31 +269,31 @@ void func_80242FF4(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     }
 
     if (updateCounter == 5) {
-        update_window_hierarchy(windowID, window->unk_02);
+        update_window_hierarchy(windowIndex, window->unk_02);
     }
 
     if (updateCounter < 10) {
-        *argA = (updateCounter + 1) * 0x10;
+        *darkening = (updateCounter + 1) * 0x10;
     } else {
-        *argA = 0xA0;
+        *darkening = 0xA0;
         window->flags &= ~WINDOW_FLAGS_8;
     }
 }
 
-void func_80243090(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
-                    s32* argA, s32* argB) {
-    Window* window = &gWindows[windowID];
+void func_80243090(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   s32* rotX, s32* rotY, s32* rotZ, s32* darkening, s32* opacity) {
+    Window* window = &gWindows[windowIndex];
 
     if (window->updateCounter == 0) {
-        update_window_hierarchy(windowID, window->unk_02);
-        *argA = 0;
+        update_window_hierarchy(windowIndex, window->unk_02);
+        *darkening = 0;
         window->flags &= ~WINDOW_FLAGS_8;
     }
 }
 
-void func_802430E4(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
-                    s32* argA, s32* argB) {
-    Window* window = &gWindows[windowID];
+void func_802430E4(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
+    Window* window = &gWindows[windowIndex];
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
@@ -301,88 +301,88 @@ void func_802430E4(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     }
 
     if (updateCounter < 16) {
-        *argB = updateCounter * 0x10;
+        *opacity = updateCounter * 0x10;
     } else {
-        *argB = 255;
+        *opacity = 255;
         window->flags &= ~WINDOW_FLAGS_8;
     }
 }
 
-void func_8024313C(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
-                    s32* argA, s32* argB) {
-    Window* window = &gWindows[windowID];
+void func_8024313C(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
+    Window* window = &gWindows[windowIndex];
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter < 16) {
-        *argB = 255 - (updateCounter * 16);
+        *opacity = 255 - (updateCounter * 16);
     } else {
-        *argB = 0;
+        *opacity = 0;
         window->flags = (window->flags & ~WINDOW_FLAGS_8) | WINDOW_FLAGS_4;
     }
 }
 
-void func_80243188(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
-                    s32* argA, s32* argB) {
-    Window* window = &gWindows[windowID];
+void func_80243188(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
+    Window* window = &gWindows[windowIndex];
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
         window->flags &= ~WINDOW_FLAGS_4;
     }
     if (updateCounter < 7) {
-        *arg1 = D_8024EFC4[updateCounter];
-        *arg7 += D_8024EFCC[updateCounter]; // BUG!  length of array is only 6
+        *flags = D_8024EFC4[updateCounter];
+        *rotX += D_8024EFCC[updateCounter]; // BUG!  length of array is only 6
     } else {
-        *arg1 = D_8024EFC4[5];
-        *arg7 += D_8024EFCC[6]; // BUG!  length of array is only 6
+        *flags = D_8024EFC4[5];
+        *rotX += D_8024EFCC[6]; // BUG!  length of array is only 6
         window->flags &= ~WINDOW_FLAGS_8;
     }
 }
 
-void func_80243238(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
-                    s32* argA, s32* argB) {
-    Window* window = &gWindows[windowID];
+void func_80243238(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
+    Window* window = &gWindows[windowIndex];
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
         window->flags &= ~WINDOW_FLAGS_4;
     }
     if (updateCounter < 7) {
-        *arg1 = D_8024EFC4[updateCounter];
-        *arg7 += D_8024EFD8[updateCounter];
+        *flags = D_8024EFC4[updateCounter];
+        *rotX += D_8024EFD8[updateCounter];
     } else {
-        *arg1 = D_8024EFC4[5];
-        *arg7 += D_8024EFD8[6]; // BUG!  length of array is only 6
+        *flags = D_8024EFC4[5];
+        *rotX += D_8024EFD8[6]; // BUG!  length of array is only 6
         window->flags &= ~WINDOW_FLAGS_8;
     }
 }
 
-void func_802432E8(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
-                    s32* argA, s32* argB) {
-    Window* window = &gWindows[windowID];
+void func_802432E8(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
+    Window* window = &gWindows[windowIndex];
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter < 5) {
-        *arg1 = D_8024EFE4[updateCounter];
-        *arg7 += D_8024F000[updateCounter];
+        *flags = D_8024EFE4[updateCounter];
+        *rotX += D_8024F000[updateCounter];
     } else {
-        *arg1 = D_8024EFE4[4];
-        *arg7 += D_8024F000[4];
+        *flags = D_8024EFE4[4];
+        *rotX += D_8024F000[4];
         window->flags = (window->flags & ~WINDOW_FLAGS_8) | WINDOW_FLAGS_4;
     }
 }
 
-void func_80243388(s32 windowID, s32* arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32* arg7, s32 arg8, s32 arg9,
-                    s32* argA, s32* argB) {
-    Window* window = &gWindows[windowID];
+void func_80243388(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
+    Window* window = &gWindows[windowIndex];
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter < 5) {
-        *arg1 = D_8024EFE4[updateCounter];
-        *arg7 = D_8024F00C[updateCounter];
+        *flags = D_8024EFE4[updateCounter];
+        *rotX = D_8024F00C[updateCounter];
     } else {
-        *arg1 = D_8024EFE4[4];
-        *arg7 = D_8024F00C[4];
+        *flags = D_8024EFE4[4];
+        *rotX = D_8024F00C[4];
         window->flags = (window->flags & ~WINDOW_FLAGS_8) | WINDOW_FLAGS_4;
     }
 }
@@ -572,7 +572,7 @@ void pause_init(void) {
     }
 
     D_802700D0 = gPauseMenuCommonIconIDs[0];
-    setup_pause_menu_tab(&D_8024F114, 4);
+    setup_pause_menu_tab(&gPauseCommonWindowsBPs, ARRAY_COUNT(gPauseCommonWindowsBPs));
     D_80270108 = 0;
     D_80270110 = 0;
     D_80270114 = 0;

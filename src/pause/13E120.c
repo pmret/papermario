@@ -1,7 +1,14 @@
 #include "common.h"
 #include "hud_element.h"
 
+
+
 extern s32 D_80270640[];
+
+//rodata
+static char* rodata_strings[] = { "party_kurio", "party_kameki", "party_pinki", "party_pareta", "party_resa",
+                                  "party_akari", "party_opuku", "party_pokopi", "letter_peach" };
+
 
 INCLUDE_ASM(s32, "pause/13E120", pause_partners_load_portrait);
 
@@ -27,3 +34,5 @@ INCLUDE_ASM(s32, "pause/13E120", pause_partners_handle_input);
 INCLUDE_ASM(s32, "pause/13E120", pause_partners_update);
 
 INCLUDE_ASM(s32, "pause/13E120", pause_partners_cleanup);
+
+
