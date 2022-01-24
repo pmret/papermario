@@ -1091,14 +1091,21 @@ enum PlayerAnims {
     ANIM_3001E                      = 0x0003001E,
     ANIM_3001F                      = 0x0003001F,
     ANIM_30020                      = 0x00030020,
+    ANIM_6000C                      = 0x0006000C,
     ANIM_80003                      = 0x00080003,
     ANIM_80007                      = 0x00080007,
     ANIM_8000B                      = 0x0008000B,
     ANIM_8000C                      = 0x0008000C,
+    ANIM_8000E                      = 0x0008000E,
     ANIM_80017                      = 0x00080017,
     ANIM_8001B                      = 0x0008001B,
     ANIM_8001D                      = 0x0008001D,
     ANIM_8001E                      = 0x0008001E,
+    ANIM_C0000                      = 0x000C0000,
+    ANIM_C0001                      = 0x000C0001,
+    ANIM_C0002                      = 0x000C0002,
+    ANIM_C0010                      = 0x000C0010,
+    ANIM_D0000                      = 0x000D0000,
 };
 
 enum AmbientSounds {
