@@ -2767,7 +2767,7 @@ segments:
     vram: 0xE0090000
     subsegments:
     - [0x38F900, c, attack_result_text]
-    - [0x390340, data]
+    - [0x390340]
   - type: group # attack_result_text gfx
     start: 0x3903D0
     subsegments:

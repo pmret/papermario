@@ -97,7 +97,7 @@ FX_MAIN(confetti_main);
 FX_MAIN(snowfall_main);
 FX_MAIN(fx_46_main);
 FX_MAIN(gather_magic_main);
-FX_MAIN(attack_result_text_main);
+EffectInstance* attack_result_text_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* small_gold_sparkle_main(EffectInstanceDataThing*, f32, f32, f32, f32);
 FX_MAIN(flashing_box_shockwave_main);
 EffectInstance* balloon_main(s32, f32, f32, f32, f32, s32);
