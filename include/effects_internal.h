@@ -29,7 +29,9 @@ void shim_transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32*
 s32 shim_npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
 void shim_sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 
-#define FX_MAIN(name) void name(s32); // the actual signature is going to be wrong, but it doesn't matter
+// the actual signature is going to be wrong, but it doesn't matter
+// TODO remove when every effect's main is sorted out
+#define FX_MAIN(name) void name(void);
 
 void big_smoke_puff_main(f32 x, f32 y, f32 z);
 void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32);
