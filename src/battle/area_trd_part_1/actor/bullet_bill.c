@@ -291,10 +291,10 @@ EvtScript N(takeTurn_802197C0) = {
 EvtScript N(80219BE0) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(2), 2)
-    EVT_CALL(PlayEffect, EFFECT_ID_17, 0, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_SMOKE_RING, 0, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_ADD(LW(1), 16)
     EVT_ADD(LW(2), 2)
-    EVT_CALL(PlayEffect, EFFECT_ID_3E, 0, LW(0), LW(1), LW(2), EVT_FLOAT(3.0), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_BLAST, 0, LW(0), LW(1), LW(2), EVT_FLOAT(3.0), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2078)
     EVT_CALL(StartRumble, 11)
     EVT_THREAD

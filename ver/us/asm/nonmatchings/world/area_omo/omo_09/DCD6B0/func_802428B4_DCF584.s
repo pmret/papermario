@@ -315,7 +315,7 @@ glabel func_802428B4_DCF584
 /* DCFA28 80242D58 8E450038 */  lw        $a1, 0x38($s2)
 /* DCFA2C 80242D5C 8E46003C */  lw        $a2, 0x3c($s2)
 /* DCFA30 80242D60 8E470040 */  lw        $a3, 0x40($s2)
-/* DCFA34 80242D64 0C01BECC */  jal       fx_walk
+/* DCFA34 80242D64 0C01BECC */  jal       fx_walking_dust
 /* DCFA38 80242D68 24040002 */   addiu    $a0, $zero, 2
 /* DCFA3C 80242D6C 3C01C47A */  lui       $at, 0xc47a
 /* DCFA40 80242D70 44810000 */  mtc1      $at, $f0

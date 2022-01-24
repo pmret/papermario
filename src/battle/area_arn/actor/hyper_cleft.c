@@ -143,7 +143,7 @@ EvtScript N(80220DC0) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_POWER_UP)
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
         EVT_ADD(LW(1), 10)
-        EVT_CALL(PlayEffect, EFFECT_ID_6B, 6, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 6, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 45, 0, 0, 0, 0, 0, 0, 0)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_cleft_hyper_Anim_4)
         EVT_WAIT_FRAMES(30)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -157,7 +157,7 @@ EvtScript N(80220DC0) = {
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.5))
         EVT_END_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2D9)
-        EVT_CALL(PlayEffect, EFFECT_ID_06, 4, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 4, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_THREAD
             EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
         EVT_END_THREAD
@@ -207,7 +207,7 @@ EvtScript N(80220DC0) = {
             EVT_THREAD
                 EVT_LOOP(30)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-                    EVT_CALL(PlayEffect, EFFECT_ID_07, 2, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                    EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 2, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
                     EVT_WAIT_FRAMES(1)
                 EVT_END_LOOP
             EVT_END_THREAD
@@ -239,7 +239,7 @@ EvtScript N(80220DC0) = {
     EVT_THREAD
         EVT_LOOP(25)
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-            EVT_CALL(PlayEffect, EFFECT_ID_07, 2, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 2, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -413,7 +413,7 @@ EvtScript N(80221DE0) = {
     EVT_THREAD
         EVT_CALL(ShakeCam, 1, 0, 5, EVT_FLOAT(1.0))
     EVT_END_THREAD
-    EVT_CALL(PlayEffect, EFFECT_ID_1D, 0, LW(0), LW(1), LW(2), 40, 8, EVT_FLOAT(0.0), 20, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LW(0), LW(1), LW(2), 40, 8, EVT_FLOAT(0.0), 20, 0, 0, 0, 0, 0)
     EVT_CALL(SetActorPos, ACTOR_SELF, LW(0), 0, LW(2))
     EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
@@ -589,7 +589,7 @@ EvtScript N(handleEvent_80222140) = {
                 EVT_ADD(LW(0), -8)
                 EVT_ADD(LW(1), 27)
             EVT_END_IF
-            EVT_CALL(PlayEffect, EFFECT_ID_1A, 0, LW(0), LW(1), LW(2), 20, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_LENS_FLARE, 0, LW(0), LW(1), LW(2), 20, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(20)
         EVT_CASE_OR_EQ(EVENT_UNKNOWN_TRIGGER)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
@@ -731,11 +731,11 @@ EvtScript N(80223310) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-        EVT_CALL(PlayEffect, EFFECT_ID_1D, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
         EVT_WAIT_FRAMES(10)
-        EVT_CALL(PlayEffect, EFFECT_ID_1D, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
         EVT_WAIT_FRAMES(5)
-        EVT_CALL(PlayEffect, EFFECT_ID_1D, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_cleft_hyper_charge_still)
     EVT_WAIT_FRAMES(10)

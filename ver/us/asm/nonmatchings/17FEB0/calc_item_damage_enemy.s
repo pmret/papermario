@@ -78,7 +78,7 @@ glabel calc_item_damage_enemy
 /* 1800D8 802517F8 8E260010 */  lw        $a2, 0x10($s1)
 /* 1800DC 802517FC 44072000 */  mfc1      $a3, $f4
 /* 1800E0 80251800 24080001 */  addiu     $t0, $zero, 1
-/* 1800E4 80251804 0C01C184 */  jal       playFX_24
+/* 1800E4 80251804 0C01C184 */  jal       fx_ring_blast
 /* 1800E8 80251808 AFA80024 */   sw       $t0, 0x24($sp)
 .L8025180C:
 /* 1800EC 8025180C 8E820188 */  lw        $v0, 0x188($s4)
@@ -105,7 +105,7 @@ glabel calc_item_damage_enemy
 /* 18013C 8025185C 8E25000C */  lw        $a1, 0xc($s1)
 /* 180140 80251860 8E260010 */  lw        $a2, 0x10($s1)
 /* 180144 80251864 44072000 */  mfc1      $a3, $f4
-/* 180148 80251868 0C01C70C */  jal       playFX_5F
+/* 180148 80251868 0C01C70C */  jal       fx_water_splash
 /* 18014C 8025186C 0000202D */   daddu    $a0, $zero, $zero
 .L80251870:
 /* 180150 80251870 8E820188 */  lw        $v0, 0x188($s4)
@@ -121,7 +121,7 @@ glabel calc_item_damage_enemy
 /* 180178 80251898 8E260010 */  lw        $a2, 0x10($s1)
 /* 18017C 8025189C 44071000 */  mfc1      $a3, $f2
 /* 180180 802518A0 24080001 */  addiu     $t0, $zero, 1
-/* 180184 802518A4 0C01C2A4 */  jal       playFX_30
+/* 180184 802518A4 0C01C2A4 */  jal       fx_big_snowflakes
 /* 180188 802518A8 AFA8002C */   sw       $t0, 0x2c($sp)
 .L802518AC:
 /* 18018C 802518AC 8E850188 */  lw        $a1, 0x188($s4)

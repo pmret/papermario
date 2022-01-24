@@ -185,7 +185,7 @@ glabel func_802B6000_E25D60
 /* E25FDC 802B627C 0280202D */   daddu    $a0, $s4, $zero
 /* E25FE0 802B6280 0220282D */  daddu     $a1, $s1, $zero
 /* E25FE4 802B6284 3C063F80 */  lui       $a2, 0x3f80
-/* E25FE8 802B6288 0C01C4B4 */  jal       playFX_46_whirlwind
+/* E25FE8 802B6288 0C01C4B4 */  jal       fx_46
 /* E25FEC 802B628C 240703E8 */   addiu    $a3, $zero, 0x3e8
 /* E25FF0 802B6290 AE2200D8 */  sw        $v0, 0xd8($s1)
 .L802B6294:

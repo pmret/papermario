@@ -46,7 +46,7 @@ ApiStatus func_8025E108(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8025E14C(Evt* script, s32 isInitialCall) {
-    playFX_44(3, 0.0f, 100.0f, 0.0f, 1.0f, 0x78);
+    fx_confetti(3, 0.0f, 100.0f, 0.0f, 1.0f, 0x78);
     return ApiStatus_DONE2;
 }
 

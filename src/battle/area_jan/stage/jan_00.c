@@ -110,7 +110,7 @@ EvtScript N(beforeBattle_802271C4) = {
     EVT_EXEC(N(80226B00))
     EVT_SET(LW(0), 53)
     EVT_EXEC(N(80226C18))
-    EVT_CALL(PlayEffect, EFFECT_ID_82, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_SUN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };

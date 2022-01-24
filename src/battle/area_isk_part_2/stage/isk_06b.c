@@ -7,7 +7,7 @@
 BSS EffectInstance* D_80220770;
 
 ApiStatus func_80218A60_4EFF00(Evt* script, s32 isInitialCall) {
-    playFX_20(1, -110.0f, 80.0f, -146.0f, 0.3f, &D_80220770);
+    fx_flame(1, -110.0f, 80.0f, -146.0f, 0.3f, &D_80220770);
     return ApiStatus_DONE2;
 }
 

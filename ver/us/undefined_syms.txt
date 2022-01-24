@@ -71,6 +71,224 @@ D_8004AA85 = 0x8004AA85;
 dtor = 0x80093DC0;
 D_80093DD0 = 0x80093DD0;
 
+// effect_1
+D_09000FA0 = 0x09000FA0;
+D_09001060 = 0x09001060;
+D_09001120 = 0x09001120;
+D_090011E0 = 0x090011E0;
+D_090012A0 = 0x090012A0;
+D_09001360 = 0x09001360;
+D_09001420 = 0x09001420;
+
+// effect_6
+D_09002780 = 0x09002780;
+D_09002868 = 0x09002868;
+D_09002950 = 0x09002950;
+D_09002A38 = 0x09002A38;
+D_09002B20 = 0x09002B20;
+D_09002B40 = 0x09002B40;
+D_09002B60 = 0x09002B60;
+
+// effect_7
+D_09002780 = 0x09002780;
+D_09002868 = 0x09002868;
+D_09002950 = 0x09002950;
+D_09002B20 = 0x09002B20;
+D_09002B40 = 0x09002B40;
+
+// effect_8
+D_09000E08 = 0x09000E08;
+
+// effect_9
+D_09000E20 = 0x09000E20;
+D_09000E38 = 0x09000E38;
+
+// effect_10, effect_11
+D_090000E0 = 0x090000E0;
+D_090001B8 = 0x090001B8;
+
+// effect_12
+D_09000240 = 0x09000240;
+
+// effect_13
+D_090002F0 = 0x090002F0;
+
+// effect_14
+D_09000900 = 0x09000900;
+D_090009E8 = 0x090009E8;
+
+// effect_16
+D_09002170 = 0x09002170;
+D_09002238 = 0x09002238;
+D_090022E0 = 0x090022E0;
+D_09002308 = 0x09002308;
+D_090023B0 = 0x090023B0;
+D_090023D8 = 0x090023D8;
+D_09002480 = 0x09002480;
+D_090024A8 = 0x090024A8;
+D_09002550 = 0x09002550;
+D_09002578 = 0x09002578;
+
+// effect_73
+D_090002C0 = 0x090002C0;
+D_09000330 = 0x09000330;
+D_09000370 = 0x09000370;
+D_090003B0 = 0x090003B0;
+D_090003F0 = 0x090003F0;
+D_09000430 = 0x09000430;
+D_09000470 = 0x09000470;
+
+// effect_75
+D_09001280 = 0x09001280;
+D_09001358 = 0x09001358;
+D_09001430 = 0x09001430;
+D_09001508 = 0x09001508;
+
+// effect_134
+D_09000800 = 0x09000800;
+D_09000BA8 = 0x09000BA8;
+D_09000BC8 = 0x09000BC8;
+D_09000BE8 = 0x09000BE8;
+D_09000C08 = 0x09000C08;
+D_09000C28 = 0x09000C28;
+D_09000C48 = 0x09000C48;
+D_09000C68 = 0x09000C68;
+D_09000C88 = 0x09000C88;
+D_09000CA8 = 0x09000CA8;
+D_09000CC8 = 0x09000CC8;
+D_09000CE8 = 0x09000CE8;
+D_09000D08 = 0x09000D08;
+
+// Invalid pointers from dead code
+dead_atan2 = 0x8002AF70;
+dead_gCurrentCamID = 0x800A158C;
+dead_gCameras = 0x800B8D80;
+D_80100060 = 0x80100060;
+D_801000A0 = 0x801000A0;
+dead_evt_get_variable = 0x802D4E8C;
+dead_evt_set_variable = 0x802D5468;
+dead_evt_get_float_variable = 0x802D57FC;
+dead_cos_rad = 0x8002B4C0;
+dead_evt_set_float_variable = 0x802D5A10;
+dead_fx_sparkles = 0x80075170;
+dead_gPlayerStatusPtr = 0x800FFC90;
+dead_set_main_pan_u = 0x80126064;
+dead_set_main_pan_v = 0x8012607C;
+dead_set_aux_pan_u = 0x80126094;
+dead_set_aux_pan_v = 0x801260AC;
+dead_get_npc_unsafe = 0x8003E4BC;
+dead_fx_emote = 0x80075110;
+dead_get_enemy = 0x80042AF4;
+dead_dist2D = 0x8002B1C4;
+dead_get_clamped_angle_diff = 0x8002AF18;
+dead_clamp_angle = 0x8002AE14;
+dead_add_vec2D_polar = 0x8002B28C;
+dead_ai_enemy_play_sound = 0x8004D800;
+func_8004D9C0 = 0x8004D9C0;
+func_8004DAD8 = 0x8004DAD8;
+func_8004DF64 = 0x8004DF64;
+func_8004E024 = 0x8004E024;
+func_8004E25C = 0x8004E25C;
+func_8004E2EC = 0x8004E2EC;
+func_8004E39C = 0x8004E39C;
+func_8004E544 = 0x8004E544;
+func_8004E808 = 0x8004E808;
+func_8004EB8C = 0x8004EB8C;
+func_8004D1A4 = 0x8004D1A4;
+dead_npc_move_heading = 0x8003E424;
+dead_sqrtf = 0x80067040;
+dead_npc_test_move_simple_with_slipping = 0x800E5304;
+dead_npc_raycast_down_sides = 0x800E423C;
+dead_is_point_within_region = 0x8004D0C4;
+func_8004D8E0 = 0x8004D8E0;
+dead_rand_int = 0x8002ACEC;
+dead_get_npc_safe = 0x8003E534;
+dead_heap_malloc = 0x8002BFD4;
+func_8002C01C = 0x8002C01C;
+dead_sin_deg = 0x8002B5DC;
+dead_cos_deg = 0x8002B640;
+dead_subtract_hp = 0x800F1EF8;
+dead_sfx_adjust_env_sound_pos = 0x8015704C;
+dead_fx_star_spirits_energy = 0x80077C30;
+dead_update_lerp = 0x8002B6A4;
+dead_fx_spirit_card = 0x80077930;
+dead_create_shadow_type = 0x8011AAB4;
+dead_dist3D = 0x8002B21C;
+func_802E2A80 = 0x802E2A80;
+func_802E2B74 = 0x802E2B74;
+func_80128510 = 0x80128510;
+func_8012DFE8 = 0x8012DFE8;
+func_8002AA2C = 0x8002AA2C;
+func_80059AC8 = 0x80059AC8;
+dead_get_entity_by_index = 0x80118BB0;
+dead_fx_sun = 0x80077BD0;
+func_80041080 = 0x80041080;
+dead_set_max_SP = 0x800F1D9C;
+dead_sync_status_menu = 0x800F1730;
+dead_get_npc_by_index = 0x8003C43C;
+dead_increment_status_menu_disabled = 0x800F1718;
+dead_decrement_status_menu_disabled = 0x800F16F4;
+dead_get_model_list_index_from_tree_index = 0x80125270;
+dead_get_model_from_list_index = 0x80124F44;
+dead_guTranslateF = 0x8006CAC0;
+func_800775D0 = 0x800775D0;
+func_802F3B00 = 0x802F3B00;
+func_800FCD0C = 0x800FCD0C;
+func_800F9260 = 0x800F9260;
+func_800F93E8 = 0x800F93E8;
+dead_switch_to_partner = 0x800F2D5C;
+dead_set_message_msg = 0x80130C74;
+dead_fx_energy_orb_wave = 0x800769D0;
+dead_fx_radial_shimmer = 0x80075E30;
+func_8002B524 = 0x8002B524;
+func_8002BF18 = 0x8002BF18;
+func_80076970 = 0x80076970;
+dead_set_screen_overlay_color = 0x80144200;
+dead_set_screen_overlay_params_front = 0x80144178;
+dead_npc_test_move_simple_without_slipping = 0x800E53AC;
+dead_get_item_entity = 0x8013CF98;
+func_80066FE0 = 0x80066FE0;
+func_8002A910 = 0x8002A910;
+dead_get_current_map_header = 0x8005F128;
+dead_partner_clear_player_tracking = 0x800F7278;
+func_800F2E98 = 0x800F2E98;
+dead_set_npc_yaw = 0x8003ED50;
+dead_disable_npc_shadow = 0x8003E5E8;
+dead_get_screen_coords = 0x8002FCBC;
+dead_sfx_get_spatialized_sound_params = 0x801574DC;
+dead_sfx_play_sound_with_params = 0x80157118;
+dead_load_asset_by_name = 0x8005F238;
+dead_decode_yay0 = 0x80074070;
+dead_general_heap_free = 0x8002BF68;
+dead_set_message_images = 0x80130C64;
+func_8002B45C = 0x8002B45C;
+func_801266F8 = 0x801266F8;
+func_80126734 = 0x80126734;
+dead_set_screen_overlay_params_back = 0x80144194;
+dead_gItemTable = 0x8008D2C0;
+dead_gPartnerActionStatus = 0x80117163;
+dead_gPlayerStatus = 0x80117578;
+dead_gPlayerActionState = 0x8011762C;
+dead_gPartnerActionStatus2 = 0x80117160;
+dead_gPlayerData = 0x80117840;
+dead_gCollisionStatus = 0x80169B12;
+dead_gOverrideFlags = 0x800A15A8;
+D_800A1530 = 0x800A1530;
+D_800A15A4 = 0x800A15A4;
+D_800A15C4 = 0x800A15C4;
+D_800A15CC = 0x800A15CC;
+dead_gCurrentEncounter = 0x800B7EF0;
+D_800B8DEC = 0x800B8DEC;
+dead_guMtxIdentF = 0x8006C660;
+dead_guMtxCatF = 0x8006C7C0;
+D_80169B16 = 0x80169B16;
+D_80248380 = 0x80248380;
+D_8024854C = 0x8024854C;
+D_80246894 = 0x80246894;
+
+// TODO below
+
+// misc unsorted
 gBackgroundImage = 0x80200000;
 func_80242040_8B20B0 = 0x80242040;
 spiked_goomba = 0x8021B0AC;
@@ -96,9 +314,7 @@ D_8000030C = 0x8000030C;
 osMemSize = 0x80000318;
 D_8000031C = 0x8000031C;
 D_800A08C0 = 0x800A08C0;
-
 D_80164000 = 0x80164000;
-D_80169B16 = 0x80169B16;
 D_80197000 = 0x80197000;
 D_801A6000 = 0x801A6000;
 D_801A7000 = 0x801A7000;
@@ -107,7 +323,6 @@ D_80210000 = 0x80210000;
 D_8022AD80_4C3F70 = 0x8022AD80;
 D_8022ADD0 = 0x8022ADD0;
 D_8022B550 = 0x8022B550;
-D_802310D0 = 0x802310D0;
 D_80232C4C = 0x80232C4C;
 D_80235E00 = 0x80235E00;
 D_80235E6C_4CF05C = 0x80235E6C;
@@ -235,7 +450,6 @@ D_802465F0 = 0x802465F0;
 D_802466D0 = 0x802466D0;
 D_80246794 = 0x80246794;
 D_802467B4 = 0x802467B4;
-D_80246894 = 0x80246894;
 D_80246990 = 0x80246990;
 D_80246BE8 = 0x80246BE8;
 D_80247050 = 0x80247050;
@@ -250,13 +464,11 @@ D_80247CA0 = 0x80247CA0;
 D_80247CB4 = 0x80247CB4;
 D_80247D00 = 0x80247D00;
 D_80247E68 = 0x80247E68;
-D_80248380 = 0x80248380;
 D_80248388 = 0x80248388;
 D_802483C0 = 0x802483C0;
 D_802483C4 = 0x802483C4;
 D_802483D0 = 0x802483D0;
 D_80248480 = 0x80248480;
-D_8024854C = 0x8024854C;
 D_80248600 = 0x80248600;
 D_80248624 = 0x80248624;
 D_80248650 = 0x80248650;
@@ -961,219 +1173,5 @@ gSpriteHeapPtr = 0x8034F800;
 heap_battleHead = 0x803DA800;
 D_802510B0 = 0x802510B0;
 D_8026A2B0 = 0x8026A2B0;
-
-// BSS syms
-#ifndef NON_MATCHING
-// todo add more here as we find them
-#endif
-
-// effect_1
-D_09000FA0 = 0x09000FA0;
-D_09001060 = 0x09001060;
-D_09001120 = 0x09001120;
-D_090011E0 = 0x090011E0;
-D_090012A0 = 0x090012A0;
-D_09001360 = 0x09001360;
-D_09001420 = 0x09001420;
-
-// effect_6
-D_09002780 = 0x09002780;
-D_09002868 = 0x09002868;
-D_09002950 = 0x09002950;
-D_09002A38 = 0x09002A38;
-D_09002B20 = 0x09002B20;
-D_09002B40 = 0x09002B40;
-D_09002B60 = 0x09002B60;
-
-// effect_7
-D_09002780 = 0x09002780;
-D_09002868 = 0x09002868;
-D_09002950 = 0x09002950;
-D_09002B20 = 0x09002B20;
-D_09002B40 = 0x09002B40;
-
-// effect_8
-D_09000E08 = 0x09000E08;
-
-// effect_9
-D_09000E20 = 0x09000E20;
-D_09000E38 = 0x09000E38;
-
-// effect_10 / effect_11
-D_090000E0 = 0x090000E0;
-D_090001B8 = 0x090001B8;
-
-// effect_12
-D_09000240 = 0x09000240;
-
-// effect_13
-D_090002F0 = 0x090002F0;
-
-// effect_14
-D_09000900 = 0x09000900;
-D_090009E8 = 0x090009E8;
-
-// effect_16
-D_09002170 = 0x09002170;
-D_09002238 = 0x09002238;
-D_090022E0 = 0x090022E0;
-D_09002308 = 0x09002308;
-D_090023B0 = 0x090023B0;
-D_090023D8 = 0x090023D8;
-D_09002480 = 0x09002480;
-D_090024A8 = 0x090024A8;
-D_09002550 = 0x09002550;
-D_09002578 = 0x09002578;
-
-// effect_73
-D_090002C0 = 0x090002C0;
-D_09000330 = 0x09000330;
-D_09000370 = 0x09000370;
-D_090003B0 = 0x090003B0;
-D_090003F0 = 0x090003F0;
-D_09000430 = 0x09000430;
-D_09000470 = 0x09000470;
-
-// effect_75
-D_09001280 = 0x09001280;
-D_09001358 = 0x09001358;
-D_09001430 = 0x09001430;
-D_09001508 = 0x09001508;
-
-// effect_134
-D_09000800 = 0x09000800;
-D_09000BA8 = 0x09000BA8;
-D_09000BC8 = 0x09000BC8;
-D_09000BE8 = 0x09000BE8;
-D_09000C08 = 0x09000C08;
-D_09000C28 = 0x09000C28;
-D_09000C48 = 0x09000C48;
-D_09000C68 = 0x09000C68;
-D_09000C88 = 0x09000C88;
-D_09000CA8 = 0x09000CA8;
-D_09000CC8 = 0x09000CC8;
-D_09000CE8 = 0x09000CE8;
-D_09000D08 = 0x09000D08;
-
-// Invalid pointers from dead code
-dead_atan2 = 0x8002AF70;
-dead_gCurrentCamID = 0x800A158C;
-dead_gCameras = 0x800B8D80;
-D_80100060 = 0x80100060;
-D_801000A0 = 0x801000A0;
-dead_evt_get_variable = 0x802D4E8C;
-dead_evt_set_variable = 0x802D5468;
-dead_evt_get_float_variable = 0x802D57FC;
-dead_cos_rad = 0x8002B4C0;
-dead_evt_set_float_variable = 0x802D5A10;
-dead_playFX_11 = 0x80075170;
-dead_gPlayerStatusPtr = 0x800FFC90;
-dead_set_main_pan_u = 0x80126064;
-dead_set_main_pan_v = 0x8012607C;
-dead_set_aux_pan_u = 0x80126094;
-dead_set_aux_pan_v = 0x801260AC;
-dead_get_npc_unsafe = 0x8003E4BC;
-dead_fx_emote = 0x80075110;
-dead_get_enemy = 0x80042AF4;
-dead_dist2D = 0x8002B1C4;
-dead_get_clamped_angle_diff = 0x8002AF18;
-dead_clamp_angle = 0x8002AE14;
-dead_add_vec2D_polar = 0x8002B28C;
-dead_ai_enemy_play_sound = 0x8004D800;
-func_8004D9C0 = 0x8004D9C0;
-func_8004DAD8 = 0x8004DAD8;
-func_8004DF64 = 0x8004DF64;
-func_8004E024 = 0x8004E024;
-func_8004E25C = 0x8004E25C;
-func_8004E2EC = 0x8004E2EC;
-func_8004E39C = 0x8004E39C;
-func_8004E544 = 0x8004E544;
-func_8004E808 = 0x8004E808;
-func_8004EB8C = 0x8004EB8C;
-func_8004D1A4 = 0x8004D1A4;
-dead_npc_move_heading = 0x8003E424;
-dead_sqrtf = 0x80067040;
-dead_npc_test_move_simple_with_slipping = 0x800E5304;
-dead_npc_raycast_down_sides = 0x800E423C;
-dead_is_point_within_region = 0x8004D0C4;
-func_8004D8E0 = 0x8004D8E0;
-dead_rand_int = 0x8002ACEC;
-dead_get_npc_safe = 0x8003E534;
-dead_heap_malloc = 0x8002BFD4;
-func_8002C01C = 0x8002C01C;
-dead_sin_deg = 0x8002B5DC;
-dead_cos_deg = 0x8002B640;
-dead_subtract_hp = 0x800F1EF8;
-dead_sfx_adjust_env_sound_pos = 0x8015704C;
-dead_playFX_83 = 0x80077C30;
-dead_update_lerp = 0x8002B6A4;
-dead_playFX_7B = 0x80077930;
-dead_create_shadow_type = 0x8011AAB4;
-dead_dist3D = 0x8002B21C;
-func_802E2A80 = 0x802E2A80;
-func_802E2B74 = 0x802E2B74;
-func_80128510 = 0x80128510;
-func_8012DFE8 = 0x8012DFE8;
-func_8002AA2C = 0x8002AA2C;
-func_80059AC8 = 0x80059AC8;
-dead_get_entity_by_index = 0x80118BB0;
-dead_playFX_82 = 0x80077BD0;
-func_80041080 = 0x80041080;
-dead_set_max_SP = 0x800F1D9C;
-dead_sync_status_menu = 0x800F1730;
-dead_get_npc_by_index = 0x8003C43C;
-dead_increment_status_menu_disabled = 0x800F1718;
-dead_decrement_status_menu_disabled = 0x800F16F4;
-dead_get_model_list_index_from_tree_index = 0x80125270;
-dead_get_model_from_list_index = 0x80124F44;
-dead_guTranslateF = 0x8006CAC0;
-func_800775D0 = 0x800775D0;
-func_802F3B00 = 0x802F3B00;
-func_800FCD0C = 0x800FCD0C;
-func_800F9260 = 0x800F9260;
-func_800F93E8 = 0x800F93E8;
-dead_switch_to_partner = 0x800F2D5C;
-dead_set_message_msg = 0x80130C74;
-dead_playFX_52 = 0x800769D0;
-dead_playFX_33 = 0x80075E30;
-func_8002B524 = 0x8002B524;
-func_8002BF18 = 0x8002BF18;
-func_80076970 = 0x80076970;
-dead_set_screen_overlay_color = 0x80144200;
-dead_set_screen_overlay_params_front = 0x80144178;
-dead_npc_test_move_simple_without_slipping = 0x800E53AC;
-dead_get_item_entity = 0x8013CF98;
-func_80066FE0 = 0x80066FE0;
-func_8002A910 = 0x8002A910;
-dead_get_current_map_header = 0x8005F128;
-dead_partner_clear_player_tracking = 0x800F7278;
-func_800F2E98 = 0x800F2E98;
-dead_set_npc_yaw = 0x8003ED50;
-dead_disable_npc_shadow = 0x8003E5E8;
-dead_get_screen_coords = 0x8002FCBC;
-dead_sfx_get_spatialized_sound_params = 0x801574DC;
-dead_sfx_play_sound_with_params = 0x80157118;
-dead_load_asset_by_name = 0x8005F238;
-dead_decode_yay0 = 0x80074070;
-dead_general_heap_free = 0x8002BF68;
-dead_set_message_images = 0x80130C64;
-func_8002B45C = 0x8002B45C;
-func_801266F8 = 0x801266F8;
-func_80126734 = 0x80126734;
-dead_set_screen_overlay_params_back = 0x80144194;
-dead_gItemTable = 0x8008D2C0;
-dead_gPartnerActionStatus = 0x80117163;
-dead_gPlayerStatus = 0x80117578;
-dead_gPlayerActionState = 0x8011762C;
-dead_gPartnerActionStatus2 = 0x80117160;
-dead_gPlayerData = 0x80117840;
-dead_gCollisionStatus = 0x80169B12;
-dead_gOverrideFlags = 0x800A15A8;
-D_800A1530 = 0x800A1530;
-D_800A15A4 = 0x800A15A4;
-D_800A15C4 = 0x800A15C4;
-D_800A15CC = 0x800A15CC;
-dead_gCurrentEncounter = 0x800B7EF0;
-D_800B8DEC = 0x800B8DEC;
-dead_guMtxIdentF = 0x8006C660;
-dead_guMtxCatF = 0x8006C7C0;
+D_80248380_kzn_19 = 0x80248380;
+D_8024854C_kzn_19 = 0x8024854C;

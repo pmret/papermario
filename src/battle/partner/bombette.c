@@ -29,36 +29,36 @@ ApiStatus func_80238000_6FAD10(Evt* script, s32 isInitialCall) {
     s16 selectedMoveID;
     s32 soundID;
 
-    playFX_17(0, x, y, z);
+    fx_smoke_ring(0, x, y, z);
     selectedMoveID = battleStatus->selectedMoveID;
 
     switch (selectedMoveID) {
         case 146:
             if (script->varTable[10] > 0) {
-                playFX_19(1, x, y + 20, z);
+                fx_explosion(1, x, y + 20, z);
             } else {
-                playFX_19(0, x, y + 20, z);
+                fx_explosion(0, x, y + 20, z);
             }
             sfx_play_sound(8214);
             break;
         case 147:
             if (script->varTable[10] > 0) {
-                playFX_19(1, x, y + 20, z);
+                fx_explosion(1, x, y + 20, z);
             } else {
-                playFX_19(0, x, y + 20, z);
+                fx_explosion(0, x, y + 20, z);
             }
             sfx_play_sound(8215);
             break;
         case 148:
             if (script->varTable[10] > 0) {
-                playFX_19(2, x, y + 20, z);
+                fx_explosion(2, x, y + 20, z);
             } else {
-                playFX_19(1, x, y + 20, z);
+                fx_explosion(1, x, y + 20, z);
             }
             sfx_play_sound(8215);
             break;
         default:
-            playFX_19(0, x, y + 20, z);
+            fx_explosion(0, x, y + 20, z);
             sfx_play_sound(8214);
             break;
     }
@@ -1202,9 +1202,9 @@ EvtScript N(8023B228) = {
                 EVT_CALL(GetActorPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
                 EVT_WAIT_FRAMES(8)
                 EVT_IF_GT(LW(10), 0)
-                    EVT_CALL(PlayEffect, EFFECT_ID_68, 0, LW(0), 0, LW(2), 1, 0, 0, 0, 0, 0, 0, 0, 0)
+                    EVT_CALL(PlayEffect, EFFECT_RED_IMPACT, 0, LW(0), 0, LW(2), 1, 0, 0, 0, 0, 0, 0, 0, 0)
                 EVT_ELSE
-                    EVT_CALL(PlayEffect, EFFECT_ID_68, 1, LW(0), 0, LW(2), 1, 0, 0, 0, 0, 0, 0, 0, 0)
+                    EVT_CALL(PlayEffect, EFFECT_RED_IMPACT, 1, LW(0), 0, LW(2), 1, 0, 0, 0, 0, 0, 0, 0, 0)
                 EVT_END_IF
             EVT_CASE_EQ(148)
                 EVT_SET(LW(10), 0)

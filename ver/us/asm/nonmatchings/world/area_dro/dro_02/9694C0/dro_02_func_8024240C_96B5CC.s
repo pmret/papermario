@@ -253,7 +253,7 @@ glabel dro_02_func_8024240C_96B5CC
 /* 96B938 80242778 44810000 */  mtc1      $at, $f0
 /* 96B93C 8024277C 44071000 */  mfc1      $a3, $f2
 /* 96B940 80242780 0000202D */  daddu     $a0, $zero, $zero
-/* 96B944 80242784 0C01BFBC */  jal       playFX_11
+/* 96B944 80242784 0C01BFBC */  jal       fx_sparkles
 /* 96B948 80242788 E7A00010 */   swc1     $f0, 0x10($sp)
 .L8024278C:
 /* 96B94C 8024278C 8E030000 */  lw        $v1, ($s0)
@@ -309,7 +309,7 @@ glabel dro_02_func_8024240C_96B5CC
 /* 96BA10 80242850 44810000 */  mtc1      $at, $f0
 /* 96BA14 80242854 44071000 */  mfc1      $a3, $f2
 /* 96BA18 80242858 0000202D */  daddu     $a0, $zero, $zero
-/* 96BA1C 8024285C 0C01BFBC */  jal       playFX_11
+/* 96BA1C 8024285C 0C01BFBC */  jal       fx_sparkles
 /* 96BA20 80242860 E7A00010 */   swc1     $f0, 0x10($sp)
 .L80242864:
 /* 96BA24 80242864 8E030000 */  lw        $v1, ($s0)
@@ -369,7 +369,7 @@ glabel dro_02_func_8024240C_96B5CC
 /* 96BAF4 80242934 44810000 */  mtc1      $at, $f0
 /* 96BAF8 80242938 44071000 */  mfc1      $a3, $f2
 /* 96BAFC 8024293C 0000202D */  daddu     $a0, $zero, $zero
-/* 96BB00 80242940 0C01BFBC */  jal       playFX_11
+/* 96BB00 80242940 0C01BFBC */  jal       fx_sparkles
 /* 96BB04 80242944 E7A00010 */   swc1     $f0, 0x10($sp)
 .L80242948:
 /* 96BB08 80242948 8E030000 */  lw        $v1, ($s0)
@@ -520,7 +520,7 @@ glabel dro_02_func_8024240C_96B5CC
 /* 96BD34 80242B74 44071000 */  mfc1      $a3, $f2
 /* 96BD38 80242B78 2402FFFF */  addiu     $v0, $zero, -1
 /* 96BD3C 80242B7C AFA20014 */  sw        $v0, 0x14($sp)
-/* 96BD40 80242B80 0C01C82C */  jal       playFX_6B
+/* 96BD40 80242B80 0C01C82C */  jal       fx_energy_in_out
 /* 96BD44 80242B84 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 96BD48 80242B88 AE020000 */  sw        $v0, ($s0)
 /* 96BD4C 80242B8C 8C43000C */  lw        $v1, 0xc($v0)
@@ -709,7 +709,7 @@ glabel dro_02_func_8024240C_96B5CC
 /* 96C00C 80242E4C 44810000 */  mtc1      $at, $f0
 /* 96C010 80242E50 44071000 */  mfc1      $a3, $f2
 /* 96C014 80242E54 0000202D */  daddu     $a0, $zero, $zero
-/* 96C018 80242E58 0C01BFBC */  jal       playFX_11
+/* 96C018 80242E58 0C01BFBC */  jal       fx_sparkles
 /* 96C01C 80242E5C E7A00010 */   swc1     $f0, 0x10($sp)
 /* 96C020 80242E60 0C05272D */  jal       sfx_play_sound
 /* 96C024 80242E64 24040206 */   addiu    $a0, $zero, 0x206

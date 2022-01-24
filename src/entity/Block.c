@@ -22,7 +22,7 @@ void entity_base_block_setupGfx(s32 entityIndex) {
 }
 
 void entity_base_block_play_vanish_effect(Entity* entity) {
-    playFX_6F(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
+    fx_cold_breath(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
 }
 
 f32 entity_block_hit_init_scale(Entity* entity) {

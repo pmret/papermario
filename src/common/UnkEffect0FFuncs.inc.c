@@ -12,7 +12,7 @@ ApiStatus N(UnkEffect0FFunc2)(Evt* script, s32 isInitialCall) {
     f32 var6 = evt_get_float_variable(script, *args++);
     f32 var7 = evt_get_float_variable(script, *args++);
 
-    playFX_0F(var0, var1, var2, var3, var4, var5, var6, var7);
+    fx_star(var0, var1, var2, var3, var4, var5, var6, var7);
     return ApiStatus_DONE2;
 }
 
@@ -42,7 +42,7 @@ ApiStatus N(UnkEffect0FFunc)(Evt* script, s32 isInitialCall) {
     var5 = playerStatus->position.y;
     var6 = playerStatus->position.z - (rand3 * cos_rad(yaw));
     var6 = var6 - (rand2 * cos_rad(yawMinus));
-    playFX_0F(0, var1, var2, var3, var4, var5, var6, rand_int(10) + 10);
+    fx_star(0, var1, var2, var3, var4, var5, var6, rand_int(10) + 10);
     return ApiStatus_DONE2;
 }
 
@@ -77,7 +77,7 @@ ApiStatus N(UnkEffect0FFunc3)(Evt* script, s32 isInitialCall) {
     var5 = playerStatus->position.y;
     var6 = playerStatus->position.z + (rand3 * cos_rad(yaw));
     var6 = var6 - (rand2 * cos_rad(yawMinus));
-    playFX_0F(1, var1, var2, var3, var4, var5, var6, rand_int(10) + 10);
+    fx_star(1, var1, var2, var3, var4, var5, var6, rand_int(10) + 10);
     return ApiStatus_DONE2;
 }
 
@@ -114,6 +114,6 @@ ApiStatus N(UnkEffect0FFunc4)(Evt* script, s32 isInitialCall) {
     var5 = playerStatus->position.y;
     var6 = playerStatus->position.z + (rand3 * cos_rad(yaw));
     var6 = var6 - (rand2 * cos_rad(yawMinus));
-    playFX_0F(2, var1, var2, var3, var4, var5, var6, rand_int(4) + 10);
+    fx_star(2, var1, var2, var3, var4, var5, var6, rand_int(4) + 10);
     return ApiStatus_DONE2;
 }

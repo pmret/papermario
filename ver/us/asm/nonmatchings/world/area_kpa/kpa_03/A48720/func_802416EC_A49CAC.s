@@ -100,7 +100,7 @@ glabel func_802416EC_A49CAC
 /* A49E24 80241864 44810000 */  mtc1      $at, $f0
 /* A49E28 80241868 2402000D */  addiu     $v0, $zero, 0xd
 /* A49E2C 8024186C AFA20014 */  sw        $v0, 0x14($sp)
-/* A49E30 80241870 0C01BFEC */  jal       playFX_13
+/* A49E30 80241870 0C01BFEC */  jal       fx_gather_energy_pink
 /* A49E34 80241874 E7A00010 */   swc1     $f0, 0x10($sp)
 /* A49E38 80241878 2402000F */  addiu     $v0, $zero, 0xf
 /* A49E3C 8024187C A602008E */  sh        $v0, 0x8e($s0)

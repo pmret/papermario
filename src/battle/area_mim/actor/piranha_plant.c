@@ -203,7 +203,7 @@ EvtScript N(handleEvent_8021D60C) = {
                     EVT_ADD(LW(0), 0)
                     EVT_ADD(LW(1), 35)
                 EVT_END_IF
-                EVT_CALL(PlayEffect, EFFECT_ID_1A, 0, LW(0), LW(1), LW(2), 20, 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_LENS_FLARE, 0, LW(0), LW(1), LW(2), 20, 0, 0, 0, 0, 0, 0, 0, 0)
                 EVT_WAIT_FRAMES(20)
             EVT_END_THREAD
             EVT_LOOP(40)

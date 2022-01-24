@@ -695,16 +695,16 @@ EvtScript N(80242FD0) = {
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-// It seems like playFX_82 was not properly defined for this file. Having a proper
+// It seems like fx_sun was not properly defined for this file. Having a proper
 // declaration makes it not match.
 #ifdef AVOID_UB
-void playFX_82(s32, f32, f32, f32, f32, s32);
+void fx_sun(s32, f32, f32, f32, f32, s32);
 #else
-void playFX_82(s32, s32, s32, s32, s32, s32);
+void fx_sun(s32, s32, s32, s32, s32, s32);
 #endif
 
 ApiStatus N(func_8024030C_CE39FC)(Evt* script, s32 isInitialCall) {
-    playFX_82(1, 0, 0, 0, 0, 0);
+    fx_sun(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

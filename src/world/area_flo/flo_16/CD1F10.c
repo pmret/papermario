@@ -587,7 +587,7 @@ ApiStatus N(func_802406E0_CD2510)(Evt* script, s32 isInitialCall) {
         scriptPtr->unk_5C = get_entity_by_index(evt_get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-            userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
+            userDataPtr->unk_08[i] = fx_motion_blur_flame(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
                                                    scriptPtr->unk_5C->position.z, 1.0f, -1);
             save = 0.0f;
             userDataPtr->unk_2C[i] = save;

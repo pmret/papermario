@@ -260,7 +260,7 @@ glabel battle_item_sleepy_sheep_func_802A123C_71E88C
 /* 71EC2C 802A15DC 4406A000 */  mfc1      $a2, $f20
 /* 71EC30 802A15E0 4407C000 */  mfc1      $a3, $f24
 /* 71EC34 802A15E4 24150001 */  addiu     $s5, $zero, 1
-/* 71EC38 802A15E8 0C01BEB4 */  jal       fx_land
+/* 71EC38 802A15E8 0C01BEB4 */  jal       fx_landing_dust
 /* 71EC3C 802A15EC AFA00010 */   sw       $zero, 0x10($sp)
 /* 71EC40 802A15F0 2694000C */  addiu     $s4, $s4, 0xc
 .L802A15F4:
@@ -305,7 +305,7 @@ glabel battle_item_sleepy_sheep_func_802A123C_71E88C
 /* 71ECDC 802A168C 4406A000 */  mfc1      $a2, $f20
 /* 71ECE0 802A1690 44070000 */  mfc1      $a3, $f0
 /* 71ECE4 802A1694 24040002 */  addiu     $a0, $zero, 2
-/* 71ECE8 802A1698 0C01BEB4 */  jal       fx_land
+/* 71ECE8 802A1698 0C01BEB4 */  jal       fx_landing_dust
 /* 71ECEC 802A169C AFA00010 */   sw       $zero, 0x10($sp)
 .L802A16A0:
 /* 71ECF0 802A16A0 C7C20000 */  lwc1      $f2, ($fp)

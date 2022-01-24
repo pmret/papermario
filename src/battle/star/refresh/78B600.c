@@ -40,7 +40,7 @@ ApiStatus func_802A18E8_78BEE8(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     s32 var4 = evt_get_variable(script, *args++);
 
-    playFX_40(0, var1, var2, var3, var4);
+    fx_recover(0, var1, var2, var3, var4);
 
     return ApiStatus_DONE2;
 }
@@ -52,7 +52,7 @@ ApiStatus func_802A19A8_78BFA8(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     s32 var4 = evt_get_variable(script, *args++);
 
-    playFX_40(1, var1, var2, var3, var4);
+    fx_recover(1, var1, var2, var3, var4);
 
     return ApiStatus_DONE2;
 }

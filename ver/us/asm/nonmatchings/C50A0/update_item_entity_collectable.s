@@ -1058,7 +1058,7 @@ glabel update_item_entity_collectable
 /* CB894 80135194 8E450008 */  lw        $a1, 8($s2)
 /* CB898 80135198 8E470010 */  lw        $a3, 0x10($s2)
 /* CB89C 8013519C 44062000 */  mfc1      $a2, $f4
-/* CB8A0 801351A0 0C01C4FC */  jal       playFX_49
+/* CB8A0 801351A0 0C01C4FC */  jal       fx_small_gold_sparkle
 /* CB8A4 801351A4 0000202D */   daddu    $a0, $zero, $zero
 /* CB8A8 801351A8 96430018 */  lhu       $v1, 0x18($s2)
 /* CB8AC 801351AC 2462FFF0 */  addiu     $v0, $v1, -0x10
@@ -1132,7 +1132,7 @@ glabel update_item_entity_collectable
 /* CB9A4 801352A4 8E870030 */  lw        $a3, 0x30($s4)
 /* CB9A8 801352A8 44061000 */  mfc1      $a2, $f2
 /* CB9AC 801352AC 24020001 */  addiu     $v0, $zero, 1
-/* CB9B0 801352B0 0C01C424 */  jal       playFX_40
+/* CB9B0 801352B0 0C01C424 */  jal       fx_recover
 /* CB9B4 801352B4 AFA20010 */   sw       $v0, 0x10($sp)
 /* CB9B8 801352B8 C6400010 */  lwc1      $f0, 0x10($s2)
 /* CB9BC 801352BC 24042056 */  addiu     $a0, $zero, 0x2056
@@ -1172,7 +1172,7 @@ glabel update_item_entity_collectable
 /* CBA38 80135338 8E870030 */  lw        $a3, 0x30($s4)
 /* CBA3C 8013533C 44061000 */  mfc1      $a2, $f2
 /* CBA40 80135340 0080102D */  daddu     $v0, $a0, $zero
-/* CBA44 80135344 0C01C424 */  jal       playFX_40
+/* CBA44 80135344 0C01C424 */  jal       fx_recover
 /* CBA48 80135348 AFA20010 */   sw       $v0, 0x10($sp)
 /* CBA4C 8013534C C6400010 */  lwc1      $f0, 0x10($s2)
 /* CBA50 80135350 24042056 */  addiu     $a0, $zero, 0x2056
@@ -1213,7 +1213,7 @@ glabel update_item_entity_collectable
 /* CBAD0 801353D0 44810000 */  mtc1      $at, $f0
 /* CBAD4 801353D4 44061000 */  mfc1      $a2, $f2
 /* CBAD8 801353D8 24040004 */  addiu     $a0, $zero, 4
-/* CBADC 801353DC 0C01BFBC */  jal       playFX_11
+/* CBADC 801353DC 0C01BFBC */  jal       fx_sparkles
 /* CBAE0 801353E0 E7A00010 */   swc1     $f0, 0x10($sp)
 /* CBAE4 801353E4 0804D533 */  j         .L801354CC
 /* CBAE8 801353E8 0240202D */   daddu    $a0, $s2, $zero

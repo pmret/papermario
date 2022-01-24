@@ -284,7 +284,7 @@ EvtScript N(handleEvent_8021E874) = {
             EVT_ELSE
                 EVT_ADD(LW(1), 26)
             EVT_END_IF
-            EVT_CALL(PlayEffect, EFFECT_ID_1A, 0, LW(0), LW(1), LW(2), 20, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_LENS_FLARE, 0, LW(0), LW(1), LW(2), 20, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(20)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH

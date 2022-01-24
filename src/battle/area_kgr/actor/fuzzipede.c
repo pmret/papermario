@@ -875,7 +875,7 @@ EvtScript N(8021B22C) = {
                 EVT_END_LOOP
                 EVT_WAIT_FRAMES(10)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
-                EVT_CALL(PlayEffect, EFFECT_ID_43, 0, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_FIREWORK, 0, LW(0), LW(1), LW(2), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
                 EVT_CALL(N(StartRumbleWithParams), 200, 10)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20DC)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_fuzzipede_Palette_00_Anim_13)

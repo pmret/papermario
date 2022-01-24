@@ -98,7 +98,7 @@ ApiStatus func_80218774_5CEE04(Evt* script, s32 isInitialCall) {
     f32 var6 = evt_get_float_variable(script, *args++);
     f32 var7 = evt_get_float_variable(script, *args++);
     s32 var8 = evt_get_variable(script, *args++);
-    EffectInstance* effect = playFX_6E(var1, var2, var3, var4, var5, var6, var7, var8);
+    EffectInstance* effect = fx_huff_puff_breath(var1, var2, var3, var4, var5, var6, var7, var8);
 
     evt_set_variable(script, *args++, effect);
     return ApiStatus_DONE2;
@@ -115,7 +115,7 @@ ApiStatus func_80218924_5CEFB4(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     f32 var4 = evt_get_float_variable(script, *args++);
 
-    script->varTable[0] = playFX_57(0, var1, var2, var3, var4 * 2.5f, 0);
+    script->varTable[0] = fx_snaking_static(0, var1, var2, var3, var4 * 2.5f, 0);
     return ApiStatus_DONE2;
 }
 

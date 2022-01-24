@@ -987,7 +987,7 @@ void npc_update_decoration_bowser_aura(Npc* npc, s32 idx) {
 
     switch (npc->decorationInitialised[idx]) {
         case 0:
-            playFX_3B(2, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &npc->decorations[idx]);
+            fx_aura(2, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &npc->decorations[idx]);
             npc->decorationInitialised[idx] = 1;
             break;
         case 1:
@@ -1038,7 +1038,7 @@ void npc_update_decoration_seeing_stars(Npc* npc, s32 idx) {
 
     switch (npc->decorationInitialised[idx]) {
         case 0:
-            playFX_2F(0, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, 20.0f, 3, &npc->decorations[idx]);
+            fx_stars_orbiting(0, npc->pos.x, npc->pos.y + npc->collisionHeight, npc->pos.z, 20.0f, 3, &npc->decorations[idx]);
             npc->decorationInitialised[idx] = 1;
             return;
         case 1:
@@ -1063,7 +1063,7 @@ void npc_update_decoration_glow_in_front(Npc* npc, s32 idx) {
 
     switch (npc->decorationInitialised[idx]) {
         case 0:
-            npc->decorations[idx] = playFX_52(2, npc->pos.x, npc->pos.y + npc->collisionHeight * 0.5, npc->pos.z,
+            npc->decorations[idx] = fx_energy_orb_wave(2, npc->pos.x, npc->pos.y + npc->collisionHeight * 0.5, npc->pos.z,
                                                   npc->scale.x * 0.8 + 0.2f, -1);
             npc->decorationInitialised[idx] = 1;
             break;
@@ -1086,7 +1086,7 @@ void npc_update_decoration_glow_behind(Npc* npc, s32 idx) {
 
     switch (npc->decorationInitialised[idx]) {
         case 0:
-            npc->decorations[idx] = playFX_52(2, npc->pos.x, npc->pos.y + npc->collisionHeight * 0.5, npc->pos.z - 5.0f, 1.0f,
+            npc->decorations[idx] = fx_energy_orb_wave(2, npc->pos.x, npc->pos.y + npc->collisionHeight * 0.5, npc->pos.z - 5.0f, 1.0f,
                                                   0);
             npc->decorationInitialised[idx] = 1;
             break;
@@ -1393,21 +1393,21 @@ void func_8003D788(Npc* npc, s32 arg1) {
         f32 z = npc->pos.z;
 
         if (phi_a2 == 0) {
-            fx_land(0, x, y, z, D_80077C10);
+            fx_landing_dust(0, x, y, z, D_80077C10);
             D_80077C10 = clamp_angle(D_80077C10 + 35.0f);
         } else {
-            playFX_72(3, x, y, z,  13.0f, 10.0f, 1.0f, 5, 30);
+            fx_misc_particles(3, x, y, z,  13.0f, 10.0f, 1.0f, 5, 30);
         }
     } else if (arg1 != 0) {
         if (D_80077C14++ >= 4) {
             D_80077C14 = 0;
             if (phi_a2 == 0) {
                 sin_cos_rad((clamp_angle(-npc->yaw) * TAU) / 360.0f, &subroutine_argA, &subroutine_argB);
-                fx_walk(0, npc->pos.x + (npc->collisionRadius * subroutine_argA * 0.2f), npc->pos.y + 1.5f,
+                fx_walking_dust(0, npc->pos.x + (npc->collisionRadius * subroutine_argA * 0.2f), npc->pos.y + 1.5f,
                                npc->pos.z + (npc->collisionRadius * subroutine_argB * 0.2f), subroutine_argA, subroutine_argB);
             } else {
                 sin_cos_rad((clamp_angle(npc->yaw) * TAU) / 360.0f, &subroutine_argA, &subroutine_argB);
-                playFX_72(3, npc->pos.x + (npc->collisionRadius * subroutine_argA), npc->pos.y + 1.5f,
+                fx_misc_particles(3, npc->pos.x + (npc->collisionRadius * subroutine_argA), npc->pos.y + 1.5f,
                               npc->pos.z + (npc->collisionRadius * subroutine_argB), 5.0f, 10.0f, 1.0f, 5, 30);
             }
         }
@@ -1428,7 +1428,7 @@ void func_8003DFA0(Npc* npc) {
         temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
         x = sin_rad(temp_f20);
         z = cos_rad(temp_f20);
-        playFX_0C(npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 1.5f,
+        fx_footprint(npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 1.5f,
                   npc->pos.z + (npc->collisionRadius * z * 0.2f), -npc->yaw, D_80077C34);
         D_80077C34 = !D_80077C34;
     }
@@ -1444,7 +1444,7 @@ void func_8003E0D4(Npc* npc) {
         theta = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
         sinTheta = sin_rad(theta);
         cosTheta = cos_rad(theta);
-        playFX_2C(1, npc->pos.x + (npc->collisionRadius * sinTheta * 0.2f),
+        fx_falling_leaves(1, npc->pos.x + (npc->collisionRadius * sinTheta * 0.2f),
                   40.0f, npc->pos.z + (npc->collisionRadius * cosTheta * 0.2f));
     }
 }
@@ -1459,7 +1459,7 @@ void func_8003E1D0(Npc* npc) {
         temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
         x = sin_rad(temp_f20);
         z = cos_rad(temp_f20);
-        playFX_23(0, npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 0.0f,
+        fx_rising_bubble(0, npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 0.0f,
                   npc->pos.z + (npc->collisionRadius * z * 0.2f), 0.0f);
     }
 }

@@ -61,7 +61,7 @@ ApiStatus func_802384B0_703FA0(Evt* script, s32 isInitialCall) {
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
 
-    D_80239A0C_7054FC = playFX_33(8, var1, var2, var3, 1.3f, 55);
+    D_80239A0C_7054FC = fx_radial_shimmer(8, var1, var2, var3, 1.3f, 55);
 
     return ApiStatus_DONE2;
 }
@@ -86,7 +86,7 @@ ApiStatus func_8023859C_70408C(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     EffectInstanceDataThing* dataThing;
 
-    D_8023C1B4 = playFX_58(0, var1, var2, var3, 1.0f, 10);
+    D_8023C1B4 = fx_thunderbolt_ring(0, var1, var2, var3, 1.0f, 10);
     dataThing = D_8023C1B4->data;
     dataThing->unk_30 = 3;
 
@@ -125,7 +125,7 @@ ApiStatus func_80238B3C_70462C(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     EffectInstanceDataThing* temp_a0;
 
-    D_8023C1B4 = playFX_58(0, var1, var2, var3, 1.0f, 60);
+    D_8023C1B4 = fx_thunderbolt_ring(0, var1, var2, var3, 1.0f, 60);
     temp_a0 = D_8023C1B4->data;
     temp_a0->unk_30 = 2;
 

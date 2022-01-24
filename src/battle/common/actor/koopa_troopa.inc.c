@@ -504,11 +504,11 @@ EvtScript N(takeTurn_8021DD9C) = {
         EVT_CHILD_THREAD
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(1), 4)
-            EVT_CALL(PlayEffect, EFFECT_ID_1D, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(3)
-            EVT_CALL(PlayEffect, EFFECT_ID_1D, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(2)
-            EVT_CALL(PlayEffect, EFFECT_ID_1D, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
         EVT_END_CHILD_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2021)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_troopa_Palette_01_Anim_6)
