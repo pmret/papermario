@@ -846,7 +846,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             out += f"ActorPartBlueprint {struct['name']}[] = {{\n"
 
             for _ in range(0, struct["length"] // 36):
-                d = unpack(">IbbbbbbhIIIIhxxxxxx", bytes.read(36))
+                d = unpack(">IbbbbbbhIIIIbbxxxxxx", bytes.read(36))
 
                 out += INDENT + "{\n"
                 out += INDENT + INDENT + f".flags = {read_flags(d[0], 'ActorPartFlags')},\n"
@@ -859,6 +859,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += INDENT + INDENT  + f".eventFlags = {read_flags(d[10], 'ActorEventFlags')},\n"
                 out += INDENT + INDENT  + f".elementImmunityFlags = {read_flags(d[11], 'ElementImmunityFlags')},\n"
                 out += INDENT + INDENT  + f".unk_1C = {d[12]},\n"
+                out += INDENT + INDENT  + f".unk_1D = {d[13]},\n"
                 out += INDENT + "},\n"
 
             out += f"}};\n"
