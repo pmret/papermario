@@ -62,6 +62,9 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
 
+    CPPFLAGS_272 = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
+               "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
+
     cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
     cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
     cflags_272 = cflags_272.replace("-ggdb3","-g1")
@@ -117,7 +120,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc_272",
         description="cc_272 $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cc_272} {cflags_272} $cflags $out.i -o $out'",
+        #command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cc_272} {cflags_272} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cc_272} {CPPFLAGS_272} {cppflags} $cppflags {cflags_272} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out'",
         depfile="$out.d",
     )
 
