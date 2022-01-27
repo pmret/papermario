@@ -53,7 +53,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     cross = "mips-linux-gnu-"
     cc = f"{BUILD_TOOLS}/cc/gcc/gcc"
     cc_ido = f"{BUILD_TOOLS}/cc/ido5.3/cc"
-    cc_272 = f"{BUILD_TOOLS}/cc/gcc2.7.2/gcc"
+    cc_272_dir = f"{BUILD_TOOLS}/cc/gcc2.7.2/"
+    cc_272 = f"{cc_272_dir}/gcc"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
     compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
@@ -120,8 +121,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc_272",
         description="cc_272 $in",
-        #command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cc_272} {cflags_272} $cflags $out.i -o $out'",
-        command=f"bash -o pipefail -c '{cc_272} {CPPFLAGS_272} {cppflags} $cppflags {cflags_272} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out'",
+        command=f"bash -o pipefail -c 'COMPILER_PATH={cc_272_dir} {cc_272} {CPPFLAGS_272} {cppflags} $cppflags {cflags_272} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out'",
         depfile="$out.d",
     )
 
