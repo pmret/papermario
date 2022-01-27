@@ -11,3 +11,4 @@ INCLUDE_ASM(s32, "pause/13FD40", pause_spirits_handle_input);
 INCLUDE_ASM(s32, "pause/13FD40", pause_spirits_update);
 
 INCLUDE_ASM(s32, "pause/13FD40", pause_spirits_cleanup);
+
