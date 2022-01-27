@@ -1,9 +1,7 @@
 #include "common.h"
-#include "include_asm_libultra.h"
 
-#ifndef KMC_ASM
 void guFrustumF(Matrix4f mf, f32 l, f32 r, f32 b, f32 t, f32 n, f32 f, f32 scale) {
-    s32    i, j;
+    s32 i, j;
 
     guMtxIdentF(mf);
 
@@ -22,11 +20,7 @@ void guFrustumF(Matrix4f mf, f32 l, f32 r, f32 b, f32 t, f32 n, f32 f, f32 scale
         }
     }
 }
-#else
-INCLUDE_ASM_LIBULTRA("guFrustum", guFrustumF);
-#endif
 
-#ifndef KMC_ASM
 void guFrustum(Mtx* m, f32 l, f32 r, f32 b, f32 t, f32 n, f32 f, f32 scale) {
     Matrix4f mf;
 
@@ -34,7 +28,3 @@ void guFrustum(Mtx* m, f32 l, f32 r, f32 b, f32 t, f32 n, f32 f, f32 scale) {
 
     guMtxF2L(mf, m);
 }
-#else
-INCLUDE_ASM_LIBULTRA("guFrustum", guFrustum);
-#endif
-

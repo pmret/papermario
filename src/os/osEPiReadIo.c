@@ -1,7 +1,3 @@
-#ifdef KMC_ASM
-#define MOVE_ADDU
-#endif
-
 #include "common.h"
 
 s32 osEPiReadIo(OSPiHandle* pihandle, u32 devAddr, u32* data) {

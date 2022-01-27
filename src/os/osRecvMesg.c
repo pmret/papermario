@@ -1,8 +1,6 @@
 #include "common.h"
-#include "include_asm_libultra.h"
 #include <PR/osint.h>
 
-#ifndef KMC_ASM
 s32 osRecvMesg(OSMesgQueue *mq, OSMesg *msg, s32 flags) {
     register u32 saveMask;
     saveMask = __osDisableInt();
@@ -27,7 +25,4 @@ s32 osRecvMesg(OSMesgQueue *mq, OSMesg *msg, s32 flags) {
     __osRestoreInt(saveMask);
     return 0;
 }
-#else
-INCLUDE_ASM_LIBULTRA("osRecvMesg", osRecvMesg);
-#endif
 
