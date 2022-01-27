@@ -172,7 +172,7 @@ void func_E0090428(EffectInstance* effect) {
 }
 
 // gSPTextureRectangle needs a lot of work
-#ifdef NON_MATCHING
+#ifdef NON_EQUIVALENT
 void func_E0090444(EffectInstance* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
