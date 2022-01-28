@@ -170,7 +170,7 @@ s16** spr_get_player_palettes(s32 spriteIndex);
 /// @param animID - Set MSB for tail allocation (i.e. `0x80XXYYZZ`)
 s32 spr_load_npc_sprite(s32 animID, s32** extraAnimList);
 
-void spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale);
+s32 spr_update_sprite(s32 spriteInstanceID, s32 animID, f32 timeScale);
 
 s32 spr_draw_npc_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, s16** paletteList, Matrix4f mtx);
 
