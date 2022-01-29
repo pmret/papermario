@@ -1,7 +1,5 @@
 #include "common.h"
-#include "include_asm_libultra.h"
 
-#ifndef KMC_ASM
 void guRotateRPYF(Matrix4f mf, f32 r, f32 p, f32 h) {
     static f32 dtor = 3.1415926 / 180.0;
     f32 sinr, sinp, sinh;
@@ -31,12 +29,7 @@ void guRotateRPYF(Matrix4f mf, f32 r, f32 p, f32 h) {
     mf[2][1] = cosr * sinp * sinh - sinr * cosh;
     mf[2][2] = cosr * cosp;
 }
-#else
-static f32 dtor = 3.1415926 / 180.0;
-INCLUDE_ASM_LIBULTRA("rotateRPY", guRotateRPYF);
-#endif
 
-#ifndef KMC_ASM
 void guRotateRPY(Mtx *m, f32 r, f32 p, f32 h) {
     Matrix4f mf;
 
@@ -44,6 +37,3 @@ void guRotateRPY(Mtx *m, f32 r, f32 p, f32 h) {
 
     guMtxF2L(mf, m);
 }
-#else
-INCLUDE_ASM_LIBULTRA("rotateRPY", guRotateRPY);
-#endif

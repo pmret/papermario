@@ -1,7 +1,5 @@
 #include "common.h"
-#include "include_asm_libultra.h"
 
-#ifndef KMC_ASM
 void guPositionF(Matrix4f mf, f32 r, f32 p, f32 h, f32 s, f32 x, f32 y, f32 z) {
         static f32 dtor = 3.1415926 / 180.0;
         f32   sinr, sinp, sinh;
@@ -37,12 +35,7 @@ void guPositionF(Matrix4f mf, f32 r, f32 p, f32 h, f32 s, f32 x, f32 y, f32 z) {
         mf[3][2] = z;
         mf[3][3] = 1.0;
 }
-#else
-static f32 dtor = 3.1415926 / 180.0;
-INCLUDE_ASM_LIBULTRA("position", guPositionF);
-#endif
 
-#ifndef KMC_ASM
 void guPosition(Mtx* m, f32 r, f32 p, f32 h, f32 s,
                                 f32 x, f32 y, f32 z) {
     f32 mf[4][4];
@@ -51,6 +44,3 @@ void guPosition(Mtx* m, f32 r, f32 p, f32 h, f32 s,
 
     guMtxF2L(mf, m);
 }
-#else
-INCLUDE_ASM_LIBULTRA("position", guPosition);
-#endif

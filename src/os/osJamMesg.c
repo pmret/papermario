@@ -1,8 +1,6 @@
 #include "common.h"
-#include "include_asm_libultra.h"
 #include <PR/osint.h>
 
-#ifndef KMC_ASM
 s32 osJamMesg(OSMesgQueue *mq, OSMesg msg, s32 flag) {
     register u32 saveMask = __osDisableInt();
     while (mq->validCount >= mq->msgCount)
@@ -25,6 +23,3 @@ s32 osJamMesg(OSMesgQueue *mq, OSMesg msg, s32 flag) {
     __osRestoreInt(saveMask);
     return 0;
 }
-#else
-INCLUDE_ASM_LIBULTRA("osJamMesg", osJamMesg);
-#endif

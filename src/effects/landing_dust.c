@@ -104,11 +104,11 @@ void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
 
-    data = shim_general_heap_malloc(numParts * sizeof(LandingDustFXData));
+    data = shim_general_heap_malloc(numParts * sizeof(*data));
     effect->data = data;
     ASSERT(effect->data != NULL);
 
-    shim_mem_clear(data, numParts * sizeof(LandingDustFXData));
+    shim_mem_clear(data, numParts * sizeof(*data));
 
     switch (type) {
         case 0:

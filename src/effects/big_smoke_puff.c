@@ -44,7 +44,7 @@ void big_smoke_puff_main(f32 x, f32 y, f32 z) {
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    data = shim_general_heap_malloc(effect->numParts * sizeof(BigSmokePuffFXData));
+    data = shim_general_heap_malloc(effect->numParts * sizeof(*data));
     effect->data = data;
 
     ASSERT(data != NULL);
