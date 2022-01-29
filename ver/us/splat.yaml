@@ -190,7 +190,7 @@ segments:
     - [0x41E30, c, os/41e30_len_40]
     - [0x41E70, c, os/41e70_len_340]
     - [0x421B0, c, os/421b0_len_60]
-    - [0x42210, c, os/42210_len_50]
+    - [0x42210, c, os/visetmode, gcc_272 -O3]
     - [0x42260, c, os/42260_len_170]
     - [0x423D0, c, os/423d0_len_50]
     - [0x42420, c, os/42420_len_50]

@@ -104,7 +104,7 @@ dlabel D_800959A8
 dlabel D_800959D0
 .word D_80095970
 
-dlabel D_800959D4
+dlabel __osViNext
 .word D_800959A0, 0x00000000, 0x00000000
 
 dlabel D_800959E0
