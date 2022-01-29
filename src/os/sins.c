@@ -1,9 +1,7 @@
 #include "common.h"
-#include "include_asm_libultra.h"
 
 #include "sintable.inc.c"
 
-#ifndef KMC_ASM
 s16 sins(u16 x) {
     /* 0 <= x < 0x10000  ==>  0 <= x < 2PI */
 
@@ -23,6 +21,3 @@ s16 sins(u16 x) {
         return val;
     }
 }
-#else
-INCLUDE_ASM_LIBULTRA("sins", sins);
-#endif
