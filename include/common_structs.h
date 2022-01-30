@@ -2350,7 +2350,7 @@ typedef struct SaveMetadata {
 
 typedef struct SpriteShadingLightSource {
     /* 0x00 */ s8 flags;
-    /* 0x01 */ s8 rgb[3];
+    /* 0x01 */ Color_RGB8 rgb;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 falloff;
     /* 0x14 */ s8 unk_14;
@@ -2361,7 +2361,7 @@ typedef struct SpriteShadingProfile {
     /* 0x00 */ s16 flags;
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ SpriteShadingLightSource sources[7];
-    /* 0xAC */ s8 ambientColor[3];
+    /* 0xAC */ Color_RGB8 ambientColor;
     /* 0xAF */ s8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
 

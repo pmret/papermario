@@ -17,9 +17,10 @@ MusicSettings D_8014F6F0 = {
     .unk_2C = 0
 };
 
-s32 gSongsUsingVariationFlag[] = { SONG_SPECIAL_BATTLE, SONG_TUBBA_BLUBBA_BATTLE, SONG_JR_TROOPA_BATTLE,
-                                      SONG_YOSHI_KIDS_FOUND, SONG_ITEM_UPGRADE, SONG_NEW_PARTNER,
-                                    };
+s32 gSongsUsingVariationFlag[] = {
+    SONG_SPECIAL_BATTLE, SONG_TUBBA_BLUBBA_BATTLE, SONG_JR_TROOPA_BATTLE, SONG_YOSHI_KIDS_FOUND, SONG_ITEM_UPGRADE,
+    SONG_NEW_PARTNER,
+};
 
 s16 D_8014F738 = 0;
 
