@@ -196,7 +196,7 @@ void func_80242D04(s32 windowID, s32 posX, s32 posY) {
                     break;
                 }
             }
-            if (i >= 0x2C) {
+            if (i >= 44) {
                 D_8024EFB4 = 0;
             }
         }

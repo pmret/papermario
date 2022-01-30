@@ -175,7 +175,6 @@ extern s32 gPauseMenuTargetPosY;
 extern s32 gPauseMenuCursorPosY;
 extern u8 gPauseMenuTextScrollInterpEasingLUT[16];
 extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
-extern s32 D_80270700[1];
 extern f32 pause_map_cameraX;
 extern f32 pause_map_cameraY;
 extern s32 pause_map_marioX;

@@ -116,7 +116,6 @@ extern HudScript HudScript_AnimatedHandPointer[];
 extern HudScript HudScript_StatusCoin[];
 extern HudScript HudScript_Refund[];
 extern HudScript HudScript_MenuTimes[];
-extern HudScript* D_8024FA30[1];
 extern HudScript* gBadgeMenuElements[22];
 extern HudElement* gItemIcons[20];
 
