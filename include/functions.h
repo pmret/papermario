@@ -681,12 +681,18 @@ void enable_player_shadow(void);
 s32 get_msg_lines(s32 messageID);
 void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, s32, void* drawContents, PopupMessage* popup, s32 parent);
 void set_window_update(s32 panelID, s32);
+
 void snd_stop_sound(s32 soundID);
+void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
+void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
+
+void sfx_adjust_env_sound_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
+void sfx_stop_sound(s32 soundID);
+
 void partner_disable_input(void);
 void func_80268798(s32, s32, s32, s32);
 void func_8026880C(s32, s32, s32);
 void func_802687E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
-void sfx_stop_sound(s32 soundID);
 void close_message(MessagePrintState* msgPrintState);
 void show_foreground_models_unchecked(void);
 void hide_foreground_models_unchecked(void);

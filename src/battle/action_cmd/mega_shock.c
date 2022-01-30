@@ -12,8 +12,6 @@ extern s32 D_802943C0;
 extern HudScript HudScript_MashAButton;
 extern HudScript HudScript_MashBButton1;
 
-void sfx_adjust_env_sound_params(s32, s32, s32, s32);
-
 typedef struct structD_802A9930_42E340 {
     /* 0x00 */ s16 unk_0;
     /* 0x08 */ u16 unk_8;

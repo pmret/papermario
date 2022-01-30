@@ -4,8 +4,6 @@
 
 #define NAMESPACE action_command_smack
 
-void sfx_adjust_env_sound_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
-
 extern HudScript HudScript_BlueMeter;
 extern HudScript HudScript_StickNeutral;
 extern HudScript HudScript_100pct;
