@@ -88,7 +88,7 @@ glabel osCreateViManager
 /* 41FB8 80066BB8 AC204698 */  sw        $zero, %lo(D_80094698)($at)
 /* 41FBC 80066BBC 0C019798 */  jal       osCreateThread
 /* 41FC0 80066BC0 AFA30010 */   sw       $v1, 0x10($sp)
-/* 41FC4 80066BC4 0C01B2A4 */  jal       osViInit
+/* 41FC4 80066BC4 0C01B2A4 */  jal       __osViInit
 /* 41FC8 80066BC8 00000000 */   nop
 /* 41FCC 80066BCC 0C019808 */  jal       osStartThread
 /* 41FD0 80066BD0 02002021 */   addu     $a0, $s0, $zero

@@ -1,5 +1,11 @@
+.include "macro.inc"
+
+# assembler directives
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
+.set gp=64     # allow use of 64-bit general purpose registers
+
+.section .text, "ax"
 
 glabel __osProbeTLB
 /* 41C60 80066860 40085000 */  mfc0      $t0, $10
@@ -52,5 +58,3 @@ glabel __osProbeTLB
 /* 41D0C 8006690C 40885000 */  mtc0      $t0, $10
 /* 41D10 80066910 03E00008 */  jr        $ra
 /* 41D14 80066914 00000000 */   nop
-/* 41D18 80066918 00000000 */  nop
-/* 41D1C 8006691C 00000000 */  nop

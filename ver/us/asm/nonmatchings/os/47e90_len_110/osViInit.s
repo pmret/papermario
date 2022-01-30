@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osViInit
+glabel __osViInit
 /* 47E90 8006CA90 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 47E94 8006CA94 AFB00010 */  sw        $s0, 0x10($sp)
 /* 47E98 8006CA98 3C108009 */  lui       $s0, %hi(D_80095970)
@@ -12,8 +12,8 @@ glabel osViInit
 /* 47EAC 8006CAAC 24050060 */   addiu    $a1, $zero, 0x60
 /* 47EB0 8006CAB0 3C038000 */  lui       $v1, %hi(osTvType)
 /* 47EB4 8006CAB4 8C630300 */  lw        $v1, %lo(osTvType)($v1)
-/* 47EB8 8006CAB8 3C018009 */  lui       $at, %hi(D_800959D0)
-/* 47EBC 8006CABC AC3059D0 */  sw        $s0, %lo(D_800959D0)($at)
+/* 47EB8 8006CAB8 3C018009 */  lui       $at, %hi(__osViCurr)
+/* 47EBC 8006CABC AC3059D0 */  sw        $s0, %lo(__osViCurr)($at)
 /* 47EC0 8006CAC0 26100030 */  addiu     $s0, $s0, 0x30
 /* 47EC4 8006CAC4 24020001 */  addiu     $v0, $zero, 1
 /* 47EC8 8006CAC8 3C018009 */  lui       $at, %hi(D_800959A2)

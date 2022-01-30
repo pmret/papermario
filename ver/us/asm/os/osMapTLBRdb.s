@@ -1,5 +1,11 @@
+.include "macro.inc"
+
+# assembler directives
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
+.set gp=64     # allow use of 64-bit general purpose registers
+
+.section .text, "ax"
 
 glabel osMapTLBRdb
 /* 47E30 8006CA30 40085000 */  mfc0      $t0, $10
@@ -24,5 +30,3 @@ glabel osMapTLBRdb
 /* 47E7C 8006CA7C 40885000 */  mtc0      $t0, $10
 /* 47E80 8006CA80 03E00008 */  jr        $ra
 /* 47E84 8006CA84 00000000 */   nop
-/* 47E88 8006CA88 00000000 */  nop
-/* 47E8C 8006CA8C 00000000 */  nop
