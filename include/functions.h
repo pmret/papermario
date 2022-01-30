@@ -321,7 +321,7 @@ void btl_state_update_22(void);
 void btl_state_draw_22(void);
 
 void btl_state_update_celebration(void);
-void btl_draw_upgrade_windows(void);
+void btl_draw_upgrade_windows(s32);
 void btl_state_draw_celebration(void);
 
 void func_8024F7C8(void);

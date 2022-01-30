@@ -854,7 +854,7 @@ typedef struct BattleStatus {
     /* 0x000 */ s32 flags1;
     /* 0x004 */ s32 flags2;
     /* 0x008 */ s32 varTable[16];
-    /* 0x048 */ u8 currentSubmenu;
+    /* 0x048 */ s8 currentSubmenu;
     /* 0x049 */ char unk_49[3];
     /* 0x04C */ s8 unk_4C[16];
     /* 0x05C */ s8 unk_5C[16];
@@ -862,7 +862,7 @@ typedef struct BattleStatus {
     /* 0x070 */ s16 menuDisableFlags; /* 1 = jump, 2 = hammer, 4 = items */
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
-    /* 0x078 */ u8 totalStarPoints;
+    /* 0x078 */ s8 totalStarPoints;
     /* 0x079 */ u8 pendingStarPoints; /* how many to add */
     /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
     /* 0x07B */ u8 damageTaken;
