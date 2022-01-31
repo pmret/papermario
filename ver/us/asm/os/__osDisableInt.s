@@ -8,8 +8,8 @@
 .section .text, "ax"
 
 glabel __osDisableInt
-/* 46760 8006B360 3C0A8009 */  lui       $t2, %hi(D_80095900)
-/* 46764 8006B364 254A5900 */  addiu     $t2, $t2, %lo(D_80095900)
+/* 46760 8006B360 3C0A8009 */  lui       $t2, %hi(__OSGlobalIntMask)
+/* 46764 8006B364 254A5900 */  addiu     $t2, $t2, %lo(__OSGlobalIntMask)
 /* 46768 8006B368 8D4B0000 */  lw        $t3, ($t2)
 /* 4676C 8006B36C 316BFF00 */  andi      $t3, $t3, 0xff00
 /* 46770 8006B370 40086000 */  mfc0      $t0, $12

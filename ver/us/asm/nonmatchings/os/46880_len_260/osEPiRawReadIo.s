@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osEPiRawReadIo
+glabel __osEPiRawReadIo
 /* 46970 8006B570 3C02A460 */  lui       $v0, 0xa460
 /* 46974 8006B574 34420010 */  ori       $v0, $v0, 0x10
 /* 46978 8006B578 8C420000 */  lw        $v0, ($v0)
