@@ -1,18 +1,18 @@
 #include "PR/osint.h"
 
 void __osDequeueThread(OSThread **queue, OSThread *t) {
-    register OSThread **pred;
+    register OSThread *pred;
     register OSThread *succ;
 
-    pred = queue;
-    succ = *pred;
+    pred = (OSThread *) queue;
+    succ = pred->next;
 
     while (succ != NULL) {
         if (succ == t) {
-            *pred = t->next;
+            pred->next = t->next;
             return;
         }
         pred = succ;
-        succ = *pred;
+        succ = pred->next;
     }
 }

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "PR/os_internal.h"
 
 s32 osEPiLinkHandle(OSPiHandle* EPiHandle) {
     u32 saveMask = __osDisableInt();

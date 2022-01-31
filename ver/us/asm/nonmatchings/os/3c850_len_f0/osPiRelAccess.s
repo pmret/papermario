@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osPiRelAccess
+glabel __osPiRelAccess
 /* 3C910 80061510 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 3C914 80061514 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 3C918 80061518 3C04800B */  lui       $a0, %hi(gOsPiMessageQueue)

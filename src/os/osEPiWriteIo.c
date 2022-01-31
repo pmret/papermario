@@ -1,11 +1,11 @@
-#include "common.h"
+#include "PR/piint.h"
 
 s32 osEPiWriteIo(OSPiHandle* handle, u32 devAddr, u32 data) {
     register s32 ret;
 
-    osPiGetAccess();
+    __osPiGetAccess();
     ret = __osEPiRawWriteIo(handle, devAddr, data);
-    osPiRelAccess();
+    __osPiRelAccess();
 
     return ret;
 }
