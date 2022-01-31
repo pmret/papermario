@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel D_80094670
+dlabel __osTimerList
 .word 0x800D9210, 0x00000000, 0x00000000, 0x00000000
 
 dlabel D_80094680
@@ -62,7 +62,7 @@ dlabel D_800958F4
 dlabel D_800958F8
 .word 0x02E6D354
 
-dlabel D_800958FC
+dlabel __osShutdown
 .word 0x00000000
 
 dlabel __OSGlobalIntMask

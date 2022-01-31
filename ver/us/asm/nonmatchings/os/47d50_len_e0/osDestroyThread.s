@@ -19,7 +19,7 @@ glabel osDestroyThread
 /* 47D84 8006C984 10620004 */  beq       $v1, $v0, .L8006C998
 /* 47D88 8006C988 00000000 */   nop
 /* 47D8C 8006C98C 8E040008 */  lw        $a0, 8($s0)
-/* 47D90 8006C990 0C019880 */  jal       osDequeueThread
+/* 47D90 8006C990 0C019880 */  jal       __osDequeueThread
 /* 47D94 8006C994 02002821 */   addu     $a1, $s0, $zero
 .L8006C998:
 /* 47D98 8006C998 3C028009 */  lui       $v0, %hi(__osActiveQueue)
@@ -53,7 +53,7 @@ glabel osDestroyThread
 /* 47DF8 8006C9F8 8C424660 */  lw        $v0, %lo(__osRunningThread)($v0)
 /* 47DFC 8006C9FC 16020003 */  bne       $s0, $v0, .L8006CA0C
 /* 47E00 8006CA00 00000000 */   nop
-/* 47E04 8006CA04 0C01AC75 */  jal       osDispatchThread
+/* 47E04 8006CA04 0C01AC75 */  jal       __osDispatchThread
 /* 47E08 8006CA08 00000000 */   nop
 .L8006CA0C:
 /* 47E0C 8006CA0C 0C01ACF4 */  jal       __osRestoreInt

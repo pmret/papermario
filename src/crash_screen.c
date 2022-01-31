@@ -275,7 +275,7 @@ void crash_screen_draw(OSThread* faultedThread) {
 }
 
 OSThread* crash_screen_get_faulted_thread(void) {
-    OSThread* thread = osGetActiveQueue();
+    OSThread* thread = __osGetActiveQueue();
 
     while (thread->priority != -1) {
         if (thread->priority > 0 && thread->priority < 0x7F && (thread->flags & 3)) {

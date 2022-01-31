@@ -61,30 +61,30 @@ glabel viMgrMain
 /* 420E0 80066CE0 3C01800B */  lui       $at, %hi(D_800AF910)
 /* 420E4 80066CE4 A422F910 */  sh        $v0, %lo(D_800AF910)($at)
 .L80066CE8:
-/* 420E8 80066CE8 3C02800A */  lui       $v0, %hi(D_8009A5E4)
-/* 420EC 80066CEC 8C42A5E4 */  lw        $v0, %lo(D_8009A5E4)($v0)
+/* 420E8 80066CE8 3C02800A */  lui       $v0, %hi(__osViIntrCount)
+/* 420EC 80066CEC 8C42A5E4 */  lw        $v0, %lo(__osViIntrCount)($v0)
 /* 420F0 80066CF0 24420001 */  addiu     $v0, $v0, 1
-/* 420F4 80066CF4 3C01800A */  lui       $at, %hi(D_8009A5E4)
+/* 420F4 80066CF4 3C01800A */  lui       $at, %hi(__osViIntrCount)
 /* 420F8 80066CF8 1220000A */  beqz      $s1, .L80066D24
-/* 420FC 80066CFC AC22A5E4 */   sw       $v0, %lo(D_8009A5E4)($at)
+/* 420FC 80066CFC AC22A5E4 */   sw       $v0, %lo(__osViIntrCount)($at)
 /* 42100 80066D00 0C019680 */  jal       osGetCount
 /* 42104 80066D04 00008821 */   addu     $s1, $zero, $zero
 /* 42108 80066D08 00408021 */  addu      $s0, $v0, $zero
 /* 4210C 80066D0C 02001821 */  addu      $v1, $s0, $zero
 /* 42110 80066D10 00001021 */  addu      $v0, $zero, $zero
-/* 42114 80066D14 3C01800A */  lui       $at, %hi(D_8009A608)
-/* 42118 80066D18 AC22A608 */  sw        $v0, %lo(D_8009A608)($at)
+/* 42114 80066D14 3C01800A */  lui       $at, %hi(__osCurrentTime)
+/* 42118 80066D18 AC22A608 */  sw        $v0, %lo(__osCurrentTime)($at)
 /* 4211C 80066D1C 3C01800A */  lui       $at, %hi(D_8009A60C)
 /* 42120 80066D20 AC23A60C */  sw        $v1, %lo(D_8009A60C)($at)
 .L80066D24:
-/* 42124 80066D24 3C10800A */  lui       $s0, %hi(D_8009A5C8)
+/* 42124 80066D24 3C10800A */  lui       $s0, %hi(__osBaseCounter)
 /* 42128 80066D28 0C019680 */  jal       osGetCount
-/* 4212C 80066D2C 8E10A5C8 */   lw       $s0, %lo(D_8009A5C8)($s0)
-/* 42130 80066D30 3C01800A */  lui       $at, %hi(D_8009A5C8)
-/* 42134 80066D34 AC22A5C8 */  sw        $v0, %lo(D_8009A5C8)($at)
+/* 4212C 80066D2C 8E10A5C8 */   lw       $s0, %lo(__osBaseCounter)($s0)
+/* 42130 80066D30 3C01800A */  lui       $at, %hi(__osBaseCounter)
+/* 42134 80066D34 AC22A5C8 */  sw        $v0, %lo(__osBaseCounter)($at)
 /* 42138 80066D38 00508023 */  subu      $s0, $v0, $s0
-/* 4213C 80066D3C 3C02800A */  lui       $v0, %hi(D_8009A608)
-/* 42140 80066D40 8C42A608 */  lw        $v0, %lo(D_8009A608)($v0)
+/* 4213C 80066D3C 3C02800A */  lui       $v0, %hi(__osCurrentTime)
+/* 42140 80066D40 8C42A608 */  lw        $v0, %lo(__osCurrentTime)($v0)
 /* 42144 80066D44 3C03800A */  lui       $v1, %hi(D_8009A60C)
 /* 42148 80066D48 8C63A60C */  lw        $v1, %lo(D_8009A60C)($v1)
 /* 4214C 80066D4C 02002821 */  addu      $a1, $s0, $zero
@@ -93,8 +93,8 @@ glabel viMgrMain
 /* 42158 80066D58 0065302B */  sltu      $a2, $v1, $a1
 /* 4215C 80066D5C 00441021 */  addu      $v0, $v0, $a0
 /* 42160 80066D60 00461021 */  addu      $v0, $v0, $a2
-/* 42164 80066D64 3C01800A */  lui       $at, %hi(D_8009A608)
-/* 42168 80066D68 AC22A608 */  sw        $v0, %lo(D_8009A608)($at)
+/* 42164 80066D64 3C01800A */  lui       $at, %hi(__osCurrentTime)
+/* 42168 80066D68 AC22A608 */  sw        $v0, %lo(__osCurrentTime)($at)
 /* 4216C 80066D6C 3C01800A */  lui       $at, %hi(D_8009A60C)
 /* 42170 80066D70 08019B19 */  j         .L80066C64
 /* 42174 80066D74 AC23A60C */   sw       $v1, %lo(D_8009A60C)($at)

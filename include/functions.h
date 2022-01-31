@@ -17,8 +17,8 @@ void nuBoot(void);
 void boot_idle(void);
 void boot_main(void);
 
-void osCleanupThread(void);
-OSThread* osGetActiveQueue(void);
+void __osCleanupThread(void);
+OSThread* __osGetActiveQueue(void);
 
 f32 signF(f32 val);
 
