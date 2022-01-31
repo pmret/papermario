@@ -1,4 +1,5 @@
 #include "common.h"
+#include "audio.h"
 
 #define MAX_SOUND_INSTANCES 10
 
@@ -12,12 +13,11 @@ typedef struct SoundInstance {
     /* 0x10 */ Vec3f position;
 } SoundInstance; // size = 0x1C
 
-extern SoundInstance D_801598A0[MAX_SOUND_INSTANCES];
-extern SoundInstance D_801599B8[MAX_SOUND_INSTANCES];
-extern SoundInstance* D_80159AD0;
-
-void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
-void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
+typedef struct AlternatingSoundSet {
+    /* 0x00 */ s32* sounds;
+    /* 0x04 */ s16 soundCount;
+    /* 0x06 */ s16 currentIndex;
+} AlternatingSoundSet; // size = 0x08
 
 // sound IDs
 s32 D_8014F2D0[] = {
@@ -70,12 +70,6 @@ s32 D_8014F584[] = { 0x00002041, 0x00002042 };
 s32 D_8014F58C[] = { 0x00002043, 0x00002044 };
 s32 D_8014F594[] = { 0x00002078, 0x00002079 };
 s32 D_8014F59C[] = { 0x000003B6, 0x000003B7 };
-
-typedef struct AlternatingSoundSet {
-    /* 0x00 */ s32* sounds;
-    /* 0x04 */ s16 soundCount;
-    /* 0x06 */ s16 currentIndex;
-} AlternatingSoundSet; // size = 0x08
 
 AlternatingSoundSet D_8014F5A4[] = {
     {
@@ -233,10 +227,101 @@ s32 D_8014F6B4[] = {
     SOUND_20A4,
 };
 
+extern SoundInstance D_801598A0[MAX_SOUND_INSTANCES];
+extern SoundInstance D_801599B8[MAX_SOUND_INSTANCES];
+extern SoundInstance* D_80159AD0;
 extern s32 D_80159AD4;
 
-INCLUDE_ASM(void, "DF950", sfx_compute_spatialized_sound_params_2, f32 posX, f32 posY, f32 posZ, s16* volume, s16* pan,
-            u32 sourceFlags);
+void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s16* pan);
+void sfx_compute_spatialized_sound_params_1(f32 x, f32 y, f32 z, s16* volume, s16* pan);
+
+void sfx_compute_spatialized_sound_params_2(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags) {
+    s32 screenX, screenY, screenZ;
+    f32 f1, f2, f3;
+    f32 lerp1, lerp2, lerp3;
+    f32 volTemp, panTemp;
+    s32 phi_v0;
+
+    get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
+
+    if (screenX > 5000 || screenX < -5000 || screenY > 5000 || screenY < -5000) {
+        *volume = -1;
+        *pan = 0;
+        return;
+    }
+
+    if (flags & 0x20000) {
+        if (screenX < -30 || screenX > 350 || screenY < -30) {
+            *volume = -1;
+            *pan = 0;
+            return;
+        }
+
+        if (screenY > 270) {
+            *volume = -1;
+            *pan = 0;
+            return;
+        }
+    } else if (flags & 0x40000) {
+        if (screenX < -30 || screenX > 350) {
+            *volume = -1;
+            *pan = 0;
+            return;
+        }
+    } else if (flags & 0x80000) {
+        if (screenY < -30 || screenY > 270) {
+            *volume = -1;
+            *pan = 0;
+            return;
+        }
+    }
+
+    lerp1 = abs(160 - screenX) - 145;
+    if (lerp1 < 0.0) {
+        lerp1 = 0.0f;
+    }
+
+    f1 = update_lerp(0, 1.0f, 0.0f, lerp1, 200);
+    if (f1 < 0.0) {
+        f1 = 0.0f;
+    }
+
+    lerp2 = abs(120 - screenY) - 105;
+    if (lerp2 < 0.0) {
+        lerp2 = 0.0f;
+    }
+
+    f2 = update_lerp(0, 1.0f, 0.0f, lerp2, 130);
+    if (f2 < 0.0) {
+        f2 = 0.0f;
+    }
+
+    lerp3 = screenZ - 5550.0;
+    if (lerp3 < 0.0) {
+        lerp3 = 0.0f;
+    }
+
+    f3 = update_lerp(0, 1.0f, 0.0f, lerp3, 250);
+    if (f3 < 0.0) {
+        f3 = 0.0f;
+    }
+
+    volTemp = (f1 * f2 * f3) * 127.0;
+    if (volTemp < 15.0) {
+        volTemp = 15.0f;
+    } else if (volTemp > 127.0) {
+        volTemp = 127.0f;
+    }
+    *volume = volTemp;
+
+    panTemp = (((f32) screenX - (SCREEN_WIDTH / 2.0)) / 3.6) + 64.0;
+    if (panTemp < 1.0) {
+        panTemp = 1.0f;
+    } else if (panTemp > 127.0) {
+        panTemp = 127.0f;
+    }
+    *pan = panTemp;
+}
 
 void sfx_reset_door_sounds(void) {
     gCurrentDoorSoundsSet = 0;
@@ -273,10 +358,26 @@ void sfx_clear_env_sounds(s16 playSounds) {
     }
 }
 
-INCLUDE_ASM(void, "DF950", sfx_update_looping_sound_params);
+void sfx_update_looping_sound_params(void) {
+    SoundInstance* sound = D_80159AD0;
+    u16 volume;
+    u16 pan;
+    s32 i;
+
+    for (i = 0; i < 10; i++, sound++) {
+        if (sound->flags & 1) {
+            if (sound->flags & 2) {
+                sfx_get_spatialized_sound_params(sound->position.x, sound->position.y, sound->position.z, &volume, &pan, sound->sourceFlags);
+                sound->volume = volume;
+                sound->pan = pan;
+            }
+            snd_adjust_sound_with_shift(sound->soundID, sound->volume, sound->pan, sound->pitchShift);
+        }
+    }
+}
 
 void func_801497FC(s32 arg0) {
-    func_800561E4();
+    func_800561E4(arg0);
     D_80159AD4 = arg0;
 }
 
@@ -358,7 +459,7 @@ s32 sfx_adjust_env_sound_pos(s32 soundID, s32 sourceFlags, f32 x, f32 y, f32 z) 
     SoundInstance* sound = sfx_get_env_sound_instance(soundID);
 
     if (sound == NULL) {
-        return 0;
+        return FALSE;
     }
 
     sound->sourceFlags = sourceFlags;
@@ -367,8 +468,7 @@ s32 sfx_adjust_env_sound_pos(s32 soundID, s32 sourceFlags, f32 x, f32 y, f32 z) 
     sound->position.z = z;
     sound->soundID = soundID;
     sound->flags |= 3;
-
-    return 1;
+    return TRUE;
 }
 
 void func_80149A6C(s32 soundID, s32 keepPlaying) {
@@ -418,7 +518,7 @@ void sfx_play_sound_with_params(s32 soundID, u8 arg1, u8 arg2, s16 arg3) {
     }
 }
 #else
-INCLUDE_ASM(void, "DF950", sfx_play_sound_with_params, s32 arg0, u8 arg1, u8 arg2, s16 arg3);
+INCLUDE_ASM(void, "sfx", sfx_play_sound_with_params, s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 #endif
 
 void sfx_adjust_env_sound_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
@@ -480,9 +580,121 @@ void sfx_play_sound_at_position(s32 soundID, s32 flags, f32 posX, f32 posY, f32 
     }
 }
 
-INCLUDE_ASM(void, "DF950", sfx_get_spatialized_sound_params, f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4,
-            s32 arg5);
+void sfx_get_spatialized_sound_params(f32 x, f32 y, f32 z, s16* volume, s16* pan, s32 flags) {
+    s32 temp_s0;
+    u32 temp_2;
 
-INCLUDE_ASM(s32, "DF950", sfx_compute_spatialized_sound_params_0);
+    temp_s0 = flags & 0xFFFF0000;
 
-INCLUDE_ASM(s32, "DF950", sfx_compute_spatialized_sound_params_1);
+    do {
+        temp_2 = flags & 0xFFFF;
+    } while (0); // required to match
+
+    switch (temp_2) {
+        case 0:
+            sfx_compute_spatialized_sound_params_0(x, y, z, volume, pan);
+            break;
+        case 1:
+            sfx_compute_spatialized_sound_params_1(x, y, z, volume, pan);
+            break;
+        case 2:
+            sfx_compute_spatialized_sound_params_2(x, y, z, volume, pan, temp_s0);
+            break;
+    }
+
+    if (temp_s0 & 0x10000) {
+        *volume = 0;
+    } else if (temp_s0 & 0x400000) {
+        if (*volume < 80) {
+            *volume = 80;
+        }
+    } else if (temp_s0 & 0x200000) {
+        if (*volume < 60) {
+            *volume = 60;
+        }
+    } else if (temp_s0 & 0x100000) {
+        if (*volume < 40) {
+            *volume = 40;
+        }
+    }
+
+    if (*pan < 1) {
+        *pan = 1;
+    }
+    if (*pan > 127) {
+        *pan = 127;
+    }
+}
+
+void sfx_compute_spatialized_sound_params_0(f32 x, f32 y, f32 z, s16* volume, s16* pan) {
+    s32 screenX, screenY, screenZ;
+
+    get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
+
+    if (screenX > 3000 || screenX < -3000 || screenY > 3000 || screenY < -3000) {
+        *volume = 1;
+        *pan = 0;
+        return;
+    }
+
+    *volume = 127;
+    if (screenX < 0) {
+        *volume = (screenX * 0.3f) + 127.0f;
+        screenX = 0;
+    }
+    if (screenX > SCREEN_WIDTH) {
+        *volume = 127.0f - ((screenX - SCREEN_WIDTH) * 0.3f);
+        screenX = SCREEN_WIDTH;
+    }
+
+    if (*volume < 1) {
+        *volume = 1;
+    }
+
+    if (!gGameStatusPtr->isBattle) {
+        *pan = (screenX * 0.2f) + 32.0f;
+    } else {
+        f32 temp_f20 = ((screenX * 127.0) / 320.0) - 64.0;
+        *pan = (s32) (temp_f20 * sin_rad((fabs(temp_f20) * 90.0 * 0.015625 * TAU) / 360.0)) + 64;
+    }
+}
+
+void sfx_compute_spatialized_sound_params_1(f32 x, f32 y, f32 z, s16* volume, s16* pan) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+    s32 screenX, screenY, screenZ;
+    f32 temp_f0;
+
+    get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
+
+    if (screenX > 3000 || screenX < -3000 || screenY > 3000 || screenY < -3000) {
+        *volume = 1;
+        *pan = 0;
+        return;
+    }
+
+    *volume = 127;
+    if (screenX < 0) {
+        *volume = (screenX * 0.3f) + 127.0f;
+        screenX = 0;
+    }
+
+    if (camera->viewportW < screenX) {
+        *volume = 127.0f - ((screenX - camera->viewportW) * 0.3f);
+        screenX = camera->viewportW;
+    }
+
+    temp_f0 = fabsf(5000 - screenZ);
+    if (temp_f0 > 1000.0f) {
+        temp_f0 = 1000.0f;
+    }
+
+    *volume = *volume * (1500.0f - temp_f0) * 0.001f;
+    if (*volume > 127) {
+        *volume = 127;
+    }
+    if (*volume < 1) {
+        *volume = 1;
+    }
+
+    *pan = ((screenX * 64.0f) / camera->viewportW) + 32.0f;
+}

@@ -3,8 +3,6 @@
 
 #define NAMESPACE action_command_bomb
 
-void sfx_adjust_env_sound_params(s32, s32, s32, s32);
-
 extern HudScript HudScript_BlueMeter;
 extern HudScript HudScript_AButton;
 extern HudScript HudScript_100pct;
