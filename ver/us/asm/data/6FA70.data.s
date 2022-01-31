@@ -26,7 +26,7 @@ dlabel D_80094694
 dlabel D_80094698
 .word 0x00000000
 
-dlabel D_8009469C
+dlabel __additional_scanline
 .word 0x00000000
 
 dlabel osViModeTable

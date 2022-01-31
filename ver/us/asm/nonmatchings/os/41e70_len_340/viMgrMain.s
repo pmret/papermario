@@ -38,7 +38,7 @@ glabel viMgrMain
 /* 4208C 80066C8C 08019B19 */  j         .L80066C64
 /* 42090 80066C90 00000000 */   nop
 .L80066C94:
-/* 42094 80066C94 0C019C1C */  jal       osViSwapContext
+/* 42094 80066C94 0C019C1C */  jal       __osViSwapContext
 /* 42098 80066C98 00000000 */   nop
 /* 4209C 80066C9C 3C02800B */  lui       $v0, %hi(D_800AF910)
 /* 420A0 80066CA0 9442F910 */  lhu       $v0, %lo(D_800AF910)($v0)
@@ -99,7 +99,7 @@ glabel viMgrMain
 /* 42170 80066D70 08019B19 */  j         .L80066C64
 /* 42174 80066D74 AC23A60C */   sw       $v1, %lo(D_8009A60C)($at)
 .L80066D78:
-/* 42178 80066D78 0C019935 */  jal       osTimerInterrupt
+/* 42178 80066D78 0C019935 */  jal       __osTimerInterrupt
 /* 4217C 80066D7C 00000000 */   nop
 /* 42180 80066D80 08019B19 */  j         .L80066C64
 /* 42184 80066D84 00000000 */   nop

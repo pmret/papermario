@@ -66,7 +66,7 @@ glabel __osViInit
 /* 47F74 8006CB74 3C02A440 */   lui      $v0, 0xa440
 .L8006CB78:
 /* 47F78 8006CB78 AC400000 */  sw        $zero, ($v0)
-/* 47F7C 8006CB7C 0C019C1C */  jal       osViSwapContext
+/* 47F7C 8006CB7C 0C019C1C */  jal       __osViSwapContext
 /* 47F80 8006CB80 00000000 */   nop
 /* 47F84 8006CB84 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 47F88 8006CB88 8FB00010 */  lw        $s0, 0x10($sp)

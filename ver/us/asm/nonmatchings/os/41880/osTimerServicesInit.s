@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osTimerServicesInit
+glabel __osTimerServicesInit
 /* 41880 80066480 3C028009 */  lui       $v0, %hi(D_80094670)
 /* 41884 80066484 8C424670 */  lw        $v0, %lo(D_80094670)($v0)
 /* 41888 80066488 00002021 */  addu      $a0, $zero, $zero

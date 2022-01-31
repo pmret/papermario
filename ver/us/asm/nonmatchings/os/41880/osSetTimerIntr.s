@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osSetTimerIntr
+glabel __osSetTimerIntr
 /* 41A10 80066610 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 41A14 80066614 AFB30020 */  sw        $s3, 0x20($sp)
 /* 41A18 80066618 AFB2001C */  sw        $s2, 0x1c($sp)

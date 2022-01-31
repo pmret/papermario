@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osTimerInterrupt
+glabel __osTimerInterrupt
 /* 418D4 800664D4 3C038009 */  lui       $v1, %hi(D_80094670)
 /* 418D8 800664D8 8C634670 */  lw        $v1, %lo(D_80094670)($v1)
 /* 418DC 800664DC 27BDFFE8 */  addiu     $sp, $sp, -0x18
@@ -49,7 +49,7 @@ glabel osTimerInterrupt
 /* 41978 80066578 00862023 */  subu      $a0, $a0, $a2
 /* 4197C 8006657C 00822023 */  subu      $a0, $a0, $v0
 /* 41980 80066580 AE040010 */  sw        $a0, 0x10($s0)
-/* 41984 80066584 0C019984 */  jal       osSetTimerIntr
+/* 41984 80066584 0C019984 */  jal       __osSetTimerIntr
 /* 41988 80066588 AE050014 */   sw       $a1, 0x14($s0)
 /* 4198C 8006658C 08019980 */  j         .L80066600
 /* 41990 80066590 00000000 */   nop
@@ -79,7 +79,7 @@ glabel osTimerInterrupt
 /* 419E4 800665E4 8E03000C */  lw        $v1, 0xc($s0)
 /* 419E8 800665E8 02002021 */  addu      $a0, $s0, $zero
 /* 419EC 800665EC AC820010 */  sw        $v0, 0x10($a0)
-/* 419F0 800665F0 0C0199A4 */  jal       osInsertTimer
+/* 419F0 800665F0 0C0199A4 */  jal       __osInsertTimer
 /* 419F4 800665F4 AC830014 */   sw       $v1, 0x14($a0)
 /* 419F8 800665F8 0801993D */  j         .L800664F4
 /* 419FC 800665FC 00000000 */   nop
