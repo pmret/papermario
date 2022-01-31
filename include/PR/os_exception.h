@@ -21,7 +21,7 @@
 
 /*---------------------------------------------------------------------*
         Copyright (C) 1998 Nintendo. (Originated by SGI)
-        
+
         $RCSfile: os_exception.h,v $
         $Revision: 1.1 $
         $Date: 1998/10/09 08:01:07 $
@@ -63,6 +63,7 @@ typedef u32 OSHWIntr;
 /* Interrupt masks */
 
 #define	OS_IM_NONE	0x00000001
+#define OS_IM_RCP   0x00000401 // MODIFIED HEADER FILE, MISSING DEFINE
 #define	OS_IM_SW1	0x00000501
 #define	OS_IM_SW2	0x00000601
 #define	OS_IM_CART	0x00000c01

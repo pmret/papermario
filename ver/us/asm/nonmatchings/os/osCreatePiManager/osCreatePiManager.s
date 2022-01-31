@@ -57,8 +57,8 @@ glabel osCreatePiManager
 /* 3BEA8 80060AA8 2631E6E0 */  addiu     $s1, $s1, %lo(piMgrThread)
 /* 3BEAC 80060AAC 02202021 */  addu      $a0, $s1, $zero
 /* 3BEB0 80060AB0 00002821 */  addu      $a1, $zero, $zero
-/* 3BEB4 80060AB4 3C068006 */  lui       $a2, %hi(osDevMgrMain)
-/* 3BEB8 80060AB8 24C61090 */  addiu     $a2, $a2, %lo(osDevMgrMain)
+/* 3BEB4 80060AB4 3C068006 */  lui       $a2, %hi(__osDevMgrMain)
+/* 3BEB8 80060AB8 24C61090 */  addiu     $a2, $a2, %lo(__osDevMgrMain)
 /* 3BEBC 80060ABC 24030001 */  addiu     $v1, $zero, 1
 /* 3BEC0 80060AC0 AE830000 */  sw        $v1, ($s4)
 /* 3BEC4 80060AC4 3C03800B */  lui       $v1, %hi(gOsPiMessageQueue)

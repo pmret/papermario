@@ -17,9 +17,6 @@ void nuBoot(void);
 void boot_idle(void);
 void boot_main(void);
 
-void osCleanupThread(void);
-OSThread* osGetActiveQueue(void);
-
 f32 signF(f32 val);
 
 void* heap_malloc(s32 size);

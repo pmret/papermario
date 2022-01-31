@@ -1,8 +1,6 @@
 #include "common.h"
 #include <PR/osint.h>
 
-u32 __osPreNMI = 0;
-
 s32 osSendMesg(OSMesgQueue *mq, OSMesg msg, s32 flags)
 {
     register u32 saveMask;
