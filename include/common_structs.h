@@ -2121,7 +2121,7 @@ typedef struct MenuPanel {
 } MenuPanel; // size = 0x1C
 
 typedef struct WindowBackground {
-    /* 0x00 */ s32* imgData;
+    /* 0x00 */ u8* imgData;
     /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
     /* 0x05 */ s8 width;
     /* 0x06 */ s8 height;
@@ -2130,7 +2130,7 @@ typedef struct WindowBackground {
 } WindowBackground; // size = 0xC
 
 typedef struct WindowCorners {
-    /* 0x00 */ s32* imgData;
+    /* 0x00 */ u8* imgData;
     /* 0x04 */ s8 packedTileFormat; // upper = fmt, lower = depth; e.g., 31 = CI-8
     /* 0x05 */ Vec2b size1;
     /* 0x07 */ Vec2b size2;

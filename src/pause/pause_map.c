@@ -10,10 +10,10 @@ void pause_map_update(MenuPanel* tab);
 void pause_map_cleanup(MenuPanel* tab);
 void func_80242D04(s32 windowID, s32 posX, s32 posY);
 
-extern s32 D_8026F118[];
+extern Gfx gPauseDLWorldMap[];
 extern s32 D_802510B0[];
-extern s32 D_8026F1B8;
-extern s32 D_8026F2A0[];
+extern Gfx D_8026F1B8[];
+extern Gfx gPauseDLArrows[];
 extern s32 D_8026FEE8;
 extern s32 D_80270700[1];
 
@@ -193,7 +193,7 @@ void pause_map_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3, s32
     s32 pathLength;
 
 
-    gSPDisplayList(gMasterGfxPos++, &D_8026F118);
+    gSPDisplayList(gMasterGfxPos++, gPauseDLWorldMap);
     q = -cameraX * 32;
     for (i = 0; i < 60; i++) {
         if (4 * i + 4 < 0x6F) {
@@ -214,7 +214,7 @@ void pause_map_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3, s32
         }
     }
 
-    gSPDisplayList(gMasterGfxPos++, &D_8026F1B8);
+    gSPDisplayList(gMasterGfxPos++, D_8026F1B8);
 
     x1 = arg1 + 0x1A;
     y1 = arg2 + 0x16;
@@ -296,7 +296,7 @@ void pause_map_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3, s32
             offset2 = offset;
             offset3 = offset;
 
-            gSPDisplayList(gMasterGfxPos++, &D_8026F2A0);
+            gSPDisplayList(gMasterGfxPos++, gPauseDLArrows);
 
             if (!(pause_map_cameraX < 0.0f)) {
                 offset0 = 0;

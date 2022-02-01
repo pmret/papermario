@@ -20,7 +20,7 @@ extern HudElStruct gItemHudScripts[];
 extern s32 D_8026FC48;
 extern s32 D_8026FC10;
 extern s32 D_802703FC;
-extern s32 D_8026F348;
+extern Gfx gPauseDLOrbs[];
 extern s32* D_8026FFB0;
 extern s32 D_8026FBD8;
 
@@ -482,7 +482,7 @@ void pause_badges_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4
                     g1 = 0xFF;
                     b1 = 0x64;
 
-                    gSPDisplayList(gMasterGfxPos++, &D_8026F348);
+                    gSPDisplayList(gMasterGfxPos++, gPauseDLOrbs);
                     gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
 
                     if (sp84 == 0) {
@@ -585,7 +585,7 @@ void pause_badges_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4
     s7 = 0xff;
     s8 = 0x64;
     qwer = playerData->maxBP;
-    gSPDisplayList(gMasterGfxPos++, &D_8026F348);
+    gSPDisplayList(gMasterGfxPos++, gPauseDLOrbs);
     gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
     for (c = 0; c < qwer; c++) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xE3, 0xE3, 0xE3, 0xFF);

@@ -169,7 +169,6 @@ extern char D_802700D[8];
 extern s32 D_802700E0;
 extern s32 gPauseMenuCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
-extern s32 gPauseMenuMsgs[348];
 extern s32 gPauseMenuTargetPosX;
 extern s32 gPauseMenuTargetPosY;
 extern s32 gPauseMenuCursorPosY;

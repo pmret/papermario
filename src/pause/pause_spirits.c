@@ -11,7 +11,7 @@ typedef struct SpriteEntryData {
 extern s32 D_802706FC;
 extern s32 D_802706E0[];
 extern s32 D_802706C0[];
-extern s32 D_8026F5A0[];
+extern Gfx D_8026F5A0[];
 extern s32 D_8026A2B0;
 extern s32 D_8026FE78[];
 
@@ -57,7 +57,10 @@ SpriteEntryData D_8024F8C0[] = { { .animID = 0x00120000,
                                    .extraAnim1 = 0x00180001,
                                    .extraAnim2 =  0x00180002,
                                    .unk_0C = 0xFFFFFFFF } };
-s32 D_8024F930[] = { 0x05060001, 0x02050404, 0x03020000 };
+s8 D_8024F930[] = {
+    5, 6, 0, 1, 2,
+    5, 4, 4, 3, 2
+};
 Vec2i D_8024F93C[] = { {.x = 120, .y = -5},
                        {.x = 179, .y = -2},
                        {.x = 222, .y = 28},
@@ -133,7 +136,7 @@ void pause_spirits_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3,
 
     gDPPipeSync(gMasterGfxPos++);
     gSPViewport(gMasterGfxPos++, &D_8024F8B0);
-    gSPDisplayList(gMasterGfxPos++, &D_8026F5A0);
+    gSPDisplayList(gMasterGfxPos++, D_8026F5A0);
 
     for (i = 0; i < 5; i++) {
         gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 64, &D_8026A2B0);
