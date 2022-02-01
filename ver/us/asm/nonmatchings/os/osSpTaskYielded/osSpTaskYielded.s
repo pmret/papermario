@@ -5,7 +5,7 @@ glabel osSpTaskYielded
 /* 41070 80065C70 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 41074 80065C74 AFB00010 */  sw        $s0, 0x10($sp)
 /* 41078 80065C78 AFBF0014 */  sw        $ra, 0x14($sp)
-/* 4107C 80065C7C 0C01B1B8 */  jal       osSpGetStatus
+/* 4107C 80065C7C 0C01B1B8 */  jal       __osSpGetStatus
 /* 41080 80065C80 00808021 */   addu     $s0, $a0, $zero
 /* 41084 80065C84 00022202 */  srl       $a0, $v0, 8
 /* 41088 80065C88 30420080 */  andi      $v0, $v0, 0x80

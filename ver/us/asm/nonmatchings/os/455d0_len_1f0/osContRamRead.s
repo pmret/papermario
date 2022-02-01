@@ -65,7 +65,7 @@ glabel osContRamRead
 .L8006A2B0:
 /* 456B0 8006A2B0 02C02021 */  addu      $a0, $s6, $zero
 /* 456B4 8006A2B4 001610C2 */  srl       $v0, $s6, 3
-/* 456B8 8006A2B8 0C01B218 */  jal       osContAddressCrc
+/* 456B8 8006A2B8 0C01B218 */  jal       __osContAddressCrc
 /* 456BC 8006A2BC A2020004 */   sb       $v0, 4($s0)
 /* 456C0 8006A2C0 8FA8001C */  lw        $t0, 0x1c($sp)
 /* 456C4 8006A2C4 24040001 */  addiu     $a0, $zero, 1
@@ -90,7 +90,7 @@ glabel osContRamRead
 /* 45710 8006A310 56200015 */  bnel      $s1, $zero, .L8006A368
 /* 45714 8006A314 24110001 */   addiu    $s1, $zero, 1
 /* 45718 8006A318 26120006 */  addiu     $s2, $s0, 6
-/* 4571C 8006A31C 0C01B233 */  jal       osContDataCrc
+/* 4571C 8006A31C 0C01B233 */  jal       __osContDataCrc
 /* 45720 8006A320 02402021 */   addu     $a0, $s2, $zero
 /* 45724 8006A324 92030026 */  lbu       $v1, 0x26($s0)
 /* 45728 8006A328 304200FF */  andi      $v0, $v0, 0xff

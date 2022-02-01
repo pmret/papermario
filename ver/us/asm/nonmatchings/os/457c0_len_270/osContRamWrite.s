@@ -74,7 +74,7 @@ glabel osContRamWrite
 .L8006A4C0:
 /* 458C0 8006A4C0 02C02021 */  addu      $a0, $s6, $zero
 /* 458C4 8006A4C4 001610C2 */  srl       $v0, $s6, 3
-/* 458C8 8006A4C8 0C01B218 */  jal       osContAddressCrc
+/* 458C8 8006A4C8 0C01B218 */  jal       __osContAddressCrc
 /* 458CC 8006A4CC A2020004 */   sb       $v0, 4($s0)
 /* 458D0 8006A4D0 02E02021 */  addu      $a0, $s7, $zero
 /* 458D4 8006A4D4 8FA80014 */  lw        $t0, 0x14($sp)
@@ -87,7 +87,7 @@ glabel osContRamWrite
 /* 458F0 8006A4F0 24A5A000 */  addiu     $a1, $a1, %lo(D_800DA000)
 /* 458F4 8006A4F4 0C019730 */  jal       osSiRawStartDma
 /* 458F8 8006A4F8 24040001 */   addiu    $a0, $zero, 1
-/* 458FC 8006A4FC 0C01B233 */  jal       osContDataCrc
+/* 458FC 8006A4FC 0C01B233 */  jal       __osContDataCrc
 /* 45900 8006A500 02E02021 */   addu     $a0, $s7, $zero
 /* 45904 8006A504 02802021 */  addu      $a0, $s4, $zero
 /* 45908 8006A508 00002821 */  addu      $a1, $zero, $zero

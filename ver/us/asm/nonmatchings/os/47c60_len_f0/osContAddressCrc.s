@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osContAddressCrc
+glabel __osContAddressCrc
 /* 47C60 8006C860 00001821 */  addu      $v1, $zero, $zero
 /* 47C64 8006C864 24050400 */  addiu     $a1, $zero, 0x400
 /* 47C68 8006C868 3084FFFF */  andi      $a0, $a0, 0xffff

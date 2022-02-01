@@ -9,17 +9,17 @@ glabel __osInitialize_common
 /* 45B18 8006A718 0C01B19C */  jal       __osGetSR
 /* 45B1C 8006A71C AC22A660 */   sw       $v0, %lo(D_8009A660)($at)
 /* 45B20 8006A720 3C042000 */  lui       $a0, 0x2000
-/* 45B24 8006A724 0C01B1A8 */  jal       osSetSR
+/* 45B24 8006A724 0C01B1A8 */  jal       __osSetSR
 /* 45B28 8006A728 00442025 */   or       $a0, $v0, $a0
 /* 45B2C 8006A72C 3C040100 */  lui       $a0, 0x100
-/* 45B30 8006A730 0C01B1A4 */  jal       osSetFpcCsr
+/* 45B30 8006A730 0C01B1A4 */  jal       __osSetFpcCsr
 /* 45B34 8006A734 34840800 */   ori      $a0, $a0, 0x800
-/* 45B38 8006A738 0C01B1AC */  jal       osSetWatchLo
+/* 45B38 8006A738 0C01B1AC */  jal       __osSetWatchLo
 /* 45B3C 8006A73C 3C040490 */   lui      $a0, 0x490
 /* 45B40 8006A740 3C041FC0 */  lui       $a0, 0x1fc0
 .L8006A744:
 /* 45B44 8006A744 348407FC */  ori       $a0, $a0, 0x7fc
-/* 45B48 8006A748 0C01B1F0 */  jal       osSiRawReadIo
+/* 45B48 8006A748 0C01B1F0 */  jal       __osSiRawReadIo
 /* 45B4C 8006A74C 27A50010 */   addiu    $a1, $sp, 0x10
 /* 45B50 8006A750 1440FFFC */  bnez      $v0, .L8006A744
 /* 45B54 8006A754 3C041FC0 */   lui      $a0, 0x1fc0
@@ -27,7 +27,7 @@ glabel __osInitialize_common
 /* 45B58 8006A758 8FA50010 */  lw        $a1, 0x10($sp)
 /* 45B5C 8006A75C 3C041FC0 */  lui       $a0, 0x1fc0
 /* 45B60 8006A760 348407FC */  ori       $a0, $a0, 0x7fc
-/* 45B64 8006A764 0C01B204 */  jal       osSiRawWriteIo
+/* 45B64 8006A764 0C01B204 */  jal       __osSiRawWriteIo
 /* 45B68 8006A768 34A50008 */   ori      $a1, $a1, 8
 /* 45B6C 8006A76C 1440FFFA */  bnez      $v0, .L8006A758
 /* 45B70 8006A770 00000000 */   nop
