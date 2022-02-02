@@ -798,6 +798,7 @@ void func_80268770(s32, s32, s32);
 void func_80268C9C(void);
 void func_802B6CF0_E2B3A0(void);
 void func_80269160(void);
+void func_800E24F8(void);
 void load_tattle_flags(s32);
 void remove_consumable(void);
 void delete_shadow(s32);
@@ -814,6 +815,9 @@ void draw_encounters_neutral(void);
 void show_first_strike_message(void);
 void entity_upgrade_block_hide_content(s32);
 s32 lookup_defense(s32*, s32);
+void peach_check_for_parasol_input(void);
+void peach_sync_disguise_npc(void);
+s32 check_conversation_trigger(void);
 
 void clear_player_status(void);
 void clear_entity_models(void);

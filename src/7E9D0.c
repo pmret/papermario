@@ -5,7 +5,7 @@
 #include "world/actions.h"
 #include "npc.h"
 
-extern s32 D_8010C924;
+extern void* D_8010C924;
 extern s32 D_8010C964;
 extern s32 gSpinHistoryBufferPos;
 extern s16 D_8010C9B0;
@@ -61,7 +61,7 @@ void phys_reset_spin_history(void) {
     }
 
     D_8010C964 = 0;
-    D_8010C924 = 0;
+    D_8010C924 = NULL;
 }
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_action_state);
