@@ -57,7 +57,7 @@ glabel osPfsDeleteFile
 .L80068688:
 /* 43A88 80068688 27A50018 */  addiu     $a1, $sp, 0x18
 /* 43A8C 8006868C 00003021 */  addu      $a2, $zero, $zero
-/* 43A90 80068690 0C01A7A3 */  jal       osPfsRWInode
+/* 43A90 80068690 0C01A7A3 */  jal       __osPfsRWInode
 /* 43A94 80068694 02003821 */   addu     $a3, $s0, $zero
 /* 43A98 80068698 1440002B */  bnez      $v0, .L80068748
 /* 43A9C 8006869C 02202021 */   addu     $a0, $s1, $zero
@@ -70,7 +70,7 @@ glabel osPfsDeleteFile
 /* 43AB8 800686B8 02202021 */   addu     $a0, $s1, $zero
 /* 43ABC 800686BC 27A50018 */  addiu     $a1, $sp, 0x18
 /* 43AC0 800686C0 24060001 */  addiu     $a2, $zero, 1
-/* 43AC4 800686C4 0C01A7A3 */  jal       osPfsRWInode
+/* 43AC4 800686C4 0C01A7A3 */  jal       __osPfsRWInode
 /* 43AC8 800686C8 02003821 */   addu     $a3, $s0, $zero
 /* 43ACC 800686CC 1440001E */  bnez      $v0, .L80068748
 /* 43AD0 800686D0 00000000 */   nop

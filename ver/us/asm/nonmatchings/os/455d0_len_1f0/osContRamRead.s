@@ -71,14 +71,14 @@ glabel osContRamRead
 /* 456C4 8006A2C4 24040001 */  addiu     $a0, $zero, 1
 /* 456C8 8006A2C8 03C02821 */  addu      $a1, $fp, $zero
 /* 456CC 8006A2CC 00481025 */  or        $v0, $v0, $t0
-/* 456D0 8006A2D0 0C019730 */  jal       osSiRawStartDma
+/* 456D0 8006A2D0 0C019730 */  jal       __osSiRawStartDma
 /* 456D4 8006A2D4 A2020005 */   sb       $v0, 5($s0)
 /* 456D8 8006A2D8 02802021 */  addu      $a0, $s4, $zero
 /* 456DC 8006A2DC 00002821 */  addu      $a1, $zero, $zero
 /* 456E0 8006A2E0 0C0195BC */  jal       osRecvMesg
 /* 456E4 8006A2E4 24060001 */   addiu    $a2, $zero, 1
 /* 456E8 8006A2E8 00002021 */  addu      $a0, $zero, $zero
-/* 456EC 8006A2EC 0C019730 */  jal       osSiRawStartDma
+/* 456EC 8006A2EC 0C019730 */  jal       __osSiRawStartDma
 /* 456F0 8006A2F0 03C02821 */   addu     $a1, $fp, $zero
 /* 456F4 8006A2F4 02802021 */  addu      $a0, $s4, $zero
 /* 456F8 8006A2F8 00002821 */  addu      $a1, $zero, $zero

@@ -224,7 +224,7 @@ void render_curtains(void) {
     }
 
     if (gCurtainScale < 1.9) {
-        Mtx m;
+        Matrix4f m;
         f32 scale;
         s8 rgb;
 
@@ -232,8 +232,8 @@ void render_curtains(void) {
         gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
         gSPDisplayList(gMasterGfxPos++, &D_800760C0);
 
-        guFrustumF(m.m[0], -80.0f, 80.0f, -60.0f, 60.0f, 160.0f, 640.0f, 1.0f);
-        guMtxF2L(m.m[0], &D_8009BAA8[0]);
+        guFrustumF(m, -80.0f, 80.0f, -60.0f, 60.0f, 160.0f, 640.0f, 1.0f);
+        guMtxF2L(m, &D_8009BAA8[0]);
 
         gSPMatrix(gMasterGfxPos++, &D_8009BAA8[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
@@ -242,9 +242,9 @@ void render_curtains(void) {
             scale = 1.0f;
         }
 
-        guPositionF(m.m[0], 0.0f, 0.0f, 0.0f, scale * 0.1, 0.0f, 0.0f, -320.0f);
+        guPositionF(m, 0.0f, 0.0f, 0.0f, scale * 0.1, 0.0f, 0.0f, -320.0f);
 
-        guMtxF2L(m.m[0], &D_8009BAA8[1]);
+        guMtxF2L(m, &D_8009BAA8[1]);
 
         gSPMatrix(gMasterGfxPos++, &D_8009BAA8[1], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         rgb = 255.0f - (gCurtainFade * 255.0f);

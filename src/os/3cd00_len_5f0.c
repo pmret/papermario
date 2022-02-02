@@ -11,10 +11,10 @@ s32 osContStartQuery(OSMesgQueue* mq) {
     osSiGetAccess();
     if (D_8009A61C != 0) {
         osPackRequestData(0);
-        osSiRawStartDma(1, &D_800B0ED0);
+        __osSiRawStartDma(1, &D_800B0ED0);
         osRecvMesg(mq, NULL, 1);
     }
-    ret = osSiRawStartDma(0, &D_800B0ED0);
+    ret = __osSiRawStartDma(0, &D_800B0ED0);
     D_8009A61C = 0;
     osSiRelAccess();
 

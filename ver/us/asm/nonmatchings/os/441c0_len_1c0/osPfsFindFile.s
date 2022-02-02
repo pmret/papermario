@@ -22,7 +22,7 @@ glabel osPfsFindFile
 /* 44204 80068E04 30420001 */  andi      $v0, $v0, 1
 /* 44208 80068E08 1040004E */  beqz      $v0, .L80068F44
 /* 4420C 80068E0C 00A0B821 */   addu     $s7, $a1, $zero
-/* 44210 80068E10 0C01A775 */  jal       osCheckId
+/* 44210 80068E10 0C01A775 */  jal       __osCheckId
 /* 44214 80068E14 02002021 */   addu     $a0, $s0, $zero
 /* 44218 80068E18 00403821 */  addu      $a3, $v0, $zero
 /* 4421C 80068E1C 14E0004A */  bnez      $a3, .L80068F48

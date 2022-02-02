@@ -1,5 +1,11 @@
+.include "macro.inc"
+
+# assembler directives
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
+.set gp=64     # allow use of 64-bit general purpose registers
+
+.section .text, "ax"
 
 glabel guNormalize
 /* 47FC0 8006CBC0 C4840000 */  lwc1      $f4, ($a0)
@@ -23,6 +29,3 @@ glabel guNormalize
 /* 48008 8006CC08 E4B20000 */  swc1      $f18, ($a1)
 /* 4800C 8006CC0C 03E00008 */  jr        $ra
 /* 48010 8006CC10 E4C40000 */   swc1     $f4, ($a2)
-/* 48014 8006CC14 00000000 */  nop
-/* 48018 8006CC18 00000000 */  nop
-/* 4801C 8006CC1C 00000000 */  nop

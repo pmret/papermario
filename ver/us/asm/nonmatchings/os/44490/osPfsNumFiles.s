@@ -19,7 +19,7 @@ glabel osPfsNumFiles
 /* 444C8 800690C8 0801A45C */  j         .L80069170
 /* 444CC 800690CC 24020005 */   addiu    $v0, $zero, 5
 .L800690D0:
-/* 444D0 800690D0 0C01A775 */  jal       osCheckId
+/* 444D0 800690D0 0C01A775 */  jal       __osCheckId
 /* 444D4 800690D4 02002021 */   addu     $a0, $s0, $zero
 /* 444D8 800690D8 14400025 */  bnez      $v0, .L80069170
 /* 444DC 800690DC 00000000 */   nop

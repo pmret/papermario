@@ -25,14 +25,14 @@ glabel osPfsIsPlug
 /* 4878C 8006D38C 0C01B52F */  jal       osPfsRequestData
 /* 48790 8006D390 00002021 */   addu     $a0, $zero, $zero
 /* 48794 8006D394 24040001 */  addiu     $a0, $zero, 1
-/* 48798 8006D398 0C019730 */  jal       osSiRawStartDma
+/* 48798 8006D398 0C019730 */  jal       __osSiRawStartDma
 /* 4879C 8006D39C 02802821 */   addu     $a1, $s4, $zero
 /* 487A0 8006D3A0 02402021 */  addu      $a0, $s2, $zero
 /* 487A4 8006D3A4 02202821 */  addu      $a1, $s1, $zero
 /* 487A8 8006D3A8 0C0195BC */  jal       osRecvMesg
 /* 487AC 8006D3AC 24060001 */   addiu    $a2, $zero, 1
 /* 487B0 8006D3B0 00002021 */  addu      $a0, $zero, $zero
-/* 487B4 8006D3B4 0C019730 */  jal       osSiRawStartDma
+/* 487B4 8006D3B4 0C019730 */  jal       __osSiRawStartDma
 /* 487B8 8006D3B8 02802821 */   addu     $a1, $s4, $zero
 /* 487BC 8006D3BC 02402021 */  addu      $a0, $s2, $zero
 /* 487C0 8006D3C0 02202821 */  addu      $a1, $s1, $zero
