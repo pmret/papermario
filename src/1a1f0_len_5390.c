@@ -674,7 +674,7 @@ void update_encounters_conversation(void) {
 void draw_encounters_conversation(void) {
 }
 
-s8 check_conversation_trigger(void) {
+s32 check_conversation_trigger(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* camera = &gCameras[gCurrentCameraID];
     EncounterStatus* encounterStatus = &gCurrentEncounter;
