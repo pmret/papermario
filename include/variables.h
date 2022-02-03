@@ -158,20 +158,11 @@ extern Window gWindows[64];
 extern s32 D_802A3838;
 
 // Pause
-extern s32 gPauseMenuHeldButtons;
-extern s32 gPauseMenuPressedButtons;
-extern s32 gPauseMenuCurrentDescMsg;
-extern s32* gPauseMenuCurrentDescIconScript;
-extern s32 D_802700D0;
-
-extern s8 gPauseMenuCurrentTab;
-extern char D_802700D[8];
-extern s32 D_802700E0;
-extern s32 gPauseMenuCommonIconIDs[8];
+extern s32 gPauseCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
-extern s32 gPauseMenuTargetPosX;
-extern s32 gPauseMenuTargetPosY;
-extern s32 gPauseMenuCursorPosY;
+extern s32 gPauseCursorTargetPosX;
+extern s32 gPauseCursorTargetPosY;
+extern s32 gPauseCursorPosY;
 extern u8 gPauseMenuTextScrollInterpEasingLUT[16];
 extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
 extern f32 pause_map_cameraX;

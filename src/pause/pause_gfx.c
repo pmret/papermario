@@ -384,7 +384,7 @@ s32 gPauseMessages[] = {
     (s32)gPauseMsg_54     , (s32)gPauseMsg_55     , (s32)gPauseMsg_56
 };
 
-Gfx* D_8026F8D4[] = {
+Gfx* gPauseDLLabels[] = {
     gPauseDLBannerHp, gPauseDLBannerFp, gPauseDLBannerBp, gPauseDLBannerBoots, gPauseDLBannerHammer,
     gPauseDLBannerStarEnergy, gPauseDLStatsBar, gPauseDLAvailable, gPauseDLCheckAbilities
 };
@@ -412,6 +412,6 @@ void pause_draw_menu_label(s32 index, s32 x, s32 y) {
         xOffset = 160;
     }
 
-    gSPDisplayList(gMasterGfxPos++, D_8026F8D4[index]);
+    gSPDisplayList(gMasterGfxPos++, gPauseDLLabels[index]);
     pause_draw_rect(x * 4, y * 4, (x + xOffset) * 4, (y + 16) * 4, 0, 0, 0, 0x400, 0x400);
 }

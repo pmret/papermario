@@ -13,11 +13,11 @@ extern s32 D_8024C100_C09980[3];
 extern s32 D_8024C110;
 
 void filemenu_update_show_options_left(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                       s32* scaleY, s32* rotX, s32* rotY, s32* rotZ, s32* darkening, s32* opacity);
+                                       s32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 void filemenu_update_show_options_right(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                       s32* scaleY, s32* rotX, s32* rotY, s32* rotZ, s32* darkening, s32* opacity);
+                                       s32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 void filemenu_update_show_options_bottom(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                       s32* scaleY, s32* rotX, s32* rotY, s32* rotZ, s32* darkening, s32* opacity);
+                                       s32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 
 void filemenu_info_draw_message_contents(MenuPanel* menu, s32 baseX, s32 baseY) {
     s8 page = menu->page;
@@ -25,7 +25,7 @@ void filemenu_info_draw_message_contents(MenuPanel* menu, s32 baseX, s32 baseY) 
     switch (page) {
         case 0:
             filemenu_draw_message(filemenu_get_menu_message(0x1A), baseX + 10, baseY + 4, 255, 0, 0);
-            draw_number(filemenu_menus[0]->unk_00.c.selected + 1, baseX + 48, baseY + 6, 0, 0, 255, 3);
+            draw_number(filemenu_menus[0]->selected + 1, baseX + 48, baseY + 6, 0, 0, 255, 3);
             filemenu_draw_message(filemenu_get_menu_message(0x1B), baseX + 49, baseY + 4, 255, 0, 0);
             break;
         case 2:
@@ -42,7 +42,7 @@ void filemenu_info_draw_message_contents(MenuPanel* menu, s32 baseX, s32 baseY) 
             break;
         case 3:
             filemenu_draw_message(filemenu_get_menu_message(0x1A), baseX + 10, baseY + 4, 255, 0, 0);
-            draw_number(filemenu_menus[0]->unk_00.c.selected + 1, baseX + 48, baseY + 6, 0, 0, 255, page);
+            draw_number(filemenu_menus[0]->selected + 1, baseX + 48, baseY + 6, 0, 0, 255, page);
             filemenu_draw_message(filemenu_get_menu_message(0x1F), baseX + 49, baseY + 4, 255, 0, 0);
             break;
     }

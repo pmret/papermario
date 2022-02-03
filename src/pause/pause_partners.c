@@ -1,13 +1,5 @@
-#include "common.h"
-#include "hud_element.h"
+#include "pause_common.h"
 #include "sprite.h"
-
-typedef struct SpriteEntryData {
-    /* 0x00 */ s32 animID;
-    /* 0x04 */ s32 extraAnim1;
-    /* 0x08 */ s32 extraAnim2;
-    /* 0x0C */ s32 unk_0C;
-} SpriteEntryData; // size = 0x10
 
 typedef struct PartnerPosition {
     /* 0x00 */ f32 pos;
@@ -15,7 +7,6 @@ typedef struct PartnerPosition {
 } PartnerPosition; // size = 0x8
 
 extern HudScript HudScript_FPCost;
-extern HudScript HudScript_StatFp_1;
 extern HudScript HudScript_PartnerRank;
 extern HudScript HudScript_MoveDiamond;
 extern HudScript HudScript_MoveBlueOrb;
@@ -51,45 +42,16 @@ Vp D_8024F620 = {
         .vtrans = { 640, 480, 511, 0 },
     }
 };
-SpriteEntryData D_8024F630[] = { { .animID = 0x00010000,
-                                   .extraAnim1 = 0x00010002,
-                                   .extraAnim2 =  0x00010008,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00020000,
-                                   .extraAnim1 = 0x00020004,
-                                   .extraAnim2 =  0x0002000D,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00030000,
-                                   .extraAnim1 = 0x00030005,
-                                   .extraAnim2 =  0x0003000E,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00040000,
-                                   .extraAnim1 = 0x00040002,
-                                   .extraAnim2 =  0x00040006,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00050000,
-                                   .extraAnim1 = 0x00050002,
-                                   .extraAnim2 =  0x00050004,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00060000,
-                                   .extraAnim1 = 0x00060002,
-                                   .extraAnim2 =  0x00060004,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00070000,
-                                   .extraAnim1 = 0x00070002,
-                                   .extraAnim2 =  0x00070004,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00080000,
-                                   .extraAnim1 = 0x00080005,
-                                   .extraAnim2 =  0x00080009,
-                                   .unk_0C = 0xFFFFFFFF } };
+s32 D_8024F630[][4] = {
+    { 0x00010000, 0x00010002, 0x00010008, 0xFFFFFFFF },
+    { 0x00020000, 0x00020004, 0x0002000D, 0xFFFFFFFF },
+    { 0x00030000, 0x00030005, 0x0003000E, 0xFFFFFFFF },
+    { 0x00040000, 0x00040002, 0x00040006, 0xFFFFFFFF },
+    { 0x00050000, 0x00050002, 0x00050004, 0xFFFFFFFF },
+    { 0x00060000, 0x00060002, 0x00060004, 0xFFFFFFFF },
+    { 0x00070000, 0x00070002, 0x00070004, 0xFFFFFFFF },
+    { 0x00080000, 0x00080005, 0x00080009, 0xFFFFFFFF }
+};
 s32 D_8024F6B0[] = { 1, 2, 3, 4, 9, 6, 7, 8};
 s32 D_8024F6D0[] = { 0x00280006, 0x00280013, 0x00280020, 0x0028002D, 0x0028003A, 0x00280047, 0x00280054, 0x00280061 };
 s32 D_8024F6F0[] = { MOVE_HEADBONK1, MOVE_SHELL_TOSS1, MOVE_BODY_SLAM1, MOVE_SKY_DIVE1,
@@ -116,78 +78,77 @@ Gfx D_8024F750[] = {
     gsSPEndDisplayList() };
 s32 D_8024F7C0 = -1;
 s32 D_8024F7C4 = -1;
-MenuWindowBP D_8024F7C8[] = { { .windowID = 34,
+MenuWindowBP D_8024F7C8[] = { { .windowID = WINDOW_ID_34,
                                          .unk_01 = 0,
                                          .pos = { .x = 3,
                                                   .y = 16 },
-                                         .height = 289,
-                                         .width = 154,
+                                         .width = 289,
+                                         .height = 154,
                                          .unk_0A = { 1, 0},
                                          .fpDrawContents = &pause_partners_draw_contents,
                                          .tab = NULL,
-                                         .parentID = 0x16000000,
-                                         .fpUpdate = 2,
+                                         .parentID = WINDOW_ID_PAUSE_MAIN,
+                                         .fpUpdate = { 2 },
                                          .unk_1C = 0,
-                                         .style = 0x8026FD60 },
+                                         .style = &gPauseWS_20 },
 
-                                       { .windowID = 35,
+                                       { .windowID = WINDOW_ID_35,
                                          .unk_01 = 0,
                                          .pos = { .x = 8,
                                                   .y = 103 },
-                                         .height = 112,
-                                         .width = 20,
+                                         .width = 112,
+                                         .height = 20,
                                          .unk_0A = { 0, 0},
                                          .fpDrawContents = &pause_partners_draw_title,
                                          .tab = NULL,
-                                         .parentID = 0x22000000,
-                                         .fpUpdate = 1,
+                                         .parentID = WINDOW_ID_34,
+                                         .fpUpdate = { 1 },
                                          .unk_1C = 0,
-                                         .style = 0x8026FDD0 },
+                                         .style = &gPauseWS_22 },
 
-                                       { .windowID = 36,
+                                       { .windowID = WINDOW_ID_36,
                                          .unk_01 = 0,
                                          .pos = { .x = 133,
                                                   .y = 36 },
-                                         .height = 140,
-                                         .width = 80,
+                                         .width = 140,
+                                         .height = 80,
                                          .unk_0A = { 0, 0},
                                          .fpDrawContents = &pause_partners_draw_movelist,
                                          .tab = NULL,
-                                         .parentID = 0x22000000,
-                                         .fpUpdate = 2,
+                                         .parentID = WINDOW_ID_34,
+                                         .fpUpdate = { 2 },
                                          .unk_1C = 0,
                                          .style = -1 },
 
-                                       { .windowID = 37,
+                                       { .windowID = WINDOW_ID_37,
                                          .unk_01 = 0,
                                          .pos = { .x = 12,
                                                   .y = -6 },
-                                         .height = 80,
-                                         .width = 16,
+                                         .width = 80,
+                                         .height = 16,
                                          .unk_0A = { 0, 0},
                                          .fpDrawContents = &pause_partners_draw_movelist_title,
                                          .tab = NULL,
-                                         .parentID = 0x24000000,
-                                         .fpUpdate = 1,
+                                         .parentID = WINDOW_ID_36,
+                                         .fpUpdate = { 1 },
                                          .unk_1C = 0,
                                          .style = -1 },
 
-                                       { .windowID = 38,
+                                       { .windowID = WINDOW_ID_38,
                                          .unk_01 = 0,
                                          .pos = { .x = 102,
                                                   .y = -12 },
-                                         .height = 32,
                                          .width = 32,
+                                         .height = 32,
                                          .unk_0A = { 0, 0},
                                          .fpDrawContents = &pause_partners_draw_movelist_flower,
                                          .tab = NULL,
-                                         .parentID = 0x24000000,
-                                         .fpUpdate = 1,
+                                         .parentID = WINDOW_ID_36,
+                                         .fpUpdate = { 1 },
                                          .unk_1C = 0,
                                          .style = -1 } };
 u8 D_8024F87C[] = {0x00, 0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07, 0x07, 0x08 };
-MenuPanel D_8024F88C = { .unk_00 = {
-                            .s = 0x100 },
+MenuPanel gPausePanelPartners = { .initialized = FALSE, .col = 0, .row = 1, .selected = 0,
                          .page = 0,
                          .numCols = 4,
                          .numRows = 2,
@@ -293,7 +254,7 @@ void pause_partners_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
     currentTab = gPauseMenuCurrentTab;
     if (currentTab == 4) {
         if (D_802706AC == 0) {
-            func_80242D04(0x22, arg1 + 0x2A, arg2 + 0x58);
+            pause_set_cursor_pos(0x22, arg1 + 0x2A, arg2 + 0x58);
         }
 
         if (gPauseMenuCurrentTab == currentTab && D_802706AC == 0) {
@@ -379,7 +340,7 @@ void pause_partners_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
     }
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1a, y1a, x2a, y2a);
-    draw_box(0, &D_8026FD98, arg1 + 0x7A, arg2 + 0x10, 0, 166, 121, arg5, arg6, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, arg3, arg4, 0);
+    draw_box(0, &gPauseWS_21, arg1 + 0x7A, arg2 + 0x10, 0, 166, 121, arg5, arg6, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, arg3, arg4, 0);
 }
 
 void pause_partners_draw_title(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
@@ -466,7 +427,7 @@ void pause_partners_draw_movelist(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
     }
 
     if (gPauseMenuCurrentTab == 4 && D_802706AC == 1) {
-        func_80242D04(0x24, arg1 - 2, arg2 + 0x1C + D_802706A4 * 0xD);
+        pause_set_cursor_pos(0x24, arg1 - 2, arg2 + 0x1C + D_802706A4 * 0xD);
     }
 }
 
@@ -493,12 +454,12 @@ void pause_partners_init(MenuPanel* panel) {
 
     if (D_802706B0 == 0) {
         set_window_update(0x22, 2);
-        panel->unk_00.c.initialized = FALSE;
+        panel->initialized = FALSE;
         return;
     }
 
     for (i = 0; i < 8; i++) {
-        D_80270660[i] = spr_load_npc_sprite(D_8024F630[i].animID, &D_8024F630[i]);
+        D_80270660[i] = spr_load_npc_sprite(D_8024F630[i][0], D_8024F630[i]);
     }
 
     for (i = 0; i < 8; i++) {
@@ -523,7 +484,7 @@ void pause_partners_init(MenuPanel* panel) {
     D_802706AC = 0;
     D_802706A8 = D_802706A0 * 360 / D_802706B0;
     pause_partners_load_portrait(0);
-    panel->unk_00.c.initialized = TRUE;
+    panel->initialized = TRUE;
 }
 
 void pause_partners_handle_input(MenuPanel* panel) {
@@ -531,22 +492,22 @@ void pause_partners_handle_input(MenuPanel* panel) {
     s32 level, level2;
     s32 oldPos;
 
-    if (D_802706B0 >= 2 && (D_802706AC == 0 || (gPauseMenuHeldButtons & (BUTTON_Z | BUTTON_R)))) {
+    if (D_802706B0 >= 2 && (D_802706AC == 0 || (gPauseHeldButtons & (BUTTON_Z | BUTTON_R)))) {
         s0 = 0;
 
-        if (gPauseMenuHeldButtons & BUTTON_STICK_LEFT) {
+        if (gPauseHeldButtons & BUTTON_STICK_LEFT) {
             s0 = -1;
         }
 
-        if (gPauseMenuHeldButtons & BUTTON_STICK_RIGHT) {
+        if (gPauseHeldButtons & BUTTON_STICK_RIGHT) {
             s0++;
         }
 
-        if (gPauseMenuHeldButtons & BUTTON_Z) {
+        if (gPauseHeldButtons & BUTTON_Z) {
             s0--;
         }
 
-        if (gPauseMenuHeldButtons & BUTTON_R) {
+        if (gPauseHeldButtons & BUTTON_R) {
             s0++;
         }
 
@@ -593,10 +554,10 @@ void pause_partners_handle_input(MenuPanel* panel) {
             level2 = 2;
         }
 
-        if (gPauseMenuHeldButtons & BUTTON_STICK_UP) {
+        if (gPauseHeldButtons & BUTTON_STICK_UP) {
             D_802706A4--;
         }
-        if (gPauseMenuHeldButtons & BUTTON_STICK_DOWN) {
+        if (gPauseHeldButtons & BUTTON_STICK_DOWN) {
             D_802706A4++;
         }
 
@@ -611,14 +572,14 @@ void pause_partners_handle_input(MenuPanel* panel) {
         }
     }
 
-    if ((gPauseMenuPressedButtons & BUTTON_A) && D_802706AC == 0) {
+    if ((gPausePressedButtons & BUTTON_A) && D_802706AC == 0) {
         D_802706AC = 1;
         sfx_play_sound(0xC9);
         set_window_update(0x24, 1);
         return;
     }
 
-    if (gPauseMenuPressedButtons & BUTTON_B) {
+    if (gPausePressedButtons & BUTTON_B) {
         if (D_802706AC == 0) {
             gPauseMenuCurrentTab = 0;
             sfx_play_sound(0xCA);
@@ -631,14 +592,14 @@ void pause_partners_handle_input(MenuPanel* panel) {
         }
     }
 
-    gPauseMenuCurrentDescIconScript = 0;
+    gPauseCurrentDescIconScript = 0;
 
     if (D_802706AC == 0) {
-        gPauseMenuCurrentDescMsg = D_8024F6D0[D_80270680[D_802706A0]];
+        gPauseCurrentDescMsg = D_8024F6D0[D_80270680[D_802706A0]];
     } else if (D_802706A4 == 0) {
-        gPauseMenuCurrentDescMsg = gMoveTable[D_8024F6F0[D_80270680[D_802706A0]]].menuDescID;
+        gPauseCurrentDescMsg = gMoveTable[D_8024F6F0[D_80270680[D_802706A0]]].menuDescID;
     } else {
-        gPauseMenuCurrentDescMsg = gMoveTable[D_8024F6F0[D_80270680[D_802706A0]] + 2 + D_802706A4].menuDescID;
+        gPauseCurrentDescMsg = gMoveTable[D_8024F6F0[D_80270680[D_802706A0]] + 2 + D_802706A4].menuDescID;
     }
 }
 
@@ -663,9 +624,9 @@ void pause_partners_update(MenuPanel* panel) {
 
     for (i = 0; i < D_802706B0; i++) {
         if (i == D_802706A0) {
-            spr_update_sprite(D_80270660[D_80270680[i]], D_8024F630[D_80270680[i]].extraAnim1, 1.0f);
+            spr_update_sprite(D_80270660[D_80270680[i]], D_8024F630[D_80270680[i]][1], 1.0f);
         } else {
-            spr_update_sprite(D_80270660[D_80270680[i]], D_8024F630[D_80270680[i]].animID, 1.0f);
+            spr_update_sprite(D_80270660[D_80270680[i]], D_8024F630[D_80270680[i]][0], 1.0f);
         }
     }
 

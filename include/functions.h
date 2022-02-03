@@ -163,7 +163,7 @@ s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
 void peach_set_disguise_anim(s32);
 
-void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
+void draw_box(s32 flags, WindowStyleCustom* windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
               u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
               void* drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
 s32 get_msg_width(s32 msgID, u16 charset);
@@ -455,8 +455,10 @@ void bgm_push_battle_song(void);
 void func_801497FC(s32 arg0);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
 
-s32 basic_window_update(void);
-s32 basic_hidden_window_update(void);
+void basic_window_update(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
+void basic_hidden_window_update(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 
 void player_create_target_list(Actor* actor);
 void enemy_create_target_list(Actor* actor);
@@ -680,7 +682,7 @@ void func_800EF300(void);
 void enable_player_shadow(void);
 s32 get_msg_lines(s32 messageID);
 void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, s32, void* drawContents, PopupMessage* popup, s32 parent);
-void set_window_update(s32 panelID, s32);
+void set_window_update(s32 panelID, WindowUpdateFunc);
 void snd_stop_sound(s32 soundID);
 void partner_disable_input(void);
 void func_80268798(s32, s32, s32, s32);

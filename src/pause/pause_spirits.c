@@ -1,12 +1,5 @@
-#include "common.h"
+#include "pause_common.h"
 #include "sprite.h"
-
-typedef struct SpriteEntryData {
-    /* 0x00 */ s32 animID;
-    /* 0x04 */ s32 extraAnim1;
-    /* 0x08 */ s32 extraAnim2;
-    /* 0x0C */ s32 unk_0C;
-} SpriteEntryData; // size = 0x10
 
 extern s32 D_802706FC;
 extern s32 D_802706E0[];
@@ -23,40 +16,15 @@ void pause_spirits_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3,
 void pause_spirits_draw_title(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u32 arg5, u32 arg6);
 
 s32 D_8024F8B0[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000 };
-SpriteEntryData D_8024F8C0[] = { { .animID = 0x00120000,
-                                   .extraAnim1 = 0x00120001,
-                                   .extraAnim2 =  0x00120002,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00130000,
-                                   .extraAnim1 = 0x00130001,
-                                   .extraAnim2 =  0x00130002,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00140000,
-                                   .extraAnim1 = 0x00140001,
-                                   .extraAnim2 =  0x00140002,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00150000,
-                                   .extraAnim1 = 0x00150001,
-                                   .extraAnim2 =  0x00150002,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00160000,
-                                   .extraAnim1 = 0x00160001,
-                                   .extraAnim2 =  0x00160002,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00170000,
-                                   .extraAnim1 = 0x00170001,
-                                   .extraAnim2 =  0x00170003,
-                                   .unk_0C = 0xFFFFFFFF },
-
-                                { .animID = 0x00180000,
-                                   .extraAnim1 = 0x00180001,
-                                   .extraAnim2 =  0x00180002,
-                                   .unk_0C = 0xFFFFFFFF } };
+s32 D_8024F8C0[][4] = {
+    { 0x00120000, 0x00120001, 0x00120002, 0xFFFFFFFF },
+    { 0x00130000, 0x00130001, 0x00130002, 0xFFFFFFFF },
+    { 0x00140000, 0x00140001, 0x00140002, 0xFFFFFFFF },
+    { 0x00150000, 0x00150001, 0x00150002, 0xFFFFFFFF },
+    { 0x00160000, 0x00160001, 0x00160002, 0xFFFFFFFF },
+    { 0x00170000, 0x00170001, 0x00170003, 0xFFFFFFFF },
+    { 0x00180000, 0x00180001, 0x00180002, 0xFFFFFFFF }
+};
 s8 D_8024F930[] = {
     5, 6, 0, 1, 2,
     5, 4, 4, 3, 2
@@ -76,40 +44,38 @@ Vec2i D_8024F990[] = { {.x = 120, .y = 50},
                        {.x = 75, .y = 110},
                        {.x = 20, .y = 90},
                        {.x = 60, .y = 55} };
-MenuWindowBP D_8024F9C8[] = { { .windowID = 39,
+MenuWindowBP D_8024F9C8[] = { { .windowID = WINDOW_ID_39,
                                 .unk_01 = 0,
                                 .pos = { .x = 3,
                                          .y = 16 },
-                                .height = 289,
-                                .width = 154,
+                                .width = 289,
+                                .height = 154,
                                 .unk_0A = { 1, 0},
                                 .fpDrawContents = &pause_spirits_draw_contents,
                                 .tab = NULL,
-                                .parentID = 0x16000000,
-                                .fpUpdate = 2,
+                                .parentID = WINDOW_ID_PAUSE_MAIN,
+                                .fpUpdate = { 2 },
                                 .unk_1C = 0,
-                                .style = 0x8026FE08 },
+                                .style = &gPauseWS_23 },
 
-                            { .windowID = 40,
+                            { .windowID = WINDOW_ID_40,
                                 .unk_01 = 0,
                                 .pos = { .x = 86,
                                          .y = 124 },
-                                .height = 120,
-                                .width = 20,
+                                .width = 120,
+                                .height = 20,
                                 .unk_0A = { 0, 0},
                                 .fpDrawContents = &pause_spirits_draw_title,
                                 .tab = NULL,
-                                .parentID = 0x27000000,
-                                .fpUpdate = 1,
+                                .parentID = WINDOW_ID_39,
+                                .fpUpdate = { 1 },
                                 .unk_1C = 0,
-                                .style = 0x8026FE40 } };
-MenuPanel D_8024FA10 = { .unk_00 = {
-                            .c = {
+                                .style = &gPauseWS_24 } };
+MenuPanel gPausePanelSpirits = {
                                 .initialized = FALSE,
                                 .col = 2,
                                 .row = 0,
-                                .selected = 0
-                            } },
+                                .selected = 0,
                          .page = 0,
                          .numCols = 5,
                          .numRows = 2,
@@ -218,10 +184,10 @@ void pause_spirits_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3,
     }
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
-    draw_box(0, &D_8026FE78, arg1 + 7, arg2 + 0xE, 0, 0x110, 0x7E, arg5, arg6, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, arg3, arg4, 0);
+    draw_box(0, &gPauseWS_25, arg1 + 7, arg2 + 0xE, 0, 0x110, 0x7E, arg5, arg6, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, arg3, arg4, 0);
 
     if (gPauseMenuCurrentTab == 5) {
-        func_80242D04(0x27, arg1 + D_8024F990[panel->unk_00.c.selected].x, arg2 + D_8024F990[panel->unk_00.c.selected].y);
+        pause_set_cursor_pos(0x27, arg1 + D_8024F990[panel->selected].x, arg2 + D_8024F990[panel->selected].y);
     }
 }
 
@@ -230,8 +196,8 @@ void pause_spirits_draw_title(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3, s3
     PlayerData* playerData = get_player_data();
 
     if (gPauseMenuCurrentTab == 5) {
-        if (playerData->maxStarPower > D_802706E0[panel->unk_00.c.selected]) {
-            msgID = D_802706E0[panel->unk_00.c.selected] + MESSAGE_ID(0x1D, 0x2A);
+        if (playerData->maxStarPower > D_802706E0[panel->selected]) {
+            msgID = D_802706E0[panel->selected] + MESSAGE_ID(0x1D, 0x2A);
         } else {
             msgID = pause_get_menu_msg(0x56);
         }
@@ -251,127 +217,127 @@ void pause_spirits_init(MenuPanel* panel) {
     }
 
     for (i = 0; i < 7; i++) {
-        D_802706C0[i] = spr_load_npc_sprite(D_8024F8C0[i].animID, &D_8024F8C0[i]);
+        D_802706C0[i] = spr_load_npc_sprite(D_8024F8C0[i][0], D_8024F8C0[i]);
     }
 
     for (i = 0; i < 2; i++) {
         D_8024F9C8[i].tab = panel;
     }
     setup_pause_menu_tab(D_8024F9C8, 2);
-    panel->unk_00.c.initialized = TRUE;
+    panel->initialized = TRUE;
 }
 
 void pause_spirits_handle_input(MenuPanel* panel) {
-    s32 oldSelected = panel->unk_00.c.selected;
+    s32 oldSelected = panel->selected;
 
-    if (gPauseMenuHeldButtons & BUTTON_STICK_LEFT) {
+    if (gPauseHeldButtons & BUTTON_STICK_LEFT) {
         while (TRUE) {
-            panel->unk_00.c.col--;
-            if (panel->unk_00.c.col < 0) {
-                panel->unk_00.c.col = 0;
+            panel->col--;
+            if (panel->col < 0) {
+                panel->col = 0;
                 break;
             }
 
-            if (panel->unk_00.c.selected != panel->gridData[
+            if (panel->selected != panel->gridData[
                                             (panel->page * panel->numCols * panel->numRows)
-                                          + (panel->numCols * panel->unk_00.c.row)
-                                          + (panel->unk_00.c.col)]) {
+                                          + (panel->numCols * panel->row)
+                                          + (panel->col)]) {
                                               break;
                                           }
         }
     }
 
-    if (gPauseMenuHeldButtons & BUTTON_STICK_RIGHT) {
+    if (gPauseHeldButtons & BUTTON_STICK_RIGHT) {
         while (TRUE) {
-            panel->unk_00.c.col++;
-            if (panel->unk_00.c.col >= panel->numCols) {
-                panel->unk_00.c.col = panel->numCols - 1;
+            panel->col++;
+            if (panel->col >= panel->numCols) {
+                panel->col = panel->numCols - 1;
                 break;
             }
 
-            if (panel->unk_00.c.selected != panel->gridData[
+            if (panel->selected != panel->gridData[
                                             (panel->page * panel->numCols * panel->numRows)
-                                          + (panel->numCols * panel->unk_00.c.row)
-                                          + (panel->unk_00.c.col)]) {
+                                          + (panel->numCols * panel->row)
+                                          + (panel->col)]) {
                                               break;
                                           }
         }
     }
 
-    if (gPauseMenuHeldButtons & BUTTON_STICK_UP) {
-        if (panel->unk_00.c.selected == 2) {
-            panel->unk_00.c.col = 3;
-            panel->unk_00.c.row = 0;
-        } else if (panel->unk_00.c.selected == 5) {
-            panel->unk_00.c.col = 1;
-            panel->unk_00.c.row = 0;
+    if (gPauseHeldButtons & BUTTON_STICK_UP) {
+        if (panel->selected == 2) {
+            panel->col = 3;
+            panel->row = 0;
+        } else if (panel->selected == 5) {
+            panel->col = 1;
+            panel->row = 0;
         } else {
             while (TRUE) {
-                panel->unk_00.c.row--;
-                if (panel->unk_00.c.row < 0) {
-                    panel->unk_00.c.row = 0;
+                panel->row--;
+                if (panel->row < 0) {
+                    panel->row = 0;
                     break;
                 }
-                if (panel->unk_00.c.selected != panel->gridData[
+                if (panel->selected != panel->gridData[
                                                 (panel->page * panel->numCols * panel->numRows)
-                                              + (panel->numCols * panel->unk_00.c.row)
-                                              + (panel->unk_00.c.col)]) {
+                                              + (panel->numCols * panel->row)
+                                              + (panel->col)]) {
                                                   break;
                                               }
             }
         }
     }
 
-    if (gPauseMenuHeldButtons & BUTTON_STICK_DOWN) {
-        if (panel->unk_00.c.selected == 2) {
-            panel->unk_00.c.col = 3;
-            panel->unk_00.c.row = 1;
-        } else if (panel->unk_00.c.selected == 5) {
-            panel->unk_00.c.col = 1;
-            panel->unk_00.c.row = 1;
+    if (gPauseHeldButtons & BUTTON_STICK_DOWN) {
+        if (panel->selected == 2) {
+            panel->col = 3;
+            panel->row = 1;
+        } else if (panel->selected == 5) {
+            panel->col = 1;
+            panel->row = 1;
         } else {
             while (TRUE) {
-                panel->unk_00.c.row++;
-                if (panel->unk_00.c.row >= panel->numRows) {
-                    panel->unk_00.c.row = panel->numRows - 1;
+                panel->row++;
+                if (panel->row >= panel->numRows) {
+                    panel->row = panel->numRows - 1;
                     break;
                 }
-                if (panel->unk_00.c.selected != panel->gridData[
+                if (panel->selected != panel->gridData[
                                                 (panel->page * panel->numCols * panel->numRows)
-                                              + (panel->numCols * panel->unk_00.c.row)
-                                              + (panel->unk_00.c.col)]) {
+                                              + (panel->numCols * panel->row)
+                                              + (panel->col)]) {
                                                   break;
                                               }
             }
         }
     }
 
-    panel->unk_00.c.selected = panel->gridData[
+    panel->selected = panel->gridData[
                               (panel->page * panel->numCols * panel->numRows)
-                            + (panel->numCols * panel->unk_00.c.row)
-                            + (panel->unk_00.c.col)];
+                            + (panel->numCols * panel->row)
+                            + (panel->col)];
 
-    if (panel->unk_00.c.selected == 4) {
-        panel->unk_00.c.col = 1;
-        panel->unk_00.c.row = 1;
+    if (panel->selected == 4) {
+        panel->col = 1;
+        panel->row = 1;
     }
 
-    if (panel->unk_00.c.selected != oldSelected) {
+    if (panel->selected != oldSelected) {
         sfx_play_sound(0xC7);
     }
 
-    if (gPauseMenuPressedButtons & BUTTON_B) {
+    if (gPausePressedButtons & BUTTON_B) {
         gPauseMenuCurrentTab = 0;
         sfx_play_sound(0xCA);
         return;
     }
 
-    gPauseMenuCurrentDescIconScript = 0;
+    gPauseCurrentDescIconScript = 0;
 
-    if (get_player_data()->maxStarPower <= D_802706E0[panel->unk_00.c.selected]) {
-        gPauseMenuCurrentDescMsg = pause_get_menu_msg(0x56);
+    if (get_player_data()->maxStarPower <= D_802706E0[panel->selected]) {
+        gPauseCurrentDescMsg = pause_get_menu_msg(0x56);
     } else {
-        gPauseMenuCurrentDescMsg = MESSAGE_ID(0x1D, 0x31) + D_802706E0[panel->unk_00.c.selected];
+        gPauseCurrentDescMsg = MESSAGE_ID(0x1D, 0x31) + D_802706E0[panel->selected];
     }
 }
 
@@ -380,11 +346,11 @@ void pause_spirits_update(MenuPanel* panel) {
     s32 i;
 
     for (i = 0; i < D_802706FC; i++) {
-        if (i < playerData->maxStarPower && gPauseMenuCurrentTab == 5 && i == panel->unk_00.c.selected) {
-            spr_update_sprite(D_802706C0[i], D_8024F8C0[i].extraAnim1, 1.0f);
+        if (i < playerData->maxStarPower && gPauseMenuCurrentTab == 5 && i == panel->selected) {
+            spr_update_sprite(D_802706C0[i], D_8024F8C0[i][1], 1.0f);
         } else {
             //TODO find better match
-            do { spr_update_sprite(D_802706C0[i], D_8024F8C0[i].animID, 1.0f); } while (0);
+            do { spr_update_sprite(D_802706C0[i], D_8024F8C0[i][0], 1.0f); } while (0);
         }
     }
 }

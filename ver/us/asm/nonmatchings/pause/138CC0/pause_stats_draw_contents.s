@@ -447,8 +447,8 @@ glabel pause_stats_draw_contents
 .L80246060:
 /* 1393A0 80246060 AFA20014 */  sw        $v0, 0x14($sp)
 /* 1393A4 80246064 24040004 */  addiu     $a0, $zero, 4
-/* 1393A8 80246068 3C058027 */  lui       $a1, %hi(D_8026FB30)
-/* 1393AC 8024606C 24A5FB30 */  addiu     $a1, $a1, %lo(D_8026FB30)
+/* 1393A8 80246068 3C058027 */  lui       $a1, %hi(gPauseWS_10)
+/* 1393AC 8024606C 24A5FB30 */  addiu     $a1, $a1, %lo(gPauseWS_10)
 /* 1393B0 80246070 24020011 */  addiu     $v0, $zero, 0x11
 /* 1393B4 80246074 241100FF */  addiu     $s1, $zero, 0xff
 /* 1393B8 80246078 AFA20018 */  sw        $v0, 0x18($sp)
@@ -1147,7 +1147,7 @@ glabel pause_stats_draw_contents
 /* 139DC4 80246A84 8C450000 */  lw        $a1, ($v0)
 /* 139DC8 80246A88 8C460004 */  lw        $a2, 4($v0)
 /* 139DCC 80246A8C 01052821 */  addu      $a1, $t0, $a1
-/* 139DD0 80246A90 0C090B41 */  jal       func_80242D04
+/* 139DD0 80246A90 0C090B41 */  jal       pause_set_cursor_pos
 /* 139DD4 80246A94 03C63021 */   addu     $a2, $fp, $a2
 .L80246A98:
 /* 139DD8 80246A98 8FBF007C */  lw        $ra, 0x7c($sp)

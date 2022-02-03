@@ -1,5 +1,4 @@
-#include "common.h"
-#include "hud_element.h"
+#include "pause_common.h"
 #include "message_ids.h"
 
 void pause_map_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
@@ -8,14 +7,12 @@ void pause_map_init(MenuPanel* tab);
 void pause_map_handle_input(MenuPanel* tab);
 void pause_map_update(MenuPanel* tab);
 void pause_map_cleanup(MenuPanel* tab);
-void func_80242D04(s32 windowID, s32 posX, s32 posY);
+void pause_set_cursor_pos(s32 windowID, s32 posX, s32 posY);
 
 extern Gfx gPauseDLWorldMap[];
 extern s32 D_802510B0[];
 extern Gfx D_8026F1B8[];
 extern Gfx gPauseDLArrows[];
-extern s32 D_8026FEE8;
-extern s32 D_80270700[1];
 
 s32 D_8024FA30[] = { 0x80242644, 0xFFFFFFFF };
 s32 D_8024FA38[] = { 0x01F601F8, 0xF7FEF800, 0xF800F9FD, 0xFBFD0000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
@@ -52,76 +49,76 @@ s32 D_802501B8[] = { 0xFD060206, 0x08030605, 0xFE06FA03, 0x00000000, 0x00000000,
 s32 D_802501F8[] = { 0xFA05FE07, 0x02070606, 0x08030800, 0x08FD08FB, 0x06FB07FC, 0x08FF0803, 0x02080000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
 s32 D_80250238[] = { 0xFD070006, 0x04070000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
 s32 D_80250278[] = { 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
-PauseMapSpace pause_map_spaces[] = { { .pos = { .x = 0x74, .y = 0xb9 }, .parent = 0, .pathLength = 7, .unk_06 = 0, .path = D_8024FA38, .afterRequirement = 0x60, .id = 1 },
-                                     { .pos = { .x = 0x76, .y = 0x97 }, .parent = 0, .pathLength = 3, .unk_06 = 0, .path = D_8024FA78, .afterRequirement = 0x60, .id = 0x19 },
-                                     { .pos = { .x = 0x8F, .y = 0x86 }, .parent = 1, .pathLength = 3, .unk_06 = 0, .path = D_8024FAB8, .afterRequirement = -0x69, .id = 0x1B },
-                                     { .pos = { .x = 0x64, .y = 0xAE }, .parent = 0, .pathLength = 0, .unk_06 = 0, .path = D_8024FAF8, .afterRequirement = 0x61, .id = 2 },
-                                     { .pos = { .x = 0x24, .y = 0x9D }, .parent = 5, .pathLength = 0, .unk_06 = 0, .path = D_8024FB38, .afterRequirement = -0x73, .id = 0x1E },
-                                     { .pos = { .x = 0x4A, .y = 0x9A }, .parent = 0, .pathLength = 4, .unk_06 = 0, .path = D_8024FB78, .afterRequirement = -0x6B, .id = 0x1F },
-                                     { .pos = { .x = 0x94, .y = 0xA7 }, .parent = 0, .pathLength = 5, .unk_06 = 0, .path = D_8024FBB8, .afterRequirement = -0x4B, .id = 0x20 },
-                                     { .pos = { .x = 0x9A, .y = 0x94 }, .parent = 6, .pathLength = 2, .unk_06 = 0, .path = D_8024FBF8, .afterRequirement = -0x5C, .id = 0x21 },
-                                     { .pos = { .x = 0xCD, .y = 0x98 }, .parent = 6, .pathLength = 7, .unk_06 = 0, .path = D_8024FC38, .afterRequirement = -0x4B, .id = 7 },
-                                     { .pos = { .x = 0xE3, .y = 0xF3 }, .parent = 0, .pathLength = 19, .unk_06 = 0, .path = D_8024FC78, .afterRequirement = 0x61, .id = 8 },
-                                     { .pos = { .x = 0x10A, .y = 0xCE }, .parent = 9, .pathLength = 13, .unk_06 = 0, .path = D_8024FCB8, .afterRequirement = -0x3E, .id = 10 },
-                                     { .pos = { .x = 0x118, .y = 0xBF }, .parent = 10, .pathLength = 2, .unk_06 = 0, .path = D_8024FCF8, .afterRequirement = 0x61, .id = 9 },
-                                     { .pos = { .x = 0xFC, .y = 0xBC }, .parent = 10, .pathLength = 2, .unk_06 = 0, .path = D_8024FD38, .afterRequirement = -0x36, .id = 11 },
-                                     { .pos = { .x = 0xBB, .y = 0xC1 }, .parent = 0, .pathLength = 7, .unk_06 = 0, .path = D_8024FD78, .afterRequirement = -0x30, .id = 12 },
-                                     { .pos = { .x = 0xAA, .y = 0xB4 }, .parent = 13, .pathLength = 1, .unk_06 = 0, .path = D_8024FDB8, .afterRequirement = -0x23, .id = 13 },
-                                     { .pos = { .x = 0xDF, .y = 0xAA }, .parent = 13, .pathLength = 4, .unk_06 = 0, .path = D_8024FDF8, .afterRequirement = -0xE, .id = 0x22 },
-                                     { .pos = { .x = 0x107, .y = 0x9C }, .parent = 15, .pathLength = 4, .unk_06 = 0, .path = D_8024FE38, .afterRequirement = -0xE, .id = 15 },
-                                     { .pos = { .x = 0xCB, .y = 0xAB }, .parent = 15, .pathLength = 1, .unk_06 = 0, .path = D_8024FE78, .afterRequirement = -0xE, .id = 0x23 },
-                                     { .pos = { .x = 0x4F, .y = 0xAD }, .parent = 0, .pathLength = 4, .unk_06 = 0, .path = D_8024FEB8, .afterRequirement = 7, .id = 16 },
-                                     { .pos = { .x = 0x42, .y = 0x121 }, .parent = 0, .pathLength = 21, .unk_06 = 0, .path = D_8024FEF8, .afterRequirement = 0x18, .id = 0x24 },
-                                     { .pos = { .x = 0x54, .y = 0x112 }, .parent = 19, .pathLength = 2, .unk_06 = 0, .path = D_8024FF38, .afterRequirement = 0x61, .id = 0x25 },
-                                     { .pos = { .x = 0x2F, .y = 0xFC }, .parent = 19, .pathLength = 5, .unk_06 = 0, .path = D_8024FF78, .afterRequirement = 0x26, .id = 0x12 },
-                                     { .pos = { .x = 0x3B, .y = 0x7E }, .parent = 0, .pathLength = 0, .unk_06 = 0, .path = D_8024FFB8, .afterRequirement = 0x3A, .id = 0x26 },
-                                     { .pos = { .x = 0x3A, .y = 0x5C }, .parent = 22, .pathLength = 4, .unk_06 = 0, .path = D_8024FFF8, .afterRequirement = 0x3A, .id = 0x27 },
-                                     { .pos = { .x = 0xB7, .y = 0x7D }, .parent = 3, .pathLength = 0, .unk_06 = 0, .path = D_80250038, .afterRequirement = 0x43, .id = 0x28 },
-                                     { .pos = { .x = 0xCB, .y = 0x7E }, .parent = 24, .pathLength = 1, .unk_06 = 0, .path = D_80250078, .afterRequirement = 0x45, .id = 0x29 },
-                                     { .pos = { .x = 0xEA, .y = 0x80 }, .parent = 25, .pathLength = 2, .unk_06 = 0, .path = D_802500B8, .afterRequirement = 0x48, .id = 0x2A },
-                                     { .pos = { .x = 0xDC, .y = 0x70 }, .parent = 25, .pathLength = 2, .unk_06 = 0, .path = D_802500F8, .afterRequirement = 0x59, .id = 0x2B },
-                                     { .pos = { .x = 0xDF, .y = 0x63 }, .parent = 27, .pathLength = 1, .unk_06 = 0, .path = D_80250138, .afterRequirement = 0x59, .id = 0x15 },
-                                     { .pos = { .x = 0x9E, .y = 0x6E }, .parent = 2, .pathLength = 6, .unk_06 = 0, .path = D_80250178, .afterRequirement = 0x61, .id = 0x1C },
-                                     { .pos = { .x = 0xA3, .y = 0x4E }, .parent = 29, .pathLength = 6, .unk_06 = 0, .path = D_802501B8, .afterRequirement = 0x61, .id = 0x1D },
-                                     { .pos = { .x = 0x60, .y = 0x31 }, .parent = 30, .pathLength = 13, .unk_06 = 0, .path = D_802501F8, .afterRequirement = 0x60, .id = 0x16 },
-                                     { .pos = { .x = 0x58, .y = 0x16 }, .parent = 31, .pathLength = 3, .unk_06 = 0, .path = D_80250238, .afterRequirement = 0x60, .id = 0x1A },
-                                     { .pos = { .x = 0x62, .y = 0x93 }, .parent = 0, .pathLength = 0, .unk_06 = 0, .path = D_80250278, .afterRequirement = 0x61, .id = 0x2C }
+PauseMapSpace pause_map_spaces[] = {
+    { .pos = { .x = 0x74, .y = 0xb9 }, .parent = 0, .pathLength = 7, .unk_06 = 0, .path = D_8024FA38, .afterRequirement = 0x60, .id = 1 },
+    { .pos = { .x = 0x76, .y = 0x97 }, .parent = 0, .pathLength = 3, .unk_06 = 0, .path = D_8024FA78, .afterRequirement = 0x60, .id = 0x19 },
+    { .pos = { .x = 0x8F, .y = 0x86 }, .parent = 1, .pathLength = 3, .unk_06 = 0, .path = D_8024FAB8, .afterRequirement = -0x69, .id = 0x1B },
+    { .pos = { .x = 0x64, .y = 0xAE }, .parent = 0, .pathLength = 0, .unk_06 = 0, .path = D_8024FAF8, .afterRequirement = 0x61, .id = 2 },
+    { .pos = { .x = 0x24, .y = 0x9D }, .parent = 5, .pathLength = 0, .unk_06 = 0, .path = D_8024FB38, .afterRequirement = -0x73, .id = 0x1E },
+    { .pos = { .x = 0x4A, .y = 0x9A }, .parent = 0, .pathLength = 4, .unk_06 = 0, .path = D_8024FB78, .afterRequirement = -0x6B, .id = 0x1F },
+    { .pos = { .x = 0x94, .y = 0xA7 }, .parent = 0, .pathLength = 5, .unk_06 = 0, .path = D_8024FBB8, .afterRequirement = -0x4B, .id = 0x20 },
+    { .pos = { .x = 0x9A, .y = 0x94 }, .parent = 6, .pathLength = 2, .unk_06 = 0, .path = D_8024FBF8, .afterRequirement = -0x5C, .id = 0x21 },
+    { .pos = { .x = 0xCD, .y = 0x98 }, .parent = 6, .pathLength = 7, .unk_06 = 0, .path = D_8024FC38, .afterRequirement = -0x4B, .id = 7 },
+    { .pos = { .x = 0xE3, .y = 0xF3 }, .parent = 0, .pathLength = 19, .unk_06 = 0, .path = D_8024FC78, .afterRequirement = 0x61, .id = 8 },
+    { .pos = { .x = 0x10A, .y = 0xCE }, .parent = 9, .pathLength = 13, .unk_06 = 0, .path = D_8024FCB8, .afterRequirement = -0x3E, .id = 10 },
+    { .pos = { .x = 0x118, .y = 0xBF }, .parent = 10, .pathLength = 2, .unk_06 = 0, .path = D_8024FCF8, .afterRequirement = 0x61, .id = 9 },
+    { .pos = { .x = 0xFC, .y = 0xBC }, .parent = 10, .pathLength = 2, .unk_06 = 0, .path = D_8024FD38, .afterRequirement = -0x36, .id = 11 },
+    { .pos = { .x = 0xBB, .y = 0xC1 }, .parent = 0, .pathLength = 7, .unk_06 = 0, .path = D_8024FD78, .afterRequirement = -0x30, .id = 12 },
+    { .pos = { .x = 0xAA, .y = 0xB4 }, .parent = 13, .pathLength = 1, .unk_06 = 0, .path = D_8024FDB8, .afterRequirement = -0x23, .id = 13 },
+    { .pos = { .x = 0xDF, .y = 0xAA }, .parent = 13, .pathLength = 4, .unk_06 = 0, .path = D_8024FDF8, .afterRequirement = -0xE, .id = 0x22 },
+    { .pos = { .x = 0x107, .y = 0x9C }, .parent = 15, .pathLength = 4, .unk_06 = 0, .path = D_8024FE38, .afterRequirement = -0xE, .id = 15 },
+    { .pos = { .x = 0xCB, .y = 0xAB }, .parent = 15, .pathLength = 1, .unk_06 = 0, .path = D_8024FE78, .afterRequirement = -0xE, .id = 0x23 },
+    { .pos = { .x = 0x4F, .y = 0xAD }, .parent = 0, .pathLength = 4, .unk_06 = 0, .path = D_8024FEB8, .afterRequirement = 7, .id = 16 },
+    { .pos = { .x = 0x42, .y = 0x121 }, .parent = 0, .pathLength = 21, .unk_06 = 0, .path = D_8024FEF8, .afterRequirement = 0x18, .id = 0x24 },
+    { .pos = { .x = 0x54, .y = 0x112 }, .parent = 19, .pathLength = 2, .unk_06 = 0, .path = D_8024FF38, .afterRequirement = 0x61, .id = 0x25 },
+    { .pos = { .x = 0x2F, .y = 0xFC }, .parent = 19, .pathLength = 5, .unk_06 = 0, .path = D_8024FF78, .afterRequirement = 0x26, .id = 0x12 },
+    { .pos = { .x = 0x3B, .y = 0x7E }, .parent = 0, .pathLength = 0, .unk_06 = 0, .path = D_8024FFB8, .afterRequirement = 0x3A, .id = 0x26 },
+    { .pos = { .x = 0x3A, .y = 0x5C }, .parent = 22, .pathLength = 4, .unk_06 = 0, .path = D_8024FFF8, .afterRequirement = 0x3A, .id = 0x27 },
+    { .pos = { .x = 0xB7, .y = 0x7D }, .parent = 3, .pathLength = 0, .unk_06 = 0, .path = D_80250038, .afterRequirement = 0x43, .id = 0x28 },
+    { .pos = { .x = 0xCB, .y = 0x7E }, .parent = 24, .pathLength = 1, .unk_06 = 0, .path = D_80250078, .afterRequirement = 0x45, .id = 0x29 },
+    { .pos = { .x = 0xEA, .y = 0x80 }, .parent = 25, .pathLength = 2, .unk_06 = 0, .path = D_802500B8, .afterRequirement = 0x48, .id = 0x2A },
+    { .pos = { .x = 0xDC, .y = 0x70 }, .parent = 25, .pathLength = 2, .unk_06 = 0, .path = D_802500F8, .afterRequirement = 0x59, .id = 0x2B },
+    { .pos = { .x = 0xDF, .y = 0x63 }, .parent = 27, .pathLength = 1, .unk_06 = 0, .path = D_80250138, .afterRequirement = 0x59, .id = 0x15 },
+    { .pos = { .x = 0x9E, .y = 0x6E }, .parent = 2, .pathLength = 6, .unk_06 = 0, .path = D_80250178, .afterRequirement = 0x61, .id = 0x1C },
+    { .pos = { .x = 0xA3, .y = 0x4E }, .parent = 29, .pathLength = 6, .unk_06 = 0, .path = D_802501B8, .afterRequirement = 0x61, .id = 0x1D },
+    { .pos = { .x = 0x60, .y = 0x31 }, .parent = 30, .pathLength = 13, .unk_06 = 0, .path = D_802501F8, .afterRequirement = 0x60, .id = 0x16 },
+    { .pos = { .x = 0x58, .y = 0x16 }, .parent = 31, .pathLength = 3, .unk_06 = 0, .path = D_80250238, .afterRequirement = 0x60, .id = 0x1A },
+    { .pos = { .x = 0x62, .y = 0x93 }, .parent = 0, .pathLength = 0, .unk_06 = 0, .path = D_80250278, .afterRequirement = 0x61, .id = 0x2C }
 };
 s32 D_80250560[] = { 0, 2, 3, 3, 4, 4, 4, 4, 3, 2, 1, 0 };
-MenuWindowBP pause_map_windowBlueprints[] = { { .windowID = 41,
+MenuWindowBP pause_map_windowBlueprints[] = { { .windowID = WINDOW_ID_41,
                                          .unk_01 = 0,
                                          .pos = { .x = 3,
                                                   .y = 16 },
-                                         .height = 289,
-                                         .width = 154,
+                                         .width = 289,
+                                         .height = 154,
                                          .unk_0A = { 1, 0},
                                          .fpDrawContents = &pause_map_draw_contents,
                                          .tab = NULL,
-                                         .parentID = 0x16000000,
-                                         .fpUpdate = 2,
+                                         .parentID = WINDOW_ID_PAUSE_MAIN,
+                                         .fpUpdate = { 2 },
                                          .unk_1C = 0,
-                                         .style = 0x8026FEB0 },
+                                         .style = &gPauseWS_26 },
 
-                                              { .windowID = 42,
+                                              { .windowID = WINDOW_ID_42,
                                          .unk_01 = 0,
                                          .pos = { .x = 0x38,
                                                   .y = 0x7C },
-                                         .height = 0xB4,
-                                         .width = 0x14,
+                                         .width = 180,
+                                         .height = 20,
                                          .unk_0A = { 0, 0},
                                          .fpDrawContents = &pause_map_draw_title,
                                          .tab = NULL,
-                                         .parentID = 0x29000000,
-                                         .fpUpdate = 1,
+                                         .parentID = WINDOW_ID_41,
+                                         .fpUpdate = { 1 },
                                          .unk_1C = 0,
-                                         .style = 0x8026FF20 },
+                                         .style = &gPauseWS_28 },
                                          {},
                                          {},
                                          {},
                                          {},
                                          {} };
-MenuPanel D_8025068C = { .unk_00 = {
-                            .s = 0 },
+MenuPanel gPausePanelMap = { .initialized = FALSE, .col = 0, .row = 0, .selected = 0,
                          .page = 0,
                          .numCols = 0,
                          .numRows = 0,
@@ -287,7 +284,7 @@ void pause_map_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3, s32
 
     currentTab = gPauseMenuCurrentTab;
     if (currentTab == 6) {
-        func_80242D04(0x29, bX + pause_map_targetX - 8.0f, bY + pause_map_targetY);
+        pause_set_cursor_pos(0x29, bX + pause_map_targetX - 8.0f, bY + pause_map_targetY);
 
         if (gPauseMenuCurrentTab == currentTab) {
             offset = D_80250560[gGameStatusPtr->frameCounter % 12];
@@ -344,7 +341,7 @@ void pause_map_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3, s32
     }
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1a, y1a, x2a, y2a);
-    draw_box(0, &D_8026FEE8, arg1 + 0x12, arg2 + 0xE, 0, 0xFA, 0x7E, arg5, arg6, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, arg3, arg4, 0);
+    draw_box(0, &gPauseWS_27, arg1 + 0x12, arg2 + 0xE, 0, 0xFA, 0x7E, arg5, arg6, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, arg3, arg4, 0);
 }
 
 void pause_map_draw_title(s32* arg1, s32 arg2, s32 textOffsetY, s32 textOffsetX) {
@@ -414,7 +411,7 @@ void pause_map_init(MenuPanel* tab) {
         pause_map_cameraY = -209.0f;
     }
 
-    tab->unk_00.c.initialized = TRUE;
+    tab->initialized = TRUE;
 }
 
 void pause_map_handle_input(MenuPanel* tab) {
@@ -489,23 +486,23 @@ void pause_map_handle_input(MenuPanel* tab) {
         pause_map_cameraY = -210.0f;
     }
 
-    if (gPauseMenuPressedButtons & B_BUTTON) {
+    if (gPausePressedButtons & B_BUTTON) {
         sfx_play_sound(0xCA);
         gPauseMenuCurrentTab = 0;
         return;
     }
 
-    gPauseMenuCurrentDescIconScript = 0;
+    gPauseCurrentDescIconScript = 0;
     if (pause_map_cursorCurrentOption == -1) {
-        gPauseMenuCurrentDescMsg = 0;
+        gPauseCurrentDescMsg = 0;
         return;
     }
 
-    gPauseMenuCurrentDescMsg = MSG_pause_map_location_0_before_desc + (pause_map_cursorCurrentOption * 3);
+    gPauseCurrentDescMsg = MSG_pause_map_location_0_before_desc + (pause_map_cursorCurrentOption * 3);
 
     // If the story has progressed enough, show the "after" description
     if (evt_get_variable(0, EVT_STORY_PROGRESS) >= pause_map_spaces[pause_map_cursorCurrentOption].afterRequirement) {
-        gPauseMenuCurrentDescMsg++;
+        gPauseCurrentDescMsg++;
     }
 }
 

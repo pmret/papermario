@@ -1,21 +1,13 @@
-#include "common.h"
-#include "hud_element.h"
+#include "pause_common.h"
 
 typedef struct {
     HudScript* q1;
     HudScript* q2;
 } HudElStruct;
 
-extern HudScript HudScript_StatBp;
-extern HudScript HudScript_ListPrevPage;
-extern HudScript HudScript_ListNextPage;
-extern HudScript HudScript_Dash;
-extern HudScript HudScript_StatusStar1;
 extern u32 D_802705C4;
-extern s32 D_8026FCF0;
 extern s32 D_80270634;
 extern HudElStruct gItemHudScripts[];
-extern s32 D_8026FCB8;
 
 void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void pause_items_init(MenuPanel* panel);
@@ -23,26 +15,26 @@ void pause_items_handle_input(MenuPanel* panel);
 void pause_items_update(MenuPanel* panel);
 void pause_items_cleanup(MenuPanel* panel);
 
-HudScript* D_8024F570[] = { HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
-                            HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
-                            HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
-                            HudScript_StatBp, HudScript_ListPrevPage, HudScript_ListNextPage, HudScript_Dash,
-                            HudScript_StatusStar1 };
-MenuWindowBP D_8024F5C0[] = { { .windowID = 33,
+HudScript* D_8024F570[] = {
+    HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
+    HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
+    HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
+    HudScript_StatBp, HudScript_ListPrevPage, HudScript_ListNextPage, HudScript_Dash,
+    HudScript_StatusStar1 };
+MenuWindowBP D_8024F5C0[] = { { .windowID = WINDOW_ID_33,
                                          .unk_01 = 0,
                                          .pos = { .x = 3,
                                                   .y = 16 },
-                                         .height = 289,
-                                         .width = 154,
+                                         .width = 289,
+                                         .height = 154,
                                          .unk_0A = { 1, 0},
                                          .fpDrawContents = &pause_items_draw_contents,
                                          .tab = NULL,
-                                         .parentID = 0x16000000,
-                                         .fpUpdate = 2,
+                                         .parentID = WINDOW_ID_PAUSE_MAIN,
+                                         .fpUpdate = { 2 },
                                          .unk_1C = 0,
-                                         .style = 0x8026FD28 } };
-MenuPanel D_8024F5E4 = { .unk_00 = {
-                            .s = 0 },
+                                         .style = &gPauseWS_19 } };
+MenuPanel gPausePanelItems = { .initialized = FALSE, .col = 0, .row = 0, .selected = 0,
                          .page = 0,
                          .numCols = 0,
                          .numRows = 0,
@@ -118,7 +110,7 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     sp64 = 0xA;
     sp5C = gItemMenuSelectedIndex / gItemMenuPages[gItemMenuCurrentPage].numCols;
     sp58 = gItemMenuSelectedIndex % gItemMenuPages[gItemMenuCurrentPage].numCols;
-    draw_box(4, &D_8026FCF0, arg1 + 0x44, arg2, 0, arg3 - 0x44, arg4, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
+    draw_box(4, &gPauseWS_18, arg1 + 0x44, arg2, 0, arg3 - 0x44, arg4, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
 
     x1 = arg1 + 1;
     y1 = arg2 + 7;
@@ -223,7 +215,7 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     } else {
                         if (s5) {
                             set_hud_element_flags(el, 0x20000000);
-                            gPauseMenuCurrentDescIconScript = gItemHudScripts[gItemTable[itemID].iconID].q1;
+                            gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[itemID].iconID].q1;
                         }
 
                         set_hud_element_anim(el, gItemHudScripts[gItemTable[itemID].iconID].q1);
@@ -282,7 +274,7 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         }
     }
 
-    draw_box(4, &D_8026FCB8, gItemMenuCurrentTab == 0 ? arg1 + 9 : arg1, arg2 + 7, 0,
+    draw_box(4, &gPauseWS_17, gItemMenuCurrentTab == 0 ? arg1 + 9 : arg1, arg2 + 7, 0,
          0x5B, 0x22, 0xFF, gItemMenuCurrentTab == 1 ? 0x80 : 0x00, 0, 0,
          0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
 
@@ -298,7 +290,7 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
     draw_msg(msg, dx, dy, opacity, 0, 1);
 
-    draw_box(4, &D_8026FCB8, gItemMenuCurrentTab == 1 ? arg1 + 9 : arg1, arg2 + 0x27, 0,
+    draw_box(4, &gPauseWS_17, gItemMenuCurrentTab == 1 ? arg1 + 9 : arg1, arg2 + 0x27, 0,
          0x5B, 0x22, 0xFF, gItemMenuCurrentTab == 0 ? 0x80 : 0x00, 0, 0,
          0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
 
@@ -316,7 +308,7 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     if (gPauseMenuCurrentTab == 3) {
          if (gItemMenuLevel  == 0) {
-             func_80242D04(0x21, arg1 + 0xC , arg2 + 0x1A + gItemMenuCurrentTab  * 32);
+             pause_set_cursor_pos(0x21, arg1 + 0xC , arg2 + 0x1A + gItemMenuCurrentTab  * 32);
          } else {
              posX1 = pause_items_get_pos_x(gItemMenuCurrentPage, gItemMenuSelectedIndex  - gItemMenuPages[gItemMenuCurrentPage].listStart * gItemMenuPages[gItemMenuCurrentPage].numCols);
              posY1 = pause_items_get_pos_y(gItemMenuCurrentPage, gItemMenuSelectedIndex  - gItemMenuPages[gItemMenuCurrentPage].listStart * gItemMenuPages[gItemMenuCurrentPage].numCols);
@@ -329,9 +321,9 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
              }
 
              if (gItemMenuCurrentScrollPos  != gItemMenuTargetScrollPos) {
-                 func_80242BAC(0x21, arg1 + 0x55 + offsetX, arg2 + 0x17 + offsetY);
+                 pause_set_cursor_pos_immediate(0x21, arg1 + 0x55 + offsetX, arg2 + 0x17 + offsetY);
              } else {
-                 func_80242D04(0x21, arg1 + 0x55 + offsetX, arg2 + 0x17 + offsetY);
+                 pause_set_cursor_pos(0x21, arg1 + 0x55 + offsetX, arg2 + 0x17 + offsetY);
              }
          }
     }
@@ -429,7 +421,7 @@ void pause_items_init(MenuPanel* panel) {
     }
 
     setup_pause_menu_tab(&D_8024F5C0, 1);
-    panel->unk_00.c.initialized = TRUE;
+    panel->initialized = TRUE;
 }
 
 void pause_items_handle_input(MenuPanel* panel) {
@@ -438,7 +430,7 @@ void pause_items_handle_input(MenuPanel* panel) {
     s32 row = gItemMenuSelectedIndex / gItemMenuPages[gItemMenuCurrentPage].numCols;
     s32 column = gItemMenuSelectedIndex % gItemMenuPages[gItemMenuCurrentPage].numCols;
 
-    if ((gPauseMenuPressedButtons & BUTTON_A) && gItemMenuLevel == 0) {
+    if ((gPausePressedButtons & BUTTON_A) && gItemMenuLevel == 0) {
         if (gItemMenuItemIDs[gItemMenuSelectedIndex] == 0x7FFE) {
             sfx_play_sound(0x21D);
         } else {
@@ -452,7 +444,7 @@ void pause_items_handle_input(MenuPanel* panel) {
     if (gItemMenuNumItems != 0) {
         if (gItemMenuLevel == 0) {
             oldTab = gItemMenuCurrentTab;
-            if (gPauseMenuHeldButtons & (BUTTON_STICK_UP|BUTTON_STICK_DOWN)) {
+            if (gPauseHeldButtons & (BUTTON_STICK_UP|BUTTON_STICK_DOWN)) {
                 gItemMenuCurrentTab ^= 1;
             }
 
@@ -461,9 +453,9 @@ void pause_items_handle_input(MenuPanel* panel) {
                 pause_items_load_items(gItemMenuCurrentTab);
             }
         } else {
-            if (gPauseMenuHeldButtons & (BUTTON_STICK_UP|BUTTON_Z)) {
+            if (gPauseHeldButtons & (BUTTON_STICK_UP|BUTTON_Z)) {
                 row--;
-                if (gPauseMenuHeldButtons & BUTTON_STICK_UP) {
+                if (gPauseHeldButtons & BUTTON_STICK_UP) {
                     if (row < 0) {
                         row = 0;
                     }
@@ -480,8 +472,8 @@ void pause_items_handle_input(MenuPanel* panel) {
                 }
             }
 
-            if (gPauseMenuHeldButtons & (BUTTON_STICK_DOWN|BUTTON_R)) {
-                if (gPauseMenuHeldButtons & BUTTON_STICK_DOWN) {
+            if (gPauseHeldButtons & (BUTTON_STICK_DOWN|BUTTON_R)) {
+                if (gPauseHeldButtons & BUTTON_STICK_DOWN) {
                     row++;
                     if (row >= gItemMenuPages[gItemMenuCurrentPage].listStart + gItemMenuPages[gItemMenuCurrentPage].numRows) {
                         gItemMenuCurrentPage++;
@@ -503,13 +495,13 @@ void pause_items_handle_input(MenuPanel* panel) {
             }
 
             if (gItemMenuItemIDs[row * gItemMenuPages[gItemMenuCurrentPage].numCols] != 0x7FFE) {
-                if (gPauseMenuHeldButtons & BUTTON_STICK_LEFT) {
+                if (gPauseHeldButtons & BUTTON_STICK_LEFT) {
                     column--;
 
                     if (column < 0) {
                         column = gItemMenuPages[gItemMenuCurrentPage].numCols - 1;
                     }
-                } else if (gPauseMenuHeldButtons & BUTTON_STICK_RIGHT) {
+                } else if (gPauseHeldButtons & BUTTON_STICK_RIGHT) {
                     column++;
                     if (column >= gItemMenuPages[gItemMenuCurrentPage].numCols) {
                         column = 0;
@@ -530,22 +522,22 @@ void pause_items_handle_input(MenuPanel* panel) {
 
     if (gItemMenuLevel == 1) {
         if (gItemMenuSelectedItemID != 0x7FFE && gItemMenuSelectedItemID != 0x7FFF && gItemMenuSelectedItemID != 0) {
-            gPauseMenuCurrentDescMsg = gItemTable[gItemMenuSelectedItemID].menuMsg;
+            gPauseCurrentDescMsg = gItemTable[gItemMenuSelectedItemID].menuMsg;
         } else {
-            gPauseMenuCurrentDescMsg = 0;
-            gPauseMenuCurrentDescIconScript  = NULL;
+            gPauseCurrentDescMsg = 0;
+            gPauseCurrentDescIconScript  = NULL;
         }
     } else {
         if (gItemMenuCurrentTab == 1) {
-            gPauseMenuCurrentDescMsg = pause_get_menu_msg(0x51);
+            gPauseCurrentDescMsg = pause_get_menu_msg(0x51);
         } else {
-            gPauseMenuCurrentDescMsg = pause_get_menu_msg(0x52);
+            gPauseCurrentDescMsg = pause_get_menu_msg(0x52);
         }
 
-        gPauseMenuCurrentDescIconScript = NULL;
+        gPauseCurrentDescIconScript = NULL;
     }
 
-    if (gPauseMenuPressedButtons & BUTTON_B) {
+    if (gPausePressedButtons & BUTTON_B) {
         if (gItemMenuLevel == 0) {
             sfx_play_sound(0xCA);
             gPauseMenuCurrentTab = 0;
