@@ -4,8 +4,6 @@
 // Invalid badge ID filled in unused slots of gBadgeMenuItemIDs
 #define BADGE_INVALID 0x7FFF
 
-extern s32 D_802703FC;
-extern Gfx gPauseDLOrbs[];
 extern s32* D_8026FFB0;
 
 void pause_badges_init(MenuPanel* panel);
@@ -433,7 +431,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                     clear_hud_element_flags(el, 0x20000000);
                     set_hud_element_flags(el, 0x8000);
                     if (sp88) {
-                        el = D_802703FC;
+                        el = gBadgeMenuIconIDs[21];
                     } else {
                         if (s5) {
                             set_hud_element_flags(el, 0x20000000);

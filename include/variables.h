@@ -158,62 +158,15 @@ extern Window gWindows[64];
 extern s32 D_802A3838;
 
 // Pause
+/*
 extern s32 gPauseCommonIconIDs[8];
-extern s32 gPauseMenuTabIconIDs[6];
 extern s32 gPauseCursorTargetPosX;
 extern s32 gPauseCursorTargetPosY;
 extern s32 gPauseCursorPosY;
 extern u8 gPauseMenuTextScrollInterpEasingLUT[16];
 extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
-extern f32 pause_map_cameraX;
-extern f32 pause_map_cameraY;
-extern s32 pause_map_marioX;
-extern s32 pause_map_marioY;
-extern f32 pause_map_targetX;
-extern f32 pause_map_targetY;
-extern s32 pause_map_cursorCurrentOption;
-extern s32 pause_map_cursorCurrentOptionCopy;
-extern s32 pause_map_spacesInSnapRange;
+*/
 
-
-extern PauseMapSpace pause_map_spaces[34];
-extern MenuWindowBP pause_map_windowBlueprints[7];
-// Badges
-extern s32 gBadgeMenuCurrentScrollPos;
-extern s32 gBadgeMenuTargetScrollPos;
-extern s16 gBadgeMenuItemIDs[128];
-extern s32 gBadgeMenuCurrentPage;
-extern PauseItemPage gBadgeMenuPages[20];
-extern s32 gBadgeMenuSelectedIndex;
-extern s32 D_8027037C;
-extern s32 gBadgeMenuSelectedItemID;
-extern s16 gBadgeMenuNumItems;
-extern s32 D_80270388;
-extern s32 D_80270394;
-extern s32 gBadgeMenuLevel;
-extern s32 gBadgeMenuCurrentTab;
-extern s32 gBadgeMenuBShowNotEnoughBP;
-extern s32 D_802703A4;
-extern s32 gBadgeMenuIconIDs[22];
-extern MenuWindowBP gBadgeMenuWindowBPs[1];
-
-// Items
-extern s16 gItemMenuItemIDs[100];
-extern s32 gItemMenuCurrentPage;
-extern PauseItemPage gItemMenuPages[20];
-extern s32 gItemMenuSelectedIndex;
-extern s32 gItemMenuSelectedItemID;
-extern s16 gItemMenuNumItems;
-extern s32 D_802705D0;
-extern s32 gItemMenuCurrentScrollPos;
-extern s32 gItemMenuTargetScrollPos;
-extern s32 D_802705DC;
-extern s32 gItemMenuLevel;
-extern s32 gItemMenuCurrentTab;
-extern s32 gItemMenuScrollUpIcon;
-
-// Stats
-extern s32 gStatsMenuIconIDs[12];
 extern s32 gGameState;
 extern s16 gNpcCount;
 extern s32 gOverrideFlags;

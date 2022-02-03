@@ -58,7 +58,10 @@ static f32 N(D_8024EF84);
 static s32 N(D_8024EF88);
 static s8 N(pad_D_8024EF8C)[0x4];
 static N(temp)* N(D_8024EF90)[4]; // possibly bigger?
-static s8 N(pad_D_8024EF94)[0x18];
+static s32 N(D_8024EFA0);
+static s32 N(pad_D_8024EFA4);
+static s32 N(D_8024EFA8);
+static s32 N(pad_D_8024EFAC)[3];
 static s32 N(D_8024EFB8);
 static s8 N(pad_D_8024EFBC)[0x4];
 static EffectInstance* N(D_8024EFC0);
@@ -1112,7 +1115,7 @@ EvtScript N(80247250) = {
 };
 
 EvtScript N(802472C4) = {
-    EVT_USE_ARRAY(EVT_PTR(gPauseCursorTargetPosX))
+    EVT_USE_ARRAY(EVT_PTR(N(D_8024EFA8)))
     EVT_SET(EVT_SAVE_FLAG(1769), 1)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerFlagBits, 4194304, 1)
@@ -3157,7 +3160,7 @@ ApiStatus N(func_80240C88_969E48)(Evt* script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(N(D_8024EFC0));
-        free_generic_entity(gPauseCursorPosY);
+        free_generic_entity(N(D_8024EFA0));
         return ApiStatus_DONE2;
     }
 
@@ -3229,7 +3232,7 @@ void N(func_802412F8_96A4B8)(void) {
 }
 
 ApiStatus N(func_80241364_96A524)(Evt* script, s32 isInitialCall) {
-    gPauseCursorPosY = create_generic_entity_frontUI(NULL, N(func_802412F8_96A4B8));
+    N(D_8024EFA0) = create_generic_entity_frontUI(NULL, N(func_802412F8_96A4B8));
     return ApiStatus_DONE2;
 }
 

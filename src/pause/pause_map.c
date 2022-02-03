@@ -361,7 +361,7 @@ void pause_map_init(MenuPanel* tab) {
     s32 tempVar;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_80270700); i++) {
+    for (i = 0; i < ARRAY_COUNT(D_8024FA30); i++) {
         D_80270700[i] = create_hud_element(D_8024FA30[i]);
         set_hud_element_flags(D_80270700[i], 0x80);
     }
