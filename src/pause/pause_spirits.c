@@ -12,8 +12,6 @@ void pause_spirits_init(MenuPanel* panel);
 void pause_spirits_handle_input(MenuPanel* panel);
 void pause_spirits_update(MenuPanel* panel);
 void pause_spirits_cleanup(MenuPanel* panel);
-void pause_spirits_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
-void pause_spirits_draw_title(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u32 arg5, u32 arg6);
 
 s32 D_8024F8B0[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000 };
 s32 D_8024F8C0[][4] = {
@@ -86,7 +84,7 @@ MenuPanel gPausePanelSpirits = {
                          .fpUpdate = &pause_spirits_update,
                          .fpCleanup = &pause_spirits_cleanup };
 
-void pause_spirits_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     Matrix4f sp50;
     Matrix4f sp90;
     s32 i, j;
@@ -112,7 +110,7 @@ void pause_spirits_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3,
         gDPPipeSync(gMasterGfxPos++);
         gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 8, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMASK, G_TX_NOLOD, G_TX_MIRROR | G_TX_WRAP, 7, G_TX_NOLOD);
         gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, i * 0x58, 508, 0x54 + i * 0x58);
-        pause_draw_rect((arg1 + 0xF) * 4, (arg2 + 0x16 + i * 0x16) * 4, (arg1 + 0x10F) * 4, (arg2 + 0x16 + i * 0x16 + 0x16) * 4, 0, 0x10, 0x10 + i * 0x2C0, 0x400, 0x400);
+        pause_draw_rect((baseX + 0xF) * 4, (baseY + 0x16 + i * 0x16) * 4, (baseX + 0x10F) * 4, (baseY + 0x16 + i * 0x16 + 0x16) * 4, 0, 0x10, 0x10 + i * 0x2C0, 0x400, 0x400);
         gDPPipeSync(gMasterGfxPos++);
     }
 
@@ -144,7 +142,7 @@ void pause_spirits_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3,
         }
 
         func_802DE894(D_802706C0[D_802706E0[s2]], 8, s0, s0, s0, s1, 0x40);
-        guTranslateF(sp50, arg1 + 0x16 + x, arg2 + 0x4D + y + f20, 0.0f);
+        guTranslateF(sp50, baseX + 0x16 + x, baseY + 0x4D + y + f20, 0.0f);
         guRotateF(sp90, 180.0f, 0.0f, 0.0f, 1.0f);
         guMtxCatF(sp90, sp50, sp50);
 
@@ -160,10 +158,10 @@ void pause_spirits_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3,
 
     gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 
-    x1 = arg1 + 7;
-    y1 = arg2 + 14;
-    x2 = arg1 + 0x117;
-    y2 = arg2 + 0x8C;
+    x1 = baseX + 7;
+    y1 = baseY + 14;
+    x2 = baseX + 0x117;
+    y2 = baseY + 0x8C;
 
     if (x1 <= 0) {
         x1 = 1;
@@ -184,24 +182,24 @@ void pause_spirits_draw_contents(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3,
     }
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
-    draw_box(0, &gPauseWS_25, arg1 + 7, arg2 + 0xE, 0, 0x110, 0x7E, arg5, arg6, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, arg3, arg4, 0);
+    draw_box(0, &gPauseWS_25, baseX + 7, baseY + 0xE, 0, 0x110, 0x7E, opacity, darkening, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, width, height, 0);
 
     if (gPauseMenuCurrentTab == 5) {
-        pause_set_cursor_pos(0x27, arg1 + D_8024F990[panel->selected].x, arg2 + D_8024F990[panel->selected].y);
+        pause_set_cursor_pos(0x27, baseX + D_8024F990[menu->selected].x, baseY + D_8024F990[menu->selected].y);
     }
 }
 
-void pause_spirits_draw_title(MenuPanel* panel, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u32 arg5, u32 arg6) {
+void pause_spirits_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 msgID;
     PlayerData* playerData = get_player_data();
 
     if (gPauseMenuCurrentTab == 5) {
-        if (playerData->maxStarPower > D_802706E0[panel->selected]) {
-            msgID = D_802706E0[panel->selected] + MESSAGE_ID(0x1D, 0x2A);
+        if (playerData->maxStarPower > D_802706E0[menu->selected]) {
+            msgID = D_802706E0[menu->selected] + MESSAGE_ID(0x1D, 0x2A);
         } else {
             msgID = pause_get_menu_msg(0x56);
         }
-        draw_msg(msgID, arg1 + ((arg3 - get_msg_width(msgID, 0)) >> 1), arg2 + 1, 0xFF, 0, 0);
+        draw_msg(msgID, baseX + ((width - get_msg_width(msgID, 0)) >> 1), baseY + 1, 0xFF, 0, 0);
     }
 }
 

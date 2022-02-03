@@ -45,12 +45,21 @@ extern HudScript HudScript_ListPrevPage[];
 extern HudScript HudScript_ListNextPage[];
 extern HudScript HudScript_Dash[];
 extern HudScript HudScript_LabelBpNeeded[];
+extern HudScript HudScript_FPCost[];
+extern HudScript HudScript_PartnerRank[];
+extern HudScript HudScript_MoveDiamond[];
+extern HudScript HudScript_MoveBlueOrb[];
+extern HudScript HudScript_MoveGreenOrb[];
+extern HudScript HudScript_MoveRedOrb[];
+extern HudScript HudScript_MapWalk0[];
+extern HudScriptPair gItemHudScripts[];
 
 //TODO add in functions.h
 void update_window_hierarchy(s32 windowIndex, s32 arg1);
 void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
                         s32* maxLinesPerPage, s32* arg6, s32 charset);
 void replace_window_update(s32 idx, s8 arg1, WindowUpdateFunc pendingFunc);
+void decode_yay0(void* src, void* dst);
 
 extern MenuPanel gPausePanelTabs;
 extern MenuPanel gPausePanelStats;
@@ -131,35 +140,15 @@ extern s32 D_802701F0[4];
 extern s32 D_80270200[64];
 extern s32 D_80270300[64];
 extern s32 D_80270400[64];
-extern s32 D_80270500[64];
-extern s32 D_80270600[64];
+extern s32 D_80270500[58];
+extern s32 gItemIcons[20];
+extern s32 D_80270638[50];
 extern s32 D_80270700[1];
-extern s32 D_80270704[63];
-extern s32 D_80270800[64];
-extern s32 D_80270900[64];
-extern s32 D_80270A00[64];
-extern s32 D_80270B00[64];
-extern s32 D_80270C00[64];
-extern s32 D_80270D00[64];
-extern s32 D_80270E00[64];
-extern s32 D_80270F00[64];
-extern s32 D_80271000[1024];
-extern s32 D_80272000[1024];
-extern s32 D_80273000[1024];
-extern s32 D_80274000[1024];
-extern s32 D_80275000[1024];
-extern s32 D_80276000[1024];
-extern s32 D_80277000[1024];
-extern s32 D_80278000[64];
-extern s32 D_80278100[64];
-extern s32 D_80278200[64];
-extern s32 D_80278300[64];
-extern s32 D_80278400[64];
-extern s32 D_80278500[64];
-extern s32 D_80278600[4];
-extern s32 D_80278610[4];
-extern s32 D_80278620[4];
-extern s32 D_80278630[4];
+extern s32 D_80270704[11];
+extern s8  D_80270730[512];
+extern s8  D_80270930[15752];
+extern s8  D_802746B8[512];
+extern s8  D_802748B8[15752];
 
 void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void pause_main_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
@@ -174,6 +163,16 @@ void pause_tabs_draw_map(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 h
 void pause_tabs_draw_invis(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_partners_draw_movelist_flower(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_spirits_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_map_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 
 void pause_tabs_init(MenuPanel* tab);
 void pause_tabs_handle_input(MenuPanel* tab);
@@ -201,5 +200,6 @@ void func_80243388(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ,
 void pause_set_cursor_pos(s32 windowID, s32 posX, s32 posY);
 void pause_set_cursor_pos_immediate(s32 windowID, s32 posX, s32 posY);
 void pause_set_cursor_opacity(s32 val);
+void pause_draw_menu_label(s32 index, s32 x, s32 y);
 
 #endif

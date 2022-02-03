@@ -6,12 +6,6 @@ typedef struct PartnerPosition {
     /* 0x04 */ s32 index;
 } PartnerPosition; // size = 0x8
 
-extern HudScript HudScript_FPCost;
-extern HudScript HudScript_PartnerRank;
-extern HudScript HudScript_MoveDiamond;
-extern HudScript HudScript_MoveBlueOrb;
-extern HudScript HudScript_MoveGreenOrb;
-extern HudScript HudScript_MoveRedOrb;
 extern s32 gPartnerPopupProperties[11][4];
 
 extern s32 D_80270640[];
@@ -24,18 +18,14 @@ extern s32 D_802706AC;
 extern s32 D_802706B0;
 extern s32 D_8026FD98;
 
-void pause_partners_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u32 arg5, u32 arg6);
-void pause_partners_draw_title(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
-void pause_partners_draw_movelist(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
-void pause_partners_draw_movelist_title(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
-void pause_partners_draw_movelist_flower(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void pause_partners_init(MenuPanel* panel);
 void pause_partners_handle_input(MenuPanel* panel);
 void pause_partners_update(MenuPanel* panel);
 void pause_partners_cleanup(MenuPanel* panel);
 
-HudScript* D_8024F600[] = { HudScript_FPCost, HudScript_StatFp_1, HudScript_PartnerRank, HudScript_PartnerRank,
-                         HudScript_MoveDiamond, HudScript_MoveBlueOrb, HudScript_MoveGreenOrb, HudScript_MoveRedOrb };
+HudScript* D_8024F600[] = {
+    HudScript_FPCost, HudScript_StatFp_1, HudScript_PartnerRank, HudScript_PartnerRank,
+    HudScript_MoveDiamond, HudScript_MoveBlueOrb, HudScript_MoveGreenOrb, HudScript_MoveRedOrb };
 Vp D_8024F620 = {
     .vp = {
         .vscale = { 640, 480, 511, 0 },
@@ -56,10 +46,13 @@ s32 D_8024F6B0[] = { 1, 2, 3, 4, 9, 6, 7, 8};
 s32 D_8024F6D0[] = { 0x00280006, 0x00280013, 0x00280020, 0x0028002D, 0x0028003A, 0x00280047, 0x00280054, 0x00280061 };
 s32 D_8024F6F0[] = { MOVE_HEADBONK1, MOVE_SHELL_TOSS1, MOVE_BODY_SLAM1, MOVE_SKY_DIVE1,
                      MOVE_SMACK1, MOVE_ELECTRO_DASH1, MOVE_BELLY_FLOP1, MOVE_SPINY_FLIP1 };
-s32 D_8024F710[] = { 0x04050607, 0x00010203 };
+s8 D_8024F710[] = {
+    4, 5, 6, 7,
+    0, 1, 2, 3
+};
 char* D_8024F718[] = { "party_kurio", "party_kameki", "party_pinki", "party_pareta", "party_resa",  "party_akari", "party_opuku", "party_pokopi", "letter_peach" };
-s32 D_8024F73C[] = { 0x80270930, 0x802748B8 };
-s32 D_8024F744[] = { 0x80270730, 0x802746B8 };
+s8* D_8024F73C[] = { D_80270930, D_802748B8 };
+s8* D_8024F744[] = { D_80270730, D_802746B8 };
 s32 D_8024F74C = 0;
 Gfx D_8024F750[] = {
     gsDPPipeSync(),
@@ -75,7 +68,8 @@ Gfx D_8024F750[] = {
     gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, 1, 0, 0, 0, TEXEL0, 0, 0, 0, 1),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPEndDisplayList() };
+    gsSPEndDisplayList()
+};
 s32 D_8024F7C0 = -1;
 s32 D_8024F7C4 = -1;
 MenuWindowBP D_8024F7C8[] = { { .windowID = WINDOW_ID_34,
@@ -118,7 +112,7 @@ MenuWindowBP D_8024F7C8[] = { { .windowID = WINDOW_ID_34,
                                          .parentID = WINDOW_ID_34,
                                          .fpUpdate = { 2 },
                                          .unk_1C = 0,
-                                         .style = -1 },
+                                         .style = (WindowStyleCustom*)-1 },
 
                                        { .windowID = WINDOW_ID_37,
                                          .unk_01 = 0,
@@ -132,7 +126,7 @@ MenuWindowBP D_8024F7C8[] = { { .windowID = WINDOW_ID_34,
                                          .parentID = WINDOW_ID_36,
                                          .fpUpdate = { 1 },
                                          .unk_1C = 0,
-                                         .style = -1 },
+                                         .style = (WindowStyleCustom*)-1 },
 
                                        { .windowID = WINDOW_ID_38,
                                          .unk_01 = 0,
@@ -146,7 +140,7 @@ MenuWindowBP D_8024F7C8[] = { { .windowID = WINDOW_ID_34,
                                          .parentID = WINDOW_ID_36,
                                          .fpUpdate = { 1 },
                                          .unk_1C = 0,
-                                         .style = -1 } };
+                                         .style = (WindowStyleCustom*)-1 } };
 u8 D_8024F87C[] = {0x00, 0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07, 0x07, 0x08 };
 MenuPanel gPausePanelPartners = { .initialized = FALSE, .col = 0, .row = 1, .selected = 0,
                          .page = 0,
@@ -178,7 +172,7 @@ void pause_partners_load_portrait(s32 arg0) {
     }
 }
 
-void pause_partners_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u32 arg5, u32 arg6) {
+void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     Matrix4f sp50;
     Matrix4f sp90;
     PartnerPosition spD0[8];
@@ -198,11 +192,11 @@ void pause_partners_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
     s32 a0, s8;
 
     gSPViewport(gMasterGfxPos++, &D_8024F620);
-    guOrthoF(&sp50, 0.0f, 320.0f, 240.0f, 0.0f, -100.0f, 100.0f, 1.0f);
-    guMtxF2L(&sp50, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guOrthoF(sp50, 0.0f, 320.0f, 240.0f, 0.0f, -100.0f, 100.0f, 1.0f);
+    guMtxF2L(sp50, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    guTranslateF(&sp50, 0.0f, 0.0f, 0.0f);
-    guMtxF2L(&sp50, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp50, 0.0f, 0.0f, 0.0f);
+    guMtxF2L(sp50, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     for (i = 0; i < D_802706B0; i++) {
@@ -234,7 +228,7 @@ void pause_partners_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
         offsetY = cos_deg(angle) * 20.0f + 0.0f;
         scale = 30.0 / (f24 + 60.0f) + 0.5;
 
-        guTranslateF(sp50, arg1 + 0x16 + offsetX, arg2 + 0x51 + offsetY, -f24);
+        guTranslateF(sp50, baseX + 0x16 + offsetX, baseY + 0x51 + offsetY, -f24);
         guRotateF(sp90, 180.0f, 0.0f, 0.0f, 1.0f);
         guMtxCatF(sp90, sp50, sp50);
         guScaleF(sp90, scale, scale, 1.0f);
@@ -254,7 +248,7 @@ void pause_partners_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
     currentTab = gPauseMenuCurrentTab;
     if (currentTab == 4) {
         if (D_802706AC == 0) {
-            pause_set_cursor_pos(0x22, arg1 + 0x2A, arg2 + 0x58);
+            pause_set_cursor_pos(0x22, baseX + 0x2A, baseY + 0x58);
         }
 
         if (gPauseMenuCurrentTab == currentTab && D_802706AC == 0) {
@@ -262,10 +256,10 @@ void pause_partners_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
         }
     }
 
-    x1 = arg1 + 0x82;
-    y1 = arg2 + 0x18;
-    x2 = arg1 + 0x118;
-    y2 = arg2 + 0x81;
+    x1 = baseX + 0x82;
+    y1 = baseY + 0x18;
+    x2 = baseX + 0x118;
+    y2 = baseY + 0x81;
 
     if (x1 <= 0) {
         x1 = 1;
@@ -307,7 +301,7 @@ void pause_partners_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
             gDPLoadTextureTile(gMasterGfxPos++, D_8024F73C[i], G_IM_FMT_CI, G_IM_SIZ_8b, 150, 0,
                                 0, 12 * l, 149, 12 * l + t6 - 1, 0,
                                 G_TX_CLAMP, G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-            pause_draw_rect((arg1 + 0x82 + s7) * 4, (arg2 + 0x18 + 12 * l) * 4, (arg1 + 0x118 + s7) * 4, (arg2 + 0x18 + 12 * l + t6) * 4, 0, 0,
+            pause_draw_rect((baseX + 0x82 + s7) * 4, (baseY + 0x18 + 12 * l) * 4, (baseX + 0x118 + s7) * 4, (baseY + 0x18 + 12 * l + t6) * 4, 0, 0,
                             12 * l * 32, 0x400, 0x400);
             gDPPipeSync(gMasterGfxPos++);
             if (12 * l + 12 >= 105) {
@@ -316,10 +310,10 @@ void pause_partners_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
         }
     }
 
-    x1a = arg1 + 0x7A;
-    y1a = arg2 + 0x10;
-    x2a = arg1 + 0x120;
-    y2a = arg2 + 0x89;
+    x1a = baseX + 0x7A;
+    y1a = baseY + 0x10;
+    x2a = baseX + 0x120;
+    y2a = baseY + 0x89;
 
     if (x1a <= 0) {
         x1a = 1;
@@ -340,10 +334,10 @@ void pause_partners_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
     }
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1a, y1a, x2a, y2a);
-    draw_box(0, &gPauseWS_21, arg1 + 0x7A, arg2 + 0x10, 0, 166, 121, arg5, arg6, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, arg3, arg4, 0);
+    draw_box(0, &gPauseWS_21, baseX + 0x7A, baseY + 0x10, 0, 166, 121, opacity, darkening, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, width, height, 0);
 }
 
-void pause_partners_draw_title(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 msgID = gPartnerPopupProperties[D_8024F6B0[D_80270680[D_802706A0]]][0];
     s32 level = get_player_data()->partners[D_8024F6B0[D_80270680[D_802706A0]]].level;
     s32 msgWidth = get_msg_width(msgID, 0);
@@ -360,20 +354,20 @@ void pause_partners_draw_title(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         msgWidth += 4;
     }
 
-    draw_msg(msgID, arg1 + ((arg3 - offset - msgWidth) >> 1), arg2 + 1, 0xFF, 0, 0);
+    draw_msg(msgID, baseX + ((width - offset - msgWidth) >> 1), baseY + 1, 0xFF, 0, 0);
 
     if (level == 1) {
-        set_hud_element_render_pos(D_80270640[2], arg1 + 0x5F, arg2 + 0xA);
+        set_hud_element_render_pos(D_80270640[2], baseX + 0x5F, baseY + 0xA);
         draw_hud_element_3(D_80270640[2]);
     } else if (level == 2) {
-        set_hud_element_render_pos(D_80270640[2], arg1 + 0x5B, arg2 + 0xA);
+        set_hud_element_render_pos(D_80270640[2], baseX + 0x5B, baseY + 0xA);
         draw_hud_element_3(D_80270640[2]);
-        set_hud_element_render_pos(D_80270640[3], arg1 + 0x65, arg2 + 0xA);
+        set_hud_element_render_pos(D_80270640[3], baseX + 0x65, baseY + 0xA);
         draw_hud_element_3(D_80270640[3]);
     }
 }
 
-void pause_partners_draw_movelist(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 i;
     s32 moveNameID;
     s32 costFP;
@@ -390,8 +384,8 @@ void pause_partners_draw_movelist(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
         level = 2;
     }
     for (i = 0; i < 4; i++) {
-        msgX = arg1 + 0x15;
-        msgY = arg2 + 0x16 + i * 0xD;
+        msgX = baseX + 0x15;
+        msgY = baseY + 0x16 + i * 0xD;
 
         if (i >= level) {
             continue;
@@ -414,29 +408,29 @@ void pause_partners_draw_movelist(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
         draw_msg(moveNameID, msgX, msgY, 255, 10, style);
         set_hud_element_scale(D_80270640[i + 4], 0.5f);
         //TODO find better match
-        set_hud_element_render_pos(D_80270640[i + 4], 0xC - (-arg1), arg2 + 0x1C + i * 0xD);
+        set_hud_element_render_pos(D_80270640[i + 4], 0xC - (-baseX), baseY + 0x1C + i * 0xD);
         draw_hud_element_3(D_80270640[i + 4]);
 
         if (costFP != 0) {
-            draw_number(costFP, arg1 + 0x7D, arg2 + 0x16 + i * 0xD, style, 0xA, 0xFF, 3);
+            draw_number(costFP, baseX + 0x7D, baseY + 0x16 + i * 0xD, style, 0xA, 0xFF, 3);
             if (costFP > 0) {
-                set_hud_element_render_pos(D_80270640[0], arg1 + 0x86, arg2 + 0x1D + i * 0xD);
+                set_hud_element_render_pos(D_80270640[0], baseX + 0x86, baseY + 0x1D + i * 0xD);
                 draw_hud_element_3(D_80270640[0]);
             }
         }
     }
 
     if (gPauseMenuCurrentTab == 4 && D_802706AC == 1) {
-        pause_set_cursor_pos(0x24, arg1 - 2, arg2 + 0x1C + D_802706A4 * 0xD);
+        pause_set_cursor_pos(0x24, baseX - 2, baseY + 0x1C + D_802706A4 * 0xD);
     }
 }
 
-void pause_partners_draw_movelist_title(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    draw_msg(pause_get_menu_msg(0x55), arg1 + 12, arg2 + 1, 0xFF, -1, 1);
+void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
+    draw_msg(pause_get_menu_msg(0x55), baseX + 12, baseY + 1, 0xFF, -1, 1);
 }
 
-void pause_partners_draw_movelist_flower(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    set_hud_element_render_pos(D_80270640[1], arg1 + 17, arg2 + 16);
+void pause_partners_draw_movelist_flower(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
+    set_hud_element_render_pos(D_80270640[1], baseX + 17, baseY + 16);
     draw_hud_element_3(D_80270640[1]);
 }
 
@@ -470,7 +464,7 @@ void pause_partners_init(MenuPanel* panel) {
     for (i = 0; i < 5; i++) {
         D_8024F7C8[i].tab = panel;
     }
-    setup_pause_menu_tab(&D_8024F7C8, 5);
+    setup_pause_menu_tab(D_8024F7C8, 5);
 
     D_802706A0 = 0;
     for (i = 0; i < D_802706B0; i++) {

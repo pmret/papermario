@@ -1,15 +1,8 @@
 #include "pause_common.h"
 
-typedef struct {
-    HudScript* q1;
-    HudScript* q2;
-} HudElStruct;
-
 extern u32 D_802705C4;
 extern s32 D_80270634;
-extern HudElStruct gItemHudScripts[];
 
-void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void pause_items_init(MenuPanel* panel);
 void pause_items_handle_input(MenuPanel* panel);
 void pause_items_update(MenuPanel* panel);
@@ -84,7 +77,7 @@ s32 pause_items_scroll_offset_x(s32 beforeX) {
     return beforeX;
 }
 
-void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 i, j, k;
     s32 sp54;
     s32 sp58;
@@ -102,7 +95,7 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 s5, s2, s4;
     s32* iconIDs;
     s32 el;
-    s32 msg, dx, dy, opacity;
+    s32 msg, dx, dy, opacity1;
     s32 posX1, posY1;
     s32 offsetX, offsetY;
 
@@ -110,12 +103,12 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     sp64 = 0xA;
     sp5C = gItemMenuSelectedIndex / gItemMenuPages[gItemMenuCurrentPage].numCols;
     sp58 = gItemMenuSelectedIndex % gItemMenuPages[gItemMenuCurrentPage].numCols;
-    draw_box(4, &gPauseWS_18, arg1 + 0x44, arg2, 0, arg3 - 0x44, arg4, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
+    draw_box(4, &gPauseWS_18, baseX + 0x44, baseY, 0, width - 0x44, height, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
 
-    x1 = arg1 + 1;
-    y1 = arg2 + 7;
-    x2 = arg1 + arg3 - 1;
-    y2 = arg2 + arg4 - 7;
+    x1 = baseX + 1;
+    y1 = baseY + 7;
+    x2 = baseX + width - 1;
+    y2 = baseY + height - 7;
 
     if (x1 <= 0) {
         x1 = 1;
@@ -136,8 +129,8 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 
     sp54 = 0;
-    sp6C = arg1 + 0x77;
-    sp70 = arg2 + 0x11;
+    sp6C = baseX + 0x77;
+    sp70 = baseY + 0x11;
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
 
@@ -215,15 +208,15 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     } else {
                         if (s5) {
                             set_hud_element_flags(el, 0x20000000);
-                            gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[itemID].iconID].q1;
+                            gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[itemID].iconID].enabled;
                         }
 
-                        set_hud_element_anim(el, gItemHudScripts[gItemTable[itemID].iconID].q1);
+                        set_hud_element_anim(el, gItemHudScripts[gItemTable[itemID].iconID].enabled);
                         set_hud_element_scale(el, 0.670816f);
                     }
 
-                    set_hud_element_render_pos(el, arg1 + 0x69 + pause_items_scroll_offset_x(posX) + s2,
-                                                arg2 + 0x17 + pause_items_scroll_offset_y(posY) + s4);
+                    set_hud_element_render_pos(el, baseX + 0x69 + pause_items_scroll_offset_x(posX) + s2,
+                                                baseY + 0x17 + pause_items_scroll_offset_y(posY) + s4);
                     if (sp54 == 0) {
                         draw_hud_element_3(el);
                     } else {
@@ -236,10 +229,10 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         }
     }
 
-    x1 = arg1 + 1;
-    y1 = arg2 + 1;
-    x2 = arg1 + arg3 - 1;
-    y2 = arg2 + arg4 - 1;
+    x1 = baseX + 1;
+    y1 = baseY + 1;
+    x2 = baseX + width - 1;
+    y2 = baseY + height - 1;
     gDPPipeSync(gMasterGfxPos++);
 
     if (x1 <= 0) {
@@ -264,51 +257,51 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
     if (gPauseMenuCurrentTab == 3 && gItemMenuLevel == 1) {
         if (gItemMenuCurrentPage > 0) {
-            set_hud_element_render_pos(gItemIcons[16], arg1 + 278, arg2 + 14);
+            set_hud_element_render_pos(gItemIcons[16], baseX + 278, baseY + 14);
             draw_hud_element_3(gItemIcons[16]);
         }
 
         if (gItemMenuPages [gItemMenuCurrentPage + 1].enabled) {
-            set_hud_element_render_pos(gItemIcons[17], arg1 + 278, arg2 + 146);
+            set_hud_element_render_pos(gItemIcons[17], baseX + 278, baseY + 146);
             draw_hud_element_3(gItemIcons[17]);
         }
     }
 
-    draw_box(4, &gPauseWS_17, gItemMenuCurrentTab == 0 ? arg1 + 9 : arg1, arg2 + 7, 0,
+    draw_box(4, &gPauseWS_17, gItemMenuCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,
          0x5B, 0x22, 0xFF, gItemMenuCurrentTab == 1 ? 0x80 : 0x00, 0, 0,
          0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
 
     msg = pause_get_menu_msg(0x4F);
-    dx = arg1 + 12;
+    dx = baseX + 12;
     if (gItemMenuCurrentTab == 0) {
-        dx = arg1 + 21;
+        dx = baseX + 21;
     }
-    opacity = 0xFF;
-    dy = arg2 + 0x11;
+    opacity1 = 0xFF;
+    dy = baseY + 0x11;
     if (gItemMenuCurrentTab == 1) {
-        opacity = 0xBF;
+        opacity1 = 0xBF;
     }
-    draw_msg(msg, dx, dy, opacity, 0, 1);
+    draw_msg(msg, dx, dy, opacity1, 0, 1);
 
-    draw_box(4, &gPauseWS_17, gItemMenuCurrentTab == 1 ? arg1 + 9 : arg1, arg2 + 0x27, 0,
+    draw_box(4, &gPauseWS_17, gItemMenuCurrentTab == 1 ? baseX + 9 : baseX, baseY + 0x27, 0,
          0x5B, 0x22, 0xFF, gItemMenuCurrentTab == 0 ? 0x80 : 0x00, 0, 0,
          0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
 
     msg = pause_get_menu_msg(0x50);
-    dx = arg1 + 0x19;
+    dx = baseX + 0x19;
     if (gItemMenuCurrentTab == 1) {
-        dx = arg1 + 0x22;
+        dx = baseX + 0x22;
     }
-    opacity = 0xFF;
-    dy = arg2 + 0x31;
+    opacity1 = 0xFF;
+    dy = baseY + 0x31;
     if (gItemMenuCurrentTab == 0) {
-        opacity = 0xBF;
+        opacity1 = 0xBF;
     }
-    draw_msg(msg, dx, dy, opacity, 0, 1);
+    draw_msg(msg, dx, dy, opacity1, 0, 1);
 
     if (gPauseMenuCurrentTab == 3) {
          if (gItemMenuLevel  == 0) {
-             pause_set_cursor_pos(0x21, arg1 + 0xC , arg2 + 0x1A + gItemMenuCurrentTab  * 32);
+             pause_set_cursor_pos(0x21, baseX + 0xC , baseY + 0x1A + gItemMenuCurrentTab  * 32);
          } else {
              posX1 = pause_items_get_pos_x(gItemMenuCurrentPage, gItemMenuSelectedIndex  - gItemMenuPages[gItemMenuCurrentPage].listStart * gItemMenuPages[gItemMenuCurrentPage].numCols);
              posY1 = pause_items_get_pos_y(gItemMenuCurrentPage, gItemMenuSelectedIndex  - gItemMenuPages[gItemMenuCurrentPage].listStart * gItemMenuPages[gItemMenuCurrentPage].numCols);
@@ -321,9 +314,9 @@ void pause_items_draw_contents(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
              }
 
              if (gItemMenuCurrentScrollPos  != gItemMenuTargetScrollPos) {
-                 pause_set_cursor_pos_immediate(0x21, arg1 + 0x55 + offsetX, arg2 + 0x17 + offsetY);
+                 pause_set_cursor_pos_immediate(0x21, baseX + 0x55 + offsetX, baseY + 0x17 + offsetY);
              } else {
-                 pause_set_cursor_pos(0x21, arg1 + 0x55 + offsetX, arg2 + 0x17 + offsetY);
+                 pause_set_cursor_pos(0x21, baseX + 0x55 + offsetX, baseY + 0x17 + offsetY);
              }
          }
     }
@@ -361,7 +354,7 @@ void pause_items_load_items(s32 invItems) {
         gItemMenuItemIDs[0] = 0x7FFE;
         totalItems = 1;
     } else {
-        pause_sort_item_list(&gItemMenuItemIDs, totalItems, pause_items_comparator);
+        pause_sort_item_list(gItemMenuItemIDs, totalItems, pause_items_comparator);
     }
 
     gItemMenuNumItems = totalItems;
@@ -370,7 +363,7 @@ void pause_items_load_items(s32 invItems) {
         gItemMenuItemIDs[i] = 0x7FFF;
     }
 
-    page = &gItemMenuPages;
+    page = gItemMenuPages;
     gItemMenuSelectedIndex = 0;
     gItemMenuSelectedItemID = 0;
     D_802705C4 = 0;
@@ -420,7 +413,7 @@ void pause_items_init(MenuPanel* panel) {
         D_8024F5C0[i].tab = panel;
     }
 
-    setup_pause_menu_tab(&D_8024F5C0, 1);
+    setup_pause_menu_tab(D_8024F5C0, 1);
     panel->initialized = TRUE;
 }
 

@@ -4,12 +4,6 @@
 // Invalid badge ID filled in unused slots of gBadgeMenuItemIDs
 #define BADGE_INVALID 0x7FFF
 
-typedef struct {
-    HudScript* q1;
-    HudScript* q2;
-} HudElStruct;
-
-extern HudElStruct gItemHudScripts[];
 extern s32 D_802703FC;
 extern Gfx gPauseDLOrbs[];
 extern s32* D_8026FFB0;
@@ -18,7 +12,6 @@ void pause_badges_init(MenuPanel* panel);
 void pause_badges_handle_input(MenuPanel* panel);
 void pause_badges_update(MenuPanel* panel);
 void pause_badges_cleanup(MenuPanel* panel);
-void pause_draw_menu_label(s32 index, s32 x, s32 y);
 
 HudScript* gBadgeMenuElements[] = {
     HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,
@@ -444,13 +437,13 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                     } else {
                         if (s5) {
                             set_hud_element_flags(el, 0x20000000);
-                            gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[badgeID].iconID].q1;
+                            gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[badgeID].iconID].enabled;
                         }
 
                         if (!sp84 && sp8C) {
-                            set_hud_element_anim(el, gItemHudScripts[gItemTable[badgeID].iconID].q2);
+                            set_hud_element_anim(el, gItemHudScripts[gItemTable[badgeID].iconID].disabled);
                         } else {
-                            set_hud_element_anim(el, gItemHudScripts[gItemTable[badgeID].iconID].q1);
+                            set_hud_element_anim(el, gItemHudScripts[gItemTable[badgeID].iconID].enabled);
                         }
 
                         set_hud_element_scale(el, 0.670816f);
