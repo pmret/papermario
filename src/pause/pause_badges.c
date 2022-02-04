@@ -1,7 +1,7 @@
 #include "pause_common.h"
 // Fake "badge" for the None entry that appears on the equipped badges page when nothing is equipped
 #define BADGE_NONE_STANDIN 0x7FFE
-// Invalid badge ID filled in unused slots of gBadgeMenuItemIDs
+// Invalid badge ID filled in unused slots of gPauseBadgesItemIds
 #define BADGE_INVALID 0x7FFF
 
 extern s32* D_8026FFB0;
@@ -122,15 +122,15 @@ s32 pause_badges_get_row(s32 page, s32 itemIdx) {
 }
 
 s32 pause_badges_is_visible(s32 y) {
-    if (y < gBadgeMenuCurrentScrollPos - 32) {
+    if (y < gPauseBadgesCurrentScrollPos - 32) {
         return FALSE;
     } else {
-        return y < gBadgeMenuCurrentScrollPos + 128;
+        return y < gPauseBadgesCurrentScrollPos + 128;
     }
 }
 
 s32 pause_badges_scroll_offset_y(s32 offset) {
-    return offset - gBadgeMenuCurrentScrollPos;
+    return offset - gPauseBadgesCurrentScrollPos;
 }
 
 s32 pause_badges_scroll_offset_x(s32 x) {
@@ -290,19 +290,19 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     s32* iconIDs;
     PlayerData* playerData = &gPlayerData;
 
-    PauseItemPage* page = &gBadgeMenuPages[gBadgeMenuCurrentPage];
+    PauseItemPage* page = &gPauseBadgesPages[gPauseBadgesCurrentPage];
 
     sp70 = 0;
     sp74 = 0;
     sp64 = 1;
     sp6C = gPlayerData.maxBP - pause_get_total_equipped_bp_cost();
-    sp60 = gBadgeMenuSelectedIndex / page->numCols;
-    sp5C = gBadgeMenuSelectedIndex % page->numCols;
+    sp60 = gPauseBadgesSelectedIndex / page->numCols;
+    sp5C = gPauseBadgesSelectedIndex % page->numCols;
 
     draw_box(4, &gPauseWS_15, baseX + 84, baseY, 0, width - 84, height, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 320, 240, 0);
-    set_hud_element_render_pos(gBadgeMenuIconIDs[20], baseX + 241, baseY + 11);
+    set_hud_element_render_pos(gPauseBadgesIconIDs[20], baseX + 241, baseY + 11);
     sp68 = 10;
-    draw_hud_element_3(gBadgeMenuIconIDs[20]);
+    draw_hud_element_3(gPauseBadgesIconIDs[20]);
     x1 = baseX + 1;
     y1 = baseY + 14;
     x2 = baseX + width - 1;
@@ -331,11 +331,11 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     sp58 = 0;
     for ( i = 0; i < 3; i++) {
         for ( j = 0; j < 20; j++) {
-            iconIDs = gBadgeMenuIconIDs;
+            iconIDs = gPauseBadgesIconIDs;
             sp7C = baseX + 119;
             sp80 = baseY + 17;
 
-            sp78 = &gBadgeMenuPages[j];
+            sp78 = &gPauseBadgesPages[j];
             if (!sp78->enabled) {
                 break;
             }
@@ -343,7 +343,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
             pause_badges_get_pos_y(j, 0);
 
             for (k = 0; k < sp78->count; k++) {
-                badgeID = gBadgeMenuItemIDs[sp78->startIndex + k];
+                badgeID = gPauseBadgesItemIds[sp78->startIndex + k];
                 sp84 = FALSE;
                 s5 = FALSE;
                 equippedBadges = gPlayerData.equippedBadges;
@@ -365,7 +365,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                 }
 
                 if (gPauseMenuCurrentTab == 2 &&
-                    gBadgeMenuLevel == 1 &&
+                    gPauseBadgesLevel == 1 &&
                     pause_badges_get_column(j, k) == sp5C &&
                     pause_badges_get_row(j, k) == sp60) {
                     badgeID2 = badgeID;
@@ -431,7 +431,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                     clear_hud_element_flags(el, 0x20000000);
                     set_hud_element_flags(el, 0x8000);
                     if (sp88) {
-                        el = gBadgeMenuIconIDs[21];
+                        el = gPauseBadgesIconIDs[21];
                     } else {
                         if (s5) {
                             set_hud_element_flags(el, 0x20000000);
@@ -543,20 +543,20 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
 
-    if (gPauseMenuCurrentTab == 2 && gBadgeMenuLevel == 1) {
-        if (gBadgeMenuCurrentPage > 0) {
-            set_hud_element_render_pos(gBadgeMenuIconIDs[17], baseX + 278, baseY + 14);
-            draw_hud_element_3(gBadgeMenuIconIDs[17]);
+    if (gPauseMenuCurrentTab == 2 && gPauseBadgesLevel == 1) {
+        if (gPauseBadgesCurrentPage > 0) {
+            set_hud_element_render_pos(gPauseBadgesIconIDs[17], baseX + 278, baseY + 14);
+            draw_hud_element_3(gPauseBadgesIconIDs[17]);
         }
 
-        if (gBadgeMenuPages[gBadgeMenuCurrentPage + 1].enabled) {
-            set_hud_element_render_pos(gBadgeMenuIconIDs[18], baseX + 278, baseY + 146);
-            draw_hud_element_3(gBadgeMenuIconIDs[18]);
+        if (gPauseBadgesPages[gPauseBadgesCurrentPage + 1].enabled) {
+            set_hud_element_render_pos(gPauseBadgesIconIDs[18], baseX + 278, baseY + 146);
+            draw_hud_element_3(gPauseBadgesIconIDs[18]);
         }
     }
 
-    set_hud_element_render_pos(gBadgeMenuIconIDs[16], baseX + 43, baseY + 81);
-    draw_hud_element_3(gBadgeMenuIconIDs[16]);
+    set_hud_element_render_pos(gPauseBadgesIconIDs[16], baseX + 43, baseY + 81);
+    draw_hud_element_3(gPauseBadgesIconIDs[16]);
     draw_msg(pause_get_menu_msg(70), baseX + 16, baseY + 74, 0xFF, 0xA, 1);
     draw_number(playerData->maxBP, baseX + 69, baseY + 74, 1, 0xA, 0xFF, 3);
     bpAmount = playerData->maxBP - pause_get_total_equipped_bp_cost();
@@ -605,59 +605,59 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
         gDPPipeSync(gMasterGfxPos++);
     }
 
-    draw_box(4, &gPauseWS_13, gBadgeMenuCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,
-         0x5B, 0x22, 0xFF, gBadgeMenuCurrentTab == 1 ? 0x80 : 0x00, 0, 0,
+    draw_box(4, &gPauseWS_13, gPauseBadgesCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,
+         0x5B, 0x22, 0xFF, gPauseBadgesCurrentTab == 1 ? 0x80 : 0x00, 0, 0,
          0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
 
 
     msg = pause_get_menu_msg(0x47);
     dx = baseX + 10;
-    if (gBadgeMenuCurrentTab == 0) {
+    if (gPauseBadgesCurrentTab == 0) {
         dx = baseX + 19;
     }
     opacity1 = 0xFF;
     dy = baseY + 0x11;
-    if (gBadgeMenuCurrentTab == 1) {
+    if (gPauseBadgesCurrentTab == 1) {
         opacity1 = 0xBF;
     }
     draw_msg(msg, dx, dy, opacity1, 0, 1);
-    //draw_msg(pause_get_menu_msg(0x47), gBadgeMenuCurrentTab == 0 ? baseX + 19 : baseX + 10, baseY + 0x11,
-      //           gBadgeMenuCurrentTab == 1 ? 0xBF : 0xFF, 0, 1);
+    //draw_msg(pause_get_menu_msg(0x47), gPauseBadgesCurrentTab == 0 ? baseX + 19 : baseX + 10, baseY + 0x11,
+      //           gPauseBadgesCurrentTab == 1 ? 0xBF : 0xFF, 0, 1);
 
-    draw_box(4, &gPauseWS_13, gBadgeMenuCurrentTab == 1 ? baseX + 9 : baseX, baseY + 0x25, 0, 0x5B, 0x22, 0xFF,
-            gBadgeMenuCurrentTab == 0 ? 0x80 : 0x00, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
+    draw_box(4, &gPauseWS_13, gPauseBadgesCurrentTab == 1 ? baseX + 9 : baseX, baseY + 0x25, 0, 0x5B, 0x22, 0xFF,
+            gPauseBadgesCurrentTab == 0 ? 0x80 : 0x00, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
 
 
     msg = pause_get_menu_msg(0x48);
     dx = baseX + 12;
-    if (gBadgeMenuCurrentTab == 1) {
+    if (gPauseBadgesCurrentTab == 1) {
         dx = baseX + 21;
     }
     dy = baseY + 0x2A;
     opacity1 = 0xFF;
-    if (gBadgeMenuCurrentTab == 0) {
+    if (gPauseBadgesCurrentTab == 0) {
         opacity1 = 0xBF;
     }
     draw_msg(msg, dx, dy, opacity1, 0, 1);
 
     msg = pause_get_menu_msg(0x49);
     dx = baseX + 0x1A;
-    if (gBadgeMenuCurrentTab == 1) {
+    if (gPauseBadgesCurrentTab == 1) {
         dx = baseX + 0x23;
     }
     dy = baseY + 0x34;
     opacity1 = 0xFF;
-    if (gBadgeMenuCurrentTab == 0) {
+    if (gPauseBadgesCurrentTab == 0) {
         opacity1 = 0xBF;
     }
     draw_msg(msg, dx, dy, opacity1, 0, 1);
 
     if (gPauseMenuCurrentTab == 2) {
-         if (gBadgeMenuLevel == 0) {
-             pause_set_cursor_pos(32, baseX + 0xA , baseY + 0x1A + gBadgeMenuCurrentTab * 32);
+         if (gPauseBadgesLevel == 0) {
+             pause_set_cursor_pos(32, baseX + 0xA , baseY + 0x1A + gPauseBadgesCurrentTab * 32);
          } else {
-             posX1 = pause_badges_get_pos_x(gBadgeMenuCurrentPage, gBadgeMenuSelectedIndex - gBadgeMenuPages[gBadgeMenuCurrentPage].listStart * gBadgeMenuPages[gBadgeMenuCurrentPage].numCols);
-             posY1 = pause_badges_get_pos_y(gBadgeMenuCurrentPage, gBadgeMenuSelectedIndex - gBadgeMenuPages[gBadgeMenuCurrentPage].listStart * gBadgeMenuPages[gBadgeMenuCurrentPage].numCols);
+             posX1 = pause_badges_get_pos_x(gPauseBadgesCurrentPage, gPauseBadgesSelectedIndex - gPauseBadgesPages[gPauseBadgesCurrentPage].listStart * gPauseBadgesPages[gPauseBadgesCurrentPage].numCols);
+             posY1 = pause_badges_get_pos_y(gPauseBadgesCurrentPage, gPauseBadgesSelectedIndex - gPauseBadgesPages[gPauseBadgesCurrentPage].listStart * gPauseBadgesPages[gPauseBadgesCurrentPage].numCols);
              offsetX = pause_badges_scroll_offset_x(posX1);
              offsetY = pause_badges_scroll_offset_y(posY1);
              if (offsetY < 0) {
@@ -666,7 +666,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                  offsetY = 112;
              }
 
-             if (gBadgeMenuCurrentScrollPos != gBadgeMenuTargetScrollPos) {
+             if (gPauseBadgesCurrentScrollPos != gPauseBadgesTargetScrollPos) {
                  pause_set_cursor_pos_immediate(0x20, baseX + 0x5D + offsetX, baseY + 0x17 + offsetY);
              } else {
                  pause_set_cursor_pos(0x20, baseX + 0x5D + offsetX, baseY + 0x17 + offsetY);
@@ -674,9 +674,9 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
          }
     }
 
-    if (gBadgeMenuBShowNotEnoughBP != 0) {
+    if (gPauseBadgesBShowNotEnoughBP != 0) {
         pause_set_cursor_opacity(0);
-        if (gBadgeMenuBShowNotEnoughBP == 1) {
+        if (gPauseBadgesBShowNotEnoughBP == 1) {
             draw_box(4, &gPauseWS_13, baseX + 0x43, baseY + 0x3C, 0, 0x89, 0x1A, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
             draw_msg(pause_get_menu_msg(0x4A), baseX + 0x56, baseY + 0x42, 0xFF, 0, 1);
         } else {
@@ -702,7 +702,7 @@ void pause_badges_load_badges(s32 onlyEquipped) {
             } else if (badgeItemID > ITEM_LAST_BADGE) {
                 break;
             } else {
-                gBadgeMenuItemIDs[numItems] = badgeItemID;
+                gPauseBadgesItemIds[numItems] = badgeItemID;
                 numItems += 1;
             }
         }
@@ -719,31 +719,31 @@ void pause_badges_load_badges(s32 onlyEquipped) {
             s16 badgeItemID = *equippedBadges;
 
             if (badgeItemID != 0) {
-                gBadgeMenuItemIDs[numItems] = badgeItemID;
+                gPauseBadgesItemIds[numItems] = badgeItemID;
                 numItems += 1;
             }
             equippedBadges++;
         }
     }
     if (numItems == 0) {
-        gBadgeMenuItemIDs[0] = BADGE_NONE_STANDIN;
+        gPauseBadgesItemIds[0] = BADGE_NONE_STANDIN;
         numItems = 1;
     }
-    gBadgeMenuNumItems = numItems;
-    for (i = numItems; i < ARRAY_COUNT(gBadgeMenuItemIDs); i++) {
-        gBadgeMenuItemIDs[i] = BADGE_INVALID;
+    gPauseBadgesNumItems = numItems;
+    for (i = numItems; i < ARRAY_COUNT(gPauseBadgesItemIds); i++) {
+        gPauseBadgesItemIds[i] = BADGE_INVALID;
     }
 
-    gBadgeMenuSelectedIndex = 0;
-    gBadgeMenuSelectedItemID = 0;
+    gPauseBadgesSelectedIndex = 0;
+    gPauseBadgesSelectedItem = 0;
     D_8027037C = 0;
     D_80270394 = 0;
-    gBadgeMenuCurrentPage = 0;
+    gPauseBadgesCurrentPage = 0;
 
-    page = &gBadgeMenuPages[0];
+    page = &gPauseBadgesPages[0];
     i = 0;
 
-    for (i = 0; i < gBadgeMenuNumItems / 8; i++, page++) {
+    for (i = 0; i < gPauseBadgesNumItems / 8; i++, page++) {
         page->listStart = i * 8;
         page->numCols = 1;
         page->numRows = 8;
@@ -752,7 +752,7 @@ void pause_badges_load_badges(s32 onlyEquipped) {
         page->count = 8;
     }
 
-    if ((gBadgeMenuNumItems % 8) != 0) {
+    if ((gPauseBadgesNumItems % 8) != 0) {
         s16 count;
         s32 menuNumItems;
 
@@ -761,7 +761,7 @@ void pause_badges_load_badges(s32 onlyEquipped) {
         page->enabled = TRUE;
         page->startIndex = i * 8;
 
-        menuNumItems = gBadgeMenuNumItems;
+        menuNumItems = gPauseBadgesNumItems;
         count = menuNumItems - (menuNumItems / 8 * 8);
         page->count = count;
         page->numRows = page->count;
@@ -769,14 +769,14 @@ void pause_badges_load_badges(s32 onlyEquipped) {
         page++;
     }
 
-    while (i < ARRAY_COUNT(gBadgeMenuPages)) {
+    while (i < ARRAY_COUNT(gPauseBadgesPages)) {
         page->enabled = FALSE;
 
         i++;
         page++;
     }
 
-    gBadgeMenuTargetScrollPos = gBadgeMenuCurrentScrollPos = pause_badges_get_pos_y(0, 0);
+    gPauseBadgesTargetScrollPos = gPauseBadgesCurrentScrollPos = pause_badges_get_pos_y(0, 0);
 }
 
 void pause_badges_init(MenuPanel* panel) {
@@ -785,20 +785,20 @@ void pause_badges_init(MenuPanel* panel) {
     // This sorts the badge list and then discards the count
     pause_badges_count_all();
 
-    gBadgeMenuLevel = 0;
-    gBadgeMenuCurrentTab = 0;
-    gBadgeMenuBShowNotEnoughBP = 0;
+    gPauseBadgesLevel = 0;
+    gPauseBadgesCurrentTab = 0;
+    gPauseBadgesBShowNotEnoughBP = 0;
 
     pause_badges_load_badges(FALSE);
-    if (gBadgeMenuItemIDs[0] == BADGE_NONE_STANDIN) {
+    if (gPauseBadgesItemIds[0] == BADGE_NONE_STANDIN) {
         panel->initialized = FALSE;
         return;
     }
 
-    for (i = 0; i < ARRAY_COUNT(gBadgeMenuIconIDs); i++) {
+    for (i = 0; i < ARRAY_COUNT(gPauseBadgesIconIDs); i++) {
         s32 iconID = create_hud_element(gBadgeMenuElements[i]);
 
-        gBadgeMenuIconIDs[i] = iconID;
+        gPauseBadgesIconIDs[i] = iconID;
         set_hud_element_flags(iconID, 0x80);
     }
 
@@ -810,8 +810,8 @@ void pause_badges_init(MenuPanel* panel) {
 }
 
 void pause_badges_handle_input(MenuPanel* panel) {
-    s32 selectedIndex = gBadgeMenuSelectedIndex;
-    s32 numCols = gBadgeMenuPages[gBadgeMenuCurrentPage].numCols;
+    s32 selectedIndex = gPauseBadgesSelectedIndex;
+    s32 numCols = gPauseBadgesPages[gPauseBadgesCurrentPage].numCols;
 
     s32 selectedCol = selectedIndex % numCols;
     s32 selectedRow = selectedIndex / numCols;
@@ -819,17 +819,17 @@ void pause_badges_handle_input(MenuPanel* panel) {
     if (gPausePressedButtons & BUTTON_A) {
         s16 badgeID;
 
-        if (gBadgeMenuBShowNotEnoughBP != 0) {
-            gBadgeMenuBShowNotEnoughBP = 0;
-        } else if (gBadgeMenuLevel == 0) {
-            if (gBadgeMenuItemIDs[selectedIndex] == BADGE_NONE_STANDIN) {
+        if (gPauseBadgesBShowNotEnoughBP != 0) {
+            gPauseBadgesBShowNotEnoughBP = 0;
+        } else if (gPauseBadgesLevel == 0) {
+            if (gPauseBadgesItemIds[selectedIndex] == BADGE_NONE_STANDIN) {
                 sfx_play_sound(SOUND_MENU_BADGE_ERROR);
             } else {
-                gBadgeMenuLevel = 1;
+                gPauseBadgesLevel = 1;
                 sfx_play_sound(SOUND_MENU_NEXT);
             }
         } else {
-            badgeID = gBadgeMenuItemIDs[selectedIndex];
+            badgeID = gPauseBadgesItemIds[selectedIndex];
             switch (pause_badges_try_equip(badgeID)) {
                 case EQUIP_RESULT_ALREADY_EQUIPPED:
                     sfx_play_sound(SOUND_MENU_BADGE_UNEQUIP);
@@ -837,11 +837,11 @@ void pause_badges_handle_input(MenuPanel* panel) {
                     break;
                 case EQUIP_RESULT_NOT_ENOUGH_BP:
                     sfx_play_sound(SOUND_MENU_BADGE_ERROR);
-                    gBadgeMenuBShowNotEnoughBP = 1;
+                    gPauseBadgesBShowNotEnoughBP = 1;
                     break;
                 case EQUIP_RESULT_TOO_MANY_BADGES:
                     sfx_play_sound(SOUND_MENU_BADGE_ERROR);
-                    gBadgeMenuBShowNotEnoughBP = 2;
+                    gPauseBadgesBShowNotEnoughBP = 2;
                     break;
                 case EQUIP_RESULT_SUCCESS:
                     sfx_play_sound(SOUND_MENU_BADGE_EQUIP);
@@ -852,19 +852,19 @@ void pause_badges_handle_input(MenuPanel* panel) {
     }
 
     if ((gPausePressedButtons != 0) || (gPauseHeldButtons != 0)) {
-        gBadgeMenuBShowNotEnoughBP = 0;
+        gPauseBadgesBShowNotEnoughBP = 0;
     }
 
-    if (gBadgeMenuNumItems != 0) {
-        if (gBadgeMenuLevel == 0) {
-            s32 oldTab = gBadgeMenuCurrentTab;
+    if (gPauseBadgesNumItems != 0) {
+        if (gPauseBadgesLevel == 0) {
+            s32 oldTab = gPauseBadgesCurrentTab;
 
             if (gPauseHeldButtons & (BUTTON_STICK_UP | BUTTON_STICK_DOWN)) {
-                gBadgeMenuCurrentTab ^= 1;
+                gPauseBadgesCurrentTab ^= 1;
             }
-            if (oldTab != gBadgeMenuCurrentTab) {
+            if (oldTab != gPauseBadgesCurrentTab) {
                 sfx_play_sound(SOUND_MENU_CHANGE_TAB);
-                pause_badges_load_badges(gBadgeMenuCurrentTab);
+                pause_badges_load_badges(gPauseBadgesCurrentTab);
             }
         } else {
             s32 heldButtons = gPauseHeldButtons;
@@ -877,16 +877,16 @@ void pause_badges_handle_input(MenuPanel* panel) {
                     if (selectedRow < 0) {
                         selectedRow = 0;
                     }
-                    if (selectedRow < gBadgeMenuPages[gBadgeMenuCurrentPage].listStart) {
-                        gBadgeMenuCurrentPage -= 1;
+                    if (selectedRow < gPauseBadgesPages[gPauseBadgesCurrentPage].listStart) {
+                        gPauseBadgesCurrentPage -= 1;
                     }
                 } else {
                     // Z button press
-                    gBadgeMenuCurrentPage -= 1;
-                    if (gBadgeMenuCurrentPage < 0) {
-                        gBadgeMenuCurrentPage = 0;
+                    gPauseBadgesCurrentPage -= 1;
+                    if (gPauseBadgesCurrentPage < 0) {
+                        gPauseBadgesCurrentPage = 0;
                     }
-                    selectedRow = gBadgeMenuPages[gBadgeMenuCurrentPage].listStart;
+                    selectedRow = gPauseBadgesPages[gPauseBadgesCurrentPage].listStart;
                 }
             }
 
@@ -894,13 +894,13 @@ void pause_badges_handle_input(MenuPanel* panel) {
             heldButtons2 = gPauseHeldButtons;
             if (heldButtons2 & (BUTTON_STICK_DOWN | BUTTON_R)) {
                 if (heldButtons2 & BUTTON_STICK_DOWN) {
-                    PauseItemPage* page = &gBadgeMenuPages[gBadgeMenuCurrentPage];
+                    PauseItemPage* page = &gPauseBadgesPages[gPauseBadgesCurrentPage];
 
                     selectedRow += 1;
                     if (selectedRow >= (page->listStart + page->numRows)) {
-                        gBadgeMenuCurrentPage += 1;
-                        if (!gBadgeMenuPages[gBadgeMenuCurrentPage].enabled) {
-                            gBadgeMenuCurrentPage -= 1;
+                        gPauseBadgesCurrentPage += 1;
+                        if (!gPauseBadgesPages[gPauseBadgesCurrentPage].enabled) {
+                            gPauseBadgesCurrentPage -= 1;
                             selectedRow -= 1;
                         }
                     }
@@ -908,19 +908,19 @@ void pause_badges_handle_input(MenuPanel* panel) {
                     // R button press
                     PauseItemPage* newPage;
 
-                    gBadgeMenuCurrentPage++;
-                    newPage = &gBadgeMenuPages[gBadgeMenuCurrentPage];
+                    gPauseBadgesCurrentPage++;
+                    newPage = &gPauseBadgesPages[gPauseBadgesCurrentPage];
 
                     if (!newPage->enabled) {
-                        gBadgeMenuCurrentPage -= 1;
+                        gPauseBadgesCurrentPage -= 1;
                     } else {
                         selectedRow = newPage->listStart;
                     }
                 }
             }
 
-            newPageNumCols = gBadgeMenuPages[gBadgeMenuCurrentPage].numCols;
-            if (gBadgeMenuItemIDs[selectedRow * newPageNumCols] != BADGE_NONE_STANDIN) {
+            newPageNumCols = gPauseBadgesPages[gPauseBadgesCurrentPage].numCols;
+            if (gPauseBadgesItemIds[selectedRow * newPageNumCols] != BADGE_NONE_STANDIN) {
                 if (gPauseHeldButtons & BUTTON_STICK_LEFT) {
                     selectedCol -= 1;
                     if (selectedCol < 0) {
@@ -935,16 +935,16 @@ void pause_badges_handle_input(MenuPanel* panel) {
             } else {
                 selectedCol = 0;
             }
-            gBadgeMenuSelectedIndex = selectedCol + (selectedRow * gBadgeMenuPages[gBadgeMenuCurrentPage].numCols);
-            if (gBadgeMenuSelectedIndex != selectedIndex) {
+            gPauseBadgesSelectedIndex = selectedCol + (selectedRow * gPauseBadgesPages[gPauseBadgesCurrentPage].numCols);
+            if (gPauseBadgesSelectedIndex != selectedIndex) {
                 sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
             }
-            gBadgeMenuSelectedItemID = gBadgeMenuItemIDs[gBadgeMenuSelectedIndex];
+            gPauseBadgesSelectedItem = gPauseBadgesItemIds[gPauseBadgesSelectedIndex];
         }
     }
 
-    if (gBadgeMenuLevel == 1) {
-        s32 itemID = gBadgeMenuSelectedItemID;
+    if (gPauseBadgesLevel == 1) {
+        s32 itemID = gPauseBadgesSelectedItem;
 
         if (((itemID != BADGE_NONE_STANDIN) && (itemID != BADGE_INVALID) && (itemID != 0))) {
             gPauseCurrentDescMsg = gItemTable[itemID].menuMsg;
@@ -953,19 +953,19 @@ void pause_badges_handle_input(MenuPanel* panel) {
             gPauseCurrentDescIconScript = NULL;
         }
     } else {
-        gPauseCurrentDescMsg = pause_get_menu_msg(gBadgeMenuCurrentTab == 0 ? 0x4C : 0x4D);
+        gPauseCurrentDescMsg = pause_get_menu_msg(gPauseBadgesCurrentTab == 0 ? 0x4C : 0x4D);
         gPauseCurrentDescIconScript = NULL;
     }
 
     if (gPausePressedButtons & BUTTON_B) {
-        if (gBadgeMenuLevel == 0) {
+        if (gPauseBadgesLevel == 0) {
             sfx_play_sound(SOUND_MENU_BACK);
             gPauseMenuCurrentTab = 0;
         } else {
             sfx_play_sound(SOUND_MENU_BACK);
-            gBadgeMenuLevel = 0;
+            gPauseBadgesLevel = 0;
             enforce_hpfp_limits();
-            if (gBadgeMenuCurrentTab == 1) {
+            if (gPauseBadgesCurrentTab == 1) {
                 pause_badges_load_badges(TRUE);
             }
         }
@@ -973,10 +973,9 @@ void pause_badges_handle_input(MenuPanel* panel) {
 }
 
 void pause_badges_update(MenuPanel* panel) {
-    PauseItemPage* menuPages = gBadgeMenuPages;
-    PauseItemPage* currentMenuPage = &menuPages[gBadgeMenuCurrentPage];
-    s32 temp = (gBadgeMenuSelectedIndex / currentMenuPage->numCols) - currentMenuPage->listStart;
-    s32* currentScrollPos;
+    PauseItemPage* menuPages = gPauseBadgesPages;
+    PauseItemPage* currentMenuPage = &menuPages[gPauseBadgesCurrentPage];
+    s32 temp = (gPauseBadgesSelectedIndex / currentMenuPage->numCols) - currentMenuPage->listStart;
 
     if ((temp < 2) || currentMenuPage->numRows < 9) {
         D_80270394 = 0;
@@ -992,15 +991,14 @@ void pause_badges_update(MenuPanel* panel) {
         }
     }
 
-    currentScrollPos = &gBadgeMenuCurrentScrollPos;
-    gBadgeMenuTargetScrollPos = pause_badges_get_pos_y(gBadgeMenuCurrentPage, D_80270394 * currentMenuPage->numCols);
-    *currentScrollPos += pause_interp_vertical_scroll(gBadgeMenuTargetScrollPos - *currentScrollPos);
+    gPauseBadgesTargetScrollPos = pause_badges_get_pos_y(gPauseBadgesCurrentPage, D_80270394 * currentMenuPage->numCols);
+    gPauseBadgesCurrentScrollPos += pause_interp_vertical_scroll(gPauseBadgesTargetScrollPos - gPauseBadgesCurrentScrollPos);
 }
 
 void pause_badges_cleanup(MenuPanel* panel) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gBadgeMenuIconIDs); i++) {
-        free_hud_element(gBadgeMenuIconIDs[i]);
+    for (i = 0; i < ARRAY_COUNT(gPauseBadgesIconIDs); i++) {
+        free_hud_element(gPauseBadgesIconIDs[i]);
     }
 }

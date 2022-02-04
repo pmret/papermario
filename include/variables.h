@@ -157,16 +157,6 @@ extern Window gWindows[64];
 
 extern s32 D_802A3838;
 
-// Pause
-/*
-extern s32 gPauseCommonIconIDs[8];
-extern s32 gPauseCursorTargetPosX;
-extern s32 gPauseCursorTargetPosY;
-extern s32 gPauseCursorPosY;
-extern u8 gPauseMenuTextScrollInterpEasingLUT[16];
-extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
-*/
-
 extern s32 gGameState;
 extern s16 gNpcCount;
 extern s32 gOverrideFlags;

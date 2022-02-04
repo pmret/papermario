@@ -36,8 +36,8 @@
 #define PANIC() while (TRUE) {}
 #endif
 
-#define BADGE_MENU_PAGE(index) (&gBadgeMenuPages[index])
-#define ITEM_MENU_PAGE(index) (&gItemMenuPages[index])
+#define BADGE_MENU_PAGE(index) (&gPauseBadgesPages[index])
+#define ITEM_MENU_PAGE(index) (&gPauseItemsPages[index])
 
 #define MAX_MAPVARS 16
 #define MAX_MAPFLAGS 3

@@ -171,8 +171,8 @@ void pause_map_draw_border_arrows(s32 imageIndex, s32 x, s32 y) {
 }
 
 void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
-    s32 cameraX = pause_map_cameraX;
-    s32 cameraY = pause_map_cameraY;
+    s32 cameraX = gPauseMapCameraX;
+    s32 cameraY = gPauseMapCameraY;
     s32 i, j;
     s32 t5;
     s32 x1, y1, x2, y2;
@@ -250,7 +250,7 @@ void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
             continue;
         }
 
-        if (i != pause_map_cursorCurrentOption) {
+        if (i != gPauseMapCursorCurrentOption) {
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xDC, 0x50, 0x1E, 0xFF);
         } else {
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, (gGameStatusPtr->frameCounter * 10) % 120 + 0x78,
@@ -279,12 +279,12 @@ void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
 
     bX = baseX + 0x1A + cameraX;
     bY = baseY + 0x16 + cameraY;
-    set_hud_element_render_pos(D_80270700[0], bX + pause_map_marioX, bY + pause_map_marioY - 7);
-    draw_hud_element_3(D_80270700[0]);
+    set_hud_element_render_pos(gPauseMapIconIDs[0], bX + gPauseMapMarioX, bY + gPauseMapMarioY - 7);
+    draw_hud_element_3(gPauseMapIconIDs[0]);
 
     currentTab = gPauseMenuCurrentTab;
     if (currentTab == 6) {
-        pause_set_cursor_pos(0x29, bX + pause_map_targetX - 8.0f, bY + pause_map_targetY);
+        pause_set_cursor_pos(0x29, bX + gPauseMapTargetX - 8.0f, bY + gPauseMapTargetY);
 
         if (gPauseMenuCurrentTab == currentTab) {
             offset = D_80250560[gGameStatusPtr->frameCounter % 12];
@@ -295,22 +295,22 @@ void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
 
             gSPDisplayList(gMasterGfxPos++, gPauseDLArrows);
 
-            if (!(pause_map_cameraX < 0.0f)) {
+            if (!(gPauseMapCameraX < 0.0f)) {
                 offset0 = 0;
             }
             pause_map_draw_border_arrows(0, baseX + 0x1A - offset0, baseY + height / 2 - 8);
 
-            if (!(pause_map_cameraX > -86.0f)) {
+            if (!(gPauseMapCameraX > -86.0f)) {
                 offset1 = 0;
             }
             pause_map_draw_border_arrows(1, baseX + width - 0x32 + offset1, baseY + height / 2 - 8);
 
-            if (!(pause_map_cameraY < 0.0f)) {
+            if (!(gPauseMapCameraY < 0.0f)) {
                 offset2 = 0;
             }
             pause_map_draw_border_arrows(2, baseX + width / 2 - 8, baseY + 0x18 - offset2);
 
-            if (!(pause_map_cameraY > -210.0f)) {
+            if (!(gPauseMapCameraY > -210.0f)) {
                 offset3 = 0;
             }
             pause_map_draw_border_arrows(3, baseX + width / 2 - 8, baseY + height - 0x2C + offset3);
@@ -349,9 +349,9 @@ void pause_map_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
     s32 msgID;
 
     if (gPauseMenuCurrentTab == 6) {
-        if (pause_map_cursorCurrentOption != -1) {
-            msgWidth = get_msg_width(MSG_pause_map_location_0_name + (pause_map_cursorCurrentOption * 3), 0);
-            msgID = MSG_pause_map_location_0_name + (pause_map_cursorCurrentOption * 3);
+        if (gPauseMapCursorCurrentOption != -1) {
+            msgWidth = get_msg_width(MSG_pause_map_location_0_name + (gPauseMapCursorCurrentOption * 3), 0);
+            msgID = MSG_pause_map_location_0_name + (gPauseMapCursorCurrentOption * 3);
             draw_msg(msgID, baseX + ((width - msgWidth) >> 1), baseY + 1, 255, 0, 0);
         }
     }
@@ -362,8 +362,8 @@ void pause_map_init(MenuPanel* tab) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_8024FA30); i++) {
-        D_80270700[i] = create_hud_element(D_8024FA30[i]);
-        set_hud_element_flags(D_80270700[i], 0x80);
+        gPauseMapIconIDs[i] = create_hud_element(D_8024FA30[i]);
+        set_hud_element_flags(gPauseMapIconIDs[i], 0x80);
     }
 
     for (i = 0; i < ARRAY_COUNT(pause_map_windowBlueprints); i++) {
@@ -371,9 +371,9 @@ void pause_map_init(MenuPanel* tab) {
     }
 
     setup_pause_menu_tab(pause_map_windowBlueprints, ARRAY_COUNT(pause_map_windowBlueprints));
-    pause_map_cursorCurrentOption = -1;
-    pause_map_spacesInSnapRange = 0;
-    pause_map_cursorCurrentOptionCopy = -1;
+    gPauseMapCursorCurrentOption = -1;
+    gPauseMapSpacesInSnapRange = 0;
+    gPauseMapCursorCurrentOptionCopy = -1;
     tempVar = evt_get_variable(0, EVT_SAVE_VAR(425));
 
     for (i = 0; i < ARRAY_COUNT(pause_map_spaces); i++) {
@@ -383,32 +383,32 @@ void pause_map_init(MenuPanel* tab) {
     }
 
     if (i < ARRAY_COUNT(pause_map_spaces)) {
-        pause_map_marioX = pause_map_spaces[i].pos.x;
-        pause_map_marioY = pause_map_spaces[i].pos.y;
+        gPauseMapMarioX = pause_map_spaces[i].pos.x;
+        gPauseMapMarioY = pause_map_spaces[i].pos.y;
     } else {
-        pause_map_marioX = 0;
-        pause_map_marioY = 0;
+        gPauseMapMarioX = 0;
+        gPauseMapMarioY = 0;
     }
-    pause_map_targetX = pause_map_marioX;
-    pause_map_targetY = pause_map_marioY;
+    gPauseMapTargetX = gPauseMapMarioX;
+    gPauseMapTargetY = gPauseMapMarioY;
 
-    pause_map_cameraX = 0.0f;
-    pause_map_cameraY = 0.0f;
-    pause_map_cameraX -= (s32)(pause_map_targetX + pause_map_cameraX - 117.0);
-    pause_map_cameraY -= (s32)(pause_map_targetY + pause_map_cameraY - 55.0);
+    gPauseMapCameraX = 0.0f;
+    gPauseMapCameraY = 0.0f;
+    gPauseMapCameraX -= (s32)(gPauseMapTargetX + gPauseMapCameraX - 117.0);
+    gPauseMapCameraY -= (s32)(gPauseMapTargetY + gPauseMapCameraY - 55.0);
 
-    if (pause_map_cameraX > 0)  {
-        pause_map_cameraX = 0;
+    if (gPauseMapCameraX > 0)  {
+        gPauseMapCameraX = 0;
     }
-    if (pause_map_cameraY > 0) {
-        pause_map_cameraY = 0;
+    if (gPauseMapCameraY > 0) {
+        gPauseMapCameraY = 0;
     }
 
-    if (pause_map_cameraX <= -86.0f) {
-        pause_map_cameraX = -85.0f;
+    if (gPauseMapCameraX <= -86.0f) {
+        gPauseMapCameraX = -85.0f;
     }
-    if (pause_map_cameraY <= -210.0f) {
-        pause_map_cameraY = -209.0f;
+    if (gPauseMapCameraY <= -210.0f) {
+        gPauseMapCameraY = -209.0f;
     }
 
     tab->initialized = TRUE;
@@ -417,73 +417,73 @@ void pause_map_init(MenuPanel* tab) {
 void pause_map_handle_input(MenuPanel* tab) {
     f32 xMovement = gGameStatusPtr->stickX * 0.05f;
     f32 yMovement = -gGameStatusPtr->stickY * 0.05f;
-    f32 pause_map_targetYPosTemp = pause_map_targetY;
-    f32 pause_map_targetXPosTemp = pause_map_targetX;
+    f32 gPauseMapTargetYPosTemp = gPauseMapTargetY;
+    f32 gPauseMapTargetXPosTemp = gPauseMapTargetX;
     s32 xTemp;
     s32 yTemp;
 
-    if (xMovement == 0.0f && yMovement == 0.0f && pause_map_cursorCurrentOption != -1) {
-        PauseMapSpace* mapSpace = &pause_map_spaces[pause_map_cursorCurrentOption];
+    if (xMovement == 0.0f && yMovement == 0.0f && gPauseMapCursorCurrentOption != -1) {
+        PauseMapSpace* mapSpace = &pause_map_spaces[gPauseMapCursorCurrentOption];
 
-        xMovement = mapSpace->pos.x - pause_map_targetXPosTemp;
-        yMovement = mapSpace->pos.y - pause_map_targetYPosTemp;
+        xMovement = mapSpace->pos.x - gPauseMapTargetXPosTemp;
+        yMovement = mapSpace->pos.y - gPauseMapTargetYPosTemp;
 
         xMovement *= 0.32;
         yMovement *= 0.32;
     }
 
-    pause_map_targetX += xMovement;
-    pause_map_targetY += yMovement;
+    gPauseMapTargetX += xMovement;
+    gPauseMapTargetY += yMovement;
 
-    if (pause_map_targetX < 16.0f) {
-        pause_map_targetX = 16.0f;
+    if (gPauseMapTargetX < 16.0f) {
+        gPauseMapTargetX = 16.0f;
     }
 
-    if (pause_map_targetY < 8.0f) {
-        pause_map_targetY = 8.0f;
+    if (gPauseMapTargetY < 8.0f) {
+        gPauseMapTargetY = 8.0f;
     }
 
-    if (pause_map_targetX >= 316.0f) {
-        pause_map_targetX = 315.0f;
+    if (gPauseMapTargetX >= 316.0f) {
+        gPauseMapTargetX = 315.0f;
     }
 
-    if (pause_map_targetY >= 308.0f) {
-        pause_map_targetY = 307.0f;
+    if (gPauseMapTargetY >= 308.0f) {
+        gPauseMapTargetY = 307.0f;
     }
 
-    xTemp = pause_map_targetX + pause_map_cameraX - 117.0;
-    yTemp = pause_map_targetY + pause_map_cameraY - 55.0;
+    xTemp = gPauseMapTargetX + gPauseMapCameraX - 117.0;
+    yTemp = gPauseMapTargetY + gPauseMapCameraY - 55.0;
 
     if (xTemp >= 53.0) {
-        pause_map_cameraX -= xTemp - 53.0;
+        gPauseMapCameraX -= xTemp - 53.0;
     }
 
     if (xTemp <= -37.0) {
-        pause_map_cameraX -= xTemp + 37.0;
+        gPauseMapCameraX -= xTemp + 37.0;
     }
 
     if (yTemp >= 15.0) {
-        pause_map_cameraY -= yTemp - 15.0;
+        gPauseMapCameraY -= yTemp - 15.0;
     }
 
     if (yTemp <= -15.0) {
-        pause_map_cameraY -= yTemp + 15.0;
+        gPauseMapCameraY -= yTemp + 15.0;
     }
 
-    if (pause_map_cameraX > 0.0f) {
-        pause_map_cameraX = 0.0f;
+    if (gPauseMapCameraX > 0.0f) {
+        gPauseMapCameraX = 0.0f;
     }
 
-    if (pause_map_cameraY > 0.0f) {
-        pause_map_cameraY = 0.0f;
+    if (gPauseMapCameraY > 0.0f) {
+        gPauseMapCameraY = 0.0f;
     }
 
-    if (pause_map_cameraX < -86.0f) {
-        pause_map_cameraX = -86.0f;
+    if (gPauseMapCameraX < -86.0f) {
+        gPauseMapCameraX = -86.0f;
     }
 
-    if (pause_map_cameraY < -210.0f) {
-        pause_map_cameraY = -210.0f;
+    if (gPauseMapCameraY < -210.0f) {
+        gPauseMapCameraY = -210.0f;
     }
 
     if (gPausePressedButtons & B_BUTTON) {
@@ -493,15 +493,15 @@ void pause_map_handle_input(MenuPanel* tab) {
     }
 
     gPauseCurrentDescIconScript = 0;
-    if (pause_map_cursorCurrentOption == -1) {
+    if (gPauseMapCursorCurrentOption == -1) {
         gPauseCurrentDescMsg = 0;
         return;
     }
 
-    gPauseCurrentDescMsg = MSG_pause_map_location_0_before_desc + (pause_map_cursorCurrentOption * 3);
+    gPauseCurrentDescMsg = MSG_pause_map_location_0_before_desc + (gPauseMapCursorCurrentOption * 3);
 
     // If the story has progressed enough, show the "after" description
-    if (evt_get_variable(0, EVT_STORY_PROGRESS) >= pause_map_spaces[pause_map_cursorCurrentOption].afterRequirement) {
+    if (evt_get_variable(0, EVT_STORY_PROGRESS) >= pause_map_spaces[gPauseMapCursorCurrentOption].afterRequirement) {
         gPauseCurrentDescMsg++;
     }
 }
@@ -512,17 +512,17 @@ void pause_map_update(MenuPanel* tab) {
     f32 cursorOption = -1.0f;
     s32 i;
 
-    pause_map_cursorCurrentOption = -1;
-    pause_map_spacesInSnapRange = 0;
+    gPauseMapCursorCurrentOption = -1;
+    gPauseMapSpacesInSnapRange = 0;
 
     for (i = 0; i < ARRAY_COUNT(pause_map_spaces); i++, mapSpace++) {
         if (evt_get_variable(0, EVT_SAVE_FLAG_PLACES_VISITED + i) != 0) {
-            f32 deltaX = pause_map_targetX - mapSpace->pos.x;
-            f32 deltaY = pause_map_targetY - mapSpace->pos.y;
+            f32 deltaX = gPauseMapTargetX - mapSpace->pos.x;
+            f32 deltaY = gPauseMapTargetY - mapSpace->pos.y;
             f32 sqSum = SQ(deltaX) + SQ(deltaY);
 
             if (sqSum < 400.0f) {
-                pause_map_spacesInSnapRange++;
+                gPauseMapSpacesInSnapRange++;
             }
 
             if (sqSum < lowestSqSum && sqSum < 200.0f) {
@@ -532,14 +532,14 @@ void pause_map_update(MenuPanel* tab) {
         }
     }
 
-    pause_map_cursorCurrentOption = cursorOption;
-    pause_map_cursorCurrentOptionCopy = cursorOption;
+    gPauseMapCursorCurrentOption = cursorOption;
+    gPauseMapCursorCurrentOptionCopy = cursorOption;
 }
 
 void pause_map_cleanup(MenuPanel* tab) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_80270700); i++) {
-        free_hud_element(D_80270700[i]);
+    for (i = 0; i < ARRAY_COUNT(gPauseMapIconIDs); i++) {
+        free_hud_element(gPauseMapIconIDs[i]);
     }
 }

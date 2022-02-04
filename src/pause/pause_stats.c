@@ -77,10 +77,10 @@ INCLUDE_ASM(s32, "pause/138CC0", pause_stats_draw_contents);
 void pause_stats_init(MenuPanel* panel) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gStatsMenuIconIDs); i++) {
+    for (i = 0; i < ARRAY_COUNT(gPauseStatsIconIDs); i++) {
         s32 iconID = create_hud_element(gStatsMenuElements[i]);
 
-        gStatsMenuIconIDs[i] = iconID;
+        gPauseStatsIconIDs[i] = iconID;
         set_hud_element_flags(iconID, 0x80);
     }
 
@@ -212,10 +212,10 @@ void pause_stats_handle_input(MenuPanel* panel) {
 }
 
 void pause_stats_cleanup(MenuPanel* panel) {
-    s32* iconIDs = gStatsMenuIconIDs;
+    s32* iconIDs = gPauseStatsIconIDs;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gStatsMenuIconIDs); i++) {
+    for (i = 0; i < ARRAY_COUNT(gPauseStatsIconIDs); i++) {
         free_hud_element(iconIDs[i]);
     }
 }

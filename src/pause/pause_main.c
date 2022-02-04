@@ -625,7 +625,7 @@ void pause_tutorial_input(s32 *pressed, s32 *held) {
     *held = heldNew;
 }
 
-const f32 rodata_padding[] = {0.0f, 0.0f, 0.0f};
+
 
 void pause_handle_input(s32 pressed, s32 held) {
     s32 height;
@@ -733,6 +733,8 @@ void pause_cleanup(void) {
 
     set_window_update(WINDOW_ID_PAUSE_CURSOR, 2);
 }
+
+const f32 rodata_padding[] = {0.0f, 0.0f, 0.0f};
 
 s32 pause_get_total_equipped_bp_cost(void) {
     s32 totalCost = 0;

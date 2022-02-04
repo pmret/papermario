@@ -305,7 +305,7 @@ Gfx gPauseDLCheckAbilities[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8026F5A0[] = {
+Gfx gPauseDLSpiritsBg[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
