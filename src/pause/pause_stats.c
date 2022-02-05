@@ -1,5 +1,5 @@
 #include "pause_common.h"
-
+static s32 gPauseStatsIconIDs[12];
 // Probably only used here, but could theoretically be used in the main menu too
 typedef struct {
     s32 cursorX;

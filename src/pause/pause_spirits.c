@@ -1,6 +1,10 @@
 #include "pause_common.h"
 #include "sprite.h"
 
+static s32 gPauseSpiritsSpriteIDs[8];
+static s32 gPauseSpiritsIndexes[7];
+static s32 gPauseSpiritsNumSpirits;
+
 extern Gfx gPauseDLSpiritsBg[];
 extern s32 D_8026A2B0;
 extern s32 D_8026FE78[];
@@ -318,7 +322,7 @@ void pause_spirits_handle_input(MenuPanel* panel) {
     }
 
     if (panel->selected != oldSelected) {
-        sfx_play_sound(0xC7);
+        sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
     }
 
     if (gPausePressedButtons & BUTTON_B) {

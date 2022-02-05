@@ -1,10 +1,27 @@
 #include "pause_common.h"
+
+static s16 gPauseBadgesItemIds[128];
+static s32 gPauseBadgesCurrentPage;
+static s32 D_80270284;
+static PauseItemPage gPauseBadgesPages[20];
+static s32 gPauseBadgesSelectedIndex;
+static s32 D_8027037C;
+static s32 gPauseBadgesSelectedItem;
+static s16 gPauseBadgesNumItems;
+static s32 D_80270388;
+static s32 gPauseBadgesCurrentScrollPos;
+static s32 gPauseBadgesTargetScrollPos;
+static s32 D_80270394;
+static s32 gPauseBadgesLevel;
+static s32 gPauseBadgesCurrentTab;
+static s32 gPauseBadgesBShowNotEnoughBP;
+static s32 D_802703A4; // unused
+static s32 gPauseBadgesIconIDs[22];
+
 // Fake "badge" for the None entry that appears on the equipped badges page when nothing is equipped
 #define BADGE_NONE_STANDIN 0x7FFE
 // Invalid badge ID filled in unused slots of gPauseBadgesItemIds
 #define BADGE_INVALID 0x7FFF
-
-extern s32* D_8026FFB0;
 
 void pause_badges_init(MenuPanel* panel);
 void pause_badges_handle_input(MenuPanel* panel);

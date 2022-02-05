@@ -109,6 +109,7 @@ extern s32 gPauseCurrentDescMsg;
 extern HudScript* gPauseCurrentDescIconScript;
 extern s32 gPauseCursorIconID;
 extern s8 gPauseMenuCurrentTab;
+/*
 extern s32 gPauseTutorialFrameCounter;
 extern s32 gPauseCommonIconIDs[8];
 extern s32 gPauseShownDescMsg;
@@ -118,10 +119,13 @@ extern s32 gPauseDescTextOffset;
 extern HudScript* gPauseShownDescIconScript;
 extern s32 gPauseTutorialSprites[3];
 extern s32 D_80270128[2];
+
 extern s32 gPauseTabsIconIDs[6];
 extern s32 gPauseTabsPreviousTab;
 extern s32 gPauseTabsHorizScrollPos;
+
 extern s32 gPauseStatsIconIDs[12];
+
 extern s16 gPauseBadgesItemIds[128];
 extern s32 gPauseBadgesCurrentPage;
 extern s32 D_80270284;
@@ -138,6 +142,7 @@ extern s32 gPauseBadgesLevel;
 extern s32 gPauseBadgesCurrentTab;
 extern s32 gPauseBadgesBShowNotEnoughBP;
 extern s32 gPauseBadgesIconIDs[22];
+
 extern s16 gPauseItemsItemIDs[100];
 extern s32 gPauseItemsCurrentPage;
 extern s32 D_802704CC;
@@ -153,6 +158,7 @@ extern s32 D_802705DC;
 extern s32 gPauseItemsLevel;
 extern s32 gPauseItemsCurrentTab;
 extern s32 gPauseItemsIconIDs[20];
+
 extern s32 gPausePartnersIconIDs[8];
 extern s32 gPausePartnersSpriteIDs[8];
 extern s32 gPausePartnersPartnerIdx[8];
@@ -161,9 +167,11 @@ extern s32 gPausePartnersSelectedMove;
 extern f32 gPausePartnersRotAngle;
 extern s32 gPausePartnersLevel;
 extern s32 gPausePartnersNumPartners;
+
 extern s32 gPauseSpiritsSpriteIDs[8];
 extern s32 gPauseSpiritsIndexes[7];
 extern s32 gPauseSpiritsNumSpirits;
+
 extern s32 gPauseMapIconIDs[1];
 extern f32 gPauseMapCameraX;
 extern f32 gPauseMapCameraY;
@@ -174,6 +182,7 @@ extern f32 gPauseMapTargetY;
 extern s32 gPauseMapCursorCurrentOption;
 extern s32 gPauseMapCursorCurrentOptionCopy;
 extern s32 gPauseMapSpacesInSnapRange;
+*/
 extern s8  gPauseBufferPal1[512];
 extern s8  gPauseBufferImg1[15752];
 extern s8  gPauseBufferPal2[512];

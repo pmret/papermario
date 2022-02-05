@@ -1,6 +1,17 @@
 #include "pause_common.h"
 #include "message_ids.h"
 
+static s32 gPauseMapIconIDs[1];
+static f32 gPauseMapCameraX;
+static f32 gPauseMapCameraY;
+static s32 gPauseMapMarioX;
+static s32 gPauseMapMarioY;
+static f32 gPauseMapTargetX;
+static f32 gPauseMapTargetY;
+static s32 gPauseMapCursorCurrentOption;
+static s32 gPauseMapCursorCurrentOptionCopy;
+static s32 gPauseMapSpacesInSnapRange;
+
 void pause_map_init(MenuPanel* tab);
 void pause_map_handle_input(MenuPanel* tab);
 void pause_map_update(MenuPanel* tab);

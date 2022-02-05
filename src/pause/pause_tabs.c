@@ -1,5 +1,7 @@
 #include "pause_common.h"
-
+static s32 gPauseTabsIconIDs[6];
+static s32 gPauseTabsPreviousTab;
+static s32 gPauseTabsHorizScrollPos;
 HudScript* D_8024F1B0[] = { HudScript_HeaderStats, HudScript_HeaderBadges, HudScript_HeaderItems,
                             HudScript_HeaderParty, HudScript_HeaderSpirits, HudScript_HeaderMap };
 s8 D_8024F1C8[] = { 0, 1, 2, 3, 4, 5 };

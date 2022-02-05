@@ -461,7 +461,7 @@ s32 popup_menu_update(void) {
                 }
 
                 if (D_8010D64C != D_8010D648) {
-                    sfx_play_sound(0xC7);
+                    sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
                 }
 
                 for (i = 0; i < 4; i++) {

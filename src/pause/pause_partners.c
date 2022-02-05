@@ -1,6 +1,15 @@
 #include "pause_common.h"
 #include "sprite.h"
 
+static s32 gPausePartnersIconIDs[8];
+static s32 gPausePartnersSpriteIDs[8];
+static s32 gPausePartnersPartnerIdx[8];
+static s32 gPausePartnersCurrentPartnerIdx;
+static s32 gPausePartnersSelectedMove;
+static f32 gPausePartnersRotAngle;
+static s32 gPausePartnersLevel;
+static s32 gPausePartnersNumPartners;
+
 typedef struct PartnerPosition {
     /* 0x00 */ f32 pos;
     /* 0x04 */ s32 index;
@@ -16,13 +25,13 @@ void pause_partners_cleanup(MenuPanel* panel);
 HudScript* D_8024F600[] = {
     HudScript_FPCost, HudScript_StatFp_1, HudScript_PartnerRank, HudScript_PartnerRank,
     HudScript_MoveDiamond, HudScript_MoveBlueOrb, HudScript_MoveGreenOrb, HudScript_MoveRedOrb };
-Vp D_8024F620 = {
+Vp gPausePartnersViewport = {
     .vp = {
         .vscale = { 640, 480, 511, 0 },
         .vtrans = { 640, 480, 511, 0 },
     }
 };
-s32 D_8024F630[][4] = {
+s32 gPausePartnersSpriteAnims[][4] = {
     { 0x00010000, 0x00010002, 0x00010008, 0xFFFFFFFF },
     { 0x00020000, 0x00020004, 0x0002000D, 0xFFFFFFFF },
     { 0x00030000, 0x00030005, 0x0003000E, 0xFFFFFFFF },
@@ -34,17 +43,17 @@ s32 D_8024F630[][4] = {
 };
 s32 gPausePartnersPartnerIDs[] = { 1, 2, 3, 4, 9, 6, 7, 8};
 s32 D_8024F6D0[] = { 0x00280006, 0x00280013, 0x00280020, 0x0028002D, 0x0028003A, 0x00280047, 0x00280054, 0x00280061 };
-s32 D_8024F6F0[] = { MOVE_HEADBONK1, MOVE_SHELL_TOSS1, MOVE_BODY_SLAM1, MOVE_SKY_DIVE1,
+s32 gPausePartnersMoveBase[] = { MOVE_HEADBONK1, MOVE_SHELL_TOSS1, MOVE_BODY_SLAM1, MOVE_SKY_DIVE1,
                      MOVE_SMACK1, MOVE_ELECTRO_DASH1, MOVE_BELLY_FLOP1, MOVE_SPINY_FLIP1 };
-s8 D_8024F710[] = {
+s8 gPausePartnersGridData[] = {
     4, 5, 6, 7,
     0, 1, 2, 3
 };
-char* D_8024F718[] = { "party_kurio", "party_kameki", "party_pinki", "party_pareta", "party_resa",  "party_akari", "party_opuku", "party_pokopi", "letter_peach" };
-s8* D_8024F73C[] = { gPauseBufferImg1, gPauseBufferImg2 };
-s8* D_8024F744[] = { gPauseBufferPal1, gPauseBufferPal2 };
+char* gPausePartnersAssetNames[] = { "party_kurio", "party_kameki", "party_pinki", "party_pareta", "party_resa",  "party_akari", "party_opuku", "party_pokopi", "letter_peach" };
+s8* gPausePartnersImageBuffers[] = { gPauseBufferImg1, gPauseBufferImg2 };
+s8* gPausePartnersPaletteBuffers[] = { gPauseBufferPal1, gPauseBufferPal2 };
 s32 D_8024F74C = 0;
-Gfx D_8024F750[] = {
+Gfx gPausePartnersDL[] = {
     gsDPPipeSync(),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -62,7 +71,7 @@ Gfx D_8024F750[] = {
 };
 s32 D_8024F7C0 = -1;
 s32 D_8024F7C4 = -1;
-MenuWindowBP D_8024F7C8[] = { { .windowID = WINDOW_ID_34,
+MenuWindowBP D_8024F7C8[] = { { .windowID = WINDOW_ID_PAUSE_PARTNERS,
                                          .unk_01 = 0,
                                          .pos = { .x = 3,
                                                   .y = 16 },
@@ -76,7 +85,7 @@ MenuWindowBP D_8024F7C8[] = { { .windowID = WINDOW_ID_34,
                                          .unk_1C = 0,
                                          .style = &gPauseWS_20 },
 
-                                       { .windowID = WINDOW_ID_35,
+                                       { .windowID = WINDOW_ID_PAUSE_PARTNERS_TITLE,
                                          .unk_01 = 0,
                                          .pos = { .x = 8,
                                                   .y = 103 },
@@ -85,12 +94,12 @@ MenuWindowBP D_8024F7C8[] = { { .windowID = WINDOW_ID_34,
                                          .unk_0A = { 0, 0},
                                          .fpDrawContents = &pause_partners_draw_title,
                                          .tab = NULL,
-                                         .parentID = WINDOW_ID_34,
+                                         .parentID = WINDOW_ID_PAUSE_PARTNERS,
                                          .fpUpdate = { 1 },
                                          .unk_1C = 0,
                                          .style = &gPauseWS_22 },
 
-                                       { .windowID = WINDOW_ID_36,
+                                       { .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
                                          .unk_01 = 0,
                                          .pos = { .x = 133,
                                                   .y = 36 },
@@ -99,12 +108,12 @@ MenuWindowBP D_8024F7C8[] = { { .windowID = WINDOW_ID_34,
                                          .unk_0A = { 0, 0},
                                          .fpDrawContents = &pause_partners_draw_movelist,
                                          .tab = NULL,
-                                         .parentID = WINDOW_ID_34,
+                                         .parentID = WINDOW_ID_PAUSE_PARTNERS,
                                          .fpUpdate = { 2 },
                                          .unk_1C = 0,
                                          .style = (WindowStyleCustom*)-1 },
 
-                                       { .windowID = WINDOW_ID_37,
+                                       { .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE,
                                          .unk_01 = 0,
                                          .pos = { .x = 12,
                                                   .y = -6 },
@@ -113,12 +122,12 @@ MenuWindowBP D_8024F7C8[] = { { .windowID = WINDOW_ID_34,
                                          .unk_0A = { 0, 0},
                                          .fpDrawContents = &pause_partners_draw_movelist_title,
                                          .tab = NULL,
-                                         .parentID = WINDOW_ID_36,
+                                         .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
                                          .fpUpdate = { 1 },
                                          .unk_1C = 0,
                                          .style = (WindowStyleCustom*)-1 },
 
-                                       { .windowID = WINDOW_ID_38,
+                                       { .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_FLOWER,
                                          .unk_01 = 0,
                                          .pos = { .x = 102,
                                                   .y = -12 },
@@ -127,21 +136,26 @@ MenuWindowBP D_8024F7C8[] = { { .windowID = WINDOW_ID_34,
                                          .unk_0A = { 0, 0},
                                          .fpDrawContents = &pause_partners_draw_movelist_flower,
                                          .tab = NULL,
-                                         .parentID = WINDOW_ID_36,
+                                         .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
                                          .fpUpdate = { 1 },
                                          .unk_1C = 0,
                                          .style = (WindowStyleCustom*)-1 } };
 u8 D_8024F87C[] = {0x00, 0x01, 0x02, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07, 0x07, 0x08 };
-MenuPanel gPausePanelPartners = { .initialized = FALSE, .col = 0, .row = 1, .selected = 0,
-                         .page = 0,
-                         .numCols = 4,
-                         .numRows = 2,
-                         .numPages = 0,
-                         .gridData = D_8024F710,
-                         .fpInit = &pause_partners_init,
-                         .fpHandleInput = &pause_partners_handle_input,
-                         .fpUpdate = &pause_partners_update,
-                         .fpCleanup = &pause_partners_cleanup };
+MenuPanel gPausePanelPartners = {
+    .initialized = FALSE,
+    .col = 0,
+    .row = 1,
+    .selected = 0,
+    .page = 0,
+    .numCols = 4,
+    .numRows = 2,
+    .numPages = 0,
+    .gridData = gPausePartnersGridData,
+    .fpInit = &pause_partners_init,
+    .fpHandleInput = &pause_partners_handle_input,
+    .fpUpdate = &pause_partners_update,
+    .fpCleanup = &pause_partners_cleanup
+};
 
 void pause_partners_load_portrait(s32 arg0) {
     s32 size;
@@ -149,15 +163,15 @@ void pause_partners_load_portrait(s32 arg0) {
 
     if (D_8024F7C0 != gPausePartnersPartnerIdx[arg0]) {
         D_8024F7C0 = gPausePartnersPartnerIdx[arg0];
-        asset = load_asset_by_name(D_8024F718[D_8024F7C0], &size);
-        decode_yay0(asset, D_8024F744[0]);
+        asset = load_asset_by_name(gPausePartnersAssetNames[D_8024F7C0], &size);
+        decode_yay0(asset, gPausePartnersPaletteBuffers[0]);
         general_heap_free(asset);
     }
 
     if (D_8024F7C4 != gPausePartnersPartnerIdx[(arg0 + 1) % gPausePartnersNumPartners]) {
         D_8024F7C4 = gPausePartnersPartnerIdx[(arg0 + 1) % gPausePartnersNumPartners];
-        asset = load_asset_by_name(D_8024F718[D_8024F7C4], &size);
-        decode_yay0(asset, D_8024F744[1]);
+        asset = load_asset_by_name(gPausePartnersAssetNames[D_8024F7C4], &size);
+        decode_yay0(asset, gPausePartnersPaletteBuffers[1]);
         general_heap_free(asset);
     }
 }
@@ -181,7 +195,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     s32 dd;
     s32 a0, s8;
 
-    gSPViewport(gMasterGfxPos++, &D_8024F620);
+    gSPViewport(gMasterGfxPos++, &gPausePartnersViewport);
     guOrthoF(sp50, 0.0f, 320.0f, 240.0f, 0.0f, -100.0f, 100.0f, 1.0f);
     guMtxF2L(sp50, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
@@ -277,8 +291,8 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     s8 = ta2;
     pause_partners_load_portrait(s8 % gPausePartnersNumPartners);
     for (i = 0; i < 2; s7 += 150, i++) {
-        gSPDisplayList(gMasterGfxPos++, &D_8024F750);
-        gDPLoadTLUT_pal256(gMasterGfxPos++, D_8024F744[i]);
+        gSPDisplayList(gMasterGfxPos++, &gPausePartnersDL);
+        gDPLoadTLUT_pal256(gMasterGfxPos++, gPausePartnersPaletteBuffers[i]);
 
         for (l = 0; l < 20; l++) {
             //dd = 12 * l;
@@ -288,7 +302,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
                 t6 = 106 - 12 * l;
             }
 
-            gDPLoadTextureTile(gMasterGfxPos++, D_8024F73C[i], G_IM_FMT_CI, G_IM_SIZ_8b, 150, 0,
+            gDPLoadTextureTile(gMasterGfxPos++, gPausePartnersImageBuffers[i], G_IM_FMT_CI, G_IM_SIZ_8b, 150, 0,
                                 0, 12 * l, 149, 12 * l + t6 - 1, 0,
                                 G_TX_CLAMP, G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
             pause_draw_rect((baseX + 0x82 + s7) * 4, (baseY + 0x18 + 12 * l) * 4, (baseX + 0x118 + s7) * 4, (baseY + 0x18 + 12 * l + t6) * 4, 0, 0,
@@ -384,13 +398,13 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         style = 1;
 
         if (i == 0) {
-            moveNameID = gMoveTable[D_8024F6F0[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].moveNameID;
+            moveNameID = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].moveNameID;
         } else {
-            moveNameID =  gMoveTable[D_8024F6F0[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + i].moveNameID;
+            moveNameID =  gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + i].moveNameID;
         }
 
         if (i > 0) {
-            costFP = gMoveTable[D_8024F6F0[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + i].costFP;
+            costFP = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + i].costFP;
         } else {
             costFP = 0;
         }
@@ -442,8 +456,8 @@ void pause_partners_init(MenuPanel* panel) {
         return;
     }
 
-    for (i = 0; i < 8; i++) {
-        gPausePartnersSpriteIDs[i] = spr_load_npc_sprite(D_8024F630[i][0], D_8024F630[i]);
+    for (i = 0; i < ARRAY_COUNT(gPausePartnersSpriteAnims); i++) {
+        gPausePartnersSpriteIDs[i] = spr_load_npc_sprite(gPausePartnersSpriteAnims[i][0], gPausePartnersSpriteAnims[i]);
     }
 
     for (i = 0; i < 8; i++) {
@@ -496,7 +510,7 @@ void pause_partners_handle_input(MenuPanel* panel) {
         }
 
         if (s0) {
-            sfx_play_sound(0xC7);
+            sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
             gPausePartnersCurrentPartnerIdx += s0;
 
             if (gPausePartnersCurrentPartnerIdx < 0) {
@@ -552,7 +566,7 @@ void pause_partners_handle_input(MenuPanel* panel) {
         }
 
         if (gPausePartnersSelectedMove != oldPos) {
-            sfx_play_sound(0xC7);
+            sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
         }
     }
 
@@ -581,9 +595,9 @@ void pause_partners_handle_input(MenuPanel* panel) {
     if (gPausePartnersLevel == 0) {
         gPauseCurrentDescMsg = D_8024F6D0[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]];
     } else if (gPausePartnersSelectedMove == 0) {
-        gPauseCurrentDescMsg = gMoveTable[D_8024F6F0[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].menuDescID;
+        gPauseCurrentDescMsg = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]]].menuDescID;
     } else {
-        gPauseCurrentDescMsg = gMoveTable[D_8024F6F0[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + gPausePartnersSelectedMove].menuDescID;
+        gPauseCurrentDescMsg = gMoveTable[gPausePartnersMoveBase[gPausePartnersPartnerIdx[gPausePartnersCurrentPartnerIdx]] + 2 + gPausePartnersSelectedMove].menuDescID;
     }
 }
 
@@ -608,9 +622,9 @@ void pause_partners_update(MenuPanel* panel) {
 
     for (i = 0; i < gPausePartnersNumPartners; i++) {
         if (i == gPausePartnersCurrentPartnerIdx) {
-            spr_update_sprite(gPausePartnersSpriteIDs[gPausePartnersPartnerIdx[i]], D_8024F630[gPausePartnersPartnerIdx[i]][1], 1.0f);
+            spr_update_sprite(gPausePartnersSpriteIDs[gPausePartnersPartnerIdx[i]], gPausePartnersSpriteAnims[gPausePartnersPartnerIdx[i]][1], 1.0f);
         } else {
-            spr_update_sprite(gPausePartnersSpriteIDs[gPausePartnersPartnerIdx[i]], D_8024F630[gPausePartnersPartnerIdx[i]][0], 1.0f);
+            spr_update_sprite(gPausePartnersSpriteIDs[gPausePartnersPartnerIdx[i]], gPausePartnersSpriteAnims[gPausePartnersPartnerIdx[i]][0], 1.0f);
         }
     }
 

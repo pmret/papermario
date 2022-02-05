@@ -917,7 +917,6 @@ segments:
     start: 0x135EE0
     vram: 0x80242BA0
     subsegments:
-    - [0x135EE0, c, pause_bss]
     - [0x135EE0, c, pause_main]
     - [0x137ED0, c, pause_tabs]
     - [0x138CC0, c, pause_stats]

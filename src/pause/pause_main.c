@@ -3,6 +3,31 @@
 #include "sprite.h"
 #include "pause_common.h"
 
+#ifndef M2CTX
+#define BSS __attribute__ ((section (".bss")))
+#else
+#define BSS static
+#endif
+
+BSS s32 gPauseHeldButtons;
+BSS s32 gPausePressedButtons;
+BSS s32 gPauseCurrentDescMsg;
+BSS HudScript* gPauseCurrentDescIconScript;
+BSS s32 gPauseCursorIconID;
+BSS s8 gPauseMenuCurrentTab;
+BSS s8 D_802700D[7]; //padding
+
+static s32 gPauseTutorialFrameCounter;
+static s32 D_802700E4;
+static s32 gPauseCommonIconIDs[8];
+static s32 gPauseShownDescMsg;
+static s32 gPauseDescTextMaxPos;
+static s32 gPauseDescTextPos;
+static s32 gPauseDescTextOffset;
+static HudScript* gPauseShownDescIconScript;
+static s32 gPauseTutorialSprites[3];
+static s32 D_80270128[2]; // padding
+
 HudScript* gPauseIconScripts[] = {
     HudScript_AnimatedCursorHand, HudScript_DescMsgPrev, HudScript_DescMsgNext, HudScript_UnusedBadge,
     HudScript_StickTapRight, HudScript_PressAButton, HudScript_PressStartButton, HudScript_StartButtonText

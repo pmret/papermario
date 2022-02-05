@@ -415,3 +415,15 @@ void pause_draw_menu_label(s32 index, s32 x, s32 y) {
     gSPDisplayList(gMasterGfxPos++, gPauseDLLabels[index]);
     pause_draw_rect(x * 4, y * 4, (x + xOffset) * 4, (y + 16) * 4, 0, 0, 0, 0x400, 0x400);
 }
+
+
+#ifndef M2CTX
+#define BSS __attribute__ ((section (".bss")))
+#else
+#define BSS static
+#endif
+
+BSS s8  gPauseBufferPal1[512];
+BSS s8  gPauseBufferImg1[15752];
+BSS s8  gPauseBufferPal2[512];
+BSS s8  gPauseBufferImg2[15752];

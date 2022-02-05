@@ -1,5 +1,21 @@
 #include "pause_common.h"
 
+static s16 gPauseItemsItemIDs[100];
+static s32 gPauseItemsCurrentPage;
+static s32 D_802704CC;
+static PauseItemPage gPauseItemsPages[20];
+static s32 gPauseItemsSelectedIndex;
+static u32 D_802705C4;
+static s32 gPauseItemsSelectedItem;
+static s16 gPauseItemsNumItems;
+static s32 D_802705D0;
+static s32 gPauseItemsCurrentScrollPos;
+static s32 gPauseItemsTargetScrollPos;
+static s32 D_802705DC;
+static s32 gPauseItemsLevel;
+static s32 gPauseItemsCurrentTab;
+static s32 gPauseItemsIconIDs[20];
+
 void pause_items_init(MenuPanel* panel);
 void pause_items_handle_input(MenuPanel* panel);
 void pause_items_update(MenuPanel* panel);
@@ -503,7 +519,7 @@ void pause_items_handle_input(MenuPanel* panel) {
 
             gPauseItemsSelectedIndex = column + row * gPauseItemsPages[gPauseItemsCurrentPage].numCols;
             if (gPauseItemsSelectedIndex != oldSelectedIndex) {
-                sfx_play_sound(0xC7);
+                sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
             }
 
             gPauseItemsSelectedItem = gPauseItemsItemIDs[gPauseItemsSelectedIndex];
