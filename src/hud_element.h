@@ -112,6 +112,8 @@ typedef struct HudElement {
 
 typedef HudElement* HudElementList[320];
 
+extern HudScript* gItemHudScripts[337][2];
+
 extern HudScript HudScript_AnimatedHandPointer[];
 extern HudScript HudScript_StatusCoin[];
 extern HudScript HudScript_Refund[];
@@ -189,6 +191,7 @@ void render_hud_elements_world(void);
 
 void func_80143C48(s32 arg0, s32 arg1, s32 arg2);
 void func_80144218(s32 arg0);
+void func_80144238(s32 arg0);
 void func_80144258(s32 arg0);
 void func_80144278(s32 arg0);
 

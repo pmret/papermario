@@ -218,10 +218,10 @@ typedef struct PlayerData {
     /* 0x001 */ s8 hammerLevel;
     /* 0x002 */ s8 curHP;
     /* 0x003 */ s8 curMaxHP;
-    /* 0x004 */ u8 hardMaxHP;
+    /* 0x004 */ s8 hardMaxHP;
     /* 0x005 */ s8 curFP;
     /* 0x006 */ s8 curMaxFP;
-    /* 0x007 */ u8 hardMaxFP;
+    /* 0x007 */ s8 hardMaxFP;
     /* 0x008 */ s8 maxBP;
     /* 0x009 */ s8 level;
     /* 0x00A */ s8 hasActionCommands;
@@ -863,7 +863,7 @@ typedef struct BattleStatus {
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ s8 totalStarPoints;
-    /* 0x079 */ u8 pendingStarPoints; /* how many to add */
+    /* 0x079 */ s8 pendingStarPoints; /* how many to add */
     /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
     /* 0x07B */ u8 damageTaken;
     /* 0x07C */ s8 changePartnerAllowed;
@@ -1866,7 +1866,7 @@ typedef struct Actor {
     /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
-    /* 0x20C */ struct s32* statusTable;
+    /* 0x20C */ s32* statusTable;
     /* 0x210 */ s8 debuff;
     /* 0x211 */ s8 debuffDuration;
     /* 0x212 */ s8 staticStatus; /* 0B = yes */

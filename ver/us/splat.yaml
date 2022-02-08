@@ -5109,7 +5109,19 @@ segments:
     subsegments:
     - [0x79D8A0, c]
     - [0x79DE50]
-  - [0x79EF40, bin] # todo identify
+  - type: code # todo identify
+    start: 0x79EF40
+    vram: 0x802A1000
+    overlay: True
+    subsegments:
+    - [0x79EF40, bin]
+  - type: code # todo identify
+    start: 0x7A89A0
+    vram: 0x802A1000
+    overlay: True
+    subsegments:
+    - [0x7A89A0, bin]
+  - [0x7B5960, bin]  # todo identify
   - dir: world/script_api
     type: code
     start: 0x7E0E80

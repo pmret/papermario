@@ -384,7 +384,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             effectRet = fx_recover(iVar1, fVar2, fVar3, fVar4, iVar5);
             break;
         case EFFECT_DISABLE_X:
-            effectRet = fx_disable_x(iVar1, fVar2, fVar3, fVar4, iVar5);
+            effectRet = (EffectInstance*)fx_disable_x(iVar1, fVar2, fVar3, fVar4, iVar5);
             break;
         case EFFECT_BOMBETTE_BREAKING:
             effectRet = fx_bombette_breaking(iVar1, iVar2, iVar3, fVar4, iVar5, iVar6);
