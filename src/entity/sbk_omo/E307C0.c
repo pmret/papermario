@@ -45,7 +45,7 @@ void func_802BC2BC_E30C0C(Entity* entity) {
 
     if (result != 0) {
         data->unk_02 &= ~1;
-        playFX_18(3, entity->position.x, entity->position.y + 35.0f, entity->position.z, 0, -1.0f, 0, 3);
+        fx_damage_stars(3, entity->position.x, entity->position.y + 35.0f, entity->position.z, 0, -1.0f, 0, 3);
         if (result > 0) {
             data->unk_02 |= 1;
         }

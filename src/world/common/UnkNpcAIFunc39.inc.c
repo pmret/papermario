@@ -36,7 +36,7 @@ void N(UnkNpcAIFunc39)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
             npc->jumpVelocity = 0.0f;
             npc->pos.y = posY;
             npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
-            fx_walk(2, npc->pos.x, npc->pos.y, npc->pos.z, 0.0f, 0.0f);
+            fx_walking_dust(2, npc->pos.x, npc->pos.y, npc->pos.z, 0.0f, 0.0f);
             script->functionTemp[0] = 12;
 
             if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) == 0) {

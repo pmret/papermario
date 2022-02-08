@@ -333,7 +333,7 @@ void func_802B6120_E2A7D0(void) {
             parasolStruct->position.y = playerStatus->position.y - 20;
         }
         if (parasolStruct->unk_08 < 0xB && parasolStruct->unk_08 & 1) {
-            playFX_11(3, parasolStruct->position.x - 8, parasolStruct->position.y + 50, parasolStruct->position.z, 2);
+            fx_sparkles(3, parasolStruct->position.x - 8, parasolStruct->position.y + 50, parasolStruct->position.z, 2);
             temp_f22 = parasolStruct->position.x;
             tempX = (((cam->currentYaw + playerStatus->spriteFacingAngle) - 90) * TAU) / 360;
 
@@ -347,7 +347,7 @@ void func_802B6120_E2A7D0(void) {
     } else if (parasolStruct->unk_08 == 0) {
         parasolStruct->unk_08 = -1;
         if (parasolStruct->npc != NULL) {
-            playFX_84(playerStatus->unk_0D - 1, parasolStruct->npc->pos.x, parasolStruct->npc->pos.y, parasolStruct->npc->pos.z, 1, parasolStruct->npc->yawCamOffset);
+            fx_pink_sparkles(playerStatus->unk_0D - 1, parasolStruct->npc->pos.x, parasolStruct->npc->pos.y, parasolStruct->npc->pos.z, 1, parasolStruct->npc->yawCamOffset);
         }
     }
     if (parasolStruct->unk_0C != 0) {
@@ -356,7 +356,7 @@ void func_802B6120_E2A7D0(void) {
                 sfx_play_sound_at_player(0xFE, 0);
             }
             if ((parasolStruct->unk_0C & 3) == 0) {
-                playFX_22(4, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 50, 50, 0x28, 0x1E);
+                fx_stars_shimmer(4, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 50, 50, 0x28, 0x1E);
             }
         }
         parasolStruct->unk_0C--;

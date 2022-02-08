@@ -141,7 +141,7 @@ ApiStatus func_80238B60_6F1C40(Evt* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "battle/partner/goombario", func_80238BCC_6F1CAC);
 
 ApiStatus func_80238E04_6F1EE4(Evt* script, s32 isInitialCall) {
-    D_8023CDA0 = playFX_6C(0, 206, 144, 0, 1.0f, 0);
+    D_8023CDA0 = fx_tattle_window(0, 206, 144, 0, 1.0f, 0);
 
     return ApiStatus_DONE2;
 }
@@ -222,7 +222,7 @@ ApiStatus func_802390C8_6F21A8(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     f32 var4 = evt_get_float_variable(script, *args++);
 
-    playFX_6B(6, var1, var2, var3, var4, 45);
+    fx_energy_in_out(6, var1, var2, var3, var4, 45);
 
     return ApiStatus_DONE2;
 }

@@ -6,7 +6,7 @@
 struct BGMPlayer;
 struct UnkAl19E0;
 
-typedef void (*UnkFuncAl)();
+typedef void (*UnkFuncAl)(void);
 
 typedef union UnkField {
     u8 u8;

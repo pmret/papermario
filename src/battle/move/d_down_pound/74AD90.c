@@ -14,9 +14,9 @@ ApiStatus func_802A10A4_74AE34(Evt* script, s32 isInitialCall) {
     s32 var2 = evt_get_variable(script, *args++);
 
     if (script->varTable[10] == 0) {
-        playFX_32(TRUE, var0 + 30, var1 + 25, var2, 45.0f);
+        fx_green_impact(TRUE, var0 + 30, var1 + 25, var2, 45.0f);
     } else {
-        playFX_32(FALSE, var0 + 30, var1 + 25, var2, 45.0f);
+        fx_green_impact(FALSE, var0 + 30, var1 + 25, var2, 45.0f);
     }
 
     return ApiStatus_DONE2;

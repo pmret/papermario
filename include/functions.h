@@ -17,9 +17,6 @@ void nuBoot(void);
 void boot_idle(void);
 void boot_main(void);
 
-void osCleanupThread(void);
-OSThread* osGetActiveQueue(void);
-
 f32 signF(f32 val);
 
 void* heap_malloc(s32 size);
@@ -684,11 +681,16 @@ s32 get_msg_lines(s32 messageID);
 void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, s32, void* drawContents, PopupMessage* popup, s32 parent);
 void set_window_update(s32 panelID, WindowUpdateFunc);
 void snd_stop_sound(s32 soundID);
+void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
+void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
+
+void sfx_adjust_env_sound_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
+void sfx_stop_sound(s32 soundID);
+
 void partner_disable_input(void);
 void func_80268798(s32, s32, s32, s32);
 void func_8026880C(s32, s32, s32);
 void func_802687E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
-void sfx_stop_sound(s32 soundID);
 void close_message(MessagePrintState* msgPrintState);
 void show_foreground_models_unchecked(void);
 void hide_foreground_models_unchecked(void);
@@ -797,6 +799,7 @@ void func_80268770(s32, s32, s32);
 void func_80268C9C(void);
 void func_802B6CF0_E2B3A0(void);
 void func_80269160(void);
+void func_800E24F8(void);
 void load_tattle_flags(s32);
 void remove_consumable(void);
 void delete_shadow(s32);
@@ -813,6 +816,9 @@ void draw_encounters_neutral(void);
 void show_first_strike_message(void);
 void entity_upgrade_block_hide_content(s32);
 s32 lookup_defense(s32*, s32);
+void peach_check_for_parasol_input(void);
+void peach_sync_disguise_npc(void);
+s32 check_conversation_trigger(void);
 
 void clear_player_status(void);
 void clear_entity_models(void);

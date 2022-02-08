@@ -92,7 +92,7 @@ void entity_SuperBlockContent_idle(Entity* entity) {
     if (data->unk_0A == 0 && gOverrideFlags == 0) {
         if (--data->unk_02 <= 0) {
             data->unk_02 = 50;
-            playFX_22(3, entity->position.x, entity->position.y, entity->position.z, 22.0f, 8.0f, 4, 20);
+            fx_stars_shimmer(3, entity->position.x, entity->position.y, entity->position.z, 22.0f, 8.0f, 4, 20);
         }
     }
 }

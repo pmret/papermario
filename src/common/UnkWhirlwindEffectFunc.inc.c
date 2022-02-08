@@ -15,6 +15,6 @@ ApiStatus N(UnkWhirlwindEffectFunc)(Evt* script, s32 isInitialCall) {
     N(effectStruct).unk_2C = var2 - 10.0f;
     N(effectStruct).unk_30 = var3;
 
-    playFX_46_whirlwind(6, &N(effectStruct), 1.0f, var4);
+    fx_46(6, &N(effectStruct), 1.0f, var4);
     return ApiStatus_DONE2;
 }

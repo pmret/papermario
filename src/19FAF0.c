@@ -4,12 +4,12 @@
 #include "script_api/battle.h"
 
 ApiStatus func_80271210(Evt* script, s32 isInitialCall) {
-    playFX_31(0, script->varTable[0], script->varTable[1], script->varTable[2]);
+    fx_debuff(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80271258(Evt* script, s32 isInitialCall) {
-    playFX_31(1, script->varTable[0], script->varTable[1], script->varTable[2]);
+    fx_debuff(1, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
@@ -23,7 +23,7 @@ ApiStatus func_802713B0(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(ApiStatus, "19FAF0", func_802713B0, Evt* script, s32 isInitialCall);
 
 ApiStatus func_8027143C(Evt* script, s32 isInitialCall) {
-    playFX_30(0, script->varTable[0], script->varTable[1], script->varTable[2]);
+    fx_big_snowflakes(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 

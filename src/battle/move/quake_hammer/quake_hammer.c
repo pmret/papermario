@@ -638,11 +638,11 @@ EvtScript D_802A3168_0073D038 = {
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
         EVT_ADD(LW(0), 24)
         EVT_ADD(LW(1), 10)
-        EVT_CALL(PlayEffect, EFFECT_ID_1D, 1, LW(0), LW(1), LW(2), 60, 8, 0, 30, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LW(0), LW(1), LW(2), 60, 8, 0, 30, 0, 0, 0, 0, 0)
         EVT_WAIT_FRAMES(2)
-        EVT_CALL(PlayEffect, EFFECT_ID_1D, 1, LW(0), LW(1), LW(2), 60, 8, 33, 30, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LW(0), LW(1), LW(2), 60, 8, 33, 30, 0, 0, 0, 0, 0)
         EVT_WAIT_FRAMES(2)
-        EVT_CALL(PlayEffect, EFFECT_ID_1D, 1, LW(0), LW(1), LW(2), 60, 8, 66, 30, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LW(0), LW(1), LW(2), 60, 8, 66, 30, 0, 0, 0, 0, 0)
     EVT_END_CHILD_THREAD
     EVT_CALL(DidActionSucceed, LW(0))
     EVT_SWITCH(LW(0))
@@ -662,8 +662,8 @@ EvtScript D_802A3168_0073D038 = {
                 EVT_CALL(GetActorPos, ACTOR_PLAYER, LW(0), LW(1), LW(2))
                 EVT_ADD(LW(0), 24)
                 EVT_ADD(LW(1), 10)
-                EVT_CALL(PlayEffect, EFFECT_ID_1D, 0, LW(0), LW(1), LW(2), 72, 8, 0, 30, 0, 0, 0, 0, 0)
-                EVT_CALL(PlayEffect, EFFECT_ID_1D, 0, LW(0), LW(1), LW(2), 72, 8, 24, 30, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LW(0), LW(1), LW(2), 72, 8, 0, 30, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 0, LW(0), LW(1), LW(2), 72, 8, 24, 30, 0, 0, 0, 0, 0)
             EVT_END_CHILD_THREAD
         EVT_CASE_DEFAULT
             EVT_CALL(StartRumble, 9)

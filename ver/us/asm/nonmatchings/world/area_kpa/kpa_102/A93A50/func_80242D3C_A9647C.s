@@ -103,7 +103,7 @@ glabel func_80242D3C_A9647C
 /* A96600 80242EC0 44810000 */  mtc1      $at, $f0
 /* A96604 80242EC4 2402000D */  addiu     $v0, $zero, 0xd
 /* A96608 80242EC8 AFA20014 */  sw        $v0, 0x14($sp)
-/* A9660C 80242ECC 0C01BFEC */  jal       playFX_13
+/* A9660C 80242ECC 0C01BFEC */  jal       fx_gather_energy_pink
 /* A96610 80242ED0 E7A00010 */   swc1     $f0, 0x10($sp)
 /* A96614 80242ED4 2402000F */  addiu     $v0, $zero, 0xf
 /* A96618 80242ED8 A602008E */  sh        $v0, 0x8e($s0)

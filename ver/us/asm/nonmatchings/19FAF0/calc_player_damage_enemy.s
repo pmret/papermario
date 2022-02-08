@@ -277,7 +277,7 @@ glabel calc_player_damage_enemy
 /* 1A0608 80271D28 8E460010 */  lw        $a2, 0x10($s2)
 /* 1A060C 80271D2C 44072000 */  mfc1      $a3, $f4
 /* 1A0610 80271D30 24080001 */  addiu     $t0, $zero, 1
-/* 1A0614 80271D34 0C01C184 */  jal       playFX_24
+/* 1A0614 80271D34 0C01C184 */  jal       fx_ring_blast
 /* 1A0618 80271D38 AFA80028 */   sw       $t0, 0x28($sp)
 .L80271D3C:
 /* 1A061C 80271D3C 8E820188 */  lw        $v0, 0x188($s4)
@@ -304,7 +304,7 @@ glabel calc_player_damage_enemy
 /* 1A066C 80271D8C 8E45000C */  lw        $a1, 0xc($s2)
 /* 1A0670 80271D90 8E460010 */  lw        $a2, 0x10($s2)
 /* 1A0674 80271D94 44072000 */  mfc1      $a3, $f4
-/* 1A0678 80271D98 0C01C70C */  jal       playFX_5F
+/* 1A0678 80271D98 0C01C70C */  jal       fx_water_splash
 /* 1A067C 80271D9C 0000202D */   daddu    $a0, $zero, $zero
 .L80271DA0:
 /* 1A0680 80271DA0 8E820188 */  lw        $v0, 0x188($s4)
@@ -320,7 +320,7 @@ glabel calc_player_damage_enemy
 /* 1A06A8 80271DC8 8E460010 */  lw        $a2, 0x10($s2)
 /* 1A06AC 80271DCC 44071000 */  mfc1      $a3, $f2
 /* 1A06B0 80271DD0 24080001 */  addiu     $t0, $zero, 1
-/* 1A06B4 80271DD4 0C01C2A4 */  jal       playFX_30
+/* 1A06B4 80271DD4 0C01C2A4 */  jal       fx_big_snowflakes
 /* 1A06B8 80271DD8 AFA80030 */   sw       $t0, 0x30($sp)
 .L80271DDC:
 /* 1A06BC 80271DDC 8FA40018 */  lw        $a0, 0x18($sp)
@@ -340,7 +340,7 @@ glabel calc_player_damage_enemy
 /* 1A06F4 80271E14 8E45000C */  lw        $a1, 0xc($s2)
 /* 1A06F8 80271E18 8E460010 */  lw        $a2, 0x10($s2)
 /* 1A06FC 80271E1C 44072000 */  mfc1      $a3, $f4
-/* 1A0700 80271E20 0C01C9F4 */  jal       playFX_7E
+/* 1A0700 80271E20 0C01C9F4 */  jal       fx_breaking_junk
 /* 1A0704 80271E24 0000202D */   daddu    $a0, $zero, $zero
 /* 1A0708 80271E28 2603FFFF */  addiu     $v1, $s0, -1
 /* 1A070C 80271E2C 2C620006 */  sltiu     $v0, $v1, 6
@@ -600,7 +600,7 @@ glabel calc_player_damage_enemy
 /* 1A0A94 802721B4 8E45000C */  lw        $a1, 0xc($s2)
 /* 1A0A98 802721B8 8E460010 */  lw        $a2, 0x10($s2)
 /* 1A0A9C 802721BC 8E470014 */  lw        $a3, 0x14($s2)
-/* 1A0AA0 802721C0 0C01C2EC */  jal       playFX_33
+/* 1A0AA0 802721C0 0C01C2EC */  jal       fx_radial_shimmer
 /* 1A0AA4 802721C4 24040009 */   addiu    $a0, $zero, 9
 .L802721C8:
 /* 1A0AA8 802721C8 3C11800E */  lui       $s1, %hi(gBattleStatus)

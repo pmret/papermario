@@ -5,7 +5,7 @@
 #include "world/actions.h"
 #include "npc.h"
 
-extern s32 D_8010C924;
+extern void* D_8010C924;
 extern s32 D_8010C964;
 extern s32 gSpinHistoryBufferPos;
 extern s16 D_8010C9B0;
@@ -61,12 +61,48 @@ void phys_reset_spin_history(void) {
     }
 
     D_8010C964 = 0;
-    D_8010C924 = 0;
+    D_8010C924 = NULL;
 }
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_action_state);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_peach_update);
+void phys_peach_update(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Action* action;
+
+    func_800E24F8();
+
+    do {
+        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_20) && check_conversation_trigger()) {
+            set_action_state(ACTION_STATE_TALK);
+        }
+
+        if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+            action = &D_800F7C8C[playerStatus->actionState];
+            if (action->flag) {
+                if (action->dmaStart != NULL && action->dmaStart != D_8010C924) {
+                    D_8010C924 = action->dmaStart;
+
+                    // TODO: This needs to be a defined linker define for full shiftability
+                    dma_copy(D_8010C924, D_800F7C8C[playerStatus->actionState].dmaEnd, (void* )0x802B6000);
+                }
+
+                if (D_800F7C8C[playerStatus->actionState].flag) {
+                    D_800F7C8C[playerStatus->actionState].update();
+                }
+            }
+        } else {
+            if (D_800F7C8C[playerStatus->actionState].flag) {
+                D_800F7C8C[playerStatus->actionState].update();
+            }
+        }
+    } while (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED);
+
+    peach_check_for_parasol_input();
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE) {
+        peach_sync_disguise_npc();
+    }
+}
 
 void set_action_state(s32 actionState) {
     PlayerStatus* playerStatus = &gPlayerStatus;

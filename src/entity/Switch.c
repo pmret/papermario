@@ -452,7 +452,7 @@ void entity_base_switch_animate_scale(Entity* entity) {
 
     temp_s0->unk_24++;
     if ((temp_s0->unk_24 == 10) && (temp_s0->attachedEntity == NULL)) {
-        playFX_6F(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
+        fx_cold_breath(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
     }
 }
 

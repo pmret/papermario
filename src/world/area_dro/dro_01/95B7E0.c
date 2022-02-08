@@ -3013,11 +3013,11 @@ ApiStatus N(func_80241BE0_95CDE0)(Evt* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
-        N(D_8024DFE0) = playFX_4E(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
+        N(D_8024DFE0) = fx_quizmo_stage(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
                                       evt_get_variable(script, EVT_ARRAY(3)));
-        N(D_8024DFE4) = playFX_54(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
+        N(D_8024DFE4) = fx_quizmo_audience(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
                                       evt_get_variable(script, EVT_ARRAY(3)));
-        N(D_8024DFE8) = playFX_80(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
+        N(D_8024DFE8) = fx_quizmo_assistant(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
                                       evt_get_variable(script, EVT_ARRAY(3)), 1.0f, 0);
 
         effectPtr = N(D_8024DFE0)->unk_0C;
@@ -3126,9 +3126,9 @@ void N(func_80242468_95D668)(void) {
     s32 var = evt_get_variable(NULL, N(D_8024DFD8));
 
     if (var == 1) {
-        playFX_50(0, 0, 0, 0);
+        fx_quizmo_answer(0, 0, 0, 0);
     } else if (var == 2) {
-        playFX_50(1, 0, 0, 0);
+        fx_quizmo_answer(1, 0, 0, 0);
     }
 }
 

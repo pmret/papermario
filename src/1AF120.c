@@ -393,7 +393,7 @@ EvtScript D_80296014 = {
     EVT_WAIT_FRAMES(8)
     EVT_LABEL(10)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LW(0), LW(1), LW(2))
-    EVT_CALL(PlayEffect, EFFECT_ID_06, 0, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 0, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };
@@ -405,11 +405,11 @@ EvtScript D_8029621C = {
         EVT_ADD(LW(5), -5)
         EVT_ADD(LW(6), 18)
         EVT_ADD(LW(7), 5)
-        EVT_CALL(PlayEffect, EFFECT_ID_24, 0, LW(5), LW(6), LW(7), EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_RING_BLAST, 0, LW(5), LW(6), LW(7), EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
         EVT_WAIT_FRAMES(2)
         EVT_ADD(LW(5), 10)
         EVT_ADD(LW(6), -14)
-        EVT_CALL(PlayEffect, EFFECT_ID_24, 0, LW(5), LW(6), LW(7), EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_RING_BLAST, 0, LW(5), LW(6), LW(7), EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_CHILD_THREAD
     EVT_CALL(GetDamageIntensity)
     EVT_SWITCH(LW(0))
@@ -1138,7 +1138,7 @@ EvtScript D_80298E20 = {
         EVT_SUB(LW(1), LW(7))
     EVT_END_IF
     EVT_SUB(LW(1), 3)
-    EVT_CALL(PlayEffect, EFFECT_ID_67, 0, LW(0), LW(1), LW(2), LW(3), 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_WHIRLWIND, 0, LW(0), LW(1), LW(2), LW(3), 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(func_80269E80, LW(0))
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(14)
@@ -1511,7 +1511,7 @@ EvtScript DoBurnHit = {
                         EVT_SETF(LW(3), EVT_FLOAT(1.0))
                     EVT_END_IF
                 EVT_END_IF
-                EVT_CALL(PlayEffect, EFFECT_ID_27, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
+                EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BURN_DEATH)
     EVT_END_SWITCH
@@ -1535,7 +1535,7 @@ EvtScript D_8029A76C = {
     EVT_SETF(LW(5), LW(3))
     EVT_DIVF(LW(5), EVT_FLOAT(20.0))
     EVT_ADDF(LW(1), LW(5))
-    EVT_CALL(PlayEffect, EFFECT_ID_4A, 0, LW(0), LW(1), LW(2), LW(4), LW(3), 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LW(0), LW(1), LW(2), LW(4), LW(3), 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_SHOCK)
     EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(HPBarToCurrent, ACTOR_SELF)
@@ -1678,7 +1678,7 @@ EvtScript D_8029AF08 = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 10)
     EVT_ADD(LW(2), 10)
-    EVT_CALL(PlayEffect, EFFECT_ID_01, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_BIG_SMOKE_PUFF, LW(0), LW(1), LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DEATH)
     EVT_CALL(DropStarPoints, -127)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -1989,7 +1989,7 @@ EvtScript DoAirLift = {
             EVT_CALL(GetActorPos, ACTOR_SELF, LW(3), LW(4), LW(5))
             EVT_CALL(GetActorSize, ACTOR_SELF, LW(6), LW(7))
             EVT_ADD(LW(4), LW(6))
-            EVT_CALL(PlayEffect, EFFECT_ID_28, 0, LW(3), LW(4), LW(5), 5, -45, 20, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SWEAT, 0, LW(3), LW(4), LW(5), 5, -45, 20, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(10)
         EVT_END_LOOP
         EVT_CALL(SetAnimationRate, ACTOR_SELF, LW(0), EVT_FLOAT(1.0))

@@ -315,7 +315,7 @@ glabel func_80242A08_DF18A8
 /* DF1D4C 80242EAC 8E450038 */  lw        $a1, 0x38($s2)
 /* DF1D50 80242EB0 8E46003C */  lw        $a2, 0x3c($s2)
 /* DF1D54 80242EB4 8E470040 */  lw        $a3, 0x40($s2)
-/* DF1D58 80242EB8 0C01BECC */  jal       fx_walk
+/* DF1D58 80242EB8 0C01BECC */  jal       fx_walking_dust
 /* DF1D5C 80242EBC 24040002 */   addiu    $a0, $zero, 2
 /* DF1D60 80242EC0 3C01C47A */  lui       $at, 0xc47a
 /* DF1D64 80242EC4 44810000 */  mtc1      $at, $f0

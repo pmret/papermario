@@ -456,7 +456,7 @@ EvtScript N(handleEvent_8021F228) = {
             EVT_ELSE
                 EVT_ADD(LW(1), 24)
             EVT_END_IF
-            EVT_CALL(PlayEffect, EFFECT_ID_1A, 0, LW(0), LW(1), LW(2), 20, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_LENS_FLARE, 0, LW(0), LW(1), LW(2), 20, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(20)
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LW(0), 1)
@@ -729,11 +729,11 @@ EvtScript N(takeTurn_80220A44) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzy_beetle_Palette_00_Anim_6)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
-        EVT_CALL(PlayEffect, EFFECT_ID_1D, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
         EVT_WAIT_FRAMES(10)
-        EVT_CALL(PlayEffect, EFFECT_ID_1D, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
         EVT_WAIT_FRAMES(5)
-        EVT_CALL(PlayEffect, EFFECT_ID_1D, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SMOKE_IMPACT, 1, LW(0), LW(1), LW(2), 32, 4, 0, 10, 0, 0, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x2021)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_buzzy_beetle_Palette_00_Anim_5)

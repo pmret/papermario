@@ -30,7 +30,7 @@ void func_802BBD78_E2E6A8(Entity* entity) {
     angle = (clamp_angle(entity->rotation.y) * TAU) / 360.0f;
     xOffset = cos_rad(angle) * -26.0;
     zOffset = sin_rad(angle) * 6.0;
-    playFX_21(0, entity->position.x + xOffset, entity->position.y + 62.0f, entity->position.z + zOffset, clamp_angle(entity->rotation.y - 90.0), 54.0f, 2);
+    fx_stars_burst(0, entity->position.x + xOffset, entity->position.y + 62.0f, entity->position.z + zOffset, clamp_angle(entity->rotation.y - 90.0), 54.0f, 2);
 }
 
 INCLUDE_ASM(s32, "entity/jan_iwa/E2E5F0", func_802BBE8C_E2E7BC);

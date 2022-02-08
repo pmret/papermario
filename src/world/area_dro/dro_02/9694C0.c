@@ -3112,11 +3112,11 @@ ApiStatus N(func_80240A70_969C30)(Evt* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
-        N(D_8024EFC0) = playFX_4E(0, (f32) evt_get_variable(script, EVT_ARRAY(1)), (f32) evt_get_variable(script, EVT_ARRAY(2)),
+        N(D_8024EFC0) = fx_quizmo_stage(0, (f32) evt_get_variable(script, EVT_ARRAY(1)), (f32) evt_get_variable(script, EVT_ARRAY(2)),
                                       (f32) evt_get_variable(script, EVT_ARRAY(3)));
-        N(D_8024EFC4) = playFX_54(0, (f32) evt_get_variable(script, EVT_ARRAY(1)), (f32) evt_get_variable(script, EVT_ARRAY(2)),
+        N(D_8024EFC4) = fx_quizmo_audience(0, (f32) evt_get_variable(script, EVT_ARRAY(1)), (f32) evt_get_variable(script, EVT_ARRAY(2)),
                                       (f32) evt_get_variable(script, EVT_ARRAY(3)));
-        N(D_8024EFC8) = playFX_80(0, (f32) evt_get_variable(script, EVT_ARRAY(1)), (f32) evt_get_variable(script, EVT_ARRAY(2)),
+        N(D_8024EFC8) = fx_quizmo_assistant(0, (f32) evt_get_variable(script, EVT_ARRAY(1)), (f32) evt_get_variable(script, EVT_ARRAY(2)),
                                       (f32) evt_get_variable(script, EVT_ARRAY(3)), 1.0f, 0);
 
         effectPtr = (EffectInstanceDataThing*) N(D_8024EFC0)->data; // TODO this is wrong
@@ -3225,9 +3225,9 @@ void N(func_802412F8_96A4B8)(void) {
     s32 var = evt_get_variable(NULL, N(D_8024EFB8));
 
     if (var == 1) {
-        playFX_50(0, 0, 0, 0);
+        fx_quizmo_answer(0, 0, 0, 0);
     } else if (var == 2) {
-        playFX_50(1, 0, 0, 0);
+        fx_quizmo_answer(1, 0, 0, 0);
     }
 }
 

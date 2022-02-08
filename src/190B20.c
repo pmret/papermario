@@ -1825,7 +1825,7 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
     f32 temp_f20_2;
 
     if (var0 == 2) {
-        fx_land(0, xPos, yPos + 0.0f, zPos, D_802938A4);
+        fx_landing_dust(0, xPos, yPos + 0.0f, zPos, D_802938A4);
     } else if (var0 == 1) {
         D_802938A8 = 4;
     } else if (D_802938A8++ >= 4) {
@@ -1833,7 +1833,7 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
         temp_f20 = (clamp_angle(-angleDeg) * TAU) / 360.0f;
         temp_f20_2 = sin_rad(temp_f20);
         temp_f0 = cos_rad(temp_f20);
-        fx_walk(0, xPos + (temp_f20_2 * 24.0f * 0.2f), yPos + 1.5f, zPos + (temp_f0 * 24.0f * 0.2f), temp_f20_2, temp_f0);
+        fx_walking_dust(0, xPos + (temp_f20_2 * 24.0f * 0.2f), yPos + 1.5f, zPos + (temp_f0 * 24.0f * 0.2f), temp_f20_2, temp_f0);
     }
 }
 #else
@@ -2064,7 +2064,7 @@ void load_player_actor(void) {
     player->shadow.id = create_shadow_type(0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
     player->shadowScale = player->size.x / 24.0;
     player->hudElementDataIndex = create_status_icon_set();
-    player->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
+    player->ptrDefuffIcon = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
     player->unk_228 = NULL;
 
     if (is_ability_active(ABILITY_ZAP_TAP)) {
@@ -2318,7 +2318,7 @@ void load_partner_actor(void) {
         partnerActor->shadow.id = create_shadow_type(0, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z);
         partnerActor->shadowScale = partnerActor->size.x / 24.0;
         partnerActor->hudElementDataIndex = create_status_icon_set();
-        partnerActor->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
+        partnerActor->ptrDefuffIcon = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
         partnerActor->unk_228 = NULL;
 
         takeTurnScript = start_script(partnerActor->takeTurnScriptSource, 10, 0);
@@ -2589,7 +2589,7 @@ Actor* create_actor(Formation formation) {
     takeTurnScript->owner1.enemyID = actor->enemyIndex | 0x200;
     actor->shadow.id = create_shadow_type(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
     actor->shadowScale = actor->size.x / 24.0;
-    actor->ptrDefuffIcon = playFX_41(0, -142.0f, 34.0f, 1.0f, 0);
+    actor->ptrDefuffIcon = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
     actor->unk_228 = NULL;
     actor->hudElementDataIndex = create_status_icon_set();
     return actor;
@@ -2768,7 +2768,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                                 if (effect != NULL) {
                                     effect->flags |= EFFECT_INSTANCE_FLAGS_10;
                                 }
-                                target->unk_228 = playFX_81(0, target->currentPos.x, target->currentPos.y,
+                                target->unk_228 = fx_ice_pillar(0, target->currentPos.x, target->currentPos.y,
                                                             target->currentPos.z, 1.0f, 0);
                                 create_status_debuff(target->hudElementDataIndex, STATUS_FROZEN);
                             }
@@ -2985,7 +2985,7 @@ void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a) {
         a = 55;
     }
 
-    playFX_1E(0, x, y, z, 10.0f, a, attack, &gDamageCountEffects[i]);
+    fx_damage_indicator(0, x, y, z, 10.0f, a, attack, &gDamageCountEffects[i]);
     gDamageCountTimers[i] = 40;
 }
 
@@ -3011,7 +3011,7 @@ void show_damage_popup(f32 x, f32 y, f32 z, s32 attack, s32 a) {
         a = 55;
     }
 
-    playFX_1E(0, x, y, z, 10.0f, a, attack, &gDamageCountEffects[i]);
+    fx_damage_indicator(0, x, y, z, 10.0f, a, attack, &gDamageCountEffects[i]);
     gDamageCountTimers[i] = 40;
 }
 
@@ -3472,10 +3472,10 @@ void remove_player_buffs(s32 buffs) {
         battleStatus->unk_43C->unk_0C->unk_10 = 0;
         battleStatus->waterBlockEffect->flags |= 0x10;
 
-        playFX_5A(1, player->currentPos.x, player->currentPos.y + 18.0f, player->currentPos.z + 5.0f, 1.5f, 0xA);
-        playFX_5F(0, player->currentPos.x - 10.0f, player->currentPos.y + 5.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
-        playFX_5F(0, player->currentPos.x - 15.0f, player->currentPos.y + 32.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
-        playFX_5F(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
+        fx_water_block(1, player->currentPos.x, player->currentPos.y + 18.0f, player->currentPos.z + 5.0f, 1.5f, 0xA);
+        fx_water_splash(0, player->currentPos.x - 10.0f, player->currentPos.y + 5.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
+        fx_water_splash(0, player->currentPos.x - 15.0f, player->currentPos.y + 32.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
+        fx_water_splash(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
 
         battleStatus->waterBlockEffect = NULL;
         sfx_play_sound(SOUND_299);

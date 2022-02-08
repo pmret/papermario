@@ -1,15 +1,11 @@
-#ifdef KMC_ASM
-#define MOVE_ADDU
-#endif
-
-#include "common.h"
+#include "PR/piint.h"
 
 s32 osEPiWriteIo(OSPiHandle* handle, u32 devAddr, u32 data) {
     register s32 ret;
 
-    osPiGetAccess();
-    ret = osEPiRawWriteIo(handle, devAddr, data);
-    osPiRelAccess();
+    __osPiGetAccess();
+    ret = __osEPiRawWriteIo(handle, devAddr, data);
+    __osPiRelAccess();
 
     return ret;
 }

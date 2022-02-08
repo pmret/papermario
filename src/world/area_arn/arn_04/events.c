@@ -467,7 +467,7 @@ void N(func_80242A1C_BE61CC)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     if (npc->duration % 3 == 0) {
-        fx_walk(2, npc->pos.x, npc->pos.y, npc->pos.z + 2.0f, 0, 0);
+        fx_walking_dust(2, npc->pos.x, npc->pos.y, npc->pos.z + 2.0f, 0, 0);
     }
 
     npc->duration--;

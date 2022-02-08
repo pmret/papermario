@@ -383,7 +383,7 @@ EvtScript N(80224448) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(3), LW(4), LW(5))
         EVT_ADD(LW(4), 10)
         EVT_ADD(LW(5), 5)
-        EVT_CALL(PlayEffect, EFFECT_ID_27, 0, LW(3), LW(4), LW(5), EVT_FLOAT(1.0), 10, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LW(3), LW(4), LW(5), EVT_FLOAT(1.0), 10, 0, 0, 0, 0, 0, 0, 0)
     EVT_END_IF
     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
@@ -551,7 +551,7 @@ EvtScript N(wMagikoopa_ShapeSpell) = {
         EVT_SUB(LW(0), 30)
         EVT_ADD(LW(1), 36)
     EVT_END_IF
-    EVT_CALL(PlayEffect, EFFECT_ID_47, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.5), 30, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_GATHER_MAGIC, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.5), 30, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, NPC_ANIM_flying_magikoopa_Palette_03_Anim_2)
     EVT_WAIT_FRAMES(30)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, BS_FLAGS1_10)
@@ -958,12 +958,12 @@ EvtScript N(healOne) = {
             EVT_SUB(LW(0), 6)
             EVT_ADD(LW(1), 12)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, EFFECT_ID_33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, EFFECT_ID_33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -972,12 +972,12 @@ EvtScript N(healOne) = {
             EVT_SUB(LW(0), 12)
             EVT_ADD(LW(1), 14)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, EFFECT_ID_33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, EFFECT_ID_33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)
@@ -1044,12 +1044,12 @@ EvtScript N(healAll) = {
             EVT_SUB(LW(0), 6)
             EVT_ADD(LW(1), 12)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, EFFECT_ID_33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LW(0), 16)
             EVT_ADD(LW(1), 31)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, EFFECT_ID_33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
@@ -1058,12 +1058,12 @@ EvtScript N(healAll) = {
             EVT_SUB(LW(0), 12)
             EVT_ADD(LW(1), 14)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, EFFECT_ID_33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.12), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_ELSE
             EVT_SUB(LW(0), 30)
             EVT_ADD(LW(1), 36)
             EVT_SUB(LW(2), 2)
-            EVT_CALL(PlayEffect, EFFECT_ID_33, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 7, LW(0), LW(1), LW(2), EVT_FLOAT(0.3), 30, 0, 0, 0, 0, 0, 0, 0)
         EVT_END_IF
     EVT_END_IF
     EVT_WAIT_FRAMES(30)

@@ -1,7 +1,5 @@
 #include "common.h"
-#include "include_asm_libultra.h"
 
-#ifndef KMC_ASM
 void guLookAtHiliteF(Matrix4f mf, LookAt *l, Hilite *h,
                      f32 xEye, f32 yEye, f32 zEye,
                      f32 xAt,  f32 yAt,  f32 zAt,
@@ -136,11 +134,7 @@ void guLookAtHiliteF(Matrix4f mf, LookAt *l, Hilite *h,
     mf[2][3] = 0;
     mf[3][3] = 1;
 }
-#else
-INCLUDE_ASM_LIBULTRA("lookathil", guLookAtHiliteF);
-#endif
 
-#ifndef KMC_ASM
 void guLookAtHilite (Mtx *m, LookAt *l, Hilite *h,
                      f32 xEye, f32 yEye, f32 zEye,
                      f32 xAt,  f32 yAt,  f32 zAt,
@@ -156,6 +150,3 @@ void guLookAtHilite (Mtx *m, LookAt *l, Hilite *h,
 
     guMtxF2L(mf, m);
 }
-#else
-INCLUDE_ASM_LIBULTRA("lookathil", guLookAtHilite);
-#endif

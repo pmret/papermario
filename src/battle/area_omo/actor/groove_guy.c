@@ -612,7 +612,7 @@ s32 func_8021878C_512D5C(Evt* script, s32 isInitialCall) {
     D_802310D0.unk_28 = x;
     D_802310D0.unk_2C = y;
     D_802310D0.unk_30 = z;
-    playFX_46_whirlwind(6, &D_802310D0, temp_f20, temp_v0);
+    fx_46(6, &D_802310D0, temp_f20, temp_v0);
 
     return ApiStatus_DONE2;
 }
@@ -692,7 +692,7 @@ EvtScript N(8022671C) = {
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 30)
-    EVT_CALL(PlayEffect, EFFECT_ID_11, 0, LW(0), LW(1), LW(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_SPARKLES, 0, LW(0), LW(1), LW(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x206D)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_groove_guy_Palette_00_Anim_A)
     EVT_WAIT_FRAMES(8)
@@ -764,7 +764,7 @@ EvtScript N(80226DEC) = {
     EVT_CALL(SetAnimation, LW(11), 1, NPC_ANIM_groove_guy_Palette_00_Anim_A)
     EVT_CALL(GetActorPos, LW(11), LW(0), LW(1), LW(2))
     EVT_ADD(LW(1), 20)
-    EVT_CALL(PlayEffect, EFFECT_ID_1A, 0, LW(0), LW(1), LW(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_LENS_FLARE, 0, LW(0), LW(1), LW(2), 30, 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(GetActorPos, LW(11), LW(0), LW(1), LW(2))
     EVT_CALL(ForceHomePos, LW(11), LW(0), LW(1), LW(2))
     EVT_WAIT_FRAMES(25)

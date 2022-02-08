@@ -9,7 +9,7 @@ ApiStatus N(func_802A123C_716E9C)(Evt* script, s32 isInitialCall) {
     s32 b = evt_get_variable(script, *args++);
     s32 c = evt_get_variable(script, *args++);
 
-    playFX_3F(0, a, b, c, 0);
+    fx_fire_flower(0, a, b, c, 0);
 
     return ApiStatus_DONE2;
 }

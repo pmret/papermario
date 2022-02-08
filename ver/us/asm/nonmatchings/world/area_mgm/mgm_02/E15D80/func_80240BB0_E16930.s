@@ -506,7 +506,7 @@ glabel func_80240BB0_E16930
 /* E170B8 80241338 AFA00014 */  sw        $zero, 0x14($sp)
 /* E170BC 8024133C 8E650038 */  lw        $a1, 0x38($s3)
 /* E170C0 80241340 44071000 */  mfc1      $a3, $f2
-/* E170C4 80241344 0C01BECC */  jal       fx_walk
+/* E170C4 80241344 0C01BECC */  jal       fx_walking_dust
 /* E170C8 80241348 24040001 */   addiu    $a0, $zero, 1
 /* E170CC 8024134C 080906CF */  j         .L80241B3C
 /* E170D0 80241350 2694001C */   addiu    $s4, $s4, 0x1c
@@ -730,7 +730,7 @@ glabel func_80240BB0_E16930
 /* E1740C 8024168C 8E650038 */  lw        $a1, 0x38($s3)
 /* E17410 80241690 8E66003C */  lw        $a2, 0x3c($s3)
 /* E17414 80241694 44071000 */  mfc1      $a3, $f2
-/* E17418 80241698 0C01C07C */  jal       playFX_19
+/* E17418 80241698 0C01C07C */  jal       fx_explosion
 /* E1741C 8024169C 0000202D */   daddu    $a0, $zero, $zero
 /* E17420 802416A0 24042076 */  addiu     $a0, $zero, 0x2076
 /* E17424 802416A4 2402001E */  addiu     $v0, $zero, 0x1e

@@ -1,7 +1,6 @@
-#include "common.h"
-#include "include_asm_libultra.h"
+#include "PR/osint.h"
+#include "PR/R4300.h"
 
-#ifndef KMC_ASM
 u32 osVirtualToPhysical(void *addr) {
     if (IS_KSEG0(addr)) {
         return K0_TO_PHYS(addr);
@@ -11,6 +10,3 @@ u32 osVirtualToPhysical(void *addr) {
         return __osProbeTLB(addr);
     }
 }
-#else
-INCLUDE_ASM_LIBULTRA("osVirtualToPhysical", osVirtualToPhysical);
-#endif

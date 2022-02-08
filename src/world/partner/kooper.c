@@ -8,7 +8,7 @@ s32 test_item_entity_position(f32, f32, f32, f32);
 s32 npc_raycast_up_corner(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
 s32 npc_raycast_up(s32 ignoreFlags, f32* x, f32* y, f32* z, f32* length);
 void start_bounce_b(void);
-void playFX_18(s32, f32, f32, f32, f32, f32, f32, s32);
+void fx_damage_stars(s32, f32, f32, f32, f32, f32, f32, s32);
 void func_801341B0(Npc* npc);
 
 BSS s32 D_802BEC50;
@@ -357,7 +357,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         kooper->currentAnim.w = 0x20009;
                         D_802BEB40_31CB60 = 1;
                         temp_f20_2 = sin_deg(playerStatus->targetYaw);
-                        playFX_18(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
+                        fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                                 temp_f20_2, -1.0f, -cos_deg(playerStatus->targetYaw), 3);
                         start_bounce_b();
 
@@ -390,7 +390,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         }
 
                         temp_f20_3 = sin_deg(kooper->yaw);
-                        playFX_18(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
+                        fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                                 temp_f20_3, -1.0f, -cos_deg(kooper->yaw), 1);
                         sfx_play_sound_at_npc(0, 0, -4);
                         script->functionTemp[0] = 7;
@@ -431,7 +431,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                             if (func_802BD17C_31B19C(kooper) != 0) {
                                 sfx_play_sound_at_npc(0x286, 0, -4);
                                 temp_f20_4 = sin_deg(kooper->yaw);
-                                playFX_18(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
+                                fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                                           temp_f20_4, -1.0f, -cos_deg(kooper->yaw), 1);
                                 sfx_play_sound_at_npc(0, 0, -4);
                                 script->functionTemp[0] = 4;
@@ -473,7 +473,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                         }
 
                         temp_f20_3 = sin_deg(kooper->yaw);
-                        playFX_18(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
+                        fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                                 temp_f20_3, -1.0f, -cos_deg(kooper->yaw), 1);
                         sfx_play_sound_at_npc(0, 0, -4);
                         script->functionTemp[0] = 7;
@@ -550,7 +550,7 @@ ApiStatus func_802BD638_31B658(Evt* script, s32 isInitialCall) {
                     kooper->pos.z = sp28;
                     sfx_play_sound_at_npc(0x10C, 0, -4);
                     temp_f20_6 = sin_deg(kooper->yaw + 180.0f);
-                    playFX_18(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
+                    fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                             temp_f20_6, -1.0f, -cos_deg(kooper->yaw + 180.0f), 1);
                     script->functionTemp[0] = 0;
                 } else {

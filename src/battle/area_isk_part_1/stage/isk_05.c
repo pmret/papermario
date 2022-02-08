@@ -9,8 +9,8 @@ BSS EffectInstance* N(D_80224D70);
 BSS EffectInstance* N(D_80224D74);
 
 ApiStatus N(CreateTorchFX)(Evt* script, s32 isInitialCall) {
-    playFX_20(1, -90.0f, 45.0f, -146.0f, 0.25f, &N(D_80224D70));
-    playFX_20(1, 80.0f, 45.0f, -146.0f, 0.25f, &N(D_80224D74));
+    fx_flame(1, -90.0f, 45.0f, -146.0f, 0.25f, &N(D_80224D70));
+    fx_flame(1, 80.0f, 45.0f, -146.0f, 0.25f, &N(D_80224D74));
     return ApiStatus_DONE2;
 }
 

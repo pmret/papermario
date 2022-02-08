@@ -345,7 +345,7 @@ EvtScript N(8021BEBC) = {
                             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                             EVT_ADD(LW(0), 10)
-                            EVT_CALL(PlayEffect, EFFECT_ID_2B, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                            EVT_CALL(PlayEffect, EFFECT_WINDY_LEAVES, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
                             EVT_WAIT_FRAMES(3)
                         EVT_END_LOOP
                     EVT_END_THREAD
@@ -383,7 +383,7 @@ EvtScript N(8021BEBC) = {
                             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                             EVT_ADD(LW(0), 10)
-                            EVT_CALL(PlayEffect, EFFECT_ID_2B, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                            EVT_CALL(PlayEffect, EFFECT_WINDY_LEAVES, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
                             EVT_WAIT_FRAMES(3)
                         EVT_END_LOOP
                     EVT_END_THREAD
@@ -448,7 +448,7 @@ EvtScript N(8021BEBC) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
             EVT_ADD(LW(0), 10)
-            EVT_CALL(PlayEffect, EFFECT_ID_2B, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_WINDY_LEAVES, 2, LW(0), 10, LW(2), 0, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(3)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -558,7 +558,7 @@ EvtScript N(8021CCE8) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LW(0), LW(1), LW(2))
     EVT_ADD(LW(0), 24)
     EVT_ADD(LW(1), 24)
-    EVT_CALL(PlayEffect, EFFECT_ID_6D, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.6), 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_CALL(PlayEffect, EFFECT_SHINY_FLARE, 0, LW(0), LW(1), LW(2), EVT_FLOAT(0.6), 0, 0, 0, 0, 0, 0, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, 0x20F3)
     EVT_WAIT_FRAMES(10)
     EVT_CALL(SetPartSounds, ACTOR_SELF, 3, 1, 0, 0)

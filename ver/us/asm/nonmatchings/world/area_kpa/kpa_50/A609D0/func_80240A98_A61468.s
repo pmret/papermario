@@ -88,7 +88,7 @@ glabel func_80240A98_A61468
 /* A6156C 80240B9C 8E050038 */  lw        $a1, 0x38($s0)
 /* A61570 80240BA0 8E06003C */  lw        $a2, 0x3c($s0)
 /* A61574 80240BA4 8E070040 */  lw        $a3, 0x40($s0)
-/* A61578 80240BA8 0C01BECC */  jal       fx_walk
+/* A61578 80240BA8 0C01BECC */  jal       fx_walking_dust
 /* A6157C 80240BAC 24040002 */   addiu    $a0, $zero, 2
 /* A61580 80240BB0 C64C006C */  lwc1      $f12, 0x6c($s2)
 /* A61584 80240BB4 0C00A6C9 */  jal       clamp_angle
@@ -253,7 +253,7 @@ glabel func_80240A98_A61468
 /* A617E4 80240E14 8E050038 */  lw        $a1, 0x38($s0)
 /* A617E8 80240E18 8E06003C */  lw        $a2, 0x3c($s0)
 /* A617EC 80240E1C 8E070040 */  lw        $a3, 0x40($s0)
-/* A617F0 80240E20 0C01BECC */  jal       fx_walk
+/* A617F0 80240E20 0C01BECC */  jal       fx_walking_dust
 /* A617F4 80240E24 24040002 */   addiu    $a0, $zero, 2
 /* A617F8 80240E28 3C01C47A */  lui       $at, 0xc47a
 /* A617FC 80240E2C 44810000 */  mtc1      $at, $f0

@@ -439,7 +439,7 @@ EvtScript N(handleEvent_80219050) = {
             EVT_END_IF
             EVT_ADDF(LW(3), LW(0))
             EVT_ADDF(LW(4), LW(1))
-            EVT_CALL(PlayEffect, EFFECT_ID_1A, 0, LW(3), LW(4), LW(5), 20, 0, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_LENS_FLARE, 0, LW(3), LW(4), LW(5), 20, 0, 0, 0, 0, 0, 0, 0, 0)
             EVT_WAIT_FRAMES(30)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LW(0), 1)
@@ -964,7 +964,7 @@ EvtScript N(8021BDE4) = {
             EVT_ADD(LW(1), LW(3))
             EVT_ADD(LW(2), 5)
             EVT_DIVF(LW(3), EVT_FLOAT(10.0))
-            EVT_CALL(PlayEffect, EFFECT_ID_27, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
+            EVT_CALL(PlayEffect, EFFECT_SMOKE_BURST, 0, LW(0), LW(1), LW(2), LW(3), 10, 0, 0, 0, 0, 0, 0, 0)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_CALL(GetActorVar, ACTOR_SELF, 7, LW(1))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, LW(1))

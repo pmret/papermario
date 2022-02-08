@@ -394,7 +394,7 @@ glabel btl_state_update_celebration
 /* 18D01C 8025E73C 44063000 */  mfc1      $a2, $f6
 /* 18D020 8025E740 AFA30028 */  sw        $v1, 0x28($sp)
 /* 18D024 8025E744 AFA2002C */  sw        $v0, 0x2c($sp)
-/* 18D028 8025E748 0C01C424 */  jal       playFX_40
+/* 18D028 8025E748 0C01C424 */  jal       fx_recover
 /* 18D02C 8025E74C AFA80010 */   sw       $t0, 0x10($sp)
 /* 18D030 8025E750 C6240144 */  lwc1      $f4, 0x144($s1)
 /* 18D034 8025E754 C620014C */  lwc1      $f0, 0x14c($s1)
@@ -430,7 +430,7 @@ glabel btl_state_update_celebration
 /* 18D0AC 8025E7CC 24040001 */  addiu     $a0, $zero, 1
 /* 18D0B0 8025E7D0 AFA30028 */  sw        $v1, 0x28($sp)
 /* 18D0B4 8025E7D4 AFA2002C */  sw        $v0, 0x2c($sp)
-/* 18D0B8 8025E7D8 0C01C424 */  jal       playFX_40
+/* 18D0B8 8025E7D8 0C01C424 */  jal       fx_recover
 /* 18D0BC 8025E7DC AFA80010 */   sw       $t0, 0x10($sp)
 /* 18D0C0 8025E7E0 82A2028E */  lb        $v0, 0x28e($s5)
 /* 18D0C4 8025E7E4 00021200 */  sll       $v0, $v0, 8
@@ -1566,7 +1566,7 @@ glabel btl_state_update_celebration
 /* 18E1E8 8025F908 3C013F80 */  lui       $at, 0x3f80
 /* 18E1EC 8025F90C 44810000 */  mtc1      $at, $f0
 /* 18E1F0 8025F910 00A0382D */  daddu     $a3, $a1, $zero
-/* 18E1F4 8025F914 0C01C484 */  jal       playFX_44
+/* 18E1F4 8025F914 0C01C484 */  jal       fx_confetti
 /* 18E1F8 8025F918 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 18E1FC 8025F91C 08097FD2 */  j         .L8025FF48_18E828
 /* 18E200 8025F920 AE000000 */   sw       $zero, ($s0)

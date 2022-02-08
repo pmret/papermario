@@ -91,7 +91,7 @@ s32 calc_item_damage_enemy(void) {
     }
     phi_a0_2 = 0;
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
-        playFX_24(0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z + 5.0f, 1.0f, 0x18);
+        fx_ring_blast(0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z + 5.0f, 1.0f, 0x18);
         isFireDamage = TRUE;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_ELECTRIC) {
@@ -99,10 +99,10 @@ s32 calc_item_damage_enemy(void) {
         isElectricDamage = TRUE;
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_WATER) {
-        playFX_5F(0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z + 5.0f, 1.0f, 0x18);
+        fx_water_splash(0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z + 5.0f, 1.0f, 0x18);
     }
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_ICE) {
-        playFX_30(0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z + 5.0f);
+        fx_big_snowflakes(0, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z + 5.0f);
         isIceDamage = TRUE;
     }
     if ((battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS) == 0) {

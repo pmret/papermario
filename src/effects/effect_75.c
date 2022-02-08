@@ -1,108 +1,60 @@
 #include "common.h"
 #include "effects_internal.h"
 
-extern Gfx D_09001280[];
-extern Gfx D_09001358[];
-extern Gfx D_09001430[];
-extern Gfx D_09001508[];
+typedef struct Effect117 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+} Effect117; // size = 0x??
 
-Gfx* D_E00963E0[] = { D_09001280, D_09001358, D_09001430 };
-
-void fx_75_init(EffectInstance* effect);
-void fx_75_update(EffectInstance* effect);
-void fx_75_render(EffectInstance* effect);
 void fx_75_appendGfx(void* effect);
 
-EffectInstance* fx_75_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
-    EffectBlueprint bp;
-    EffectInstance* effect;
-    Effect75* data;
-    Effect75* part;
-    s32 numParts = 1;
+s32 D_E00EAA50[2] = { 0x09001A00, 0x09001A20 };
 
-    bp.init = fx_75_init;
-    bp.update = fx_75_update;
-    bp.renderWorld = fx_75_render;
-    bp.unk_00 = 0;
-    bp.unk_14 = NULL;
-    bp.effectID = EFFECT_ID_4B;
+s32 D_E00EAA58[2] = { 0x09001910, 0x00000000 };
 
-    effect = shim_create_effect_instance(&bp);
-    effect->numParts = numParts;
+INCLUDE_ASM(s32, "effects/effect_75", fx_75_main);
 
-    data = shim_general_heap_malloc(numParts * sizeof(*data));
-    effect->data = data;
-    part = data;
-
-    ASSERT(data != NULL);
-
-    part->unk_00 = arg0;
-    part->unk_04 = arg1;
-    part->unk_08 = arg2;
-    part->unk_0C = arg3;
-    part->unk_10 = 0.0f;
-    part->unk_1C = arg5;
-    part->unk_18 = 0.67f;
-    part->unk_20 = 0;
-    part->unk_14 = arg4;
-
-    return effect;
+void fx_75_init(void) {
 }
 
-void fx_75_init(EffectInstance* effect) {
-}
-
-void fx_75_update(EffectInstance* effect) {
-    Effect75* part = (Effect75*)effect->data;
-
-    part->unk_1C--;
-    part->unk_20++;
-
-    if (part->unk_1C < 0) {
-        shim_remove_effect(effect);
-        return;
-    }
-
-    part->unk_10 += part->unk_14;
-    if (part->unk_10 > 2.0f) {
-        part->unk_10 = 2.0f;
-    }
-    part->unk_08 += part->unk_10;
-}
+INCLUDE_ASM(s32, "effects/effect_75", fx_75_update);
 
 void fx_75_render(EffectInstance* effect) {
+    Effect117* effect117 = effect->data;
     RenderTask renderTask;
+    RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
+    s32 outDist;
+    f32 outX;
+    f32 outY;
+    f32 outZ;
+    f32 outS;
 
-    renderTask.appendGfx = fx_75_appendGfx;
-    renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
-    renderTask.renderMode = RENDER_MODE_SURFACE_OPA;
+    shim_transform_point(gCameras[gCurrentCameraID].perspectiveMatrix[0], effect117->unk_04, effect117->unk_08, effect117->unk_0C, 1.0f, &outX, &outY, &outZ, &outS);
 
-    retTask = shim_queue_render_task(&renderTask);
+    outDist = outZ + 5000;
+    if (outDist < 0) {
+        outDist = 0;
+    } else if (outDist > 10000) {
+        outDist = 10000;
+    }
+
+    if (outS < 0.01 && -0.01 < outS) {
+        outDist = 0;
+    }
+
+    renderTaskPtr->appendGfx = fx_75_appendGfx;
+    renderTaskPtr->distance = -outDist;
+    renderTaskPtr->appendGfxArg = effect;
+    renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
+
+    retTask = shim_queue_render_task(renderTaskPtr);
     retTask->renderMode |= RENDER_MODE_2;
 }
 
-void fx_75_appendGfx(void* effect) {
-    Matrix4f sp18;
-    Matrix4f sp58;
-    Effect75* part = ((EffectInstance*)effect)->data;
-    s32 idx = part->unk_00;
-
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-
-    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guScaleF(sp58, part->unk_18, part->unk_18, 1.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
-
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
-              G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_E00963E0[idx]);
-    gSPDisplayList(gMasterGfxPos++, D_09001508);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+void func_E00EA664(void) {
 }
+
+INCLUDE_ASM(s32, "effects/effect_75", fx_75_appendGfx);

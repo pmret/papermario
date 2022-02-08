@@ -18,6 +18,7 @@ extern void __osDequeueThread(OSThread **, OSThread *);
 extern void __osEnqueueThread(OSThread **, OSThread *);
 extern OSThread *__osPopThread(OSThread **);
 extern void __osDispatchThread(void);
+extern void __osCleanupThread(void);
 
 extern void __osSetTimerIntr(OSTime);
 extern OSTime __osInsertTimer(OSTimer *);
@@ -36,6 +37,7 @@ extern OSTime __osCurrentTime;
 extern u32 __osBaseCounter;
 extern u32 __osViIntrCount;
 extern u32 __osTimerCounter;
+extern u32 __osShutdown;
 
 extern __OSEventState __osEventStateTab[OS_NUM_EVENTS];
 

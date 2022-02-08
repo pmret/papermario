@@ -17,7 +17,7 @@ void fx_46_render(EffectInstance* effect) {
     renderTask.appendGfx = fx_46_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
-    renderTask.renderMode = RENDER_MODE_28;
+    renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_MODE_2;

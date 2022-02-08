@@ -212,7 +212,7 @@ ApiStatus N(func_802A1818_731B18)(Evt* script, s32 isInitialCall) {
     s32 c = evt_get_variable(script, *args++);
     s32 d = evt_get_variable(script, *args++);
 
-    playFX_40(0, a, b, c, d);
+    fx_recover(0, a, b, c, d);
     return ApiStatus_DONE2;
 }
 
@@ -223,7 +223,7 @@ ApiStatus N(func_802A18D8_731BD8)(Evt* script, s32 isInitialCall) {
     s32 c = evt_get_variable(script, *args++);
     s32 d = evt_get_variable(script, *args++);
 
-    playFX_40(1, a, b, c, d);
+    fx_recover(1, a, b, c, d);
     return ApiStatus_DONE2;
 }
 

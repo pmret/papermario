@@ -7,10 +7,18 @@ else
 fi
 
 uname=`uname`
+unset supported
+
 if [[ "$uname" == "Darwin" ]]; then
+    supported = true
+
     echo "Downloading gcc/binutils for macOS"
     curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/mac.tar.gz" | tar zx -C tools/build/cc/gcc
-    curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/mac.tar.gz" | tar zx -C tools/build/cc/gcc
+    curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/mac.tar.gz" | tar zx -C tools/build/cc/GCC
+
+    # 2.7.2
+    curl -L "https://github.com/decompals/mips-gcc-2.7.2/releases/download/main/gcc-2.7.2-mac.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2
+    curl -L "https://github.com/decompals/mips-binutils-2.6/releases/download/main/binutils-2.6-mac.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2
 
     echo "Downloading IDO 5.3 for macOS"
     curl -L "https://github.com/ethteck/ido-static-recomp/releases/download/per-function/ido-5.3-recomp-macos-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3
@@ -23,7 +31,7 @@ if [[ "$uname" == "Darwin" ]]; then
     fi
 
     # Install packages
-    brew install md5sha1sum ninja gcc nanaian/brew/mips-linux-gnu-binutils wine || exit 1
+    brew install md5sha1sum ninja gcc nanaian/brew/mips-linux-gnu-binutils || exit 1
     python3 -m pip install -U -r requirements.txt || exit 1
 
     if [[ $1 == "--extra" ]]; then
@@ -35,23 +43,15 @@ if [[ "$uname" == "Darwin" ]]; then
     exit
 fi
 
-echo "Downloading gcc/binutils for Linux"
-curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc
-curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc
-
-echo "Downloading IDO 5.3 for Linux"
-curl -L "https://github.com/ethteck/ido-static-recomp/releases/download/per-function/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3
-
-echo "Downloading KMC GCC wrapper for Linux"
-curl -L "https://github.com/Mr-Wiseguy/kmc-gcc-wrapper/releases/download/master/kmc-gcc-wrapper-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/kmcgcc
-
 # Debian and derivatives (apt)
 if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; then
+    supported = true
+
     echo "Installing packages for Debian or derivative (apt)"
 
     # Add i386 arch for wine32
     # sudo dpkg --add-architecture i386
-    ${SUDO} apt install -y git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev ninja-build cpp-mips-linux-gnu gcc-multilib|| exit 1
+    ${SUDO} apt install -y curl git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev ninja-build cpp-mips-linux-gnu gcc-multilib|| exit 1
     python3 -m pip install -U -r requirements.txt
 
     if [[ $1 == "--extra" ]]; then
@@ -66,13 +66,15 @@ fi
 
 # Arch Linux and derivatives (pacman)
 if cat /etc/os-release | grep -E 'ID=arch|ID_LIKE=arch' &> /dev/null; then
+    supported = true
+
     echo "Installing packages for Arch Linux or derivative (pacman)"
 
     # Upgrade existing packages (note: no --noconfirm)
     ${SUDO} pacman -Syu || exit 1
 
     # Install dependencies
-    ${SUDO} pacman -S --noconfirm --needed git python python-pip python-setuptools base-devel zlib libyaml ninja || exit 1
+    ${SUDO} pacman -S --noconfirm --needed curl git python python-pip python-setuptools base-devel zlib libyaml ninja || exit 1
     python3 -m pip install -U -r requirements.txt
 
     # Install binutils if required
@@ -107,9 +109,11 @@ fi
 
 # openSUSE (zypper)
 if cat /etc/os-release | grep ID=opensuse &> /dev/null; then
+    supported = true
+
     echo "Installing packages for openSUSE (zypper)"
 
-    ${SUDO} zypper -n install git python3 python3-devel python3-pip python3-setuptools gcc gcc-c++ glibc-devel make cross-mips-binutils zlib-devel libyaml-devel ninja
+    ${SUDO} zypper -n curl install git python3 python3-devel python3-pip python3-setuptools gcc gcc-c++ glibc-devel make cross-mips-binutils zlib-devel libyaml-devel ninja
 
     # Link the openSUSE locations for binutils tools to their usual GNU locations
     ${SUDO} ln -s /usr/bin/mips-suse-linux-addr2line /usr/bin/mips-linux-gnu-addr2line
@@ -142,6 +146,8 @@ fi
 
 # Alpine Linux (apk)
 if cat /etc/os-release | grep ID=alpine &> /dev/null; then
+    supported = true
+
     echo "Installing packages for Alpine Linux (apk)"
 
     # If the edge/community repo isn't present, it needs to be for astyle
@@ -150,7 +156,7 @@ if cat /etc/os-release | grep ID=alpine &> /dev/null; then
     fi
 
     # Install dependencies
-    ${SUDO} apk add --no-cache bash wget git python3 python3-dev py3-pip build-base zlib-dev yaml-dev ninja
+    ${SUDO} apk add --no-cache bash curl wget git python3 python3-dev py3-pip build-base zlib-dev yaml-dev ninja
     python3 -m pip install -U -r requirements.txt
 
     # Install binutils if required
@@ -198,10 +204,23 @@ if cat /etc/os-release | grep ID=alpine &> /dev/null; then
 fi
 
 
-echo "The following distros (and their derivatives) are supported by install.sh:"
-echo "- Debian/Ubuntu (apt)"
-echo "- Arch Linux (pacman)"
-echo "- openSUSE (zypper)"
-echo "- Alpine Linux (apk)"
-echo "Please consider contributing and adding an installation script for your distro."
-exit 1
+if [ "$supported" = false ]; then
+    echo "The following distros (and their derivatives) are supported by install.sh:"
+    echo "- Debian/Ubuntu (apt)"
+    echo "- Arch Linux (pacman)"
+    echo "- openSUSE (zypper)"
+    echo "- Alpine Linux (apk)"
+    echo "Please consider contributing and adding an installation script for your distro."
+    exit 1
+fi
+
+echo "Downloading gcc/binutils for Linux"
+curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc
+curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc
+
+# 2.7.2
+curl -L "https://github.com/decompals/mips-gcc-2.7.2/releases/download/main/gcc-2.7.2-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2
+curl -L "https://github.com/decompals/mips-binutils-2.6/releases/download/main/binutils-2.6-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2
+
+echo "Downloading IDO 5.3 for Linux"
+curl -L "https://github.com/ethteck/ido-static-recomp/releases/download/per-function/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3

@@ -434,7 +434,7 @@ EvtScript N(80219054) = {
         EVT_END_THREAD
         EVT_ADD(LW(0), 20)
         EVT_ADD(LW(1), 20)
-        EVT_CALL(PlayEffect, EFFECT_ID_40, 0, LW(0), LW(1), LW(2), LW(3), 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_CALL(PlayEffect, EFFECT_RECOVER, 0, LW(0), LW(1), LW(2), LW(3), 0, 0, 0, 0, 0, 0, 0, 0)
         EVT_CALL(GetActorHP, ACTOR_SELF, LW(0))
         EVT_ADD(LW(0), LW(3))
         EVT_CALL(SetEnemyHP, ACTOR_SELF, LW(0))

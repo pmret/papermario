@@ -1388,9 +1388,9 @@ NpcGroupList N(npcGroupList_80245AEC) = {
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-EffectInstance* playFX_82();
+EffectInstance* fx_sun();
 
 ApiStatus N(func_80240B00_CE7200)(Evt* script, s32 isInitialCall) {
-    playFX_82(1, 0, 0, 0, 0, 0);
+    fx_sun(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

@@ -5,132 +5,141 @@
 #include "common_structs.h"
 
 enum EffectID {
-    EFFECT_ID_00 = 0x00,
-    EFFECT_ID_01,
-    EFFECT_ID_06 = 0x06,
-    EFFECT_ID_07,
-    EFFECT_ID_08,
-    EFFECT_ID_09,
-    EFFECT_ID_0A,
-    EFFECT_ID_0B,
-    EFFECT_ID_0C,
-    EFFECT_ID_0D,
-    EFFECT_ID_0E,
-    EFFECT_ID_0F,
-    EFFECT_ID_10,
-    EFFECT_ID_11,
-    EFFECT_ID_12,
-    EFFECT_ID_13,
-    EFFECT_ID_14,
-    EFFECT_ID_15,
-    EFFECT_ID_16,
-    EFFECT_ID_17,
-    EFFECT_ID_18,
-    EFFECT_ID_19,
-    EFFECT_ID_1A,
-    EFFECT_ID_1B,
-    EFFECT_ID_1C,
-    EFFECT_ID_1D,
-    EFFECT_ID_1E,
-    EFFECT_ID_1F,
-    EFFECT_ID_20,
-    EFFECT_ID_21,
-    EFFECT_ID_22,
-    EFFECT_ID_23,
-    EFFECT_ID_24,
-    EFFECT_ID_25,
-    EFFECT_ID_26,
-    EFFECT_ID_27,
-    EFFECT_ID_28,
-    EFFECT_ID_29,
-    EFFECT_ID_2B = 0x2B,
-    EFFECT_ID_2C,
-    EFFECT_ID_2D,
-    EFFECT_ID_2E,
-    EFFECT_ID_2F,
-    EFFECT_ID_30,
-    EFFECT_ID_31,
-    EFFECT_ID_32,
-    EFFECT_ID_33,
-    EFFECT_ID_34,
-    EFFECT_ID_35,
-    EFFECT_ID_36,
-    EFFECT_ID_37,
-    EFFECT_ID_38,
-    EFFECT_ID_39,
-    EFFECT_ID_3A,
-    EFFECT_ID_3B,
-    EFFECT_ID_3C,
-    EFFECT_ID_3D,
-    EFFECT_ID_3E,
-    EFFECT_ID_3F,
-    EFFECT_ID_40,
-    EFFECT_ID_41,
-    EFFECT_ID_42,
-    EFFECT_ID_43,
-    EFFECT_ID_44,
-    EFFECT_ID_45,
-    EFFECT_ID_46,
-    EFFECT_ID_47,
-    EFFECT_ID_48,
-    EFFECT_ID_49,
-    EFFECT_ID_4A,
-    EFFECT_ID_4B,
-    EFFECT_ID_4C,
-    EFFECT_ID_4D,
-    EFFECT_ID_4E,
-    EFFECT_ID_4F,
-    EFFECT_ID_51 = 0x51,
-    EFFECT_ID_52,
-    EFFECT_ID_53,
-    EFFECT_ID_55 = 0x55,
-    EFFECT_ID_56,
-    EFFECT_ID_57,
-    EFFECT_ID_58,
-    EFFECT_ID_59,
-    EFFECT_ID_5A,
-    EFFECT_ID_5B,
-    EFFECT_ID_5C,
-    EFFECT_ID_5D,
-    EFFECT_ID_5E,
-    EFFECT_ID_5F,
-    EFFECT_ID_60,
-    EFFECT_ID_61,
-    EFFECT_ID_62,
-    EFFECT_ID_63,
-    EFFECT_ID_64,
-    EFFECT_ID_65,
-    EFFECT_ID_66,
-    EFFECT_ID_67,
-    EFFECT_ID_68,
-    EFFECT_ID_69,
-    EFFECT_ID_6B = 0x6B,
-    EFFECT_ID_6C,
-    EFFECT_ID_6D,
-    EFFECT_ID_6E,
-    EFFECT_ID_6F,
-    EFFECT_ID_70,
-    EFFECT_ID_71,
-    EFFECT_ID_72,
-    EFFECT_ID_73,
-    EFFECT_ID_74,
-    EFFECT_ID_75,
-    EFFECT_ID_77 = 0x77,
-    EFFECT_ID_78,
-    EFFECT_ID_79,
-    EFFECT_ID_7A,
-    EFFECT_ID_7B,
-    EFFECT_ID_7C,
-    EFFECT_ID_7D,
-    EFFECT_ID_7E,
-    EFFECT_ID_7F,
-    EFFECT_ID_80,
-    EFFECT_ID_81,
-    EFFECT_ID_82,
-    EFFECT_ID_83,
-    EFFECT_ID_84,
-    EFFECT_ID_85,
-    EFFECT_ID_86,
+    EFFECT_00 = 0x00,
+    EFFECT_BIG_SMOKE_PUFF,
+    EFFECT_02, // unused
+    EFFECT_03, // unused
+    EFFECT_04, // unused
+    EFFECT_05, // unused
+    EFFECT_LANDING_DUST,
+    EFFECT_WALKING_DUST,
+    EFFECT_FLOWER_SPLASH,
+    EFFECT_FLOWER_TRAIL,
+    EFFECT_CLOUD_PUFF,
+    EFFECT_CLOUD_TRAIL,
+    EFFECT_FOOTPRINT,
+    EFFECT_FLOATING_FLOWER,
+    EFFECT_SNOWFLAKE,
+    EFFECT_STAR,
+    EFFECT_EMOTE,
+    EFFECT_SPARKLES,
+    EFFECT_SHAPE_SPELL,
+    EFFECT_GATHER_ENERGY_PINK,
+    EFFECT_DROP_LEAVES,
+    EFFECT_DUST,
+    EFFECT_SHATTERING_STONES,
+    EFFECT_SMOKE_RING,
+    EFFECT_DAMAGE_STARS,
+    EFFECT_EXPLOSION,
+    EFFECT_LENS_FLARE,
+    EFFECT_GOT_ITEM_OUTLINE,
+    EFFECT_SPIKY_WHITE_AURA,
+    EFFECT_SMOKE_IMPACT,
+    EFFECT_DAMAGE_INDICATOR,
+    EFFECT_PURPLE_RING,
+    EFFECT_FLAME,
+    EFFECT_STARS_BURST,
+    EFFECT_STARS_SHIMMER,
+    EFFECT_RISING_BUBBLE,
+    EFFECT_RING_BLAST,
+    EFFECT_SHOCKWAVE,
+    EFFECT_MUSIC_NOTE,
+    EFFECT_SMOKE_BURST,
+    EFFECT_SWEAT,
+    EFFECT_SLEEP_BUBBLE,
+    EFFECT_2A, // unused
+    EFFECT_WINDY_LEAVES,
+    EFFECT_FALLING_LEAVES,
+    EFFECT_STARS_SPREAD,
+    EFFECT_STEAM_BURST,
+    EFFECT_STARS_ORBITING,
+    EFFECT_BIG_SNOWFLAKES,
+    EFFECT_DEBUFF,
+    EFFECT_GREEN_IMPACT,
+    EFFECT_RADIAL_SHIMMER,
+    EFFECT_ENDING_DECALS,
+    EFFECT_LIGHT_RAYS,
+    EFFECT_LIGHTNING,
+    EFFECT_FIRE_BREATH,
+    EFFECT_SHIMMER_BURST,
+    EFFECT_ENERGY_SHOCKWAVE,
+    EFFECT_SHIMMER_WAVE,
+    EFFECT_AURA,
+    EFFECT_3C,
+    EFFECT_3D,
+    EFFECT_BLAST,
+    EFFECT_FIRE_FLOWER,
+    EFFECT_RECOVER,
+    EFFECT_DISABLE_X,
+    EFFECT_BOMBETTE_BREAKING,
+    EFFECT_FIREWORK,
+    EFFECT_CONFETTI,
+    EFFECT_SNOWFALL,
+    EFFECT_46,
+    EFFECT_GATHER_MAGIC,
+    EFFECT_ATTACK_RESULT_TEXT,
+    EFFECT_SMALL_GOLD_SPARKLE,
+    EFFECT_FLASHING_BOX_SHOCKWAVE,
+    EFFECT_BALLOON,
+    EFFECT_FLOATING_ROCK,
+    EFFECT_CHOMP_DROP,
+    EFFECT_QUIZMO_STAGE,
+    EFFECT_RADIATING_ENERGY_ORB,
+    EFFECT_QUIZMO_ANSWER, // unused
+    EFFECT_MOTION_BLUR_FLAME,
+    EFFECT_ENERGY_ORB_WAVE,
+    EFFECT_MERLIN_HOUSE_STARS,
+    EFFECT_QUIZMO_AUDIENCE, // unused
+    EFFECT_BUTTERFLIES,
+    EFFECT_STAT_CHANGE,
+    EFFECT_SNAKING_STATIC,
+    EFFECT_THUNDERBOLT_RING,
+    EFFECT_SQUIRT,
+    EFFECT_WATER_BLOCK,
+    EFFECT_WATERFALL,
+    EFFECT_WATER_FOUNTAIN,
+    EFFECT_UNDERWATER,
+    EFFECT_LIGHTNING_BOLT,
+    EFFECT_WATER_SPLASH,
+    EFFECT_SNOWMAN_DOLL,
+    EFFECT_FRIGHT_JAR,
+    EFFECT_STOP_WATCH,
+    EFFECT_63,
+    EFFECT_THROW_SPINY,
+    EFFECT_65,
+    EFFECT_TUBBA_HEART_ATTACK,
+    EFFECT_WHIRLWIND,
+    EFFECT_RED_IMPACT,
+    EFFECT_FLOATING_CLOUD_PUFF,
+    EFFECT_6A, // unused
+    EFFECT_ENERGY_IN_OUT,
+    EFFECT_TATTLE_WINDOW,
+    EFFECT_SHINY_FLARE,
+    EFFECT_HUFF_PUFF_BREATH,
+    EFFECT_COLD_BREATH,
+    EFFECT_EMBERS,
+    EFFECT_HIEROGLYPHS,
+    EFFECT_MISC_PARTICLES,
+    EFFECT_STATIC_STATUS,
+    EFFECT_MOVING_CLOUD,
+    EFFECT_75,
+    EFFECT_76, // unused
+    EFFECT_FIREWORK_ROCKET,
+    EFFECT_PEACH_STAR_BEAM,
+    EFFECT_CHAPTER_CHANGE,
+    EFFECT_ICE_SHARD,
+    EFFECT_SPIRIT_CARD,
+    EFFECT_LIL_OINK,
+    EFFECT_SOMETHING_ROTATING,
+    EFFECT_BREAKING_JUNK,
+    EFFECT_PARTNER_BUFF,
+    EFFECT_QUIZMO_ASSISTANT,
+    EFFECT_ICE_PILLAR,
+    EFFECT_SUN,
+    EFFECT_STAR_SPIRITS_ENERGY,
+    EFFECT_PINK_SPARKLES,
+    EFFECT_STAR_OUTLINE,
+    EFFECT_86,
 };
 
 typedef struct {
@@ -194,7 +203,7 @@ typedef struct StarSpiritEffect {
     /* 0x54 */ struct StarSpiritEffectUnkStruct* unk_54;
 } StarSpiritEffect; // size = 0x58
 
-typedef struct Effect1 {
+typedef struct BigSmokePuffFXData {
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ s16 unk_02;
     /* 0x04 */ s16 unk_04;
@@ -208,9 +217,9 @@ typedef struct Effect1 {
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ char unk_28[0x4];
-} Effect1; // size = 0x2C
+} BigSmokePuffFXData; // size = 0x2C
 
-typedef struct Effect6 {
+typedef struct LandingDustFXData {
     /* 0x00 */ u16 type;
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ f32 x;
@@ -229,9 +238,9 @@ typedef struct Effect6 {
     /* 0x38 */ s32 unk_38;
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ s32 unk_40;
-} Effect6; // size = 0x44
+} LandingDustFXData; // size = 0x44
 
-typedef struct Effect7 {
+typedef struct WalkingDustFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ u16 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -246,10 +255,10 @@ typedef struct Effect7 {
     /* 0x6C */ s32 unk_6C;
     /* 0x70 */ s32 unk_70;
     /* 0x74 */ s32 unk_74;
-} Effect7; // size = 0x78
+} WalkingDustFXData; // size = 0x78
 
-// Used by effects 8 and 9 (TODO: better name)
-typedef struct Effect8 {
+// Used by both flower_splash and flower_trail
+typedef struct FlowerFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ u16 unk_04;
     /* 0x06 */ s16 unk_06;
@@ -276,9 +285,9 @@ typedef struct Effect8 {
     /* 0x8C */ f32 unk_8C;
     /* 0x90 */ f32 unk_90;
     /* 0x94 */ f32 unk_94;
-} Effect8; // size = 0x98
+} FlowerFXData; // size = 0x98
 
-typedef struct Effect10 {
+typedef struct CloudPuffFXData {
     /* 0x00 */ s32 alive;
     /* 0x04 */ char unk_04[0x2];
     /* 0x06 */ s16 lifetime;
@@ -300,9 +309,9 @@ typedef struct Effect10 {
     /* 0x40 */ s32 unk_40;
     /* 0x44 */ f32 unk_44;
     /* 0x48 */ f32 unk_48;
-} Effect10; // size = 0x4C
+} CloudPuffFXData; // size = 0x4C
 
-typedef struct Effect11 {
+typedef struct CloudTrailFXData {
     /* 0x00 */ s32 alive;
     /* 0x04 */ u16 unk_04;
     /* 0x06 */ s16 lifetime;
@@ -324,9 +333,9 @@ typedef struct Effect11 {
     /* 0x40 */ f32 unk_40;
     /* 0x44 */ s32 unk_44;
     /* 0x48 */ char unk_48[0x8];
-} Effect11; // size = 0x50
+} CloudTrailFXData; // size = 0x50
 
-typedef struct Effect12 {
+typedef struct FootprintFXData {
     /* 0x00 */ s32 alive;
     /* 0x04 */ char unk_04[0x2];
     /* 0x06 */ s16 lifetime;
@@ -350,9 +359,9 @@ typedef struct Effect12 {
     /* 0x88 */ char unk_88[0x8];
     /* 0x90 */ f32 unk_90;
     /* 0x94 */ f32 unk_94;
-} Effect12; // size = 0x98
+} FootprintFXData; // size = 0x98
 
-typedef struct Effect13 {
+typedef struct FloatingFlowerFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -371,9 +380,9 @@ typedef struct Effect13 {
     /* 0x3C */ s32 unk_3C;
     /* 0x40 */ s32 unk_40;
     /* 0x44 */ s32 unk_44;
-} Effect13; // size = 0x48
+} FloatingFlowerFXData; // size = 0x48
 
-typedef struct Effect14 {
+typedef struct SnowflakeFXData {
     /* 0x00 */ f32 xPos;
     /* 0x04 */ f32 yPos;
     /* 0x08 */ f32 zPos;
@@ -385,9 +394,9 @@ typedef struct Effect14 {
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ s32 unk_28;
-} Effect14; // size = 0x2C
+} SnowflakeFXData; // size = 0x2C
 
-typedef struct Effect15 {
+typedef struct StarFXData {
     /* 0x000 */ s32 unk_00;
     /* 0x004 */ f32 unk_04;
     /* 0x008 */ f32 unk_08;
@@ -409,9 +418,9 @@ typedef struct Effect15 {
     /* 0x244 */ s32 unk_244;
     /* 0x248 */ s32 unk_248;
     /* 0x24C */ s32 unk_24C;
-} Effect15; // size = 0x250
+} StarFXData; // size = 0x250
 
-typedef struct Effect16 {
+typedef struct EmoteFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -428,9 +437,26 @@ typedef struct Effect16 {
     /* 0x34 */ s32 unk_34;
     /* 0x38 */ s32 unk_38;
     /* 0x3C */ s32 unk_3C;
-} Effect16; // size = 0x40
+} EmoteFXData; // size = 0x40
 
-typedef struct Effect73 {
+typedef struct AttackResultTextFXData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ char unk_2C[0x4];
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+} AttackResultTextFXData; // size = 0x38
+
+typedef struct SmallGoldSparkleFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -440,9 +466,9 @@ typedef struct Effect73 {
     /* 0x18 */ s32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ s32 unk_20;
-} Effect73; // size = 0x24
+} SmallGoldSparkleFXData; // size = 0x24
 
-typedef struct Effect75 {
+typedef struct BalloonFXData {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -452,7 +478,7 @@ typedef struct Effect75 {
     /* 0x18 */ f32 unk_18;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
-} Effect75; // size = 0x24
+} BalloonFXData; // size = 0x24
 
 typedef struct Effect134 {
     /* 0x00 */ s32 unk_00;
@@ -472,9 +498,9 @@ typedef struct Effect134 {
 } Effect134; // size = 0x38
 
 // TODO figure out what this actually is
-// playFX_4E invokes gEffectTable[78]'s entryPoint function
-// playFX_6F invokes gEffectTable[111]'s entryPoint function
-// playFX_83 invokes gEffectTable[131]'s entryPoint function
+// fx_quizmo_stage invokes gEffectTable[78]'s entryPoint function
+// fx_cold_breath invokes gEffectTable[111]'s entryPoint function
+// fx_star_spirits_energy invokes gEffectTable[131]'s entryPoint function
 // These functions are currently typed to return void
 // Assume they return an Effect*, and this struct is accessed at unk_0C,
 // but this struct differs from EffectInstanceData
@@ -607,140 +633,136 @@ EffectInstance* create_effect_instance(EffectBlueprint* effectBp);
 void remove_effect(EffectInstance*);
 s32 load_effect(s32 effectIndex);
 
-void playFX_00(s32, f32, f32, f32, s32);
-void playFX_01(f32, f32, f32);
-void playFX_02(s32, f32, f32, f32, s32);
-EffectInstance* playFX_03(s32, f32, f32, f32, s32);
-EffectInstance* playFX_04(s32, f32, f32, f32, s32);
-EffectInstance* playFX_05(s32, f32, f32, f32, s32);
-void fx_land(s32, f32, f32, f32, f32);
-void fx_walk(s32, f32, f32, f32, f32, f32);
-void playFX_08(f32, f32, f32, f32);
-void playFX_09(s32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_0A(f32, f32, f32, f32);
-EffectInstance* playFX_0B(s32, f32, f32, f32);
-EffectInstance* playFX_0C(f32, f32, f32, f32, f32);
-EffectInstance* playFX_0D(s32, f32, f32, f32, s32);
-EffectInstance* playFX_0E(f32, f32, f32, s32);
-void playFX_0F(s32, f32, f32, f32, f32, f32, f32, f32);
+void fx_big_dust_puff(s32, f32, f32, f32, s32);
+void fx_big_smoke_puff(f32, f32, f32);
+void fx_landing_dust(s32, f32, f32, f32, f32);
+void fx_walking_dust(s32, f32, f32, f32, f32, f32);
+void fx_flower_splash(f32, f32, f32, f32);
+void fx_flower_trail(s32, f32, f32, f32, f32, f32);
+EffectInstance* fx_cloud_puff(f32, f32, f32, f32);
+EffectInstance* fx_cloud_trail(s32, f32, f32, f32);
+EffectInstance* fx_footprint(f32, f32, f32, f32, f32);
+EffectInstance* fx_floating_flower(s32, f32, f32, f32, s32);
+EffectInstance* fx_snowflake(f32, f32, f32, s32);
+void fx_star(s32, f32, f32, f32, f32, f32, f32, f32);
 void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
-void playFX_11(s32, f32, f32, f32, f32);
-EffectInstance* playFX_12(s32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_13(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_14(s32, f32, f32, f32, s32);
-EffectInstance* playFX_15(s32, f32, f32, f32, s32);
-EffectInstance* playFX_16(s32, f32, f32, f32, f32);
-void playFX_17(s32, f32, f32, f32);
-void playFX_18(s32, f32, f32, f32, f32, f32, f32, s32);
-void playFX_19(s32, f32, f32, f32);
-EffectInstance* playFX_1A(s32, f32, f32, f32, s32);
-EffectInstance* playFX_1B(s32, f32, f32, f32, f32, s32*);
-EffectInstance* playFX_1C(s32, f32, f32, f32, s32);
-void playFX_1D(s32, f32, f32, f32, f32, s32, f32, s32);
-EffectInstance* playFX_1E(s32, f32, f32, f32, f32, f32, s32, s32*);
-EffectInstance* playFX_1F(s32, f32, f32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_20(s32, f32, f32, f32, f32, EffectInstance**);
-EffectInstance* playFX_21(s32, f32, f32, f32, f32, f32, s32);
-void playFX_22(s32, f32, f32, f32, f32, f32, s32, s32);
-EffectInstance* playFX_23(u32, f32, f32, f32, f32);
-EffectInstance* playFX_24(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_25(s32, f32, f32, f32);
-void playFX_26(s32, f32, f32, f32);
-EffectInstance* playFX_27(s32, f32, f32, f32, f32, s32);
+void fx_sparkles(s32, f32, f32, f32, f32);
+EffectInstance* fx_shape_spell(s32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_gather_energy_pink(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_drop_leaves(s32, f32, f32, f32, s32);
+EffectInstance* fx_dust(s32, f32, f32, f32, s32);
+EffectInstance* fx_shattering_stones(s32, f32, f32, f32, f32);
+void fx_smoke_ring(s32, f32, f32, f32);
+void fx_damage_stars(s32, f32, f32, f32, f32, f32, f32, s32);
+void fx_explosion(s32, f32, f32, f32);
+EffectInstance* fx_lens_flare(s32, f32, f32, f32, s32);
+EffectInstance* fx_got_item_outline(s32, f32, f32, f32, f32, s32*);
+EffectInstance* fx_spiky_white_aura(s32, f32, f32, f32, s32);
+void fx_smoke_impact(s32, f32, f32, f32, f32, s32, f32, s32);
+EffectInstance* fx_damage_indicator(s32, f32, f32, f32, f32, f32, s32, s32*);
+EffectInstance* fx_purple_ring(s32, f32, f32, f32, f32, f32, f32, f32);
+EffectInstance* fx_flame(s32, f32, f32, f32, f32, EffectInstance**);
+EffectInstance* fx_stars_burst(s32, f32, f32, f32, f32, f32, s32);
+void fx_stars_shimmer(s32, f32, f32, f32, f32, f32, s32, s32);
+EffectInstance* fx_rising_bubble(u32, f32, f32, f32, f32);
+EffectInstance* fx_ring_blast(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_shockwave(s32, f32, f32, f32);
+void fx_music_note(s32, f32, f32, f32);
+EffectInstance* fx_smoke_burst(s32, f32, f32, f32, f32, s32);
 void fx_sweat(s32, f32 x, f32 y, f32 z, f32, f32, s32);
 void fx_sleep_bubble(s32, f32, f32, f32, f32, f32, s32*);
-EffectInstance* playFX_2A(s32, f32, f32, f32);
-EffectInstance* playFX_2B(s32, f32, f32, f32);
-EffectInstance* playFX_2C(s32, f32, f32, f32);
-void playFX_2D(s32, f32, f32, f32, s32, s32);
-void playFX_2E(s32, f32, f32, f32, f32, s32);
-void playFX_2F(s32, f32, f32, f32, f32, s32, s32*);
-void playFX_30(s32, f32, f32, f32);
-void playFX_31(s32, f32, f32, f32);
-void playFX_32(s32, f32, f32, f32, f32);
-EffectInstance* playFX_33(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_34(s32, f32, f32, f32, f32, s32*);
-EffectInstance* playFX_35(s32, f32, f32, f32, f32, s32*);
-EffectInstance* playFX_36(s32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_37(s32, f32, f32, f32, f32, f32, f32, s32, s32, s32);
-EffectInstance* playFX_38(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_39(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_3A(s32, f32, f32, f32, f32, f32, s32, s32);
-void playFX_3B(s32, f32, f32, f32, f32, s32*);
-EffectInstance* playFX_3C(s32, f32, f32, f32, f32, s32*);
-void playFX_3D(s32, f32, f32, f32, f32, f32, f32, s32, s32*);
-EffectInstance* playFX_3E(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_3F(s32, f32, f32, f32, s32);
-EffectInstance* playFX_40(s32, f32, f32, f32, s32);
-EffectInstance* playFX_41(s32, f32, f32, f32, s32);
-EffectInstance* playFX_42(s32, s32, s32, f32, s32, s32);
-EffectInstance* playFX_43(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_44(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_45(s32, s32);
-EffectInstance* playFX_46_whirlwind(s32, EffectWhirlwind*, f32, s32);
-EffectInstance* playFX_47(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_48(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_49(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_4A(s32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_4B(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_4C(s32, f32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_4D(s32, f32, f32, f32, f32, s32, f32, s32, f32, s32);
-EffectInstance* playFX_4E(s32, f32, f32, f32);
-EffectInstance* playFX_4F(s32, f32, f32, f32, f32, s32);
-void playFX_50(s32, f32, f32, f32);
-EffectInstance* playFX_51(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_52(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_53(s32, f32, f32, f32);
-EffectInstance* playFX_54(s32, f32, f32, f32);
-EffectInstance* playFX_55(s32, f32, f32, f32);
-EffectInstance* playFX_56(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_57(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_58(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_59(s32, f32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_5A(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
-EffectInstance* playFX_5B(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_5C(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_5D(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_5E(s32, f32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_5F(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
-EffectInstance* playFX_60(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_61(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_62(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_63(s32, f32, f32, f32, f32, f32, f32, f32, s32, s32);
-EffectInstance* playFX_64(s32, f32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_65(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_66(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_67(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_68(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_69(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6A(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6B(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6C(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6D(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6E(s32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6F(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_70(s32, f32, f32, f32, f32, f32, f32, s32, s32, f32, f32);
-EffectInstance* playFX_71(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_72(s32, f32, f32, f32, f32, f32, f32, s32, s32);
-EffectInstance* playFX_73(s32, f32, f32, f32, f32, s32, s32); //returns ptr to struct unk_802BE310* in watt.c
-EffectInstance* playFX_74(s32, f32, f32, f32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_75(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_76(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_77(s32, f32, f32, f32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_78(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_79(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_7A(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_7B(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_7C(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_7D(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_7E(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_7F(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_80(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_81(s32, f32 x, f32 y, f32 z, f32, s32);
-EffectInstance* playFX_82(s32, f32, f32, f32, f32, s32 time);
-EffectInstance* playFX_83(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_84(s32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_85(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_86(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_2A(s32, f32, f32, f32);
+EffectInstance* fx_windy_leaves(s32, f32, f32, f32);
+EffectInstance* fx_falling_leaves(s32, f32, f32, f32);
+void fx_stars_spread(s32, f32, f32, f32, s32, s32);
+void fx_steam_burst(s32, f32, f32, f32, f32, s32);
+void fx_stars_orbiting(s32, f32, f32, f32, f32, s32, s32*);
+void fx_big_snowflakes(s32, f32, f32, f32);
+void fx_debuff(s32, f32, f32, f32);
+void fx_green_impact(s32, f32, f32, f32, f32);
+EffectInstance* fx_radial_shimmer(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_ending_decals(s32, f32, f32, f32, f32, s32*);
+EffectInstance* fx_light_rays(s32, f32, f32, f32, f32, s32*);
+EffectInstance* fx_lightning(s32, f32, f32, f32, f32, f32);
+EffectInstance* fx_fire_breath(s32, f32, f32, f32, f32, f32, f32, s32, s32, s32);
+EffectInstance* fx_shimmer_burst(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_energy_shockwave(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_shimmer_wave(s32, f32, f32, f32, f32, f32, s32, s32);
+void fx_aura(s32, f32, f32, f32, f32, s32*);
+EffectInstance* fx_3C(s32, f32, f32, f32, f32, s32*);
+void fx_3D(s32, f32, f32, f32, f32, f32, f32, s32, s32*);
+EffectInstance* fx_blast(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_fire_flower(s32, f32, f32, f32, s32);
+EffectInstance* fx_recover(s32, f32, f32, f32, s32);
+EffectInstance* fx_disable_x(s32, f32, f32, f32, s32);
+EffectInstance* fx_bombette_breaking(s32, s32, s32, f32, s32, s32);
+EffectInstance* fx_firework(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_confetti(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_snowfall(s32, s32);
+EffectInstance* fx_46(s32, EffectWhirlwind*, f32, s32);
+EffectInstance* fx_gather_magic(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_attack_result_text(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_small_gold_sparkle(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_flashing_box_shockwave(s32, f32, f32, f32, f32, f32);
+EffectInstance* fx_balloon(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_floating_rock(s32, f32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_chomp_drop(s32, f32, f32, f32, f32, s32, f32, s32, f32, s32);
+EffectInstance* fx_quizmo_stage(s32, f32, f32, f32);
+EffectInstance* fx_radiating_energy_orb(s32, f32, f32, f32, f32, s32);
+void fx_quizmo_answer(s32, f32, f32, f32);
+EffectInstance* fx_motion_blur_flame(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_energy_orb_wave(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_merlin_house_stars(s32, f32, f32, f32);
+EffectInstance* fx_quizmo_audience(s32, f32, f32, f32);
+EffectInstance* fx_butterflies(s32, f32, f32, f32);
+EffectInstance* fx_stat_change(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_snaking_static(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_thunderbolt_ring(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_squirt(s32, f32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_water_block(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
+EffectInstance* fx_waterfall(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_water_fountain(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_underwater(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_lightning_bolt(s32, f32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_water_splash(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
+EffectInstance* fx_snowman_doll(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_fright_jar(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_stop_watch(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_63(s32, f32, f32, f32, f32, f32, f32, f32, s32, s32);
+EffectInstance* fx_throw_spiny(s32, f32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_65(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_tubba_heart_attack(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_whirlwind(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_red_impact(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_floating_cloud_puff(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_6A(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_energy_in_out(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_tattle_window(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_shiny_flare(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_huff_puff_breath(s32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_cold_breath(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_embers(s32, f32, f32, f32, f32, f32, f32, s32, s32, f32, f32);
+EffectInstance* fx_hieroglyphs(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_misc_particles(s32, f32, f32, f32, f32, f32, f32, s32, s32);
+EffectInstance* fx_static_status(s32, f32, f32, f32, f32, s32, s32); //returns ptr to struct unk_802BE310* in watt.c
+EffectInstance* fx_moving_cloud(s32, f32, f32, f32, f32, f32, f32, f32, f32);
+EffectInstance* fx_75(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_76(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_firework_rocket(s32, f32, f32, f32, f32, f32, f32, f32, s32);
+EffectInstance* fx_peach_star_beam(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_chapter_change(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_ice_shard(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_spirit_card(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_lil_oink(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_something_rotating(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_breaking_junk(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_partner_buff(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_quizmo_assistant(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_ice_pillar(s32, f32 x, f32 y, f32 z, f32, s32);
+EffectInstance* fx_sun(s32, f32, f32, f32, f32, s32 time);
+EffectInstance* fx_star_spirits_energy(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_pink_sparkles(s32, f32, f32, f32, f32, f32);
+EffectInstance* fx_star_outline(s32, f32, f32, f32, f32, s32);
+EffectInstance* fx_86(s32, f32, f32, f32, f32, s32);
 
 #endif

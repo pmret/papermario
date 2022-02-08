@@ -32,7 +32,7 @@ void entity_TriggerBlock_start_bound_script_2(Entity* entity) {
 }
 
 void entity_TriggerBlock_play_vanish_effect(Entity* entity) {
-    TriggerBlockVanishEffect = playFX_6F(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
+    TriggerBlockVanishEffect = fx_cold_breath(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
 }
 
 void entity_HitItemBlock_play_anim(Entity* entity) {
