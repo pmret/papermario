@@ -29,9 +29,9 @@ glabel func_8006CA70
 /* 47ED0 8006CAD0 AC225904 */  sw        $v0, %lo(D_80095904)($at)
 /* 47ED4 8006CAD4 14600004 */  bnez      $v1, .L8006CAE8
 /* 47ED8 8006CAD8 24020002 */   addiu    $v0, $zero, 2
-/* 47EDC 8006CADC 3C028009 */  lui       $v0, %hi(D_80095970)
+/* 47EDC 8006CADC 3C028009 */  lui       $v0, %hi(vi)
 /* 47EE0 8006CAE0 0801B2C1 */  j         .L8006CB04
-/* 47EE4 8006CAE4 24425970 */   addiu    $v0, $v0, %lo(D_80095970)
+/* 47EE4 8006CAE4 24425970 */   addiu    $v0, $v0, %lo(vi)
 .L8006CAE8:
 /* 47EE8 8006CAE8 14620004 */  bne       $v1, $v0, .L8006CAFC
 /* 47EEC 8006CAEC 00000000 */   nop

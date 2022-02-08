@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osPfsRWInode
+glabel __osPfsRWInode
 /* 4528C 80069E8C 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 45290 80069E90 AFB20030 */  sw        $s2, 0x30($sp)
 /* 45294 80069E94 00809021 */  addu      $s2, $a0, $zero

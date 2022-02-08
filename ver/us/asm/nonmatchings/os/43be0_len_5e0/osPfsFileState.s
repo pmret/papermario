@@ -23,7 +23,7 @@ glabel osPfsFileState
 /* 44068 80068C68 30420001 */  andi      $v0, $v0, 1
 /* 4406C 80068C6C 10400048 */  beqz      $v0, .L80068D90
 /* 44070 80068C70 24020005 */   addiu    $v0, $zero, 5
-/* 44074 80068C74 0C01A775 */  jal       osCheckId
+/* 44074 80068C74 0C01A775 */  jal       __osCheckId
 /* 44078 80068C78 02202021 */   addu     $a0, $s1, $zero
 /* 4407C 80068C7C 14400044 */  bnez      $v0, .L80068D90
 /* 44080 80068C80 00000000 */   nop
@@ -68,7 +68,7 @@ glabel osPfsFileState
 /* 4410C 80068D0C 02202021 */   addu     $a0, $s1, $zero
 /* 44110 80068D10 00409021 */  addu      $s2, $v0, $zero
 /* 44114 80068D14 27A50010 */  addiu     $a1, $sp, 0x10
-/* 44118 80068D18 0C01A7A3 */  jal       osPfsRWInode
+/* 44118 80068D18 0C01A7A3 */  jal       __osPfsRWInode
 /* 4411C 80068D1C 00003021 */   addu     $a2, $zero, $zero
 /* 44120 80068D20 1440001B */  bnez      $v0, .L80068D90
 /* 44124 80068D24 00000000 */   nop

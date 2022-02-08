@@ -90,7 +90,7 @@ glabel osPfsAllocateFile
 /* 436CC 800682CC 27A50020 */  addiu     $a1, $sp, 0x20
 /* 436D0 800682D0 00003021 */  addu      $a2, $zero, $zero
 /* 436D4 800682D4 323000FF */  andi      $s0, $s1, 0xff
-/* 436D8 800682D8 0C01A7A3 */  jal       osPfsRWInode
+/* 436D8 800682D8 0C01A7A3 */  jal       __osPfsRWInode
 /* 436DC 800682DC 02003821 */   addu     $a3, $s0, $zero
 /* 436E0 800682E0 00401821 */  addu      $v1, $v0, $zero
 /* 436E4 800682E4 14600048 */  bnez      $v1, .L80068408
@@ -119,7 +119,7 @@ glabel osPfsAllocateFile
 /* 43740 80068340 8FA30244 */  lw        $v1, 0x244($sp)
 /* 43744 80068344 24060001 */  addiu     $a2, $zero, 1
 /* 43748 80068348 32E700FF */  andi      $a3, $s7, 0xff
-/* 4374C 8006834C 0C01A7A3 */  jal       osPfsRWInode
+/* 4374C 8006834C 0C01A7A3 */  jal       __osPfsRWInode
 /* 43750 80068350 A0430001 */   sb       $v1, 1($v0)
 /* 43754 80068354 00401821 */  addu      $v1, $v0, $zero
 /* 43758 80068358 10600006 */  beqz      $v1, .L80068374
@@ -139,7 +139,7 @@ glabel osPfsAllocateFile
 /* 43788 80068388 02402021 */  addu      $a0, $s2, $zero
 /* 4378C 8006838C 27A50020 */  addiu     $a1, $sp, 0x20
 /* 43790 80068390 24060001 */  addiu     $a2, $zero, 1
-/* 43794 80068394 0C01A7A3 */  jal       osPfsRWInode
+/* 43794 80068394 0C01A7A3 */  jal       __osPfsRWInode
 /* 43798 80068398 322700FF */   andi     $a3, $s1, 0xff
 /* 4379C 8006839C 00401821 */  addu      $v1, $v0, $zero
 /* 437A0 800683A0 10600011 */  beqz      $v1, .L800683E8

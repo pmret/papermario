@@ -71,6 +71,11 @@ typedef union {
     u32 as_word;
 } HudFlags;
 
+typedef struct HudScriptPair {
+    /* 0x00 */ HudScript* enabled;
+    /* 0x04 */ HudScript* disabled;
+} HudScriptPair; // size = 0x08
+
 typedef struct HudTransform {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ Vec3f position;
@@ -112,15 +117,10 @@ typedef struct HudElement {
 
 typedef HudElement* HudElementList[320];
 
-extern HudScript* gItemHudScripts[337][2];
-
 extern HudScript HudScript_AnimatedHandPointer[];
 extern HudScript HudScript_StatusCoin[];
 extern HudScript HudScript_Refund[];
 extern HudScript HudScript_MenuTimes[];
-extern HudScript* D_8024FA30[1];
-extern HudScript* gBadgeMenuElements[22];
-extern HudElement* gItemIcons[20];
 
 #define he_End HUD_ELEMENT_OP_End
 #define he_SetRGBA(arg0, image) HUD_ELEMENT_OP_SetRGBA, arg0, (s32)image

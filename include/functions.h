@@ -74,6 +74,17 @@ void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,
                                 s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity);
 
+void update_window_hierarchy(s32 windowIndex, s32 arg1);
+void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
+                        s32* maxLinesPerPage, s32* arg6, s32 charset);
+void replace_window_update(s32 idx, s8 arg1, WindowUpdateFunc pendingFunc);
+void decode_yay0(void* src, void* dst);
+
+//pause
+void pause_init(void);
+void pause_handle_input(s32 buttonsPressed, s32 buttonsHeld);
+void pause_cleanup(void);
+
 // file menu stuff
 void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);
 s8* filemenu_get_menu_message(s32 idx);
@@ -162,8 +173,8 @@ s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
 void peach_set_disguise_anim(s32);
 
-void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
-              s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
+void draw_box(s32 flags, WindowStyleCustom* windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
+              u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
               void* drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
 s32 get_msg_width(s32 msgID, u16 charset);
 
@@ -350,13 +361,6 @@ s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z);
 s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 centerY, f32 sizeX, f32 sizeZ);
 PlayerData* get_player_data(void);
 
-// Pause
-s32 pause_interp_vertical_scroll(s32 deltaBefore);
-void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
-s32 pause_get_total_equipped_bp_cost(void);
-s32 pause_get_menu_msg(s32 index);
-void pause_sort_item_list(s16* arr, s32 len, s32 (*compare)(s16*, s16 *));
-
 s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
 s32 player_raycast_below_cam_relative(PlayerStatus*, f32*, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
@@ -456,8 +460,10 @@ void bgm_push_battle_song(void);
 void func_801497FC(s32 arg0);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
 
-s32 basic_window_update(void);
-s32 basic_hidden_window_update(void);
+void basic_window_update(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
+void basic_hidden_window_update(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                   f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 
 void player_create_target_list(Actor* actor);
 void enemy_create_target_list(Actor* actor);
@@ -685,8 +691,7 @@ void func_800EF300(void);
 void enable_player_shadow(void);
 s32 get_msg_lines(s32 messageID);
 void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, s32, void* drawContents, PopupMessage* popup, s32 parent);
-void set_window_update(s32 panelID, s32);
-
+void set_window_update(s32 panelID, WindowUpdateFunc);
 void snd_stop_sound(s32 soundID);
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
