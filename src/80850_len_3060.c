@@ -1122,7 +1122,7 @@ INCLUDE_ASM(s32, "80850_len_3060", is_ability_active);
 #endif
 
 
-s32 is_partner_ability_active(void) {
+s32 is_partner_ability_active(s32 ability) {
     return 0;
 }
 

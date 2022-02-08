@@ -218,10 +218,10 @@ typedef struct PlayerData {
     /* 0x001 */ s8 hammerLevel;
     /* 0x002 */ s8 curHP;
     /* 0x003 */ s8 curMaxHP;
-    /* 0x004 */ u8 hardMaxHP;
+    /* 0x004 */ s8 hardMaxHP;
     /* 0x005 */ s8 curFP;
     /* 0x006 */ s8 curMaxFP;
-    /* 0x007 */ u8 hardMaxFP;
+    /* 0x007 */ s8 hardMaxFP;
     /* 0x008 */ s8 maxBP;
     /* 0x009 */ s8 level;
     /* 0x00A */ s8 hasActionCommands;
@@ -854,7 +854,7 @@ typedef struct BattleStatus {
     /* 0x000 */ s32 flags1;
     /* 0x004 */ s32 flags2;
     /* 0x008 */ s32 varTable[16];
-    /* 0x048 */ u8 currentSubmenu;
+    /* 0x048 */ s8 currentSubmenu;
     /* 0x049 */ char unk_49[3];
     /* 0x04C */ s8 unk_4C[16];
     /* 0x05C */ s8 unk_5C[16];
@@ -862,8 +862,8 @@ typedef struct BattleStatus {
     /* 0x070 */ s16 menuDisableFlags; /* 1 = jump, 2 = hammer, 4 = items */
     /* 0x072 */ char unk_72[2];
     /* 0x074 */ s32 unk_74;
-    /* 0x078 */ u8 totalStarPoints;
-    /* 0x079 */ u8 pendingStarPoints; /* how many to add */
+    /* 0x078 */ s8 totalStarPoints;
+    /* 0x079 */ s8 pendingStarPoints; /* how many to add */
     /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
     /* 0x07B */ u8 damageTaken;
     /* 0x07C */ s8 changePartnerAllowed;
@@ -1866,7 +1866,7 @@ typedef struct Actor {
     /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
-    /* 0x20C */ struct s32* statusTable;
+    /* 0x20C */ s32* statusTable;
     /* 0x210 */ s8 debuff;
     /* 0x211 */ s8 debuffDuration;
     /* 0x212 */ s8 staticStatus; /* 0B = yes */
@@ -2350,7 +2350,7 @@ typedef struct SaveMetadata {
 
 typedef struct SpriteShadingLightSource {
     /* 0x00 */ s8 flags;
-    /* 0x01 */ s8 rgb[3];
+    /* 0x01 */ Color_RGB8 rgb;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 falloff;
     /* 0x14 */ s8 unk_14;
@@ -2361,7 +2361,7 @@ typedef struct SpriteShadingProfile {
     /* 0x00 */ s16 flags;
     /* 0x02 */ char unk_02[0x2];
     /* 0x04 */ SpriteShadingLightSource sources[7];
-    /* 0xAC */ s8 ambientColor[3];
+    /* 0xAC */ Color_RGB8 ambientColor;
     /* 0xAF */ s8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
 

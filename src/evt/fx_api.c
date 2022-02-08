@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "evt/fx_api", ShowEmote, Evt* script, s32 isInitialCall);
 ApiStatus RemoveEffect(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    remove_effect(evt_get_variable(script, *args++));
+    remove_effect((EffectInstance*)evt_get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
@@ -72,7 +72,7 @@ ApiStatus func_802D7BA4(Evt* script, s32 isInitialCall) {
     s32 var5 = script->varTable[5];
     s32 var6 = script->varTable[6];
     s32 temp;
-    f32 t0;
+    u8 t0;
     f32 t1;
 
     if (isInitialCall) {
@@ -111,7 +111,7 @@ ApiStatus Spawn802D9D50(Evt* script, s32 isInitialCall) {
     s32 var5 = evt_get_variable(script, *args++);
     s32 var6 = evt_get_variable(script, *args++);
 
-    Evt* newScript = start_script(D_802D9D50, 1, 0);
+    Evt* newScript = start_script(&D_802D9D50, 1, 0);
     newScript->varTable[0] = var0;
     newScript->varTable[1] = var1;
     newScript->varTable[2] = var2;
@@ -229,7 +229,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_star(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, fVar8);
             break;
         case EFFECT_EMOTE:
-            fx_emote(iVar1, (Npc* ) a2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, &sp30);
+            fx_emote(iVar1, (Npc*)a2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, &sp30);
             evt_set_variable(script, a8, sp30);
             break;
         case EFFECT_SPARKLES:
@@ -273,7 +273,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_smoke_impact(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6, fVar7, iVar8);
             break;
         case EFFECT_DAMAGE_INDICATOR:
-            fx_damage_indicator(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7, &sp30);
+            fx_damage_indicator(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7, (EffectInstance**)&sp30);
             evt_set_variable(script, a8, sp30);
             break;
         case EFFECT_PURPLE_RING:
@@ -311,7 +311,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             fx_windy_leaves(iVar1, fVar2, fVar3, fVar4);
             break;
         case EFFECT_FLAME:
-            fx_flame(iVar1, fVar2, fVar3, fVar4, fVar5, &sp34);
+            fx_flame(iVar1, fVar2, fVar3, fVar4, fVar5, (EffectInstance**)&sp34);
             evt_set_variable(script, a6, sp34);
             break;
         case EFFECT_FALLING_LEAVES:
@@ -384,7 +384,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             effectRet = fx_recover(iVar1, fVar2, fVar3, fVar4, iVar5);
             break;
         case EFFECT_DISABLE_X:
-            effectRet = fx_disable_x(iVar1, fVar2, fVar3, fVar4, iVar5);
+            effectRet = (EffectInstance*)fx_disable_x(iVar1, fVar2, fVar3, fVar4, iVar5);
             break;
         case EFFECT_BOMBETTE_BREAKING:
             effectRet = fx_bombette_breaking(iVar1, iVar2, iVar3, fVar4, iVar5, iVar6);
@@ -399,7 +399,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             effectRet = fx_snowfall(iVar1, iVar2);
             break;
         case EFFECT_46:
-            effectRet = fx_46(iVar1, a2, fVar3, iVar4);
+            effectRet = fx_46(iVar1, (EffectWhirlwind*)a2, fVar3, iVar4);
             break;
         case EFFECT_GATHER_MAGIC:
             effectRet = fx_gather_magic(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
@@ -586,7 +586,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     }
 
     if (effectRet != NULL) {
-        evt_set_variable(script, EVT_VAR(15), effectRet);
+        evt_set_variable(script, EVT_VAR(15), (s32)effectRet);
     }
 
     return ApiStatus_DONE2;

@@ -104,6 +104,8 @@ void func_80257DA4(void*);
 void func_80254C50(Actor*);
 void func_80258E14(void*);
 
+void func_80254610(Actor*);
+
 f32 func_800E34D8(void);
 void func_800E4AD8(s32 arg0);
 f32 player_check_collision_below(f32, s32* colliderID);
@@ -207,6 +209,7 @@ Trigger* get_trigger_by_id(s32 triggerID);
 Actor* get_actor(s32 actorID);
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 s32 add_coins(s32 amt);
+s32 is_partner_ability_active(s32);
 
 s32 phys_can_player_interact(void);
 
@@ -329,12 +332,13 @@ void btl_state_update_22(void);
 void btl_state_draw_22(void);
 
 void btl_state_update_celebration(void);
-void btl_draw_upgrade_windows(void);
+void btl_draw_upgrade_windows(s32);
 void btl_state_draw_celebration(void);
 
 void func_8024F7C8(void);
 void func_80266978(void);
 void func_80266B14(void);
+s32 func_8024E584(void);
 void func_8024EE48(void);
 void func_8024EEA8(void);
 void func_80255FD8(void);
@@ -512,6 +516,8 @@ void func_80138D88(s32, s32, s32, s32, f32);
 void func_8013A4D0(void);
 
 void btl_cam_set_target_pos(f32, f32, f32);
+void btl_cam_unfreeze(void);
+
 void deduct_current_move_fp(void);
 void load_partner_actor(void);
 void dispatch_event_partner(s32);
@@ -643,9 +649,11 @@ void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 s32 func_8004A784(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
 void base_UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 void UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
-void func_80266AF8(Actor*);
+
+s32 func_80263230(Actor*, Actor*);
 void func_80266EA8(ActorPart*, s32);
 void func_80266E40(Actor*);
+void func_80267018(Actor* actor, s32 arg1);
 void remove_player_buffs(s32);
 s32 is_actor_hp_bar_visible(Actor*);
 
@@ -710,14 +718,21 @@ void btl_cam_target_actor(s32);
 void btl_cam_set_zoom(s16);
 void btl_cam_move(s16);
 void func_8024E60C(void);
+
 void dispatch_event_actor(Actor*, s32);
+s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event);
+
 void btl_show_variable_battle_message(s32, s32, s32);
 s32 btl_is_popup_displayed(void);
 void func_8024E3D8(s32);
 s32 inflict_status(Actor*, s32, s32);
 s32 try_inflict_status(Actor*, s32, s32);
+s32 inflict_status_set_duration(Actor* actor, s32 statusTypeKey, s32 statusDurationKey, s32 duration);
 void mdl_set_all_fog_mode(s32);
 void load_model_animator_tree(s32, StaticAnimatorNode**);
+
+s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration);
+s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags);
 
 void func_8024EDC0(void);
 
@@ -754,9 +769,14 @@ void func_8024EFE0(f32 x, f32 y, f32 z, s32, s32, s32);
 void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a);
 s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion);
 s32 calc_partner_test_enemy(void);
+void disable_actor_blur(Actor*);
 void reset_actor_blur(Actor*);
+void enable_actor_blur(Actor*);
+void func_80251474(Actor*);
 s32 func_8025C8A0(s32, ActorPart*);
 void func_8025CD28(s32, ActorPart*);
+void func_8025CEC8(ActorPart*);
+void _remove_part_decoration(ActorPart* part, s32 decorationIndex);
 void func_8025D158(ActorPart*, s32);
 void func_8025D290(ActorPart*, s32);
 void func_8025D3C4(ActorPart*, s32);
@@ -799,8 +819,13 @@ void update_encounters_conversation(void);
 void update_encounters_post_battle(void);
 void reset_background_settings(void);
 void func_80138188(void);
+void func_80266970(Actor*);
+void func_80266ADC(Actor*);
+void func_80266AF8(Actor*);
+void func_80266E14(ActorPart*);
 void func_80268770(s32, s32, s32);
 void func_80268C9C(void);
+s32 check_block_input(s32 buttonMask);
 void func_802B6CF0_E2B3A0(void);
 void func_80269160(void);
 void func_800E24F8(void);
@@ -820,6 +845,7 @@ void draw_encounters_neutral(void);
 void show_first_strike_message(void);
 void entity_upgrade_block_hide_content(s32);
 s32 lookup_defense(s32*, s32);
+s32 lookup_status_chance(s32*, s32);
 void peach_check_for_parasol_input(void);
 void peach_sync_disguise_npc(void);
 s32 check_conversation_trigger(void);

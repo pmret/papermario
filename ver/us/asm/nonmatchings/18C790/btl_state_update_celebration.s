@@ -1289,8 +1289,8 @@ glabel btl_state_update_celebration
 /* 18DDC8 8025F4E8 0C051261 */  jal       set_hud_element_render_pos
 /* 18DDCC 8025F4EC 24C6002E */   addiu    $a2, $a2, 0x2e
 /* 18DDD0 8025F4F0 24020001 */  addiu     $v0, $zero, 1
-/* 18DDD4 8025F4F4 3C01802A */  lui       $at, %hi(D_8029FB68)
-/* 18DDD8 8025F4F8 AC22FB68 */  sw        $v0, %lo(D_8029FB68)($at)
+/* 18DDD4 8025F4F4 3C01802A */  lui       $at, %hi(D_8029FB60+0x8)
+/* 18DDD8 8025F4F8 AC22FB68 */  sw        $v0, %lo(D_8029FB60+0x8)($at)
 .L8025F4FC:
 /* 18DDDC 8025F4FC 3C048029 */  lui       $a0, %hi(HudScript_ProjectorBeam)
 /* 18DDE0 8025F500 24842C28 */  addiu     $a0, $a0, %lo(HudScript_ProjectorBeam)
