@@ -28,7 +28,7 @@ extern EvtScript N(8023C754);
 ApiStatus func_80238000_6F5E80(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    ActorMovement* partnerActorMovement = &partnerActor->state;
+    ActorState* partnerActorMovement = &partnerActor->state;
 
     if (isInitialCall) {
         partnerActor->state.currentPos.x = partnerActor->currentPos.x;
@@ -191,7 +191,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(partsTable_80238524)),
     .partsData = N(partsTable_80238524),
-    .script = N(init_80238570),
+    .script = &N(init_80238570),
     .statusTable = N(statusTable_80238478),
     .escapeChance = 0,
     .airLiftChance = 0,
