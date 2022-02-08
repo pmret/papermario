@@ -1,13 +1,6 @@
-//#include "common.h"
 #include "ld_addrs.h"
 #include "sprite.h"
 #include "pause_common.h"
-
-#ifndef M2CTX
-#define BSS __attribute__ ((section (".bss")))
-#else
-#define BSS static
-#endif
 
 BSS s32 gPauseHeldButtons;
 BSS s32 gPausePressedButtons;
@@ -26,9 +19,8 @@ static s32 gPauseDescTextPos;
 static s32 gPauseDescTextOffset;
 static HudScript* gPauseShownDescIconScript;
 static s32 gPauseTutorialSprites[3];
-static s32 D_80270128[2]; // padding
 
-HudScript* gPauseIconScripts[] = {
+static HudScript* gPauseIconScripts[] = {
     HudScript_AnimatedCursorHand, HudScript_DescMsgPrev, HudScript_DescMsgNext, HudScript_UnusedBadge,
     HudScript_StickTapRight, HudScript_PressAButton, HudScript_PressStartButton, HudScript_StartButtonText
 };
@@ -119,7 +111,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
     .width = 320,
     .height = 240,
     .unk_0A = { 0, 0 },
-    .fpDrawContents = &pause_cursor_draw_contents,
+    .fpDrawContents = &pause_draw_cursor,
     .tab = NULL,
     .parentID = WINDOW_ID_NONE,
     .fpUpdate = { 1 },
@@ -244,7 +236,7 @@ void func_80242FBC(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ,
     window->flags &= ~(WINDOW_FLAGS_4 | WINDOW_FLAGS_8);
 }
 
-void pause_update_tab_losing_focus(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+void pause_update_tab_inactive(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
     Window* window = &gWindows[windowIndex];
     s32 updateCounter = window->updateCounter;
@@ -265,7 +257,7 @@ void pause_update_tab_losing_focus(s32 windowIndex, s32* flags, s32* posX, s32* 
     }
 }
 
-void pause_update_tab_getting_focus(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+void pause_update_tab_active(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
     Window* window = &gWindows[windowIndex];
 
@@ -306,7 +298,7 @@ void func_8024313C(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ,
     }
 }
 
-void func_80243188(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+void pause_update_page_active_2(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
     Window* window = &gWindows[windowIndex];
     s32 updateCounter = window->updateCounter;
@@ -324,7 +316,7 @@ void func_80243188(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ,
     }
 }
 
-void func_80243238(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+void pause_update_page_active_1(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
     Window* window = &gWindows[windowIndex];
     s32 updateCounter = window->updateCounter;
@@ -342,7 +334,7 @@ void func_80243238(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ,
     }
 }
 
-void func_802432E8(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+void pause_update_page_inactive_1(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
     Window* window = &gWindows[windowIndex];
     s32 updateCounter = window->updateCounter;
@@ -357,7 +349,7 @@ void func_802432E8(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ,
     }
 }
 
-void func_80243388(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+void pause_update_page_inactive_2(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
     Window* window = &gWindows[windowIndex];
     s32 updateCounter = window->updateCounter;
@@ -403,7 +395,7 @@ s32 pause_interp_vertical_scroll(s32 deltaBefore) {
     return val * s;
 }
 
-void pause_cursor_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
+void pause_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 currentOpacity;
 
     pause_interp_cursor();
@@ -578,7 +570,7 @@ void pause_init(void) {
         if (!gPausePanels[i]->initialized) {
             set_window_update(24 + i, 2);
         } else {
-            gWindows[24 + i].pos.x = posX + 14;
+            gWindows[WINDOW_ID_PAUSE_TUTORIAL + i].pos.x = posX + 14;
             posX -= 45;
         }
     }
@@ -734,18 +726,18 @@ void pause_cleanup(void) {
     s32 i;
     MenuPanel** menuPanels;
 
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < ARRAY_COUNT(gPauseCommonIconIDs); i++) {
         free_hud_element(gPauseCommonIconIDs[i]);
     }
 
     if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < ARRAY_COUNT(gPauseTutorialSprites); i++) {
             spr_free_sprite(gPauseTutorialSprites[i]);
         }
     }
 
     menuPanels = gPausePanels;
-    for (i = 0; i < 7; menuPanels++, i++) {
+    for (i = 0; i < ARRAY_COUNT(gPausePanels); menuPanels++, i++) {
         if ((*menuPanels)->initialized) {
             if ((*menuPanels)->fpCleanup) {
                 (*menuPanels)->fpCleanup(*menuPanels);

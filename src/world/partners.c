@@ -556,7 +556,7 @@ s32 partner_use_ability(void) {
         wPartner != NULL &&
         (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc))) {
         if ((gGameStatusPtr->unk_81 != 0) && (actionStatus->currentButtons & BUTTON_B)) {
-            sfx_play_sound(SOUND_MENU_BADGE_ERROR);
+            sfx_play_sound(SOUND_MENU_ERROR);
         } else if (D_8010CFD8 != 0) {
             D_8010CFE0 = 1;
             D_8010CFE8 = 8;

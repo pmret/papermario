@@ -121,7 +121,7 @@ extern HudScript HudScript_AnimatedHandPointer[];
 extern HudScript HudScript_StatusCoin[];
 extern HudScript HudScript_Refund[];
 extern HudScript HudScript_MenuTimes[];
-extern HudScript* gBadgeMenuElements[22];
+extern HudScript* gPauseBadgesElements[22];
 
 #define he_End HUD_ELEMENT_OP_End
 #define he_SetRGBA(arg0, image) HUD_ELEMENT_OP_SetRGBA, arg0, (s32)image

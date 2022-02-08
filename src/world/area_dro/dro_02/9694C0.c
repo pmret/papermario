@@ -1065,7 +1065,7 @@ EvtScript N(80246520) = {
     EVT_ELSE
         EVT_CALL(SetNpcAnimation, 10, NPC_ANIM_chuck_quizmo_Palette_00_Anim_9)
         EVT_SET(EVT_ARRAY(4), 2)
-        EVT_CALL(PlaySound, SOUND_MENU_BADGE_ERROR)
+        EVT_CALL(PlaySound, SOUND_MENU_ERROR)
         EVT_CALL(PlaySound, 0x8B)
         EVT_EXEC_GET_TID(N(80246470), EVT_VAR(1))
         EVT_CALL(GetPlayerPos, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
