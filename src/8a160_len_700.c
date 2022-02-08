@@ -18,7 +18,38 @@ typedef struct {
 
 extern struct_func_800F0CB0 D_8010D000[];
 
-INCLUDE_ASM(s32, "8a160_len_700", func_800F0CB0);
+// INCLUDE_ASM(s32, "8a160_len_700", func_800F0CB0);
+
+void func_800F0CB0(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
+
+    s32 temp_v1;
+    struct_func_800F0CB0 *temp_a1;
+    s32 phi_v1;
+    sub_struct_func_800F0CB0 *phi_a1;
+
+    temp_a1 = &D_8010D000[arg0];
+    phi_a1 = &temp_a1->unk00[0];
+    temp_v1 = 0x39;
+
+
+    if (arg0 <= 0) {
+        phi_a1->unk0 = 1;
+        phi_a1->unk8 = arg1;
+        phi_a1->unkC = arg2;
+        phi_a1->unk18 = arg3;
+        phi_a1->unk1 = 0x28;
+        phi_a1->unk2 = 0;
+        phi_a1 = &temp_a1->unk00[1];
+        phi_v1 = 1;
+        while (phi_v1 < temp_v1) {
+            phi_a1->unk7 = (s32) (-(f32) phi_v1 * 0.0f) - 1;
+            phi_v1 = phi_v1 + 1;
+            phi_a1 ++;
+        }
+
+    }
+}
+
 
 void func_800F0D5C(void) {
     struct_func_800F0CB0* temp = &D_8010D000[0];
