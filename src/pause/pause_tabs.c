@@ -1,5 +1,18 @@
 #include "pause_common.h"
 
+extern MenuPanel* gPausePanels[];
+void pause_tabs_draw_stats(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_tabs_draw_badges(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_tabs_draw_items(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_tabs_draw_party(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_tabs_draw_spirits(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_tabs_draw_map(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_tabs_draw_invis(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_tabs_init(MenuPanel* tab);
+void pause_tabs_handle_input(MenuPanel* tab);
+void pause_tabs_update(MenuPanel* tab);
+void pause_tabs_cleanup(MenuPanel* tab);
+
 static s32 gPauseTabsIconIDs[6];
 static s32 gPauseTabsPreviousTab;
 static s32 gPauseTabsHorizScrollPos;
@@ -300,9 +313,9 @@ void pause_tabs_handle_input(MenuPanel* tab) {
 }
 
 void pause_tabs_update(MenuPanel* tab) {
-    s32 s0;
-    f32 f2;
+    s32 absValue;
     f32 delta;
+    f32 deltaBefore;
     f32 f7;
     void (*fpUpdateInactive)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
                                  f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
@@ -313,21 +326,21 @@ void pause_tabs_update(MenuPanel* tab) {
     s32 flag;
     s32 sgn;
 
-    delta = tab->col * 300 - gPauseTabsHorizScrollPos;
-    s0 = abs(delta);
-    sgn = sign(delta);
+    deltaBefore = tab->col * 300 - gPauseTabsHorizScrollPos;
+    absValue = abs(deltaBefore);
+    sgn = sign(deltaBefore);
 
-    if (s0 >= 16) {
-        f2 = s0 * 0.5;
-        if (f2 > 32.0f) {
-            f2 = 32.0f;
+    if (absValue >= 16) {
+        delta = absValue * 0.5;
+        if (delta > 32.0f) {
+            delta = 32.0f;
         }
     } else {
-        f2 = gPauseTabsInterpTable[s0];
+        delta = gPauseTabsInterpTable[absValue];
     }
-    f2 = f2 * sgn;
+    delta = delta * sgn;
 
-    gPauseTabsHorizScrollPos += f2;
+    gPauseTabsHorizScrollPos += delta;
 
     if ((gPauseTabsPreviousTab != 0 || tab->col != 5) && (gPauseTabsPreviousTab < tab->col || gPauseTabsPreviousTab == 5 && tab->col == 0)) {
         fpUpdateActive = &pause_update_page_active_1;
@@ -375,7 +388,6 @@ void pause_tabs_update(MenuPanel* tab) {
 }
 
 void pause_tabs_cleanup(MenuPanel* tab) {
-    //s32* iconIDs = gPauseTabsIconIDs;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPauseTabsIconIDs); i++) {

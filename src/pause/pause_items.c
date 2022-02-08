@@ -1,5 +1,11 @@
 #include "pause_common.h"
 
+void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_items_init(MenuPanel* panel);
+void pause_items_handle_input(MenuPanel* panel);
+void pause_items_update(MenuPanel* panel);
+void pause_items_cleanup(MenuPanel* panel);
+
 static s16 gPauseItemsItemIDs[100];
 static s32 gPauseItemsCurrentPage;
 static s32 D_802704CC;
@@ -18,11 +24,6 @@ static s32 gPauseItemsIconIDs[20];
 
 #define ITEM_NONE_STANDIN 0x7FFE
 #define ITEM_INVALID 0x7FFF
-
-void pause_items_init(MenuPanel* panel);
-void pause_items_handle_input(MenuPanel* panel);
-void pause_items_update(MenuPanel* panel);
-void pause_items_cleanup(MenuPanel* panel);
 
 HudScript* gPauseItemsElements[] = {
     HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,

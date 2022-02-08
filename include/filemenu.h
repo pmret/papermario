@@ -5,8 +5,6 @@
 
 extern MenuPanel* filemenu_menus[4];
 
-void pause_partners_draw_movelist_flower(MenuPanel* menu, s32 posX, s32 posY);
-
 extern BSS s32 filemenu_iterFileIdx;
 extern BSS s32 filemenu_pressedButtons;
 extern BSS s32 filemenu_8024C088;

@@ -2,6 +2,19 @@
 #include "sprite.h"
 #include "pause_common.h"
 
+extern MenuPanel gPausePanelTabs;
+extern MenuPanel gPausePanelStats;
+extern MenuPanel gPausePanelBadges;
+extern MenuPanel gPausePanelItems;
+extern MenuPanel gPausePanelPartners;
+extern MenuPanel gPausePanelSpirits;
+extern MenuPanel gPausePanelMap;
+
+void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_main_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_textbox_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+
 BSS s32 gPauseHeldButtons;
 BSS s32 gPausePressedButtons;
 BSS s32 gPauseCurrentDescMsg;
@@ -36,14 +49,14 @@ s32 gPauseCursorTargetPosY = -120;
 s32 gPauseCursorTargetOpacity = 0;
 u32 D_8024EFB4 = 1;
 u32 D_8024EFB8[] = {0xFFF6FFE7, 0xFFD6FFC4, 0xFFB00000 }; //unused
-u8 D_8024EFC4[] = { 1, 1, 1, 1, 1, 0, 0};
-s16 D_8024EFCC[] = { -80, -65, -38, -30, -10, 0 };
-s16 D_8024EFD8[] = {  80,  65,  38,  30,  10, 0 };
-u8 D_8024EFE4[] = { 1, 1, 1, 1, 1, 1, 0, 0 };
+u8 gPauseWindowFlipUpFlags[] = { 1, 1, 1, 1, 1, 0, 0};
+s16 gPauseWindowFlipUpAngles[] = { -80, -65, -38, -30, -10, 0 };
+s16 gPauseWindowFlipUpAngles_2[] = {  80,  65,  38,  30,  10, 0 };
+u8 gPauseWindowFlipDownFlags[] = { 1, 1, 1, 1, 1, 1, 0, 0 };
 u8 D_8024EFEC[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x00, 0x11, 0x00, 0x25, 0x00, 0x3C,
                     0x00, 0x55, 0x00, 0x6E }; //unused
-s16 D_8024F000[] = { -10, -25, -42, -60, -80};
-s16 D_8024F00C[] = {  10,  25,  42,  60,  80 };
+s16 gPauseWindowFlipDownAngles[] = { -10, -25, -42, -60, -80};
+s16 gPauseWindowFlipDownAngles_2[] = {  10,  25,  42,  60,  80 };
 s32 gPauseTutorialState = -1;
 s32 gPauseTutorialInputState = 3;
 s32 gPauseTutorialButtons[] = { BUTTON_A, BUTTON_STICK_RIGHT, BUTTON_A, BUTTON_A, BUTTON_A, BUTTON_A, BUTTON_START };
@@ -64,7 +77,7 @@ Vp gPauseTutorialViewport = {
         .vtrans = { 640, 480, 511, 0 },
     }
 };
-s32 D_8024F110 = 0;
+s32 gPauseTutorialScrollPos = 0;
 MenuWindowBP gPauseCommonWindowsBPs[] = {
   { .windowID = WINDOW_ID_PAUSE_MAIN,
     .unk_01 = 0,
@@ -294,7 +307,8 @@ void func_8024313C(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ,
         *opacity = 255 - (updateCounter * 16);
     } else {
         *opacity = 0;
-        window->flags = (window->flags & ~WINDOW_FLAGS_8) | WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags |= WINDOW_FLAGS_4;
     }
 }
 
@@ -307,11 +321,11 @@ void pause_update_page_active_2(s32 windowIndex, s32* flags, s32* posX, s32* pos
         window->flags &= ~WINDOW_FLAGS_4;
     }
     if (updateCounter < 7) {
-        *flags = D_8024EFC4[updateCounter];
-        *rotX += D_8024EFCC[updateCounter]; // BUG!  length of array is only 6
+        *flags = gPauseWindowFlipUpFlags[updateCounter];
+        *rotX += gPauseWindowFlipUpAngles[updateCounter];
     } else {
-        *flags = D_8024EFC4[5];
-        *rotX += D_8024EFCC[6]; // BUG!  length of array is only 6
+        *flags = gPauseWindowFlipUpFlags[5];
+        *rotX += gPauseWindowFlipUpAngles[6];
         window->flags &= ~WINDOW_FLAGS_8;
     }
 }
@@ -325,11 +339,11 @@ void pause_update_page_active_1(s32 windowIndex, s32* flags, s32* posX, s32* pos
         window->flags &= ~WINDOW_FLAGS_4;
     }
     if (updateCounter < 7) {
-        *flags = D_8024EFC4[updateCounter];
-        *rotX += D_8024EFD8[updateCounter];
+        *flags = gPauseWindowFlipUpFlags[updateCounter];
+        *rotX += gPauseWindowFlipUpAngles_2[updateCounter];
     } else {
-        *flags = D_8024EFC4[5];
-        *rotX += D_8024EFD8[6]; // BUG!  length of array is only 6
+        *flags = gPauseWindowFlipUpFlags[5];
+        *rotX += gPauseWindowFlipUpAngles_2[6];
         window->flags &= ~WINDOW_FLAGS_8;
     }
 }
@@ -340,12 +354,13 @@ void pause_update_page_inactive_1(s32 windowIndex, s32* flags, s32* posX, s32* p
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter < 5) {
-        *flags = D_8024EFE4[updateCounter];
-        *rotX += D_8024F000[updateCounter];
+        *flags = gPauseWindowFlipDownFlags[updateCounter];
+        *rotX += gPauseWindowFlipDownAngles[updateCounter];
     } else {
-        *flags = D_8024EFE4[4];
-        *rotX += D_8024F000[4];
-        window->flags = (window->flags & ~WINDOW_FLAGS_8) | WINDOW_FLAGS_4;
+        *flags = gPauseWindowFlipDownFlags[4];
+        *rotX += gPauseWindowFlipDownAngles[4];
+        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags |= WINDOW_FLAGS_4;
     }
 }
 
@@ -355,12 +370,13 @@ void pause_update_page_inactive_2(s32 windowIndex, s32* flags, s32* posX, s32* p
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter < 5) {
-        *flags = D_8024EFE4[updateCounter];
-        *rotX = D_8024F00C[updateCounter];
+        *flags = gPauseWindowFlipDownFlags[updateCounter];
+        *rotX = gPauseWindowFlipDownAngles_2[updateCounter];
     } else {
-        *flags = D_8024EFE4[4];
-        *rotX = D_8024F00C[4];
-        window->flags = (window->flags & ~WINDOW_FLAGS_8) | WINDOW_FLAGS_4;
+        *flags = gPauseWindowFlipDownFlags[4];
+        *rotX = gPauseWindowFlipDownAngles_2[4];
+        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags |= WINDOW_FLAGS_4;
     }
 }
 
@@ -444,9 +460,9 @@ void pause_textbox_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
 }
 
 void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
-    Matrix4f sp28;
-    Matrix4f sp68;
-    f32 (*psp68)[4];
+    Matrix4f matrix1;
+    Matrix4f matrix2;
+    f32 (*matrix2ptr)[4];
     s32 msgHeight;
     s32 msgWidth;
     s32 msgMaxLineChars;
@@ -459,7 +475,7 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     s32 msgMaxLinesPerPage2;
     s32 i;
     s32 margin, margin2;
-    s32 temp_s2;
+    s32 state;
 
     if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) == 0)
         return;
@@ -474,48 +490,49 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     pause_draw_rect(baseX * 4, (baseY + 12) * 4, (baseX + width) * 4, (baseY + height) * 4, 0, 0, 0, 0, 0);
     gDPPipeSync(gMasterGfxPos++);
     gSPViewport(gMasterGfxPos++, &gPauseTutorialViewport);
-    guOrthoF(sp28, 0.0f, 320.0f, 240.0f, 0.0f, -100.0f, 100.0f, 1.0f);
-    guMtxF2L(sp28, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guOrthoF(matrix1, 0.0f, 320.0f, 240.0f, 0.0f, -100.0f, 100.0f, 1.0f);
+    guMtxF2L(matrix1, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
     for (i = 0; i < 3; i++) {
-        psp68 = sp68;
+        //needed to match
+        matrix2ptr = matrix2;
         switch (i) {
             case 0:
-                guTranslateF(sp28, 40.0f, 223.0f, 0);
-                guScaleF(psp68, -0.8f, 0.8f, 1.0f);
+                guTranslateF(matrix1, 40.0f, 223.0f, 0);
+                guScaleF(matrix2ptr, -0.8f, 0.8f, 1.0f);
                 break;
             case 1:
-                guTranslateF(sp28, 60.0f, 223.0f, 0);
-                guScaleF(psp68, -0.8f, 0.8f, 1.0f);
+                guTranslateF(matrix1, 60.0f, 223.0f, 0);
+                guScaleF(matrix2ptr, -0.8f, 0.8f, 1.0f);
                 break;
             default:
-                guTranslateF(sp28, 280.0f, 223.0f, 0);
-                guScaleF(psp68, 0.8f, 0.8f, 1.0f);
+                guTranslateF(matrix1, 280.0f, 223.0f, 0);
+                guScaleF(matrix2ptr, 0.8f, 0.8f, 1.0f);
                 break;
         }
 
-        guMtxCatF(psp68, sp28, sp28);
-        guRotateF(psp68, 180.0f, 0.0f, 0.0f, 1.0f);
-        guMtxCatF(psp68, sp28, sp28);
-        guRotateF(psp68, 180.0f, 0.0f, 1.0f, 0.0f);
-        guMtxCatF(psp68, sp28, sp28);
-        guMtxF2L(sp28, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guMtxCatF(matrix2ptr, matrix1, matrix1);
+        guRotateF(matrix2ptr, 180.0f, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(matrix2ptr, matrix1, matrix1);
+        guRotateF(matrix2ptr, 180.0f, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(matrix2ptr, matrix1, matrix1);
+        guMtxF2L(matrix1, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         func_802DE894(gPauseTutorialSprites[i], 6, 255, 255, 255, 255, 64);
-        spr_draw_npc_sprite(gPauseTutorialSprites[i], 0, 0, 0, sp28);
+        spr_draw_npc_sprite(gPauseTutorialSprites[i], 0, 0, 0, matrix1);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
 
     get_msg_properties(pause_get_menu_msg(1), &msgHeight, &msgWidth, &msgMaxLineChars, &msgNumLines, &msgMaxLinesPerPage, NULL, 1);
     margin = (s32)(width - msgWidth) >> 1;
     draw_msg(pause_get_menu_msg(1), baseX + margin, baseY, 0xFF, 0, 1);
-    D_8024F110 += pause_interp_text_scroll(gPauseTutorialState * 140 - D_8024F110);
+    gPauseTutorialScrollPos += pause_interp_text_scroll(gPauseTutorialState * 140 - gPauseTutorialScrollPos);
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, baseX + 1, baseY + 1, baseX + width - 1, baseY + height - 1);
-    temp_s2 = gPauseTutorialState;
-    get_msg_properties(pause_get_menu_msg(gPauseTutorialDescMessages[temp_s2]), &msgHeight2, &msgWidth2, &msgMaxLineChars2, &msgNumLines2, &msgMaxLinesPerPage2, NULL, 1);
+    state = gPauseTutorialState;
+    get_msg_properties(pause_get_menu_msg(gPauseTutorialDescMessages[state]), &msgHeight2, &msgWidth2, &msgMaxLineChars2, &msgNumLines2, &msgMaxLinesPerPage2, NULL, 1);
     margin2 = (s32)(width - msgWidth2) >> 1;
-    draw_msg(pause_get_menu_msg(gPauseTutorialDescMessages[temp_s2]), baseX + margin2, baseY + 13 + temp_s2 * 140 - D_8024F110, 0xFF, 10, 1);
+    draw_msg(pause_get_menu_msg(gPauseTutorialDescMessages[state]), baseX + margin2, baseY + 13 + state * 140 - gPauseTutorialScrollPos, 0xFF, 10, 1);
     set_hud_element_render_pos(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], baseX + width / 2 - 2, baseY + 52);
     set_hud_element_flags(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], 0x8000);
     set_hud_element_scale(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], 0.5f);
@@ -576,15 +593,15 @@ void pause_init(void) {
     }
     pauseWindows = &gWindows[25];
     x = pauseWindows[gPausePanels[0]->col].pos.x;
-    gWindows[43].pos.x = x + 6;
+    gWindows[WINDOW_ID_PAUSE_TAB_INVIS].pos.x = x + 6;
 
     if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < ARRAY_COUNT(gPauseTutorialSpriteAnims); i++) {
             gPauseTutorialSprites[i] = spr_load_npc_sprite(gPauseTutorialSpriteAnims[i][0], gPauseTutorialSpriteAnims[i]);
         }
 
-        set_window_update(24, 1);
-        sfx_play_sound(9);
+        set_window_update(WINDOW_ID_PAUSE_TUTORIAL, 1);
+        sfx_play_sound(SOUND_MENU_START_TUTORIAL);
     }
 
     update_window_hierarchy(WINDOW_ID_PAUSE_CURSOR, 0x40);
@@ -655,7 +672,7 @@ void pause_handle_input(s32 pressed, s32 held) {
     MenuPanel* currentPanel = gPausePanels[gPauseMenuCurrentTab];
 
     if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < ARRAY_COUNT(gPauseTutorialSprites); i++) {
             spr_update_sprite(gPauseTutorialSprites[i], gPauseTutorialSpriteAnims[i][1], 1.0f);
         }
     }
@@ -751,7 +768,7 @@ void pause_cleanup(void) {
     set_window_update(WINDOW_ID_PAUSE_CURSOR, 2);
 }
 
-const f32 rodata_padding[] = {0.0f, 0.0f, 0.0f};
+const f32 pause_rodata_padding[] = {0.0f, 0.0f, 0.0f};
 
 s32 pause_get_total_equipped_bp_cost(void) {
     s32 totalCost = 0;

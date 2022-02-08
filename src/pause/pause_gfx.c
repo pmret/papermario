@@ -1,4 +1,5 @@
-#include "common.h"
+#include "pause_common.h"
+
 #include "pause/image_143BF0.png.h"
 #include "pause/image_143FF0.png.h"
 #include "pause/world_map.png.h"

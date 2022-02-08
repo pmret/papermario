@@ -61,24 +61,6 @@ extern HudScript HudScript_StatusSPIncrement6[];
 extern HudScript HudScript_StatusSPIncrement7[];
 extern HudScriptPair gItemHudScripts[];
 
-//TODO add in functions.h
-void update_window_hierarchy(s32 windowIndex, s32 arg1);
-void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
-                        s32* maxLinesPerPage, s32* arg6, s32 charset);
-void replace_window_update(s32 idx, s8 arg1, WindowUpdateFunc pendingFunc);
-void decode_yay0(void* src, void* dst);
-
-extern MenuPanel gPausePanelTabs;
-extern MenuPanel gPausePanelStats;
-extern MenuPanel gPausePanelBadges;
-extern MenuPanel gPausePanelItems;
-extern MenuPanel gPausePanelPartners;
-extern MenuPanel gPausePanelSpirits;
-extern MenuPanel gPausePanelMap;
-extern MenuPanel* gPausePanels[];
-
-extern Gfx gPauseDLOrbs[];
-
 extern WindowStyleCustom gPauseWS_0;
 extern WindowStyleCustom gPauseWS_1;
 extern WindowStyleCustom gPauseWS_2;
@@ -117,43 +99,6 @@ extern HudScript* gPauseCurrentDescIconScript;
 extern s32 gPauseCursorIconID;
 extern s8 gPauseMenuCurrentTab;
 
-extern s8  gPauseBufferPal1[512];
-extern s8  gPauseBufferImg1[15752];
-extern s8  gPauseBufferPal2[512];
-extern s8  gPauseBufferImg2[15752];
-
-void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_main_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_textbox_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_tabs_draw_stats(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_tabs_draw_badges(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_tabs_draw_items(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_tabs_draw_party(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_tabs_draw_spirits(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_tabs_draw_map(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_tabs_draw_invis(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_partners_draw_movelist_flower(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_spirits_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void pause_map_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-
-void pause_tabs_init(MenuPanel* tab);
-void pause_tabs_handle_input(MenuPanel* tab);
-void pause_tabs_update(MenuPanel* tab);
-void pause_tabs_cleanup(MenuPanel* tab);
-void pause_stats_init(MenuPanel* panel);
-void pause_stats_handle_input(MenuPanel* panel);
-void pause_stats_cleanup(MenuPanel* panel);
-
 void pause_update_tab_default(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
                    f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 void pause_update_tab_active(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
@@ -173,5 +118,10 @@ void pause_set_cursor_pos(s32 windowID, s32 posX, s32 posY);
 void pause_set_cursor_pos_immediate(s32 windowID, s32 posX, s32 posY);
 void pause_set_cursor_opacity(s32 val);
 void pause_draw_menu_label(s32 index, s32 x, s32 y);
+s32 pause_get_total_equipped_bp_cost(void);
+void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
+s32 pause_get_menu_msg(s32 index);
+s32 pause_interp_vertical_scroll(s32 deltaBefore);
+void pause_sort_item_list(s16* arr, s32 len, s32 (*compare)(s16*, s16 *));
 
 #endif

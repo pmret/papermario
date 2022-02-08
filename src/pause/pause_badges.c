@@ -1,5 +1,13 @@
 #include "pause_common.h"
 
+extern Gfx gPauseDLOrbs[];
+
+void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_badges_init(MenuPanel* panel);
+void pause_badges_handle_input(MenuPanel* panel);
+void pause_badges_update(MenuPanel* panel);
+void pause_badges_cleanup(MenuPanel* panel);
+
 static s16 gPauseBadgesItemIds[128];
 static s32 gPauseBadgesCurrentPage;
 static s32 D_80270284;
@@ -22,11 +30,6 @@ static s32 gPauseBadgesIconIDs[22];
 #define BADGE_NONE_STANDIN 0x7FFE
 // Invalid badge ID filled in unused slots of gPauseBadgesItemIds
 #define BADGE_INVALID 0x7FFF
-
-void pause_badges_init(MenuPanel* panel);
-void pause_badges_handle_input(MenuPanel* panel);
-void pause_badges_update(MenuPanel* panel);
-void pause_badges_cleanup(MenuPanel* panel);
 
 HudScript* gPauseBadgesElements[] = {
     HudScript_StatBp, HudScript_StatBp, HudScript_StatBp, HudScript_StatBp,

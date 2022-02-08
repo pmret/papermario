@@ -1,18 +1,20 @@
 #include "pause_common.h"
 #include "sprite.h"
 
-static s32 gPauseSpiritsSpriteIDs[7];
-static s32 D_802706DC;
-static s32 gPauseSpiritsIndexes[7];
-static s32 gPauseSpiritsNumSpirits;
-
 extern Gfx gPauseDLSpiritsBg[];
 extern s8 pause_spirits_bg_png[];
 
+void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_spirits_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void pause_spirits_init(MenuPanel* panel);
 void pause_spirits_handle_input(MenuPanel* panel);
 void pause_spirits_update(MenuPanel* panel);
 void pause_spirits_cleanup(MenuPanel* panel);
+
+static s32 gPauseSpiritsSpriteIDs[7];
+static s32 D_802706DC;
+static s32 gPauseSpiritsIndexes[7];
+static s32 gPauseSpiritsNumSpirits;
 
 Vp gPauseSpiritsViewport = {
     .vp = {

@@ -1,6 +1,18 @@
 #include "pause_common.h"
 #include "message_ids.h"
 
+extern Gfx gPauseDLWorldMap[];
+extern u8 pause_world_map_png[];
+extern Gfx gPauseDLPathPoints[];
+extern Gfx gPauseDLArrows[];
+
+void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_map_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_map_init(MenuPanel* tab);
+void pause_map_handle_input(MenuPanel* tab);
+void pause_map_update(MenuPanel* tab);
+void pause_map_cleanup(MenuPanel* tab);
+
 static s32 gPauseMapIconIDs[1];
 static f32 gPauseMapCameraX;
 static f32 gPauseMapCameraY;
@@ -12,17 +24,7 @@ static s32 gPauseMapCursorCurrentOption;
 static s32 gPauseMapCursorCurrentOptionCopy;
 static s32 gPauseMapSpacesInSnapRange;
 
-void pause_map_init(MenuPanel* tab);
-void pause_map_handle_input(MenuPanel* tab);
-void pause_map_update(MenuPanel* tab);
-void pause_map_cleanup(MenuPanel* tab);
-
-extern Gfx gPauseDLWorldMap[];
-extern u8 pause_world_map_png[];
-extern Gfx gPauseDLPathPoints[];
-extern Gfx gPauseDLArrows[];
-
-HudScript* D_8024FA30[] = { HudScript_MapWalk0 };
+HudScript* gPauseMapIconScripts[] = { HudScript_MapWalk0 };
 s32 D_8024FA34 = -1;
 Vec2b gPauseMapPaths[][32] = {
     { { 1, -10 }, { 1, -8 }, { -9, -2 }, { -8, 0 }, { -8, 0 }, { -7, -3 }, { -5, -3 }, },
@@ -379,8 +381,8 @@ void pause_map_init(MenuPanel* tab) {
     s32 currentLocation;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_8024FA30); i++) {
-        gPauseMapIconIDs[i] = create_hud_element(D_8024FA30[i]);
+    for (i = 0; i < ARRAY_COUNT(gPauseMapIconScripts); i++) {
+        gPauseMapIconIDs[i] = create_hud_element(gPauseMapIconScripts[i]);
         set_hud_element_flags(gPauseMapIconIDs[i], 0x80);
     }
 

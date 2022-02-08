@@ -489,6 +489,7 @@ enum SoundIDs {
     SOUND_0                         = 0x00000000,
     SOUND_MENU_BADGE_EQUIP          = 0x00000005,
     SOUND_MENU_BADGE_UNEQUIP        = 0x00000006,
+    SOUND_MENU_START_TUTORIAL       = 0x00000009,
     SOUND_D                         = 0x0000000D,
     SOUND_E                         = 0x0000000E,
     SOUND_43                        = 0x00000043,

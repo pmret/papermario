@@ -1,6 +1,22 @@
 #include "pause_common.h"
 #include "sprite.h"
 
+extern s32 gPartnerPopupProperties[11][4];
+extern s8 gPauseBufferPal1[512];
+extern s8 gPauseBufferImg1[15752];
+extern s8 gPauseBufferPal2[512];
+extern s8 gPauseBufferImg2[15752];
+
+void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_partners_draw_movelist_flower(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
+void pause_partners_init(MenuPanel* panel);
+void pause_partners_handle_input(MenuPanel* panel);
+void pause_partners_update(MenuPanel* panel);
+void pause_partners_cleanup(MenuPanel* panel);
+
 static s32 gPausePartnersIconIDs[8];
 static s32 gPausePartnersSpriteIDs[8];
 static s32 gPausePartnersPartnerIdx[8];
@@ -10,16 +26,10 @@ static f32 gPausePartnersRotAngle;
 static s32 gPausePartnersLevel;
 static s32 gPausePartnersNumPartners;
 
-extern s32 gPartnerPopupProperties[11][4];
-
-void pause_partners_init(MenuPanel* panel);
-void pause_partners_handle_input(MenuPanel* panel);
-void pause_partners_update(MenuPanel* panel);
-void pause_partners_cleanup(MenuPanel* panel);
-
-HudScript* gPausePartnersElements[] = {
+HudScript* gPausePartnersIconScripts[] = {
     HudScript_FPCost, HudScript_StatFp_1, HudScript_PartnerRank, HudScript_PartnerRank,
-    HudScript_MoveDiamond, HudScript_MoveBlueOrb, HudScript_MoveGreenOrb, HudScript_MoveRedOrb };
+    HudScript_MoveDiamond, HudScript_MoveBlueOrb, HudScript_MoveGreenOrb, HudScript_MoveRedOrb
+};
 Vp gPausePartnersViewport = {
     .vp = {
         .vscale = { 640, 480, 511, 0 },
@@ -42,7 +52,7 @@ s32 gPausePartnersMessages[] = {
     MESSAGE_ID(0x28, 0x3A), MESSAGE_ID(0x28, 0x47), MESSAGE_ID(0x28, 0x54), MESSAGE_ID(0x28, 0x61)
 };
 s32 gPausePartnersMoveBase[] = { MOVE_HEADBONK1, MOVE_SHELL_TOSS1, MOVE_BODY_SLAM1, MOVE_SKY_DIVE1,
-                     MOVE_SMACK1, MOVE_ELECTRO_DASH1, MOVE_BELLY_FLOP1, MOVE_SPINY_FLIP1 };
+                                 MOVE_SMACK1, MOVE_ELECTRO_DASH1, MOVE_BELLY_FLOP1, MOVE_SPINY_FLIP1 };
 s8 gPausePartnersGridData[] = {
     4, 5, 6, 7,
     0, 1, 2, 3
@@ -457,8 +467,8 @@ void pause_partners_init(MenuPanel* panel) {
         gPausePartnersSpriteIDs[i] = spr_load_npc_sprite(gPausePartnersSpriteAnims[i][0], gPausePartnersSpriteAnims[i]);
     }
 
-    for (i = 0; i < ARRAY_COUNT(gPausePartnersElements); i++) {
-        gPausePartnersIconIDs[i] = create_hud_element(gPausePartnersElements[i]);
+    for (i = 0; i < ARRAY_COUNT(gPausePartnersIconScripts); i++) {
+        gPausePartnersIconIDs[i] = create_hud_element(gPausePartnersIconScripts[i]);
         set_hud_element_flags(gPausePartnersIconIDs[i], 0x80);
     }
 

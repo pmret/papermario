@@ -74,6 +74,17 @@ void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,
                                 s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity);
 
+void update_window_hierarchy(s32 windowIndex, s32 arg1);
+void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
+                        s32* maxLinesPerPage, s32* arg6, s32 charset);
+void replace_window_update(s32 idx, s8 arg1, WindowUpdateFunc pendingFunc);
+void decode_yay0(void* src, void* dst);
+
+//pause
+void pause_init(void);
+void pause_handle_input(s32 buttonsPressed, s32 buttonsHeld);
+void pause_cleanup(void);
+
 // file menu stuff
 void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);
 s8* filemenu_get_menu_message(s32 idx);
@@ -345,13 +356,6 @@ s32 resume_all_script(s32 id);
 s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z);
 s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 centerY, f32 sizeX, f32 sizeZ);
 PlayerData* get_player_data(void);
-
-// Pause
-s32 pause_interp_vertical_scroll(s32 deltaBefore);
-void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
-s32 pause_get_total_equipped_bp_cost(void);
-s32 pause_get_menu_msg(s32 index);
-void pause_sort_item_list(s16* arr, s32 len, s32 (*compare)(s16*, s16 *));
 
 s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
