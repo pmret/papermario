@@ -70,10 +70,10 @@ BSS s32 filemenu_8024C100[8];
 INCLUDE_ASM(s32, "163400", mainmenu_draw_rect);
 
 void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row) {
-    menu->unk_00.c.col = col;
-    menu->unk_00.c.row = row;
-    menu->unk_00.c.selected = menu->gridData[(menu->page * menu->numCols * menu->numRows) +
-                                    (menu->numCols * menu->unk_00.c.row) + menu->unk_00.c.col];
+    menu->col = col;
+    menu->row = row;
+    menu->selected = menu->gridData[(menu->page * menu->numCols * menu->numRows) +
+                                    (menu->numCols * menu->row) + menu->col];
 }
 
 void filemenu_set_cursor_alpha(s32 arg0) {
@@ -560,7 +560,7 @@ void filemenu_cleanup(void) {
 
     panelIt = filemenu_menus;
     for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
-        if ((*panelIt)->unk_00.c.initialized) {
+        if ((*panelIt)->initialized) {
             if ((*panelIt)->fpCleanup != NULL) {
                 (*panelIt)->fpCleanup(*panelIt);
             }

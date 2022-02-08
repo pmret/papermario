@@ -69,7 +69,7 @@ ApiStatus func_80238000_6FAD10(Evt* script, s32 isInitialCall) {
 ApiStatus func_80238244_6FAF54(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    ActorMovement* partnerActorMovement = &partnerActor->state;
+    ActorState* partnerActorMovement = &partnerActor->state;
 
     if (isInitialCall) {
         partnerActor->state.currentPos.x = partnerActor->currentPos.x;
@@ -306,7 +306,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 99,
     .partCount = ARRAY_COUNT(N(partsTable_80238734)),
     .partsData = N(partsTable_80238734),
-    .script = N(init_80238780),
+    .script = &N(init_80238780),
     .statusTable = N(statusTable_80238688),
     .escapeChance = 0,
     .airLiftChance = 0,

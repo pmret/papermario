@@ -55,7 +55,7 @@ INCLUDE_ASM(s32, "ddaf0_len_c50", set_window_properties);
 
 INCLUDE_ASM(s32, "ddaf0_len_c50", update_window_hierarchy);
 
-void replace_window_update(s32 idx, s8 arg1, s32 pendingFunc) {
+void replace_window_update(s32 idx, s8 arg1, WindowUpdateFunc pendingFunc) {
     if (gWindows[idx].flags & 1) {
         gWindows[idx].flags |= 0xA;
         gWindows[idx].fpPending = pendingFunc;
@@ -63,9 +63,9 @@ void replace_window_update(s32 idx, s8 arg1, s32 pendingFunc) {
     }
 }
 
-void set_window_update(s32 panelIndex, s32 func) {
+void set_window_update(s32 panelIndex, WindowUpdateFunc func) {
     if (gWindows[panelIndex].flags & 1) {
-        if (func == gWindows[panelIndex].fpUpdate) {
+        if (func.i == gWindows[panelIndex].fpUpdate.i) {
             gWindows[panelIndex].flags &= ~0x2;
         } else {
             gWindows[panelIndex].flags |= 0xA;
