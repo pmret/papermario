@@ -461,7 +461,7 @@ s32 popup_menu_update(void) {
                 }
 
                 if (D_8010D64C != D_8010D648) {
-                    sfx_play_sound(0xC7);
+                    sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
                 }
 
                 for (i = 0; i < 4; i++) {
@@ -515,12 +515,12 @@ s32 popup_menu_update(void) {
                                 break;
                             }
                             if (gPopupMenu->popupType == 1) {
-                                sfx_play_sound(SOUND_MENU_BADGE_ERROR);
+                                sfx_play_sound(SOUND_MENU_ERROR);
                                 D_8010D640 = 0x1E;
                                 break;
                             }
                             if ((D_8010D68E != 0) && (gPopupMenu->popupType == 0 || gPopupMenu->popupType == 3)) {
-                                sfx_play_sound(SOUND_MENU_BADGE_ERROR);
+                                sfx_play_sound(SOUND_MENU_ERROR);
                             }
                             break;
                     }

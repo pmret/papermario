@@ -15,7 +15,7 @@ void filemenu_yesno_init(MenuPanel* tab) {
     }
 
     setup_pause_menu_tab(D_8024A0CC, ARRAY_COUNT(D_8024A0CC));
-    tab->unk_00.c.initialized = TRUE;
+    tab->initialized = TRUE;
 }
 
 INCLUDE_ASM(s32, "167570", filemenu_yesno_handle_input);
