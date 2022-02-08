@@ -351,6 +351,8 @@ s32 calc_item_damage_enemy(void) {
         INFLICT_STATUS(PARALYZE);
         INFLICT_STATUS(DIZZY);
 
+        #undef INFLICT_STATUS
+
         if (wasStatusInflicted) {
             if (dispatchEvent == EVENT_UNKNOWN_TRIGGER) {
                 dispatchEvent = EVENT_HIT_COMBO;
