@@ -440,10 +440,6 @@ s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32
     return ret;
 }
 
-s32 npc_raycast_general(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
-                        f32* hitY, f32* hitZ, f32* outDepth, f32* hitNx, f32* hitNy, f32* hitNz);
-// Dumb float regalloc
-#ifdef NON_EQUIVALENT
 s32 npc_raycast_general(s32 flags, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
                         f32* hitY, f32* hitZ, f32* outDepth, f32* hitNx, f32* hitNy, f32* hitNz) {
     s32 ret;
@@ -468,13 +464,12 @@ s32 npc_raycast_general(s32 flags, f32 startX, f32 startY, f32 startZ, f32 dirX,
         if (entityID >= 0) {
             ret = entityID | 0x4000;
         }
+
+        // TODO required to match
+        if ((s32)startY && startY && startY);
     }
     return ret;
 }
-#else
-INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_general, s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 dirX,
-            f32 dirY, f32 dirZ, f32* hitX, f32* hitY, f32* hitZ, f32* outDepth, f32* hitNx, f32* hitNy, f32* hitNz);
-#endif
 
 void npc_get_slip_vector(f32* outX, f32* outZ, f32 aX, f32 aZ, f32 bX, f32 bZ) {
     f32 dotProduct = (aX * bX) + (aZ * bZ);

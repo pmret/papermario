@@ -335,7 +335,7 @@ segments:
     vram: 0x800DC500
     subsegments:
     - [0x759B0, c, bss2]
-    - [0x759B0, c, 759b0_len_61b0]
+    - [0x759B0, c, npc_collision]
     - [0x77480, c, 77480]
     - [0x7B440, c, 7B440]
     - [0x7BB60, c, 7bb60_len_41b0]
@@ -348,7 +348,7 @@ segments:
     - [0x8A160, c, 8a160_len_700]
     - [0x8A860, c, 8a860_len_3f30]
     - [0x8E790, c, 8e790_len_2850]
-    - [0x90FE0, .data, 759b0_len_61b0]
+    - [0x90FE0, .data, npc_collision]
     - [0x913B0, .data, world/actions]
     - [0x914E0, .data, world/partners] # TODO shiftability: include following images in c file to fix padding issues
     - [0x919B0, ci4,     ui/a_button_unpressed, 48, 40]
