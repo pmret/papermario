@@ -1,5 +1,13 @@
 #include "pause_common.h"
 #include "sprite.h"
+#include "sprite/npc/world_goombario.h"
+#include "sprite/npc/world_kooper.h"
+#include "sprite/npc/world_bombette.h"
+#include "sprite/npc/world_parakarry.h"
+#include "sprite/npc/world_bow.h"
+#include "sprite/npc/world_watt.h"
+#include "sprite/npc/world_sushie.h"
+#include "sprite/npc/world_lakilester.h"
 
 extern s32 gPartnerPopupProperties[11][4];
 extern s8 gPauseBufferPal1[512];
@@ -37,14 +45,54 @@ Vp gPausePartnersViewport = {
     }
 };
 s32 gPausePartnersSpriteAnims[][4] = {
-    { 0x00010000, 0x00010002, 0x00010008, 0xFFFFFFFF },
-    { 0x00020000, 0x00020004, 0x0002000D, 0xFFFFFFFF },
-    { 0x00030000, 0x00030005, 0x0003000E, 0xFFFFFFFF },
-    { 0x00040000, 0x00040002, 0x00040006, 0xFFFFFFFF },
-    { 0x00050000, 0x00050002, 0x00050004, 0xFFFFFFFF },
-    { 0x00060000, 0x00060002, 0x00060004, 0xFFFFFFFF },
-    { 0x00070000, 0x00070002, 0x00070004, 0xFFFFFFFF },
-    { 0x00080000, 0x00080005, 0x00080009, 0xFFFFFFFF }
+    {
+        NPC_ANIM_world_goombario_normal_still,
+        NPC_ANIM_world_goombario_normal_walk,
+        NPC_ANIM_world_goombario_normal_talk,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_kooper_normal_still,
+        NPC_ANIM_world_kooper_normal_walk,
+        NPC_ANIM_world_kooper_normal_talk,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_bombette_normal_still,
+        NPC_ANIM_world_bombette_normal_walk,
+        NPC_ANIM_world_bombette_normal_idle_fast,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_parakarry_Palette_00_Anim_0,
+        NPC_ANIM_world_parakarry_Palette_00_Anim_2,
+        NPC_ANIM_world_parakarry_Palette_00_Anim_6,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_bow_Palette_00_Anim_0,
+        NPC_ANIM_world_bow_Palette_00_Anim_2,
+        NPC_ANIM_world_bow_Palette_00_Anim_4,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_watt_Palette_00_Anim_0,
+        NPC_ANIM_world_watt_Palette_00_Anim_2,
+        NPC_ANIM_world_watt_Palette_00_Anim_4,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_sushie_Palette_00_Anim_0,
+        NPC_ANIM_world_sushie_Palette_00_Anim_2,
+        NPC_ANIM_world_sushie_Palette_00_Anim_4,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_lakilester_Palette_00_Anim_0,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_5,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_9,
+        ANIM_END
+    }
 };
 s32 gPausePartnersPartnerIDs[] = { 1, 2, 3, 4, 9, 6, 7, 8};
 s32 gPausePartnersMessages[] = {
@@ -63,7 +111,7 @@ s8* gPausePartnersPaletteBuffers[] = { gPauseBufferPal1, gPauseBufferPal2 };
 s32 D_8024F74C = 0;
 Gfx gPausePartnersDL[] = {
     gsDPPipeSync(),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetTexturePersp(G_TP_NONE),
     gsDPSetTextureDetail(G_TD_CLAMP),
@@ -80,70 +128,72 @@ Gfx gPausePartnersDL[] = {
 s32 gPausePartnersCurrentPortraitIndex = -1;
 s32 gPausePartnersNextPortraitIndex = -1;
 MenuWindowBP gPausePartnersWindowBPs[] = {
-  { .windowID = WINDOW_ID_PAUSE_PARTNERS,
-    .unk_01 = 0,
-    .pos = { .x = 3, .y = 16 },
-    .width = 289,
-    .height = 154,
-    .unk_0A = { 1, 0},
-    .fpDrawContents = &pause_partners_draw_contents,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_MAIN,
-    .fpUpdate = { 2 },
-    .unk_1C = 0,
-    .style = &gPauseWS_20 },
-
-  { .windowID = WINDOW_ID_PAUSE_PARTNERS_TITLE,
-    .unk_01 = 0,
-    .pos = { .x = 8, .y = 103 },
-    .width = 112,
-    .height = 20,
-    .unk_0A = { 0, 0},
-    .fpDrawContents = &pause_partners_draw_title,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_PARTNERS,
-    .fpUpdate = { 1 },
-    .unk_1C = 0,
-    .style = &gPauseWS_22 },
-
-  { .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
-    .unk_01 = 0,
-    .pos = { .x = 133, .y = 36 },
-    .width = 140,
-    .height = 80,
-    .unk_0A = { 0, 0},
-    .fpDrawContents = &pause_partners_draw_movelist,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_PARTNERS,
-    .fpUpdate = { 2 },
-    .unk_1C = 0,
-    .style = (WindowStyleCustom*)-1 },
-
-  { .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE,
-    .unk_01 = 0,
-    .pos = { .x = 12, .y = -6 },
-    .width = 80,
-    .height = 16,
-    .unk_0A = { 0, 0},
-    .fpDrawContents = &pause_partners_draw_movelist_title,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
-    .fpUpdate = { 1 },
-    .unk_1C = 0,
-    .style = (WindowStyleCustom*)-1 },
-
-  { .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_FLOWER,
-    .unk_01 = 0,
-    .pos = { .x = 102, .y = -12 },
-    .width = 32,
-    .height = 32,
-    .unk_0A = { 0, 0},
-    .fpDrawContents = &pause_partners_draw_movelist_flower,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
-    .fpUpdate = { 1 },
-    .unk_1C = 0,
-    .style = (WindowStyleCustom*)-1 }
+    {
+        .windowID = WINDOW_ID_PAUSE_PARTNERS,
+        .unk_01 = 0,
+        .pos = { .x = 3, .y = 16 },
+        .width = 289,
+        .height = 154,
+        .unk_0A = { 1, 0},
+        .fpDrawContents = &pause_partners_draw_contents,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .fpUpdate = { 2 },
+        .unk_1C = 0,
+        .style = &gPauseWS_20
+    }, {
+        .windowID = WINDOW_ID_PAUSE_PARTNERS_TITLE,
+        .unk_01 = 0,
+        .pos = { .x = 8, .y = 103 },
+        .width = 112,
+        .height = 20,
+        .unk_0A = { 0, 0},
+        .fpDrawContents = &pause_partners_draw_title,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_PARTNERS,
+        .fpUpdate = { 1 },
+        .unk_1C = 0,
+        .style = &gPauseWS_22
+    }, {
+        .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
+        .unk_01 = 0,
+        .pos = { .x = 133, .y = 36 },
+        .width = 140,
+        .height = 80,
+        .unk_0A = { 0, 0},
+        .fpDrawContents = &pause_partners_draw_movelist,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_PARTNERS,
+        .fpUpdate = { 2 },
+        .unk_1C = 0,
+        .style = (WindowStyleCustom*)-1
+    }, {
+        .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE,
+        .unk_01 = 0,
+        .pos = { .x = 12, .y = -6 },
+        .width = 80,
+        .height = 16,
+        .unk_0A = { 0, 0},
+        .fpDrawContents = &pause_partners_draw_movelist_title,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
+        .fpUpdate = { 1 },
+        .unk_1C = 0,
+        .style = (WindowStyleCustom*)-1
+    }, {
+        .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_FLOWER,
+        .unk_01 = 0,
+        .pos = { .x = 102, .y = -12 },
+        .width = 32,
+        .height = 32,
+        .unk_0A = { 0, 0},
+        .fpDrawContents = &pause_partners_draw_movelist_flower,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
+        .fpUpdate = { 1 },
+        .unk_1C = 0,
+        .style = (WindowStyleCustom*)-1
+    }
 };
 u8 gPausePartnersPortraitScrollInterpTable[] = {0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8 };
 MenuPanel gPausePanelPartners = {
@@ -161,6 +211,11 @@ MenuPanel gPausePanelPartners = {
     .fpUpdate = &pause_partners_update,
     .fpCleanup = &pause_partners_cleanup
 };
+
+typedef struct PartnerPosition {
+    /* 0x00 */ f32 pos;
+    /* 0x04 */ s32 index;
+} PartnerPosition; // size = 0x8
 
 void pause_partners_load_portrait(s32 index) {
     s32 size;
@@ -180,11 +235,6 @@ void pause_partners_load_portrait(s32 index) {
         general_heap_free(asset);
     }
 }
-
-typedef struct PartnerPosition {
-    /* 0x00 */ f32 pos;
-    /* 0x04 */ s32 index;
-} PartnerPosition; // size = 0x8
 
 void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     Matrix4f matrix;
@@ -211,7 +261,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     for (i = 0; i < gPausePartnersNumPartners; i++) {
-        currentPos = cos_deg( i * 360 / gPausePartnersNumPartners - gPausePartnersRotAngle) * 20.0f + 0.0f;
+        currentPos = cos_deg(i * 360 / gPausePartnersNumPartners - gPausePartnersRotAngle) * 20.0f + 0.0f;
 
         for (j = 0; j < i; j++) {
             if (currentPos < partnerPositions[j].pos) {
@@ -238,7 +288,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         offsetY = cos_deg(angle) * 20.0f + 0.0f;
         scale = 30.0 / (offsetZ + 60.0f) + 0.5;
 
-        guTranslateF(matrix, baseX + 0x16 + offsetX, baseY + 0x51 + offsetY, -offsetZ);
+        guTranslateF(matrix, baseX + 22 + offsetX, baseY + 81 + offsetY, -offsetZ);
         guRotateF(matrix2, 180.0f, 0.0f, 0.0f, 1.0f);
         guMtxCatF(matrix2, matrix, matrix);
         guScaleF(matrix2, scale, scale, 1.0f);
@@ -258,7 +308,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     currentTab = gPauseMenuCurrentTab;
     if (currentTab == 4) {
         if (gPausePartnersLevel == 0) {
-            pause_set_cursor_pos(WINDOW_ID_PAUSE_PARTNERS, baseX + 0x2A, baseY + 0x58);
+            pause_set_cursor_pos(WINDOW_ID_PAUSE_PARTNERS, baseX + 42, baseY + 88);
         }
 
         if (gPauseMenuCurrentTab == currentTab && gPausePartnersLevel == 0) {
@@ -266,10 +316,10 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         }
     }
 
-    x1 = baseX + 0x82;
-    y1 = baseY + 0x18;
-    x2 = baseX + 0x118;
-    y2 = baseY + 0x81;
+    x1 = baseX + 130;
+    y1 = baseY + 24;
+    x2 = baseX + 280;
+    y2 = baseY + 129;
 
     if (x1 <= 0) {
         x1 = 1;
@@ -278,15 +328,15 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         y1 = 1;
     }
 
-    if (x2 <= 0 || y2 <= 0 || x1 >= 319 || y1 >= 239) {
+    if (x2 <= 0 || y2 <= 0 || x1 >= SCREEN_WIDTH - 1 || y1 >= SCREEN_HEIGHT - 1) {
         return;
     }
 
-    if (x2 >= 319) {
-        x2 = 319;
+    if (x2 >= SCREEN_WIDTH - 1) {
+        x2 = SCREEN_WIDTH - 1;
     }
-    if (y2 >= 239) {
-        y2 = 239;
+    if (y2 >= SCREEN_HEIGHT - 1) {
+        y2 = SCREEN_HEIGHT - 1;
     }
 
     portraitScrollPos = (gPausePartnersRotAngle + 360.0f) * 15000.0f * gPausePartnersNumPartners / 360.0f;
@@ -310,7 +360,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
             gDPLoadTextureTile(gMasterGfxPos++, gPausePartnersImageBuffers[i], G_IM_FMT_CI, G_IM_SIZ_8b, 150, 0,
                                 0, 12 * index, 149, 12 * index + tileHeight - 1, 0,
                                 G_TX_CLAMP, G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-            pause_draw_rect((baseX + 0x82 + portraitOffsetX) * 4, (baseY + 0x18 + 12 * index) * 4, (baseX + 0x118 + portraitOffsetX) * 4, (baseY + 0x18 + 12 * index + tileHeight) * 4, 0, 0,
+            pause_draw_rect((baseX + 130 + portraitOffsetX) * 4, (baseY + 24 + 12 * index) * 4, (baseX + 280 + portraitOffsetX) * 4, (baseY + 24 + 12 * index + tileHeight) * 4, 0, 0,
                             12 * index * 32, 0x400, 0x400);
             gDPPipeSync(gMasterGfxPos++);
             if (12 * index + 12 >= 105) {
@@ -320,10 +370,10 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     }
     {
         s32 x1, y1, x2, y2;
-        x1 = baseX + 0x7A;
-        y1 = baseY + 0x10;
-        x2 = baseX + 0x120;
-        y2 = baseY + 0x89;
+        x1 = baseX + 122;
+        y1 = baseY + 16;
+        x2 = baseX + 288;
+        y2 = baseY + 137;
 
         if (x1 <= 0) {
             x1 = 1;
@@ -332,20 +382,20 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
             y1 = 1;
         }
 
-        if (x2 <= 0 || y2 <= 0 || x1 >= 319 || y1 >= 239) {
+        if (x2 <= 0 || y2 <= 0 || x1 >= SCREEN_WIDTH - 1 || y1 >= SCREEN_HEIGHT - 1) {
             return;
         }
 
-        if (x2 >= 319) {
-            x2 = 319;
+        if (x2 >= SCREEN_WIDTH - 1) {
+            x2 = SCREEN_WIDTH - 1;
         }
-        if (y2 >= 239) {
-            y2 = 239;
+        if (y2 >= SCREEN_HEIGHT - 1) {
+            y2 = SCREEN_HEIGHT - 1;
         }
 
         gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
     }
-    draw_box(0, &gPauseWS_21, baseX + 0x7A, baseY + 0x10, 0, 166, 121, opacity, darkening, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, width, height, 0);
+    draw_box(0, &gPauseWS_21, baseX + 122, baseY + 16, 0, 166, 121, opacity, darkening, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, width, height, 0);
 }
 
 void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
@@ -365,15 +415,15 @@ void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         msgWidth += 4;
     }
 
-    draw_msg(msgID, baseX + ((width - offset - msgWidth) >> 1), baseY + 1, 0xFF, 0, 0);
+    draw_msg(msgID, baseX + ((width - offset - msgWidth) >> 1), baseY + 1, 255, 0, 0);
 
     if (level == 1) {
-        set_hud_element_render_pos(gPausePartnersIconIDs[2], baseX + 0x5F, baseY + 0xA);
+        set_hud_element_render_pos(gPausePartnersIconIDs[2], baseX + 95, baseY + 10);
         draw_hud_element_3(gPausePartnersIconIDs[2]);
     } else if (level == 2) {
-        set_hud_element_render_pos(gPausePartnersIconIDs[2], baseX + 0x5B, baseY + 0xA);
+        set_hud_element_render_pos(gPausePartnersIconIDs[2], baseX + 91, baseY + 10);
         draw_hud_element_3(gPausePartnersIconIDs[2]);
-        set_hud_element_render_pos(gPausePartnersIconIDs[3], baseX + 0x65, baseY + 0xA);
+        set_hud_element_render_pos(gPausePartnersIconIDs[3], baseX + 101, baseY + 10);
         draw_hud_element_3(gPausePartnersIconIDs[3]);
     }
 }
@@ -419,25 +469,25 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         draw_msg(moveNameID, msgX, msgY, 255, 10, style);
         set_hud_element_scale(gPausePartnersIconIDs[i + 4], 0.5f);
         //TODO find better match
-        set_hud_element_render_pos(gPausePartnersIconIDs[i + 4], 0xC - (-baseX), baseY + 0x1C + i * 13);
+        set_hud_element_render_pos(gPausePartnersIconIDs[i + 4], 12 - (-baseX), baseY + 28 + i * 13);
         draw_hud_element_3(gPausePartnersIconIDs[i + 4]);
 
         if (costFP != 0) {
-            draw_number(costFP, baseX + 0x7D, baseY + 0x16 + i * 13, style, 0xA, 0xFF, 3);
+            draw_number(costFP, baseX + 125, baseY + 22 + i * 13, style, 10, 255, 3);
             if (costFP > 0) {
-                set_hud_element_render_pos(gPausePartnersIconIDs[0], baseX + 0x86, baseY + 0x1D + i * 13);
+                set_hud_element_render_pos(gPausePartnersIconIDs[0], baseX + 134, baseY + 29 + i * 13);
                 draw_hud_element_3(gPausePartnersIconIDs[0]);
             }
         }
     }
 
     if (gPauseMenuCurrentTab == 4 && gPausePartnersLevel == 1) {
-        pause_set_cursor_pos(0x24, baseX - 2, baseY + 0x1C + gPausePartnersSelectedMove * 13);
+        pause_set_cursor_pos(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, baseX - 2, baseY + 28 + gPausePartnersSelectedMove * 13);
     }
 }
 
 void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
-    draw_msg(pause_get_menu_msg(0x55), baseX + 12, baseY + 1, 0xFF, -1, 1);
+    draw_msg(pause_get_menu_msg(0x55), baseX + 12, baseY + 1, 255, -1, 1);
 }
 
 void pause_partners_draw_movelist_flower(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
@@ -458,7 +508,7 @@ void pause_partners_init(MenuPanel* panel) {
     }
 
     if (gPausePartnersNumPartners == 0) {
-        set_window_update(0x22, 2);
+        set_window_update(WINDOW_ID_PAUSE_PARTNERS, 2);
         panel->initialized = FALSE;
         return;
     }
@@ -647,5 +697,3 @@ void pause_partners_cleanup(MenuPanel* panel) {
         spr_free_sprite(gPausePartnersSpriteIDs[i]);
     }
 }
-
-

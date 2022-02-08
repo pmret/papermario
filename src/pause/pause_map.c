@@ -63,73 +63,76 @@ Vec2b gPauseMapPaths[][32] = {
     {}
 };
 PauseMapSpace gPauseMapSpaces[] = {
-    { .pos = { .x = 116, .y = 185 }, .parent =  0, .pathLength =  7, .path = gPauseMapPaths[ 0], .afterRequirement = STORY_EPILOGUE                   , .id = LOCATION_TOAD_TOWN },
-    { .pos = { .x = 118, .y = 151 }, .parent =  0, .pathLength =  3, .path = gPauseMapPaths[ 1], .afterRequirement = STORY_EPILOGUE                   , .id = LOCATION_PEACH_CASTLE_GROUNDS },
-    { .pos = { .x = 143, .y = 134 }, .parent =  1, .pathLength =  3, .path = gPauseMapPaths[ 2], .afterRequirement = STORY_CH0_BEGAN_PEACH_MISSION    , .id = LOCATION_SHOOTING_STAR_SUMMIT },
-    { .pos = { .x = 100, .y = 174 }, .parent =  0, .pathLength =  0, .path = gPauseMapPaths[ 3], .afterRequirement = STORY_61                         , .id = LOCATION_TOAD_TOWN_TUNNELS },
-    { .pos = { .x =  36, .y = 157 }, .parent =  5, .pathLength =  0, .path = gPauseMapPaths[ 4], .afterRequirement = STORY_CH0_GOOMBARIO_JOINED_PARTY , .id = LOCATION_GOOMBA_VILLAGE },
-    { .pos = { .x =  74, .y = 154 }, .parent =  0, .pathLength =  4, .path = gPauseMapPaths[ 5], .afterRequirement = STORY_CH0_ARRIVED_AT_TOAD_TOWN   , .id = LOCATION_GOOMBA_ROAD },
-    { .pos = { .x = 148, .y = 167 }, .parent =  0, .pathLength =  5, .path = gPauseMapPaths[ 6], .afterRequirement = STORY_CH1_STAR_SPRIT_DEPARTED    , .id = LOCATION_PLEASANT_PATH },
-    { .pos = { .x = 154, .y = 148 }, .parent =  6, .pathLength =  2, .path = gPauseMapPaths[ 7], .afterRequirement = STORY_CH1_KOOPER_JOINED_PARTY    , .id = LOCATION_KOOPA_VILLAGE },
-    { .pos = { .x = 205, .y = 152 }, .parent =  6, .pathLength =  7, .path = gPauseMapPaths[ 8], .afterRequirement = STORY_CH1_STAR_SPRIT_DEPARTED    , .id = LOCATION_KOOPA_BROS_FORTRESS },
-    { .pos = { .x = 227, .y = 243 }, .parent =  0, .pathLength = 19, .path = gPauseMapPaths[ 9], .afterRequirement = STORY_61                         , .id = LOCATION_MT_RUGGED },
+    { .pos = { .x = 116, .y = 185 }, .parent =  0, .pathLength =  7, .path = gPauseMapPaths[ 0], .afterRequirement = STORY_EPILOGUE,                    .id = LOCATION_TOAD_TOWN },
+    { .pos = { .x = 118, .y = 151 }, .parent =  0, .pathLength =  3, .path = gPauseMapPaths[ 1], .afterRequirement = STORY_EPILOGUE,                    .id = LOCATION_PEACH_CASTLE_GROUNDS },
+    { .pos = { .x = 143, .y = 134 }, .parent =  1, .pathLength =  3, .path = gPauseMapPaths[ 2], .afterRequirement = STORY_CH0_BEGAN_PEACH_MISSION,     .id = LOCATION_SHOOTING_STAR_SUMMIT },
+    { .pos = { .x = 100, .y = 174 }, .parent =  0, .pathLength =  0, .path = gPauseMapPaths[ 3], .afterRequirement = STORY_61,                          .id = LOCATION_TOAD_TOWN_TUNNELS },
+    { .pos = { .x =  36, .y = 157 }, .parent =  5, .pathLength =  0, .path = gPauseMapPaths[ 4], .afterRequirement = STORY_CH0_GOOMBARIO_JOINED_PARTY,  .id = LOCATION_GOOMBA_VILLAGE },
+    { .pos = { .x =  74, .y = 154 }, .parent =  0, .pathLength =  4, .path = gPauseMapPaths[ 5], .afterRequirement = STORY_CH0_ARRIVED_AT_TOAD_TOWN,    .id = LOCATION_GOOMBA_ROAD },
+    { .pos = { .x = 148, .y = 167 }, .parent =  0, .pathLength =  5, .path = gPauseMapPaths[ 6], .afterRequirement = STORY_CH1_STAR_SPRIT_DEPARTED,     .id = LOCATION_PLEASANT_PATH },
+    { .pos = { .x = 154, .y = 148 }, .parent =  6, .pathLength =  2, .path = gPauseMapPaths[ 7], .afterRequirement = STORY_CH1_KOOPER_JOINED_PARTY,     .id = LOCATION_KOOPA_VILLAGE },
+    { .pos = { .x = 205, .y = 152 }, .parent =  6, .pathLength =  7, .path = gPauseMapPaths[ 8], .afterRequirement = STORY_CH1_STAR_SPRIT_DEPARTED,     .id = LOCATION_KOOPA_BROS_FORTRESS },
+    { .pos = { .x = 227, .y = 243 }, .parent =  0, .pathLength = 19, .path = gPauseMapPaths[ 9], .afterRequirement = STORY_61,                          .id = LOCATION_MT_RUGGED },
     { .pos = { .x = 266, .y = 206 }, .parent =  9, .pathLength = 13, .path = gPauseMapPaths[10], .afterRequirement = STORY_CH2_UNCOVERED_DRY_DRY_RUINS, .id = LOCATION_DRY_DRY_DESERT },
-    { .pos = { .x = 280, .y = 191 }, .parent = 10, .pathLength =  2, .path = gPauseMapPaths[11], .afterRequirement = STORY_61                         , .id = LOCATION_DRY_DRY_OUTPOST },
-    { .pos = { .x = 252, .y = 188 }, .parent = 10, .pathLength =  2, .path = gPauseMapPaths[12], .afterRequirement = STORY_CH2_BEGAN_PEACH_MISSION    , .id = LOCATION_DRY_DRY_RUINS },
+    { .pos = { .x = 280, .y = 191 }, .parent = 10, .pathLength =  2, .path = gPauseMapPaths[11], .afterRequirement = STORY_61,                          .id = LOCATION_DRY_DRY_OUTPOST },
+    { .pos = { .x = 252, .y = 188 }, .parent = 10, .pathLength =  2, .path = gPauseMapPaths[12], .afterRequirement = STORY_CH2_BEGAN_PEACH_MISSION,     .id = LOCATION_DRY_DRY_RUINS },
     { .pos = { .x = 187, .y = 193 }, .parent =  0, .pathLength =  7, .path = gPauseMapPaths[13], .afterRequirement = STORY_CH3_ARRIVED_AT_BOOS_MANSION, .id = LOCATION_FOREVER_FOREST },
-    { .pos = { .x = 170, .y = 180 }, .parent = 13, .pathLength =  1, .path = gPauseMapPaths[14], .afterRequirement = STORY_CH3_UNLOCKED_GUSTY_GULCH   , .id = LOCATION_BOOS_MANSION },
-    { .pos = { .x = 223, .y = 170 }, .parent = 13, .pathLength =  4, .path = gPauseMapPaths[15], .afterRequirement = STORY_CH3_BEGAN_PEACH_MISSION    , .id = LOCATION_GUSTY_GULCH },
-    { .pos = { .x = 263, .y = 156 }, .parent = 15, .pathLength =  4, .path = gPauseMapPaths[16], .afterRequirement = STORY_CH3_BEGAN_PEACH_MISSION    , .id = LOCATION_TUBBAS_MANOR },
-    { .pos = { .x = 203, .y = 171 }, .parent = 15, .pathLength =  1, .path = gPauseMapPaths[17], .afterRequirement = STORY_CH3_BEGAN_PEACH_MISSION    , .id = LOCATION_WINDY_MILL },
-    { .pos = { .x =  79, .y = 173 }, .parent =  0, .pathLength =  4, .path = gPauseMapPaths[18], .afterRequirement = STORY_CH4_STAR_SPRIT_DEPARTED    , .id = LOCATION_SHY_GUYS_TOYBOX },
-    { .pos = { .x =  66, .y = 289 }, .parent =  0, .pathLength = 21, .path = gPauseMapPaths[19], .afterRequirement = STORY_CH5_ZIP_LINE_READY         , .id = LOCATION_JADE_JUNGLE },
-    { .pos = { .x =  84, .y = 274 }, .parent = 19, .pathLength =  2, .path = gPauseMapPaths[20], .afterRequirement = STORY_61                         , .id = LOCATION_YOSHIS_VILLAGE },
-    { .pos = { .x =  47, .y = 252 }, .parent = 19, .pathLength =  5, .path = gPauseMapPaths[21], .afterRequirement = STORY_CH5_BEGAN_PEACH_MISSION    , .id = LOCATION_MT_LAVALAVA },
-    { .pos = { .x =  59, .y = 126 }, .parent =  0, .pathLength =  0, .path = gPauseMapPaths[22], .afterRequirement = STORY_CH6_BEGAN_PEACH_MISSION    , .id = LOCATION_FLOWER_FIELDS },
-    { .pos = { .x =  58, .y =  92 }, .parent = 22, .pathLength =  4, .path = gPauseMapPaths[23], .afterRequirement = STORY_CH6_BEGAN_PEACH_MISSION    , .id = LOCATION_CLOUDY_CLIMB },
-    { .pos = { .x = 183, .y = 125 }, .parent =  3, .pathLength =  0, .path = gPauseMapPaths[24], .afterRequirement = STORY_CH7_MAYOR_MURDER_SOLVED    , .id = LOCATION_SHIVER_CITY },
-    { .pos = { .x = 203, .y = 126 }, .parent = 24, .pathLength =  1, .path = gPauseMapPaths[25], .afterRequirement = STORY_CH7_DEFEATED_MONSTAR       , .id = LOCATION_SHIVER_SNOWFIELD },
-    { .pos = { .x = 234, .y = 128 }, .parent = 25, .pathLength =  2, .path = gPauseMapPaths[26], .afterRequirement = STORY_CH7_GOT_SNOWMAN_SCARF      , .id = LOCATION_STARBORN_VALLEY },
-    { .pos = { .x = 220, .y = 112 }, .parent = 25, .pathLength =  2, .path = gPauseMapPaths[27], .afterRequirement = STORY_CH7_STAR_SPRIT_DEPARTED    , .id = LOCATION_SHIVER_MOUNTAIN },
-    { .pos = { .x = 223, .y =  99 }, .parent = 27, .pathLength =  1, .path = gPauseMapPaths[28], .afterRequirement = STORY_CH7_STAR_SPRIT_DEPARTED    , .id = LOCATION_CRYSTAL_PALACE },
-    { .pos = { .x = 158, .y = 110 }, .parent =  2, .pathLength =  6, .path = gPauseMapPaths[29], .afterRequirement = STORY_61                         , .id = LOCATION_STAR_WAY },
-    { .pos = { .x = 163, .y =  78 }, .parent = 29, .pathLength =  6, .path = gPauseMapPaths[30], .afterRequirement = STORY_61                         , .id = LOCATION_STAR_HAVEN },
-    { .pos = { .x =  96, .y =  49 }, .parent = 30, .pathLength = 13, .path = gPauseMapPaths[31], .afterRequirement = STORY_EPILOGUE                   , .id = LOCATION_BOWSERS_CASTLE },
-    { .pos = { .x =  88, .y =  22 }, .parent = 31, .pathLength =  3, .path = gPauseMapPaths[32], .afterRequirement = STORY_EPILOGUE                   , .id = LOCATION_PEACHS_CASTLE },
-    { .pos = { .x =  98, .y = 147 }, .parent =  0, .pathLength =  0, .path = gPauseMapPaths[33], .afterRequirement = STORY_61                         , .id = LOCATION_MARIOS_HOUSE }
+    { .pos = { .x = 170, .y = 180 }, .parent = 13, .pathLength =  1, .path = gPauseMapPaths[14], .afterRequirement = STORY_CH3_UNLOCKED_GUSTY_GULCH,    .id = LOCATION_BOOS_MANSION },
+    { .pos = { .x = 223, .y = 170 }, .parent = 13, .pathLength =  4, .path = gPauseMapPaths[15], .afterRequirement = STORY_CH3_BEGAN_PEACH_MISSION,     .id = LOCATION_GUSTY_GULCH },
+    { .pos = { .x = 263, .y = 156 }, .parent = 15, .pathLength =  4, .path = gPauseMapPaths[16], .afterRequirement = STORY_CH3_BEGAN_PEACH_MISSION,     .id = LOCATION_TUBBAS_MANOR },
+    { .pos = { .x = 203, .y = 171 }, .parent = 15, .pathLength =  1, .path = gPauseMapPaths[17], .afterRequirement = STORY_CH3_BEGAN_PEACH_MISSION,     .id = LOCATION_WINDY_MILL },
+    { .pos = { .x =  79, .y = 173 }, .parent =  0, .pathLength =  4, .path = gPauseMapPaths[18], .afterRequirement = STORY_CH4_STAR_SPRIT_DEPARTED,     .id = LOCATION_SHY_GUYS_TOYBOX },
+    { .pos = { .x =  66, .y = 289 }, .parent =  0, .pathLength = 21, .path = gPauseMapPaths[19], .afterRequirement = STORY_CH5_ZIP_LINE_READY,          .id = LOCATION_JADE_JUNGLE },
+    { .pos = { .x =  84, .y = 274 }, .parent = 19, .pathLength =  2, .path = gPauseMapPaths[20], .afterRequirement = STORY_61,                          .id = LOCATION_YOSHIS_VILLAGE },
+    { .pos = { .x =  47, .y = 252 }, .parent = 19, .pathLength =  5, .path = gPauseMapPaths[21], .afterRequirement = STORY_CH5_BEGAN_PEACH_MISSION,     .id = LOCATION_MT_LAVALAVA },
+    { .pos = { .x =  59, .y = 126 }, .parent =  0, .pathLength =  0, .path = gPauseMapPaths[22], .afterRequirement = STORY_CH6_BEGAN_PEACH_MISSION,     .id = LOCATION_FLOWER_FIELDS },
+    { .pos = { .x =  58, .y =  92 }, .parent = 22, .pathLength =  4, .path = gPauseMapPaths[23], .afterRequirement = STORY_CH6_BEGAN_PEACH_MISSION,     .id = LOCATION_CLOUDY_CLIMB },
+    { .pos = { .x = 183, .y = 125 }, .parent =  3, .pathLength =  0, .path = gPauseMapPaths[24], .afterRequirement = STORY_CH7_MAYOR_MURDER_SOLVED,     .id = LOCATION_SHIVER_CITY },
+    { .pos = { .x = 203, .y = 126 }, .parent = 24, .pathLength =  1, .path = gPauseMapPaths[25], .afterRequirement = STORY_CH7_DEFEATED_MONSTAR,        .id = LOCATION_SHIVER_SNOWFIELD },
+    { .pos = { .x = 234, .y = 128 }, .parent = 25, .pathLength =  2, .path = gPauseMapPaths[26], .afterRequirement = STORY_CH7_GOT_SNOWMAN_SCARF,       .id = LOCATION_STARBORN_VALLEY },
+    { .pos = { .x = 220, .y = 112 }, .parent = 25, .pathLength =  2, .path = gPauseMapPaths[27], .afterRequirement = STORY_CH7_STAR_SPRIT_DEPARTED,     .id = LOCATION_SHIVER_MOUNTAIN },
+    { .pos = { .x = 223, .y =  99 }, .parent = 27, .pathLength =  1, .path = gPauseMapPaths[28], .afterRequirement = STORY_CH7_STAR_SPRIT_DEPARTED,     .id = LOCATION_CRYSTAL_PALACE },
+    { .pos = { .x = 158, .y = 110 }, .parent =  2, .pathLength =  6, .path = gPauseMapPaths[29], .afterRequirement = STORY_61,                          .id = LOCATION_STAR_WAY },
+    { .pos = { .x = 163, .y =  78 }, .parent = 29, .pathLength =  6, .path = gPauseMapPaths[30], .afterRequirement = STORY_61,                          .id = LOCATION_STAR_HAVEN },
+    { .pos = { .x =  96, .y =  49 }, .parent = 30, .pathLength = 13, .path = gPauseMapPaths[31], .afterRequirement = STORY_EPILOGUE,                    .id = LOCATION_BOWSERS_CASTLE },
+    { .pos = { .x =  88, .y =  22 }, .parent = 31, .pathLength =  3, .path = gPauseMapPaths[32], .afterRequirement = STORY_EPILOGUE,                    .id = LOCATION_PEACHS_CASTLE },
+    { .pos = { .x =  98, .y = 147 }, .parent =  0, .pathLength =  0, .path = gPauseMapPaths[33], .afterRequirement = STORY_61,                          .id = LOCATION_MARIOS_HOUSE }
 };
 s32 gPauseMapArrowWobble[] = { 0, 2, 3, 3, 4, 4, 4, 4, 3, 2, 1, 0 };
 MenuWindowBP gPauseMapWindowBPs[] = {
-  { .windowID = WINDOW_ID_PAUSE_MAP,
-    .unk_01 = 0,
-    .pos = { .x = 3, .y = 16 },
-    .width = 289,
-    .height = 154,
-    .unk_0A = { 1, 0 },
-    .fpDrawContents = &pause_map_draw_contents,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_MAIN,
-    .fpUpdate = { 2 },
-    .unk_1C = 0,
-    .style = &gPauseWS_26 },
-
-  { .windowID = WINDOW_ID_PAUSE_MAP_TITLE,
-    .unk_01 = 0,
-    .pos = { .x = 56, .y = 124 },
-    .width = 180,
-    .height = 20,
-    .unk_0A = { 0, 0 },
-    .fpDrawContents = &pause_map_draw_title,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_MAP,
-    .fpUpdate = { 1 },
-    .unk_1C = 0,
-    .style = &gPauseWS_28 },
-  {},
-  {},
-  {},
-  {},
-  {}
+    {
+        .windowID = WINDOW_ID_PAUSE_MAP,
+        .unk_01 = 0,
+        .pos = { .x = 3, .y = 16 },
+        .width = 289,
+        .height = 154,
+        .unk_0A = { 1, 0 },
+        .fpDrawContents = &pause_map_draw_contents,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .fpUpdate = { 2 },
+        .unk_1C = 0,
+        .style = &gPauseWS_26
+    },
+    {
+        .windowID = WINDOW_ID_PAUSE_MAP_TITLE,
+        .unk_01 = 0,
+        .pos = { .x = 56, .y = 124 },
+        .width = 180,
+        .height = 20,
+        .unk_0A = { 0, 0 },
+        .fpDrawContents = &pause_map_draw_title,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_MAP,
+        .fpUpdate = { 1 },
+        .unk_1C = 0,
+        .style = &gPauseWS_28
+    },
+    { },
+    { },
+    { },
+    { },
+    { }
 };
 MenuPanel gPausePanelMap = {
     .initialized = FALSE,
@@ -242,15 +245,15 @@ void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
         y1 = 1;
     }
 
-    if (x2 <= 0 || y2 <= 0 || x1 >= 319 || y1 >= 239) {
+    if (x2 <= 0 || y2 <= 0 || x1 >= SCREEN_WIDTH - 1 || y1 >= SCREEN_HEIGHT - 1) {
         return;
     }
 
-    if (x2 >= 319) {
-        x2 = 319;
+    if (x2 >= SCREEN_WIDTH - 1) {
+        x2 = SCREEN_WIDTH - 1;
     }
-    if (y2 >= 239) {
-        y2 = 239;
+    if (y2 >= SCREEN_HEIGHT - 1) {
+        y2 = SCREEN_HEIGHT - 1;
     }
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
@@ -268,18 +271,18 @@ void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
         }
 
         if (i != gPauseMapCursorCurrentOption) {
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xDC, 0x50, 0x1E, 0xFF);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 220, 80, 30, 255);
         } else {
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, (gGameStatusPtr->frameCounter * 10) % 120 + 0x78,
-                                                   (gGameStatusPtr->frameCounter * 10) % 120 + 0x78,
-                                                   (gGameStatusPtr->frameCounter * 10) % 120, 0xFF);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, (gGameStatusPtr->frameCounter * 10) % 120 + 120,
+                                                   (gGameStatusPtr->frameCounter * 10) % 120 + 120,
+                                                   (gGameStatusPtr->frameCounter * 10) % 120, 255);
         }
 
         bigPointX = camX + 26 + posX;
         bigPointY = camY + 22 + posY;
         pause_draw_rect((bigPointX - 8) * 4, (bigPointY - 8) * 4, (bigPointX + 8) * 4, (bigPointY + 8) * 4, 0, 0, 0, 0x400, 0x400);
         gDPPipeSync(gMasterGfxPos++);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xE6, 0xBE, 0xB4, 0xFF);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 230, 190, 180, 255);
 
         pathLength = mapSpace->pathLength;
         path = mapSpace->path;
@@ -348,15 +351,15 @@ void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
             y1 = 1;
         }
 
-        if (x2 <= 0 || y2 <= 0 || x1 >= 319 || y1 >= 239) {
+        if (x2 <= 0 || y2 <= 0 || x1 >= SCREEN_WIDTH - 1 || y1 >= SCREEN_HEIGHT - 1) {
             return;
         }
 
-        if (x2 >= 319) {
-            x2 = 319;
+        if (x2 >= SCREEN_WIDTH - 1) {
+            x2 = SCREEN_WIDTH - 1;
         }
-        if (y2 >= 239) {
-            y2 = 239;
+        if (y2 >= SCREEN_HEIGHT - 1) {
+            y2 = SCREEN_HEIGHT - 1;
         }
 
         gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);

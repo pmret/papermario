@@ -15,9 +15,9 @@ typedef struct {
 } StatsEntryData; // size = 0xC
 
 HudScript* gStatsMenuElements[] = { HudScript_MarioHeadSmall, HudScript_StatBoots0, HudScript_StatHammer0,
-                                       HudScript_StatusCoin, HudScript_StatusStarPoint, HudScript_StatStarPiece_1,
-                                       HudScript_Clock, HudScript_StatusHeart, HudScript_StatFp_1, HudScript_StatBp,
-                                       HudScript_StatusStar1, HudScript_StatTimes};
+                                    HudScript_StatusCoin, HudScript_StatusStarPoint, HudScript_StatStarPiece_1,
+                                    HudScript_Clock, HudScript_StatusHeart, HudScript_StatFp_1, HudScript_StatBp,
+                                    HudScript_StatusStar1, HudScript_StatTimes};
 HudScript* gStatsBootsElements[] = { HudScript_StatBoots0, HudScript_StatBoots1, HudScript_StatBoots2, HudScript_StatBoots3 };
 HudScript* gStatsHammerElements[] = { HudScript_StatHammer0, HudScript_StatHammer1, HudScript_StatHammer2, HudScript_StatHammer3 };
 s32 gPauseStatsBootsMessages[] = { 59, 60, 61, 62 };
@@ -61,18 +61,20 @@ s32 D_8024F480 = 7;
 s32 D_8024F484 = 8;
 
 MenuWindowBP gStatsMenuWindowBPs[] = {
-  { .windowID = WINDOW_ID_PAUSE_STATS,
-    .unk_01 = 0,
-    .pos = { .x = 3, .y = 16 },
-    .width = 289,
-    .height = 154,
-    .unk_0A = { 0, 0},
-    .fpDrawContents = &pause_stats_draw_contents,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_MAIN,
-    .fpUpdate = { 2 },
-    .unk_1C = 0,
-    .style = &gPauseWS_12 }
+    {
+        .windowID = WINDOW_ID_PAUSE_STATS,
+        .unk_01 = 0,
+        .pos = { .x = 3, .y = 16 },
+        .width = 289,
+        .height = 154,
+        .unk_0A = { 0, 0},
+        .fpDrawContents = &pause_stats_draw_contents,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .fpUpdate = { 2 },
+        .unk_1C = 0,
+        .style = &gPauseWS_12
+    }
 };
 MenuPanel gPausePanelStats = {
     .initialized = FALSE,
@@ -122,10 +124,7 @@ void pause_stats_handle_input(MenuPanel* panel) {
             if (panel->col < 0) {
                 panel->col = 0;
                 break;
-            } else if (panel->selected != panel->gridData[
-                                            (panel->page * panel->numCols * panel->numRows)
-                                          + (panel->numCols * panel->row)
-                                          + (panel->col)]) {
+            } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
                 break;
             }
         }
@@ -137,10 +136,7 @@ void pause_stats_handle_input(MenuPanel* panel) {
             if (panel->col >= panel->numCols) {
                 panel->col = panel->numCols - 1;
                 break;
-            } else if (panel->selected != panel->gridData[
-                                            (panel->page * panel->numCols * panel->numRows)
-                                          + (panel->numCols * panel->row)
-                                          + (panel->col)]) {
+            } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
                 break;
             }
         }
@@ -152,10 +148,7 @@ void pause_stats_handle_input(MenuPanel* panel) {
             if (panel->row < 0) {
                 panel->row = 0;
                 break;
-            } else if (panel->selected != panel->gridData[
-                                            (panel->page * panel->numCols * panel->numRows)
-                                          + (panel->numCols * panel->row)
-                                          + (panel->col)]) {
+            } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
                 break;
             }
         }
@@ -167,19 +160,13 @@ void pause_stats_handle_input(MenuPanel* panel) {
             if (panel->row >= panel->numRows) {
                 panel->row = panel->numRows - 1;
                 break;
-            } else if (panel->selected != panel->gridData[
-                                            (panel->page * panel->numCols * panel->numRows)
-                                          + (panel->numCols * panel->row)
-                                          + (panel->col)]) {
+            } else if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
                 break;
             }
         }
     }
 
-    panel->selected = panel->gridData[
-                        (panel->page * panel->numCols * panel->numRows)
-                      + (panel->numCols * panel->row)
-                      + (panel->col)];
+    panel->selected = MENU_PANEL_SELECTED_GRID_DATA(panel);
     if (panel->selected != initialSelection) {
         sfx_play_sound(SOUND_MENU_CHANGE_SELECTION);
     }

@@ -1,5 +1,12 @@
 #include "pause_common.h"
 #include "sprite.h"
+#include "sprite/npc/world_eldstar.h"
+#include "sprite/npc/world_mamar.h"
+#include "sprite/npc/world_skolar.h"
+#include "sprite/npc/world_muskular.h"
+#include "sprite/npc/world_misstar.h"
+#include "sprite/npc/world_klevar.h"
+#include "sprite/npc/world_kalmar.h"
 
 extern Gfx gPauseDLSpiritsBg[];
 extern s8 pause_spirits_bg_png[];
@@ -23,13 +30,48 @@ Vp gPauseSpiritsViewport = {
     }
 };
 s32 gPauseSpiritsSpriteAnims[][4] = {
-    { 0x00120000, 0x00120001, 0x00120002, 0xFFFFFFFF },
-    { 0x00130000, 0x00130001, 0x00130002, 0xFFFFFFFF },
-    { 0x00140000, 0x00140001, 0x00140002, 0xFFFFFFFF },
-    { 0x00150000, 0x00150001, 0x00150002, 0xFFFFFFFF },
-    { 0x00160000, 0x00160001, 0x00160002, 0xFFFFFFFF },
-    { 0x00170000, 0x00170001, 0x00170003, 0xFFFFFFFF },
-    { 0x00180000, 0x00180001, 0x00180002, 0xFFFFFFFF }
+    {
+        NPC_ANIM_world_eldstar_Palette_00_Anim_0,
+        NPC_ANIM_world_eldstar_Palette_00_Anim_1,
+        NPC_ANIM_world_eldstar_Palette_00_Anim_2,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_mamar_Palette_00_Anim_0,
+        NPC_ANIM_world_mamar_Palette_00_Anim_1,
+        NPC_ANIM_world_mamar_Palette_00_Anim_2,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_skolar_Palette_00_Anim_0,
+        NPC_ANIM_world_skolar_Palette_00_Anim_1,
+        NPC_ANIM_world_skolar_Palette_00_Anim_2,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_muskular_Palette_00_Anim_0,
+        NPC_ANIM_world_muskular_Palette_00_Anim_1,
+        NPC_ANIM_world_muskular_Palette_00_Anim_2,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_misstar_Palette_00_Anim_0,
+        NPC_ANIM_world_misstar_Palette_00_Anim_1,
+        NPC_ANIM_world_misstar_Palette_00_Anim_2,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_klevar_Palette_00_Anim_0,
+        NPC_ANIM_world_klevar_Palette_00_Anim_1,
+        NPC_ANIM_world_klevar_Palette_00_Anim_3,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_kalmar_Palette_00_Anim_0,
+        NPC_ANIM_world_kalmar_Palette_00_Anim_1,
+        NPC_ANIM_world_kalmar_Palette_00_Anim_2,
+        ANIM_END
+    }
 };
 s8 gPauseSpiritsGridData[] = {
     5, 6, 0, 1, 2,
@@ -55,31 +97,34 @@ Vec2i gPauseSpiritsCursorPositions[] = {
     { .x = 60, .y = 55 }
 };
 MenuWindowBP gPauseSpiritsWindowsBPs[] = {
-  { .windowID = WINDOW_ID_PAUSE_SPIRITS,
-    .unk_01 = 0,
-    .pos = { .x = 3, .y = 16 },
-    .width = 289,
-    .height = 154,
-    .unk_0A = { 1, 0 },
-    .fpDrawContents = &pause_spirits_draw_contents,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_MAIN,
-    .fpUpdate = { 2 },
-    .unk_1C = 0,
-    .style = &gPauseWS_23 },
-
-  { .windowID = WINDOW_ID_PAUSE_SPIRITS_TITLE,
-    .unk_01 = 0,
-    .pos = { .x = 86, .y = 124 },
-    .width = 120,
-    .height = 20,
-    .unk_0A = { 0, 0 },
-    .fpDrawContents = &pause_spirits_draw_title,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_SPIRITS,
-    .fpUpdate = { 1 },
-    .unk_1C = 0,
-    .style = &gPauseWS_24 }
+    {
+        .windowID = WINDOW_ID_PAUSE_SPIRITS,
+        .unk_01 = 0,
+        .pos = { .x = 3, .y = 16 },
+        .width = 289,
+        .height = 154,
+        .unk_0A = { 1, 0 },
+        .fpDrawContents = &pause_spirits_draw_contents,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .fpUpdate = { 2 },
+        .unk_1C = 0,
+        .style = &gPauseWS_23
+    },
+    {
+        .windowID = WINDOW_ID_PAUSE_SPIRITS_TITLE,
+        .unk_01 = 0,
+        .pos = { .x = 86, .y = 124 },
+        .width = 120,
+        .height = 20,
+        .unk_0A = { 0, 0 },
+        .fpDrawContents = &pause_spirits_draw_title,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_SPIRITS,
+        .fpUpdate = { 1 },
+        .unk_1C = 0,
+        .style = &gPauseWS_24
+    }
 };
 MenuPanel gPausePanelSpirits = {
     .initialized = FALSE,
@@ -119,7 +164,7 @@ void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
         gDPLoadTextureTile_4b(gMasterGfxPos++, pause_spirits_bg_png, G_IM_FMT_CI, 128, 110,
                                0, i * 22, 127, i * 22 + 21, 0,
                                G_TX_MIRROR, G_TX_CLAMP, 7, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-        pause_draw_rect((baseX + 0xF) * 4, (baseY + 0x16 + i * 0x16) * 4, (baseX + 0x10F) * 4, (baseY + 0x16 + i * 0x16 + 0x16) * 4, 0, 0x10, 0x10 + i * 0x2C0, 0x400, 0x400);
+        pause_draw_rect((baseX + 15) * 4, (baseY + 22 + i * 22) * 4, (baseX + 271) * 4, (baseY + 22 + i * 22 + 22) * 4, 0, 16, 16 + i * 704, 0x400, 0x400);
         gDPPipeSync(gMasterGfxPos++);
     }
 
@@ -151,7 +196,7 @@ void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
         }
 
         func_802DE894(gPauseSpiritsSpriteIDs[gPauseSpiritsIndexes[index]], 8, s0, s0, s0, s1, 0x40);
-        guTranslateF(matrix1, baseX + 0x16 + x, baseY + 0x4D + y + offsetY, 0.0f);
+        guTranslateF(matrix1, baseX + 22 + x, baseY + 77 + y + offsetY, 0.0f);
         guRotateF(matrix2, 180.0f, 0.0f, 0.0f, 1.0f);
         guMtxCatF(matrix2, matrix1, matrix1);
 
@@ -179,15 +224,15 @@ void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
         y1 = 1;
     }
 
-    if (x2 <= 0 || y2 <= 0 || x1 >= 319 || y1 >= 239) {
+    if (x2 <= 0 || y2 <= 0 || x1 >= SCREEN_WIDTH - 1 || y1 >= SCREEN_HEIGHT - 1) {
         return;
     }
 
-    if (x2 >= 319) {
-        x2 = 319;
+    if (x2 >= SCREEN_WIDTH - 1) {
+        x2 = SCREEN_WIDTH - 1;
     }
-    if (y2 >= 239) {
-        y2 = 239;
+    if (y2 >= SCREEN_HEIGHT - 1) {
+        y2 = SCREEN_HEIGHT - 1;
     }
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
@@ -208,7 +253,7 @@ void pause_spirits_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, 
         } else {
             msgID = pause_get_menu_msg(0x56);
         }
-        draw_msg(msgID, baseX + ((width - get_msg_width(msgID, 0)) >> 1), baseY + 1, 0xFF, 0, 0);
+        draw_msg(msgID, baseX + ((width - get_msg_width(msgID, 0)) >> 1), baseY + 1, 255, 0, 0);
     }
 }
 
@@ -245,12 +290,9 @@ void pause_spirits_handle_input(MenuPanel* panel) {
                 break;
             }
 
-            if (panel->selected != panel->gridData[
-                                            (panel->page * panel->numCols * panel->numRows)
-                                          + (panel->numCols * panel->row)
-                                          + (panel->col)]) {
-                                              break;
-                                          }
+            if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
+                break;
+            }
         }
     }
 
@@ -262,12 +304,9 @@ void pause_spirits_handle_input(MenuPanel* panel) {
                 break;
             }
 
-            if (panel->selected != panel->gridData[
-                                            (panel->page * panel->numCols * panel->numRows)
-                                          + (panel->numCols * panel->row)
-                                          + (panel->col)]) {
-                                              break;
-                                          }
+            if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
+                break;
+            }
         }
     }
 
@@ -285,12 +324,9 @@ void pause_spirits_handle_input(MenuPanel* panel) {
                     panel->row = 0;
                     break;
                 }
-                if (panel->selected != panel->gridData[
-                                                (panel->page * panel->numCols * panel->numRows)
-                                              + (panel->numCols * panel->row)
-                                              + (panel->col)]) {
-                                                  break;
-                                              }
+                if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
+                    break;
+                }
             }
         }
     }
@@ -309,20 +345,14 @@ void pause_spirits_handle_input(MenuPanel* panel) {
                     panel->row = panel->numRows - 1;
                     break;
                 }
-                if (panel->selected != panel->gridData[
-                                                (panel->page * panel->numCols * panel->numRows)
-                                              + (panel->numCols * panel->row)
-                                              + (panel->col)]) {
-                                                  break;
-                                              }
+                if (panel->selected != MENU_PANEL_SELECTED_GRID_DATA(panel)) {
+                    break;
+                }
             }
         }
     }
 
-    panel->selected = panel->gridData[
-                              (panel->page * panel->numCols * panel->numRows)
-                            + (panel->numCols * panel->row)
-                            + (panel->col)];
+    panel->selected = MENU_PANEL_SELECTED_GRID_DATA(panel);
 
     if (panel->selected == 4) {
         panel->col = 1;

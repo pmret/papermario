@@ -33,18 +33,20 @@ HudScript* gPauseItemsElements[] = {
     HudScript_StatusStar1
 };
 MenuWindowBP gPauseItemsWindowBPs[] = {
-  { .windowID = WINDOW_ID_PAUSE_ITEMS,
-    .unk_01 = 0,
-    .pos = { .x = 3, .y = 16 },
-    .width = 289,
-    .height = 154,
-    .unk_0A = { 1, 0},
-    .fpDrawContents = &pause_items_draw_contents,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_MAIN,
-    .fpUpdate = { 2 },
-    .unk_1C = 0,
-    .style = &gPauseWS_19 }
+    {
+        .windowID = WINDOW_ID_PAUSE_ITEMS,
+        .unk_01 = 0,
+        .pos = { .x = 3, .y = 16 },
+        .width = 289,
+        .height = 154,
+        .unk_0A = { 1, 0},
+        .fpDrawContents = &pause_items_draw_contents,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .fpUpdate = { 2 },
+        .unk_1C = 0,
+        .style = &gPauseWS_19
+    }
 };
 MenuPanel gPausePanelItems = {
     .initialized = FALSE,
@@ -124,10 +126,10 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     s32 cursorOffsetX, cursorOffsetY;
 
     style = 1;
-    palette = 0xA;
+    palette = 10;
     currentItemColumn = gPauseItemsSelectedIndex / gPauseItemsPages[gPauseItemsCurrentPage].numCols;
     currentItemRow = gPauseItemsSelectedIndex % gPauseItemsPages[gPauseItemsCurrentPage].numCols;
-    draw_box(4, &gPauseWS_18, baseX + 68, baseY, 0, width - 68, height, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 320, 240, 0);
+    draw_box(4, &gPauseWS_18, baseX + 68, baseY, 0, width - 68, height, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
     x1 = baseX + 1;
     y1 = baseY + 7;
@@ -141,20 +143,20 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         y1 = 1;
     }
 
-    if (x2 <= 0 || y2 <= 0 || x1 >= 319 || y1 >= 239) {
+    if (x2 <= 0 || y2 <= 0 || x1 >= SCREEN_WIDTH - 1 || y1 >= SCREEN_HEIGHT - 1) {
         return;
     }
 
-    if (x2 >= 319) {
-        x2 = 319;
+    if (x2 >= SCREEN_WIDTH - 1) {
+        x2 = SCREEN_WIDTH - 1;
     }
-    if (y2 >= 239) {
-        y2 = 239;
+    if (y2 >= SCREEN_HEIGHT - 1) {
+        y2 = SCREEN_HEIGHT - 1;
     }
 
     totalItemIndex = 0;
-    sp6C = baseX + 0x77;
-    sp70 = baseY + 0x11;
+    sp6C = baseX + 119;
+    sp70 = baseY + 17;
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
 
@@ -182,7 +184,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
                 isNone = itemID == ITEM_NONE_STANDIN;
 
                 if (gPauseMenuCurrentTab == 3 &&
-                    gPauseItemsLevel  == 1 &&
+                    gPauseItemsLevel == 1 &&
                     pause_items_get_column(pageIndex, itemIndex) == currentItemRow &&
                     pause_items_get_row(pageIndex, itemIndex) == currentItemColumn) {
                     isSelected = TRUE;
@@ -211,12 +213,12 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
                 if (i == 0) {
                     if (isNone) {
                         draw_msg(pause_get_menu_msg(0x4E), sp6C + pause_items_scroll_offset_x(posX) + itemOffsetX,
-                                sp70 + pause_items_scroll_offset_y(posY) + itemOffsetY, 0xFF, palette, style);
+                                sp70 + pause_items_scroll_offset_y(posY) + itemOffsetY, 255, palette, style);
                     } else {
                         if (gItemTable[itemID].nameMsg) {
                             if (gItemTable[itemID].nameMsg > 0) {
                                 draw_msg(gItemTable[itemID].nameMsg, sp6C + pause_items_scroll_offset_x(posX) + itemOffsetX,
-                                        sp70 + pause_items_scroll_offset_y(posY) + itemOffsetY, 0xFF, palette, style);
+                                        sp70 + pause_items_scroll_offset_y(posY) + itemOffsetY, 255, palette, style);
                             }
                         }
                     }
@@ -238,8 +240,8 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
                         set_hud_element_scale(itemIcon, 0.670816f);
                     }
 
-                    set_hud_element_render_pos(itemIcon, baseX + 0x69 + pause_items_scroll_offset_x(posX) + itemOffsetX,
-                                                baseY + 0x17 + pause_items_scroll_offset_y(posY) + itemOffsetY);
+                    set_hud_element_render_pos(itemIcon, baseX + 105 + pause_items_scroll_offset_x(posX) + itemOffsetX,
+                                                baseY + 23 + pause_items_scroll_offset_y(posY) + itemOffsetY);
                     if (totalItemIndex == 0) {
                         draw_hud_element_3(itemIcon);
                     } else {
@@ -265,15 +267,15 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         y1 = 1;
     }
 
-    if (x2 <= 0 || y2 <= 0 || x1 >= 319 || y1 >= 239) {
+    if (x2 <= 0 || y2 <= 0 || x1 >= SCREEN_WIDTH - 1 || y1 >= SCREEN_HEIGHT - 1) {
         return;
     }
 
-    if (x2 >= 319) {
-        x2 = 319;
+    if (x2 >= SCREEN_WIDTH - 1) {
+        x2 = SCREEN_WIDTH - 1;
     }
-    if (y2 >= 239) {
-        y2 = 239;
+    if (y2 >= SCREEN_HEIGHT - 1) {
+        y2 = SCREEN_HEIGHT - 1;
     }
 
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
@@ -291,40 +293,40 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     }
 
     draw_box(4, &gPauseWS_17, gPauseItemsCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,
-         0x5B, 0x22, 0xFF, gPauseItemsCurrentTab == 1 ? 0x80 : 0x00, 0, 0,
-         0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
+         91, 34, 255, gPauseItemsCurrentTab == 1 ? 128 : 0, 0, 0,
+         0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
     msg = pause_get_menu_msg(0x4F);
     msgX = baseX + 12;
     if (gPauseItemsCurrentTab == 0) {
         msgX = baseX + 21;
     }
-    opacity1 = 0xFF;
-    msgY = baseY + 0x11;
+    opacity1 = 255;
+    msgY = baseY + 17;
     if (gPauseItemsCurrentTab == 1) {
-        opacity1 = 0xBF;
+        opacity1 = 191;
     }
     draw_msg(msg, msgX, msgY, opacity1, 0, 1);
 
-    draw_box(4, &gPauseWS_17, gPauseItemsCurrentTab == 1 ? baseX + 9 : baseX, baseY + 0x27, 0,
-         0x5B, 0x22, 0xFF, gPauseItemsCurrentTab == 0 ? 0x80 : 0x00, 0, 0,
-         0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
+    draw_box(4, &gPauseWS_17, gPauseItemsCurrentTab == 1 ? baseX + 9 : baseX, baseY + 39, 0,
+         91, 34, 255, gPauseItemsCurrentTab == 0 ? 128 : 0, 0, 0,
+         0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
     msg = pause_get_menu_msg(0x50);
-    msgX = baseX + 0x19;
+    msgX = baseX + 25;
     if (gPauseItemsCurrentTab == 1) {
-        msgX = baseX + 0x22;
+        msgX = baseX + 34;
     }
-    opacity1 = 0xFF;
-    msgY = baseY + 0x31;
+    opacity1 = 255;
+    msgY = baseY + 49;
     if (gPauseItemsCurrentTab == 0) {
-        opacity1 = 0xBF;
+        opacity1 = 191;
     }
     draw_msg(msg, msgX, msgY, opacity1, 0, 1);
 
     if (gPauseMenuCurrentTab == 3) {
-         if (gPauseItemsLevel  == 0) {
-             pause_set_cursor_pos(0x21, baseX + 0xC , baseY + 0x1A + gPauseItemsCurrentTab  * 32);
+         if (gPauseItemsLevel == 0) {
+             pause_set_cursor_pos(WINDOW_ID_PAUSE_ITEMS, baseX + 12, baseY + 26 + gPauseItemsCurrentTab * 32);
          } else {
              selectedPosX = pause_items_get_pos_x(gPauseItemsCurrentPage, gPauseItemsSelectedIndex  - gPauseItemsPages[gPauseItemsCurrentPage].listStart * gPauseItemsPages[gPauseItemsCurrentPage].numCols);
              selectedPosY = pause_items_get_pos_y(gPauseItemsCurrentPage, gPauseItemsSelectedIndex  - gPauseItemsPages[gPauseItemsCurrentPage].listStart * gPauseItemsPages[gPauseItemsCurrentPage].numCols);
@@ -337,9 +339,9 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
              }
 
              if (gPauseItemsCurrentScrollPos  != gPauseItemsTargetScrollPos) {
-                 pause_set_cursor_pos_immediate(0x21, baseX + 0x55 + cursorOffsetX, baseY + 0x17 + cursorOffsetY);
+                 pause_set_cursor_pos_immediate(WINDOW_ID_PAUSE_ITEMS, baseX + 85 + cursorOffsetX, baseY + 23 + cursorOffsetY);
              } else {
-                 pause_set_cursor_pos(0x21, baseX + 0x55 + cursorOffsetX, baseY + 0x17 + cursorOffsetY);
+                 pause_set_cursor_pos(WINDOW_ID_PAUSE_ITEMS, baseX + 85 + cursorOffsetX, baseY + 23 + cursorOffsetY);
              }
          }
     }
@@ -374,7 +376,7 @@ void pause_items_load_items(s32 invItems) {
     }
 
     if (totalItems == 0) {
-        gPauseItemsItemIDs[0] = 0x7FFE;
+        gPauseItemsItemIDs[0] = ITEM_NONE_STANDIN;
         totalItems = 1;
     } else {
         pause_sort_item_list(gPauseItemsItemIDs, totalItems, pause_items_comparator);
@@ -540,7 +542,7 @@ void pause_items_handle_input(MenuPanel* panel) {
             gPauseCurrentDescMsg = gItemTable[gPauseItemsSelectedItem].menuMsg;
         } else {
             gPauseCurrentDescMsg = 0;
-            gPauseCurrentDescIconScript  = NULL;
+            gPauseCurrentDescIconScript = NULL;
         }
     } else {
         if (gPauseItemsCurrentTab == 1) {

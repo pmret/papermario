@@ -1,6 +1,9 @@
 #include "ld_addrs.h"
 #include "sprite.h"
 #include "pause_common.h"
+#include "sprite/npc/goombaria.h"
+#include "sprite/npc/world_goombario.h"
+#include "sprite/npc/goompa.h"
 
 extern MenuPanel gPausePanelTabs;
 extern MenuPanel gPausePanelStats;
@@ -48,7 +51,7 @@ s32 gPauseCursorTargetPosX = 160;
 s32 gPauseCursorTargetPosY = -120;
 s32 gPauseCursorTargetOpacity = 0;
 u32 D_8024EFB4 = 1;
-u32 D_8024EFB8[] = {0xFFF6FFE7, 0xFFD6FFC4, 0xFFB00000 }; //unused
+s16 D_8024EFB8[] = { -10, -25, -42, -60, -80 }; //unused
 u8 gPauseWindowFlipUpFlags[] = { 1, 1, 1, 1, 1, 0, 0};
 s16 gPauseWindowFlipUpAngles[] = { -80, -65, -38, -30, -10, 0 };
 s16 gPauseWindowFlipUpAngles_2[] = {  80,  65,  38,  30,  10, 0 };
@@ -67,9 +70,24 @@ s32 gPauseTutorialIconIDs[] = { 5, 4, 5, 5, 5, 5, 6 };
 u8 gPauseMenuTextScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8};
 u8 gPauseMenuPageScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8};
 s32 gPauseTutorialSpriteAnims[][4] = {
-    { 0x009E0000, 0x009E0001, 0x009E000B, 0xFFFFFFFF },
-    { 0x00010000, 0x00010001, 0x00010008, 0xFFFFFFFF },
-    { 0x009D0000, 0x009D0001, 0x009D0008, 0xFFFFFFFF }
+    {
+        NPC_ANIM_goombaria_Palette_00_Anim_0,
+        NPC_ANIM_goombaria_Palette_00_Anim_1,
+        NPC_ANIM_goombaria_Palette_00_Anim_B,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_world_goombario_normal_still,
+        NPC_ANIM_world_goombario_normal_idle,
+        NPC_ANIM_world_goombario_normal_talk,
+        ANIM_END
+    },
+    {
+        NPC_ANIM_goompa_Palette_00_Anim_0,
+        NPC_ANIM_goompa_Palette_00_Anim_1,
+        NPC_ANIM_goompa_Palette_00_Anim_8,
+        ANIM_END
+    }
 };
 Vp gPauseTutorialViewport = {
     .vp = {
@@ -79,57 +97,63 @@ Vp gPauseTutorialViewport = {
 };
 s32 gPauseTutorialScrollPos = 0;
 MenuWindowBP gPauseCommonWindowsBPs[] = {
-  { .windowID = WINDOW_ID_PAUSE_MAIN,
-    .unk_01 = 0,
-    .pos = { .x = 12, .y = 20 },
-    .width = 296,
-    .height = 200,
-    .unk_0A = { 0, 0 },
-    .fpDrawContents = &pause_main_draw_contents,
-    .tab = NULL,
-    .parentID = WINDOW_ID_NONE,
-    .fpUpdate = { 1 },
-    .unk_1C = 0x40000000,
-    .style = &gPauseWS_0 },
-
-  { .windowID = WINDOW_ID_PAUSE_TUTORIAL,
-    .unk_01 = 0,
-    .pos = { .x = 0, .y = 138 },
-    .width = 296,
-    .height = 63,
-    .unk_0A = { 0, 0 },
-    .fpDrawContents = &pause_tutorial_draw_contents,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_MAIN,
-    .fpUpdate = { 2 },
-    .unk_1C = 0,
-    .style = &gPauseWS_2 },
-
-  { .windowID = WINDOW_ID_PAUSE_DECRIPTION,
-    .unk_01 = 0,
-    .pos = { .x = 20, .y = 164 },
-    .width = 256,
-    .height = 32,
-    .unk_0A = { 0, 0 },
-    .fpDrawContents = &pause_textbox_draw_contents,
-    .tab = NULL,
-    .parentID = WINDOW_ID_PAUSE_MAIN,
-    .fpUpdate = { .func = &basic_window_update },
-    .unk_1C = 0,
-    .style = &gPauseWS_1 },
-
-  { .windowID = WINDOW_ID_PAUSE_CURSOR,
-    .unk_01 = 0,
-    .pos = { .x = 0, .y = 0 },
-    .width = 320,
-    .height = 240,
-    .unk_0A = { 0, 0 },
-    .fpDrawContents = &pause_draw_cursor,
-    .tab = NULL,
-    .parentID = WINDOW_ID_NONE,
-    .fpUpdate = { 1 },
-    .unk_1C = 0,
-    .style = &gPauseWS_0 } };
+    {
+        .windowID = WINDOW_ID_PAUSE_MAIN,
+        .unk_01 = 0,
+        .pos = { .x = 12, .y = 20 },
+        .width = 296,
+        .height = 200,
+        .unk_0A = { 0, 0 },
+        .fpDrawContents = &pause_main_draw_contents,
+        .tab = NULL,
+        .parentID = WINDOW_ID_NONE,
+        .fpUpdate = { 1 },
+        .unk_1C = 0x40000000,
+        .style = &gPauseWS_0
+    },
+    {
+        .windowID = WINDOW_ID_PAUSE_TUTORIAL,
+        .unk_01 = 0,
+        .pos = { .x = 0, .y = 138 },
+        .width = 296,
+        .height = 63,
+        .unk_0A = { 0, 0 },
+        .fpDrawContents = &pause_tutorial_draw_contents,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .fpUpdate = { 2 },
+        .unk_1C = 0,
+        .style = &gPauseWS_2
+    },
+    {
+        .windowID = WINDOW_ID_PAUSE_DECRIPTION,
+        .unk_01 = 0,
+        .pos = { .x = 20, .y = 164 },
+        .width = 256,
+        .height = 32,
+        .unk_0A = { 0, 0 },
+        .fpDrawContents = &pause_textbox_draw_contents,
+        .tab = NULL,
+        .parentID = WINDOW_ID_PAUSE_MAIN,
+        .fpUpdate = { .func = &basic_window_update },
+        .unk_1C = 0,
+        .style = &gPauseWS_1
+    },
+    {
+        .windowID = WINDOW_ID_PAUSE_CURSOR,
+        .unk_01 = 0,
+        .pos = { .x = 0, .y = 0 },
+        .width = SCREEN_WIDTH,
+        .height = SCREEN_HEIGHT,
+        .unk_0A = { 0, 0 },
+        .fpDrawContents = &pause_draw_cursor,
+        .tab = NULL,
+        .parentID = WINDOW_ID_NONE,
+        .fpUpdate = { 1 },
+        .unk_1C = 0,
+        .style = &gPauseWS_0
+    }
+};
 
 void pause_set_cursor_opacity(s32 val) {
     gPauseCursorTargetOpacity = val;
@@ -263,7 +287,7 @@ void pause_update_tab_inactive(s32 windowIndex, s32* flags, s32* posX, s32* posY
     }
 
     if (updateCounter < 10) {
-        *darkening = (updateCounter + 1) * 0x10;
+        *darkening = (updateCounter + 1) * 16;
     } else {
         *darkening = 160;
         window->flags &= ~WINDOW_FLAGS_8;
@@ -291,7 +315,7 @@ void func_802430E4(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ,
     }
 
     if (updateCounter < 16) {
-        *opacity = updateCounter * 0x10;
+        *opacity = updateCounter * 16;
     } else {
         *opacity = 255;
         window->flags &= ~WINDOW_FLAGS_8;
@@ -477,16 +501,17 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     s32 margin, margin2;
     s32 state;
 
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) == 0)
+    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) == FALSE) {
         return;
+    }
 
     gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
     gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
     gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x37, 0x37, 0x37, 0xFF);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 55, 55, 55, 255);
     pause_draw_rect(baseX * 4, baseY * 4, (baseX + width) * 4, (baseY + 12) * 4, 0, 0, 0, 0, 0);
     gDPPipeSync(gMasterGfxPos++);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xB9, 0xB9, 0xB9, 0xFF);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 185, 185, 185, 255);
     pause_draw_rect(baseX * 4, (baseY + 12) * 4, (baseX + width) * 4, (baseY + height) * 4, 0, 0, 0, 0, 0);
     gDPPipeSync(gMasterGfxPos++);
     gSPViewport(gMasterGfxPos++, &gPauseTutorialViewport);
@@ -526,13 +551,13 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
 
     get_msg_properties(pause_get_menu_msg(1), &msgHeight, &msgWidth, &msgMaxLineChars, &msgNumLines, &msgMaxLinesPerPage, NULL, 1);
     margin = (s32)(width - msgWidth) >> 1;
-    draw_msg(pause_get_menu_msg(1), baseX + margin, baseY, 0xFF, 0, 1);
+    draw_msg(pause_get_menu_msg(1), baseX + margin, baseY, 255, 0, 1);
     gPauseTutorialScrollPos += pause_interp_text_scroll(gPauseTutorialState * 140 - gPauseTutorialScrollPos);
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, baseX + 1, baseY + 1, baseX + width - 1, baseY + height - 1);
     state = gPauseTutorialState;
     get_msg_properties(pause_get_menu_msg(gPauseTutorialDescMessages[state]), &msgHeight2, &msgWidth2, &msgMaxLineChars2, &msgNumLines2, &msgMaxLinesPerPage2, NULL, 1);
     margin2 = (s32)(width - msgWidth2) >> 1;
-    draw_msg(pause_get_menu_msg(gPauseTutorialDescMessages[state]), baseX + margin2, baseY + 13 + state * 140 - gPauseTutorialScrollPos, 0xFF, 10, 1);
+    draw_msg(pause_get_menu_msg(gPauseTutorialDescMessages[state]), baseX + margin2, baseY + 13 + state * 140 - gPauseTutorialScrollPos, 255, 10, 1);
     set_hud_element_render_pos(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], baseX + width / 2 - 2, baseY + 52);
     set_hud_element_flags(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], 0x8000);
     set_hud_element_scale(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], 0.5f);
@@ -543,7 +568,7 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         draw_hud_element_3(gPauseCommonIconIDs[7]);
     }
 
-    draw_msg(pause_get_menu_msg(gPauseTutorialCmdMessages[gPauseTutorialState]), baseX + width / 2 + 10, baseY + 44, 0xFF, 10, 0);
+    draw_msg(pause_get_menu_msg(gPauseTutorialCmdMessages[gPauseTutorialState]), baseX + width / 2 + 10, baseY + 44, 255, 10, 0);
 }
 
 void pause_init(void) {
@@ -595,7 +620,7 @@ void pause_init(void) {
     x = pauseWindows[gPausePanels[0]->col].pos.x;
     gWindows[WINDOW_ID_PAUSE_TAB_INVIS].pos.x = x + 6;
 
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
+    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94))) {
         for (i = 0; i < ARRAY_COUNT(gPauseTutorialSpriteAnims); i++) {
             gPauseTutorialSprites[i] = spr_load_npc_sprite(gPauseTutorialSpriteAnims[i][0], gPauseTutorialSpriteAnims[i]);
         }
@@ -613,46 +638,46 @@ void pause_tutorial_input(s32 *pressed, s32 *held) {
     s32 heldNew = *held;
 
     switch (gPauseTutorialInputState) {
-    case 0:
-        heldNew = pressedNew = pressedNew & gPauseTutorialButtons[gPauseTutorialState];
-        if (pressedNew) {
-            gPauseTutorialInputState = 1;
-        }
-        if (pressedOld && pressedNew == 0) {
-            sfx_play_sound(541);
-        }
-        if (gPauseTutorialState == 0) {
+        case 0:
+            heldNew = pressedNew = pressedNew & gPauseTutorialButtons[gPauseTutorialState];
+            if (pressedNew) {
+                gPauseTutorialInputState = 1;
+            }
+            if (pressedOld && pressedNew == 0) {
+                sfx_play_sound(541);
+            }
+            if (gPauseTutorialState == 0) {
+                pressedNew = 0;
+                heldNew = 0;
+            }
+            break;
+        case 1:
+            gPauseTutorialFrameCounter = 0;
+            gPauseTutorialInputState = 2;
             pressedNew = 0;
             heldNew = 0;
-        }
-        break;
-    case 1:
-        gPauseTutorialFrameCounter = 0;
-        gPauseTutorialInputState = 2;
-        pressedNew = 0;
-        heldNew = 0;
-        break;
-    case 2:
-        if (--gPauseTutorialFrameCounter <= 0) {
-            gPauseTutorialInputState = 3;
-        }
-        pressedNew = 0;
-        heldNew = 0;
-        break;
-    case 3:
-        gPauseTutorialFrameCounter = 16;
-        gPauseTutorialInputState = 4;
-        gPauseTutorialState += 1;
-        pressedNew = 0;
-        heldNew = 0;
-        break;
-    case 4:
-        if (--gPauseTutorialFrameCounter <= 0) {
-            gPauseTutorialInputState = 0;
-        }
-        pressedNew = 0;
-        heldNew = 0;
-        break;
+            break;
+        case 2:
+            if (--gPauseTutorialFrameCounter <= 0) {
+                gPauseTutorialInputState = 3;
+            }
+            pressedNew = 0;
+            heldNew = 0;
+            break;
+        case 3:
+            gPauseTutorialFrameCounter = 16;
+            gPauseTutorialInputState = 4;
+            gPauseTutorialState += 1;
+            pressedNew = 0;
+            heldNew = 0;
+            break;
+        case 4:
+            if (--gPauseTutorialFrameCounter <= 0) {
+                gPauseTutorialInputState = 0;
+            }
+            pressedNew = 0;
+            heldNew = 0;
+            break;
     }
 
     *pressed = pressedNew;
@@ -671,7 +696,7 @@ void pause_handle_input(s32 pressed, s32 held) {
     s32 currentDescMsg = gPauseCurrentDescMsg;
     MenuPanel* currentPanel = gPausePanels[gPauseMenuCurrentTab];
 
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
+    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94))) {
         for (i = 0; i < ARRAY_COUNT(gPauseTutorialSprites); i++) {
             spr_update_sprite(gPauseTutorialSprites[i], gPauseTutorialSpriteAnims[i][1], 1.0f);
         }
@@ -679,7 +704,7 @@ void pause_handle_input(s32 pressed, s32 held) {
 
     gPausePressedButtons = pressed;
     gPauseHeldButtons = held;
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
+    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94))) {
         pause_tutorial_input(&gPausePressedButtons, &gPauseHeldButtons);
     }
 
@@ -747,7 +772,7 @@ void pause_cleanup(void) {
         free_hud_element(gPauseCommonIconIDs[i]);
     }
 
-    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94)) != 0) {
+    if (evt_get_variable(NULL, EVT_SAVE_FLAG(94))) {
         for (i = 0; i < ARRAY_COUNT(gPauseTutorialSprites); i++) {
             spr_free_sprite(gPauseTutorialSprites[i]);
         }
@@ -768,7 +793,7 @@ void pause_cleanup(void) {
     set_window_update(WINDOW_ID_PAUSE_CURSOR, 2);
 }
 
-const f32 pause_rodata_padding[] = {0.0f, 0.0f, 0.0f};
+
 
 s32 pause_get_total_equipped_bp_cost(void) {
     s32 totalCost = 0;
@@ -807,7 +832,6 @@ void pause_sort_item_list(s16* arr, s32 len, s32 (*compare)(s16*, s16 *)) {
             arr[0] = arr[1];
             arr[1] = temp;
         }
-        return;
     } else {
         // Nontrivial sort required, use shell sort
         u32 gap = 1;
@@ -845,3 +869,5 @@ void pause_sort_item_list(s16* arr, s32 len, s32 (*compare)(s16*, s16 *)) {
         }
     }
 }
+
+static const f32 rodata_padding[] = {0.0f, 0.0f, 0.0f};
