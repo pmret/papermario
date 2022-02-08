@@ -730,7 +730,7 @@ void pause_handle_input(s32 pressed, s32 held) {
         }
     }
     menuPanels = gPausePanels;
-    for (i = 0; i < 7; menuPanels++, i++) {
+    for (i = 0; i < ARRAY_COUNT(gPausePanels); menuPanels++, i++) {
         if ((*menuPanels)->initialized) {
             if ((*menuPanels)->fpUpdate) {
                 (*menuPanels)->fpUpdate(*menuPanels);
