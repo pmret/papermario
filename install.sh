@@ -10,7 +10,7 @@ uname=`uname`
 unset supported
 
 if [[ "$uname" == "Darwin" ]]; then
-    supported = true
+    supported=true
 
     echo "Downloading gcc/binutils for macOS"
     curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/mac.tar.gz" | tar zx -C tools/build/cc/gcc
@@ -45,7 +45,7 @@ fi
 
 # Debian and derivatives (apt)
 if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; then
-    supported = true
+    supported=true
 
     echo "Installing packages for Debian or derivative (apt)"
 
@@ -61,12 +61,11 @@ if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; th
     fi
 
     echo "Done"
-    exit
 fi
 
 # Arch Linux and derivatives (pacman)
 if cat /etc/os-release | grep -E 'ID=arch|ID_LIKE=arch' &> /dev/null; then
-    supported = true
+    supported=true
 
     echo "Installing packages for Arch Linux or derivative (pacman)"
 
@@ -104,12 +103,11 @@ if cat /etc/os-release | grep -E 'ID=arch|ID_LIKE=arch' &> /dev/null; then
     fi
 
     echo "Done"
-    exit
 fi
 
 # openSUSE (zypper)
 if cat /etc/os-release | grep ID=opensuse &> /dev/null; then
-    supported = true
+    supported=true
 
     echo "Installing packages for openSUSE (zypper)"
 
@@ -141,12 +139,11 @@ if cat /etc/os-release | grep ID=opensuse &> /dev/null; then
     fi
 
     echo "Done"
-    exit
 fi
 
 # Alpine Linux (apk)
 if cat /etc/os-release | grep ID=alpine &> /dev/null; then
-    supported = true
+    supported=true
 
     echo "Installing packages for Alpine Linux (apk)"
 
@@ -199,8 +196,6 @@ if cat /etc/os-release | grep ID=alpine &> /dev/null; then
     fi
 
     echo "Done"
-    exit
-
 fi
 
 
