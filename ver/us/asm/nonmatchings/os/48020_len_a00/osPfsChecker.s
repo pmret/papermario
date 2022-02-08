@@ -15,7 +15,7 @@ glabel osPfsChecker
 /* 48048 8006CC48 AFB40488 */  sw        $s4, 0x488($sp)
 /* 4804C 8006CC4C AFB30484 */  sw        $s3, 0x484($sp)
 /* 48050 8006CC50 AFB20480 */  sw        $s2, 0x480($sp)
-/* 48054 8006CC54 0C01A775 */  jal       osCheckId
+/* 48054 8006CC54 0C01A775 */  jal       __osCheckId
 /* 48058 8006CC58 AFB00478 */   sw       $s0, 0x478($sp)
 /* 4805C 8006CC5C 00408021 */  addu      $s0, $v0, $zero
 /* 48060 8006CC60 24020002 */  addiu     $v0, $zero, 2
@@ -86,7 +86,7 @@ glabel osPfsChecker
 /* 48148 8006CD48 00609821 */   addu     $s3, $v1, $zero
 /* 4814C 8006CD4C 02202021 */  addu      $a0, $s1, $zero
 /* 48150 8006CD50 27A50118 */  addiu     $a1, $sp, 0x118
-/* 48154 8006CD54 0C01A7A3 */  jal       osPfsRWInode
+/* 48154 8006CD54 0C01A7A3 */  jal       __osPfsRWInode
 /* 48158 8006CD58 00003021 */   addu     $a2, $zero, $zero
 /* 4815C 8006CD5C 00408021 */  addu      $s0, $v0, $zero
 /* 48160 8006CD60 0260B021 */  addu      $s6, $s3, $zero
@@ -204,7 +204,7 @@ glabel osPfsChecker
 /* 482EC 8006CEEC 27A50118 */  addiu     $a1, $sp, 0x118
 /* 482F0 8006CEF0 00003021 */  addu      $a2, $zero, $zero
 /* 482F4 8006CEF4 327200FF */  andi      $s2, $s3, 0xff
-/* 482F8 8006CEF8 0C01A7A3 */  jal       osPfsRWInode
+/* 482F8 8006CEF8 0C01A7A3 */  jal       __osPfsRWInode
 /* 482FC 8006CEFC 02403821 */   addu     $a3, $s2, $zero
 /* 48300 8006CF00 00408021 */  addu      $s0, $v0, $zero
 /* 48304 8006CF04 0010182B */  sltu      $v1, $zero, $s0
@@ -281,7 +281,7 @@ glabel osPfsChecker
 /* 483F8 8006CFF8 02202021 */  addu      $a0, $s1, $zero
 /* 483FC 8006CFFC 27A50018 */  addiu     $a1, $sp, 0x18
 /* 48400 8006D000 24060001 */  addiu     $a2, $zero, 1
-/* 48404 8006D004 0C01A7A3 */  jal       osPfsRWInode
+/* 48404 8006D004 0C01A7A3 */  jal       __osPfsRWInode
 /* 48408 8006D008 326700FF */   andi     $a3, $s3, 0xff
 /* 4840C 8006D00C 00408021 */  addu      $s0, $v0, $zero
 /* 48410 8006D010 1600FF1B */  bnez      $s0, .L8006CC80

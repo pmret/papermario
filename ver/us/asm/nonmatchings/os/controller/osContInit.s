@@ -70,7 +70,7 @@ glabel osContInit
 /* 3D078 80061C78 24040001 */  addiu     $a0, $zero, 1
 /* 3D07C 80061C7C 3C11800B */  lui       $s1, %hi(D_800B0ED0)
 /* 3D080 80061C80 26310ED0 */  addiu     $s1, $s1, %lo(D_800B0ED0)
-/* 3D084 80061C84 0C019730 */  jal       osSiRawStartDma
+/* 3D084 80061C84 0C019730 */  jal       __osSiRawStartDma
 /* 3D088 80061C88 02202821 */   addu     $a1, $s1, $zero
 /* 3D08C 80061C8C 02802021 */  addu      $a0, $s4, $zero
 /* 3D090 80061C90 27B00058 */  addiu     $s0, $sp, 0x58
@@ -78,7 +78,7 @@ glabel osContInit
 /* 3D098 80061C98 0C0195BC */  jal       osRecvMesg
 /* 3D09C 80061C9C 24060001 */   addiu    $a2, $zero, 1
 /* 3D0A0 80061CA0 00002021 */  addu      $a0, $zero, $zero
-/* 3D0A4 80061CA4 0C019730 */  jal       osSiRawStartDma
+/* 3D0A4 80061CA4 0C019730 */  jal       __osSiRawStartDma
 /* 3D0A8 80061CA8 02202821 */   addu     $a1, $s1, $zero
 /* 3D0AC 80061CAC 02802021 */  addu      $a0, $s4, $zero
 /* 3D0B0 80061CB0 02002821 */  addu      $a1, $s0, $zero

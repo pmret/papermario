@@ -141,7 +141,7 @@ glabel func_80240504_EE6AB4
 /* EE6CAC 802406FC 00A32821 */  addu      $a1, $a1, $v1
 /* EE6CB0 80240700 00452821 */  addu      $a1, $v0, $a1
 /* EE6CB4 80240704 46200020 */  cvt.s.d   $f0, $f0
-/* EE6CB8 80240708 0C01B1B0 */  jal       osSpDeviceBusy
+/* EE6CB8 80240708 0C01B1B0 */  jal       __osSpDeviceBusy
 /* EE6CBC 8024070C E7A00034 */   swc1     $f0, 0x34($sp)
 /* EE6CC0 80240710 0000202D */  daddu     $a0, $zero, $zero
 /* EE6CC4 80240714 27A50050 */  addiu     $a1, $sp, 0x50

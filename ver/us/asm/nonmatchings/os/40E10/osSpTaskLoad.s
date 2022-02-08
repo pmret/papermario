@@ -107,12 +107,12 @@ glabel osSpTaskLoad
 .L80065B8C:
 /* 40F8C 80065B8C 0C018614 */  jal       osWritebackDCache
 /* 40F90 80065B90 24050040 */   addiu    $a1, $zero, 0x40
-/* 40F94 80065B94 0C01B1BC */  jal       osSpSetStatus
+/* 40F94 80065B94 0C01B1BC */  jal       __osSpSetStatus
 /* 40F98 80065B98 24042B00 */   addiu    $a0, $zero, 0x2b00
 /* 40F9C 80065B9C 2410FFFF */  addiu     $s0, $zero, -1
 /* 40FA0 80065BA0 3C040400 */  lui       $a0, 0x400
 .L80065BA4:
-/* 40FA4 80065BA4 0C01B1C0 */  jal       osSpSetPc
+/* 40FA4 80065BA4 0C01B1C0 */  jal       __osSpSetPc
 /* 40FA8 80065BA8 34841000 */   ori      $a0, $a0, 0x1000
 /* 40FAC 80065BAC 1050FFFD */  beq       $v0, $s0, .L80065BA4
 /* 40FB0 80065BB0 3C040400 */   lui      $a0, 0x400
@@ -122,12 +122,12 @@ glabel osSpTaskLoad
 /* 40FBC 80065BBC 3C050400 */  lui       $a1, 0x400
 /* 40FC0 80065BC0 34A50FC0 */  ori       $a1, $a1, 0xfc0
 /* 40FC4 80065BC4 02203021 */  addu      $a2, $s1, $zero
-/* 40FC8 80065BC8 0C01B1CC */  jal       osSpRawStartDma
+/* 40FC8 80065BC8 0C01B1CC */  jal       __osSpRawStartDma
 /* 40FCC 80065BCC 24070040 */   addiu    $a3, $zero, 0x40
 /* 40FD0 80065BD0 1050FFFA */  beq       $v0, $s0, .L80065BBC
 /* 40FD4 80065BD4 24040001 */   addiu    $a0, $zero, 1
 .L80065BD8:
-/* 40FD8 80065BD8 0C01B1B0 */  jal       osSpDeviceBusy
+/* 40FD8 80065BD8 0C01B1B0 */  jal       __osSpDeviceBusy
 /* 40FDC 80065BDC 00000000 */   nop
 /* 40FE0 80065BE0 1440FFFD */  bnez      $v0, .L80065BD8
 /* 40FE4 80065BE4 24040001 */   addiu    $a0, $zero, 1
@@ -136,7 +136,7 @@ glabel osSpTaskLoad
 /* 40FEC 80065BEC 8E260008 */  lw        $a2, 8($s1)
 /* 40FF0 80065BF0 8E27000C */  lw        $a3, 0xc($s1)
 /* 40FF4 80065BF4 3C050400 */  lui       $a1, 0x400
-/* 40FF8 80065BF8 0C01B1CC */  jal       osSpRawStartDma
+/* 40FF8 80065BF8 0C01B1CC */  jal       __osSpRawStartDma
 /* 40FFC 80065BFC 34A51000 */   ori      $a1, $a1, 0x1000
 /* 41000 80065C00 1050FFFA */  beq       $v0, $s0, .L80065BEC
 /* 41004 80065C04 24040001 */   addiu    $a0, $zero, 1

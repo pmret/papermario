@@ -47,7 +47,7 @@ glabel corrupted
 /* 48674 8006D274 10E2000C */  beq       $a3, $v0, .L8006D2A8
 /* 48678 8006D278 02802021 */   addu     $a0, $s4, $zero
 /* 4867C 8006D27C 02202821 */  addu      $a1, $s1, $zero
-/* 48680 8006D280 0C01A7A3 */  jal       osPfsRWInode
+/* 48680 8006D280 0C01A7A3 */  jal       __osPfsRWInode
 /* 48684 8006D284 00003021 */   addu     $a2, $zero, $zero
 /* 48688 8006D288 00402021 */  addu      $a0, $v0, $zero
 /* 4868C 8006D28C 0004182B */  sltu      $v1, $zero, $a0

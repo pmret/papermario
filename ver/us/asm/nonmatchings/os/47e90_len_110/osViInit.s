@@ -4,8 +4,8 @@
 glabel __osViInit
 /* 47E90 8006CA90 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 47E94 8006CA94 AFB00010 */  sw        $s0, 0x10($sp)
-/* 47E98 8006CA98 3C108009 */  lui       $s0, %hi(D_80095970)
-/* 47E9C 8006CA9C 26105970 */  addiu     $s0, $s0, %lo(D_80095970)
+/* 47E98 8006CA98 3C108009 */  lui       $s0, %hi(vi)
+/* 47E9C 8006CA9C 26105970 */  addiu     $s0, $s0, %lo(vi)
 /* 47EA0 8006CAA0 02002021 */  addu      $a0, $s0, $zero
 /* 47EA4 8006CAA4 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 47EA8 8006CAA8 0C01925C */  jal       bzero

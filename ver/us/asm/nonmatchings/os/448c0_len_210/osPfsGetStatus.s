@@ -19,7 +19,7 @@ glabel osPfsGetStatus
 /* 448F8 800694F8 24040001 */  addiu     $a0, $zero, 1
 /* 448FC 800694FC 3C11800E */  lui       $s1, %hi(D_800DA000)
 /* 44900 80069500 2631A000 */  addiu     $s1, $s1, %lo(D_800DA000)
-/* 44904 80069504 0C019730 */  jal       osSiRawStartDma
+/* 44904 80069504 0C019730 */  jal       __osSiRawStartDma
 /* 44908 80069508 02202821 */   addu     $a1, $s1, $zero
 /* 4490C 8006950C 02402021 */  addu      $a0, $s2, $zero
 /* 44910 80069510 27B00018 */  addiu     $s0, $sp, 0x18
@@ -27,7 +27,7 @@ glabel osPfsGetStatus
 /* 44918 80069518 0C0195BC */  jal       osRecvMesg
 /* 4491C 8006951C 24060001 */   addiu    $a2, $zero, 1
 /* 44920 80069520 00002021 */  addu      $a0, $zero, $zero
-/* 44924 80069524 0C019730 */  jal       osSiRawStartDma
+/* 44924 80069524 0C019730 */  jal       __osSiRawStartDma
 /* 44928 80069528 02202821 */   addu     $a1, $s1, $zero
 /* 4492C 8006952C 02402021 */  addu      $a0, $s2, $zero
 /* 44930 80069530 02002821 */  addu      $a1, $s0, $zero

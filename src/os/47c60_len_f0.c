@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "os/47c60_len_f0", osContAddressCrc);
 
-u8 osContDataCrc(u8* data) {
+u8 __osContDataCrc(u8* data) {
     s32 ret;
     u32 bit;
     u32 byte;

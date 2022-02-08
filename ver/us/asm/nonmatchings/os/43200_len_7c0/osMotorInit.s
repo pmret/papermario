@@ -82,7 +82,7 @@ glabel osMotorInit
 /* 43460 80068060 24020003 */  addiu     $v0, $zero, 3
 /* 43464 80068064 A3A20033 */  sb        $v0, 0x33($sp)
 /* 43468 80068068 240200C0 */  addiu     $v0, $zero, 0xc0
-/* 4346C 8006806C 0C01B218 */  jal       osContAddressCrc
+/* 4346C 8006806C 0C01B218 */  jal       __osContAddressCrc
 /* 43470 80068070 A3A20034 */   sb       $v0, 0x34($sp)
 /* 43474 80068074 12200008 */  beqz      $s1, .L80068098
 /* 43478 80068078 A3A20035 */   sb       $v0, 0x35($sp)

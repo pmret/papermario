@@ -34,7 +34,7 @@ glabel osPfsReadWriteFile
 /* 43C54 80068854 30420001 */  andi      $v0, $v0, 1
 /* 43C58 80068858 104000E7 */  beqz      $v0, .L80068BF8
 /* 43C5C 8006885C 24020005 */   addiu    $v0, $zero, 5
-/* 43C60 80068860 0C01A775 */  jal       osCheckId
+/* 43C60 80068860 0C01A775 */  jal       __osCheckId
 /* 43C64 80068864 02002021 */   addu     $a0, $s0, $zero
 /* 43C68 80068868 24030002 */  addiu     $v1, $zero, 2
 /* 43C6C 8006886C 104300E2 */  beq       $v0, $v1, .L80068BF8
@@ -120,7 +120,7 @@ glabel osPfsReadWriteFile
 /* 43D90 80068990 02002021 */   addu     $a0, $s0, $zero
 /* 43D94 80068994 A3A30138 */  sb        $v1, 0x138($sp)
 /* 43D98 80068998 02402821 */  addu      $a1, $s2, $zero
-/* 43D9C 8006899C 0C01A7A3 */  jal       osPfsRWInode
+/* 43D9C 8006899C 0C01A7A3 */  jal       __osPfsRWInode
 /* 43DA0 800689A0 00003021 */   addu     $a2, $zero, $zero
 /* 43DA4 800689A4 1440001A */  bnez      $v0, .L80068A10
 /* 43DA8 800689A8 00401821 */   addu     $v1, $v0, $zero
@@ -178,7 +178,7 @@ glabel osPfsReadWriteFile
 /* 43E60 80068A60 A3A30138 */  sb        $v1, 0x138($sp)
 /* 43E64 80068A64 02002021 */  addu      $a0, $s0, $zero
 /* 43E68 80068A68 02202821 */  addu      $a1, $s1, $zero
-/* 43E6C 80068A6C 0C01A7A3 */  jal       osPfsRWInode
+/* 43E6C 80068A6C 0C01A7A3 */  jal       __osPfsRWInode
 /* 43E70 80068A70 00003021 */   addu     $a2, $zero, $zero
 /* 43E74 80068A74 1440001A */  bnez      $v0, .L80068AE0
 /* 43E78 80068A78 00401821 */   addu     $v1, $v0, $zero
