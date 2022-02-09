@@ -186,7 +186,7 @@ s32 func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
 
 //s32 func_802DE8DC(); // TODO
 
-s32 spr_get_npc_raster_info(SpriteRasterInfo* out, int npcSpriteID, int rasterIndex);
+s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex);
 
 s32** spr_get_npc_palettes(s32 npcSpriteID);
 

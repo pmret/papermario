@@ -85,18 +85,19 @@ PlayerSpriteSet spr_playerSpriteSets[] = {
 };
 
 #ifdef NON_EQUIVALENT
-extern s32* gSpriteHeapPtr;
 extern s32** D_802DFE44;
 extern s32* D_802DFE9C;
 
 void spr_init_quad_cache(void) {
-    s32 i;
     s32* phi_v0;
+    s32 i;
+    
     D_802DFE44 = _heap_malloc(&gSpriteHeapPtr, 0x580);
 
-    for (i = 21; i >= 0; i--) {
+    for (i = 0; i < 22; i++) {
         D_802DFE44[i] = -1;
     }
+    
 }
 #else
 INCLUDE_ASM(s32, "sprite", spr_init_quad_cache);
@@ -363,30 +364,37 @@ s32 func_802DE894(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
 
 INCLUDE_ASM(s32, "sprite", func_802DE8DC);
 
-#ifdef NON_EQUIVALENT
+typedef struct unkStructSprite {
+    /* 0x00 */ s32* unk_00;
+    /* 0x04 */ u8 width;
+    /* 0x05 */ u8 height;
+    /* 0x06 */ s8 unk_06;
+    /* 0x07 */ u8 unk_07;
+} unkStructSprite;
 
-// Some WIP work on sprite raster stuff.
-s32 spr_get_npc_raster_info(spr_raster_info* outInfo, int npcSpriteID, int rasterIndex) {
+//TODO: fake match
+s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex) {
     SpriteAnimData* sprite;
-    void *temp_v1;
+    unkStructSprite* temp_v1;
+    s32** paletteOffsetCopy;
+    s32 newVar;
+    
 
     sprite = spr_npcSprites[npcSpriteID];
     if (sprite == 0) {
-        return FALSE;
+        return 0;
     }
+
+    paletteOffsetCopy = sprite->palettesOffset;
     temp_v1 = sprite->rastersOffset[rasterIndex];
-    outInfo->unk0 = (s32)temp_v1->unk0;
-    outInfo->unk8 = (s32)temp_v1->unk4;
-    outInfo->unkC = (s32)temp_v1->unk5;
-    outInfo->unk4 = sprite->unk4[temp_v1->unk6];
-    return TRUE;
+    out->raster = temp_v1->unk_00;
+    out->width = temp_v1->width;
+    newVar = npcSpriteID;
+    out->height = temp_v1->height;
+    if (npcSpriteID && newVar) {}
+    out->defaultPal = paletteOffsetCopy[temp_v1->unk_06];
+    return 1;
 }
-
-#else
-
-INCLUDE_ASM(s32, "sprite", spr_get_npc_raster_info);
-
-#endif
 
 s32** spr_get_npc_palettes(s32 npcSpriteID) {
     SpriteAnimData* sprite = spr_npcSprites[npcSpriteID];
