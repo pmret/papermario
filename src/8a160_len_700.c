@@ -18,8 +18,6 @@ typedef struct {
 
 extern struct_func_800F0CB0 D_8010D000[];
 
-// INCLUDE_ASM(s32, "8a160_len_700", func_800F0CB0);
-
 void func_800F0CB0(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     s32 temp_v1;
     struct_func_800F0CB0 *temp_a1;
