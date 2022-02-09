@@ -37,11 +37,11 @@ void func_800F0CB0(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
         phi_a1->unk2 = 0;
         phi_a1 = &temp_a1->unk00[1];
         phi_v1 = 1;
-    while (phi_v1 < temp_v1) {
-        phi_a1->unk7 = (s32) (-(f32) phi_v1 * 0.0f) - 1;
-        phi_v1 = phi_v1 + 1;
-        phi_a1++;
-    }
+        while (phi_v1 < temp_v1) {
+            phi_a1->unk7 = (s32) (-(f32) phi_v1 * 0.0f) - 1;
+            phi_v1 = phi_v1 + 1;
+            phi_a1++;
+        }
     }
 }
 
