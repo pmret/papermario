@@ -261,15 +261,13 @@ INCLUDE_ASM(s32, "C50A0", test_item_player_collision);
 s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
     ItemEntity* item;
     f32 dx, dy, dz;
-    s32 flags;
-    s8 type;
     s32 i;
 
     if (is_starting_conversation() || D_801565A4 || get_time_freeze_mode() || gOverrideFlags & GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS) {
         return -1;
     }
 
-    for (i = 0; i < MAX_ITEM_ENTITIES; i++){
+    for (i = 0; i < ARRAY_COUNT(D_801565A0); i++){
         item = D_801565A0[i];
 
         if (item == NULL) {
