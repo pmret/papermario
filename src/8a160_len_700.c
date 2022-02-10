@@ -19,12 +19,11 @@ typedef struct {
 extern struct_func_800F0CB0 D_8010D000[];
 
 void func_800F0CB0(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
-
     struct_func_800F0CB0* temp_a1 = &D_8010D000[arg0];
     sub_struct_func_800F0CB0* phi_a1 = &temp_a1->unk00[0];
     s32 temp_v1 = 0x39;
     s32 phi_v1;
-    
+
     if (arg0 <= 0) {
         phi_a1->unk0 = 1;
         phi_a1->unk8 = arg1;
