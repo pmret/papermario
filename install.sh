@@ -38,9 +38,6 @@ if [[ "$uname" == "Darwin" ]]; then
         echo "Installing extra"
         python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
-
-    echo "Done"
-    exit
 fi
 
 # Debian and derivatives (apt)
@@ -59,8 +56,6 @@ if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; th
         ${SUDO} apt install -y clang-tidy astyle doxygen || exit 1
         python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
-
-    echo "Done"
 fi
 
 # Arch Linux and derivatives (pacman)
@@ -101,8 +96,6 @@ if cat /etc/os-release | grep -E 'ID=arch|ID_LIKE=arch' &> /dev/null; then
         ${SUDO} pacman -S --noconfirm --needed clang astyle doxygen || exit 1
         python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
-
-    echo "Done"
 fi
 
 # openSUSE (zypper)
@@ -137,8 +130,6 @@ if cat /etc/os-release | grep ID=opensuse &> /dev/null; then
         ${SUDO} zypper -n install clang astyle doxygen || exit 1
         python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
-
-    echo "Done"
 fi
 
 # Alpine Linux (apk)
@@ -194,12 +185,10 @@ if cat /etc/os-release | grep ID=alpine &> /dev/null; then
         ${SUDO} apk add --no-cache clang-extra-tools astyle doxygen || exit 1
         python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
-
-    echo "Done"
 fi
 
 
-if [ "$supported" = false ]; then
+if [ "$supported" != true ]; then
     echo "The following distros (and their derivatives) are supported by install.sh:"
     echo "- Debian/Ubuntu (apt)"
     echo "- Arch Linux (pacman)"

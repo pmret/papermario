@@ -3,12 +3,9 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "hud_element.h"
+#include "sprite.h"
 
 s32 D_802946E0[] = { 100, 100, 100, 110, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130, 130 };
-
-s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event);
-s32 func_80263230(Actor*, Actor*);
-void func_80267018(Actor* actor, s32 arg1);
 
 s32 has_enchanted_part(Actor* actor) {
     ActorPart* partIt = actor->partsTable;
@@ -820,7 +817,7 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
     if (actor->currentHP <= 0) {
         battleStatus->lastAttackDamage += actor->currentHP;
         actor->currentHP = 0;
-        dispatchEvent = EVENT_DEATH;
+    dispatchEvent = EVENT_DEATH;
     }
 
     battleStatus->lastAttackDamage += temp_v1;
@@ -870,6 +867,7 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
     return 0;
 }
 #else
+s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEvent, s32 stopMotion);
 INCLUDE_ASM(s32, "1A5830", dispatch_damage_event_actor);
 #endif
 
@@ -1095,11 +1093,11 @@ s32 LandJumpPart(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 1;
     }
 
-    part = script->functionTemp[2];
+    part = (ActorPart*)script->functionTemp[2];
     movement = part->movement;
     movement->unk_00.y += movement->unk_2C;
     movement->unk_2C -= movement->jumpScale;
-    add_xz_vec3f_copy1(movement, movement->moveSpeed, movement->unk_30);
+    add_xz_vec3f_copy1(&movement->unk_00, movement->moveSpeed, movement->unk_30);
     part->absolutePosition.x = movement->unk_00.x;
     part->absolutePosition.y = movement->unk_00.y;
     part->absolutePosition.z = movement->unk_00.z;

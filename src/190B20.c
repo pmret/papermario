@@ -8,9 +8,9 @@
 #include "sprite.h"
 
 typedef struct PartnerDMAData {
-    /* 0x00 */ s32 dmaStart;
-    /* 0x04 */ s32 dmaEnd;
-    /* 0x08 */ s32 dmaDest;
+    /* 0x00 */ u32 dmaStart;
+    /* 0x04 */ u32 dmaEnd;
+    /* 0x08 */ void* dmaDest;
     /* 0x0C */ ActorBlueprint* ActorBlueprint;
     /* 0x10 */ s32 y;
 } PartnerDMAData; // size = 0x14
@@ -1197,8 +1197,8 @@ s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
     return ret;
 }
 
-void func_80263230(Actor* arg0, Actor* arg1) {
-    func_80263064(arg0, arg1, 0);
+s32 func_80263230(Actor* arg0, Actor* arg1) {
+    return func_80263064(arg0, arg1, 0);
 }
 
 void func_8026324C(Actor* arg0, Actor* arg1) {
@@ -2857,7 +2857,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
     if (statusTypeKey == STATUS_DAZE) {
         if (statusTypeKey != target->koStatus) {
             inflict_status(target, STATUS_DAZE, duration);
-            sfx_play_sound(0x2107);
+            sfx_play_sound(SOUND_2107);
         } else {
             target->koDuration += duration;
             if (target->koDuration > 9) {
@@ -3127,8 +3127,7 @@ void func_80266B14(void) {
     }
 }
 
-// dumb label
-#ifdef NON_MATCHING
+// TODO dumb label required to match, clean up
 s32 try_inflict_status(Actor* actor, s32 statusTypeKey, s32 statusKey) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 phi_s0;
@@ -3163,7 +3162,6 @@ s32 try_inflict_status(Actor* actor, s32 statusTypeKey, s32 statusKey) {
         duration = 3;
     }
 
-// TODO remove this label (required to match)
 meow:
     if (duration > 0) {
         if (battleStatus->currentAttackStatus < 0) {
@@ -3179,12 +3177,9 @@ meow:
     }
     return duration;
 }
-#else
-INCLUDE_ASM(s32, "190B20", try_inflict_status);
-#endif
 
 s32 inflict_status_set_duration(Actor* actor, s32 statusTypeKey, s32 statusDurationKey, s32 duration) {
-    s32 var0 = duration;
+    s32 var0 = duration; // TODO required to match, look into
     s32 statusDuration = 0;
 
     if (actor->statusTable == NULL || lookup_status_chance(actor->statusTable, statusTypeKey) > 0) {
@@ -3690,7 +3685,7 @@ void start_rumble_type(u32 arg0) {
         case 9:
         case 10:
         case 11:
-            D_802939C0 = start_script(D_80293AC4, 0xA, 0x20)->id;
+            D_802939C0 = start_script(&D_80293AC4, 0xA, 0x20)->id;
             break;
     }
 }

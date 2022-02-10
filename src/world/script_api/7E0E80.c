@@ -361,7 +361,6 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
 
 //dumb stuff
 #ifdef NON_EQUIVALENT
-extern HudScriptAnim* gItemHudScripts[337][2];
 
 void shop_open_item_select_popup(s32 mode) {
     Shop* shop = gGameStatusPtr->mapShop;
