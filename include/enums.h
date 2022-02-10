@@ -2914,37 +2914,19 @@ enum EncounterStatusFlags {
 
 enum WindowFlags {
     WINDOW_FLAGS_1                 = 0x00000001,
-    WINDOW_FLAGS_2                 = 0x00000002,
-    WINDOW_FLAGS_4                 = 0x00000004,
+    WINDOW_FLAGS_FPUPDATE_CHANGED  = 0x00000002,
+    WINDOW_FLAGS_HIDDEN            = 0x00000004, // updated but not rendered
     WINDOW_FLAGS_8                 = 0x00000008,
-    WINDOW_FLAGS_10                = 0x00000010,
-    WINDOW_FLAGS_20                = 0x00000020,
+    WINDOW_FLAGS_HAS_CHILDREN      = 0x00000010,
+    WINDOW_FLAGS_DISABLED          = 0x00000020, // not updated or rendered
     WINDOW_FLAGS_40                = 0x00000040,
-    WINDOW_FLAGS_80                = 0x00000080,
-    WINDOW_FLAGS_100               = 0x00000100,
-    WINDOW_FLAGS_200               = 0x00000200,
-    WINDOW_FLAGS_400               = 0x00000400,
-    WINDOW_FLAGS_800               = 0x00000800,
-    WINDOW_FLAGS_1000              = 0x00001000,
-    WINDOW_FLAGS_2000              = 0x00002000,
-    WINDOW_FLAGS_4000              = 0x00004000,
-    WINDOW_FLAGS_8000              = 0x00008000,
-    WINDOW_FLAGS_10000             = 0x00010000,
-    WINDOW_FLAGS_20000             = 0x00020000,
-    WINDOW_FLAGS_40000             = 0x00040000,
-    WINDOW_FLAGS_80000             = 0x00080000,
-    WINDOW_FLAGS_100000            = 0x00100000,
-    WINDOW_FLAGS_200000            = 0x00200000,
-    WINDOW_FLAGS_400000            = 0x00400000,
-    WINDOW_FLAGS_800000            = 0x00800000,
-    WINDOW_FLAGS_1000000           = 0x01000000,
-    WINDOW_FLAGS_2000000           = 0x02000000,
-    WINDOW_FLAGS_4000000           = 0x04000000,
-    WINDOW_FLAGS_8000000           = 0x08000000,
-    WINDOW_FLAGS_10000000          = 0x10000000,
-    WINDOW_FLAGS_20000000          = 0x20000000,
-    WINDOW_FLAGS_40000000          = 0x40000000,
-    WINDOW_FLAGS_80000000          = 0x80000000,
+};
+
+enum DrawFlags {
+    DRAW_FLAGS_ROTSCALE                  = 0x00000001,
+    DRAW_FLAGS_2                         = 0x00000002,
+    DRAW_FLAGS_CLIP                      = 0x00000004,
+    DRAW_FLAGS_CULL_BACK                 = 0x00000008,
 };
 
 enum EntityModelFlags {

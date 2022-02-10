@@ -185,8 +185,8 @@ void func_8024330C(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -194,7 +194,7 @@ void func_8024330C(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249BBC)) {
@@ -209,8 +209,8 @@ void filemenu_update_show_name_input(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -218,7 +218,7 @@ void filemenu_update_show_name_input(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249BDC)) {
@@ -233,8 +233,8 @@ void filemenu_update_show_options_left(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -242,7 +242,7 @@ void filemenu_update_show_options_left(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249BFC)) {
@@ -257,8 +257,8 @@ void filemenu_update_show_options_right(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -266,7 +266,7 @@ void filemenu_update_show_options_right(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249C1C)) {
@@ -281,8 +281,8 @@ void filemenu_update_show_options_bottom(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -290,7 +290,7 @@ void filemenu_update_show_options_bottom(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249C3C)) {
@@ -305,8 +305,8 @@ void filemenu_update_show_title(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -314,7 +314,7 @@ void filemenu_update_show_title(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249C5C)) {
@@ -329,8 +329,8 @@ void func_802435C4(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -342,7 +342,7 @@ void func_802435C4(
     } else {
         *posX += D_80249C7C[ARRAY_COUNT(D_80249C7C) - 1];
         window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -350,8 +350,8 @@ void filemenu_update_hidden_name_input(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -363,7 +363,7 @@ void filemenu_update_hidden_name_input(
     } else {
         *posX -= D_80249C90[ARRAY_COUNT(D_80249C90) - 1];
         window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -371,8 +371,8 @@ void filemenu_update_hidden_options_left(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -384,7 +384,7 @@ void filemenu_update_hidden_options_left(
     } else {
         *posX += D_80249CA4[ARRAY_COUNT(D_80249CA4) - 1];
         window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -392,8 +392,8 @@ void filemenu_update_hidden_options_right(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -405,7 +405,7 @@ void filemenu_update_hidden_options_right(
     } else {
         *posX -= D_80249CB8[ARRAY_COUNT(D_80249CB8) - 1];
         window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -413,8 +413,8 @@ void filemenu_update_hidden_title(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -426,7 +426,7 @@ void filemenu_update_hidden_title(
     } else {
         *posY += D_80249CCC[ARRAY_COUNT(D_80249CCC) - 1];
         window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -434,8 +434,8 @@ void filemenu_update_hidden_options_bottom(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -447,7 +447,7 @@ void filemenu_update_hidden_options_bottom(
     } else {
         *posY -= D_80249CE0[ARRAY_COUNT(D_80249CE0) - 1];
         window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -455,8 +455,8 @@ void filemenu_update_show_with_rotation(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -464,12 +464,12 @@ void filemenu_update_show_with_rotation(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249CF4)) {
         *rotY += D_80249CF4[updateCounter];
-        *flags = 8 | 1;
+        *flags = DRAW_FLAGS_CULL_BACK | DRAW_FLAGS_ROTSCALE;
     } else {
         *flags = 0;
         window->flags &= ~WINDOW_FLAGS_8;
@@ -480,8 +480,8 @@ void filemenu_update_hidden_with_rotation(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -490,11 +490,11 @@ void filemenu_update_hidden_with_rotation(
 
     if (updateCounter < 10) { // TODO: array count?
         *rotY += -D_80249D14[updateCounter];
-        *flags = 8 | 1;
+        *flags = DRAW_FLAGS_CULL_BACK | DRAW_FLAGS_ROTSCALE;
     } else {
         *flags = 0;
         window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -508,8 +508,8 @@ void filemenu_update_hidden_name_confirm(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -526,7 +526,7 @@ void filemenu_update_hidden_name_confirm(
         *posY -= D_80249D48[updateCounter];
     } else {
         window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 

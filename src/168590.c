@@ -12,12 +12,12 @@ extern s8 D_8024C098;
 extern s32 D_8024C100_C09980[3];
 extern s32 D_8024C110;
 
-void filemenu_update_show_options_left(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                       s32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-void filemenu_update_show_options_right(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                       s32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-void filemenu_update_show_options_bottom(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                       s32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
+void filemenu_update_show_options_left(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
+                                       f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
+void filemenu_update_show_options_right(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
+                                       f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
+void filemenu_update_show_options_bottom(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
+                                       f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 
 void filemenu_info_draw_message_contents(MenuPanel* menu, s32 baseX, s32 baseY) {
     s8 page = menu->page;

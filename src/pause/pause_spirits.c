@@ -103,12 +103,12 @@ MenuWindowBP gPauseSpiritsWindowsBPs[] = {
         .pos = { .x = 3, .y = 16 },
         .width = 289,
         .height = 154,
-        .unk_0A = { 1, 0 },
+        .priority = 1,
         .fpDrawContents = &pause_spirits_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 2 },
-        .unk_1C = 0,
+        .extraFlags = 0,
         .style = &gPauseWS_23
     },
     {
@@ -117,12 +117,12 @@ MenuWindowBP gPauseSpiritsWindowsBPs[] = {
         .pos = { .x = 86, .y = 124 },
         .width = 120,
         .height = 20,
-        .unk_0A = { 0, 0 },
+        .priority = 0,
         .fpDrawContents = &pause_spirits_draw_title,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_SPIRITS,
         .fpUpdate = { 1 },
-        .unk_1C = 0,
+        .extraFlags = 0,
         .style = &gPauseWS_24
     }
 };

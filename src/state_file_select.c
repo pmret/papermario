@@ -381,7 +381,7 @@ void state_step_exit_file_select(void) {
             break;
         case 2:
             filemenu_cleanup();
-            set_windows_visible(FALSE);
+            set_windows_visible(0);
             D_800A0931 = 3;
         case 3:
             set_time_freeze_mode(0);

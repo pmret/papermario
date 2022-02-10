@@ -134,12 +134,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .pos = { .x = 3, .y = 16 },
         .width = 289,
         .height = 154,
-        .unk_0A = { 1, 0},
+        .priority = 1,
         .fpDrawContents = &pause_partners_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 2 },
-        .unk_1C = 0,
+        .extraFlags = 0,
         .style = &gPauseWS_20
     }, {
         .windowID = WINDOW_ID_PAUSE_PARTNERS_TITLE,
@@ -147,12 +147,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .pos = { .x = 8, .y = 103 },
         .width = 112,
         .height = 20,
-        .unk_0A = { 0, 0},
+        .priority = 0,
         .fpDrawContents = &pause_partners_draw_title,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_PARTNERS,
         .fpUpdate = { 1 },
-        .unk_1C = 0,
+        .extraFlags = 0,
         .style = &gPauseWS_22
     }, {
         .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
@@ -160,12 +160,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .pos = { .x = 133, .y = 36 },
         .width = 140,
         .height = 80,
-        .unk_0A = { 0, 0},
+        .priority = 0,
         .fpDrawContents = &pause_partners_draw_movelist,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_PARTNERS,
         .fpUpdate = { 2 },
-        .unk_1C = 0,
+        .extraFlags = 0,
         .style = (WindowStyleCustom*)-1
     }, {
         .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE,
@@ -173,12 +173,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .pos = { .x = 12, .y = -6 },
         .width = 80,
         .height = 16,
-        .unk_0A = { 0, 0},
+        .priority = 0,
         .fpDrawContents = &pause_partners_draw_movelist_title,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
         .fpUpdate = { 1 },
-        .unk_1C = 0,
+        .extraFlags = 0,
         .style = (WindowStyleCustom*)-1
     }, {
         .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_FLOWER,
@@ -186,12 +186,12 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .pos = { .x = 102, .y = -12 },
         .width = 32,
         .height = 32,
-        .unk_0A = { 0, 0},
+        .priority = 0,
         .fpDrawContents = &pause_partners_draw_movelist_flower,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
         .fpUpdate = { 1 },
-        .unk_1C = 0,
+        .extraFlags = 0,
         .style = (WindowStyleCustom*)-1
     }
 };

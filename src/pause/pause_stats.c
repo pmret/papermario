@@ -67,12 +67,12 @@ MenuWindowBP gStatsMenuWindowBPs[] = {
         .pos = { .x = 3, .y = 16 },
         .width = 289,
         .height = 154,
-        .unk_0A = { 0, 0},
+        .priority = 0,
         .fpDrawContents = &pause_stats_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 2 },
-        .unk_1C = 0,
+        .extraFlags = 0,
         .style = &gPauseWS_12
     }
 };

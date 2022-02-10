@@ -13,7 +13,7 @@ extern s32 D_80286530;
 extern s32 D_80286534;
 extern Evt* D_8028652C;
 extern HudScript* HudScript_Item_Coin;
-extern s32 D_8014F150[64];
+extern s32 gWindowStyles[64];
 
 ApiStatus func_802803C8(Evt* script, s32 isInitialCall);
 ApiStatus func_80280410(Evt* script, s32 isInitialCall);
@@ -906,8 +906,8 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
     get_generic_entity(create_generic_entity_frontUI(NULL, draw_shop_items));
     set_window_properties(0xA, 100, 66, 120, 28, 0, shop_draw_item_name, NULL, -1);
     set_window_properties(0xB, 32, 184, 256, 32, 1, shop_draw_item_desc, NULL, -1);
-    D_8014F150[10] = 9;
-    D_8014F150[11] = 3;
+    gWindowStyles[10] = 9;
+    gWindowStyles[11] = 3;
     shop->currentItemSlot = 0;
     shop->selectedStoreItemSlot = 0;
     shop->flags = SHOP_FLAGS_0;

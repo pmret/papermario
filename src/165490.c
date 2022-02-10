@@ -302,7 +302,7 @@ static const f32 padding[] = { 0.0f }; // TODO remove when the following func is
 void filemenu_main_handle_input(MenuPanel* menu);
 INCLUDE_ASM(s32, "165490", filemenu_main_handle_input);
 
-extern s32 D_8014F150[];
+extern s32 gWindowStyles[];
 
 INCLUDE_ASM(s32, "165490", filemenu_main_update);
 

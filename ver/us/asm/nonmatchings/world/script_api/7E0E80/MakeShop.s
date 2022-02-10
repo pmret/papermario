@@ -208,8 +208,8 @@ glabel MakeShop
 /* 7E29F0 80281B70 AFA0001C */  sw        $zero, 0x1c($sp)
 /* 7E29F4 80281B74 0C051F32 */  jal       set_window_properties
 /* 7E29F8 80281B78 AFB00020 */   sw       $s0, 0x20($sp)
-/* 7E29FC 80281B7C 3C048015 */  lui       $a0, %hi(D_8014F150)
-/* 7E2A00 80281B80 2484F150 */  addiu     $a0, $a0, %lo(D_8014F150)
+/* 7E29FC 80281B7C 3C048015 */  lui       $a0, %hi(gWindowStyles)
+/* 7E2A00 80281B80 2484F150 */  addiu     $a0, $a0, %lo(gWindowStyles)
 /* 7E2A04 80281B84 24030009 */  addiu     $v1, $zero, 9
 /* 7E2A08 80281B88 AC830028 */  sw        $v1, 0x28($a0)
 /* 7E2A0C 80281B8C 24030003 */  addiu     $v1, $zero, 3

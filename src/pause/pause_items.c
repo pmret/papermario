@@ -39,12 +39,12 @@ MenuWindowBP gPauseItemsWindowBPs[] = {
         .pos = { .x = 3, .y = 16 },
         .width = 289,
         .height = 154,
-        .unk_0A = { 1, 0},
+        .priority = 1,
         .fpDrawContents = &pause_items_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 2 },
-        .unk_1C = 0,
+        .extraFlags = 0,
         .style = &gPauseWS_19
     }
 };
@@ -129,7 +129,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     palette = 10;
     currentItemColumn = gPauseItemsSelectedIndex / gPauseItemsPages[gPauseItemsCurrentPage].numCols;
     currentItemRow = gPauseItemsSelectedIndex % gPauseItemsPages[gPauseItemsCurrentPage].numCols;
-    draw_box(4, &gPauseWS_18, baseX + 68, baseY, 0, width - 68, height, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+    draw_box(DRAW_FLAGS_CLIP, &gPauseWS_18, baseX + 68, baseY, 0, width - 68, height, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
     x1 = baseX + 1;
     y1 = baseY + 7;
@@ -292,7 +292,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         }
     }
 
-    draw_box(4, &gPauseWS_17, gPauseItemsCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,
+    draw_box(DRAW_FLAGS_CLIP, &gPauseWS_17, gPauseItemsCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,
          91, 34, 255, gPauseItemsCurrentTab == 1 ? 128 : 0, 0, 0,
          0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
@@ -308,7 +308,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     }
     draw_msg(msg, msgX, msgY, opacity1, 0, 1);
 
-    draw_box(4, &gPauseWS_17, gPauseItemsCurrentTab == 1 ? baseX + 9 : baseX, baseY + 39, 0,
+    draw_box(DRAW_FLAGS_CLIP, &gPauseWS_17, gPauseItemsCurrentTab == 1 ? baseX + 9 : baseX, baseY + 39, 0,
          91, 34, 255, gPauseItemsCurrentTab == 0 ? 128 : 0, 0, 0,
          0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
