@@ -1451,12 +1451,13 @@ typedef struct PushBlockGrid {
 typedef struct ItemEntityPhysicsData {
     /* 0x00 */ f32 verticalVelocity;
     /* 0x04 */ f32 gravity; /* 2 = normal, 1 = low gravity, higher values never 'settle' */
-    /* 0x08 */ char unk_08[4];
+    /* 0x08 */ f32 unk_08;
     /* 0x0C */ f32 constVelocity;
     /* 0x10 */ f32 velx;
     /* 0x14 */ f32 velz;
     /* 0x18 */ f32 moveAngle;
-    /* 0x1C */ char unk_1C[8];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
 } ItemEntityPhysicsData; // size = 0x24
 
 typedef struct RenderTask {
@@ -2143,11 +2144,16 @@ typedef struct WindowStyleCustom {
     /* 0x34 */ s8 color2[4];
 } WindowStyleCustom; // size = 0x38;
 
+#ifndef M2CTX
 typedef union {
     int i;
     void (*func)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
                                  f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 } WindowUpdateFunc __attribute__((transparent_union));
+#else
+typedef void (*WindowUpdateFunc)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+                                 f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
+#endif
 
 typedef struct MenuWindowBP {
     /* 0x00 */ s8 windowID;

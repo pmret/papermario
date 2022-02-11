@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 #define MAX_ITEM_ENTITIES 256
 
@@ -307,7 +308,513 @@ s32 func_80134240(void) {
     return D_80155D88;
 }
 
+extern s32 D_80155D80;
+
 INCLUDE_ASM(s32, "C50A0", update_item_entity_collectable);
+// void update_item_entity_collectable(ItemEntity* itemEntity) {
+//     PlayerStatus* playerStatus = &gPlayerStatus;
+//     PlayerData* playerData = &gPlayerData;
+//     f32 sp20;
+//     f32 sp24;
+//     f32 sp28;
+//     f32 sp2C;
+//     ItemEntityPhysicsData* temp_s1;
+//     ItemEntityPhysicsData* temp_s1_2;
+//     ItemEntityPhysicsData* temp_v0_2;
+//     f32 temp_f0;
+//     f32 temp_f0_3;
+//     f32 temp_f0_4;
+//     f32 temp_f0_5;
+//     f32 temp_f20;
+//     f32 temp_f22;
+//     f32 temp_f22_2;
+//     f32 temp_f24;
+//     f32 temp_f2;
+//     f32 temp_f2_2;
+//     f32 temp_f4;
+//     f32 temp_f4_2;
+//     f32* temp_v0_10;
+//     f64 temp_f0_2;
+//     s16 temp_v0_3;
+//     s16 temp_v0_6;
+//     s32 temp_s0;
+//     s32 temp_v0_9;
+//     s32 temp_v1_2;
+//     s32 temp_v1_8;
+//     s8 temp_a0;
+//     s8 temp_v0_4;
+//     s8 temp_v0_5;
+//     s8 temp_v0_8;
+//     s8 temp_v1;
+//     s8 temp_v1_10;
+//     s8 temp_v1_7;
+//     s8 temp_v1_9;
+//     u16 temp_v1_11;
+//     u16 temp_v1_3;
+//     u16 temp_v1_5;
+//     u32 temp_v0_7;
+//     s32 phi_v0;
+//     s32 phi_v0_2;
+//     s32 phi_v0_3;
+//     s32 phi_a0;
+//     f32 phi_f0;
+//     f32 phi_f12;
+//     s32 phi_v0_4;
+//     f32 phi_f12_2;
+//     f32 phi_f20;
+//     f32 phi_f24;
+//     s32 phi_v0_5;
+//     u8 phi_v0_6;
+//     s32 phi_a0_2;
+//     s32 phi_a0_3;
+//     s8 phi_v1_2;
+//     f32 phi_f12_3;
+//     s32 phi_v0_7;
+
+//     if (D_801565A4 == 0) {
+//         if (itemEntity->pickupDelay != 0) {
+//             itemEntity->pickupDelay--;
+//             return;
+//         }
+//         temp_v1 = itemEntity->type;
+//         temp_a0 = itemEntity->state;
+//         temp_s0 = temp_v1 == 0x17;
+//         switch (temp_a0) {                          /* irregular */
+//             case 0:
+//                 item_entity_enable_shadow(itemEntity);
+//                 temp_v0_2 = heap_malloc(0x24);
+//                 temp_s1 = temp_v0_2;
+//                 itemEntity->physicsData = temp_s1;
+//                 if (temp_s1 == 0) {
+//     loop_7:
+//                     goto loop_7;
+//                 }
+//                 temp_v1_2 = itemEntity->flags;
+//                 if ((temp_v1_2 & 0x01000000) != 0) {
+//                     phi_f0 = 16.0f;
+//                 } else if ((temp_v1_2 & 0x10000) == 0) {
+//                     phi_f0 = 12.0f;
+//                 } else {
+//                     phi_f0 = 14.0f;
+//                 }
+//                 temp_s1->verticalVelocity = phi_f0;
+//                 temp_s1->gravity = 2.0f;
+//                 temp_s1->unk_08 = 24.0f;
+//                 temp_s1->constVelocity = 24.0f;
+//                 temp_v0_3 = itemEntity->wsFaceAngle;
+//                 if ((s32) temp_v0_3 < 0) {
+//                     temp_v1_3 = (u16) itemEntity->itemID;
+//                     if ((u32) (temp_v1_3 - 0x10) < 0xCBU) {
+//                         if (rand_int(0x2710) < 0x1388) {
+//                             phi_f12 = *(&gCameras->currentYaw + (temp_s0 * 0x558)) + 105.0f;
+//                             phi_v0_4 = rand_int(0x1E);
+//                         } else {
+//                             phi_f12 = *(&gCameras->currentYaw + (temp_s0 * 0x558)) - 105.0f;
+//                             phi_v0_4 = rand_int(0x1E);
+//                         }
+//                         temp_s1->moveAngle = clamp_angle((phi_f12 + (f32) phi_v0_4) - 15.0f);
+//                         temp_s1->verticalVelocity += 4.0f;
+//                     } else if ((s16) temp_v1_3 != 0x158) {
+//                         if ((s32) (s16) temp_v1_3 < 0x159) {
+//                             if ((s16) temp_v1_3 != 0x156) {
+//                                 if ((s32) (s16) temp_v1_3 < 0x157) {
+//                                     if ((s16) temp_v1_3 != 0x10) {
+//                                         temp_s1->moveAngle = 0.0f;
+//                                     } else {
+//                                         if (rand_int(0x2710) >= 0x1388) {
+//                                             phi_f12_3 = *(&gCameras->currentYaw + (temp_s0 * 0x558)) - 90.0f;
+//                                             phi_v0_7 = rand_int(0x78);
+//                                         } else {
+//                                             goto block_43;
+//                                         }
+//                                         goto block_44;
+//                                     }
+//                                 } else {
+//                                     if (rand_int(0x2710) >= 0x1388) {
+//                                         phi_f12_3 = *(&gCameras->currentYaw + (temp_s0 * 0x558)) - 90.0f;
+//                                         phi_v0_7 = rand_int(0x78);
+//                                     } else {
+//                                         goto block_43;
+//                                     }
+//                                     goto block_44;
+//                                 }
+//                             } else {
+//                                 goto block_43;
+//                             }
+//                         } else if ((s16) temp_v1_3 != 0x15A) {
+//                             if ((s32) (s16) temp_v1_3 >= 0x15A) {
+//                                 if ((s16) temp_v1_3 != 0x15B) {
+//                                     if ((s16) temp_v1_3 != 0x15C) {
+//                                         temp_s1->moveAngle = 0.0f;
+//                                     } else {
+//                                         if (rand_int(0x2710) < 0x1388) {
+//                                             phi_f12_2 = (*(&gCameras->currentYaw + (temp_s0 * 0x558)) + 90.0f + (f32) rand_int(0x3C)) - 30.0f;
+//                                         } else {
+//                                             phi_f12_2 = ((*(&gCameras->currentYaw + (temp_s0 * 0x558)) - 90.0f) + (f32) rand_int(0x3C)) - 30.0f;
+//                                         }
+//                                         goto block_45;
+//                                     }
+//                                 } else {
+//                                     phi_f12_2 = (*(&gCameras->currentYaw + (temp_s0 * 0x558)) - 90.0f) + (f32) rand_int(0x78) + 60.0f;
+//                                     goto block_45;
+//                                 }
+//                             } else {
+//                                 if (itemEntity->type != 0x17) {
+//                                     phi_f12_3 = *(&gCameras->currentYaw + (temp_s0 * 0x558)) - 90.0f;
+//                                     phi_v0_7 = rand_int(0x78);
+//                                     goto block_44;
+//                                 }
+//                                 if (rand_int(0x2710) < 0x1388) {
+//                                     phi_f12_2 = (*(&gCameras->currentYaw + (temp_s0 * 0x558)) + 90.0f + (f32) rand_int(0x3C)) - 30.0f;
+//                                 } else {
+//                                     phi_f12_2 = ((*(&gCameras->currentYaw + (temp_s0 * 0x558)) - 90.0f) + (f32) rand_int(0x3C)) - 30.0f;
+//                                 }
+//                                 goto block_45;
+//                             }
+//                         } else {
+//                             goto block_43;
+//                         }
+//                     } else {
+//     block_43:
+//                         phi_f12_3 = *(&gCameras->currentYaw + (temp_s0 * 0x558)) + 90.0f;
+//                         phi_v0_7 = rand_int(0x78);
+//     block_44:
+//                         phi_f12_2 = (phi_f12_3 + (f32) phi_v0_7) - 60.0f;
+//     block_45:
+//                         temp_s1->moveAngle = clamp_angle(phi_f12_2);
+//                     }
+//                     if ((itemEntity->flags & 0x01000000) == 0) {
+//                         phi_f20 = (temp_s1->moveAngle * 6.28318f) / 360.0f;
+//                         phi_f24 = (f32) ((f64) ((f32) rand_int(0x7D0) / 1000.0f) + 1.5);
+//                     } else {
+//                         phi_f20 = (temp_s1->moveAngle * 6.28318f) / 360.0f;
+//                         phi_f24 = (f32) ((f64) ((f32) rand_int(0x7D0) / 1000.0f) + 2.0);
+//                     }
+//                 } else {
+//                     temp_s1->moveAngle = clamp_angle((f32) temp_v0_3);
+//                     if ((itemEntity->flags & 0x40000000) == 0) {
+//                         phi_f24 = (f32) (((f64) (s16) (itemEntity->wsFaceAngle / 360) * 0.6) + 1.5);
+//                     } else {
+//                         phi_f24 = 2.1f;
+//                     }
+//                     phi_f20 = (temp_s1->moveAngle * 6.28318f) / 360.0f;
+//                 }
+//                 temp_f22 = sin_rad(phi_f20);
+//                 temp_f2 = -phi_f24 * cos_rad(phi_f20);
+//                 temp_s1->velx = phi_f24 * temp_f22;
+//                 temp_s1->velz = temp_f2;
+//                 if (itemEntity->type != 0x17) {
+//                     temp_s1->unk_1C = 180;
+//                     temp_s1->unk_20 = 0;
+//                 } else {
+//                     phi_v0_5 = 0x14;
+//                     if ((itemEntity->flags & 0x400000) == 0) {
+//                         phi_v0_5 = 0x11;
+//                     }
+//                     temp_s1->unk_1C = phi_v0_5;
+//                     temp_s1->unk_20 = 0;
+//                     temp_s1->verticalVelocity = 15.0f;
+//                     temp_s1->gravity = 1.6f;
+//                 }
+//                 if (itemEntity->type == 0x14) {
+//                     temp_s1->unk_1C = 0x3C;
+//                     temp_s1->unk_20 = 0;
+//                     temp_s1->velx = 0.0f;
+//                     temp_s1->velz = 0.0f;
+//                 }
+//                 phi_v0_6 = (u8) 1;
+//                 if (itemEntity->type == 0xC) {
+//                     temp_s1->verticalVelocity = 0.0f;
+//                     temp_s1->velx = 0.0f;
+//                     temp_s1->velz = 0.0f;
+//                     temp_s1->unk_20 = 1;
+//                 }
+//                 if (itemEntity->type == 0x10) {
+//                     temp_s1->verticalVelocity = 0.0f;
+//                     temp_s1->velx = 0.0f;
+//                     temp_s1->velz = 0.0f;
+//                     temp_s1->unk_20 = 1;
+//                 }
+//                 if ((itemEntity->flags & 0x800) != 0) {
+//                     set_global_flag((s32) itemEntity->boundVar);
+//                 }
+//     block_139:
+//                 itemEntity->state = phi_v0_6;
+//             case 1:
+//                 temp_s1_2 = itemEntity->physicsData;
+//                 if ((temp_v1 == 0x14) || (temp_v1 == 0x17) || (temp_s1_2->unk_20 == 0) || (phi_v0_6 = 3U, (test_item_player_collision(itemEntity) == 0))) {
+//                     temp_v1_8 = itemEntity->flags;
+//                     phi_v0 = temp_v1_8 & 0x2000;
+//                     if ((temp_v1_8 & 0x200) == 0) {
+//                         phi_v0 = temp_v1_8 & 0x2000;
+//                         if ((gOverrideFlags & 0x300) == 0) {
+//                             phi_v0 = temp_v1_8 & 0x2000;
+//                             if ((temp_v1_8 & 0x200000) == 0) {
+//                                 temp_v0_9 = temp_s1_2->unk_1C - 1;
+//                                 temp_s1_2->unk_1C = temp_v0_9;
+//                                 if (temp_v0_9 >= 0) {
+//                                     phi_v0 = itemEntity->flags & 0x2000;
+//                                     goto block_75;
+//                                 }
+//                                 goto block_138;
+//                             }
+//                         }
+//                     }
+//     block_75:
+//                     if ((phi_v0 == 0) && ((itemEntity->flags & 0x200000) == 0)) {
+//                         temp_f4 = temp_s1_2->verticalVelocity - temp_s1_2->gravity;
+//                         temp_s1_2->verticalVelocity = temp_f4;
+//                         if ((f64) temp_f4 < -16.0) {
+//                             temp_s1_2->verticalVelocity = -16.0f;
+//                         }
+//                         itemEntity->position.y += temp_s1_2->verticalVelocity;
+//                         itemEntity->position.x += temp_s1_2->velx;
+//                         itemEntity->position.z += temp_s1_2->velz;
+//                     }
+//                     if ((itemEntity->type != 0x14) || (phi_v0_6 = 3U, !(temp_s1_2->verticalVelocity <= 0.0f))) {
+//                         if ((itemEntity->flags & 0x30000000) == 0) {
+//                             temp_v1_9 = itemEntity->type;
+//                             if ((temp_v1_9 != 0x14) && (temp_v1_9 != 0x17)) {
+//                                 temp_v0_10 = &sp2C;
+//                                 if (temp_s1_2->verticalVelocity > 0.0f) {
+//                                     temp_f24 = temp_s1_2->constVelocity;
+//                                     sp20 = itemEntity->position.x;
+//                                     sp24 = itemEntity->position.y;
+//                                     sp28 = itemEntity->position.z;
+//                                     sp2C = temp_f24 + temp_s1_2->verticalVelocity;
+//                                     if ((npc_raycast_up(0x20000, &sp20, &sp24, &sp28, temp_v0_10) != 0) && (sp2C < temp_f24)) {
+//                                         itemEntity->position.y = sp24 - temp_f24;
+//                                         temp_s1_2->verticalVelocity = 0.0f;
+//                                     }
+//                                 }
+//                             }
+//                             if ((itemEntity->flags & 0x30000000) == 0) {
+//                                 temp_v1_10 = itemEntity->type;
+//                                 if ((temp_v1_10 != 0x14) && (temp_v1_10 != 0x17) && ((temp_s1_2->velx != 0.0f) || (temp_s1_2->velz != 0.0f))) {
+//                                     sp20 = itemEntity->position.x;
+//                                     sp24 = itemEntity->position.y;
+//                                     sp28 = itemEntity->position.z;
+//                                     if (temp_s1_2->unk_20 == 0) {
+//                                         phi_v0_2 = npc_test_move_complex_with_slipping(0x20000, &sp20, &sp24, &sp28, 0.0f, temp_s1_2->moveAngle, temp_s1_2->constVelocity, temp_s1_2->unk_08);
+//                                     } else {
+//                                         phi_v0_2 = npc_test_move_simple_with_slipping(0x20000, &sp20, &sp24, &sp28, 0.0f, temp_s1_2->moveAngle, temp_s1_2->constVelocity, temp_s1_2->unk_08);
+//                                     }
+//                                     if (phi_v0_2 != 0) {
+//                                         itemEntity->position.x = sp20;
+//                                         itemEntity->position.y = sp24;
+//                                         itemEntity->position.z = sp28;
+//                                         temp_f0 = clamp_angle(temp_s1_2->moveAngle + 180.0f);
+//                                         temp_f2_2 = temp_f0 * TAU;
+//                                         temp_s1_2->moveAngle = temp_f0;
+//                                         temp_f20 = temp_f2_2 / 360.0f;
+//                                         temp_f22_2 = sin_rad(temp_f20);
+//                                         temp_f0_2 = (f64) cos_rad(temp_f20) * -2.0;
+//                                         temp_s1_2->velx = (f32) (2.0 * (f64) temp_f22_2);
+//                                         temp_s1_2->velz = (f32) temp_f0_2;
+//                                     }
+//                                 }
+//                             }
+//                         }
+//                         if (!(itemEntity->flags & 0x10000000) && itemEntity->type != 0x14) {
+//                             phi_v0_3 = 1;
+//                             if (temp_s1_2->verticalVelocity <= 0.0) {
+//                                 temp_s1_2->unk_20 = 1;
+//                                 if (itemEntity->type != 0x17) {
+//                                     sp20 = itemEntity->position.x;
+//                                     sp28 = itemEntity->position.z;
+//                                     sp2C = -temp_s1_2->verticalVelocity + 12.0f;
+//                                     sp24 = (itemEntity->position.y - temp_s1_2->verticalVelocity) + 12.0f;
+//                                     if (temp_s1_2->unk_20 == 0) {
+//                                         phi_v0_3 = npc_raycast_down_sides(0x20000, &sp20, &sp24, &sp28, &sp2C);
+//                                     } else {
+//                                         phi_v0_3 = npc_raycast_down_around(0x20000, &sp20, &sp24, &sp28, &sp2C, 180.0f, 20.0f);
+//                                     }
+//                                 } else {
+//                                     temp_f0_3 = temp_s1_2->verticalVelocity;
+//                                     temp_f0_4 = -temp_f0_3 + 12.0f;
+//                                     sp20 = itemEntity->position.x;
+//                                     temp_f4_2 = (itemEntity->position.y - temp_f0_3) + 12.0f;
+//                                     sp2C = temp_f0_4;
+//                                     sp28 = itemEntity->position.z;
+//                                     sp24 = temp_f4_2;
+//                                     if (temp_f4_2 < (temp_f0_4 + 0.0f)) {
+//                                         sp24 = 0.0f;
+//                                     } else {
+//                                         phi_v0_3 = 0;
+//                                     }
+//                                 }
+//                                 if (phi_v0_3 != 0) {
+//                                     itemEntity->position.y = sp24;
+//                                     temp_f0_5 = (f32) ((f64) -temp_s1_2->verticalVelocity / 1.25);
+//                                     temp_s1_2->verticalVelocity = temp_f0_5;
+//                                     if ((f64) temp_f0_5 < 3.0) {
+//                                         temp_s1_2->verticalVelocity = 0.0f;
+//                                         temp_s1_2->velx = 0.0f;
+//                                         temp_s1_2->velz = 0.0f;
+//                                         itemEntity->flags |= 0x20000000;
+//                                     } else {
+//                                         temp_v1_11 = (u16) itemEntity->itemID;
+//                                         phi_a0 = 0x21B;
+//                                         if ((u32) (temp_v1_11 - 0xE0) < 0x75U) {
+//                                             goto block_136;
+//                                         }
+//                                         phi_a0 = 0x21A;
+//                                         if ((u32) ((temp_v1_11 - 0x10) & 0xFFFF) < 0xCBU) {
+//                                             goto block_136;
+//                                         }
+//                                         switch (itemEntity->itemID) {
+//                                             case 0x156:
+//         block_136:
+//                                                 sfx_play_sound_at_position(0x214, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                                 break;
+//                                             case 0x157:
+//                                                 sfx_play_sound_at_position(0x212, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                                 break;
+//                                             case 0x10:
+//                                                 sfx_play_sound_at_position(0x212, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                                 break;
+//                                             case 0x158:
+//                                                 sfx_play_sound_at_position(0x214, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                                 break;
+//                                             case 0x159:
+//                                                 sfx_play_sound_at_position(0x212, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                                 break;
+//                                             case 0x15A:
+//                                                 sfx_play_sound_at_position(0x214, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                                 break;
+//                                             case 0x15C:
+//                                                 sfx_play_sound_at_position(0x219, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                                 break;
+//                                             case 0x15B:
+//                                                 sfx_play_sound_at_position(0x218, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                                 break;
+//                                         }
+//                                     }
+//                                 }
+//                             }
+//                         }
+//                         if (itemEntity->position.y < -2000.0f) {
+//     block_138:
+//                             phi_v0_6 = 2U;
+//                             goto block_139;
+//                         }
+//                     } else {
+//                         goto block_139;
+//                     }
+//                 } else {
+//                     goto block_139;
+//                 }
+//                 goto block_140;
+//             default:
+//     block_140:
+//                 if (itemEntity->state == 2) {
+//                     remove_item_entity_by_reference(itemEntity);
+//                 }
+//                 if (itemEntity->state == 3) {
+//                     if (itemEntity->flags & 0x400) {
+//                         set_global_flag((s32) itemEntity->boundVar);
+//                     }
+//                     fx_small_gold_sparkle(0, itemEntity->position.x, itemEntity->position.y + 16.0f, itemEntity->position.z, 1.0f, 0);
+//                     temp_v1_5 = (u16) itemEntity->itemID;
+//                     if (((u32) (temp_v1_5 - 0x10) >= 0xCBU) && ((u32) ((temp_v1_5 - 0xE0) & 0xFFFF) >= 0x75U)) {
+//                         if ((s16) temp_v1_5 == 0x15C) {
+//                             playerData->starPiecesCollected = (u16) playerData->starPiecesCollected + 1;
+//                             goto block_149;
+//                         }
+//                         if (itemEntity->type == 0x17) {
+//                             itemEntity->itemID = -1;
+//                         }
+
+//                         switch (itemEntity->itemID) {
+//                             case 0x156:
+//                                 if ((s32) playerData->curHP < (s32) playerData->curMaxHP) {
+//                                     fx_recover(0, playerStatus->position.x, playerStatus->position.y + (f32) playerStatus->colliderHeight, playerStatus->position.z, 1);
+//                                     sfx_play_sound_at_position(0x2056, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                 }
+//                                 temp_v0_4 = (u8) playerData->curHP + 1;
+//                                 playerData->curHP = temp_v0_4;
+//                                 if ((s32) playerData->curMaxHP < (s32) temp_v0_4) {
+//                                     playerData->curHP = (s8) (u8) playerData->curMaxHP;
+//                                 }
+//                                 phi_a0_2 = 0x213;
+//         block_173:
+//                                 sfx_play_sound_at_position(phi_a0_2, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                 fx_sparkles(4, playerStatus->position.x, playerStatus->position.y + (f32) playerStatus->colliderHeight, playerStatus->position.z, 30.0f);
+//                                 break;
+//                             case 0x15B:
+//                                 if ((s32) playerData->curFP < (s32) playerData->curMaxFP) {
+//                                     fx_recover(1, playerStatus->position.x, playerStatus->position.y + (f32) playerStatus->colliderHeight, playerStatus->position.z, 1);
+//                                     sfx_play_sound_at_position(0x2056, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                 }
+//                                 temp_v0_5 = (u8) playerData->curFP + 1;
+//                                 playerData->curFP = temp_v0_5;
+//                                 if ((s32) playerData->curMaxFP < (s32) temp_v0_5) {
+//                                     playerData->curFP = (s8) (u8) playerData->curMaxFP;
+//                                 }
+//                                 phi_a0_2 = 0x217;
+//                                 goto block_173;
+//                             case 0x157:
+//                                 temp_v0_6 = (u16) playerData->coins + 1;
+//                                 playerData->coins = temp_v0_6;
+//                                 if ((s32) temp_v0_6 >= 0x3E8) {
+//                                     playerData->coins = 0x3E7;
+//                                 }
+//                                 sfx_play_sound_at_position(0x211, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                 temp_v0_7 = playerData->totalCoinsEarned + 1;
+//                                 playerData->totalCoinsEarned = temp_v0_7;
+//                                 if (temp_v0_7 > 0x1869FU) {
+//                                     playerData->totalCoinsEarned = 0x1869F;
+//                                 }
+//                                 break;
+//                             case 0x10:
+//                                 playerData->fortressKeyCount = (u8) playerData->fortressKeyCount + 1;
+//                                 phi_a0_3 = 0x211;
+//         block_185:
+//                                 sfx_play_sound_at_position(phi_a0_3, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
+//                                 break;
+//                             case 0x159:
+//                                 temp_v0_8 = (u8) playerData->starPoints + 1;
+//                                 playerData->starPoints = temp_v0_8;
+//                                 if ((s32) temp_v0_8 >= 0x65) {
+//                                     playerData->starPoints = 0x64;
+//                                 }
+//                                 phi_a0_3 = 0x211;
+//                                 goto block_185;
+//                             case 0x15A:
+//                                 playerData->curHP = (s8) (u8) playerData->curMaxHP;
+//                                 playerData->curFP = (s8) (u8) playerData->curMaxFP;
+//                                 phi_a0_3 = 0x213;
+//                                 goto block_185;
+//                         }
+//                         D_801565A8 = 0;
+//                         gOverrideFlags &= -0x41;
+//                         remove_item_entity_by_reference(itemEntity);
+//                     } else {
+//     block_149:
+//                         itemEntity->state = 0xA;
+//                     }
+//                 }
+//                 temp_v1_7 = (s8) itemEntity->state;
+//                 phi_v1_2 = temp_v1_7;
+//                 if (temp_v1_7 == 4) {
+//                     if (does_script_exist(D_80155D80) == 0) {
+//                         D_801565A8 = 0;
+//                         remove_item_entity_by_reference(itemEntity);
+//                         resume_all_group(2);
+//                     }
+//                     phi_v1_2 = (s8) itemEntity->state;
+//                 }
+//                 if (phi_v1_2 == 0xA) {
+//                     D_801565A4 = 1;
+//                     itemEntity->type = 0x1C;
+//                     itemEntity->state = 0;
+//                     D_801565A8 = 0;
+//                     gOverrideFlags |= 0x40;
+//                 }
+//                 break;
+//         }
+//     }
+// }
 
 INCLUDE_ASM(s32, "C50A0", func_8013559C);
 
