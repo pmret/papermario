@@ -38,6 +38,7 @@ if [[ "$uname" == "Darwin" ]]; then
         echo "Installing extra"
         python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
+    exit 0
 fi
 
 # Debian and derivatives (apt)
