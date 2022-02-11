@@ -267,7 +267,7 @@ s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
         return -1;
     }
 
-    for (i = 0; i < ARRAY_COUNT(D_801565A0); i++){
+    for (i = 0; i < MAX_ITEM_ENTITIES; i++){
         item = D_801565A0[i];
 
         if (item == NULL) {
