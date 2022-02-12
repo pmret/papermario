@@ -52,7 +52,7 @@ MenuWindowBP gPauseBadgesWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 2 },
         .extraFlags = 0,
-        .style = { &gPauseWS_16 }
+        .style = { .customStyle = &gPauseWS_16 }
     }
 };
 MenuPanel gPausePanelBadges = {

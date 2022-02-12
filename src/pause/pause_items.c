@@ -45,7 +45,7 @@ MenuWindowBP gPauseItemsWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 2 },
         .extraFlags = 0,
-        .style = { &gPauseWS_19 }
+        .style = { .customStyle = &gPauseWS_19 }
     }
 };
 MenuPanel gPausePanelItems = {
