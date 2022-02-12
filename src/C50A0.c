@@ -847,4 +847,17 @@ void func_801369D0(s32 arg1, s32 x, s32 y) {
     draw_msg(0x1D0060, x + 12, y + 4, 255, 52, 0);
 }
 
-INCLUDE_ASM(s32, "C50A0", func_80136A08);
+void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 arg2) {
+    ItemData* itemData = &gItemTable[itemEntity->itemID];
+    s32 itemMsg;
+
+    switch (itemEntity->state) {
+        case 2:
+        case 3:
+        case 10:
+        case 11:
+            itemMsg = itemData->itemMsg;
+            draw_msg(itemMsg, posX + 8, arg2, 255, 0xA, 0);
+            break;
+    }
+}

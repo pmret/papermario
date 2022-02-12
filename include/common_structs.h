@@ -1119,7 +1119,7 @@ typedef struct ItemEntity {
     /* 0x08 */ Vec3f position;
     /* 0x14 */ struct ItemEntityPhysicsData* physicsData;
     /* 0x18 */ s16 itemID; /* into item table, also worldIconID */
-    /* 0x1A */ u8 state;
+    /* 0x1A */ s8 state;
     /* 0x1B */ s8 type;
     /* 0x1C */ u8 pickupDelay; /* num frames before item can be picked up */
     /* 0x1D */ char unk_1D;
