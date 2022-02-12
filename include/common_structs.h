@@ -1115,7 +1115,7 @@ typedef struct ItemData {
 typedef struct ItemEntity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 boundVar; /* see make_item_entity */
-    /* 0x06 */ char unk_06[2];
+    /* 0x06 */ s16 unk_06;
     /* 0x08 */ Vec3f position;
     /* 0x14 */ struct ItemEntityPhysicsData* physicsData;
     /* 0x18 */ s16 itemID; /* into item table, also worldIconID */

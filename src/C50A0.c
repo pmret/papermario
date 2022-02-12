@@ -948,7 +948,98 @@ INCLUDE_ASM(s32, "C50A0", update_item_entity_temp);
 
 INCLUDE_ASM(s32, "C50A0", func_801363A0);
 
+
+extern s32 D_8014C6E4[];
+extern s32 D_801568E0;
+extern s32 D_801568EC;
 INCLUDE_ASM(s32, "C50A0", func_8013673C);
+/*void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY) {
+    ItemData* itemData = &gItemTable[itemEntity->itemID];
+    s32 offsetY;
+    u16 itemTypeFlags;
+    u16 temp_v1_2;
+    s32 msgID;
+    s32 phi_a1;
+
+    switch (itemEntity->state) {
+        case 2:
+        case 3:
+        case 10:
+        case 11:
+            if (!(itemData->typeFlags & 0x40)) {
+                if (itemEntity->flags & 0x04000000) {
+                    if (itemEntity->unk_06 & 4) {
+                        msgID = 0x1D0058;
+                    } else {
+                        msgID = 0x1D005A;
+                    }
+                } else {
+                    msgID = 0x1D0058;
+                }
+
+                set_message_msg(itemData->nameMsg, 0);
+
+                if (itemEntity->unk_06 & 0x10) {
+                    msgID = 0x1D005D;
+                }
+                if (itemEntity->unk_06 & 0x20) {
+                    msgID = 0x1D005E;
+                }
+                if (itemEntity->unk_06 & 0x40) {
+                    msgID = 0x1D005C;
+                }
+            } else {
+                if (itemEntity->flags & 0x04000000) {
+                    if (itemEntity->unk_06 & 4) {
+                        msgID = 0x1D0059;
+                    } else {
+                        msgID = 0x1D005B;
+                    }
+                } else {
+                    msgID = 0x1D0059;
+                }
+
+                if (itemEntity->unk_06 & 0x10) {
+                    msgID = 0x1D005D;
+                }
+                if (itemEntity->unk_06 & 0x20) {
+                    msgID = 0x1D005E;
+                }
+                if (itemEntity->unk_06 & 0x40) {
+                    msgID = 0x1D005C;
+                }
+                set_message_msg(itemData->nameMsg, 0);
+            }
+
+            offsetY = D_8014C6E4[get_msg_lines(msgID) - 1];
+            itemTypeFlags = gItemTable[itemEntity->itemID].typeFlags;
+
+            if (!(itemTypeFlags & 0x40) && !(itemTypeFlags & 8) && (itemEntity->itemID != 0x15C)) {
+                if (!(itemTypeFlags & 0x20)) {
+                    if (itemEntity->unk_06 & 0x30) {
+                        draw_msg(msgID, posX + 15, posY + offsetY, 255, 0x2F, 0);
+                    } else {
+                        draw_msg(msgID, posX + 40, posY + offsetY, 255, 0x2F, 0);
+
+                        if (!(itemEntity->unk_06 & 0x30)) {
+                            set_hud_element_render_pos(D_801568E0, posX + 20, posY + 20);
+                            draw_hud_element_2(D_801568E0);
+                        }
+                    }
+                    return;
+                }
+            }
+            draw_msg(msgID, posX + 15, posY + offsetY, 255, 0x2F, 0);
+            break;
+        case 13:
+        case 14:
+            set_message_msg(gItemTable[D_801568EC].nameMsg, 0);
+            draw_msg(0x1D005F, posX + 40, posY + 4, 255, 0x2F, 0);
+            set_hud_element_render_pos(D_801568E0, posX + 20, posY + 20);
+            draw_hud_element_2(D_801568E0);
+            break;
+    }
+}*/
 
 void func_801369D0(s32 arg1, s32 x, s32 y) {
     draw_msg(0x1D0060, x + 12, y + 4, 255, 52, 0);
