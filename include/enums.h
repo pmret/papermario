@@ -1498,6 +1498,7 @@ enum NpcIDs {
 
 enum EntityTypes {
     ENTITY_TYPE_SHADOW                  =   0x01,
+    ENTITY_TYPE_2                       =   0x02,
     ENTITY_TYPE_PADLOCK                 =   0x03,
     ENTITY_TYPE_PADLOCK_RED_FRAME       =   0x04,
     ENTITY_TYPE_PADLOCK_RED_FACE        =   0x05,

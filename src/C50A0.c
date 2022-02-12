@@ -317,32 +317,51 @@ void func_80133A94(s32 idx, s32 itemID) {
 s32 test_item_player_collision(ItemEntity* itemEntity);
 INCLUDE_ASM(s32, "C50A0", test_item_player_collision);
 
-s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 arg3) {
+s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
+    ItemEntity* item;
+    f32 dx, dy, dz;
     s32 i;
 
-    if (is_starting_conversation() || D_801565A4 != 0 || get_time_freeze_mode() != 0 || (gOverrideFlags & 0x200000)) {
+    if (is_starting_conversation() || D_801565A4 || get_time_freeze_mode() != 0 ||
+        gOverrideFlags & GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS)
+    {
         return -1;
     }
 
-    for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
-        ItemEntity* itemEntity = D_801565A0[i];
+    for (i = 0; i < MAX_ITEM_ENTITIES; i++){
+        item = D_801565A0[i];
 
-        if (itemEntity != NULL && itemEntity->flags != 0 && itemEntity->type != 1 && itemEntity->type != 2) {
-            if (!(itemEntity->flags & 0x40)) {
-                if (!(itemEntity->flags & 0x200000)) {
-                    f32 dx = itemEntity->position.x - x;
-                    f32 dy = itemEntity->position.y - y;
-                    f32 dz = itemEntity->position.z - z;
+        if (item == NULL) {
+            continue;
+        }
 
-                    if (sqrtf(SQ(dx) + SQ(dy) + SQ(dz)) < arg3) {
-                        return i;
-                    }
-                }
-            }
+        if (!item->flags) {
+            continue;
+        }
 
+        if (item->type == ENTITY_TYPE_SHADOW) {
+            continue;
+        }
+
+        if (item->type == ENTITY_TYPE_2) {
+            continue;
+        }
+
+        if (item->flags & ENTITY_FLAGS_CONTINUOUS_COLLISION) {
+            continue;
+        }
+
+        if (item->flags & ENTITY_FLAGS_200000) {
+            continue;
+        }
+
+        dx = item->position.x - x;
+        dz = item->position.y - y;
+        dy = item->position.z - z;
+        if (sqrtf(SQ(dx) + SQ(dz) + SQ(dy)) < dist) {
+            return i;
         }
     }
-
     return -1;
 }
 
