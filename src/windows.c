@@ -202,54 +202,59 @@ void main_menu_window_update(s32 windowID, s32* flags, s32* posX, s32* posY, s32
         window->flags &= ~(WINDOW_FLAGS_8 | WINDOW_FLAGS_HIDDEN);
     }
 }
-//#define NON_MATCHING
-#ifdef NON_MATCHING
-void render_windows(s32* windowsArray, s32 parent, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32* arg7) {
+
+void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 baseY, s32 opacity, s32 darkening, f32 (*rotScaleMtx)[4]) {
     Window* window;
     Window* childWindow;
     s32 i;
     s32 childWindowID;
     s32 counter;
-    Matrix4f outMtx;
-    f32* matrix2;
-    s32 flags;
+    Matrix4f matrix;
+    f32 (*outMtx)[4];
+    s32 childFlags;
     s32 posX, posY, posZ;
     f32 scaleX, scaleY, rotX, rotY, rotZ;
-    s32 darkening, opacity;
+    s32 childDarkening, childOpacity;
     s32 boxFlags;
     s32 boxTranslateX;
     s32 boxTranslateY;
     s32 fpUpdateIdx;
     s32 width, height;
-    void (*fpUpdateFunc)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
+    s32 (*fpUpdateFunc)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                                  f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
+    s32 childWindowIdCopy;
     s32 windowStyle;
     void* fpDrawContents;
     s32 drawContentsArg0;
+    s32* a;
 
-    for (i = 0; i < ARRAY_COUNT(gWindows); i++) {
+    for (i = 0, a = windowsArray; i < ARRAY_COUNT(gWindows); i++, a++) {
         window = &gWindows[parent];
-        childWindowID = windowsArray[i];
+        childWindowID = *a;
+
         if (childWindowID < 0) {
             continue;
         }
+
         childWindow = &gWindows[childWindowID];
         if (childWindow->flags == 0 || (childWindow->flags & WINDOW_FLAGS_DISABLED)) {
             continue;
         }
+
         fpUpdateIdx = childWindow->fpUpdate.i;
         if (fpUpdateIdx == 0 || childWindow->parent != parent) {
             continue;
         }
+
         counter = childWindow->updateCounter;
         posX = childWindow->pos.x;
         posY = childWindow->pos.y;
         posZ = 0;
-        flags = 0;
+        childFlags = 0;
         rotX = rotY = rotZ = 0.0f;
         scaleY = scaleX = 1.0f;
-        darkening = 0;
-        opacity = 255;
+        childDarkening = 0;
+        childOpacity = 255;
         width = childWindow->width;
         height = childWindow->height;
 
@@ -261,38 +266,44 @@ void render_windows(s32* windowsArray, s32 parent, s32 arg2, s32 arg3, s32 arg4,
                 update_window_hierarchy(childWindowID, childWindow->originalPriority);
             }
             if (updateData->flags & SIMPLE_WINDOW_UPDATE_DARKENING) {
-                darkening = updateData->darkening;
+                childDarkening = updateData->darkening;
             }
             if (updateData->flags & SIMPLE_WINDOW_UPDATE_OPACITY) {
-                opacity = updateData->opacity;
+                childOpacity = updateData->opacity;
             }
         } else {
-            fpUpdateFunc = childWindow->fpUpdate.func;
-            fpUpdateFunc(childWindowID, &flags, &posX, &posY, &posZ, &scaleX, &scaleY, &rotX, &rotY, &rotZ, &darkening, &opacity);
+            //type conversion needed for matching
+            fpUpdateFunc = (s32 (*)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
+                                 f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity))(childWindow->fpUpdate.func);
+            fpUpdateFunc(childWindowID, &childFlags, &posX, &posY, &posZ, &scaleX, &scaleY, &rotX, &rotY, &rotZ, &childDarkening, &childOpacity);
         }
+
         if (childWindow->fpUpdate.i) {
             if (childWindow->updateCounter < 255) {
                 childWindow->updateCounter++;
             }
         }
+
         if (scaleX == 0 || scaleY == 0 || (childWindow->flags & WINDOW_FLAGS_HIDDEN)) {
             continue;
         }
 
-        darkening += arg6;
-        opacity = opacity * arg5 / 255;
+        childDarkening += darkening;
+        childOpacity = childOpacity * opacity / 255;
         fpDrawContents = childWindow->fpDrawContents;
         drawContentsArg0 = childWindow->drawContentsArg0;
         windowStyle = gWindowStyles[childWindowID];
-        matrix2 = outMtx;
+        outMtx = matrix;
+        //needed to match
+        childWindowIdCopy = childWindowID;
 
-        if (darkening > 255) {
-            darkening = 255;
+        if (childDarkening > 255) {
+            childDarkening = 255;
         }
-        flags |= arg2;
-        if (!(arg2 & DRAW_FLAGS_ROTSCALE)) {
-            posX += arg3;
-            posY += arg4;
+        childFlags |= flags;
+        if (!(flags & DRAW_FLAGS_ROTSCALE)) {
+            posX += baseX;
+            posY += baseY;
         }
 
         if (parent == -1) {
@@ -304,29 +315,27 @@ void render_windows(s32* windowsArray, s32 parent, s32 arg2, s32 arg3, s32 arg4,
         if (parent != -1) {
             boxTranslateY = window->height;
         }
-        boxFlags = flags;
+        boxFlags = childFlags;
         if (childWindow->flags & WINDOW_FLAGS_40) {
             boxFlags |= DRAW_FLAGS_2;
         }
-        if (draw_box(boxFlags, windowStyle, posX, posY, posZ, width, height, opacity, darkening,
-                    scaleX, scaleY, rotX, rotY, rotZ, fpDrawContents, drawContentsArg0, arg7,
-                    boxTranslateX, boxTranslateY, matrix2) == 0) {
-            if (flags == 0 && arg7 == 0) {
-                matrix2 = NULL;
+        if (draw_box(boxFlags, windowStyle, posX, posY, posZ, width, height, childOpacity, childDarkening,
+                    scaleX, scaleY, rotX, rotY, rotZ, fpDrawContents, drawContentsArg0, rotScaleMtx,
+                    boxTranslateX, boxTranslateY, outMtx) == 0) {
+            if (childFlags == 0 && rotScaleMtx == 0) {
+                outMtx = NULL;
             }
+
             if (childWindow->flags & WINDOW_FLAGS_HAS_CHILDREN) {
-                render_windows(windowsArray, childWindowID, flags, posX, posY, opacity, darkening, matrix2);
+                render_windows(windowsArray, childWindowIdCopy, childFlags, posX, posY, childOpacity, childDarkening, outMtx);
             }
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "ddaf0_len_c50", render_windows);
-#endif
 
 void render_window_root(void) {
-    s32 sp20[ARRAY_COUNT(gWindows)];
-    s32* ptr = sp20;
+    s32 priorityArray[ARRAY_COUNT(gWindows)];
+    s32* ptr = priorityArray;
     s32 i;
     Window* window;
 
@@ -335,7 +344,7 @@ void render_window_root(void) {
     }
     for (i = 0, window = gWindows; i < ARRAY_COUNT(gWindows); window++, i++) {
         if (window->flags != 0) {
-            sp20[window->priority] = i;
+            priorityArray[window->priority] = i;
         }
     }
 
@@ -348,14 +357,14 @@ void render_window_root(void) {
     gSPClipRatio(gMasterGfxPos++, FRUSTRATIO_2);
     gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
     gDPPipeSync(gMasterGfxPos++);
-    render_windows(sp20, WINDOW_ID_NONE, 0, 0, 0, 255, 0, 0);
+    render_windows(priorityArray, WINDOW_ID_NONE, 0, 0, 0, 255, 0, NULL);
 }
 
-void set_window_properties(s32 windowID, s32 posX, s32 posY, s32 width, s32 height, u8 priority, void* fpDrawContents, PopupMessage* drawContentsArg0, s8 parent) {
+void set_window_properties(s32 windowID, s32 posX, s32 posY, s32 width, s32 height, u8 priority, void* fpDrawContents, void* drawContentsArg0, s8 parent) {
     Window* window = &gWindows[windowID];
     u8 priorityCopy = priority;
 
-    window->flags = WINDOW_FLAGS_1 | WINDOW_FLAGS_HIDDEN;
+    window->flags = WINDOW_FLAGS_INITIALIZED | WINDOW_FLAGS_HIDDEN;
     window->pos.x = posX;
     window->pos.y = posY;
     window->width = width;
@@ -407,7 +416,7 @@ void update_window_hierarchy(s32 windowID, u8 priority) {
 }
 
 void replace_window_update(s32 windowID, s8 priority, WindowUpdateFunc pendingFunc) {
-    if (gWindows[windowID].flags & WINDOW_FLAGS_1) {
+    if (gWindows[windowID].flags & WINDOW_FLAGS_INITIALIZED) {
         gWindows[windowID].flags |= WINDOW_FLAGS_FPUPDATE_CHANGED | WINDOW_FLAGS_8;
         gWindows[windowID].fpPending = pendingFunc;
         gWindows[windowID].originalPriority = priority;
@@ -415,7 +424,7 @@ void replace_window_update(s32 windowID, s8 priority, WindowUpdateFunc pendingFu
 }
 
 void set_window_update(s32 windowID, WindowUpdateFunc func) {
-    if (gWindows[windowID].flags & WINDOW_FLAGS_1) {
+    if (gWindows[windowID].flags & WINDOW_FLAGS_INITIALIZED) {
         if (func.i == gWindows[windowID].fpUpdate.i) {
             gWindows[windowID].flags &= ~WINDOW_FLAGS_FPUPDATE_CHANGED;
         } else {
@@ -432,7 +441,7 @@ void set_windows_visible(s32 groupIdx) {
     u8 max = gWindowsGroups[groupIdx].max;
 
     for (i = 0; i < 64; i++, window++) {
-        if (window->flags & WINDOW_FLAGS_1) {
+        if (window->flags & WINDOW_FLAGS_INITIALIZED) {
             if (i < min || i > max) {
                 window->flags |= WINDOW_FLAGS_DISABLED;
             } else {

@@ -668,7 +668,25 @@ segments:
       - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
     - [0x9DE60, data]
     - [0xA2D40, .data, 8a860_len_3f30]
-    - [0xA2D90, .data, 8e790_len_2850]
+    - start: 0xA2D90
+      type: .data
+      name: 8e790_len_2850
+      subsegments:
+      - [0xA2D90, .data, 8e790_len_2850]
+      - [0xA2E90, ia8, ui/corners9, 16, 64]
+      - [0xA3290, ia8, ui/corners8, 24, 96]
+      - [0xA3B90, ia8, ui/corners6, 16, 40]
+      - [0xA3E10, ia8, ui/corners7, 16, 32]
+      - [0xA4010, ia8, ui/corners3, 16, 96]
+      - [0xA4610, ia8, ui/corners5, 16, 32]
+      - [0xA4810, ia8, ui/corners4, 8, 32]
+      - [0xA4910, i4, ui/background1, 16, 16]
+      - [0xA4990, ia8, ui/corners1, 16, 64]
+      - [0xA4D90, i4, ui/corners2, 16, 64]
+      - [0xA4F90, i4, ui/background2, 16, 1]
+      - [0xA4F98]
+      - [0xA5078, vtx, vtx/drawbox1]
+      - [0xA50B8]
     - [0xA5100]
   - type: code
     start: 0xA5DD0
@@ -688,7 +706,7 @@ segments:
     - [0xDBD70, c, trigger]
     - [0xDC470, c, dc470_len_14c0]
     - [0xDD930, c, dd930_len_1c0]
-    - [0xDDAF0, c, ddaf0_len_c50]
+    - [0xDDAF0, c, windows]
     - [0xDE740, c, de740_len_23f0]
     - [0xDF950, c, sfx]
     - [0xE0B30, c, e0b30_len_b80]
@@ -712,7 +730,7 @@ segments:
     - [0xE56C0, .data, hud_element]
     - [0xE5820, .data, dc470_len_14c0]
     - [0xE5840, .data, dd930_len_1c0]
-    - [0xE5850, .data, ddaf0_len_c50]
+    - [0xE5850, .data, windows]
     - [0xE59D0, .data, sfx]
     - [0xE5DF0, .data, e0b30_len_b80]
     - [0xE5E40]

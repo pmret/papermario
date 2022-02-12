@@ -2921,7 +2921,7 @@ enum EncounterStatusFlags {
 };
 
 enum WindowFlags {
-    WINDOW_FLAGS_1                 = 0x00000001,
+    WINDOW_FLAGS_INITIALIZED       = 0x00000001,
     WINDOW_FLAGS_FPUPDATE_CHANGED  = 0x00000002,
     WINDOW_FLAGS_HIDDEN            = 0x00000004, // updated but not rendered
     WINDOW_FLAGS_8                 = 0x00000008,

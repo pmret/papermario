@@ -2139,8 +2139,8 @@ typedef struct WindowStyleCustom {
     /* 0x1C */ char unk_1C[0x4];
     /* 0x20 */ Gfx opaqueCombineMode; // used when alpha == 255
     /* 0x28 */ Gfx transparentCombineMode; // used when alpha < 255
-    /* 0x30 */ s8 color1[4];
-    /* 0x34 */ s8 color2[4];
+    /* 0x30 */ Color_RGBA8 color1;
+    /* 0x34 */ Color_RGBA8 color2;
 } WindowStyleCustom; // size = 0x38;
 
 typedef union {
