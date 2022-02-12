@@ -109,7 +109,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .parentID = WINDOW_ID_NONE,
         .fpUpdate = { 1 },
         .extraFlags = WINDOW_FLAGS_40,
-        .style = { &gPauseWS_0 }
+        .style = { .customStyle = &gPauseWS_0 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TUTORIAL,
@@ -123,7 +123,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 2 },
         .extraFlags = 0,
-        .style = { &gPauseWS_2 }
+        .style = { .customStyle = &gPauseWS_2 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_DECRIPTION,
@@ -137,7 +137,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { .func = &basic_window_update },
         .extraFlags = 0,
-        .style = { &gPauseWS_1 }
+        .style = { .customStyle = &gPauseWS_1 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_CURSOR,
@@ -151,7 +151,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .parentID = WINDOW_ID_NONE,
         .fpUpdate = { 1 },
         .extraFlags = 0,
-        .style = { &gPauseWS_0 }
+        .style = { .customStyle = &gPauseWS_0 }
     }
 };
 

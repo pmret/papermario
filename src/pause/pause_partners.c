@@ -140,7 +140,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 2 },
         .extraFlags = 0,
-        .style = { &gPauseWS_20 }
+        .style = { .customStyle = &gPauseWS_20 }
     }, {
         .windowID = WINDOW_ID_PAUSE_PARTNERS_TITLE,
         .unk_01 = 0,
@@ -153,7 +153,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_PARTNERS,
         .fpUpdate = { 1 },
         .extraFlags = 0,
-        .style = { &gPauseWS_22 }
+        .style = { .customStyle = &gPauseWS_22 }
     }, {
         .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
         .unk_01 = 0,
