@@ -73,7 +73,7 @@ MenuWindowBP gStatsMenuWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 2 },
         .extraFlags = 0,
-        .style = &gPauseWS_12
+        .style = { .customStyle = &gPauseWS_12 }
     }
 };
 MenuPanel gPausePanelStats = {

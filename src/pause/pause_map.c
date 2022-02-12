@@ -112,7 +112,7 @@ MenuWindowBP gPauseMapWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 2 },
         .extraFlags = 0,
-        .style = &gPauseWS_26
+        .style = { .customStyle = &gPauseWS_26 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_MAP_TITLE,
@@ -126,7 +126,7 @@ MenuWindowBP gPauseMapWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAP,
         .fpUpdate = { 1 },
         .extraFlags = 0,
-        .style = &gPauseWS_28
+        .style = { .customStyle = &gPauseWS_28 }
     },
     { },
     { },

@@ -289,10 +289,10 @@ void filemenu_main_init(MenuPanel* menu) {
     *posXPtr = x;
 
     if (menu->page != 0) {
-        set_window_update(0x35, 2);
-        set_window_update(0x37, 2);
-        set_window_update(0x33, 2);
-        set_window_update(0x34, 2);
+        set_window_update(0x35, WINDOW_UPDATE_HIDE);
+        set_window_update(0x37, WINDOW_UPDATE_HIDE);
+        set_window_update(0x33, WINDOW_UPDATE_HIDE);
+        set_window_update(0x34, WINDOW_UPDATE_HIDE);
     }
     menu->initialized = 1;
 }

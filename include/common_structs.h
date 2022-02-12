@@ -2144,6 +2144,11 @@ typedef struct WindowStyleCustom {
 } WindowStyleCustom; // size = 0x38;
 
 typedef union {
+    int defaultStyleID;
+    WindowStyleCustom* customStyle;
+} WindowStyle TRANSPARENT_UNION;
+
+typedef union {
     int i;
     void (*func)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                                  f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
@@ -2161,7 +2166,7 @@ typedef struct MenuWindowBP {
     /* 0x14 */ s8 parentID;
     /* 0x18 */ WindowUpdateFunc fpUpdate;
     /* 0x1C */ u8 extraFlags;
-    /* 0x20 */ WindowStyleCustom* style;
+    /* 0x20 */ WindowStyle style;
 } MenuWindowBP; // size = 0x24;
 
 typedef struct {
@@ -2175,7 +2180,7 @@ typedef struct {
     /* 0x10 */ s16 width;
     /* 0x12 */ s16 height;
     /* 0x14 */ UNK_FUN_PTR(fpDrawContents);
-    /* 0x18 */ s32 drawContentsArg0;
+    /* 0x18 */ void* drawContentsArg0;
     /* 0x1C */ u8 updateCounter;
     /* 0x1D */ char unk_1D[3];
 } Window; // size = 0x20

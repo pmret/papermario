@@ -20,81 +20,81 @@ typedef struct WindowsGroup {
     /* 0x01 */ u8 max;
 } WindowsGroup; // size = 0x02
 
-s32 gWindowStyles[] = {
-    3, 3, 11, 12, 13, 14, 3, 21, 3, 0, 9, 3, 0, 1, 3, 9,
-    10, 7, 8, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 3, 11, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+WindowStyle gWindowStyles[] = {
+    { 3 }, { 3 }, { 11 }, { 12 }, { 13 }, { 14 }, { 3 }, { 21 }, { 3 }, { 0 }, { 9 }, { 3 }, { 0 }, { 1 }, { 3 }, { 9 },
+    { 10 }, { 7 }, { 8 }, { 3 }, { 3 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 },
+    { 0 }, { 0 }, { 0 }, { 0 }, { 3 }, { 11 }, { 12 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 },
+    { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 0 }, { 1 }
 };
 
 SimpleWindowUpdateData gSimpleWindowUpdates[] = {
     {
         .flags = 0,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_8,
+        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
     {
         .flags = 0,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_HIDDEN | WINDOW_FLAGS_8,
+        .windowFlagsUnset = WINDOW_FLAGS_HIDDEN | WINDOW_FLAGS_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
     {
         .flags = 0,
         .windowFlagsSet = WINDOW_FLAGS_HIDDEN,
-        .windowFlagsUnset = WINDOW_FLAGS_8,
+        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_1,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_8,
+        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_DARKENING,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_8,
+        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
         .darkening = 100,
         .opacity = 0
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_DARKENING,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_8,
+        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 0
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_OPACITY,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_8,
+        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 184
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_OPACITY,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_8,
+        .windowFlagsUnset = WINDOW_FLAGS_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 255
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_OPACITY,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_HIDDEN | WINDOW_FLAGS_8,
+        .windowFlagsUnset = WINDOW_FLAGS_HIDDEN | WINDOW_FLAGS_INITIAL_ANIMATION,
         .darkening = 0,
         .opacity = 184
     },
     {
         .flags = SIMPLE_WINDOW_UPDATE_DARKENING,
         .windowFlagsSet = 0,
-        .windowFlagsUnset = WINDOW_FLAGS_HIDDEN | WINDOW_FLAGS_8,
+        .windowFlagsUnset = WINDOW_FLAGS_HIDDEN | WINDOW_FLAGS_INITIAL_ANIMATION,
         .darkening = 100,
         .opacity = 0
     },
@@ -107,8 +107,9 @@ SimpleWindowUpdateData gSimpleWindowUpdates[] = {
 u8 gWindowAppearScales[] = { 50, 80, 100, 105, 100 };
 u8 gWindowAppearFlags[] = { DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, 0};
 u8 gWindowDisappearScales[] = { 105, 100, 77, 57, 40, 27, 16, 8, 3, 0 };
-u8 gWindowDisappearFlags[] = { DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE,
-                    DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, 0 };
+u8 gWindowDisappearFlags[] = { DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE,
+                               DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE,
+                               DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, 0 };
 
 WindowsGroup gWindowsGroups[] = {
     { WINDOW_ID_0, WINDOW_ID_63 }, // all windows
@@ -117,13 +118,12 @@ WindowsGroup gWindowsGroups[] = {
     { WINDOW_ID_PAUSE_CURSOR, WINDOW_ID_63 } // file menu
 };
 
-// this is definitely wrong but I had issues trying to use an array accessor
 void clear_windows(void) {
-    Window* windowIt = gWindows;
+    Window* window = gWindows;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gWindows); i++, windowIt++) {
-        windowIt->flags = 0;
+    for (i = 0; i < ARRAY_COUNT(gWindows); i++, window++) {
+        window->flags = 0;
     }
 }
 
@@ -132,7 +132,7 @@ void update_windows(void) {
     s32 i;
     u8 flags;
 
-    for (i = 0, window = gWindows; i < 64; i++, window++) {
+    for (i = 0, window = gWindows; i < ARRAY_COUNT(gWindows); i++, window++) {
         flags = window->flags;
 
         if (!flags || (flags & WINDOW_FLAGS_DISABLED)) {
@@ -166,7 +166,7 @@ void basic_window_update(s32 windowID, s32* flags, s32* posX, s32* posY, s32* po
         *scaleX = 1.0f;
         *scaleY = 1.0f;
         *rotZ = 0.0f;
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -185,7 +185,7 @@ void basic_hidden_window_update(s32 windowID, s32* flags, s32* posX, s32* posY, 
         *scaleX = 0.0f;
         *scaleY = 0.0f;
         *rotZ = 0.0f;
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
         window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
@@ -199,7 +199,7 @@ void main_menu_window_update(s32 windowID, s32* flags, s32* posX, s32* posY, s32
         *darkening = (counter + 1) * 16;
     } else {
         *darkening = 160;
-        window->flags &= ~(WINDOW_FLAGS_8 | WINDOW_FLAGS_HIDDEN);
+        window->flags &= ~(WINDOW_FLAGS_INITIAL_ANIMATION | WINDOW_FLAGS_HIDDEN);
     }
 }
 
@@ -223,14 +223,14 @@ void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 bas
     s32 (*fpUpdateFunc)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                                  f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
     s32 childWindowIdCopy;
-    s32 windowStyle;
+    WindowStyle windowStyle;
     void* fpDrawContents;
-    s32 drawContentsArg0;
-    s32* a;
+    void* drawContentsArg0;
+    s32* windowArrayIt;
 
-    for (i = 0, a = windowsArray; i < ARRAY_COUNT(gWindows); i++, a++) {
+    for (i = 0, windowArrayIt = windowsArray; i < ARRAY_COUNT(gWindows); i++, windowArrayIt++) {
         window = &gWindows[parent];
-        childWindowID = *a;
+        childWindowID = *windowArrayIt;
 
         if (childWindowID < 0) {
             continue;
@@ -262,6 +262,7 @@ void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 bas
             SimpleWindowUpdateData* updateData = &gSimpleWindowUpdates[fpUpdateIdx];
             childWindow->flags |= updateData->windowFlagsSet;
             childWindow->flags &= ~updateData->windowFlagsUnset;
+
             if (counter == 0 && (updateData->flags & SIMPLE_WINDOW_UPDATE_1)) {
                 update_window_hierarchy(childWindowID, childWindow->originalPriority);
             }
@@ -307,18 +308,21 @@ void render_windows(s32* windowsArray, s32 parent, s32 flags, s32 baseX, s32 bas
         }
 
         if (parent == -1) {
-            boxTranslateX = 320;
+            boxTranslateX = SCREEN_WIDTH;
         } else {
             boxTranslateX = window->width;
         }
-        boxTranslateY = 240;
+
+        boxTranslateY = SCREEN_HEIGHT;
         if (parent != -1) {
             boxTranslateY = window->height;
         }
+
         boxFlags = childFlags;
         if (childWindow->flags & WINDOW_FLAGS_40) {
             boxFlags |= DRAW_FLAGS_2;
         }
+
         if (draw_box(boxFlags, windowStyle, posX, posY, posZ, width, height, childOpacity, childDarkening,
                     scaleX, scaleY, rotX, rotY, rotZ, fpDrawContents, drawContentsArg0, rotScaleMtx,
                     boxTranslateX, boxTranslateY, outMtx) == 0) {
@@ -417,7 +421,7 @@ void update_window_hierarchy(s32 windowID, u8 priority) {
 
 void replace_window_update(s32 windowID, s8 priority, WindowUpdateFunc pendingFunc) {
     if (gWindows[windowID].flags & WINDOW_FLAGS_INITIALIZED) {
-        gWindows[windowID].flags |= WINDOW_FLAGS_FPUPDATE_CHANGED | WINDOW_FLAGS_8;
+        gWindows[windowID].flags |= WINDOW_FLAGS_FPUPDATE_CHANGED | WINDOW_FLAGS_INITIAL_ANIMATION;
         gWindows[windowID].fpPending = pendingFunc;
         gWindows[windowID].originalPriority = priority;
     }
@@ -428,7 +432,7 @@ void set_window_update(s32 windowID, WindowUpdateFunc func) {
         if (func.i == gWindows[windowID].fpUpdate.i) {
             gWindows[windowID].flags &= ~WINDOW_FLAGS_FPUPDATE_CHANGED;
         } else {
-            gWindows[windowID].flags |= WINDOW_FLAGS_FPUPDATE_CHANGED | WINDOW_FLAGS_8;
+            gWindows[windowID].flags |= WINDOW_FLAGS_FPUPDATE_CHANGED | WINDOW_FLAGS_INITIAL_ANIMATION;
             gWindows[windowID].fpPending = func;
         }
     }
@@ -440,7 +444,7 @@ void set_windows_visible(s32 groupIdx) {
     u8 min = gWindowsGroups[groupIdx].min;
     u8 max = gWindowsGroups[groupIdx].max;
 
-    for (i = 0; i < 64; i++, window++) {
+    for (i = 0; i < ARRAY_COUNT(gWindows); i++, window++) {
         if (window->flags & WINDOW_FLAGS_INITIALIZED) {
             if (i < min || i > max) {
                 window->flags |= WINDOW_FLAGS_DISABLED;
@@ -456,7 +460,7 @@ void setup_pause_menu_tab(MenuWindowBP* bp, s32 count) {
 
     for (i = 0; i < count; i++, bp++) {
         set_window_properties(bp->windowID, bp->pos.x, bp->pos.y, bp->width, bp->height, bp->priority, bp->fpDrawContents, bp->tab, bp->parentID);
-        if (bp->style != -1) {
+        if (bp->style.defaultStyleID != -1) {
             gWindowStyles[bp->windowID] = bp->style;
         }
         set_window_update(bp->windowID, bp->fpUpdate);

@@ -201,7 +201,7 @@ void func_8024330C(
         *posX -= D_80249BBC[updateCounter];
     } else {
         *posX -= D_80249BBC[ARRAY_COUNT(D_80249BBC) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -225,7 +225,7 @@ void filemenu_update_show_name_input(
         *posX += D_80249BDC[updateCounter];
     } else {
         *posX += D_80249BDC[ARRAY_COUNT(D_80249BDC) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -249,7 +249,7 @@ void filemenu_update_show_options_left(
         *posX -= D_80249BFC[updateCounter];
     } else {
         *posX -= D_80249BFC[ARRAY_COUNT(D_80249BFC) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -273,7 +273,7 @@ void filemenu_update_show_options_right(
         *posX += D_80249C1C[updateCounter];
     } else {
         *posX += D_80249C1C[ARRAY_COUNT(D_80249C1C) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -297,7 +297,7 @@ void filemenu_update_show_options_bottom(
         *posY += D_80249C3C[updateCounter];
     } else {
         *posY += D_80249C3C[ARRAY_COUNT(D_80249C3C) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -321,7 +321,7 @@ void filemenu_update_show_title(
         *posY -= D_80249C5C[updateCounter];
     } else {
         *posY -= D_80249C5C[ARRAY_COUNT(D_80249C5C) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -341,7 +341,7 @@ void func_802435C4(
         *posX += D_80249C7C[updateCounter];
     } else {
         *posX += D_80249C7C[ARRAY_COUNT(D_80249C7C) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
         window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
@@ -362,7 +362,7 @@ void filemenu_update_hidden_name_input(
         *posX -= D_80249C90[updateCounter];
     } else {
         *posX -= D_80249C90[ARRAY_COUNT(D_80249C90) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
         window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
@@ -383,7 +383,7 @@ void filemenu_update_hidden_options_left(
         *posX += D_80249CA4[updateCounter];
     } else {
         *posX += D_80249CA4[ARRAY_COUNT(D_80249CA4) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
         window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
@@ -404,7 +404,7 @@ void filemenu_update_hidden_options_right(
         *posX -= D_80249CB8[updateCounter];
     } else {
         *posX -= D_80249CB8[ARRAY_COUNT(D_80249CB8) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
         window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
@@ -425,7 +425,7 @@ void filemenu_update_hidden_title(
         *posY += D_80249CCC[updateCounter];
     } else {
         *posY += D_80249CCC[ARRAY_COUNT(D_80249CCC) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
         window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
@@ -446,7 +446,7 @@ void filemenu_update_hidden_options_bottom(
         *posY -= D_80249CE0[updateCounter];
     } else {
         *posY -= D_80249CE0[ARRAY_COUNT(D_80249CE0) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
         window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
@@ -472,7 +472,7 @@ void filemenu_update_show_with_rotation(
         *flags = DRAW_FLAGS_CULL_BACK | DRAW_FLAGS_ROTSCALE;
     } else {
         *flags = 0;
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -493,7 +493,7 @@ void filemenu_update_hidden_with_rotation(
         *flags = DRAW_FLAGS_CULL_BACK | DRAW_FLAGS_ROTSCALE;
     } else {
         *flags = 0;
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
         window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
@@ -525,7 +525,7 @@ void filemenu_update_hidden_name_confirm(
         mainmenu_draw_rect(0, 0, 1280, 960, 0, 0, 0, 0, 0);
         *posY -= D_80249D48[updateCounter];
     } else {
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
         window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
@@ -569,11 +569,11 @@ void filemenu_cleanup(void) {
     }
 
     for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
-        set_window_update(i, 2);
+        set_window_update(i, WINDOW_UPDATE_HIDE);
     }
 
-    set_window_update(0x18, 2);
-    set_window_update(0x17, 2);
+    set_window_update(0x18, WINDOW_UPDATE_HIDE);
+    set_window_update(0x17, WINDOW_UPDATE_HIDE);
     func_80244BC4();
 }
 

@@ -109,7 +109,7 @@ MenuWindowBP gPauseSpiritsWindowsBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 2 },
         .extraFlags = 0,
-        .style = &gPauseWS_23
+        .style = { &gPauseWS_23 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_SPIRITS_TITLE,
@@ -123,7 +123,7 @@ MenuWindowBP gPauseSpiritsWindowsBPs[] = {
         .parentID = WINDOW_ID_PAUSE_SPIRITS,
         .fpUpdate = { 1 },
         .extraFlags = 0,
-        .style = &gPauseWS_24
+        .style = { &gPauseWS_24 }
     }
 };
 MenuPanel gPausePanelSpirits = {

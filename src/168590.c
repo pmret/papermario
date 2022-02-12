@@ -90,7 +90,7 @@ void filemenu_info_handle_input(void) {
                 filemenu_set_selected(menu, 1, 2);
                 break;
         }
-        set_window_update(0x2F, 2);
+        set_window_update(0x2F, WINDOW_UPDATE_HIDE);
     }
 }
 
@@ -104,8 +104,8 @@ void func_80248170(s32 idx) {
     Window* window = &gWindows[idx];
 
     if (window->updateCounter == 8) {
-        window->flags &= ~WINDOW_FLAGS_8;
-        set_window_update(idx, 1);
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        set_window_update(idx, WINDOW_UPDATE_SHOW);
     }
 }
 

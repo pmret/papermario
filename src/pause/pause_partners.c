@@ -140,7 +140,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 2 },
         .extraFlags = 0,
-        .style = &gPauseWS_20
+        .style = { &gPauseWS_20 }
     }, {
         .windowID = WINDOW_ID_PAUSE_PARTNERS_TITLE,
         .unk_01 = 0,
@@ -153,7 +153,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_PARTNERS,
         .fpUpdate = { 1 },
         .extraFlags = 0,
-        .style = &gPauseWS_22
+        .style = { &gPauseWS_22 }
     }, {
         .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
         .unk_01 = 0,
@@ -166,7 +166,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_PARTNERS,
         .fpUpdate = { 2 },
         .extraFlags = 0,
-        .style = (WindowStyleCustom*)-1
+        .style = { -1 }
     }, {
         .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE,
         .unk_01 = 0,
@@ -179,7 +179,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
         .fpUpdate = { 1 },
         .extraFlags = 0,
-        .style = (WindowStyleCustom*)-1
+        .style = { -1 }
     }, {
         .windowID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST_FLOWER,
         .unk_01 = 0,
@@ -192,7 +192,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
         .fpUpdate = { 1 },
         .extraFlags = 0,
-        .style = (WindowStyleCustom*)-1
+        .style = { -1 }
     }
 };
 u8 gPausePartnersPortraitScrollInterpTable[] = {0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8 };
@@ -508,7 +508,7 @@ void pause_partners_init(MenuPanel* panel) {
     }
 
     if (gPausePartnersNumPartners == 0) {
-        set_window_update(WINDOW_ID_PAUSE_PARTNERS, 2);
+        set_window_update(WINDOW_ID_PAUSE_PARTNERS, WINDOW_UPDATE_HIDE);
         panel->initialized = FALSE;
         return;
     }
@@ -630,7 +630,7 @@ void pause_partners_handle_input(MenuPanel* panel) {
     if ((gPausePressedButtons & BUTTON_A) && gPausePartnersLevel == 0) {
         gPausePartnersLevel = 1;
         sfx_play_sound(SOUND_MENU_NEXT);
-        set_window_update(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, 1);
+        set_window_update(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, WINDOW_UPDATE_SHOW);
         return;
     }
 
@@ -642,7 +642,7 @@ void pause_partners_handle_input(MenuPanel* panel) {
         } else {
             gPausePartnersLevel = 0;
             sfx_play_sound(SOUND_MENU_BACK);
-            set_window_update(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, 2);
+            set_window_update(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, WINDOW_UPDATE_HIDE);
             return;
         }
     }

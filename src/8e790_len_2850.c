@@ -1,19 +1,19 @@
 #include "common.h"
-typedef struct WindowStyle {
-    u8 bgIndex;
-    u8 cornersIndex;
-    u8 unk_2;
-    Color_RGBA8 color1;
-    Color_RGBA8 color2;
-} WindowStyle; // size 0xB
+typedef struct DefaultWindowStyle {
+    /* 0x00 */ u8 bgIndex;
+    /* 0x01 */ u8 cornersIndex;
+    /* 0x02 */ u8 unk_2;
+    /* 0x03 */ Color_RGBA8 color1;
+    /* 0x07 */ Color_RGBA8 color2;
+} DefaultWindowStyle; // size = 0x0B
 
 typedef struct UnkDrawStruct {
     Vtx vert[16];
-} UnkDrawStruct;
+} UnkDrawStruct; // size = 0x100
 
-extern UnkDrawStruct D_8010D6B0[];
+static UnkDrawStruct D_8010D6B0[];
 
-WindowStyle D_801098E0[] = {
+DefaultWindowStyle D_801098E0[] = {
     {
         .bgIndex = 1,
         .cornersIndex = 0,
@@ -330,8 +330,8 @@ Mtx D_8010BC08 = {
     }
 };
 
-INCLUDE_ASM(void, "8e790_len_2850", draw_box, s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width,
+INCLUDE_ASM(void, "8e790_len_2850", draw_box, s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s32 width,
             s32 height, s32 opacity, s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ,
             void (*fpDrawContents)(s32),s32 drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY,
-            Matrix4f* outMtx);
+            f32 (*outMtx)[4]);
 

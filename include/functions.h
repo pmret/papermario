@@ -173,9 +173,9 @@ s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
 void peach_set_disguise_anim(s32);
 
-s32 draw_box(s32 flags, WindowStyleCustom* windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
+s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
               u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
-              void* drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
+              void* drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, f32 (*outMtx)[4]);
 s32 get_msg_width(s32 msgID, u16 charset);
 
 s32 partner_player_can_pause(void);

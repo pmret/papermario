@@ -36,7 +36,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { 1 },
         .extraFlags = 0,
-        .style = &gPauseWS_3
+        .style = { .customStyle = &gPauseWS_3 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TAB_BADGES,
@@ -50,7 +50,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { .func = &pause_update_tab_default },
         .extraFlags = 0,
-        .style = &gPauseWS_4
+        .style = { .customStyle = &gPauseWS_4 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TAB_ITEMS,
@@ -64,7 +64,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { .func = &pause_update_tab_default },
         .extraFlags = 0,
-        .style = &gPauseWS_5
+        .style = { .customStyle = &gPauseWS_5 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TAB_PARTY,
@@ -78,7 +78,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { .func = &pause_update_tab_default },
         .extraFlags = 0,
-        .style = &gPauseWS_6
+        .style = { .customStyle = &gPauseWS_6 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TAB_SPIRITS,
@@ -92,7 +92,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { .func = &pause_update_tab_default },
         .extraFlags = 0,
-        .style = &gPauseWS_7
+        .style = { .customStyle = &gPauseWS_7 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TAB_MAP,
@@ -106,7 +106,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { .func = &pause_update_tab_default },
         .extraFlags = 0,
-        .style = &gPauseWS_8
+        .style = { .customStyle = &gPauseWS_8 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TAB_INVIS,
@@ -120,7 +120,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .parentID = WINDOW_ID_NONE,
         .fpUpdate = { 1 },
         .extraFlags = 0,
-        .style = &gPauseWS_9
+        .style = { .customStyle = &gPauseWS_9 }
     }
 };
 s32 gPauseTabsCurrentTab = 0;
