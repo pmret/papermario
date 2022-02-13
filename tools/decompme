@@ -1,0 +1,204 @@
+#!/usr/bin/env python3
+
+import argparse
+import sys
+from glob import glob
+from pathlib import Path
+import json
+import requests
+
+# m2ctx.py is an optional dependency for context generation
+try:
+    import m2ctx
+except ImportError:
+    m2ctx = None
+
+DECOMP_ME_HOST = "https://decomp.me"
+SRC_DIR = "src/"
+NONMATCHINGS_DIR = "ver/us/asm/nonmatchings/"
+NONMATCHINGS_ASM_GLOB = NONMATCHINGS_DIR + "**/*.s"
+SYMBOL_ADDRS_TXT = "ver/us/symbol_addrs.txt"
+SCRATCH_DEFAULTS = {
+    "project": "papermario",
+    "platform": "n64",
+    "compiler": "gcc2.8.1",
+    "compiler_flags": "-O2 -fforce-addr",
+}
+
+num_warnings = 0
+def warn(message: str):
+    global num_warnings
+    print("warning: " + message, file=sys.stderr)
+    num_warnings += 1
+
+class Symbol:
+    def __init__(self, ram_addr: int, rom_addr: int):
+        self.ram_addr = ram_addr
+        self.rom_addr = rom_addr
+
+class Function:
+    def __init__(self, name: str, asm_file: Path, symbol: Symbol):
+        self.name = name
+        self.asm_file = asm_file
+        self.symbol = symbol
+
+    def serialize(self):
+        return {
+            "display_name": self.name,
+            "rom_address": self.symbol.rom_addr,
+        }
+
+def parse_symbol_addrs():
+    with open(SYMBOL_ADDRS_TXT, "r") as f:
+        lines = f.readlines()
+
+    symbol_addrs = {}
+
+    for line in lines:
+        name = line[:line.find(" ")]
+
+        attributes = line[line.find("//"):].split(" ")
+        ram_addr = int(line[:line.find(";")].split("=")[1].strip(), base=0)
+        rom_addr = next((int(attr.split(":")[1], base=0) for attr in attributes if attr.split(":")[0] == "rom"), None)
+
+        symbol_addrs[name] = Symbol(ram_addr, rom_addr)
+
+    return symbol_addrs
+
+def get_symbol_name_from_asm_file(asm_file: Path):
+    with asm_file.open("r") as f:
+        lines = f.readlines()
+
+    for line in lines:
+        if line.startswith("glabel "):
+            return line.split(" ")[1].strip()
+
+    return None
+
+class DecompMeCli(object):
+    def __init__(self):
+        parser = argparse.ArgumentParser(
+            description="decomp.me command-line interface",
+            usage="""decompme <command> [<args>]
+
+Commands:
+   list     List nonmatching functions
+   new      Create a new scratch for a nonmatching function
+""")
+        parser.add_argument("command", help="Subcommand to run")
+        args = parser.parse_args(sys.argv[1:2])
+        if not hasattr(self, args.command):
+            parser.print_help()
+            exit(1)
+        getattr(self, args.command)()
+
+        if num_warnings > 0:
+            print(f"exited with {num_warnings} warnings", file=sys.stderr)
+
+    def list(self):
+        parser = argparse.ArgumentParser(
+            description="List nonmatching functions")
+        parser.add_argument("--json", action="store_true")
+        args = parser.parse_args(sys.argv[2:])
+
+        symbol_addrs = parse_symbol_addrs()
+        asm_files = [Path(p) for p in glob(NONMATCHINGS_ASM_GLOB, recursive=True)]
+        functions = []
+
+        for asm_file in asm_files:
+            symbol_name = get_symbol_name_from_asm_file(asm_file)
+            if not symbol_name:
+                warn(f"unable to determine symbol name of function '{asm_file}'")
+                continue
+
+            symbol = symbol_addrs.get(symbol_name)
+            if not symbol:
+                warn(f"no symbol with name '{symbol_name}' found")
+                continue
+
+            functions.append(Function(symbol_name, asm_file, symbol))
+
+        if args.json:
+            obj = [fn.serialize() for fn in functions]
+            print(json.dumps(obj))
+        else:
+            for fn in functions:
+                print(fn.name)
+
+    def new(self):
+        parser = argparse.ArgumentParser(
+            description="Create a new scratch for a nonmatching function")
+        parser.add_argument("function", help="ROM address or symbol name of function to create scratch for")
+        parser.add_argument("--dry-run", action="store_true", help="Print scratch create payload instead of sending it")
+        parser.add_argument("--open", action="store_true", help="Open the scratch in a web browser")
+        args = parser.parse_args(sys.argv[2:])
+
+        symbol_addrs = parse_symbol_addrs()
+
+        # Get symbol from args.function
+        symbol = None
+        symbol_name = None
+        try:
+            rom_addr = int(args.function, base=0)
+
+            # Get symbol from ROM address
+            for sym_name, sym in symbol_addrs.items():
+                if sym.rom_addr == rom_addr:
+                    symbol = sym
+                    symbol_name = sym_name
+                    break
+            if not symbol:
+                print(f"no symbol with rom address '{rom_addr:X}' found", file=sys.stderr)
+                exit(1)
+        except ValueError:
+            symbol_name = args.function
+            symbol = symbol_addrs.get(symbol_name)
+            if not symbol:
+                print(f"no symbol with name '{symbol_name}' found", file=sys.stderr)
+                exit(1)
+
+        # Find an asm file with the symbol name
+        asm_file = next(Path(p) for p in glob(NONMATCHINGS_ASM_GLOB, recursive=True) if Path(p).stem == symbol_name)
+        if not asm_file:
+            print(f"no asm file with name '{symbol_name}' found", file=sys.stderr)
+            exit(1)
+
+        with asm_file.open("r") as f:
+            asm_file_content = f.read()
+
+        # Generate context if m2ctx is available
+        if m2ctx:
+            c_file = Path(SRC_DIR) / asm_file.relative_to(NONMATCHINGS_DIR).parent.with_suffix(".c")
+            context = m2ctx.import_c_file(c_file)
+        else:
+            context = ""
+
+        # ScratchCreateSerializer payload
+        data = {
+            **SCRATCH_DEFAULTS,
+            "diff_label": symbol_name,
+            "rom_address": symbol.rom_addr,
+            "target_asm": asm_file_content,
+            "context": context,
+            # TODO: grab source_code from #ifdef NONMATCHING block, if any
+        }
+
+        if args.dry_run:
+            print(json.dumps(data))
+        else:
+            r = requests.post(DECOMP_ME_HOST + "/api/scratch", json=data)
+
+            if r.status_code != 201:
+                print(f"error: {r.status_code}", file=sys.stderr)
+                print(r.text, file=sys.stderr)
+                exit(1)
+
+            url = DECOMP_ME_HOST + r.json()["html_url"]
+            print(url)
+
+            if args.open:
+                import webbrowser
+                webbrowser.open(url)
+
+if __name__ == "__main__":
+    DecompMeCli()
