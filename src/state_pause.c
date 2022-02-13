@@ -24,7 +24,7 @@ void state_init_pause(void) {
     D_800A0922 = 0;
     disable_player_input();
     set_time_freeze_mode(TIME_FREEZE_PARTNER_MENU);
-    set_windows_visible(WINDOWS_GROUP_PAUSE_MENU);
+    set_windows_visible(WINDOW_GROUP_PAUSE_MENU);
 }
 
 void state_step_pause(void) {
@@ -181,7 +181,7 @@ void state_step_unpause(void) {
                         gGameStatusPtr->unk_15C = gGameStatusPtr->unk_15E;
                         calculate_model_sizes();
                         npc_reload_all();
-                        set_windows_visible(WINDOWS_GROUP_ALL);
+                        set_windows_visible(WINDOW_GROUP_ALL);
                         func_800E98C4();
                         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                         D_800A0921 = 3;

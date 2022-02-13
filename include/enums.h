@@ -2923,10 +2923,10 @@ enum EncounterStatusFlags {
 enum WindowFlags {
     WINDOW_FLAGS_INITIALIZED       = 0x00000001,
     WINDOW_FLAGS_FPUPDATE_CHANGED  = 0x00000002,
-    WINDOW_FLAGS_HIDDEN            = 0x00000004, // updated but not rendered
+    WINDOW_FLAGS_HIDDEN            = 0x00000004, ///< Updated but not rendered
     WINDOW_FLAGS_INITIAL_ANIMATION = 0x00000008,
     WINDOW_FLAGS_HAS_CHILDREN      = 0x00000010,
-    WINDOW_FLAGS_DISABLED          = 0x00000020, // not updated or rendered
+    WINDOW_FLAGS_DISABLED          = 0x00000020, ///< Not updated or rendered
     WINDOW_FLAGS_40                = 0x00000040,
 };
 
@@ -3277,14 +3277,14 @@ enum SimpleWindowUpdateId {
     WINDOW_UPDATE_TRANSPARENT       = 5,
     WINDOW_UPDATE_OPAQUE            = 6,
     WINDOW_UPDATE_SHOW_TRANSPARENT  = 7,
-    WINDOW_UPDATE_SHOW_DARKENED     = 8
+    WINDOW_UPDATE_SHOW_DARKENED     = 8,
 };
 
-enum WindowsGroupId {
-    WINDOWS_GROUP_ALL = 0,
-    WINDOWS_GROUP_1 = 1,
-    WINDOWS_GROUP_PAUSE_MENU = 2,
-    WINDOWS_GROUP_FILE_MENU = 3,
+enum WindowGroupId {
+    WINDOW_GROUP_ALL = 0,
+    WINDOW_GROUP_1 = 1,
+    WINDOW_GROUP_PAUSE_MENU = 2,
+    WINDOW_GROUP_FILE_MENU = 3,
 };
 
 #endif

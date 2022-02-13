@@ -15,10 +15,10 @@ typedef struct SimpleWindowUpdateData {
     /* 0x04 */ u8 opacity;
 } SimpleWindowUpdateData; // size = 0x05
 
-typedef struct WindowsGroup {
+typedef struct WindowGroup {
     /* 0x00 */ u8 min;
     /* 0x01 */ u8 max;
-} WindowsGroup; // size = 0x02
+} WindowGroup; // size = 0x02
 
 WindowStyle gWindowStyles[] = {
     { 3 }, { 3 }, { 11 }, { 12 }, { 13 }, { 14 }, { 3 }, { 21 }, { 3 }, { 0 }, { 9 }, { 3 }, { 0 }, { 1 }, { 3 }, { 9 },
@@ -111,7 +111,7 @@ u8 gWindowDisappearFlags[] = { DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FL
                                DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE,
                                DRAW_FLAGS_ROTSCALE, DRAW_FLAGS_ROTSCALE, 0 };
 
-WindowsGroup gWindowsGroups[] = {
+WindowGroup gWindowGroups[] = {
     { WINDOW_ID_0, WINDOW_ID_63 }, // all windows
     { WINDOW_ID_8, WINDOW_ID_9 }, // battle ?
     { WINDOW_ID_PAUSE_MAIN, WINDOW_ID_PAUSE_TAB_INVIS }, // pause menu
@@ -441,8 +441,8 @@ void set_window_update(s32 windowID, WindowUpdateFunc func) {
 void set_windows_visible(s32 groupIdx) {
     s32 i;
     Window* window = gWindows;
-    u8 min = gWindowsGroups[groupIdx].min;
-    u8 max = gWindowsGroups[groupIdx].max;
+    u8 min = gWindowGroups[groupIdx].min;
+    u8 max = gWindowGroups[groupIdx].max;
 
     for (i = 0; i < ARRAY_COUNT(gWindows); i++, window++) {
         if (window->flags & WINDOW_FLAGS_INITIALIZED) {

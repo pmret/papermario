@@ -103,7 +103,7 @@ void state_step_language_select(void) {
                     gOverrideFlags &= ~0x8;
                 } else {
                     gOverrideFlags |= 8;
-                    set_windows_visible(WINDOWS_GROUP_FILE_MENU);
+                    set_windows_visible(WINDOW_GROUP_FILE_MENU);
                     D_800A0930 = 1;
                     D_800A0931 = 3;
                 }
@@ -160,7 +160,7 @@ void state_step_file_select(void) {
 
     switch (D_800A0931) {
         case 1:
-            set_windows_visible(WINDOWS_GROUP_FILE_MENU);
+            set_windows_visible(WINDOW_GROUP_FILE_MENU);
             D_800A0930 = temp;
             D_800A0931 = 2;
             break;
@@ -310,7 +310,7 @@ void state_step_exit_language_select(void) {
                     func_800E98C4();
                     set_time_freeze_mode(1);
                 }
-                set_windows_visible(WINDOWS_GROUP_ALL);
+                set_windows_visible(WINDOW_GROUP_ALL);
                 D_800A0931 = 3;
                 update_player();
                 update_npcs();
@@ -381,7 +381,7 @@ void state_step_exit_file_select(void) {
             break;
         case 2:
             filemenu_cleanup();
-            set_windows_visible(WINDOWS_GROUP_ALL);
+            set_windows_visible(WINDOW_GROUP_ALL);
             D_800A0931 = 3;
         case 3:
             set_time_freeze_mode(0);
