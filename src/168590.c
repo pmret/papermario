@@ -12,12 +12,12 @@ extern s8 D_8024C098;
 extern s32 D_8024C100_C09980[3];
 extern s32 D_8024C110;
 
-void filemenu_update_show_options_left(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                       s32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-void filemenu_update_show_options_right(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                       s32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-void filemenu_update_show_options_bottom(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX,
-                                       s32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
+void filemenu_update_show_options_left(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
+                                       f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
+void filemenu_update_show_options_right(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
+                                       f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
+void filemenu_update_show_options_bottom(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
+                                       f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 
 void filemenu_info_draw_message_contents(MenuPanel* menu, s32 baseX, s32 baseY) {
     s8 page = menu->page;
@@ -90,7 +90,7 @@ void filemenu_info_handle_input(void) {
                 filemenu_set_selected(menu, 1, 2);
                 break;
         }
-        set_window_update(0x2F, 2);
+        set_window_update(0x2F, WINDOW_UPDATE_HIDE);
     }
 }
 
@@ -104,8 +104,8 @@ void func_80248170(s32 idx) {
     Window* window = &gWindows[idx];
 
     if (window->updateCounter == 8) {
-        window->flags &= ~WINDOW_FLAGS_8;
-        set_window_update(idx, 1);
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        set_window_update(idx, WINDOW_UPDATE_SHOW);
     }
 }
 

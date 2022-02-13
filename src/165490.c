@@ -289,10 +289,10 @@ void filemenu_main_init(MenuPanel* menu) {
     *posXPtr = x;
 
     if (menu->page != 0) {
-        set_window_update(0x35, 2);
-        set_window_update(0x37, 2);
-        set_window_update(0x33, 2);
-        set_window_update(0x34, 2);
+        set_window_update(0x35, WINDOW_UPDATE_HIDE);
+        set_window_update(0x37, WINDOW_UPDATE_HIDE);
+        set_window_update(0x33, WINDOW_UPDATE_HIDE);
+        set_window_update(0x34, WINDOW_UPDATE_HIDE);
     }
     menu->initialized = 1;
 }
@@ -302,7 +302,7 @@ static const f32 padding[] = { 0.0f }; // TODO remove when the following func is
 void filemenu_main_handle_input(MenuPanel* menu);
 INCLUDE_ASM(s32, "165490", filemenu_main_handle_input);
 
-extern s32 D_8014F150[];
+extern s32 gWindowStyles[];
 
 INCLUDE_ASM(s32, "165490", filemenu_main_update);
 

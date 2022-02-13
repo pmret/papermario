@@ -1,7 +1,7 @@
 #include "common.h"
 
-extern s8 D_8010B460[];
-extern s8 D_8010B360[];
+extern s8 ui_background1_png[];
+extern s8 ui_corners4_png[];
 extern s8 pause_image_1439F0_png[];
 extern s8 pause_image_143BF0_png[];
 extern s8 pause_image_143FF0_png[];
@@ -33,7 +33,7 @@ WindowStyleCustom gPauseWS_0 = {
 };
 WindowStyleCustom gPauseWS_1 = {
     .background = {
-        .imgData = D_8010B460,
+        .imgData = ui_background1_png,
         .packedTileFormat = 0x40,
         .width = 16,
         .height = 16,
@@ -41,7 +41,7 @@ WindowStyleCustom gPauseWS_1 = {
         .size = 128
     },
     .corners = {
-        .imgData = D_8010B360,
+        .imgData = ui_corners4_png,
         .packedTileFormat = 0x31,
         .size1 = { .x = 8, .y = 8},
         .size2 = { .x = 8, .y = 8},
@@ -297,7 +297,7 @@ WindowStyleCustom gPauseWS_11 = {
 };
 WindowStyleCustom gPauseWS_12 = {
 	.background = {
-		.imgData = D_8010B460,
+		.imgData = ui_background1_png,
 		.packedTileFormat = 0x40,
 		.width = 16,
 		.height = 16,
@@ -305,7 +305,7 @@ WindowStyleCustom gPauseWS_12 = {
 		.size = 128
 	},
 	.corners = {
-		.imgData = D_8010B360,
+		.imgData = ui_corners4_png,
 		.packedTileFormat = 0x31,
 		.size1 = { .x = 8, .y = 8 },
 		.size2 = { .x = 8, .y = 8 },
@@ -369,7 +369,7 @@ WindowStyleCustom gPauseWS_14 = {
 };
 WindowStyleCustom gPauseWS_15 = {
 	.background = {
-		.imgData = D_8010B460,
+		.imgData = ui_background1_png,
 		.packedTileFormat = 0x40,
 		.width = 16,
 		.height = 16,
@@ -377,7 +377,7 @@ WindowStyleCustom gPauseWS_15 = {
 		.size = 128
 	},
 	.corners = {
-		.imgData = D_8010B360,
+		.imgData = ui_corners4_png,
 		.packedTileFormat = 0x31,
 		.size1 = { .x = 8, .y = 8 },
 		.size2 = { .x = 8, .y = 8 },
@@ -393,7 +393,7 @@ WindowStyleCustom gPauseWS_15 = {
 };
 WindowStyleCustom gPauseWS_16 = {
 	.background = {
-		.imgData = D_8010B460,
+		.imgData = ui_background1_png,
 		.packedTileFormat = 0x40,
 		.width = 16,
 		.height = 16,
@@ -401,7 +401,7 @@ WindowStyleCustom gPauseWS_16 = {
 		.size = 128
 	},
 	.corners = {
-		.imgData = D_8010B360,
+		.imgData = ui_corners4_png,
 		.packedTileFormat = 0x31,
 		.size1 = { .x = 8, .y = 8 },
 		.size2 = { .x = 8, .y = 8 },
@@ -441,7 +441,7 @@ WindowStyleCustom gPauseWS_17 = {
 };
 WindowStyleCustom gPauseWS_18 = {
 	.background = {
-		.imgData = D_8010B460,
+		.imgData = ui_background1_png,
 		.packedTileFormat = 0x40,
 		.width = 16,
 		.height = 16,
@@ -449,7 +449,7 @@ WindowStyleCustom gPauseWS_18 = {
 		.size = 128
 	},
 	.corners = {
-		.imgData = D_8010B360,
+		.imgData = ui_corners4_png,
 		.packedTileFormat = 0x31,
 		.size1 = { .x = 8, .y = 8 },
 		.size2 = { .x = 8, .y = 8 },
@@ -465,7 +465,7 @@ WindowStyleCustom gPauseWS_18 = {
 };
 WindowStyleCustom gPauseWS_19 = {
 	.background = {
-		.imgData = D_8010B460,
+		.imgData = ui_background1_png,
 		.packedTileFormat = 0x40,
 		.width = 16,
 		.height = 16,
@@ -473,7 +473,7 @@ WindowStyleCustom gPauseWS_19 = {
 		.size = 128
 	},
 	.corners = {
-		.imgData = D_8010B360,
+		.imgData = ui_corners4_png,
 		.packedTileFormat = 0x31,
 		.size1 = { .x = 8, .y = 8 },
 		.size2 = { .x = 8, .y = 8 },
@@ -489,7 +489,7 @@ WindowStyleCustom gPauseWS_19 = {
 };
 WindowStyleCustom gPauseWS_20 = {
 	.background = {
-		.imgData = D_8010B460,
+		.imgData = ui_background1_png,
 		.packedTileFormat = 0x40,
 		.width = 16,
 		.height = 16,
@@ -497,7 +497,7 @@ WindowStyleCustom gPauseWS_20 = {
 		.size = 128
 	},
 	.corners = {
-		.imgData = D_8010B360,
+		.imgData = ui_corners4_png,
 		.packedTileFormat = 0x31,
 		.size1 = { .x = 8, .y = 8 },
 		.size2 = { .x = 8, .y = 8 },
@@ -513,7 +513,7 @@ WindowStyleCustom gPauseWS_20 = {
 };
 WindowStyleCustom gPauseWS_21 = {
 	.background = {
-		.imgData = D_8010B460,
+		.imgData = ui_background1_png,
 		.packedTileFormat = 0x40,
 		.width = 16,
 		.height = 16,
@@ -561,7 +561,7 @@ WindowStyleCustom gPauseWS_22 = {
 };
 WindowStyleCustom gPauseWS_23 = {
 	.background = {
-		.imgData = D_8010B460,
+		.imgData = ui_background1_png,
 		.packedTileFormat = 0x40,
 		.width = 16,
 		.height = 16,
@@ -569,7 +569,7 @@ WindowStyleCustom gPauseWS_23 = {
 		.size = 128
 	},
 	.corners = {
-		.imgData = D_8010B360,
+		.imgData = ui_corners4_png,
 		.packedTileFormat = 0x31,
 		.size1 = { .x = 8, .y = 8 },
 		.size2 = { .x = 8, .y = 8 },
@@ -609,7 +609,7 @@ WindowStyleCustom gPauseWS_24 = {
 };
 WindowStyleCustom gPauseWS_25 = {
 	.background = {
-		.imgData = D_8010B460,
+		.imgData = ui_background1_png,
 		.packedTileFormat = 0x40,
 		.width = 16,
 		.height = 16,
@@ -633,7 +633,7 @@ WindowStyleCustom gPauseWS_25 = {
 };
 WindowStyleCustom gPauseWS_26 = {
 	.background = {
-		.imgData = D_8010B460,
+		.imgData = ui_background1_png,
 		.packedTileFormat = 0x40,
 		.width = 16,
 		.height = 16,
@@ -641,7 +641,7 @@ WindowStyleCustom gPauseWS_26 = {
 		.size = 128
 	},
 	.corners = {
-		.imgData = D_8010B360,
+		.imgData = ui_corners4_png,
 		.packedTileFormat = 0x31,
 		.size1 = { .x = 8, .y = 8 },
 		.size2 = { .x = 8, .y = 8 },
@@ -657,7 +657,7 @@ WindowStyleCustom gPauseWS_26 = {
 };
 WindowStyleCustom gPauseWS_27 = {
 	.background = {
-		.imgData = D_8010B460,
+		.imgData = ui_background1_png,
 		.packedTileFormat = 0x40,
 		.width = 16,
 		.height = 16,

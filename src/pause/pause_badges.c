@@ -46,13 +46,13 @@ MenuWindowBP gPauseBadgesWindowBPs[] = {
         .pos = { .x = 3, .y = 16 },
         .width = 289,
         .height = 154,
-        .unk_0A = { 1, 0},
+        .priority = 1,
         .fpDrawContents = &pause_badges_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { 2 },
-        .unk_1C = 0,
-        .style = &gPauseWS_16
+        .fpUpdate = { WINDOW_UPDATE_HIDE },
+        .extraFlags = 0,
+        .style = { .customStyle = &gPauseWS_16 }
     }
 };
 MenuPanel gPausePanelBadges = {
@@ -309,7 +309,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     currentBadgeColumn = gPauseBadgesSelectedIndex / currentPage->numCols;
     currentBadgeRow = gPauseBadgesSelectedIndex % currentPage->numCols;
 
-    draw_box(4, &gPauseWS_15, baseX + 84, baseY, 0, width - 84, height, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+    draw_box(DRAW_FLAGS_CLIP, &gPauseWS_15, baseX + 84, baseY, 0, width - 84, height, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
     set_hud_element_render_pos(gPauseBadgesIconIDs[20], baseX + 241, baseY + 11);
     palette = 10;
     draw_hud_element_3(gPauseBadgesIconIDs[20]);
@@ -406,7 +406,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                     }
 
                     if (isEquipped) {
-                        draw_box(4, &gPauseWS_14, badgeListX + pause_badges_scroll_offset_x(posX) - 20,
+                        draw_box(DRAW_FLAGS_CLIP, &gPauseWS_14, badgeListX + pause_badges_scroll_offset_x(posX) - 20,
                                 baseY + pause_badges_scroll_offset_y(posY) + 17, 0, 200, 13, 255, 0, 0, 0, 0, 0,
                                 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
                     } else if (cannotBeEquipped) {
@@ -610,7 +610,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
         gDPPipeSync(gMasterGfxPos++);
     }
 
-    draw_box(4, &gPauseWS_13, gPauseBadgesCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,
+    draw_box(DRAW_FLAGS_CLIP, &gPauseWS_13, gPauseBadgesCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,
          91, 34, 255, gPauseBadgesCurrentTab == 1 ? 128 : 0, 0, 0,
          0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
@@ -626,7 +626,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     }
     draw_msg(msg, msgX, msgY, msgOpacity, 0, 1);
 
-    draw_box(4, &gPauseWS_13, gPauseBadgesCurrentTab == 1 ? baseX + 9 : baseX, baseY + 37, 0, 91, 34, 255,
+    draw_box(DRAW_FLAGS_CLIP, &gPauseWS_13, gPauseBadgesCurrentTab == 1 ? baseX + 9 : baseX, baseY + 37, 0, 91, 34, 255,
             gPauseBadgesCurrentTab == 0 ? 128 : 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
     msg = pause_get_menu_msg(0x48);
@@ -678,10 +678,10 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     if (gPauseBadgesShowNotEnoughBP != 0) {
         pause_set_cursor_opacity(0);
         if (gPauseBadgesShowNotEnoughBP == 1) {
-            draw_box(4, &gPauseWS_13, baseX + 67, baseY + 60, 0, 137, 26, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+            draw_box(DRAW_FLAGS_CLIP, &gPauseWS_13, baseX + 67, baseY + 60, 0, 137, 26, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
             draw_msg(pause_get_menu_msg(0x4A), baseX + 86, baseY + 66, 255, 0, 1);
         } else {
-            draw_box(4, &gPauseWS_13, baseX + 67, baseY + 60, 0, 173, 26, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+            draw_box(DRAW_FLAGS_CLIP, &gPauseWS_13, baseX + 67, baseY + 60, 0, 173, 26, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
             draw_msg(pause_get_menu_msg(0x4B), baseX + 90, baseY + 66, 255, 0, 1);
         }
     }
