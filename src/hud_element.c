@@ -80,9 +80,9 @@ extern HudElementList D_80156F60;
 extern HudElementList D_80157460;
 extern s32* D_8015133C;
 extern void* D_80157968;
-extern void* D_801512C8;
+extern UnkHudElementStruct** D_801512C8;
 extern UnkHudElementStruct D_80157970[];
-extern void* D_801512D0;
+extern UnkHudElementStruct** D_801512D0;
 extern UnkHudElementStruct D_80157F70[];
 extern void* D_80158574;
 extern UnkHudElementStruct D_80158580[];
@@ -105,7 +105,59 @@ INCLUDE_ASM(void, "hud_element", draw_rect_hud_element,
     s32 dropShadow
 )
 
-INCLUDE_ASM(void, "hud_element", clear_hud_element_cache, void);
+void clear_hud_element_cache(void) {
+    s32 i;
+    UnkHudElementStruct* p1;
+    UnkHudElementStruct* p2;
+
+    if (!gGameStatusPtr->isBattle) {
+        gHudElements = &D_80156F60;
+        D_8015133C = &D_80157968;
+        D_801512C8 = &D_80157970;
+        D_801512D0 = &D_80157F70;
+    } else {
+        gHudElements = &D_80157460;
+        D_8015133C = &D_80158574;
+        D_801512C8 = &D_80158580;
+        D_801512D0 = &D_80158B80;
+    }
+
+    if (!gGameStatusPtr->isBattle) {
+        D_80151314 = general_heap_malloc(D_8014EFC4[0]);
+        ASSERT(D_80151314);
+        D_80157964 = D_80151314;
+        *D_8015133C = 0;
+        p1 = D_801512C8;
+        p2 = D_801512D0;
+        for (i = 0; i < 192; i++) {
+            p1[i].unk_00 = -1;
+            p2[i].unk_00 = -1;
+        }
+    } else {
+        if (D_8014EFC0[0] == 0) {
+            D_80151314 = general_heap_malloc(D_8014EFC4[0] / 2);
+            ASSERT(D_80151314);
+        } else {
+            D_80151314 = D_8014EFC0[0];
+        }
+        D_80158570 = D_80151314;
+        *D_8015133C = 0;
+        p1 = D_801512C8;
+        p2 = D_801512D0;
+        for (i = 0; i < 192; i++) {
+            p1[i].unk_00 = -1;
+            p2[i].unk_00 = -1;
+        }
+    }
+
+    for (i = 0; i < 320; i++) {
+        (*gHudElements)[i] = NULL;
+    }
+
+    D_801512B4 = 0;
+    D_80159180 = 0;
+    func_801413F8();
+}
 
 void init_hud_element_list(void) {
     if (!gGameStatusPtr->isBattle) {
@@ -132,7 +184,7 @@ void init_hud_element_list(void) {
 }
 
 void func_801413F8(void) {
-    set_cam_viewport(3, 0, 0, 0x13F, 0xEF);
+    set_cam_viewport(3, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     gCameras[3].updateMode = 2;
     gCameras[3].unk_06 = 1;
     gCameras[3].unk_20 = 0x3CBF;
@@ -516,7 +568,6 @@ void clear_hud_element_flags(s32 id, s32 flags) {
     (*gHudElements)[id & ~0x800]->flags.as_word &= ~flags;
 }
 
-//INCLUDE_ASM(void, "hud_element", ALT_clear_hud_element_cache, void);
 void ALT_clear_hud_element_cache(void) {
     s32 i;
 
