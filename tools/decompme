@@ -115,6 +115,9 @@ Commands:
             if not symbol:
                 warn(f"no symbol with name '{symbol_name}' found")
                 continue
+            if not symbol.rom_addr:
+                warn(f"symbol '{symbol_name}' requires a ROM address")
+                continue
 
             functions.append(Function(symbol_name, asm_file, symbol))
 
