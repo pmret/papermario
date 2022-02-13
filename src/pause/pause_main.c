@@ -107,7 +107,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .fpDrawContents = &pause_main_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_NONE,
-        .fpUpdate = { 1 },
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = WINDOW_FLAGS_40,
         .style = { .customStyle = &gPauseWS_0 }
     },
@@ -121,7 +121,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .fpDrawContents = &pause_tutorial_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { 2 },
+        .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_2 }
     },
