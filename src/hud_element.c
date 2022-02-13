@@ -2,6 +2,11 @@
 #include "hud_element.h"
 #include "nu/nusys.h"
 
+typedef struct UnkHudElementStruct {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+} UnkHudElementStruct; // size = 0x08;
+
 extern HudElementList* gHudElements;
 
 s32 D_8014EFC0[] = { 0x00000000, };
@@ -73,15 +78,15 @@ extern s32 D_801512B4; // no of hud elements?
 extern s32 D_80159180;
 extern HudElementList D_80156F60;
 extern HudElementList D_80157460;
-extern void* D_8015133C;
+extern s32* D_8015133C;
 extern void* D_80157968;
 extern void* D_801512C8;
-extern void* D_80157970;
+extern UnkHudElementStruct D_80157970[];
 extern void* D_801512D0;
-extern void* D_80157F70;
+extern UnkHudElementStruct D_80157F70[];
 extern void* D_80158574;
-extern void* D_80158580;
-extern void* D_80158B80;
+extern UnkHudElementStruct D_80158580[];
+extern UnkHudElementStruct D_80158B80[];
 extern s32* D_80157964;
 extern s32* D_80158570;
 extern s32* D_80151314;
@@ -511,7 +516,46 @@ void clear_hud_element_flags(s32 id, s32 flags) {
     (*gHudElements)[id & ~0x800]->flags.as_word &= ~flags;
 }
 
-INCLUDE_ASM(void, "hud_element", ALT_clear_hud_element_cache, void);
+//INCLUDE_ASM(void, "hud_element", ALT_clear_hud_element_cache, void);
+void ALT_clear_hud_element_cache(void) {
+    s32 i;
+
+    if (!gGameStatusPtr->isBattle) {
+        heap_free(D_80151314);
+        D_80151314 = heap_malloc(D_8014EFC4[0]);
+        ASSERT(D_80151314);
+        D_80157964 = D_80151314;
+        *D_8015133C = 0;
+        D_8015133C = &D_80157968;
+        D_801512C8 = &D_80157970;
+        D_801512D0 = &D_80157F70;
+        D_80151314 = D_80157964;
+
+        for (i = 0; i < 192; i++) {
+            D_80157970[i].unk_00 = -1;
+            D_80157F70[i].unk_00 = -1;
+        }
+    } else {
+        if (D_8014EFC0[0] == 0) {
+            heap_free(D_80151314);
+            D_80151314 = heap_malloc(D_8014EFC4[0] / 2);
+            ASSERT(D_80151314);
+        } else {
+            D_80151314 = D_8014EFC0[0];
+        }
+        D_80158570 = D_80151314;
+        *D_8015133C = 0;
+        D_8015133C = &D_80158574;
+        D_801512C8 = &D_80158580;
+        D_801512D0 = &D_80158B80;
+        D_80151314 = D_80158570;
+
+        for (i = 0; i < 192; i++) {
+            D_80158580[i].unk_00 = -1;
+            D_80158B80[i].unk_00 = -1;
+        }
+    }
+}
 
 void set_hud_element_scale(s32 index, f32 scale) {
     HudElement* elem = (*gHudElements)[index & ~0x800];
