@@ -138,7 +138,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .fpDrawContents = &pause_partners_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { 2 },
+        .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_20 }
     }, {
@@ -151,7 +151,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .fpDrawContents = &pause_partners_draw_title,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_PARTNERS,
-        .fpUpdate = { 1 },
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_22 }
     }, {
@@ -164,7 +164,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .fpDrawContents = &pause_partners_draw_movelist,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_PARTNERS,
-        .fpUpdate = { 2 },
+        .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { -1 }
     }, {
@@ -177,7 +177,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .fpDrawContents = &pause_partners_draw_movelist_title,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
-        .fpUpdate = { 1 },
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { -1 }
     }, {
@@ -190,7 +190,7 @@ MenuWindowBP gPausePartnersWindowBPs[] = {
         .fpDrawContents = &pause_partners_draw_movelist_flower,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_PARTNERS_MOVELIST,
-        .fpUpdate = { 1 },
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { -1 }
     }

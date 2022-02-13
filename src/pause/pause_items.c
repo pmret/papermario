@@ -43,7 +43,7 @@ MenuWindowBP gPauseItemsWindowBPs[] = {
         .fpDrawContents = &pause_items_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { 2 },
+        .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_19 }
     }

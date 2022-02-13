@@ -110,7 +110,7 @@ MenuWindowBP gPauseMapWindowBPs[] = {
         .fpDrawContents = &pause_map_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { 2 },
+        .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_26 }
     },
@@ -124,7 +124,7 @@ MenuWindowBP gPauseMapWindowBPs[] = {
         .fpDrawContents = &pause_map_draw_title,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAP,
-        .fpUpdate = { 1 },
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_28 }
     },

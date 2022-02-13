@@ -149,7 +149,7 @@ MenuWindowBP gPauseCommonWindowsBPs[] = {
         .fpDrawContents = &pause_draw_cursor,
         .tab = NULL,
         .parentID = WINDOW_ID_NONE,
-        .fpUpdate = { 1 },
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_0 }
     }

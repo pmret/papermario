@@ -34,7 +34,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .fpDrawContents = &pause_tabs_draw_stats,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { 1 },
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_3 }
     },
@@ -118,7 +118,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .fpDrawContents = &pause_tabs_draw_invis,
         .tab = NULL,
         .parentID = WINDOW_ID_NONE,
-        .fpUpdate = { 1 },
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_9 }
     }

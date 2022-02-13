@@ -107,7 +107,7 @@ MenuWindowBP gPauseSpiritsWindowsBPs[] = {
         .fpDrawContents = &pause_spirits_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { 2 },
+        .fpUpdate = { WINDOW_UPDATE_HIDE },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_23 }
     },
@@ -121,7 +121,7 @@ MenuWindowBP gPauseSpiritsWindowsBPs[] = {
         .fpDrawContents = &pause_spirits_draw_title,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_SPIRITS,
-        .fpUpdate = { 1 },
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_24 }
     }
