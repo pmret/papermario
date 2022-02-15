@@ -30,13 +30,13 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .pos = { .x = 0, .y = 7 },
         .width = 43,
         .height = 15,
-        .unk_0A = { 64, 0 },
+        .priority = 64,
         .fpDrawContents = &pause_tabs_draw_stats,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { 1 },
-        .unk_1C = 0,
-        .style = &gPauseWS_3
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
+        .extraFlags = 0,
+        .style = { .customStyle = &gPauseWS_3 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TAB_BADGES,
@@ -44,13 +44,13 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .pos = { .x = 0, .y = 7 },
         .width = 43,
         .height = 15,
-        .unk_0A = { 0, 0 },
+        .priority = 0,
         .fpDrawContents = &pause_tabs_draw_badges,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { .func = &pause_update_tab_default },
-        .unk_1C = 0,
-        .style = &gPauseWS_4
+        .extraFlags = 0,
+        .style = { .customStyle = &gPauseWS_4 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TAB_ITEMS,
@@ -58,13 +58,13 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .pos = { .x = 0, .y = 7 },
         .width = 43,
         .height = 15,
-        .unk_0A = { 0, 0 },
+        .priority = 0,
         .fpDrawContents = &pause_tabs_draw_items,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { .func = &pause_update_tab_default },
-        .unk_1C = 0,
-        .style = &gPauseWS_5
+        .extraFlags = 0,
+        .style = { .customStyle = &gPauseWS_5 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TAB_PARTY,
@@ -72,13 +72,13 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .pos = { .x = 0, .y = 7 },
         .width = 43,
         .height = 15,
-        .unk_0A = { 0, 0 },
+        .priority = 0,
         .fpDrawContents = &pause_tabs_draw_party,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { .func = &pause_update_tab_default },
-        .unk_1C = 0,
-        .style = &gPauseWS_6
+        .extraFlags = 0,
+        .style = { .customStyle = &gPauseWS_6 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TAB_SPIRITS,
@@ -86,13 +86,13 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .pos = { .x = 0, .y = 7 },
         .width = 43,
         .height = 15,
-        .unk_0A = { 0, 0 },
+        .priority = 0,
         .fpDrawContents = &pause_tabs_draw_spirits,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { .func = &pause_update_tab_default },
-        .unk_1C = 0,
-        .style = &gPauseWS_7
+        .extraFlags = 0,
+        .style = { .customStyle = &gPauseWS_7 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TAB_MAP,
@@ -100,13 +100,13 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .pos = { .x = 0, .y = 7 },
         .width = 43,
         .height = 15,
-        .unk_0A = { 0, 0 },
+        .priority = 0,
         .fpDrawContents = &pause_tabs_draw_map,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { .func = &pause_update_tab_default },
-        .unk_1C = 0,
-        .style = &gPauseWS_8
+        .extraFlags = 0,
+        .style = { .customStyle = &gPauseWS_8 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_TAB_INVIS,
@@ -114,13 +114,13 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .pos = { .x = 8, .y = 8 },
         .width = 16,
         .height = 16,
-        .unk_0A = { 64, 0 },
+        .priority = 64,
         .fpDrawContents = &pause_tabs_draw_invis,
         .tab = NULL,
         .parentID = WINDOW_ID_NONE,
-        .fpUpdate = { 1 },
-        .unk_1C = 0,
-        .style = &gPauseWS_9
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
+        .extraFlags = 0,
+        .style = { .customStyle = &gPauseWS_9 }
     }
 };
 s32 gPauseTabsCurrentTab = 0;
@@ -326,9 +326,9 @@ void pause_tabs_update(MenuPanel* tab) {
     f32 delta;
     f32 deltaBefore;
     f32 f7;
-    void (*fpUpdateInactive)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+    void (*fpUpdateInactive)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                                  f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-    void (*fpUpdateActive)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+    void (*fpUpdateActive)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                                  f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
     WindowUpdateFunc fpUpdate;
     s32 i;

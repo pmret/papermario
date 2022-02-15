@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel filemenu_main_update
-/* 16738C 80246B2C 3C058015 */  lui       $a1, %hi(D_8014F150)
-/* 167390 80246B30 24A5F150 */  addiu     $a1, $a1, %lo(D_8014F150)
+/* 16738C 80246B2C 3C058015 */  lui       $a1, %hi(gWindowStyles)
+/* 167390 80246B30 24A5F150 */  addiu     $a1, $a1, %lo(gWindowStyles)
 /* 167394 80246B34 3C068025 */  lui       $a2, %hi(D_8024BDA8)
 /* 167398 80246B38 24C6BDA8 */  addiu     $a2, $a2, %lo(D_8024BDA8)
 /* 16739C 80246B3C 24C20070 */  addiu     $v0, $a2, 0x70
@@ -79,8 +79,8 @@ glabel filemenu_main_update
 /* 167494 80246C34 03E00008 */  jr        $ra
 /* 167498 80246C38 00000000 */   nop
 .L80246C3C:
-/* 16749C 80246C3C 3C038015 */  lui       $v1, %hi(D_8014F150)
-/* 1674A0 80246C40 2463F150 */  addiu     $v1, $v1, %lo(D_8014F150)
+/* 16749C 80246C3C 3C038015 */  lui       $v1, %hi(gWindowStyles)
+/* 1674A0 80246C40 2463F150 */  addiu     $v1, $v1, %lo(gWindowStyles)
 /* 1674A4 80246C44 3C028025 */  lui       $v0, %hi(D_8024BDE0)
 /* 1674A8 80246C48 2442BDE0 */  addiu     $v0, $v0, %lo(D_8024BDE0)
 /* 1674AC 80246C4C AC6200E0 */  sw        $v0, 0xe0($v1)
@@ -88,8 +88,8 @@ glabel filemenu_main_update
 /* 1674B4 80246C54 03E00008 */  jr        $ra
 /* 1674B8 80246C58 AC6200F0 */   sw       $v0, 0xf0($v1)
 .L80246C5C:
-/* 1674BC 80246C5C 3C038015 */  lui       $v1, %hi(D_8014F150)
-/* 1674C0 80246C60 2463F150 */  addiu     $v1, $v1, %lo(D_8014F150)
+/* 1674BC 80246C5C 3C038015 */  lui       $v1, %hi(gWindowStyles)
+/* 1674C0 80246C60 2463F150 */  addiu     $v1, $v1, %lo(gWindowStyles)
 /* 1674C4 80246C64 3C028025 */  lui       $v0, %hi(D_8024BDE0)
 /* 1674C8 80246C68 2442BDE0 */  addiu     $v0, $v0, %lo(D_8024BDE0)
 /* 1674CC 80246C6C AC6200E4 */  sw        $v0, 0xe4($v1)
@@ -97,8 +97,8 @@ glabel filemenu_main_update
 /* 1674D4 80246C74 03E00008 */  jr        $ra
 /* 1674D8 80246C78 AC6200F4 */   sw       $v0, 0xf4($v1)
 .L80246C7C:
-/* 1674DC 80246C7C 3C038015 */  lui       $v1, %hi(D_8014F150)
-/* 1674E0 80246C80 2463F150 */  addiu     $v1, $v1, %lo(D_8014F150)
+/* 1674DC 80246C7C 3C038015 */  lui       $v1, %hi(gWindowStyles)
+/* 1674E0 80246C80 2463F150 */  addiu     $v1, $v1, %lo(gWindowStyles)
 /* 1674E4 80246C84 3C028025 */  lui       $v0, %hi(D_8024BDE0)
 /* 1674E8 80246C88 2442BDE0 */  addiu     $v0, $v0, %lo(D_8024BDE0)
 /* 1674EC 80246C8C AC6200E8 */  sw        $v0, 0xe8($v1)
@@ -106,8 +106,8 @@ glabel filemenu_main_update
 /* 1674F4 80246C94 03E00008 */  jr        $ra
 /* 1674F8 80246C98 AC6200F8 */   sw       $v0, 0xf8($v1)
 .L80246C9C:
-/* 1674FC 80246C9C 3C038015 */  lui       $v1, %hi(D_8014F150)
-/* 167500 80246CA0 2463F150 */  addiu     $v1, $v1, %lo(D_8014F150)
+/* 1674FC 80246C9C 3C038015 */  lui       $v1, %hi(gWindowStyles)
+/* 167500 80246CA0 2463F150 */  addiu     $v1, $v1, %lo(gWindowStyles)
 /* 167504 80246CA4 3C028025 */  lui       $v0, %hi(D_8024BDE0)
 /* 167508 80246CA8 2442BDE0 */  addiu     $v0, $v0, %lo(D_8024BDE0)
 /* 16750C 80246CAC AC6200EC */  sw        $v0, 0xec($v1)
