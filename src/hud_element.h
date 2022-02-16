@@ -62,19 +62,14 @@ enum {
     HUD_ELEMENT_SIZE_32x24,
 };
 
-
-typedef union {
-    struct {
-        u32 f0: 4;
-        u32 f4: 4;
-    } as_bitfields;
-    u32 as_word;
-} HudFlags;
-
 typedef struct HudScriptPair {
     /* 0x00 */ HudScript* enabled;
     /* 0x04 */ HudScript* disabled;
 } HudScriptPair; // size = 0x08
+
+typedef struct UnkMatrixStruct {
+    Vtx vtx[4];
+} UnkMatrixStruct; // size = 0x40
 
 typedef struct HudTransform {
     /* 0x00 */ s32 unk_00;
@@ -82,11 +77,11 @@ typedef struct HudTransform {
     /* 0x10 */ Vec3f rotation;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Vec2s pivot;
-    /* 0x30 */ char unk_30[0xC4];
+    /* 0x30 */ UnkMatrixStruct unk_30[3];
 } HudTransform; // size = 0xF0
 
 typedef struct HudElement {
-    /* 0x00 */ HudFlags flags;
+    /* 0x00 */ u32 flags;
     /* 0x04 */ const HudScript* readPos;
     /* 0x08 */ const HudScript* anim;
     /* 0x0C */ s32* ptrPropertyList;
@@ -112,7 +107,7 @@ typedef struct HudElement {
     /* 0x4A */ u8 opacity;
     /* 0x4B */ Color_RGB8 tint;
     /* 0x4E */ Vec2bu customImageSize;
-    /* 0x40 */ Vec2bu customDrawSize;
+    /* 0x50 */ Vec2bu customDrawSize;
 } HudElement; // size = 0x54
 
 typedef HudElement* HudElementList[320];

@@ -505,7 +505,7 @@ void update_all_status_icons(PopupMessage* popup) {
             if (icon->boostJump.removing == 1) {
                 s32 index = icon->prevIndexBoostJump;
 
-                if (get_hud_element(index)->flags.as_word & 4) {
+                if (get_hud_element(index)->flags & 4) {
                     free_hud_element(index);
                     icon->boostJump.removing = 0;
                 }
@@ -516,7 +516,7 @@ void update_all_status_icons(PopupMessage* popup) {
             if (icon->boostHammer.removing == 1) {
                 s32 index = icon->prevIndexBoostHammer;
 
-                if (get_hud_element(index)->flags.as_word & 4) {
+                if (get_hud_element(index)->flags & 4) {
                     free_hud_element(index);
                     icon->boostHammer.removing = 0;
                 }

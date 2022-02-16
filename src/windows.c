@@ -357,7 +357,7 @@ void render_window_root(void) {
     gDPPipelineMode(gMasterGfxPos++, G_PM_NPRIMITIVE);
     gDPSetCombineMode(gMasterGfxPos++, G_CC_SHADE, G_CC_SHADE);
     gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
-    gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 16, 0x2CF0); // WHAT?? does it make several operations at once?
+    gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 16, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_NONE);
     gSPClipRatio(gMasterGfxPos++, FRUSTRATIO_2);
     gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
     gDPPipeSync(gMasterGfxPos++);
