@@ -179,7 +179,7 @@ typedef struct SoundPlayer {
     /* 0x94 */ u8 unk_94;
     /* 0x95 */ char unk_05;
     /* 0x96 */ s16 currentSoundID;
-    /* 0x98 */ char unk_98[0x1];
+    /* 0x98 */ u8 unk_98;
     /* 0x99 */ u8 unk_99;
     /* 0x9A */ s8 sfxParamsFlags;
     /* 0x9B */ u8 sfxPan;
@@ -205,7 +205,7 @@ typedef struct SoundSefHeader {
 
 typedef struct SoundManager {
     /* 0x000 */ struct UnkAl19E0* soundData;
-    /* 0x004 */ char unk_04[0x4];
+    /* 0x004 */ UnkAl48* unk_04;
     /* 0x008 */ s32* sefData;
     /* 0x00C */ s32* normalSounds[8];
     /* 0x02C */ s32* soundsWithBit2000;
