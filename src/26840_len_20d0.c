@@ -210,11 +210,11 @@ s16 func_8004C444(SoundManager* arg0) {
 
     arg0->unk_60 = temp + playCounter;
 
-    for (i = phi_a3, phi_a3 += 8; i < (u8)(phi_a3); i++){
+    for (i = phi_a3, phi_a3 += 8; i < (u8)phi_a3; i++){
         temp_a1 = &arg0->unk_16C[i - arg0->sfxPlayerSelector];
         if (temp_a1->sefDataReadPos != 0) {
             arg0->unk4 = temp_a2 = &arg0->soundData->unk_1320[i];
-            if ((arg0->unk4->unk_45 <= arg0->unk_BC)) {
+            if (arg0->unk4->unk_45 <= arg0->unk_BC) {
                 arg0->unk_BF = i;
                 switch (temp_a1->sfxParamsFlags & 3) {
                     case 0:
@@ -226,7 +226,6 @@ s16 func_8004C444(SoundManager* arg0) {
                     case 2: // Yes, this is needed.
                         break;
                 }
-                continue;
             } else {
                 temp_a1->sefDataReadPos = NULL;
                 temp_a1->currentSoundID = 0;
