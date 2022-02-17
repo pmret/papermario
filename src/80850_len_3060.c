@@ -513,7 +513,7 @@ void show_coin_counter(void) {
     s32 index;
 
     if ((D_8010CD10 != 0) || (D_8010CD12 != 0)) {
-        set_window_update(0x14, 2);
+        set_window_update(0x14, WINDOW_UPDATE_HIDE);
         if (uiStatus->iconIndex12 > -1) {
             free_hud_element(uiStatus->iconIndex10);
             free_hud_element(uiStatus->iconIndex11);

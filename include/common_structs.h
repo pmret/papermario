@@ -2140,14 +2140,19 @@ typedef struct WindowStyleCustom {
     /* 0x1C */ char unk_1C[0x4];
     /* 0x20 */ Gfx opaqueCombineMode; // used when alpha == 255
     /* 0x28 */ Gfx transparentCombineMode; // used when alpha < 255
-    /* 0x30 */ s8 color1[4];
-    /* 0x34 */ s8 color2[4];
+    /* 0x30 */ Color_RGBA8 color1;
+    /* 0x34 */ Color_RGBA8 color2;
 } WindowStyleCustom; // size = 0x38;
 
 #ifndef M2CTX
 typedef union {
+    int defaultStyleID;
+    WindowStyleCustom* customStyle;
+} WindowStyle TRANSPARENT_UNION;
+
+typedef union {
     int i;
-    void (*func)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
+    void (*func)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                                  f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 } WindowUpdateFunc __attribute__((transparent_union));
 #else
@@ -2161,27 +2166,27 @@ typedef struct MenuWindowBP {
     /* 0x02 */ Vec2s pos;
     /* 0x06 */ s16 width;
     /* 0x08 */ s16 height;
-    /* 0x0A */ char unk_0A[2];
+    /* 0x0A */ u8 priority;
     /* 0x0C */ void (*fpDrawContents)(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
     /* 0x10 */ MenuPanel* tab;
     /* 0x14 */ s8 parentID;
     /* 0x18 */ WindowUpdateFunc fpUpdate;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ WindowStyleCustom* style;
+    /* 0x1C */ u8 extraFlags;
+    /* 0x20 */ WindowStyle style;
 } MenuWindowBP; // size = 0x24;
 
 typedef struct {
     /* 0x00 */ u8 flags;
-    /* 0x01 */ s8 panelID; // ?
-    /* 0x02 */ u8 unk_02; // related to heirarchy somehow - sibling? group?
-    /* 0x03 */ s8 parent; // ?
+    /* 0x01 */ u8 priority; // lower priority rendered first
+    /* 0x02 */ u8 originalPriority;
+    /* 0x03 */ s8 parent;
     /* 0x04 */ WindowUpdateFunc fpUpdate;
     /* 0x08 */ WindowUpdateFunc fpPending;
     /* 0x0C */ Vec2s pos;
     /* 0x10 */ s16 width;
     /* 0x12 */ s16 height;
     /* 0x14 */ UNK_FUN_PTR(fpDrawContents);
-    /* 0x18 */ s32 drawContentsArg0;
+    /* 0x18 */ void* drawContentsArg0;
     /* 0x1C */ u8 updateCounter;
     /* 0x1D */ char unk_1D[3];
 } Window; // size = 0x20
