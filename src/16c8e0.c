@@ -188,7 +188,7 @@ void initialize_battle(void) {
     create_generic_entity_world(NULL, func_8023ED5C);
     func_8024EDC0();
     func_80268E88();
-    set_windows_visible(1);
+    set_windows_visible(WINDOW_GROUP_1);
     D_8029EFBC = create_hud_element(HudScript_HPBar);
     set_hud_element_flags(D_8029EFBC, 0x80);
 
