@@ -206,7 +206,7 @@ typedef struct SoundSefHeader {
 
 typedef struct SoundManager {
     /* 0x000 */ struct UnkAl19E0* soundData;
-    /* 0x004 */ UnkAl48* unk_04;
+    /* 0x004 */ struct UnkAl48* unk_04;
     /* 0x008 */ s32* sefData;
     /* 0x00C */ s32* normalSounds[8];
     /* 0x02C */ s32* soundsWithBit2000;
