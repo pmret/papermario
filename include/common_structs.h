@@ -1115,11 +1115,11 @@ typedef struct ItemData {
 typedef struct ItemEntity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 boundVar; /* see make_item_entity */
-    /* 0x06 */ char unk_06[2];
+    /* 0x06 */ s16 unk_06;
     /* 0x08 */ Vec3f position;
     /* 0x14 */ struct ItemEntityPhysicsData* physicsData;
     /* 0x18 */ s16 itemID; /* into item table, also worldIconID */
-    /* 0x1A */ u8 state;
+    /* 0x1A */ s8 state;
     /* 0x1B */ s8 type;
     /* 0x1C */ u8 pickupDelay; /* num frames before item can be picked up */
     /* 0x1D */ char unk_1D;
@@ -1451,12 +1451,13 @@ typedef struct PushBlockGrid {
 typedef struct ItemEntityPhysicsData {
     /* 0x00 */ f32 verticalVelocity;
     /* 0x04 */ f32 gravity; /* 2 = normal, 1 = low gravity, higher values never 'settle' */
-    /* 0x08 */ char unk_08[4];
+    /* 0x08 */ f32 unk_08;
     /* 0x0C */ f32 constVelocity;
     /* 0x10 */ f32 velx;
     /* 0x14 */ f32 velz;
     /* 0x18 */ f32 moveAngle;
-    /* 0x1C */ char unk_1C[8];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
 } ItemEntityPhysicsData; // size = 0x24
 
 typedef struct RenderTask {
@@ -2152,7 +2153,7 @@ typedef union {
     int i;
     void (*func)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                                  f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-} WindowUpdateFunc __attribute__((transparent_union));
+} WindowUpdateFunc TRANSPARENT_UNION;
 
 typedef struct MenuWindowBP {
     /* 0x00 */ s8 windowID;
