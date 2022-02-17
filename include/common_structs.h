@@ -2144,7 +2144,6 @@ typedef struct WindowStyleCustom {
     /* 0x34 */ Color_RGBA8 color2;
 } WindowStyleCustom; // size = 0x38;
 
-#ifndef M2CTX
 typedef union {
     int defaultStyleID;
     WindowStyleCustom* customStyle;
@@ -2154,11 +2153,7 @@ typedef union {
     int i;
     void (*func)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                                  f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-} WindowUpdateFunc __attribute__((transparent_union));
-#else
-typedef void (*WindowUpdateFunc)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, s32* scaleX, s32* scaleY,
-                                 f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-#endif
+} WindowUpdateFunc TRANSPARENT_UNION;
 
 typedef struct MenuWindowBP {
     /* 0x00 */ s8 windowID;
