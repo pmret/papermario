@@ -5,6 +5,7 @@
 
 struct BGMPlayer;
 struct UnkAl19E0;
+struct UnkAl48;
 
 typedef void (*UnkFuncAl)(void);
 
