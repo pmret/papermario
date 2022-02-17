@@ -197,7 +197,45 @@ INCLUDE_ASM(void, "26840_len_20d0", snd_set_modifiers, SoundManager* manager, So
 void snd_set_player_modifiers(SoundManager* manager, SoundSFXEntry* sfxEntry);
 INCLUDE_ASM(void, "26840_len_20d0", snd_set_player_modifiers, SoundManager* manager, SoundSFXEntry* sfxEntry);
 
-INCLUDE_ASM(s16, "26840_len_20d0", func_8004C444, SoundManager* manager);
+void func_8004C578(SoundManager*, SoundPlayer*, UnkAl48*, u32);
+void func_8004C884(SoundManager*, SoundPlayer*, UnkAl48*, u32);
+
+s16 func_8004C444(SoundManager* arg0) {
+    u32 phi_a3 = arg0->sfxPlayerSelector;
+    u16 temp = arg0->unk_60;
+    u16 playCounter = arg0->playCounter;
+    SoundPlayer* temp_a1;
+    UnkAl48* temp_a2;
+    u8 i;
+
+    arg0->unk_60 = temp + playCounter;
+
+    for (i = phi_a3, phi_a3 += 8; i < (u8)(phi_a3); i++){
+        temp_a1 = &arg0->unk_16C[i - arg0->sfxPlayerSelector];
+        if (temp_a1->sefDataReadPos != 0) {
+            arg0->unk4 = temp_a2 = &arg0->soundData->unk_1320[i];
+            if ((arg0->unk4->unk_45 <= arg0->unk_BC)) {
+                arg0->unk_BF = i;
+                switch (temp_a1->sfxParamsFlags & 3) {
+                    case 0:
+                        func_8004C578(arg0, temp_a1, temp_a2, i);
+                        break;
+                    case 1:
+                        func_8004C884(arg0, temp_a1, temp_a2, i);
+                        break;
+                    case 2: // Yes, this is needed.
+                        break;
+                }
+                continue;
+            } else {
+                temp_a1->sefDataReadPos = NULL;
+                temp_a1->currentSoundID = 0;
+                temp_a1->unk_98 = 0;
+            }
+        }
+    }
+    return 0;
+}
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004C578);
 
