@@ -67,9 +67,9 @@ typedef struct HudScriptPair {
     /* 0x04 */ HudScript* disabled;
 } HudScriptPair; // size = 0x08
 
-typedef struct UnkMatrixStruct {
+typedef struct VtxRect {
     Vtx vtx[4];
-} UnkMatrixStruct; // size = 0x40
+} VtxRect; // size = 0x40
 
 typedef struct HudTransform {
     /* 0x00 */ s32 unk_00;
@@ -77,7 +77,7 @@ typedef struct HudTransform {
     /* 0x10 */ Vec3f rotation;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Vec2s pivot;
-    /* 0x30 */ UnkMatrixStruct unk_30[3];
+    /* 0x30 */ VtxRect unk_30[3];
 } HudTransform; // size = 0xF0
 
 typedef struct HudElement {
@@ -85,8 +85,8 @@ typedef struct HudElement {
     /* 0x04 */ const HudScript* readPos;
     /* 0x08 */ const HudScript* anim;
     /* 0x0C */ s32* ptrPropertyList;
-    /* 0x10 */ s32* imageAddr;
-    /* 0x14 */ s32* paletteAddr;
+    /* 0x10 */ u8* imageAddr;
+    /* 0x14 */ u8* paletteAddr;
     /* 0x18 */ s32 memOffset;
     /* 0x1C */ HudTransform* hudTransform;
     /* 0x20 */ f32 unk_20;

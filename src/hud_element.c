@@ -483,9 +483,417 @@ void update_hud_elements(void) {
     }
 }
 
-INCLUDE_ASM(s32, "hud_element", hud_element_update, HudElement* hudElement);
+//INCLUDE_ASM(s32, "hud_element", hud_element_update, HudElement* hudElement);
+s32 hud_element_update(HudElement* hudElement) {
+    UnkHudElementStruct* a1;
+    UnkHudElementStruct* a3;
+    s32 i;
+    s32 drawSizePreset;
+    s32 tileSizePreset;
+    u8 sizePreset;
+    f32 xScaled, yScaled;
+    s32 imageWidth, imageHeight, drawWidth, drawHeight;
+    u32 min, max;
+    u32 flags;
+    f32 scale1, scale2;
+    s32 raster, palette;
+    s32 s1, s2;
+    s32 arg1, arg2;
+    f32 uniformScale;
+    s32* newReadPos;
 
-//INCLUDE_ASM(void, "hud_element", render_hud_elements_backUI, void);
+    HudTransform* hudTransform = hudElement->hudTransform;
+    s32* nextPos = hudElement->readPos;
+
+    switch (*nextPos++) {
+        case HUD_ELEMENT_OP_End:
+            hudElement->updateTimer = 60;
+            flags = hudElement->flags;
+            do { hudElement->flags = flags | 0x4; } while (0);
+            return FALSE;
+
+        case HUD_ELEMENT_OP_Delete:
+            hudElement->updateTimer = 60;
+            do {
+                hudElement->flags |= 0x40000;
+            } while (0);
+            return FALSE;
+
+        case HUD_ELEMENT_OP_UseIA8:
+            hudElement->readPos = nextPos;
+            hudElement->flags |= 0x80000;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_SetVisible:
+            hudElement->readPos = nextPos;
+            hudElement->flags |= 0x4000;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_SetHidden:
+            hudElement->readPos = nextPos;
+            hudElement->flags &= ~0x4000;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_SetFlags:
+            s1 = *nextPos++;
+            hudElement->readPos = nextPos;
+            hudElement->flags |= s1;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_ClearFlags:
+            s1 = *nextPos++;
+            hudElement->readPos = nextPos;
+            hudElement->flags &= ~s1;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_SetRGBA:
+            hudElement->updateTimer = *nextPos++;
+            hudElement->imageAddr = *nextPos++;
+            hudElement->readPos = nextPos;
+
+            if (hudElement->flags & 0x400000) {
+                hudElement->imageAddr += hudElement->memOffset;
+            }
+
+            if (hudElement->flags & 0x100) {
+                if ((hudElement->flags & 0x100000) == 0) {
+                    tileSizePreset = hudElement->tileSizePreset;
+                    drawSizePreset = hudElement->drawSizePreset;
+                    imageWidth = gHudElementSizes[tileSizePreset].width;
+                    imageHeight = gHudElementSizes[tileSizePreset].height;
+                    drawWidth = gHudElementSizes[drawSizePreset].width;
+                    drawHeight = gHudElementSizes[drawSizePreset].height;
+                } else {
+                    imageWidth = hudElement->customImageSize.x;
+                    imageHeight = hudElement->customImageSize.y;
+                    drawWidth = hudElement->customDrawSize.x;
+                    drawHeight = hudElement->customDrawSize.y;
+                }
+
+                if ((hudElement->flags & 0x200) == 0) {
+                    hudElement->flags |= 0x200;
+                    hudElement->unkImgScale[0] = imageWidth;
+                    hudElement->unkImgScale[1] = imageHeight;
+                    hudElement->unk_20 = ((f32)drawWidth - (f32)imageWidth) / (f32)hudElement->updateTimer;
+                    hudElement->unk_24 = ((f32)drawHeight - (f32)imageHeight) / (f32)hudElement->updateTimer;
+                } else {
+                    hudElement->flags &= ~0x200;
+                    hudElement->unkImgScale[0] = drawWidth;
+                    hudElement->unkImgScale[1] = drawHeight;
+                    hudElement->unk_20 = ((f32)imageWidth - (f32)drawWidth) / (f32)hudElement->updateTimer;
+                    hudElement->unk_24 = ((f32)imageHeight - (f32)drawHeight) / (f32)hudElement->updateTimer;
+                }
+            }
+            return FALSE;
+
+        case HUD_ELEMENT_OP_SetCI:
+            hudElement->updateTimer = *nextPos++;
+            hudElement->imageAddr = *nextPos++;
+            hudElement->paletteAddr = *nextPos++;
+            hudElement->readPos = nextPos;
+
+            if (hudElement->flags & 0x400000) {
+                hudElement->imageAddr += hudElement->memOffset;
+                hudElement->paletteAddr += hudElement->memOffset;
+            }
+
+            if (hudElement->flags & 0x100) {
+                if ((hudElement->flags & 0x100000) == 0) {
+                    tileSizePreset = hudElement->tileSizePreset;
+                    drawSizePreset = hudElement->drawSizePreset;
+                    imageWidth = gHudElementSizes[tileSizePreset].width;
+                    imageHeight = gHudElementSizes[tileSizePreset].height;
+                    drawWidth = gHudElementSizes[drawSizePreset].width;
+                    drawHeight = gHudElementSizes[drawSizePreset].height;
+                } else {
+                    imageWidth = hudElement->customImageSize.x;
+                    imageHeight = hudElement->customImageSize.y;
+                    drawWidth = hudElement->customDrawSize.x;
+                    drawHeight = hudElement->customDrawSize.y;
+                }
+
+                if ((hudElement->flags & 0x200) == 0) {
+                    hudElement->flags |= 0x200;
+                    hudElement->unkImgScale[0] = imageWidth;
+                    hudElement->unkImgScale[1] = imageHeight;
+                    hudElement->unk_20 = ((f32)drawWidth - (f32)imageWidth) / (f32)hudElement->updateTimer;
+                    hudElement->unk_24 = ((f32)drawHeight - (f32)imageHeight) / (f32)hudElement->updateTimer;
+                } else {
+                    hudElement->flags &= ~0x200;
+                    hudElement->unkImgScale[0] = drawWidth;
+                    hudElement->unkImgScale[1] = drawHeight;
+                    hudElement->unk_20 = ((f32)imageWidth - (f32)drawWidth) / (f32)hudElement->updateTimer;
+                    hudElement->unk_24 = ((f32)imageHeight - (f32)drawHeight) / (f32)hudElement->updateTimer;
+                }
+            }
+            return FALSE;
+
+        case HUD_ELEMENT_OP_SetImage:
+            hudElement->updateTimer = *nextPos++;
+
+            if ((hudElement->flags & 0x400) == 0) {
+                a1 = D_80157970;
+                a3 = D_80157F70;
+            } else {
+                a1 = D_80158580;
+                a3 = D_80158B80;
+            }
+
+            i = 0;
+            while (TRUE) {
+                if (a1[i].unk_00 == *nextPos) {
+                    break;
+                }
+                ASSERT(++i < 192);
+            }
+
+            nextPos++;
+            hudElement->imageAddr = a1[i].unk_04;
+
+            i = 0;
+            while (TRUE) {
+                if (a3[i].unk_00 == *nextPos) {
+                    break;
+                }
+                ASSERT(++i < 192);
+            }
+            hudElement->paletteAddr = a3[i].unk_04;
+            nextPos += 3;
+            hudElement->readPos = nextPos;
+
+
+            if (hudElement->flags & 0x100) {
+                if ((hudElement->flags & 0x100000) == 0) {
+                    tileSizePreset = hudElement->tileSizePreset;
+                    drawSizePreset = hudElement->drawSizePreset;
+                    imageWidth = gHudElementSizes[tileSizePreset].width;
+                    imageHeight = gHudElementSizes[tileSizePreset].height;
+                    drawWidth = gHudElementSizes[drawSizePreset].width;
+                    drawHeight = gHudElementSizes[drawSizePreset].height;
+                } else {
+                    imageWidth = hudElement->customImageSize.x;
+                    imageHeight = hudElement->customImageSize.y;
+                    drawWidth = hudElement->customDrawSize.x;
+                    drawHeight = hudElement->customDrawSize.y;
+                }
+
+                if ((hudElement->flags & 0x200) == 0) {
+                    hudElement->flags |= 0x200;
+                    hudElement->unkImgScale[0] = imageWidth;
+                    hudElement->unkImgScale[1] = imageHeight;
+                    hudElement->unk_20 = ((f32)drawWidth - (f32)imageWidth) / (f32)hudElement->updateTimer;
+                    hudElement->unk_24 = ((f32)drawHeight - (f32)imageHeight) / (f32)hudElement->updateTimer;
+                } else {
+                    hudElement->flags &= ~0x200;
+                    hudElement->unkImgScale[0] = drawWidth;
+                    hudElement->unkImgScale[1] = drawHeight;
+                    hudElement->unk_20 = ((f32)imageWidth - (f32)drawWidth) / (f32)hudElement->updateTimer;
+                    hudElement->unk_24 = ((f32)imageHeight - (f32)drawHeight) / (f32)hudElement->updateTimer;
+                }
+            }
+            return FALSE;
+
+        case HUD_ELEMENT_OP_Restart:
+            hudElement->readPos = hudElement->ptrPropertyList;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_Loop:
+            hudElement->ptrPropertyList = nextPos;
+            hudElement->readPos = nextPos;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_RandomRestart:
+            s1 = *nextPos++;
+            s2 = *nextPos++;
+            if (rand_int(s1) < s2) {
+                hudElement->readPos = hudElement->ptrPropertyList;
+            } else {
+                hudElement->readPos = nextPos;
+            }
+            return TRUE;
+
+        case HUD_ELEMENT_OP_SetTileSize:
+            sizePreset = *nextPos++;
+            hudElement->widthScale = X10(1);
+            hudElement->heightScale = X10(1);
+            hudElement->readPos = nextPos;
+            hudElement->drawSizePreset = sizePreset;
+            hudElement->tileSizePreset = sizePreset;
+            hudElement->flags &= ~0x100;
+            hudElement->flags &= ~0x800;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_SetSizesAutoScale:
+            tileSizePreset = *nextPos++;
+            arg2 = *nextPos++;
+
+            hudElement->readPos = nextPos;
+            hudElement->tileSizePreset = tileSizePreset;
+            hudElement->drawSizePreset = arg2;
+
+            imageWidth = gHudElementSizes[tileSizePreset].width;
+            imageHeight = gHudElementSizes[tileSizePreset].height;
+            drawWidth = gHudElementSizes[arg2].width;
+            drawHeight = gHudElementSizes[arg2].height;
+
+            xScaled = (f32) drawWidth / (f32) imageWidth;
+            yScaled = (f32) drawHeight / (f32) imageHeight;
+
+            xScaled = 1.0f / xScaled;
+            yScaled = 1.0f / yScaled;
+
+            hudElement->widthScale = X10(xScaled);
+            hudElement->heightScale = X10(yScaled);
+
+            hudElement->flags &= ~0x100;
+            hudElement->flags |= 0x800;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_SetSizesFixedScale:
+            tileSizePreset = *nextPos++;
+            drawSizePreset = *nextPos++;
+
+            hudElement->widthScale = X10(1);
+            hudElement->heightScale = X10(1);
+            hudElement->readPos = nextPos;
+            hudElement->tileSizePreset = tileSizePreset;
+            hudElement->drawSizePreset = drawSizePreset;
+            hudElement->flags |= 0x100;
+            hudElement->flags &= ~0x800;
+            hudElement->flags &= ~0x200;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_AddTexelOffsetX:
+            s1 = *nextPos++;
+            hudElement->readPos = nextPos;
+            hudElement->screenPosOffset.x += s1;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_AddTexelOffsetY:
+            s2 = *nextPos++;
+            if ((hudElement->flags & 0x2000) == 0) {
+                hudElement->screenPosOffset.y += s2;
+            } else {
+                hudElement->screenPosOffset.y -= s2;
+            }
+            hudElement->readPos = nextPos;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_AddTexelOffset:
+            s1 = *nextPos++;
+            s2 = *nextPos++;
+            hudElement->screenPosOffset.x = s1;
+            if ((hudElement->flags & 0x2000) == 0) {
+                hudElement->screenPosOffset.y = s2;
+            } else {
+                hudElement->screenPosOffset.y = -s2;
+            }
+            hudElement->readPos = nextPos;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_SetScale:
+            uniformScale = (f32)*nextPos++;
+            uniformScale /= 65536;
+            hudElement->uniformScale = uniformScale;
+            if ((hudElement->flags & 0x100000) == 0) {
+                imageWidth = gHudElementSizes[hudElement->tileSizePreset].width;
+                imageHeight = gHudElementSizes[hudElement->tileSizePreset].height;
+                drawWidth = gHudElementSizes[hudElement->drawSizePreset].width;
+                drawHeight = gHudElementSizes[hudElement->drawSizePreset].height;
+            } else {
+                imageWidth = hudElement->customImageSize.x;
+                imageHeight = hudElement->customImageSize.y;
+                drawWidth = hudElement->customDrawSize.x;
+                drawHeight = hudElement->customDrawSize.y;
+            }
+
+            hudElement->sizeX = drawWidth * uniformScale;
+            hudElement->sizeY = drawHeight * uniformScale;
+
+            xScaled = (f32) drawWidth / (f32) imageWidth * uniformScale;
+            yScaled = (f32) drawHeight / (f32) imageHeight * uniformScale;
+
+            xScaled = 1.0f / xScaled;
+            yScaled = 1.0f / yScaled;
+
+            hudElement->widthScale = X10(xScaled);
+            hudElement->heightScale = X10(yScaled);
+
+            hudElement->readPos = nextPos;
+            hudElement->flags &= ~0x100;
+            hudElement->flags |= 0x800 | 0x10;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_SetAlpha:
+            s1 = *nextPos++;
+            hudElement->opacity = s1;
+            hudElement->flags |= 0x20;
+            if (hudElement->opacity == 255) {
+                hudElement->flags &= ~0x20;
+            }
+            hudElement->readPos = nextPos;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_RandomDelay:
+            s1 = *nextPos++;
+            s2 = *nextPos++;
+            hudElement->updateTimer = rand_int(s2 - s1) + s1;
+            hudElement->readPos = nextPos;
+            do {} while(0);
+            return FALSE;
+
+        case HUD_ELEMENT_OP_SetCustomSize:
+            hudElement->customDrawSize.x = hudElement->customImageSize.x = *nextPos++;
+            hudElement->customDrawSize.y = hudElement->customImageSize.y = *nextPos++;
+            hudElement->readPos = nextPos;
+            hudElement->widthScale = X10(1);
+            hudElement->heightScale = X10(1);
+            hudElement->drawSizePreset = 0;
+            hudElement->tileSizePreset = 0;
+            hudElement->flags &= ~0x100;
+            hudElement->flags &= ~0x800;
+            hudElement->flags |= 0x100000;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_op_15:
+            s1 = *nextPos++;
+            hudElement->readPos = nextPos;
+            hudElement->flags &= ~0x0F000000;
+            hudElement->flags |= s1 << 24;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_RandomBranch:
+            s1 = *nextPos++;
+            newReadPos = nextPos[rand_int(s1 - 1)];
+            hudElement->readPos = newReadPos;
+            load_hud_element(hudElement, newReadPos);
+            return TRUE;
+
+        case HUD_ELEMENT_OP_PlaySound:
+            arg2 = *nextPos++;
+            sfx_play_sound(arg2);
+            hudElement->readPos = nextPos;
+            return TRUE;
+
+        case HUD_ELEMENT_OP_op_1B:
+            arg1 = *nextPos++;
+            arg2 = *nextPos++;
+            hudElement->readPos = nextPos;
+            if (hudElement->flags & 0x10000) {
+                hudTransform->pivot.x = arg1;
+                do {
+                    hudTransform->pivot.y = arg2;
+                } while (0);
+            }
+            return TRUE;
+
+        case HUD_ELEMENT_OP_op_16:
+            return FALSE;
+    }
+
+    return FALSE;
+}
+
 void render_hud_elements_backUI(void) {
     s32 i, count, j;
     s32 sortedElements[320];
@@ -742,7 +1150,7 @@ void render_hud_element(HudElement* hudElement) {
     s32 height, width;
     HudTransform* transform;
     HudTransform *new_var;
-    UnkMatrixStruct* ums;
+    VtxRect* ums;
     s32 mode;
     u32 flags;
     u8* raster;
