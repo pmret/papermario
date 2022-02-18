@@ -95,12 +95,12 @@ void state_step_logos(void) {
                 gGameStatusPtr->introCounter--;
                 break;
             case 2:
-                if (intro_logos_fade_out(0xA) != 0) {
+                if (intro_logos_fade_out(0xA)) {
                     gGameStatusPtr->introState++;
                 }
                 break;
             case 3:
-                if (intro_logos_fade_in(0xA) != 0) {
+                if (intro_logos_fade_in(0xA)) {
                     gGameStatusPtr->introState++;
                     gGameStatusPtr->introCounter = 40;
                 }
@@ -113,13 +113,13 @@ void state_step_logos(void) {
                 gGameStatusPtr->introCounter--;
                 break;
             case 5:
-                if (intro_logos_fade_out(0xA) != 0) {
+                if (intro_logos_fade_out(0xA)) {
                     gGameStatusPtr->introState++;
                 }
                 break;
             case 0:
             case 6:
-                if (intro_logos_fade_in(0xA) != 0) {
+                if (intro_logos_fade_in(0xA)) {
                     gGameStatusPtr->introState++;
                     gGameStatusPtr->introCounter = 30;
                 }

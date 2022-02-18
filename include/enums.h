@@ -508,6 +508,7 @@ enum SoundIDs {
     SOUND_MENU_NEXT                 = 0x000000C9,
     SOUND_MENU_BACK                 = 0x000000CA,
     SOUND_D4                        = 0x000000D4,
+    SOUND_D5                        = 0x000000D5,
     SOUND_HIT_PLAYER_NORMAL         = 0x000000E1,
     SOUND_HIT_PLAYER_FIRE           = 0x000000E2,
     SOUND_HIT_PLAYER_ICE            = 0x000000E3,
@@ -2425,6 +2426,7 @@ enum DebuffTypes {
 
 enum GlobalOverrides {
     GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD                       = 0x00000002,
+    GLOBAL_OVERRIDES_8                                          = 0x00000008,
     GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL                  = 0x00000020,
     GLOBAL_OVERRIDES_40                                         = 0x00000040,
     GLOBAL_OVERRIDES_DISABLE_BATTLES                            = 0x00000100,
