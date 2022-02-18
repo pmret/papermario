@@ -159,7 +159,6 @@ void state_init_title_screen(void) {
 INCLUDE_ASM(void, "state_title_screen", state_init_title_screen, void);
 #endif
 
-//INCLUDE_ASM(void, "state_title_screen", state_step_title_screen, void);
 void state_step_title_screen(void) {
     s16* temp;
     u32 pressedButtons = gGameStatusPtr->pressedButtons;
