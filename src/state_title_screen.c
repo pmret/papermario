@@ -311,7 +311,7 @@ void state_drawUI_title_screen(void) {
             if (gGameStatusPtr->contBitPattern & 1) {
                 title_screen_draw_press_start();
             }
-        default:
+        case 3:
             break;
         case 1:
         case 4:
