@@ -2410,6 +2410,7 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_NO_TARGET_AVAILABLE             = 0x00001000,
     BS_FLAGS2_1000000                         = 0x01000000,
     BS_FLAGS2_2000000                         = 0x02000000,
+    BS_FLAGS2_8000000                         = 0x08000000,
 };
 
 enum BattleStates2 {
@@ -3323,6 +3324,12 @@ enum WindowGroupId {
     WINDOW_GROUP_1 = 1,
     WINDOW_GROUP_PAUSE_MENU = 2,
     WINDOW_GROUP_FILE_MENU = 3,
+};
+
+enum RushFlags {
+    RUSHES_NONE       = 0,
+    RUSHES_MEGA_RUSH  = 1,
+    RUSHES_POWER_RUSH = 2,
 };
 
 #endif
