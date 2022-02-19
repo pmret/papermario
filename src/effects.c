@@ -204,7 +204,7 @@ void func_80059D48(void) {
 }
 
 void update_effects(void) {
-    if (!(gOverrideFlags & 0xC00)) {
+    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400))) {
         EffectGraphics* effectGraphics;
         s32 i;
 

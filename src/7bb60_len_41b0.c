@@ -423,7 +423,7 @@ void player_get_camera_facing_angle(void) {
         angle = 180.0f;
     }
 
-    angle = angle + gCameras[0].currentYaw + 90.0f;
+    angle = angle + gCameras[CAM_DEFAULT].currentYaw + 90.0f;
 
     clamp_angle(angle);
 }

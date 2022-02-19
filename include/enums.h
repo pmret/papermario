@@ -508,6 +508,7 @@ enum SoundIDs {
     SOUND_MENU_NEXT                 = 0x000000C9,
     SOUND_MENU_BACK                 = 0x000000CA,
     SOUND_D4                        = 0x000000D4,
+    SOUND_D5                        = 0x000000D5,
     SOUND_HIT_PLAYER_NORMAL         = 0x000000E1,
     SOUND_HIT_PLAYER_FIRE           = 0x000000E2,
     SOUND_HIT_PLAYER_ICE            = 0x000000E3,
@@ -2333,6 +2334,31 @@ enum GameModeIDs {
     GAME_MODE_DEMO                        = 0x00000011,
 };
 
+enum IntroStates {
+    INTRO_STATE_0                        = 0x00000000,
+    INTRO_STATE_1                        = 0x00000001,
+    INTRO_STATE_2                        = 0x00000002,
+    INTRO_STATE_3                        = 0x00000003,
+    INTRO_STATE_4                        = 0x00000004,
+    INTRO_STATE_5                        = 0x00000005,
+    INTRO_STATE_6                        = 0x00000006,
+    INTRO_STATE_7                        = 0x00000007,
+    INTRO_STATE_8                        = 0x00000008,
+    INTRO_STATE_9                        = 0x00000009,
+    INTRO_STATE_A                        = 0x0000000A,
+    INTRO_STATE_B                        = 0x0000000B,
+    INTRO_STATE_C                        = 0x0000000C,
+    INTRO_STATE_D                        = 0x0000000D,
+    INTRO_STATE_E                        = 0x0000000E,
+    INTRO_STATE_F                        = 0x0000000F,
+    INTRO_STATE_10                       = 0x00000010,
+    INTRO_STATE_11                       = 0x00000011,
+    INTRO_STATE_12                       = 0x00000012,
+    INTRO_STATE_13                       = 0x00000013,
+    INTRO_STATE_14                       = 0x00000014,
+    INTRO_STATE_15                       = 0x00000015,
+};
+
 enum BattleStatusFlags1 {
     BS_FLAGS1_0                = 0x00000000,
     BS_FLAGS1_1                = 0x00000001, // show actors
@@ -2425,10 +2451,21 @@ enum DebuffTypes {
 
 enum GlobalOverrides {
     GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD                       = 0x00000002,
+    GLOBAL_OVERRIDES_8                                          = 0x00000008,
+    GLOBAL_OVERRIDES_10                                         = 0x00000010,
     GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL                  = 0x00000020,
     GLOBAL_OVERRIDES_40                                         = 0x00000040,
+    GLOBAL_OVERRIDES_80                                         = 0x00000080,
     GLOBAL_OVERRIDES_DISABLE_BATTLES                            = 0x00000100,
+    GLOBAL_OVERRIDES_200                                        = 0x00000200,
+    GLOBAL_OVERRIDES_400                                        = 0x00000400,
+    GLOBAL_OVERRIDES_800                                        = 0x00000800,
+    GLOBAL_OVERRIDES_1000                                       = 0x00001000,
+    GLOBAL_OVERRIDES_2000                                       = 0x00002000,
+    GLOBAL_OVERRIDES_4000                                       = 0x00004000,
+    GLOBAL_OVERRIDES_8000                                       = 0x00008000,
     GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS               = 0x00010000,
+    GLOBAL_OVERRIDES_20000                                      = 0x00020000,
     GLOBAL_OVERRIDES_DISABLE_MENUS                              = 0x00040000,
     GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS              = 0x00100000,
     GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS                         = 0x00200000,

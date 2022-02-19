@@ -70,7 +70,7 @@ ApiStatus func_80282594(Evt* script, s32 isInitialCall) {
     f32 temp_f0;
 
     temp_f0 = evt_get_float_variable(script, *script->ptrReadPos);
-    camera = &gCameras[0];
+    camera = &gCameras[CAM_DEFAULT];
 
     if (temp_f0 >= 0.0f) {
         D_80286540 = camera->moveSpeed;

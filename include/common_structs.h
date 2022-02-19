@@ -1401,7 +1401,9 @@ typedef struct GameStatus {
     /* 0x0AC */ s8 introState;
     /* 0x0AD */ s8 introCounter;
     /* 0x0AE */ s8 bSkipIntro;
-    /* 0x0AF */ char unk_AF[0x7];
+    /* 0x0AF */ s8 unk_AF;
+    /* 0x0B0 */ s8 unk_B0;
+    /* 0x0B1 */ char unk_B1[0x5];
     /* 0x0B6 */ s16 bootAlpha;
     /* 0x0B8 */ s16 bootBlue;
     /* 0x0BA */ s16 bootGreen;

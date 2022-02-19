@@ -156,9 +156,9 @@ ApiStatus SetMessageImages(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802D0C94(Evt* script, s32 initialCall) {
     if (evt_get_variable(script, *script->ptrReadPos) == 0) {
-        gOverrideFlags |= 0x10;
+        gOverrideFlags |= GLOBAL_OVERRIDES_10;
     } else {
-        gOverrideFlags &= ~0x10;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
     }
     return ApiStatus_DONE2;
 }

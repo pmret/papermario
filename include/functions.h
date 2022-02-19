@@ -43,7 +43,9 @@ s32 is_picking_up_item(void);
 f32 integrate_gravity(void);
 void gravity_use_fall_parms(void);
 f32 get_clamped_angle_diff(f32, f32);
+s32 intro_logos_fade_in(s16 subtractAlpha);
 s32 intro_logos_fade_out(s16 addAlpha);
+void intro_logos_update_fade(void);
 
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
@@ -74,6 +76,8 @@ void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 s32 draw_ci_image_with_clipping(s32* raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s32* palette, s16 posX,
                                 s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity);
 
+void render_frame(s32 flag);
+void clear_windows(void);
 void update_window_hierarchy(s32 windowIndex, u8 arg1);
 void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
                         s32* maxLinesPerPage, s32* arg6, s32 charset);
@@ -817,6 +821,7 @@ void update_encounters_neutral(void);
 void update_encounters_pre_battle(void);
 void update_encounters_conversation(void);
 void update_encounters_post_battle(void);
+void load_map_bg(char* optAssetName);
 void reset_background_settings(void);
 void func_80138188(void);
 void func_80266970(Actor*);

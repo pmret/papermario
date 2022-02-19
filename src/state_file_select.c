@@ -40,31 +40,31 @@ void state_init_file_select(void) {
     set_hud_element_nonworld_cache(0, 0);
     clear_hud_element_cache();
     load_model_textures(0, 0, 0);
-    gCameras[0].updateMode = 6;
-    gCameras[0].unk_06 = 1;
-    gCameras[0].nearClip = 16;
-    gCameras[0].farClip = 4096;
-    gCameras[0].flags |= CAM_FLAG_ENABLED;
-    gCurrentCameraID = 0;
-    gCameras[1].flags |= CAM_FLAG_ENABLED;
-    gCameras[2].flags |= CAM_FLAG_ENABLED;
-    gCameras[3].flags |= CAM_FLAG_ENABLED;
-    gCameras[0].vfov = 25.0f;
+    gCameras[CAM_DEFAULT].updateMode = 6;
+    gCameras[CAM_DEFAULT].unk_06 = 1;
+    gCameras[CAM_DEFAULT].nearClip = 16;
+    gCameras[CAM_DEFAULT].farClip = 4096;
+    gCameras[CAM_DEFAULT].flags |= CAM_FLAG_ENABLED;
+    gCurrentCameraID = CAM_DEFAULT;
+    gCameras[CAM_BATTLE].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_TATTLE].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_CAM3].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_DEFAULT].vfov = 25.0f;
     set_cam_viewport(0, 12, 28, 296, 184);
-    gCameras[0].unk_1E = 40;
-    gCameras[0].lookAt_eye.x = 500.0f;
-    gCameras[0].lookAt_eye.y = 1000.0f;
-    gCameras[0].lookAt_eye.z = 1500.0f;
-    gCameras[0].unk_5C = 150.0f;
-    gCameras[0].bgColor[0] = 0;
-    gCameras[0].bgColor[1] = 0;
-    gCameras[0].bgColor[2] = 0;
-    gCameras[0].unk_54 = 25.0f;
-    gCameras[0].unk_58 = 25.0f;
-    gCameras[0].unk_1C = 0;
-    gCameras[0].unk_20 = 100;
-    gCameras[0].unk_22 = 0;
-    gOverrideFlags |= 0x10000;
+    gCameras[CAM_DEFAULT].unk_1E = 40;
+    gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
+    gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
+    gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
+    gCameras[CAM_DEFAULT].unk_5C = 150.0f;
+    gCameras[CAM_DEFAULT].bgColor[0] = 0;
+    gCameras[CAM_DEFAULT].bgColor[1] = 0;
+    gCameras[CAM_DEFAULT].bgColor[2] = 0;
+    gCameras[CAM_DEFAULT].unk_54 = 25.0f;
+    gCameras[CAM_DEFAULT].unk_58 = 25.0f;
+    gCameras[CAM_DEFAULT].unk_1C = 0;
+    gCameras[CAM_DEFAULT].unk_20 = 100;
+    gCameras[CAM_DEFAULT].unk_22 = 0;
+    gOverrideFlags |= GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
 }
 
 void state_step_language_select(void) {
@@ -93,16 +93,16 @@ void state_step_language_select(void) {
         case 1:
             D_800A0930 = 5;
             D_800A0931 = 2;
-            gOverrideFlags |= 8;
+            gOverrideFlags |= GLOBAL_OVERRIDES_8;
             break;
         case 2:
             D_800A0930--;
             if (D_800A0930 == 0) {
                 nuGfxSetCfb(D_80077980, 2);
                 if (nuGfxCfb[2] == nuGfxCfb_ptr) {
-                    gOverrideFlags &= ~0x8;
+                    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                 } else {
-                    gOverrideFlags |= 8;
+                    gOverrideFlags |= GLOBAL_OVERRIDES_8;
                     set_windows_visible(WINDOW_GROUP_FILE_MENU);
                     D_800A0930 = 1;
                     D_800A0931 = 3;
@@ -137,7 +137,7 @@ void state_step_language_select(void) {
                     clear_trigger_data();
                     nuPiReadRomOverlay(&D_8007798C);
                     filemenu_init(1);
-                    gOverrideFlags &= ~0x8;
+                    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                     set_screen_overlay_params_front(255, 255.0f);
                 }
                 if (D_800A0930 >= 0) {
@@ -201,7 +201,7 @@ void state_init_exit_language_select(void) {
         set_screen_overlay_params_front(0, D_800A0932[0]);
     }
     D_800A0930 = 1;
-    gOverrideFlags &= ~0x40;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
 }
 
 void state_init_exit_file_select(void) {
@@ -213,10 +213,10 @@ void state_init_exit_file_select(void) {
         set_map_transition_effect(7);
     } else {
         set_map_transition_effect(8);
-        gOverrideFlags &= ~0x0010000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
         bgm_set_song(0, -1, 0, 1000, 8);
     }
-    gOverrideFlags &= ~0x40;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
 }
 
 void state_step_exit_language_select(void) {
@@ -251,7 +251,7 @@ void state_step_exit_language_select(void) {
             break;
         case 2:
             if (D_800A0930 == 3) {
-                gOverrideFlags |= 8;
+                gOverrideFlags |= GLOBAL_OVERRIDES_8;
             }
 
             if (D_800A0930 >= 0) {
@@ -266,7 +266,7 @@ void state_step_exit_language_select(void) {
                     D_800A0930 = -1;
                     nuGfxSetCfb(D_80077980, ARRAY_COUNT(D_80077980));
                     filemenu_cleanup();
-                    gOverrideFlags &= ~0x8;
+                    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                     mapConfig = get_current_map_header();
                     map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
                     gGameStatusPtr->isBattle = FALSE;
@@ -347,7 +347,7 @@ void state_step_exit_language_select(void) {
             update_encounters();
             update_effects();
             enable_player_input();
-            set_game_mode(4);
+            set_game_mode(GAME_MODE_CHANGE_MAP);
             set_screen_overlay_params_front(255, -1.0f);
             break;
         }
@@ -386,8 +386,8 @@ void state_step_exit_file_select(void) {
         case 3:
             set_time_freeze_mode(0);
             if (temp_s0 == 0) {
-                set_game_mode(2);
-                gOverrideFlags &= ~0x10000;
+                set_game_mode(GAME_MODE_TITLE_SCREEN);
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
             } else {
                 D_800A0930 = 10;
                 D_800A0931 = 4;
@@ -410,7 +410,7 @@ void state_step_exit_file_select(void) {
             }
             break;
         case 6:
-            set_game_mode(7);
+            set_game_mode(GAME_MODE_WORLD);
             break;
     }
 }

@@ -18,7 +18,7 @@ ApiStatus N(UnkEffect0FFunc2)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(UnkEffect0FFunc)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 yaw = gCameras[0].currentYaw / 180.0f * PI;
+    f32 yaw = gCameras[CAM_DEFAULT].currentYaw / 180.0f * PI;
     f32 yawPlus = yaw + 1.570796;
     f32 yawMinus = yaw - 1.570796;
     f32 temp_f30;
@@ -49,7 +49,7 @@ ApiStatus N(UnkEffect0FFunc)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(UnkEffect0FFunc3)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 yaw = gCameras[0].currentYaw / 180.0f * PI;
+    f32 yaw = gCameras[CAM_DEFAULT].currentYaw / 180.0f * PI;
     f32 yawPlus = yaw + 1.570796;
     f32 yawMinus = yaw - 1.570796;
     f32 temp_f30;
@@ -83,7 +83,7 @@ ApiStatus N(UnkEffect0FFunc3)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(UnkEffect0FFunc4)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 yaw = gCameras[0].currentYaw / 180.0f * PI;
+    f32 yaw = gCameras[CAM_DEFAULT].currentYaw / 180.0f * PI;
     f32 yawPlus = yaw + 1.570796;
     f32 yawMinus = yaw - 1.570796;
     f32 temp_f30;
