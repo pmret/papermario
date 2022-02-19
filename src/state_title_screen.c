@@ -100,9 +100,9 @@ void state_init_title_screen(void) {
     general_heap_create();
     clear_printers();
     func_801497FC(0);
-    gGameStatusPtr->introState = 0;
+    gGameStatusPtr->introState = INTRO_STATE_0;
     gGameStatusPtr->introCounter = 0;
-    gGameStatusPtr->isBattle = 0;
+    gGameStatusPtr->isBattle = FALSE;
     gGameStatusPtr->creditsViewportMode = -1;
     intro_logos_update_fade();
     titleData = load_asset_by_name("title_data", &titleDataSize);
@@ -115,30 +115,30 @@ void state_init_title_screen(void) {
     D_800A0980 = (s32*)(D_800A0974->unk_08 + (s32) D_800A0974);
 
     create_cameras_a();
-    gCameras[0].updateMode = 6;
-    gCameras[0].unk_06 = 1;
-    gCameras[0].nearClip = 0x10;
-    gCameras[0].farClip = 0x1000;
-    gCurrentCameraID = 0;
-    gCameras[0].vfov = 25.0f;
-    gCameras[0].flags |= CAMERA_FLAGS_2;
-    gCameras[1].flags |= CAMERA_FLAGS_2;
-    gCameras[2].flags |= CAMERA_FLAGS_2;
-    gCameras[3].flags |= CAMERA_FLAGS_2;
+    gCameras[CAM_DEFAULT].updateMode = 6;
+    gCameras[CAM_DEFAULT].unk_06 = 1;
+    gCameras[CAM_DEFAULT].nearClip = 0x10;
+    gCameras[CAM_DEFAULT].farClip = 0x1000;
+    gCurrentCameraID = CAM_DEFAULT;
+    gCameras[CAM_DEFAULT].vfov = 25.0f;
+    gCameras[CAM_DEFAULT].flags |= CAMERA_FLAGS_2;
+    gCameras[CAM_BATTLE].flags |= CAMERA_FLAGS_2;
+    gCameras[CAM_TATTLE].flags |= CAMERA_FLAGS_2;
+    gCameras[CAM_CAM3].flags |= CAMERA_FLAGS_2;
     set_cam_viewport(0, 12, 28, 296, 184);
-    gCameras[0].unk_1E = 40;
-    gCameras[0].bgColor[0] = 0;
-    gCameras[0].bgColor[1] = 0;
-    gCameras[0].bgColor[2] = 0;
-    gCameras[0].unk_54 = 25.0f;
-    gCameras[0].unk_58 = 25.0f;
-    gCameras[0].unk_1C = 0;
-    gCameras[0].unk_20 = 100;
-    gCameras[0].unk_22 = 0;
-    gCameras[0].lookAt_eye.x = 500.0f;
-    gCameras[0].lookAt_eye.y = 1000.0f;
-    gCameras[0].lookAt_eye.z = 1500.0f;
-    gCameras[0].unk_5C = 150.0f;
+    gCameras[CAM_DEFAULT].unk_1E = 40;
+    gCameras[CAM_DEFAULT].bgColor[0] = 0;
+    gCameras[CAM_DEFAULT].bgColor[1] = 0;
+    gCameras[CAM_DEFAULT].bgColor[2] = 0;
+    gCameras[CAM_DEFAULT].unk_54 = 25.0f;
+    gCameras[CAM_DEFAULT].unk_58 = 25.0f;
+    gCameras[CAM_DEFAULT].unk_1C = 0;
+    gCameras[CAM_DEFAULT].unk_20 = 100;
+    gCameras[CAM_DEFAULT].unk_22 = 0;
+    gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
+    gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
+    gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
+    gCameras[CAM_DEFAULT].unk_5C = 150.0f;
     clear_script_list();
     clear_generic_entity_list();
     clear_render_tasks();
@@ -172,14 +172,14 @@ void state_step_title_screen(void) {
     }
 
     switch (gGameStatusPtr->introState) {
-        case 0:
+        case INTRO_STATE_0:
             D_800A0970 = 3;
             gOverrideFlags |= GLOBAL_OVERRIDES_8;
             gGameStatusPtr->unk_B0 = 20;
             gGameStatusPtr->unk_AF = gGameStatusPtr->unk_B0;
             gGameStatusPtr->introState++;
             break;
-        case 1:
+        case INTRO_STATE_1:
             if (D_800A0970 != 0) {
                 D_800A0970--;
             } else {
@@ -189,18 +189,18 @@ void state_step_title_screen(void) {
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                 if (intro_logos_fade_in(6) != 0) {
                     if (gGameStatusPtr->unk_AF == 0) {
-                        gGameStatusPtr->introState = 2;
+                        gGameStatusPtr->introState = INTRO_STATE_2;
                     }
                 }
                 intro_logos_update_fade();
             }
             break;
-        case 2:
+        case INTRO_STATE_2:
             if (D_80077A34[0] != NULL && D_800A0988 == 120) {
                 bgm_set_song(0, -1, 0, 3900, 8);
             }
             if (D_800A0988 == 0) {
-                gGameStatusPtr->introState = 4;
+                gGameStatusPtr->introState = INTRO_STATE_4;
                 if (D_80077A34[0] == NULL) {
                     *D_800779C0 = 10;
                 } else {
@@ -210,15 +210,15 @@ void state_step_title_screen(void) {
                 return;
             }
             if (pressedButtons & (BUTTON_A | BUTTON_START)) {
-                gGameStatusPtr->introState = 4;
+                gGameStatusPtr->introState = INTRO_STATE_4;
                 *D_800779C0 = 5;
                 sfx_play_sound(SOUND_D5);
                 bgm_set_song(0, SONG_FILE_SELECT, 0, 500, 8);
                 return;
             }
             break;
-        case 4:
-            gGameStatusPtr->introState = 5;
+        case INTRO_STATE_4:
+            gGameStatusPtr->introState = INTRO_STATE_5;
             intro_logos_set_fade_color(0xD0);
             if (*D_800779C0 == 9 || *D_800779C0 == 10) {
                 gGameStatusPtr->unk_B0 = 20;
@@ -227,7 +227,7 @@ void state_step_title_screen(void) {
             }
             gGameStatusPtr->unk_AF = gGameStatusPtr->unk_B0;
             break;
-        case 5:
+        case INTRO_STATE_5:
             if (*D_800779C0 == 9 || *D_800779C0 == 10) {
                 if (gGameStatusPtr->unk_AF != 0) {
                     gGameStatusPtr->unk_AF--;
@@ -236,7 +236,7 @@ void state_step_title_screen(void) {
                     if (gGameStatusPtr->unk_AF == 0) {
                         gGameStatusPtr->unk_AF = 3;
                         gOverrideFlags |= GLOBAL_OVERRIDES_8;
-                        gGameStatusPtr->introState = 6;
+                        gGameStatusPtr->introState = INTRO_STATE_6;
                     }
                 }
                 intro_logos_update_fade();
@@ -244,17 +244,17 @@ void state_step_title_screen(void) {
                 if (gGameStatusPtr->unk_AF == 0) {
                     gGameStatusPtr->unk_AF = 3;
                     gOverrideFlags |= GLOBAL_OVERRIDES_8;
-                    gGameStatusPtr->introState = 6;
+                    gGameStatusPtr->introState = INTRO_STATE_6;
                 } else {
                     gGameStatusPtr->unk_AF--;
                 }
             } else {
                 gGameStatusPtr->unk_AF = 3;
                 gOverrideFlags |= GLOBAL_OVERRIDES_8;
-                gGameStatusPtr->introState = 6;
+                gGameStatusPtr->introState = INTRO_STATE_6;
             }
             break;
-        case 6:
+        case INTRO_STATE_6:
             if (gGameStatusPtr->unk_AF != 0) {
                 gGameStatusPtr->unk_AF--;
                 break;
@@ -300,22 +300,22 @@ void state_step_title_screen(void) {
 
 void state_drawUI_title_screen(void) {
     switch (gGameStatusPtr->introState) {
-        case 0:
+        case INTRO_STATE_0:
             D_80077A28 = 0;
             D_80077A2C = 0;
             D_80077A30 = 0;
             draw_title_screen_NOP();
             break;
-        case 2:
+        case INTRO_STATE_2:
             draw_title_screen_NOP();
             if (gGameStatusPtr->contBitPattern & 1) {
                 title_screen_draw_press_start();
             }
-        case 3:
+        case INTRO_STATE_3:
             break;
-        case 1:
-        case 4:
-        case 5:
+        case INTRO_STATE_1:
+        case INTRO_STATE_4:
+        case INTRO_STATE_5:
             draw_title_screen_NOP();
             break;
     }
@@ -326,22 +326,22 @@ void appendGfx_title_screen(void) {
     s32 temp;
 
     switch (gGameStatusPtr->introState) {
-        case 0:
-        case 3:
+        case INTRO_STATE_0:
+        case INTRO_STATE_3:
             break;
-        case 1:
+        case INTRO_STATE_1:
             phi_f12 = gGameStatusPtr->unk_AF;
             phi_f12 /= gGameStatusPtr->unk_B0;
             phi_f12 = SQ(phi_f12);
             title_screen_draw_images(phi_f12, phi_f12);
             break;
-        case 2:
+        case INTRO_STATE_2:
             title_screen_draw_images(0.0f, 0.0f);
             break;
-        case 4:
+        case INTRO_STATE_4:
             title_screen_draw_images(0.0f, 0.0f);
             break;
-        case 5:
+        case INTRO_STATE_5:
             temp = gGameStatusPtr->unk_AF - 1;
             phi_f12 = gGameStatusPtr->unk_B0 - temp;
             phi_f12 /= gGameStatusPtr->unk_B0;

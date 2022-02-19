@@ -558,7 +558,7 @@ EvtScript world_lakilester_use_ability = {
 ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
-    Camera* cam = &gCameras[0];
+    Camera* cam = &gCameras[CAM_DEFAULT];
     Npc* lakilester = script->owner2.npc;
     f32 sp20, sp24, sp28, sp2C;
     f32 yaw;

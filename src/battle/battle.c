@@ -506,7 +506,7 @@ void load_demo_battle(u32 index) {
     gCurrentEncounter.unk_10 = 0;
     set_battle_stage(-1);
     gGameStatusPtr->demoFlags |= 1;
-    gOverrideFlags &= ~0x8;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
     load_battle(battleID);
 }
 

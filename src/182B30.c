@@ -541,7 +541,7 @@ void func_8025599C(void* data) {
 }
 
 void update_actor_shadow(s32 arg0, Actor* actor) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
     ActorPart* actorPart;
     Shadow* shadow;
     s32 numParts;

@@ -78,26 +78,26 @@ void state_step_demo(void) {
         case 3:
             intro_logos_set_fade_alpha(255);
             intro_logos_set_fade_color(224);
-            gGameStatusPtr->introState = 3;
-            gOverrideFlags |= 8;
+            gGameStatusPtr->introState = INTRO_STATE_3;
+            gOverrideFlags |= GLOBAL_OVERRIDES_8;
             intro_logos_update_fade();
             gGameStatusPtr->demoState = 5;
             break;
         case 4:
-            if (gGameStatusPtr->introState != 0) {
+            if (gGameStatusPtr->introState != INTRO_STATE_0) {
                 gGameStatusPtr->introState--;
             }
 
-            if (gGameStatusPtr->introState == 0) {
+            if (gGameStatusPtr->introState == INTRO_STATE_0) {
                 gGameStatusPtr->nextDemoScene = 0;
                 gGameStatusPtr->demoState = 0;
                 gGameStatusPtr->peachFlags = 0;
                 func_80056204();
                 gGameStatusPtr->isBattle = FALSE;
                 gGameStatusPtr->unk_76 = 0;
-                gGameStatusPtr->disableScripts = 0;
-                gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
-                gOverrideFlags &= ~0x8;
+                gGameStatusPtr->disableScripts = FALSE;
+                gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                 general_heap_create();
                 clear_render_tasks();
                 clear_generic_entity_list();

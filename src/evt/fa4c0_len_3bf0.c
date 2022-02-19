@@ -244,7 +244,7 @@ ApiStatus CloseChoicePopup(Evt* script, s32 isInitialCall) {
     enable_player_input();
     enable_player_static_collisions();
     partner_enable_input();
-    gOverrideFlags &= ~0x40;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
     return ApiStatus_DONE2;
 }
 

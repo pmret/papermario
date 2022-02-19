@@ -33,11 +33,11 @@ void func_802B6000_E27F40(void) {
         playerStatus->currentSpeed = 0.0f;
         D_802B68B0 = 0.0f;
 
-        gCameras[0].moveFlags |= 3;
+        gCameras[CAM_DEFAULT].moveFlags |= 3;
         D_802B68B4 = 90.0f;
         subtract_hp(1);
         open_status_menu_long();
-        gOverrideFlags |= 0x40;
+        gOverrideFlags |= GLOBAL_OVERRIDES_40;
         sfx_play_sound_at_player(0xE8, 0);
     }
 
@@ -164,7 +164,7 @@ void func_802B6000_E27F40(void) {
                 exec_ShakeCamX(0, 2, 1, 0.8f);
                 start_rumble(0x100, 0x32);
                 phys_adjust_cam_on_landing();
-                gCameras[0].moveFlags &= ~2;
+                gCameras[CAM_DEFAULT].moveFlags &= ~2;
                 sfx_play_sound_at_player(0x3FB, 0);
                 suggest_player_anim_setUnkFlag(0x8001A);
                 playerStatus->flags &= ~0x800;
@@ -188,7 +188,7 @@ void func_802B6000_E27F40(void) {
             if (--playerStatus->framesOnGround << 16 <= 0) {
                 set_action_state(ACTION_STATE_LAND);
                 playerStatus->flags &= ~0x800000;
-                gOverrideFlags &= ~0x40;
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
             }
             break;
     }

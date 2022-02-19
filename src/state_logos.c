@@ -16,7 +16,7 @@ void state_init_logos(void) {
     s32* temp_800A0910;
 
     general_heap_create();
-    gGameStatusPtr->introState = 0;
+    gGameStatusPtr->introState = INTRO_STATE_0;
     gGameStatusPtr->introCounter = 0;
     gGameStatusPtr->bSkipIntro = FALSE;
     intro_logos_set_fade_alpha(255);
@@ -38,30 +38,30 @@ void state_init_logos(void) {
 
     nuContRmbForceStop();
     create_cameras_a();
-    gCameras[0].updateMode = 6;
-    gCameras[0].unk_06 = 1;
-    gCameras[0].nearClip = 0x10;
-    gCameras[0].farClip = 0x1000;
-    gCurrentCameraID = 0;
-    gCameras[0].vfov = 25.0f;
-    gCameras[0].flags |= CAM_FLAG_ENABLED;
-    gCameras[1].flags |= CAM_FLAG_ENABLED;
-    gCameras[2].flags |= CAM_FLAG_ENABLED;
-    gCameras[3].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_DEFAULT].updateMode = 6;
+    gCameras[CAM_DEFAULT].unk_06 = 1;
+    gCameras[CAM_DEFAULT].nearClip = 0x10;
+    gCameras[CAM_DEFAULT].farClip = 0x1000;
+    gCurrentCameraID = CAM_DEFAULT;
+    gCameras[CAM_DEFAULT].vfov = 25.0f;
+    gCameras[CAM_DEFAULT].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_BATTLE].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_TATTLE].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_CAM3].flags |= CAM_FLAG_ENABLED;
     set_cam_viewport(0, 12, 28, 296, 184);
-    gCameras[0].unk_1E = 0x28;
-    gCameras[0].bgColor[0] = 0;
-    gCameras[0].bgColor[1] = 0;
-    gCameras[0].bgColor[2] = 0;
-    gCameras[0].unk_54 = 25.0f;
-    gCameras[0].unk_58 = 25.0f;
-    gCameras[0].unk_1C = 0;
-    gCameras[0].unk_20 = 100;
-    gCameras[0].unk_22 = 0;
-    gCameras[0].lookAt_eye.x = 500.0f;
-    gCameras[0].lookAt_eye.y = 1000.0f;
-    gCameras[0].lookAt_eye.z = 1500.0f;
-    gCameras[0].unk_5C = 150.0f;
+    gCameras[CAM_DEFAULT].unk_1E = 0x28;
+    gCameras[CAM_DEFAULT].bgColor[0] = 0;
+    gCameras[CAM_DEFAULT].bgColor[1] = 0;
+    gCameras[CAM_DEFAULT].bgColor[2] = 0;
+    gCameras[CAM_DEFAULT].unk_54 = 25.0f;
+    gCameras[CAM_DEFAULT].unk_58 = 25.0f;
+    gCameras[CAM_DEFAULT].unk_1C = 0;
+    gCameras[CAM_DEFAULT].unk_20 = 100;
+    gCameras[CAM_DEFAULT].unk_22 = 0;
+    gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
+    gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
+    gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
+    gCameras[CAM_DEFAULT].unk_5C = 150.0f;
     clear_script_list();
     clear_generic_entity_list();
     clear_render_tasks();
@@ -73,7 +73,7 @@ void state_init_logos(void) {
     reset_background_settings();
     clear_entity_data(1);
     clear_effect_data();
-    gOverrideFlags |= 0x2;
+    gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD;
     intro_logos_update_fade();
     gGameStatusPtr->backgroundFlags = FALSE;
 }
@@ -87,44 +87,44 @@ void state_step_logos(void) {
         }
     } else {
         switch (gGameStatusPtr->introState) {
-            case 1:
+            case INTRO_STATE_1:
                 if (gGameStatusPtr->introCounter == 0) {
                     intro_logos_set_fade_color(208);
                     gGameStatusPtr->introState++;
                 }
                 gGameStatusPtr->introCounter--;
                 break;
-            case 2:
+            case INTRO_STATE_2:
                 if (intro_logos_fade_out(0xA)) {
                     gGameStatusPtr->introState++;
                 }
                 break;
-            case 3:
+            case INTRO_STATE_3:
                 if (intro_logos_fade_in(0xA)) {
                     gGameStatusPtr->introState++;
                     gGameStatusPtr->introCounter = 40;
                 }
                 break;
-            case 4:
+            case INTRO_STATE_4:
                 if (gGameStatusPtr->introCounter == 0) {
                     gGameStatusPtr->introState++;
                     intro_logos_set_fade_color(208);
                 }
                 gGameStatusPtr->introCounter--;
                 break;
-            case 5:
+            case INTRO_STATE_5:
                 if (intro_logos_fade_out(0xA)) {
                     gGameStatusPtr->introState++;
                 }
                 break;
-            case 0:
-            case 6:
+            case INTRO_STATE_0:
+            case INTRO_STATE_6:
                 if (intro_logos_fade_in(0xA)) {
                     gGameStatusPtr->introState++;
                     gGameStatusPtr->introCounter = 30;
                 }
                 break;
-            case 7:
+            case INTRO_STATE_7:
                 if (gGameStatusPtr->introCounter == 0) {
                     gGameStatusPtr->introState++;
                     intro_logos_set_fade_color(208);
@@ -132,7 +132,7 @@ void state_step_logos(void) {
                 }
                 gGameStatusPtr->introCounter--;
                 break;
-            case 8:
+            case INTRO_STATE_8:
                 if (gGameStatusPtr->introCounter == 0) {
                     gGameStatusPtr->introState++;
                     set_curtain_scale_goal(1.0f);
@@ -142,20 +142,20 @@ void state_step_logos(void) {
                     gGameStatusPtr->introCounter--;
                 }
                 break;
-            case 9:
+            case INTRO_STATE_9:
                 if (intro_logos_fade_out(0xA) != 0) {
                     gGameStatusPtr->introCounter = 15;
                     gGameStatusPtr->introState++;
                 }
                 break;
-            case 10:
+            case INTRO_STATE_A:
                 if (gGameStatusPtr->introCounter == 0) {
                     gGameStatusPtr->introState++;
                 } else {
                     gGameStatusPtr->introCounter--;
                 }
                 break;
-            case 11:
+            case INTRO_STATE_B:
                 heap_free(D_800A0910);
                 D_800A0910 = 0;
 

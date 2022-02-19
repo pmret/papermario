@@ -152,7 +152,7 @@ INCLUDE_ASM(s32, "1776B0", func_8024A990);
 INCLUDE_ASM(s32, "1776B0", func_8024AFE4);
 
 ApiStatus func_8024B5FC(Evt* script, s32 isInitialCall) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
     f32 x, y, z;
     f32 invAngle;
     f32 angle;
@@ -200,7 +200,7 @@ ApiStatus func_8024B5FC(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8024B9A0(Evt* script, s32 isInitialCall) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
     f32 x, y, z;
     f32 invAngle;
     f32 angle;
@@ -263,7 +263,7 @@ ApiStatus func_8024B9A0(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8024BDA4(Evt* script, s32 isInitialCall) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
     f32 x, y, z;
     f32 invAngle;
     f32 angle;
@@ -316,7 +316,7 @@ ApiStatus func_8024BDA4(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8024C180(Evt* script, s32 isInitialCall) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
     f32 x, y, z;
     f32 invAngle;
     f32 angle;
@@ -372,7 +372,7 @@ ApiStatus func_8024C180(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8024C570(Evt* script, s32 isInitialCall) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
     f32 x, y, z;
     f32 invAngle;
     f32 angle;
@@ -425,7 +425,7 @@ ApiStatus func_8024C570(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8024C944(Evt* script, s32 isInitialCall) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 screenX, screenY, screenZ;
@@ -491,7 +491,7 @@ ApiStatus func_8024C944(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8024CB68(Evt* script, s32 isInitialCall) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 actorClass = D_8029F27C & ACTOR_CLASS_MASK;
@@ -587,7 +587,7 @@ ApiStatus func_8024CB68(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8024CE9C(Evt* script, s32 isInitialCall) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
 
     D_8029F284 = 8;
     camera->unk_24 = 0;
@@ -1364,7 +1364,7 @@ void func_8024E45C(s32 actorID, s32 arg1) {
 }
 
 void func_8024E484(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6, s32 zoomPercent) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
 
     if (D_80280CE0 == 0) {
         camera->unk_1C = arg0;
@@ -1398,7 +1398,7 @@ void btl_cam_set_target_pos(f32 x, f32 y, f32 z) {
 }
 
 void func_8024E554(f32 arg0, f32 arg1, f32 arg2) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
 
     if (D_80280CE0 == 0) {
         camera->unk_54 = arg0;
@@ -1493,7 +1493,7 @@ ApiStatus func_8024E6B4(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8024E748(Evt* script, s32 isInitialCall) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
     Bytecode* args = script->ptrReadPos;
     s32 mode;
     s32 val;
@@ -1536,7 +1536,7 @@ ApiStatus func_8024E748(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8024E820(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
 
     if (D_80280CE0 != 0) {
         return ApiStatus_DONE2;
@@ -1569,7 +1569,7 @@ ApiStatus SetBattleCamTarget(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_8024E9B0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
 
     if (D_80280CE0 != 0) {
         return ApiStatus_DONE2;

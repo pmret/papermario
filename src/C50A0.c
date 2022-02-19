@@ -386,7 +386,7 @@ void clear_item_entity_flags(s32 index, s32 flags) {
 
 void func_801341B0(s32 index) {
     ItemEntity* itemEntity = D_801565A0[index];
-    gOverrideFlags |= 0x40;
+    gOverrideFlags |= GLOBAL_OVERRIDES_40;
     itemEntity->flags |= ENTITY_FLAGS_100;
 }
 
@@ -448,7 +448,7 @@ void update_item_entity_static(ItemEntity* itemEntity) {
         itemEntity->type = 28;
         itemEntity->state = 0;
         D_801565A8 = 0;
-        gOverrideFlags |= 0x40;
+        gOverrideFlags |= GLOBAL_OVERRIDES_40;
     }
 }
 

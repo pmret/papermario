@@ -1,6 +1,6 @@
 #include "common.h"
 
-s32 gCurrentCameraID = 0;
+s32 gCurrentCameraID = CAM_DEFAULT;
 
 s32 func_800328A4(Camera* camera, f32 arg1, f32 arg2);
 s32 func_80032970(Camera* camera, f32 arg1);

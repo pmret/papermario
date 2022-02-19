@@ -52,7 +52,7 @@ void state_step_battle(void) {
             return;
         }
         D_800A0900--;
-        gOverrideFlags |= 0x8;
+        gOverrideFlags |= GLOBAL_OVERRIDES_8;
         nuContRmbForceStop();
     }
 
@@ -104,7 +104,7 @@ void state_step_battle(void) {
             gPlayerStatusPtr->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40;
             D_800A0908 = get_time_freeze_mode();
             set_time_freeze_mode(TIME_FREEZE_NORMAL);
-            gOverrideFlags &= ~0x8;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
 
             if (D_800A0900 >= 0) {
                 return;
@@ -129,7 +129,7 @@ void state_drawUI_battle(void) {
 }
 
 void state_init_end_battle(void) {
-    gOverrideFlags |= 0x8;
+    gOverrideFlags |= GLOBAL_OVERRIDES_8;
     nuContRmbForceStop();
     D_800A0900 = 5;
 }
@@ -146,7 +146,7 @@ void state_step_end_battle(void) {
 
             D_800A0900 = -1;
             nuGfxSetCfb(D_800778A0, 3);
-            gOverrideFlags &= ~0x8;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
             nuContRmbForceStopEnd();
             sfx_stop_env_sounds();
             mapConfig = get_current_map_header();

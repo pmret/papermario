@@ -26,7 +26,7 @@ void init_enter_world_shared(void) {
     nuContRmbForceStopEnd();
     update_exit_map_screen_overlay(&gMapTransitionAlpha);
 
-    gOverrideFlags |= 0x8;
+    gOverrideFlags |= GLOBAL_OVERRIDES_8;
 
     evt_set_variable(NULL, EVT_SAVE_VAR(1), gGameStatusPtr->unk_A9);
     timeFreezeMode = 0;
@@ -66,7 +66,7 @@ void state_step_enter_world(void) {
             if (D_800A0946 != 0) {
                 D_800A0946--;
             } else if (!does_script_exist(gGameStatusPtr->mainScriptID)) {
-                gOverrideFlags &= ~0x8;
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                 D_800A0944++;
             }
             break;
@@ -88,7 +88,7 @@ void state_step_enter_world(void) {
 }
 
 void state_drawUI_enter_world(void) {
-    if (gGameStatusPtr->introState == 2) {
+    if (gGameStatusPtr->introState == INTRO_STATE_2) {
         draw_status_ui();
     }
 }
@@ -119,7 +119,7 @@ void state_step_change_map(void) {
             }
             break;
         case 1:
-            gOverrideFlags |= 8;
+            gOverrideFlags |= GLOBAL_OVERRIDES_8;
             nuContRmbForceStop();
             D_800A0946 = 4;
             D_800A0944++;
@@ -154,7 +154,7 @@ void state_step_change_map(void) {
             if (D_800A0946 != 0) {
                 D_800A0946--;
             } else if (!does_script_exist(gGameStatusPtr->mainScriptID)) {
-                gOverrideFlags &= ~0x8;
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                 D_800A0944++;
             }
             break;
@@ -191,7 +191,7 @@ void func_80036430(void) {
 void func_8003646C(void) {
     switch (D_800A0944) {
         case 1:
-            gOverrideFlags |= 8;
+            gOverrideFlags |= GLOBAL_OVERRIDES_8;
             nuContRmbForceStop();
             D_800A0946 = 4;
             D_800A0944++;
@@ -211,7 +211,7 @@ void func_8003646C(void) {
             update_encounters();
             update_npcs();
             if (!does_script_exist(gGameStatusPtr->mainScriptID)) {
-                gOverrideFlags &= ~0x8;
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                 D_800A0944++;
                 break;
             }

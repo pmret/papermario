@@ -4,15 +4,15 @@
 #include "sprite.h"
 
 void state_init_startup(void) {
-    gOverrideFlags |= 0x8;
-    gGameStatusPtr->introState = 3;
+    gOverrideFlags |= GLOBAL_OVERRIDES_8;
+    gGameStatusPtr->introState = INTRO_STATE_3;
 }
 
 void state_step_startup(void) {
     GameStatus* gameStatus = gGameStatusPtr;
     s32 i;
 
-    if (gameStatus->introState != 0) {
+    if (gameStatus->introState != INTRO_STATE_0) {
         gameStatus->introState--;
         return;
     }
@@ -79,7 +79,7 @@ void state_step_startup(void) {
         audio_set_mono();
     }
 
-    gOverrideFlags &= ~0x8;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
     set_game_mode(GAME_MODE_LOGOS);
 }
 

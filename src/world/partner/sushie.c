@@ -31,7 +31,7 @@ f32 D_802BFDBC_320B2C = 0.0f;
 void func_802BD100_31DE70(void) {
     Npc* partnerNPC = get_npc_unsafe(NPC_PARTNER);
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Camera* cam = &gCameras[0];
+    Camera* cam = &gCameras[CAM_DEFAULT];
     s32 phi_v1;
 
     playerStatus->position.x = partnerNPC->pos.x;
