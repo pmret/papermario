@@ -163,7 +163,7 @@ void state_step_intro(void) {
                 clear_item_entity_data();
                 clear_saved_variables();
                 initialize_collision();
-                set_game_mode(2);
+                set_game_mode(GAME_MODE_TITLE_SCREEN);
                 return;
             }
 

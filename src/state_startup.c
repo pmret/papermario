@@ -80,7 +80,7 @@ void state_step_startup(void) {
     }
 
     gOverrideFlags &= ~0x8;
-    set_game_mode(1);
+    set_game_mode(GAME_MODE_LOGOS);
 }
 
 void state_drawUI_startup(void) {

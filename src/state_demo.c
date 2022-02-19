@@ -123,7 +123,7 @@ void state_step_demo(void) {
                 clear_item_entity_data();
                 clear_saved_variables();
                 initialize_collision();
-                set_game_mode(2);
+                set_game_mode(GAME_MODE_TITLE_SCREEN);
             }
             return;
         case 0:
@@ -142,7 +142,7 @@ void state_step_demo(void) {
                 set_map_transition_effect(2);
             }
 
-            set_game_mode(3);
+            set_game_mode(GAME_MODE_ENTER_DEMO_WORLD);
             break;
         case 1:
             get_map_IDs_by_name(demoSceneData->mapName, &areaID, &mapID);
@@ -160,7 +160,7 @@ void state_step_demo(void) {
                 set_map_transition_effect(2);
             }
 
-            set_game_mode(3);
+            set_game_mode(GAME_MODE_ENTER_DEMO_WORLD);
             break;
         case 2:
             load_demo_battle(demoSceneData->entryID);

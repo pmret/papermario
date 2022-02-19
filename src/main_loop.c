@@ -109,7 +109,7 @@ void step_game_loop(void) {
                 D_8009A690--;
                 if (D_8009A690 == 0) {
                     sfx_stop_env_sounds();
-                    set_game_mode(0);
+                    set_game_mode(GAME_MODE_STARTUP);
                     gOverrideFlags &= ~0x20;
                 }
                 break;
@@ -303,7 +303,7 @@ void load_engine_data(void) {
     }
 
     gOverrideFlags |= 0x8;
-    set_game_mode(0);
+    set_game_mode(GAME_MODE_STARTUP);
 }
 
 /// Time freeze modes:

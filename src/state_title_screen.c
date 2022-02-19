@@ -3,7 +3,14 @@
 #include "hud_element.h"
 #include "sprite.h"
 
-void title_screen_draw_copyright(f32);
+// Properties of the title screen Paper Mario logo
+#define TITLE_WIDTH  200 // Width of the texture
+#define TITLE_HEIGHT 112 // Height of the texture
+#define TITLE_TILE_HEIGHT 2 // Height of an individually loaded tile in the texture
+#define TITLE_NUM_TILES (TITLE_HEIGHT / TITLE_TILE_HEIGHT) // Number of tiles in the texture
+#define TITLE_TILE_PIXELS (TITLE_WIDTH * TITLE_TILE_HEIGHT) // Number of pixels in a single tile of the texture
+#define TITLE_POS_LEFT ((SCREEN_WIDTH - TITLE_WIDTH) / 2) // Left edge of the texture on screen
+#define TITLE_POS_TOP 15 // Top edge of the texture on screen (with no offset)
 
 s16 D_800779C0[2] = {0, 0};
 s32 D_800779C4 = 0;
@@ -75,17 +82,15 @@ extern s32* D_800A097C;
 extern s32* D_800A0980;
 extern s16 D_800A0988;
 
-void appendGfx_title_screen(void*);
+void appendGfx_title_screen(void);
 void draw_title_screen_NOP(void);
 void title_screen_draw_images(f32, f32);
 void title_screen_draw_logo(f32);
 void title_screen_draw_press_start(void);
+void title_screen_draw_copyright(f32);
 
-// Commented section
-#ifdef NON_MATCHING
 void state_init_title_screen(void) {
     s32 titleDataSize;
-    TitleDataStruct* temp_a0;
     void* titleDataDst;
     void* titleData;
 
@@ -105,10 +110,9 @@ void state_init_title_screen(void) {
     decode_yay0(titleData, titleDataDst);
     general_heap_free(titleData);
 
-    // this is the non-matching part
-    D_800A0978 = D_800A0974->unk_00 + (u8*)D_800A0974;
-    D_800A0980 = D_800A0974->unk_08 + (u8*)D_800A0974;
-    D_800A097C = D_800A0974->unk_04 + (u8*)D_800A0974;
+    D_800A0978 = (s32*)(D_800A0974->unk_00 + (s32) D_800A0974);
+    D_800A097C = (s32*)(D_800A0974->unk_04 + (s32) D_800A0974);
+    D_800A0980 = (s32*)(D_800A0974->unk_08 + (s32) D_800A0974);
 
     create_cameras_a();
     gCameras[0].updateMode = 6;
@@ -153,11 +157,8 @@ void state_init_title_screen(void) {
     load_map_bg("title_bg");
     read_background_size(&gBackgroundImage);
     bgm_set_song(0, SONG_MAIN_THEME, 0, 500, 8);
-    D_800A0988 = 0x1E0;
+    D_800A0988 = 480;
 }
-#else
-INCLUDE_ASM(void, "state_title_screen", state_init_title_screen, void);
-#endif
 
 void state_step_title_screen(void) {
     s16* temp;
@@ -276,16 +277,16 @@ void state_step_title_screen(void) {
             switch (temp[0]) {
                 case 9:
                     gGameStatusPtr->creditsViewportMode = 0;
-                    set_game_mode(0x10);
+                    set_game_mode(GAME_MODE_INTRO);
                     break;
                 case 10:
-                    set_game_mode(0x11);
+                    set_game_mode(GAME_MODE_DEMO);
                     break;
                 case 5:
                     gGameStatusPtr->areaID = 0;
                     gGameStatusPtr->mapID = 0xB;
                     gGameStatusPtr->entryID = 0;
-                    set_game_mode(0xE);
+                    set_game_mode(GAME_MODE_FILE_SELECT);
                     break;
             }
             return;
@@ -320,7 +321,7 @@ void state_drawUI_title_screen(void) {
     }
 }
 
-void appendGfx_title_screen(void* data) {
+void appendGfx_title_screen(void) {
     f32 phi_f12;
     s32 temp;
 
@@ -380,7 +381,34 @@ void title_screen_draw_images(f32 arg0, f32 arg1) {
     title_screen_draw_copyright(arg1);
 }
 
-INCLUDE_ASM(void, "state_title_screen", title_screen_draw_logo);
+void title_screen_draw_logo(f32 arg0) {
+    s32 yOffset;
+    s32 i;
+
+    gSPDisplayList(gMasterGfxPos++, D_80077A50);
+    gDPPipeSync(gMasterGfxPos++);
+    yOffset = -100 * arg0;
+
+    for (i = 0; i < TITLE_NUM_TILES; i++) {
+        // Load a tile from the logo texture
+        gDPLoadTextureTile(gMasterGfxPos++, &D_800A0978[i * TITLE_TILE_PIXELS], G_IM_FMT_RGBA, G_IM_SIZ_32b,
+                           TITLE_WIDTH, TITLE_TILE_HEIGHT, // width, height
+                           0, 0, (TITLE_WIDTH - 1), (TITLE_TILE_HEIGHT - 1), // uls, ult, lrs, lrt
+                           0, // pal
+                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, // cms, cmt
+                           G_TX_NOMASK, G_TX_NOMASK, // masks, maskt
+                           G_TX_NOLOD, G_TX_NOLOD); // shifts, shiftt
+        // Draw a scissored texture rectangle with the loaded tile
+        gSPScisTextureRectangle(gMasterGfxPos++,
+            (TITLE_POS_LEFT)                                                      << 2, // ulx
+            (TITLE_POS_TOP + TITLE_TILE_HEIGHT * i + yOffset)                     << 2, // uly
+            (TITLE_POS_LEFT + TITLE_WIDTH)                                        << 2, // lrx
+            (TITLE_POS_TOP + TITLE_TILE_HEIGHT + TITLE_TILE_HEIGHT * i + yOffset) << 2, // lry
+            G_TX_RENDERTILE, 0, 0, 1 << 10, 1 << 10);
+    }
+
+    gDPPipeSync(gMasterGfxPos++);
+}
 
 void title_screen_draw_press_start(void) {
     switch (D_80077A2C) {

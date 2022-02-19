@@ -175,7 +175,7 @@ void state_step_end_battle(void) {
             if (gGameStatusPtr->demoFlags & 1) {
                 npc_reload_all();
                 playerStatus->animFlags = D_800A0904;
-                set_game_mode(17);
+                set_game_mode(GAME_MODE_DEMO);
             } else {
                 void* mapShape;
                 u32 sizeTemp;
@@ -207,7 +207,7 @@ void state_step_end_battle(void) {
                 if (D_800A0908 != 0) {
                     set_time_freeze_mode(D_800A0908);
                 }
-                set_game_mode(4);
+                set_game_mode(GAME_MODE_CHANGE_MAP);
             }
         }
     }

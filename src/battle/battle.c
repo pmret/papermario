@@ -323,7 +323,7 @@ void load_battle_section(void) {
 
 void load_battle(s32 arg0) {
     D_800DC4E8 = arg0;
-    set_game_mode(8);
+    set_game_mode(GAME_MODE_BATTLE);
     gBattleState = 0;
     D_800DC4D0 = 0;
     gBattleState2 = 0;

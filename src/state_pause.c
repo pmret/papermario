@@ -223,7 +223,7 @@ void state_step_unpause(void) {
             update_player();
             update_effects();
             enable_player_input();
-            set_game_mode(4);
+            set_game_mode(GAME_MODE_CHANGE_MAP);
             break;
     }
 }

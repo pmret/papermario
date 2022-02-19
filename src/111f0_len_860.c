@@ -81,7 +81,7 @@ void state_step_enter_world(void) {
                     enable_player_input();
                 }
                 set_screen_overlay_params_front(255, -1.0f);
-                set_game_mode(4);
+                set_game_mode(GAME_MODE_CHANGE_MAP);
             }
             break;
     }
@@ -169,7 +169,7 @@ void state_step_change_map(void) {
                     enable_player_input();
                 }
                 set_screen_overlay_params_front(255, -1.0f);
-                set_game_mode(4);
+                set_game_mode(GAME_MODE_CHANGE_MAP);
             }
             break;
         }
@@ -222,7 +222,7 @@ void func_8003646C(void) {
                 gMapTransitionAlpha = 0;
                 D_800A0944++;
                 set_screen_overlay_params_front(255, -1.0f);
-                set_game_mode(4);
+                set_game_mode(GAME_MODE_CHANGE_MAP);
             }
             update_npcs();
             update_player();

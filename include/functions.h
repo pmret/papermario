@@ -821,6 +821,7 @@ void update_encounters_neutral(void);
 void update_encounters_pre_battle(void);
 void update_encounters_conversation(void);
 void update_encounters_post_battle(void);
+void load_map_bg(char* optAssetName);
 void reset_background_settings(void);
 void func_80138188(void);
 void func_80266970(Actor*);

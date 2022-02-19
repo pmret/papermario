@@ -83,7 +83,7 @@ void state_step_logos(void) {
         if (intro_logos_fade_out(0xA) != 0) {
             set_curtain_scale(1.0f);
             set_curtain_fade(0.0f);
-            set_game_mode(2);
+            set_game_mode(GAME_MODE_TITLE_SCREEN);
         }
     } else {
         switch (gGameStatusPtr->introState) {
@@ -161,7 +161,7 @@ void state_step_logos(void) {
 
                 intro_logos_set_fade_alpha(255);
                 gGameStatusPtr->creditsViewportMode = 0;
-                set_game_mode(16);
+                set_game_mode(GAME_MODE_INTRO);
                 break;
         }
     }

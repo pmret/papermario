@@ -347,7 +347,7 @@ void state_step_exit_language_select(void) {
             update_encounters();
             update_effects();
             enable_player_input();
-            set_game_mode(4);
+            set_game_mode(GAME_MODE_CHANGE_MAP);
             set_screen_overlay_params_front(255, -1.0f);
             break;
         }
@@ -386,7 +386,7 @@ void state_step_exit_file_select(void) {
         case 3:
             set_time_freeze_mode(0);
             if (temp_s0 == 0) {
-                set_game_mode(2);
+                set_game_mode(GAME_MODE_TITLE_SCREEN);
                 gOverrideFlags &= ~0x10000;
             } else {
                 D_800A0930 = 10;
@@ -410,7 +410,7 @@ void state_step_exit_file_select(void) {
             }
             break;
         case 6:
-            set_game_mode(7);
+            set_game_mode(GAME_MODE_WORLD);
             break;
     }
 }
