@@ -205,7 +205,7 @@ ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->rushesFlags = RUSHES_NONE;
+    battleStatus->rushFlags = RUSH_FLAG_NONE;
     gBattleState = D_800DC4E4;
     gBattleState2 = D_800DC4D8;
     battleStatus->flags1 |= BS_FLAGS1_8;
@@ -214,13 +214,13 @@ ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
     if (!(battleStatus->flags2 & BS_FLAGS2_40)) {
         if (playerData->curHP <= 1 && is_ability_active(ABILITY_MEGA_RUSH)) {
             gBattleStatus.flags2 |= BS_FLAGS2_8000000;
-            battleStatus->rushesFlags |= RUSHES_MEGA_RUSH;
+            battleStatus->rushFlags |= RUSH_FLAG_MEGA;
         }
 
         if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) && 
-            !(battleStatus->rushesFlags & RUSHES_MEGA_RUSH)) {
+            !(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
             gBattleStatus.flags2 |= BS_FLAGS2_8000000;
-            battleStatus->rushesFlags |= RUSHES_POWER_RUSH;
+            battleStatus->rushFlags |= RUSH_FLAG_POWER;
         }
     }
     return ApiStatus_DONE2;

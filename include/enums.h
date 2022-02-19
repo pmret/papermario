@@ -3327,9 +3327,9 @@ enum WindowGroupId {
 };
 
 enum RushFlags {
-    RUSHES_NONE       = 0,
-    RUSHES_MEGA_RUSH  = 1,
-    RUSHES_POWER_RUSH = 2,
+    RUSH_FLAG_NONE  = 0,
+    RUSH_FLAG_MEGA  = 1,
+    RUSH_FLAG_POWER = 2,
 };
 
 #endif
