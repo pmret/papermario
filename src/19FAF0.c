@@ -13,25 +13,69 @@ ApiStatus func_80271258(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802712A0(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "19FAF0", func_802712A0, Evt* script, s32 isInitialCall);
+ApiStatus func_802712A0(Evt* script, s32 isInitialCall) {
+    EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
-ApiStatus func_80271328(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "19FAF0", func_80271328, Evt* script, s32 isInitialCall);
+    ((DebuffFXData*)debuffEffect->data)->unk_38 = 200;
+    ((DebuffFXData*)debuffEffect->data)->unk_39 = 120;
+    ((DebuffFXData*)debuffEffect->data)->unk_3A = 0;
+    ((DebuffFXData*)debuffEffect->data)->unk_3B = 234;
+    ((DebuffFXData*)debuffEffect->data)->unk_3C = 193;
+    ((DebuffFXData*)debuffEffect->data)->unk_3D = 0;
+    return ApiStatus_DONE2;
+}
 
-ApiStatus func_802713B0(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "19FAF0", func_802713B0, Evt* script, s32 isInitialCall);
+ApiStatus func_80271328(Evt* script, s32 isInitialCall) {
+    EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
+
+    ((DebuffFXData*)debuffEffect->data)->unk_38 = 60;
+    ((DebuffFXData*)debuffEffect->data)->unk_39 = 160;
+    ((DebuffFXData*)debuffEffect->data)->unk_3A = 0;
+    ((DebuffFXData*)debuffEffect->data)->unk_3B = 90;
+    ((DebuffFXData*)debuffEffect->data)->unk_3C = 240;
+    ((DebuffFXData*)debuffEffect->data)->unk_3D = 0;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802713B0(Evt* script, s32 isInitialCall) {
+    EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
+
+    ((DebuffFXData*)debuffEffect->data)->unk_38 = 205;
+    ((DebuffFXData*)debuffEffect->data)->unk_39 = 0;
+    ((DebuffFXData*)debuffEffect->data)->unk_3A = 40;
+    ((DebuffFXData*)debuffEffect->data)->unk_3B = 205;
+    ((DebuffFXData*)debuffEffect->data)->unk_3C = 32;
+    ((DebuffFXData*)debuffEffect->data)->unk_3D = 242;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_8027143C(Evt* script, s32 isInitialCall) {
     fx_big_snowflakes(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80271484(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "19FAF0", func_80271484, Evt* script, s32 isInitialCall);
+ApiStatus func_80271484(Evt* script, s32 isInitialCall) {
+    Actor* actor = (Actor*)script->varTable[3];
+    f32 temp1 = actor->size.y;
+    f32 temp2 = actor->size.x / 2;
 
-ApiStatus func_80271588(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "19FAF0", func_80271588, Evt* script, s32 isInitialCall);
+    fx_misc_particles(0, script->varTable[0], script->varTable[1], script->varTable[2], temp1, temp2, 1.0f, 10, 30);
+    fx_misc_particles(1, script->varTable[0], script->varTable[1], script->varTable[2], temp1, temp2, 1.0f, 10, 30);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80271588(Evt* script, s32 isInitialCall) {
+    s32 i;
+
+    for (i = 0; i < 20; i++) {
+        fx_floating_cloud_puff(0,
+                               script->varTable[0] + rand_int(30) - 15,
+                               script->varTable[1] + rand_int(20) - 15,
+                               script->varTable[2] + 5,
+                               1.0f, 25);
+    }
+    return ApiStatus_DONE2;
+}
 
 EvtScript DoSleepHit = {
     EVT_CALL(func_80271210)
@@ -78,6 +122,8 @@ EvtScript DoShrinkHit = {
     EVT_RETURN
     EVT_END
 };
+
+void dispatch_damage_event_player_1(s32 damageAmount, s32 event);
 
 void dispatch_event_player(s32 eventType) {
     Actor* player = gBattleStatus.playerActor;
@@ -126,12 +172,132 @@ void dispatch_event_player_continue_turn(s32 eventType) {
     }
 }
 
-INCLUDE_ASM(s32, "19FAF0", calc_player_test_enemy);
+//INCLUDE_ASM(s32, "19FAF0", calc_player_test_enemy);
+s32 calc_player_test_enemy(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    s32 currentTargetID = battleStatus->currentTargetID;
+    s32 targetPart = battleStatus->currentTargetPart;
+    ActorState* state = &player->state;
+    Actor* target;
+    ActorPart* part;
+
+    battleStatus->currentTargetID2 = battleStatus->currentTargetID;
+    battleStatus->currentTargetPart2 = battleStatus->currentTargetPart;
+
+    target = get_actor(currentTargetID);
+
+
+    if (target == NULL) {
+        return 0;
+    }
+
+    part = get_actor_part(target, targetPart);
+    ASSERT(part != NULL);
+
+    if (part->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
+        return 6;
+    } else if (target->transStatus == STATUS_E || ((part->eventFlags & ACTOR_EVENT_FLAG_800) &&
+               !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)))
+    {
+        return 6;
+    } else if (target->stoneStatus == STATUS_STONE) {
+        sfx_play_sound_at_position(SOUND_IMMUNE, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        return 8;
+    } else if ((battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP) && (part->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP) &&
+               !player_team_is_ability_active(player, 2))
+    {
+        sfx_play_sound_at_position(SOUND_108, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        return 4;
+    } else if (!(battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_JUMP)) &&
+               (part->eventFlags & ACTOR_EVENT_FLAG_SPIKY_FRONT) &&
+               (!(battleStatus->currentAttackEventSuppression & 4) &&
+               !player_team_is_ability_active(player, 2)))
+    {
+        sfx_play_sound_at_position(SOUND_108, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        dispatch_damage_event_player_1(1, EVENT_SPIKE_CONTACT);
+        dispatch_event_actor(target, EVENT_SPIKE_TAUNT);
+        return -1;
+    } else if (player->staticStatus != STATUS_STATIC && target->staticStatus == STATUS_STATIC) {
+        return 7;
+    }
+
+    return 0;
+}
 
 INCLUDE_ASM(s32, "19FAF0", calc_player_damage_enemy);
 
-s32 dispatch_damage_event_player(s32, s32, s32);
-INCLUDE_ASM(s32, "19FAF0", dispatch_damage_event_player);
+s32 dispatch_damage_event_player(s32 damageAmount, s32 event, s32 arg2) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Actor* player = battleStatus->playerActor;
+    ActorState* state = &player->state;
+    s32 oldHPChangeCounter;
+    s32 flags;
+    s32 dispatchEvent;
+    s32 oldPlayerHP;
+    s32 temp;
+    s32 temp2;
+
+    battleStatus->currentAttackDamage = damageAmount;
+
+    temp = (s16)damageAmount;
+    player->hpChangeCounter += temp;
+
+    temp = player->hpChangeCounter;
+    player->currentHP = playerData->curHP;
+    player->damageCounter += temp;
+    player->hpChangeCounter -= temp;
+    battleStatus->lastAttackDamage = 0;
+    player->currentHP -= temp;
+    battleStatus->damageTaken += temp;
+
+    oldPlayerHP = player->currentHP;
+
+    dispatchEvent = event;
+    if (player->currentHP <= 0) {
+        battleStatus->lastAttackDamage += oldPlayerHP;
+        player->currentHP = 0;
+        dispatchEvent = EVENT_DEATH;
+    }
+    battleStatus->lastAttackDamage += temp;
+    playerData->curHP = player->currentHP;
+
+    if (dispatchEvent == EVENT_HIT_COMBO) {
+        dispatchEvent = EVENT_HIT;
+    }
+    if (dispatchEvent == EVENT_UNKNOWN_TRIGGER) {
+        dispatchEvent = EVENT_IMMUNE;
+    }
+
+    if (dispatchEvent == EVENT_DEATH) {
+        if (event == EVENT_SPIKE_CONTACT) {
+            dispatchEvent = EVENT_SPIKE_DEATH;
+        }
+        if (event == EVENT_BURN_CONTACT) {
+            dispatchEvent = EVENT_BURN_DEATH;
+        }
+        if (event == EVENT_SHOCK_HIT) {
+            dispatchEvent = EVENT_SHOCK_DEATH;
+        }
+    }
+
+    if (!arg2) {
+        set_goal_pos_to_part(state, ACTOR_PLAYER, 0);
+        sfx_play_sound_at_position(SOUND_HIT_NORMAL, 0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+    }
+
+    show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 1);
+    func_802666E4(player, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
+
+    if (battleStatus->lastAttackDamage > 0) {
+        func_80267018(player, 1);
+    }
+
+    flags = (gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)) != 0;
+    dispatch_event_player(dispatchEvent);
+    return flags;
+}
 
 s32 dispatch_damage_event_player_0(s32 damageAmount, s32 event) {
     BattleStatus* battleStatus = &gBattleStatus;

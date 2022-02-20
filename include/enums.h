@@ -516,6 +516,7 @@ enum SoundIDs {
     SOUND_HIT_NORMAL                = 0x000000E9,
     SOUND_HIT_FIRE                  = 0x000000EA,
     SOUND_HIT_ICE                   = 0x000000EB,
+    SOUND_108                       = 0x00000108,
     SOUND_IMMUNE                    = 0x0000010C,
     SOUND_HIT_BONES                 = 0x0000010D,
     SOUND_STEP1                     = 0x00000141,

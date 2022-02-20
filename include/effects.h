@@ -573,7 +573,7 @@ typedef struct EffectInstance {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 numParts;
-    /* 0x0C */ DebuffFXData* data; // often but not always EffectInstanceData
+    /* 0x0C */ void* data; // often but not always EffectInstanceData
     /* 0x10 */ struct EffectGraphics* graphics;
 } EffectInstance; // size = 0x14
 
@@ -703,7 +703,7 @@ void fx_stars_spread(s32, f32, f32, f32, s32, s32);
 void fx_steam_burst(s32, f32, f32, f32, f32, s32);
 void fx_stars_orbiting(s32, f32, f32, f32, f32, s32, s32*);
 void fx_big_snowflakes(s32, f32, f32, f32);
-void fx_debuff(s32, f32, f32, f32);
+EffectInstance* fx_debuff(s32, f32, f32, f32);
 void fx_green_impact(s32, f32, f32, f32, f32);
 EffectInstance* fx_radial_shimmer(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_ending_decals(s32, f32, f32, f32, f32, s32*);
