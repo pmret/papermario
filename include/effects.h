@@ -480,6 +480,31 @@ typedef struct BalloonFXData {
     /* 0x20 */ s32 unk_20;
 } BalloonFXData; // size = 0x24
 
+typedef struct DebuffFXData {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ char unk_02[2];
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ u8 unk_38;
+    /* 0x39 */ u8 unk_39;
+    /* 0x3A */ u8 unk_3A;
+    /* 0x3B */ u8 unk_3B;
+    /* 0x3C */ u8 unk_3C;
+    /* 0x3D */ u8 unk_3D;
+    /* 0x3E */ char unk_3E[2];
+} DebuffFXData; // size = 0x40
+
 typedef struct Effect134 {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ f32 unk_04;
@@ -548,7 +573,7 @@ typedef struct EffectInstance {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 numParts;
-    /* 0x0C */ void* data; // often but not always EffectInstanceData
+    /* 0x0C */ DebuffFXData* data; // often but not always EffectInstanceData
     /* 0x10 */ struct EffectGraphics* graphics;
 } EffectInstance; // size = 0x14
 

@@ -2603,7 +2603,7 @@ segments:
     vram: 0xE0062000
     subsegments:
     - [0x364300, c, debuff]
-    - [0x364BC0, data]
+    - [0x364BC0]
   - [0x364C00, bin] # debuff gfx
   - name: effect_green_impact
     dir: effects
