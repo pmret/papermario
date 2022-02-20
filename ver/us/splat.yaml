@@ -2339,7 +2339,7 @@ segments:
     vram: 0xE0024000
     subsegments:
     - [0x339250, c, shape_spell]
-    - [0x339F10, data]
+    - [0x339F10]
   - [0x339F60, bin] # shape_spell gfx
   - name: effect_gather_energy_pink
     dir: effects
@@ -2515,7 +2515,7 @@ segments:
     vram: 0xE004C000
     subsegments:
     - [0x359F20, c, music_note]
-    - [0x35A580, data]
+    - [0x35A580]
   - [0x35A5E0, bin] # music_note gfx
   - name: effect_smoke_burst
     dir: effects
@@ -2736,7 +2736,7 @@ segments:
     vram: 0xE0080000
     subsegments:
     - [0x3812C0, c, recover]
-    - [0x381D80, data]
+    - [0x381D80]
   - [0x381E00, bin] # recover gfx
   - name: effect_disable_x
     dir: effects
@@ -3125,7 +3125,7 @@ segments:
     vram: 0xE00D8000
     subsegments:
     - [0x3D67C0, c, tattle_window]
-    - [0x3D6FA0, data]
+    - [0x3D6FA0]
   - [0x3D7040, bin] # tattle_window gfx
   - name: effect_shiny_flare
     dir: effects
