@@ -237,11 +237,10 @@ s32 dispatch_damage_event_player(s32 damageAmount, s32 event, s32 arg2) {
     s32 dispatchEvent;
     s32 oldPlayerHP;
     s32 temp;
-    s32 temp2;
 
     battleStatus->currentAttackDamage = damageAmount;
 
-    temp = (s16)damageAmount;
+    temp = (s16)damageAmount; // usage of temp here required to match
     player->hpChangeCounter += temp;
 
     temp = player->hpChangeCounter;
