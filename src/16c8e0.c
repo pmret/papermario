@@ -1,6 +1,9 @@
 #include "common.h"
+#include "hud_element.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
+#include "sprite.h"
+#include "effects.h"
 
 f32 D_802809F0 = 0.0f;
 s8 D_802809F4 = 0;
@@ -9,26 +12,46 @@ s16 D_802809F6 = -1;
 s16 D_802809F8 = 0;
 u16 D_802809FA = 0;
 
-void* D_802809FC[] = {
-    D_80291FA8, D_80291FD0, D_80291FF8, D_80292020, D_80292048, D_80292070, D_80292098, D_802920C0, D_802920E8, D_80292110, NULL, NULL, NULL,
+extern HudScript HudScript_HPDigit0;
+extern HudScript HudScript_HPDigit1;
+extern HudScript HudScript_HPDigit2;
+extern HudScript HudScript_HPDigit3;
+extern HudScript HudScript_HPDigit4;
+extern HudScript HudScript_HPDigit5;
+extern HudScript HudScript_HPDigit6;
+extern HudScript HudScript_HPDigit7;
+extern HudScript HudScript_HPDigit8;
+extern HudScript HudScript_HPDigit9;
+
+void* bHPDigitHudScripts[] = {
+    HudScript_HPDigit0, HudScript_HPDigit1, HudScript_HPDigit2, HudScript_HPDigit3, HudScript_HPDigit4, HudScript_HPDigit5, HudScript_HPDigit6, HudScript_HPDigit7, HudScript_HPDigit8, HudScript_HPDigit9, NULL, NULL, NULL,
 };
 
 s32 D_80280A30 = 0xFF;
 
+extern s32 D_8029DA30;
 extern s8 D_8029DA33;
 extern s32 D_8029DA34;
 extern Camera D_8029DA50[ARRAY_COUNT(gCameras)];
 extern f32 D_8029EFB0;
 extern f32 D_8029EFB4;
 extern f32 D_8029EFB8;
+extern s32 D_8029EFBC;
+extern s32 D_8029EFC0[10];
+extern s32 D_8029EFE8[10];
+extern s32 D_8029F010[10];
+extern HudScript HudScript_HPBar;
+extern HudScript HudScript_Item_SmallStarPoint;
+extern HudScript HudScript_Item_StarPoint;
+extern HudScript HudScript_StatusSPShine;
 
-EvtSource BtlPutPartnerAway = {
+EvtScript BtlPutPartnerAway = {
     EVT_CALL(DispatchEvent, 256, 62)
     EVT_CHILD_THREAD
         EVT_SETF(EVT_VAR(0), EVT_FIXED(1.0))
         EVT_LOOP(10)
             EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
-            EVT_SUBF(EVT_VAR(0), EVT_FIXED(0.1005859375))
+            EVT_SUBF(EVT_VAR(0), EVT_FIXED(0.1))
             EVT_WAIT_FRAMES(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
@@ -44,12 +67,12 @@ EvtSource BtlPutPartnerAway = {
     EVT_END
 };
 
-EvtSource BtlBringPartnerOut = {
+EvtScript BtlBringPartnerOut = {
     EVT_CHILD_THREAD
-        EVT_SETF(EVT_VAR(0), EVT_FIXED(0.1005859375))
+        EVT_SETF(EVT_VAR(0), EVT_FIXED(0.1))
         EVT_LOOP(20)
             EVT_CALL(SetActorScale, 256, EVT_VAR(0), EVT_VAR(0), EVT_FIXED(1.0))
-            EVT_ADDF(EVT_VAR(0), EVT_FIXED(0.05078125))
+            EVT_ADDF(EVT_VAR(0), EVT_FIXED(0.05))
             EVT_WAIT_FRAMES(1)
         EVT_END_LOOP
         EVT_CALL(SetActorScale, 256, EVT_FIXED(1.0), EVT_FIXED(1.0), EVT_FIXED(1.0))
@@ -68,17 +91,17 @@ EvtSource BtlBringPartnerOut = {
     EVT_END
 };
 
+void func_8023ED5C(void);
+void func_8023F088(Camera*);
+void func_8023FF84(Camera*);
+
 void get_dpad_input_radial(f32* angle, f32* magnitude) {
     BattleStatus* battleStatus = &gBattleStatus;
-    u16 currentButtonsDown;
-    f32 stickX;
-    f32 stickY;
-    f32 mag;
     f32 maxMagnitude = 60.0f;
-
-    stickX = battleStatus->stickX;
-    stickY = battleStatus->stickY;
-    currentButtonsDown = battleStatus->currentButtonsDown;
+    f32 stickX = battleStatus->stickX;
+    f32 stickY = battleStatus->stickY;
+    u16 currentButtonsDown = battleStatus->currentButtonsDown;
+    f32 mag;
 
     if (currentButtonsDown & 0xF00) {
         stickY = 0.0f;
@@ -116,7 +139,89 @@ void func_8023E11C(void) {
     D_802809F5 = 0;
 }
 
-INCLUDE_ASM(s32, "16c8e0", initialize_battle);
+void initialize_battle(void) {
+    PlayerData* playerData = &gPlayerData;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Camera* tattleCam = &gCameras[CAM_TATTLE];
+    s32 hudElemID;
+    s32 i;
+
+    gBattleStatus.flags1 = 0;
+    gBattleStatus.flags2 = 0;
+    gBattleStatus.flags1 = 0;
+    D_8029DA34 = gOverrideFlags;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
+    gBattleStatus.inputBitmask = -1;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
+
+    for (i = 0; i < 16; i++) {
+        battleStatus->pushInputBuffer[i] = 0; // @bug? why just 16
+    }
+
+    battleStatus->inputBufferPos = 0;
+    battleStatus->holdInputBufferPos = 0;
+    battleStatus->unk_95 = 0;
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        battleStatus->enemyActors[i] = NULL;
+    }
+
+    battleStatus->playerActor = NULL;
+    battleStatus->partnerActor = NULL;
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->unk_4C); i++) {
+        battleStatus->unk_4C[i] = -1;
+        battleStatus->unk_5C[i] = -1;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(battleStatus->tattleFlags); i++) {
+        battleStatus->tattleFlags[i] = 0;
+    }
+
+    if (gGameStatusPtr->peachFlags & 1) {
+        gBattleStatus.flags2 |= BS_FLAGS2_40;
+        increment_status_menu_disabled();
+    } else {
+        gBattleStatus.flags2 &= ~BS_FLAGS2_40;
+    }
+
+    create_generic_entity_world(NULL, func_8023ED5C);
+    func_8024EDC0();
+    func_80268E88();
+    set_windows_visible(WINDOW_GROUP_1);
+    D_8029EFBC = create_hud_element(HudScript_HPBar);
+    set_hud_element_flags(D_8029EFBC, 0x80);
+
+    for (i = 0; i < ARRAY_COUNT(D_8029EFC0); i++) {
+        hudElemID = D_8029EFC0[i] = create_hud_element(HudScript_Item_StarPoint);
+        set_hud_element_flags(hudElemID, 0x80 | 0x2);
+        set_hud_element_render_depth(hudElemID, 20);
+    }
+
+    for (i = 0; i < ARRAY_COUNT(D_8029EFE8); i++) {
+        hudElemID = D_8029EFE8[i] = create_hud_element(HudScript_StatusSPShine);
+        set_hud_element_flags(hudElemID, 0x80 | 0x2);
+        set_hud_element_render_depth(hudElemID, 20);
+    }
+
+    for (i = 0; i < ARRAY_COUNT(D_8029F010); i++) {
+        hudElemID = D_8029F010[i] = create_hud_element(HudScript_Item_SmallStarPoint);
+        set_hud_element_flags(hudElemID, 0x80 | 0x2);
+        set_hud_element_render_depth(hudElemID, 20);
+    }
+
+    tattleCam->fpDoPreRender = func_8023F088;
+    tattleCam->fpDoPostRender = func_8023FF84;
+
+    if (playerData->battlesCount < 9999) {
+        playerData->battlesCount++;
+    }
+
+    D_8029DA30 = playerData->currentPartner;
+    if (gBattleStatus.flags2 & BS_FLAGS2_40) {
+        playerData->currentPartner = PARTNER_TWINK;
+    }
+}
 
 void func_8023E3FC(void) {
 }
@@ -137,7 +242,7 @@ void btl_update(void) {
     s32 cond;
 
     if (battleStatus->inputBitmask != -1) {
-        if (battleStatus->flags1 & 0x80000 && gGameStatusPtr->unk_81 != 0) {
+        if (battleStatus->flags1 & BS_FLAGS1_80000 && gGameStatusPtr->unk_81 != 0) {
             s32 inputBitmask = battleStatus->inputBitmask;
 
             battleStatus->currentButtonsDown = gGameStatusPtr->altCurrentButtons & inputBitmask;
@@ -371,8 +476,8 @@ void func_8023ED5C(void) {
 
     if (gBattleState != 0) {
         func_8024EEA8();
-        if (battleStatus->unk_B8 != NULL) {
-            battleStatus->unk_B8();
+        if (battleStatus->initBattleCallback != NULL) {
+            battleStatus->initBattleCallback();
         }
         if (battleStatus->flags1 & 1) {
             func_80255FD8();
@@ -382,7 +487,7 @@ void func_8023ED5C(void) {
                     actor = battleStatus->enemyActors[i];
 
                     if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
-                        renderTaskPtr->appendGfxArg = i;
+                        renderTaskPtr->appendGfxArg = (void*)i;
                         renderTaskPtr->appendGfx = func_80257B28;
                         renderTaskPtr->distance = actor->currentPos.z;
                         renderTaskPtr->renderMode = actor->renderMode;
@@ -460,11 +565,21 @@ void func_8023ED5C(void) {
     }
 }
 
-INCLUDE_ASM(s32, "16c8e0", func_8023F060);
+u16 func_8023F060(u16 arg0, s32 arg1, s32 arg2) {
+    s32 temp_lo;
+    s32 phi_v0;
+
+    temp_lo = (arg1 - (arg0)) * arg2;
+    phi_v0 = temp_lo;
+    if (temp_lo < 0) {
+        phi_v0 = temp_lo + 0xFF;
+    }
+    return (arg0 + (phi_v0 >> 8));
+}
 
 INCLUDE_ASM(s32, "16c8e0", func_8023F088);
 
-void func_8023FF84(void) {
+void func_8023FF84(Camera* camera) {
     show_foreground_models_unchecked();
 }
 
@@ -497,15 +612,15 @@ void btl_restore_world_cameras(void) {
         gCameras[i] = D_8029DA50[i];
     }
 
-    gCurrentCameraID = 0;
+    gCurrentCameraID = CAM_DEFAULT;
     playerStatus->position.x = D_8029EFB0;
     playerStatus->position.y = D_8029EFB4;
     playerStatus->position.z = D_8029EFB8;
 
     if (D_8029DA34 & 0x80) {
-        gOverrideFlags |= 0x80;
+        gOverrideFlags |= GLOBAL_OVERRIDES_80;
     } else {
-        gOverrideFlags &= ~0x80;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
     }
 
     if (gBattleStatus.flags2 & 0x40) {
@@ -559,9 +674,9 @@ void btl_delete_actor(Actor* actor) {
         partsTable = actorPartTemp;
     }
 
-    delete_shadow(actor->shadow);
+    delete_shadow(actor->shadow.id);
     remove_all_status_icons(actor->hudElementDataIndex);
-    remove_effect(actor->ptrDefuffIcon);
+    remove_effect(actor->ptrDefuffIcon); // ???
 
     if (actor->unk_200 != NULL) {
         actor->unk_200[3][9] = 0;
@@ -579,9 +694,9 @@ void btl_delete_actor(Actor* actor) {
 }
 
 void btl_delete_player_actor(Actor* player) {
-    struct ActorPart* partsTable;
-    struct ActorPartMovement* movement;
-    struct DecorationTable* decorationTable;
+    ActorPart* partsTable;
+    ActorPartMovement* movement;
+    DecorationTable* decorationTable;
     s32 i;
 
     for (i = 0; i < 2; i++) {
@@ -602,7 +717,7 @@ void btl_delete_player_actor(Actor* player) {
     decorationTable = partsTable->decorationTable;
     movement = partsTable->movement;
 
-    delete_shadow(player->shadow);
+    delete_shadow(player->shadow.id);
     remove_all_status_icons(player->hudElementDataIndex);
     remove_effect(player->ptrDefuffIcon);
 

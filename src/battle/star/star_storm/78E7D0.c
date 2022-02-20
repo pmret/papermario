@@ -14,10 +14,10 @@ ApiStatus func_802A1518_78ECE8(Evt* script, s32 isInitialCall) {
 
     if (script->varTable[0] % 4) {
         var4 = var1 + (rand_int(50) + var2);
-        playFX_0F(2, var1, var2, var3, var4, 0, var3, rand_int(10) + 7);
+        fx_star(2, var1, var2, var3, var4, 0, var3, rand_int(10) + 7);
     } else {
         var4 = var1 + (rand_int(50) + var2);
-        playFX_0F(3, var1, var2, var3, var4, 0, var3, rand_int(10) + 7);
+        fx_star(3, var1, var2, var3, var4, 0, var3, rand_int(10) + 7);
     }
 
     return ApiStatus_DONE2;
@@ -29,12 +29,12 @@ ApiStatus func_802A1628_78EDF8(Evt* script, s32 isInitialCall) {
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
 
-    playFX_18(2, var1, var2, var3, 0, -1.0f, 0, 5);
+    fx_damage_stars(2, var1, var2, var3, 0, -1.0f, 0, 5);
 
     return ApiStatus_DONE2;
 }
 
-EvtSource N(802A16F0) = {
+EvtScript N(802A16F0) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(UseBattleCamPreset, 69)
@@ -89,7 +89,7 @@ EvtSource N(802A16F0) = {
     EVT_END
 };
 
-EvtSource N(802A1A88) = {
+EvtScript N(802A1A88) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(UseBattleCamPreset, 69)
@@ -144,7 +144,7 @@ EvtSource N(802A1A88) = {
     EVT_END
 };
 
-EvtSource N(802A1E20) = {
+EvtScript N(802A1E20) = {
     EVT_WAIT_FRAMES(8)
     EVT_CALL(SetForegroundModelsVisible, 0)
     EVT_CALL(func_8024E664, 73)
@@ -178,7 +178,7 @@ EvtSource N(802A1E20) = {
     EVT_END
 };
 
-EvtSource N(802A202C) = {
+EvtScript N(802A202C) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(UseBattleCamPreset, 2)
@@ -249,7 +249,7 @@ EvtSource N(802A202C) = {
     EVT_END
 };
 
-EvtSource N(802A247C) = {
+EvtScript N(802A247C) = {
     EVT_CALL(GetOwnerID, LW(10))
     EVT_IF_EQ(LW(10), 0)
         EVT_CALL(N(UnkBackgroundFunc))
@@ -272,7 +272,7 @@ EvtSource N(802A247C) = {
     EVT_END
 };
 
-EvtSource N(usePower) = {
+EvtScript N(usePower) = {
     EVT_EXEC_WAIT(N(802A16F0))
     EVT_SET_CONST(LW(0), NPC_ANIM_battle_skolar_Palette_00_Anim_1)
     EVT_EXEC_WAIT(N(802A1E20))

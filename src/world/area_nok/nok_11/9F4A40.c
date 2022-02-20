@@ -11,11 +11,11 @@ static char* N(exit_str_1) = "nok_12";
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80240394_9F4DD4);
+#include "world/common/UnkNpcAIMainFunc5.inc.c"
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80240984_9F53C4);
+#include "world/common/UnkNpcAIFunc35.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
@@ -35,7 +35,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241428_9F5E68);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241AE0_9F6520);
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_80241F08_9F6948);

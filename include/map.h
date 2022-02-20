@@ -14,10 +14,10 @@ typedef Vec4f EntryList[];
 /// Fields other than main, entryList, entryCount, background, and tattle are initialised when the map loads.
 typedef struct MapConfig {
     /* 0x00 */ struct ModelNode* modelTreeRoot;
-    /* 0x04 */ UNK_PTR collision;
-    /* 0x08 */ UNK_PTR unk_08;
+    /* 0x04 */ s32 hitAssetCollisionOffset;
+    /* 0x08 */ s32 hitAssetZoneOffset;
     /* 0x0C */ char unk_0C[4];
-    /* 0x10 */ EvtSource* main;
+    /* 0x10 */ EvtScript* main;
     /* 0x14 */ EntryList* entryList;
     /* 0x18 */ s32 entryCount;
     /* 0x1C */ char unk_1C[12];
@@ -28,7 +28,7 @@ typedef struct MapConfig {
     /* 0x38 */ BackgroundHeader* background;
     /* 0x3C */ union {
         s32 msgID;
-        UNK_FUN_PTR(get);
+        s32 (*get)(void);
     } tattle;
 } MapConfig; // size = 0x40
 

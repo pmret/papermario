@@ -14,15 +14,15 @@ glabel osCreateViManager
 /* 41E94 80066A94 8E820000 */  lw        $v0, ($s4)
 /* 41E98 80066A98 14400055 */  bnez      $v0, .L80066BF0
 /* 41E9C 80066A9C 00808821 */   addu     $s1, $a0, $zero
-/* 41EA0 80066AA0 0C019920 */  jal       osTimerServicesInit
+/* 41EA0 80066AA0 0C019920 */  jal       __osTimerServicesInit
 /* 41EA4 80066AA4 2412FFFF */   addiu    $s2, $zero, -1
 /* 41EA8 80066AA8 3C13800B */  lui       $s3, %hi(D_800B0AD0)
 /* 41EAC 80066AAC 26730AD0 */  addiu     $s3, $s3, %lo(D_800B0AD0)
 /* 41EB0 80066AB0 02602021 */  addu      $a0, $s3, $zero
 /* 41EB4 80066AB4 3C05800B */  lui       $a1, %hi(D_800B0AE8)
 /* 41EB8 80066AB8 24A50AE8 */  addiu     $a1, $a1, %lo(D_800B0AE8)
-/* 41EBC 80066ABC 3C018009 */  lui       $at, %hi(D_8009469C)
-/* 41EC0 80066AC0 AC20469C */  sw        $zero, %lo(D_8009469C)($at)
+/* 41EBC 80066ABC 3C018009 */  lui       $at, %hi(__additional_scanline)
+/* 41EC0 80066AC0 AC20469C */  sw        $zero, %lo(__additional_scanline)($at)
 /* 41EC4 80066AC4 0C019560 */  jal       osCreateMesgQueue
 /* 41EC8 80066AC8 24060005 */   addiu    $a2, $zero, 5
 /* 41ECC 80066ACC 24040007 */  addiu     $a0, $zero, 7
@@ -88,7 +88,7 @@ glabel osCreateViManager
 /* 41FB8 80066BB8 AC204698 */  sw        $zero, %lo(D_80094698)($at)
 /* 41FBC 80066BBC 0C019798 */  jal       osCreateThread
 /* 41FC0 80066BC0 AFA30010 */   sw       $v1, 0x10($sp)
-/* 41FC4 80066BC4 0C01B2A4 */  jal       osViInit
+/* 41FC4 80066BC4 0C01B2A4 */  jal       __osViInit
 /* 41FC8 80066BC8 00000000 */   nop
 /* 41FCC 80066BCC 0C019808 */  jal       osStartThread
 /* 41FD0 80066BD0 02002021 */   addu     $a0, $s0, $zero

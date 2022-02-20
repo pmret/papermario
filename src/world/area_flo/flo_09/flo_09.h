@@ -13,6 +13,6 @@ ApiStatus N(func_8024162C_CB662C)(Evt* script, s32 isInitialCall);
 
 extern f32 N(D_8024362C_CB862C)[];
 extern NpcGroupList N(npcGroupList_8024414C);
-extern EvtSource N(802425DC);
-extern EvtSource N(802434A8);
-extern EvtSource N(main);
+extern EvtScript N(802425DC);
+extern EvtScript N(802434A8);
+extern EvtScript N(main);

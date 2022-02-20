@@ -62,7 +62,7 @@ BSS s32 filemenu_heldButtons;
 BSS s32 filemenu_8024C090;
 BSS s32 filemenu_loadedFileIdx;
 BSS s32 filemenu_8024C098[2];
-BSS s32 filemenu_cursorHudElemID;
+BSS s32 filemenu_cursorHudElemID[1];
 BSS s32 filemenu_8024C0A4[3];
 BSS s32 filemenu_hudElemIDs[20];
 BSS s32 filemenu_8024C100[8];
@@ -70,10 +70,10 @@ BSS s32 filemenu_8024C100[8];
 INCLUDE_ASM(s32, "163400", mainmenu_draw_rect);
 
 void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row) {
-    menu->unk_00.c.col = col;
-    menu->unk_00.c.row = row;
-    menu->unk_00.c.selected = menu->gridData[(menu->page * menu->numCols * menu->numRows) +
-                                    (menu->numCols * menu->unk_00.c.row) + menu->unk_00.c.col];
+    menu->col = col;
+    menu->row = row;
+    menu->selected = menu->gridData[(menu->page * menu->numCols * menu->numRows) +
+                                    (menu->numCols * menu->row) + menu->col];
 }
 
 void filemenu_set_cursor_alpha(s32 arg0) {
@@ -132,7 +132,7 @@ void filemenu_update_cursor(void) {
     D_80249B94 += xDelta;
     D_80249B98 += yDelta;
 
-    if (filemenu_cursorGoalAlpha == 0) {    
+    if (filemenu_cursorGoalAlpha == 0) {
         D_80249B9C -= 128;
         if (D_80249B9C < 0) {
             D_80249B9C = 0;
@@ -143,7 +143,7 @@ void filemenu_update_cursor(void) {
             D_80249B9C = 255;
         }
     }
-    
+
     for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
         Window* window = &gWindows[i];
         s8 parent = window->parent;
@@ -168,7 +168,7 @@ void filemenu_update_cursor(void) {
                     D_80249B98 = D_80249BA4;
                 }
             }
-        } 
+        }
         if (D_80249BB8 == 0) {
             filemenu_cursorGoalAlpha = filemenu_cursorGoalAlpha2;
         }
@@ -185,8 +185,8 @@ void func_8024330C(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -194,14 +194,14 @@ void func_8024330C(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249BBC)) {
         *posX -= D_80249BBC[updateCounter];
     } else {
         *posX -= D_80249BBC[ARRAY_COUNT(D_80249BBC) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -209,8 +209,8 @@ void filemenu_update_show_name_input(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -218,14 +218,14 @@ void filemenu_update_show_name_input(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249BDC)) {
         *posX += D_80249BDC[updateCounter];
     } else {
         *posX += D_80249BDC[ARRAY_COUNT(D_80249BDC) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -233,8 +233,8 @@ void filemenu_update_show_options_left(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -242,14 +242,14 @@ void filemenu_update_show_options_left(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249BFC)) {
         *posX -= D_80249BFC[updateCounter];
     } else {
         *posX -= D_80249BFC[ARRAY_COUNT(D_80249BFC) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -257,8 +257,8 @@ void filemenu_update_show_options_right(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -266,14 +266,14 @@ void filemenu_update_show_options_right(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249C1C)) {
         *posX += D_80249C1C[updateCounter];
     } else {
         *posX += D_80249C1C[ARRAY_COUNT(D_80249C1C) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -281,8 +281,8 @@ void filemenu_update_show_options_bottom(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -290,14 +290,14 @@ void filemenu_update_show_options_bottom(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249C3C)) {
         *posY += D_80249C3C[updateCounter];
     } else {
         *posY += D_80249C3C[ARRAY_COUNT(D_80249C3C) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -305,8 +305,8 @@ void filemenu_update_show_title(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -314,14 +314,14 @@ void filemenu_update_show_title(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249C5C)) {
         *posY -= D_80249C5C[updateCounter];
     } else {
         *posY -= D_80249C5C[ARRAY_COUNT(D_80249C5C) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -329,8 +329,8 @@ void func_802435C4(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -341,8 +341,8 @@ void func_802435C4(
         *posX += D_80249C7C[updateCounter];
     } else {
         *posX += D_80249C7C[ARRAY_COUNT(D_80249C7C) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -350,8 +350,8 @@ void filemenu_update_hidden_name_input(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -362,8 +362,8 @@ void filemenu_update_hidden_name_input(
         *posX -= D_80249C90[updateCounter];
     } else {
         *posX -= D_80249C90[ARRAY_COUNT(D_80249C90) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -371,8 +371,8 @@ void filemenu_update_hidden_options_left(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -383,8 +383,8 @@ void filemenu_update_hidden_options_left(
         *posX += D_80249CA4[updateCounter];
     } else {
         *posX += D_80249CA4[ARRAY_COUNT(D_80249CA4) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -392,8 +392,8 @@ void filemenu_update_hidden_options_right(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -404,8 +404,8 @@ void filemenu_update_hidden_options_right(
         *posX -= D_80249CB8[updateCounter];
     } else {
         *posX -= D_80249CB8[ARRAY_COUNT(D_80249CB8) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -413,8 +413,8 @@ void filemenu_update_hidden_title(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -425,8 +425,8 @@ void filemenu_update_hidden_title(
         *posY += D_80249CCC[updateCounter];
     } else {
         *posY += D_80249CCC[ARRAY_COUNT(D_80249CCC) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -434,8 +434,8 @@ void filemenu_update_hidden_options_bottom(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -446,8 +446,8 @@ void filemenu_update_hidden_options_bottom(
         *posY -= D_80249CE0[updateCounter];
     } else {
         *posY -= D_80249CE0[ARRAY_COUNT(D_80249CE0) - 1];
-        window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -455,8 +455,8 @@ void filemenu_update_show_with_rotation(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -464,15 +464,15 @@ void filemenu_update_show_with_rotation(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter == 0) {
-        window->flags &= ~WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
     }
 
     if (updateCounter < ARRAY_COUNT(D_80249CF4)) {
         *rotY += D_80249CF4[updateCounter];
-        *flags = 8 | 1;
+        *flags = DRAW_FLAGS_CULL_BACK | DRAW_FLAGS_ROTSCALE;
     } else {
         *flags = 0;
-        window->flags &= ~WINDOW_FLAGS_8;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
     }
 }
 
@@ -480,8 +480,8 @@ void filemenu_update_hidden_with_rotation(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -490,11 +490,11 @@ void filemenu_update_hidden_with_rotation(
 
     if (updateCounter < 10) { // TODO: array count?
         *rotY += -D_80249D14[updateCounter];
-        *flags = 8 | 1;
+        *flags = DRAW_FLAGS_CULL_BACK | DRAW_FLAGS_ROTSCALE;
     } else {
         *flags = 0;
-        window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -508,8 +508,8 @@ void filemenu_update_hidden_name_confirm(
     s32 windowIdx,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,
-    s32* scaleX, s32* scaleY,
-    s32* rotX, f32* rotY, s32* rotZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
     s32* darkening,
     s32* opacity
 ) {
@@ -525,8 +525,8 @@ void filemenu_update_hidden_name_confirm(
         mainmenu_draw_rect(0, 0, 1280, 960, 0, 0, 0, 0, 0);
         *posY -= D_80249D48[updateCounter];
     } else {
-        window->flags &= ~WINDOW_FLAGS_8;
-        window->flags |= WINDOW_FLAGS_4;
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAGS_HIDDEN;
     }
 }
 
@@ -539,9 +539,9 @@ void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
         if (temp_a1 > 255) {
             temp_a1 = 255;
         }
-        set_hud_element_alpha(filemenu_cursorHudElemID, temp_a1);
-        set_hud_element_render_pos(filemenu_cursorHudElemID, baseX + D_80249B94, baseY + D_80249B98);
-        draw_hud_element_3(filemenu_cursorHudElemID);
+        set_hud_element_alpha(filemenu_cursorHudElemID[0], temp_a1);
+        set_hud_element_render_pos(filemenu_cursorHudElemID[0], baseX + D_80249B94, baseY + D_80249B98);
+        draw_hud_element_3(filemenu_cursorHudElemID[0]);
     }
 }
 
@@ -549,6 +549,32 @@ INCLUDE_ASM(s32, "163400", filemenu_draw_contents_copy_arrow);
 
 INCLUDE_ASM(void, "163400", filemenu_init);
 
-INCLUDE_ASM(s32, "163400", filemenu_cleanup);
+// TODO bad match, look into
+void filemenu_cleanup(void) {
+    MenuPanel** panelIt;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(filemenu_cursorHudElemID); i++) {
+        free_hud_element(filemenu_cursorHudElemID[i]);
+    }
+
+    panelIt = filemenu_menus;
+    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
+        if ((*panelIt)->initialized) {
+            if ((*panelIt)->fpCleanup != NULL) {
+                (*panelIt)->fpCleanup(*panelIt);
+            }
+        }
+        panelIt++;
+    }
+
+    for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
+        set_window_update(i, WINDOW_UPDATE_HIDE);
+    }
+
+    set_window_update(0x18, WINDOW_UPDATE_HIDE);
+    set_window_update(0x17, WINDOW_UPDATE_HIDE);
+    func_80244BC4();
+}
 
 INCLUDE_ASM(s32, "163400", func_80244BC4);

@@ -7,7 +7,7 @@
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-INCLUDE_ASM(s32, "EF2680", func_80240220_EF2830);
+#include "world/common/UnkNpcAIFunc35.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
@@ -74,7 +74,7 @@ void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     z = npc->pos.z;
     w = 1000.0f;
 
-    npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w);
+    npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
     npc->pos.y = y + temp_f24 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 0xC);
 
@@ -88,7 +88,7 @@ void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
                 y = npc->pos.y;
                 z = npc->pos.z;
                 w = 1000.0f;
-                npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w);
+                npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
                 npc->moveToPos.y = y + temp_f24;
                 script->functionTemp[0] = 12;
                 return;
@@ -111,7 +111,7 @@ void func_802415DC_EF3BEC(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
                 y = temp_f22;
                 z = npc->pos.z;
                 w = 1000.0f;
-                npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w);
+                npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
                 y += temp_f24;
                 w = y - temp_f22;
                 if (w > 2.0) {
@@ -157,7 +157,7 @@ void func_80241A40_EF4050(Evt* script, NpcAISettings* aiSettings, EnemyTerritory
     z = npc->pos.z;
     w = 1000.0f;
 
-    npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w);
+    npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w);
     npc->pos.y = y + temp_f22 + (sin_deg(enemy->varTable[2]) * temp_f20);
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 0xC);
     if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) != 0) {
@@ -188,9 +188,9 @@ INCLUDE_ASM(s32, "EF2680", func_80241C90_EF42A0);
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "EF2680", func_80242530_EF4B40);
+#include "world/common/DeadUnkNpcAIMainFunc5.inc.c"
 
-// This should be roughly like this and is a copy from CD7350 (func_80242918_CD9BF8), but with the little extra block
+// This should be roughly like this and is a copy from CD7350 (UnkNpcAIMainFunc6), but with the little extra block
 // at the beginning. I have to assume that is has to roughly look like below, but I can't get it to match.
 #ifdef NON_EQUIVALENT
 ApiStatus func_8024299C_EF4FAC(Evt* script, s32 isInitialCall) {
@@ -199,7 +199,7 @@ ApiStatus func_8024299C_EF4FAC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = evt_get_variable(script, *args);
+    NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args);
     s32 var;
     u32 x, y, z;
     f32 x2, y2, z2, w2;

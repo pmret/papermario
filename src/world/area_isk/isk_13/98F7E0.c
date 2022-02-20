@@ -3,29 +3,27 @@
 static char* N(exit_str_0) = "isk_12";
 static char* N(exit_str_1) = "";
 
-INCLUDE_ASM(s32, "world/area_isk/isk_13/98F7E0", func_80240000_98F7E0);
+#include "world/common/UnkNpcAIFunc36.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_13/98F7E0", func_80240230_98FA10);
+#include "world/common/UnkNpcAIFunc37.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_13/98F7E0", func_80240628_98FE08);
+#include "world/common/UnkNpcAIFunc38.inc.c"
 
 #include "world/common/UnkNpcAIFunc15.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_13/98F7E0", func_802408AC_99008C);
+#include "world/common/UnkNpcAIFunc39.inc.c"
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_13/98F7E0", func_80240BF0_9903D0);
+#include "world/common/UnkNpcAIMainFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_13/98F7E0", func_80240E14_9905F4);
+#include "world/common/UnkNpcAIFunc40.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_13/98F7E0", func_80240EA8_990688);
+#include "world/common/UnkNpcAIMainFunc3.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_13/98F7E0", func_80240F3C_99071C);
-
-INCLUDE_ASM(s32, "world/area_isk/isk_13/98F7E0", func_80241108_9908E8);
+#include "world/common/UnkFunc53.inc.c"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_13/98F7E0", func_802411F8_9909D8);
 

@@ -126,7 +126,7 @@ glabel func_802BB1E8_E2B918
 /* E2BAA4 802BB374 8E250048 */  lw        $a1, 0x48($s1)
 /* E2BAA8 802BB378 8E270050 */  lw        $a3, 0x50($s1)
 /* E2BAAC 802BB37C 44062000 */  mfc1      $a2, $f4
-/* E2BAB0 802BB380 0C01BFBC */  jal       playFX_11
+/* E2BAB0 802BB380 0C01BFBC */  jal       fx_sparkles
 /* E2BAB4 802BB384 0000202D */   daddu    $a0, $zero, $zero
 /* E2BAB8 802BB388 8E220000 */  lw        $v0, ($s1)
 /* E2BABC 802BB38C 34420020 */  ori       $v0, $v0, 0x20

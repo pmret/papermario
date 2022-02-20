@@ -57,16 +57,16 @@ glabel osCreatePiManager
 /* 3BEA8 80060AA8 2631E6E0 */  addiu     $s1, $s1, %lo(piMgrThread)
 /* 3BEAC 80060AAC 02202021 */  addu      $a0, $s1, $zero
 /* 3BEB0 80060AB0 00002821 */  addu      $a1, $zero, $zero
-/* 3BEB4 80060AB4 3C068006 */  lui       $a2, %hi(osDevMgrMain)
-/* 3BEB8 80060AB8 24C61090 */  addiu     $a2, $a2, %lo(osDevMgrMain)
+/* 3BEB4 80060AB4 3C068006 */  lui       $a2, %hi(__osDevMgrMain)
+/* 3BEB8 80060AB8 24C61090 */  addiu     $a2, $a2, %lo(__osDevMgrMain)
 /* 3BEBC 80060ABC 24030001 */  addiu     $v1, $zero, 1
 /* 3BEC0 80060AC0 AE830000 */  sw        $v1, ($s4)
 /* 3BEC4 80060AC4 3C03800B */  lui       $v1, %hi(gOsPiMessageQueue)
 /* 3BEC8 80060AC8 24634380 */  addiu     $v1, $v1, %lo(gOsPiMessageQueue)
 /* 3BECC 80060ACC 3C018009 */  lui       $at, %hi(__osPiDevMgr+0x10)
 /* 3BED0 80060AD0 AC233D60 */  sw        $v1, %lo(__osPiDevMgr+0x10)($at)
-/* 3BED4 80060AD4 3C038007 */  lui       $v1, %hi(osPiRawStartDma)
-/* 3BED8 80060AD8 2463B480 */  addiu     $v1, $v1, %lo(osPiRawStartDma)
+/* 3BED4 80060AD4 3C038007 */  lui       $v1, %hi(__osPiRawStartDma)
+/* 3BED8 80060AD8 2463B480 */  addiu     $v1, $v1, %lo(__osPiRawStartDma)
 /* 3BEDC 80060ADC 3C018009 */  lui       $at, %hi(__osPiDevMgr+0x14)
 /* 3BEE0 80060AE0 AC233D64 */  sw        $v1, %lo(__osPiDevMgr+0x14)($at)
 /* 3BEE4 80060AE4 3C038006 */  lui       $v1, %hi(osEPiRawStartDma)

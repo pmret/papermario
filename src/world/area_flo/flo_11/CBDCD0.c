@@ -26,7 +26,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_11_tattle },
 };
 
-EvtSource N(802403E0) = {
+EvtScript N(802403E0) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
@@ -37,7 +37,7 @@ EvtSource N(802403E0) = {
     EVT_END
 };
 
-EvtSource N(80240450) = {
+EvtScript N(80240450) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -78,7 +78,7 @@ EvtSource N(80240450) = {
     EVT_END
 };
 
-EvtSource N(802406FC) = {
+EvtScript N(802406FC) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
@@ -134,7 +134,7 @@ EvtSource N(802406FC) = {
     EVT_END
 };
 
-EvtSource N(80240A50) = {
+EvtScript N(80240A50) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(HidePlayerShadow, TRUE)
@@ -197,7 +197,7 @@ EvtSource N(80240A50) = {
     EVT_END
 };
 
-EvtSource N(80240E40) = {
+EvtScript N(80240E40) = {
     EVT_CALL(N(UnkFunc25))
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_RETURN
@@ -219,7 +219,7 @@ EvtSource N(80240E40) = {
     EVT_END
 };
 
-EvtSource N(80240F1C) = {
+EvtScript N(80240F1C) = {
     EVT_CALL(N(SetPlayerStatusAnimFlags100000))
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerPhysics, TRUE)
@@ -253,7 +253,7 @@ EvtSource N(80240F1C) = {
     EVT_END
 };
 
-EvtSource N(802410F8) = {
+EvtScript N(802410F8) = {
     EVT_CALL(IsPlayerOnValidFloor, EVT_VAR(0))
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_RETURN
@@ -315,11 +315,11 @@ EvtSource N(802410F8) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_8024142C) = EXIT_WALK_SCRIPT(60,  0, "flo_23",  1);
+EvtScript N(exitWalk_8024142C) = EXIT_WALK_SCRIPT(60,  0, "flo_23",  1);
 
-EvtSource N(exitWalk_80241488) = EXIT_WALK_SCRIPT(60,  1, "flo_12",  0);
+EvtScript N(exitWalk_80241488) = EXIT_WALK_SCRIPT(60,  1, "flo_12",  0);
 
-EvtSource N(802414E4) = {
+EvtScript N(802414E4) = {
     EVT_SET_GROUP(27)
     EVT_CALL(GotoMap, EVT_PTR("flo_11"), 5)
     EVT_WAIT_FRAMES(100)
@@ -327,7 +327,7 @@ EvtSource N(802414E4) = {
     EVT_END
 };
 
-EvtSource N(80241520) = {
+EvtScript N(80241520) = {
     EVT_SET_GROUP(27)
     EVT_CALL(GotoMap, EVT_PTR("flo_11"), 6)
     EVT_WAIT_FRAMES(100)
@@ -335,7 +335,7 @@ EvtSource N(80241520) = {
     EVT_END
 };
 
-EvtSource N(8024155C) = {
+EvtScript N(8024155C) = {
     EVT_SET_GROUP(27)
     EVT_CALL(GotoMap, EVT_PTR("flo_11"), 7)
     EVT_WAIT_FRAMES(100)
@@ -343,7 +343,7 @@ EvtSource N(8024155C) = {
     EVT_END
 };
 
-EvtSource N(80241598) = {
+EvtScript N(80241598) = {
     EVT_SET_GROUP(27)
     EVT_CALL(GotoMap, EVT_PTR("flo_11"), 2)
     EVT_WAIT_FRAMES(100)
@@ -351,7 +351,7 @@ EvtSource N(80241598) = {
     EVT_END
 };
 
-EvtSource N(802415D4) = {
+EvtScript N(802415D4) = {
     EVT_SET_GROUP(27)
     EVT_CALL(GotoMap, EVT_PTR("flo_11"), 3)
     EVT_WAIT_FRAMES(100)
@@ -359,7 +359,7 @@ EvtSource N(802415D4) = {
     EVT_END
 };
 
-EvtSource N(80241610) = {
+EvtScript N(80241610) = {
     EVT_SET_GROUP(27)
     EVT_CALL(GotoMap, EVT_PTR("flo_11"), 4)
     EVT_WAIT_FRAMES(100)
@@ -367,7 +367,7 @@ EvtSource N(80241610) = {
     EVT_END
 };
 
-EvtSource N(8024164C) = {
+EvtScript N(8024164C) = {
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
     EVT_SET(EVT_VAR(12), EVT_VAR(2))
@@ -376,7 +376,7 @@ EvtSource N(8024164C) = {
     EVT_END
 };
 
-EvtSource N(80241698) = {
+EvtScript N(80241698) = {
     EVT_BIND_TRIGGER(N(exitWalk_80241488), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_8024142C), TRIGGER_FLOOR_ABOVE, 4, 1, 0)
     EVT_SET(EVT_VAR(0), 2)
@@ -407,7 +407,7 @@ EvtSource N(80241698) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
@@ -449,8 +449,8 @@ static s32 N(pad_1AB8)[] = {
 NpcSettings N(npcSettings_80241AC0) = {
     .height = 32,
     .radius = 24,
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 20,
 };
 
@@ -496,7 +496,7 @@ s32 N(vectorList_80241C84)[] = {
     0x42200000, 0x42C80000, 0x43AF0000, 0x42200000,
 };
 
-EvtSource N(80241CB4) = {
+EvtScript N(80241CB4) = {
     EVT_LOOP(0)
         EVT_CALL(PlaySound, SOUND_295)
         EVT_WAIT_FRAMES(EVT_VAR(0))
@@ -505,7 +505,7 @@ EvtSource N(80241CB4) = {
     EVT_END
 };
 
-EvtSource N(80241CF4) = {
+EvtScript N(80241CF4) = {
     EVT_SET(EVT_VAR(0), 5)
     EVT_EXEC_GET_TID(N(80241CB4), EVT_MAP_VAR(11))
     EVT_THREAD
@@ -533,7 +533,7 @@ EvtSource N(80241CF4) = {
     EVT_END
 };
 
-EvtSource N(80241E4C) = {
+EvtScript N(80241E4C) = {
     EVT_THREAD
         EVT_CALL(LoadPath, 30, EVT_PTR(N(vectorList_80241BAC)), 4, 0)
         EVT_LOOP(0)
@@ -559,7 +559,7 @@ EvtSource N(80241E4C) = {
     EVT_END
 };
 
-EvtSource N(80241F80) = {
+EvtScript N(80241F80) = {
     EVT_SET(EVT_VAR(0), 4)
     EVT_EXEC_GET_TID(N(80241CB4), EVT_MAP_VAR(11))
     EVT_THREAD
@@ -586,7 +586,7 @@ EvtSource N(80241F80) = {
     EVT_END
 };
 
-EvtSource N(802420C8) = {
+EvtScript N(802420C8) = {
     EVT_THREAD
         EVT_CALL(LoadPath, 40, EVT_PTR(N(vectorList_80241C54)), 4, 0)
         EVT_LOOP(0)
@@ -615,7 +615,7 @@ EvtSource N(802420C8) = {
     EVT_END
 };
 
-EvtSource N(80242240) = {
+EvtScript N(80242240) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1377), 1)
         EVT_RETURN
     EVT_END_IF
@@ -697,7 +697,7 @@ EvtSource N(80242240) = {
     EVT_END
 };
 
-EvtSource N(idle_80242810) = {
+EvtScript N(idle_80242810) = {
     EVT_LOOP(0)
         EVT_CALL(GetSelfVar, 0, EVT_VAR(0))
         EVT_IF_NE(EVT_VAR(0), 0)
@@ -713,7 +713,7 @@ EvtSource N(idle_80242810) = {
     EVT_END
 };
 
-EvtSource N(defeat_802428B8) = {
+EvtScript N(defeat_802428B8) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -744,7 +744,7 @@ EvtSource N(defeat_802428B8) = {
     EVT_END
 };
 
-EvtSource N(defeat_80242AC4) = {
+EvtScript N(defeat_80242AC4) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -760,7 +760,7 @@ EvtSource N(defeat_80242AC4) = {
     EVT_END
 };
 
-EvtSource N(init_80242B58) = {
+EvtScript N(init_80242B58) = {
     EVT_CALL(SetNpcPos, 0, 0, -1000, 0)
     EVT_IF_EQ(EVT_SAVE_FLAG(1377), 0)
         EVT_IF_GE(EVT_SAVE_VAR(0), 45)
@@ -777,7 +777,7 @@ EvtSource N(init_80242B58) = {
     EVT_END
 };
 
-EvtSource N(init_80242C38) = {
+EvtScript N(init_80242C38) = {
     EVT_CALL(SetNpcPos, 1, 0, -1000, 0)
     EVT_IF_EQ(EVT_SAVE_FLAG(1377), 0)
         EVT_IF_GE(EVT_SAVE_VAR(0), 45)
@@ -878,7 +878,7 @@ static s32 N(pad_30EC) = {
     0x00000000,
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EA0E8, -220, 60, -75, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1384))
     EVT_RETURN
@@ -897,9 +897,9 @@ EvtSource N(makeEntities) = {
 
 #include "world/common/SomeXYZFunc2.inc.c"
 
-void playFX_82();
+void fx_sun();
 
 ApiStatus N(func_802402E0_CBDFB0)(Evt* script, s32 isInitialCall) {
-    playFX_82(0, 0, 0, 0, 0, 0);
+    fx_sun(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

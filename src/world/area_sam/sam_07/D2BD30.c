@@ -31,7 +31,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_802405B0_D2C2E0);
 
 #include "world/common/UnkNpcAIFunc32.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_07/D2BD30", func_80241088_D2CDB8);
+#include "world/common/UnkNpcAIFunc46.inc.c"
 
 #include "world/common/UnkNpcDurationFlagFunc3.inc.c"
 

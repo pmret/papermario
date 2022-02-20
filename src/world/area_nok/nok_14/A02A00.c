@@ -8,11 +8,11 @@
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_14/A02A00", func_80240554_A02D94);
+#include "world/common/UnkNpcAIMainFunc5.inc.c"
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_14/A02A00", func_80240B44_A03384);
+#include "world/common/UnkNpcAIFunc35.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 

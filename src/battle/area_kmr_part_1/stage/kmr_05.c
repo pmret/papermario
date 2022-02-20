@@ -3,16 +3,16 @@
 
 #define NAMESPACE b_area_kmr_part_1_kmr_05
 
-#include "clouds.inc.c"
+#include "world/common/clouds.inc.c"
 
-EvtSource N(beforeBattle_80220A28) = {
+EvtScript N(beforeBattle_80220A28) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(EnableModel, 27, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(afterBattle_80220A5C) = {
+EvtScript N(afterBattle_80220A5C) = {
     EVT_RETURN
     EVT_END
 };

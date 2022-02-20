@@ -10,7 +10,7 @@ ApiStatus N(func_802A123C_71CF1C)(Evt* script, s32 isInitialCall) {
     s32 c = evt_get_variable(script, *args++);
     s32 d = evt_get_variable(script, *args++);
 
-    playFX_40(0, a, b, c, d);
+    fx_recover(0, a, b, c, d);
 
     return ApiStatus_DONE2;
 }
@@ -27,7 +27,7 @@ ApiStatus N(func_802A12FC_71CFDC)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x0000008D)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_EXEC_WAIT(N(EatItem))

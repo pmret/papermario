@@ -144,7 +144,7 @@ ApiStatus N(ReflectFloor)(Evt* script, s32 isInitialCall) {
         case REFLECTION_FLOOR_WALL:
         case REFLECTION_FLOOR:
             script->array[0] = create_generic_entity_world(NULL, N(reflection_setup_floor));
-            gOverrideFlags |= 0x80;
+            gOverrideFlags |= GLOBAL_OVERRIDES_80;
             break;
         case REFLECTION_WALL:
             break;
@@ -406,7 +406,7 @@ void N(SetPartnerFlags20000)(void) {
 // Requires most of area_pra to have its data decomped.
 
 /*
-#new:EvtSource $Script_802415D0
+#new:EvtScript $Script_802415D0
 {
     0:  NewArray  00000010 *VarA
    10:  If  *Var1  ==  00000000

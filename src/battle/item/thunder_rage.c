@@ -41,7 +41,7 @@ ApiStatus N(func_802A1354_71B4F4)(Evt* script, s32 isInitialCall) {
             posY -= actor->size.y / 2;
         }
 
-        playFX_36(rand_int(2) + 3, posX, posY, posZ, scaleX, scaleY);
+        fx_lightning(rand_int(2) + 3, posX, posY, posZ, scaleX, scaleY);
 
         return ApiStatus_DONE2;
     }
@@ -51,7 +51,7 @@ ApiStatus N(func_802A1354_71B4F4)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x00000082)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CHILD_THREAD

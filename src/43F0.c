@@ -50,8 +50,7 @@ Gfx D_80074580[] = {
     gsSPEndDisplayList(),
 };
 
-void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
-void dma_write_block(s32 romStart, s32 vramDest, s32 length);
+void dma_write_block(s32 dramAddr, s32 devAddr, s32 size);
 
 #define ROM_CHUNK_SIZE 0x2000
 
@@ -652,15 +651,15 @@ f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ) {
 }
 
 f32 get_player_normal_yaw(void) {
-    return atan2(0, 0, gGameStatusPtr->playerTraceNormal.x, gGameStatusPtr->playerTraceNormal.z);
+    return atan2(0, 0, gGameStatusPtr->playerGroundTraceNormal.x, gGameStatusPtr->playerGroundTraceNormal.z);
 }
 
 f32 get_player_normal_pitch(void) {
-    f32 traceNormalX = gGameStatusPtr->playerTraceNormal.x;
-    f32 traceNormalZ = gGameStatusPtr->playerTraceNormal.z;
+    f32 traceNormalX = gGameStatusPtr->playerGroundTraceNormal.x;
+    f32 traceNormalZ = gGameStatusPtr->playerGroundTraceNormal.z;
     f32 sqrt = sqrtf(SQ(traceNormalX) + SQ(traceNormalZ));
 
-    return atan2(0.0f, 0.0f, sqrt, -gGameStatusPtr->playerTraceNormal.y);
+    return atan2(0.0f, 0.0f, sqrt, -gGameStatusPtr->playerGroundTraceNormal.y);
 }
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by) {

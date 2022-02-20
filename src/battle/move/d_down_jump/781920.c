@@ -12,9 +12,9 @@ ApiStatus func_802A10E4_781A04(Evt* script, s32 isInitialCall) {
     s32 var2 = evt_get_variable(script, *args++);
 
     if (script->varTable[10] == 0) {
-        playFX_32(TRUE, var0, var1, var2, 0.0f);
+        fx_green_impact(TRUE, var0, var1, var2, 0.0f);
     } else {
-        playFX_32(FALSE, var0, var1, var2, 0.0f);
+        fx_green_impact(FALSE, var0, var1, var2, 0.0f);
     }
 
     return ApiStatus_DONE2;

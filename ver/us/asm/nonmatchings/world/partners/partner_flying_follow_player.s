@@ -35,15 +35,15 @@ glabel partner_flying_follow_player
 /* 86F04 800EDA54 00400008 */  jr        $v0
 /* 86F08 800EDA58 00000000 */   nop
 .L800EDA5C_86F0C:
-/* 86F0C 800EDA5C 3C038011 */  lui       $v1, %hi(D_8010CD38)
-/* 86F10 800EDA60 2463CD38 */  addiu     $v1, $v1, %lo(D_8010CD38)
+/* 86F0C 800EDA5C 3C038011 */  lui       $v1, %hi(PlayerMoveHistory)
+/* 86F10 800EDA60 2463CD38 */  addiu     $v1, $v1, %lo(PlayerMoveHistory)
 /* 86F14 800EDA64 44806000 */  mtc1      $zero, $f12
 /* 86F18 800EDA68 3C028011 */  lui       $v0, %hi(D_8010CFBC)
 /* 86F1C 800EDA6C 8C42CFBC */  lw        $v0, %lo(D_8010CFBC)($v0)
 /* 86F20 800EDA70 C6220038 */  lwc1      $f2, 0x38($s1)
 /* 86F24 800EDA74 C624003C */  lwc1      $f4, 0x3c($s1)
-/* 86F28 800EDA78 3C018011 */  lui       $at, %hi(D_8010CFC0)
-/* 86F2C 800EDA7C C42ACFC0 */  lwc1      $f10, %lo(D_8010CFC0)($at)
+/* 86F28 800EDA78 3C018011 */  lui       $at, %hi(wPartnerTetherDistance)
+/* 86F2C 800EDA7C C42ACFC0 */  lwc1      $f10, %lo(wPartnerTetherDistance)($at)
 /* 86F30 800EDA80 3C0141A0 */  lui       $at, 0x41a0
 /* 86F34 800EDA84 44814000 */  mtc1      $at, $f8
 /* 86F38 800EDA88 C6200040 */  lwc1      $f0, 0x40($s1)
@@ -56,12 +56,12 @@ glabel partner_flying_follow_player
 /* 86F54 800EDAA4 E7A20020 */  swc1      $f2, 0x20($sp)
 /* 86F58 800EDAA8 E7A40024 */  swc1      $f4, 0x24($sp)
 /* 86F5C 800EDAAC E7A00028 */  swc1      $f0, 0x28($sp)
-/* 86F60 800EDAB0 3C018010 */  lui       $at, %hi(D_800F833C)
-/* 86F64 800EDAB4 E422833C */  swc1      $f2, %lo(D_800F833C)($at)
-/* 86F68 800EDAB8 3C018010 */  lui       $at, %hi(D_800F8340)
-/* 86F6C 800EDABC E4248340 */  swc1      $f4, %lo(D_800F8340)($at)
-/* 86F70 800EDAC0 3C018010 */  lui       $at, %hi(D_800F8344)
-/* 86F74 800EDAC4 E4208344 */  swc1      $f0, %lo(D_800F8344)($at)
+/* 86F60 800EDAB0 3C018010 */  lui       $at, %hi(SavedPartnerPosX)
+/* 86F64 800EDAB4 E422833C */  swc1      $f2, %lo(SavedPartnerPosX)($at)
+/* 86F68 800EDAB8 3C018010 */  lui       $at, %hi(SavedPartnerPosY)
+/* 86F6C 800EDABC E4248340 */  swc1      $f4, %lo(SavedPartnerPosY)($at)
+/* 86F70 800EDAC0 3C018010 */  lui       $at, %hi(SavedPartnerPosZ)
+/* 86F74 800EDAC4 E4208344 */  swc1      $f0, %lo(SavedPartnerPosZ)($at)
 /* 86F78 800EDAC8 45020008 */  bc1fl     .L800EDAEC
 /* 86F7C 800EDACC 46083000 */   add.s    $f0, $f6, $f8
 /* 86F80 800EDAD0 460A4081 */  sub.s     $f2, $f8, $f10
@@ -156,8 +156,8 @@ glabel partner_flying_follow_player
 /* 870CC 800EDC1C 00000000 */  nop
 /* 870D0 800EDC20 E6200018 */  swc1      $f0, 0x18($s1)
 .L800EDC24:
-/* 870D4 800EDC24 3C018011 */  lui       $at, %hi(D_8010CFC0)
-/* 870D8 800EDC28 C422CFC0 */  lwc1      $f2, %lo(D_8010CFC0)($at)
+/* 870D4 800EDC24 3C018011 */  lui       $at, %hi(wPartnerTetherDistance)
+/* 870D8 800EDC28 C422CFC0 */  lwc1      $f2, %lo(wPartnerTetherDistance)($at)
 /* 870DC 800EDC2C 3C0141A0 */  lui       $at, 0x41a0
 /* 870E0 800EDC30 44810000 */  mtc1      $at, $f0
 /* 870E4 800EDC34 00000000 */  nop
@@ -172,8 +172,8 @@ glabel partner_flying_follow_player
 .L800EDC58:
 /* 87108 800EDC58 3C128011 */  lui       $s2, %hi(D_8010CFBC)
 /* 8710C 800EDC5C 2652CFBC */  addiu     $s2, $s2, %lo(D_8010CFBC)
-/* 87110 800EDC60 3C148011 */  lui       $s4, %hi(D_8010CD38)
-/* 87114 800EDC64 2694CD38 */  addiu     $s4, $s4, %lo(D_8010CD38)
+/* 87110 800EDC60 3C148011 */  lui       $s4, %hi(PlayerMoveHistory)
+/* 87114 800EDC64 2694CD38 */  addiu     $s4, $s4, %lo(PlayerMoveHistory)
 .L800EDC68:
 /* 87118 800EDC68 C7AC0020 */  lwc1      $f12, 0x20($sp)
 /* 8711C 800EDC6C C7AE0028 */  lwc1      $f14, 0x28($sp)
@@ -234,8 +234,8 @@ glabel partner_flying_follow_player
 /* 871F4 800EDD44 46200020 */   cvt.s.d  $f0, $f0
 .L800EDD48:
 /* 871F8 800EDD48 8E430000 */  lw        $v1, ($s2)
-/* 871FC 800EDD4C 3C028011 */  lui       $v0, %hi(D_8010CFB8)
-/* 87200 800EDD50 8C42CFB8 */  lw        $v0, %lo(D_8010CFB8)($v0)
+/* 871FC 800EDD4C 3C028011 */  lui       $v0, %hi(PlayerMoveHistoryIndex)
+/* 87200 800EDD50 8C42CFB8 */  lw        $v0, %lo(PlayerMoveHistoryIndex)($v0)
 /* 87204 800EDD54 1062FF92 */  beq       $v1, $v0, .L800EDBA0
 /* 87208 800EDD58 00000000 */   nop
 /* 8720C 800EDD5C C62C0038 */  lwc1      $f12, 0x38($s1)
@@ -243,8 +243,8 @@ glabel partner_flying_follow_player
 /* 87214 800EDD64 8E660028 */  lw        $a2, 0x28($s3)
 /* 87218 800EDD68 0C00A7B5 */  jal       dist2D
 /* 8721C 800EDD6C 8E670030 */   lw       $a3, 0x30($s3)
-/* 87220 800EDD70 3C018011 */  lui       $at, %hi(D_8010CFC0)
-/* 87224 800EDD74 C422CFC0 */  lwc1      $f2, %lo(D_8010CFC0)($at)
+/* 87220 800EDD70 3C018011 */  lui       $at, %hi(wPartnerTetherDistance)
+/* 87224 800EDD74 C422CFC0 */  lwc1      $f2, %lo(wPartnerTetherDistance)($at)
 /* 87228 800EDD78 4602003E */  c.le.s    $f0, $f2
 /* 8722C 800EDD7C 00000000 */  nop
 /* 87230 800EDD80 4501FF94 */  bc1t      .L800EDBD4
@@ -280,8 +280,8 @@ glabel partner_flying_follow_player
 /* 8729C 800EDDEC 3C048011 */  lui       $a0, %hi(D_8010CFBC)
 /* 872A0 800EDDF0 2484CFBC */  addiu     $a0, $a0, %lo(D_8010CFBC)
 /* 872A4 800EDDF4 8C830000 */  lw        $v1, ($a0)
-/* 872A8 800EDDF8 3C028011 */  lui       $v0, %hi(D_8010CFB8)
-/* 872AC 800EDDFC 8C42CFB8 */  lw        $v0, %lo(D_8010CFB8)($v0)
+/* 872A8 800EDDF8 3C028011 */  lui       $v0, %hi(PlayerMoveHistoryIndex)
+/* 872AC 800EDDFC 8C42CFB8 */  lw        $v0, %lo(PlayerMoveHistoryIndex)($v0)
 /* 872B0 800EDE00 106202D9 */  beq       $v1, $v0, .L800EE968_87E18
 /* 872B4 800EDE04 24620001 */   addiu    $v0, $v1, 1
 /* 872B8 800EDE08 AC820000 */  sw        $v0, ($a0)
@@ -289,8 +289,8 @@ glabel partner_flying_follow_player
 /* 872C0 800EDE10 50400001 */  beql      $v0, $zero, .L800EDE18
 /* 872C4 800EDE14 AC800000 */   sw       $zero, ($a0)
 .L800EDE18:
-/* 872C8 800EDE18 3C038011 */  lui       $v1, %hi(D_8010CD38)
-/* 872CC 800EDE1C 2463CD38 */  addiu     $v1, $v1, %lo(D_8010CD38)
+/* 872C8 800EDE18 3C038011 */  lui       $v1, %hi(PlayerMoveHistory)
+/* 872CC 800EDE1C 2463CD38 */  addiu     $v1, $v1, %lo(PlayerMoveHistory)
 /* 872D0 800EDE20 8C820000 */  lw        $v0, ($a0)
 /* 872D4 800EDE24 3C013FA6 */  lui       $at, 0x3fa6
 /* 872D8 800EDE28 34216666 */  ori       $at, $at, 0x6666
@@ -357,8 +357,8 @@ glabel partner_flying_follow_player
 /* 873C0 800EDF10 86020000 */  lh        $v0, ($s0)
 /* 873C4 800EDF14 14520026 */  bne       $v0, $s2, .L800EDFB0
 /* 873C8 800EDF18 2402000A */   addiu    $v0, $zero, 0xa
-/* 873CC 800EDF1C 3C018011 */  lui       $at, %hi(D_8010CFC0)
-/* 873D0 800EDF20 C420CFC0 */  lwc1      $f0, %lo(D_8010CFC0)($at)
+/* 873CC 800EDF1C 3C018011 */  lui       $at, %hi(wPartnerTetherDistance)
+/* 873D0 800EDF20 C420CFC0 */  lwc1      $f0, %lo(wPartnerTetherDistance)($at)
 /* 873D4 800EDF24 C7A2002C */  lwc1      $f2, 0x2c($sp)
 /* 873D8 800EDF28 4600103C */  c.lt.s    $f2, $f0
 /* 873DC 800EDF2C 00000000 */  nop
@@ -511,8 +511,8 @@ glabel partner_flying_follow_player
 /* 8760C 800EE15C E620000C */  swc1      $f0, 0xc($s1)
 /* 87610 800EE160 0C00A7B5 */  jal       dist2D
 /* 87614 800EE164 A6000000 */   sh       $zero, ($s0)
-/* 87618 800EE168 3C018011 */  lui       $at, %hi(D_8010CFC0)
-/* 8761C 800EE16C C422CFC0 */  lwc1      $f2, %lo(D_8010CFC0)($at)
+/* 87618 800EE168 3C018011 */  lui       $at, %hi(wPartnerTetherDistance)
+/* 8761C 800EE16C C422CFC0 */  lwc1      $f2, %lo(wPartnerTetherDistance)($at)
 /* 87620 800EE170 4602003C */  c.lt.s    $f0, $f2
 /* 87624 800EE174 00000000 */  nop
 /* 87628 800EE178 450001FB */  bc1f      .L800EE968_87E18
@@ -521,8 +521,8 @@ glabel partner_flying_follow_player
 /* 87634 800EE184 0803BA5A */  j         .L800EE968_87E18
 /* 87638 800EE188 A6020000 */   sh       $v0, ($s0)
 .L800EE18C_8763C:
-/* 8763C 800EE18C 3C038011 */  lui       $v1, %hi(D_8010CD38)
-/* 87640 800EE190 2463CD38 */  addiu     $v1, $v1, %lo(D_8010CD38)
+/* 8763C 800EE18C 3C038011 */  lui       $v1, %hi(PlayerMoveHistory)
+/* 87640 800EE190 2463CD38 */  addiu     $v1, $v1, %lo(PlayerMoveHistory)
 /* 87644 800EE194 C62C0038 */  lwc1      $f12, 0x38($s1)
 /* 87648 800EE198 C62E0040 */  lwc1      $f14, 0x40($s1)
 /* 8764C 800EE19C 8E660028 */  lw        $a2, 0x28($s3)
@@ -540,8 +540,8 @@ glabel partner_flying_follow_player
 /* 8767C 800EE1CC E7A20024 */  swc1      $f2, 0x24($sp)
 /* 87680 800EE1D0 0C00A7B5 */  jal       dist2D
 /* 87684 800EE1D4 E7A40028 */   swc1     $f4, 0x28($sp)
-/* 87688 800EE1D8 3C018011 */  lui       $at, %hi(D_8010CFC0)
-/* 8768C 800EE1DC C422CFC0 */  lwc1      $f2, %lo(D_8010CFC0)($at)
+/* 87688 800EE1D8 3C018011 */  lui       $at, %hi(wPartnerTetherDistance)
+/* 8768C 800EE1DC C422CFC0 */  lwc1      $f2, %lo(wPartnerTetherDistance)($at)
 /* 87690 800EE1E0 4602003E */  c.le.s    $f0, $f2
 /* 87694 800EE1E4 00000000 */  nop
 /* 87698 800EE1E8 450000A5 */  bc1f      .L800EE480
@@ -612,8 +612,8 @@ glabel partner_flying_follow_player
 /* 87794 800EE2E4 46006300 */   add.s    $f12, $f12, $f0
 /* 87798 800EE2E8 44070000 */  mfc1      $a3, $f0
 /* 8779C 800EE2EC C6600028 */  lwc1      $f0, 0x28($s3)
-/* 877A0 800EE2F0 3C018011 */  lui       $at, %hi(D_8010CFC0)
-/* 877A4 800EE2F4 C424CFC0 */  lwc1      $f4, %lo(D_8010CFC0)($at)
+/* 877A0 800EE2F0 3C018011 */  lui       $at, %hi(wPartnerTetherDistance)
+/* 877A4 800EE2F4 C424CFC0 */  lwc1      $f4, %lo(wPartnerTetherDistance)($at)
 /* 877A8 800EE2F8 26240060 */  addiu     $a0, $s1, 0x60
 /* 877AC 800EE2FC E6200060 */  swc1      $f0, 0x60($s1)
 /* 877B0 800EE300 3C014120 */  lui       $at, 0x4120
@@ -723,8 +723,8 @@ glabel partner_flying_follow_player
 /* 87938 800EE488 8E660028 */  lw        $a2, 0x28($s3)
 /* 8793C 800EE48C 0C00A7B5 */  jal       dist2D
 /* 87940 800EE490 8E670030 */   lw       $a3, 0x30($s3)
-/* 87944 800EE494 3C018011 */  lui       $at, %hi(D_8010CFC0)
-/* 87948 800EE498 C422CFC0 */  lwc1      $f2, %lo(D_8010CFC0)($at)
+/* 87944 800EE494 3C018011 */  lui       $at, %hi(wPartnerTetherDistance)
+/* 87948 800EE498 C422CFC0 */  lwc1      $f2, %lo(wPartnerTetherDistance)($at)
 /* 8794C 800EE49C 4602003E */  c.le.s    $f0, $f2
 /* 87950 800EE4A0 00000000 */  nop
 /* 87954 800EE4A4 45010130 */  bc1t      .L800EE968_87E18
@@ -733,8 +733,8 @@ glabel partner_flying_follow_player
 /* 87960 800EE4B0 4481C000 */  mtc1      $at, $f24
 /* 87964 800EE4B4 3C128011 */  lui       $s2, %hi(D_8010CFBC)
 /* 87968 800EE4B8 2652CFBC */  addiu     $s2, $s2, %lo(D_8010CFBC)
-/* 8796C 800EE4BC 3C148011 */  lui       $s4, %hi(D_8010CD38)
-/* 87970 800EE4C0 2694CD38 */  addiu     $s4, $s4, %lo(D_8010CD38)
+/* 8796C 800EE4BC 3C148011 */  lui       $s4, %hi(PlayerMoveHistory)
+/* 87970 800EE4C0 2694CD38 */  addiu     $s4, $s4, %lo(PlayerMoveHistory)
 .L800EE4C4:
 /* 87974 800EE4C4 82020000 */  lb        $v0, ($s0)
 /* 87978 800EE4C8 14400024 */  bnez      $v0, .L800EE55C
@@ -760,8 +760,8 @@ glabel partner_flying_follow_player
 /* 879C8 800EE518 45010010 */  bc1t      .L800EE55C
 /* 879CC 800EE51C 00000000 */   nop
 /* 879D0 800EE520 8E430000 */  lw        $v1, ($s2)
-/* 879D4 800EE524 3C028011 */  lui       $v0, %hi(D_8010CFB8)
-/* 879D8 800EE528 8C42CFB8 */  lw        $v0, %lo(D_8010CFB8)($v0)
+/* 879D4 800EE524 3C028011 */  lui       $v0, %hi(PlayerMoveHistoryIndex)
+/* 879D8 800EE528 8C42CFB8 */  lw        $v0, %lo(PlayerMoveHistoryIndex)($v0)
 /* 879DC 800EE52C 1062000B */  beq       $v1, $v0, .L800EE55C
 /* 879E0 800EE530 24620001 */   addiu    $v0, $v1, 1
 /* 879E4 800EE534 AE420000 */  sw        $v0, ($s2)
@@ -822,13 +822,13 @@ glabel partner_flying_follow_player
 /* 87AB0 800EE600 8E260060 */  lw        $a2, 0x60($s1)
 /* 87AB4 800EE604 0C00A7B5 */  jal       dist2D
 /* 87AB8 800EE608 8E270068 */   lw       $a3, 0x68($s1)
-/* 87ABC 800EE60C 3C018010 */  lui       $at, %hi(D_800F802C)
-/* 87AC0 800EE610 C422802C */  lwc1      $f2, %lo(D_800F802C)($at)
+/* 87ABC 800EE60C 3C018010 */  lui       $at, %hi(wPartnerMoveTime)
+/* 87AC0 800EE610 C422802C */  lwc1      $f2, %lo(wPartnerMoveTime)($at)
 /* 87AC4 800EE614 468010A0 */  cvt.s.w   $f2, $f2
 /* 87AC8 800EE618 E7A0002C */  swc1      $f0, 0x2c($sp)
 /* 87ACC 800EE61C 46020003 */  div.s     $f0, $f0, $f2
-/* 87AD0 800EE620 3C018010 */  lui       $at, %hi(D_800F8030)
-/* 87AD4 800EE624 E4208030 */  swc1      $f0, %lo(D_800F8030)($at)
+/* 87AD0 800EE620 3C018010 */  lui       $at, %hi(wPartnerMoveSpeed)
+/* 87AD4 800EE624 E4208030 */  swc1      $f0, %lo(wPartnerMoveSpeed)($at)
 /* 87AD8 800EE628 E6200018 */  swc1      $f0, 0x18($s1)
 /* 87ADC 800EE62C 46000021 */  cvt.d.s   $f0, $f0
 /* 87AE0 800EE630 26240028 */  addiu     $a0, $s1, 0x28
@@ -868,8 +868,8 @@ glabel partner_flying_follow_player
 /* 87B60 800EE6B0 24420001 */  addiu     $v0, $v0, 1
 /* 87B64 800EE6B4 A4620000 */  sh        $v0, ($v1)
 .L800EE6B8:
-/* 87B68 800EE6B8 3C098010 */  lui       $t1, %hi(D_800F802C)
-/* 87B6C 800EE6BC 2529802C */  addiu     $t1, $t1, %lo(D_800F802C)
+/* 87B68 800EE6B8 3C098010 */  lui       $t1, %hi(wPartnerMoveTime)
+/* 87B6C 800EE6BC 2529802C */  addiu     $t1, $t1, %lo(wPartnerMoveTime)
 /* 87B70 800EE6C0 8D280000 */  lw        $t0, ($t1)
 /* 87B74 800EE6C4 1100007E */  beqz      $t0, .L800EE8C0
 /* 87B78 800EE6C8 3C040001 */   lui      $a0, 1
@@ -903,7 +903,7 @@ glabel partner_flying_follow_player
 /* 87BE8 800EE738 44830000 */  mtc1      $v1, $f0
 /* 87BEC 800EE73C 00000000 */  nop
 /* 87BF0 800EE740 46800020 */  cvt.s.w   $f0, $f0
-/* 87BF4 800EE744 0C0371DE */  jal       npc_raycast_down_ahead
+/* 87BF4 800EE744 0C0371DE */  jal       npc_raycast_down_around
 /* 87BF8 800EE748 E7A00018 */   swc1     $f0, 0x18($sp)
 /* 87BFC 800EE74C 14400017 */  bnez      $v0, .L800EE7AC
 /* 87C00 800EE750 00000000 */   nop
@@ -946,8 +946,8 @@ glabel partner_flying_follow_player
 /* 87C90 800EE7E0 46001080 */  add.s     $f2, $f2, $f0
 /* 87C94 800EE7E4 E622003C */  swc1      $f2, 0x3c($s1)
 .L800EE7E8:
-/* 87C98 800EE7E8 3C018010 */  lui       $at, %hi(D_800F8030)
-/* 87C9C 800EE7EC C4208030 */  lwc1      $f0, %lo(D_800F8030)($at)
+/* 87C98 800EE7E8 3C018010 */  lui       $at, %hi(wPartnerMoveSpeed)
+/* 87C9C 800EE7EC C4208030 */  lwc1      $f0, %lo(wPartnerMoveSpeed)($at)
 /* 87CA0 800EE7F0 C6220038 */  lwc1      $f2, 0x38($s1)
 /* 87CA4 800EE7F4 C624003C */  lwc1      $f4, 0x3c($s1)
 /* 87CA8 800EE7F8 C6260040 */  lwc1      $f6, 0x40($s1)

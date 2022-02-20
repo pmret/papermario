@@ -41,7 +41,7 @@ s32 D_802BE254_31DDC4 = 6;
 void func_802BD100_31CC70(Npc* npc) {
     if (!(npc->flags & NPC_FLAG_2)) {
         if (D_802BE310 == NULL) {
-            D_802BE310 = (unk_802BE310*)playFX_73(0, npc->pos.x, npc->pos.y + 13.0f, npc->pos.z, 0.9f, 5, 0);
+            D_802BE310 = (unk_802BE310*)fx_static_status(0, npc->pos.x, npc->pos.y + 13.0f, npc->pos.z, 0.9f, 5, 0);
         }
     }
 }
@@ -81,7 +81,7 @@ ApiStatus func_802BD27C_31CDEC(Evt* script, s32 isInitialCall) {
     }
 }
 
-EvtSource world_watt_take_out = {
+EvtScript world_watt_take_out = {
     EVT_CALL(func_802BD27C_31CDEC)
     EVT_RETURN
     EVT_END
@@ -203,7 +203,7 @@ ApiStatus func_802BD2B4_31CE24(Evt* script, s32 isInitialCall) {
     return 0;
 }
 
-EvtSource world_watt_update = {
+EvtScript world_watt_update = {
     EVT_CALL(func_802BD2B4_31CE24)
     EVT_RETURN
     EVT_END
@@ -221,7 +221,7 @@ void func_802BD710_31D280(Npc* watt) {
 s32 func_802BD754_31D2C4(void);
 INCLUDE_ASM(s32, "world/partner/watt", func_802BD754_31D2C4);
 
-EvtSource world_watt_use_ability = {
+EvtScript world_watt_use_ability = {
     EVT_CALL(func_802BD754_31D2C4)
     EVT_RETURN
     EVT_END
@@ -239,7 +239,7 @@ s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
         wattActionStatus->actionState.b[3] = 0;
         wattActionStatus->actionState.b[0] = 0;
         playerStatus->animFlags &= ~(PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT);
-        gGameStatusPtr->unk_7D = 0;
+        gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
     }
 
     if (partner_put_away(watt)) {
@@ -249,7 +249,7 @@ s32 func_802BDD0C_31D87C(Evt* script, s32 isInitialCall) {
     }
 }
 
-EvtSource world_watt_put_away = {
+EvtScript world_watt_put_away = {
     EVT_CALL(func_802BDD0C_31D87C)
     EVT_RETURN
     EVT_END
@@ -304,7 +304,7 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
             watt->flags &= ~NPC_FLAG_GRAVITY;
             watt->flags |= NPC_FLAG_100;
             playerStatus->animFlags |= PLAYER_STATUS_ANIM_FLAGS_2 | PLAYER_STATUS_ANIM_FLAGS_HOLDING_WATT;
-            gGameStatusPtr->unk_7D = 1;
+            gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
             wattActionStatus->actionState.b[0] = 1;
             wattActionStatus->actionState.b[3] = 6;
             D_802BE308 = 0;
@@ -385,7 +385,7 @@ void func_802BE070_31DBE0(void) {
     }
 }
 
-EvtSource world_watt_while_riding = {
+EvtScript world_watt_while_riding = {
     EVT_CALL(func_802BDE88_31D9F8)
     EVT_RETURN
     EVT_END

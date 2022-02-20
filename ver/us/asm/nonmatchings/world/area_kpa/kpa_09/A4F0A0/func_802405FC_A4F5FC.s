@@ -315,7 +315,7 @@ glabel func_802405FC_A4F5FC
 /* A4FAA0 80240AA0 8E450038 */  lw        $a1, 0x38($s2)
 /* A4FAA4 80240AA4 8E46003C */  lw        $a2, 0x3c($s2)
 /* A4FAA8 80240AA8 8E470040 */  lw        $a3, 0x40($s2)
-/* A4FAAC 80240AAC 0C01BECC */  jal       fx_walk
+/* A4FAAC 80240AAC 0C01BECC */  jal       fx_walking_dust
 /* A4FAB0 80240AB0 24040002 */   addiu    $a0, $zero, 2
 /* A4FAB4 80240AB4 3C01C47A */  lui       $at, 0xc47a
 /* A4FAB8 80240AB8 44810000 */  mtc1      $at, $f0

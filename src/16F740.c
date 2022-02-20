@@ -189,16 +189,17 @@ void func_80243910(void) {
 void btl_state_update_prepare_menu(void) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->unk_4D = -1;
-    battleStatus->unk_4E = -1;
-    battleStatus->unk_4F = -1;
-    battleStatus->unk_50 = -1;
-    battleStatus->unk_51 = -1;
-    battleStatus->unk_52 = -1;
-    battleStatus->stratsLastCursorPos = -1;
-    battleStatus->unk_5D = -1;
-    battleStatus->unk_62 = -1;
-    battleStatus->unk_63 = -1;
+    battleStatus->unk_4C[1] = -1;
+    battleStatus->unk_4C[2] = -1;
+    battleStatus->unk_4C[3] = -1;
+    battleStatus->unk_4C[4] = -1;
+    battleStatus->unk_4C[5] = -1;
+    battleStatus->unk_4C[5] = -1;
+    battleStatus->unk_4C[6] = -1;
+    battleStatus->unk_4C[7] = -1;
+    battleStatus->unk_5C[1] = -1;
+    battleStatus->unk_5C[6] = -1;
+    battleStatus->unk_5C[7] = -1;
 
     dma_copy(_415D90_ROM_START, _415D90_ROM_END, _415D90_VRAM);
 
@@ -370,9 +371,9 @@ void btl_state_update_victory(void) {
 
     if (gBattleState2 == BATTLE_STATES2_UNK_2) {
         func_8024E40C(2);
-        if (battleStatus->unk_8A == 3) {
+        if (battleStatus->nextMerleeSpellType == 3) {
             if ((s8) battleStatus->totalStarPoints == 0) {
-                battleStatus->unk_8A = 0;
+                battleStatus->nextMerleeSpellType = 0;
                 playerData->merleeTurnCount = 0;
                 playerData->merleeCastsLeft++;
             } else {
@@ -393,11 +394,11 @@ void btl_state_update_victory(void) {
             D_8029F248--;
         } else if (player->takeTurnScript == NULL || !does_script_exist(player->takeTurnID)) {
             player->takeTurnScript = NULL;
-            if (battleStatus->unk_8A != 3) {
+            if (battleStatus->nextMerleeSpellType != 3) {
                 gBattleState2 = BATTLE_STATES2_UNK_4;
             } else {
                 battleStatus->incrementStarPointDelay = 0x14;
-                battleStatus->unk_8A = 0;
+                battleStatus->nextMerleeSpellType = 0;
                 gBattleState2 = BATTLE_STATES2_UNK_4;
                 battleStatus->pendingStarPoints = battleStatus->totalStarPoints
                                         + battleStatus->pendingStarPoints + battleStatus->pendingStarPoints;
@@ -487,7 +488,7 @@ void btl_state_update_defeat(void) {
 
             if (player->debuff != 0) {
                 if (player->debuff == 7) {
-                    sfx_play_sound(SOUND_E7);
+                    sfx_play_sound(SOUND_FROZEN_SHATTER);
                     player->unk_228->flags |= EFFECT_INSTANCE_FLAGS_10;
                     player->unk_228 = NULL;
                 }
@@ -588,7 +589,7 @@ void btl_state_update_change_partner(void) {
                 }
             }
 
-            battleStatus->unk_5C = -1;
+            battleStatus->unk_5C[0] = -1;
             D_8029F248 = 0xA;
             gBattleState2 = BATTLE_STATES2_UNK_2;
 

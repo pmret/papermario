@@ -6,12 +6,15 @@
 
 #ifndef M2CTX
 #define BSS __attribute__ ((section (".bss")))
+#define TRANSPARENT_UNION __attribute__ ((__transparent_union__))
 #else
 #define BSS static
+#define TRANSPARENT_UNION
 #endif
 
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 
+#define A(sym) NS(AREA, sym)
 #define N(sym) NS(NAMESPACE, sym)
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
@@ -33,8 +36,13 @@
 #define PANIC() while (TRUE) {}
 #endif
 
-#define BADGE_MENU_PAGE(index) (&gBadgeMenuPages[index])
-#define ITEM_MENU_PAGE(index) (&gItemMenuPages[index])
+#define BADGE_MENU_PAGE(index) (&gPauseBadgesPages[index])
+#define ITEM_MENU_PAGE(index) (&gPauseItemsPages[index])
+
+#define MENU_PANEL_SELECTED_GRID_DATA(panel) \
+    (panel)->gridData[(panel)->page * (panel)->numCols * (panel)->numRows + \
+                      (panel)->numCols * (panel)->row + \
+                      (panel)->col]
 
 #define MAX_MAPVARS 16
 #define MAX_MAPFLAGS 3
@@ -64,6 +72,8 @@
 
 #define SPRITE_WORLD_SCALE 0.71428573f
 
+#define BATTLE_ENTITY_ID_MASK 0x800
+
 #define PACK_FILL_COLOR(r, g, b, a) (GPACK_RGBA5551(r, g, b, a) << 0x10) | GPACK_RGBA5551(r, g, b, a)
 
 #define SQ(x) (x*x)
@@ -84,6 +94,7 @@
 #define SPRITE_PIXEL_SCALE (5.0 / 7.0)
 
 #ifdef PERMUTER
+#undef SCRIPT
 #define SCRIPT(...) {}
 #endif
 

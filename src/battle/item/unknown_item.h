@@ -10,8 +10,8 @@
 ApiStatus N(func_802A123C_72447C)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802A12FC_72453C)(Evt* script, s32 isInitialCall);
 
-EvtSource N(UseItemWithEffect);
-EvtSource N(PlayerGoHome);
-EvtSource N(EatItem);
+extern EvtScript N(UseItemWithEffect);
+extern EvtScript N(PlayerGoHome);
+extern EvtScript N(EatItem);
 
 #endif

@@ -14,7 +14,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_14_tattle },
 };
 
-EvtSource N(802423F0) = {
+EvtScript N(802423F0) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
@@ -25,7 +25,7 @@ EvtSource N(802423F0) = {
     EVT_END
 };
 
-EvtSource N(updateTexturePan_80242460) = {
+EvtScript N(updateTexturePan_80242460) = {
     EVT_SET_GROUP(0)
     EVT_IF_EQ(EVT_VAR(5), 1)
         EVT_IF_EQ(EVT_VAR(6), 1)
@@ -42,11 +42,11 @@ EvtSource N(updateTexturePan_80242460) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_802424FC) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  1);
+EvtScript N(exitWalk_802424FC) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  1);
 
-EvtSource N(exitWalk_80242558) = EXIT_WALK_SCRIPT(60,  1, "flo_13",  0);
+EvtScript N(exitWalk_80242558) = EXIT_WALK_SCRIPT(60,  1, "flo_13",  0);
 
-EvtSource N(802425B4) = {
+EvtScript N(802425B4) = {
     EVT_BIND_TRIGGER(N(exitWalk_80242558), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_802424FC), TRIGGER_FLOOR_ABOVE, 4, 1, 0)
     EVT_RETURN
@@ -62,7 +62,7 @@ s32 N(lavaResetList_802425FC)[] = {
     0x00000023, 0xC2480000, 0x00000000, 0x42DC0000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -149,7 +149,7 @@ static s32 N(pad_2BF4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80242C00) = {
+EvtScript N(80242C00) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -190,7 +190,7 @@ EvtSource N(80242C00) = {
     EVT_END
 };
 
-EvtSource N(80242EAC) = {
+EvtScript N(80242EAC) = {
     EVT_SET(EVT_VAR(9), EVT_VAR(6))
     EVT_SET(EVT_VAR(8), EVT_VAR(5))
     EVT_SET(EVT_VAR(7), EVT_VAR(4))
@@ -246,7 +246,7 @@ s32 N(D_802431CC_CCE4DC) = {
     0x00000000,
 };
 
-EvtSource N(802431D0) = {
+EvtScript N(802431D0) = {
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(MakeLerp, EVT_VAR(1), 48, 15, 0)
     EVT_LOOP(0)
@@ -267,7 +267,7 @@ EvtSource N(802431D0) = {
     EVT_END
 };
 
-EvtSource N(802432E8) = {
+EvtScript N(802432E8) = {
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, ((NPC_FLAG_GRAVITY)), FALSE)
     EVT_LOOP(0)
         EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -290,7 +290,7 @@ Vec3f N(vectorList_80243384)[] = {
     { -69.0, 75.0, 81.0 },
 };
 
-EvtSource N(80243420) = {
+EvtScript N(80243420) = {
     EVT_WAIT_FRAMES(20)
     EVT_CALL(PlaySound, 0x80000023)
     EVT_CALL(LoadPath, 165, EVT_PTR(N(vectorList_80243384)), 13, 10)
@@ -310,7 +310,7 @@ EvtSource N(80243420) = {
     EVT_END
 };
 
-EvtSource N(8024352C) = {
+EvtScript N(8024352C) = {
     EVT_CALL(IsPlayerWithin, 531, 81, 30, EVT_VAR(0))
     EVT_IF_EQ(EVT_VAR(0), 0)
         EVT_RETURN
@@ -365,7 +365,7 @@ EvtSource N(8024352C) = {
     EVT_END
 };
 
-EvtSource N(80243870) = {
+EvtScript N(80243870) = {
     EVT_CALL(PlaySoundAt, 0x193, 0, 591, 55, 121)
     EVT_CALL(EnableModel, 123, 1)
     EVT_SETF(EVT_VAR(2), EVT_FIXED(1.0))
@@ -416,7 +416,7 @@ s32 N(D_80243B18_CCEE28) = {
     0x0000005A,
 };
 
-EvtSource N(80243B1C) = {
+EvtScript N(80243B1C) = {
     EVT_SET_GROUP(0)
     EVT_SET(EVT_VAR(15), EVT_VAR(0))
     EVT_LABEL(0)
@@ -476,7 +476,7 @@ EvtSource N(80243B1C) = {
 };
 
 
-EvtSource N(80243E78) = {
+EvtScript N(80243E78) = {
     EVT_CALL(ModifyColliderFlags, 3, 31, 0x00000006)
     EVT_CALL(ModifyColliderFlags, 3, 32, 0x00000006)
     EVT_CALL(ModifyColliderFlags, 3, 33, 0x00000006)
@@ -576,10 +576,10 @@ EvtSource N(80243E78) = {
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-void playFX_82();
+void fx_sun();
 
 ApiStatus N(func_8024030C_CCB61C)(Evt* script, s32 isInitialCall) {
-    playFX_82(0, 0, 0, 0, 0, 0);
+    fx_sun(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

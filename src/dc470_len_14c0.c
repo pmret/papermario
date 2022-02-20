@@ -29,25 +29,25 @@ void reset_background_settings(void) {
     D_801595A0 = 0;
     D_8014F12F = 0;
     gGameStatusPtr->unk_15C = 180;
-    gGameStatusPtr->enableBackground &= 0xF0;
+    gGameStatusPtr->backgroundFlags &= 0xF0;
 }
 
 void read_background_size(BackgroundHeader* bg) {
-    gGameStatusPtr->backgroundMaxW = bg->width;
-    gGameStatusPtr->backgroundMaxH = bg->height;
-    gGameStatusPtr->backgroundMinW = bg->startX;
-    gGameStatusPtr->backgroundMinH = bg->startY;
+    gGameStatusPtr->backgroundMaxX = bg->width;
+    gGameStatusPtr->backgroundMaxY = bg->height;
+    gGameStatusPtr->backgroundMinX = bg->startX;
+    gGameStatusPtr->backgroundMinY = bg->startY;
     gGameStatusPtr->backgroundRaster = bg->raster;
     gGameStatusPtr->backgroundPalette = bg->palette;
-    gGameStatusPtr->enableBackground |= 1;
+    gGameStatusPtr->backgroundFlags |= 1;
 }
 
 void set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
-    gGameStatusPtr->enableBackground &= ~1;
-    gGameStatusPtr->backgroundMaxW = startX;
-    gGameStatusPtr->backgroundMaxH = startY;
-    gGameStatusPtr->backgroundMinW = sizeX;
-    gGameStatusPtr->backgroundMinH = sizeY;
+    gGameStatusPtr->backgroundFlags &= ~1;
+    gGameStatusPtr->backgroundMaxX = startX;
+    gGameStatusPtr->backgroundMaxY = startY;
+    gGameStatusPtr->backgroundMinX = sizeX;
+    gGameStatusPtr->backgroundMinY = sizeY;
 }
 
 u16 blend_background_channel(s32 arg0, s32 arg1, s32 alpha) {

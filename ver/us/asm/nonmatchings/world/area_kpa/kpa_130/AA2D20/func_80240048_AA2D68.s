@@ -249,7 +249,7 @@ glabel func_80240048_AA2D68
 /* AA30F0 802403D0 E7A20010 */  swc1      $f2, 0x10($sp)
 /* AA30F4 802403D4 8E250038 */  lw        $a1, 0x38($s1)
 /* AA30F8 802403D8 44072000 */  mfc1      $a3, $f4
-/* AA30FC 802403DC 0C01C184 */  jal       playFX_24
+/* AA30FC 802403DC 0C01C184 */  jal       fx_ring_blast
 /* AA3100 802403E0 0000202D */   daddu    $a0, $zero, $zero
 /* AA3104 802403E4 C620003C */  lwc1      $f0, 0x3c($s1)
 /* AA3108 802403E8 46140000 */  add.s     $f0, $f0, $f20
@@ -265,7 +265,7 @@ glabel func_80240048_AA2D68
 /* AA3130 80240410 E7A20010 */  swc1      $f2, 0x10($sp)
 /* AA3134 80240414 8E250038 */  lw        $a1, 0x38($s1)
 /* AA3138 80240418 44072000 */  mfc1      $a3, $f4
-/* AA313C 8024041C 0C01C1CC */  jal       playFX_27
+/* AA313C 8024041C 0C01C1CC */  jal       fx_smoke_burst
 /* AA3140 80240420 0000202D */   daddu    $a0, $zero, $zero
 /* AA3144 80240424 24020001 */  addiu     $v0, $zero, 1
 /* AA3148 80240428 A622008E */  sh        $v0, 0x8e($s1)

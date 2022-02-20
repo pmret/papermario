@@ -5,8 +5,9 @@
 
 struct BGMPlayer;
 struct UnkAl19E0;
+struct UnkAl48;
 
-typedef void (*UnkFuncAl)();
+typedef void (*UnkFuncAl)(void);
 
 typedef union UnkField {
     u8 u8;
@@ -179,7 +180,7 @@ typedef struct SoundPlayer {
     /* 0x94 */ u8 unk_94;
     /* 0x95 */ char unk_05;
     /* 0x96 */ s16 currentSoundID;
-    /* 0x98 */ char unk_98[0x1];
+    /* 0x98 */ u8 unk_98;
     /* 0x99 */ u8 unk_99;
     /* 0x9A */ s8 sfxParamsFlags;
     /* 0x9B */ u8 sfxPan;
@@ -205,7 +206,7 @@ typedef struct SoundSefHeader {
 
 typedef struct SoundManager {
     /* 0x000 */ struct UnkAl19E0* soundData;
-    /* 0x004 */ char unk_04[0x4];
+    /* 0x004 */ struct UnkAl48* unk_04;
     /* 0x008 */ s32* sefData;
     /* 0x00C */ s32* normalSounds[8];
     /* 0x02C */ s32* soundsWithBit2000;
@@ -664,8 +665,8 @@ s32 func_80056044(s32, u8);
 void func_8005608C(s32*, s32*);
 void func_800560A8(void);
 void func_80056144(UnkFuncAl, s32);
-void func_8005615C(void);
-void func_80056180(void);
+void audio_set_stereo(void);
+void audio_set_mono(void);
 void func_800561A4(s32);
 void func_800561C4(s32);
 void func_800561E4(s32);

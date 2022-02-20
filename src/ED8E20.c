@@ -54,6 +54,6 @@ ApiStatus N(DeadGetEntryPos)(Evt* script, s32 isInitialCall) {
 #include "world/common/SomeXYZFunc2.inc.c"
 
 ApiStatus func_80240318_ED9138(Evt* script, s32 isInitialCall) {
-    dead_playFX_82(0, 0, 0, 0, 0, 0);
+    dead_fx_sun(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

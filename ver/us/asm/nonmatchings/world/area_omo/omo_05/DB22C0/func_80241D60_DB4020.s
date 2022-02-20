@@ -86,7 +86,7 @@ glabel func_80241D60_DB4020
 .L80241E7C_DB413C:
 /* DB413C 80241E7C 0280202D */  daddu     $a0, $s4, $zero
 /* DB4140 80241E80 0200282D */  daddu     $a1, $s0, $zero
-/* DB4144 80241E84 0C090301 */  jal       func_80240C04_DB2EC4
+/* DB4144 80241E84 0C090301 */  jal       omo_05_UnkNpcAIFunc35
 /* DB4148 80241E88 0260302D */   daddu    $a2, $s3, $zero
 /* DB414C 80241E8C 080907CA */  j         .L80241F28
 /* DB4150 80241E90 0000102D */   daddu    $v0, $zero, $zero

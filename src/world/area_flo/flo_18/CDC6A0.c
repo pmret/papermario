@@ -26,7 +26,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_18_tattle },
 };
 
-EvtSource N(80240830) = {
+EvtScript N(80240830) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_PUFF_PUFF_MACHINE, 0, 8)
@@ -42,7 +42,7 @@ static s32 N(pad_8B8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(updateTexturePan_802408C0) = {
+EvtScript N(updateTexturePan_802408C0) = {
     EVT_SET_GROUP(0)
     EVT_IF_EQ(EVT_VAR(5), 1)
         EVT_IF_EQ(EVT_VAR(6), 1)
@@ -59,9 +59,9 @@ EvtSource N(updateTexturePan_802408C0) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_8024095C) = EXIT_WALK_SCRIPT(60,  0, "flo_17",  1);
+EvtScript N(exitWalk_8024095C) = EXIT_WALK_SCRIPT(60,  0, "flo_17",  1);
 
-EvtSource N(802409B8) = {
+EvtScript N(802409B8) = {
     EVT_BIND_TRIGGER(N(exitWalk_8024095C), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_RETURN
     EVT_END
@@ -72,7 +72,7 @@ s32 N(lavaResetList_802409E4)[] = {
     0x0000000D, 0x432A0000, 0x00000000, 0x42F00000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
@@ -151,7 +151,7 @@ static s32 N(pad_E88)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(80240E90) = {
+EvtScript N(80240E90) = {
     EVT_SET_GROUP(11)
     EVT_LOOP(0)
         EVT_CALL(PlayEffect, 0x5E, 0, EVT_FIXED(-16.0), EVT_FIXED(102.0), EVT_FIXED(-4.1), EVT_FIXED(80.9), EVT_FIXED(102.0), EVT_FIXED(-4.1), EVT_FIXED(0.5), 6, 0, 0, 0, 0)
@@ -179,7 +179,7 @@ EvtSource N(80240E90) = {
     EVT_END
 };
 
-EvtSource N(80241094) = {
+EvtScript N(80241094) = {
     EVT_CALL(EnableModel, EVT_VAR(15), 1)
     EVT_SET(EVT_VAR(14), 159)
     EVT_LOOP(EVT_VAR(14))
@@ -209,7 +209,7 @@ EvtSource N(80241094) = {
     EVT_END
 };
 
-EvtSource N(80241284) = {
+EvtScript N(80241284) = {
     EVT_SET(EVT_VAR(14), 0)
     EVT_LABEL(0)
     EVT_IF_GE(EVT_SAVE_VAR(253), 3)
@@ -238,7 +238,7 @@ EvtSource N(80241284) = {
     EVT_END
 };
 
-EvtSource N(802413F0) = {
+EvtScript N(802413F0) = {
     EVT_IF_EQ(EVT_MAP_FLAG(2), 1)
         EVT_RETURN
     EVT_END_IF
@@ -373,7 +373,7 @@ EvtSource N(802413F0) = {
 };
 
 #ifdef NON_EQUIVALENT
-EvtSource N(80241ED4) = {
+EvtScript N(80241ED4) = {
     EVT_SETF(EVT_VAR(0), 0)
     EVT_SETF(EVT_VAR(1), 0)
     EVT_SETF(EVT_VAR(2), 0)
@@ -416,7 +416,7 @@ EVT_RETURN
 EVT_END
 };
 #else
-EvtSource N(80241ED4) = {
+EvtScript N(80241ED4) = {
     EVT_CMD(EVT_OP_SETF, EVT_VAR(0), 0),
     EVT_CMD(EVT_OP_SETF, EVT_VAR(1), 0),
     EVT_CMD(EVT_OP_SETF, EVT_VAR(2), 0),
@@ -460,7 +460,7 @@ EVT_CMD(EVT_OP_END)
 };
 #endif
 
-EvtSource N(80242174) = {
+EvtScript N(80242174) = {
     EVT_SETF(EVT_VAR(0), 0)
     EVT_SETF(EVT_VAR(1), 0)
     EVT_SETF(EVT_VAR(2), 0)
@@ -508,7 +508,7 @@ EvtSource N(80242174) = {
     EVT_END
 };
 
-EvtSource N(80242474) = {
+EvtScript N(80242474) = {
     EVT_SETF(EVT_VAR(2), 0)
     EVT_SETF(EVT_VAR(1), 0)
     EVT_SETF(EVT_VAR(0), 0)
@@ -539,7 +539,7 @@ EvtSource N(80242474) = {
     EVT_END
 };
 
-EvtSource N(80242620) = {
+EvtScript N(80242620) = {
     EVT_SETF(EVT_VAR(2), 0)
     EVT_SETF(EVT_VAR(1), 0)
     EVT_SETF(EVT_VAR(0), 0)
@@ -582,7 +582,7 @@ EvtSource N(80242620) = {
 };
 
 #ifdef NON_EQUIVALENT
-EvtSource N(80242910) = {
+EvtScript N(80242910) = {
     EVT_SETF(EVT_VAR(0), 0)
     EVT_SETF(EVT_VAR(1), 0)
     EVT_SETF(EVT_VAR(2), 0)
@@ -619,7 +619,7 @@ EVT_RETURN
 EVT_END
 };
 #else
-EvtSource N(80242910) = {
+EvtScript N(80242910) = {
     EVT_CMD(EVT_OP_SETF, EVT_VAR(0), 0),
     EVT_CMD(EVT_OP_SETF, EVT_VAR(1), 0),
     EVT_CMD(EVT_OP_SETF, EVT_VAR(2), 0),
@@ -657,7 +657,7 @@ EVT_CMD(EVT_OP_END)
 };
 #endif
 
-EvtSource N(80242B18) = {
+EvtScript N(80242B18) = {
     EVT_CALL(ModifyColliderFlags, 0, 18, 0x7FFFFE00)
     EVT_SETF(EVT_VAR(0), 0)
     EVT_SETF(EVT_VAR(1), 0)
@@ -707,7 +707,7 @@ s32 N(intTable_80242DC8)[] = {
     0x00000000, 0x0000001B, 0x00000055, 0x00000000, 0x0000001B, 0x00000050, 0x00000023, 0x0000001B,
 };
 
-EvtSource N(80242E28) = {
+EvtScript N(80242E28) = {
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_IF_LT(EVT_VAR(0), -210)
@@ -835,7 +835,7 @@ Vec4f N(triggerCoord_8024369C) = { 50.0f, 0.0f, -10.0, 0.0f };
 
 Vec4f N(triggerCoord_802436AC) = { 105.0f, 0.0f, -10.0, 0.0f };
 
-EvtSource N(802436BC) = {
+EvtScript N(802436BC) = {
     EVT_IF_GE(EVT_SAVE_VAR(0), 53)
         EVT_CALL(EnableModel, 49, 0)
         EVT_CALL(ModifyColliderFlags, 0, 19, 0x7FFFFE00)
@@ -998,7 +998,7 @@ Vec3f N(vectorList_8024401C)[] = {
     { -280.0, 315.0, 30.0 },
 };
 
-EvtSource N(80244058) = {
+EvtScript N(80244058) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetPlayerPos, 30, 0, 50)
@@ -1031,7 +1031,7 @@ EvtSource N(80244058) = {
     EVT_END
 };
 
-EvtSource N(80244270) = {
+EvtScript N(80244270) = {
     EVT_THREAD
         EVT_CALL(PlaySoundAtNpc, 4, 0x19E, 0)
         EVT_CALL(SetNpcFlagBits, 4, ((NPC_FLAG_100)), TRUE)
@@ -1090,7 +1090,7 @@ EvtSource N(80244270) = {
     EVT_END
 };
 
-EvtSource N(802445D4) = {
+EvtScript N(802445D4) = {
     EVT_WAIT_FRAMES(5)
     EVT_CALL(IsPlayerWithin, 40, 0, 200, EVT_VAR(0))
     EVT_IF_EQ(EVT_VAR(0), 0)
@@ -1120,7 +1120,7 @@ EvtSource N(802445D4) = {
     EVT_END
 };
 
-EvtSource N(80244774) = {
+EvtScript N(80244774) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(GetNpcPos, NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -1175,7 +1175,7 @@ EvtSource N(80244774) = {
     EVT_END
 };
 
-EvtSource N(idle_80244B3C) = {
+EvtScript N(idle_80244B3C) = {
     EVT_LOOP(0)
         EVT_CALL(GetSelfVar, 0, EVT_VAR(0))
         EVT_IF_NE(EVT_VAR(0), 0)
@@ -1198,7 +1198,7 @@ EvtSource N(idle_80244B3C) = {
     EVT_END
 };
 
-EvtSource N(defeat_80244C84) = {
+EvtScript N(defeat_80244C84) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -1225,7 +1225,7 @@ EvtSource N(defeat_80244C84) = {
     EVT_END
 };
 
-EvtSource N(80244E2C) = {
+EvtScript N(80244E2C) = {
     EVT_SWITCH(EVT_MAP_VAR(10))
         EVT_CASE_EQ(0)
             EVT_CALL(NpcFacePlayer, 3, 1)
@@ -1240,7 +1240,7 @@ EvtSource N(80244E2C) = {
     EVT_END
 };
 
-EvtSource N(80244ED0) = {
+EvtScript N(80244ED0) = {
     EVT_SWITCH(EVT_MAP_VAR(10))
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 16, MESSAGE_ID(0x11, 0x00B9))
@@ -1259,7 +1259,7 @@ EvtSource N(80244ED0) = {
     EVT_END
 };
 
-EvtSource N(80245004) = {
+EvtScript N(80245004) = {
     EVT_SWITCH(EVT_MAP_VAR(10))
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, 3, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 16, MESSAGE_ID(0x11, 0x00BA))
@@ -1277,7 +1277,7 @@ EvtSource N(80245004) = {
     EVT_END
 };
 
-EvtSource N(80245108) = {
+EvtScript N(80245108) = {
     EVT_IF_GE(EVT_SAVE_VAR(0), 52)
         EVT_RETURN
     EVT_END_IF
@@ -1300,7 +1300,7 @@ EvtSource N(80245108) = {
     EVT_END
 };
 
-EvtSource N(80245228) = {
+EvtScript N(80245228) = {
     EVT_IF_EQ(EVT_MAP_VAR(10), -1)
         EVT_SET(EVT_MAP_VAR(10), 0)
         EVT_EXEC_WAIT(N(80245108))
@@ -1310,7 +1310,7 @@ EvtSource N(80245228) = {
     EVT_END
 };
 
-EvtSource N(8024527C) = {
+EvtScript N(8024527C) = {
     EVT_IF_EQ(EVT_MAP_VAR(10), -1)
         EVT_SET(EVT_MAP_VAR(10), 1)
         EVT_EXEC_WAIT(N(80245108))
@@ -1320,7 +1320,7 @@ EvtSource N(8024527C) = {
     EVT_END
 };
 
-EvtSource N(802452D0) = {
+EvtScript N(802452D0) = {
     EVT_IF_EQ(EVT_MAP_VAR(10), -1)
         EVT_SET(EVT_MAP_VAR(10), 2)
         EVT_EXEC_WAIT(N(80245108))
@@ -1330,7 +1330,7 @@ EvtSource N(802452D0) = {
     EVT_END
 };
 
-EvtSource N(80245324) = {
+EvtScript N(80245324) = {
     EVT_IF_EQ(EVT_MAP_VAR(10), -1)
         EVT_SET(EVT_MAP_VAR(10), 3)
         EVT_EXEC_WAIT(N(80245108))
@@ -1340,7 +1340,7 @@ EvtSource N(80245324) = {
     EVT_END
 };
 
-EvtSource N(80245378) = {
+EvtScript N(80245378) = {
     EVT_IF_GE(EVT_SAVE_VAR(0), 52)
         EVT_RETURN
     EVT_END_IF
@@ -1365,7 +1365,7 @@ EvtSource N(80245378) = {
     EVT_END
 };
 
-EvtSource N(802454D4) = {
+EvtScript N(802454D4) = {
     EVT_IF_EQ(EVT_MAP_VAR(10), -1)
         EVT_SET(EVT_MAP_VAR(10), 0)
         EVT_CALL(GetNpcPos, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -1376,7 +1376,7 @@ EvtSource N(802454D4) = {
     EVT_END
 };
 
-EvtSource N(80245544) = {
+EvtScript N(80245544) = {
     EVT_IF_EQ(EVT_MAP_VAR(10), -1)
         EVT_SET(EVT_MAP_VAR(10), 1)
         EVT_CALL(GetNpcPos, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -1387,7 +1387,7 @@ EvtSource N(80245544) = {
     EVT_END
 };
 
-EvtSource N(802455B4) = {
+EvtScript N(802455B4) = {
     EVT_IF_EQ(EVT_MAP_VAR(10), -1)
         EVT_SET(EVT_MAP_VAR(10), 2)
         EVT_CALL(GetNpcPos, 1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -1398,7 +1398,7 @@ EvtSource N(802455B4) = {
     EVT_END
 };
 
-EvtSource N(80245624) = {
+EvtScript N(80245624) = {
     EVT_IF_EQ(EVT_MAP_VAR(10), -1)
         EVT_SET(EVT_MAP_VAR(10), 3)
         EVT_CALL(GetNpcPos, 2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -1417,7 +1417,7 @@ Vec4f N(triggerCoord_802456B4) = { 50.0f, 0.0f, -10.0, 0.0f };
 
 Vec4f N(triggerCoord_802456C4) = { 105.0f, 0.0f, -10.0, 0.0f };
 
-EvtSource N(802456D4) = {
+EvtScript N(802456D4) = {
     EVT_SET(EVT_MAP_VAR(10), -1)
     EVT_BIND_TRIGGER(N(80245228), TRIGGER_WALL_HAMMER, 23, 1, 0)
     EVT_BIND_TRIGGER(N(80245228), TRIGGER_WALL_HAMMER, 19, 1, 0)
@@ -1431,7 +1431,7 @@ EvtSource N(802456D4) = {
     EVT_END
 };
 
-EvtSource N(interact_802457D4) = {
+EvtScript N(interact_802457D4) = {
     EVT_SWITCH(EVT_AREA_VAR(6))
         EVT_CASE_EQ(0)
             EVT_CALL(GetSelfNpcID, EVT_VAR(0))
@@ -1475,7 +1475,7 @@ EvtSource N(interact_802457D4) = {
     EVT_END
 };
 
-EvtSource N(init_80245AA8) = {
+EvtScript N(init_80245AA8) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), 52)
         EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80244B3C)))
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802457D4)))
@@ -1487,7 +1487,7 @@ EvtSource N(init_80245AA8) = {
     EVT_END
 };
 
-EvtSource N(init_80245B30) = {
+EvtScript N(init_80245B30) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), 52)
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244C84)))
     EVT_ELSE
@@ -1497,18 +1497,7 @@ EvtSource N(init_80245B30) = {
     EVT_END
 };
 
-EvtSource N(init_80245B90) = {
-    EVT_IF_LT(EVT_SAVE_VAR(0), 52)
-        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802457D4)))
-        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244C84)))
-    EVT_ELSE
-        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
-    EVT_END_IF
-    EVT_RETURN
-    EVT_END
-};
-
-EvtSource N(init_80245C04) = {
+EvtScript N(init_80245B90) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), 52)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802457D4)))
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244C84)))
@@ -1519,7 +1508,18 @@ EvtSource N(init_80245C04) = {
     EVT_END
 };
 
-EvtSource N(init_80245C78) = {
+EvtScript N(init_80245C04) = {
+    EVT_IF_LT(EVT_SAVE_VAR(0), 52)
+        EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802457D4)))
+        EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244C84)))
+    EVT_ELSE
+        EVT_CALL(SetNpcPos, NPC_SELF, 0, -1000, 0)
+    EVT_END_IF
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(init_80245C78) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), 52)
         EVT_CALL(BindNpcInteract, NPC_SELF, EVT_PTR(N(interact_802457D4)))
         EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80244C84)))
@@ -1736,16 +1736,16 @@ static s32 N(pad_66B4)[] = {
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-// It seems like playFX_82 was not properly defined for this file. Having a proper
+// It seems like fx_sun was not properly defined for this file. Having a proper
 // declaration makes it not match.
 #ifdef AVOID_UB
-void playFX_82(s32, f32, f32, f32, f32, s32);
+void fx_sun(s32, f32, f32, f32, f32, s32);
 #else
-void playFX_82(s32, s32, s32, s32, s32, s32);
+void fx_sun(s32, s32, s32, s32, s32, s32);
 #endif
 
 ApiStatus N(func_8024030C_CDC9AC)(Evt* script, s32 isInitialCall) {
-    playFX_82(1, 0, 0, 0, 0, 0);
+    fx_sun(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

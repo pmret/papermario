@@ -1,13 +1,23 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_80245350_EEB900
+.double 0.04
+
+dlabel D_80245358_EEB908
+.double 0.98
+
+.section .text
+
 glabel func_80240504_EE6AB4
 /* EE6AB4 80240504 27BDFF88 */  addiu     $sp, $sp, -0x78
 /* EE6AB8 80240508 AFBF0064 */  sw        $ra, 0x64($sp)
 /* EE6ABC 8024050C AFB00060 */  sw        $s0, 0x60($sp)
 /* EE6AC0 80240510 F7B60070 */  sdc1      $f22, 0x70($sp)
 /* EE6AC4 80240514 F7B40068 */  sdc1      $f20, 0x68($sp)
-/* EE6AC8 80240518 0C01B198 */  jal       osGetCause
+/* EE6AC8 80240518 0C01B198 */  jal       __osGetCause
 /* EE6ACC 8024051C 27A40010 */   addiu    $a0, $sp, 0x10
 /* EE6AD0 80240520 3C108024 */  lui       $s0, %hi(D_80243B44_EEA0F4)
 /* EE6AD4 80240524 26103B44 */  addiu     $s0, $s0, %lo(D_80243B44_EEA0F4)
@@ -131,7 +141,7 @@ glabel func_80240504_EE6AB4
 /* EE6CAC 802406FC 00A32821 */  addu      $a1, $a1, $v1
 /* EE6CB0 80240700 00452821 */  addu      $a1, $v0, $a1
 /* EE6CB4 80240704 46200020 */  cvt.s.d   $f0, $f0
-/* EE6CB8 80240708 0C01B1B0 */  jal       osSpDeviceBusy
+/* EE6CB8 80240708 0C01B1B0 */  jal       __osSpDeviceBusy
 /* EE6CBC 8024070C E7A00034 */   swc1     $f0, 0x34($sp)
 /* EE6CC0 80240710 0000202D */  daddu     $a0, $zero, $zero
 /* EE6CC4 80240714 27A50050 */  addiu     $a1, $sp, 0x50

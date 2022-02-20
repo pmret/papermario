@@ -16,7 +16,10 @@
 
 /// Decimal constant.
 /// Despite the name, "floats" are actually stored as fixed-point values.
-#define EVT_FLOAT(DOUBLE) (((Bytecode)(DOUBLE * 1024.0f) + -230000000))
+
+ // This fixes an issue with fixed point numbers not being correct. POtentially a truncation vs round difference.
+#define EVT_FLOAT_ROUND(x) ((x)>=0?(f64)((x) + 0.9):(f64)(x))
+#define EVT_FLOAT(DOUBLE) (((Bytecode)EVT_FLOAT_ROUND((DOUBLE * 1024.0f)) + -230000000))
 
 /// Address/pointer constant.
 #define EVT_ADDR(sym) (((Bytecode) &((sym))))
@@ -81,7 +84,7 @@
 /// Global Saved **Byte**. A variable saved in the save file.
 ///
 /// Used for almost all savefile state.
-#define GSW(INDEX) (((((INDEX)) - 170000000))
+#define GSW(INDEX) ((((INDEX)) - 170000000))
 
 /// User Word. A variable stored within the current thread's array.
 /// You can load an array with EVT_USE_ARRAY or temporarily allocate one with EVT_MALLOC_ARRAY, then get/set values with
@@ -127,10 +130,18 @@
 /// This macro expands to the given opcode and argv, with argc calculated automatically.
 
 #ifndef PERMUTER
+#ifndef M2CTX
 #define EVT_CMD(opcode, argv...) \
     opcode, \
     (sizeof((Bytecode[]){argv})/sizeof(Bytecode)), \
     ##argv
+#else
+// This definition that passes in 0 for the number of args is used for pycparser since it can't handle varargs
+#define EVT_CMD(opcode, argv...) \
+    opcode, \
+    0, \
+    ##argv
+#endif
 #else
 // This definition that passes in 0 for the number of args is used for pycparser since it can't handle varargs
 #define EVT_CMD(opcode, argv...) \
@@ -284,6 +295,9 @@
 /// It also marks the end of any previous case.
 #define EVT_CASE_RANGE(MIN, MAX)                EVT_CMD(EVT_OP_CASE_RANGE, MIN, MAX),
 
+/// Marks the end of a switch case
+#define EVT_BREAK_SWITCH                        EVT_CMD(EVT_OP_BREAK_SWITCH),
+
 /// Marks the end of a switch statement and any case.
 #define EVT_END_SWITCH                          EVT_CMD(EVT_OP_END_SWITCH),
 
@@ -361,11 +375,11 @@
 /// `VAR &= VALUE`
 #define EVT_BITWISE_AND(VAR, VALUE)             EVT_CMD(EVT_OP_BITWISE_AND, VAR, VALUE),
 
-/// `VAR |= VALUE`
-#define EVT_BITWISE_OR(VAR, VALUE)              EVT_CMD(EVT_OP_BITWISE_OR, VAR, VALUE),
-
 /// `VAR &= CONST`, but CONST is treated as-is rather than dereferenced with evt_get_variable.
 #define EVT_BITWISE_AND_CONST(VAR, CONST)       EVT_CMD(EVT_OP_BITWISE_AND_CONST, VAR, CONST),
+
+/// `VAR |= VALUE`
+#define EVT_BITWISE_OR(VAR, VALUE)              EVT_CMD(EVT_OP_BITWISE_OR, VAR, VALUE),
 
 /// `VAR |= CONST`, but CONST is treated as-is rather than dereferenced with evt_get_variable.
 #define EVT_BITWISE_OR_CONST(VAR, CONST)        EVT_CMD(EVT_OP_BITWISE_OR_CONST, VAR, CONST),
@@ -499,7 +513,7 @@
 ///     EVT_CALL(ApiFunction)
 ///
 /// The given arguments can be accessed from the API function using `thread->ptrReadPos`.
-#define EVT_CALL(FUNC, ...)                     EVT_CMD(EVT_OP_CALL, (Bytecode) FUNC, ##__VA_ARGS__),
+#define EVT_CALL(FUNC, ARGS...)                     EVT_CMD(EVT_OP_CALL, (Bytecode) FUNC, ##ARGS),
 
 
 /****** COMMON SCRIPTS ************************************************************************************************/

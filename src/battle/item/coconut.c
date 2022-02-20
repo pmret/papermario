@@ -13,10 +13,10 @@ static s32 _pad = 0;
 
 /// 32x32 square.
 Vtx N(model)[] = {
-    { .v = { -16, -16, 0, FALSE, 0,    0,    0, 0, 0, 255 } },
-    { .v = { 15,  -16, 0, FALSE, 1024, 0,    0, 0, 0, 255 } },
-    { .v = { 15,  15,  0, FALSE, 1024, 1024, 0, 0, 0, 255 } },
-    { .v = { -16, 15,  0, FALSE, 0,    1024, 0, 0, 0, 255 } },
+    { .v = {{ -16, -16, 0 }, FALSE, { 0,    0    }, { 0, 0, 0, 255 }}},
+    { .v = {{ 15,  -16, 0 }, FALSE, { 1024, 0    }, { 0, 0, 0, 255 }}},
+    { .v = {{ 15,  15,  0 }, FALSE, { 1024, 1024 }, { 0, 0, 0, 255 }}},
+    { .v = {{ -16, 15,  0 }, FALSE, { 0,    1024 }, { 0, 0, 0, 255 }}},
 };
 
 Gfx N(displayList)[] = {
@@ -45,7 +45,7 @@ s32 N(modelCommandList)[] = {
     0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), &N(displayList), 0x00000002, 0x00000000,
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x000000AC)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, 3)

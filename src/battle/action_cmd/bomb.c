@@ -3,15 +3,12 @@
 
 #define NAMESPACE action_command_bomb
 
-void btl_set_popup_duration(s32);
-void sfx_adjust_env_sound_params(s32, s32, s32, s32);
-
-extern HudElementAnim D_80108AFC;
-extern HudElementAnim D_80108B28;
-extern HudElementAnim D_80292974;
+extern HudScript HudScript_BlueMeter;
+extern HudScript HudScript_AButton;
+extern HudScript HudScript_100pct;
 extern s32 D_80294300;
 
-extern HudElementAnim D_80108B80;
+extern HudScript HudScript_MashAButton;
 
 typedef struct UnkVec2s {
     /* 0x00 */ s16 unk_0;
@@ -56,19 +53,19 @@ ApiStatus func_802A9000_427A70(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElementX = -48;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(&D_80108B28);
+    hudElement = create_hud_element(HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(&D_80108AFC);
+    hudElement = create_hud_element(HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(&D_80292974);
+    hudElement = create_hud_element(HudScript_100pct);
     actionCommandStatus->hudElements[2] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
@@ -123,7 +120,7 @@ void func_802A928C_427CFC(void) {
                 break;
             }
 
-            set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108B80);
+            set_hud_element_anim(actionCommandStatus->hudElements[0], &HudScript_MashAButton);
             actionCommandStatus->barFillLevel = 0;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
             sfx_play_sound_with_params(0x80000041, 0, 0, 0);

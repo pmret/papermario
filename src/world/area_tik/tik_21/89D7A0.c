@@ -21,4 +21,4 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/SomeXYZFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_21/89D7A0", func_802405EC_89DD8C);
+#include "world/common/UnkPosFunc2.inc.c"

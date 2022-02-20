@@ -26,8 +26,8 @@ glabel func_802B6000_E25D60
 /* E25D8C 802B602C F7B60040 */  sdc1      $f22, 0x40($sp)
 /* E25D90 802B6030 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* E25D94 802B6034 8E220000 */  lw        $v0, ($s1)
-/* E25D98 802B6038 3C108011 */  lui       $s0, %hi(D_8010F250)
-/* E25D9C 802B603C 2610F250 */  addiu     $s0, $s0, %lo(D_8010F250)
+/* E25D98 802B6038 3C108011 */  lui       $s0, %hi(gPlayerSpinState)
+/* E25D9C 802B603C 2610F250 */  addiu     $s0, $s0, %lo(gPlayerSpinState)
 /* E25DA0 802B6040 0441009D */  bgez      $v0, .L802B62B8
 /* E25DA4 802B6044 0000A82D */   daddu    $s5, $zero, $zero
 /* E25DA8 802B6048 3C037FF7 */  lui       $v1, 0x7ff7
@@ -185,7 +185,7 @@ glabel func_802B6000_E25D60
 /* E25FDC 802B627C 0280202D */   daddu    $a0, $s4, $zero
 /* E25FE0 802B6280 0220282D */  daddu     $a1, $s1, $zero
 /* E25FE4 802B6284 3C063F80 */  lui       $a2, 0x3f80
-/* E25FE8 802B6288 0C01C4B4 */  jal       playFX_46_whirlwind
+/* E25FE8 802B6288 0C01C4B4 */  jal       fx_46
 /* E25FEC 802B628C 240703E8 */   addiu    $a3, $zero, 0x3e8
 /* E25FF0 802B6290 AE2200D8 */  sw        $v0, 0xd8($s1)
 .L802B6294:

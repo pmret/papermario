@@ -3,9 +3,9 @@
 
 #define NAMESPACE b_area_kmr_part_1_kmr_04
 
-#include "clouds.inc.c"
+#include "world/common/clouds.inc.c"
 
-EvtSource N(beforeBattle_802205D8) = {
+EvtScript N(beforeBattle_802205D8) = {
     EVT_CALL(SetSpriteShading, -1)
     EVT_SET(EVT_VAR(0), 1)
     EVT_SET(EVT_VAR(2), 0)
@@ -17,7 +17,7 @@ EvtSource N(beforeBattle_802205D8) = {
     EVT_END
 };
 
-EvtSource N(afterBattle_80220650) = {
+EvtScript N(afterBattle_80220650) = {
     EVT_RETURN
     EVT_END
 };

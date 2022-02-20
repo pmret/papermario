@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-void fx_63_appendGfx(EffectInstance* effect);
+void fx_63_appendGfx(void* effect);
 
 INCLUDE_ASM(s32, "effects/effect_63", fx_63_main);
 
@@ -16,7 +16,7 @@ void fx_63_render(EffectInstance* effect) {
 
     renderTask.appendGfx = fx_63_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = shim_queue_render_task(&renderTask);

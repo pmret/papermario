@@ -48,8 +48,8 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     s32 decompressedSize;
 
     sfx_stop_env_sounds();
-    gOverrideFlags &= ~0x40;
-    gOverrideFlags &= ~0x80;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
 
     gGameStatusPtr->playerSpriteSet = 0;
     func_8002D160();
@@ -138,7 +138,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     if (initStatus == 0) {
         initialize_collision();
-        load_hit_asset();
+        load_map_hit_asset();
     }
 
     reset_battle_status();
@@ -170,11 +170,11 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         set_background_size(296, 200, 12, 20);
     }
 
-    gCurrentCameraID = 0;
-    gCameras[0].flags |= CAM_FLAG_ENABLED;
-    gCameras[1].flags |= CAM_FLAG_ENABLED;
-    gCameras[2].flags |= CAM_FLAG_ENABLED;
-    gCameras[3].flags |= CAM_FLAG_ENABLED;
+    gCurrentCameraID = CAM_DEFAULT;
+    gCameras[CAM_DEFAULT].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_BATTLE].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_TATTLE].flags |= CAM_FLAG_ENABLED;
+    gCameras[CAM_CAM3].flags |= CAM_FLAG_ENABLED;
 
     if (gGameStatusPtr->creditsViewportMode == -1) {
         set_cam_viewport(0, 12, 20, 296, 200);
@@ -274,14 +274,12 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
 
 
 // these, along with all the *_maps, almost certainly belong in the next file
-s16 D_8008FF70[] = { 4, 6, 5, 4, 7, 6, 0, 3, 4, 3, 7, 4, 3, 2, 7, 2, 6, 7, 2, 1, 6, 1, 5, 6, 1, 0, 5, 0, 4, 5, 0, 1, 2,
-                     0, 2, 3
-                   };
+s16 gEntityColliderFaces[] = { 4, 6, 5, 4, 7, 6, 0, 3, 4, 3, 7, 4, 3, 2, 7, 2, 6, 7, 2, 1, 6, 1, 5, 6, 1, 0, 5,
+                                 0, 4, 5, 0, 1, 2, 0, 2, 3};
 
-f32 D_8008FFB8[] = { 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f,
-                     0.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, -1.0f,
-                     0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f
-                   };
+f32 gEntityColliderNormals[] = { 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+                                       0.0f, -1.0f, 0.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+                                       1.0f, 0.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f};
 
 /// Toad Town
 Map mac_maps[] = {

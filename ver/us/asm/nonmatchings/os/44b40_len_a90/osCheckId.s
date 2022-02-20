@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osCheckId
+glabel __osCheckId
 /* 451D4 80069DD4 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 451D8 80069DD8 AFB00030 */  sw        $s0, 0x30($sp)
 /* 451DC 80069DDC 00808021 */  addu      $s0, $a0, $zero

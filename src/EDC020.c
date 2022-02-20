@@ -18,7 +18,7 @@ extern s32 D_80241850_EDD834 = {
 };
 */
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
 #ifdef NON_MATCHING // TODO(data)
 ApiStatus func_8024027C_EDC25C(Evt* script, s32 isInitialCall) {

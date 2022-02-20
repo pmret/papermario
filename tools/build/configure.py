@@ -53,7 +53,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     cross = "mips-linux-gnu-"
     cc = f"{BUILD_TOOLS}/cc/gcc/gcc"
     cc_ido = f"{BUILD_TOOLS}/cc/ido5.3/cc"
-    cc_kmc = f"{BUILD_TOOLS}/cc/kmcgcc/gcc"
+    cc_272_dir = f"{BUILD_TOOLS}/cc/gcc2.7.2/"
+    cc_272 = f"{cc_272_dir}/gcc"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
     compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
@@ -62,15 +63,12 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
 
-    if sys.platform == "darwin" and not non_matching:
-        CPPFLAGS += " -DKMC_ASM"
-
-    CPPFLAGS_LIBULTRA = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
+    CPPFLAGS_272 = "-Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM " \
                "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
 
     cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
-    kmc_cflags = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
-    kmc_cflags = kmc_cflags.replace("-ggdb3","-g1")
+    cflags_272 = f"-c -G0 -mgp32 -mfp32 -mips3 {extra_cflags}"
+    cflags_272 = cflags_272.replace("-ggdb3","-g1")
 
     ninja.variable("python", sys.executable)
 
@@ -121,9 +119,9 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
         command=f"{ccache}{cc_ido} -w {CPPFLAGS_COMMON} {cppflags} $cppflags -c -mips1 -O0 -G0 -non_shared -Xfullwarn -Xcpluscomm -o $out $in",
     )
 
-    ninja.rule("cc_kmc",
-        description="kmc $in",
-        command=f"bash -o pipefail -c 'N64ALIGN=ON VR4300MUL=ON {cc_kmc} {CPPFLAGS_LIBULTRA} {cppflags} $cppflags {kmc_cflags} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out'",
+    ninja.rule("cc_272",
+        description="cc_272 $in",
+        command=f"bash -o pipefail -c 'COMPILER_PATH={cc_272_dir} {cc_272} {CPPFLAGS_272} {cppflags} $cppflags {cflags_272} $cflags $in -o $out && mips-linux-gnu-objcopy -N $in $out'",
     )
 
     ninja.rule("cxx",
@@ -394,10 +392,10 @@ class Configure:
 
                 if seg.name.endswith("osFlash"):
                     task = "cc_ido"
-                elif "kmc" in cflags and (sys.platform != "darwin" or non_matching):
-                    task = "cc_kmc"
+                elif "gcc_272" in cflags:
+                    task = "cc_272"
 
-                cflags = cflags.replace("kmc", "")
+                cflags = cflags.replace("gcc_272", "")
 
                 build(entry.object_path, entry.src_paths, task, variables={
                     "cflags": cflags,

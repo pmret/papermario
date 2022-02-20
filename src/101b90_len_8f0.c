@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite.h"
 
 typedef struct UnkSpr10 {
     /* 0x00 */ s32 unk_00;

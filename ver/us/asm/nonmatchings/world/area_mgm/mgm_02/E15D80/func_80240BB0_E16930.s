@@ -189,8 +189,8 @@ glabel func_80240BB0_E16930
 /* E16BDC 80240E5C E660000C */   swc1     $f0, 0xc($s3)
 .L80240E60_E16BE0:
 /* E16BE0 80240E60 8EA4000C */  lw        $a0, 0xc($s5)
-/* E16BE4 80240E64 3C058011 */  lui       $a1, %hi(D_80108B28)
-/* E16BE8 80240E68 24A58B28 */  addiu     $a1, $a1, %lo(D_80108B28)
+/* E16BE4 80240E64 3C058011 */  lui       $a1, %hi(HudScript_AButton)
+/* E16BE8 80240E68 24A58B28 */  addiu     $a1, $a1, %lo(HudScript_AButton)
 /* E16BEC 80240E6C 0C0511FF */  jal       set_hud_element_anim
 /* E16BF0 80240E70 00000000 */   nop
 /* E16BF4 80240E74 8EA4000C */  lw        $a0, 0xc($s5)
@@ -402,8 +402,8 @@ glabel func_80240BB0_E16930
 /* E16F28 802411A8 46200020 */  cvt.s.d   $f0, $f0
 /* E16F2C 802411AC E6600040 */  swc1      $f0, 0x40($s3)
 /* E16F30 802411B0 8EA4000C */  lw        $a0, 0xc($s5)
-/* E16F34 802411B4 3C058011 */  lui       $a1, %hi(D_80108B80)
-/* E16F38 802411B8 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
+/* E16F34 802411B4 3C058011 */  lui       $a1, %hi(HudScript_MashAButton)
+/* E16F38 802411B8 24A58B80 */  addiu     $a1, $a1, %lo(HudScript_MashAButton)
 /* E16F3C 802411BC 0C0511FF */  jal       set_hud_element_anim
 /* E16F40 802411C0 00000000 */   nop
 /* E16F44 802411C4 8EA4000C */  lw        $a0, 0xc($s5)
@@ -450,8 +450,8 @@ glabel func_80240BB0_E16930
 /* E16FE0 80241260 2402000A */  addiu     $v0, $zero, 0xa
 /* E16FE4 80241264 A662008E */  sh        $v0, 0x8e($s3)
 /* E16FE8 80241268 8EA4000C */  lw        $a0, 0xc($s5)
-/* E16FEC 8024126C 3C058011 */  lui       $a1, %hi(D_80108B28)
-/* E16FF0 80241270 24A58B28 */  addiu     $a1, $a1, %lo(D_80108B28)
+/* E16FEC 8024126C 3C058011 */  lui       $a1, %hi(HudScript_AButton)
+/* E16FF0 80241270 24A58B28 */  addiu     $a1, $a1, %lo(HudScript_AButton)
 /* E16FF4 80241274 0C0511FF */  jal       set_hud_element_anim
 /* E16FF8 80241278 2694001C */   addiu    $s4, $s4, 0x1c
 /* E16FFC 8024127C 8EA4000C */  lw        $a0, 0xc($s5)
@@ -506,7 +506,7 @@ glabel func_80240BB0_E16930
 /* E170B8 80241338 AFA00014 */  sw        $zero, 0x14($sp)
 /* E170BC 8024133C 8E650038 */  lw        $a1, 0x38($s3)
 /* E170C0 80241340 44071000 */  mfc1      $a3, $f2
-/* E170C4 80241344 0C01BECC */  jal       fx_walk
+/* E170C4 80241344 0C01BECC */  jal       fx_walking_dust
 /* E170C8 80241348 24040001 */   addiu    $a0, $zero, 1
 /* E170CC 8024134C 080906CF */  j         .L80241B3C
 /* E170D0 80241350 2694001C */   addiu    $s4, $s4, 0x1c
@@ -730,7 +730,7 @@ glabel func_80240BB0_E16930
 /* E1740C 8024168C 8E650038 */  lw        $a1, 0x38($s3)
 /* E17410 80241690 8E66003C */  lw        $a2, 0x3c($s3)
 /* E17414 80241694 44071000 */  mfc1      $a3, $f2
-/* E17418 80241698 0C01C07C */  jal       playFX_19
+/* E17418 80241698 0C01C07C */  jal       fx_explosion
 /* E1741C 8024169C 0000202D */   daddu    $a0, $zero, $zero
 /* E17420 802416A0 24042076 */  addiu     $a0, $zero, 0x2076
 /* E17424 802416A4 2402001E */  addiu     $v0, $zero, 0x1e

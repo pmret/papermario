@@ -5,9 +5,9 @@ static char* N(exit_str_1) = "nok_02";
 
 #define UNK_ALPHA_FUNC_NPC 15
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240000_9C53E0);
+#include "world/common/UnkNpcAIFunc43.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802400B4_9C5494);
+#include "world/common/UnkNpcAIFunc44.inc.c"
 
 #include "world/common/NpcJumpFunc3.inc.c"
 
@@ -19,11 +19,11 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802400B4_9C5494);
 
 #include "world/common/UnkNpcAIFunc10.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240540_9C5920);
+#include "world/common/UnkNpcAIFunc42.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802405EC_9C59CC);
+#include "world/common/UnkNpcAIFunc45.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802407F4_9C5BD4);
+#include "world/common/UnkNpcAIMainFunc4.inc.c"
 
 #include "world/common/Call800E9894.inc.c"
 

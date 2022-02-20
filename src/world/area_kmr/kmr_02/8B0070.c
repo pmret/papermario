@@ -65,9 +65,9 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241388_8B13F8);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802413F4_8B1464);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241424_8B1494);
+#include "world/common/UnkNpcAIFunc43.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802414D8_8B1548);
+#include "world/common/UnkNpcAIFunc44.inc.c"
 
 #include "world/common/NpcJumpFunc3.inc.c"
 
@@ -79,11 +79,11 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802414D8_8B1548);
 
 #include "world/common/UnkNpcAIFunc10.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241964_8B19D4);
+#include "world/common/UnkNpcAIFunc42.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241A10_8B1A80);
+#include "world/common/UnkNpcAIFunc45.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241C18_8B1C88);
+#include "world/common/UnkNpcAIMainFunc4.inc.c"
 
 static char* N(exit_str_4) = "nok_02";
 static char* N(exit_str_5) = "kmr_03";

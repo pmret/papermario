@@ -12,25 +12,72 @@ extern s32 D_80286524;
 extern s32 D_80286530;
 extern s32 D_80286534;
 extern Evt* D_8028652C;
-extern HudElementAnim* D_80080868;
-extern s32 D_8014F150[64];
+extern HudScript* HudScript_Item_Coin;
+extern s32 gWindowStyles[64];
 
 ApiStatus func_802803C8(Evt* script, s32 isInitialCall);
 ApiStatus func_80280410(Evt* script, s32 isInitialCall);
 ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall);
 ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall);
 
-EvtSource ShopBeginSpeech = { 0x00000043, 0x00000006, SpeakToPlayer, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+EvtScript ShopBeginSpeech = {
+    EVT_CALL(SpeakToPlayer, LW(1), LW(2), LW(3), 0, LW(0))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource ShopContinueSpeech = { 0x00000043, 0x00000006, ContinueSpeech, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+EvtScript ShopContinueSpeech = {
+    EVT_CALL(ContinueSpeech, LW(1), LW(2), LW(3), 0, LW(0))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource ShopResetSpeech = { 0x00000043, 0x00000005, EndSpeech, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0x00000043, 0x00000006, SpeakToPlayer, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+EvtScript ShopResetSpeech = {
+    EVT_CALL(EndSpeech, LW(1), LW(2), LW(3), 0)
+    EVT_CALL(SpeakToPlayer, LW(1), LW(2), LW(3), 0, LW(0))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource ShopEndSpeech = { 0x00000043, 0x00000005, EndSpeech, 0xFE363C80, 0xFE363C81, 0xFE363C82, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+EvtScript ShopEndSpeech = {
+    EVT_CALL(EndSpeech, LW(0), LW(1), LW(2), 0)
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource D_80283F58_7E4DD8 = { 0x00000043, 0x00000002, GetCurrentPartner, 0xFE363C81, 0x0000000A, 0x00000002, 0xFE363C81, 0x00000000, 0x00000004, 0x00000001, 0x0000000A, 0x00000013, 0x00000000, 0x0000000A, 0x00000002, 0xFE363C81, 0x00000002, 0x00000004, 0x00000001, 0x0000000A, 0x00000013, 0x00000000, 0x0000000A, 0x00000002, 0xFE363C81, 0x00000003, 0x00000004, 0x00000001, 0x0000000A, 0x00000013, 0x00000000, 0x00000002, 0x00000000, 0x00000003, 0x00000001, 0x0000000A, 0x00000043, 0x00000001, func_802803C8, 0x0000000A, 0x00000002, 0xFE363C82, 0x00000000, 0x00000002, 0x00000000, 0x00000013, 0x00000000, 0x00000043, 0x00000002, func_80280410, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+EvtScript D_80283F58_7E4DD8 = {
+    EVT_CALL(GetCurrentPartner, LW(1))
+    EVT_IF_EQ(LW(1), 0)
+        EVT_GOTO(10)
+    EVT_END_IF
+    EVT_IF_EQ(LW(1), 2)
+        EVT_GOTO(10)
+    EVT_END_IF
+    EVT_IF_EQ(LW(1), 3)
+        EVT_GOTO(10)
+    EVT_END_IF
+    EVT_RETURN
+    EVT_LABEL(10)
+    EVT_CALL(func_802803C8)
+    EVT_IF_EQ(LW(2), 0)
+        EVT_RETURN
+    EVT_END_IF
+    EVT_CALL(func_80280410, LW(0))
+    EVT_RETURN
+    EVT_END
+};
 
-EvtSource BadgeShopInteract = { 0x00000043, 0x00000002, ShowShopPurchaseDialog, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, 0x00000043, 0x00000001, ShowShopOwnerDialog, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+EvtScript BadgeShopInteract = {
+    EVT_CALL(ShowShopPurchaseDialog, LW(0))
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript D_80284054_7E4ED4 = {
+    EVT_CALL(ShowShopOwnerDialog)
+    EVT_RETURN
+    EVT_END
+};
 
 s32 shop_owner_begin_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
@@ -198,11 +245,11 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
     GameStatus* gameStatus = gGameStatusPtr;
     s32 shopItemSlot = script->varTable[0];
     Shop* shop = gameStatus->mapShop;
-    StaticInventoryItem* shopInventory = &shop->staticInventory[shopItemSlot];
-    StaticItem* shopItem = &gItemTable[shopInventory->itemID];
+    ShopItemData* shopInventory = &shop->staticInventory[shopItemSlot];
+    ItemData* shopItem = &gItemTable[shopInventory->itemID];
     ShopOwner* shopOwner;
     Evt* shopOwnerScript;
-    EvtSource* shopOwnerScriptSource;
+    EvtScript* shopOwnerScriptSource;
     s32 bpCost;
     s32 args;
 
@@ -221,7 +268,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
         func_800E9900();
         show_coin_counter();
     }
-    
+
     switch (script->functionTemp[0]) {
         case 0:
             if (!does_script_exist(script->functionTemp[1])) {
@@ -289,7 +336,7 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
             shopOwner = shop->owner;
             D_8028652C = NULL;
             if (shopOwner != NULL) {
-                shopOwnerScriptSource = shopOwner->unk_0C;
+                shopOwnerScriptSource = shopOwner->onBuyEvt;
                 if (shopOwnerScriptSource != NULL) {
                     shopOwnerScript = start_script(shopOwnerScriptSource, 1, 0);
                     D_8028652C = shopOwnerScript;
@@ -314,7 +361,6 @@ ApiStatus ShowShopPurchaseDialog(Evt* script, s32 isInitialCall) {
 
 //dumb stuff
 #ifdef NON_EQUIVALENT
-extern s32 D_8008A680[337][2];
 
 void shop_open_item_select_popup(s32 mode) {
     Shop* shop = gGameStatusPtr->mapShop;
@@ -352,7 +398,7 @@ void shop_open_item_select_popup(s32 mode) {
         }
 
         if (itemID != 0) {
-            menu->ptrIcon[i] = D_8008A680[gItemTable[itemID].iconID][0];
+            menu->ptrIcon[i] = gItemHudScripts[gItemTable[itemID].iconID][0];
             menu->userIndex[i] = i;
             menu->enabled[i] = TRUE;
             menu->nameMsg[i] = gItemTable[itemID].nameMsg;
@@ -404,7 +450,7 @@ void shop_close_item_select_popup(void) {
 s32 shop_get_sell_price(s32 itemID) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 numItems = shop->numSpecialPrices;
-    StaticPriceItem* items = shop->staticPriceList;
+    ShopSellPriceData* items = shop->staticPriceList;
     s32 i;
 
     if (shop) {
@@ -425,7 +471,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
     GameStatus* gameStatus = gGameStatusPtr;
     PlayerData* playerData = &gPlayerData;
     Shop* shop = gameStatus->mapShop;
-    StaticItem* item;
+    ItemData* item;
     s32 temp_v1_2;
 
     if (isInitialCall) {
@@ -502,7 +548,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             if (shop_update_item_select_popup(&shop->selectedStoreItemSlot) == 1) {
                 script->functionTemp[0] = 21;
                 script->functionTemp[1] = 15;
-            }     
+            }
             break;
         case 21:
             if (script->functionTemp[1] <= 0) {
@@ -598,7 +644,7 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
                     script->functionTemp[1] = shop_owner_begin_speech(22);
                     script->functionTemp[0] = 9;
                 }
-            } else { 
+            } else {
                 script->functionTemp[1]--;
             }
             break;
@@ -683,8 +729,8 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
             break;
         case 10:
             if (shop->owner != NULL) {
-                if (shop->owner->unk_14 != 0) {
-                    start_script(shop->owner->unk_14, 1, 0);
+                if (shop->owner->onTalkEvt != 0) {
+                    start_script(shop->owner->onTalkEvt, 1, 0);
                 }
             }
             open_status_menu_short();
@@ -695,15 +741,15 @@ ApiStatus ShowShopOwnerDialog(Evt* script, s32 isInitialCall) {
 
 void shop_draw_item_name(s32 arg0, s32 posX, s32 posY) {
     Shop* shop = gGameStatusPtr->mapShop;
-    StaticInventoryItem* siItem = &shop->staticInventory[shop->currentItemSlot];
-    StaticItem* shopItem = &gItemTable[siItem->itemID];
+    ShopItemData* siItem = &shop->staticInventory[shop->currentItemSlot];
+    ItemData* shopItem = &gItemTable[siItem->itemID];
 
     draw_msg(shopItem->nameMsg, posX + 60 - (get_msg_width(shopItem->nameMsg, 0) >> 1), posY + 6, 255, 0, 0);
 }
 
 void shop_draw_item_desc(s32 arg0, s32 posX, s32 posY) {
     Shop* shop = gGameStatusPtr->mapShop;
-    StaticInventoryItem* shopItem = &shop->staticInventory[shop->currentItemSlot];
+    ShopItemData* shopItem = &shop->staticInventory[shop->currentItemSlot];
 
     draw_msg(shopItem->unk_08, posX + 8, posY, 255, 0xA, 0);
 }
@@ -713,7 +759,7 @@ extern void draw_shop_items(void);
 #ifdef NON_EQUIVALENT
 void draw_shop_items(void) {
     Shop* shop = gGameStatusPtr->mapShop;
-    StaticInventoryItem* staticItems;
+    ShopItemData* ItemDatas;
     Camera* camera;
     s32 i;
     s32 xTemp;
@@ -733,7 +779,7 @@ void draw_shop_items(void) {
 
     if (shop->flags & SHOP_FLAGS_1) {
         camera = &gCameras[gCurrentCameraID];
-        staticItems = shop->staticInventory;
+        ItemDatas = shop->staticInventory;
         shopItemEntities = gGameStatusPtr->shopItemEntities;
 
         for (i = 0; i < shop->numItems; i++) {
@@ -753,14 +799,14 @@ void draw_shop_items(void) {
                 xTemp = (((x * camera->viewportW) + camera->viewportW) * 0.5) + camera->viewportStartX;
                 yTemp = (((y * camera->viewportH) + camera->viewportH) * 0.5) + camera->viewportStartY;
 
-                if (staticItems[i].price < 100) {
+                if (ItemDatas[i].price < 100) {
                     xOffset = -4;
                 } else {
                     xOffset = 0;
                 }
 
                 if (!(get_item_entity(shopItemEntities[i].index)->flags & 0x40)) {
-                    draw_number(staticItems[i].price, xTemp + xOffset, yTemp, 1, 0, 255, 0);
+                    draw_number(ItemDatas[i].price, xTemp + xOffset, yTemp, 1, 0, 255, 0);
                 }
 
                 if (i == shop->currentItemSlot) {
@@ -788,9 +834,9 @@ INCLUDE_ASM(s32, "world/script_api/7E0E80", draw_shop_items);
 #ifdef NON_MATCHING
 s32 MakeShop(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    ShopItemLocation* staticItemPositions = evt_get_variable(script, *args++);
-    StaticInventoryItem* inventory = evt_get_variable(script, *args++);
-    StaticPriceItem* prices = evt_get_variable(script, *args++);
+    ShopItemLocation* ItemDataPositions = evt_get_variable(script, *args++);
+    ShopItemData* inventory = evt_get_variable(script, *args++);
+    ShopSellPriceData* prices = evt_get_variable(script, *args++);
     s32 inventoryItemFlags = evt_get_variable(script, *args++);
     Shop* shop = heap_malloc(sizeof(Shop));
     Model* model;
@@ -802,13 +848,13 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
     f32 sizeY;
     f32 sizeZ;
     s32 items;
-    
+
     gGameStatusPtr->mapShop = shop;
-    shop->staticItemPositions = staticItemPositions;
+    shop->ItemDataPositions = ItemDataPositions;
     shop->staticInventory = inventory;
     shop->staticPriceList = prices;
     shop->inventoryItemFlags = inventoryItemFlags;
-    
+
     numShopItems = 0;
     items = inventory->itemID;
     while (items != 0) {
@@ -817,7 +863,7 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
         items = inventory->itemID;
     }
     shop->numItems = numShopItems;
-    
+
     numShopItems = 0;
     if (prices != NULL) {
         items = prices->itemID;
@@ -828,39 +874,39 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
         }
     }
     shop->numSpecialPrices = numShopItems;
-    
+
     if (shop->numItems > 0) {
         gGameStatusPtr->shopItemEntities = heap_malloc(sizeof(ShopItemEntity) * shop->numItems);
     }
-    
+
     inventory = shop->staticInventory;
-    staticItemPositions = shop->staticItemPositions;
+    ItemDataPositions = shop->ItemDataPositions;
     numShopItems = 0;
     while (inventory->itemID != 0) {
-        get_model_center_and_size(staticItemPositions->posModelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
+        get_model_center_and_size(ItemDataPositions->posModelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
         centerY += 6;
         gGameStatusPtr->shopItemEntities[numShopItems].pos.x = centerX;
         gGameStatusPtr->shopItemEntities[numShopItems].pos.y = centerY;
         gGameStatusPtr->shopItemEntities[numShopItems].pos.z = centerZ;
-        model = get_model_from_list_index(get_model_list_index_from_tree_index(staticItemPositions->posModelID));
+        model = get_model_from_list_index(get_model_list_index_from_tree_index(ItemDataPositions->posModelID));
         model->flags |= MODEL_FLAGS_FLAG_4;
         gGameStatusPtr->shopItemEntities[numShopItems].index = make_item_entity_nodelay(inventory->itemID | shop->inventoryItemFlags, centerX, centerY, centerZ, 1, 0);
         set_item_entity_flags(gGameStatusPtr->shopItemEntities[numShopItems].index, 0x4000);
-        bind_trigger_1(D_80283F58_7E4DD8, 0x80, staticItemPositions->triggerColliderID, numShopItems, 0, 3);
-        bind_trigger_1(D_80283F58_7E4DD8, 0x800, staticItemPositions->triggerColliderID, numShopItems, 0, 3);
-        staticItemPositions++;
+        bind_trigger_1(D_80283F58_7E4DD8, 0x80, ItemDataPositions->triggerColliderID, numShopItems, 0, 3);
+        bind_trigger_1(D_80283F58_7E4DD8, 0x800, ItemDataPositions->triggerColliderID, numShopItems, 0, 3);
+        ItemDataPositions++;
         inventory++;
         numShopItems++;
     }
 
-    shop->costIconID = create_hud_element(&D_80080868);
+    shop->costIconID = create_hud_element(&HudScript_Item_Coin);
     set_hud_element_flags(shop->costIconID, 0x80);
     clear_hud_element_flags(shop->costIconID, 0x8000);
     get_generic_entity(create_generic_entity_frontUI(NULL, draw_shop_items));
     set_window_properties(0xA, 100, 66, 120, 28, 0, shop_draw_item_name, NULL, -1);
     set_window_properties(0xB, 32, 184, 256, 32, 1, shop_draw_item_desc, NULL, -1);
-    D_8014F150[10] = 9;
-    D_8014F150[11] = 3;
+    gWindowStyles[10] = 9;
+    gWindowStyles[11] = 3;
     shop->currentItemSlot = 0;
     shop->selectedStoreItemSlot = 0;
     shop->flags = SHOP_FLAGS_0;

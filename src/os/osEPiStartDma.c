@@ -1,8 +1,4 @@
-#ifdef KMC_ASM
-#define MOVE_ADDU
-#endif
-
-#include "common.h"
+#include "PR/piint.h"
 
 s32 osEPiStartDma(OSPiHandle* pihandle, OSIoMesg* mb, s32 direction) {
     if (!__osPiDevMgr.active) {

@@ -1,6 +1,6 @@
 #include "tik_24.h"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_80240360_8A5DE0);
+#include "world/common/UnkPosFunc2.inc.c"
 
 #include "world/common/set_script_owner_npc_anim.inc.c"
 
@@ -10,4 +10,4 @@ INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_80240360_8A5DE0);
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_24/8A5DE0", func_80240A64_8A64E4);
+#include "world/common/UnkNpcAIMainFunc5.inc.c"

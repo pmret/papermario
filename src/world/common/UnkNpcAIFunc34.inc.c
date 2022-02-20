@@ -26,7 +26,7 @@ void N(UnkNpcAIFunc34)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
         y = npc->pos.y + npc->collisionHeight;
         z = npc->pos.z;
         w = npc->collisionHeight + 3.0;
-        if ((npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w) != 0) && (w < npc->collisionHeight)) {
+        if ((npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &w) != 0) && (w < npc->collisionHeight)) {
             flag = 1;
         }
     }

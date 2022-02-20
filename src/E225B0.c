@@ -34,7 +34,6 @@ extern void (*D_8010C93C)(void);
 extern struct802B7C78* D_802B7C78_E23228;
 extern struct8015A578 D_8015A578;
 
-void fold_update(s32, s32, s32, s32, s32, s32, s32);
 void fold_appendGfx_component(s32, UnknownCommand*, s32, Matrix4f*);
 void func_802B735C_E2290C(void);
 
@@ -137,7 +136,7 @@ void func_802B735C_E2290C(void) {
     switch (temp_v1) {
         case 0:
             if (partnerActionStatus->actionState.b[0] && partnerActionStatus->actionState.b[3] == 8) {
-                phi_v0 = gGameStatusPtr->unk_7D;
+                phi_v0 = gGameStatusPtr->keepUsingPartnerOnMapChange;
             } else {
                 phi_v0 = playerStatus->flags & 0x3000;
             }

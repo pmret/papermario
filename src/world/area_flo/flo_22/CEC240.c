@@ -20,7 +20,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_22_tattle },
 };
 
-EvtSource N(802402E0) = {
+EvtScript N(802402E0) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
@@ -31,15 +31,15 @@ EvtSource N(802402E0) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_80240350) = EXIT_WALK_SCRIPT(60,  0, "flo_03",  1);
+EvtScript N(exitWalk_80240350) = EXIT_WALK_SCRIPT(60,  0, "flo_03",  1);
 
-EvtSource N(802403AC) = {
+EvtScript N(802403AC) = {
     EVT_BIND_TRIGGER(N(exitWalk_80240350), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamLeadPlayer, 0, 0)
@@ -72,7 +72,7 @@ NpcSettings N(npcSettings_80240520) = {
     .level = 99,
 };
 
-EvtSource N(idle_8024054C) = {
+EvtScript N(idle_8024054C) = {
     EVT_SET(EVT_MAP_VAR(10), 0)
     EVT_LOOP(0)
         EVT_SWITCH(EVT_MAP_VAR(10))
@@ -88,7 +88,7 @@ EvtSource N(idle_8024054C) = {
     EVT_END
 };
 
-EvtSource N(defeat_802405E4) = {
+EvtScript N(defeat_802405E4) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -112,14 +112,14 @@ EvtSource N(defeat_802405E4) = {
     EVT_END
 };
 
-EvtSource N(init_80240740) = {
+EvtScript N(init_80240740) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_8024054C)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802405E4)))
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(idle_80240778) = {
+EvtScript N(idle_80240778) = {
     EVT_SET(EVT_MAP_VAR(11), 0)
     EVT_LOOP(0)
         EVT_SWITCH(EVT_MAP_VAR(11))
@@ -135,7 +135,7 @@ EvtSource N(idle_80240778) = {
     EVT_END
 };
 
-EvtSource N(defeat_80240810) = {
+EvtScript N(defeat_80240810) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -164,7 +164,7 @@ EvtSource N(defeat_80240810) = {
     EVT_END
 };
 
-EvtSource N(init_802409CC) = {
+EvtScript N(init_802409CC) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_80240778)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_80240810)))
     EVT_RETURN
@@ -256,7 +256,7 @@ s32 N(itemList_80240E10)[] = {
     ITEM_NONE,
 };
 
-EvtSource N(80240E24) = {
+EvtScript N(80240E24) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT_FRAMES(20)
     EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x11, 0x00DB), 300, 120)
@@ -266,7 +266,7 @@ EvtSource N(80240E24) = {
     EVT_END
 };
 
-EvtSource N(80240E84) = {
+EvtScript N(80240E84) = {
     EVT_CALL(SetPlayerAnimation, 393230)
     EVT_THREAD
         EVT_CALL(GetPlayerPos, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
@@ -296,7 +296,7 @@ EvtSource N(80240E84) = {
     EVT_END
 };
 
-EvtSource N(80241028) = {
+EvtScript N(80241028) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(ShowConsumableChoicePopup)
@@ -368,7 +368,7 @@ EvtSource N(80241028) = {
     EVT_END
 };
 
-EvtSource N(80241528) = {
+EvtScript N(80241528) = {
     EVT_BIND_PADLOCK(N(80241028), TRIGGER_WALL_PRESS_A, 9, EVT_PTR(N(itemList_80240E10)), 0, 1)
     EVT_IF_EQ(EVT_SAVE_FLAG(1395), 1)
         EVT_CALL(MakeItemEntity, ITEM_FLOWER_SAVER_B, -83, 0, 0, 0, EVT_SAVE_FLAG(1392))
@@ -381,9 +381,9 @@ static s32 N(pad_1594)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-void playFX_82();
+void fx_sun();
 
 ApiStatus N(func_80240000_CEC240)(Evt* script, s32 isInitialCall) {
-    playFX_82(1, 0, 0, 0, 0, 0);
+    fx_sun(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

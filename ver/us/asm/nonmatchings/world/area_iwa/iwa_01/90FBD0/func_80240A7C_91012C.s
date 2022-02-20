@@ -315,7 +315,7 @@ glabel func_80240A7C_91012C
 /* 9105D0 80240F20 8E450038 */  lw        $a1, 0x38($s2)
 /* 9105D4 80240F24 8E46003C */  lw        $a2, 0x3c($s2)
 /* 9105D8 80240F28 8E470040 */  lw        $a3, 0x40($s2)
-/* 9105DC 80240F2C 0C01BECC */  jal       fx_walk
+/* 9105DC 80240F2C 0C01BECC */  jal       fx_walking_dust
 /* 9105E0 80240F30 24040002 */   addiu    $a0, $zero, 2
 /* 9105E4 80240F34 3C01C47A */  lui       $at, 0xc47a
 /* 9105E8 80240F38 44810000 */  mtc1      $at, $f0

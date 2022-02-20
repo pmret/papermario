@@ -42,8 +42,8 @@ glabel flo_08_func_802401CC_CAEF0C
 /* CAEF9C 8024025C 5040002E */  beql      $v0, $zero, .L80240318
 /* CAEFA0 80240260 26520001 */   addiu    $s2, $s2, 1
 /* CAEFA4 80240264 00101100 */  sll       $v0, $s0, 4
-/* CAEFA8 80240268 3C068009 */  lui       $a2, %hi(D_8008EF20)
-/* CAEFAC 8024026C 24C6EF20 */  addiu     $a2, $a2, %lo(D_8008EF20)
+/* CAEFA8 80240268 3C068009 */  lui       $a2, %hi(gPartnerPopupProperties)
+/* CAEFAC 8024026C 24C6EF20 */  addiu     $a2, $a2, %lo(gPartnerPopupProperties)
 /* CAEFB0 80240270 00461021 */  addu      $v0, $v0, $a2
 /* CAEFB4 80240274 0200202D */  daddu     $a0, $s0, $zero
 /* CAEFB8 80240278 AE300108 */  sw        $s0, 0x108($s1)
@@ -54,8 +54,8 @@ glabel flo_08_func_802401CC_CAEF0C
 /* CAEFCC 8024028C 0040202D */  daddu     $a0, $v0, $zero
 /* CAEFD0 80240290 04800011 */  bltz      $a0, .L802402D8
 /* CAEFD4 80240294 00101080 */   sll      $v0, $s0, 2
-/* CAEFD8 80240298 3C06800F */  lui       $a2, %hi(D_800F7F00)
-/* CAEFDC 8024029C 24C67F00 */  addiu     $a2, $a2, %lo(D_800F7F00)
+/* CAEFD8 80240298 3C06800F */  lui       $a2, %hi(wPartnerHudScripts)
+/* CAEFDC 8024029C 24C67F00 */  addiu     $a2, $a2, %lo(wPartnerHudScripts)
 /* CAEFE0 802402A0 00461021 */  addu      $v0, $v0, $a2
 /* CAEFE4 802402A4 8C430000 */  lw        $v1, ($v0)
 /* CAEFE8 802402A8 24020001 */  addiu     $v0, $zero, 1
@@ -71,8 +71,8 @@ glabel flo_08_func_802401CC_CAEF0C
 /* CAF010 802402D0 080900BF */  j         .L802402FC
 /* CAF014 802402D4 AE220294 */   sw       $v0, 0x294($s1)
 .L802402D8:
-/* CAF018 802402D8 3C06800F */  lui       $a2, %hi(D_800F7F40)
-/* CAF01C 802402DC 24C67F40 */  addiu     $a2, $a2, %lo(D_800F7F40)
+/* CAF018 802402D8 3C06800F */  lui       $a2, %hi(wDisabledPartnerHudScripts)
+/* CAF01C 802402DC 24C67F40 */  addiu     $a2, $a2, %lo(wDisabledPartnerHudScripts)
 /* CAF020 802402E0 00461021 */  addu      $v0, $v0, $a2
 /* CAF024 802402E4 8C420000 */  lw        $v0, ($v0)
 /* CAF028 802402E8 AE20018C */  sw        $zero, 0x18c($s1)
@@ -130,9 +130,9 @@ glabel flo_08_func_802401CC_CAEF0C
 /* CAF0E0 802403A0 02621021 */  addu      $v0, $s3, $v0
 /* CAF0E4 802403A4 8C420108 */  lw        $v0, 0x108($v0)
 /* CAF0E8 802403A8 00021100 */  sll       $v0, $v0, 4
-/* CAF0EC 802403AC 3C038009 */  lui       $v1, %hi(D_8008EF20)
+/* CAF0EC 802403AC 3C038009 */  lui       $v1, %hi(gPartnerPopupProperties)
 /* CAF0F0 802403B0 00621821 */  addu      $v1, $v1, $v0
-/* CAF0F4 802403B4 8C63EF20 */  lw        $v1, %lo(D_8008EF20)($v1)
+/* CAF0F4 802403B4 8C63EF20 */  lw        $v1, %lo(gPartnerPopupProperties)($v1)
 /* CAF0F8 802403B8 8EA20074 */  lw        $v0, 0x74($s5)
 /* CAF0FC 802403BC 2442FFFF */  addiu     $v0, $v0, -1
 /* CAF100 802403C0 00021080 */  sll       $v0, $v0, 2

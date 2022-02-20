@@ -1,5 +1,3 @@
-#include "ultra64.h"
-
 #ifndef _DEAD_H_
 #define _DEAD_H_
 
@@ -12,7 +10,7 @@
 #define evt_get_float_variable dead_evt_get_float_variable
 #define cos_rad dead_cos_rad
 #define evt_set_float_variable dead_evt_set_float_variable
-#define playFX_11 dead_playFX_11
+#define fx_sparkles dead_fx_sparkles
 #define gPlayerStatusPtr dead_gPlayerStatusPtr
 #define set_main_pan_u dead_set_main_pan_u
 #define set_main_pan_v dead_set_main_pan_v
@@ -41,9 +39,6 @@
 #define npc_test_move_simple_with_slipping dead_npc_test_move_simple_with_slipping
 #define get_screen_coords dead_get_screen_coords
 #define func_800495A0 func_800495A0
-#define func_8004DAD8 func_800496B8
-#define func_8004D9C0 func_800496B8
-#define func_8004E024 func_80049C04
 #define func_8004A73C func_8004EB8C
 #define gCurrentCameraID dead_gCurrentCameraID
 #define add_vec2D_polar dead_add_vec2D_polar
@@ -51,19 +46,19 @@
 #define gPartnerActionStatus dead_gPartnerActionStatus
 #define get_npc_safe dead_get_npc_safe
 #define sfx_adjust_env_sound_pos dead_sfx_adjust_env_sound_pos
-#define playFX_83 dead_playFX_83
+#define fx_star_spirits_energy dead_fx_star_spirits_energy
 #define heap_malloc dead_heap_malloc
 #define update_lerp dead_update_lerp
 #define create_shadow_type dead_create_shadow_type
-#define playFX_7B dead_playFX_7B
+#define fx_spirit_card dead_fx_spirit_card
 #define dist3D dead_dist3D
 #define subtract_hp dead_subtract_hp
 #define get_entity_by_index dead_get_entity_by_index
-#define playFX_52 dead_playFX_52
-#define playFX_33 dead_playFX_33
+#define fx_energy_orb_wave dead_fx_energy_orb_wave
+#define fx_radial_shimmer dead_fx_radial_shimmer
 #define set_screen_overlay_color dead_set_screen_overlay_color
 #define set_screen_overlay_params_front dead_set_screen_overlay_params_front
-#define playFX_82 dead_playFX_82
+#define fx_sun dead_fx_sun
 #define set_message_images dead_set_message_images
 #define general_heap_free dead_general_heap_free
 #define decode_yay0 dead_decode_yay0
@@ -82,7 +77,7 @@
 #define gOverrideFlags dead_gOverrideFlags
 #define set_message_msg dead_set_message_msg
 #define gPlayerData dead_gPlayerData
-#define D_8008EF20 D_80094900
+#define gPartnerPopupProperties D_80094900
 #define increment_status_menu_disabled dead_increment_status_menu_disabled
 #define decrement_status_menu_disabled dead_decrement_status_menu_disabled
 #define sync_status_menu dead_sync_status_menu
@@ -92,8 +87,17 @@
 #define guTranslateF dead_guTranslateF
 #define get_model_from_list_index dead_get_model_from_list_index
 #define get_model_list_index_from_tree_index dead_get_model_list_index_from_tree_index
-#define guMtxCatF osSiRawReadIo
-#define guMtxIdentF osGetCause
-//#define sqrtf dead_sqrtf // <- This somehow breaks things
+#define guMtxCatF dead_guMtxCatF
+#define guMtxIdentF dead_guMtxIdentF
+#define func_800495A0 func_8004D9C0
+#define func_800496B8 func_8004DAD8
+#define base_UnkNpcAIFunc1 func_8004DF64
+#define func_80049C04 func_8004E024
+#define func_80049E3C func_8004E25C
+#define func_80049ECC func_8004E2EC
+#define func_80049F7C func_8004E39C
+#define func_8004A124 func_8004E544
+#define func_8004A3E8 func_8004E808
+#define gCurrentEncounter dead_gCurrentEncounter
 
 #endif

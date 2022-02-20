@@ -342,7 +342,7 @@ glabel func_802BD758_3184A8
 /* 318998 802BDC48 44820000 */  mtc1      $v0, $f0
 /* 31899C 802BDC4C 00000000 */  nop
 /* 3189A0 802BDC50 46800020 */  cvt.s.w   $f0, $f0
-/* 3189A4 802BDC54 0C0371DE */  jal       npc_raycast_down_ahead
+/* 3189A4 802BDC54 0C0371DE */  jal       npc_raycast_down_around
 /* 3189A8 802BDC58 E7A00018 */   swc1     $f0, 0x18($sp)
 /* 3189AC 802BDC5C 10400023 */  beqz      $v0, .L802BDCEC
 /* 3189B0 802BDC60 00000000 */   nop
@@ -505,7 +505,7 @@ glabel func_802BD758_3184A8
 /* 318BE8 802BDE98 00501021 */  addu      $v0, $v0, $s0
 /* 318BEC 802BDE9C 80440015 */  lb        $a0, 0x15($v0)
 /* 318BF0 802BDEA0 44061000 */  mfc1      $a2, $f2
-/* 318BF4 802BDEA4 0C01C07C */  jal       playFX_19
+/* 318BF4 802BDEA4 0C01C07C */  jal       fx_explosion
 /* 318BF8 802BDEA8 00000000 */   nop
 /* 318BFC 802BDEAC 82020012 */  lb        $v0, 0x12($s0)
 /* 318C00 802BDEB0 000210C0 */  sll       $v0, $v0, 3

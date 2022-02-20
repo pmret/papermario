@@ -15,8 +15,8 @@ dlabel D_80099AA0
 glabel osSetIntMask
 /* 3BD40 80060940 400C6000 */  mfc0      $t4, $12
 /* 3BD44 80060944 3182FF01 */  andi      $v0, $t4, 0xff01
-/* 3BD48 80060948 3C088009 */  lui       $t0, %hi(D_80095900)
-/* 3BD4C 8006094C 25085900 */  addiu     $t0, $t0, %lo(D_80095900)
+/* 3BD48 80060948 3C088009 */  lui       $t0, %hi(__OSGlobalIntMask)
+/* 3BD4C 8006094C 25085900 */  addiu     $t0, $t0, %lo(__OSGlobalIntMask)
 /* 3BD50 80060950 8D0B0000 */  lw        $t3, ($t0)
 /* 3BD54 80060954 2401FFFF */  addiu     $at, $zero, -1
 /* 3BD58 80060958 01614026 */  xor       $t0, $t3, $at

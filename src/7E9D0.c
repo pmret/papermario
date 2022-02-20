@@ -5,7 +5,7 @@
 #include "world/actions.h"
 #include "npc.h"
 
-extern s32 D_8010C924;
+extern void* D_8010C924;
 extern s32 D_8010C964;
 extern s32 gSpinHistoryBufferPos;
 extern s16 D_8010C9B0;
@@ -50,7 +50,7 @@ f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z) {
 void phys_reset_spin_history(void) {
     s32 i;
 
-    mem_clear(&D_8010F250, sizeof(Temp8010F250));
+    mem_clear(&gPlayerSpinState, sizeof(PlayerSpinState));
     gSpinHistoryBufferPos = 0;
 
     for (i = 0; i < ARRAY_COUNT(gSpinHistoryPosAngle); i++) {
@@ -61,17 +61,53 @@ void phys_reset_spin_history(void) {
     }
 
     D_8010C964 = 0;
-    D_8010C924 = 0;
+    D_8010C924 = NULL;
 }
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_action_state);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_peach_update);
+void phys_peach_update(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Action* action;
+
+    func_800E24F8();
+
+    do {
+        if (!(playerStatus->flags & PLAYER_STATUS_FLAGS_20) && check_conversation_trigger()) {
+            set_action_state(ACTION_STATE_TALK);
+        }
+
+        if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+            action = &D_800F7C8C[playerStatus->actionState];
+            if (action->flag) {
+                if (action->dmaStart != NULL && action->dmaStart != D_8010C924) {
+                    D_8010C924 = action->dmaStart;
+
+                    // TODO: This needs to be a defined linker define for full shiftability
+                    dma_copy(D_8010C924, D_800F7C8C[playerStatus->actionState].dmaEnd, (void* )0x802B6000);
+                }
+
+                if (D_800F7C8C[playerStatus->actionState].flag) {
+                    D_800F7C8C[playerStatus->actionState].update();
+                }
+            }
+        } else {
+            if (D_800F7C8C[playerStatus->actionState].flag) {
+                D_800F7C8C[playerStatus->actionState].update();
+            }
+        }
+    } while (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED);
+
+    peach_check_for_parasol_input();
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_IN_DISGUISE) {
+        peach_sync_disguise_npc();
+    }
+}
 
 void set_action_state(s32 actionState) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
-    Temp8010F250* unknownStruct = &D_8010F250;
+    PlayerSpinState* spinState = &gPlayerSpinState;
 
     if (playerStatus->flags & 0x200) {
         playerStatus->flags &= ~0x200;
@@ -143,8 +179,8 @@ void set_action_state(s32 actionState) {
     playerStatus->flags &= ~0x20000;
     playerStatus->animFlags &= ~0x10000;
 
-    if (unknownStruct->unk_30 != 0) {
-        sfx_stop_sound(unknownStruct->unk_30);
+    if (spinState->spinSoundID != 0) {
+        sfx_stop_sound(spinState->spinSoundID);
     }
 
     if (playerStatus->unk_D8) {
@@ -214,8 +250,8 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", check_input_jump, void);
 
 void check_input_spin(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Temp8010F250* temp_8010F250 = &D_8010F250;
-    Temp8010F250* temp2 = temp_8010F250;
+    PlayerSpinState* spinState = &gPlayerSpinState;
+    PlayerSpinState* temp2 = spinState;
 
     if (!(playerStatus->flags & (PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO | PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) &&
         !(playerStatus->animFlags & 1) &&
@@ -226,15 +262,15 @@ void check_input_spin(void) {
         s32 btnPressed = playerStatus->pressedButtons & Z_TRIG;
 
         // TODO
-        if (actionState != 0x21) {
-            if (actionState < 0x22) {
-                if (actionState < 3) {
+        if (actionState != ACTION_STATE_RIDE) {
+            if (actionState < ACTION_STATE_STEP_UP) {
+                if (actionState < ACTION_STATE_JUMP) {
                     if (actionState >= 0 && !(playerStatus->animFlags & 0x10000)) {
-                        if (btnPressed || temp_8010F250->unk_01) {
+                        if (btnPressed || spinState->hasBufferedSpin) {
                             set_action_state(ACTION_STATE_SPIN);
-                            if (temp_8010F250->unk_01 != 0) {
-                                if (temp_8010F250->unk_08 != 0 || temp_8010F250->unk_0C != 0) {
-                                    playerStatus->prevActionState = temp2->unk_07;
+                            if (spinState->hasBufferedSpin != FALSE) {
+                                if (spinState->bufferedStickAxis.x != 0 || spinState->bufferedStickAxis.y != 0) {
+                                    playerStatus->prevActionState = temp2->prevActionState;
                                 } else {
                                     playerStatus->prevActionState = ACTION_STATE_IDLE;
                                 }

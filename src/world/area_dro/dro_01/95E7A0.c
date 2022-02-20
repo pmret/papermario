@@ -24,7 +24,7 @@
 #include "world/common/SomeXYZFunc2.inc.c"
 #define NAMESPACE dro_01
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
 FoliageModelList N(tree1_Leaves) = {
     .count = 1,
@@ -56,7 +56,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(triggerCoord_8024DD68) = { 120.0f, 0.0f, -43.0f, 0.0f };
 
-EvtSource N(8024DD78) = {
+EvtScript N(8024DD78) = {
     EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_WALL_HAMMER, 11, 1, 0)
     EVT_BIND_TRIGGER(N(shakeTree), TRIGGER_POINT_BOMB, EVT_PTR(N(triggerCoord_8024DD68)), 1, 0)

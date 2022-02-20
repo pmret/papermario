@@ -96,7 +96,7 @@ void func_8005513C(u32 arg0) {
     }
 }
 
-void snd_start_sound(s32 soundID, u8 volume, s8 pan) {
+void snd_start_sound(s32 soundID, u8 volume, u8 pan) {
     SoundManager* soundManager = D_8009A640;
     s16 a1temp = volume * 256;
 
@@ -104,14 +104,14 @@ void snd_start_sound(s32 soundID, u8 volume, s8 pan) {
         a1temp |= 0xFF;
     }
 
-    if (pan < 0) {
+    if (pan > 0x7F) {
         pan = 0x7F;
     }
 
     snd_enqueue_sfx_event(soundManager, soundID, a1temp, 0, pan);
 }
 
-void snd_start_sound_with_shift(s32 soundID, u8 volume, s8 pan, s16 pitchShift) {
+void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
     SoundManager* soundManager = D_8009A640;
     s16 a1temp = volume * 256;
 
@@ -119,7 +119,7 @@ void snd_start_sound_with_shift(s32 soundID, u8 volume, s8 pan, s16 pitchShift) 
         a1temp |= 0xFF;
     }
 
-    if (pan < 0) {
+    if (pan > 0x7F) {
         pan = 0x7F;
     }
 
@@ -132,7 +132,7 @@ void snd_start_sound_with_shift(s32 soundID, u8 volume, s8 pan, s16 pitchShift) 
     snd_enqueue_sfx_event(soundManager, soundID, a1temp, pitchShift, pan);
 }
 
-void snd_adjust_sound(s32 soundID, u8 volume, s8 pan) {
+void snd_adjust_sound(s32 soundID, u8 volume, u8 pan) {
     SoundManager* soundManager = D_8009A640;
     s16 a1temp = volume * 256;
 
@@ -140,14 +140,14 @@ void snd_adjust_sound(s32 soundID, u8 volume, s8 pan) {
         a1temp |= 0xFF;
     }
 
-    if (pan < 0) {
+    if (pan > 0x7F) {
         pan = 0x7F;
     }
 
     snd_enqueue_sfx_event(soundManager, soundID | 0x1000, a1temp, 0, pan);
 }
 
-void snd_adjust_sound_with_shift(s32 soundID, u8 volume, s8 pan, s16 pitchShift) {
+void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift) {
     SoundManager* soundManager = D_8009A640;
     s16 a1temp = volume * 256;
 
@@ -155,7 +155,7 @@ void snd_adjust_sound_with_shift(s32 soundID, u8 volume, s8 pan, s16 pitchShift)
         a1temp |= 0xFF;
     }
 
-    if (pan < 0) {
+    if (pan > 0x7F) {
         pan = 0x7F;
     }
 
@@ -579,12 +579,12 @@ void func_80056144(UnkFuncAl arg0, s32 arg1) {
     D_8009A5C0->unk_A4[arg1] = arg0;
 }
 
-void func_8005615C(void) {
+void audio_set_stereo(void) {
     func_80056D5C(1);
     func_80054DA8(0);
 }
 
-void func_80056180(void) {
+void audio_set_mono(void) {
     func_80056D5C(0);
     func_80054DA8(1);
 }

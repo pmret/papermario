@@ -1,14 +1,12 @@
 #include "common.h"
 #include "ld_addrs.h"
 #include "battle.h"
+#include "battle_tables.h"
 #include "hud_element.h"
 #include "sprite.h"
 
 extern s32 D_800DC060;
 extern Stage* D_800DC064;
-
-extern BattleList b_area_kmr_part_1_formationTable;
-extern StageList b_area_kmr_part_1_stageTable;
 
 BattleArea gBattleAreas[0x30] = {
     {
@@ -20,98 +18,98 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kmr_part_2),
         .name = "エリア ＫＭＲ その２",
-        .battles = 0x80219840,
-        .stages = 0x8021987C,
+        .battles = &b_area_kmr_part_2_formationTable,
+        .stages = &b_area_kmr_part_2_stageTable,
     },
     {
         AREA(area_kmr_part_3),
         .name = "エリア ＫＭＲ その３",
-        .battles = 0x8021A2AC,
-        .stages = 0x8021A360,
+        .battles = &b_area_kmr_part_3_formationTable,
+        .stages = &b_area_kmr_part_3_stageTable,
     },
     {
         AREA(area_mac),
         .name = "エリア ＭＡＣ",
-        .battles = 0x80232A5C,
-        .stages = 0x80232AD4,
+        .battles = &b_area_mac_formationTable,
+        .stages = &b_area_mac_stageTable,
     },
     {
         AREA(area_hos),
         .name = "エリア ＨＯＳ",
-        .battles = 0x80225F24,
-        .stages = 0x80225F88,
+        .battles = &b_area_hos_formationTable,
+        .stages = &b_area_hos_stageTable,
     },
     {
         AREA(area_nok),
         .name = "エリア ＮＯＫ",
-        .battles = 0x80219520,
-        .stages = 0x80219728,
+        .battles = &b_area_nok_formationTable,
+        .stages = &b_area_nok_stageTable,
     },
     {
         AREA(area_trd_part_1),
         .name = "エリア ＴＲＤ その１",
-        .battles = 0x80218CB0,
-        .stages = 0x80218EE0,
+        .battles = &b_area_trd_part_1_formationTable,
+        .stages = &b_area_trd_part_1_stageTable,
     },
     {
         AREA(area_trd_part_2),
         .name = "エリア ＴＲＤ その２",
-        .battles = 0x8021A5DC,
-        .stages = 0x8021A604,
+        .battles = &b_area_trd_part_2_formationTable,
+        .stages = &b_area_trd_part_2_stageTable,
     },
     {
         AREA(area_trd_part_3),
         .name = "エリア ＴＲＤ その３",
-        .battles = 0x8021823C,
-        .stages = 0x80218264,
+        .battles = &b_area_trd_part_3_formationTable,
+        .stages = &b_area_trd_part_3_stageTable,
     },
     {
         AREA(area_iwa),
         .name = "エリア ＩＷＡ",
-        .battles = 0x802185B8,
-        .stages = 0x802186E4,
+        .battles = &b_area_iwa_formationTable,
+        .stages = &b_area_iwa_stageTable,
     },
     {
         AREA(area_sbk),
         .name = "エリア ＳＢＫ",
-        .battles = 0x8021FE80,
-        .stages = 0x8021FFE8,
+        .battles = &b_area_sbk_formationTable,
+        .stages = &b_area_sbk_stageTable,
     },
     {
         AREA(area_isk_part_1),
         .name = "エリア ＩＳＫ その１",
-        .battles = 0x80224700,
-        .stages = 0x802248A4,
+        .battles = &b_area_isk_part_1_formationTable,
+        .stages = &b_area_isk_part_1_stageTable,
     },
     {
         AREA(area_isk_part_2),
         .name = "エリア ＩＳＫ その２",
-        .battles = 0x80220448,
-        .stages = 0x80220470,
+        .battles = &b_area_isk_part_2_formationTable,
+        .stages = &b_area_isk_part_2_stageTable,
     },
     {
         AREA(area_mim),
         .name = "エリア ＭＩＭ",
-        .battles = 0x8021EA70,
-        .stages = 0x8021EBEC,
+        .battles = &b_area_mim_formationTable,
+        .stages = &b_area_mim_stageTable,
     },
     {
         AREA(area_arn),
         .name = "エリア ＡＲＮ",
-        .battles = 0x80228110,
-        .stages = 0x80228278,
+        .battles = &b_area_arn_formationTable,
+        .stages = &b_area_arn_stageTable,
     },
     {
         AREA(area_dgb),
         .name = "エリア ＤＧＢ",
-        .battles = 0x8021B38C,
-        .stages = 0x8021B418,
+        .battles = &b_area_dgb_formationTable,
+        .stages = &b_area_dgb_stageTable,
     },
     {
         AREA(area_omo),
         .name = "エリア ＯＭＯ",
-        .battles = 0x80230730,
-        .stages = 0x80230AC8,
+        .battles = &b_area_omo_formationTable,
+        .stages = &b_area_omo_stageTable,
     },
     {
         AREA(area_omo2),
@@ -128,26 +126,26 @@ BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kgr),
         .name = "エリア ＫＧＲ",
-        .battles = 0x8021D5FC,
-        .stages = 0x8021D624,
+        .battles = &b_area_kgr_formationTable,
+        .stages = &b_area_kgr_stageTable,
     },
     {
         AREA(area_jan),
         .name = "エリア ＪＡＮ",
-        .battles = 0x80228AF8,
-        .stages = 0x80228C60,
+        .battles = &b_area_jan_formationTable,
+        .stages = &b_area_jan_stageTable,
     },
     {
         AREA(area_jan2),
         .name = "エリア ＪＡＮ２",
-        .battles = 0x8021F6C8,
-        .stages = 0x8021F72C,
+        .battles = &b_area_jan2_formationTable,
+        .stages = &b_area_jan2_stageTable,
     },
     {
         AREA(area_kzn),
         .name = "エリア ＫＺＮ",
-        .battles = 0x80229E74,
-        .stages = 0x8022A02C,
+        .battles = &b_area_kzn_formationTable,
+        .stages = &b_area_kzn_stageTable,
     },
     {
         AREA(area_kzn2),
@@ -325,7 +323,7 @@ void load_battle_section(void) {
 
 void load_battle(s32 arg0) {
     D_800DC4E8 = arg0;
-    set_game_mode(8);
+    set_game_mode(GAME_MODE_BATTLE);
     gBattleState = 0;
     D_800DC4D0 = 0;
     gBattleState2 = 0;
@@ -508,7 +506,7 @@ void load_demo_battle(u32 index) {
     gCurrentEncounter.unk_10 = 0;
     set_battle_stage(-1);
     gGameStatusPtr->demoFlags |= 1;
-    gOverrideFlags &= ~0x8;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
     load_battle(battleID);
 }
 

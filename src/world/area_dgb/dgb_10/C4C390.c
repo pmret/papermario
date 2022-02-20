@@ -13,7 +13,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_10_tattle },
 };
 
-EvtSource N(80240250) = {
+EvtScript N(80240250) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -30,15 +30,15 @@ static s32 N(pad_2E8)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitWalk_802402F0) = EXIT_WALK_SCRIPT(40,  0, "dgb_09",  3);
+EvtScript N(exitWalk_802402F0) = EXIT_WALK_SCRIPT(40,  0, "dgb_09",  3);
 
-EvtSource N(8024034C) = {
+EvtScript N(8024034C) = {
     EVT_BIND_TRIGGER(N(exitWalk_802402F0), TRIGGER_FLOOR_ABOVE, 8, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(enterWalk_80240378) = {
+EvtScript N(enterWalk_80240378) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -66,7 +66,7 @@ EvtSource N(enterWalk_80240378) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -92,7 +92,7 @@ static s32 N(pad_66C) = {
     0x00000000,
 };
 
-EvtSource N(80240670) = {
+EvtScript N(80240670) = {
     EVT_USE_BUF(EVT_VAR(0))
     EVT_MALLOC_ARRAY(6, EVT_VAR(10))
     EVT_BUF_READ1(EVT_VAR(0))
@@ -113,7 +113,7 @@ EvtSource N(80240670) = {
     EVT_END
 };
 
-EvtSource N(80240770) = {
+EvtScript N(80240770) = {
     EVT_USE_ARRAY(EVT_VAR(0))
     EVT_CALL(N(func_80240000_C4C390))
     EVT_IF_EQ(EVT_VAR(0), 0)
@@ -134,7 +134,7 @@ EvtSource N(80240770) = {
     EVT_END
 };
 
-EvtSource N(80240860) = {
+EvtScript N(80240860) = {
     EVT_USE_BUF(EVT_VAR(0))
     EVT_MALLOC_ARRAY(6, EVT_VAR(9))
     EVT_BUF_READ1(EVT_VAR(1))
@@ -167,7 +167,7 @@ EvtSource N(80240860) = {
     EVT_IF_NE(EVT_VAR(2), EVT_ARRAY(3))
         EVT_GOTO(2)
     EVT_END_IF
-    EVT_CALL(N(func_802400A0_C4C430))
+    EVT_CALL(N(UnkDistFunc2))
     EVT_IF_EQ(EVT_VAR(0), 1)
         EVT_EXEC_WAIT(N(80240AF4))
     EVT_END_IF
@@ -188,7 +188,7 @@ EvtSource N(80240860) = {
     EVT_END
 };
 
-EvtSource N(80240AF4) = {
+EvtScript N(80240AF4) = {
     EVT_USE_ARRAY(EVT_VAR(9))
     EVT_CALL(GetPlayerPos, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4))
     EVT_CALL(MakeLerp, 0, 5, 3, 1)
@@ -219,7 +219,7 @@ EvtSource N(80240AF4) = {
     EVT_END
 };
 
-EvtSource N(80240CB8) = {
+EvtScript N(80240CB8) = {
     EVT_USE_ARRAY(EVT_VAR(9))
     EVT_CALL(MakeItemEntity, EVT_ARRAY(5), EVT_ARRAY(2), EVT_ARRAY(3), EVT_ARRAY(4), 3, 0)
     EVT_SET(EVT_VAR(2), 0)
@@ -247,7 +247,7 @@ EvtSource N(80240CB8) = {
     EVT_END
 };
 
-EvtSource N(80240E68) = {
+EvtScript N(80240E68) = {
     EVT_CALL(N(func_8024013C_C4C4CC))
     EVT_CALL(func_802CA988, 0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5))
     EVT_CALL(N(func_802401C0_C4C550))
@@ -262,25 +262,25 @@ static s32 N(pad_EDC) = {
     0x00000000,
 };
 
-EvtSource N(80240EE0) = {
+EvtScript N(80240EE0) = {
     EVT_SET(EVT_SAVE_FLAG(1052), 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80240F00) = {
+EvtScript N(80240F00) = {
     EVT_SET(EVT_SAVE_FLAG(1053), 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80240F20) = {
+EvtScript N(80240F20) = {
     EVT_SET(EVT_SAVE_FLAG(1054), 1)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1052), 0)
         EVT_CALL(MakeEntity, 0x802BCE84, 500, 0, -100, 0, MAKE_ENTITY_END)
         EVT_CALL(AssignScript, EVT_PTR(N(80240EE0)))
@@ -313,22 +313,7 @@ ApiStatus N(func_80240000_C4C390)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802400A0_C4C430)(Evt* script, s32 isInitialCall) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 distance;
-    s32* array = script->array;
-
-    distance = dist2D(playerStatus->position.x, playerStatus->position.z, array[2], array[4]);
-    script->varTable[0] = 0;
-    if (distance < 112.5f) {
-        script->varTable[0] = 2;
-    }
-    if (distance < 37.5f) {
-        script->varTable[0] = 1;
-    }
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkDistFunc2.inc.c"
 
 ApiStatus N(func_8024013C_C4C4CC)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

@@ -46,7 +46,7 @@ void func_802B60A4_E29514(void) {
 
     if (playerStatus->flags & (1 << 31)) {
         playerStatus->flags &= ~0x80000000;
-        gOverrideFlags |= 0x40;
+        gOverrideFlags |= GLOBAL_OVERRIDES_40;
         func_800EF300();
         playerStatus->fallState = 1;
         playerStatus->framesOnGround = 0;
@@ -75,7 +75,7 @@ void func_802B60A4_E29514(void) {
     }
     switch(playerStatus->fallState) {
         case 1:
-            gOverrideFlags |= 0x40;
+            gOverrideFlags |= GLOBAL_OVERRIDES_40;
             if (++D_802B6EE4 >= 20.0f) {
                 D_802B6EE4 = 20.0f;
             }
@@ -132,7 +132,7 @@ void func_802B60A4_E29514(void) {
             }
             break;
         case 2:
-            gOverrideFlags |= 0x40;
+            gOverrideFlags |= GLOBAL_OVERRIDES_40;
             if (--D_802B6EE4 < 0.0f) {
                 D_802B6EE4 = 0.0f;
                 playerStatus->flags &= ~0x100000;
@@ -156,7 +156,7 @@ void func_802B60A4_E29514(void) {
                 enable_player_static_collisions();
                 set_action_state(ACTION_STATE_LAND);
                 enable_partner_ai();
-                gOverrideFlags &= ~0x40;
+                gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
                 return;
             }
     }
@@ -273,7 +273,7 @@ void func_802B60A4_E29514(void) {
             playerStatus->flags |= 0x800000;
             start_falling();
             enable_partner_ai();
-            gOverrideFlags &= ~0x40;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
             break;
     }
 }

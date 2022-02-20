@@ -32,7 +32,7 @@ void func_802B6000_E26710(void) {
         suggest_player_anim_setUnkFlag(0x80000);
         disable_player_input();
         playerStatus->flags |= 0x200;
-        gCameras[0].moveFlags |= 1;
+        gCameras[CAM_DEFAULT].moveFlags |= 1;
         temp_f0 = clamp_angle(playerStatus->targetYaw - gCameras[gCurrentCameraID].currentYaw);
         phi_f4 = -60.0f;
         if (temp_f0 <= 180.0f) {

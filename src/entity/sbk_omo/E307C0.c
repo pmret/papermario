@@ -19,7 +19,7 @@ INCLUDE_ASM(s32, "entity/sbk_omo/E307C0", func_802BBE70_E307C0);
 
 void func_802BC2BC_E30C0C(Entity* entity) {
     u16 currentFloor = gCollisionStatus.currentFloor;
-    structE307C0* data = (structE307C0*)entity->dataBuf;
+    structE307C0* data = (structE307C0*)entity->dataBuf.unk;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 actionState = playerStatus->actionState;
     f32 x,y,z,sp2C;
@@ -45,7 +45,7 @@ void func_802BC2BC_E30C0C(Entity* entity) {
 
     if (result != 0) {
         data->unk_02 &= ~1;
-        playFX_18(3, entity->position.x, entity->position.y + 35.0f, entity->position.z, 0, -1.0f, 0, 3);
+        fx_damage_stars(3, entity->position.x, entity->position.y + 35.0f, entity->position.z, 0, -1.0f, 0, 3);
         if (result > 0) {
             data->unk_02 |= 1;
         }
@@ -58,7 +58,7 @@ void func_802BC2BC_E30C0C(Entity* entity) {
 }
 
 void func_802BC4B8_E30E08(Entity* entity) {
-    structE307C0* data = (structE307C0*)entity->dataBuf;
+    structE307C0* data = (structE307C0*)entity->dataBuf.unk;
     s32 i;
 
     data->unk_04--;
@@ -73,13 +73,13 @@ void func_802BC4B8_E30E08(Entity* entity) {
 }
 
 void func_802BC514_E30E64(Entity* entity) {
-    structE307C0* data = (structE307C0*)entity->dataBuf;
+    structE307C0* data = (structE307C0*)entity->dataBuf.unk;
     entity->position.x = data->position.x + (data->unk_01 & 1 ? 1.0f : -1.0f);
     data->unk_01 -= 1;
 }
 
 void func_802BC558_E30EA8(Entity* entity) {
-    structE307C0* data = (structE307C0*)entity->dataBuf;
+    structE307C0* data = (structE307C0*)entity->dataBuf.unk;
     entity->position.x = data->position.x;
     entity->position.z = data->position.y;
 }
@@ -93,14 +93,14 @@ void func_802BC99C_E312EC(Entity* entity) {
 }
 
 void func_802BC9CC_E3131C(Entity* entity) {
-    structE307C0* data = (structE307C0*)entity->dataBuf;
+    structE307C0* data = (structE307C0*)entity->dataBuf.unk;
     if (data->unk_02 & 1) {
         entity_start_script(entity);
     }
 }
 
 void func_802BC9FC_E3134C(Entity* entity) {
-    structE307C0* data = (structE307C0*)entity->dataBuf;
+    structE307C0* data = (structE307C0*)entity->dataBuf.unk;
     entity->renderSetupFunc = &func_802BBE70_E307C0;
     data->position.x = entity->position.x;
     data->position.z = entity->position.y;

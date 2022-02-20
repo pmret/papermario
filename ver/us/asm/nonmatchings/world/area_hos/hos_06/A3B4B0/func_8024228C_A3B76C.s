@@ -41,8 +41,8 @@ glabel func_8024228C_A3B76C
 /* A3B7F4 80242314 AEA20318 */  sw        $v0, 0x318($s5)
 /* A3B7F8 80242318 0000B02D */  daddu     $s6, $zero, $zero
 /* A3B7FC 8024231C 02C0902D */  daddu     $s2, $s6, $zero
-/* A3B800 80242320 3C1E8009 */  lui       $fp, %hi(D_8008A680)
-/* A3B804 80242324 27DEA680 */  addiu     $fp, $fp, %lo(D_8008A680)
+/* A3B800 80242320 3C1E8009 */  lui       $fp, %hi(gItemHudScripts)
+/* A3B804 80242324 27DEA680 */  addiu     $fp, $fp, %lo(gItemHudScripts)
 /* A3B808 80242328 24170001 */  addiu     $s7, $zero, 1
 /* A3B80C 8024232C 3C148024 */  lui       $s4, %hi(D_80245EEC_A3F3CC)
 /* A3B810 80242330 26945EEC */  addiu     $s4, $s4, %lo(D_80245EEC_A3F3CC)

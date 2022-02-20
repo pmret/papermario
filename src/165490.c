@@ -56,7 +56,7 @@ void filemenu_draw_contents_stereo(
     s32 width, s32 height,
     s32 opacity, s32 darkening
 ) {
-    if (gGameStatusPtr->unk_AB == 1) {
+    if (gGameStatusPtr->soundOutputMode == SOUND_OUT_STEREO) {
         set_hud_element_render_pos(filemenu_hudElemIDs[18], baseX + 34, baseY + 10);
         draw_hud_element_3(filemenu_hudElemIDs[18]);
     } else {
@@ -71,7 +71,7 @@ void filemenu_draw_contents_mono(
     s32 width, s32 height,
     s32 opacity, s32 darkening
 ) {
-    if (gGameStatusPtr->unk_AB == 0) {
+    if (gGameStatusPtr->soundOutputMode == SOUND_OUT_MONO) {
         set_hud_element_render_pos(filemenu_hudElemIDs[16], baseX + 34, baseY + 10);
         draw_hud_element_3(filemenu_hudElemIDs[16]);
     } else {
@@ -87,7 +87,7 @@ void filemenu_draw_contents_option_left(
     s32 opacity, s32 darkening
 ) {
     if (menu->page != 2) {
-        if ((menu->unk_00.s & 0x00FFFF00) == 0x200) {
+        if (menu->col == 0 && menu->row == 2) {
             filemenu_set_cursor_goal_pos(53, baseX, baseY + 8);
         }
         filemenu_draw_message(filemenu_get_menu_message(9), baseX + 8, baseY + 2, 255, 0, 1);
@@ -112,7 +112,7 @@ void filemenu_draw_contents_option_center(
             msgIdx = 10;
             xOffset = 18;
             yOffset = 0;
-            if ((menu->unk_00.s & 0xFFFF00) == 0x010200) {
+            if (menu->col == 1 && menu->row == 2) {
                 filemenu_set_cursor_goal_pos(54, baseX + 8, baseY + 8);
             }
             break;
@@ -120,7 +120,7 @@ void filemenu_draw_contents_option_center(
             msgIdx = 11;
             xOffset = 14;
             yOffset = 0;
-            if ((menu->unk_00.s & 0xFFFF00) == 0x010200) {
+            if (menu->col == 1 && menu->row == 2) {
                 filemenu_set_cursor_goal_pos(54, baseX + 4, baseY + 8);
             }
             break;
@@ -136,7 +136,7 @@ void filemenu_draw_contents_option_right(
     s32 opacity, s32 darkening
 ) {
     if (menu->page != 2) {
-        if ((menu->unk_00.s & 0xFFFF00) == 0x020200) {
+        if (menu->col == 2 && menu->row == 2) {
             filemenu_set_cursor_goal_pos(55, baseX + 8, baseY + 8);
         }
         filemenu_draw_message(filemenu_get_menu_message(10), baseX + 20, baseY + 2, 255, 0, 1);
@@ -153,7 +153,7 @@ void filemenu_draw_contents_file_title(
     s32 width, s32 height,
     s32 opacity, s32 darkening)
 {
-    if (D_8024C098 == 0 && menu->unk_00.c.selected == fileIdx) {
+    if (D_8024C098 == 0 && menu->selected == fileIdx) {
         filemenu_set_cursor_goal_pos(fileIdx + 60, baseX - 3, baseY + 8);
     }
 
@@ -256,9 +256,9 @@ void filemenu_main_init(MenuPanel* menu) {
     }
 
     setup_pause_menu_tab(D_80249EA0, ARRAY_COUNT(D_80249EA0));
-    menu->unk_00.c.selected = menu->gridData[(menu->page * menu->numCols * menu->numRows) +
-                                             (menu->numCols * menu->unk_00.c.row) +
-                                             menu->unk_00.c.col];
+    menu->selected = menu->gridData[(menu->page * menu->numCols * menu->numRows) +
+                                             (menu->numCols * menu->row) +
+                                             menu->col];
 
     if (menu->page == 2) {
         gWindows[45].pos.y = 1;
@@ -289,12 +289,12 @@ void filemenu_main_init(MenuPanel* menu) {
     *posXPtr = x;
 
     if (menu->page != 0) {
-        set_window_update(0x35, 2);
-        set_window_update(0x37, 2);
-        set_window_update(0x33, 2);
-        set_window_update(0x34, 2);
+        set_window_update(0x35, WINDOW_UPDATE_HIDE);
+        set_window_update(0x37, WINDOW_UPDATE_HIDE);
+        set_window_update(0x33, WINDOW_UPDATE_HIDE);
+        set_window_update(0x34, WINDOW_UPDATE_HIDE);
     }
-    menu->unk_00.c.initialized = 1;
+    menu->initialized = 1;
 }
 
 static const f32 padding[] = { 0.0f }; // TODO remove when the following func is matched
@@ -302,7 +302,7 @@ static const f32 padding[] = { 0.0f }; // TODO remove when the following func is
 void filemenu_main_handle_input(MenuPanel* menu);
 INCLUDE_ASM(s32, "165490", filemenu_main_handle_input);
 
-extern s32 D_8014F150[];
+extern s32 gWindowStyles[];
 
 INCLUDE_ASM(s32, "165490", filemenu_main_update);
 

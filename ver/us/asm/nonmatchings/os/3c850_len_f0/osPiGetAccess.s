@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osPiGetAccess
+glabel __osPiGetAccess
 /* 3C8A4 800614A4 3C028009 */  lui       $v0, %hi(__osPiAccessQueueEnabled)
 /* 3C8A8 800614A8 8C423D90 */  lw        $v0, %lo(__osPiAccessQueueEnabled)($v0)
 /* 3C8AC 800614AC 27BDFFE0 */  addiu     $sp, $sp, -0x20

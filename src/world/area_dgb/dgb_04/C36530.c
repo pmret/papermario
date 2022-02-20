@@ -1,9 +1,11 @@
 #include "dgb_04.h"
+#include "sprite.h"
+#include "world/partners.h"
 #include "sprite/npc/sentinel.h"
 #include "message_ids.h"
 
-extern s32 D_800F7F00[];
-extern s32 D_800F7F40[];
+extern s32 wPartnerHudScripts[];
+extern s32 wDisabledPartnerHudScripts[];
 
 enum {
     NPC_SENTINEL,
@@ -21,7 +23,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_04_tattle },
 };
 
-EvtSource N(80243170) = {
+EvtScript N(80243170) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(-29)
             EVT_CALL(SetMusicTrack, 0, SONG_TUBBAS_MANOR, 0, 8)
@@ -38,7 +40,7 @@ static s32 N(pad_3208)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(exitSingleDoor_80243210) = {
+EvtScript N(exitSingleDoor_80243210) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 0)
@@ -54,7 +56,7 @@ EvtSource N(exitSingleDoor_80243210) = {
     EVT_END
 };
 
-EvtSource N(exitDoubleDoor_802432C4) = {
+EvtScript N(exitDoubleDoor_802432C4) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(UseDoorSounds, 3)
@@ -70,7 +72,7 @@ EvtSource N(exitDoubleDoor_802432C4) = {
     EVT_END
 };
 
-EvtSource N(enterSingleDoor_80243378) = {
+EvtScript N(enterSingleDoor_80243378) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -88,7 +90,7 @@ EvtSource N(enterSingleDoor_80243378) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 15)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -116,7 +118,7 @@ f32 N(D_80243560_C39A90)[] = {
     1.5f, 20.0f,
 };
 
-EvtSource N(80243578) = {
+EvtScript N(80243578) = {
     EVT_CALL(SetSelfEnemyFlagBits, ((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | NPC_FLAG_SIMPLIFIED_PHYSICS | NPC_FLAG_PARTICLE | NPC_FLAG_8000000 | NPC_FLAG_10000000 | NPC_FLAG_20000000)), TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, ((NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT)), TRUE)
     EVT_RETURN
@@ -138,7 +140,7 @@ NpcAISettings N(npcAISettings_802435B4) = {
 
 extern const char N(dgb_00_name_hack)[];
 
-EvtSource N(npcAI_802435E4) = {
+EvtScript N(npcAI_802435E4) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 5, -650)
     EVT_CALL(SetSelfVar, 6, 30)
@@ -199,7 +201,7 @@ EvtSource N(npcAI_802435E4) = {
     EVT_END
 };
 
-EvtSource N(80243A0C) = {
+EvtScript N(80243A0C) = {
     EVT_CALL(GetOwnerEncounterTrigger, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(1)
@@ -214,7 +216,7 @@ EvtSource N(80243A0C) = {
     EVT_END
 };
 
-EvtSource N(80243A98) = {
+EvtScript N(80243A98) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -290,7 +292,7 @@ f32 N(D_80243D88_C3A2B8)[] = {
     140.0f, 180.0f, 220.0f
 };
 
-EvtSource N(80243D94) = {
+EvtScript N(80243D94) = {
     EVT_WAIT_FRAMES(10)
     EVT_CALL(PlaySound, 0x212D)
     EVT_CALL(N(UnkFunc21), EVT_MAP_VAR(0))
@@ -322,7 +324,7 @@ EvtSource N(80243D94) = {
     EVT_END
 };
 
-EvtSource N(80243EF8) = {
+EvtScript N(80243EF8) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1046), 1)
         EVT_RETURN
     EVT_END_IF
@@ -406,7 +408,7 @@ EvtSource N(80243EF8) = {
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EA910, 500, -360, 110, 0, MAKE_ENTITY_END)
     EVT_SET(EVT_MAP_VAR(0), EVT_VAR(0))
     EVT_CALL(AssignBlockFlag, EVT_SAVE_FLAG(1046))
@@ -417,150 +419,7 @@ EvtSource N(makeEntities) = {
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-#ifdef NON_EQUIVALENT
-// second npc_raycast_down_sides call
-void N(func_802401B0_C366E0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    f32 temp_f24;
-    f32 posX, posY, posZ, posW;
-    s32 var;
-    f32 temp_f0;
-    f32 phi_f4;
-    s32 phi_v0;
-    s32 phi_s4 = 0;
-
-    f32 a = enemy->varTable[7];
-    f32 temp_f2  = a / 100.0;
-    f32 b = enemy->varTable[3];
-    f32 temp_f26 = b / 100.0;
-    f32 c = enemy->varTable[4];
-    f32 temp_f20 = c / 100.0;
-    f32 d = enemy->varTable[1];
-    f32 temp_f22 = d / 100.0;
-
-    enemy->varTable[4] = npc->pos.y * 100.0;
-    temp_f24 = temp_f26 + temp_f2;
-
-    if ((enemy->varTable[0] & 0x11) == 1) {
-        if (npc->flags & 8) {
-            if (temp_f22 < (temp_f24 - npc->pos.y)) {
-                enemy->varTable[0] |= 0x10;
-            }
-        } else {
-            posX = npc->pos.x;
-            posY = npc->pos.y;
-            posZ = npc->pos.z;
-            posW = 1000.0f;
-            npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
-            if (temp_f22 < (temp_f26 - posW)) {
-                enemy->varTable[0] |= 0x10;
-            }
-        }
-    }
-
-    if ((enemy->varTable[0] & 0x11) == 0x11) {
-        f64 test;
-        if (npc->flags & 8) {
-            phi_f4 = temp_f24;
-            test = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
-            //npc->pos.y = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
-            npc->pos.y = test;
-        } else {
-            posX = npc->pos.x;
-            posY = temp_f20;
-            posZ = npc->pos.z;
-            posW = 1000.0f;
-            npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
-            phi_f4 = posY;
-            phi_f4 += temp_f26;
-            d = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
-            test = d;
-            npc->pos.y = test;
-            //npc->pos.y = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
-        }
-        //npc->pos.y = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
-
-        if (fabsf(phi_f4 - npc->pos.y) < 1.0) {
-            npc->pos.y = phi_f4;
-            enemy->varTable[0] &= ~0x10;
-        }
-    } else if (enemy->varTable[1] > 0) {
-        temp_f0 = sin_deg(enemy->varTable[2]);
-        if (npc->flags & 8) {
-            phi_v0 = FALSE;
-        } else {
-            posX = npc->pos.x;
-            posY = npc->pos.y;
-            posZ = npc->pos.z;
-            posW = 1000.0f;
-            phi_v0 = npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
-        }
-        if (phi_v0) {
-            npc->pos.y = posY + temp_f26 + (temp_f0 * temp_f22);
-        } else {
-            npc->pos.y = temp_f24 + (temp_f0 * temp_f22);
-        }
-        enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 10);
-    }
-
-    if (enemy->varTable[9] <= 0) {
-        if (aiSettings->unk_14 >= 0) {
-            if (script->functionTemp[1] <= 0) {
-                script->functionTemp[1] = aiSettings->unk_14;
-                if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) &&
-                    func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
-                    fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
-                    npc->moveToPos.y = npc->pos.y;
-                    ai_enemy_play_sound(npc, 0x2F4, 0x200000);
-                    if (enemy->npcSettings->unk_2A & 1) {
-                        script->functionTemp[0] = 10;
-                    } else {
-                        script->functionTemp[0] = 12;
-                    }
-                    return;
-                }
-            }
-            script->functionTemp[1]--;
-        }
-    } else {
-        enemy->varTable[9]--;
-    }
-
-    if (is_point_within_region(enemy->territory->wander.wanderShape,
-                               enemy->territory->wander.point.x, enemy->territory->wander.point.z,
-                               npc->pos.x, npc->pos.z,
-                               enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
-        posW = dist2D(enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z);
-        if (npc->moveSpeed < posW) {
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
-            phi_s4 = 1;
-        }
-    }
-
-    if (enemy->territory->wander.wanderSizeX | enemy->territory->wander.wanderSizeZ | phi_s4) {
-        if (npc->turnAroundYawAdjustment == 0) {
-            npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-        } else {
-            return;
-        }
-    }
-
-    enemy->varTable[4] = npc->pos.y * 100.0;
-    if (aiSettings->moveTime > 0) {
-        if ((npc->duration <= 0) || (--npc->duration <= 0)) {
-            script->functionTemp[0] = 2;
-            script->functionTemp[1] = (rand_int(1000) % 3) + 2;
-            if ((aiSettings->unk_2C <= 0) || (aiSettings->waitTime <= 0) || (script->functionTemp[1] < 3)) {
-                script->functionTemp[0] = 0;
-            }
-        }
-    }
-}
-#else
-INCLUDE_ASM(void, "world/area_dgb/dgb_04/C36530", dgb_04_func_802401B0_C366E0, Evt* script,
-            NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
-#endif
+#include "world/common/UnkNpcAIFunc35.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
@@ -620,7 +479,7 @@ ApiStatus N(func_8024130C_C3783C)(Evt* script, s32 isInitialCall) {
         case 0:
             N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
         case 1:
-            N(func_802401B0_C366E0)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc35)(script, aiSettings, territoryPtr);
             break;
         case 2:
             N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
@@ -735,7 +594,7 @@ void N(func_802417F8_C37D28)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
         posY = gPlayerStatusPtr->position.y;
         posZ = gPlayerStatusPtr->position.z;
         posW = 1000.0f;
-        npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+        npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
         if (fabsf(npc->pos.y - posY) > 24.0) {
             npc->pos.y -= 1.8;
         } else {
@@ -781,7 +640,7 @@ void N(func_80241B4C_C3807C)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     posY = npc->pos.y;
     posZ = npc->pos.z;
     posW = 1000.0f;
-    npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+    npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW);
     if (!(npc->pos.y < (posY + temp_f20))) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc->pos.y = posY + temp_f20;
@@ -844,7 +703,7 @@ void N(func_80241E3C_C3836C)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
     s32 var;
     s32 var2;
 
-    if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+    if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW)) {
         npc->pos.y = posY + temp_f26 + (temp_f20 * temp_f22);
     } else {
         npc->pos.y = temp_f24 + (temp_f20 * temp_f22);
@@ -880,7 +739,7 @@ ApiStatus N(func_80242154_C38684)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = evt_get_variable(script, *args);
+    NpcAISettings* aiSettings =(NpcAISettings*) evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -901,7 +760,7 @@ ApiStatus N(func_80242154_C38684)(Evt* script, s32 isInitialCall) {
             N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
             func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
         case 1:
-            N(func_802401B0_C366E0)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc35)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] == 12) {
                 npc->duration = 6;
             }
@@ -1004,14 +863,14 @@ ApiStatus N(func_8024259C_C38ACC)(Evt* script, s32 isInitialCall) {
 
             if (playerData->partners[idx].enabled) {
                 ptr->unk_108[i] = idx;
-                ptr->unk_84[i] = *D_8008EF20[idx];
+                ptr->unk_84[i] = *gPartnerPopupProperties[idx];
                 partnerLevel = N(UnkFunc37)(idx, var);
                 if (partnerLevel >= 0) {
-                    ptr->unk_00[i] = D_800F7F00[idx];
+                    ptr->unk_00[i] = wPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 1;
                     ptr->unk_294[i] = N(D_80243D48_C3A278)[i][partnerLevel];
                 } else {
-                    ptr->unk_00[i] = D_800F7F40[idx];
+                    ptr->unk_00[i] = wDisabledPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 0;
                     ptr->unk_294[i] = N(D_80243D30_C3A260)[var];
                 }
@@ -1045,7 +904,7 @@ ApiStatus N(func_8024259C_C38ACC)(Evt* script, s32 isInitialCall) {
 
     destroy_popup_menu();
     if (script->functionTemp[1] != 0xFF) {
-        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1] - 1]][0];
+        script->varTable[0] = gPartnerPopupProperties[ptr->unk_108[script->functionTemp[1] - 1]][0];
         script->varTable[1] = ptr->unk_108[script->functionTemp[1] - 1];
     } else {
         script->varTable[0] = -1;
@@ -1106,7 +965,7 @@ ApiStatus N(func_802429D0_C38F00)(Evt* script, s32 isInitialCall) {
         scriptPtr->unk_5C = get_entity_by_index(evt_get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-            userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
+            userDataPtr->unk_08[i] = fx_motion_blur_flame(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
                                                    scriptPtr->unk_5C->position.z, 1.0f, -1);
             save = 0.0f;
             userDataPtr->unk_2C[i] = save;

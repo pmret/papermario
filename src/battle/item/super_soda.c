@@ -44,7 +44,7 @@ ApiStatus N(func_802A12EC_724FCC)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_802A1378_725058)(Evt* script, s32 isInitialCall) {
     s32 actorId = evt_get_variable(script, *script->ptrReadPos);
     Actor* actor = get_actor(actorId);
-    s32 id = actor->actorID & 0x700;
+    s32 actorClass = actor->actorID & ACTOR_CLASS_MASK;
 
     if (actor->debuff != STATUS_END) {
         actor->debuffDuration = 0;
@@ -56,10 +56,10 @@ ApiStatus N(func_802A1378_725058)(Evt* script, s32 isInitialCall) {
         actor->koDuration = 0;
         actor->koStatus = 0;
 
-        switch (id) {
-            case ACTOR_PLAYER:
+        switch (actorClass) {
+            case ACTOR_CLASS_PLAYER:
                 break;
-            case ACTOR_PARTNER:
+            case ACTOR_CLASS_PARTNER:
                 dispatch_event_partner(0x31);
                 break;
         }
@@ -79,7 +79,7 @@ ApiStatus N(func_802A1418_7250F8)(Evt* script, s32 isInitialCall) {
     s32 c = evt_get_variable(script, *args++);
     s32 d = evt_get_variable(script, *args++);
 
-    playFX_40(1, a, b, c, d);
+    fx_recover(1, a, b, c, d);
     return ApiStatus_DONE2;
 }
 
@@ -87,7 +87,7 @@ ApiStatus N(func_802A1418_7250F8)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(script6) = {
+EvtScript N(script6) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)
     EVT_WAIT_FRAMES(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 60)
@@ -165,7 +165,7 @@ EvtSource N(script6) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x0000009B)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(InitTargetIterator)

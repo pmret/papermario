@@ -124,6 +124,11 @@ def diff_syms(qb, tb):
     if len(tb[1]) < 8:
         return 0
 
+    # The minimum edit distance for two strings of different lengths is `abs(l1 - l2)`
+    # Quickly check if it's impossible to beat the threshold. If it is, then return 0
+    l1, l2 = len(qb[0]), len(tb[0])
+    if abs(l1 - l2) / (l1 + l2) > 1.0 - args.threshold:
+        return 0
     r = ratio(qb[0], tb[0])
 
     if r == 1.0 and qb[1] != tb[1]:
@@ -261,68 +266,77 @@ def do_cross_query():
     ccount = Counter()
     clusters = []
 
+    sym_bytes = {}
     for sym_name in map_syms:
         if not sym_name.startswith("D_") and \
            not sym_name.startswith("_binary") and \
            not sym_name.startswith("jtbl_") and \
            not re.match(r"L[0-9A-F]{8}_[0-9A-F]{5,6}", sym_name):
             if get_symbol_length(sym_name) > 16:
-                query_bytes = get_symbol_bytes(map_offsets, sym_name)
+                sym_bytes[sym_name] = get_symbol_bytes(map_offsets, sym_name)
 
-                cluster_match = False
-                for cluster in clusters:
-                    cluster_first = cluster[0]
-                    cluster_score = get_pair_score(query_bytes, cluster_first)
-                    if cluster_score >= args.threshold:
-                        cluster_match = True
-                        if sym_name.startswith("func") and not cluster_first.startswith("func"):
-                            ccount[sym_name] = ccount[cluster_first]
-                            del ccount[cluster_first]
-                            cluster_first = sym_name
-                            cluster.insert(0, cluster_first)
-                        else:
-                            cluster.append(sym_name)
+    for sym_name, query_bytes in sym_bytes.items():
+        cluster_match = False
+        for cluster in clusters:
+            cluster_first = cluster[0]
+            cluster_score = diff_syms(query_bytes, sym_bytes[cluster_first])
+            if cluster_score >= args.threshold:
+                cluster_match = True
+                if sym_name.startswith("func") and not cluster_first.startswith("func"):
+                    ccount[sym_name] = ccount[cluster_first]
+                    del ccount[cluster_first]
+                    cluster_first = sym_name
+                    cluster.insert(0, cluster_first)
+                else:
+                    cluster.append(sym_name)
 
-                        if cluster_first.startswith("func"):
-                            ccount[cluster_first] += 1
+                if cluster_first.startswith("func"):
+                    ccount[cluster_first] += 1
 
-                        #if len(cluster) % 10 == 0 and len(cluster) >= 10:
-                        print(f"Cluster {cluster_first} grew to size {len(cluster)} - {sym_name}: {str(cluster_score)}")
-                        break
-                if not cluster_match:
-                    clusters.append([sym_name])
+                #if len(cluster) % 10 == 0 and len(cluster) >= 10:
+                print(f"Cluster {cluster_first} grew to size {len(cluster)} - {sym_name}: {str(cluster_score)}")
+                break
+        if not cluster_match:
+            clusters.append([sym_name])
     print(ccount.most_common(100))
 
 
-parser = argparse.ArgumentParser(description="Tools to assist with decomp")
-parser.add_argument("query", help="function or file")
-parser.add_argument("--threshold", help="score threshold between 0 and 1 (higher is more restrictive)", type=float, default=0.9, required=False)
-parser.add_argument("--num-out", help="number of functions to display", type=int, default=100, required=False)
-parser.add_argument("--generate-templates", help="automatically generate templates in `all` and `short` mode", action='store_true', required=False)
+parser = argparse.ArgumentParser(description="Tool to find duplicates for a specific function or to find all duplicates across the codebase.")
+group = parser.add_mutually_exclusive_group()
+group.add_argument("-a", "--all", help="find ALL duplicates and output them into a file", action='store_true', required=False)
+group.add_argument("-c", "--cross", help="do a cross query over the codebase", action='store_true', required=False)
+group.add_argument("-s", "--short", help="find MOST duplicates besides some very small duplicates. Cuts the runtime in half with minimal loss", action='store_true', required=False)
+parser.add_argument("query", help="function or file", nargs='?', default=None)
+parser.add_argument("-t", "--threshold", help="score threshold between 0 and 1 (higher is more restrictive)", type=float, default=0.9, required=False)
+parser.add_argument("-n", "--num-out", help="number of functions to display", type=int, default=100, required=False)
 
 args = parser.parse_args()
 
-rom_bytes = read_rom()
-map_syms = parse_map(os.path.join(root_dir, "ver", "current", "build", "papermario.map"))
-map_offsets = get_map_offsets(map_syms)
-
-s_files = get_all_s_files()
-
-query_dir = find_dir(args.query)
-
-if query_dir is not None:
-    files = os.listdir(query_dir)
-    for f_name in files:
-        do_query(f_name[:-2])
-else:
-    if args.query == "cross":
-        args.threshold = 0.985
-        do_cross_query()
-    elif args.query == "all":
-        args.threshold = 0.985
-        all_matches(True)
-    elif args.query == "short":
-        args.threshold = 0.985
-        all_matches(False)
+if __name__ == "__main__":
+    rom_bytes = read_rom()
+    map_syms = parse_map(os.path.join(root_dir, "ver", "current", "build", "papermario.map"))
+    map_offsets = get_map_offsets(map_syms)
+    
+    s_files = get_all_s_files()
+    
+    query_dir = find_dir(args.query)
+    
+    if query_dir is not None:
+        files = os.listdir(query_dir)
+        for f_name in files:
+            do_query(f_name[:-2])
     else:
-        do_query(args.query)
+        if args.cross:
+            args.threshold = 0.985
+            do_cross_query()
+        elif args.all:
+            args.threshold = 0.985
+            all_matches(True)
+        elif args.short:
+            args.threshold = 0.985
+            all_matches(False)
+        else:
+            if args.query is None:
+                parser.print_help()
+            else:
+                do_query(args.query)

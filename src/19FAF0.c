@@ -4,12 +4,12 @@
 #include "script_api/battle.h"
 
 ApiStatus func_80271210(Evt* script, s32 isInitialCall) {
-    playFX_31(0, script->varTable[0], script->varTable[1], script->varTable[2]);
+    fx_debuff(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80271258(Evt* script, s32 isInitialCall) {
-    playFX_31(1, script->varTable[0], script->varTable[1], script->varTable[2]);
+    fx_debuff(1, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
@@ -23,7 +23,7 @@ ApiStatus func_802713B0(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(ApiStatus, "19FAF0", func_802713B0, Evt* script, s32 isInitialCall);
 
 ApiStatus func_8027143C(Evt* script, s32 isInitialCall) {
-    playFX_30(0, script->varTable[0], script->varTable[1], script->varTable[2]);
+    fx_big_snowflakes(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
@@ -32,6 +32,52 @@ INCLUDE_ASM(ApiStatus, "19FAF0", func_80271484, Evt* script, s32 isInitialCall);
 
 ApiStatus func_80271588(Evt* script, s32 isInitialCall);
 INCLUDE_ASM(ApiStatus, "19FAF0", func_80271588, Evt* script, s32 isInitialCall);
+
+EvtScript DoSleepHit = {
+    EVT_CALL(func_80271210)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript DoDizzyHit = {
+    EVT_CALL(func_80271258)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript DoParalyzeHit = {
+    EVT_CALL(func_802712A0)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript DoPoisonHit = {
+    EVT_CALL(func_80271328)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript DoStopHit = {
+    EVT_CALL(func_802713B0)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript DoFreezeHit = {
+    EVT_CALL(func_8027143C)
+    EVT_WAIT_FRAMES(8)
+    EVT_CALL(func_8027143C)
+    EVT_WAIT_FRAMES(15)
+    EVT_CALL(func_80271484)
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript DoShrinkHit = {
+    EVT_CALL(func_80271588)
+    EVT_RETURN
+    EVT_END
+};
 
 void dispatch_event_player(s32 eventType) {
     Actor* player = gBattleStatus.playerActor;
@@ -44,7 +90,7 @@ void dispatch_event_player(s32 eventType) {
     oldOnHitScript = player->onHitScript;
     oldOnHitID = player->onHitID;
 
-    eventScript = start_script(HandleEvent_Player, 10, 0x20);
+    eventScript = start_script(&HandleEvent_Player, 10, 0x20);
     player->onHitScript = eventScript;
     player->onHitID = eventScript->id;
     eventScript->owner1.actor = NULL;
@@ -70,7 +116,7 @@ void dispatch_event_player_continue_turn(s32 eventType) {
     oldOnHitScript = player->onHitScript;
     oldOnHitID = player->onHitID;
 
-    eventScript = start_script(HandleEvent_Player, 10, 0x20);
+    eventScript = start_script(&HandleEvent_Player, 10, 0x20);
     player->onHitScript = eventScript;
     player->onHitID = eventScript->id;
     eventScript->owner1.actor = NULL;
@@ -84,6 +130,7 @@ INCLUDE_ASM(s32, "19FAF0", calc_player_test_enemy);
 
 INCLUDE_ASM(s32, "19FAF0", calc_player_damage_enemy);
 
+s32 dispatch_damage_event_player(s32, s32, s32);
 INCLUDE_ASM(s32, "19FAF0", dispatch_damage_event_player);
 
 s32 dispatch_damage_event_player_0(s32 damageAmount, s32 event) {

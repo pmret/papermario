@@ -1,4 +1,4 @@
 #include "nok_12.h"
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 

@@ -26,7 +26,7 @@ void func_802B6000_E26DE0(void) {
         suggest_player_anim_clearUnkFlag(0x1000A);
         disable_player_input();
         playerStatus->flags |= 0x200;
-        gCameras[0].moveFlags |= 1;
+        gCameras[CAM_DEFAULT].moveFlags |= 1;
         sfx_play_sound_at_player(0x146, 0);
     }
 

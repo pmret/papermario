@@ -3,11 +3,11 @@
 
 #define NAMESPACE action_command_power_shock
 
-extern const HudElementAnim D_80108AFC[];
-extern const HudElementAnim D_80108B28[];
-extern const HudElementAnim D_80108B80[];
-extern const HudElementAnim D_80109244[];
-extern const HudElementAnim D_80292974[];
+extern const HudScript HudScript_BlueMeter[];
+extern const HudScript HudScript_AButton[];
+extern const HudScript HudScript_MashAButton[];
+extern const HudScript HudScript_RunAwayOK[];
+extern const HudScript HudScript_100pct[];
 extern s32 D_802943A0[];
 extern s16 D_802A9AA2_42D9B2[];
 extern s32 D_802A9B00;
@@ -42,25 +42,25 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     D_802A9B00 = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(D_80108B28);
+    hudElement = create_hud_element(HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
 
-    hudElement = create_hud_element(D_80108AFC);
+    hudElement = create_hud_element(HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(D_80292974);
+    hudElement = create_hud_element(HudScript_100pct);
     actionCommandStatus->hudElements[3] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
-    hudElement = create_hud_element(D_80109244);
+    hudElement = create_hud_element(HudScript_RunAwayOK);
     actionCommandStatus->hudElements[4] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
@@ -162,7 +162,7 @@ void func_802A9310_42D220(void) {
                 actionCommandStatus->unk_4E--;
                 break;
             }
-            set_hud_element_anim(actionCommandStatus->hudElements[0], D_80108B80);
+            set_hud_element_anim(actionCommandStatus->hudElements[0], HudScript_MashAButton);
             actionCommandStatus->unk_44 = 0;
             actionCommandStatus->unk_5C = 0;
             D_802A9B00 = 1;

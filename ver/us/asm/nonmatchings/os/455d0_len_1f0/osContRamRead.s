@@ -65,20 +65,20 @@ glabel osContRamRead
 .L8006A2B0:
 /* 456B0 8006A2B0 02C02021 */  addu      $a0, $s6, $zero
 /* 456B4 8006A2B4 001610C2 */  srl       $v0, $s6, 3
-/* 456B8 8006A2B8 0C01B218 */  jal       osContAddressCrc
+/* 456B8 8006A2B8 0C01B218 */  jal       __osContAddressCrc
 /* 456BC 8006A2BC A2020004 */   sb       $v0, 4($s0)
 /* 456C0 8006A2C0 8FA8001C */  lw        $t0, 0x1c($sp)
 /* 456C4 8006A2C4 24040001 */  addiu     $a0, $zero, 1
 /* 456C8 8006A2C8 03C02821 */  addu      $a1, $fp, $zero
 /* 456CC 8006A2CC 00481025 */  or        $v0, $v0, $t0
-/* 456D0 8006A2D0 0C019730 */  jal       osSiRawStartDma
+/* 456D0 8006A2D0 0C019730 */  jal       __osSiRawStartDma
 /* 456D4 8006A2D4 A2020005 */   sb       $v0, 5($s0)
 /* 456D8 8006A2D8 02802021 */  addu      $a0, $s4, $zero
 /* 456DC 8006A2DC 00002821 */  addu      $a1, $zero, $zero
 /* 456E0 8006A2E0 0C0195BC */  jal       osRecvMesg
 /* 456E4 8006A2E4 24060001 */   addiu    $a2, $zero, 1
 /* 456E8 8006A2E8 00002021 */  addu      $a0, $zero, $zero
-/* 456EC 8006A2EC 0C019730 */  jal       osSiRawStartDma
+/* 456EC 8006A2EC 0C019730 */  jal       __osSiRawStartDma
 /* 456F0 8006A2F0 03C02821 */   addu     $a1, $fp, $zero
 /* 456F4 8006A2F4 02802021 */  addu      $a0, $s4, $zero
 /* 456F8 8006A2F8 00002821 */  addu      $a1, $zero, $zero
@@ -90,7 +90,7 @@ glabel osContRamRead
 /* 45710 8006A310 56200015 */  bnel      $s1, $zero, .L8006A368
 /* 45714 8006A314 24110001 */   addiu    $s1, $zero, 1
 /* 45718 8006A318 26120006 */  addiu     $s2, $s0, 6
-/* 4571C 8006A31C 0C01B233 */  jal       osContDataCrc
+/* 4571C 8006A31C 0C01B233 */  jal       __osContDataCrc
 /* 45720 8006A320 02402021 */   addu     $a0, $s2, $zero
 /* 45724 8006A324 92030026 */  lbu       $v1, 0x26($s0)
 /* 45728 8006A328 304200FF */  andi      $v0, $v0, 0xff

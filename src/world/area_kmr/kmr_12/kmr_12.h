@@ -12,11 +12,10 @@
 #define GetGoomba N(GetGoomba)
 ApiStatus GetGoomba(Evt* script, s32 isInitialCall);
 
-extern  MapConfig N(config);
-extern  EvtSource N(main);
-extern  EvtSource N(PlayMusic);
-extern  EvtSource N(MakeEntities);
-extern  EvtSource N(ReadWestSign);
+extern EvtScript N(main);
+extern EvtScript N(PlayMusic);
+extern EvtScript N(MakeEntities);
+extern EvtScript N(ReadWestSign);
 extern NpcGroupList N(npcGroupList);
 
 extern s32 D_802EAFDC;

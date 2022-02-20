@@ -9,7 +9,7 @@
 
 ApiStatus N(func_802A123C_72DDAC)(Evt* script, s32 isInitialCall);
 
-EvtSource N(UseItemWithEffect);
-EvtSource N(PlayerGoHome);
+extern EvtScript N(UseItemWithEffect);
+extern EvtScript N(PlayerGoHome);
 
 #endif

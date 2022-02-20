@@ -8,7 +8,7 @@
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80240844_9A8C34);
+#include "world/common/UnkNpcAIMainFunc5.inc.c"
 
 #include "world/common/UnkNpcAIFunc24.inc.c"
 
@@ -38,7 +38,7 @@ INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241B14_9A9F04);
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80241FC8_9AA3B8);
+#include "world/common/UnkNpcAIFunc35.inc.c"
 
 #define NAMESPACE dup_trd_04
 #include "world/common/UnkNpcAIFunc1.inc.c"

@@ -16,8 +16,8 @@ ApiStatus N(func_80240540_CE3C30)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240660_CE3D50)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240784_CE3E74)(Evt* script, s32 isInitialCall);
 
-extern EvtSource N(80241780);
-extern EvtSource N(80241CC4);
-extern EvtSource N(80242A2C);
-extern EvtSource N(80242FD0);
-extern EvtSource N(main);
+extern EvtScript N(80241780);
+extern EvtScript N(80241CC4);
+extern EvtScript N(80242A2C);
+extern EvtScript N(80242FD0);
+extern EvtScript N(main);

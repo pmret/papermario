@@ -5,7 +5,7 @@
 ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall) {
     s32 actorId = evt_get_variable(script, *script->ptrReadPos);
     Actor* actor = get_actor(actorId);
-    s32 id = actor->actorID & 0x700;
+    s32 id = actor->actorID & ACTOR_CLASS_MASK;
 
     if (actor->debuff != STATUS_END) {
         actor->debuffDuration = 0;
@@ -18,9 +18,9 @@ ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall) {
         actor->koStatus = 0;
 
         switch (id) {
-            case ACTOR_PLAYER:
+            case ACTOR_CLASS_PLAYER:
                 break;
-            case ACTOR_PARTNER:
+            case ACTOR_CLASS_PARTNER:
                 dispatch_event_partner(0x31);
         }
         actor->ptrDefuffIcon->ptrPropertyList[15] = 0;
@@ -31,7 +31,7 @@ ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x89)
     EVT_EXEC_WAIT(battle_item_tasty_tonic_UseItemWithEffect)
     EVT_CALL(InitTargetIterator)

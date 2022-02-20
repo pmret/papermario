@@ -88,7 +88,7 @@ glabel func_80240C08_A9F948
 /* A9FA4C 80240D0C 8E050038 */  lw        $a1, 0x38($s0)
 /* A9FA50 80240D10 8E06003C */  lw        $a2, 0x3c($s0)
 /* A9FA54 80240D14 8E070040 */  lw        $a3, 0x40($s0)
-/* A9FA58 80240D18 0C01BECC */  jal       fx_walk
+/* A9FA58 80240D18 0C01BECC */  jal       fx_walking_dust
 /* A9FA5C 80240D1C 24040002 */   addiu    $a0, $zero, 2
 /* A9FA60 80240D20 C64C006C */  lwc1      $f12, 0x6c($s2)
 /* A9FA64 80240D24 0C00A6C9 */  jal       clamp_angle
@@ -253,7 +253,7 @@ glabel func_80240C08_A9F948
 /* A9FCC4 80240F84 8E050038 */  lw        $a1, 0x38($s0)
 /* A9FCC8 80240F88 8E06003C */  lw        $a2, 0x3c($s0)
 /* A9FCCC 80240F8C 8E070040 */  lw        $a3, 0x40($s0)
-/* A9FCD0 80240F90 0C01BECC */  jal       fx_walk
+/* A9FCD0 80240F90 0C01BECC */  jal       fx_walking_dust
 /* A9FCD4 80240F94 24040002 */   addiu    $a0, $zero, 2
 /* A9FCD8 80240F98 3C01C47A */  lui       $at, 0xc47a
 /* A9FCDC 80240F9C 44810000 */  mtc1      $at, $f0

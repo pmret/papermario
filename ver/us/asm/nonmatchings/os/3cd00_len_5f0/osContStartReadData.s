@@ -16,7 +16,7 @@ glabel osContStartReadData
 /* 3CDCC 800619CC 00000000 */   nop
 /* 3CDD0 800619D0 3C05800B */  lui       $a1, %hi(D_800B0ED0)
 /* 3CDD4 800619D4 24A50ED0 */  addiu     $a1, $a1, %lo(D_800B0ED0)
-/* 3CDD8 800619D8 0C019730 */  jal       osSiRawStartDma
+/* 3CDD8 800619D8 0C019730 */  jal       __osSiRawStartDma
 /* 3CDDC 800619DC 24040001 */   addiu    $a0, $zero, 1
 /* 3CDE0 800619E0 02002021 */  addu      $a0, $s0, $zero
 /* 3CDE4 800619E4 00002821 */  addu      $a1, $zero, $zero
@@ -25,7 +25,7 @@ glabel osContStartReadData
 .L800619F0:
 /* 3CDF0 800619F0 3C05800B */  lui       $a1, %hi(D_800B0ED0)
 /* 3CDF4 800619F4 24A50ED0 */  addiu     $a1, $a1, %lo(D_800B0ED0)
-/* 3CDF8 800619F8 0C019730 */  jal       osSiRawStartDma
+/* 3CDF8 800619F8 0C019730 */  jal       __osSiRawStartDma
 /* 3CDFC 800619FC 00002021 */   addu     $a0, $zero, $zero
 /* 3CE00 80061A00 24030001 */  addiu     $v1, $zero, 1
 /* 3CE04 80061A04 3C01800A */  lui       $at, %hi(D_8009A61C)

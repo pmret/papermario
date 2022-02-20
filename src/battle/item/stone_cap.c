@@ -25,7 +25,7 @@ ApiStatus N(func_802A123C_7217DC)(Evt* script, s32 isInitialCall) {
                 f32 x = player->currentPos.x + ((rand_int(20) - 10) * player->scalingFactor);
                 f32 y = player->currentPos.y + ((rand_int(20) + 10) * player->scalingFactor);
                 f32 z = player->currentPos.z + 5.0f;
-                playFX_69(0, x, y, z, 1.0f, 25);
+                fx_floating_cloud_puff(0, x, y, z, 1.0f, 25);
             }
 
             if (script->functionTemp[1] == 0) {
@@ -47,7 +47,7 @@ ApiStatus N(func_802A123C_7217DC)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x00000088)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(PlaySound, SOUND_361)

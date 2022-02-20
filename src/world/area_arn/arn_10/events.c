@@ -2,7 +2,7 @@
 #include "sprite/npc/tubbas_heart.h"
 #include "sprite/npc/goomba.h"
 
-EvtSource N(exitSingleDoor_80240100) = {
+EvtScript N(exitSingleDoor_80240100) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(0), 0)
@@ -17,7 +17,7 @@ EvtSource N(exitSingleDoor_80240100) = {
     EVT_END
 };
 
-EvtSource N(exitSingleDoor_802401A4) = {
+EvtScript N(exitSingleDoor_802401A4) = {
     EVT_SET_GROUP(27)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(EVT_VAR(0), 1)
@@ -32,14 +32,14 @@ EvtSource N(exitSingleDoor_802401A4) = {
     EVT_END
 };
 
-EvtSource N(80240248) = {
+EvtScript N(80240248) = {
     EVT_BIND_TRIGGER(N(exitSingleDoor_80240100), TRIGGER_WALL_PRESS_A, 6, 1, 0)
     EVT_BIND_TRIGGER(N(exitSingleDoor_802401A4), TRIGGER_WALL_PRESS_A, 11, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(enterSingleDoor_80240290) = {
+EvtScript N(enterSingleDoor_80240290) = {
     EVT_CALL(GetEntryID, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -57,7 +57,7 @@ EvtSource N(enterSingleDoor_80240290) = {
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 35)
     EVT_CALL(SetSpriteShading, 524289)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -77,12 +77,12 @@ static s32 N(pad_424)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80240430) = {
+EvtScript N(80240430) = {
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(80240440) = {
+EvtScript N(80240440) = {
     EVT_RETURN
     EVT_END
 };
@@ -108,7 +108,7 @@ NpcAISettings N(npcAISettings_8024047C) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_802404AC) = {
+EvtScript N(npcAI_802404AC) = {
     EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_8024047C)))
     EVT_RETURN
     EVT_END
@@ -123,7 +123,7 @@ NpcSettings N(npcSettings_802404CC) = {
     .level = 12,
 };
 
-EvtSource N(idle_802404F8) = {
+EvtScript N(idle_802404F8) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FIXED(3.0))
     EVT_CALL(GetNpcPos, NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -151,14 +151,14 @@ EvtSource N(idle_802404F8) = {
     EVT_END
 };
 
-EvtSource N(defeat_802406F4) = {
+EvtScript N(defeat_802406F4) = {
     EVT_SET(EVT_SAVE_FLAG(1016), 1)
     EVT_CALL(DoNpcDefeat)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(init_80240720) = {
+EvtScript N(init_80240720) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(idle_802404F8)))
     EVT_IF_NE(EVT_SAVE_VAR(0), -20)
         EVT_CALL(RemoveNpc, NPC_SELF)
@@ -167,7 +167,7 @@ EvtSource N(init_80240720) = {
     EVT_END
 };
 
-EvtSource N(init_8024076C) = {
+EvtScript N(init_8024076C) = {
     EVT_IF_LT(EVT_SAVE_VAR(0), -12)
         EVT_IF_EQ(EVT_SAVE_FLAG(1016), 1)
             EVT_CALL(RemoveNpc, NPC_SELF)
@@ -253,7 +253,7 @@ static s32 N(pad_BDC)[] = {
     0x00000000,
 };
 
-EvtSource N(80240BE0) = {
+EvtScript N(80240BE0) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ShowMessageAtScreenPos, MESSAGE_ID(0x1D, 0x0182), 160, 40)
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -261,7 +261,7 @@ EvtSource N(80240BE0) = {
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_CALL(MakeEntity, 0x802EAFDC, 200, 0, -40, 0, MAKE_ENTITY_END)
     EVT_CALL(AssignScript, EVT_PTR(N(80240BE0)))
     EVT_RETURN

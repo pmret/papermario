@@ -7,7 +7,7 @@ ApiStatus func_80238C88_700A08(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var0 = 0;
 
-    switch (battleStatus->partnerActor->staticActorData->level) {
+    switch (battleStatus->partnerActor->actorBlueprint->level) {
         case 0:
             var0 = 5;
             break;
@@ -28,7 +28,7 @@ ApiStatus func_80238CE0_700A60(Evt* script, s32 isInitialCall) {
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor = get_actor(partnerActor->targetActorID);
     ActorPart* targetActorPart = get_actor_part(targetActor, partnerActor->targetPartIndex);
-    s32 airLiftChance = targetActor->staticActorData->airLiftChance;
+    s32 airLiftChance = targetActor->actorBlueprint->airLiftChance;
     s32 temp = 100 - (targetActor->currentHP * 100) / targetActor->maxHP;
 
     if (targetActor->transStatus == 14) {

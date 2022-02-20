@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 #define MAX_ITEM_ENTITIES 256
 
@@ -14,8 +15,12 @@ extern s16 D_80155D8C;
 extern s16 D_80155D8E;
 extern s16 D_80155D90;
 
+void item_entity_load(ItemEntity* itemEntity);
 void draw_item_entities(void);
 void func_80132D94(void);
+void func_8013559C(ItemEntity* itemEntity);
+void func_801356C4(void);
+void func_801356D4(void);
 
 INCLUDE_ASM(s32, "C50A0", draw_ci_image_with_clipping);
 
@@ -105,7 +110,7 @@ void item_entity_disable_shadow(ItemEntity* itemEntity) {
     itemEntity->flags |= ENTITY_FLAGS_CONTINUOUS_COLLISION;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
-        shadow->flags |= SHADOW_FLAGS_1;
+        shadow->flags |= SHADOW_FLAGS_HIDDEN;
     }
 }
 
@@ -115,7 +120,7 @@ void item_entity_enable_shadow(ItemEntity* itemEntity) {
     itemEntity->flags &= ~ENTITY_FLAGS_CONTINUOUS_COLLISION;
     if (itemEntity->shadowIndex >= 0) {
         shadow = get_shadow_by_index(itemEntity->shadowIndex);
-        shadow->flags &= ~SHADOW_FLAGS_1;
+        shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
     }
 }
 
@@ -174,18 +179,76 @@ s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode,
     return make_item_entity(itemID, x, y, z, itemSpawnMode, pickupDelay, -1, pickupVar);
 }
 
-INCLUDE_ASM(s32, "C50A0", init_got_item);
+INCLUDE_ASM(s32, "C50A0", make_item_entity_at_player);
 
 INCLUDE_ASM(s32, "C50A0", item_entity_update);
 
 INCLUDE_ASM(s32, "C50A0", update_item_entities);
 
 INCLUDE_ASM(s32, "C50A0", appendGfx_item_entity);
-void appendGfx_item_entity(ItemEntity* itemEntity);
+void appendGfx_item_entity(void* itemEntity);
 
-INCLUDE_ASM(s32, "C50A0", draw_item_entities);
+void draw_item_entities(void) {
+    RenderTask rt;
+    RenderTask* rtPtr = &rt;
+    RenderTask* retTask;
+    s32 i;
 
-INCLUDE_ASM(s32, "C50A0", func_80132D94);
+    for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
+        ItemEntity* itemEntity = D_801565A0[i];
+
+        if (itemEntity != NULL && itemEntity->flags != 0 && !(itemEntity->flags & 0x40) &&
+            (itemEntity->flags & (1 << gCurrentCamID)) && !(itemEntity->flags & 0x100000) &&
+            !(itemEntity->unk_1D != -1 && D_80155D88 != itemEntity->unk_1D))
+        {
+            if (!(itemEntity->flags & 0x80000)) {
+                rtPtr->renderMode = RENDER_MODE_ALPHATEST;
+            } else {
+                rtPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
+            }
+
+            rtPtr->appendGfxArg = itemEntity;
+            rtPtr->appendGfx = appendGfx_item_entity;
+            rtPtr->distance = 0;
+
+            retTask = queue_render_task(rtPtr);
+            retTask->renderMode |= RENDER_MODE_2;
+        }
+
+        do {} while (0); // required to match
+    }
+}
+
+void func_80132D94(void) {
+    if (!(gOverrideFlags & 0xC000)) {
+        s32 i;
+
+        for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
+            ItemEntity* itemEntity = D_801565A0[i];
+
+            if (itemEntity != NULL && itemEntity->flags != 0) {
+                switch (itemEntity->type) {
+                    case 0:
+                        func_801356C4();
+                        break;
+                    case 1:
+                    case 2:
+                        func_801356D4();
+                        break;
+                    case 3:
+                    case 12:
+                    case 16:
+                    case 20:
+                    case 23:
+                        func_8013559C(itemEntity);
+                        break;
+                }
+            }
+
+            do {} while (0); // required to match
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "C50A0", render_item_entities);
 
@@ -258,7 +321,53 @@ void func_80133A94(s32 idx, s32 itemID) {
 s32 test_item_player_collision(ItemEntity* itemEntity);
 INCLUDE_ASM(s32, "C50A0", test_item_player_collision);
 
-INCLUDE_ASM(s32, "C50A0", test_item_entity_position);
+s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
+    ItemEntity* item;
+    f32 dx, dy, dz;
+    s32 i;
+
+    if (is_starting_conversation() || D_801565A4 || get_time_freeze_mode() != 0 ||
+        gOverrideFlags & GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS)
+    {
+        return -1;
+    }
+
+    for (i = 0; i < MAX_ITEM_ENTITIES; i++){
+        item = D_801565A0[i];
+
+        if (item == NULL) {
+            continue;
+        }
+
+        if (!item->flags) {
+            continue;
+        }
+
+        if (item->type == ENTITY_TYPE_SHADOW) {
+            continue;
+        }
+
+        if (item->type == ENTITY_TYPE_2) {
+            continue;
+        }
+
+        if (item->flags & ENTITY_FLAGS_CONTINUOUS_COLLISION) {
+            continue;
+        }
+
+        if (item->flags & ENTITY_FLAGS_200000) {
+            continue;
+        }
+
+        dx = item->position.x - x;
+        dz = item->position.y - y;
+        dy = item->position.z - z;
+        if (sqrtf(SQ(dx) + SQ(dz) + SQ(dy)) < dist) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 void set_item_entity_flags(s32 index, s32 flags) {
     ItemEntity* itemEntity = D_801565A0[index];
@@ -277,7 +386,7 @@ void clear_item_entity_flags(s32 index, s32 flags) {
 
 void func_801341B0(s32 index) {
     ItemEntity* itemEntity = D_801565A0[index];
-    gOverrideFlags |= 0x40;
+    gOverrideFlags |= GLOBAL_OVERRIDES_40;
     itemEntity->flags |= ENTITY_FLAGS_100;
 }
 
@@ -309,7 +418,29 @@ s32 func_80134240(void) {
 
 INCLUDE_ASM(s32, "C50A0", update_item_entity_collectable);
 
-INCLUDE_ASM(s32, "C50A0", func_8013559C);
+void func_8013559C(ItemEntity* itemEntity) {
+    if (itemEntity->state == 1) {
+        ItemEntityPhysicsData* physicsData = itemEntity->physicsData;
+        s32 flag = (itemEntity->flags & 0x20000) > 0;
+
+        if (itemEntity->type != 0x14) {
+            if (itemEntity->type != 0x17) {
+                if (physicsData->unk_1C < 60) {
+                    if ((itemEntity->flags & 0x200000) || ((gGameStatusPtr->frameCounter + flag) & 1)) {
+                        itemEntity->flags &= ~0x40;
+                    } else {
+                        itemEntity->flags |= 0x40;
+                    }
+                }
+            } else {
+                if (physicsData->unk_1C < 0xA) {
+                    itemEntity->unk_2F = physicsData->unk_1C * 28;
+                    itemEntity->flags |= 0x80000;
+                }
+            }
+        }
+    }
+}
 
 void update_item_entity_static(ItemEntity* itemEntity) {
     if ((s8)itemEntity->state == 0 && test_item_player_collision(itemEntity)) {
@@ -317,7 +448,7 @@ void update_item_entity_static(ItemEntity* itemEntity) {
         itemEntity->type = 28;
         itemEntity->state = 0;
         D_801565A8 = 0;
-        gOverrideFlags |= 0x40;
+        gOverrideFlags |= GLOBAL_OVERRIDES_40;
     }
 }
 
@@ -340,4 +471,17 @@ void func_801369D0(s32 arg1, s32 x, s32 y) {
     draw_msg(0x1D0060, x + 12, y + 4, 255, 52, 0);
 }
 
-INCLUDE_ASM(s32, "C50A0", func_80136A08);
+void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 arg2) {
+    ItemData* itemData = &gItemTable[itemEntity->itemID];
+    s32 itemMsg;
+
+    switch (itemEntity->state) {
+        case 2:
+        case 3:
+        case 10:
+        case 11:
+            itemMsg = itemData->itemMsg;
+            draw_msg(itemMsg, posX + 8, arg2, 255, 0xA, 0);
+            break;
+    }
+}

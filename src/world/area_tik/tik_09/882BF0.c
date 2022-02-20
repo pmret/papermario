@@ -8,6 +8,6 @@
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_09/882BF0", func_80240DC4_882F84);
+#include "world/common/UnkNpcAIMainFunc5.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_09/882BF0", func_80241204_8833C4);

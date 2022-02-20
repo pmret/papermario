@@ -2,8 +2,8 @@
 #include "effects.h"
 #include "hud_element.h"
 
-extern HudElementAnim D_80108AAC[];
-extern HudElementAnim D_80108AD4[];
+extern HudScript HudScript_Happy[];
+extern HudScript HudScript_HPDrain[];
 
 extern s32 D_8029FB90;
 extern f32 D_8029FB94;
@@ -135,7 +135,7 @@ ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_8029FBA0 = create_hud_element(D_80108A64);
+        D_8029FBA0 = create_hud_element(HudScript_Refund);
         set_hud_element_render_pos(D_8029FBA0, iconPosX + 36, iconPosY - 63);
     }
 
@@ -188,7 +188,7 @@ ApiStatus func_80261164(Evt* script, s32 isInitialCall) {
 
 ApiStatus ConsumeLifeShroom(Evt *script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    StaticItem* item = &gItemTable[0x95];
+    ItemData* item = &gItemTable[0x95];
 
     playerData->curHP += item->potencyA;
     if (playerData->curMaxHP < playerData->curHP) {
@@ -201,33 +201,30 @@ ApiStatus ConsumeLifeShroom(Evt *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// TODO something wrong with the struct breakdown for BattleStatus
-#ifdef NON_EQUIVALENT
 ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->dangerFlags = 0;
-    gBattleState = battleStatus->unk_474;
-    battleStatus->battleState = battleStatus->unk_468;
-    battleStatus->flags1 |= 8;
-    battleStatus->flags2 &= ~0x8000000;
+    battleStatus->rushFlags = RUSH_FLAG_NONE;
+    gBattleState = D_800DC4E4;
+    gBattleState2 = D_800DC4D8;
+    battleStatus->flags1 |= BS_FLAGS1_8;
+    battleStatus->flags2 &= ~BS_FLAGS2_8000000;
 
-    if (!(battleStatus->flags2 & 0x40)) {
+    if (!(battleStatus->flags2 & BS_FLAGS2_40)) {
         if (playerData->curHP <= 1 && is_ability_active(ABILITY_MEGA_RUSH)) {
-            battleStatus->flags2 |= 0x8000000;
-            gBattleStatus.dangerFlags |= 1;
+            gBattleStatus.flags2 |= BS_FLAGS2_8000000;
+            battleStatus->rushFlags |= RUSH_FLAG_MEGA;
         }
-        if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) && !(battleStatus->dangerFlags & 1)) {
-            battleStatus->flags2 |= 0x8000000;
-            gBattleStatus.dangerFlags |= 2;
+
+        if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) && 
+            !(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
+            gBattleStatus.flags2 |= BS_FLAGS2_8000000;
+            battleStatus->rushFlags |= RUSH_FLAG_POWER;
         }
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "18F340", RestorePreDefeatState);
-#endif
 
 ApiStatus func_80261388(Evt* script, s32 isInitialCall) {
     s32 partnerActorExists = gBattleStatus.partnerActor != NULL;
@@ -250,7 +247,7 @@ ApiStatus func_802613BC(Evt* script, s32 isInitialCall) {
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
 
-    playFX_6B(6, var1, var2 + 15, var3, 1.2f, 30);
+    fx_energy_in_out(6, var1, var2 + 15, var3, 1.2f, 30);
     return ApiStatus_DONE2;
 }
 
@@ -260,7 +257,7 @@ ApiStatus func_80261478(Evt* script, s32 isInitialCall) {
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
 
-    playFX_52(9, var1, var2 + 15, var3, 5.0f, 15);
+    fx_energy_orb_wave(9, var1, var2 + 15, var3, 5.0f, 15);
     return ApiStatus_DONE2;
 }
 
@@ -331,8 +328,8 @@ ApiStatus func_802616F4(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[1] = 0;
         D_8029FB94 = merlee->pos.y;
-        D_8029FB98 = playFX_52(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
-        D_8029FB9C = playFX_52(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
+        D_8029FB98 = fx_energy_orb_wave(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
+        D_8029FB9C = fx_energy_orb_wave(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_8029FBA4 = 0;
         D_8029FB90 = 12;
         sfx_play_sound(0x2074);
@@ -410,13 +407,13 @@ ApiStatus func_802619E8(Evt* script, s32 isInitialCall) {
     screenY -= 19;
 
     if (script->varTable[10] > 0) {
-        D_8029FBAC = create_hud_element(D_80108AD4);
+        D_8029FBAC = create_hud_element(HudScript_HPDrain);
         set_hud_element_render_pos(D_8029FBAC, screenX, screenY);
         screenY += 9;
     }
 
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        D_8029FBA8 = create_hud_element(D_80108AAC);
+        D_8029FBA8 = create_hud_element(HudScript_Happy);
         set_hud_element_render_pos(D_8029FBA8, screenX, screenY);
     }
     return ApiStatus_DONE2;
@@ -439,7 +436,7 @@ ApiStatus FXRecoverHP(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     s32 var4 = evt_get_variable(script, *args++);
 
-    playFX_40(0, var1, var2, var3, var4);
+    fx_recover(0, var1, var2, var3, var4);
     return ApiStatus_DONE2;
 }
 
@@ -450,7 +447,7 @@ ApiStatus FXRecoverFP(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     s32 var4 = evt_get_variable(script, *args++);
 
-    playFX_40(1, var1, var2, var3, var4);
+    fx_recover(1, var1, var2, var3, var4);
     return ApiStatus_DONE2;
 }
 

@@ -36,7 +36,7 @@ ApiStatus N(func_802A123C_71D9AC)(Evt* script, s32 isInitialCall) {
     }
 
     do {
-        playFX_0F(phi_a0, temp_s1, c8, temp_s0, temp_f22, 0, temp_f20, phi_v0 + 7);
+        fx_star(phi_a0, temp_s1, c8, temp_s0, temp_f22, 0, temp_f20, phi_v0 + 7);
         if (temp_f20) {
             temp_f20 -= rand;
         }
@@ -55,7 +55,7 @@ ApiStatus N(func_802A1388_71DAF8)(Evt* script, s32 isInitialCall) {
     s32 b = evt_get_variable(script, *args++);
     s32 c = evt_get_variable(script, *args++);
 
-    playFX_18(2, a, b, c, 0, -1.0f, 0, 5);
+    fx_damage_stars(2, a, b, c, 0, -1.0f, 0, 5);
 
     return ApiStatus_DONE2;
 }
@@ -93,7 +93,7 @@ ApiStatus N(func_802A14D4_71DC44)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x00000083)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD

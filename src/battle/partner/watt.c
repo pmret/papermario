@@ -61,7 +61,7 @@ ApiStatus func_802384B0_703FA0(Evt* script, s32 isInitialCall) {
     s32 var2 = evt_get_variable(script, *args++);
     s32 var3 = evt_get_variable(script, *args++);
 
-    D_80239A0C_7054FC = playFX_33(8, var1, var2, var3, 1.3f, 55);
+    D_80239A0C_7054FC = fx_radial_shimmer(8, var1, var2, var3, 1.3f, 55);
 
     return ApiStatus_DONE2;
 }
@@ -86,7 +86,7 @@ ApiStatus func_8023859C_70408C(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     EffectInstanceDataThing* dataThing;
 
-    D_8023C1B4 = playFX_58(0, var1, var2, var3, 1.0f, 10);
+    D_8023C1B4 = fx_thunderbolt_ring(0, var1, var2, var3, 1.0f, 10);
     dataThing = D_8023C1B4->data;
     dataThing->unk_30 = 3;
 
@@ -125,7 +125,7 @@ ApiStatus func_80238B3C_70462C(Evt* script, s32 isInitialCall) {
     s32 var3 = evt_get_variable(script, *args++);
     EffectInstanceDataThing* temp_a0;
 
-    D_8023C1B4 = playFX_58(0, var1, var2, var3, 1.0f, 60);
+    D_8023C1B4 = fx_thunderbolt_ring(0, var1, var2, var3, 1.0f, 60);
     temp_a0 = D_8023C1B4->data;
     temp_a0->unk_30 = 2;
 
@@ -164,7 +164,7 @@ ApiStatus N(AverageTargetParalyzeChance)(Evt* script, s32 isInitialCall) {
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor;
     ActorPart* targetActorPart;
-    s32 targetActorDescBaseStatusChance;
+    s32 targetActorBlueprintBaseStatusChance;
     s32 chanceTotal = 0;
     s32 nTargets = 0;
     s32 i;
@@ -172,18 +172,18 @@ ApiStatus N(AverageTargetParalyzeChance)(Evt* script, s32 isInitialCall) {
     for (i = 0; i < partnerActor->targetListLength; i++) {
         targetActor = get_actor(partnerActor->targetData[i].actorID);
         targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
-        targetActorDescBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_PARALYZE);
+        targetActorBlueprintBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_PARALYZE);
 
         if (targetActor->transStatus == 14) {
-            targetActorDescBaseStatusChance = 0;
+            targetActorBlueprintBaseStatusChance = 0;
         }
 
         if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
-            targetActorDescBaseStatusChance = 0;
+            targetActorBlueprintBaseStatusChance = 0;
         }
 
-        if (targetActorDescBaseStatusChance > 0) {
-            chanceTotal += targetActorDescBaseStatusChance;
+        if (targetActorBlueprintBaseStatusChance > 0) {
+            chanceTotal += targetActorBlueprintBaseStatusChance;
             nTargets++;
         }
     }

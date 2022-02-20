@@ -18,4 +18,4 @@
 
 INCLUDE_ASM(s32, "world/area_tik/tik_22/89FEF0", func_8024061C_8A04DC);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_22/89FEF0", func_80240640_8A0500);
+#include "world/common/UnkPosFunc2.inc.c"

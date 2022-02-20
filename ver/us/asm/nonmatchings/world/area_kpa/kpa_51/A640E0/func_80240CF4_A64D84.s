@@ -100,7 +100,7 @@ glabel func_80240CF4_A64D84
 /* A64EFC 80240E6C 44810000 */  mtc1      $at, $f0
 /* A64F00 80240E70 2402000D */  addiu     $v0, $zero, 0xd
 /* A64F04 80240E74 AFA20014 */  sw        $v0, 0x14($sp)
-/* A64F08 80240E78 0C01BFEC */  jal       playFX_13
+/* A64F08 80240E78 0C01BFEC */  jal       fx_gather_energy_pink
 /* A64F0C 80240E7C E7A00010 */   swc1     $f0, 0x10($sp)
 /* A64F10 80240E80 2402000F */  addiu     $v0, $zero, 0xf
 /* A64F14 80240E84 A602008E */  sh        $v0, 0x8e($s0)

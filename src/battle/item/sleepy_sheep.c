@@ -129,7 +129,7 @@ ApiStatus func_802A123C_71E88C(Evt* script, s32 isInitialCall) {
                         if (x > 40.0f) {
                             x2 = -(x - 40.0f);
                         }
-                        fx_land(3, x2, y2, z, 0);
+                        fx_landing_dust(3, x2, y2, z, 0);
                         flag = 1;
                     }
                 }
@@ -139,7 +139,7 @@ ApiStatus func_802A123C_71E88C(Evt* script, s32 isInitialCall) {
             }
             if (gGameStatusPtr->frameCounter & 1) {
                 s32 randIdx = rand_int(9);
-                fx_land(2, N(D_802A3E88_7214D8)[randIdx * 3 + 0] + D_802A3F88_ptr->x,
+                fx_landing_dust(2, N(D_802A3E88_7214D8)[randIdx * 3 + 0] + D_802A3F88_ptr->x,
                               N(D_802A3E88_7214D8)[randIdx * 3 + 1],
                               N(D_802A3E88_7214D8)[randIdx * 3 + 2] + D_802A3F88_ptr->z, 0);
             }
@@ -240,10 +240,10 @@ static s32 _pad = 0;
 #include "battle/item/sleepy_sheep3.pal.inc.c"
 
 Vtx N(model)[] = {
-    { .v = { -28,  0,  0, FALSE, 0,    1536, 0, 0, 0, 255 } },
-    { .v = {  27,  0,  0, FALSE, 1792, 1536, 0, 0, 0, 255 } },
-    { .v = {  27, 47,  0, FALSE, 1792,    0, 0, 0, 0, 255 } },
-    { .v = { -28, 47,  0, FALSE, 0,       0, 0, 0, 0, 255 } },
+    { .v = {{ -28,  0,  0 }, FALSE, { 0,    1536 }, { 0, 0, 0, 255 }}},
+    { .v = {{  27,  0,  0 }, FALSE, { 1792, 1536 }, { 0, 0, 0, 255 }}},
+    { .v = {{  27, 47,  0 }, FALSE, { 1792,    0 }, { 0, 0, 0, 255 }}},
+    { .v = {{ -28, 47,  0 }, FALSE, { 0,       0 }, { 0, 0, 0, 255 }}},
 };
 
 Gfx N(frame1_displayList)[] = {
@@ -335,7 +335,7 @@ s32 N(modelCommandList)[] = {
     0x00000002, 0x00000000,
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x0000008F)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(UseBattleCamPreset, 19)

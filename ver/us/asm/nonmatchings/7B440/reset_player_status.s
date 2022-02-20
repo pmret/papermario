@@ -159,8 +159,8 @@ glabel reset_player_status
 /* 7B768 800E22B8 E4420064 */  swc1      $f2, 0x64($v0)
 /* 7B76C 800E22BC 0C039668 */  jal       phys_reset_spin_history
 /* 7B770 800E22C0 E4440068 */   swc1     $f4, 0x68($v0)
-/* 7B774 800E22C4 3C048011 */  lui       $a0, %hi(D_8010F250)
-/* 7B778 800E22C8 2484F250 */  addiu     $a0, $a0, %lo(D_8010F250)
+/* 7B774 800E22C4 3C048011 */  lui       $a0, %hi(gPlayerSpinState)
+/* 7B778 800E22C8 2484F250 */  addiu     $a0, $a0, %lo(gPlayerSpinState)
 /* 7B77C 800E22CC 0C00A580 */  jal       mem_clear
 /* 7B780 800E22D0 24050034 */   addiu    $a1, $zero, 0x34
 /* 7B784 800E22D4 8FBF0014 */  lw        $ra, 0x14($sp)

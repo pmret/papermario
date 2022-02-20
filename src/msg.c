@@ -755,7 +755,7 @@ void draw_message_window(MessagePrintState* printer) {
         case MSG_WINDOW_STATE_E:
             printer->windowBasePos.x = 160 - (printer->windowSize.x / 2);
             printer->windowBasePos.y = 56;
-            draw_box(1, 0, printer->windowBasePos.x, 56, 0, printer->windowSize.x, printer->windowSize.y, 255, 0,
+            draw_box(DRAW_FLAGS_ROTSCALE, 0, printer->windowBasePos.x, 56, 0, printer->windowSize.x, printer->windowSize.y, 255, 0,
                      scale, scale, 0.0f, 0.0f, rotZ, drawbox_message_delegate, printer, NULL, SCREEN_WIDTH,
                      SCREEN_HEIGHT, NULL);
             break;

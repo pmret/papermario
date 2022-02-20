@@ -8,7 +8,6 @@ extern EntityModelList gWorldEntityModelList;
 extern EntityModelList gBattleEntityModelList;
 extern EntityModelList* gCurrentEntityModelList;
 extern s32 gEntityModelCount;
-extern s32 D_8014C260[];
 extern s32 entity_fog_enabled;
 extern s32 entity_fog_red;
 extern s32 entity_fog_green;
@@ -95,7 +94,7 @@ s32 load_entity_model(s32* cmdList) {
     newEntityModel->cmdListSavedPos = newEntityModel->cmdListReadPos;
 
     if (gGameStatusPtr->isBattle) {
-        i |= 0x800;
+        i |= BATTLE_ENTITY_ID_MASK;
     }
     return i;
 }
@@ -137,7 +136,7 @@ s32 ALT_load_entity_model(s32* cmdList) {
     newEntityModel->cmdListSavedPos = newEntityModel->cmdListReadPos;
 
     if (gGameStatusPtr->isBattle) {
-        i |= 0x800;
+        i |= BATTLE_ENTITY_ID_MASK;
     }
     return i;
 }
@@ -146,8 +145,8 @@ void exec_entity_model_commandlist(s32 idx) {
     EntityModel* entityModel;
     void* temp_v0_2;
 
-    if (!gGameStatusPtr->isBattle || (idx & 0x800)) {
-        idx &= ~0x800;
+    if (!gGameStatusPtr->isBattle || (idx & BATTLE_ENTITY_ID_MASK)) {
+        idx &= ~BATTLE_ENTITY_ID_MASK;
         entityModel = (*gCurrentEntityModelList)[idx];
         if (entityModel != NULL && (entityModel->flags)) {
             if (!(entityModel->flags & ENTITY_MODEL_FLAGS_20)) {
@@ -229,7 +228,7 @@ INCLUDE_ASM(s32, "entity", draw_entity_model_E);
 
 void set_entity_model_render_command_list(s32 idx, u32* commandList) {
     u32* phi_a1;
-    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
 
     if (entityModel != NULL && entityModel->flags) {
         phi_a1 = commandList;
@@ -244,11 +243,11 @@ void set_entity_model_render_command_list(s32 idx, u32* commandList) {
 }
 
 EntityModel* get_entity_model(s32 listIndex) {
-    return (*gCurrentEntityModelList)[listIndex & ~0x800];
+    return (*gCurrentEntityModelList)[listIndex & ~BATTLE_ENTITY_ID_MASK];
 }
 
 void free_entity_model_by_index(s32 idx) {
-    s32 index = idx & ~0x800;
+    s32 index = idx & ~BATTLE_ENTITY_ID_MASK;
     EntityModel* entityModel = (*gCurrentEntityModelList)[index];
 
     if (entityModel != NULL && entityModel->flags) {
@@ -279,7 +278,7 @@ void free_entity_model_by_ref(EntityModel* entityModel) {
 }
 
 void set_entity_model_flags(s32 idx, s32 newFlags) {
-    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
 
     if (entityModel != NULL && entityModel->flags) {
         entityModel->flags |= newFlags;
@@ -287,7 +286,7 @@ void set_entity_model_flags(s32 idx, s32 newFlags) {
 }
 
 void clear_entity_model_flags(s32 idx, s32 newFlags) {
-    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
 
     if (entityModel != NULL && entityModel->flags) {
         entityModel->flags &= ~newFlags;
@@ -295,20 +294,20 @@ void clear_entity_model_flags(s32 idx, s32 newFlags) {
 }
 
 void bind_entity_model_setupGfx(s32 idx, s32 setupGfxCallbackArg0, UNK_FUN_PTR(fpSetupGfxCallback)) {
-    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
 
     entityModel->fpSetupGfxCallback = fpSetupGfxCallback;
     entityModel->setupGfxCallbackArg0 = setupGfxCallbackArg0;
 }
 
 void func_80122F8C(s32 idx, s32 newFlags) {
-    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
 
     entityModel->flags |= newFlags;
 }
 
 void func_80122FB8(s32 idx, s32 newFlags) {
-    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~BATTLE_ENTITY_ID_MASK];
 
     entityModel->flags = (entityModel->flags & ~(ENTITY_MODEL_FLAGS_1 | ENTITY_MODEL_FLAGS_2 | ENTITY_MODEL_FLAGS_4 | ENTITY_MODEL_FLAGS_8)) | newFlags;
 }
@@ -374,7 +373,7 @@ void init_generic_entity_list(void) {
     }
 }
 
-s32 create_generic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)) {
+s32 create_generic_entity_world(void (*updateFunc)(Evt*, s32), void (*drawFunc)(Evt*, s32)) {
     s32 i;
     DynamicEntity* newDynEntity;
 
@@ -400,7 +399,7 @@ s32 create_generic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)
     }
 
     if (gGameStatusPtr->isBattle) {
-        i |= 0x800;
+        i |= BATTLE_ENTITY_ID_MASK;
     }
     return i;
 }
@@ -431,7 +430,7 @@ s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(voi
     }
 
     if (gGameStatusPtr->isBattle) {
-        i |= 0x800;
+        i |= BATTLE_ENTITY_ID_MASK;
     }
     return i;
 }
@@ -462,7 +461,7 @@ s32 create_generic_entity_backUI(void (*updateFunc)(void), void (*drawFunc)(void
     }
 
     if (gGameStatusPtr->isBattle) {
-        i |= 0x800;
+        i |= BATTLE_ENTITY_ID_MASK;
     }
     return i;
 }
@@ -519,10 +518,10 @@ void render_generic_entities_backUI(void) {
 }
 
 void free_generic_entity(s32 idx) {
-    if (!gGameStatusPtr->isBattle || (idx & 0x800)) {
+    if (!gGameStatusPtr->isBattle || (idx & BATTLE_ENTITY_ID_MASK)) {
         DynamicEntityList** curDynEntityList = &gCurrentDynamicEntityListPtr;
 
-        idx &= ~0x800;
+        idx &= ~BATTLE_ENTITY_ID_MASK;
         if ((**curDynEntityList)[idx] != NULL) {
             heap_free((**curDynEntityList)[idx]);
             (**curDynEntityList)[idx] = NULL;
@@ -531,5 +530,5 @@ void free_generic_entity(s32 idx) {
 }
 
 DynamicEntity* get_generic_entity(s32 idx) {
-    return (*gCurrentDynamicEntityListPtr)[idx & ~0x800];
+    return (*gCurrentDynamicEntityListPtr)[idx & ~BATTLE_ENTITY_ID_MASK];
 }

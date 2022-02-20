@@ -88,7 +88,7 @@ glabel func_80242DF0_DCFAC0
 /* DCFBC4 80242EF4 8E050038 */  lw        $a1, 0x38($s0)
 /* DCFBC8 80242EF8 8E06003C */  lw        $a2, 0x3c($s0)
 /* DCFBCC 80242EFC 8E070040 */  lw        $a3, 0x40($s0)
-/* DCFBD0 80242F00 0C01BECC */  jal       fx_walk
+/* DCFBD0 80242F00 0C01BECC */  jal       fx_walking_dust
 /* DCFBD4 80242F04 24040002 */   addiu    $a0, $zero, 2
 /* DCFBD8 80242F08 C64C006C */  lwc1      $f12, 0x6c($s2)
 /* DCFBDC 80242F0C 0C00A6C9 */  jal       clamp_angle
@@ -253,7 +253,7 @@ glabel func_80242DF0_DCFAC0
 /* DCFE3C 8024316C 8E050038 */  lw        $a1, 0x38($s0)
 /* DCFE40 80243170 8E06003C */  lw        $a2, 0x3c($s0)
 /* DCFE44 80243174 8E070040 */  lw        $a3, 0x40($s0)
-/* DCFE48 80243178 0C01BECC */  jal       fx_walk
+/* DCFE48 80243178 0C01BECC */  jal       fx_walking_dust
 /* DCFE4C 8024317C 24040002 */   addiu    $a0, $zero, 2
 /* DCFE50 80243180 3C01C47A */  lui       $at, 0xc47a
 /* DCFE54 80243184 44810000 */  mtc1      $at, $f0

@@ -8,7 +8,7 @@ s32 func_802D5B10();
 
 s32 D_802D9D30 = 0;
 
-EvtSource D_802D9D34 = {
+EvtScript D_802D9D34 = {
     EVT_CALL(func_802D5B10)
     EVT_RETURN
     EVT_END
@@ -244,7 +244,7 @@ ApiStatus CloseChoicePopup(Evt* script, s32 isInitialCall) {
     enable_player_input();
     enable_player_static_collisions();
     partner_enable_input();
-    gOverrideFlags &= ~0x40;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
     return ApiStatus_DONE2;
 }
 
@@ -523,7 +523,7 @@ ApiStatus ShowGotItem(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            script->functionTemp[1] = init_got_item(evt_get_variable(script, *args++), evt_get_variable(script, *args++), *args++);
+            script->functionTemp[1] = make_item_entity_at_player(evt_get_variable(script, *args++), evt_get_variable(script, *args++), *args++);
             script->functionTemp[0] = 1;
             break;
         case 1:

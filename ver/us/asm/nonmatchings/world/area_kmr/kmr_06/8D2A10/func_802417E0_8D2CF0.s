@@ -46,16 +46,16 @@ glabel func_802417E0_8D2CF0
 /* 8D2D94 80241884 E600001C */  swc1      $f0, 0x1c($s0)
 /* 8D2D98 80241888 E6000020 */  swc1      $f0, 0x20($s0)
 /* 8D2D9C 8024188C E6000024 */  swc1      $f0, 0x24($s0)
-/* 8D2DA0 80241890 3C038009 */  lui       $v1, %hi(D_8008E3D8)
+/* 8D2DA0 80241890 3C038009 */  lui       $v1, %hi(gItemIconRasterOffsets)
 /* 8D2DA4 80241894 00721821 */  addu      $v1, $v1, $s2
-/* 8D2DA8 80241898 8C63E3D8 */  lw        $v1, %lo(D_8008E3D8)($v1)
+/* 8D2DA8 80241898 8C63E3D8 */  lw        $v1, %lo(gItemIconRasterOffsets)($v1)
 /* 8D2DAC 8024189C 0040A02D */  daddu     $s4, $v0, $zero
 /* 8D2DB0 802418A0 00712021 */  addu      $a0, $v1, $s1
 /* 8D2DB4 802418A4 0C00A5CF */  jal       dma_copy
 /* 8D2DB8 802418A8 00652821 */   addu     $a1, $v1, $a1
-/* 8D2DBC 802418AC 3C058009 */  lui       $a1, %hi(D_8008E94C)
+/* 8D2DBC 802418AC 3C058009 */  lui       $a1, %hi(gItemIconPaletteOffsets)
 /* 8D2DC0 802418B0 00B22821 */  addu      $a1, $a1, $s2
-/* 8D2DC4 802418B4 8CA5E94C */  lw        $a1, %lo(D_8008E94C)($a1)
+/* 8D2DC4 802418B4 8CA5E94C */  lw        $a1, %lo(gItemIconPaletteOffsets)($a1)
 /* 8D2DC8 802418B8 0280302D */  daddu     $a2, $s4, $zero
 /* 8D2DCC 802418BC 00B12021 */  addu      $a0, $a1, $s1
 /* 8D2DD0 802418C0 26310020 */  addiu     $s1, $s1, 0x20

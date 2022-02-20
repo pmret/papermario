@@ -9,7 +9,7 @@ ApiStatus N(func_802A123C_716E9C)(Evt* script, s32 isInitialCall) {
     s32 b = evt_get_variable(script, *args++);
     s32 c = evt_get_variable(script, *args++);
 
-    playFX_3F(0, a, b, c, 0);
+    fx_fire_flower(0, a, b, c, 0);
 
     return ApiStatus_DONE2;
 }
@@ -34,7 +34,7 @@ ApiStatus N(func_802A1378_716FD8)(Evt* script, s32 isInitialCall) {
 
 #include "UseItem.inc.c"
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET_CONST(EVT_VAR(10), 0x00000080)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CALL(N(FadeBackgroundToBlack))

@@ -76,7 +76,7 @@ segments:
     - [0x13870, c, npc]
     - [0x1A1F0, c, 1a1f0_len_5390]
     - [0x1F580, c, encounter_api]
-    - [0x20EC0, c, 20ec0_len_5040]
+    - [0x20EC0, c, status_icons]
     - [0x23680, c]
     - [0x25AF0, c]
     - [0x25F00, c, 25f00_len_940]
@@ -92,7 +92,7 @@ segments:
     - [0x341D0, c, 341d0]
     - [0x35080, c, effects]
     - [0x35AC0, c, world/world]
-    - [0x362A0, c, 362a0_len_2f70]
+    - [0x362A0, c, collision]
     - [0x39210, c, 39210_len_aa0]
     - [0x39CB0, c, os/39cb0_len_100]
     - [0x39DB0, c, os/nusys/nuSched]
@@ -126,92 +126,96 @@ segments:
     - [0x3BD20, c, os/nusys/nuContQueryRead]
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3BDE0, c, os/osCreatePiManager]
-    - [0x3C160, c, os/osEPiWriteIo, kmc -O3]
-    - [0x3C1C0, c, os/osEPiReadIo, kmc -O3]
-    - [0x3C220, c, os/osEPiStartDma, kmc -O3]
-    - [0x3C2C0, c, os/osEPiLinkHandle, kmc -O3]
+    - [0x3C160, c, os/osEPiWriteIo, gcc_272 -O3]
+    - [0x3C1C0, c, os/osEPiReadIo, gcc_272 -O3]
+    - [0x3C220, c, os/osEPiStartDma, gcc_272 -O3]
+    - [0x3C2C0, c, os/osEPiLinkHandle, gcc_272 -O3]
     - [0x3C310, c, os/osCartRomInit]
-    - [0x3C490, c, os/3c490_len_3c0]
+    - [0x3C490, c, os/devmgr, gcc_272 -O3]
     - [0x3C850, c, os/3c850_len_f0]
     - [0x3C940, c, os/3c940_len_140]
-    - [0x3CA80, c, os/3ca80_len_a0]
+    - [0x3CA80, c, os/aisetnextbuf, gcc_272 -O3]
     - [0x3CB20, hasm, os/osInvalDCache]
     - [0x3CBD0, hasm, os/osInvalICache]
     - [0x3CC50, hasm, os/osWritebackDCache]
     - [0x3CCD0, hasm, os/osWritebackDCacheAll]
     - [0x3CD00, c, os/3cd00_len_5f0] # MOVE_ADDU
     - [0x3CF80, c, os/controller]
-    - [0x3D290, c, os/osVirtualToPhysical]
-    - [0x3D2F0, c, os/3d2f0_len_10]
-    - [0x3D300, c, os/3d300_len_30]
-    - [0x3D330, c, os/guFrustum]
-    - [0x3D5B0, c, os/guLookAt]
-    - [0x3DCC0, c, os/3dcc0_len_a60]
-    - [0x3E720, c, os/3e720_len_5f0]
-    - [0x3ED10, c, os/guOrtho, kmc -O3]
-    - [0x3EF90, c, os/3ef90_len_600]
-    - [0x3F310, c, os/3f310_len_3c0]
-    - [0x3F6D0, c, os/3f6d0_len_320]
-    - [0x3F9F0, c, os/sins]
-    - [0x3FA50, c, os/3fa50_len_f60]
-    - [0x3FEA0, c, os/3FEA0] # MOVE_ADDU
+    - [0x3D290, c, os/osVirtualToPhysical, gcc_272 -O3]
+    - [0x3D2F0, c, os/sqrtf, -ffast-math]
+    - [0x3D300, c, os/coss, gcc_272 -O3]
+    - [0x3D330, c, os/guFrustum, gcc_272 -O3]
+    - [0x3D5B0, c, os/guLookAt, gcc_272 -O3]
+    - [0x3DCC0, c, os/lookathil, gcc_272 -O3]
+    - [0x3E720, c, os/lookatref, gcc_272 -O3]
+    - [0x3ED10, c, os/guOrtho, gcc_272 -O3]
+    - [0x3EF90, c, os/perspective, gcc_272 -O3]
+    - [0x3F310, c, os/position, gcc_272 -O3]
+    - [0x3F6D0, c, os/rotateRPY, gcc_272 -O3]
+    - [0x3F9F0, c, os/sins, gcc_272 -O3]
+    - [0x3FA50, hasm, os/bcopy]
+    - [0x3FD70, hasm, os/bzero]
+    - [0x3FE10, c, os/string, gcc_272 -O3]
+    - [0x3FEA0, c, os/3FEA0]
+    - [0x408EC, c, os/sprintf] # MOVE_ADDU
     - [0x40980, c, os/osCreateMesgQueue]
-    - [0x409B0, c, os/osJamMesg]
-    - [0x40AF0, c, os/osRecvMesg]
-    - [0x40C20, c, os/40c20_len_1f0]
+    - [0x409B0, c, os/osJamMesg, gcc_272 -O3]
+    - [0x40AF0, c, os/osRecvMesg, gcc_272 -O3]
+    - [0x40C20, c, os/sendmesg, gcc_272 -O3]
+    - [0x40D50, c, os/seteventmesg, gcc_272 -O3]
     - [0x40E00, hasm, os/osGetCount]
     - [0x40E10, c, os/40E10]
-    - [0x41050, c, os/osSpTaskYield]
-    - [0x41070, c, os/osSpTaskYielded]
-    - [0x410C0, c, os/osSiRawStartDma]
+    - [0x41050, c, os/osSpTaskYield, gcc_272 -O3]
+    - [0x41070, c, os/sptaskyielded, gcc_272 -O3]
+    - [0x410C0, c, os/sirawdma, gcc_272 -O3]
     - [0x41170, c, os/41170_len_f0]
-    - [0x41260, c, os/osCreateThread]
+    - [0x41260, c, os/createthread, gcc_272 -O3]
     - [0x41330, c, os/osGetThreadPri]
     - [0x41350, c, os/osSetThreadPri] # MOVE_ADDU
-    - [0x41420, c, os/41420_len_120]
-    - [0x41540, c, os/41540_len_c0]
-    - [0x41600, c, os/41600_len_40]
-    - [0x41640, c, os/41640_len_50]
-    - [0x41690, c, os/41690_len_10]
-    - [0x416A0, c, os/416a0_len_90]
-    - [0x41730, c, os/41730_len_20]
-    - [0x41750, c, os/41750_len_450]
-    - [0x41880, c, os/41880]
-    - [0x41BA0, c, os/41ba0_len_c0]
-    - [0x41C60, c, os/41c60_len_c0]
-    - [0x41D20, c, os/41d20_len_40]
-    - [0x41D60, c, os/41d60_len_50]
-    - [0x41DB0, c, os/41db0_len_40]
-    - [0x41DF0, c, os/41df0_len_40]
-    - [0x41E30, c, os/41e30_len_40]
+    - [0x41420, c, os/startthread, gcc_272 -O3]
+    - [0x41540, c, os/stopthread, gcc_272 -O3]
+    - [0x41600, c, os/thread, gcc_272 -O3]
+    - [0x41640, c, os/yieldthread, gcc_272 -O3]
+    - [0x41690, c, os/getactivequeue, gcc_272 -O3]
+    - [0x416A0, c, os/gettime, gcc_272 -O3]
+    - [0x41730, c, os/settime, gcc_272 -O3]
+    - [0x41750, c, os/settimer, gcc_272 -O3]
+    - [0x41880, c, os/timerintr, gcc_272 -O3]
+    - [0x41BA0, hasm, os/osMapTLB]
+    - [0x41C60, hasm, os/__osProbeTLB]
+    - [0x41D20, hasm, os/osUnmapTLB]
+    - [0x41D60, hasm, os/osUnmapTLBAll]
+    - [0x41DB0, c, os/vigetcurrframebuf, gcc_272 -O3]
+    - [0x41DF0, c, os/vigetnextframebuf, gcc_272 -O3]
+    - [0x41E30, c, os/vigetmode, gcc_272 -O3]
     - [0x41E70, c, os/41e70_len_340]
-    - [0x421B0, c, os/421b0_len_60]
-    - [0x42210, c, os/42210_len_50]
-    - [0x42260, c, os/42260_len_170]
-    - [0x423D0, c, os/423d0_len_50]
-    - [0x42420, c, os/42420_len_50]
-    - [0x42470, c, os/42470_len_310]
-    - [0x42780, c, os/42780_len_120]
-    - [0x427E0, c, os/osViRepeatLine]
-    - [0x42840, c, os/guMtxIdent]
-    - [0x428A0, c, os/guMtxIdentF]
-    - [0x42900, c, os/42900_len_80]
-    - [0x42980, c, os/42980_len_80]
-    - [0x42A00, c, os/42a00_len_100]
-    - [0x42B00, c, os/42b00_len_c0]
-    - [0x42BC0, c, os/42bc0_len_60]
-    - [0x42C20, c, os/42c20_len_e0]
-    - [0x42D00, c, os/42d00_len_60]
-    - [0x42D60, c, os/42d60_len_80]
-    - [0x42DE0, c, os/42de0_len_90]
-    - [0x42E70, c, os/42e70_len_390]
-    - [0x42F20, c, os/guRotate, kmc -O3]
+    - [0x421B0, c, os/visetevent, gcc_272 -O3]
+    - [0x42210, c, os/visetmode, gcc_272 -O3]
+    - [0x42260, c, os/visetspecial, gcc_272 -O3]
+    - [0x423D0, c, os/visetyscale, gcc_272 -O3]
+    - [0x42420, c, os/viswapbuf, gcc_272 -O3]
+    - [0x42470, c, os/viswapcontext, gcc_272 -O3]
+    - [0x42780, c, os/viblack, gcc_272 -O3]
+    - [0x427E0, c, os/virepeatline, gcc_272 -O3]
+    - [0x42840, hasm, os/guMtxIdent]
+    - [0x428A0, hasm, os/guMtxIdentF]
+    - [0x42900, hasm, os/guMtxF2L]
+    - [0x42980, hasm, os/guMtxL2F]
+    - [0x42A00, hasm, os/guMtxCatF]
+    - [0x42B00, hasm, os/guScale]
+    - [0x42BC0, hasm, os/guScaleF]
+    - [0x42C20, hasm, os/guTranslate]
+    - [0x42D00, hasm, os/guTranslateF]
+    - [0x42D60, c, os/guMtxCat, gcc_272 -O3]
+    - [0x42DE0, c, os/guMtxXFML, gcc_272 -O3]
+    - [0x42E70, c, os/guMtxXFMF, gcc_272 -O3]
+    - [0x42F20, c, os/guRotate, gcc_272 -O3]
     - [0x43200, c, os/43200_len_7c0]
     - [0x43590, c, os/43590]
     - [0x439C0, c, os/439c0_len_220]
     - [0x43BE0, c, os/43be0_len_5e0]
     - [0x441C0, c, os/441c0_len_1c0]
-    - [0x44380, c, os/44380_len_4e0]
+    - [0x44380, c, os/pfsfreeblocks, gcc_272 -O3]
     - [0x44490, c, os/44490]
     - [0x44860, c, os/44860_len_60]
     - [0x448C0, c, os/448c0_len_210]
@@ -219,29 +223,38 @@ segments:
     - [0x44B40, c, os/44b40_len_a90]
     - [0x455D0, c, os/455d0_len_1f0]
     - [0x457C0, c, os/457c0_len_270]
-    - [0x45A30, c, os/45a30_len_20]
+    - [0x45A30, c, os/afterprenmi, gcc_272 -O3]
     - [0x45A50, c, os/45a50_len_3a0]
     - [0x45DF0, hasm, os/exceptasm]
     - [0x46760, hasm, os/__osDisableInt]
     - [0x467D0, hasm, os/__osRestoreInt]
-    - [0x467F0, c, os/467f0_len_90]
-    - [0x46880, c, os/46880_len_260]
-    - [0x46AE0, c, os/46ae0_len_170]
-    - [0x46C50, c, os/46c50_len_20]
+    - [0x467F0, c, os/setglobalintmask, gcc_272 -O3]
+    - [0x467F0, c, os/resetglobalintmask, gcc_272 -O3]
+    - [0x46880, c, os/pirawdma, gcc_272 -O3]
+    - [0x46950, c, os/pigetcmdq, gcc_272 -O3]
+    - [0x46970, c, os/epirawread, gcc_272 -O3]
+    - [0x46AE0, c, os/epirawwrite, gcc_272 -O3]
+    - [0x46C50, c, os/ai, gcc_272 -O3]
     - [0x46C70, c, os/46c70_len_e00]
-    - [0x47A60, hasm, os/osGetCause]
-    - [0x47A70, c, os/47a70_len_10]
-    - [0x47A80, c, os/47a80_len_10]
-    - [0x47A90, c, os/47a90_len_50]
-    - [0x47AE0, c, os/47ae0_len_e0]
-    - [0x47BC0, c, os/47bc0_len_50]
-    - [0x47C10, c, os/47c10_len_50]
+    - [0x47A60, hasm, os/__osGetCause]
+    - [0x47A70, hasm, os/__osGetSR]
+    - [0x47A80, hasm, os/__osSetCompare]
+    - [0x47A90, hasm, os/setfpccsr]
+    - [0x47AA0, hasm, os/setsr]
+    - [0x47AB0, hasm, os/__osSetWatchLo]
+    - [0x47AC0, c, os/sp, gcc_272 -O3]
+    - [0x47AE0, c, os/spgetstat, gcc_272 -O3]
+    - [0x47AF0, c, os/sptaskyield, gcc_272 -O3]
+    - [0x47B00, c, os/spsetpc, gcc_272 -O3]
+    - [0x47B30, c, os/sprawdma, gcc_272 -O3]
+    - [0x47BC0, c, os/sirawread, gcc_272 -O3]
+    - [0x47C10, c, os/sirawwrite, gcc_272 -O3]
     - [0x47C60, c, os/47c60_len_f0] # MOVE_ADDU
-    - [0x47D50, c, os/47d50_len_e0]
-    - [0x47E30, c, os/47e30_len_60]
+    - [0x47D50, c, os/destroythread, gcc_272 -O3]
+    - [0x47E30, hasm, os/osMapTLBRdb]
     - [0x47E90, c, os/47e90_len_110]
     - [0x47FA0, c, os/47fa0_len_20]
-    - [0x47FC0, c, os/47fc0_len_60]
+    - [0x47FC0, hasm, os/guNormalize]
     - [0x48020, c, os/48020_len_a00]
     - [0x48A20, c, os/ldiv]
     - [0x48BE0, c, os/osSiDeviceBusy]
@@ -310,13 +323,13 @@ segments:
     - [0x6F120, .data, os/osCreatePiManager]
     - [0x6F180, .data, os/osCartRomInit]
     - [0x6F190, .data, os/3c850_len_f0]
-    - [0x6F1A0, .data, os/3ca80_len_a0]
+    - [0x6F1A0, .data, os/aisetnextbuf]
     - [0x6F1B0, .data, os/controller]
-    - [0x6F1C0, .data, os/3f310_len_3c0]
-    - [0x6F1D0, .data, os/3f6d0_len_320]
+    - [0x6F1C0, .data, os/position]
+    - [0x6F1D0, .data, os/rotateRPY]
     - [0x6F1E0, .data, os/sins]
     - [0x6F9E0, .data, os/3FEA0]
-    - [0x6FA30, .data, os/40c20_len_1f0]
+    - [0x6FA30, .data, os/seteventmesg]
     - [0x6FA40, .data, os/41170_len_f0]
     - [0x6FA50, .data, os/osSetThreadPri]
     - [0x6FA70, data] # has scripts?
@@ -324,54 +337,13 @@ segments:
     - [0x71430, bin, gspF3DEX2kawase_fifo_text]
     - [0x72A60, bin, gspF3DEX2kawase_fifo_data]
     - [0x72E80, bin, n_aspMain_data]
-    - [0x73130, .rodata, is_debug]
-    - [0x73148, .rodata, main_loop]
-    - [0x73160, .rodata, 43F0]
-    - [0x73200, .rodata, curtains]
-    - [0x73230, .rodata, crash_screen]
-    - [0x735E0, .rodata, 8800]
-    - [0x73610, .rodata, B0E0]
-    - [0x73680, .rodata, camera]
-    - [0x73690, .rodata, state_logos]
-    - [0x736E8, .rodata, state_file_select]
-    - [0x73720, .rodata, 111f0_len_860]
-    - [0x73738, .rodata, state_intro]
-    - [0x73790, .rodata, state_title_screen]
-    - [0x73860, .rodata, state_demo]
-    - [0x73880, .rodata, npc]
-    - [0x739F0, .rodata, 1a1f0_len_5390]
-    - [0x73AB0, .rodata, 20ec0_len_5040]
-    - [0x73B10, .rodata, 23680]
-    - [0x73CC0, .rodata, 28910_len_5090]
-    - [0x73CF0, .rodata, 2e230_len_2190]
-    - [0x73D08, .rodata, 30450]
-    - [0x73D30, .rodata, 33450]
-    - [0x73D40, .rodata, 341d0]
-    - [0x73DA0, .rodata, world/world]
-    - [0x74EA0, .rodata, os/osSetIntMask]
-    - [0x74F20, .rodata, os/3c490_len_3c0]
-    - [0x74F40, .rodata, os/3c940_len_140]
-    - [0x74F50, .rodata, os/guLookAt]
-    - [0x74F70, .rodata, os/3dcc0_len_a60]
-    - [0x74FA0, .rodata, os/3e720_len_5f0]
-    - [0x74FB0, .rodata, os/3ef90_len_600]
-    - [0x74FF0, .rodata, os/3FEA0]
-    - [0x75170, .rodata, os/42470_len_310]
-    - [0x75180, .rodata, os/exceptasm]
-    - [0x751D0, .rodata, os/46c70_len_e00]
-    - [0x75240, .rodata, os/48c00_len_5c0]
-    - [0x75340, .rodata, os/491c0_len_f80]
-    - [0x75540, .rodata, os/49C70]
-    - [0x75640, .rodata, battle/battle]
-    # bss starts at 0x8009A5B0
-    # 0x800 of bss until...
-    # - [0x75240, .bss, main_loop]
-    # - [0x75240, .bss, os/39cb0_len_100, 0x0] # size unknown
+    - [0x73130]
   - type: code
     start: 0x759B0
     vram: 0x800DC500
     subsegments:
-    - [0x759B0, c, 759b0_len_61b0]
+    - [0x759B0, c, bss2]
+    - [0x759B0, c, npc_collision]
     - [0x77480, c, 77480]
     - [0x7B440, c, 7B440]
     - [0x7BB60, c, 7bb60_len_41b0]
@@ -384,7 +356,7 @@ segments:
     - [0x8A160, c, 8a160_len_700]
     - [0x8A860, c, 8a860_len_3f30]
     - [0x8E790, c, 8e790_len_2850]
-    - [0x90FE0, .data, 759b0_len_61b0]
+    - [0x90FE0, .data, npc_collision]
     - [0x913B0, .data, world/actions]
     - [0x914E0, .data, world/partners] # TODO shiftability: include following images in c file to fix padding issues
     - [0x919B0, ci4,     ui/a_button_unpressed, 48, 40]
@@ -696,12 +668,31 @@ segments:
       - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
     - [0x9DE60, data]
     - [0xA2D40, .data, 8a860_len_3f30]
-    - [0xA2D90, data]
-    - [0xA5100] # bss at 8010C920
+    - start: 0xA2D90
+      type: .data
+      name: 8e790_len_2850
+      subsegments:
+      - [0xA2D90, .data, 8e790_len_2850]
+      - [0xA2E90, ia8, ui/corners9, 16, 64]
+      - [0xA3290, ia8, ui/corners8, 24, 96]
+      - [0xA3B90, ia8, ui/corners6, 16, 40]
+      - [0xA3E10, ia8, ui/corners7, 16, 32]
+      - [0xA4010, ia8, ui/corners3, 16, 96]
+      - [0xA4610, ia8, ui/corners5, 16, 32]
+      - [0xA4810, ia8, ui/corners4, 8, 32]
+      - [0xA4910, i4, ui/background1, 16, 16]
+      - [0xA4990, ia8, ui/corners1, 16, 64]
+      - [0xA4D90, i4, ui/corners2, 16, 64]
+      - [0xA4F90, i4, ui/background2, 16, 1]
+      - [0xA4F98]
+      - [0xA5078, vtx, vtx/drawbox1]
+      - [0xA50B8]
+    - [0xA5100]
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
     subsegments:
+    - [0xA5DD0, c, bss3]
     - [0xA5DD0, c, a5dd0_len_114e0]
     - [0xB4580, c, B4580]
     - [0xB72B0, c, entity]
@@ -715,16 +706,15 @@ segments:
     - [0xDBD70, c, trigger]
     - [0xDC470, c, dc470_len_14c0]
     - [0xDD930, c, dd930_len_1c0]
-    - [0xDDAF0, c, ddaf0_len_c50]
+    - [0xDDAF0, c, windows]
     - [0xDE740, c, de740_len_23f0]
-    - [0xDF950, c, DF950]
+    - [0xDF950, c, sfx]
     - [0xE0B30, c, e0b30_len_b80]
     - [0xE16B0, .data, a5dd0_len_114e0]
     - [0xE2950, .data, B4580]
     - [0xE2960, .data, entity]
     - [0xE2980, .data, msg]
     - [0xE2CA0, data]
-    #- [0xE2DF0, .data, cd180_len_38f0]
     - start: 0xE2DF0
       type: .data
       name: cd180_len_38f0
@@ -740,8 +730,8 @@ segments:
     - [0xE56C0, .data, hud_element]
     - [0xE5820, .data, dc470_len_14c0]
     - [0xE5840, .data, dd930_len_1c0]
-    - [0xE5850, .data, ddaf0_len_c50]
-    - [0xE59D0, .data, DF950]
+    - [0xE5850, .data, windows]
+    - [0xE59D0, .data, sfx]
     - [0xE5DF0, .data, e0b30_len_b80]
     - [0xE5E40]
   - type: code
@@ -948,51 +938,64 @@ segments:
     - [0x134F40, palette, ui/blue_orb]
     - [0x134F60, ci4, ui/label_bubble, 56, 16]
     - [0x135120, palette, ui/label_bubble]
-    - [0x135140, bin, pause_icon_table] # TODO data
+    - [0x135140, data, pause_icon_table]
   - type: code
     dir: pause
     start: 0x135EE0
     vram: 0x80242BA0
     subsegments:
-    - [0x135EE0, c]
-    - [0x137ED0, c]
-    - [0x138CC0, c]
+    - [0x135EE0, c, pause_main]
+    - [0x137ED0, c, pause_tabs]
+    - [0x138CC0, c, pause_stats]
+    - [0x13A320, c, pause_badges]
     - [0x13CAF0, c, pause_items]
-    - [0x13E120, c]
-    - [0x13FD40, c]
+    - [0x13E120, c, pause_partners]
+    - [0x13FD40, c, pause_spirits]
     - [0x140C70, c, pause_map]
-    - [0x1421C0, c]
-    - [0x1422A0, data]
-    - [0x1443F0, ci8,        world_map, 320, 320]
-    - [0x15D3F0, palette,    world_map]
-    - [0x15D5F0, ci4,        spirits_bg, 128, 110]
-    - [0x15F170, palette,    spirits_bg]
-    - [0x15F370, rgba16,     filled_pip, 8, 8]
-    - [0x15F3F0, rgba16,     empty_pip, 8, 8]
-    - [0x15F470, rgba16,     red_pip, 8, 8]
-    - [0x15F4F0, bin]
-    - [0x15F570, ia8,        image_15F570, 16, 16]
-    - [0x15F670, ia8,        image_15F670, 16, 16]
-    - [0x15F770, ia8,        arrows, 16, 32]
-    - [0x15F970, ci4,        banner_hp, 64, 16]
-    - [0x15FB70, palette,    banner_hp]
-    - [0x15FD70, ci4,        banner_fp, 64, 16]
-    - [0x15FF70, palette,    banner_fp]
-    - [0x160170, ci4,        banner_bp, 64, 16]
-    - [0x160370, palette,    banner_bp]
-    - [0x160570, ci4,        banner_boots, 48, 16]
-    - [0x1606F0, palette,    banner_boots]
-    - [0x1608F0, ci4,        banner_hammer, 48, 16]
-    - [0x160A70, palette,    banner_hammer]
-    - [0x160C70, ci4,        banner_star_energy, 48, 16]
-    - [0x160DF0, palette,    banner_star_energy]
-    - [0x160FF0, ci4,        available, 64, 16]
-    - [0x1611F0, palette,    available]
-    - [0x1613F0, ci4,        prompt_check_abilities, 128, 16]
-    - [0x1617F0, palette,    prompt_check_abilities]
-    - [0x1619F0, ci4,        stats_bar, 160, 8]
-    - [0x161C70, palette,    stats_bar]
-    - [0x161E70, data]
+    - [0x1421C0, c, pause_gfx]
+    - [0x1422A0, .data, pause_main]
+    - [0x1424F0, .data, pause_tabs]
+    - [0x142670, .data, pause_stats]
+    - [0x142810, .data, pause_badges]
+    - [0x1428B0, .data, pause_items]
+    - [0x142940, .data, pause_partners]
+    - [0x142BF0, .data, pause_spirits]
+    - [0x142D70, .data, pause_map]
+    - start: 0x1439F0
+      type: .data
+      name: pause_gfx
+      subsegments:
+      - [0x1439F0, ia8,        image_1439F0, 16, 32]
+      - [0x143BF0, ia8,        image_143BF0, 16, 64]
+      - [0x143FF0, ia8,        image_143FF0, 16, 64]
+      - [0x1443F0, ci8,        world_map, 320, 320]
+      - [0x15D3F0, palette,    world_map]
+      - [0x15D5F0, ci4,        spirits_bg, 128, 110]
+      - [0x15F170, palette,    spirits_bg]
+      - [0x15F370, rgba16,     orbs, 8, 32]
+      - [0x15F570, ia8,        image_15F570, 16, 16]
+      - [0x15F670, ia8,        image_15F670, 16, 16]
+      - [0x15F770, ia4,        arrows, 16, 64]
+      - [0x15F970, ci4,        banner_hp, 64, 16]
+      - [0x15FB70, palette,    banner_hp]
+      - [0x15FD70, ci4,        banner_fp, 64, 16]
+      - [0x15FF70, palette,    banner_fp]
+      - [0x160170, ci4,        banner_bp, 64, 16]
+      - [0x160370, palette,    banner_bp]
+      - [0x160570, ci4,        banner_boots, 48, 16]
+      - [0x1606F0, palette,    banner_boots]
+      - [0x1608F0, ci4,        banner_hammer, 48, 16]
+      - [0x160A70, palette,    banner_hammer]
+      - [0x160C70, ci4,        banner_star_energy, 48, 16]
+      - [0x160DF0, palette,    banner_star_energy]
+      - [0x160FF0, ci4,        available, 64, 16]
+      - [0x1611F0, palette,    available]
+      - [0x1613F0, ci4,        prompt_check_abilities, 128, 16]
+      - [0x1617F0, palette,    prompt_check_abilities]
+      - [0x1619F0, ci4,        stats_bar, 160, 8]
+      - [0x161C70, palette,    stats_bar]
+      - [0x161E70, .data,      pause_gfx]
+    - [0x162D30, .data,      pause_styles]
     - [0x1632A0]
   - type: code
     start: 0x163400
@@ -1025,7 +1028,7 @@ segments:
     - [0x190B20, c, 190B20]
     - [0x1967B0, c, load_script]
     - [0x196AA0, c, 196AA0]
-    - [0x197F40, c, 197F40]
+    - [0x197F40, c, actor_api]
     - [0x19FAF0, c, 19FAF0]
     - [0x1A5830, c, 1A5830]
     - [0x1AC760, c]
@@ -1035,6 +1038,10 @@ segments:
     - [0x1AF5C0, .data, 1776B0]
     - [0x1AF8A0, .data, 190B20]
     - [0x1B21E0, data, 1AF2D0] # begins with image?
+    - [0x1C2EC0, .data, 19FAF0]
+    - [0x1C2FC0, .data, 1A5830]
+    - [0x1C3000, .data, 1AF120]
+    - [0x1CB0B0, .data, 1AF230]
     - [0x1CB240, .rodata, 16c8e0]
     - [0x1CB368, .rodata, 16F740]
     - [0x1CB4E0, .rodata, 1776B0]
@@ -1044,7 +1051,7 @@ segments:
     - [0x1CBE70, .rodata, 18F340]
     - [0x1CBE80, .rodata, 190B20]
     - [0x1CBF80, .rodata, 196AA0]
-    - [0x1CC0A0, .rodata, 197F40]
+    - [0x1CC0A0, .rodata, actor_api]
     - [0x1CC160, .rodata, 19FAF0]
     - [0x1CC270, .rodata, 1A5830]
   - [0x1CC310, ci4,     icon/present, 32, 32]
@@ -2201,11 +2208,11 @@ segments:
     - [0x325160]
   - type: code
     start: 0x3251D0
-    vram: 0x802BD100
+    vram: 0x802C0000
     overlay: True
     subsegments:
-    - [0x3251D0, c]
-    - [0x3255E0, data]
+    - [0x3251D0, c, 3251D0]
+    - [0x3255E0]
   - type: code
     start: 0x325AD0
     vram: 0xE0200000
@@ -2213,595 +2220,595 @@ segments:
     - [0x325AD0, c]
     - [0x325EE0, pm_effect_shims, effect_shims]
     - [0x326160, .data, 325AD0]
-  - [0x326410, bin] # effect 1 gfx
-  - name: effect_1
+  - [0x326410, bin] # big_smoke_puff gfx
+  - name: effect_big_smoke_puff
     dir: effects
     type: code
     start: 0x3278F0
     vram: 0xE0002000
     subsegments:
-    - [0x3278F0, c, effect_1]
+    - [0x3278F0, c, big_smoke_puff]
     - [0x328050]
-  - name: effect_6
+  - name: effect_landing_dust
     dir: effects
     type: code
     start: 0x328110
     vram: 0xE000C000
     subsegments:
-    - [0x328110, c, effect_6]
+    - [0x328110, c, landing_dust]
     - [0x328D20]
-  - [0x328EA0, bin] # effect 6,7,23,29,39 gfx
-  - name: effect_7
+  - [0x328EA0, bin] # landing_dust, walking_dust, smoke_ring, smoke_impact, smoke_burst gfx
+  - name: effect_walking_dust
     dir: effects
     type: code
     start: 0x32C110
     vram: 0xE000E000
     subsegments:
-    - [0x32C110, c, effect_7]
+    - [0x32C110, c, walking_dust]
     - [0x32C770]
-  - name: effect_8
+  - name: effect_flower_splash
     dir: effects
     type: code
     start: 0x32C7A0
     vram: 0xE0010000
     subsegments:
-    - [0x32C7A0, c, effect_8]
+    - [0x32C7A0, c, flower_splash]
     - [0x32CEB0]
-  - [0x32CEC0, bin] # effect 8,9 gfx
-  - name: effect_9
+  - [0x32CEC0, bin] # flower_splash, flower_trail gfx
+  - name: effect_flower_trail
     dir: effects
     type: code
     start: 0x32DD10
     vram: 0xE0012000
     subsegments:
-    - [0x32DD10, c, effect_9]
-  - name: effect_10
+    - [0x32DD10, c, flower_trail]
+  - name: effect_cloud_puff
     dir: effects
     type: code
     start: 0x32E490
     vram: 0xE0014000
     subsegments:
-    - [0x32E490, c, effect_10]
+    - [0x32E490, c, cloud_puff]
     - [0x32EC10]
-  - [0x32EC50, bin] # effect 10,11 gfx
-  - name: effect_11
+  - [0x32EC50, bin] # cloud_puff, cloud_trail gfx
+  - name: effect_cloud_trail
     dir: effects
     type: code
     start: 0x32EE30
     vram: 0xE0016000
     subsegments:
-    - [0x32EE30, c, effect_11]
+    - [0x32EE30, c, cloud_trail]
     - [0x32F550]
-  - name: effect_12
+  - name: effect_footprint
     dir: effects
     type: code
     start: 0x32F580
     vram: 0xE0018000
     subsegments:
-    - [0x32F580, c, effect_12]
-  - [0x32FB50, bin] # effect 12 gfx
-  - name: effect_13
+    - [0x32F580, c, footprint]
+  - [0x32FB50, bin] # footprint gfx
+  - name: effect_floating_flower
     dir: effects
     type: code
     start: 0x32FE30
     vram: 0xE001A000
     subsegments:
-    - [0x32FE30, c, effect_13]
-    - [0x330440, data]
-  - [0x330460, bin] # effect 13 gfx
-  - name: effect_14
+    - [0x32FE30, c, floating_flower]
+    - [0x330440]
+  - [0x330460, bin] # floating_flower gfx
+  - name: effect_snowflake
     dir: effects
     type: code
     start: 0x330910
     vram: 0xE001C000
     subsegments:
-    - [0x330910, c, effect_14]
-    - [0x330EF0, data]
-  - [0x330F00, bin] # effect 14 gfx
-  - name: effect_15
+    - [0x330910, c, snowflake]
+    - [0x330EF0]
+  - [0x330F00, bin] # snowflake gfx
+  - name: effect_star
     dir: effects
     type: code
     start: 0x331940
     vram: 0xE001E000
     subsegments:
-    - [0x331940, c, effect_15]
-    - [0x332690, data]
-  - [0x3326A0, bin] # effect 15 gfx
-  - name: effect_16
+    - [0x331940, c, star]
+    - [0x332690]
+  - [0x3326A0, bin] # star gfx
+  - name: effect_emote
     dir: effects
     type: code
     start: 0x333EC0
     vram: 0xE0020000
     subsegments:
-    - [0x333EC0, c, effect_16]
-    - [0x334B50, data]
-  - [0x334C70, bin] # effect 16 gfx
-  - name: effect_17
+    - [0x333EC0, c, emote]
+    - [0x334B50]
+  - [0x334C70, bin] # emote gfx
+  - name: effect_sparkles
     dir: effects
     type: code
     start: 0x337240
     vram: 0xE0022000
     subsegments:
-    - [0x337240, c, effect_17]
+    - [0x337240, c, sparkles]
     - [0x337F10, data]
-  - [0x337FC0, bin] # effect 17,34,56,58,132 gfx
-  - name: effect_18
+  - [0x337FC0, bin] # sparkles, stars_shimmer, shimmer_burst, shimmer_wave, pink_sparkles gfx
+  - name: effect_shape_spell
     dir: effects
     type: code
     start: 0x339250
     vram: 0xE0024000
     subsegments:
-    - [0x339250, c, effect_18]
+    - [0x339250, c, shape_spell]
     - [0x339F10, data]
-  - [0x339F60, bin] # effect 18 gfx
-  - name: effect_19
+  - [0x339F60, bin] # shape_spell gfx
+  - name: effect_gather_energy_pink
     dir: effects
     type: code
     start: 0x33B180
     vram: 0xE0026000
     subsegments:
-    - [0x33B180, c, effect_19]
+    - [0x33B180, c, gather_energy_pink]
     - [0x33BB70, data]
-  - [0x33BBD0, bin] # effect 19 gfx
-  - name: effect_20
+  - [0x33BBD0, bin] # gather_energy_pink gfx
+  - name: effect_drop_leaves
     dir: effects
     type: code
     start: 0x33CDF0
     vram: 0xE0028000
     subsegments:
-    - [0x33CDF0, c, effect_20]
+    - [0x33CDF0, c, drop_leaves]
     - [0x33D5D0, data]
-  - [0x33D610, bin] # effect 20,43 gfx
-  - name: effect_21
+  - [0x33D610, bin] # drop_leaves, windy_leaves gfx
+  - name: effect_dust
     dir: effects
     type: code
     start: 0x33E8C0
     vram: 0xE002A000
     subsegments:
-    - [0x33E8C0, c, effect_21]
+    - [0x33E8C0, c, dust]
     - [0x33EFE0, data]
-  - [0x33F000, bin] # effect 21 gfx
-  - name: effect_22
+  - [0x33F000, bin] # dust gfx
+  - name: effect_shattering_stones
     dir: effects
     type: code
     start: 0x33FE80
     vram: 0xE002C000
     subsegments:
-    - [0x33FE80, c, effect_22]
+    - [0x33FE80, c, shattering_stones]
     - [0x3407C0, data]
-  - [0x340880, bin] # effect 22 gfx
-  - name: effect_23
+  - [0x340880, bin] # shattering_stones gfx
+  - name: effect_smoke_ring
     dir: effects
     type: code
     start: 0x3419E0
     vram: 0xE002E000
     subsegments:
-    - [0x3419E0, c, effect_23]
+    - [0x3419E0, c, smoke_ring]
     - [0x342120, data]
-  - name: effect_24
+  - name: effect_damage_stars
     dir: effects
     type: code
     start: 0x342140
     vram: 0xE0030000
     subsegments:
-    - [0x342140, c, effect_24]
+    - [0x342140, c, damage_stars]
     - [0x342FD0, data]
-  - [0x343040, bin] # effect 24,33 gfx
-  - name: effect_25
+  - [0x343040, bin] # damage_stars, stars_burst gfx
+  - name: effect_explosion
     dir: effects
     type: code
     start: 0x343680
     vram: 0xE0032000
     subsegments:
-    - [0x343680, c, effect_25]
+    - [0x343680, c, explosion]
     - [0x343F30, data]
-  - [0x343F70, bin] # effect 25 gfx
-  - name: effect_26
+  - [0x343F70, bin] # explosion gfx
+  - name: effect_lens_flare
     dir: effects
     type: code
     start: 0x344A10
     vram: 0xE0034000
     subsegments:
-    - [0x344A10, c, effect_26]
+    - [0x344A10, c, lens_flare]
     - [0x345190, data]
-  - [0x3451E0, bin] # effect 26 gfx
-  - name: effect_27
+  - [0x3451E0, bin] # lens_flare gfx
+  - name: effect_got_item_outline
     dir: effects
     type: code
     start: 0x3454E0
     vram: 0xE0036000
     subsegments:
-    - [0x3454E0, c, effect_27]
+    - [0x3454E0, c, got_item_outline]
     - [0x345B10, data]
-  - [0x345B40, bin] # effect 27 gfx
-  - name: effect_28
+  - [0x345B40, bin] # got_item_outline gfx
+  - name: effect_spiky_white_aura
     dir: effects
     type: code
     start: 0x34DD20
     vram: 0xE0038000
     subsegments:
-    - [0x34DD20, c, effect_28]
+    - [0x34DD20, c, spiky_white_aura]
     - [0x34E710, data]
-  - [0x34E770, bin] # effect 28 gfx
-  - name: effect_29
+  - [0x34E770, bin] # spiky_white_aura gfx
+  - name: effect_smoke_impact
     dir: effects
     type: code
     start: 0x34EC80
     vram: 0xE003A000
     subsegments:
-    - [0x34EC80, c, effect_29]
+    - [0x34EC80, c, smoke_impact]
     - [0x34F480, data]
-  - name: effect_30
+  - name: effect_damage_indicator
     dir: effects
     type: code
     start: 0x34F4C0
     vram: 0xE003C000
     subsegments:
-    - [0x34F4C0, c, effect_30]
+    - [0x34F4C0, c, damage_indicator]
     - [0x350160, data]
-  - [0x350220, bin] # effect 30 gfx
-  - name: effect_31
+  - [0x350220, bin] # damage_indicator gfx
+  - name: effect_purple_ring
     dir: effects
     type: code
     start: 0x352440
     vram: 0xE003E000
     subsegments:
-    - [0x352440, c, effect_31]
+    - [0x352440, c, purple_ring]
     - [0x352CB0, data]
-  - [0x352CE0, bin] # effect 31 gfx
-  - name: effect_32
+  - [0x352CE0, bin] # purple_ring gfx
+  - name: effect_flame
     dir: effects
     type: code
     start: 0x353300
     vram: 0xE0040000
     subsegments:
-    - [0x353300, c, effect_32]
+    - [0x353300, c, flame]
     - [0x353B40]
-  - [0x353BB0, bin] # effect 32 gfx
-  - name: effect_33
+  - [0x353BB0, bin] # flame gfx
+  - name: effect_stars_burst
     dir: effects
     type: code
     start: 0x3547A0
     vram: 0xE0042000
     subsegments:
-    - [0x3547A0, c, effect_33]
+    - [0x3547A0, c, stars_burst]
     - [0x354F20, data]
-  - name: effect_34
+  - name: effect_stars_shimmer
     dir: effects
     type: code
     start: 0x354F60
     vram: 0xE0044000
     subsegments:
-    - [0x354F60, c, effect_34]
+    - [0x354F60, c, stars_shimmer]
     - [0x355D10, data]
-  - name: effect_35
+  - name: effect_rising_bubble
     dir: effects
     type: code
     start: 0x355EE0
     vram: 0xE0046000
     subsegments:
-    - [0x355EE0, c, effect_35]
+    - [0x355EE0, c, rising_bubble]
     - [0x3564E0, data]
-  - [0x356530, bin] # effect 35 gfx
-  - name: effect_36
+  - [0x356530, bin] # rising_bubble gfx
+  - name: effect_ring_blast
     dir: effects
     type: code
     start: 0x356980
     vram: 0xE0048000
     subsegments:
-    - [0x356980, c, effect_36]
+    - [0x356980, c, ring_blast]
     - [0x357380, data]
-  - [0x3573A0, bin] # effect 36 gfx
-  - name: effect_37
+  - [0x3573A0, bin] # ring_blast gfx
+  - name: effect_shockwave
     dir: effects
     type: code
     start: 0x3584C0
     vram: 0xE004A000
     subsegments:
-    - [0x3584C0, c, effect_37]
+    - [0x3584C0, c, shockwave]
     - [0x359320, data]
-  - [0x3593B0, bin] # effect 37,104 gfx
-  - name: effect_38
+  - [0x3593B0, bin] # shockwave, red_impact gfx
+  - name: effect_music_note
     dir: effects
     type: code
     start: 0x359F20
     vram: 0xE004C000
     subsegments:
-    - [0x359F20, c, effect_38]
+    - [0x359F20, c, music_note]
     - [0x35A580, data]
-  - [0x35A5E0, bin] # effect 38 gfx
-  - name: effect_39
+  - [0x35A5E0, bin] # music_note gfx
+  - name: effect_smoke_burst
     dir: effects
     type: code
     start: 0x35B9D0
     vram: 0xE004E000
     subsegments:
-    - [0x35B9D0, c, effect_39]
+    - [0x35B9D0, c, smoke_burst]
     - [0x35BFB0, data]
-  - name: effect_40
+  - name: effect_sweat
     dir: effects
     type: code
     start: 0x35BFD0
     vram: 0xE0050000
     subsegments:
-    - [0x35BFD0, c, effect_40]
+    - [0x35BFD0, c, sweat]
     - [0x35C530, data]
-  - [0x35C550, bin] # effect 40 gfx
-  - name: effect_41
+  - [0x35C550, bin] # sweat gfx
+  - name: effect_sleep_bubble
     dir: effects
     type: code
     start: 0x35CA80
     vram: 0xE0052000
     subsegments:
-    - [0x35CA80, c, effect_41]
+    - [0x35CA80, c, sleep_bubble]
     - [0x35D460, data]
-  - [0x35D510, bin] # effect 41 gfx
-  - name: effect_43
+  - [0x35D510, bin] # sleep_bubble gfx
+  - name: effect_windy_leaves
     dir: effects
     type: code
     start: 0x35DA00
     vram: 0xE0056000
     subsegments:
-    - [0x35DA00, c, effect_43]
+    - [0x35DA00, c, windy_leaves]
     - [0x35E8A0, data]
-  - name: effect_44
+  - name: effect_falling_leaves
     dir: effects
     type: code
     start: 0x35E920
     vram: 0xE0058000
     subsegments:
-    - [0x35E920, c, effect_44]
+    - [0x35E920, c, falling_leaves]
     - [0x35F0A0, data]
-  - [0x35F0E0, bin] # effect 44 gfx
-  - name: effect_45
+  - [0x35F0E0, bin] # falling_leaves gfx
+  - name: effect_stars_spread
     dir: effects
     type: code
     start: 0x3602C0
     vram: 0xE005A000
     subsegments:
-    - [0x3602C0, c, effect_45]
+    - [0x3602C0, c, stars_spread]
     - [0x360A10, data]
-  - [0x360A30, bin] # effect 45 gfx
-  - name: effect_46
+  - [0x360A30, bin] # stars_spread gfx
+  - name: effect_steam_burst
     dir: effects
     type: code
     start: 0x360F40
     vram: 0xE005C000
     subsegments:
-    - [0x360F40, c, effect_46]
+    - [0x360F40, c, steam_burst]
     - [0x361640, data]
-  - [0x361670, bin] # effect 46 gfx
-  - name: effect_47
+  - [0x361670, bin] # steam_burst gfx
+  - name: effect_stars_orbiting
     dir: effects
     type: code
     start: 0x3625C0
     vram: 0xE005E000
     subsegments:
-    - [0x3625C0, c, effect_47]
+    - [0x3625C0, c, stars_orbiting]
     - [0x362C30, data]
-  - [0x362C50, bin] # effect 47 gfx
-  - name: effect_48
+  - [0x362C50, bin] # stars_orbiting gfx
+  - name: effect_big_snowflakes
     dir: effects
     type: code
     start: 0x363160
     vram: 0xE0060000
     subsegments:
-    - [0x363160, c, effect_48]
+    - [0x363160, c, big_snowflakes]
     - [0x363890, data]
-  - [0x3638C0, bin] # effect 48 gfx
-  - name: effect_49
+  - [0x3638C0, bin] # big_snowflakes gfx
+  - name: effect_debuff
     dir: effects
     type: code
     start: 0x364300
     vram: 0xE0062000
     subsegments:
-    - [0x364300, c, effect_49]
+    - [0x364300, c, debuff]
     - [0x364BC0, data]
-  - [0x364C00, bin] # effect 49 gfx
-  - name: effect_50
+  - [0x364C00, bin] # debuff gfx
+  - name: effect_green_impact
     dir: effects
     type: code
     start: 0x364F10
     vram: 0xE0064000
     subsegments:
-    - [0x364F10, c, effect_50]
+    - [0x364F10, c, green_impact]
     - [0x365970, data]
-  - [0x3659B0, bin] # effect 50 gfx
-  - name: effect_51
+  - [0x3659B0, bin] # green_impact gfx
+  - name: effect_radial_shimmer
     dir: effects
     type: code
     start: 0x366030
     vram: 0xE0066000
     subsegments:
-    - [0x366030, c, effect_51]
+    - [0x366030, c, radial_shimmer]
     - [0x366C80, data]
-  - [0x366D60, bin] # effect 51 gfx
-  - name: effect_52
+  - [0x366D60, bin] # radial_shimmer gfx
+  - name: effect_ending_decals
     dir: effects
     type: code
     start: 0x36A8D0
     vram: 0xE0068000
     subsegments:
-    - [0x36A8D0, c, effect_52]
+    - [0x36A8D0, c, ending_decals]
     - [0x36AE80, data]
-  - [0x36AEE0, bin] # effect 52 gfx
-  - name: effect_53
+  - [0x36AEE0, bin] # ending_decals gfx
+  - name: effect_light_rays
     dir: effects
     type: code
     start: 0x36D020
     vram: 0xE006A000
     subsegments:
-    - [0x36D020, c, effect_53]
+    - [0x36D020, c, light_rays]
     - [0x36DE10, data]
-  - [0x36DF90, bin] # effect 53 gfx
-  - name: effect_54
+  - [0x36DF90, bin] # light_rays gfx
+  - name: effect_lightning
     dir: effects
     type: code
     start: 0x36E1D0
     vram: 0xE006C000
     subsegments:
-    - [0x36E1D0, c, effect_54]
+    - [0x36E1D0, c, lightning]
     - [0x36ED30, data]
-  - [0x36ED60, bin] # effect 54 gfx
-  - name: effect_55
+  - [0x36ED60, bin] # lightning gfx
+  - name: effect_fire_breath
     dir: effects
     type: code
     start: 0x372790
     vram: 0xE006E000
     subsegments:
-    - [0x372790, c, effect_55]
+    - [0x372790, c, fire_breath]
     - [0x373390, data]
-  - [0x3733E0, bin] # effect 55 gfx
-  - name: effect_56
+  - [0x3733E0, bin] # fire_breath gfx
+  - name: effect_shimmer_burst
     dir: effects
     type: code
     start: 0x3740B0
     vram: 0xE0070000
     subsegments:
-    - [0x3740B0, c, effect_56]
+    - [0x3740B0, c, shimmer_burst]
     - [0x374D80, data]
-  - name: effect_57
+  - name: effect_energy_shockwave
     dir: effects
     type: code
     start: 0x374E50
     vram: 0xE0072000
     subsegments:
-    - [0x374E50, c, effect_57]
+    - [0x374E50, c, energy_shockwave]
     - [0x375500, data]
-  - [0x375510, bin] # effect 57 gfx
-  - name: effect_58
+  - [0x375510, bin] # energy_shockwave gfx
+  - name: effect_shimmer_wave
     dir: effects
     type: code
     start: 0x376460
     vram: 0xE0074000
     subsegments:
-    - [0x376460, c, effect_58]
+    - [0x376460, c, shimmer_wave]
     - [0x376FC0, data]
-  - name: effect_59
+  - name: effect_aura
     dir: effects
     type: code
     start: 0x377070
     vram: 0xE0076000
     subsegments:
-    - [0x377070, c, effect_59]
+    - [0x377070, c, aura]
     - [0x377F00, data]
-  - [0x377F80, bin] # effect 59 gfx
-  - name: effect_60
+  - [0x377F80, bin] # aura gfx
+  - name: effect_effect_3C
     dir: effects
     type: code
     start: 0x37A3F0
     vram: 0xE0078000
     subsegments:
-    - [0x37A3F0, c, effect_60]
+    - [0x37A3F0, c, effect_3C]
     - [0x37ACF0, data]
-  - [0x37ADD0, bin] # effect 60 gfx
-  - name: effect_61
+  - [0x37ADD0, bin] # effect_3C gfx
+  - name: effect_effect_3D
     dir: effects
     type: code
     start: 0x37C540
     vram: 0xE007A000
     subsegments:
-    - [0x37C540, c, effect_61]
+    - [0x37C540, c, effect_3D]
     - [0x37D140, data]
-  - [0x37D180, bin] # effect 61 gfx
-  - name: effect_62
+  - [0x37D180, bin] # effect_3D gfx
+  - name: effect_blast
     dir: effects
     type: code
     start: 0x37D490
     vram: 0xE007C000
     subsegments:
-    - [0x37D490, c, effect_62]
+    - [0x37D490, c, blast]
     - [0x37D9A0, data]
-  - [0x37D9D0, bin] # effect 62,66 gfx
-  - name: effect_63
+  - [0x37D9D0, bin] # blast, bombette_breaking gfx
+  - name: effect_fire_flower # should be called fire_flower but we already have a segment with that name TODO rename
     dir: effects
     type: code
     start: 0x37F720
     vram: 0xE007E000
     subsegments:
-    - [0x37F720, c, effect_63]
+    - [0x37F720, c, fire_flower]
     - [0x380350, data]
-  - [0x3803A0, bin] # effect 63 gfx
-  - name: effect_64
+  - [0x3803A0, bin] # fire_flower gfx
+  - name: effect_recover
     dir: effects
     type: code
     start: 0x3812C0
     vram: 0xE0080000
     subsegments:
-    - [0x3812C0, c, effect_64]
+    - [0x3812C0, c, recover]
     - [0x381D80, data]
-  - [0x381E00, bin] # effect 64 gfx
-  - name: effect_65
+  - [0x381E00, bin] # recover gfx
+  - name: effect_disable_x
     dir: effects
     type: code
     start: 0x385640
     vram: 0xE0082000
     subsegments:
-    - [0x385640, c, effect_65]
+    - [0x385640, c, disable_x]
     - [0x386340, data]
-  - [0x3863B0, bin] # effect 65 gfx
-  - name: effect_66
+  - [0x3863B0, bin] # disable_x gfx
+  - name: effect_bombette_breaking
     dir: effects
     type: code
     start: 0x3889D0
     vram: 0xE0084000
     subsegments:
-    - [0x3889D0, c, effect_66]
+    - [0x3889D0, c, bombette_breaking]
     - [0x3897E0, data]
-  - name: effect_67
+  - name: effect_firework
     dir: effects
     type: code
     start: 0x389850
     vram: 0xE0086000
     subsegments:
-    - [0x389850, c, effect_67]
+    - [0x389850, c, firework]
     - [0x38A2F0, data]
-  - [0x38A350, bin] # effect 67 gfx
-  - name: effect_68
+  - [0x38A350, bin] # firework gfx
+  - name: effect_confetti
     dir: effects
     type: code
     start: 0x38ADF0
     vram: 0xE0088000
     subsegments:
-    - [0x38ADF0, c, effect_68]
+    - [0x38ADF0, c, confetti]
     - [0x38BAB0, data]
-  - [0x38BBA0, bin] # effect 68 gfx
-  - name: effect_69
+  - [0x38BBA0, bin] # confetti gfx
+  - name: effect_snowfall
     dir: effects
     type: code
     start: 0x38C5F0
     vram: 0xE008A000
     subsegments:
-    - [0x38C5F0, c, effect_69]
+    - [0x38C5F0, c, snowfall]
     - [0x38D040, data]
-  - [0x38D070, bin] # effect 69 gfx
-  - name: effect_70
+  - [0x38D070, bin] # snowfall gfx
+  - name: effect_effect_46
     dir: effects
     type: code
     start: 0x38DE00
     vram: 0xE008C000
     subsegments:
-    - [0x38DE00, c, effect_70]
+    - [0x38DE00, c, effect_46]
     - [0x38E8F0, data]
-  - [0x38E990, bin] # effect 70 gfx
-  - name: effect_71
+  - [0x38E990, bin] # effect_46 gfx
+  - name: effect_gather_magic
     dir: effects
     type: code
     start: 0x38EE60
     vram: 0xE008E000
     subsegments:
-    - [0x38EE60, c, effect_71]
+    - [0x38EE60, c, gather_magic]
     - [0x38F6F0, data]
-  - [0x38F710, bin] # effect 71 gfx
-  - name: effect_72
+  - [0x38F710, bin] # gather_magic gfx
+  - name: effect_attack_result_text
     dir: effects
     type: code
     start: 0x38F900
     vram: 0xE0090000
     subsegments:
-    - [0x38F900, c, effect_72]
-    - [0x390340, data]
-  - type: group # effect 72 gfx
+    - [0x38F900, c, attack_result_text]
+    - [0x390340]
+  - type: group # attack_result_text gfx
     start: 0x3903D0
     subsegments:
     - [0x3903D0, ia4, battle/lucky, 64, 32]
@@ -2810,424 +2817,424 @@ segments:
     - [0x390FD0, ia4, battle/nice,  64, 32]
     - [0x3913D0, ia4, battle/super, 64, 32]
     - [0x3917D0, bin]
-  - name: effect_73
+  - name: effect_small_gold_sparkle
     dir: effects
     type: code
     start: 0x391D30
     vram: 0xE0092000
     subsegments:
-    - [0x391D30, c, effect_73]
+    - [0x391D30, c, small_gold_sparkle]
     - [0x3923C0]
-  - [0x392440, bin] # effect 73 gfx
-  - name: effect_74
+  - [0x392440, bin] # small_gold_sparkle gfx
+  - name: effect_flashing_box_shockwave
     dir: effects
     type: code
     start: 0x3928D0
     vram: 0xE0094000
     subsegments:
-    - [0x3928D0, c, effect_74]
+    - [0x3928D0, c, flashing_box_shockwave]
     - [0x393080, data]
-  - [0x3930A0, bin] # effect 74 gfx
-  - name: effect_75
+  - [0x3930A0, bin] # flashing_box_shockwave gfx
+  - name: effect_balloon
     dir: effects
     type: code
     start: 0x394280
     vram: 0xE0096000
     subsegments:
-    - [0x394280, c, effect_75]
+    - [0x394280, c, balloon]
     - [0x394660]
-  - [0x394670, bin] # effect 75 gfx
-  - name: effect_76
+  - [0x394670, bin] # balloon gfx
+  - name: effect_floating_rock
     dir: effects
     type: code
     start: 0x395BB0
     vram: 0xE0098000
     subsegments:
-    - [0x395BB0, c, effect_76]
+    - [0x395BB0, c, floating_rock]
     - [0x3960C0, data]
-  - [0x3960F0, bin] # effect 76 gfx
-  - name: effect_77
+  - [0x3960F0, bin] # floating_rock gfx
+  - name: effect_chomp_drop
     dir: effects
     type: code
     start: 0x3965B0
     vram: 0xE009A000
     subsegments:
-    - [0x3965B0, c, effect_77]
+    - [0x3965B0, c, chomp_drop]
     - [0x397010, data]
-  - [0x397040, bin] # effect 77 gfx
-  - name: effect_78
+  - [0x397040, bin] # chomp_drop gfx
+  - name: effect_quizmo_stage
     dir: effects
     type: code
     start: 0x3981F0
     vram: 0xE009C000
     subsegments:
-    - [0x3981F0, c, effect_78]
-  - [0x398BC0, bin] # effect 78 gfx
-  - name: effect_79
+    - [0x3981F0, c, quizmo_stage]
+  - [0x398BC0, bin] # quizmo_stage gfx
+  - name: effect_radiating_energy_orb
     dir: effects
     type: code
     start: 0x39FF20
     vram: 0xE009E000
     subsegments:
-    - [0x39FF20, c, effect_79]
+    - [0x39FF20, c, radiating_energy_orb]
     - [0x3A0D10]
-  - [0x3A0D60, bin] # effect 79 gfx
-  - name: effect_80
+  - [0x3A0D60, bin] # radiating_energy_orb gfx
+  - name: effect_quizmo_answer
     dir: effects
     type: code
     start: 0x3A2290
     vram: 0xE00A0000
     subsegments:
-    - [0x3A2290, c, effect_80]
-  - [0x3A2440, bin] # effect 80 gfx
-  - name: effect_81
+    - [0x3A2290, c, quizmo_answer]
+  - [0x3A2440, bin] # quizmo_answer gfx
+  - name: effect_motion_blur_flame
     dir: effects
     type: code
     start: 0x3A2990
     vram: 0xE00A2000
     subsegments:
-    - [0x3A2990, c, effect_81]
+    - [0x3A2990, c, motion_blur_flame]
     - [0x3A3360]
-  - [0x3A33D0, bin] # effect 81 gfx
-  - name: effect_82
+  - [0x3A33D0, bin] # motion_blur_flame gfx
+  - name: effect_energy_orb_wave
     dir: effects
     type: code
     start: 0x3A37E0
     vram: 0xE00A4000
     subsegments:
-    - [0x3A37E0, c, effect_82]
+    - [0x3A37E0, c, energy_orb_wave]
     - [0x3A42B0]
-  - [0x3A4320, bin] # effect 82 gfx
-  - name: effect_83
+  - [0x3A4320, bin] # energy_orb_wave gfx
+  - name: effect_merlin_house_stars
     dir: effects
     type: code
     start: 0x3A5550
     vram: 0xE00A6000
     subsegments:
-    - [0x3A5550, c, effect_83]
-  - [0x3A5BE0, bin] # effect 83 gfx
-  - name: effect_84
+    - [0x3A5550, c, merlin_house_stars]
+  - [0x3A5BE0, bin] # merlin_house_stars gfx
+  - name: effect_quizmo_audience
     dir: effects
     type: code
     start: 0x3A70F0
     vram: 0xE00A8000
     subsegments:
-    - [0x3A70F0, c, effect_84]
+    - [0x3A70F0, c, quizmo_audience]
     - [0x3A7710]
-  - [0x3A77A0, bin] # effect 84 gfx
-  - name: effect_85
+  - [0x3A77A0, bin] # quizmo_audience gfx
+  - name: effect_butterflies
     dir: effects
     type: code
     start: 0x3AA920
     vram: 0xE00AA000
     subsegments:
-    - [0x3AA920, c, effect_85]
+    - [0x3AA920, c, butterflies]
     - [0x3AAFE0]
-  - [0x3AB030, bin] # effect 85 gfx
-  - name: effect_86
+  - [0x3AB030, bin] # butterflies gfx
+  - name: effect_stat_change
     dir: effects
     type: code
     start: 0x3AEE20
     vram: 0xE00AC000
     subsegments:
-    - [0x3AEE20, c, effect_86]
+    - [0x3AEE20, c, stat_change]
     - [0x3AF5D0]
-  - [0x3AF700, bin] # effect 86 gfx
-  - name: effect_87
+  - [0x3AF700, bin] # stat_change gfx
+  - name: effect_snaking_static
     dir: effects
     type: code
     start: 0x3B2350
     vram: 0xE00AE000
     subsegments:
-    - [0x3B2350, c, effect_87]
-  - [0x3B2D90, bin] # effect 87 gfx
-  - name: effect_88
+    - [0x3B2350, c, snaking_static]
+  - [0x3B2D90, bin] # snaking_static gfx
+  - name: effect_thunderbolt_ring
     dir: effects
     type: code
     start: 0x3B3EB0
     vram: 0xE00B0000
     subsegments:
-    - [0x3B3EB0, c, effect_88]
+    - [0x3B3EB0, c, thunderbolt_ring]
     - [0x3B4690]
-  - [0x3B46A0, bin] # effect 88 gfx
-  - name: effect_89
+  - [0x3B46A0, bin] # thunderbolt_ring gfx
+  - name: effect_squirt
     dir: effects
     type: code
     start: 0x3B4790
     vram: 0xE00B2000
     subsegments:
-    - [0x3B4790, c, effect_89]
+    - [0x3B4790, c, squirt]
     - [0x3B5330]
-  - [0x3B5340, bin] # effect 89 gfx
-  - name: effect_90
+  - [0x3B5340, bin] # squirt gfx
+  - name: effect_water_block
     dir: effects
     type: code
     start: 0x3B5CF0
     vram: 0xE00B4000
     subsegments:
-    - [0x3B5CF0, c, effect_90]
+    - [0x3B5CF0, c, water_block]
     - [0x3B69E0]
-  - [0x3B6BF0, bin] # effect 90 gfx
-  - name: effect_91
+  - [0x3B6BF0, bin] # water_block gfx
+  - name: effect_waterfall
     dir: effects
     type: code
     start: 0x3B7160
     vram: 0xE00B6000
     subsegments:
-    - [0x3B7160, c, effect_91]
+    - [0x3B7160, c, waterfall]
     - [0x3B78B0]
-  - [0x3B78D0, bin] # effect 91 gfx
-  - name: effect_92
+  - [0x3B78D0, bin] # waterfall gfx
+  - name: effect_water_fountain
     dir: effects
     type: code
     start: 0x3B7B80
     vram: 0xE00B8000
     subsegments:
-    - [0x3B7B80, c, effect_92]
+    - [0x3B7B80, c, water_fountain]
     - [0x3B8470]
-  - [0x3B8860, bin] # effect 92 gfx
-  - name: effect_93
+  - [0x3B8860, bin] # water_fountain gfx
+  - name: effect_underwater
     dir: effects
     type: code
     start: 0x3B8BD0
     vram: 0xE00BA000
     subsegments:
-    - [0x3B8BD0, c, effect_93]
+    - [0x3B8BD0, c, underwater]
     - [0x3B9A50]
-  - [0x3B9A70, bin] # effect 93 gfx
-  - name: effect_94
+  - [0x3B9A70, bin] # underwater gfx
+  - name: effect_lightning_bolt
     dir: effects
     type: code
     start: 0x3BA030
     vram: 0xE00BC000
     subsegments:
-    - [0x3BA030, c, effect_94]
+    - [0x3BA030, c, lightning_bolt]
     - [0x3BAC60]
-  - [0x3BAEA0, bin] # effect 94 gfx
-  - name: effect_95
+  - [0x3BAEA0, bin] # lightning_bolt gfx
+  - name: effect_water_splash
     dir: effects
     type: code
     start: 0x3BBF60
     vram: 0xE00BE000
     subsegments:
-    - [0x3BBF60, c, effect_95]
+    - [0x3BBF60, c, water_splash]
     - [0x3BCA50, data]
-  - [0x3BCA90, bin] # effect 95 gfx
-  - name: effect_96
+  - [0x3BCA90, bin] # water_splash gfx
+  - name: effect_snowman_doll
     dir: effects
     type: code
     start: 0x3BCD60
     vram: 0xE00C0000
     subsegments:
-    - [0x3BCD60, c, effect_96]
+    - [0x3BCD60, c, snowman_doll]
     - [0x3BD770, data]
-  - [0x3BD9A0, bin] # effect 96 gfx
-  - name: effect_97
+  - [0x3BD9A0, bin] # snowman_doll gfx
+  - name: effect_fright_jar
     dir: effects
     type: code
     start: 0x3C11D0
     vram: 0xE00C2000
     subsegments:
-    - [0x3C11D0, c, effect_97]
+    - [0x3C11D0, c, fright_jar]
     - [0x3C1B60, data]
-  - [0x3C1BA0, bin] # effect 97 gfx
-  - name: effect_98
+  - [0x3C1BA0, bin] # fright_jar gfx
+  - name: effect_stop_watch
     dir: effects
     type: code
     start: 0x3CADF0
     vram: 0xE00C4000
     subsegments:
-    - [0x3CADF0, c, effect_98]
+    - [0x3CADF0, c, stop_watch]
     - [0x3CB7C0, data]
-  - [0x3CB890, bin] # effect 98 gfx
-  - name: effect_99
+  - [0x3CB890, bin] # stop_watch gfx
+  - name: effect_effect_63
     dir: effects
     type: code
     start: 0x3CC9E0
     vram: 0xE00C6000
     subsegments:
-    - [0x3CC9E0, c, effect_99]
+    - [0x3CC9E0, c, effect_63]
     - [0x3CD670, data]
-  - [0x3CD6E0, bin] # effect 99 gfx
-  - name: effect_100
+  - [0x3CD6E0, bin] # effect_63 gfx
+  - name: effect_throw_spiny
     dir: effects
     type: code
     start: 0x3CF3A0
     vram: 0xE00C8000
     subsegments:
-    - [0x3CF3A0, c, effect_100]
+    - [0x3CF3A0, c, throw_spiny]
     - [0x3CFAB0, data]
-  - [0x3CFAF0, bin] # effect 100 gfx
-  - name: effect_101
+  - [0x3CFAF0, bin] # throw_spiny gfx
+  - name: effect_effect_65
     dir: effects
     type: code
     start: 0x3D0500
     vram: 0xE00CA000
     subsegments:
-    - [0x3D0500, c, effect_101]
+    - [0x3D0500, c, effect_65]
     - [0x3D11B0, data]
-  - [0x3D11E0, bin] # effect 101 gfx
-  - name: effect_102
+  - [0x3D11E0, bin] # effect_65 gfx
+  - name: effect_tubba_heart_attack
     dir: effects
     type: code
     start: 0x3D1690
     vram: 0xE00CC000
     subsegments:
-    - [0x3D1690, c, effect_102]
+    - [0x3D1690, c, tubba_heart_attack]
     - [0x3D2460, data]
-  - [0x3D2580, bin] # effect 102 gfx
-  - name: effect_103
+  - [0x3D2580, bin] # tubba_heart_attack gfx
+  - name: effect_whirlwind
     dir: effects
     type: code
     start: 0x3D2AC0
     vram: 0xE00CE000
     subsegments:
-    - [0x3D2AC0, c, effect_103]
+    - [0x3D2AC0, c, whirlwind]
     - [0x3D3910, data]
-  - [0x3D3930, bin] # effect 103 gfx
-  - name: effect_104
+  - [0x3D3930, bin] # whirlwind gfx
+  - name: effect_red_impact
     dir: effects
     type: code
     start: 0x3D3E20
     vram: 0xE00D0000
     subsegments:
-    - [0x3D3E20, c, effect_104]
+    - [0x3D3E20, c, red_impact]
     - [0x3D4930, data]
-  - name: effect_105
+  - name: effect_floating_cloud_puff
     dir: effects
     type: code
     start: 0x3D4970
     vram: 0xE00D2000
     subsegments:
-    - [0x3D4970, c, effect_105]
+    - [0x3D4970, c, floating_cloud_puff]
     - [0x3D4E70, data]
-  - [0x3D4E90, bin] # effect 105 gfx
-  - name: effect_107
+  - [0x3D4E90, bin] # floating_cloud_puff gfx
+  - name: effect_energy_in_out
     dir: effects
     type: code
     start: 0x3D5020
     vram: 0xE00D6000
     subsegments:
-    - [0x3D5020, c, effect_107]
+    - [0x3D5020, c, energy_in_out]
     - [0x3D5E60, data]
-  - [0x3D5F30, bin] # effect 107 gfx
-  - name: effect_108
+  - [0x3D5F30, bin] # energy_in_out gfx
+  - name: effect_tattle_window
     dir: effects
     type: code
     start: 0x3D67C0
     vram: 0xE00D8000
     subsegments:
-    - [0x3D67C0, c, effect_108]
+    - [0x3D67C0, c, tattle_window]
     - [0x3D6FA0, data]
-  - [0x3D7040, bin] # effect 108 gfx
-  - name: effect_109
+  - [0x3D7040, bin] # tattle_window gfx
+  - name: effect_shiny_flare
     dir: effects
     type: code
     start: 0x3D7240
     vram: 0xE00DA000
     subsegments:
-    - [0x3D7240, c, effect_109]
+    - [0x3D7240, c, shiny_flare]
     - [0x3D7740, data]
-  - [0x3D7770, bin] # effect 109 gfx
-  - name: effect_110
+  - [0x3D7770, bin] # shiny_flare gfx
+  - name: effect_huff_puff_breath
     dir: effects
     type: code
     start: 0x3D7A70
     vram: 0xE00DC000
     subsegments:
-    - [0x3D7A70, c, effect_110]
+    - [0x3D7A70, c, huff_puff_breath]
     - [0x3D80B0, data]
-  - [0x3D80C0, bin] # effect 110 gfx
-  - name: effect_111
+  - [0x3D80C0, bin] # huff_puff_breath gfx
+  - name: effect_cold_breath
     dir: effects
     type: code
     start: 0x3D8720
     vram: 0xE00DE000
     subsegments:
-    - [0x3D8720, c, effect_111]
+    - [0x3D8720, c, cold_breath]
     - [0x3D8F30, data]
-  - [0x3D9100, bin] # effect 111 gfx
-  - name: effect_112
+  - [0x3D9100, bin] # ecold_breath gfx
+  - name: effect_embers
     dir: effects
     type: code
     start: 0x3DB460
     vram: 0xE00E0000
     subsegments:
-    - [0x3DB460, c, effect_112]
+    - [0x3DB460, c, embers]
     - [0x3DBEA0, data]
-  - [0x3DBF40, bin] # effect 112 gfx
-  - name: effect_113
+  - [0x3DBF40, bin] # embers gfx
+  - name: effect_hieroglyphs
     dir: effects
     type: code
     start: 0x3DC310
     vram: 0xE00E2000
     subsegments:
-    - [0x3DC310, c, effect_113]
+    - [0x3DC310, c, hieroglyphs]
     - [0x3DCD00, data]
-  - [0x3DCD50, bin] # effect 113 gfx
-  - name: effect_114
+  - [0x3DCD50, bin] # hieroglyphs gfx
+  - name: effect_misc_particles
     dir: effects
     type: code
     start: 0x3DE000
     vram: 0xE00E4000
     subsegments:
-    - [0x3DE000, c, effect_114]
+    - [0x3DE000, c, misc_particles]
     - [0x3DED90, data]
-  - [0x3DEE60, bin] # effect 114 gfx
-  - name: effect_115
+  - [0x3DEE60, bin] # misc_particles gfx
+  - name: effect_static_status
     dir: effects
     type: code
     start: 0x3E0930
     vram: 0xE00E6000
     subsegments:
-    - [0x3E0930, c, effect_115]
+    - [0x3E0930, c, static_status]
     - [0x3E11B0, data]
-  - [0x3E12D0, bin] # effect 115 gfx
-  - name: effect_116
+  - [0x3E12D0, bin] # static_status gfx
+  - name: effect_moving_cloud
     dir: effects
     type: code
     start: 0x3E1690
     vram: 0xE00E8000
     subsegments:
-    - [0x3E1690, c, effect_116]
+    - [0x3E1690, c, moving_cloud]
     - [0x3E1CC0, data]
-  - [0x3E1CD0, bin] # effect 116 gfx
-  - name: effect_117
+  - [0x3E1CD0, bin] # moving_cloud gfx
+  - name: effect_effect_75
     dir: effects
     type: code
     start: 0x3E1EE0
     vram: 0xE00EA000
     subsegments:
-    - [0x3E1EE0, c, effect_117]
+    - [0x3E1EE0, c, effect_75]
     - [0x3E2930]
-  - [0x3E2960, bin] # effect 117 gfx
-  - name: effect_119
+  - [0x3E2960, bin] # effect_75 gfx
+  - name: effect_firework_rocket
     dir: effects
     type: code
     start: 0x3E43A0
     vram: 0xE010A000
     subsegments:
-    - [0x3E43A0, c, effect_119]
+    - [0x3E43A0, c, firework_rocket]
     - [0x3E5060, data]
-  - [0x3E5350, bin] # effect 119 gfx
-  - name: effect_120
+  - [0x3E5350, bin] # firework_rocket gfx
+  - name: effect_peach_star_beam
     dir: effects
     type: code
     start: 0x3E54C0
     vram: 0xE010C000
     subsegments:
-    - [0x3E54C0, c, effect_120]
+    - [0x3E54C0, c, peach_star_beam]
     - [0x3E5ED0, data]
-  - [0x3E5F30, bin] # effect 120 gfx
-  - name: effect_121
+  - [0x3E5F30, bin] # peach_star_beam gfx
+  - name: effect_chapter_change
     dir: effects
     type: code
     start: 0x3EB4E0
     vram: 0xE010E000
     subsegments:
-    - [0x3EB4E0, c, effect_121]
+    - [0x3EB4E0, c, chapter_change]
     - [0x3EBC30, data]
-  - type: group # effect 121 gfx
+  - type: group # chapter_change gfx
     start: 0x3EBE60
     subsegments:
     - [0x3EBE60, ia8,    world/ch0,               144, 40]
@@ -3244,24 +3251,24 @@ segments:
     - [0x3F6BA0, ia8,    world/ch8,               64,  64]
     - [0x3F7BA0, rgba16, world/chapter_rainbow,   8,  16]
     - [0x3F7CA0, bin]
-  - name: effect_122
+  - name: effect_ice_shard
     dir: effects
     type: code
     start: 0x3F83F0
     vram: 0xE0110000
     subsegments:
-    - [0x3F83F0, c, effect_122]
+    - [0x3F83F0, c, ice_shard]
     - [0x3F8CA0, data]
-  - [0x3F8CC0, bin] # effect 122 gfx
-  - name: effect_123
+  - [0x3F8CC0, bin] # ice_shard gfx
+  - name: effect_spirit_card
     dir: effects
     type: code
     start: 0x3F9E50
     vram: 0xE0112000
     subsegments:
-    - [0x3F9E50, c, effect_123]
+    - [0x3F9E50, c, spirit_card]
     - [0x3FA480, data]
-  - type: group # effect 123,125 gfx
+  - type: group # effect spirit_card, something_rotating gfx
     start: 0x3FA4B0
     subsegments:
     - start: 0x3FA4B0
@@ -3344,41 +3351,41 @@ segments:
       height: 48
     - [0x3FE0B0, palette, star_cards/klevar]
     - [0x3FE0D0, bin]
-  - name: effect_124
+  - name: effect_lil_oink
     dir: effects
     type: code
     start: 0x3FEAE0
     vram: 0xE0114000
     subsegments:
-    - [0x3FEAE0, c, effect_124]
+    - [0x3FEAE0, c, lil_oink]
     - [0x3FF180, data]
-  - [0x3FF250, bin] # effect 124 gfx
-  - name: effect_125
+  - [0x3FF250, bin] # lil_oink gfx
+  - name: effect_something_rotating
     dir: effects
     type: code
     start: 0x402640
     vram: 0xE0116000
     subsegments:
-    - [0x402640, c, effect_125]
+    - [0x402640, c, something_rotating]
     - [0x4032A0, data]
-  - name: effect_126
+  - name: effect_breaking_junk
     dir: effects
     type: code
     start: 0x403400
     vram: 0xE0118000
     subsegments:
-    - [0x403400, c, effect_126]
+    - [0x403400, c, breaking_junk]
     - [0x403BB0, data]
-  - [0x403BF0, bin] # effect 126 gfx
-  - name: effect_127
+  - [0x403BF0, bin] # breaking_junk gfx
+  - name: effect_partner_buff
     dir: effects
     type: code
     start: 0x404220
     vram: 0xE011A000
     subsegments:
-    - [0x404220, c, effect_127]
+    - [0x404220, c, partner_buff]
     - [0x404E40, data]
-  - type: group # effect 127 gfx
+  - type: group # partner_buff gfx
     start: 0x404F40
     subsegments:
     - start: 0x404F40
@@ -3410,75 +3417,74 @@ segments:
       height: 160
     - [0x406540, palette, world/numbers]
     - [0x406740, bin]
-  - name: effect_128
+  - name: effect_quizmo_assistant
     dir: effects
     type: code
     start: 0x406B40
     vram: 0xE011C000
     subsegments:
-    - [0x406B40, c, effect_128]
+    - [0x406B40, c, quizmo_assistant]
     - [0x407040, data]
-  - [0x407080, bin] # effect 128 gfx
-  - name: effect_129
+  - [0x407080, bin] # quizmo_assistant gfx
+  - name: effect_ice_pillar
     dir: effects
     type: code
     start: 0x409990
     vram: 0xE011E000
     subsegments:
-    - [0x409990, c, effect_129]
+    - [0x409990, c, ice_pillar]
     - [0x40A180, data]
-  - [0x40A1C0, bin] # effect 129 gfx
-  - name: effect_130
+  - [0x40A1C0, bin] # ice_pillar gfx
+  - name: effect_sun
     dir: effects
     type: code
     start: 0x40B3F0
     vram: 0xE0120000
     subsegments:
-    - [0x40B3F0, c, effect_130]
+    - [0x40B3F0, c, sun]
     - [0x40BB70, data]
-  - [0x40BBA0, bin] # effect 130 gfx
-  - name: effect_131
+  - [0x40BBA0, bin] # sun gfx
+  - name: effect_star_spirits_energy
     dir: effects
     type: code
     start: 0x40C5A0
     vram: 0xE0122000
     subsegments:
-    - [0x40C5A0, c, effect_131]
+    - [0x40C5A0, c, star_spirits_energy]
     - [0x40D130, data]
-  - [0x40D290, bin] # effect 131 gfx
-  - name: effect_132
+  - [0x40D290, bin] # star_spirits_energy gfx
+  - name: effect_pink_sparkles
     dir: effects
     type: code
     start: 0x412730
     vram: 0xE0124000
     subsegments:
-    - [0x412730, c, effect_132]
+    - [0x412730, c, pink_sparkles]
     - [0x412FD0, data]
-  - name: effect_133
+  - name: effect_star_outline
     dir: effects
     type: code
     start: 0x413360
     vram: 0xE0126000
     subsegments:
-    - [0x413360, c, effect_133]
+    - [0x413360, c, star_outline]
     - [0x413F20, data]
-  - [0x413FA0, bin] # effect 133 gfx
-  - name: effect_134
+  - [0x413FA0, bin] # star_outline gfx
+  - name: effect_effect_86
     dir: effects
     type: code
     start: 0x414BA0
     vram: 0xE0128000
     subsegments:
-    - [0x414BA0, c, effect_134]
-    - [0x415020, data]
-  - [0x415060, bin] # effect 134 gfx
+    - [0x414BA0, c, effect_86]
+    - [0x415020]
+  - [0x415060, bin] # effect_86 gfx
   - type: code
     start: 0x415D90
     vram: 0x802A1000
     subsegments:
     - [0x415D90, c, 415D90]
-    - [0x4200D0, .data, 415D90]
-    - [0x420500]
+    - [0x4200D0]
   - type: code
     start: 0x4219F0
     vram: 0x802A9000
@@ -3487,6 +3493,7 @@ segments:
     overlay: True
     subsegments:
     - [0x4219F0, c, jump]
+    - [0x421FC0]
   - type: code
     start: 0x422000
     vram: 0x802A9000
@@ -3703,207 +3710,317 @@ segments:
     - [0x4313F0, c, stage/kmr_04]
     - [0x431660, c, stage/kmr_05]
     - [0x4318D0, c, stage/kmr_06]
-    - [0x431B80, .data, area]
-    - [0x431FB0, .data, actor/goomba]
-    - [0x433970, .data, actor/spiked_goomba]
-    - [0x4354A0, .data, actor/paragoomba]
-    - [0x438740, .data, stage/kmr_02]
-    - [0x4387A0, .data, stage/kmr_03]
-    - [0x438BF0, .data, stage/kmr_04]
-    - [0x439040, .data, stage/kmr_05]
-    - [0x439440, .data, stage/kmr_06]
-    - [0x4398A0, .rodata, area]
-    - [0x4399AC, .rodata, stage/kmr_02] # FIXME: fucky rodata alignment
-    - [0x4399CC, .rodata, stage/kmr_03]
-    - [0x4399FC, .rodata, stage/kmr_04]
-    - [0x439A2C, .rodata, stage/kmr_05]
-    - [0x439A5C, .rodata, stage/kmr_06]
+    - [0x431B80]
   - dir: battle/area_kmr_part_2
     type: code
     start: 0x439A90
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x439A90, c]
-    - [0x43A5A0, c]
-    - [0x43A7E0, c]
-    - [0x43AA50, c]
-    - [0x43ACC0, c]
-    - [0x43AF30, c]
-    - [0x43B1E0, data]
+    - [0x439A90, c, area]
+    - [0x439A90, c, actor/blue_goomba]
+    - [0x439D10, c, actor/red_goomba]
+    - [0x439F90, c, actor/blue_goomba2]
+    - [0x43A210, c, actor/red_goomba2]
+    - [0x43A4C0, c, actor/goomba_king]
+    - [0x43A5A0, c, actor/goomnut_tree]
+    - [0x43A7E0, c, stage/kmr_02]
+    - [0x43A7E0, c, stage/kmr_03]
+    - [0x43AA50, c, stage/kmr_04]
+    - [0x43ACC0, c, stage/kmr_05]
+    - [0x43AF30, c, stage/kmr_06]
+    - [0x43B1E0]
   - dir: battle/area_kmr_part_3
     type: code
     start: 0x447440
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x447440, c]
-    - [0x4479A0, c]
-    - [0x447C80, c]
-    - [0x447D50, c]
-    - [0x448420, c]
-    - [0x448690, c]
-    - [0x448900, c]
-    - [0x448B70, c]
-    - [0x448E20, c]
-    - [0x448E80, c]
-    - [0x4495F0, data]
+    - [0x447440, c, area]
+    - [0x447440, c, actor/spiked_goomba]
+    - [0x4476C0, c, actor/paragoomba]
+    - [0x4479A0, c, actor/paragoomba2]
+    - [0x447C80, c, actor/jr_troopa]
+    - [0x447C80, c, actor/egg_jr_troopa]
+    - [0x447C80, c, actor/para_jr_troopa]
+    - [0x447D50, c, actor/spiked_para_jr_troopa]
+    - [0x447F10, c, actor/mage_jr_troopa]
+    - [0x447F10, c, actor/final_jr_troopa]
+    - [0x448420, c, stage/kmr_02]
+    - [0x448420, c, stage/kmr_03]
+    - [0x448690, c, stage/kmr_04]
+    - [0x448900, c, stage/kmr_05]
+    - [0x448B70, c, stage/kmr_06]
+    - [0x448E20, c, stage/nok_01]
+    - [0x448E20, c, stage/mim_01]
+    - [0x448E80, c, stage/sam_01]
+    - [0x4491A0, c, stage/mac_01]
+    - [0x4495F0, c, stage/kpa_01]
+    - [0x4495F0]
   - dir: battle/area_mac
     type: code
     start: 0x464490
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x464490, c]
-    - [0x464560, c]
-    - [0x465D90, c]
-    - [0x4661E0, data]
+    - [0x464490, c, actor/chan]
+    - [0x464560, c, actor/lee]
+    - [0x465D90, c, actor/master1]
+    - [0x465D90, c, actor/master2]
+    - [0x465D90, c, actor/master3]
+    - [0x465D90, c, stage/mac_01]
+    - [0x4661E0, c, stage/mac_02]
+    - [0x4661E0, c, area]
+    - [0x4661E0]
   - dir: battle/area_hos
     type: code
     start: 0x47F0B0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x47F0B0, c]
-    - [0x47F0D0, c]
-    - [0x47F570, c]
-    - [0x4800C0, data]
+    - [0x47F0B0, c, actor/goombario_tutor]
+    - [0x47F0D0, c, actor/ember]
+    - [0x47F200, c, actor/magikoopa]
+    - [0x47F570, c, stage/hos_01]
+    - [0x4800C0, c, stage/hos_00]
+    - [0x4800C0, c, stage/hos_02]
+    - [0x4800C0, c, area]
+    - [0x4800C0]
   - dir: battle/area_nok
     type: code
     start: 0x48D1A0
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x48D1A0, c]
-    - [0x48D700, c]
-    - [0x48DA50, c]
-    - [0x48DBC0, c]
-    - [0x48DCF0, c]
-    - [0x48DFC0, data]
+    - [0x48D1A0, c, area]
+    - [0x48D1A0, c, actor/goomba]
+    - [0x48D420, c, actor/paragoomba]
+    - [0x48D700, c, actor/spiked_goomba]
+    - [0x48D980, c, actor/koopa_troopa]
+    - [0x48DA50, c, actor/fuzzy]
+    - [0x48DBC0, c, actor/paratroopa]
+    - [0x48DCF0, c, actor/kent_c_koopa]
+    - [0x48DFC0, c, stage/nok_01]
+    - [0x48DFC0, c, stage/nok_02]
+    - [0x48DFC0, c, stage/nok_03]
+    - [0x48DFC0, c, stage/nok_04]
+    - [0x48DFC0]
   - dir: battle/area_trd_part_1
     type: code
     start: 0x4A10A0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4A10A0, c]
-    - [0x4A1190, c]
-    - [0x4A12C0, c]
-    - [0x4A1530, data]
+    - [0x4A10A0, c, area]
+    - [0x4A10A0, c, actor/bullet_bill]
+    - [0x4A10A0, c, actor/bill_blaster]
+    - [0x4A10A0, c, actor/bob_omb]
+    - [0x4A10C0, c, actor/koopa_troopa]
+    - [0x4A1190, c, actor/paratroopa]
+    - [0x4A12C0, c, stage/trd_01]
+    - [0x4A12C0, c, stage/trd_02]
+    - [0x4A12C0, c, stage/trd_02b]
+    - [0x4A12C0, c, stage/trd_03]
+    - [0x4A1530, c, stage/trd_04]
+    - [0x4A1530, c, stage/trd_05]
+    - [0x4A1530, c, stage/trd_00]
+    - [0x4A1530, c, stage/trd_02c]
+    - [0x4A1530, c, stage/trd_02d]
+    - [0x4A1530, c, stage/trd_05b]
+    - [0x4A1530, c, stage/trd_05c]
+    - [0x4A1530, c, stage/trd_05d]
+    - [0x4A1530, c, stage/trd_05e]
+    - [0x4A1530, c, stage/trd_05f]
+    - [0x4A1530]
   - dir: battle/area_trd_part_2
     type: code
     start: 0x4B11F0
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x4B11F0, c]
-    - [0x4B15D0, c]
-    - [0x4B1D90, c]
-    - [0x4B2550, c]
-    - [0x4B2D10, c]
-    - [0x4B34D0, c]
-    - [0x4B3740, data]
+    - [0x4B11F0, c, area]
+    - [0x4B11F0, c, actor/fake_bowser]
+    - [0x4B15D0, c, actor/green_ninja_koopa]
+    - [0x4B1D90, c, actor/red_ninja_koopa]
+    - [0x4B2550, c, actor/blue_ninja_koopa]
+    - [0x4B2D10, c, actor/yellow_ninja_koopa]
+    - [0x4B34D0, c, stage/trd_00]
+    - [0x4B34D0, c, stage/trd_01]
+    - [0x4B34D0, c, stage/trd_02]
+    - [0x4B34D0, c, stage/trd_02b]
+    - [0x4B34D0, c, stage/trd_03]
+    - [0x4B3740, c, stage/trd_04]
+    - [0x4B3740, c, stage/trd_05]
+    - [0x4B3740, c, stage/trd_05b]
+    - [0x4B3740, c, stage/trd_05c]
+    - [0x4B3740, c, stage/trd_05d]
+    - [0x4B3740, c, stage/trd_05e]
+    - [0x4B3740, c, stage/trd_05f]
+    - [0x4B3740]
   - dir: battle/area_trd_part_3
     type: code
     start: 0x4CF1B0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4CF1B0, c]
-    - [0x4CF3D0, data]
+    - [0x4CF1B0, c, area]
+    - [0x4CF1B0, c, actor/eldstar]
+    - [0x4CF3D0, c, stage/nok_01]
+    - [0x4CF3D0]
   - dir: battle/area_iwa
     type: code
     start: 0x4D01F0
     vram: 0x80218000
+    subalign: 4
     overlay: True
     subsegments:
-    - [0x4D01F0, c]
-    - [0x4D02B0, c]
-    - [0x4D0310, c]
-    - [0x4D0360, c]
-    - [0x4D03B0, c]
-    - [0x4D0400, data]
+    - [0x4D01F0, c, area]
+    - [0x4D01F0, c, actor/cleft]
+    - [0x4D02B0, c, actor/monty_mole]
+    - [0x4D02B0, c, actor/buzzar]
+    - [0x4D0310, c, actor/whacka]
+    - [0x4D0360, c, stage/iwa_01]
+    - [0x4D03B0, c, stage/iwa_01b]
+    - [0x4D03B0, c, stage/iwa_02]
+    - [0x4D0400]
   - dir: battle/area_sbk
     type: code
     start: 0x4DA5E0
     vram: 0x80218000
+    subalign: 16 # BSS alignment hack
     overlay: True
     subsegments:
-    - [0x4DA5E0, c]
-    - [0x4DA6B0, c]
-    - [0x4DA860, data]
+    - [0x4DA5E0, c, actor/pokey]
+    - [0x4DA6B0, c, actor/bandit]
+    - [0x4DA6B0, c, stage/sbk_02]
+    - [0x4DA860, c, area]
+    - [0x4DA860]
   - dir: battle/area_isk_part_1
     type: code
     start: 0x4E2740
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4E2740, c]
-    - [0x4E2810, c]
-    - [0x4E28E0, c]
-    - [0x4E29B0, c]
-    - [0x4E30C0, c]
-    - [0x4E3190, c]
-    - [0x4E3350, data]
+    - [0x4E2740, c, actor/pokey_mummy]
+    - [0x4E2810, c, actor/swooper]
+    - [0x4E28E0, c, actor/buzzy_beetle]
+    - [0x4E29B0, c, actor/stone_chomp]
+    - [0x4E2FF0, c, stage/isk_00]
+    - [0x4E2FF0, c, stage/isk_01]
+    - [0x4E2FF0, c, stage/isk_02]
+    - [0x4E2FF0, c, stage/isk_03]
+    - [0x4E2FF0, c, stage/isk_04]
+    - [0x4E30C0, c, stage/isk_05]
+    - [0x4E3190, c, stage/isk_06]
+    - [0x4E3200, c, stage/isk_07]
+    - [0x4E3200, c, stage/isk_07]
+    - [0x4E3270, c, stage/isk_03b]
+    - [0x4E3270, c, stage/isk_02b]
+    - [0x4E3270, c, stage/isk_02c]
+    - [0x4E3270, c, stage/isk_06b]
+    - [0x4E32E0, c, stage/isk_08]
+    - [0x4E3350, c, area]
+    - [0x4E3350]
   - dir: battle/area_isk_part_2
     type: code
     start: 0x4EF4A0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4EF4A0, c]
-    - [0x4EFCF0, c]
-    - [0x4EFDC0, c]
-    - [0x4EFE90, c]
-    - [0x4EFFE0, data]
+    - [0x4EF4A0, c, actor/chain_chomp]
+    - [0x4EFB30, c, actor/tutankoopa]
+    - [0x4EFCF0, c, stage/isk_00]
+    - [0x4EFCF0, c, stage/isk_01]
+    - [0x4EFCF0, c, stage/isk_02]
+    - [0x4EFCF0, c, stage/isk_02b]
+    - [0x4EFCF0, c, stage/isk_02c]
+    - [0x4EFCF0, c, stage/isk_03]
+    - [0x4EFCF0, c, stage/isk_03b]
+    - [0x4EFCF0, c, stage/isk_04]
+    - [0x4EFDC0, c, stage/isk_05]
+    - [0x4EFE90, c, stage/isk_06]
+    - [0x4EFF00, c, stage/isk_06b]
+    - [0x4EFF70, c, stage/isk_07]
+    - [0x4EFFE0, c, area]
+    - [0x4EFFE0]
   - dir: battle/area_mim
     type: code
     start: 0x4F7BE0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4F7BE0, c]
-    - [0x4F7D50, c]
-    - [0x4F7F40, c]
-    - [0x4F7FA0, data]
+    - [0x4F7BE0, c, actor/forest_fuzzy]
+    - [0x4F7D50, c, actor/bzzap]
+    - [0x4F7F40, c, actor/piranha_plant]
+    - [0x4F7F40, c, stage/mim_01]
+    - [0x4F7FA0, c, area]
+    - [0x4F7FA0]
   - dir: battle/area_arn
     type: code
     start: 0x4FEA50
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x4FEA50, c]
-    - [0x4FED30, c]
-    - [0x4FF010, c]
-    - [0x4FF0D0, c]
-    - [0x4FF1C0, data]
+    - [0x4FEA50, c, actor/hypergoomba]
+    - [0x4FED30, c, actor/hyper_paragoomba]
+    - [0x4FF010, c, actor/hyper_cleft]
+    - [0x4FF0D0, c, actor/tubbas_heart]
+    - [0x4FF1C0, c, actor/tubba_blubba]
+    - [0x4FF1C0, c, stage/arn_01]
+    - [0x4FF1C0, c, stage/arn_02]
+    - [0x4FF1C0, c, stage/arn_03]
+    - [0x4FF1C0, c, stage/arn_04]
+    - [0x4FF1C0, c, stage/arn_05]
+    - [0x4FF1C0, c, stage/arn_06]
+    - [0x4FF1C0, c, area]
+    - [0x4FF1C0]
   - dir: battle/area_dgb
     type: code
     start: 0x50F020
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x50F020, data]
+    - [0x50F020, c, actor/clubba]
+    - [0x50F020, c, actor/tubba_blubba]
+    - [0x50F020, c, stage/dgb_01]
+    - [0x50F020, c, stage/dgb_02]
+    - [0x50F020, c, stage/dgb_03]
+    - [0x50F020, c, stage/dgb_04]
+    - [0x50F020, c, stage/dgb_05]
+    - [0x50F020, c, area]
+    - [0x50F020]
   - dir: battle/area_omo
     type: code
     start: 0x5125D0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x5125D0, c]
-    - [0x5126A0, c]
-    - [0x512770, c]
-    - [0x512840, c]
-    - [0x512910, c]
-    - [0x5129E0, c]
-    - [0x512AB0, c]
-    - [0x512C90, c]
-    - [0x512E50, c]
-    - [0x513380, c]
-    - [0x5134B0, c]
-    - [0x513580, c]
-    - [0x513790, c]
-    - [0x5137E0, data]
+    - [0x5125D0, c, actor/red_shy_guy]
+    - [0x5126A0, c, actor/blue_shy_guy]
+    - [0x512770, c, actor/yellow_shy_guy]
+    - [0x512840, c, actor/pink_shy_guy]
+    - [0x512910, c, actor/green_shy_guy]
+    - [0x5129E0, c, actor/anti_guy]
+    - [0x512AB0, c, actor/medi_guy]
+    - [0x512C90, c, actor/groove_guy]
+    - [0x512E50, c, actor/spy_guy]
+    - [0x513380, c, actor/sky_guy]
+    - [0x5134B0, c, actor/pyro_guy]
+    - [0x513580, c, stage/omo_01]
+    - [0x513790, c, stage/omo_02]
+    - [0x513790, c, stage/omo_03]
+    - [0x513790, c, stage/omo_03b]
+    - [0x513790, c, stage/omo_04]
+    - [0x5137E0, c, stage/omo_05]
+    - [0x5137E0, c, stage/omo_05b]
+    - [0x5137E0, c, stage/omo_06]
+    - [0x5137E0, c, stage/omo_07]
+    - [0x5137E0, c, area]
+    - [0x5137E0]
   - dir: battle/area_omo2
     type: code
     start: 0x52B6A0
@@ -3977,42 +4094,71 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x56E2A0, c]
-    - [0x56E800, c]
-    - [0x56EC50, data]
+    - [0x56E2A0, c, actor/fuzzipede]
+    - [0x56E800, c, stage/kgr_01]
+    - [0x56EC50, c, area]
+    - [0x56EC50]
   - dir: battle/area_jan
     type: code
     start: 0x573920
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x573920, c]
-    - [0x5739F0, c]
-    - [0x573AC0, c]
-    - [0x573C30, c]
-    - [0x573E10, c]
-    - [0x573EE0, data]
+    - [0x573920, c, actor/spear_guy]
+    - [0x5739F0, c, actor/hurt_plant]
+    - [0x573AC0, c, actor/jungle_fuzzy]
+    - [0x573C30, c, actor/m_bush]
+    - [0x573C30, c, actor/medi_guy]
+    - [0x573E10, c, actor/spike_top]
+    - [0x573EE0, c, stage/jan_00]
+    - [0x573EE0, c, stage/jan_01]
+    - [0x573EE0, c, stage/jan_01b]
+    - [0x573EE0, c, stage/jan_02]
+    - [0x573EE0, c, stage/jan_03]
+    - [0x573EE0, c, stage/jan_03b]
+    - [0x573EE0, c, stage/jan_04]
+    - [0x573EE0, c, stage/jan_04b]
+    - [0x573EE0, c, area]
+    - [0x573EE0]
   - dir: battle/area_jan2
     type: code
     start: 0x584940
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x584940, c]
-    - [0x584B90, c]
-    - [0x585000, data]
+    - [0x584940, c, actor/putrid_piranha]
+    - [0x584B90, c, actor/white_magikoopa]
+    - [0x585000, c, stage/jan_00]
+    - [0x585000, c, stage/jan_01]
+    - [0x585000, c, stage/jan_01b]
+    - [0x585000, c, stage/jan_02]
+    - [0x585000, c, stage/jan_03]
+    - [0x585000, c, stage/jan_03b]
+    - [0x585000, c, stage/jan_04]
+    - [0x585000, c, stage/jan_04b]
+    - [0x585000, c, area]
+    - [0x585000]
   - dir: battle/area_kzn
     type: code
     start: 0x58C2F0
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x58C2F0, c]
-    - [0x58C670, c]
-    - [0x58C740, c]
-    - [0x58C920, c]
-    - [0x58CC90, c]
-    - [0x58D100, data]
+    - [0x58C2F0, c, actor/lava_bubble]
+    - [0x58C420, c, actor/putrid_piranha]
+    - [0x58C670, c, actor/spike_top]
+    - [0x58C740, c, actor/medi_guy]
+    - [0x58C920, c, actor/red_magikoopa]
+    - [0x58CC90, c, actor/white_magikoopa]
+    - [0x58D100, c, stage/kzn_01]
+    - [0x58D100, c, stage/kzn_01b]
+    - [0x58D100, c, stage/kzn_02]
+    - [0x58D100, c, stage/kzn_04]
+    - [0x58D100, c, stage/kzn_04b]
+    - [0x58D100, c, stage/kzn_04c]
+    - [0x58D100, c, stage/kzn_05]
+    - [0x58D100, c, area]
+    - [0x58D100]
   - dir: battle/area_kzn2
     type: code
     start: 0x59E6E0
@@ -4213,7 +4359,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x6F0B30, data]
+    - [0x6F0B30, c, goompa]
   - name: battle_partner_goombario
     dir: battle/partner
     type: code
@@ -4222,8 +4368,7 @@ segments:
     overlay: True
     subsegments:
     - [0x6F10E0, c, goombario]
-    - [0x6F2290, .data, goombario]
-    - [0x6F5E30, data, 6F2290] # rodata
+    - [0x6F2290]
   - name: battle_partner_kooper
     dir: battle/partner
     type: code
@@ -4232,7 +4377,7 @@ segments:
     overlay: True
     subsegments:
     - [0x6F5E80, c, kooper]
-    - [0x6F62B0, data]
+    - [0x6F62B0]
   - name: battle_partner_bombette
     dir: battle/partner
     type: code
@@ -4241,7 +4386,7 @@ segments:
     overlay: True
     subsegments:
     - [0x6FAD10, c, bombette]
-    - [0x6FB350, data]
+    - [0x6FB350]
   - name: battle_partner_parakarry
     dir: battle/partner
     type: code
@@ -4538,10 +4683,11 @@ segments:
     overlay: True
     subsegments:
     - [0x72A750, c, insecticide_herb]
-    - start: 0x72B130
+    - start: 0x72AB70
       type: .data
       name: insecticide_herb
       subsegments:
+      - [0x72AB70]
       - [0x72B130, ci4, insecticide_herb, 32, 32]
       - [0x72B330, palette, insecticide_herb]
       - [0x72B350]
@@ -4648,32 +4794,32 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x7345A0, c]
-    - [0x734650, data]
+    - [0x7345A0, c, hammer]
+    - [0x734650]
   - dir: battle/move/spin_smash
     type: code
     start: 0x737890
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x737890, c]
-    - [0x737A20, data]
+    - [0x737890, c, spin_smash]
+    - [0x737A20]
   - dir: battle/move/quake_hammer
     type: code
     start: 0x73AED0
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x73AED0, c]
-    - [0x73AF80, data]
+    - [0x73AED0, c, quake_hammer]
+    - [0x73AF80]
   - dir: battle/move/jump
     type: code
     start: 0x73D860
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x73D860, c]
-    - [0x73D9A0, data]
+    - [0x73D860, c, jump]
+    - [0x73D9A0]
   - dir: battle/move/multibounce
     type: code
     start: 0x740CC0
@@ -4792,8 +4938,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x765C20, c]
-    - [0x765D10, data]
+    - [0x765C20, c, auto_jump]
+    - [0x765D10]
   - dir: battle/move/power_quake
     type: code
     start: 0x767C90
@@ -4808,8 +4954,8 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x76A830, c]
-    - [0x76A920, data]
+    - [0x76A830, c, auto_multibounce]
+    - [0x76A920]
   - dir: battle/move/power_jump
     type: code
     start: 0x76D760
@@ -5002,7 +5148,19 @@ segments:
     subsegments:
     - [0x79D8A0, c]
     - [0x79DE50]
-  - [0x79EF40, bin] # todo identify
+  - type: code # todo identify
+    start: 0x79EF40
+    vram: 0x802A1000
+    overlay: True
+    subsegments:
+    - [0x79EF40, bin]
+  - type: code # todo identify
+    start: 0x7A89A0
+    vram: 0x802A1000
+    overlay: True
+    subsegments:
+    - [0x7A89A0, bin]
+  - [0x7B5960, bin]  # todo identify
   - dir: world/script_api
     type: code
     start: 0x7E0E80
@@ -6475,7 +6633,14 @@ segments:
     subsegments:
     - [0x9691C0,       c, 9691C0]
     - [0x9694C0,       c, 9694C0]
-    - [0x96CC30,   .data, 9694C0]
+    - start: 0x96CC30
+      type: .data
+      name: 9694C0
+      subsegments:
+      - [0x96CC30,   .data, 9694C0]
+      - [0x971F98,     vtx, vtx/971F98]
+      - [0x9722B8,     vtx, vtx/9722B8]
+      - [0x973578]
     - [0x9780D0]
   - name: isk_01
     dir: world/area_isk/isk_01
@@ -9105,303 +9270,307 @@ segments:
     # dgb_00-18, 1x 32767.0, 2 jump tables
     # dgb_00, 2x 32767.0, jump table
     # dgb_08 only
-  - name: C20F40
-    type: .data
+  - name: C20F40 # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
+    type: code
     dir: world/area_dgb
     start: 0xC20F40
     vram: 0x80200000
     subsegments:
-    - [0xC20F40, .data, C20F40] # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
-    - [0xC20F40, vtx, vtx/C20F40]
-    - [0xC21100, vtx, vtx/C21100]
-    - [0xC21130, vtx, vtx/C21130]
-    - [0xC211E0, vtx, vtx/C211E0]
-    - [0xC211F0, vtx, vtx/C211F0]
-    - [0xC21240, vtx, vtx/C21240]
-    - [0xC21360, vtx, vtx/C21360]
-    - [0xC213C0, vtx, vtx/C213C0]
-    - [0xC215A0, vtx, vtx/C215A0]
-    - [0xC21700, vtx, vtx/C21700]
-    - [0xC21770, vtx, vtx/C21770]
-    - [0xC21810, vtx, vtx/C21810]
-    - [0xC21930, vtx, vtx/C21930]
-    - [0xC21AE0, vtx, vtx/C21AE0]
-    - [0xC21B20, vtx, vtx/C21B20]
-    - [0xC21BD0, vtx, vtx/C21BD0]
-    - [0xC21C90, vtx, vtx/C21C90]
-    - [0xC21D30, vtx, vtx/C21D30]
-    - [0xC21DD0, vtx, vtx/C21DD0]
-    - [0xC21E00, vtx, vtx/C21E00]
-    - [0xC21F30, vtx, vtx/C21F30]
-    - [0xC22050, vtx, vtx/C22050]
-    - [0xC22190, vtx, vtx/C22190]
-    - [0xC222D0, vtx, vtx/C222D0]
-    - [0xC22330, vtx, vtx/C22330]
-    - [0xC224A0, vtx, vtx/C224A0]
-    - [0xC224E0, vtx, vtx/C224E0]
-    - [0xC22510, vtx, vtx/C22510]
-    - [0xC22620, vtx, vtx/C22620]
-    - [0xC22780, vtx, vtx/C22780]
-    - [0xC22810, vtx, vtx/C22810]
-    - [0xC22870, vtx, vtx/C22870]
-    - [0xC228F0, vtx, vtx/C228F0]
-    - [0xC22950, vtx, vtx/C22950]
-    - [0xC229F0, vtx, vtx/C229F0]
-    - [0xC22B00, vtx, vtx/C22B00]
-    - [0xC22C00, vtx, vtx/C22C00]
-    - [0xC22E00, vtx, vtx/C22E00]
-    - [0xC22EC0, vtx, vtx/C22EC0]
-    - [0xC230A0, vtx, vtx/C230A0]
-    - [0xC23240, vtx, vtx/C23240]
-    - [0xC23260, vtx, vtx/C23260]
-    - [0xC232A0, vtx, vtx/C232A0]
-    - [0xC23330, vtx, vtx/C23330]
-    - [0xC233D0, vtx, vtx/C233D0]
-    - [0xC23480, vtx, vtx/C23480]
-    - [0xC234B0, vtx, vtx/C234B0]
-    - [0xC235C0, vtx, vtx/C235C0]
-    - [0xC236E0, vtx, vtx/C236E0]
-    - [0xC23810, vtx, vtx/C23810]
-    - [0xC238B0, vtx, vtx/C238B0]
-    - [0xC239D0, vtx, vtx/C239D0]
-    - [0xC23A70, vtx, vtx/C23A70]
-    - [0xC23B70, vtx, vtx/C23B70]
-    - [0xC23BA0, vtx, vtx/C23BA0]
-    - [0xC23C70, vtx, vtx/C23C70]
-    - [0xC23C90, vtx, vtx/C23C90]
-    - [0xC23CE0, vtx, vtx/C23CE0]
-    - [0xC23D20, vtx, vtx/C23D20]
-    - [0xC23D60, vtx, vtx/C23D60]
-    - [0xC23DD0, vtx, vtx/C23DD0]
-    - [0xC23E00, vtx, vtx/C23E00]
-    - [0xC23E20, vtx, vtx/C23E20]
-    - [0xC23E50, vtx, vtx/C23E50]
-    - [0xC23F10, vtx, vtx/C23F10]
-    - [0xC23FD0, vtx, vtx/C23FD0]
-    - [0xC240D0, vtx, vtx/C240D0]
-    - [0xC241D0, vtx, vtx/C241D0]
-    - [0xC24350, vtx, vtx/C24350]
-    - [0xC24510, vtx, vtx/C24510]
-    - [0xC24540, vtx, vtx/C24540]
-    - [0xC24600, vtx, vtx/C24600]
-    - [0xC24690, vtx, vtx/C24690]
-    - [0xC24720, vtx, vtx/C24720]
-    - [0xC24730, vtx, vtx/C24730]
-    - [0xC24840, vtx, vtx/C24840]
-    - [0xC24960, vtx, vtx/C24960]
-    - [0xC24980, vtx, vtx/C24980]
-    - [0xC24AD0, vtx, vtx/C24AD0]
-    - [0xC24AF0, vtx, vtx/C24AF0]
-    - [0xC24CD0, vtx, vtx/C24CD0]
-    - [0xC24EB0, vtx, vtx/C24EB0]
-    - [0xC24F30, vtx, vtx/C24F30]
-    - [0xC24FB0, vtx, vtx/C24FB0]
-    - [0xC25050, vtx, vtx/C25050]
-    - [0xC25250, vtx, vtx/C25250]
-    - [0xC25310, vtx, vtx/C25310]
-    - [0xC25350, vtx, vtx/C25350]
-    - [0xC25500, vtx, vtx/C25500]
-    - [0xC25600, vtx, vtx/C25600]
-    - [0xC256D0, vtx, vtx/C256D0]
-    - [0xC25710, vtx, vtx/C25710]
-    - [0xC257D0, vtx, vtx/C257D0]
-    - [0xC257F0, vtx, vtx/C257F0]
-    - [0xC25900, vtx, vtx/C25900]
-    - [0xC25950, vtx, vtx/C25950]
-    - [0xC25A30, vtx, vtx/C25A30]
-    - [0xC25AB0, vtx, vtx/C25AB0]
-    - [0xC25B30, vtx, vtx/C25B30]
-    - [0xC25BD0, vtx, vtx/C25BD0]
-    - [0xC25C00, vtx, vtx/C25C00]
-    - [0xC25C20, vtx, vtx/C25C20]
-    - [0xC25C80, vtx, vtx/C25C80]
-    - [0xC25CF0, vtx, vtx/C25CF0]
-    - [0xC25D30, vtx, vtx/C25D30]
-    - [0xC25DA0, vtx, vtx/C25DA0]
-    - [0xC25DD0, vtx, vtx/C25DD0]
-    - [0xC25EA0, vtx, vtx/C25EA0]
-    - [0xC25F00, vtx, vtx/C25F00]
-    - [0xC25F90, vtx, vtx/C25F90]
-    - [0xC26040, vtx, vtx/C26040]
-    - [0xC26090, vtx, vtx/C26090]
-    - [0xC26130, vtx, vtx/C26130]
-    - [0xC26250, vtx, vtx/C26250]
-    - [0xC26290, vtx, vtx/C26290]
-    - [0xC262D0, vtx, vtx/C262D0]
-    - [0xC26310, vtx, vtx/C26310]
-    - [0xC26350, vtx, vtx/C26350]
-    - [0xC26390, vtx, vtx/C26390]
-    - [0xC263D0, vtx, vtx/C263D0]
-    - [0xC26410, vtx, vtx/C26410]
-    - [0xC26450, vtx, vtx/C26450]
-    - [0xC26490, vtx, vtx/C26490]
-    - [0xC264D0, vtx, vtx/C264D0]
-    - [0xC26510, vtx, vtx/C26510]
-    - [0xC26550, vtx, vtx/C26550]
-    - [0xC26590, vtx, vtx/C26590]
-    - [0xC265D0, vtx, vtx/C265D0]
-    - [0xC26610, vtx, vtx/C26610]
-    - [0xC26650, vtx, vtx/C26650]
-    - [0xC26690, vtx, vtx/C26690]
-    - [0xC266D0, vtx, vtx/C266D0]
-    - [0xC26710, vtx, vtx/C26710]
-    - [0xC26750, vtx, vtx/C26750]
-    - [0xC26890, vtx, vtx/C26890]
-    - [0xC26A60, vtx, vtx/C26A60]
-    - [0xC26AE0, vtx, vtx/C26AE0]
-    - [0xC26CC0, vtx, vtx/C26CC0]
-    - [0xC26EB0, vtx, vtx/C26EB0]
-    - [0xC26F40, vtx, vtx/C26F40]
-    - [0xC26FB0, vtx, vtx/C26FB0]
-    - [0xC27110, vtx, vtx/C27110]
-    - [0xC27180, vtx, vtx/C27180]
-    - [0xC27220, vtx, vtx/C27220]
-    - [0xC27300, vtx, vtx/C27300]
-    - [0xC273A0, vtx, vtx/C273A0]
-    - [0xC27460, vtx, vtx/C27460]
-    - [0xC27580, vtx, vtx/C27580]
-    - [0xC27740, vtx, vtx/C27740]
-    - [0xC27770, vtx, vtx/C27770]
-    - [0xC27880, vtx, vtx/C27880]
-    - [0xC27A40, vtx, vtx/C27A40]
-    - [0xC27A70, vtx, vtx/C27A70]
-    - [0xC27B80, vtx, vtx/C27B80]
-    - [0xC27D60, vtx, vtx/C27D60]
-    - [0xC27F20, vtx, vtx/C27F20]
-    - [0xC27FC0, vtx, vtx/C27FC0]
-    - [0xC27FE0, vtx, vtx/C27FE0]
-    - [0xC28080, vtx, vtx/C28080]
-    - [0xC28110, vtx, vtx/C28110]
-    - [0xC28190, vtx, vtx/C28190]
-    - [0xC281B0, vtx, vtx/C281B0]
-    - [0xC281E0, vtx, vtx/C281E0]
-    - [0xC282D0, vtx, vtx/C282D0]
-    - [0xC282F0, vtx, vtx/C282F0]
-    - [0xC28310, vtx, vtx/C28310]
-    - [0xC28420, vtx, vtx/C28420]
-    - [0xC284F0, vtx, vtx/C284F0]
-    - [0xC28550, vtx, vtx/C28550]
-    - [0xC28690, vtx, vtx/C28690]
-    - [0xC28720, vtx, vtx/C28720]
-    - [0xC287A0, vtx, vtx/C287A0]
-    - [0xC28890, vtx, vtx/C28890]
-    - [0xC28970, vtx, vtx/C28970]
-    - [0xC28A70, vtx, vtx/C28A70]
-    - [0xC28BB0, vtx, vtx/C28BB0]
-    - [0xC28D90, vtx, vtx/C28D90]
-    - [0xC28F70, vtx, vtx/C28F70]
-    - [0xC29150, vtx, vtx/C29150]
-    - [0xC29330, vtx, vtx/C29330]
-    - [0xC29470, vtx, vtx/C29470]
-    - [0xC294A0, vtx, vtx/C294A0]
-    - [0xC294F0, vtx, vtx/C294F0]
-    - [0xC29540, vtx, vtx/C29540]
-    - [0xC29570, vtx, vtx/C29570]
-    - [0xC295B0, vtx, vtx/C295B0]
-    - [0xC29630, vtx, vtx/C29630]
-    - [0xC29650, vtx, vtx/C29650]
-    - [0xC296C0, vtx, vtx/C296C0]
-    - [0xC29750, vtx, vtx/C29750]
-    - [0xC297F0, vtx, vtx/C297F0]
-    - [0xC298E0, vtx, vtx/C298E0]
-    - [0xC29A40, vtx, vtx/C29A40]
-    - [0xC29AB0, vtx, vtx/C29AB0]
-    - [0xC29BB0, vtx, vtx/C29BB0]
-    - [0xC29CD0, vtx, vtx/C29CD0]
-    - [0xC29E00, vtx, vtx/C29E00]
-    - [0xC29F50, vtx, vtx/C29F50]
-    - [0xC2A080, vtx, vtx/C2A080]
-    - [0xC2A180, vtx, vtx/C2A180]
-    - [0xC2A2C0, vtx, vtx/C2A2C0]
-    - [0xC2A3C0, vtx, vtx/C2A3C0]
-    - [0xC2A540, vtx, vtx/C2A540]
-    - [0xC2A700, vtx, vtx/C2A700]
-    - [0xC2A740, vtx, vtx/C2A740]
-    - [0xC2A790, vtx, vtx/C2A790]
-    - [0xC2A8D0, vtx, vtx/C2A8D0]
-    - [0xC2AAB0, vtx, vtx/C2AAB0]
-    - [0xC2AC90, vtx, vtx/C2AC90]
-    - [0xC2AD20, vtx, vtx/C2AD20]
-    - [0xC2AD70, vtx, vtx/C2AD70]
-    - [0xC2AE50, vtx, vtx/C2AE50]
-    - [0xC2AE70, vtx, vtx/C2AE70]
-    - [0xC2AEB0, vtx, vtx/C2AEB0]
-    - [0xC2AF60, vtx, vtx/C2AF60]
-    - [0xC2AF80, vtx, vtx/C2AF80]
-    - [0xC2B010, vtx, vtx/C2B010]
-    - [0xC2B050, vtx, vtx/C2B050]
-    - [0xC2B220, vtx, vtx/C2B220]
-    - [0xC2B250, vtx, vtx/C2B250]
-    - [0xC2B2D0, vtx, vtx/C2B2D0]
-    - [0xC2B340, vtx, vtx/C2B340]
-    - [0xC2B3C0, vtx, vtx/C2B3C0]
-    - [0xC2B3E0, vtx, vtx/C2B3E0]
-    - [0xC2B410, vtx, vtx/C2B410]
-    - [0xC2B560, vtx, vtx/C2B560]
-    - [0xC2B6D0, vtx, vtx/C2B6D0]
-    - [0xC2B800, vtx, vtx/C2B800]
-    - [0xC2B850, vtx, vtx/C2B850]
-    - [0xC2B8E0, vtx, vtx/C2B8E0]
-    - [0xC2B9B0, vtx, vtx/C2B9B0]
-    - [0xC2BA50, vtx, vtx/C2BA50]
-    - [0xC2BB50, vtx, vtx/C2BB50]
-    - [0xC2BD50, vtx, vtx/C2BD50]
-    - [0xC2BE50, vtx, vtx/C2BE50]
-    - [0xC2BF50, vtx, vtx/C2BF50]
-    - [0xC2BF60, vtx, vtx/C2BF60]
-    - [0xC2BFD0, vtx, vtx/C2BFD0]
-    - [0xC2C080, vtx, vtx/C2C080]
-    - [0xC2C0B0, vtx, vtx/C2C0B0]
-    - [0xC2C0F0, vtx, vtx/C2C0F0]
-    - [0xC2C130, vtx, vtx/C2C130]
-    - [0xC2C1C0, vtx, vtx/C2C1C0]
-    - [0xC2C300, vtx, vtx/C2C300]
-    - [0xC2C4E0, vtx, vtx/C2C4E0]
-    - [0xC2C6C0, vtx, vtx/C2C6C0]
-    - [0xC2C8A0, vtx, vtx/C2C8A0]
-    - [0xC2CA20, vtx, vtx/C2CA20]
-    - [0xC2CBA0, vtx, vtx/C2CBA0]
-    - [0xC2CD20, vtx, vtx/C2CD20]
-    - [0xC2CEA0, vtx, vtx/C2CEA0]
-    - [0xC2CED0, vtx, vtx/C2CED0]
-    - [0xC2CF00, vtx, vtx/C2CF00]
-    - [0xC2CFC0, vtx, vtx/C2CFC0]
-    - [0xC2D140, vtx, vtx/C2D140]
-    - [0xC2D170, vtx, vtx/C2D170]
-    - [0xC2D1A0, vtx, vtx/C2D1A0]
-    - [0xC2D260, vtx, vtx/C2D260]
-    - [0xC2D3E0, vtx, vtx/C2D3E0]
-    - [0xC2D410, vtx, vtx/C2D410]
-    - [0xC2D440, vtx, vtx/C2D440]
-    - [0xC2D500, vtx, vtx/C2D500]
-    - [0xC2D560, vtx, vtx/C2D560]
-    - [0xC2D5C0, vtx, vtx/C2D5C0]
-    - [0xC2D620, vtx, vtx/C2D620]
-    - [0xC2D660, vtx, vtx/C2D660]
-    - [0xC2D6A0, vtx, vtx/C2D6A0]
-    - [0xC2D6E0, vtx, vtx/C2D6E0]
-    - [0xC2D830, vtx, vtx/C2D830]
-    - [0xC2D8F0, vtx, vtx/C2D8F0]
-    - [0xC2DA20, vtx, vtx/C2DA20]
-    - [0xC2DBE0, vtx, vtx/C2DBE0]
-    - [0xC2DCB0, vtx, vtx/C2DCB0]
-    - [0xC2DD50, vtx, vtx/C2DD50]
-    - [0xC2DD90, vtx, vtx/C2DD90]
-    - [0xC2DEA0, vtx, vtx/C2DEA0]
-    - [0xC2DFC0, vtx, vtx/C2DFC0]
-    - [0xC2E020, vtx, vtx/C2E020]
-    - [0xC2E1E0, vtx, vtx/C2E1E0]
-    - [0xC2E2B0, vtx, vtx/C2E2B0]
-    - [0xC2E360, vtx, vtx/C2E360]
-    - [0xC2E390, vtx, vtx/C2E390]
-    - [0xC2E4A0, vtx, vtx/C2E4A0]
-    - [0xC2E5D0, vtx, vtx/C2E5D0]
-    - [0xC2E620, vtx, vtx/C2E620]
-    - [0xC2E7B0, vtx, vtx/C2E7B0]
-    - [0xC2E800, vtx, vtx/C2E800]
-    - [0xC2E8C0, vtx, vtx/C2E8C0]
-    - [0xC2E980, vtx, vtx/C2E980]
-    - [0xC2EA60, vtx, vtx/C2EA60]
+    - [0xC20F40, c, C20F40]
+    - start: 0xC20F40
+      type: .data
+      name: C20F40
+      subsegments:
+      - [0xC20F40, vtx, vtx/C20F40]
+      - [0xC21100, vtx, vtx/C21100]
+      - [0xC21130, vtx, vtx/C21130]
+      - [0xC211E0, vtx, vtx/C211E0]
+      - [0xC211F0, vtx, vtx/C211F0]
+      - [0xC21240, vtx, vtx/C21240]
+      - [0xC21360, vtx, vtx/C21360]
+      - [0xC213C0, vtx, vtx/C213C0]
+      - [0xC215A0, vtx, vtx/C215A0]
+      - [0xC21700, vtx, vtx/C21700]
+      - [0xC21770, vtx, vtx/C21770]
+      - [0xC21810, vtx, vtx/C21810]
+      - [0xC21930, vtx, vtx/C21930]
+      - [0xC21AE0, vtx, vtx/C21AE0]
+      - [0xC21B20, vtx, vtx/C21B20]
+      - [0xC21BD0, vtx, vtx/C21BD0]
+      - [0xC21C90, vtx, vtx/C21C90]
+      - [0xC21D30, vtx, vtx/C21D30]
+      - [0xC21DD0, vtx, vtx/C21DD0]
+      - [0xC21E00, vtx, vtx/C21E00]
+      - [0xC21F30, vtx, vtx/C21F30]
+      - [0xC22050, vtx, vtx/C22050]
+      - [0xC22190, vtx, vtx/C22190]
+      - [0xC222D0, vtx, vtx/C222D0]
+      - [0xC22330, vtx, vtx/C22330]
+      - [0xC224A0, vtx, vtx/C224A0]
+      - [0xC224E0, vtx, vtx/C224E0]
+      - [0xC22510, vtx, vtx/C22510]
+      - [0xC22620, vtx, vtx/C22620]
+      - [0xC22780, vtx, vtx/C22780]
+      - [0xC22810, vtx, vtx/C22810]
+      - [0xC22870, vtx, vtx/C22870]
+      - [0xC228F0, vtx, vtx/C228F0]
+      - [0xC22950, vtx, vtx/C22950]
+      - [0xC229F0, vtx, vtx/C229F0]
+      - [0xC22B00, vtx, vtx/C22B00]
+      - [0xC22C00, vtx, vtx/C22C00]
+      - [0xC22E00, vtx, vtx/C22E00]
+      - [0xC22EC0, vtx, vtx/C22EC0]
+      - [0xC230A0, vtx, vtx/C230A0]
+      - [0xC23240, vtx, vtx/C23240]
+      - [0xC23260, vtx, vtx/C23260]
+      - [0xC232A0, vtx, vtx/C232A0]
+      - [0xC23330, vtx, vtx/C23330]
+      - [0xC233D0, vtx, vtx/C233D0]
+      - [0xC23480, vtx, vtx/C23480]
+      - [0xC234B0, vtx, vtx/C234B0]
+      - [0xC235C0, vtx, vtx/C235C0]
+      - [0xC236E0, vtx, vtx/C236E0]
+      - [0xC23810, vtx, vtx/C23810]
+      - [0xC238B0, vtx, vtx/C238B0]
+      - [0xC239D0, vtx, vtx/C239D0]
+      - [0xC23A70, vtx, vtx/C23A70]
+      - [0xC23B70, vtx, vtx/C23B70]
+      - [0xC23BA0, vtx, vtx/C23BA0]
+      - [0xC23C70, vtx, vtx/C23C70]
+      - [0xC23C90, vtx, vtx/C23C90]
+      - [0xC23CE0, vtx, vtx/C23CE0]
+      - [0xC23D20, vtx, vtx/C23D20]
+      - [0xC23D60, vtx, vtx/C23D60]
+      - [0xC23DD0, vtx, vtx/C23DD0]
+      - [0xC23E00, vtx, vtx/C23E00]
+      - [0xC23E20, vtx, vtx/C23E20]
+      - [0xC23E50, vtx, vtx/C23E50]
+      - [0xC23F10, vtx, vtx/C23F10]
+      - [0xC23FD0, vtx, vtx/C23FD0]
+      - [0xC240D0, vtx, vtx/C240D0]
+      - [0xC241D0, vtx, vtx/C241D0]
+      - [0xC24350, vtx, vtx/C24350]
+      - [0xC24510, vtx, vtx/C24510]
+      - [0xC24540, vtx, vtx/C24540]
+      - [0xC24600, vtx, vtx/C24600]
+      - [0xC24690, vtx, vtx/C24690]
+      - [0xC24720, vtx, vtx/C24720]
+      - [0xC24730, vtx, vtx/C24730]
+      - [0xC24840, vtx, vtx/C24840]
+      - [0xC24960, vtx, vtx/C24960]
+      - [0xC24980, vtx, vtx/C24980]
+      - [0xC24AD0, vtx, vtx/C24AD0]
+      - [0xC24AF0, vtx, vtx/C24AF0]
+      - [0xC24CD0, vtx, vtx/C24CD0]
+      - [0xC24EB0, vtx, vtx/C24EB0]
+      - [0xC24F30, vtx, vtx/C24F30]
+      - [0xC24FB0, vtx, vtx/C24FB0]
+      - [0xC25050, vtx, vtx/C25050]
+      - [0xC25250, vtx, vtx/C25250]
+      - [0xC25310, vtx, vtx/C25310]
+      - [0xC25350, vtx, vtx/C25350]
+      - [0xC25500, vtx, vtx/C25500]
+      - [0xC25600, vtx, vtx/C25600]
+      - [0xC256D0, vtx, vtx/C256D0]
+      - [0xC25710, vtx, vtx/C25710]
+      - [0xC257D0, vtx, vtx/C257D0]
+      - [0xC257F0, vtx, vtx/C257F0]
+      - [0xC25900, vtx, vtx/C25900]
+      - [0xC25950, vtx, vtx/C25950]
+      - [0xC25A30, vtx, vtx/C25A30]
+      - [0xC25AB0, vtx, vtx/C25AB0]
+      - [0xC25B30, vtx, vtx/C25B30]
+      - [0xC25BD0, vtx, vtx/C25BD0]
+      - [0xC25C00, vtx, vtx/C25C00]
+      - [0xC25C20, vtx, vtx/C25C20]
+      - [0xC25C80, vtx, vtx/C25C80]
+      - [0xC25CF0, vtx, vtx/C25CF0]
+      - [0xC25D30, vtx, vtx/C25D30]
+      - [0xC25DA0, vtx, vtx/C25DA0]
+      - [0xC25DD0, vtx, vtx/C25DD0]
+      - [0xC25EA0, vtx, vtx/C25EA0]
+      - [0xC25F00, vtx, vtx/C25F00]
+      - [0xC25F90, vtx, vtx/C25F90]
+      - [0xC26040, vtx, vtx/C26040]
+      - [0xC26090, vtx, vtx/C26090]
+      - [0xC26130, vtx, vtx/C26130]
+      - [0xC26250, vtx, vtx/C26250]
+      - [0xC26290, vtx, vtx/C26290]
+      - [0xC262D0, vtx, vtx/C262D0]
+      - [0xC26310, vtx, vtx/C26310]
+      - [0xC26350, vtx, vtx/C26350]
+      - [0xC26390, vtx, vtx/C26390]
+      - [0xC263D0, vtx, vtx/C263D0]
+      - [0xC26410, vtx, vtx/C26410]
+      - [0xC26450, vtx, vtx/C26450]
+      - [0xC26490, vtx, vtx/C26490]
+      - [0xC264D0, vtx, vtx/C264D0]
+      - [0xC26510, vtx, vtx/C26510]
+      - [0xC26550, vtx, vtx/C26550]
+      - [0xC26590, vtx, vtx/C26590]
+      - [0xC265D0, vtx, vtx/C265D0]
+      - [0xC26610, vtx, vtx/C26610]
+      - [0xC26650, vtx, vtx/C26650]
+      - [0xC26690, vtx, vtx/C26690]
+      - [0xC266D0, vtx, vtx/C266D0]
+      - [0xC26710, vtx, vtx/C26710]
+      - [0xC26750, vtx, vtx/C26750]
+      - [0xC26890, vtx, vtx/C26890]
+      - [0xC26A60, vtx, vtx/C26A60]
+      - [0xC26AE0, vtx, vtx/C26AE0]
+      - [0xC26CC0, vtx, vtx/C26CC0]
+      - [0xC26EB0, vtx, vtx/C26EB0]
+      - [0xC26F40, vtx, vtx/C26F40]
+      - [0xC26FB0, vtx, vtx/C26FB0]
+      - [0xC27110, vtx, vtx/C27110]
+      - [0xC27180, vtx, vtx/C27180]
+      - [0xC27220, vtx, vtx/C27220]
+      - [0xC27300, vtx, vtx/C27300]
+      - [0xC273A0, vtx, vtx/C273A0]
+      - [0xC27460, vtx, vtx/C27460]
+      - [0xC27580, vtx, vtx/C27580]
+      - [0xC27740, vtx, vtx/C27740]
+      - [0xC27770, vtx, vtx/C27770]
+      - [0xC27880, vtx, vtx/C27880]
+      - [0xC27A40, vtx, vtx/C27A40]
+      - [0xC27A70, vtx, vtx/C27A70]
+      - [0xC27B80, vtx, vtx/C27B80]
+      - [0xC27D60, vtx, vtx/C27D60]
+      - [0xC27F20, vtx, vtx/C27F20]
+      - [0xC27FC0, vtx, vtx/C27FC0]
+      - [0xC27FE0, vtx, vtx/C27FE0]
+      - [0xC28080, vtx, vtx/C28080]
+      - [0xC28110, vtx, vtx/C28110]
+      - [0xC28190, vtx, vtx/C28190]
+      - [0xC281B0, vtx, vtx/C281B0]
+      - [0xC281E0, vtx, vtx/C281E0]
+      - [0xC282D0, vtx, vtx/C282D0]
+      - [0xC282F0, vtx, vtx/C282F0]
+      - [0xC28310, vtx, vtx/C28310]
+      - [0xC28420, vtx, vtx/C28420]
+      - [0xC284F0, vtx, vtx/C284F0]
+      - [0xC28550, vtx, vtx/C28550]
+      - [0xC28690, vtx, vtx/C28690]
+      - [0xC28720, vtx, vtx/C28720]
+      - [0xC287A0, vtx, vtx/C287A0]
+      - [0xC28890, vtx, vtx/C28890]
+      - [0xC28970, vtx, vtx/C28970]
+      - [0xC28A70, vtx, vtx/C28A70]
+      - [0xC28BB0, vtx, vtx/C28BB0]
+      - [0xC28D90, vtx, vtx/C28D90]
+      - [0xC28F70, vtx, vtx/C28F70]
+      - [0xC29150, vtx, vtx/C29150]
+      - [0xC29330, vtx, vtx/C29330]
+      - [0xC29470, vtx, vtx/C29470]
+      - [0xC294A0, vtx, vtx/C294A0]
+      - [0xC294F0, vtx, vtx/C294F0]
+      - [0xC29540, vtx, vtx/C29540]
+      - [0xC29570, vtx, vtx/C29570]
+      - [0xC295B0, vtx, vtx/C295B0]
+      - [0xC29630, vtx, vtx/C29630]
+      - [0xC29650, vtx, vtx/C29650]
+      - [0xC296C0, vtx, vtx/C296C0]
+      - [0xC29750, vtx, vtx/C29750]
+      - [0xC297F0, vtx, vtx/C297F0]
+      - [0xC298E0, vtx, vtx/C298E0]
+      - [0xC29A40, vtx, vtx/C29A40]
+      - [0xC29AB0, vtx, vtx/C29AB0]
+      - [0xC29BB0, vtx, vtx/C29BB0]
+      - [0xC29CD0, vtx, vtx/C29CD0]
+      - [0xC29E00, vtx, vtx/C29E00]
+      - [0xC29F50, vtx, vtx/C29F50]
+      - [0xC2A080, vtx, vtx/C2A080]
+      - [0xC2A180, vtx, vtx/C2A180]
+      - [0xC2A2C0, vtx, vtx/C2A2C0]
+      - [0xC2A3C0, vtx, vtx/C2A3C0]
+      - [0xC2A540, vtx, vtx/C2A540]
+      - [0xC2A700, vtx, vtx/C2A700]
+      - [0xC2A740, vtx, vtx/C2A740]
+      - [0xC2A790, vtx, vtx/C2A790]
+      - [0xC2A8D0, vtx, vtx/C2A8D0]
+      - [0xC2AAB0, vtx, vtx/C2AAB0]
+      - [0xC2AC90, vtx, vtx/C2AC90]
+      - [0xC2AD20, vtx, vtx/C2AD20]
+      - [0xC2AD70, vtx, vtx/C2AD70]
+      - [0xC2AE50, vtx, vtx/C2AE50]
+      - [0xC2AE70, vtx, vtx/C2AE70]
+      - [0xC2AEB0, vtx, vtx/C2AEB0]
+      - [0xC2AF60, vtx, vtx/C2AF60]
+      - [0xC2AF80, vtx, vtx/C2AF80]
+      - [0xC2B010, vtx, vtx/C2B010]
+      - [0xC2B050, vtx, vtx/C2B050]
+      - [0xC2B220, vtx, vtx/C2B220]
+      - [0xC2B250, vtx, vtx/C2B250]
+      - [0xC2B2D0, vtx, vtx/C2B2D0]
+      - [0xC2B340, vtx, vtx/C2B340]
+      - [0xC2B3C0, vtx, vtx/C2B3C0]
+      - [0xC2B3E0, vtx, vtx/C2B3E0]
+      - [0xC2B410, vtx, vtx/C2B410]
+      - [0xC2B560, vtx, vtx/C2B560]
+      - [0xC2B6D0, vtx, vtx/C2B6D0]
+      - [0xC2B800, vtx, vtx/C2B800]
+      - [0xC2B850, vtx, vtx/C2B850]
+      - [0xC2B8E0, vtx, vtx/C2B8E0]
+      - [0xC2B9B0, vtx, vtx/C2B9B0]
+      - [0xC2BA50, vtx, vtx/C2BA50]
+      - [0xC2BB50, vtx, vtx/C2BB50]
+      - [0xC2BD50, vtx, vtx/C2BD50]
+      - [0xC2BE50, vtx, vtx/C2BE50]
+      - [0xC2BF50, vtx, vtx/C2BF50]
+      - [0xC2BF60, vtx, vtx/C2BF60]
+      - [0xC2BFD0, vtx, vtx/C2BFD0]
+      - [0xC2C080, vtx, vtx/C2C080]
+      - [0xC2C0B0, vtx, vtx/C2C0B0]
+      - [0xC2C0F0, vtx, vtx/C2C0F0]
+      - [0xC2C130, vtx, vtx/C2C130]
+      - [0xC2C1C0, vtx, vtx/C2C1C0]
+      - [0xC2C300, vtx, vtx/C2C300]
+      - [0xC2C4E0, vtx, vtx/C2C4E0]
+      - [0xC2C6C0, vtx, vtx/C2C6C0]
+      - [0xC2C8A0, vtx, vtx/C2C8A0]
+      - [0xC2CA20, vtx, vtx/C2CA20]
+      - [0xC2CBA0, vtx, vtx/C2CBA0]
+      - [0xC2CD20, vtx, vtx/C2CD20]
+      - [0xC2CEA0, vtx, vtx/C2CEA0]
+      - [0xC2CED0, vtx, vtx/C2CED0]
+      - [0xC2CF00, vtx, vtx/C2CF00]
+      - [0xC2CFC0, vtx, vtx/C2CFC0]
+      - [0xC2D140, vtx, vtx/C2D140]
+      - [0xC2D170, vtx, vtx/C2D170]
+      - [0xC2D1A0, vtx, vtx/C2D1A0]
+      - [0xC2D260, vtx, vtx/C2D260]
+      - [0xC2D3E0, vtx, vtx/C2D3E0]
+      - [0xC2D410, vtx, vtx/C2D410]
+      - [0xC2D440, vtx, vtx/C2D440]
+      - [0xC2D500, vtx, vtx/C2D500]
+      - [0xC2D560, vtx, vtx/C2D560]
+      - [0xC2D5C0, vtx, vtx/C2D5C0]
+      - [0xC2D620, vtx, vtx/C2D620]
+      - [0xC2D660, vtx, vtx/C2D660]
+      - [0xC2D6A0, vtx, vtx/C2D6A0]
+      - [0xC2D6E0, vtx, vtx/C2D6E0]
+      - [0xC2D830, vtx, vtx/C2D830]
+      - [0xC2D8F0, vtx, vtx/C2D8F0]
+      - [0xC2DA20, vtx, vtx/C2DA20]
+      - [0xC2DBE0, vtx, vtx/C2DBE0]
+      - [0xC2DCB0, vtx, vtx/C2DCB0]
+      - [0xC2DD50, vtx, vtx/C2DD50]
+      - [0xC2DD90, vtx, vtx/C2DD90]
+      - [0xC2DEA0, vtx, vtx/C2DEA0]
+      - [0xC2DFC0, vtx, vtx/C2DFC0]
+      - [0xC2E020, vtx, vtx/C2E020]
+      - [0xC2E1E0, vtx, vtx/C2E1E0]
+      - [0xC2E2B0, vtx, vtx/C2E2B0]
+      - [0xC2E360, vtx, vtx/C2E360]
+      - [0xC2E390, vtx, vtx/C2E390]
+      - [0xC2E4A0, vtx, vtx/C2E4A0]
+      - [0xC2E5D0, vtx, vtx/C2E5D0]
+      - [0xC2E620, vtx, vtx/C2E620]
+      - [0xC2E7B0, vtx, vtx/C2E7B0]
+      - [0xC2E800, vtx, vtx/C2E800]
+      - [0xC2E8C0, vtx, vtx/C2E8C0]
+      - [0xC2E980, vtx, vtx/C2E980]
+      - [0xC2EA60, vtx, vtx/C2EA60]
   - name: dgb_02
     dir: world/area_dgb/dgb_02
     type: code
@@ -10870,8 +11039,7 @@ segments:
     - [0xDFE5B0, data]
     - [0xE019E0, data]
     - [0xE04180, data]
-    - [0xE052C0, data]
-    - [0xE05300]
+    - [0xE052C0]
   - name: end_01
     dir: world/area_end/end_01
     type: code
@@ -11333,7 +11501,8 @@ segments:
     - [0xEE65B0, c]
     - [0xEE70C0, c]
     - [0xEE8940, c]
-    - [0xEE8970, data] # Has rodata followed by a script...but doesn't seem to be a new segment
+    - [0xEE8970, data]
+    - [0xEEB900]
   - type: code
     start: 0xEED100
     vram: 0x80240000

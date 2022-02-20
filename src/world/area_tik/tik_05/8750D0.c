@@ -1,6 +1,6 @@
 #include "tik_05.h"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_05/8750D0", func_80240310_8750D0);
+#include "world/common/UnkPosFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_05/8750D0", func_80240680_875440);
 

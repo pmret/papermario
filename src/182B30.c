@@ -1,6 +1,15 @@
 #include "common.h"
 #include "sprite.h"
+#include "effects.h"
 #include "battle/battle.h"
+
+void func_80255FE0(s32, void*);
+void func_802571F0(s32, Actor*);
+void update_player_actor_shadow(void);
+void func_8025950C(ActorPart*, s32, s32);
+void func_802597B0(ActorPart*, s32, s32);
+void func_8025C918(void);
+void func_8025CD40(void);
 
 s32 func_80254250(void) {
     s32 ret;
@@ -18,13 +27,12 @@ s32 func_80254250(void) {
     return ret;
 }
 
-void mtx_mirror_y(Matrix4f arg0) {
-
-    guMtxIdentF(arg0);
-    (arg0)[0][0] = 1.0f;
-    (arg0)[1][1] = -1.0f;
-    (arg0)[2][2] = 1.0f;
-    (arg0)[3][3] = 1.0f;
+void mtx_mirror_y(Matrix4f mtx) {
+    guMtxIdentF(mtx);
+    mtx[0][0] = 1.0f;
+    mtx[1][1] = -1.0f;
+    mtx[2][2] = 1.0f;
+    mtx[3][3] = 1.0f;
 }
 
 void enable_actor_blur(Actor* actor) {
@@ -314,9 +322,9 @@ void func_80254C50(Actor* actor) {
                 guMtxCatF(sp258, sp1D8, sp218);
                 temp_s0_2 = partTable->opacity;
                 partTable->opacity = phi_s6 - (sp29C * phi_s4);
-                func_802591EC(0, partTable, clamp_angle(scale + 0xB4), &sp218, 1);
+                func_802591EC(0, partTable, clamp_angle(scale + 180), &sp218, 1);
                 partTable->opacity = temp_s0_2;
-            } 
+            }
         }
     }
 }
@@ -389,16 +397,16 @@ void func_802552EC(s32 arg0, Actor* actor) {
     guMtxCatF(sp18, sp58, sp198);
     guMtxCatF(sp198, sp98, spD8);
     guScaleF(sp118, actor->scale.x * SPRITE_PIXEL_SCALE * actor->scalingFactor,
-                    actor->scale.y * SPRITE_PIXEL_SCALE * actor->scalingFactor, 
+                    actor->scale.y * SPRITE_PIXEL_SCALE * actor->scalingFactor,
                     actor->scale.z * SPRITE_PIXEL_SCALE);
     guMtxCatF(sp118, spD8, sp298);
 
     numParts = actor->numParts;
     partTable = actor->partsTable;
     for (i = 0; i < numParts; i++) {
-        if ((partTable->idleAnimations == NULL) || (partTable->flags & ACTOR_PART_FLAG_2)) {  
+        if ((partTable->idleAnimations == NULL) || (partTable->flags & ACTOR_PART_FLAG_2)) {
             partTable = partTable->nextPart;
-            continue; 
+            continue;
         }
 
         decorationTable = partTable->decorationTable;
@@ -516,7 +524,9 @@ void func_8025593C(Actor* actor) {
     func_802550BC(0, actor);
 }
 
-void func_8025595C(Actor* actor) {
+void func_8025595C(void* data) {
+    Actor* actor = data;
+
     func_802552EC(0, actor);
 }
 
@@ -524,12 +534,14 @@ void func_8025597C(Actor* actor) {
     func_802550BC(1, actor);
 }
 
-void func_8025599C(Actor* actor) {
+void func_8025599C(void* data) {
+    Actor* actor = data;
+
     func_802552EC(1, actor);
 }
 
 void update_actor_shadow(s32 arg0, Actor* actor) {
-    Camera* camera = &gCameras[1];
+    Camera* camera = &gCameras[CAM_BATTLE];
     ActorPart* actorPart;
     Shadow* shadow;
     s32 numParts;
@@ -541,8 +553,8 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
     s32 i;
 
     if (actor != NULL) {
-        shadow = get_shadow_by_index((s32) actor->shadow);
-        shadow->flags |= SHADOW_FLAGS_1;
+        shadow = get_shadow_by_index(actor->shadow.id);
+        shadow->flags |= SHADOW_FLAGS_HIDDEN;
         if (!(actor->flags & ACTOR_FLAG_DISABLED)) {
             if (actor->flags & ACTOR_FLAG_10000000) {
                 if (arg0 == 0) {
@@ -590,9 +602,9 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                     actorPart->currentPos.y = y2;
                     actorPart->currentPos.z = z2;
 
-                    if (!(actorPart->flags & SHADOW_FLAGS_4)) {
+                    if (!(actorPart->flags & ACTOR_PART_FLAG_4)) {
                         shadow = get_shadow_by_index(actorPart->shadowIndex);
-                        shadow->flags &= ~SHADOW_FLAGS_1;
+                        shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
                         x1 = actorPart->currentPos.x;
                         if (!(actor->flags & ACTOR_FLAG_HP_OFFSET_BELOW)) {
                             y1 = actorPart->currentPos.y + 12.0;
@@ -605,7 +617,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                         npc_raycast_down_sides(0, &x1, &y1, &z1, &dist);
 
                         if (200.0f < dist) {
-                            shadow->flags |= SHADOW_FLAGS_1;
+                            shadow->flags |= SHADOW_FLAGS_HIDDEN;
                         }
                         shadow->position.x = x1;
                         shadow->position.y = y1;
@@ -621,7 +633,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                 actorPart = actorPart->nextPart;
             }
 
-            shadow = get_shadow_by_index((s32) actor->shadow);
+            shadow = get_shadow_by_index(actor->shadow.id);
             if (!(actor->flags & ACTOR_FLAG_NO_SHADOW)) {
                 shadow->flags &= ~ACTOR_FLAG_DISABLED;
             }
@@ -638,7 +650,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
             npc_raycast_down_sides(0, &x1, &y1, &z1, &dist);
 
             if (200.0f < dist) {
-                shadow->flags |= SHADOW_FLAGS_1;
+                shadow->flags |= SHADOW_FLAGS_HIDDEN;
             }
             shadow->position.x = x1;
             shadow->position.y = y1;
@@ -650,7 +662,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
     }
 }
 
-s32 update_enemy_shadows(void) {
+void update_enemy_shadows(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 i;
 
@@ -658,8 +670,6 @@ s32 update_enemy_shadows(void) {
         update_actor_shadow(0, battleStatus->enemyActors[i]);
     }
 }
-
-void update_player_actor_shadow(void);
 
 void update_hero_shadows(void) {
     update_actor_shadow(1, gBattleStatus.partnerActor);
@@ -673,19 +683,21 @@ INCLUDE_ASM(s32, "182B30", func_80255FE0);
 
 INCLUDE_ASM(s32, "182B30", func_802571F0);
 
-void func_80257B28(s32 arg0) {
-    func_80255FE0(0, arg0);
+void func_80257B28(void* data) {
+    func_80255FE0(0, data);
 }
 
-void func_80257B48(s32 arg0) {
-    func_80255FE0(1, arg0);
+void func_80257B48(void* data) {
+    func_80255FE0(1, data);
 }
 
-void func_80257B68(Actor* actor) {
+void func_80257B68(void* data) {
+    Actor* actor = data;
+
     func_802571F0(0, actor);
 }
 
-void func_80257B88(void) {
+void func_80257B88(void* data) {
     func_802571F0(1, gBattleStatus.partnerActor);
 }
 
@@ -703,13 +715,13 @@ void update_player_actor_shadow(void) {
         func_802549F4(player);
     }
 
-    shadow = get_shadow_by_index(player->shadow);
-    shadow->flags &= ~SHADOW_FLAGS_1;
+    shadow = get_shadow_by_index(player->shadow.id);
+    shadow->flags &= ~SHADOW_FLAGS_HIDDEN;
 
     if (!battleStatus->outtaSightActive) {
-        shadow->unk_05 = 128;
+        shadow->alpha = 128;
     } else {
-        shadow->unk_05 = 40;
+        shadow->alpha = 40;
     }
 
     distance = 32767.0f;
@@ -719,7 +731,7 @@ void update_player_actor_shadow(void) {
     npc_raycast_down_sides(0, &x, &y, &z, &distance);
 
     if (distance > 200.0f) {
-        shadow->flags |= SHADOW_FLAGS_1;
+        shadow->flags |= SHADOW_FLAGS_HIDDEN;
     }
     shadow->position.x = x;
     shadow->position.y = y;
@@ -751,19 +763,19 @@ INCLUDE_ASM(s32, "182B30", func_802597B0);
 
 INCLUDE_ASM(s32, "182B30", func_8025995C);
 
-void func_80259A48(s32 arg0, ActorPart* arg1, s32 arg2, s32 arg3) {
-    DecorationTable* decorationTable = arg1->decorationTable;
+void func_80259A48(s32 arg0, ActorPart* part, s32 arg2, s32 arg3) {
+    DecorationTable* decorationTable = part->decorationTable;
 
     if (decorationTable->unk_6C1 != 0) {
-        arg1->verticalStretch = 1;
-        arg1->unkOffset[0] = 0;
-        arg1->unkOffset[1] = 0;
+        part->verticalStretch = 1;
+        part->unkOffset[0] = 0;
+        part->unkOffset[1] = 0;
         decorationTable->unk_6C1 = 0;
     }
     if (arg0 == 0) {
-        func_802597B0(arg1, arg2, arg3);
+        func_802597B0(part, arg2, arg3);
     } else {
-        func_8025950C(arg1, arg2, arg3);
+        func_8025950C(part, arg2, arg3);
     }
 }
 
@@ -899,7 +911,8 @@ void func_8025D158(ActorPart* part, s32 decorationIndex) {
 INCLUDE_ASM(s32, "182B30", func_8025D160);
 
 void func_8025D290(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->unk_0C->unk_2C = 5;
+    // TODO cast to appropriate struct data type once we know what it is
+    ((s32*) part->decorationTable->unk_8B0[decorationIndex]->data)[11] = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D2B0);
@@ -916,25 +929,26 @@ void func_8025D4A0(ActorPart* part, s32 decorationIndex) {
 INCLUDE_ASM(s32, "182B30", func_8025D4C8);
 
 void func_8025D620(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->unk_0C->unk_2C = 5;
+    // TODO cast to appropriate struct data type once we know what it is
+    ((s32*) part->decorationTable->unk_8B0[decorationIndex]->data)[11] = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D640);
 
 void func_8025D6FC(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->unk_00 |= 0x10;
+    part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D71C);
 
 void func_8025D810(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->unk_00 |= 0x10;
+    part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D830);
 
 void func_8025D8EC(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->unk_8B0[decorationIndex]->unk_00 |= 0x10;
+    part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D90C);
@@ -949,13 +963,13 @@ void func_8025DBC8(ActorPart* part, s32 decorationIndex) {
 
 INCLUDE_ASM(s32, "182B30", func_8025DBD0);
 
-void func_8025DD40(ActorPart* actorPart, s32 decorationIndex) {
-    actorPart->decorationTable->unk_8B0[decorationIndex]->unk_0C->unk_2C = 5;
+void func_8025DD40(ActorPart* part, s32 decorationIndex) {
+    // TODO cast to appropriate struct data type once we know what it is
+    ((s32*) part->decorationTable->unk_8B0[decorationIndex]->data)[11] = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025DD60);
 
-void func_8025DE88(ActorPart* actorPart, s32 decorationIndex) {
-    actorPart->decorationTable->unk_8B0[decorationIndex]->unk_00 |= 0x10;
+void func_8025DE88(ActorPart* part, s32 decorationIndex) {
+    part->decorationTable->unk_8B0[decorationIndex]->flags |= 0x10;
 }
-

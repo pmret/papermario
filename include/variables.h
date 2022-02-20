@@ -17,9 +17,9 @@ extern CollisionStatus gCollisionStatus;
 extern GameStatus gGameStatus;
 extern GameStatus* gGameStatusPtr;
 extern s32 gRandSeed;
-extern StaticItem gItemTable[364];
+extern ItemData gItemTable[364];
 extern UNK_FUN_PTR(gCurrentUpdateFunction);
-extern StaticMove gMoveTable[185];
+extern MoveData gMoveTable[185];
 
 extern s32 gBattleState;
 extern BattleStatus gBattleStatus;
@@ -79,11 +79,12 @@ extern s8 D_800A0900;
 extern f32 D_800F7B60[];
 extern s16 D_800F7B80;
 extern EncounterStatus gCurrentEncounter;
-extern s8* D_801512F0;
+extern u8* D_801512F0;
 extern s16 D_80151308;
 extern s32 D_80151310;
 
 extern s32 D_8010C92C;
+extern s32 D_8010C950;
 extern s16 D_8010CD00;
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
@@ -95,17 +96,17 @@ extern MessagePrintState* gCurrentPrintContext;
 extern s32 D_802DB264;
 extern MessagePrintState* D_802DB268;
 
-extern StaticShadowData D_802E98BC;
-extern StaticShadowData D_802E98E0;
-extern StaticShadowData D_802E9904;
-extern s32 D_802EB390;
-extern s32 D_802EB394;
-extern MessagePrintState* D_802EB398;
-extern MessagePrintState* D_802EB39C;
+extern ShadowBlueprint CircularShadowA;
+extern ShadowBlueprint CircularShadowB;
+extern ShadowBlueprint SquareShadow;
+extern s32 SaveBlockTutorialMessagePrinterClosed;
+extern s32 SaveBlockResultMessagePrinterClosed;
+extern MessagePrintState* SaveBlockTutorialMessagePrinter;
+extern MessagePrintState* SaveBlockResultMessagePrinter;
 extern s32 D_802E99DC;
 
 extern Entity* D_802EB3A0;
-extern s32 D_8015C7D0[3]; // not size 3
+extern s32 CreateEntityVarArgBuffer[3]; // not size 3
 
 extern f32 D_800F7B70[4];
 
@@ -149,86 +150,13 @@ extern s32 D_800A0964;
 extern s8 D_800A0B94;
 extern s16 D_800A0BB8;
 
+extern SpriteShadingProfile* D_801512B0;
 extern SpriteShadingProfile* D_80151328;
-
 
 extern Window gWindows[64];
 
 extern s32 D_802A3838;
 
-// Pause
-extern s32 gPauseMenuHeldButtons;
-extern s32 gPauseMenuPressedButtons;
-extern s32 gPauseMenuCurrentDescMsg;
-extern s32* gPauseMenuCurrentDescIconScript;
-extern s32 D_802700D0;
-
-extern s8 gPauseMenuCurrentTab;
-extern char D_802700D[8];
-extern s32 D_802700E0;
-extern s32 gPauseMenuCommonIconIDs[8];
-extern s32 gPauseMenuTabIconIDs[6];
-extern s32 gPauseMenuMsgs[348];
-extern s32 gPauseMenuIconScripts[8];
-extern MenuPanel gPauseMenuPanels[7];
-extern s32 gPauseMenuCursorPosX;
-extern s32 gPauseMenuCursorPosY;
-extern s32 gPauseMenuCursorOpacity;
-extern s32 gPauseMenuTargetPosX;
-extern s32 gPauseMenuTargetPosY;
-extern s32 gPauseMenuCursorTargetOpacity;
-extern u8 gPauseMenuTextScrollInterpEasingLUT[16];
-extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
-extern s32 D_80270700[1];
-extern f32 pause_map_cameraX;
-extern f32 pause_map_cameraY;
-extern s32 pause_map_marioX;
-extern s32 pause_map_marioY;
-extern f32 pause_map_targetX;
-extern f32 pause_map_targetY;
-extern s32 pause_map_cursorCurrentOption;
-extern s32 pause_map_cursorCurrentOptionCopy;
-extern s32 pause_map_spacesInSnapRange;
-
-
-extern PauseMapSpace pause_map_spaces[34];
-extern MenuWindowBP pause_map_windowBlueprints[7];
-// Badges
-extern s32 gBadgeMenuCurrentScrollPos;
-extern s32 gBadgeMenuTargetScrollPos;
-extern s16 gBadgeMenuItemIDs[128];
-extern s32 gBadgeMenuCurrentPage;
-extern PauseItemPage gBadgeMenuPages[20];
-extern s32 gBadgeMenuSelectedIndex;
-extern s32 D_8027037C;
-extern s32 gBadgeMenuSelectedItemID;
-extern s16 gBadgeMenuNumItems;
-extern s32 D_80270388;
-extern s32 D_80270394;
-extern s32 gBadgeMenuLevel;
-extern s32 gBadgeMenuCurrentTab;
-extern s32 gBadgeMenuBShowNotEnoughBP;
-extern s32 D_802703A4;
-extern s32 gBadgeMenuIconIDs[22];
-extern MenuWindowBP gBadgeMenuWindowBPs[1];
-
-// Items
-extern s16 gItemMenuItemIDs[100];
-extern s32 gItemMenuCurrentPage;
-extern PauseItemPage gItemMenuPages[20];
-extern s32 gItemMenuSelectedIndex;
-extern s32 gItemMenuSelectedItemID;
-extern s16 gItemMenuNumItems;
-extern s32 D_802705D0;
-extern s32 gItemMenuCurrentScrollPos;
-extern s32 gItemMenuTargetScrollPos;
-extern s32 D_802705DC;
-extern s32 gItemMenuLevel;
-extern s32 gItemMenuCurrentTab;
-extern s32 gItemMenuScrollUpIcon;
-
-// Stats
-extern s32 gStatsMenuIconIDs[12];
 extern s32 gGameState;
 extern s16 gNpcCount;
 extern s32 gOverrideFlags;
@@ -266,9 +194,10 @@ extern s16 gCurrentDoorSoundsSet;
 extern s32 D_800D9620;
 extern UNK_TYPE D_800E92D8;
 extern UNK_TYPE D_80147574;
+extern s8 D_8014C248[];
 
 extern UNK_FUN_PTR(D_8010C920);
-extern s32 D_8010C940;
+extern UNK_FUN_PTR(D_8010C940);
 extern Entity* D_8010C954;
 extern UNK_FUN_PTR(D_8010C958);
 extern s32 D_8010C95C;
@@ -283,7 +212,7 @@ extern s32 D_8010C978;
 extern Vec3s btl_actorHomePositions[];
 
 extern PartnerActionStatus gPartnerActionStatus; // something with partners
-extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
+extern PlayerSpinState gPlayerSpinState; // sfx_play_sound state struct?
 
 extern SaveData gCurrentSaveFile;
 
@@ -306,16 +235,15 @@ extern u8 D_800779B0;
 extern u32 D_80078174;
 extern u8 D_800A0963;
 
-extern UNK_TYPE D_802EB3B0;
+extern struct EffectInstance* TriggerBlockVanishEffect;
 extern UNK_TYPE D_00000094;
 extern UNK_TYPE D_00000094_2; // two symbols resolve to the same addr. Required for matching
-extern UNK_TYPE D_802EA0A0;
-extern StaticEntityData D_802EA07C;
+extern EntityBlueprint Entity_InertRedBlock;
+extern EntityBlueprint Entity_InertYellowBlock;
 extern UNK_TYPE D_802EA310;
-extern UNK_TYPE D_802EA618;
-extern UNK_TYPE D_802EA63C;
-extern UNK_TYPE D_802EA660;
-extern s16 D_8015C7D2;
+extern EntityBlueprint Entity_HitGroundedYellowBlock;
+extern EntityBlueprint Entity_HitFloatingYellowBlock;
+extern EntityBlueprint Entity_HitRedBlock;
 
 extern UNK_TYPE D_0A000328;
 extern UNK_TYPE D_0A000380;
@@ -324,9 +252,9 @@ extern UNK_TYPE D_0A000800;
 extern UNK_TYPE D_0A000808;
 
 // Scripts
-extern EvtSource SCRIPT_NpcDefeat;
-extern EvtSource ShakeCam1;
-extern EvtSource ShakeCamX;
+extern EvtScript SCRIPT_NpcDefeat;
+extern EvtScript ShakeCam1;
+extern EvtScript ShakeCamX;
 
 extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;
@@ -338,9 +266,6 @@ extern MusicSettings D_8014F6F0;
 // OS
 extern OSThread D_800A4270; // idle thread, id 1
 extern OSThread D_800A4420; // id 3
-extern OSThread* __osActiveQueue;
-extern OSThread* __osRunningThread;
-extern OSThread* __osRunQueue;
 extern OSDevMgr __osPiDevMgr;
 
 // gfx
@@ -376,11 +301,14 @@ extern s16 gCurrentCamID;
 
 extern HeapNode gSpriteHeapPtr;
 
-extern s32 D_8029C890[12][5];
+extern s32 D_8029C890[10][5];
 
 // Heap?
 extern s32 D_8038F800;
 extern s32 D_803B5000;
+
+extern HeapNode heap_collisionHead;
+extern HeapNode heap_generalHead;
 extern HeapNode heap_battleHead;
 
 extern s32 bMarioIdleAnims[];
@@ -388,18 +316,18 @@ extern s32 bMarioDefendAnims[];
 extern s32 bPeachIdleAnims[];
 
 // TODO: name these entity symbols
-extern StaticEntityData D_802E9A18; // entitySaveBlock
-extern StaticEntityData D_802E9BB0;
-extern StaticEntityData D_802E9BD4; // entityBlueSwitch
-extern StaticEntityData D_802E9BF8; // entityHugeBlueSwitch
-extern StaticEntityData D_802E9C1C;
-extern StaticEntityData D_802E9C8C;
-extern StaticEntityData D_802E9CB0;
-extern StaticEntityData D_802E9CD4;
-extern StaticEntityData D_802E9CF8;
-extern StaticEntityData D_802E9D1C;
-extern StaticEntityData D_802E9D40;
-extern StaticEntityData D_802E9D64;
+extern EntityBlueprint Entity_SavePoint; // entitySaveBlock
+extern EntityBlueprint Entity_RedSwitch;
+extern EntityBlueprint Entity_BlueSwitch; // entityBlueSwitch
+extern EntityBlueprint Entity_HugeBlueSwitch; // entityHugeBlueSwitch
+extern EntityBlueprint Entity_GreenStompSwitch;
+extern EntityBlueprint Entity_ShatteringHammer1Block;
+extern EntityBlueprint Entity_ShatteringHammer2Block;
+extern EntityBlueprint Entity_ShatteringHammer3Block;
+extern EntityBlueprint Entity_ShatteringHammer1BlockTiny;
+extern EntityBlueprint Entity_ShatteringHammer2BlockTiny;
+extern EntityBlueprint Entity_ShatteringHammer3BlockTiny;
+extern EntityBlueprint Entity_ShatteringBrickBlock;
 
 // Temporary dead stuff
 extern PartnerActionStatus dead_gPartnerActionStatus2;

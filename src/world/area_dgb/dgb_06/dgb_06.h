@@ -6,6 +6,6 @@
 
 #define NAMESPACE dgb_06
 
-NpcGroupList N(npcGroupList_80240B44);
-EvtSource N(main);
-EvtSource N(makeEntities);
+extern NpcGroupList N(npcGroupList_80240B44);
+extern EvtScript N(main);
+extern EvtScript N(makeEntities);

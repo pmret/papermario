@@ -75,17 +75,17 @@ enum {
     EVT_OP_BITWISE_OR, ///< Args: container, expression to bitwise OR with
     EVT_OP_BITWISE_OR_CONST, ///< Args: container, value to bitwise OR with
     EVT_OP_CALL, ///< Args: *function, ...
-    EVT_OP_EXEC, ///< Args: EvtSource*
-    EVT_OP_EXEC_GET_TID, ///< Args: EvtSource*, container
-    EVT_OP_EXEC_WAIT, ///< Spawns a script and waits for it to return before continuing. Args: EvtSource*
-    EVT_OP_BIND_TRIGGER, ///< Args: EvtSource*, trigger flags, s32 target, 1, Trigger*
+    EVT_OP_EXEC, ///< Args: EvtScript*
+    EVT_OP_EXEC_GET_TID, ///< Args: EvtScript*, container
+    EVT_OP_EXEC_WAIT, ///< Spawns a script and waits for it to return before continuing. Args: EvtScript*
+    EVT_OP_BIND_TRIGGER, ///< Args: EvtScript*, trigger flags, s32 target, 1, Trigger*
     EVT_OP_UNBIND, ///< Unbinds any triggers bound to this script.
     EVT_OP_KILL_THREAD, ///< Args: ScriptID
-    EVT_OP_JUMP, ///< Args: EvtSource*
+    EVT_OP_JUMP, ///< Args: EvtScript*
     EVT_OP_SET_PRIORITY, ///< Args: priority
     EVT_OP_SET_TIMESCALE, ///< Args: timescale
     EVT_OP_SET_GROUP, ///< Args: group
-    EVT_OP_BIND_PADLOCK, ///< Args: EvtSource*, trigger flags, s32 target, ItemList*, 0, 1
+    EVT_OP_BIND_PADLOCK, ///< Args: EvtScript*, trigger flags, s32 target, ItemList*, 0, 1
     EVT_OP_SUSPEND_GROUP, ///< Args: group
     EVT_OP_RESUME_GROUP, ///< Args: group
     EVT_OP_SUSPEND_OTHERS, ///< Args: group
@@ -113,7 +113,7 @@ enum {
 #define EVT_SAVE_FLAG(v)     ((v - 130000000))
 #define EVT_AREA_VAR(v)      ((v - 150000000))
 #define EVT_SAVE_VAR(v)      ((v - 170000000))
-#define EVT_ARRAY(v)         ((v - 190000000))
+#define EVT_ARRAY(v)         (Bytecode) ((v - 190000000))
 #define EVT_ARRAY_FLAG(v)    ((v - 210000000))
 #define EVT_FIXED(v)         (((v * 1024.0f) + -230000000)) // See evt_float_to_fixed_var
 #define EVT_PTR(sym)         (Bytecode) &sym

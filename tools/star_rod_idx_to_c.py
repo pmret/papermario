@@ -91,6 +91,12 @@ def get_include_list(area_name, map_name):
                         includes.add(func_name)
     return includes
 
+def read_enum(num: int, constants_name: str) -> str:
+    if num in disasm_script.CONSTANTS[constants_name]:
+        return disasm_script.CONSTANTS[constants_name][num]
+    else:
+        return num
+
 def read_flags(flags: int, constants_name: str) -> str:
     enabled = []
     for x in range(32):
@@ -102,7 +108,10 @@ def read_flags(flags: int, constants_name: str) -> str:
                 print(f"0x{val:08X} missing from enum {constants_name}!")
                 enabled.append(f"0x{val:08X}")
     if not enabled:
-        enabled.append("0")
+        if 0 in disasm_script.CONSTANTS[constants_name]:
+            enabled.append(disasm_script.CONSTANTS[constants_name][0])
+        else:
+            enabled.append("0")
 
     return " | ".join(enabled)
 
@@ -137,6 +146,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
         struct = midx.pop(0)
 
         name = struct["name"]
+        print(name, file=sys.stderr)
 
         #INCLUDED["functions"].add(name)
 
@@ -151,17 +161,18 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
         if struct["type"].startswith("Script"):
             if struct["type"] == "Script_Main":
                 name = "N(main)"
-                INCLUDES_NEEDED["forward"].append(f"EvtSource " + name + ";")
+                INCLUDES_NEEDED["forward"].append(f"EvtScript " + name + ";")
                 main_script_name = name
 
             # For PlayMusic script if using a separate header file
             #if afterHeader:
-            #    INCLUDES_NEEDED["forward"].append(f"EvtSource " + name + ";")
+            #    INCLUDES_NEEDED["forward"].append(f"EvtScript " + name + ";")
             #    afterHeader = False
-
+            disasm_script.LOCAL_WORDS = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
             script_text = disasm_script.ScriptDisassembler(
                 bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED,
                 transform_symbol_name=transform_symbol_name,
+                use_script_lib=False,
             ).disassemble()
 
             if "shakeTree" in name or "searchBush" in name:
@@ -181,7 +192,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 if "GotoMap" in script_text[4]:
                     map_, entryIdx = script_text[4].split("(",1)[1].split(")",1)[0].split(",")
                 if walkDistance and exitIdx and map_ and entryIdx:
-                    out += f"EvtSource {name} = EXIT_WALK_SCRIPT({walkDistance}, {exitIdx}, {map_}, {entryIdx});\n"
+                    out += f"EvtScript {name} = EXIT_WALK_SCRIPT({walkDistance}, {exitIdx}, {map_}, {entryIdx});\n"
                 else:
                     print(f"Unable to macro replace exit script {name}")
                     out += "\n".join(script_text) + "\n"
@@ -235,9 +246,9 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                         var_name = var_names[x]
                         if not var == 0:
                             if var == 0x80077F70:
-                                tmp_out += INDENT + f".{var_name} = EnemyNpcHit,\n"
+                                tmp_out += INDENT + f".{var_name} = &EnemyNpcHit,\n"
                             elif var == 0x8007809C:
-                                tmp_out += INDENT + f".{var_name} = EnemyNpcDefeat,\n"
+                                tmp_out += INDENT + f".{var_name} = &EnemyNpcDefeat,\n"
                             elif var_name != "flags" and var in symbol_map:
                                 tmp_out += INDENT + f".{var_name} = &{symbol_map[var][0][1]},\n"
                                 if symbol_map[var][0][1] not in INCLUDED["functions"]:
@@ -702,30 +713,30 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += "    { "
 
                 if actor in symbol_map:
-                    out += f"&{symbol_map[actor][0][1]}, "
+                    out += f".actor = &{symbol_map[actor][0][1]}, "
 
-                    s = f"ActorDesc {symbol_map[actor][0][1]};"
+                    s = f"ActorBlueprint {symbol_map[actor][0][1]};"
                     if s not in INCLUDES_NEEDED["forward"]:
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
-                    out += f"{actor}, "
+                    out += f".actor = {actor}, "
 
 
                 if position in symbol_map:
-                    out += f".position = &{symbol_map[position][0][1]}"
+                    out += f".home = {{ .vec = &{symbol_map[position][0][1]} }}"
 
                     s = f"Vec3f {symbol_map[position][0][1]};"
                     if s not in INCLUDES_NEEDED["forward"]:
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
-                    out += f".position = {position}"
+                    out += f".home = {{ .index = {position} }}"
 
                 out += f", .priority = {priority}"
 
                 if var0 == 0 and var1 == 0 and var2 == 0 and var3 == 0:
                     pass
                 else:
-                    out += f", {var1}, {var2} {var3}, {var4}"
+                    out += f", {var0}, {var1} {var2}, {var3}"
 
                 out += " },\n"
 
@@ -743,7 +754,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 else:
                     out += "    BATTLE("
                     out += f"{symbol_map[name][0][1]}, "
-                    out += f"&{symbol_map[ptr][0][1]}, "
+                    out += f"{symbol_map[ptr][0][1]}, "
                     out += f"&{symbol_map[stage_ptr][0][1]}"
                     out += "),\n"
 
@@ -818,14 +829,13 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
                 element = disasm_script.CONSTANTS["Statuses"][element]
 
-                sprite_id =  (anim & 0x00FF0000) >> 16
-                palette_id = (anim & 0x0000FF00) >> 8
-                anim_id =    (anim & 0x000000FF) >> 0
-                sprite =  disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
-                palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
-                anim =    disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
-                anim = f"NPC_ANIM_{sprite}_{palette}_{anim}"
-                INCLUDES_NEEDED["sprites"].add(sprite)
+                value = (anim & 0x00FFFFFF)
+
+                if value in disasm_script.CONSTANTS["NPC_SPRITE"]:
+                   INCLUDES_NEEDED["sprites"].add(disasm_script.CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
+                   anim =  disasm_script.CONSTANTS['NPC_SPRITE'][value]
+                else:
+                    anim = f"{anim:06X}"
 
                 out += f"    {element}, "
                 out += " " * (16 - len(element))
@@ -833,10 +843,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
             out += f"}};\n"
         elif struct["type"] == "PartsTable":
-            out += f"ActorPartDesc {struct['name']}[] = {{\n"
+            out += f"ActorPartBlueprint {struct['name']}[] = {{\n"
 
             for _ in range(0, struct["length"] // 36):
-                d = unpack(">IbbbbbbhIIIIxxxxxxxx", bytes.read(36))
+                d = unpack(">IbbbbbbhIIIIbbxxxxxx", bytes.read(36))
 
                 out += INDENT + "{\n"
                 out += INDENT + INDENT + f".flags = {read_flags(d[0], 'ActorPartFlags')},\n"
@@ -844,20 +854,22 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += INDENT + INDENT  + f".posOffset = {{ {d[2]}, {d[3]}, {d[4]} }},\n"
                 out += INDENT + INDENT  + f".targetOffset = {{ {d[5]}, {d[6]} }},\n"
                 out += INDENT + INDENT  + f".opacity = {d[7]},\n"
-                out += INDENT + INDENT  + f".idleAnimations = {read_ptr(d[8], symbol_map)},\n"
-                out += INDENT + INDENT  + f".defenseTable = {read_ptr(d[9], symbol_map)},\n"
+                out += INDENT + INDENT  + f".idleAnimations = N(idleAnimations_{d[8]:08X}),\n"
+                out += INDENT + INDENT  + f".defenseTable = N(defenseTable_{d[9]:08X}),\n"
                 out += INDENT + INDENT  + f".eventFlags = {read_flags(d[10], 'ActorEventFlags')},\n"
-                out += INDENT + INDENT  + f".elementImmunityFlags = {d[11]},\n" # TODO flags
+                out += INDENT + INDENT  + f".elementImmunityFlags = {read_flags(d[11], 'ElementImmunityFlags')},\n"
+                out += INDENT + INDENT  + f".unk_1C = {d[12]},\n"
+                out += INDENT + INDENT  + f".unk_1D = {d[13]},\n"
                 out += INDENT + "},\n"
 
             out += f"}};\n"
         elif struct["type"] == "Actor":
-            out += f"ActorDesc {struct['name']} = {{\n"
+            out += f"ActorBlueprint NAMESPACE = {{\n"
 
             d = unpack(">IxBBBhxxIIIBBBBBBBBbbbbbbbb", bytes.read(struct["length"]))
 
             out += INDENT + f".flags = {read_flags(d[0], 'ActorFlags')},\n"
-            out += INDENT + f".type = {d[1]},\n" # TODO enum
+            out += INDENT + f".type = {read_enum(d[1], 'ActorType')},\n"
             out += INDENT + f".level = {d[2]},\n"
             out += INDENT + f".maxHP = {d[3]},\n"
             out += INDENT + f".partCount = ARRAY_COUNT({read_ptr(d[5], symbol_map)}),\n"
@@ -881,7 +893,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
             pass
         elif struct["type"] == "Stage":
-            out += f"Stage {struct['name']} = {{\n"
+            out += f"Stage NAMESPACE = {{\n"
 
             texture, shape, hit, preBattle, postBattle, bg, unk_18, unk_1C, unk_20, unk_24 = unpack(">IIIIIIIIII", bytes.read(struct["length"]))
 
@@ -928,18 +940,14 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += f"s32 {name}[] = {{"
             else:
                 out += f"s32 {name} = {{"
-
             for i in range(0, struct["length"], 4):
                 if (i % 0x20) == 0:
                     out += f"\n   "
-
                 word = int.from_bytes(bytes.read(4), byteorder="big")
-
                 if word in symbol_map:
                     out += f" {symbol_map[word][0][1]},"
                 else:
                     out += f" 0x{word:08X},"
-
             out += f"\n}};\n"
 
         out += "\n"
@@ -1056,11 +1064,11 @@ if __name__ == "__main__":
                 .replace("peachdash", "peach_dash")
             )
         else:
-            segment_name = f"battle_partner_{battle_area}"
+            segment_name = f"battle/{battle_area}"
 
         is_battle = True
 
-    symbol_map = {}
+    symbol_map = disasm_script.script_lib()
     def add_to_symbol_map(addr, pair):
         if addr in symbol_map:
             symbol_map[addr].append(pair)
@@ -1215,5 +1223,3 @@ if __name__ == "__main__":
 
         print("=======================================\n")
         print(disasm.rstrip())
-
-

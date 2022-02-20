@@ -31,7 +31,7 @@ f32 D_802BFDBC_320B2C = 0.0f;
 void func_802BD100_31DE70(void) {
     Npc* partnerNPC = get_npc_unsafe(NPC_PARTNER);
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Camera* cam = &gCameras[0];
+    Camera* cam = &gCameras[CAM_DEFAULT];
     s32 phi_v1;
 
     playerStatus->position.x = partnerNPC->pos.x;
@@ -54,7 +54,7 @@ void func_802BD20C_31DF7C(f32* arg0, f32* arg1) {
     f32 phi_f20;
     f32 temp_f2 = gPartnerActionStatus.stickY;
     f32 temp_f0 = gPartnerActionStatus.stickX;
-    
+
     D_802BFDB0_320B20 = temp_f0;
     D_802BFDB4_320B24 = temp_f2;
     temp_f22 = clamp_angle(atan2(0.0f, 0.0f, temp_f0, -temp_f2) + gCameras->currentYaw);
@@ -82,8 +82,8 @@ void func_802BD368_31E0D8(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
 
     arg2 += 100.0f;
     sp20 = 200.0f;
-    
-    if (npc_raycast_down_ahead(arg0, &arg1, &arg2, &arg3, &sp20, arg4, arg5) == 0) {
+
+    if (npc_raycast_down_around(arg0, &arg1, &arg2, &arg3, &sp20, arg4, arg5) == 0) {
         collisionStatus->currentFloor = -1;
     } else {
         collisionStatus->currentFloor = D_8010C97A;
@@ -112,7 +112,7 @@ s32 func_802BE280_31EFF0(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32 arg4, f3
 void func_802BE3A4_31F114(Npc*);
 INCLUDE_ASM(s32, "world/partner/sushie", func_802BE3A4_31F114);
 
-EvtSource world_sushie_use_ability = {
+EvtScript world_sushie_use_ability = {
     EVT_CALL(func_802BE3A4_31F114)
     EVT_RETURN
     EVT_END
@@ -121,7 +121,7 @@ EvtSource world_sushie_use_ability = {
 void world_sushie_init(Npc* sushie) {
     sushie->collisionHeight = 24;
     sushie->collisionRadius = 36;
-    sushie->unk_80 = 0x10000;
+    sushie->collisionChannel = 0x10000;
     D_802BFEEC = 0;
     bss_802BFEE4 = 0;
     bss_802BFEE8 = 0;
@@ -131,7 +131,7 @@ void world_sushie_init(Npc* sushie) {
 
 s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
     Npc* sushie = script->owner2.npc;
- 
+
     if (isInitialCall) {
         partner_init_get_out(sushie);
     }
@@ -139,7 +139,7 @@ s32 func_802BF568_3202D8(Evt* script, s32 isInitialCall) {
     return partner_get_out(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_sushie_take_out = {
+EvtScript world_sushie_take_out = {
     EVT_CALL(func_802BF568_3202D8)
     EVT_RETURN
     EVT_END
@@ -159,7 +159,7 @@ ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
     }
 
     entity = D_8010C954;
-    
+
     if (entity == NULL) {
         partner_walking_update_player_tracking(sushie);
         partner_walking_update_motion(sushie);
@@ -228,7 +228,7 @@ ApiStatus func_802BF5A0_320310(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource world_sushie_update = {
+EvtScript world_sushie_update = {
     EVT_CALL(func_802BF5A0_320310)
     EVT_RETURN
     EVT_END
@@ -254,7 +254,7 @@ s32 func_802BF964_3206D4(Evt* script, s32 isInitialCall) {
     return partner_put_away(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_sushie_put_away = {
+EvtScript world_sushie_put_away = {
     EVT_CALL(func_802BF964_3206D4)
     EVT_RETURN
     EVT_END
@@ -277,7 +277,7 @@ void world_sushie_pre_battle(Npc* sushie) {
 
 void world_sushie_post_battle(Npc* sushie) {
     PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
-    
+
     if (sushieActionStatus->actionState.b[1] != 0) {
         *sushie = sushieActionStatus->npc;
         partner_use_ability();
@@ -294,18 +294,18 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 0;
         D_802BFEE0 = playerStatus->position.y;
     }
-    
+
     funcTemp0 = script->functionTemp[0];
 
     switch (funcTemp0) {
         case 0:
-            gGameStatusPtr->unk_7D = 1;
+            gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
             disable_player_static_collisions();
             disable_player_input();
             partnerNPC->pos.x = playerStatus->position.x;
             partnerNPC->pos.z = playerStatus->position.z;
             partnerNPC->pos.y = playerStatus->position.y;
-            func_802BD368_31E0D8(partnerNPC->unk_80, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z,
+            func_802BD368_31E0D8(partnerNPC->collisionChannel, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z,
                                 partnerNPC->yaw, partnerNPC->collisionRadius * 0.5f);
             partnerNPC->pos.y = D_802BFEE0 - (partnerNPC->collisionHeight * 0.5f);
             temp_f0 = atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);
@@ -339,7 +339,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
             func_802BD100_31DE70();
 
             if (!(script->functionTemp[1] & 3)) {
-                playFX_23(0, partnerNPC->pos.x, partnerNPC->moveToPos.y +
+                fx_rising_bubble(0, partnerNPC->pos.x, partnerNPC->moveToPos.y +
                         (partnerNPC->collisionHeight * 0.5f), partnerNPC->pos.z, 0);
             }
 
@@ -362,7 +362,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource world_sushie_while_riding = {
+EvtScript world_sushie_while_riding = {
     EVT_CALL(func_802BFAB8_320828)
     EVT_RETURN
     EVT_END

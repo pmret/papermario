@@ -41,7 +41,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_00_tattle },
 };
 
-EvtSource N(802414D0) = SCRIPT({
+EvtScript N(802414D0) = SCRIPT({
     GetEntryID(EVT_VAR(0));
     match EVT_VAR(0) {
         == 8 {
@@ -84,7 +84,7 @@ static s32 N(pad_16BC) = {
     0x00000000,
 };
 
-EvtSource N(802416C0) = SCRIPT({
+EvtScript N(802416C0) = SCRIPT({
     group 11;
     EVT_VAR(10) = EVT_VAR(0);
     EVT_VAR(11) = EVT_VAR(1);
@@ -123,7 +123,7 @@ EvtSource N(802416C0) = SCRIPT({
     goto 0;
 });
 
-EvtSource N(8024196C) = SCRIPT({
+EvtScript N(8024196C) = SCRIPT({
     DisablePlayerInput(TRUE);
     ModifyColliderFlags(0, 2, 0x7FFFFE00);
     PlayerMoveTo(30, -170, 10);
@@ -158,7 +158,7 @@ EvtSource N(8024196C) = SCRIPT({
     sleep 100;
 });
 
-EvtSource N(80241B90) = SCRIPT({
+EvtScript N(80241B90) = SCRIPT({
     DisablePlayerInput(TRUE);
     ModifyColliderFlags(0, 2, 0x7FFFFE00);
     InterpPlayerYaw(180, 0);
@@ -189,21 +189,21 @@ EvtSource N(80241B90) = SCRIPT({
     ModifyColliderFlags(1, 2, 0x7FFFFE00);
 });
 
-EvtSource N(exitWalk_80241D7C) = EXIT_WALK_SCRIPT(60,  1, "flo_14",  0);
+EvtScript N(exitWalk_80241D7C) = EXIT_WALK_SCRIPT(60,  1, "flo_14",  0);
 
-EvtSource N(exitWalk_80241DD8) = EXIT_WALK_SCRIPT(60,  2, "flo_23",  0);
+EvtScript N(exitWalk_80241DD8) = EXIT_WALK_SCRIPT(60,  2, "flo_23",  0);
 
-EvtSource N(exitWalk_80241E34) = EXIT_WALK_SCRIPT(60,  3, "flo_25",  0);
+EvtScript N(exitWalk_80241E34) = EXIT_WALK_SCRIPT(60,  3, "flo_25",  0);
 
-EvtSource N(exitWalk_80241E90) = EXIT_WALK_SCRIPT(60,  4, "flo_16",  0);
+EvtScript N(exitWalk_80241E90) = EXIT_WALK_SCRIPT(60,  4, "flo_16",  0);
 
-EvtSource N(exitWalk_80241EEC) = EXIT_WALK_SCRIPT(60,  5, "flo_09",  0);
+EvtScript N(exitWalk_80241EEC) = EXIT_WALK_SCRIPT(60,  5, "flo_09",  0);
 
-EvtSource N(exitWalk_80241F48) = EXIT_WALK_SCRIPT(60,  6, "flo_08",  0);
+EvtScript N(exitWalk_80241F48) = EXIT_WALK_SCRIPT(60,  6, "flo_08",  0);
 
 const s32 N(pad_XXXX)[] = { 0, 0};
 
-EvtSource N(80241FA4) = SCRIPT({
+EvtScript N(80241FA4) = SCRIPT({
     bind N(exitWalk_80241D7C) TRIGGER_FLOOR_ABOVE 5;
     bind N(exitWalk_80241DD8) TRIGGER_FLOOR_ABOVE 9;
     bind N(exitWalk_80241E34) TRIGGER_FLOOR_ABOVE 13;
@@ -212,7 +212,7 @@ EvtSource N(80241FA4) = SCRIPT({
     bind N(exitWalk_80241F48) TRIGGER_FLOOR_ABOVE 25;
 });
 
-EvtSource N(enterWalk_8024205C) = SCRIPT({
+EvtScript N(enterWalk_8024205C) = SCRIPT({
     GetLoadType(EVT_VAR(1));
     if (EVT_VAR(1) == 1) {
         spawn EnterSavePoint;
@@ -261,7 +261,7 @@ EvtSource N(enterWalk_8024205C) = SCRIPT({
     bind N(80242FCC) TRIGGER_WALL_PRESS_A 2;
 });
 
-EvtSource N(main) = SCRIPT({
+EvtScript N(main) = SCRIPT({
     EVT_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -370,8 +370,8 @@ NpcAISettings N(npcAISettings_8024286C) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_8024289C) = SCRIPT({
-    N(func_80240BD4_C9EAF4)(N(npcAISettings_8024286C));
+EvtScript N(npcAI_8024289C) = SCRIPT({
+    N(UnkNpcAIMainFunc)(N(npcAISettings_8024286C));
 });
 
 NpcSettings N(npcSettings_802428BC) = {
@@ -407,7 +407,7 @@ NpcSettings N(npcSettings_8024296C) = {
 
 extern const char N(flo_07_name_hack)[];
 
-EvtSource N(80242998) = SCRIPT({
+EvtScript N(80242998) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     UseSettingsFrom(0, 50, 0, -200);
@@ -426,7 +426,7 @@ EvtSource N(80242998) = SCRIPT({
     sleep 100;
 });
 
-EvtSource N(80242AF0) = SCRIPT({
+EvtScript N(80242AF0) = SCRIPT({
     DisablePlayerInput(TRUE);
     UseSettingsFrom(0, 0, 0, -170);
     SetPanTarget(0, 0, 0, -170);
@@ -490,7 +490,7 @@ EvtSource N(80242AF0) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-EvtSource N(80242FCC) = SCRIPT({
+EvtScript N(80242FCC) = SCRIPT({
     DisablePlayerInput(TRUE);
     sleep 2;
     GetPlayerActionState(EVT_VAR(3));
@@ -573,7 +573,7 @@ EvtSource N(80242FCC) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-EvtSource N(80243368) = SCRIPT({
+EvtScript N(80243368) = SCRIPT({
     AdjustCam(0, 90.0, 0, 600, 21.0, -12.0);
     sleep 20;
     ShowMessageAtWorldPos(MESSAGE_ID(0x11, 0x000B), 0, 50, -200);
@@ -587,7 +587,7 @@ EvtSource N(80243368) = SCRIPT({
     ResetCam(0, 90.0);
 });
 
-EvtSource N(init_80243474) = SCRIPT({
+EvtScript N(init_80243474) = SCRIPT({
     EnableGroup(121, 0);
     EnableGroup(80, 0);
     EnableGroup(132, 0);
@@ -599,7 +599,7 @@ EvtSource N(init_80243474) = SCRIPT({
     }
 });
 
-EvtSource N(interact_8024352C) = SCRIPT({
+EvtScript N(interact_8024352C) = SCRIPT({
     match EVT_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             SpeakToPlayer(NPC_SELF, NPC_ANIM_bubulb_Palette_00_Anim_3, NPC_ANIM_bubulb_Palette_00_Anim_2, 0, MESSAGE_ID(0x11, 0x0016));
@@ -631,7 +631,7 @@ EvtSource N(interact_8024352C) = SCRIPT({
     }
 });
 
-EvtSource N(interact_802436C0) = SCRIPT({
+EvtScript N(interact_802436C0) = SCRIPT({
     match EVT_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             SpeakToPlayer(NPC_SELF, NPC_ANIM_bubulb_Palette_01_Anim_3, NPC_ANIM_bubulb_Palette_01_Anim_2, 0, MESSAGE_ID(0x11, 0x001D));
@@ -663,7 +663,7 @@ EvtSource N(interact_802436C0) = SCRIPT({
     }
 });
 
-EvtSource N(interact_80243854) = SCRIPT({
+EvtScript N(interact_80243854) = SCRIPT({
     match EVT_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             SpeakToPlayer(NPC_SELF, NPC_ANIM_bubulb_Palette_02_Anim_3, NPC_ANIM_bubulb_Palette_02_Anim_2, 0, MESSAGE_ID(0x11, 0x0024));
@@ -695,7 +695,7 @@ EvtSource N(interact_80243854) = SCRIPT({
     }
 });
 
-EvtSource N(interact_802439E8) = SCRIPT({
+EvtScript N(interact_802439E8) = SCRIPT({
     match EVT_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             SpeakToPlayer(NPC_SELF, NPC_ANIM_bubulb_Palette_03_Anim_3, NPC_ANIM_bubulb_Palette_03_Anim_2, 0, MESSAGE_ID(0x11, 0x002B));
@@ -727,27 +727,27 @@ EvtSource N(interact_802439E8) = SCRIPT({
     }
 });
 
-EvtSource N(init_80243B7C) = SCRIPT({
+EvtScript N(init_80243B7C) = SCRIPT({
     EVT_AREA_FLAG(18) = 0;
     BindNpcInteract(NPC_SELF, N(interact_8024352C));
 });
 
-EvtSource N(init_80243BB0) = SCRIPT({
+EvtScript N(init_80243BB0) = SCRIPT({
     EVT_AREA_FLAG(19) = 0;
     BindNpcInteract(NPC_SELF, N(interact_802436C0));
 });
 
-EvtSource N(init_80243BE4) = SCRIPT({
+EvtScript N(init_80243BE4) = SCRIPT({
     EVT_AREA_FLAG(20) = 0;
     BindNpcInteract(NPC_SELF, N(interact_80243854));
 });
 
-EvtSource N(init_80243C18) = SCRIPT({
+EvtScript N(init_80243C18) = SCRIPT({
     EVT_AREA_FLAG(21) = 0;
     BindNpcInteract(NPC_SELF, N(interact_802439E8));
 });
 
-EvtSource N(interact_80243C4C) = SCRIPT({
+EvtScript N(interact_80243C4C) = SCRIPT({
     if (EVT_SAVE_FLAG(1373) == 0) {
         AdjustCam(0, 4.0, -30, 300, 20.0, -9.5);
         EVT_SAVE_FLAG(1373) = 1;
@@ -831,12 +831,12 @@ EvtSource N(interact_80243C4C) = SCRIPT({
     ResetCam(0, 4.0);
 });
 
-EvtSource N(init_8024414C) = SCRIPT({
+EvtScript N(init_8024414C) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80243C4C));
     SetNpcCollisionSize(-1, 65, 50);
 });
 
-EvtSource N(idle_80244188) = SCRIPT({
+EvtScript N(idle_80244188) = SCRIPT({
     loop {
         loop 10 {
             GetNpcPos(NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
@@ -853,7 +853,7 @@ EvtSource N(idle_80244188) = SCRIPT({
     }
 });
 
-EvtSource N(8024427C) = SCRIPT({
+EvtScript N(8024427C) = SCRIPT({
     DisablePartnerAI(0);
     func_802CF56C(2);
     GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
@@ -985,7 +985,7 @@ EvtSource N(8024427C) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-EvtSource N(init_80244BF4) = SCRIPT({
+EvtScript N(init_80244BF4) = SCRIPT({
     GetLoadType(EVT_VAR(1));
     if (EVT_VAR(1) != 1) {
         GetEntryID(EVT_VAR(0));
@@ -998,7 +998,7 @@ EvtSource N(init_80244BF4) = SCRIPT({
     }
 });
 
-EvtSource N(interact_80244C98) = SCRIPT({
+EvtScript N(interact_80244C98) = SCRIPT({
     if (EVT_STORY_PROGRESS <= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SpeakToPlayer(NPC_LAKILULU, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0,
                       MESSAGE_ID(0x11, 0x0032));
@@ -1020,7 +1020,7 @@ EvtSource N(interact_80244C98) = SCRIPT({
     }
 });
 
-EvtSource N(init_80244DD0) = SCRIPT({
+EvtScript N(init_80244DD0) = SCRIPT({
     if (EVT_STORY_PROGRESS >= STORY_CH6_BEGAN_PEACH_MISSION) {
         BindNpcInteract(NPC_SELF, N(interact_80244C98));
         SetNpcCollisionSize(-1, 36, 28);
@@ -1313,7 +1313,7 @@ f32 N(D_80245E88_CA3DA8)[] = {
 
 extern const char N(sam_11_name_hack)[];
 
-EvtSource N(80245EB8) = SCRIPT({
+EvtScript N(80245EB8) = SCRIPT({
     SetPlayerPos(-400, 0, 200);
     SetNpcPos(NPC_PARTNER, -380, 0, 200);
     func_802CF56C(2);
@@ -1350,19 +1350,19 @@ EvtSource N(80245EB8) = SCRIPT({
     sleep 100;
 });
 
-EvtSource N(init_80246170) = SCRIPT({
+EvtScript N(init_80246170) = SCRIPT({
     SetPlayerPos(-400, 0, 200);
     SetNpcPos(NPC_PARTNER, -380, 0, 200);
     SetNpcPos(NPC_BUBULB0, 196, 20, 354);
     SetNpcYaw(NPC_BUBULB0, 270);
 });
 
-EvtSource N(init_802461E4) = SCRIPT({
+EvtScript N(init_802461E4) = SCRIPT({
     SetNpcPos(NPC_BUBULB1, 163, 20, 370);
     SetNpcYaw(NPC_BUBULB1, 90);
 });
 
-EvtSource N(init_80246224) = SCRIPT({
+EvtScript N(init_80246224) = SCRIPT({
     SetNpcPos(NPC_BUBULB2, 266, 20, 322);
     SetNpcYaw(NPC_BUBULB2, 270);
 });
@@ -1466,7 +1466,7 @@ static s32 N(pad_684C) = {
     0x00000000,
 };
 
-EvtSource N(80246850) = SCRIPT({
+EvtScript N(80246850) = SCRIPT({
     EVT_VAR(1) = (float) EVT_VAR(0);
     EVT_VAR(1) -= -700.0;
     EVT_VAR(1) /= 100.0;
@@ -1586,7 +1586,7 @@ EvtSource N(80246850) = SCRIPT({
     TranslateModel(119, 13.0029296875, -631.15234375, -0.9462890625);
 });
 
-EvtSource N(80247488) = SCRIPT({
+EvtScript N(80247488) = SCRIPT({
     EVT_VAR(1) = (float) EVT_VAR(0);
     EVT_VAR(1) -= -700.0;
     EVT_VAR(1) /= 100.0;
@@ -1602,7 +1602,7 @@ EvtSource N(80247488) = SCRIPT({
     RotateGroup(79, EVT_VAR(1), 0, 1, 0);
 });
 
-EvtSource N(80247588) = SCRIPT({
+EvtScript N(80247588) = SCRIPT({
     TranslateModel(83, 9.5, 12.0, 15.0);
     TranslateModel(85, -9.5, 12.0, 15.0);
     TranslateModel(87, 0.0, 0.0, 17.0);
@@ -1618,7 +1618,7 @@ EvtSource N(80247588) = SCRIPT({
     ScaleModel(87, EVT_VAR(0), EVT_VAR(0), EVT_VAR(0));
 });
 
-EvtSource N(802476F4) = SCRIPT({
+EvtScript N(802476F4) = SCRIPT({
     ScaleModel(81, EVT_VAR(0), EVT_VAR(0), EVT_VAR(0));
     EVT_VAR(1) = (float) EVT_VAR(0);
     EVT_VAR(1) *= 90.0;
@@ -1626,7 +1626,7 @@ EvtSource N(802476F4) = SCRIPT({
     RotateModel(81, EVT_VAR(1), 1, 0, 0);
 });
 
-EvtSource N(80247770) = SCRIPT({
+EvtScript N(80247770) = SCRIPT({
     EVT_VAR(1) = (float) EVT_VAR(0);
     EVT_VAR(1) *= -3.0;
     TranslateModel(81, -0.259765625, EVT_VAR(0), 1.4775390625);
@@ -1636,7 +1636,7 @@ EvtSource N(80247770) = SCRIPT({
 
 extern const char N(flo_19_name_hack)[];
 
-EvtSource N(802477EC) = SCRIPT({
+EvtScript N(802477EC) = SCRIPT({
     if (EVT_AREA_FLAG(44) == 0) {
         DisablePlayerInput(TRUE);
         func_802D2B6C();
@@ -1701,7 +1701,7 @@ EvtSource N(802477EC) = SCRIPT({
     }
 });
 
-EvtSource N(80247BCC) = SCRIPT({
+EvtScript N(80247BCC) = SCRIPT({
     DisablePlayerInput(TRUE);
     SetPlayerActionState(10);
     ModifyColliderFlags(0, 47, 0x7FFFFE00);
@@ -1762,7 +1762,7 @@ EvtSource N(80247BCC) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-EvtSource N(80247FAC) = SCRIPT({
+EvtScript N(80247FAC) = SCRIPT({
     PlaySoundAtCollider(47, 411, 0);
     EVT_VAR(15) = 0;
     loop 100 {
@@ -1822,7 +1822,7 @@ EvtSource N(80247FAC) = SCRIPT({
     sleep 100;
 });
 
-EvtSource N(8024834C) = SCRIPT({
+EvtScript N(8024834C) = SCRIPT({
     DisablePlayerInput(TRUE);
     InterpPlayerYaw(200, 0);
     SetPlayerPos(-60, 0, 30);
@@ -1860,7 +1860,7 @@ s32 N(itemList_80248598)[] = {
     ITEM_NONE,
 };
 
-EvtSource N(802485A8) = SCRIPT({
+EvtScript N(802485A8) = SCRIPT({
     DisablePlayerInput(TRUE);
     func_802D2884(-85, 85, 0);
     func_802CF56C(2);
@@ -1994,7 +1994,7 @@ EvtSource N(802485A8) = SCRIPT({
     }
 });
 
-EvtSource N(80248D3C) = SCRIPT({
+EvtScript N(80248D3C) = SCRIPT({
 0:
     IsPlayerWithin(-85, 85, 20, EVT_VAR(0));
     if (EVT_VAR(0) == 0) {
@@ -2015,7 +2015,7 @@ EvtSource N(80248D3C) = SCRIPT({
     N(func_802413BC_C9F2DC)();
 });
 
-EvtSource N(80248E30) = SCRIPT({
+EvtScript N(80248E30) = SCRIPT({
     if (EVT_STORY_PROGRESS < STORY_CH6_GREW_MAGIC_BEANSTALK) {
         loop {
             sleep 1;
@@ -2035,7 +2035,7 @@ EvtSource N(80248E30) = SCRIPT({
     }
 });
 
-EvtSource N(80248F48) = SCRIPT({
+EvtScript N(80248F48) = SCRIPT({
     bind N(802477EC) TRIGGER_FLOOR_TOUCH 46;
     EnableGroup(121, 1);
     EnableGroup(80, 1);
@@ -2074,7 +2074,7 @@ static s32 N(pad_9128)[] = {
     0x00000000, 0x00000000,
 };
 
-EvtSource N(makeEntities) = SCRIPT({
+EvtScript N(makeEntities) = SCRIPT({
     if (EVT_STORY_PROGRESS < STORY_EPILOGUE) {
         MakeEntity(0x802E9A18, 110, 60, -100, 0, MAKE_ENTITY_END);
     }
@@ -2102,89 +2102,7 @@ EvtSource N(makeEntities) = SCRIPT({
 
 #include "world/common/UnkFunc16.inc.c"
 
-ApiStatus N(func_80240BD4_C9EAF4)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
-    f32 posX, posY, posZ, posW;
-
-    territory.unk_00 = 0;
-    territory.shape = enemy->territory->patrol.detectShape;
-    territory.pointX = enemy->territory->patrol.detect.x;
-    territory.pointZ = enemy->territory->patrol.detect.z;
-    territory.sizeX = enemy->territory->patrol.detectSizeX;
-    territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_18 = 65.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall || enemy->unk_B0 & 4) {
-        script->functionTemp[0] = 0;
-        npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~0x800;
-        if (!enemy->territory->patrol.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~8;
-        } else {
-            npc->flags = (npc->flags & ~0x200) | 8;
-        }
-
-        if (enemy->unk_B0 & 4) {
-            script->functionTemp[0] = 99;
-            script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~4;
-        } else if (enemy->flags & ENEMY_FLAGS_40000000) {
-            script->functionTemp[0] = 12;
-            enemy->flags &= ~ENEMY_FLAGS_40000000;
-        }
-
-        posX = npc->pos.x;
-        posY = npc->pos.y + npc->collisionHeight;
-        posZ = npc->pos.z;
-        posW = 100.0f;
-
-        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
-            npc->pos.y = posY;
-        }
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
-        case 1:
-            N(UnkFunc13)(script, npcAISettings, territoryPtr);
-            break;
-        case 2:
-            N(UnkNpcAIFunc1)(script, npcAISettings, territoryPtr);
-        case 3:
-            N(UnkFunc14)(script, npcAISettings, territoryPtr);
-            break;
-        case 4:
-            N(UnkNpcAIFunc25)(script, npcAISettings, territoryPtr);
-            break;
-        case 10:
-            N(NpcJumpFunc2)(script, npcAISettings, territoryPtr);
-        case 11:
-            N(NpcJumpFunc)(script, npcAISettings, territoryPtr);
-            break;
-        case 12:
-            N(UnkNpcAIFunc13)(script, npcAISettings, territoryPtr);
-        case 13:
-            N(UnkFunc15)(script, npcAISettings, territoryPtr);
-            break;
-        case 14:
-            N(UnkNpcDurationFlagFunc)(script, npcAISettings, territoryPtr);
-            break;
-        case 15:
-            N(UnkFunc16)(script, npcAISettings, territoryPtr);
-            break;
-        case 99:
-            func_8004A73C(script);
-    }
-    return ApiStatus_BLOCK;
-}
+#include "world/common/UnkNpcAIMainFunc.inc.c"
 
 ApiStatus N(PostChapter6StatUpdate)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

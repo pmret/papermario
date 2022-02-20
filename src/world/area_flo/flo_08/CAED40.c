@@ -1,8 +1,8 @@
 #include "flo_08.h"
 
-extern s32 D_800F7F00[];
-extern s32 D_800F7F40[];
-extern s32 D_8008EF20[11][4];
+extern s32 wPartnerHudScripts[];
+extern s32 wDisabledPartnerHudScripts[];
+extern s32 gPartnerPopupProperties[11][4];
 
 #include "world/common/SetOverrideFlags_40.inc.c"
 
@@ -56,14 +56,14 @@ ApiStatus N(func_802401CC_CAEF0C)(Evt* script, s32 isInitialCall) {
 
             if (playerData->partners[idx].enabled) {
                 ptr->unk_108[i] = idx;
-                ptr->unk_84[i] = *D_8008EF20[idx];
+                ptr->unk_84[i] = *gPartnerPopupProperties[idx];
                 partnerLevel = N(UnkFunc37)(idx, var);
                 if (partnerLevel >= 0) {
-                    ptr->unk_00[i] = D_800F7F00[idx];
+                    ptr->unk_00[i] = wPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 1;
                     ptr->unk_294[i] = N(D_80241FC8_CB0D08)[i][partnerLevel];
                 } else {
-                    ptr->unk_00[i] = D_800F7F40[idx];
+                    ptr->unk_00[i] = wDisabledPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 0;
                     ptr->unk_294[i] = N(D_80241FB0_CB0CF0)[var];
                 }
@@ -97,7 +97,7 @@ ApiStatus N(func_802401CC_CAEF0C)(Evt* script, s32 isInitialCall) {
 
     destroy_popup_menu();
     if (script->functionTemp[1] != 0xFF) {
-        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1] - 1]][0];
+        script->varTable[0] = gPartnerPopupProperties[ptr->unk_108[script->functionTemp[1] - 1]][0];
         script->varTable[1] = ptr->unk_108[script->functionTemp[1] - 1];
     } else {
         script->varTable[0] = -1;
@@ -158,7 +158,7 @@ ApiStatus N(func_80240600_CAF340)(Evt* script, s32 isInitialCall) {
         scriptPtr->unk_5C = get_entity_by_index(evt_get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-            userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
+            userDataPtr->unk_08[i] = fx_motion_blur_flame(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
                                                    scriptPtr->unk_5C->position.z, 1.0f, -1);
             save = 0.0f;
             userDataPtr->unk_2C[i] = save;

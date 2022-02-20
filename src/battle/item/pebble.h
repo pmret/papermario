@@ -7,7 +7,7 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_pebble
 
-EvtSource N(UseItemWithEffect);
-EvtSource N(PlayerGoHome);
+extern EvtScript N(UseItemWithEffect);
+extern EvtScript N(PlayerGoHome);
 
 #endif

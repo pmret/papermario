@@ -1,10 +1,11 @@
 #include "common.h"
+#include "effects.h"
 
 void entity_shattering_init_pieces(Entity* entity, void* arg1, void* arg2);
 
 void entity_GreenStompSwitch_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    struct802E1400* temp = entity->dataBuf;
+    struct802E1400* temp = (struct802E1400*) entity->dataBuf.unk;
 
     if (entity->collisionFlags & 1) {
         if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
@@ -16,7 +17,7 @@ void entity_GreenStompSwitch_idle(Entity* entity) {
 }
 
 void entity_GreenStompSwitch_retract(Entity* entity) {
-    struct802E1400* temp = entity->dataBuf;
+    struct802E1400* temp = (struct802E1400*) entity->dataBuf.unk;
     u16 temp2 = temp->unk_22--;
 
     if (temp2) {
@@ -29,7 +30,7 @@ void entity_GreenStompSwitch_retract(Entity* entity) {
 }
 
 void entity_GreenStompSwitch_extend(Entity* entity) {
-    struct802E1400* temp = entity->dataBuf;
+    struct802E1400* temp = (struct802E1400*) entity->dataBuf.unk;
     u16 temp2 = temp->unk_22--;
 
     if (temp2) {
@@ -43,7 +44,7 @@ void entity_GreenStompSwitch_extend(Entity* entity) {
 void entity_raycast_down(f32*, f32*, f32*, f32*, f32*, f32*);
 
 void entity_switch_fall_down(Entity* entity) {
-    struct802E1400* temp_s1 = entity->dataBuf;
+    struct802E1400* temp_s1 = (struct802E1400*) entity->dataBuf.unk;
     f32 hitDepth = 10.0f;
     f32 x = entity->position.x;
     f32 y = entity->position.y;
@@ -76,7 +77,7 @@ void entity_HugeBlueSwitch_idle(Entity* entity) {
 }
 
 void entity_small_switch_idle(Entity* entity) {
-    struct802E1400* temp = entity->dataBuf;
+    struct802E1400* temp = (struct802E1400*) entity->dataBuf.unk;
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
@@ -128,7 +129,7 @@ void entity_RedSwitch_wait_and_reset(Entity* entity) {
 }
 
 void entity_base_switch_anim_init(Entity* entity) {
-    struct802E1400* temp = entity->dataBuf;
+    struct802E1400* temp = (struct802E1400*) entity->dataBuf.unk;
 
     temp->unk_00.x = 1.0f;
     temp->unk_00.y = 0.1f;
@@ -137,14 +138,12 @@ void entity_base_switch_anim_init(Entity* entity) {
     temp->unk_11 = 0;
 }
 
-#ifdef NON_MATCHING
-// needs rodata support
 s32 entity_RedSwitch_animate_scale(Entity* entity) {
     f32 temp_f0;
     f32 temp_f2;
     f32 temp_f4;
     f32 temp_f6;
-    struct802E1400* temp_s0 = entity->dataBuf;
+    struct802E1400* temp_s0 = (struct802E1400*) entity->dataBuf.unk;
     f32 phi_f4;
     s32 phi_s2 = 0;
 
@@ -310,23 +309,18 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
         exec_entity_commandlist(entity);
     }
 }
-#else
-INCLUDE_ASM(s32, "entity/Switch", entity_RedSwitch_animate_scale, Entity* entity);
-#endif
 
 void entity_base_switch_start_bound_script(Entity* entity) {
-    struct802E1400* temp = entity->dataBuf;
+    struct802E1400* temp = (struct802E1400*) entity->dataBuf.unk;
     set_area_flag(temp->unk_20);
     entity_start_script(entity);
 }
 
-#ifdef NON_MATCHING
-// needs rodata support
 void entity_base_switch_animate_scale(Entity* entity) {
     f32 temp_f0;
     f32 temp_f4;
     f32 temp_f6;
-    struct802E1400* temp_s0 = entity->dataBuf;
+    struct802E1400* temp_s0 = (struct802E1400*) entity->dataBuf.unk;
     f32 phi_f4;
     s32 phi_s2 = 0;
 
@@ -458,16 +452,13 @@ void entity_base_switch_animate_scale(Entity* entity) {
 
     temp_s0->unk_24++;
     if ((temp_s0->unk_24 == 10) && (temp_s0->attachedEntity == NULL)) {
-        playFX_6F(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
+        fx_cold_breath(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
     }
 }
-#else
-INCLUDE_ASM(void, "entity/Switch", entity_base_switch_animate_scale, Entity* entity);
-#endif
 
 void entity_base_switch_init(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    struct802E1400* temp = entity->dataBuf;
+    struct802E1400* temp = (struct802E1400*) entity->dataBuf.unk;
 
     playerStatus->animFlags |= 0x1000000;
     temp->unk_14.x = 1.0f;
@@ -477,15 +468,15 @@ void entity_base_switch_init(Entity* entity) {
 
 void entity_BlueSwitch_init(Entity* entity) {
     Entity* temp_v0_2;
-    struct802E1400* temp = entity->dataBuf;
+    struct802E1400* temp = (struct802E1400*) entity->dataBuf.unk;
 
     entity_base_switch_init(entity);
-    if (D_8015C7D0[0] == 2) {
+    if (CreateEntityVarArgBuffer[0] == 2) {
         D_802EB3A0 = entity;
         return;
     }
 
-    if (D_8015C7D0[0] == 1) {
+    if (CreateEntityVarArgBuffer[0] == 1) {
         if (D_802EB3A0 != NULL) {
             temp->attachedEntity = D_802EB3A0;
             entity->flags |= ENTITY_FLAGS_HIDDEN;
@@ -500,7 +491,7 @@ void entity_HugeBlueSwitch_init(Entity* entity) {
     struct802E1400* temp;
 
     entity_base_switch_init(entity);
-    temp = entity->dataBuf;
+    temp = (struct802E1400*) entity->dataBuf.unk;
     entity->scale.x = 3.0f;
     entity->scale.y = 3.0f;
     entity->scale.z = 3.0f;
@@ -542,7 +533,7 @@ void entity_shattering_setupGfx(s32 entityIndex) {
     threeSixty = 360.0f;
     someFloat = 0.00390625f;
     entity = get_entity_by_index(entityIndex);
-    temp_s4 = entity->dataBuf;
+    temp_s4 = (struct802E1400*) entity->dataBuf.unk;
     x_inv = -entity->position.x;
     y_inv = -entity->position.y;
     z_inv = -entity->position.z;

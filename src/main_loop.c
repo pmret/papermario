@@ -5,8 +5,8 @@
 #include "sprite.h"
 #include "overlay.h"
 
-s8 D_80074020 = 1;
-s8 D_80074021 = 5;
+s8 gGameStepDelayAmount = 1;
+s8 gGameStepDelayCount = 5;
 
 GameStatus gGameStatus = {0};
 GameStatus* gGameStatusPtr = &gGameStatus;
@@ -50,22 +50,23 @@ void gfx_draw_background(void);
 
 void step_game_loop(void) {
     PlayerData* playerData = &gPlayerData;
+    const int MAX_GAME_TIME = 1000*60*60*60 - 1; // 1000 hours minus one frame at 60 fps
 
     update_input();
 
     gGameStatusPtr->frameCounter++;
 
     playerData->frameCounter += 2;
-    if (playerData->frameCounter > 215999999) {
-        playerData->frameCounter = 215999999;
+    if (playerData->frameCounter > MAX_GAME_TIME) {
+        playerData->frameCounter = MAX_GAME_TIME;
     }
 
     update_max_rumble_duration();
 
-    if (D_80074021 != 0) {
-        D_80074021-- ;
-        if (D_80074021 == 0) {
-            D_80074021 = D_80074020;
+    if (gGameStepDelayCount != 0) {
+        gGameStepDelayCount-- ;
+        if (gGameStepDelayCount == 0) {
+            gGameStepDelayCount = gGameStepDelayAmount;
         } else {
             return;
         }
@@ -87,10 +88,10 @@ void step_game_loop(void) {
     update_windows();
     update_curtains();
 
-    if (gOverrideFlags & 0x20) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL) {
         switch (D_800741A2) {
             case 0:
-                gOverrideFlags |= 0x200;
+                gOverrideFlags |= GLOBAL_OVERRIDES_200;
                 disable_player_input();
 
                 if (D_800741A0 == 255) {
@@ -104,12 +105,12 @@ void step_game_loop(void) {
                 }
                 break;
             case 1:
-                gOverrideFlags |= 0x8;
+                gOverrideFlags |= GLOBAL_OVERRIDES_8;
                 D_8009A690--;
                 if (D_8009A690 == 0) {
                     sfx_stop_env_sounds();
-                    set_game_mode(0);
-                    gOverrideFlags &= ~0x20;
+                    set_game_mode(GAME_MODE_STARTUP);
+                    gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL;
                 }
                 break;
         }
@@ -118,28 +119,28 @@ void step_game_loop(void) {
         D_800741A2 = 0;
     }
 
-    if (gOverrideFlags & 0x100) {
-        gOverrideFlags |= 0x1000;
+    if (gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_BATTLES) {
+        gOverrideFlags |= GLOBAL_OVERRIDES_1000;
     } else {
-        gOverrideFlags &= ~0x1000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_1000;
     }
 
-    if (gOverrideFlags & 0x200) {
-        gOverrideFlags |= 0x2000;
+    if (gOverrideFlags & GLOBAL_OVERRIDES_200) {
+        gOverrideFlags |= GLOBAL_OVERRIDES_2000;
     } else {
-        gOverrideFlags &= ~0x2000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_2000;
     }
 
-    if (gOverrideFlags & 0x400) {
-        gOverrideFlags |= 0x4000;
+    if (gOverrideFlags & GLOBAL_OVERRIDES_400) {
+        gOverrideFlags |= GLOBAL_OVERRIDES_4000;
     } else {
-        gOverrideFlags &= ~0x4000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_4000;
     }
 
-    if (gOverrideFlags & 0x800) {
-        gOverrideFlags |= 0x8000;
+    if (gOverrideFlags & GLOBAL_OVERRIDES_800) {
+        gOverrideFlags |= GLOBAL_OVERRIDES_8000;
     } else {
-        gOverrideFlags &= ~0x8000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_8000;
     }
 
     rand_int(1);
@@ -167,7 +168,7 @@ void gfx_draw_frame(void) {
     gMatrixListPos = 0;
     gMasterGfxPos = &gDisplayContext->mainGfx[0];
 
-    if (gOverrideFlags & 8) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_8) {
         gCurrentDisplayContextIndex = gCurrentDisplayContextIndex ^ 1;
         return;
     }
@@ -176,7 +177,7 @@ void gfx_draw_frame(void) {
 
     spr_render_init();
 
-    if (!(gOverrideFlags & 2)) {
+    if (!(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD)) {
         render_frame(0);
     }
 
@@ -188,14 +189,15 @@ void gfx_draw_frame(void) {
     render_effects_UI();
     state_render_backUI();
 
-    if (!(gOverrideFlags & 0x10000)) {
+    if (!(gOverrideFlags & GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS)) {
         render_window_root();
     }
-    if (!(gOverrideFlags & 2) && gGameStatusPtr->disableScripts == 0) {
+
+    if (!(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD) && !gGameStatusPtr->disableScripts) {
         render_frame(1);
     }
 
-    if (!(gOverrideFlags & 0x100010)) {
+    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS | GLOBAL_OVERRIDES_10))) {
         render_messages();
     }
 
@@ -203,22 +205,22 @@ void gfx_draw_frame(void) {
     render_hud_elements_frontUI();
     render_screen_overlay_frontUI();
 
-    if ((gOverrideFlags & 0x100010) == 0x10) {
+    if ((gOverrideFlags & (GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS | GLOBAL_OVERRIDES_10)) == GLOBAL_OVERRIDES_10) {
         render_messages();
     }
 
     render_curtains();
 
-    if (gOverrideFlags & 0x100000) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS) {
         render_messages();
     }
-    if (gOverrideFlags & 0x10000) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS) {
         render_window_root();
     }
 
     state_render_frontUI();
 
-    if (gOverrideFlags & 0x20) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL) {
         switch (D_800741A2) {
             case 0:
             case 1:
@@ -250,7 +252,7 @@ void load_engine_data(void) {
 
     gOverrideFlags = 0;
     gGameStatusPtr->unk_79 = 0;
-    gGameStatusPtr->enableBackground = 0;
+    gGameStatusPtr->backgroundFlags = 0;
     gGameStatusPtr->musicEnabled = 1;
     gGameStatusPtr->unk_7C = 1;
     gGameStatusPtr->creditsViewportMode = -1;
@@ -260,7 +262,7 @@ void load_engine_data(void) {
     gGameStatusPtr->unk_83 = 4;
     timeFreezeMode = 0;
     gGameStatusPtr->debugQuizmo = gGameStatusPtr->unk_13C = 0;
-    D_80074021 = 5;
+    gGameStepDelayCount = 5;
     gGameStatusPtr->saveCount = 0;
     fio_init_flash();
     func_80028838();
@@ -301,8 +303,8 @@ void load_engine_data(void) {
         gGameStatusPtr->unk_48[i] = 12;
     }
 
-    gOverrideFlags |= 0x8;
-    set_game_mode(0);
+    gOverrideFlags |= GLOBAL_OVERRIDES_8;
+    set_game_mode(GAME_MODE_STARTUP);
 }
 
 /// Time freeze modes:
@@ -315,30 +317,30 @@ void set_time_freeze_mode(s32 mode) {
     switch (mode) {
         case 0:
             timeFreezeMode = mode;
-            gOverrideFlags &= ~0xF00;
+            gOverrideFlags &= ~(GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES);
             resume_all_group(3);
             break;
         case 1:
             timeFreezeMode = mode;
-            gOverrideFlags &= ~0xE00;
-            gOverrideFlags |= 0x100;
+            gOverrideFlags &= ~(GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200);
+            gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_BATTLES;
             suspend_all_group(1);
             break;
         case 2:
             timeFreezeMode = mode;
-            gOverrideFlags &= ~0xC00;
-            gOverrideFlags |= 0x300;
+            gOverrideFlags &= ~(GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800);
+            gOverrideFlags |= GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;
             suspend_all_group(2);
             break;
         case 3:
             timeFreezeMode = mode;
-            gOverrideFlags &= ~0x800;
-            gOverrideFlags |= 0x700;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_800;
+            gOverrideFlags |= GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;
             suspend_all_group(2);
             break;
         case 4:
             timeFreezeMode = mode;
-            gOverrideFlags |= 0xF00;
+            gOverrideFlags |= GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;
             break;
     }
 }
@@ -422,10 +424,10 @@ void func_80027BAC(s32 arg0, s32 arg1) {
 void gfx_draw_background(void) {
     Camera* camera;
     s32 bgFlags;
-    s32 backgroundMinW;
-    s32 backgroundSumW;
-    s32 backgroundMinH;
-    s32 backgroundSumH;
+    s32 backgroundMinX;
+    s32 backgroundMaxX;
+    s32 backgroundMinY;
+    s32 backgroundMaxY;
     s32 viewportStartX;
     s32 i;
     s32 a = 0x18;
@@ -433,7 +435,7 @@ void gfx_draw_background(void) {
     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     camera = &gCameras[gCurrentCameraID];
-    bgFlags = gGameStatusPtr->enableBackground & 0xF0;
+    bgFlags = gGameStatusPtr->backgroundFlags & 0xF0;
 
     switch (bgFlags) {
         case 0x10:
@@ -447,14 +449,14 @@ void gfx_draw_background(void) {
             gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
             gDPPipeSync(gMasterGfxPos++);
             gDPSetDepthSource(gMasterGfxPos++, G_ZS_PIXEL);
-            gGameStatusPtr->enableBackground &= ~0xF0;
-            gGameStatusPtr->enableBackground |= 0x20;
+            gGameStatusPtr->backgroundFlags &= ~0xF0;
+            gGameStatusPtr->backgroundFlags |= 0x20;
             break;
         case 0x20:
             gfx_transfer_frame_to_depth(nuGfxCfb[0], nuGfxCfb[1], nuGfxZBuffer); // applies filters to the framebuffer
             D_800741F8 = 0;
-            gGameStatusPtr->enableBackground &= ~0xF0;
-            gGameStatusPtr->enableBackground |= 0x30;
+            gGameStatusPtr->backgroundFlags &= ~0xF0;
+            gGameStatusPtr->backgroundFlags |= 0x30;
             // fall through
         case 0x30:
             D_800741F8 += 0x10;
@@ -488,7 +490,7 @@ void gfx_draw_background(void) {
             }
             break;
         default:
-            if (gOverrideFlags & 8) {
+            if (gOverrideFlags & GLOBAL_OVERRIDES_8) {
                 gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
                 return;
             }
@@ -503,62 +505,62 @@ void gfx_draw_background(void) {
             gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
             gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(camera->bgColor[0], camera->bgColor[1], camera->bgColor[2], 1));
 
-            backgroundMinW = gGameStatusPtr->backgroundMinW;
-            backgroundSumW = backgroundMinW + gGameStatusPtr->backgroundMaxW;
-            backgroundMinH = gGameStatusPtr->backgroundMinH;
-            backgroundSumH = backgroundMinH + gGameStatusPtr->backgroundMaxH;
+            backgroundMinX = gGameStatusPtr->backgroundMinX;
+            backgroundMaxX = backgroundMinX + gGameStatusPtr->backgroundMaxX;
+            backgroundMinY = gGameStatusPtr->backgroundMinY;
+            backgroundMaxY = backgroundMinY + gGameStatusPtr->backgroundMaxY;
             viewportStartX = camera->viewportStartX;
 
-            if (backgroundMinW < viewportStartX) {
-                backgroundMinW = viewportStartX;
+            if (backgroundMinX < viewportStartX) {
+                backgroundMinX = viewportStartX;
             }
 
-            if (backgroundMinH < camera->viewportStartY) {
-                backgroundMinH = camera->viewportStartY;
+            if (backgroundMinY < camera->viewportStartY) {
+                backgroundMinY = camera->viewportStartY;
             }
 
-            if (backgroundSumW > viewportStartX + camera->viewportW) {
-                backgroundSumW = viewportStartX + camera->viewportW;
+            if (backgroundMaxX > viewportStartX + camera->viewportW) {
+                backgroundMaxX = viewportStartX + camera->viewportW;
             }
 
-            if (backgroundSumH > camera->viewportStartY + camera->viewportH) {
-                backgroundSumH = camera->viewportStartY + camera->viewportH;
+            if (backgroundMaxY > camera->viewportStartY + camera->viewportH) {
+                backgroundMaxY = camera->viewportStartY + camera->viewportH;
             }
 
-            if (backgroundMinW < 0) {
-                backgroundMinW = 0;
+            if (backgroundMinX < 0) {
+                backgroundMinX = 0;
             }
 
-            if (backgroundMinH < 0) {
-                backgroundMinH = 0;
+            if (backgroundMinY < 0) {
+                backgroundMinY = 0;
             }
 
-            if (backgroundSumW < 1) {
-                backgroundSumW = 1;
+            if (backgroundMaxX < 1) {
+                backgroundMaxX = 1;
             }
 
-            if (backgroundSumH < 1) {
-                backgroundSumH = 1;
+            if (backgroundMaxY < 1) {
+                backgroundMaxY = 1;
             }
 
-            if (backgroundMinW > SCREEN_WIDTH - 1) {
-                backgroundMinW = SCREEN_WIDTH - 1;
+            if (backgroundMinX > SCREEN_WIDTH - 1) {
+                backgroundMinX = SCREEN_WIDTH - 1;
             }
 
-            if (backgroundMinH > SCREEN_HEIGHT - 1) {
-                backgroundMinH = SCREEN_HEIGHT - 1;
+            if (backgroundMinY > SCREEN_HEIGHT - 1) {
+                backgroundMinY = SCREEN_HEIGHT - 1;
             }
 
-            if (backgroundSumW > SCREEN_WIDTH) {
-                backgroundSumW = SCREEN_WIDTH;
+            if (backgroundMaxX > SCREEN_WIDTH) {
+                backgroundMaxX = SCREEN_WIDTH;
             }
 
-            if (backgroundSumH > SCREEN_HEIGHT) {
-                backgroundSumH = SCREEN_HEIGHT;
+            if (backgroundMaxY > SCREEN_HEIGHT) {
+                backgroundMaxY = SCREEN_HEIGHT;
             }
 
-            if (!(gGameStatusPtr->enableBackground & 1)) {
-                gDPFillRectangle(gMasterGfxPos++, backgroundMinW, backgroundMinH, backgroundSumW - 1, backgroundSumH - 1);
+            if (!(gGameStatusPtr->backgroundFlags & 1)) {
+                gDPFillRectangle(gMasterGfxPos++, backgroundMinX, backgroundMinY, backgroundMaxX - 1, backgroundMaxY - 1);
             } else {
                 appendGfx_background_texture();
             }
@@ -569,23 +571,23 @@ void gfx_draw_background(void) {
             gDPSetFillColor(gMasterGfxPos++, 0x00010001);
             gDPPipeSync(gMasterGfxPos++);
 
-            if (backgroundMinH > 0) {
-                gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH - 1, backgroundMinH - 1);
+            if (backgroundMinY > 0) {
+                gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH - 1, backgroundMinY - 1);
                 gDPNoOp(gMasterGfxPos++);
             }
 
-            if (backgroundMinW > 0) {
-                gDPFillRectangle(gMasterGfxPos++, 0, backgroundMinH, backgroundMinW - 1, backgroundSumH - 1);
+            if (backgroundMinX > 0) {
+                gDPFillRectangle(gMasterGfxPos++, 0, backgroundMinY, backgroundMinX - 1, backgroundMaxY - 1);
                 gDPNoOp(gMasterGfxPos++);
             }
 
-            if (backgroundSumW < SCREEN_WIDTH) {
-                gDPFillRectangle(gMasterGfxPos++, backgroundSumW, backgroundMinH, SCREEN_WIDTH - 1, backgroundSumH - 1);
+            if (backgroundMaxX < SCREEN_WIDTH) {
+                gDPFillRectangle(gMasterGfxPos++, backgroundMaxX, backgroundMinY, SCREEN_WIDTH - 1, backgroundMaxY - 1);
                 gDPNoOp(gMasterGfxPos++);
             }
 
-            if (backgroundSumH < 0xF0) {
-                gDPFillRectangle(gMasterGfxPos++, 0, backgroundSumH, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+            if (backgroundMaxY < 0xF0) {
+                gDPFillRectangle(gMasterGfxPos++, 0, backgroundMaxY, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
                 gDPNoOp(gMasterGfxPos++);
             }
             break;

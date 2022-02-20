@@ -46,8 +46,8 @@ extern s32 D_80241440_9EF030[12];
 extern s32 D_80241438_9EF028;
 extern s32 D_8024143C_9EF02C;
 extern s32 D_80243254_9F0E44;
-extern EvtSource D_80241470_9EF060;
-extern EvtSource D_8024161C_9EF20C;
+extern EvtScript D_80241470_9EF060;
+extern EvtScript D_8024161C_9EF20C;
 extern s32 D_80241768_9EF358;
 extern s32 D_80241748_9EF338;
 
@@ -180,7 +180,7 @@ ApiStatus func_802406C4_9EE2B4(Evt* script, s32 isInitialCall) {
     s32 temp_s1_2 = evt_get_variable(script, *args++);
     s32 temp_s2 = evt_get_variable(script, *args++);
     Evt* script2;
-    EvtSource* phi_a0;
+    EvtScript* phi_a0;
 
     temp_s1_2 %= 6;
 

@@ -1,9 +1,9 @@
 #include "flo_16.h"
 #include "message_ids.h"
 
-extern s32 D_800F7F00[];
-extern s32 D_800F7F40[];
-extern s32 D_8008EF20[11][4];
+extern s32 wPartnerHudScripts[];
+extern s32 wDisabledPartnerHudScripts[];
+extern s32 gPartnerPopupProperties[11][4];
 
 EntryList N(entryList) = {
     { -720.0f,   0.0f, 0.0f,  90.0f },
@@ -18,7 +18,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_16_tattle },
 };
 
-EvtSource N(802429D0) = {
+EvtScript N(802429D0) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
@@ -29,11 +29,11 @@ EvtSource N(802429D0) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_80242A40) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  4);
+EvtScript N(exitWalk_80242A40) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  4);
 
-EvtSource N(exitWalk_80242A9C) = EXIT_WALK_SCRIPT(60,  1, "flo_17",  0);
+EvtScript N(exitWalk_80242A9C) = EXIT_WALK_SCRIPT(60,  1, "flo_17",  0);
 
-EvtSource N(80242AF8) = {
+EvtScript N(80242AF8) = {
     EVT_BIND_TRIGGER(N(exitWalk_80242A40), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_80242A9C), TRIGGER_FLOOR_ABOVE, 4, 1, 0)
     EVT_RETURN
@@ -45,7 +45,7 @@ s32 N(lavaResetList_80242B40)[] = {
     0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -98,7 +98,7 @@ EvtSource N(main) = {
     EVT_END
 };
 
-EvtSource N(80242EA0) = {
+EvtScript N(80242EA0) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -139,7 +139,7 @@ EvtSource N(80242EA0) = {
     EVT_END
 };
 
-EvtSource N(8024314C) = {
+EvtScript N(8024314C) = {
     EVT_SET(EVT_VAR(9), EVT_VAR(6))
     EVT_SET(EVT_VAR(8), EVT_VAR(5))
     EVT_SET(EVT_VAR(7), EVT_VAR(4))
@@ -191,7 +191,7 @@ EvtSource N(8024314C) = {
     EVT_END
 };
 
-EvtSource N(8024346C) = {
+EvtScript N(8024346C) = {
     EVT_CALL(ModifyColliderFlags, 3, 20, 0x00000006)
     EVT_SET(EVT_VAR(0), -740)
     EVT_SET(EVT_VAR(1), -140)
@@ -261,7 +261,7 @@ f32 N(D_80243758_CD5588)[] = {
     140.0f, 180.0f, 220.0f,
 };
 
-EvtSource N(80243764) = {
+EvtScript N(80243764) = {
     EVT_WAIT_FRAMES(10)
     EVT_CALL(PlaySound, 0x212D)
     EVT_CALL(N(UnkFunc21), EVT_MAP_VAR(0))
@@ -293,7 +293,7 @@ EvtSource N(80243764) = {
     EVT_END
 };
 
-EvtSource N(802438C8) = {
+EvtScript N(802438C8) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1403), 1)
         EVT_RETURN
     EVT_END_IF
@@ -377,7 +377,7 @@ EvtSource N(802438C8) = {
     EVT_END
 };
 
-EvtSource N(80243D48) = {
+EvtScript N(80243D48) = {
     EVT_LABEL(0)
     EVT_CALL(GetPlayerPos, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_CALL(SetCamTarget, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
@@ -387,7 +387,7 @@ EvtSource N(80243D48) = {
     EVT_END
 };
 
-EvtSource N(80243DB0) = {
+EvtScript N(80243DB0) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerActionState, 6)
@@ -403,7 +403,7 @@ EvtSource N(80243DB0) = {
     EVT_END
 };
 
-EvtSource N(80243E80) = {
+EvtScript N(80243E80) = {
     EVT_IF_EQ(EVT_AREA_FLAG(39), 0)
         EVT_CALL(N(UnkFunc44))
         EVT_IF_EQ(EVT_VAR(0), 0)
@@ -420,7 +420,7 @@ EvtSource N(80243E80) = {
     EVT_END
 };
 
-EvtSource N(makeEntities) = {
+EvtScript N(makeEntities) = {
     EVT_SET(EVT_AREA_FLAG(39), 0)
     EVT_BIND_TRIGGER(N(80243E80), TRIGGER_FLOOR_TOUCH, 20, 1, 0)
     EVT_CALL(MakeEntity, 0x802EA910, 350, 240, -100, 0, MAKE_ENTITY_END)
@@ -485,14 +485,14 @@ ApiStatus N(func_802402AC_CD20DC)(Evt* script, s32 isInitialCall) {
 
             if (playerData->partners[idx].enabled) {
                 ptr->unk_108[i] = idx;
-                ptr->unk_84[i] = *D_8008EF20[idx];
+                ptr->unk_84[i] = *gPartnerPopupProperties[idx];
                 partnerLevel = N(UnkFunc37)(idx, var);
                 if (partnerLevel >= 0) {
-                    ptr->unk_00[i] = D_800F7F00[idx];
+                    ptr->unk_00[i] = wPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 1;
                     ptr->unk_294[i] = N(D_80243718_CD5548)[i][partnerLevel];
                 } else {
-                    ptr->unk_00[i] = D_800F7F40[idx];
+                    ptr->unk_00[i] = wDisabledPartnerHudScripts[idx];
                     ptr->unk_18C[i] = 0;
                     ptr->unk_294[i] = N(D_80243700_CD5530)[var];
                 }
@@ -526,7 +526,7 @@ ApiStatus N(func_802402AC_CD20DC)(Evt* script, s32 isInitialCall) {
 
     destroy_popup_menu();
     if (script->functionTemp[1] != 0xFF) {
-        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1] - 1]][0];
+        script->varTable[0] = gPartnerPopupProperties[ptr->unk_108[script->functionTemp[1] - 1]][0];
         script->varTable[1] = ptr->unk_108[script->functionTemp[1] - 1];
     } else {
         script->varTable[0] = -1;
@@ -587,7 +587,7 @@ ApiStatus N(func_802406E0_CD2510)(Evt* script, s32 isInitialCall) {
         scriptPtr->unk_5C = get_entity_by_index(evt_get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-            userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
+            userDataPtr->unk_08[i] = fx_motion_blur_flame(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
                                                    scriptPtr->unk_5C->position.z, 1.0f, -1);
             save = 0.0f;
             userDataPtr->unk_2C[i] = save;

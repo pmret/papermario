@@ -1,6 +1,7 @@
 #! /usr/bin/python3
 
 import struct
+import argparse
 
 def fmt_size(val):
     if val == 0:
@@ -56,6 +57,7 @@ def fmt_size(val):
     else:
         return val
 
+
 class HudElementScript():
     def __init__(self, symbol):
         self.symbol = symbol
@@ -69,7 +71,7 @@ class HudElementScript():
         indent = "    "
         op = 99
 
-        print(f"HudElementAnim {self.symbol} = {{")
+        print(f"HudScript {self.symbol} = {{")
 
         while op:
             op = next(buf, -1)
@@ -141,9 +143,8 @@ class HudElementScript():
 
         print("};\n")
 
-if __name__ == "__main__":
-    import argparse
 
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("file", type=str, help=".data.s file to dissassemble")
 

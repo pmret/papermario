@@ -1,4 +1,5 @@
 #include "gv_01.h"
+#include "sprite.h"
 
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
@@ -34,4 +35,39 @@ ApiStatus func_802405EC_E1EA4C(Evt* script, s32 isInitialCall) {
     return script->functionTemp[0] == 255;
 }
 
-INCLUDE_ASM(s32, "world/area_gv/gv_01/E1E460", func_80240688_E1EAE8);
+ApiStatus func_80240688_E1EAE8(Evt* script, s32 isInitialCall) {
+    gGameStatusPtr->isBattle = FALSE;
+    gGameStatusPtr->unk_76 = 0;
+    gGameStatusPtr->disableScripts = 0;
+    gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
+    general_heap_create();
+    clear_render_tasks();
+    clear_generic_entity_list();
+    clear_script_list();
+    create_cameras_a();
+    spr_init_sprites(0);
+    clear_entity_models();
+    clear_animator_list();
+    clear_model_data();
+    clear_sprite_shading_data();
+    reset_background_settings();
+    clear_hud_element_cache();
+    clear_trigger_data();
+    clear_printers();
+    clear_entity_data(0);
+    clear_screen_overlays();
+    clear_player_status();
+    clear_npcs();
+    clear_player_data();
+    reset_battle_status();
+    init_encounter_status();
+    clear_effect_data();
+    clear_item_entity_data();
+    clear_saved_variables();
+    initialize_collision();
+    intro_logos_set_fade_alpha(255);
+    intro_logos_set_fade_color(208);
+    set_game_mode(GAME_MODE_TITLE_SCREEN);
+    return ApiStatus_FINISH;
+}

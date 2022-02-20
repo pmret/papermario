@@ -85,7 +85,7 @@ ApiStatus func_8021849C_6DC23C(Evt* script, s32 isInitialCall) {
     playerStatus->flags |= 0x1000000;
     entity->collisionFlags = 0x40;
     playerStatus->actionState = ACTION_STATE_HAMMER;
-    entity->staticData->unk_data_ptr2(entity);
+    entity->blueprint->fpHandleCollision(entity);
     entity->unk_07 = 0xA;
     entity->flags |= ENTITY_FLAGS_DETECTED_COLLISION;
     collisionStatus->lastWallHammered = -1;

@@ -25,8 +25,8 @@ glabel func_80240AD0_A39FB0
 /* A3A000 80240B20 0280902D */  daddu     $s2, $s4, $zero
 /* A3A004 80240B24 3C17F840 */  lui       $s7, 0xf840
 /* A3A008 80240B28 36F7626B */  ori       $s7, $s7, 0x626b
-/* A3A00C 80240B2C 3C1E8009 */  lui       $fp, %hi(D_8008A680)
-/* A3A010 80240B30 27DEA680 */  addiu     $fp, $fp, %lo(D_8008A680)
+/* A3A00C 80240B2C 3C1E8009 */  lui       $fp, %hi(gItemHudScripts)
+/* A3A010 80240B30 27DEA680 */  addiu     $fp, $fp, %lo(gItemHudScripts)
 /* A3A014 80240B34 3C118024 */  lui       $s1, %hi(D_802435EC_A3CACC)
 /* A3A018 80240B38 263135EC */  addiu     $s1, $s1, %lo(D_802435EC_A3CACC)
 /* A3A01C 80240B3C 02A0802D */  daddu     $s0, $s5, $zero

@@ -23,7 +23,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_09_tattle },
 };
 
-EvtSource N(80241880) = {
+EvtScript N(80241880) = {
     EVT_SWITCH(EVT_SAVE_VAR(0))
         EVT_CASE_LT(53)
             EVT_CALL(SetMusicTrack, 0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8)
@@ -34,7 +34,7 @@ EvtSource N(80241880) = {
     EVT_END
 };
 
-EvtSource N(802418F0) = {
+EvtScript N(802418F0) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -75,18 +75,18 @@ EvtSource N(802418F0) = {
     EVT_END
 };
 
-EvtSource N(exitWalk_80241B9C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  5);
+EvtScript N(exitWalk_80241B9C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  5);
 
-EvtSource N(exitWalk_80241BF8) = EXIT_WALK_SCRIPT(60,  1, "flo_03",  0);
+EvtScript N(exitWalk_80241BF8) = EXIT_WALK_SCRIPT(60,  1, "flo_03",  0);
 
-EvtSource N(80241C54) = {
+EvtScript N(80241C54) = {
     EVT_BIND_TRIGGER(N(exitWalk_80241B9C), TRIGGER_FLOOR_ABOVE, 0, 1, 0)
     EVT_BIND_TRIGGER(N(exitWalk_80241BF8), TRIGGER_FLOOR_ABOVE, 4, 1, 0)
     EVT_RETURN
     EVT_END
 };
 
-EvtSource N(main) = {
+EvtScript N(main) = {
     EVT_SET(EVT_SAVE_VAR(425), 38)
     EVT_CALL(SetSpriteShading, -1)
     EVT_CALL(SetCamPerspective, 0, 3, 25, 16, 4096)
@@ -148,7 +148,7 @@ static s32 N(pad_2004)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-EvtSource N(80242010) = {
+EvtScript N(80242010) = {
     EVT_SET_GROUP(11)
     EVT_SET(EVT_VAR(10), EVT_VAR(0))
     EVT_SET(EVT_VAR(11), EVT_VAR(1))
@@ -189,7 +189,7 @@ EvtSource N(80242010) = {
     EVT_END
 };
 
-EvtSource N(802422BC) = {
+EvtScript N(802422BC) = {
     EVT_SET(EVT_VAR(9), EVT_VAR(6))
     EVT_SET(EVT_VAR(8), EVT_VAR(5))
     EVT_SET(EVT_VAR(7), EVT_VAR(4))
@@ -241,7 +241,7 @@ EvtSource N(802422BC) = {
     EVT_END
 };
 
-EvtSource N(802425DC) = {
+EvtScript N(802425DC) = {
     EVT_CALL(GetModelCenter, 69)
     EVT_SET(EVT_VAR(3), 69)
     EVT_SET(EVT_VAR(4), 70)
@@ -292,9 +292,9 @@ static s32 N(pad_2874)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-#include "world/common/foliage.inc.c"
+#include "common/foliage.inc.c"
 
-EvtSource N(802431E4) = {
+EvtScript N(802431E4) = {
     EVT_CALL(GetNpcPos, 3, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2))
     EVT_IF_LT(EVT_VAR(1), 0)
         EVT_CALL(GetModelCenter, EVT_VAR(9))
@@ -305,7 +305,7 @@ EvtSource N(802431E4) = {
     EVT_END
 };
 
-EvtSource N(tree1_Callback) = {
+EvtScript N(tree1_Callback) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1382), 0)
         EVT_IF_EQ(EVT_AREA_VAR(5), 1)
             EVT_CALL(MakeItemEntity, ITEM_HAPPY_FLOWER_B, -250, 100, 0, 13, EVT_SAVE_FLAG(1382))
@@ -320,7 +320,7 @@ EvtSource N(tree1_Callback) = {
     EVT_END
 };
 
-EvtSource N(tree2_Callback) = {
+EvtScript N(tree2_Callback) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1382), 0)
         EVT_SET(EVT_AREA_VAR(4), 1)
         EVT_SET(EVT_AREA_VAR(5), 0)
@@ -329,7 +329,7 @@ EvtSource N(tree2_Callback) = {
     EVT_END
 };
 
-EvtSource N(tree3_Callback) = {
+EvtScript N(tree3_Callback) = {
     EVT_IF_EQ(EVT_SAVE_FLAG(1382), 0)
         EVT_IF_EQ(EVT_AREA_VAR(4), 1)
             EVT_IF_EQ(EVT_AREA_VAR(5), 0)
@@ -400,7 +400,7 @@ ShakeTreeConfig N(tree3) = {
 
 Vec4f N(triggerCoord_80243498) = { 200.0f, 0.0f, 1.0f, 0.0f };
 
-EvtSource N(802434A8) = {
+EvtScript N(802434A8) = {
     EVT_SET(EVT_AREA_VAR(4), 0)
     EVT_SET(EVT_AREA_VAR(5), 0)
     EVT_SET(EVT_VAR(0), EVT_PTR(N(tree1)))
@@ -431,7 +431,7 @@ NpcAISettings N(npcAISettings_802435B0) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_802435E0) = {
+EvtScript N(npcAI_802435E0) = {
     EVT_CALL(DoBasicAI, EVT_PTR(N(npcAISettings_802435B0)))
     EVT_RETURN
     EVT_END
@@ -441,8 +441,8 @@ NpcSettings N(npcSettings_80243600) = {
     .height = 30,
     .radius = 24,
     .ai = &N(npcAI_802435E0),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 19,
 };
 
@@ -466,7 +466,7 @@ NpcAISettings N(npcAISettings_80243644) = {
     .unk_2C = 1,
 };
 
-EvtSource N(npcAI_80243674) = {
+EvtScript N(npcAI_80243674) = {
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
@@ -480,8 +480,8 @@ NpcSettings N(npcSettings_802436E4) = {
     .height = 26,
     .radius = 24,
     .ai = &N(npcAI_80243674),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 19,
 };
 
@@ -491,7 +491,7 @@ NpcSettings N(npcSettings_80243710) = {
     .level = 99,
 };
 
-EvtSource N(npcAI_8024373C) = {
+EvtScript N(npcAI_8024373C) = {
     EVT_LOOP(0)
         EVT_CALL(GetSelfVar, 0, EVT_VAR(0))
         EVT_SWITCH(EVT_VAR(0))
@@ -518,7 +518,7 @@ EvtSource N(npcAI_8024373C) = {
     EVT_END
 };
 
-EvtSource N(defeat_802438C8) = {
+EvtScript N(defeat_802438C8) = {
     EVT_CALL(GetBattleOutcome, EVT_VAR(0))
     EVT_SWITCH(EVT_VAR(0))
         EVT_CASE_EQ(0)
@@ -532,7 +532,7 @@ EvtSource N(defeat_802438C8) = {
     EVT_END
 };
 
-EvtSource N(init_80243954) = {
+EvtScript N(init_80243954) = {
     EVT_CALL(BindNpcIdle, NPC_SELF, EVT_PTR(N(npcAI_8024373C)))
     EVT_CALL(BindNpcDefeat, NPC_SELF, EVT_PTR(N(defeat_802438C8)))
     EVT_RETURN

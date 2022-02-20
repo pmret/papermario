@@ -17,9 +17,10 @@ MusicSettings D_8014F6F0 = {
     .unk_2C = 0
 };
 
-s32 gSongsUsingVariationFlag[] = { SONG_SPECIAL_BATTLE, SONG_TUBBA_BLUBBA_BATTLE, SONG_JR_TROOPA_BATTLE,
-                                      SONG_YOSHI_KIDS_FOUND, SONG_ITEM_UPGRADE, SONG_NEW_PARTNER,
-                                    };
+s32 gSongsUsingVariationFlag[] = {
+    SONG_SPECIAL_BATTLE, SONG_TUBBA_BLUBBA_BATTLE, SONG_JR_TROOPA_BATTLE, SONG_YOSHI_KIDS_FOUND, SONG_ITEM_UPGRADE,
+    SONG_NEW_PARTNER,
+};
 
 s16 D_8014F738 = 0;
 
@@ -411,8 +412,8 @@ void bgm_pop_battle_song(void) {
     MusicSettings* musicSetting = &gMusicSettings[0];
 
     if (gGameStatusPtr->demoState == 0) {
-        if (gOverrideFlags & 0x20000) {
-            gOverrideFlags &= ~0x20000;
+        if (gOverrideFlags & GLOBAL_OVERRIDES_20000) {
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_20000;
         } else {
             musicSetting->flags |= MUSIC_SETTINGS_FLAGS_8;
             _bgm_set_song(0, musicSetting->unk_24, musicSetting->unk_28, 0, 8);
@@ -424,7 +425,7 @@ void bgm_pop_battle_song(void) {
 void bgm_push_battle_song(void) {
     MusicSettings* musicSetting = &gMusicSettings[0];
 
-    if (gGameStatusPtr->demoState == 0 && !(gOverrideFlags & 0x20000)) {
+    if (gGameStatusPtr->demoState == 0 && !(gOverrideFlags & GLOBAL_OVERRIDES_20000)) {
         func_8005553C(0, 250);
         musicSetting->unk_24 = musicSetting->songID;
         musicSetting->unk_28 = musicSetting->variation;

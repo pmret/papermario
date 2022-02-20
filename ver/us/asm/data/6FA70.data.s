@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel D_80094670
+dlabel __osTimerList
 .word 0x800D9210, 0x00000000, 0x00000000, 0x00000000
 
 dlabel D_80094680
@@ -26,7 +26,7 @@ dlabel D_80094694
 dlabel D_80094698
 .word 0x00000000
 
-dlabel D_8009469C
+dlabel __additional_scanline
 .word 0x00000000
 
 dlabel osViModeTable
@@ -62,10 +62,10 @@ dlabel D_800958F4
 dlabel D_800958F8
 .word 0x02E6D354
 
-dlabel D_800958FC
+dlabel __osShutdown
 .word 0x00000000
 
-dlabel D_80095900
+dlabel __OSGlobalIntMask
 .word 0x003FFF01, 0x00000000, 0x00000000, 0x00000000
 
 dlabel D_80095910
@@ -80,7 +80,7 @@ dlabel D_80095940
 dlabel D_80095954
 .ascii "0123456789ABCDEF\0\0\0\0\0\0\0\0\0\0\0\0"
 
-dlabel D_80095970
+dlabel vi
 .short 0x0000
 
 dlabel D_80095972
@@ -101,10 +101,10 @@ dlabel D_800959A4
 dlabel D_800959A8
 .word 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
 
-dlabel D_800959D0
-.word D_80095970
+dlabel __osViCurr
+.word vi
 
-dlabel D_800959D4
+dlabel __osViNext
 .word D_800959A0, 0x00000000, 0x00000000
 
 dlabel D_800959E0

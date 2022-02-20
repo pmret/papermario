@@ -24,7 +24,7 @@ void state_init_pause(void) {
     D_800A0922 = 0;
     disable_player_input();
     set_time_freeze_mode(TIME_FREEZE_PARTNER_MENU);
-    set_windows_visible(2);
+    set_windows_visible(WINDOW_GROUP_PAUSE_MENU);
 }
 
 void state_step_pause(void) {
@@ -39,9 +39,9 @@ void state_step_pause(void) {
             if (nuGfxCfb[1] == nuGfxCfb_ptr) {
                 D_800A0920 = 4;
                 D_800A0921 = 2;
-                gOverrideFlags |= 0x8;
-                gGameStatusPtr->enableBackground &= ~0xF0;
-                gGameStatusPtr->enableBackground |= 0x10;
+                gOverrideFlags |= GLOBAL_OVERRIDES_8;
+                gGameStatusPtr->backgroundFlags &= ~0xF0;
+                gGameStatusPtr->backgroundFlags |= 0x10;
 
             }
             break;
@@ -58,7 +58,7 @@ void state_step_pause(void) {
                     sfx_stop_env_sounds();
                     func_8003B1A8();
                     gGameStatusPtr->isBattle = oldIsBattle;
-                    allocate_hit_tables();
+                    backup_map_collision_data();
                     battle_heap_create();
                     nuContRmbForceStop();
                     sfx_clear_env_sounds(0);
@@ -82,7 +82,7 @@ void state_step_pause(void) {
                     bgm_quiet_max_volume();
                     nuPiReadRomOverlay(&D_8007795C);
                     pause_init();
-                    gOverrideFlags &= ~0x8;
+                    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                 }
 
                 if (D_800A0920 >= 0) {
@@ -118,7 +118,7 @@ void state_step_unpause(void) {
         case 0:
         case 1:
             if (D_800A0920 == 4) {
-                gOverrideFlags |= 0x8;
+                gOverrideFlags |= GLOBAL_OVERRIDES_8;
             }
 
             if (D_800A0920 >= 0) {
@@ -136,11 +136,11 @@ void state_step_unpause(void) {
                         D_800A0920 = -1;
                         nuGfxSetCfb(&D_80077950, ARRAY_COUNT(D_80077950));
                         pause_cleanup();
-                        gOverrideFlags &= ~0x8;
+                        gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                         mapConfig = get_current_map_header();
                         map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
                         gGameStatusPtr->isBattle = FALSE;
-                        gGameStatusPtr->enableBackground &= ~0xF0;
+                        gGameStatusPtr->backgroundFlags &= ~0xF0;
                         func_8005AF84();
                         func_8002ACDC();
                         nuContRmbForceStopEnd();
@@ -165,7 +165,7 @@ void state_step_unpause(void) {
                         decode_yay0(assetData, &D_80210000);
                         general_heap_free(assetData);
                         initialize_collision();
-                        load_collision();
+                        restore_map_collision_data();
 
                         if (map->dmaStart != NULL) {
                             dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
@@ -181,7 +181,7 @@ void state_step_unpause(void) {
                         gGameStatusPtr->unk_15C = gGameStatusPtr->unk_15E;
                         calculate_model_sizes();
                         npc_reload_all();
-                        set_windows_visible(0);
+                        set_windows_visible(WINDOW_GROUP_ALL);
                         func_800E98C4();
                         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                         D_800A0921 = 3;
@@ -223,7 +223,7 @@ void state_step_unpause(void) {
             update_player();
             update_effects();
             enable_player_input();
-            set_game_mode(4);
+            set_game_mode(GAME_MODE_CHANGE_MAP);
             break;
     }
 }

@@ -284,7 +284,7 @@ ApiStatus GetActorLevel(Evt* script, s32 isInitialCall) {
     }
 
     outVar = *args++;
-    evt_set_variable(script, outVar, get_actor(actorID)->staticActorData->level);
+    evt_set_variable(script, outVar, get_actor(actorID)->actorBlueprint->level);
 
     return ApiStatus_DONE2;
 }

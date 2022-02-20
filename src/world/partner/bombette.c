@@ -73,7 +73,7 @@ ApiStatus func_802BD300_318050(Evt* script, s32 isInitialCall) {
     return partner_get_out(bombette) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_bombette_take_out = {
+EvtScript world_bombette_take_out = {
     EVT_CALL(func_802BD300_318050)
     EVT_RETURN
     EVT_END
@@ -165,7 +165,7 @@ ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtSource world_bombette_update = {
+EvtScript world_bombette_update = {
     EVT_CALL(func_802BD338_318088)
     EVT_RETURN
     EVT_END
@@ -195,7 +195,7 @@ s32 world_bombette_can_player_pause(void) {
 ApiStatus func_802BD758_3184A8(Evt* evt, s32 isInitialCall);
 INCLUDE_ASM(s32, "world/partner/bombette", func_802BD758_3184A8);
 
-EvtSource world_bombette_use_ability = {
+EvtScript world_bombette_use_ability = {
     EVT_CALL(func_802BD758_3184A8)
     EVT_RETURN
     EVT_END
@@ -211,7 +211,7 @@ ApiStatus func_802BE4E8_319238(Evt* script, s32 isInitialCall) {
     return partner_put_away(bombette) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtSource world_bombette_put_away = {
+EvtScript world_bombette_put_away = {
     EVT_CALL(func_802BE4E8_319238)
     EVT_RETURN
     EVT_END

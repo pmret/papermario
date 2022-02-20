@@ -9,7 +9,7 @@ extern f32 D_80244070_EF1170[];
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
-INCLUDE_ASM(s32, "EEDF50", func_80241000_EEE100);
+#include "world/common/UnkNpcAIFunc35.inc.c"
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 

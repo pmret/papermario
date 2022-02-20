@@ -36,7 +36,7 @@ glabel corrupted_init
 /* 484F0 8006D0F0 02402021 */  addu      $a0, $s2, $zero
 /* 484F4 8006D0F4 27A50010 */  addiu     $a1, $sp, 0x10
 /* 484F8 8006D0F8 00003021 */  addu      $a2, $zero, $zero
-/* 484FC 8006D0FC 0C01A7A3 */  jal       osPfsRWInode
+/* 484FC 8006D0FC 0C01A7A3 */  jal       __osPfsRWInode
 /* 48500 8006D100 02003821 */   addu     $a3, $s0, $zero
 /* 48504 8006D104 00402021 */  addu      $a0, $v0, $zero
 /* 48508 8006D108 0004182B */  sltu      $v1, $zero, $a0
