@@ -128,13 +128,13 @@ void shape_spell_render(EffectInstance* effect) {
 }
 
 s32 func_E0024324(s32 arg0, s32 arg1) {
-    s32 frameCounter = gGameStatusPtr->frameCounter << 5;
+    s32 frameCounter = gGameStatusPtr->frameCounter * 32;
     
     return (f32)((shim_sin_deg(frameCounter + arg1) * (255 - arg0) + (255 - arg0)) * 0.5 + arg0);
 }
 
 s32 func_E00243BC(s32 arg0, s32 arg1) {
-    s32 frameCounter = gGameStatusPtr->frameCounter << 5;
+    s32 frameCounter = gGameStatusPtr->frameCounter * 32;
     arg1 += 0xB4;
 
     return (f32)((shim_sin_deg(frameCounter + arg1) * -arg0 + -arg0) * 0.5 + arg0);

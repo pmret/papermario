@@ -6,7 +6,15 @@ void music_note_init(EffectInstance* effect);
 void music_note_update(EffectInstance* effect);
 void music_note_render(EffectInstance* effect);
 
-s32 D_E004C660[] = { 0x09001038, 0x090010C0, 0x09001148, 0x090011D0, 0x09001258, 0x090012E0, 0x09001368 };
+extern Gfx D_09001038[];
+extern Gfx D_090010C0[];
+extern Gfx D_09001148[];
+extern Gfx D_090011D0[];
+extern Gfx D_09001258[];
+extern Gfx D_090012E0[];
+extern Gfx D_09001368[];
+
+Gfx* D_E004C660[] = { D_09001038, D_090010C0, D_09001148, D_090011D0, D_09001258, D_090012E0, D_09001368 };
 
 s8 D_E004C67C[] = { 0xFE, 0xAC, 0xAC, 0xFE, 0xAC, 0xD5, 0xFE, 0xB4, 0x9A, 0xD5, 0xB4, 0xFE, 0xB4, 0xB4, 0xFE, 0xB4, 0xDD, 0xFE, 0xB4, 0xFE, 0xFE, 0xB4, 0xFE, 0xD5, 0xB4, 0xFE, 0xB4, 0xD5, 0xFE, 0xB4, 0xFE, 0xFE, 0xB4, 0xFE, 0xD5, 0xAC, };
 
@@ -83,10 +91,9 @@ void music_note_init(EffectInstance* effect) {
 }
 
 void music_note_update(EffectInstance* effect) {
-    MusicNoteFXData* part;
+    MusicNoteFXData* part = effect->data;
     s32 timeLeft;
 
-    part = effect->data;
     part->timeLeft--;
     part->unk_1C++;
     timeLeft = part->timeLeft;

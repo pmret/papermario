@@ -66,7 +66,7 @@ FX_MAIN(stars_shimmer_main);
 FX_MAIN(rising_bubble_main);
 FX_MAIN(ring_blast_main);
 FX_MAIN(shockwave_main);
-void music_note_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3);//
+void music_note_main(s32, f32, f32, f32);
 FX_MAIN(smoke_burst_main);
 FX_MAIN(sweat_main);
 FX_MAIN(sleep_bubble_main);
@@ -134,8 +134,7 @@ FX_MAIN(whirlwind_main);
 FX_MAIN(red_impact_main);
 FX_MAIN(floating_cloud_puff_main);
 FX_MAIN(energy_in_out_main);
-//FX_MAIN(tattle_window_main);
-EffectInstance* tattle_window_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+EffectInstance* tattle_window_main(s32, f32, f32, f32, f32, s32);
 FX_MAIN(shiny_flare_main);
 FX_MAIN(huff_puff_breath_main);
 FX_MAIN(cold_breath_main);

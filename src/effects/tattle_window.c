@@ -56,7 +56,7 @@ D_E00D8818_Entry D_E00D8818[] = {
     { .unk_00 = 0x0000, .unk_02 = 0x00, .unk_03 = 0x3C },
 };
 
-EffectInstance* tattle_window_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+EffectInstance* tattle_window_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
@@ -83,9 +83,9 @@ EffectInstance* tattle_window_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
     } else {
         part->unk_10 = arg5;
     }
-    part->pos.x = arg1;
-    part->pos.y = arg2;
-    part->pos.z = arg3;
+    part->pos.x = x;
+    part->pos.y = y;
+    part->pos.z = z;
     part->unk_1C = 0;
     part->unk_18 = arg4;
     part->unk_28 = 0.0f;
