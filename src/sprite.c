@@ -405,3 +405,4 @@ s32 spr_get_npc_color_variations(s32 npcSpriteID) {
     }
     return -1;
 }
+// hi
