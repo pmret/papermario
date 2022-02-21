@@ -463,7 +463,6 @@ ApiStatus GetPlayerHP(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//INCLUDE_ASM(s32, "19FAF0", PlayerDamageEnemy, Evt* script, s32 isInitialCall);
 ApiStatus PlayerDamageEnemy(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
