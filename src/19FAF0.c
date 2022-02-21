@@ -72,7 +72,8 @@ ApiStatus func_80271588(Evt* script, s32 isInitialCall) {
                                script->varTable[0] + rand_int(30) - 15,
                                script->varTable[1] + rand_int(20) - 15,
                                script->varTable[2] + 5,
-                               1.0f, 25);
+                               1.0f,
+                               25);
     }
     return ApiStatus_DONE2;
 }
@@ -185,8 +186,6 @@ s32 calc_player_test_enemy(void) {
     battleStatus->currentTargetPart2 = battleStatus->currentTargetPart;
 
     target = get_actor(currentTargetID);
-
-
     if (target == NULL) {
         return 0;
     }
