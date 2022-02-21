@@ -172,7 +172,6 @@ void dispatch_event_player_continue_turn(s32 eventType) {
     }
 }
 
-//INCLUDE_ASM(s32, "19FAF0", calc_player_test_enemy);
 s32 calc_player_test_enemy(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
@@ -326,7 +325,86 @@ ApiStatus GetMenuSelection(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "19FAF0", func_80273444);
 
+//float bs
+#ifdef NON_MATCHING
+s32 PlayerFallToGoal(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* player = gBattleStatus.playerActor;
+    ActorState* state = &player->state;
+    f32 temp_f0_2;
+    f32 temp_f20;
+    f32 goalX;
+    f32 goalY;
+    f32 goalZ;
+    f32 currentX, currentY, currentZ;
+    f32 new_var2;
+    f32 temp;
+    f32 xTemp, yTemp, zTemp;
+    f32 goalPosX, goalPosZ;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = FALSE;
+    }
+
+    if (!script->functionTemp[0]) {
+        s32 moveTime = evt_get_variable(script, *args++);
+
+        state->currentPos.x = player->currentPos.x;
+        state->currentPos.z = player->currentPos.z;
+        currentX = state->currentPos.x;
+        state->currentPos.y = player->currentPos.y;
+        currentY = state->currentPos.y;
+        temp = state->currentPos.z;
+
+        goalX = state->goalPos.x;
+        goalY = state->goalPos.y;
+        goalZ = state->goalPos.z;
+
+        state->moveTime = moveTime;
+
+        state->angle = atan2(currentX, temp, goalX, goalZ);
+        state->distance = dist2D(currentX, temp, goalX, goalZ);
+
+        temp = goalY - currentY;
+
+        if (state->moveTime == 0) {
+            state->moveTime = state->distance / state->speed;
+        } else {
+            state->speed = state->distance / state->moveTime;
+        }
+
+        state->velocity = 0.0f;
+        state->acceleration = (((temp / state->moveTime) - state->velocity) / (-state->moveTime * 0.5));
+        set_animation(ACTOR_PLAYER, 0, state->animJumpRise);
+        script->functionTemp[0] = TRUE;
+    }
+
+    if (state->velocity < 0.0f) {
+        set_animation(0, 0, state->animJumpFall);
+    }
+
+    state->currentPos.y += state->velocity;
+    state->velocity -= state->acceleration;
+    add_xz_vec3f(&state->currentPos, state->speed, state->angle);
+
+    player->currentPos.x = state->currentPos.x;
+    player->currentPos.y = state->currentPos.y;
+    player->currentPos.z = state->currentPos.z;
+    state->moveTime--;
+
+    if (state->moveTime < 0) {
+        player->currentPos.x = state->goalPos.x;
+        player->currentPos.y = state->goalPos.y;
+        player->currentPos.z = state->goalPos.z;
+        play_movement_dust_effects(2, player->currentPos.x, player->currentPos.y, player->currentPos.z, player->yaw);
+        sfx_play_sound_at_position(SOUND_SOFT_LAND, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+        return ApiStatus_DONE1;
+    }
+    return ApiStatus_BLOCK;
+}
+#else
 INCLUDE_ASM(s32, "19FAF0", PlayerFallToGoal, Evt* script, s32 isInitialCall);
+#endif
 
 ApiStatus PlayerLandJump(Evt *script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
@@ -385,11 +463,214 @@ ApiStatus GetPlayerHP(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "19FAF0", PlayerDamageEnemy, Evt* script, s32 isInitialCall);
+//INCLUDE_ASM(s32, "19FAF0", PlayerDamageEnemy, Evt* script, s32 isInitialCall);
+ApiStatus PlayerDamageEnemy(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+    s32 a0 = *args++;
+    s32 flags;
+    Actor* target;
+    s32 temp_v0_2;
 
-INCLUDE_ASM(s32, "19FAF0", PlayerPowerBounceEnemy, Evt* script, s32 isInitialCall);
+    battleStatus->currentAttackElement = *args++;
+    battleStatus->currentAttackEventSuppression = *args++;
+    battleStatus->currentAttackStatus = *args++;
+    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
+    battleStatus->powerBounceCounter = 0;
+    flags = *args++;
 
-INCLUDE_ASM(s32, "19FAF0", PlayerTestEnemy, Evt* script, s32 isInitialCall);
+    if ((flags & (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) == (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) {
+        gBattleStatus.flags1 |= BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE;
+    } else if (flags & BS_FLAGS1_10) {
+        gBattleStatus.flags1 |= BS_FLAGS1_10;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
+    } else if (flags & BS_FLAGS1_SP_EVT_ACTIVE) {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_10;
+        gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_10;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
+    }
+
+    if (flags & BS_FLAGS1_40) {
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
+    }
+    if (flags & BS_FLAGS1_200) {
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
+    }
+    if (flags & BS_FLAGS1_80) {
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
+    }
+    if (flags & BS_FLAGS1_800) {
+        gBattleStatus.flags1 |= BS_FLAGS1_800;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_800;
+    }
+
+    target = get_actor(script->owner1.actorID);
+    battleStatus->currentTargetID = target->targetActorID;
+    battleStatus->currentTargetPart = target->targetPartIndex;
+    battleStatus->statusChance = battleStatus->currentAttackStatus;
+    if (battleStatus->statusChance == 0xFF) {
+        battleStatus->statusChance = 0;
+    }
+    battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
+
+    temp_v0_2 = calc_player_damage_enemy();
+    if (temp_v0_2 < 0) {
+        return ApiStatus_FINISH;
+    }
+    evt_set_variable(script, a0, temp_v0_2);
+
+    if (!does_script_exist_by_ref(script)) {
+        return ApiStatus_FINISH;
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus PlayerPowerBounceEnemy(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+    s32 a0 = *args++;
+    s32 flags;
+    Actor* target;
+    s32 temp_v0_2;
+
+    battleStatus->currentAttackElement = *args++;
+    battleStatus->currentAttackEventSuppression = *args++;
+    battleStatus->currentAttackStatus = *args++;
+    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
+    battleStatus->powerBounceCounter = evt_get_variable(script, *args++);
+    flags = *args++;
+
+    if ((flags & (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) == (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) {
+        gBattleStatus.flags1 |= BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE;
+    } else if (flags & BS_FLAGS1_10) {
+        gBattleStatus.flags1 |= BS_FLAGS1_10;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
+    } else if (flags & BS_FLAGS1_SP_EVT_ACTIVE) {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_10;
+        gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_10;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
+    }
+
+    if (flags & BS_FLAGS1_40) {
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
+    }
+    if (flags & BS_FLAGS1_200) {
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
+    }
+    if (flags & BS_FLAGS1_80) {
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
+    }
+    if (flags & BS_FLAGS1_800) {
+        gBattleStatus.flags1 |= BS_FLAGS1_800;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_800;
+    }
+
+    target = get_actor(script->owner1.actorID);
+    battleStatus->currentTargetID = target->targetActorID;
+    battleStatus->currentTargetPart = target->targetPartIndex;
+    battleStatus->statusChance = battleStatus->currentAttackStatus;
+    if (battleStatus->statusChance == 0xFF) {
+        battleStatus->statusChance = 0;
+    }
+    battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
+
+    temp_v0_2 = calc_player_damage_enemy();
+    if (temp_v0_2 < 0) {
+        return ApiStatus_FINISH;
+    }
+    evt_set_variable(script, a0, temp_v0_2);
+
+    if (!does_script_exist_by_ref(script)) {
+        return ApiStatus_FINISH;
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus PlayerTestEnemy(Evt* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Bytecode* args = script->ptrReadPos;
+    s32 a0 = *args++;
+    s32 flags;
+    Actor* target;
+    s32 temp_v0_2;
+
+    battleStatus->currentAttackElement = *args++;
+    battleStatus->currentAttackEventSuppression = *args++;
+    battleStatus->currentAttackStatus = *args++;
+    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
+    battleStatus->powerBounceCounter = 0;
+    flags = *args++;
+
+    if ((flags & (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) == (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) {
+        gBattleStatus.flags1 |= BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE;
+    } else if (flags & BS_FLAGS1_10) {
+        gBattleStatus.flags1 |= BS_FLAGS1_10;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
+    } else if (flags & BS_FLAGS1_SP_EVT_ACTIVE) {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_10;
+        gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_10;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_SP_EVT_ACTIVE;
+    }
+
+    if (flags & BS_FLAGS1_40) {
+        gBattleStatus.flags1 |= BS_FLAGS1_40;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_40;
+    }
+    if (flags & BS_FLAGS1_200) {
+        gBattleStatus.flags1 |= BS_FLAGS1_200;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_200;
+    }
+    if (flags & BS_FLAGS1_80) {
+        gBattleStatus.flags1 |= BS_FLAGS1_80;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_80;
+    }
+    if (flags & BS_FLAGS1_800) {
+        gBattleStatus.flags1 |= BS_FLAGS1_800;
+    } else {
+        gBattleStatus.flags1 &= ~BS_FLAGS1_800;
+    }
+
+    target = get_actor(script->owner1.actorID);
+    battleStatus->currentTargetID = target->targetActorID;
+    battleStatus->currentTargetPart = target->targetPartIndex;
+    battleStatus->statusChance = battleStatus->currentAttackStatus;
+    if (battleStatus->statusChance == 0xFF) {
+        battleStatus->statusChance = 0;
+    }
+    battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
+
+    temp_v0_2 = calc_player_test_enemy();
+    if (temp_v0_2 < 0) {
+        return ApiStatus_FINISH;
+    }
+    evt_set_variable(script, a0, temp_v0_2);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus DispatchDamagePlayerEvent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -454,7 +735,7 @@ ApiStatus DidActionSucceed(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80276EFC(Evt* script, s32 isInitialCall) {
-    gBattleStatus.flags1 |= 0x200000;
+    gBattleStatus.flags1 |= BS_FLAGS1_200000;
     return ApiStatus_DONE2;
 }
 
