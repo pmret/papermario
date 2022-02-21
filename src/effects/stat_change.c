@@ -25,10 +25,10 @@ typedef struct StatChangeFXData {
     /* 0x40 */ s32 unk_40;
 } StatChangeFXData;
 
-typedef struct extraArrowDataEntry {
+typedef struct ExtraArrowDataEntry {
     u8 unk_00;
     u8 unk_01;
-} extraArrowDataEntry;
+} ExtraArrowDataEntry;
 
 typedef struct ArrowDataTableEntry {
     s32 type;
@@ -41,7 +41,7 @@ s32 D_E00AC7BC[] = { 0x09002860, 0x09002880, 0x09002860 };
 
 s32 D_E00AC7C8[] = { 0x09002950, 0x09002990, 0x090029D0, 0x09002A10, 0x09002A50, 0x09002A90, 0x09002AD0, 0x09002B10, 0x09002B50, 0x09002B90, 0x09002BD0, 0x09002C10 };
 
-extraArrowDataEntry D_E00AC7F8[] = {
+ExtraArrowDataEntry D_E00AC7F8[] = {
     { .unk_00 = 0xFF, .unk_01 = 0x96 },
     { .unk_00 = 0xFF, .unk_01 = 0x82 },
     { .unk_00 = 0xFF, .unk_01 = 0x64 },
@@ -77,7 +77,7 @@ extraArrowDataEntry D_E00AC7F8[] = {
     { .unk_00 = 0x0A, .unk_01 = 0x64 },
 };
 
-extraArrowDataEntry D_E00AC83C[] = {
+ExtraArrowDataEntry D_E00AC83C[] = {
     { .unk_00 = 0xFF, .unk_01 = 0x96 },
     { .unk_00 = 0xFF, .unk_01 = 0x82 },
     { .unk_00 = 0xFF, .unk_01 = 0x64 },
@@ -177,8 +177,8 @@ void stat_change_init(EffectInstance* effect) {
 }
 
 void stat_change_update(EffectInstance* effect) {
-    s32 old_unk18;
     StatChangeFXData* part = effect->data;
+    s32 old_unk18;
 
     part->timeLeft--;
     old_unk18 = part->unk_18++;
