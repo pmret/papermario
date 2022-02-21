@@ -351,7 +351,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             effectRet = fx_lightning(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
             break;
         case EFFECT_FIRE_BREATH:
-        effectRet = fx_fire_breath(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, iVar9, iVar10);
+            effectRet = fx_fire_breath(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, iVar9, iVar10);
             break;
         case EFFECT_SHIMMER_BURST:
             fx_shimmer_burst(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);

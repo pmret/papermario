@@ -1859,8 +1859,8 @@ typedef struct Actor {
     /* 0x1F3 */ s8 numParts;
     /* 0x1F4 */ struct ActorPart* partsTable;
     /* 0x1F8 */ s16 lastDamageTaken;
-    /* 0x1FA */ u16 hpChangeCounter;
-    /* 0x1FC */ s16 damageCounter;
+    /* 0x1FA */ s16 hpChangeCounter;
+    /* 0x1FC */ u16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
     /* 0x204 */ s8 unk_204;
