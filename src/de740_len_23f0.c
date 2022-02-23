@@ -1,4 +1,6 @@
 #include "common.h"
+#include "sprite.h"
+#include "nu/nusys.h"
 
 extern SpriteShadingProfile D_801595C0;
 extern SpriteShadingProfile D_80159670;

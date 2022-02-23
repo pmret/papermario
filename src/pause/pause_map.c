@@ -106,13 +106,13 @@ MenuWindowBP gPauseMapWindowBPs[] = {
         .pos = { .x = 3, .y = 16 },
         .width = 289,
         .height = 154,
-        .unk_0A = { 1, 0 },
+        .priority = 1,
         .fpDrawContents = &pause_map_draw_contents,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { 2 },
-        .unk_1C = 0,
-        .style = &gPauseWS_26
+        .fpUpdate = { WINDOW_UPDATE_HIDE },
+        .extraFlags = 0,
+        .style = { .customStyle = &gPauseWS_26 }
     },
     {
         .windowID = WINDOW_ID_PAUSE_MAP_TITLE,
@@ -120,13 +120,13 @@ MenuWindowBP gPauseMapWindowBPs[] = {
         .pos = { .x = 56, .y = 124 },
         .width = 180,
         .height = 20,
-        .unk_0A = { 0, 0 },
+        .priority = 0,
         .fpDrawContents = &pause_map_draw_title,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAP,
-        .fpUpdate = { 1 },
-        .unk_1C = 0,
-        .style = &gPauseWS_28
+        .fpUpdate = { WINDOW_UPDATE_SHOW },
+        .extraFlags = 0,
+        .style = { .customStyle = &gPauseWS_28 }
     },
     { },
     { },

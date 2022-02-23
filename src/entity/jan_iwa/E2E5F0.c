@@ -71,9 +71,9 @@ void func_802BC0F0_E2EA20(Entity* entity) {
 void func_802BC17C_E2EAAC(Entity* entity) {
     structE2E5F0* data = (structE2E5F0*)entity->dataBuf.unk;
 
-    gCameras[0].targetPos.x = gPlayerStatus.position.x;
-    gCameras[0].targetPos.y = gPlayerStatus.position.y;
-    gCameras[0].targetPos.z = gPlayerStatus.position.z;
+    gCameras[CAM_DEFAULT].targetPos.x = gPlayerStatus.position.x;
+    gCameras[CAM_DEFAULT].targetPos.y = gPlayerStatus.position.y;
+    gCameras[CAM_DEFAULT].targetPos.z = gPlayerStatus.position.z;
     add_vec2D_polar(&gPlayerStatus.position.x, &gPlayerStatus.position.z, data->unk_18, data->unk_14);
 }
 

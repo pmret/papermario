@@ -10,16 +10,16 @@ void intro_logos_set_fade_color(s16 color) {
     gGameStatusPtr->bootBlue = color;
 }
 
-s16 intro_logos_fade_in(s16 subtractAlpha) {
+s32 intro_logos_fade_in(s16 subtractAlpha) {
     if (gGameStatusPtr->bootAlpha != 0) {
         gGameStatusPtr->bootAlpha -= subtractAlpha;
         if (gGameStatusPtr->bootAlpha << 16 < 0) {
             gGameStatusPtr->bootAlpha = 0;
         }
     } else {
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 s32 intro_logos_fade_out(s16 addAlpha) {
@@ -29,9 +29,9 @@ s32 intro_logos_fade_out(s16 addAlpha) {
             gGameStatusPtr->bootAlpha = 255;
         }
     } else {
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 void intro_logos_update_fade(void) {

@@ -88,10 +88,10 @@ void step_game_loop(void) {
     update_windows();
     update_curtains();
 
-    if (gOverrideFlags & 0x20) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL) {
         switch (D_800741A2) {
             case 0:
-                gOverrideFlags |= 0x200;
+                gOverrideFlags |= GLOBAL_OVERRIDES_200;
                 disable_player_input();
 
                 if (D_800741A0 == 255) {
@@ -105,12 +105,12 @@ void step_game_loop(void) {
                 }
                 break;
             case 1:
-                gOverrideFlags |= 0x8;
+                gOverrideFlags |= GLOBAL_OVERRIDES_8;
                 D_8009A690--;
                 if (D_8009A690 == 0) {
                     sfx_stop_env_sounds();
-                    set_game_mode(0);
-                    gOverrideFlags &= ~0x20;
+                    set_game_mode(GAME_MODE_STARTUP);
+                    gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL;
                 }
                 break;
         }
@@ -119,28 +119,28 @@ void step_game_loop(void) {
         D_800741A2 = 0;
     }
 
-    if (gOverrideFlags & 0x100) {
-        gOverrideFlags |= 0x1000;
+    if (gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_BATTLES) {
+        gOverrideFlags |= GLOBAL_OVERRIDES_1000;
     } else {
-        gOverrideFlags &= ~0x1000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_1000;
     }
 
-    if (gOverrideFlags & 0x200) {
-        gOverrideFlags |= 0x2000;
+    if (gOverrideFlags & GLOBAL_OVERRIDES_200) {
+        gOverrideFlags |= GLOBAL_OVERRIDES_2000;
     } else {
-        gOverrideFlags &= ~0x2000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_2000;
     }
 
-    if (gOverrideFlags & 0x400) {
-        gOverrideFlags |= 0x4000;
+    if (gOverrideFlags & GLOBAL_OVERRIDES_400) {
+        gOverrideFlags |= GLOBAL_OVERRIDES_4000;
     } else {
-        gOverrideFlags &= ~0x4000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_4000;
     }
 
-    if (gOverrideFlags & 0x800) {
-        gOverrideFlags |= 0x8000;
+    if (gOverrideFlags & GLOBAL_OVERRIDES_800) {
+        gOverrideFlags |= GLOBAL_OVERRIDES_8000;
     } else {
-        gOverrideFlags &= ~0x8000;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_8000;
     }
 
     rand_int(1);
@@ -168,7 +168,7 @@ void gfx_draw_frame(void) {
     gMatrixListPos = 0;
     gMasterGfxPos = &gDisplayContext->mainGfx[0];
 
-    if (gOverrideFlags & 8) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_8) {
         gCurrentDisplayContextIndex = gCurrentDisplayContextIndex ^ 1;
         return;
     }
@@ -177,7 +177,7 @@ void gfx_draw_frame(void) {
 
     spr_render_init();
 
-    if (!(gOverrideFlags & 2)) {
+    if (!(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD)) {
         render_frame(0);
     }
 
@@ -189,14 +189,15 @@ void gfx_draw_frame(void) {
     render_effects_UI();
     state_render_backUI();
 
-    if (!(gOverrideFlags & 0x10000)) {
+    if (!(gOverrideFlags & GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS)) {
         render_window_root();
     }
-    if (!(gOverrideFlags & 2) && gGameStatusPtr->disableScripts == 0) {
+
+    if (!(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD) && !gGameStatusPtr->disableScripts) {
         render_frame(1);
     }
 
-    if (!(gOverrideFlags & 0x100010)) {
+    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS | GLOBAL_OVERRIDES_10))) {
         render_messages();
     }
 
@@ -204,22 +205,22 @@ void gfx_draw_frame(void) {
     render_hud_elements_frontUI();
     render_screen_overlay_frontUI();
 
-    if ((gOverrideFlags & 0x100010) == 0x10) {
+    if ((gOverrideFlags & (GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS | GLOBAL_OVERRIDES_10)) == GLOBAL_OVERRIDES_10) {
         render_messages();
     }
 
     render_curtains();
 
-    if (gOverrideFlags & 0x100000) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS) {
         render_messages();
     }
-    if (gOverrideFlags & 0x10000) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS) {
         render_window_root();
     }
 
     state_render_frontUI();
 
-    if (gOverrideFlags & 0x20) {
+    if (gOverrideFlags & GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL) {
         switch (D_800741A2) {
             case 0:
             case 1:
@@ -302,8 +303,8 @@ void load_engine_data(void) {
         gGameStatusPtr->unk_48[i] = 12;
     }
 
-    gOverrideFlags |= 0x8;
-    set_game_mode(0);
+    gOverrideFlags |= GLOBAL_OVERRIDES_8;
+    set_game_mode(GAME_MODE_STARTUP);
 }
 
 /// Time freeze modes:
@@ -316,30 +317,30 @@ void set_time_freeze_mode(s32 mode) {
     switch (mode) {
         case 0:
             timeFreezeMode = mode;
-            gOverrideFlags &= ~0xF00;
+            gOverrideFlags &= ~(GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES);
             resume_all_group(3);
             break;
         case 1:
             timeFreezeMode = mode;
-            gOverrideFlags &= ~0xE00;
-            gOverrideFlags |= 0x100;
+            gOverrideFlags &= ~(GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200);
+            gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_BATTLES;
             suspend_all_group(1);
             break;
         case 2:
             timeFreezeMode = mode;
-            gOverrideFlags &= ~0xC00;
-            gOverrideFlags |= 0x300;
+            gOverrideFlags &= ~(GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800);
+            gOverrideFlags |= GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;
             suspend_all_group(2);
             break;
         case 3:
             timeFreezeMode = mode;
-            gOverrideFlags &= ~0x800;
-            gOverrideFlags |= 0x700;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_800;
+            gOverrideFlags |= GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;
             suspend_all_group(2);
             break;
         case 4:
             timeFreezeMode = mode;
-            gOverrideFlags |= 0xF00;
+            gOverrideFlags |= GLOBAL_OVERRIDES_800 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES;
             break;
     }
 }
@@ -489,7 +490,7 @@ void gfx_draw_background(void) {
             }
             break;
         default:
-            if (gOverrideFlags & 8) {
+            if (gOverrideFlags & GLOBAL_OVERRIDES_8) {
                 gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
                 return;
             }

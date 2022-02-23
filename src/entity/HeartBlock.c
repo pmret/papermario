@@ -104,7 +104,7 @@ void entity_HeartBlockContent_anim_idle(Entity* entity, s32 arg1) {
         gPlayerStatus.currentSpeed = 0;
         gPlayerStatus.animFlags |= 0x200;
         set_time_freeze_mode(1);
-        gOverrideFlags |= 0x40;
+        gOverrideFlags |= GLOBAL_OVERRIDES_40;
     }
 }
 
@@ -223,7 +223,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             playerStatus->animFlags &= ~0x200;
             enable_player_input();
             set_time_freeze_mode(0);
-            gOverrideFlags &= ~0x40;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
             exec_entity_commandlist(entity);
             break;
     }
@@ -263,7 +263,7 @@ void entity_HeartBlock_show_tutorial_message(Entity* entity) {
         *ptr = 0;
         msg_get_printer_for_msg(0x1D0001, ptr);
         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
-        gOverrideFlags |= 0x40;
+        gOverrideFlags |= GLOBAL_OVERRIDES_40;
         disable_player_input();
         set_global_flag(EVT_SAVE_FLAG(96));
         return;
@@ -275,7 +275,7 @@ void entity_HeartBlock_wait_for_close_tutorial(Entity* entity) {
     if (D_802EB3C0) {
         exec_entity_commandlist(entity);
         set_time_freeze_mode(TIME_FREEZE_NORMAL);
-        gOverrideFlags &= ~0x40;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
         enable_player_input();
     }
 }

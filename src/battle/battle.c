@@ -323,7 +323,7 @@ void load_battle_section(void) {
 
 void load_battle(s32 arg0) {
     D_800DC4E8 = arg0;
-    set_game_mode(8);
+    set_game_mode(GAME_MODE_BATTLE);
     gBattleState = 0;
     D_800DC4D0 = 0;
     gBattleState2 = 0;
@@ -506,7 +506,7 @@ void load_demo_battle(u32 index) {
     gCurrentEncounter.unk_10 = 0;
     set_battle_stage(-1);
     gGameStatusPtr->demoFlags |= 1;
-    gOverrideFlags &= ~0x8;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
     load_battle(battleID);
 }
 

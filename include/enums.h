@@ -508,6 +508,7 @@ enum SoundIDs {
     SOUND_MENU_NEXT                 = 0x000000C9,
     SOUND_MENU_BACK                 = 0x000000CA,
     SOUND_D4                        = 0x000000D4,
+    SOUND_D5                        = 0x000000D5,
     SOUND_HIT_PLAYER_NORMAL         = 0x000000E1,
     SOUND_HIT_PLAYER_FIRE           = 0x000000E2,
     SOUND_HIT_PLAYER_ICE            = 0x000000E3,
@@ -515,6 +516,7 @@ enum SoundIDs {
     SOUND_HIT_NORMAL                = 0x000000E9,
     SOUND_HIT_FIRE                  = 0x000000EA,
     SOUND_HIT_ICE                   = 0x000000EB,
+    SOUND_108                       = 0x00000108,
     SOUND_IMMUNE                    = 0x0000010C,
     SOUND_HIT_BONES                 = 0x0000010D,
     SOUND_STEP1                     = 0x00000141,
@@ -1498,6 +1500,7 @@ enum NpcIDs {
 
 enum EntityTypes {
     ENTITY_TYPE_SHADOW                  =   0x01,
+    ENTITY_TYPE_2                       =   0x02,
     ENTITY_TYPE_PADLOCK                 =   0x03,
     ENTITY_TYPE_PADLOCK_RED_FRAME       =   0x04,
     ENTITY_TYPE_PADLOCK_RED_FACE        =   0x05,
@@ -2333,6 +2336,31 @@ enum GameModeIDs {
     GAME_MODE_DEMO                        = 0x00000011,
 };
 
+enum IntroStates {
+    INTRO_STATE_0                        = 0x00000000,
+    INTRO_STATE_1                        = 0x00000001,
+    INTRO_STATE_2                        = 0x00000002,
+    INTRO_STATE_3                        = 0x00000003,
+    INTRO_STATE_4                        = 0x00000004,
+    INTRO_STATE_5                        = 0x00000005,
+    INTRO_STATE_6                        = 0x00000006,
+    INTRO_STATE_7                        = 0x00000007,
+    INTRO_STATE_8                        = 0x00000008,
+    INTRO_STATE_9                        = 0x00000009,
+    INTRO_STATE_A                        = 0x0000000A,
+    INTRO_STATE_B                        = 0x0000000B,
+    INTRO_STATE_C                        = 0x0000000C,
+    INTRO_STATE_D                        = 0x0000000D,
+    INTRO_STATE_E                        = 0x0000000E,
+    INTRO_STATE_F                        = 0x0000000F,
+    INTRO_STATE_10                       = 0x00000010,
+    INTRO_STATE_11                       = 0x00000011,
+    INTRO_STATE_12                       = 0x00000012,
+    INTRO_STATE_13                       = 0x00000013,
+    INTRO_STATE_14                       = 0x00000014,
+    INTRO_STATE_15                       = 0x00000015,
+};
+
 enum BattleStatusFlags1 {
     BS_FLAGS1_0                = 0x00000000,
     BS_FLAGS1_1                = 0x00000001, // show actors
@@ -2384,6 +2412,7 @@ enum BattleStatusFlags2 {
     BS_FLAGS2_NO_TARGET_AVAILABLE             = 0x00001000,
     BS_FLAGS2_1000000                         = 0x01000000,
     BS_FLAGS2_2000000                         = 0x02000000,
+    BS_FLAGS2_8000000                         = 0x08000000,
 };
 
 enum BattleStates2 {
@@ -2425,10 +2454,21 @@ enum DebuffTypes {
 
 enum GlobalOverrides {
     GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD                       = 0x00000002,
+    GLOBAL_OVERRIDES_8                                          = 0x00000008,
+    GLOBAL_OVERRIDES_10                                         = 0x00000010,
     GLOBAL_OVERRIDES_ENABLE_TRANSITION_STENCIL                  = 0x00000020,
     GLOBAL_OVERRIDES_40                                         = 0x00000040,
+    GLOBAL_OVERRIDES_80                                         = 0x00000080,
     GLOBAL_OVERRIDES_DISABLE_BATTLES                            = 0x00000100,
+    GLOBAL_OVERRIDES_200                                        = 0x00000200,
+    GLOBAL_OVERRIDES_400                                        = 0x00000400,
+    GLOBAL_OVERRIDES_800                                        = 0x00000800,
+    GLOBAL_OVERRIDES_1000                                       = 0x00001000,
+    GLOBAL_OVERRIDES_2000                                       = 0x00002000,
+    GLOBAL_OVERRIDES_4000                                       = 0x00004000,
+    GLOBAL_OVERRIDES_8000                                       = 0x00008000,
     GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS               = 0x00010000,
+    GLOBAL_OVERRIDES_20000                                      = 0x00020000,
     GLOBAL_OVERRIDES_DISABLE_MENUS                              = 0x00040000,
     GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS              = 0x00100000,
     GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS                         = 0x00200000,
@@ -2922,38 +2962,20 @@ enum EncounterStatusFlags {
 };
 
 enum WindowFlags {
-    WINDOW_FLAGS_1                 = 0x00000001,
-    WINDOW_FLAGS_2                 = 0x00000002,
-    WINDOW_FLAGS_4                 = 0x00000004,
-    WINDOW_FLAGS_8                 = 0x00000008,
-    WINDOW_FLAGS_10                = 0x00000010,
-    WINDOW_FLAGS_20                = 0x00000020,
+    WINDOW_FLAGS_INITIALIZED       = 0x00000001,
+    WINDOW_FLAGS_FPUPDATE_CHANGED  = 0x00000002,
+    WINDOW_FLAGS_HIDDEN            = 0x00000004, ///< Updated but not rendered
+    WINDOW_FLAGS_INITIAL_ANIMATION = 0x00000008,
+    WINDOW_FLAGS_HAS_CHILDREN      = 0x00000010,
+    WINDOW_FLAGS_DISABLED          = 0x00000020, ///< Not updated or rendered
     WINDOW_FLAGS_40                = 0x00000040,
-    WINDOW_FLAGS_80                = 0x00000080,
-    WINDOW_FLAGS_100               = 0x00000100,
-    WINDOW_FLAGS_200               = 0x00000200,
-    WINDOW_FLAGS_400               = 0x00000400,
-    WINDOW_FLAGS_800               = 0x00000800,
-    WINDOW_FLAGS_1000              = 0x00001000,
-    WINDOW_FLAGS_2000              = 0x00002000,
-    WINDOW_FLAGS_4000              = 0x00004000,
-    WINDOW_FLAGS_8000              = 0x00008000,
-    WINDOW_FLAGS_10000             = 0x00010000,
-    WINDOW_FLAGS_20000             = 0x00020000,
-    WINDOW_FLAGS_40000             = 0x00040000,
-    WINDOW_FLAGS_80000             = 0x00080000,
-    WINDOW_FLAGS_100000            = 0x00100000,
-    WINDOW_FLAGS_200000            = 0x00200000,
-    WINDOW_FLAGS_400000            = 0x00400000,
-    WINDOW_FLAGS_800000            = 0x00800000,
-    WINDOW_FLAGS_1000000           = 0x01000000,
-    WINDOW_FLAGS_2000000           = 0x02000000,
-    WINDOW_FLAGS_4000000           = 0x04000000,
-    WINDOW_FLAGS_8000000           = 0x08000000,
-    WINDOW_FLAGS_10000000          = 0x10000000,
-    WINDOW_FLAGS_20000000          = 0x20000000,
-    WINDOW_FLAGS_40000000          = 0x40000000,
-    WINDOW_FLAGS_80000000          = 0x80000000,
+};
+
+enum DrawFlags {
+    DRAW_FLAGS_ROTSCALE                  = 0x00000001,
+    DRAW_FLAGS_2                         = 0x00000002,
+    DRAW_FLAGS_CLIP                      = 0x00000004,
+    DRAW_FLAGS_CULL_BACK                 = 0x00000008,
 };
 
 enum EntityModelFlags {
@@ -3286,6 +3308,30 @@ enum WindowId {
     WINDOW_ID_61 = 61,
     WINDOW_ID_62 = 62,
     WINDOW_ID_63 = 63,
+};
+
+enum SimpleWindowUpdateId {
+    WINDOW_UPDATE_SHOW              = 1,
+    WINDOW_UPDATE_HIDE              = 2,
+    WINDOW_UPDATE_HIER_UPDATE       = 3,
+    WINDOW_UPDATE_DARKENED          = 4,
+    WINDOW_UPDATE_TRANSPARENT       = 5,
+    WINDOW_UPDATE_OPAQUE            = 6,
+    WINDOW_UPDATE_SHOW_TRANSPARENT  = 7,
+    WINDOW_UPDATE_SHOW_DARKENED     = 8,
+};
+
+enum WindowGroupId {
+    WINDOW_GROUP_ALL = 0,
+    WINDOW_GROUP_1 = 1,
+    WINDOW_GROUP_PAUSE_MENU = 2,
+    WINDOW_GROUP_FILE_MENU = 3,
+};
+
+enum RushFlags {
+    RUSH_FLAG_NONE  = 0,
+    RUSH_FLAG_MEGA  = 1,
+    RUSH_FLAG_POWER = 2,
 };
 
 #endif

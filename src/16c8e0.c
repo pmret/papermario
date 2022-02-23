@@ -150,9 +150,9 @@ void initialize_battle(void) {
     gBattleStatus.flags2 = 0;
     gBattleStatus.flags1 = 0;
     D_8029DA34 = gOverrideFlags;
-    gOverrideFlags &= ~0x80;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
     gBattleStatus.inputBitmask = -1;
-    gOverrideFlags &= ~0x80;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
 
     for (i = 0; i < 16; i++) {
         battleStatus->pushInputBuffer[i] = 0; // @bug? why just 16
@@ -188,7 +188,7 @@ void initialize_battle(void) {
     create_generic_entity_world(NULL, func_8023ED5C);
     func_8024EDC0();
     func_80268E88();
-    set_windows_visible(1);
+    set_windows_visible(WINDOW_GROUP_1);
     D_8029EFBC = create_hud_element(HudScript_HPBar);
     set_hud_element_flags(D_8029EFBC, 0x80);
 
@@ -612,15 +612,15 @@ void btl_restore_world_cameras(void) {
         gCameras[i] = D_8029DA50[i];
     }
 
-    gCurrentCameraID = 0;
+    gCurrentCameraID = CAM_DEFAULT;
     playerStatus->position.x = D_8029EFB0;
     playerStatus->position.y = D_8029EFB4;
     playerStatus->position.z = D_8029EFB8;
 
     if (D_8029DA34 & 0x80) {
-        gOverrideFlags |= 0x80;
+        gOverrideFlags |= GLOBAL_OVERRIDES_80;
     } else {
-        gOverrideFlags &= ~0x80;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
     }
 
     if (gBattleStatus.flags2 & 0x40) {

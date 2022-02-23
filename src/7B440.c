@@ -148,7 +148,7 @@ void player_input_to_move_vector(f32* angle, f32* magnitude) {
         mag = magMax;
     }
 
-    ang = clamp_angle(atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + gCameras[0].currentYaw);
+    ang = clamp_angle(atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + gCameras[CAM_DEFAULT].currentYaw);
     if (mag == 0.0f) {
         ang = playerStatus->targetYaw;
     }
@@ -170,7 +170,7 @@ void game_input_to_move_vector(f32* arg0, f32* arg1) {
         temp1 = tempMax;
     }
 
-    temp2 = clamp_angle(atan2(0.0f, 0.0f, stickX, stickY) + gCameras[0].currentYaw);
+    temp2 = clamp_angle(atan2(0.0f, 0.0f, stickX, stickY) + gCameras[CAM_DEFAULT].currentYaw);
     if (temp1 == 0.0f) {
         temp2 = playerStatus->targetYaw;
     }
@@ -183,9 +183,8 @@ void func_800E24F8(void) {
     Shadow* shadow = get_shadow_by_index(gPlayerStatus.shadowID);
     f32 x = shadow->rotation.x + 180.0;
     f32 z = shadow->rotation.z + 180.0;
-    Camera* camera = &gCameras[0];
+    Camera* camera = &gCameras[CAM_DEFAULT];
     f32 temp;
-
 
     if (x != 0.0f || z != 0.0f) {
         switch (gPlayerStatus.actionState) {

@@ -37,6 +37,16 @@ s32 D_8007F1D0[] = {
     0x00000000
 };
 
+typedef struct unk341d0 {
+    s32 unk_00;
+    s16 unk_04;
+    s16 unk_06;
+    s16 unk_08;
+    s16 unk_0A;
+    s16* unk_0C;
+    s16* unk_10;
+} unk341d0;
+
 s32* D_8007F1F8 = D_8007F1D0;
 
 s32* D_8007F1FC = D_8007F1D0;
@@ -45,13 +55,26 @@ s32* D_8007F200 = D_8007F1D0;
 
 s32* D_8007F204 = D_8007F1D0;
 
+void func_80058DD0(s16* arg);
 INCLUDE_ASM(s32, "341d0", func_80058DD0);
 
 INCLUDE_ASM(s32, "341d0", func_80058E84);
 
 INCLUDE_ASM(s32, "341d0", func_80058F88);
 
-INCLUDE_ASM(s32, "341d0", func_80059008);
+void func_80059008(unk341d0* arg0, s16 arg1, s16 arg2, s16 arg3) {
+    arg0->unk_06 = arg1;
+    arg0->unk_08 = arg2;
+
+    if (arg3 != 0) {
+        arg0->unk_0C = arg0->unk_10;
+        *arg0->unk_0C = arg3;
+        func_80058DD0(arg0->unk_0C);
+        return;
+    }
+
+    arg0->unk_0C = NULL;
+}
 
 INCLUDE_ASM(s32, "341d0", func_8005904C);
 

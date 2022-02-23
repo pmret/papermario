@@ -23,7 +23,7 @@ void func_802B6000_E27C90(void) {
         playerStatus->currentSpeed = get_xz_dist_to_player(playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z) / 18.0f;
         subtract_hp(1);
         open_status_menu_long();
-        gOverrideFlags |= 0x40;
+        gOverrideFlags |= GLOBAL_OVERRIDES_40;
     }
 
     sin_cos_rad(D_802B62B0 * TAU / 360.0f, &sinTheta, &cosTheta);
@@ -53,7 +53,7 @@ void func_802B6000_E27C90(void) {
             playerStatus->unk_10 = 60;
             playerStatus->unk_BF = 0;
             playerStatus->flags &= ~0x800;
-            gOverrideFlags &= ~0x40;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
         }
     }
 }
