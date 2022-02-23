@@ -179,60 +179,62 @@ void game_input_to_move_vector(f32* arg0, f32* arg1) {
     *arg1 = temp1;
 }
 
-// tail merge crap
-#ifdef NON_EQUIVALENT
 void func_800E24F8(void) {
-    Shadow* playerShadow = get_shadow_by_index(gPlayerStatus.shadowID);
+    Shadow* shadow = get_shadow_by_index(gPlayerStatus.shadowID);
+    f32 x = shadow->rotation.x + 180.0;
+    f32 z = shadow->rotation.z + 180.0;
     Camera* camera = &gCameras[0];
-    f32 x = playerShadow->rotation.x + 180.0;
-    f32 z = playerShadow->rotation.z + 180.0;
+    f32 temp;
+
 
     if (x != 0.0f || z != 0.0f) {
         switch (gPlayerStatus.actionState) {
-            case 3:
-            case 8:
-                camera->unk_49C = 32.0f;
+            case ACTION_STATE_JUMP:
+            case ACTION_STATE_FALLING:
+                temp = 32.0f;
+                camera->unk_49C = temp;
                 break;
-            case 1:
-            case 2:
-                if (camera->targetScreenCoords[1] < 130) {
+            case ACTION_STATE_WALK:
+            case ACTION_STATE_RUN:
+                if (camera->targetScreenCoords.y < 130) {
                     camera->unk_49C = 3.0f;
-                    return;
+                    break;
                 }
-
+                temp = 3.0f;
                 if (D_8010C9A0++ > 10) {
                     D_8010C9A0 = 10;
                     camera->unk_49C -= 2.0f;
-                    if (camera->unk_49C < 3.0f) {
-                        camera->unk_49C = 3.0f;
+                    if (camera->unk_49C < temp) {
+                        camera->unk_49C = temp;
                     }
                 }
                 break;
-            case 17:
-                camera->unk_49C = 3.0f;
+            case ACTION_STATE_SLIDING:
+                temp = 3.0f;
+                camera->unk_49C = temp;
                 break;
             default:
+                temp = 3.0f;
                 D_8010C9A0 = 0;
                 camera->unk_49C -= 2.0f;
-                if (camera->unk_49C < 3.0f) {
-                    camera->unk_49C = 3.0f;
+                if (camera->unk_49C < temp) {
+                    camera->unk_49C = temp;
                 }
                 break;
         }
     } else {
-        switch (gPlayerStatus.actionState) {
-            case 1:
-            case 2:
-            case 3:
-            case 0x11:
-                camera->unk_49C = 7.2f;
+        switch(gPlayerStatus.actionState) {
+            case ACTION_STATE_WALK:
+            case ACTION_STATE_RUN:
+            case ACTION_STATE_JUMP:
+            case ACTION_STATE_SLIDING:
+                temp = 7.2f;
                 break;
             default:
-                camera->unk_49C = 24.0f;
+                temp = 24.0f;
                 break;
         }
+
+        camera->unk_49C = temp;
     }
 }
-#else
-INCLUDE_ASM(s32, "7B440", func_800E24F8);
-#endif

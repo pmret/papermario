@@ -64,7 +64,7 @@ ApiStatus func_802381EC_707E8C(Evt* script, s32 isInitialCall) {
 
     temp_v0 = script->functionTemp[1];
     if (temp_v0) {
-        script->functionTemp[1] = (s32) (temp_v0 - 1);
+        script->functionTemp[1] = temp_v0 - 1;
 
         return ApiStatus_BLOCK;
     }

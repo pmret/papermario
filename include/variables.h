@@ -310,7 +310,7 @@ extern HeapNode heap_collisionHead;
 extern HeapNode heap_generalHead;
 extern HeapNode heap_battleHead;
 
-extern s32 bMarioIdleAnims[];
+extern u32 bMarioIdleAnims[];
 extern s32 bMarioDefendAnims[];
 extern s32 bPeachIdleAnims[];
 

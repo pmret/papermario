@@ -2,7 +2,7 @@
 #include "npc.h"
 #include "sprite.h"
 
-Npc* playerNpc = (Npc*) 0x802DB270; // XXX: raw ptr
+Npc* playerNpc = (Npc*) 0x802DB270; // TODO: raw ptr, shiftability
 
 extern s16 D_802DB5B0;
 extern VirtualEntityList D_802DB5C0;
@@ -347,8 +347,8 @@ ApiStatus PlayerJump2(Evt* script, s32 isInitialCall) {
 ApiStatus InterpPlayerYaw(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32* initialYaw = (f32*) &script->functionTemp[1];
-    f32* deltaYaw = (f32*) &script->functionTemp[2];
+    f32* initialYaw = &script->functionTempF[1];
+    f32* deltaYaw = &script->functionTempF[2];
     s32* time = &script->functionTemp[3];
 
     if (isInitialCall) {
@@ -385,8 +385,8 @@ ApiStatus InterpPlayerYaw(Evt* script, s32 isInitialCall) {
 ApiStatus PlayerFaceNpc(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32* args = script->ptrReadPos;
-    f32* playerTargetYaw = (f32*) &script->functionTemp[1];
-    f32* angle = (f32*) &script->functionTemp[2];
+    f32* playerTargetYaw = &script->functionTempF[1];
+    f32* angle = &script->functionTempF[2];
     s32* ft3 = &script->functionTemp[3];
 
     if (isInitialCall) {
@@ -698,8 +698,8 @@ ApiStatus func_802D286C(Evt* script, s32 isInitialCall) {
 ApiStatus func_802D2884(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32* ft1 = (f32*) &script->functionTemp[1];
-    f32* angle = (f32*) &script->functionTemp[2];
+    f32* ft1 = &script->functionTempF[1];
+    f32* angle = &script->functionTempF[2];
     s32* ft3 = &script->functionTemp[3];
 
     if (isInitialCall) {

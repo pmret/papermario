@@ -76,5 +76,4 @@ void set_window_update(s32 panelIndex, WindowUpdateFunc func) {
 
 INCLUDE_ASM(s32, "ddaf0_len_c50", set_windows_visible);
 
-void setup_pause_menu_tab(MenuWindowBP* bpArray, s32 arraySize);
 INCLUDE_ASM(s32, "ddaf0_len_c50", setup_pause_menu_tab);
