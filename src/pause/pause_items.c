@@ -226,13 +226,13 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
                 if (i == 1) {
                     itemIcon = iconIDs[totalItemIndex];
-                    clear_hud_element_flags(itemIcon, 0x20000000);
-                    set_hud_element_flags(itemIcon, 0x8000);
+                    clear_hud_element_flags(itemIcon, HUD_ELEMENT_FLAGS_20000000);
+                    set_hud_element_flags(itemIcon, HUD_ELEMENT_FLAGS_8000);
                     if (isNone) {
                         itemIcon = gPauseItemsIconIDs[19];
                     } else {
                         if (isSelected) {
-                            set_hud_element_flags(itemIcon, 0x20000000);
+                            set_hud_element_flags(itemIcon, HUD_ELEMENT_FLAGS_20000000);
                             gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[itemID].iconID].enabled;
                         }
 
@@ -431,7 +431,7 @@ void pause_items_init(MenuPanel* panel) {
 
     for (i = 0; i < ARRAY_COUNT(gPauseItemsIconIDs); i++) {
         gPauseItemsIconIDs[i] = create_hud_element(gPauseItemsElements[i]);
-        set_hud_element_flags(gPauseItemsIconIDs[i], 0x80);
+        set_hud_element_flags(gPauseItemsIconIDs[i], HUD_ELEMENT_FLAGS_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseItemsWindowBPs); i++) {

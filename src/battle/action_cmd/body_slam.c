@@ -38,25 +38,25 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, 0x82);
+    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
 
     hudElement = create_hud_element(HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, 0x82);
+    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
 
     hudElement = create_hud_element(HudScript_FillGaugeResult);
     actionCommandStatus->hudElements[3] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, 0x82);
+    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
 
     hudElement = create_hud_element(HudScript_TimingWait);
     actionCommandStatus->hudElements[2] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 41, actionCommandStatus->hudElementY + 22);
     set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, 0x80);
+    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80);
     return ApiStatus_DONE2;
 }
 

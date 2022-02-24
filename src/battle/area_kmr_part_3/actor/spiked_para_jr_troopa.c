@@ -549,7 +549,7 @@ ApiStatus func_802189DC_447E1C(Evt* script, s32 isInitialCall) {
 
     set_hud_element_render_pos(icon, posX, posY);
     set_hud_element_scale(icon, 1.5f);
-    clear_hud_element_flags(icon, 0x200002);
+    clear_hud_element_flags(icon, HUD_ELEMENT_FLAGS_200000 | HUD_ELEMENT_FLAGS_2);
     evt_set_variable(script, *args++, icon);
     load_tattle_flags(0x8B);
     return ApiStatus_DONE2;

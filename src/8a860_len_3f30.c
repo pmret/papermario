@@ -163,58 +163,58 @@ s32 popup_menu_update(void) {
             D_8010D68C = 0;
             elementID = create_hud_element(HudScript_EmptyBar);
             D_8010D65C = elementID;
-            set_hud_element_flags(elementID, 0x80);
+            set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80);
             set_hud_element_tint(elementID, 255, 255, 255);
             if (gPopupMenu->popupType != 2) {
-                set_hud_element_flags(elementID, 2);
+                set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_2);
             }
 
             one = 1; // required to match (why is 1 loaded so early?)
             elementID = create_hud_element(gPopupMenu->ptrIcon[0]);
             D_8010D678 = elementID;
             set_hud_element_scale(elementID, 0.45f);
-            set_hud_element_flags(elementID, 0x8080);
+            set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_8000 | HUD_ELEMENT_FLAGS_80);
 
             elementID = create_hud_element(HudScript_AnimatedHandPointer);
             D_8010D66C = elementID;
-            set_hud_element_flags(elementID, 0x20000080);
+            set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_20000000 | HUD_ELEMENT_FLAGS_80);
 
             elementID = create_hud_element(HudScript_GreenArrowUp);
             D_8010D670 = elementID;
-            set_hud_element_flags(elementID, 0x20000080);
+            set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_20000000 | HUD_ELEMENT_FLAGS_80);
 
             elementID = create_hud_element(HudScript_GreenArrowDown);
             D_8010D674 = elementID;
-            set_hud_element_flags(elementID, 0x20000080);
+            set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_20000000 | HUD_ELEMENT_FLAGS_80);
 
             if (gPopupMenu->popupType == 3) {
                 D_8010D660 = create_hud_element(HudScript_StatusStarPiece);
                 elementID = D_8010D660;
-                set_hud_element_flags(elementID, 0x80);
+                set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80);
                 set_hud_element_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == 4) {
                 D_8010D660 = create_hud_element(HudScript_StatusStarPiece);
                 elementID = D_8010D660;
-                set_hud_element_flags(elementID, 0x8080);
+                set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_8000 | HUD_ELEMENT_FLAGS_80);
                 set_hud_element_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == 5) {
                 D_8010D660 = create_hud_element(HudScript_StatusCoin);
                 elementID = D_8010D660;
-                set_hud_element_flags(elementID, 0x80);
+                set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80);
                 set_hud_element_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == 3 || gPopupMenu->popupType == 4) {
                 D_8010D664 = create_hud_element(HudScript_MenuTimes);
                 elementID = D_8010D664;
-                set_hud_element_flags(elementID, 0x80);
+                set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80);
                 set_hud_element_tint(elementID, 255, 255, 255);
             }
             if (gPopupMenu->popupType == one || gPopupMenu->popupType == 4) {
                 D_8010D668 = create_hud_element(D_80109890[0]);
                 elementID = D_8010D668;
-                set_hud_element_flags(elementID, 0x80);
+                set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80);
                 set_hud_element_tint(elementID, 255, 255, 255);
             }
 

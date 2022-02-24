@@ -87,7 +87,7 @@ ApiStatus N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
                 HudElement* icon = create_hud_element(*(B48Ptr + * (B58Ptr + i)));
 
                 *(&D_802A2DD8 + i) = icon;
-                set_hud_element_flags(icon, 0x80);
+                set_hud_element_flags(icon, HUD_ELEMENT_FLAGS_80);
             }
             D_802A2DEC = 1;
         }

@@ -7,15 +7,15 @@ s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Mat
 
 void func_801413F8(void);
 
-typedef struct UnkHudElementStruct {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-} UnkHudElementStruct; // size = 0x08;
+typedef struct HudCacheEntry {
+    /* 0x00 */ s32 id;
+    /* 0x04 */ u8* data;
+} HudCacheEntry; // size = 0x08;
 
 extern HudElementList* gHudElements;
 
 s32 D_8014EFC0 = 0;
-s32 D_8014EFC4 = 0x11000;
+s32 gHudElementCacheCapacity = 0x11000;
 
 HudScript hud_element_defaultAnim = {
     he_End,
@@ -27,7 +27,7 @@ typedef struct HudElementSize {
     s16 size;
 } HudElementSize;
 
-HudElementSize gHudElementSizes[26] = {
+HudElementSize gHudElementSizes[] = {
     { 8, 8, 32 },
     { 16, 16, 128 },
     { 24, 24, 288 },
@@ -56,9 +56,7 @@ HudElementSize gHudElementSizes[26] = {
     { 20, 32, 0 }
 };
 
-s32 D_8014F068[] = {
-    0x00220020, 0x00000028, 0x002803C8, 0x00000000
-};
+s16 D_8014F068[] = { 34, 32, 0, 40, 40, 968, 0, 0 };
 Gfx D_8014F078[] = {
     gsDPSetScissor(G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT),
     gsDPPipeSync(),
@@ -129,21 +127,20 @@ Lights1 D_8014F108 = {
 
 extern s32 D_801512B4; // no of hud elements?
 extern s32 D_80159180;
-extern HudElementList D_80156F60;
-extern HudElementList D_80157460;
-extern s32* D_8015133C;
-extern void* D_80157968;
-extern UnkHudElementStruct** D_801512C8;
-extern UnkHudElementStruct** D_801512D0;
-extern UnkHudElementStruct D_80157970[];
-
-extern UnkHudElementStruct D_80157F70[];
-extern void* D_80158574;
-extern UnkHudElementStruct D_80158580[];
-extern UnkHudElementStruct D_80158B80[];
+extern HudElementList gHudElementsWorld;
+extern HudElementList gHudElementsBattle;
+extern s32* gHudElementCacheSize;
+extern s32 gHudElementCacheSizeWorld;
+extern HudCacheEntry* gHudElementCacheTableRaster;
+extern HudCacheEntry* gHudElementCacheTablePalette;
+extern HudCacheEntry gHudElementCacheTableRasterWorld[];
+extern HudCacheEntry gHudElementCacheTablePaletteWorld[];
+extern void* gHudElementCacheSizeBattle;
+extern HudCacheEntry gHudElementCacheTableRasterBattle[];
+extern HudCacheEntry gHudElementCacheTablePaletteBattle[];
 extern s32* D_80157964;
 extern s32* D_80158570;
-extern s32* D_80151314;
+extern u8* gHudElementCacheBuffer;
 
 void load_hud_element(HudElement* hudElement, const HudScript* anim) {
     s32* ptr = anim;
@@ -151,7 +148,7 @@ void load_hud_element(HudElement* hudElement, const HudScript* anim) {
     s32 palette;
     s32 s3;
     Vec3s* size;
-    UnkHudElementStruct* uhl;
+    HudCacheEntry* uhl;
     s32 i;
     s32 x;
 
@@ -184,7 +181,7 @@ void load_hud_element(HudElement* hudElement, const HudScript* anim) {
             case HUD_ELEMENT_OP_SetCustomSize:
                 hudElement->customDrawSize.x = hudElement->customImageSize.x = *ptr++;
                 hudElement->customDrawSize.y = hudElement->customImageSize.y = *ptr++;
-                hudElement->flags |= 0x100000;
+                hudElement->flags |= HUD_ELEMENT_FLAGS_100000;
                 break;
 
             case HUD_ELEMENT_OP_AddTexelOffsetX:
@@ -212,21 +209,20 @@ void load_hud_element(HudElement* hudElement, const HudScript* anim) {
                 raster = *ptr++;
                 palette = *ptr++;
 
-                //size = &gHudElementSizes[s3];
                 i = 0;
-                uhl = D_801512C8;
+                uhl = gHudElementCacheTableRaster;
                 while (TRUE) {
-                    if (uhl->unk_00 == -1) {
-                        uhl->unk_00 = raster;
-                        uhl->unk_04 = (s32)(D_80151314) + (s32)(*D_8015133C);
+                    if (uhl->id == -1) {
+                        uhl->id = raster;
+                        uhl->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
                         if (!gGameStatusPtr->isBattle) {
-                            x = D_8014EFC4;
+                            x = gHudElementCacheCapacity;
                         } else {
-                            x = D_8014EFC4 / 2;
+                            x = gHudElementCacheCapacity / 2;
                         }
-                        ASSERT(x > *D_8015133C + gHudElementSizes[s3].size);
-                        nuPiReadRom(icon_present_VRAM + raster, uhl->unk_04, gHudElementSizes[s3].size);
-                        *D_8015133C += gHudElementSizes[s3].size;
+                        ASSERT(x > *gHudElementCacheSize + gHudElementSizes[s3].size);
+                        nuPiReadRom(icon_present_VRAM + raster, uhl->data, gHudElementSizes[s3].size);
+                        *gHudElementCacheSize += gHudElementSizes[s3].size;
                         if (!gGameStatusPtr->isBattle) {
                             *ptr = i;
                         } else {
@@ -234,7 +230,7 @@ void load_hud_element(HudElement* hudElement, const HudScript* anim) {
                         }
                         i++;
                         break;
-                    } else if (uhl->unk_00 == raster) {
+                    } else if (uhl->id == raster) {
                         if (!gGameStatusPtr->isBattle) {
                             *ptr = i;
                         } else {
@@ -249,20 +245,20 @@ void load_hud_element(HudElement* hudElement, const HudScript* anim) {
                 ptr++;
                 ASSERT(i < 192);
 
-                uhl = D_801512D0;
+                uhl = gHudElementCacheTablePalette;
                 i = 0;
                 while (TRUE) {
-                    if (uhl->unk_00 == -1) {
-                        uhl->unk_00 = palette;
-                        uhl->unk_04 = (s32)(D_80151314) + (s32)(*D_8015133C);
+                    if (uhl->id == -1) {
+                        uhl->id = palette;
+                        uhl->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
                         if (!gGameStatusPtr->isBattle) {
-                            x = D_8014EFC4;
+                            x = gHudElementCacheCapacity;
                         } else {
-                            x = D_8014EFC4 / 2;
+                            x = gHudElementCacheCapacity / 2;
                         }
-                        ASSERT(x > *D_8015133C + 32);
-                        nuPiReadRom(icon_present_VRAM + palette, uhl->unk_04, 32);
-                        *D_8015133C += 32;
+                        ASSERT(x > *gHudElementCacheSize + 32);
+                        nuPiReadRom(icon_present_VRAM + palette, uhl->data, 32);
+                        *gHudElementCacheSize += 32;
                         if (!gGameStatusPtr->isBattle) {
                             *ptr = i;
                         } else {
@@ -270,7 +266,7 @@ void load_hud_element(HudElement* hudElement, const HudScript* anim) {
                         }
                         i++;
                         break;
-                    } else if (uhl->unk_00 == palette) {
+                    } else if (uhl->id == palette) {
                         if (!gGameStatusPtr->isBattle) {
                             *ptr = i;
                         } else {
@@ -289,18 +285,6 @@ void load_hud_element(HudElement* hudElement, const HudScript* anim) {
         }
     }
 }
-/*
-INCLUDE_ASM(void, "hud_element", draw_rect_hud_element,
-    HudElement* hudElement,
-    s32 texSizeX,
-    s32 texSizeY,
-    s32 drawSizeX,
-    s32 drawSizeY,
-    s32 offsetX,
-    s32 offsetY,
-    s32 clamp,
-    s32 dropShadow
-)*/
 
 void draw_rect_hud_element(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s16 drawSizeX, s16 drawSizeY,
                            s16 offsetX, s16 offsetY, s32 clamp, s32 dropShadow) {
@@ -381,13 +365,13 @@ void draw_rect_hud_element(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
     }
 
     sp8 = 0;
-    temp5 = (hudElement->flags & 0x4000);
+    temp5 = (hudElement->flags & HUD_ELEMENT_FLAGS_4000);
     temp_a0 = temp5 != 0;
-    temp5 = (hudElement->flags & 0x80000);
+    temp5 = (hudElement->flags & HUD_ELEMENT_FLAGS_80000);
     temp_a1 = temp5 != 0;
-    temp5 = (hudElement->flags & 0x1000);
+    temp5 = (hudElement->flags & HUD_ELEMENT_FLAGS_1000);
     sp0 = temp5 != 0;
-    temp6 = (hudElement->flags & 0x2000);
+    temp6 = (hudElement->flags & HUD_ELEMENT_FLAGS_2000);
     sp4 = temp6 != 0;
 
     if (temp_a0 == TRUE) {
@@ -402,7 +386,7 @@ void draw_rect_hud_element(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
     sp34 = 6;
     sp38 = 5;
 
-    if ((hudElement->flags & 0x10) == 0) { // 1a4 -> 24c
+    if ((hudElement->flags & HUD_ELEMENT_FLAGS_10) == 0) { // 1a4 -> 24c
         switch (drawSizeX) {
             case 8:
                 sp34 = 3;
@@ -439,14 +423,14 @@ void draw_rect_hud_element(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
             break;
 
         case 1:
-            if ((hudElement->flags & 0x20) == 0) {
-                if ((hudElement->flags & 0x800000) == 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_20) == 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_800000) == 0) {
                     gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
                 } else {
                     gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_TEX_EDGE, G_RM_AA_TEX_EDGE2);
                 }
             } else {
-                if ((hudElement->flags & 0x800000) == 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_800000) == 0) {
                     gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
                 } else {
                     gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF | AA_EN, G_RM_CLD_SURF2 | AA_EN);
@@ -462,7 +446,7 @@ void draw_rect_hud_element(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
             break;
     }
 
-    if (hudElement->flags & 0x8000) {
+    if (hudElement->flags & HUD_ELEMENT_FLAGS_8000) {
         gDPSetTextureFilter(gMasterGfxPos++, G_TF_AVERAGE);
     } else {
         gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
@@ -567,13 +551,13 @@ void draw_rect_hud_element(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
             switch (sp8) {
                 case 0:
                     gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
-                    if ((hudElement->flags & 0x20) == 0) {
+                    if ((hudElement->flags & HUD_ELEMENT_FLAGS_20) == 0) {
                         gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
                     } else {
                         gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
                     }
 
-                    if (hudElement->flags & (nv = 0x20)) {
+                    if (hudElement->flags & (nv = HUD_ELEMENT_FLAGS_20)) {
                         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, hudElement->opacity);
                     }
 
@@ -667,7 +651,7 @@ void draw_rect_hud_element(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
                     break;
             }
 
-            if (hudElement->flags & 0x8000) {
+            if (hudElement->flags & HUD_ELEMENT_FLAGS_8000) {
                 gSPScisTextureRectangle(gMasterGfxPos++, sp30 * 4, sp28 * 4, sp88 * 4, sp2C * 4, 0, sp14 * 32 + 16, sp18 * 32 + 16, spC, sp10);
             } else {
                 gSPScisTextureRectangle(gMasterGfxPos++, sp30 * 4, sp28 * 4, sp88 * 4, sp2C * 4, 0, sp14 * 32, sp18 * 32, spC, sp10);
@@ -692,46 +676,46 @@ void draw_rect_hud_element(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
 
 void clear_hud_element_cache(void) {
     s32 i;
-    UnkHudElementStruct* p1;
-    UnkHudElementStruct* p2;
+    HudCacheEntry* p1;
+    HudCacheEntry* p2;
 
     if (!gGameStatusPtr->isBattle) {
-        gHudElements = &D_80156F60;
-        D_8015133C = &D_80157968;
-        D_801512C8 = &D_80157970;
-        D_801512D0 = &D_80157F70;
+        gHudElements = &gHudElementsWorld;
+        gHudElementCacheSize = &gHudElementCacheSizeWorld;
+        gHudElementCacheTableRaster = &gHudElementCacheTableRasterWorld;
+        gHudElementCacheTablePalette = &gHudElementCacheTablePaletteWorld;
     } else {
-        gHudElements = &D_80157460;
-        D_8015133C = &D_80158574;
-        D_801512C8 = &D_80158580;
-        D_801512D0 = &D_80158B80;
+        gHudElements = &gHudElementsBattle;
+        gHudElementCacheSize = &gHudElementCacheSizeBattle;
+        gHudElementCacheTableRaster = &gHudElementCacheTableRasterBattle;
+        gHudElementCacheTablePalette = &gHudElementCacheTablePaletteBattle;
     }
 
     if (!gGameStatusPtr->isBattle) {
-        D_80151314 = general_heap_malloc(D_8014EFC4);
-        ASSERT(D_80151314);
-        D_80157964 = D_80151314;
-        *D_8015133C = 0;
-        p1 = D_801512C8;
-        p2 = D_801512D0;
+        gHudElementCacheBuffer = general_heap_malloc(gHudElementCacheCapacity);
+        ASSERT(gHudElementCacheBuffer);
+        D_80157964 = gHudElementCacheBuffer;
+        *gHudElementCacheSize = 0;
+        p1 = gHudElementCacheTableRaster;
+        p2 = gHudElementCacheTablePalette;
         for (i = 0; i < 192; i++) {
-            p1[i].unk_00 = -1;
-            p2[i].unk_00 = -1;
+            p1[i].id = -1;
+            p2[i].id = -1;
         }
     } else {
         if (D_8014EFC0 == 0) {
-            D_80151314 = general_heap_malloc(D_8014EFC4 / 2);
-            ASSERT(D_80151314);
+            gHudElementCacheBuffer = general_heap_malloc(gHudElementCacheCapacity / 2);
+            ASSERT(gHudElementCacheBuffer);
         } else {
-            D_80151314 = D_8014EFC0;
+            gHudElementCacheBuffer = D_8014EFC0;
         }
-        D_80158570 = D_80151314;
-        *D_8015133C = 0;
-        p1 = D_801512C8;
-        p2 = D_801512D0;
+        D_80158570 = gHudElementCacheBuffer;
+        *gHudElementCacheSize = 0;
+        p1 = gHudElementCacheTableRaster;
+        p2 = gHudElementCacheTablePalette;
         for (i = 0; i < 192; i++) {
-            p1[i].unk_00 = -1;
-            p2[i].unk_00 = -1;
+            p1[i].id = -1;
+            p2[i].id = -1;
         }
     }
 
@@ -751,17 +735,17 @@ void init_hud_element_list(void) {
             D_80158570 = NULL;
         }
 
-        gHudElements = &D_80156F60;
-        D_8015133C = &D_80157968;
-        D_801512C8 = &D_80157970;
-        D_801512D0 = &D_80157F70;
-        D_80151314 = D_80157964;
+        gHudElements = &gHudElementsWorld;
+        gHudElementCacheSize = &gHudElementCacheSizeWorld;
+        gHudElementCacheTableRaster = &gHudElementCacheTableRasterWorld;
+        gHudElementCacheTablePalette = &gHudElementCacheTablePaletteWorld;
+        gHudElementCacheBuffer = D_80157964;
     } else {
-        gHudElements = &D_80157460;
-        D_8015133C = &D_80158574;
-        D_801512C8 = &D_80158580;
-        D_801512D0 = &D_80158B80;
-        D_80151314 = D_80158570;
+        gHudElements = &gHudElementsBattle;
+        gHudElementCacheSize = &gHudElementCacheSizeBattle;
+        gHudElementCacheTableRaster = &gHudElementCacheTableRasterBattle;
+        gHudElementCacheTablePalette = &gHudElementCacheTablePaletteBattle;
+        gHudElementCacheBuffer = D_80158570;
     }
 
     D_801512B4 = 0;
@@ -831,7 +815,7 @@ s32 create_hud_element(const HudScript* anim) {
     hudElement->tint.b = 255;
 
     if (gGameStatusPtr->isBattle) {
-        hudElement->flags |= 0x400;
+        hudElement->flags |= HUD_ELEMENT_FLAGS_400;
         id |= 0x800;
     }
 
@@ -848,8 +832,8 @@ void update_hud_elements(void) {
     for (i = 0; i < ARRAY_COUNT(*gHudElements);) {
         HudElement* elem = (*gHudElements)[i];
 
-        if (elem != NULL && (elem->flags != 0) && !(elem->flags & 2)) {
-            if (elem->flags & 0x40000) {
+        if (elem != NULL && (elem->flags != 0) && !(elem->flags & HUD_ELEMENT_FLAGS_2)) {
+            if (elem->flags & HUD_ELEMENT_FLAGS_40000) {
                 free_hud_element(i);
                 i++;
             } else if (elem->readPos != 0) {
@@ -857,7 +841,7 @@ void update_hud_elements(void) {
                 if (elem->updateTimer == 0) {
                     while (hud_element_update(elem) != 0);
                 }
-                if (elem->flags & 0x100) {
+                if (elem->flags & HUD_ELEMENT_FLAGS_100) {
                     elem->unkImgScale[0] += elem->unk_20;
                     elem->unkImgScale[1] += elem->unk_24;
                 }
@@ -872,8 +856,8 @@ void update_hud_elements(void) {
 }
 
 s32 hud_element_update(HudElement* hudElement) {
-    UnkHudElementStruct* a1;
-    UnkHudElementStruct* a3;
+    HudCacheEntry* a1;
+    HudCacheEntry* a3;
     s32 i;
     s32 drawSizePreset;
     s32 tileSizePreset;
@@ -896,29 +880,29 @@ s32 hud_element_update(HudElement* hudElement) {
         case HUD_ELEMENT_OP_End:
             hudElement->updateTimer = 60;
             flags = hudElement->flags;
-            do { hudElement->flags = flags | 0x4; } while (0);
+            do { hudElement->flags = flags | HUD_ELEMENT_FLAGS_4; } while (0);
             return FALSE;
 
         case HUD_ELEMENT_OP_Delete:
             hudElement->updateTimer = 60;
             do {
-                hudElement->flags |= 0x40000;
+                hudElement->flags |= HUD_ELEMENT_FLAGS_40000;
             } while (0);
             return FALSE;
 
         case HUD_ELEMENT_OP_UseIA8:
             hudElement->readPos = nextPos;
-            hudElement->flags |= 0x80000;
+            hudElement->flags |= HUD_ELEMENT_FLAGS_80000;
             return TRUE;
 
         case HUD_ELEMENT_OP_SetVisible:
             hudElement->readPos = nextPos;
-            hudElement->flags |= 0x4000;
+            hudElement->flags |= HUD_ELEMENT_FLAGS_4000;
             return TRUE;
 
         case HUD_ELEMENT_OP_SetHidden:
             hudElement->readPos = nextPos;
-            hudElement->flags &= ~0x4000;
+            hudElement->flags &= ~HUD_ELEMENT_FLAGS_4000;
             return TRUE;
 
         case HUD_ELEMENT_OP_SetFlags:
@@ -938,12 +922,12 @@ s32 hud_element_update(HudElement* hudElement) {
             hudElement->imageAddr = *nextPos++;
             hudElement->readPos = nextPos;
 
-            if (hudElement->flags & 0x400000) {
+            if (hudElement->flags & HUD_ELEMENT_FLAGS_400000) {
                 hudElement->imageAddr += hudElement->memOffset;
             }
 
-            if (hudElement->flags & 0x100) {
-                if ((hudElement->flags & 0x100000) == 0) {
+            if (hudElement->flags & HUD_ELEMENT_FLAGS_100) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_100000) == 0) {
                     tileSizePreset = hudElement->tileSizePreset;
                     drawSizePreset = hudElement->drawSizePreset;
                     imageWidth = gHudElementSizes[tileSizePreset].width;
@@ -957,14 +941,14 @@ s32 hud_element_update(HudElement* hudElement) {
                     drawHeight = hudElement->customDrawSize.y;
                 }
 
-                if ((hudElement->flags & 0x200) == 0) {
-                    hudElement->flags |= 0x200;
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_200) == 0) {
+                    hudElement->flags |= HUD_ELEMENT_FLAGS_200;
                     hudElement->unkImgScale[0] = imageWidth;
                     hudElement->unkImgScale[1] = imageHeight;
                     hudElement->unk_20 = ((f32)drawWidth - (f32)imageWidth) / (f32)hudElement->updateTimer;
                     hudElement->unk_24 = ((f32)drawHeight - (f32)imageHeight) / (f32)hudElement->updateTimer;
                 } else {
-                    hudElement->flags &= ~0x200;
+                    hudElement->flags &= ~HUD_ELEMENT_FLAGS_200;
                     hudElement->unkImgScale[0] = drawWidth;
                     hudElement->unkImgScale[1] = drawHeight;
                     hudElement->unk_20 = ((f32)imageWidth - (f32)drawWidth) / (f32)hudElement->updateTimer;
@@ -979,13 +963,13 @@ s32 hud_element_update(HudElement* hudElement) {
             hudElement->paletteAddr = *nextPos++;
             hudElement->readPos = nextPos;
 
-            if (hudElement->flags & 0x400000) {
+            if (hudElement->flags & HUD_ELEMENT_FLAGS_400000) {
                 hudElement->imageAddr += hudElement->memOffset;
                 hudElement->paletteAddr += hudElement->memOffset;
             }
 
-            if (hudElement->flags & 0x100) {
-                if ((hudElement->flags & 0x100000) == 0) {
+            if (hudElement->flags & HUD_ELEMENT_FLAGS_100) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_100000) == 0) {
                     tileSizePreset = hudElement->tileSizePreset;
                     drawSizePreset = hudElement->drawSizePreset;
                     imageWidth = gHudElementSizes[tileSizePreset].width;
@@ -999,14 +983,14 @@ s32 hud_element_update(HudElement* hudElement) {
                     drawHeight = hudElement->customDrawSize.y;
                 }
 
-                if ((hudElement->flags & 0x200) == 0) {
-                    hudElement->flags |= 0x200;
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_200) == 0) {
+                    hudElement->flags |= HUD_ELEMENT_FLAGS_200;
                     hudElement->unkImgScale[0] = imageWidth;
                     hudElement->unkImgScale[1] = imageHeight;
                     hudElement->unk_20 = ((f32)drawWidth - (f32)imageWidth) / (f32)hudElement->updateTimer;
                     hudElement->unk_24 = ((f32)drawHeight - (f32)imageHeight) / (f32)hudElement->updateTimer;
                 } else {
-                    hudElement->flags &= ~0x200;
+                    hudElement->flags &= ~HUD_ELEMENT_FLAGS_200;
                     hudElement->unkImgScale[0] = drawWidth;
                     hudElement->unkImgScale[1] = drawHeight;
                     hudElement->unk_20 = ((f32)imageWidth - (f32)drawWidth) / (f32)hudElement->updateTimer;
@@ -1018,39 +1002,39 @@ s32 hud_element_update(HudElement* hudElement) {
         case HUD_ELEMENT_OP_SetImage:
             hudElement->updateTimer = *nextPos++;
 
-            if ((hudElement->flags & 0x400) == 0) {
-                a1 = D_80157970;
-                a3 = D_80157F70;
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_400) == 0) {
+                a1 = gHudElementCacheTableRasterWorld;
+                a3 = gHudElementCacheTablePaletteWorld;
             } else {
-                a1 = D_80158580;
-                a3 = D_80158B80;
+                a1 = gHudElementCacheTableRasterBattle;
+                a3 = gHudElementCacheTablePaletteBattle;
             }
 
             i = 0;
             while (TRUE) {
-                if (a1[i].unk_00 == *nextPos) {
+                if (a1[i].id == *nextPos) {
                     break;
                 }
                 ASSERT(++i < 192);
             }
 
             nextPos++;
-            hudElement->imageAddr = a1[i].unk_04;
+            hudElement->imageAddr = a1[i].data;
 
             i = 0;
             while (TRUE) {
-                if (a3[i].unk_00 == *nextPos) {
+                if (a3[i].id == *nextPos) {
                     break;
                 }
                 ASSERT(++i < 192);
             }
-            hudElement->paletteAddr = a3[i].unk_04;
+            hudElement->paletteAddr = a3[i].data;
             nextPos += 3;
             hudElement->readPos = nextPos;
 
 
-            if (hudElement->flags & 0x100) {
-                if ((hudElement->flags & 0x100000) == 0) {
+            if (hudElement->flags & HUD_ELEMENT_FLAGS_100) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_100000) == 0) {
                     tileSizePreset = hudElement->tileSizePreset;
                     drawSizePreset = hudElement->drawSizePreset;
                     imageWidth = gHudElementSizes[tileSizePreset].width;
@@ -1064,14 +1048,14 @@ s32 hud_element_update(HudElement* hudElement) {
                     drawHeight = hudElement->customDrawSize.y;
                 }
 
-                if ((hudElement->flags & 0x200) == 0) {
-                    hudElement->flags |= 0x200;
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_200) == 0) {
+                    hudElement->flags |= HUD_ELEMENT_FLAGS_200;
                     hudElement->unkImgScale[0] = imageWidth;
                     hudElement->unkImgScale[1] = imageHeight;
                     hudElement->unk_20 = ((f32)drawWidth - (f32)imageWidth) / (f32)hudElement->updateTimer;
                     hudElement->unk_24 = ((f32)drawHeight - (f32)imageHeight) / (f32)hudElement->updateTimer;
                 } else {
-                    hudElement->flags &= ~0x200;
+                    hudElement->flags &= ~HUD_ELEMENT_FLAGS_200;
                     hudElement->unkImgScale[0] = drawWidth;
                     hudElement->unkImgScale[1] = drawHeight;
                     hudElement->unk_20 = ((f32)imageWidth - (f32)drawWidth) / (f32)hudElement->updateTimer;
@@ -1106,8 +1090,8 @@ s32 hud_element_update(HudElement* hudElement) {
             hudElement->readPos = nextPos;
             hudElement->drawSizePreset = sizePreset;
             hudElement->tileSizePreset = sizePreset;
-            hudElement->flags &= ~0x100;
-            hudElement->flags &= ~0x800;
+            hudElement->flags &= ~HUD_ELEMENT_FLAGS_100;
+            hudElement->flags &= ~HUD_ELEMENT_FLAGS_800;
             return TRUE;
 
         case HUD_ELEMENT_OP_SetSizesAutoScale:
@@ -1132,8 +1116,8 @@ s32 hud_element_update(HudElement* hudElement) {
             hudElement->widthScale = X10(xScaled);
             hudElement->heightScale = X10(yScaled);
 
-            hudElement->flags &= ~0x100;
-            hudElement->flags |= 0x800;
+            hudElement->flags &= ~HUD_ELEMENT_FLAGS_100;
+            hudElement->flags |= HUD_ELEMENT_FLAGS_800;
             return TRUE;
 
         case HUD_ELEMENT_OP_SetSizesFixedScale:
@@ -1145,9 +1129,9 @@ s32 hud_element_update(HudElement* hudElement) {
             hudElement->readPos = nextPos;
             hudElement->tileSizePreset = tileSizePreset;
             hudElement->drawSizePreset = drawSizePreset;
-            hudElement->flags |= 0x100;
-            hudElement->flags &= ~0x800;
-            hudElement->flags &= ~0x200;
+            hudElement->flags |= HUD_ELEMENT_FLAGS_100;
+            hudElement->flags &= ~HUD_ELEMENT_FLAGS_800;
+            hudElement->flags &= ~HUD_ELEMENT_FLAGS_200;
             return TRUE;
 
         case HUD_ELEMENT_OP_AddTexelOffsetX:
@@ -1158,7 +1142,7 @@ s32 hud_element_update(HudElement* hudElement) {
 
         case HUD_ELEMENT_OP_AddTexelOffsetY:
             s2 = *nextPos++;
-            if ((hudElement->flags & 0x2000) == 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_2000) == 0) {
                 hudElement->screenPosOffset.y += s2;
             } else {
                 hudElement->screenPosOffset.y -= s2;
@@ -1170,7 +1154,7 @@ s32 hud_element_update(HudElement* hudElement) {
             s1 = *nextPos++;
             s2 = *nextPos++;
             hudElement->screenPosOffset.x = s1;
-            if ((hudElement->flags & 0x2000) == 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_2000) == 0) {
                 hudElement->screenPosOffset.y = s2;
             } else {
                 hudElement->screenPosOffset.y = -s2;
@@ -1182,7 +1166,7 @@ s32 hud_element_update(HudElement* hudElement) {
             uniformScale = (f32)*nextPos++;
             uniformScale /= 65536;
             hudElement->uniformScale = uniformScale;
-            if ((hudElement->flags & 0x100000) == 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_100000) == 0) {
                 imageWidth = gHudElementSizes[hudElement->tileSizePreset].width;
                 imageHeight = gHudElementSizes[hudElement->tileSizePreset].height;
                 drawWidth = gHudElementSizes[hudElement->drawSizePreset].width;
@@ -1207,16 +1191,16 @@ s32 hud_element_update(HudElement* hudElement) {
             hudElement->heightScale = X10(yScaled);
 
             hudElement->readPos = nextPos;
-            hudElement->flags &= ~0x100;
-            hudElement->flags |= 0x800 | 0x10;
+            hudElement->flags &= ~HUD_ELEMENT_FLAGS_100;
+            hudElement->flags |= HUD_ELEMENT_FLAGS_800 | HUD_ELEMENT_FLAGS_10;
             return TRUE;
 
         case HUD_ELEMENT_OP_SetAlpha:
             s1 = *nextPos++;
             hudElement->opacity = s1;
-            hudElement->flags |= 0x20;
+            hudElement->flags |= HUD_ELEMENT_FLAGS_20;
             if (hudElement->opacity == 255) {
-                hudElement->flags &= ~0x20;
+                hudElement->flags &= ~HUD_ELEMENT_FLAGS_20;
             }
             hudElement->readPos = nextPos;
             return TRUE;
@@ -1237,15 +1221,15 @@ s32 hud_element_update(HudElement* hudElement) {
             hudElement->heightScale = X10(1);
             hudElement->drawSizePreset = 0;
             hudElement->tileSizePreset = 0;
-            hudElement->flags &= ~0x100;
-            hudElement->flags &= ~0x800;
-            hudElement->flags |= 0x100000;
+            hudElement->flags &= ~HUD_ELEMENT_FLAGS_100;
+            hudElement->flags &= ~HUD_ELEMENT_FLAGS_800;
+            hudElement->flags |= HUD_ELEMENT_FLAGS_100000;
             return TRUE;
 
         case HUD_ELEMENT_OP_op_15:
             s1 = *nextPos++;
             hudElement->readPos = nextPos;
-            hudElement->flags &= ~0x0F000000;
+            hudElement->flags &= ~(HUD_ELEMENT_FLAGS_1000000 | HUD_ELEMENT_FLAGS_2000000 | HUD_ELEMENT_FLAGS_4000000 | HUD_ELEMENT_FLAGS_8000000);
             hudElement->flags |= s1 << 24;
             return TRUE;
 
@@ -1266,7 +1250,7 @@ s32 hud_element_update(HudElement* hudElement) {
             arg1 = *nextPos++;
             arg2 = *nextPos++;
             hudElement->readPos = nextPos;
-            if (hudElement->flags & 0x10000) {
+            if (hudElement->flags & HUD_ELEMENT_FLAGS_10000) {
                 hudTransform->pivot.x = arg1;
                 do {
                     hudTransform->pivot.y = arg2;
@@ -1300,9 +1284,9 @@ void render_hud_elements_backUI(void) {
         hudElement = (*gHudElements)[i];
         if (hudElement != NULL) {
             s32 flags = hudElement->flags;
-            if (flags != 0 && (flags & 2) == 0) {
-                if ((flags & 0x50210080) == 0) {
-                    if ((flags & 0x40) == 0 && hudElement->drawSizePreset >= 0) {
+            if (flags != 0 && (flags & HUD_ELEMENT_FLAGS_2) == 0) {
+                if ((flags & (HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_10000 | HUD_ELEMENT_FLAGS_200000 | HUD_ELEMENT_FLAGS_10000000 | HUD_ELEMENT_FLAGS_40000000)) == 0) {
+                    if ((flags & HUD_ELEMENT_FLAGS_40) == 0 && hudElement->drawSizePreset >= 0) {
                         sortedElements[count++] = i;
                     }
                 }
@@ -1328,8 +1312,8 @@ void render_hud_elements_backUI(void) {
             break;
         }
 
-        if ((hudElement->flags & 0x100) == 0) {
-            if ((hudElement->flags & 0x100000) == 0) {
+        if ((hudElement->flags & HUD_ELEMENT_FLAGS_100) == 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_100000) == 0) {
                 texSizeX = gHudElementSizes[hudElement->tileSizePreset].width;
                 texSizeY = gHudElementSizes[hudElement->tileSizePreset].height;
             } else {
@@ -1337,8 +1321,8 @@ void render_hud_elements_backUI(void) {
                 texSizeY = hudElement->customImageSize.y;
             }
 
-            if ((hudElement->flags & 0x10) == 0) {
-                if ((hudElement->flags & 0x100000) == 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_10) == 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_100000) == 0) {
                     drawSizeX = gHudElementSizes[hudElement->drawSizePreset].width;
                     drawSizeY = gHudElementSizes[hudElement->drawSizePreset].height;
                     offsetX = -drawSizeX / 2;
@@ -1360,13 +1344,13 @@ void render_hud_elements_backUI(void) {
                 offsetY = -drawSizeY / 2;
             }
 
-            if ((hudElement->flags & 0x800) == 0) {
-                if ((hudElement->flags & 0x20000000) != 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_800) == 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_20000000) != 0) {
                     draw_rect_hud_element(hudElement, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, TRUE, TRUE);
                 }
                 draw_rect_hud_element(hudElement, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, TRUE, FALSE);
             } else {
-                if ((hudElement->flags & 0x20000000) != 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_20000000) != 0) {
                     draw_rect_hud_element(hudElement, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, TRUE);
                 }
                 draw_rect_hud_element(hudElement, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, FALSE);
@@ -1374,7 +1358,7 @@ void render_hud_elements_backUI(void) {
         } else {
             f32 xScaled, yScaled;
 
-            if ((hudElement->flags & 0x100000) == 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_100000) == 0) {
                 texSizeX = gHudElementSizes[hudElement->tileSizePreset].width;
                 texSizeY = gHudElementSizes[hudElement->tileSizePreset].height;
             } else {
@@ -1397,7 +1381,7 @@ void render_hud_elements_backUI(void) {
             hudElement->widthScale = X10(xScaled);
             hudElement->heightScale = X10(yScaled);
 
-            if ((hudElement->flags & 0x20000000) != 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_20000000) != 0) {
                 draw_rect_hud_element(hudElement, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, TRUE);
             }
             draw_rect_hud_element(hudElement, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, FALSE);
@@ -1420,9 +1404,9 @@ void render_hud_elements_frontUI(void) {
         hudElement = (*gHudElements)[i];
         if (hudElement != NULL) {
             s32 flags = hudElement->flags;
-            if (flags != 0 && (flags & 2) == 0) {
-                if ((flags & 0x10210080) == 0) {
-                    if ((flags & 0x40) != 0 && hudElement->drawSizePreset >= 0) {
+            if (flags != 0 && (flags & HUD_ELEMENT_FLAGS_2) == 0) {
+                if ((flags & (HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_10000 | HUD_ELEMENT_FLAGS_200000 | HUD_ELEMENT_FLAGS_10000000)) == 0) {
+                    if ((flags & HUD_ELEMENT_FLAGS_40) != 0 && hudElement->drawSizePreset >= 0) {
                         sortedElements[count++] = i;
                     }
                 }
@@ -1443,8 +1427,8 @@ void render_hud_elements_frontUI(void) {
 
     for (i = 0; i < count; i++) {
         hudElement = (*gHudElements)[sortedElements[i]];
-        if ((hudElement->flags & 0x100) == 0) {
-            if ((hudElement->flags & 0x100000) == 0) {
+        if ((hudElement->flags & HUD_ELEMENT_FLAGS_100) == 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_100000) == 0) {
                 texSizeX = gHudElementSizes[hudElement->tileSizePreset].width;
                 texSizeY = gHudElementSizes[hudElement->tileSizePreset].height;
             } else {
@@ -1452,8 +1436,8 @@ void render_hud_elements_frontUI(void) {
                 texSizeY = hudElement->customImageSize.y;
             }
 
-            if ((hudElement->flags & 0x10) == 0) {
-                if ((hudElement->flags & 0x100000) == 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_10) == 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_100000) == 0) {
                     drawSizeX = gHudElementSizes[hudElement->drawSizePreset].width;
                     drawSizeY = gHudElementSizes[hudElement->drawSizePreset].height;
                     offsetX = -drawSizeX / 2;
@@ -1475,13 +1459,13 @@ void render_hud_elements_frontUI(void) {
                 offsetY = -drawSizeY / 2;
             }
 
-            if ((hudElement->flags & 0x800) == 0) {
-                if ((hudElement->flags & 0x20000000) != 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_800) == 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_20000000) != 0) {
                     draw_rect_hud_element(hudElement, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, TRUE, TRUE);
                 }
                 draw_rect_hud_element(hudElement, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, TRUE, FALSE);
             } else {
-                if ((hudElement->flags & 0x20000000) != 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_20000000) != 0) {
                     draw_rect_hud_element(hudElement, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, TRUE);
                 }
                 draw_rect_hud_element(hudElement, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, FALSE);
@@ -1489,7 +1473,7 @@ void render_hud_elements_frontUI(void) {
         } else {
             f32 xScaled, yScaled;
 
-            if ((hudElement->flags & 0x100000) == 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_100000) == 0) {
                 texSizeX = gHudElementSizes[hudElement->drawSizePreset].width;
                 texSizeY = gHudElementSizes[hudElement->drawSizePreset].height;
             } else {
@@ -1512,7 +1496,7 @@ void render_hud_elements_frontUI(void) {
             hudElement->widthScale = X10(xScaled);
             hudElement->heightScale = X10(yScaled);
 
-            if ((hudElement->flags & 0x20000000) != 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_20000000) != 0) {
                 draw_rect_hud_element(hudElement, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, TRUE);
             }
             draw_rect_hud_element(hudElement, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, FALSE);
@@ -1548,17 +1532,17 @@ void render_hud_element(HudElement* hudElement) {
     s32 ulx, uly, lrx, lry;
     Vtx* vtx;
 
-    if (hudElement->flags & 0x8000) {
+    if (hudElement->flags & HUD_ELEMENT_FLAGS_8000) {
         gDPSetTextureFilter(gMasterGfxPos++, G_TF_AVERAGE);
     } else {
         gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
     }
 
-    if ((hudElement->flags & 0x100) == 0) {
+    if ((hudElement->flags & HUD_ELEMENT_FLAGS_100) == 0) {
         phi_f24 = 1.0f;
         phi_f20 = 1.0f;
     } else {
-        if ((hudElement->flags & 0x100000) == 0) {
+        if ((hudElement->flags & HUD_ELEMENT_FLAGS_100000) == 0) {
             phi_f24 = gHudElementSizes[hudElement->tileSizePreset].width;
             phi_f20 = gHudElementSizes[hudElement->tileSizePreset].height;
         } else {
@@ -1571,7 +1555,7 @@ void render_hud_element(HudElement* hudElement) {
         phi_f20 = 1.0f / phi_f20;
     }
 
-    if ((hudElement->flags & 0x100000) == 0) {
+    if ((hudElement->flags & HUD_ELEMENT_FLAGS_100000) == 0) {
         width = gHudElementSizes[hudElement->tileSizePreset].width;
         height = gHudElementSizes[hudElement->tileSizePreset].height;
     } else {
@@ -1591,7 +1575,7 @@ void render_hud_element(HudElement* hudElement) {
                     transform->scale.z);
     guRotateF(sp120, transform->rotation.y, 0.0f, 1.0f, 0.0f);
     guRotateF(sp160, transform->rotation.z, 0.0f, 0.0f, 1.0f);
-    nv = 0x4000;
+    nv = HUD_ELEMENT_FLAGS_4000;
     guRotateF(spE0, transform->rotation.x, 1.0f, 0.0f, 0.0f);
     guMtxCatF(sp160, spE0, sp20);
     guMtxCatF(sp20, sp120, spA0);
@@ -1606,7 +1590,7 @@ void render_hud_element(HudElement* hudElement) {
     mode = 0;
     a0 = mode;
     a0 = (hudElement->flags & nv) > a0;
-    v1 = mode < (hudElement->flags & 0x80000);
+    v1 = mode < (hudElement->flags & HUD_ELEMENT_FLAGS_80000);
 
     if (a0 == TRUE) {
         mode = (v1 < 1);
@@ -1625,14 +1609,14 @@ void render_hud_element(HudElement* hudElement) {
 
     switch (mode) {
         case 1:
-            if ((hudElement->flags & 0x20000) != 0) {
-                if ((hudElement->flags & 0x20) != 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_20000) != 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_20) != 0) {
                     fold_update(0, 7, 255, 255, 255, hudElement->opacity, 0);
                 } else {
                     fold_update(0, 0, 0, 0, 0, 0, 0);
                 }
             } else {
-                if ((hudElement->flags & 0x20) != 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_20) != 0) {
                     fold_update(transform->unk_00, 7, 255, 255, 255, hudElement->opacity, 0);
                 } else {
                     fold_update(transform->unk_00, 0, 0, 0, 0, 0, 0);
@@ -1648,8 +1632,8 @@ void render_hud_element(HudElement* hudElement) {
             sp2A0.height = height;
             sp2A0.palette = palette;
 
-            if ((hudElement->flags & 0x20000) != 0) {
-                if ((hudElement->flags & 0x800000) != 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_20000) != 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_800000) != 0) {
                     fold_appendGfx_component(0, &sp2A0, 0x40, sp60);
                 } else {
                     fold_appendGfx_component(0, &sp2A0, 0x40, sp60);
@@ -1694,14 +1678,14 @@ void render_hud_element(HudElement* hudElement) {
             gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0);
             gDPSetPrimColor(gMasterGfxPos++, 0, 0, hudElement->tint.r, hudElement->tint.g, hudElement->tint.b, hudElement->opacity);
 
-            if ((hudElement->flags & 0x20) == 0) {
-                if ((hudElement->flags & 0x800000) == 0) {
+            if ((hudElement->flags & HUD_ELEMENT_FLAGS_20) == 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_800000) == 0) {
                     gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
                 } else {
                     gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_TEX_EDGE, G_RM_AA_TEX_EDGE2);
                 }
             } else {
-                if ((hudElement->flags & 0x800000) == 0) {
+                if ((hudElement->flags & HUD_ELEMENT_FLAGS_800000) == 0) {
                     gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
                 } else {
                     gDPSetRenderMode(gMasterGfxPos++, AA_EN | G_RM_CLD_SURF, AA_EN | G_RM_CLD_SURF2);
@@ -1742,11 +1726,11 @@ void render_hud_elements_world(void) {
                 hudElement = (*gHudElements)[i];
                 if (hudElement != NULL) {
                     s32 flags = hudElement->flags;
-                    if (flags != 0 && (flags & 2) == 0) {
-                        if ((flags & 0x10200000) == 0) {
-                            if ((flags & 0x10000) != 0) {
-                                if ((flags & 0x40000000) == 0) {
-                                    if ((flags & 0x40) == 0 && hudElement->drawSizePreset >= 0 && (flags & 0x80) == 0) {
+                    if (flags != 0 && (flags & HUD_ELEMENT_FLAGS_2) == 0) {
+                        if ((flags & (HUD_ELEMENT_FLAGS_200000 | HUD_ELEMENT_FLAGS_10000000)) == 0) {
+                            if ((flags & HUD_ELEMENT_FLAGS_10000) != 0) {
+                                if ((flags & HUD_ELEMENT_FLAGS_40000000) == 0) {
+                                    if ((flags & HUD_ELEMENT_FLAGS_40) == 0 && hudElement->drawSizePreset >= 0 && (flags & HUD_ELEMENT_FLAGS_80) == 0) {
                                         sortedElements[count++] = i;
                                     }
                                 }
@@ -1792,11 +1776,11 @@ void render_hud_elements_world(void) {
                 hudElement = (*gHudElements)[i];
                 if (hudElement != NULL) {
                     s32 flags = hudElement->flags;
-                    if (flags != 0 && (flags & 2) == 0) {
-                        if ((flags & 0x10200000) == 0) {
-                            if ((flags & 0x10000) != 0) {
-                                if ((flags & 0x40000000) != 0) {
-                                    if ((flags & 0x40) == 0 && hudElement->drawSizePreset >= 0 && (flags & 0x80) == 0) {
+                    if (flags != 0 && (flags & HUD_ELEMENT_FLAGS_2) == 0) {
+                        if ((flags & (HUD_ELEMENT_FLAGS_200000 | HUD_ELEMENT_FLAGS_10000000)) == 0) {
+                            if ((flags & HUD_ELEMENT_FLAGS_10000) != 0) {
+                                if ((flags & HUD_ELEMENT_FLAGS_40000000) != 0) {
+                                    if ((flags & HUD_ELEMENT_FLAGS_40) == 0 && hudElement->drawSizePreset >= 0 && (flags & HUD_ELEMENT_FLAGS_80) == 0) {
                                         sortedElements[count++] = i;
                                     }
                                 }
@@ -1900,9 +1884,9 @@ void func_80143C48(s32 elemID, s32 arg1, s32 camID) {
 
         if (elem != NULL) {
             if (elem->flags != 0 && !(elem->flags & 2)) {
-                if (!(elem->flags & 0x10200000)) {
-                    if (elem->flags & 0x10000) {
-                        if (!(elem->flags & 0x40) && (elem->drawSizePreset >= 0) && (elem->flags & 0x80)) {
+                if (!(elem->flags & (HUD_ELEMENT_FLAGS_200000 | HUD_ELEMENT_FLAGS_10000000))) {
+                    if (elem->flags & HUD_ELEMENT_FLAGS_10000) {
+                        if (!(elem->flags & HUD_ELEMENT_FLAGS_40) && (elem->drawSizePreset >= 0) && (elem->flags & HUD_ELEMENT_FLAGS_80)) {
                             render_hud_element(elem);
                         }
                     }
@@ -1935,8 +1919,8 @@ void draw_hud_element(s32 id, s32 clipMode) {
     s32 offsetX, offsetY;
     s32 preset;
 
-    if ((elem->flags != 0) && !(elem->flags & 2)) {
-        if (!(elem->flags & 0x10200000) && (elem->drawSizePreset >= 0)) {
+    if ((elem->flags != 0) && !(elem->flags & HUD_ELEMENT_FLAGS_2)) {
+        if (!(elem->flags & (HUD_ELEMENT_FLAGS_200000 | HUD_ELEMENT_FLAGS_10000000)) && (elem->drawSizePreset >= 0)) {
             if (clipMode != 1) {
                 if (clipMode == 0) {
                     gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 12, 20, 308, 220);
@@ -1955,8 +1939,8 @@ void draw_hud_element(s32 id, s32 clipMode) {
                 gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
             }
 
-            if (!(elem->flags & 0x100)) {
-                if (!(elem->flags & 0x100000)) {
+            if (!(elem->flags & HUD_ELEMENT_FLAGS_100)) {
+                if (!(elem->flags & HUD_ELEMENT_FLAGS_100000)) {
                     preset = elem->tileSizePreset;
                     texSizeX = gHudElementSizes[preset].width;
                     texSizeY = gHudElementSizes[preset].height;
@@ -1965,8 +1949,8 @@ void draw_hud_element(s32 id, s32 clipMode) {
                     texSizeY = elem->customImageSize.y;
                 }
 
-                if (!(elem->flags & 0x10)) {
-                    if (!(elem->flags & 0x100000)) {
+                if (!(elem->flags & HUD_ELEMENT_FLAGS_10)) {
+                    if (!(elem->flags & HUD_ELEMENT_FLAGS_100000)) {
                         drawSizeX = gHudElementSizes[elem->drawSizePreset].width;
                         drawSizeY = gHudElementSizes[elem->drawSizePreset].height;
                     } else {
@@ -1983,13 +1967,13 @@ void draw_hud_element(s32 id, s32 clipMode) {
                     offsetY = -drawSizeY / 2;
                 } while (0); // TODO required to match
 
-                if (!(elem->flags & 0x800)) {
-                    if (elem->flags & 0x20000000) {
+                if (!(elem->flags & HUD_ELEMENT_FLAGS_800)) {
+                    if (elem->flags & HUD_ELEMENT_FLAGS_20000000) {
                         draw_rect_hud_element(elem, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, TRUE, TRUE);
                     }
                     draw_rect_hud_element(elem, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, TRUE, FALSE);
                 } else {
-                    if (elem->flags & 0x20000000) {
+                    if (elem->flags & HUD_ELEMENT_FLAGS_20000000) {
                         draw_rect_hud_element(elem, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, TRUE);
                     }
                     draw_rect_hud_element(elem, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, FALSE);
@@ -1997,7 +1981,7 @@ void draw_hud_element(s32 id, s32 clipMode) {
             } else {
                 f32 xScaled, yScaled;
 
-                if (!(elem->flags & 0x100000)) {
+                if (!(elem->flags & HUD_ELEMENT_FLAGS_100000)) {
                     preset = elem->tileSizePreset;
                     texSizeX = gHudElementSizes[preset].width;
                     texSizeY = gHudElementSizes[preset].height;
@@ -2021,7 +2005,7 @@ void draw_hud_element(s32 id, s32 clipMode) {
                 elem->widthScale = X10(xScaled);
                 elem->heightScale = X10(yScaled);
 
-                if (elem->flags & 0x20000000) {
+                if (elem->flags & HUD_ELEMENT_FLAGS_20000000) {
                     draw_rect_hud_element(elem, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, TRUE);
                 }
                 draw_rect_hud_element(elem, texSizeX, texSizeY, drawSizeX, drawSizeY, offsetX, offsetY, FALSE, FALSE);
@@ -2061,7 +2045,7 @@ void set_hud_element_anim(s32 id, const HudScript* anim) {
     hudElement->worldPosOffset.y = 0;
     hudElement->flags &= ~4;
     hudElement->uniformScale = 1.0f;
-    hudElement->flags &= ~0x930;
+    hudElement->flags &= ~(HUD_ELEMENT_FLAGS_10 | HUD_ELEMENT_FLAGS_20 | HUD_ELEMENT_FLAGS_100 | HUD_ELEMENT_FLAGS_800);
     load_hud_element(hudElement, anim);
 
     while (hud_element_update(hudElement) != 0) {}
@@ -2076,7 +2060,7 @@ HudElement* get_hud_element(s32 id) {
 }
 
 void free_hud_element(s32 id) {
-    if ((*gHudElements)[id & ~0x800]->flags & 0x10000) {
+    if ((*gHudElements)[id & ~0x800]->flags & HUD_ELEMENT_FLAGS_10000) {
         free_hud_element_transform(id & ~0x800);
     }
 
@@ -2115,38 +2099,38 @@ void ALT_clear_hud_element_cache(void) {
     s32 i;
 
     if (!gGameStatusPtr->isBattle) {
-        heap_free(D_80151314);
-        D_80151314 = heap_malloc(D_8014EFC4);
-        ASSERT(D_80151314);
-        D_80157964 = D_80151314;
-        *D_8015133C = 0;
-        D_8015133C = &D_80157968;
-        D_801512C8 = &D_80157970;
-        D_801512D0 = &D_80157F70;
-        D_80151314 = D_80157964;
+        heap_free(gHudElementCacheBuffer);
+        gHudElementCacheBuffer = heap_malloc(gHudElementCacheCapacity);
+        ASSERT(gHudElementCacheBuffer);
+        D_80157964 = gHudElementCacheBuffer;
+        *gHudElementCacheSize = 0;
+        gHudElementCacheSize = &gHudElementCacheSizeWorld;
+        gHudElementCacheTableRaster = &gHudElementCacheTableRasterWorld;
+        gHudElementCacheTablePalette = &gHudElementCacheTablePaletteWorld;
+        gHudElementCacheBuffer = D_80157964;
 
         for (i = 0; i < 192; i++) {
-            D_80157970[i].unk_00 = -1;
-            D_80157F70[i].unk_00 = -1;
+            gHudElementCacheTableRasterWorld[i].id = -1;
+            gHudElementCacheTablePaletteWorld[i].id = -1;
         }
     } else {
         if (D_8014EFC0 == 0) {
-            heap_free(D_80151314);
-            D_80151314 = heap_malloc(D_8014EFC4 / 2);
-            ASSERT(D_80151314);
+            heap_free(gHudElementCacheBuffer);
+            gHudElementCacheBuffer = heap_malloc(gHudElementCacheCapacity / 2);
+            ASSERT(gHudElementCacheBuffer);
         } else {
-            D_80151314 = D_8014EFC0;
+            gHudElementCacheBuffer = D_8014EFC0;
         }
-        D_80158570 = D_80151314;
-        *D_8015133C = 0;
-        D_8015133C = &D_80158574;
-        D_801512C8 = &D_80158580;
-        D_801512D0 = &D_80158B80;
-        D_80151314 = D_80158570;
+        D_80158570 = gHudElementCacheBuffer;
+        *gHudElementCacheSize = 0;
+        gHudElementCacheSize = &gHudElementCacheSizeBattle;
+        gHudElementCacheTableRaster = &gHudElementCacheTableRasterBattle;
+        gHudElementCacheTablePalette = &gHudElementCacheTablePaletteBattle;
+        gHudElementCacheBuffer = D_80158570;
 
         for (i = 0; i < 192; i++) {
-            D_80158580[i].unk_00 = -1;
-            D_80158B80[i].unk_00 = -1;
+            gHudElementCacheTableRasterBattle[i].id = -1;
+            gHudElementCacheTablePaletteBattle[i].id = -1;
         }
     }
 }
@@ -2160,7 +2144,7 @@ void set_hud_element_scale(s32 index, f32 scale) {
     f32 xScaled, yScaled;
 
     elem->uniformScale = scale;
-    if (!(elem->flags & 0x100000)) {
+    if (!(elem->flags & HUD_ELEMENT_FLAGS_100000)) {
         imgSizeX = gHudElementSizes[elem->tileSizePreset].width;
         imgSizeY = gHudElementSizes[elem->tileSizePreset].height;
         drawSizeX = gHudElementSizes[elem->drawSizePreset].width;
@@ -2173,8 +2157,8 @@ void set_hud_element_scale(s32 index, f32 scale) {
     }
     elem->sizeX = drawSizeX * scale;
     elem->sizeY = drawSizeY * scale;
-    elem->flags &= ~0x100;
-    elem->flags |= 0x800 | 0x10;
+    elem->flags &= ~HUD_ELEMENT_FLAGS_100;
+    elem->flags |= HUD_ELEMENT_FLAGS_800 | HUD_ELEMENT_FLAGS_10;
 
     xScaled = ((f32) drawSizeX / (f32) imgSizeX) * scale;
     yScaled = ((f32) drawSizeY / (f32) imgSizeY) * scale;
@@ -2194,8 +2178,8 @@ void set_hud_element_size(s32 id, s8 size) {
     hudElement->tileSizePreset = size;
     hudElement->drawSizePreset = size;
     hudElement->uniformScale = 1.0f;
-    hudElement->flags &= ~0x100;
-    hudElement->flags &= ~0x810;
+    hudElement->flags &= ~HUD_ELEMENT_FLAGS_100;
+    hudElement->flags &= ~(HUD_ELEMENT_FLAGS_10 | HUD_ELEMENT_FLAGS_800);
 }
 
 s32 func_80144E4C(s32 id) {
@@ -2205,18 +2189,18 @@ s32 func_80144E4C(s32 id) {
 void func_80144E74(s32 id, s32 arg1) {
     HudElement* hudElement = (*gHudElements)[id & ~0x800];
 
-    hudElement->flags &= ~0xF000000;
+    hudElement->flags &= ~(HUD_ELEMENT_FLAGS_1000000 | HUD_ELEMENT_FLAGS_2000000 | HUD_ELEMENT_FLAGS_4000000 | HUD_ELEMENT_FLAGS_8000000);
     hudElement->flags |= arg1 << 24;
 }
 
 void set_hud_element_alpha(s32 id, s32 opacity) {
     HudElement* hudElement = (*gHudElements)[id & ~0x800];
 
-    hudElement->flags |= 0x20;
+    hudElement->flags |= HUD_ELEMENT_FLAGS_20;
     hudElement->opacity = opacity;
 
     if (opacity == 255) {
-        hudElement->flags &= ~0x20;
+        hudElement->flags &= ~HUD_ELEMENT_FLAGS_20;
     }
 }
 
@@ -2234,7 +2218,7 @@ void create_hud_element_transform_A(s32 id) {
 
     element->hudTransform = transform;
     ASSERT(transform != NULL);
-    element->flags |= 0x10000;
+    element->flags |= HUD_ELEMENT_FLAGS_10000;
     transform->unk_00 = func_8013A704(1);
     transform->position.x = 0.0f;
     transform->position.y = 0.0f;
@@ -2256,7 +2240,7 @@ void create_hud_element_transform_B(s32 id) {
 
     element->hudTransform = transform;
     ASSERT(transform != NULL);
-    element->flags |= 0x30000;
+    element->flags |= HUD_ELEMENT_FLAGS_10000 | HUD_ELEMENT_FLAGS_20000;
     transform->unk_00 = 0;
     transform->position.x = 0.0f;
     transform->position.y = 0.0f;
@@ -2276,7 +2260,7 @@ void create_hud_element_transform_C(s32 id) {
 
     element->hudTransform = transform;
     ASSERT(transform != NULL);
-    element->flags |= 0x40030000;
+    element->flags |= HUD_ELEMENT_FLAGS_40000000 | HUD_ELEMENT_FLAGS_20000 | HUD_ELEMENT_FLAGS_10000;
     transform->unk_00 = 0;
     transform->position.x = 0.0f;
     transform->position.y = 0.0f;
@@ -2294,20 +2278,20 @@ void free_hud_element_transform(s32 id) {
     HudElement* hudElement = (*gHudElements)[id & ~0x800];
     HudTransform* hudTransform = hudElement->hudTransform;
 
-    if (!(hudElement->flags & 0x20000)) {
+    if (!(hudElement->flags & HUD_ELEMENT_FLAGS_20000)) {
         func_8013A854(hudTransform->unk_00);
     }
 
     heap_free(hudElement->hudTransform);
     hudElement->hudTransform = NULL;
-    hudElement->flags &= ~(0x40000000 | 0x20000 | 0x10000);
+    hudElement->flags &= ~(HUD_ELEMENT_FLAGS_40000000 | HUD_ELEMENT_FLAGS_20000 | HUD_ELEMENT_FLAGS_10000);
 }
 
 void set_hud_element_transform_pos(s32 id, f32 x, f32 y, f32 z) {
     HudElement* element = (*gHudElements)[id & ~0x800];
     HudTransform* transform = element->hudTransform;
 
-    if (element->flags & 0x10000) {
+    if (element->flags & HUD_ELEMENT_FLAGS_10000) {
         transform->position.x = x;
         transform->position.y = y;
         transform->position.z = z;
@@ -2318,7 +2302,7 @@ void set_hud_element_transform_scale(s32 id, f32 x, f32 y, f32 z) {
     HudElement* element = (*gHudElements)[id & ~0x800];
     HudTransform* transform = element->hudTransform;
 
-    if (element->flags & 0x10000) {
+    if (element->flags & HUD_ELEMENT_FLAGS_10000) {
         transform->scale.x = x;
         transform->scale.y = y;
         transform->scale.z = z;
@@ -2329,7 +2313,7 @@ void set_hud_element_transform_rotation(s32 id, f32 x, f32 y, f32 z) {
     HudElement* element = (*gHudElements)[id & ~0x800];
     HudTransform* transform = element->hudTransform;
 
-    if (element->flags & 0x10000) {
+    if (element->flags & HUD_ELEMENT_FLAGS_10000) {
         transform->rotation.x = x;
         transform->rotation.y = y;
         transform->rotation.z = z;
@@ -2340,21 +2324,21 @@ void set_hud_element_transform_rotation_pivot(s32 id, s32 dx, s32 dy) {
     HudElement* element = (*gHudElements)[id & ~0x800];
     HudTransform* transform = element->hudTransform;
 
-    if (element->flags & 0x10000) {
+    if (element->flags & HUD_ELEMENT_FLAGS_10000) {
         transform->pivot.x = dx;
         transform->pivot.y = dy;
     }
 }
 
 void copy_world_hud_element_ref_to_battle(s32 worldID, s32 battleID) {
-    D_80157460[battleID & ~0x800] = D_80156F60[worldID & ~0x800];
+    gHudElementsBattle[battleID & ~0x800] = gHudElementsWorld[worldID & ~0x800];
 }
 
 void set_hud_element_nonworld_cache(void* base, s32 size) {
     D_8014EFC0 = (s32)base;
     if (base == NULL) {
-        D_8014EFC4 = 0x11000;
+        gHudElementCacheCapacity = 0x11000;
     } else {
-        D_8014EFC4 = size;
+        gHudElementCacheCapacity = size;
     }
 }

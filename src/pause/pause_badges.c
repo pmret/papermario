@@ -436,13 +436,13 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
 
                 if (i == 1) {
                     badgeIconElement = iconIDs[badgeIndex];
-                    clear_hud_element_flags(badgeIconElement, 0x20000000);
-                    set_hud_element_flags(badgeIconElement, 0x8000);
+                    clear_hud_element_flags(badgeIconElement, HUD_ELEMENT_FLAGS_20000000);
+                    set_hud_element_flags(badgeIconElement, HUD_ELEMENT_FLAGS_8000);
                     if (isNone) {
                         badgeIconElement = gPauseBadgesIconIDs[21];
                     } else {
                         if (isSelected) {
-                            set_hud_element_flags(badgeIconElement, 0x20000000);
+                            set_hud_element_flags(badgeIconElement, HUD_ELEMENT_FLAGS_20000000);
                             gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[badgeID].iconID].enabled;
                         }
 
@@ -791,7 +791,7 @@ void pause_badges_init(MenuPanel* panel) {
         s32 iconID = create_hud_element(gPauseBadgesElements[i]);
 
         gPauseBadgesIconIDs[i] = iconID;
-        set_hud_element_flags(iconID, 0x80);
+        set_hud_element_flags(iconID, HUD_ELEMENT_FLAGS_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseBadgesWindowBPs); i++) {
