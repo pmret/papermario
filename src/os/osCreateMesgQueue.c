@@ -1,4 +1,3 @@
-#include "common.h"
 #include <PR/osint.h>
 
 void osCreateMesgQueue(OSMesgQueue *mq, OSMesg *msg, s32 msgCount) {

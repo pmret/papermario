@@ -1,4 +1,4 @@
-#include "common.h"
+#include "ultra64.h"
 
 char* strchr(const char* s, int c) {
     const char ch = c;

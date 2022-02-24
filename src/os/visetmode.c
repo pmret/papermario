@@ -1,4 +1,3 @@
-#include "common.h"
 #include "PR/viint.h"
 
 void osViSetMode(OSViMode *modep) {

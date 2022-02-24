@@ -1,4 +1,4 @@
-#include "common.h"
+#include "PR/guint.h"
 
 #include "sintable.inc.c"
 
