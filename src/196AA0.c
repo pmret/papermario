@@ -204,7 +204,7 @@ INCLUDE_ASM(s32, "196AA0", func_80268AF8);
 INCLUDE_ASM(s32, "196AA0", func_80268C9C);
 
 void func_80268E88(void) {
-    ActionCommandStatus *actionCmdStatus = &gActionCommandStatus;
+    ActionCommandStatus* actionCmdStatus = &gActionCommandStatus;
     actionCmdStatus->unk_00 = create_generic_entity_frontUI(func_80268938, func_80268AF8);
     actionCmdStatus->actionCommandID = 0;
 }
@@ -399,7 +399,7 @@ ApiStatus func_802693F0(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus CloseActionCommandInfo(Evt* script, s32 isInitialCall) {
-    ActionCommandStatus *actionCommandStatus = &gActionCommandStatus;
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     if (isInitialCall) {
         switch (actionCommandStatus->actionCommandID) {

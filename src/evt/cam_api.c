@@ -205,11 +205,9 @@ ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
             case 0:
             case 1:
                 break;
-
             case 2:
                 temp_s4 *= 4;
                 break;
-
             default:
                 break;
         }
@@ -259,10 +257,10 @@ ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
 
     if (script->functionTemp[1] == 0) {
         camera->flags &= ~CAM_FLAG_SHAKING;
-        return 2;
+        return ApiStatus_DONE2;
     }
     script->functionTemp[1]--;
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
 void exec_ShakeCam1(s32 arg0, s32 arg1, s32 arg2) {
