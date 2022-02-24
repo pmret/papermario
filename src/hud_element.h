@@ -152,17 +152,7 @@ void load_hud_element(HudElement* hudElement, const HudScript* anim);
 
 /// @param clamp        0 = repeat; 1 = clamp
 /// @param dropShadow   Whether to render a drop shadow or not
-void draw_rect_hud_element(
-    HudElement* hudElement,
-    s32 texSizeX,
-    s32 texSizeY,
-    s16 drawSizeX,
-    s16 drawSizeY,
-    s16 offsetX,
-    s16 offsetY,
-    s32 clamp,
-    s32 dropShadow
-);
+void draw_rect_hud_element(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s16 drawSizeX, s16 drawSizeY, s16 offsetX, s16 offsetY, s32 clamp, s32 dropShadow);
 
 void clear_hud_element_cache(void);
 

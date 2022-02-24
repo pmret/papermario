@@ -289,7 +289,7 @@ void load_hud_element(HudElement* hudElement, const HudScript* anim) {
         }
     }
 }
-
+/*
 INCLUDE_ASM(void, "hud_element", draw_rect_hud_element,
     HudElement* hudElement,
     s32 texSizeX,
@@ -300,7 +300,395 @@ INCLUDE_ASM(void, "hud_element", draw_rect_hud_element,
     s32 offsetY,
     s32 clamp,
     s32 dropShadow
-)
+)*/
+
+void draw_rect_hud_element(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s16 drawSizeX, s16 drawSizeY,
+                           s16 offsetX, s16 offsetY, s32 clamp, s32 dropShadow) {
+    u32 temp_a0;
+    u32 temp_a1;
+    s32 sp0;
+    s32 sp4;
+    s32 sp8;
+    s32 spC;
+    s32 sp10;
+    s32 sp14;
+    s32 sp18;
+    s32 sp1C;
+
+    u32 sp20;
+    s32 sp24;
+    s32 sp28;
+    s32 sp2C;
+    s32 sp30;
+    s32 sp34;
+    s32 sp38;
+    s32 sp40;
+    s32 sp48;
+    s32 sp4C;
+    s32 sp50;
+    s32 sp54;
+    s32 sp58;
+    s32 sp5C;
+    s32 sp64;
+    s32 sp68;
+    s32 nv2;
+    s32 sp6C;
+    s32 sp88;
+    s32 sp8C;
+    s32 sp8C_2;
+
+    u32 nv;
+    u8* imageAddr;
+    u8* paletteAddr;
+    s16 t2, t5;
+    s32 t0, t1;
+    s32 a1, t4;
+    s32 t3;
+    s32 temp;
+    s32 texSizeX2;
+    s32 temp1, temp3;
+    s32 temp11;
+    u32 temp5, temp6;
+    u16 wpX, wpY;
+    s32 qqq;
+    s16 temp2, temp4;
+    imageAddr = hudElement->imageAddr;
+    paletteAddr = hudElement->paletteAddr;
+
+    sp8C = hudElement->screenPosOffset.x * 1024;
+    sp8C_2 = hudElement->screenPosOffset.y * 1024;
+    spC = hudElement->widthScale;
+    sp8C /= spC;
+    sp10 = hudElement->heightScale;
+    sp8C_2 /= sp10;
+
+    wpX = hudElement->worldPosOffset.x;
+    wpY = hudElement->worldPosOffset.y;
+    wpX += hudElement->renderPosX + sp8C;
+    wpY += hudElement->renderPosY + sp8C_2;
+    temp2 = offsetX;
+    temp4 = offsetY;
+    temp2 += wpX;
+    temp4 += wpY;
+
+
+    t5 = temp2;
+    t2 = temp4;
+
+    if (dropShadow) {
+        t5 = temp2 + 2;
+        t2 = temp4 + 2;
+    }
+
+    sp8 = 0;
+    temp5 = (hudElement->flags & 0x4000);
+    temp_a0 = temp5 != 0;
+    temp5 = (hudElement->flags & 0x80000);
+    temp_a1 = temp5 != 0;
+    temp5 = (hudElement->flags & 0x1000);
+    sp0 = temp5 != 0;
+    temp6 = (hudElement->flags & 0x2000);
+    sp4 = temp6 != 0;
+
+    if (temp_a0 == TRUE) {
+        sp8 = temp_a1 < TRUE;
+    }
+    if (temp_a0 == 0 && temp_a1 == 1U) {
+        sp8 = 2;
+    }
+    if ((temp_a0 == 1) && (temp_a1 == temp_a0)) {
+        sp8 = 2;
+    }
+    sp34 = 6;
+    sp38 = 5;
+
+    if ((hudElement->flags & 0x10) == 0) { // 1a4 -> 24c
+        switch (drawSizeX) {
+            case 8:
+                sp34 = 3;
+                break;
+            case 16:
+                sp34 = 4;
+                break;
+            case 32:
+                sp34 = 5;
+                break;
+        }
+
+        switch (drawSizeY) {
+            case 8:
+                sp38 = 3;
+                break;
+            case 16:
+                sp38 = 4;
+                break;
+            case 32:
+                sp38 = 5;
+                break;
+        }
+    }
+    // 250
+    switch (sp8) {
+        // 1 -> 28c
+        // < 2 -> 278
+        // 2 -> 3ec
+        // default -> 430
+        case 0:
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+            gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+            break;
+
+        case 1:
+            if ((hudElement->flags & 0x20) == 0) {
+                if ((hudElement->flags & 0x800000) == 0) {
+                    gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+                } else {
+                    gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_TEX_EDGE, G_RM_AA_TEX_EDGE2);
+                }
+            } else {
+                if ((hudElement->flags & 0x800000) == 0) {
+                    gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+                } else {
+                    gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF | AA_EN, G_RM_CLD_SURF2 | AA_EN);
+                }
+            }
+            gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
+            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, paletteAddr);
+            break;
+
+        case 2:
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+            gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+            break;
+    }
+
+    if (hudElement->flags & 0x8000) {
+        gDPSetTextureFilter(gMasterGfxPos++, G_TF_AVERAGE);
+    } else {
+        gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+    }
+
+    //sp40 = t2;
+    //sp28 = t2;
+    //sp48 = texSizeY <= 16;
+    sp24 = 0;
+    sp20 = FALSE;
+    //sp4C = drawSizeY;
+    //sp54 = t5 << 16;
+    //sp5C = t5;
+    //sp50 = t2 + drawSizeY;
+    //sp64 = texSizeX;
+    //sp64 = sp64 <= 16;
+    //sp68 = drawSizeX;
+    // 51c
+    sp28 = t2;
+    while (TRUE) { // loop_51
+        sp2C = sp28 + 1024.0 / sp10 * 32.0;
+        a1 = sp24 + 31;
+        if (sp4) {
+            sp18 = texSizeY;
+        } else {
+            sp18 = 0;
+        }
+
+        if (sp2C < 0 || sp28 > SCREEN_HEIGHT) {
+            break;
+        }
+
+        if (sp2C >= SCREEN_HEIGHT) {
+            s32 temp1 = sp24 + 271;
+            temp1 -= t2 + a1;
+            a1 = temp1 - 1;
+
+            sp2C = SCREEN_HEIGHT;
+            sp20 = TRUE;
+        }
+
+        if (a1 + 1 >= texSizeY) {
+            a1 = texSizeY - 1;
+            if (texSizeY > 16) {
+                sp2C = t2 + drawSizeY - 1;
+            } else {
+                sp2C = t2 + drawSizeY;
+            }
+            sp20 = TRUE;
+        }
+        sp1C = FALSE;
+        //sp6C = t5 + drawSizeX;
+        t4 = 0;
+        sp30 = t5;
+        while (TRUE) { // loop_63
+            sp88 = sp30 + 1024.0 / spC * 64.0;
+            t3 = t4 + 63;
+            if (sp0) {
+                sp14 = texSizeX;
+            } else {
+                sp14 = 0;
+            }
+
+            if (sp88 < 0  || sp30 > SCREEN_WIDTH) {
+                break;
+            }
+
+            if (sp88 >= SCREEN_WIDTH) {
+                s32 temp1 = t4 + 383;
+                temp1 -= t5 + t3;
+                t3 = temp1 - 1;
+
+                sp88 = SCREEN_WIDTH;
+                sp1C = TRUE;
+            }
+
+            if (t3 + 1 >= texSizeX) {
+                t3 = texSizeX - 1;
+                if (texSizeX > 16) {
+                    sp88 = t5 + drawSizeX - 1;
+                } else {
+                    sp88 = t5 + drawSizeX;
+                }
+                sp1C = TRUE;
+            }
+
+            gDPPipeSync(gMasterGfxPos++);
+
+            if (sp1C ) {
+                t1 = !sp20;
+            }
+            if (!sp1C && !sp20) {
+                t1 = 0;
+            }
+            if (!sp1C && sp20) {
+                t1 = 2;
+            }
+            if (sp1C && sp20) {
+                t1 = 3;
+            }
+
+            switch (sp8) {
+                case 0:
+                    gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+                    if ((hudElement->flags & 0x20) == 0) {
+                        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+                    } else {
+                        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                    }
+
+                    if (hudElement->flags & (nv = 0x20)) {
+                        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, hudElement->opacity);
+                    }
+
+                    if (!sp0 && !sp4) {
+                        gDPLoadTextureTile(gMasterGfxPos++, imageAddr, G_IM_FMT_RGBA, G_IM_SIZ_32b, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                    } else {
+                        gDPLoadTextureTile(gMasterGfxPos++, imageAddr, G_IM_FMT_RGBA, G_IM_SIZ_32b, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                    }
+                    break;
+
+                case 1:
+                    if (!dropShadow) {
+                        gDPSetCombineLERP(gMasterGfxPos++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0);
+                        do {} while (0);
+                        if (hudElement->flags & nv) {
+                            gDPSetPrimColor(gMasterGfxPos++, 0, 0, hudElement->tint.r, hudElement->tint.g, hudElement->tint.b, hudElement->opacity);
+                        } else {
+                            gDPSetPrimColor(gMasterGfxPos++, 0, 0, hudElement->tint.r, hudElement->tint.g, hudElement->tint.b, 255);
+                        }
+                    } else {
+                        gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+                        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+                        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 40, 40, 40, 72);
+                    }
+
+                    if (!sp0 && !sp4) {
+
+                        if (!clamp) {
+                            gDPLoadTextureTile_4b(gMasterGfxPos++, imageAddr, G_IM_FMT_CI, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                        } else {
+                            switch (t1) {
+                                case 0:
+                                    gDPLoadTextureTile_4b(gMasterGfxPos++, imageAddr, G_IM_FMT_CI, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                                    break;
+                                case 1:
+                                    gDPLoadTextureTile_4b(gMasterGfxPos++, imageAddr, G_IM_FMT_CI, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                                    break;
+                                case 2:
+                                    gDPLoadTextureTile_4b(gMasterGfxPos++, imageAddr, G_IM_FMT_CI, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                                    break;
+                                case 3:
+                                    gDPLoadTextureTile_4b(gMasterGfxPos++, imageAddr, G_IM_FMT_CI, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                                    break;
+                            }
+                        }
+                    } else {
+                        gDPLoadTextureTile_4b(gMasterGfxPos++, imageAddr, G_IM_FMT_CI, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                    }
+                    break;
+
+                case 2:
+                    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0);
+                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, hudElement->tint.r, hudElement->tint.g, hudElement->tint.b, hudElement->opacity);
+
+                    if (!sp0 && !sp4) {
+                        if (!clamp) {
+                            switch (t1) {
+                                case 0:
+                                    gDPLoadTextureTile(gMasterGfxPos++, imageAddr, G_IM_FMT_IA, G_IM_SIZ_8b, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                                    break;
+                                case 1:
+                                    gDPLoadTextureTile(gMasterGfxPos++, imageAddr, G_IM_FMT_IA, G_IM_SIZ_8b, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                                    break;
+                                case 2:
+                                    gDPLoadTextureTile(gMasterGfxPos++, imageAddr, G_IM_FMT_IA, G_IM_SIZ_8b, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                                    break;
+                                case 3:
+                                    gDPLoadTextureTile(gMasterGfxPos++, imageAddr, G_IM_FMT_IA, G_IM_SIZ_8b, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                                    break;
+                            }
+                        } else {
+                            gDPLoadTextureTile(gMasterGfxPos++, imageAddr, G_IM_FMT_IA, G_IM_SIZ_8b, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                        }
+                    } else {
+                        gDPLoadTextureTile(gMasterGfxPos++, imageAddr, G_IM_FMT_IA, G_IM_SIZ_8b, texSizeX, texSizeY, t4, sp24, t3, a1, 0,
+                                            G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, sp34, sp38, G_TX_NOLOD, G_TX_NOLOD);
+                    }
+                    break;
+            }
+
+            if (hudElement->flags & 0x8000) {
+                gSPScisTextureRectangle(gMasterGfxPos++, sp30 * 4, sp28 * 4, sp88 * 4, sp2C * 4, 0, sp14 * 32 + 16, sp18 * 32 + 16, spC, sp10);
+            } else {
+                gSPScisTextureRectangle(gMasterGfxPos++, sp30 * 4, sp28 * 4, sp88 * 4, sp2C * 4, 0, sp14 * 32, sp18 * 32, spC, sp10);
+            }
+            if (sp1C) {
+                break;
+            }
+            sp30 += 1024.0 / spC * 64.0;
+            t4 += 64;
+        }
+
+        if (sp20) {
+            break;
+        }
+
+        sp24 += 32;
+        sp28 += 1024.0 / sp10 * 32.0;
+    }
+
+    gDPPipeSync(gMasterGfxPos++);
+}
 
 void clear_hud_element_cache(void) {
     s32 i;
@@ -483,7 +871,6 @@ void update_hud_elements(void) {
     }
 }
 
-//INCLUDE_ASM(s32, "hud_element", hud_element_update, HudElement* hudElement);
 s32 hud_element_update(HudElement* hudElement) {
     UnkHudElementStruct* a1;
     UnkHudElementStruct* a3;
@@ -1159,6 +1546,7 @@ void render_hud_element(HudElement* hudElement) {
     int nv2;
     s32 nv;
     s32 ulx, uly, lrx, lry;
+    Vtx* vtx;
 
     if (hudElement->flags & 0x8000) {
         gDPSetTextureFilter(gMasterGfxPos++, G_TF_AVERAGE);
@@ -1272,41 +1660,35 @@ void render_hud_element(HudElement* hudElement) {
             break;
 
         case 2:
-            ums = &transform->unk_30[D_80159180];
-
+            vtx = transform->unk_30[D_80159180].vtx;
             memcpy(&transform->unk_30[D_80159180].vtx[0], &D_8014F0C8[0], sizeof(Vtx));
             memcpy(&transform->unk_30[D_80159180].vtx[1], &D_8014F0C8[1], sizeof(Vtx));
             memcpy(&transform->unk_30[D_80159180].vtx[2], &D_8014F0C8[2], sizeof(Vtx));
             memcpy(&transform->unk_30[D_80159180].vtx[3], &D_8014F0C8[3], sizeof(Vtx));
 
-            ulx = -width / 2;
-            lrx = width / 2 - 1;
-            uly = -height / 2;
-            lry = height / 2 - 1;
+            vtx[0].v.ob[0] = -width / 2;
+            vtx[0].v.ob[1] = -height / 2;
+            vtx[0].v.ob[2] = 0;
+            vtx[0].v.tc[0] = 0;
+            vtx[0].v.tc[1] = height * 32;
 
-            ums->vtx[0].v.ob[0] = ulx;
-            ums->vtx[0].v.ob[1] = uly;
-            ums->vtx[0].v.ob[2] = 0;
-            ums->vtx[0].v.tc[0] = 0;
-            ums->vtx[0].v.tc[1] = height * 32;
+            vtx[1].v.ob[0] = width / 2 - 1;
+            vtx[1].v.ob[1] = -height / 2;
+            vtx[1].v.ob[2] = 0;
+            vtx[1].v.tc[0] = width * 32;
+            vtx[1].v.tc[1] = height * 32;
 
-            ums->vtx[1].v.ob[0] = lrx;
-            ums->vtx[1].v.ob[1] = uly;
-            ums->vtx[1].v.ob[2] = 0;
-            ums->vtx[1].v.tc[0] = width * 32;
-            ums->vtx[1].v.tc[1] = height * 32;
+            vtx[2].v.ob[0] = width / 2 - 1;
+            vtx[2].v.ob[1] = height / 2 - 1;
+            vtx[2].v.ob[2] = 0;
+            vtx[2].v.tc[0] = width * 32;
+            vtx[2].v.tc[1] = 0;
 
-            ums->vtx[2].v.ob[0] = lrx;
-            ums->vtx[2].v.ob[1] = lry;
-            ums->vtx[2].v.ob[2] = 0;
-            ums->vtx[2].v.tc[0] = width * 32;
-            ums->vtx[2].v.tc[1] = 0;
-
-            ums->vtx[3].v.ob[0] = ulx;
-            ums->vtx[3].v.ob[1] = lry;
-            ums->vtx[3].v.ob[2] = 0;
-            ums->vtx[3].v.tc[0] = 0;
-            ums->vtx[3].v.tc[1] = 0;
+            vtx[3].v.ob[0] = -width / 2;
+            vtx[3].v.ob[1] = height / 2 - 1;
+            vtx[3].v.ob[2] = 0;
+            vtx[3].v.tc[0] = 0;
+            vtx[3].v.tc[1] = 0;
 
             gDPPipeSync(gMasterGfxPos++);
             gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0);
