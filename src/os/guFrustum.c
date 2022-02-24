@@ -1,6 +1,6 @@
-#include "common.h"
+#include "PR/guint.h"
 
-void guFrustumF(Matrix4f mf, f32 l, f32 r, f32 b, f32 t, f32 n, f32 f, f32 scale) {
+void guFrustumF(f32 mf[4][4], f32 l, f32 r, f32 b, f32 t, f32 n, f32 f, f32 scale) {
     s32 i, j;
 
     guMtxIdentF(mf);
@@ -22,7 +22,7 @@ void guFrustumF(Matrix4f mf, f32 l, f32 r, f32 b, f32 t, f32 n, f32 f, f32 scale
 }
 
 void guFrustum(Mtx* m, f32 l, f32 r, f32 b, f32 t, f32 n, f32 f, f32 scale) {
-    Matrix4f mf;
+    f32 mf[4][4];
 
     guFrustumF(mf, l, r, b, t, n, f, scale);
 

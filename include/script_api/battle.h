@@ -18,7 +18,6 @@ ApiStatus MoveBattleCamOver(Evt* script, s32 isInitialCall);
 ApiStatus SetBattleCamZoom(Evt* script, s32 isInitialCall);
 ApiStatus AddBattleCamZoom(Evt* script, s32 isInitialCall);
 ApiStatus FreezeBattleCam(Evt* script, s32 isInitialCall);
-ApiStatus close_action_command_instruction_popup(Evt* script, s32 isInitialCall);
 ApiStatus ShowMessageBox(Evt* script, s32 isInitialCall);
 ApiStatus ShowVariableMessageBox(Evt* script, s32 isInitialCall);
 ApiStatus IsMessageBoxDisplayed(Evt* script, s32 isInitialCall);

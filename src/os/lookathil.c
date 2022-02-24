@@ -1,6 +1,6 @@
-#include "common.h"
+#include "PR/guint.h"
 
-void guLookAtHiliteF(Matrix4f mf, LookAt *l, Hilite *h,
+void guLookAtHiliteF(f32 mf[4][4], LookAt *l, Hilite *h,
                      f32 xEye, f32 yEye, f32 zEye,
                      f32 xAt,  f32 yAt,  f32 zAt,
                      f32 xUp,  f32 yUp,  f32 zUp,
@@ -142,7 +142,7 @@ void guLookAtHilite (Mtx *m, LookAt *l, Hilite *h,
                      f32 xl1,  f32 yl1,  f32 zl1, /* light 1 direction */
                      f32 xl2,  f32 yl2,  f32 zl2, /* light 2 direction */
                      int twidth, int theight) {   /* highlight txtr size*/
-    Matrix4f mf;
+    f32 mf[4][4];
 
     guLookAtHiliteF(mf, l, h, xEye, yEye, zEye, xAt, yAt, zAt,
             xUp, yUp, zUp, xl1, yl1, zl1, xl2, yl2, zl2,

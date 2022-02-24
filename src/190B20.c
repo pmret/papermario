@@ -889,7 +889,7 @@ ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_SLOT_MACHINE_START_DUP3] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
 };
 
-s32 bMarioIdleAnims[] = {
+u32 bMarioIdleAnims[] = {
     STATUS_NORMAL, ANIM_WALKING,
     STATUS_DANGER, ANIM_PANTING,
     STATUS_STONE, 0x00050001,

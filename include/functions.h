@@ -851,6 +851,7 @@ void update_merlee_messages(void);
 void draw_merlee_messages(void);
 void show_merlee_message(s16, s16);
 s32 is_merlee_message_done(void);
+void close_action_command_instruction_popup(void);
 void draw_encounters_conversation(void);
 void draw_encounters_post_battle(void);
 void draw_encounters_pre_battle(void);
