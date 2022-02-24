@@ -40,7 +40,7 @@ ApiStatus func_80240688_E1EAE8(Evt* script, s32 isInitialCall) {
     gGameStatusPtr->unk_76 = 0;
     gGameStatusPtr->disableScripts = 0;
     gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
-    gOverrideFlags &= ~0x8;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
     general_heap_create();
     clear_render_tasks();
     clear_generic_entity_list();
@@ -68,6 +68,6 @@ ApiStatus func_80240688_E1EAE8(Evt* script, s32 isInitialCall) {
     initialize_collision();
     intro_logos_set_fade_alpha(255);
     intro_logos_set_fade_color(208);
-    set_game_mode(2);
+    set_game_mode(GAME_MODE_TITLE_SCREEN);
     return ApiStatus_FINISH;
 }

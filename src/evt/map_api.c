@@ -660,7 +660,7 @@ void goto_map(Evt* script, s32 mode) {
     }
 
     set_map_transition_effect(mapTransitionEffect);
-    set_game_mode(5);
+    set_game_mode(GAME_MODE_UNUSED);
 }
 
 ApiStatus GotoMap(Evt* script, s32 isInitialCall) {

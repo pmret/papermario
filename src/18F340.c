@@ -201,33 +201,30 @@ ApiStatus ConsumeLifeShroom(Evt *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// TODO something wrong with the struct breakdown for BattleStatus
-#ifdef NON_EQUIVALENT
 ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->dangerFlags = 0;
-    gBattleState = battleStatus->unk_474;
-    battleStatus->battleState = battleStatus->unk_468;
-    battleStatus->flags1 |= 8;
-    battleStatus->flags2 &= ~0x8000000;
+    battleStatus->rushFlags = RUSH_FLAG_NONE;
+    gBattleState = D_800DC4E4;
+    gBattleState2 = D_800DC4D8;
+    battleStatus->flags1 |= BS_FLAGS1_8;
+    battleStatus->flags2 &= ~BS_FLAGS2_8000000;
 
-    if (!(battleStatus->flags2 & 0x40)) {
+    if (!(battleStatus->flags2 & BS_FLAGS2_40)) {
         if (playerData->curHP <= 1 && is_ability_active(ABILITY_MEGA_RUSH)) {
-            battleStatus->flags2 |= 0x8000000;
-            gBattleStatus.dangerFlags |= 1;
+            gBattleStatus.flags2 |= BS_FLAGS2_8000000;
+            battleStatus->rushFlags |= RUSH_FLAG_MEGA;
         }
-        if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) && !(battleStatus->dangerFlags & 1)) {
-            battleStatus->flags2 |= 0x8000000;
-            gBattleStatus.dangerFlags |= 2;
+
+        if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) && 
+            !(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
+            gBattleStatus.flags2 |= BS_FLAGS2_8000000;
+            battleStatus->rushFlags |= RUSH_FLAG_POWER;
         }
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "18F340", RestorePreDefeatState);
-#endif
 
 ApiStatus func_80261388(Evt* script, s32 isInitialCall) {
     s32 partnerActorExists = gBattleStatus.partnerActor != NULL;

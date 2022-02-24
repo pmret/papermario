@@ -253,9 +253,34 @@ ApiStatus PanToTarget(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/cam_api", UseSettingsFrom, Evt* script, s32 isInitialCall);
+ApiStatus UseSettingsFrom(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 id = evt_get_variable(script, *args++);
+    Camera* camera = &gCameras[id];
+    f32 startX = evt_get_float_variable(script, *args++);
+    f32 startY = evt_get_float_variable(script, *args++);
+    f32 startZ = evt_get_float_variable(script, *args++);
+    f32 hitX, hitY, hitZ;
+    f32 hitDepth = 32767.0f;
+    f32 nx, ny, nz;
+    s32 hitID = test_ray_zones(startX, startY + 10.0f, startZ, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth,
+                               &nx, &ny, &nz);
 
-INCLUDE_ASM(s32, "evt/cam_api", LoadSettings, Evt* script, s32 isInitialCall);
+    if (hitID >= 0) {
+        camera->controlSettings = *D_800D91D4[hitID].unk_10;
+    }
+    return ApiStatus_DONE2;
+}
+
+ApiStatus LoadSettings(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 id = evt_get_variable(script, *args++);
+    Camera* camera = &gCameras[id];
+    CameraControlSettings* settings = evt_get_variable(script, *args++);
+
+    camera->controlSettings = *settings;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetCamType(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -452,4 +477,46 @@ INCLUDE_ASM(s32, "evt/cam_api", SetCamProperties, Evt* script, s32 isInitialCall
 
 INCLUDE_ASM(s32, "evt/cam_api", AdjustCam, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "evt/cam_api", ResetCam, Evt* script, s32 isInitialCall);
+ApiStatus ResetCam(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 id = evt_get_variable(script, *args++);
+    Camera* camera = &gCameras[id];
+    f32 moveSpeed = evt_get_float_variable(script, *args++);
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    if (isInitialCall) {
+        f32 x = playerStatus->position.x;
+        f32 y = playerStatus->position.y;
+        f32 z = playerStatus->position.z;
+        f32 hitX, hitY, hitZ;
+        f32 hitDepth = 32767.0f;
+        f32 nx, ny, nz;
+        s32 hitID;
+
+        hitID = test_ray_zones(x, y + 10.0f, z, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth,
+                               &nx, &ny, &nz);
+
+        if (hitID >= 0) {
+            camera->controlSettings = *D_800D91D4[hitID].unk_10;
+        }
+
+        camera->movePos.x = x;
+        camera->movePos.y = y;
+        camera->movePos.z = z;
+        camera->moveSpeed = moveSpeed;
+        camera->unk_506 = 1;
+        camera->followPlayer = TRUE;
+        camera->panPhase = 0.0f;
+        return ApiStatus_BLOCK;
+    }
+
+    if (camera->interpAlpha >= 1.0f) {
+        camera->unk_506 = 1;
+        camera->followPlayer = FALSE;
+        camera->moveSpeed = 1.0f;
+        camera->panPhase = 0.0f;
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}

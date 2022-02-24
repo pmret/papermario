@@ -70,13 +70,13 @@ ApiStatus func_802C0288(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802C02E4(Evt* script, s32 isInitialCall) {
     set_time_freeze_mode(TIME_FREEZE_FULL);
-    gOverrideFlags |= 0x200000;
+    gOverrideFlags |= GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802C031C(Evt* script, s32 isInitialCall) {
     set_time_freeze_mode(TIME_FREEZE_NORMAL);
-    gOverrideFlags &= ~0x200000;
+    gOverrideFlags &= ~GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS;
     return ApiStatus_DONE2;
 }
 

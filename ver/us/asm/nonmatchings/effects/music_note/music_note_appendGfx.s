@@ -64,12 +64,12 @@ glabel music_note_appendGfx
 /* 35A3B4 E004C494 3C02E005 */  lui       $v0, %hi(D_E004C67C)
 /* 35A3B8 E004C498 00451021 */  addu      $v0, $v0, $a1
 /* 35A3BC E004C49C 9042C67C */  lbu       $v0, %lo(D_E004C67C)($v0)
-/* 35A3C0 E004C4A0 3C03E005 */  lui       $v1, %hi(D_E004C67D)
+/* 35A3C0 E004C4A0 3C03E005 */  lui       $v1, %hi(D_E004C67C+1)
 /* 35A3C4 E004C4A4 00651821 */  addu      $v1, $v1, $a1
-/* 35A3C8 E004C4A8 9063C67D */  lbu       $v1, %lo(D_E004C67D)($v1)
-/* 35A3CC E004C4AC 3C01E005 */  lui       $at, %hi(D_E004C67E)
+/* 35A3C8 E004C4A8 9063C67D */  lbu       $v1, %lo(D_E004C67C+1)($v1)
+/* 35A3CC E004C4AC 3C01E005 */  lui       $at, %hi(D_E004C67C+2)
 /* 35A3D0 E004C4B0 00250821 */  addu      $at, $at, $a1
-/* 35A3D4 E004C4B4 9025C67E */  lbu       $a1, %lo(D_E004C67E)($at)
+/* 35A3D4 E004C4B4 9025C67E */  lbu       $a1, %lo(D_E004C67C+2)($at)
 /* 35A3D8 E004C4B8 00021600 */  sll       $v0, $v0, 0x18
 /* 35A3DC E004C4BC 00031C00 */  sll       $v1, $v1, 0x10
 /* 35A3E0 E004C4C0 00431025 */  or        $v0, $v0, $v1

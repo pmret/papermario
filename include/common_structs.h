@@ -891,7 +891,7 @@ typedef struct BattleStatus {
     /* 0x096 */ s8 hammerCharge;
     /* 0x097 */ s8 jumpCharge;
     /* 0x098 */ char unk_98;
-    /* 0x099 */ u8 rushesFlags; /* 1 = mega rush, 2 = power rush */
+    /* 0x099 */ u8 rushFlags; /* 1 = mega rush, 2 = power rush */
     /* 0x09A */ s8 outtaSightActive;
     /* 0x09B */ s8 turboChargeTurnsLeft;
     /* 0x09C */ u8 turboChargeAmount; /* unused? */
@@ -1115,11 +1115,11 @@ typedef struct ItemData {
 typedef struct ItemEntity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 boundVar; /* see make_item_entity */
-    /* 0x06 */ char unk_06[2];
+    /* 0x06 */ s16 unk_06;
     /* 0x08 */ Vec3f position;
     /* 0x14 */ struct ItemEntityPhysicsData* physicsData;
     /* 0x18 */ s16 itemID; /* into item table, also worldIconID */
-    /* 0x1A */ u8 state;
+    /* 0x1A */ s8 state;
     /* 0x1B */ s8 type;
     /* 0x1C */ u8 pickupDelay; /* num frames before item can be picked up */
     /* 0x1D */ char unk_1D;
@@ -1401,7 +1401,9 @@ typedef struct GameStatus {
     /* 0x0AC */ s8 introState;
     /* 0x0AD */ s8 introCounter;
     /* 0x0AE */ s8 bSkipIntro;
-    /* 0x0AF */ char unk_AF[0x7];
+    /* 0x0AF */ s8 unk_AF;
+    /* 0x0B0 */ s8 unk_B0;
+    /* 0x0B1 */ char unk_B1[0x5];
     /* 0x0B6 */ s16 bootAlpha;
     /* 0x0B8 */ s16 bootBlue;
     /* 0x0BA */ s16 bootGreen;
@@ -1451,12 +1453,13 @@ typedef struct PushBlockGrid {
 typedef struct ItemEntityPhysicsData {
     /* 0x00 */ f32 verticalVelocity;
     /* 0x04 */ f32 gravity; /* 2 = normal, 1 = low gravity, higher values never 'settle' */
-    /* 0x08 */ char unk_08[4];
+    /* 0x08 */ f32 unk_08;
     /* 0x0C */ f32 constVelocity;
     /* 0x10 */ f32 velx;
     /* 0x14 */ f32 velz;
     /* 0x18 */ f32 moveAngle;
-    /* 0x1C */ char unk_1C[8];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
 } ItemEntityPhysicsData; // size = 0x24
 
 typedef struct RenderTask {
@@ -1856,8 +1859,8 @@ typedef struct Actor {
     /* 0x1F3 */ s8 numParts;
     /* 0x1F4 */ struct ActorPart* partsTable;
     /* 0x1F8 */ s16 lastDamageTaken;
-    /* 0x1FA */ u16 hpChangeCounter;
-    /* 0x1FC */ s16 damageCounter;
+    /* 0x1FA */ s16 hpChangeCounter;
+    /* 0x1FC */ u16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
     /* 0x204 */ s8 unk_204;
@@ -2152,7 +2155,7 @@ typedef union {
     int i;
     void (*func)(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY,
                                  f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-} WindowUpdateFunc __attribute__((transparent_union));
+} WindowUpdateFunc TRANSPARENT_UNION;
 
 typedef struct MenuWindowBP {
     /* 0x00 */ s8 windowID;

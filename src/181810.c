@@ -56,7 +56,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
         script->functionTemp[0] = 0;
-        gOverrideFlags |= 0x10;
+        gOverrideFlags |= GLOBAL_OVERRIDES_10;
         if (gSpeakingActorTalkAnim >= 0) {
             func_80263E08(actor, part, gSpeakingActorTalkAnim);
         }
@@ -97,7 +97,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
 
         if (gSpeakingActorPrintIsDone == TRUE) {
             decrement_status_menu_disabled();
-            gOverrideFlags &= ~0x10;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
             return ApiStatus_DONE1;
         }
     }
@@ -163,7 +163,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
 
         if (gSpeakingActorPrintIsDone == TRUE) {
             decrement_status_menu_disabled();
-            gOverrideFlags &= ~0x10;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
             return ApiStatus_DONE1;
         }
     }
@@ -228,10 +228,10 @@ ApiStatus func_802536A8(Evt* script, s32 isInitialCall) {
 
     if (evt_get_variable(script, *script->ptrReadPos) != 0) {
         battleStatus->unk_92 |= 1;
-        gOverrideFlags |= 0x80;
+        gOverrideFlags |= GLOBAL_OVERRIDES_80;
     } else {
         battleStatus->unk_92 &= ~1;
-        gOverrideFlags &= ~0x80;
+        gOverrideFlags &= ~GLOBAL_OVERRIDES_80;
     }
 
     return ApiStatus_DONE2;

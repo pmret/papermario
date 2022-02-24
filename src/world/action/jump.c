@@ -46,7 +46,7 @@ void func_802B60B4_E240F4(void) {
         if (playerStatus->actionState == ACTION_STATE_LAUNCH) {
             phys_adjust_cam_on_landing();
         } else {
-            gCameras[0].moveFlags |= 1;
+            gCameras[CAM_DEFAULT].moveFlags |= 1;
         }
 
         if (playerStatus->actionState == ACTION_STATE_JUMP) {
@@ -108,7 +108,7 @@ void func_802B6198_E241D8(void) {
 
         temp_s1 = phi_a0;
         suggest_player_anim_clearUnkFlag(temp_s1);
-        gCameras[0].moveFlags |= 1;
+        gCameras[CAM_DEFAULT].moveFlags |= 1;
     }
 
     playerStatus->fallState++;
@@ -136,7 +136,7 @@ void func_802B6294_E242D4(void) {
             phi_a0 = 0x6000A;
         }
         suggest_player_anim_clearUnkFlag(phi_a0);
-        gCameras[0].moveFlags |= 1;
+        gCameras[CAM_DEFAULT].moveFlags |= 1;
     }
     playerStatus->decorationList++;
 }
@@ -160,7 +160,7 @@ void func_802B6348_E24388(void) {
     if (playerStatus->flags < 0) {
         playerStatus->flags &= 0x7FFFFFF5;
         playerStatus->flags |= 4;
-        gCameras[0].moveFlags |= 1;
+        gCameras[CAM_DEFAULT].moveFlags |= 1;
     }
 
     playerStatus->decorationList++;
@@ -195,7 +195,7 @@ void func_802B647C_E244BC(void) {
         }
 
         suggest_player_anim_clearUnkFlag(temp_v1);
-        gCameras[0].moveFlags |= 1;
+        gCameras[CAM_DEFAULT].moveFlags |= 1;
     }
     playerStatus->decorationList++;
 }
@@ -207,7 +207,7 @@ void func_802B6508_E24548(void) {
         playerStatus->flags &= ~0x80000000;
         playerStatus->flags &= ~0xA;
         playerStatus->flags |= 4;
-        gCameras[0].moveFlags |= 1;
+        gCameras[CAM_DEFAULT].moveFlags |= 1;
 
         if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
             suggest_player_anim_clearUnkFlag(0xA0006);

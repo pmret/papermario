@@ -775,7 +775,7 @@ void phys_update_lava_reset(void) {
     collision_lava_reset_check_additional_overlaps();
 
     if (!(gPlayerStatusPtr->flags & PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW)) {
-        Camera* camera = &gCameras[0];
+        Camera* camera = &gCameras[CAM_DEFAULT];
 
         camera->targetPos.x = gPlayerStatusPtr->position.x;
         camera->targetPos.y = gPlayerStatusPtr->position.y;

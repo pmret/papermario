@@ -769,6 +769,7 @@ void init_hud_element_list(void) {
 }
 
 void func_801413F8(void) {
+<<<<<<< HEAD
     set_cam_viewport(3, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     gCameras[3].updateMode = 2;
     gCameras[3].unk_06 = 1;
@@ -786,6 +787,25 @@ void func_801413F8(void) {
     gCameras[3].unk_58 = -120.0f;
     gCameras[3].vfov = 1.0f;
     gCameras[3].flags &= ~0x6;
+=======
+    set_cam_viewport(3, 0, 0, 0x13F, 0xEF);
+    gCameras[CAM_CAM3].updateMode = 2;
+    gCameras[CAM_CAM3].unk_06 = 1;
+    gCameras[CAM_CAM3].unk_20 = 0x3CBF;
+    gCameras[CAM_CAM3].nearClip = 0x10;
+    gCameras[CAM_CAM3].unk_1C = 0;
+    gCameras[CAM_CAM3].unk_1E = 0;
+    gCameras[CAM_CAM3].unk_22 = 0;
+    gCameras[CAM_CAM3].unk_5C = 0;
+    gCameras[CAM_CAM3].farClip = 0x4000;
+    gCameras[CAM_CAM3].bgColor[0] = 0;
+    gCameras[CAM_CAM3].bgColor[1] = 0;
+    gCameras[CAM_CAM3].bgColor[2] = 0;
+    gCameras[CAM_CAM3].unk_54 = 160.0f;
+    gCameras[CAM_CAM3].unk_58 = -120.0f;
+    gCameras[CAM_CAM3].vfov = 1.0f;
+    gCameras[CAM_CAM3].flags &= ~0x6;
+>>>>>>> master
 }
 
 s32 create_hud_element(const HudScript* anim) {
