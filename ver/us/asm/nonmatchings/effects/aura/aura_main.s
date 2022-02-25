@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0076EE0
+.double 0.6
+
+.section .text
+
 glabel aura_main
 /* 377070 E0076000 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* 377074 E0076004 F7B60040 */  sdc1      $f22, 0x40($sp)

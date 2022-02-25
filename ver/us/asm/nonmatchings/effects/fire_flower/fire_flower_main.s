@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E007EC40
+.double 0.05
+
+.section .text
+
 glabel fire_flower_main
 /* 37F720 E007E000 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* 37F724 E007E004 F7B40050 */  sdc1      $f20, 0x50($sp)

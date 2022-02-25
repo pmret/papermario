@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0084E40
+.double 0.05
+
+dlabel D_E0084E48
+.double 0.2
+
+.section .text
+
 glabel bombette_breaking_main
 /* 388A54 E0084084 27BDFF48 */  addiu     $sp, $sp, -0xb8
 /* 388A58 E0084088 AFB5007C */  sw        $s5, 0x7c($sp)

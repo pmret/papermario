@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0052A80
+.double 0.1
+
+dlabel D_E0052A88
+.double 1.2
+
+.section .text
+
 glabel sleep_bubble_update
 /* 35CB70 E00520F0 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* 35CB74 E00520F4 AFBF0030 */  sw        $ra, 0x30($sp)
