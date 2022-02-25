@@ -32,7 +32,7 @@ EffectInstance* fire_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg
     EffectInstance* effect;
     FireFlowerFXData* part;
     Vec3i* partData;
-    s32 numParts = 0x1F;
+    s32 numParts = 31;
     s32 i;
 
     bp.unk_00 = 0;
