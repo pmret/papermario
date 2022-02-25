@@ -8,24 +8,6 @@ void fire_flower_render(EffectInstance* effect);
 
 s32 D_E007EC30[] = { 0x323C4650, 0x5A646964 };
 
-typedef struct FireFlowerFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ Vec3f pos;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ f32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ Vec3i unk_40;
-} FireFlowerFXData; // size = 0x4C
-
 EffectInstance* fire_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;

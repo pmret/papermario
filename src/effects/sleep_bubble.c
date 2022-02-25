@@ -8,19 +8,6 @@ void sleep_bubble_render(EffectInstance* effect);
 
 f32 D_E00529E0[] = { 4.4f, 3.2f, 5.4f, 2.7f, 6.0f, 4.9f, 5.2f, 3.1f, 2.4f, 4.5f, 2.6f, 5.7f, 3.8f, 2.9f, 3.1f, 5.2f, 2.3f, 5.4f, 3.5f, 2.6f, 2.4f, 3.1f, 5.2f, 4.9f, 6.0f, 2.7f, 5.4f, 3.2f, 4.4f, 2.6f, 3.5f, 5.4f, 2.3f, 5.2f, 3.1f, 2.9f, 3.8f, 5.7f, 2.6f, 4.5f };
 
-typedef struct SleepBubbleFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ s32 timeLeft;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ Vec2f points[20];
-    /* 0xC4 */ f32 unk_C4;
-    /* 0xC8 */ f32 unk_C8;
-} SleepBubbleFXData; // size = 0xCC
-
 void sleep_bubble_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, EffectInstance** arg6) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;

@@ -522,6 +522,86 @@ typedef struct Effect134 {
     /* 0x34 */ f32 unk_34;
 } Effect134; // size = 0x38
 
+typedef struct SleepBubbleFXData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ s32 timeLeft;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ Vec2f points[20];
+    /* 0xC4 */ f32 unk_C4;
+    /* 0xC8 */ f32 unk_C8;
+} SleepBubbleFXData; // size = 0xCC
+
+typedef struct AuraFXData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
+    /* 0x44 */ f32 unk_44;
+    /* 0x48 */ f32 unk_48;
+    /* 0x4C */ f32 unk_4C;
+    /* 0x50 */ f32 unk_50;
+    /* 0x54 */ f32 unk_54;
+    /* 0x58 */ f32 unk_58;
+    /* 0x5C */ f32 unk_5C;
+    /* 0x60 */ f32 unk_60;
+               union {
+                   s32 s;
+                   f32 f;
+               } unk_64;
+    /* 0x68 */ u8 unk_68;
+    /* 0x69 */ u8 unk_69;
+    /* 0x6A */ u8 unk_6A;
+    /* 0x6B */ u8 unk_6B;
+    /* 0x6C */ u8 unk_6C;
+    /* 0x6D */ u8 unk_6D;
+    /* 0x6E */ u8 unk_6E;
+} AuraFXData; // size = 0x70
+
+typedef struct BlastFXData {
+    /* 0x00 */ s16 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ s32 timeLeft;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+} BlastFXData; // size = 0x2C
+
+typedef struct FireFlowerFXData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ Vec3f pos;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    /* 0x3C */ s32 unk_3C;
+    /* 0x40 */ Vec3i unk_40;
+} FireFlowerFXData; // size = 0x4C
+
 // TODO figure out what this actually is
 // fx_quizmo_stage invokes gEffectTable[78]'s entryPoint function
 // fx_cold_breath invokes gEffectTable[111]'s entryPoint function

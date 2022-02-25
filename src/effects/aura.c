@@ -20,44 +20,6 @@ Gfx* D_E0076EC0[] = { D_090023C8, D_090023C8, D_09002428, D_09002428 };
 Gfx* D_E0076ED0[] = { D_09002000, D_09002000, D_090020E8, D_090021D0 };
 
 void aura_appendGfx(void* effect);
-
-typedef struct AuraFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ s32 unk_30;
-    /* 0x34 */ f32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ f32 unk_3C;
-    /* 0x40 */ f32 unk_40;
-    /* 0x44 */ f32 unk_44;
-    /* 0x48 */ f32 unk_48;
-    /* 0x4C */ f32 unk_4C;
-    /* 0x50 */ f32 unk_50;
-    /* 0x54 */ f32 unk_54;
-    /* 0x58 */ f32 unk_58;
-    /* 0x5C */ f32 unk_5C;
-    /* 0x60 */ f32 unk_60;
-               union {
-                   s32 s;
-                   f32 f;
-               } unk_64;
-    /* 0x68 */ u8 unk_68;
-    /* 0x69 */ u8 unk_69;
-    /* 0x6A */ u8 unk_6A;
-    /* 0x6B */ u8 unk_6B;
-    /* 0x6C */ u8 unk_6C;
-    /* 0x6D */ u8 unk_6D;
-    /* 0x6E */ u8 unk_6E;
-} AuraFXData; // size = 0x70
-
 void aura_init(EffectInstance* effect);
 void aura_update(EffectInstance* effect);
 void aura_render(EffectInstance* effect);
