@@ -2541,7 +2541,7 @@ segments:
     vram: 0xE0052000
     subsegments:
     - [0x35CA80, c, sleep_bubble]
-    - [0x35D460, data]
+    - [0x35D460]
   - [0x35D510, bin] # sleep_bubble gfx
   - name: effect_windy_leaves
     dir: effects
@@ -2691,7 +2691,7 @@ segments:
     vram: 0xE0076000
     subsegments:
     - [0x377070, c, aura]
-    - [0x377F00, data]
+    - [0x377F00]
   - [0x377F80, bin] # aura gfx
   - name: effect_effect_3C
     dir: effects
@@ -2727,7 +2727,7 @@ segments:
     vram: 0xE007E000
     subsegments:
     - [0x37F720, c, fire_flower]
-    - [0x380350, data]
+    - [0x380350]
   - [0x3803A0, bin] # fire_flower gfx
   - name: effect_recover
     dir: effects
@@ -2754,7 +2754,7 @@ segments:
     vram: 0xE0084000
     subsegments:
     - [0x3889D0, c, bombette_breaking]
-    - [0x3897E0, data]
+    - [0x3897E0]
   - name: effect_firework
     dir: effects
     type: code
