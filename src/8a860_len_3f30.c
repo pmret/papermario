@@ -166,7 +166,7 @@ s32 popup_menu_update(void) {
             set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80);
             set_hud_element_tint(elementID, 255, 255, 255);
             if (gPopupMenu->popupType != 2) {
-                set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_2);
+                set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             one = 1; // required to match (why is 1 loaded so early?)

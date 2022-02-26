@@ -333,7 +333,7 @@ void btl_state_update_celebration(void) {
                     id = create_hud_element(D_802841C0[0]);
                     D_8029FA90[0][i] = id;
                     set_hud_element_render_pos(id, 160, 317);
-                    set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+                    set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
                 }
 
                 id = create_hud_element(D_802841B8);
@@ -345,7 +345,7 @@ void btl_state_update_celebration(void) {
                     id = create_hud_element(D_802841C0[10]);
                     D_8029FA90[1][i] = id;
                     set_hud_element_render_pos(id, 312, 117);
-                    set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+                    set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
                 }
 
                 id = create_hud_element(D_802841BC);
@@ -357,7 +357,7 @@ void btl_state_update_celebration(void) {
                     id = create_hud_element(D_802841C0[20]);
                     D_8029FA90[2][i] = id;
                     set_hud_element_render_pos(id, 8, 117);
-                    set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+                    set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
                 }
 
                 D_8029FB60[0] = 0;
@@ -370,20 +370,20 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->curMaxFP % 10;
                     set_hud_element_anim(id, D_80284238[fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 14, y + 46);
 
                     id = D_8029FA90[0][2];
                     set_hud_element_anim(id, D_80284238[fpOnes]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[0][3];
                     set_hud_element_anim(id, D_802AA320);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 3, y + 46);
 
@@ -393,14 +393,14 @@ void btl_state_update_celebration(void) {
                     fpOnes = temp_v1_4 % 10;
                     set_hud_element_anim(id, D_802841C0[fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x + 3, y + 46);
 
                     id = D_8029FA90[0][5];
                     set_hud_element_anim(id, D_802841C0[fpOnes]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x + 10, y + 46);
                 } else {
@@ -409,14 +409,14 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->curMaxFP % 10;
                     set_hud_element_anim(id, D_802841C0[fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 6, y + 46);
 
                     id = D_8029FA90[0][5];
                     set_hud_element_anim(id, D_802841C0[fpOnes]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x + 2, y + 46);
                     D_8029FB60[1] = 1;
@@ -425,7 +425,7 @@ void btl_state_update_celebration(void) {
                 if (is_ability_active(0xC)) {
                     id = D_8029FAA8;
                     set_hud_element_anim(id, gItemHudScripts[gItemTable[248].iconID][0]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     set_hud_element_scale(id, 0.5f);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x + 17, y + 46);
@@ -440,20 +440,20 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->curMaxHP % 10;
                     set_hud_element_anim(id, D_80284260[fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 14, y + 46);
 
                     id = D_8029FA90[1][2];
                     set_hud_element_anim(id, scriptsTemp[fpOnes + 10]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[1][3];
                     set_hud_element_anim(id, D_802AA694);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 3, y + 46);
 
@@ -466,14 +466,14 @@ void btl_state_update_celebration(void) {
                     new_var = scriptsTemp[fpOnes + 10];
                     set_hud_element_anim(id, D_802841E8[fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x + 3, y + 46);
 
                     id = D_8029FA90[1][5];
                     set_hud_element_anim(id, new_var);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x + 10, y + 46);
                 } else {
@@ -485,14 +485,14 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->curMaxHP % 10;
                     set_hud_element_anim(id, scriptsTemp[fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 6, y + 46);
 
                     id = D_8029FA90[1][5];
                     set_hud_element_anim(id, scriptsTemp[fpOnes + 10]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x + 2, y + 46);
                     D_8029FB60[0] = 1;
@@ -501,7 +501,7 @@ void btl_state_update_celebration(void) {
                 if (is_ability_active(4)) {
                     id = D_8029FAC4;
                     set_hud_element_anim(id, gItemHudScripts[gItemTable[231].iconID][0]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     set_hud_element_scale(id, 0.5f);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x + 17, y + 46);
@@ -518,20 +518,20 @@ void btl_state_update_celebration(void) {
                     fpOnes = playerData->maxBP % 10;
                     set_hud_element_anim(id, D_80284288[fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 14, y + 46);
 
                     id = D_8029FA90[2][2];
                     set_hud_element_anim(id, scriptsTemp[fpOnes + 20]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[2][3];
                     set_hud_element_anim(id, new_var2);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 3, y + 46);
                     temp_v1_5 = playerData->maxBP + 3;
@@ -542,26 +542,26 @@ void btl_state_update_celebration(void) {
                     fpOnes = temp_v1_5 % 10;
                     set_hud_element_anim(id, D_80284210[fpTens]);
                     if (fpTens != 0) {
-                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                        clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     }
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x + 3, y + 46);
 
                     id = D_8029FA90[2][5];
                     set_hud_element_anim(id, scriptsTemp[fpOnes + 20]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x + 10, y + 46);
                 } else {
                     id = D_8029FA90[2][4];
                     set_hud_element_anim(id, D_802841C0[23]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 6, y + 46);
 
                     id = D_8029FA90[2][5];
                     set_hud_element_anim(id, D_802841C0[20]);
-                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_2);
+                    clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x + 2, y + 46);
                     D_8029FB60[2] = 1;
@@ -729,27 +729,27 @@ void btl_state_update_celebration(void) {
             if ((gGameStatusPtr->frameCounter % 2) != 0) {
                 switch (battleStatus->currentSubmenu) {
                     case 0:
-                        set_hud_element_flags(D_8029FA80[0], HUD_ELEMENT_FLAGS_2);
+                        set_hud_element_flags(D_8029FA80[0], HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                     case 1:
-                        set_hud_element_flags(D_8029FA80[1], HUD_ELEMENT_FLAGS_2);
-                        set_hud_element_flags(D_8029FA80[3], HUD_ELEMENT_FLAGS_2);
+                        set_hud_element_flags(D_8029FA80[1], HUD_ELEMENT_FLAGS_DISABLED);
+                        set_hud_element_flags(D_8029FA80[3], HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                     case 2:
-                        set_hud_element_flags(D_8029FA88, HUD_ELEMENT_FLAGS_2);
+                        set_hud_element_flags(D_8029FA88, HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                 }
             } else {
                 switch (battleStatus->currentSubmenu) {
                     case 0:
-                        clear_hud_element_flags(D_8029FA80[0], HUD_ELEMENT_FLAGS_2);
+                        clear_hud_element_flags(D_8029FA80[0], HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                     case 1:
-                        clear_hud_element_flags(D_8029FA80[1], HUD_ELEMENT_FLAGS_2);
-                        clear_hud_element_flags(D_8029FA80[3], HUD_ELEMENT_FLAGS_2);
+                        clear_hud_element_flags(D_8029FA80[1], HUD_ELEMENT_FLAGS_DISABLED);
+                        clear_hud_element_flags(D_8029FA80[3], HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                     case 2:
-                        clear_hud_element_flags(D_8029FA88, HUD_ELEMENT_FLAGS_2);
+                        clear_hud_element_flags(D_8029FA88, HUD_ELEMENT_FLAGS_DISABLED);
                         break;
                 }
             }

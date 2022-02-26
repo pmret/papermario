@@ -194,19 +194,19 @@ void initialize_battle(void) {
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFC0); i++) {
         hudElemID = D_8029EFC0[i] = create_hud_element(HudScript_Item_StarPoint);
-        set_hud_element_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+        set_hud_element_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         set_hud_element_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFE8); i++) {
         hudElemID = D_8029EFE8[i] = create_hud_element(HudScript_StatusSPShine);
-        set_hud_element_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+        set_hud_element_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         set_hud_element_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029F010); i++) {
         hudElemID = D_8029F010[i] = create_hud_element(HudScript_Item_SmallStarPoint);
-        set_hud_element_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+        set_hud_element_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         set_hud_element_render_depth(hudElemID, 20);
     }
 

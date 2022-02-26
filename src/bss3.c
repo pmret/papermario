@@ -9,7 +9,7 @@
 #endif
 
 BSS s32 D_801512B0;
-BSS s32 D_801512B4;
+BSS s32 gHudElementsNumber;
 BSS s32 gCurrentCustomModelGfxBuildersPtr;
 BSS s32 D_801512BC;
 BSS s32 D_801512C0;
@@ -213,12 +213,12 @@ BSS s8 fold_gfxDataCache[0x40];
 BSS s8 gHudElementsWorld[0x500];
 BSS s8 gHudElementsBattle[0x500];
 BSS s32 gHudElements;
-BSS s32 D_80157964;
+BSS s32 gHudElementCacheBufferWorld;
 BSS s32 gHudElementCacheSizeWorld;
 BSS char D_8015796C[0x4];
 BSS s8 gHudElementCacheTableRasterWorld[0x600];
 BSS s8 gHudElementCacheTablePaletteWorld[0x600];
-BSS s32 D_80158570;
+BSS s32 gHudElementCacheBufferBattle;
 BSS s32 gHudElementCacheSizeBattle;
 BSS char D_80158578[0x8];
 BSS s8 gHudElementCacheTableRasterBattle[0x600];

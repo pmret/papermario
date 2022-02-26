@@ -51,13 +51,13 @@ ApiStatus func_802A9000_42DA10(Evt* script, s32 isInitialCall) {
 
     elementID = create_hud_element(HudScript_AButton);
     actionCommandStatus->hudElements[0] = elementID;
-    set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+    set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(elementID, 0);
 
     elementID = create_hud_element(HudScript_BButton);
     actionCommandStatus->hudElements[2] = elementID;
-    set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+    set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(elementID, 0);
 
@@ -65,13 +65,13 @@ ApiStatus func_802A9000_42DA10(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElements[1] = elementID;
     set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
     set_hud_element_render_depth(elementID, 0);
-    set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+    set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     elementID = create_hud_element(HudScript_100pct);
     actionCommandStatus->hudElements[4] = elementID;
     set_hud_element_render_pos(elementID, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
     set_hud_element_render_depth(elementID, 0);
-    set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+    set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     return ApiStatus_DONE2;
 }
@@ -132,20 +132,20 @@ void func_802A92A0_42DCB0(void) {
 
             hudElement = actionCommandStatus->hudElements[0];
             if (actionCommandStatus->unk_61 != 0) {
-                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_2);
+                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
             set_hud_element_alpha(hudElement, 255);
 
             hudElement = actionCommandStatus->hudElements[2];
             if (actionCommandStatus->unk_61 != 0) {
-                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_2);
+                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
             set_hud_element_alpha(hudElement, 255);
 
             hudElement = actionCommandStatus->hudElements[1];
             set_hud_element_alpha(hudElement, 255);
             if (actionCommandStatus->unk_61 != 0) {
-                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_2);
+                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             actionCommandStatus->state = 1;
@@ -269,7 +269,7 @@ void func_802A92A0_42DCB0(void) {
                 actionCommandStatus->unk_68 = 1;
                 set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 50,
                     actionCommandStatus->hudElementY + 28);
-                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_2);
+                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             adjustedFillLevel = actionCommandStatus->barFillLevel / 100;

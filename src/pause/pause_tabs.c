@@ -148,10 +148,10 @@ void pause_tabs_draw_invis(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32
 
 void pause_tabs_draw_stats(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     if (darkening != 0) {
-        set_hud_element_flags(gPauseTabsIconIDs[0], HUD_ELEMENT_FLAGS_20);
+        set_hud_element_flags(gPauseTabsIconIDs[0], HUD_ELEMENT_FLAGS_TRANSPARENT);
         set_hud_element_alpha(gPauseTabsIconIDs[0], 255.0 - darkening * 0.5);
     } else {
-        clear_hud_element_flags(gPauseTabsIconIDs[0], HUD_ELEMENT_FLAGS_20);
+        clear_hud_element_flags(gPauseTabsIconIDs[0], HUD_ELEMENT_FLAGS_TRANSPARENT);
         set_hud_element_alpha(gPauseTabsIconIDs[0], 255);
     }
 
@@ -166,10 +166,10 @@ void pause_tabs_draw_stats(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32
 
 void pause_tabs_draw_badges(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     if (darkening != 0) {
-        set_hud_element_flags(gPauseTabsIconIDs[1], HUD_ELEMENT_FLAGS_20);
+        set_hud_element_flags(gPauseTabsIconIDs[1], HUD_ELEMENT_FLAGS_TRANSPARENT);
         set_hud_element_alpha(gPauseTabsIconIDs[1], 255.0 - darkening * 0.5);
     } else {
-        clear_hud_element_flags(gPauseTabsIconIDs[1], HUD_ELEMENT_FLAGS_20);
+        clear_hud_element_flags(gPauseTabsIconIDs[1], HUD_ELEMENT_FLAGS_TRANSPARENT);
         set_hud_element_alpha(gPauseTabsIconIDs[1], 255);
     }
 
@@ -184,10 +184,10 @@ void pause_tabs_draw_badges(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s3
 
 void pause_tabs_draw_items(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     if (darkening != 0) {
-        set_hud_element_flags(gPauseTabsIconIDs[2], HUD_ELEMENT_FLAGS_20);
+        set_hud_element_flags(gPauseTabsIconIDs[2], HUD_ELEMENT_FLAGS_TRANSPARENT);
         set_hud_element_alpha(gPauseTabsIconIDs[2], 255.0 - darkening * 0.5);
     } else {
-        clear_hud_element_flags(gPauseTabsIconIDs[2], HUD_ELEMENT_FLAGS_20);
+        clear_hud_element_flags(gPauseTabsIconIDs[2], HUD_ELEMENT_FLAGS_TRANSPARENT);
         set_hud_element_alpha(gPauseTabsIconIDs[2], 255);
     }
 
@@ -202,10 +202,10 @@ void pause_tabs_draw_items(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32
 
 void pause_tabs_draw_party(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     if (darkening != 0) {
-        set_hud_element_flags(gPauseTabsIconIDs[3], HUD_ELEMENT_FLAGS_20);
+        set_hud_element_flags(gPauseTabsIconIDs[3], HUD_ELEMENT_FLAGS_TRANSPARENT);
         set_hud_element_alpha(gPauseTabsIconIDs[3], 255.0 - darkening * 0.5);
     } else {
-        clear_hud_element_flags(gPauseTabsIconIDs[3], HUD_ELEMENT_FLAGS_20);
+        clear_hud_element_flags(gPauseTabsIconIDs[3], HUD_ELEMENT_FLAGS_TRANSPARENT);
         set_hud_element_alpha(gPauseTabsIconIDs[3], 255);
     }
 
@@ -220,10 +220,10 @@ void pause_tabs_draw_party(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32
 
 void pause_tabs_draw_spirits(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     if (darkening != 0) {
-        set_hud_element_flags(gPauseTabsIconIDs[4], HUD_ELEMENT_FLAGS_20);
+        set_hud_element_flags(gPauseTabsIconIDs[4], HUD_ELEMENT_FLAGS_TRANSPARENT);
         set_hud_element_alpha(gPauseTabsIconIDs[4], 255.0 - darkening * 0.5);
     } else {
-        clear_hud_element_flags(gPauseTabsIconIDs[4], HUD_ELEMENT_FLAGS_20);
+        clear_hud_element_flags(gPauseTabsIconIDs[4], HUD_ELEMENT_FLAGS_TRANSPARENT);
         set_hud_element_alpha(gPauseTabsIconIDs[4], 255);
     }
 
@@ -238,10 +238,10 @@ void pause_tabs_draw_spirits(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
 
 void pause_tabs_draw_map(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     if (darkening != 0) {
-        set_hud_element_flags(gPauseTabsIconIDs[5], HUD_ELEMENT_FLAGS_20);
+        set_hud_element_flags(gPauseTabsIconIDs[5], HUD_ELEMENT_FLAGS_TRANSPARENT);
         set_hud_element_alpha(gPauseTabsIconIDs[5], 255.0 - darkening * 0.5);
     } else {
-        clear_hud_element_flags(gPauseTabsIconIDs[5], HUD_ELEMENT_FLAGS_20);
+        clear_hud_element_flags(gPauseTabsIconIDs[5], HUD_ELEMENT_FLAGS_TRANSPARENT);
         set_hud_element_alpha(gPauseTabsIconIDs[5], 255);
     }
 

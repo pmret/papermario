@@ -373,22 +373,22 @@ void initialize_status_menu(void) {
     newVar = create_hud_element(HudScript_StatusTimes);
     iconIndex = newVar;
     uiStatus->iconIndex8 = iconIndex;
-    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusTimes);
     uiStatus->iconIndex9 = iconIndex;
-    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusTimes);
     uiStatus->iconIndexA = iconIndex;
-    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusTimes);
     uiStatus->iconIndexB = iconIndex;
-    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_2);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusStar1);
@@ -413,7 +413,7 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
     x += 8;
     y2 = y + 8;
     set_hud_element_render_pos(iconID, x, y + 7);
-    clear_hud_element_flags(iconID, HUD_ELEMENT_FLAGS_2);
+    clear_hud_element_flags(iconID, HUD_ELEMENT_FLAGS_DISABLED);
     draw_hud_element_2(iconID);
 
     // Write each digit of the input number into the digits array
@@ -436,7 +436,7 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
             keepDrawing = TRUE;
             set_hud_element_anim(iconID, DigitHudScripts[digit]);
             set_hud_element_render_pos(iconID, x, y2);
-            clear_hud_element_flags(iconID, HUD_ELEMENT_FLAGS_2);
+            clear_hud_element_flags(iconID, HUD_ELEMENT_FLAGS_DISABLED);
             draw_hud_element_2(iconID);
         }
     }
