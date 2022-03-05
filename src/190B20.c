@@ -3031,6 +3031,31 @@ void func_80266684(void) {
 }
 
 INCLUDE_ASM(void, "190B20", func_802666E4, Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16 arg4);
+// void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage) {
+//     BattleStatus* battleStatus = &gBattleStatus;
+//     s32 currentAttackElement = battleStatus->currentAttackElement;
+//     s32 phi_t0;
+
+//     if (currentAttackElement & 2) {
+//         fx_ring_blast(0, x, y, z, 1.0f, 24);
+//     } else if (currentAttackElement & 0x20) {
+//         func_80251474(actor);
+//     } else if (currentAttackElement & 4) {
+//         fx_water_splash(0, x, y, z, 1.0f, 24);
+//     } else {
+//         if (damage < 3) {
+//             phi_t0 = 0;
+//         } else if (damage < 5) {
+//             phi_t0 = 1;
+//         } else if (damage < 9) {
+//             phi_t0 = 2;
+//         } else {
+//             phi_t0 = 3;
+//         }
+
+//         fx_firework(0, x, y, z, 1.0f, phi_t0);
+//     }
+// }
 
 INCLUDE_ASM(void, "190B20", func_802667F0, s32 arg0, Actor* arg1, f32 arg2, f32 arg3, f32 arg4);
 

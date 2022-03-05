@@ -94,6 +94,8 @@ EvtScript BtlBringPartnerOut = {
 void func_8023ED5C(void);
 void func_8023F088(Camera*);
 void func_8023FF84(Camera*);
+void btl_draw_enemy_health_bars(void);
+void btl_update_starpoints_display(void);
 
 void get_dpad_input_radial(f32* angle, f32* magnitude) {
     BattleStatus* battleStatus = &gBattleStatus;

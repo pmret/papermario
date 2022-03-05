@@ -500,6 +500,7 @@ s32 get_collider_type_by_id(s32 colliderID);
 void suggest_player_anim_setUnkFlag(s32 arg0);
 void suggest_player_anim_clearUnkFlag(s32 arg0);
 void subtract_hp(s32 amt);
+void draw_status_ui(void);
 void open_status_menu_long(void);
 
 void suspend_all_group(s32 groupFlags);

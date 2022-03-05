@@ -2322,6 +2322,16 @@ typedef struct ActionCommandStatus {
     /* 0x80 */ s8 mashMeterIntervals;
 } ActionCommandStatus;
 
+typedef struct Message {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ char unk_04[0x1C];
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ char unk_28[0x1C];
+    /* 0x44 */ s32 unk_44;
+    /* 0x48 */ char unk_48[0x4];
+} Message; // size = 0x4C
+
 struct PopupMessage;
 typedef void (*PopupMessageCallback)(struct PopupMessage* popup);
 typedef struct PopupMessage {
@@ -2334,7 +2344,7 @@ typedef struct PopupMessage {
     /* 0x14 */ s16 duration;
     /* 0x16 */ s8 unk_16;
     /* 0x17 */ s8 unk_17;
-    /* 0x18 */ s32* message;
+    /* 0x18 */ Message* message;
 } PopupMessage; // size = 0x1C
 
 typedef struct unkPartnerStruct {
