@@ -31,22 +31,6 @@ HudScript* bHPDigitHudScripts[] = {
 
 s32 D_80280A30 = 0xFF;
 
-extern s32 D_8029DA30;
-extern s8 D_8029DA33;
-extern s32 D_8029DA34;
-extern Camera D_8029DA50[ARRAY_COUNT(gCameras)];
-extern f32 D_8029EFB0;
-extern f32 D_8029EFB4;
-extern f32 D_8029EFB8;
-extern s32 D_8029EFBC;
-extern s32 D_8029EFC0[10];
-extern s32 D_8029EFE8[10];
-extern s32 D_8029F010[10];
-extern HudScript HudScript_HPBar;
-extern HudScript HudScript_Item_SmallStarPoint;
-extern HudScript HudScript_Item_StarPoint;
-extern HudScript HudScript_StatusSPShine;
-
 EvtScript BtlPutPartnerAway = {
     EVT_CALL(DispatchEvent, 256, 62)
     EVT_CHILD_THREAD
@@ -92,6 +76,27 @@ EvtScript BtlBringPartnerOut = {
     EVT_RETURN
     EVT_END
 };
+
+
+extern s32 D_8029DA30;
+extern s8 D_8029DA33;
+extern s32 D_8029DA34;
+extern s32 D_8029DA40;
+extern s32 D_8029DA44;
+extern s32 D_8029DA48;
+extern s32 D_8029DA4C;
+extern Camera D_8029DA50[ARRAY_COUNT(gCameras)];
+extern f32 D_8029EFB0;
+extern f32 D_8029EFB4;
+extern f32 D_8029EFB8;
+extern s32 D_8029EFBC;
+extern s32 D_8029EFC0[10];
+extern s32 D_8029EFE8[10];
+extern s32 D_8029F010[10];
+extern HudScript HudScript_HPBar;
+extern HudScript HudScript_Item_SmallStarPoint;
+extern HudScript HudScript_Item_StarPoint;
+extern HudScript HudScript_StatusSPShine;
 
 void func_8023ED5C(void);
 void func_8023F088(Camera*);
@@ -803,7 +808,132 @@ void btl_draw_enemy_health_bars(void) {
     }
 }
 
+// needs insane amount of data migration (1AF2D0.c)
+#ifdef NON_MATCHING
+void btl_update_starpoints_display(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    s32 cond;
+    s32 i;
+
+    if (gBattleStatus.flags1 & BS_FLAGS1_1) {
+        if (!(gBattleStatus.flags2 & BS_FLAGS2_1)) {
+            D_8029DA40 = 292;
+            D_8029DA44 = 196;
+            D_8029DA48 = 6;
+            D_8029DA4C = battleStatus->totalStarPoints % 10;
+        } else {
+            D_8029DA40 += (202 - D_8029DA40) / D_8029DA48;
+            D_8029DA44 += (120 - D_8029DA44) / D_8029DA48;
+            D_8029DA48--;
+            if (D_8029DA48 < 1) {
+                D_8029DA48 = 1;
+            }
+        }
+
+        cond = TRUE;
+        if (D_802809F4 != 0) {
+            if (D_802809F5 > 8) {
+                if (D_802809F5 <= 12) {
+                    cond = FALSE;
+                } else {
+                    D_802809F5 = 0;
+                }
+            }
+            D_802809F5++;
+        }
+
+
+        if (cond) {
+            s32 posX, posY;
+            s32 tens, ones;
+            s32 id;
+            f32 one = 1.0f;
+
+            battleStatus->incrementStarPointDelay--;
+            D_802809F0 -= 1.0;
+            if (D_802809F0 <= 0.0f) {
+                s32 pendingStarPoints;
+
+                if (battleStatus->pendingStarPoints > 0) {
+                    battleStatus->totalStarPoints++;
+                    if (battleStatus->totalStarPoints > 100) {
+                        battleStatus->totalStarPoints = 100;
+                    }
+                    battleStatus->pendingStarPoints--;
+                }
+
+                pendingStarPoints = battleStatus->pendingStarPoints;
+                if (pendingStarPoints < 1) {
+                    pendingStarPoints = 1;
+                }
+
+                D_802809F0 = (f32) battleStatus->incrementStarPointDelay / pendingStarPoints;
+                if (D_802809F0 < 1.0) {
+                    D_802809F0 = 1.0f;
+                }
+                if (D_802809F0 > 6.0) {
+                    D_802809F0 = 6.0f;
+                }
+            }
+
+            posX = D_8029DA40;
+            posY = D_8029DA44;
+            tens = battleStatus->totalStarPoints / 10;
+            ones = battleStatus->totalStarPoints % 10;
+
+            for (i = 0; i < tens; i++) {
+                id = D_8029EFC0[i];
+                if (get_hud_element_anim(id) != HudScript_Item_StarPoint) {
+                    set_hud_element_anim(id, HudScript_Item_StarPoint);
+                }
+                clear_hud_element_flags(id, 2);
+                set_hud_element_render_pos(id, posX, posY);
+                draw_hud_element_clipped(id);
+
+                id = D_8029EFE8[i];
+                if (get_hud_element_anim(id) != HudScript_StatusSPShine) {
+                    set_hud_element_anim(id, HudScript_StatusSPShine);
+                }
+                clear_hud_element_flags(id, 2);
+                set_hud_element_render_pos(id, posX, posY - 5);
+                draw_hud_element_clipped(id);
+                posX -= (one * 20.0f);
+            }
+
+           for (; i < ARRAY_COUNT(D_8029EFC0); i++) {
+                set_hud_element_flags(D_8029EFC0[i], 2);
+                set_hud_element_flags(D_8029EFE8[i], 2);
+            }
+
+            posX = D_8029DA40;
+            posY = D_8029DA44 + (one * 14.0f);
+            if (gBattleStatus.flags2 & 1) {
+                if (ones != 0) {
+                    draw_box(0, 4, posX - 100, posY - 5, 0, 110, 12, 120, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL,
+                             NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+                }
+            }
+
+            for (i = 0; i < ones; i++) {
+                id = D_8029F010[i];
+                if (get_hud_element_anim(id) != HudScript_Item_SmallStarPoint) {
+                    set_hud_element_anim(id, HudScript_Item_SmallStarPoint);
+                }
+                clear_hud_element_flags(id, 2);
+                set_hud_element_render_pos(id, posX, posY);
+                draw_hud_element_clipped(id);
+                posX -= one * 10.0f;
+            }
+
+            for (; i < ARRAY_COUNT(D_8029F010); i++) {
+                set_hud_element_flags(D_8029F010[i], 2);
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "16c8e0", btl_update_starpoints_display);
+#endif
 
 void btl_save_world_cameras(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -894,7 +1024,7 @@ void btl_delete_actor(Actor* actor) {
 
     delete_shadow(actor->shadow.id);
     remove_all_status_icons(actor->hudElementDataIndex);
-    remove_effect(actor->ptrDefuffIcon); // ???
+    remove_effect(actor->debuffIcon); // ???
 
     if (actor->unk_200 != NULL) {
         actor->unk_200[3][9] = 0;
@@ -937,7 +1067,7 @@ void btl_delete_player_actor(Actor* player) {
 
     delete_shadow(player->shadow.id);
     remove_all_status_icons(player->hudElementDataIndex);
-    remove_effect(player->ptrDefuffIcon); // ???
+    remove_effect(player->debuffIcon); // ???
 
     if (player->unk_200 != NULL) {
         player->unk_200[3][9] = 0;

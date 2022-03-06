@@ -291,7 +291,7 @@ void btl_state_update_victory(void) {
             player->transStatus = 0;
             player->koStatus = 0;
             player->koDuration = 0;
-            player->ptrDefuffIcon->ptrPropertyList[15] = 0;
+            player->debuffIcon->ptrPropertyList[15] = 0;
 
             if (partner != NULL) {
                 if (partner->koStatus == 0xD) {
@@ -304,7 +304,7 @@ void btl_state_update_victory(void) {
                 partner->transStatus = 0;
                 partner->koStatus = 0;
                 partner->koDuration = 0;
-                partner->ptrDefuffIcon->ptrPropertyList[15] = 0;
+                partner->debuffIcon->ptrPropertyList[15] = 0;
             }
             break;
         case BATTLE_STATE2_PLAYER_DEFEATED:
@@ -497,7 +497,7 @@ void btl_state_update_defeat(void) {
                 remove_status_debuff(player->hudElementDataIndex);
                 player->koStatus = 0;
                 player->koDuration = 0;
-                player->ptrDefuffIcon->ptrPropertyList[15] = 0;
+                player->debuffIcon->ptrPropertyList[15] = 0;
             }
 
             func_8024E40C(0x19);

@@ -874,7 +874,7 @@ typedef struct BattleStatus {
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ s8 totalStarPoints;
     /* 0x079 */ s8 pendingStarPoints; /* how many to add */
-    /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
+    /* 0x07A */ s8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
     /* 0x07B */ u8 damageTaken;
     /* 0x07C */ s8 changePartnerAllowed;
     /* 0x07D */ s8 menuStatus[4]; ///< -1 = automatically pick the first move, 0 = disabled, 1 = enabled
@@ -1917,7 +1917,7 @@ typedef struct Actor {
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
     /* 0x436 */ s16 hudElementDataIndex;
     /* 0x438 */ s32 unk_438[2]; /* ??? see FUN_80253974 */
-    /* 0x440 */ struct HudElement* ptrDefuffIcon;
+    /* 0x440 */ struct HudElement* debuffIcon;
 } Actor; // size = 0x444
 
 typedef struct BackgroundHeader {
