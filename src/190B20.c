@@ -3579,7 +3579,7 @@ void btl_appendGfx_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 righ
     gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 }
 
-void btl_draw_prim_quad(s32 r, s32 g, s32 b, s32 a, s32 left, s32 top, s32 arg6, s32 arg7) {
+void btl_draw_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 arg6, u16 arg7) {
     u16 right = left + arg6;
     u16 bottom = top + arg7;
 

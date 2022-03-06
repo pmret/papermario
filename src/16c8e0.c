@@ -23,8 +23,10 @@ extern HudScript HudScript_HPDigit7;
 extern HudScript HudScript_HPDigit8;
 extern HudScript HudScript_HPDigit9;
 
-void* bHPDigitHudScripts[] = {
-    HudScript_HPDigit0, HudScript_HPDigit1, HudScript_HPDigit2, HudScript_HPDigit3, HudScript_HPDigit4, HudScript_HPDigit5, HudScript_HPDigit6, HudScript_HPDigit7, HudScript_HPDigit8, HudScript_HPDigit9, NULL, NULL, NULL,
+HudScript* bHPDigitHudScripts[] = {
+    &HudScript_HPDigit0, &HudScript_HPDigit1, &HudScript_HPDigit2, &HudScript_HPDigit3, &HudScript_HPDigit4,
+    &HudScript_HPDigit5, &HudScript_HPDigit6, &HudScript_HPDigit7, &HudScript_HPDigit8, &HudScript_HPDigit9,
+    NULL, NULL, NULL,
 };
 
 s32 D_80280A30 = 0xFF;
@@ -191,23 +193,23 @@ void initialize_battle(void) {
     func_8024EDC0();
     func_80268E88();
     set_windows_visible(WINDOW_GROUP_1);
-    D_8029EFBC = create_hud_element(HudScript_HPBar);
+    D_8029EFBC = create_hud_element(&HudScript_HPBar);
     set_hud_element_flags(D_8029EFBC, 0x80);
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFC0); i++) {
-        hudElemID = D_8029EFC0[i] = create_hud_element(HudScript_Item_StarPoint);
+        hudElemID = D_8029EFC0[i] = create_hud_element(&HudScript_Item_StarPoint);
         set_hud_element_flags(hudElemID, 0x80 | 0x2);
         set_hud_element_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFE8); i++) {
-        hudElemID = D_8029EFE8[i] = create_hud_element(HudScript_StatusSPShine);
+        hudElemID = D_8029EFE8[i] = create_hud_element(&HudScript_StatusSPShine);
         set_hud_element_flags(hudElemID, 0x80 | 0x2);
         set_hud_element_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029F010); i++) {
-        hudElemID = D_8029F010[i] = create_hud_element(HudScript_Item_SmallStarPoint);
+        hudElemID = D_8029F010[i] = create_hud_element(&HudScript_Item_SmallStarPoint);
         set_hud_element_flags(hudElemID, 0x80 | 0x2);
         set_hud_element_render_depth(hudElemID, 20);
     }
@@ -449,8 +451,8 @@ void btl_update(void) {
                     }
                 }
             } else if (D_802809F6 == 0xFF) {
-                if (gBattleState != 0x23) {
-                    btl_set_state(0x23);
+                if (gBattleState != BATTLE_STATE_END_DEMO_BATTLE) {
+                    btl_set_state(BATTLE_STATE_END_DEMO_BATTLE);
                 }
             } else {
                 D_802809F6 += 10;
@@ -467,7 +469,140 @@ void btl_update(void) {
     }
 }
 
-INCLUDE_ASM(s32, "16c8e0", btl_draw_ui);
+void btl_draw_ui(void) {
+    s32 cond = FALSE;
+    s32 state;
+
+    do { } while (0); // TODO required to match (probably can be removed with some sort of control flow inversion)
+
+    state = gBattleState;
+    if (gBattleState != D_800DC4D0) {
+        state = D_800DC4D0;
+        D_800DC4D0 = gBattleState;
+        cond = TRUE;
+    } else {
+        if (gBattleState == BATTLE_STATE_NEGATIVE_1) {
+            btl_update_starpoints_display();
+            btl_draw_enemy_health_bars();
+            draw_status_ui();
+            return;
+        } else if (gBattleState == BATTLE_STATE_0) {
+            return;
+        }
+    }
+
+    btl_update_starpoints_display();
+    btl_draw_enemy_health_bars();
+
+    if (!cond) {
+        switch (state) {
+            case BATTLE_STATE_NORMAL_START:
+                btl_state_draw_normal_start();
+                break;
+            case BATTLE_STATE_BEGIN_PLAYER_TURN:
+                btl_state_draw_begin_player_turn();
+                break;
+            case BATTLE_STATE_BEGIN_PARTNER_TURN:
+                btl_state_draw_begin_partner_turn();
+                break;
+            case BATTLE_STATE_9:
+                func_80243910();
+                break;
+            case BATTLE_STATE_BEGIN_TURN:
+                btl_state_draw_begin_turn();
+                break;
+            case BATTLE_STATE_END_TURN:
+                btl_state_draw_end_turn();
+                break;
+            case BATTLE_STATE_SWITCH_TO_PLAYER:
+                btl_state_draw_switch_to_player();
+                break;
+            case BATTLE_STATE_SWITCH_TO_PARTNER:
+                btl_state_draw_switch_to_partner();
+                break;
+            case BATTLE_STATE_PREPARE_MENU:
+                btl_state_draw_prepare_menu();
+                break;
+            case BATTLE_STATE_PLAYER_MENU:
+                btl_state_draw_player_menu();
+                break;
+            case BATTLE_STATE_PARTNER_MENU:
+                btl_state_draw_partner_menu();
+                break;
+            case BATTLE_STATE_TWINK_MENU:
+                btl_state_draw_twink_menu();
+                break;
+            case BATTLE_STATE_PEACH_MENU:
+                btl_state_draw_peach_menu();
+                break;
+            case BATTLE_STATE_SELECT_TARGET:
+                btl_state_draw_select_target();
+                break;
+            case BATTLE_STATE_PLAYER_MOVE:
+                btl_state_draw_player_move();
+                break;
+            case BATTLE_STATE_FIRST_STRIKE:
+                btl_state_draw_first_stike();
+                break;
+            case BATTLE_STATE_END_PLAYER_TURN:
+                btl_state_draw_end_player_turn();
+                break;
+            case BATTLE_STATE_END_PARTNER_TURN:
+                btl_state_draw_end_partner_turn();
+                break;
+            case BATTLE_STATE_PARTNER_FIRST_STRIKE:
+                btl_state_draw_partner_striking_first();
+                break;
+            case BATTLE_STATE_ENEMY_MOVE:
+                btl_state_draw_enemy_move();
+                break;
+            case BATTLE_STATE_NEXT_ENEMY:
+                btl_state_draw_next_enemy();
+                break;
+            case BATTLE_STATE_PARTNER_MOVE:
+                btl_state_draw_partner_move();
+                break;
+            case BATTLE_STATE_VICTORY:
+                btl_state_draw_victory();
+                break;
+            case BATTLE_STATE_END_BATTLE:
+                btl_state_draw_end_battle();
+                break;
+            case BATTLE_STATE_CHANGE_PARTNER:
+                btl_state_draw_change_partner();
+                break;
+            case BATTLE_STATE_RUN_AWAY:
+                btl_state_draw_run_away();
+                break;
+            case BATTLE_STATE_DEFEND:
+                btl_state_draw_defend();
+                break;
+            case BATTLE_STATE_DEFEAT:
+                btl_state_draw_defeat();
+                break;
+            case BATTLE_STATE_28:
+                btl_state_draw_1C();
+                break;
+            case BATTLE_STATE_END_TRAINING_BATTLE:
+                btl_state_draw_end_training_battle();
+                break;
+            case BATTLE_STATE_ENEMY_FIRST_STRIKE:
+                btl_state_draw_enemy_striking_first();
+                break;
+            case BATTLE_STATE_34:
+                btl_state_draw_22();
+                break;
+            case BATTLE_STATE_CELEBRATION:
+                btl_state_draw_celebration();
+                break;
+            case BATTLE_STATE_END_DEMO_BATTLE:
+                btl_state_draw_end_demo_battle();
+                break;
+        }
+    }
+    btl_draw_popup_messages();
+    draw_status_ui();
+}
 
 void func_8023ED5C(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -476,15 +611,15 @@ void func_8023ED5C(void) {
     Actor* actor;
     s32 i;
 
-    if (gBattleState != 0) {
+    if (gBattleState != BATTLE_STATE_0) {
         func_8024EEA8();
         if (battleStatus->initBattleCallback != NULL) {
             battleStatus->initBattleCallback();
         }
-        if (battleStatus->flags1 & 1) {
+        if (battleStatus->flags1 & BS_FLAGS1_1) {
             func_80255FD8();
 
-            if (gCurrentCamID == 1 || gCurrentCamID == 2) {
+            if (gCurrentCamID == CAM_BATTLE || gCurrentCamID == CAM_TATTLE) {
                 for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
                     actor = battleStatus->enemyActors[i];
 
@@ -499,7 +634,7 @@ void func_8023ED5C(void) {
                             renderTaskPtr->appendGfxArg = actor;
                             renderTaskPtr->appendGfx = func_8025595C;
                             renderTaskPtr->distance = actor->currentPos.z;
-                            renderTaskPtr->renderMode = 0x22;
+                            renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                             queue_render_task(renderTaskPtr);
                         }
 
@@ -525,7 +660,7 @@ void func_8023ED5C(void) {
                         renderTaskPtr->appendGfxArg = actor;
                         renderTaskPtr->appendGfx = func_8025599C;
                         renderTaskPtr->distance = actor->currentPos.z;
-                        renderTaskPtr->renderMode = 0x22;
+                        renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                         queue_render_task(renderTaskPtr);
                     }
 
@@ -550,7 +685,7 @@ void func_8023ED5C(void) {
                         renderTaskPtr->appendGfxArg = actor;
                         renderTaskPtr->appendGfx = func_80254C50;
                         renderTaskPtr->distance = actor->currentPos.z;
-                        renderTaskPtr->renderMode = 0x22;
+                        renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                         queue_render_task(renderTaskPtr);
                     }
 
@@ -569,14 +704,12 @@ void func_8023ED5C(void) {
 
 u16 func_8023F060(u16 arg0, s32 arg1, s32 arg2) {
     s32 temp_lo;
-    s32 phi_v0;
 
-    temp_lo = (arg1 - (arg0)) * arg2;
-    phi_v0 = temp_lo;
+    temp_lo = (arg1 - arg0) * arg2;
     if (temp_lo < 0) {
-        phi_v0 = temp_lo + 0xFF;
+        temp_lo += 0xFF;
     }
-    return (arg0 + (phi_v0 >> 8));
+    return (arg0 + (temp_lo >> 8));
 }
 
 INCLUDE_ASM(s32, "16c8e0", func_8023F088);
@@ -585,7 +718,90 @@ void func_8023FF84(Camera* camera) {
     show_foreground_models_unchecked();
 }
 
-INCLUDE_ASM(s32, "16c8e0", btl_draw_enemy_health_bars);
+void btl_draw_enemy_health_bars(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+
+    if (gGameStatusPtr->unk_7C != 0) {
+        if (gBattleStatus.flags1 & BS_FLAGS1_1) {
+            s32 i;
+
+            for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                Actor* enemy = battleStatus->enemyActors[i];
+
+                if (enemy != NULL) {
+                    s32 currentHP;
+                    s32 temp;
+                    s32 ones;
+
+                    currentHP = enemy->currentHP;
+                    temp = (currentHP * 25) / enemy->maxHP;
+
+                    if (temp < enemy->hpFraction) {
+                        enemy->hpFraction -= 2;
+                        if (enemy->hpFraction < temp) {
+                            enemy->hpFraction = temp;
+                        }
+                    }
+
+                    if (enemy->hpFraction < temp) {
+                        enemy->hpFraction += 2;
+                        if (enemy->hpFraction > temp) {
+                            enemy->hpFraction = temp;
+                        }
+                    }
+
+                    if (!(enemy->flags & (ACTOR_FLAG_40000 | ACTOR_FLAG_TARGET_ONLY)) &&
+                        ((gBattleStatus.flags1 & 2) || (enemy->flags & ENEMY_FLAGS_80000)) &&
+                        is_actor_hp_bar_visible(enemy))
+                    {
+                        f32 x = enemy->healthBarPosition.x;
+                        f32 y = enemy->healthBarPosition.y;
+                        f32 z = enemy->healthBarPosition.z;
+
+                        if (enemy->healthBarPosition.y >= -500) {
+                            s32 screenX, screenY, screenZ;
+                            s32 id;
+
+                            get_screen_coords(1, x, y, z, &screenX, &screenY, &screenZ);
+                            screenY += 16;
+                            id = D_8029EFBC;
+                            set_hud_element_render_depth(id, 10);
+                            set_hud_element_anim(id, &HudScript_HPBar);
+                            set_hud_element_render_pos(id, screenX, screenY);
+                            draw_hud_element_clipped(id);
+
+                            temp = currentHP / 10;
+                            ones = currentHP % 10;
+
+                            // tens digit
+                            if (temp > 0) {
+                                id = D_8029EFBC;
+                                set_hud_element_render_depth(id, 10);
+                                set_hud_element_anim(id, bHPDigitHudScripts[temp]);
+                                btl_draw_prim_quad(0, 0, 0, 0, screenX, screenY + 2, 8, 8);
+                                set_hud_element_render_pos(id, screenX + 4, screenY + 6);
+                                draw_hud_element_2(id);
+                            }
+
+                            // ones digit
+                            id = D_8029EFBC;
+                            set_hud_element_render_depth(id, 10);
+                            set_hud_element_anim(id, bHPDigitHudScripts[ones]);
+                            btl_draw_prim_quad(0, 0, 0, 0, screenX + 6, screenY + 2, 8, 8);
+                            set_hud_element_render_pos(id, screenX + 10, screenY + 6);
+                            draw_hud_element_2(id);
+
+                            temp = enemy->hpFraction;
+                            temp = 25 - temp;
+                            btl_draw_prim_quad(168, 0, 0, 255, screenX + 11 - temp, screenY - 7, temp, 1);
+                            btl_draw_prim_quad(255, 0, 0, 255, screenX + 11 - temp, screenY - 6, temp, 4);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "16c8e0", btl_update_starpoints_display);
 
@@ -721,7 +937,7 @@ void btl_delete_player_actor(Actor* player) {
 
     delete_shadow(player->shadow.id);
     remove_all_status_icons(player->hudElementDataIndex);
-    remove_effect(player->ptrDefuffIcon);
+    remove_effect(player->ptrDefuffIcon); // ???
 
     if (player->unk_200 != NULL) {
         player->unk_200[3][9] = 0;

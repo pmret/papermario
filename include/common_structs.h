@@ -1849,7 +1849,7 @@ typedef struct Actor {
     /* 0x1B8 */ s8 currentHP;
     /* 0x1B9 */ s8 maxHP;
     /* 0x1BA */ char unk_1BA[2];
-    /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
+    /* 0x1BC */ s8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
     /* 0x1C0 */ EvtScript* idleScriptSource;
     /* 0x1C4 */ EvtScript* takeTurnScriptSource;
