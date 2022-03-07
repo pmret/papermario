@@ -6,7 +6,6 @@ extern SaveMetadata D_800779C4[4];
 extern u8 D_80077A24[4];
 extern s8* D_80249E20[14];
 extern MenuWindowBP D_80249EA0[14];
-extern s8 D_8024C098;
 
 void filemenu_draw_contents_title(
     MenuPanel* menu,
@@ -153,7 +152,7 @@ void filemenu_draw_contents_file_title(
     s32 width, s32 height,
     s32 opacity, s32 darkening)
 {
-    if (D_8024C098 == 0 && menu->selected == fileIdx) {
+    if (filemenu_8024C098 == 0 && menu->selected == fileIdx) {
         filemenu_set_cursor_goal_pos(fileIdx + 60, baseX - 3, baseY + 8);
     }
 

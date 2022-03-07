@@ -4,11 +4,7 @@
 
 extern MenuWindowBP D_8024A134[1];
 
-extern s32 filemenu_iterFileIdx;
-extern s32 filemenu_pressedButtons;
 extern s8 D_8024C090;
-extern s32 filemenu_loadedFileIdx;
-extern s8 D_8024C098;
 extern s32 D_8024C100_C09980[3];
 extern s32 D_8024C110;
 
@@ -49,15 +45,15 @@ void filemenu_info_draw_message_contents(MenuPanel* menu, s32 baseX, s32 baseY) 
     filemenu_set_cursor_alpha(0);
 }
 
-void filemenu_info_init(s8* tab) {
+void filemenu_info_init(MenuPanel* tab) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_8024A134); i++) {
         D_8024A134[i].tab = tab;
     }
 
-    setup_pause_menu_tab(D_8024A134, 1);
-    *tab = 1;
+    setup_pause_menu_tab(D_8024A134, ARRAY_COUNT(D_8024A134));
+    tab->initialized = TRUE;
 }
 
 void filemenu_info_handle_input(void) {
@@ -65,7 +61,7 @@ void filemenu_info_handle_input(void) {
         MenuPanel* menu = filemenu_menus[0];
         s32 page;
 
-        D_8024C098 = 0;
+        filemenu_8024C098 = 0;
         page = menu->page;
 
         switch(page) {
@@ -129,7 +125,7 @@ void filemenu_draw_contents_file_create_header(MenuPanel* menu, s32 baseX, s32 b
     }
 
     tempAmt = 8;
-    if (D_8024C098 == 3) {
+    if (filemenu_8024C098 == 3) {
         s32 phi_v0 = 122;
 
         if (D_8024C090 != tempAmt) {
