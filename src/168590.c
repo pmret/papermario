@@ -6,7 +6,6 @@ extern MenuWindowBP D_8024A134[1];
 
 extern s8 D_8024C090;
 extern s32 D_8024C100_C09980[3];
-extern s32 D_8024C110;
 
 void filemenu_update_show_options_left(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
                                        f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
@@ -112,7 +111,7 @@ void filemenu_draw_contents_file_create_header(MenuPanel* menu, s32 baseX, s32 b
     s32 tempAmt;
 
     filemenu_draw_message(filemenu_get_menu_message(0x20), baseX + 10, baseY + 6, 255, 0, 0);
-    filemenu_draw_file_name(&D_8024C110, 8, baseX + 36, baseY + 22, 255, 0, 0, 0xB);
+    filemenu_draw_file_name(filemenu_8024C110, 8, baseX + 36, baseY + 22, 255, 0, 0, 0xB);
     xOffset = 41;
 
     for (i = 0; i < 8; i++) {

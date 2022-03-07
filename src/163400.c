@@ -66,7 +66,8 @@ BSS s32 filemenu_8024C09C;
 BSS s32 filemenu_cursorHudElemID[1];
 BSS s32 filemenu_8024C0A4[3];
 BSS s32 filemenu_hudElemIDs[20];
-BSS s32 filemenu_8024C100[8];
+BSS s32 filemenu_8024C100[4];
+BSS u8 filemenu_8024C110[8];
 
 s32 func_80244BC4(void);
 

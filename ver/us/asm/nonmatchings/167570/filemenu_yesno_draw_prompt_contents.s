@@ -133,8 +133,8 @@ glabel filemenu_yesno_draw_prompt_contents
 /* 167858 80246FF8 0C09265F */  jal       filemenu_draw_message
 /* 16785C 80246FFC AFA00014 */   sw       $zero, 0x14($sp)
 /* 167860 80247000 24110007 */  addiu     $s1, $zero, 7
-/* 167864 80247004 3C048025 */  lui       $a0, %hi(D_8024C110)
-/* 167868 80247008 2484C110 */  addiu     $a0, $a0, %lo(D_8024C110)
+/* 167864 80247004 3C048025 */  lui       $a0, %hi(filemenu_8024C110)
+/* 167868 80247008 2484C110 */  addiu     $a0, $a0, %lo(filemenu_8024C110)
 /* 16786C 8024700C 240300F7 */  addiu     $v1, $zero, 0xf7
 /* 167870 80247010 02241021 */  addu      $v0, $s1, $a0
 .L80247014:

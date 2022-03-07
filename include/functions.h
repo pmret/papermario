@@ -190,6 +190,8 @@ s32 disable_player_input(void);
 void func_80027088(s32);
 void set_time_freeze_mode(s32);
 
+
+
 s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID);
 
 void get_dpad_input_radial(f32* angle, f32* magnitude);

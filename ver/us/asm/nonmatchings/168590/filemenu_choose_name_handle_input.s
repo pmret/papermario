@@ -211,8 +211,8 @@ glabel filemenu_choose_name_handle_input
 /* 169730 80248ED0 00000000 */   nop
 .L80248ED4_169734:
 /* 169734 80248ED4 0000182D */  daddu     $v1, $zero, $zero
-/* 169738 80248ED8 3C058025 */  lui       $a1, %hi(D_8024C110)
-/* 16973C 80248EDC 24A5C110 */  addiu     $a1, $a1, %lo(D_8024C110)
+/* 169738 80248ED8 3C058025 */  lui       $a1, %hi(filemenu_8024C110)
+/* 16973C 80248EDC 24A5C110 */  addiu     $a1, $a1, %lo(filemenu_8024C110)
 /* 169740 80248EE0 240400F7 */  addiu     $a0, $zero, 0xf7
 /* 169744 80248EE4 00651021 */  addu      $v0, $v1, $a1
 .L80248EE8:
@@ -295,9 +295,9 @@ glabel filemenu_choose_name_handle_input
 .L80249004:
 /* 169864 80249004 92020003 */  lbu       $v0, 3($s0)
 .L80249008:
-/* 169868 80249008 3C018025 */  lui       $at, %hi(D_8024C110)
+/* 169868 80249008 3C018025 */  lui       $at, %hi(filemenu_8024C110)
 /* 16986C 8024900C 00230821 */  addu      $at, $at, $v1
-/* 169870 80249010 A022C110 */  sb        $v0, %lo(D_8024C110)($at)
+/* 169870 80249010 A022C110 */  sb        $v0, %lo(filemenu_8024C110)($at)
 /* 169874 80249014 90820000 */  lbu       $v0, ($a0)
 /* 169878 80249018 24420001 */  addiu     $v0, $v0, 1
 /* 16987C 8024901C A0820000 */  sb        $v0, ($a0)
@@ -397,8 +397,8 @@ glabel filemenu_choose_name_handle_input
 /* 1699E4 80249184 28620008 */  slti      $v0, $v1, 8
 /* 1699E8 80249188 1040000A */  beqz      $v0, .L802491B4
 /* 1699EC 8024918C 00000000 */   nop
-/* 1699F0 80249190 3C058025 */  lui       $a1, %hi(D_8024C110)
-/* 1699F4 80249194 24A5C110 */  addiu     $a1, $a1, %lo(D_8024C110)
+/* 1699F0 80249190 3C058025 */  lui       $a1, %hi(filemenu_8024C110)
+/* 1699F4 80249194 24A5C110 */  addiu     $a1, $a1, %lo(filemenu_8024C110)
 /* 1699F8 80249198 240400F7 */  addiu     $a0, $zero, 0xf7
 /* 1699FC 8024919C 00651021 */  addu      $v0, $v1, $a1
 .L802491A0:
@@ -413,8 +413,8 @@ glabel filemenu_choose_name_handle_input
 /* 169A1C 802491BC 30421000 */  andi      $v0, $v0, 0x1000
 /* 169A20 802491C0 10400053 */  beqz      $v0, .L80249310
 /* 169A24 802491C4 0000182D */   daddu    $v1, $zero, $zero
-/* 169A28 802491C8 3C058025 */  lui       $a1, %hi(D_8024C110)
-/* 169A2C 802491CC 24A5C110 */  addiu     $a1, $a1, %lo(D_8024C110)
+/* 169A28 802491C8 3C058025 */  lui       $a1, %hi(filemenu_8024C110)
+/* 169A2C 802491CC 24A5C110 */  addiu     $a1, $a1, %lo(filemenu_8024C110)
 /* 169A30 802491D0 240400F7 */  addiu     $a0, $zero, 0xf7
 /* 169A34 802491D4 00651021 */  addu      $v0, $v1, $a1
 .L802491D8:
