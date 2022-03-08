@@ -186,7 +186,7 @@ void filemenu_draw_contents_file_info(s32 arg0,
 
     draw_number((temp_s3_2 / 2160000) % 10, baseX + 76, baseY + 24, 1, 0xA, 0xFF, 2);
     temp_s1_2 = temp_s3_2 / 216000;
-    draw_number(temp_s1_2 - ((temp_s3_2 / 2160000) * 10), baseX + 0x55, baseY + 24, 1, 0xA, 0xFF, 2);
+    draw_number(temp_s1_2 - ((temp_s3_2 / 2160000) * 10), baseX + 85, baseY + 24, 1, 0xA, 0xFF, 2);
     filemenu_draw_message(filemenu_get_menu_message(0xD), baseX + 95, baseY + 23, 0xFF, 0xA, 1);
     filemenu_draw_message(filemenu_get_menu_message(0xD), baseX + 95, baseY + 18, 0xFF, 0xA, 1);
     temp_s0_3 = temp_s3_2 / 36000;
@@ -205,7 +205,7 @@ void filemenu_draw_contents_file_info(s32 arg0,
         } else {
             draw_hud_element_2(id);
         }
-    };
+    }
 }
 
 void filemenu_draw_contents_file_title(
@@ -366,6 +366,8 @@ void filemenu_main_handle_input(MenuPanel* menu);
 #ifdef NON_EQUIVALENT
 void filemenu_main_handle_input(MenuPanel* menu) {
     s32 originalSelected = menu->selected;
+    s16* posPtr;
+    s32 x, y;
     s32 i;
 
     MenuPanel* temp_a0;
@@ -509,8 +511,8 @@ loop_7:
                     set_window_update(0x3B, filemenu_update_hidden_with_rotation);
                     sfx_play_sound(SOUND_MENU_NEXT);
                     filemenu_8024C098 = 3;
-                    temp_a0 = filemenu_menus[3];
-                    filemenu_menus[3]->page = 0;
+                    temp_a0 = filemenu_menus[filemenu_8024C098];
+                    temp_a0->page = 0;
                     filemenu_set_selected(temp_a0, 0, 0);
                     break;
                 }
@@ -563,22 +565,27 @@ loop_7:
                     gWindows[50].pos.y = 143;
                     gWindows[50].width = 69;
                     gWindows[50].height = 44;
+                    posPtr = &gWindows[50].pos.x;
                     if (gWindows[50].parent != -1) {
-                        gWindows[50].pos.x = (gWindows[gWindows[50].parent].width / 2) - 34;
+                        x = (gWindows[gWindows[50].parent].width / 2) - 34;
                     } else {
-                        gWindows[50].pos.x = 126;
+                        x = 126;
                     }
+                    *posPtr = x;
 
                     gWindows[46].pos.y = -29;
                     gWindows[46].width = 192;
                     gWindows[46].height = 25;
+                    posPtr = &gWindows[46].pos.x;
                     if (gWindows[46].parent != -1) {
-                        gWindows[46].pos.x = (gWindows[gWindows[46].parent].width / 2) - 96;
+                        x = (gWindows[gWindows[46].parent].width / 2) - 96;
                     } else {
-                        gWindows[46].pos.x = 64;
+                        x = 64;
                     }
+                    *posPtr = x;
+
                     filemenu_8024C098 = 1;
-                    temp_a0 = filemenu_menus[1];
+                    temp_a0 = filemenu_menus[filemenu_8024C098];
                     temp_a0->page = 4;
                     filemenu_set_selected(temp_a0, 0, 0);
                 }
@@ -599,23 +606,27 @@ loop_7:
                         gWindows[50].pos.y = 121;
                         gWindows[50].width = 69;
                         gWindows[50].height = 44;
+                        posPtr = &gWindows[50].pos.x;
                         if (gWindows[50].parent != -1) {
-                            gWindows[50].pos.x = (gWindows[gWindows[50].parent].width / 2) - 34;
+                            x = (gWindows[gWindows[50].parent].width / 2) - 34;
                         } else {
-                            gWindows[50].pos.x = 126;
+                            x = 126;
                         }
+                        *posPtr = x;
 
                         gWindows[46].pos.y = -29;
                         gWindows[46].width = 118;
                         gWindows[46].height = 25;
+                        posPtr = &gWindows[46].pos.x;
                         if (gWindows[46].parent != -1) {
-                            gWindows[46].pos.x = (gWindows[gWindows[46].parent].width / 2) - 59;
+                            x = (gWindows[gWindows[46].parent].width / 2) - 59;
                         } else {
-                            gWindows[46].pos.x = 101;
+                            x = 101;
                         }
+                        *posPtr = x;
 
                         filemenu_8024C098 = 1;
-                        temp_a0 = filemenu_menus[1];
+                        temp_a0 = filemenu_menus[filemenu_8024C098];
                         temp_a0->page = 0;
                         filemenu_set_selected(temp_a0, 0, 1);
                     } else {
@@ -655,27 +666,32 @@ loop_7:
                         if (D_80077A24[menu->selected] == 0) {
                             sfx_play_sound(SOUND_MENU_NEXT);
                             filemenu_8024C098 = 2;
-                            filemenu_menus[2]->page = 2;
+                            filemenu_menus[filemenu_8024C098]->page = 2;
+
                             gWindows[47].width = 154;
                             gWindows[47].height = 39;
+                            posPtr = &gWindows[47].pos.x;
                             if (gWindows[47].parent != -1) {
-                                gWindows[47].pos.x = (gWindows[gWindows[47].parent].width / 2) - 77;
+                                x = (gWindows[gWindows[47].parent].width / 2) - 77;
                             } else {
-                                gWindows[47].pos.x = 83;
+                                x = 83;
                             }
+                            *posPtr = x;
 
                             temp_a1_2 = gWindows[47].height / 2;
+                            posPtr = &gWindows[47].pos.y;
                             if (gWindows[47].parent != -1) {
-                                gWindows[47].pos.y = (gWindows[gWindows[47].parent].height / 2) - temp_a1_2;
+                                y = (gWindows[gWindows[47].parent].height / 2) - temp_a1_2;
                             } else {
-                                gWindows[47].pos.y = 120 - temp_a1_2;
+                                y = 120 - temp_a1_2;
                             }
+                            *posPtr = y;
 
                             set_window_update(0x2F, 1);
                             set_window_update(0x32, 2);
                             fio_load_game(filemenu_loadedFileIdx);
                             D_800779C4[filemenu_iterFileIdx] = D_800779C4[filemenu_loadedFileIdx];
-                            fio_save_game(filemenu_iterFileIdx, filemenu_loadedFileIdx, &D_800779C4);
+                            fio_save_game(filemenu_iterFileIdx, filemenu_loadedFileIdx, D_800779C4);
                             D_80077A24[filemenu_iterFileIdx] = 1;
                         } else {
                             sfx_play_sound(SOUND_MENU_NEXT);
@@ -683,23 +699,27 @@ loop_7:
                             gWindows[50].pos.y = 121;
                             gWindows[50].width = 69;
                             gWindows[50].height = 44;
+                            posPtr = &gWindows[50].pos.x;
                             if (gWindows[50].parent != -1) {
-                                gWindows[50].pos.x = (gWindows[gWindows[50].parent].width / 2) - 34;
+                                x = (gWindows[gWindows[50].parent].width / 2) - 34;
                             } else {
-                                gWindows[50].pos.x = 126;
+                                x = 126;
                             }
+                            *posPtr = x;
 
                             gWindows[46].pos.y = -43;
                             gWindows[46].width = 182;
                             gWindows[46].height = 39;
+                            posPtr = &gWindows[46].pos.x;
                             if (gWindows[46].parent != -1) {
-                                gWindows[46].pos.x = (gWindows[gWindows[46].parent].width / 2) - 91;
+                                x = (gWindows[gWindows[46].parent].width / 2) - 91;
                             } else {
-                                gWindows[46].pos.x = 69;
+                                x = 69;
                             }
+                            *posPtr = x;
 
                             filemenu_8024C098 = 1;
-                            temp_a0 = filemenu_menus[1];
+                            temp_a0 = filemenu_menus[filemenu_8024C098];
                             temp_a0->page = 3;
                             filemenu_set_selected(temp_a0, 0, 1);
                         }
@@ -714,7 +734,7 @@ loop_7:
                     if (D_80077A24[menu->selected] == 0) {
                         sfx_play_sound(SOUND_MENU_NEXT);
                         filemenu_8024C098 = 2;
-                        filemenu_menus[2]->page = 1;
+                        filemenu_menus[filemenu_8024C098]->page = 1;
                         set_window_update(0x2C, main_menu_window_update);
                         set_window_update(0x2F, 1);
                         set_window_update(0x32, 2);
@@ -726,22 +746,27 @@ loop_7:
                         gWindows[50].pos.y = 127;
                         gWindows[50].width = 69;
                         gWindows[50].height = 44;
+                        posPtr = &gWindows[50].pos.x;
                         if (gWindows[50].parent != -1) {
-                            gWindows[50].pos.x = (gWindows[gWindows[50].parent].width / 2) - 34;
+                            x = (gWindows[gWindows[50].parent].width / 2) - 34;
                         } else {
-                            gWindows[50].pos.x = 126;
+                            x = 126;
                         }
+                        *posPtr = x;
 
                         gWindows[46].pos.y = -50;
                         gWindows[46].width = 148;
                         gWindows[46].height = 38;
+                        posPtr = &gWindows[46].pos.x;
                         if (gWindows[46].parent != -1) {
-                            gWindows[46].pos.x = (gWindows[gWindows[46].parent].width / 2) - 74;
+                            x = (gWindows[gWindows[46].parent].width / 2) - 74;
                         } else {
-                            gWindows[46].pos.x = 86;
+                            x = 86;
                         }
+                        *posPtr = x;
+
                         filemenu_8024C098 = 1;
-                        temp_a0 = filemenu_menus[1];
+                        temp_a0 = filemenu_menus[filemenu_8024C098];
                         temp_a0->page = 1;
                         filemenu_set_selected(temp_a0, 0, 1);
                     }
@@ -817,8 +842,6 @@ loop_7:
 #else
 INCLUDE_ASM(s32, "165490", filemenu_main_handle_input);
 #endif
-
-extern s32 gWindowStyles[];
 
 INCLUDE_ASM(s32, "165490", filemenu_main_update);
 

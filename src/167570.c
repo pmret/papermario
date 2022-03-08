@@ -3,9 +3,106 @@
 
 extern MenuWindowBP D_8024A0CC[2];
 
-INCLUDE_ASM(s32, "167570", filemenu_yesno_draw_options_contents);
+void filemenu_yesno_draw_options_contents(MenuPanel* tab, s32 posX, s32 posY) {
+    s32 xOffset1;
+    s32 yOffset1;
+    s32 xOffset2;
+    s32 yOffset2;
+    s32 cursorGoalXOffset;
+    s32 cursorGoalYOffset;
 
-INCLUDE_ASM(s32, "167570", filemenu_yesno_draw_prompt_contents);
+    switch (tab->page) {
+        case 0:
+            xOffset1 = 28;
+            yOffset1 = 4;
+            xOffset2 = 28;
+            yOffset2 = 21;
+            break;
+        case 1:
+            xOffset1 = 28;
+            yOffset1 = 4;
+            xOffset2 = 28;
+            yOffset2 = 21;
+            break;
+        case 2:
+            xOffset1 = 28;
+            yOffset1 = 4;
+            xOffset2 = 28;
+            yOffset2 = 21;
+            break;
+        case 3:
+            xOffset1 = 28;
+            yOffset1 = 4;
+            xOffset2 = 28;
+            yOffset2 = 21;
+            break;
+        case 4:
+            xOffset1 = 28;
+            yOffset1 = 4;
+            xOffset2 = 28;
+            yOffset2 = 21;
+            break;
+    }
+
+    filemenu_draw_message(filemenu_get_menu_message(0xE), posX + xOffset1, posY + yOffset1, 0xFF, 0, 0);
+    filemenu_draw_message(filemenu_get_menu_message(0xF), posX + xOffset2, posY + yOffset2, 0xFF, 0, 0);
+
+    if (filemenu_8024C098 == 1) {
+        if (tab->selected == 0) {
+            cursorGoalXOffset = xOffset1 - 10;
+            cursorGoalYOffset = yOffset1 + 8;
+        } else {
+            cursorGoalXOffset = xOffset2 - 10;
+            cursorGoalYOffset = yOffset2 + 8;
+        }
+        filemenu_set_cursor_goal_pos(0x32, posX + cursorGoalXOffset, posY + cursorGoalYOffset);
+    }
+}
+
+void filemenu_yesno_draw_prompt_contents(MenuPanel* tab, s32 posX, s32 posY) {
+    s32 xOffset;
+    s32 i;
+
+    switch (tab->page) {
+        case 0:
+            filemenu_draw_message(filemenu_get_menu_message(0x10), posX + 10, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(0x16), posX + 60, posY + 4, 0xFF, 0, 0);
+            draw_number(filemenu_menus[0]->selected + 1, posX + 98, posY + 6, 0, 0, 0xFF, 3);
+            filemenu_draw_message(filemenu_get_menu_message(0x21), posX + 99, posY + 4, 0xFF, 0, 0);
+            break;
+        case 3:
+            filemenu_draw_message(filemenu_get_menu_message(0x16), posX + 10, posY + 4, 0xFF, 0, 0);
+            draw_number(filemenu_menus[0]->selected + 1, posX + 48, posY + 6, 0, 0, 0xFF, 3);
+            filemenu_draw_message(filemenu_get_menu_message(0x17), posX + 49, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(0x18), posX + 10, posY + 18, 0xFF, 0, 0);
+            break;
+        case 1:
+            filemenu_draw_message(filemenu_get_menu_message(0x11), posX + 10, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(0x12), posX + 10, posY + 18, 0xFF, 0, 0);
+            break;
+        case 2:
+            filemenu_draw_message(filemenu_get_menu_message(0x13), posX + 10, posY + 6, 0xFF, 0, 0);
+
+            for (i = ARRAY_COUNT(filemenu_8024C110) - 1; i >= 0; i--) {
+                if (filemenu_8024C110[i] != 0xF7) {
+                    break;
+                }
+            }
+
+            xOffset = (147 - (i * 11)) / 2;
+            filemenu_draw_file_name(&filemenu_8024C110, i + 1, posX + xOffset, posY + 22, 0xFF, 0, 8, 0xB);
+            xOffset += (i + 1) * 11;
+            filemenu_draw_message(filemenu_get_menu_message(0x14), posX + xOffset, posY + 22, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(0x15), posX + 70, posY + 38, 0xFF, 0, 0);
+            break;
+        case 4:
+            filemenu_draw_message(filemenu_get_menu_message(0x19), posX + 10, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(0x16), posX + 127, posY + 4, 0xFF, 0, 0);
+            draw_number(filemenu_menus[0]->selected + 1, posX + 165, posY + 6, 0, 0, 0xFF, 3);
+            filemenu_draw_message(filemenu_get_menu_message(0x21), posX + 162, posY + 4, 0xFF, 0, 0);
+            break;
+    }
+}
 
 void filemenu_yesno_init(MenuPanel* tab) {
     s32 i;
@@ -17,6 +114,8 @@ void filemenu_yesno_init(MenuPanel* tab) {
     setup_pause_menu_tab(D_8024A0CC, ARRAY_COUNT(D_8024A0CC));
     tab->initialized = TRUE;
 }
+
+static const f32 padding = 0.0f;
 
 INCLUDE_ASM(s32, "167570", filemenu_yesno_handle_input);
 

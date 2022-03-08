@@ -93,8 +93,8 @@ void pause_cleanup(void);
 void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row);
 void filemenu_set_cursor_alpha(s32 arg0);
 void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);
-s8* filemenu_get_menu_message(s32 idx);
-void filemenu_draw_message(s8*, s32 posX, s32 posY, s32 alpha, s32 color, s32 flags);
+Message* filemenu_get_menu_message(s32 idx);
+void filemenu_draw_message(Message*, s32 posX, s32 posY, s32 alpha, s32 color, s32 flags);
 
 void update_enemy_shadows(void);
 void update_hero_shadows(void);
