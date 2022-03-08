@@ -32,7 +32,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80240C18_DCD8E8);
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80241AE0_DCE7B0);
+#include "world/common/UnkNpcAIMainFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80241DDC_DCEAAC);
 

@@ -25,7 +25,7 @@ static char* N(exit_str_1) = "";
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80240B94_A875E4);
+#include "world/common/UnkNpcAIMainFunc.inc.c"
 
 #include "world/common/set_script_owner_npc_anim.inc.c"
 

@@ -32,6 +32,6 @@
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_02/9A10C0", func_80241448_9A2428);
+#include "world/common/UnkNpcAIMainFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_trd/trd_02/9A10C0", func_80241744_9A2724);

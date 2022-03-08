@@ -291,7 +291,7 @@ def do_cross_query():
                     cluster.append(sym_name)
 
                 if cluster_first.startswith("func"):
-                    ccount[cluster_first] += 1
+                    ccount[cluster_first] += len(sym_bytes[cluster_first][0])
 
                 #if len(cluster) % 10 == 0 and len(cluster) >= 10:
                 print(f"Cluster {cluster_first} grew to size {len(cluster)} - {sym_name}: {str(cluster_score)}")
@@ -316,11 +316,11 @@ if __name__ == "__main__":
     rom_bytes = read_rom()
     map_syms = parse_map(os.path.join(root_dir, "ver", "current", "build", "papermario.map"))
     map_offsets = get_map_offsets(map_syms)
-    
+
     s_files = get_all_s_files()
-    
+
     query_dir = find_dir(args.query)
-    
+
     if query_dir is not None:
         files = os.listdir(query_dir)
         for f_name in files:
