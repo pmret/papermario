@@ -58,7 +58,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024268C_DCF35C);
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802428B4_DCF584);
+#include "world/common/UnkFunc54.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80242DF0_DCFAC0);
 
