@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_09/A4F0A0", func_802403D4_A4F3D4);
 
 #include "world/common/UnkFunc54.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_09/A4F0A0", func_80240B38_A4FB38);
+#include "world/common/UnkFunc55.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_09/A4F0A0", func_80240F94_A4FF94);
 

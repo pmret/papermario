@@ -22,7 +22,7 @@ ApiStatus N(UnkFunc54)(Evt* script, s32 isInitialCall) {
 
     if (get_enemy_safe(enemy->npcID) != NULL) {
         if (enemy->varTable[0] != 5) {
-            temp_s5 = evt_get_variable(script, *args++);
+            temp_s5 = (TempStuff*)evt_get_variable(script, *args++);
             npc = get_npc_unsafe(enemy->npcID);
 
             if (enemy->varTable[1] & 2) {
