@@ -24,7 +24,7 @@
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80241614_9D8634);
+#include "world/common/UnkNpcAIMainFunc.inc.c"
 
 static char* N(exit_str_0) = "nok_02";
 static char* N(exit_str_1) = "obk_09";

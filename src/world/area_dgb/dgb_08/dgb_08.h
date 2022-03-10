@@ -7,7 +7,7 @@
 #define NAMESPACE dgb_08
 
 ApiStatus N(UnkFunc1)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80240B94_C40944)(Evt* script, s32 isInitialCall);
+ApiStatus N(UnkNpcAIMainFunc)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc7)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802414AC_C4125C)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802438F0_C436A0)(Evt* script, s32 isInitialCall);

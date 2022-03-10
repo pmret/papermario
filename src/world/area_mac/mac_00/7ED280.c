@@ -22,7 +22,7 @@
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243104_7EDE14);
+#include "world/common/UnkNpcAIMainFunc.inc.c"
 
 static char* N(exit_str_0) = "mac_01";
 
