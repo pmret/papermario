@@ -246,7 +246,7 @@ ApiStatus NpcMoveTo(Evt* script, s32 isInitialCall) {
             return ApiStatus_DONE2;
         }
 
-        script->functionTemp[1] = (s32)npc;
+        script->functionTempNpc[1] = npc;
         npc->moveToPos.x = goalX;
         npc->moveToPos.z = goalZ;
         npc->duration = duration;
@@ -263,7 +263,7 @@ ApiStatus NpcMoveTo(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 1;
     }
 
-    npc = (Npc*)script->functionTemp[1];
+    npc = script->functionTempNpc[1];
     npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
@@ -288,7 +288,7 @@ ApiStatus NpcMoveTo(Evt* script, s32 isInitialCall) {
 
 ApiStatus _npc_jump_to(Evt* script, s32 isInitialCall, s32 snapYaw) {
     Bytecode* args = script->ptrReadPos;
-    f32* yaw = (f32*) &script->functionTemp[2];
+    f32* yaw = &script->functionTempF[2];
     Npc* npc;
 
     if (isInitialCall) {
@@ -309,7 +309,7 @@ ApiStatus _npc_jump_to(Evt* script, s32 isInitialCall, s32 snapYaw) {
             return ApiStatus_DONE2;
         }
 
-        script->functionTemp[1] = (s32)npc;
+        script->functionTempNpc[1] = npc;
         npc->moveToPos.x = goalX;
         npc->moveToPos.y = goalY;
         npc->moveToPos.z = goalZ;
@@ -337,7 +337,7 @@ ApiStatus _npc_jump_to(Evt* script, s32 isInitialCall, s32 snapYaw) {
         script->functionTemp[0] =1;
     }
 
-    npc = (Npc*)script->functionTemp[1];
+    npc = script->functionTempNpc[1];
     npc_move_heading(npc, npc->moveSpeed, *yaw);
 
     npc->pos.y += npc->jumpVelocity;
@@ -379,7 +379,7 @@ ApiStatus NpcFlyTo(Evt* script, s32 isInitialCall) {
             return ApiStatus_DONE2;
         }
 
-        script->functionTemp[1] = (s32)npc;
+        script->functionTempNpc[1] = npc;
         npc->moveToPos.x = evt_get_float_variable(script, *args++);
         npc->moveToPos.y = evt_get_float_variable(script, *args++);
         npc->moveToPos.z = evt_get_float_variable(script, *args++);
@@ -401,7 +401,7 @@ ApiStatus NpcFlyTo(Evt* script, s32 isInitialCall) {
         }
     }
 
-    npc = (Npc*)script->functionTemp[1];
+    npc = script->functionTempNpc[1];
     npc->pos.x = update_lerp(script->functionTemp[3], *outX, npc->moveToPos.x, npc->duration, script->varTable[6]);
     npc->pos.y = update_lerp(script->functionTemp[3], *outY, npc->moveToPos.y, npc->duration, script->varTable[6]);
     npc->pos.z = update_lerp(script->functionTemp[3], *outZ, npc->moveToPos.z, npc->duration, script->varTable[6]);
@@ -466,8 +466,8 @@ ApiStatus SetNpcYaw(Evt* script, s32 isInitialCall) {
 ApiStatus InterpNpcYaw(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
-    f32* initialYaw = (f32*) &script->functionTemp[1];
-    f32* deltaYaw = (f32*) &script->functionTemp[2];
+    f32* initialYaw = &script->functionTempF[1];
+    f32* deltaYaw = &script->functionTempF[2];
     s32* turnTime = &script->functionTemp[3];
     Npc* npc;
 
@@ -481,7 +481,7 @@ ApiStatus InterpNpcYaw(Evt* script, s32 isInitialCall) {
 
         *initialYaw = npc->yaw;
         *deltaYaw = evt_get_variable(script, *args++) - *initialYaw;
-        script->functionTemp[0] = (s32)npc;
+        script->functionTempNpc[0] = npc;
         *turnTime = evt_get_variable(script, *args++);
 
         if (*turnTime == 0) {
@@ -499,7 +499,7 @@ ApiStatus InterpNpcYaw(Evt* script, s32 isInitialCall) {
         }
     }
 
-    npc = (Npc*)script->functionTemp[0];
+    npc = script->functionTempNpc[0];
     if (*turnTime > 0) {
         npc->duration++;
         npc->yaw = *initialYaw + ((*deltaYaw * npc->duration) / *turnTime);
@@ -514,8 +514,8 @@ ApiStatus InterpNpcYaw(Evt* script, s32 isInitialCall) {
 ApiStatus NpcFacePlayer(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
-    f32* initialYaw = (f32*) &script->functionTemp[1];
-    f32* deltaYaw = (f32*) &script->functionTemp[2];
+    f32* initialYaw = &script->functionTempF[1];
+    f32* deltaYaw = &script->functionTempF[2];
     s32* turnTime = &script->functionTemp[3];
     Npc* npc;
 
@@ -529,7 +529,7 @@ ApiStatus NpcFacePlayer(Evt* script, s32 isInitialCall) {
 
         *initialYaw = npc->yaw;
         *deltaYaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z) - *initialYaw;
-        script->functionTemp[0] = (s32)npc;
+        script->functionTempNpc[0] = npc;
         *turnTime = evt_get_variable(script, *args++);
         npc->duration = 0;
 
@@ -541,7 +541,7 @@ ApiStatus NpcFacePlayer(Evt* script, s32 isInitialCall) {
         }
     }
 
-    npc = (Npc*)script->functionTemp[0];
+    npc = script->functionTempNpc[0];
     if (*turnTime > 0) {
         npc->duration++;
         npc->yaw = *initialYaw + ((*deltaYaw * npc->duration) / *turnTime);
@@ -555,8 +555,8 @@ ApiStatus NpcFacePlayer(Evt* script, s32 isInitialCall) {
 
 ApiStatus NpcFaceNpc(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    f32* initialYaw = (f32*) &script->functionTemp[1];
-    f32* deltaYaw = (f32*) &script->functionTemp[2];
+    f32* initialYaw = &script->functionTempF[1];
+    f32* deltaYaw = &script->functionTempF[2];
     s32* turnTime = &script->functionTemp[3];
     Npc* targetNpc;
     Npc* turningNpc;
@@ -577,7 +577,7 @@ ApiStatus NpcFaceNpc(Evt* script, s32 isInitialCall) {
 
         *initialYaw = turningNpc->yaw;
         *deltaYaw = atan2(turningNpc->pos.x, turningNpc->pos.z, targetNpc->pos.x, targetNpc->pos.z) - *initialYaw;
-        script->functionTemp[0] = (s32)turningNpc;
+        script->functionTempNpc[0] = turningNpc;
         *turnTime = evt_get_variable(script, *args++);
         turningNpc->duration = 0;
 
@@ -589,7 +589,7 @@ ApiStatus NpcFaceNpc(Evt* script, s32 isInitialCall) {
         }
     }
 
-    turningNpc = (Npc*)script->functionTemp[0];
+    turningNpc = script->functionTempNpc[0];
     if (*turnTime > 0) {
         turningNpc->duration++;
         turningNpc->yaw = *initialYaw + ((*deltaYaw * turningNpc->duration) / *turnTime);

@@ -141,8 +141,8 @@ typedef struct Npc {
     /* 0x020 */ struct BlurBuffer* blurBuf; ///< Null unless flag 0x100000 is set.
     /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ union {
-    /*       */   u16 h;
-    /*       */   u32 w;
+    /*       */     u16 h;
+    /*       */     u32 w;
     /*       */ } currentAnim;
     /* 0x02C */ s32 unk_2C;
     /* 0x030 */ f32 animationSpeed;
@@ -343,9 +343,19 @@ typedef struct Evt {
     /* 0x064 */ struct Evt* blockingParent; /* parent? */
     /* 0x068 */ struct Evt* childScript;
     /* 0x06C */ struct Evt* parentScript; /* brother? */
-    /* 0x070 */ s32 functionTemp[4];
+    /* 0x070 */ union {
+    /*       */     s32 functionTemp[4];
+    /*       */     f32 functionTempF[4];
+    /*       */     struct Npc* functionTempNpc[4];
+    /*       */     struct Actor* functionTempActor[4];
+    /*       */     struct ActorPart* functionTempActorPart[4];
+    /*       */ };
     /* 0x080 */ ApiFunc callFunction;
-    /* 0x084 */ s32 varTable[16];
+    /* 0x084 */ union {
+    /*       */     s32 varTable[16];
+    /*       */     struct Actor* varTableActor[4];
+    /*       */     struct Enemy* varTableEnemy[4];
+    /*       */ };
     /* 0x0C4 */ s32 varFlags[3];
     /* 0x0D0 */ s32 loopStartTable[8];
     /* 0x0F0 */ s32 loopCounterTable[8];
@@ -1859,8 +1869,8 @@ typedef struct Actor {
     /* 0x1F3 */ s8 numParts;
     /* 0x1F4 */ struct ActorPart* partsTable;
     /* 0x1F8 */ s16 lastDamageTaken;
-    /* 0x1FA */ u16 hpChangeCounter;
-    /* 0x1FC */ s16 damageCounter;
+    /* 0x1FA */ s16 hpChangeCounter;
+    /* 0x1FC */ u16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
     /* 0x204 */ s8 unk_204;

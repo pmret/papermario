@@ -3,7 +3,6 @@
 #include "common.h"
 #include "battle/battle.h"
 
-extern s32 bMarioIdleAnims[];
 extern s32 bMarioHideAnims[];
 
 ApiStatus func_80238000_710EF0(Evt* script, s32 isInitialCall) {

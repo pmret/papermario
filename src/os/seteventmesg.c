@@ -1,4 +1,3 @@
-#include "common.h"
 #include <PR/osint.h>
 
 u32 __osPreNMI = 0;

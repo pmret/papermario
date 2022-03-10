@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+dlabel D_E0024D00
+.double 1.2048192771084338
+
+.section .text
+
 glabel shape_spell_appendGfx
 /* 3396A4 E0024454 27BDFF18 */  addiu     $sp, $sp, -0xe8
 /* 3396A8 E0024458 3C07DB06 */  lui       $a3, 0xdb06

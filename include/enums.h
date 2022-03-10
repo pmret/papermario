@@ -516,6 +516,7 @@ enum SoundIDs {
     SOUND_HIT_NORMAL                = 0x000000E9,
     SOUND_HIT_FIRE                  = 0x000000EA,
     SOUND_HIT_ICE                   = 0x000000EB,
+    SOUND_108                       = 0x00000108,
     SOUND_IMMUNE                    = 0x0000010C,
     SOUND_HIT_BONES                 = 0x0000010D,
     SOUND_STEP1                     = 0x00000141,
@@ -2046,16 +2047,17 @@ enum TimeFreezeMode {
 };
 
 enum ActionCommand {
+    ACTION_COMMAND_NONE                      = 0x00000000,
     ACTION_COMMAND_JUMP                      = 0x00000001,
     ACTION_COMMAND_SMASH                     = 0x00000002,
     ACTION_COMMAND_FLEE                      = 0x00000003,
     ACTION_COMMAND_BREAK_FREE                = 0x00000004,
     ACTION_COMMAND_WHIRLWIND                 = 0x00000005,
     ACTION_COMMAND_STOP_LEECH                = 0x00000006,
-    ACTION__COMMAND_07                       = 0x00000007,
+    ACTION_COMMAND_07                        = 0x00000007,
     ACTION_COMMAND_DIZZY_SHELL               = 0x00000008,
     ACTION_COMMAND_FIRE_SHELL                = 0x00000009,
-    ACTION__COMMAND_0A                       = 0x0000000A,
+    ACTION_COMMAND_0A                        = 0x0000000A,
     ACTION_COMMAND_BOMB                      = 0x0000000B,
     ACTION_COMMAND_BODY_SLAM                 = 0x0000000C,
     ACTION_COMMAND_AIR_LIFT                  = 0x0000000D,

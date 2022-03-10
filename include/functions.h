@@ -796,6 +796,14 @@ void func_8025DE88(ActorPart*, s32);
 void func_800E9894(void);
 void func_8013A854(u32);
 
+void disable_player_blur(void);
+void enable_player_blur(void);
+void func_80254950(void);
+void func_802549A0(void);
+void func_802549C0(void);
+
+void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partIndex);
+
 void init_encounters_ui(void);
 void initialize_collision(void);
 void render_entities(void);
@@ -843,6 +851,7 @@ void update_merlee_messages(void);
 void draw_merlee_messages(void);
 void show_merlee_message(s16, s16);
 s32 is_merlee_message_done(void);
+void close_action_command_instruction_popup(void);
 void draw_encounters_conversation(void);
 void draw_encounters_post_battle(void);
 void draw_encounters_pre_battle(void);

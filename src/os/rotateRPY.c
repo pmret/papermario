@@ -1,6 +1,9 @@
-#include "common.h"
+#include "PR/guint.h"
 
-void guRotateRPYF(Matrix4f mf, f32 r, f32 p, f32 h) {
+f32 sin_rad(f32 x);
+f32 cos_rad(f32 x);
+
+void guRotateRPYF(float mf[4][4], f32 r, f32 p, f32 h) {
     static f32 dtor = 3.1415926 / 180.0;
     f32 sinr, sinp, sinh;
     f32 cosr, cosp, cosh;
@@ -31,7 +34,7 @@ void guRotateRPYF(Matrix4f mf, f32 r, f32 p, f32 h) {
 }
 
 void guRotateRPY(Mtx *m, f32 r, f32 p, f32 h) {
-    Matrix4f mf;
+    Matrix mf;
 
     guRotateRPYF(mf, r, p, h);
 

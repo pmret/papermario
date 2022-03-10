@@ -189,7 +189,79 @@ ApiStatus SetCamTarget(Evt* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "evt/cam_api", func_802CB008, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "evt/cam_api", ShakeCam, Evt* script, s32 isInitialCall);
+ApiStatus ShakeCam(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 camIndex = evt_get_variable(script, *args++);
+    s32 temp_s3 = evt_get_variable(script, *args++);
+    s32 temp_s4 = evt_get_variable(script, *args++);
+    f32 temp_f20 = 2.0f * evt_get_float_variable(script, *args++);
+    Camera* camera = &gCameras[camIndex];
+    f32 temp_f2;
+    f32 phi_f2;
+    s32 temp_a1;
+
+    if (isInitialCall) {
+        switch (temp_s3){
+            case 0:
+            case 1:
+                break;
+            case 2:
+                temp_s4 *= 4;
+                break;
+            default:
+                break;
+        }
+
+        *(f32*)&script->functionTemp[3] = 1.0f;
+        script->functionTemp[1] = temp_s4;
+
+        if (!gGameStatusPtr->isBattle) {
+            if (temp_f20 > 10.0f) {
+                temp_f20 = 10.0f;
+            }
+
+            phi_f2 = temp_f20;
+            if (temp_f20 > 6.0f) {
+                phi_f2 = 6.0f;
+            }
+            phi_f2 = phi_f2 * 32.0f + 64.0f;
+
+            temp_a1 = temp_s4;
+            if (temp_a1 < 5) {
+                temp_a1 = 5;
+            }
+            start_rumble(phi_f2, (temp_a1 & 0xFFFF) * 2);
+        }
+    }
+
+    camera->flags |= CAM_FLAG_SHAKING;
+    temp_f2 = script->functionTempF[3];
+    switch (temp_s3) {
+        case 0:
+            guTranslateF(camera->viewMtxShaking, 0.0f, -temp_f2 * temp_f20, 0.0f);
+            script->functionTempF[3] = -script->functionTempF[3];
+            break;
+        case 1:
+            guRotateF(camera->viewMtxShaking, temp_f2 * temp_f20, 0.0f, 0.0f, 1.0f);
+            script->functionTempF[3] = -script->functionTempF[3];
+            break;
+        case 2:
+            guTranslateF(camera->viewMtxShaking, 0.0f, -temp_f2 * temp_f20, 0.0f);
+            if ((script->functionTemp[1] < (temp_s4 * 2)) && (temp_s4 < script->functionTemp[1])) {
+                script->functionTempF[3] = script->functionTempF[3] * -0.8;
+            } else {
+                script->functionTempF[3] = -script->functionTempF[3];
+            }
+            break;
+    }
+
+    if (script->functionTemp[1] == 0) {
+        camera->flags &= ~CAM_FLAG_SHAKING;
+        return ApiStatus_DONE2;
+    }
+    script->functionTemp[1]--;
+    return ApiStatus_BLOCK;
+}
 
 void exec_ShakeCam1(s32 arg0, s32 arg1, s32 arg2) {
     Evt* script;

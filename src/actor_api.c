@@ -2036,7 +2036,7 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
             script->functionTemp[0] = 1;
             break;
         case 1:
-            actor2 = (Actor*) script->functionTemp[1];
+            actor2 = script->functionTempActor[1];
             if (does_script_exist(actor2->takeTurnID) == FALSE) {
                 enemyIDs = battleStatus->enemyIDs;
                 if (battleStatus->nextEnemyIndex == 0) {
@@ -3164,7 +3164,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
         }
         attackBoost = evt_get_variable(script, *args++);
         actor = get_actor(actorID);
-        script->functionTemp[1] = (s32) actor;
+        script->functionTempActor[1] = actor;
         script->functionTemp[2] = attackBoost;
 
         func_8024E40C(8);
@@ -3181,7 +3181,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 1;
     }
     get_actor(script->owner1.actorID);
-    actor = (Actor*) script->functionTemp[1];
+    actor = script->functionTempActor[1];
     attackBoost = script->functionTemp[2];
 
     flags = actor->flags;
@@ -3287,7 +3287,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
         }
         defenseBoost = evt_get_variable(script, *args++);
         actor = get_actor(actorID);
-        script->functionTemp[1] = (s32) actor;
+        script->functionTempActor[1] = actor;
         script->functionTemp[2] = defenseBoost;
 
         func_8024E40C(8);
@@ -3305,7 +3305,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 1;
     }
     get_actor(script->owner1.actorID);
-    actor = (Actor*) script->functionTemp[1];
+    actor = script->functionTempActor[1];
     defenseBoost = script->functionTemp[2];
 
     flags = actor->flags;
@@ -3427,7 +3427,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 1;
     }
     get_actor(script->owner1.actorID);
-    actor = (Actor*) script->functionTemp[1];
+    actor = script->functionTempActor[1];
     vanished = script->functionTemp[2];
 
     flags = actor->flags;
@@ -3515,7 +3515,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
         }
         electrified = evt_get_variable(script, *args++);
         actor = get_actor(actorID);
-        script->functionTemp[1] = (s32) actor;
+        script->functionTempActor[1] = actor;
         script->functionTemp[2] = electrified;
 
         func_8024E40C(8);
@@ -3533,7 +3533,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 1;
     }
     get_actor(script->owner1.actorID);
-    actor = (Actor*) script->functionTemp[1];
+    actor = script->functionTempActor[1];
     electrified = script->functionTemp[2];
 
     flags = actor->flags;
@@ -3625,7 +3625,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
         hpBoost = evt_get_variable(script, *args++);
         D_8029FBD0 = evt_get_variable(script, *args++);
         actor = get_actor(actorID);
-        script->functionTemp[1] = (s32) actor;
+        script->functionTempActor[1] = actor;
         script->functionTemp[2] = hpBoost;
 
         func_8024E40C(8);
@@ -3639,7 +3639,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
         script->functionTemp[0] = 1;
     }
     get_actor(script->owner1.enemyID);
-    actor = (Actor*) script->functionTemp[1];
+    actor = script->functionTempActor[1];
     hpBoost = script->functionTemp[2];
 
     flags = actor->flags;
