@@ -22,7 +22,7 @@
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80240C74_A8D6F4);
+#include "world/common/UnkNpcAIMainFunc.inc.c"
 
 #include "world/common/set_script_owner_npc_anim.inc.c"
 

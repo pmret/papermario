@@ -429,7 +429,7 @@ void replace_window_update(s32 windowID, s8 priority, WindowUpdateFunc pendingFu
 
 void set_window_update(s32 windowID, WindowUpdateFunc func) {
     if (gWindows[windowID].flags & WINDOW_FLAGS_INITIALIZED) {
-        if (func.i == gWindows[windowID].fpUpdate.i) {
+        if (func.func == gWindows[windowID].fpUpdate.func) {
             gWindows[windowID].flags &= ~WINDOW_FLAGS_FPUPDATE_CHANGED;
         } else {
             gWindows[windowID].flags |= WINDOW_FLAGS_FPUPDATE_CHANGED | WINDOW_FLAGS_INITIAL_ANIMATION;
@@ -459,7 +459,8 @@ void setup_pause_menu_tab(MenuWindowBP* bp, s32 count) {
     s32 i;
 
     for (i = 0; i < count; i++, bp++) {
-        set_window_properties(bp->windowID, bp->pos.x, bp->pos.y, bp->width, bp->height, bp->priority, bp->fpDrawContents, bp->tab, bp->parentID);
+        set_window_properties(bp->windowID, bp->pos.x, bp->pos.y, bp->width, bp->height, bp->priority,
+                              bp->fpDrawContents, bp->tab, bp->parentID);
         if (bp->style.defaultStyleID != -1) {
             gWindowStyles[bp->windowID] = bp->style;
         }

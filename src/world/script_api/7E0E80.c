@@ -13,7 +13,6 @@ extern s32 D_80286530;
 extern s32 D_80286534;
 extern Evt* D_8028652C;
 extern HudScript* HudScript_Item_Coin;
-extern s32 gWindowStyles[64];
 
 ApiStatus func_802803C8(Evt* script, s32 isInitialCall);
 ApiStatus func_80280410(Evt* script, s32 isInitialCall);

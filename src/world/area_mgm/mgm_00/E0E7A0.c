@@ -39,6 +39,6 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0E7A0", func_80240E74_E0F614);
+#include "world/common/UnkNpcAIMainFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0E7A0", func_80241170_E0F910);

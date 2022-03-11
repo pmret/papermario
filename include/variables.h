@@ -90,6 +90,7 @@ extern s16 D_8010CD10;
 extern s16 D_8010CD12;
 extern s32 D_8010CD20;
 extern s32 D_801595A0;
+
 extern BackgroundHeader gBackgroundImage;
 
 extern MessagePrintState* gCurrentPrintContext;
@@ -180,6 +181,8 @@ extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?
 
 extern DisplayContext D_80164000[];
+
+extern WindowStyle gWindowStyles[];
 
 extern MessagePrintState gMessagePrinters[3];
 
@@ -311,7 +314,7 @@ extern HeapNode heap_collisionHead;
 extern HeapNode heap_generalHead;
 extern HeapNode heap_battleHead;
 
-extern s32 bMarioIdleAnims[];
+extern u32 bMarioIdleAnims[];
 extern s32 bMarioDefendAnims[];
 extern s32 bPeachIdleAnims[];
 

@@ -31,7 +31,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .width = 43,
         .height = 15,
         .priority = 64,
-        .fpDrawContents = &pause_tabs_draw_stats,
+        .fpDrawContents = pause_tabs_draw_stats,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
@@ -45,10 +45,10 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .width = 43,
         .height = 15,
         .priority = 0,
-        .fpDrawContents = &pause_tabs_draw_badges,
+        .fpDrawContents = pause_tabs_draw_badges,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { .func = &pause_update_tab_default },
+        .fpUpdate = { .func = pause_update_tab_default },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_4 }
     },
@@ -59,10 +59,10 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .width = 43,
         .height = 15,
         .priority = 0,
-        .fpDrawContents = &pause_tabs_draw_items,
+        .fpDrawContents = pause_tabs_draw_items,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { .func = &pause_update_tab_default },
+        .fpUpdate = { .func = pause_update_tab_default },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_5 }
     },
@@ -73,10 +73,10 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .width = 43,
         .height = 15,
         .priority = 0,
-        .fpDrawContents = &pause_tabs_draw_party,
+        .fpDrawContents = pause_tabs_draw_party,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { .func = &pause_update_tab_default },
+        .fpUpdate = { .func = pause_update_tab_default },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_6 }
     },
@@ -87,10 +87,10 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .width = 43,
         .height = 15,
         .priority = 0,
-        .fpDrawContents = &pause_tabs_draw_spirits,
+        .fpDrawContents = pause_tabs_draw_spirits,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { .func = &pause_update_tab_default },
+        .fpUpdate = { .func = pause_update_tab_default },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_7 }
     },
@@ -101,10 +101,10 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .width = 43,
         .height = 15,
         .priority = 0,
-        .fpDrawContents = &pause_tabs_draw_map,
+        .fpDrawContents = pause_tabs_draw_map,
         .tab = NULL,
         .parentID = WINDOW_ID_PAUSE_MAIN,
-        .fpUpdate = { .func = &pause_update_tab_default },
+        .fpUpdate = { .func = pause_update_tab_default },
         .extraFlags = 0,
         .style = { .customStyle = &gPauseWS_8 }
     },
@@ -115,7 +115,7 @@ MenuWindowBP gPauseTabsWindowBPs[] = {
         .width = 16,
         .height = 16,
         .priority = 64,
-        .fpDrawContents = &pause_tabs_draw_invis,
+        .fpDrawContents = pause_tabs_draw_invis,
         .tab = NULL,
         .parentID = WINDOW_ID_NONE,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
@@ -137,10 +137,10 @@ MenuPanel gPausePanelTabs = {
     .numRows = 1,
     .numPages = 0,
     .gridData = gPauseTabsGridData,
-    .fpInit = &pause_tabs_init,
-    .fpHandleInput = &pause_tabs_handle_input,
-    .fpUpdate = &pause_tabs_update,
-    .fpCleanup = &pause_tabs_cleanup
+    .fpInit = pause_tabs_init,
+    .fpHandleInput = pause_tabs_handle_input,
+    .fpUpdate = pause_tabs_update,
+    .fpCleanup = pause_tabs_cleanup
 };
 
 void pause_tabs_draw_invis(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
@@ -352,11 +352,11 @@ void pause_tabs_update(MenuPanel* tab) {
     gPauseTabsHorizScrollPos += delta;
 
     if ((gPauseTabsPreviousTab != 0 || tab->col != 5) && (gPauseTabsPreviousTab < tab->col || gPauseTabsPreviousTab == 5 && tab->col == 0)) {
-        fpUpdateActive = &pause_update_page_active_1;
-        fpUpdateInactive = &pause_update_page_inactive_1;
+        fpUpdateActive = pause_update_page_active_1;
+        fpUpdateInactive = pause_update_page_inactive_1;
     } else {
-        fpUpdateActive = &pause_update_page_active_2;
-        fpUpdateInactive = &pause_update_page_inactive_2;
+        fpUpdateActive = pause_update_page_active_2;
+        fpUpdateInactive = pause_update_page_inactive_2;
     }
 
     flag = FALSE;

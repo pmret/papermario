@@ -1,9 +1,33 @@
 #include "common.h"
+#include "battle/action_cmd/jump.h"
+#include "battle/action_cmd/hammer.h"
+#include "battle/action_cmd/flee.h"
+#include "battle/action_cmd/break_free.h"
+#include "battle/action_cmd/whirlwind.h"
+#include "battle/action_cmd/stop_leech.h"
+#include "battle/action_cmd/07.h"
+#include "battle/action_cmd/dizzy_shell.h"
+#include "battle/action_cmd/fire_shell.h"
+#include "battle/action_cmd/0A.h"
+#include "battle/action_cmd/bomb.h"
+#include "battle/action_cmd/body_slam.h"
+#include "battle/action_cmd/air_lift.h"
+#include "battle/action_cmd/air_raid.h"
+#include "battle/action_cmd/squirt.h"
+#include "battle/action_cmd/power_shock.h"
+#include "battle/action_cmd/mega_shock.h"
+#include "battle/action_cmd/smack.h"
+#include "battle/action_cmd/spiny_surge.h"
+#include "battle/action_cmd/hurricane.h"
+#include "battle/action_cmd/spook.h"
+#include "battle/action_cmd/water_block.h"
+#include "battle/action_cmd/tidal_wave.h"
 
 // TODO: move to src/battle/action_cmd.c
 
 extern void* actionCommandDmaTable[23];
 extern s32 D_8029FBC0;
+extern s16 D_8029FC4C;
 
 ApiStatus LoadActionCommand(Evt* script, s32 isInitialCall) {
     s32 cmd = evt_get_variable(script, *script->ptrReadPos);
@@ -90,98 +114,100 @@ void func_80268858(void) {
     }
 }
 
-// action_cmd_current_main - calls current action command's main func
-#ifdef NON_EQUIVALENT
 void func_80268938(void) {
-    enum ActionCommand ac;
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
-    if (gBattleStatus.flags1 & 0x8000) {
+    if (gBattleStatus.flags1 & BS_FLAGS1_8000) {
         func_80268C9C();
     }
 
-    ac = gActionCommandStatus.actionCommandID;
-
-    switch (ac) {
+    switch (actionCommandStatus->actionCommandID) {
+        case ACTION_COMMAND_NONE:
+            break;
         case ACTION_COMMAND_JUMP:
             action_command_jump_update();
-            return;
+            break;
         case ACTION_COMMAND_SMASH:
             func_802A936C_42236C();
-            return;
+            break;
         case ACTION_COMMAND_FLEE:
             func_802A9378_422E48();
-            return;
+            break;
         case ACTION_COMMAND_BREAK_FREE:
             func_802A92DC_4236CC();
-            return;
+            break;
         case ACTION_COMMAND_WHIRLWIND:
             func_802A92F0_423F60();
-            return;
+            break;
         case ACTION_COMMAND_STOP_LEECH:
             func_802A91F8_425788();
-            return;
+            break;
         case ACTION_COMMAND_07:
             func_802A9228_425D78();
-            return;
+            break;
         case ACTION_COMMAND_DIZZY_SHELL:
             func_802A928C_4263FC();
-            return;
+            break;
         case ACTION_COMMAND_FIRE_SHELL:
             func_802A9294_426C64();
-            return;
+            break;
         case ACTION_COMMAND_0A:
-            func_802A928C_4263FC();
-            return;
+            func_802A928C_42763C();
+            break;
         case ACTION_COMMAND_BOMB:
-            func_802A928C_4263FC();
-            return;
+            func_802A928C_427CFC();
+            break;
         case ACTION_COMMAND_BODY_SLAM:
             func_802A92D4_4285B4();
-            return;
+            break;
         case ACTION_COMMAND_AIR_LIFT:
             func_802A9278_428CE8();
-            return;
+            break;
         case ACTION_COMMAND_AIR_RAID:
-            func_802A9294_426C64();
-            return;
+            func_802A9294_4295B4();
+            break;
         case ACTION_COMMAND_SQUIRT:
             func_802A9208_429F28();
-            return;
+            break;
         case ACTION_COMMAND_POWER_SHOCK:
             func_802A9310_42D220();
-            return;
+            break;
         case ACTION_COMMAND_MEGA_SHOCK:
-            func_802A92A0_422D70();
-            return;
+            func_802A92A0_42DCB0();
+            break;
         case ACTION_COMMAND_SMACK:
             func_802A9298_42E638();
-            return;
+            break;
         case ACTION_COMMAND_SPINY_SURGE:
             func_802A9254_42F074();
-            return;
+            break;
         case ACTION_COMMAND_HURRICANE:
-            func_802A92A0_422D70();
-            return;
+            func_802A92A0_42F980();
+            break;
         case ACTION_COMMAND_SPOOK:
-            func_802A9298_42E638();
-            return;
+            func_802A9298_4302B8();
+            break;
         case ACTION_COMMAND_WATER_BLOCK:
             func_802A948C_42A97C();
-            return;
+            break;
         case ACTION_COMMAND_TIDAL_WAVE:
-            func_802A9228_425D78();
-            return;
+            action_command_tidal_wave_update();
+            break;
+        default:
+            break;
     }
 }
-#else
-INCLUDE_ASM(s32, "196AA0", func_80268938);
-#endif
 
+void func_80268AF8(void);
 INCLUDE_ASM(s32, "196AA0", func_80268AF8);
 
 INCLUDE_ASM(s32, "196AA0", func_80268C9C);
 
-INCLUDE_ASM(s32, "196AA0", func_80268E88);
+void func_80268E88(void) {
+    ActionCommandStatus* actionCmdStatus = &gActionCommandStatus;
+    actionCmdStatus->unk_00 = create_generic_entity_frontUI(func_80268938, func_80268AF8);
+    actionCmdStatus->actionCommandID = 0;
+}
 
 s32 check_block_input(s32 buttonMask) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -310,7 +336,7 @@ void func_80269160(void) {
 }
 
 ApiStatus func_8026919C(Evt* script, s32 isInitialCall) {
-    gBattleStatus.unk_434 = evt_get_variable(script, *script->ptrReadPos);
+    gBattleStatus.unk_434 = (s32*) evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -346,7 +372,10 @@ ApiStatus GetActionCommandMode(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "196AA0", func_80269344);
+ApiStatus func_80269344(Evt* script, s32 isInitialCall) {
+    D_8029FC4C = evt_get_variable(script, *script->ptrReadPos);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetCommandAutoSuccess(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, *script->ptrReadPos, gActionCommandStatus.autoSucceed);
@@ -369,9 +398,35 @@ ApiStatus func_802693F0(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "196AA0", CloseActionCommandInfo);
+ApiStatus CloseActionCommandInfo(Evt* script, s32 isInitialCall) {
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
-INCLUDE_ASM(s32, "196AA0", func_80269470);
+    if (isInitialCall) {
+        switch (actionCommandStatus->actionCommandID) {
+            case ACTION_COMMAND_WHIRLWIND:
+            case ACTION_COMMAND_STOP_LEECH:
+                return ApiStatus_DONE2;
+            default:
+                func_80268C9C();
+                return ApiStatus_BLOCK;
+        }
+    }
+
+    sfx_stop_sound(0x80000041);
+    close_action_command_instruction_popup();
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80269470(Evt* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        func_80268C9C();
+        return ApiStatus_BLOCK;
+    }
+
+    close_action_command_instruction_popup();
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802694A4(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

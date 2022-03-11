@@ -141,8 +141,8 @@ typedef struct Npc {
     /* 0x020 */ struct BlurBuffer* blurBuf; ///< Null unless flag 0x100000 is set.
     /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ union {
-    /*       */   u16 h;
-    /*       */   u32 w;
+    /*       */     u16 h;
+    /*       */     u32 w;
     /*       */ } currentAnim;
     /* 0x02C */ s32 unk_2C;
     /* 0x030 */ f32 animationSpeed;
@@ -343,9 +343,19 @@ typedef struct Evt {
     /* 0x064 */ struct Evt* blockingParent; /* parent? */
     /* 0x068 */ struct Evt* childScript;
     /* 0x06C */ struct Evt* parentScript; /* brother? */
-    /* 0x070 */ s32 functionTemp[4];
+    /* 0x070 */ union {
+    /*       */     s32 functionTemp[4];
+    /*       */     f32 functionTempF[4];
+    /*       */     struct Npc* functionTempNpc[4];
+    /*       */     struct Actor* functionTempActor[4];
+    /*       */     struct ActorPart* functionTempActorPart[4];
+    /*       */ };
     /* 0x080 */ ApiFunc callFunction;
-    /* 0x084 */ s32 varTable[16];
+    /* 0x084 */ union {
+    /*       */     s32 varTable[16];
+    /*       */     struct Actor* varTableActor[4];
+    /*       */     struct Enemy* varTableEnemy[4];
+    /*       */ };
     /* 0x0C4 */ s32 varFlags[3];
     /* 0x0D0 */ s32 loopStartTable[8];
     /* 0x0F0 */ s32 loopCounterTable[8];
@@ -864,7 +874,7 @@ typedef struct BattleStatus {
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ s8 totalStarPoints;
     /* 0x079 */ s8 pendingStarPoints; /* how many to add */
-    /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
+    /* 0x07A */ s8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
     /* 0x07B */ u8 damageTaken;
     /* 0x07C */ s8 changePartnerAllowed;
     /* 0x07D */ s8 menuStatus[4]; ///< -1 = automatically pick the first move, 0 = disabled, 1 = enabled
@@ -1839,7 +1849,7 @@ typedef struct Actor {
     /* 0x1B8 */ s8 currentHP;
     /* 0x1B9 */ s8 maxHP;
     /* 0x1BA */ char unk_1BA[2];
-    /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
+    /* 0x1BC */ s8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
     /* 0x1C0 */ EvtScript* idleScriptSource;
     /* 0x1C4 */ EvtScript* takeTurnScriptSource;
@@ -1907,7 +1917,7 @@ typedef struct Actor {
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
     /* 0x436 */ s16 hudElementDataIndex;
     /* 0x438 */ s32 unk_438[2]; /* ??? see FUN_80253974 */
-    /* 0x440 */ struct EffectInstance* ptrDefuffIcon;
+    /* 0x440 */ struct EffectInstance* debuffIcon;
 } Actor; // size = 0x444
 
 typedef struct BackgroundHeader {
@@ -2312,6 +2322,16 @@ typedef struct ActionCommandStatus {
     /* 0x80 */ s8 mashMeterIntervals;
 } ActionCommandStatus;
 
+typedef struct Message {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ char unk_04[0x1C];
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ char unk_28[0x1C];
+    /* 0x44 */ s32 unk_44;
+    /* 0x48 */ char unk_48[0x4];
+} Message; // size = 0x4C
+
 struct PopupMessage;
 typedef void (*PopupMessageCallback)(struct PopupMessage* popup);
 typedef struct PopupMessage {
@@ -2324,7 +2344,7 @@ typedef struct PopupMessage {
     /* 0x14 */ s16 duration;
     /* 0x16 */ s8 unk_16;
     /* 0x17 */ s8 unk_17;
-    /* 0x18 */ s32* message;
+    /* 0x18 */ Message* message;
 } PopupMessage; // size = 0x1C
 
 typedef struct unkPartnerStruct {

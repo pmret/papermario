@@ -11,7 +11,7 @@
 [progress-us]: https://papermar.io/progress-us
 [progress-us-badge]: https://img.shields.io/endpoint?url=https://papermar.io/reports/progress_us_shield.json
 
-[progress-jp]: https://papermar.io/progress-us
+[progress-jp]: https://papermar.io/progress-jp
 [progress-jp-badge]: https://img.shields.io/endpoint?url=https://papermar.io/reports/progress_jp_shield.json
 
 [discord]: https://discord.gg/urUm3VG

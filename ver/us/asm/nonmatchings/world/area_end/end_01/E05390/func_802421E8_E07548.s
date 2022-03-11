@@ -12,8 +12,8 @@ glabel func_802421E8_E07548
 /* E07564 80242204 2631A66C */  addiu     $s1, $s1, %lo(gMasterGfxPos)
 /* E07568 80242208 AFB3002C */  sw        $s3, 0x2c($sp)
 /* E0756C 8024220C 24130004 */  addiu     $s3, $zero, 4
-/* E07570 80242210 3C028025 */  lui       $v0, %hi(D_8024B9D0)
-/* E07574 80242214 2442B9D0 */  addiu     $v0, $v0, %lo(D_8024B9D0)
+/* E07570 80242210 3C028025 */  lui       $v0, %hi(gFileMenuMessages)
+/* E07574 80242214 2442B9D0 */  addiu     $v0, $v0, %lo(gFileMenuMessages)
 /* E07578 80242218 AFBF0038 */  sw        $ra, 0x38($sp)
 /* E0757C 8024221C AFB50034 */  sw        $s5, 0x34($sp)
 /* E07580 80242220 AFB20028 */  sw        $s2, 0x28($sp)

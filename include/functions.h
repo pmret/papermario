@@ -90,9 +90,11 @@ void pause_handle_input(s32 buttonsPressed, s32 buttonsHeld);
 void pause_cleanup(void);
 
 // file menu stuff
+void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row);
+void filemenu_set_cursor_alpha(s32 arg0);
 void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);
-s8* filemenu_get_menu_message(s32 idx);
-void filemenu_draw_message(s8*, s32 posX, s32 posY, s32 alpha, s32 color, s32 flags);
+Message* filemenu_get_menu_message(s32 idx);
+void filemenu_draw_message(Message*, s32 posX, s32 posY, s32 alpha, s32 color, s32 flags);
 
 void update_enemy_shadows(void);
 void update_hero_shadows(void);
@@ -187,6 +189,8 @@ s32 disable_player_static_collisions(void);
 s32 disable_player_input(void);
 void func_80027088(s32);
 void set_time_freeze_mode(s32);
+
+
 
 s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID);
 
@@ -306,6 +310,7 @@ void btl_state_update_player_move(void);
 void btl_state_draw_player_move(void);
 void btl_state_update_end_player_turn(void);
 void btl_state_update_partner_move(void);
+void btl_state_draw_end_player_turn(void);
 void btl_state_draw_partner_move(void);
 void btl_state_update_end_partner_turn(void);
 void btl_state_draw_end_partner_turn(void);
@@ -500,6 +505,7 @@ s32 get_collider_type_by_id(s32 colliderID);
 void suggest_player_anim_setUnkFlag(s32 arg0);
 void suggest_player_anim_clearUnkFlag(s32 arg0);
 void subtract_hp(s32 amt);
+void draw_status_ui(void);
 void open_status_menu_long(void);
 
 void suspend_all_group(s32 groupFlags);
@@ -519,6 +525,7 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
 void func_80138D88(s32, s32, s32, s32, f32);
 void func_8013A4D0(void);
 
+void btl_draw_popup_messages(void);
 void btl_cam_set_target_pos(f32, f32, f32);
 void btl_cam_unfreeze(void);
 
@@ -531,6 +538,7 @@ s32 btl_check_player_defeated(void);
 void btl_show_battle_message(s32, s32);
 void btl_update_ko_status(void);
 void reset_actor_turn_info(void);
+void btl_draw_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 arg6, u16 arg7);
 void reset_all_actor_sounds(Actor*);
 void decrement_status_menu_disabled(void);
 void increment_status_menu_disabled(void);
@@ -696,6 +704,7 @@ void enable_player_shadow(void);
 s32 get_msg_lines(s32 messageID);
 void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, u8, void* drawContents, void* drawContentsArg, s8 parent);
 void set_window_update(s32 panelID, WindowUpdateFunc);
+void set_windows_visible(s32 groupIdx);
 void snd_stop_sound(s32 soundID);
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
@@ -838,6 +847,7 @@ void func_80266AF8(Actor*);
 void func_80266E14(ActorPart*);
 void func_80268770(s32, s32, s32);
 void func_80268C9C(void);
+void func_80268E88(void);
 s32 check_block_input(s32 buttonMask);
 void func_802B6CF0_E2B3A0(void);
 void func_80269160(void);
@@ -851,6 +861,7 @@ void update_merlee_messages(void);
 void draw_merlee_messages(void);
 void show_merlee_message(s16, s16);
 s32 is_merlee_message_done(void);
+void close_action_command_instruction_popup(void);
 void draw_encounters_conversation(void);
 void draw_encounters_post_battle(void);
 void draw_encounters_pre_battle(void);
