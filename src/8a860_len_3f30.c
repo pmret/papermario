@@ -177,15 +177,15 @@ s32 popup_menu_update(void) {
 
             elementID = create_hud_element(HudScript_AnimatedHandPointer);
             D_8010D66C = elementID;
-            set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_20000000 | HUD_ELEMENT_FLAGS_80);
+            set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_SHADOW | HUD_ELEMENT_FLAGS_80);
 
             elementID = create_hud_element(HudScript_GreenArrowUp);
             D_8010D670 = elementID;
-            set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_20000000 | HUD_ELEMENT_FLAGS_80);
+            set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_SHADOW | HUD_ELEMENT_FLAGS_80);
 
             elementID = create_hud_element(HudScript_GreenArrowDown);
             D_8010D674 = elementID;
-            set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_20000000 | HUD_ELEMENT_FLAGS_80);
+            set_hud_element_flags(elementID, HUD_ELEMENT_FLAGS_SHADOW | HUD_ELEMENT_FLAGS_80);
 
             if (gPopupMenu->popupType == 3) {
                 D_8010D660 = create_hud_element(HudScript_StatusStarPiece);

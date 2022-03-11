@@ -105,7 +105,7 @@ class HudElementScript():
             elif op == 0x0B:
                 print(f"{indent}he_AddTexelOffsetY({next(buf)}),")
             elif op == 0x0C:
-                print(f"{indent}he_AddTexelOffset({next(buf)}, {next(buf)}),")
+                print(f"{indent}he_SetTexelOffset({next(buf)}, {next(buf)}),")
             elif op == 0x0D:
                 print(f"{indent}he_SetImage({next(buf)}, {next(buf)}, {next(buf)}, {next(buf)}, {next(buf)}),")
             elif op == 0x0E:
@@ -137,7 +137,7 @@ class HudElementScript():
             elif op == 0x1A:
                 print(f"{indent}he_PlaySound({next(buf)}),")
             elif op == 0x1B:
-                print(f"{indent}he_op_1B({next(buf)}),")
+                print(f"{indent}he_SetPivot({next(buf)}),")
             else:
                 print(f"{indent}{op},")
 

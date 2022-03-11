@@ -31,11 +31,11 @@ ApiStatus N(func_802A12EC_724FCC)(Evt* script, s32 isInitialCall) {
         partner->koDuration = 0;
     }
     if (partner->koDuration > 0) {
-        partner->ptrDefuffIcon->loopStartPos[0xF] = partner->koDuration;
+        ((s32*)partner->ptrDefuffIcon->data)[0xF] = partner->koDuration;
     } else {
         partner->koStatus = 0;
         dispatch_event_partner(0x34);
-        partner->ptrDefuffIcon->loopStartPos[0xF] = 0;
+        ((s32*)partner->ptrDefuffIcon->data)[0xF] = 0;
     }
 
     return ApiStatus_DONE2;
@@ -64,7 +64,7 @@ ApiStatus N(func_802A1378_725058)(Evt* script, s32 isInitialCall) {
                 break;
         }
 
-        actor->ptrDefuffIcon->loopStartPos[15] = 0;
+        ((s32*)actor->ptrDefuffIcon->data)[15] = 0;
     }
 
     btl_update_ko_status();
