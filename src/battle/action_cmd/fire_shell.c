@@ -4,9 +4,9 @@
 #define NAMESPACE action_command_fire_shell
 
 extern s32 D_802942C0;
-extern HudScript HudScript_StickNeutral;
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_100pct;
+extern HudScript HudScript_StickNeutral[];
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_100pct[];
 
 ApiStatus func_802A9000_4269D0(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

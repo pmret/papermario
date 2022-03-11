@@ -4,9 +4,9 @@
 #define NAMESPACE action_command_dizzy_shell
 
 extern s32 D_802942A0;
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_AButton;
-extern HudScript HudScript_100pct;
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
+extern HudScript HudScript_100pct[];
 
 ApiStatus func_802A9000_426170(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

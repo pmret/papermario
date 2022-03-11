@@ -5,9 +5,9 @@
 
 extern s32 D_80294280;
 extern s32 D_802A9620;
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_AButton;
-extern HudScript HudScript_RunAwayOK;
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
+extern HudScript HudScript_RunAwayOK[];
 
 s32 func_8024FAFC(s32);
 

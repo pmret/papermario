@@ -93,10 +93,10 @@ extern s32 D_8029EFBC;
 extern s32 D_8029EFC0[10];
 extern s32 D_8029EFE8[10];
 extern s32 D_8029F010[10];
-extern HudScript HudScript_HPBar;
-extern HudScript HudScript_Item_SmallStarPoint;
-extern HudScript HudScript_Item_StarPoint;
-extern HudScript HudScript_StatusSPShine;
+extern HudScript HudScript_HPBar[];
+extern HudScript HudScript_Item_SmallStarPoint[];
+extern HudScript HudScript_Item_StarPoint[];
+extern HudScript HudScript_StatusSPShine[];
 
 void func_8023ED5C(void);
 void func_8023F088(Camera*);

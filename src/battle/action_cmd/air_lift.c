@@ -7,9 +7,9 @@
 
 void func_80268834(s32, s32, s16, s32);
 
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_AButton;
-extern HudScript HudScript_100pct;
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
+extern HudScript HudScript_100pct[];
 extern s32 D_80294340;
 BSS s32 air_lift_bss_0;
 

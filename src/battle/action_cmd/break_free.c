@@ -4,10 +4,10 @@
 #define NAMESPACE action_command_break_free
 
 extern s32 D_80294220;
-extern HudScript HudScript_AButton;
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_RunningAway;
-extern HudScript HudScript_RunAwayOK;
+extern HudScript HudScript_AButton[];
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_RunningAway[];
+extern HudScript HudScript_RunAwayOK[];
 
 ApiStatus func_802A9000_4233F0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

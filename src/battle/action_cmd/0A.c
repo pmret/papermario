@@ -5,9 +5,9 @@
 
 extern s32 D_802942E0;
 extern s32 HudScript_MashAButton;
-extern HudScript HudScript_100pct;
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_AButton;
+extern HudScript HudScript_100pct[];
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
 
 ApiStatus func_802A9000_4273B0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

@@ -1,5 +1,6 @@
 #include "gv_01.h"
 #include "sprite.h"
+#include "hud_element.h"
 
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 

@@ -4,10 +4,10 @@
 
 #define NAMESPACE action_command_smack
 
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_StickNeutral;
-extern HudScript HudScript_100pct;
-extern HudScript HudScript_StickMashLeft;
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_StickNeutral[];
+extern HudScript HudScript_100pct[];
+extern HudScript HudScript_StickMashLeft[];
 extern s32 D_802943E0;
 
 typedef struct UnkVec2s {
@@ -134,7 +134,7 @@ void func_802A9298_42E638(void) {
                 actionCommandStatus->unk_4E--;
                 break;
             }
-            set_hud_element_anim(actionCommandStatus->hudElements[0], &HudScript_StickMashLeft);
+            set_hud_element_anim(actionCommandStatus->hudElements[0], HudScript_StickMashLeft);
             actionCommandStatus->barFillLevel = 0;
             battleStatus->unk_85 = 0;
             actionCommandStatus->unk_5C = 0;

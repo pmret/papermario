@@ -3,9 +3,9 @@
 
 #define NAMESPACE action_command_bomb
 
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_AButton;
-extern HudScript HudScript_100pct;
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
+extern HudScript HudScript_100pct[];
 extern s32 D_80294300;
 
 extern HudScript HudScript_MashAButton;
