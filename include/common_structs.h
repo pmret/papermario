@@ -1917,7 +1917,7 @@ typedef struct Actor {
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
     /* 0x436 */ s16 hudElementDataIndex;
     /* 0x438 */ s32 unk_438[2]; /* ??? see FUN_80253974 */
-    /* 0x440 */ struct EffectInstance* debuffIcon;
+    /* 0x440 */ struct EffectInstance* debuffIcon; // TODO: figure out the type of data field of debuffIcon
 } Actor; // size = 0x444
 
 typedef struct BackgroundHeader {
