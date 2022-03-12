@@ -31,11 +31,11 @@ ApiStatus N(func_802A12EC_715B3C)(Evt* script, s32 isInitialCall) {
         partner->koDuration = 0;
     }
     if (partner->koDuration > 0) {
-        partner->debuffIcon->ptrPropertyList[0xF] = partner->koDuration;
+        ((s32*)partner->debuffIcon->data)[0xF] = partner->koDuration;
     } else {
         partner->koStatus = 0;
         dispatch_event_partner(0x34);
-        partner->debuffIcon->ptrPropertyList[0xF] = 0;
+        ((s32*)partner->debuffIcon->data)[0xF] = 0;
     }
 
     return ApiStatus_DONE2;

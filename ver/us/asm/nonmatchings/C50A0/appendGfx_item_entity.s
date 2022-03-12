@@ -285,8 +285,8 @@ glabel appendGfx_item_entity
 /* C8CD8 801325D8 ADE20000 */  sw        $v0, ($t7)
 /* C8CDC 801325DC 25C20018 */  addiu     $v0, $t6, 0x18
 /* C8CE0 801325E0 ADE20000 */  sw        $v0, ($t7)
-/* C8CE4 801325E4 3C028015 */  lui       $v0, %hi(D_801512D0)
-/* C8CE8 801325E8 8C4212D0 */  lw        $v0, %lo(D_801512D0)($v0)
+/* C8CE4 801325E4 3C028015 */  lui       $v0, %hi(gHudElementCacheTablePalette)
+/* C8CE8 801325E8 8C4212D0 */  lw        $v0, %lo(gHudElementCacheTablePalette)($v0)
 /* C8CEC 801325EC 000318C0 */  sll       $v1, $v1, 3
 /* C8CF0 801325F0 00621821 */  addu      $v1, $v1, $v0
 /* C8CF4 801325F4 8C630004 */  lw        $v1, 4($v1)
@@ -355,8 +355,8 @@ glabel appendGfx_item_entity
 /* C8DF0 801326F0 ADE20000 */  sw        $v0, ($t7)
 /* C8DF4 801326F4 25C20070 */  addiu     $v0, $t6, 0x70
 /* C8DF8 801326F8 ADE20000 */  sw        $v0, ($t7)
-/* C8DFC 801326FC 3C028015 */  lui       $v0, %hi(D_801512C8)
-/* C8E00 80132700 8C4212C8 */  lw        $v0, %lo(D_801512C8)($v0)
+/* C8DFC 801326FC 3C028015 */  lui       $v0, %hi(gHudElementCacheTableRaster)
+/* C8E00 80132700 8C4212C8 */  lw        $v0, %lo(gHudElementCacheTableRaster)($v0)
 /* C8E04 80132704 000318C0 */  sll       $v1, $v1, 3
 /* C8E08 80132708 00621821 */  addu      $v1, $v1, $v0
 /* C8E0C 8013270C 8C630004 */  lw        $v1, 4($v1)
@@ -440,8 +440,8 @@ glabel appendGfx_item_entity
 /* C8F3C 8013283C ADE20000 */  sw        $v0, ($t7)
 /* C8F40 80132840 25C20058 */  addiu     $v0, $t6, 0x58
 /* C8F44 80132844 ADE20000 */  sw        $v0, ($t7)
-/* C8F48 80132848 3C028015 */  lui       $v0, %hi(D_801512C8)
-/* C8F4C 8013284C 8C4212C8 */  lw        $v0, %lo(D_801512C8)($v0)
+/* C8F48 80132848 3C028015 */  lui       $v0, %hi(gHudElementCacheTableRaster)
+/* C8F4C 8013284C 8C4212C8 */  lw        $v0, %lo(gHudElementCacheTableRaster)($v0)
 /* C8F50 80132850 000318C0 */  sll       $v1, $v1, 3
 /* C8F54 80132854 00621821 */  addu      $v1, $v1, $v0
 /* C8F58 80132858 8C630004 */  lw        $v1, 4($v1)
@@ -494,8 +494,8 @@ glabel appendGfx_item_entity
 /* C900C 8013290C ADE20000 */  sw        $v0, ($t7)
 /* C9010 80132910 25C20018 */  addiu     $v0, $t6, 0x18
 /* C9014 80132914 ADE20000 */  sw        $v0, ($t7)
-/* C9018 80132918 3C028015 */  lui       $v0, %hi(D_801512D0)
-/* C901C 8013291C 8C4212D0 */  lw        $v0, %lo(D_801512D0)($v0)
+/* C9018 80132918 3C028015 */  lui       $v0, %hi(gHudElementCacheTablePalette)
+/* C901C 8013291C 8C4212D0 */  lw        $v0, %lo(gHudElementCacheTablePalette)($v0)
 /* C9020 80132920 000318C0 */  sll       $v1, $v1, 3
 /* C9024 80132924 00621821 */  addu      $v1, $v1, $v0
 /* C9028 80132928 8C630004 */  lw        $v1, 4($v1)
@@ -564,8 +564,8 @@ glabel appendGfx_item_entity
 /* C9124 80132A24 ADE20000 */  sw        $v0, ($t7)
 /* C9128 80132A28 25C20070 */  addiu     $v0, $t6, 0x70
 /* C912C 80132A2C ADE20000 */  sw        $v0, ($t7)
-/* C9130 80132A30 3C028015 */  lui       $v0, %hi(D_801512C8)
-/* C9134 80132A34 8C4212C8 */  lw        $v0, %lo(D_801512C8)($v0)
+/* C9130 80132A30 3C028015 */  lui       $v0, %hi(gHudElementCacheTableRaster)
+/* C9134 80132A34 8C4212C8 */  lw        $v0, %lo(gHudElementCacheTableRaster)($v0)
 /* C9138 80132A38 000318C0 */  sll       $v1, $v1, 3
 /* C913C 80132A3C 00621821 */  addu      $v1, $v1, $v0
 /* C9140 80132A40 8C630004 */  lw        $v1, 4($v1)
@@ -649,8 +649,8 @@ glabel appendGfx_item_entity
 /* C9270 80132B70 ADE20000 */  sw        $v0, ($t7)
 /* C9274 80132B74 25C20058 */  addiu     $v0, $t6, 0x58
 /* C9278 80132B78 ADE20000 */  sw        $v0, ($t7)
-/* C927C 80132B7C 3C028015 */  lui       $v0, %hi(D_801512C8)
-/* C9280 80132B80 8C4212C8 */  lw        $v0, %lo(D_801512C8)($v0)
+/* C927C 80132B7C 3C028015 */  lui       $v0, %hi(gHudElementCacheTableRaster)
+/* C9280 80132B80 8C4212C8 */  lw        $v0, %lo(gHudElementCacheTableRaster)($v0)
 /* C9284 80132B84 000318C0 */  sll       $v1, $v1, 3
 /* C9288 80132B88 00621821 */  addu      $v1, $v1, $v0
 /* C928C 80132B8C 8C630004 */  lw        $v1, 4($v1)

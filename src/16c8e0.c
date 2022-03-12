@@ -93,10 +93,10 @@ extern s32 D_8029EFBC;
 extern s32 D_8029EFC0[10];
 extern s32 D_8029EFE8[10];
 extern s32 D_8029F010[10];
-extern HudScript HudScript_HPBar;
-extern HudScript HudScript_Item_SmallStarPoint;
-extern HudScript HudScript_Item_StarPoint;
-extern HudScript HudScript_StatusSPShine;
+extern HudScript HudScript_HPBar[];
+extern HudScript HudScript_Item_SmallStarPoint[];
+extern HudScript HudScript_Item_StarPoint[];
+extern HudScript HudScript_StatusSPShine[];
 
 void func_8023ED5C(void);
 void func_8023F088(Camera*);
@@ -198,24 +198,24 @@ void initialize_battle(void) {
     func_8024EDC0();
     func_80268E88();
     set_windows_visible(WINDOW_GROUP_1);
-    D_8029EFBC = create_hud_element(&HudScript_HPBar);
-    set_hud_element_flags(D_8029EFBC, 0x80);
+    D_8029EFBC = create_hud_element(HudScript_HPBar);
+    set_hud_element_flags(D_8029EFBC, HUD_ELEMENT_FLAGS_80);
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFC0); i++) {
-        hudElemID = D_8029EFC0[i] = create_hud_element(&HudScript_Item_StarPoint);
-        set_hud_element_flags(hudElemID, 0x80 | 0x2);
+        hudElemID = D_8029EFC0[i] = create_hud_element(HudScript_Item_StarPoint);
+        set_hud_element_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         set_hud_element_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029EFE8); i++) {
-        hudElemID = D_8029EFE8[i] = create_hud_element(&HudScript_StatusSPShine);
-        set_hud_element_flags(hudElemID, 0x80 | 0x2);
+        hudElemID = D_8029EFE8[i] = create_hud_element(HudScript_StatusSPShine);
+        set_hud_element_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         set_hud_element_render_depth(hudElemID, 20);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8029F010); i++) {
-        hudElemID = D_8029F010[i] = create_hud_element(&HudScript_Item_SmallStarPoint);
-        set_hud_element_flags(hudElemID, 0x80 | 0x2);
+        hudElemID = D_8029F010[i] = create_hud_element(HudScript_Item_SmallStarPoint);
+        set_hud_element_flags(hudElemID, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         set_hud_element_render_depth(hudElemID, 20);
     }
 

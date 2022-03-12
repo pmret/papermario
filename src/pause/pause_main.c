@@ -476,8 +476,8 @@ void pause_textbox_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
         gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         set_hud_element_render_pos(gPauseCommonIconIDs[3], baseX - 4, baseY + 16);
         set_hud_element_anim(gPauseCommonIconIDs[3], gPauseShownDescIconScript);
-        set_hud_element_flags(gPauseCommonIconIDs[3], 0x20000000);
-        clear_hud_element_flags(gPauseCommonIconIDs[3], 0x8000);
+        set_hud_element_flags(gPauseCommonIconIDs[3], HUD_ELEMENT_FLAGS_SHADOW);
+        clear_hud_element_flags(gPauseCommonIconIDs[3], HUD_ELEMENT_FLAGS_8000);
         set_hud_element_scale(gPauseCommonIconIDs[3], 1.0f);
         draw_hud_element_3(gPauseCommonIconIDs[3]);
     }
@@ -559,7 +559,7 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     margin2 = (s32)(width - msgWidth2) >> 1;
     draw_msg(pause_get_menu_msg(gPauseTutorialDescMessages[state]), baseX + margin2, baseY + 13 + state * 140 - gPauseTutorialScrollPos, 255, 10, 1);
     set_hud_element_render_pos(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], baseX + width / 2 - 2, baseY + 52);
-    set_hud_element_flags(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], 0x8000);
+    set_hud_element_flags(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], HUD_ELEMENT_FLAGS_8000);
     set_hud_element_scale(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], 0.5f);
     draw_hud_element_3(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]]);
 
@@ -583,9 +583,9 @@ void pause_init(void) {
     for (i = 0; i < ARRAY_COUNT(gPauseIconScripts); i++) {
         gPauseCommonIconIDs[i] = create_hud_element(gPauseIconScripts[i]);
         if (gPauseIconScripts[i] == HudScript_AnimatedCursorHand) {
-            set_hud_element_flags(gPauseCommonIconIDs[i], 0x20000080);
+            set_hud_element_flags(gPauseCommonIconIDs[i], HUD_ELEMENT_FLAGS_SHADOW | HUD_ELEMENT_FLAGS_80);
         } else {
-            set_hud_element_flags(gPauseCommonIconIDs[i], 0x80);
+            set_hud_element_flags(gPauseCommonIconIDs[i], HUD_ELEMENT_FLAGS_80);
         }
     }
 

@@ -4,10 +4,10 @@
 #define NAMESPACE action_command_hurricane
 
 extern s32 D_80294420;
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_AButton;
-extern HudScript HudScript_BButton;
-extern HudScript HudScript_100pct;
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
+extern HudScript HudScript_BButton[];
+extern HudScript HudScript_100pct[];
 
 ApiStatus func_802A9000_42F6E0(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -35,13 +35,13 @@ ApiStatus func_802A9000_42F6E0(void) {
 
     hudElement = create_hud_element(HudScript_AButton);
     actionCommandStatus->hudElements[0] = hudElement;
-    set_hud_element_flags(hudElement, 0x82);
+    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
 
     hudElement = create_hud_element(HudScript_BButton);
     actionCommandStatus->hudElements[2] = hudElement;
-    set_hud_element_flags(hudElement, 0x82);
+    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
 
@@ -49,13 +49,13 @@ ApiStatus func_802A9000_42F6E0(void) {
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, 0x82);
+    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = create_hud_element(HudScript_100pct);
     actionCommandStatus->hudElements[4] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, 0x82);
+    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     return ApiStatus_DONE2;
 }

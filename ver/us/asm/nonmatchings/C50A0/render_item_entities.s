@@ -305,8 +305,8 @@ glabel render_item_entities
 /* C99D4 801332D4 AE220000 */  sw        $v0, ($s1)
 /* C99D8 801332D8 25A20018 */  addiu     $v0, $t5, 0x18
 /* C99DC 801332DC AE220000 */  sw        $v0, ($s1)
-/* C99E0 801332E0 3C028015 */  lui       $v0, %hi(D_801512D0)
-/* C99E4 801332E4 8C4212D0 */  lw        $v0, %lo(D_801512D0)($v0)
+/* C99E0 801332E0 3C028015 */  lui       $v0, %hi(gHudElementCacheTablePalette)
+/* C99E4 801332E4 8C4212D0 */  lw        $v0, %lo(gHudElementCacheTablePalette)($v0)
 /* C99E8 801332E8 000318C0 */  sll       $v1, $v1, 3
 /* C99EC 801332EC 00621821 */  addu      $v1, $v1, $v0
 /* C99F0 801332F0 8C630004 */  lw        $v1, 4($v1)
@@ -371,8 +371,8 @@ glabel render_item_entities
 /* C9ADC 801333DC 25A20068 */  addiu     $v0, $t5, 0x68
 /* C9AE0 801333E0 3C0F0808 */  lui       $t7, 0x808
 /* C9AE4 801333E4 AE220000 */  sw        $v0, ($s1)
-/* C9AE8 801333E8 3C028015 */  lui       $v0, %hi(D_801512C8)
-/* C9AEC 801333EC 8C4212C8 */  lw        $v0, %lo(D_801512C8)($v0)
+/* C9AE8 801333E8 3C028015 */  lui       $v0, %hi(gHudElementCacheTableRaster)
+/* C9AEC 801333EC 8C4212C8 */  lw        $v0, %lo(gHudElementCacheTableRaster)($v0)
 /* C9AF0 801333F0 000318C0 */  sll       $v1, $v1, 3
 /* C9AF4 801333F4 00621821 */  addu      $v1, $v1, $v0
 /* C9AF8 801333F8 8C630004 */  lw        $v1, 4($v1)
@@ -456,8 +456,8 @@ glabel render_item_entities
 /* C9C28 80133528 AE220000 */  sw        $v0, ($s1)
 /* C9C2C 8013352C 25A20058 */  addiu     $v0, $t5, 0x58
 /* C9C30 80133530 AE220000 */  sw        $v0, ($s1)
-/* C9C34 80133534 3C028015 */  lui       $v0, %hi(D_801512C8)
-/* C9C38 80133538 8C4212C8 */  lw        $v0, %lo(D_801512C8)($v0)
+/* C9C34 80133534 3C028015 */  lui       $v0, %hi(gHudElementCacheTableRaster)
+/* C9C38 80133538 8C4212C8 */  lw        $v0, %lo(gHudElementCacheTableRaster)($v0)
 /* C9C3C 8013353C 000318C0 */  sll       $v1, $v1, 3
 /* C9C40 80133540 00621821 */  addu      $v1, $v1, $v0
 /* C9C44 80133544 8C630004 */  lw        $v1, 4($v1)
@@ -504,8 +504,8 @@ glabel render_item_entities
 /* C9CE0 801335E0 AE220000 */  sw        $v0, ($s1)
 /* C9CE4 801335E4 25A20018 */  addiu     $v0, $t5, 0x18
 /* C9CE8 801335E8 AE220000 */  sw        $v0, ($s1)
-/* C9CEC 801335EC 3C028015 */  lui       $v0, %hi(D_801512D0)
-/* C9CF0 801335F0 8C4212D0 */  lw        $v0, %lo(D_801512D0)($v0)
+/* C9CEC 801335EC 3C028015 */  lui       $v0, %hi(gHudElementCacheTablePalette)
+/* C9CF0 801335F0 8C4212D0 */  lw        $v0, %lo(gHudElementCacheTablePalette)($v0)
 /* C9CF4 801335F4 000318C0 */  sll       $v1, $v1, 3
 /* C9CF8 801335F8 00621821 */  addu      $v1, $v1, $v0
 /* C9CFC 801335FC 8C630004 */  lw        $v1, 4($v1)
@@ -570,8 +570,8 @@ glabel render_item_entities
 /* C9DE8 801336E8 25A20068 */  addiu     $v0, $t5, 0x68
 /* C9DEC 801336EC 3C190808 */  lui       $t9, 0x808
 /* C9DF0 801336F0 AE220000 */  sw        $v0, ($s1)
-/* C9DF4 801336F4 3C028015 */  lui       $v0, %hi(D_801512C8)
-/* C9DF8 801336F8 8C4212C8 */  lw        $v0, %lo(D_801512C8)($v0)
+/* C9DF4 801336F4 3C028015 */  lui       $v0, %hi(gHudElementCacheTableRaster)
+/* C9DF8 801336F8 8C4212C8 */  lw        $v0, %lo(gHudElementCacheTableRaster)($v0)
 /* C9DFC 801336FC 000318C0 */  sll       $v1, $v1, 3
 /* C9E00 80133700 00621821 */  addu      $v1, $v1, $v0
 /* C9E04 80133704 8C630004 */  lw        $v1, 4($v1)
@@ -655,8 +655,8 @@ glabel render_item_entities
 /* C9F34 80133834 AE220000 */  sw        $v0, ($s1)
 /* C9F38 80133838 25A20058 */  addiu     $v0, $t5, 0x58
 /* C9F3C 8013383C AE220000 */  sw        $v0, ($s1)
-/* C9F40 80133840 3C028015 */  lui       $v0, %hi(D_801512C8)
-/* C9F44 80133844 8C4212C8 */  lw        $v0, %lo(D_801512C8)($v0)
+/* C9F40 80133840 3C028015 */  lui       $v0, %hi(gHudElementCacheTableRaster)
+/* C9F44 80133844 8C4212C8 */  lw        $v0, %lo(gHudElementCacheTableRaster)($v0)
 /* C9F48 80133848 000318C0 */  sll       $v1, $v1, 3
 /* C9F4C 8013384C 00621821 */  addu      $v1, $v1, $v0
 /* C9F50 80133850 8C630004 */  lw        $v1, 4($v1)
