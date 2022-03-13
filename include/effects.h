@@ -603,37 +603,29 @@ typedef struct FireFlowerFXData {
 } FireFlowerFXData; // size = 0x4C
 
 typedef struct FireBreathFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unk_28;
-    /* 0x2C */ f32 unk_2C;
+    /* 0x00 */ s32 type;
+    /* 0x04 */ s32 numChildren;
+    /* 0x08 */ s32 spawnDelay;
+    /* 0x0C */ Vec3f pos;
+    /* 0x18 */ Vec3f initPos;
+    /* 0x24 */ Vec3f endPos;
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ f32 unk_34;
-    /* 0x38 */ f32 unk_38;
-    /* 0x3C */ f32 unk_3C;
-    /* 0x40 */ s32 unk_40;
-    /* 0x44 */ s32 unk_44;
-    /* 0x48 */ s32 unk_48;
-    /* 0x4C */ s32 unk_4C;
-    /* 0x50 */ f32 unk_50;
-    /* 0x54 */ f32 unk_54;
-    /* 0x58 */ f32 unk_58;
+    /* 0x38 */ f32 scale;
+    /* 0x3C */ f32 scaleChangeFactor;
+    /* 0x40 */ s32 alpha;
+    /* 0x44 */ s32 maxLifetime;
+    /* 0x48 */ s32 lifetime;
+    /* 0x4C */ s32 spawnTimer;
+    /* 0x50 */ Vec3f unk_50;
     /* 0x5C */ f32 unk_5C;
     /* 0x60 */ f32 unk_60;
-    /* 0x64 */ s32 unk_64;
-    /* 0x68 */ s32 unk_68;
-    /* 0x6C */ s32 unk_6C;
-    /* 0x70 */ s32 unk_70;
-    /* 0x74 */ s32 unk_74;
-    /* 0x78 */ s32 unk_78;
+    /* 0x64 */ s32 primR;
+    /* 0x68 */ s32 primG;
+    /* 0x6C */ s32 primB;
+    /* 0x70 */ s32 envR;
+    /* 0x74 */ s32 envG;
+    /* 0x78 */ s32 envB;
 } FireBreathFXData; // size = 0x7C
 
 // TODO figure out what this actually is
@@ -767,6 +759,12 @@ typedef struct Effect6FInstance {
     /* 0x0C */ Effect6FData* data;
     /* 0x10 */ struct EffectGraphics* effect;
 } Effect6FInstance;
+
+enum FireBreathType {
+    FIRE_BREATH_LARGE = 0,
+    FIRE_BREATH_SMALL = 1,
+    FIRE_BREATH_TINY = 2,
+};
 
 EffectInstance* create_effect_instance(EffectBlueprint* effectBp);
 void remove_effect(EffectInstance*);
