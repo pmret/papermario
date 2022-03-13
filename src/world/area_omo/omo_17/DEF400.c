@@ -50,9 +50,9 @@ INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802427E0_DF1680);
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80242A08_DF18A8);
+#include "world/common/UnkFunc54.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80242F44_DF1DE4);
+#include "world/common/UnkFunc55.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802433A0_DF2240);
 

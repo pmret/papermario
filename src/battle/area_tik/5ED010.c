@@ -1,5 +1,5 @@
 #include "common.h"
 
-#define NAMESPACE b_area_tik
+#define NAMESPACE dup_b_area_tik
 
-INCLUDE_ASM(s32, "battle/area_tik/5ED010", func_80218B80_5ED010);
+#include "world/common/UnkFunc56.inc.c"
