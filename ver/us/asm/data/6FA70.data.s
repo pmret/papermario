@@ -59,7 +59,7 @@ dlabel D_800958F0
 dlabel D_800958F4
 .word 0x03B9ACA0
 
-dlabel D_800958F8
+dlabel osViClock
 .word 0x02E6D354
 
 dlabel __osShutdown
