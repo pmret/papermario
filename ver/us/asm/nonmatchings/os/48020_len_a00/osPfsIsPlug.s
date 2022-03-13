@@ -42,8 +42,8 @@ glabel osPfsIsPlug
 /* 487D0 8006D3D0 27A40024 */  addiu     $a0, $sp, 0x24
 /* 487D4 8006D3D4 0C01B558 */  jal       osPfsGetInitData
 /* 487D8 8006D3D8 27A50010 */   addiu    $a1, $sp, 0x10
-/* 487DC 8006D3DC 3C02800A */  lui       $v0, %hi(D_8009A606)
-/* 487E0 8006D3E0 9042A606 */  lbu       $v0, %lo(D_8009A606)($v0)
+/* 487DC 8006D3DC 3C02800A */  lui       $v0, %hi(__osMaxControllers)
+/* 487E0 8006D3E0 9042A606 */  lbu       $v0, %lo(__osMaxControllers)($v0)
 /* 487E4 8006D3E4 1840000C */  blez      $v0, .L8006D418
 /* 487E8 8006D3E8 00002021 */   addu     $a0, $zero, $zero
 /* 487EC 8006D3EC 00402821 */  addu      $a1, $v0, $zero
@@ -60,8 +60,8 @@ glabel osPfsIsPlug
 /* 48810 8006D410 1440FFF8 */  bnez      $v0, .L8006D3F4
 /* 48814 8006D414 24630004 */   addiu    $v1, $v1, 4
 .L8006D418:
-/* 48818 8006D418 3C03800A */  lui       $v1, %hi(D_8009A606)
-/* 4881C 8006D41C 9063A606 */  lbu       $v1, %lo(D_8009A606)($v1)
+/* 48818 8006D418 3C03800A */  lui       $v1, %hi(__osMaxControllers)
+/* 4881C 8006D41C 9063A606 */  lbu       $v1, %lo(__osMaxControllers)($v1)
 /* 48820 8006D420 00831026 */  xor       $v0, $a0, $v1
 /* 48824 8006D424 0002102B */  sltu      $v0, $zero, $v0
 /* 48828 8006D428 00021023 */  negu      $v0, $v0

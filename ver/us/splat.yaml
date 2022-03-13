@@ -141,7 +141,8 @@ segments:
     - [0x3CBD0, hasm, os/osInvalICache]
     - [0x3CC50, hasm, os/osWritebackDCache]
     - [0x3CCD0, hasm, os/osWritebackDCacheAll]
-    - [0x3CD00, c, os/3cd00_len_5f0] # MOVE_ADDU
+    - [0x3CD00, c, os/contquery, gcc_272 -O3]
+    - [0x3CDA0, c, os/contreaddata, gcc_272 -O3]
     - [0x3CF80, c, os/controller]
     - [0x3D290, c, os/osVirtualToPhysical, gcc_272 -O3]
     - [0x3D2F0, c, os/sqrtf, -ffast-math]
@@ -166,7 +167,7 @@ segments:
     - [0x40C20, c, os/sendmesg, gcc_272 -O3]
     - [0x40D50, c, os/seteventmesg, gcc_272 -O3]
     - [0x40E00, hasm, os/osGetCount]
-    - [0x40E10, c, os/40E10]
+    - [0x40E10, c, os/sptask, gcc_272 -O3]
     - [0x41050, c, os/osSpTaskYield, gcc_272 -O3]
     - [0x41070, c, os/sptaskyielded, gcc_272 -O3]
     - [0x410C0, c, os/sirawdma, gcc_272 -O3]
