@@ -2657,7 +2657,7 @@ segments:
     vram: 0xE006E000
     subsegments:
     - [0x372790, c, fire_breath]
-    - [0x373390, data]
+    - [0x373390]
   - [0x3733E0, bin] # fire_breath gfx
   - name: effect_shimmer_burst
     dir: effects

@@ -4,6 +4,7 @@
 #include "effects.h"
 
 s32 func_E0200000(s32);
+s32 func_E0200044(s32, s32);
 
 EffectInstance* shim_create_effect_instance(EffectBlueprint* effectBp);
 s32 shim_load_effect(s32 effectIndex);
@@ -82,7 +83,7 @@ FX_MAIN(radial_shimmer_main);
 FX_MAIN(ending_decals_main);
 FX_MAIN(light_rays_main);
 FX_MAIN(lightning_main);
-FX_MAIN(fire_breath_main);
+EffectInstance* fire_breath_main(s32, f32, f32, f32, f32, f32, f32, s32, s32, s32);
 FX_MAIN(shimmer_burst_main);
 FX_MAIN(energy_shockwave_main);
 FX_MAIN(shimmer_wave_main);
