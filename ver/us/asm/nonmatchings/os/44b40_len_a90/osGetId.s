@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osGetId
+glabel __osGetId
 /* 45008 80069C08 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* 4500C 80069C0C AFB00058 */  sw        $s0, 0x58($sp)
 /* 45010 80069C10 00808021 */  addu      $s0, $a0, $zero
@@ -10,7 +10,7 @@ glabel osGetId
 /* 4501C 80069C1C 92020065 */  lbu       $v0, 0x65($s0)
 /* 45020 80069C20 10400006 */  beqz      $v0, .L80069C3C
 /* 45024 80069C24 00000000 */   nop
-/* 45028 80069C28 0C01A5B4 */  jal       osPfsSelectBank
+/* 45028 80069C28 0C01A5B4 */  jal       __osPfsSelectBank
 /* 4502C 80069C2C 00002821 */   addu     $a1, $zero, $zero
 /* 45030 80069C30 00401821 */  addu      $v1, $v0, $zero
 /* 45034 80069C34 14600062 */  bnez      $v1, .L80069DC0
@@ -19,7 +19,7 @@ glabel osGetId
 /* 4503C 80069C3C 8E040004 */  lw        $a0, 4($s0)
 /* 45040 80069C40 8E050008 */  lw        $a1, 8($s0)
 /* 45044 80069C44 24060001 */  addiu     $a2, $zero, 1
-/* 45048 80069C48 0C01A874 */  jal       osContRamRead
+/* 45048 80069C48 0C01A874 */  jal       __osContRamRead
 /* 4504C 80069C4C 27A70010 */   addiu    $a3, $sp, 0x10
 /* 45050 80069C50 00401821 */  addu      $v1, $v0, $zero
 /* 45054 80069C54 1460005A */  bnez      $v1, .L80069DC0
@@ -49,7 +49,7 @@ glabel osGetId
 /* 450B0 80069CB0 00000000 */   nop
 .L80069CB4:
 /* 450B4 80069CB4 02002021 */  addu      $a0, $s0, $zero
-/* 450B8 80069CB8 0C01A6A9 */  jal       osCheckPackId
+/* 450B8 80069CB8 0C01A6A9 */  jal       __osCheckPackId
 /* 450BC 80069CBC 02202821 */   addu     $a1, $s1, $zero
 /* 450C0 80069CC0 00401821 */  addu      $v1, $v0, $zero
 /* 450C4 80069CC4 2402000A */  addiu     $v0, $zero, 0xa
@@ -57,7 +57,7 @@ glabel osGetId
 /* 450CC 80069CCC 02002021 */   addu     $a0, $s0, $zero
 /* 450D0 80069CD0 02202821 */  addu      $a1, $s1, $zero
 /* 450D4 80069CD4 27B10030 */  addiu     $s1, $sp, 0x30
-/* 450D8 80069CD8 0C01A5EE */  jal       osRepairPackId
+/* 450D8 80069CD8 0C01A5EE */  jal       __osRepairPackId
 /* 450DC 80069CDC 02203021 */   addu     $a2, $s1, $zero
 /* 450E0 80069CE0 00401821 */  addu      $v1, $v0, $zero
 /* 450E4 80069CE4 10600005 */  beqz      $v1, .L80069CFC
@@ -75,7 +75,7 @@ glabel osGetId
 /* 4510C 80069D0C 02002021 */  addu      $a0, $s0, $zero
 /* 45110 80069D10 02202821 */  addu      $a1, $s1, $zero
 /* 45114 80069D14 27B10030 */  addiu     $s1, $sp, 0x30
-/* 45118 80069D18 0C01A5EE */  jal       osRepairPackId
+/* 45118 80069D18 0C01A5EE */  jal       __osRepairPackId
 /* 4511C 80069D1C 02203021 */   addu     $a2, $s1, $zero
 /* 45120 80069D20 00401821 */  addu      $v1, $v0, $zero
 /* 45124 80069D24 14600026 */  bnez      $v1, .L80069DC0
@@ -112,7 +112,7 @@ glabel osGetId
 /* 4519C 80069D9C 000318C0 */  sll       $v1, $v1, 3
 /* 451A0 80069DA0 AE020058 */  sw        $v0, 0x58($s0)
 /* 451A4 80069DA4 00431021 */  addu      $v0, $v0, $v1
-/* 451A8 80069DA8 0C01A874 */  jal       osContRamRead
+/* 451A8 80069DA8 0C01A874 */  jal       __osContRamRead
 /* 451AC 80069DAC AE02005C */   sw       $v0, 0x5c($s0)
 /* 451B0 80069DB0 00401821 */  addu      $v1, $v0, $zero
 /* 451B4 80069DB4 0003102B */  sltu      $v0, $zero, $v1

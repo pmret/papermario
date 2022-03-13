@@ -30,7 +30,7 @@ glabel osPfsDeleteFile
 /* 43A20 80068620 92220065 */  lbu       $v0, 0x65($s1)
 /* 43A24 80068624 10400005 */  beqz      $v0, .L8006863C
 /* 43A28 80068628 02202021 */   addu     $a0, $s1, $zero
-/* 43A2C 8006862C 0C01A5B4 */  jal       osPfsSelectBank
+/* 43A2C 8006862C 0C01A5B4 */  jal       __osPfsSelectBank
 /* 43A30 80068630 00002821 */   addu     $a1, $zero, $zero
 /* 43A34 80068634 14400044 */  bnez      $v0, .L80068748
 /* 43A38 80068638 00000000 */   nop
@@ -41,7 +41,7 @@ glabel osPfsDeleteFile
 /* 43A48 80068648 8E250008 */  lw        $a1, 8($s1)
 /* 43A4C 8006864C 27A70118 */  addiu     $a3, $sp, 0x118
 /* 43A50 80068650 00C23021 */  addu      $a2, $a2, $v0
-/* 43A54 80068654 0C01A874 */  jal       osContRamRead
+/* 43A54 80068654 0C01A874 */  jal       __osContRamRead
 /* 43A58 80068658 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 43A5C 8006865C 1440003A */  bnez      $v0, .L80068748
 /* 43A60 80068660 00000000 */   nop
@@ -99,7 +99,7 @@ glabel osPfsDeleteFile
 /* 43B28 80068728 8E250008 */  lw        $a1, 8($s1)
 /* 43B2C 8006872C 02003821 */  addu      $a3, $s0, $zero
 /* 43B30 80068730 00C23021 */  addu      $a2, $a2, $v0
-/* 43B34 80068734 0C01A8F0 */  jal       osContRamWrite
+/* 43B34 80068734 0C01A8F0 */  jal       __osContRamWrite
 /* 43B38 80068738 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 43B3C 8006873C 0801A1D2 */  j         .L80068748
 /* 43B40 80068740 00000000 */   nop

@@ -5,8 +5,8 @@ glabel osPfsRequestData
 /* 488BC 8006D4BC 27BDFFF0 */  addiu     $sp, $sp, -0x10
 /* 488C0 8006D4C0 3C05800A */  lui       $a1, %hi(D_8009A606)
 /* 488C4 8006D4C4 90A5A606 */  lbu       $a1, %lo(D_8009A606)($a1)
-/* 488C8 8006D4C8 3C07800E */  lui       $a3, %hi(D_800DA000)
-/* 488CC 8006D4CC 24E7A000 */  addiu     $a3, $a3, %lo(D_800DA000)
+/* 488C8 8006D4C8 3C07800E */  lui       $a3, %hi(__osPfsPifRam)
+/* 488CC 8006D4CC 24E7A000 */  addiu     $a3, $a3, %lo(__osPfsPifRam)
 /* 488D0 8006D4D0 00003021 */  addu      $a2, $zero, $zero
 /* 488D4 8006D4D4 24020001 */  addiu     $v0, $zero, 1
 /* 488D8 8006D4D8 240300FF */  addiu     $v1, $zero, 0xff
@@ -15,8 +15,8 @@ glabel osPfsRequestData
 /* 488E4 8006D4E4 24020001 */  addiu     $v0, $zero, 1
 /* 488E8 8006D4E8 A3A20001 */  sb        $v0, 1($sp)
 /* 488EC 8006D4EC 24020003 */  addiu     $v0, $zero, 3
-/* 488F0 8006D4F0 3C01800A */  lui       $at, %hi(D_8009A61C)
-/* 488F4 8006D4F4 A024A61C */  sb        $a0, %lo(D_8009A61C)($at)
+/* 488F0 8006D4F0 3C01800A */  lui       $at, %hi(__osContLastCmd)
+/* 488F4 8006D4F4 A024A61C */  sb        $a0, %lo(__osContLastCmd)($at)
 /* 488F8 8006D4F8 A3A30000 */  sb        $v1, ($sp)
 /* 488FC 8006D4FC A3A20002 */  sb        $v0, 2($sp)
 /* 48900 8006D500 A3A40003 */  sb        $a0, 3($sp)

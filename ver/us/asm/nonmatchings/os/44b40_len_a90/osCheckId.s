@@ -9,13 +9,13 @@ glabel __osCheckId
 /* 451E4 80069DE4 92020065 */  lbu       $v0, 0x65($s0)
 /* 451E8 80069DE8 1040000C */  beqz      $v0, .L80069E1C
 /* 451EC 80069DEC 00000000 */   nop
-/* 451F0 80069DF0 0C01A5B4 */  jal       osPfsSelectBank
+/* 451F0 80069DF0 0C01A5B4 */  jal       __osPfsSelectBank
 /* 451F4 80069DF4 00002821 */   addu     $a1, $zero, $zero
 /* 451F8 80069DF8 00401821 */  addu      $v1, $v0, $zero
 /* 451FC 80069DFC 24020002 */  addiu     $v0, $zero, 2
 /* 45200 80069E00 14620004 */  bne       $v1, $v0, .L80069E14
 /* 45204 80069E04 02002021 */   addu     $a0, $s0, $zero
-/* 45208 80069E08 0C01A5B4 */  jal       osPfsSelectBank
+/* 45208 80069E08 0C01A5B4 */  jal       __osPfsSelectBank
 /* 4520C 80069E0C 00002821 */   addu     $a1, $zero, $zero
 /* 45210 80069E10 00401821 */  addu      $v1, $v0, $zero
 .L80069E14:
@@ -25,7 +25,7 @@ glabel __osCheckId
 /* 4521C 80069E1C 8E040004 */  lw        $a0, 4($s0)
 /* 45220 80069E20 8E050008 */  lw        $a1, 8($s0)
 /* 45224 80069E24 24060001 */  addiu     $a2, $zero, 1
-/* 45228 80069E28 0C01A874 */  jal       osContRamRead
+/* 45228 80069E28 0C01A874 */  jal       __osContRamRead
 /* 4522C 80069E2C 27A70010 */   addiu    $a3, $sp, 0x10
 /* 45230 80069E30 00401821 */  addu      $v1, $v0, $zero
 /* 45234 80069E34 1060000B */  beqz      $v1, .L80069E64
@@ -35,7 +35,7 @@ glabel __osCheckId
 /* 45244 80069E44 8E040004 */  lw        $a0, 4($s0)
 /* 45248 80069E48 8E050008 */  lw        $a1, 8($s0)
 /* 4524C 80069E4C 24060001 */  addiu     $a2, $zero, 1
-/* 45250 80069E50 0C01A874 */  jal       osContRamRead
+/* 45250 80069E50 0C01A874 */  jal       __osContRamRead
 /* 45254 80069E54 27A70010 */   addiu    $a3, $sp, 0x10
 /* 45258 80069E58 00401821 */  addu      $v1, $v0, $zero
 /* 4525C 80069E5C 14600007 */  bnez      $v1, .L80069E7C

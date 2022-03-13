@@ -8,8 +8,8 @@ glabel osPfsGetInitData
 /* 4896C 8006D56C 00005021 */  addu      $t2, $zero, $zero
 /* 48970 8006D570 3C02800A */  lui       $v0, %hi(D_8009A606)
 /* 48974 8006D574 9042A606 */  lbu       $v0, %lo(D_8009A606)($v0)
-/* 48978 8006D578 3C08800E */  lui       $t0, %hi(D_800DA000)
-/* 4897C 8006D57C 2508A000 */  addiu     $t0, $t0, %lo(D_800DA000)
+/* 48978 8006D578 3C08800E */  lui       $t0, %hi(__osPfsPifRam)
+/* 4897C 8006D57C 2508A000 */  addiu     $t0, $t0, %lo(__osPfsPifRam)
 /* 48980 8006D580 18400021 */  blez      $v0, .L8006D608
 /* 48984 8006D584 00003821 */   addu     $a3, $zero, $zero
 /* 48988 8006D588 240C0001 */  addiu     $t4, $zero, 1

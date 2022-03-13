@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osContRamRead
+glabel __osContRamRead
 /* 455D0 8006A1D0 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 455D4 8006A1D4 AFB40038 */  sw        $s4, 0x38($sp)
 /* 455D8 8006A1D8 0080A021 */  addu      $s4, $a0, $zero
@@ -17,27 +17,27 @@ glabel osContRamRead
 /* 45600 8006A200 AFB60040 */  sw        $s6, 0x40($sp)
 /* 45604 8006A204 AFB20030 */  sw        $s2, 0x30($sp)
 /* 45608 8006A208 AFB1002C */  sw        $s1, 0x2c($sp)
-/* 4560C 8006A20C 0C019771 */  jal       osSiGetAccess
+/* 4560C 8006A20C 0C019771 */  jal       __osSiGetAccess
 /* 45610 8006A210 AFA70014 */   sw       $a3, 0x14($sp)
 /* 45614 8006A214 24170002 */  addiu     $s7, $zero, 2
 /* 45618 8006A218 3216FFFF */  andi      $s6, $s0, 0xffff
 /* 4561C 8006A21C 00108140 */  sll       $s0, $s0, 5
-/* 45620 8006A220 3C1E800E */  lui       $fp, %hi(D_800DA000)
-/* 45624 8006A224 27DEA000 */  addiu     $fp, $fp, %lo(D_800DA000)
+/* 45620 8006A220 3C1E800E */  lui       $fp, %hi(__osPfsPifRam)
+/* 45624 8006A224 27DEA000 */  addiu     $fp, $fp, %lo(__osPfsPifRam)
 /* 45628 8006A228 AFB0001C */  sw        $s0, 0x1c($sp)
 .L8006A22C:
-/* 4562C 8006A22C 3C02800A */  lui       $v0, %hi(D_8009A61C)
-/* 45630 8006A230 9042A61C */  lbu       $v0, %lo(D_8009A61C)($v0)
-/* 45634 8006A234 3C10800E */  lui       $s0, %hi(D_800DA000)
+/* 4562C 8006A22C 3C02800A */  lui       $v0, %hi(__osContLastCmd)
+/* 45630 8006A230 9042A61C */  lbu       $v0, %lo(__osContLastCmd)($v0)
+/* 45634 8006A234 3C10800E */  lui       $s0, %hi(__osPfsPifRam)
 /* 45638 8006A238 14570005 */  bne       $v0, $s7, .L8006A250
-/* 4563C 8006A23C 2610A000 */   addiu    $s0, $s0, %lo(D_800DA000)
+/* 4563C 8006A23C 2610A000 */   addiu    $s0, $s0, %lo(__osPfsPifRam)
 /* 45640 8006A240 3C028009 */  lui       $v0, %hi(D_800958E0)
 /* 45644 8006A244 8C4258E0 */  lw        $v0, %lo(D_800958E0)($v0)
 /* 45648 8006A248 50530019 */  beql      $v0, $s3, .L8006A2B0
 /* 4564C 8006A24C 02708021 */   addu     $s0, $s3, $s0
 .L8006A250:
-/* 45650 8006A250 3C01800A */  lui       $at, %hi(D_8009A61C)
-/* 45654 8006A254 A037A61C */  sb        $s7, %lo(D_8009A61C)($at)
+/* 45650 8006A250 3C01800A */  lui       $at, %hi(__osContLastCmd)
+/* 45654 8006A254 A037A61C */  sb        $s7, %lo(__osContLastCmd)($at)
 /* 45658 8006A258 3C018009 */  lui       $at, %hi(D_800958E0)
 /* 4565C 8006A25C AC3358E0 */  sw        $s3, %lo(D_800958E0)($at)
 /* 45660 8006A260 1A600006 */  blez      $s3, .L8006A27C
@@ -96,7 +96,7 @@ glabel osContRamRead
 /* 45728 8006A328 304200FF */  andi      $v0, $v0, 0xff
 /* 4572C 8006A32C 10430008 */  beq       $v0, $v1, .L8006A350
 /* 45730 8006A330 02802021 */   addu     $a0, $s4, $zero
-/* 45734 8006A334 0C01A530 */  jal       osPfsGetStatus
+/* 45734 8006A334 0C01A530 */  jal       __osPfsGetStatus
 /* 45738 8006A338 02602821 */   addu     $a1, $s3, $zero
 /* 4573C 8006A33C 00408821 */  addu      $s1, $v0, $zero
 /* 45740 8006A340 1620000E */  bnez      $s1, .L8006A37C
@@ -118,7 +118,7 @@ glabel osContRamRead
 /* 45774 8006A374 0441FFAD */  bgez      $v0, .L8006A22C
 /* 45778 8006A378 26B5FFFF */   addiu    $s5, $s5, -1
 .L8006A37C:
-/* 4577C 8006A37C 0C01978C */  jal       osSiRelAccess
+/* 4577C 8006A37C 0C01978C */  jal       __osSiRelAccess
 /* 45780 8006A380 00000000 */   nop
 /* 45784 8006A384 02201021 */  addu      $v0, $s1, $zero
 /* 45788 8006A388 8FBF004C */  lw        $ra, 0x4c($sp)

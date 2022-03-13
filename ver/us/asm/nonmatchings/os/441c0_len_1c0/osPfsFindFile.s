@@ -38,13 +38,13 @@ glabel osPfsFindFile
 /* 44240 80068E40 8E050008 */  lw        $a1, 8($s0)
 /* 44244 80068E44 27A70010 */  addiu     $a3, $sp, 0x10
 /* 44248 80068E48 00D13021 */  addu      $a2, $a2, $s1
-/* 4424C 80068E4C 0C01A874 */  jal       osContRamRead
+/* 4424C 80068E4C 0C01A874 */  jal       __osContRamRead
 /* 44250 80068E50 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 44254 80068E54 00403821 */  addu      $a3, $v0, $zero
 /* 44258 80068E58 14E0003B */  bnez      $a3, .L80068F48
 /* 4425C 80068E5C 00E01021 */   addu     $v0, $a3, $zero
 /* 44260 80068E60 8E040004 */  lw        $a0, 4($s0)
-/* 44264 80068E64 0C01A530 */  jal       osPfsGetStatus
+/* 44264 80068E64 0C01A530 */  jal       __osPfsGetStatus
 /* 44268 80068E68 8E050008 */   lw       $a1, 8($s0)
 /* 4426C 80068E6C 00403821 */  addu      $a3, $v0, $zero
 /* 44270 80068E70 14E00027 */  bnez      $a3, .L80068F10

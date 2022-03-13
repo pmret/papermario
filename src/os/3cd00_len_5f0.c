@@ -1,22 +1,23 @@
 #define MOVE_ADDU
 
 #include "common.h"
+#include "PR/controller.h"
+#include "PR/siint.h"
 
-extern u8 D_8009A61C;
 extern s32 D_800B0ED0;
 
 s32 osContStartQuery(OSMesgQueue* mq) {
     s32 ret;
 
-    osSiGetAccess();
-    if (D_8009A61C != 0) {
-        osPackRequestData(0);
+    __osSiGetAccess();
+    if (__osContLastCmd != 0) {
+        __osPackRequestData(0);
         __osSiRawStartDma(1, &D_800B0ED0);
         osRecvMesg(mq, NULL, 1);
     }
     ret = __osSiRawStartDma(0, &D_800B0ED0);
-    D_8009A61C = 0;
-    osSiRelAccess();
+    __osContLastCmd = 0;
+    __osSiRelAccess();
 
     return ret;
 }

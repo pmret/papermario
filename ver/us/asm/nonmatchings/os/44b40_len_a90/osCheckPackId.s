@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osCheckPackId
+glabel __osCheckPackId
 /* 44EA4 80069AA4 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 44EA8 80069AA8 AFB40038 */  sw        $s4, 0x38($sp)
 /* 44EAC 80069AAC 0080A021 */  addu      $s4, $a0, $zero
@@ -14,7 +14,7 @@ glabel osCheckPackId
 /* 44EC8 80069AC8 92820065 */  lbu       $v0, 0x65($s4)
 /* 44ECC 80069ACC 10400005 */  beqz      $v0, .L80069AE4
 /* 44ED0 80069AD0 00A09021 */   addu     $s2, $a1, $zero
-/* 44ED4 80069AD4 0C01A5B4 */  jal       osPfsSelectBank
+/* 44ED4 80069AD4 0C01A5B4 */  jal       __osPfsSelectBank
 /* 44ED8 80069AD8 00002821 */   addu     $a1, $zero, $zero
 /* 44EDC 80069ADC 14400041 */  bnez      $v0, .L80069BE4
 /* 44EE0 80069AE0 00000000 */   nop
@@ -33,7 +33,7 @@ glabel osCheckPackId
 /* 44F0C 80069B0C 8E840004 */  lw        $a0, 4($s4)
 /* 44F10 80069B10 8E850008 */  lw        $a1, 8($s4)
 /* 44F14 80069B14 96060000 */  lhu       $a2, ($s0)
-/* 44F18 80069B18 0C01A874 */  jal       osContRamRead
+/* 44F18 80069B18 0C01A874 */  jal       __osContRamRead
 /* 44F1C 80069B1C 02403821 */   addu     $a3, $s2, $zero
 /* 44F20 80069B20 14400030 */  bnez      $v0, .L80069BE4
 /* 44F24 80069B24 02402821 */   addu     $a1, $s2, $zero
@@ -81,7 +81,7 @@ glabel osCheckPackId
 /* 44FB8 80069BB8 AFB50010 */  sw        $s5, 0x10($sp)
 /* 44FBC 80069BBC 8E840004 */  lw        $a0, 4($s4)
 /* 44FC0 80069BC0 8E850008 */  lw        $a1, 8($s4)
-/* 44FC4 80069BC4 0C01A8F0 */  jal       osContRamWrite
+/* 44FC4 80069BC4 0C01A8F0 */  jal       __osContRamWrite
 /* 44FC8 80069BC8 02403821 */   addu     $a3, $s2, $zero
 /* 44FCC 80069BCC 14400005 */  bnez      $v0, .L80069BE4
 /* 44FD0 80069BD0 26100001 */   addiu    $s0, $s0, 1

@@ -196,7 +196,7 @@ glabel osPfsAllocateFile
 /* 43858 80068458 8E440004 */  lw        $a0, 4($s2)
 /* 4385C 8006845C 8E450008 */  lw        $a1, 8($s2)
 /* 43860 80068460 00C23021 */  addu      $a2, $a2, $v0
-/* 43864 80068464 0C01A8F0 */  jal       osContRamWrite
+/* 43864 80068464 0C01A8F0 */  jal       __osContRamWrite
 /* 43868 80068468 30C6FFFF */   andi     $a2, $a2, 0xffff
 .L8006846C:
 /* 4386C 8006846C 8FBF0294 */  lw        $ra, 0x294($sp)

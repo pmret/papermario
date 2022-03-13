@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osIdCheckSum
+glabel __osIdCheckSum
 /* 44B74 80069774 2487001C */  addiu     $a3, $a0, 0x1c
 /* 44B78 80069778 A4C00000 */  sh        $zero, ($a2)
 /* 44B7C 8006977C A4A00000 */  sh        $zero, ($a1)

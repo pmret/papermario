@@ -17,19 +17,19 @@ glabel osMotorInit
 /* 43374 80067F74 AE500004 */  sw        $s0, 4($s2)
 /* 43378 80067F78 AE510008 */  sw        $s1, 8($s2)
 /* 4337C 80067F7C A2420065 */  sb        $v0, 0x65($s2)
-/* 43380 80067F80 0C01A5B4 */  jal       osPfsSelectBank
+/* 43380 80067F80 0C01A5B4 */  jal       __osPfsSelectBank
 /* 43384 80067F84 AE400000 */   sw       $zero, ($s2)
 /* 43388 80067F88 24130002 */  addiu     $s3, $zero, 2
 /* 4338C 80067F8C 14530003 */  bne       $v0, $s3, .L80067F9C
 /* 43390 80067F90 02402021 */   addu     $a0, $s2, $zero
-/* 43394 80067F94 0C01A5B4 */  jal       osPfsSelectBank
+/* 43394 80067F94 0C01A5B4 */  jal       __osPfsSelectBank
 /* 43398 80067F98 24050080 */   addiu    $a1, $zero, 0x80
 .L80067F9C:
 /* 4339C 80067F9C 14400074 */  bnez      $v0, .L80068170
 /* 433A0 80067FA0 02002021 */   addu     $a0, $s0, $zero
 /* 433A4 80067FA4 02202821 */  addu      $a1, $s1, $zero
 /* 433A8 80067FA8 24060400 */  addiu     $a2, $zero, 0x400
-/* 433AC 80067FAC 0C01A874 */  jal       osContRamRead
+/* 433AC 80067FAC 0C01A874 */  jal       __osContRamRead
 /* 433B0 80067FB0 27A70010 */   addiu    $a3, $sp, 0x10
 /* 433B4 80067FB4 50530001 */  beql      $v0, $s3, .L80067FBC
 /* 433B8 80067FB8 24020004 */   addiu    $v0, $zero, 4
@@ -40,7 +40,7 @@ glabel osMotorInit
 /* 433C8 80067FC8 240200FE */  addiu     $v0, $zero, 0xfe
 /* 433CC 80067FCC 10620013 */  beq       $v1, $v0, .L8006801C
 /* 433D0 80067FD0 02402021 */   addu     $a0, $s2, $zero
-/* 433D4 80067FD4 0C01A5B4 */  jal       osPfsSelectBank
+/* 433D4 80067FD4 0C01A5B4 */  jal       __osPfsSelectBank
 /* 433D8 80067FD8 24050080 */   addiu    $a1, $zero, 0x80
 /* 433DC 80067FDC 50530001 */  beql      $v0, $s3, .L80067FE4
 /* 433E0 80067FE0 24020004 */   addiu    $v0, $zero, 4
@@ -49,7 +49,7 @@ glabel osMotorInit
 /* 433E8 80067FE8 02002021 */   addu     $a0, $s0, $zero
 /* 433EC 80067FEC 02202821 */  addu      $a1, $s1, $zero
 /* 433F0 80067FF0 24060400 */  addiu     $a2, $zero, 0x400
-/* 433F4 80067FF4 0C01A874 */  jal       osContRamRead
+/* 433F4 80067FF4 0C01A874 */  jal       __osContRamRead
 /* 433F8 80067FF8 27A70010 */   addiu    $a3, $sp, 0x10
 /* 433FC 80067FFC 50530001 */  beql      $v0, $s3, .L80068004
 /* 43400 80068000 24020004 */   addiu    $v0, $zero, 4

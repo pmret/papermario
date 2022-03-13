@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osRepairPackId
+glabel __osRepairPackId
 /* 44BB8 800697B8 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* 44BBC 800697BC AFB10064 */  sw        $s1, 0x64($sp)
 /* 44BC0 800697C0 00808821 */  addu      $s1, $a0, $zero
@@ -30,7 +30,7 @@ glabel osRepairPackId
 /* 44C1C 8006981C 10400006 */  beqz      $v0, .L80069838
 /* 44C20 80069820 00009021 */   addu     $s2, $zero, $zero
 /* 44C24 80069824 02202021 */  addu      $a0, $s1, $zero
-/* 44C28 80069828 0C01A5B4 */  jal       osPfsSelectBank
+/* 44C28 80069828 0C01A5B4 */  jal       __osPfsSelectBank
 /* 44C2C 8006982C 00002821 */   addu     $a1, $zero, $zero
 /* 44C30 80069830 14400092 */  bnez      $v0, .L80069A7C
 /* 44C34 80069834 00000000 */   nop
@@ -39,13 +39,13 @@ glabel osRepairPackId
 /* 44C3C 8006983C 27B60038 */  addiu     $s6, $sp, 0x38
 /* 44C40 80069840 02202021 */  addu      $a0, $s1, $zero
 .L80069844:
-/* 44C44 80069844 0C01A5B4 */  jal       osPfsSelectBank
+/* 44C44 80069844 0C01A5B4 */  jal       __osPfsSelectBank
 /* 44C48 80069848 324500FF */   andi     $a1, $s2, 0xff
 /* 44C4C 8006984C 1440008B */  bnez      $v0, .L80069A7C
 /* 44C50 80069850 00003021 */   addu     $a2, $zero, $zero
 /* 44C54 80069854 8E240004 */  lw        $a0, 4($s1)
 /* 44C58 80069858 8E250008 */  lw        $a1, 8($s1)
-/* 44C5C 8006985C 0C01A874 */  jal       osContRamRead
+/* 44C5C 8006985C 0C01A874 */  jal       __osContRamRead
 /* 44C60 80069860 27A70018 */   addiu    $a3, $sp, 0x18
 /* 44C64 80069864 14400085 */  bnez      $v0, .L80069A7C
 /* 44C68 80069868 26830001 */   addiu    $v1, $s4, 1
@@ -63,13 +63,13 @@ glabel osRepairPackId
 /* 44C94 80069894 AFA00010 */  sw        $zero, 0x10($sp)
 /* 44C98 80069898 8E240004 */  lw        $a0, 4($s1)
 /* 44C9C 8006989C 8E250008 */  lw        $a1, 8($s1)
-/* 44CA0 800698A0 0C01A8F0 */  jal       osContRamWrite
+/* 44CA0 800698A0 0C01A8F0 */  jal       __osContRamWrite
 /* 44CA4 800698A4 27A70018 */   addiu    $a3, $sp, 0x18
 /* 44CA8 800698A8 14400074 */  bnez      $v0, .L80069A7C
 /* 44CAC 800698AC 00003021 */   addu     $a2, $zero, $zero
 /* 44CB0 800698B0 8E240004 */  lw        $a0, 4($s1)
 /* 44CB4 800698B4 8E250008 */  lw        $a1, 8($s1)
-/* 44CB8 800698B8 0C01A874 */  jal       osContRamRead
+/* 44CB8 800698B8 0C01A874 */  jal       __osContRamRead
 /* 44CBC 800698BC 27A70038 */   addiu    $a3, $sp, 0x38
 /* 44CC0 800698C0 1440006E */  bnez      $v0, .L80069A7C
 /* 44CC4 800698C4 00008021 */   addu     $s0, $zero, $zero
@@ -91,13 +91,13 @@ glabel osRepairPackId
 /* 44CFC 800698FC 00000000 */   nop
 /* 44D00 80069900 1A40000F */  blez      $s2, .L80069940
 /* 44D04 80069904 02202021 */   addu     $a0, $s1, $zero
-/* 44D08 80069908 0C01A5B4 */  jal       osPfsSelectBank
+/* 44D08 80069908 0C01A5B4 */  jal       __osPfsSelectBank
 /* 44D0C 8006990C 00002821 */   addu     $a1, $zero, $zero
 /* 44D10 80069910 1440005A */  bnez      $v0, .L80069A7C
 /* 44D14 80069914 00003021 */   addu     $a2, $zero, $zero
 /* 44D18 80069918 8E240004 */  lw        $a0, 4($s1)
 /* 44D1C 8006991C 8E250008 */  lw        $a1, 8($s1)
-/* 44D20 80069920 0C01A874 */  jal       osContRamRead
+/* 44D20 80069920 0C01A874 */  jal       __osContRamRead
 /* 44D24 80069924 02803821 */   addu     $a3, $s4, $zero
 /* 44D28 80069928 14400054 */  bnez      $v0, .L80069A7C
 /* 44D2C 8006992C 00000000 */   nop
@@ -114,7 +114,7 @@ glabel osRepairPackId
 /* 44D50 80069950 92220065 */  lbu       $v0, 0x65($s1)
 /* 44D54 80069954 10400005 */  beqz      $v0, .L8006996C
 /* 44D58 80069958 02202021 */   addu     $a0, $s1, $zero
-/* 44D5C 8006995C 0C01A5B4 */  jal       osPfsSelectBank
+/* 44D5C 8006995C 0C01A5B4 */  jal       __osPfsSelectBank
 /* 44D60 80069960 00002821 */   addu     $a1, $zero, $zero
 /* 44D64 80069964 14400045 */  bnez      $v0, .L80069A7C
 /* 44D68 80069968 00000000 */   nop
@@ -161,7 +161,7 @@ glabel osRepairPackId
 /* 44E00 80069A00 AFB40010 */  sw        $s4, 0x10($sp)
 /* 44E04 80069A04 8E240004 */  lw        $a0, 4($s1)
 /* 44E08 80069A08 8E250008 */  lw        $a1, 8($s1)
-/* 44E0C 80069A0C 0C01A8F0 */  jal       osContRamWrite
+/* 44E0C 80069A0C 0C01A8F0 */  jal       __osContRamWrite
 /* 44E10 80069A10 02603821 */   addu     $a3, $s3, $zero
 /* 44E14 80069A14 14400019 */  bnez      $v0, .L80069A7C
 /* 44E18 80069A18 26100001 */   addiu    $s0, $s0, 1
@@ -171,7 +171,7 @@ glabel osRepairPackId
 /* 44E28 80069A28 8E240004 */  lw        $a0, 4($s1)
 /* 44E2C 80069A2C 8E250008 */  lw        $a1, 8($s1)
 /* 44E30 80069A30 24060001 */  addiu     $a2, $zero, 1
-/* 44E34 80069A34 0C01A874 */  jal       osContRamRead
+/* 44E34 80069A34 0C01A874 */  jal       __osContRamRead
 /* 44E38 80069A38 27A70018 */   addiu    $a3, $sp, 0x18
 /* 44E3C 80069A3C 10400005 */  beqz      $v0, .L80069A54
 /* 44E40 80069A40 02603021 */   addu     $a2, $s3, $zero

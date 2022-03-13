@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osPackRequestData
+glabel __osPackRequestData
 /* 3D1D0 80061DD0 27BDFFF0 */  addiu     $sp, $sp, -0x10
 /* 3D1D4 80061DD4 00802821 */  addu      $a1, $a0, $zero
 /* 3D1D8 80061DD8 2406000E */  addiu     $a2, $zero, 0xe

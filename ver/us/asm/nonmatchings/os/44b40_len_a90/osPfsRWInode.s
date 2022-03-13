@@ -19,8 +19,8 @@ glabel __osPfsRWInode
 /* 452C4 80069EC4 AFB1002C */  sw        $s1, 0x2c($sp)
 /* 452C8 80069EC8 14400011 */  bnez      $v0, .L80069F10
 /* 452CC 80069ECC AFB00028 */   sw       $s0, 0x28($sp)
-/* 452D0 80069ED0 3C038009 */  lui       $v1, %hi(D_800958D4)
-/* 452D4 80069ED4 906358D4 */  lbu       $v1, %lo(D_800958D4)($v1)
+/* 452D0 80069ED0 3C038009 */  lui       $v1, %hi(__osPfsInodeCacheBank)
+/* 452D4 80069ED4 906358D4 */  lbu       $v1, %lo(__osPfsInodeCacheBank)($v1)
 /* 452D8 80069ED8 32E200FF */  andi      $v0, $s7, 0xff
 /* 452DC 80069EDC 1443000C */  bne       $v0, $v1, .L80069F10
 /* 452E0 80069EE0 00000000 */   nop
@@ -39,7 +39,7 @@ glabel __osPfsRWInode
 /* 45310 80069F10 92420065 */  lbu       $v0, 0x65($s2)
 /* 45314 80069F14 10400006 */  beqz      $v0, .L80069F30
 /* 45318 80069F18 02402021 */   addu     $a0, $s2, $zero
-/* 4531C 80069F1C 0C01A5B4 */  jal       osPfsSelectBank
+/* 4531C 80069F1C 0C01A5B4 */  jal       __osPfsSelectBank
 /* 45320 80069F20 00002821 */   addu     $a1, $zero, $zero
 /* 45324 80069F24 00401821 */  addu      $v1, $v0, $zero
 /* 45328 80069F28 1460009A */  bnez      $v1, .L8006A194
@@ -88,7 +88,7 @@ glabel __osPfsRWInode
 /* 453BC 80069FBC 02203821 */  addu      $a3, $s1, $zero
 /* 453C0 80069FC0 00D33021 */  addu      $a2, $a2, $s3
 /* 453C4 80069FC4 00D03021 */  addu      $a2, $a2, $s0
-/* 453C8 80069FC8 0C01A8F0 */  jal       osContRamWrite
+/* 453C8 80069FC8 0C01A8F0 */  jal       __osContRamWrite
 /* 453CC 80069FCC 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 453D0 80069FD0 8E460058 */  lw        $a2, 0x58($s2)
 /* 453D4 80069FD4 AFA00010 */  sw        $zero, 0x10($sp)
@@ -97,7 +97,7 @@ glabel __osPfsRWInode
 /* 453E0 80069FE0 02203821 */  addu      $a3, $s1, $zero
 /* 453E4 80069FE4 00D33021 */  addu      $a2, $a2, $s3
 /* 453E8 80069FE8 00D03021 */  addu      $a2, $a2, $s0
-/* 453EC 80069FEC 0C01A8F0 */  jal       osContRamWrite
+/* 453EC 80069FEC 0C01A8F0 */  jal       __osContRamWrite
 /* 453F0 80069FF0 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 453F4 80069FF4 0801A808 */  j         .L8006A020
 /* 453F8 80069FF8 00401821 */   addu     $v1, $v0, $zero
@@ -108,7 +108,7 @@ glabel __osPfsRWInode
 /* 45408 8006A008 02203821 */  addu      $a3, $s1, $zero
 /* 4540C 8006A00C 00D33021 */  addu      $a2, $a2, $s3
 /* 45410 8006A010 00D03021 */  addu      $a2, $a2, $s0
-/* 45414 8006A014 0C01A874 */  jal       osContRamRead
+/* 45414 8006A014 0C01A874 */  jal       __osContRamRead
 /* 45418 8006A018 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 4541C 8006A01C 00401821 */  addu      $v1, $v0, $zero
 .L8006A020:
@@ -152,7 +152,7 @@ glabel __osPfsRWInode
 /* 454A8 8006A0A8 26310020 */  addiu     $s1, $s1, 0x20
 /* 454AC 8006A0AC 00D33021 */  addu      $a2, $a2, $s3
 /* 454B0 8006A0B0 00D03021 */  addu      $a2, $a2, $s0
-/* 454B4 8006A0B4 0C01A874 */  jal       osContRamRead
+/* 454B4 8006A0B4 0C01A874 */  jal       __osContRamRead
 /* 454B8 8006A0B8 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 454BC 8006A0BC 26100001 */  addiu     $s0, $s0, 1
 /* 454C0 8006A0C0 2A020008 */  slti      $v0, $s0, 8
@@ -196,7 +196,7 @@ glabel __osPfsRWInode
 /* 45544 8006A144 26310020 */  addiu     $s1, $s1, 0x20
 /* 45548 8006A148 00D33021 */  addu      $a2, $a2, $s3
 /* 4554C 8006A14C 00D03021 */  addu      $a2, $a2, $s0
-/* 45550 8006A150 0C01A8F0 */  jal       osContRamWrite
+/* 45550 8006A150 0C01A8F0 */  jal       __osContRamWrite
 /* 45554 8006A154 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 45558 8006A158 26100001 */  addiu     $s0, $s0, 1
 /* 4555C 8006A15C 2A020008 */  slti      $v0, $s0, 8
@@ -207,8 +207,8 @@ glabel __osPfsRWInode
 .L8006A16C:
 /* 4556C 8006A16C 3C05800E */  lui       $a1, %hi(D_800D9680)
 /* 45570 8006A170 24A59680 */  addiu     $a1, $a1, %lo(D_800D9680)
-/* 45574 8006A174 3C018009 */  lui       $at, %hi(D_800958D4)
-/* 45578 8006A178 A03758D4 */  sb        $s7, %lo(D_800958D4)($at)
+/* 45574 8006A174 3C018009 */  lui       $at, %hi(__osPfsInodeCacheBank)
+/* 45578 8006A178 A03758D4 */  sb        $s7, %lo(__osPfsInodeCacheBank)($at)
 /* 4557C 8006A17C 0C019194 */  jal       bcopy
 /* 45580 8006A180 24060100 */   addiu    $a2, $zero, 0x100
 /* 45584 8006A184 8E430008 */  lw        $v1, 8($s2)

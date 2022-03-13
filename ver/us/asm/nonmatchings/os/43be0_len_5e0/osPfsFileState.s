@@ -30,7 +30,7 @@ glabel osPfsFileState
 /* 44084 80068C84 92220065 */  lbu       $v0, 0x65($s1)
 /* 44088 80068C88 10400005 */  beqz      $v0, .L80068CA0
 /* 4408C 80068C8C 02202021 */   addu     $a0, $s1, $zero
-/* 44090 80068C90 0C01A5B4 */  jal       osPfsSelectBank
+/* 44090 80068C90 0C01A5B4 */  jal       __osPfsSelectBank
 /* 44094 80068C94 00002821 */   addu     $a1, $zero, $zero
 /* 44098 80068C98 1440003D */  bnez      $v0, .L80068D90
 /* 4409C 80068C9C 00000000 */   nop
@@ -40,7 +40,7 @@ glabel osPfsFileState
 /* 440A8 80068CA8 8E250008 */  lw        $a1, 8($s1)
 /* 440AC 80068CAC 27A70110 */  addiu     $a3, $sp, 0x110
 /* 440B0 80068CB0 00D03021 */  addu      $a2, $a2, $s0
-/* 440B4 80068CB4 0C01A874 */  jal       osContRamRead
+/* 440B4 80068CB4 0C01A874 */  jal       __osContRamRead
 /* 440B8 80068CB8 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 440BC 80068CBC 14400034 */  bnez      $v0, .L80068D90
 /* 440C0 80068CC0 00000000 */   nop
@@ -98,7 +98,7 @@ glabel osPfsFileState
 /* 4417C 80068D7C 0C019194 */  jal       bcopy
 /* 44180 80068D80 24060004 */   addiu    $a2, $zero, 4
 /* 44184 80068D84 8E240004 */  lw        $a0, 4($s1)
-/* 44188 80068D88 0C01A530 */  jal       osPfsGetStatus
+/* 44188 80068D88 0C01A530 */  jal       __osPfsGetStatus
 /* 4418C 80068D8C 8E250008 */   lw       $a1, 8($s1)
 .L80068D90:
 /* 44190 80068D90 8FBF0148 */  lw        $ra, 0x148($sp)

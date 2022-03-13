@@ -65,7 +65,7 @@ glabel osContInit
 .L80061C68:
 /* 3D068 80061C68 3C01800A */  lui       $at, %hi(D_8009A606)
 /* 3D06C 80061C6C A022A606 */  sb        $v0, %lo(D_8009A606)($at)
-/* 3D070 80061C70 0C018774 */  jal       osPackRequestData
+/* 3D070 80061C70 0C018774 */  jal       __osPackRequestData
 /* 3D074 80061C74 00002021 */   addu     $a0, $zero, $zero
 /* 3D078 80061C78 24040001 */  addiu     $a0, $zero, 1
 /* 3D07C 80061C7C 3C11800B */  lui       $s1, %hi(D_800B0ED0)
@@ -88,9 +88,9 @@ glabel osContInit
 /* 3D0C0 80061CC0 02A02021 */  addu      $a0, $s5, $zero
 /* 3D0C4 80061CC4 0C018747 */  jal       osContGetInitData
 /* 3D0C8 80061CC8 02C02821 */   addu     $a1, $s6, $zero
-/* 3D0CC 80061CCC 3C01800A */  lui       $at, %hi(D_8009A61C)
+/* 3D0CC 80061CCC 3C01800A */  lui       $at, %hi(__osContLastCmd)
 /* 3D0D0 80061CD0 0C01975C */  jal       osSiCreateAccessQueue
-/* 3D0D4 80061CD4 A020A61C */   sb       $zero, %lo(D_8009A61C)($at)
+/* 3D0D4 80061CD4 A020A61C */   sb       $zero, %lo(__osContLastCmd)($at)
 /* 3D0D8 80061CD8 3C04800E */  lui       $a0, %hi(D_800DAAC0)
 /* 3D0DC 80061CDC 2484AAC0 */  addiu     $a0, $a0, %lo(D_800DAAC0)
 /* 3D0E0 80061CE0 3C05800A */  lui       $a1, %hi(D_8009A620)

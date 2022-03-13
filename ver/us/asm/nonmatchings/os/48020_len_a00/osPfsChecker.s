@@ -21,7 +21,7 @@ glabel osPfsChecker
 /* 48060 8006CC60 24020002 */  addiu     $v0, $zero, 2
 /* 48064 8006CC64 16020004 */  bne       $s0, $v0, .L8006CC78
 /* 48068 8006CC68 00000000 */   nop
-/* 4806C 8006CC6C 0C01A702 */  jal       osGetId
+/* 4806C 8006CC6C 0C01A702 */  jal       __osGetId
 /* 48070 8006CC70 02202021 */   addu     $a0, $s1, $zero
 /* 48074 8006CC74 00408021 */  addu      $s0, $v0, $zero
 .L8006CC78:
@@ -47,7 +47,7 @@ glabel osPfsChecker
 /* 480B8 8006CCB8 8E250008 */  lw        $a1, 8($s1)
 /* 480BC 8006CCBC 27A70218 */  addiu     $a3, $sp, 0x218
 /* 480C0 8006CCC0 00D23021 */  addu      $a2, $a2, $s2
-/* 480C4 8006CCC4 0C01A874 */  jal       osContRamRead
+/* 480C4 8006CCC4 0C01A874 */  jal       __osContRamRead
 /* 480C8 8006CCC8 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 480CC 8006CCCC 00408021 */  addu      $s0, $v0, $zero
 /* 480D0 8006CCD0 160000DF */  bnez      $s0, .L8006D050
@@ -135,7 +135,7 @@ glabel osPfsChecker
 /* 481F4 8006CDF4 92220065 */  lbu       $v0, 0x65($s1)
 /* 481F8 8006CDF8 10400006 */  beqz      $v0, .L8006CE14
 /* 481FC 8006CDFC 02202021 */   addu     $a0, $s1, $zero
-/* 48200 8006CE00 0C01A5B4 */  jal       osPfsSelectBank
+/* 48200 8006CE00 0C01A5B4 */  jal       __osPfsSelectBank
 /* 48204 8006CE04 00002821 */   addu     $a1, $zero, $zero
 /* 48208 8006CE08 00408021 */  addu      $s0, $v0, $zero
 /* 4820C 8006CE0C 16000090 */  bnez      $s0, .L8006D050
@@ -147,7 +147,7 @@ glabel osPfsChecker
 /* 48220 8006CE20 8E250008 */  lw        $a1, 8($s1)
 /* 48224 8006CE24 27A70218 */  addiu     $a3, $sp, 0x218
 /* 48228 8006CE28 00D23021 */  addu      $a2, $a2, $s2
-/* 4822C 8006CE2C 0C01A8F0 */  jal       osContRamWrite
+/* 4822C 8006CE2C 0C01A8F0 */  jal       __osContRamWrite
 /* 48230 8006CE30 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 48234 8006CE34 00408021 */  addu      $s0, $v0, $zero
 /* 48238 8006CE38 1600FF91 */  bnez      $s0, .L8006CC80
@@ -169,7 +169,7 @@ glabel osPfsChecker
 /* 4826C 8006CE6C 8E250008 */  lw        $a1, 8($s1)
 /* 48270 8006CE70 27A70218 */  addiu     $a3, $sp, 0x218
 /* 48274 8006CE74 00D23021 */  addu      $a2, $a2, $s2
-/* 48278 8006CE78 0C01A874 */  jal       osContRamRead
+/* 48278 8006CE78 0C01A874 */  jal       __osContRamRead
 /* 4827C 8006CE7C 30C6FFFF */   andi     $a2, $a2, 0xffff
 /* 48280 8006CE80 00408021 */  addu      $s0, $v0, $zero
 /* 48284 8006CE84 16000072 */  bnez      $s0, .L8006D050
