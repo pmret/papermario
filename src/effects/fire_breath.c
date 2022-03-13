@@ -129,15 +129,15 @@ void fire_breath_update(EffectInstance* effect) {
             data->endPos.z, data->numChildren - 1, data->spawnDelay, maxLifetime
         );
 
-        spawned->data->primR = data->primR;
-        spawned->data->primG = data->primG;
-        spawned->data->primB = data->primB;
-        spawned->data->envR = data->envR;
-        spawned->data->envG = data->envG;
-        spawned->data->envB = data->envB;
-        spawned->data->unk_30 = spawned->data->scale = data->unk_30;
-        spawned->data->unk_34 = data->unk_34;
-        spawned->data->scaleChangeFactor = data->scaleChangeFactor;
+        ((FireBreathFXData*)spawned->data)->primR = data->primR;
+        ((FireBreathFXData*)spawned->data)->primG = data->primG;
+        ((FireBreathFXData*)spawned->data)->primB = data->primB;
+        ((FireBreathFXData*)spawned->data)->envR = data->envR;
+        ((FireBreathFXData*)spawned->data)->envG = data->envG;
+        ((FireBreathFXData*)spawned->data)->envB = data->envB;
+        ((FireBreathFXData*)spawned->data)->unk_30 = ((FireBreathFXData*)spawned->data)->scale = data->unk_30;
+        ((FireBreathFXData*)spawned->data)->unk_34 = data->unk_34;
+        ((FireBreathFXData*)spawned->data)->scaleChangeFactor = data->scaleChangeFactor;
     }
 
     if (lifetime < 10 && data->type == FIRE_BREATH_LARGE) {
