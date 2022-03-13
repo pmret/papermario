@@ -4,8 +4,7 @@
 
 s32 osPfsCheckRamArea(OSPfs *pfs);
 
-s32 osPfsNumFiles(OSPfs *pfs, s32 *max_files, s32 *files_used)
-{
+s32 osPfsNumFiles(OSPfs *pfs, s32 *max_files, s32 *files_used) {
     int j;
     s32 ret;
     __OSDir dir;
@@ -14,11 +13,11 @@ s32 osPfsNumFiles(OSPfs *pfs, s32 *max_files, s32 *files_used)
     PFS_CHECK_STATUS;
     ERRCK(__osCheckId(pfs));
     SET_ACTIVEBANK_TO_ZERO;
-    for (j = 0; j < pfs->dir_size; j++)
-    {
+    for (j = 0; j < pfs->dir_size; j++) {
         ERRCK(__osContRamRead(pfs->queue, pfs->channel, pfs->dir_table + j, (u8*)&dir));
-        if (dir.company_code != 0 && dir.game_code != 0)
+        if (dir.company_code != 0 && dir.game_code != 0) {
             files++;
+        }
     }
     *files_used = files;
     *max_files = pfs->dir_size;
@@ -26,8 +25,7 @@ s32 osPfsNumFiles(OSPfs *pfs, s32 *max_files, s32 *files_used)
     return ret;
 }
 
-s32 osPfsInitPak(OSMesgQueue *queue, OSPfs *pfs, int channel)
-{
+s32 osPfsInitPak(OSMesgQueue *queue, OSPfs *pfs, int channel) {
     int k;
     s32 ret;
     u16 sum;
@@ -44,16 +42,14 @@ s32 osPfsInitPak(OSMesgQueue *queue, OSPfs *pfs, int channel)
     ERRCK(__osContRamRead(pfs->queue, pfs->channel, 1, (u8*)temp));
     __osIdCheckSum((u16*)temp, &sum, &isum);
     id = (__OSPackId *)temp;
-    if (id->checksum != sum || id->inverted_checksum != isum)
-    {
+    if (id->checksum != sum || id->inverted_checksum != isum) {
         ret = __osCheckPackId(pfs, id);
         if (ret != 0) {
             pfs->status |= PFS_ID_BROKEN;
             return ret;
         }
     }
-    if ((id->deviceid & 1) == 0)
-    {
+    if ((id->deviceid & 1) == 0) {
         ret = __osRepairPackId(pfs, id, &newid);
         if (ret != 0) {
             if (ret == PFS_ERR_ID_FATAL) {
@@ -62,8 +58,9 @@ s32 osPfsInitPak(OSMesgQueue *queue, OSPfs *pfs, int channel)
             return ret;
         }
         id = &newid;
-        if ((id->deviceid & 1) == 0)
+        if ((id->deviceid & 1) == 0) {
             return PFS_ERR_DEVICE;
+        }
     }
     bcopy(id, pfs->id, ARRAY_COUNT(pfs->id));
     pfs->version = id->version;
@@ -94,7 +91,6 @@ s32 osPfsCheckRamArea(OSPfs *pfs) {
     ERRCK(__osContRamRead(pfs->queue, pfs->channel, 0, temp2));
     if (bcmp(temp1, temp2, ARRAY_COUNT(temp1)) != 0) {
         return PFS_ERR_DEVICE;
-
     }
     ret = __osContRamWrite(pfs->queue, pfs->channel, 0, temp3, FALSE);
     return ret;

@@ -5,8 +5,7 @@ extern u8 __osPfsInodeCacheBank;
 void __osPfsRequestOneChannel(int channel, u8 cmd);
 void __osPfsGetOneChannelData(int channel, OSContStatus *data);
 
-s32 __osPfsGetStatus(OSMesgQueue *queue, int channel)
-{
+s32 __osPfsGetStatus(OSMesgQueue *queue, int channel) {
     s32 ret;
     OSMesg dummy;
     OSContStatus data;
@@ -18,17 +17,19 @@ s32 __osPfsGetStatus(OSMesgQueue *queue, int channel)
     ret = __osSiRawStartDma(OS_READ, &__osPfsPifRam);
     osRecvMesg(queue, &dummy, OS_MESG_BLOCK);
     __osPfsGetOneChannelData(channel, &data);
-    if (((data.status & CONT_CARD_ON) != 0) && ((data.status & CONT_CARD_PULL) != 0))
+    if (((data.status & CONT_CARD_ON) != 0) && ((data.status & CONT_CARD_PULL) != 0)) {
         return PFS_ERR_NEW_PACK;
-    if ((data.errno != 0) || ((data.status & CONT_CARD_ON) == 0))
+    }
+    if ((data.errno != 0) || ((data.status & CONT_CARD_ON) == 0)) {
         return PFS_ERR_NOPACK;
-    if ((data.status & CONT_ADDR_CRC_ER) != 0)
+    }
+    if ((data.status & CONT_ADDR_CRC_ER) != 0) {
         return PFS_ERR_CONTRFAIL;
+    }
     return ret;
 }
 
-void __osPfsRequestOneChannel(int channel, u8 cmd)
-{
+void __osPfsRequestOneChannel(int channel, u8 cmd) {
     u8 *ptr;
     __OSContRequesFormatShort requestformat;
     int i;
@@ -43,26 +44,26 @@ void __osPfsRequestOneChannel(int channel, u8 cmd)
     requestformat.typeh = CONT_CMD_NOP;
     requestformat.typel = CONT_CMD_NOP;
     requestformat.status = CONT_CMD_NOP;
-    for (i = 0; i < channel; i++)
+    for (i = 0; i < channel; i++) {
         *ptr++ = 0;
+    }
 
     *(__OSContRequesFormatShort *)ptr = requestformat;
     ptr += sizeof(__OSContRequesFormatShort);
     *ptr = CONT_CMD_END;
 }
 
-void __osPfsGetOneChannelData(int channel, OSContStatus *data)
-{
+void __osPfsGetOneChannelData(int channel, OSContStatus *data) {
     u8 *ptr;
     __OSContRequesFormatShort requestformat;
     int i;
     ptr = (u8*)&__osPfsPifRam;
-    for (i = 0; i < channel; i++)
+    for (i = 0; i < channel; i++) {
         ptr++;
+    }
     requestformat = *(__OSContRequesFormatShort *)ptr;
     data->errno = CHNL_ERR(requestformat);
-    if (data->errno == 0)
-    {
+    if (data->errno == 0) {
         data->type = (requestformat.typel << 8) | (requestformat.typeh);
         data->status = requestformat.status;
     }
