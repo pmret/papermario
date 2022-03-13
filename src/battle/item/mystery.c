@@ -94,7 +94,7 @@ ApiStatus N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
             for (; i < 7; i++, iconPtr++) {
                 icon = create_hud_element(ic[itemTable[D_802A25FC[i]].iconID].iconId);
                 *iconPtr = icon;
-                set_hud_element_flags(icon, 0x80);
+                set_hud_element_flags(icon, HUD_ELEMENT_FLAGS_80);
             }
             D_802A25E4 = 1;
         }

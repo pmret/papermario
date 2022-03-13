@@ -37,14 +37,14 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
         actionCommandStatus->hudElements[0] = hudElement;
         set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
         set_hud_element_render_depth(hudElement, 0);
-        set_hud_element_flags(hudElement, 0x82);
+        set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
         for (i = 1; i < ARRAY_COUNT(actionCommandStatus->hudElements); i++) {
             hudElement = create_hud_element(HudScript_AButton);
             actionCommandStatus->hudElements[i] = hudElement;
             set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
             set_hud_element_render_depth(hudElement, 0);
-            set_hud_element_flags(hudElement, 0x82);
+            set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
         }
 
         return ApiStatus_DONE2;
@@ -95,7 +95,7 @@ void N(update)(void) {
             btl_set_popup_duration(99);
             hudElement = actionCommandStatus->hudElements[0];
             if (actionCommandStatus->unk_61 != 0) {
-                clear_hud_element_flags(hudElement, 2);
+                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
             set_hud_element_alpha(hudElement, 0xFF);
             actionCommandStatus->state = 1;
@@ -140,7 +140,7 @@ void N(update)(void) {
                 hudElement,
                 actionCommandStatus->hudElementX + ((actionCommandStatus->unk_5D - 1) * 20) + 16,
                 actionCommandStatus->hudElementY);
-            clear_hud_element_flags(hudElement, 2);
+            clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             sfx_play_sound(0x233);
             actionCommandStatus->unk_70 = 1;
             actionCommandStatus->state = 12;

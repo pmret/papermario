@@ -1917,7 +1917,7 @@ typedef struct Actor {
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
     /* 0x436 */ s16 hudElementDataIndex;
     /* 0x438 */ s32 unk_438[2]; /* ??? see FUN_80253974 */
-    /* 0x440 */ struct HudElement* debuffIcon;
+    /* 0x440 */ struct EffectInstance* debuffIcon; // TODO: figure out the type of data field of debuffIcon
 } Actor; // size = 0x444
 
 typedef struct BackgroundHeader {
@@ -2414,5 +2414,16 @@ typedef struct UnkStruct0 {
     /* 0x04 */ char unk_04[8];
     /* 0x0C */ UnkStruct1* unk_0C;
 } UnkStruct0;
+
+typedef struct FoldImageRecPart {
+    /* 0x00 */ s8* raster;
+    /* 0x04 */ s8* palette;
+    /* 0x08 */ u16 width;
+    /* 0x0A */ u16 height;
+    /* 0x0C */ s16 xOffset;
+    /* 0x0E */ s16 yOffset;
+    /* 0x10 */ u8 unk_10;
+    /* 0x11 */ char unk_11[0x7];
+} FoldImageRecPart; // size = 0x18
 
 #endif

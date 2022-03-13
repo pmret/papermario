@@ -833,7 +833,7 @@ void fx_3D(s32, f32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* fx_blast(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_fire_flower(s32, f32, f32, f32, s32);
 EffectInstance* fx_recover(s32, f32, f32, f32, s32);
-struct HudElement* fx_disable_x(s32, f32, f32, f32, s32);
+EffectInstance* fx_disable_x(s32, f32, f32, f32, s32);
 EffectInstance* fx_bombette_breaking(s32, s32, s32, f32, s32, s32);
 EffectInstance* fx_firework(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_confetti(s32, f32, f32, f32, f32, s32);

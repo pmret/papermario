@@ -899,8 +899,8 @@ s32 MakeShop(Evt* script, s32 isInitialCall) {
     }
 
     shop->costIconID = create_hud_element(&HudScript_Item_Coin);
-    set_hud_element_flags(shop->costIconID, 0x80);
-    clear_hud_element_flags(shop->costIconID, 0x8000);
+    set_hud_element_flags(shop->costIconID, HUD_ELEMENT_FLAGS_80);
+    clear_hud_element_flags(shop->costIconID, HUD_ELEMENT_FLAGS_8000);
     get_generic_entity(create_generic_entity_frontUI(NULL, draw_shop_items));
     set_window_properties(0xA, 100, 66, 120, 28, 0, shop_draw_item_name, NULL, -1);
     set_window_properties(0xB, 32, 184, 256, 32, 1, shop_draw_item_desc, NULL, -1);

@@ -2754,7 +2754,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     if (target->debuff != statusTypeKey) {
                         target->status = statusTypeKey;
                     }
-                    target->debuffIcon->ptrPropertyList[15] = 0;
+                    ((s32*)target->debuffIcon->data)[15] = 0;
                     target->debuff = statusTypeKey;
                     target->debuffDuration = duration;
                     if ((s8)duration > 9) {
@@ -3502,7 +3502,7 @@ void btl_update_ko_status(void) {
     player->koDuration = player->debuffDuration;
     if (player->koDuration > 0) {
         player->koStatus = STATUS_DAZE;
-        player->debuffIcon->ptrPropertyList[15] = player->koDuration;
+        ((s32*)player->debuffIcon->data)[15] = player->koDuration;
 
         if (koDuration == 0) {
             sfx_play_sound(SOUND_2107);
@@ -3517,7 +3517,7 @@ void btl_update_ko_status(void) {
 
         if (partner->koDuration > 0) {
             partner->koStatus = STATUS_DAZE;
-            partner->debuffIcon->ptrPropertyList[15] = partner->koDuration;
+            ((s32*)partner->debuffIcon->data)[15] = partner->koDuration;
         }
     }
 
@@ -3528,7 +3528,7 @@ void btl_update_ko_status(void) {
             enemy->koDuration = enemy->debuffDuration;
             if (enemy->koDuration > 0) {
                 enemy->koStatus = STATUS_DAZE;
-                enemy->debuffIcon->ptrPropertyList[15] = enemy->koDuration;
+                ((s32*)enemy->debuffIcon->data)[15] = enemy->koDuration;
             }
         }
     }

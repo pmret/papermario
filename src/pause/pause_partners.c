@@ -519,7 +519,7 @@ void pause_partners_init(MenuPanel* panel) {
 
     for (i = 0; i < ARRAY_COUNT(gPausePartnersIconScripts); i++) {
         gPausePartnersIconIDs[i] = create_hud_element(gPausePartnersIconScripts[i]);
-        set_hud_element_flags(gPausePartnersIconIDs[i], 0x80);
+        set_hud_element_flags(gPausePartnersIconIDs[i], HUD_ELEMENT_FLAGS_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPausePartnersWindowBPs); i++) {

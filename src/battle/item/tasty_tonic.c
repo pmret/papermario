@@ -1,4 +1,5 @@
 #include "tasty_tonic.h"
+#include "effects.h"
 
 #include "ItemRefund.inc.c"
 
@@ -23,7 +24,7 @@ ApiStatus N(func_802A123C_72223C)(Evt* script, s32 isInitialCall) {
             case ACTOR_CLASS_PARTNER:
                 dispatch_event_partner(0x31);
         }
-        actor->debuffIcon->ptrPropertyList[15] = 0;
+        ((s32*)(actor->debuffIcon->data))[15] = 0;
     }
 
     return ApiStatus_DONE2;
