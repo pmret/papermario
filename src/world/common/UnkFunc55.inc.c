@@ -60,7 +60,6 @@ ApiStatus N(UnkFunc55)(Evt* script, s32 isInitialCall) {
             {
                 npc_move_heading(npc, npc->moveSpeed, npc->yaw);
             } else {
-
                 phi_s4 = 1;
             }
 

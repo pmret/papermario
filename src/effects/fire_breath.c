@@ -14,9 +14,12 @@ void fire_breath_update(EffectInstance* effect);
 void fire_breath_render(EffectInstance* effect);
 void fire_breath_appendGfx(void* effect);
 
-EffectInstance* fire_breath_main(s32 type, f32 startX, f32 startY, f32 startZ, f32 endX, f32 endY, f32 endZ,
-                                 s32 numExtra, s32 spawnDelay, s32 lifetime)
-{
+EffectInstance* fire_breath_main(
+    s32 type,
+    f32 startX, f32 startY, f32 startZ,
+    f32 endX, f32 endY, f32 endZ,
+    s32 numExtra, s32 spawnDelay, s32 lifetime
+) {
     EffectBlueprint bp;
     FireBreathFXData* data;
     EffectInstance* effect;
@@ -111,9 +114,9 @@ void fire_breath_update(EffectInstance* effect) {
         data->scale += (2.5 - data->scale) * 0.05;
     }
 
-    data->pos.x = data->initPos.x + ((((data->endPos.x - data->initPos.x) + data->unk_50.x) * spawnTimer) / maxLifetime);
-    data->pos.y = data->initPos.y + ((((data->endPos.y - data->initPos.y) + data->unk_50.y) * spawnTimer) / maxLifetime);
-    data->pos.z = data->initPos.z + ((((data->endPos.z - data->initPos.z) + data->unk_50.z) * spawnTimer) / maxLifetime);
+    data->pos.x = data->initPos.x + (((data->endPos.x - data->initPos.x + data->unk_50.x) * spawnTimer) / maxLifetime);
+    data->pos.y = data->initPos.y + (((data->endPos.y - data->initPos.y + data->unk_50.y) * spawnTimer) / maxLifetime);
+    data->pos.z = data->initPos.z + (((data->endPos.z - data->initPos.z + data->unk_50.z) * spawnTimer) / maxLifetime);
 
     if (data->type == FIRE_BREATH_SMALL) {
         data->unk_60 += (f32) spawnTimer * 0.01;

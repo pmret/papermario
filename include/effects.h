@@ -763,7 +763,7 @@ typedef struct Effect6FInstance {
 enum FireBreathType {
     FIRE_BREATH_LARGE = 0,
     FIRE_BREATH_SMALL = 1,
-    FIRE_BREATH_TINY = 2,
+    FIRE_BREATH_TINY  = 2,
 };
 
 EffectInstance* create_effect_instance(EffectBlueprint* effectBp);
