@@ -12,7 +12,7 @@ ApiStatus func_802A10E4_779D74(Evt* script, s32 isInitialCall) {
     Actor *enemyTargetActor;
     u32 enemyTargetPowerBounceChance;
 
-    enemyTargetActor = get_actor((s32) get_actor(script->owner1.enemyID)->targetActorID);
+    enemyTargetActor = get_actor(get_actor(script->owner1.enemyID)->targetActorID);
 
     script->varTable[0] = 99;
 
