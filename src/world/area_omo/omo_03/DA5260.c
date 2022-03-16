@@ -10,7 +10,7 @@
 
 #include "common/UnkBufferFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_8024020C_DA544C);
+#include "common/SetPlayerStatusPosYaw.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_802402B0_DA54F0);
 

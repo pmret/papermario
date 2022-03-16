@@ -13,7 +13,7 @@ static char* N(exit_str_3) = "omo_03";
 
 #include "common/UnkBufferFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_16/DEBED0", func_802401EC_DEC0BC);
+#include "common/SetPlayerStatusPosYaw.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_16/DEBED0", func_80240290_DEC160);
 

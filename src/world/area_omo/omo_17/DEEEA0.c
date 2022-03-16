@@ -17,7 +17,7 @@ static char* N(exit_str_7) = "";
 
 #include "common/UnkBufferFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEEEA0", func_802401EC_DEF08C);
+#include "common/SetPlayerStatusPosYaw.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEEEA0", func_80240290_DEF130);
 
