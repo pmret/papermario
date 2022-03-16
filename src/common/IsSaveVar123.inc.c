@@ -1,5 +1,4 @@
 #include "common.h"
-#include "npc.h"
 
 ApiStatus N(IsSaveVar123)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = 0;

@@ -19,6 +19,6 @@ static char* N(exit_str_3) = "omo_03";
 
 #include "common/UnkFloatFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_16/DEBED0", func_80240518_DEC3E8);
+#include "common/IsAOrBPressed.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_16/DEBED0", func_8024055C_DEC42C);

@@ -23,7 +23,7 @@ static char* N(exit_str_7) = "";
 
 #include "common/UnkFloatFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_80240518_DB7E28);
+#include "common/IsAOrBPressed.inc.c"
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 

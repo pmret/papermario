@@ -23,4 +23,4 @@ static char* N(exit_str_7) = "";
 
 #include "common/UnkFloatFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEEEA0", func_80240518_DEF3B8);
+#include "common/IsAOrBPressed.inc.c"
