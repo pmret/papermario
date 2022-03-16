@@ -15,7 +15,7 @@ static char* N(exit_str_7) = "";
 
 #include "common/CompareFloats.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_80240168_DB7A78);
+#include "common/UnkBufferFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_802401EC_DB7AFC);
 
