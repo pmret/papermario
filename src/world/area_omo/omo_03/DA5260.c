@@ -12,7 +12,7 @@
 
 #include "common/SetPlayerStatusPosYaw.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_802402B0_DA54F0);
+#include "common/SetNpcPosYaw.inc.c"
 
 #include "common/UnkFloatFunc.inc.c"
 

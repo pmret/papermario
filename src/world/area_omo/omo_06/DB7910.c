@@ -19,7 +19,7 @@ static char* N(exit_str_7) = "";
 
 #include "common/SetPlayerStatusPosYaw.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_06/DB7910", func_80240290_DB7BA0);
+#include "common/SetNpcPosYaw.inc.c"
 
 #include "common/UnkFloatFunc.inc.c"
 
