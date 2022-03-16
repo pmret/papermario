@@ -6,7 +6,7 @@
 
 #include "common/SetAngleClamped.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_80240104_DA5344);
+#include "common/CompareFloats.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_03/DA5260", func_80240188_DA53C8);
 

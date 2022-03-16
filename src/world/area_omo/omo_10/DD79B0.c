@@ -13,7 +13,7 @@ static char* N(exit_str_7) = "";
 
 #include "common/SetAngleClamped.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_10/DD79B0", func_802400E4_DD7A94);
+#include "common/CompareFloats.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_10/DD79B0", func_80240168_DD7B18);
 
