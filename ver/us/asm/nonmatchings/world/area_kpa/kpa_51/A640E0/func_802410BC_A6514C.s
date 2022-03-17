@@ -114,7 +114,7 @@ glabel func_802410BC_A6514C
 .L80241240_A652D0:
 /* A652D0 80241240 02A0202D */  daddu     $a0, $s5, $zero
 /* A652D4 80241244 0260282D */  daddu     $a1, $s3, $zero
-/* A652D8 80241248 0C090234 */  jal       func_802408D0_A64960
+/* A652D8 80241248 0C090234 */  jal       kpa_51_UnkFunc59
 /* A652DC 8024124C 0280302D */   daddu    $a2, $s4, $zero
 .L80241250_A652E0:
 /* A652E0 80241250 02A0202D */  daddu     $a0, $s5, $zero

@@ -8,7 +8,7 @@
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_802407A4_A64834);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_802408D0_A64960);
+#include "world/common/UnkFunc59.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_80240970_A64A00);
 
