@@ -2,7 +2,7 @@
 
 #include "world/common/UnkNpcAIFunc47.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_80240220_A642B0);
+#include "world/common/UnkFunc57.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_80240730_A647C0);
 
