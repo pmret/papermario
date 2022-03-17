@@ -45,21 +45,19 @@ ApiStatus func_802A15B4_795894(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802A1628_795908(Evt* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
+    u32 flags;
     
     script->varTable[0] = 0;
+    flags = targetActor->flags;
     
-    {
-        u32 flags = targetActor->flags;
-
-        if(!(flags & ACTOR_FLAG_TARGET_ONLY)) {
-            if(!(flags & ACTOR_FLAG_NO_DMG_APPLY)) {
-                if (!(flags & ACTOR_FLAG_2000) && targetActor->actorBlueprint->upAndAwayChance != 0 && rand_int(100) <= targetActor->actorBlueprint->upAndAwayChance) {
-                    script->varTable[0] = 1;
-                }
+    if(!(flags & ACTOR_FLAG_TARGET_ONLY)) {
+        if(!(flags & ACTOR_FLAG_NO_DMG_APPLY)) {
+            if (!(flags & ACTOR_FLAG_2000) && targetActor->actorBlueprint->upAndAwayChance != 0 && rand_int(100) <= targetActor->actorBlueprint->upAndAwayChance) {
+                script->varTable[0] = 1;
             }
-            else {
-                return ApiStatus_DONE2;
-            }
+        }
+        else {
+            return ApiStatus_DONE2;
         }
     }
 
