@@ -43,23 +43,28 @@ ApiStatus func_802A15B4_795894(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#ifdef NON_EQUIVALENT
 ApiStatus func_802A1628_795908(Evt* script, s32 isInitialCall) {
-    Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
-    s32 flags = targetActor->flags;
-
+    Actor* targetActor = get_actor((s32)get_actor(script->owner1.actorID)->targetActorID);
+    
     script->varTable[0] = 0;
 
-    if ((flags & ACTOR_FLAG_TARGET_ONLY) == NULL && (flags & ACTOR_FLAG_NO_DMG_APPLY) == NULL && (flags & ACTOR_FLAG_2000) == NULL && targetActor->actorBlueprint->upAndAwayChance != 0 && targetActor->actorBlueprint->upAndAwayChance >= rand_int(100)) {
-        script->varTable[0] = 1;
+    {
+        u32 flags = targetActor->flags;
+
+        if((flags & ACTOR_FLAG_TARGET_ONLY) == 0) {
+            if((flags & ACTOR_FLAG_NO_DMG_APPLY) == 0) {
+                if ((flags & ACTOR_FLAG_2000) == 0 && targetActor->actorBlueprint->upAndAwayChance != 0 && rand_int(100) <= targetActor->actorBlueprint->upAndAwayChance) {
+                    script->varTable[0] = 1;
+                }
+            }
+            else {
+                return ApiStatus_DONE2;
+            }
+        }
     }
 
     return ApiStatus_DONE2;
 }
-#else
-ApiStatus func_802A1628_795908(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/star/up_and_away/7952E0", func_802A1628_795908);
-#endif
 
 EvtScript N(802A16D0) = {
     EVT_CALL(GetOwnerID, LW(10))
