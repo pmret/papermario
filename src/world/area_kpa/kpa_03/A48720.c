@@ -12,7 +12,7 @@
 
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_80240A48_A49008);
+#include "world/common/UnkNpcAIFunc47.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_80240C18_A491D8);
 

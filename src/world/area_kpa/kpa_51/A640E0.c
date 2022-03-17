@@ -1,6 +1,6 @@
 #include "kpa_51.h"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_80240050_A640E0);
+#include "world/common/UnkNpcAIFunc47.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_80240220_A642B0);
 
