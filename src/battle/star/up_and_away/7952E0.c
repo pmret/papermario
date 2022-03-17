@@ -50,8 +50,8 @@ ApiStatus func_802A1628_795908(Evt* script, s32 isInitialCall) {
     script->varTable[0] = 0;
     flags = targetActor->flags;
     
-    if(!(flags & ACTOR_FLAG_TARGET_ONLY)) {
-        if(!(flags & ACTOR_FLAG_NO_DMG_APPLY)) {
+    if (!(flags & ACTOR_FLAG_TARGET_ONLY)) {
+        if (!(flags & ACTOR_FLAG_NO_DMG_APPLY)) {
             if (!(flags & ACTOR_FLAG_2000) && targetActor->actorBlueprint->upAndAwayChance != 0 && rand_int(100) <= targetActor->actorBlueprint->upAndAwayChance) {
                 script->varTable[0] = 1;
             }
