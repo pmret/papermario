@@ -9,10 +9,9 @@
 #include "world/common/IsRightOnEquipped.inc.c"
 
 ApiStatus func_802A10A4_77F2E4(Evt* script, s32 isInitialCall) {
-    ActorState* playerActorState;
+    ActorState* playerActorState = &gBattleStatus.playerActor->state;
     s32 i;
 
-    playerActorState = &gBattleStatus.playerActor->state;
     for (i = 0; i < 20; i++) {
         fx_floating_cloud_puff(0, 
                                (playerActorState->goalPos.x + (f32) rand_int(30)) - 15.0f, 
