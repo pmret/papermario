@@ -4,7 +4,7 @@
 
 #include "world/common/UnkFunc57.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_80240730_A647C0);
+#include "world/common/UnkFunc58.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_802407A4_A64834);
 

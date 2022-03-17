@@ -98,7 +98,7 @@ glabel func_8024110C_A4DB2C
 .L80241258_A4DC78:
 /* A4DC78 80241258 02A0202D */  daddu     $a0, $s5, $zero
 /* A4DC7C 8024125C 0260282D */  daddu     $a1, $s3, $zero
-/* A4DC80 80241260 0C0901E0 */  jal       func_80240780_A4D1A0
+/* A4DC80 80241260 0C0901E0 */  jal       kpa_08_UnkFunc58
 /* A4DC84 80241264 0280302D */   daddu    $a2, $s4, $zero
 /* A4DC88 80241268 8EA30070 */  lw        $v1, 0x70($s5)
 /* A4DC8C 8024126C 24020001 */  addiu     $v0, $zero, 1
