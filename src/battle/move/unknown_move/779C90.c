@@ -18,7 +18,7 @@ ApiStatus func_802A10E4_779D74(Evt* script, s32 isInitialCall) {
 
     enemyTargetPowerBounceChance = enemyTargetActor->actorBlueprint->powerBounceChance;
 
-    if (is_ability_active(0) != 0) {
+    if (is_ability_active(ABILITY_DODGE_MASTER)) {
         enemyTargetPowerBounceChance += 7;
     }
 
