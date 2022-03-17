@@ -9,10 +9,8 @@
 extern s32 D_802A26D0_77B360;
 
 ApiStatus func_802A10E4_779D74(Evt* script, s32 isInitialCall) {
-    Actor *enemyTargetActor;
+    Actor* enemyTargetActor = get_actor(get_actor(script->owner1.enemyID)->targetActorID);
     u32 enemyTargetPowerBounceChance;
-
-    enemyTargetActor = get_actor(get_actor(script->owner1.enemyID)->targetActorID);
 
     script->varTable[0] = 99;
 
