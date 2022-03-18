@@ -18,7 +18,7 @@ glabel func_802427E0_DF1680
 /* DF16B4 80242814 00021400 */  sll       $v0, $v0, 0x10
 /* DF16B8 80242818 1C40002B */  bgtz      $v0, .L802428C8
 /* DF16BC 8024281C 00000000 */   nop
-/* DF16C0 80242820 0C09092B */  jal       func_802424AC_DF134C
+/* DF16C0 80242820 0C09092B */  jal       omo_17_UnkFunc61
 /* DF16C4 80242824 0240202D */   daddu    $a0, $s2, $zero
 /* DF16C8 80242828 0040202D */  daddu     $a0, $v0, $zero
 /* DF16CC 8024282C 0481001A */  bgez      $a0, .L80242898

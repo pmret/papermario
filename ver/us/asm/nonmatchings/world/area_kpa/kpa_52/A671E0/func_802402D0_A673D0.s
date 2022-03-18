@@ -55,7 +55,7 @@ glabel func_802402D0_A673D0
 /* A67498 80240398 080900FC */  j         .L802403F0
 /* A6749C 8024039C AE030028 */   sw       $v1, 0x28($s0)
 .L802403A0:
-/* A674A0 802403A0 0C090038 */  jal       func_802400E0_A671E0
+/* A674A0 802403A0 0C090038 */  jal       kpa_52_UnkFunc61
 /* A674A4 802403A4 0240202D */   daddu    $a0, $s2, $zero
 /* A674A8 802403A8 0040202D */  daddu     $a0, $v0, $zero
 /* A674AC 802403AC 2402FFFF */  addiu     $v0, $zero, -1

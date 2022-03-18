@@ -38,7 +38,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80241C08_DF0AA8);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802422C0_DF1160);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802424AC_DF134C);
+#include "world/common/UnkFunc61.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_8024269C_DF153C);
 

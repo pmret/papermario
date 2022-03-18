@@ -55,7 +55,7 @@ glabel func_8024269C_DF153C
 /* DF1604 80242764 080909EF */  j         .L802427BC
 /* DF1608 80242768 AE030028 */   sw       $v1, 0x28($s0)
 .L8024276C:
-/* DF160C 8024276C 0C09092B */  jal       func_802424AC_DF134C
+/* DF160C 8024276C 0C09092B */  jal       omo_17_UnkFunc61
 /* DF1610 80242770 0240202D */   daddu    $a0, $s2, $zero
 /* DF1614 80242774 0040202D */  daddu     $a0, $v0, $zero
 /* DF1618 80242778 2402FFFF */  addiu     $v0, $zero, -1

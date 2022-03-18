@@ -18,7 +18,7 @@ glabel func_802404A4_A99A34
 /* A99A68 802404D8 00021400 */  sll       $v0, $v0, 0x10
 /* A99A6C 802404DC 1C40002B */  bgtz      $v0, .L8024058C
 /* A99A70 802404E0 00000000 */   nop
-/* A99A74 802404E4 0C09005C */  jal       func_80240170_A99700
+/* A99A74 802404E4 0C09005C */  jal       kpa_111_UnkFunc61
 /* A99A78 802404E8 0240202D */   daddu    $a0, $s2, $zero
 /* A99A7C 802404EC 0040202D */  daddu     $a0, $v0, $zero
 /* A99A80 802404F0 0481001A */  bgez      $a0, .L8024055C

@@ -55,7 +55,7 @@ glabel func_80242548_DCF218
 /* DCF2E0 80242610 0809099A */  j         .L80242668
 /* DCF2E4 80242614 AE030028 */   sw       $v1, 0x28($s0)
 .L80242618:
-/* DCF2E8 80242618 0C0908D6 */  jal       func_80242358_DCF028
+/* DCF2E8 80242618 0C0908D6 */  jal       omo_09_UnkFunc61
 /* DCF2EC 8024261C 0240202D */   daddu    $a0, $s2, $zero
 /* DCF2F0 80242620 0040202D */  daddu     $a0, $v0, $zero
 /* DCF2F4 80242624 2402FFFF */  addiu     $v0, $zero, -1
