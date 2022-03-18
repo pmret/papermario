@@ -4242,6 +4242,7 @@ segments:
     - [0x6253E0, c]
     - [0x625750, c]
     - [0x626A30, data]
+    - [0x63CE70]
   - dir: battle/area_sam2
     type: code
     start: 0x63D1E0
@@ -4286,6 +4287,7 @@ segments:
     - [0x66B5B0, c]
     - [0x66B920, c]
     - [0x66BC90, data]
+    - [0x684750]
   - dir: battle/area_kpa
     type: code
     start: 0x684A30

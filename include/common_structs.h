@@ -1789,7 +1789,10 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x00 */ Vec3f currentPos;
     /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ Vec3f unk_18;
-    /* 0x24 */ char unk_24[24];
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ char unk_2C[0x4];
+    /* 0x30 */ Vec3f unk_30;
     /* 0x3C */ f32 acceleration;
     /* 0x40 */ f32 speed;
     /* 0x44 */ f32 velocity;

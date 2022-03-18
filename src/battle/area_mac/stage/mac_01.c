@@ -282,8 +282,6 @@ EvtScript N(afterBattle_802328F0) = {
     EVT_END
 };
 
-static const f32 padding[2] = { 0.0f, 0.0f };
-
 Stage NAMESPACE = {
     .texture = "mac_tex",
     .shape = "mac_bt01_shape",

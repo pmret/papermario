@@ -821,7 +821,6 @@ ApiStatus N(func_8024240C_C3893C)(Evt* script, s32 isInitialCall) {
 #include "world/common/UnkFunc18.inc.c"
 
 #ifdef NON_EQUIVALENT
-
 typedef struct {
     s32 unk_00[8];
     char unk_20[0x64];
@@ -841,7 +840,6 @@ typedef struct {
     s32 unk_328;
     s16 unk_32C;
 } N(UnkStruct);
-
 
 ApiStatus N(func_8024259C_C38ACC)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

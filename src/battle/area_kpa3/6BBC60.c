@@ -2,7 +2,7 @@
 
 #define NAMESPACE b_area_kpa3
 
-INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_802180D0_6BBC60);
+#include "world/common/UnkFunc62.inc.c"
 
 #include "common/ActorJumpToPos.inc.c"
 

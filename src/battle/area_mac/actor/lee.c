@@ -754,8 +754,8 @@ EvtScript N(8021F5F8) = {
 ApiStatus func_80218100_464590(Evt*, s32);
 INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80218100_464590);
 
-ApiStatus func_80218300_464790(Evt*, s32);
-INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80218300_464790);
+
+#include "world/common/UnkFunc62.inc.c"
 
 #include "common/ActorJumpToPos.inc.c"
 
@@ -784,7 +784,7 @@ EvtScript N(8021F6E0) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 0, 5)
     EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
-    EVT_CALL(func_80218300_464790, LW(10), 0)
+    EVT_CALL(N(UnkFunc62), LW(10), 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, 16)
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(6)
@@ -843,7 +843,7 @@ EvtScript N(8021F6E0) = {
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
-            EVT_CALL(func_80218300_464790, LW(10), 3)
+            EVT_CALL(N(UnkFunc62), LW(10), 3)
         EVT_CASE_EQ(1)
             EVT_THREAD
                 EVT_WAIT_FRAMES(4)
@@ -857,7 +857,7 @@ EvtScript N(8021F6E0) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(EnableActorBlur, -127, 1)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
-            EVT_CALL(func_80218300_464790, LW(10), 3)
+            EVT_CALL(N(UnkFunc62), LW(10), 3)
             EVT_CALL(EnableActorBlur, -127, 0)
         EVT_CASE_EQ(2)
             EVT_THREAD
@@ -881,7 +881,7 @@ EvtScript N(8021F6E0) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(EnableActorBlur, -127, 1)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
-            EVT_CALL(func_80218300_464790, LW(10), 3)
+            EVT_CALL(N(UnkFunc62), LW(10), 3)
             EVT_CALL(EnableActorBlur, -127, 0)
     EVT_END_SWITCH
     EVT_CHILD_THREAD
