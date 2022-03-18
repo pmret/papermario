@@ -63,8 +63,40 @@ void func_802B6000_E24920(void) {
     }
 }
 
+void func_802B61C0_E24AE0(void) {
+    f32 sp14;
+    f32 sp10;
+    s32 temp_a0;
+    CollisionStatus* currentCollisionStatus = &gCollisionStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
-INCLUDE_ASM(void, "world/action/land", func_802B61C0_E24AE0, void);
+    if ((playerStatus->animFlags & 0x1000) != 0) {
+        func_802B644C_E24D6C();
+        return;
+    }
+    temp_a0 = playerStatus->flags;
+    if (temp_a0 < 0) {
+        playerStatus->flags = temp_a0 & 0x7F77FFF1;
+        playerStatus->fallState = 0;
+        playerStatus->decorationList = 0;
+        playerStatus->unk_C2 = 0;
+        playerStatus->decorationPos[0] = playerStatus->position.x;
+        playerStatus->decorationPos[1] = playerStatus->position.z;
+        if (((u16) currentCollisionStatus->currentFloor & 0x4000) == 0) {
+            phys_adjust_cam_on_landing();
+        }
+        currentCollisionStatus->lastTouchedFloor = -1;
+    }
+    playerStatus->fallState = (u8) playerStatus->fallState + 1;
+    playerStatus->currentSpeed *= 0.6f;
+    player_input_to_move_vector(&sp10, &sp14);
+    check_input_jump();
+    if (sp14 != 0.0f) {
+        playerStatus->targetYaw = sp10;
+    }
+    update_locomotion_state();
+}
+
 
 INCLUDE_ASM(void, "world/action/land", func_802B62CC_E24BEC, void);
 
