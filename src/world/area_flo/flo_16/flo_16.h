@@ -24,7 +24,7 @@ ApiStatus N(func_80240000_CD1E30)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024011C_CD1F4C)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802402AC_CD20DC)(Evt* script, s32 isInitialCall);
 ApiStatus N(SwitchToPartner)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802406E0_CD2510)(Evt* script, s32 isInitialCall);
+ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc44)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242754_CD4584)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242940_CD4770)(Evt* script, s32 isInitialCall);

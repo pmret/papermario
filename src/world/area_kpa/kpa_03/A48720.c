@@ -28,7 +28,10 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_802413CC_A4998C);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_8024150C_A49ACC);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_802416B0_A49C70);
+void func_802416B0_A49C70(Evt* script) {
+    get_npc_unsafe(script->owner1.enemy->npcID)->duration = 40;
+    script->functionTemp[0] = 21;
+}
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_802416EC_A49CAC);
 

@@ -22,7 +22,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_08/B5E910", func_8024082C_B5EADC);
 
 #include "world/common/UnkFunc22.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_08/B5E910", func_80240C60_B5EF10);
+#include "world/common/UnkFunc60.inc.c"
 
 #include "world/common/UnkFunc23.inc.c"
 
