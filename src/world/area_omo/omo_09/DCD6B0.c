@@ -56,15 +56,13 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80242014_DCECE4);
 
 #include "world/common/UnkNpcAIFunc9.inc.c"
 
-#include "world/common/UnkDurationCheck.inc.c"
+#include "world/common/UnkDurationCheckNoArgs.inc.c"
 
 #include "world/common/UnkFunc54.inc.c"
 
 #include "world/common/UnkFunc55.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024324C_DCFF1C);
-
-static char* N(exit_str_0) = "omo_09";
+#include "world/common/UnkNpcAIMainFunc7.inc.c"
 
 #include "world/common/SetNpcB5_3.inc.c"
 

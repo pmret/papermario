@@ -48,13 +48,13 @@ INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802422C0_DF1160);
 
 #include "world/common/UnkNpcAIFunc9.inc.c"
 
-#include "world/common/UnkDurationCheck.inc.c"
+#include "world/common/UnkDurationCheckNoArgs.inc.c"
 
 #include "world/common/UnkFunc54.inc.c"
 
 #include "world/common/UnkFunc55.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802433A0_DF2240);
+#include "world/common/UnkNpcAIMainFunc7.inc.c"
 
 #include "world/common/SetNpcB5_3.inc.c"
 

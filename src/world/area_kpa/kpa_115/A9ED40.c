@@ -19,12 +19,12 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/UnkNpcAIFunc9.inc.c"
 
-#include "world/common/UnkDurationCheck.inc.c"
+#include "world/common/UnkDurationCheckNoArgs.inc.c"
 
 #include "world/common/UnkFunc54.inc.c"
 
 #include "world/common/UnkFunc55.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_80241064_A9FDA4);
+#include "world/common/UnkNpcAIMainFunc7.inc.c"
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"

@@ -10,7 +10,7 @@
 
 #include "world/common/UnkNpcAIFunc9.inc.c"
 
-#include "world/common/UnkDurationCheck.inc.c"
+#include "world/common/UnkDurationCheckNoArgs.inc.c"
 
 #include "world/common/UnkFunc54.inc.c"
 
@@ -36,7 +36,7 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80241CF0_9113A0);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80241D70_911420);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80241F6C_91161C);
+#include "world/common/UnkNpcAIMainFunc7.inc.c"
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"
 

@@ -10,13 +10,13 @@
 
 #include "world/common/UnkNpcAIFunc9.inc.c"
 
-#include "world/common/UnkDurationCheck.inc.c"
+#include "world/common/UnkDurationCheckNoArgs.inc.c"
 
 #include "world/common/UnkFunc54.inc.c"
 
 #include "world/common/UnkFunc55.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80241204_A94944);
+#include "world/common/UnkNpcAIMainFunc7.inc.c"
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"
 

@@ -17,12 +17,12 @@ static char* N(exit_str_1) = "kpa_112";
 
 #include "world/common/UnkNpcAIFunc9.inc.c"
 
-#include "world/common/UnkDurationCheck.inc.c"
+#include "world/common/UnkDurationCheckNoArgs.inc.c"
 
 #include "world/common/UnkFunc54.inc.c"
 
 #include "world/common/UnkFunc55.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_111/A99590", func_80241064_A9A5F4);
+#include "world/common/UnkNpcAIMainFunc7.inc.c"
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"
