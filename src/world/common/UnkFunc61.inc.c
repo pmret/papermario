@@ -6,7 +6,7 @@ s32 N(UnkFunc61)(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     Camera* camera = &gCameras[gCurrentCamID];
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    f32* temp_v0 = evt_get_variable(script, *args++); // TODO figure out what this is
+    f32* temp_v0 = (f32*)evt_get_variable(script, *args++); // TODO figure out what this is
     f32 angle;
     f32 t0;
     f32 t1;

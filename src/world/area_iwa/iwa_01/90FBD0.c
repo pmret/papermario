@@ -2,7 +2,7 @@
 
 #include "world/common/UnkFunc61.inc.c"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80240710_90FDC0);
+#include "world/common/UnkNpcAIFunc48.inc.c"
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_01/90FBD0", func_80240854_90FF04);
 

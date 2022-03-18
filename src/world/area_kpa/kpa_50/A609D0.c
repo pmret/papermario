@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "kpa_81";
 
 #include "world/common/UnkFunc61.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_50/A609D0", func_802401F0_A60BC0);
+#include "world/common/UnkNpcAIFunc48.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_50/A609D0", func_80240334_A60D04);
 

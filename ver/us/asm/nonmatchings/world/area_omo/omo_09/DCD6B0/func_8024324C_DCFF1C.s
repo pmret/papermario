@@ -173,7 +173,7 @@ glabel func_8024324C_DCFF1C
 /* DD0168 80243498 0260202D */  daddu     $a0, $s3, $zero
 /* DD016C 8024349C 8E050024 */  lw        $a1, 0x24($s0)
 /* DD0170 802434A0 8E060028 */  lw        $a2, 0x28($s0)
-/* DD0174 802434A4 0C090952 */  jal       func_80242548_DCF218
+/* DD0174 802434A4 0C090952 */  jal       omo_09_UnkNpcAIFunc48
 /* DD0178 802434A8 02A0382D */   daddu    $a3, $s5, $zero
 /* DD017C 802434AC 8E630070 */  lw        $v1, 0x70($s3)
 /* DD0180 802434B0 2402000C */  addiu     $v0, $zero, 0xc
