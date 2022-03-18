@@ -4,7 +4,7 @@
 
 #include "world/common/UnkNpcAIFunc48.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80240644_A93D84);
+#include "world/common/UnkNpcAIFunc49.inc.c"
 
 #include "world/common/UnkSetDurationFunc.inc.c"
 

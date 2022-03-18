@@ -7,7 +7,7 @@ static char* N(exit_str_1) = "kpa_81";
 
 #include "world/common/UnkNpcAIFunc48.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_50/A609D0", func_80240334_A60D04);
+#include "world/common/UnkNpcAIFunc49.inc.c"
 
 #include "world/common/UnkSetDurationFunc.inc.c"
 
