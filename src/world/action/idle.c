@@ -76,9 +76,6 @@ void world_action_idle_update(void) {
     }
 }
 
-#ifndef NON_EQUIVALENT
-INCLUDE_ASM(void, "world/action/idle", func_802B61E4_E23444, void);
-#else
 void func_802B61E4_E23444(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
@@ -96,10 +93,10 @@ void func_802B61E4_E23444(void) {
             if (!(gGameStatusPtr->peachFlags & 0x10)) {
                 suggest_player_anim_clearUnkFlag(world_action_idle_peachAnims[gGameStatusPtr->peachAnimIdx]);
             } else {
-                suggest_player_anim_clearUnkFlag(world_actions_peachDisguises[playerStatus->peachDisguise].idle);
+                suggest_player_anim_clearUnkFlag(0xC000E);
             }
         } else {
-            suggest_player_anim_clearUnkFlag(0xC000E);
+            peach_set_disguise_anim(world_actions_peachDisguises[gPlayerStatus.peachDisguise].idle);
         }
     }
 
@@ -155,4 +152,3 @@ void func_802B61E4_E23444(void) {
         }
     }
 }
-#endif
