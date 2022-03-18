@@ -1968,7 +1968,7 @@ ActorPartBlueprint N(partsTable_8022348C)[] = {
 
 extern EvtScript N(init_Parakarry);
 
-ActorBlueprint N(parakerry) = {
+ActorBlueprint N(parakarry) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_LEE_PARAKARRY,
     .level = 0,
@@ -2254,8 +2254,8 @@ EvtScript N(nextTurn_80224320) = {
     EVT_END
 };
 
-Formation N(formation_parakerry) = {
-    { .actor = &N(parakerry), .home = { .vec = &N(vector3D_8021E940) }}
+Formation N(formation_parakarry) = {
+    { .actor = &N(parakarry), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
 s32 N(idleAnimations_80224410)[] = {
@@ -3984,8 +3984,41 @@ ApiStatus func_802197B8_465C48(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80219824_465CB4(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80219824_465CB4);
+ApiStatus func_80219824_465CB4(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 partnerID = evt_get_variable(script, *args++);
+    Actor* actor = get_actor(script->owner1.enemyID);
+    FormationRow* formation = NULL;
+
+    switch (partnerID) {
+        case PARTNER_GOOMBARIO:
+            formation = N(formation_goombario);
+            break;
+        case PARTNER_KOOPER:
+            formation = N(formation_kooper);
+            break;
+        case PARTNER_BOMBETTE:
+            formation = N(formation_bombette);
+            break;
+        case PARTNER_PARAKARRY:
+            formation = N(formation_parakarry);
+            break;
+        case PARTNER_BOW:
+            formation = N(formation_bow);
+            break;
+        case PARTNER_WATT:
+            formation = N(formation_watt);
+            break;
+        case PARTNER_SUSHIE:
+            formation = N(formation_sushie);
+            break;
+        case PARTNER_LAKILESTER:
+            formation = N(formation_lakilester);
+            break;
+    }
+    formation->priority = actor->turnPriority + 10;
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(copyPartner) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -4029,7 +4062,7 @@ EvtScript N(copyPartner) = {
         EVT_CASE_EQ(3)
             EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_bombette)), 0)
         EVT_CASE_EQ(4)
-            EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_parakerry)), 0)
+            EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_parakarry)), 0)
         EVT_CASE_EQ(9)
             EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_bow)), 0)
         EVT_CASE_EQ(6)
