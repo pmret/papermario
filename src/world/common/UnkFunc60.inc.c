@@ -36,8 +36,8 @@ ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall) {
 
         userData->unk_5C = get_entity_by_index(evt_get_variable(script, *args++));
 
-        for (i = 0; i < 3; i++) {
-            userData->unk_08[i] = fx_motion_blur_flame(0, userData->unk_5C->position.x,
+        for (i = 0; i < ARRAY_COUNT(userData->unk_08); i++) {
+            userData->unk_08[i] = (EffectGraphics*) fx_motion_blur_flame(0, userData->unk_5C->position.x,
                                                           userData->unk_5C->position.y + 12.5f,
                                                           userData->unk_5C->position.z, 1.0f, -1);
             t1 = 0.0f;
@@ -55,7 +55,7 @@ ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall) {
         userData->unk_64 = 0;
 
         t1 = 50.0f;
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < ARRAY_COUNT(userData->unk_38); i++) {
             x = 0.0f;
             add_vec2D_polar(&x, &userData->unk_44[i], t1, N(bigFuncFloats)[i]);
             userData->unk_38[i] = cosTheta * x;
@@ -70,7 +70,7 @@ ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall) {
     switch (userData->unk_00) {
         case 0:
             t1 = update_lerp(5, 0.0f, 50.0f, userData->unk_60, 20);
-            for (i = 0; i < 3; i++) {
+            for (i = 0; i < ARRAY_COUNT(userData->unk_20); i++) {
                 x = userData->unk_20[i] = 0.0f;
                 add_vec2D_polar(&x, &userData->unk_20[i], t1, N(bigFuncFloats)[i]);
                 userData->unk_14[i] = cosTheta * x;
@@ -85,7 +85,7 @@ ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall) {
             break;
         case 1:
             t1 = 50.0f;
-            for (i = 0; i < 3; i++) {
+            for (i = 0; i < ARRAY_COUNT(userData->unk_20); i++) {
                 x = userData->unk_20[i] = 0.0f;
                 add_vec2D_polar(&x, &userData->unk_20[i], t1, N(bigFuncFloats)[i]);
                 userData->unk_14[i] = cosTheta * x;
@@ -101,7 +101,7 @@ ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall) {
         case 2:
             userData->unk_60++;
             if (userData->unk_60 > 30) {
-                for (i = 0; i < 3; i++) {
+                for (i = 0; i < ARRAY_COUNT(userData->unk_08); i++) {
                     userData->unk_08[i]->flags |= 0x10;
                 }
                 return ApiStatus_DONE2;
@@ -118,10 +118,10 @@ ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall) {
             }
             break;
         case 1:
-            for (i = 0; i < 3; i++) {
-                userData->unk_14[i] = userData->unk_14[i] + update_lerp(1, 0.0f, userData->unk_38[i], userData->unk_64, 20);
-                userData->unk_20[i] = userData->unk_20[i] + update_lerp(1, 0.0f, userData->unk_44[i], userData->unk_64, 20);
-                userData->unk_2C[i] = userData->unk_2C[i] + update_lerp(1, 0.0f, userData->unk_50[i], userData->unk_64, 20);
+            for (i = 0; i < ARRAY_COUNT(userData->unk_14); i++) {
+                userData->unk_14[i] += update_lerp(1, 0.0f, userData->unk_38[i], userData->unk_64, 20);
+                userData->unk_20[i] += update_lerp(1, 0.0f, userData->unk_44[i], userData->unk_64, 20);
+                userData->unk_2C[i] += update_lerp(1, 0.0f, userData->unk_50[i], userData->unk_64, 20);
             }
 
             userData->unk_64++;
@@ -132,7 +132,7 @@ ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(userData->unk_08); i++) {
         ((EffectInstanceData*)userData->unk_08[i]->freeDelay)->rotation.x = userData->unk_14[i];
         ((EffectInstanceData*)userData->unk_08[i]->freeDelay)->rotation.y = userData->unk_20[i];
         ((EffectInstanceData*)userData->unk_08[i]->freeDelay)->rotation.z = userData->unk_2C[i];
