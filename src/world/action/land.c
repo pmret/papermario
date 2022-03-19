@@ -1,4 +1,5 @@
 #include "common.h"
+#include "functions.h"
 
 void func_802B6000_E24920(void) {
     f32 sp14;
@@ -97,7 +98,98 @@ void func_802B61C0_E24AE0(void) {
     update_locomotion_state();
 }
 
+void func_802B62CC_E24BEC(void) {
+    CollisionStatus* currentCollisionStatus = &gCollisionStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 sp14;
+    f32 sp10;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v0_3;
+    s32 phi_a0;
+    f32 argVal;
+    s32 temp2;
 
-INCLUDE_ASM(void, "world/action/land", func_802B62CC_E24BEC, void);
+    if (playerStatus->flags < 0) {
+        temp_v0 = playerStatus->flags & 0x7FFFFFFF;
+        playerStatus->flags = temp_v0;
+        playerStatus->fallState = 0;
+        playerStatus->decorationList = 0;
+        playerStatus->unk_C2 = 0;
+        playerStatus->flags = temp_v0 & ~0xE;
+        playerStatus->decorationPos[0] = playerStatus->position.x;
+        playerStatus->decorationPos[1] = playerStatus->position.z;
+        sfx_play_sound_at_player(0x148, 0);
+        if (((u16) currentCollisionStatus->currentFloor & 0x4000) == 0) {
+            phys_adjust_cam_on_landing();
+        }
+        currentCollisionStatus->lastTouchedFloor = -1;
+    }
+    playerStatus->fallState = (u8) playerStatus->fallState + 1;
+    playerStatus->currentSpeed *= 0.6f;
+    player_input_to_move_vector(&sp10, &sp14);
+    if (sp14 != 0.0f) {
+        
+        if (sp14 != 0.0f) {
+            playerStatus->targetYaw = sp10;
+        }
 
-INCLUDE_ASM(void, "world/action/land", func_802B644C_E24D6C, void);
+        temp_v0_2 = SQ(playerStatus->stickAxis[0]);
+
+        temp_v0_3 = SQ(playerStatus->stickAxis[1]);
+
+        if (!(sqrtf(temp_v0_2 + temp_v0_3) > 55.0f)) {
+            set_action_state(ACTION_STATE_WALK);
+            return;
+        }
+        set_action_state(ACTION_STATE_RUN);
+    }
+    else
+    {
+        set_action_state(ACTION_STATE_IDLE);
+    }
+}
+
+void func_802B644C_E24D6C(void) {
+    CollisionStatus* currentCollisionStatus = &gCollisionStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 sp14;
+    f32 sp10;
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 temp_v0_3;
+    s32 temp_v1;
+    
+
+    temp_v0 = playerStatus->flags;
+    if (temp_v0 < 0) {
+        temp_v1 = temp_v0 & 0x7FFFFFFF;
+        playerStatus->flags = temp_v1;
+        playerStatus->fallState = 0;
+        playerStatus->decorationList = 0;
+        playerStatus->unk_C2 = 0;
+        playerStatus->flags = temp_v1 & ~0xE;
+        playerStatus->decorationPos[0] = playerStatus->position.x;
+        playerStatus->decorationPos[1] = playerStatus->position.z;
+        if (( currentCollisionStatus->currentFloor & 0x4000) == 0) {
+            phys_adjust_cam_on_landing();
+        }
+        currentCollisionStatus->lastTouchedFloor = -1;
+    }
+    playerStatus->fallState = playerStatus->fallState + 1;
+    playerStatus->currentSpeed *= 0.6f;
+    player_input_to_move_vector(&sp10, &sp14);
+    if (sp14 != 0.0f) {
+        playerStatus->targetYaw = sp10;
+    }
+    temp_v0_2 = playerStatus->stickAxis[0] * playerStatus->stickAxis[0];
+    temp_v0_3 = playerStatus->stickAxis[1] * playerStatus->stickAxis[1];
+    
+    if ((sqrtf(temp_v0_2 + temp_v0_3) > 55.0f)) {
+        set_action_state(ACTION_STATE_RUN);
+    }
+    else
+    {
+        set_action_state(ACTION_STATE_WALK);
+    }
+}

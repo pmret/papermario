@@ -18,7 +18,7 @@ void func_800E5520(void) {
     D_8010C9B0 = 0;
 }
 
-INCLUDE_ASM(void, "7bb60_len_41b0", phys_adjust_cam_on_landing, void);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_adjust_cam_on_landing, void);
 
 void phys_clear_spin_history(void) {
     s32 i;
