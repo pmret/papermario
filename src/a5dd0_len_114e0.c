@@ -1034,6 +1034,7 @@ s32 entity_get_collision_flags(Entity* entity);
 void entity_free_static_data(EntityBlueprint* data);
 void update_entity_shadow_position(Entity* entity);
 s32 entity_raycast_down(f32* x, f32* y, f32* z, f32* hitYaw, f32* hitPitch, f32* hitLength);
+void func_80117D00(Model* model);
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTxMtx, s32 treeDepth);
 void enable_transform_group(u16 modelID);
 
@@ -2914,6 +2915,7 @@ ModelTransformGroup* get_transform_group(s32 index) {
     return (*gCurrentTransformGroups)[index];
 }
 
+void func_8011B1D8(ModelNode*);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B1D8);
 
 void make_transform_group(u16 modelID) {

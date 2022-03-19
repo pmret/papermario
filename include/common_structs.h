@@ -609,7 +609,7 @@ typedef struct Shadow {
     /* 0x07 */ char unk_07;
     /* 0x08 */ s16 entityModelID;
     /* 0x0A */ s16 vertexSegment;
-    /* 0x0C */ Vtx_tn** vertexArray;
+    /* 0x0C */ Vtx* vertexArray;
     /* 0x10 */ Vec3f position;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Vec3f rotation;

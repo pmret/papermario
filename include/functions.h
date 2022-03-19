@@ -17,10 +17,15 @@ void nuBoot(void);
 void boot_idle(void);
 void boot_main(void);
 
+void is_debug_init(void);
+
 f32 signF(f32 val);
+
+void func_8002D160(void);
 
 void* heap_malloc(s32 size);
 void* _heap_malloc(HeapNode* head, u32 size);
+void* _heap_malloc_tail(HeapNode* head, u32 size);
 u32 _heap_free(HeapNode* heapNodeList, void* addrToFree);
 void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize);
 HeapNode* _heap_create(HeapNode* addr, u32 size);
@@ -97,6 +102,8 @@ void filemenu_set_cursor_alpha(s32 arg0);
 void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);
 Message* filemenu_get_menu_message(s32 idx);
 void filemenu_draw_message(Message*, s32 posX, s32 posY, s32 alpha, s32 color, s32 flags);
+
+void gfx_task_background(void);
 
 void update_enemy_shadows(void);
 void update_hero_shadows(void);
@@ -619,7 +626,10 @@ void state_step_demo(void);
 void state_drawUI_demo(void);
 void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void));
 
+void func_802B2000(void);
+void func_802B203C(void);
 void func_802B2078(void);
+void func_802B20B4(void);
 
 void initialize_curtains(void);
 void update_curtains(void);

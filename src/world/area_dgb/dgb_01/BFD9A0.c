@@ -3,6 +3,7 @@
 #include "sprite/npc/world_tubba.h"
 #include "message_ids.h"
 #include "effects.h"
+#include "world/partners.h"
 
 EntryList N(entryList) = {
     {    0.0f,   0.0f, 485.0f,   0.0f },
