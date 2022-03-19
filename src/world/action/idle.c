@@ -1,8 +1,6 @@
 #include "common.h"
 #include "../actions.h"
 
-void func_802B61E4_E23444(void);
-
 s32 world_action_idle_peachAnims[] = {
     0x000A0001, // Idle
 
@@ -11,6 +9,8 @@ s32 world_action_idle_peachAnims[] = {
     0x000A0015, 0x000A0017, 0x000A0019, 0x000A001B, 0x000A001D, 0x000A001F, 0x000A0021, 0x000A0023,
     0x000A0025, 0x000A0027, 0x000A0029, 0x00000000,
 };
+
+void func_802B61E4_E23444(void);
 
 void world_action_idle_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -79,6 +79,8 @@ void world_action_idle_update(void) {
 void func_802B61E4_E23444(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
+    f32 angle;
+    f32 magnitude;
 
     if (playerStatus->flags & 0x80000000) {
         playerStatus->flags &= ~0x80000000;
@@ -138,17 +140,12 @@ void func_802B61E4_E23444(void) {
         }
     }
 
-    {
-        f32 angle;
-        f32 magnitude;
+    player_input_to_move_vector(&angle, &magnitude);
+    phys_update_interact_collider();
 
-        player_input_to_move_vector(&angle, &magnitude);
-        phys_update_interact_collider();
-
-        if (magnitude != 0.0f) {
-            playerStatus->framesOnGround = 0;
-            playerStatus->targetYaw = angle;
-            set_action_state(ACTION_STATE_WALK);
-        }
+    if (magnitude != 0.0f) {
+        playerStatus->framesOnGround = 0;
+        playerStatus->targetYaw = angle;
+        set_action_state(ACTION_STATE_WALK);
     }
 }
