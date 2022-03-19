@@ -110,7 +110,7 @@ glabel func_802413AC_BAECEC
 .L80241518_BAEE58:
 /* BAEE58 80241518 0280202D */  daddu     $a0, $s4, $zero
 /* BAEE5C 8024151C 0200282D */  daddu     $a1, $s0, $zero
-/* BAEE60 80241520 0C09033D */  jal       func_80240CF4_BAE634
+/* BAEE60 80241520 0C09033D */  jal       mim_08_SixFloatsFunc
 /* BAEE64 80241524 0260302D */   daddu    $a2, $s3, $zero
 /* BAEE68 80241528 0809055D */  j         .L80241574
 /* BAEE6C 8024152C 0000102D */   daddu    $v0, $zero, $zero

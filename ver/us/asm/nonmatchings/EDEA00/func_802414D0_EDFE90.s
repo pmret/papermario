@@ -124,7 +124,7 @@ glabel func_802414D0_EDFE90
 .L80241668_EE0028:
 /* EE0028 80241668 02A0202D */  daddu     $a0, $s5, $zero
 /* EE002C 8024166C 0200282D */  daddu     $a1, $s0, $zero
-/* EE0030 80241670 0C090386 */  jal       func_80240E18_EDF7D8
+/* EE0030 80241670 0C090386 */  jal       EDEA00_SixFloatsFunc
 /* EE0034 80241674 0260302D */   daddu    $a2, $s3, $zero
 /* EE0038 80241678 080905B1 */  j         .L802416C4
 /* EE003C 8024167C 0000102D */   daddu    $v0, $zero, $zero

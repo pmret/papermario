@@ -10,7 +10,7 @@
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802411A4_D21034);
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 

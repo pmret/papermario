@@ -5,7 +5,7 @@
 dlabel D_80244480_A1A6A0
 .word 0x00000002, 0x00000000, 0x00000001, 0x00000000
 
-dlabel D_80244490_A1A6B0
+dlabel hos_02_sixFloats
 .float 4.5, 3.5, 2.6, 2.0, 1.5, 20.0
 
 dlabel D_802444A8_A1A6C8

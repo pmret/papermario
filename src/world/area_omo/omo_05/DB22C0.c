@@ -29,7 +29,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240780_DB2A40);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802416A8_DB3968);
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802415E8_A03E28
+glabel nok_14_SixFloatsFunc
 /* A03E28 802415E8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A03E2C 802415EC AFB00010 */  sw        $s0, 0x10($sp)
 /* A03E30 802415F0 0080802D */  daddu     $s0, $a0, $zero
@@ -15,9 +15,9 @@ glabel func_802415E8_A03E28
 /* A03E50 80241610 00031C00 */  sll       $v1, $v1, 0x10
 /* A03E54 80241614 00031B83 */  sra       $v1, $v1, 0xe
 /* A03E58 80241618 A444008E */  sh        $a0, 0x8e($v0)
-/* A03E5C 8024161C 3C018024 */  lui       $at, %hi(D_80243A18_A06258)
+/* A03E5C 8024161C 3C018024 */  lui       $at, %hi(nok_14_sixFloats)
 /* A03E60 80241620 00230821 */  addu      $at, $at, $v1
-/* A03E64 80241624 C4223A18 */  lwc1      $f2, %lo(D_80243A18_A06258)($at)
+/* A03E64 80241624 C4223A18 */  lwc1      $f2, %lo(nok_14_sixFloats)($at)
 /* A03E68 80241628 8443008E */  lh        $v1, 0x8e($v0)
 /* A03E6C 8024162C 46020000 */  add.s     $f0, $f0, $f2
 /* A03E70 80241630 28630005 */  slti      $v1, $v1, 5

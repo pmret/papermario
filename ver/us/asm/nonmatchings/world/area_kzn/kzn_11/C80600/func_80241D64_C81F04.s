@@ -111,7 +111,7 @@ glabel func_80241D64_C81F04
 .L80241ED4_C82074:
 /* C82074 80241ED4 0280202D */  daddu     $a0, $s4, $zero
 /* C82078 80241ED8 0200282D */  daddu     $a1, $s0, $zero
-/* C8207C 80241EDC 0C09042D */  jal       func_802410B4_C81254
+/* C8207C 80241EDC 0C09042D */  jal       kzn_11_SixFloatsFunc
 /* C82080 80241EE0 0260302D */   daddu    $a2, $s3, $zero
 /* C82084 80241EE4 080907CA */  j         .L80241F28
 /* C82088 80241EE8 0000102D */   daddu    $v0, $zero, $zero

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802416A8_DB3968
+glabel omo_05_SixFloatsFunc
 /* DB3968 802416A8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* DB396C 802416AC AFB00010 */  sw        $s0, 0x10($sp)
 /* DB3970 802416B0 0080802D */  daddu     $s0, $a0, $zero
@@ -15,9 +15,9 @@ glabel func_802416A8_DB3968
 /* DB3990 802416D0 00031C00 */  sll       $v1, $v1, 0x10
 /* DB3994 802416D4 00031B83 */  sra       $v1, $v1, 0xe
 /* DB3998 802416D8 A444008E */  sh        $a0, 0x8e($v0)
-/* DB399C 802416DC 3C018024 */  lui       $at, %hi(D_80242F88_DB5248)
+/* DB399C 802416DC 3C018024 */  lui       $at, %hi(omo_05_sixFloats)
 /* DB39A0 802416E0 00230821 */  addu      $at, $at, $v1
-/* DB39A4 802416E4 C4222F88 */  lwc1      $f2, %lo(D_80242F88_DB5248)($at)
+/* DB39A4 802416E4 C4222F88 */  lwc1      $f2, %lo(omo_05_sixFloats)($at)
 /* DB39A8 802416E8 8443008E */  lh        $v1, 0x8e($v0)
 /* DB39AC 802416EC 46020000 */  add.s     $f0, $f0, $f2
 /* DB39B0 802416F0 28630005 */  slti      $v1, $v1, 5

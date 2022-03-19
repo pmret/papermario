@@ -110,7 +110,7 @@ glabel func_802416AC_DAEAAC
 .L80241818_DAEC18:
 /* DAEC18 80241818 0280202D */  daddu     $a0, $s4, $zero
 /* DAEC1C 8024181C 0200282D */  daddu     $a1, $s0, $zero
-/* DAEC20 80241820 0C0903FD */  jal       func_80240FF4_DAE3F4
+/* DAEC20 80241820 0C0903FD */  jal       omo_04_SixFloatsFunc
 /* DAEC24 80241824 0260302D */   daddu    $a2, $s3, $zero
 /* DAEC28 80241828 0809061D */  j         .L80241874
 /* DAEC2C 8024182C 0000102D */   daddu    $v0, $zero, $zero

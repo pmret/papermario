@@ -111,7 +111,7 @@ glabel func_802428F4_A18B14
 .L80242A64_A18C84:
 /* A18C84 80242A64 0280202D */  daddu     $a0, $s4, $zero
 /* A18C88 80242A68 0200282D */  daddu     $a1, $s0, $zero
-/* A18C8C 80242A6C 0C090711 */  jal       func_80241C44_A17E64
+/* A18C8C 80242A6C 0C090711 */  jal       hos_02_SixFloatsFunc
 /* A18C90 80242A70 0260302D */   daddu    $a2, $s3, $zero
 /* A18C94 80242A74 08090AAE */  j         .L80242AB8
 /* A18C98 80242A78 0000102D */   daddu    $v0, $zero, $zero

@@ -6,7 +6,6 @@
 #define NAMESPACE EE70C0
 
 extern const s32 D_802453E0_EEB990[];
-extern f32 D_802444F0_EEAAA0[];
 
 INCLUDE_ASM(s32, "EE70C0", func_80240B10_EE70C0);
 //#include "world/common/UnkNpcAIFunc23.inc.c"
@@ -19,15 +18,7 @@ INCLUDE_ASM(s32, "EE70C0", func_80240B10_EE70C0);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-void func_80241764_EE7D14(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->pos.y += D_802444F0_EEAAA0[npc->duration++];
-    if (npc->duration >= 5) {
-        script->functionTemp[0] = 12;
-    }
-}
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 

@@ -113,7 +113,7 @@ static s32 N(pad_3558)[] = {
     0x00000000, 0x00000000,
 };
 
-f32 N(D_80243560_C39A90)[] = {
+f32 N(sixFloats)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
     1.5f, 20.0f,
 };
@@ -427,15 +427,7 @@ EvtScript N(makeEntities) = {
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-void N(func_80240C54_C37184)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->pos.y += N(D_80243560_C39A90)[npc->duration++];
-    if (npc->duration >= 5) {
-        script->functionTemp[0] = 12;
-    }
-}
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -489,7 +481,7 @@ ApiStatus N(func_8024130C_C3783C)(Evt* script, s32 isInitialCall) {
         case 10:
             N(UnkNpcAIFunc2)(script, aiSettings, territoryPtr);
         case 11:
-            N(func_80240C54_C37184)(script, aiSettings, territoryPtr);
+            N(SixFloatsFunc)(script, aiSettings, territoryPtr);
             break;
         case 12:
             N(UnkNpcAIFunc14)(script, aiSettings, territoryPtr);

@@ -37,7 +37,7 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80241708_A08608);
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 

@@ -110,7 +110,7 @@ glabel func_80243124_9AB514
 .L80243290_9AB680:
 /* 9AB680 80243290 0280202D */  daddu     $a0, $s4, $zero
 /* 9AB684 80243294 0200282D */  daddu     $a1, $s0, $zero
-/* 9AB688 80243298 0C090A9B */  jal       func_80242A6C_9AAE5C
+/* 9AB688 80243298 0C090A9B */  jal       trd_04_SixFloatsFunc
 /* 9AB68C 8024329C 0260302D */   daddu    $a2, $s3, $zero
 /* 9AB690 802432A0 08090CBB */  j         .L802432EC
 /* 9AB694 802432A4 0000102D */   daddu    $v0, $zero, $zero

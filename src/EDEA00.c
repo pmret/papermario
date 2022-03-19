@@ -5,8 +5,6 @@
 
 #define NAMESPACE EDEA00
 
-extern f32 D_802441DC_EE2B9C[];
-
 #include "world/common/UnkFunc41.inc.c"
 
 #include "world/common/UnkNpcAIFunc23.inc.c"
@@ -19,15 +17,7 @@ extern f32 D_802441DC_EE2B9C[];
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-void func_80240E18_EDF7D8(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->pos.y += D_802441DC_EE2B9C[npc->duration++];
-    if (npc->duration >= 5) {
-        script->functionTemp[0] = 12;
-    }
-}
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 

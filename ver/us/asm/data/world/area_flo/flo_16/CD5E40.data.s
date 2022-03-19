@@ -2,7 +2,7 @@
 
 .section .data
 
-dlabel D_80244010_CD5E40
+dlabel sixFloats
 .float 4.5, 3.5, 2.6, 2.0, 1.5, 20.0
 
 dlabel D_80244028_CD5E58

@@ -110,7 +110,7 @@ glabel func_802422C0_DF1160
 .L8024242C_DF12CC:
 /* DF12CC 8024242C 0280202D */  daddu     $a0, $s4, $zero
 /* DF12D0 80242430 0200282D */  daddu     $a1, $s0, $zero
-/* DF12D4 80242434 0C090702 */  jal       func_80241C08_DF0AA8
+/* DF12D4 80242434 0C090702 */  jal       omo_17_SixFloatsFunc
 /* DF12D8 80242438 0260302D */   daddu    $a2, $s3, $zero
 /* DF12DC 8024243C 08090922 */  j         .L80242488
 /* DF12E0 80242440 0000102D */   daddu    $v0, $zero, $zero

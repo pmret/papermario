@@ -110,7 +110,7 @@ glabel func_80241D60_DB4020
 .L80241ECC_DB418C:
 /* DB418C 80241ECC 0280202D */  daddu     $a0, $s4, $zero
 /* DB4190 80241ED0 0200282D */  daddu     $a1, $s0, $zero
-/* DB4194 80241ED4 0C0905AA */  jal       func_802416A8_DB3968
+/* DB4194 80241ED4 0C0905AA */  jal       omo_05_SixFloatsFunc
 /* DB4198 80241ED8 0260302D */   daddu    $a2, $s3, $zero
 /* DB419C 80241EDC 080907CA */  j         .L80241F28
 /* DB41A0 80241EE0 0000102D */   daddu    $v0, $zero, $zero

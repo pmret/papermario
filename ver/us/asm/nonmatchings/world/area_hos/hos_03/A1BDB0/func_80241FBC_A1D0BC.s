@@ -110,7 +110,7 @@ glabel func_80241FBC_A1D0BC
 .L80242128_A1D228:
 /* A1D228 80242128 0280202D */  daddu     $a0, $s4, $zero
 /* A1D22C 8024212C 0200282D */  daddu     $a1, $s0, $zero
-/* A1D230 80242130 0C090641 */  jal       func_80241904_A1CA04
+/* A1D230 80242130 0C090641 */  jal       hos_03_SixFloatsFunc
 /* A1D234 80242134 0260302D */   daddu    $a2, $s3, $zero
 /* A1D238 80242138 08090861 */  j         .L80242184
 /* A1D23C 8024213C 0000102D */   daddu    $v0, $zero, $zero

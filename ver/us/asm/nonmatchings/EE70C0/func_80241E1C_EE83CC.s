@@ -121,7 +121,7 @@ dlabel L80241FA4_EE8554
 dlabel L80241FB4_EE8564
 /* EE8564 80241FB4 02A0202D */  daddu     $a0, $s5, $zero
 /* EE8568 80241FB8 0200282D */  daddu     $a1, $s0, $zero
-/* EE856C 80241FBC 0C0905D9 */  jal       func_80241764_EE7D14
+/* EE856C 80241FBC 0C0905D9 */  jal       EE70C0_SixFloatsFunc
 /* EE8570 80241FC0 0260302D */   daddu    $a2, $s3, $zero
 /* EE8574 80241FC4 08090804 */  j         .L80242010
 /* EE8578 80241FC8 0000102D */   daddu    $v0, $zero, $zero

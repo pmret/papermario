@@ -10,15 +10,7 @@
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-void N(func_80240F74_CB5F74)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->pos.y += N(D_8024362C_CB862C)[npc->duration++];
-    if (npc->duration >= 5) {
-        script->functionTemp[0] = 12;
-    }
-}
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -71,7 +63,7 @@ ApiStatus N(func_8024162C_CB662C)(Evt* script, s32 isInitialCall) {
         case 10:
             N(UnkNpcAIFunc2)(script, npcAISettings, territoryPtr);
         case 11:
-            N(func_80240F74_CB5F74)(script, npcAISettings, territoryPtr);
+            N(SixFloatsFunc)(script, npcAISettings, territoryPtr);
             break;
         case 12:
             N(UnkNpcAIFunc14)(script, npcAISettings, territoryPtr);

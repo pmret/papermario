@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_07/C6EA50", func_802407F4_C6EB24);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_07/C6EA50", func_80241474_C6F7A4);
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 

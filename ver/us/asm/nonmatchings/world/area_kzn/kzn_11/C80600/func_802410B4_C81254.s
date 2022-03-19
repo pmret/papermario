@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802410B4_C81254
+glabel kzn_11_SixFloatsFunc
 /* C81254 802410B4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* C81258 802410B8 AFB00010 */  sw        $s0, 0x10($sp)
 /* C8125C 802410BC 0080802D */  daddu     $s0, $a0, $zero
@@ -15,9 +15,9 @@ glabel func_802410B4_C81254
 /* C8127C 802410DC 00031C00 */  sll       $v1, $v1, 0x10
 /* C81280 802410E0 00031B83 */  sra       $v1, $v1, 0xe
 /* C81284 802410E4 A444008E */  sh        $a0, 0x8e($v0)
-/* C81288 802410E8 3C018024 */  lui       $at, %hi(D_802436D0_C83870)
+/* C81288 802410E8 3C018024 */  lui       $at, %hi(kzn_11_sixFloats)
 /* C8128C 802410EC 00230821 */  addu      $at, $at, $v1
-/* C81290 802410F0 C42236D0 */  lwc1      $f2, %lo(D_802436D0_C83870)($at)
+/* C81290 802410F0 C42236D0 */  lwc1      $f2, %lo(kzn_11_sixFloats)($at)
 /* C81294 802410F4 8443008E */  lh        $v1, 0x8e($v0)
 /* C81298 802410F8 46020000 */  add.s     $f0, $f0, $f2
 /* C8129C 802410FC 28630005 */  slti      $v1, $v1, 5

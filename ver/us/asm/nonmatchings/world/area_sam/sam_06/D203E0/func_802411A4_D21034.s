@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802411A4_D21034
+glabel sam_06_SixFloatsFunc
 /* D21034 802411A4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* D21038 802411A8 AFB00010 */  sw        $s0, 0x10($sp)
 /* D2103C 802411AC 0080802D */  daddu     $s0, $a0, $zero
@@ -15,9 +15,9 @@ glabel func_802411A4_D21034
 /* D2105C 802411CC 00031C00 */  sll       $v1, $v1, 0x10
 /* D21060 802411D0 00031B83 */  sra       $v1, $v1, 0xe
 /* D21064 802411D4 A444008E */  sh        $a0, 0x8e($v0)
-/* D21068 802411D8 3C018024 */  lui       $at, %hi(D_802441B8_D24048)
+/* D21068 802411D8 3C018024 */  lui       $at, %hi(sam_06_sixFloats)
 /* D2106C 802411DC 00230821 */  addu      $at, $at, $v1
-/* D21070 802411E0 C42241B8 */  lwc1      $f2, %lo(D_802441B8_D24048)($at)
+/* D21070 802411E0 C42241B8 */  lwc1      $f2, %lo(sam_06_sixFloats)($at)
 /* D21074 802411E4 8443008E */  lh        $v1, 0x8e($v0)
 /* D21078 802411E8 46020000 */  add.s     $f0, $f0, $f2
 /* D2107C 802411EC 28630005 */  slti      $v1, $v1, 5

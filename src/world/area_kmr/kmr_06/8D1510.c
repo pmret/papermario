@@ -13,7 +13,7 @@ static char* N(exit_str_1) = "kmr_07";
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_06/8D1510", func_80240C54_8D2164);
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 

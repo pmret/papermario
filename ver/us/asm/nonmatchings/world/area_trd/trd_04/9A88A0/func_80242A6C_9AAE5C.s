@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80242A6C_9AAE5C
+glabel trd_04_SixFloatsFunc
 /* 9AAE5C 80242A6C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 9AAE60 80242A70 AFB00010 */  sw        $s0, 0x10($sp)
 /* 9AAE64 80242A74 0080802D */  daddu     $s0, $a0, $zero
@@ -15,9 +15,9 @@ glabel func_80242A6C_9AAE5C
 /* 9AAE84 80242A94 00031C00 */  sll       $v1, $v1, 0x10
 /* 9AAE88 80242A98 00031B83 */  sra       $v1, $v1, 0xe
 /* 9AAE8C 80242A9C A444008E */  sh        $a0, 0x8e($v0)
-/* 9AAE90 80242AA0 3C018024 */  lui       $at, %hi(D_802456F4_9ADAE4)
+/* 9AAE90 80242AA0 3C018024 */  lui       $at, %hi(trd_04_sixFloats)
 /* 9AAE94 80242AA4 00230821 */  addu      $at, $at, $v1
-/* 9AAE98 80242AA8 C42256F4 */  lwc1      $f2, %lo(D_802456F4_9ADAE4)($at)
+/* 9AAE98 80242AA8 C42256F4 */  lwc1      $f2, %lo(trd_04_sixFloats)($at)
 /* 9AAE9C 80242AAC 8443008E */  lh        $v1, 0x8e($v0)
 /* 9AAEA0 80242AB0 46020000 */  add.s     $f0, $f0, $f2
 /* 9AAEA4 80242AB4 28630005 */  slti      $v1, $v1, 5

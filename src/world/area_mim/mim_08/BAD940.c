@@ -17,7 +17,7 @@ INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80240068_BAD9A8);
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80240CF4_BAE634);
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 

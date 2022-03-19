@@ -110,7 +110,7 @@ glabel func_8024185C_D216EC
 .L802419C8_D21858:
 /* D21858 802419C8 0280202D */  daddu     $a0, $s4, $zero
 /* D2185C 802419CC 0200282D */  daddu     $a1, $s0, $zero
-/* D21860 802419D0 0C090469 */  jal       func_802411A4_D21034
+/* D21860 802419D0 0C090469 */  jal       sam_06_SixFloatsFunc
 /* D21864 802419D4 0260302D */   daddu    $a2, $s3, $zero
 /* D21868 802419D8 08090689 */  j         .L80241A24
 /* D2186C 802419DC 0000102D */   daddu    $v0, $zero, $zero
