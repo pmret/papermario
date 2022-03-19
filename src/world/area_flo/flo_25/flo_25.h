@@ -11,7 +11,7 @@ ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc43)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CF2BD0)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80241944_CF4514)(Evt* script, s32 isInitialCall);
+ApiStatus N(UnkNpcAIMainFunc10)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80241D58_CF4928)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80241DAC_CF497C)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80241DE4_CF49B4)(Evt* script, s32 isInitialCall);

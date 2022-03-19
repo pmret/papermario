@@ -26,7 +26,7 @@ ApiStatus N(func_802402AC_CD20DC)(Evt* script, s32 isInitialCall);
 ApiStatus N(SwitchToPartner)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc44)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_80242754_CD4584)(Evt* script, s32 isInitialCall);
+ApiStatus N(UnkNpcAIMainFunc10)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242940_CD4770)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_802444D4);

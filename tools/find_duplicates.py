@@ -175,7 +175,7 @@ def do_query(query):
     for match in matches:
         if i == args.num_out:
             break
-        match_str = "{:.2f} - {}".format(matches[match], match)
+        match_str = "{:.3f} - {}".format(matches[match], match)
         if match not in s_files:
            match_str += " (decompiled)"
         print(match_str)

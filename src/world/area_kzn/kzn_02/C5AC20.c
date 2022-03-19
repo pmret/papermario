@@ -4,7 +4,7 @@
 
 #include "world/common/UnkNpcAIFunc35.inc.c"
 
-#include "world/common/UnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1_copy.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
@@ -20,18 +20,16 @@
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_802417EC_C5BF2C);
+#include "world/common/UnkNpcAIMainFunc9.inc.c"
 
 #include "world/common/UnkNpcAIFunc13.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241B08_C5C248);
-//#include "world/common/UnkNpcAIFunc34.inc.c"
+#include "world/common/UnkNpcAIFunc34.inc.c"
 
 #include "world/common/UnkFunc45.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241DE4_C5C524);
+#include "world/common/UnkNpcAIMainFunc10.inc.c"
 
-static char* N(exit_str_0) = "kzn_02";
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241FCC_C5C70C);
 
