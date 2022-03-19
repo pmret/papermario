@@ -1,6 +1,9 @@
 #include "common.h"
 #include "functions.h"
 
+void func_802B62CC_E24BEC(void);
+void func_802B644C_E24D6C(void);
+
 void func_802B6000_E24920(void) {
     f32 inputMoveMagnitude;
     f32 inputMoveAngle;
@@ -8,7 +11,7 @@ void func_802B6000_E24920(void) {
     s32 phi_a0;
     CollisionStatus* currentCollisionStatus = &gCollisionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Camera* currentCameras = &gCameras;
+    Camera* currentCameras = &gCameras[0];
     
     if ((playerStatus->animFlags & 0x1000) != 0) {
         func_802B62CC_E24BEC();
@@ -52,7 +55,7 @@ void func_802B6000_E24920(void) {
 
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
     jumpInputCheck = check_input_jump();
-    
+
     if ((jumpInputCheck != 0) || (jumpInputCheck < (s32) playerStatus->fallState)) {
         if (inputMoveMagnitude == 0.0f) {
             set_action_state(0);
