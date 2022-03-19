@@ -13,27 +13,34 @@ void func_802B6000_E24920(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* currentCameras = &gCameras[0];
     
-    if ((playerStatus->animFlags & 0x1000) != 0) {
+    if ((playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
         func_802B62CC_E24BEC();
         return;
     }
 
-    if (playerStatus->flags < 0) {
-        playerStatus->flags = playerStatus->flags & 0x7F77FFF1;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerStatus->flags = playerStatus->flags & ~(
+            PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | 
+            PLAYER_STATUS_FLAGS_800000 | 
+            PLAYER_STATUS_FLAGS_80000 | 
+            PLAYER_STATUS_FLAGS_8 |
+            PLAYER_STATUS_FLAGS_FALLING | 
+            PLAYER_STATUS_FLAGS_JUMPING
+        );
         playerStatus->fallState = 0;
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->decorationPos[0] = playerStatus->position.x;
         playerStatus->decorationPos[1] = playerStatus->position.z;
 
-        if ((playerStatus->animFlags & 0x4000) != 0) {
-            phi_a0 = 0x9 << 16;
+        if ((playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO)) {
+            phi_a0 = 0x90000;
             phi_a0 |= 0x2;
 
         } else {
             phi_a0 = 0x6000B;
-            if ((playerStatus->animFlags & 1) == 0) {
-                phi_a0 = 0x1 << 16;
+            if (!(playerStatus->animFlags & 1)) {
+                phi_a0 = 0x10000;
                 phi_a0 |= 0x9;
             }
         }
@@ -42,21 +49,21 @@ void func_802B6000_E24920(void) {
         sfx_play_sound_at_player(0x8161, 0);
         sfx_play_sound_at_player(0x148, 0);
 
-        if (((u16) currentCollisionStatus->currentFloor & 0x4000) == 0) {
+        if (!(currentCollisionStatus->currentFloor & 0x4000)) {
             phys_adjust_cam_on_landing();
         }
 
         currentCollisionStatus->lastTouchedFloor = -1;
-        playerStatus->animFlags &= 0xFFFB0000 | 0xFFFF;
-        currentCameras->moveFlags = (u16) currentCameras->moveFlags & 0xFFFB;
+        playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40000;
+        currentCameras->moveFlags = currentCameras->moveFlags & 0xFFFB;
     }
-    playerStatus->fallState = (u8) playerStatus->fallState + 1;
+    playerStatus->fallState++;
     playerStatus->currentSpeed *= 0.6f;
 
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
     jumpInputCheck = check_input_jump();
 
-    if ((jumpInputCheck != 0) || (jumpInputCheck < (s32) playerStatus->fallState)) {
+    if ((jumpInputCheck != 0) || (jumpInputCheck < playerStatus->fallState)) {
         if (inputMoveMagnitude == 0.0f) {
             set_action_state(0);
             return;
@@ -74,20 +81,27 @@ void func_802B61C0_E24AE0(void) {
     f32 inputMoveMagnitude;
     f32 inputMoveAngle;
 
-    if ((playerStatus->animFlags & 0x1000) != 0) {
+    if ((playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
         func_802B644C_E24D6C();
         return;
     }
 
-    if (playerStatus->flags < 0) {
-        playerStatus->flags = playerStatus->flags & 0x7F77FFF1;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+         playerStatus->flags = playerStatus->flags & ~(
+            PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | 
+            PLAYER_STATUS_FLAGS_800000 | 
+            PLAYER_STATUS_FLAGS_80000 | 
+            PLAYER_STATUS_FLAGS_8 |
+            PLAYER_STATUS_FLAGS_FALLING | 
+            PLAYER_STATUS_FLAGS_JUMPING
+        );
         playerStatus->fallState = 0;
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->decorationPos[0] = playerStatus->position.x;
         playerStatus->decorationPos[1] = playerStatus->position.z;
 
-        if ((currentCollisionStatus->currentFloor & 0x4000) == 0) {
+        if (!(currentCollisionStatus->currentFloor & 0x4000)) {
             phys_adjust_cam_on_landing();
         }
 
@@ -116,26 +130,26 @@ void func_802B62CC_E24BEC(void) {
     s32 squaredStick0;
     s32 squaredStick1;
 
-    if (playerStatus->flags < 0) {
-        playerFlagsModified = playerStatus->flags & 0x7FFFFFFF;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerFlagsModified = playerStatus->flags & ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->flags = playerFlagsModified;
         playerStatus->fallState = 0;
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
-        playerStatus->flags = playerFlagsModified & ~0xE;
+        playerStatus->flags = playerFlagsModified & ~(PLAYER_STATUS_FLAGS_8 | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
         playerStatus->decorationPos[0] = playerStatus->position.x;
         playerStatus->decorationPos[1] = playerStatus->position.z;
 
         sfx_play_sound_at_player(0x148, 0);
 
-        if (((u16) currentCollisionStatus->currentFloor & 0x4000) == 0) {
+        if (!(currentCollisionStatus->currentFloor & 0x4000)) {
             phys_adjust_cam_on_landing();
         }
 
         currentCollisionStatus->lastTouchedFloor = -1;
     }
 
-    playerStatus->fallState = (u8) playerStatus->fallState + 1;
+    playerStatus->fallState++;
     playerStatus->currentSpeed *= 0.6f;
 
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
@@ -169,17 +183,17 @@ void func_802B644C_E24D6C(void) {
     s32 squaredStick1;
     s32 playerFlagsModified;
     
-    if (playerStatus->flags < 0) {
-        playerFlagsModified = playerStatus->flags & 0x7FFFFFFF;
+    if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
+        playerFlagsModified = playerStatus->flags & ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->flags = playerFlagsModified;
         playerStatus->fallState = 0;
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
-        playerStatus->flags = playerFlagsModified & ~0xE;
+        playerStatus->flags = playerFlagsModified & ~(PLAYER_STATUS_FLAGS_8 | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
         playerStatus->decorationPos[0] = playerStatus->position.x;
         playerStatus->decorationPos[1] = playerStatus->position.z;
 
-        if (( currentCollisionStatus->currentFloor & 0x4000) == 0) {
+        if (!(currentCollisionStatus->currentFloor & 0x4000)) {
             phys_adjust_cam_on_landing();
         }
 

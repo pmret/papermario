@@ -1826,6 +1826,7 @@ enum NpcFlags {
 enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_JUMPING                          = 0x00000002,
     PLAYER_STATUS_FLAGS_FALLING                          = 0x00000004,
+    PLAYER_STATUS_FLAGS_8                                = 0x00000008,
     PLAYER_STATUS_FLAGS_10                               = 0x00000010,
     PLAYER_STATUS_FLAGS_20                               = 0x00000020,
     PLAYER_STATUS_FLAGS_80                               = 0x00000080,
@@ -1839,6 +1840,7 @@ enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_8000                             = 0x00008000,
     PLAYER_STATUS_FLAGS_20000                            = 0x00020000,
     PLAYER_STATUS_FLAGS_40000                            = 0x00040000,
+    PLAYER_STATUS_FLAGS_80000                            = 0x00080000,
     PLAYER_STATUS_FLAGS_800000                           = 0x00800000,
     PLAYER_STATUS_FLAGS_HAS_CONVERSATION_NPC             = 0x02000000,
     PLAYER_STATUS_FLAGS_CAMERA_DOESNT_FOLLOW             = 0x04000000,
