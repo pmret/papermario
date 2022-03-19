@@ -48,7 +48,7 @@ ApiStatus N(UnkNpcAIMainFunc5)(Evt* script, s32 isInitialCall) {
 
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
-            fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
+            fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 40, &emoteTemp);
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & ENEMY_FLAGS_40000000) {
             script->functionTemp[0] = 12;

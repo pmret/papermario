@@ -32,7 +32,7 @@
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241304_A8DD84);
+#include "world/common/UnkNpcAIMainFunc8.inc.c"
 
 #include "world/common/Call800E9894.inc.c"
 
