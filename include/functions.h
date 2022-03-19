@@ -887,4 +887,6 @@ void clear_entity_data(s32);
 void clear_effect_data(void);
 void clear_area_flags(void);
 
+void update_locomotion_state(void);
+
 #endif
