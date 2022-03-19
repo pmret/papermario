@@ -9,7 +9,7 @@
 ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CB5000)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc43)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_8024162C_CB662C)(Evt* script, s32 isInitialCall);
+ApiStatus N(UnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall);
 
 extern f32 N(sixFloats)[];
 extern NpcGroupList N(npcGroupList_8024414C);
