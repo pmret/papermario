@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80241390_87AF70);
 
 #include "world/common/UnkNpcAIFunc35.inc.c"
 
-#include "world/common/UnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1_copy.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
@@ -24,4 +24,4 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_80241390_87AF70);
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/87AC00", func_802426FC_87C2DC);
+#include "world/common/UnkNpcAIMainFunc9.inc.c"

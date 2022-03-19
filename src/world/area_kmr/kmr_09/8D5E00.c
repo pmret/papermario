@@ -7,7 +7,7 @@ static char* N(exit_str_1) = "kmr_06";
 
 #include "world/common/UnkNpcAIFunc35.inc.c"
 
-#include "world/common/UnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1_copy.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
@@ -23,7 +23,7 @@ static char* N(exit_str_1) = "kmr_06";
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_09/8D5E00", func_8024130C_8D710C);
+#include "world/common/UnkNpcAIMainFunc9.inc.c"
 
 ApiStatus func_802414F8_8D72F8(Evt* script, s32 isInitialCall) {
     script->varTable[0] = get_enemy_safe(2);

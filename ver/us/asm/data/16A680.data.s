@@ -36,7 +36,7 @@ dlabel D_8024A158
 .word 0x00000000, 0x00010100, D_8024A130, filemenu_info_init, filemenu_info_handle_input, filemenu_info_update, filemenu_info_cleanup, 0x00000000, 0x00000000, 0x00000000
 
 dlabel D_8024A180
-.word dgb_00_init_80241F70, func_80241FBC_A1D0BC, kzn_09_UnkNpcAIFunc12
+.word dgb_00_init_80241F70, some_80241FBC, kzn_09_UnkNpcAIFunc12
 
 dlabel D_8024A18C
 .word 0xFFFFFFFC

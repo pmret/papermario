@@ -40,9 +40,7 @@
 
 #include "world/common/UnkNpcAIFunc35.inc.c"
 
-#define NAMESPACE dup_trd_04
-#include "world/common/UnkNpcAIFunc1.inc.c"
-#define NAMESPACE trd_04
+#include "world/common/UnkNpcAIFunc1_copy.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
@@ -58,7 +56,10 @@
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80243124_9AB514);
+#include "world/common/UnkNpcAIMainFunc9.inc.c"
+
+// todo remove when below are decompiled
+static const f32 padding = 0.0f;
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_80243310_9AB700);
 

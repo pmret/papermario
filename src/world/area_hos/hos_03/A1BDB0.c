@@ -6,7 +6,7 @@
 
 #include "world/common/UnkNpcAIFunc35.inc.c"
 
-#include "world/common/UnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1_copy.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
@@ -22,7 +22,7 @@
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80241FBC_A1D0BC);
+#include "world/common/UnkNpcAIMainFunc9.inc.c"
 
 #include "world/common/Call800E9894.inc.c"
 
