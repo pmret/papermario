@@ -330,7 +330,7 @@ BSS s8 nuGfxTask[10 * 0x58];
 BSS s8 D_800D95E8[0x38];
 BSS s8 D_800D9620[0x48];
 BSS s8 D_800D9668[0x18];
-BSS s8 D_800D9680[0x100];
+BSS s8 __osPfsInodeCache[0x100];
 BSS s8 rspbootUcodeBuffer[0x100];
 BSS s8 D_800D9880[0x700];
 BSS s8 __osEventStateTab[0x80];

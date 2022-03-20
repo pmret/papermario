@@ -39,15 +39,15 @@ glabel __osContRamWrite
 /* 45840 8006A440 3C10800E */  lui       $s0, %hi(__osPfsPifRam)
 /* 45844 8006A444 145E0005 */  bne       $v0, $fp, .L8006A45C
 /* 45848 8006A448 2610A000 */   addiu    $s0, $s0, %lo(__osPfsPifRam)
-/* 4584C 8006A44C 3C028009 */  lui       $v0, %hi(D_800958E0)
-/* 45850 8006A450 8C4258E0 */  lw        $v0, %lo(D_800958E0)($v0)
+/* 4584C 8006A44C 3C028009 */  lui       $v0, %hi(__osPfsLastChannel)
+/* 45850 8006A450 8C4258E0 */  lw        $v0, %lo(__osPfsLastChannel)($v0)
 /* 45854 8006A454 5053001A */  beql      $v0, $s3, .L8006A4C0
 /* 45858 8006A458 02708021 */   addu     $s0, $s3, $s0
 .L8006A45C:
 /* 4585C 8006A45C 3C01800A */  lui       $at, %hi(__osContLastCmd)
 /* 45860 8006A460 A03EA61C */  sb        $fp, %lo(__osContLastCmd)($at)
-/* 45864 8006A464 3C018009 */  lui       $at, %hi(D_800958E0)
-/* 45868 8006A468 AC3358E0 */  sw        $s3, %lo(D_800958E0)($at)
+/* 45864 8006A464 3C018009 */  lui       $at, %hi(__osPfsLastChannel)
+/* 45868 8006A468 AC3358E0 */  sw        $s3, %lo(__osPfsLastChannel)($at)
 /* 4586C 8006A46C 1A600006 */  blez      $s3, .L8006A488
 /* 45870 8006A470 00001821 */   addu     $v1, $zero, $zero
 .L8006A474:

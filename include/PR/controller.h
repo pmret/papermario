@@ -49,7 +49,8 @@ typedef struct
     /* 0x1 */ u8 txsize;
     /* 0x2 */ u8 rxsize;
     /* 0x3 */ u8 cmd;
-    /* 0x4 */ u16 address;
+    /* 0x4 */ u8 addrh;
+    /* 0x5 */ u8 addrl;
     /* 0x6 */ u8 data[BLOCKSIZE];
     /* 0x26 */ u8 datacrc;
 } __OSContRamReadFormat;
@@ -102,6 +103,11 @@ typedef struct
     /* 0x4 */ u8 data[EEPROM_BLOCK_SIZE];
 } __OSContEepromFormat;
 
+#define PFS_FORCE 1
+
+#define PFS_LABEL_AREA 7
+#define PFS_PAGE_SIZE (BLOCKSIZE*PFS_ONE_PAGE)
+
 //from: http://en64.shoutwiki.com/wiki/SI_Registers_Detailed#CONT_CMD_Usage
 #define CONT_CMD_REQUEST_STATUS 0
 #define CONT_CMD_READ_BUTTON 1
@@ -152,8 +158,6 @@ s32 __osGetId(OSPfs *pfs);
 s32 __osCheckId(OSPfs *pfs);
 s32 __osPfsRWInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank);
 s32 __osPfsSelectBank(OSPfs *pfs, u8 bank);
-s32 __osPfsDeclearPage(OSPfs *pfs, __OSInode *inode, int file_size_in_pages, int *first_page, u8 bank, int *decleared, int *last_page);
-s32 __osPfsReleasePages(OSPfs *pfs, __OSInode *inode, u8 start_page, u16 *sum, u8 bank, __OSInodeUnit *last_page, int flag);
 s32 __osBlockSum(OSPfs *pfs, u8 page_no, u16 *sum, u8 bank);
 s32 __osContRamRead(OSMesgQueue *mq, int channel, u16 address, u8 *buffer);
 s32 __osContRamWrite(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int force);
