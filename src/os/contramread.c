@@ -44,9 +44,9 @@ s32 __osContRamRead(OSMesgQueue *mq, int channel, u16 address, u8 *buffer) {
             if (__osContDataCrc(((__OSContRamReadFormat *)ptr)->data) != ((__OSContRamReadFormat *)ptr)->datacrc) {
                 ret = __osPfsGetStatus(mq, channel);
                 if (ret != 0) {
-		            break;
+                    break;
 	            } else {
-		            ret = PFS_ERR_CONTRFAIL;
+                    ret = PFS_ERR_CONTRFAIL;
 	            }
             } else {
                 bcopy(((__OSContRamReadFormat *)ptr)->data, buffer, BLOCKSIZE);

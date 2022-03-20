@@ -134,7 +134,13 @@ typedef struct {
 #define PFS_ID_BANK_1M      4
 #define PFS_BANKS_256K      1
 
-#define PFS_WRITTEN             2
+#define PFS_WRITTEN 2
+
+#define PFS_ID_0AREA            1
+#define PFS_ID_1AREA            3
+#define PFS_ID_2AREA            4
+#define PFS_ID_3AREA            6
+#define PFS_LABEL_AREA          7
 
 #define PFS_BANK_LAPPED_BY  8   /* => u8 */
 #define PFS_SECTOR_PER_BANK 32

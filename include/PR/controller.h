@@ -105,7 +105,6 @@ typedef struct
 
 #define PFS_FORCE 1
 
-#define PFS_LABEL_AREA 7
 #define PFS_PAGE_SIZE (BLOCKSIZE*PFS_ONE_PAGE)
 
 //from: http://en64.shoutwiki.com/wiki/SI_Registers_Detailed#CONT_CMD_Usage

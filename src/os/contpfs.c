@@ -30,11 +30,10 @@ s32 __osIdCheckSum(u16 *ptr, u16 *csum, u16 *icsum) {
     }
     return 0;
 }
-s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
-{
+s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid) {
     s32 ret;
-    u8 temp[32];
-    u8 comp[32];
+    u8 temp[BLOCKSIZE];
+    u8 comp[BLOCKSIZE];
     u8 mask;
     int i;
     int j;
@@ -89,10 +88,10 @@ s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
     newid->banks = j;
     newid->version = badid->version;
     __osIdCheckSum((u16*)newid, &newid->checksum, &newid->inverted_checksum);
-    index[0] = 1;
-    index[1] = 3;
-    index[2] = 4;
-    index[3] = 6;
+    index[0] = PFS_ID_0AREA;
+    index[1] = PFS_ID_1AREA;
+    index[2] = PFS_ID_2AREA;
+    index[3] = PFS_ID_3AREA;
     for (i = 0; i < ARRAY_COUNT(index); i++) {
         ERRCK(__osContRamWrite(pfs->queue, pfs->channel, index[i], (u8*)newid, TRUE));
     }
@@ -105,8 +104,7 @@ s32 __osRepairPackId(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
     return 0;
 }
 
-s32 __osCheckPackId(OSPfs *pfs, __OSPackId *temp)
-{
+s32 __osCheckPackId(OSPfs *pfs, __OSPackId *temp) {
     u16 index[4];
     s32 ret;
     u16 sum;
@@ -116,10 +114,10 @@ s32 __osCheckPackId(OSPfs *pfs, __OSPackId *temp)
 
     ret = 0;
     SET_ACTIVEBANK_TO_ZERO;
-    index[0] = 1;
-    index[1] = 3;
-    index[2] = 4;
-    index[3] = 6;
+    index[0] = PFS_ID_0AREA;
+    index[1] = PFS_ID_1AREA;
+    index[2] = PFS_ID_2AREA;
+    index[3] = PFS_ID_3AREA;
     for (i = 1; i < ARRAY_COUNT(index); i++) {
         ERRCK(__osContRamRead(pfs->queue, pfs->channel, index[i], (u8*)temp));
         __osIdCheckSum((u16 *)temp, &sum, &isum);
@@ -138,12 +136,11 @@ s32 __osCheckPackId(OSPfs *pfs, __OSPackId *temp)
     return 0;
 }
 
-s32 __osGetId(OSPfs *pfs)
-{
+s32 __osGetId(OSPfs *pfs) {
     int k;
     u16 sum;
     u16 isum;
-    u8 temp[32];
+    u8 temp[BLOCKSIZE];
     __OSPackId newid;
     s32 ret;
     __OSPackId *id;
@@ -180,8 +177,7 @@ s32 __osGetId(OSPfs *pfs)
     return 0;
 }
 
-s32 __osCheckId(OSPfs *pfs)
-{
+s32 __osCheckId(OSPfs *pfs) {
     u8 temp[BLOCKSIZE];
     s32 ret;
 
@@ -210,8 +206,7 @@ s32 __osCheckId(OSPfs *pfs)
     return 0;
 }
 
-s32 __osPfsRWInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank)
-{
+s32 __osPfsRWInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank) {
     u8 sum;
     int j;
     s32 ret;
@@ -236,7 +231,7 @@ s32 __osPfsRWInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank)
     }
 
     for (j = 0; j < PFS_ONE_PAGE; j++) {
-        addr = ((u8 *)inode->inode_page + j * 32); //TODO: don't like this =/ //maybe &inode->inode_table[j*PFS_ONE_PAGE].ipage or something
+        addr = ((u8 *)inode->inode_page + j * 32);
         if (flag == PFS_WRITE) {
             ret = __osContRamWrite(pfs->queue, pfs->channel, pfs->inode_table + bank * PFS_ONE_PAGE + j, addr, FALSE);
             ret = __osContRamWrite(pfs->queue, pfs->channel, pfs->minode_table + bank * PFS_ONE_PAGE + j, addr, FALSE);

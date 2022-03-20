@@ -30,7 +30,7 @@ s32 osPfsInitPak(OSMesgQueue *queue, OSPfs *pfs, int channel) {
     s32 ret;
     u16 sum;
     u16 isum;
-    u8 temp[32];
+    u8 temp[BLOCKSIZE];
     __OSPackId *id;
     __OSPackId newid;
     PFS_GET_STATUS;
@@ -77,9 +77,9 @@ s32 osPfsInitPak(OSMesgQueue *queue, OSPfs *pfs, int channel) {
 }
 
 s32 osPfsCheckRamArea(OSPfs *pfs) {
-    u8 temp1[32];
-    u8 temp2[32];
-    u8 temp3[32];
+    u8 temp1[BLOCKSIZE];
+    u8 temp2[BLOCKSIZE];
+    u8 temp3[BLOCKSIZE];
     s32 i;
     s32 ret;
     ERRCK(__osPfsSelectBank(pfs, 0));

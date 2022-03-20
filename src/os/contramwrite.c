@@ -55,9 +55,9 @@ s32 __osContRamWrite(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int 
             if (crc != ((__OSContRamReadFormat *)ptr)->datacrc) {
                 ret = __osPfsGetStatus(mq, channel);
                 if (ret != 0) {
-		            break;
+                    break;
 	            } else {
-		            ret = PFS_ERR_CONTRFAIL;
+                    ret = PFS_ERR_CONTRFAIL;
 	            }
             }
         } else {
