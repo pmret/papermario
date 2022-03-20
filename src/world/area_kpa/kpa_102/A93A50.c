@@ -12,9 +12,9 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80240644_A93D84);
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_8024086C_A93FAC);
+#include "world/common/UnkFunc54.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80240DA8_A944E8);
+#include "world/common/UnkFunc55.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80241204_A94944);
 
