@@ -220,12 +220,12 @@ s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3) {
             add_vec2D_polar(&f1, &f2, arg3, 270.0f - npc->renderYaw);
 
             if (dist2D(f1, f2, playerStatus->position.x, playerStatus->position.z) <= arg2) {
-                return 1;
+                return TRUE;
             }
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2) {

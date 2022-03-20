@@ -3,23 +3,23 @@
 static char* N(exit_str_0) = "kpa_70";
 static char* N(exit_str_1) = "kpa_81";
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_50/A609D0", func_80240000_A609D0);
+#include "world/common/UnkFunc61.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_50/A609D0", func_802401F0_A60BC0);
+#include "world/common/UnkNpcAIFunc48.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_50/A609D0", func_80240334_A60D04);
+#include "world/common/UnkNpcAIFunc49.inc.c"
 
 #include "world/common/UnkSetDurationFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc9.inc.c"
 
-#include "world/common/UnkDurationCheck.inc.c"
+#include "world/common/UnkDurationCheckNoArgs.inc.c"
 
 #include "world/common/UnkFunc54.inc.c"
 
 #include "world/common/UnkFunc55.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_50/A609D0", func_80240EF4_A618C4);
+#include "world/common/UnkNpcAIMainFunc7.inc.c"
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"
 

@@ -1,14 +1,14 @@
 #include "kpa_51.h"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_80240050_A640E0);
+#include "world/common/UnkNpcAIFunc47.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_80240220_A642B0);
+#include "world/common/UnkFunc57.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_80240730_A647C0);
+#include "world/common/UnkFunc58.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_802407A4_A64834);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_802408D0_A64960);
+#include "world/common/UnkFunc59.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_51/A640E0", func_80240970_A64A00);
 

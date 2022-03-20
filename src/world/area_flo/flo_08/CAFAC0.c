@@ -63,7 +63,7 @@ s32 N(D_80241FC8_CB0D08)[8][2] = {
     { 0x001D00EC, 0x001D00ED }, { 0x001D00EE, 0x001D00EF }
 };
 
-f32 N(D_80242008_CB0D48)[3] = {
+f32 N(bigFuncFloats)[3] = {
     140.0f, 180.0f, 220.0f
 };
 
@@ -93,7 +93,7 @@ EvtScript N(80242014) = {
         EVT_CALL(N(UnkPartnerPosFunc))
     EVT_END_THREAD
     EVT_WAIT_FRAMES(3)
-    EVT_CALL(N(func_80240600_CAF340), EVT_MAP_VAR(0))
+    EVT_CALL(N(UnkFunc60), EVT_MAP_VAR(0))
     EVT_WAIT_FRAMES(30)
     EVT_RETURN
     EVT_END

@@ -121,7 +121,7 @@ glabel func_8024137C_EF398C
 .L80241514_EF3B24:
 /* EF3B24 80241514 02A0202D */  daddu     $a0, $s5, $zero
 /* EF3B28 80241518 0200282D */  daddu     $a1, $s0, $zero
-/* EF3B2C 8024151C 0C090331 */  jal       func_80240CC4_EF32D4
+/* EF3B2C 8024151C 0C090331 */  jal       EF2680_SixFloatsFunc
 /* EF3B30 80241520 0260302D */   daddu    $a2, $s3, $zero
 /* EF3B34 80241524 0809055C */  j         .L80241570
 /* EF3B38 80241528 0000102D */   daddu    $v0, $zero, $zero

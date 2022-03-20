@@ -121,7 +121,7 @@ glabel func_8024162C_ED161C
 .L802417C4_ED17B4:
 /* ED17B4 802417C4 02A0202D */  daddu     $a0, $s5, $zero
 /* ED17B8 802417C8 0200282D */  daddu     $a1, $s0, $zero
-/* ED17BC 802417CC 0C0903DD */  jal       func_80240F74_ED0F64
+/* ED17BC 802417CC 0C0903DD */  jal       ED0310_SixFloatsFunc
 /* ED17C0 802417D0 0260302D */   daddu    $a2, $s3, $zero
 /* ED17C4 802417D4 08090608 */  j         .L80241820
 /* ED17C8 802417D8 0000102D */   daddu    $v0, $zero, $zero

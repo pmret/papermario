@@ -266,7 +266,9 @@ typedef struct FormationRow {
     /* 0x10 */ s32 var1;
     /* 0x14 */ s32 var2;
     /* 0x18 */ s32 var3;
-} Formation[]; // size = 0x1C * n
+} FormationRow; // size = 0x1C * n
+
+typedef FormationRow Formation[];
 
 typedef struct Stage {
     /* 0x00 */ const char* texture;
@@ -334,5 +336,6 @@ extern ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT];
 
 void func_80072BCC(s32 arg0);
 void load_demo_battle(u32 index);
+Actor* create_actor(Formation formation);
 
 #endif

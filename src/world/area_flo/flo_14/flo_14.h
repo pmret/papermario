@@ -17,7 +17,7 @@ ApiStatus N(func_8024042C_CCB73C)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_8024046C_CCB77C)(Evt* script, s32 isInitialCall);
 void N(func_80240504_CCB814)(void);
 void N(func_802407D4_CCBAE4)(void);
-ApiStatus N(func_80241E1C_CCD12C)(Evt* script, s32 isInitialCall);
+ApiStatus N(UnkNpcAIMainFunc9)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242234_CCD544)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242288_CCD598)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_802422C0_CCD5D0)(Evt* script, s32 isInitialCall);

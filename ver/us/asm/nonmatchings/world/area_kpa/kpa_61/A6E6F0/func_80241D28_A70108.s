@@ -25,7 +25,7 @@ glabel func_80241D28_A70108
 /* A70158 80241D78 0260202D */  daddu     $a0, $s3, $zero
 /* A7015C 80241D7C 8E250024 */  lw        $a1, 0x24($s1)
 /* A70160 80241D80 8E260028 */  lw        $a2, 0x28($s1)
-/* A70164 80241D84 0C0902B9 */  jal       func_80240AE4_A6EEC4
+/* A70164 80241D84 0C0902B9 */  jal       kpa_61_UnkNpcAIFunc47
 /* A70168 80241D88 0280382D */   daddu    $a3, $s4, $zero
 /* A7016C 80241D8C 0040882D */  daddu     $s1, $v0, $zero
 /* A70170 80241D90 24020001 */  addiu     $v0, $zero, 1

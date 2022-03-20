@@ -4,13 +4,13 @@
 
 #include "world/common/UnkNpcAIFunc35.inc.c"
 
-#include "world/common/UnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1_copy.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_802416A4_C72B24);
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -20,16 +20,15 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_802416A4_C72B24);
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80241D5C_C731DC);
+#include "world/common/UnkNpcAIMainFunc9.inc.c"
 
 #include "world/common/UnkNpcAIFunc13.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80242078_C734F8);
-//#include "world/common/UnkNpcAIFunc34.inc.c"
+#include "world/common/UnkNpcAIFunc34.inc.c"
 
 #include "world/common/UnkFunc45.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80242354_C737D4);
+#include "world/common/UnkNpcAIMainFunc10.inc.c"
 
 #include "world/common/UnkNpcAIFunc6.inc.c"
 

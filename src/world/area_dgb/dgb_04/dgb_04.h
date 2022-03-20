@@ -21,7 +21,7 @@ ApiStatus N(UnkFunc20)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc39)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc21)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc22)(Evt* script, s32 isInitialCall);
-ApiStatus N(func_802429D0_C38F00)(Evt* script, s32 isInitialCall);
+ApiStatus N(UnkFunc60)(Evt* script, s32 isInitialCall);
 ApiStatus N(func_80242F08_C39438)(Evt* script, s32 isInitialCall);
 ApiStatus N(UnkFunc24)(Evt* script, s32 isInitialCall);
 

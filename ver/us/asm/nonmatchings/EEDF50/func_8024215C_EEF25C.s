@@ -121,7 +121,7 @@ glabel func_8024215C_EEF25C
 .L802422F4_EEF3F4:
 /* EEF3F4 802422F4 02A0202D */  daddu     $a0, $s5, $zero
 /* EEF3F8 802422F8 0200282D */  daddu     $a1, $s0, $zero
-/* EEF3FC 802422FC 0C0906A9 */  jal       func_80241AA4_EEEBA4
+/* EEF3FC 802422FC 0C0906A9 */  jal       EEDF50_SixFloatsFunc
 /* EEF400 80242300 0260302D */   daddu    $a2, $s3, $zero
 /* EEF404 80242304 080908D4 */  j         .L80242350
 /* EEF408 80242308 0000102D */   daddu    $v0, $zero, $zero

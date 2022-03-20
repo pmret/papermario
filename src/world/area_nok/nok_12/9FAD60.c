@@ -34,6 +34,6 @@
 
 #include "world/common/UnkNpcAIMainFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_12/9FAD60", func_80241BD4_9FC3C4);
+#include "world/common/UnkNpcAIMainFunc8.inc.c"
 
 static char* N(exit_str_0) = "nok_12";

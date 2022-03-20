@@ -2031,7 +2031,7 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            script->functionTemp[1] = create_actor(evt_get_variable(script, *args++));
+            script->functionTempActor[1] = create_actor((struct FormationRow*)evt_get_variable(script, *args++));
             script->functionTemp[2] = evt_get_variable(script, *args++);
             script->functionTemp[0] = 1;
             break;

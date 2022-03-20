@@ -536,7 +536,7 @@ typedef struct SleepBubbleFXData {
 } SleepBubbleFXData; // size = 0xCC
 
 typedef struct AuraFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;

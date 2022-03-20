@@ -35,7 +35,7 @@ static char* N(exit_str_1) = "";
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80241224_A87C74);
+#include "world/common/UnkNpcAIMainFunc8.inc.c"
 
 #include "world/common/Call800E9894.inc.c"
 

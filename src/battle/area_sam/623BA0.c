@@ -3,7 +3,7 @@
 
 #define NAMESPACE b_area_sam
 
-INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_80218000_623BA0);
+#include "world/common/UnkFunc62.inc.c"
 
 #include "common/ActorJumpToPos.inc.c"
 
@@ -49,7 +49,7 @@ ApiStatus func_80219304_624EA4(Evt* script, s32 isInitialCall) {
     if (unkDuplighost->effect2 != NULL) {
         unkDuplighost->effect2->flags |= EFFECT_INSTANCE_FLAGS_10;
     }
-    
+
     return ApiStatus_DONE2;
 }
 
@@ -83,7 +83,7 @@ ApiStatus func_802193F0_624F90(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802194B8_625058(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     evt_set_variable(script, *args++, gPlayerData.currentPartner);
     evt_set_variable(script, *args++, gPlayerData.partners[gPlayerData.currentPartner].level);
     return ApiStatus_DONE2;
