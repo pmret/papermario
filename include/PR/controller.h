@@ -103,43 +103,64 @@ typedef struct
     /* 0x4 */ u8 data[EEPROM_BLOCK_SIZE];
 } __OSContEepromFormat;
 
-#define PFS_FORCE 1
+#define PFS_ONE_PAGE                8
+#define PFS_PAGE_SIZE               (BLOCKSIZE*PFS_ONE_PAGE)
 
-#define PFS_PAGE_SIZE (BLOCKSIZE*PFS_ONE_PAGE)
+#define PFS_INODE_SIZE_PER_PAGE     128
+
+#define PFS_ID_0AREA                1
+#define PFS_ID_1AREA                3
+#define PFS_ID_2AREA                4
+#define PFS_ID_3AREA                6
+#define PFS_LABEL_AREA              7
+
+#define PFS_WRITTEN                 2
+
+#define PFS_EOF                     1
+#define PFS_PAGE_NOT_EXIST          2
+#define PFS_PAGE_NOT_USED           3
+
+#define PFS_FORCE                   1
+
+#define	PFS_ID_BANK_256K            0
 
 //from: http://en64.shoutwiki.com/wiki/SI_Registers_Detailed#CONT_CMD_Usage
-#define CONT_CMD_REQUEST_STATUS 0
-#define CONT_CMD_READ_BUTTON 1
-#define CONT_CMD_READ_MEMPACK 2
-#define CONT_CMD_WRITE_MEMPACK 3
-#define CONT_CMD_READ_EEPROM 4
-#define CONT_CMD_WRITE_EEPROM 5
-#define CONT_CMD_RESET 0xff
+#define CONT_CMD_REQUEST_STATUS     0
+#define CONT_CMD_READ_BUTTON        1
+#define CONT_CMD_READ_MEMPACK       2
+#define CONT_CMD_WRITE_MEMPACK      3
+#define CONT_CMD_READ_EEPROM        4
+#define CONT_CMD_WRITE_EEPROM       5
+#define CONT_CMD_RESET              0xff
 
-#define CONT_CMD_REQUEST_STATUS_TX 1
-#define CONT_CMD_READ_BUTTON_TX 1
-#define CONT_CMD_READ_MEMPACK_TX 3
-#define CONT_CMD_WRITE_MEMPACK_TX 35
-#define CONT_CMD_READ_EEPROM_TX 2
-#define CONT_CMD_WRITE_EEPROM_TX 10
-#define CONT_CMD_RESET_TX 1
+#define CONT_CMD_REQUEST_STATUS_TX  1
+#define CONT_CMD_READ_BUTTON_TX     1
+#define CONT_CMD_READ_MEMPACK_TX    3
+#define CONT_CMD_WRITE_MEMPACK_TX   35
+#define CONT_CMD_READ_EEPROM_TX     2
+#define CONT_CMD_WRITE_EEPROM_TX    10
+#define CONT_CMD_RESET_TX           1
 
-#define CONT_CMD_REQUEST_STATUS_RX 3
-#define CONT_CMD_READ_BUTTON_RX 4
-#define CONT_CMD_READ_MEMPACK_RX 33
-#define CONT_CMD_WRITE_MEMPACK_RX 1
-#define CONT_CMD_READ_EEPROM_RX 8
-#define CONT_CMD_WRITE_EEPROM_RX 1
-#define CONT_CMD_RESET_RX 3
+#define CONT_CMD_REQUEST_STATUS_RX  3
+#define CONT_CMD_READ_BUTTON_RX     4
+#define CONT_CMD_READ_MEMPACK_RX    33
+#define CONT_CMD_WRITE_MEMPACK_RX   1
+#define CONT_CMD_READ_EEPROM_RX     8
+#define CONT_CMD_WRITE_EEPROM_RX    1
+#define CONT_CMD_RESET_RX           3
 
-#define CONT_CMD_NOP 0xff
-#define CONT_CMD_END 0xfe //indicates end of a command
-#define CONT_CMD_EXE 1    //set pif ram status byte to this to do a command
+#define CONT_CMD_NOP                0xff
+#define CONT_CMD_END                0xfe //indicates end of a command
+#define CONT_CMD_EXE                1    //set pif ram status byte to this to do a command
 
-#define DIR_STATUS_EMPTY 0
-#define DIR_STATUS_UNKNOWN 1
-#define DIR_STATUS_OCCUPIED 2
+#define DIR_STATUS_EMPTY            0
+#define DIR_STATUS_UNKNOWN          1
+#define DIR_STATUS_OCCUPIED         2
 
+#define	PFS_BANK_LAPPED_BY          8	/* => u8 */
+#define	PFS_SECTOR_PER_BANK         32
+#define	PFS_INODE_DIST_MAP          (PFS_BANK_LAPPED_BY * PFS_SECTOR_PER_BANK)
+#define	PFS_SECTOR_SIZE             (PFS_INODE_SIZE_PER_PAGE/PFS_SECTOR_PER_BANK)
 
 typedef struct
 {
