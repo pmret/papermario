@@ -5,21 +5,21 @@ void func_802B62CC_E24BEC(void);
 void func_802B644C_E24D6C(void);
 
 void func_802B6000_E24920(void) {
+    CollisionStatus* currentCollisionStatus = &gCollisionStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Camera* camera = &gCameras[CAM_DEFAULT];
     f32 inputMoveMagnitude;
     f32 inputMoveAngle;
     s32 jumpInputCheck;
     s32 phi_a0;
-    CollisionStatus* currentCollisionStatus = &gCollisionStatus;
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    Camera* currentCameras = &gCameras[0];
     
-    if ((playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         func_802B62CC_E24BEC();
         return;
     }
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerStatus->flags = playerStatus->flags & ~(
+        playerStatus->flags &= ~(
             PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | 
             PLAYER_STATUS_FLAGS_800000 | 
             PLAYER_STATUS_FLAGS_80000 | 
@@ -33,7 +33,7 @@ void func_802B6000_E24920(void) {
         playerStatus->decorationPos[0] = playerStatus->position.x;
         playerStatus->decorationPos[1] = playerStatus->position.z;
 
-        if ((playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO)) {
+        if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_8BIT_MARIO) {
             phi_a0 = 0x90000;
             phi_a0 |= 0x2;
 
@@ -55,7 +55,7 @@ void func_802B6000_E24920(void) {
 
         currentCollisionStatus->lastTouchedFloor = -1;
         playerStatus->animFlags &= ~PLAYER_STATUS_ANIM_FLAGS_40000;
-        currentCameras->moveFlags = currentCameras->moveFlags & 0xFFFB;
+        camera->moveFlags &= ~0x4;
     }
     playerStatus->fallState++;
     playerStatus->currentSpeed *= 0.6f;
@@ -63,7 +63,7 @@ void func_802B6000_E24920(void) {
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
     jumpInputCheck = check_input_jump();
 
-    if ((jumpInputCheck != 0) || (jumpInputCheck < playerStatus->fallState)) {
+    if (jumpInputCheck != 0 || jumpInputCheck < playerStatus->fallState) {
         if (inputMoveMagnitude == 0.0f) {
             set_action_state(0);
             return;
@@ -81,13 +81,13 @@ void func_802B61C0_E24AE0(void) {
     f32 inputMoveMagnitude;
     f32 inputMoveAngle;
 
-    if ((playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS)) {
+    if (playerStatus->animFlags & PLAYER_STATUS_ANIM_FLAGS_USING_PEACH_PHYSICS) {
         func_802B644C_E24D6C();
         return;
     }
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-         playerStatus->flags = playerStatus->flags & ~(
+         playerStatus->flags &= ~(
             PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | 
             PLAYER_STATUS_FLAGS_800000 | 
             PLAYER_STATUS_FLAGS_80000 | 
@@ -108,7 +108,7 @@ void func_802B61C0_E24AE0(void) {
         currentCollisionStatus->lastTouchedFloor = -1;
     }
 
-    playerStatus->fallState = (u8) playerStatus->fallState + 1;
+    playerStatus->fallState++;
     playerStatus->currentSpeed *= 0.6f;
 
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
@@ -126,17 +126,15 @@ void func_802B62CC_E24BEC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 inputMoveMagnitude;
     f32 inputMoveAngle;
-    s32 playerFlagsModified;
     s32 squaredStick0;
     s32 squaredStick1;
 
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerFlagsModified = playerStatus->flags & ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->flags = playerFlagsModified;
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->fallState = 0;
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
-        playerStatus->flags = playerFlagsModified & ~(PLAYER_STATUS_FLAGS_8 | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_8 | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
         playerStatus->decorationPos[0] = playerStatus->position.x;
         playerStatus->decorationPos[1] = playerStatus->position.z;
 
@@ -181,15 +179,13 @@ void func_802B644C_E24D6C(void) {
     f32 inputMoveAngle;
     s32 squaredStick0;
     s32 squaredStick1;
-    s32 playerFlagsModified;
     
     if (playerStatus->flags & PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED) {
-        playerFlagsModified = playerStatus->flags & ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
-        playerStatus->flags = playerFlagsModified;
+        playerStatus->flags &= ~PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED;
         playerStatus->fallState = 0;
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
-        playerStatus->flags = playerFlagsModified & ~(PLAYER_STATUS_FLAGS_8 | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
+        playerStatus->flags &= ~(PLAYER_STATUS_FLAGS_8 | PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING);
         playerStatus->decorationPos[0] = playerStatus->position.x;
         playerStatus->decorationPos[1] = playerStatus->position.z;
 
@@ -212,7 +208,7 @@ void func_802B644C_E24D6C(void) {
     squaredStick0 = playerStatus->stickAxis[0] * playerStatus->stickAxis[0];
     squaredStick1 = playerStatus->stickAxis[1] * playerStatus->stickAxis[1];
     
-    if ((sqrtf(squaredStick0 + squaredStick1) > 55.0f)) {
+    if (sqrtf(squaredStick0 + squaredStick1) > 55.0f) {
         set_action_state(ACTION_STATE_RUN);
     } else {
         set_action_state(ACTION_STATE_WALK);
