@@ -122,9 +122,6 @@ ApiStatus func_8025E14C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-
-void set_window_update(s32 panelID, s32);
-
 void btl_state_update_celebration(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
@@ -665,7 +662,7 @@ void btl_state_update_celebration(void) {
             break;
         case BATTLE_STATE2_UNK_9:
             free_hud_element(D_8029FAE8);
-            set_window_update(8, 2);
+            set_window_update(8, WINDOW_UPDATE_HIDE);
 
             switch (battleStatus->currentSubmenu) {
                 case 0:
