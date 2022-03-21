@@ -474,7 +474,7 @@ s32 msg_printer_load_msg(s32 msgID, MessagePrintState* printer) {
     return 1;
 }
 
-void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s16 x, s16 y) {
+void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s32 x, s32 y) {
     msgPrintState->initOpenPos.x = x;
     msgPrintState->initOpenPos.y = y;
 

@@ -172,6 +172,7 @@ s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 
 // Text
 MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* a1);
+void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s32 x, s32 y);
 
 void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
@@ -354,6 +355,7 @@ void btl_draw_upgrade_windows(s32);
 void btl_state_draw_celebration(void);
 
 void func_8024F7C8(void);
+void func_80263E08(Actor*, ActorPart*, s32);
 void func_80266978(void);
 void func_80266B14(void);
 s32 func_8024E584(void);
@@ -507,6 +509,7 @@ Evt* get_script_by_index(s32 index);
 
 s32 get_lava_reset_pos(f32* x, f32* y, f32* z);
 void start_rumble(s32, s32);
+void start_rumble_type(u32);
 void start_falling(void);
 
 void set_action_state(s32 actionState);
@@ -738,6 +741,7 @@ void draw_entity_model_E(s32, Mtx*);
 void draw_entity_model_A(s32, Mtx*);
 void free_entity_model_by_index(s32 idx);
 void func_8024E40C(s32);
+void func_8024E484(s16, s16, s16, s16, s32, s32, s32, s32);
 void btl_cam_set_zoffset(s16);
 void btl_cam_target_actor(s32);
 void btl_cam_set_zoom(s16);
@@ -780,6 +784,7 @@ void func_800E96C8(void);
 void hide_popup_menu(void);
 void destroy_popup_menu(void);
 void func_800E98C4(void);
+void func_800F0D5C(void);
 s32 get_item_count(void);
 s32 get_stored_empty_count(void);
 s32 get_stored_count(void);

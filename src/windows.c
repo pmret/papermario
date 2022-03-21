@@ -433,7 +433,7 @@ void set_window_update(s32 windowID, s32 func) {
             gWindows[windowID].flags &= ~WINDOW_FLAGS_FPUPDATE_CHANGED;
         } else {
             gWindows[windowID].flags |= WINDOW_FLAGS_FPUPDATE_CHANGED | WINDOW_FLAGS_INITIAL_ANIMATION;
-            gWindows[windowID].fpPending.func = func;
+            gWindows[windowID].fpPending.i = func;
         }
     }
 }

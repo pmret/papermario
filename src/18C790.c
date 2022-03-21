@@ -184,7 +184,7 @@ void btl_state_update_celebration(void) {
                 D_8029FB4C--;
             } else if (func_8024E584() != 0) {
                 dma_copy(_7A89A0_ROM_START, _7A89A0_ROM_END, _7A89A0_VRAM);
-                script = start_script(D_802842B0, 0xA, 0);
+                script = start_script(&D_802842B0, 0xA, 0);
                 D_8029FB78 = 0;
                 D_8029FB54 = 20;
                 D_8029FB70 = D_8029FB6C / D_8029FB54;
@@ -230,7 +230,7 @@ void btl_state_update_celebration(void) {
                             partner->flags &= ~(ACTOR_FLAG_4000000 | ACTOR_FLAG_8000000);
                         }
                         battleStatus->battlePhase = 5;
-                        script = start_script(PlayerScriptDispatcher, 0xA, 0);
+                        script = start_script(&PlayerScriptDispatcher, 0xA, 0);
                         player->takeTurnScript = script;
                         player->takeTurnID = script->id;
                         script->owner1.actorID = ACTOR_PLAYER;
@@ -273,7 +273,7 @@ void btl_state_update_celebration(void) {
             }
             break;
         case BATTLE_STATE2_UNK_5:
-            D_8029FB7C = start_script(D_80284880, 0xA, 0);
+            D_8029FB7C = start_script(&D_80284880, 0xA, 0);
             D_8029FB4C = 25;
             gBattleState2 = BATTLE_STATE2_UNK_6;
             D_8029FB80 = D_8029FB7C->id;
@@ -302,22 +302,22 @@ void btl_state_update_celebration(void) {
                     set_background_color_blend(0, 0, 0, ((10 - D_8029FB4C) * 0x10) & 0xF0);
                 }
             } else {
-                id = create_hud_element(D_802A9F0C);
+                id = create_hud_element(&D_802A9F0C);
                 D_8029FA80[0] = id;
                 set_hud_element_render_pos(id, 310, 140);
                 set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = create_hud_element(D_802A9F5C);
+                id = create_hud_element(&D_802A9F5C);
                 D_8029FA80[1] = id;
                 set_hud_element_render_pos(id, 158, 340);
                 set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = create_hud_element(D_802A9F84);
+                id = create_hud_element(&D_802A9F84);
                 D_8029FA80[3] = id;
                 set_hud_element_render_pos(id, 158, 340);
                 set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
 
-                id = create_hud_element(D_802A9FAC);
+                id = create_hud_element(&D_802A9FAC);
                 D_8029FA80[2] = id;
                 set_hud_element_render_pos(id, 6, 140);
                 set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
@@ -380,7 +380,7 @@ void btl_state_update_celebration(void) {
                     set_hud_element_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[0][3];
-                    set_hud_element_anim(id, D_802AA320);
+                    set_hud_element_anim(id, &D_802AA320);
                     clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 3, y + 46);
@@ -448,7 +448,7 @@ void btl_state_update_celebration(void) {
                     set_hud_element_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[1][3];
-                    set_hud_element_anim(id, D_802AA694);
+                    set_hud_element_anim(id, &D_802AA694);
                     clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 3, y + 46);
@@ -517,7 +517,7 @@ void btl_state_update_celebration(void) {
                     set_hud_element_render_pos(id, x - 8, y + 46);
 
                     id = D_8029FA90[2][3];
-                    set_hud_element_anim(id, D_802AAA08);
+                    set_hud_element_anim(id, &D_802AAA08);
                     clear_hud_element_flags(id, HUD_ELEMENT_FLAGS_DISABLED);
                     get_hud_element_render_pos(id, &x, &y);
                     set_hud_element_render_pos(id, x - 3, y + 46);
@@ -553,7 +553,7 @@ void btl_state_update_celebration(void) {
                     D_8029FB60[2] = 1;
                 }
 
-                D_8029FAE8 = id = create_hud_element(HudScript_ProjectorBeam);
+                D_8029FAE8 = id = create_hud_element(&HudScript_ProjectorBeam);
                 create_hud_element_transform_B(id);
                 set_hud_element_render_pos(id, 156, 13);
                 set_hud_element_tint(id, 255, 255, 255);
@@ -563,7 +563,7 @@ void btl_state_update_celebration(void) {
                 set_hud_element_alpha(id, 200);
                 set_hud_element_flags(id, HUD_ELEMENT_FLAGS_8000 | HUD_ELEMENT_FLAGS_80);
 
-                D_8029FB48 = id = create_hud_element(D_802AAA30);
+                D_8029FB48 = id = create_hud_element(&D_802AAA30);
                 set_hud_element_render_pos(id, 0, 0);
                 set_hud_element_flags(id, HUD_ELEMENT_FLAGS_80);
                 battleStatus->currentSubmenu = 1;

@@ -399,20 +399,20 @@ s32 popup_menu_update(void) {
                     case 8:
                     case 9:
                     case 12:
-                        set_window_update(0xE, basic_window_update);
+                        set_window_update(0xE, (s32)basic_window_update);
                         sfx_play_sound(1);
-                        set_window_update(0x13, basic_window_update);
+                        set_window_update(0x13, (s32)basic_window_update);
                         break;
                     case 1:
                     case 4:
-                        set_window_update(0xE, basic_window_update);
+                        set_window_update(0xE, (s32)basic_window_update);
                         sfx_play_sound(2);
-                        set_window_update(0x13, basic_window_update);
+                        set_window_update(0x13, (s32)basic_window_update);
                         break;
                     case 10:
                     case 11:
                     case 13:
-                        set_window_update(0xE, basic_window_update);
+                        set_window_update(0xE, (s32)basic_window_update);
                         sfx_play_sound(1);
                         break;
                 }
@@ -420,14 +420,14 @@ s32 popup_menu_update(void) {
             }
 
             if (gPopupMenu->popupType == 3) {
-                set_window_update(0x10, basic_window_update);
-                set_window_update(0x14, basic_window_update);
+                set_window_update(0x10, (s32)basic_window_update);
+                set_window_update(0x14, (s32)basic_window_update);
             }
             if (gPopupMenu->popupType == 4) {
-                set_window_update(0x12, basic_window_update);
+                set_window_update(0x12, (s32)basic_window_update);
             }
             if (gPopupMenu->popupType == 5) {
-                set_window_update(0x10, basic_window_update);
+                set_window_update(0x10, (s32)basic_window_update);
             }
             D_8010D640 = 1;
             break;
