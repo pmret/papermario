@@ -3,13 +3,17 @@
 
 extern f32 D_802B6770_E27C80;
 
-//wip - not good yet
-#ifdef NON_EQUIVALENT
+// the switch
+#ifdef NON_MATCHING
 void func_802B6000_E28A30(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 oldFlags = playerStatus->flags;
 
     if (playerStatus->flags < 0) {
-        playerStatus->flags &= 0x7FF7FFF1;
+        playerStatus->flags &= ~(
+            PLAYER_STATUS_FLAGS_ACTION_STATE_CHANGED | PLAYER_STATUS_FLAGS_80000 | PLAYER_STATUS_FLAGS_8 |
+            PLAYER_STATUS_FLAGS_FALLING | PLAYER_STATUS_FLAGS_JUMPING
+        );
         playerStatus->fallState = 0;
         playerStatus->framesOnGround = 0;
         playerStatus->decorationList = 0;
@@ -19,10 +23,13 @@ void func_802B6000_E28A30(void) {
     }
 
     if (playerStatus->animFlags & 0x400000) {
-        if (gPartnerActionStatus.actionState.b[3]  == 8) {
-            func_802BD100_317020(playerStatus->flags);
-        } else if (gPartnerActionStatus.actionState.b[3]  == 7) {
-            func_802BD100_317020(playerStatus->flags);
+        switch (gPartnerActionStatus.actionState.b[3]) {
+            case 8:
+                func_802BD100_317020(oldFlags);
+                break;
+            case 7:
+                func_802BD100_317020(oldFlags);
+                break;
         }
     }
 }
