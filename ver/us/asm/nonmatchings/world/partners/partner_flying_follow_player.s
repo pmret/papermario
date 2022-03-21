@@ -35,8 +35,8 @@ glabel partner_flying_follow_player
 /* 86F04 800EDA54 00400008 */  jr        $v0
 /* 86F08 800EDA58 00000000 */   nop
 .L800EDA5C_86F0C:
-/* 86F0C 800EDA5C 3C038011 */  lui       $v1, %hi(PlayerMoveHistory)
-/* 86F10 800EDA60 2463CD38 */  addiu     $v1, $v1, %lo(PlayerMoveHistory)
+/* 86F0C 800EDA5C 3C038011 */  lui       $v1, %hi(gPlayerMoveHistory)
+/* 86F10 800EDA60 2463CD38 */  addiu     $v1, $v1, %lo(gPlayerMoveHistory)
 /* 86F14 800EDA64 44806000 */  mtc1      $zero, $f12
 /* 86F18 800EDA68 3C028011 */  lui       $v0, %hi(D_8010CFBC)
 /* 86F1C 800EDA6C 8C42CFBC */  lw        $v0, %lo(D_8010CFBC)($v0)
@@ -56,12 +56,12 @@ glabel partner_flying_follow_player
 /* 86F54 800EDAA4 E7A20020 */  swc1      $f2, 0x20($sp)
 /* 86F58 800EDAA8 E7A40024 */  swc1      $f4, 0x24($sp)
 /* 86F5C 800EDAAC E7A00028 */  swc1      $f0, 0x28($sp)
-/* 86F60 800EDAB0 3C018010 */  lui       $at, %hi(SavedPartnerPosX)
-/* 86F64 800EDAB4 E422833C */  swc1      $f2, %lo(SavedPartnerPosX)($at)
-/* 86F68 800EDAB8 3C018010 */  lui       $at, %hi(SavedPartnerPosY)
-/* 86F6C 800EDABC E4248340 */  swc1      $f4, %lo(SavedPartnerPosY)($at)
-/* 86F70 800EDAC0 3C018010 */  lui       $at, %hi(SavedPartnerPosZ)
-/* 86F74 800EDAC4 E4208344 */  swc1      $f0, %lo(SavedPartnerPosZ)($at)
+/* 86F60 800EDAB0 3C018010 */  lui       $at, %hi(wSavedPartnerPosX)
+/* 86F64 800EDAB4 E422833C */  swc1      $f2, %lo(wSavedPartnerPosX)($at)
+/* 86F68 800EDAB8 3C018010 */  lui       $at, %hi(wSavedPartnerPosY)
+/* 86F6C 800EDABC E4248340 */  swc1      $f4, %lo(wSavedPartnerPosY)($at)
+/* 86F70 800EDAC0 3C018010 */  lui       $at, %hi(wSavedPartnerPosZ)
+/* 86F74 800EDAC4 E4208344 */  swc1      $f0, %lo(wSavedPartnerPosZ)($at)
 /* 86F78 800EDAC8 45020008 */  bc1fl     .L800EDAEC
 /* 86F7C 800EDACC 46083000 */   add.s    $f0, $f6, $f8
 /* 86F80 800EDAD0 460A4081 */  sub.s     $f2, $f8, $f10
@@ -172,8 +172,8 @@ glabel partner_flying_follow_player
 .L800EDC58:
 /* 87108 800EDC58 3C128011 */  lui       $s2, %hi(D_8010CFBC)
 /* 8710C 800EDC5C 2652CFBC */  addiu     $s2, $s2, %lo(D_8010CFBC)
-/* 87110 800EDC60 3C148011 */  lui       $s4, %hi(PlayerMoveHistory)
-/* 87114 800EDC64 2694CD38 */  addiu     $s4, $s4, %lo(PlayerMoveHistory)
+/* 87110 800EDC60 3C148011 */  lui       $s4, %hi(gPlayerMoveHistory)
+/* 87114 800EDC64 2694CD38 */  addiu     $s4, $s4, %lo(gPlayerMoveHistory)
 .L800EDC68:
 /* 87118 800EDC68 C7AC0020 */  lwc1      $f12, 0x20($sp)
 /* 8711C 800EDC6C C7AE0028 */  lwc1      $f14, 0x28($sp)
@@ -234,8 +234,8 @@ glabel partner_flying_follow_player
 /* 871F4 800EDD44 46200020 */   cvt.s.d  $f0, $f0
 .L800EDD48:
 /* 871F8 800EDD48 8E430000 */  lw        $v1, ($s2)
-/* 871FC 800EDD4C 3C028011 */  lui       $v0, %hi(PlayerMoveHistoryIndex)
-/* 87200 800EDD50 8C42CFB8 */  lw        $v0, %lo(PlayerMoveHistoryIndex)($v0)
+/* 871FC 800EDD4C 3C028011 */  lui       $v0, %hi(gPlayerMoveHistoryIndex)
+/* 87200 800EDD50 8C42CFB8 */  lw        $v0, %lo(gPlayerMoveHistoryIndex)($v0)
 /* 87204 800EDD54 1062FF92 */  beq       $v1, $v0, .L800EDBA0
 /* 87208 800EDD58 00000000 */   nop
 /* 8720C 800EDD5C C62C0038 */  lwc1      $f12, 0x38($s1)
@@ -280,8 +280,8 @@ glabel partner_flying_follow_player
 /* 8729C 800EDDEC 3C048011 */  lui       $a0, %hi(D_8010CFBC)
 /* 872A0 800EDDF0 2484CFBC */  addiu     $a0, $a0, %lo(D_8010CFBC)
 /* 872A4 800EDDF4 8C830000 */  lw        $v1, ($a0)
-/* 872A8 800EDDF8 3C028011 */  lui       $v0, %hi(PlayerMoveHistoryIndex)
-/* 872AC 800EDDFC 8C42CFB8 */  lw        $v0, %lo(PlayerMoveHistoryIndex)($v0)
+/* 872A8 800EDDF8 3C028011 */  lui       $v0, %hi(gPlayerMoveHistoryIndex)
+/* 872AC 800EDDFC 8C42CFB8 */  lw        $v0, %lo(gPlayerMoveHistoryIndex)($v0)
 /* 872B0 800EDE00 106202D9 */  beq       $v1, $v0, .L800EE968_87E18
 /* 872B4 800EDE04 24620001 */   addiu    $v0, $v1, 1
 /* 872B8 800EDE08 AC820000 */  sw        $v0, ($a0)
@@ -289,8 +289,8 @@ glabel partner_flying_follow_player
 /* 872C0 800EDE10 50400001 */  beql      $v0, $zero, .L800EDE18
 /* 872C4 800EDE14 AC800000 */   sw       $zero, ($a0)
 .L800EDE18:
-/* 872C8 800EDE18 3C038011 */  lui       $v1, %hi(PlayerMoveHistory)
-/* 872CC 800EDE1C 2463CD38 */  addiu     $v1, $v1, %lo(PlayerMoveHistory)
+/* 872C8 800EDE18 3C038011 */  lui       $v1, %hi(gPlayerMoveHistory)
+/* 872CC 800EDE1C 2463CD38 */  addiu     $v1, $v1, %lo(gPlayerMoveHistory)
 /* 872D0 800EDE20 8C820000 */  lw        $v0, ($a0)
 /* 872D4 800EDE24 3C013FA6 */  lui       $at, 0x3fa6
 /* 872D8 800EDE28 34216666 */  ori       $at, $at, 0x6666
@@ -521,8 +521,8 @@ glabel partner_flying_follow_player
 /* 87634 800EE184 0803BA5A */  j         .L800EE968_87E18
 /* 87638 800EE188 A6020000 */   sh       $v0, ($s0)
 .L800EE18C_8763C:
-/* 8763C 800EE18C 3C038011 */  lui       $v1, %hi(PlayerMoveHistory)
-/* 87640 800EE190 2463CD38 */  addiu     $v1, $v1, %lo(PlayerMoveHistory)
+/* 8763C 800EE18C 3C038011 */  lui       $v1, %hi(gPlayerMoveHistory)
+/* 87640 800EE190 2463CD38 */  addiu     $v1, $v1, %lo(gPlayerMoveHistory)
 /* 87644 800EE194 C62C0038 */  lwc1      $f12, 0x38($s1)
 /* 87648 800EE198 C62E0040 */  lwc1      $f14, 0x40($s1)
 /* 8764C 800EE19C 8E660028 */  lw        $a2, 0x28($s3)
@@ -733,8 +733,8 @@ glabel partner_flying_follow_player
 /* 87960 800EE4B0 4481C000 */  mtc1      $at, $f24
 /* 87964 800EE4B4 3C128011 */  lui       $s2, %hi(D_8010CFBC)
 /* 87968 800EE4B8 2652CFBC */  addiu     $s2, $s2, %lo(D_8010CFBC)
-/* 8796C 800EE4BC 3C148011 */  lui       $s4, %hi(PlayerMoveHistory)
-/* 87970 800EE4C0 2694CD38 */  addiu     $s4, $s4, %lo(PlayerMoveHistory)
+/* 8796C 800EE4BC 3C148011 */  lui       $s4, %hi(gPlayerMoveHistory)
+/* 87970 800EE4C0 2694CD38 */  addiu     $s4, $s4, %lo(gPlayerMoveHistory)
 .L800EE4C4:
 /* 87974 800EE4C4 82020000 */  lb        $v0, ($s0)
 /* 87978 800EE4C8 14400024 */  bnez      $v0, .L800EE55C
@@ -760,8 +760,8 @@ glabel partner_flying_follow_player
 /* 879C8 800EE518 45010010 */  bc1t      .L800EE55C
 /* 879CC 800EE51C 00000000 */   nop
 /* 879D0 800EE520 8E430000 */  lw        $v1, ($s2)
-/* 879D4 800EE524 3C028011 */  lui       $v0, %hi(PlayerMoveHistoryIndex)
-/* 879D8 800EE528 8C42CFB8 */  lw        $v0, %lo(PlayerMoveHistoryIndex)($v0)
+/* 879D4 800EE524 3C028011 */  lui       $v0, %hi(gPlayerMoveHistoryIndex)
+/* 879D8 800EE528 8C42CFB8 */  lw        $v0, %lo(gPlayerMoveHistoryIndex)($v0)
 /* 879DC 800EE52C 1062000B */  beq       $v1, $v0, .L800EE55C
 /* 879E0 800EE530 24620001 */   addiu    $v0, $v1, 1
 /* 879E4 800EE534 AE420000 */  sw        $v0, ($s2)

@@ -381,6 +381,8 @@ PlayerData* get_player_data(void);
 
 s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
+s32 npc_raycast_up(s32, f32*, f32*, f32*, f32*);
+s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
 s32 player_raycast_below_cam_relative(PlayerStatus*, f32*, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
 s32 npc_test_move_taller_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 s32 npc_test_move_simple_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);

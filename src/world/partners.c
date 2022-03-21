@@ -92,18 +92,12 @@ extern s16 D_8010CFC8;
 extern s16 D_8010CFCA;
 extern s16 D_8010CFCE;
 extern s32 D_802C0000;
-extern s32 PlayerMoveHistoryIndex;
+extern s32 gPlayerMoveHistoryIndex;
 extern s32 D_8010CFBC;
-extern s32 D_8010CFCC;
+extern s16 D_8010CFCC;
 
-extern struct player_path_element PlayerMoveHistory[40];
+extern PlayerPathElement gPlayerMoveHistory[40];
 extern EvtScript D_802C05CC_32579C;
-
-typedef struct player_path_element{
-    /* 0x00 */ s8 isJumping;
-    /* 0x03 */ char unk_01[3];
-    /* 0x04 */ Vec3f position;
-}player_path_element; // size unknown
 
 s32 partner_is_idle(Npc* partner);
 s32 world_partner_can_player_pause_default(Npc* partner);
@@ -330,9 +324,9 @@ WorldPartner wPartners[12] = {
     },
 };
 
-f32 SavedPartnerPosX = 0;
-f32 SavedPartnerPosY = 0;
-f32 SavedPartnerPosZ = 0;
+f32 wSavedPartnerPosX = 0;
+f32 wSavedPartnerPosY = 0;
+f32 wSavedPartnerPosZ = 0;
 
 PartnerAnimations gPartnerAnimations[] = {
     {0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
@@ -504,9 +498,9 @@ void switch_to_partner(s32 arg0) {
             D_8010CFE8 = 4;
         } else {
             D_8010CFE8 = 6;
-            SavedPartnerPosX = playerStatus->position.x;
-            SavedPartnerPosY = playerStatus->position.y;
-            SavedPartnerPosZ = playerStatus->position.z;
+            wSavedPartnerPosX = playerStatus->position.x;
+            wSavedPartnerPosY = playerStatus->position.y;
+            wSavedPartnerPosZ = playerStatus->position.z;
         }
     }
 }
@@ -527,9 +521,9 @@ void partner_init_after_battle(s32 arg0) {
             D_8010CFE8 = 4;
         } else {
             D_8010CFE8 = 6;
-            SavedPartnerPosX = playerStatus->position.x;
-            SavedPartnerPosY = playerStatus->position.y;
-            SavedPartnerPosZ = playerStatus->position.z;
+            wSavedPartnerPosX = playerStatus->position.x;
+            wSavedPartnerPosY = playerStatus->position.y;
+            wSavedPartnerPosZ = playerStatus->position.z;
         }
     }
 }
@@ -598,9 +592,9 @@ void partner_reset_data(void) {
     }
 
     wPartner = NULL;
-    SavedPartnerPosX = playerStatus->position.x;
-    SavedPartnerPosY = playerStatus->position.y;
-    SavedPartnerPosZ = playerStatus->position.z;
+    wSavedPartnerPosX = playerStatus->position.x;
+    wSavedPartnerPosY = playerStatus->position.y;
+    wSavedPartnerPosZ = playerStatus->position.z;
 
     if (D_8010CFD8 == 0) {
         D_8010CFE8 = 1;
@@ -627,9 +621,9 @@ void partner_initialize_data(void) {
     actionStatus->unk_358 = 0;
     actionStatus->actionState.b[2] = 0;
     wPartner = NULL;
-    SavedPartnerPosX = 0;
-    SavedPartnerPosY = 0;
-    SavedPartnerPosZ = 0;
+    wSavedPartnerPosX = 0;
+    wSavedPartnerPosY = 0;
+    wSavedPartnerPosZ = 0;
 }
 
 s32 partner_test_enemy_collision(s32 arg0) {
@@ -719,30 +713,70 @@ void partner_resume_ability_script(void) {
     }
 }
 
-INCLUDE_ASM(void, "world/partners", partner_walking_enable, Npc* partner, s32 val);
+void partner_walking_enable(Npc* partner, s32 val) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerPathElement* it = gPlayerMoveHistory;
+    s32 i;
+
+    partner->pos.x = wSavedPartnerPosX;
+    partner->pos.y = wSavedPartnerPosY;
+    partner->pos.z = wSavedPartnerPosZ;
+
+    for (i = 0; i < ARRAY_COUNT(gPlayerMoveHistory); i++, it++) {
+        it->pos.x = playerStatus->position.x;
+        it->pos.y = playerStatus->position.y;
+        it->pos.z = playerStatus->position.z;
+        it->isJumping = FALSE;
+    }
+
+    gPlayerMoveHistoryIndex = 0;
+    D_8010CFBC = 0;
+    D_8010CFCA = val ? 2 : 0;
+    D_8010CFC8 = 0;
+
+    if (D_8010CFC4 == 1 || D_8010CFC4 == 3) {
+        D_8010CFC4 = 0;
+        D_8010CFCA = 0;
+        D_8010CFC8 = 0;
+    } else if (D_8010CFC4 == 2) {
+        D_8010CFCA = 0;
+        D_8010CFC8 = 50;
+    }
+
+    D_8010CFCE = 0;
+    D_8010CFCC = 0;
+    wPartnerMoveTime = 16;
+    wPartnerTetherDistance = 40.0f;
+    partner->currentAnim.w = gPartnerAnimations[D_8010CFD8].anims[5];
+    func_800EA5B8(&partner->flags);
+    partner->collisionChannel = 0x10000;
+    partner->jumpVelocity = 0.0f;
+    partner->flags |= NPC_FLAG_400000 | NPC_FLAG_GRAVITY | NPC_FLAG_100;
+    partner->jumpScale = 1.8f;
+}
 
 void partner_walking_update_player_tracking(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 isPlayerJumping;
-    player_path_element* currentSnapshot;
+    PlayerPathElement* currentSnapshot;
 
     if ((playerStatus->flags & 6) != 0) {
         isPlayerJumping = (playerStatus->actionState == ACTION_STATE_LAND || playerStatus->actionState == ACTION_STATE_STEP_DOWN) ^ 1;
     } else {
         isPlayerJumping = FALSE;
     }
-    currentSnapshot = &PlayerMoveHistory[PlayerMoveHistoryIndex];
+    currentSnapshot = &gPlayerMoveHistory[gPlayerMoveHistoryIndex];
     if (((currentSnapshot->isJumping == 0) || (isPlayerJumping == 0)) &&
-        ((currentSnapshot->position.x != playerStatus->position.x) || (currentSnapshot->position.y != playerStatus->position.y)
-        || (currentSnapshot->position.z != playerStatus->position.z))) {
-        if (D_8010CFBC != PlayerMoveHistoryIndex + 1) {
-            if (++PlayerMoveHistoryIndex >= ARRAY_COUNT(PlayerMoveHistory)) {
-                PlayerMoveHistoryIndex = 0;
+        ((currentSnapshot->pos.x != playerStatus->position.x) || (currentSnapshot->pos.y != playerStatus->position.y)
+        || (currentSnapshot->pos.z != playerStatus->position.z))) {
+        if (D_8010CFBC != gPlayerMoveHistoryIndex + 1) {
+            if (++gPlayerMoveHistoryIndex >= ARRAY_COUNT(gPlayerMoveHistory)) {
+                gPlayerMoveHistoryIndex = 0;
             }
-            currentSnapshot = &PlayerMoveHistory[PlayerMoveHistoryIndex];
-            currentSnapshot->position.x = playerStatus->position.x;
-            currentSnapshot->position.y = playerStatus->position.y;
-            currentSnapshot->position.z = playerStatus->position.z;
+            currentSnapshot = &gPlayerMoveHistory[gPlayerMoveHistoryIndex];
+            currentSnapshot->pos.x = playerStatus->position.x;
+            currentSnapshot->pos.y = playerStatus->position.y;
+            currentSnapshot->pos.z = playerStatus->position.z;
             currentSnapshot->isJumping = isPlayerJumping;
         }
     }
@@ -772,18 +806,61 @@ void partner_walking_update_motion(Npc* partner) {
     }
 
     partner_do_player_collision(partner);
-    SavedPartnerPosX = partner->pos.x;
-    SavedPartnerPosY = partner->pos.y;
-    SavedPartnerPosZ = partner->pos.z;
+    wSavedPartnerPosX = partner->pos.x;
+    wSavedPartnerPosY = partner->pos.y;
+    wSavedPartnerPosZ = partner->pos.z;
 }
 
 INCLUDE_ASM(void, "world/partners", partner_walking_follow_player, Npc* partner);
 
-INCLUDE_ASM(void, "world/partners", partner_flying_enable, Npc* partner, s32 val);
+void partner_flying_enable(Npc* partner, s32 val) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerPathElement* it = gPlayerMoveHistory;
+    s32 i;
+
+    partner->pos.x = wSavedPartnerPosX;
+    partner->pos.y = wSavedPartnerPosY;
+    partner->pos.z = wSavedPartnerPosZ;
+
+    for (i = 0; i < ARRAY_COUNT(gPlayerMoveHistory); i++, it++) {
+        it->pos.x = wSavedPartnerPosX;
+        it->pos.y = wSavedPartnerPosY;
+        it->pos.z = wSavedPartnerPosZ;
+        it->isJumping = FALSE;
+    }
+
+    gPlayerMoveHistoryIndex = 0;
+    D_8010CFBC = 0;
+
+    if (!val) {
+        D_8010CFC8 = 0;
+        D_8010CFCA = 0;
+    } else if (D_8010CFC4 == 0) {
+        D_8010CFC8 = 15;
+        D_8010CFCA = 2;
+    } else if (D_8010CFC4 == 1 || D_8010CFC4 == 3) {
+        D_8010CFC4 = 0;
+        D_8010CFC8 = 0;
+        D_8010CFCA = 0;
+    } else if (D_8010CFC4 == 2) {
+        D_8010CFC8 = 50;
+        D_8010CFCA = 0;
+    }
+
+    D_8010CFCE = 0;
+    D_8010CFCC = 0;
+    wPartnerMoveTime = 16;
+    wPartnerTetherDistance = 40.0f;
+    partner->currentAnim.w = gPartnerAnimations[D_8010CFD8].anims[5];
+    func_800EA5B8(&partner->flags);
+    partner->collisionChannel = 0x10000;
+    partner->flags |= NPC_FLAG_100;
+    partner->flags &= ~NPC_FLAG_GRAVITY;
+}
 
 void partner_flying_update_player_tracking(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    player_path_element* currentSnapShot;
+    PlayerPathElement* currentSnapshot;
     f32 effectiveY;
     s32 zero = 0; // TODO fix this as || zero == 0 is always going to be true as is
 
@@ -791,18 +868,18 @@ void partner_flying_update_player_tracking(Npc* partner) {
     if ((playerStatus->actionState == ACTION_STATE_HIT_LAVA) || (playerStatus->actionState == ACTION_STATE_HIT_FIRE)) {
         effectiveY = playerStatus->lastGoodPosition.y + partner->collisionHeight + 5;
     }
-    currentSnapShot = &PlayerMoveHistory[PlayerMoveHistoryIndex];
-    if ((!currentSnapShot->isJumping || zero == 0) && (currentSnapShot->position.x != playerStatus->position.x || currentSnapShot->position.y != effectiveY
-        || currentSnapShot->position.z != playerStatus->position.z)) {
-        if (D_8010CFBC != PlayerMoveHistoryIndex + 1) {
-            if (++PlayerMoveHistoryIndex >= ARRAY_COUNT(PlayerMoveHistory)) {
-                PlayerMoveHistoryIndex = 0;
+    currentSnapshot = &gPlayerMoveHistory[gPlayerMoveHistoryIndex];
+    if ((!currentSnapshot->isJumping || zero == 0) && (currentSnapshot->pos.x != playerStatus->position.x || currentSnapshot->pos.y != effectiveY
+        || currentSnapshot->pos.z != playerStatus->position.z)) {
+        if (D_8010CFBC != gPlayerMoveHistoryIndex + 1) {
+            if (++gPlayerMoveHistoryIndex >= ARRAY_COUNT(gPlayerMoveHistory)) {
+                gPlayerMoveHistoryIndex = 0;
             }
-            currentSnapShot = &PlayerMoveHistory[PlayerMoveHistoryIndex];
-            currentSnapShot->position.x = playerStatus->position.x;
-            currentSnapShot->position.y = effectiveY;
-            currentSnapShot->position.z = playerStatus->position.z;
-            currentSnapShot->isJumping = zero;
+            currentSnapshot = &gPlayerMoveHistory[gPlayerMoveHistoryIndex];
+            currentSnapshot->pos.x = playerStatus->position.x;
+            currentSnapshot->pos.y = effectiveY;
+            currentSnapshot->pos.z = playerStatus->position.z;
+            currentSnapshot->isJumping = zero;
         }
     }
 }
@@ -841,9 +918,9 @@ s32 partner_put_away(Npc* partner) {
             tempPosY = playerStatus->position.y + (playerStatus->colliderHeight / 2);
             partner->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight / 2);
             tempPosZ = playerStatus->position.z;
-            SavedPartnerPosX = tempMoveToX;
-            SavedPartnerPosY = tempMoveToY;
-            SavedPartnerPosZ = tempMoveToZ;
+            wSavedPartnerPosX = tempMoveToX;
+            wSavedPartnerPosY = tempMoveToY;
+            wSavedPartnerPosZ = tempMoveToZ;
             partner->moveSpeed = 4.0f;
             partner->jumpScale = 1.6f;
             partner->moveToPos.z = tempPosZ;
@@ -950,7 +1027,21 @@ void func_800EF43C(void) {
     D_8010CFCE = 0;
 }
 
-INCLUDE_ASM(void, "world/partners", partner_clear_player_tracking, Npc* partner);
+void partner_clear_player_tracking(Npc* partner) {
+    PlayerPathElement* it = gPlayerMoveHistory;
+    s32 i;
+
+    wSavedPartnerPosX = partner->pos.x;
+    wSavedPartnerPosY = partner->pos.y;
+    wSavedPartnerPosZ = partner->pos.z;
+
+    for (i = 0; i < ARRAY_COUNT(gPlayerMoveHistory); i++, it++) {
+        it->pos.x = wSavedPartnerPosX;
+        it->pos.y = wSavedPartnerPosY;
+        it->pos.z = wSavedPartnerPosZ;
+        it->isJumping = FALSE;
+    }
+}
 
 s32 func_800EF4E0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -960,17 +1051,17 @@ s32 func_800EF4E0(void) {
     if (playerStatus->unk_90 == 0.0f) {
         if (!(playerStatus->spriteFacingAngle >= 90.0f) || !(playerStatus->spriteFacingAngle < 270.0f)) {
             ret = 1;
-            playerStatus->targetYaw = clamp_angle(cameras[0].currentYaw - 90.0f);
+            playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw - 90.0f);
         } else {
-            playerStatus->targetYaw = clamp_angle(cameras[0].currentYaw + 90.0f);
+            playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw + 90.0f);
             ret = 0;
         }
-    } else if (get_clamped_angle_diff(cameras[0].currentYaw, playerStatus->targetYaw) < 0.0f) {
+    } else if (get_clamped_angle_diff(cameras[CAM_DEFAULT].currentYaw, playerStatus->targetYaw) < 0.0f) {
         ret = 1;
-        playerStatus->targetYaw = clamp_angle(cameras[0].currentYaw - 90.0f);
+        playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw - 90.0f);
     } else {
         ret = 0;
-        playerStatus->targetYaw = clamp_angle(cameras[0].currentYaw + 90.0f);
+        playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw + 90.0f);
     }
 
     playerStatus->currentYaw = playerStatus->targetYaw;

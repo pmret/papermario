@@ -1733,7 +1733,8 @@ typedef struct Encounter {
 } Encounter; // size = 0x5C
 
 typedef struct PlayerPathElement {
-    /* 0x00 */ char unk_00[4];
+    /* 0x00 */ s8 isJumping;
+    /* 0x03 */ char unk_01[3];
     /* 0x04 */ Vec3f pos;
 } PlayerPathElement; // size = 0x10
 
