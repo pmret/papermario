@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel osContRamWrite
+glabel __osContRamWrite
 /* 457C0 8006A3C0 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 457C4 8006A3C4 8FA20058 */  lw        $v0, 0x58($sp)
 /* 457C8 8006A3C8 AFB40030 */  sw        $s4, 0x30($sp)
@@ -28,26 +28,26 @@ glabel osContRamWrite
 /* 4581C 8006A41C 1480005D */  bnez      $a0, .L8006A594
 /* 45820 8006A420 00001021 */   addu     $v0, $zero, $zero
 .L8006A424:
-/* 45824 8006A424 0C019771 */  jal       osSiGetAccess
+/* 45824 8006A424 0C019771 */  jal       __osSiGetAccess
 /* 45828 8006A428 241E0003 */   addiu    $fp, $zero, 3
 /* 4582C 8006A42C 3216FFFF */  andi      $s6, $s0, 0xffff
 /* 45830 8006A430 00108140 */  sll       $s0, $s0, 5
 /* 45834 8006A434 AFB00014 */  sw        $s0, 0x14($sp)
 .L8006A438:
-/* 45838 8006A438 3C02800A */  lui       $v0, %hi(D_8009A61C)
-/* 4583C 8006A43C 9042A61C */  lbu       $v0, %lo(D_8009A61C)($v0)
-/* 45840 8006A440 3C10800E */  lui       $s0, %hi(D_800DA000)
+/* 45838 8006A438 3C02800A */  lui       $v0, %hi(__osContLastCmd)
+/* 4583C 8006A43C 9042A61C */  lbu       $v0, %lo(__osContLastCmd)($v0)
+/* 45840 8006A440 3C10800E */  lui       $s0, %hi(__osPfsPifRam)
 /* 45844 8006A444 145E0005 */  bne       $v0, $fp, .L8006A45C
-/* 45848 8006A448 2610A000 */   addiu    $s0, $s0, %lo(D_800DA000)
-/* 4584C 8006A44C 3C028009 */  lui       $v0, %hi(D_800958E0)
-/* 45850 8006A450 8C4258E0 */  lw        $v0, %lo(D_800958E0)($v0)
+/* 45848 8006A448 2610A000 */   addiu    $s0, $s0, %lo(__osPfsPifRam)
+/* 4584C 8006A44C 3C028009 */  lui       $v0, %hi(__osPfsLastChannel)
+/* 45850 8006A450 8C4258E0 */  lw        $v0, %lo(__osPfsLastChannel)($v0)
 /* 45854 8006A454 5053001A */  beql      $v0, $s3, .L8006A4C0
 /* 45858 8006A458 02708021 */   addu     $s0, $s3, $s0
 .L8006A45C:
-/* 4585C 8006A45C 3C01800A */  lui       $at, %hi(D_8009A61C)
-/* 45860 8006A460 A03EA61C */  sb        $fp, %lo(D_8009A61C)($at)
-/* 45864 8006A464 3C018009 */  lui       $at, %hi(D_800958E0)
-/* 45868 8006A468 AC3358E0 */  sw        $s3, %lo(D_800958E0)($at)
+/* 4585C 8006A45C 3C01800A */  lui       $at, %hi(__osContLastCmd)
+/* 45860 8006A460 A03EA61C */  sb        $fp, %lo(__osContLastCmd)($at)
+/* 45864 8006A464 3C018009 */  lui       $at, %hi(__osPfsLastChannel)
+/* 45868 8006A468 AC3358E0 */  sw        $s3, %lo(__osPfsLastChannel)($at)
 /* 4586C 8006A46C 1A600006 */  blez      $s3, .L8006A488
 /* 45870 8006A470 00001821 */   addu     $v1, $zero, $zero
 .L8006A474:
@@ -83,8 +83,8 @@ glabel osContRamWrite
 /* 458E0 8006A4E0 00481025 */  or        $v0, $v0, $t0
 /* 458E4 8006A4E4 0C019194 */  jal       bcopy
 /* 458E8 8006A4E8 A2020005 */   sb       $v0, 5($s0)
-/* 458EC 8006A4EC 3C05800E */  lui       $a1, %hi(D_800DA000)
-/* 458F0 8006A4F0 24A5A000 */  addiu     $a1, $a1, %lo(D_800DA000)
+/* 458EC 8006A4EC 3C05800E */  lui       $a1, %hi(__osPfsPifRam)
+/* 458F0 8006A4F0 24A5A000 */  addiu     $a1, $a1, %lo(__osPfsPifRam)
 /* 458F4 8006A4F4 0C019730 */  jal       __osSiRawStartDma
 /* 458F8 8006A4F8 24040001 */   addiu    $a0, $zero, 1
 /* 458FC 8006A4FC 0C01B233 */  jal       __osContDataCrc
@@ -94,8 +94,8 @@ glabel osContRamWrite
 /* 4590C 8006A50C 24060001 */  addiu     $a2, $zero, 1
 /* 45910 8006A510 0C0195BC */  jal       osRecvMesg
 /* 45914 8006A514 00409021 */   addu     $s2, $v0, $zero
-/* 45918 8006A518 3C05800E */  lui       $a1, %hi(D_800DA000)
-/* 4591C 8006A51C 24A5A000 */  addiu     $a1, $a1, %lo(D_800DA000)
+/* 45918 8006A518 3C05800E */  lui       $a1, %hi(__osPfsPifRam)
+/* 4591C 8006A51C 24A5A000 */  addiu     $a1, $a1, %lo(__osPfsPifRam)
 /* 45920 8006A520 0C019730 */  jal       __osSiRawStartDma
 /* 45924 8006A524 00002021 */   addu     $a0, $zero, $zero
 /* 45928 8006A528 02802021 */  addu      $a0, $s4, $zero
@@ -111,7 +111,7 @@ glabel osContRamWrite
 /* 45950 8006A550 324200FF */  andi      $v0, $s2, 0xff
 /* 45954 8006A554 10430007 */  beq       $v0, $v1, .L8006A574
 /* 45958 8006A558 02802021 */   addu     $a0, $s4, $zero
-/* 4595C 8006A55C 0C01A530 */  jal       osPfsGetStatus
+/* 4595C 8006A55C 0C01A530 */  jal       __osPfsGetStatus
 /* 45960 8006A560 02602821 */   addu     $a1, $s3, $zero
 /* 45964 8006A564 00408821 */  addu      $s1, $v0, $zero
 /* 45968 8006A568 16200007 */  bnez      $s1, .L8006A588
@@ -124,7 +124,7 @@ glabel osContRamWrite
 /* 45980 8006A580 0441FFAD */  bgez      $v0, .L8006A438
 /* 45984 8006A584 26B5FFFF */   addiu    $s5, $s5, -1
 .L8006A588:
-/* 45988 8006A588 0C01978C */  jal       osSiRelAccess
+/* 45988 8006A588 0C01978C */  jal       __osSiRelAccess
 /* 4598C 8006A58C 00000000 */   nop
 /* 45990 8006A590 02201021 */  addu      $v0, $s1, $zero
 .L8006A594:
