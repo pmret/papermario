@@ -715,7 +715,7 @@ void func_800EF300(void);
 void enable_player_shadow(void);
 s32 get_msg_lines(s32 messageID);
 void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, u8, void* drawContents, void* drawContentsArg, s8 parent);
-void set_window_update(s32 panelID, WindowUpdateFunc);
+void set_window_update(s32 panelID, s32);
 void set_windows_visible(s32 groupIdx);
 void snd_stop_sound(s32 soundID);
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);

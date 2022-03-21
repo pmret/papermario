@@ -427,13 +427,13 @@ void replace_window_update(s32 windowID, s8 priority, WindowUpdateFunc pendingFu
     }
 }
 
-void set_window_update(s32 windowID, WindowUpdateFunc func) {
+void set_window_update(s32 windowID, s32 func) {
     if (gWindows[windowID].flags & WINDOW_FLAGS_INITIALIZED) {
-        if (func.func == gWindows[windowID].fpUpdate.func) {
+        if (func == gWindows[windowID].fpUpdate.i) {
             gWindows[windowID].flags &= ~WINDOW_FLAGS_FPUPDATE_CHANGED;
         } else {
             gWindows[windowID].flags |= WINDOW_FLAGS_FPUPDATE_CHANGED | WINDOW_FLAGS_INITIAL_ANIMATION;
-            gWindows[windowID].fpPending = func;
+            gWindows[windowID].fpPending.func = func;
         }
     }
 }
@@ -464,7 +464,7 @@ void setup_pause_menu_tab(MenuWindowBP* bp, s32 count) {
         if (bp->style.defaultStyleID != -1) {
             gWindowStyles[bp->windowID] = bp->style;
         }
-        set_window_update(bp->windowID, bp->fpUpdate);
+        set_window_update(bp->windowID, bp->fpUpdate.i);
         gWindows[bp->windowID].flags |= bp->extraFlags;
     }
 }
