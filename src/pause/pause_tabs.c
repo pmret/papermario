@@ -375,7 +375,7 @@ void pause_tabs_update(MenuPanel* tab) {
                                       fpUpdate.func == pause_update_page_active_2 ||
                                       fpUpdate.func == basic_window_update ||
                                       fpUpdate.i == 1)) {
-                    set_window_update(gPauseTabsPageWindowIDs[i], fpUpdateInactive);
+                    set_window_update(gPauseTabsPageWindowIDs[i], (s32)fpUpdateInactive);
                     flag = TRUE;
                 }
             }
@@ -390,7 +390,7 @@ void pause_tabs_update(MenuPanel* tab) {
                     D_8024F310 = 0;
                 }
 
-                set_window_update(gPauseTabsPageWindowIDs[tab->col], fpUpdateActive);
+                set_window_update(gPauseTabsPageWindowIDs[tab->col], (s32)fpUpdateActive);
             }
         }
     }
