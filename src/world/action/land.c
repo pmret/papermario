@@ -153,7 +153,6 @@ void func_802B62CC_E24BEC(void) {
     player_input_to_move_vector(&inputMoveAngle, &inputMoveMagnitude);
 
     if (inputMoveMagnitude != 0.0f) {
-        
         if (inputMoveMagnitude != 0.0f) {
             playerStatus->targetYaw = inputMoveAngle;
         }
