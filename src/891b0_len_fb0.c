@@ -18,16 +18,6 @@ extern s32 D_80109494;
 extern s16 D_801094A4;
 extern s32 D_801094A8;
 
-void func_800EFE2C(void);
-void func_800F0248(void);
-void func_800F0490(void);
-void func_800F0864(void);
-void func_800F09EC(void);
-void func_800F0B3C(void);
-extern s32 D_80109480;
-extern s32 D_8010CFF0;
-extern s32 D_8010CFF4;
-
 void func_800EFD00(void) {
 }
 
