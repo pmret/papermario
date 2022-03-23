@@ -25,7 +25,7 @@ glabel func_80241918_A49ED8
 /* A49F28 80241968 0260202D */  daddu     $a0, $s3, $zero
 /* A49F2C 8024196C 8E250024 */  lw        $a1, 0x24($s1)
 /* A49F30 80241970 8E260028 */  lw        $a2, 0x28($s1)
-/* A49F34 80241974 0C090292 */  jal       func_80240A48_A49008
+/* A49F34 80241974 0C090292 */  jal       kpa_03_UnkNpcAIFunc47
 /* A49F38 80241978 0280382D */   daddu    $a3, $s4, $zero
 /* A49F3C 8024197C 0040882D */  daddu     $s1, $v0, $zero
 /* A49F40 80241980 24020001 */  addiu     $v0, $zero, 1

@@ -16,7 +16,7 @@ typedef enum {
     HUD_ELEMENT_OP_SetHidden,
     HUD_ELEMENT_OP_AddTexelOffsetX,
     HUD_ELEMENT_OP_AddTexelOffsetY,
-    HUD_ELEMENT_OP_AddTexelOffset,
+    HUD_ELEMENT_OP_SetTexelOffset,
     HUD_ELEMENT_OP_SetImage,
     HUD_ELEMENT_OP_SetScale,
     HUD_ELEMENT_OP_SetAlpha,
@@ -31,7 +31,7 @@ typedef enum {
     HUD_ELEMENT_OP_SetFlags,
     HUD_ELEMENT_OP_ClearFlags,
     HUD_ELEMENT_OP_PlaySound,
-    HUD_ELEMENT_OP_op_1B,
+    HUD_ELEMENT_OP_SetPivot,
 } HudScript[0];
 
 enum {
@@ -62,40 +62,70 @@ enum {
     HUD_ELEMENT_SIZE_32x24,
 };
 
-
-typedef union {
-    struct {
-        u32 f0: 4;
-        u32 f4: 4;
-    } as_bitfields;
-    u32 as_word;
-} HudFlags;
+enum HudElementFlags {
+    HUD_ELEMENT_FLAGS_INITIALIZED        = 0x00000001,
+    HUD_ELEMENT_FLAGS_DISABLED           = 0x00000002,
+    HUD_ELEMENT_FLAGS_ANIMATION_FINISHED = 0x00000004,
+    HUD_ELEMENT_FLAGS_8                  = 0x00000008,
+    HUD_ELEMENT_FLAGS_SCALED             = 0x00000010,
+    HUD_ELEMENT_FLAGS_TRANSPARENT        = 0x00000020,
+    HUD_ELEMENT_FLAGS_FRONTUI            = 0x00000040,
+    HUD_ELEMENT_FLAGS_80                 = 0x00000080,
+    HUD_ELEMENT_FLAGS_FIXEDSCALE         = 0x00000100,
+    HUD_ELEMENT_FLAGS_200                = 0x00000200,
+    HUD_ELEMENT_FLAGS_BATTLE             = 0x00000400,
+    HUD_ELEMENT_FLAGS_REPEATED           = 0x00000800,
+    HUD_ELEMENT_FLAGS_FLIPX              = 0x00001000,
+    HUD_ELEMENT_FLAGS_FLIPY              = 0x00002000,
+    HUD_ELEMENT_FLAGS_FMT_CI4            = 0x00004000,
+    HUD_ELEMENT_FLAGS_8000               = 0x00008000,
+    HUD_ELEMENT_FLAGS_TRANSFORM          = 0x00010000,
+    HUD_ELEMENT_FLAGS_NO_FOLD            = 0x00020000,
+    HUD_ELEMENT_FLAGS_DELETE             = 0x00040000,
+    HUD_ELEMENT_FLAGS_FMT_IA8            = 0x00080000,
+    HUD_ELEMENT_FLAGS_CUSTOM_SIZE        = 0x00100000,
+    HUD_ELEMENT_FLAGS_200000             = 0x00200000,
+    HUD_ELEMENT_FLAGS_MEMOFFSET          = 0x00400000,
+    HUD_ELEMENT_FLAGS_ANTIALIASING       = 0x00800000,
+    HUD_ELEMENT_FLAGS_1000000            = 0x01000000,
+    HUD_ELEMENT_FLAGS_2000000            = 0x02000000,
+    HUD_ELEMENT_FLAGS_4000000            = 0x04000000,
+    HUD_ELEMENT_FLAGS_8000000            = 0x08000000,
+    HUD_ELEMENT_FLAGS_10000000           = 0x10000000,
+    HUD_ELEMENT_FLAGS_SHADOW             = 0x20000000,
+    HUD_ELEMENT_FLAGS_40000000           = 0x40000000,
+    HUD_ELEMENT_FLAGS_80000000           = 0x80000000,
+};
 
 typedef struct HudScriptPair {
     /* 0x00 */ HudScript* enabled;
     /* 0x04 */ HudScript* disabled;
 } HudScriptPair; // size = 0x08
 
+typedef struct VtxRect {
+    Vtx vtx[4];
+} VtxRect; // size = 0x40
+
 typedef struct HudTransform {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 foldIdx;
     /* 0x04 */ Vec3f position;
     /* 0x10 */ Vec3f rotation;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Vec2s pivot;
-    /* 0x30 */ char unk_30[0xC4];
+    /* 0x30 */ VtxRect unk_30[3];
 } HudTransform; // size = 0xF0
 
 typedef struct HudElement {
-    /* 0x00 */ HudFlags flags;
+    /* 0x00 */ u32 flags;
     /* 0x04 */ const HudScript* readPos;
     /* 0x08 */ const HudScript* anim;
-    /* 0x0C */ s32* ptrPropertyList;
-    /* 0x10 */ s32* imageAddr;
-    /* 0x14 */ s32* paletteAddr;
+    /* 0x0C */ HudScript* loopStartPos;
+    /* 0x10 */ u8* imageAddr;
+    /* 0x14 */ u8* paletteAddr;
     /* 0x18 */ s32 memOffset;
     /* 0x1C */ HudTransform* hudTransform;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
+    /* 0x20 */ f32 deltaSizeX;
+    /* 0x24 */ f32 deltaSizeY;
     /* 0x28 */ f32 unkImgScale[2];
     /* 0x30 */ f32 uniformScale;
     /* 0x34 */ s32 widthScale; ///< X10
@@ -112,7 +142,7 @@ typedef struct HudElement {
     /* 0x4A */ u8 opacity;
     /* 0x4B */ Color_RGB8 tint;
     /* 0x4E */ Vec2bu customImageSize;
-    /* 0x40 */ Vec2bu customDrawSize;
+    /* 0x50 */ Vec2bu customDrawSize;
 } HudElement; // size = 0x54
 
 typedef HudElement* HudElementList[320];
@@ -128,13 +158,13 @@ extern HudScript HudScript_MenuTimes[];
 #define he_Restart HUD_ELEMENT_OP_Restart
 #define he_Loop HUD_ELEMENT_OP_Loop
 #define he_SetTileSize(size) HUD_ELEMENT_OP_SetTileSize, size
-#define he_SetSizesAutoScale(size1, size2) HUD_ELEMENT_OP_SetSizesAutoScale, size1, size1
-#define he_SetSizesFixedScale(size1, size2) HUD_ELEMENT_OP_SetSizesFixedScale, size2, size2
+#define he_SetSizesAutoScale(size1, size2) HUD_ELEMENT_OP_SetSizesAutoScale, size1, size2
+#define he_SetSizesFixedScale(size1, size2) HUD_ELEMENT_OP_SetSizesFixedScale, size1, size2
 #define he_SetVisible HUD_ELEMENT_OP_SetVisible
 #define he_SetHidden HUD_ELEMENT_OP_SetHidden
 #define he_AddTexelOffsetX(x) HUD_ELEMENT_OP_AddTexelOffsetX, x
 #define he_AddTexelOffsetY(y) HUD_ELEMENT_OP_AddTexelOffsetY, y
-#define he_AddTexelOffset(x, y) HUD_ELEMENT_OP_AddTexelOffset, x, y
+#define he_SetTexelOffset(x, y) HUD_ELEMENT_OP_SetTexelOffset, x, y
 #define he_SetImage(arg0, raster, palette, arg2, arg3) HUD_ELEMENT_OP_SetImage, arg0, raster, palette, arg2, arg3
 #define he_SetScale(scale) HUD_ELEMENT_OP_SetScale, (s32)(scale * 65536.0f)
 #define he_SetAlpha(alpha) HUD_ELEMENT_OP_SetAlpha, alpha
@@ -151,23 +181,13 @@ extern HudScript HudScript_MenuTimes[];
 #define he_SetFlags(arg0) HUD_ELEMENT_OP_SetFlags, arg0
 #define he_ClearFlags(arg0) HUD_ELEMENT_OP_ClearFlags, arg0
 #define he_PlaySound(arg0) HUD_ELEMENT_OP_PlaySound, arg0
-#define he_op_1B(arg0, arg1) HUD_ELEMENT_OP_op_1B, arg0, arg1
+#define he_SetPivot(arg0, arg1) HUD_ELEMENT_OP_SetPivot, arg0, arg1
 
 void load_hud_element(HudElement* hudElement, const HudScript* anim);
 
 /// @param clamp        0 = repeat; 1 = clamp
 /// @param dropShadow   Whether to render a drop shadow or not
-void draw_rect_hud_element(
-    HudElement* hudElement,
-    s32 texSizeX,
-    s32 texSizeY,
-    s16 drawSizeX,
-    s16 drawSizeY,
-    s16 offsetX,
-    s16 offsetY,
-    s32 clamp,
-    s32 dropShadow
-);
+void draw_rect_hud_element(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s16 drawSizeX, s16 drawSizeY, s16 offsetX, s16 offsetY, s32 clamp, s32 dropShadow);
 
 void clear_hud_element_cache(void);
 
@@ -189,7 +209,7 @@ void render_hud_element(HudElement* hudElement);
 
 void render_hud_elements_world(void);
 
-void func_80143C48(s32 arg0, s32 arg1, s32 arg2);
+void func_80143C48(s32 arg0, s32 arg1, s32 camID);
 void func_80144218(s32 arg0);
 void func_80144238(s32 arg0);
 void func_80144258(s32 arg0);
@@ -225,7 +245,7 @@ void ALT_clear_hud_element_cache(void);
 
 void set_hud_element_scale(s32 index, f32 scale);
 
-void set_hud_element_size(s32 id, s8 size);
+void set_hud_element_size_preset(s32 id, s8 size);
 
 s32 func_80144E4C(s32 id);
 

@@ -113,7 +113,7 @@ static s32 N(pad_3558)[] = {
     0x00000000, 0x00000000,
 };
 
-f32 N(D_80243560_C39A90)[] = {
+f32 N(sixFloats)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
     1.5f, 20.0f,
 };
@@ -288,7 +288,7 @@ s32 N(D_80243D48_C3A278)[8][2] = {
     { 0x001D00EC, 0x001D00ED }, { 0x001D00EE, 0x001D00EF }
 };
 
-f32 N(D_80243D88_C3A2B8)[] = {
+f32 N(bigFuncFloats)[] = {
     140.0f, 180.0f, 220.0f
 };
 
@@ -318,7 +318,7 @@ EvtScript N(80243D94) = {
         EVT_CALL(N(UnkPartnerPosFunc))
     EVT_END_THREAD
     EVT_WAIT_FRAMES(3)
-    EVT_CALL(N(func_802429D0_C38F00), EVT_MAP_VAR(0))
+    EVT_CALL(N(UnkFunc60), EVT_MAP_VAR(0))
     EVT_WAIT_FRAMES(30)
     EVT_RETURN
     EVT_END
@@ -421,21 +421,13 @@ EvtScript N(makeEntities) = {
 
 #include "world/common/UnkNpcAIFunc35.inc.c"
 
-#include "world/common/UnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1_copy.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-void N(func_80240C54_C37184)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->pos.y += N(D_80243560_C39A90)[npc->duration++];
-    if (npc->duration >= 5) {
-        script->functionTemp[0] = 12;
-    }
-}
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -445,64 +437,7 @@ void N(func_80240C54_C37184)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
 #include "world/common/UnkFunc5.inc.c"
 
-ApiStatus N(func_8024130C_C3783C)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Bytecode* args = script->ptrReadPos;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = (NpcAISettings*) evt_get_variable(script, *args);
-
-    territory.unk_00 = 0;
-    territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 120.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall) {
-        N(UnkFunc5)(npc, enemy, script, aiSettings);
-    }
-
-    npc->unk_AB = -2;
-
-    if (enemy->unk_B0 & 4) {
-        if (enemy->unk_B4 != 0) {
-            return ApiStatus_BLOCK;
-        }
-        enemy->unk_B0 &= ~4;
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
-        case 1:
-            N(UnkNpcAIFunc35)(script, aiSettings, territoryPtr);
-            break;
-        case 2:
-            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
-        case 3:
-            N(UnkFunc4)(script, aiSettings, territoryPtr);
-            break;
-        case 10:
-            N(UnkNpcAIFunc2)(script, aiSettings, territoryPtr);
-        case 11:
-            N(func_80240C54_C37184)(script, aiSettings, territoryPtr);
-            break;
-        case 12:
-            N(UnkNpcAIFunc14)(script, aiSettings, territoryPtr);
-            break;
-        case 13:
-            N(UnkNpcAIFunc3)(script, aiSettings, territoryPtr);
-            break;
-        case 14:
-            N(UnkFunc6)(script, aiSettings, territoryPtr);
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "world/common/UnkNpcAIMainFunc9.inc.c"
 
 void N(func_802414F8_C37A28)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -766,7 +701,7 @@ ApiStatus N(func_80242154_C38684)(Evt* script, s32 isInitialCall) {
             }
             break;
         case 2:
-            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc1_copy)(script, aiSettings, territoryPtr);
         case 3:
             N(UnkFunc4)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0] == 12) {
@@ -821,7 +756,6 @@ ApiStatus N(func_8024240C_C3893C)(Evt* script, s32 isInitialCall) {
 #include "world/common/UnkFunc18.inc.c"
 
 #ifdef NON_EQUIVALENT
-
 typedef struct {
     s32 unk_00[8];
     char unk_20[0x64];
@@ -841,7 +775,6 @@ typedef struct {
     s32 unk_328;
     s16 unk_32C;
 } N(UnkStruct);
-
 
 ApiStatus N(func_8024259C_C38ACC)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
@@ -931,148 +864,7 @@ INCLUDE_ASM(ApiStatus, "world/area_dgb/dgb_04/C36530", dgb_04_func_8024259C_C38A
 
 #include "world/common/UnkFunc22.inc.c"
 
-typedef struct {
-    s32 unk_00;
-    s32 unk_04;
-    EffectGraphics* unk_08[3]; // TODO this is wrong
-    f32 unk_14[3];
-    f32 unk_20[3];
-    f32 unk_2C[3];
-    f32 unk_38[3];
-    f32 unk_44[3];
-    f32 unk_50[3];
-    Entity* unk_5C;
-    s32 unk_60;
-    s32 unk_64;
-} N(UserData);
-
-ApiStatus N(func_802429D0_C38F00)(Evt* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    Npc* npc = get_npc_safe(-4);
-    f32 sinTheta, cosTheta;
-    s32 i;
-    f32 var;
-    N(UserData)* userDataPtr;
-    N(UserData)* scriptPtr;
-    f32 save, save2;
-
-    sin_cos_deg(gCameras[gCurrentCameraID].currentYaw, &sinTheta, &cosTheta);
-
-    if (isInitialCall) {
-        script->userData = (N(UserData)*)general_heap_malloc(0x68);
-        scriptPtr = (N(UserData)*)script->userData;
-
-        scriptPtr->unk_5C = get_entity_by_index(evt_get_variable(script, *args));
-
-        for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-            userDataPtr->unk_08[i] = fx_motion_blur_flame(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
-                                                   scriptPtr->unk_5C->position.z, 1.0f, -1);
-            save = 0.0f;
-            userDataPtr->unk_2C[i] = save;
-            userDataPtr->unk_20[i] = save;
-            userDataPtr->unk_14[i] = save;
-            userDataPtr->unk_50[i] = save;
-            userDataPtr->unk_44[i] = save;
-            userDataPtr->unk_38[i] = save;
-        }
-
-        scriptPtr->unk_00 = 0;
-        scriptPtr->unk_04 = 0;
-        scriptPtr->unk_60 = 0;
-        scriptPtr->unk_64 = 0;
-
-        userDataPtr = scriptPtr;
-        for (i = 0, save = 50.0f; i < 3; i++) {
-            var = 0;
-            add_vec2D_polar(&var, &scriptPtr->unk_44[i], save, *(N(D_80243D88_C3A2B8) + i)); //*(dataPtr++));
-            userDataPtr->unk_38[i] = cosTheta * var;
-            userDataPtr->unk_50[i] = sinTheta * var;
-            userDataPtr->unk_38[i] = npc->pos.x - (scriptPtr->unk_5C->position.x + userDataPtr->unk_38[i]);
-            userDataPtr->unk_44[i] = npc->pos.y - (scriptPtr->unk_5C->position.y + userDataPtr->unk_44[i]);
-            userDataPtr->unk_50[i] = npc->pos.z - (scriptPtr->unk_5C->position.z + userDataPtr->unk_50[i]);
-        }
-    }
-
-    scriptPtr = (N(UserData)*)script->userData;
-    switch (scriptPtr->unk_00) {
-        case 0:
-            save = update_lerp(5, 0.0f, 50.0f, scriptPtr->unk_60, 0x14);
-            save2 = 0.0f;
-            for (i = 0; i < 3; i++) {
-                scriptPtr->unk_20[i] = save2;
-                var = save2;
-                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, *(N(D_80243D88_C3A2B8) + i));
-                scriptPtr->unk_14[i] = cosTheta * var;
-                scriptPtr->unk_2C[i] = sinTheta * var;
-            }
-
-            scriptPtr->unk_60++;
-            if (scriptPtr->unk_60 >= 0x15) {
-                scriptPtr->unk_00 = 1;
-                scriptPtr->unk_60 = 0;
-            }
-            break;
-
-        case 1:
-            save = 50.0f;
-            save2 = 0.0f;
-            for (i = 0; i < 3; i++) {
-                scriptPtr->unk_20[i] = save2;
-                var = save2;
-                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, *(N(D_80243D88_C3A2B8) + i));
-                scriptPtr->unk_14[i] = cosTheta * var;
-                scriptPtr->unk_2C[i] = sinTheta * var;
-            }
-
-            scriptPtr->unk_60++;
-            if (scriptPtr->unk_60 >= 0x10) {
-                scriptPtr->unk_60 = 0xF;
-                scriptPtr->unk_00 = 2;
-            }
-            break;
-
-        case 2:
-            scriptPtr->unk_60++;
-            if (scriptPtr->unk_60 >= 0x1F) {
-                for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-                    userDataPtr->unk_08[i]->flags |= 0x10;
-                }
-                return ApiStatus_DONE2;
-            }
-    }
-
-    switch (scriptPtr->unk_04) {
-        case 0:
-            scriptPtr->unk_64++;
-            if (scriptPtr->unk_64 >= 0x10) {
-                scriptPtr->unk_04 = 1;
-                scriptPtr->unk_64 = 0;
-            }
-            break;
-
-        case 1:
-            for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-                userDataPtr->unk_14[i] = userDataPtr->unk_14[i] + update_lerp(1, 0.0f, userDataPtr->unk_38[i], scriptPtr->unk_64, 0x14);
-                userDataPtr->unk_20[i] = userDataPtr->unk_20[i] + update_lerp(1, 0.0f, userDataPtr->unk_44[i], scriptPtr->unk_64, 0x14);
-                userDataPtr->unk_2C[i] = userDataPtr->unk_2C[i] + update_lerp(1, 0.0f, userDataPtr->unk_50[i], scriptPtr->unk_64, 0x14);
-            }
-
-            scriptPtr->unk_64++;
-            if (scriptPtr->unk_64 >= 0x15) {
-                scriptPtr->unk_04 = 2;
-                scriptPtr->unk_64 = 0;
-            }
-            break;
-    }
-
-    for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-        ((EffectInstanceData*)userDataPtr->unk_08[i]->freeDelay)->rotation.x = userDataPtr->unk_14[i];
-        ((EffectInstanceData*)userDataPtr->unk_08[i]->freeDelay)->rotation.y = userDataPtr->unk_20[i];
-        ((EffectInstanceData*)userDataPtr->unk_08[i]->freeDelay)->rotation.z = userDataPtr->unk_2C[i];
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "world/common/UnkFunc60.inc.c"
 
 s32 N(func_80242F08_C39438)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

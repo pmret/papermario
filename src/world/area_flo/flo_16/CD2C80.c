@@ -8,7 +8,7 @@ enum {
     NPC_TUFF_PUFF1,
 };
 
-f32 N(D_80244010_CD5E40)[] = {
+f32 N(sixFloats)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
     1.5f, 20.0f,
 };
@@ -31,7 +31,7 @@ EvtScript N(npcAI_80244058) = {
     EVT_CALL(SetSelfVar, 5, 0)
     EVT_CALL(SetSelfVar, 6, 0)
     EVT_CALL(SetSelfVar, 1, 600)
-    EVT_CALL(N(func_80242754_CD4584), EVT_PTR(N(npcAISettings_80244028)))
+    EVT_CALL(N(UnkNpcAIMainFunc10), EVT_PTR(N(npcAISettings_80244028)))
     EVT_RETURN
     EVT_END
 };
@@ -357,21 +357,13 @@ EvtScript N(802451C4) = {
 
 #include "world/common/UnkNpcAIFunc35.inc.c"
 
-#include "world/common/UnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1_copy.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-void N(func_80241AA4_CD38D4)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->pos.y += N(D_80244010_CD5E40)[npc->duration++];
-    if (npc->duration >= 5) {
-        script->functionTemp[0] = 12;
-    }
-}
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -381,65 +373,7 @@ void N(func_80241AA4_CD38D4)(Evt* script, NpcAISettings* aiSettings, EnemyTerrit
 
 #include "world/common/UnkFunc5.inc.c"
 
-ApiStatus N(func_8024215C_CD3F8C)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Bytecode* args = script->ptrReadPos;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings =(NpcAISettings*) evt_get_variable(script, *args);
-
-    territory.unk_00 = 0;
-    territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 120.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall) {
-        N(UnkFunc5)(npc, enemy, script, aiSettings);
-    }
-
-    npc->unk_AB = -2;
-
-    if (enemy->unk_B0 & 4) {
-        if (enemy->unk_B4 != 0) {
-            return ApiStatus_BLOCK;
-        }
-        enemy->unk_B0 &= ~4;
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
-        case 1:
-            N(UnkNpcAIFunc35)(script, aiSettings, territoryPtr);
-            break;
-        case 2:
-            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
-        case 3:
-            N(UnkFunc4)(script, aiSettings, territoryPtr);
-            break;
-        case 10:
-            N(UnkNpcAIFunc2)(script, aiSettings, territoryPtr);
-        case 11:
-            N(func_80241AA4_CD38D4)(script, aiSettings, territoryPtr);
-            break;
-        case 12:
-            N(UnkNpcAIFunc14)(script, aiSettings, territoryPtr);
-            break;
-        case 13:
-            N(UnkNpcAIFunc3)(script, aiSettings, territoryPtr);
-            break;
-        case 14:
-            N(UnkFunc6)(script, aiSettings, territoryPtr);
-            break;
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "world/common/UnkNpcAIMainFunc9.inc.c"
 
 #include "world/common/UnkNpcAIFunc13.inc.c"
 
@@ -447,61 +381,4 @@ ApiStatus N(func_8024215C_CD3F8C)(Evt* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc45.inc.c"
 
-ApiStatus N(func_80242754_CD4584)(Evt* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Bytecode* args = script->ptrReadPos;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings =(NpcAISettings*) evt_get_variable(script, *args);
-
-    territory.unk_00 = 0;
-    territory.shape = enemy->territory->wander.detectShape;
-    territory.pointX = enemy->territory->wander.detect.x;
-    territory.pointZ = enemy->territory->wander.detect.z;
-    territory.sizeX = enemy->territory->wander.detectSizeX;
-    territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_18 = 120.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall) {
-        N(UnkFunc5)(npc, enemy, script, aiSettings);
-        script->functionTemp[0] = 0;
-    }
-    npc->unk_AB = -2;
-
-    if (enemy->unk_B0 & 4) {
-        if (enemy->unk_B4) {
-            return ApiStatus_BLOCK;
-        }
-        enemy->unk_B0 &= ~4;
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
-        case 1:
-            N(UnkNpcAIFunc35)(script, aiSettings, territoryPtr);
-            break;
-        case 2:
-            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
-        case 3:
-            N(UnkFunc4)(script, aiSettings, territoryPtr);
-            break;
-        case 10:
-            N(UnkNpcAIFunc2)(script, aiSettings, territoryPtr);
-        case 11:
-            N(func_80241AA4_CD38D4)(script, aiSettings, territoryPtr);
-            break;
-        case 12:
-            N(UnkNpcAIFunc13)(script, aiSettings, territoryPtr);
-        case 13:
-            N(UnkNpcAIFunc34)(script, aiSettings, territoryPtr);
-            break;
-        case 20:
-            N(UnkFunc45)(script, aiSettings, territoryPtr);
-            break;
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "world/common/UnkNpcAIMainFunc10.inc.c"

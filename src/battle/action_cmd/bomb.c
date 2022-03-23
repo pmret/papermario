@@ -3,9 +3,9 @@
 
 #define NAMESPACE action_command_bomb
 
-extern HudScript HudScript_BlueMeter;
-extern HudScript HudScript_AButton;
-extern HudScript HudScript_100pct;
+extern HudScript HudScript_BlueMeter[];
+extern HudScript HudScript_AButton[];
+extern HudScript HudScript_100pct[];
 extern s32 D_80294300;
 
 extern HudScript HudScript_MashAButton;
@@ -57,19 +57,19 @@ ApiStatus func_802A9000_427A70(Evt* script, s32 isInitialCall) {
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, 0x82);
+    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = create_hud_element(HudScript_BlueMeter);
     actionCommandStatus->hudElements[1] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, 0x82);
+    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     hudElement = create_hud_element(HudScript_100pct);
     actionCommandStatus->hudElements[2] = hudElement;
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
-    set_hud_element_flags(hudElement, 0x82);
+    set_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
 
     return ApiStatus_DONE2;
 }
@@ -88,13 +88,13 @@ void func_802A928C_427CFC(void) {
             hudElement = actionCommandStatus->hudElements[0];
             set_hud_element_alpha(hudElement, 255);
             if (actionCommandStatus->unk_61) {
-                clear_hud_element_flags(hudElement, 0x2);
+                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             hudElement = actionCommandStatus->hudElements[1];
             set_hud_element_alpha(hudElement, 255);
             if (actionCommandStatus->unk_61) {
-                clear_hud_element_flags(hudElement, 0x2);
+                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             actionCommandStatus->state = 1;
@@ -163,7 +163,7 @@ void func_802A928C_427CFC(void) {
                 actionCommandStatus->unk_68 = TRUE;
                 set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 50,
                     actionCommandStatus->hudElementY + 28);
-                clear_hud_element_flags(hudElement, 0x2);
+                clear_hud_element_flags(hudElement, HUD_ELEMENT_FLAGS_DISABLED);
             }
 
             battleStatus->unk_84 = actionCommandStatus->barFillLevel / 100;

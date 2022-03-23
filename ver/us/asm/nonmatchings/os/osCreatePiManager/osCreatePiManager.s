@@ -31,7 +31,7 @@ glabel osCreatePiManager
 /* 3BE48 80060A48 8C423D90 */  lw        $v0, %lo(__osPiAccessQueueEnabled)($v0)
 /* 3BE4C 80060A4C 54400004 */  bnel      $v0, $zero, .L80060A60
 /* 3BE50 80060A50 24040008 */   addiu    $a0, $zero, 8
-/* 3BE54 80060A54 0C018514 */  jal       osPiCreateAccessQueue
+/* 3BE54 80060A54 0C018514 */  jal       __osPiCreateAccessQueue
 /* 3BE58 80060A58 00000000 */   nop
 /* 3BE5C 80060A5C 24040008 */  addiu     $a0, $zero, 8
 .L80060A60:
@@ -61,8 +61,8 @@ glabel osCreatePiManager
 /* 3BEB8 80060AB8 24C61090 */  addiu     $a2, $a2, %lo(__osDevMgrMain)
 /* 3BEBC 80060ABC 24030001 */  addiu     $v1, $zero, 1
 /* 3BEC0 80060AC0 AE830000 */  sw        $v1, ($s4)
-/* 3BEC4 80060AC4 3C03800B */  lui       $v1, %hi(gOsPiMessageQueue)
-/* 3BEC8 80060AC8 24634380 */  addiu     $v1, $v1, %lo(gOsPiMessageQueue)
+/* 3BEC4 80060AC4 3C03800B */  lui       $v1, %hi(__osPiAccessQueue)
+/* 3BEC8 80060AC8 24634380 */  addiu     $v1, $v1, %lo(__osPiAccessQueue)
 /* 3BECC 80060ACC 3C018009 */  lui       $at, %hi(__osPiDevMgr+0x10)
 /* 3BED0 80060AD0 AC233D60 */  sw        $v1, %lo(__osPiDevMgr+0x10)($at)
 /* 3BED4 80060AD4 3C038007 */  lui       $v1, %hi(__osPiRawStartDma)

@@ -13,14 +13,14 @@ static char* N(exit_str_7) = "";
 
 #include "common/SetAngleClamped.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEEEA0", func_802400E4_DEEF84);
+#include "common/CompareFloats.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEEEA0", func_80240168_DEF008);
+#include "common/UnkBufferFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEEEA0", func_802401EC_DEF08C);
+#include "common/SetPlayerStatusPosYaw.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEEEA0", func_80240290_DEF130);
+#include "common/SetNpcPosYaw.inc.c"
 
 #include "common/UnkFloatFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEEEA0", func_80240518_DEF3B8);
+#include "common/IsAOrBPressed.inc.c"

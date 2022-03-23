@@ -9,8 +9,6 @@ extern s32 gSpeakingActorIdleAnim;
 extern Actor* gSpeakingActor;
 extern ActorPart* gSpeakingActorPart;
 
-void msg_printer_set_origin_pos(MessagePrintState* printer, s32 x, s32 y);
-
 ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor;
@@ -264,7 +262,7 @@ ApiStatus func_802537C0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a0 = *args++;
     s32 a1 = *args++;
-    f32 t1;
+    u8 t1;
     f32 t2;
     s32 t3;
 

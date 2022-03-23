@@ -32,7 +32,7 @@ INCLUDE_ASM(s32, "EED1E0", func_802402AC_EED3AC);
 
 #include "world/common/UnkFunc22.inc.c"
 
-INCLUDE_ASM(s32, "EED1E0", func_802406E0_EED7E0);
+#include "world/common/UnkFunc60.inc.c"
 
 #include "world/common/UnkFunc23.inc.c"
 

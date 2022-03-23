@@ -100,7 +100,26 @@ INCLUDE_ASM(s32, "17D6A0", func_8024F5AC);
 
 INCLUDE_ASM(s32, "17D6A0", func_8024F768);
 
-INCLUDE_ASM(s32, "17D6A0", func_8024F7C8);
+void func_8024F7C8(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
+        PopupMessage* popup = &popupMessages[i];
+
+        if (popup->active && (popup->active & 0x10)) {
+            Message* message = popup->message;
+            s32 j;
+
+            for (j = 0; j < popup->messageIndex; j++, message++) {
+                if (message->unk_00 != 0) {
+                    message->unk_24 = 0;
+                    message->unk_20 = 1;
+                    message->unk_44 = 20;
+                }
+            }
+        }
+    }
+}
 
 ApiStatus func_8024F84C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -255,4 +274,26 @@ ApiStatus func_80251454(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "17D6A0", func_80251474);
+void func_80251474(Actor* actor) {
+    ActorPart* part = actor->partsTable;
+
+    while (part != NULL) {
+        if (!(part->flags & ACTOR_PART_FLAG_INVISIBLE) &&
+            part->idleAnimations != NULL &&
+            !(part->flags & ACTOR_PART_FLAG_40000000))
+        {
+            f32 x = part->currentPos.x;
+            f32 y = part->currentPos.y + (actor->size.y / 10);
+            f32 z = part->currentPos.z;
+            s32 f1 = (part->size.x + (part->size.x / 4)) * actor->scalingFactor;
+            s32 f2 = (part->size.y - 2) * actor->scalingFactor;
+
+            if (actor->flags & 0x8000) {
+                y -= actor->size.y / 2;
+            }
+
+            fx_flashing_box_shockwave(0, x, y, z, f1, f2);
+        }
+        part = part->nextPart;
+    }
+}

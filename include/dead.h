@@ -26,6 +26,7 @@
 #define dist2D dead_dist2D
 #define sin_deg dead_sin_deg
 #define cos_deg dead_cos_deg
+#define sin_cos_deg dead_sin_cos_deg
 #define gPlayerStatus dead_gPlayerStatus
 #define gPlayerActionState dead_gPlayerActionState
 #define is_point_within_region dead_is_point_within_region
@@ -48,6 +49,7 @@
 #define sfx_adjust_env_sound_pos dead_sfx_adjust_env_sound_pos
 #define fx_star_spirits_energy dead_fx_star_spirits_energy
 #define heap_malloc dead_heap_malloc
+#define general_heap_malloc dead_general_heap_malloc
 #define update_lerp dead_update_lerp
 #define create_shadow_type dead_create_shadow_type
 #define fx_spirit_card dead_fx_spirit_card
@@ -99,5 +101,6 @@
 #define func_8004A124 func_8004E544
 #define func_8004A3E8 func_8004E808
 #define gCurrentEncounter dead_gCurrentEncounter
+#define fx_motion_blur_flame dead_fx_motion_blur_flame
 
 #endif

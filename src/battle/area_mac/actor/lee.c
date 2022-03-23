@@ -754,8 +754,8 @@ EvtScript N(8021F5F8) = {
 ApiStatus func_80218100_464590(Evt*, s32);
 INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80218100_464590);
 
-ApiStatus func_80218300_464790(Evt*, s32);
-INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80218300_464790);
+
+#include "world/common/UnkFunc62.inc.c"
 
 #include "common/ActorJumpToPos.inc.c"
 
@@ -784,7 +784,7 @@ EvtScript N(8021F6E0) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 0, 5)
     EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
-    EVT_CALL(func_80218300_464790, LW(10), 0)
+    EVT_CALL(N(UnkFunc62), LW(10), 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LW(0), 0, 0, 1, 16)
     EVT_SWITCH(LW(0))
         EVT_CASE_OR_EQ(6)
@@ -843,7 +843,7 @@ EvtScript N(8021F6E0) = {
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
-            EVT_CALL(func_80218300_464790, LW(10), 3)
+            EVT_CALL(N(UnkFunc62), LW(10), 3)
         EVT_CASE_EQ(1)
             EVT_THREAD
                 EVT_WAIT_FRAMES(4)
@@ -857,7 +857,7 @@ EvtScript N(8021F6E0) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(EnableActorBlur, -127, 1)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
-            EVT_CALL(func_80218300_464790, LW(10), 3)
+            EVT_CALL(N(UnkFunc62), LW(10), 3)
             EVT_CALL(EnableActorBlur, -127, 0)
         EVT_CASE_EQ(2)
             EVT_THREAD
@@ -881,7 +881,7 @@ EvtScript N(8021F6E0) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(EnableActorBlur, -127, 1)
             EVT_CALL(SetJumpAnimations, ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk, NPC_ANIM_battle_goombario_default_headbonk)
-            EVT_CALL(func_80218300_464790, LW(10), 3)
+            EVT_CALL(N(UnkFunc62), LW(10), 3)
             EVT_CALL(EnableActorBlur, -127, 0)
     EVT_END_SWITCH
     EVT_CHILD_THREAD
@@ -1968,7 +1968,7 @@ ActorPartBlueprint N(partsTable_8022348C)[] = {
 
 extern EvtScript N(init_Parakarry);
 
-ActorBlueprint N(parakerry) = {
+ActorBlueprint N(parakarry) = {
     .flags = ACTOR_FLAG_FLYING,
     .type = ACTOR_TYPE_LEE_PARAKARRY,
     .level = 0,
@@ -2254,8 +2254,8 @@ EvtScript N(nextTurn_80224320) = {
     EVT_END
 };
 
-Formation N(formation_parakerry) = {
-    { .actor = &N(parakerry), .home = { .vec = &N(vector3D_8021E940) }}
+Formation N(formation_parakarry) = {
+    { .actor = &N(parakarry), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
 s32 N(idleAnimations_80224410)[] = {
@@ -3984,8 +3984,41 @@ ApiStatus func_802197B8_465C48(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80219824_465CB4(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/area_mac/actor/lee", func_80219824_465CB4);
+ApiStatus func_80219824_465CB4(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 partnerID = evt_get_variable(script, *args++);
+    Actor* actor = get_actor(script->owner1.enemyID);
+    FormationRow* formation = NULL;
+
+    switch (partnerID) {
+        case PARTNER_GOOMBARIO:
+            formation = N(formation_goombario);
+            break;
+        case PARTNER_KOOPER:
+            formation = N(formation_kooper);
+            break;
+        case PARTNER_BOMBETTE:
+            formation = N(formation_bombette);
+            break;
+        case PARTNER_PARAKARRY:
+            formation = N(formation_parakarry);
+            break;
+        case PARTNER_BOW:
+            formation = N(formation_bow);
+            break;
+        case PARTNER_WATT:
+            formation = N(formation_watt);
+            break;
+        case PARTNER_SUSHIE:
+            formation = N(formation_sushie);
+            break;
+        case PARTNER_LAKILESTER:
+            formation = N(formation_lakilester);
+            break;
+    }
+    formation->priority = actor->turnPriority + 10;
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(copyPartner) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -4029,7 +4062,7 @@ EvtScript N(copyPartner) = {
         EVT_CASE_EQ(3)
             EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_bombette)), 0)
         EVT_CASE_EQ(4)
-            EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_parakerry)), 0)
+            EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_parakarry)), 0)
         EVT_CASE_EQ(9)
             EVT_CALL(SummonEnemy, EVT_ADDR(N(formation_bow)), 0)
         EVT_CASE_EQ(6)

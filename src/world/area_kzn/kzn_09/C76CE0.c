@@ -25,7 +25,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_802401CC_C76EAC);
 
 #include "world/common/UnkFunc22.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_80240600_C772E0);
+#include "world/common/UnkFunc60.inc.c"
 
 #include "world/common/UnkFunc23.inc.c"
 

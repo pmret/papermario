@@ -32,7 +32,7 @@ INCLUDE_ASM(s32, "EC9D00", func_802401CC_EC9ECC);
 
 #include "world/common/UnkFunc22.inc.c"
 
-INCLUDE_ASM(s32, "EC9D00", func_80240600_ECA300);
+#include "world/common/UnkFunc60.inc.c"
 
 #include "world/common/UnkFunc23.inc.c"
 

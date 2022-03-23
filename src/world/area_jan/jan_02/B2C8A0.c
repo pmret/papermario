@@ -24,7 +24,7 @@
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80240FC4_B2D434);
+#include "world/common/UnkNpcAIMainFunc.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

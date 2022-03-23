@@ -17,10 +17,15 @@ void nuBoot(void);
 void boot_idle(void);
 void boot_main(void);
 
+void is_debug_init(void);
+
 f32 signF(f32 val);
+
+void func_8002D160(void);
 
 void* heap_malloc(s32 size);
 void* _heap_malloc(HeapNode* head, u32 size);
+void* _heap_malloc_tail(HeapNode* head, u32 size);
 u32 _heap_free(HeapNode* heapNodeList, void* addrToFree);
 void* _heap_realloc(HeapNode* heapNodeList, void* addr, u32 newSize);
 HeapNode* _heap_create(HeapNode* addr, u32 size);
@@ -84,15 +89,21 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
 void replace_window_update(s32 idx, s8 arg1, WindowUpdateFunc pendingFunc);
 void decode_yay0(void* src, void* dst);
 
+s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3);
+
 //pause
 void pause_init(void);
 void pause_handle_input(s32 buttonsPressed, s32 buttonsHeld);
 void pause_cleanup(void);
 
 // file menu stuff
+void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row);
+void filemenu_set_cursor_alpha(s32 arg0);
 void filemenu_set_cursor_goal_pos(s32 windowIndex, s32 posX, s32 posY);
-s8* filemenu_get_menu_message(s32 idx);
-void filemenu_draw_message(s8*, s32 posX, s32 posY, s32 alpha, s32 color, s32 flags);
+Message* filemenu_get_menu_message(s32 idx);
+void filemenu_draw_message(Message*, s32 posX, s32 posY, s32 alpha, s32 color, s32 flags);
+
+void gfx_task_background(void);
 
 void update_enemy_shadows(void);
 void update_hero_shadows(void);
@@ -161,6 +172,7 @@ s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 
 // Text
 MessagePrintState* msg_get_printer_for_msg(s32 msgID, s32* a1);
+void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s32 x, s32 y);
 
 void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
@@ -188,13 +200,15 @@ s32 disable_player_input(void);
 void func_80027088(s32);
 void set_time_freeze_mode(s32);
 
+
+
 s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID);
 
 void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
-void phys_adjust_cam_on_landing(void);
+s32 phys_adjust_cam_on_landing(void);
 void phys_init_integrator_for_current_state(void);
 void phys_player_land(void);
 void phys_main_collision_below(void);
@@ -306,6 +320,7 @@ void btl_state_update_player_move(void);
 void btl_state_draw_player_move(void);
 void btl_state_update_end_player_turn(void);
 void btl_state_update_partner_move(void);
+void btl_state_draw_end_player_turn(void);
 void btl_state_draw_partner_move(void);
 void btl_state_update_end_partner_turn(void);
 void btl_state_draw_end_partner_turn(void);
@@ -340,6 +355,7 @@ void btl_draw_upgrade_windows(s32);
 void btl_state_draw_celebration(void);
 
 void func_8024F7C8(void);
+void func_80263E08(Actor*, ActorPart*, s32);
 void func_80266978(void);
 void func_80266B14(void);
 s32 func_8024E584(void);
@@ -493,6 +509,7 @@ Evt* get_script_by_index(s32 index);
 
 s32 get_lava_reset_pos(f32* x, f32* y, f32* z);
 void start_rumble(s32, s32);
+void start_rumble_type(u32);
 void start_falling(void);
 
 void set_action_state(s32 actionState);
@@ -500,6 +517,7 @@ s32 get_collider_type_by_id(s32 colliderID);
 void suggest_player_anim_setUnkFlag(s32 arg0);
 void suggest_player_anim_clearUnkFlag(s32 arg0);
 void subtract_hp(s32 amt);
+void draw_status_ui(void);
 void open_status_menu_long(void);
 
 void suspend_all_group(s32 groupFlags);
@@ -519,6 +537,7 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
 void func_80138D88(s32, s32, s32, s32, f32);
 void func_8013A4D0(void);
 
+void btl_draw_popup_messages(void);
 void btl_cam_set_target_pos(f32, f32, f32);
 void btl_cam_unfreeze(void);
 
@@ -531,6 +550,7 @@ s32 btl_check_player_defeated(void);
 void btl_show_battle_message(s32, s32);
 void btl_update_ko_status(void);
 void reset_actor_turn_info(void);
+void btl_draw_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 arg6, u16 arg7);
 void reset_all_actor_sounds(Actor*);
 void decrement_status_menu_disabled(void);
 void increment_status_menu_disabled(void);
@@ -609,7 +629,10 @@ void state_step_demo(void);
 void state_drawUI_demo(void);
 void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void));
 
+void func_802B2000(void);
+void func_802B203C(void);
 void func_802B2078(void);
+void func_802B20B4(void);
 
 void initialize_curtains(void);
 void update_curtains(void);
@@ -695,7 +718,8 @@ void func_800EF300(void);
 void enable_player_shadow(void);
 s32 get_msg_lines(s32 messageID);
 void set_window_properties(s32 panelID, s32 posX, s32 posY, s32 width, s32 height, u8, void* drawContents, void* drawContentsArg, s8 parent);
-void set_window_update(s32 panelID, WindowUpdateFunc);
+void set_window_update(s32 panelID, s32);
+void set_windows_visible(s32 groupIdx);
 void snd_stop_sound(s32 soundID);
 void snd_start_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, u8 pan, s16 pitchShift);
@@ -717,6 +741,7 @@ void draw_entity_model_E(s32, Mtx*);
 void draw_entity_model_A(s32, Mtx*);
 void free_entity_model_by_index(s32 idx);
 void func_8024E40C(s32);
+void func_8024E484(s16, s16, s16, s16, s32, s32, s32, s32);
 void btl_cam_set_zoffset(s16);
 void btl_cam_target_actor(s32);
 void btl_cam_set_zoom(s16);
@@ -759,6 +784,7 @@ void func_800E96C8(void);
 void hide_popup_menu(void);
 void destroy_popup_menu(void);
 void func_800E98C4(void);
+void func_800F0D5C(void);
 s32 get_item_count(void);
 s32 get_stored_empty_count(void);
 s32 get_stored_count(void);
@@ -838,6 +864,7 @@ void func_80266AF8(Actor*);
 void func_80266E14(ActorPart*);
 void func_80268770(s32, s32, s32);
 void func_80268C9C(void);
+void func_80268E88(void);
 s32 check_block_input(s32 buttonMask);
 void func_802B6CF0_E2B3A0(void);
 void func_80269160(void);
@@ -876,5 +903,7 @@ void clear_script_list(void);
 void clear_entity_data(s32);
 void clear_effect_data(void);
 void clear_area_flags(void);
+
+void update_locomotion_state(void);
 
 #endif

@@ -386,7 +386,7 @@ void pause_map_init(MenuPanel* tab) {
 
     for (i = 0; i < ARRAY_COUNT(gPauseMapIconScripts); i++) {
         gPauseMapIconIDs[i] = create_hud_element(gPauseMapIconScripts[i]);
-        set_hud_element_flags(gPauseMapIconIDs[i], 0x80);
+        set_hud_element_flags(gPauseMapIconIDs[i], HUD_ELEMENT_FLAGS_80);
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseMapWindowBPs); i++) {

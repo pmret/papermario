@@ -2,14 +2,6 @@
 #include "filemenu.h"
 #include "hud_element.h"
 
-extern s32 D_80241ECC;
-extern MenuPanel D_8024A098;
-extern MenuPanel D_8024A114;
-extern MenuPanel D_8024A158;
-extern MenuPanel D_8024A1D8;
-extern s32 D_8024BA60;
-extern s32 D_8024BA98;
-
 void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void filemenu_draw_contents_copy_arrow(
     MenuPanel* menu,
@@ -17,6 +9,14 @@ void filemenu_draw_contents_copy_arrow(
     s32 width, s32 height,
     s32 opacity, s32 darkening
 );
+
+extern s32 D_80241ECC;
+extern MenuPanel D_8024A098;
+extern MenuPanel D_8024A114;
+extern MenuPanel D_8024A158;
+extern MenuPanel D_8024A1D8;
+extern s32 D_8024BA60;
+extern s32 D_8024BA98;
 
 s32* D_80249B80[] = { &D_80241ECC };
 MenuPanel* filemenu_menus[4] = { &D_8024A098, &D_8024A114, &D_8024A158, &D_8024A1D8 };
@@ -42,8 +42,8 @@ s16 D_80249CB8[10] = { -2, -8, -18, -30, -42, -55, -70, -85, -100, -115 };
 s16 D_80249CCC[10] = { -1, -3, -7, -12, -17, -22, -27, -32, -37, -42 };
 s16 D_80249CE0[10] = { -1, -3, -7, -12, -17, -22, -27, -32, -37, -42 };
 s16 D_80249CF4[16] = { 180, 173, 161, 148, 134, 120, 105, 91, 77, 62, 48, 34, 21, 9, 2, 0 };
-s16 D_80249D14[] = { 0, 2, 9, 21, 34, 48, 62, 77, 91, 105, 120, 134, 148, 161, 173, 180 };
-s16 D_80249D34[] = { 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
+s16 D_80249D14[16] = { 0, 2, 9, 21, 34, 48, 62, 77, 91, 105, 120, 134, 148, 161, 173, 180 };
+s16 D_80249D34[10] = { 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
 s16 D_80249D48[10] = { 0, 5, 17, 37, 60, 85, 110, 135, 160, 185};
 s32 D_80249D4C = 0; // padding?
 s32 D_80249D60[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
@@ -61,11 +61,15 @@ BSS s32 filemenu_8024C088;
 BSS s32 filemenu_heldButtons;
 BSS s32 filemenu_8024C090;
 BSS s32 filemenu_loadedFileIdx;
-BSS s32 filemenu_8024C098[2];
+BSS s8 filemenu_8024C098;
+BSS s32 filemenu_8024C09C;
 BSS s32 filemenu_cursorHudElemID[1];
 BSS s32 filemenu_8024C0A4[3];
 BSS s32 filemenu_hudElemIDs[20];
-BSS s32 filemenu_8024C100[8];
+BSS s32 filemenu_8024C100[4];
+BSS u8 filemenu_8024C110[8];
+
+s32 func_80244BC4(void);
 
 INCLUDE_ASM(s32, "163400", mainmenu_draw_rect);
 
@@ -179,7 +183,53 @@ void filemenu_update_cursor(void) {
     filemenu_cursorGoalAlpha2 = 0xFF;
 }
 
+// problem with second loop declaration
+#ifdef NON_MATCHING
+void filemenu_update(void) {
+    MenuPanel* menu = filemenu_menus[filemenu_8024C098];
+    s32 i;
+
+    for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
+        if ((gWindows[i].parent == -1 || gWindows[i].parent == 0x2C) &&
+            (gWindows[i].flags & WINDOW_FLAGS_INITIAL_ANIMATION))
+        {
+            break;
+        }
+    }
+
+    if (i >= ARRAY_COUNT(gWindows)) {
+        filemenu_heldButtons = gGameStatusPtr->heldButtons;
+        filemenu_pressedButtons = gGameStatusPtr->pressedButtons;
+    } else {
+        filemenu_heldButtons = 0;
+        filemenu_pressedButtons = 0;
+    }
+
+    if (filemenu_pressedButtons & BUTTON_B) {
+        filemenu_pressedButtons &= ~BUTTON_A;
+    }
+    if (filemenu_heldButtons & BUTTON_B) {
+        filemenu_heldButtons &= ~BUTTON_A;
+    }
+
+    if (menu->initialized) {
+        if (menu->fpHandleInput != NULL) {
+            menu->fpHandleInput(menu);
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
+        menu = filemenu_menus[i];
+        if (menu->initialized) {
+            if (menu->fpUpdate != NULL) {
+                menu->fpUpdate(menu);
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "163400", filemenu_update);
+#endif
 
 void func_8024330C(
     s32 windowIdx,
@@ -498,11 +548,98 @@ void filemenu_update_hidden_with_rotation(
     }
 }
 
-INCLUDE_ASM(s32, "163400", filemenu_update_select_file);
+void filemenu_update_select_file(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
+    Window* window = &gWindows[windowIdx];
+    Window* parent = &gWindows[window->parent];
+    s32 updateCounter = window->updateCounter;
+    f32 temp_f4 = updateCounter / 16.0f;
+    s32 widthDelta = (parent->width / 2) - (window->width / 2);
+    s32 heightDelta = (parent->height / 2) - (window->height / 2) - 34;
 
-INCLUDE_ASM(s32, "163400", filemenu_update_deselect_file);
+    if (updateCounter < 16) {
+        *posX += -window->pos.x + (((f32) (widthDelta - window->pos.x) * temp_f4) + window->pos.x);
+        *posY += -window->pos.y + (((f32) (heightDelta - window->pos.y) * temp_f4) + window->pos.y);
+    } else {
+        *posX += -window->pos.x + ((f32) (widthDelta - window->pos.x) + window->pos.x);
+        *posY += -window->pos.y + ((f32) (heightDelta - window->pos.y) + window->pos.y);
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+    }
+}
 
-INCLUDE_ASM(s32, "163400", filemenu_update_show_name_confirm);
+void filemenu_update_deselect_file(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
+    Window* window = &gWindows[windowIdx];
+    s32 updateCounter = window->updateCounter;
+    f32 temp_f4 = 1.0f - (updateCounter / 16.0f);
+
+    if (updateCounter < 16) {
+        *posX += -window->pos.x + (((80 - window->pos.x) * temp_f4) + window->pos.x);
+        *posY += -window->pos.y + (((36 - window->pos.y) * temp_f4) + window->pos.y);
+    } else {
+        *posX += -window->pos.x + ((80 - window->pos.x) * 0.0f + window->pos.x);
+        *posY += -window->pos.y + ((36 - window->pos.y) * 0.0f + window->pos.y);
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+    }
+}
+
+void filemenu_update_show_name_confirm(
+    s32 windowIdx,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
+    Window* window = &gWindows[windowIdx];
+    s32 updateCounter = window->updateCounter;
+    s32 temp_s1;
+    s32 temp_s2;
+    s32 temp_s3;
+    u32 temp_v1;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+    gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+    gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, 140);
+
+    if (updateCounter < 10) {
+        temp_s2 = updateCounter * 48;
+        temp_s3 = updateCounter * 12;
+        mainmenu_draw_rect(0, 0, 1280, temp_s2, 0, 0, 0, 0, 0);
+        temp_s1 = (SCREEN_HEIGHT - temp_s3) * 4;
+        mainmenu_draw_rect(0, temp_s1, 1280, 960, 0, 0, 0, 0, 0);
+        mainmenu_draw_rect(0, temp_s2, updateCounter * 64, temp_s1, 0, 0, 0, 0, 0);
+        mainmenu_draw_rect((SCREEN_WIDTH - (updateCounter * 16)) * 4, temp_s2, 1280, temp_s1, 0, 0, 0, 0, 0);
+    } else {
+        mainmenu_draw_rect(0, 0, 1280, 960, 0, 0, 0, 0, 0);
+    }
+
+    temp_v1 = updateCounter - 10;
+    if (temp_v1 < 10) {
+        window->flags &= ~WINDOW_FLAGS_HIDDEN;
+        *posY -= D_80249D34[temp_v1];
+    }
+    if (updateCounter >= 20) {
+        window->flags &= ~WINDOW_FLAGS_INITIAL_ANIMATION;
+    }
+}
 
 void filemenu_update_hidden_name_confirm(
     s32 windowIdx,
@@ -559,13 +696,12 @@ void filemenu_cleanup(void) {
     }
 
     panelIt = filemenu_menus;
-    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
+    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, panelIt++) {
         if ((*panelIt)->initialized) {
             if ((*panelIt)->fpCleanup != NULL) {
                 (*panelIt)->fpCleanup(*panelIt);
             }
         }
-        panelIt++;
     }
 
     for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
@@ -577,4 +713,12 @@ void filemenu_cleanup(void) {
     func_80244BC4();
 }
 
-INCLUDE_ASM(s32, "163400", func_80244BC4);
+s32 func_80244BC4() {
+    if (filemenu_menus[0]->page == 0 && filemenu_8024C098 == 1 && filemenu_menus[1]->selected == 0) {
+        return 2;
+    } else if (filemenu_menus[0]->page == 0 && filemenu_menus[0]->selected < 4) {
+        return 1;
+    } else {
+        return 0;
+    }
+}

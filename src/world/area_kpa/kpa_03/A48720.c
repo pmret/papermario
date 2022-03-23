@@ -12,15 +12,15 @@
 
 #include "world/common/AwaitPlayerNearNpc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_80240A48_A49008);
+#include "world/common/UnkNpcAIFunc47.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_80240C18_A491D8);
+#include "world/common/UnkFunc57.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_80241128_A496E8);
+#include "world/common/UnkFunc58.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_8024119C_A4975C);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_802412C8_A49888);
+#include "world/common/UnkFunc59.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_80241368_A49928);
 
@@ -28,7 +28,10 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_802413CC_A4998C);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_8024150C_A49ACC);
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_802416B0_A49C70);
+void func_802416B0_A49C70(Evt* script) {
+    get_npc_unsafe(script->owner1.enemy->npcID)->duration = 40;
+    script->functionTemp[0] = 21;
+}
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_03/A48720", func_802416EC_A49CAC);
 

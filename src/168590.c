@@ -4,20 +4,8 @@
 
 extern MenuWindowBP D_8024A134[1];
 
-extern s32 filemenu_iterFileIdx;
-extern s32 filemenu_pressedButtons;
 extern s8 D_8024C090;
-extern s32 filemenu_loadedFileIdx;
-extern s8 D_8024C098;
 extern s32 D_8024C100_C09980[3];
-extern s32 D_8024C110;
-
-void filemenu_update_show_options_left(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
-                                       f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-void filemenu_update_show_options_right(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
-                                       f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-void filemenu_update_show_options_bottom(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
-                                       f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
 
 void filemenu_info_draw_message_contents(MenuPanel* menu, s32 baseX, s32 baseY) {
     s8 page = menu->page;
@@ -49,15 +37,15 @@ void filemenu_info_draw_message_contents(MenuPanel* menu, s32 baseX, s32 baseY) 
     filemenu_set_cursor_alpha(0);
 }
 
-void filemenu_info_init(s8* tab) {
+void filemenu_info_init(MenuPanel* tab) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_8024A134); i++) {
         D_8024A134[i].tab = tab;
     }
 
-    setup_pause_menu_tab(D_8024A134, 1);
-    *tab = 1;
+    setup_pause_menu_tab(D_8024A134, ARRAY_COUNT(D_8024A134));
+    tab->initialized = TRUE;
 }
 
 void filemenu_info_handle_input(void) {
@@ -65,24 +53,24 @@ void filemenu_info_handle_input(void) {
         MenuPanel* menu = filemenu_menus[0];
         s32 page;
 
-        D_8024C098 = 0;
+        filemenu_8024C098 = 0;
         page = menu->page;
 
         switch(page) {
             case 1:
                 menu->page = 0;
-                set_window_update(0x33, filemenu_update_show_options_left);
-                set_window_update(0x34, filemenu_update_show_options_right);
-                set_window_update(0x35, filemenu_update_show_options_bottom);
-                set_window_update(0x37, filemenu_update_show_options_bottom);
+                set_window_update(0x33, (s32)filemenu_update_show_options_left);
+                set_window_update(0x34, (s32)filemenu_update_show_options_right);
+                set_window_update(0x35, (s32)filemenu_update_show_options_bottom);
+                set_window_update(0x37, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 0, 2);
                 break;
             case 4:
                 menu->page = 0;
-                set_window_update(0x33, filemenu_update_show_options_left);
-                set_window_update(0x34, filemenu_update_show_options_right);
-                set_window_update(0x35, filemenu_update_show_options_bottom);
-                set_window_update(0x37, filemenu_update_show_options_bottom);
+                set_window_update(0x33, (s32)filemenu_update_show_options_left);
+                set_window_update(0x34, (s32)filemenu_update_show_options_right);
+                set_window_update(0x35, (s32)filemenu_update_show_options_bottom);
+                set_window_update(0x37, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 1, 2);
                 break;
             case 2:
@@ -116,7 +104,7 @@ void filemenu_draw_contents_file_create_header(MenuPanel* menu, s32 baseX, s32 b
     s32 tempAmt;
 
     filemenu_draw_message(filemenu_get_menu_message(0x20), baseX + 10, baseY + 6, 255, 0, 0);
-    filemenu_draw_file_name(&D_8024C110, 8, baseX + 36, baseY + 22, 255, 0, 0, 0xB);
+    filemenu_draw_file_name(filemenu_8024C110, 8, baseX + 36, baseY + 22, 255, 0, 0, 0xB);
     xOffset = 41;
 
     for (i = 0; i < 8; i++) {
@@ -129,7 +117,7 @@ void filemenu_draw_contents_file_create_header(MenuPanel* menu, s32 baseX, s32 b
     }
 
     tempAmt = 8;
-    if (D_8024C098 == 3) {
+    if (filemenu_8024C098 == 3) {
         s32 phi_v0 = 122;
 
         if (D_8024C090 != tempAmt) {

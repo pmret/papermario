@@ -32,7 +32,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80240C18_DCD8E8);
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80241AE0_DCE7B0);
+#include "world/common/UnkNpcAIMainFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80241DDC_DCEAAC);
 
@@ -46,25 +46,23 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80241F1C_DCEBEC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80242014_DCECE4);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80242358_DCF028);
+#include "world/common/UnkFunc61.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80242548_DCF218);
+#include "world/common/UnkNpcAIFunc48.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024268C_DCF35C);
+#include "world/common/UnkNpcAIFunc49.inc.c"
 
 #include "world/common/UnkSetDurationFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc9.inc.c"
 
-#include "world/common/UnkDurationCheck.inc.c"
+#include "world/common/UnkDurationCheckNoArgs.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802428B4_DCF584);
+#include "world/common/UnkFunc54.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80242DF0_DCFAC0);
+#include "world/common/UnkFunc55.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024324C_DCFF1C);
-
-static char* N(exit_str_0) = "omo_09";
+#include "world/common/UnkNpcAIMainFunc7.inc.c"
 
 #include "world/common/SetNpcB5_3.inc.c"
 

@@ -536,7 +536,7 @@ typedef struct SleepBubbleFXData {
 } SleepBubbleFXData; // size = 0xCC
 
 typedef struct AuraFXData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 type;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;
@@ -602,6 +602,32 @@ typedef struct FireFlowerFXData {
     /* 0x40 */ Vec3i unk_40;
 } FireFlowerFXData; // size = 0x4C
 
+typedef struct FireBreathFXData {
+    /* 0x00 */ s32 type;
+    /* 0x04 */ s32 numChildren;
+    /* 0x08 */ s32 spawnDelay;
+    /* 0x0C */ Vec3f pos;
+    /* 0x18 */ Vec3f initPos;
+    /* 0x24 */ Vec3f endPos;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ f32 unk_34;
+    /* 0x38 */ f32 scale;
+    /* 0x3C */ f32 scaleChangeFactor;
+    /* 0x40 */ s32 alpha;
+    /* 0x44 */ s32 maxLifetime;
+    /* 0x48 */ s32 lifetime;
+    /* 0x4C */ s32 spawnTimer;
+    /* 0x50 */ Vec3f unk_50;
+    /* 0x5C */ f32 unk_5C;
+    /* 0x60 */ f32 unk_60;
+    /* 0x64 */ s32 primR;
+    /* 0x68 */ s32 primG;
+    /* 0x6C */ s32 primB;
+    /* 0x70 */ s32 envR;
+    /* 0x74 */ s32 envG;
+    /* 0x78 */ s32 envB;
+} FireBreathFXData; // size = 0x7C
+
 // TODO figure out what this actually is
 // fx_quizmo_stage invokes gEffectTable[78]'s entryPoint function
 // fx_cold_breath invokes gEffectTable[111]'s entryPoint function
@@ -653,7 +679,7 @@ typedef struct EffectInstance {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 numParts;
-    /* 0x0C */ void* data; // often but not always EffectInstanceData
+    /* 0x0C */ void* data;
     /* 0x10 */ struct EffectGraphics* graphics;
 } EffectInstance; // size = 0x14
 
@@ -734,6 +760,12 @@ typedef struct Effect6FInstance {
     /* 0x10 */ struct EffectGraphics* effect;
 } Effect6FInstance;
 
+enum FireBreathType {
+    FIRE_BREATH_LARGE = 0,
+    FIRE_BREATH_SMALL = 1,
+    FIRE_BREATH_TINY  = 2,
+};
+
 EffectInstance* create_effect_instance(EffectBlueprint* effectBp);
 void remove_effect(EffectInstance*);
 s32 load_effect(s32 effectIndex);
@@ -799,7 +831,7 @@ void fx_3D(s32, f32, f32, f32, f32, f32, f32, s32, s32*);
 EffectInstance* fx_blast(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_fire_flower(s32, f32, f32, f32, s32);
 EffectInstance* fx_recover(s32, f32, f32, f32, s32);
-struct HudElement* fx_disable_x(s32, f32, f32, f32, s32);
+EffectInstance* fx_disable_x(s32, f32, f32, f32, s32);
 EffectInstance* fx_bombette_breaking(s32, s32, s32, f32, s32, s32);
 EffectInstance* fx_firework(s32, f32, f32, f32, f32, s32);
 EffectInstance* fx_confetti(s32, f32, f32, f32, f32, s32);

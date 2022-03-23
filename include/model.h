@@ -161,8 +161,12 @@ void animator_update_model_transforms(ModelAnimator* animator, Mtx* rootTransfor
 void render_animated_model(s32 animatorID, Mtx* rootTransform);
 void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx)[4], AnimatorNode* node,
                                           Mtx* rootTransform);
+void delete_model_animator_node(AnimatorNode* node);
+void delete_model_animator_nodes(ModelAnimator* animator);
+void delete_model_animator(ModelAnimator* animator);
+void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32 vtxSegment, Vtx* vertexArray);
 void appendGfx_animator(ModelAnimator* animator);
+ModelAnimator* set_animator_render_callback(s32 animModelID, s32 callbackArg, s32 callbackFunc);
 void reload_mesh_animator_tree(ModelAnimator* animator);
 s32 step_mesh_animator(ModelAnimator* animator);
-
 #endif

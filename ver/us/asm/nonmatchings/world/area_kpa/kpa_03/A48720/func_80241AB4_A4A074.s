@@ -98,7 +98,7 @@ glabel func_80241AB4_A4A074
 .L80241C00_A4A1C0:
 /* A4A1C0 80241C00 02A0202D */  daddu     $a0, $s5, $zero
 /* A4A1C4 80241C04 0260282D */  daddu     $a1, $s3, $zero
-/* A4A1C8 80241C08 0C09044A */  jal       func_80241128_A496E8
+/* A4A1C8 80241C08 0C09044A */  jal       kpa_03_UnkFunc58
 /* A4A1CC 80241C0C 0280302D */   daddu    $a2, $s4, $zero
 /* A4A1D0 80241C10 8EA30070 */  lw        $v1, 0x70($s5)
 /* A4A1D4 80241C14 24020001 */  addiu     $v0, $zero, 1
@@ -114,7 +114,7 @@ glabel func_80241AB4_A4A074
 .L80241C38_A4A1F8:
 /* A4A1F8 80241C38 02A0202D */  daddu     $a0, $s5, $zero
 /* A4A1FC 80241C3C 0260282D */  daddu     $a1, $s3, $zero
-/* A4A200 80241C40 0C0904B2 */  jal       func_802412C8_A49888
+/* A4A200 80241C40 0C0904B2 */  jal       kpa_03_UnkFunc59
 /* A4A204 80241C44 0280302D */   daddu    $a2, $s4, $zero
 .L80241C48_A4A208:
 /* A4A208 80241C48 02A0202D */  daddu     $a0, $s5, $zero

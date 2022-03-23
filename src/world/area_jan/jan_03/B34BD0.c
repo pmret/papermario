@@ -47,7 +47,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802405EC_B351BC);
 
 #include "world/common/UnkFunc16.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802411B4_B35D84);
+#include "world/common/UnkNpcAIMainFunc.inc.c"
 
 static char* N(exit_str_4) = "tik_08";
 

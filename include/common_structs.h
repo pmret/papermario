@@ -609,7 +609,7 @@ typedef struct Shadow {
     /* 0x07 */ char unk_07;
     /* 0x08 */ s16 entityModelID;
     /* 0x0A */ s16 vertexSegment;
-    /* 0x0C */ Vtx_tn** vertexArray;
+    /* 0x0C */ Vtx* vertexArray;
     /* 0x10 */ Vec3f position;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Vec3f rotation;
@@ -874,7 +874,7 @@ typedef struct BattleStatus {
     /* 0x074 */ s32 unk_74;
     /* 0x078 */ s8 totalStarPoints;
     /* 0x079 */ s8 pendingStarPoints; /* how many to add */
-    /* 0x07A */ u8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
+    /* 0x07A */ s8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
     /* 0x07B */ u8 damageTaken;
     /* 0x07C */ s8 changePartnerAllowed;
     /* 0x07D */ s8 menuStatus[4]; ///< -1 = automatically pick the first move, 0 = disabled, 1 = enabled
@@ -1789,7 +1789,10 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x00 */ Vec3f currentPos;
     /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ Vec3f unk_18;
-    /* 0x24 */ char unk_24[24];
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ char unk_2C[0x4];
+    /* 0x30 */ Vec3f unk_30;
     /* 0x3C */ f32 acceleration;
     /* 0x40 */ f32 speed;
     /* 0x44 */ f32 velocity;
@@ -1849,7 +1852,7 @@ typedef struct Actor {
     /* 0x1B8 */ s8 currentHP;
     /* 0x1B9 */ s8 maxHP;
     /* 0x1BA */ char unk_1BA[2];
-    /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
+    /* 0x1BC */ s8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
     /* 0x1C0 */ EvtScript* idleScriptSource;
     /* 0x1C4 */ EvtScript* takeTurnScriptSource;
@@ -1917,7 +1920,7 @@ typedef struct Actor {
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
     /* 0x436 */ s16 hudElementDataIndex;
     /* 0x438 */ s32 unk_438[2]; /* ??? see FUN_80253974 */
-    /* 0x440 */ struct HudElement* ptrDefuffIcon;
+    /* 0x440 */ struct EffectInstance* debuffIcon; // TODO: figure out the type of data field of debuffIcon
 } Actor; // size = 0x444
 
 typedef struct BackgroundHeader {
@@ -2322,6 +2325,16 @@ typedef struct ActionCommandStatus {
     /* 0x80 */ s8 mashMeterIntervals;
 } ActionCommandStatus;
 
+typedef struct Message {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ char unk_04[0x1C];
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ char unk_28[0x1C];
+    /* 0x44 */ s32 unk_44;
+    /* 0x48 */ char unk_48[0x4];
+} Message; // size = 0x4C
+
 struct PopupMessage;
 typedef void (*PopupMessageCallback)(struct PopupMessage* popup);
 typedef struct PopupMessage {
@@ -2334,7 +2347,7 @@ typedef struct PopupMessage {
     /* 0x14 */ s16 duration;
     /* 0x16 */ s8 unk_16;
     /* 0x17 */ s8 unk_17;
-    /* 0x18 */ s32* message;
+    /* 0x18 */ Message* message;
 } PopupMessage; // size = 0x1C
 
 typedef struct unkPartnerStruct {
@@ -2404,5 +2417,16 @@ typedef struct UnkStruct0 {
     /* 0x04 */ char unk_04[8];
     /* 0x0C */ UnkStruct1* unk_0C;
 } UnkStruct0;
+
+typedef struct FoldImageRecPart {
+    /* 0x00 */ s8* raster;
+    /* 0x04 */ s8* palette;
+    /* 0x08 */ u16 width;
+    /* 0x0A */ u16 height;
+    /* 0x0C */ s16 xOffset;
+    /* 0x0E */ s16 yOffset;
+    /* 0x10 */ u8 unk_10;
+    /* 0x11 */ char unk_11[0x7];
+} FoldImageRecPart; // size = 0x18
 
 #endif

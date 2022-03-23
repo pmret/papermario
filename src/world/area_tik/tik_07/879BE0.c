@@ -37,7 +37,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802404AC_87A08C);
 
 #include "world/common/UnkFunc22.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802408E0_87A4C0);
+#include "world/common/UnkFunc60.inc.c"
 
 #include "world/common/UnkFunc23.inc.c"
 

@@ -25,7 +25,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_08/D2FC80", func_802401CC_D2FE4C);
 
 #include "world/common/UnkFunc22.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_08/D2FC80", func_80240600_D30280);
+#include "world/common/UnkFunc60.inc.c"
 
 #include "world/common/UnkFunc23.inc.c"
 

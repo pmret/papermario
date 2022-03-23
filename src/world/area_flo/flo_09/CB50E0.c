@@ -446,7 +446,7 @@ NpcSettings N(npcSettings_80243600) = {
     .level = 19,
 };
 
-f32 N(D_8024362C_CB862C)[] = {
+f32 N(sixFloats)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
     1.5f, 20.0f,
 };
@@ -471,7 +471,7 @@ EvtScript N(npcAI_80243674) = {
     EVT_CALL(SetSelfVar, 5, -630)
     EVT_CALL(SetSelfVar, 6, 50)
     EVT_CALL(SetSelfVar, 1, 200)
-    EVT_CALL(N(func_8024162C_CB662C), EVT_PTR(N(npcAISettings_80243644)))
+    EVT_CALL(N(UnkNpcAIMainFunc9), EVT_PTR(N(npcAISettings_80243644)))
     EVT_RETURN
     EVT_END
 };

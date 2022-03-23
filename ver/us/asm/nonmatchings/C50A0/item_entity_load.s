@@ -60,8 +60,8 @@ glabel item_entity_load
 /* C78DC 801311DC 24120120 */   addiu    $s2, $zero, 0x120
 /* C78E0 801311E0 24120200 */  addiu     $s2, $zero, 0x200
 .L801311E4:
-/* C78E4 801311E4 3C038015 */  lui       $v1, %hi(D_801512C8)
-/* C78E8 801311E8 8C6312C8 */  lw        $v1, %lo(D_801512C8)($v1)
+/* C78E4 801311E4 3C038015 */  lui       $v1, %hi(gHudElementCacheTableRaster)
+/* C78E8 801311E8 8C6312C8 */  lw        $v1, %lo(gHudElementCacheTableRaster)($v1)
 /* C78EC 801311EC 0000882D */  daddu     $s1, $zero, $zero
 /* C78F0 801311F0 0220982D */  daddu     $s3, $s1, $zero
 /* C78F4 801311F4 24650004 */  addiu     $a1, $v1, 4
@@ -69,10 +69,10 @@ glabel item_entity_load
 /* C78F8 801311F8 8C620000 */  lw        $v0, ($v1)
 /* C78FC 801311FC 1457001F */  bne       $v0, $s7, .L8013127C
 /* C7900 80131200 00000000 */   nop
-/* C7904 80131204 3C048015 */  lui       $a0, %hi(D_8015133C)
-/* C7908 80131208 8C84133C */  lw        $a0, %lo(D_8015133C)($a0)
-/* C790C 8013120C 3C028015 */  lui       $v0, %hi(D_80151314)
-/* C7910 80131210 8C421314 */  lw        $v0, %lo(D_80151314)($v0)
+/* C7904 80131204 3C048015 */  lui       $a0, %hi(gHudElementCacheSize)
+/* C7908 80131208 8C84133C */  lw        $a0, %lo(gHudElementCacheSize)($a0)
+/* C790C 8013120C 3C028015 */  lui       $v0, %hi(gHudElementCacheBuffer)
+/* C7910 80131210 8C421314 */  lw        $v0, %lo(gHudElementCacheBuffer)($v0)
 /* C7914 80131214 AC660000 */  sw        $a2, ($v1)
 /* C7918 80131218 8C830000 */  lw        $v1, ($a0)
 /* C791C 8013121C 00431021 */  addu      $v0, $v0, $v1
@@ -89,8 +89,8 @@ glabel item_entity_load
 /* C7940 80131240 8CA50000 */  lw        $a1, ($a1)
 /* C7944 80131244 0C017D24 */  jal       nuPiReadRom
 /* C7948 80131248 0240302D */   daddu    $a2, $s2, $zero
-/* C794C 8013124C 3C038015 */  lui       $v1, %hi(D_8015133C)
-/* C7950 80131250 8C63133C */  lw        $v1, %lo(D_8015133C)($v1)
+/* C794C 8013124C 3C038015 */  lui       $v1, %hi(gHudElementCacheSize)
+/* C7950 80131250 8C63133C */  lw        $v1, %lo(gHudElementCacheSize)($v1)
 /* C7954 80131254 8C620000 */  lw        $v0, ($v1)
 /* C7958 80131258 00521021 */  addu      $v0, $v0, $s2
 /* C795C 8013125C AC620000 */  sw        $v0, ($v1)
@@ -132,18 +132,18 @@ glabel item_entity_load
 /* C79D4 801312D4 0804C4B5 */  j         .L801312D4
 /* C79D8 801312D8 00000000 */   nop
 .L801312DC:
-/* C79DC 801312DC 3C038015 */  lui       $v1, %hi(D_801512D0)
-/* C79E0 801312E0 8C6312D0 */  lw        $v1, %lo(D_801512D0)($v1)
+/* C79DC 801312DC 3C038015 */  lui       $v1, %hi(gHudElementCacheTablePalette)
+/* C79E0 801312E0 8C6312D0 */  lw        $v1, %lo(gHudElementCacheTablePalette)($v1)
 /* C79E4 801312E4 0220902D */  daddu     $s2, $s1, $zero
 /* C79E8 801312E8 24650004 */  addiu     $a1, $v1, 4
 .L801312EC:
 /* C79EC 801312EC 8C620000 */  lw        $v0, ($v1)
 /* C79F0 801312F0 1457001F */  bne       $v0, $s7, .L80131370
 /* C79F4 801312F4 00000000 */   nop
-/* C79F8 801312F8 3C048015 */  lui       $a0, %hi(D_8015133C)
-/* C79FC 801312FC 8C84133C */  lw        $a0, %lo(D_8015133C)($a0)
-/* C7A00 80131300 3C028015 */  lui       $v0, %hi(D_80151314)
-/* C7A04 80131304 8C421314 */  lw        $v0, %lo(D_80151314)($v0)
+/* C79F8 801312F8 3C048015 */  lui       $a0, %hi(gHudElementCacheSize)
+/* C79FC 801312FC 8C84133C */  lw        $a0, %lo(gHudElementCacheSize)($a0)
+/* C7A00 80131300 3C028015 */  lui       $v0, %hi(gHudElementCacheBuffer)
+/* C7A04 80131304 8C421314 */  lw        $v0, %lo(gHudElementCacheBuffer)($v0)
 /* C7A08 80131308 AC740000 */  sw        $s4, ($v1)
 /* C7A0C 8013130C 8C830000 */  lw        $v1, ($a0)
 /* C7A10 80131310 00431021 */  addu      $v0, $v0, $v1
@@ -160,8 +160,8 @@ glabel item_entity_load
 /* C7A34 80131334 8CA50000 */  lw        $a1, ($a1)
 /* C7A38 80131338 0C017D24 */  jal       nuPiReadRom
 /* C7A3C 8013133C 24060020 */   addiu    $a2, $zero, 0x20
-/* C7A40 80131340 3C038015 */  lui       $v1, %hi(D_8015133C)
-/* C7A44 80131344 8C63133C */  lw        $v1, %lo(D_8015133C)($v1)
+/* C7A40 80131340 3C038015 */  lui       $v1, %hi(gHudElementCacheSize)
+/* C7A44 80131344 8C63133C */  lw        $v1, %lo(gHudElementCacheSize)($v1)
 /* C7A48 80131348 8C620000 */  lw        $v0, ($v1)
 /* C7A4C 8013134C 24420020 */  addiu     $v0, $v0, 0x20
 /* C7A50 80131350 AC620000 */  sw        $v0, ($v1)

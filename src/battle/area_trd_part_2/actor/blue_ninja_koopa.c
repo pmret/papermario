@@ -154,8 +154,7 @@ BSS static char pad;
 
 #include "common/UnkEnemyFunc.inc.c"
 
-ApiStatus func_80219530_4B2720(Evt* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/area_trd_part_2/4B2550", func_80219530_4B2720);
+#include "common/UnkEnemyPosFunc.inc.c"
 
 #include "common/GetLastActorEventType.inc.c"
 
@@ -266,7 +265,7 @@ EvtScript N(8022B6E8) = {
                         EVT_SET(LF(0), 1)
                     EVT_END_IF
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
-                    EVT_CALL(func_80219530_4B2720, LW(0), LW(1), LW(2))
+                    EVT_CALL(N(UnkEnemyPosFunc), LW(0), LW(1), LW(2))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_bros_Palette_00_Anim_A)
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022B6D0)))
@@ -305,7 +304,7 @@ EvtScript N(8022B6E8) = {
                         EVT_SET(LF(0), 1)
                     EVT_END_IF
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
-                    EVT_CALL(func_80219530_4B2720, LW(0), LW(1), LW(2))
+                    EVT_CALL(N(UnkEnemyPosFunc), LW(0), LW(1), LW(2))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LW(0), LW(1), LW(2))
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, NPC_ANIM_koopa_bros_Palette_00_Anim_E)
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_ADDR(N(idleAnimations_8022B6D0)))

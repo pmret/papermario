@@ -332,69 +332,69 @@ void initialize_status_menu(void) {
 
     iconIndex = create_hud_element(HudScript_StatusHP);
     uiStatus->hpIconIndices[0] = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusHeart);
     uiStatus->hpIconIndices[1] = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusFP);
     uiStatus->fpIconIndices[0] = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusFlower);
     uiStatus->fpIconIndices[1] = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusCoin);
     uiStatus->coinIconIndex = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_Item_CoinSparkleRandom);
     uiStatus->coinSparkleIconIndex = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusStarPoint);
     uiStatus->starpointsIconIndex = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusSPShine);
     uiStatus->starpointsShineIconIndex = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     newVar = create_hud_element(HudScript_StatusTimes);
     iconIndex = newVar;
     uiStatus->iconIndex8 = iconIndex;
-    set_hud_element_flags(iconIndex, 0x82);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusTimes);
     uiStatus->iconIndex9 = iconIndex;
-    set_hud_element_flags(iconIndex, 0x82);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusTimes);
     uiStatus->iconIndexA = iconIndex;
-    set_hud_element_flags(iconIndex, 0x82);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusTimes);
     uiStatus->iconIndexB = iconIndex;
-    set_hud_element_flags(iconIndex, 0x82);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     iconIndex = create_hud_element(HudScript_StatusStar1);
     uiStatus->starIconIndex = iconIndex;
-    set_hud_element_flags(iconIndex, 0x80);
-    clear_hud_element_flags(iconIndex, 0x8000);
+    set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
 
     func_800F0D5C();
 }
@@ -413,7 +413,7 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
     x += 8;
     y2 = y + 8;
     set_hud_element_render_pos(iconID, x, y + 7);
-    clear_hud_element_flags(iconID, 2);
+    clear_hud_element_flags(iconID, HUD_ELEMENT_FLAGS_DISABLED);
     draw_hud_element_2(iconID);
 
     // Write each digit of the input number into the digits array
@@ -436,7 +436,7 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
             keepDrawing = TRUE;
             set_hud_element_anim(iconID, DigitHudScripts[digit]);
             set_hud_element_render_pos(iconID, x, y2);
-            clear_hud_element_flags(iconID, 2);
+            clear_hud_element_flags(iconID, HUD_ELEMENT_FLAGS_DISABLED);
             draw_hud_element_2(iconID);
         }
     }
@@ -492,7 +492,7 @@ void update_coin_counter(void) {
         if ((uiStatus->displayCoins == playerData->coins) || (uiStatus->unk_6C[0] <= 30)) {
             uiStatus->unk_6C[0] -= 1;
             if (uiStatus->unk_6C[0] == 0) {
-                set_window_update(20, basic_hidden_window_update);
+                set_window_update(20, (s32)basic_hidden_window_update);
                 uiStatus->unk_6C[1] = 15;
                 D_8010CD10 = 0;
                 D_8010CD12 = 1;
@@ -513,7 +513,7 @@ void show_coin_counter(void) {
     s32 index;
 
     if ((D_8010CD10 != 0) || (D_8010CD12 != 0)) {
-        set_window_update(0x14, WINDOW_UPDATE_HIDE);
+        set_window_update(20, WINDOW_UPDATE_HIDE);
         if (uiStatus->iconIndex12 > -1) {
             free_hud_element(uiStatus->iconIndex10);
             free_hud_element(uiStatus->iconIndex11);
@@ -526,16 +526,16 @@ void show_coin_counter(void) {
     }
 
     if (uiStatus->unk_6C[0] == 0) {
-        set_window_properties(0x14, 0x20, 0xa4, 0x40, 0x14, 0x15, coin_counter_draw_content, 0, -1);
-        set_window_update(0x14, basic_window_update);
+        set_window_properties(0x14, 32, 164, 64, 20, 0x15, coin_counter_draw_content, 0, -1);
+        set_window_update(20, (s32)basic_window_update);
         index = create_hud_element(HudScript_MenuTimes);
         uiStatus->iconIndex10 = index;
-        set_hud_element_flags(index, 0x80);
-        set_hud_element_tint(index, 0xff, 0xff, 0xff);
+        set_hud_element_flags(index, HUD_ELEMENT_FLAGS_80);
+        set_hud_element_tint(index, 255, 255, 255);
         index = create_hud_element(HudScript_StatusCoin);
         uiStatus->iconIndex11 = index;
-        set_hud_element_flags(index, 0x80);
-        set_hud_element_tint(index, 0xff, 0xff, 0xff);
+        set_hud_element_flags(index, HUD_ELEMENT_FLAGS_80);
+        set_hud_element_tint(index, 255, 255, 255);
         uiStatus->unk_6C[0] = 0;
 
         if (uiStatus->unk_6C[2] < 0) {

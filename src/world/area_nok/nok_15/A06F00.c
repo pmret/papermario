@@ -31,13 +31,13 @@ static char* N(exit_str_3) = "";
 
 #include "world/common/UnkNpcAIFunc35.inc.c"
 
-#include "world/common/UnkNpcAIFunc1.inc.c"
+#include "world/common/UnkNpcAIFunc1_copy.inc.c"
 
 #include "world/common/UnkFunc4.inc.c"
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80241708_A08608);
+#include "world/common/SixFloatsFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
@@ -47,7 +47,10 @@ INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80241708_A08608);
 
 #include "world/common/UnkFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80241DC0_A08CC0);
+#include "world/common/UnkNpcAIMainFunc9.inc.c"
+
+// todo remove when below are decompiled
+static const f32 padding = 0.0f;
 
 INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80241FAC_A08EAC);
 

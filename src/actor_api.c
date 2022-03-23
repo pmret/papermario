@@ -2031,7 +2031,7 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            script->functionTemp[1] = create_actor(evt_get_variable(script, *args++));
+            script->functionTempActor[1] = create_actor((struct FormationRow*)evt_get_variable(script, *args++));
             script->functionTemp[2] = evt_get_variable(script, *args++);
             script->functionTemp[0] = 1;
             break;
@@ -2231,12 +2231,12 @@ ApiStatus SetBattleState(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus WaitForState(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32* ptrReadPos = script->ptrReadPos;
     s32 temp_v0;
 
     if (isInitialCall) {
-        temp_v0 = evt_get_variable(script, *ptrReadPos);
+        temp_v0 = evt_get_variable(script, *args++);
         if (!temp_v0) {
             battleStatus->unk_95 = 0;
             return ApiStatus_DONE2;
@@ -2246,7 +2246,7 @@ ApiStatus WaitForState(Evt* script, s32 isInitialCall) {
 
     temp_v0 = battleStatus->unk_95;
     if (temp_v0) {
-        return (gBattleState == temp_v0) * 2;
+        return (gBattleState == temp_v0) * ApiStatus_DONE2;
     }
 
     return ApiStatus_DONE2;
