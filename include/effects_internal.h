@@ -128,7 +128,7 @@ FX_MAIN(snowman_doll_main);
 FX_MAIN(fright_jar_main);
 FX_MAIN(stop_watch_main);
 FX_MAIN(fx_63_main);
-FX_MAIN(throw_spiny_main);
+EffectInstance* throw_spiny_main(EffectBlueprint* arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 arg8);
 FX_MAIN(fx_65_main);
 FX_MAIN(tubba_heart_attack_main);
 FX_MAIN(whirlwind_main);
