@@ -533,13 +533,13 @@ s32 func_802BE6A0_3221F0(f32* arg0) {
     f32 colliderHeight = gPlayerStatus.colliderHeight;
     f32 hitDirX, hitDirZ;
     f32 hitRx, hitRz;
-    f32 sp28, sp2C;
+    f32 x, z;
 
     *arg0 = gPlayerStatus.position.y + colliderHeight;
-    sp28 = gPlayerStatus.position.x;
-    sp2C = gPlayerStatus.position.z;
+    x = gPlayerStatus.position.x;
+    z = gPlayerStatus.position.z;
 
-    player_raycast_below_cam_relative(&gPlayerStatus, &sp28, arg0, &sp2C, &colliderHeight, &hitRx, &hitRz,
+    player_raycast_below_cam_relative(&gPlayerStatus, &x, arg0, &z, &colliderHeight, &hitRx, &hitRz,
                                       &hitDirX, &hitDirZ);
 }
 
@@ -549,7 +549,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
     Camera* cameras = &gCameras[CAM_DEFAULT];
     Npc* npc = script->owner2.npc;
     s32 colliderHeightTemp;
-    f32 xPosTemp, yPosTemp, zPosTemp, sp2C;
+    f32 x, y, z, sp2C;
     f32 yaw, camYaw;
     s32 i;
 
@@ -695,14 +695,14 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             yaw = 0.0f;
 
             for (i = 0; i < 4; i++) {
-                xPosTemp = npc->moveToPos.x;
-                yPosTemp = npc->moveToPos.y;
-                zPosTemp = npc->moveToPos.z;
-                npc_test_move_simple_with_slipping(0x10000, &xPosTemp, &yPosTemp, &zPosTemp, npc->moveSpeed,
+                x = npc->moveToPos.x;
+                y = npc->moveToPos.y;
+                z = npc->moveToPos.z;
+                npc_test_move_simple_with_slipping(0x10000, &x, &y, &z, npc->moveSpeed,
                                                     yaw, npc->collisionHeight, npc->collisionRadius);
-                npc->moveToPos.x = xPosTemp;
-                npc->moveToPos.y = yPosTemp;
-                npc->moveToPos.z = zPosTemp;
+                npc->moveToPos.x = x;
+                npc->moveToPos.y = y;
+                npc->moveToPos.z = z;
                 yaw += 90.0f;
             }
 
@@ -851,13 +851,13 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             playerStatus->position.y += npc->jumpVelocity;
             sp2C = playerStatus->colliderHeight * 0.5f;
 
-            xPosTemp = playerStatus->position.x;
-            yPosTemp = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
-            zPosTemp = playerStatus->position.z;
+            x = playerStatus->position.x;
+            y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
+            z = playerStatus->position.z;
 
             yaw = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
 
-            if (player_raycast_up_corners(playerStatus, &xPosTemp, &yPosTemp, &zPosTemp, &sp2C, yaw) >= 0) {
+            if (player_raycast_up_corners(playerStatus, &x, &y, &z, &sp2C, yaw) >= 0) {
                 D_802BFF14 = 10;
                 break;
             }
@@ -866,9 +866,9 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, npc->moveSpeed, npc->yaw);
 
             func_800E4AD8(0);
-            if (func_802BE6A0_3221F0(&yPosTemp) >= 0) {
+            if (func_802BE6A0_3221F0(&y) >= 0) {
                 D_802BFF14 = 10;
-                playerStatus->position.y = yPosTemp;
+                playerStatus->position.y = y;
             }
             break;
         }

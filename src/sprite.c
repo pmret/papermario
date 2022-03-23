@@ -9,7 +9,8 @@ extern SpriteAnimData* spr_npcSprites[0xEA];
 extern struct spr_playerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
 extern struct D_802DFA48 D_802DFA48[51];
 extern u8 spr_npcSpriteInstanceCount[];
-
+extern s32** D_802DFE44;
+extern s32 D_802DFE48[22];
 void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize);
 
 Vtx spr_defaultQuad[] = {
@@ -84,24 +85,14 @@ PlayerSpriteSet spr_playerSpriteSets[] = {
     /* Peach */ {  6, 0x900, 0x00003C00 },
 };
 
-#ifdef NON_EQUIVALENT
-extern s32** D_802DFE44;
-extern s32* D_802DFE9C;
-
 void spr_init_quad_cache(void) {
-    s32* phi_v0;
     s32 i;
-    
     D_802DFE44 = _heap_malloc(&gSpriteHeapPtr, 0x580);
 
     for (i = 0; i < 22; i++) {
-        D_802DFE44[i] = -1;
+        D_802DFE48[i] = -1;
     }
-    
 }
-#else
-INCLUDE_ASM(s32, "sprite", spr_init_quad_cache);
-#endif
 
 INCLUDE_ASM(s32, "sprite", spr_get_cached_quad);
 
@@ -209,7 +200,7 @@ INCLUDE_ASM(s32, "sprite", spr_component_update_finish);
 INCLUDE_ASM(s32, "sprite", spr_component_update);
 
 void spr_init_component_anim_state(SpriteComponent* comp, s16*** anim) {
-    if (anim == -1) {
+    if (anim == (s16***)-1) {
         comp->initialized = FALSE;
         return;
     }
@@ -287,7 +278,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
     }
 
     for (i = 0; i < ARRAY_COUNT(spr_npcSprites); i++) {
-        s32* npcSprites = spr_npcSprites;
+        s32* npcSprites = (s32*)spr_npcSprites;
         u8* npcSpriteInstanceCount = spr_npcSpriteInstanceCount;
 
         npcSprites[i] = 0;
@@ -372,28 +363,25 @@ typedef struct unkStructSprite {
     /* 0x07 */ u8 unk_07;
 } unkStructSprite;
 
-//TODO: fake match
 s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex) {
     SpriteAnimData* sprite;
     unkStructSprite* temp_v1;
     s32** paletteOffsetCopy;
     s32 newVar;
-    
 
     sprite = spr_npcSprites[npcSpriteID];
-    if (sprite == 0) {
-        return 0;
+    
+    if (sprite != NULL) {
+        paletteOffsetCopy = sprite->palettesOffset;
+        temp_v1 = (unkStructSprite*)sprite->rastersOffset[rasterIndex];
+        out->raster = temp_v1->unk_00;
+        out->width = temp_v1->width;
+        newVar = npcSpriteID;
+        out->height = temp_v1->height;
+        out->defaultPal = paletteOffsetCopy[temp_v1->unk_06];
+        return 1;
     }
-
-    paletteOffsetCopy = sprite->palettesOffset;
-    temp_v1 = sprite->rastersOffset[rasterIndex];
-    out->raster = temp_v1->unk_00;
-    out->width = temp_v1->width;
-    newVar = npcSpriteID;
-    out->height = temp_v1->height;
-    if (npcSpriteID && newVar) {}
-    out->defaultPal = paletteOffsetCopy[temp_v1->unk_06];
-    return 1;
+    return 0;
 }
 
 s32** spr_get_npc_palettes(s32 npcSpriteID) {
