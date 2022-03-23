@@ -7,13 +7,6 @@ extern MenuWindowBP D_8024A134[1];
 extern s8 D_8024C090;
 extern s32 D_8024C100_C09980[3];
 
-void filemenu_update_show_options_left(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
-                                       f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-void filemenu_update_show_options_right(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
-                                       f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-void filemenu_update_show_options_bottom(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX,
-                                       f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity);
-
 void filemenu_info_draw_message_contents(MenuPanel* menu, s32 baseX, s32 baseY) {
     s8 page = menu->page;
 
@@ -66,18 +59,18 @@ void filemenu_info_handle_input(void) {
         switch(page) {
             case 1:
                 menu->page = 0;
-                set_window_update(0x33, filemenu_update_show_options_left);
-                set_window_update(0x34, filemenu_update_show_options_right);
-                set_window_update(0x35, filemenu_update_show_options_bottom);
-                set_window_update(0x37, filemenu_update_show_options_bottom);
+                set_window_update(0x33, (s32)filemenu_update_show_options_left);
+                set_window_update(0x34, (s32)filemenu_update_show_options_right);
+                set_window_update(0x35, (s32)filemenu_update_show_options_bottom);
+                set_window_update(0x37, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 0, 2);
                 break;
             case 4:
                 menu->page = 0;
-                set_window_update(0x33, filemenu_update_show_options_left);
-                set_window_update(0x34, filemenu_update_show_options_right);
-                set_window_update(0x35, filemenu_update_show_options_bottom);
-                set_window_update(0x37, filemenu_update_show_options_bottom);
+                set_window_update(0x33, (s32)filemenu_update_show_options_left);
+                set_window_update(0x34, (s32)filemenu_update_show_options_right);
+                set_window_update(0x35, (s32)filemenu_update_show_options_bottom);
+                set_window_update(0x37, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 1, 2);
                 break;
             case 2:

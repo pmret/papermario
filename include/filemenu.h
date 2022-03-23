@@ -45,4 +45,6 @@ WINDOW_UPDATE_FUNC(filemenu_update_show_name_confirm);
 
 WINDOW_UPDATE_FUNC(main_menu_window_update);
 
+void filemenu_draw_file_name(u8*, s32, s32, s32, s32, s32, s32, s32);
+
 #endif
