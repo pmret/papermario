@@ -183,10 +183,9 @@ void filemenu_update_cursor(void) {
     filemenu_cursorGoalAlpha2 = 0xFF;
 }
 
-// problem with second loop declaration
-#ifdef NON_MATCHING
 void filemenu_update(void) {
     MenuPanel* menu = filemenu_menus[filemenu_8024C098];
+    MenuPanel** menuIt;
     s32 i;
 
     for (i = 0x2C; i < ARRAY_COUNT(gWindows); i++) {
@@ -218,18 +217,15 @@ void filemenu_update(void) {
         }
     }
 
-    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++) {
-        menu = filemenu_menus[i];
-        if (menu->initialized) {
-            if (menu->fpUpdate != NULL) {
-                menu->fpUpdate(menu);
-            }
+    // TODO clean up bad match
+    menuIt = &filemenu_menus;
+    for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, menuIt++) {
+        menu = *menuIt;
+        if (menu->initialized && menu->fpUpdate != NULL) {
+            menu->fpUpdate(menu);
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "163400", filemenu_update);
-#endif
 
 void func_8024330C(
     s32 windowIdx,
