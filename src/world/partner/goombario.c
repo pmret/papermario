@@ -74,7 +74,7 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
         D_8010C954 = 0;
     }
 
-    playerData->unk_2F4[1]++;
+    playerData->partnerUsedTime[1]++;
     entity = D_8010C954;
 
     if (entity == NULL) {

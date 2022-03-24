@@ -51,7 +51,7 @@ ApiStatus func_802BD168_323AB8(Evt* script, s32 isInitialCall) {
     }
 
     entity = D_8010C954;
-    playerData->unk_2F4[9]++;
+    playerData->partnerUsedTime[9]++;
 
     if (entity == NULL) {
         partner_flying_update_player_tracking(bow);

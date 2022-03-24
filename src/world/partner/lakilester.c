@@ -97,7 +97,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
         D_8010C954 = NULL;
     }
 
-    playerData->unk_2F4[8]++;
+    playerData->partnerUsedTime[8]++;
     lakilester->flags |= NPC_FLAG_DIRTY_SHADOW;
     entity = D_8010C954;
 

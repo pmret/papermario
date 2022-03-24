@@ -1308,9 +1308,9 @@ void update_partner_timers(void) {
     if (!gGameStatusPtr->isBattle) {
         s32 i;
 
-        for (i = 1; i < ARRAY_COUNT(playerData->unk_2C4); i++) {
+        for (i = 1; i < ARRAY_COUNT(playerData->partnerUnlockedTime); i++) {
             if (playerData->partners[i].enabled) {
-                playerData->unk_2C4[i] += 1;
+                playerData->partnerUnlockedTime[i] += 1;
             }
         }
     }

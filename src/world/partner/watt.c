@@ -108,7 +108,7 @@ ApiStatus func_802BD2B4_31CE24(Evt* script, s32 isInitialCall) {
         }
 
         entity = D_8010C954;
-        playerData->unk_2F4[6]++;
+        playerData->partnerUsedTime[6]++;
 
         if (entity == NULL) {
             func_802BD100_31CC70(watt);

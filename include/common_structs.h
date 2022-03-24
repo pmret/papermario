@@ -247,29 +247,32 @@ typedef struct PlayerData {
     /* 0x28E */ s8 maxStarPower;
     /* 0x28F */ char unk_28F;
     /* 0x290 */ s16 specialBarsFilled;
-    /* 0x292 */ s8 unk_292;
-    /* 0x293 */ char unk_293[0x1];
-    /* 0x294 */ u16 otherHitsTaken;
-    /* 0x296 */ s16 unk_296;
+    /* 0x292 */ s8 starBeamLevel;
+    /* 0x293 */ char unk_293;
+    /* 0x294 */ u16 actionCommandAttempts;
+    /* 0x296 */ s16 actionCommandSuccesses;
     /* 0x298 */ u16 hitsTaken;
     /* 0x29A */ u16 hitsBlocked;
     /* 0x29C */ s16 playerFirstStrikes;
     /* 0x29E */ s16 enemyFirstStrikes;
     /* 0x2A0 */ u16 powerBounces;
     /* 0x2A2 */ u16 battlesCount;
-    /* 0x2A4 */ s16 unk_2A4[4];
-    /* 0x2AC */ s32 unk_2AC;
-    /* 0x2B0 */ s32 unk_2B0;
+    /* 0x2A4 */ s16 battlesWon;
+    /* 0x2A6 */ s16 unk_2A6;
+    /* 0x2A8 */ s16 battlesFled;
+    /* 0x2AA */ s16 trainingsDone;
+    /* 0x2AC */ s32 walkingStepsTaken;
+    /* 0x2B0 */ s32 runningStepsTaken;
     /* 0x2B4 */ u32 totalCoinsEarned;
     /* 0x2B8 */ s16 idleFrameCounter; /* frames with no inputs, overflows ever ~36 minutes of idling */
     /* 0x2BA */ char unk_2BA[2];
     /* 0x2BC */ u32 frameCounter; /* increases by 2 per frame */
     /* 0x2C0 */ s16 quizzesAnswered;
     /* 0x2C2 */ s16 quizzesCorrect;
-    /* 0x2C4 */ s32 unk_2C4[12];
-    /* 0x2F4 */ s32 unk_2F4[12];
+    /* 0x2C4 */ s32 partnerUnlockedTime[12];
+    /* 0x2F4 */ s32 partnerUsedTime[12];
     /* 0x324 */ s32 tradeEventStartTime;
-    /* 0x328 */ s32 unk_328;
+    /* 0x328 */ s32 droTreeOrbitTime;
     /* 0x32C */ s16 starPiecesCollected;
     /* 0x32E */ s16 jumpGamePlays;
     /* 0x330 */ s32 jumpGameTotal; /* all-time winnings, max = 99999 */

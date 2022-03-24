@@ -27,7 +27,7 @@ ApiStatus GoombariaUpdate(Evt* script, s32 isInitialCall) {
 
     partner_walking_update_player_tracking(goombaria);
     partner_walking_update_motion(goombaria);
-    playerData->unk_2F4[PARTNER_GOOMBARIA]++;
+    playerData->partnerUsedTime[PARTNER_GOOMBARIA]++;
 
     return ApiStatus_BLOCK;
 }

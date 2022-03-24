@@ -43,7 +43,7 @@ void clear_player_data(void) {
     playerData->merleeTurnCount = -1;
     playerData->maxStarPower = 0;
     playerData->specialBarsFilled = 0;
-    playerData->unk_292 = 0;
+    playerData->starBeamLevel = 0;
     playerData->currentPartner = 0;
 
     for (i = 0; i < ARRAY_COUNT(playerData->partners); i++) {
@@ -74,32 +74,32 @@ void clear_player_data(void) {
         playerData->storedItems[i] = ITEM_NONE;
     }
 
-    playerData->otherHitsTaken = 0;
-    playerData->unk_296 = 0;
+    playerData->actionCommandAttempts = 0;
+    playerData->actionCommandSuccesses = 0;
     playerData->hitsTaken = 0;
     playerData->hitsBlocked = 0;
     playerData->playerFirstStrikes = 0;
     playerData->enemyFirstStrikes = 0;
     playerData->powerBounces = 0;
     playerData->battlesCount = 0;
-    playerData->unk_2A4[0] = 0;
-    playerData->unk_2A4[1] = 0;
-    playerData->unk_2A4[2] = 0;
-    playerData->unk_2A4[3] = 0;
-    playerData->unk_2AC = 0;
-    playerData->unk_2B0 = 0;
+    playerData->battlesWon = 0;
+    playerData->unk_2A6 = 0;
+    playerData->battlesFled = 0;
+    playerData->trainingsDone = 0;
+    playerData->walkingStepsTaken = 0;
+    playerData->runningStepsTaken = 0;
     playerData->idleFrameCounter = 0;
     playerData->totalCoinsEarned = 0;
     playerData->frameCounter = 0;
     playerData->quizzesAnswered = 0;
     playerData->quizzesCorrect = 0;
 
-    for (i = 0; i < ARRAY_COUNT(playerData->unk_2C4); i++) {
-        playerData->unk_2C4[i] = 0;
-        playerData->unk_2F4[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(playerData->partnerUnlockedTime); i++) {
+        playerData->partnerUnlockedTime[i] = 0;
+        playerData->partnerUsedTime[i] = 0;
     }
 
-    playerData->unk_328 = 0;
+    playerData->droTreeOrbitTime = 0;
     playerData->starPiecesCollected = 0;
     playerData->jumpGamePlays = 0;
     playerData->jumpGameTotal = 0;
@@ -266,7 +266,7 @@ s32 get_stored_empty_count(void) {
 void enforce_hpfp_limits(void) {
     PlayerData* playerData = &gPlayerData;
 
-    playerData->curMaxHP = playerData->hardMaxHP + (is_ability_active(4) * 5);
+    playerData->curMaxHP = playerData->hardMaxHP + (is_ability_active(ABILITY_HP_PLUS) * 5);
     if (playerData->curMaxHP > 75) {
         playerData->curMaxHP = 75;
     }
@@ -274,7 +274,7 @@ void enforce_hpfp_limits(void) {
         playerData->curHP = playerData->curMaxHP;
     }
 
-    playerData->curMaxFP = playerData->hardMaxFP + (is_ability_active(12) * 5);
+    playerData->curMaxFP = playerData->hardMaxFP + (is_ability_active(ABILITY_FP_PLUS) * 5);
     if (playerData->curMaxFP > 75) {
         playerData->curMaxFP = 75;
     }

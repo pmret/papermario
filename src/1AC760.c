@@ -77,7 +77,7 @@ s32 calc_partner_test_enemy(void) {
 
                 if (!(battleStatus->currentAttackElement & (0x10000000 | 0x80)) &&
                     (actorPart->eventFlags & 0x10000) && !(battleStatus->currentAttackEventSuppression & 4) &&
-                    !(player_team_is_ability_active(state, 2))) {
+                    !(player_team_is_ability_active(state, ABILITY_SPIKE_SHIELD))) {
                     sfx_play_sound_at_position(0x108, 0, partner->state.currentPos.x,
                                                partner->state.currentPos.y, partner->state.currentPos.z);
                     dispatch_damage_event_partner_1(1, 0x2A);

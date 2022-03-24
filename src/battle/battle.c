@@ -386,7 +386,7 @@ void setup_demo_player(void) {
     playerData->merleeTurnCount = 0;
     playerData->maxStarPower = 0;
     playerData->specialBarsFilled = 0;
-    playerData->unk_292 = 0;
+    playerData->starBeamLevel = 0;
 }
 
 void load_demo_battle(u32 index) {

@@ -103,7 +103,7 @@ void func_802B6288_E23968(void) {
             return;
         }
         try_player_footstep_sounds(4);
-        playerData->unk_2B0++;
+        playerData->runningStepsTaken++;
     }
 }
 

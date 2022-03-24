@@ -93,7 +93,7 @@ ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
         D_8010C954 = 0;
     }
 
-    playerData->unk_2F4[3]++;
+    playerData->partnerUsedTime[3]++;
     bombette->flags |= NPC_FLAG_DIRTY_SHADOW;
     entity = D_8010C954;
 

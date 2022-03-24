@@ -50,7 +50,7 @@ ApiStatus func_802BD180_3196F0(Evt* script, s32 isInitialCall) {
         D_8010C954 = 0;
     }
 
-    playerData->unk_2F4[4]++;
+    playerData->partnerUsedTime[4]++;
     entity = D_8010C954;
 
     if (entity == NULL) {
