@@ -44,8 +44,8 @@ void filemenu_yesno_draw_options_contents(MenuPanel* tab, s32 posX, s32 posY) {
             break;
     }
 
-    filemenu_draw_message(filemenu_get_menu_message(0xE), posX + xOffset1, posY + yOffset1, 0xFF, 0, 0);
-    filemenu_draw_message(filemenu_get_menu_message(0xF), posX + xOffset2, posY + yOffset2, 0xFF, 0, 0);
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_YES), posX + xOffset1, posY + yOffset1, 0xFF, 0, 0);
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_NO), posX + xOffset2, posY + yOffset2, 0xFF, 0, 0);
 
     if (filemenu_8024C098 == 1) {
         if (tab->selected == 0) {
@@ -65,23 +65,23 @@ void filemenu_yesno_draw_prompt_contents(MenuPanel* tab, s32 posX, s32 posY) {
 
     switch (tab->page) {
         case 0:
-            filemenu_draw_message(filemenu_get_menu_message(0x10), posX + 10, posY + 4, 0xFF, 0, 0);
-            filemenu_draw_message(filemenu_get_menu_message(0x16), posX + 60, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE), posX + 10, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_22), posX + 60, posY + 4, 0xFF, 0, 0);
             draw_number(filemenu_menus[0]->selected + 1, posX + 98, posY + 6, 0, 0, 0xFF, 3);
-            filemenu_draw_message(filemenu_get_menu_message(0x21), posX + 99, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_QUESTION), posX + 99, posY + 4, 0xFF, 0, 0);
             break;
         case 3:
-            filemenu_draw_message(filemenu_get_menu_message(0x16), posX + 10, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_22), posX + 10, posY + 4, 0xFF, 0, 0);
             draw_number(filemenu_menus[0]->selected + 1, posX + 48, posY + 6, 0, 0, 0xFF, 3);
-            filemenu_draw_message(filemenu_get_menu_message(0x17), posX + 49, posY + 4, 0xFF, 0, 0);
-            filemenu_draw_message(filemenu_get_menu_message(0x18), posX + 10, posY + 18, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_WILL_BE_DELETED), posX + 49, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_OK_TO_COPY_TO_THIS_FILE), posX + 10, posY + 18, 0xFF, 0, 0);
             break;
         case 1:
-            filemenu_draw_message(filemenu_get_menu_message(0x11), posX + 10, posY + 4, 0xFF, 0, 0);
-            filemenu_draw_message(filemenu_get_menu_message(0x12), posX + 10, posY + 18, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_OVERRIDE_TO_NEW_DATA), posX + 10, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_SAVE_OK), posX + 10, posY + 18, 0xFF, 0, 0);
             break;
         case 2:
-            filemenu_draw_message(filemenu_get_menu_message(0x13), posX + 10, posY + 6, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_NAME_IS), posX + 10, posY + 6, 0xFF, 0, 0);
 
             for (i = ARRAY_COUNT(filemenu_8024C110) - 1; i >= 0; i--) {
                 if (filemenu_8024C110[i] != 0xF7) {
@@ -92,14 +92,14 @@ void filemenu_yesno_draw_prompt_contents(MenuPanel* tab, s32 posX, s32 posY) {
             xOffset = (147 - (i * 11)) / 2;
             filemenu_draw_file_name(&filemenu_8024C110, i + 1, posX + xOffset, posY + 22, 0xFF, 0, 8, 0xB);
             xOffset += (i + 1) * 11;
-            filemenu_draw_message(filemenu_get_menu_message(0x14), posX + xOffset, posY + 22, 0xFF, 0, 0);
-            filemenu_draw_message(filemenu_get_menu_message(0x15), posX + 70, posY + 38, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_20), posX + xOffset, posY + 22, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_OK), posX + 70, posY + 38, 0xFF, 0, 0);
             break;
         case 4:
-            filemenu_draw_message(filemenu_get_menu_message(0x19), posX + 10, posY + 4, 0xFF, 0, 0);
-            filemenu_draw_message(filemenu_get_menu_message(0x16), posX + 127, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_START_GAME_WITH), posX + 10, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_22), posX + 127, posY + 4, 0xFF, 0, 0);
             draw_number(filemenu_menus[0]->selected + 1, posX + 165, posY + 6, 0, 0, 0xFF, 3);
-            filemenu_draw_message(filemenu_get_menu_message(0x21), posX + 162, posY + 4, 0xFF, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_QUESTION), posX + 162, posY + 4, 0xFF, 0, 0);
             break;
     }
 }

@@ -67,10 +67,10 @@ glabel filemenu_init
 /* 165228 802449C8 3C15800E */  lui       $s5, %hi(gCurrentSaveFile)
 /* 16522C 802449CC 26B5ACC0 */  addiu     $s5, $s5, %lo(gCurrentSaveFile)
 /* 165230 802449D0 24140001 */  addiu     $s4, $zero, 1
-/* 165234 802449D4 3C118007 */  lui       $s1, %hi(D_80077A24)
-/* 165238 802449D8 26317A24 */  addiu     $s1, $s1, %lo(D_80077A24)
-/* 16523C 802449DC 3C128007 */  lui       $s2, %hi(D_800779C4)
-/* 165240 802449E0 265279C4 */  addiu     $s2, $s2, %lo(D_800779C4)
+/* 165234 802449D4 3C118007 */  lui       $s1, %hi(gSaveSlotHasData)
+/* 165238 802449D8 26317A24 */  addiu     $s1, $s1, %lo(gSaveSlotHasData)
+/* 16523C 802449DC 3C128007 */  lui       $s2, %hi(gSaveSlotMetadata)
+/* 165240 802449E0 265279C4 */  addiu     $s2, $s2, %lo(gSaveSlotMetadata)
 .L802449E4:
 /* 165244 802449E4 0C00ACB4 */  jal       fio_load_game
 /* 165248 802449E8 0200202D */   daddu    $a0, $s0, $zero

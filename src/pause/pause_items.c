@@ -226,13 +226,13 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
                 if (i == 1) {
                     itemIcon = iconIDs[totalItemIndex];
-                    clear_hud_element_flags(itemIcon, HUD_ELEMENT_FLAGS_SHADOW);
-                    set_hud_element_flags(itemIcon, HUD_ELEMENT_FLAGS_8000);
+                    clear_hud_element_flags(itemIcon, HUD_ELEMENT_FLAGS_DROP_SHADOW);
+                    set_hud_element_flags(itemIcon, HUD_ELEMENT_FLAGS_FILTER_TEX);
                     if (isNone) {
                         itemIcon = gPauseItemsIconIDs[19];
                     } else {
                         if (isSelected) {
-                            set_hud_element_flags(itemIcon, HUD_ELEMENT_FLAGS_SHADOW);
+                            set_hud_element_flags(itemIcon, HUD_ELEMENT_FLAGS_DROP_SHADOW);
                             gPauseCurrentDescIconScript = gItemHudScripts[gItemTable[itemID].iconID].enabled;
                         }
 
@@ -243,9 +243,9 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
                     set_hud_element_render_pos(itemIcon, baseX + 105 + pause_items_scroll_offset_x(posX) + itemOffsetX,
                                                 baseY + 23 + pause_items_scroll_offset_y(posY) + itemOffsetY);
                     if (totalItemIndex == 0) {
-                        draw_hud_element_3(itemIcon);
+                        draw_hud_element_without_clipping(itemIcon);
                     } else {
-                        draw_hud_element_2(itemIcon);
+                        draw_next_hud_element(itemIcon);
                     }
 
                     totalItemIndex++;
@@ -283,12 +283,12 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     if (gPauseMenuCurrentTab == 3 && gPauseItemsLevel == 1) {
         if (gPauseItemsCurrentPage > 0) {
             set_hud_element_render_pos(gPauseItemsIconIDs[16], baseX + 278, baseY + 14);
-            draw_hud_element_3(gPauseItemsIconIDs[16]);
+            draw_hud_element_without_clipping(gPauseItemsIconIDs[16]);
         }
 
         if (gPauseItemsPages [gPauseItemsCurrentPage + 1].enabled) {
             set_hud_element_render_pos(gPauseItemsIconIDs[17], baseX + 278, baseY + 146);
-            draw_hud_element_3(gPauseItemsIconIDs[17]);
+            draw_hud_element_without_clipping(gPauseItemsIconIDs[17]);
         }
     }
 

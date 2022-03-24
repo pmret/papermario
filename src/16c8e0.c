@@ -785,7 +785,7 @@ void btl_draw_enemy_health_bars(void) {
                                 set_hud_element_anim(id, bHPDigitHudScripts[temp]);
                                 btl_draw_prim_quad(0, 0, 0, 0, screenX, screenY + 2, 8, 8);
                                 set_hud_element_render_pos(id, screenX + 4, screenY + 6);
-                                draw_hud_element_2(id);
+                                draw_next_hud_element(id);
                             }
 
                             // ones digit
@@ -794,7 +794,7 @@ void btl_draw_enemy_health_bars(void) {
                             set_hud_element_anim(id, bHPDigitHudScripts[ones]);
                             btl_draw_prim_quad(0, 0, 0, 0, screenX + 6, screenY + 2, 8, 8);
                             set_hud_element_render_pos(id, screenX + 10, screenY + 6);
-                            draw_hud_element_2(id);
+                            draw_next_hud_element(id);
 
                             temp = enemy->hpFraction;
                             temp = 25 - temp;

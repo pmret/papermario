@@ -678,7 +678,7 @@ void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
         }
         set_hud_element_alpha(filemenu_cursorHudElemID[0], temp_a1);
         set_hud_element_render_pos(filemenu_cursorHudElemID[0], baseX + D_80249B94, baseY + D_80249B98);
-        draw_hud_element_3(filemenu_cursorHudElemID[0]);
+        draw_hud_element_without_clipping(filemenu_cursorHudElemID[0]);
     }
 }
 

@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+#define HUD_ELEMENT_BATTLE_ID_MASK 0x800
+
 typedef enum {
     HUD_ELEMENT_OP_End,
     HUD_ELEMENT_OP_SetRGBA,
@@ -78,7 +80,7 @@ enum HudElementFlags {
     HUD_ELEMENT_FLAGS_FLIPX              = 0x00001000,
     HUD_ELEMENT_FLAGS_FLIPY              = 0x00002000,
     HUD_ELEMENT_FLAGS_FMT_CI4            = 0x00004000,
-    HUD_ELEMENT_FLAGS_8000               = 0x00008000,
+    HUD_ELEMENT_FLAGS_FILTER_TEX         = 0x00008000,
     HUD_ELEMENT_FLAGS_TRANSFORM          = 0x00010000,
     HUD_ELEMENT_FLAGS_NO_FOLD            = 0x00020000,
     HUD_ELEMENT_FLAGS_DELETE             = 0x00040000,
@@ -92,9 +94,15 @@ enum HudElementFlags {
     HUD_ELEMENT_FLAGS_4000000            = 0x04000000,
     HUD_ELEMENT_FLAGS_8000000            = 0x08000000,
     HUD_ELEMENT_FLAGS_10000000           = 0x10000000,
-    HUD_ELEMENT_FLAGS_SHADOW             = 0x20000000,
+    HUD_ELEMENT_FLAGS_DROP_SHADOW        = 0x20000000,
     HUD_ELEMENT_FLAGS_40000000           = 0x40000000,
     HUD_ELEMENT_FLAGS_80000000           = 0x80000000,
+};
+
+enum {
+    HUD_ELEMENT_DRAW_FIRST_WITH_CLIPPING    = 0,
+    HUD_ELEMENT_DRAW_NEXT                   = 1,
+    HUD_ELEMENT_DRAW_FIRST_WITHOUT_CLIPPING = 2,
 };
 
 typedef struct HudScriptPair {
@@ -215,10 +223,10 @@ void func_80144238(s32 arg0);
 void func_80144258(s32 arg0);
 void func_80144278(s32 arg0);
 
-void draw_hud_element(s32 id, s32 clipMode);
+void draw_hud_element_internal(s32 id, s32 clipMode);
 void draw_hud_element_clipped(s32 id);
-void draw_hud_element_2(s32 id);
-void draw_hud_element_3(s32 id);
+void draw_next_hud_element(s32 id);
+void draw_hud_element_without_clipping(s32 id);
 
 void set_hud_element_anim(s32 id, const HudScript* anim);
 

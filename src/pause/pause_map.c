@@ -300,7 +300,7 @@ void pause_map_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
     mapULX = baseX + 26 + cameraX;
     mapULY = baseY + 22 + cameraY;
     set_hud_element_render_pos(gPauseMapIconIDs[0], mapULX + gPauseMapMarioX, mapULY + gPauseMapMarioY - 7);
-    draw_hud_element_3(gPauseMapIconIDs[0]);
+    draw_hud_element_without_clipping(gPauseMapIconIDs[0]);
 
     currentTab = gPauseMenuCurrentTab;
     if (currentTab == 6) {

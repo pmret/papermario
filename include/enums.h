@@ -1634,6 +1634,10 @@ enum TriggerFlags {
     TRIGGER_SCRIPT_BOUND        = 0x01000000
 };
 
+enum ItemEntityFlags {
+    ITEM_ENTITY_FLAGS_TINY      = 0x00004000,
+};
+
 enum Buttons {
     BUTTON_C_RIGHT      = 0x00000001,
     BUTTON_C_LEFT       = 0x00000002,
@@ -1826,7 +1830,7 @@ enum NpcFlags {
 enum PlayerStatusFlags {
     PLAYER_STATUS_FLAGS_JUMPING                          = 0x00000002,
     PLAYER_STATUS_FLAGS_FALLING                          = 0x00000004,
-    PLAYER_STATUS_FLAGS_8                                = 0x00000008,
+    PLAYER_STATUS_FLAGS_KNOCKBACK                        = 0x00000008,
     PLAYER_STATUS_FLAGS_10                               = 0x00000010,
     PLAYER_STATUS_FLAGS_20                               = 0x00000020,
     PLAYER_STATUS_FLAGS_80                               = 0x00000080,
@@ -3376,6 +3380,44 @@ enum RushFlags {
     RUSH_FLAG_NONE  = 0,
     RUSH_FLAG_MEGA  = 1,
     RUSH_FLAG_POWER = 2,
+};
+
+enum FileMenuMessages {
+    FILE_MESSAGE_NONE                       = 0,
+	FILE_MESSAGE_SELECT_FILE_TO_START       = 1, // Select file to start:[End]
+	FILE_MESSAGE_SELECT_FILE_TO_DELETE      = 2, // Select file to delete:[End]
+	FILE_MESSAGE_SELECT_FILE_TO_SAVE        = 3, // Select file to save[End]
+	FILE_MESSAGE_COPY_WHICH_FILE            = 4, // Copy which file?[End]
+	FILE_MESSAGE_COPY_TO_WHICH_FILE         = 5, // Copy to which file?[End]
+	FILE_MESSAGE_NEW                        = 6, // NEW[End]
+	FILE_MESSAGE_LEVEL                      = 7, // Level[End]
+	FILE_MESSAGE_PLAY_TIME                  = 8, // Play Time[End]
+	FILE_MESSAGE_DELETE_FILE                = 9, // Delete File[End]
+	FILE_MESSAGE_CANCEL                     = 10, // Cancel[End]
+	FILE_MESSAGE_COPY_FILE                  = 11, // Copy File[End]
+	FILE_MESSAGE_FIRST_PLAY                 = 12, // First Play[End]
+	FILE_MESSAGE_PERIOD_13                  = 13, // .[End]
+	FILE_MESSAGE_YES                        = 14, // Yes[End]
+	FILE_MESSAGE_NO                         = 15, // No[End]
+	FILE_MESSAGE_DELETE                     = 16, // Delete[End]
+	FILE_MESSAGE_OVERRIDE_TO_NEW_DATA       = 17, // Override to New Data[End]
+	FILE_MESSAGE_SAVE_OK                    = 18, // Save OK?[End]
+	FILE_MESSAGE_FILE_NAME_IS               = 19, // File name is :[End]
+	FILE_MESSAGE_PERIOD_20                  = 20, // .[End]
+	FILE_MESSAGE_OK                         = 21, // OK?[End]
+	FILE_MESSAGE_FILE_22                    = 22, // File[End]
+	FILE_MESSAGE_WILL_BE_DELETED            = 23, // will be deleted.[End]
+	FILE_MESSAGE_OK_TO_COPY_TO_THIS_FILE    = 24, // OK to copy to this file?[End]
+	FILE_MESSAGE_START_GAME_WITH            = 25, // Start game with[End]
+	FILE_MESSAGE_FILE_26                    = 26, // File[End]
+	FILE_MESSAGE_HAS_BEEN_DELETED           = 27, // has been deleted.[End]
+	FILE_MESSAGE_28                         = 28, // [End]
+	FILE_MESSAGE_COPY_FROM                  = 29, // Copy from[End]
+	FILE_MESSAGE_TO                         = 30, // to[End]
+	FILE_MESSAGE_HAS_BEEN_CREATED           = 31, // has been created.[End]
+	FILE_MESSAGE_ENTER_A_FILE_NAME          = 32, // Enter a file name![End]
+	FILE_MESSAGE_QUESTION                   = 33, // ?[End]
+	FILE_MESSAGE_PERIOD_34                  = 34, // .[End]
 };
 
 #endif

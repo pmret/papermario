@@ -34,7 +34,7 @@ glabel status_menu_draw_stat
 /* 81358 800E7EA8 0280202D */  daddu     $a0, $s4, $zero
 /* 8135C 800E7EAC 0C05128B */  jal       clear_hud_element_flags
 /* 81360 800E7EB0 02C0282D */   daddu    $a1, $s6, $zero
-/* 81364 800E7EB4 0C0511F1 */  jal       draw_hud_element_2
+/* 81364 800E7EB4 0C0511F1 */  jal       draw_next_hud_element
 /* 81368 800E7EB8 0280202D */   daddu    $a0, $s4, $zero
 /* 8136C 800E7EBC 3C066666 */  lui       $a2, 0x6666
 /* 81370 800E7EC0 34C66667 */  ori       $a2, $a2, 0x6667
@@ -89,7 +89,7 @@ glabel status_menu_draw_stat
 /* 81428 800E7F78 0280202D */  daddu     $a0, $s4, $zero
 /* 8142C 800E7F7C 0C05128B */  jal       clear_hud_element_flags
 /* 81430 800E7F80 24050002 */   addiu    $a1, $zero, 2
-/* 81434 800E7F84 0C0511F1 */  jal       draw_hud_element_2
+/* 81434 800E7F84 0C0511F1 */  jal       draw_next_hud_element
 /* 81438 800E7F88 0280202D */   daddu    $a0, $s4, $zero
 /* 8143C 800E7F8C 26520001 */  addiu     $s2, $s2, 1
 .L800E7F90:
@@ -153,7 +153,7 @@ glabel status_menu_draw_stat
 /* 81510 800E8060 0280202D */  daddu     $a0, $s4, $zero
 /* 81514 800E8064 0C05128B */  jal       clear_hud_element_flags
 /* 81518 800E8068 24050002 */   addiu    $a1, $zero, 2
-/* 8151C 800E806C 0C0511F1 */  jal       draw_hud_element_2
+/* 8151C 800E806C 0C0511F1 */  jal       draw_next_hud_element
 /* 81520 800E8070 0280202D */   daddu    $a0, $s4, $zero
 /* 81524 800E8074 26520001 */  addiu     $s2, $s2, 1
 .L800E8078:

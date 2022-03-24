@@ -561,7 +561,7 @@ void btl_state_update_celebration(void) {
                 set_hud_element_transform_rotation(id, 0.0f, 0.0f, 180.0f);
                 set_hud_element_transform_scale(id, 1.0f, 1.5f, 1.0f);
                 set_hud_element_alpha(id, 200);
-                set_hud_element_flags(id, HUD_ELEMENT_FLAGS_8000 | HUD_ELEMENT_FLAGS_80);
+                set_hud_element_flags(id, HUD_ELEMENT_FLAGS_FILTER_TEX | HUD_ELEMENT_FLAGS_80);
 
                 D_8029FB48 = id = create_hud_element(&D_802AAA30);
                 set_hud_element_render_pos(id, 0, 0);

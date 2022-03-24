@@ -446,7 +446,7 @@ void pause_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 hei
         }
         set_hud_element_alpha(gPauseCommonIconIDs[0], currentOpacity);
         set_hud_element_render_pos(gPauseCommonIconIDs[0], baseX + gPauseCursorPosX, baseY + gPauseCursorPosY);
-        draw_hud_element_3(gPauseCommonIconIDs[0]);
+        draw_hud_element_without_clipping(gPauseCommonIconIDs[0]);
     }
 }
 
@@ -461,12 +461,12 @@ void pause_textbox_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
 
     if (gPauseDescTextPos != 0) {
         set_hud_element_render_pos(gPauseCommonIconIDs[1], baseX + width - 4, baseY + 4);
-        draw_hud_element_3(gPauseCommonIconIDs[1]);
+        draw_hud_element_without_clipping(gPauseCommonIconIDs[1]);
     }
 
     if (gPauseDescTextPos < gPauseDescTextMaxPos) {
         set_hud_element_render_pos(gPauseCommonIconIDs[2], baseX + width - 4, baseY + height - 4);
-        draw_hud_element_3(gPauseCommonIconIDs[2]);
+        draw_hud_element_without_clipping(gPauseCommonIconIDs[2]);
     }
 
     gDPPipeSync(gMasterGfxPos++);
@@ -476,10 +476,10 @@ void pause_textbox_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
         gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         set_hud_element_render_pos(gPauseCommonIconIDs[3], baseX - 4, baseY + 16);
         set_hud_element_anim(gPauseCommonIconIDs[3], gPauseShownDescIconScript);
-        set_hud_element_flags(gPauseCommonIconIDs[3], HUD_ELEMENT_FLAGS_SHADOW);
-        clear_hud_element_flags(gPauseCommonIconIDs[3], HUD_ELEMENT_FLAGS_8000);
+        set_hud_element_flags(gPauseCommonIconIDs[3], HUD_ELEMENT_FLAGS_DROP_SHADOW);
+        clear_hud_element_flags(gPauseCommonIconIDs[3], HUD_ELEMENT_FLAGS_FILTER_TEX);
         set_hud_element_scale(gPauseCommonIconIDs[3], 1.0f);
-        draw_hud_element_3(gPauseCommonIconIDs[3]);
+        draw_hud_element_without_clipping(gPauseCommonIconIDs[3]);
     }
 }
 
@@ -559,13 +559,13 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     margin2 = (s32)(width - msgWidth2) >> 1;
     draw_msg(pause_get_menu_msg(gPauseTutorialDescMessages[state]), baseX + margin2, baseY + 13 + state * 140 - gPauseTutorialScrollPos, 255, 10, 1);
     set_hud_element_render_pos(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], baseX + width / 2 - 2, baseY + 52);
-    set_hud_element_flags(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], HUD_ELEMENT_FLAGS_8000);
+    set_hud_element_flags(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], HUD_ELEMENT_FLAGS_FILTER_TEX);
     set_hud_element_scale(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]], 0.5f);
-    draw_hud_element_3(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]]);
+    draw_hud_element_without_clipping(gPauseCommonIconIDs[gPauseTutorialIconIDs[gPauseTutorialState]]);
 
     if (gPauseTutorialIconIDs[gPauseTutorialState] == 6) {
         set_hud_element_render_pos(gPauseCommonIconIDs[7], baseX + width / 2 + 1, baseY + 50);
-        draw_hud_element_3(gPauseCommonIconIDs[7]);
+        draw_hud_element_without_clipping(gPauseCommonIconIDs[7]);
     }
 
     draw_msg(pause_get_menu_msg(gPauseTutorialCmdMessages[gPauseTutorialState]), baseX + width / 2 + 10, baseY + 44, 255, 10, 0);
@@ -583,7 +583,7 @@ void pause_init(void) {
     for (i = 0; i < ARRAY_COUNT(gPauseIconScripts); i++) {
         gPauseCommonIconIDs[i] = create_hud_element(gPauseIconScripts[i]);
         if (gPauseIconScripts[i] == HudScript_AnimatedCursorHand) {
-            set_hud_element_flags(gPauseCommonIconIDs[i], HUD_ELEMENT_FLAGS_SHADOW | HUD_ELEMENT_FLAGS_80);
+            set_hud_element_flags(gPauseCommonIconIDs[i], HUD_ELEMENT_FLAGS_DROP_SHADOW | HUD_ELEMENT_FLAGS_80);
         } else {
             set_hud_element_flags(gPauseCommonIconIDs[i], HUD_ELEMENT_FLAGS_80);
         }

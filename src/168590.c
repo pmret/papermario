@@ -12,26 +12,26 @@ void filemenu_info_draw_message_contents(MenuPanel* menu, s32 baseX, s32 baseY) 
 
     switch (page) {
         case 0:
-            filemenu_draw_message(filemenu_get_menu_message(0x1A), baseX + 10, baseY + 4, 255, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 10, baseY + 4, 255, 0, 0);
             draw_number(filemenu_menus[0]->selected + 1, baseX + 48, baseY + 6, 0, 0, 255, 3);
-            filemenu_draw_message(filemenu_get_menu_message(0x1B), baseX + 49, baseY + 4, 255, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_HAS_BEEN_DELETED), baseX + 49, baseY + 4, 255, 0, 0);
             break;
         case 2:
-            filemenu_draw_message(filemenu_get_menu_message(0x1D), baseX + 10, baseY + 4, 255, 0, 0);
-            filemenu_draw_message(filemenu_get_menu_message(0x1A), baseX + 84, baseY + 4, 255, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_COPY_FROM), baseX + 10, baseY + 4, 255, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 84, baseY + 4, 255, 0, 0);
             draw_number(filemenu_loadedFileIdx + 1, baseX + 122, baseY + 6, 0, 0, 255, 3);
-            filemenu_draw_message(filemenu_get_menu_message(0x1E), baseX + 10, baseY + 18, 255, 0, 0);
-            filemenu_draw_message(filemenu_get_menu_message(0x1A), baseX + 30, baseY + 18, 255, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_TO), baseX + 10, baseY + 18, 255, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 30, baseY + 18, 255, 0, 0);
             draw_number(filemenu_iterFileIdx + 1, baseX + 68, baseY + 20, 0, 0, 255, 3);
-            filemenu_draw_message(filemenu_get_menu_message(0x22), baseX + 65, baseY + 18, 255, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_34), baseX + 65, baseY + 18, 255, 0, 0);
             break;
         case 1:
-            filemenu_draw_message(filemenu_get_menu_message(0x1C), baseX + 10, baseY + 4, 255, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_28), baseX + 10, baseY + 4, 255, 0, 0);
             break;
         case 3:
-            filemenu_draw_message(filemenu_get_menu_message(0x1A), baseX + 10, baseY + 4, 255, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 10, baseY + 4, 255, 0, 0);
             draw_number(filemenu_menus[0]->selected + 1, baseX + 48, baseY + 6, 0, 0, 255, page);
-            filemenu_draw_message(filemenu_get_menu_message(0x1F), baseX + 49, baseY + 4, 255, 0, 0);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_HAS_BEEN_CREATED), baseX + 49, baseY + 4, 255, 0, 0);
             break;
     }
     filemenu_set_cursor_alpha(0);
@@ -103,16 +103,16 @@ void filemenu_draw_contents_file_create_header(MenuPanel* menu, s32 baseX, s32 b
     s32 i;
     s32 tempAmt;
 
-    filemenu_draw_message(filemenu_get_menu_message(0x20), baseX + 10, baseY + 6, 255, 0, 0);
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_ENTER_A_FILE_NAME), baseX + 10, baseY + 6, 255, 0, 0);
     filemenu_draw_file_name(filemenu_8024C110, 8, baseX + 36, baseY + 22, 255, 0, 0, 0xB);
     xOffset = 41;
 
     for (i = 0; i < 8; i++) {
         set_hud_element_render_pos(D_8024C100_C09980[1], baseX + 42 + (i * 11), baseY + xOffset);
         if (i == 0) {
-            draw_hud_element_3(D_8024C100_C09980[1]);
+            draw_hud_element_without_clipping(D_8024C100_C09980[1]);
         } else {
-            draw_hud_element_2(D_8024C100_C09980[1]);
+            draw_next_hud_element(D_8024C100_C09980[1]);
         }
     }
 
@@ -124,7 +124,7 @@ void filemenu_draw_contents_file_create_header(MenuPanel* menu, s32 baseX, s32 b
             phi_v0 = (D_8024C090 * 0xB) + 45;
         }
         set_hud_element_render_pos(D_8024C100_C09980[0], baseX + phi_v0, baseY + 45);
-        draw_hud_element_2(D_8024C100_C09980[0]);
+        draw_next_hud_element(D_8024C100_C09980[0]);
     }
 }
 

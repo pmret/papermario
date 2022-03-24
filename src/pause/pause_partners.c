@@ -419,12 +419,12 @@ void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
     if (level == 1) {
         set_hud_element_render_pos(gPausePartnersIconIDs[2], baseX + 95, baseY + 10);
-        draw_hud_element_3(gPausePartnersIconIDs[2]);
+        draw_hud_element_without_clipping(gPausePartnersIconIDs[2]);
     } else if (level == 2) {
         set_hud_element_render_pos(gPausePartnersIconIDs[2], baseX + 91, baseY + 10);
-        draw_hud_element_3(gPausePartnersIconIDs[2]);
+        draw_hud_element_without_clipping(gPausePartnersIconIDs[2]);
         set_hud_element_render_pos(gPausePartnersIconIDs[3], baseX + 101, baseY + 10);
-        draw_hud_element_3(gPausePartnersIconIDs[3]);
+        draw_hud_element_without_clipping(gPausePartnersIconIDs[3]);
     }
 }
 
@@ -470,13 +470,13 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         set_hud_element_scale(gPausePartnersIconIDs[i + 4], 0.5f);
         //TODO find better match
         set_hud_element_render_pos(gPausePartnersIconIDs[i + 4], 12 - (-baseX), baseY + 28 + i * 13);
-        draw_hud_element_3(gPausePartnersIconIDs[i + 4]);
+        draw_hud_element_without_clipping(gPausePartnersIconIDs[i + 4]);
 
         if (costFP != 0) {
             draw_number(costFP, baseX + 125, baseY + 22 + i * 13, style, 10, 255, 3);
             if (costFP > 0) {
                 set_hud_element_render_pos(gPausePartnersIconIDs[0], baseX + 134, baseY + 29 + i * 13);
-                draw_hud_element_3(gPausePartnersIconIDs[0]);
+                draw_hud_element_without_clipping(gPausePartnersIconIDs[0]);
             }
         }
     }
@@ -492,7 +492,7 @@ void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s
 
 void pause_partners_draw_movelist_flower(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     set_hud_element_render_pos(gPausePartnersIconIDs[1], baseX + 17, baseY + 16);
-    draw_hud_element_3(gPausePartnersIconIDs[1]);
+    draw_hud_element_without_clipping(gPausePartnersIconIDs[1]);
 }
 
 void pause_partners_init(MenuPanel* panel) {

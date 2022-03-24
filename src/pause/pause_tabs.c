@@ -156,7 +156,7 @@ void pause_tabs_draw_stats(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32
     }
 
     set_hud_element_render_pos(gPauseTabsIconIDs[0], baseX + 22, baseY + 7);
-    draw_hud_element_3(gPauseTabsIconIDs[0]);
+    draw_hud_element_without_clipping(gPauseTabsIconIDs[0]);
     if (gPauseMenuCurrentTab == 0) {
         if (gPauseTabsWindowIDs[menu->col] == 25) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX, baseY + 6);
@@ -174,7 +174,7 @@ void pause_tabs_draw_badges(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s3
     }
 
     set_hud_element_render_pos(gPauseTabsIconIDs[1], baseX + 22, baseY + 7);
-    draw_hud_element_3(gPauseTabsIconIDs[1]);
+    draw_hud_element_without_clipping(gPauseTabsIconIDs[1]);
     if (gPauseMenuCurrentTab == 0) {
         if (gPauseTabsWindowIDs[menu->col] == 26) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX, baseY + 6);
@@ -192,7 +192,7 @@ void pause_tabs_draw_items(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32
     }
 
     set_hud_element_render_pos(gPauseTabsIconIDs[2], baseX + 22, baseY + 7);
-    draw_hud_element_3(gPauseTabsIconIDs[2]);
+    draw_hud_element_without_clipping(gPauseTabsIconIDs[2]);
     if (gPauseMenuCurrentTab == 0) {
         if (gPauseTabsWindowIDs[menu->col] == 27) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX, baseY + 6);
@@ -210,7 +210,7 @@ void pause_tabs_draw_party(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32
     }
 
     set_hud_element_render_pos(gPauseTabsIconIDs[3], baseX + 22, baseY + 7);
-    draw_hud_element_3(gPauseTabsIconIDs[3]);
+    draw_hud_element_without_clipping(gPauseTabsIconIDs[3]);
     if (gPauseMenuCurrentTab == 0) {
         if (gPauseTabsWindowIDs[menu->col] == 28) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX, baseY + 6);
@@ -228,7 +228,7 @@ void pause_tabs_draw_spirits(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s
     }
 
     set_hud_element_render_pos(gPauseTabsIconIDs[4], baseX + 22, baseY + 7);
-    draw_hud_element_3(gPauseTabsIconIDs[4]);
+    draw_hud_element_without_clipping(gPauseTabsIconIDs[4]);
     if (gPauseMenuCurrentTab == 0) {
         if (gPauseTabsWindowIDs[menu->col] == 29) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX, baseY + 6);
@@ -246,7 +246,7 @@ void pause_tabs_draw_map(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 h
     }
 
     set_hud_element_render_pos(gPauseTabsIconIDs[5], baseX + 23, baseY + 7);
-    draw_hud_element_3(gPauseTabsIconIDs[5]);
+    draw_hud_element_without_clipping(gPauseTabsIconIDs[5]);
     if (gPauseMenuCurrentTab == 0) {
         if (gPauseTabsWindowIDs[menu->col] == 30) {
             pause_set_cursor_pos(gPauseTabsWindowIDs[menu->col], baseX, baseY + 6);

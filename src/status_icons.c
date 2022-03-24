@@ -570,7 +570,7 @@ void draw_all_status_icons(PopupMessage* popup) {
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
                 elementId = icon->status1.activeElementID;
                 set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
-                draw_hud_element_2(elementId);
+                draw_next_hud_element(elementId);
                 iconCounter = 1;
                 isActiveDrawn = 1;
             }
@@ -591,7 +591,7 @@ void draw_all_status_icons(PopupMessage* popup) {
             get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
             elementId = icon->status1.removingElementID;
             set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
-            draw_hud_element_2(elementId);
+            draw_next_hud_element(elementId);
         }
 
         isActiveDrawn = 0;
@@ -614,7 +614,7 @@ void draw_all_status_icons(PopupMessage* popup) {
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
                 elementId = icon->status2.activeElementID;
                 set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
-                draw_hud_element_2(elementId);
+                draw_next_hud_element(elementId);
 
                 iconCounter++;
                 isActiveDrawn = 1;
@@ -640,7 +640,7 @@ void draw_all_status_icons(PopupMessage* popup) {
             get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
             elementId = icon->status2.removingElementID;
             set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
-            draw_hud_element_2(elementId);
+            draw_next_hud_element(elementId);
         }
 
         isActiveDrawn = 0;
@@ -665,7 +665,7 @@ void draw_all_status_icons(PopupMessage* popup) {
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
                 elementId = icon->status3.activeElementID;
                 set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
-                draw_hud_element_2(elementId);
+                draw_next_hud_element(elementId);
                 iconCounter++;
                 isActiveDrawn = 1;
             }
@@ -693,7 +693,7 @@ void draw_all_status_icons(PopupMessage* popup) {
             get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
             elementId = icon->status3.removingElementID;
             set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
-            draw_hud_element_2(elementId);
+            draw_next_hud_element(elementId);
         }
 
         isActiveDrawn = 0;
@@ -722,7 +722,7 @@ void draw_all_status_icons(PopupMessage* popup) {
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
                 elementId = icon->status4.activeElementID;
                 set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
-                draw_hud_element_2(elementId);
+                draw_next_hud_element(elementId);
                 iconCounter++;
                 isActiveDrawn = 1;
             }
@@ -753,7 +753,7 @@ void draw_all_status_icons(PopupMessage* popup) {
             get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
             elementId = icon->status4.removingElementID;
             set_hud_element_render_pos(elementId, screenX - 8, screenY - 8);
-            draw_hud_element_2(elementId);
+            draw_next_hud_element(elementId);
         }
 
         do {
@@ -769,7 +769,7 @@ void draw_all_status_icons(PopupMessage* popup) {
                     get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
                     elementId = icon->boostJump.activeElementID;
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
-                    draw_hud_element_2(elementId);
+                    draw_next_hud_element(elementId);
                 }
             }
         } while (0);
@@ -783,7 +783,7 @@ void draw_all_status_icons(PopupMessage* popup) {
             get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
             elementId = icon->prevIndexBoostJump;
             set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
-            draw_hud_element_2(elementId);
+            draw_next_hud_element(elementId);
         }
 
         do {
@@ -799,7 +799,7 @@ void draw_all_status_icons(PopupMessage* popup) {
                     get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
                     elementId = icon->boostHammer.activeElementID;
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
-                    draw_hud_element_2(elementId);
+                    draw_next_hud_element(elementId);
                 }
             }
         } while (0);
@@ -813,7 +813,7 @@ void draw_all_status_icons(PopupMessage* popup) {
             get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
             elementId = icon->prevIndexBoostHammer;
             set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
-            draw_hud_element_2(elementId);
+            draw_next_hud_element(elementId);
         }
 
         do {
@@ -829,7 +829,7 @@ void draw_all_status_icons(PopupMessage* popup) {
                     get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
                     elementId = icon->boostPartner.activeElementID;
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 12);
-                    draw_hud_element_2(elementId);
+                    draw_next_hud_element(elementId);
                 }
             }
         } while (0);
@@ -847,7 +847,7 @@ void draw_all_status_icons(PopupMessage* popup) {
                     get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
                     elementId = icon->surprise.activeElementID;
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 15);
-                    draw_hud_element_2(elementId);
+                    draw_next_hud_element(elementId);
                 }
             }
         } while (0);
@@ -865,7 +865,7 @@ void draw_all_status_icons(PopupMessage* popup) {
                     get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
                     elementId = icon->peril.activeElementID;
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 16);
-                    draw_hud_element_2(elementId);
+                    draw_next_hud_element(elementId);
                 }
             }
         } while (0);
@@ -883,7 +883,7 @@ void draw_all_status_icons(PopupMessage* popup) {
                     get_screen_coords(gCurrentCameraID, x, icon->worldPos.y + icon->offsetY, z, &screenX, &screenY, &screenZ);
                     elementId = icon->danger.activeElementID;
                     set_hud_element_render_pos(elementId, screenX + 2, screenY - 16);
-                    draw_hud_element_2(elementId);
+                    draw_next_hud_element(elementId);
                 }
             }
         } while (0);

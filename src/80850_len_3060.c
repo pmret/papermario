@@ -333,68 +333,68 @@ void initialize_status_menu(void) {
     iconIndex = create_hud_element(HudScript_StatusHP);
     uiStatus->hpIconIndices[0] = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     iconIndex = create_hud_element(HudScript_StatusHeart);
     uiStatus->hpIconIndices[1] = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     iconIndex = create_hud_element(HudScript_StatusFP);
     uiStatus->fpIconIndices[0] = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     iconIndex = create_hud_element(HudScript_StatusFlower);
     uiStatus->fpIconIndices[1] = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     iconIndex = create_hud_element(HudScript_StatusCoin);
     uiStatus->coinIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     iconIndex = create_hud_element(HudScript_Item_CoinSparkleRandom);
     uiStatus->coinSparkleIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     iconIndex = create_hud_element(HudScript_StatusStarPoint);
     uiStatus->starpointsIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     iconIndex = create_hud_element(HudScript_StatusSPShine);
     uiStatus->starpointsShineIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     newVar = create_hud_element(HudScript_StatusTimes);
     iconIndex = newVar;
     uiStatus->iconIndex8 = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     iconIndex = create_hud_element(HudScript_StatusTimes);
     uiStatus->iconIndex9 = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     iconIndex = create_hud_element(HudScript_StatusTimes);
     uiStatus->iconIndexA = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     iconIndex = create_hud_element(HudScript_StatusTimes);
     uiStatus->iconIndexB = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80 | HUD_ELEMENT_FLAGS_DISABLED);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     iconIndex = create_hud_element(HudScript_StatusStar1);
     uiStatus->starIconIndex = iconIndex;
     set_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_80);
-    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_8000);
+    clear_hud_element_flags(iconIndex, HUD_ELEMENT_FLAGS_FILTER_TEX);
 
     func_800F0D5C();
 }
@@ -414,7 +414,7 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
     y2 = y + 8;
     set_hud_element_render_pos(iconID, x, y + 7);
     clear_hud_element_flags(iconID, HUD_ELEMENT_FLAGS_DISABLED);
-    draw_hud_element_2(iconID);
+    draw_next_hud_element(iconID);
 
     // Write each digit of the input number into the digits array
     for (i = 0; i < numDigits; i++) {
@@ -437,7 +437,7 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
             set_hud_element_anim(iconID, DigitHudScripts[digit]);
             set_hud_element_render_pos(iconID, x, y2);
             clear_hud_element_flags(iconID, HUD_ELEMENT_FLAGS_DISABLED);
-            draw_hud_element_2(iconID);
+            draw_next_hud_element(iconID);
         }
     }
 }
